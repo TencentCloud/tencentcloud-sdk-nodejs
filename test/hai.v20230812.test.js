@@ -28,6 +28,16 @@ it("hai.v20230812.UpdateServiceConfigs", async function () {
     }
 })
 
+it("hai.v20230812.InquirePriceUpdateServiceConfigs", async function () {
+    try {
+       const data = await client.InquirePriceUpdateServiceConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hai.v20230812.DescribeInstances", async function () {
     try {
        const data = await client.DescribeInstances({})

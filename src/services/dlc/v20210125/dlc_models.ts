@@ -1453,6 +1453,10 @@ export interface SmartOptimizerPolicy {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ChangeTable?: SmartOptimizerChangeTablePolicy
+  /**
+   * 表过期策略
+   */
+  TableExpiration?: TableExpirationPolicy
 }
 
 /**
@@ -2726,6 +2730,10 @@ export interface Policy {
    * 需要授权的Model名，填 * 代表当前Database下所有表。当授权类型为管理员级别时，只允许填“*”，当授权类型为数据连接级别、数据库级别时只允许填空，其他类型下可以任意指定数据表。
    */
   Model?: string
+  /**
+   * 权限来源是否为管理员
+   */
+  IsAdminPolicy?: boolean
 }
 
 /**
@@ -3717,6 +3725,20 @@ export interface CrontabResumeSuspendStrategy {
    * 挂起配置：0（默认）：等待任务结束后挂起、1：强制挂起
    */
   SuspendStrategy?: number
+}
+
+/**
+ * 表过期策略
+ */
+export interface TableExpirationPolicy {
+  /**
+   * 是否启用策略
+   */
+  Enabled: boolean
+  /**
+   * 表过期时间，单位：天
+   */
+  Expiration: number
 }
 
 /**
@@ -7368,7 +7390,7 @@ export interface LakeFsInfo {
    */
   Type?: string
   /**
-   * 容量
+   * 存储用量
    */
   SpaceUsedSize?: number
   /**
@@ -7391,6 +7413,10 @@ export interface LakeFsInfo {
    * 托管桶状态，当前取值为：creating、bind、readOnly、isolate
    */
   Status?: string
+  /**
+   * 托管存储桶标签列表
+   */
+  TagList?: Array<TagInfo>
 }
 
 /**

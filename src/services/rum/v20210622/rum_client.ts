@@ -52,9 +52,10 @@ import {
   DeleteStarProjectRequest,
   DescribeWhitelistsRequest,
   DescribeUvListRequest,
-  DescribeTawAreasResponse,
+  DescribeDataReportCountV2Request,
   DescribeDataRequest,
   StopProjectRequest,
+  DescribeTawAreasResponse,
   ResumeProjectResponse,
   ModifyProjectLimitRequest,
   DeleteInstanceResponse,
@@ -123,6 +124,7 @@ import {
   DescribeRumGroupLogRequest,
   DescribeWhitelistsResponse,
   DescribeProjectsResponse,
+  DescribeDataReportCountV2Response,
   ModifyProjectResponse,
   DescribeDataReportCountResponse,
   DescribeRumLogExportResponse,
@@ -229,6 +231,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDataLogUrlStatisticsResponse) => void
   ): Promise<DescribeDataLogUrlStatisticsResponse> {
     return this.request("DescribeDataLogUrlStatistics", req, cb)
+  }
+
+  /**
+   * 获取项目上报量
+   */
+  async DescribeDataReportCountV2(
+    req: DescribeDataReportCountV2Request,
+    cb?: (error: string, rep: DescribeDataReportCountV2Response) => void
+  ): Promise<DescribeDataReportCountV2Response> {
+    return this.request("DescribeDataReportCountV2", req, cb)
   }
 
   /**

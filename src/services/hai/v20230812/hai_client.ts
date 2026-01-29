@@ -26,6 +26,7 @@ import {
   DescribeInstanceNetworkStatusResponse,
   Instance,
   TerminateInstancesRequest,
+  InquirePriceUpdateServiceConfigsRequest,
   TerminateInstancesResponse,
   DescribeApplicationsResponse,
   StartInstanceRequest,
@@ -36,6 +37,7 @@ import {
   StopInstanceRequest,
   DescribeMuskPromptsRequest,
   DescribeScenesResponse,
+  ServicePriceDetail,
   DescribeApplicationsRequest,
   SceneInfo,
   CreateApplicationRequest,
@@ -52,6 +54,7 @@ import {
   DescribeScenesRequest,
   DescribeRegionsResponse,
   InquirePriceRunInstancesRequest,
+  InquirePriceUpdateServiceConfigsResponse,
   StartInstanceResponse,
   CreateMuskPromptResponse,
   DescribeServiceLoginSettingsRequest,
@@ -85,6 +88,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateServiceConfigsResponse) => void
   ): Promise<UpdateServiceConfigsResponse> {
     return this.request("UpdateServiceConfigs", req, cb)
+  }
+
+  /**
+   * 本接口(InquirePriceUpdateServiceConfigs)用于更新服务配置询价
+   */
+  async InquirePriceUpdateServiceConfigs(
+    req?: InquirePriceUpdateServiceConfigsRequest,
+    cb?: (error: string, rep: InquirePriceUpdateServiceConfigsResponse) => void
+  ): Promise<InquirePriceUpdateServiceConfigsResponse> {
+    return this.request("InquirePriceUpdateServiceConfigs", req, cb)
   }
 
   /**

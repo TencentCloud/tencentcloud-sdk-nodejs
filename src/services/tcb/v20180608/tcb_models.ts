@@ -82,6 +82,26 @@ export interface DescribeEnvLimitResponse {
 }
 
 /**
+ * ListTables返回参数结构体
+ */
+export interface ListTablesResponse {
+  /**
+   * 表信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tables?: Array<TableInfo>
+  /**
+   * 分页信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Pager?: Pager
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 订单信息
  */
 export interface OrderInfo {
@@ -263,6 +283,20 @@ export interface DeleteCloudBaseRunServerVersionResponse {
 }
 
 /**
+ * DescribeDatabaseACL请求参数结构体
+ */
+export interface DescribeDatabaseACLRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 集合名称
+   */
+  CollectionName: string
+}
+
+/**
  * ModifyClsTopic返回参数结构体
  */
 export interface ModifyClsTopicResponse {
@@ -270,6 +304,20 @@ export interface ModifyClsTopicResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 本类型用于UpdateTable接口中描述待创建索引信息
+ */
+export interface CreateIndex {
+  /**
+   * 索引名称
+   */
+  IndexName?: string
+  /**
+   * 索引结构
+   */
+  MgoKeySchema?: MgoKeySchema
 }
 
 /**
@@ -391,17 +439,17 @@ export interface DescribeGraphDataResponse {
 }
 
 /**
- * DescribePostpayPackageFreeQuotas请求参数结构体
+ * 删除tcb用户返回值
  */
-export interface DescribePostpayPackageFreeQuotasRequest {
+export interface DeleteUsersResp {
   /**
-   * 环境ID
+   * 成功个数
    */
-  EnvId?: string
+  SuccessCount?: number
   /**
-   * 免费额度类型标识
+   * 失败个数
    */
-  FreeQuotaType?: string
+  FailedCount?: number
 }
 
 /**
@@ -503,6 +551,21 @@ export interface BanConfig {
    * 地域黑名单（国家英文名）
    */
   CountryBlackList?: Array<string>
+}
+
+/**
+ * ModifyUser返回参数结构体
+ */
+export interface ModifyUserResponse {
+  /**
+   * 修改用户返回值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ModifyUserResp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -628,6 +691,20 @@ export interface CloudRunServiceSimpleVersionSnapshot {
 }
 
 /**
+ * 索引的key值
+ */
+export interface Indexkey {
+  /**
+   * 键名
+   */
+  Name?: string
+  /**
+   * 方向：specify 1 for ascending or -1 for descending
+   */
+  Direction?: string
+}
+
+/**
  * DestroyStaticStore请求参数结构体
  */
 export interface DestroyStaticStoreRequest {
@@ -739,6 +816,20 @@ export interface CreatePostpayPackageRequest {
    * 附加字段，用于透传额外的自定义信息
    */
   Extra?: string
+}
+
+/**
+ * MongoDB连接器配置
+ */
+export interface MongoConnector {
+  /**
+   * 连接器实例ID
+   */
+  InstanceId?: string
+  /**
+   * MongoDB数据库名
+   */
+  DatabaseName?: string
 }
 
 /**
@@ -1340,6 +1431,24 @@ export interface DescribeSmsQuotasRequest {
 }
 
 /**
+ * 本类型用于接口中描述待创建索引结构
+ */
+export interface MgoKeySchema {
+  /**
+   * 索引字段
+   */
+  MgoIndexKeys?: Array<MgoIndexKeys>
+  /**
+   * 是否唯一索引
+   */
+  MgoIsUnique?: boolean
+  /**
+   * 是否稀疏索引
+   */
+  MgoIsSparse?: boolean
+}
+
+/**
  * DescribeHostingDomainTask请求参数结构体
  */
 export interface DescribeHostingDomainTaskRequest {
@@ -1361,6 +1470,20 @@ export interface FreezeCloudBaseRunServersRequest {
    * 服务名列表
    */
   ServerNameList: Array<string>
+}
+
+/**
+ * 查询用户返回结果
+ */
+export interface DescribeUserListResp {
+  /**
+   * 用户总数
+   */
+  Total?: number
+  /**
+   * 用户列表
+   */
+  UserList?: Array<User>
 }
 
 /**
@@ -1596,6 +1719,20 @@ export interface DescribeActivityRecordResponse {
 }
 
 /**
+ * CreateUser返回参数结构体
+ */
+export interface CreateUserResponse {
+  /**
+   * 结果返回
+   */
+  Data?: CreateUserResp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateStaticStore请求参数结构体
  */
 export interface CreateStaticStoreRequest {
@@ -1781,6 +1918,16 @@ export interface CloudBaseRunVersionFlowItem {
 }
 
 /**
+ * ModifyDatabaseACL返回参数结构体
+ */
+export interface ModifyDatabaseACLResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteWxGatewayRoute请求参数结构体
  */
 export interface DeleteWxGatewayRouteRequest {
@@ -1824,6 +1971,16 @@ export interface CustomHeader {
    * 请求添加头部配置
    */
   RequestToAddList?: Array<CustomRequestToAdd>
+}
+
+/**
+ * UpdateTable返回参数结构体
+ */
+export interface UpdateTableResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1964,23 +2121,57 @@ export interface DestroyStaticStoreResponse {
 }
 
 /**
- * BindEnvGateway请求参数结构体
+ * DeleteUsers返回参数结构体
  */
-export interface BindEnvGatewayRequest {
+export interface DeleteUsersResponse {
   /**
-   * 子环境id
+   * 删除用户结果
    */
-  SubEnvId: string
-}
-
-/**
- * ModifyDatabaseACL返回参数结构体
- */
-export interface ModifyDatabaseACLResponse {
+  Data?: DeleteUsersResp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeUserList返回参数结构体
+ */
+export interface DescribeUserListResponse {
+  /**
+   * 结果返回
+   */
+  Data?: DescribeUserListResp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateTable请求参数结构体
+ */
+export interface CreateTableRequest {
+  /**
+   * 数据表名；长度不超过96个字符，可以为英文字母、数字、下划线(_)和短横线(-)的组合，且不能以下划线开头
+   */
+  TableName: string
+  /**
+   * FlexDB实例ID，如：tnt-nl7hjzasw
+   */
+  Tag?: string
+  /**
+   * FlexDB数据库权限信息
+   */
+  PermissionInfo?: PermissionInfo
+  /**
+   * 云开发环境ID
+   */
+  EnvId?: string
+  /**
+   * MongoDB连接器配置
+   */
+  MongoConnector?: MongoConnector
 }
 
 /**
@@ -2054,25 +2245,25 @@ export interface DescribeDownloadFileResponse {
 }
 
 /**
- * 1分钱计费详情
+ * DeleteTable请求参数结构体
  */
-export interface SpecialCostItem {
+export interface DeleteTableRequest {
   /**
-   * 上报日期
+   * 待删除的表名
    */
-  ReportDate?: string
+  TableName: string
   /**
-   * 腾讯云uin
+   * FlexDB实例ID
    */
-  Uin?: string
+  Tag?: string
   /**
-   * 资源id:环境id
+   * 云开发环境ID
    */
   EnvId?: string
   /**
-   * 上报任务状态
+   * MongoDB连接器配置
    */
-  Status?: string
+  MongoConnector?: MongoConnector
 }
 
 /**
@@ -2230,33 +2421,13 @@ export interface DestroyEnvResponse {
 }
 
 /**
- * DescribeCloudBaseProjectVersionList请求参数结构体
+ * DeleteTable返回参数结构体
  */
-export interface DescribeCloudBaseProjectVersionListRequest {
+export interface DeleteTableResponse {
   /**
-   * 环境id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EnvId: string
-  /**
-   * 项目名称
-   */
-  ProjectName: string
-  /**
-   * 页大小
-   */
-  PageSize?: number
-  /**
-   * 第几页,从0开始
-   */
-  PageNum?: number
-  /**
-   * 起始时间
-   */
-  StartTime?: string
-  /**
-   * 终止时间
-   */
-  EndTime?: string
+  RequestId?: string
 }
 
 /**
@@ -2306,6 +2477,48 @@ export interface CodeSource {
 }
 
 /**
+ * 用户信息
+ */
+export interface User {
+  /**
+   * 用户ID
+   */
+  Uid?: string
+  /**
+   * 用户名
+   */
+  Name?: string
+  /**
+   * 用户类型：internalUser-内部用户、externalUser-外部用户
+   */
+  Type?: string
+  /**
+   * 用户状态：ACTIVE（激活）、BLOCKED（冻结）
+   */
+  UserStatus?: string
+  /**
+   * 用户昵称
+   */
+  NickName?: string
+  /**
+   * 手机号
+   */
+  Phone?: string
+  /**
+   * 邮箱
+   */
+  Email?: string
+  /**
+   * 头像链接
+   */
+  AvatarUrl?: string
+  /**
+   * 用户描述
+   */
+  Description?: string
+}
+
+/**
  * DescribeEnvs返回参数结构体
  */
 export interface DescribeEnvsResponse {
@@ -2321,6 +2534,20 @@ export interface DescribeEnvsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribePostpayPackageFreeQuotas请求参数结构体
+ */
+export interface DescribePostpayPackageFreeQuotasRequest {
+  /**
+   * 环境ID
+   */
+  EnvId?: string
+  /**
+   * 免费额度类型标识
+   */
+  FreeQuotaType?: string
 }
 
 /**
@@ -2648,6 +2875,20 @@ export interface RunSqlRequest {
 }
 
 /**
+ * DeleteUsers请求参数结构体
+ */
+export interface DeleteUsersRequest {
+  /**
+   * 环境id
+   */
+  EnvId: string
+  /**
+   * tcb用户id列表, 一次最多支持删除100个
+   */
+  Uids: Array<string>
+}
+
+/**
  * 仓库信息
  */
 export interface CbrRepoInfo {
@@ -2720,35 +2961,37 @@ export interface DeleteWxGatewayRouteResponse {
 }
 
 /**
- * KV参数的优先级
+ * DescribeCloudBaseProjectVersionList返回参数结构体
  */
-export interface CloudBaseRunKVPriority {
+export interface DescribeCloudBaseProjectVersionListResponse {
   /**
-   * 参数的Key
+   * 版本列表
    */
-  Key?: string
+  ProjectVersions?: Array<CloudBaseProjectVersion>
   /**
-   * 参数的Value
+   * 总个数
    */
-  Value?: string
+  TotalCount?: number
   /**
-   * 优先级
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Priority?: number
+  RequestId?: string
 }
 
 /**
- * UnfreezeCloudBaseRunServers请求参数结构体
+ * 索引命中信息
  */
-export interface UnfreezeCloudBaseRunServersRequest {
+export interface IndexAccesses {
   /**
-   * 环境ID
+   * 索引命中次数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnvId: string
+  Ops?: number
   /**
-   * 服务名称列表
+   * 命中次数从何时开始计数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServerNameList: Array<string>
+  Since?: string
 }
 
 /**
@@ -2844,6 +3087,30 @@ export interface EstablishCloudBaseRunServerRequest {
 }
 
 /**
+ * ReinstateEnv返回参数结构体
+ */
+export interface ReinstateEnvResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 本类型用于UpdateTable接口中描述待创建索引信息
+ */
+export interface MgoIndexKeys {
+  /**
+   * 无
+   */
+  Name?: string
+  /**
+   * 无
+   */
+  Direction?: string
+}
+
+/**
  * 对标 EKS VolumeMount
  */
 export interface CloudBaseRunServiceVolumeMount {
@@ -2906,21 +3173,21 @@ export interface DescribeWxGatewayRoutesRequest {
 }
 
 /**
- * DescribeCloudBaseProjectVersionList返回参数结构体
+ * KV参数的优先级
  */
-export interface DescribeCloudBaseProjectVersionListResponse {
+export interface CloudBaseRunKVPriority {
   /**
-   * 版本列表
+   * 参数的Key
    */
-  ProjectVersions?: Array<CloudBaseProjectVersion>
+  Key?: string
   /**
-   * 总个数
+   * 参数的Value
    */
-  TotalCount?: number
+  Value?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 优先级
    */
-  RequestId?: string
+  Priority?: number
 }
 
 /**
@@ -2934,9 +3201,19 @@ export interface DescribeDownloadFileRequest {
 }
 
 /**
- * ReinstateEnv返回参数结构体
+ * DescribeTables返回参数结构体
  */
-export interface ReinstateEnvResponse {
+export interface DescribeTablesResponse {
+  /**
+   * 表信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tables?: Array<TableInfo>
+  /**
+   * 分页信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Pager?: Pager
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3334,6 +3611,16 @@ export interface CloudBaseSecurityContext {
 }
 
 /**
+ * 本类型用于UpdateTable接口中描述待删除索引信息
+ */
+export interface DropIndex {
+  /**
+   * 索引名称
+   */
+  IndexName?: string
+}
+
+/**
  * 扩展文件
  */
 export interface ExtensionFile {
@@ -3375,17 +3662,53 @@ export interface EstablishWxGatewayRouteResponse {
 }
 
 /**
- * DescribeDatabaseACL请求参数结构体
+ * CreateUser请求参数结构体
  */
-export interface DescribeDatabaseACLRequest {
+export interface CreateUserRequest {
   /**
-   * 环境ID
+   * 环境id
    */
   EnvId: string
   /**
-   * 集合名称
+   * 用户名，用户名规则：1. 长度1-64字符 2. 只能包含大小写英文字母、数字和符号 . _ - 3. 只能以字母或数字开头 4. 不能重复
    */
-  CollectionName: string
+  Name: string
+  /**
+   * 用户ID，最多64字符，如不传则系统自动生成
+   */
+  Uid?: string
+  /**
+   * 用户类型：internalUser-内部用户、externalUser-外部用户，默认internalUser（内部用户）
+   */
+  Type?: string
+  /**
+   * 密码，传入Uid时密码可不传。密码规则：1. 长度8-32字符（推荐12位以上） 2. 不能以特殊字符开头 3. 至少包含以下四项中的三项：小写字母a-z、大写字母A-Z、数字0-9、特殊字符()!@#$%^&*\|?><_-
+   */
+  Password?: string
+  /**
+   * 用户状态：ACTIVE（激活）、BLOCKED（冻结），默认激活
+   */
+  UserStatus?: string
+  /**
+   * 用户昵称，长度2-64字符
+   */
+  NickName?: string
+  /**
+   * 手机号，不能重复
+   */
+  Phone?: string
+  /**
+   * 邮箱地址，不能重复
+   */
+  Email?: string
+  /**
+   * 头像链接，可访问的公网URL
+   */
+  AvatarUrl?: string
+  /**
+   * 用户描述，最多200字符
+   */
+  Description?: string
 }
 
 /**
@@ -3487,6 +3810,37 @@ export interface CloudBaseRunServerVersionItem {
    * Monolithic，Microservice
    */
   Architecture?: string
+}
+
+/**
+ * 表信息
+ */
+export interface TableInfo {
+  /**
+   * 表名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
+  /**
+   * 表中文档数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Count?: number
+  /**
+   * 表的大小（即表中文档总大小），单位：字节
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: number
+  /**
+   * 索引数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexCount?: number
+  /**
+   * 索引占用空间，单位：字节
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexSize?: number
 }
 
 /**
@@ -3602,6 +3956,32 @@ export interface DescribeSmsQuotasResponse {
 }
 
 /**
+ * DescribeTables请求参数结构体
+ */
+export interface DescribeTablesRequest {
+  /**
+   * 分页条件
+   */
+  MgoLimit: number
+  /**
+   * 实例ID
+   */
+  Tag?: string
+  /**
+   * 分页条件
+   */
+  MgoOffset?: number
+  /**
+   * 环境id
+   */
+  EnvId?: string
+  /**
+   * MongoConnector
+   */
+  MongoConnector?: MongoConnector
+}
+
+/**
  * 主机路径挂载参数
  */
 export interface CloudBaseRunServiceVolumeHostPath {
@@ -3609,6 +3989,40 @@ export interface CloudBaseRunServiceVolumeHostPath {
    * 主机路径
    */
   Path?: string
+}
+
+/**
+ * DescribeUserList请求参数结构体
+ */
+export interface DescribeUserListRequest {
+  /**
+   * 环境id
+   */
+  EnvId: string
+  /**
+   * 页码，从1开始，默认1
+   */
+  PageNo?: number
+  /**
+   * 每页数量，默认20，最大100
+   */
+  PageSize?: number
+  /**
+   * 用户名，模糊查询
+   */
+  Name?: string
+  /**
+   * 用户昵称，模糊查询
+   */
+  NickName?: string
+  /**
+   * 手机号，模糊查询
+   */
+  Phone?: string
+  /**
+   * 邮箱，模糊查询
+   */
+  Email?: string
 }
 
 /**
@@ -3689,6 +4103,16 @@ export interface DescribeCurveDataRequest {
 }
 
 /**
+ * CreateTable返回参数结构体
+ */
+export interface CreateTableResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ImageSecretInfo的信息
  */
 export interface CloudBaseRunImageSecretInfo {
@@ -3711,45 +4135,13 @@ export interface CloudBaseRunImageSecretInfo {
 }
 
 /**
- * DescribeCloudBaseRunServer返回参数结构体
+ * BindEnvGateway请求参数结构体
  */
-export interface DescribeCloudBaseRunServerResponse {
+export interface BindEnvGatewayRequest {
   /**
-   * 个数
+   * 子环境id
    */
-  TotalCount?: number
-  /**
-   * 版本列表
-   */
-  VersionItems?: Array<CloudBaseRunServerVersionItem>
-  /**
-   * 服务名称
-   */
-  ServerName?: string
-  /**
-   * 是否对于外网开放
-   */
-  IsPublic?: boolean
-  /**
-   * 镜像仓库
-   */
-  ImageRepo?: string
-  /**
-   * 流量配置的类型（FLOW,URL_PARAMS)
-   */
-  TrafficType?: string
-  /**
-   * 服务创建类型，默认为空，一键部署为oneclick
-   */
-  SourceType?: string
-  /**
-   * 服务标签, function: 托管函数
-   */
-  Tag?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  SubEnvId: string
 }
 
 /**
@@ -3894,6 +4286,44 @@ export interface DescribeCbrServerVersionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ListTables请求参数结构体
+ */
+export interface ListTablesRequest {
+  /**
+   * 每页返回数量（0-1000)
+   */
+  MgoLimit: number
+  /**
+   * FlexDB实例ID
+   */
+  Tag?: string
+  /**
+   * 分页偏移量
+   */
+  MgoOffset?: number
+  /**
+   * 过滤标签数组，用于过滤表名，可选值如：HIDDEN、WEDA、WEDA_SYSTEM
+   */
+  Filters?: Array<string>
+  /**
+   * 模糊搜索查询值
+   */
+  SearchValue?: string
+  /**
+   * 是否展示隐藏表
+   */
+  ShowHidden?: boolean
+  /**
+   * 云开发环境ID
+   */
+  EnvId?: string
+  /**
+   * mongo连接器信息
+   */
+  MongoConnector?: MongoConnector
 }
 
 /**
@@ -4084,6 +4514,16 @@ export interface DescribeCloudBaseRunVersionSnapshotRequest {
 }
 
 /**
+ * 修改用户返回值
+ */
+export interface ModifyUserResp {
+  /**
+   * 是否成功
+   */
+  Success?: boolean
+}
+
+/**
  * 后付费资源免费量信息
  */
 export interface FreequotaInfo {
@@ -4122,6 +4562,28 @@ export interface FreequotaInfo {
 }
 
 /**
+ * DescribeTable请求参数结构体
+ */
+export interface DescribeTableRequest {
+  /**
+   * 表名
+   */
+  TableName: string
+  /**
+   * FlecDB实例ID
+   */
+  Tag?: string
+  /**
+   * 云开发环境ID
+   */
+  EnvId?: string
+  /**
+   * MongoDB连接器配置
+   */
+  MongoConnector?: MongoConnector
+}
+
+/**
  * DescribeUserActivityInfo返回参数结构体
  */
 export interface DescribeUserActivityInfoResponse {
@@ -4149,6 +4611,36 @@ export interface DescribeUserActivityInfoResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateTable请求参数结构体
+ */
+export interface UpdateTableRequest {
+  /**
+   * 表名
+   */
+  TableName: string
+  /**
+   * FlexDB实例ID
+   */
+  Tag?: string
+  /**
+   * 待删除索引信息
+   */
+  DropIndexes?: Array<DropIndex>
+  /**
+   * 待创建索引信息
+   */
+  CreateIndexes?: Array<CreateIndex>
+  /**
+   * 云开发环境ID
+   */
+  EnvId?: string
+  /**
+   * MongoDB连接器配置
+   */
+  MongoConnector?: MongoConnector
 }
 
 /**
@@ -4308,6 +4800,28 @@ export interface DescribeCloudBaseProjectLatestVersionListRequest {
 }
 
 /**
+ * FlexDB数据库权限信息
+ */
+export interface PermissionInfo {
+  /**
+   * "READONLY",   //公有读，私有写。所有用户可读，仅创建者及管理员可写  
+"PRIVATE",    //私有读写，仅创建者及管理员可读写  
+"ADMINWRITE", //所有用户可读，仅管理员可写  
+"ADMINONLY",  //仅管理员可操作  
+"CUSTOM",     // 安全规则
+   */
+  AclTag: string
+  /**
+   * 云开发环境ID
+   */
+  EnvId: string
+  /**
+   * 自定义规则
+   */
+  Rule?: string
+}
+
+/**
  * 安全网关版本路由信息限额配置
  */
 export interface FrequencyLimitConfig {
@@ -4336,84 +4850,51 @@ export interface DescribeHostingDomainTaskResponse {
 }
 
 /**
- * 环境计费信息
+ * DescribeTable返回参数结构体
  */
-export interface EnvBillingInfoItem {
+export interface DescribeTableResponse {
   /**
-   * 环境ID
+   * 索引相关信息
    */
-  EnvId?: string
+  Indexes?: Array<IndexInfo>
   /**
-   * tcb产品套餐ID，参考DescribePackages接口的返回值。
+   * 索引个数
    */
-  PackageId?: string
+  IndexNum?: number
   /**
-   * 自动续费标记
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IsAutoRenew?: boolean
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudBaseProjectVersionList请求参数结构体
+ */
+export interface DescribeCloudBaseProjectVersionListRequest {
   /**
-   * 状态。包含以下取值：
-<li> 空字符串：初始化中</li>
-<li> NORMAL：正常</li>
-<li> ISOLATE：隔离</li>
+   * 环境id
    */
-  Status?: string
+  EnvId: string
   /**
-   * 支付方式。包含以下取值：
-<li> PREPAYMENT：预付费</li>
-<li> POSTPAID：后付费</li>
+   * 项目名称
    */
-  PayMode?: string
+  ProjectName: string
   /**
-   * 隔离时间，最近一次隔离的时间
+   * 页大小
    */
-  IsolatedTime?: string
+  PageSize?: number
   /**
-   * 过期时间，套餐即将到期的时间
+   * 第几页,从0开始
    */
-  ExpireTime?: string
+  PageNum?: number
   /**
-   * 创建时间，第一次接入计费方案的时间。
+   * 起始时间
    */
-  CreateTime?: string
+  StartTime?: string
   /**
-   * 更新时间，计费信息最近一次更新的时间。
+   * 终止时间
    */
-  UpdateTime?: string
-  /**
-   * true表示从未升级过付费版。
-   */
-  IsAlwaysFree?: boolean
-  /**
-   * 付费渠道。
-<li> miniapp：小程序</li>
-<li> qcloud：腾讯云</li>
-   */
-  PaymentChannel?: string
-  /**
-   * 最新的订单信息
-   */
-  OrderInfo?: OrderInfo
-  /**
-   * 免费配额信息。
-   */
-  FreeQuota?: string
-  /**
-   * 是否开启 `超过套餐额度部分转按量付费`
-   */
-  EnableOverrun?: boolean
-  /**
-   * 环境套餐类型
-   */
-  ExtPackageType?: string
-  /**
-   * 是否付费期环境，可取值：yes/no。
-   */
-  EnvCharged?: string
-  /**
-   * 是否已激活，可取值：yes/no。
-   */
-  EnvActivated?: string
+  EndTime?: string
 }
 
 /**
@@ -4488,6 +4969,37 @@ export interface WxGatewayRountItem {
    * 安全网关自定义头部
    */
   CustomHeader?: CustomHeader
+}
+
+/**
+ * 索引信息
+ */
+export interface IndexInfo {
+  /**
+   * 索引名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 索引大小，单位: 字节
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: number
+  /**
+   * 索引键值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Keys?: Array<Indexkey>
+  /**
+   * 索引使用信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Accesses?: IndexAccesses
+  /**
+   * 是否为唯一索引
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Unique?: boolean
 }
 
 /**
@@ -4688,6 +5200,69 @@ export interface CloudBaseCodeRepoDetail {
 export type CheckTcbServiceRequest = null
 
 /**
+ * 分页信息
+ */
+export interface Pager {
+  /**
+   * 分页偏移量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Offset?: number
+  /**
+   * 每页返回记录数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Limit?: number
+  /**
+   * 文档集合总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+}
+
+/**
+ * DescribeCloudBaseRunServer返回参数结构体
+ */
+export interface DescribeCloudBaseRunServerResponse {
+  /**
+   * 个数
+   */
+  TotalCount?: number
+  /**
+   * 版本列表
+   */
+  VersionItems?: Array<CloudBaseRunServerVersionItem>
+  /**
+   * 服务名称
+   */
+  ServerName?: string
+  /**
+   * 是否对于外网开放
+   */
+  IsPublic?: boolean
+  /**
+   * 镜像仓库
+   */
+  ImageRepo?: string
+  /**
+   * 流量配置的类型（FLOW,URL_PARAMS)
+   */
+  TrafficType?: string
+  /**
+   * 服务创建类型，默认为空，一键部署为oneclick
+   */
+  SourceType?: string
+  /**
+   * 服务标签, function: 托管函数
+   */
+  Tag?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeUserActivityInfo请求参数结构体
  */
 export interface DescribeUserActivityInfoRequest {
@@ -4707,6 +5282,20 @@ export interface DescribeUserActivityInfoRequest {
    * 团id, 1元钱裂变中活动团id不为空时根据团id来查询记录，为空时查询uin最新记录
    */
   GroupId?: string
+}
+
+/**
+ * UnfreezeCloudBaseRunServers请求参数结构体
+ */
+export interface UnfreezeCloudBaseRunServersRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 服务名称列表
+   */
+  ServerNameList: Array<string>
 }
 
 /**
@@ -5129,6 +5718,87 @@ export interface CloudBaseProjectVersion {
 }
 
 /**
+ * 环境计费信息
+ */
+export interface EnvBillingInfoItem {
+  /**
+   * 环境ID
+   */
+  EnvId?: string
+  /**
+   * tcb产品套餐ID，参考DescribePackages接口的返回值。
+   */
+  PackageId?: string
+  /**
+   * 自动续费标记
+   */
+  IsAutoRenew?: boolean
+  /**
+   * 状态。包含以下取值：
+<li> 空字符串：初始化中</li>
+<li> NORMAL：正常</li>
+<li> ISOLATE：隔离</li>
+   */
+  Status?: string
+  /**
+   * 支付方式。包含以下取值：
+<li> PREPAYMENT：预付费</li>
+<li> POSTPAID：后付费</li>
+   */
+  PayMode?: string
+  /**
+   * 隔离时间，最近一次隔离的时间
+   */
+  IsolatedTime?: string
+  /**
+   * 过期时间，套餐即将到期的时间
+   */
+  ExpireTime?: string
+  /**
+   * 创建时间，第一次接入计费方案的时间。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间，计费信息最近一次更新的时间。
+   */
+  UpdateTime?: string
+  /**
+   * true表示从未升级过付费版。
+   */
+  IsAlwaysFree?: boolean
+  /**
+   * 付费渠道。
+<li> miniapp：小程序</li>
+<li> qcloud：腾讯云</li>
+   */
+  PaymentChannel?: string
+  /**
+   * 最新的订单信息
+   */
+  OrderInfo?: OrderInfo
+  /**
+   * 免费配额信息。
+   */
+  FreeQuota?: string
+  /**
+   * 是否开启 `超过套餐额度部分转按量付费`
+   */
+  EnableOverrun?: boolean
+  /**
+   * 环境套餐类型
+   */
+  ExtPackageType?: string
+  /**
+   * 是否付费期环境，可取值：yes/no。
+   */
+  EnvCharged?: string
+  /**
+   * 是否已激活，可取值：yes/no。
+   */
+  EnvActivated?: string
+}
+
+/**
  * DescribeEnvDealRegion请求参数结构体
  */
 export interface DescribeEnvDealRegionRequest {
@@ -5160,6 +5830,28 @@ ap-shanghai = 上海地域
 ap-beijing = 北京地域
    */
   DealRegion: string
+}
+
+/**
+ * 1分钱计费详情
+ */
+export interface SpecialCostItem {
+  /**
+   * 上报日期
+   */
+  ReportDate?: string
+  /**
+   * 腾讯云uin
+   */
+  Uin?: string
+  /**
+   * 资源id:环境id
+   */
+  EnvId?: string
+  /**
+   * 上报任务状态
+   */
+  Status?: string
 }
 
 /**
@@ -5223,6 +5915,56 @@ export interface ModifyEnvRequest {
 }
 
 /**
+ * ModifyUser请求参数结构体
+ */
+export interface ModifyUserRequest {
+  /**
+   * 环境id
+   */
+  EnvId: string
+  /**
+   * 用户Id, 不做修改
+   */
+  Uid: string
+  /**
+   * 用户名，用户名规则：1. 长度1-64字符 2. 只能包含大小写英文字母、数字和符号 . _ - 3. 只能以字母或数字开头 4. 不能重复，不传该字段或传空字符不修改
+   */
+  Name?: string
+  /**
+   * 用户类型：0-内部用户、1-外部用户，默认0（内部用户），不传该字段或传空字符串不修改
+   */
+  Type?: string
+  /**
+   * 密码，传入Uid时密码可不传。密码规则：1. 长度8-32字符（推荐12位以上） 2. 不能以特殊字符开头 3. 至少包含以下四项中的三项：小写字母a-z、大写字母A-Z、数字0-9、特殊字符()!@#$%^&*\|?><_-，不传该字段或传空字符串不修改
+   */
+  Password?: string
+  /**
+   * 用户状态：ACTIVE（激活）、BLOCKED（冻结），默认冻结，不传该字段或传空字符串不修改
+   */
+  UserStatus?: string
+  /**
+   * 用户昵称，长度2-64字符，不传该字段不修改，传空字符修改为空
+   */
+  NickName?: string
+  /**
+   * 手机号，11位数字，不传该字段不修改，传空字符串修改为空
+   */
+  Phone?: string
+  /**
+   * 邮箱地址，不传该字段不修改，传空字符修改为空
+   */
+  Email?: string
+  /**
+   * 头像链接，可访问的公网URL，不传该字段不修改，传空字符串修改为空
+   */
+  AvatarUrl?: string
+  /**
+   * 用户描述，最多200字符，不传该字段不修改，传空字符修改为空
+   */
+  Description?: string
+}
+
+/**
  * 按量付费免费配额信息
  */
 export interface PostpayEnvQuota {
@@ -5280,6 +6022,16 @@ export interface DescribePostpayPackageFreeQuotasResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 创建用户返回结果
+ */
+export interface CreateUserResp {
+  /**
+   * 用户ID
+   */
+  Uid?: string
 }
 
 /**

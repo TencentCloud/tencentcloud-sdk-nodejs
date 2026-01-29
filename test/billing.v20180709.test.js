@@ -238,6 +238,16 @@ it("billing.v20180709.DescribeBillDetail", async function () {
     }
 })
 
+it("billing.v20180709.SetRenewal", async function () {
+    try {
+       const data = await client.SetRenewal({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("billing.v20180709.DescribeBillSummary", async function () {
     try {
        const data = await client.DescribeBillSummary({})

@@ -1076,6 +1076,10 @@ export interface SubmitVideoEditJobRequest {
    */
   Image?: Image
   /**
+   * 扩展字段。
+   */
+  VideoEditParam?: VideoEditParam
+  /**
    * 为生成视频添加标识的开关，默认为1。传0 需前往  [控制台](https://console.cloud.tencent.com/vtc/setting)  申请开启显式标识自主完成后方可生效。
 1：添加标识；
 0：不添加标识；
@@ -1164,4 +1168,15 @@ export interface DescribeHunyuanToVideoJobResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 视频编辑参数
+ */
+export interface VideoEditParam {
+  /**
+   * 魔法词，针对特定场景生效。不同场景传不同的值。默认不传。
+- 换人场景：1
+   */
+  Magic?: string
 }

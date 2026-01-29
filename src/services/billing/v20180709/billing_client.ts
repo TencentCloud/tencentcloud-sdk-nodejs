@@ -111,6 +111,7 @@ import {
   DescribeDosageDetailByDateResponse,
   DescribeBudgetRemindRecordListRequest,
   DescribeCostSummaryByRegionRequest,
+  SetRenewalRequest,
   ConsumptionSummaryTrend,
   DescribeBillDownloadUrlRequest,
   DescribeAllocationOverviewRequest,
@@ -153,6 +154,7 @@ import {
   JsonObject,
   AllocationOverviewDetail,
   AnalysePayModeDetail,
+  OperateRsp,
   AllocationBillTrendDetail,
   DescribeBillSummaryResponse,
   TagsForm,
@@ -202,6 +204,7 @@ import {
   BillBusiness,
   BudgetRemindRecords,
   DescribeAllocationRuleDetailResponse,
+  SetRenewalResponse,
   UsageDetails,
   DescribeBillSummaryByPayModeResponse,
   BillInstanceType,
@@ -502,6 +505,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBillDetailResponse) => void
   ): Promise<DescribeBillDetailResponse> {
     return this.request("DescribeBillDetail", req, cb)
+  }
+
+  /**
+     * 注意事项：
+1、本接口支持对包年包月实例设置自动续费模式及周期
+2、可通过实例查询接口获取到产品编码、地域编码
+3、子用户使用该接口时，应具备QcloudFinanceRenewManageFullAccess权限策略。
+     */
+  async SetRenewal(
+    req: SetRenewalRequest,
+    cb?: (error: string, rep: SetRenewalResponse) => void
+  ): Promise<SetRenewalResponse> {
+    return this.request("SetRenewal", req, cb)
   }
 
   /**

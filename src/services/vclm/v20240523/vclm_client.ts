@@ -67,6 +67,7 @@ import {
   DescribeImageAnimateJobRequest,
   DescribePortraitSingJobResponse,
   DescribeHunyuanToVideoJobResponse,
+  VideoEditParam,
 } from "./vclm_models"
 
 /**

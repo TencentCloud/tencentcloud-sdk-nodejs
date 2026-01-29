@@ -83,6 +83,7 @@ import {
   FailedCreateRoleData,
   CreateEmployeeChangeUrlRequest,
   DescribeSingleSignOnEmployeesResponse,
+  FeedbackInfoReason,
   PositionInfo,
   CreateUserAutoSignEnableUrlRequest,
   CreateBatchOrganizationRegistrationTasksRequest,
@@ -99,6 +100,7 @@ import {
   DescribeBillUsageDetailResponse,
   ContractSummary,
   DescribeFlowBriefsResponse,
+  DescribeRiskIdentificationTaskFeedbackRequest,
   CreateBatchAdminChangeInvitationsRequest,
   DescribeFlowTemplatesResponse,
   ReferenceExcerpt,
@@ -120,6 +122,7 @@ import {
   CreateFlowApproversResponse,
   ModifyExtendedServiceRequest,
   DeleteOrganizationAuthorizationInfo,
+  CreateLMInformationExtractionTaskFieldFeedbackRequest,
   ReviewerInfo,
   CreateContractReviewWebUrlResponse,
   DisableUserAutoSignResponse,
@@ -132,9 +135,11 @@ import {
   CreateBatchQuickSignUrlResponse,
   FlowCreateApprover,
   DeleteSingleSignOnEmployeesResponse,
+  Permission,
   CreateUserMobileChangeUrlResponse,
   DescribeFlowTemplatesRequest,
   DescribeFlowEvidenceReportResponse,
+  CreateRiskIdentificationTaskFeedbackResponse,
   BatchOrganizationRegistrationTasksDetails,
   RecipientComponentInfo,
   ExportContractReviewResultResponse,
@@ -182,6 +187,7 @@ import {
   FlowForwardInfo,
   CreateOrganizationBatchSignUrlResponse,
   FileInfo,
+  FeedbackInfo,
   CreatePartnerAutoSignAuthUrlRequest,
   CreateExtendedServiceAuthInfosResponse,
   ExtractionTaskResult,
@@ -202,7 +208,7 @@ import {
   CreateInformationExtractionWebUrlResponse,
   CreateFlowGroupSignReviewRequest,
   Admin,
-  OccupiedSeal,
+  Caller,
   ExportContractComparisonTaskResponse,
   EmbedUrlOption,
   DescribeContractComparisonTaskResponse,
@@ -229,6 +235,7 @@ import {
   ModifyApplicationCallbackInfoResponse,
   RiskIdentificationRoleInfo,
   CreateUserVerifyUrlRequest,
+  DescribeLMInformationExtractionTaskFieldFeedbackRequest,
   CreateIntegrationEmployeesRequest,
   CreateFlowOption,
   DescribeContractDiffTaskWebUrlResponse,
@@ -262,6 +269,8 @@ import {
   FillApproverInfo,
   CreatePersonAuthCertificateImageResponse,
   FlowForwardResult,
+  DescribeLMInformationExtractionTaskFieldFeedbackResponse,
+  CreateLMInformationExtractionTaskFieldFeedbackResponse,
   DescribeIntegrationEmployeesResponse,
   ModifyFlowDeadlineResponse,
   CreateBatchCancelFlowUrlResponse,
@@ -283,6 +292,7 @@ import {
   CreatePreparedPersonalEsignResponse,
   FlowGroupOptions,
   RegisterInfo,
+  RiskIdentificationFeedbackInfo,
   CreateReleaseFlowRequest,
   CreateIntegrationUserRolesRequest,
   SuccessUpdateStaffData,
@@ -325,6 +335,7 @@ import {
   CreateResultPageConfig,
   Component,
   FlowGroupUrlInfo,
+  SubTaskFeedback,
   UpdateIntegrationEmployeesResponse,
   ModifyPartnerAutoSignAuthUrlRequest,
   DescribeInformationExtractionWebUrlResponse,
@@ -337,10 +348,11 @@ import {
   CreateOrganizationAuthFileResponse,
   FlowBatchApproverInfo,
   StartFlowResponse,
-  DescribeContractReviewWebUrlResponse,
+  DescribeRiskIdentificationTaskFeedbackResponse,
   SignComponentConfig,
   DescribeInformationExtractionWebUrlRequest,
   DescribeFlowComponentsResponse,
+  DescribeContractReviewWebUrlResponse,
   CancelFailureFlow,
   DescribeIntegrationEmployeesRequest,
   DescribeContractReviewTaskListWebUrlResponse,
@@ -352,9 +364,10 @@ import {
   Option,
   DescribeOrganizationSealsResponse,
   DescribeBillUsageDetailRequest,
+  FeedbackList,
   CreateBatchAdminChangeInvitationsUrlRequest,
   CreateUserAutoSignSealUrlResponse,
-  Caller,
+  OccupiedSeal,
   IntentionActionResultDetail,
   CreateEmployeeQualificationSealQrCodeRequest,
   FailedDeleteStaffData,
@@ -412,7 +425,7 @@ import {
   DescribeBatchOrganizationRegistrationUrlsResponse,
   ExportContractComparisonTaskRequest,
   CreateInformationExtractionWebUrlRequest,
-  Permission,
+  CreateRiskIdentificationTaskFeedbackRequest,
   ReleasedApprover,
   DescribeUserFlowTypeRequest,
   DescribeContractReviewTaskListWebUrlRequest,
@@ -730,6 +743,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeExtendedServiceAuthInfosResponse) => void
   ): Promise<DescribeExtendedServiceAuthInfosResponse> {
     return this.request("DescribeExtendedServiceAuthInfos", req, cb)
+  }
+
+  /**
+   * 此接口（DescribeRiskIdentificationTaskFeedback）用于查询合同审查任务结果反馈信息
+   */
+  async DescribeRiskIdentificationTaskFeedback(
+    req: DescribeRiskIdentificationTaskFeedbackRequest,
+    cb?: (error: string, rep: DescribeRiskIdentificationTaskFeedbackResponse) => void
+  ): Promise<DescribeRiskIdentificationTaskFeedbackResponse> {
+    return this.request("DescribeRiskIdentificationTaskFeedback", req, cb)
   }
 
   /**
@@ -1701,6 +1724,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 此接口（DescribeLMInformationExtractionTaskFieldFeedback）用于查询合同智能提取任务字段反馈信息。
+   */
+  async DescribeLMInformationExtractionTaskFieldFeedback(
+    req: DescribeLMInformationExtractionTaskFieldFeedbackRequest,
+    cb?: (error: string, rep: DescribeLMInformationExtractionTaskFieldFeedbackResponse) => void
+  ): Promise<DescribeLMInformationExtractionTaskFieldFeedbackResponse> {
+    return this.request("DescribeLMInformationExtractionTaskFieldFeedback", req, cb)
+  }
+
+  /**
      * 此接口（CreateBatchInformationExtractionTask）用来通过上传后的PDF资源编号来批量创建合同智能审查任务。<br/>
 
 适用场景：根据合同关键词（字段名称）来提取PDF合同文件的字段结果信息。
@@ -2069,6 +2102,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 此接口（CreateLMInformationExtractionTaskFieldFeedback）用于创建合同智能提取任务字段结果的反馈。
+   */
+  async CreateLMInformationExtractionTaskFieldFeedback(
+    req: CreateLMInformationExtractionTaskFieldFeedbackRequest,
+    cb?: (error: string, rep: CreateLMInformationExtractionTaskFieldFeedbackResponse) => void
+  ): Promise<CreateLMInformationExtractionTaskFieldFeedbackResponse> {
+    return this.request("CreateLMInformationExtractionTaskFieldFeedback", req, cb)
+  }
+
+  /**
      * 本接口（CreateOrganizationAuthUrl）的主要功能是生成合作企业的认证链接。
 
 在生成链接的过程中，可以提供一部分已知信息，以便为对方进行认证流程提供便利。
@@ -2324,6 +2367,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: DeleteOrganizationAuthorizationsResponse) => void
   ): Promise<DeleteOrganizationAuthorizationsResponse> {
     return this.request("DeleteOrganizationAuthorizations", req, cb)
+  }
+
+  /**
+   * 此接口（CreateRiskIdentificationTaskFeedback）用于创建合同审查任务结果反馈。
+   */
+  async CreateRiskIdentificationTaskFeedback(
+    req: CreateRiskIdentificationTaskFeedbackRequest,
+    cb?: (error: string, rep: CreateRiskIdentificationTaskFeedbackResponse) => void
+  ): Promise<CreateRiskIdentificationTaskFeedbackResponse> {
+    return this.request("CreateRiskIdentificationTaskFeedback", req, cb)
   }
 
   /**

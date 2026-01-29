@@ -164,6 +164,7 @@ import {
   Task,
   DataEngineConfigInstanceInfo,
   CrontabResumeSuspendStrategy,
+  TableExpirationPolicy,
   VpcInfo,
   CustomConfig,
   NotebookSessions,

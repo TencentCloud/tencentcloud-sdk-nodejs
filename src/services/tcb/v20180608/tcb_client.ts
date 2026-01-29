@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeEnvLimitResponse,
+  ListTablesResponse,
   OrderInfo,
   CheckTcbServiceResponse,
   DescribeCloudBaseRunServerVersionRequest,
@@ -26,23 +27,28 @@ import {
   PostPaidEnvDeductInfo,
   DescribeEnvDealRegionResponse,
   DeleteCloudBaseRunServerVersionResponse,
+  DescribeDatabaseACLRequest,
   ModifyClsTopicResponse,
+  CreateIndex,
   DbInstance,
   EditAuthConfigResponse,
   CloudBaseRunSideSpec,
   CommonServiceAPIResponse,
   DescribeGraphDataResponse,
-  DescribePostpayPackageFreeQuotasRequest,
+  DeleteUsersResp,
   DescribeEnvLimitRequest,
   DescribeCloudBaseBuildServiceResponse,
   DescribeSpecialCostItemsRequest,
   DescribeCloudBaseRunVersionRequest,
   BanConfig,
+  ModifyUserResponse,
   CloudRunServiceSimpleVersionSnapshot,
+  Indexkey,
   DestroyStaticStoreRequest,
   ReplaceActivityRecordResponse,
   LogServiceInfo,
   CreatePostpayPackageRequest,
+  MongoConnector,
   DescribeCurveDataResponse,
   DescribeBaasPackageListRequest,
   ClsInfo,
@@ -63,8 +69,10 @@ import {
   DescribeCloudBaseRunServerVersionResponse,
   DescribeGatewayVersionsResponse,
   DescribeSmsQuotasRequest,
+  MgoKeySchema,
   DescribeHostingDomainTaskRequest,
   FreezeCloudBaseRunServersRequest,
+  DescribeUserListResp,
   BaasPackageInfo,
   ModifyGatewayVersionTrafficRequest,
   DescribeQuotaDataResponse,
@@ -75,6 +83,7 @@ import {
   CommonServiceAPIRequest,
   ModifyCloudBaseRunServerFlowConfRequest,
   DescribeActivityRecordResponse,
+  CreateUserResponse,
   CreateStaticStoreRequest,
   DeleteCloudBaseProjectLatestVersionResponse,
   DescribeGatewayCurveDataRequest,
@@ -83,9 +92,11 @@ import {
   CreateAuthDomainResponse,
   DescribeEnvsRequest,
   CloudBaseRunVersionFlowItem,
+  ModifyDatabaseACLResponse,
   DeleteWxGatewayRouteRequest,
   DescribeEnvPostpaidDeductRequest,
   CustomHeader,
+  UpdateTableResponse,
   DescribeExtraPkgBillingInfoRequest,
   BindEnvGatewayResponse,
   DescribeWxGatewaysRequest,
@@ -96,19 +107,22 @@ import {
   HpaPolicy,
   CreateCloudBaseRunResourceResponse,
   DestroyStaticStoreResponse,
-  BindEnvGatewayRequest,
-  ModifyDatabaseACLResponse,
+  DeleteUsersResponse,
+  DescribeUserListResponse,
+  CreateTableRequest,
   CloudBaseEsInfo,
   ModifyCloudBaseRunServerFlowConfResponse,
   DescribeDownloadFileResponse,
-  SpecialCostItem,
+  DeleteTableRequest,
   EstablishCloudBaseRunServerResponse,
   EnvInfo,
   DestroyEnvRequest,
   DestroyEnvResponse,
-  DescribeCloudBaseProjectVersionListRequest,
+  DeleteTableResponse,
   CodeSource,
+  User,
   DescribeEnvsResponse,
+  DescribePostpayPackageFreeQuotasRequest,
   CreateAuthDomainRequest,
   DescribeEnvPostpaidDeductResponse,
   CreateHostingDomainResponse,
@@ -117,20 +131,23 @@ import {
   DeleteCloudBaseRunServerVersionRequest,
   CreateCloudBaseRunServerVersionRequest,
   RunSqlRequest,
+  DeleteUsersRequest,
   CbrRepoInfo,
   DescribeBaasPackageListResponse,
   ReplaceActivityRecordRequest,
   DeleteWxGatewayRouteResponse,
-  CloudBaseRunKVPriority,
-  UnfreezeCloudBaseRunServersRequest,
+  DescribeCloudBaseProjectVersionListResponse,
+  IndexAccesses,
   CustomLogConfig,
   EstablishCloudBaseRunServerRequest,
+  ReinstateEnvResponse,
+  MgoIndexKeys,
   CloudBaseRunServiceVolumeMount,
   DescribeSpecialCostItemsResponse,
   DescribeWxGatewayRoutesRequest,
-  DescribeCloudBaseProjectVersionListResponse,
+  CloudBaseRunKVPriority,
   DescribeDownloadFileRequest,
-  ReinstateEnvResponse,
+  DescribeTablesResponse,
   CloudBaseRunVpcSubnet,
   PackageFreeQuotaInfo,
   DescribeEnvFreeQuotaResponse,
@@ -145,24 +162,30 @@ import {
   DescribeWxGatewayRoutesResponse,
   DatabasesInfo,
   CloudBaseSecurityContext,
+  DropIndex,
   ExtensionFile,
   DeleteGatewayVersionResponse,
   EstablishWxGatewayRouteResponse,
-  DescribeDatabaseACLRequest,
+  CreateUserRequest,
   CreateCloudBaseRunServerVersionResponse,
   CloudBaseRunServerVersionItem,
+  TableInfo,
   DeleteCloudBaseProjectLatestVersionRequest,
   DescribeCloudBaseProjectLatestVersionListResponse,
   DescribeWxGatewaysResponse,
   DescribeGatewayVersionsRequest,
   CloudBaseRunNfsVolumeSource,
   DescribeSmsQuotasResponse,
+  DescribeTablesRequest,
   CloudBaseRunServiceVolumeHostPath,
+  DescribeUserListRequest,
   DescribeCurveDataRequest,
+  CreateTableResponse,
   CloudBaseRunImageSecretInfo,
-  DescribeCloudBaseRunServerResponse,
+  BindEnvGatewayRequest,
   ModifyEnvResponse,
   DescribeCbrServerVersionResponse,
+  ListTablesRequest,
   DescribeQuotaDataRequest,
   CreateStaticStoreResponse,
   EditAuthConfigRequest,
@@ -170,24 +193,33 @@ import {
   DescribeCloudBaseRunResourceResponse,
   StorageInfo,
   DescribeCloudBaseRunVersionSnapshotRequest,
+  ModifyUserResp,
   FreequotaInfo,
+  DescribeTableRequest,
   DescribeUserActivityInfoResponse,
+  UpdateTableRequest,
   DescribePostpayFreeQuotasResponse,
   ModifyGatewayVersionTrafficResponse,
   ActivityRecordItem,
   AuthDomain,
   RunSqlResponse,
   DescribeCloudBaseProjectLatestVersionListRequest,
+  PermissionInfo,
   FrequencyLimitConfig,
   DescribeHostingDomainTaskResponse,
-  EnvBillingInfoItem,
+  DescribeTableResponse,
+  DescribeCloudBaseProjectVersionListRequest,
   WxGatewayRountItem,
+  IndexInfo,
   DescribeCloudBaseRunVersionResponse,
   DescribeCloudBaseRunResourceForExtendRequest,
   DescribeCloudBaseBuildServiceRequest,
   CloudBaseCodeRepoDetail,
   CheckTcbServiceRequest,
+  Pager,
+  DescribeCloudBaseRunServerResponse,
   DescribeUserActivityInfoRequest,
+  UnfreezeCloudBaseRunServersRequest,
   Tag,
   DescribeCloudBaseRunVersionSnapshotResponse,
   CreateCloudBaseRunResourceRequest,
@@ -199,14 +231,18 @@ import {
   WxGatewayCustomConfig,
   ObjectKV,
   CloudBaseProjectVersion,
+  EnvBillingInfoItem,
   DescribeEnvDealRegionRequest,
+  SpecialCostItem,
   DescribeDatabaseACLResponse,
   ModifyCloudBaseRunServerVersionResponse,
   DescribeExtensionUploadInfoResponse,
   ModifyEnvRequest,
+  ModifyUserRequest,
   PostpayEnvQuota,
   CustomRequestToAdd,
   DescribePostpayPackageFreeQuotasResponse,
+  CreateUserResp,
   DescribeExtraPkgBillingInfoResponse,
   CloudBaseCodeRepoName,
 } from "./tcb_models"
@@ -261,6 +297,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询tcb用户列表
+   */
+  async DescribeUserList(
+    req: DescribeUserListRequest,
+    cb?: (error: string, rep: DescribeUserListResponse) => void
+  ): Promise<DescribeUserListResponse> {
+    return this.request("DescribeUserList", req, cb)
+  }
+
+  /**
    * 执行SQL语句
    */
   async RunSql(
@@ -301,6 +347,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询表的相关信息，包括索引等信息
+   */
+  async DescribeTable(
+    req: DescribeTableRequest,
+    cb?: (error: string, rep: DescribeTableResponse) => void
+  ): Promise<DescribeTableResponse> {
+    return this.request("DescribeTable", req, cb)
+  }
+
+  /**
    * 绑定另外一个环境下的网关，callContainer请求可以访问到该网关
    */
   async BindEnvGateway(
@@ -311,14 +367,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询网关版本信息
-暂不鉴权
-     */
-  async DescribeGatewayVersions(
-    req: DescribeGatewayVersionsRequest,
-    cb?: (error: string, rep: DescribeGatewayVersionsResponse) => void
-  ): Promise<DescribeGatewayVersionsResponse> {
-    return this.request("DescribeGatewayVersions", req, cb)
+   * 本接口(CreateTable)用于创建表，支持创建capped类型集合，暂时不支持分片表
+   */
+  async CreateTable(
+    req: CreateTableRequest,
+    cb?: (error: string, rep: CreateTableResponse) => void
+  ): Promise<CreateTableResponse> {
+    return this.request("CreateTable", req, cb)
   }
 
   /**
@@ -555,6 +610,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除tcb用户
+   */
+  async DeleteUsers(
+    req: DeleteUsersRequest,
+    cb?: (error: string, rep: DeleteUsersResponse) => void
+  ): Promise<DeleteUsersResponse> {
+    return this.request("DeleteUsers", req, cb)
+  }
+
+  /**
    * 查看容器托管的集群状态扩展使用
    */
   async DescribeCloudBaseRunResourceForExtend(
@@ -562,6 +627,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudBaseRunResourceForExtendResponse) => void
   ): Promise<DescribeCloudBaseRunResourceForExtendResponse> {
     return this.request("DescribeCloudBaseRunResourceForExtend", req, cb)
+  }
+
+  /**
+   * 修改tcb用户
+   */
+  async ModifyUser(
+    req: ModifyUserRequest,
+    cb?: (error: string, rep: ModifyUserResponse) => void
+  ): Promise<ModifyUserResponse> {
+    return this.request("ModifyUser", req, cb)
   }
 
   /**
@@ -592,6 +667,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeExtraPkgBillingInfoResponse) => void
   ): Promise<DescribeExtraPkgBillingInfoResponse> {
     return this.request("DescribeExtraPkgBillingInfo", req, cb)
+  }
+
+  /**
+   * 本接口(UpdateTable)用于修改表信息，当前可以支持创建和删除索引
+   */
+  async UpdateTable(
+    req: UpdateTableRequest,
+    cb?: (error: string, rep: UpdateTableResponse) => void
+  ): Promise<UpdateTableResponse> {
+    return this.request("UpdateTable", req, cb)
   }
 
   /**
@@ -755,6 +840,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(DeleteTable)用于删除表，删除表后表中数据将会被删除且无法恢复，请谨慎操作
+   */
+  async DeleteTable(
+    req: DeleteTableRequest,
+    cb?: (error: string, rep: DeleteTableResponse) => void
+  ): Promise<DeleteTableResponse> {
+    return this.request("DeleteTable", req, cb)
+  }
+
+  /**
    * 销毁环境
    */
   async DestroyEnv(
@@ -795,6 +890,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 查询网关版本信息
+暂不鉴权
+     */
+  async DescribeGatewayVersions(
+    req: DescribeGatewayVersionsRequest,
+    cb?: (error: string, rep: DescribeGatewayVersionsResponse) => void
+  ): Promise<DescribeGatewayVersionsResponse> {
+    return this.request("DescribeGatewayVersions", req, cb)
+  }
+
+  /**
    * 查询服务版本详情(新)
    */
   async DescribeCloudBaseRunVersion(
@@ -822,6 +928,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDatabaseACLResponse) => void
   ): Promise<ModifyDatabaseACLResponse> {
     return this.request("ModifyDatabaseACL", req, cb)
+  }
+
+  /**
+   * 本接口(ListTables)用于查询所有表信息，包括表名、表中数据条数、表中数据量、索引个数及索引的大小等
+   */
+  async DescribeTables(
+    req: DescribeTablesRequest,
+    cb?: (error: string, rep: DescribeTablesResponse) => void
+  ): Promise<DescribeTablesResponse> {
+    return this.request("DescribeTables", req, cb)
+  }
+
+  /**
+   * 创建tcb用户
+   */
+  async CreateUser(
+    req: CreateUserRequest,
+    cb?: (error: string, rep: CreateUserResponse) => void
+  ): Promise<CreateUserResponse> {
+    return this.request("CreateUser", req, cb)
   }
 
   /**
@@ -882,5 +1008,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEnvFreeQuotaResponse) => void
   ): Promise<DescribeEnvFreeQuotaResponse> {
     return this.request("DescribeEnvFreeQuota", req, cb)
+  }
+
+  /**
+   * 本接口(ListTables)用于查询所有表信息，包括表名、表中数据条数、表中数据量、索引个数及索引的大小等
+   */
+  async ListTables(
+    req: ListTablesRequest,
+    cb?: (error: string, rep: ListTablesResponse) => void
+  ): Promise<ListTablesResponse> {
+    return this.request("ListTables", req, cb)
   }
 }

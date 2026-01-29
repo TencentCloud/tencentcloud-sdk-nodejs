@@ -9625,7 +9625,7 @@ export interface DescribeUnsatisfiedReplyContextResponse {
  */
 export interface ModifyDocAttrRangeRequest {
   /**
-   * 应用ID
+   * 应用ID，获取方法参看[如何获取   BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
    */
   BotBizId: string
   /**
@@ -9637,7 +9637,7 @@ export interface ModifyDocAttrRangeRequest {
    */
   AttrRange: number
   /**
-   * 属性标签引用
+   * 属性标签引用，LabelBizIds可通过 DescribeAttributeLabel 接口获取
    */
   AttrLabels: Array<AttrLabelRefer>
 }

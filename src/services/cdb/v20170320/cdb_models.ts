@@ -9640,8 +9640,13 @@ export interface CreateCloneInstanceRequest {
   SpecifiedSubBackupId?: number
   /**
    * 新产生的克隆实例主库的可用区信息，默认同源实例 Zone 的值。
+   * @deprecated
    */
   MasterZone?: string
+  /**
+   * 新产生的克隆实例主库的可用区信息，默认同源实例 Zone 的值。
+   */
+  Zone?: string
 }
 
 /**

@@ -991,21 +991,29 @@ export interface DescribeUvListRequest {
 }
 
 /**
- * DescribeTawAreas返回参数结构体
+ * DescribeDataReportCountV2请求参数结构体
  */
-export interface DescribeTawAreasResponse {
+export interface DescribeDataReportCountV2Request {
   /**
-   * 片区总数
+   * 开始时间
    */
-  TotalCount?: number
+  StartTime: number
   /**
-   * 片区列表
+   * 结束时间
    */
-  AreaSet?: Array<RumAreaInfo>
+  EndTime: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 项目ID
    */
-  RequestId?: string
+  ID?: number
+  /**
+   * 上报类型（custom，event，log，miniProgramData，performance，pv，speed，webvitals）
+   */
+  ReportType?: string
+  /**
+   * 实例ID
+   */
+  InstanceID?: string
 }
 
 /**
@@ -1030,6 +1038,24 @@ export interface StopProjectRequest {
    * 项目 id
    */
   ProjectId: number
+}
+
+/**
+ * DescribeTawAreas返回参数结构体
+ */
+export interface DescribeTawAreasResponse {
+  /**
+   * 片区总数
+   */
+  TotalCount?: number
+  /**
+   * 片区列表
+   */
+  AreaSet?: Array<RumAreaInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3101,6 +3127,20 @@ export interface DescribeProjectsResponse {
    * 项目列表
    */
   ProjectSet?: Array<RumProject>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDataReportCountV2返回参数结构体
+ */
+export interface DescribeDataReportCountV2Response {
+  /**
+   * 返回值
+   */
+  Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

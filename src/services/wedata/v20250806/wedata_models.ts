@@ -11850,7 +11850,7 @@ ResourceUri，取决于 ResourceType，Metalake时固定为default，其他类�
 - Metalake，固定为default
 - Catalog，取catalogName
 - Schema，取catalogName.SchemaName
-- Table,，取catalogName.SchemaName.TableName
+- Table，取catalogName.SchemaName.TableName
    */
   Resource?: PrivilegeResource
   /**

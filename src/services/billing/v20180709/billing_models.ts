@@ -3508,6 +3508,44 @@ export interface DescribeCostSummaryByRegionRequest {
 }
 
 /**
+ * SetRenewal请求参数结构体
+ */
+export interface SetRenewalRequest {
+  /**
+   * 产品编码。
+   */
+  ProductCode: string
+  /**
+   * 地域编码。
+   */
+  RegionCode: string
+  /**
+   * 实例ID，仅支持指定一个。
+   */
+  InstanceId: string
+  /**
+   * 续费标识。枚举值如下：
+NOTIFY_AND_MANUAL_RENEW：手动续费
+NOTIFY_AND_AUTO_RENEW：自动续费
+DISABLE_NOTIFY_AND_MANUAL_RENEW：到期不续
+   */
+  RenewFlag: string
+  /**
+   * 自动续费周期长度，不填写时默认按产品侧设置的默认值
+如果是月，支持：1-11
+如果是年，支持：1-5
+实际按产品侧支持的范围为主
+   */
+  RenewPeriod?: string
+  /**
+   * 自动续费周期单位，不填写时默认按产品侧设置的默认值
+y 年，m 月
+实际按产品侧支持的范围为主
+   */
+  RenewPeriodUnit?: string
+}
+
+/**
  * 消耗费用趋势
  */
 export interface ConsumptionSummaryTrend {
@@ -5044,6 +5082,27 @@ export interface AnalysePayModeDetail {
    * 计费模式Name
    */
   PayModeName?: string
+}
+
+/**
+ * 资源操作返回详情
+ */
+export interface OperateRsp {
+  /**
+   * 实例维度操作失败code码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Code?: number
+  /**
+   * 资源操作失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
+  /**
+   * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
 }
 
 /**
@@ -6966,6 +7025,20 @@ export interface DescribeAllocationRuleDetailResponse {
    * 公摊比例表达式，Type为1和2时返回
    */
   RatioDetail?: Array<AllocationRationExpression>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SetRenewal返回参数结构体
+ */
+export interface SetRenewalResponse {
+  /**
+   * 操作失败时的实例列表。
+   */
+  InstanceList?: Array<OperateRsp>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

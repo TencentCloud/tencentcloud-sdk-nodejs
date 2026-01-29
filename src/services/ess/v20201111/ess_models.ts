@@ -2575,6 +2575,23 @@ export interface DescribeSingleSignOnEmployeesResponse {
 }
 
 /**
+ * 信息提取结果字段反馈错误原因
+ */
+export interface FeedbackInfoReason {
+  /**
+   * 反馈信息提取错误原因。
+`值如下`：
+- 1: 提取错误(提取不精准、提取为空等)
+- 2: 其他错误
+   */
+  ReasonType?: number
+  /**
+   * 反馈提取错误详细错误原因，不能超过500个字符
+   */
+  ReasonContent?: string
+}
+
+/**
  * 坐标详情
  */
 export interface PositionInfo {
@@ -3000,6 +3017,20 @@ export interface DescribeFlowBriefsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeRiskIdentificationTaskFeedback请求参数结构体
+ */
+export interface DescribeRiskIdentificationTaskFeedbackRequest {
+  /**
+   * 执行合同审查任务的员工信息。
+   */
+  Operator: UserInfo
+  /**
+   * 合同审查任务ID，该参数通过调用接口[批量创建合同智能提取任务](https://qian.tencent.com/developers/companyApis/%E5%90%88%E5%90%8C%E6%99%BA%E8%83%BD%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/CreateBatchInformationExtractionTask)获取。
+   */
+  TaskId?: string
 }
 
 /**
@@ -3574,6 +3605,24 @@ export interface DeleteOrganizationAuthorizationInfo {
 }
 
 /**
+ * CreateLMInformationExtractionTaskFieldFeedback请求参数结构体
+ */
+export interface CreateLMInformationExtractionTaskFieldFeedbackRequest {
+  /**
+   * 执行合同智能提取任务的员工信息。
+   */
+  Operator: UserInfo
+  /**
+   * 合同智能提取任务结果字段ID值。该参数通过调用接口[获取合同智能提取任务详情](https://qian.tencent.com/developers/companyApis/%E5%90%88%E5%90%8C%E6%99%BA%E8%83%BD%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/DescribeInformationExtractionTask)返回中的Results. ExtractionFieldResults.Id获取。
+   */
+  Id?: string
+  /**
+   * 合同智能提取任务反馈信息
+   */
+  Feedback?: FeedbackInfo
+}
+
+/**
  * 关注方信息
  */
 export interface ReviewerInfo {
@@ -4120,6 +4169,56 @@ export interface DeleteSingleSignOnEmployeesResponse {
 }
 
 /**
+ * 权限树节点权限
+ */
+export interface Permission {
+  /**
+   * 权限名称
+   */
+  Name?: string
+  /**
+   * 权限key
+   */
+  Key?: string
+  /**
+   * 权限类型 1前端，2后端
+   */
+  Type?: number
+  /**
+   * 是否隐藏
+   */
+  Hide?: number
+  /**
+   * 数据权限标签 1:表示根节点，2:表示叶子结点
+   */
+  DataLabel?: number
+  /**
+   * 数据权限独有，1:关联其他模块鉴权，2:表示关联自己模块鉴权
+   */
+  DataType?: number
+  /**
+   * 数据权限独有，表示数据范围，1：全公司，2:部门及下级部门，3:自己
+   */
+  DataRange?: number
+  /**
+   * 关联权限, 表示这个功能权限要受哪个数据权限管控
+   */
+  DataTo?: string
+  /**
+   * 父级权限key
+   */
+  ParentKey?: string
+  /**
+   * 是否选中
+   */
+  IsChecked?: boolean
+  /**
+   * 子权限集合
+   */
+  Children?: Array<Permission>
+}
+
+/**
  * CreateUserMobileChangeUrl返回参数结构体
  */
 export interface CreateUserMobileChangeUrlResponse {
@@ -4240,6 +4339,16 @@ export interface DescribeFlowEvidenceReportResponse {
 <li>**EvidenceStatusFailed** ： 出证任务执行失败</li></ul>
    */
   Status?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateRiskIdentificationTaskFeedback返回参数结构体
+ */
+export interface CreateRiskIdentificationTaskFeedbackResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5531,6 +5640,24 @@ export interface FileInfo {
 }
 
 /**
+ * 信息提取结果字段反馈
+ */
+export interface FeedbackInfo {
+  /**
+   * 合同信息提取结果反馈。
+`值如下`：
+- 0:  未反馈
+- 1: 信息提取正确
+- 2: 信息提取有错误
+   */
+  Result?: number
+  /**
+   * 信息提取错误原因，当Result为2时需要填写此信息
+   */
+  Reason?: FeedbackInfoReason
+}
+
+/**
  * CreatePartnerAutoSignAuthUrl请求参数结构体
  */
 export interface CreatePartnerAutoSignAuthUrlRequest {
@@ -6135,77 +6262,28 @@ export interface Admin {
 }
 
 /**
- * 持有的电子印章信息
+ * 此结构体 (Caller) 用于描述调用方属性。
  */
-export interface OccupiedSeal {
+export interface Caller {
   /**
-   * 电子印章编号
+   * 应用号
+   * @deprecated
    */
-  SealId?: string
+  ApplicationId?: string
   /**
-   * 电子印章名称
+   * 主机构ID
+   * @deprecated
    */
-  SealName?: string
+  OrganizationId?: string
   /**
-   * 电子印章授权时间戳，单位秒
+   * 经办人的用户ID，同UserId
    */
-  CreateOn?: number
+  OperatorId?: string
   /**
-   * 电子印章授权人的UserId
+   * 下属机构ID
+   * @deprecated
    */
-  Creator?: string
-  /**
-   * 电子印章策略Id
-   */
-  SealPolicyId?: string
-  /**
-   * 印章状态，有以下六种：CHECKING（审核中）SUCCESS（已启用）FAIL（审核拒绝）CHECKING-SADM（待超管审核）DISABLE（已停用）STOPPED（已终止）
-   */
-  SealStatus?: string
-  /**
-   * 审核失败原因
-   */
-  FailReason?: string
-  /**
-   * 印章图片url，5分钟内有效
-   */
-  Url?: string
-  /**
-   * 印章类型,OFFICIAL-企业公章, CONTRACT-合同专用章,ORGANIZATIONSEAL-企业印章(本地上传印章类型),LEGAL_PERSON_SEAL-法人印章
-   */
-  SealType?: string
-  /**
-   * 用印申请是否为永久授权，true-是，false-否
-   */
-  IsAllTime?: boolean
-  /**
-   * 授权人列表
-   */
-  AuthorizedUsers?: Array<AuthorizedUser>
-  /**
-   * 印章扩展数据信息
-   */
-  ExtendScene?: ExtendScene
-  /**
-   * 印章的真实宽度，单位毫米
-   */
-  RealWidth?: number
-  /**
-   * 印章的真实高度，单位毫米
-   */
-  RealHeight?: number
-  /**
-   * 自定义子类型印章
-   */
-  SubSealType?: string
-  /**
-   * 自定义子类型印章名称
-   */
-  SubSealName?: string
-  /**
-   * 印章描述
-   */
-  SealDescription?: string
+  SubOrganizationId?: string
 }
 
 /**
@@ -6924,6 +7002,20 @@ export interface CreateUserVerifyUrlRequest {
    * 在用户完成实名认证后，其自定义数据将通过[企业引导个人实名认证后回调](https://qian.tencent.com/developers/company/callback_types_staffs/#%E5%8D%81%E4%BA%8C-%E4%BC%81%E4%B8%9A%E5%BC%95%E5%AF%BC%E4%B8%AA%E4%BA%BA%E5%AE%9E%E5%90%8D%E8%AE%A4%E8%AF%81%E5%90%8E%E5%9B%9E%E8%B0%83)返回，以便用户确认其个人数据信息。请注意，自定义数据的字符长度上限为1000，且必须采用base64编码格式。
    */
   UserData?: string
+}
+
+/**
+ * DescribeLMInformationExtractionTaskFieldFeedback请求参数结构体
+ */
+export interface DescribeLMInformationExtractionTaskFieldFeedbackRequest {
+  /**
+   * 执行合同智能提取任务的员工信息。
+   */
+  Operator: UserInfo
+  /**
+   * 合同智能提取任务ID，该参数通过调用接口[批量创建合同智能提取任务](https://qian.tencent.com/developers/companyApis/%E5%90%88%E5%90%8C%E6%99%BA%E8%83%BD%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/CreateBatchInformationExtractionTask/)获取。
+   */
+  TaskId?: string
 }
 
 /**
@@ -8295,6 +8387,34 @@ export interface FlowForwardResult {
 }
 
 /**
+ * DescribeLMInformationExtractionTaskFieldFeedback返回参数结构体
+ */
+export interface DescribeLMInformationExtractionTaskFieldFeedbackResponse {
+  /**
+   * 合同智能提取子任务反馈信息
+   */
+  SubTaskFeedbackList?: Array<SubTaskFeedback>
+  /**
+   * 合同智能提取任务ID
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateLMInformationExtractionTaskFieldFeedback返回参数结构体
+ */
+export interface CreateLMInformationExtractionTaskFieldFeedbackResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeIntegrationEmployees返回参数结构体
  */
 export interface DescribeIntegrationEmployeesResponse {
@@ -8904,6 +9024,28 @@ UnifiedSocialCreditCodeSame  是否可以编辑证件号码。
 OrganizationIdCardTypeSame  是否可以更改证照类型。
    */
   RegisterInfoOption?: RegisterInfoOption
+}
+
+/**
+ * 合同审查反馈信息
+ */
+export interface RiskIdentificationFeedbackInfo {
+  /**
+   * 审查结果ID
+   */
+  RiskId?: string
+  /**
+   * 反馈结果
+
+- 1: 其他错误
+- 2: 审查错误
+- 3: 审查正确
+   */
+  FeedbackResult?: number
+  /**
+   * 反馈原因
+   */
+  Reason?: string
 }
 
 /**
@@ -10810,6 +10952,20 @@ export interface FlowGroupUrlInfo {
 }
 
 /**
+ * 信息提取子任务反馈信息
+ */
+export interface SubTaskFeedback {
+  /**
+   * 信息提取子任务ID
+   */
+  SubTaskId?: string
+  /**
+   * 提取结果反馈信息
+   */
+  FeedbackList?: Array<FeedbackList>
+}
+
+/**
  * UpdateIntegrationEmployees返回参数结构体
  */
 export interface UpdateIntegrationEmployeesResponse {
@@ -11040,26 +11196,13 @@ export interface StartFlowResponse {
 }
 
 /**
- * DescribeContractReviewWebUrl返回参数结构体
+ * DescribeRiskIdentificationTaskFeedback返回参数结构体
  */
-export interface DescribeContractReviewWebUrlResponse {
+export interface DescribeRiskIdentificationTaskFeedbackResponse {
   /**
-   * 合同审查嵌入式web页面链接。
-注意：`链接有效期为5分钟，且链接仅能使用一次。如果上传的合同文件为word时不能进行iframe方式嵌入到贵方系统的网页中，需要单独页面打开此链接显示`
+   * 合同审查任务反馈信息列表
    */
-  WebUrl?: string
-  /**
-   * 合同审查任务状态。任务状态为`5`时没有WebUrl链接。
-状态如下：
-<ul>
-    <li>**1** - 合同审查任务创建成功</li>   
-    <li>**2** - 合同审查任务排队中</li>  
-    <li>**3** - 合同审查任务执行中</li>   
-    <li>**4** - 合同审查任务执行成功</li>
-    <li>**5** - 合同审查任务执行失败</li>
-</ul>
-   */
-  Status?: number
+  FeedbackList?: Array<RiskIdentificationFeedbackInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11108,6 +11251,33 @@ export interface DescribeFlowComponentsResponse {
    * 合同流程关联的填写控件信息，包括填写控件的归属方以及是否填写等内容。
    */
   RecipientComponentInfos?: Array<RecipientComponentInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeContractReviewWebUrl返回参数结构体
+ */
+export interface DescribeContractReviewWebUrlResponse {
+  /**
+   * 合同审查嵌入式web页面链接。
+注意：`链接有效期为5分钟，且链接仅能使用一次。如果上传的合同文件为word时不能进行iframe方式嵌入到贵方系统的网页中，需要单独页面打开此链接显示`
+   */
+  WebUrl?: string
+  /**
+   * 合同审查任务状态。任务状态为`5`时没有WebUrl链接。
+状态如下：
+<ul>
+    <li>**1** - 合同审查任务创建成功</li>   
+    <li>**2** - 合同审查任务排队中</li>  
+    <li>**3** - 合同审查任务执行中</li>   
+    <li>**4** - 合同审查任务执行成功</li>
+    <li>**5** - 合同审查任务执行失败</li>
+</ul>
+   */
+  Status?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11477,6 +11647,20 @@ export interface DescribeBillUsageDetailRequest {
 }
 
 /**
+ * 信息提取任务反馈信息列表
+ */
+export interface FeedbackList {
+  /**
+   * 信息提取结果字段ID
+   */
+  Id?: string
+  /**
+   * 反馈信息
+   */
+  Info?: FeedbackInfo
+}
+
+/**
  * CreateBatchAdminChangeInvitationsUrl请求参数结构体
  */
 export interface CreateBatchAdminChangeInvitationsUrlRequest {
@@ -11566,28 +11750,77 @@ export interface CreateUserAutoSignSealUrlResponse {
 }
 
 /**
- * 此结构体 (Caller) 用于描述调用方属性。
+ * 持有的电子印章信息
  */
-export interface Caller {
+export interface OccupiedSeal {
   /**
-   * 应用号
-   * @deprecated
+   * 电子印章编号
    */
-  ApplicationId?: string
+  SealId?: string
   /**
-   * 主机构ID
-   * @deprecated
+   * 电子印章名称
    */
-  OrganizationId?: string
+  SealName?: string
   /**
-   * 经办人的用户ID，同UserId
+   * 电子印章授权时间戳，单位秒
    */
-  OperatorId?: string
+  CreateOn?: number
   /**
-   * 下属机构ID
-   * @deprecated
+   * 电子印章授权人的UserId
    */
-  SubOrganizationId?: string
+  Creator?: string
+  /**
+   * 电子印章策略Id
+   */
+  SealPolicyId?: string
+  /**
+   * 印章状态，有以下六种：CHECKING（审核中）SUCCESS（已启用）FAIL（审核拒绝）CHECKING-SADM（待超管审核）DISABLE（已停用）STOPPED（已终止）
+   */
+  SealStatus?: string
+  /**
+   * 审核失败原因
+   */
+  FailReason?: string
+  /**
+   * 印章图片url，5分钟内有效
+   */
+  Url?: string
+  /**
+   * 印章类型,OFFICIAL-企业公章, CONTRACT-合同专用章,ORGANIZATIONSEAL-企业印章(本地上传印章类型),LEGAL_PERSON_SEAL-法人印章
+   */
+  SealType?: string
+  /**
+   * 用印申请是否为永久授权，true-是，false-否
+   */
+  IsAllTime?: boolean
+  /**
+   * 授权人列表
+   */
+  AuthorizedUsers?: Array<AuthorizedUser>
+  /**
+   * 印章扩展数据信息
+   */
+  ExtendScene?: ExtendScene
+  /**
+   * 印章的真实宽度，单位毫米
+   */
+  RealWidth?: number
+  /**
+   * 印章的真实高度，单位毫米
+   */
+  RealHeight?: number
+  /**
+   * 自定义子类型印章
+   */
+  SubSealType?: string
+  /**
+   * 自定义子类型印章名称
+   */
+  SubSealName?: string
+  /**
+   * 印章描述
+   */
+  SealDescription?: string
 }
 
 /**
@@ -13612,53 +13845,33 @@ export interface CreateInformationExtractionWebUrlRequest {
 }
 
 /**
- * 权限树节点权限
+ * CreateRiskIdentificationTaskFeedback请求参数结构体
  */
-export interface Permission {
+export interface CreateRiskIdentificationTaskFeedbackRequest {
   /**
-   * 权限名称
+   * 执行合同审查任务的员工信息。
    */
-  Name?: string
+  Operator: UserInfo
   /**
-   * 权限key
+   * 合同审查风险结果ID，取值如下：
+
+- 反馈风险项结果。该参数通过调用接口[获取合同审查任务详情](https://qian.tencent.com/developers/companyApis/%E5%90%88%E5%90%8C%E6%99%BA%E8%83%BD%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/DescribeContractReviewTask)获取（取Risks.RiskId值）。
+
+- 反馈通过项结果。该参数通过调用接口[获取合同审查任务详情](https://qian.tencent.com/developers/companyApis/%E5%90%88%E5%90%8C%E6%99%BA%E8%83%BD%E7%9B%B8%E5%85%B3%E6%8E%A5%E5%8F%A3/DescribeContractReviewTask)获取（取ApprovedLists.RiskId值）
    */
-  Key?: string
+  RiskId?: string
   /**
-   * 权限类型 1前端，2后端
+   * 反馈结果
+
+- 1: 其他错误
+- 2: 审查错误
+- 3: 审查正确
    */
-  Type?: number
+  FeedbackResult?: number
   /**
-   * 是否隐藏
+   * 审查反馈原因
    */
-  Hide?: number
-  /**
-   * 数据权限标签 1:表示根节点，2:表示叶子结点
-   */
-  DataLabel?: number
-  /**
-   * 数据权限独有，1:关联其他模块鉴权，2:表示关联自己模块鉴权
-   */
-  DataType?: number
-  /**
-   * 数据权限独有，表示数据范围，1：全公司，2:部门及下级部门，3:自己
-   */
-  DataRange?: number
-  /**
-   * 关联权限, 表示这个功能权限要受哪个数据权限管控
-   */
-  DataTo?: string
-  /**
-   * 父级权限key
-   */
-  ParentKey?: string
-  /**
-   * 是否选中
-   */
-  IsChecked?: boolean
-  /**
-   * 子权限集合
-   */
-  Children?: Array<Permission>
+  Reason?: string
 }
 
 /**

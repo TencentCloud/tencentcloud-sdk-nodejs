@@ -158,6 +158,16 @@ it("ess.v20201111.DescribeExtendedServiceAuthInfos", async function () {
     }
 })
 
+it("ess.v20201111.DescribeRiskIdentificationTaskFeedback", async function () {
+    try {
+       const data = await client.DescribeRiskIdentificationTaskFeedback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeUserAutoSignStatus", async function () {
     try {
        const data = await client.DescribeUserAutoSignStatus({})
@@ -738,6 +748,16 @@ it("ess.v20201111.ExportContractComparisonTask", async function () {
     }
 })
 
+it("ess.v20201111.DescribeLMInformationExtractionTaskFieldFeedback", async function () {
+    try {
+       const data = await client.DescribeLMInformationExtractionTaskFieldFeedback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateBatchInformationExtractionTask", async function () {
     try {
        const data = await client.CreateBatchInformationExtractionTask({})
@@ -938,6 +958,16 @@ it("ess.v20201111.ModifyPartnerAutoSignAuthUrl", async function () {
     }
 })
 
+it("ess.v20201111.CreateLMInformationExtractionTaskFieldFeedback", async function () {
+    try {
+       const data = await client.CreateLMInformationExtractionTaskFieldFeedback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateOrganizationAuthUrl", async function () {
     try {
        const data = await client.CreateOrganizationAuthUrl({})
@@ -1051,6 +1081,16 @@ it("ess.v20201111.CreateIntegrationEmployees", async function () {
 it("ess.v20201111.DeleteOrganizationAuthorizations", async function () {
     try {
        const data = await client.DeleteOrganizationAuthorizations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.CreateRiskIdentificationTaskFeedback", async function () {
+    try {
+       const data = await client.CreateRiskIdentificationTaskFeedback({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

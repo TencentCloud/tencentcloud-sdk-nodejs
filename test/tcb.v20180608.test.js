@@ -58,6 +58,16 @@ it("tcb.v20180608.ModifyClsTopic", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeUserList", async function () {
+    try {
+       const data = await client.DescribeUserList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.RunSql", async function () {
     try {
        const data = await client.RunSql({})
@@ -98,6 +108,16 @@ it("tcb.v20180608.DescribeUserActivityInfo", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeTable", async function () {
+    try {
+       const data = await client.DescribeTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.BindEnvGateway", async function () {
     try {
        const data = await client.BindEnvGateway({})
@@ -108,9 +128,9 @@ it("tcb.v20180608.BindEnvGateway", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeGatewayVersions", async function () {
+it("tcb.v20180608.CreateTable", async function () {
     try {
-       const data = await client.DescribeGatewayVersions({})
+       const data = await client.CreateTable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +368,29 @@ it("tcb.v20180608.ModifyCloudBaseRunServerFlowConf", async function () {
     }
 })
 
+it("tcb.v20180608.DeleteUsers", async function () {
+    try {
+       const data = await client.DeleteUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeCloudBaseRunResourceForExtend", async function () {
     try {
        const data = await client.DescribeCloudBaseRunResourceForExtend({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.ModifyUser", async function () {
+    try {
+       const data = await client.ModifyUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -381,6 +421,16 @@ it("tcb.v20180608.DescribeEnvDealRegion", async function () {
 it("tcb.v20180608.DescribeExtraPkgBillingInfo", async function () {
     try {
        const data = await client.DescribeExtraPkgBillingInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.UpdateTable", async function () {
+    try {
+       const data = await client.UpdateTable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,6 +598,16 @@ it("tcb.v20180608.EstablishCloudBaseRunServer", async function () {
     }
 })
 
+it("tcb.v20180608.DeleteTable", async function () {
+    try {
+       const data = await client.DeleteTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DestroyEnv", async function () {
     try {
        const data = await client.DestroyEnv({})
@@ -588,6 +648,16 @@ it("tcb.v20180608.DescribeCloudBaseRunVersionSnapshot", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeGatewayVersions", async function () {
+    try {
+       const data = await client.DescribeGatewayVersions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeCloudBaseRunVersion", async function () {
     try {
        const data = await client.DescribeCloudBaseRunVersion({})
@@ -611,6 +681,26 @@ it("tcb.v20180608.DescribeCurveData", async function () {
 it("tcb.v20180608.ModifyDatabaseACL", async function () {
     try {
        const data = await client.ModifyDatabaseACL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeTables", async function () {
+    try {
+       const data = await client.DescribeTables({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.CreateUser", async function () {
+    try {
+       const data = await client.CreateUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -671,6 +761,16 @@ it("tcb.v20180608.DescribePostpayFreeQuotas", async function () {
 it("tcb.v20180608.DescribeEnvFreeQuota", async function () {
     try {
        const data = await client.DescribeEnvFreeQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.ListTables", async function () {
+    try {
+       const data = await client.ListTables({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -98,6 +98,16 @@ it("rum.v20210622.DescribeDataLogUrlStatistics", async function () {
     }
 })
 
+it("rum.v20210622.DescribeDataReportCountV2", async function () {
+    try {
+       const data = await client.DescribeDataReportCountV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rum.v20210622.DescribeDataFetchProject", async function () {
     try {
        const data = await client.DescribeDataFetchProject({})
