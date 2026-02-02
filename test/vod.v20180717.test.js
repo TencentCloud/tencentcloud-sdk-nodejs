@@ -328,6 +328,16 @@ it("vod.v20180717.ModifyDefaultDistributionConfig", async function () {
     }
 })
 
+it("vod.v20180717.DescribeProcessImageAsyncTemplates", async function () {
+    try {
+       const data = await client.DescribeProcessImageAsyncTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeCdnLogs", async function () {
     try {
        const data = await client.DescribeCdnLogs({})
@@ -488,9 +498,9 @@ it("vod.v20180717.DescribeLicenseUsageData", async function () {
     }
 })
 
-it("vod.v20180717.ModifyImageSpriteTemplate", async function () {
+it("vod.v20180717.ModifyEventConfig", async function () {
     try {
-       const data = await client.ModifyImageSpriteTemplate({})
+       const data = await client.ModifyEventConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -518,9 +528,9 @@ it("vod.v20180717.ExecuteFunction", async function () {
     }
 })
 
-it("vod.v20180717.DeleteReviewTemplate", async function () {
+it("vod.v20180717.DeleteVodDomain", async function () {
     try {
-       const data = await client.DeleteReviewTemplate({})
+       const data = await client.DeleteVodDomain({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -758,9 +768,19 @@ it("vod.v20180717.DescribeProcedureTemplates", async function () {
     }
 })
 
-it("vod.v20180717.DescribeClientUploadAccelerationUsageData", async function () {
+it("vod.v20180717.DeleteReviewTemplate", async function () {
     try {
-       const data = await client.DescribeClientUploadAccelerationUsageData({})
+       const data = await client.DeleteReviewTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.ModifyImageSpriteTemplate", async function () {
+    try {
+       const data = await client.ModifyImageSpriteTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -868,9 +888,9 @@ it("vod.v20180717.EnhanceMediaByTemplate", async function () {
     }
 })
 
-it("vod.v20180717.ModifyPersonSample", async function () {
+it("vod.v20180717.CreateAigcApiToken", async function () {
     try {
-       const data = await client.ModifyPersonSample({})
+       const data = await client.CreateAigcApiToken({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1178,16 +1198,6 @@ it("vod.v20180717.DeleteImageProcessingTemplate", async function () {
     }
 })
 
-it("vod.v20180717.ProcessMedia", async function () {
-    try {
-       const data = await client.ProcessMedia({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("vod.v20180717.CreateHeadTailTemplate", async function () {
     try {
        const data = await client.CreateHeadTailTemplate({})
@@ -1308,6 +1318,16 @@ it("vod.v20180717.CreateSubAppId", async function () {
     }
 })
 
+it("vod.v20180717.ModifyPersonSample", async function () {
+    try {
+       const data = await client.ModifyPersonSample({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeAnimatedGraphicsTemplates", async function () {
     try {
        const data = await client.DescribeAnimatedGraphicsTemplates({})
@@ -1388,9 +1408,9 @@ it("vod.v20180717.CreateClass", async function () {
     }
 })
 
-it("vod.v20180717.DescribeProcessImageAsyncTemplates", async function () {
+it("vod.v20180717.DescribeAigcApiTokens", async function () {
     try {
-       const data = await client.DescribeProcessImageAsyncTemplates({})
+       const data = await client.DescribeAigcApiTokens({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1418,9 +1438,9 @@ it("vod.v20180717.DescribeEventConfig", async function () {
     }
 })
 
-it("vod.v20180717.ModifySubAppIdInfo", async function () {
+it("vod.v20180717.DescribeAigcFaceInfo", async function () {
     try {
-       const data = await client.ModifySubAppIdInfo({})
+       const data = await client.DescribeAigcFaceInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1551,6 +1571,16 @@ it("vod.v20180717.DescribeJustInTimeTranscodeTemplates", async function () {
 it("vod.v20180717.CreateReviewTemplate", async function () {
     try {
        const data = await client.CreateReviewTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.DeleteAigcApiToken", async function () {
+    try {
+       const data = await client.DeleteAigcApiToken({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1788,9 +1818,9 @@ it("vod.v20180717.AttachMediaSubtitles", async function () {
     }
 })
 
-it("vod.v20180717.ModifyEventConfig", async function () {
+it("vod.v20180717.DescribeClientUploadAccelerationUsageData", async function () {
     try {
-       const data = await client.ModifyEventConfig({})
+       const data = await client.DescribeClientUploadAccelerationUsageData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1948,9 +1978,9 @@ it("vod.v20180717.ModifyContentReviewTemplate", async function () {
     }
 })
 
-it("vod.v20180717.DeleteVodDomain", async function () {
+it("vod.v20180717.ProcessMedia", async function () {
     try {
-       const data = await client.DeleteVodDomain({})
+       const data = await client.ProcessMedia({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1991,6 +2021,16 @@ it("vod.v20180717.DescribeRebuildMediaTemplates", async function () {
 it("vod.v20180717.DescribeDailyPlayStatFileList", async function () {
     try {
        const data = await client.DescribeDailyPlayStatFileList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.ModifySubAppIdInfo", async function () {
+    try {
+       const data = await client.ModifySubAppIdInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -120,6 +120,11 @@ export interface AigcVideoOutputConfig {
    * 是否开启vidu智能插帧。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li>
    */
   FrameInterpolate?: string
+  /**
+   * 是否开启图标水印。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li> 
+目前支持的模型有 Vidu，其他模型暂不支持。
+   */
+  LogoAdd?: string
 }
 
 /**
@@ -2298,6 +2303,28 @@ export interface DescribeLicenseUsageDataResponse {
 }
 
 /**
+ * 人脸身份信息。
+ */
+export interface AigcFaceIdentityInfo {
+  /**
+   * 视频中的人脸 ID。同一个人脸在视频中间隔超过1s时会视作不同 ID。
+   */
+  FaceId?: string
+  /**
+   * 从视频中截取的人脸示意图。
+   */
+  FaceImage?: string
+  /**
+   * 该人脸可对口型区间的起点时间，可作为对口型最佳开始时间。单位：毫秒。
+   */
+  StartTime?: number
+  /**
+   * 该人脸可对口型区间的终点时间；注：此结果存在毫秒级误差，会长于实际区间终点。单位：毫秒。
+   */
+  EndTime?: number
+}
+
+/**
  * DeleteMPSTemplate请求参数结构体
  */
 export interface DeleteMPSTemplateRequest {
@@ -3875,6 +3902,100 @@ export interface RemoveWatermarkTask {
 }
 
 /**
+ * 音视频处理任务信息
+ */
+export interface ProcedureTask {
+  /**
+   * 音视频处理任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 任务流状态，取值：
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+   */
+  Status?: string
+  /**
+   * 已弃用，请使用各个具体任务的 ErrCode。
+   * @deprecated
+   */
+  ErrCode?: number
+  /**
+   * 已弃用，请使用各个具体任务的 Message。
+   * @deprecated
+   */
+  Message?: string
+  /**
+   * 媒体文件 ID
+<li>若流程由 [ProcessMedia](https://cloud.tencent.com/document/product/266/33427) 发起，该字段表示 [MediaInfo](https://cloud.tencent.com/document/product/266/31773#MediaInfo) 的 FileId；</li>
+<li>若流程由 [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426) 发起，该字段表示 [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773#MediaInputInfo) 的 Id。</li>
+   */
+  FileId?: string
+  /**
+   * 媒体文件名称
+<li>若流程由 [ProcessMedia](https://cloud.tencent.com/document/product/266/33427) 发起，该字段表示 [MediaInfo](https://cloud.tencent.com/document/product/266/31773#MediaInfo) 的 BasicInfo.Name；</li>
+<li>若流程由 [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426) 发起，该字段表示 [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773#MediaInputInfo) 的 Name。</li>
+   */
+  FileName?: string
+  /**
+   * 媒体文件地址
+<li>若流程由 [ProcessMedia](https://cloud.tencent.com/document/product/266/33427) 发起，该字段表示 [MediaInfo](https://cloud.tencent.com/document/product/266/31773#MediaInfo) 的 BasicInfo.MediaUrl；</li>
+<li>若流程由 [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426) 发起，该字段表示 [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773#MediaInputInfo) 的 Url。</li>
+   */
+  FileUrl?: string
+  /**
+   * 原始音视频的元信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetaData?: MediaMetaData
+  /**
+   * 音视频处理任务的执行状态与结果。
+   */
+  MediaProcessResultSet?: Array<MediaProcessTaskResult>
+  /**
+   * 音视频审核任务的执行状态与结果。
+   */
+  AiContentReviewResultSet?: Array<AiContentReviewResult>
+  /**
+   * 音视频内容分析任务的执行状态与结果。
+   */
+  AiAnalysisResultSet?: Array<AiAnalysisResult>
+  /**
+   * 音视频内容识别任务的执行状态与结果。
+   */
+  AiRecognitionResultSet?: Array<AiRecognitionResult>
+  /**
+   * 任务流的优先级，取值范围为 [-10, 10]。
+   */
+  TasksPriority?: number
+  /**
+   * 任务流状态变更通知模式。
+<li>Finish：只有当任务流全部执行完毕时，才发起一次事件通知；</li>
+<li>Change：只要任务流中每个子任务的状态发生变化，都进行事件通知；</li>
+<li>None：不接受该任务流回调。</li>
+   */
+  TasksNotifyMode?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+  /**
+   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 操作者。取值范围：
+<li>System: 表示系统触发。</li>
+   */
+  Operator?: string
+  /**
+   * 操作类型。取值范围：
+<li>TSC: 表示使用极速高清进行智能降码。</li>
+   */
+  OperationType?: string
+}
+
+/**
  * ReviewAudioVideo请求参数结构体
  */
 export interface ReviewAudioVideoRequest {
@@ -5251,23 +5372,40 @@ export interface TraceWatermarkInput {
 }
 
 /**
- * 语音鉴别涉及令人反感的信息的任务控制参数。
+ * ModifyPersonSample请求参数结构体
  */
-export interface PornAsrReviewTemplateInfoForUpdate {
+export interface ModifyPersonSampleRequest {
   /**
-   * 语音鉴别涉及令人反感的信息的任务开关，可选值：
-<li>ON：开启语音鉴别涉及令人反感的信息的任务；</li>
-<li>OFF：关闭语音鉴别涉及令人反感的信息的任务。</li>
+   * 素材 ID。
    */
-  Switch?: string
+  PersonId: string
   /**
-   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
-  BlockConfidence?: number
+  SubAppId?: number
   /**
-   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
+   * 名称，长度限制：128 个字符。
    */
-  ReviewConfidence?: number
+  Name?: string
+  /**
+   * 描述，长度限制：1024 个字符。
+   */
+  Description?: string
+  /**
+   * 素材应用场景，可选值：
+1. Recognition：用于内容识别，等价于 Recognition.Face。
+2. Review：用于不适宜的内容识别，等价于 Review.Face。
+3. All：用于内容识别、不适宜的内容识别，等价于 1+2。
+   */
+  Usages?: Array<string>
+  /**
+   * 五官操作信息。
+   */
+  FaceOperationInfo?: AiSampleFaceOperation
+  /**
+   * 标签操作信息。
+   */
+  TagOperationInfo?: AiSampleTagOperation
 }
 
 /**
@@ -5856,29 +5994,60 @@ FileId和MediaStoragePath必须提供其中一个。
 }
 
 /**
- * AI 生商品图参数配置
+ * 提取视频数字水印任务信息
  */
-export interface ProductImageConfig {
+export interface ExtractBlindWatermarkTask {
   /**
-   * 生成图片背景的提示词。如果此字段缺省则内部会自行生成灵感。
+   * 媒体处理任务 ID。
    */
-  Prompt?: string
+  TaskId?: string
   /**
-   * 要阻止模型生成图片的提示词。
+   * 任务流状态，取值：
+<li>WAITING：等待中；</li>
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
    */
-  NegativePrompt?: string
+  Status?: string
   /**
-   * 关于产品的描述，详细的描述，有助于生成更符合要求的图片。
+   * 错误码，0 表示成功，其他值表示失败。
    */
-  ProductDesc?: string
+  ErrCode?: number
   /**
-   * 特殊要求。如有特殊要求，可通过该字段传入。
+   * 错误信息。
    */
-  MoreRequirement?: string
+  Message?: string
   /**
-   * 期望生成的图片张数。不传默认值为1，最大合法值为10。
+   * 提取数字水印的文件输入信息。
    */
-  OutputImageCount?: number
+  InputInfo?: ExtractBlindWatermarkInputInfo
+  /**
+   * 数字水印类型，可选值：<li>blind-basic：基础版权数字水印；</li> <li>blind-ab：ab版权数字水印；</li>
+   */
+  Type?: string
+  /**
+   * 标记是否检测到水印，如果该参数为true， Result字段将返回水印提取结果，如果该参数为false，Result字段不会返回。
+   */
+  IsDetected?: boolean
+  /**
+   * 提取出的数字水印内容，当没有检测到水印时该字段不会返回。
+   */
+  Result?: string
+  /**
+   * 溯源水印提取出的播放者的 ID，以十六进制表示，共6位。
+   */
+  ResultUV?: string
+  /**
+   * 提取数字水印配置。
+   */
+  ExtractBlindWatermarkConfig?: ExtractBlindWatermarkTaskConfig
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+  /**
+   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
 }
 
 /**
@@ -6768,6 +6937,25 @@ export interface EditMediaOutputConfig {
    * 极速高清转码参数。
    */
   TEHDConfig?: EditMediaTEHDConfig
+}
+
+/**
+ * ModifyPersonSample返回参数结构体
+ */
+export interface ModifyPersonSampleResponse {
+  /**
+   * 素材信息。
+   */
+  Person?: AiSamplePerson
+  /**
+   * 处理失败的五官信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailFaceInfoSet?: Array<AiSampleFailFaceInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7945,7 +8133,7 @@ export interface DescribeAIAnalysisTemplatesRequest {
  */
 export interface AigcImageTaskInputFileInfo {
   /**
-   * 输入的视频文件类型。取值有： <li>File：点播媒体文件；</li> <li>Url：可访问的 URL；</li>
+   * 输入的视频文件类型。取值有： <li>File：点播媒体文件；</li> <li>Url：可访问的 Url；</li>
    */
   Type?: string
   /**
@@ -8057,7 +8245,7 @@ export interface EmptyTrackItem {
  */
 export interface AigcVideoTaskInputFileInfo {
   /**
-   * 输入的视频文件类型。取值有： <li>File：点播媒体文件；</li> <li>Url：可访问的 URL；</li>
+   * 输入的视频文件类型。取值有： <li>File：点播媒体文件；</li> <li>Url：可访问的 Url；</li>
    */
   Type?: string
   /**
@@ -9228,6 +9416,16 @@ export interface ModifyAIAnalysisTemplateResponse {
 }
 
 /**
+ * DescribeAigcApiTokens请求参数结构体
+ */
+export interface DescribeAigcApiTokensRequest {
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+}
+
+/**
  * 智能去除水印任务的输出。
  */
 export interface RemoveWaterMarkTaskOutput {
@@ -9875,6 +10073,24 @@ export interface MediaProcessTaskSnapshotByTimeOffsetResult {
 }
 
 /**
+ * AIGC 人脸输入文件信息
+ */
+export interface AigcFaceInputFileInfo {
+  /**
+   * 输入的视频文件类型。取值有： <li>File：点播媒体文件；</li> <li>Url：可访问的 Url；</li>
+   */
+  Type?: string
+  /**
+   * 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。当 Type 取值为 File 时，本参数有效。
+   */
+  FileId?: string
+  /**
+   * 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。
+   */
+  Url?: string
+}
+
+/**
  * ModifyEnhanceMediaTemplate返回参数结构体
  */
 export interface ModifyEnhanceMediaTemplateResponse {
@@ -9969,7 +10185,7 @@ export interface CreateAigcVideoTaskRequest {
    */
   ModelName: string
   /**
-   * 模型版本。取值：<li>当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；</li><li>当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、O1；</li><li>当 ModelName 是 Jimeng，可选值为 3.0pro；</li><li>当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo；</li><li>当 ModelName 是 GV，可选值为 3.1、3.1-Fast；</li><li>当 ModelName 是 OS，可选值为 2.0；</li><li>当 ModelName 是 Hunyuan，可选值为 1.5；</li><li>当 ModelName 是 Mingmou，可选值为 1.0；</li>
+   * 模型版本。取值：<li>当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；</li><li>当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、O1；</li><li>当 ModelName 是 Jimeng，可选值为 3.0pro；</li><li>当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo；</li><li>当 ModelName 是 GV，可选值为 3.1、3.1-fast；</li><li>当 ModelName 是 OS，可选值为 2.0；</li><li>当 ModelName 是 Hunyuan，可选值为 1.5；</li><li>当 ModelName 是 Mingmou，可选值为 1.0；</li>
    */
   ModelVersion: string
   /**
@@ -10023,7 +10239,10 @@ export interface CreateAigcVideoTaskRequest {
   InputRegion?: string
   /**
    * 场景类型。取值如下：
-<li>当 ModelName 为 Kling 时，取值 motion_control 表示动作控制；</li>
+<li>当 ModelName 为 Kling 时：
+    motion_control 表示动作控制；
+    avatar_i2v 表示数字人；
+    lip_sync 表示对口型；</li>
 <li>其他 ModelName 暂不支持。</li>
    */
   SceneType?: string
@@ -10937,6 +11156,32 @@ export interface DescribeContentReviewTemplatesResponse {
 }
 
 /**
+ * AI 生商品图参数配置
+ */
+export interface ProductImageConfig {
+  /**
+   * 生成图片背景的提示词。如果此字段缺省则内部会自行生成灵感。
+   */
+  Prompt?: string
+  /**
+   * 要阻止模型生成图片的提示词。
+   */
+  NegativePrompt?: string
+  /**
+   * 关于产品的描述，详细的描述，有助于生成更符合要求的图片。
+   */
+  ProductDesc?: string
+  /**
+   * 特殊要求。如有特殊要求，可通过该字段传入。
+   */
+  MoreRequirement?: string
+  /**
+   * 期望生成的图片张数。不传默认值为1，最大合法值为10。
+   */
+  OutputImageCount?: number
+}
+
+/**
  * 极速高清参数配置。
  */
 export interface TEHDConfig {
@@ -11334,63 +11579,13 @@ export interface MediaProcessTaskCoverBySnapshotResult {
 }
 
 /**
- * CreateWatermarkTemplate请求参数结构体
+ * DeleteAigcApiToken返回参数结构体
  */
-export interface CreateWatermarkTemplateRequest {
+export interface DeleteAigcApiTokenResponse {
   /**
-   * 水印类型，可选值：
-<li>image：图片水印；</li>
-<li>text：文字水印；</li>
-<li>svg：SVG 水印。</li>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Type: string
-  /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
-   */
-  SubAppId?: number
-  /**
-   * 水印模板名称，长度限制：64 个字符。
-   */
-  Name?: string
-  /**
-   * 模板描述信息，长度限制：256 个字符。
-   */
-  Comment?: string
-  /**
-   * 原点位置，可选值：
-<li>TopLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角；</li>
-<li>TopRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；</li>
-<li>BottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；</li>
-<li>BottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下角。</li>
-默认值：TopLeft。
-   */
-  CoordinateOrigin?: string
-  /**
-   * 水印原点距离视频图像坐标原点的水平位置。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示水印 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 XPos 为指定像素，如 100px 表示 XPos 为 100 像素。</li>
-默认值：0px。
-   */
-  XPos?: string
-  /**
-   * 水印原点距离视频图像坐标原点的垂直位置。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示水印 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 YPos 为指定像素，如 100px 表示 YPos 为 100 像素。</li>
-默认值：0px。
-   */
-  YPos?: string
-  /**
-   * 图片水印模板，当 Type 为 image，该字段必填。当 Type 为 text，该字段无效。
-   */
-  ImageTemplate?: ImageWatermarkInput
-  /**
-   * 文字水印模板，当 Type 为 text，该字段必填。当 Type 为 image，该字段无效。
-   */
-  TextTemplate?: TextWatermarkTemplateInput
-  /**
-   * SVG水印模板，当 Type 为 svg，该字段必填。当 Type 为 image 或 text，该字段无效。
-   */
-  SvgTemplate?: SvgWatermarkInput
+  RequestId?: string
 }
 
 /**
@@ -11477,44 +11672,13 @@ export interface DescribeMPSTemplatesRequest {
 }
 
 /**
- * CreateSceneAigcImageTask请求参数结构体
+ * DescribeCLSLogsets请求参数结构体
  */
-export interface CreateSceneAigcImageTaskRequest {
+export interface DescribeCLSLogsetsRequest {
   /**
-   * **点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。**
+   * 日志集所属的地域，取值有： <li>ap-guangzhou：广州；</li> <li>ap-beijing：北京；</li> <li>ap-chengdu：成都；</li> <li>ap-chongqing：重庆；</li> <li>ap-nanjing：南京；</li> <li>ap-shanghai：上海；</li> <li>ap-singapore：新加坡。</li>
    */
-  SubAppId: number
-  /**
-   * 场景化生图参数配置。
-   */
-  SceneInfo: AigcImageSceneInfo
-  /**
-   * 输入图片列表，支持的图片格式：jpg、jpeg、png、webp。不同的场景需要不同的输入数据：
-
-- AI换衣场景：只能输入 1 张**模特**图片。
-- AI生商品图场景：需输入 1～10 张**同一产品**的不同角度的图片
-   */
-  FileInfos?: Array<SceneAigcImageTaskInputFileInfo>
-  /**
-   * 场景化生图任务的输出媒体文件配置。
-   */
-  OutputConfig?: SceneAigcImageOutputConfig
-  /**
-   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
-   */
-  SessionId?: string
-  /**
-   * 来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。
-   */
-  SessionContext?: string
-  /**
-   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
-   */
-  TasksPriority?: number
-  /**
-   * 保留字段，特殊用途时使用。
-   */
-  ExtInfo?: string
+  CLSRegion: string
 }
 
 /**
@@ -11772,6 +11936,41 @@ export interface ImageContentReviewInput {
 }
 
 /**
+ * 点播文件视频流信息
+ */
+export interface MediaVideoStreamItem {
+  /**
+   * 视频流的码率，单位：bps。
+   */
+  Bitrate?: number
+  /**
+   * 视频流的高度，单位：px。
+   */
+  Height?: number
+  /**
+   * 视频流的宽度，单位：px。
+   */
+  Width?: number
+  /**
+   * 视频流的编码格式，例如 h264。
+   */
+  Codec?: string
+  /**
+   * 帧率，单位：hz。
+   */
+  Fps?: number
+  /**
+   * 编码标签，仅当 Codec 为 hevc 时有效。
+   */
+  CodecTag?: string
+  /**
+   * 画面动态范围信息。
+<li><font color=red>注意</font>：在 2023-01-10T00:00:00Z 后处理的转码文件，此字段有效。</li>
+   */
+  DynamicRangeInfo?: DynamicRangeInfo
+}
+
+/**
  * 视频转码播放信息（2017 版）
  */
 export interface TranscodePlayInfo2017 {
@@ -11839,6 +12038,66 @@ export interface SplitMediaTask {
    * 视频拆条任务进度，取值范围 [0-100] 。
    */
   Progress?: number
+}
+
+/**
+ * CreateWatermarkTemplate请求参数结构体
+ */
+export interface CreateWatermarkTemplateRequest {
+  /**
+   * 水印类型，可选值：
+<li>image：图片水印；</li>
+<li>text：文字水印；</li>
+<li>svg：SVG 水印。</li>
+   */
+  Type: string
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 水印模板名称，长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 原点位置，可选值：
+<li>TopLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角；</li>
+<li>TopRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；</li>
+<li>BottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；</li>
+<li>BottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下角。</li>
+默认值：TopLeft。
+   */
+  CoordinateOrigin?: string
+  /**
+   * 水印原点距离视频图像坐标原点的水平位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 XPos 为指定像素，如 100px 表示 XPos 为 100 像素。</li>
+默认值：0px。
+   */
+  XPos?: string
+  /**
+   * 水印原点距离视频图像坐标原点的垂直位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 YPos 为指定像素，如 100px 表示 YPos 为 100 像素。</li>
+默认值：0px。
+   */
+  YPos?: string
+  /**
+   * 图片水印模板，当 Type 为 image，该字段必填。当 Type 为 text，该字段无效。
+   */
+  ImageTemplate?: ImageWatermarkInput
+  /**
+   * 文字水印模板，当 Type 为 text，该字段必填。当 Type 为 image，该字段无效。
+   */
+  TextTemplate?: TextWatermarkTemplateInput
+  /**
+   * SVG水印模板，当 Type 为 svg，该字段必填。当 Type 为 image 或 text，该字段无效。
+   */
+  SvgTemplate?: SvgWatermarkInput
 }
 
 /**
@@ -11924,6 +12183,48 @@ export interface ModifyQualityInspectTemplateRequest {
    * 视频画面质量评价的控制参数。
    */
   QualityEvaluationConfigure?: QualityEvaluationConfigureInfoForUpdate
+}
+
+/**
+ * 场景化 AIGC 生视频任务信息
+ */
+export interface SceneAigcVideoTask {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 任务状态，取值：<li>PROCESSING：处理中；</li><li>FINISH：已完成。</li>
+   */
+  Status?: string
+  /**
+   * 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 任务进度，取值范围 [0-100] 。
+   */
+  Progress?: number
+  /**
+   * AIGC 生视频任务的输入信息。
+   */
+  Input?: SceneAigcVideoTaskInput
+  /**
+   * AIGC 生视频任务的输出信息。
+   */
+  Output?: SceneAigcVideoTaskOutput
+  /**
+   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
 }
 
 /**
@@ -12980,6 +13281,16 @@ export interface ReduceMediaBitrateAdaptiveDynamicStreamingResult {
    * 对视频转自适应码流任务的输出。
    */
   Output?: AdaptiveDynamicStreamingInfoItem
+}
+
+/**
+ * 媒体处理任务中的数字水印参数类型
+ */
+export interface BlindWatermarkInput {
+  /**
+   * 数字水印模板ID
+   */
+  Definition: number
 }
 
 /**
@@ -14600,74 +14911,21 @@ export interface AiReviewPoliticalAsrTaskInput {
 }
 
 /**
- * PullUpload请求参数结构体
+ * 提取盲水印输入信息
  */
-export interface PullUploadRequest {
+export interface ExtractBlindWatermarkInputInfo {
   /**
-   * 要拉取的媒体 URL，暂不支持拉取 Dash 格式（可以支持 HLS）。
-支持的扩展名详见[媒体类型](https://cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B)。请确保媒体 URL 可以访问。
+   * 提取数字水印输入类型，可选值：<li>FILEID：文件媒资ID；</li><li>URL：文件url；</li>
    */
-  MediaUrl: string
+  Type: string
   /**
-   * 媒体文件类型（扩展名），支持的类型详见[媒体类型](https://cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B)。
-如果 MediaType 不填或取值为空字符串，将根据 MediaUrl 自动获取文件类型。
+   * 需要提取的文件媒资ID
    */
-  MediaType?: string
+  FileId?: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * 需要提取的视频文件url
    */
-  SubAppId?: number
-  /**
-   * 媒体名称。
-   */
-  MediaName?: string
-  /**
-   * 要拉取的视频封面 URL。支持的文件格式：gif、jpeg（jpg）、png。
-   */
-  CoverUrl?: string
-  /**
-   * 媒体后续任务操作，详见[上传指定任务流](https://cloud.tencent.com/document/product/266/9759)。
-   */
-  Procedure?: string
-  /**
-   * 媒体文件过期时间，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  ExpireTime?: string
-  /**
-   * 指定上传园区，仅适用于对上传地域有特殊需求的用户：
-<li>不填默认上传至您的[默认地域](https://cloud.tencent.com/document/product/266/14059?from=11329#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4)。</li>
-<li>若指定上传园区，请先确认[上传存储设置](https://cloud.tencent.com/document/product/266/14059?from=11329#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4)已经开启相应的存储地域。</li>
-   */
-  StorageRegion?: string
-  /**
-   * 分类ID，用于对媒体进行分类管理，可通过[创建分类](https://cloud.tencent.com/document/product/266/7812)接口，创建分类，获得分类 ID。
-   */
-  ClassId?: number
-  /**
-   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
-   */
-  TasksPriority?: number
-  /**
-   * 来源上下文，用于透传用户请求信息，当指定 Procedure 任务后，任务流状态变更回调将返回该字段值，最长 1000 个字符。
-   */
-  SessionContext?: string
-  /**
-   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
-   */
-  SessionId?: string
-  /**
-   * 保留字段，特殊用途时使用。
-   */
-  ExtInfo?: string
-  /**
-   * 来源上下文，用于透传用户请求信息，[上传完成回调](/document/product/266/7830) 将返回该字段值，最长 250 个字符。
-   */
-  SourceContext?: string
-  /**
-   * 媒体存储路径，以/开头。
-只有[FileID + Path 模式](https://cloud.tencent.com/document/product/266/126825)的子应用可以指定存储路径。
-   */
-  MediaStoragePath?: string
+  Url?: string
 }
 
 /**
@@ -15270,6 +15528,17 @@ export interface CreateRoundPlayRequest {
 }
 
 /**
+ * 提取视频转码数字水印任务配置
+ */
+export interface ExtractBlindWatermarkTaskConfig {
+  /**
+   * 当提取数字水印类型为blind-abseq时有效，用于指定输入视频的切片时长，单位：毫秒。
+如果不填默认切片时长为5秒。
+   */
+  SegmentDuration: number
+}
+
+/**
  * 图片编码格式参数
  */
 export interface ImageEncodeConfig {
@@ -15645,6 +15914,10 @@ export interface TranscodeTaskInput {
    */
   CopyRightWatermark?: CopyRightWatermarkInput
   /**
+   * 数字水印。
+   */
+  BlindWatermark?: BlindWatermarkInput
+  /**
    * 马赛克列表，最大可支持 10 张。
    */
   MosaicSet?: Array<MosaicInput>
@@ -15691,6 +15964,20 @@ export interface DescribeClientUploadAccelerationUsageDataRequest {
 默认查询所有加速类型的用量 。
    */
   Type?: string
+}
+
+/**
+ * AIGC 人脸信息
+ */
+export interface AigcFaceInfo {
+  /**
+   * 主体 ID。需自行记录下返回的主体 ID。
+   */
+  SessionId?: string
+  /**
+   * 人脸信息列表。
+   */
+  FaceInfoList?: Array<AigcFaceIdentityInfo>
 }
 
 /**
@@ -15820,6 +16107,20 @@ export interface ProcessImageAsyncTemplateItem {
    * 图片异步处理模板配置。
    */
   ProcessImageConfigure?: ProcessImageAsyncTask
+}
+
+/**
+ * DescribeAigcFaceInfo返回参数结构体
+ */
+export interface DescribeAigcFaceInfoResponse {
+  /**
+   * 人脸信息。
+   */
+  FaceInfoSet?: Array<AigcFaceInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -16421,6 +16722,18 @@ export interface EventContent {
    * AIGC 生视频任务信息，仅当 EventType 为 AigcVideoTaskComplete 时有效。
    */
   AigcVideoCompleteEvent?: AigcVideoTask
+  /**
+   * 提取数字水印信息，仅当 EventType 为 ExtractBlindWatermarkComplete 时有效。
+   */
+  ExtractBlindWatermarkComplete?: ExtractBlindWatermarkTask
+  /**
+   * AIGC 场景化生图任务信息，仅当 EventType 为 SceneAigcImageCompleteEvent 时有效。
+   */
+  SceneAigcImageCompleteEvent?: SceneAigcImageTask
+  /**
+   * 图片异步处理任务信息，仅当 EventType 为 ProcessImageAsyncCompleteEvent 时有效。
+   */
+  ProcessImageAsyncCompleteEvent?: ProcessImageAsyncTask
 }
 
 /**
@@ -16759,40 +17072,13 @@ export interface DescribeMediaInfosRequest {
 }
 
 /**
- * ModifyPersonSample请求参数结构体
+ * CreateAigcApiToken请求参数结构体
  */
-export interface ModifyPersonSampleRequest {
-  /**
-   * 素材 ID。
-   */
-  PersonId: string
+export interface CreateAigcApiTokenRequest {
   /**
    * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
-  SubAppId?: number
-  /**
-   * 名称，长度限制：128 个字符。
-   */
-  Name?: string
-  /**
-   * 描述，长度限制：1024 个字符。
-   */
-  Description?: string
-  /**
-   * 素材应用场景，可选值：
-1. Recognition：用于内容识别，等价于 Recognition.Face。
-2. Review：用于不适宜的内容识别，等价于 Review.Face。
-3. All：用于内容识别、不适宜的内容识别，等价于 1+2。
-   */
-  Usages?: Array<string>
-  /**
-   * 五官操作信息。
-   */
-  FaceOperationInfo?: AiSampleFaceOperation
-  /**
-   * 标签操作信息。
-   */
-  TagOperationInfo?: AiSampleTagOperation
+  SubAppId: number
 }
 
 /**
@@ -17166,45 +17452,74 @@ export interface SDMCDrmKeyProviderInfo {
 }
 
 /**
- * 场景化 AIGC 生视频任务信息
+ * PullUpload请求参数结构体
  */
-export interface SceneAigcVideoTask {
+export interface PullUploadRequest {
   /**
-   * 任务 ID。
+   * 要拉取的媒体 URL，暂不支持拉取 Dash 格式（可以支持 HLS）。
+支持的扩展名详见[媒体类型](https://cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B)。请确保媒体 URL 可以访问。
    */
-  TaskId?: string
+  MediaUrl: string
   /**
-   * 任务状态，取值：<li>PROCESSING：处理中；</li><li>FINISH：已完成。</li>
+   * 媒体文件类型（扩展名），支持的类型详见[媒体类型](https://cloud.tencent.com/document/product/266/9760#.E5.AA.92.E4.BD.93.E7.B1.BB.E5.9E.8B)。
+如果 MediaType 不填或取值为空字符串，将根据 MediaUrl 自动获取文件类型。
    */
-  Status?: string
+  MediaType?: string
   /**
-   * 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
-  ErrCode?: number
+  SubAppId?: number
   /**
-   * 错误信息。
+   * 媒体名称。
    */
-  Message?: string
+  MediaName?: string
   /**
-   * 任务进度，取值范围 [0-100] 。
+   * 要拉取的视频封面 URL。支持的文件格式：gif、jpeg（jpg）、png。
    */
-  Progress?: number
+  CoverUrl?: string
   /**
-   * AIGC 生视频任务的输入信息。
+   * 媒体后续任务操作，详见[上传指定任务流](https://cloud.tencent.com/document/product/266/9759)。
    */
-  Input?: SceneAigcVideoTaskInput
+  Procedure?: string
   /**
-   * AIGC 生视频任务的输出信息。
+   * 媒体文件过期时间，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
    */
-  Output?: SceneAigcVideoTaskOutput
+  ExpireTime?: string
   /**
-   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   * 指定上传园区，仅适用于对上传地域有特殊需求的用户：
+<li>不填默认上传至您的[默认地域](https://cloud.tencent.com/document/product/266/14059?from=11329#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4)。</li>
+<li>若指定上传园区，请先确认[上传存储设置](https://cloud.tencent.com/document/product/266/14059?from=11329#.E5.AD.98.E5.82.A8.E5.9C.B0.E5.9F.9F.E6.AD.A5.E9.AA.A4)已经开启相应的存储地域。</li>
+   */
+  StorageRegion?: string
+  /**
+   * 分类ID，用于对媒体进行分类管理，可通过[创建分类](https://cloud.tencent.com/document/product/266/7812)接口，创建分类，获得分类 ID。
+   */
+  ClassId?: number
+  /**
+   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+   */
+  TasksPriority?: number
+  /**
+   * 来源上下文，用于透传用户请求信息，当指定 Procedure 任务后，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+  /**
+   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
    */
   SessionId?: string
   /**
-   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   * 保留字段，特殊用途时使用。
    */
-  SessionContext?: string
+  ExtInfo?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，[上传完成回调](/document/product/266/7830) 将返回该字段值，最长 250 个字符。
+   */
+  SourceContext?: string
+  /**
+   * 媒体存储路径，以/开头。
+只有[FileID + Path 模式](https://cloud.tencent.com/document/product/266/126825)的子应用可以指定存储路径。
+   */
+  MediaStoragePath?: string
 }
 
 /**
@@ -17588,19 +17903,17 @@ export interface SearchMediaBySemanticsResponse {
 }
 
 /**
- * AI 样本管理，关键词输入信息。
+ * DescribeAigcFaceInfo请求参数结构体
  */
-export interface AiSampleWordInfo {
+export interface DescribeAigcFaceInfoRequest {
   /**
-   * 关键词，长度限制：20 个字符。
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
-  Keyword: string
+  SubAppId: number
   /**
-   * 关键词标签
-<li>数组长度限制：20 个标签；</li>
-<li>单个标签长度限制：128 个字符。</li>
+   * 需要获取人脸信息的输入视频信息，最多包含一个文件。
    */
-  Tags?: Array<string>
+  FileInfos?: Array<AigcFaceInputFileInfo>
 }
 
 /**
@@ -18144,6 +18457,10 @@ export interface AdaptiveDynamicStreamingTaskInput {
    */
   CopyRightWatermark?: CopyRightWatermarkInput
   /**
+   * 数字水印。
+   */
+  BlindWatermark?: BlindWatermarkInput
+  /**
    * 字幕列表，元素为字幕 ID，支持多个字幕，最大可支持16个。
    */
   SubtitleSet?: Array<string>
@@ -18168,13 +18485,44 @@ export interface DescribeImageSpriteTemplatesResponse {
 }
 
 /**
- * DescribeCLSLogsets请求参数结构体
+ * CreateSceneAigcImageTask请求参数结构体
  */
-export interface DescribeCLSLogsetsRequest {
+export interface CreateSceneAigcImageTaskRequest {
   /**
-   * 日志集所属的地域，取值有： <li>ap-guangzhou：广州；</li> <li>ap-beijing：北京；</li> <li>ap-chengdu：成都；</li> <li>ap-chongqing：重庆；</li> <li>ap-nanjing：南京；</li> <li>ap-shanghai：上海；</li> <li>ap-singapore：新加坡。</li>
+   * **点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。**
    */
-  CLSRegion: string
+  SubAppId: number
+  /**
+   * 场景化生图参数配置。
+   */
+  SceneInfo: AigcImageSceneInfo
+  /**
+   * 输入图片列表，支持的图片格式：jpg、jpeg、png、webp。不同的场景需要不同的输入数据：
+
+- AI换衣场景：只能输入 1 张**模特**图片。
+- AI生商品图场景：需输入 1～10 张**同一产品**的不同角度的图片
+   */
+  FileInfos?: Array<SceneAigcImageTaskInputFileInfo>
+  /**
+   * 场景化生图任务的输出媒体文件配置。
+   */
+  OutputConfig?: SceneAigcImageOutputConfig
+  /**
+   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+  /**
+   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+   */
+  TasksPriority?: number
+  /**
+   * 保留字段，特殊用途时使用。
+   */
+  ExtInfo?: string
 }
 
 /**
@@ -18462,7 +18810,7 @@ export interface DescribeStorageDataRequest {
  */
 export interface DescribeTaskDetailResponse {
   /**
-   * 任务类型，取值：<li>Procedure：视频处理任务；</li><li>EditMedia：视频编辑任务；</li><li>SplitMedia：视频拆条任务；</li><li>ComposeMedia：制作媒体文件任务；</li><li>WechatPublish：微信发布任务；</li><li>WechatMiniProgramPublish：微信小程序视频发布任务；</li><li>PullUpload：拉取上传媒体文件任务；</li><li>FastClipMedia：快速剪辑任务；</li><li>RemoveWatermarkTask：智能去除水印任务；</li><li>DescribeFileAttributesTask：获取文件属性任务；</li><li>RebuildMedia：音画质重生任务（不推荐使用）；</li><li>ReviewAudioVideo：音视频审核任务；</li><li>ExtractTraceWatermark：提取溯源水印任务；</li><li>ExtractCopyRightWatermark：提取版权水印任务；</li><li>QualityInspect：音画质检测任务；</li><li>QualityEnhance：音画质重生任务；</li><li>ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；</li><li>ProcessMediaByMPS：MPS 视频处理任务；</li><li>AigcImageTask：AIGC 生图任务；</li><li>SceneAigcImageTask：场景化 AIGC 生图任务；</li><li>AigcVideoTask：AIGC 生视频任务；</li><li>ImportMediaKnowledge：导入媒体知识任务。</li><li>SceneAigcVideoTask：场景化 AIGC 生视频任务；</li>
+   * 任务类型，取值：<li>Procedure：视频处理任务；</li><li>EditMedia：视频编辑任务；</li><li>SplitMedia：视频拆条任务；</li><li>ComposeMedia：制作媒体文件任务；</li><li>WechatPublish：微信发布任务；</li><li>WechatMiniProgramPublish：微信小程序视频发布任务；</li><li>PullUpload：拉取上传媒体文件任务；</li><li>FastClipMedia：快速剪辑任务；</li><li>RemoveWatermarkTask：智能去除水印任务；</li><li>DescribeFileAttributesTask：获取文件属性任务；</li><li>RebuildMedia：音画质重生任务（不推荐使用）；</li><li>ReviewAudioVideo：音视频审核任务；</li><li>ExtractTraceWatermark：提取溯源水印任务；</li><li>ExtractCopyRightWatermark：提取版权水印任务；</li><li>QualityInspect：音画质检测任务；</li><li>QualityEnhance：音画质重生任务；</li><li>ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；</li><li>ProcessMediaByMPS：MPS 视频处理任务；</li><li>AigcImageTask：AIGC 生图任务；</li><li>SceneAigcImageTask：场景化 AIGC 生图任务；</li><li>AigcVideoTask：AIGC 生视频任务；</li><li>ImportMediaKnowledge：导入媒体知识任务。</li><li>SceneAigcVideoTask：场景化 AIGC 生视频任务；</li><li> ExtractBlindWatermark：提取数字水印任务。</li>
    */
   TaskType?: string
   /**
@@ -18623,6 +18971,10 @@ export interface DescribeTaskDetailResponse {
    * 图像异步处理任务信息，仅当 TaskType 为 ProcessImageAsync，该字段有值。
    */
   ProcessImageAsyncTask?: ProcessImageAsync
+  /**
+   * 提取数字水印任务信息，仅当 TaskType 为 ExtractBlindWatermark，该字段有值。
+   */
+  ExtractBlindWatermarkTask?: ExtractBlindWatermarkTask
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19417,97 +19769,17 @@ export interface ExtractTraceWatermarkRequest {
 }
 
 /**
- * 音视频处理任务信息
+ * DescribeAigcApiTokens返回参数结构体
  */
-export interface ProcedureTask {
+export interface DescribeAigcApiTokensResponse {
   /**
-   * 音视频处理任务 ID。
+   * API Token 列表
    */
-  TaskId?: string
+  ApiTokens?: Array<string>
   /**
-   * 任务流状态，取值：
-<li>PROCESSING：处理中；</li>
-<li>FINISH：已完成。</li>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Status?: string
-  /**
-   * 已弃用，请使用各个具体任务的 ErrCode。
-   * @deprecated
-   */
-  ErrCode?: number
-  /**
-   * 已弃用，请使用各个具体任务的 Message。
-   * @deprecated
-   */
-  Message?: string
-  /**
-   * 媒体文件 ID
-<li>若流程由 [ProcessMedia](https://cloud.tencent.com/document/product/266/33427) 发起，该字段表示 [MediaInfo](https://cloud.tencent.com/document/product/266/31773#MediaInfo) 的 FileId；</li>
-<li>若流程由 [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426) 发起，该字段表示 [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773#MediaInputInfo) 的 Id。</li>
-   */
-  FileId?: string
-  /**
-   * 媒体文件名称
-<li>若流程由 [ProcessMedia](https://cloud.tencent.com/document/product/266/33427) 发起，该字段表示 [MediaInfo](https://cloud.tencent.com/document/product/266/31773#MediaInfo) 的 BasicInfo.Name；</li>
-<li>若流程由 [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426) 发起，该字段表示 [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773#MediaInputInfo) 的 Name。</li>
-   */
-  FileName?: string
-  /**
-   * 媒体文件地址
-<li>若流程由 [ProcessMedia](https://cloud.tencent.com/document/product/266/33427) 发起，该字段表示 [MediaInfo](https://cloud.tencent.com/document/product/266/31773#MediaInfo) 的 BasicInfo.MediaUrl；</li>
-<li>若流程由 [ProcessMediaByUrl](https://cloud.tencent.com/document/product/266/33426) 发起，该字段表示 [MediaInputInfo](https://cloud.tencent.com/document/product/266/31773#MediaInputInfo) 的 Url。</li>
-   */
-  FileUrl?: string
-  /**
-   * 原始音视频的元信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MetaData?: MediaMetaData
-  /**
-   * 音视频处理任务的执行状态与结果。
-   */
-  MediaProcessResultSet?: Array<MediaProcessTaskResult>
-  /**
-   * 音视频审核任务的执行状态与结果。
-   */
-  AiContentReviewResultSet?: Array<AiContentReviewResult>
-  /**
-   * 音视频内容分析任务的执行状态与结果。
-   */
-  AiAnalysisResultSet?: Array<AiAnalysisResult>
-  /**
-   * 音视频内容识别任务的执行状态与结果。
-   */
-  AiRecognitionResultSet?: Array<AiRecognitionResult>
-  /**
-   * 任务流的优先级，取值范围为 [-10, 10]。
-   */
-  TasksPriority?: number
-  /**
-   * 任务流状态变更通知模式。
-<li>Finish：只有当任务流全部执行完毕时，才发起一次事件通知；</li>
-<li>Change：只要任务流中每个子任务的状态发生变化，都进行事件通知；</li>
-<li>None：不接受该任务流回调。</li>
-   */
-  TasksNotifyMode?: string
-  /**
-   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
-   */
-  SessionContext?: string
-  /**
-   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
-   */
-  SessionId?: string
-  /**
-   * 操作者。取值范围：
-<li>System: 表示系统触发。</li>
-   */
-  Operator?: string
-  /**
-   * 操作类型。取值范围：
-<li>TSC: 表示使用极速高清进行智能降码。</li>
-   */
-  OperationType?: string
+  RequestId?: string
 }
 
 /**
@@ -19569,15 +19841,17 @@ export interface DescribeSnapshotByTimeOffsetTemplatesResponse {
 }
 
 /**
- * 域名 QUIC 配置信息
+ * DeleteAigcApiToken请求参数结构体
  */
-export interface DomainQUICConfig {
+export interface DeleteAigcApiTokenRequest {
   /**
-   * QUIC 配置状态，可选值：
-<li>Enabled: 启用；</li>
-<li>Disabled: 禁用。</li>
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
-  Status: string
+  SubAppId: number
+  /**
+   * API 的 Token
+   */
+  ApiToken: string
 }
 
 /**
@@ -19810,6 +20084,26 @@ export interface AiRecognitionTaskAsrWordsResultInput {
    * 语音关键词识别模板 ID。
    */
   Definition?: number
+}
+
+/**
+ * 语音鉴别涉及令人反感的信息的任务控制参数。
+ */
+export interface PornAsrReviewTemplateInfoForUpdate {
+  /**
+   * 语音鉴别涉及令人反感的信息的任务开关，可选值：
+<li>ON：开启语音鉴别涉及令人反感的信息的任务；</li>
+<li>OFF：关闭语音鉴别涉及令人反感的信息的任务。</li>
+   */
+  Switch?: string
+  /**
+   * 判定涉嫌违规的分数阈值，当审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   */
+  BlockConfidence?: number
+  /**
+   * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
+   */
+  ReviewConfidence?: number
 }
 
 /**
@@ -20996,38 +21290,15 @@ export interface FastEditMediaRequest {
 }
 
 /**
- * 点播文件视频流信息
+ * 域名 QUIC 配置信息
  */
-export interface MediaVideoStreamItem {
+export interface DomainQUICConfig {
   /**
-   * 视频流的码率，单位：bps。
+   * QUIC 配置状态，可选值：
+<li>Enabled: 启用；</li>
+<li>Disabled: 禁用。</li>
    */
-  Bitrate?: number
-  /**
-   * 视频流的高度，单位：px。
-   */
-  Height?: number
-  /**
-   * 视频流的宽度，单位：px。
-   */
-  Width?: number
-  /**
-   * 视频流的编码格式，例如 h264。
-   */
-  Codec?: string
-  /**
-   * 帧率，单位：hz。
-   */
-  Fps?: number
-  /**
-   * 编码标签，仅当 Codec 为 hevc 时有效。
-   */
-  CodecTag?: string
-  /**
-   * 画面动态范围信息。
-<li><font color=red>注意</font>：在 2023-01-10T00:00:00Z 后处理的转码文件，此字段有效。</li>
-   */
-  DynamicRangeInfo?: DynamicRangeInfo
+  Status: string
 }
 
 /**
@@ -21417,18 +21688,13 @@ export interface ConfirmEventsResponse {
 }
 
 /**
- * ModifyPersonSample返回参数结构体
+ * CreateAigcApiToken返回参数结构体
  */
-export interface ModifyPersonSampleResponse {
+export interface CreateAigcApiTokenResponse {
   /**
-   * 素材信息。
+   * API的Token
    */
-  Person?: AiSamplePerson
-  /**
-   * 处理失败的五官信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FailFaceInfoSet?: Array<AiSampleFailFaceInfo>
+  ApiToken?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -23286,6 +23552,22 @@ export interface PullUploadTask {
    * 拉取上传进度，取值范围 [0-100] 。
    */
   Progress?: number
+}
+
+/**
+ * AI 样本管理，关键词输入信息。
+ */
+export interface AiSampleWordInfo {
+  /**
+   * 关键词，长度限制：20 个字符。
+   */
+  Keyword: string
+  /**
+   * 关键词标签
+<li>数组长度限制：20 个标签；</li>
+<li>单个标签长度限制：128 个字符。</li>
+   */
+  Tags?: Array<string>
 }
 
 /**

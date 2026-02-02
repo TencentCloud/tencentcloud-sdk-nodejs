@@ -400,13 +400,14 @@ export interface SendEmailRequest {
    */
   FromEmailAddress: string
   /**
-   * 收信人邮箱地址，最多支持群发50人。注意：邮件内容会显示所有收件人地址，非群发邮件请多次调用API发送。
-   */
-  Destination: Array<string>
-  /**
    * 邮件主题
    */
   Subject: string
+  /**
+   * 收信人邮箱地址，最多支持群发50人。注意：邮件内容会显示所有收件人地址，非群发邮件请多次调用API发送。
+Destination/Cc/Bcc三个参数必须至少存在一个。
+   */
+  Destination?: Array<string>
   /**
    * 邮件的“回复”电子邮件地址。可以填写您能收到邮件的邮箱地址，可以是个人邮箱。如果不填，收件人的回复邮件将会发送失败。
    */

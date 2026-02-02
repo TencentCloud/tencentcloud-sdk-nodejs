@@ -1589,13 +1589,12 @@ export interface AttrLabelDetail {
  */
 export interface QAQuery {
   /**
-   * 页码
-
+   * 页码 从1开始
 
    */
   PageNumber: number
   /**
-   * 每页数量
+   * 页大小 默认15 最大100
 
    */
   PageSize: number
@@ -1614,12 +1613,12 @@ export interface QAQuery {
    */
   CateBizId?: string
   /**
-   * 校验状态
+   * 校验状态的枚举值
 
    */
   AcceptStatus?: Array<number | bigint>
   /**
-   * 发布状态
+   * 发布状态的枚举值
 
    */
   ReleaseStatus?: Array<number | bigint>
@@ -1647,6 +1646,11 @@ export interface QAQuery {
    * 查询类型 filename 名称、 attribute 标签
    */
   QueryType?: string
+  /**
+   * 问答生效域检索，不检索不传。枚举值如下：
+1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效。
+   */
+  EnableScope?: number
 }
 
 /**

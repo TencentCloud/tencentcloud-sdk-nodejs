@@ -111,7 +111,6 @@ export interface GovernanceAlias {
   Editable?: boolean
   /**
    * 元数据信息
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Metadatas?: Array<Metadata>
 }
@@ -3754,7 +3753,6 @@ export interface GovernanceServiceContract {
   Interfaces?: Array<GovernanceInterfaceDescription>
   /**
    * 元数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Metadatas?: Array<Metadata>
 }
@@ -4844,7 +4842,6 @@ export interface GovernanceNamespace {
   SyncToGlobalRegistry?: boolean
   /**
    * 元数据
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Metadatas?: Array<Metadata>
 }

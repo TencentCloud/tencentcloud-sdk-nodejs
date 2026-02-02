@@ -276,6 +276,51 @@ export interface DescribeWebSecurityTemplatesRequest {
 }
 
 /**
+ * 安全的执行动作
+ */
+export interface SecurityAction {
+  /**
+   * 安全执行的具体动作。取值有：
+<li>Deny：拦截，阻止请求访问站点资源；</li>
+<li>Monitor：观察，仅记录日志；</li>
+<li>Redirect：重定向至 URL；</li>
+<li>Disabled：未启用，不启用指定规则；</li>
+<li>Allow：允许访问，但延迟处理请求；</li>
+<li>Challenge：挑战，响应挑战内容；</li>
+<li>Trans：放行，允许请求直接访问站点资源；</li>
+<li>BlockIP：待废弃，IP 封禁；</li>
+<li>ReturnCustomPage：待废弃，使用指定页面拦截；</li>
+<li>JSChallenge：待废弃，JavaScript 挑战；</li>
+<li>ManagedChallenge：待废弃，托管挑战。</li>
+   */
+  Name: string
+  /**
+   * 当 Name 为 Deny 时的附加参数。
+   */
+  DenyActionParameters?: DenyActionParameters
+  /**
+   * 当 Name 为 Redirect 时的附加参数。
+   */
+  RedirectActionParameters?: RedirectActionParameters
+  /**
+   * 当 Name 为 Allow 时的附加参数。
+   */
+  AllowActionParameters?: AllowActionParameters
+  /**
+   * 当 Name 为 Challenge 时的附加参数。
+   */
+  ChallengeActionParameters?: ChallengeActionParameters
+  /**
+   * 待废弃，当 Name 为 BlockIP 时的附加参数。
+   */
+  BlockIPActionParameters?: BlockIPActionParameters
+  /**
+   * 待废弃，当 Name 为 ReturnCustomPage 时的附加参数。
+   */
+  ReturnCustomPageActionParameters?: ReturnCustomPageActionParameters
+}
+
+/**
  * IP 情报库（原客户端画像分析）配置。
  */
 export interface IPReputation {
@@ -2931,48 +2976,13 @@ export interface StatusCodeCacheParam {
 }
 
 /**
- * 安全的执行动作
+ * 人机校验页的具体配置。
  */
-export interface SecurityAction {
+export interface CAPTCHAPageChallenge {
   /**
-   * 安全执行的具体动作。取值有：
-<li>Deny：拦截，阻止请求访问站点资源；</li>
-<li>Monitor：观察，仅记录日志；</li>
-<li>Redirect：重定向至 URL；</li>
-<li>Disabled：未启用，不启用指定规则；</li>
-<li>Allow：允许访问，但延迟处理请求；</li>
-<li>Challenge：挑战，响应挑战内容；</li>
-<li>Trans：放行，允许请求直接访问站点资源；</li>
-<li>BlockIP：待废弃，IP 封禁；</li>
-<li>ReturnCustomPage：待废弃，使用指定页面拦截；</li>
-<li>JSChallenge：待废弃，JavaScript 挑战；</li>
-<li>ManagedChallenge：待废弃，托管挑战。</li>
+   * 人机校验页是否开启，取值有：<li>on：开启；</li><li>off：关闭。</li>
    */
-  Name: string
-  /**
-   * 当 Name 为 Deny 时的附加参数。
-   */
-  DenyActionParameters?: DenyActionParameters
-  /**
-   * 当 Name 为 Redirect 时的附加参数。
-   */
-  RedirectActionParameters?: RedirectActionParameters
-  /**
-   * 当 Name 为 Allow 时的附加参数。
-   */
-  AllowActionParameters?: AllowActionParameters
-  /**
-   * 当 Name 为 Challenge 时的附加参数。
-   */
-  ChallengeActionParameters?: ChallengeActionParameters
-  /**
-   * 待废弃，当 Name 为 BlockIP 时的附加参数。
-   */
-  BlockIPActionParameters?: BlockIPActionParameters
-  /**
-   * 待废弃，当 Name 为 ReturnCustomPage 时的附加参数。
-   */
-  ReturnCustomPageActionParameters?: ReturnCustomPageActionParameters
+  Enabled?: string
 }
 
 /**
@@ -5991,22 +6001,22 @@ export interface DropPageDetail {
 }
 
 /**
- * CNAME 状态
+ * 接入域名 CNAME 配置状态
  */
 export interface CnameStatus {
   /**
-   * 记录名称。
+   * 接入域名。
    */
   RecordName?: string
   /**
-   * CNAME 地址。
-注意：此字段可能返回 null，表示取不到有效值。
+   * EdgeOne 分配给接入域名的 CNAME。
    */
   Cname?: string
   /**
-   * CNAME 状态信息，取值有：
-<li>active：生效；</li>
-<li>moved：不生效；</li>
+   * CNAME 配置状态校验结果，取值有：
+<li>active：表示接入域名已正确配置到 EdgeOne 为其分配的指定 CNAME；</li>
+<li>moved：表示接入域名未配置到 EdgeOne 为其分配的指定 CNAME；</li>
+<li>invalid：表示接入域名配置的 CNAME 为 EdgeOne 为其他域名分配的 CNAME，会导致服务异常，请修改为 EdgeOne 为该接入域名提供的指定 CNAME，您可通过本结构体的 Cname 字段获取 EdgeOne 为该接入域名提供的 CNAME。</li>
    */
   Status?: string
 }
@@ -8639,7 +8649,7 @@ export interface ModifyL4ProxyRulesStatusResponse {
  */
 export interface CheckCnameStatusResponse {
   /**
-   * 加速域名 CNAME 状态信息列表。
+   * 接入域名的 CNAME 配置状态信息列表。
    */
   CnameStatus?: Array<CnameStatus>
   /**
@@ -10481,6 +10491,10 @@ export interface SecurityPolicy {
    * Bot 管理配置。
    */
   BotManagement?: BotManagement
+  /**
+   * 基础 Bot 管理配置。
+   */
+  BotManagementLite?: BotManagementLite
 }
 
 /**
@@ -14516,6 +14530,27 @@ export interface TemplateScope {
 }
 
 /**
+ * AI 爬虫检测的具体配置。
+ */
+export interface AICrawlerDetection {
+  /**
+   * AI 爬虫检测是否开启。取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+
+   */
+  Enabled?: string
+  /**
+   * AI 爬虫检测的执行动作，当 Enabled 为 on 时，此字段必填。SecurityAction 的 Name 取值仅支持：
+<li>Deny：拦截；</li>
+<li>Monitor：观察；</li>
+<li>Allow：放行；</li>
+<li>Challenge：挑战，其中 ChallengeActionParameters 中的 ChallengeOption 仅支持 JSChallenge 和 ManagedChallenge。</li>
+   */
+  Action?: SecurityAction
+}
+
+/**
  * 自定义错误页面。
  */
 export interface ErrorPage {
@@ -14920,6 +14955,20 @@ export interface DeleteFunctionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Web 安全的基础 BOT 规则结构。
+ */
+export interface BotManagementLite {
+  /**
+   * 人机校验页的具体配置。
+   */
+  CAPTCHAPageChallenge?: CAPTCHAPageChallenge
+  /**
+   * AI爬虫检测的具体配置。
+   */
+  AICrawlerDetection?: AICrawlerDetection
 }
 
 /**
@@ -15998,7 +16047,7 @@ export interface CheckCnameStatusRequest {
    */
   ZoneId: string
   /**
-   * 加速域名列表。
+   * 需要检测 CNAME 配置状态的域名列表，可以为：<li>加速域名;</li><li>别称域名。</li>
    */
   RecordNames: Array<string>
 }

@@ -1391,29 +1391,27 @@ export interface ServiceStatus {
  */
 export interface ScanVoiceRequest {
   /**
-   * 应用ID，登录[控制台 - 服务管理](https://console.cloud.tencent.com/gamegme)创建应用得到的AppID
+   * <p>应用ID，登录<a href="https://console.cloud.tencent.com/gamegme">控制台 - 服务管理</a>创建应用得到的AppID</p>
    */
   BizId: number
   /**
-   * 语音检测场景，参数值目前要求为 default。 预留场景设置： 谩骂、色情、广告、违禁等场景，<a href="#Label_Value">具体取值见上述 Label 说明。</a>
+   * <p>语音检测场景，参数值目前要求为 default。 预留场景设置： 谩骂、色情、广告、违禁等场景，<a href="#Label_Value">具体取值见上述 Label 说明。</a></p>
    */
   Scenes: Array<string>
   /**
-   * 是否为直播流。值为 false 时表示普通语音文件检测；为 true 时表示语音流检测。
+   * <p>是否为直播流。值为 false 时表示普通语音文件检测；为 true 时表示语音流检测。</p>
    */
   Live: boolean
   /**
-   * 语音检测任务列表，列表最多支持100个检测任务。结构体中包含：
-<li>DataId：数据的唯一ID</li>
-<li>Url：数据文件的url，为 urlencode 编码，流式则为拉流地址</li>
+   * <p>语音检测任务列表，列表最多支持100个检测任务。结构体中包含：</p><li>DataId：数据的唯一ID</li><li>Url：数据文件的url，为 urlencode 编码，流式则为拉流地址</li>
    */
   Tasks: Array<Task>
   /**
-   * 异步检测结果回调地址，具体见上述<a href="#Callback_Declare">回调相关说明</a>。（说明：该字段为空时，必须通过接口(查询语音检测结果)获取检测结果）。
+   * <p>异步检测结果回调地址，具体见上述<a href="#Callback_Declare">回调相关说明</a>。（说明：该字段为空时，必须通过接口(查询语音检测结果)获取检测结果）。</p>
    */
   Callback?: string
   /**
-   * 语种，不传默认中文
+   * <p>语种，不传默认中文</p>
    */
   Lang?: string
 }
@@ -1934,8 +1932,7 @@ export interface StatisticsItem {
  */
 export interface ScanVoiceResponse {
   /**
-   * 语音检测返回。Data 字段是 JSON 数组，每一个元素包含：<li>DataId： 请求中对应的 DataId。</li>
-<li>TaskID ：该检测任务的 ID，用于轮询语音检测结果。</li>
+   * <p>语音检测返回。Data 字段是 JSON 数组，每一个元素包含：<li>DataId： 请求中对应的 DataId。</li></p><li>TaskID ：该检测任务的 ID，用于轮询语音检测结果。</li>
    */
   Data?: Array<ScanVoiceResult>
   /**

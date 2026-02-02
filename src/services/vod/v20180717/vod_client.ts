@@ -98,6 +98,7 @@ import {
   ComposeMediaResponse,
   RoundPlayInfo,
   DescribeLicenseUsageDataResponse,
+  AigcFaceIdentityInfo,
   DeleteMPSTemplateRequest,
   DrmStreamingsInfoForUpdate,
   ClassificationConfigureInfo,
@@ -160,6 +161,7 @@ import {
   MPSOutputFile,
   CreatePersonSampleRequest,
   RemoveWatermarkTask,
+  ProcedureTask,
   ReviewAudioVideoRequest,
   StorageRegionInfo,
   MediaTransitionItem,
@@ -218,7 +220,7 @@ import {
   MediaProcessTaskAdaptiveDynamicStreamingResult,
   FrameRateWithDenInfo,
   TraceWatermarkInput,
-  PornAsrReviewTemplateInfoForUpdate,
+  ModifyPersonSampleRequest,
   ReviewAudioVideoSegmentItem,
   MediaAnimatedGraphicsInfo,
   DescribeSnapshotByTimeOffsetTemplatesRequest,
@@ -240,7 +242,7 @@ import {
   SuperResolutionInfo,
   MediaImageSpriteInfo,
   EnhanceMediaQualityRequest,
-  ProductImageConfig,
+  ExtractBlindWatermarkTask,
   ProductInstanceRecource,
   PersistenceCompleteTask,
   AiRecognitionTaskFaceSegmentItem,
@@ -278,6 +280,7 @@ import {
   ColorEnhanceInfo,
   DeleteEnhanceMediaTemplateResponse,
   EditMediaOutputConfig,
+  ModifyPersonSampleResponse,
   CreateAigcCustomElementRequest,
   SplitMediaTaskSegmentInfo,
   AiReviewPornAsrTaskOutput,
@@ -372,6 +375,7 @@ import {
   AiAnalysisTaskTagResult,
   SearchMediaResponse,
   ModifyAIAnalysisTemplateResponse,
+  DescribeAigcApiTokensRequest,
   RemoveWaterMarkTaskOutput,
   ModifyMediaStorageClassRequest,
   AiAnalysisTaskTagOutput,
@@ -397,6 +401,7 @@ import {
   ImportMediaKnowledgeResponse,
   RestoreMediaResponse,
   MediaProcessTaskSnapshotByTimeOffsetResult,
+  AigcFaceInputFileInfo,
   ModifyEnhanceMediaTemplateResponse,
   SceneAigcVideoOutputConfig,
   EnhanceMediaByTemplateResponse,
@@ -440,6 +445,7 @@ import {
   DeleteImageSpriteTemplateResponse,
   LowLightEnhanceInfo,
   DescribeContentReviewTemplatesResponse,
+  ProductImageConfig,
   TEHDConfig,
   ProcessImageAsyncTaskInput,
   ImageReviewUsageDataItem,
@@ -457,12 +463,12 @@ import {
   SetVodDomainCertificateResponse,
   ExtractTraceWatermarkTaskOutput,
   MediaProcessTaskCoverBySnapshotResult,
-  CreateWatermarkTemplateRequest,
+  DeleteAigcApiTokenResponse,
   ComplexAdaptiveDynamicStreamingTaskInput,
   SortBy,
   AdvancedSuperResolutionConfig,
   DescribeMPSTemplatesRequest,
-  CreateSceneAigcImageTaskRequest,
+  DescribeCLSLogsetsRequest,
   TerrorismConfigureInfoForUpdate,
   DescribePersonSamplesRequest,
   DescribeEventsStateRequest,
@@ -475,10 +481,13 @@ import {
   ImageScale,
   ModifyJustInTimeTranscodeTemplateResponse,
   ImageContentReviewInput,
+  MediaVideoStreamItem,
   TranscodePlayInfo2017,
   SplitMediaTask,
+  CreateWatermarkTemplateRequest,
   ComposeMediaTaskInput,
   ModifyQualityInspectTemplateRequest,
+  SceneAigcVideoTask,
   AnimatedGraphicTaskInput,
   MosaicInput,
   AIAnalysisTemplateItem,
@@ -515,6 +524,7 @@ import {
   AiReviewTerrorismOcrTaskOutput,
   AiAnalysisResult,
   ReduceMediaBitrateAdaptiveDynamicStreamingResult,
+  BlindWatermarkInput,
   AttachMediaSubtitlesResponse,
   CreateDomainVerifyRecordResponse,
   ExtractCopyRightWatermarkResponse,
@@ -580,7 +590,7 @@ import {
   DeleteContentReviewTemplateResponse,
   MediaBasicInfo,
   AiReviewPoliticalAsrTaskInput,
-  PullUploadRequest,
+  ExtractBlindWatermarkInputInfo,
   CreateQualityInspectTemplateRequest,
   ProcessMediaByProcedureRequest,
   RebuildMediaTargetVideoStream,
@@ -602,6 +612,7 @@ import {
   ParseStreamingManifestResponse,
   ListFilesResponse,
   CreateRoundPlayRequest,
+  ExtractBlindWatermarkTaskConfig,
   ImageEncodeConfig,
   AiReviewTaskPornResult,
   AiRecognitionTaskObjectResultOutput,
@@ -619,11 +630,13 @@ import {
   AdaptiveStreamTemplate,
   TranscodeTaskInput,
   DescribeClientUploadAccelerationUsageDataRequest,
+  AigcFaceInfo,
   ModifyAIRecognitionTemplateRequest,
   DeleteMPSTemplateResponse,
   QRCodeConfigureInfo,
   DescribeStorageRegionsRequest,
   ProcessImageAsyncTemplateItem,
+  DescribeAigcFaceInfoResponse,
   CreateMPSTemplateResponse,
   WechatPublishTask,
   DescribeCDNStatDetailsRequest,
@@ -657,7 +670,7 @@ import {
   DescribeQualityInspectTemplatesRequest,
   MPSOutputFileInfo,
   DescribeMediaInfosRequest,
-  ModifyPersonSampleRequest,
+  CreateAigcApiTokenRequest,
   DescribeDrmDataKeyRequest,
   AsrFullTextConfigureInfo,
   TerrorismImageResult,
@@ -672,7 +685,7 @@ import {
   MPSAiMediaInfo,
   AiReviewPornTaskOutput,
   SDMCDrmKeyProviderInfo,
-  SceneAigcVideoTask,
+  PullUploadRequest,
   CreateSceneAigcVideoTaskResponse,
   AiRecognitionTaskAsrFullTextResult,
   DeleteQualityInspectTemplateResponse,
@@ -690,7 +703,7 @@ import {
   DeleteProcedureTemplateRequest,
   WatermarkInput,
   SearchMediaBySemanticsResponse,
-  AiSampleWordInfo,
+  DescribeAigcFaceInfoRequest,
   AdaptiveDynamicStreamingInfoItem,
   CreateMPSTemplateRequest,
   LiveRealTimeClipStreamInfo,
@@ -710,7 +723,7 @@ import {
   CreateComplexAdaptiveDynamicStreamingTaskResponse,
   AdaptiveDynamicStreamingTaskInput,
   DescribeImageSpriteTemplatesResponse,
-  DescribeCLSLogsetsRequest,
+  CreateSceneAigcImageTaskRequest,
   InspectMediaQualityRequest,
   TransitionOperation,
   AiRecognitionTaskHeadTailResultInput,
@@ -764,10 +777,10 @@ import {
   CreateProcessImageAsyncTemplateRequest,
   CreateCLSLogsetRequest,
   ExtractTraceWatermarkRequest,
-  ProcedureTask,
+  DescribeAigcApiTokensResponse,
   ReviewAudioVideoTask,
   DescribeSnapshotByTimeOffsetTemplatesResponse,
-  DomainQUICConfig,
+  DeleteAigcApiTokenRequest,
   SetDrmKeyProviderInfoRequest,
   SnapshotByTimeOffsetTemplate,
   DeleteSnapshotByTimeOffsetTemplateResponse,
@@ -778,6 +791,7 @@ import {
   CreateTranscodeTemplateResponse,
   AudioDenoiseInfo,
   AiRecognitionTaskAsrWordsResultInput,
+  PornAsrReviewTemplateInfoForUpdate,
   ModifySubAppIdStatusResponse,
   CreateAIAnalysisTemplateRequest,
   AiReviewTerrorismTaskInput,
@@ -816,7 +830,7 @@ import {
   ReviewTemplate,
   DescribeCurrentPlaylistRequest,
   FastEditMediaRequest,
-  MediaVideoStreamItem,
+  DomainQUICConfig,
   CreateRebuildMediaTemplateRequest,
   ImageOperation,
   MediaSubStreamInfoItem,
@@ -831,7 +845,7 @@ import {
   ExecuteFunctionRequest,
   RebuildMediaTask,
   ConfirmEventsResponse,
-  ModifyPersonSampleResponse,
+  CreateAigcApiTokenResponse,
   VideoTrackItem,
   VideoDenoiseInfo,
   DescribeLicenseUsageDataRequest,
@@ -896,6 +910,7 @@ import {
   DescribeMediaProcessUsageDataRequest,
   DescribeCLSPushTargetsResponse,
   PullUploadTask,
+  AiSampleWordInfo,
   DescribeImageProcessingTemplatesResponse,
   UserDefineOcrTextReviewTemplateInfoForUpdate,
   SampleSnapshotTaskInput,
@@ -1308,6 +1323,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据图像异步处理模板唯一标识，获取图像异步处理模板详情列表。返回结果包含符合条件的所有用户自定义图像异步处理模板。
+   */
+  async DescribeProcessImageAsyncTemplates(
+    req: DescribeProcessImageAsyncTemplatesRequest,
+    cb?: (error: string, rep: DescribeProcessImageAsyncTemplatesResponse) => void
+  ): Promise<DescribeProcessImageAsyncTemplatesResponse> {
+    return this.request("DescribeProcessImageAsyncTemplates", req, cb)
+  }
+
+  /**
      * 查询点播域名的 CDN （不含 EdgeOne 回源到 VOD 域名）访问日志的下载链接。
     1. 可以查询最近30天内的 CDN 日志下载链接。
     2. 默认情况下 CDN 每小时生成一个日志文件，如果某一个小时没有 CDN 访问，不会生成日志文件。    
@@ -1497,13 +1522,18 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改用户自定义雪碧图模板。
-   */
-  async ModifyImageSpriteTemplate(
-    req: ModifyImageSpriteTemplateRequest,
-    cb?: (error: string, rep: ModifyImageSpriteTemplateResponse) => void
-  ): Promise<ModifyImageSpriteTemplateResponse> {
-    return this.request("ModifyImageSpriteTemplate", req, cb)
+     * 腾讯云点播为客户提供了媒体上传、媒体管理、媒体处理等等服务，在这些服务执行过程或执行结束时，腾讯云点播也提供各种对应的事件通知，方便开发者感知服务处理状态，并做下一步的业务操作。
+
+开发者可以通过调用本接口来实现：
+- 设置接收回调通知的类型，目前有[ HTTP 回调通知](https://cloud.tencent.com/document/product/266/33779) 和 [基于消息队列的可靠通知](https://cloud.tencent.com/document/product/266/33779) 两种类型。
+- 对于[ HTTP 回调通知](https://cloud.tencent.com/document/product/266/33779)，可设置 3.0 格式回调的地址。3.0 格式回调的说明参见 [历史格式回调](https://cloud.tencent.com/document/product/266/33796)。
+- 对具体事件服务的通知事件选择设置接收或者忽略。
+     */
+  async ModifyEventConfig(
+    req: ModifyEventConfigRequest,
+    cb?: (error: string, rep: ModifyEventConfigResponse) => void
+  ): Promise<ModifyEventConfigResponse> {
+    return this.request("ModifyEventConfig", req, cb)
   }
 
   /**
@@ -1528,14 +1558,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 删除用户自定义审核模板。
->模板仅适用于 [音视频审核(ReviewAudioVideo)](https://cloud.tencent.com/document/api/266/80283) 和 [图片审核(ReviewImage)](https://cloud.tencent.com/document/api/266/73217) 接口。
+     * 该接口用于删除点播加速域名。
+1、域名删除前需要先关闭所有区域的加速。
      */
-  async DeleteReviewTemplate(
-    req: DeleteReviewTemplateRequest,
-    cb?: (error: string, rep: DeleteReviewTemplateResponse) => void
-  ): Promise<DeleteReviewTemplateResponse> {
-    return this.request("DeleteReviewTemplate", req, cb)
+  async DeleteVodDomain(
+    req: DeleteVodDomainRequest,
+    cb?: (error: string, rep: DeleteVodDomainResponse) => void
+  ): Promise<DeleteVodDomainResponse> {
+    return this.request("DeleteVodDomain", req, cb)
   }
 
   /**
@@ -1834,16 +1864,24 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口返回查询时间范围内客户端上传加速统计信息。
-   1. 可以查询最近365天内的客户端上传加速统计数据。
-   2. 查询时间跨度不超过90天。
-   3. 查询时间跨度超过1天的，返回以天为粒度的数据，否则，返回以5分钟为粒度的数据。
+     * 删除用户自定义审核模板。
+>模板仅适用于 [音视频审核(ReviewAudioVideo)](https://cloud.tencent.com/document/api/266/80283) 和 [图片审核(ReviewImage)](https://cloud.tencent.com/document/api/266/73217) 接口。
      */
-  async DescribeClientUploadAccelerationUsageData(
-    req: DescribeClientUploadAccelerationUsageDataRequest,
-    cb?: (error: string, rep: DescribeClientUploadAccelerationUsageDataResponse) => void
-  ): Promise<DescribeClientUploadAccelerationUsageDataResponse> {
-    return this.request("DescribeClientUploadAccelerationUsageData", req, cb)
+  async DeleteReviewTemplate(
+    req: DeleteReviewTemplateRequest,
+    cb?: (error: string, rep: DeleteReviewTemplateResponse) => void
+  ): Promise<DeleteReviewTemplateResponse> {
+    return this.request("DeleteReviewTemplate", req, cb)
+  }
+
+  /**
+   * 修改用户自定义雪碧图模板。
+   */
+  async ModifyImageSpriteTemplate(
+    req: ModifyImageSpriteTemplateRequest,
+    cb?: (error: string, rep: ModifyImageSpriteTemplateResponse) => void
+  ): Promise<ModifyImageSpriteTemplateResponse> {
+    return this.request("ModifyImageSpriteTemplate", req, cb)
   }
 
   /**
@@ -1959,13 +1997,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于根据素材 ID，修改素材样本信息，包括名称、描述的修改，以及五官、标签的添加、删除、重置操作。五官删除操作需保证至少剩余 1 张图片，否则，请使用重置操作。
+   * 创建AIGC调用API的Token。创建后数据同步有延时，约30秒后可查询或删除。
    */
-  async ModifyPersonSample(
-    req: ModifyPersonSampleRequest,
-    cb?: (error: string, rep: ModifyPersonSampleResponse) => void
-  ): Promise<ModifyPersonSampleResponse> {
-    return this.request("ModifyPersonSample", req, cb)
+  async CreateAigcApiToken(
+    req: CreateAigcApiTokenRequest,
+    cb?: (error: string, rep: CreateAigcApiTokenResponse) => void
+  ): Promise<CreateAigcApiTokenResponse> {
+    return this.request("CreateAigcApiToken", req, cb)
   }
 
   /**
@@ -2313,28 +2351,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 对点播中的音视频媒体发起处理任务，功能包括：
-1. 视频转码（带水印）；
-2. 视频转动图；
-3. 对视频按指定时间点截图；
-4. 对视频采样截图；
-5. 对视频截取雪碧图；
-6. 对视频截取一张图做封面；
-7. 对视频转自适应码流（并加密）；
-8. 内容审核（令人反感的信息、不安全的信息、不适宜的信息），<font color=red>不建议</font> 使用该接口发起，推荐使用 [音视频审核(ReviewAudioVideo)](https://cloud.tencent.com/document/api/266/80283) 或 [图片审核(ReviewImage)](https://cloud.tencent.com/document/api/266/73217)；
-9. 内容分析（标签、分类、封面、按帧标签），暂时不支持 HLS 格式；
-10. 内容识别（视频片头片尾、人脸、文本全文、文本关键词、语音全文、语音关键词、物体）。
-
-如使用事件通知，事件通知的类型为 [任务流状态变更](https://cloud.tencent.com/document/product/266/9636)。
-     */
-  async ProcessMedia(
-    req: ProcessMediaRequest,
-    cb?: (error: string, rep: ProcessMediaResponse) => void
-  ): Promise<ProcessMediaResponse> {
-    return this.request("ProcessMedia", req, cb)
-  }
-
-  /**
      * 创建片头片尾模板。
 - 最大支持模板数量为 100 个。
      */
@@ -2471,6 +2487,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用于根据素材 ID，修改素材样本信息，包括名称、描述的修改，以及五官、标签的添加、删除、重置操作。五官删除操作需保证至少剩余 1 张图片，否则，请使用重置操作。
+   */
+  async ModifyPersonSample(
+    req: ModifyPersonSampleRequest,
+    cb?: (error: string, rep: ModifyPersonSampleResponse) => void
+  ): Promise<ModifyPersonSampleResponse> {
+    return this.request("ModifyPersonSample", req, cb)
+  }
+
+  /**
    * 查询转动图模板列表，支持根据条件，分页查询。
    */
   async DescribeAnimatedGraphicsTemplates(
@@ -2559,13 +2585,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据图像异步处理模板唯一标识，获取图像异步处理模板详情列表。返回结果包含符合条件的所有用户自定义图像异步处理模板。
+   * 查询 AIGC API Token 列表。创建或删除后数据同步有延时，约30秒后可查询最新数据。
    */
-  async DescribeProcessImageAsyncTemplates(
-    req: DescribeProcessImageAsyncTemplatesRequest,
-    cb?: (error: string, rep: DescribeProcessImageAsyncTemplatesResponse) => void
-  ): Promise<DescribeProcessImageAsyncTemplatesResponse> {
-    return this.request("DescribeProcessImageAsyncTemplates", req, cb)
+  async DescribeAigcApiTokens(
+    req: DescribeAigcApiTokensRequest,
+    cb?: (error: string, rep: DescribeAigcApiTokensResponse) => void
+  ): Promise<DescribeAigcApiTokensResponse> {
+    return this.request("DescribeAigcApiTokens", req, cb)
   }
 
   /**
@@ -2593,13 +2619,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于修改应用信息，但不允许修改默认应用信息。
+   * 该接口用于获取 AIGC 人脸信息。注意，调用本接口会产生人脸识别费用，请参考[计费文档](https://cloud.tencent.com/document/product/266/95125#96b3b59a-f9e1-49e9-966a-bedb70a4bf12)。
    */
-  async ModifySubAppIdInfo(
-    req: ModifySubAppIdInfoRequest,
-    cb?: (error: string, rep: ModifySubAppIdInfoResponse) => void
-  ): Promise<ModifySubAppIdInfoResponse> {
-    return this.request("ModifySubAppIdInfo", req, cb)
+  async DescribeAigcFaceInfo(
+    req: DescribeAigcFaceInfoRequest,
+    cb?: (error: string, rep: DescribeAigcFaceInfoResponse) => void
+  ): Promise<DescribeAigcFaceInfoResponse> {
+    return this.request("DescribeAigcFaceInfo", req, cb)
   }
 
   /**
@@ -2736,6 +2762,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateReviewTemplateResponse) => void
   ): Promise<CreateReviewTemplateResponse> {
     return this.request("CreateReviewTemplate", req, cb)
+  }
+
+  /**
+   * 删除 AIGC API Token
+   */
+  async DeleteAigcApiToken(
+    req: DeleteAigcApiTokenRequest,
+    cb?: (error: string, rep: DeleteAigcApiTokenResponse) => void
+  ): Promise<DeleteAigcApiTokenResponse> {
+    return this.request("DeleteAigcApiToken", req, cb)
   }
 
   /**
@@ -3018,18 +3054,16 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 腾讯云点播为客户提供了媒体上传、媒体管理、媒体处理等等服务，在这些服务执行过程或执行结束时，腾讯云点播也提供各种对应的事件通知，方便开发者感知服务处理状态，并做下一步的业务操作。
-
-开发者可以通过调用本接口来实现：
-- 设置接收回调通知的类型，目前有[ HTTP 回调通知](https://cloud.tencent.com/document/product/266/33779) 和 [基于消息队列的可靠通知](https://cloud.tencent.com/document/product/266/33779) 两种类型。
-- 对于[ HTTP 回调通知](https://cloud.tencent.com/document/product/266/33779)，可设置 3.0 格式回调的地址。3.0 格式回调的说明参见 [历史格式回调](https://cloud.tencent.com/document/product/266/33796)。
-- 对具体事件服务的通知事件选择设置接收或者忽略。
+     * 该接口返回查询时间范围内客户端上传加速统计信息。
+   1. 可以查询最近365天内的客户端上传加速统计数据。
+   2. 查询时间跨度不超过90天。
+   3. 查询时间跨度超过1天的，返回以天为粒度的数据，否则，返回以5分钟为粒度的数据。
      */
-  async ModifyEventConfig(
-    req: ModifyEventConfigRequest,
-    cb?: (error: string, rep: ModifyEventConfigResponse) => void
-  ): Promise<ModifyEventConfigResponse> {
-    return this.request("ModifyEventConfig", req, cb)
+  async DescribeClientUploadAccelerationUsageData(
+    req: DescribeClientUploadAccelerationUsageDataRequest,
+    cb?: (error: string, rep: DescribeClientUploadAccelerationUsageDataResponse) => void
+  ): Promise<DescribeClientUploadAccelerationUsageDataResponse> {
+    return this.request("DescribeClientUploadAccelerationUsageData", req, cb)
   }
 
   /**
@@ -3223,14 +3257,25 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口用于删除点播加速域名。
-1、域名删除前需要先关闭所有区域的加速。
+     * 对点播中的音视频媒体发起处理任务，功能包括：
+1. 视频转码（带水印）；
+2. 视频转动图；
+3. 对视频按指定时间点截图；
+4. 对视频采样截图；
+5. 对视频截取雪碧图；
+6. 对视频截取一张图做封面；
+7. 对视频转自适应码流（并加密）；
+8. 内容审核（令人反感的信息、不安全的信息、不适宜的信息），<font color=red>不建议</font> 使用该接口发起，推荐使用 [音视频审核(ReviewAudioVideo)](https://cloud.tencent.com/document/api/266/80283) 或 [图片审核(ReviewImage)](https://cloud.tencent.com/document/api/266/73217)；
+9. 内容分析（标签、分类、封面、按帧标签），暂时不支持 HLS 格式；
+10. 内容识别（视频片头片尾、人脸、文本全文、文本关键词、语音全文、语音关键词、物体）。
+
+如使用事件通知，事件通知的类型为 [任务流状态变更](https://cloud.tencent.com/document/product/266/9636)。
      */
-  async DeleteVodDomain(
-    req: DeleteVodDomainRequest,
-    cb?: (error: string, rep: DeleteVodDomainResponse) => void
-  ): Promise<DeleteVodDomainResponse> {
-    return this.request("DeleteVodDomain", req, cb)
+  async ProcessMedia(
+    req: ProcessMediaRequest,
+    cb?: (error: string, rep: ProcessMediaResponse) => void
+  ): Promise<ProcessMediaResponse> {
+    return this.request("ProcessMedia", req, cb)
   }
 
   /**
@@ -3281,6 +3326,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDailyPlayStatFileListResponse) => void
   ): Promise<DescribeDailyPlayStatFileListResponse> {
     return this.request("DescribeDailyPlayStatFileList", req, cb)
+  }
+
+  /**
+   * 该接口用于修改应用信息，但不允许修改默认应用信息。
+   */
+  async ModifySubAppIdInfo(
+    req: ModifySubAppIdInfoRequest,
+    cb?: (error: string, rep: ModifySubAppIdInfoResponse) => void
+  ): Promise<ModifySubAppIdInfoResponse> {
+    return this.request("ModifySubAppIdInfo", req, cb)
   }
 
   /**

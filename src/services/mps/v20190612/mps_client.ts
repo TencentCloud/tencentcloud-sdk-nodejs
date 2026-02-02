@@ -401,6 +401,7 @@ import {
   DescribeGroupAttachFlowsByIdRequest,
   DescribeWorkflowsResponse,
   AsrWordsConfigureInfoForUpdate,
+  SyncDubbingRequest,
   ScheduleSmartSubtitleTaskResult,
   DeleteImageSpriteTemplateResponse,
   DescribeContentReviewTemplatesResponse,
@@ -684,6 +685,7 @@ import {
   BeautyEffectItemConfig,
   AiRecognitionTaskTransTextResultOutput,
   SmartSubtitlesResult,
+  SyncDubbingResponse,
   ModifySnapshotByTimeOffsetTemplateRequest,
   AsrHotWordsConfigure,
   ImageAreaBoxInfo,
@@ -2080,6 +2082,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeImageSpriteTemplatesResponse) => void
   ): Promise<DescribeImageSpriteTemplatesResponse> {
     return this.request("DescribeImageSpriteTemplates", req, cb)
+  }
+
+  /**
+     * # 同步配音接口
+## 音色克隆
+## 语音合成
+     */
+  async SyncDubbing(
+    req: SyncDubbingRequest,
+    cb?: (error: string, rep: SyncDubbingResponse) => void
+  ): Promise<SyncDubbingResponse> {
+    return this.request("SyncDubbing", req, cb)
   }
 
   /**

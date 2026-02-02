@@ -1158,6 +1158,16 @@ it("mps.v20190612.DescribeImageSpriteTemplates", async function () {
     }
 })
 
+it("mps.v20190612.SyncDubbing", async function () {
+    try {
+       const data = await client.SyncDubbing({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DescribeWatermarkTemplates", async function () {
     try {
        const data = await client.DescribeWatermarkTemplates({})
