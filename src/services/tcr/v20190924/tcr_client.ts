@@ -28,6 +28,7 @@ import {
   DescribeReplicationInstanceCreateTasksResponse,
   WebhookTriggerLog,
   AccessVpc,
+  DescribeInternalEndpointsRequest,
   ModifyTagRetentionRuleRequest,
   ReplicationPolicyInfo,
   ManageExternalEndpointRequest,
@@ -36,6 +37,7 @@ import {
   DescribeInstanceCustomizedDomainResponse,
   TerminateGCJobResponse,
   TriggerInvokePara,
+  GCParameters,
   TriggerLogResp,
   DownloadHelmChartRequest,
   DuplicateImagePersonalRequest,
@@ -60,6 +62,7 @@ import {
   DeleteInstanceTokenResponse,
   DescribeInstancesResponse,
   CreateReplicationInstanceRequest,
+  ValidateRepositoryExistPersonalRequest,
   ModifyInstanceTokenResponse,
   DescribeApplicationTriggerLogPersonalResponse,
   FavorResp,
@@ -79,7 +82,7 @@ import {
   DeleteRepositoryResponse,
   DeleteImagePersonalResponse,
   DescribeWebhookTriggerLogResponse,
-  DownloadHelmChartResponse,
+  CreateGCJobRequest,
   ManageReplicationRequest,
   DeleteWebhookTriggerResponse,
   DeleteImageLifecycleGlobalPersonalResponse,
@@ -138,7 +141,7 @@ import {
   CreateUserPersonalRequest,
   DeleteServiceAccountResponse,
   ModifyNamespaceResponse,
-  ValidateRepositoryExistPersonalRequest,
+  DownloadHelmChartResponse,
   ModifyUserPasswordPersonalResponse,
   TcrNamespaceInfo,
   DescribeImagesResponse,
@@ -266,7 +269,7 @@ import {
   DescribeSecurityPoliciesRequest,
   ModifyInstanceResponse,
   ReplicationRegistry,
-  DescribeInternalEndpointsRequest,
+  CreateGCJobResponse,
   ValidateNamespaceExistPersonalResponse,
   CheckInstanceRequest,
   DescribeApplicationTriggerPersonalResp,
@@ -594,6 +597,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTagRetentionRuleResponse) => void
   ): Promise<CreateTagRetentionRuleResponse> {
     return this.request("CreateTagRetentionRule", req, cb)
+  }
+
+  /**
+   * 创建 GC 作业
+   */
+  async CreateGCJob(
+    req: CreateGCJobRequest,
+    cb?: (error: string, rep: CreateGCJobResponse) => void
+  ): Promise<CreateGCJobResponse> {
+    return this.request("CreateGCJob", req, cb)
   }
 
   /**

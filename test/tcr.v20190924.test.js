@@ -288,6 +288,16 @@ it("tcr.v20190924.CreateTagRetentionRule", async function () {
     }
 })
 
+it("tcr.v20190924.CreateGCJob", async function () {
+    try {
+       const data = await client.CreateGCJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DeleteImageLifecycleGlobalPersonal", async function () {
     try {
        const data = await client.DeleteImageLifecycleGlobalPersonal({})

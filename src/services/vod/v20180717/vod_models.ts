@@ -306,19 +306,37 @@ export interface DescribeFileAttributesTask {
 }
 
 /**
- * 视频画面质量评价的控制参数。
+ * ExtractBlindWatermark请求参数结构体
  */
-export interface QualityEvaluationConfigureInfo {
+export interface ExtractBlindWatermarkRequest {
   /**
-   * 视频画面质量评价检测开关，可选值：
-<li>ON：开启；</li>
-<li>OFF：关闭。</li>
+   * 数字水印类型，可选值：<li>blind-basic：基础版权数字水印；</li><li>blind-trace：溯源ab序列水印；</li>
    */
-  Switch: string
+  Type: string
   /**
-   * 视频画面质量评价过滤阈值，结果只返回低于该值的时间段，默认值为 60。
+   * 媒体处理的文件输入信息。
    */
-  Score?: number
+  InputInfo: ExtractBlindWatermarkInputInfo
+  /**
+   * 添加水印时的点播应用 ID。注意不管是传入FILEID还是URL，都必须与添加水印时的SubAppId吻合才能提取到水印。
+   */
+  SubAppId: number
+  /**
+   * 提取数字水印任务配置
+   */
+  ExtractBlindWatermarkConfig?: ExtractBlindWatermarkTaskConfig
+  /**
+   * 标识来源上下文，用于透传用户请求信息，在 ExtractBlindWatermarkComplete 回调和任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+  /**
+   * 用于任务去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+   */
+  TasksPriority?: number
 }
 
 /**
@@ -948,6 +966,20 @@ export interface AiReviewProhibitedOcrTaskOutput {
    * Ocr 文字有涉违禁嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   SegmentSetFileUrlExpireTime?: string
+}
+
+/**
+ * DescribeAigcFaceInfo请求参数结构体
+ */
+export interface DescribeAigcFaceInfoRequest {
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId: number
+  /**
+   * 需要获取人脸信息的输入视频信息，最多包含一个文件。
+   */
+  FileInfos?: Array<AigcFaceInputFileInfo>
 }
 
 /**
@@ -3818,6 +3850,22 @@ export interface MPSOutputFile {
 }
 
 /**
+ * 视频画面质量评价的控制参数。
+ */
+export interface QualityEvaluationConfigureInfo {
+  /**
+   * 视频画面质量评价检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch: string
+  /**
+   * 视频画面质量评价过滤阈值，结果只返回低于该值的时间段，默认值为 60。
+   */
+  Score?: number
+}
+
+/**
  * CreatePersonSample请求参数结构体
  */
 export interface CreatePersonSampleRequest {
@@ -4712,6 +4760,32 @@ export interface ImageBlur {
    * 正态分布的标准差，必须大于0。当 Type 取值为 Gaussian 时此字段有效。
    */
   Sigma?: number
+}
+
+/**
+ * CreateBlindWatermarkTemplate请求参数结构体
+ */
+export interface CreateBlindWatermarkTemplateRequest {
+  /**
+   * 数字水印类型，可选值：<li>blind-basic：基础版权数字水印；</li><li>blind-nagra：NAGRA水印；</li>
+   */
+  Type: string
+  /**
+   * 数字水印文字内容，长度不超过64个字符，NAGRA水印类型的模板创建后不支持修改文字内容。
+   */
+  TextContent: string
+  /**
+   * 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。
+   */
+  SubAppId?: number
+  /**
+   * 数字水印模板名称，支持中文、英文、数字、_、-和. 六种格式，长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 数字水印模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
 }
 
 /**
@@ -7461,6 +7535,34 @@ export interface RebuildMediaTargetAudioStream {
 }
 
 /**
+ * DescribeBlindWatermarkTemplates请求参数结构体
+ */
+export interface DescribeBlindWatermarkTemplatesRequest {
+  /**
+   * 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。
+   */
+  SubAppId?: number
+  /**
+   * 数字水印模板唯一标识过滤条件，数组长度限制：100。
+   */
+  Definitions?: Array<number | bigint>
+  /**
+   * 数字水印类型，可选值：<li>blind-basic：基础版权数字水印；</li><li>blind-nagra：Nagra取证水印；</li>
+   */
+  Type?: string
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数
+<li>默认值：10；</li>
+<li>最大值：100。</li>
+   */
+  Limit?: number
+}
+
+/**
  * 视频拼接源文件信息（2017 版）
  */
 export interface ConcatFileInfo2017 {
@@ -7743,19 +7845,36 @@ export interface ForbidMediaDistributionResponse {
 }
 
 /**
- * 用于描述一个时间段的通用数据类型。
+ * 智能精彩片段结果信息
  */
-export interface TimeRange {
+export interface AiAnalysisTaskHighlightOutput {
   /**
-   * <li>大于等于此时间（起始时间）。</li>
-<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。</li>
+   * 视频智能精彩片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 HighlightSetFileUrl 对应的文件中获取。
    */
-  After?: string
+  HighlightSet: Array<MediaAiAnalysisHighlightItem>
   /**
-   * <li>小于此时间（结束时间）。</li>
-<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。</li>
+   * 视频智能精彩片段列表文件 URL。文件的内容为 JSON，数据结构与 HighlightSet 字段一致。 （文件不会永久存储，到达 HighlightSetFileUrlExpireTime 时间点后文件将被删除）。
    */
-  Before?: string
+  HighlightSetFileUrl: string
+  /**
+   * 视频智能精彩片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  HighlightSetFileUrlExpireTime: string
+}
+
+/**
+ * ExtractBlindWatermark返回参数结构体
+ */
+export interface ExtractBlindWatermarkResponse {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8051,6 +8170,16 @@ export interface CreateContentReviewTemplateResponse {
    * 音视频内容审核模板唯一标识。
    */
   Definition?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyBlindWatermarkTemplate返回参数结构体
+ */
+export interface ModifyBlindWatermarkTemplateResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9516,22 +9645,13 @@ export interface MosaicConfigureInfo {
 }
 
 /**
- * 智能精彩片段结果信息
+ * DeleteBlindWatermarkTemplate返回参数结构体
  */
-export interface AiAnalysisTaskHighlightOutput {
+export interface DeleteBlindWatermarkTemplateResponse {
   /**
-   * 视频智能精彩片段列表。
-<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 HighlightSetFileUrl 对应的文件中获取。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  HighlightSet: Array<MediaAiAnalysisHighlightItem>
-  /**
-   * 视频智能精彩片段列表文件 URL。文件的内容为 JSON，数据结构与 HighlightSet 字段一致。 （文件不会永久存储，到达 HighlightSetFileUrlExpireTime 时间点后文件将被删除）。
-   */
-  HighlightSetFileUrl: string
-  /**
-   * 视频智能精彩片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  HighlightSetFileUrlExpireTime: string
+  RequestId?: string
 }
 
 /**
@@ -9852,6 +9972,20 @@ export interface ModifyReviewTemplateRequest {
 注意：不填表示不更新。
    */
   Labels?: Array<string>
+}
+
+/**
+ * CreateBlindWatermarkTemplate返回参数结构体
+ */
+export interface CreateBlindWatermarkTemplateResponse {
+  /**
+   * 数字水印模板唯一标识。
+   */
+  Definition?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10332,36 +10466,29 @@ export interface AudioVolumeBalanceInfo {
 }
 
 /**
- * ModifyEventConfig请求参数结构体
+ * ModifyBlindWatermarkTemplate请求参数结构体
  */
-export interface ModifyEventConfigRequest {
+export interface ModifyBlindWatermarkTemplateRequest {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * 数字水印模板唯一标识。
+   */
+  Definition: number
+  /**
+   * 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。
    */
   SubAppId?: number
   /**
-   * 接收事件通知的方式。
-<li>PUSH：[HTTP 回调通知](https://cloud.tencent.com/document/product/266/33779)；</li>
-<li>PULL：[基于消息队列的可靠通知](https://cloud.tencent.com/document/product/266/33779)。</li>
+   * 数字水印模板名称，支持 中文、英文、数字、_、-和. 六种格式，长度限制：64 个字符。
    */
-  Mode?: string
+  Name?: string
   /**
-   * 采用 [HTTP 回调通知](https://cloud.tencent.com/document/product/266/33779) 接收方式时，用于接收 3.0 格式回调的地址。
-注意：如果带 NotificationUrl  参数且值为空字符串时将会清空 3.0 格式回调地址。
+   * 数字水印模板描述信息，长度限制：256 个字符。
    */
-  NotificationUrl?: string
+  Comment?: string
   /**
-   * 是否接收 [视频上传完成](https://cloud.tencent.com/document/product/266/7830) 事件通知， 默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。
+   * 数字水印文字内容，长度不超过64个字符，NAGRA水印类型的模板不支持修改文字内容。
    */
-  UploadMediaCompleteEventSwitch?: string
-  /**
-   * 是否接收 [视频删除完成](https://cloud.tencent.com/document/product/266/13434) 事件通知，  默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。
-   */
-  DeleteMediaCompleteEventSwitch?: string
-  /**
-   * 是否接收剪辑固化完成事件通知，  默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。
-   */
-  PersistenceCompleteEventSwitch?: string
+  TextContent?: string
 }
 
 /**
@@ -11672,13 +11799,37 @@ export interface DescribeMPSTemplatesRequest {
 }
 
 /**
- * DescribeCLSLogsets请求参数结构体
+ * 数字水印模板详情
  */
-export interface DescribeCLSLogsetsRequest {
+export interface BlindWatermarkTemplate {
   /**
-   * 日志集所属的地域，取值有： <li>ap-guangzhou：广州；</li> <li>ap-beijing：北京；</li> <li>ap-chengdu：成都；</li> <li>ap-chongqing：重庆；</li> <li>ap-nanjing：南京；</li> <li>ap-shanghai：上海；</li> <li>ap-singapore：新加坡。</li>
+   * 数字水印模板唯一标识。
    */
-  CLSRegion: string
+  Definition?: number
+  /**
+   * 数字水印类型，可选值：<li>blind-basic：基础版权数字水印；</li><li>blind-nagra：NAGRA取证水印；</li>
+   */
+  Type?: string
+  /**
+   * 数字水印模板名称。
+   */
+  Name?: string
+  /**
+   * 数字水印模板文本内容，长度不超过64个字符。
+   */
+  TextContent?: string
+  /**
+   * 数字水印模板描述信息。
+   */
+  Comment?: string
+  /**
+   * 数字水印模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  CreateTime?: string
+  /**
+   * 数字水印模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -12992,6 +13143,20 @@ export interface ModifySubAppIdStatusRequest {
 }
 
 /**
+ * DeleteBlindWatermarkTemplate请求参数结构体
+ */
+export interface DeleteBlindWatermarkTemplateRequest {
+  /**
+   * 数字水印模板唯一标识。
+   */
+  Definition: number
+  /**
+   * 点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。
+   */
+  SubAppId?: number
+}
+
+/**
  * CreateSubAppId返回参数结构体
  */
 export interface CreateSubAppIdResponse {
@@ -13284,6 +13449,39 @@ export interface ReduceMediaBitrateAdaptiveDynamicStreamingResult {
 }
 
 /**
+ * ModifyEventConfig请求参数结构体
+ */
+export interface ModifyEventConfigRequest {
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 接收事件通知的方式。
+<li>PUSH：[HTTP 回调通知](https://cloud.tencent.com/document/product/266/33779)；</li>
+<li>PULL：[基于消息队列的可靠通知](https://cloud.tencent.com/document/product/266/33779)。</li>
+   */
+  Mode?: string
+  /**
+   * 采用 [HTTP 回调通知](https://cloud.tencent.com/document/product/266/33779) 接收方式时，用于接收 3.0 格式回调的地址。
+注意：如果带 NotificationUrl  参数且值为空字符串时将会清空 3.0 格式回调地址。
+   */
+  NotificationUrl?: string
+  /**
+   * 是否接收 [视频上传完成](https://cloud.tencent.com/document/product/266/7830) 事件通知， 默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。
+   */
+  UploadMediaCompleteEventSwitch?: string
+  /**
+   * 是否接收 [视频删除完成](https://cloud.tencent.com/document/product/266/13434) 事件通知，  默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。
+   */
+  DeleteMediaCompleteEventSwitch?: string
+  /**
+   * 是否接收剪辑固化完成事件通知，  默认 "OFF" 为忽略该事件通知，"ON" 为接收事件通知。
+   */
+  PersistenceCompleteEventSwitch?: string
+}
+
+/**
  * 媒体处理任务中的数字水印参数类型
  */
 export interface BlindWatermarkInput {
@@ -13291,6 +13489,24 @@ export interface BlindWatermarkInput {
    * 数字水印模板ID
    */
   Definition: number
+}
+
+/**
+ * DescribeBlindWatermarkTemplates返回参数结构体
+ */
+export interface DescribeBlindWatermarkTemplatesResponse {
+  /**
+   * 符合过滤条件的记录总数。
+   */
+  TotalCount?: number
+  /**
+   * 数字水印模板详情列表。
+   */
+  BlindWatermarkTemplateSet?: Array<BlindWatermarkTemplate>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -17903,17 +18119,19 @@ export interface SearchMediaBySemanticsResponse {
 }
 
 /**
- * DescribeAigcFaceInfo请求参数结构体
+ * AI 样本管理，关键词输入信息。
  */
-export interface DescribeAigcFaceInfoRequest {
+export interface AiSampleWordInfo {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * 关键词，长度限制：20 个字符。
    */
-  SubAppId: number
+  Keyword: string
   /**
-   * 需要获取人脸信息的输入视频信息，最多包含一个文件。
+   * 关键词标签
+<li>数组长度限制：20 个标签；</li>
+<li>单个标签长度限制：128 个字符。</li>
    */
-  FileInfos?: Array<AigcFaceInputFileInfo>
+  Tags?: Array<string>
 }
 
 /**
@@ -17960,6 +18178,10 @@ export interface AdaptiveDynamicStreamingInfoItem {
    * 版权信息。
    */
   CopyRightWatermarkText?: string
+  /**
+   * 数字水印模板id。
+   */
+  BlindWatermarkDefinition?: number
   /**
    * 字幕信息列表。
    */
@@ -19284,6 +19506,16 @@ export interface AiRecognitionTaskOcrFullTextResultInput {
    * 文本全文识别模板 ID。
    */
   Definition?: number
+}
+
+/**
+ * DescribeCLSLogsets请求参数结构体
+ */
+export interface DescribeCLSLogsetsRequest {
+  /**
+   * 日志集所属的地域，取值有： <li>ap-guangzhou：广州；</li> <li>ap-beijing：北京；</li> <li>ap-chengdu：成都；</li> <li>ap-chongqing：重庆；</li> <li>ap-nanjing：南京；</li> <li>ap-shanghai：上海；</li> <li>ap-singapore：新加坡。</li>
+   */
+  CLSRegion: string
 }
 
 /**
@@ -21887,6 +22119,10 @@ export interface MediaTranscodeItem {
    * 版权信息。
    */
   CopyRightWatermarkText?: string
+  /**
+   * 数字水印模板id。
+   */
+  BlindWatermarkDefinition?: number
 }
 
 /**
@@ -22695,6 +22931,22 @@ export interface AudioVolumeParam {
 默认是0。
    */
   Gain?: number
+}
+
+/**
+ * 用于描述一个时间段的通用数据类型。
+ */
+export interface TimeRange {
+  /**
+   * <li>大于等于此时间（起始时间）。</li>
+<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。</li>
+   */
+  After?: string
+  /**
+   * <li>小于此时间（结束时间）。</li>
+<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。</li>
+   */
+  Before?: string
 }
 
 /**
@@ -23552,22 +23804,6 @@ export interface PullUploadTask {
    * 拉取上传进度，取值范围 [0-100] 。
    */
   Progress?: number
-}
-
-/**
- * AI 样本管理，关键词输入信息。
- */
-export interface AiSampleWordInfo {
-  /**
-   * 关键词，长度限制：20 个字符。
-   */
-  Keyword: string
-  /**
-   * 关键词标签
-<li>数组长度限制：20 个标签；</li>
-<li>单个标签长度限制：128 个字符。</li>
-   */
-  Tags?: Array<string>
 }
 
 /**

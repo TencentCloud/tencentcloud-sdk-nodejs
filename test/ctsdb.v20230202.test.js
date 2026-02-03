@@ -28,6 +28,16 @@ it("ctsdb.v20230202.DescribeClusters", async function () {
     }
 })
 
+it("ctsdb.v20230202.DescribeClusterDetail", async function () {
+    try {
+       const data = await client.DescribeClusterDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ctsdb.v20230202.DescribeDatabases", async function () {
     try {
        const data = await client.DescribeDatabases({})

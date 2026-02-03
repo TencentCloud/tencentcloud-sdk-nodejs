@@ -118,6 +118,20 @@ export interface RestartLogstashInstanceRequest {
 }
 
 /**
+ * updateInstance使用的额外的EsConfig和JvmHeapConfig
+ */
+export interface OtherConfig {
+  /**
+   * es的yml额外配置
+   */
+  EsConfig?: string
+  /**
+   * es的jvm heap config
+   */
+  JvmHeapConfig?: string
+}
+
+/**
  * DescribeInstanceOperations请求参数结构体
  */
 export interface DescribeInstanceOperationsRequest {
@@ -3084,6 +3098,10 @@ export interface CreateClusterSnapshotRequest {
    * 跨地域备份地域名称 ap-guangzhou
    */
   RemoteCosRegion?: string
+  /**
+   * cos多AZ备份 0 单AZ; 1 多AZ
+   */
+  MultiAz?: number
 }
 
 /**
@@ -3477,6 +3495,10 @@ export interface CosBackup {
    * 备份索引列表，如果不填表示备份所有索引
    */
   Indices?: string
+  /**
+   * cos多AZ备份 0 单AZ; 1 多AZ
+   */
+  MultiAz?: number
   /**
    * 策略创建时间
    */
@@ -5034,6 +5056,11 @@ SUCCESS     备份成功
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StrategyName?: string
+  /**
+   * cos多AZ备份 0 单AZ; 1 多AZ
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MultiAz?: number
 }
 
 /**
@@ -5875,6 +5902,10 @@ CLOSE 关闭
    * 自动扩盘删除参数
    */
   AutoScaleDiskDeleteNodeTypeList?: Array<string>
+  /**
+   * 其他附加配置，jvm或者yml
+   */
+  OtherConfig?: OtherConfig
 }
 
 /**

@@ -1085,6 +1085,10 @@ export interface ApmAppConfig {
    * spanId的索引key: 当CLS索引类型为键值索引时生效
    */
   LogSpanIdKey?: string
+  /**
+   * 自动性能剖析配置
+   */
+  AutoProfilingConfig?: AutoProfilingConfig
 }
 
 /**
@@ -1897,6 +1901,36 @@ export interface DescribeGeneralOTSpanListRequest {
 }
 
 /**
+ * 自动性能剖析配置
+ */
+export interface AutoProfilingConfig {
+  /**
+   * 自动CPU剖析任务开关
+   */
+  CpuProfilingEnable?: boolean
+  /**
+   * 自动内存剖析任务开关
+   */
+  MemoryProfilingEnable?: boolean
+  /**
+   * 自动CPU剖析任务阈值
+   */
+  CpuProfilingThreshold?: number
+  /**
+   * 自动内存剖析任务阈值
+   */
+  MemoryProfilingThreshold?: number
+  /**
+   * CPU自动剖析任务时长
+   */
+  CpuProfilingDuration?: number
+  /**
+   * 内存自动剖析任务时长
+   */
+  MemoryProfilingDuration?: number
+}
+
+/**
  * DescribeGeneralApmApplicationConfig返回参数结构体
  */
 export interface DescribeGeneralApmApplicationConfigResponse {
@@ -2681,6 +2715,10 @@ export interface ApmApplicationConfigView {
    * 脱敏规则
    */
   DesensitizationRule?: string
+  /**
+   * 自动性能剖析任务配置
+   */
+  AutoProfilingConfig?: AutoProfilingConfig
 }
 
 /**
@@ -3026,6 +3064,10 @@ export interface ModifyApmApplicationConfigRequest {
    * spanId的索引key: 当CLS索引类型为键值索引时生效
    */
   LogSpanIdKey?: string
+  /**
+   * 自动性能剖析任务配置
+   */
+  AutoProfilingConfig?: AutoProfilingConfig
 }
 
 /**

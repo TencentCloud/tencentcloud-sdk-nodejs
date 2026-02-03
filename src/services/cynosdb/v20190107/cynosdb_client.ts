@@ -18,19 +18,23 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  OfflineLibraDBClusterRequest,
   DeleteClusterSaveBackupResponse,
+  ModifyLibraDBClusterDataSourceResponse,
   UpgradeProxyVersionResponse,
   DescribeInstanceCLSLogDeliveryResponse,
+  LibraInstanceSet,
   ModifyMaintainPeriodConfigRequest,
   BizTaskModifyInstanceParam,
   ModifyClusterReadOnlyResponse,
   ModifyClusterStorageRequest,
   DescribeResourcePackageDetailResponse,
+  ModifyLibraDBClusterDataSourceRequest,
   UpgradeInstanceRequest,
   SearchClusterTablesRequest,
   DescribeMaintainPeriodRequest,
   AccountParam,
-  DescribeProjectSecurityGroupsResponse,
+  ModifyBackupDownloadRestrictionResponse,
   DescribeClusterDatabaseTablesRequest,
   DescribeClusterParamsResponse,
   RefundResourcePackageResponse,
@@ -40,12 +44,14 @@ import {
   DescribeSlaveZonesResponse,
   DescribeProxiesResponse,
   DescribeClusterDetailDatabasesRequest,
+  DescribeLibraDBClustersResponse,
   InquirePriceMultiSpecRequest,
   RollbackRoGroupInfo,
   CreateClustersResponse,
   CynosdbInstanceGrp,
   ModifyInstanceParamRequest,
   ModifyInstanceUpgradeLimitDaysResponse,
+  CreateLibraDBClustersResponse,
   DatabaseTables,
   UserHostPrivilege,
   StopCLSDeliveryRequest,
@@ -59,9 +65,11 @@ import {
   DescribeClusterDetailRequest,
   ModifyResourcePackageNameRequest,
   UpgradeProxy,
+  OpenWanResponse,
   BackupFileInfo,
   UpgradeProxyRequest,
   DescribeBinlogDownloadUrlResponse,
+  DescribeLibraDBInstanceSpecsResponse,
   SwitchClusterVpcRequest,
   CloseProxyRequest,
   CloseSSLRequest,
@@ -69,6 +77,8 @@ import {
   DescribeClusterPasswordComplexityResponse,
   DescribeAuditRuleWithInstanceIdsRequest,
   DescribeClusterDatabasesResponse,
+  ModifyLibraDBClusterNameRequest,
+  ResetLibraDBClusterAccountPasswordResponse,
   ModifyInstanceData,
   DescribeInstanceParamsRequest,
   ModifyBinlogSaveDaysRequest,
@@ -77,6 +87,7 @@ import {
   DescribeSaveBackupClustersResponse,
   BackupLimitClusterRestriction,
   SlowQueriesItem,
+  ModifyLibraDBClusterAccountHostResponse,
   DescribeIntegrateTaskRequest,
   PolicyRule,
   ProxyGroupInfo,
@@ -92,6 +103,7 @@ import {
   UpgradeProxyResponse,
   DescribeClusterReadOnlyResponse,
   DescribeInstanceSpecsRequest,
+  ModifyMaintainPeriodConfigResponse,
   DescribeProxyNodesResponse,
   CreateIntegrateClusterRequest,
   ProxyNodeInfo,
@@ -108,28 +120,37 @@ import {
   InquirePriceCreateResponse,
   DescribeClusterReadOnlyRequest,
   DescribeIntegrateTaskResponse,
+  CreateLibraDBClustersRequest,
   CreateClustersRequest,
+  DescribeLibraDBInstanceSpecsRequest,
   DescribeClusterParamLogsRequest,
   CloseProxyResponse,
   DescribeResourcePackageSaleSpecRequest,
   UnbindClusterResourcePackagesResponse,
+  DownloadLibraDBClusterListResponse,
   RollBackClusterResponse,
   OpenSSLRequest,
+  UpgradeProxyVersionRequest,
   DescribeClusterInstanceGrpsResponse,
   ModifyBackupConfigResponse,
   ModifyClusterDatabaseRequest,
+  MigrateObject,
   DescribeResourcePackageDetailRequest,
   InstanceCLSDeliveryInfo,
   InquirePriceMultiSpecResponse,
   DescribeRedoLogsRequest,
-  ModifyMaintainPeriodConfigResponse,
+  LibraDBClusterSrcInfo,
+  DescribeLibraDBInstanceDetailRequest,
+  DescribeLibraDBClusterAccountAllPrivilegesRequest,
   DisassociateSecurityGroupsRequest,
   ModifyBackupNameRequest,
+  ModifyLibraDBClusterAccountPrivilegeResponse,
   AuditRuleFilters,
   DescribeClusterParamsRequest,
   ModifyAccountHostResponse,
   DescribeAccountAllGrantPrivilegesRequest,
   DeleteCLSDeliveryRequest,
+  DescribeLibraDBClusterAccountPrivilegesRequest,
   ProxyEndPointConfigInfo,
   CreateCLSDeliveryResponse,
   DescribeServerlessInstanceSpecsResponse,
@@ -137,18 +158,23 @@ import {
   DescribeBinlogsRequest,
   InquirePriceModifyResponse,
   InstanceAuditLogFilter,
+  ModifyLibraDBClusterReplicationObjectResponse,
   SlaveZoneStockInfo,
   ModifyProxyRwSplitRequest,
   DescribeResourcePackageListResponse,
+  DescribeLibraDBInstanceDetailResponse,
   ObjectTask,
   ModifyAuditRuleTemplatesRequest,
   CreateClustersData,
+  SaveBackupClusterInfo,
   DescribeProxiesRequest,
   ModifySnapBackupCrossRegionConfigRequest,
+  ForwardInstanceInfo,
   ModifyParamItem,
   AssociateSecurityGroupsRequest,
   ParamTemplateListInfo,
   CloseProxyEndPointRequest,
+  LibraDBInstanceInitInfo,
   DescribeBinlogsResponse,
   AuditInstanceInfo,
   AddClusterSlaveZoneResponse,
@@ -157,17 +183,21 @@ import {
   IsolateInstanceResponse,
   CopyClusterPasswordComplexityResponse,
   DescribeClusterTransparentEncryptInfoRequest,
+  MigrateOpt,
   GoodsSpec,
   DeleteParamTemplateRequest,
+  DescribeLibraDBClusterAutoMapRuleRequest,
   RevokeAccountPrivilegesResponse,
   DescribeRedoLogsResponse,
   ServerlessSpec,
   ModifyBackupDownloadRestrictionRequest,
   DescribeClusterDetailDatabasesResponse,
   CreateParamTemplateResponse,
+  LogFilter,
   DescribeAccountAllGrantPrivilegesResponse,
   ModifyDbVersionData,
   DatabasePrivileges,
+  DescribeLibraDBClusterTableMappingRequest,
   DescribeSupportProxyVersionRequest,
   DescribeProxySpecsRequest,
   ResumeServerlessRequest,
@@ -175,6 +205,7 @@ import {
   InstanceNetInfo,
   ModifyClusterDatabaseResponse,
   InstanceParamItem,
+  IsolateLibraDBInstanceRequest,
   DescribeDBSecurityGroupsRequest,
   RollbackData,
   UnbindClusterResourcePackagesRequest,
@@ -188,16 +219,20 @@ import {
   CreateAuditLogFileResponse,
   PauseServerlessResponse,
   DescribeInstanceDetailResponse,
+  RestartLibraDBInstanceRequest,
   DeleteAccountsResponse,
+  RenewLibraDBClustersRequest,
   CreateResourcePackageResponse,
   ModifyBinlogConfigRequest,
+  ModifyLibraDBClusterNameResponse,
+  DeleteLibraDBClusterAccountsRequest,
   SetRenewFlagResponse,
   CreateClusterDatabaseResponse,
   DescribeClustersResponse,
   DescribeBackupConfigResponse,
   DescribeParamTemplatesResponse,
   ProxyConfig,
-  SaveBackupClusterInfo,
+  CheckItem,
   Addr,
   DescribeProjectSecurityGroupsRequest,
   ServerlessZoneStockInfo,
@@ -206,28 +241,38 @@ import {
   InstanceAuditStatus,
   OpenWanRequest,
   DescribeClusterInstanceGroupsResponse,
+  CreateLibraDBClusterAccountsResponse,
+  MigrateTableItem,
   CreateProxyEndPointResponse,
   NetAddr,
   CopyClusterPasswordComplexityRequest,
   ReplayInstanceAuditLogRequest,
+  MigrateDBItem,
+  RegionInstanceSpecInfo,
   ModifyAccountPrivilegesResponse,
   InquirePriceCreateRequest,
+  ModifyLibraDBClusterAccountDescriptionRequest,
   ModifyAuditServiceRequest,
+  DescribeLibraDBClusterDetailResponse,
+  GrantAccountPrivilegesResponse,
   ModifyClusterNameResponse,
   CrossRegionBackupItem,
   ExportInstanceSlowQueriesRequest,
+  RestartLibraDBInstanceResponse,
   ParamItem,
   ResumeServerlessResponse,
   GdnTaskInfo,
   DescribeBackupDownloadUserRestrictionResponse,
   SaleZone,
+  InstanceSet,
   ModifySnapBackupCrossRegionConfigResponse,
   SwitchProxyVpcResponse,
-  StartCLSDeliveryRequest,
+  ModifyLibraDBForwardConfigResponse,
   SlaveZoneAttrItem,
   DeliverSummary,
   DescribeChangedParamsAfterUpgradeRequest,
   CLSInfo,
+  AutoMapRule,
   SwitchProxyVpcRequest,
   RestartInstanceResponse,
   DescribeBinlogSaveDaysRequest,
@@ -237,7 +282,8 @@ import {
   AddInstancesRequest,
   CynosdbInstanceDetail,
   DescribeBackupDownloadRestrictionRequest,
-  RollbackTable,
+  InputAccount,
+  ResourcePackage,
   DescribeInstanceErrorLogsRequest,
   DescribeInstanceDetailRequest,
   Package,
@@ -251,17 +297,20 @@ import {
   AuditLog,
   CreateProxyResponse,
   BizTaskModifyParamsData,
-  RollBackClusterRequest,
+  OfflineLibraDBClusterResponse,
   DescribeAuditLogFilesRequest,
   OpenClusterTransparentEncryptResponse,
   ModifyBackupConfigRequest,
   DisassociateSecurityGroupsResponse,
   DescribeClusterDatabasesRequest,
+  OfflineLibraDBInstanceResponse,
   RemoveClusterSlaveZoneRequest,
   ModifyResourcePackagesDeductionPriorityRequest,
+  OfflineLibraDBInstanceRequest,
   DescribeRollbackTimeRangeRequest,
   InquirePriceRenewRequest,
   DescribeAccountPrivilegesResponse,
+  DescribeLibraDBClusterAccountsRequest,
   ProxyInstanceWeight,
   CreateResourcePackageRequest,
   CloseProxyEndPointResponse,
@@ -278,21 +327,25 @@ import {
   CreateAccountsResponse,
   ModifyClusterGlobalEncryptionResponse,
   CloseWanResponse,
+  ModifyProxyRwSplitResponse,
   DescribeInstancesResponse,
   SalePackageSpec,
   Account,
   ModifyResourcePackagesDeductionPriorityResponse,
   CloseWanRequest,
   AuditLogFilter,
-  UpgradeProxyVersionRequest,
+  TableMappingObject,
   GoodsPrice,
   ModifyResourcePackageClustersRequest,
   RuleFilters,
   DescribeFlowResponse,
   ExportInstanceErrorLogsRequest,
+  DescribeLibraDBDataSourceRequest,
   ActivateInstanceRequest,
-  DescribeBackupDownloadRestrictionResponse,
+  ModifyAccountDescriptionRequest,
+  DescribeLibraDBClusterTableMappingResponse,
   DeleteClusterDatabaseRequest,
+  DescribeInstanceCLSLogDeliveryRequest,
   CynosdbErrorLogItem,
   ModifyVipVportRequest,
   InstanceAbility,
@@ -304,6 +357,7 @@ import {
   DeleteAuditRuleTemplatesRequest,
   ExportInstanceSlowQueriesResponse,
   SwitchClusterZoneRequest,
+  DescribeLibraDBClusterAutoMapRuleResponse,
   Ability,
   InstanceInitInfo,
   InquirePriceModifyRequest,
@@ -316,8 +370,10 @@ import {
   ModifyParamsData,
   BindInstanceInfo,
   DescribeAuditRuleWithInstanceIdsResponse,
+  SetLibraDBClusterRenewFlagResponse,
   SearchClusterDatabasesRequest,
   ModifyProxyDescResponse,
+  ReplicationObject,
   CreateIntegrateClusterResponse,
   DbTable,
   ModifyClusterSlaveZoneResponse,
@@ -327,13 +383,18 @@ import {
   ReloadBalanceProxyNodeResponse,
   CloseAuditServiceResponse,
   ModifyParamTemplateResponse,
+  ActivateLibraDBClusterResponse,
   BindClusterResourcePackagesResponse,
   LogRuleTemplateInfo,
-  ProxyZone,
+  StartCLSDeliveryRequest,
+  LibraClusterSet,
   CreateProxyRequest,
+  DeleteLibraDBClusterResponse,
   DescribeResourcePackageSaleSpecResponse,
+  UpgradeClusterVersionResponse,
   QuerySimpleFilter,
-  DescribeResourcesByDealNameRequest,
+  LibraDBClusterSet,
+  DescribeLibraDBClusterAccountPrivilegesResponse,
   DescribeAuditInstanceListRequest,
   DescribeInstanceSlowQueriesResponse,
   DescribeInstancesRequest,
@@ -341,15 +402,18 @@ import {
   DescribeBackupDownloadUrlResponse,
   TradePrice,
   DescribeBinlogConfigRequest,
+  IsolateLibraDBClusterRequest,
   CreateAuditRuleTemplateRequest,
   PauseServerlessRequest,
   CynosdbCluster,
-  OpenWanResponse,
+  DataSourceItem,
   OfflineClusterResponse,
   ClusterTaskId,
+  DeleteLibraDBClusterAccountsResponse,
   ModifyClusterGlobalEncryptionRequest,
   ModifyAccountHostRequest,
   DescribeFlowRequest,
+  DescribeLibraDBDataSourceResponse,
   DescribeClusterDatabaseTablesResponse,
   ModifyAccountPrivilegesRequest,
   CreateBackupRequest,
@@ -366,11 +430,15 @@ import {
   ModifyClusterSlaveZoneRequest,
   DescribeInstanceErrorLogsResponse,
   DescribeSupportProxyVersionResponse,
+  DescribeLibraDBForwardConfigResponse,
+  ZoneStockInfo4Libra,
   DeleteClusterDatabaseResponse,
   CynosdbClusterDetail,
+  ActivateLibraDBInstanceResponse,
   RestartInstanceRequest,
   PackageDetail,
   BackupLimitVpcItem,
+  DescribeLibraDBClusterAccountsResponse,
   BinlogConfigInfo,
   DescribeAccountPrivilegesRequest,
   ModifyAccountParamsResponse,
@@ -380,19 +448,24 @@ import {
   DescribeClusterDetailResponse,
   DescribeInstanceSlowQueriesRequest,
   ModifyResourcePackageClustersResponse,
-  InputAccount,
+  LibraDBClusterDetail,
   DescribeSaveBackupClustersRequest,
+  DescribeLibraDBClusterAccountAllPrivilegesResponse,
+  RollBackClusterRequest,
   ProxyConfigInfo,
   ModifyClusterNameRequest,
   InstanceAuditRule,
+  DescribeLibraDBClusterDetailRequest,
   ExchangeRoGroupInfo,
+  IsolateLibraDBInstanceResponse,
   RefundResourcePackageRequest,
   DescribeBinlogDownloadUrlRequest,
   ModifyInstanceNameRequest,
   RollbackInstanceInfo,
-  UpgradeClusterVersionResponse,
+  ModifyLibraDBClusterAccountPrivilegeRequest,
   DescribeDBSecurityGroupsResponse,
   DeleteParamTemplateResponse,
+  DownloadLibraDBClusterListRequest,
   ClusterInstanceDetail,
   ClusterSlaveData,
   OldAddrInfo,
@@ -401,29 +474,38 @@ import {
   DescribeAuditLogsResponse,
   PackagePriority,
   DescribeInstancesWithinSameClusterRequest,
-  CynosdbInstanceGroup,
+  ModifyBinlogConfigResponse,
   ModifyAccountDescriptionResponse,
   SetRenewFlagRequest,
   DescribeServerlessInstanceSpecsRequest,
+  ActivateLibraDBClusterRequest,
   ProxyGroup,
+  DescribeLibraDBSlowLogsRequest,
   AddClusterSlaveZoneRequest,
+  CheckCreateLibraDBInstanceRequest,
   RollbackDatabase,
+  DeleteLibraDBClusterRequest,
   DescribeTasksRequest,
   ModifyClusterStorageResponse,
   ModifyInstanceUpgradeLimitDaysRequest,
+  ModifyLibraDBClusterAccountHostRequest,
   CloseClusterPasswordComplexityRequest,
+  ModifyLibraDBClusterAccountDescriptionResponse,
   DescribeIsolatedInstancesRequest,
   ModifyAccountParamsRequest,
-  ReplayInstanceAuditLogResponse,
+  CheckCreateLibraDBInstanceResponse,
   AuditLogFile,
   DescribeAuditRuleTemplatesResponse,
   LogicBackupConfigInfo,
+  ProxyZone,
+  RoAddr,
   IntegrateCreateClusterConfig,
   DeleteBackupResponse,
-  ModifyBackupDownloadRestrictionResponse,
+  DescribeProjectSecurityGroupsResponse,
   ParamDetail,
   OfflineClusterRequest,
   ResetAccountPasswordResponse,
+  CreateLibraDBClusterAccountsRequest,
   DescribeClusterInstanceGroupsRequest,
   OpenAuditServiceRequest,
   ModifyResourcePackageNameResponse,
@@ -431,38 +513,49 @@ import {
   IntegrateInstanceInfo,
   SwitchClusterLogBin,
   ExportInstanceErrorLogsResponse,
+  DescribeLibraDBClustersRequest,
+  LibraDBNodeInfo,
   ParamItemDetail,
   GrantAccountPrivilegesRequest,
   IsolateClusterResponse,
   RenewClustersResponse,
+  ModifyLibraDBForwardConfigRequest,
   BackupConfigInfo,
   RollbackTableInfo,
   RollbackProcessInfo,
   ModifyVipVportResponse,
   ModifyDBInstanceSecurityGroupsRequest,
   CloseAuditServiceRequest,
+  ModifyLibraDBClusterReplicationObjectRequest,
   ModifyClusterPasswordComplexityResponse,
   UpgradeClusterVersionRequest,
   AuditInstanceFilters,
   ParamInfo,
   ModifyClusterParamResponse,
   SecurityGroup,
+  SetLibraDBClusterRenewFlagRequest,
   ModifyClusterPasswordComplexityRequest,
   BackupLimitRestriction,
+  DescribeLibraDBVersionRequest,
   ModifyInstanceParamResponse,
+  LibraDBVersion,
   TaskProgressInfo,
+  ResetLibraDBClusterAccountPasswordRequest,
   TemplateParamInfo,
   CreateBackupResponse,
+  DescribeLibraDBVersionResponse,
   DescribeInstancesWithinSameClusterResponse,
   RollbackToNewClusterResponse,
-  ResourcePackage,
+  DescribeResourcesByDealNameRequest,
   DeleteClusterSaveBackupRequest,
   DescribeSlaveZonesRequest,
+  RenewLibraDBClustersResponse,
   BillingResourceInfo,
-  ModifyProxyRwSplitResponse,
-  ModifyAccountDescriptionRequest,
-  DescribeInstanceCLSLogDeliveryRequest,
+  InstanceNameWeight,
+  DescribeBackupDownloadRestrictionResponse,
+  DescribeLibraDBForwardConfigRequest,
   UpgradeInstanceResponse,
+  IsolateLibraDBClusterResponse,
   CreateAuditRuleTemplateResponse,
   DescribeResourcePackageListRequest,
   CloseSSLResponse,
@@ -475,25 +568,29 @@ import {
   ModifyServerlessStrategyRequest,
   DescribeBinlogConfigResponse,
   Module,
+  RollbackTable,
   SaleRegion,
   DescribeSSLStatusRequest,
   ProxyVersionInfo,
   DeleteAuditLogFileRequest,
   DescribeIsolatedInstancesResponse,
-  GrantAccountPrivilegesResponse,
+  DescribeLibraDBSlowLogsResponse,
   ClusterParamModifyLog,
-  ModifyBinlogConfigResponse,
-  InstanceNameWeight,
+  CynosdbInstanceGroup,
+  ActivateLibraDBInstanceRequest,
   ResetAccountPasswordRequest,
   ModifiableInfo,
   TaskMaintainInfo,
   DescribeServerlessStrategyRequest,
   TablePrivileges,
+  ReplayInstanceAuditLogResponse,
   DescribeBinlogSaveDaysResponse,
+  ModifyLibraDBClusterProjectRequest,
   DeleteBackupRequest,
   ErrorLogItemExport,
   DescribeParamTemplateDetailResponse,
   ModifyBinlogSaveDaysResponse,
+  ModifyLibraDBClusterProjectResponse,
   DeleteAuditRuleTemplatesResponse,
   ClusterReadOnlyValue,
   ZoneStockInfo,
@@ -542,13 +639,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 回放实例审计日志
+   * 本接口(ModifyAccountDescription)用于修改数据库账号描述信息。
    */
-  async ReplayInstanceAuditLog(
-    req: ReplayInstanceAuditLogRequest,
-    cb?: (error: string, rep: ReplayInstanceAuditLogResponse) => void
-  ): Promise<ReplayInstanceAuditLogResponse> {
-    return this.request("ReplayInstanceAuditLog", req, cb)
+  async ModifyAccountDescription(
+    req: ModifyAccountDescriptionRequest,
+    cb?: (error: string, rep: ModifyAccountDescriptionResponse) => void
+  ): Promise<ModifyAccountDescriptionResponse> {
+    return this.request("ModifyAccountDescription", req, cb)
   }
 
   /**
@@ -562,13 +659,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ResumeServerless）用于恢复 serverless 集群（启动暂停的集群）。
+   * 本接口（DeleteAccounts）用于删除用户账号。
    */
-  async ResumeServerless(
-    req: ResumeServerlessRequest,
-    cb?: (error: string, rep: ResumeServerlessResponse) => void
-  ): Promise<ResumeServerlessResponse> {
-    return this.request("ResumeServerless", req, cb)
+  async DeleteAccounts(
+    req: DeleteAccountsRequest,
+    cb?: (error: string, rep: DeleteAccountsResponse) => void
+  ): Promise<DeleteAccountsResponse> {
+    return this.request("DeleteAccounts", req, cb)
   }
 
   /**
@@ -602,6 +699,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyLibraDBForwardConfig）用于修改只读分析实例自动转发参数
+   */
+  async ModifyLibraDBForwardConfig(
+    req: ModifyLibraDBForwardConfigRequest,
+    cb?: (error: string, rep: ModifyLibraDBForwardConfigResponse) => void
+  ): Promise<ModifyLibraDBForwardConfigResponse> {
+    return this.request("ModifyLibraDBForwardConfig", req, cb)
+  }
+
+  /**
    * 本接口（GrantAccountPrivileges）用于批量授权账号权限。
    */
   async GrantAccountPrivileges(
@@ -632,13 +739,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CopyClusterPasswordComplexity）用于复制集群密码复杂度。
+   * 本接口（DescribeResourcesByDealName）用于查询订单关联实例。
    */
-  async CopyClusterPasswordComplexity(
-    req: CopyClusterPasswordComplexityRequest,
-    cb?: (error: string, rep: CopyClusterPasswordComplexityResponse) => void
-  ): Promise<CopyClusterPasswordComplexityResponse> {
-    return this.request("CopyClusterPasswordComplexity", req, cb)
+  async DescribeResourcesByDealName(
+    req: DescribeResourcesByDealNameRequest,
+    cb?: (error: string, rep: DescribeResourcesByDealNameResponse) => void
+  ): Promise<DescribeResourcesByDealNameResponse> {
+    return this.request("DescribeResourcesByDealName", req, cb)
   }
 
   /**
@@ -682,6 +789,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询分析集群列表
+   */
+  async DescribeLibraDBClusters(
+    req: DescribeLibraDBClustersRequest,
+    cb?: (error: string, rep: DescribeLibraDBClustersResponse) => void
+  ): Promise<DescribeLibraDBClustersResponse> {
+    return this.request("DescribeLibraDBClusters", req, cb)
+  }
+
+  /**
    * 查询从可用区
    */
   async DescribeSlaveZones(
@@ -709,6 +826,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CloseProxyResponse) => void
   ): Promise<CloseProxyResponse> {
     return this.request("CloseProxy", req, cb)
+  }
+
+  /**
+   * 本接口（OfflineCluster）用于销毁集群。
+   */
+  async OfflineCluster(
+    req: OfflineClusterRequest,
+    cb?: (error: string, rep: OfflineClusterResponse) => void
+  ): Promise<OfflineClusterResponse> {
+    return this.request("OfflineCluster", req, cb)
   }
 
   /**
@@ -782,13 +909,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeResourcesByDealName）用于查询订单关联实例。
+   * 删除 TDSQL-C 分析集群
    */
-  async DescribeResourcesByDealName(
-    req: DescribeResourcesByDealNameRequest,
-    cb?: (error: string, rep: DescribeResourcesByDealNameResponse) => void
-  ): Promise<DescribeResourcesByDealNameResponse> {
-    return this.request("DescribeResourcesByDealName", req, cb)
+  async DeleteLibraDBCluster(
+    req: DeleteLibraDBClusterRequest,
+    cb?: (error: string, rep: DeleteLibraDBClusterResponse) => void
+  ): Promise<DeleteLibraDBClusterResponse> {
+    return this.request("DeleteLibraDBCluster", req, cb)
+  }
+
+  /**
+   * 本接口（CopyClusterPasswordComplexity）用于复制集群密码复杂度。
+   */
+  async CopyClusterPasswordComplexity(
+    req: CopyClusterPasswordComplexityRequest,
+    cb?: (error: string, rep: CopyClusterPasswordComplexityResponse) => void
+  ): Promise<CopyClusterPasswordComplexityResponse> {
+    return this.request("CopyClusterPasswordComplexity", req, cb)
+  }
+
+  /**
+   * 下载分析集群列表
+   */
+  async DownloadLibraDBClusterList(
+    req: DownloadLibraDBClusterListRequest,
+    cb?: (error: string, rep: DownloadLibraDBClusterListResponse) => void
+  ): Promise<DownloadLibraDBClusterListResponse> {
+    return this.request("DownloadLibraDBClusterList", req, cb)
   }
 
   /**
@@ -839,6 +986,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RenewClustersResponse) => void
   ): Promise<RenewClustersResponse> {
     return this.request("RenewClusters", req, cb)
+  }
+
+  /**
+   * 本接口（SearchClusterDatabases）用于搜索集群数据库列表。
+   */
+  async SearchClusterDatabases(
+    req: SearchClusterDatabasesRequest,
+    cb?: (error: string, rep: SearchClusterDatabasesResponse) => void
+  ): Promise<SearchClusterDatabasesResponse> {
+    return this.request("SearchClusterDatabases", req, cb)
+  }
+
+  /**
+   * 隔离 TDSQL-C 分析集群
+   */
+  async IsolateLibraDBCluster(
+    req: IsolateLibraDBClusterRequest,
+    cb?: (error: string, rep: IsolateLibraDBClusterResponse) => void
+  ): Promise<IsolateLibraDBClusterResponse> {
+    return this.request("IsolateLibraDBCluster", req, cb)
   }
 
   /**
@@ -902,6 +1069,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（OpenClusterReadOnlyInstanceGroupAccess）用于开启只读实例组接入。
+   */
+  async OpenClusterReadOnlyInstanceGroupAccess(
+    req: OpenClusterReadOnlyInstanceGroupAccessRequest,
+    cb?: (error: string, rep: OpenClusterReadOnlyInstanceGroupAccessResponse) => void
+  ): Promise<OpenClusterReadOnlyInstanceGroupAccessResponse> {
+    return this.request("OpenClusterReadOnlyInstanceGroupAccess", req, cb)
+  }
+
+  /**
    * 本接口（CloseClusterPasswordComplexity）用于关闭集群密码复杂度。
    */
   async CloseClusterPasswordComplexity(
@@ -919,6 +1096,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RollBackClusterResponse) => void
   ): Promise<RollBackClusterResponse> {
     return this.request("RollBackCluster", req, cb)
+  }
+
+  /**
+   * 下线分析集群
+   */
+  async OfflineLibraDBCluster(
+    req: OfflineLibraDBClusterRequest,
+    cb?: (error: string, rep: OfflineLibraDBClusterResponse) => void
+  ): Promise<OfflineLibraDBClusterResponse> {
+    return this.request("OfflineLibraDBCluster", req, cb)
   }
 
   /**
@@ -962,13 +1149,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeInstanceErrorLogs）用于查询实例错误日志列表。
+   * 本接口（ModifyLibraDBClusterReplicationObject）用于修改分析集群同步对象
    */
-  async DescribeInstanceErrorLogs(
-    req: DescribeInstanceErrorLogsRequest,
-    cb?: (error: string, rep: DescribeInstanceErrorLogsResponse) => void
-  ): Promise<DescribeInstanceErrorLogsResponse> {
-    return this.request("DescribeInstanceErrorLogs", req, cb)
+  async ModifyLibraDBClusterReplicationObject(
+    req: ModifyLibraDBClusterReplicationObjectRequest,
+    cb?: (error: string, rep: ModifyLibraDBClusterReplicationObjectResponse) => void
+  ): Promise<ModifyLibraDBClusterReplicationObjectResponse> {
+    return this.request("ModifyLibraDBClusterReplicationObject", req, cb)
   }
 
   /**
@@ -982,6 +1169,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改分析集群名称
+   */
+  async ModifyLibraDBClusterName(
+    req: ModifyLibraDBClusterNameRequest,
+    cb?: (error: string, rep: ModifyLibraDBClusterNameResponse) => void
+  ): Promise<ModifyLibraDBClusterNameResponse> {
+    return this.request("ModifyLibraDBClusterName", req, cb)
+  }
+
+  /**
    * 本接口（ModifyProxyRwSplit）用于配置数据库代理读写分离。
    */
   async ModifyProxyRwSplit(
@@ -989,6 +1186,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyProxyRwSplitResponse) => void
   ): Promise<ModifyProxyRwSplitResponse> {
     return this.request("ModifyProxyRwSplit", req, cb)
+  }
+
+  /**
+   * 续费分析集群
+   */
+  async RenewLibraDBClusters(
+    req: RenewLibraDBClustersRequest,
+    cb?: (error: string, rep: RenewLibraDBClustersResponse) => void
+  ): Promise<RenewLibraDBClustersResponse> {
+    return this.request("RenewLibraDBClusters", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeLibraDBClusterAutoMapRule）用于查看分析集群高级映射规则
+   */
+  async DescribeLibraDBClusterAutoMapRule(
+    req: DescribeLibraDBClusterAutoMapRuleRequest,
+    cb?: (error: string, rep: DescribeLibraDBClusterAutoMapRuleResponse) => void
+  ): Promise<DescribeLibraDBClusterAutoMapRuleResponse> {
+    return this.request("DescribeLibraDBClusterAutoMapRule", req, cb)
   }
 
   /**
@@ -1062,6 +1279,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 设置 TDSQL-C 分析集群是否续费
+   */
+  async SetLibraDBClusterRenewFlag(
+    req: SetLibraDBClusterRenewFlagRequest,
+    cb?: (error: string, rep: SetLibraDBClusterRenewFlagResponse) => void
+  ): Promise<SetLibraDBClusterRenewFlagResponse> {
+    return this.request("SetLibraDBClusterRenewFlag", req, cb)
+  }
+
+  /**
    * 本接口（CreateBackup）用于为集群创建手动备份。
    */
   async CreateBackup(
@@ -1122,13 +1349,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口（InquirePriceMultiSpec）用于批量询价
+   * 查询只读分析引擎支持的版本列表
    */
-  async InquirePriceMultiSpec(
-    req: InquirePriceMultiSpecRequest,
-    cb?: (error: string, rep: InquirePriceMultiSpecResponse) => void
-  ): Promise<InquirePriceMultiSpecResponse> {
-    return this.request("InquirePriceMultiSpec", req, cb)
+  async DescribeLibraDBVersion(
+    req?: DescribeLibraDBVersionRequest,
+    cb?: (error: string, rep: DescribeLibraDBVersionResponse) => void
+  ): Promise<DescribeLibraDBVersionResponse> {
+    return this.request("DescribeLibraDBVersion", req, cb)
   }
 
   /**
@@ -1222,13 +1449,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeInstanceParams）用于查询实例参数列表。
+   * 查询 TDSQL-C 分析集群信息
    */
-  async DescribeInstanceParams(
-    req: DescribeInstanceParamsRequest,
-    cb?: (error: string, rep: DescribeInstanceParamsResponse) => void
-  ): Promise<DescribeInstanceParamsResponse> {
-    return this.request("DescribeInstanceParams", req, cb)
+  async DescribeLibraDBClusterDetail(
+    req: DescribeLibraDBClusterDetailRequest,
+    cb?: (error: string, rep: DescribeLibraDBClusterDetailResponse) => void
+  ): Promise<DescribeLibraDBClusterDetailResponse> {
+    return this.request("DescribeLibraDBClusterDetail", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyLibraDBClusterAccountDescription）用于修改分析集群账号描述
+   */
+  async ModifyLibraDBClusterAccountDescription(
+    req: ModifyLibraDBClusterAccountDescriptionRequest,
+    cb?: (error: string, rep: ModifyLibraDBClusterAccountDescriptionResponse) => void
+  ): Promise<ModifyLibraDBClusterAccountDescriptionResponse> {
+    return this.request("ModifyLibraDBClusterAccountDescription", req, cb)
   }
 
   /**
@@ -1242,13 +1479,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeClusterDatabases）用于获取集群数据库列表。
+   * 本接口（DescribeParamTemplateDetail）用于查询用户参数模板详情。
    */
-  async DescribeClusterDatabases(
-    req: DescribeClusterDatabasesRequest,
-    cb?: (error: string, rep: DescribeClusterDatabasesResponse) => void
-  ): Promise<DescribeClusterDatabasesResponse> {
-    return this.request("DescribeClusterDatabases", req, cb)
+  async DescribeParamTemplateDetail(
+    req: DescribeParamTemplateDetailRequest,
+    cb?: (error: string, rep: DescribeParamTemplateDetailResponse) => void
+  ): Promise<DescribeParamTemplateDetailResponse> {
+    return this.request("DescribeParamTemplateDetail", req, cb)
+  }
+
+  /**
+   * 本接口（ActivateLibraDBInstance）用于解除已隔离的只读分析引擎实例。
+   */
+  async ActivateLibraDBInstance(
+    req: ActivateLibraDBInstanceRequest,
+    cb?: (error: string, rep: ActivateLibraDBInstanceResponse) => void
+  ): Promise<ActivateLibraDBInstanceResponse> {
+    return this.request("ActivateLibraDBInstance", req, cb)
   }
 
   /**
@@ -1292,6 +1539,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 回放实例审计日志
+   */
+  async ReplayInstanceAuditLog(
+    req: ReplayInstanceAuditLogRequest,
+    cb?: (error: string, rep: ReplayInstanceAuditLogResponse) => void
+  ): Promise<ReplayInstanceAuditLogResponse> {
+    return this.request("ReplayInstanceAuditLog", req, cb)
+  }
+
+  /**
    * 本接口（RollbackToNewCluster）用于回档到新集群。
    */
   async RollbackToNewCluster(
@@ -1302,13 +1559,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateResourcePackage）用于新购资源包。
+   * 本接口（DescribeInstanceParams）用于查询实例参数列表。
    */
-  async CreateResourcePackage(
-    req: CreateResourcePackageRequest,
-    cb?: (error: string, rep: CreateResourcePackageResponse) => void
-  ): Promise<CreateResourcePackageResponse> {
-    return this.request("CreateResourcePackage", req, cb)
+  async DescribeInstanceParams(
+    req: DescribeInstanceParamsRequest,
+    cb?: (error: string, rep: DescribeInstanceParamsResponse) => void
+  ): Promise<DescribeInstanceParamsResponse> {
+    return this.request("DescribeInstanceParams", req, cb)
   }
 
   /**
@@ -1319,6 +1576,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAuditLogFilesResponse) => void
   ): Promise<DescribeAuditLogFilesResponse> {
     return this.request("DescribeAuditLogFiles", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeLibraDBClusterAccountPrivileges）用于查询分析集群账号权限
+   */
+  async DescribeLibraDBClusterAccountPrivileges(
+    req: DescribeLibraDBClusterAccountPrivilegesRequest,
+    cb?: (error: string, rep: DescribeLibraDBClusterAccountPrivilegesResponse) => void
+  ): Promise<DescribeLibraDBClusterAccountPrivilegesResponse> {
+    return this.request("DescribeLibraDBClusterAccountPrivileges", req, cb)
   }
 
   /**
@@ -1342,13 +1609,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（SearchClusterDatabases）用于搜索集群数据库列表。
+   * 本接口（DeleteLibraDBClusterAccounts）用于删除分析集群账号
    */
-  async SearchClusterDatabases(
-    req: SearchClusterDatabasesRequest,
-    cb?: (error: string, rep: SearchClusterDatabasesResponse) => void
-  ): Promise<SearchClusterDatabasesResponse> {
-    return this.request("SearchClusterDatabases", req, cb)
+  async DeleteLibraDBClusterAccounts(
+    req: DeleteLibraDBClusterAccountsRequest,
+    cb?: (error: string, rep: DeleteLibraDBClusterAccountsResponse) => void
+  ): Promise<DeleteLibraDBClusterAccountsResponse> {
+    return this.request("DeleteLibraDBClusterAccounts", req, cb)
+  }
+
+  /**
+   * 本接口(IsolateLibraDBInstance)用于隔离的只读分析引擎实例。
+   */
+  async IsolateLibraDBInstance(
+    req: IsolateLibraDBInstanceRequest,
+    cb?: (error: string, rep: IsolateLibraDBInstanceResponse) => void
+  ): Promise<IsolateLibraDBInstanceResponse> {
+    return this.request("IsolateLibraDBInstance", req, cb)
   }
 
   /**
@@ -1362,6 +1639,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ResumeServerless）用于恢复 serverless 集群（启动暂停的集群）。
+   */
+  async ResumeServerless(
+    req: ResumeServerlessRequest,
+    cb?: (error: string, rep: ResumeServerlessResponse) => void
+  ): Promise<ResumeServerlessResponse> {
+    return this.request("ResumeServerless", req, cb)
+  }
+
+  /**
    * 本接口（ModifyInstanceUpgradeLimitDays）用于修改实例内核小版本的升级限制时间。
    */
   async ModifyInstanceUpgradeLimitDays(
@@ -1372,13 +1659,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DeleteAccounts）用于删除用户账号。
+   * 本接口（DescribeLibraDBClusterAccounts）用于查询分析集群账号
    */
-  async DeleteAccounts(
-    req: DeleteAccountsRequest,
-    cb?: (error: string, rep: DeleteAccountsResponse) => void
-  ): Promise<DeleteAccountsResponse> {
-    return this.request("DeleteAccounts", req, cb)
+  async DescribeLibraDBClusterAccounts(
+    req: DescribeLibraDBClusterAccountsRequest,
+    cb?: (error: string, rep: DescribeLibraDBClusterAccountsResponse) => void
+  ): Promise<DescribeLibraDBClusterAccountsResponse> {
+    return this.request("DescribeLibraDBClusterAccounts", req, cb)
   }
 
   /**
@@ -1392,13 +1679,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（OpenClusterReadOnlyInstanceGroupAccess）用于开启只读实例组接入。
+   * 本接口（ModifyLibraDBClusterAccountPrivilege）用于修改分析集群账号权限
    */
-  async OpenClusterReadOnlyInstanceGroupAccess(
-    req: OpenClusterReadOnlyInstanceGroupAccessRequest,
-    cb?: (error: string, rep: OpenClusterReadOnlyInstanceGroupAccessResponse) => void
-  ): Promise<OpenClusterReadOnlyInstanceGroupAccessResponse> {
-    return this.request("OpenClusterReadOnlyInstanceGroupAccess", req, cb)
+  async ModifyLibraDBClusterAccountPrivilege(
+    req: ModifyLibraDBClusterAccountPrivilegeRequest,
+    cb?: (error: string, rep: ModifyLibraDBClusterAccountPrivilegeResponse) => void
+  ): Promise<ModifyLibraDBClusterAccountPrivilegeResponse> {
+    return this.request("ModifyLibraDBClusterAccountPrivilege", req, cb)
   }
 
   /**
@@ -1409,6 +1696,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OpenClusterTransparentEncryptResponse) => void
   ): Promise<OpenClusterTransparentEncryptResponse> {
     return this.request("OpenClusterTransparentEncrypt", req, cb)
+  }
+
+  /**
+   * 修改分析集群项目 ID
+   */
+  async ModifyLibraDBClusterProject(
+    req: ModifyLibraDBClusterProjectRequest,
+    cb?: (error: string, rep: ModifyLibraDBClusterProjectResponse) => void
+  ): Promise<ModifyLibraDBClusterProjectResponse> {
+    return this.request("ModifyLibraDBClusterProject", req, cb)
   }
 
   /**
@@ -1429,6 +1726,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteBackupResponse) => void
   ): Promise<DeleteBackupResponse> {
     return this.request("DeleteBackup", req, cb)
+  }
+
+  /**
+   * 重启只读分析引擎
+   */
+  async RestartLibraDBInstance(
+    req: RestartLibraDBInstanceRequest,
+    cb?: (error: string, rep: RestartLibraDBInstanceResponse) => void
+  ): Promise<RestartLibraDBInstanceResponse> {
+    return this.request("RestartLibraDBInstance", req, cb)
   }
 
   /**
@@ -1612,6 +1919,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(OfflineLibraDBInstance)用于下线的只读分析引擎实例。
+   */
+  async OfflineLibraDBInstance(
+    req: OfflineLibraDBInstanceRequest,
+    cb?: (error: string, rep: OfflineLibraDBInstanceResponse) => void
+  ): Promise<OfflineLibraDBInstanceResponse> {
+    return this.request("OfflineLibraDBInstance", req, cb)
+  }
+
+  /**
    * 本接口（OpenWan）用于开通外网。
    */
   async OpenWan(
@@ -1619,6 +1936,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OpenWanResponse) => void
   ): Promise<OpenWanResponse> {
     return this.request("OpenWan", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeClusterDatabases）用于获取集群数据库列表。
+   */
+  async DescribeClusterDatabases(
+    req: DescribeClusterDatabasesRequest,
+    cb?: (error: string, rep: DescribeClusterDatabasesResponse) => void
+  ): Promise<DescribeClusterDatabasesResponse> {
+    return this.request("DescribeClusterDatabases", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyLibraDBClusterAccountHost）用于修改分析集群账号的可登录主机信息
+   */
+  async ModifyLibraDBClusterAccountHost(
+    req: ModifyLibraDBClusterAccountHostRequest,
+    cb?: (error: string, rep: ModifyLibraDBClusterAccountHostResponse) => void
+  ): Promise<ModifyLibraDBClusterAccountHostResponse> {
+    return this.request("ModifyLibraDBClusterAccountHost", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeLibraDBClusterAccountAllPrivileges）用于查询分析集群账号全部权限
+   */
+  async DescribeLibraDBClusterAccountAllPrivileges(
+    req: DescribeLibraDBClusterAccountAllPrivilegesRequest,
+    cb?: (error: string, rep: DescribeLibraDBClusterAccountAllPrivilegesResponse) => void
+  ): Promise<DescribeLibraDBClusterAccountAllPrivilegesResponse> {
+    return this.request("DescribeLibraDBClusterAccountAllPrivileges", req, cb)
   }
 
   /**
@@ -1639,6 +1986,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AssociateSecurityGroupsResponse) => void
   ): Promise<AssociateSecurityGroupsResponse> {
     return this.request("AssociateSecurityGroups", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeLibraDBInstanceSpecs)用于查询只读分析引擎在该地域支持的规格列表信息
+   */
+  async DescribeLibraDBInstanceSpecs(
+    req?: DescribeLibraDBInstanceSpecsRequest,
+    cb?: (error: string, rep: DescribeLibraDBInstanceSpecsResponse) => void
+  ): Promise<DescribeLibraDBInstanceSpecsResponse> {
+    return this.request("DescribeLibraDBInstanceSpecs", req, cb)
   }
 
   /**
@@ -1669,6 +2026,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAccountPrivilegesResponse) => void
   ): Promise<ModifyAccountPrivilegesResponse> {
     return this.request("ModifyAccountPrivileges", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeLibraDBForwardConfig）用于查询分析引擎转发参数
+   */
+  async DescribeLibraDBForwardConfig(
+    req: DescribeLibraDBForwardConfigRequest,
+    cb?: (error: string, rep: DescribeLibraDBForwardConfigResponse) => void
+  ): Promise<DescribeLibraDBForwardConfigResponse> {
+    return this.request("DescribeLibraDBForwardConfig", req, cb)
   }
 
   /**
@@ -1732,6 +2099,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（CheckCreateLibraDBInstance）用于校验集群是否可以添加只读分析引擎实例
+   */
+  async CheckCreateLibraDBInstance(
+    req: CheckCreateLibraDBInstanceRequest,
+    cb?: (error: string, rep: CheckCreateLibraDBInstanceResponse) => void
+  ): Promise<CheckCreateLibraDBInstanceResponse> {
+    return this.request("CheckCreateLibraDBInstance", req, cb)
+  }
+
+  /**
    * 本接口（SetRenewFlag）用于设置实例的自动续费功能。
    */
   async SetRenewFlag(
@@ -1782,6 +2159,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyLibraDBForwardConfig）用于查看分析集群库表映射关系
+   */
+  async DescribeLibraDBClusterTableMapping(
+    req: DescribeLibraDBClusterTableMappingRequest,
+    cb?: (error: string, rep: DescribeLibraDBClusterTableMappingResponse) => void
+  ): Promise<DescribeLibraDBClusterTableMappingResponse> {
+    return this.request("DescribeLibraDBClusterTableMapping", req, cb)
+  }
+
+  /**
    * 该接口用户查询当前地域用户设置的默认备份下载来源限制
    */
   async DescribeBackupDownloadRestriction(
@@ -1792,13 +2179,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（OfflineCluster）用于销毁集群。
+   * 本接口（DescribeLibraDBDataSource）用于查询分析集群的源实例信息
    */
-  async OfflineCluster(
-    req: OfflineClusterRequest,
-    cb?: (error: string, rep: OfflineClusterResponse) => void
-  ): Promise<OfflineClusterResponse> {
-    return this.request("OfflineCluster", req, cb)
+  async DescribeLibraDBDataSource(
+    req: DescribeLibraDBDataSourceRequest,
+    cb?: (error: string, rep: DescribeLibraDBDataSourceResponse) => void
+  ): Promise<DescribeLibraDBDataSourceResponse> {
+    return this.request("DescribeLibraDBDataSource", req, cb)
   }
 
   /**
@@ -1812,6 +2199,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 解除分析集群隔离状态
+   */
+  async ActivateLibraDBCluster(
+    req: ActivateLibraDBClusterRequest,
+    cb?: (error: string, rep: ActivateLibraDBClusterResponse) => void
+  ): Promise<ActivateLibraDBClusterResponse> {
+    return this.request("ActivateLibraDBCluster", req, cb)
+  }
+
+  /**
    * 开关全局加密
    */
   async ModifyClusterGlobalEncryption(
@@ -1819,6 +2216,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyClusterGlobalEncryptionResponse) => void
   ): Promise<ModifyClusterGlobalEncryptionResponse> {
     return this.request("ModifyClusterGlobalEncryption", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeLibraDBSlowLogs）为只读分析引擎的慢 SQL 明细查询接口
+   */
+  async DescribeLibraDBSlowLogs(
+    req: DescribeLibraDBSlowLogsRequest,
+    cb?: (error: string, rep: DescribeLibraDBSlowLogsResponse) => void
+  ): Promise<DescribeLibraDBSlowLogsResponse> {
+    return this.request("DescribeLibraDBSlowLogs", req, cb)
   }
 
   /**
@@ -1832,13 +2239,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ModifyAccountDescription)用于修改数据库账号描述信息。
+   * 本接口（CreateResourcePackage）用于新购资源包。
    */
-  async ModifyAccountDescription(
-    req: ModifyAccountDescriptionRequest,
-    cb?: (error: string, rep: ModifyAccountDescriptionResponse) => void
-  ): Promise<ModifyAccountDescriptionResponse> {
-    return this.request("ModifyAccountDescription", req, cb)
+  async CreateResourcePackage(
+    req: CreateResourcePackageRequest,
+    cb?: (error: string, rep: CreateResourcePackageResponse) => void
+  ): Promise<CreateResourcePackageResponse> {
+    return this.request("CreateResourcePackage", req, cb)
   }
 
   /**
@@ -1922,6 +2329,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyLibraDBClusterDataSource）用于修改 TDSQL-C 分析集群数据源
+   */
+  async ModifyLibraDBClusterDataSource(
+    req: ModifyLibraDBClusterDataSourceRequest,
+    cb?: (error: string, rep: ModifyLibraDBClusterDataSourceResponse) => void
+  ): Promise<ModifyLibraDBClusterDataSourceResponse> {
+    return this.request("ModifyLibraDBClusterDataSource", req, cb)
+  }
+
+  /**
    * 本接口(DescribeInstances)用于查询实例列表。
    */
   async DescribeInstances(
@@ -1939,6 +2356,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBinlogConfigResponse) => void
   ): Promise<DescribeBinlogConfigResponse> {
     return this.request("DescribeBinlogConfig", req, cb)
+  }
+
+  /**
+   * 此接口（InquirePriceMultiSpec）用于批量询价
+   */
+  async InquirePriceMultiSpec(
+    req: InquirePriceMultiSpecRequest,
+    cb?: (error: string, rep: InquirePriceMultiSpecResponse) => void
+  ): Promise<InquirePriceMultiSpecResponse> {
+    return this.request("InquirePriceMultiSpec", req, cb)
   }
 
   /**
@@ -1979,6 +2406,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterParamsResponse) => void
   ): Promise<DescribeClusterParamsResponse> {
     return this.request("DescribeClusterParams", req, cb)
+  }
+
+  /**
+   * 修改分析集群账号密码
+   */
+  async ResetLibraDBClusterAccountPassword(
+    req: ResetLibraDBClusterAccountPasswordRequest,
+    cb?: (error: string, rep: ResetLibraDBClusterAccountPasswordResponse) => void
+  ): Promise<ResetLibraDBClusterAccountPasswordResponse> {
+    return this.request("ResetLibraDBClusterAccountPassword", req, cb)
   }
 
   /**
@@ -2072,6 +2509,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(DescribeLibraDBInstanceDetail)用于查询只读分析引擎详情
+   */
+  async DescribeLibraDBInstanceDetail(
+    req: DescribeLibraDBInstanceDetailRequest,
+    cb?: (error: string, rep: DescribeLibraDBInstanceDetailResponse) => void
+  ): Promise<DescribeLibraDBInstanceDetailResponse> {
+    return this.request("DescribeLibraDBInstanceDetail", req, cb)
+  }
+
+  /**
    * 本接口（CreateProxy）用于开启集群的数据库代理。
    */
   async CreateProxy(
@@ -2152,6 +2599,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建 TDSQL-C 分析集群
+   */
+  async CreateLibraDBClusters(
+    req: CreateLibraDBClustersRequest,
+    cb?: (error: string, rep: CreateLibraDBClustersResponse) => void
+  ): Promise<CreateLibraDBClustersResponse> {
+    return this.request("CreateLibraDBClusters", req, cb)
+  }
+
+  /**
    * 本接口（UpgradeInstance）用于实例变配。
    */
   async UpgradeInstance(
@@ -2169,6 +2626,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBinlogsResponse) => void
   ): Promise<DescribeBinlogsResponse> {
     return this.request("DescribeBinlogs", req, cb)
+  }
+
+  /**
+   * 本接口（CreateLibraDBClusterAccounts）用于创建分析集群账号
+   */
+  async CreateLibraDBClusterAccounts(
+    req: CreateLibraDBClusterAccountsRequest,
+    cb?: (error: string, rep: CreateLibraDBClusterAccountsResponse) => void
+  ): Promise<CreateLibraDBClusterAccountsResponse> {
+    return this.request("CreateLibraDBClusterAccounts", req, cb)
   }
 
   /**
@@ -2232,13 +2699,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeParamTemplateDetail）用于查询用户参数模板详情。
+   * 本接口（DescribeInstanceErrorLogs）用于查询实例错误日志列表。
    */
-  async DescribeParamTemplateDetail(
-    req: DescribeParamTemplateDetailRequest,
-    cb?: (error: string, rep: DescribeParamTemplateDetailResponse) => void
-  ): Promise<DescribeParamTemplateDetailResponse> {
-    return this.request("DescribeParamTemplateDetail", req, cb)
+  async DescribeInstanceErrorLogs(
+    req: DescribeInstanceErrorLogsRequest,
+    cb?: (error: string, rep: DescribeInstanceErrorLogsResponse) => void
+  ): Promise<DescribeInstanceErrorLogsResponse> {
+    return this.request("DescribeInstanceErrorLogs", req, cb)
   }
 
   /**

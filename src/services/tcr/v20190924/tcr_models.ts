@@ -175,6 +175,16 @@ export interface AccessVpc {
 }
 
 /**
+ * DescribeInternalEndpoints请求参数结构体
+ */
+export interface DescribeInternalEndpointsRequest {
+  /**
+   * 实例Id
+   */
+  RegistryId: string
+}
+
+/**
  * ModifyTagRetentionRule请求参数结构体
  */
 export interface ModifyTagRetentionRuleRequest {
@@ -370,6 +380,16 @@ export interface TriggerInvokePara {
    * TKE集群地域数字ID
    */
   ClusterRegion?: number
+}
+
+/**
+ * GC 参数
+ */
+export interface GCParameters {
+  /**
+   * 模拟运行
+   */
+  Dryrun?: boolean
 }
 
 /**
@@ -846,6 +866,16 @@ export interface CreateReplicationInstanceRequest {
 }
 
 /**
+ * ValidateRepositoryExistPersonal请求参数结构体
+ */
+export interface ValidateRepositoryExistPersonalRequest {
+  /**
+   * 仓库名称
+   */
+  RepoName: string
+}
+
+/**
  * ModifyInstanceToken返回参数结构体
  */
 export interface ModifyInstanceTokenResponse {
@@ -1176,45 +1206,17 @@ export interface DescribeWebhookTriggerLogResponse {
 }
 
 /**
- * DownloadHelmChart返回参数结构体
+ * CreateGCJob请求参数结构体
  */
-export interface DownloadHelmChartResponse {
+export interface CreateGCJobRequest {
   /**
-   * 临时token
+   * 实例 Id
    */
-  TmpToken?: string
+  RegistryId: string
   /**
-   * 临时的secretId
+   * GC 参数
    */
-  TmpSecretId?: string
-  /**
-   * 临时的secretKey
-   */
-  TmpSecretKey?: string
-  /**
-   * 存储桶信息
-   */
-  Bucket?: string
-  /**
-   * 实例ID
-   */
-  Region?: string
-  /**
-   * chart信息
-   */
-  Path?: string
-  /**
-   * 开始时间时间戳
-   */
-  StartTime?: number
-  /**
-   * token过期时间时间戳
-   */
-  ExpiredTime?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  GCParameters?: GCParameters
 }
 
 /**
@@ -2201,13 +2203,45 @@ export interface ModifyNamespaceResponse {
 }
 
 /**
- * ValidateRepositoryExistPersonal请求参数结构体
+ * DownloadHelmChart返回参数结构体
  */
-export interface ValidateRepositoryExistPersonalRequest {
+export interface DownloadHelmChartResponse {
   /**
-   * 仓库名称
+   * 临时token
    */
-  RepoName: string
+  TmpToken?: string
+  /**
+   * 临时的secretId
+   */
+  TmpSecretId?: string
+  /**
+   * 临时的secretKey
+   */
+  TmpSecretKey?: string
+  /**
+   * 存储桶信息
+   */
+  Bucket?: string
+  /**
+   * 实例ID
+   */
+  Region?: string
+  /**
+   * chart信息
+   */
+  Path?: string
+  /**
+   * 开始时间时间戳
+   */
+  StartTime?: number
+  /**
+   * token过期时间时间戳
+   */
+  ExpiredTime?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4658,13 +4692,13 @@ export interface ReplicationRegistry {
 }
 
 /**
- * DescribeInternalEndpoints请求参数结构体
+ * CreateGCJob返回参数结构体
  */
-export interface DescribeInternalEndpointsRequest {
+export interface CreateGCJobResponse {
   /**
-   * 实例Id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RegistryId: string
+  RequestId?: string
 }
 
 /**

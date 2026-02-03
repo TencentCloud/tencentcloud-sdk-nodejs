@@ -18,17 +18,21 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  Filter,
+  Spec,
   Tag,
   Network,
   DescribeClustersRequest,
   Database,
   DescribeDatabasesResponse,
+  Component,
   Period,
   DescribeDatabasesRequest,
-  Spec,
-  Filter,
+  DescribeClusterDetailRequest,
+  DescribeClusterDetailResponse,
   Cluster,
   DescribeClustersResponse,
+  ClusterDetail,
   Order,
   Tenant,
 } from "./ctsdb_models"
@@ -50,6 +54,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClustersResponse) => void
   ): Promise<DescribeClustersResponse> {
     return this.request("DescribeClusters", req, cb)
+  }
+
+  /**
+   * 查询实例详情
+   */
+  async DescribeClusterDetail(
+    req?: DescribeClusterDetailRequest,
+    cb?: (error: string, rep: DescribeClusterDetailResponse) => void
+  ): Promise<DescribeClusterDetailResponse> {
+    return this.request("DescribeClusterDetail", req, cb)
   }
 
   /**

@@ -778,72 +778,81 @@ export interface ResultColumn {
  */
 export interface Setats {
   /**
-   * setats serialId
+   * <p>setats serialId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SetatsSerialId?: string
   /**
-   * 1  // 停止
-2  // 运行中
-3  // 初始化中
-4  // 扩容中
-5  // Warehoouse未配置
-6  // Warehoouse配置中
-7  // 重启中
--2 // 已删除(集群被销毁时更新为此状态)
+   * <p>1  // 停止<br>2  // 运行中<br>3  // 初始化中<br>4  // 扩容中<br>5  // Warehoouse未配置<br>6  // Warehoouse配置中<br>7  // 重启中<br>-2 // 已删除(集群被销毁时更新为此状态)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
-   * setats warehouse
+   * <p>setats warehouse</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Warehouse?: Warehouse
   /**
-   * setats master 机器规格
+   * <p>setats master 机器规格</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MasterInfo?: SetatsCvmInfo
   /**
-   * setats worker规格
+   * <p>setats worker规格</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkerInfo?: SetatsCvmInfo
   /**
-   * 标签
+   * <p>标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
-   * 自动续费
+   * <p>自动续费</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRenewFlag?: number
   /**
-   * 过期时间
+   * <p>过期时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
   /**
-   * 过期时间 秒
+   * <p>过期时间 秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SecondsUntilExpiry?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * manager url
+   * <p>manager url</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ManagerUrl?: string
   /**
-   * 隔离时间
+   * <p>隔离时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsolatedTime?: string
+  /**
+   * <p>Setats集群自己的id</p>
+   */
+  OwnerClusterGroupSerialId?: string
+  /**
+   * <p>setats 集群类型</p>
+   */
+  Type?: number
+  /**
+   * <p>Setats UI url</p>
+   */
+  SetatsUiUrl?: string
+  /**
+   * <p>setats镜像版本</p>
+   */
+  ImageVersion?: string
 }
 
 /**
@@ -4191,50 +4200,54 @@ export interface DescribeFolderRequest {
  */
 export interface Warehouse {
   /**
-   * 状态
+   * <p>状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
-   * location
+   * <p>location</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Location?: string
   /**
-   * catalogtype
+   * <p>catalogtype</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CatalogType?: string
   /**
-   * uri
+   * <p>uri</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Uri?: string
   /**
-   * warehouse url
+   * <p>warehouse url</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WarehouseUrl?: string
   /**
-   * 认证方式
+   * <p>认证方式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Authentication?: string
   /**
-   * 资源
+   * <p>资源</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceRefs?: Array<ResourceRefLatest>
   /**
-   * hive warehouse uri
+   * <p>hive warehouse uri</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HiveUri?: string
   /**
-   * 高级参数
+   * <p>高级参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Properties?: Array<Property>
+  /**
+   * <p>hive cata 类型</p>
+   */
+  HiveCatalogType?: number
 }
 
 /**

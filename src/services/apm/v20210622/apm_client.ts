@@ -76,6 +76,7 @@ import {
   ApmTag,
   Filter,
   DescribeGeneralOTSpanListRequest,
+  AutoProfilingConfig,
   DescribeGeneralApmApplicationConfigResponse,
   CreateApmInstanceResponse,
   DeleteApmSampleConfigResponse,

@@ -22,6 +22,7 @@ import {
   ServerlessSpaceUser,
   ServerlessIndexSettingsField,
   RestartLogstashInstanceRequest,
+  OtherConfig,
   DescribeInstanceOperationsRequest,
   LogstashInstanceInfo,
   OperationDetail,

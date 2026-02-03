@@ -16,6 +16,16 @@
  */
 
 /**
+ * OfflineLibraDBCluster请求参数结构体
+ */
+export interface OfflineLibraDBClusterRequest {
+  /**
+   * 分析集群 ID
+   */
+  ClusterId: string
+}
+
+/**
  * DeleteClusterSaveBackup返回参数结构体
  */
 export interface DeleteClusterSaveBackupResponse {
@@ -23,6 +33,20 @@ export interface DeleteClusterSaveBackupResponse {
    * 任务ID
    */
   TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyLibraDBClusterDataSource返回参数结构体
+ */
+export interface ModifyLibraDBClusterDataSourceResponse {
+  /**
+   * 异步任务ID
+   */
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -65,6 +89,104 @@ export interface DescribeInstanceCLSLogDeliveryResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * libra实例信息
+ */
+export interface LibraInstanceSet {
+  /**
+   * 数据库模式
+   */
+  DbMode?: string
+  /**
+   * cpu核数
+   */
+  InstanceCpu?: number
+  /**
+   * 实例类型
+   */
+  InstanceDeviceType?: string
+  /**
+   * 组id
+   */
+  InstanceGroupId?: string
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 内存
+   */
+  InstanceMemory?: number
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 付费模式
+   */
+  InstancePayMode?: number
+  /**
+   * 付费结束时间
+   */
+  InstancePeriodEndTime?: string
+  /**
+   * 实例角色
+   */
+  InstanceRole?: string
+  /**
+   * 实例状态
+   */
+  InstanceStatus?: string
+  /**
+   * 实例状态描述
+   */
+  InstanceStatusDesc?: string
+  /**
+   * 网络类型
+   */
+  NetType?: string
+  /**
+   * 子网id
+   */
+  UniqSubnetId?: string
+  /**
+   * vpcid
+   */
+  UniqVpcId?: string
+  /**
+   * 虚拟ip
+   */
+  Vip?: string
+  /**
+   * 虚拟端口
+   */
+  Vport?: number
+  /**
+   * 外网区域
+   */
+  WanDomain?: string
+  /**
+   * 外网ip
+   */
+  WanIP?: string
+  /**
+   * 外网port
+   */
+  WanPort?: number
+  /**
+   * 外网状态
+   */
+  WanStatus?: string
+  /**
+   * 硬盘
+   */
+  InstanceStorage?: number
+  /**
+   * 硬盘类型
+   */
+  InstanceStorageType?: string
 }
 
 /**
@@ -155,6 +277,24 @@ export interface DescribeResourcePackageDetailResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyLibraDBClusterDataSource请求参数结构体
+ */
+export interface ModifyLibraDBClusterDataSourceRequest {
+  /**
+   * 分析集群ID
+   */
+  ClusterId: string
+  /**
+   * 只读分析引擎实例ID
+   */
+  InstanceId: string
+  /**
+   * 源端信息
+   */
+  SrcInfo?: Array<LibraDBClusterSrcInfo>
 }
 
 /**
@@ -257,17 +397,9 @@ export interface AccountParam {
 }
 
 /**
- * DescribeProjectSecurityGroups返回参数结构体
+ * ModifyBackupDownloadRestriction返回参数结构体
  */
-export interface DescribeProjectSecurityGroupsResponse {
-  /**
-   * 安全组详情
-   */
-  Groups?: Array<SecurityGroup>
-  /**
-   * 总数量
-   */
-  Total?: number
+export interface ModifyBackupDownloadRestrictionResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -472,6 +604,24 @@ export interface DescribeClusterDetailDatabasesRequest {
 }
 
 /**
+ * DescribeLibraDBClusters返回参数结构体
+ */
+export interface DescribeLibraDBClustersResponse {
+  /**
+   * 集群信息
+   */
+  ClusterSet?: Array<LibraDBClusterSet>
+  /**
+   * 集群数量
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * InquirePriceMultiSpec请求参数结构体
  */
 export interface InquirePriceMultiSpecRequest {
@@ -673,6 +823,36 @@ export interface ModifyInstanceParamRequest {
  * ModifyInstanceUpgradeLimitDays返回参数结构体
  */
 export interface ModifyInstanceUpgradeLimitDaysResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateLibraDBClusters返回参数结构体
+ */
+export interface CreateLibraDBClustersResponse {
+  /**
+   * 预付费总订单号
+   */
+  BigDealIds?: Array<string>
+  /**
+   * 集群ID
+   */
+  ClusterIds?: Array<string>
+  /**
+   * 每个资源对应一个dealName，业务需要根据dealName保证发货接口幂等
+   */
+  DealNames?: Array<string>
+  /**
+   * 冻结流水
+   */
+  TranId?: string
+  /**
+   * 实例id
+   */
+  ResourceIds?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -919,6 +1099,20 @@ export interface UpgradeProxy {
 }
 
 /**
+ * OpenWan返回参数结构体
+ */
+export interface OpenWanResponse {
+  /**
+   * 任务流ID
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 备份文件信息
  */
 export interface BackupFileInfo {
@@ -1026,6 +1220,21 @@ export interface DescribeBinlogDownloadUrlResponse {
    * 下载地址
    */
   DownloadUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLibraDBInstanceSpecs返回参数结构体
+ */
+export interface DescribeLibraDBInstanceSpecsResponse {
+  /**
+   * 该地域实例规格信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceSpecSet?: Array<RegionInstanceSpecInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1406,6 +1615,30 @@ export interface DescribeClusterDatabasesResponse {
 }
 
 /**
+ * ModifyLibraDBClusterName请求参数结构体
+ */
+export interface ModifyLibraDBClusterNameRequest {
+  /**
+   * 分析集群 ID
+   */
+  ClusterId: string
+  /**
+   * 集群名称
+   */
+  ClusterName: string
+}
+
+/**
+ * ResetLibraDBClusterAccountPassword返回参数结构体
+ */
+export interface ResetLibraDBClusterAccountPasswordResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 实例变配任务信息
  */
 export interface ModifyInstanceData {
@@ -1650,6 +1883,16 @@ export interface SlowQueriesItem {
 数据库内核版本大于3.1.12
    */
   TrxCommitDelay?: number
+}
+
+/**
+ * ModifyLibraDBClusterAccountHost返回参数结构体
+ */
+export interface ModifyLibraDBClusterAccountHostResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2069,6 +2312,16 @@ export interface DescribeInstanceSpecsRequest {
    * 实例机器类型
    */
   DeviceType?: string
+}
+
+/**
+ * ModifyMaintainPeriodConfig返回参数结构体
+ */
+export interface ModifyMaintainPeriodConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2587,6 +2840,92 @@ export interface DescribeIntegrateTaskResponse {
 }
 
 /**
+ * CreateLibraDBClusters请求参数结构体
+ */
+export interface CreateLibraDBClustersRequest {
+  /**
+   * 数量
+   */
+  Count: number
+  /**
+   * 可用区
+   */
+  Zone: string
+  /**
+   * 实例初始化信息
+   */
+  InstanceInitInfos: Array<LibraDBInstanceInitInfo>
+  /**
+   * 用户密码
+   */
+  AdminPassword?: string
+  /**
+   * 是否自动续费
+   */
+  AutoRenewFlag?: number
+  /**
+   * 是否自动选择代金券
+   */
+  AutoVoucher?: number
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 下单模式
+   */
+  DealMode?: string
+  /**
+   * 加密方法
+   */
+  EncryptMethod?: string
+  /**
+   * LibraDBVersion 版本，缺省为最新版本
+   */
+  LibraDBVersion?: string
+  /**
+   * 订单来源
+   */
+  OrderSource?: string
+  /**
+   * 付费模式
+   */
+  PayMode?: number
+  /**
+   * 项目id
+   */
+  ProjectId?: string
+  /**
+   * 安全组
+   */
+  SecurityGroupIds?: Array<string>
+  /**
+   * 时长
+   */
+  TimeSpan?: number
+  /**
+   * 时间单位
+   */
+  TimeUnit?: string
+  /**
+   * 实例创建绑定Tag数组信息
+   */
+  ResourceTags?: Array<Tag>
+  /**
+   * 集群所在vpcId
+   */
+  VpcId?: string
+  /**
+   * 集群所在SubnetId
+   */
+  SubnetId?: string
+  /**
+   * 端口
+   */
+  Port?: string
+}
+
+/**
  * CreateClusters请求参数结构体
  */
 export interface CreateClustersRequest {
@@ -2801,6 +3140,11 @@ cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
 }
 
 /**
+ * DescribeLibraDBInstanceSpecs请求参数结构体
+ */
+export type DescribeLibraDBInstanceSpecsRequest = null
+
+/**
  * DescribeClusterParamLogs请求参数结构体
  */
 export interface DescribeClusterParamLogsRequest {
@@ -2888,6 +3232,24 @@ export interface UnbindClusterResourcePackagesResponse {
 }
 
 /**
+ * DownloadLibraDBClusterList返回参数结构体
+ */
+export interface DownloadLibraDBClusterListResponse {
+  /**
+   * 分析集群信息
+   */
+  ClusterSet?: Array<LibraClusterSet>
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RollBackCluster返回参数结构体
  */
 export interface RollBackClusterResponse {
@@ -2913,6 +3275,32 @@ export interface OpenSSLRequest {
    * 实例ID
    */
   InstanceId?: string
+}
+
+/**
+ * UpgradeProxyVersion请求参数结构体
+ */
+export interface UpgradeProxyVersionRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 数据库代理当前版本
+   */
+  SrcProxyVersion: string
+  /**
+   * 数据库代理升级版本
+   */
+  DstProxyVersion: string
+  /**
+   * 数据库代理组ID
+   */
+  ProxyGroupId?: string
+  /**
+   * 升级时间 ：no（升级完成时）yes（实例维护时间）
+   */
+  IsInMaintainPeriod?: string
 }
 
 /**
@@ -2972,6 +3360,22 @@ export interface ModifyClusterDatabaseRequest {
    * 历史授权用户主机权限
    */
   OldUserHostPrivileges?: Array<UserHostPrivilege>
+}
+
+/**
+ * 同步数据对象
+ */
+export interface MigrateObject {
+  /**
+   * 数据库迁移模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MigrateDBMode?: string
+  /**
+   * 数据库信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Databases?: Array<MigrateDBItem>
 }
 
 /**
@@ -3101,13 +3505,97 @@ export interface DescribeRedoLogsRequest {
 }
 
 /**
- * ModifyMaintainPeriodConfig返回参数结构体
+ * libra分析集群源数据库信息
  */
-export interface ModifyMaintainPeriodConfigResponse {
+export interface LibraDBClusterSrcInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 源端类型
    */
-  RequestId?: string
+  SrcInstanceType: string
+  /**
+   * 网络类型
+   */
+  AccessType?: string
+  /**
+   * 源端实例ID
+   */
+  SrcInstanceId?: string
+  /**
+   * 源端集群ID
+   */
+  SrcClusterId?: string
+  /**
+   * 地址
+   */
+  IP?: string
+  /**
+   * 端口
+   */
+  Port?: string
+  /**
+   * 用户名
+   */
+  User?: string
+  /**
+   * 密码
+   */
+  Password?: string
+  /**
+   * 源端sql_mode
+   */
+  SqlMode?: string
+  /**
+   * 源端应用id
+   */
+  SrcAppId?: number
+  /**
+   * 源端账号
+   */
+  SrcUin?: string
+  /**
+   * 源端子账号
+   */
+  SrcSubAccountUin?: string
+  /**
+   * 账号
+   */
+  AccountMode?: string
+  /**
+   * 源端实例地域
+   */
+  Region?: string
+  /**
+   * 对源端实例的操作
+   */
+  Operation?: string
+}
+
+/**
+ * DescribeLibraDBInstanceDetail请求参数结构体
+ */
+export interface DescribeLibraDBInstanceDetailRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 只读分析引擎实例 ID
+   */
+  InstanceId: string
+}
+
+/**
+ * DescribeLibraDBClusterAccountAllPrivileges请求参数结构体
+ */
+export interface DescribeLibraDBClusterAccountAllPrivilegesRequest {
+  /**
+   * 分析集群id
+   */
+  ClusterId: string
+  /**
+   * 账号
+   */
+  Account: InputAccount
 }
 
 /**
@@ -3146,6 +3634,16 @@ export interface ModifyBackupNameRequest {
    * 备注名，长度不能超过60个字符
    */
   BackupName: string
+}
+
+/**
+ * ModifyLibraDBClusterAccountPrivilege返回参数结构体
+ */
+export interface ModifyLibraDBClusterAccountPrivilegeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3220,6 +3718,36 @@ export interface DeleteCLSDeliveryRequest {
    * 是否维护时间运行
    */
   IsInMaintainPeriod?: string
+}
+
+/**
+ * DescribeLibraDBClusterAccountPrivileges请求参数结构体
+ */
+export interface DescribeLibraDBClusterAccountPrivilegesRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+  /**
+   * 账号名
+   */
+  AccountName: string
+  /**
+   * 主机名
+   */
+  Host: string
+  /**
+   * 数据库名
+   */
+  Db: string
+  /**
+   * 类型
+   */
+  Type: string
+  /**
+   * 表名
+   */
+  TableName?: string
 }
 
 /**
@@ -3385,6 +3913,20 @@ RA - 范围。
 }
 
 /**
+ * ModifyLibraDBClusterReplicationObject返回参数结构体
+ */
+export interface ModifyLibraDBClusterReplicationObjectResponse {
+  /**
+   * 异步任务ID
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 备可用区库存信息
  */
 export interface SlaveZoneStockInfo {
@@ -3504,6 +4046,179 @@ export interface DescribeResourcePackageListResponse {
 }
 
 /**
+ * DescribeLibraDBInstanceDetail返回参数结构体
+ */
+export interface DescribeLibraDBInstanceDetailResponse {
+  /**
+   * 主账号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+  /**
+   * 账号唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: number
+  /**
+   * 集群ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterName?: string
+  /**
+   * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * 项目ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: number
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
+  /**
+   * 实例状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 状态描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatusDesc?: string
+  /**
+   * Libra分析引擎版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LibraDBVersion?: string
+  /**
+   * cpu核数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cpu?: number
+  /**
+   * 内存大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Memory?: number
+  /**
+   * 存储大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Storage?: number
+  /**
+   * 存储类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageType?: string
+  /**
+   * 实例类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceType?: string
+  /**
+   * 实例角色
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceRole?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 售卖方式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PayMode?: number
+  /**
+   * 售卖开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PeriodStartTime?: string
+  /**
+   * 售卖结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PeriodEndTime?: string
+  /**
+   * 续费标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RenewFlag?: number
+  /**
+   * 网络类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetType?: number
+  /**
+   * 私有网络ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 子网ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * 虚拟IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Vip?: string
+  /**
+   * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Vport?: number
+  /**
+   * 实例网络信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceNetInfo?: InstanceNetInfo
+  /**
+   * 实例标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceTags?: Array<Tag>
+  /**
+   * 实例节点信息
+   */
+  NodeInfo?: Array<LibraDBNodeInfo>
+  /**
+   * 实例节点个数
+   */
+  NodeCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 任务信息
  */
 export interface ObjectTask {
@@ -3578,6 +4293,52 @@ export interface CreateClustersData {
 }
 
 /**
+ * 遗留备份列表
+ */
+export interface SaveBackupClusterInfo {
+  /**
+   * 遗照备份id
+   */
+  BackupId?: number
+  /**
+   * 集群id
+   */
+  ClusterId?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 地域
+   */
+  Region?: string
+  /**
+   * 可用区
+   */
+  Zone?: string
+  /**
+   * 备份时间
+   */
+  BackupTime?: string
+  /**
+   * 数据库版本
+   */
+  DbVersion?: string
+  /**
+   * Db类型(NORMAL, SERVERLESS)
+   */
+  DbMode?: string
+  /**
+   * 集群状态
+   */
+  ClusterStatus?: string
+  /**
+   * 任务列表
+   */
+  Tasks?: Array<ObjectTask>
+}
+
+/**
  * DescribeProxies请求参数结构体
  */
 export interface DescribeProxiesRequest {
@@ -3627,6 +4388,22 @@ export interface ModifySnapBackupCrossRegionConfigRequest {
    * 快照备份所跨地域
    */
   CrossRegions?: Array<string>
+}
+
+/**
+ * 转发实例信息
+ */
+export interface ForwardInstanceInfo {
+  /**
+   * 转发实例id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 转发实例地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
 }
 
 /**
@@ -3713,6 +4490,56 @@ export interface CloseProxyEndPointRequest {
    * 数据库代理组ID
    */
   ProxyGroupId: string
+}
+
+/**
+ * libra实例初始化信息
+ */
+export interface LibraDBInstanceInitInfo {
+  /**
+   * cpu
+   */
+  Cpu?: number
+  /**
+   * 内存
+   */
+  Memory?: number
+  /**
+   * 硬盘
+   */
+  StorageSize?: number
+  /**
+   * 存储类型
+   */
+  StorageType?: string
+  /**
+   * 实例类型
+   */
+  InstanceType?: string
+  /**
+   * 实例版本
+   */
+  LibraDBVersion?: string
+  /**
+   * 实例数量
+   */
+  InstanceCount?: number
+  /**
+   * vpc id
+   */
+  VpcId?: string
+  /**
+   * subnet id
+   */
+  SubnetId?: string
+  /**
+   * 端口
+   */
+  Port?: number
+  /**
+   * 购买实例副本数
+   */
+  ReplicasNum?: number
 }
 
 /**
@@ -3833,6 +4660,16 @@ export interface DescribeClusterTransparentEncryptInfoRequest {
 }
 
 /**
+ * 同步对象详情
+ */
+export interface MigrateOpt {
+  /**
+   * 包含数据库表信息
+   */
+  DatabaseTables?: MigrateObject
+}
+
+/**
  * 商品规格
  */
 export interface GoodsSpec {
@@ -3887,6 +4724,20 @@ export interface DeleteParamTemplateRequest {
    * 参数模板ID
    */
   TemplateId: number
+}
+
+/**
+ * DescribeLibraDBClusterAutoMapRule请求参数结构体
+ */
+export interface DescribeLibraDBClusterAutoMapRuleRequest {
+  /**
+   * 分析集群ID
+   */
+  ClusterId: string
+  /**
+   * 分析实例ID
+   */
+  InstanceId: string
 }
 
 /**
@@ -4015,6 +4866,24 @@ export interface CreateParamTemplateResponse {
 }
 
 /**
+ * 日志过滤条件
+ */
+export interface LogFilter {
+  /**
+   * 过滤项。
+   */
+  Type?: string
+  /**
+   * 过滤条件。支持以下条件： WINC-包含（分词维度）， WEXC-不包含（分词维度）, INC - 包含, EXC - 不包含, EQS - 等于, NEQ - 不等于, RA - 范围。
+   */
+  Compare?: string
+  /**
+   * 过滤的值。反向查询时，多个值之前是且的关系，正向查询多个值是或的关系
+   */
+  Value?: Array<string>
+}
+
+/**
  * DescribeAccountAllGrantPrivileges返回参数结构体
  */
 export interface DescribeAccountAllGrantPrivilegesResponse {
@@ -4070,6 +4939,60 @@ export interface DatabasePrivileges {
    * 权限列表
    */
   Privileges: Array<string>
+}
+
+/**
+ * DescribeLibraDBClusterTableMapping请求参数结构体
+ */
+export interface DescribeLibraDBClusterTableMappingRequest {
+  /**
+   * 分析集群ID
+   */
+  ClusterId: string
+  /**
+   * 分析引擎实例ID
+   */
+  InstanceId: string
+  /**
+   * 节点ID
+   */
+  NodeId?: string
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 页面记录限制
+   */
+  Limit?: number
+  /**
+   * 源端schema列表
+   */
+  SrcSchemas?: Array<string>
+  /**
+   * 源端表列表
+   */
+  SrcTableName?: Array<string>
+  /**
+   * 状态列表
+   */
+  StatusList?: Array<string>
+  /**
+   * 映射数据库名称
+   */
+  MapSchemas?: Array<string>
+  /**
+   * 映射表名
+   */
+  MapTableName?: Array<string>
+  /**
+   * 是否查询映射数据库名称不为空的记录
+   */
+  MapSchemaNotEmpty?: boolean
+  /**
+   * 是否查询映射表名不为空的记录
+   */
+  MapTableNameNotEmpty?: boolean
 }
 
 /**
@@ -4188,6 +5111,32 @@ export interface InstanceParamItem {
    * 实例参数列表
    */
   ParamsItems?: Array<ParamItemDetail>
+}
+
+/**
+ * IsolateLibraDBInstance请求参数结构体
+ */
+export interface IsolateLibraDBInstanceRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 只读分析引擎实例 ID 列表
+   */
+  InstanceIdList: Array<string>
+  /**
+   * 是否是强制隔离
+   */
+  ForceIsolate?: boolean
+  /**
+   * 隔离原因类型
+   */
+  IsolateReasonTypes?: Array<number | bigint>
+  /**
+   * 隔离原因
+   */
+  IsolateReason?: string
 }
 
 /**
@@ -4453,6 +5402,16 @@ export interface DescribeInstanceDetailResponse {
 }
 
 /**
+ * RestartLibraDBInstance请求参数结构体
+ */
+export interface RestartLibraDBInstanceRequest {
+  /**
+   * 只读分析引擎实例 ID
+   */
+  InstanceId: string
+}
+
+/**
  * DeleteAccounts返回参数结构体
  */
 export interface DeleteAccountsResponse {
@@ -4460,6 +5419,28 @@ export interface DeleteAccountsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RenewLibraDBClusters请求参数结构体
+ */
+export interface RenewLibraDBClustersRequest {
+  /**
+   * 时间间隔
+   */
+  TimeSpan: number
+  /**
+   * 时间单位
+   */
+  TimeUnit: string
+  /**
+   * 分析集群 ID
+   */
+  ClusterId: string
+  /**
+   * 订单模式
+   */
+  DealMode?: number
 }
 
 /**
@@ -4492,6 +5473,30 @@ export interface ModifyBinlogConfigRequest {
    * Binlog配置信息
    */
   BinlogConfig: BinlogConfigInfo
+}
+
+/**
+ * ModifyLibraDBClusterName返回参数结构体
+ */
+export interface ModifyLibraDBClusterNameResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteLibraDBClusterAccounts请求参数结构体
+ */
+export interface DeleteLibraDBClusterAccountsRequest {
+  /**
+   * 分析集群id
+   */
+  ClusterId: string
+  /**
+   * 账号
+   */
+  Accounts: Array<InputAccount>
 }
 
 /**
@@ -4636,49 +5641,29 @@ export interface ProxyConfig {
 }
 
 /**
- * 遗留备份列表
+ * 校验项
  */
-export interface SaveBackupClusterInfo {
+export interface CheckItem {
   /**
-   * 遗照备份id
+   * 校验项名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  BackupId?: number
+  Item?: string
   /**
-   * 集群id
+   * 该项的校验结果
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId?: string
+  Result?: string
   /**
-   * 集群名称
+   * 校验不通过的详细说明和修改建议
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterName?: string
+  CurrentValue?: string
   /**
-   * 地域
+   * 校验不通过的详细说明和修改建议
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region?: string
-  /**
-   * 可用区
-   */
-  Zone?: string
-  /**
-   * 备份时间
-   */
-  BackupTime?: string
-  /**
-   * 数据库版本
-   */
-  DbVersion?: string
-  /**
-   * Db类型(NORMAL, SERVERLESS)
-   */
-  DbMode?: string
-  /**
-   * 集群状态
-   */
-  ClusterStatus?: string
-  /**
-   * 任务列表
-   */
-  Tasks?: Array<ObjectTask>
+  ExpectedValue?: string
 }
 
 /**
@@ -4915,6 +5900,27 @@ export interface DescribeClusterInstanceGroupsResponse {
 }
 
 /**
+ * CreateLibraDBClusterAccounts返回参数结构体
+ */
+export interface CreateLibraDBClusterAccountsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 同步数据表名称
+ */
+export interface MigrateTableItem {
+  /**
+   * 数据表名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
+}
+
+/**
  * CreateProxyEndPoint返回参数结构体
  */
 export interface CreateProxyEndPointResponse {
@@ -5040,6 +6046,83 @@ export interface ReplayInstanceAuditLogRequest {
 }
 
 /**
+ * 同步库表对象
+ */
+export interface MigrateDBItem {
+  /**
+   * 数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbName?: string
+  /**
+   * 数据表迁移模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MigrateTableMode?: string
+  /**
+   * 数据表信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tables?: Array<MigrateTableItem>
+}
+
+/**
+ * 该地域实例规格信息
+ */
+export interface RegionInstanceSpecInfo {
+  /**
+   * cpu核数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cpu?: number
+  /**
+   * 内存大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Memory?: number
+  /**
+   * 最小存储大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MinStorageSize?: number
+  /**
+   * 最大存储大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxStorageSize?: number
+  /**
+   * 是否有库存
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasStock?: boolean
+  /**
+   * 实例类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceType?: string
+  /**
+   * 存储类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageType?: string
+  /**
+   * 最小副本数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MinReplicaNum?: number
+  /**
+   * 最大副本数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxReplicaNum?: number
+  /**
+   * 可用区库存信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneStockInfos?: Array<ZoneStockInfo4Libra>
+}
+
+/**
  * ModifyAccountPrivileges返回参数结构体
  */
 export interface ModifyAccountPrivilegesResponse {
@@ -5102,6 +6185,28 @@ export interface InquirePriceCreateRequest {
 }
 
 /**
+ * ModifyLibraDBClusterAccountDescription请求参数结构体
+ */
+export interface ModifyLibraDBClusterAccountDescriptionRequest {
+  /**
+   * 分析集群id
+   */
+  ClusterId: string
+  /**
+   * 账号名
+   */
+  AccountName: string
+  /**
+   * 描述
+   */
+  Description: string
+  /**
+   * 主机名
+   */
+  Host?: string
+}
+
+/**
  * ModifyAuditService请求参数结构体
  */
 export interface ModifyAuditServiceRequest {
@@ -5129,6 +6234,30 @@ export interface ModifyAuditServiceRequest {
    * 规则模板ID。
    */
   RuleTemplateIds?: Array<string>
+}
+
+/**
+ * DescribeLibraDBClusterDetail返回参数结构体
+ */
+export interface DescribeLibraDBClusterDetailResponse {
+  /**
+   * 集群信息
+   */
+  Detail?: LibraDBClusterDetail
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GrantAccountPrivileges返回参数结构体
+ */
+export interface GrantAccountPrivilegesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5207,6 +6336,21 @@ export interface ExportInstanceSlowQueriesRequest {
    * 排序类型，可选值：asc,desc
    */
   OrderByType?: string
+}
+
+/**
+ * RestartLibraDBInstance返回参数结构体
+ */
+export interface RestartLibraDBInstanceResponse {
+  /**
+   * 异步任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5357,6 +6501,80 @@ export interface SaleZone {
 }
 
 /**
+ * 实例信息
+ */
+export interface InstanceSet {
+  /**
+   * 数据库模式
+   */
+  DbMode?: string
+  /**
+   * cpu核数
+   */
+  InstanceCpu?: number
+  /**
+   * 实例类型
+   */
+  InstanceDeviceType?: string
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 内存
+   */
+  InstanceMemory?: number
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 实例角色
+   */
+  InstanceRole?: string
+  /**
+   * 实例状态
+   */
+  InstanceStatus?: string
+  /**
+   * 状态描述
+   */
+  InstanceStatusDesc?: string
+  /**
+   * 硬盘
+   */
+  InstanceStorage?: number
+  /**
+   * 硬盘类型
+   */
+  InstanceStorageType?: string
+  /**
+   * 引擎类型
+   */
+  InstanceType?: string
+  /**
+   * 持续的时间
+   */
+  MaintainDuration?: number
+  /**
+   * 执行开始时间(距离0点的秒数)
+   */
+  MaintainStartTime?: number
+  /**
+   * 可以执行的时间，枚举值：["Mon","Tue","Wed","Thu","Fri", "Sat", "Sun"]
+   */
+  MaintainWeekDays?: Array<string>
+  /**
+   * 节点列表
+   */
+  NodeList?: Array<string>
+  /**
+   * 实例任务
+   */
+  InstanceTasks?: Array<ObjectTask>
+}
+
+/**
  * ModifySnapBackupCrossRegionConfig返回参数结构体
  */
 export interface ModifySnapBackupCrossRegionConfigResponse {
@@ -5385,25 +6603,13 @@ export interface SwitchProxyVpcResponse {
 }
 
 /**
- * StartCLSDelivery请求参数结构体
+ * ModifyLibraDBForwardConfig返回参数结构体
  */
-export interface StartCLSDeliveryRequest {
+export interface ModifyLibraDBForwardConfigResponse {
   /**
-   * 实例id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
-  /**
-   * 开通的日志主题id
-   */
-  CLSTopicIds: Array<string>
-  /**
-   * 日志类型
-   */
-  LogType?: string
-  /**
-   * 是否维护时间运行
-   */
-  IsInMaintainPeriod?: string
+  RequestId?: string
 }
 
 /**
@@ -5502,6 +6708,32 @@ reuse:使用已有日志集，使用GroupId指定日志集。
    * 日志集name
    */
   GroupName?: string
+}
+
+/**
+ * 高级映射，自动映射规则
+ */
+export interface AutoMapRule {
+  /**
+   * 源端实例Id
+   */
+  SrcInstanceId: string
+  /**
+   * 源端数据库正则
+   */
+  SrcDatabaseRegex: string
+  /**
+   * 源端表正则
+   */
+  SrcTableRegex: string
+  /**
+   * 目标端数据库正则
+   */
+  DstDatabaseRegex: string
+  /**
+   * 目标端表正则
+   */
+  DstTableRegex: string
 }
 
 /**
@@ -5870,17 +7102,36 @@ export interface DescribeBackupDownloadRestrictionRequest {
 }
 
 /**
- * 回档数据库及表
+ * 账号，包含accountName和host
  */
-export interface RollbackTable {
+export interface InputAccount {
   /**
-   * 数据库名称
+   * 账号
    */
-  Database: string
+  AccountName: string
   /**
-   * 数据库表
+   * 主机，默认‘%’
    */
-  Tables: Array<RollbackTableInfo>
+  Host?: string
+}
+
+/**
+ * 资源包信息
+ */
+export interface ResourcePackage {
+  /**
+   * 资源包的唯一ID
+   */
+  PackageId?: string
+  /**
+   * 资源包类型：CCU：计算资源包
+DISK：存储资源包
+   */
+  PackageType?: string
+  /**
+   * 当前资源包绑定在当前实例下的抵扣优先级
+   */
+  DeductionPriority?: number
 }
 
 /**
@@ -6266,43 +7517,17 @@ export interface BizTaskModifyParamsData {
 }
 
 /**
- * RollBackCluster请求参数结构体
+ * OfflineLibraDBCluster返回参数结构体
  */
-export interface RollBackClusterRequest {
+export interface OfflineLibraDBClusterResponse {
   /**
-   * 集群ID
+   * flow id
    */
-  ClusterId: string
+  FlowId?: number
   /**
-   * 回档策略 timeRollback-按时间点回档 snapRollback-按备份文件回档
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RollbackStrategy: string
-  /**
-   * 备份文件ID。
-回档策略为按备份文件回档时必填。
-   */
-  RollbackId: number
-  /**
-   * 期望回档时间。
-回档策略为timeRollback按时间点回档时必填。
-   */
-  ExpectTime?: string
-  /**
-   * 期望阈值（已废弃）
-   */
-  ExpectTimeThresh?: number
-  /**
-   * 回档数据库列表
-   */
-  RollbackDatabases?: Array<RollbackDatabase>
-  /**
-   * 回档数据库表列表
-   */
-  RollbackTables?: Array<RollbackTable>
-  /**
-   * 按时间点回档模式，full: 普通; db: 快速; table: 极速  （默认是普通）
-   */
-  RollbackMode?: string
+  RequestId?: string
 }
 
 /**
@@ -6413,6 +7638,21 @@ export interface DescribeClusterDatabasesRequest {
 }
 
 /**
+ * OfflineLibraDBInstance返回参数结构体
+ */
+export interface OfflineLibraDBInstanceResponse {
+  /**
+   * 任务流id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RemoveClusterSlaveZone请求参数结构体
  */
 export interface RemoveClusterSlaveZoneRequest {
@@ -6442,6 +7682,20 @@ export interface ModifyResourcePackagesDeductionPriorityRequest {
    * 资源包抵扣优先级
    */
   DeductionPriorities: Array<PackagePriority>
+}
+
+/**
+ * OfflineLibraDBInstance请求参数结构体
+ */
+export interface OfflineLibraDBInstanceRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 只读分析引擎实例 ID 列表
+   */
+  InstanceIdList: Array<string>
 }
 
 /**
@@ -6484,6 +7738,36 @@ export interface DescribeAccountPrivilegesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeLibraDBClusterAccounts请求参数结构体
+ */
+export interface DescribeLibraDBClusterAccountsRequest {
+  /**
+   * 分析集群id
+   */
+  ClusterId: string
+  /**
+   * 账号名
+   */
+  AccountNames?: Array<string>
+  /**
+   * 模糊匹配关键字
+   */
+  AccountRegular?: string
+  /**
+   * 主机名
+   */
+  Hosts?: Array<string>
+  /**
+   * 限制
+   */
+  Limit?: number
+  /**
+   * 偏移
+   */
+  Offset?: number
 }
 
 /**
@@ -6775,6 +8059,24 @@ export interface CloseWanResponse {
 }
 
 /**
+ * ModifyProxyRwSplit返回参数结构体
+ */
+export interface ModifyProxyRwSplitResponse {
+  /**
+   * 异步FlowId
+   */
+  FlowId?: number
+  /**
+   * 异步任务ID
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeInstances返回参数结构体
  */
 export interface DescribeInstancesResponse {
@@ -6943,29 +8245,53 @@ export interface AuditLogFilter {
 }
 
 /**
- * UpgradeProxyVersion请求参数结构体
+ * 表映射关系
  */
-export interface UpgradeProxyVersionRequest {
+export interface TableMappingObject {
   /**
-   * 集群ID
+   * 源端实例Id
    */
-  ClusterId: string
+  SrcInstanceId?: string
   /**
-   * 数据库代理当前版本
+   * 数据库名称
    */
-  SrcProxyVersion: string
+  DatabaseName?: string
   /**
-   * 数据库代理升级版本
+   * 表名
    */
-  DstProxyVersion: string
+  TableName?: string
   /**
-   * 数据库代理组ID
+   * 映射数据库名称
    */
-  ProxyGroupId?: string
+  MapDatabaseName?: string
   /**
-   * 升级时间 ：no（升级完成时）yes（实例维护时间）
+   * 映射表名
    */
-  IsInMaintainPeriod?: string
+  MapTableName?: string
+  /**
+   * 同步状态
+   */
+  Status?: string
+  /**
+   * 同步进度
+   */
+  Process?: number
+  /**
+   * 延迟
+   */
+  Lag?: number
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 是否为主表
+   */
+  IsPrimary?: boolean
+  /**
+   * 虚拟列填充值
+   */
+  VirtualColValue?: string
 }
 
 /**
@@ -7086,6 +8412,20 @@ export interface ExportInstanceErrorLogsRequest {
 }
 
 /**
+ * DescribeLibraDBDataSource请求参数结构体
+ */
+export interface DescribeLibraDBDataSourceRequest {
+  /**
+   * 分析集群ID
+   */
+  ClusterId: string
+  /**
+   * 只读分析引擎实例ID
+   */
+  InstanceId: string
+}
+
+/**
  * ActivateInstance请求参数结构体
  */
 export interface ActivateInstanceRequest {
@@ -7100,14 +8440,39 @@ export interface ActivateInstanceRequest {
 }
 
 /**
- * DescribeBackupDownloadRestriction返回参数结构体
+ * ModifyAccountDescription请求参数结构体
  */
-export interface DescribeBackupDownloadRestrictionResponse {
+export interface ModifyAccountDescriptionRequest {
   /**
-   * 集群备份下载限制
-注意：此字段可能返回 null，表示取不到有效值。
+   * 数据库账号名
    */
-  BackupLimitClusterRestrictions?: Array<BackupLimitClusterRestriction>
+  AccountName: string
+  /**
+   * 数据库账号描述信息
+   */
+  Description: string
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 主机，默认为"%"
+   */
+  Host?: string
+}
+
+/**
+ * DescribeLibraDBClusterTableMapping返回参数结构体
+ */
+export interface DescribeLibraDBClusterTableMappingResponse {
+  /**
+   * 总记录数
+   */
+  TotalCnt?: number
+  /**
+   * 数据库映射信息
+   */
+  TableMappings?: Array<TableMappingObject>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7126,6 +8491,20 @@ export interface DeleteClusterDatabaseRequest {
    * 数据库名
    */
   DbNames: Array<string>
+}
+
+/**
+ * DescribeInstanceCLSLogDelivery请求参数结构体
+ */
+export interface DescribeInstanceCLSLogDeliveryRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * 日志类型
+   */
+  LogType?: string
 }
 
 /**
@@ -7306,6 +8685,20 @@ export interface SwitchClusterZoneRequest {
    * 维护期间执行-yes,立即执行-no
    */
   IsInMaintainPeriod?: string
+}
+
+/**
+ * DescribeLibraDBClusterAutoMapRule返回参数结构体
+ */
+export interface DescribeLibraDBClusterAutoMapRuleResponse {
+  /**
+   * 高级映射规则
+   */
+  AutoMapRules?: Array<AutoMapRule>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7759,6 +9152,20 @@ export interface DescribeAuditRuleWithInstanceIdsResponse {
 }
 
 /**
+ * SetLibraDBClusterRenewFlag返回参数结构体
+ */
+export interface SetLibraDBClusterRenewFlagResponse {
+  /**
+   * 数量
+   */
+  Count?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SearchClusterDatabases请求参数结构体
  */
 export interface SearchClusterDatabasesRequest {
@@ -7786,6 +9193,37 @@ export interface ModifyProxyDescResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 分析引擎同步对象
+ */
+export interface ReplicationObject {
+  /**
+   * 源端实例类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SrcInstanceType: string
+  /**
+   * 源端集群Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SrcClusterId?: string
+  /**
+   * 源端实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SrcInstanceId?: string
+  /**
+   * 复制任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReplicationJobId?: string
+  /**
+   * 同步对象详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MigrateObjects?: MigrateOpt
 }
 
 /**
@@ -8065,6 +9503,20 @@ export interface ModifyParamTemplateResponse {
 }
 
 /**
+ * ActivateLibraDBCluster返回参数结构体
+ */
+export interface ActivateLibraDBClusterResponse {
+  /**
+   * flow id
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * BindClusterResourcePackages返回参数结构体
  */
 export interface BindClusterResourcePackagesResponse {
@@ -8097,17 +9549,99 @@ export interface LogRuleTemplateInfo {
 }
 
 /**
- * proxy节点可用区内个数
+ * StartCLSDelivery请求参数结构体
  */
-export interface ProxyZone {
+export interface StartCLSDeliveryRequest {
   /**
-   * proxy节点可用区
+   * 实例id
    */
-  ProxyNodeZone?: string
+  InstanceId: string
   /**
-   * proxy节点数量
+   * 开通的日志主题id
    */
-  ProxyNodeCount?: number
+  CLSTopicIds: Array<string>
+  /**
+   * 日志类型
+   */
+  LogType?: string
+  /**
+   * 是否维护时间运行
+   */
+  IsInMaintainPeriod?: string
+}
+
+/**
+ * libra集群信息
+ */
+export interface LibraClusterSet {
+  /**
+   * 用户id
+   */
+  AppId?: number
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 数据库版本
+   */
+  DbVersion?: string
+  /**
+   * 实例信息
+   */
+  InstanceSet?: Array<LibraInstanceSet>
+  /**
+   * 付费模式
+   */
+  PayMode?: number
+  /**
+   * 到期时间
+   */
+  PeriodEndTime?: string
+  /**
+   * 项目id
+   */
+  ProjectID?: number
+  /**
+   * 地域
+   */
+  Region?: string
+  /**
+   * 自动续费标识，1为自动续费，0为到期不续
+   */
+  RenewFlag?: number
+  /**
+   * 状态
+   */
+  Status?: string
+  /**
+   * 状态描述
+   */
+  StatusDesc?: string
+  /**
+   * 存储大小
+   */
+  Storage?: number
+  /**
+   * 使用容量
+   */
+  UsedStorage?: number
+  /**
+   * vip地址
+   */
+  Vip?: string
+  /**
+   * vport端口
+   */
+  Vport?: number
 }
 
 /**
@@ -8165,6 +9699,20 @@ export interface CreateProxyRequest {
 }
 
 /**
+ * DeleteLibraDBCluster返回参数结构体
+ */
+export interface DeleteLibraDBClusterResponse {
+  /**
+   * flow id
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeResourcePackageSaleSpec返回参数结构体
  */
 export interface DescribeResourcePackageSaleSpecResponse {
@@ -8176,6 +9724,20 @@ export interface DescribeResourcePackageSaleSpecResponse {
    * 资源包明细说明
    */
   Detail?: Array<SalePackageSpec>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpgradeClusterVersion返回参数结构体
+ */
+export interface UpgradeClusterVersionResponse {
+  /**
+   * 异步任务id
+   */
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8201,19 +9763,137 @@ export interface QuerySimpleFilter {
 }
 
 /**
- * DescribeResourcesByDealName请求参数结构体
+ * 集群列表信息
  */
-export interface DescribeResourcesByDealNameRequest {
+export interface LibraDBClusterSet {
   /**
-   * 计费订单ID（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）。
-DealName与DealNames至少应输入一项，两者都传时以DealName为准。
+   * 用户id
    */
-  DealName?: string
+  AppId?: number
   /**
-   * 计费订单ID列表，可以一次查询若干条订单ID对应资源信息（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）。
-DealName与DealNames至少应输入一项，两者都传时以DealName为准。
+   * 集群ID
    */
-  DealNames?: Array<string>
+  ClusterId?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * cynos版本
+   */
+  CynosVersion?: string
+  /**
+   * 版本标签
+   */
+  CynosVersionTag?: string
+  /**
+   * 数据库版本
+   */
+  DbVersion?: string
+  /**
+   * 实例数量
+   */
+  InstanceNum?: number
+  /**
+   * 是否冻结
+   */
+  IsFreeze?: string
+  /**
+   * 网络地址
+   */
+  NetAddrs?: Array<NetAddr>
+  /**
+   * 付费模式
+   */
+  PayMode?: number
+  /**
+   * 到期时间
+
+   */
+  PeriodEndTime?: string
+  /**
+   * 项目id
+   */
+  ProjectID?: number
+  /**
+   * 地域
+   */
+  Region?: string
+  /**
+   * 自动续费标识，1为自动续费，0为到期不续
+   */
+  RenewFlag?: number
+  /**
+   * 状态
+   */
+  Status?: string
+  /**
+   * 状态描述
+   */
+  StatusDesc?: string
+  /**
+   * 存储大小，单位为G
+   */
+  Storage?: number
+  /**
+   * 子网ID
+   */
+  SubnetId?: string
+  /**
+   * 任务列表
+   */
+  Tasks?: Array<ObjectTask>
+  /**
+   * 账户id
+   */
+  Uin?: string
+  /**
+   * vip地址
+   */
+  Vip?: string
+  /**
+   * vpc唯一id
+   */
+  VpcId?: string
+  /**
+   * vport端口
+   */
+  Vport?: number
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 主可用区
+   */
+  MasterZone?: string
+  /**
+   * 物理可用区
+   */
+  PhysicalZone?: string
+  /**
+   * 可用区
+   */
+  Zone?: string
+}
+
+/**
+ * DescribeLibraDBClusterAccountPrivileges返回参数结构体
+ */
+export interface DescribeLibraDBClusterAccountPrivilegesResponse {
+  /**
+   * 权限列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Privileges?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8391,6 +10071,24 @@ export interface DescribeBinlogConfigRequest {
    * 集群ID
    */
   ClusterId: string
+}
+
+/**
+ * IsolateLibraDBCluster请求参数结构体
+ */
+export interface IsolateLibraDBClusterRequest {
+  /**
+   * 分析集群 ID
+   */
+  ClusterId: string
+  /**
+   * 隔离原因类型
+   */
+  IsolateReasonTypes?: Array<number | bigint>
+  /**
+   * 隔离原因
+   */
+  IsolateReason?: string
 }
 
 /**
@@ -8635,17 +10333,49 @@ pause
 }
 
 /**
- * OpenWan返回参数结构体
+ * 数据源项
  */
-export interface OpenWanResponse {
+export interface DataSourceItem {
   /**
-   * 任务流ID
+   * 源端实例ID
    */
-  FlowId?: number
+  InstanceId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 源端集群ID
    */
-  RequestId?: string
+  ClusterId?: string
+  /**
+   * 源端数据库类型
+   */
+  DBType?: string
+  /**
+   * 源端数据库IP
+   */
+  IP?: string
+  /**
+   * 源端数据库端口
+   */
+  Port?: number
+  /**
+   * 源实例地域
+   */
+  Region?: string
+  /**
+   * 源端实例可用区
+   */
+  Zone?: string
+  /**
+   * 源端主账号uin
+   */
+  SrcUin?: string
+  /**
+   * 账号类型
+   */
+  AccountMode?: string
+  /**
+   * 同步任务状态
+   */
+  ReplicationJobStatus?: string
 }
 
 /**
@@ -8674,6 +10404,16 @@ export interface ClusterTaskId {
    * 任务ID
    */
   TaskId?: string
+}
+
+/**
+ * DeleteLibraDBClusterAccounts返回参数结构体
+ */
+export interface DeleteLibraDBClusterAccountsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8716,6 +10456,21 @@ export interface DescribeFlowRequest {
    * 任务流ID
    */
   FlowId: number
+}
+
+/**
+ * DescribeLibraDBDataSource返回参数结构体
+ */
+export interface DescribeLibraDBDataSourceResponse {
+  /**
+   * 源端信息列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataSourceList?: Array<DataSourceItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9113,6 +10868,41 @@ export interface DescribeSupportProxyVersionResponse {
 }
 
 /**
+ * DescribeLibraDBForwardConfig返回参数结构体
+ */
+export interface DescribeLibraDBForwardConfigResponse {
+  /**
+   * 是否开启转发
+   */
+  ForwardMode?: string
+  /**
+   * 转发列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ForwardList?: Array<ForwardInstanceInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * Libra所售卖的地域库存信息
+ */
+export interface ZoneStockInfo4Libra {
+  /**
+   * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
+  /**
+   * 是否有库存
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasStock?: boolean
+}
+
+/**
  * DeleteClusterDatabase返回参数结构体
  */
 export interface DeleteClusterDatabaseResponse {
@@ -9373,6 +11163,21 @@ pausing
 }
 
 /**
+ * ActivateLibraDBInstance返回参数结构体
+ */
+export interface ActivateLibraDBInstanceResponse {
+  /**
+   * 任务流id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RestartInstance请求参数结构体
  */
 export interface RestartInstanceRequest {
@@ -9432,6 +11237,24 @@ export interface BackupLimitVpcItem {
    * 限制下载的vpc列表
    */
   VpcList?: Array<string>
+}
+
+/**
+ * DescribeLibraDBClusterAccounts返回参数结构体
+ */
+export interface DescribeLibraDBClusterAccountsResponse {
+  /**
+   * 账号信息
+   */
+  AccountSet?: Array<Account>
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9610,17 +11433,125 @@ export interface ModifyResourcePackageClustersResponse {
 }
 
 /**
- * 账号，包含accountName和host
+ * libra集群详情
  */
-export interface InputAccount {
+export interface LibraDBClusterDetail {
   /**
-   * 账号
+   * 集群id
    */
-  AccountName: string
+  ClusterId?: string
   /**
-   * 主机，默认‘%’
+   * 集群名称
    */
-  Host?: string
+  ClusterName?: string
+  /**
+   * 地域
+   */
+  Region?: string
+  /**
+   * 状态
+   */
+  Status?: string
+  /**
+   * 状态描述
+   */
+  StatusDesc?: string
+  /**
+   * 存储大小
+   */
+  Storage?: number
+  /**
+   * VPC名称
+   */
+  VpcName?: string
+  /**
+   * vpc唯一id
+   */
+  VpcId?: string
+  /**
+   * 子网名称
+   */
+  SubnetName?: string
+  /**
+   * 子网ID
+   */
+  SubnetId?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 数据库版本
+   */
+  DbVersion?: string
+  /**
+   * 使用容量
+   */
+  UsedStorage?: number
+  /**
+   * vip地址
+   */
+  Vip?: string
+  /**
+   * vport端口
+   */
+  Vport?: number
+  /**
+   * 集群只读实例的vip地址和vport端口
+   */
+  RoAddr?: Array<RoAddr>
+  /**
+   * cynos版本
+   */
+  CynosVersion?: string
+  /**
+   * 是否冻结
+   */
+  IsFreeze?: string
+  /**
+   * 任务列表
+   */
+  Tasks?: Array<ObjectTask>
+  /**
+   * 主可用区
+   */
+  MasterZone?: string
+  /**
+   * 实例集合
+   */
+  InstanceSet?: Array<InstanceSet>
+  /**
+   * 付费模式
+   */
+  PayMode?: number
+  /**
+   * 到期时间
+   */
+  PeriodEndTime?: string
+  /**
+   * 项目id
+   */
+  ProjectID?: number
+  /**
+   * 自动续费标识
+   */
+  RenewFlag?: number
+  /**
+   * 版本标签
+   */
+  CynosVersionTag?: string
+  /**
+   * 不支持添加ro yes-不支持添加ro， no/null/"" 支持添加ro
+   */
+  NoSupportAddRo?: string
+  /**
+   * 可用区
+   */
+  Zone?: string
+  /**
+   * 物理可用区
+   */
+  PhysicalZone?: string
 }
 
 /**
@@ -9639,6 +11570,76 @@ export interface DescribeSaveBackupClustersRequest {
    * 检索条件
    */
   Filters?: Array<QuerySimpleFilter>
+}
+
+/**
+ * DescribeLibraDBClusterAccountAllPrivileges返回参数结构体
+ */
+export interface DescribeLibraDBClusterAccountAllPrivilegesResponse {
+  /**
+   * 权限语句
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivilegeStatements?: Array<string>
+  /**
+   * 全局权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GlobalPrivileges?: Array<string>
+  /**
+   * 数据库权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabasePrivileges?: Array<DatabasePrivileges>
+  /**
+   * 表权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TablePrivileges?: Array<TablePrivileges>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RollBackCluster请求参数结构体
+ */
+export interface RollBackClusterRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 回档策略 timeRollback-按时间点回档 snapRollback-按备份文件回档
+   */
+  RollbackStrategy: string
+  /**
+   * 备份文件ID。
+回档策略为按备份文件回档时必填。
+   */
+  RollbackId: number
+  /**
+   * 期望回档时间。
+回档策略为timeRollback按时间点回档时必填。
+   */
+  ExpectTime?: string
+  /**
+   * 期望阈值（已废弃）
+   */
+  ExpectTimeThresh?: number
+  /**
+   * 回档数据库列表
+   */
+  RollbackDatabases?: Array<RollbackDatabase>
+  /**
+   * 回档数据库表列表
+   */
+  RollbackTables?: Array<RollbackTable>
+  /**
+   * 按时间点回档模式，full: 普通; db: 快速; table: 极速  （默认是普通）
+   */
+  RollbackMode?: string
 }
 
 /**
@@ -9708,6 +11709,20 @@ export interface InstanceAuditRule {
 }
 
 /**
+ * DescribeLibraDBClusterDetail请求参数结构体
+ */
+export interface DescribeLibraDBClusterDetailRequest {
+  /**
+   * 分析集群 ID
+   */
+  ClusterId: string
+  /**
+   * 是否获取更多服务器信息，可选值yes no
+   */
+  GetServerInfo?: string
+}
+
+/**
  * 交换RO组信息
  */
 export interface ExchangeRoGroupInfo {
@@ -9719,6 +11734,26 @@ export interface ExchangeRoGroupInfo {
    * 目标RO组信息
    */
   DstRoGroupInfo?: RollbackRoGroupInfo
+}
+
+/**
+ * IsolateLibraDBInstance返回参数结构体
+ */
+export interface IsolateLibraDBInstanceResponse {
+  /**
+   * 任务流id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlowId?: number
+  /**
+   * 订单号列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DealNames?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9818,17 +11853,29 @@ export interface RollbackInstanceInfo {
 }
 
 /**
- * UpgradeClusterVersion返回参数结构体
+ * ModifyLibraDBClusterAccountPrivilege请求参数结构体
  */
-export interface UpgradeClusterVersionResponse {
+export interface ModifyLibraDBClusterAccountPrivilegeRequest {
   /**
-   * 异步任务id
+   * 集群id
    */
-  FlowId?: number
+  ClusterId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 账号
    */
-  RequestId?: string
+  Account: InputAccount
+  /**
+   * 全局权限
+   */
+  GlobalPrivileges?: Array<string>
+  /**
+   * 数据库权限
+   */
+  DatabasePrivileges?: Array<DatabasePrivileges>
+  /**
+   * 表权限
+   */
+  TablePrivileges?: Array<TablePrivileges>
 }
 
 /**
@@ -9853,6 +11900,32 @@ export interface DeleteParamTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DownloadLibraDBClusterList请求参数结构体
+ */
+export interface DownloadLibraDBClusterListRequest {
+  /**
+   * 限制数
+   */
+  Limit?: number
+  /**
+   * 偏移值
+   */
+  Offset?: number
+  /**
+   * 排序字段
+   */
+  OrderBy?: string
+  /**
+   * 排序方式，desc,asc,DESC,ASC
+   */
+  OrderByType?: string
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<QueryFilter>
 }
 
 /**
@@ -10087,93 +12160,13 @@ export interface DescribeInstancesWithinSameClusterRequest {
 }
 
 /**
- * 实例组信息
+ * ModifyBinlogConfig返回参数结构体
  */
-export interface CynosdbInstanceGroup {
+export interface ModifyBinlogConfigResponse {
   /**
-   * 用户appId
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AppId?: number
-  /**
-   * 集群ID
-   */
-  ClusterId?: string
-  /**
-   * 创建时间
-   */
-  CreatedTime?: string
-  /**
-   * 删除时间
-   */
-  DeletedTime?: string
-  /**
-   * 实例组ID
-   */
-  InstanceGroupId?: string
-  /**
-   * 状态
-   */
-  Status?: string
-  /**
-   * 实例组（网络）类型。ha-ha组；ro-只读组；proxy-代理；singleRo-只读实例独占
-   */
-  Type?: string
-  /**
-   * 更新时间
-   */
-  UpdatedTime?: string
-  /**
-   * 内网IP
-   */
-  Vip?: string
-  /**
-   * 内网端口
-   */
-  Vport?: number
-  /**
-   * 外网域名
-   */
-  WanDomain?: string
-  /**
-   * 外网ip
-   */
-  WanIP?: string
-  /**
-   * 外网端口
-   */
-  WanPort?: number
-  /**
-   * 外网状态
-   */
-  WanStatus?: string
-  /**
-   * 实例组包含实例信息
-   */
-  InstanceSet?: Array<CynosdbInstance>
-  /**
-   * VPC的ID
-   */
-  UniqVpcId?: string
-  /**
-   * 子网ID
-   */
-  UniqSubnetId?: string
-  /**
-   * 正在回收IP信息
-   */
-  OldAddrInfo?: OldAddrInfo
-  /**
-   * 正在进行的任务
-   */
-  ProcessingTasks?: Array<string>
-  /**
-   * 任务列表
-   */
-  Tasks?: Array<ObjectTask>
-  /**
-   * biz_net_service表id
-   */
-  NetServiceId?: number
+  RequestId?: string
 }
 
 /**
@@ -10208,6 +12201,16 @@ export interface DescribeServerlessInstanceSpecsRequest {
    * 可用区
    */
   Zone?: string
+}
+
+/**
+ * ActivateLibraDBCluster请求参数结构体
+ */
+export interface ActivateLibraDBClusterRequest {
+  /**
+   * 分析集群 ID
+   */
+  ClusterId: string
 }
 
 /**
@@ -10253,6 +12256,44 @@ export interface ProxyGroup {
 }
 
 /**
+ * DescribeLibraDBSlowLogs请求参数结构体
+ */
+export interface DescribeLibraDBSlowLogsRequest {
+  /**
+   * 只读分析引擎实例 ID
+   */
+  InstanceId?: string
+  /**
+   * 开始时间,1753171200。
+   */
+  StartTime?: number
+  /**
+   * 结束时间,1753171200。
+   */
+  EndTime?: number
+  /**
+   * 日志单页条数限制:0-200。
+   */
+  Limit?: string
+  /**
+   * 日志分页，大于0。
+   */
+  Offset?: string
+  /**
+   * 日志排序方式，DESC-降序，ASC-升序。
+   */
+  Order?: string
+  /**
+   * 日志排序条件。
+   */
+  OrderBy?: string
+  /**
+   * 过滤条件。
+   */
+  LogFilter?: Array<LogFilter>
+}
+
+/**
  * AddClusterSlaveZone请求参数结构体
  */
 export interface AddClusterSlaveZoneRequest {
@@ -10275,6 +12316,20 @@ export interface AddClusterSlaveZoneRequest {
 }
 
 /**
+ * CheckCreateLibraDBInstance请求参数结构体
+ */
+export interface CheckCreateLibraDBInstanceRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+}
+
+/**
  * 回滚数据库信息
  */
 export interface RollbackDatabase {
@@ -10286,6 +12341,16 @@ export interface RollbackDatabase {
    * 新数据库名称
    */
   NewDatabase: string
+}
+
+/**
+ * DeleteLibraDBCluster请求参数结构体
+ */
+export interface DeleteLibraDBClusterRequest {
+  /**
+   * 分析集群 ID
+   */
+  ClusterId: string
 }
 
 /**
@@ -10355,6 +12420,24 @@ export interface ModifyInstanceUpgradeLimitDaysRequest {
 }
 
 /**
+ * ModifyLibraDBClusterAccountHost请求参数结构体
+ */
+export interface ModifyLibraDBClusterAccountHostRequest {
+  /**
+   * 分析集群id
+   */
+  ClusterId: string
+  /**
+   * 账号信息
+   */
+  Account: InputAccount
+  /**
+   * 主机名
+   */
+  NewHost: string
+}
+
+/**
  * CloseClusterPasswordComplexity请求参数结构体
  */
 export interface CloseClusterPasswordComplexityRequest {
@@ -10362,6 +12445,16 @@ export interface CloseClusterPasswordComplexityRequest {
    * 集群ID数组
    */
   ClusterIds: Array<string>
+}
+
+/**
+ * ModifyLibraDBClusterAccountDescription返回参数结构体
+ */
+export interface ModifyLibraDBClusterAccountDescriptionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10417,13 +12510,19 @@ export interface ModifyAccountParamsRequest {
 }
 
 /**
- * ReplayInstanceAuditLog返回参数结构体
+ * CheckCreateLibraDBInstance返回参数结构体
  */
-export interface ReplayInstanceAuditLogResponse {
+export interface CheckCreateLibraDBInstanceResponse {
   /**
-   * 任务id
+   * 整体校验状态
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TaskId?: number
+  Status?: string
+  /**
+   * 校验项
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckItem?: Array<CheckItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10519,6 +12618,34 @@ export interface LogicBackupConfigInfo {
 }
 
 /**
+ * proxy节点可用区内个数
+ */
+export interface ProxyZone {
+  /**
+   * proxy节点可用区
+   */
+  ProxyNodeZone?: string
+  /**
+   * proxy节点数量
+   */
+  ProxyNodeCount?: number
+}
+
+/**
+ * 只读实例地址
+ */
+export interface RoAddr {
+  /**
+   * IP地址
+   */
+  IP?: string
+  /**
+   * 端口
+   */
+  Port?: number
+}
+
+/**
  * 集成集群配置
  */
 export interface IntegrateCreateClusterConfig {
@@ -10551,9 +12678,17 @@ export interface DeleteBackupResponse {
 }
 
 /**
- * ModifyBackupDownloadRestriction返回参数结构体
+ * DescribeProjectSecurityGroups返回参数结构体
  */
-export interface ModifyBackupDownloadRestrictionResponse {
+export interface DescribeProjectSecurityGroupsResponse {
+  /**
+   * 安全组详情
+   */
+  Groups?: Array<SecurityGroup>
+  /**
+   * 总数量
+   */
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10652,6 +12787,24 @@ export interface ResetAccountPasswordResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateLibraDBClusterAccounts请求参数结构体
+ */
+export interface CreateLibraDBClusterAccountsRequest {
+  /**
+   * 分析集群id
+   */
+  ClusterId: string
+  /**
+   * 账户信息
+   */
+  Accounts: Array<NewAccount>
+  /**
+   * 加密方式
+   */
+  EncryptMethod?: string
 }
 
 /**
@@ -10827,6 +12980,66 @@ export interface ExportInstanceErrorLogsResponse {
 }
 
 /**
+ * DescribeLibraDBClusters请求参数结构体
+ */
+export interface DescribeLibraDBClustersRequest {
+  /**
+   * 限制
+   */
+  Limit?: number
+  /**
+   * 偏置
+   */
+  Offset?: number
+  /**
+   * 排序字段
+   */
+  OrderBy?: string
+  /**
+   * 排序方法
+   */
+  OrderByType?: string
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<QueryFilter>
+}
+
+/**
+ * LibraDB 节点信息
+ */
+export interface LibraDBNodeInfo {
+  /**
+   * LibraDB节点ID
+   */
+  NodeId?: string
+  /**
+   * 节点状态
+   */
+  Status?: string
+  /**
+   * 数据同步中
+   */
+  DataStatus?: string
+  /**
+   * CPU核数
+   */
+  Cpu?: number
+  /**
+   * 内存大小，单位 G
+   */
+  Memory?: number
+  /**
+   * 磁盘大小，单位G
+   */
+  Storage?: number
+  /**
+   * 错误信息
+   */
+  Message?: string
+}
+
+/**
  * 实例参数信息
  */
 export interface ParamItemDetail {
@@ -10953,6 +13166,24 @@ export interface RenewClustersResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyLibraDBForwardConfig请求参数结构体
+ */
+export interface ModifyLibraDBForwardConfigRequest {
+  /**
+   * 只读分析引擎实例Id
+   */
+  InstanceId: string
+  /**
+   * 转发模式
+   */
+  ForwardMode?: string
+  /**
+   * 转发实例列表
+   */
+  ForwardList?: Array<ForwardInstanceInfo>
 }
 
 /**
@@ -11092,6 +13323,36 @@ export interface CloseAuditServiceRequest {
    * 实例ID。
    */
   InstanceId: string
+}
+
+/**
+ * ModifyLibraDBClusterReplicationObject请求参数结构体
+ */
+export interface ModifyLibraDBClusterReplicationObjectRequest {
+  /**
+   * 分析集群ID
+   */
+  ClusterId: string
+  /**
+   * 只读分析引擎实例 ID
+   */
+  InstanceId: string
+  /**
+   * 映射模式
+   */
+  ForceDefaultMapRule?: string
+  /**
+   * 同步对象
+   */
+  Objects?: Array<ReplicationObject>
+  /**
+   * 自动映射规则
+   */
+  AutoMapRules?: Array<AutoMapRule>
+  /**
+   * 是否按照最新映射规则刷新存量映射关系
+   */
+  RefreshMapping?: boolean
 }
 
 /**
@@ -11263,6 +13524,20 @@ export interface SecurityGroup {
 }
 
 /**
+ * SetLibraDBClusterRenewFlag请求参数结构体
+ */
+export interface SetLibraDBClusterRenewFlagRequest {
+  /**
+   * 分析集群 ID 列表
+   */
+  ResourceIds?: Array<string>
+  /**
+   * 续费标记 0:正常续费  1:自动续费 2:到期不续
+   */
+  AutoRenewFlag?: number
+}
+
+/**
  * ModifyClusterPasswordComplexity请求参数结构体
  */
 export interface ModifyClusterPasswordComplexityRequest {
@@ -11325,6 +13600,11 @@ export interface BackupLimitRestriction {
 }
 
 /**
+ * DescribeLibraDBVersion请求参数结构体
+ */
+export type DescribeLibraDBVersionRequest = null
+
+/**
  * ModifyInstanceParam返回参数结构体
  */
 export interface ModifyInstanceParamResponse {
@@ -11336,6 +13616,24 @@ export interface ModifyInstanceParamResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * LibraDB 版本信息
+ */
+export interface LibraDBVersion {
+  /**
+   * 版本号
+   */
+  Version?: string
+  /**
+   * 版本tag
+   */
+  Tag?: string
+  /**
+   * 是否可以使用该版本
+   */
+  HasPermission?: boolean
 }
 
 /**
@@ -11354,6 +13652,32 @@ export interface TaskProgressInfo {
    * 预估时间
    */
   CurrentStepRemainingTime?: string
+}
+
+/**
+ * ResetLibraDBClusterAccountPassword请求参数结构体
+ */
+export interface ResetLibraDBClusterAccountPasswordRequest {
+  /**
+   * 分析集群 ID
+   */
+  ClusterId: string
+  /**
+   * 密码
+   */
+  AccountPassword: string
+  /**
+   * 账号
+   */
+  AccountName: string
+  /**
+   * 加密方式
+   */
+  EncryptMethod?: string
+  /**
+   * 主机
+   */
+  Host?: string
 }
 
 /**
@@ -11413,6 +13737,20 @@ export interface CreateBackupResponse {
 }
 
 /**
+ * DescribeLibraDBVersion返回参数结构体
+ */
+export interface DescribeLibraDBVersionResponse {
+  /**
+   * 版本列表
+   */
+  VersionList?: Array<LibraDBVersion>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeInstancesWithinSameCluster返回参数结构体
  */
 export interface DescribeInstancesWithinSameClusterResponse {
@@ -11462,22 +13800,19 @@ export interface RollbackToNewClusterResponse {
 }
 
 /**
- * 资源包信息
+ * DescribeResourcesByDealName请求参数结构体
  */
-export interface ResourcePackage {
+export interface DescribeResourcesByDealNameRequest {
   /**
-   * 资源包的唯一ID
+   * 计费订单ID（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）。
+DealName与DealNames至少应输入一项，两者都传时以DealName为准。
    */
-  PackageId?: string
+  DealName?: string
   /**
-   * 资源包类型：CCU：计算资源包
-DISK：存储资源包
+   * 计费订单ID列表，可以一次查询若干条订单ID对应资源信息（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）。
+DealName与DealNames至少应输入一项，两者都传时以DealName为准。
    */
-  PackageType?: string
-  /**
-   * 当前资源包绑定在当前实例下的抵扣优先级
-   */
-  DeductionPriority?: number
+  DealNames?: Array<string>
 }
 
 /**
@@ -11509,6 +13844,36 @@ export interface DescribeSlaveZonesRequest {
 }
 
 /**
+ * RenewLibraDBClusters返回参数结构体
+ */
+export interface RenewLibraDBClustersResponse {
+  /**
+   * 预付费总订单号
+   */
+  BigDealIds?: Array<string>
+  /**
+   * 冻结流水
+   */
+  TranId?: string
+  /**
+   * 订单名称
+   */
+  DealNames?: Array<string>
+  /**
+   * 资源id
+   */
+  ResourceIds?: Array<string>
+  /**
+   * 集群id
+   */
+  ClusterIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 计费资源信息
  */
 export interface BillingResourceInfo {
@@ -11527,17 +13892,28 @@ export interface BillingResourceInfo {
 }
 
 /**
- * ModifyProxyRwSplit返回参数结构体
+ * 实例权重
  */
-export interface ModifyProxyRwSplitResponse {
+export interface InstanceNameWeight {
   /**
-   * 异步FlowId
+   * 实例名称，创建集群中InstanceInitInfo.InstanceName所指定名称
    */
-  FlowId?: number
+  InstanceName?: string
   /**
-   * 异步任务ID
+   * 权重
    */
-  TaskId?: number
+  Weight?: number
+}
+
+/**
+ * DescribeBackupDownloadRestriction返回参数结构体
+ */
+export interface DescribeBackupDownloadRestrictionResponse {
+  /**
+   * 集群备份下载限制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BackupLimitClusterRestrictions?: Array<BackupLimitClusterRestriction>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11545,39 +13921,13 @@ export interface ModifyProxyRwSplitResponse {
 }
 
 /**
- * ModifyAccountDescription请求参数结构体
+ * DescribeLibraDBForwardConfig请求参数结构体
  */
-export interface ModifyAccountDescriptionRequest {
+export interface DescribeLibraDBForwardConfigRequest {
   /**
-   * 数据库账号名
-   */
-  AccountName: string
-  /**
-   * 数据库账号描述信息
-   */
-  Description: string
-  /**
-   * 集群ID
-   */
-  ClusterId: string
-  /**
-   * 主机，默认为"%"
-   */
-  Host?: string
-}
-
-/**
- * DescribeInstanceCLSLogDelivery请求参数结构体
- */
-export interface DescribeInstanceCLSLogDeliveryRequest {
-  /**
-   * 实例id
+   * 只读分析引擎实例id
    */
   InstanceId: string
-  /**
-   * 日志类型
-   */
-  LogType?: string
 }
 
 /**
@@ -11594,6 +13944,24 @@ export interface UpgradeInstanceResponse {
   BigDealIds?: Array<string>
   /**
    * 订单号
+   */
+  DealNames?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * IsolateLibraDBCluster返回参数结构体
+ */
+export interface IsolateLibraDBClusterResponse {
+  /**
+   * flow id
+   */
+  FlowId?: number
+  /**
+   * 返回订单号
    */
   DealNames?: Array<string>
   /**
@@ -11947,6 +14315,20 @@ export interface Module {
 }
 
 /**
+ * 回档数据库及表
+ */
+export interface RollbackTable {
+  /**
+   * 数据库名称
+   */
+  Database: string
+  /**
+   * 数据库表
+   */
+  Tables: Array<RollbackTableInfo>
+}
+
+/**
  * 售卖地域信息
  */
 export interface SaleRegion {
@@ -12037,9 +14419,9 @@ export interface DescribeIsolatedInstancesResponse {
 }
 
 /**
- * GrantAccountPrivileges返回参数结构体
+ * DescribeLibraDBSlowLogs返回参数结构体
  */
-export interface GrantAccountPrivilegesResponse {
+export interface DescribeLibraDBSlowLogsResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12085,27 +14467,107 @@ export interface ClusterParamModifyLog {
 }
 
 /**
- * ModifyBinlogConfig返回参数结构体
+ * 实例组信息
  */
-export interface ModifyBinlogConfigResponse {
+export interface CynosdbInstanceGroup {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 用户appId
    */
-  RequestId?: string
+  AppId?: number
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
+   * 创建时间
+   */
+  CreatedTime?: string
+  /**
+   * 删除时间
+   */
+  DeletedTime?: string
+  /**
+   * 实例组ID
+   */
+  InstanceGroupId?: string
+  /**
+   * 状态
+   */
+  Status?: string
+  /**
+   * 实例组（网络）类型。ha-ha组；ro-只读组；proxy-代理；singleRo-只读实例独占
+   */
+  Type?: string
+  /**
+   * 更新时间
+   */
+  UpdatedTime?: string
+  /**
+   * 内网IP
+   */
+  Vip?: string
+  /**
+   * 内网端口
+   */
+  Vport?: number
+  /**
+   * 外网域名
+   */
+  WanDomain?: string
+  /**
+   * 外网ip
+   */
+  WanIP?: string
+  /**
+   * 外网端口
+   */
+  WanPort?: number
+  /**
+   * 外网状态
+   */
+  WanStatus?: string
+  /**
+   * 实例组包含实例信息
+   */
+  InstanceSet?: Array<CynosdbInstance>
+  /**
+   * VPC的ID
+   */
+  UniqVpcId?: string
+  /**
+   * 子网ID
+   */
+  UniqSubnetId?: string
+  /**
+   * 正在回收IP信息
+   */
+  OldAddrInfo?: OldAddrInfo
+  /**
+   * 正在进行的任务
+   */
+  ProcessingTasks?: Array<string>
+  /**
+   * 任务列表
+   */
+  Tasks?: Array<ObjectTask>
+  /**
+   * biz_net_service表id
+   */
+  NetServiceId?: number
 }
 
 /**
- * 实例权重
+ * ActivateLibraDBInstance请求参数结构体
  */
-export interface InstanceNameWeight {
+export interface ActivateLibraDBInstanceRequest {
   /**
-   * 实例名称，创建集群中InstanceInitInfo.InstanceName所指定名称
+   * 集群ID
    */
-  InstanceName?: string
+  ClusterId: string
   /**
-   * 权重
+   * 只读分析引擎实例 ID 列表
    */
-  Weight?: number
+  InstanceIdList: Array<string>
 }
 
 /**
@@ -12187,6 +14649,20 @@ export interface TablePrivileges {
 }
 
 /**
+ * ReplayInstanceAuditLog返回参数结构体
+ */
+export interface ReplayInstanceAuditLogResponse {
+  /**
+   * 任务id
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBinlogSaveDays返回参数结构体
  */
 export interface DescribeBinlogSaveDaysResponse {
@@ -12198,6 +14674,20 @@ export interface DescribeBinlogSaveDaysResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyLibraDBClusterProject请求参数结构体
+ */
+export interface ModifyLibraDBClusterProjectRequest {
+  /**
+   * 分析集群 ID 列表
+   */
+  ClusterIdSet?: Array<string>
+  /**
+   * 项目 ID
+   */
+  ProjectId?: number
 }
 
 /**
@@ -12278,6 +14768,20 @@ export interface DescribeParamTemplateDetailResponse {
  * ModifyBinlogSaveDays返回参数结构体
  */
 export interface ModifyBinlogSaveDaysResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyLibraDBClusterProject返回参数结构体
+ */
+export interface ModifyLibraDBClusterProjectResponse {
+  /**
+   * 集群列表
+   */
+  AffectedClusterIdSet?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

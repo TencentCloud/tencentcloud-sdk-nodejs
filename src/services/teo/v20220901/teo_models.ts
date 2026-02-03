@@ -15193,6 +15193,10 @@ export interface TCRCEOption {
    * Channel 信息。
    */
   Channel: string
+  /**
+   * RCE Channel 的开通地域，目前可选的取值范围：<li>ap-beijing：华北地区（北京）；</li><li>ap-jakarta：亚太东南（雅加达）；</li><li>ap-singapore：亚太东南（新加坡）；</li><li>eu-frankfurt：欧洲地区（法兰克福）；</li><li>na-siliconvalley：美国西部（硅谷）。</li>
+   */
+  Region?: string
 }
 
 /**

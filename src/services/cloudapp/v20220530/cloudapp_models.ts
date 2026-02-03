@@ -85,20 +85,6 @@ export interface DescribeLicenseResponse {
 export type VerifyLicenseRequest = null
 
 /**
- * 元数据展示信息
- */
-export interface DisplayMetadata {
-  /**
-   * <p>展示的名称</p>
-   */
-  Name?: string
-  /**
-   * <p>展示的值</p>
-   */
-  Value?: string
-}
-
-/**
  * 表示应用实例的软件授权，包含颁发信息、激活信息等内容。
  */
 export interface License {
@@ -195,6 +181,30 @@ export interface License {
 }
 
 /**
+ * 元数据展示信息
+ */
+export interface DisplayMetadata {
+  /**
+   * <p>展示的名称</p>
+   */
+  Name?: string
+  /**
+   * <p>展示的值</p>
+   */
+  Value?: string
+}
+
+/**
+ * IssueLicense返回参数结构体
+ */
+export interface IssueLicenseResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 描述键值对过滤器，用于条件过滤查询。例如过滤 ID、名称、状态等
 
 - 若存在多个 Filter 时，Filter间的关系为逻辑与（AND）关系。
@@ -259,4 +269,44 @@ export interface DescribeLicenseRequest {
    * 可选过滤器
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * IssueLicense请求参数结构体
+ */
+export interface IssueLicenseRequest {
+  /**
+   * <p>云应用实例 ID</p>
+   */
+  CloudappId: string
+  /**
+   * <p>云应用颁发的 License 授权 ID。系统中唯一，伙伴可通过 License 颁发的订阅接口中获取</p>
+   */
+  LicenseId: string
+  /**
+   * <p>License 的详细数据</p>
+   */
+  LicenseData: PartnerLicenseData
+  /**
+   * <p>License 的激活模式</p>枚举值：<ul><li> immediate ： 立即激活</li><li> scheduled： 指定时间激活</li></ul>
+   */
+  ActivateMode?: string
+  /**
+   * <p>激活时间，指定时间激活时需要传该字段</p>
+   */
+  ActivateAt?: string
+}
+
+/**
+ * License 内容信息
+ */
+export interface PartnerLicenseData {
+  /**
+   * <p>License 文本内容。可传入密钥、证书等文本型 License 内容，二进制内容请进行 base64 编码</p>
+   */
+  Text: string
+  /**
+   * <p>License 的额外信息，JSON 字符串格式</p>
+   */
+  ExtraData?: string
 }

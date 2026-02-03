@@ -27,7 +27,7 @@ import {
   CreateStorageRegionRequest,
   AiRecognitionTaskAsrFullTextSegmentItem,
   DescribeFileAttributesTask,
-  QualityEvaluationConfigureInfo,
+  ExtractBlindWatermarkRequest,
   ReviewAudioVideoTaskInput,
   DescribeAllClassRequest,
   AigcImageTaskOutput,
@@ -49,6 +49,7 @@ import {
   AiReviewTaskProhibitedOcrResult,
   AiRecognitionTaskAsrFullTextResultOutput,
   AiReviewProhibitedOcrTaskOutput,
+  DescribeAigcFaceInfoRequest,
   MediaMiniProgramReviewElem,
   ManageTaskResponse,
   CreateImageProcessingTemplateRequest,
@@ -159,6 +160,7 @@ import {
   DescribeAigcUsageDataResponse,
   AigcUsageDataItem,
   MPSOutputFile,
+  QualityEvaluationConfigureInfo,
   CreatePersonSampleRequest,
   RemoveWatermarkTask,
   ProcedureTask,
@@ -195,6 +197,7 @@ import {
   QualityInspectTask,
   DescribeEnhanceMediaTemplatesResponse,
   ImageBlur,
+  CreateBlindWatermarkTemplateRequest,
   ModifyVodDomainAccelerateConfigRequest,
   PoliticalConfigureInfoForUpdate,
   ElementReferInfo,
@@ -298,6 +301,7 @@ import {
   LicenseUsageDataItem,
   ProcessImageAsyncTask,
   RebuildMediaTargetAudioStream,
+  DescribeBlindWatermarkTemplatesRequest,
   ConcatFileInfo2017,
   ContentReviewResult,
   SceneAigcVideoTaskInput,
@@ -311,7 +315,8 @@ import {
   DescribeAdaptiveDynamicStreamingTemplatesResponse,
   MediaMiniProgramReviewInfo,
   ForbidMediaDistributionResponse,
-  TimeRange,
+  AiAnalysisTaskHighlightOutput,
+  ExtractBlindWatermarkResponse,
   DescribeAdaptiveDynamicStreamingTemplatesRequest,
   ModifyRoundPlayRequest,
   ImageWatermarkInput,
@@ -323,6 +328,7 @@ import {
   RebuildMediaTemplate,
   CreatePersonSampleResponse,
   CreateContentReviewTemplateResponse,
+  ModifyBlindWatermarkTemplateResponse,
   ModifyAnimatedGraphicsTemplateRequest,
   DescribeAIAnalysisTemplatesRequest,
   AigcImageTaskInputFileInfo,
@@ -380,7 +386,7 @@ import {
   ModifyMediaStorageClassRequest,
   AiAnalysisTaskTagOutput,
   MosaicConfigureInfo,
-  AiAnalysisTaskHighlightOutput,
+  DeleteBlindWatermarkTemplateResponse,
   DescribeRebuildMediaTemplatesRequest,
   ReviewImageSegmentItem,
   CreateCLSTopicResponse,
@@ -394,6 +400,7 @@ import {
   ComplexAdaptiveDynamicStreamingTask,
   ModifyMediaInfoResponse,
   ModifyReviewTemplateRequest,
+  CreateBlindWatermarkTemplateResponse,
   AiRecognitionTaskOcrFullTextResult,
   DescribeCLSTopicsResponse,
   MPSSubTaskResult,
@@ -410,7 +417,7 @@ import {
   ComplexAdaptiveDynamicStreamingTaskAudioInput,
   ManageTaskRequest,
   AudioVolumeBalanceInfo,
-  ModifyEventConfigRequest,
+  ModifyBlindWatermarkTemplateRequest,
   AiRecognitionTaskAsrWordsResultOutput,
   DescribeHeadTailTemplatesRequest,
   ModifyAdaptiveDynamicStreamingTemplateResponse,
@@ -468,7 +475,7 @@ import {
   SortBy,
   AdvancedSuperResolutionConfig,
   DescribeMPSTemplatesRequest,
-  DescribeCLSLogsetsRequest,
+  BlindWatermarkTemplate,
   TerrorismConfigureInfoForUpdate,
   DescribePersonSamplesRequest,
   DescribeEventsStateRequest,
@@ -512,6 +519,7 @@ import {
   CreateAIRecognitionTemplateResponse,
   ProcessImageAsyncInput,
   ModifySubAppIdStatusRequest,
+  DeleteBlindWatermarkTemplateRequest,
   CreateSubAppIdResponse,
   DeleteTranscodeTemplateRequest,
   AiReviewTerrorismTaskOutput,
@@ -524,7 +532,9 @@ import {
   AiReviewTerrorismOcrTaskOutput,
   AiAnalysisResult,
   ReduceMediaBitrateAdaptiveDynamicStreamingResult,
+  ModifyEventConfigRequest,
   BlindWatermarkInput,
+  DescribeBlindWatermarkTemplatesResponse,
   AttachMediaSubtitlesResponse,
   CreateDomainVerifyRecordResponse,
   ExtractCopyRightWatermarkResponse,
@@ -703,7 +713,7 @@ import {
   DeleteProcedureTemplateRequest,
   WatermarkInput,
   SearchMediaBySemanticsResponse,
-  DescribeAigcFaceInfoRequest,
+  AiSampleWordInfo,
   AdaptiveDynamicStreamingInfoItem,
   CreateMPSTemplateRequest,
   LiveRealTimeClipStreamInfo,
@@ -755,6 +765,7 @@ import {
   ReduceMediaBitrateMediaProcessTaskResult,
   ImageQualityEnhanceInfo,
   AiRecognitionTaskOcrFullTextResultInput,
+  DescribeCLSLogsetsRequest,
   DescribeAigcUsageDataRequest,
   CreateVodDomainResponse,
   ModifyVodDomainAccelerateConfigResponse,
@@ -875,6 +886,7 @@ import {
   DescribeRebuildMediaTemplatesResponse,
   ModifyEnhanceMediaTemplateRequest,
   AudioVolumeParam,
+  TimeRange,
   AiReviewTaskPornAsrResult,
   ProductInstanceResource,
   ModifyClassResponse,
@@ -910,7 +922,6 @@ import {
   DescribeMediaProcessUsageDataRequest,
   DescribeCLSPushTargetsResponse,
   PullUploadTask,
-  AiSampleWordInfo,
   DescribeImageProcessingTemplatesResponse,
   UserDefineOcrTextReviewTemplateInfoForUpdate,
   SampleSnapshotTaskInput,
@@ -1676,6 +1687,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改用户自定义数字水印模板，数字水印类型不允许修改。
+   */
+  async ModifyBlindWatermarkTemplate(
+    req: ModifyBlindWatermarkTemplateRequest,
+    cb?: (error: string, rep: ModifyBlindWatermarkTemplateResponse) => void
+  ): Promise<ModifyBlindWatermarkTemplateResponse> {
+    return this.request("ModifyBlindWatermarkTemplate", req, cb)
+  }
+
+  /**
      * 该 API 已经<font color=red>不再维护</font>，请使用新版接口 [音画质重生](https://cloud.tencent.com/document/api/266/102571)。
 发起音画质重生
      */
@@ -2062,6 +2083,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建用户自定义数字水印模板。
+   */
+  async CreateBlindWatermarkTemplate(
+    req: CreateBlindWatermarkTemplateRequest,
+    cb?: (error: string, rep: CreateBlindWatermarkTemplateResponse) => void
+  ): Promise<CreateBlindWatermarkTemplateResponse> {
+    return this.request("CreateBlindWatermarkTemplate", req, cb)
+  }
+
+  /**
    * 查询 VOD 创建的 CLS 日志主题列表。
    */
   async DescribeCLSTopics(
@@ -2351,6 +2382,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除用户自定义数字水印模板。
+   */
+  async DeleteBlindWatermarkTemplate(
+    req: DeleteBlindWatermarkTemplateRequest,
+    cb?: (error: string, rep: DeleteBlindWatermarkTemplateResponse) => void
+  ): Promise<DeleteBlindWatermarkTemplateResponse> {
+    return this.request("DeleteBlindWatermarkTemplate", req, cb)
+  }
+
+  /**
      * 创建片头片尾模板。
 - 最大支持模板数量为 100 个。
      */
@@ -2412,17 +2453,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 对云点播的 HLS 视频实现快速拼接和快速剪辑，生成新的 HLS 格式的媒体。
-
-快速拼接或剪辑生成的视频，将产生新的 FileId 并进行固化，固化成功后新视频的文件独立于原始输入视频存在，不受原始视频删除等影响。
-
-<font color='red'>注意：</font>通过 ModifyEventConfig 接口启用接收剪辑固化事件通知，固化成功后将会收到一个 PersistenceComplete 类型的事件通知。在收到这个事件通知之前，不应该对原始输入的视频进行删除、降冷等操作，否则拼接剪辑生成的视频播放可能出现异常。
-     */
-  async FastEditMedia(
-    req: FastEditMediaRequest,
-    cb?: (error: string, rep: FastEditMediaResponse) => void
-  ): Promise<FastEditMediaResponse> {
-    return this.request("FastEditMedia", req, cb)
+   * 用于发起提取视频数字水印任务，提取结果可以通过DescribeTaskDetail查询。
+   */
+  async ExtractBlindWatermark(
+    req: ExtractBlindWatermarkRequest,
+    cb?: (error: string, rep: ExtractBlindWatermarkResponse) => void
+  ): Promise<ExtractBlindWatermarkResponse> {
+    return this.request("ExtractBlindWatermark", req, cb)
   }
 
   /**
@@ -2592,6 +2629,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAigcApiTokensResponse) => void
   ): Promise<DescribeAigcApiTokensResponse> {
     return this.request("DescribeAigcApiTokens", req, cb)
+  }
+
+  /**
+     * 对云点播的 HLS 视频实现快速拼接和快速剪辑，生成新的 HLS 格式的媒体。
+
+快速拼接或剪辑生成的视频，将产生新的 FileId 并进行固化，固化成功后新视频的文件独立于原始输入视频存在，不受原始视频删除等影响。
+
+<font color='red'>注意：</font>通过 ModifyEventConfig 接口启用接收剪辑固化事件通知，固化成功后将会收到一个 PersistenceComplete 类型的事件通知。在收到这个事件通知之前，不应该对原始输入的视频进行删除、降冷等操作，否则拼接剪辑生成的视频播放可能出现异常。
+     */
+  async FastEditMedia(
+    req: FastEditMediaRequest,
+    cb?: (error: string, rep: FastEditMediaResponse) => void
+  ): Promise<FastEditMediaResponse> {
+    return this.request("FastEditMedia", req, cb)
   }
 
   /**
@@ -2792,6 +2843,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteQualityInspectTemplateResponse) => void
   ): Promise<DeleteQualityInspectTemplateResponse> {
     return this.request("DeleteQualityInspectTemplate", req, cb)
+  }
+
+  /**
+   * 查询用户自定义数字水印模板。
+   */
+  async DescribeBlindWatermarkTemplates(
+    req: DescribeBlindWatermarkTemplatesRequest,
+    cb?: (error: string, rep: DescribeBlindWatermarkTemplatesResponse) => void
+  ): Promise<DescribeBlindWatermarkTemplatesResponse> {
+    return this.request("DescribeBlindWatermarkTemplates", req, cb)
   }
 
   /**

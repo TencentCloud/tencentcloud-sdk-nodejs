@@ -2085,10 +2085,8 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * # 同步配音接口
-## 音色克隆
-## 语音合成
-     */
+   * 同步接口，返回克隆音色Id或合成音频结果
+   */
   async SyncDubbing(
     req: SyncDubbingRequest,
     cb?: (error: string, rep: SyncDubbingResponse) => void

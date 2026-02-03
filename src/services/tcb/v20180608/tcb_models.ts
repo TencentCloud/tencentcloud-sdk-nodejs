@@ -283,17 +283,43 @@ export interface DeleteCloudBaseRunServerVersionResponse {
 }
 
 /**
- * DescribeDatabaseACL请求参数结构体
+ * BindCloudBaseAccessDomain请求参数结构体
  */
-export interface DescribeDatabaseACLRequest {
+export interface BindCloudBaseAccessDomainRequest {
   /**
-   * 环境ID
+   * 服务Id，目前是指环境Id
    */
-  EnvId: string
+  ServiceId: string
   /**
-   * 集合名称
+   * 自定义域名
    */
-  CollectionName: string
+  Domain: string
+  /**
+   * 腾讯云证书Id
+   */
+  CertId?: string
+  /**
+   * 默认1，1 绑定默认Cdn，2 绑定TcbIngress（不经过cdn），4 绑定自定义cdn
+   */
+  BindFlag?: number
+  /**
+   * 自定义cdn cname域名
+   */
+  CustomCname?: string
+}
+
+/**
+ * http访问服务客户端限频
+ */
+export interface CloudBaseClientQPSPolicy {
+  /**
+   * UserID 或 ClientIP 或 None，如果为 None 代表不限制
+   */
+  LimitBy?: string
+  /**
+   * 限制值
+   */
+  LimitValue?: number
 }
 
 /**
@@ -514,6 +540,20 @@ export interface DescribeSpecialCostItemsRequest {
 }
 
 /**
+ * UnfreezeCloudBaseRunServers请求参数结构体
+ */
+export interface UnfreezeCloudBaseRunServersRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 服务名称列表
+   */
+  ServerNameList: Array<string>
+}
+
+/**
  * DescribeCloudBaseRunVersion请求参数结构体
  */
 export interface DescribeCloudBaseRunVersionRequest {
@@ -566,6 +606,28 @@ export interface ModifyUserResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CLS日志结果
+ */
+export interface LogResObject {
+  /**
+   * 获取更多检索结果的游标
+   */
+  Context?: string
+  /**
+   * 搜索结果是否已经全部返回
+   */
+  ListOver?: boolean
+  /**
+   * 日志内容信息
+   */
+  Results?: Array<LogObject>
+  /**
+   * 日志聚合结果
+   */
+  AnalysisRecords?: Array<string>
 }
 
 /**
@@ -691,17 +753,18 @@ export interface CloudRunServiceSimpleVersionSnapshot {
 }
 
 /**
- * 索引的key值
+ * BindCloudBaseAccessDomain返回参数结构体
  */
-export interface Indexkey {
+export interface BindCloudBaseAccessDomainResponse {
   /**
-   * 键名
+   * 服务Id，目前是指环境Id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
+  ServiceId?: string
   /**
-   * 方向：specify 1 for ascending or -1 for descending
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Direction?: string
+  RequestId?: string
 }
 
 /**
@@ -997,13 +1060,21 @@ export interface DescribeAuthDomainsResponse {
 }
 
 /**
- * ReinstateEnv请求参数结构体
+ * ModifyCloudBaseGWAPI请求参数结构体
  */
-export interface ReinstateEnvRequest {
+export interface ModifyCloudBaseGWAPIRequest {
   /**
-   * 环境ID
+   * Service ID
    */
-  EnvId: string
+  ServiceId: string
+  /**
+   * API ID
+   */
+  APIId: string
+  /**
+   * 选项列表，key取值：domain, path。
+   */
+  Options: Array<CloudBaseOption>
 }
 
 /**
@@ -1572,6 +1643,16 @@ export interface DescribeQuotaDataResponse {
 }
 
 /**
+ * CreateBillDeal返回参数结构体
+ */
+export interface CreateBillDealResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeGatewayCurveData返回参数结构体
  */
 export interface DescribeGatewayCurveDataResponse {
@@ -1661,6 +1742,80 @@ export interface FunctionInfo {
 }
 
 /**
+ * 安全网关路由
+ */
+export interface WxGatewayRountItem {
+  /**
+   * 安全网关路由名称
+   */
+  GatewayRouteName?: string
+  /**
+   * 安全网关路由协议
+   */
+  GatewayRouteProtocol?: string
+  /**
+   * 安全网关路由地址
+   */
+  GatewayRouteAddr?: string
+  /**
+   * 安全网关路由描述
+   */
+  GatewayRouteDesc?: string
+  /**
+   * 安全网关后端集群id，如果是外网服务，该id与GatewayRountName相同
+   */
+  GatewayRouteClusterId?: string
+  /**
+   * 安全网关创建时间
+   */
+  GatewayRouteCreateTime?: string
+  /**
+   * 安全网关路由限制
+   */
+  FrequencyLimitConfig?: Array<FrequencyLimitConfig>
+  /**
+   * ip代表绑定后端ip。cbr代表云托管服务
+   */
+  GatewayRouteServerType?: string
+  /**
+   * 服务名
+   */
+  GatewayRouteServerName?: string
+  /**
+   * ip
+   */
+  GatewayRewriteHost?: string
+  /**
+   * 网关版本
+   */
+  GatewayVersion?: string
+  /**
+   * 请求路径
+   */
+  GatewayRoutePath?: string
+  /**
+   * 请求模式
+   */
+  GatewayRouteMethod?: string
+  /**
+   * 4层端口
+   */
+  GatewayRoutePort?: number
+  /**
+   * 路由环境ID
+   */
+  GatewayRouteEnvId?: string
+  /**
+   * 路径匹配类型，支持prefix(前缀匹配)，regex(正则匹配)， 默认prefix
+   */
+  GatewayRoutePathMatchType?: string
+  /**
+   * 安全网关自定义头部
+   */
+  CustomHeader?: CustomHeader
+}
+
+/**
  * CommonServiceAPI请求参数结构体
  */
 export interface CommonServiceAPIRequest {
@@ -1676,6 +1831,43 @@ export interface CommonServiceAPIRequest {
    * 指定角色
    */
   ApiRole?: string
+}
+
+/**
+ * 静态托管资源信息
+ */
+export interface StaticStoreInfo {
+  /**
+   * 环境ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnvId?: string
+  /**
+   * 静态域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CdnDomain?: string
+  /**
+   * COS桶
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Bucket?: string
+  /**
+   * cos区域
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  Regoin?: string
+  /**
+   * 资源状态:init(初始化)/process(处理中)/online(上线)/destroying(销毁中)/offline(下线))
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
 }
 
 /**
@@ -1730,6 +1922,16 @@ export interface CreateUserResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeEnvAccountCircle请求参数结构体
+ */
+export interface DescribeEnvAccountCircleRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
 }
 
 /**
@@ -1942,6 +2144,32 @@ export interface DeleteWxGatewayRouteRequest {
 }
 
 /**
+ * EstablishWxGatewayRoute请求参数结构体
+ */
+export interface EstablishWxGatewayRouteRequest {
+  /**
+   * 网关id
+   */
+  GatewayId: string
+  /**
+   * 服务名称
+   */
+  GatewayRouteName: string
+  /**
+   * 服务地址
+   */
+  GatewayRouteAddr: string
+  /**
+   * 协议类型 http/https
+   */
+  GatewayRouteProtocol: string
+  /**
+   * 服务描述
+   */
+  GatewayRouteDesc?: string
+}
+
+/**
  * DescribeEnvPostpaidDeduct请求参数结构体
  */
 export interface DescribeEnvPostpaidDeductRequest {
@@ -2104,6 +2332,36 @@ export interface CreateCloudBaseRunResourceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CLS日志单条信息
+ */
+export interface LogObject {
+  /**
+   * 日志属于的 topic ID
+   */
+  TopicId?: string
+  /**
+   * 日志主题的名字
+   */
+  TopicName?: string
+  /**
+   * 日志时间
+   */
+  Timestamp?: string
+  /**
+   * 日志内容
+   */
+  Content?: string
+  /**
+   * 采集路径
+   */
+  FileName?: string
+  /**
+   * 日志来源设备
+   */
+  Source?: string
 }
 
 /**
@@ -2281,115 +2539,69 @@ export interface EstablishCloudBaseRunServerResponse {
 }
 
 /**
- * 环境信息
+ * CreateCloudBaseGWAPI请求参数结构体
  */
-export interface EnvInfo {
+export interface CreateCloudBaseGWAPIRequest {
   /**
-   * 账户下该环境唯一标识
+   * Service ID
    */
-  EnvId?: string
+  ServiceId: string
   /**
-   * 环境来源。包含以下取值：
-<li>miniapp：微信小程序</li>
-<li>qcloud ：腾讯云</li>
+   * API Path
    */
-  Source?: string
+  Path: string
   /**
-   * 环境别名，要以a-z开头，不能包含 a-zA-z0-9- 以外的字符
+   * API类型（1表示云函数，2表示容器）
    */
-  Alias?: string
+  Type: number
   /**
-   * 创建时间
+   * API Name
    */
-  CreateTime?: string
+  Name: string
   /**
-   * 最后修改时间
+   * APIId，如果非空，表示修改绑定Path
    */
-  UpdateTime?: string
+  APIId?: string
   /**
-   * 环境状态。包含以下取值：
-<li>NORMAL：正常可用</li>
-<li>UNAVAILABLE：服务不可用，可能是尚未初始化或者初始化过程中</li>
+   * 自定义值通用字段（当Type为容器时必填）
    */
-  Status?: string
+  Custom?: string
   /**
-   * 数据库列表
+   * 认证开关 1为开启 2为关闭
    */
-  Databases?: Array<DatabasesInfo>
+  AuthSwitch?: number
   /**
-   * 存储列表
+   * 是否开启多地域
    */
-  Storages?: Array<StorageInfo>
+  EnableRegion?: boolean
   /**
-   * 函数列表
+   * 是否启用统一域名
    */
-  Functions?: Array<FunctionInfo>
+  EnableUnion?: boolean
   /**
-   * tcb产品套餐ID，参考DescribePackages接口的返回值。
+   * 域名
    */
-  PackageId?: string
+  Domain?: string
   /**
-   * 套餐中文名称，参考DescribePackages接口的返回值。
+   * 访问类型："OA", "PUBLIC", "MINIAPP", "VPC" （不传默认PUBLIC+MINIAPP+VPC）
    */
-  PackageName?: string
+  AccessTypes?: Array<string>
   /**
-   * 云日志服务列表
+   * 是否开启路径透传，默认true表示短路径，即不开启路径透传(已弃用)
    */
-  LogServices?: Array<LogServiceInfo>
+  IsShortPath?: boolean
   /**
-   * 静态资源信息
+   * 路径透传，默认0关闭，1开启，2关闭
    */
-  StaticStorages?: Array<StaticStorageInfo>
+  PathTransmission?: number
   /**
-   * 是否到期自动降为免费版
+   * 跨域校验，默认0开启，1开启，2关闭
    */
-  IsAutoDegrade?: boolean
+  EnableCheckAcrossDomain?: number
   /**
-   * 环境渠道
+   * 静态托管资源目录
    */
-  EnvChannel?: string
-  /**
-   * 支付方式。包含以下取值：
-<li> prepayment：预付费</li>
-<li> postpaid：后付费</li>
-   */
-  PayMode?: string
-  /**
-   * 是否为默认环境
-   */
-  IsDefault?: boolean
-  /**
-   * 环境所属地域
-   */
-  Region?: string
-  /**
-   * 环境标签列表
-   */
-  Tags?: Array<Tag>
-  /**
-   * 自定义日志服务
-   */
-  CustomLogServices?: Array<ClsInfo>
-  /**
-   * 环境类型：baas, run, hoting, weda
-   */
-  EnvType?: string
-  /**
-   * 是否是dau新套餐
-   */
-  IsDauPackage?: boolean
-  /**
-   * 套餐类型:空\baas\tcbr
-   */
-  PackageType?: string
-  /**
-   * 架构类型
-   */
-  ArchitectureType?: string
-  /**
-   * 回收标志，默认为空
-   */
-  Recycle?: string
+  StaticFileDirectory?: string
 }
 
 /**
@@ -2421,14 +2633,9 @@ export interface DestroyEnvResponse {
 }
 
 /**
- * DeleteTable返回参数结构体
+ * CreateBillDeal请求参数结构体
  */
-export interface DeleteTableResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type CreateBillDealRequest = null
 
 /**
  * 云开发项目来源
@@ -2474,6 +2681,28 @@ export interface CodeSource {
    * coding项目
    */
   ProjectName?: string
+}
+
+/**
+ * RunSql请求参数结构体
+ */
+export interface RunSqlRequest {
+  /**
+   * 要执行的SQL语句
+   */
+  Sql: string
+  /**
+   * 云开发环境ID
+   */
+  EnvId: string
+  /**
+   * 数据库连接器实例信息
+   */
+  DbInstance?: DbInstance
+  /**
+   * 是否只读；当 `true` 时仅允许以 `SELECT/WITH/SHOW/DESCRIBE/DESC/EXPLAIN` 开头的 SQL
+   */
+  ReadOnly?: boolean
 }
 
 /**
@@ -2604,6 +2833,28 @@ export interface TkeClusterInfo {
    * 版本内网CLB所在子网Id
    */
   VersionClbSubnetId?: string
+}
+
+/**
+ * RunSql返回参数结构体
+ */
+export interface RunSqlResponse {
+  /**
+   * 查询结果行，每个元素为 JSON 字符串
+   */
+  Items?: Array<string>
+  /**
+   * 列元数据信息，每个元素为 JSON 字符串，字段包含 `name/databaseType/nullable/length/precision/scale`
+   */
+  Infos?: Array<string>
+  /**
+   * 受影响的行数（INSERT/UPDATE/DELETE 等语句）
+   */
+  RowsAffected?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2853,25 +3104,70 @@ export interface CreateCloudBaseRunServerVersionRequest {
 }
 
 /**
- * RunSql请求参数结构体
+ * DeleteCloudBaseGWAPI请求参数结构体
  */
-export interface RunSqlRequest {
+export interface DeleteCloudBaseGWAPIRequest {
   /**
-   * 要执行的SQL语句
+   * 服务ID
    */
-  Sql: string
+  ServiceId: string
   /**
-   * 云开发环境ID
+   * API Path
+   */
+  Path?: string
+  /**
+   * API ID
+   */
+  APIId?: string
+  /**
+   * API类型
+   */
+  Type?: number
+  /**
+   * API Name
+   */
+  Name?: string
+  /**
+   * 自定义值字段（Type为2时，传递容器服务名表示需要删除JNSGW）
+   */
+  Custom?: string
+  /**
+   * 域名
+   */
+  Domain?: string
+}
+
+/**
+ * CreateCloudBaseGWAPI返回参数结构体
+ */
+export interface CreateCloudBaseGWAPIResponse {
+  /**
+   * API ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  APIId: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSafeRule请求参数结构体
+ */
+export interface DescribeSafeRuleRequest {
+  /**
+   * 环境ID
    */
   EnvId: string
   /**
-   * 数据库连接器实例信息
+   * 集合名称
    */
-  DbInstance?: DbInstance
+  CollectionName: string
   /**
-   * 是否只读；当 `true` 时仅允许以 `SELECT/WITH/SHOW/DESCRIBE/DESC/EXPLAIN` 开头的 SQL
+   * 微信AppId，微信必传
    */
-  ReadOnly?: boolean
+  WxAppId?: string
 }
 
 /**
@@ -2995,6 +3291,30 @@ export interface IndexAccesses {
 }
 
 /**
+ * DescribeSafeRule返回参数结构体
+ */
+export interface DescribeSafeRuleResponse {
+  /**
+   * 规则内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rule?: string
+  /**
+   * 权限标签。包含以下取值：
+<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
+<li> PRIVATE：仅创建者及管理员可读写</li>
+<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
+<li> ADMINONLY：仅管理员可读写</li>
+<li> CUSTOM：自定义安全规则</li>
+   */
+  AclTag?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 安全网关自定义日志配置
  */
 export interface CustomLogConfig {
@@ -3087,6 +3407,36 @@ export interface EstablishCloudBaseRunServerRequest {
 }
 
 /**
+ * DescribeCloudBaseProjectVersionList请求参数结构体
+ */
+export interface DescribeCloudBaseProjectVersionListRequest {
+  /**
+   * 环境id
+   */
+  EnvId: string
+  /**
+   * 项目名称
+   */
+  ProjectName: string
+  /**
+   * 页大小
+   */
+  PageSize?: number
+  /**
+   * 第几页,从0开始
+   */
+  PageNum?: number
+  /**
+   * 起始时间
+   */
+  StartTime?: string
+  /**
+   * 终止时间
+   */
+  EndTime?: string
+}
+
+/**
  * ReinstateEnv返回参数结构体
  */
 export interface ReinstateEnvResponse {
@@ -3151,6 +3501,16 @@ export interface DescribeSpecialCostItemsResponse {
 }
 
 /**
+ * DescribeStaticStore请求参数结构体
+ */
+export interface DescribeStaticStoreRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+}
+
+/**
  * DescribeWxGatewayRoutes请求参数结构体
  */
 export interface DescribeWxGatewayRoutesRequest {
@@ -3170,6 +3530,16 @@ export interface DescribeWxGatewayRoutesRequest {
    * 网关版本名
    */
   GatewayVersion?: string
+}
+
+/**
+ * ModifyCloudBaseGWAPI返回参数结构体
+ */
+export interface ModifyCloudBaseGWAPIResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3214,6 +3584,24 @@ export interface DescribeTablesResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Pager?: Pager
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeEnvAccountCircle返回参数结构体
+ */
+export interface DescribeEnvAccountCircleResponse {
+  /**
+   * 环境计费周期开始时间
+   */
+  StartTime?: string
+  /**
+   * 环境计费周期结束时间
+   */
+  EndTime?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3489,29 +3877,37 @@ export interface ModifyCloudBaseRunServerVersionRequest {
 }
 
 /**
- * EstablishWxGatewayRoute请求参数结构体
+ * DescribeCloudBaseGWAPI返回参数结构体
  */
-export interface EstablishWxGatewayRouteRequest {
+export interface DescribeCloudBaseGWAPIResponse {
   /**
-   * 网关id
+   * API列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayId: string
+  APISet?: Array<CloudBaseGWAPI>
   /**
-   * 服务名称
+   * 是否开启http调用
    */
-  GatewayRouteName: string
+  EnableService?: boolean
   /**
-   * 服务地址
+   * 查询结果的数据总量
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayRouteAddr: string
+  Total?: number
   /**
-   * 协议类型 http/https
+   * 查询的分页参数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayRouteProtocol: string
+  Offset?: number
   /**
-   * 服务描述
+   * 查询的分页参数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GatewayRouteDesc?: string
+  Limit?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3535,6 +3931,52 @@ export interface UnfreezeCloudBaseRunServersResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeCloudBaseGWAPI请求参数结构体
+ */
+export interface DescribeCloudBaseGWAPIRequest {
+  /**
+   * 服务ID
+   */
+  ServiceId?: string
+  /**
+   * API域名
+   */
+  Domain?: string
+  /**
+   * API Path
+   */
+  Path?: string
+  /**
+   * API ID
+   */
+  APIId?: string
+  /**
+   * API类型，1为云函数，2为容器
+   */
+  Type?: number
+  /**
+   * API名，Type为1时为云函数名，Type为2时为容器服务名
+   */
+  Name?: string
+  /**
+   * 查询的分页参数，用于设置查询的偏移位置，0表示从头开始
+   */
+  Offset?: number
+  /**
+   * 查询的分页参数，用于表示每次查询的最大返回数据量
+   */
+  Limit?: number
+  /**
+   * 是否启用多地域
+   */
+  EnableRegion?: boolean
+  /**
+   * 是否使用统一域名
+   */
+  EnableUnion?: boolean
 }
 
 /**
@@ -3635,6 +4077,53 @@ export interface ExtensionFile {
    * 文件名，长度不超过24
    */
   FileName: string
+}
+
+/**
+ * DescribeCloudBaseGWService返回参数结构体
+ */
+export interface DescribeCloudBaseGWServiceResponse {
+  /**
+   * 服务列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceSet?: Array<CloudBaseGWService>
+  /**
+   * 是否开启服务
+   */
+  EnableService?: boolean
+  /**
+   * 默认域名信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultDomain?: string
+  /**
+   * 是否开启CDN迁移
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableUnion?: boolean
+  /**
+   * 是否开启跨域校验，默认开启 true
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableCheckAcrossDomain?: boolean
+  /**
+   * 自定义路由规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomRoutingRules?: string
+  /**
+   * 默认域名绑定类型，1绑定TCB-CDN，2绑定tcbingres（不经过cdn）
+   */
+  AccessFlag?: number
+  /**
+   * 云接入源站域名
+   */
+  OriginDomain?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3898,6 +4387,20 @@ export interface DescribeWxGatewaysResponse {
 }
 
 /**
+ * DeleteCloudBaseGWDomain请求参数结构体
+ */
+export interface DeleteCloudBaseGWDomainRequest {
+  /**
+   * 服务ID
+   */
+  ServiceId: string
+  /**
+   * 服务域名
+   */
+  Domain: string
+}
+
+/**
  * DescribeGatewayVersions请求参数结构体
  */
 export interface DescribeGatewayVersionsRequest {
@@ -4106,6 +4609,21 @@ export interface DescribeCurveDataRequest {
  * CreateTable返回参数结构体
  */
 export interface CreateTableResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeStaticStore返回参数结构体
+ */
+export interface DescribeStaticStoreResponse {
+  /**
+   * 静态托管资源信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<StaticStoreInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4461,6 +4979,20 @@ export interface DescribeCloudBaseRunResourceResponse {
 }
 
 /**
+ * 索引的key值
+ */
+export interface Indexkey {
+  /**
+   * 键名
+   */
+  Name?: string
+  /**
+   * 方向：specify 1 for ascending or -1 for descending
+   */
+  Direction?: string
+}
+
+/**
  * StorageInfo 资源信息
  */
 export interface StorageInfo {
@@ -4521,6 +5053,16 @@ export interface ModifyUserResp {
    * 是否成功
    */
   Success?: boolean
+}
+
+/**
+ * BindCloudBaseGWDomain返回参数结构体
+ */
+export interface BindCloudBaseGWDomainResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4614,33 +5156,115 @@ export interface DescribeUserActivityInfoResponse {
 }
 
 /**
- * UpdateTable请求参数结构体
+ * 环境信息
  */
-export interface UpdateTableRequest {
+export interface EnvInfo {
   /**
-   * 表名
-   */
-  TableName: string
-  /**
-   * FlexDB实例ID
-   */
-  Tag?: string
-  /**
-   * 待删除索引信息
-   */
-  DropIndexes?: Array<DropIndex>
-  /**
-   * 待创建索引信息
-   */
-  CreateIndexes?: Array<CreateIndex>
-  /**
-   * 云开发环境ID
+   * 账户下该环境唯一标识
    */
   EnvId?: string
   /**
-   * MongoDB连接器配置
+   * 环境来源。包含以下取值：
+<li>miniapp：微信小程序</li>
+<li>qcloud ：腾讯云</li>
    */
-  MongoConnector?: MongoConnector
+  Source?: string
+  /**
+   * 环境别名，要以a-z开头，不能包含 a-zA-z0-9- 以外的字符
+   */
+  Alias?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 最后修改时间
+   */
+  UpdateTime?: string
+  /**
+   * 环境状态。包含以下取值：
+<li>NORMAL：正常可用</li>
+<li>UNAVAILABLE：服务不可用，可能是尚未初始化或者初始化过程中</li>
+   */
+  Status?: string
+  /**
+   * 数据库列表
+   */
+  Databases?: Array<DatabasesInfo>
+  /**
+   * 存储列表
+   */
+  Storages?: Array<StorageInfo>
+  /**
+   * 函数列表
+   */
+  Functions?: Array<FunctionInfo>
+  /**
+   * tcb产品套餐ID，参考DescribePackages接口的返回值。
+   */
+  PackageId?: string
+  /**
+   * 套餐中文名称，参考DescribePackages接口的返回值。
+   */
+  PackageName?: string
+  /**
+   * 云日志服务列表
+   */
+  LogServices?: Array<LogServiceInfo>
+  /**
+   * 静态资源信息
+   */
+  StaticStorages?: Array<StaticStorageInfo>
+  /**
+   * 是否到期自动降为免费版
+   */
+  IsAutoDegrade?: boolean
+  /**
+   * 环境渠道
+   */
+  EnvChannel?: string
+  /**
+   * 支付方式。包含以下取值：
+<li> prepayment：预付费</li>
+<li> postpaid：后付费</li>
+   */
+  PayMode?: string
+  /**
+   * 是否为默认环境
+   */
+  IsDefault?: boolean
+  /**
+   * 环境所属地域
+   */
+  Region?: string
+  /**
+   * 环境标签列表
+   */
+  Tags?: Array<Tag>
+  /**
+   * 自定义日志服务
+   */
+  CustomLogServices?: Array<ClsInfo>
+  /**
+   * 环境类型：baas, run, hoting, weda
+   */
+  EnvType?: string
+  /**
+   * 是否是dau新套餐
+   */
+  IsDauPackage?: boolean
+  /**
+   * 套餐类型:空\baas\tcbr
+   */
+  PackageType?: string
+  /**
+   * 架构类型
+   */
+  ArchitectureType?: string
+  /**
+   * 回收标志，默认为空
+   */
+  Recycle?: string
 }
 
 /**
@@ -4744,25 +5368,17 @@ export interface AuthDomain {
 }
 
 /**
- * RunSql返回参数结构体
+ * http访问服务路由qps策略
  */
-export interface RunSqlResponse {
+export interface CloudBaseGWAPIQPSPolicy {
   /**
-   * 查询结果行，每个元素为 JSON 字符串
+   * qps限额总量
    */
-  Items?: Array<string>
+  QPSTotal?: number
   /**
-   * 列元数据信息，每个元素为 JSON 字符串，字段包含 `name/databaseType/nullable/length/precision/scale`
+   * 客户端限频，如果不限制，LimitBy=None
    */
-  Infos?: Array<string>
-  /**
-   * 受影响的行数（INSERT/UPDATE/DELETE 等语句）
-   */
-  RowsAffected?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  QPSPerClient?: CloudBaseClientQPSPolicy
 }
 
 /**
@@ -4868,107 +5484,27 @@ export interface DescribeTableResponse {
 }
 
 /**
- * DescribeCloudBaseProjectVersionList请求参数结构体
+ * DeleteTable返回参数结构体
  */
-export interface DescribeCloudBaseProjectVersionListRequest {
+export interface DeleteTableResponse {
   /**
-   * 环境id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EnvId: string
-  /**
-   * 项目名称
-   */
-  ProjectName: string
-  /**
-   * 页大小
-   */
-  PageSize?: number
-  /**
-   * 第几页,从0开始
-   */
-  PageNum?: number
-  /**
-   * 起始时间
-   */
-  StartTime?: string
-  /**
-   * 终止时间
-   */
-  EndTime?: string
+  RequestId?: string
 }
 
 /**
- * 安全网关路由
+ * http service选项
  */
-export interface WxGatewayRountItem {
+export interface CloudBaseOption {
   /**
-   * 安全网关路由名称
+   * 键
    */
-  GatewayRouteName?: string
+  Key: string
   /**
-   * 安全网关路由协议
+   * 值
    */
-  GatewayRouteProtocol?: string
-  /**
-   * 安全网关路由地址
-   */
-  GatewayRouteAddr?: string
-  /**
-   * 安全网关路由描述
-   */
-  GatewayRouteDesc?: string
-  /**
-   * 安全网关后端集群id，如果是外网服务，该id与GatewayRountName相同
-   */
-  GatewayRouteClusterId?: string
-  /**
-   * 安全网关创建时间
-   */
-  GatewayRouteCreateTime?: string
-  /**
-   * 安全网关路由限制
-   */
-  FrequencyLimitConfig?: Array<FrequencyLimitConfig>
-  /**
-   * ip代表绑定后端ip。cbr代表云托管服务
-   */
-  GatewayRouteServerType?: string
-  /**
-   * 服务名
-   */
-  GatewayRouteServerName?: string
-  /**
-   * ip
-   */
-  GatewayRewriteHost?: string
-  /**
-   * 网关版本
-   */
-  GatewayVersion?: string
-  /**
-   * 请求路径
-   */
-  GatewayRoutePath?: string
-  /**
-   * 请求模式
-   */
-  GatewayRouteMethod?: string
-  /**
-   * 4层端口
-   */
-  GatewayRoutePort?: number
-  /**
-   * 路由环境ID
-   */
-  GatewayRouteEnvId?: string
-  /**
-   * 路径匹配类型，支持prefix(前缀匹配)，regex(正则匹配)， 默认prefix
-   */
-  GatewayRoutePathMatchType?: string
-  /**
-   * 安全网关自定义头部
-   */
-  CustomHeader?: CustomHeader
+  Value: string
 }
 
 /**
@@ -5145,6 +5681,42 @@ export interface DescribeCloudBaseRunVersionResponse {
 }
 
 /**
+ * SearchClsLog返回参数结构体
+ */
+export interface SearchClsLogResponse {
+  /**
+   * 日志内容结果
+   */
+  LogResults?: LogResObject
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudBaseGWService请求参数结构体
+ */
+export interface DescribeCloudBaseGWServiceRequest {
+  /**
+   * 服务ID
+   */
+  ServiceId?: string
+  /**
+   * 服务域名
+   */
+  Domain?: string
+  /**
+   * 是否启用多地域
+   */
+  EnableRegion?: boolean
+  /**
+   * 是否启用统一域名
+   */
+  EnableUnion?: boolean
+}
+
+/**
  * DescribeCloudBaseRunResourceForExtend请求参数结构体
  */
 export interface DescribeCloudBaseRunResourceForExtendRequest {
@@ -5178,6 +5750,44 @@ export interface DescribeCloudBaseBuildServiceRequest {
    * 文件后缀
    */
   Suffix?: string
+}
+
+/**
+ * SearchClsLog请求参数结构体
+ */
+export interface SearchClsLogRequest {
+  /**
+   * 环境唯一ID
+   */
+  EnvId: string
+  /**
+   * 查询起始时间条件
+   */
+  StartTime: string
+  /**
+   * 查询结束时间条件
+   */
+  EndTime: string
+  /**
+   * 查询语句，例如查询云函数：(src:app OR src:system) AND log:\"START RequestId*\"， 查询云数据库：module:database，查询审批流：module:workflow，查询模型：module:model，查询用户权限：module:auth，以上仅为示例语句，实际使用时请根据具体日志内容进行调整，查询语句需严格遵循CLS（Cloud Log Service）语法规范 详细的语法规则请参考官方档：https://cloud.tencent.com/document/product/614/47044
+   */
+  QueryString: string
+  /**
+   * 单次要返回的日志条数，单次返回的最大条数为100
+   */
+  Limit: number
+  /**
+   * 加载更多使用，透传上次返回的 context 值，获取后续的日志内容，通过游标最多可获取10000条，请尽可能缩小时间范围
+   */
+  Context?: string
+  /**
+   * 按时间排序 asc（升序）或者 desc（降序），默认为 desc
+   */
+  Sort?: string
+  /**
+   * 是否使用Lucene语法，默认为false
+   */
+  UseLucene?: boolean
 }
 
 /**
@@ -5263,6 +5873,20 @@ export interface DescribeCloudBaseRunServerResponse {
 }
 
 /**
+ * DescribeDatabaseACL请求参数结构体
+ */
+export interface DescribeDatabaseACLRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 集合名称
+   */
+  CollectionName: string
+}
+
+/**
  * DescribeUserActivityInfo请求参数结构体
  */
 export interface DescribeUserActivityInfoRequest {
@@ -5285,17 +5909,17 @@ export interface DescribeUserActivityInfoRequest {
 }
 
 /**
- * UnfreezeCloudBaseRunServers请求参数结构体
+ * DeleteCloudBaseGWAPI返回参数结构体
  */
-export interface UnfreezeCloudBaseRunServersRequest {
+export interface DeleteCloudBaseGWAPIResponse {
   /**
-   * 环境ID
+   * 最终删除API个数
    */
-  EnvId: string
+  Count?: number
   /**
-   * 服务名称列表
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ServerNameList: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -5324,6 +5948,16 @@ export interface DescribeCloudBaseRunVersionSnapshotResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ReinstateEnv请求参数结构体
+ */
+export interface ReinstateEnvRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
 }
 
 /**
@@ -5833,6 +6467,50 @@ ap-beijing = 北京地域
 }
 
 /**
+ * UpdateTable请求参数结构体
+ */
+export interface UpdateTableRequest {
+  /**
+   * 表名
+   */
+  TableName: string
+  /**
+   * FlexDB实例ID
+   */
+  Tag?: string
+  /**
+   * 待删除索引信息
+   */
+  DropIndexes?: Array<DropIndex>
+  /**
+   * 待创建索引信息
+   */
+  CreateIndexes?: Array<CreateIndex>
+  /**
+   * 云开发环境ID
+   */
+  EnvId?: string
+  /**
+   * MongoDB连接器配置
+   */
+  MongoConnector?: MongoConnector
+}
+
+/**
+ * DeleteCloudBaseGWDomain返回参数结构体
+ */
+export interface DeleteCloudBaseGWDomainResponse {
+  /**
+   * 删除个数
+   */
+  Count?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 1分钱计费详情
  */
 export interface SpecialCostItem {
@@ -5898,6 +6576,86 @@ export interface DescribeExtensionUploadInfoResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 网关服务
+ */
+export interface CloudBaseGWService {
+  /**
+   * 服务ID
+   */
+  ServiceId?: string
+  /**
+   * 服务域名
+   */
+  Domain?: string
+  /**
+   * 开启时间
+   */
+  OpenTime?: number
+  /**
+   * 绑定状态，1 绑定中；2绑定失败；3绑定成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 是否被抢占, 被抢占表示域名被其他环境绑定了，需要解绑或者重新绑定。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsPreempted?: boolean
+  /**
+   * 是否开启多地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableRegion?: boolean
+  /**
+   * cdn CName地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cname?: string
+  /**
+   * 统一域名状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnionStatus?: number
+  /**
+   * CName状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CnameStatus?: number
+  /**
+   * 证书Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertId?: string
+  /**
+   * 是否强制https
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ForceHttps?: boolean
+  /**
+   * icp黑名单封禁状态，0-未封禁，1-封禁
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IcpForbidStatus?: number
+  /**
+   * 自定义路由规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomRoutingRules?: string
+  /**
+   * 绑定类型，1绑定cdn，2源站，4自定义
+   */
+  BindFlag?: number
+  /**
+   * TcbIngress源站cname
+   */
+  OriginCname?: string
+  /**
+   * 自定义cname
+   */
+  CustomCname?: string
 }
 
 /**
@@ -6025,6 +6783,28 @@ export interface DescribePostpayPackageFreeQuotasResponse {
 }
 
 /**
+ * BindCloudBaseGWDomain请求参数结构体
+ */
+export interface BindCloudBaseGWDomainRequest {
+  /**
+   * 服务ID
+   */
+  ServiceId: string
+  /**
+   * 服务域名
+   */
+  Domain: string
+  /**
+   * 证书ID
+   */
+  CertId?: string
+  /**
+   * 是否启用多地域
+   */
+  EnableRegion?: boolean
+}
+
+/**
  * 创建用户返回结果
  */
 export interface CreateUserResp {
@@ -6064,4 +6844,99 @@ export interface CloudBaseCodeRepoName {
    * repo的完整全名
    */
   FullName?: string
+}
+
+/**
+ * tcb 网关API
+ */
+export interface CloudBaseGWAPI {
+  /**
+   * 服务ID
+   */
+  ServiceId?: string
+  /**
+   * API ID
+   */
+  APIId?: string
+  /**
+   * API Path
+   */
+  Path?: string
+  /**
+   * API 类型
+   */
+  Type?: number
+  /**
+   * API 名
+   */
+  Name?: string
+  /**
+   * API创建时间
+   */
+  CreateTime?: number
+  /**
+   * 自定义值通用字段：
+Type为1时，该值为空。
+Type为2时，该值为容器的代理IP:PORT数组。
+   */
+  Custom?: string
+  /**
+   * 表示是否开启认证
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableAuth?: boolean
+  /**
+   * 云开发环境ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnvId?: string
+  /**
+   * 访问类型（该参数暂不对外暴露）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessType?: number
+  /**
+   * 统一发布状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnionStatus?: number
+  /**
+   * 域名（*表示所有域名）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domain?: string
+  /**
+   * 是否有路径冲突
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConflictFlag?: boolean
+  /**
+   * 域名状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DomainStatus?: number
+  /**
+   * 是否开启路径透传，默认true表示短路径，即不开启(已弃用)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsShortPath?: boolean
+  /**
+   * 路径透传，默认0关闭，1开启，2关闭
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PathTransmission?: number
+  /**
+   * 跨域校验，默认0开启，1开启，2关闭
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableCheckAcrossDomain?: number
+  /**
+   * 静态托管文件目录
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StaticFileDirectory?: string
+  /**
+   * QPS策略
+   */
+  QPSPolicy?: CloudBaseGWAPIQPSPolicy
 }

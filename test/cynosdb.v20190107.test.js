@@ -48,9 +48,9 @@ it("cynosdb.v20190107.DescribeBackupConfig", async function () {
     }
 })
 
-it("cynosdb.v20190107.ReplayInstanceAuditLog", async function () {
+it("cynosdb.v20190107.ModifyAccountDescription", async function () {
     try {
-       const data = await client.ReplayInstanceAuditLog({})
+       const data = await client.ModifyAccountDescription({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +68,9 @@ it("cynosdb.v20190107.ModifyBinlogConfig", async function () {
     }
 })
 
-it("cynosdb.v20190107.ResumeServerless", async function () {
+it("cynosdb.v20190107.DeleteAccounts", async function () {
     try {
-       const data = await client.ResumeServerless({})
+       const data = await client.DeleteAccounts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,6 +108,16 @@ it("cynosdb.v20190107.CreateAuditRuleTemplate", async function () {
     }
 })
 
+it("cynosdb.v20190107.ModifyLibraDBForwardConfig", async function () {
+    try {
+       const data = await client.ModifyLibraDBForwardConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.GrantAccountPrivileges", async function () {
     try {
        const data = await client.GrantAccountPrivileges({})
@@ -138,9 +148,9 @@ it("cynosdb.v20190107.ModifyMaintainPeriodConfig", async function () {
     }
 })
 
-it("cynosdb.v20190107.CopyClusterPasswordComplexity", async function () {
+it("cynosdb.v20190107.DescribeResourcesByDealName", async function () {
     try {
-       const data = await client.CopyClusterPasswordComplexity({})
+       const data = await client.DescribeResourcesByDealName({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,6 +198,16 @@ it("cynosdb.v20190107.CreateAuditLogFile", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeLibraDBClusters", async function () {
+    try {
+       const data = await client.DescribeLibraDBClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeSlaveZones", async function () {
     try {
        const data = await client.DescribeSlaveZones({})
@@ -211,6 +231,16 @@ it("cynosdb.v20190107.CloseProxyEndPoint", async function () {
 it("cynosdb.v20190107.CloseProxy", async function () {
     try {
        const data = await client.CloseProxy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.OfflineCluster", async function () {
+    try {
+       const data = await client.OfflineCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +318,29 @@ it("cynosdb.v20190107.DescribeBinlogDownloadUrl", async function () {
     }
 })
 
-it("cynosdb.v20190107.DescribeResourcesByDealName", async function () {
+it("cynosdb.v20190107.DeleteLibraDBCluster", async function () {
     try {
-       const data = await client.DescribeResourcesByDealName({})
+       const data = await client.DeleteLibraDBCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.CopyClusterPasswordComplexity", async function () {
+    try {
+       const data = await client.CopyClusterPasswordComplexity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DownloadLibraDBClusterList", async function () {
+    try {
+       const data = await client.DownloadLibraDBClusterList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -341,6 +391,26 @@ it("cynosdb.v20190107.DescribeProxyNodes", async function () {
 it("cynosdb.v20190107.RenewClusters", async function () {
     try {
        const data = await client.RenewClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.SearchClusterDatabases", async function () {
+    try {
+       const data = await client.SearchClusterDatabases({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.IsolateLibraDBCluster", async function () {
+    try {
+       const data = await client.IsolateLibraDBCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,6 +478,16 @@ it("cynosdb.v20190107.DescribeAccountPrivileges", async function () {
     }
 })
 
+it("cynosdb.v20190107.OpenClusterReadOnlyInstanceGroupAccess", async function () {
+    try {
+       const data = await client.OpenClusterReadOnlyInstanceGroupAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.CloseClusterPasswordComplexity", async function () {
     try {
        const data = await client.CloseClusterPasswordComplexity({})
@@ -421,6 +501,16 @@ it("cynosdb.v20190107.CloseClusterPasswordComplexity", async function () {
 it("cynosdb.v20190107.RollBackCluster", async function () {
     try {
        const data = await client.RollBackCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.OfflineLibraDBCluster", async function () {
+    try {
+       const data = await client.OfflineLibraDBCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,9 +558,9 @@ it("cynosdb.v20190107.DescribeIsolatedInstances", async function () {
     }
 })
 
-it("cynosdb.v20190107.DescribeInstanceErrorLogs", async function () {
+it("cynosdb.v20190107.ModifyLibraDBClusterReplicationObject", async function () {
     try {
-       const data = await client.DescribeInstanceErrorLogs({})
+       const data = await client.ModifyLibraDBClusterReplicationObject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,9 +578,39 @@ it("cynosdb.v20190107.ModifyClusterName", async function () {
     }
 })
 
+it("cynosdb.v20190107.ModifyLibraDBClusterName", async function () {
+    try {
+       const data = await client.ModifyLibraDBClusterName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ModifyProxyRwSplit", async function () {
     try {
        const data = await client.ModifyProxyRwSplit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.RenewLibraDBClusters", async function () {
+    try {
+       const data = await client.RenewLibraDBClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeLibraDBClusterAutoMapRule", async function () {
+    try {
+       const data = await client.DescribeLibraDBClusterAutoMapRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -568,6 +688,16 @@ it("cynosdb.v20190107.ModifyClusterPasswordComplexity", async function () {
     }
 })
 
+it("cynosdb.v20190107.SetLibraDBClusterRenewFlag", async function () {
+    try {
+       const data = await client.SetLibraDBClusterRenewFlag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.CreateBackup", async function () {
     try {
        const data = await client.CreateBackup({})
@@ -628,9 +758,9 @@ it("cynosdb.v20190107.UpgradeProxy", async function () {
     }
 })
 
-it("cynosdb.v20190107.InquirePriceMultiSpec", async function () {
+it("cynosdb.v20190107.DescribeLibraDBVersion", async function () {
     try {
-       const data = await client.InquirePriceMultiSpec({})
+       const data = await client.DescribeLibraDBVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,9 +858,19 @@ it("cynosdb.v20190107.ModifyResourcePackagesDeductionPriority", async function (
     }
 })
 
-it("cynosdb.v20190107.DescribeInstanceParams", async function () {
+it("cynosdb.v20190107.DescribeLibraDBClusterDetail", async function () {
     try {
-       const data = await client.DescribeInstanceParams({})
+       const data = await client.DescribeLibraDBClusterDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ModifyLibraDBClusterAccountDescription", async function () {
+    try {
+       const data = await client.ModifyLibraDBClusterAccountDescription({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -748,9 +888,19 @@ it("cynosdb.v20190107.DescribeInstanceSlowQueries", async function () {
     }
 })
 
-it("cynosdb.v20190107.DescribeClusterDatabases", async function () {
+it("cynosdb.v20190107.DescribeParamTemplateDetail", async function () {
     try {
-       const data = await client.DescribeClusterDatabases({})
+       const data = await client.DescribeParamTemplateDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ActivateLibraDBInstance", async function () {
+    try {
+       const data = await client.ActivateLibraDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -798,6 +948,16 @@ it("cynosdb.v20190107.CreateAccounts", async function () {
     }
 })
 
+it("cynosdb.v20190107.ReplayInstanceAuditLog", async function () {
+    try {
+       const data = await client.ReplayInstanceAuditLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.RollbackToNewCluster", async function () {
     try {
        const data = await client.RollbackToNewCluster({})
@@ -808,9 +968,9 @@ it("cynosdb.v20190107.RollbackToNewCluster", async function () {
     }
 })
 
-it("cynosdb.v20190107.CreateResourcePackage", async function () {
+it("cynosdb.v20190107.DescribeInstanceParams", async function () {
     try {
-       const data = await client.CreateResourcePackage({})
+       const data = await client.DescribeInstanceParams({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -821,6 +981,16 @@ it("cynosdb.v20190107.CreateResourcePackage", async function () {
 it("cynosdb.v20190107.DescribeAuditLogFiles", async function () {
     try {
        const data = await client.DescribeAuditLogFiles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeLibraDBClusterAccountPrivileges", async function () {
+    try {
+       const data = await client.DescribeLibraDBClusterAccountPrivileges({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -848,9 +1018,19 @@ it("cynosdb.v20190107.SwitchClusterZone", async function () {
     }
 })
 
-it("cynosdb.v20190107.SearchClusterDatabases", async function () {
+it("cynosdb.v20190107.DeleteLibraDBClusterAccounts", async function () {
     try {
-       const data = await client.SearchClusterDatabases({})
+       const data = await client.DeleteLibraDBClusterAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.IsolateLibraDBInstance", async function () {
+    try {
+       const data = await client.IsolateLibraDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -868,6 +1048,16 @@ it("cynosdb.v20190107.AddInstances", async function () {
     }
 })
 
+it("cynosdb.v20190107.ResumeServerless", async function () {
+    try {
+       const data = await client.ResumeServerless({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ModifyInstanceUpgradeLimitDays", async function () {
     try {
        const data = await client.ModifyInstanceUpgradeLimitDays({})
@@ -878,9 +1068,9 @@ it("cynosdb.v20190107.ModifyInstanceUpgradeLimitDays", async function () {
     }
 })
 
-it("cynosdb.v20190107.DeleteAccounts", async function () {
+it("cynosdb.v20190107.DescribeLibraDBClusterAccounts", async function () {
     try {
-       const data = await client.DeleteAccounts({})
+       const data = await client.DescribeLibraDBClusterAccounts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -898,9 +1088,9 @@ it("cynosdb.v20190107.RevokeAccountPrivileges", async function () {
     }
 })
 
-it("cynosdb.v20190107.OpenClusterReadOnlyInstanceGroupAccess", async function () {
+it("cynosdb.v20190107.ModifyLibraDBClusterAccountPrivilege", async function () {
     try {
-       const data = await client.OpenClusterReadOnlyInstanceGroupAccess({})
+       const data = await client.ModifyLibraDBClusterAccountPrivilege({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -911,6 +1101,16 @@ it("cynosdb.v20190107.OpenClusterReadOnlyInstanceGroupAccess", async function ()
 it("cynosdb.v20190107.OpenClusterTransparentEncrypt", async function () {
     try {
        const data = await client.OpenClusterTransparentEncrypt({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ModifyLibraDBClusterProject", async function () {
+    try {
+       const data = await client.ModifyLibraDBClusterProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -931,6 +1131,16 @@ it("cynosdb.v20190107.DescribeParamTemplates", async function () {
 it("cynosdb.v20190107.DeleteBackup", async function () {
     try {
        const data = await client.DeleteBackup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.RestartLibraDBInstance", async function () {
+    try {
+       const data = await client.RestartLibraDBInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1118,9 +1328,49 @@ it("cynosdb.v20190107.ModifySnapBackupCrossRegionConfig", async function () {
     }
 })
 
+it("cynosdb.v20190107.OfflineLibraDBInstance", async function () {
+    try {
+       const data = await client.OfflineLibraDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.OpenWan", async function () {
     try {
        const data = await client.OpenWan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeClusterDatabases", async function () {
+    try {
+       const data = await client.DescribeClusterDatabases({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ModifyLibraDBClusterAccountHost", async function () {
+    try {
+       const data = await client.ModifyLibraDBClusterAccountHost({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeLibraDBClusterAccountAllPrivileges", async function () {
+    try {
+       const data = await client.DescribeLibraDBClusterAccountAllPrivileges({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1141,6 +1391,16 @@ it("cynosdb.v20190107.InquirePriceCreate", async function () {
 it("cynosdb.v20190107.AssociateSecurityGroups", async function () {
     try {
        const data = await client.AssociateSecurityGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeLibraDBInstanceSpecs", async function () {
+    try {
+       const data = await client.DescribeLibraDBInstanceSpecs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1171,6 +1431,16 @@ it("cynosdb.v20190107.DescribeResourcePackageSaleSpec", async function () {
 it("cynosdb.v20190107.ModifyAccountPrivileges", async function () {
     try {
        const data = await client.ModifyAccountPrivileges({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeLibraDBForwardConfig", async function () {
+    try {
+       const data = await client.DescribeLibraDBForwardConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1238,6 +1508,16 @@ it("cynosdb.v20190107.DescribeAccounts", async function () {
     }
 })
 
+it("cynosdb.v20190107.CheckCreateLibraDBInstance", async function () {
+    try {
+       const data = await client.CheckCreateLibraDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.SetRenewFlag", async function () {
     try {
        const data = await client.SetRenewFlag({})
@@ -1288,6 +1568,16 @@ it("cynosdb.v20190107.ReloadBalanceProxyNode", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeLibraDBClusterTableMapping", async function () {
+    try {
+       const data = await client.DescribeLibraDBClusterTableMapping({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeBackupDownloadRestriction", async function () {
     try {
        const data = await client.DescribeBackupDownloadRestriction({})
@@ -1298,9 +1588,9 @@ it("cynosdb.v20190107.DescribeBackupDownloadRestriction", async function () {
     }
 })
 
-it("cynosdb.v20190107.OfflineCluster", async function () {
+it("cynosdb.v20190107.DescribeLibraDBDataSource", async function () {
     try {
-       const data = await client.OfflineCluster({})
+       const data = await client.DescribeLibraDBDataSource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1318,9 +1608,29 @@ it("cynosdb.v20190107.DescribeClusterDatabaseTables", async function () {
     }
 })
 
+it("cynosdb.v20190107.ActivateLibraDBCluster", async function () {
+    try {
+       const data = await client.ActivateLibraDBCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ModifyClusterGlobalEncryption", async function () {
     try {
        const data = await client.ModifyClusterGlobalEncryption({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeLibraDBSlowLogs", async function () {
+    try {
+       const data = await client.DescribeLibraDBSlowLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1338,9 +1648,9 @@ it("cynosdb.v20190107.DescribeBackupList", async function () {
     }
 })
 
-it("cynosdb.v20190107.ModifyAccountDescription", async function () {
+it("cynosdb.v20190107.CreateResourcePackage", async function () {
     try {
-       const data = await client.ModifyAccountDescription({})
+       const data = await client.CreateResourcePackage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1428,6 +1738,16 @@ it("cynosdb.v20190107.ModifyBackupConfig", async function () {
     }
 })
 
+it("cynosdb.v20190107.ModifyLibraDBClusterDataSource", async function () {
+    try {
+       const data = await client.ModifyLibraDBClusterDataSource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeInstances", async function () {
     try {
        const data = await client.DescribeInstances({})
@@ -1441,6 +1761,16 @@ it("cynosdb.v20190107.DescribeInstances", async function () {
 it("cynosdb.v20190107.DescribeBinlogConfig", async function () {
     try {
        const data = await client.DescribeBinlogConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.InquirePriceMultiSpec", async function () {
+    try {
+       const data = await client.InquirePriceMultiSpec({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1481,6 +1811,16 @@ it("cynosdb.v20190107.DescribeResourcePackageList", async function () {
 it("cynosdb.v20190107.DescribeClusterParams", async function () {
     try {
        const data = await client.DescribeClusterParams({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ResetLibraDBClusterAccountPassword", async function () {
+    try {
+       const data = await client.ResetLibraDBClusterAccountPassword({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1578,6 +1918,16 @@ it("cynosdb.v20190107.SwitchClusterVpc", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeLibraDBInstanceDetail", async function () {
+    try {
+       const data = await client.DescribeLibraDBInstanceDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.CreateProxy", async function () {
     try {
        const data = await client.CreateProxy({})
@@ -1658,6 +2008,16 @@ it("cynosdb.v20190107.DeleteParamTemplate", async function () {
     }
 })
 
+it("cynosdb.v20190107.CreateLibraDBClusters", async function () {
+    try {
+       const data = await client.CreateLibraDBClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.UpgradeInstance", async function () {
     try {
        const data = await client.UpgradeInstance({})
@@ -1671,6 +2031,16 @@ it("cynosdb.v20190107.UpgradeInstance", async function () {
 it("cynosdb.v20190107.DescribeBinlogs", async function () {
     try {
        const data = await client.DescribeBinlogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.CreateLibraDBClusterAccounts", async function () {
+    try {
+       const data = await client.CreateLibraDBClusterAccounts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1738,9 +2108,9 @@ it("cynosdb.v20190107.CloseSSL", async function () {
     }
 })
 
-it("cynosdb.v20190107.DescribeParamTemplateDetail", async function () {
+it("cynosdb.v20190107.DescribeInstanceErrorLogs", async function () {
     try {
-       const data = await client.DescribeParamTemplateDetail({})
+       const data = await client.DescribeInstanceErrorLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

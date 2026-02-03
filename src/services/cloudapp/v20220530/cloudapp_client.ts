@@ -21,12 +21,15 @@ import {
   SaleParam,
   DescribeLicenseResponse,
   VerifyLicenseRequest,
-  DisplayMetadata,
   License,
+  DisplayMetadata,
+  IssueLicenseResponse,
   Filter,
   LicenseData,
   VerifyLicenseResponse,
   DescribeLicenseRequest,
+  IssueLicenseRequest,
+  PartnerLicenseData,
 } from "./cloudapp_models"
 
 /**
@@ -46,6 +49,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: VerifyLicenseResponse) => void
   ): Promise<VerifyLicenseResponse> {
     return this.request("VerifyLicense", req, cb)
+  }
+
+  /**
+   * 颁发 License
+   */
+  async IssueLicense(
+    req: IssueLicenseRequest,
+    cb?: (error: string, rep: IssueLicenseResponse) => void
+  ): Promise<IssueLicenseResponse> {
+    return this.request("IssueLicense", req, cb)
   }
 
   /**

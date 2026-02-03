@@ -628,6 +628,16 @@ it("vod.v20180717.DescribeMPSTemplates", async function () {
     }
 })
 
+it("vod.v20180717.ModifyBlindWatermarkTemplate", async function () {
+    try {
+       const data = await client.ModifyBlindWatermarkTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.RebuildMedia", async function () {
     try {
        const data = await client.RebuildMedia({})
@@ -948,6 +958,16 @@ it("vod.v20180717.DeleteAnimatedGraphicsTemplate", async function () {
     }
 })
 
+it("vod.v20180717.CreateBlindWatermarkTemplate", async function () {
+    try {
+       const data = await client.CreateBlindWatermarkTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeCLSTopics", async function () {
     try {
        const data = await client.DescribeCLSTopics({})
@@ -1198,6 +1218,16 @@ it("vod.v20180717.DeleteImageProcessingTemplate", async function () {
     }
 })
 
+it("vod.v20180717.DeleteBlindWatermarkTemplate", async function () {
+    try {
+       const data = await client.DeleteBlindWatermarkTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.CreateHeadTailTemplate", async function () {
     try {
        const data = await client.CreateHeadTailTemplate({})
@@ -1248,9 +1278,9 @@ it("vod.v20180717.CreateMPSTemplate", async function () {
     }
 })
 
-it("vod.v20180717.FastEditMedia", async function () {
+it("vod.v20180717.ExtractBlindWatermark", async function () {
     try {
-       const data = await client.FastEditMedia({})
+       const data = await client.ExtractBlindWatermark({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1411,6 +1441,16 @@ it("vod.v20180717.CreateClass", async function () {
 it("vod.v20180717.DescribeAigcApiTokens", async function () {
     try {
        const data = await client.DescribeAigcApiTokens({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.FastEditMedia", async function () {
+    try {
+       const data = await client.FastEditMedia({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1601,6 +1641,16 @@ it("vod.v20180717.DescribeAIRecognitionTemplates", async function () {
 it("vod.v20180717.DeleteQualityInspectTemplate", async function () {
     try {
        const data = await client.DeleteQualityInspectTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.DescribeBlindWatermarkTemplates", async function () {
+    try {
+       const data = await client.DescribeBlindWatermarkTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
