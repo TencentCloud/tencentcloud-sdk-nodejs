@@ -218,7 +218,7 @@ import {
   DescribeSnapshotByTimeOffsetTemplatesRequest,
   ScheduleRecognitionTaskResult,
   ModifyStreamLinkEventResponse,
-  WithdrawsWatermarkRequest,
+  VideoComprehensionResultItem,
   SmartSubtitleTaskTransTextResultOutput,
   ImageProcessTaskOutput,
   ComposeTargetInfo,
@@ -231,6 +231,7 @@ import {
   DescribeInputRISTSettings,
   RTMPPullSourceAddress,
   CosOutputStorage,
+  LiveStreamAiSmartSubtitleResultInfo,
   MediaProcessTaskAnimatedGraphicResult,
   ProcessMediaResponse,
   CreateWordSamplesResponse,
@@ -253,6 +254,7 @@ import {
   PornAsrReviewTemplateInfo,
   CreateAigcImageTaskResponse,
   ComposeVideoStream,
+  LiveSmartSubtitleResult,
   ProhibitedAsrReviewTemplateInfoForUpdate,
   AiAnalysisTaskCutoutInput,
   ModifyAnimatedGraphicsTemplateResponse,
@@ -444,6 +446,7 @@ import {
   FlowRealtimeStatusRTP,
   AnimatedGraphicTaskInput,
   OutputAddress,
+  LiveSmartSubtitlesTaskInput,
   MosaicInput,
   LiveRecordTaskInput,
   DescribeStreamLinkActivateStateRequest,
@@ -600,6 +603,7 @@ import {
   FlowRealtimeStatusSRT,
   SpecificationDataItem,
   TEHDConfigForUpdate,
+  WithdrawsWatermarkRequest,
   DeleteStreamLinkOutputRequest,
   ModifyPersonSampleRequest,
   AsrFullTextConfigureInfo,
@@ -2251,7 +2255,7 @@ export class Client extends AbstractClient {
 
 * 智能内容审核（画面鉴黄、敏感信息检测、声音鉴黄）；
 * 智能内容识别（人脸、文本全文、文本关键词、语音全文、语音关键词、语音实时翻译、物体识别、游戏打点）。
-* 智能内容分析（新闻实时拆条）。
+* 智能内容分析（拆条，集锦）。
 * 质检（直播流格式诊断、音画内容检测（抖动、模糊、低光照、过曝光、黑边、白边、黑屏、白屏、花屏、噪点、马赛克、二维码等）、无参考打分）。
 * 录制
 

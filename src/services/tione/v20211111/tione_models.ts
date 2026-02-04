@@ -1089,9 +1089,9 @@ export interface VolumeMount {
   /**
    * cfs的配置信息
    */
-  CFSConfig: CFSConfig
+  CFSConfig?: CFSConfig
   /**
-   * 挂载源类型，CFS、COS，默认为CFS
+   * 挂载源类型，CFS、COS、PUBLIC_DATA_SOURCE，默认为CFS
    */
   VolumeSourceType?: string
   /**
@@ -1099,6 +1099,10 @@ export interface VolumeMount {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MountPath?: string
+  /**
+   * 挂载数据源时的配置信息
+   */
+  PublicDataSource?: PublicDataSourceFS
 }
 
 /**
@@ -2100,6 +2104,52 @@ export interface DescribeModelServiceGroupsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 计费项内容
+ */
+export interface Spec {
+  /**
+   * 计费项标签
+   */
+  SpecId?: string
+  /**
+   * 计费项名称
+   */
+  SpecName?: string
+  /**
+   * 计费项显示名称
+   */
+  SpecAlias?: string
+  /**
+   * 是否售罄
+   */
+  Available?: boolean
+  /**
+   * 当前资源售罄时，可用的区域有哪些
+   */
+  AvailableRegion?: Array<string>
+  /**
+   * 当前计费项支持的特性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpecFeatures?: Array<string>
+  /**
+   * 计费项类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpecType?: string
+  /**
+   * GPU类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GpuType?: string
+  /**
+   * 计费项CategoryId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CategoryId?: string
 }
 
 /**
@@ -3832,6 +3882,10 @@ POSTPAID_BY_HOUR 按量计费
    * 代码仓库配置
    */
   CodeRepos?: Array<CodeRepoConfig>
+  /**
+   * 网络暴露配置
+   */
+  ExposeNetworkConfig?: ExposeNetworkConfig
 }
 
 /**
@@ -5870,6 +5924,10 @@ export interface TrainingTaskDetail {
    * 任务关联的代码仓库配置
    */
   CodeRepos?: Array<CodeRepoConfig>
+  /**
+   * 暴露网络配置
+   */
+  ExposeNetworkConfig?: ExposeNetworkConfig
 }
 
 /**
@@ -6133,49 +6191,17 @@ export interface CreateModelServiceAuthTokenRequest {
 }
 
 /**
- * 计费项内容
+ * 暴露网络配置
  */
-export interface Spec {
+export interface ExposeNetworkConfig {
   /**
-   * 计费项标签
+   * ssh配置
    */
-  SpecId?: string
+  SSHConfig?: SSHConfig
   /**
-   * 计费项名称
+   * 容器端口暴露到公网配置
    */
-  SpecName?: string
-  /**
-   * 计费项显示名称
-   */
-  SpecAlias?: string
-  /**
-   * 是否售罄
-   */
-  Available?: boolean
-  /**
-   * 当前资源售罄时，可用的区域有哪些
-   */
-  AvailableRegion?: Array<string>
-  /**
-   * 当前计费项支持的特性
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SpecFeatures?: Array<string>
-  /**
-   * 计费项类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SpecType?: string
-  /**
-   * GPU类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GpuType?: string
-  /**
-   * 计费项CategoryId
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CategoryId?: string
+  ExposePortConfig?: ExposePortConfig
 }
 
 /**

@@ -1864,45 +1864,49 @@ export interface DeleteOrganizationMembersResponse {
  */
 export interface ManagerShareUnit {
   /**
-   * 共享单元ID。
+   * <p>共享单元ID。</p>
    */
   UnitId?: string
   /**
-   * 共享单元名称。
+   * <p>共享单元名称。</p>
    */
   Name?: string
   /**
-   * 共享单元管理员Uin。
+   * <p>共享单元管理员Uin。</p>
    */
   Uin?: number
   /**
-   * 共享单元管理员OwnerUin。
+   * <p>共享单元管理员OwnerUin。</p>
    */
   OwnerUin?: number
   /**
-   * 共享单元地域。
+   * <p>共享单元地域。</p>
    */
   Area?: string
   /**
-   * 描述。
+   * <p>描述。</p>
    */
   Description?: string
   /**
-   * 创建时间。
+   * <p>创建时间。</p>
    */
   CreateTime?: string
   /**
-   * 共享单元资源数。
+   * <p>共享单元资源数。</p>
    */
   ShareResourceNum?: number
   /**
-   * 共享单元成员数。
+   * <p>共享单元成员数。</p>
    */
   ShareMemberNum?: number
   /**
-   * 共享范围。取值：1-仅允许集团组织内共享 2-允许共享给任意账号
+   * <p>共享范围。取值：1-仅允许集团组织内共享 2-允许共享给任意账号</p>
    */
   ShareScope?: number
+  /**
+   * <p>共享单元部门数。</p>
+   */
+  ShareNodeNum?: number
 }
 
 /**

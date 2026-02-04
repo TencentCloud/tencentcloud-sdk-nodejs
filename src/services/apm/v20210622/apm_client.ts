@@ -20,14 +20,17 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeApmAssociationResponse,
   CreateApmInstanceRequest,
+  DescribeApmVulnerabilityCountResponse,
   DescribeServiceOverviewResponse,
   ApmSampleConfig,
   AgentOperationConfigView,
   SelectorView,
   DescribeApmSampleConfigRequest,
+  DescribeApmAllVulCountResponse,
   DescribeApmSampleConfigResponse,
   DescribeServiceOverviewRequest,
   DescribeTopologyNewResponse,
+  DescribeOPRAllVulCountResponse,
   ModifyApmApplicationConfigResponse,
   DescribeApmServiceMetricResponse,
   ModifyApmAssociationRequest,
@@ -38,11 +41,13 @@ import {
   Position,
   ComponentTopologyView,
   CreateProfileTaskRequest,
-  ApmPrometheusRules,
+  DescribeApmVulnerabilityDetailRequest,
+  DeleteApmSampleConfigResponse,
   TopologyEdgeNew,
   DescribeApmPrometheusRuleRequest,
   CreateApmPrometheusRuleResponse,
   TerminateApmInstanceResponse,
+  ApmPrometheusRules,
   ApmMetricRecord,
   TopologyNode,
   DescribeApmAgentResponse,
@@ -63,7 +68,7 @@ import {
   SpanTag,
   DescribeGeneralMetricDataResponse,
   ModifyApmInstanceRequest,
-  ModifyApmSampleConfigRequest,
+  SpanLog,
   QueryMetricItem,
   ServiceDetail,
   DescribeApmInstancesResponse,
@@ -71,6 +76,7 @@ import {
   ModifyApmSampleConfigResponse,
   DescribeApmApplicationConfigRequest,
   CreateProfileTaskResponse,
+  DescribeApmVulnerabilityDetailResponse,
   ModifyApmPrometheusRuleResponse,
   DescribeMetricRecordsResponse,
   ApmTag,
@@ -79,18 +85,20 @@ import {
   AutoProfilingConfig,
   DescribeGeneralApmApplicationConfigResponse,
   CreateApmInstanceResponse,
-  DeleteApmSampleConfigResponse,
+  ApmVulnerabilityServiceDetail,
   DescribeGeneralApmApplicationConfigRequest,
   DescribeTopologyNewRequest,
   DescribeApmInstancesRequest,
   DeleteApmSampleConfigRequest,
-  SpanLog,
+  DescribeApmVulnerabilityCountRequest,
+  ModifyApmSampleConfigRequest,
   TerminateApmInstanceRequest,
   ApmInstanceDetail,
   Span,
   ModifyGeneralApmApplicationConfigRequest,
   DescribeApmServiceMetricRequest,
   CreateApmPrometheusRuleRequest,
+  DescribeApmAllVulCountRequest,
   TkeMeta,
   Instrument,
   DescribeTagValuesResponse,
@@ -108,6 +116,7 @@ import {
   SpanReference,
   SpanProcess,
   GeneralFilter,
+  DescribeOPRAllVulCountRequest,
 } from "./apm_models"
 
 /**
@@ -127,6 +136,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyApmInstanceResponse) => void
   ): Promise<ModifyApmInstanceResponse> {
     return this.request("ModifyApmInstance", req, cb)
+  }
+
+  /**
+   * 查询漏洞详情
+   */
+  async DescribeApmVulnerabilityDetail(
+    req: DescribeApmVulnerabilityDetailRequest,
+    cb?: (error: string, rep: DescribeApmVulnerabilityDetailResponse) => void
+  ): Promise<DescribeApmVulnerabilityDetailResponse> {
+    return this.request("DescribeApmVulnerabilityDetail", req, cb)
   }
 
   /**
@@ -361,6 +380,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询用户所有漏洞信息
+   */
+  async DescribeApmAllVulCount(
+    req: DescribeApmAllVulCountRequest,
+    cb?: (error: string, rep: DescribeApmAllVulCountResponse) => void
+  ): Promise<DescribeApmAllVulCountResponse> {
+    return this.request("DescribeApmAllVulCount", req, cb)
+  }
+
+  /**
    * 查询应用配置接口
    */
   async DescribeApmApplicationConfig(
@@ -401,6 +430,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询用户所有漏洞信息
+   */
+  async DescribeOPRAllVulCount(
+    req: DescribeOPRAllVulCountRequest,
+    cb?: (error: string, rep: DescribeOPRAllVulCountResponse) => void
+  ): Promise<DescribeOPRAllVulCountResponse> {
+    return this.request("DescribeOPRAllVulCount", req, cb)
+  }
+
+  /**
    * 应用概览数据拉取
    */
   async DescribeServiceOverview(
@@ -408,5 +447,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeServiceOverviewResponse) => void
   ): Promise<DescribeServiceOverviewResponse> {
     return this.request("DescribeServiceOverview", req, cb)
+  }
+
+  /**
+   * 查询漏洞指标
+   */
+  async DescribeApmVulnerabilityCount(
+    req: DescribeApmVulnerabilityCountRequest,
+    cb?: (error: string, rep: DescribeApmVulnerabilityCountResponse) => void
+  ): Promise<DescribeApmVulnerabilityCountResponse> {
+    return this.request("DescribeApmVulnerabilityCount", req, cb)
   }
 }

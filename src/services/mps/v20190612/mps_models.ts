@@ -778,20 +778,28 @@ export interface AdaptiveDynamicStreamingTemplate {
 }
 
 /**
- * 智能成片结果信息
+ * AI解说二创结果信息
  */
 export interface AiAnalysisTaskReelOutput {
   /**
-   * 成片视频路径。
+   * 解说视频路径。
    */
   VideoPath?: string
+  /**
+   * 解说视频路径列表。
+
+**注意**：
+1. 当返回一个文件时，`VideoPath `返回一个文件路径，`VideoPaths `也会填充同样路径的一个元素。
+2. 当返回多个文件时，`VideoPath `返回为空字符串，`VideoPaths `返回多文件路径列表。
+   */
+  VideoPaths?: Array<string>
   /**
    * 脚本文件路径
 
    */
   ScriptPath?: string
   /**
-   * 成片视频存储位置。
+   * 解说视频存储位置。
    */
   OutputStorage?: TaskOutputStorage
 }
@@ -2953,6 +2961,7 @@ export interface ParseLiveStreamProcessNotificationResponse {
 <li>LiveRecordResult：直播录制结果；</li>
 <li>AiQualityControlResult：媒体质检结果；</li>
 <li>AiAnalysisResult：内容分析结果；</li>
+<li>AiSmartSubtitleResult：智能字幕结果；</li>
 <li>ProcessEof：直播流处理结束。</li>
    */
   NotificationType?: string
@@ -2990,6 +2999,10 @@ export interface ParseLiveStreamProcessNotificationResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LiveRecordResultInfo?: LiveStreamRecordResultInfo
+  /**
+   * 智能字幕结果，当 NotificationType 为 AiSmartSubtitleResult 时有效。
+   */
+  AiSmartSubtitleResultInfo?: LiveStreamAiSmartSubtitleResultInfo
   /**
    * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长50个字符，不带或者带空字符串表示不做去重。
    */
@@ -4597,6 +4610,13 @@ export interface CreateBlindWatermarkTemplateRequest {
    * 数字水印模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
+  /**
+   * 数字水印强度。
+default: 默认，高清画质和抗性平衡
+stronger:画质清晰，抗性较强
+strongest:画质一般，抗性最强
+   */
+  Strength?: string
 }
 
 /**
@@ -5149,21 +5169,30 @@ export interface ModifyStreamLinkEventResponse {
 }
 
 /**
- * WithdrawsWatermark请求参数结构体
+ * 视频分镜理解结果
  */
-export interface WithdrawsWatermarkRequest {
+export interface VideoComprehensionResultItem {
   /**
-   * 输入媒体文件存储信息。
+   * 分镜片段起始时间（单位：秒）
+
    */
-  InputInfo: MediaInputInfo
+  StartTime?: number
   /**
-   * 任务的事件通知信息，不填代表不获取事件通知。
+   * 分镜片段结束时间（单位：秒）
    */
-  TaskNotifyConfig?: TaskNotifyConfig
+  EndTime?: number
   /**
-   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   * 分镜片段标题
    */
-  SessionContext?: string
+  Title?: string
+  /**
+   * 分镜片段信息描述
+   */
+  Description?: string
+  /**
+   * 分镜片段关键词
+   */
+  Keywords?: Array<string>
 }
 
 /**
@@ -5539,6 +5568,16 @@ export interface CosOutputStorage {
    * 媒体处理生成的文件输出的目标 Bucket 的园区，如 ap-chongqing。如果不填，表示继承上层。
    */
   Region?: string
+}
+
+/**
+ * 直播智能字幕结果
+ */
+export interface LiveStreamAiSmartSubtitleResultInfo {
+  /**
+   * 直播智能字幕任务结果列表。
+   */
+  SmartSubtitleResult?: Array<LiveSmartSubtitleResult>
 }
 
 /**
@@ -6055,6 +6094,48 @@ export interface ComposeVideoStream {
 如果不设置，服务将通过画面复杂度自动采用合适的码率。
    */
   Bitrate?: number
+}
+
+/**
+ * 直播智能字幕结果
+ */
+export interface LiveSmartSubtitleResult {
+  /**
+   * 识别文本。
+   */
+  Text?: string
+  /**
+   * 翻译片段起始的 PTS 时间，单位：秒。
+   */
+  StartPTSTime?: number
+  /**
+   * 翻译片段终止的 PTS 时间，单位：秒。
+   */
+  EndPTSTime?: number
+  /**
+   * 翻译文本。
+   */
+  Trans?: string
+  /**
+   * 翻译开始UTC时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
+  /**
+   * 翻译结束UTC时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * 稳态标记。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SteadyState?: boolean
+  /**
+   * websocket与trtc实时翻译的UserId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserId?: string
 }
 
 /**
@@ -11362,6 +11443,10 @@ export interface BlindWatermarkTemplate {
    * 数字水印模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
   UpdateTime?: string
+  /**
+   * 数字水印强度。 default: 默认，高清画质和抗性平衡 stronger:画质清晰，抗性较强 strongest:画质一般，抗性最强
+   */
+  Strength?: string
 }
 
 /**
@@ -11659,6 +11744,20 @@ export interface OutputAddress {
    * 出口IP。
    */
   Ip: string
+}
+
+/**
+ * 直播智能字幕输入结构体
+ */
+export interface LiveSmartSubtitlesTaskInput {
+  /**
+   * 智能字幕模板 ID 。
+   */
+  Definition?: number
+  /**
+   * 用户扩展字段，一般场景不用填。
+   */
+  UserExtPara?: string
 }
 
 /**
@@ -12412,12 +12511,12 @@ export interface AiAnalysisResult {
    */
   VideoComprehensionTask?: AiAnalysisTaskVideoComprehensionResult
   /**
-   * 视频内容分析抠图任务的查询结果，当任务类型为Cutout时有效。
+   * 视频内容分析智能抠图任务的查询结果，当任务类型为Cutout时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CutoutTask?: AiAnalysisTaskCutoutResult
   /**
-   * 视频内容分析成片任务的查询结果，当任务类型为Reel时有效。
+   * 视频内容分析AI解说二创任务的查询结果，当任务类型为Reel时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReelTask?: AiAnalysisTaskReelResult
@@ -12580,7 +12679,7 @@ export interface UpdateSmartErasePrivacyConfig {
 }
 
 /**
- * 智能成片结果类型
+ * AI解说二创结果类型
  */
 export interface AiAnalysisTaskReelResult {
   /**
@@ -12596,11 +12695,11 @@ export interface AiAnalysisTaskReelResult {
    */
   Message?: string
   /**
-   * 智能成片任务输入。
+   * AI解说二创任务输入。
    */
   Input?: AiAnalysisTaskReelInput
   /**
-   * 智能成片任务输出。
+   * AI解说二创任务输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiAnalysisTaskReelOutput
@@ -13563,17 +13662,17 @@ export interface QualityControlItem {
  */
 export interface TaskStatDataItem {
   /**
-   * 数据所在时间区间的开始时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。
+   * 数据所在时间区间的开始时间，使用 ISO 日期格式。如：当时间粒度为天，2018-12-01T00:00:00+08:00，表示2018年12月1日（含）到2018年12月2日（不含）区间。
    */
-  Time: string
+  Time?: string
   /**
    * 任务数。
    */
-  Count: number
+  Count?: number
   /**
    * 任务用量。
    */
-  Usage: number
+  Usage?: number
 }
 
 /**
@@ -15894,6 +15993,24 @@ export interface TEHDConfigForUpdate {
 }
 
 /**
+ * WithdrawsWatermark请求参数结构体
+ */
+export interface WithdrawsWatermarkRequest {
+  /**
+   * 输入媒体文件存储信息。
+   */
+  InputInfo: MediaInputInfo
+  /**
+   * 任务的事件通知信息，不填代表不获取事件通知。
+   */
+  TaskNotifyConfig?: TaskNotifyConfig
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
+}
+
+/**
  * DeleteStreamLinkOutput请求参数结构体
  */
 export interface DeleteStreamLinkOutputRequest {
@@ -16139,6 +16256,14 @@ export interface AiAnalysisTaskVideoComprehensionOutput {
    * 视频（音频）理解内容详情
    */
   VideoComprehensionAnalysisResult?: string
+  /**
+   * 视频（音频）理解扩展信息
+   */
+  VideoComprehensionExtInfo?: string
+  /**
+   * 视频分镜理解结果
+   */
+  VideoComprehensionResultList?: Array<VideoComprehensionResultItem>
 }
 
 /**
@@ -16367,7 +16492,7 @@ export interface BatchProcessMediaRequest {
   InputInfo: Array<MediaInputInfo>
   /**
    * 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。
-注意：当InputInfo.Type为URL时，该参数是必填项
+注意：当InputInfo.Type为URL时，该参数是必填项，目前只支持COS输出
    */
   OutputStorage?: TaskOutputStorage
   /**
@@ -16392,7 +16517,7 @@ export interface BatchProcessMediaRequest {
    */
   SessionContext?: string
   /**
-   * 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。
+   * 资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。
    */
   ResourceId?: string
   /**
@@ -18780,13 +18905,19 @@ PicUrlExpireTime 时间点后图片将被删除）。
  */
 export interface ProcessLiveStreamRequest {
   /**
-   * 直播流 URL（必须是直播文件地址，支持 rtmp，hls 和 flv, trtc 等）。
+   * 直播流 URL（必须是直播流地址，支持 rtmp，hls 和 flv, trtc,webrtc,srt等）。
 trtc地址如下：
  trtc: //trtc.rtc.qq.com/mps/`<roomid>`?sdkappid=`<sdkappid>`&userid=`<userid>`&usersig=<`usersig>`
 `<roomid>` 为trtc的房间号id, 为数字
 `<sdkappid>` 为trtc的sdk app id
 `<userid>` 为服务进入房间的用户id,可以区分谁是机器人
 <`usersig>` 为trtc 用户的签名
+
+webrtc 支持[LEB](https://cloud.tencent.com/product/leb)的直播流，地址获取请[参考](https://cloud.tencent.com/document/product/267/32720)
+
+srt支持地址请[参考](https://ffmpeg.org/ffmpeg-protocols.html#srt)
+
+
    */
   Url: string
   /**
@@ -18817,6 +18948,10 @@ trtc地址如下：
    * 媒体质检类型任务参数。
    */
   AiQualityControlTask?: AiQualityControlTaskInput
+  /**
+   * 智能字幕任务参数。
+   */
+  SmartSubtitlesTask?: LiveSmartSubtitlesTaskInput
   /**
    * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
    */
@@ -20642,7 +20777,7 @@ export interface DescribeSmartSubtitleTemplatesResponse {
  */
 export interface DescribeUsageDataRequest {
   /**
-   * 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+   * 起始日期。使用 ISO 日期格式。
    */
   StartTime: string
   /**
@@ -21803,6 +21938,10 @@ export interface ModifyBlindWatermarkTemplateRequest {
    * 数字水印文字内容，长度不超过64个字符，NAGRA水印类型的模板不支持修改文字内容。
    */
   TextContent?: string
+  /**
+   * 数字水印强度。 default: 默认，高清画质和抗性平衡 stronger:画质清晰，抗性较强 strongest:画质一般，抗性最强
+   */
+  Strength?: string
 }
 
 /**
@@ -23897,7 +24036,7 @@ export interface HighlightSegmentItem {
 }
 
 /**
- * 视频抠图结果数据结构
+ * 视频智能抠图结果数据结构
  */
 export interface AiAnalysisTaskCutoutResult {
   /**

@@ -348,6 +348,16 @@ it("ccc.v20200210.DescribeCarrierPrivilegeNumberApplicants", async function () {
     }
 })
 
+it("ccc.v20200210.DescribeFlashSMSList", async function () {
+    try {
+       const data = await client.DescribeFlashSMSList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeTelSession", async function () {
     try {
        const data = await client.DescribeTelSession({})

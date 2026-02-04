@@ -11953,6 +11953,14 @@ export interface OutputRisk {
    */
   Positions?: Array<PositionInfo>
   /**
+   * 是否已修订
+   */
+  IsMark?: boolean
+  /**
+   * 是否已忽略
+   */
+  IsIgnore?: boolean
+  /**
    * 审查依据
    */
   RiskBasis?: string
@@ -11980,6 +11988,10 @@ export interface OutputRisk {
    * 创建时间
    */
   CreatedOn?: number
+  /**
+   * 风险等级别名
+   */
+  RiskLevelAliasName?: string
 }
 
 /**

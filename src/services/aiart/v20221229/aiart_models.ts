@@ -278,32 +278,6 @@ export interface UploadTrainPortraitImagesResponse {
 }
 
 /**
- * SubmitTemplateToImageJob请求参数结构体
- */
-export interface SubmitTemplateToImageJobRequest {
-  /**
-   * <p>算法将根据输入的图片，结合文本描述智能生成与之相关的图像。Base64 和 Url 必须提供一个，如果都提供以 Url 为准。图片限制：单边分辨率小于5000且大于50，转成 Base64 字符串后小于 8MB，格式支持 jpg、jpeg、png、bmp、tiff、webp。</p>
-   */
-  Image: Image
-  /**
-   * <p>绘画风格当前仅支持美术馆风格（gallerying）。</p>
-   */
-  Style?: string
-  /**
-   * <p>特效模式，默认使用人像模式。</p>枚举值：<ul><li> Person： 人像模式，仅支持上传人像图片。</li><li> Pet： 宠物模式，支持宠物等非人像图片。</li></ul>默认值：Person
-   */
-  Mode?: string
-  /**
-   * <p>为生成结果图添加显式水印标识的开关，默认为1。<br />1：添加。<br />0：不添加。<br />其他数值：默认按1处理。<br />建议您使用显著标识来提示结果图使用了 AI 绘画技术，是 AI 生成的图片。</p>
-   */
-  LogoAdd?: number
-  /**
-   * <p>标识内容设置。默认在生成结果图右下角添加“图片由 AI 生成”字样，您可根据自身需要替换为其他的标识图片。</p>
-   */
-  LogoParam?: LogoParam
-}
-
-/**
  * UploadTrainPortraitImages请求参数结构体
  */
 export interface UploadTrainPortraitImagesRequest {
@@ -564,20 +538,6 @@ INIT: 初始化、WAIT：等待中、RUN：运行中、FAIL：处理失败、DON
 }
 
 /**
- * SubmitTextToImageProJob返回参数结构体
- */
-export interface SubmitTextToImageProJobResponse {
-  /**
-   * 任务 ID。
-   */
-  JobId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ChangeClothes返回参数结构体
  */
 export interface ChangeClothesResponse {
@@ -656,13 +616,15 @@ export interface SubmitMemeJobResponse {
 }
 
 /**
- * DescribeTemplateToImageJob请求参数结构体
+ * SubmitTrainPortraitModelJob请求参数结构体
  */
-export interface DescribeTemplateToImageJobRequest {
+export interface SubmitTrainPortraitModelJobRequest {
   /**
-   * 任务 ID。
+   * 在上传写真训练图片时指定的写真模型 ID。 
+每个 AI 写真模型自训练完成起1年内有效，有效期内可使用模型生成图片，期满后需要重新训练模型。
+
    */
-  JobId: string
+  ModelId: string
 }
 
 /**
@@ -729,36 +691,6 @@ export interface Rect {
 }
 
 /**
- * DescribeTemplateToImageJob返回参数结构体
- */
-export interface DescribeTemplateToImageJobResponse {
-  /**
-   * 当前任务状态码：
-1：等待中、2：运行中、4：处理失败、5：处理完成。
-   */
-  Status?: string
-  /**
-   * 任务处理失败错误码。
-
-   */
-  ErrorCode?: string
-  /**
-   * 任务处理失败错误信息。
-
-   */
-  ErrorMessage?: string
-  /**
-   * 生成图 URL 列表，有效期1小时，请及时保存。
-
-   */
-  ResultImage?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 融合信息
  */
 export interface FaceInfo {
@@ -773,11 +705,11 @@ export interface FaceInfo {
 }
 
 /**
- * SubmitTemplateToImageJob返回参数结构体
+ * SubmitTextToImageProJob返回参数结构体
  */
-export interface SubmitTemplateToImageJobResponse {
+export interface SubmitTextToImageProJobResponse {
   /**
-   * <p>任务 ID。</p>
+   * 任务 ID。
    */
   JobId?: string
   /**
@@ -989,15 +921,23 @@ export interface Filter {
 }
 
 /**
- * SubmitTrainPortraitModelJob请求参数结构体
+ * TextToImageRapid返回参数结构体
  */
-export interface SubmitTrainPortraitModelJobRequest {
+export interface TextToImageRapidResponse {
   /**
-   * 在上传写真训练图片时指定的写真模型 ID。 
-每个 AI 写真模型自训练完成起1年内有效，有效期内可使用模型生成图片，期满后需要重新训练模型。
-
+   * 根据入参 RspImgType 填入不同，返回不同的内容。
+如果传入 base64 则返回生成图 Base64 编码。
+如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。
    */
-  ModelId: string
+  ResultImage?: string
+  /**
+   * Seed
+   */
+  Seed?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1519,26 +1459,6 @@ export interface RefineImageResponse {
 如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。
    */
   ResultImage?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * TextToImageRapid返回参数结构体
- */
-export interface TextToImageRapidResponse {
-  /**
-   * 根据入参 RspImgType 填入不同，返回不同的内容。
-如果传入 base64 则返回生成图 Base64 编码。
-如果传入 url 则返回的生成图 URL , 有效期1小时，请及时保存。
-   */
-  ResultImage?: string
-  /**
-   * Seed
-   */
-  Seed?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

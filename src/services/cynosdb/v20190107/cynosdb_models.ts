@@ -2616,7 +2616,7 @@ export interface SnapshotBackupConfig {
    */
   ReserveDuration?: number
   /**
-   * 动数据备份触发策略，periodically:自动周期备份,frequent:高频备份
+   * 自动数据备份触发策略，periodically:自动周期备份,frequent:高频备份
    */
   BackupTriggerStrategy?: string
 }

@@ -438,15 +438,59 @@ export interface InstanceNode {
   /**
    * id
    */
-  NodeId: number
+  NodeId?: number
   /**
    * cn
    */
-  NodeType: string
+  NodeType?: string
   /**
    * ip
    */
-  NodeIp: string
+  NodeIp?: string
+  /**
+   * 私有ip
+   */
+  PrivateNetworkIp?: string
+  /**
+   * 节点角色
+   */
+  NodeRole?: string
+  /**
+   * 节点名称
+   */
+  NodeName?: string
+  /**
+   * 规格名称
+   */
+  SpecName?: string
+  /**
+   * cpu
+   */
+  Cpu?: number
+  /**
+   * 内存
+   */
+  Memory?: number
+  /**
+   * 数据盘数量
+   */
+  DataDiskCount?: number
+  /**
+   * 数据盘大小
+   */
+  DataDiskSize?: number
+  /**
+   * 数据盘类型
+   */
+  DataDiskType?: string
+  /**
+   * 唯一uuid
+   */
+  UUID?: string
+  /**
+   * 区域
+   */
+  Zone?: string
 }
 
 /**
@@ -757,6 +801,26 @@ export interface InstanceInfo {
    * 访问信息
    */
   AccessDetails?: Array<AccessInfo>
+  /**
+   * 集群是否跨az，为0不跨az；为1跨az
+   */
+  IsAz?: number
+  /**
+   * 备可用区
+   */
+  SecondaryZone?: string
+  /**
+   * 备子网
+   */
+  SecondarySubnet?: string
+  /**
+   * 访问信息
+   */
+  AccessInfo?: string
+  /**
+   * GTM节点信息
+   */
+  GTMNodes?: Array<InstanceNodeGroup>
 }
 
 /**
@@ -813,6 +877,10 @@ export interface ParamDetail {
    * 参数名
    */
   ParameterName?: string
+  /**
+   * 最新修改值
+   */
+  LatestValue?: string
 }
 
 /**
@@ -1058,6 +1126,10 @@ export interface DescribeInstanceOperationsResponse {
    */
   Operations?: Array<InstanceOperation>
   /**
+   * 错误信息
+   */
+  ErrorMsg?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1148,6 +1220,10 @@ export interface DescribeUpgradeListResponse {
    * 升级记录总数
    */
   TotalCount?: string
+  /**
+   * 错误信息
+   */
+  ErrorMsg?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1252,6 +1328,10 @@ export interface DescribeInstanceResponse {
    * 实例描述信息
    */
   InstanceInfo?: InstanceInfo
+  /**
+   * 错误信息
+   */
+  ErrorMsg?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1679,6 +1759,10 @@ export interface DescribeInstanceStateResponse {
    * 集群备份任务开启状态
    */
   BackupStatus?: number
+  /**
+   * 集群备份任务开启状态2
+   */
+  BackupOpenStatus?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

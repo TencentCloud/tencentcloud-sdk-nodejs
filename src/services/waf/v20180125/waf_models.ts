@@ -1158,6 +1158,10 @@ export interface BotToken {
    * token有效性配置信息
    */
   TokenValidation?: TokenValidation
+  /**
+   * 1表示开启了禁用嵌套功能
+   */
+  DisableMultiJson?: number
 }
 
 /**
@@ -2728,6 +2732,14 @@ export interface UpdateRateLimitV2Response {
    */
   BaseInfo?: RateLimitCommonRsp
   /**
+   * 操作的规则ID
+   */
+  LimitRuleID?: number
+  /**
+   * 所属域名
+   */
+  Domain?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2820,7 +2832,15 @@ export interface BotIdDetail {
    */
   Level?: number
   /**
-   * 规则类型
+   * "cbe-01": "爬虫型BOT",
+	"cbe-02": "刷量型BOT",
+	"cbe-03": "账号穷举型BOT",
+	"cbe-04": "恶意扫描型BOT",
+	"cbe-05": "DDoS型BOT",
+	"cbe-06": "垃圾邮件发送型BOT",
+	"cbe-07": "社交媒体自动化型BOT",
+	"cbe-08": "竞争对手数据收集型BOT",
+	"cbe-09": "恶意软件传播型BOT"
    */
   BotIdType?: string
   /**
@@ -2925,6 +2945,10 @@ export interface DescribeBotSceneUCBRuleRequest {
    * 规则id
    */
   RuleId?: string
+  /**
+   * batch表示批量规则、scene表示场景规则，不传表示全部
+   */
+  Source?: string
 }
 
 /**
@@ -3001,6 +3025,14 @@ export interface ModifyApiSecSensitiveRuleRequest {
    * 自定义事件规则
    */
   ApiSecCustomEventRuleRule?: ApiSecCustomEventRule
+  /**
+   * 无效api排除规则
+   */
+  CustomApiExcludeRule?: ApiSecExcludeRule
+  /**
+   * 批量操作的时候的无效api排除规则
+   */
+  ApiExcludeRuleName?: Array<string>
 }
 
 /**
@@ -3439,6 +3471,11 @@ export interface FieldWriteConfig {
    * 1:开启 0:不开启
    */
   EnableBot?: number
+  /**
+   * 响应方向body
+1:开启 0:不开启
+   */
+  EnableResponse?: number
 }
 
 /**
@@ -3612,6 +3649,10 @@ export interface PostCLSFlowInfo {
    * CLS日志集合ID
    */
   LogTopicID?: string
+  /**
+   * 写配置
+   */
+  WriteConfig?: FieldWriteConfig
 }
 
 /**
@@ -4350,6 +4391,10 @@ public：公有云域名
    * 域名标签
    */
   Labels?: Array<string>
+  /**
+   * saaswaf独享ip状态，0是关闭，1是开启，2是开启中
+   */
+  PrivateVipStatus?: number
 }
 
 /**
@@ -4804,7 +4849,7 @@ export interface DescribeOwaspRulesRequest {
    */
   Limit?: number
   /**
-   * 排序字段，支持 RuleId, UpdateTime
+   * 排序字段，支持 RuleId, ModifyTime
    */
   By?: string
   /**
@@ -5435,7 +5480,7 @@ export interface ModifyObjectRequest {
    */
   OpType: string
   /**
-   * 新的Waf开关状态，如果和已有状态相同认为修改成功
+   * 新的Waf开关状态，如果和已有状态相同认为修改成功。状态可以为0或1
    */
   Status?: number
   /**
@@ -5577,6 +5622,10 @@ export interface ApiDetailSampleHistory {
    * 响应样例
    */
   RspLog?: string
+  /**
+   * 完整请求样例
+   */
+  FullReqLog?: string
 }
 
 /**
@@ -6339,6 +6388,14 @@ export interface CreateRateLimitV2Response {
    * 操作结果
    */
   BaseInfo?: RateLimitCommonRsp
+  /**
+   * 创建规则的ruleID
+   */
+  LimitRuleID?: number
+  /**
+   * 所属域名
+   */
+  Domain?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7121,6 +7178,32 @@ export interface ModifyHostRequest {
 }
 
 /**
+ * 排除无效api资产的规则
+ */
+export interface ApiSecExcludeRule {
+  /**
+   * 规则名称
+   */
+  RuleName?: string
+  /**
+   * 匹配类型，regex、prefix、suffix、contain匹配模式
+   */
+  MatchType?: string
+  /**
+   * 匹配内容
+   */
+  Content?: string
+  /**
+   * 状态开关
+   */
+  Status?: number
+  /**
+   * 规则更新时间
+   */
+  UpdateTime?: number
+}
+
+/**
  * DestroyPostCKafkaFlow请求参数结构体
  */
 export interface DestroyPostCKafkaFlowRequest {
@@ -7588,6 +7671,10 @@ export interface MiniPkg {
    * 计费项
    */
   BillingItem?: string
+  /**
+   * 小程序网关类型 1新网关；0老网关
+   */
+  GatewayType?: number
 }
 
 /**
@@ -8367,6 +8454,18 @@ export interface IpAccessControlParam {
    * 备注
    */
   Note?: string
+  /**
+   * 任务类型（TimedJob/CronJob）
+   */
+  JobType?: string
+  /**
+   * 任务时间配置
+   */
+  JobDateTime?: JobDateTime
+  /**
+   * 生效状态
+   */
+  ValidStatus?: number
 }
 
 /**
@@ -8416,7 +8515,7 @@ export interface DescribeBotIdRuleRequest {
    */
   Level?: Array<number | bigint>
   /**
-   * 规则类型筛选
+   * 规则类型筛选"cbe-01": "爬虫型BOT", 	"cbe-02": "刷量型BOT", 	"cbe-03": "账号穷举型BOT", 	"cbe-04": "恶意扫描型BOT", 	"cbe-05": "DDoS型BOT", 	"cbe-06": "垃圾邮件发送型BOT", 	"cbe-07": "社交媒体自动化型BOT", 	"cbe-08": "竞争对手数据收集型BOT", 	"cbe-09": "恶意软件传播型BOT"
    */
   BotIdType?: Array<string>
   /**
@@ -10011,6 +10110,14 @@ export interface InstanceInfo {
    * BOT安全监测资源信息
    */
   BotMonitorPkg?: BotMonitorPkg
+  /**
+   * 独享ip资源信息
+   */
+  DedicatedIPPkg?: DedicatedIPPkg
+  /**
+   * 已经配置独享ip的数量
+   */
+  DedicatedIPCount?: number
 }
 
 /**
@@ -11502,6 +11609,22 @@ export interface UpsertCCRuleRequest {
    * 规则来源
    */
   Source?: string
+  /**
+   * forever
+   */
+  JobType?: string
+  /**
+   * 无
+   */
+  JobDateTime?: JobDateTime
+  /**
+   * 0
+   */
+  ExpireTime?: number
+  /**
+   * 有效性
+   */
+  ValidStatus?: number
 }
 
 /**
@@ -11974,6 +12097,48 @@ export interface DescribePortsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 独享IP套餐资源信息
+ */
+export interface DedicatedIPPkg {
+  /**
+   * 资源id
+   */
+  ResourceIds?: string
+  /**
+   * 状态
+   */
+  Status?: number
+  /**
+   * 地域
+   */
+  Region?: number
+  /**
+   * 开始时间
+   */
+  BeginTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 申请数量
+   */
+  InquireNum?: number
+  /**
+   * 使用数量
+   */
+  UsedNum?: number
+  /**
+   * 续费标志
+   */
+  RenewFlag?: number
+  /**
+   * 计费项
+   */
+  BillingItem?: string
 }
 
 /**
@@ -12747,6 +12912,18 @@ export interface AddAttackWhiteRuleResponse {
  */
 export interface ImportIpAccessControlResponse {
   /**
+   * 成功导入数量
+   */
+  SuccessCount?: number
+  /**
+   * 导入数量
+   */
+  TotalCount?: number
+  /**
+   * 执行时间
+   */
+  Timestamp?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -12825,11 +13002,11 @@ export interface CronJob {
    */
   WDays?: Array<number | bigint>
   /**
-   * 开始时间
+   * 开始时间戳
    */
   StartTime?: string
   /**
-   * 结束时间
+   * 结束时间戳
    */
   EndTime?: string
 }
@@ -13186,6 +13363,10 @@ https：使用https协议回源
 10：内部错误
    */
   State?: number
+  /**
+   * saaswaf独享ip状态，0是关闭状态，1是开启状态，2是开启中
+   */
+  PrivateVipStatus?: number
 }
 
 /**
@@ -13664,6 +13845,14 @@ export interface InOutputBotUCBRule {
    * 惩罚时间
    */
   DelayTime?: number
+  /**
+   * 是否为批量规则：0表示场景规则，1表示批量规则
+   */
+  Batch?: number
+  /**
+   * 24小时内命中数
+   */
+  HitCount?: number
 }
 
 /**
@@ -14656,6 +14845,10 @@ export interface DescribeApiDetailResponse {
    * 请求样例，json字符串格式
    */
   Log?: string
+  /**
+   * 完整请求样例
+   */
+  FullReqLog?: string
   /**
    * 请求参数样例列表
    */

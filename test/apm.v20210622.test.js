@@ -28,6 +28,16 @@ it("apm.v20210622.ModifyApmInstance", async function () {
     }
 })
 
+it("apm.v20210622.DescribeApmVulnerabilityDetail", async function () {
+    try {
+       const data = await client.DescribeApmVulnerabilityDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apm.v20210622.DescribeGeneralSpanList", async function () {
     try {
        const data = await client.DescribeGeneralSpanList({})
@@ -238,6 +248,16 @@ it("apm.v20210622.CreateProfileTask", async function () {
     }
 })
 
+it("apm.v20210622.DescribeApmAllVulCount", async function () {
+    try {
+       const data = await client.DescribeApmAllVulCount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apm.v20210622.DescribeApmApplicationConfig", async function () {
     try {
        const data = await client.DescribeApmApplicationConfig({})
@@ -278,9 +298,29 @@ it("apm.v20210622.ModifyApmApplicationConfig", async function () {
     }
 })
 
+it("apm.v20210622.DescribeOPRAllVulCount", async function () {
+    try {
+       const data = await client.DescribeOPRAllVulCount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apm.v20210622.DescribeServiceOverview", async function () {
     try {
        const data = await client.DescribeServiceOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apm.v20210622.DescribeApmVulnerabilityCount", async function () {
+    try {
+       const data = await client.DescribeApmVulnerabilityCount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

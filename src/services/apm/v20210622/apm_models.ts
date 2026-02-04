@@ -64,6 +64,32 @@ export interface CreateApmInstanceRequest {
 }
 
 /**
+ * DescribeApmVulnerabilityCount返回参数结构体
+ */
+export interface DescribeApmVulnerabilityCountResponse {
+  /**
+   * 包含漏洞指标以及业务系统个数
+   */
+  VulnerabilityList?: Array<ApmMetricRecord>
+  /**
+   * 总漏洞个数
+   */
+  VulnerabilityCount?: number
+  /**
+   * 严重漏洞个数
+   */
+  ImportantVulnerabilityCount?: number
+  /**
+   * 高危漏洞个数
+   */
+  CriticalVulnerabilityCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeServiceOverview返回参数结构体
  */
 export interface DescribeServiceOverviewResponse {
@@ -173,6 +199,32 @@ export interface DescribeApmSampleConfigRequest {
 }
 
 /**
+ * DescribeApmAllVulCount返回参数结构体
+ */
+export interface DescribeApmAllVulCountResponse {
+  /**
+   * 包含漏洞指标以及业务系统个数
+   */
+  VulnerabilityList?: Array<ApmMetricRecord>
+  /**
+   * 总漏洞个数
+   */
+  VulnerabilityCount?: number
+  /**
+   * 严重漏洞个数
+   */
+  ImportantVulnerabilityCount?: number
+  /**
+   * 高危漏洞个数
+   */
+  CriticalVulnerabilityCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeApmSampleConfig返回参数结构体
  */
 export interface DescribeApmSampleConfigResponse {
@@ -255,6 +307,32 @@ export interface DescribeTopologyNewResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Selectors?: SelectorView
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeOPRAllVulCount返回参数结构体
+ */
+export interface DescribeOPRAllVulCountResponse {
+  /**
+   * 包含漏洞指标以及业务系统个数
+   */
+  VulnerabilityList?: Array<ApmMetricRecord>
+  /**
+   * 总漏洞个数
+   */
+  VulnerabilityCount?: number
+  /**
+   * 严重漏洞个数
+   */
+  ImportantVulnerabilityCount?: number
+  /**
+   * 高危漏洞个数
+   */
+  CriticalVulnerabilityCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -480,38 +558,35 @@ export interface CreateProfileTaskRequest {
 }
 
 /**
- * 展示apm业务系统关联prometheus关系返回体
+ * DescribeApmVulnerabilityDetail请求参数结构体
  */
-export interface ApmPrometheusRules {
+export interface DescribeApmVulnerabilityDetailRequest {
   /**
-   * 指标匹配规则ID
+   * 秒级时间戳
    */
-  Id?: number
+  StartTime: number
   /**
-   * 指标匹配规则名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 秒级时间戳
    */
-  Name?: string
+  EndTime: number
   /**
-   * 规则生效的应用。生效于全部应用就传空字符串
-注意：此字段可能返回 null，表示取不到有效值。
+   * APM业务系统ID
    */
-  ServiceName?: string
+  InstanceId: string
   /**
-   * 指标匹配规则状态：1(启用)、2（不启用）
-注意：此字段可能返回 null，表示取不到有效值。
+   * 条件过滤，必填service.name, instrumentation.name, version, vul.id
    */
-  Status?: number
+  Filters?: Array<Filter>
+}
+
+/**
+ * DeleteApmSampleConfig返回参数结构体
+ */
+export interface DeleteApmSampleConfigResponse {
   /**
-   * 指标匹配规则
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  MetricNameRule?: string
-  /**
-   * 匹配类型：0精准匹配，1前缀匹配，2后缀匹配
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MetricMatchType?: number
+  RequestId?: string
 }
 
 /**
@@ -612,6 +687,41 @@ export interface TerminateApmInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 展示apm业务系统关联prometheus关系返回体
+ */
+export interface ApmPrometheusRules {
+  /**
+   * 指标匹配规则ID
+   */
+  Id?: number
+  /**
+   * 指标匹配规则名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 规则生效的应用。生效于全部应用就传空字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceName?: string
+  /**
+   * 指标匹配规则状态：1(启用)、2（不启用）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 指标匹配规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetricNameRule?: string
+  /**
+   * 匹配类型：0精准匹配，1前缀匹配，2后缀匹配
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetricMatchType?: number
 }
 
 /**
@@ -1617,45 +1727,19 @@ export interface ModifyApmInstanceRequest {
 }
 
 /**
- * ModifyApmSampleConfig请求参数结构体
+ * Span日志部分
+
+
  */
-export interface ModifyApmSampleConfigRequest {
+export interface SpanLog {
   /**
-   * 业务系统ID
+   * 日志时间戳
    */
-  InstanceId: string
+  Timestamp: number
   /**
-   * 采样规则名
+   * 标签
    */
-  SampleName: string
-  /**
-   * 采样率
-   */
-  SampleRate: number
-  /**
-   * 应用名，生效于所有应用则填空
-   */
-  ServiceName?: string
-  /**
-   * 接口名
-   */
-  OperationName?: string
-  /**
-   * 采样tag
-   */
-  Tags?: Array<APMKVItem>
-  /**
-   * 采样开关 0关 1开 2删除
-   */
-  Status?: number
-  /**
-   * 配置Id
-   */
-  Id?: number
-  /**
-   * 0=精确匹配（默认）；1=前缀匹配；2=后缀匹配
-   */
-  OperationType?: number
+  Fields: Array<SpanTag>
 }
 
 /**
@@ -1786,6 +1870,24 @@ export interface CreateProfileTaskResponse {
    * 任务ID
    */
   TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeApmVulnerabilityDetail返回参数结构体
+ */
+export interface DescribeApmVulnerabilityDetailResponse {
+  /**
+   * 漏洞详情
+   */
+  Tags?: Array<ApmTag>
+  /**
+   * 漏洞相关业务系统列表
+   */
+  ServiceInstanceList?: Array<ApmVulnerabilityServiceDetail>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1959,13 +2061,24 @@ export interface CreateApmInstanceResponse {
 }
 
 /**
- * DeleteApmSampleConfig返回参数结构体
+ * APM应用实例漏洞相关信息
  */
-export interface DeleteApmSampleConfigResponse {
+export interface ApmVulnerabilityServiceDetail {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 应用实例
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  ServiceInstance?: string
+  /**
+   * 漏洞所在jar包路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Path?: string
+  /**
+   * 最近发生时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastOccurTime?: number
 }
 
 /**
@@ -2101,19 +2214,71 @@ export interface DeleteApmSampleConfigRequest {
 }
 
 /**
- * Span日志部分
-
-
+ * DescribeApmVulnerabilityCount请求参数结构体
  */
-export interface SpanLog {
+export interface DescribeApmVulnerabilityCountRequest {
   /**
-   * 日志时间戳
+   * APM业务系统ID
    */
-  Timestamp: number
+  InstanceId: string
   /**
-   * 标签
+   * APM应用名称
    */
-  Fields: Array<SpanTag>
+  ServiceName: string
+  /**
+   * 秒级时间戳
+   */
+  StartTime: number
+  /**
+   * 秒级时间戳
+   */
+  EndTime?: number
+  /**
+   * 查询的数据类型，攻击检测为“attack_detect”
+   */
+  Type?: string
+}
+
+/**
+ * ModifyApmSampleConfig请求参数结构体
+ */
+export interface ModifyApmSampleConfigRequest {
+  /**
+   * 业务系统ID
+   */
+  InstanceId: string
+  /**
+   * 采样规则名
+   */
+  SampleName: string
+  /**
+   * 采样率
+   */
+  SampleRate: number
+  /**
+   * 应用名，生效于所有应用则填空
+   */
+  ServiceName?: string
+  /**
+   * 接口名
+   */
+  OperationName?: string
+  /**
+   * 采样tag
+   */
+  Tags?: Array<APMKVItem>
+  /**
+   * 采样开关 0关 1开 2删除
+   */
+  Status?: number
+  /**
+   * 配置Id
+   */
+  Id?: number
+  /**
+   * 0=精确匹配（默认）；1=前缀匹配；2=后缀匹配
+   */
+  OperationType?: number
 }
 
 /**
@@ -2517,6 +2682,20 @@ export interface CreateApmPrometheusRuleRequest {
    * 业务系统ID
    */
   InstanceId: string
+}
+
+/**
+ * DescribeApmAllVulCount请求参数结构体
+ */
+export interface DescribeApmAllVulCountRequest {
+  /**
+   * 秒级时间戳
+   */
+  StartTime: number
+  /**
+   * 秒级时间戳
+   */
+  EndTime: number
 }
 
 /**
@@ -3144,4 +3323,18 @@ export interface GeneralFilter {
    * 过滤值
    */
   Value: string
+}
+
+/**
+ * DescribeOPRAllVulCount请求参数结构体
+ */
+export interface DescribeOPRAllVulCountRequest {
+  /**
+   * 秒级时间戳
+   */
+  StartTime: number
+  /**
+   * 秒级时间戳
+   */
+  EndTime: number
 }

@@ -513,7 +513,7 @@ export interface GetAsrKeyWordLibListResponse {
  */
 export interface VoicePrintEnrollResponse {
   /**
-   * 说话人基本数据
+   * <p>说话人基本数据</p>
    */
   Data?: VoicePrintBaseData
   /**
@@ -729,25 +729,29 @@ export interface VoicePrintCountData {
  */
 export interface VoicePrintUpdateRequest {
   /**
-   * 音频格式 0: pcm, 1: wav
+   * <p>音频格式 0: pcm, 1: wav</p>
    */
   VoiceFormat: number
   /**
-   * 音频采样率 目前仅支持16000 单位Hz
+   * <p>音频采样率 目前仅支持16000 单位Hz</p>
    */
   SampleRate: number
   /**
-   * 说话人id， 说话人唯一标识
+   * <p>说话人id， 说话人唯一标识</p>
    */
   VoicePrintId: string
   /**
-   * 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M
+   * <p>音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M</p>
    */
-  Data: string
+  Data?: string
   /**
-   * 说话人昵称  不超过32字节
+   * <p>说话人昵称  不超过32字节</p>
    */
   SpeakerNick?: string
+  /**
+   * <p>声纹cos url 注意:仅支持腾讯云cos url 地址</p>
+   */
+  AudioUrl?: string
 }
 
 /**
@@ -1471,7 +1475,7 @@ export interface ModifyCustomizationRequest {
  */
 export interface VoicePrintUpdateResponse {
   /**
-   * 说话人基础数据
+   * <p>说话人基础数据</p>
    */
   Data?: VoicePrintBaseData
   /**
@@ -1743,21 +1747,25 @@ export interface VoicePrintCompareData {
  */
 export interface VoicePrintVerifyRequest {
   /**
-   * 音频格式 0: pcm, 1: wav
+   * <p>音频格式 0: pcm, 1: wav</p>
    */
   VoiceFormat: number
   /**
-   * 音频采样率，目前支持16000，单位：Hz，必填
+   * <p>音频采样率，目前支持16000，单位：Hz，必填</p>
    */
   SampleRate: number
   /**
-   * 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M
-   */
-  Data: string
-  /**
-   * 说话人id, 说话人唯一标识
+   * <p>说话人id, 说话人唯一标识</p>
    */
   VoicePrintId: string
+  /**
+   * <p>音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M</p>
+   */
+  Data?: string
+  /**
+   * <p>声纹cos url 注意:仅支持腾讯云cos url 地址</p>
+   */
+  AudioUrl?: string
 }
 
 /**
@@ -1851,7 +1859,7 @@ export interface CreateAsrVocabRequest {
  */
 export interface VoicePrintVerifyResponse {
   /**
-   * 说话人验证数据
+   * <p>说话人验证数据</p>
    */
   Data?: VoicePrintVerifyData
   /**
@@ -1923,25 +1931,29 @@ export interface GetUsageByDateRequest {
  */
 export interface VoicePrintEnrollRequest {
   /**
-   * 音频格式 0: pcm, 1: wav
+   * <p>音频格式 0: pcm, 1: wav</p>
    */
   VoiceFormat: number
   /**
-   * 音频采样率，目前支持16000，单位：Hz，必填
+   * <p>音频采样率，目前支持16000，单位：Hz，必填</p>
    */
   SampleRate: number
   /**
-   * 音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M
+   * <p>音频数据, base64 编码, 音频时长不能超过30s，数据大小不超过2M</p>
    */
-  Data: string
+  Data?: string
   /**
-   * 说话人昵称  不超过32字节
+   * <p>说话人昵称  不超过32字节</p>
    */
   SpeakerNick?: string
   /**
-   * 分组id, 仅支持大小写字母和下划线的组合，不超过128个字符
+   * <p>分组id, 仅支持大小写字母和下划线的组合，不超过128个字符</p>
    */
   GroupId?: string
+  /**
+   * <p>声纹cos url 注意:仅支持腾讯云cos url 地址</p>
+   */
+  AudioUrl?: string
 }
 
 /**

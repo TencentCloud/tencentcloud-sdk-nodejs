@@ -998,6 +998,10 @@ export interface AIAgentInfo {
    * 智能体名称
    */
   AIAgentName?: string
+  /**
+   * 智能体变量名列表
+   */
+  VariableNames?: Array<string>
 }
 
 /**
@@ -2101,6 +2105,40 @@ export interface ResumePredictiveDialingCampaignResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 闪信记录
+ */
+export interface FlashSMSRecord {
+  /**
+   * 会话 ID
+   */
+  SessionId?: string
+  /**
+   * 闪信投递号码（被叫）
+   */
+  DeliveryNumber?: string
+  /**
+   * 呼叫关联的系统号码
+   */
+  ServingNumber?: string
+  /**
+   * 投递状态，1 表示成功，其他表示失败
+   */
+  DeliveryStatus?: number
+  /**
+   * 投递失败原因
+   */
+  DeliveryMessage?: string
+  /**
+   * 投递时间戳，Unix 秒级时间戳
+   */
+  DeliveryTimestamp?: number
+  /**
+   * 送达时间（送达成功），Unix 秒级时间戳
+   */
+  ArriveTimestamp?: number
 }
 
 /**
@@ -3238,6 +3276,24 @@ export interface Message {
 }
 
 /**
+ * DescribeFlashSMSList返回参数结构体
+ */
+export interface DescribeFlashSMSListResponse {
+  /**
+   * 记录总数
+   */
+  Total?: number
+  /**
+   * 闪信记录列表
+   */
+  FlashSMSList?: Array<FlashSMSRecord>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AbortPredictiveDialingCampaign返回参数结构体
  */
 export interface AbortPredictiveDialingCampaignResponse {
@@ -3395,6 +3451,48 @@ export interface IVRKeyPressedElement {
    * TTS 提示音内容
    */
   TTSPrompt?: string
+}
+
+/**
+ * DescribeFlashSMSList请求参数结构体
+ */
+export interface DescribeFlashSMSListRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * 起始时间戳，Unix 秒级时间戳，最大支持近180天。
+   */
+  StartTimestamp: number
+  /**
+   * 结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。
+   */
+  EndTimestamp: number
+  /**
+   * 闪信投递号码（被叫号码）
+   */
+  DeliveryNumber?: string
+  /**
+   * 呼叫关联的系统号码
+   */
+  ServingNumber?: string
+  /**
+   * 会话 ID
+   */
+  SessionId?: string
+  /**
+   * 投递结果 1 为成功，其他为失败
+   */
+  DeliveryStatus?: number
+  /**
+   * 分页大小，默认 20，最大 100
+   */
+  PageSize?: number
+  /**
+   * 分页页码，从 0 开始
+   */
+  PageNumber?: number
 }
 
 /**

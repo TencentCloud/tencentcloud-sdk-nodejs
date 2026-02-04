@@ -86,6 +86,7 @@ import {
   UnbindNumberCallOutSkillGroupRequest,
   CreateCarrierPrivilegeNumberApplicantRequest,
   ResumePredictiveDialingCampaignResponse,
+  FlashSMSRecord,
   CallInSkillGroupMetrics,
   CreateExtensionResponse,
   CreateUserSigRequest,
@@ -133,6 +134,7 @@ import {
   ModifyOwnNumberApplyRequest,
   PSTNSessionInfo,
   Message,
+  DescribeFlashSMSListResponse,
   AbortPredictiveDialingCampaignResponse,
   DescribeIMCdrsResponse,
   DescribeNumbersRequest,
@@ -140,6 +142,7 @@ import {
   BindNumberCallOutSkillGroupRequest,
   DeletePredictiveDialingCampaignResponse,
   IVRKeyPressedElement,
+  DescribeFlashSMSListRequest,
   UnbindNumberCallOutSkillGroupResponse,
   DescribeAgentCruiseDialingCampaignRequest,
   DescribePSTNActiveSessionListRequest,
@@ -595,6 +598,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCarrierPrivilegeNumberApplicantsResponse) => void
   ): Promise<DescribeCarrierPrivilegeNumberApplicantsResponse> {
     return this.request("DescribeCarrierPrivilegeNumberApplicants", req, cb)
+  }
+
+  /**
+   * 获取闪信记录列表
+   */
+  async DescribeFlashSMSList(
+    req: DescribeFlashSMSListRequest,
+    cb?: (error: string, rep: DescribeFlashSMSListResponse) => void
+  ): Promise<DescribeFlashSMSListResponse> {
+    return this.request("DescribeFlashSMSList", req, cb)
   }
 
   /**
