@@ -19,8 +19,29 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeAlarmNotifyHistoriesRequest,
-  DescribeAlarmNotifyHistoriesResponse,
+  WebhookNoticeTmpl,
+  TeamsRobotNoticeTmplMatcher,
+  FeiShuRobotNoticeTmplMatcher,
   PageByNoParams,
+  PagerDutyRobotNoticeTmpl,
+  WeWorkRobotNoticeTmplMatcher,
+  NoticeContentTmplItem,
+  QCloudYeheNoticeTmplItem,
+  CreateNoticeContentTmplResponse,
+  QCloudYeheWeChatNoticeTmplItem,
+  PagerDutyRobotNoticeTmplHeader,
+  DescribeAlarmNotifyHistoriesResponse,
+  DingDingRobotNoticeTmpl,
+  PagerDutyRobotNoticeTmplMatcher,
+  WebhookNoticeTmplHeader,
+  FeiShuRobotNoticeTmpl,
+  DingDingRobotNoticeTmplMatcher,
+  TeamsRobotNoticeTmpl,
+  WeWorkRobotNoticeTmpl,
+  QCloudYeheNoticeTmpl,
+  CreateNoticeContentTmplRequest,
+  QCloudYeheNoticeTmplMatcher,
+  WebhookNoticeTmplMatcher,
 } from "./monitor_models"
 
 /**
@@ -30,6 +51,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("monitor.tencentcloudapi.com", "2023-06-16", clientConfig)
+  }
+
+  /**
+   * 创建自定义通知内容模板
+   */
+  async CreateNoticeContentTmpl(
+    req: CreateNoticeContentTmplRequest,
+    cb?: (error: string, rep: CreateNoticeContentTmplResponse) => void
+  ): Promise<CreateNoticeContentTmplResponse> {
+    return this.request("CreateNoticeContentTmpl", req, cb)
   }
 
   /**

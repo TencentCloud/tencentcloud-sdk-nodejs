@@ -4153,6 +4153,24 @@ export interface DescribeHostsResponse {
 export type DescribeAccessIndexRequest = null
 
 /**
+ * 搜索框内容，冒号前面是key, 冒号是操作，值是最后一位，操作（冒号）默认是相等
+ */
+export interface BotDataFilter {
+  /**
+   * 查询维度
+   */
+  Entity?: string
+  /**
+   * 操作符
+   */
+  Operator?: string
+  /**
+   * 操作值，多个值用
+   */
+  Value?: string
+}
+
+/**
  * domain列表
  */
 export interface DomainInfo {
@@ -9069,6 +9087,40 @@ export interface BotMonitorPkg {
 }
 
 /**
+ * DescribeApiAggregateTopN请求参数结构体
+ */
+export interface DescribeApiAggregateTopNRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 需要的Top数，默认5， 最大值100
+   */
+  TopN: number
+  /**
+   * 开始时间
+   */
+  StartTs: number
+  /**
+   * 结束时间
+   */
+  EndTs: number
+  /**
+   * 需要查询TOP的维度名
+   */
+  Dimension: string
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<BotDataFilter>
+  /**
+   * 是否查询全域名的三个特殊图标
+   */
+  GlobalFlag?: boolean
+}
+
+/**
  * GetOrganizationRole请求参数结构体
  */
 export type GetOrganizationRoleRequest = null
@@ -12908,6 +12960,21 @@ export interface AddAttackWhiteRuleResponse {
 }
 
 /**
+ * DescribeApiAggregateTopN返回参数结构体
+ */
+export interface DescribeApiAggregateTopNResponse {
+  /**
+   * topN结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<BotTopItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ImportIpAccessControl返回参数结构体
  */
 export interface ImportIpAccessControlResponse {
@@ -14915,6 +14982,24 @@ export interface TokenVerifyRule {
    * 其他会话有效性校验方式(contains、length、regex)的校验规则
    */
   GeneralRule?: TokenRuleEntry
+}
+
+/**
+ * bot的topN复杂类型
+ */
+export interface BotTopItem {
+  /**
+   * 对应的key
+   */
+  Key?: string
+  /**
+   * 对应的值
+   */
+  Value?: number
+  /**
+   * key对应的展示描述语
+   */
+  Label?: string
 }
 
 /**

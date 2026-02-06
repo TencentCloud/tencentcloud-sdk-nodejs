@@ -88,16 +88,6 @@ it("trtc.v20190722.DescribeRoomInfo", async function () {
     }
 })
 
-it("trtc.v20190722.DescribeTRTCMarketQualityMetricData", async function () {
-    try {
-       const data = await client.DescribeTRTCMarketQualityMetricData({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("trtc.v20190722.DescribeWebRecord", async function () {
     try {
        const data = await client.DescribeWebRecord({})
@@ -221,16 +211,6 @@ it("trtc.v20190722.UpdateStreamIngest", async function () {
 it("trtc.v20190722.DeletePicture", async function () {
     try {
        const data = await client.DeletePicture({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trtc.v20190722.DescribeTRTCRealTimeQualityMetricData", async function () {
-    try {
-       const data = await client.DescribeTRTCRealTimeQualityMetricData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

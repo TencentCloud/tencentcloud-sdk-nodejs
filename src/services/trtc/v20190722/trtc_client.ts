@@ -19,14 +19,13 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ModifyCloudSliceTaskResponse,
-  TimeValue,
   DescribeCloudModerationResponse,
   AgentConfig,
   CreatePictureRequest,
   SubscribeModerationUserIds,
   AudioEncodeParams,
   ServerPushText,
-  DescribeTRTCMarketQualityMetricDataResponse,
+  McuRecordParams,
   MixLayout,
   McuVideoParams,
   DescribeTRTCRealTimeScaleDataRequest,
@@ -74,11 +73,10 @@ import {
   CloudStorage,
   VoicePrint,
   DescribeTrtcUsageResponse,
-  McuRecordParams,
+  TimeValue,
   CreateCloudRecordingResponse,
-  DescribeTRTCMarketQualityMetricDataRequest,
   DescribeWebRecordRequest,
-  AmbientSound,
+  DescribeTRTCRealTimeScaleDataResponse,
   DescribeRecordStatisticRequest,
   DescribeRoomInfoRequest,
   StorageParams,
@@ -109,7 +107,7 @@ import {
   DescribeRoomInfoResponse,
   McuLayoutParams,
   StartWebRecordRequest,
-  DescribeTRTCRealTimeQualityMetricDataRequest,
+  RecordParams,
   DescribeAITranscriptionRequest,
   CreateBasicModerationResponse,
   SdkAppIdTrtcMcuTranscodeTimeUsage,
@@ -149,15 +147,13 @@ import {
   SdkAppIdRecordUsage,
   AudioEncode,
   RemoveUserRequest,
-  TRTCDataResult,
   DismissRoomRequest,
   DescribeUnusualEventRequest,
   DescribeCloudRecordingRequest,
   TencentVod,
-  RecordParams,
   DeleteVoicePrintResponse,
   StartWebRecordResponse,
-  DescribeTRTCRealTimeQualityMetricDataResponse,
+  TRTCDataResult,
   DescribeCloudRecordingResponse,
   ModifyCloudModerationRequest,
   RecordUsage,
@@ -210,7 +206,7 @@ import {
   DescribeCloudSliceTaskRequest,
   StopPublishCdnStreamRequest,
   MixUserInfo,
-  DescribeTRTCRealTimeScaleDataResponse,
+  AmbientSound,
   DescribeTRTCMarketQualityDataRequest,
   UpdatePublishCdnStreamRequest,
   InvokeLLM,
@@ -360,26 +356,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRoomInfoResponse) => void
   ): Promise<DescribeRoomInfoResponse> {
     return this.request("DescribeRoomInfo", req, cb)
-  }
-
-  /**
-     * 云监控monitor接口已下线，trtc同步下线接口
-
-查询TRTC监控仪表盘-数据大盘质量指标（包括下列指标）
-joinSuccessRate：加入频道成功率。
-joinSuccessIn5sRate：5s内加入频道成功率。
-audioFreezeRate：音频卡顿率。
-videoFreezeRate：视频卡顿率。
-networkDelay ：网络延迟率。
-注意：
-1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
-2.查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天。
-     */
-  async DescribeTRTCMarketQualityMetricData(
-    req: DescribeTRTCMarketQualityMetricDataRequest,
-    cb?: (error: string, rep: DescribeTRTCMarketQualityMetricDataResponse) => void
-  ): Promise<DescribeTRTCMarketQualityMetricDataResponse> {
-    return this.request("DescribeTRTCMarketQualityMetricData", req, cb)
   }
 
   /**
@@ -559,23 +535,6 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: DeletePictureResponse) => void
   ): Promise<DeletePictureResponse> {
     return this.request("DeletePicture", req, cb)
-  }
-
-  /**
-     * 云监控monitor接口已下线，trtc同步下线接口
-
-查询TRTC监控仪表盘-实时监控质量指标（会返回下列指标）
--视频卡顿率
--音频卡顿率
-注意：
-1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，监控仪表盘版本功能和计费说明：https://cloud.tencent.com/document/product/647/81331。
-2.查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
-     */
-  async DescribeTRTCRealTimeQualityMetricData(
-    req: DescribeTRTCRealTimeQualityMetricDataRequest,
-    cb?: (error: string, rep: DescribeTRTCRealTimeQualityMetricDataResponse) => void
-  ): Promise<DescribeTRTCRealTimeQualityMetricDataResponse> {
-    return this.request("DescribeTRTCRealTimeQualityMetricData", req, cb)
   }
 
   /**
@@ -1149,7 +1108,9 @@ networkDelay ：网络延迟率。
   }
 
   /**
-     * 查询TRTC监控仪表盘-实时监控规模指标（会返回下列指标）
+     * 腾讯云可观测平台monitor接口已下线，TRTC同步下线接口
+
+查询TRTC监控仪表盘-实时监控规模指标（会返回下列指标）
 -userCount（在线用户数）
 -roomCount（在线房间数）
 注意：

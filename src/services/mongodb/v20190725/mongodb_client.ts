@@ -131,6 +131,7 @@ import {
   ParamTpl,
   InquirePriceModifyDBInstanceSpecResponse,
   SecurityGroupBound,
+  BackupTotalSize,
   DescribeDBInstanceNodePropertyResponse,
   InstanceInfo,
   DescribeDBInstanceParamTplDetailResponse,

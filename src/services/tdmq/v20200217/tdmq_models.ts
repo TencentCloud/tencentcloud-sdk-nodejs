@@ -1879,6 +1879,16 @@ export interface SendRocketMQMessageRequest {
 }
 
 /**
+ * CreateRocketMQGroupV2返回参数结构体
+ */
+export interface CreateRocketMQGroupV2Response {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCluster返回参数结构体
  */
 export interface CreateClusterResponse {
@@ -7030,6 +7040,48 @@ export interface DescribeRocketMQPublicAccessPointResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateRocketMQGroupV2请求参数结构体
+ */
+export interface CreateRocketMQGroupV2Request {
+  /**
+   * 消费组名称
+   */
+  GroupId: string
+  /**
+   * 消费组所在的命名空间，4.x 通用集群命名空间固定为: tdmq_default
+   */
+  Namespace: string
+  /**
+   * 是否开启消费
+   */
+  ReadEnable: boolean
+  /**
+   * 是否开启广播消费
+   */
+  BroadcastEnable: boolean
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * Group类型（TCP/HTTP）
+   */
+  GroupType?: string
+  /**
+   * Group最大重试次数
+   */
+  RetryMaxTimes?: number
+  /**
+   * 标签列表
+   */
+  TagList?: Array<Tag>
 }
 
 /**

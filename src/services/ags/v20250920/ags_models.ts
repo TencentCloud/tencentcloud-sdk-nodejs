@@ -124,6 +124,20 @@ export interface SandboxInstance {
 }
 
 /**
+ * 文件存储配置
+ */
+export interface CfsStorageSource {
+  /**
+   * CFS资源ID
+   */
+  FileSystemId?: string
+  /**
+   * CFS挂载路径
+   */
+  Path?: string
+}
+
+/**
  * StopSandboxInstance请求参数结构体
  */
 export interface StopSandboxInstanceRequest {
@@ -375,6 +389,10 @@ export interface StorageSource {
    * 镜像卷配置
    */
   Image?: ImageStorageSource
+  /**
+   * 文件存储配置
+   */
+  Cfs?: CfsStorageSource
 }
 
 /**

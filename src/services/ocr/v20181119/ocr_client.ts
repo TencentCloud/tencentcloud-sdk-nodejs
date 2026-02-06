@@ -33,6 +33,7 @@ import {
   BankCardOCRRequest,
   VatInvoiceVerifyNewResponse,
   CarInvoiceOCRRequest,
+  DescribeQuestionMarkAgentJobResponse,
   ExtractDocMultiRequest,
   QuestionSplitLayoutOCRRequest,
   TrainTicketOCRRequest,
@@ -71,6 +72,7 @@ import {
   BankSlip,
   QuestionOCRResponse,
   SealInfo,
+  SubmitQuestionMarkAgentJobRequest,
   InvoiceGeneralInfo,
   TextVatInvoice,
   ShipInvoiceInfo,
@@ -170,7 +172,7 @@ import {
   MotorVehicleSaleInvoice,
   TextArithmetic,
   ElectronicTrainTicket,
-  UsedVehicleInvoiceInfo,
+  RecognizeHealthCodeOCRResponse,
   PassportRecognizeInfos,
   SubmitExtractDocAgentJobResponse,
   ImageEnhancementResponse,
@@ -185,10 +187,12 @@ import {
   FinancialBill,
   LicensePlateOCRRequest,
   GeneralBasicOCRRequest,
+  UsedVehicleInvoiceInfo,
   RecognizeTableMultiOCRRequest,
   GeneralEfficientOCRRequest,
   AdvertiseOCRRequest,
   AirTicketInfo,
+  SubmitQuestionMarkAgentJobResponse,
   RideHailingDriverLicenseOCRResponse,
   TextVehicleBack,
   ImageEnhancementRequest,
@@ -225,6 +229,7 @@ import {
   ClassifyStoreNameResponse,
   DescribeExtractDocAgentJobRequest,
   ElectronicTollSummaryItem,
+  ContentInfo,
   TableTitle,
   RecognizeTableAccurateOCRRequest,
   Coord,
@@ -245,7 +250,7 @@ import {
   PassportOCRRequest,
   DutyPaidProofOCRRequest,
   ConfigAdvanced,
-  RecognizeHealthCodeOCRResponse,
+  DescribeQuestionMarkAgentJobRequest,
   LineInfo,
   GeneralCardWarnInfo,
   TollInvoice,
@@ -265,7 +270,8 @@ import {
   RecognizeGeneralInvoiceResponse,
   HandwritingEssayOCRResponse,
   InsuranceBillInfo,
-  ContentInfo,
+  MarkInfo,
+  AnswerInfo,
   QuestionOCRRequest,
   TextTractorVehicleBack,
   RecognizeMedicalInvoiceOCRRequest,
@@ -694,6 +700,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 用于试题批改Agent提交任务。主要面向K12的试题批改产品，支持整卷/单题端到端（试卷切题+题目批改+手写坐标回显）处理，主要聚焦的场景包括试题批改（含手写答案）、试题解析（不含手写答案），其中低年级算式批改效果比线上[数学作业批改](https://cloud.tencent.com/document/product/1004)效果更好。精准输出题目、正误判定、答案对比、错误及知识点等结构化评估结果。
+
+默认接口请求并发限制：10题/分钟。
+     */
+  async SubmitQuestionMarkAgentJob(
+    req: SubmitQuestionMarkAgentJobRequest,
+    cb?: (error: string, rep: SubmitQuestionMarkAgentJobResponse) => void
+  ): Promise<SubmitQuestionMarkAgentJobResponse> {
+    return this.request("SubmitQuestionMarkAgentJob", req, cb)
+  }
+
+  /**
      * 本接口支持网约车驾驶证关键字段的识别，包括姓名、证号、起始日期、截止日期、发证日期。
 
 默认接口请求频率限制：5次/秒。
@@ -1102,6 +1120,19 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * <b>此接口不再进行服务升级，建议您使用识别能力更强、服务性能更优的<a href="https://cloud.tencent.com/document/product/866/90802">通用票据识别（高级版）</a>。</b>
+本接口支持定额发票的发票号码、发票代码、金额(大小写)、发票消费类型、地区及是否有公司印章等关键字段的识别。
+
+默认接口请求频率限制：5次/秒。
+     */
+  async QuotaInvoiceOCR(
+    req: QuotaInvoiceOCRRequest,
+    cb?: (error: string, rep: QuotaInvoiceOCRResponse) => void
+  ): Promise<QuotaInvoiceOCRResponse> {
+    return this.request("QuotaInvoiceOCR", req, cb)
+  }
+
+  /**
      * 本接口当前仅支持复杂磅单收发货单抽取，更多强推理场景支持定制咨询。点击[立即体验](https://ocrdemo.cloud.tencent.com/?action=ExtractDocMultiPro)。
 
 默认接口请求频率限制：5次/秒。
@@ -1305,16 +1336,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <b>此接口不再进行服务升级，建议您使用识别能力更强、服务性能更优的<a href="https://cloud.tencent.com/document/product/866/90802">通用票据识别（高级版）</a>。</b>
-本接口支持定额发票的发票号码、发票代码、金额(大小写)、发票消费类型、地区及是否有公司印章等关键字段的识别。
+     * 用于试题批改Agent查询任务。主要面向K12的试题批改产品，支持整卷/单题端到端（试卷切题+题目批改+手写坐标回显）处理，主要聚焦的场景包括试题批改（含手写答案）、试题解析（不含手写答案），其中低年级算式批改效果比线上[数学作业批改](https://cloud.tencent.com/document/product/1004)效果更好。精准输出题目、正误判定、答案对比、错误及知识点等结构化评估结果。
 
-默认接口请求频率限制：5次/秒。
+默认接口请求并发限制：10题/分钟。
      */
-  async QuotaInvoiceOCR(
-    req: QuotaInvoiceOCRRequest,
-    cb?: (error: string, rep: QuotaInvoiceOCRResponse) => void
-  ): Promise<QuotaInvoiceOCRResponse> {
-    return this.request("QuotaInvoiceOCR", req, cb)
+  async DescribeQuestionMarkAgentJob(
+    req: DescribeQuestionMarkAgentJobRequest,
+    cb?: (error: string, rep: DescribeQuestionMarkAgentJobResponse) => void
+  ): Promise<DescribeQuestionMarkAgentJobResponse> {
+    return this.request("DescribeQuestionMarkAgentJob", req, cb)
   }
 
   /**

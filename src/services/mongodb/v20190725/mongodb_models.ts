@@ -556,6 +556,10 @@ export interface DescribeBackupRulesResponse {
    */
   BackupSaveTime?: number
   /**
+   * 备份频率。备份时间间隔，单位小时。取值12，24
+   */
+  BackupFrequency?: number
+  /**
    * 自动备份开始时间。
    */
   BackupTime?: number
@@ -563,8 +567,44 @@ export interface DescribeBackupRulesResponse {
    * 备份方式。
 - 0：逻辑备份。
 - 1：物理备份。
+- 3：快照备份。
+**说明**:
+1. 通用版实例支持逻辑备份与物理备份。云盘版实例支持物理备份与快照备份，暂不支持逻辑备份。
+2. 实例开通存储加密，则备份方式不能为物理备份。
    */
   BackupMethod?: number
+  /**
+   * 周几备份，0-6，逗号分割
+   */
+  ActiveWeekdays?: string
+  /**
+   * 长期备份周期。weekly-按周，monthly-按月，空不开启。
+   */
+  LongTermInterval?: string
+  /**
+   * 长期备份的日期，周0-6，月1-31
+   */
+  LongTermActiveDays?: string
+  /**
+   * 长期备份保留时间
+   */
+  LongTermExpiredDays?: number
+  /**
+   * 增量备份保留时间
+   */
+  OplogExpiredDays?: number
+  /**
+   * 备份版本号。0-旧备份方式，1-高级备份
+   */
+  BackupVersion?: number
+  /**
+   * 备份大小
+   */
+  BackupTotalSize?: BackupTotalSize
+  /**
+   * 告警额度
+   */
+  AlertThreshold?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2794,6 +2834,24 @@ export interface SecurityGroupBound {
 }
 
 /**
+ * 实例备份总大小
+ */
+export interface BackupTotalSize {
+  /**
+   * 全量备份总大小，单位字节
+   */
+  SnapshotSize?: number
+  /**
+   * 增量备份总大小
+   */
+  OplogSize?: number
+  /**
+   * 免费额度
+   */
+  FreeQuota?: number
+}
+
+/**
  * DescribeDBInstanceNodeProperty返回参数结构体
  */
 export interface DescribeDBInstanceNodePropertyResponse {
@@ -3806,10 +3864,7 @@ export interface SetBackupRulesRequest {
    */
   ActiveWeekdays?: string
   /**
-   * 长期保留周期。支持按周或按月选择特定日期的备份（例如，每月1日、15日的备份数据），将其保留更长周期。
-- 不开启（默认）：不启用长期保留功能。
-- 按周保留： 指定为 weekly。
-- 按月保留： 指定为 monthly。
+   * 长期保留周期。支持按周或按月选择特定日期的备份（例如，每月1日、15日的备份数据），将其保留更长周期。- 不开启（默认）：不启用长期保留功能。- 按周保留： 指定为 weekly。- 按月保留： 指定为 monthly。待废弃，使用LongTermInterval
    */
   LongTermUnit?: string
   /**
@@ -3836,12 +3891,17 @@ export interface SetBackupRulesRequest {
    */
   BackupVersion?: number
   /**
-   * 设置备份数据集存储空间使用率的告警阈值。
-- 单位：%。
--  默认值：100。
-- 取值范围：[50,300]。
+   * 设置备份数据集存储空间使用率的告警阈值。- 单位：%。-  默认值：100。- 取值范围：[50,300]。待废弃,使用AlertThreshold
    */
   AlarmWaterLevel?: number
+  /**
+   * 长期保留周期。支持按周或按月选择特定日期的备份（例如，每月1日、15日的备份数据），将其保留更长周期。- 不开启（默认）：不启用长期保留功能。- 按周保留： 指定为 weekly。- 按月保留： 指定为 monthly。
+   */
+  LongTermInterval?: string
+  /**
+   * 设置备份数据集存储空间使用率的告警阈值。- 单位：%。-  默认值：100。- 取值范围：[50,300]。
+   */
+  AlertThreshold?: number
 }
 
 /**

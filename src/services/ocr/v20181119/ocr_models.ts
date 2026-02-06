@@ -475,6 +475,36 @@ export interface CarInvoiceOCRRequest {
 }
 
 /**
+ * DescribeQuestionMarkAgentJob返回参数结构体
+ */
+export interface DescribeQuestionMarkAgentJobResponse {
+  /**
+   * 任务执行错误码。当任务状态不为 FAIL 时，该值为""。
+   */
+  ErrorCode?: string
+  /**
+   * 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。
+   */
+  ErrorMessage?: string
+  /**
+   * 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功
+   */
+  JobStatus?: string
+  /**
+   * 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负。
+   */
+  Angle?: number
+  /**
+   * 试题批改信息
+   */
+  MarkInfos?: Array<MarkInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ExtractDocMulti请求参数结构体
  */
 export interface ExtractDocMultiRequest {
@@ -1683,6 +1713,42 @@ export interface SealInfo {
 三角形印章：4
    */
   SealShape: string
+}
+
+/**
+ * SubmitQuestionMarkAgentJob请求参数结构体
+ */
+export interface SubmitQuestionMarkAgentJobRequest {
+  /**
+   * 图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。  示例值：/9j/4AAQSkZJRg.....s97n//2Q==
+   */
+  ImageBase64?: string
+  /**
+   * 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。  示例值：https://ocr-demo-1254418846.cos.ap-guangzhou.myqcloud.com/general/GeneralAccurateOCR/GeneralAccurateOCR1.jpg
+   */
+  ImageUrl?: string
+  /**
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，默认值为1。
+   */
+  PdfPageNumber?: number
+  /**
+   * 表示整张试卷批改需要先切题，默认为false
+   * @deprecated
+   */
+  BoolSingleQuestion?: boolean
+  /**
+   * 默认false 表示关闭深度思考  true 表示打开深度思考，更深层次推理分析，速度更慢
+   * @deprecated
+   */
+  EnableDeepThink?: boolean
+  /**
+   * 题目信息输出配置，当key对应为true表示开启配置开关。     当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；当key为TrueAnswer  value为true 表示输出每道题的正确答案 ；当key为ReturnAnswerPosition  value为false表示不输出手写答案坐标（降低处理耗时，按需输出）； 设置方式参考  {"KnowledgePoints":true,"TrueAnswer":true}
+   */
+  QuestionConfigMap?: string
+  /**
+   * 仅有单题有效，如果切题有多题则不生效，单题批改的时候作为参考答案输入到批改模型中
+   */
+  ReferenceAnswer?: string
 }
 
 /**
@@ -5362,105 +5428,53 @@ export interface ElectronicTrainTicket {
 }
 
 /**
- * 二手车销售统一发票信息
+ * RecognizeHealthCodeOCR返回参数结构体
  */
-export interface UsedVehicleInvoiceInfo {
+export interface RecognizeHealthCodeOCRResponse {
   /**
-   * 所属税局
+   * 持码人姓名，如：王*（允许返回空值）
    */
-  TaxBureau: string
+  Name?: string
   /**
-   * 买方单位/个人
+   * 持码人身份证号，如：11**************01（允许返回空值）
    */
-  Buyer: string
+  IDNumber?: string
   /**
-   * 买方单位代码/身份证号码
+   * 健康码更新时间（允许返回空值）
    */
-  BuyerNo: string
+  Time?: string
   /**
-   * 买方单位/个人地址
+   * 健康码颜色：绿色、黄色、红色（允许返回空值）
    */
-  BuyerAddress: string
+  Color?: string
   /**
-   * 买方单位电话
+   * 核酸检测间隔时长（允许返回空值）
    */
-  BuyerTel: string
+  TestingInterval?: string
   /**
-   * 卖方单位/个人
+   * 核酸检测结果：阴性、阳性、暂无核酸检测记录（允许返回空值）
    */
-  Seller: string
+  TestingResult?: string
   /**
-   * 卖方单位代码/身份证号码
+   * 核酸检测时间（允许返回空值）
    */
-  SellerNo: string
+  TestingTime?: string
   /**
-   * 卖方单位/个人地址
+   * 疫苗接种信息，返回接种针数或接种情况（允许返回空值）
    */
-  SellerAddress: string
+  Vaccination?: string
   /**
-   * 卖方单位电话
+   * 场所名称（允许返回空值）
    */
-  SellerTel: string
+  SpotName?: string
   /**
-   * 车牌照号
+   * 疫苗接种时间
    */
-  VehicleLicenseNo: string
+  VaccinationTime?: string
   /**
-   * 登记证号
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RegisterNo: string
-  /**
-   * 车架号/车辆识别代码
-   */
-  VehicleIdentifyNo: string
-  /**
-   * 转入地车辆管理所名称
-   */
-  ManagementOffice: string
-  /**
-   * 车价合计
-   */
-  VehicleTotalPrice: string
-  /**
-   * 经营、拍卖单位
-   */
-  Auctioneer: string
-  /**
-   * 经营、拍卖单位地址
-   */
-  AuctioneerAddress: string
-  /**
-   * 经营、拍卖单位纳税人识别号
-   */
-  AuctioneerTaxpayerNum: string
-  /**
-   * 经营、拍卖单位开户银行、账号
-   */
-  AuctioneerBankAccount: string
-  /**
-   * 经营、拍卖单位电话
-   */
-  AuctioneerTel: string
-  /**
-   * 二手车市场
-   */
-  Market: string
-  /**
-   * 二手车市场纳税人识别号
-   */
-  MarketTaxpayerNum: string
-  /**
-   * 二手车市场地址
-   */
-  MarketAddress: string
-  /**
-   * 二手车市场开户银行账号
-   */
-  MarketBankAccount: string
-  /**
-   * 二手车市场电话
-   */
-  MarketTel: string
+  RequestId?: string
 }
 
 /**
@@ -6023,6 +6037,108 @@ ara：阿拉伯语
 }
 
 /**
+ * 二手车销售统一发票信息
+ */
+export interface UsedVehicleInvoiceInfo {
+  /**
+   * 所属税局
+   */
+  TaxBureau: string
+  /**
+   * 买方单位/个人
+   */
+  Buyer: string
+  /**
+   * 买方单位代码/身份证号码
+   */
+  BuyerNo: string
+  /**
+   * 买方单位/个人地址
+   */
+  BuyerAddress: string
+  /**
+   * 买方单位电话
+   */
+  BuyerTel: string
+  /**
+   * 卖方单位/个人
+   */
+  Seller: string
+  /**
+   * 卖方单位代码/身份证号码
+   */
+  SellerNo: string
+  /**
+   * 卖方单位/个人地址
+   */
+  SellerAddress: string
+  /**
+   * 卖方单位电话
+   */
+  SellerTel: string
+  /**
+   * 车牌照号
+   */
+  VehicleLicenseNo: string
+  /**
+   * 登记证号
+   */
+  RegisterNo: string
+  /**
+   * 车架号/车辆识别代码
+   */
+  VehicleIdentifyNo: string
+  /**
+   * 转入地车辆管理所名称
+   */
+  ManagementOffice: string
+  /**
+   * 车价合计
+   */
+  VehicleTotalPrice: string
+  /**
+   * 经营、拍卖单位
+   */
+  Auctioneer: string
+  /**
+   * 经营、拍卖单位地址
+   */
+  AuctioneerAddress: string
+  /**
+   * 经营、拍卖单位纳税人识别号
+   */
+  AuctioneerTaxpayerNum: string
+  /**
+   * 经营、拍卖单位开户银行、账号
+   */
+  AuctioneerBankAccount: string
+  /**
+   * 经营、拍卖单位电话
+   */
+  AuctioneerTel: string
+  /**
+   * 二手车市场
+   */
+  Market: string
+  /**
+   * 二手车市场纳税人识别号
+   */
+  MarketTaxpayerNum: string
+  /**
+   * 二手车市场地址
+   */
+  MarketAddress: string
+  /**
+   * 二手车市场开户银行账号
+   */
+  MarketBankAccount: string
+  /**
+   * 二手车市场电话
+   */
+  MarketTel: string
+}
+
+/**
  * RecognizeTableMultiOCR请求参数结构体
  */
 export interface RecognizeTableMultiOCRRequest {
@@ -6187,6 +6303,28 @@ export interface AirTicketInfo {
    * 统一社会信用代码
    */
   UnifiedSocialCreditCodeOfPurchaser?: string
+}
+
+/**
+ * SubmitQuestionMarkAgentJob返回参数结构体
+ */
+export interface SubmitQuestionMarkAgentJobResponse {
+  /**
+   * 任务唯一ID。由服务端生成.
+   */
+  JobId?: string
+  /**
+   * 切题题目边框坐标列表 （如果BoolSingleQuestion为true则返回空）
+   */
+  QuestionInfo?: Array<QuestionInfo>
+  /**
+   * 题目切题数量，作为计费题目数总量
+   */
+  QuestionCount?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7560,6 +7698,44 @@ export interface ElectronicTollSummaryItem {
 }
 
 /**
+ * 卡证字段信息返回值
+ */
+export interface ContentInfo {
+  /**
+   * 字段内容
+   */
+  Content?: string
+  /**
+   * 结果置信度
+   */
+  Confidence?: number
+  /**
+   * 字段是否不完整（value内容）
+0 字段正常
+1 字段不完整
+   */
+  IsInComplete?: number
+  /**
+   * 字段反光（value内容）
+0 字段正常
+1 字段有反光
+   */
+  IsReflect?: number
+  /**
+   * 字段是否不完整（key内容）
+0 字段正常
+1 字段不完整
+   */
+  IsKeyInComplete?: number
+  /**
+   * 字段反光（key内容）
+0 字段正常
+1 字段有反光
+   */
+  IsKeyReflect?: number
+}
+
+/**
  * 表格标题
  */
 export interface TableTitle {
@@ -7985,53 +8161,13 @@ export interface ConfigAdvanced {
 }
 
 /**
- * RecognizeHealthCodeOCR返回参数结构体
+ * DescribeQuestionMarkAgentJob请求参数结构体
  */
-export interface RecognizeHealthCodeOCRResponse {
+export interface DescribeQuestionMarkAgentJobRequest {
   /**
-   * 持码人姓名，如：王*（允许返回空值）
+   * 任务唯一ID。由服务端生成。
    */
-  Name?: string
-  /**
-   * 持码人身份证号，如：11**************01（允许返回空值）
-   */
-  IDNumber?: string
-  /**
-   * 健康码更新时间（允许返回空值）
-   */
-  Time?: string
-  /**
-   * 健康码颜色：绿色、黄色、红色（允许返回空值）
-   */
-  Color?: string
-  /**
-   * 核酸检测间隔时长（允许返回空值）
-   */
-  TestingInterval?: string
-  /**
-   * 核酸检测结果：阴性、阳性、暂无核酸检测记录（允许返回空值）
-   */
-  TestingResult?: string
-  /**
-   * 核酸检测时间（允许返回空值）
-   */
-  TestingTime?: string
-  /**
-   * 疫苗接种信息，返回接种针数或接种情况（允许返回空值）
-   */
-  Vaccination?: string
-  /**
-   * 场所名称（允许返回空值）
-   */
-  SpotName?: string
-  /**
-   * 疫苗接种时间
-   */
-  VaccinationTime?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  JobId?: string
 }
 
 /**
@@ -8694,41 +8830,67 @@ export interface InsuranceBillInfo {
 }
 
 /**
- * 卡证字段信息返回值
+ * 整张试卷所有题目批改信息
  */
-export interface ContentInfo {
+export interface MarkInfo {
   /**
-   * 字段内容
+   * 题目的题干信息 
+
+
    */
-  Content?: string
+  MarkItemTitle?: string
   /**
-   * 结果置信度
+   * 批改答案列表（每个小题存在多个答案，比如多个填空区域答案，循序按照从左到右，从上到下排列）
    */
-  Confidence?: number
+  AnswerInfos?: Array<AnswerInfo>
   /**
-   * 字段是否不完整（value内容）
-0 字段正常
-1 字段不完整
+   * 嵌套题目结构（如果有多层嵌套则会返回子题信息，如果没有嵌套题目则返回空）
    */
-  IsInComplete?: number
+  MarkInfos?: Array<MarkInfo>
+}
+
+/**
+ * 单题所有答案区域批改信息
+ */
+export interface AnswerInfo {
   /**
-   * 字段反光（value内容）
-0 字段正常
-1 字段有反光
+   * 手写答案内容，比如选择题的手写的选项、填空题的手写内容
    */
-  IsReflect?: number
+  HandwriteInfo?: string
   /**
-   * 字段是否不完整（key内容）
-0 字段正常
-1 字段不完整
+   * 答案是否正确
    */
-  IsKeyInComplete?: number
+  IsCorrect?: boolean
   /**
-   * 字段反光（key内容）
-0 字段正常
-1 字段有反光
+   * 答案分析结果
+
    */
-  IsKeyReflect?: number
+  AnswerAnalysis?: string
+  /**
+   * 答案区域的4个角点坐标, 是个长度为8的数组
+
+[0,1,2,3,4,5,6,7]
+
+(0,1) 左上角坐标
+(2,3) 右上角坐标
+(4,5) 右下角坐标
+(6,7) 左下角坐标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HandwriteInfoPositions?: Array<number | bigint>
+  /**
+   * 返回正确答案内容
+
+QuestionConfigMap配置了（“TrueAnswer”：1）才生效返回
+   */
+  RightAnswer?: string
+  /**
+   * 返回题目的知识点内容
+
+QuestionConfigMap配置了（“KnowledgePoints”：1）才生效返回
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KnowledgePoints?: Array<string>
 }
 
 /**

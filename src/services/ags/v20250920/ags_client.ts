@@ -22,6 +22,7 @@ import {
   CosStorageSource,
   StartSandboxInstanceRequest,
   SandboxInstance,
+  CfsStorageSource,
   StopSandboxInstanceRequest,
   DescribeSandboxToolListResponse,
   CreateAPIKeyResponse,

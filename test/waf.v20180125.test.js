@@ -248,6 +248,16 @@ it("waf.v20180125.DescribeScanIp", async function () {
     }
 })
 
+it("waf.v20180125.DescribeApiAggregateTopN", async function () {
+    try {
+       const data = await client.DescribeApiAggregateTopN({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DeleteOwaspRuleStatus", async function () {
     try {
        const data = await client.DeleteOwaspRuleStatus({})
@@ -788,9 +798,9 @@ it("waf.v20180125.DescribeDomainDetailsSaas", async function () {
     }
 })
 
-it("waf.v20180125.DescribeLogHistogram", async function () {
+it("waf.v20180125.DescribeCCRule", async function () {
     try {
-       const data = await client.DescribeLogHistogram({})
+       const data = await client.DescribeCCRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -821,6 +831,16 @@ it("waf.v20180125.DescribePeakValue", async function () {
 it("waf.v20180125.ModifyWafThreatenIntelligence", async function () {
     try {
        const data = await client.ModifyWafThreatenIntelligence({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeLogHistogram", async function () {
+    try {
+       const data = await client.DescribeLogHistogram({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1681,16 +1701,6 @@ it("waf.v20180125.ModifyAreaBanRule", async function () {
 it("waf.v20180125.DeleteRateLimitsV2", async function () {
     try {
        const data = await client.DeleteRateLimitsV2({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("waf.v20180125.DescribeCCRule", async function () {
-    try {
-       const data = await client.DescribeCCRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

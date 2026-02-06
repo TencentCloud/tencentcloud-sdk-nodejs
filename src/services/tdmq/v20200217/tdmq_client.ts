@@ -76,6 +76,7 @@ import {
   DeleteEnvironmentsRequest,
   DescribeRocketMQClustersRequest,
   SendRocketMQMessageRequest,
+  CreateRocketMQGroupV2Response,
   CreateClusterResponse,
   DeleteRocketMQNamespaceRequest,
   DeleteRabbitMQPermissionRequest,
@@ -263,6 +264,7 @@ import {
   DescribeRocketMQMigratingTopicListResponse,
   DescribeEnvironmentRolesResponse,
   DescribeRocketMQPublicAccessPointResponse,
+  CreateRocketMQGroupV2Request,
   DescribeRabbitMQExchangesResponse,
   DescribeRabbitMQQueueDetailResponse,
   DescribeRocketMQTopicMsgsResponse,
@@ -1658,6 +1660,17 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: ModifyEnvironmentRoleResponse) => void
   ): Promise<ModifyEnvironmentRoleResponse> {
     return this.request("ModifyEnvironmentRole", req, cb)
+  }
+
+  /**
+     * 创建 RocketMQ 消费组。
+当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。创建 5.x 集群消费组的接口文档见 [CreateConsumerGroup](https://cloud.tencent.com/document/api/1493/97943)。
+     */
+  async CreateRocketMQGroupV2(
+    req: CreateRocketMQGroupV2Request,
+    cb?: (error: string, rep: CreateRocketMQGroupV2Response) => void
+  ): Promise<CreateRocketMQGroupV2Response> {
+    return this.request("CreateRocketMQGroupV2", req, cb)
   }
 
   /**

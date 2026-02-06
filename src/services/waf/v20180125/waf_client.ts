@@ -178,6 +178,7 @@ import {
   CreatePostCLSFlowResponse,
   DescribeHostsResponse,
   DescribeAccessIndexRequest,
+  BotDataFilter,
   DomainInfo,
   DescribeAreaBanAreasResponse,
   DescribeDomainsResponse,
@@ -362,6 +363,7 @@ import {
   UserDomainInfo,
   DescribeAntiFakeRulesResponse,
   BotMonitorPkg,
+  DescribeApiAggregateTopNRequest,
   GetOrganizationRoleRequest,
   DescribeTopicsRequest,
   BatchDomainResult,
@@ -501,6 +503,7 @@ import {
   ModifyInstanceRenewFlagResponse,
   ModifyOwaspRuleTypeStatusResponse,
   AddAttackWhiteRuleResponse,
+  DescribeApiAggregateTopNResponse,
   ImportIpAccessControlResponse,
   AddCustomWhiteRuleRequest,
   DescribeTopicsResponse,
@@ -569,6 +572,7 @@ import {
   DescribeVipInfoResponse,
   DescribeApiDetailResponse,
   TokenVerifyRule,
+  BotTopItem,
   DescribeRuleLimitRequest,
   LimitMethod,
   ModifyDomainsCLSStatusRequest,
@@ -834,6 +838,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeScanIpResponse) => void
   ): Promise<DescribeScanIpResponse> {
     return this.request("DescribeScanIp", req, cb)
+  }
+
+  /**
+   * 获取Api安全模块的访问日志聚合topN
+   */
+  async DescribeApiAggregateTopN(
+    req: DescribeApiAggregateTopNRequest,
+    cb?: (error: string, rep: DescribeApiAggregateTopNResponse) => void
+  ): Promise<DescribeApiAggregateTopNResponse> {
+    return this.request("DescribeApiAggregateTopN", req, cb)
   }
 
   /**
@@ -1378,13 +1392,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于构建日志数量直方图
+   * Waf  CC V2 Query接口
    */
-  async DescribeLogHistogram(
-    req: DescribeLogHistogramRequest,
-    cb?: (error: string, rep: DescribeLogHistogramResponse) => void
-  ): Promise<DescribeLogHistogramResponse> {
-    return this.request("DescribeLogHistogram", req, cb)
+  async DescribeCCRule(
+    req: DescribeCCRuleRequest,
+    cb?: (error: string, rep: DescribeCCRuleResponse) => void
+  ): Promise<DescribeCCRuleResponse> {
+    return this.request("DescribeCCRule", req, cb)
   }
 
   /**
@@ -1415,6 +1429,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyWafThreatenIntelligenceResponse) => void
   ): Promise<ModifyWafThreatenIntelligenceResponse> {
     return this.request("ModifyWafThreatenIntelligence", req, cb)
+  }
+
+  /**
+   * 本接口用于构建日志数量直方图
+   */
+  async DescribeLogHistogram(
+    req: DescribeLogHistogramRequest,
+    cb?: (error: string, rep: DescribeLogHistogramResponse) => void
+  ): Promise<DescribeLogHistogramResponse> {
+    return this.request("DescribeLogHistogram", req, cb)
   }
 
   /**
@@ -2278,16 +2302,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRateLimitsV2Response) => void
   ): Promise<DeleteRateLimitsV2Response> {
     return this.request("DeleteRateLimitsV2", req, cb)
-  }
-
-  /**
-   * Waf  CC V2 Query接口
-   */
-  async DescribeCCRule(
-    req: DescribeCCRuleRequest,
-    cb?: (error: string, rep: DescribeCCRuleResponse) => void
-  ): Promise<DescribeCCRuleResponse> {
-    return this.request("DescribeCCRule", req, cb)
   }
 
   /**

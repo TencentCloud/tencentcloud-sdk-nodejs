@@ -2137,113 +2137,25 @@ export interface InternalMedicineHeart {
 }
 
 /**
- * 报告基本信息
+ * ImageToClass请求参数结构体
  */
-export interface ReportInfo {
+export interface ImageToClassRequest {
   /**
-   * 医院名称
+   * 图片列表，允许传入多张图片，支持传入图片的base64编码，暂不支持图片url
    */
-  Hospital?: string
+  ImageInfoList: Array<ImageInfo>
   /**
-   * 科室名称
+   * 图片处理参数
    */
-  DepartmentName?: string
+  HandleParam: HandleParam
   /**
-   * 申请时间
+   * 不填，默认为0
    */
-  BillingTime?: string
+  Type: number
   /**
-   * 报告时间
+   * 后付费的用户类型，新客户传1，老客户可不传或传 0。2022 年 12 月 15 新增了计费项，在此时间之前已经通过商务指定优惠价格的大客户，请不传这个字段或传 0，如果传 1 会导致以前获得的折扣价格失效。在 2022 年 12 月 15 日之后，通过商务指定优惠价格的大客户请传 1。
    */
-  ReportTime?: string
-  /**
-   * 检查时间
-   */
-  InspectTime?: string
-  /**
-   * 检查号
-   */
-  CheckNum?: string
-  /**
-   * 影像号
-   */
-  ImageNum?: string
-  /**
-   * 放射号
-   */
-  RadiationNum?: string
-  /**
-   * 检验号
-   */
-  TestNum?: string
-  /**
-   * 门诊号
-   */
-  OutpatientNum?: string
-  /**
-   * 病理号
-   */
-  PathologyNum?: string
-  /**
-   * 住院号
-   */
-  InHospitalNum?: string
-  /**
-   * 样本号
-   */
-  SampleNum?: string
-  /**
-   * 标本种类
-   */
-  SampleType?: string
-  /**
-   * 病历号
-   */
-  MedicalRecordNum?: string
-  /**
-   * 报告名称
-   */
-  ReportName?: string
-  /**
-   * 超声号
-   */
-  UltraNum?: string
-  /**
-   * 临床诊断
-   */
-  Diagnose?: string
-  /**
-   * 检查项目
-   */
-  CheckItem?: string
-  /**
-   * 检查方法
-   */
-  CheckMethod?: string
-  /**
-   * 诊断时间
-   */
-  DiagnoseTime?: string
-  /**
-   * 体检号
-   */
-  HealthCheckupNum?: string
-  /**
-   * 其它时间
-   */
-  OtherTime?: string
-  /**
-   * 打印时间
-   */
-  PrintTime?: string
-  /**
-   * 未归类时间
-   */
-  Times?: Array<Time>
-  /**
-   * 床号
-   */
-  BedNo?: string
+  UserType?: number
 }
 
 /**
@@ -2603,17 +2515,25 @@ export interface NeonatalInfo {
  */
 export interface EyeItem {
   /**
-   * 左眼
+   * <p>左眼</p>
    */
   Left?: EyeChildItem
   /**
-   * 右眼
+   * <p>右眼</p>
    */
   Right?: EyeChildItem
   /**
-   * 瞳距
+   * <p>瞳距</p>
    */
   Pd?: BaseItem2
+  /**
+   * <p>右眼平均后结果</p>
+   */
+  RightFinal?: EyeFinalItem
+  /**
+   * <p>左眼平均后结果</p>
+   */
+  LeftFinal?: EyeFinalItem
 }
 
 /**
@@ -2788,6 +2708,116 @@ export interface DrugListBlock {
    * 值
    */
   Value?: string
+}
+
+/**
+ * 报告基本信息
+ */
+export interface ReportInfo {
+  /**
+   * 医院名称
+   */
+  Hospital?: string
+  /**
+   * 科室名称
+   */
+  DepartmentName?: string
+  /**
+   * 申请时间
+   */
+  BillingTime?: string
+  /**
+   * 报告时间
+   */
+  ReportTime?: string
+  /**
+   * 检查时间
+   */
+  InspectTime?: string
+  /**
+   * 检查号
+   */
+  CheckNum?: string
+  /**
+   * 影像号
+   */
+  ImageNum?: string
+  /**
+   * 放射号
+   */
+  RadiationNum?: string
+  /**
+   * 检验号
+   */
+  TestNum?: string
+  /**
+   * 门诊号
+   */
+  OutpatientNum?: string
+  /**
+   * 病理号
+   */
+  PathologyNum?: string
+  /**
+   * 住院号
+   */
+  InHospitalNum?: string
+  /**
+   * 样本号
+   */
+  SampleNum?: string
+  /**
+   * 标本种类
+   */
+  SampleType?: string
+  /**
+   * 病历号
+   */
+  MedicalRecordNum?: string
+  /**
+   * 报告名称
+   */
+  ReportName?: string
+  /**
+   * 超声号
+   */
+  UltraNum?: string
+  /**
+   * 临床诊断
+   */
+  Diagnose?: string
+  /**
+   * 检查项目
+   */
+  CheckItem?: string
+  /**
+   * 检查方法
+   */
+  CheckMethod?: string
+  /**
+   * 诊断时间
+   */
+  DiagnoseTime?: string
+  /**
+   * 体检号
+   */
+  HealthCheckupNum?: string
+  /**
+   * 其它时间
+   */
+  OtherTime?: string
+  /**
+   * 打印时间
+   */
+  PrintTime?: string
+  /**
+   * 未归类时间
+   */
+  Times?: Array<Time>
+  /**
+   * 床号
+   */
+  BedNo?: string
 }
 
 /**
@@ -5429,25 +5459,25 @@ export interface Invas {
 }
 
 /**
- * ImageToClass请求参数结构体
+ * 眼科子结构 平均后结果
  */
-export interface ImageToClassRequest {
+export interface EyeFinalItem {
   /**
-   * 图片列表，允许传入多张图片，支持传入图片的base64编码，暂不支持图片url
+   * <p>球镜</p>
    */
-  ImageInfoList: Array<ImageInfo>
+  Sph?: BaseItem3
   /**
-   * 图片处理参数
+   * <p>柱镜</p>
    */
-  HandleParam: HandleParam
+  Cyl?: BaseItem3
   /**
-   * 不填，默认为0
+   * <p>轴位</p>
    */
-  Type: number
+  Ax?: BaseItem3
   /**
-   * 后付费的用户类型，新客户传1，老客户可不传或传 0。2022 年 12 月 15 新增了计费项，在此时间之前已经通过商务指定优惠价格的大客户，请不传这个字段或传 0，如果传 1 会导致以前获得的折扣价格失效。在 2022 年 12 月 15 日之后，通过商务指定优惠价格的大客户请传 1。
+   * <p>等效球镜</p>
    */
-  UserType?: number
+  Se?: BaseItem2
 }
 
 /**

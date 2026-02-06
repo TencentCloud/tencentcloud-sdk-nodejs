@@ -30,20 +30,6 @@ export interface ModifyCloudSliceTaskResponse {
 }
 
 /**
- * 返回的质量数据，时间:值
- */
-export interface TimeValue {
-  /**
-   * 时间，unix时间戳（1590065877s)
-   */
-  Time?: number
-  /**
-   * 当前时间返回参数取值，如（bigvCapFps在1590065877取值为0，则Value：0 ）
-   */
-  Value?: number
-}
-
-/**
  * DescribeCloudModeration返回参数结构体
  */
 export interface DescribeCloudModerationResponse {
@@ -278,18 +264,53 @@ export interface ServerPushText {
 }
 
 /**
- * DescribeTRTCMarketQualityMetricData返回参数结构体
+ * 转推录制参数
  */
-export interface DescribeTRTCMarketQualityMetricDataResponse {
+export interface McuRecordParams {
   /**
-   * TRTC监控数据出参
-注意：此字段可能返回 null，表示取不到有效值。
+   * 转推录制模式， 
+0/不填: 暂不支持，行为未定义；
+1: 不开启录制；
+2: 开启录制（使用控制台自动录制模板参数，参考：[跳转文档](https://cloud.tencent.com/document/product/647/111748#.E5.BD.95.E5.88.B6.E6.8E.A7.E5.88.B6.E6.96.B9.E6.A1.88)）；
+3: 开启录制（使用API指定参数）。
    */
-  Data: TRTCDataResp
+  UniRecord?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 录制任务 key，标识一个录制任务；您可以通过该参数，将多个转推任务录制成一个文件。不指定该参数时，只录制当前转推任务。
+【限制长度为128字节，只允许包含大小写英文字母（a-zA-Z）、数字（0-9）及下划线(_)和连词符(-)】
    */
-  RequestId?: string
+  RecordKey?: string
+  /**
+   * 【仅当UniRecord=3时此参数有效】
+续录等待时间，对应录制模板“续录等待时长”，单位：秒。该值需大于等于 5，且小于等于 86400(24小时)，默认值为 30。启用续录时，录制任务空闲超过RecordWaitTime的时长，自动结束。
+   */
+  RecordWaitTime?: number
+  /**
+   * 【仅当UniRecord=3时此参数有效】
+录制输出文件格式列表，对应录制模板“文件格式”，支持“hls”、"mp4"、"aac"三种格式，默认值为"mp4"。其中"mp4"和"aac"格式，不能同时指定。
+只录制 mp4格式，示例值：["mp4"]。同时录制mp4 和 HLS 格式，示例值：["mp4","hls"]。
+   */
+  RecordFormat?: Array<string>
+  /**
+   * 【仅当UniRecord=3时此参数有效】
+单个文件录制时长，对应录制模板“单个录制文件时长”，单位：分钟。该值需大于等于 1，且小于等于 1440(24小时)，默认值为 1440。只对"mp4"或"aac"格式生效。实际单文件录制时长还受单文件大小不超过 2G 限制，超过2G则强制拆分。
+   */
+  MaxMediaFileDuration?: number
+  /**
+   * 【仅当UniRecord=3时此参数有效】
+录制的音视频类型，对应录制模板“录制格式”，0:音视频，1：纯音频，2：纯视频。最终录制文件内容是录制指定类型和转推内容的交集。
+   */
+  StreamType?: number
+  /**
+   * 录制文件名前缀，不超过64字符。只有存储为vod时生效。
+【限制长度为64字节，只允许包含大小写英文字母（a-zA-Z）、数字（0-9）及下划线(_)和连词符(-)】
+   */
+  UserDefineRecordPrefix?: string
+  /**
+   * 【仅当UniRecord=3时此参数有效】
+录制文件存储参数，对应控制台“存储位置”及相关参数。目前支持云点播VOD和对象存储COS两种存储方式，只能填写一种。
+   */
+  McuStorageParams?: McuStorageParams
 }
 
 /**
@@ -1462,53 +1483,17 @@ export interface DescribeTrtcUsageResponse {
 }
 
 /**
- * 转推录制参数
+ * 返回的质量数据，时间:值
  */
-export interface McuRecordParams {
+export interface TimeValue {
   /**
-   * 转推录制模式， 
-0/不填: 暂不支持，行为未定义；
-1: 不开启录制；
-2: 开启录制（使用控制台自动录制模板参数，参考：[跳转文档](https://cloud.tencent.com/document/product/647/111748#.E5.BD.95.E5.88.B6.E6.8E.A7.E5.88.B6.E6.96.B9.E6.A1.88)）；
-3: 开启录制（使用API指定参数）。
+   * 时间，unix时间戳（1590065877s)
    */
-  UniRecord?: number
+  Time?: number
   /**
-   * 录制任务 key，标识一个录制任务；您可以通过该参数，将多个转推任务录制成一个文件。不指定该参数时，只录制当前转推任务。
-【限制长度为128字节，只允许包含大小写英文字母（a-zA-Z）、数字（0-9）及下划线(_)和连词符(-)】
+   * 当前时间返回参数取值，如（bigvCapFps在1590065877取值为0，则Value：0 ）
    */
-  RecordKey?: string
-  /**
-   * 【仅当UniRecord=3时此参数有效】
-续录等待时间，对应录制模板“续录等待时长”，单位：秒。该值需大于等于 5，且小于等于 86400(24小时)，默认值为 30。启用续录时，录制任务空闲超过RecordWaitTime的时长，自动结束。
-   */
-  RecordWaitTime?: number
-  /**
-   * 【仅当UniRecord=3时此参数有效】
-录制输出文件格式列表，对应录制模板“文件格式”，支持“hls”、"mp4"、"aac"三种格式，默认值为"mp4"。其中"mp4"和"aac"格式，不能同时指定。
-只录制 mp4格式，示例值：["mp4"]。同时录制mp4 和 HLS 格式，示例值：["mp4","hls"]。
-   */
-  RecordFormat?: Array<string>
-  /**
-   * 【仅当UniRecord=3时此参数有效】
-单个文件录制时长，对应录制模板“单个录制文件时长”，单位：分钟。该值需大于等于 1，且小于等于 1440(24小时)，默认值为 1440。只对"mp4"或"aac"格式生效。实际单文件录制时长还受单文件大小不超过 2G 限制，超过2G则强制拆分。
-   */
-  MaxMediaFileDuration?: number
-  /**
-   * 【仅当UniRecord=3时此参数有效】
-录制的音视频类型，对应录制模板“录制格式”，0:音视频，1：纯音频，2：纯视频。最终录制文件内容是录制指定类型和转推内容的交集。
-   */
-  StreamType?: number
-  /**
-   * 录制文件名前缀，不超过64字符。只有存储为vod时生效。
-【限制长度为64字节，只允许包含大小写英文字母（a-zA-Z）、数字（0-9）及下划线(_)和连词符(-)】
-   */
-  UserDefineRecordPrefix?: string
-  /**
-   * 【仅当UniRecord=3时此参数有效】
-录制文件存储参数，对应控制台“存储位置”及相关参数。目前支持云点播VOD和对象存储COS两种存储方式，只能填写一种。
-   */
-  McuStorageParams?: McuStorageParams
+  Value?: number
 }
 
 /**
@@ -1523,30 +1508,6 @@ export interface CreateCloudRecordingResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeTRTCMarketQualityMetricData请求参数结构体
- */
-export interface DescribeTRTCMarketQualityMetricDataRequest {
-  /**
-   * 用户SdkAppId（如：1400xxxxxx）
-   */
-  SdkAppId: string
-  /**
-   * 查询开始时间，格式为YYYY-MM-DD。（查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天）
-   */
-  StartTime: string
-  /**
-   * 查询结束时间，格式为YYYY-MM-DD。
-   */
-  EndTime: string
-  /**
-   * 返回数据的粒度，支持设为以下值：
-d：按天。此时返回查询时间范围内 UTC 时间为零点的数据。
-h：按小时。此时返回查询时间范围内 UTC 时间为整小时的数据。
-   */
-  Period: string
 }
 
 /**
@@ -1568,21 +1529,18 @@ export interface DescribeWebRecordRequest {
 }
 
 /**
- * 背景音设置，将在通话中添加环境音效，使体验更加逼真。目前支持以下选项：
-coffee_shops: 咖啡店氛围，背景中有人聊天。
-busy_office: 客服中心
-street_traffic: 户外街道
-evening_mountain: 户外山林
+ * DescribeTRTCRealTimeScaleData返回参数结构体
  */
-export interface AmbientSound {
+export interface DescribeTRTCRealTimeScaleDataResponse {
   /**
-   * 环境场景选择
+   * TRTC监控数据出参
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Scene: string
+  Data?: TRTCDataResult
   /**
-   * 控制环境音的音量。取值的范围是 [0,2]。值越低，环境音越小；值越高，环境音越响亮。如果未设置，则使用默认值 1。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Volume?: number
+  RequestId?: string
 }
 
 /**
@@ -2233,25 +2191,57 @@ export interface StartWebRecordRequest {
 }
 
 /**
- * DescribeTRTCRealTimeQualityMetricData请求参数结构体
+ * 云端录制控制参数。
  */
-export interface DescribeTRTCRealTimeQualityMetricDataRequest {
+export interface RecordParams {
   /**
-   * 用户SdkAppId（如：1400xxxxxx）
+   * 录制模式：
+1：单流录制，分别录制房间的订阅UserId的音频和视频，将录制文件上传至云存储；
+2：合流录制，将房间内订阅UserId的音视频混录成一个音视频文件，将录制文件上传至云存储；
    */
-  SdkAppId: string
+  RecordMode: number
   /**
-   * 开始时间，unix时间戳，单位：秒（查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时）
+   * 房间内持续没有主播的状态超过MaxIdleTime的时长，自动停止录制，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。
    */
-  StartTime: number
+  MaxIdleTime?: number
   /**
-   * 结束时间，unix时间戳，单位：秒
+   * 录制的媒体流类型：
+0：录制音频+视频流（默认）;
+1：仅录制音频流；
+2：仅录制视频流，
    */
-  EndTime: number
+  StreamType?: number
   /**
-   * 房间ID
+   * 指定订阅流白名单或者黑名单。
    */
-  RoomId?: string
+  SubscribeStreamUserIds?: SubscribeStreamUserIds
+  /**
+   * 输出文件的格式（存储至COS等第三方存储时有效）。0：(默认)输出文件为hls格式。1：输出文件格式为hls+mp4。2：输出文件格式为hls+aac 。3：输出文件格式为mp4。4：输出文件格式为aac。
+
+存储到云点播VOD时此参数无效，存储到VOD时请通过TencentVod（https://cloud.tencent.com/document/api/647/44055#TencentVod）内的MediaType设置。
+   */
+  OutputFormat?: number
+  /**
+   * 单流录制模式下，用户的音视频是否合并，0：单流音视频不合并（默认）。1：单流音视频合并成一个ts。合流录制此参数无需设置，默认音视频合并。
+   */
+  AvMerge?: number
+  /**
+   * 如果是aac或者mp4文件格式，超过长度限制后，系统会自动拆分视频文件。单位：分钟。默认为1440min（24h），取值范围为1-1440。【单文件限制最大为2G，满足文件大小 >2G 或录制时长度 > 24h任意一个条件，文件都会自动切分】
+Hls 格式录制此参数不生效。
+   */
+  MaxMediaFileDuration?: number
+  /**
+   * 指定录制主辅流，0：主流+辅流（默认）；1:主流；2:辅流。
+   */
+  MediaId?: number
+  /**
+   * 上行视频停止时，录制的补帧类型，0：补最后一帧 1：补黑帧
+   */
+  FillType?: number
+  /**
+   * 控制录制任务是否订阅混流回推机器人，1是订阅，0是不订阅，默认是0。如果是混流录制任务，建议用订阅白名单控制订阅用户，防止同时订阅混流回推机器人和上行主播，以避免混音效果。
+   */
+  SubscribeAbility?: number
 }
 
 /**
@@ -3201,27 +3191,6 @@ export interface RemoveUserRequest {
 }
 
 /**
- * TRTC数据大盘/实时监控 API接口数据出参
- */
-export interface TRTCDataResult {
-  /**
-   * StatementID值，监控仪表盘下固定为0。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StatementID?: number
-  /**
-   * 查询结果数据，以Columns-Values形式返回。	
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Series?: Array<SeriesInfos>
-  /**
-   * Total值，监控仪表盘功能下固定为1。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Total?: number
-}
-
-/**
  * DismissRoom请求参数结构体
  */
 export interface DismissRoomRequest {
@@ -3321,60 +3290,6 @@ export interface TencentVod {
 }
 
 /**
- * 云端录制控制参数。
- */
-export interface RecordParams {
-  /**
-   * 录制模式：
-1：单流录制，分别录制房间的订阅UserId的音频和视频，将录制文件上传至云存储；
-2：合流录制，将房间内订阅UserId的音视频混录成一个音视频文件，将录制文件上传至云存储；
-   */
-  RecordMode: number
-  /**
-   * 房间内持续没有主播的状态超过MaxIdleTime的时长，自动停止录制，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。
-   */
-  MaxIdleTime?: number
-  /**
-   * 录制的媒体流类型：
-0：录制音频+视频流（默认）;
-1：仅录制音频流；
-2：仅录制视频流，
-   */
-  StreamType?: number
-  /**
-   * 指定订阅流白名单或者黑名单。
-   */
-  SubscribeStreamUserIds?: SubscribeStreamUserIds
-  /**
-   * 输出文件的格式（存储至COS等第三方存储时有效）。0：(默认)输出文件为hls格式。1：输出文件格式为hls+mp4。2：输出文件格式为hls+aac 。3：输出文件格式为mp4。4：输出文件格式为aac。
-
-存储到云点播VOD时此参数无效，存储到VOD时请通过TencentVod（https://cloud.tencent.com/document/api/647/44055#TencentVod）内的MediaType设置。
-   */
-  OutputFormat?: number
-  /**
-   * 单流录制模式下，用户的音视频是否合并，0：单流音视频不合并（默认）。1：单流音视频合并成一个ts。合流录制此参数无需设置，默认音视频合并。
-   */
-  AvMerge?: number
-  /**
-   * 如果是aac或者mp4文件格式，超过长度限制后，系统会自动拆分视频文件。单位：分钟。默认为1440min（24h），取值范围为1-1440。【单文件限制最大为2G，满足文件大小 >2G 或录制时长度 > 24h任意一个条件，文件都会自动切分】
-Hls 格式录制此参数不生效。
-   */
-  MaxMediaFileDuration?: number
-  /**
-   * 指定录制主辅流，0：主流+辅流（默认）；1:主流；2:辅流。
-   */
-  MediaId?: number
-  /**
-   * 上行视频停止时，录制的补帧类型，0：补最后一帧 1：补黑帧
-   */
-  FillType?: number
-  /**
-   * 控制录制任务是否订阅混流回推机器人，1是订阅，0是不订阅，默认是0。如果是混流录制任务，建议用订阅白名单控制订阅用户，防止同时订阅混流回推机器人和上行主播，以避免混音效果。
-   */
-  SubscribeAbility?: number
-}
-
-/**
  * DeleteVoicePrint返回参数结构体
  */
 export interface DeleteVoicePrintResponse {
@@ -3399,18 +3314,24 @@ export interface StartWebRecordResponse {
 }
 
 /**
- * DescribeTRTCRealTimeQualityMetricData返回参数结构体
+ * TRTC数据大盘/实时监控 API接口数据出参
  */
-export interface DescribeTRTCRealTimeQualityMetricDataResponse {
+export interface TRTCDataResult {
   /**
-   * TRTC监控数据出参
+   * StatementID值，监控仪表盘下固定为0。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data: TRTCDataResp
+  StatementID?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 查询结果数据，以Columns-Values形式返回。	
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  Series?: Array<SeriesInfos>
+  /**
+   * Total值，监控仪表盘功能下固定为1。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
 }
 
 /**
@@ -4650,18 +4571,21 @@ export interface MixUserInfo {
 }
 
 /**
- * DescribeTRTCRealTimeScaleData返回参数结构体
+ * 背景音设置，将在通话中添加环境音效，使体验更加逼真。目前支持以下选项：
+coffee_shops: 咖啡店氛围，背景中有人聊天。
+busy_office: 客服中心
+street_traffic: 户外街道
+evening_mountain: 户外山林
  */
-export interface DescribeTRTCRealTimeScaleDataResponse {
+export interface AmbientSound {
   /**
-   * TRTC监控数据出参
-注意：此字段可能返回 null，表示取不到有效值。
+   * 环境场景选择
    */
-  Data?: TRTCDataResult
+  Scene: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 控制环境音的音量。取值的范围是 [0,2]。值越低，环境音越小；值越高，环境音越响亮。如果未设置，则使用默认值 1。
    */
-  RequestId?: string
+  Volume?: number
 }
 
 /**

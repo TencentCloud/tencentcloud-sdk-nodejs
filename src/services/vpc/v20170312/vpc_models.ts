@@ -10831,7 +10831,7 @@ export interface CreateDirectConnectGatewayRequest {
    * <li>NetworkType 为 VPC 时，这里传值为私有网络实例ID</li>
 <li>NetworkType 为 CCN 时，这里传值为云联网实例ID</li>
    */
-  NetworkInstanceId: string
+  NetworkInstanceId?: string
   /**
    * 网关类型，可选值：
 <li>NORMAL - （默认）标准型，注：云联网只支持标准型</li>

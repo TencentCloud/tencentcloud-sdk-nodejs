@@ -218,6 +218,16 @@ it("ocr.v20181119.DescribeExtractDocAgentJob", async function () {
     }
 })
 
+it("ocr.v20181119.SubmitQuestionMarkAgentJob", async function () {
+    try {
+       const data = await client.SubmitQuestionMarkAgentJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.RideHailingDriverLicenseOCR", async function () {
     try {
        const data = await client.RideHailingDriverLicenseOCR({})
@@ -331,6 +341,16 @@ it("ocr.v20181119.GeneralBasicOCR", async function () {
 it("ocr.v20181119.RecognizeThaiIDCardOCR", async function () {
     try {
        const data = await client.RecognizeThaiIDCardOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ocr.v20181119.QuotaInvoiceOCR", async function () {
+    try {
+       const data = await client.QuotaInvoiceOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,9 +488,9 @@ it("ocr.v20181119.VatRollInvoiceOCR", async function () {
     }
 })
 
-it("ocr.v20181119.QuotaInvoiceOCR", async function () {
+it("ocr.v20181119.DescribeQuestionMarkAgentJob", async function () {
     try {
-       const data = await client.QuotaInvoiceOCR({})
+       const data = await client.DescribeQuestionMarkAgentJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

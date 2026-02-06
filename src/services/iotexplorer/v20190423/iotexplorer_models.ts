@@ -2665,6 +2665,10 @@ export interface TalkAIBotInfo {
    * 已关联产品信息列表
    */
   BoundProducts?: Array<TalkProductInfo>
+  /**
+   * 自定义工具列表，最多可创建10个
+   */
+  CustomTools?: string
 }
 
 /**
@@ -2722,6 +2726,10 @@ export interface ModifyTWeTalkAIBotRequest {
    * 智能体配置
    */
   AgentConfig?: TalkAgentConfigInfo
+  /**
+   * 自定义工具配置，最多可创建10个
+   */
+  CustomTools?: string
 }
 
 /**
@@ -9505,6 +9513,10 @@ export interface CreateTWeTalkAIBotRequest {
    * 实例ID
    */
   InstanceId?: string
+  /**
+   * 自定义工具配置，最多可创建10个
+   */
+  CustomTools?: string
 }
 
 /**
