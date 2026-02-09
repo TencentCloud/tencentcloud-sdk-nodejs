@@ -31,15 +31,16 @@ import {
   CloudBaseClientQPSPolicy,
   ModifyClsTopicResponse,
   CreateIndex,
+  ClusterDetail,
   DbInstance,
-  EditAuthConfigResponse,
+  DescribeMySQLClusterDetailResponse,
   CloudBaseRunSideSpec,
   CommonServiceAPIResponse,
   DescribeGraphDataResponse,
   DeleteUsersResp,
   DescribeEnvLimitRequest,
   DescribeCloudBaseBuildServiceResponse,
-  DescribeSpecialCostItemsRequest,
+  DescribeMySQLTaskStatusRequest,
   UnfreezeCloudBaseRunServersRequest,
   DescribeCloudBaseRunVersionRequest,
   BanConfig,
@@ -49,7 +50,7 @@ import {
   BindCloudBaseAccessDomainResponse,
   DestroyStaticStoreRequest,
   ReplaceActivityRecordResponse,
-  LogServiceInfo,
+  DescribeSpecialCostItemsRequest,
   CreatePostpayPackageRequest,
   MongoConnector,
   DescribeCurveDataResponse,
@@ -80,6 +81,7 @@ import {
   ModifyGatewayVersionTrafficRequest,
   DescribeQuotaDataResponse,
   CreateBillDealResponse,
+  CreateMySQLResult,
   DescribeGatewayCurveDataResponse,
   KVPair,
   SmsFreeQuota,
@@ -91,6 +93,7 @@ import {
   DescribeActivityRecordResponse,
   CreateUserResponse,
   DescribeEnvAccountCircleRequest,
+  DescribeMySQLClusterDetailRequest,
   CreateStaticStoreRequest,
   DeleteCloudBaseProjectLatestVersionResponse,
   DescribeGatewayCurveDataRequest,
@@ -101,8 +104,10 @@ import {
   CloudBaseRunVersionFlowItem,
   ModifyDatabaseACLResponse,
   DeleteWxGatewayRouteRequest,
+  EditAuthConfigResponse,
   EstablishWxGatewayRouteRequest,
   DescribeEnvPostpaidDeductRequest,
+  DestroyMySQLResponse,
   CustomHeader,
   UpdateTableResponse,
   DescribeExtraPkgBillingInfoRequest,
@@ -111,8 +116,10 @@ import {
   DescribeEnvFreeQuotaRequest,
   CloudBaseCapabilities,
   DescribeExtensionUploadInfoRequest,
+  DescribeCreateMySQLResultRequest,
   DescribeBillingInfoRequest,
   HpaPolicy,
+  TkeClusterInfo,
   CreateCloudBaseRunResourceResponse,
   LogObject,
   DestroyStaticStoreResponse,
@@ -120,6 +127,7 @@ import {
   DescribeUserListResponse,
   CreateTableRequest,
   CloudBaseEsInfo,
+  CreateMySQLResponse,
   ModifyCloudBaseRunServerFlowConfResponse,
   DescribeDownloadFileResponse,
   DeleteTableRequest,
@@ -131,18 +139,20 @@ import {
   CodeSource,
   RunSqlRequest,
   User,
+  DestroyMySQLRequest,
   DescribeEnvsResponse,
   DescribePostpayPackageFreeQuotasRequest,
   CreateAuthDomainRequest,
   DescribeEnvPostpaidDeductResponse,
   CreateHostingDomainResponse,
-  TkeClusterInfo,
+  MySQLTaskStatus,
   RunSqlResponse,
   DescribeActivityRecordRequest,
   DeleteCloudBaseRunServerVersionRequest,
   CreateCloudBaseRunServerVersionRequest,
   DeleteCloudBaseGWAPIRequest,
   CreateCloudBaseGWAPIResponse,
+  DescribeCreateMySQLResultResponse,
   DescribeSafeRuleRequest,
   DeleteUsersRequest,
   CbrRepoInfo,
@@ -174,10 +184,11 @@ import {
   DescribeCloudBaseRunResourceForExtendResponse,
   CreateAndDeployCloudBaseProjectRequest,
   ModifyCloudBaseRunServerVersionRequest,
+  DestroyMySQLResult,
   DescribeCloudBaseGWAPIResponse,
   UnfreezeCloudBaseRunServersResponse,
   DescribeCloudBaseGWAPIRequest,
-  DescribeCbrServerVersionRequest,
+  CreateMySQLRequest,
   DescribeWxGatewayRoutesResponse,
   DatabasesInfo,
   CloudBaseSecurityContext,
@@ -189,6 +200,7 @@ import {
   CreateUserRequest,
   CreateCloudBaseRunServerVersionResponse,
   CloudBaseRunServerVersionItem,
+  DescribeMySQLTaskStatusResponse,
   TableInfo,
   DeleteCloudBaseProjectLatestVersionRequest,
   DescribeCloudBaseProjectLatestVersionListResponse,
@@ -228,7 +240,7 @@ import {
   AuthDomain,
   CloudBaseGWAPIQPSPolicy,
   DescribeCloudBaseProjectLatestVersionListRequest,
-  PermissionInfo,
+  LogServiceInfo,
   FrequencyLimitConfig,
   DescribeHostingDomainTaskResponse,
   DescribeTableResponse,
@@ -236,6 +248,7 @@ import {
   CloudBaseOption,
   IndexInfo,
   DescribeCloudBaseRunVersionResponse,
+  DescribeCbrServerVersionRequest,
   SearchClsLogResponse,
   DescribeCloudBaseGWServiceRequest,
   DescribeCloudBaseRunResourceForExtendRequest,
@@ -243,15 +256,19 @@ import {
   SearchClsLogRequest,
   CloudBaseCodeRepoDetail,
   CheckTcbServiceRequest,
+  MySQLNetDetail,
+  PermissionInfo,
   Pager,
   DescribeCloudBaseRunServerResponse,
   DescribeDatabaseACLRequest,
   DescribeUserActivityInfoRequest,
+  DescribeCreateMySQLResult,
   DeleteCloudBaseGWAPIResponse,
   Tag,
   DescribeCloudBaseRunVersionSnapshotResponse,
   ReinstateEnvRequest,
   CreateCloudBaseRunResourceRequest,
+  MySQLClusterDetail,
   DescribeAuthDomainsRequest,
   FreezeCloudBaseRunServersResponse,
   CloudRunServiceVolume,
@@ -554,13 +571,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除安全网关路由
+   * 开通Mysql
    */
-  async DeleteWxGatewayRoute(
-    req: DeleteWxGatewayRouteRequest,
-    cb?: (error: string, rep: DeleteWxGatewayRouteResponse) => void
-  ): Promise<DeleteWxGatewayRouteResponse> {
-    return this.request("DeleteWxGatewayRoute", req, cb)
+  async CreateMySQL(
+    req: CreateMySQLRequest,
+    cb?: (error: string, rep: CreateMySQLResponse) => void
+  ): Promise<CreateMySQLResponse> {
+    return this.request("CreateMySQL", req, cb)
   }
 
   /**
@@ -674,6 +691,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Mysql任务状态
+   */
+  async DescribeMySQLTaskStatus(
+    req: DescribeMySQLTaskStatusRequest,
+    cb?: (error: string, rep: DescribeMySQLTaskStatusResponse) => void
+  ): Promise<DescribeMySQLTaskStatusResponse> {
+    return this.request("DescribeMySQLTaskStatus", req, cb)
+  }
+
+  /**
    * 删除服务版本
    */
   async DeleteCloudBaseRunServerVersion(
@@ -727,7 +754,7 @@ export class Client extends AbstractClient {
    * 创建云开发产品计费订单
    */
   async CreateBillDeal(
-    req?: CreateBillDealRequest,
+    req: CreateBillDealRequest,
     cb?: (error: string, rep: CreateBillDealResponse) => void
   ): Promise<CreateBillDealResponse> {
     return this.request("CreateBillDeal", req, cb)
@@ -744,13 +771,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改数据库权限
+   * 销毁Mysql
    */
-  async ModifyDatabaseACL(
-    req: ModifyDatabaseACLRequest,
-    cb?: (error: string, rep: ModifyDatabaseACLResponse) => void
-  ): Promise<ModifyDatabaseACLResponse> {
-    return this.request("ModifyDatabaseACL", req, cb)
+  async DescribeMySQLClusterDetail(
+    req: DescribeMySQLClusterDetailRequest,
+    cb?: (error: string, rep: DescribeMySQLClusterDetailResponse) => void
+  ): Promise<DescribeMySQLClusterDetailResponse> {
+    return this.request("DescribeMySQLClusterDetail", req, cb)
   }
 
   /**
@@ -884,6 +911,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除安全网关路由
+   */
+  async DeleteWxGatewayRoute(
+    req: DeleteWxGatewayRouteRequest,
+    cb?: (error: string, rep: DeleteWxGatewayRouteResponse) => void
+  ): Promise<DeleteWxGatewayRouteResponse> {
+    return this.request("DeleteWxGatewayRoute", req, cb)
+  }
+
+  /**
    * 更新活动详情
    */
   async ReplaceActivityRecord(
@@ -924,6 +961,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 销毁Mysql
+   */
+  async DestroyMySQL(
+    req: DestroyMySQLRequest,
+    cb?: (error: string, rep: DestroyMySQLResponse) => void
+  ): Promise<DestroyMySQLResponse> {
+    return this.request("DestroyMySQL", req, cb)
+  }
+
+  /**
    * 查询环境计费周期
    */
   async DescribeEnvAccountCircle(
@@ -941,6 +988,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePostpayFreeQuotasResponse) => void
   ): Promise<DescribePostpayFreeQuotasResponse> {
     return this.request("DescribePostpayFreeQuotas", req, cb)
+  }
+
+  /**
+   * 查询开通Mysql结果
+   */
+  async DescribeCreateMySQLResult(
+    req: DescribeCreateMySQLResultRequest,
+    cb?: (error: string, rep: DescribeCreateMySQLResultResponse) => void
+  ): Promise<DescribeCreateMySQLResultResponse> {
+    return this.request("DescribeCreateMySQLResult", req, cb)
   }
 
   /**
@@ -1022,6 +1079,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UnfreezeCloudBaseRunServersResponse) => void
   ): Promise<UnfreezeCloudBaseRunServersResponse> {
     return this.request("UnfreezeCloudBaseRunServers", req, cb)
+  }
+
+  /**
+   * 修改数据库权限
+   */
+  async ModifyDatabaseACL(
+    req: ModifyDatabaseACLRequest,
+    cb?: (error: string, rep: ModifyDatabaseACLResponse) => void
+  ): Promise<ModifyDatabaseACLResponse> {
+    return this.request("ModifyDatabaseACL", req, cb)
   }
 
   /**

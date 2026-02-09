@@ -2122,6 +2122,10 @@ export interface SearchSubtaskResultByIdResponse {
    */
   TotalCount?: number
   /**
+   * 运维子任务执行结果
+   */
+  SubtaskResult?: Array<SubtaskResult>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2148,7 +2152,7 @@ export interface SearchSubtaskResultByIdRequest {
    */
   Id?: string
   /**
-   * 运维父任务执行状态
+   * 运维父任务执行状态。1 - 执行中，2 - 成功，3 - 失败，4 - 超时
    */
   Status?: Array<number | bigint>
 }
@@ -5786,6 +5790,73 @@ export interface RunOperationTaskRequest {
    * 运维任务ID
    */
   Id: number
+}
+
+/**
+ * 运维子任务执行结果
+ */
+export interface SubtaskResult {
+  /**
+   * 执行日志ID
+   */
+  Id?: string
+  /**
+   * 执行主机实例ID
+   */
+  InstanceId?: string
+  /**
+   * 执行主机名称
+   * @deprecated
+   */
+  Name?: string
+  /**
+   * 执行主机地域
+   */
+  ApCode?: string
+  /**
+   * 执行主机外网IP
+   */
+  PublicIp?: string
+  /**
+   * 执行主机内网IP
+   */
+  PrivateIp?: string
+  /**
+   * 运维任务状态 1 - 执行中，2 - 成功， 3 - 失败，4 - 超时
+   */
+  Status?: number
+  /**
+   * 运维任务失败原因
+   */
+  Reason?: string
+  /**
+   * 运维任务命令退出码
+   */
+  ExitCode?: number
+  /**
+   * 运维任务开始时间
+   */
+  StartTime?: string
+  /**
+   * 运维任务结束时间
+   */
+  EndTime?: string
+  /**
+   * 运维任务执行结果输出。默认超出16384字节的内容会被自动截断
+   */
+  StdOut?: string
+  /**
+   * 运维任务执行结果错误
+   */
+  StdErr?: string
+  /**
+   * 资产名
+   */
+  DeviceName?: string
+  /**
+   * 资产账号
+   */
+  Account?: string
 }
 
 /**

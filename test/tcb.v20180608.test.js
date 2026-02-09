@@ -278,9 +278,9 @@ it("tcb.v20180608.DescribeHostingDomainTask", async function () {
     }
 })
 
-it("tcb.v20180608.DeleteWxGatewayRoute", async function () {
+it("tcb.v20180608.CreateMySQL", async function () {
     try {
-       const data = await client.DeleteWxGatewayRoute({})
+       const data = await client.CreateMySQL({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,6 +398,16 @@ it("tcb.v20180608.DescribeSafeRule", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeMySQLTaskStatus", async function () {
+    try {
+       const data = await client.DescribeMySQLTaskStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DeleteCloudBaseRunServerVersion", async function () {
     try {
        const data = await client.DeleteCloudBaseRunServerVersion({})
@@ -468,9 +478,9 @@ it("tcb.v20180608.DescribeCurveData", async function () {
     }
 })
 
-it("tcb.v20180608.ModifyDatabaseACL", async function () {
+it("tcb.v20180608.DescribeMySQLClusterDetail", async function () {
     try {
-       const data = await client.ModifyDatabaseACL({})
+       const data = await client.DescribeMySQLClusterDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -608,6 +618,16 @@ it("tcb.v20180608.DescribePostpayPackageFreeQuotas", async function () {
     }
 })
 
+it("tcb.v20180608.DeleteWxGatewayRoute", async function () {
+    try {
+       const data = await client.DeleteWxGatewayRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.ReplaceActivityRecord", async function () {
     try {
        const data = await client.ReplaceActivityRecord({})
@@ -648,6 +668,16 @@ it("tcb.v20180608.DestroyEnv", async function () {
     }
 })
 
+it("tcb.v20180608.DestroyMySQL", async function () {
+    try {
+       const data = await client.DestroyMySQL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeEnvAccountCircle", async function () {
     try {
        const data = await client.DescribeEnvAccountCircle({})
@@ -661,6 +691,16 @@ it("tcb.v20180608.DescribeEnvAccountCircle", async function () {
 it("tcb.v20180608.DescribePostpayFreeQuotas", async function () {
     try {
        const data = await client.DescribePostpayFreeQuotas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeCreateMySQLResult", async function () {
+    try {
+       const data = await client.DescribeCreateMySQLResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -741,6 +781,16 @@ it("tcb.v20180608.DescribeAuthDomains", async function () {
 it("tcb.v20180608.UnfreezeCloudBaseRunServers", async function () {
     try {
        const data = await client.UnfreezeCloudBaseRunServers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.ModifyDatabaseACL", async function () {
+    try {
+       const data = await client.ModifyDatabaseACL({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

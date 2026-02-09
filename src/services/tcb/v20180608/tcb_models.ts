@@ -347,6 +347,62 @@ export interface CreateIndex {
 }
 
 /**
+ * TDSQL-C数据库详情
+ */
+export interface ClusterDetail {
+  /**
+   * 是否开启公网访问
+   */
+  IsOpenPubNetAccess?: boolean
+  /**
+   * 最大算力
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxCpu?: number
+  /**
+   * 最小算力
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MinCpu?: number
+  /**
+   * TDSQL-C集群状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 存储用量（单位：MB）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsedStorage?: number
+  /**
+   * 最大存储量（单位：GB）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageLimit?: number
+  /**
+   * 数据库类型
+   */
+  DbType?: string
+  /**
+   * 数据库类型
+   */
+  DbVersion?: string
+  /**
+   * 公网访问状态；open开启，opening开启中，closed关闭，closing关闭中
+   */
+  WanStatus?: string
+  /**
+   * 数据库集群状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterStatus?: string
+  /**
+   * serverless状态
+   */
+  ServerlessStatus?: string
+}
+
+/**
  * 数据库连接器实例信息
  */
 export interface DbInstance {
@@ -365,9 +421,13 @@ export interface DbInstance {
 }
 
 /**
- * EditAuthConfig返回参数结构体
+ * DescribeMySQLClusterDetail返回参数结构体
  */
-export interface EditAuthConfigResponse {
+export interface DescribeMySQLClusterDetailResponse {
+  /**
+   * 集群详情
+   */
+  Data?: MySQLClusterDetail
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -522,21 +582,21 @@ export interface DescribeCloudBaseBuildServiceResponse {
 }
 
 /**
- * DescribeSpecialCostItems请求参数结构体
+ * DescribeMySQLTaskStatus请求参数结构体
  */
-export interface DescribeSpecialCostItemsRequest {
+export interface DescribeMySQLTaskStatusRequest {
   /**
-   * 环境id
+   * 云开发环境ID
    */
-  EnvId?: string
+  EnvId: string
   /**
-   * 查询开始时间
+   * 任务Id
    */
-  StartTime?: string
+  TaskId?: string
   /**
-   * 查询结束时间
+   * 任务名
    */
-  EndTime?: string
+  TaskName?: string
 }
 
 /**
@@ -792,33 +852,21 @@ export interface ReplaceActivityRecordResponse {
 }
 
 /**
- * 云日志服务相关信息
+ * DescribeSpecialCostItems请求参数结构体
  */
-export interface LogServiceInfo {
+export interface DescribeSpecialCostItemsRequest {
   /**
-   * log名
+   * 环境id
    */
-  LogsetName?: string
+  EnvId?: string
   /**
-   * log-id
+   * 查询开始时间
    */
-  LogsetId?: string
+  StartTime?: string
   /**
-   * topic名
+   * 查询结束时间
    */
-  TopicName?: string
-  /**
-   * topic-id
-   */
-  TopicId?: string
-  /**
-   * cls日志所属地域
-   */
-  Region?: string
-  /**
-   * topic保存时长 默认7天
-   */
-  Period?: number
+  EndTime?: string
 }
 
 /**
@@ -1653,6 +1701,16 @@ export interface CreateBillDealResponse {
 }
 
 /**
+ * 开通Mysql 结果
+ */
+export interface CreateMySQLResult {
+  /**
+   * 任务ID
+   */
+  TaskId?: string
+}
+
+/**
  * DescribeGatewayCurveData返回参数结构体
  */
 export interface DescribeGatewayCurveDataResponse {
@@ -1935,6 +1993,16 @@ export interface DescribeEnvAccountCircleRequest {
 }
 
 /**
+ * DescribeMySQLClusterDetail请求参数结构体
+ */
+export interface DescribeMySQLClusterDetailRequest {
+  /**
+   * 云开发环境ID
+   */
+  EnvId: string
+}
+
+/**
  * CreateStaticStore请求参数结构体
  */
 export interface CreateStaticStoreRequest {
@@ -2144,6 +2212,16 @@ export interface DeleteWxGatewayRouteRequest {
 }
 
 /**
+ * EditAuthConfig返回参数结构体
+ */
+export interface EditAuthConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * EstablishWxGatewayRoute请求参数结构体
  */
 export interface EstablishWxGatewayRouteRequest {
@@ -2189,6 +2267,20 @@ export interface DescribeEnvPostpaidDeductRequest {
    * 查询结束时间
    */
   EndTime?: string
+}
+
+/**
+ * DestroyMySQL返回参数结构体
+ */
+export interface DestroyMySQLResponse {
+  /**
+   * 销毁结果
+   */
+  Data?: DestroyMySQLResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2297,6 +2389,20 @@ export interface DescribeExtensionUploadInfoRequest {
 }
 
 /**
+ * DescribeCreateMySQLResult请求参数结构体
+ */
+export interface DescribeCreateMySQLResultRequest {
+  /**
+   * 云开发环境ID
+   */
+  EnvId: string
+  /**
+   * OpenMysql 返回任务 Id
+   */
+  TaskId?: string
+}
+
+/**
  * DescribeBillingInfo请求参数结构体
  */
 export interface DescribeBillingInfoRequest {
@@ -2318,6 +2424,24 @@ export interface HpaPolicy {
    * 策略阈值
    */
   PolicyThreshold?: number
+}
+
+/**
+ * tke集群信息
+ */
+export interface TkeClusterInfo {
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
+   * 集群的vpcId
+   */
+  VpcId?: string
+  /**
+   * 版本内网CLB所在子网Id
+   */
+  VersionClbSubnetId?: string
 }
 
 /**
@@ -2464,6 +2588,20 @@ export interface CloudBaseEsInfo {
    * 密码
    */
   Password?: string
+}
+
+/**
+ * CreateMySQL返回参数结构体
+ */
+export interface CreateMySQLResponse {
+  /**
+   * 开通结果
+   */
+  Data?: CreateMySQLResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2635,7 +2773,77 @@ export interface DestroyEnvResponse {
 /**
  * CreateBillDeal请求参数结构体
  */
-export type CreateBillDealRequest = null
+export interface CreateBillDealRequest {
+  /**
+   * 当前下单的操作类型，可取[purchase,renew,modify]三种值，分别代表新购，续费，变配。
+   */
+  DealType: string
+  /**
+   * 购买的产品类型，可取[tcb-baas,tcb-promotion,tcb-package], 分别代表baas套餐、大促包、资源包
+   */
+  ProductType: string
+  /**
+   * 目标下单产品/套餐Id
+   */
+  PackageId: string
+  /**
+   * 默认只下单不支付，为ture则下单并支付
+   */
+  CreateAndPay?: boolean
+  /**
+   * 购买时长
+   */
+  TimeSpan?: number
+  /**
+   * 购买时长单位,按各产品规则可选d(天),m(月),y(年),p(一次性)
+   */
+  TimeUnit?: string
+  /**
+   * 资源唯一标识
+   */
+  ResourceId?: string
+  /**
+   * 来源可选[qcloud,miniapp]，默认qcloud
+   */
+  Source?: string
+  /**
+   * 资源别名
+   */
+  Alias?: string
+  /**
+   * 环境id
+   */
+  EnvId?: string
+  /**
+   * 开启超限按量
+   */
+  EnableExcess?: boolean
+  /**
+   * 变配目标产品/套餐id
+   */
+  ModifyPackageId?: string
+  /**
+   * jsonstr附加信息
+   */
+  Extension?: string
+  /**
+   * 是否自动选择代金券支付
+   */
+  AutoVoucher?: boolean
+  /**
+   * 资源类型。
+代表新购环境（DealType=purchase 并且 ProductType=tcb-baas ）时需要发货哪些资源。
+可取值：flexdb, cos, cdn, scf
+
+   */
+  ResourceTypes?: Array<string>
+  /**
+   * 环境标签。
+ 代表新购环境（DealType=purchase 并且 ProductType=tcb-baas ）时需要打的标签。
+
+   */
+  EnvTags?: Array<Tag>
+}
 
 /**
  * 云开发项目来源
@@ -2748,6 +2956,16 @@ export interface User {
 }
 
 /**
+ * DestroyMySQL请求参数结构体
+ */
+export interface DestroyMySQLRequest {
+  /**
+   * 云开发环境ID
+   */
+  EnvId: string
+}
+
+/**
  * DescribeEnvs返回参数结构体
  */
 export interface DescribeEnvsResponse {
@@ -2818,21 +3036,17 @@ export interface CreateHostingDomainResponse {
 }
 
 /**
- * tke集群信息
+ * MySql 任务状态
  */
-export interface TkeClusterInfo {
+export interface MySQLTaskStatus {
   /**
-   * 集群ID
+   * SUCCESS | FAILED | PENDING
    */
-  ClusterId?: string
+  Status?: string
   /**
-   * 集群的vpcId
+   * 状态描述
    */
-  VpcId?: string
-  /**
-   * 版本内网CLB所在子网Id
-   */
-  VersionClbSubnetId?: string
+  StatusDesc?: string
 }
 
 /**
@@ -3146,6 +3360,20 @@ export interface CreateCloudBaseGWAPIResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   APIId: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCreateMySQLResult返回参数结构体
+ */
+export interface DescribeCreateMySQLResultResponse {
+  /**
+   * 查询开通结果
+   */
+  Data?: DescribeCreateMySQLResult
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3877,6 +4105,24 @@ export interface ModifyCloudBaseRunServerVersionRequest {
 }
 
 /**
+ * 销毁 Mysql 结果
+ */
+export interface DestroyMySQLResult {
+  /**
+   * 是否成功
+   */
+  IsSuccess?: boolean
+  /**
+   * 任务ID
+   */
+  TaskId?: string
+  /**
+   * 任务名
+   */
+  TaskName?: string
+}
+
+/**
  * DescribeCloudBaseGWAPI返回参数结构体
  */
 export interface DescribeCloudBaseGWAPIResponse {
@@ -3980,21 +4226,33 @@ export interface DescribeCloudBaseGWAPIRequest {
 }
 
 /**
- * DescribeCbrServerVersion请求参数结构体
+ * CreateMySQL请求参数结构体
  */
-export interface DescribeCbrServerVersionRequest {
+export interface CreateMySQLRequest {
   /**
-   * 环境ID
+   * 云开发环境ID
    */
   EnvId: string
   /**
-   * 服务名称
+   * Db类型 1. FLEXDB 2.MYSQL
    */
-  ServerName: string
+  DbInstanceType: string
   /**
-   * 版本名称
+   * mysql版本
    */
-  VersionName: string
+  MysqlVersion?: string
+  /**
+   * vpc Id
+   */
+  VpcId?: string
+  /**
+   * 子网ID
+   */
+  SubnetId?: string
+  /**
+   * 0 区分表名大小写；1 不区分表名大小写(默认)
+   */
+  LowerCaseTableNames?: string
 }
 
 /**
@@ -4299,6 +4557,20 @@ export interface CloudBaseRunServerVersionItem {
    * Monolithic，Microservice
    */
   Architecture?: string
+}
+
+/**
+ * DescribeMySQLTaskStatus返回参数结构体
+ */
+export interface DescribeMySQLTaskStatusResponse {
+  /**
+   * 任务状态
+   */
+  Data?: MySQLTaskStatus
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5416,25 +5688,33 @@ export interface DescribeCloudBaseProjectLatestVersionListRequest {
 }
 
 /**
- * FlexDB数据库权限信息
+ * 云日志服务相关信息
  */
-export interface PermissionInfo {
+export interface LogServiceInfo {
   /**
-   * "READONLY",   //公有读，私有写。所有用户可读，仅创建者及管理员可写  
-"PRIVATE",    //私有读写，仅创建者及管理员可读写  
-"ADMINWRITE", //所有用户可读，仅管理员可写  
-"ADMINONLY",  //仅管理员可操作  
-"CUSTOM",     // 安全规则
+   * log名
    */
-  AclTag: string
+  LogsetName?: string
   /**
-   * 云开发环境ID
+   * log-id
    */
-  EnvId: string
+  LogsetId?: string
   /**
-   * 自定义规则
+   * topic名
    */
-  Rule?: string
+  TopicName?: string
+  /**
+   * topic-id
+   */
+  TopicId?: string
+  /**
+   * cls日志所属地域
+   */
+  Region?: string
+  /**
+   * topic保存时长 默认7天
+   */
+  Period?: number
 }
 
 /**
@@ -5681,6 +5961,24 @@ export interface DescribeCloudBaseRunVersionResponse {
 }
 
 /**
+ * DescribeCbrServerVersion请求参数结构体
+ */
+export interface DescribeCbrServerVersionRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 服务名称
+   */
+  ServerName: string
+  /**
+   * 版本名称
+   */
+  VersionName: string
+}
+
+/**
  * SearchClsLog返回参数结构体
  */
 export interface SearchClsLogResponse {
@@ -5810,6 +6108,69 @@ export interface CloudBaseCodeRepoDetail {
 export type CheckTcbServiceRequest = null
 
 /**
+ * TDSQL-C网络信息类型
+ */
+export interface MySQLNetDetail {
+  /**
+   * 内网地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivateNetAddress?: string
+  /**
+   * 外网地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PubNetAddress?: string
+  /**
+   * 网络信息（VPCID/SubnetID）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Net?: string
+  /**
+   * 是否开通公网
+   */
+  PubNetAccessEnabled?: boolean
+  /**
+   * vpc id
+   */
+  VpcId?: string
+  /**
+   * vpc name
+   */
+  VpcName?: string
+  /**
+   * 子网ID
+   */
+  SubnetId?: string
+  /**
+   * 子网名
+   */
+  SubnetName?: string
+}
+
+/**
+ * FlexDB数据库权限信息
+ */
+export interface PermissionInfo {
+  /**
+   * "READONLY",   //公有读，私有写。所有用户可读，仅创建者及管理员可写  
+"PRIVATE",    //私有读写，仅创建者及管理员可读写  
+"ADMINWRITE", //所有用户可读，仅管理员可写  
+"ADMINONLY",  //仅管理员可操作  
+"CUSTOM",     // 安全规则
+   */
+  AclTag: string
+  /**
+   * 云开发环境ID
+   */
+  EnvId: string
+  /**
+   * 自定义规则
+   */
+  Rule?: string
+}
+
+/**
  * 分页信息
  */
 export interface Pager {
@@ -5909,6 +6270,25 @@ export interface DescribeUserActivityInfoRequest {
 }
 
 /**
+ * 查询开通Mysql结果
+ */
+export interface DescribeCreateMySQLResult {
+  /**
+   * 状态 notexist | init | doing | success | fail
+   */
+  Status?: string
+  /**
+   * 失败原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailReason?: string
+  /**
+   * 是否冻结
+   */
+  FreezeStatus?: boolean
+}
+
+/**
  * DeleteCloudBaseGWAPI返回参数结构体
  */
 export interface DeleteCloudBaseGWAPIResponse {
@@ -5976,6 +6356,24 @@ export interface CreateCloudBaseRunResourceRequest {
    * 子网ID列表，当VpcId不为空，SubnetIds也不能为空
    */
   SubnetIds?: Array<string>
+}
+
+/**
+ * MySql 集群详情
+ */
+export interface MySQLClusterDetail {
+  /**
+   * 集群ID
+   */
+  DbClusterId?: string
+  /**
+   * 网络详情
+   */
+  NetInfo?: MySQLNetDetail
+  /**
+   * 数据库详情
+   */
+  DbInfo?: ClusterDetail
 }
 
 /**

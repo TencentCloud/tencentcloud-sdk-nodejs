@@ -1851,6 +1851,7 @@ Name：实例名称
 UserId：实例用户ID
 HostSerialNumber：宿主机序列号
 HostServerSerialNumber：机箱序列号
+AndroidInstanceModel：实例型号
    */
   Filters?: Array<Filter>
 }
@@ -2527,6 +2528,7 @@ export interface DescribeAndroidInstanceImagesRequest {
   Limit?: number
   /**
    * 字段过滤器。Filter 的 Name 有以下值：
+ImageModel：镜像型号
 ImageName：镜像名称
 ImageState：镜像状态
 AndroidVersion：安卓版本
@@ -2763,6 +2765,12 @@ IDLE：未连接
 ESTABLISHED：连接中
    */
   ServiceStatus?: string
+  /**
+   * 安卓实例型号。
+YS1：默认值，基础型云手机
+GC0、GC1、GC2：三种性能型云手机
+   */
+  AndroidInstanceModel?: string
 }
 
 /**
@@ -2963,6 +2971,10 @@ A6：六开
    * 安卓实例标签列表
    */
   Labels?: Array<AndroidInstanceLabel>
+  /**
+   * 安卓实例型号。YS1：默认值，基础型云手机GC0、GC1、GC2：三种性能型云手机
+   */
+  Model?: string
 }
 
 /**
@@ -3017,6 +3029,12 @@ export interface AndroidInstanceImage {
    * 创建时间
    */
   CreateTime?: string
+  /**
+   * 镜像型号。
+YS1：基础型云手机
+GC0、GC1、GC2：三种性能型云手机
+   */
+  AndroidInstanceImageModel?: string
 }
 
 /**

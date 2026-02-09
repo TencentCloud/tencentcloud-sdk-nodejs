@@ -248,6 +248,7 @@ import {
   CheckLDAPConnectionResponse,
   ModifyReconnectionSettingRequest,
   RunOperationTaskRequest,
+  SubtaskResult,
   Acl,
   TagFilter,
   DescribeDevicesRequest,

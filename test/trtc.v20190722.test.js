@@ -688,16 +688,6 @@ it("trtc.v20190722.DescribeUnusualEvent", async function () {
     }
 })
 
-it("trtc.v20190722.DescribeTRTCRealTimeScaleMetricData", async function () {
-    try {
-       const data = await client.DescribeTRTCRealTimeScaleMetricData({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("trtc.v20190722.TextToSpeechSSE", async function () {
     try {
        const data = await client.TextToSpeechSSE({})

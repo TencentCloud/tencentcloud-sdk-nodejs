@@ -830,25 +830,21 @@ export interface ScaleInfomation {
 }
 
 /**
- * DescribeTRTCRealTimeScaleMetricData请求参数结构体
+ * 转推服务加入TRTC房间的机器人参数。
  */
-export interface DescribeTRTCRealTimeScaleMetricDataRequest {
+export interface AgentParams {
   /**
-   * 用户SdkAppId（如：1400xxxxxx）
+   * 转推服务在TRTC房间使用的[UserId](https://cloud.tencent.com/document/product/647/46351#userid)，注意这个userId不能与其他TRTC或者转推服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。
    */
-  SdkAppId: string
+  UserId: string
   /**
-   * 开始时间，unix时间戳，单位：秒（查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时）
+   * 转推服务加入TRTC房间的用户签名，当前 UserId 对应的验证签名，相当于登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910#UserSig)的方案。
    */
-  StartTime: number
+  UserSig?: string
   /**
-   * 结束时间，unix时间戳，单位：秒
+   * 所有参与混流转推的主播持续离开TRTC房间或切换成观众超过MaxIdleTime的时长，自动停止转推，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。
    */
-  EndTime: number
-  /**
-   * 房间ID
-   */
-  RoomId?: string
+  MaxIdleTime?: number
 }
 
 /**
@@ -2496,21 +2492,6 @@ export interface DescribeVoicePrintRequest {
    * 每页条数 最少20,DescribeMode为1时填写
    */
   PageSize?: number
-}
-
-/**
- * DescribeTRTCRealTimeScaleMetricData返回参数结构体
- */
-export interface DescribeTRTCRealTimeScaleMetricDataResponse {
-  /**
-   * TRTC监控数据出参
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: TRTCDataResp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -4707,24 +4688,6 @@ export interface AuditStorageParams {
 }
 
 /**
- * 转推服务加入TRTC房间的机器人参数。
- */
-export interface AgentParams {
-  /**
-   * 转推服务在TRTC房间使用的[UserId](https://cloud.tencent.com/document/product/647/46351#userid)，注意这个userId不能与其他TRTC或者转推服务等已经使用的UserId重复，建议可以把房间ID作为userId的标识的一部分。
-   */
-  UserId: string
-  /**
-   * 转推服务加入TRTC房间的用户签名，当前 UserId 对应的验证签名，相当于登录密码，具体计算方法请参考TRTC计算[UserSig](https://cloud.tencent.com/document/product/647/45910#UserSig)的方案。
-   */
-  UserSig?: string
-  /**
-   * 所有参与混流转推的主播持续离开TRTC房间或切换成观众超过MaxIdleTime的时长，自动停止转推，单位：秒。默认值为 30 秒，该值需大于等于 5秒，且小于等于 86400秒(24小时)。
-   */
-  MaxIdleTime?: number
-}
-
-/**
  * VoiceClone返回参数结构体
  */
 export interface VoiceCloneResponse {
@@ -4829,7 +4792,16 @@ export interface TextToSpeechSSERequest {
    */
   Model?: string
   /**
-   *  需要合成的语言（ISO 639-1），支持 zh（中文）、en（英文）、yue（粤语）、ja（日语）、ko（韩语），默认自动识别
+   *  需要合成的语言（ISO 639-1），默认自动识别，支持如下语言：
+- zh（中文）
+- en（英文）
+- yue（粤语）
+- ja（日语）
+- ko（韩语）
+- ar（阿拉伯语）
+- id（印尼语）
+- th（泰语）
+
    */
   Language?: string
 }
