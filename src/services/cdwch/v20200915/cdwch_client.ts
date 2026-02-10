@@ -84,12 +84,14 @@ import {
   DescribeCkSqlApisResponse,
   Charge,
   DescribeBackUpScheduleRequest,
+  RestartInstanceResponse,
   ScaleCNOutUpInstanceResponse,
   ResourceSpec,
   ClusterConfigsInfoFromEMR,
   DescribeInstanceClustersRequest,
   DescribeCNInstancesResponse,
   DestroyInstanceRequest,
+  RestartInstanceRequest,
   ServiceInfo,
   ModifyClusterConfigsResponse,
   DeleteBackUpDataResponse,
@@ -277,6 +279,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyClusterConfigsResponse) => void
   ): Promise<ModifyClusterConfigsResponse> {
     return this.request("ModifyClusterConfigs", req, cb)
+  }
+
+  /**
+   * 重启实例，可以按节点类型和节点进行重启，可选滚动重启
+   */
+  async RestartInstance(
+    req: RestartInstanceRequest,
+    cb?: (error: string, rep: RestartInstanceResponse) => void
+  ): Promise<RestartInstanceResponse> {
+    return this.request("RestartInstance", req, cb)
   }
 
   /**

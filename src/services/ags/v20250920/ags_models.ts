@@ -253,6 +253,10 @@ export interface CreateSandboxToolRequest {
    * 沙箱工具自定义配置
    */
   CustomConfiguration?: CustomConfiguration
+  /**
+   * 沙箱工具日志推送相关配置
+   */
+  LogConfiguration?: LogConfiguration
 }
 
 /**
@@ -531,6 +535,10 @@ export interface SandboxTool {
    * 沙箱工具自定义配置
    */
   CustomConfiguration?: CustomConfigurationDetail
+  /**
+   * 沙箱工具日志推送相关配置
+   */
+  LogConfiguration?: LogConfiguration
 }
 
 /**
@@ -894,6 +902,26 @@ export interface CreatePreCacheImageTaskRequest {
    * 镜像仓库类型：`enterprise`、`personal`。
    */
   ImageRegistryType: string
+}
+
+/**
+ * 沙箱工具日志推送CLS相关配置
+ */
+export interface CLSConfig {
+  /**
+   * 沙箱工具日志推送所使用的CLS日志主题ID
+   */
+  TopicId?: string
+}
+
+/**
+ * 沙箱工具日志采集相关配置
+ */
+export interface LogConfiguration {
+  /**
+   * 日志推送CLS的配置。
+   */
+  CLSConfig?: CLSConfig
 }
 
 /**

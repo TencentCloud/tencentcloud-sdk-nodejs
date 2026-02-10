@@ -178,6 +178,16 @@ it("cdwch.v20200915.ModifyClusterConfigs", async function () {
     }
 })
 
+it("cdwch.v20200915.RestartInstance", async function () {
+    try {
+       const data = await client.RestartInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdwch.v20200915.ScaleCNOutUpInstance", async function () {
     try {
        const data = await client.ScaleCNOutUpInstance({})

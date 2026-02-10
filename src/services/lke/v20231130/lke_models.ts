@@ -934,6 +934,10 @@ export interface AgentToolInfo {
    * 授权类型; 0-无鉴权；1-APIKey；2-CAM授权；3-Oauth2.0授权；
    */
   AuthType?: number
+  /**
+   * 工具授权配置状态；0：不需要授权，1：需要授权-未配置，2：需要授权-已配置
+   */
+  AuthConfigStatus?: number
 }
 
 /**
@@ -2192,6 +2196,8 @@ export interface KnowledgeDetail {
 export interface FileInfoContent {
   /**
    * 实时文档解析接口返回的 DocBizId
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
    */
   DocBizId?: number
   /**
@@ -2214,6 +2220,16 @@ export interface FileInfoContent {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileUrl?: string
+  /**
+   * 实时文档解析接口返回的 doc_id。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DocId?: number
+  /**
+   * 文件创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
 }
 
 /**
@@ -2634,7 +2650,8 @@ export interface DescribeStorageCredentialRequest {
    */
   BotBizId?: string
   /**
-   * 文件类型,正常的文件名类型后缀，例如 xlsx、pdf、 docx、png 等
+   * 文件类型,正常的文件名类型后缀，支持 docx、doc、pdf、txt、md、wps、pages、html、mhtml、epub、xml、json、log、xlsx、xls、csv、tsv、numbers、pptx、ppt、ppsx、ppsm、key、png、jpg、jpeg、gif、bmp、tiff、webp、heif、heic、jp2、eps、icns、im、pcx、ppm、xbm、xmind
+
    */
   FileType?: string
   /**
@@ -2682,6 +2699,10 @@ export interface SearchStrategy {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NatureLanguageToSqlModelConfig?: NL2SQLModelConfig
+  /**
+   * 是否开启图谱检索
+   */
+  GraphRetrieval?: boolean
 }
 
 /**
@@ -3192,6 +3213,11 @@ export interface Widget {
    * Widget实例ID
    */
   WidgetRunId?: string
+  /**
+   * Widget显示数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  View?: string
   /**
    * Widget状态数据
 注意：此字段可能返回 null，表示取不到有效值。
@@ -4850,13 +4876,13 @@ export interface DescribeAppResponse {
  */
 export interface DeleteAppRequest {
   /**
-   * 应用ID
+   * 应用ID，获取方法参看如何获取   [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)。
    */
   AppBizId: string
   /**
-   * 应用类型；knowledge_qa-知识问答管理；summary-知识摘要；classifys-知识标签提取
+   * 应用类型；`"knowledge_qa"` 知识问答应用（包含标准模式 单工作流 Multi-Agent 等模式）
    */
-  AppType: string
+  AppType?: string
 }
 
 /**
@@ -5041,6 +5067,20 @@ export interface AudioTranscript {
 }
 
 /**
+ * UpdateSharedKnowledge返回参数结构体
+ */
+export interface UpdateSharedKnowledgeResponse {
+  /**
+   * 共享知识库业务ID
+   */
+  KnowledgeBizId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 输入框配置
  */
 export interface InputBoxConfig {
@@ -5142,6 +5182,10 @@ export interface DescribeAppAgentListResponse {
    * Agent转交高级设置
    */
   HandoffAdvancedSetting?: AgentHandoffAdvancedSetting
+  /**
+   * Agent数量上限
+   */
+  MaxAgentCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5874,6 +5918,10 @@ export interface Agent {
    * 高级设置
    */
   AdvancedConfig?: AgentAdvancedConfig
+  /**
+   * 工具数量上限
+   */
+  MaxToolCount?: number
 }
 
 /**
@@ -8101,7 +8149,7 @@ export interface DescribeStorageCredentialResponse {
    */
   Type?: string
   /**
-   * 主号
+   * 企业主账号
    */
   CorpUin?: string
   /**
@@ -8112,6 +8160,14 @@ export interface DescribeStorageCredentialResponse {
    * 上传存储路径，到具体文件
    */
   UploadPath?: string
+  /**
+   * 文件上传地址，使用put请求上传文件到该地址
+   */
+  UploadUrl?: string
+  /**
+   * 文件的预签名地址，支持下载
+   */
+  FileUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8361,17 +8417,13 @@ export interface PluginToolReqParam {
 }
 
 /**
- * UpdateSharedKnowledge返回参数结构体
+ * 异步工作流的消息
  */
-export interface UpdateSharedKnowledgeResponse {
+export interface AsyncWorkflowMessage {
   /**
-   * 共享知识库业务ID
+   * 内容数组，包含多个内容对象
    */
-  KnowledgeBizId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Contents?: Array<Content>
 }
 
 /**
@@ -9763,6 +9815,7 @@ export interface AgentPluginInfo {
   Headers?: Array<AgentPluginHeader>
   /**
    * 插件调用LLM时使用的模型配置，一般用于指定知识库问答插件的生成模型
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Model?: AgentModelInfo
   /**
@@ -9771,6 +9824,7 @@ export interface AgentPluginInfo {
   PluginInfoType?: number
   /**
    * 知识库问答插件配置
+注意：此字段可能返回 null，表示取不到有效值。
    */
   KnowledgeQa?: AgentKnowledgeQAPlugin
   /**
@@ -10549,6 +10603,11 @@ export interface WorkflowRunDetail {
    * 工作流的流程图
    */
   WorkflowGraph?: string
+  /**
+   * 当前的回复消息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LatestMessage?: AsyncWorkflowMessage
 }
 
 /**

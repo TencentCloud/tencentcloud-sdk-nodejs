@@ -3108,11 +3108,11 @@ export interface UserInfo {
    */
   UserName: string
   /**
-   * 密码
+   * base64加密后的密码
    */
   PassWord: string
   /**
-   * 用户链接来自的 IP
+   * 用户链接来自的 IP地址
    */
   WhiteHost?: string
   /**

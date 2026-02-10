@@ -55,6 +55,7 @@ import {
   CreateImageProcessingTemplateRequest,
   ModifyDefaultStorageRegionRequest,
   ModifyEventConfigResponse,
+  DeleteLLMComprehendTemplateRequest,
   QualityInspectTaskOutput,
   QualityEnhanceTaskInput,
   ResetProcedureTemplateResponse,
@@ -70,6 +71,7 @@ import {
   DescribeImageReviewUsageDataResponse,
   TempCertificate,
   RebuildMediaRequest,
+  LLMComprehendSummary,
   DescribeDefaultDistributionConfigRequest,
   AiReviewTaskPoliticalOcrResult,
   QualityEnhanceTask,
@@ -182,6 +184,7 @@ import {
   AiAnalysisTaskCoverResult,
   DescribeEventConfigRequest,
   MediaContentReviewOcrTextSegmentItem,
+  ModifyLLMComprehendTemplateResponse,
   AiAnalysisTaskClassificationOutput,
   FileDeleteTask,
   ResourceTag,
@@ -190,10 +193,11 @@ import {
   AiAnalysisTaskHighlightResult,
   SetVodDomainCertificateRequest,
   CreateAigcVideoTaskResponse,
+  ModifyAdaptiveDynamicStreamingTemplateResponse,
   CreateRebuildMediaTemplateResponse,
   AiRecognitionTaskOcrWordsResultOutput,
   AiSampleFaceInfo,
-  MediaImageSpriteItem,
+  ImageUnderstandingInfo,
   QualityInspectTask,
   DescribeEnhanceMediaTemplatesResponse,
   ImageBlur,
@@ -222,6 +226,7 @@ import {
   ModifyMediaInfoRequest,
   MediaProcessTaskAdaptiveDynamicStreamingResult,
   FrameRateWithDenInfo,
+  LLMComprehendAsrForUpdate,
   TraceWatermarkInput,
   ModifyPersonSampleRequest,
   ReviewAudioVideoSegmentItem,
@@ -235,7 +240,7 @@ import {
   SimpleAesEdkPair,
   MediaSubtitleInfo,
   AiRecognitionTaskAsrFullTextResultInput,
-  ModifyReviewTemplateResponse,
+  DeleteLLMComprehendTemplateResponse,
   MediaMiniProgramReviewInfoItem,
   TaskStatData,
   SplitMediaOutputConfig,
@@ -259,6 +264,7 @@ import {
   PoliticalAsrReviewTemplateInfoForUpdate,
   WechatMiniProgramPublishTaskInput,
   SetCLSPushTargetRequest,
+  LLMComprehendTemplateItem,
   AiSampleFaceOperation,
   SvgWatermarkInputForUpdate,
   AiReviewTaskTerrorismOcrResult,
@@ -399,6 +405,7 @@ import {
   ProcessImageRequest,
   ComplexAdaptiveDynamicStreamingTask,
   ModifyMediaInfoResponse,
+  DescribeLLMComprehendTemplatesResponse,
   ModifyReviewTemplateRequest,
   CreateBlindWatermarkTemplateResponse,
   AiRecognitionTaskOcrFullTextResult,
@@ -407,7 +414,7 @@ import {
   MediaTrackItem,
   ImportMediaKnowledgeResponse,
   RestoreMediaResponse,
-  MediaProcessTaskSnapshotByTimeOffsetResult,
+  ImageUnderstandingItem,
   AigcFaceInputFileInfo,
   ModifyEnhanceMediaTemplateResponse,
   SceneAigcVideoOutputConfig,
@@ -420,7 +427,7 @@ import {
   ModifyBlindWatermarkTemplateRequest,
   AiRecognitionTaskAsrWordsResultOutput,
   DescribeHeadTailTemplatesRequest,
-  ModifyAdaptiveDynamicStreamingTemplateResponse,
+  CreateLLMComprehendTemplateResponse,
   ImageSceneAigcEncodeConfig,
   BlurConfigureInfoForUpdate,
   ProcessMediaByUrlResponse,
@@ -441,6 +448,7 @@ import {
   SimpleHlsClipRequest,
   MediaDeleteItem,
   EnhanceConfigForUpdate,
+  MediaProcessTaskSnapshotByTimeOffsetResult,
   PoliticalImageResult,
   AiSamplePerson,
   MediaAdaptiveDynamicStreamingInfo,
@@ -449,6 +457,7 @@ import {
   AsrWordsConfigureInfoForUpdate,
   DescribeDailyMostPlayedStatRequest,
   LiveRealTimeClipMediaSegmentInfo,
+  ModifyLLMComprehendTemplateRequest,
   DeleteImageSpriteTemplateResponse,
   LowLightEnhanceInfo,
   DescribeContentReviewTemplatesResponse,
@@ -495,6 +504,7 @@ import {
   ComposeMediaTaskInput,
   ModifyQualityInspectTemplateRequest,
   SceneAigcVideoTask,
+  ProcessImageAsyncInputExtendedParameter,
   AnimatedGraphicTaskInput,
   MosaicInput,
   AIAnalysisTemplateItem,
@@ -574,6 +584,7 @@ import {
   ModifyContentReviewTemplateRequest,
   ImageSpriteTemplate,
   DeleteReviewTemplateRequest,
+  CreateLLMComprehendTemplateRequest,
   AiAnalysisTaskCoverOutput,
   AiContentReviewTaskInput,
   CreateAdaptiveDynamicStreamingTemplateResponse,
@@ -612,6 +623,7 @@ import {
   JustInTimeTranscodeTemplate,
   TaskStatDataItem,
   PornOcrReviewTemplateInfo,
+  DescribeLLMComprehendTemplatesRequest,
   AiReviewTaskPoliticalAsrResult,
   CreateProcessImageAsyncTemplateResponse,
   TrtcRecordInfo,
@@ -656,6 +668,7 @@ import {
   StatDataItem,
   CreateStorageRegionResponse,
   AccelerateAreaInfo,
+  MediaImageSpriteItem,
   MediaSourceData,
   DescribePrepaidProductsResponse,
   ProhibitedAsrReviewTemplateInfo,
@@ -785,6 +798,7 @@ import {
   ReviewImageResponse,
   DescribeStorageRegionsResponse,
   ModifySnapshotByTimeOffsetTemplateRequest,
+  ModifyReviewTemplateResponse,
   CreateProcessImageAsyncTemplateRequest,
   CreateCLSLogsetRequest,
   ExtractTraceWatermarkRequest,
@@ -877,6 +891,7 @@ import {
   DescribeAIAnalysisTemplatesResponse,
   CreateSnapshotByTimeOffsetTemplateRequest,
   DescribeQualityInspectTemplatesResponse,
+  LLMComprehendSummaryForUpdate,
   AiRecognitionTaskAsrWordsResult,
   CreateSubAppIdRequest,
   DescribeProcedureTemplatesResponse,
@@ -932,6 +947,7 @@ import {
   TerrorismConfigureInfo,
   CreateCLSLogsetResponse,
   PoliticalAsrReviewTemplateInfo,
+  LLMComprehendAsr,
   SceneAigcImageTaskInput,
   CreateAnimatedGraphicsTemplateResponse,
   SampleSnapshotTemplate,
@@ -1003,15 +1019,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口用于创建轮播播单，数量上限：100。
-轮播播单的每个文件可以指定源文件，也可以指定某个转码文件。
-指定的文件必须是hls格式，所有的播单文件最好保持相同的码率和分辨率。
-     */
-  async CreateRoundPlay(
-    req: CreateRoundPlayRequest,
-    cb?: (error: string, rep: CreateRoundPlayResponse) => void
-  ): Promise<CreateRoundPlayResponse> {
-    return this.request("CreateRoundPlay", req, cb)
+   * 创建大模型解析模板
+   */
+  async CreateLLMComprehendTemplate(
+    req: CreateLLMComprehendTemplateRequest,
+    cb?: (error: string, rep: CreateLLMComprehendTemplateResponse) => void
+  ): Promise<CreateLLMComprehendTemplateResponse> {
+    return this.request("CreateLLMComprehendTemplate", req, cb)
   }
 
   /**
@@ -1081,6 +1095,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据大模型解析模板唯一标识，获取大模型解析模板详情列表。返回结果包含符合条件的所有用户自定义大模型解析模板。
+   */
+  async DescribeLLMComprehendTemplates(
+    req: DescribeLLMComprehendTemplatesRequest,
+    cb?: (error: string, rep: DescribeLLMComprehendTemplatesResponse) => void
+  ): Promise<DescribeLLMComprehendTemplatesResponse> {
+    return this.request("DescribeLLMComprehendTemplates", req, cb)
+  }
+
+  /**
      * 修改即时转码模板。
 - 注意：即时转码模板创建后，不推荐修改，如需修改参数，推荐使用新增模板。
      */
@@ -1114,13 +1138,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建用户自定义指定时间点截图模板，数量上限：16。
-   */
-  async CreateSnapshotByTimeOffsetTemplate(
-    req: CreateSnapshotByTimeOffsetTemplateRequest,
-    cb?: (error: string, rep: CreateSnapshotByTimeOffsetTemplateResponse) => void
-  ): Promise<CreateSnapshotByTimeOffsetTemplateResponse> {
-    return this.request("CreateSnapshotByTimeOffsetTemplate", req, cb)
+     * 该接口用于创建轮播播单，数量上限：100。
+轮播播单的每个文件可以指定源文件，也可以指定某个转码文件。
+指定的文件必须是hls格式，所有的播单文件最好保持相同的码率和分辨率。
+     */
+  async CreateRoundPlay(
+    req: CreateRoundPlayRequest,
+    cb?: (error: string, rep: CreateRoundPlayResponse) => void
+  ): Promise<CreateRoundPlayResponse> {
+    return this.request("CreateRoundPlay", req, cb)
   }
 
   /**
@@ -1171,6 +1197,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateQualityInspectTemplateResponse) => void
   ): Promise<CreateQualityInspectTemplateResponse> {
     return this.request("CreateQualityInspectTemplate", req, cb)
+  }
+
+  /**
+   * 创建用户自定义指定时间点截图模板，数量上限：16。
+   */
+  async CreateSnapshotByTimeOffsetTemplate(
+    req: CreateSnapshotByTimeOffsetTemplateRequest,
+    cb?: (error: string, rep: CreateSnapshotByTimeOffsetTemplateResponse) => void
+  ): Promise<CreateSnapshotByTimeOffsetTemplateResponse> {
+    return this.request("CreateSnapshotByTimeOffsetTemplate", req, cb)
   }
 
   /**
@@ -1367,13 +1403,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 为点播域名设置投递 CLS 的目标。
+   * 修改大模型解析模板
    */
-  async SetCLSPushTarget(
-    req: SetCLSPushTargetRequest,
-    cb?: (error: string, rep: SetCLSPushTargetResponse) => void
-  ): Promise<SetCLSPushTargetResponse> {
-    return this.request("SetCLSPushTarget", req, cb)
+  async ModifyLLMComprehendTemplate(
+    req: ModifyLLMComprehendTemplateRequest,
+    cb?: (error: string, rep: ModifyLLMComprehendTemplateResponse) => void
+  ): Promise<ModifyLLMComprehendTemplateResponse> {
+    return this.request("ModifyLLMComprehendTemplate", req, cb)
   }
 
   /**
@@ -1644,24 +1680,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口用于合成媒体文件，可以达到以下效果：
-
-1. **画面旋转**：对视频、图片的画面旋转一定角度，或按照某个方向翻转。
-2. **声音控制**：升高降低视频、音频中声音的音量，或者对视频静音。
-3. **画面叠加**：将视频、图片中的画面依序叠加在一起，如实现“画中画”的效果。
-4. **声音混合**：将视频、音频中的声音混合在一起（混音）。
-5. **声音提取**：将视频中的音频提取出来（不保留画面）。
-6. **裁剪**：对视频、音频裁剪出指定时间段。
-7. **拼接**：对视频、音频、图片按时间顺序前后拼接。
-8. **转场**：将多段视频或图片拼接时，可以在段落之间添加转场效果。
-
-合成后的媒体封装格式可以是 MP4（视频）或 MP3（音频）。如使用事件通知，事件通知的类型为 [视频合成完成](https://cloud.tencent.com/document/product/266/43000)。
-     */
-  async ComposeMedia(
-    req: ComposeMediaRequest,
-    cb?: (error: string, rep: ComposeMediaResponse) => void
-  ): Promise<ComposeMediaResponse> {
-    return this.request("ComposeMedia", req, cb)
+   * 查询转自适应码流模板，支持根据条件，分页查询。
+   */
+  async DescribeAdaptiveDynamicStreamingTemplates(
+    req: DescribeAdaptiveDynamicStreamingTemplatesRequest,
+    cb?: (error: string, rep: DescribeAdaptiveDynamicStreamingTemplatesResponse) => void
+  ): Promise<DescribeAdaptiveDynamicStreamingTemplatesResponse> {
+    return this.request("DescribeAdaptiveDynamicStreamingTemplates", req, cb)
   }
 
   /**
@@ -2249,6 +2274,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 删除用户自定义图像异步处理模板。
+
+注意：模板 ID 为 10000 以下的为系统预置模板，不允许删除。
+     */
+  async DeleteLLMComprehendTemplate(
+    req: DeleteLLMComprehendTemplateRequest,
+    cb?: (error: string, rep: DeleteLLMComprehendTemplateResponse) => void
+  ): Promise<DeleteLLMComprehendTemplateResponse> {
+    return this.request("DeleteLLMComprehendTemplate", req, cb)
+  }
+
+  /**
    * 该接口用于生成场景化 AIGC 图片。<b>接口处于内测阶段，如需使用请[联系我们](https://cloud.tencent.com/online-service?from=sales_sales&source=PRESALE)，接口调用会产生实际费用。</b>
    */
   async CreateSceneAigcImageTask(
@@ -2704,13 +2741,24 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询转自适应码流模板，支持根据条件，分页查询。
-   */
-  async DescribeAdaptiveDynamicStreamingTemplates(
-    req: DescribeAdaptiveDynamicStreamingTemplatesRequest,
-    cb?: (error: string, rep: DescribeAdaptiveDynamicStreamingTemplatesResponse) => void
-  ): Promise<DescribeAdaptiveDynamicStreamingTemplatesResponse> {
-    return this.request("DescribeAdaptiveDynamicStreamingTemplates", req, cb)
+     * 该接口用于合成媒体文件，可以达到以下效果：
+
+1. **画面旋转**：对视频、图片的画面旋转一定角度，或按照某个方向翻转。
+2. **声音控制**：升高降低视频、音频中声音的音量，或者对视频静音。
+3. **画面叠加**：将视频、图片中的画面依序叠加在一起，如实现“画中画”的效果。
+4. **声音混合**：将视频、音频中的声音混合在一起（混音）。
+5. **声音提取**：将视频中的音频提取出来（不保留画面）。
+6. **裁剪**：对视频、音频裁剪出指定时间段。
+7. **拼接**：对视频、音频、图片按时间顺序前后拼接。
+8. **转场**：将多段视频或图片拼接时，可以在段落之间添加转场效果。
+
+合成后的媒体封装格式可以是 MP4（视频）或 MP3（音频）。如使用事件通知，事件通知的类型为 [视频合成完成](https://cloud.tencent.com/document/product/266/43000)。
+     */
+  async ComposeMedia(
+    req: ComposeMediaRequest,
+    cb?: (error: string, rep: ComposeMediaResponse) => void
+  ): Promise<ComposeMediaResponse> {
+    return this.request("ComposeMedia", req, cb)
   }
 
   /**
@@ -3358,6 +3406,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteEnhanceMediaTemplateResponse) => void
   ): Promise<DeleteEnhanceMediaTemplateResponse> {
     return this.request("DeleteEnhanceMediaTemplate", req, cb)
+  }
+
+  /**
+   * 为点播域名设置投递 CLS 的目标。
+   */
+  async SetCLSPushTarget(
+    req: SetCLSPushTargetRequest,
+    cb?: (error: string, rep: SetCLSPushTargetResponse) => void
+  ): Promise<SetCLSPushTargetResponse> {
+    return this.request("SetCLSPushTarget", req, cb)
   }
 
   /**

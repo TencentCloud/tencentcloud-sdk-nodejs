@@ -1068,6 +1068,20 @@ export interface ModifyEventConfigResponse {
 }
 
 /**
+ * DeleteLLMComprehendTemplate请求参数结构体
+ */
+export interface DeleteLLMComprehendTemplateRequest {
+  /**
+   * 大模型理解模板的唯一标识
+   */
+  Definition: number
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+}
+
+/**
  * 音画质检测任务的输出。
  */
 export interface QualityInspectTaskOutput {
@@ -1483,6 +1497,22 @@ export interface RebuildMediaRequest {
    * 保留字段，特殊用途时使用。
    */
   ExtInfo?: string
+}
+
+/**
+ * 大模型解析分段摘要解析配置
+ */
+export interface LLMComprehendSummary {
+  /**
+   * 分段摘要任务开关，可选值：
+- ON：开启分段摘要任务；
+- OFF：关闭分段摘要任
+   */
+  Switch: string
+  /**
+   * 扩展参数，其值为序列化的 json字符串。可参考[扩展参数说明](/document/product/862/104493#note)
+   */
+  ExtendedParameter?: string
 }
 
 /**
@@ -4464,6 +4494,16 @@ PicUrlExpireTime 时间点后图片将被删除）。
 }
 
 /**
+ * ModifyLLMComprehendTemplate返回参数结构体
+ */
+export interface ModifyLLMComprehendTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 智能分类结果信息
  */
 export interface AiAnalysisTaskClassificationOutput {
@@ -4523,11 +4563,16 @@ export interface ImportMediaKnowledgeRequest {
    */
   FileId: string
   /**
+   * 大模型理解模板的唯一标识
+   */
+  Definition?: number
+  /**
    * 需要导入知识库任务类型，可选值有：
 - AiAnalysis.DescriptionTask
 - SmartSubtitle.AsrFullTextTask
+   * @deprecated
    */
-  ImportTasks: Array<string>
+  ImportTasks?: Array<string>
 }
 
 /**
@@ -4632,6 +4677,16 @@ export interface CreateAigcVideoTaskResponse {
 }
 
 /**
+ * ModifyAdaptiveDynamicStreamingTemplate返回参数结构体
+ */
+export interface ModifyAdaptiveDynamicStreamingTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateRebuildMediaTemplate返回参数结构体
  */
 export interface CreateRebuildMediaTemplateResponse {
@@ -4679,33 +4734,13 @@ export interface AiSampleFaceInfo {
 }
 
 /**
- * 雪碧图信息
+ * 图片理解信息。
  */
-export interface MediaImageSpriteItem {
+export interface ImageUnderstandingInfo {
   /**
-   * 雪碧图规格，参见[雪碧图参数模板](https://cloud.tencent.com/document/product/266/33480#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+   * 图片理解项集合。
    */
-  Definition?: number
-  /**
-   * 雪碧图小图的高度。
-   */
-  Height?: number
-  /**
-   * 雪碧图小图的宽度。
-   */
-  Width?: number
-  /**
-   * 每一张雪碧图大图里小图的数量。
-   */
-  TotalCount?: number
-  /**
-   * 每一张雪碧图大图的地址。
-   */
-  ImageUrlSet?: Array<string>
-  /**
-   * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
-   */
-  WebVttUrl?: string
+  ImageUnderstandingSet?: Array<ImageUnderstandingItem>
 }
 
 /**
@@ -5457,6 +5492,18 @@ export interface FrameRateWithDenInfo {
 }
 
 /**
+ * 大模型解析文本转录解析配置
+ */
+export interface LLMComprehendAsrForUpdate {
+  /**
+   * 文本转录任务开关，可选值：
+- ON：开启文本转录任务；
+- OFF：关闭文本转录任务。
+   */
+  Switch?: string
+}
+
+/**
  * 溯源水印参数
  */
 export interface TraceWatermarkInput {
@@ -5810,9 +5857,9 @@ export interface AiRecognitionTaskAsrFullTextResultInput {
 }
 
 /**
- * ModifyReviewTemplate返回参数结构体
+ * DeleteLLMComprehendTemplate返回参数结构体
  */
-export interface ModifyReviewTemplateResponse {
+export interface DeleteLLMComprehendTemplateResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6377,6 +6424,46 @@ export interface SetCLSPushTargetRequest {
    * 要设置的中国大陆以外地区的日志推送目标。
    */
   OutsideChineseMainlandCLSTargetInfo?: AreaCLSTargetInfo
+}
+
+/**
+ * 大模型解析模板详情。
+ */
+export interface LLMComprehendTemplateItem {
+  /**
+   * 图片异步处理模板唯一标识。
+   */
+  Definition?: number
+  /**
+   * 图片异步处理模板名称。
+   */
+  Name?: string
+  /**
+   * 图片异步处理模板描述信息。
+   */
+  Comment?: string
+  /**
+   * 解析级别，可选值为：
+- Audio: 音频级解析
+- Video: 视频级解析
+   */
+  Level?: string
+  /**
+   * 分段摘要解析配置
+   */
+  Summary?: LLMComprehendSummary
+  /**
+   * 文本转录解析配置
+   */
+  Asr?: LLMComprehendAsr
+  /**
+   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  CreateTime?: string
+  /**
+   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -8438,21 +8525,27 @@ export interface AigcVideoTaskInputFileInfo {
   /**
    * 参考类型，GV模型适用。
 注意：
-
-当使用GV模型时，可作为参考方式,可选asset(素材)、style(风格)。
+当使用 GV 模型时，可作为参考方式，可选值：asset 表示素材、style 表示风格；
+当使用 Kling 模型以及 Category 为 Video 时，可区分参考视频类型，feature 表示特征参考视频，base 表示待编辑视频。
    */
   ReferenceType?: string
   /**
-   * 主体id.
+   * 主体 Id。
 适用模型：Vidu-q2.
-当需要对图片标识主体时，需要每个图片都带主体id，后续生成时可以通过@主体id的方式使用。
+当需要对图片标识主体时，需要每个图片都带主体 Id，后续生成时可以通过@主体 Id 的方式使用。当 Category 为 Image 时有效。
    */
   ObjectId?: string
   /**
-   * 适用于Vidu-q2模型。
-当全部图片携带主体id时，可针对主体设置音色id。 音色列表：https://shengshu.feishu.cn/sheets/EgFvs6DShhiEBStmjzccr5gonOg
+   * 适用于 Vidu-q2 模型。
+当全部图片携带主体 Id 时，可针对主体设置音色 Id。 当 Category 为 Image 时有效。音色列表：https://shengshu.feishu.cn/sheets/EgFvs6DShhiEBStmjzccr5gonOg
    */
   VoiceId?: string
+  /**
+   * 是否保留视频原声。当 Category 为 Video 时有效。取值如下：
+<li>Enabled：保留</li>
+<li>Disabled：不保留</li>
+   */
+  KeepOriginalSound?: string
 }
 
 /**
@@ -9979,6 +10072,24 @@ export interface ModifyMediaInfoResponse {
 }
 
 /**
+ * DescribeLLMComprehendTemplates返回参数结构体
+ */
+export interface DescribeLLMComprehendTemplatesResponse {
+  /**
+   * 符合过滤条件的记录总数。
+   */
+  TotalCount?: number
+  /**
+   * 图片异步处理模板详情列表。
+   */
+  LLMComprehendTemplateSet?: Array<LLMComprehendTemplateItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyReviewTemplate请求参数结构体
  */
 export interface ModifyReviewTemplateRequest {
@@ -10203,46 +10314,17 @@ export interface RestoreMediaResponse {
 }
 
 /**
- * 对视频按指定时间点截图任务结果类型
+ * 图片理解信息项。
  */
-export interface MediaProcessTaskSnapshotByTimeOffsetResult {
+export interface ImageUnderstandingItem {
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   * 模板id。
    */
-  Status?: string
+  Definition?: number
   /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   * 任务输出文件。
    */
-  ErrCodeExt?: string
-  /**
-   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
-   */
-  ErrCode?: number
-  /**
-   * 错误信息。
-   */
-  Message?: string
-  /**
-   * 对视频按指定时间点截图任务输入。
-   */
-  Input?: SnapshotByTimeOffsetTaskInput
-  /**
-   * 对视频按指定时间点截图任务输出。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Output?: MediaSnapshotByTimeOffsetItem
-  /**
-   * 对视频按指定时间点截图任务进度，取值范围 [0-100] 。
-   */
-  Progress?: number
-  /**
-   * 时间点截图任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  BeginProcessTime?: string
-  /**
-   * 时间点截图任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  FinishTime?: string
+  OutputFile?: Array<MPSOutputFileInfo>
 }
 
 /**
@@ -10416,6 +10498,9 @@ export interface CreateAigcVideoTaskRequest {
     motion_control 表示动作控制；
     avatar_i2v 表示数字人；
     lip_sync 表示对口型；</li>
+<li>当 ModelName 为 Vidu 时：
+    template_effect 表示特效模板；
+</li>
 <li>其他 ModelName 暂不支持。</li>
    */
   SceneType?: string
@@ -10572,9 +10657,13 @@ export interface DescribeHeadTailTemplatesRequest {
 }
 
 /**
- * ModifyAdaptiveDynamicStreamingTemplate返回参数结构体
+ * CreateLLMComprehendTemplate返回参数结构体
  */
-export interface ModifyAdaptiveDynamicStreamingTemplateResponse {
+export interface CreateLLMComprehendTemplateResponse {
+  /**
+   * 大模型理解模板的唯一标识
+   */
+  Definition?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11111,6 +11200,49 @@ export interface EnhanceConfigForUpdate {
 }
 
 /**
+ * 对视频按指定时间点截图任务结果类型
+ */
+export interface MediaProcessTaskSnapshotByTimeOffsetResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 对视频按指定时间点截图任务输入。
+   */
+  Input?: SnapshotByTimeOffsetTaskInput
+  /**
+   * 对视频按指定时间点截图任务输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: MediaSnapshotByTimeOffsetItem
+  /**
+   * 对视频按指定时间点截图任务进度，取值范围 [0-100] 。
+   */
+  Progress?: number
+  /**
+   * 时间点截图任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  BeginProcessTime?: string
+  /**
+   * 时间点截图任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  FinishTime?: string
+}
+
+/**
  * 图片画面审核涉及令人不适宜信息的任务结果类型
  */
 export interface PoliticalImageResult {
@@ -11276,6 +11408,42 @@ export interface LiveRealTimeClipMediaSegmentInfo {
 }
 
 /**
+ * ModifyLLMComprehendTemplate请求参数结构体
+ */
+export interface ModifyLLMComprehendTemplateRequest {
+  /**
+   * 大模型理解模板的唯一标识
+   */
+  Definition: number
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 大模型解析模板名称，长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 大模型解析模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 解析模型，可选值为：
+- Basic: 基础模型
+- Pro: 优化模型
+   */
+  Model?: string
+  /**
+   * 分段摘要解析配置
+   */
+  Summary?: LLMComprehendSummaryForUpdate
+  /**
+   * 文本转录解析配置
+   */
+  Asr?: LLMComprehendAsrForUpdate
+}
+
+/**
  * DeleteImageSpriteTemplate返回参数结构体
  */
 export interface DeleteImageSpriteTemplateResponse {
@@ -11370,6 +11538,10 @@ export interface ProcessImageAsyncTaskInput {
    * 图片异步处理模板ID。
    */
   Definition: number
+  /**
+   * 图片异步处理扩展参数。
+   */
+  ExtendedParameter?: ProcessImageAsyncInputExtendedParameter
 }
 
 /**
@@ -11827,6 +11999,16 @@ export interface AdvancedSuperResolutionConfig {
    * 目标图片高度，不能超过4096。
    */
   Height?: number
+  /**
+   * 目标图片长边长度，不能超过4096。
+注意：当Mode等于aspect或fixed，且未配置Width和Height字段时使用此配置。
+   */
+  LongSide?: number
+  /**
+   * 目标图片短边长度，不能超过4096。
+注意：当Mode等于aspect或fixed，且未配置Width和Height字段时使用此配置。
+   */
+  ShortSide?: number
 }
 
 /**
@@ -12427,6 +12609,16 @@ export interface SceneAigcVideoTask {
    * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
    */
   SessionContext?: string
+}
+
+/**
+ * 图片异步处理扩展参数。
+ */
+export interface ProcessImageAsyncInputExtendedParameter {
+  /**
+   * 输入模型的提示词。
+   */
+  Prompts?: Array<string>
 }
 
 /**
@@ -14586,6 +14778,38 @@ export interface DeleteReviewTemplateRequest {
 }
 
 /**
+ * CreateLLMComprehendTemplate请求参数结构体
+ */
+export interface CreateLLMComprehendTemplateRequest {
+  /**
+   * 解析级别，可选值为：
+- Audio: 音频级解析
+- Video: 视频级解析
+   */
+  Level: string
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 大模型解析模板名称，长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 大模型解析模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 分段摘要解析配置
+   */
+  Summary?: LLMComprehendSummary
+  /**
+   * 文本转录解析配置
+   */
+  Asr?: LLMComprehendAsr
+}
+
+/**
  * 智能封面结果信息
  */
 export interface AiAnalysisTaskCoverOutput {
@@ -14847,6 +15071,10 @@ export interface ProcessImageAsyncOutput {
    * 图片异步处理任务的输出文件信息。
    */
   FileInfo?: ProcessImageAsyncOutputFileInfo
+  /**
+   * 图片理解结果。
+   */
+  OutputText?: string
 }
 
 /**
@@ -15580,6 +15808,28 @@ export interface PornOcrReviewTemplateInfo {
    * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * DescribeLLMComprehendTemplates请求参数结构体
+ */
+export interface DescribeLLMComprehendTemplatesRequest {
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 大模型解析模板唯一标识过滤条件，数组长度最大值：100。
+   */
+  Definitions?: Array<number | bigint>
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数，默认值：10，最大值：100。
+   */
+  Limit?: number
 }
 
 /**
@@ -16663,6 +16913,36 @@ export interface AccelerateAreaInfo {
    * 加速域名对应的 CNAME 域名。
    */
   TencentEdgeDomain?: string
+}
+
+/**
+ * 雪碧图信息
+ */
+export interface MediaImageSpriteItem {
+  /**
+   * 雪碧图规格，参见[雪碧图参数模板](https://cloud.tencent.com/document/product/266/33480#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+   */
+  Definition?: number
+  /**
+   * 雪碧图小图的高度。
+   */
+  Height?: number
+  /**
+   * 雪碧图小图的宽度。
+   */
+  Width?: number
+  /**
+   * 每一张雪碧图大图里小图的数量。
+   */
+  TotalCount?: number
+  /**
+   * 每一张雪碧图大图的地址。
+   */
+  ImageUrlSet?: Array<string>
+  /**
+   * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
+   */
+  WebVttUrl?: string
 }
 
 /**
@@ -18503,6 +18783,11 @@ export interface MediaInfo {
    * MPS智能媒资信息
    */
   MPSAiMediaInfo?: MPSAiMediaInfo
+  /**
+   * 图片理解信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageUnderstandingInfo?: ImageUnderstandingInfo
 }
 
 /**
@@ -19985,6 +20270,16 @@ export interface ModifySnapshotByTimeOffsetTemplateRequest {
 }
 
 /**
+ * ModifyReviewTemplate返回参数结构体
+ */
+export interface ModifyReviewTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateProcessImageAsyncTemplate请求参数结构体
  */
 export interface CreateProcessImageAsyncTemplateRequest {
@@ -21241,6 +21536,10 @@ export interface CreateAigcImageTaskRequest {
    * 生图任务的输出媒体文件配置。
    */
   OutputConfig?: AigcImageOutputConfig
+  /**
+   * 输入文件的区域信息。当文件url是国外地址时候，可选Oversea。默认Mainland。
+   */
+  InputRegion?: string
   /**
    * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
    */
@@ -22532,6 +22831,22 @@ export interface DescribeQualityInspectTemplatesResponse {
 }
 
 /**
+ * 大模型解析分段摘要解析配置
+ */
+export interface LLMComprehendSummaryForUpdate {
+  /**
+   * 分段摘要任务开关，可选值：
+- ON：开启分段摘要任务；
+- OFF：关闭分段摘要任
+   */
+  Switch?: string
+  /**
+   * 扩展参数，其值为序列化的 json字符串。可参考[扩展参数说明](/document/product/862/104493#note)
+   */
+  ExtendedParameter?: string
+}
+
+/**
  * 语音关键词识别结果。
  */
 export interface AiRecognitionTaskAsrWordsResult {
@@ -23777,6 +24092,18 @@ export interface DescribeMediaProcessUsageDataRequest {
 <li>JITTranscoding: 即时转码</li>
 <li>VideoSnapshot: 视频截图</li>
 <li>JITEncryption: 即时加密</li>
+<li>MediaEnhancement: 音视频增强</li>
+<li>ImageCompression: 图片压缩</li>
+<li>ImageEnhancement: 图片增强</li>
+<li>ImageSuperResolution: 图片超分</li>
+<li>ImageAdvanceCompression: 图片高级压缩</li>
+<li>ImageUnderstanding: 图片理解</li>
+<li>AddTraceWatermark: 添加溯源水印</li>
+<li>AddBlindWatermark: 添加盲水印</li>
+<li>AddNagraWatermark: 添加NAGRA数字水印</li>
+<li>ExtractTraceWatermark: 提取溯源水印</li>
+<li>ExtractBlindWatermark: 提取盲水印</li>
+<li>ExtractNagraWatermark: 提取NAGRA数字水印</li>
 
    */
   Type?: string
@@ -24102,6 +24429,18 @@ export interface PoliticalAsrReviewTemplateInfo {
    * 判定涉嫌违规的分数阈值，当音视频审核达到该分数以上，认为涉嫌违规，不填默认为 100 分。取值范围：0~100。
    */
   BlockConfidence?: number
+}
+
+/**
+ * 大模型解析文本转录解析配置
+ */
+export interface LLMComprehendAsr {
+  /**
+   * 文本转录任务开关，可选值：
+- ON：开启文本转录任务；
+- OFF：关闭文本转录任务。
+   */
+  Switch: string
 }
 
 /**

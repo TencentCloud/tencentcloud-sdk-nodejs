@@ -20,6 +20,10 @@
  */
 export interface CreateFileSystemResponse {
   /**
+   * 创建成功返回的文件系统ID：
+   */
+  FileSystemId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -108,25 +112,97 @@ export interface ClientNodeAttribute {
 }
 
 /**
- * GooseFSx文件系统的属性
+ * 数据预热任务参数
  */
-export interface GooseFSxAttribute {
+export interface DistributedLoadAttrs {
   /**
-   * GooseFSx的型号
+   * 预热类型，枚举值 LoadByPath｜LoadByList
    */
-  Model?: string
+  LoadType: string
   /**
-   * 容量单位是GB, 例如4608(4.5TB)
+   * 是否跳过相同文件，默认为 true
    */
-  Capacity?: number
+  SkipIfExists?: boolean
   /**
-   * 要关联映射的bucket列表
+   * 预热路径，入参单条挂载路径。入参数LoadType为LoadByPath，该参数不应为空
    */
-  MappedBucketList?: Array<MappedBucket>
+  LoadByPath?: string
   /**
-   * 客户侧管理节点信息
+   * 通过文件列表批量预热，入参为 cos://bucket-appid/ 开头的 COS 路径，且仅支持 txt 格式文件，长度不能超过255个字符。入参数LoadType为LoadByList，该参数不应为空
    */
-  ClientManagerNodeList?: Array<ClientClusterManagerNodeInfo>
+  LoadByList?: string
+  /**
+   * 副本数配置，枚举值，可选值 SingleReplica（单副本，默认）｜MaxReplica（最大副本）
+   */
+  Replica?: string
+  /**
+   * 同步执行元数据预热，并基于预热后的元数据执行 DistributedLoad。默认为 false
+   */
+  MetadataSync?: boolean
+}
+
+/**
+ * 预热任务参数
+ */
+export interface LoadTaskAttrs {
+  /**
+   * 预热任务 ID
+   */
+  TaskId?: string
+  /**
+   * 预热任务类型，枚举值，MetadataLoad｜DistributedLoad
+   */
+  TaskType?: string
+  /**
+   * 任务描述，支持中文
+   */
+  Description?: string
+  /**
+   * 任务优先级，数值越高代表优先级越高，边界值 1-9999，默认值为 1
+   */
+  Priority?: number
+  /**
+   * 元数据预热任务参数，用于仅预热元数据时入参。入参数TaskType为MetadataLoad时，该参数不应为空。
+   */
+  MetadataLoadAttrs?: MetadataLoadAttrs
+  /**
+   * 数据预热任务参数。入参数TaskType为DistributedLoad时，该参数不应为空。
+   */
+  DistributedLoadAttrs?: DistributedLoadAttrs
+  /**
+   * 将任务执行报告写入 COS 的路径，如果不需要报告则入参空
+   */
+  ReportPath?: string
+  /**
+   * 枚举，Completed，Running，Waiting，Cancelled
+   */
+  State?: string
+  /**
+   * 任务执行信息，打印预热文件成功个数，失败个数，预热耗时信息
+   */
+  TaskMessage?: string
+  /**
+   * 预热任务创建时间
+   */
+  CreateTime?: string
+  /**
+   * 预热任务变更时间
+   */
+  ModifyTime?: string
+  /**
+   * 任务提交账号，子账号或服务角色 ID
+   */
+  Requester?: string
+}
+
+/**
+ * UpdateLoadTaskPriority返回参数结构体
+ */
+export interface UpdateLoadTaskPriorityResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -155,6 +231,20 @@ export interface DescribeFileSystemsResponse {
    * 总共的文件系统数量
    */
   TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLoadTask返回参数结构体
+ */
+export interface DescribeLoadTaskResponse {
+  /**
+   * 预热任务参数
+   */
+  LoadTaskAttrs?: LoadTaskAttrs
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -262,17 +352,25 @@ export interface FSAttribute {
 }
 
 /**
- * DescribeFilesets返回参数结构体
+ * 元数据预热参数
  */
-export interface DescribeFilesetsResponse {
+export interface MetadataLoadAttrs {
   /**
-   * Fileset列表
+   * 预热类型，枚举值 LoadByPath｜LoadByList
    */
-  FilesetList?: Array<FilesetInfo>
+  LoadType: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 是否跳过相同文件，默认为 true
    */
-  RequestId?: string
+  SkipIfExists?: boolean
+  /**
+   * 预热路径，入参单条挂载路径，长度不能超过255个字符。入参数LoadType为LoadByPath，该参数不应为空
+   */
+  LoadByPath?: string
+  /**
+   * 通过文件列表批量预热，入参为 cos://bucket-appid/ 开头的 COS 路径，且仅支持 txt 格式文件，长度不能超过255个字符。入参数LoadType为LoadByList，该参数不应为空
+   */
+  LoadByList?: string
 }
 
 /**
@@ -293,6 +391,20 @@ export interface DescribeClusterRoleTokenResponse {
  * BatchDeleteClientNodes返回参数结构体
  */
 export interface BatchDeleteClientNodesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateLoadTask返回参数结构体
+ */
+export interface CreateLoadTaskResponse {
+  /**
+   * 预热任务 ID
+   */
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -371,6 +483,18 @@ export interface SubnetInfo {
    * 子网ID
    */
   SubnetId?: string
+  /**
+   * 应用的集群；可以是集群id,也可以是All
+   */
+  UsedCluster?: string
+  /**
+   * cidr，只有当IsDirectConnect为true时才生效
+   */
+  CIDR?: string
+  /**
+   * 是否为专线接入场景
+   */
+  IsDirectConnect?: boolean
 }
 
 /**
@@ -384,17 +508,43 @@ export interface DeleteFileSystemRequest {
 }
 
 /**
- * CreateFileset返回参数结构体
+ * CancelLoadTask返回参数结构体
  */
-export interface CreateFilesetResponse {
-  /**
-   * Fileset id
-   */
-  FsetId?: string
+export interface CancelLoadTaskResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 创建预热任务
+ */
+export interface LoadTaskCreationAttrs {
+  /**
+   * 预热任务类型，枚举值，MetadataLoad｜DistributedLoad。
+   */
+  TaskType: string
+  /**
+   * 任务优先级，数值越高代表优先级越高，边界值 1-9999，默认值为 1
+   */
+  Priority?: number
+  /**
+   * 任务描述，支持中文
+   */
+  Description?: string
+  /**
+   * 元数据预热任务参数，用于仅预热元数据时入参。入参数TaskType为MetadataLoad时，该参数不应为空。
+   */
+  MetadataLoadAttrs?: MetadataLoadAttrs
+  /**
+   * 数据预热任务参数。入参数TaskType为DistributedLoad时，该参数不应为空。
+   */
+  DistributedLoadAttrs?: DistributedLoadAttrs
+  /**
+   * 将任务执行报告写入 COS 的路径，如果不需要报告则入参空
+   */
+  ReportPath?: string
 }
 
 /**
@@ -421,8 +571,9 @@ export interface GooseFSxBuildElement {
   Capacity: number
   /**
    * 要关联映射的bucket列表
+   * @deprecated
    */
-  MappedBucketList: Array<MappedBucket>
+  MappedBucketList?: Array<MappedBucket>
 }
 
 /**
@@ -446,13 +597,27 @@ export interface DescribeFilesetGeneralConfigRequest {
 }
 
 /**
+ * UpdateLoadTaskPriority请求参数结构体
+ */
+export interface UpdateLoadTaskPriorityRequest {
+  /**
+   * 集群 ID
+   */
+  ClusterId: string
+  /**
+   * 预热任务 ID
+   */
+  TaskId: string
+  /**
+   * 任务优先级，数值越高代表优先级越高，边界值 1-9999，默认值为 1
+   */
+  Priority: number
+}
+
+/**
  * CreateFileSystem请求参数结构体
  */
 export interface CreateFileSystemRequest {
-  /**
-   * 文件系统类型, 可填goosefs和goosefsx
-   */
-  Type: string
   /**
    * 文件系统名
    */
@@ -474,6 +639,11 @@ export interface CreateFileSystemRequest {
    */
   Zone: string
   /**
+   * 文件系统类型, 可填goosefs和goosefsx
+   * @deprecated
+   */
+  Type?: string
+  /**
    * 文件系统关联的tag
    */
   Tag?: Array<Tag>
@@ -492,9 +662,13 @@ export interface CreateFileSystemRequest {
 }
 
 /**
- * DeleteCrossVpcSubnetSupportForClientNode返回参数结构体
+ * DescribeFilesets返回参数结构体
  */
-export interface DeleteCrossVpcSubnetSupportForClientNodeResponse {
+export interface DescribeFilesetsResponse {
+  /**
+   * Fileset列表
+   */
+  FilesetList?: Array<FilesetInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -513,6 +687,10 @@ export interface BuildClientNodeMountCommandRequest {
    * 自定义挂载目录的绝对路径, 如果未指定, 则会使用默认值, 格式/goosefsx/${fs_id}-proxy. 比如/goosefsx/x-c60-a2b3d4-proxy
    */
   CustomMountDir?: string
+  /**
+   * 客户端集群ID
+   */
+  ClusterId?: string
 }
 
 /**
@@ -558,6 +736,20 @@ export interface DetachFileSystemBucketRequest {
 }
 
 /**
+ * CancelLoadTask请求参数结构体
+ */
+export interface CancelLoadTaskRequest {
+  /**
+   * 集群 ID
+   */
+  ClusterId: string
+  /**
+   * 预热任务 ID
+   */
+  TaskId: string
+}
+
+/**
  * 查询Client Token
  */
 export interface ClientToken {
@@ -581,6 +773,16 @@ export interface ClientToken {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Token?: string
+}
+
+/**
+ * DescribeFileSystemBuckets请求参数结构体
+ */
+export interface DescribeFileSystemBucketsRequest {
+  /**
+   * 文件系统ID
+   */
+  FileSystemId: string
 }
 
 /**
@@ -652,6 +854,20 @@ export interface QueryDataRepositoryBandwidthRequest {
 }
 
 /**
+ * DescribeLoadTask请求参数结构体
+ */
+export interface DescribeLoadTaskRequest {
+  /**
+   * 集群 ID
+   */
+  ClusterId: string
+  /**
+   * 预热任务 ID
+   */
+  TaskId: string
+}
+
+/**
  * 客户侧集群管理节点信息
  */
 export interface ClientClusterManagerNodeInfo {
@@ -667,6 +883,10 @@ export interface ClientClusterManagerNodeInfo {
    * 初始密码
    */
   InitialPassword?: string
+  /**
+   * 所属集群id
+   */
+  ClusterId?: string
 }
 
 /**
@@ -728,9 +948,9 @@ export interface FilesetInfo {
 }
 
 /**
- * ExpandCapacity返回参数结构体
+ * UpdateFileset返回参数结构体
  */
-export interface ExpandCapacityResponse {
+export interface UpdateFilesetResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -779,16 +999,24 @@ export interface BatchDeleteClientNodesRequest {
    * 是否单集群，默认是false
    */
   SingleClusterFlag?: boolean
+  /**
+   * 客户端集群id
+   */
+  ClusterId?: string
 }
 
 /**
- * DescribeFileSystemBuckets请求参数结构体
+ * CreateFileset返回参数结构体
  */
-export interface DescribeFileSystemBucketsRequest {
+export interface CreateFilesetResponse {
   /**
-   * 文件系统ID
+   * Fileset id
    */
-  FileSystemId: string
+  FsetId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -809,16 +1037,6 @@ export interface QueryCrossVpcSubnetSupportForClientNodeResponse {
    * 支持的子网信息集合
    */
   SubnetInfoCollection?: Array<SubnetInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * UpdateFileset返回参数结构体
- */
-export interface UpdateFilesetResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -888,13 +1106,9 @@ export interface CreateDataRepositoryTaskResponse {
 }
 
 /**
- * DescribeClusterRoles返回参数结构体
+ * ExpandCapacity返回参数结构体
  */
-export interface DescribeClusterRolesResponse {
-  /**
-   * 集群角色
-   */
-  ClusterRoles?: Array<ClusterRole>
+export interface ExpandCapacityResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -902,25 +1116,13 @@ export interface DescribeClusterRolesResponse {
 }
 
 /**
- * ClusterRole
+ * DeleteCrossVpcSubnetSupportForClientNode返回参数结构体
  */
-export interface ClusterRole {
+export interface DeleteCrossVpcSubnetSupportForClientNodeResponse {
   /**
-   * 集群ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ClusterId?: string
-  /**
-   * 角色名
-   */
-  RoleName?: string
-  /**
-   * 描述
-   */
-  Description?: string
-  /**
-   * 目录列表
-   */
-  DirectoryList?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -960,6 +1162,58 @@ export interface DescribeDataRepositoryTaskStatusResponse {
 }
 
 /**
+ * ListLoadTasks返回参数结构体
+ */
+export interface ListLoadTasksResponse {
+  /**
+   * 预热任务参数
+   */
+  LoadTaskList?: Array<LoadTaskAttrs>
+  /**
+   * 任务数总量
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListLoadTasks请求参数结构体
+ */
+export interface ListLoadTasksRequest {
+  /**
+   * 集群 ID
+   */
+  ClusterId: string
+  /**
+   * 偏移量
+   */
+  Offset: number
+  /**
+   * 偏移量
+   */
+  Limit: number
+  /**
+   * 任务创建起始时间戳，默认为3天前：当前时间戳-86400*3
+   */
+  StartTimestamp?: number
+  /**
+   * 任务变更时间戳
+   */
+  EndTimestamp?: number
+  /**
+   * 筛选任务状态，枚举Waiting,Running,Canceled,Completed。默认返回所有任务
+   */
+  State?: string
+  /**
+   * 筛选优先级任务，默认返回所有任务
+   */
+  Priority?: number
+}
+
+/**
  * BatchAddClientNodes请求参数结构体
  */
 export interface BatchAddClientNodesRequest {
@@ -975,6 +1229,10 @@ export interface BatchAddClientNodesRequest {
    * 是否单集群默认是false
    */
   SingleClusterFlag?: boolean
+  /**
+   * 客户端集群id
+   */
+  ClusterId?: string
 }
 
 /**
@@ -1034,6 +1292,28 @@ export interface DescribeFileSystemBucketsResponse {
 }
 
 /**
+ * GooseFSx文件系统的属性
+ */
+export interface GooseFSxAttribute {
+  /**
+   * GooseFSx的型号
+   */
+  Model?: string
+  /**
+   * 容量单位是GB, 例如4608(4.5TB)
+   */
+  Capacity?: number
+  /**
+   * 要关联映射的bucket列表
+   */
+  MappedBucketList?: Array<MappedBucket>
+  /**
+   * 客户侧管理节点信息
+   */
+  ClientManagerNodeList?: Array<ClientClusterManagerNodeInfo>
+}
+
+/**
  * DescribeClientNodes请求参数结构体
  */
 export interface DescribeClientNodesRequest {
@@ -1072,20 +1352,6 @@ export interface ModifyDataRepositoryBandwidthRequest {
 }
 
 /**
- * DescribeClusterRoles请求参数结构体
- */
-export interface DescribeClusterRolesRequest {
-  /**
-   * 集群ID
-   */
-  ClusterId: string
-  /**
-   * 角色名
-   */
-  RoleName?: string
-}
-
-/**
  * CreateDataRepositoryTask请求参数结构体
  */
 export interface CreateDataRepositoryTaskRequest {
@@ -1117,6 +1383,14 @@ export interface CreateDataRepositoryTaskRequest {
    * 文件列表下载地址，以http开头
    */
   TextLocation?: string
+  /**
+   * 是否开启自定义路径(暂时仅供预热使用)
+   */
+  EnableDataFlowSubPath?: boolean
+  /**
+   * 自定义路径(暂时仅供预热使用)
+   */
+  DataFlowSubPath?: string
 }
 
 /**
@@ -1131,6 +1405,20 @@ export interface DescribeClientNodesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateLoadTask请求参数结构体
+ */
+export interface CreateLoadTaskRequest {
+  /**
+   * 集群 ID
+   */
+  ClusterId: string
+  /**
+   * 创建预热任务参数
+   */
+  LoadTaskCreationAttrs: LoadTaskCreationAttrs
 }
 
 /**

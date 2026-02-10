@@ -18,16 +18,6 @@ const client = new tencentcloud.goosefs.v20220519.Client({
 })
 describe("goosefs.v20220519.test.js", function () {
 
-it("goosefs.v20220519.DescribeClusterRoles", async function () {
-    try {
-       const data = await client.DescribeClusterRoles({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("goosefs.v20220519.ExpandCapacity", async function () {
     try {
        const data = await client.ExpandCapacity({})
@@ -68,6 +58,16 @@ it("goosefs.v20220519.DescribeClusterClientToken", async function () {
     }
 })
 
+it("goosefs.v20220519.DescribeLoadTask", async function () {
+    try {
+       const data = await client.DescribeLoadTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("goosefs.v20220519.ModifyDataRepositoryBandwidth", async function () {
     try {
        const data = await client.ModifyDataRepositoryBandwidth({})
@@ -98,9 +98,39 @@ it("goosefs.v20220519.CreateDataRepositoryTask", async function () {
     }
 })
 
+it("goosefs.v20220519.ListLoadTasks", async function () {
+    try {
+       const data = await client.ListLoadTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("goosefs.v20220519.BuildClientNodeMountCommand", async function () {
     try {
        const data = await client.BuildClientNodeMountCommand({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("goosefs.v20220519.UpdateLoadTaskPriority", async function () {
+    try {
+       const data = await client.UpdateLoadTaskPriority({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("goosefs.v20220519.CancelLoadTask", async function () {
+    try {
+       const data = await client.CancelLoadTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,6 +171,16 @@ it("goosefs.v20220519.DeleteFileset", async function () {
 it("goosefs.v20220519.DescribeClientNodes", async function () {
     try {
        const data = await client.DescribeClientNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("goosefs.v20220519.CreateLoadTask", async function () {
+    try {
+       const data = await client.CreateLoadTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

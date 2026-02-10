@@ -21,6 +21,7 @@ import {
   CreateRoomRequest,
   DescribeQuestionListRequest,
   ModifyRoomResponse,
+  LoginOriginIdRequest,
   DescribeAppDetailResponse,
   DeleteSupervisorRequest,
   DeleteUserRequest,
@@ -30,6 +31,7 @@ import {
   DeleteUserResponse,
   DeleteWhiteBoardSnapshotRequest,
   BatchDeleteRecordRequest,
+  DescribePlayRecordsResponse,
   ModifyAppResponse,
   UnblockKickedUserResponse,
   CreateGroupLiveCodesRequest,
@@ -47,8 +49,9 @@ import {
   BatchAddGroupMemberResponse,
   ModifyUserProfileResponse,
   GetWatermarkResponse,
-  LoginOriginIdRequest,
+  DescribePlaybackListResponse,
   BatchRegisterResponse,
+  PlaybackItem,
   BindDocumentToRoomResponse,
   StopRecordResponse,
   CreateGroupWithSubGroupRequest,
@@ -97,6 +100,7 @@ import {
   DescribeGroupLiveCodesRequest,
   EventInfo,
   DescribeScoreListRequest,
+  TokenResult,
   DescribeRecordStreamRequest,
   AppConfig,
   DeleteRecordResponse,
@@ -109,14 +113,17 @@ import {
   DescribeScoreListResponse,
   DescribeDocumentRequest,
   BatchDeleteRecordResponse,
+  BatchGetPlaybackTokenRequest,
   FaceMsgContent,
   SetAppCustomContentRequest,
   DescribeUserRequest,
   RegisterUserResponse,
   StartRoomResponse,
+  DescribePlaybackListRequest,
   BindDocumentToRoomRequest,
   CreateDocumentRequest,
   GetRoomMessageResponse,
+  GroupBaseInfo,
   BatchUserInfo,
   BatchAddGroupMemberRequest,
   TransferItem,
@@ -135,9 +142,9 @@ import {
   DescribeRecordTaskResponse,
   DescribeSupervisorsRequest,
   MessageList,
-  DescribeGroupRequest,
+  DeleteGroupMemberRequest,
   EndRoomResponse,
-  GetWatermarkRequest,
+  GetPlaybackTokenRequest,
   EndRoomRequest,
   CreateGroupWithMembersResponse,
   BatchDeleteGroupMemberRequest,
@@ -145,12 +152,13 @@ import {
   ModifyAppRequest,
   UnbindDocumentFromRoomRequest,
   MutedAccountList,
-  GroupBaseInfo,
+  BackgroundPictureConfig,
   LoginUserRequest,
   StopRecordRequest,
   SingleStreamInfo,
   GetRoomEventResponse,
   AnswerStat,
+  GetPlaybackTokenResponse,
   SendRoomNormalMessageResponse,
   DeleteSupervisorResponse,
   SetWatermarkResponse,
@@ -169,6 +177,7 @@ import {
   KickUserFromRoomRequest,
   SetWatermarkRequest,
   GetRoomsRequest,
+  BatchGetPlaybackTokenResponse,
   ForbidSendMsgResponse,
   SendRoomNormalMessageRequest,
   DescribeRecordTaskRequest,
@@ -185,18 +194,22 @@ import {
   SceneItem,
   DeleteRoomRequest,
   BatchCreateGroupWithMembersRequest,
-  DeleteGroupMemberRequest,
+  DescribeGroupRequest,
   CreateSupervisorRequest,
-  BackgroundPictureConfig,
+  DeletePlaybackItemRequest,
   DeleteAppCustomContentResponse,
-  DescribeCurrentMemberListResponse,
   ModifyGroupResponse,
+  DescribeCurrentMemberListResponse,
+  GetWatermarkRequest,
   DescribeGroupListResponse,
   ModifyRoomRequest,
   CustomRecordInfo,
   DescribeDeveloperResponse,
+  DeletePlaybackItemResponse,
   TextMsgContent,
   TextMarkConfig,
+  PlayRecord,
+  DescribePlayRecordsRequest,
 } from "./lcic_models"
 
 /**
@@ -216,6 +229,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAppDetailResponse) => void
   ): Promise<DescribeAppDetailResponse> {
     return this.request("DescribeAppDetail", req, cb)
+  }
+
+  /**
+   * 获取巡课列表
+   */
+  async DescribeSupervisors(
+    req: DescribeSupervisorsRequest,
+    cb?: (error: string, rep: DescribeSupervisorsResponse) => void
+  ): Promise<DescribeSupervisorsResponse> {
+    return this.request("DescribeSupervisors", req, cb)
   }
 
   /**
@@ -321,13 +344,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口用于修改用户信息，例如头像、昵称（用户名）等。注意，课中的用户信息不会立即同步修改，需待下次上课时，修改后的信息才会更新显示。
+   * 查询录制信息
    */
-  async ModifyUserProfile(
-    req: ModifyUserProfileRequest,
-    cb?: (error: string, rep: ModifyUserProfileResponse) => void
-  ): Promise<ModifyUserProfileResponse> {
-    return this.request("ModifyUserProfile", req, cb)
+  async DescribeRecord(
+    req: DescribeRecordRequest,
+    cb?: (error: string, rep: DescribeRecordResponse) => void
+  ): Promise<DescribeRecordResponse> {
+    return this.request("DescribeRecord", req, cb)
   }
 
   /**
@@ -413,13 +436,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 解禁从房间里面踢出的用户
+   * 获取信令录制回放token，用于回放指定课堂时鉴权
    */
-  async UnblockKickedUser(
-    req: UnblockKickedUserRequest,
-    cb?: (error: string, rep: UnblockKickedUserResponse) => void
-  ): Promise<UnblockKickedUserResponse> {
-    return this.request("UnblockKickedUser", req, cb)
+  async GetPlaybackToken(
+    req: GetPlaybackTokenRequest,
+    cb?: (error: string, rep: GetPlaybackTokenResponse) => void
+  ): Promise<GetPlaybackTokenResponse> {
+    return this.request("GetPlaybackToken", req, cb)
   }
 
   /**
@@ -433,13 +456,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取巡课列表
+   * 批量获取信令录制回放token，用于回放指定课堂时鉴权
    */
-  async DescribeSupervisors(
-    req: DescribeSupervisorsRequest,
-    cb?: (error: string, rep: DescribeSupervisorsResponse) => void
-  ): Promise<DescribeSupervisorsResponse> {
-    return this.request("DescribeSupervisors", req, cb)
+  async BatchGetPlaybackToken(
+    req: BatchGetPlaybackTokenRequest,
+    cb?: (error: string, rep: BatchGetPlaybackTokenResponse) => void
+  ): Promise<BatchGetPlaybackTokenResponse> {
+    return this.request("BatchGetPlaybackToken", req, cb)
+  }
+
+  /**
+   * 文档从房间解绑
+   */
+  async UnbindDocumentFromRoom(
+    req: UnbindDocumentFromRoomRequest,
+    cb?: (error: string, rep: UnbindDocumentFromRoomResponse) => void
+  ): Promise<UnbindDocumentFromRoomResponse> {
+    return this.request("UnbindDocumentFromRoom", req, cb)
   }
 
   /**
@@ -493,13 +526,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除巡课
+   * 此接口用于批量添加成员列表到指定群组
    */
-  async DeleteSupervisor(
-    req: DeleteSupervisorRequest,
-    cb?: (error: string, rep: DeleteSupervisorResponse) => void
-  ): Promise<DeleteSupervisorResponse> {
-    return this.request("DeleteSupervisor", req, cb)
+  async BatchAddGroupMember(
+    req: BatchAddGroupMemberRequest,
+    cb?: (error: string, rep: BatchAddGroupMemberResponse) => void
+  ): Promise<BatchAddGroupMemberResponse> {
+    return this.request("BatchAddGroupMember", req, cb)
   }
 
   /**
@@ -573,13 +606,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询录制信息
+   * 信令录制视频观看记录查询接口，用于查询指定课堂在指定时间段内的用户播放记录。
    */
-  async DescribeRecord(
-    req: DescribeRecordRequest,
-    cb?: (error: string, rep: DescribeRecordResponse) => void
-  ): Promise<DescribeRecordResponse> {
-    return this.request("DescribeRecord", req, cb)
+  async DescribePlayRecords(
+    req: DescribePlayRecordsRequest,
+    cb?: (error: string, rep: DescribePlayRecordsResponse) => void
+  ): Promise<DescribePlayRecordsResponse> {
+    return this.request("DescribePlayRecords", req, cb)
   }
 
   /**
@@ -593,13 +626,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口用于批量添加成员列表到指定群组
+   * 删除巡课
    */
-  async BatchAddGroupMember(
-    req: BatchAddGroupMemberRequest,
-    cb?: (error: string, rep: BatchAddGroupMemberResponse) => void
-  ): Promise<BatchAddGroupMemberResponse> {
-    return this.request("BatchAddGroupMember", req, cb)
+  async DeleteSupervisor(
+    req: DeleteSupervisorRequest,
+    cb?: (error: string, rep: DeleteSupervisorResponse) => void
+  ): Promise<DeleteSupervisorResponse> {
+    return this.request("DeleteSupervisor", req, cb)
   }
 
   /**
@@ -630,6 +663,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRecordTaskResponse) => void
   ): Promise<DescribeRecordTaskResponse> {
     return this.request("DescribeRecordTask", req, cb)
+  }
+
+  /**
+   * 解禁从房间里面踢出的用户
+   */
+  async UnblockKickedUser(
+    req: UnblockKickedUserRequest,
+    cb?: (error: string, rep: UnblockKickedUserResponse) => void
+  ): Promise<UnblockKickedUserResponse> {
+    return this.request("UnblockKickedUser", req, cb)
   }
 
   /**
@@ -680,6 +723,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: LoginOriginIdResponse) => void
   ): Promise<LoginOriginIdResponse> {
     return this.request("LoginOriginId", req, cb)
+  }
+
+  /**
+   * 查询录制信息
+   */
+  async DescribePlaybackList(
+    req: DescribePlaybackListRequest,
+    cb?: (error: string, rep: DescribePlaybackListResponse) => void
+  ): Promise<DescribePlaybackListResponse> {
+    return this.request("DescribePlaybackList", req, cb)
   }
 
   /**
@@ -876,13 +929,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 文档从房间解绑
+   * 此接口用于批量创建群组
    */
-  async UnbindDocumentFromRoom(
-    req: UnbindDocumentFromRoomRequest,
-    cb?: (error: string, rep: UnbindDocumentFromRoomResponse) => void
-  ): Promise<UnbindDocumentFromRoomResponse> {
-    return this.request("UnbindDocumentFromRoom", req, cb)
+  async BatchCreateGroupWithMembers(
+    req: BatchCreateGroupWithMembersRequest,
+    cb?: (error: string, rep: BatchCreateGroupWithMembersResponse) => void
+  ): Promise<BatchCreateGroupWithMembersResponse> {
+    return this.request("BatchCreateGroupWithMembers", req, cb)
   }
 
   /**
@@ -936,13 +989,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口用于批量创建群组
+   * 此接口用于修改用户信息，例如头像、昵称（用户名）等。注意，课中的用户信息不会立即同步修改，需待下次上课时，修改后的信息才会更新显示。
    */
-  async BatchCreateGroupWithMembers(
-    req: BatchCreateGroupWithMembersRequest,
-    cb?: (error: string, rep: BatchCreateGroupWithMembersResponse) => void
-  ): Promise<BatchCreateGroupWithMembersResponse> {
-    return this.request("BatchCreateGroupWithMembers", req, cb)
+  async ModifyUserProfile(
+    req: ModifyUserProfileRequest,
+    cb?: (error: string, rep: ModifyUserProfileResponse) => void
+  ): Promise<ModifyUserProfileResponse> {
+    return this.request("ModifyUserProfile", req, cb)
+  }
+
+  /**
+   * 删除该堂课的录制记录
+   */
+  async DeletePlaybackItem(
+    req: DeletePlaybackItemRequest,
+    cb?: (error: string, rep: DeletePlaybackItemResponse) => void
+  ): Promise<DeletePlaybackItemResponse> {
+    return this.request("DeletePlaybackItem", req, cb)
   }
 
   /**

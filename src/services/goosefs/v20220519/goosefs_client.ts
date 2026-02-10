@@ -22,67 +22,78 @@ import {
   CreateFilesetRequest,
   DescribeFilesetsRequest,
   ClientNodeAttribute,
-  GooseFSxAttribute,
+  DistributedLoadAttrs,
+  LoadTaskAttrs,
+  UpdateLoadTaskPriorityResponse,
   DescribeClusterRoleTokenRequest,
   DescribeFileSystemsResponse,
+  DescribeLoadTaskResponse,
   DescribeFilesetGeneralConfigResponse,
   DetachFileSystemBucketResponse,
   DeleteFilesetRequest,
   FSAttribute,
-  DescribeFilesetsResponse,
+  MetadataLoadAttrs,
   DescribeClusterRoleTokenResponse,
   BatchDeleteClientNodesResponse,
+  CreateLoadTaskResponse,
   QueryCrossVpcSubnetSupportForClientNodeRequest,
   ChargeAttribute,
   DeleteCrossVpcSubnetSupportForClientNodeRequest,
   AttachFileSystemBucketRequest,
   SubnetInfo,
   DeleteFileSystemRequest,
-  CreateFilesetResponse,
+  CancelLoadTaskResponse,
+  LoadTaskCreationAttrs,
   BatchAddClientNodesResponse,
   GooseFSxBuildElement,
   AttachFileSystemBucketResponse,
   DescribeFilesetGeneralConfigRequest,
+  UpdateLoadTaskPriorityRequest,
   CreateFileSystemRequest,
-  DeleteCrossVpcSubnetSupportForClientNodeResponse,
+  DescribeFilesetsResponse,
   BuildClientNodeMountCommandRequest,
   DeleteFileSystemResponse,
   ExpandCapacityRequest,
   DetachFileSystemBucketRequest,
+  CancelLoadTaskRequest,
   ClientToken,
+  DescribeFileSystemBucketsRequest,
   UpdateFilesetRequest,
   ModifyDataRepositoryBandwidthResponse,
   QueryDataRepositoryBandwidthResponse,
   QueryDataRepositoryBandwidthRequest,
+  DescribeLoadTaskRequest,
   ClientClusterManagerNodeInfo,
   FilesetInfo,
-  ExpandCapacityResponse,
+  UpdateFilesetResponse,
   LinuxNodeAttribute,
   BatchDeleteClientNodesRequest,
-  DescribeFileSystemBucketsRequest,
+  CreateFilesetResponse,
   UpdateFilesetGeneralConfigResponse,
   QueryCrossVpcSubnetSupportForClientNodeResponse,
-  UpdateFilesetResponse,
   DescribeFileSystemsRequest,
   UpdateFilesetGeneralConfigRequest,
   DescribeClusterClientTokenRequest,
   AddCrossVpcSubnetSupportForClientNodeResponse,
   CreateDataRepositoryTaskResponse,
-  DescribeClusterRolesResponse,
-  ClusterRole,
+  ExpandCapacityResponse,
+  DeleteCrossVpcSubnetSupportForClientNodeResponse,
   DeleteFilesetResponse,
   DescribeDataRepositoryTaskStatusResponse,
+  ListLoadTasksResponse,
+  ListLoadTasksRequest,
   BatchAddClientNodesRequest,
   AddCrossVpcSubnetSupportForClientNodeRequest,
   DescribeDataRepositoryTaskStatusRequest,
   RoleToken,
   DescribeFileSystemBucketsResponse,
+  GooseFSxAttribute,
   DescribeClientNodesRequest,
   Tag,
   ModifyDataRepositoryBandwidthRequest,
-  DescribeClusterRolesRequest,
   CreateDataRepositoryTaskRequest,
   DescribeClientNodesResponse,
+  CreateLoadTaskRequest,
   BuildClientNodeMountCommandResponse,
   DescribeClusterClientTokenResponse,
   MappedBucket,
@@ -95,18 +106,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("goosefs.tencentcloudapi.com", "2022-05-19", clientConfig)
-  }
-
-  /**
-     * 接口废弃
-
-查询GooseFS集群角色
-     */
-  async DescribeClusterRoles(
-    req: DescribeClusterRolesRequest,
-    cb?: (error: string, rep: DescribeClusterRolesResponse) => void
-  ): Promise<DescribeClusterRolesResponse> {
-    return this.request("DescribeClusterRoles", req, cb)
   }
 
   /**
@@ -150,6 +149,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询单个预热任务执行情况。注意，该接口需要 GooseFS 集群版本 ≥ 1.5.1。
+   */
+  async DescribeLoadTask(
+    req: DescribeLoadTaskRequest,
+    cb?: (error: string, rep: DescribeLoadTaskResponse) => void
+  ): Promise<DescribeLoadTaskResponse> {
+    return this.request("DescribeLoadTask", req, cb)
+  }
+
+  /**
    * 修改数据流动带宽
    */
   async ModifyDataRepositoryBandwidth(
@@ -180,6 +189,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 列出该集群下所有预热任务。注意，该接口需要 GooseFS 集群版本 ≥ 1.5.1。
+   */
+  async ListLoadTasks(
+    req: ListLoadTasksRequest,
+    cb?: (error: string, rep: ListLoadTasksResponse) => void
+  ): Promise<ListLoadTasksResponse> {
+    return this.request("ListLoadTasks", req, cb)
+  }
+
+  /**
    * 生成客户端的挂载命令
    */
   async BuildClientNodeMountCommand(
@@ -187,6 +206,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BuildClientNodeMountCommandResponse) => void
   ): Promise<BuildClientNodeMountCommandResponse> {
     return this.request("BuildClientNodeMountCommand", req, cb)
+  }
+
+  /**
+   * 变更已有 GooseFS 预热任务配置，仅任务状态为 waiting 时可调用该接口。注意，该接口需要 GooseFS 集群版本 ≥ 1.5.1。
+   */
+  async UpdateLoadTaskPriority(
+    req: UpdateLoadTaskPriorityRequest,
+    cb?: (error: string, rep: UpdateLoadTaskPriorityResponse) => void
+  ): Promise<UpdateLoadTaskPriorityResponse> {
+    return this.request("UpdateLoadTaskPriority", req, cb)
+  }
+
+  /**
+   * 取消单个预热任务，仅任务在 waiting、running 状态时可以调用此接口。注意，该接口需要 GooseFS 集群版本 ≥ 1.5.1。
+   */
+  async CancelLoadTask(
+    req: CancelLoadTaskRequest,
+    cb?: (error: string, rep: CancelLoadTaskResponse) => void
+  ): Promise<CancelLoadTaskResponse> {
+    return this.request("CancelLoadTask", req, cb)
   }
 
   /**
@@ -227,6 +266,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClientNodesResponse) => void
   ): Promise<DescribeClientNodesResponse> {
     return this.request("DescribeClientNodes", req, cb)
+  }
+
+  /**
+   * GooseFS 预热相关接口，用于下发，列出，查询，修改预热任务。用于元数据预热、数据预热场景。 注意，该接口需要 GooseFS 集群版本 ≥ 1.5.1。
+   */
+  async CreateLoadTask(
+    req: CreateLoadTaskRequest,
+    cb?: (error: string, rep: CreateLoadTaskResponse) => void
+  ): Promise<CreateLoadTaskResponse> {
+    return this.request("CreateLoadTask", req, cb)
   }
 
   /**

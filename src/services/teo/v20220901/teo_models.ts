@@ -7768,6 +7768,16 @@ export interface CreateAccelerationDomainRequest {
 <li>off：关闭状态。</li>不填默认为：follow。
    */
   IPv6Status?: string
+  /**
+   * 指定域名绑定的共享 CNAME 地址，不传时使用默认 CNAME。
+绑定共享 CNAME 要求所有域名的调度策略保持一致，以下配置将影响调度策略，在不一致时绑定共享 CNAME 将按照以下方式处理：
+- IPv6 访问：不允许创建域名，请修改 IPv6Status 已保持与共享 CNAME 绑定的其余域名配置一致；
+- DDoS 防护：如果选择的共享 CNAME 已启用 DDoS 防护，则创建域名时，将默认为该域名启用 DDoS 防护。
+- 中国大陆网络优化（国际加速）：不允许创建域名，请保持当前域名的中国大陆网络优化（国际加速）配置与共享 CNAME 绑定的其余域名一致后重试。
+
+注：共享 CNAME 当前仍在内测中，如需使用，请联系我们开通。
+   */
+  SharedCNAME?: string
 }
 
 /**

@@ -88,6 +88,16 @@ it("mongodb.v20190725.DescribeDBInstanceDeal", async function () {
     }
 })
 
+it("mongodb.v20190725.ModifyDBInstanceParamTpl", async function () {
+    try {
+       const data = await client.ModifyDBInstanceParamTpl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeCurrentOp", async function () {
     try {
        const data = await client.DescribeCurrentOp({})
@@ -138,9 +148,9 @@ it("mongodb.v20190725.DescribeSecurityGroup", async function () {
     }
 })
 
-it("mongodb.v20190725.SetAccountUserPrivilege", async function () {
+it("mongodb.v20190725.DescribeDBInstanceNamespace", async function () {
     try {
-       const data = await client.SetAccountUserPrivilege({})
+       const data = await client.DescribeDBInstanceNamespace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -151,6 +161,16 @@ it("mongodb.v20190725.SetAccountUserPrivilege", async function () {
 it("mongodb.v20190725.FlushInstanceRouterConfig", async function () {
     try {
        const data = await client.FlushInstanceRouterConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.OpenAuditService", async function () {
+    try {
+       const data = await client.OpenAuditService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,6 +208,26 @@ it("mongodb.v20190725.FlashBackDBInstance", async function () {
     }
 })
 
+it("mongodb.v20190725.SetAccountUserPrivilege", async function () {
+    try {
+       const data = await client.SetAccountUserPrivilege({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.DropDBInstanceParamTpl", async function () {
+    try {
+       const data = await client.DropDBInstanceParamTpl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeAuditInstanceList", async function () {
     try {
        const data = await client.DescribeAuditInstanceList({})
@@ -198,9 +238,9 @@ it("mongodb.v20190725.DescribeAuditInstanceList", async function () {
     }
 })
 
-it("mongodb.v20190725.DescribeDetailedSlowLogs", async function () {
+it("mongodb.v20190725.DescribeAuditConfig", async function () {
     try {
-       const data = await client.DescribeDetailedSlowLogs({})
+       const data = await client.DescribeAuditConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +338,19 @@ it("mongodb.v20190725.OfflineIsolatedDBInstance", async function () {
     }
 })
 
-it("mongodb.v20190725.ModifyDBInstanceParamTpl", async function () {
+it("mongodb.v20190725.RenewDBInstances", async function () {
     try {
-       const data = await client.ModifyDBInstanceParamTpl({})
+       const data = await client.RenewDBInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.DescribeAuditLogs", async function () {
+    try {
+       const data = await client.DescribeAuditLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -328,9 +378,9 @@ it("mongodb.v20190725.CreateDBInstanceParamTpl", async function () {
     }
 })
 
-it("mongodb.v20190725.DropDBInstanceParamTpl", async function () {
+it("mongodb.v20190725.DescribeDetailedSlowLogs", async function () {
     try {
-       const data = await client.DropDBInstanceParamTpl({})
+       const data = await client.DescribeDetailedSlowLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +398,9 @@ it("mongodb.v20190725.ModifyDBInstanceSpec", async function () {
     }
 })
 
-it("mongodb.v20190725.RenewDBInstances", async function () {
+it("mongodb.v20190725.CloseAuditService", async function () {
     try {
-       const data = await client.RenewDBInstances({})
+       const data = await client.CloseAuditService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,9 +448,9 @@ it("mongodb.v20190725.DescribeDBInstances", async function () {
     }
 })
 
-it("mongodb.v20190725.DescribeDBInstanceNamespace", async function () {
+it("mongodb.v20190725.CreateAuditLogFile", async function () {
     try {
-       const data = await client.DescribeDBInstanceNamespace({})
+       const data = await client.CreateAuditLogFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -608,19 +658,9 @@ it("mongodb.v20190725.ModifySRVConnectionUrl", async function () {
     }
 })
 
-it("mongodb.v20190725.OpenAuditService", async function () {
+it("mongodb.v20190725.DescribeAuditLogFiles", async function () {
     try {
-       const data = await client.OpenAuditService({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("mongodb.v20190725.CreateAuditLogFile", async function () {
-    try {
-       const data = await client.CreateAuditLogFile({})
+       const data = await client.DescribeAuditLogFiles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

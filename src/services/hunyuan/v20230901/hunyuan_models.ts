@@ -630,6 +630,10 @@ export interface ChatTranslationsRequest {
    * 参考示例，最多10个
    */
   References?: Array<Reference>
+  /**
+   * 关联的术语库 ID 列表，用于术语翻译，最大支持5个术语库
+   */
+  GlossaryIDs?: Array<string>
 }
 
 /**

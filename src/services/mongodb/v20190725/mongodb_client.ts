@@ -24,12 +24,14 @@ import {
   DescribeAccountUsersRequest,
   DescribeDBInstanceParamTplRequest,
   CreateBackupDBInstanceResponse,
+  DescribeAuditLogsRequest,
   DBInstancePrice,
   TerminateDBInstancesRequest,
   KillOpsRequest,
   DropDBInstanceParamTplResponse,
   DeleteLogDownloadTaskResponse,
-  DescribeDBInstanceNamespaceResponse,
+  InquirePriceRenewDBInstancesRequest,
+  DescribeAuditLogFilesResponse,
   DescribeSlowLogsRequest,
   FlushInstanceRouterConfigResponse,
   DescribeCurrentOpResponse,
@@ -103,7 +105,7 @@ import {
   InstanceTextParam,
   ModifyDBInstanceSecurityGroupRequest,
   DescribeAccountUsersResponse,
-  InquirePriceRenewDBInstancesRequest,
+  DescribeDBInstanceNamespaceResponse,
   DescribeBackupDownloadTaskRequest,
   ModifySRVConnectionUrlRequest,
   DescribeClientConnectionsResponse,
@@ -116,6 +118,8 @@ import {
   DescribeInstanceParamsRequest,
   NodeTag,
   InquirePriceCreateDBInstancesResponse,
+  CloseAuditServiceRequest,
+  OpenAuditServiceResponse,
   DescribeSecurityGroupResponse,
   DescribeTransparentDataEncryptionStatusRequest,
   SecurityGroup,
@@ -130,12 +134,13 @@ import {
   CreateBackupDownloadTaskRequest,
   ParamTpl,
   InquirePriceModifyDBInstanceSpecResponse,
+  CreateDBInstanceHourRequest,
   SecurityGroupBound,
   BackupTotalSize,
   DescribeDBInstanceNodePropertyResponse,
-  InstanceInfo,
+  CloseAuditServiceResponse,
   DescribeDBInstanceParamTplDetailResponse,
-  DescribeMongodbLogsResponse,
+  DescribeAuditInstanceListRequest,
   DeliverSummary,
   DescribeInstanceSSLResponse,
   ModifyDBInstanceParamTplRequest,
@@ -146,6 +151,7 @@ import {
   SetDBInstanceDeletionProtectionResponse,
   DescribeDetailedSlowLogsResponse,
   ShardInfo,
+  InstanceInfo,
   SetBackupRulesResponse,
   ModifyAuditServiceRequest,
   EnableSRVConnectionUrlRequest,
@@ -155,16 +161,17 @@ import {
   RenameInstanceResponse,
   DropDBInstanceParamTplRequest,
   DescribeTransparentDataEncryptionStatusResponse,
-  OpenAuditServiceResponse,
+  DescribeAuditConfigRequest,
   CreateBackupDBInstanceRequest,
   SetAccountUserPrivilegeRequest,
   UpgradeDbInstanceVersionResponse,
-  DescribeAuditInstanceListRequest,
+  DescribeMongodbLogsResponse,
   NodeProperty,
   KillOpsResponse,
   IsolateDBInstanceRequest,
-  CreateDBInstanceHourRequest,
+  AuditLogFile,
   EnableTransparentDataEncryptionResponse,
+  DescribeAuditLogFilesRequest,
   SetBackupRulesRequest,
   AssignProjectRequest,
   DescribeMongodbLogsRequest,
@@ -176,6 +183,7 @@ import {
   SpecificationInfo,
   CreateAuditLogFileRequest,
   DeleteAuditLogFileRequest,
+  RemoveNodeList,
   FlashbackCollection,
   DescribeSpecInfoResponse,
   InquirePriceRenewDBInstancesResponse,
@@ -190,10 +198,12 @@ import {
   DescribeDBInstanceParamTplResponse,
   ModifyDBInstanceSpecResponse,
   DescribeDBInstanceURLResponse,
-  RemoveNodeList,
+  DescribeAuditConfigResponse,
+  AuditLog,
   DescribeLogDownloadTasksResponse,
   SlowLogItem,
   RestartNodesRequest,
+  ModifyMongoDBParamType,
   ModifyAuditServiceResponse,
   SetInstanceMaintenanceRequest,
   RestartNodesResponse,
@@ -205,7 +215,7 @@ import {
   InstanceChargePrepaid,
   RenewDBInstancesRequest,
   UpgradeDBInstanceKernelVersionRequest,
-  ModifyMongoDBParamType,
+  DescribeAuditLogsResponse,
 } from "./mongodb_models"
 
 /**
@@ -289,6 +299,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(ModifyDBInstanceParamTpl )用于修改MongoDB云数据库实例的参数模板。
+   **说明：ModifyDBInstanceParamTpl  API正在公测中，在此期间，该接口仅对公测用户开放**
+   */
+  async ModifyDBInstanceParamTpl(
+    req: ModifyDBInstanceParamTplRequest,
+    cb?: (error: string, rep: ModifyDBInstanceParamTplResponse) => void
+  ): Promise<ModifyDBInstanceParamTplResponse> {
+    return this.request("ModifyDBInstanceParamTpl", req, cb)
+  }
+
+  /**
    * 本接口（DescribeCurrentOp）用于查询云数据库实例的当前正在执行的操作。
    */
   async DescribeCurrentOp(
@@ -339,13 +360,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（SetAccountUserPrivilege）用于设置实例的账号权限。
+   * 本接口（DescribeDBInstanceNamespace）用于查询数据库的表信息。
    */
-  async SetAccountUserPrivilege(
-    req: SetAccountUserPrivilegeRequest,
-    cb?: (error: string, rep: SetAccountUserPrivilegeResponse) => void
-  ): Promise<SetAccountUserPrivilegeResponse> {
-    return this.request("SetAccountUserPrivilege", req, cb)
+  async DescribeDBInstanceNamespace(
+    req: DescribeDBInstanceNamespaceRequest,
+    cb?: (error: string, rep: DescribeDBInstanceNamespaceResponse) => void
+  ): Promise<DescribeDBInstanceNamespaceResponse> {
+    return this.request("DescribeDBInstanceNamespace", req, cb)
   }
 
   /**
@@ -356,6 +377,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FlushInstanceRouterConfigResponse) => void
   ): Promise<FlushInstanceRouterConfigResponse> {
     return this.request("FlushInstanceRouterConfig", req, cb)
+  }
+
+  /**
+   * 本接口(OpenAuditService)用于开通云数据库实例的审计。
+   */
+  async OpenAuditService(
+    req: OpenAuditServiceRequest,
+    cb?: (error: string, rep: OpenAuditServiceResponse) => void
+  ): Promise<OpenAuditServiceResponse> {
+    return this.request("OpenAuditService", req, cb)
   }
 
   /**
@@ -390,6 +421,27 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（SetAccountUserPrivilege）用于设置实例的账号权限。
+   */
+  async SetAccountUserPrivilege(
+    req: SetAccountUserPrivilegeRequest,
+    cb?: (error: string, rep: SetAccountUserPrivilegeResponse) => void
+  ): Promise<SetAccountUserPrivilegeResponse> {
+    return this.request("SetAccountUserPrivilege", req, cb)
+  }
+
+  /**
+   * 本接口(DropDBInstanceParamTpl )用于删除云数据库MongoDB实例的参数模板
+   **说明：DropDBInstanceParamTpl  API正在公测中，在此期间，该接口仅对公测用户开放**
+   */
+  async DropDBInstanceParamTpl(
+    req: DropDBInstanceParamTplRequest,
+    cb?: (error: string, rep: DropDBInstanceParamTplResponse) => void
+  ): Promise<DropDBInstanceParamTplResponse> {
+    return this.request("DropDBInstanceParamTpl", req, cb)
+  }
+
+  /**
    * 本接口（DescribeAuditInstanceList）用于查询开通或未开通数据库审计的实例列表。
    */
   async DescribeAuditInstanceList(
@@ -400,13 +452,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDetailedSlowLogs）用于查询实例慢日志详情。
+   * 本接口(DescribeAuditConfig)用于查询云数据库审计策略的服务配置，包括审计日志保存时长等。
    */
-  async DescribeDetailedSlowLogs(
-    req: DescribeDetailedSlowLogsRequest,
-    cb?: (error: string, rep: DescribeDetailedSlowLogsResponse) => void
-  ): Promise<DescribeDetailedSlowLogsResponse> {
-    return this.request("DescribeDetailedSlowLogs", req, cb)
+  async DescribeAuditConfig(
+    req: DescribeAuditConfigRequest,
+    cb?: (error: string, rep: DescribeAuditConfigResponse) => void
+  ): Promise<DescribeAuditConfigResponse> {
+    return this.request("DescribeAuditConfig", req, cb)
   }
 
   /**
@@ -500,14 +552,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(ModifyDBInstanceParamTpl )用于修改MongoDB云数据库实例的参数模板。
-   **说明：ModifyDBInstanceParamTpl  API正在公测中，在此期间，该接口仅对公测用户开放**
+   * 本接口(RenewDBInstance)用于续费云数据库实例，仅支持付费模式为包年包月的实例。按量计费实例不需要续费。
    */
-  async ModifyDBInstanceParamTpl(
-    req: ModifyDBInstanceParamTplRequest,
-    cb?: (error: string, rep: ModifyDBInstanceParamTplResponse) => void
-  ): Promise<ModifyDBInstanceParamTplResponse> {
-    return this.request("ModifyDBInstanceParamTpl", req, cb)
+  async RenewDBInstances(
+    req: RenewDBInstancesRequest,
+    cb?: (error: string, rep: RenewDBInstancesResponse) => void
+  ): Promise<RenewDBInstancesResponse> {
+    return this.request("RenewDBInstances", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeAuditLogs)用于查询数据库审计日志。
+   */
+  async DescribeAuditLogs(
+    req: DescribeAuditLogsRequest,
+    cb?: (error: string, rep: DescribeAuditLogsResponse) => void
+  ): Promise<DescribeAuditLogsResponse> {
+    return this.request("DescribeAuditLogs", req, cb)
   }
 
   /**
@@ -532,14 +593,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DropDBInstanceParamTpl )用于删除云数据库MongoDB实例的参数模板
-   **说明：DropDBInstanceParamTpl  API正在公测中，在此期间，该接口仅对公测用户开放**
+   * 本接口（DescribeDetailedSlowLogs）用于查询实例慢日志详情。
    */
-  async DropDBInstanceParamTpl(
-    req: DropDBInstanceParamTplRequest,
-    cb?: (error: string, rep: DropDBInstanceParamTplResponse) => void
-  ): Promise<DropDBInstanceParamTplResponse> {
-    return this.request("DropDBInstanceParamTpl", req, cb)
+  async DescribeDetailedSlowLogs(
+    req: DescribeDetailedSlowLogsRequest,
+    cb?: (error: string, rep: DescribeDetailedSlowLogsResponse) => void
+  ): Promise<DescribeDetailedSlowLogsResponse> {
+    return this.request("DescribeDetailedSlowLogs", req, cb)
   }
 
   /**
@@ -553,13 +613,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(RenewDBInstance)用于续费云数据库实例，仅支持付费模式为包年包月的实例。按量计费实例不需要续费。
+   * 本接口（CloseAuditService）用于关闭审计服务
    */
-  async RenewDBInstances(
-    req: RenewDBInstancesRequest,
-    cb?: (error: string, rep: RenewDBInstancesResponse) => void
-  ): Promise<RenewDBInstancesResponse> {
-    return this.request("RenewDBInstances", req, cb)
+  async CloseAuditService(
+    req: CloseAuditServiceRequest,
+    cb?: (error: string, rep: CloseAuditServiceResponse) => void
+  ): Promise<CloseAuditServiceResponse> {
+    return this.request("CloseAuditService", req, cb)
   }
 
   /**
@@ -603,13 +663,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeDBInstanceNamespace）用于查询数据库的表信息。
+   * 本接口(CreateAuditLogFile)用于创建云数据库实例的审计日志文件。
    */
-  async DescribeDBInstanceNamespace(
-    req: DescribeDBInstanceNamespaceRequest,
-    cb?: (error: string, rep: DescribeDBInstanceNamespaceResponse) => void
-  ): Promise<DescribeDBInstanceNamespaceResponse> {
-    return this.request("DescribeDBInstanceNamespace", req, cb)
+  async CreateAuditLogFile(
+    req: CreateAuditLogFileRequest,
+    cb?: (error: string, rep: CreateAuditLogFileResponse) => void
+  ): Promise<CreateAuditLogFileResponse> {
+    return this.request("CreateAuditLogFile", req, cb)
   }
 
   /**
@@ -814,23 +874,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(OpenAuditService)用于开通云数据库实例的审计。
+   * 本接口(DescribeAuditLogFiles)用于查询云数据库实例的审计日志文件。
    */
-  async OpenAuditService(
-    req: OpenAuditServiceRequest,
-    cb?: (error: string, rep: OpenAuditServiceResponse) => void
-  ): Promise<OpenAuditServiceResponse> {
-    return this.request("OpenAuditService", req, cb)
-  }
-
-  /**
-   * 本接口(CreateAuditLogFile)用于创建云数据库实例的审计日志文件。
-   */
-  async CreateAuditLogFile(
-    req: CreateAuditLogFileRequest,
-    cb?: (error: string, rep: CreateAuditLogFileResponse) => void
-  ): Promise<CreateAuditLogFileResponse> {
-    return this.request("CreateAuditLogFile", req, cb)
+  async DescribeAuditLogFiles(
+    req: DescribeAuditLogFilesRequest,
+    cb?: (error: string, rep: DescribeAuditLogFilesResponse) => void
+  ): Promise<DescribeAuditLogFilesResponse> {
+    return this.request("DescribeAuditLogFiles", req, cb)
   }
 
   /**

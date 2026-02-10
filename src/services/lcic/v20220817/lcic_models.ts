@@ -64,7 +64,7 @@ export interface CreateRoomRequest {
    */
   AudioQuality?: number
   /**
-   * <p>录制方式，可以有以下取值：0 开启自动录制（默认值）1  禁止录制2 开启手动录制 注： - 如果该配置取值为0，录制将从上课后开始，课堂结束后停止。 - 如果该配置取值为2，需通过startRecord、stopRecord接口控制录制的开始和结束。</p>
+   * <p>录制方式。</p><p>枚举值：</p><ul><li>0： 开启自动录制（默认）</li><li>1： 禁止录制</li><li>2： 开启手动录制。（仅支持页面录制，需通过startRecord、stopRecord接口控制录制的开始和结束。）</li><li>3： 信令录制。</li></ul>
    */
   DisableRecord?: number
   /**
@@ -185,6 +185,20 @@ export interface ModifyRoomResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * LoginOriginId请求参数结构体
+ */
+export interface LoginOriginIdRequest {
+  /**
+   * 低代码互动课堂的SdkAppId。
+   */
+  SdkAppId: number
+  /**
+   * 用户在客户系统的Id，需要在同一应用下唯一。
+   */
+  OriginId: string
 }
 
 /**
@@ -331,6 +345,24 @@ export interface BatchDeleteRecordRequest {
    * 低代码互动课堂的SdkAppId。
    */
   SdkAppId: number
+}
+
+/**
+ * DescribePlayRecords返回参数结构体
+ */
+export interface DescribePlayRecordsResponse {
+  /**
+   * <p>总条数。</p>
+   */
+  Total?: number
+  /**
+   * <p>信令录制视频回放观看记录列表。</p>
+   */
+  Records?: Array<PlayRecord>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -671,17 +703,21 @@ export interface GetWatermarkResponse {
 }
 
 /**
- * LoginOriginId请求参数结构体
+ * DescribePlaybackList返回参数结构体
  */
-export interface LoginOriginIdRequest {
+export interface DescribePlaybackListResponse {
   /**
-   * 低代码互动课堂的SdkAppId。
+   * <p>总数</p>
    */
-  SdkAppId: number
+  Total?: number
   /**
-   * 用户在客户系统的Id，需要在同一应用下唯一。
+   * <p>课堂回放信息列表</p>
    */
-  OriginId: string
+  Items?: Array<PlaybackItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -696,6 +732,28 @@ export interface BatchRegisterResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 课堂回放信息
+ */
+export interface PlaybackItem {
+  /**
+   * <p>房间id</p>
+   */
+  RoomId?: number
+  /**
+   * <p>回放地址</p>
+   */
+  PlaybackUrl?: string
+  /**
+   * <p>录制时长</p>
+   */
+  Duration?: number
+  /**
+   * <p>录制开始时间</p>
+   */
+  CreateTime?: number
 }
 
 /**
@@ -1856,6 +1914,20 @@ export interface DescribeScoreListRequest {
 }
 
 /**
+ * token结果
+ */
+export interface TokenResult {
+  /**
+   * <p>房间id</p>
+   */
+  RoomId?: number
+  /**
+   * <p>该房间信令回放的token</p>
+   */
+  Token?: string
+}
+
+/**
  * DescribeRecordStream请求参数结构体
  */
 export interface DescribeRecordStreamRequest {
@@ -2081,6 +2153,24 @@ export interface BatchDeleteRecordResponse {
 }
 
 /**
+ * BatchGetPlaybackToken请求参数结构体
+ */
+export interface BatchGetPlaybackTokenRequest {
+  /**
+   * <p>低代码平台的SdkAppId。</p>
+   */
+  SdkAppId: number
+  /**
+   * <p>房间ID。</p>
+   */
+  RoomIds: Array<number | bigint>
+  /**
+   * <p>token过期时间，单位秒。如果传0则表示不过期</p>
+   */
+  ExpireSeconds?: number
+}
+
+/**
  * 表情消息
  */
 export interface FaceMsgContent {
@@ -2148,6 +2238,24 @@ export interface StartRoomResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribePlaybackList请求参数结构体
+ */
+export interface DescribePlaybackListRequest {
+  /**
+   * <p>低代码平台的SdkAppId。</p>
+   */
+  SdkAppId: number
+  /**
+   * <p>分页查询当前页数，从1开始递增</p>
+   */
+  Page?: number
+  /**
+   * <p>默认10条，最大上限为100条</p>
+   */
+  Limit?: number
 }
 
 /**
@@ -2244,6 +2352,20 @@ export interface GetRoomMessageResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 批量创建群组基础信息
+ */
+export interface GroupBaseInfo {
+  /**
+   * 待创建群组名
+   */
+  GroupName: string
+  /**
+   * 群组主讲人ID
+   */
+  TeacherId?: string
 }
 
 /**
@@ -2758,17 +2880,21 @@ export interface MessageList {
 }
 
 /**
- * DescribeGroup请求参数结构体
+ * DeleteGroupMember请求参数结构体
  */
-export interface DescribeGroupRequest {
+export interface DeleteGroupMemberRequest {
   /**
-   * 群组ID
+   * 群组ID，联合群组无法删除群组成员
    */
   GroupId: string
   /**
    * 低代码平台应用ID
    */
   SdkAppId: number
+  /**
+   * 成员列表，最大值200
+   */
+  MemberIds: Array<string>
 }
 
 /**
@@ -2782,14 +2908,25 @@ export interface EndRoomResponse {
 }
 
 /**
- * GetWatermark请求参数结构体
+ * GetPlaybackToken请求参数结构体
  */
-export interface GetWatermarkRequest {
+export interface GetPlaybackTokenRequest {
   /**
-   * 低代码互动课堂的SdkAppId。
-
+   * <p>低代码平台的SdkAppId。</p>
    */
   SdkAppId: number
+  /**
+   * <p>房间ID。</p>
+   */
+  RoomId: number
+  /**
+   * <p>用户ID。</p>
+   */
+  UserId?: string
+  /**
+   * <p>token过期时间，单位秒。如果传0则表示不过期</p>
+   */
+  ExpireSeconds?: number
 }
 
 /**
@@ -2919,17 +3056,13 @@ export interface MutedAccountList {
 }
 
 /**
- * 批量创建群组基础信息
+ * 背景图片配置
  */
-export interface GroupBaseInfo {
+export interface BackgroundPictureConfig {
   /**
-   * 待创建群组名
+   * 背景图片的url
    */
-  GroupName: string
-  /**
-   * 群组主讲人ID
-   */
-  TeacherId?: string
+  Url?: string
 }
 
 /**
@@ -3032,6 +3165,28 @@ export interface AnswerStat {
    * 答题人数
    */
   Count?: number
+}
+
+/**
+ * GetPlaybackToken返回参数结构体
+ */
+export interface GetPlaybackTokenResponse {
+  /**
+   * <p>token值，用于回放鉴权。</p>
+   */
+  Token?: string
+  /**
+   * <p>房间ID。</p>
+   */
+  RoomId?: number
+  /**
+   * <p>用户ID。</p>
+   */
+  UserId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3567,6 +3722,24 @@ export interface GetRoomsRequest {
 }
 
 /**
+ * BatchGetPlaybackToken返回参数结构体
+ */
+export interface BatchGetPlaybackTokenResponse {
+  /**
+   * <p>token值，用于回放鉴权。</p>
+   */
+  Results?: Array<TokenResult>
+  /**
+   * <p>房间ID。</p>
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ForbidSendMsg返回参数结构体
  */
 export interface ForbidSendMsgResponse {
@@ -3848,21 +4021,17 @@ export interface BatchCreateGroupWithMembersRequest {
 }
 
 /**
- * DeleteGroupMember请求参数结构体
+ * DescribeGroup请求参数结构体
  */
-export interface DeleteGroupMemberRequest {
+export interface DescribeGroupRequest {
   /**
-   * 群组ID，联合群组无法删除群组成员
+   * 群组ID
    */
   GroupId: string
   /**
    * 低代码平台应用ID
    */
   SdkAppId: number
-  /**
-   * 成员列表，最大值200
-   */
-  MemberIds: Array<string>
 }
 
 /**
@@ -3880,19 +4049,33 @@ export interface CreateSupervisorRequest {
 }
 
 /**
- * 背景图片配置
+ * DeletePlaybackItem请求参数结构体
  */
-export interface BackgroundPictureConfig {
+export interface DeletePlaybackItemRequest {
   /**
-   * 背景图片的url
+   * <p>低代码互动课堂的SdkAppId。</p>
    */
-  Url?: string
+  SdkAppId: number
+  /**
+   * <p>课堂ID。</p>
+   */
+  RoomId: number
 }
 
 /**
  * DeleteAppCustomContent返回参数结构体
  */
 export interface DeleteAppCustomContentResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyGroup返回参数结构体
+ */
+export interface ModifyGroupResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3918,13 +4101,14 @@ export interface DescribeCurrentMemberListResponse {
 }
 
 /**
- * ModifyGroup返回参数结构体
+ * GetWatermark请求参数结构体
  */
-export interface ModifyGroupResponse {
+export interface GetWatermarkRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 低代码互动课堂的SdkAppId。
+
    */
-  RequestId?: string
+  SdkAppId: number
 }
 
 /**
@@ -4126,6 +4310,16 @@ export interface DescribeDeveloperResponse {
 }
 
 /**
+ * DeletePlaybackItem返回参数结构体
+ */
+export interface DeletePlaybackItemResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 文本消息
  */
 export interface TextMsgContent {
@@ -4147,4 +4341,68 @@ export interface TextMarkConfig {
    * 文字水印颜色
    */
   Color?: string
+}
+
+/**
+ * 信令录制视频观看记录详情
+ */
+export interface PlayRecord {
+  /**
+   * <p>房间ID。</p>
+   */
+  RoomId?: number
+  /**
+   * <p>用户ID。</p>
+   */
+  UserId?: string
+  /**
+   * <p>单次播放会话ID。</p>
+   */
+  SessionId?: string
+  /**
+   * <p>播放开始时间，unix时间戳（秒）。</p>
+   */
+  PlayBeginTime?: number
+  /**
+   * <p>播放结束时间，unix时间戳（秒）。</p>
+   */
+  PlayEndTime?: number
+  /**
+   * <p>播放时长（毫秒）。</p>
+   */
+  Duration?: number
+}
+
+/**
+ * DescribePlayRecords请求参数结构体
+ */
+export interface DescribePlayRecordsRequest {
+  /**
+   * <p>低代码互动课堂的SdkAppId。</p>
+   */
+  SdkAppId: number
+  /**
+   * <p>房间ID。</p>
+   */
+  RoomId: number
+  /**
+   * <p>开始时间，unix时间戳（秒）。</p>
+   */
+  StartTime: number
+  /**
+   * <p>结束时间，unix时间戳（秒）。</p>
+   */
+  EndTime: number
+  /**
+   * <p>页码，从1开始递增。</p><p>默认值：1</p>
+   */
+  Page: number
+  /**
+   * <p>每页获取的记录条数。</p><p>取值范围：[1, 200]</p><p>默认值：20</p>
+   */
+  PageSize: number
+  /**
+   * <p>用户ID。</p>
+   */
+  UserId?: string
 }

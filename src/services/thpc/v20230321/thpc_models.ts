@@ -527,19 +527,19 @@ export interface DeleteClusterResponse {
  */
 export interface DescribeAutoScalingConfigurationResponse {
   /**
-   * 集群ID。
+   * <p>集群ID。</p>
    */
   ClusterId?: string
   /**
-   * 任务连续等待时间，队列的任务处于连续等待的时间。单位秒。
+   * <p>任务连续等待时间，队列的任务处于连续等待的时间。单位秒。</p>
    */
   ExpansionBusyTime?: number
   /**
-   * 节点连续空闲（未运行作业）时间，一个节点连续处于空闲状态时间。
+   * <p>节点连续空闲（未运行作业）时间，一个节点连续处于空闲状态时间。</p>
    */
   ShrinkIdleTime?: number
   /**
-   * 扩容队列配置概览列表。
+   * <p>扩容队列配置概览列表。</p>
    */
   QueueConfigs?: Array<QueueConfigOverview>
   /**
@@ -2549,9 +2549,13 @@ export interface VirtualPrivateCloud {
  */
 export interface DescribeAutoScalingConfigurationRequest {
   /**
-   * 集群ID。
+   * <p>集群ID。</p>
    */
   ClusterId: string
+  /**
+   * <p>队列名称</p>
+   */
+  QueueName?: string
 }
 
 /**

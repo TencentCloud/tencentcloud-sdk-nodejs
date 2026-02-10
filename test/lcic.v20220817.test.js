@@ -28,6 +28,16 @@ it("lcic.v20220817.DescribeAppDetail", async function () {
     }
 })
 
+it("lcic.v20220817.DescribeSupervisors", async function () {
+    try {
+       const data = await client.DescribeSupervisors({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.DescribeRoomForbiddenUser", async function () {
     try {
        const data = await client.DescribeRoomForbiddenUser({})
@@ -128,9 +138,9 @@ it("lcic.v20220817.SetWatermark", async function () {
     }
 })
 
-it("lcic.v20220817.ModifyUserProfile", async function () {
+it("lcic.v20220817.DescribeRecord", async function () {
     try {
-       const data = await client.ModifyUserProfile({})
+       const data = await client.DescribeRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,9 +228,9 @@ it("lcic.v20220817.DeleteGroupMember", async function () {
     }
 })
 
-it("lcic.v20220817.UnblockKickedUser", async function () {
+it("lcic.v20220817.GetPlaybackToken", async function () {
     try {
-       const data = await client.UnblockKickedUser({})
+       const data = await client.GetPlaybackToken({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +248,19 @@ it("lcic.v20220817.CreateDocument", async function () {
     }
 })
 
-it("lcic.v20220817.DescribeSupervisors", async function () {
+it("lcic.v20220817.BatchGetPlaybackToken", async function () {
     try {
-       const data = await client.DescribeSupervisors({})
+       const data = await client.BatchGetPlaybackToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.UnbindDocumentFromRoom", async function () {
+    try {
+       const data = await client.UnbindDocumentFromRoom({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -298,9 +318,9 @@ it("lcic.v20220817.BatchRegister", async function () {
     }
 })
 
-it("lcic.v20220817.DeleteSupervisor", async function () {
+it("lcic.v20220817.BatchAddGroupMember", async function () {
     try {
-       const data = await client.DeleteSupervisor({})
+       const data = await client.BatchAddGroupMember({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,9 +398,9 @@ it("lcic.v20220817.SendRoomNormalMessage", async function () {
     }
 })
 
-it("lcic.v20220817.DescribeRecord", async function () {
+it("lcic.v20220817.DescribePlayRecords", async function () {
     try {
-       const data = await client.DescribeRecord({})
+       const data = await client.DescribePlayRecords({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,9 +418,9 @@ it("lcic.v20220817.DescribeGroupList", async function () {
     }
 })
 
-it("lcic.v20220817.BatchAddGroupMember", async function () {
+it("lcic.v20220817.DeleteSupervisor", async function () {
     try {
-       const data = await client.BatchAddGroupMember({})
+       const data = await client.DeleteSupervisor({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,6 +458,16 @@ it("lcic.v20220817.DescribeRecordTask", async function () {
     }
 })
 
+it("lcic.v20220817.UnblockKickedUser", async function () {
+    try {
+       const data = await client.UnblockKickedUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.GetRoomEvent", async function () {
     try {
        const data = await client.GetRoomEvent({})
@@ -461,6 +491,16 @@ it("lcic.v20220817.BindDocumentToRoom", async function () {
 it("lcic.v20220817.LoginOriginId", async function () {
     try {
        const data = await client.LoginOriginId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.DescribePlaybackList", async function () {
+    try {
+       const data = await client.DescribePlaybackList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -658,9 +698,9 @@ it("lcic.v20220817.DeleteRoom", async function () {
     }
 })
 
-it("lcic.v20220817.UnbindDocumentFromRoom", async function () {
+it("lcic.v20220817.BatchCreateGroupWithMembers", async function () {
     try {
-       const data = await client.UnbindDocumentFromRoom({})
+       const data = await client.BatchCreateGroupWithMembers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -718,9 +758,19 @@ it("lcic.v20220817.DescribeMarquee", async function () {
     }
 })
 
-it("lcic.v20220817.BatchCreateGroupWithMembers", async function () {
+it("lcic.v20220817.ModifyUserProfile", async function () {
     try {
-       const data = await client.BatchCreateGroupWithMembers({})
+       const data = await client.ModifyUserProfile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.DeletePlaybackItem", async function () {
+    try {
+       const data = await client.DeletePlaybackItem({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

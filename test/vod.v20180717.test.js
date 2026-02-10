@@ -38,9 +38,9 @@ it("vod.v20180717.DescribeCLSLogsets", async function () {
     }
 })
 
-it("vod.v20180717.CreateRoundPlay", async function () {
+it("vod.v20180717.CreateLLMComprehendTemplate", async function () {
     try {
-       const data = await client.CreateRoundPlay({})
+       const data = await client.CreateLLMComprehendTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,6 +98,16 @@ it("vod.v20180717.CreateAigcImageTask", async function () {
     }
 })
 
+it("vod.v20180717.DescribeLLMComprehendTemplates", async function () {
+    try {
+       const data = await client.DescribeLLMComprehendTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.ModifyJustInTimeTranscodeTemplate", async function () {
     try {
        const data = await client.ModifyJustInTimeTranscodeTemplate({})
@@ -128,9 +138,9 @@ it("vod.v20180717.ApplyUpload", async function () {
     }
 })
 
-it("vod.v20180717.CreateSnapshotByTimeOffsetTemplate", async function () {
+it("vod.v20180717.CreateRoundPlay", async function () {
     try {
-       const data = await client.CreateSnapshotByTimeOffsetTemplate({})
+       const data = await client.CreateRoundPlay({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -171,6 +181,16 @@ it("vod.v20180717.ProcessMediaByProcedure", async function () {
 it("vod.v20180717.CreateQualityInspectTemplate", async function () {
     try {
        const data = await client.CreateQualityInspectTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.CreateSnapshotByTimeOffsetTemplate", async function () {
+    try {
+       const data = await client.CreateSnapshotByTimeOffsetTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,9 +378,9 @@ it("vod.v20180717.CreateCLSLogset", async function () {
     }
 })
 
-it("vod.v20180717.SetCLSPushTarget", async function () {
+it("vod.v20180717.ModifyLLMComprehendTemplate", async function () {
     try {
-       const data = await client.SetCLSPushTarget({})
+       const data = await client.ModifyLLMComprehendTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -598,9 +618,9 @@ it("vod.v20180717.DescribeSnapshotByTimeOffsetTemplates", async function () {
     }
 })
 
-it("vod.v20180717.ComposeMedia", async function () {
+it("vod.v20180717.DescribeAdaptiveDynamicStreamingTemplates", async function () {
     try {
-       const data = await client.ComposeMedia({})
+       const data = await client.DescribeAdaptiveDynamicStreamingTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1108,6 +1128,16 @@ it("vod.v20180717.CreateSceneAigcVideoTask", async function () {
     }
 })
 
+it("vod.v20180717.DeleteLLMComprehendTemplate", async function () {
+    try {
+       const data = await client.DeleteLLMComprehendTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.CreateSceneAigcImageTask", async function () {
     try {
        const data = await client.CreateSceneAigcImageTask({})
@@ -1508,9 +1538,9 @@ it("vod.v20180717.ModifyRoundPlay", async function () {
     }
 })
 
-it("vod.v20180717.DescribeAdaptiveDynamicStreamingTemplates", async function () {
+it("vod.v20180717.ComposeMedia", async function () {
     try {
-       const data = await client.DescribeAdaptiveDynamicStreamingTemplates({})
+       const data = await client.ComposeMedia({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2051,6 +2081,16 @@ it("vod.v20180717.CreateAIRecognitionTemplate", async function () {
 it("vod.v20180717.DeleteEnhanceMediaTemplate", async function () {
     try {
        const data = await client.DeleteEnhanceMediaTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.SetCLSPushTarget", async function () {
+    try {
+       const data = await client.SetCLSPushTarget({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

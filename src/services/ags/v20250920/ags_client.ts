@@ -63,6 +63,8 @@ import {
   AcquireSandboxInstanceTokenResponse,
   ProbeConfiguration,
   CreatePreCacheImageTaskRequest,
+  CLSConfig,
+  LogConfiguration,
   Tag,
   UpdateSandboxToolRequest,
   ResumeSandboxInstanceResponse,

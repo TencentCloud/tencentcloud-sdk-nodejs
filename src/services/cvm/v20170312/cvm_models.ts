@@ -2033,7 +2033,7 @@ export interface CreateHpcClusterResponse {
 }
 
 /**
- * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机（仅专用宿主机产品可用），母机IP等
+ * 描述了实例的抽象位置，包括其所在的可用区，所属的项目，宿主机（仅专用宿主机产品可用），母机IP，专有预扣资源等
  */
 export interface Placement {
   /**

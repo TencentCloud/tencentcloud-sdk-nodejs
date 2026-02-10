@@ -269,6 +269,48 @@ export interface CreateBackupDBInstanceResponse {
 }
 
 /**
+ * DescribeAuditLogs请求参数结构体
+ */
+export interface DescribeAuditLogsRequest {
+  /**
+   * 实例ID，格式如：cmgo-xftsghuy，与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+  /**
+   * 开始时间，格式为："2017-07-12 10:29:20"。
+   */
+  StartTime: string
+  /**
+   * 结束时间，格式为："2017-07-12 10:29:20"。
+   */
+  EndTime: string
+  /**
+   * 过滤条件，可按设置的过滤条件过滤日志。
+   */
+  Filter?: AuditLogFilter
+  /**
+   * 分页参数，指单次返回的数据条数。默认值为100，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 分页偏移量。
+   */
+  Offset?: number
+  /**
+   * 审计日志的排序方式。
+<ul><li>ASC：升序。</li><li>DESC：降序。</li></ul>
+   */
+  Order?: string
+  /**
+   * 审计日志的排序字段，包括：
+<ul><li>timestamp：时间戳。</li>
+<li>affectRows：影响行数。</li>
+<li>execTime：执行时间。</li></ul>
+   */
+  OrderBy?: string
+}
+
+/**
  * 数据库实例价格
  */
 export interface DBInstancePrice {
@@ -335,17 +377,32 @@ export interface DeleteLogDownloadTaskResponse {
 }
 
 /**
- * DescribeDBInstanceNamespace返回参数结构体
+ * InquirePriceRenewDBInstances请求参数结构体
  */
-export interface DescribeDBInstanceNamespaceResponse {
+export interface InquirePriceRenewDBInstancesRequest {
   /**
-   * 查询实例的数据库列表。若未使用 DbName 指定具体查询的数据库，则仅返回查询实例所有的数据库列表，而不返回 Collections 集合信息。
+   * 实例ID。请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID，且单次最多同时查询5个实例。
    */
-  Databases?: Array<string>
+  InstanceIds: Array<string>
   /**
-   * 查询的集合信息。指定 DbName 时，则仅返回该数据库下的集合列表。
+   * 预付费模式（即包年包月）相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。
    */
-  Collections?: Array<string>
+  InstanceChargePrepaid: InstanceChargePrepaid
+}
+
+/**
+ * DescribeAuditLogFiles返回参数结构体
+ */
+export interface DescribeAuditLogFilesResponse {
+  /**
+   * 符合条件的审计日志文件个数。
+   */
+  TotalCount?: number
+  /**
+   * 审计日志文件详情。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<AuditLogFile>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2334,17 +2391,21 @@ export interface DescribeAccountUsersResponse {
 }
 
 /**
- * InquirePriceRenewDBInstances请求参数结构体
+ * DescribeDBInstanceNamespace返回参数结构体
  */
-export interface InquirePriceRenewDBInstancesRequest {
+export interface DescribeDBInstanceNamespaceResponse {
   /**
-   * 实例ID。请登录[MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID，且单次最多同时查询5个实例。
+   * 查询实例的数据库列表。若未使用 DbName 指定具体查询的数据库，则仅返回查询实例所有的数据库列表，而不返回 Collections 集合信息。
    */
-  InstanceIds: Array<string>
+  Databases?: Array<string>
   /**
-   * 预付费模式（即包年包月）相关参数设置。通过该参数可以指定包年包月实例的续费时长、是否设置自动续费等属性。
+   * 查询的集合信息。指定 DbName 时，则仅返回该数据库下的集合列表。
    */
-  InstanceChargePrepaid: InstanceChargePrepaid
+  Collections?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2550,6 +2611,26 @@ export interface InquirePriceCreateDBInstancesResponse {
    * 价格
    */
   Price?: DBInstancePrice
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CloseAuditService请求参数结构体
+ */
+export interface CloseAuditServiceRequest {
+  /**
+   * 实例ID，格式如：cmgo-test1234，与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+}
+
+/**
+ * OpenAuditService返回参数结构体
+ */
+export interface OpenAuditServiceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2794,6 +2875,165 @@ export interface InquirePriceModifyDBInstanceSpecResponse {
 }
 
 /**
+ * CreateDBInstanceHour请求参数结构体
+ */
+export interface CreateDBInstanceHourRequest {
+  /**
+   * 实例内存大小，单位：GB。具体售卖的内存规格，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。
+   */
+  Memory: number
+  /**
+   * 实例硬盘大小，单位：GB。每一个 CPU 规格对应的最大磁盘与最小磁盘范围，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。
+   */
+  Volume: number
+  /**
+   * - 创建副本集实例，指副本集数量，该参数只能为1。
+- 创建分片集群实例，指分片的数量。请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询分片数量的取值范围，其返回的数据结构SpecItems中的参数MinReplicateSetNum与MaxReplicateSetNum分别对应其最小值与最大值。
+   */
+  ReplicateSetNum: number
+  /**
+   * - 创建副本集实例，指每个副本集内主从节点数量。每个副本集所支持的最大节点数与最小节点数，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。
+- 创建分片集群实例，指每个分片的主从节点数量。每个分片所支持的最大节点数与最小节点数，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。
+   */
+  NodeNum: number
+  /**
+   * 指版本信息。具体支持的版本信息 ，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。
+- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。
+- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。
+- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。
+- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。
+- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。
+- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。
+- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。
+   */
+  MongoVersion: string
+  /**
+   * 产品规格类型。
+- HIO10G：通用高HIO万兆型。
+- HCD：云盘版类型。
+   */
+  MachineCode: string
+  /**
+   * 实例数量，最小值1，最大值为30。
+   */
+  GoodsNum: number
+  /**
+   * 可用区信息，输入格式如：ap-guangzhou-2。
+- 具体信息，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。
+- 该参数为主可用区，如果多可用区部署，Zone必须是AvailabilityZoneList中的一个。
+   */
+  Zone: string
+  /**
+   * 实例架构类型。
+- REPLSET：副本集。
+- SHARD：分片集群。
+   */
+  ClusterType: string
+  /**
+   * 私有网络ID。
+- 仅支持配置私有网络，必须选择一个与实例同一地域的私有网络。请登录[私有网络控制台](https://console.cloud.tencent.com/vpc)获取可使用的私有网络 ID。
+- 实例创建成功之后，支持更换私有网络。具体操作，请参见[更换网络](https://cloud.tencent.com/document/product/239/30910)。
+   */
+  VpcId?: string
+  /**
+   * 私有网络 VPC 的子网 ID。
+- 必须在已选的私有网络内指定一个子网。请登录[私有网络控制台](https://console.cloud.tencent.com/vpc)获取可使用的子网 ID。
+- 实例创建成功之后，支持更换私有网络及子网。具体操作，请参见[更换网络](https://cloud.tencent.com/document/product/239/30910)。
+   */
+  SubnetId?: string
+  /**
+   * 实例密码。设置要求如下：
+- 字符个数为[8,32]。
+- 可输入[A,Z]、[a,z]、[0,9]范围内的字符。
+- 可输入的特殊字符包括：感叹号“!”，at“@”，警号“#”、百分号“%”、插入号“^”、星号“\*”、括号“()”、下划线“_”。
+- 不能设置单一的字母或者数字。
+   */
+  Password?: string
+  /**
+   * 项目ID。
+- 若不设置该参数，则为默认项目。
+- 在 [MongoDB 控制台项目管理](https://console.cloud.tencent.com/project)页面，可获取项目ID。
+   */
+  ProjectId?: number
+  /**
+   * 实例标签信息。
+   */
+  Tags?: Array<TagInfo>
+  /**
+   * 实例类型。
+- 1：正式实例。
+- 3：只读实例。
+- 4：灾备实例。
+- 5：克隆实例。注意：克隆实例 RestoreTime 为必填项。
+   */
+  Clone?: number
+  /**
+   * 父实例 ID。
+- 当参数**Clone**为3或者4时，即实例为只读或灾备实例时，该参数必须配置。
+- 请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制父实例 ID。
+   */
+  Father?: string
+  /**
+   * 安全组 ID。 请登录[安全组控制台](https://console.cloud.tencent.com/vpc/security-group)页面获取与数据库实例同地域的安全组 ID。
+   */
+  SecurityGroup?: Array<string>
+  /**
+   * 克隆实例回档时间。
+- 若为克隆实例，则必须配置该参数。输入格式示例：2021-08-13 16:30:00。
+- 回档时间范围：仅能回档7天内时间点的数据。
+   */
+  RestoreTime?: string
+  /**
+   * 实例名称。仅支持长度为128个字符的中文、英文、数字、下划线\_、分隔符\-。批量购买数据库实例时，支持通过自定义命名模式串与数字后缀自动升序功能，高效设置实例名称。
+- 基础模式：前缀＋自动升序编号（默认从1开始），**lnstanceName**仅需自定义实例名称前缀，例如设置为：cmgo，设置购买数量为5，则购买后，实例名称依次分别为cmgo1、cmgo2、cmgo3、cmgo4、cmgo5。
+- 自定义起始序号模式：前缀+｛R:x｝（x为自定义起始序号）。**InstanceName**需填写“前缀｛R:x｝”，例如：cmgo｛R:3｝，设置购买数量为5，则实例名称为cmgo3、cmgo4、cmgo5、cmgo6、cmgo7。
+- 复合模式串：前缀1{R:x}+前缀2{R:y}+ ⋯+固定后缀，x与y分别为每一段前缀的起始序号。**instanceName**需填写复合模式串，例如：cmgo{R:10}\_node{R:12}\_db，设置批量购买数量为5，则实例名称为 cmgo10\_node12\_db, cmgo11\_node13\_db, cmgo12\_node14\_db, cmgo13\_node15\_db, cluster14\_node16\_db. 
+   */
+  InstanceName?: string
+  /**
+   * 若多可用区部署云数据库实例，指定多可用区列表。
+- 多可用区部署实例，参数 **Zone** 指定实例主可用区信息；**AvailabilityZoneList** 指定所有可用区信息，包含主可用区。输入格式如：[ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4]。
+- 通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 可获取云数据库不同地域规划的可用区信息，以便指定有效的可用区。
+- 多可用区部署节点只能部署在3个不同可用区。不支持将集群的大多数节点部署在同一个可用区。例如：3节点集群不支持2个节点部署在同一个区。
+   */
+  AvailabilityZoneList?: Array<string>
+  /**
+   * Mongos CPU 核数，支持1、2、4、8、16。购买分片集群时，必须填写。
+   */
+  MongosCpu?: number
+  /**
+   * Mongos 内存大小。
+-  购买分片集群时，必须填写。
+- 单位：GB，支持1核2GB、2核4GB、4核8GB、8核16GB、16核32GB。
+   */
+  MongosMemory?: number
+  /**
+   * Mongos 数量。购买分片集群时，必须填写。
+- 单可用区部署实例，其数量范围为[3,32]。
+- 多可用区部署实例，其数量范围为[6,32]。
+   */
+  MongosNodeNum?: number
+  /**
+   * 只读节点数量，取值范围[0,5]。
+   */
+  ReadonlyNodeNum?: number
+  /**
+   * 指只读节点所属可用区数组。跨可用区部署实例，参数**ReadonlyNodeNum**不为**0**时，必须配置该参数。
+   */
+  ReadonlyNodeAvailabilityZoneList?: Array<string>
+  /**
+   * Hidden节点所属可用区。跨可用区部署实例，必须配置该参数。
+   */
+  HiddenZone?: string
+  /**
+   * 参数模板 ID。
+- 参数模板是预置了特定参数值的集合，可用于快速配置新的 MongoDB 实例。合理使用参数模板，能有效提升数据库的部署效率与运行性能。
+- 参数模板 ID 可通过 [DescribeDBInstanceParamTpl ](https://cloud.tencent.com/document/product/240/109155)接口获取。请选择与实例版本与架构所对应的参数模板 ID。
+   */
+  ParamTemplateId?: string
+}
+
+/**
  * 安全组规则
  */
 export interface SecurityGroupBound {
@@ -2870,74 +3110,13 @@ export interface DescribeDBInstanceNodePropertyResponse {
 }
 
 /**
- * 实例信息详情
+ * CloseAuditService返回参数结构体
  */
-export interface InstanceInfo {
+export interface CloseAuditServiceResponse {
   /**
-   * 审计日志保存时长。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AuditLogExpireDay?: number
-  /**
-   * 审计状态。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AuditStatus?: string
-  /**
-   * 实例 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceId?: string
-  /**
-   * 实例名。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceName?: string
-  /**
-   * 实例角色。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceRole?: string
-  /**
-   * 实例类型。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceType?: string
-  /**
-   * 数据库版本。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MongodbVersion?: string
-  /**
-   * 项目 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProjectId?: number
-  /**
-   * 地域。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Region?: string
-  /**
-   * 实例状态。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: string
-  /**
-   * 是否支持审计。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SupportAudit?: boolean
-  /**
-   * 可用区。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Zone?: string
-  /**
-   * 标签信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TagList?: Array<TagInfo>
+  RequestId?: string
 }
 
 /**
@@ -2994,22 +3173,29 @@ export interface DescribeDBInstanceParamTplDetailResponse {
 }
 
 /**
- * DescribeMongodbLogs返回参数结构体
+ * DescribeAuditInstanceList请求参数结构体
  */
-export interface DescribeMongodbLogsResponse {
+export interface DescribeAuditInstanceListRequest {
   /**
-   * 日志总数。
+   * 指明待查询的实例为已开通审计或未开通审计。<ul><li>1：已开通审计功能。</li><li>0：未开通审计功能。</li></ul>
    */
-  TotalCount?: number
+  AuditSwitch?: number
   /**
-   * 日志详情列表。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 筛选条件。
    */
-  LogList?: Array<LogInfo>
+  Filters?: Array<Filters>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 审计类型，不传 默认全部，0 全审计，1 规则审计
    */
-  RequestId?: string
+  AuditMode?: number
+  /**
+   * 每页显示数量。
+   */
+  Limit?: number
+  /**
+   * 分页偏移量。
+   */
+  Offset?: number
 }
 
 /**
@@ -3312,6 +3498,77 @@ export interface ShardInfo {
 }
 
 /**
+ * 实例信息详情
+ */
+export interface InstanceInfo {
+  /**
+   * 审计日志保存时长。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuditLogExpireDay?: number
+  /**
+   * 审计状态。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuditStatus?: string
+  /**
+   * 实例 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 实例名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * 实例角色。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceRole?: string
+  /**
+   * 实例类型。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceType?: string
+  /**
+   * 数据库版本。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MongodbVersion?: string
+  /**
+   * 项目 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: number
+  /**
+   * 地域。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * 实例状态。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 是否支持审计。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SupportAudit?: boolean
+  /**
+   * 可用区。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
+  /**
+   * 标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagList?: Array<TagInfo>
+}
+
+/**
  * SetBackupRules返回参数结构体
  */
 export interface SetBackupRulesResponse {
@@ -3461,13 +3718,13 @@ export interface DescribeTransparentDataEncryptionStatusResponse {
 }
 
 /**
- * OpenAuditService返回参数结构体
+ * DescribeAuditConfig请求参数结构体
  */
-export interface OpenAuditServiceResponse {
+export interface DescribeAuditConfigRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例 ID，格式如：cmgo-xftsghuy，与云数据库控制台页面中显示的实例 ID 相同。
    */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -3527,29 +3784,22 @@ export interface UpgradeDbInstanceVersionResponse {
 }
 
 /**
- * DescribeAuditInstanceList请求参数结构体
+ * DescribeMongodbLogs返回参数结构体
  */
-export interface DescribeAuditInstanceListRequest {
+export interface DescribeMongodbLogsResponse {
   /**
-   * 指明待查询的实例为已开通审计或未开通审计。<ul><li>1：已开通审计功能。</li><li>0：未开通审计功能。</li></ul>
+   * 日志总数。
    */
-  AuditSwitch?: number
+  TotalCount?: number
   /**
-   * 筛选条件。
+   * 日志详情列表。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Filters?: Array<Filters>
+  LogList?: Array<LogInfo>
   /**
-   * 审计类型，不传 默认全部，0 全审计，1 规则审计
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AuditMode?: number
-  /**
-   * 每页显示数量。
-   */
-  Limit?: number
-  /**
-   * 分页偏移量。
-   */
-  Offset?: number
+  RequestId?: string
 }
 
 /**
@@ -3644,162 +3894,43 @@ export interface IsolateDBInstanceRequest {
 }
 
 /**
- * CreateDBInstanceHour请求参数结构体
+ * 审计日志文件
  */
-export interface CreateDBInstanceHourRequest {
+export interface AuditLogFile {
   /**
-   * 实例内存大小，单位：GB。具体售卖的内存规格，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。
+   * 审计日志文件名称。
    */
-  Memory: number
+  FileName?: string
   /**
-   * 实例硬盘大小，单位：GB。每一个 CPU 规格对应的最大磁盘与最小磁盘范围，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。
+   * 审计日志文件创建时间。格式为 : "2019-03-20 17:09:13"。
    */
-  Volume: number
+  CreateTime?: string
   /**
-   * - 创建副本集实例，指副本集数量，该参数只能为1。
-- 创建分片集群实例，指分片的数量。请通过接口[DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567)查询分片数量的取值范围，其返回的数据结构SpecItems中的参数MinReplicateSetNum与MaxReplicateSetNum分别对应其最小值与最大值。
+   * 文件状态值。可能返回的值为：
+"creating" - 生成中；
+"failed" - 创建失败；
+"success" - 已生成。
    */
-  ReplicateSetNum: number
+  Status?: string
   /**
-   * - 创建副本集实例，指每个副本集内主从节点数量。每个副本集所支持的最大节点数与最小节点数，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。
-- 创建分片集群实例，指每个分片的主从节点数量。每个分片所支持的最大节点数与最小节点数，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。
+   * 文件大小，单位为 KB。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeNum: number
+  FileSize?: number
   /**
-   * 指版本信息。具体支持的版本信息 ，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。
-- MONGO_40_WT：MongoDB 4.0 WiredTiger存储引擎版本。
-- MONGO_42_WT：MongoDB 4.2 WiredTiger存储引擎版本。
-- MONGO_44_WT：MongoDB 4.4 WiredTiger存储引擎版本。
-- MONGO_50_WT：MongoDB 5.0 WiredTiger存储引擎版本。
-- MONGO_60_WT：MongoDB 6.0 WiredTiger存储引擎版本。
-- MONGO_70_WT：MongoDB 7.0 WiredTiger存储引擎版本。
-- MONGO_80_WT：MongoDB 8.0 WiredTiger存储引擎版本。
+   * 审计日志下载地址。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  MongoVersion: string
+  DownloadUrl?: string
   /**
-   * 产品规格类型。
-- HIO10G：通用高HIO万兆型。
-- HCD：云盘版类型。
+   * 错误信息。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  MachineCode: string
+  ErrMsg?: string
   /**
-   * 实例数量，最小值1，最大值为30。
+   * 下载进度
    */
-  GoodsNum: number
-  /**
-   * 可用区信息，输入格式如：ap-guangzhou-2。
-- 具体信息，请通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 获取。
-- 该参数为主可用区，如果多可用区部署，Zone必须是AvailabilityZoneList中的一个。
-   */
-  Zone: string
-  /**
-   * 实例架构类型。
-- REPLSET：副本集。
-- SHARD：分片集群。
-   */
-  ClusterType: string
-  /**
-   * 私有网络ID。
-- 仅支持配置私有网络，必须选择一个与实例同一地域的私有网络。请登录[私有网络控制台](https://console.cloud.tencent.com/vpc)获取可使用的私有网络 ID。
-- 实例创建成功之后，支持更换私有网络。具体操作，请参见[更换网络](https://cloud.tencent.com/document/product/239/30910)。
-   */
-  VpcId?: string
-  /**
-   * 私有网络 VPC 的子网 ID。
-- 必须在已选的私有网络内指定一个子网。请登录[私有网络控制台](https://console.cloud.tencent.com/vpc)获取可使用的子网 ID。
-- 实例创建成功之后，支持更换私有网络及子网。具体操作，请参见[更换网络](https://cloud.tencent.com/document/product/239/30910)。
-   */
-  SubnetId?: string
-  /**
-   * 实例密码。设置要求如下：
-- 字符个数为[8,32]。
-- 可输入[A,Z]、[a,z]、[0,9]范围内的字符。
-- 可输入的特殊字符包括：感叹号“!”，at“@”，警号“#”、百分号“%”、插入号“^”、星号“\*”、括号“()”、下划线“_”。
-- 不能设置单一的字母或者数字。
-   */
-  Password?: string
-  /**
-   * 项目ID。
-- 若不设置该参数，则为默认项目。
-- 在 [MongoDB 控制台项目管理](https://console.cloud.tencent.com/project)页面，可获取项目ID。
-   */
-  ProjectId?: number
-  /**
-   * 实例标签信息。
-   */
-  Tags?: Array<TagInfo>
-  /**
-   * 实例类型。
-- 1：正式实例。
-- 3：只读实例。
-- 4：灾备实例。
-- 5：克隆实例。注意：克隆实例 RestoreTime 为必填项。
-   */
-  Clone?: number
-  /**
-   * 父实例 ID。
-- 当参数**Clone**为3或者4时，即实例为只读或灾备实例时，该参数必须配置。
-- 请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制父实例 ID。
-   */
-  Father?: string
-  /**
-   * 安全组 ID。 请登录[安全组控制台](https://console.cloud.tencent.com/vpc/security-group)页面获取与数据库实例同地域的安全组 ID。
-   */
-  SecurityGroup?: Array<string>
-  /**
-   * 克隆实例回档时间。
-- 若为克隆实例，则必须配置该参数。输入格式示例：2021-08-13 16:30:00。
-- 回档时间范围：仅能回档7天内时间点的数据。
-   */
-  RestoreTime?: string
-  /**
-   * 实例名称。仅支持长度为128个字符的中文、英文、数字、下划线\_、分隔符\-。批量购买数据库实例时，支持通过自定义命名模式串与数字后缀自动升序功能，高效设置实例名称。
-- 基础模式：前缀＋自动升序编号（默认从1开始），**lnstanceName**仅需自定义实例名称前缀，例如设置为：cmgo，设置购买数量为5，则购买后，实例名称依次分别为cmgo1、cmgo2、cmgo3、cmgo4、cmgo5。
-- 自定义起始序号模式：前缀+｛R:x｝（x为自定义起始序号）。**InstanceName**需填写“前缀｛R:x｝”，例如：cmgo｛R:3｝，设置购买数量为5，则实例名称为cmgo3、cmgo4、cmgo5、cmgo6、cmgo7。
-- 复合模式串：前缀1{R:x}+前缀2{R:y}+ ⋯+固定后缀，x与y分别为每一段前缀的起始序号。**instanceName**需填写复合模式串，例如：cmgo{R:10}\_node{R:12}\_db，设置批量购买数量为5，则实例名称为 cmgo10\_node12\_db, cmgo11\_node13\_db, cmgo12\_node14\_db, cmgo13\_node15\_db, cluster14\_node16\_db. 
-   */
-  InstanceName?: string
-  /**
-   * 若多可用区部署云数据库实例，指定多可用区列表。
-- 多可用区部署实例，参数 **Zone** 指定实例主可用区信息；**AvailabilityZoneList** 指定所有可用区信息，包含主可用区。输入格式如：[ap-guangzhou-2,ap-guangzhou-3,ap-guangzhou-4]。
-- 通过接口 [DescribeSpecInfo](https://cloud.tencent.com/document/product/240/38567) 可获取云数据库不同地域规划的可用区信息，以便指定有效的可用区。
-- 多可用区部署节点只能部署在3个不同可用区。不支持将集群的大多数节点部署在同一个可用区。例如：3节点集群不支持2个节点部署在同一个区。
-   */
-  AvailabilityZoneList?: Array<string>
-  /**
-   * Mongos CPU 核数，支持1、2、4、8、16。购买分片集群时，必须填写。
-   */
-  MongosCpu?: number
-  /**
-   * Mongos 内存大小。
--  购买分片集群时，必须填写。
-- 单位：GB，支持1核2GB、2核4GB、4核8GB、8核16GB、16核32GB。
-   */
-  MongosMemory?: number
-  /**
-   * Mongos 数量。购买分片集群时，必须填写。
-- 单可用区部署实例，其数量范围为[3,32]。
-- 多可用区部署实例，其数量范围为[6,32]。
-   */
-  MongosNodeNum?: number
-  /**
-   * 只读节点数量，取值范围[0,5]。
-   */
-  ReadonlyNodeNum?: number
-  /**
-   * 指只读节点所属可用区数组。跨可用区部署实例，参数**ReadonlyNodeNum**不为**0**时，必须配置该参数。
-   */
-  ReadonlyNodeAvailabilityZoneList?: Array<string>
-  /**
-   * Hidden节点所属可用区。跨可用区部署实例，必须配置该参数。
-   */
-  HiddenZone?: string
-  /**
-   * 参数模板 ID。
-- 参数模板是预置了特定参数值的集合，可用于快速配置新的 MongoDB 实例。合理使用参数模板，能有效提升数据库的部署效率与运行性能。
-- 参数模板 ID 可通过 [DescribeDBInstanceParamTpl ](https://cloud.tencent.com/document/product/240/109155)接口获取。请选择与实例版本与架构所对应的参数模板 ID。
-   */
-  ParamTemplateId?: string
+  ProgressRate?: number
 }
 
 /**
@@ -3814,6 +3945,28 @@ export interface EnableTransparentDataEncryptionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAuditLogFiles请求参数结构体
+ */
+export interface DescribeAuditLogFilesRequest {
+  /**
+   * 实例 ID，格式如：cmgo-xfts****，与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+  /**
+   * 分页大小参数。默认值为 20，取值范围[1,100]。
+   */
+  Limit?: number
+  /**
+   * 分页偏移量。
+   */
+  Offset?: number
+  /**
+   * 审计日志文件名。该接口将根据此参数过滤相关的审计日志文件。
+   */
+  FileName?: string
 }
 
 /**
@@ -4131,6 +4284,31 @@ export interface DeleteAuditLogFileRequest {
    * 审计日志文件名称，须保证文件名的准确性。
    */
   FileName: string
+}
+
+/**
+ * 修改实例节点详情。
+ */
+export interface RemoveNodeList {
+  /**
+   * 需要删除的节点角色。
+- SECONDARY：Mongod 从节点。
+- READONLY：只读节点。
+- MONGOS：Mongos 节点。
+   */
+  Role: string
+  /**
+   * 要删除的节点 ID。分片集群须指定一组分片要删除的节点名称即可，其余分片对该组对齐。
+- 获取方式：登录 [MongoDB控制台](https://console.cloud.tencent.com/mongodb)，在**节点管理**页签，可获取**节点 ID**。
+- 特别说明：分片集群同一节点上的分片，仅需指定0分片节点 ID 即可。例如：cmgo-6hfk\*\*\*\*\_0-node-primary。
+   */
+  NodeName: string
+  /**
+   * 节点所对应的可用区。当前支持可用区信息，请参见[地域和可用区](https://cloud.tencent.com/document/product/240/3637)。
+- 单可用区，所有节点在同一可用区。
+- 多可用区：当前标准规格是三可用区分布，主从节点不在同一可用区，需注意配置所删除节点对应的可用区，且删除后必须满足任意2个可用区节点数大于第3个可用区原则。
+   */
+  Zone: string
 }
 
 /**
@@ -4464,28 +4642,93 @@ export interface DescribeDBInstanceURLResponse {
 }
 
 /**
- * 修改实例节点详情。
+ * DescribeAuditConfig返回参数结构体
  */
-export interface RemoveNodeList {
+export interface DescribeAuditConfigResponse {
   /**
-   * 需要删除的节点角色。
-- SECONDARY：Mongod 从节点。
-- READONLY：只读节点。
-- MONGOS：Mongos 节点。
+   * 实例id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Role: string
+  InstanceId?: string
   /**
-   * 要删除的节点 ID。分片集群须指定一组分片要删除的节点名称即可，其余分片对该组对齐。
-- 获取方式：登录 [MongoDB控制台](https://console.cloud.tencent.com/mongodb)，在**节点管理**页签，可获取**节点 ID**。
-- 特别说明：分片集群同一节点上的分片，仅需指定0分片节点 ID 即可。例如：cmgo-6hfk\*\*\*\*\_0-node-primary。
+   * 实例名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeName: string
+  InstanceName?: string
   /**
-   * 节点所对应的可用区。当前支持可用区信息，请参见[地域和可用区](https://cloud.tencent.com/document/product/240/3637)。
-- 单可用区，所有节点在同一可用区。
-- 多可用区：当前标准规格是三可用区分布，主从节点不在同一可用区，需注意配置所删除节点对应的可用区，且删除后必须满足任意2个可用区节点数大于第3个可用区原则。
+   * true表示全审计，false表示规则审计
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Zone: string
+  AuditAll?: boolean
+  /**
+   * 该实例开通数据库审计的时间。
+   */
+  CreateTime?: string
+  /**
+   * 审计日志保存时长。
+单位：天。目前支持的保存时长包括：0、30、180、365，1095、1825。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogExpireDay?: number
+  /**
+   * 审计日志存储类型。目前仅支持storage：存储型。
+   */
+  LogType?: string
+  /**
+   * 是否正在关闭审计功能。
+<ul><li>true：是。</li><li>false：否。</li></ul>
+   */
+  IsClosing?: string
+  /**
+   * 是否正在开启审计功能。<ul><li>true：是。</li><li>false：否。</li></ul>
+   */
+  IsOpening?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 审计日志
+ */
+export interface AuditLog {
+  /**
+   * 影响行数
+   */
+  AffectRows?: number
+  /**
+   * 操作类型。如：grantRolesToRole、dropRole等。
+   */
+  Atype?: string
+  /**
+   * 执行时间。单位为：ms。
+   */
+  ExecTime?: number
+  /**
+   * 客户端地址。
+   */
+  Host?: string
+  /**
+   * 操作参数。包含操作的详细参数信息。
+   */
+  Param?: string
+  /**
+   * 执行结果。0表示成功，非0表示失败。
+   */
+  Result?: number
+  /**
+   * 用户角色列表。格式为：role@db,role@db。
+   */
+  Roles?: string
+  /**
+   * 操作时间戳。格式为：YYYY-MM-DD HH:mm:ss。
+   */
+  Timestamp?: string
+  /**
+   * 用户名。格式为：user@db。
+   */
+  User?: string
 }
 
 /**
@@ -4539,6 +4782,20 @@ export interface RestartNodesRequest {
 - 节点 ID，请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在**节点管理**页面复制，或者通过 [DescribeDBInstanceNodeProperty ](https://cloud.tencent.com/document/product/240/82022)接口获取。
    */
   NodeIds: Array<string>
+}
+
+/**
+ * 修改mongoDB实例，请求参数
+ */
+export interface ModifyMongoDBParamType {
+  /**
+   * 需要修改的参数名称，请严格参考通过 DescribeInstanceParams 获取的当前实例支持的参数名。
+   */
+  Key: string
+  /**
+   * 需要修改的参数名称对应的值，请严格参考通过 DescribeInstanceParams 获取的参数对应的值的范围。
+   */
+  Value: string
 }
 
 /**
@@ -4936,15 +5193,20 @@ export interface UpgradeDBInstanceKernelVersionRequest {
 }
 
 /**
- * 修改mongoDB实例，请求参数
+ * DescribeAuditLogs返回参数结构体
  */
-export interface ModifyMongoDBParamType {
+export interface DescribeAuditLogsResponse {
   /**
-   * 需要修改的参数名称，请严格参考通过 DescribeInstanceParams 获取的当前实例支持的参数名。
+   * 符合条件的审计日志条数。
    */
-  Key: string
+  TotalCount?: number
   /**
-   * 需要修改的参数名称对应的值，请严格参考通过 DescribeInstanceParams 获取的参数对应的值的范围。
+   * 审计日志详情。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: string
+  Items?: Array<AuditLog>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

@@ -1914,6 +1914,20 @@ export interface DescribeBackUpScheduleRequest {
 }
 
 /**
+ * RestartInstance返回参数结构体
+ */
+export interface RestartInstanceResponse {
+  /**
+   * 任务id
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ScaleCNOutUpInstance返回参数结构体
  */
 export interface ScaleCNOutUpInstanceResponse {
@@ -2063,6 +2077,28 @@ export interface DestroyInstanceRequest {
    * 集群id
    */
   InstanceId: string
+}
+
+/**
+ * RestartInstance请求参数结构体
+ */
+export interface RestartInstanceRequest {
+  /**
+   * 实例id
+   */
+  InstanceId: string
+  /**
+   * 节点类型，可选值：CK / ZK / CHPROXY
+   */
+  NodeType: string
+  /**
+   * 符合节点类型的要重启的节点ip列表
+   */
+  NodeIpList: Array<string>
+  /**
+   * 是否滚动重启，默认为true
+   */
+  RollingRestart?: boolean
 }
 
 /**
