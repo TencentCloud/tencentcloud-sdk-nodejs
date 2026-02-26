@@ -578,6 +578,16 @@ it("monitor.v20180724.UpgradeGrafanaInstance", async function () {
     }
 })
 
+it("monitor.v20180724.DescribeNotificationContentTemplateSupports", async function () {
+    try {
+       const data = await client.DescribeNotificationContentTemplateSupports({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeRemoteWrites", async function () {
     try {
        const data = await client.DescribeRemoteWrites({})

@@ -326,6 +326,26 @@ export interface DescribePolicyGroupInfoResponse {
 }
 
 /**
+ * 告警通知内容模板支持的变量或者函数列表
+ */
+export interface NotificationContentTemplateSupport {
+  /**
+   * 监控类型
+   */
+  MonitorType?: string
+  /**
+   * 支持的变量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Variables?: Array<NotificationContentTemplateSupportDetail>
+  /**
+   * 支持的函数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Functions?: Array<NotificationContentTemplateSupportDetail>
+}
+
+/**
  * 策略标签
  */
 export interface PolicyTag {
@@ -2947,13 +2967,21 @@ export interface InstanceGroups {
 }
 
 /**
- * UpdateGrafanaNotificationChannel返回参数结构体
+ * 托管Prometheus agent信息
  */
-export interface UpdateGrafanaNotificationChannelResponse {
+export interface PrometheusAgentInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 集群类型。可填入tke、eks、tkeedge、tdcc，分别代表标准集群、弹性集群、边缘集群、注册集群
    */
-  RequestId?: string
+  ClusterType: string
+  /**
+   * 集成容器服务中关联的集群ID
+   */
+  ClusterId: string
+  /**
+   * 该参数未使用，不需要填写
+   */
+  Describe?: string
 }
 
 /**
@@ -4652,21 +4680,21 @@ export interface UpdatePrometheusScrapeJobRequest {
 }
 
 /**
- * 托管Prometheus agent信息
+ * 告警通知内容模板支持的变量或者函数
  */
-export interface PrometheusAgentInfo {
+export interface NotificationContentTemplateSupportDetail {
   /**
-   * 集群类型。可填入tke、eks、tkeedge、tdcc，分别代表标准集群、弹性集群、边缘集群、注册集群
+   * 变量/函数名称
    */
-  ClusterType: string
+  Name?: string
   /**
-   * 集成容器服务中关联的集群ID
+   * 描述
    */
-  ClusterId: string
+  Desc?: string
   /**
-   * 该参数未使用，不需要填写
+   * 示例
    */
-  Describe?: string
+  Example?: string
 }
 
 /**
@@ -4860,6 +4888,16 @@ export interface CreateGrafanaInstanceRequest {
    * 是否自动选择代金券，默认为 false
    */
   AutoVoucher?: boolean
+}
+
+/**
+ * DescribeNotificationContentTemplateSupports请求参数结构体
+ */
+export interface DescribeNotificationContentTemplateSupportsRequest {
+  /**
+   * 监控类型
+   */
+  MonitorType?: string
 }
 
 /**
@@ -9110,6 +9148,21 @@ export interface UpgradeGrafanaDashboardRequest {
 }
 
 /**
+ * DescribeNotificationContentTemplateSupports返回参数结构体
+ */
+export interface DescribeNotificationContentTemplateSupportsResponse {
+  /**
+   * 配置详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Support?: NotificationContentTemplateSupport
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteServiceDiscovery请求参数结构体
  */
 export interface DeleteServiceDiscoveryRequest {
@@ -11900,6 +11953,16 @@ export interface DescribeMonitorResourceInfoResponse {
    * 告警短信数量
    */
   AlarmSMSNumber?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateGrafanaNotificationChannel返回参数结构体
+ */
+export interface UpdateGrafanaNotificationChannelResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

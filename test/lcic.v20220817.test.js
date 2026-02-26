@@ -248,6 +248,16 @@ it("lcic.v20220817.CreateDocument", async function () {
     }
 })
 
+it("lcic.v20220817.LoginOriginIdWithRoom", async function () {
+    try {
+       const data = await client.LoginOriginIdWithRoom({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.BatchGetPlaybackToken", async function () {
     try {
        const data = await client.BatchGetPlaybackToken({})
@@ -401,6 +411,16 @@ it("lcic.v20220817.SendRoomNormalMessage", async function () {
 it("lcic.v20220817.DescribePlayRecords", async function () {
     try {
        const data = await client.DescribePlayRecords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.LoginUserWithRoom", async function () {
+    try {
+       const data = await client.LoginUserWithRoom({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

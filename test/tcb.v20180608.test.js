@@ -288,6 +288,16 @@ it("tcb.v20180608.CreateMySQL", async function () {
     }
 })
 
+it("tcb.v20180608.CreateEnv", async function () {
+    try {
+       const data = await client.CreateEnv({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.ModifyGatewayVersionTraffic", async function () {
     try {
        const data = await client.ModifyGatewayVersionTraffic({})
@@ -808,6 +818,16 @@ it("tcb.v20180608.DescribeBillingInfo", async function () {
     }
 })
 
+it("tcb.v20180608.RenewEnv", async function () {
+    try {
+       const data = await client.RenewEnv({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.ReinstateEnv", async function () {
     try {
        const data = await client.ReinstateEnv({})
@@ -871,6 +891,16 @@ it("tcb.v20180608.DeleteCloudBaseGWAPI", async function () {
 it("tcb.v20180608.DescribeGraphData", async function () {
     try {
        const data = await client.DescribeGraphData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.ModifyEnvPlan", async function () {
+    try {
+       const data = await client.ModifyEnvPlan({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

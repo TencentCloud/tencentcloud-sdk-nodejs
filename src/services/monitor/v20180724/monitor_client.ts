@@ -31,6 +31,7 @@ import {
   AlarmHistoryMetric,
   DescribeExternalClusterRegisterCommandResponse,
   DescribePolicyGroupInfoResponse,
+  NotificationContentTemplateSupport,
   PolicyTag,
   DeletePrometheusClusterAgentRequest,
   DescribePrometheusScrapeJobsRequest,
@@ -136,7 +137,7 @@ import {
   DescribeExternalClusterUninstallCommandRequest,
   CreateAlarmNoticeRequest,
   InstanceGroups,
-  UpdateGrafanaNotificationChannelResponse,
+  PrometheusAgentInfo,
   CreateExporterIntegrationResponse,
   UnBindingAllPolicyObjectRequest,
   AlarmPolicyCondition,
@@ -206,7 +207,7 @@ import {
   DescribePrometheusTargetsTMPResponse,
   DescribePrometheusGlobalConfigResponse,
   UpdatePrometheusScrapeJobRequest,
-  PrometheusAgentInfo,
+  NotificationContentTemplateSupportDetail,
   SingleOrderedDataPoint,
   ServiceDiscoveryItem,
   CreatePrometheusClusterAgentResponse,
@@ -216,6 +217,7 @@ import {
   UpdatePrometheusAlertGroupStateRequest,
   PrometheusAlertManagerConfig,
   CreateGrafanaInstanceRequest,
+  DescribeNotificationContentTemplateSupportsRequest,
   DescribePrometheusInstanceUsageResponse,
   BindProgressStep,
   DescribePrometheusGlobalNotificationRequest,
@@ -383,6 +385,7 @@ import {
   ReceiverInfo,
   DescribeRecordingRulesRequest,
   UpgradeGrafanaDashboardRequest,
+  DescribeNotificationContentTemplateSupportsResponse,
   DeleteServiceDiscoveryRequest,
   DescribeInstalledPluginsResponse,
   UpdateGrafanaConfigResponse,
@@ -500,6 +503,7 @@ import {
   TerminatePrometheusInstancesResponse,
   ModifyRemoteURLsResponse,
   DescribeMonitorResourceInfoResponse,
+  UpdateGrafanaNotificationChannelResponse,
   UpdateSSOAccountResponse,
   RunPrometheusInstanceRequest,
   DeleteAlarmShieldsResponse,
@@ -1083,6 +1087,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询告警通知内容模板支持的变量或者函数列表
+   */
+  async DescribeNotificationContentTemplateSupports(
+    req: DescribeNotificationContentTemplateSupportsRequest,
+    cb?: (error: string, rep: DescribeNotificationContentTemplateSupportsResponse) => void
+  ): Promise<DescribeNotificationContentTemplateSupportsResponse> {
+    return this.request("DescribeNotificationContentTemplateSupports", req, cb)
+  }
+
+  /**
    * 查询安装的 Agent 列表
    */
   async DescribeRemoteWrites(
@@ -1227,8 +1241,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建全局告警通知渠道。集群内创建的告警规则如果未配置告警通知渠道，默认走全局告警通知渠道（建议在控制台创建告警，集群内创建告警不易维护）
-   */
+     * 之前TPS的接口，迁移后已经不需要该功能
+
+创建全局告警通知渠道。集群内创建的告警规则如果未配置告警通知渠道，默认走全局告警通知渠道（建议在控制台创建告警，集群内创建告警不易维护）
+     */
   async CreatePrometheusGlobalNotification(
     req: CreatePrometheusGlobalNotificationRequest,
     cb?: (error: string, rep: CreatePrometheusGlobalNotificationResponse) => void
@@ -1548,8 +1564,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询全局告警通知渠道
-   */
+     * 之前TPS的接口，迁移后已经不需要
+
+查询全局告警通知渠道
+     */
   async DescribePrometheusGlobalNotification(
     req: DescribePrometheusGlobalNotificationRequest,
     cb?: (error: string, rep: DescribePrometheusGlobalNotificationResponse) => void
@@ -1601,8 +1619,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改全局告警通知渠道
-   */
+     * 之前TPS接口，迁移后不需要
+
+修改全局告警通知渠道
+     */
   async ModifyPrometheusGlobalNotification(
     req: ModifyPrometheusGlobalNotificationRequest,
     cb?: (error: string, rep: ModifyPrometheusGlobalNotificationResponse) => void

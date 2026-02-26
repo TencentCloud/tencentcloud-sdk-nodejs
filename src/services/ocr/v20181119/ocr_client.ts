@@ -31,12 +31,12 @@ import {
   VinOCRResponse,
   ResidencePermitInfo,
   BankCardOCRRequest,
-  VatInvoiceVerifyNewResponse,
+  VatInvoiceItem,
   CarInvoiceOCRRequest,
   DescribeQuestionMarkAgentJobResponse,
   ExtractDocMultiRequest,
   QuestionSplitLayoutOCRRequest,
-  TrainTicketOCRRequest,
+  DescribeMarkEssayAgentJobResponse,
   EstateCertOCRResponse,
   ExtractDocMultiProRequest,
   WordItem,
@@ -91,7 +91,7 @@ import {
   MainlandPermitOCRRequest,
   VatElectronicItemInfo,
   WordPolygon,
-  EnterpriseLicenseOCRRequest,
+  EnglishOCRRequest,
   VehicleLicenseOCRRequest,
   QuestionSplitOCRResponse,
   TableOCRResponse,
@@ -185,10 +185,12 @@ import {
   QuestionSplitLayoutOCRResponse,
   ElectronicAirTransportDetail,
   FinancialBill,
+  SubmitMarkEssayAgentJobRequest,
   LicensePlateOCRRequest,
   GeneralBasicOCRRequest,
   UsedVehicleInvoiceInfo,
   RecognizeTableMultiOCRRequest,
+  SubmitMarkEssayAgentJobResponse,
   GeneralEfficientOCRRequest,
   AdvertiseOCRRequest,
   AirTicketInfo,
@@ -197,7 +199,7 @@ import {
   TextVehicleBack,
   ImageEnhancementRequest,
   ExtractDocBasicResponse,
-  EnglishOCRRequest,
+  EnterpriseLicenseOCRRequest,
   VatInvoiceItemInfo,
   VatElectronicInfo,
   SmartStructuralOCRResponse,
@@ -230,6 +232,7 @@ import {
   DescribeExtractDocAgentJobRequest,
   ElectronicTollSummaryItem,
   ContentInfo,
+  MarkEssaySuggestions,
   TableTitle,
   RecognizeTableAccurateOCRRequest,
   Coord,
@@ -277,6 +280,7 @@ import {
   RecognizeMedicalInvoiceOCRRequest,
   InsuranceBillOCRResponse,
   ClassifyDetectInfo,
+  TrainTicketOCRRequest,
   GeneralEfficientOCRResponse,
   ShipInvoiceOCRRequest,
   MLIDPassportOCRResponse,
@@ -303,7 +307,7 @@ import {
   BusInvoiceOCRRequest,
   QuotaInvoiceOCRResponse,
   RecognizeEncryptedIDCardOCRResponse,
-  VatInvoiceItem,
+  Positions,
   RideHailingTransportLicenseOCRResponse,
   CandWord,
   RecognizeContainerOCRResponse,
@@ -331,6 +335,7 @@ import {
   BusinessCertificateInfo,
   WaybillOCRRequest,
   RideHailingTransportLicenseOCRRequest,
+  VatInvoiceVerifyNewResponse,
   MLIDCardOCRResponse,
   TableCellInfo,
   RecognizeTableOCRRequest,
@@ -346,6 +351,7 @@ import {
   BusinessCardOCRRequest,
   FinanBillOCRRequest,
   RecognizeValidIDCardOCRResponse,
+  DescribeMarkEssayAgentJobRequest,
   GeneralFastOCRResponse,
   Key,
   QrcodePositionObj,
@@ -557,6 +563,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: MLIDPassportOCRResponse) => void
   ): Promise<MLIDPassportOCRResponse> {
     return this.request("MLIDPassportOCR", req, cb)
+  }
+
+  /**
+     * 用于作文批改Agent提交任务。基于业界领先的千亿参数多模态大模型技术，提供中英文手写作文的精准批改端到端服务。核心功能涵盖错别字智能识别、好词好句点评、错句纠错，并能够在原文中定位至具体段落与字符位置，同时提供详细的修改建议与优化内容。此能力是作业批改场景中的核心模块。
+
+默认接口请求并发限制：2次/分钟。
+     */
+  async SubmitMarkEssayAgentJob(
+    req: SubmitMarkEssayAgentJobRequest,
+    cb?: (error: string, rep: SubmitMarkEssayAgentJobResponse) => void
+  ): Promise<SubmitMarkEssayAgentJobResponse> {
+    return this.request("SubmitMarkEssayAgentJob", req, cb)
   }
 
   /**
@@ -1456,6 +1474,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 用于作文批改Agent查询任务。基于业界领先的千亿参数多模态大模型技术，提供中英文手写作文的精准批改端到端服务。核心功能涵盖错别字智能识别、好词好句点评、错句纠错，并能够在原文中定位至具体段落与字符位置，同时提供详细的修改建议与优化内容。此能力是作业批改场景中的核心模块。
+
+默认接口请求并发限制：2次/分钟。
+     */
+  async DescribeMarkEssayAgentJob(
+    req: DescribeMarkEssayAgentJobRequest,
+    cb?: (error: string, rep: DescribeMarkEssayAgentJobResponse) => void
+  ): Promise<DescribeMarkEssayAgentJobResponse> {
+    return this.request("DescribeMarkEssayAgentJob", req, cb)
+  }
+
+  /**
      * <b>此接口不再进行服务升级，建议您使用识别能力更强、服务性能更优的<a href="https://cloud.tencent.com/document/product/866/90802">通用票据识别（高级版）</a>。</b>
 本接口支持过路过桥费发票关键字段的识别，包括发票代码、发票号码、日期、金额、入口、出口、时间、发票消费类型、高速标志等。
 
@@ -1517,15 +1547,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持居民户口簿户主页及成员页关键字段的识别，包括姓名、户别、地址、籍贯、身份证号码等。
+     * 本接口支持国内机动车登记证书主要字段的结构化识别，包括机动车所有人、身份证明名称、号码、车辆型号、车辆识别代号、发动机号、制造厂名称等。
 
 默认接口请求频率限制：5次/秒。
      */
-  async ResidenceBookletOCR(
-    req: ResidenceBookletOCRRequest,
-    cb?: (error: string, rep: ResidenceBookletOCRResponse) => void
-  ): Promise<ResidenceBookletOCRResponse> {
-    return this.request("ResidenceBookletOCR", req, cb)
+  async VehicleRegCertOCR(
+    req: VehicleRegCertOCRRequest,
+    cb?: (error: string, rep: VehicleRegCertOCRResponse) => void
+  ): Promise<VehicleRegCertOCRResponse> {
+    return this.request("VehicleRegCertOCR", req, cb)
   }
 
   /**
@@ -1841,15 +1871,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持国内机动车登记证书主要字段的结构化识别，包括机动车所有人、身份证明名称、号码、车辆型号、车辆识别代号、发动机号、制造厂名称等。
+     * 本接口支持居民户口簿户主页及成员页关键字段的识别，包括姓名、户别、地址、籍贯、身份证号码等。
 
 默认接口请求频率限制：5次/秒。
      */
-  async VehicleRegCertOCR(
-    req: VehicleRegCertOCRRequest,
-    cb?: (error: string, rep: VehicleRegCertOCRResponse) => void
-  ): Promise<VehicleRegCertOCRResponse> {
-    return this.request("VehicleRegCertOCR", req, cb)
+  async ResidenceBookletOCR(
+    req: ResidenceBookletOCRRequest,
+    cb?: (error: string, rep: ResidenceBookletOCRResponse) => void
+  ): Promise<ResidenceBookletOCRResponse> {
+    return this.request("ResidenceBookletOCR", req, cb)
   }
 
   /**

@@ -1050,6 +1050,25 @@ export interface DetachClassicLinkVpcRequest {
 }
 
 /**
+ * ModifyAddressAttribute请求参数结构体
+ */
+export interface ModifyAddressAttributeRequest {
+  /**
+   * 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：`eip-11112222`。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。
+   */
+  AddressId: string
+  /**
+   * 修改后的 EIP 名称。长度上限为128个字符，允许使用大小写字母、汉字、数字、连字符"-"和下划线"\_"，不能包含空格。
+   */
+  AddressName?: string
+  /**
+   * 设定EIP是否直通，"TRUE"表示直通，"FALSE"表示非直通。
+注意：该参数仅对 EIP 直通功能可见的用户可以设定，EIP 必须为绑定状态，绑定的对象为 CVM 。
+   */
+  EipDirectConnection?: string
+}
+
+/**
  * DescribeBandwidthPackageBillUsage返回参数结构体
  */
 export interface DescribeBandwidthPackageBillUsageResponse {
@@ -1252,6 +1271,48 @@ DIRECTCONNECT：专线网关
    * 路由的更新时间
    */
   UpdateTime: string
+}
+
+/**
+ * CreateCcnPolicyBasedRoutingNextHop请求参数结构体
+ */
+export interface CreateCcnPolicyBasedRoutingNextHopRequest {
+  /**
+   * 云联网ID
+   */
+  CcnId: string
+  /**
+   * 下一跳地域
+   */
+  NextHopRegion: string
+  /**
+   * 关联实例ID
+   */
+  InstanceId: string
+  /**
+   * 名称
+   */
+  Name: string
+  /**
+   * 关联实例类型[VPC,DIRECTCONNECT,VPNGW]
+   */
+  InstanceType: string
+  /**
+   * 状态
+   */
+  State?: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 下一跳资源类型[HAVIP, GWLB_ENDPOINT]]
+   */
+  NextHopResourceType?: string
+  /**
+   * 下一跳资源ID
+   */
+  NextHopResourceId?: string
 }
 
 /**
@@ -1589,6 +1650,38 @@ export interface ModifyNetworkAclEntriesRequest {
 }
 
 /**
+ * DescribeBandwidthPackages请求参数结构体
+ */
+export interface DescribeBandwidthPackagesRequest {
+  /**
+   * 带宽包唯一ID列表
+   */
+  BandwidthPackageIds?: Array<string>
+  /**
+   * 每次请求的`Filters`的上限为10。参数不支持同时指定`BandwidthPackageIds`和`Filters`。详细的过滤条件如下：
+<li> bandwidth-package-id - String - 是否必填：否 - （过滤条件）按照带宽包的唯一标识ID过滤。</li>
+<li> bandwidth-package-name - String - 是否必填：否 - （过滤条件）按照 带宽包名称过滤。不支持模糊过滤。</li>
+<li> network-type - String - 是否必填：否 - （过滤条件）按照带宽包的类型过滤。网络类型可参考[BandwidthPackage](https://cloud.tencent.com/document/api/215/15824#BandwidthPackage)。</li>
+<li> charge-type - String - 是否必填：否 - （过滤条件）按照带宽包的计费类型过滤。计费类型可参考[BandwidthPackage](https://cloud.tencent.com/document/api/215/15824#BandwidthPackage)。</li>
+<li> resource.resource-type - String - 是否必填：否 - （过滤条件）按照带宽包资源类型过滤。资源类型包括'Address'和'LoadBalance'</li>
+<li> resource.resource-id - String - 是否必填：否 - （过滤条件）按照带宽包资源Id过滤。资源Id形如'eip-xxxx','lb-xxxx'</li>
+<li> resource.address-ip - String - 是否必填：否 - （过滤条件）按照带宽包资源Ip过滤。</li>
+<li> tag-key - String - 是否必填：否 - （过滤条件）按照标签键进行过滤。</li>
+<li> tag-value - String - 是否必填：否 - （过滤条件）按照标签值进行过滤。</li>
+<li> tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。tag-key使用具体的标签键进行替换。</li>
+   */
+  Filters?: Array<Filter>
+  /**
+   * 查询带宽包偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小结。
+   */
+  Offset?: number
+  /**
+   * 查询带宽包返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小结。
+   */
+  Limit?: number
+}
+
+/**
  * ReplaceRoutePolicyAssociations返回参数结构体
  */
 export interface ReplaceRoutePolicyAssociationsResponse {
@@ -1723,17 +1816,17 @@ export interface VpnGatewayQuota {
 }
 
 /**
- * DeleteVpnGatewaySslClient请求参数结构体
+ * 用于修改入路由表ECMP算法。现在支持的算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。
  */
-export interface DeleteVpnGatewaySslClientRequest {
+export interface RouteECMPAlgorithm {
   /**
-   * SSL-VPN-CLIENT 实例ID。不可和SslVpnClientIds同时使用。
+   *  目标网段
    */
-  SslVpnClientId?: string
+  DestinationCidrBlock?: string
   /**
-   * SSL-VPN-CLIENT 实例ID列表。批量删除时使用。不可和SslVpnClientId同时使用。
+   * 支持的 ECMP算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。
    */
-  SslVpnClientIds?: Array<string>
+  SubnetRouteAlgorithm?: string
 }
 
 /**
@@ -2262,6 +2355,37 @@ ACCEPT：接收且启用。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
+}
+
+/**
+ * DescribePrivateNatGateways请求参数结构体
+ */
+export interface DescribePrivateNatGatewaysRequest {
+  /**
+   * 私网网关唯一`ID`，形如：`intranat-0g3blj80`。
+注意：NatGatewayIds和Filters参数互斥，不能同时传入。
+   */
+  NatGatewayIds?: Array<string>
+  /**
+   * 过滤条件。<li>NatGatewayId - String - 私网网关唯一`ID`，形如：`intranat-0g3blj80`。</li><li>NatGatewayName - String - 专线网关名称，默认模糊查询。</li><li>VpcId - String - 私网网关所在`VpcId`。</li><li>TagKey - Tag数组 - 私网网关标签键值对数组</li><li>intranat-status - String - （过滤条件）NAT实例当前状态，形如：`AVAILABLE`。</li>
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20。
+   */
+  Limit?: number
+  /**
+   * 排序字段。可选值：NatGatewayId、NatGatewayName、CreatedTime。
+   */
+  OrderField?: string
+  /**
+   * 排序方式。可选值：ASC、DESC。分别表示升序、降序。
+   */
+  OrderDirection?: string
 }
 
 /**
@@ -3195,6 +3319,24 @@ export interface DescribeInstanceJumboResponse {
 }
 
 /**
+ * DescribeCcnPolicyBasedRoutingRule返回参数结构体
+ */
+export interface DescribeCcnPolicyBasedRoutingRuleResponse {
+  /**
+   * 云联网策略路由下一跳信息
+   */
+  CcnPolicyBasedRoutingRuleSet?: Array<CcnPolicyBasedRoutingRule>
+  /**
+   * 符合条件的对象数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AssociateInstancesToCcnRouteTable请求参数结构体
  */
 export interface AssociateInstancesToCcnRouteTableRequest {
@@ -4026,6 +4168,20 @@ export interface TrafficFlow {
 }
 
 /**
+ * DeleteCcnPolicyBasedRoutingNextHop请求参数结构体
+ */
+export interface DeleteCcnPolicyBasedRoutingNextHopRequest {
+  /**
+   * 云联网ID
+   */
+  CcnId: string
+  /**
+   * 策略路由下一跳ID
+   */
+  PolicyBasedRoutingNextHopIds: Array<string>
+}
+
+/**
  * CreateRoutePolicy请求参数结构体
  */
 export interface CreateRoutePolicyRequest {
@@ -4307,34 +4463,9 @@ export interface ReplaceRoutePolicyEntriesResponse {
 }
 
 /**
- * 带宽上下限。
+ * CreateCdcLDCXList请求参数结构体
  */
-export interface BandwidthRange {
-  /**
-   * 资源ID。
-   */
-  ResourceId?: string
-  /**
-   * 带宽下限，单位：Mbps。计费类型以及对应的带宽下限：
-- TOP5_POSTPAID_BY_MONTH: 默认无下限
-- BANDWIDTH_POSTPAID_BY_DAY: 50
-- FIXED_PREPAID_BY_MONTH: 100
-- ENHANCED95_POSTPAID_BY_MONTH: 300
-- PEAK_BANDWIDTH_POSTPAID_BY_DAY: 50
-- PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 50
-   */
-  BandwidthLowerLimit?: number
-  /**
-   * 带宽上限，单位：Mbps。计费类型以及对应的带宽上限：
-- TOP5_POSTPAID_BY_MONTH: 默认无上限
-- BANDWIDTH_POSTPAID_BY_DAY: 300
-- FIXED_PREPAID_BY_MONTH: 5000
-- ENHANCED95_POSTPAID_BY_MONTH: 5000
-- PEAK_BANDWIDTH_POSTPAID_BY_DAY: 300
-- PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 2000
-   */
-  BandwidthUpperLimit?: number
-}
+export type CreateCdcLDCXListRequest = null
 
 /**
  * ModifyAddressInternetChargeType请求参数结构体
@@ -4493,6 +4624,52 @@ export interface MigrateBandwidthPackageResourcesRequest {
    * 要迁移的资源的ID列表
    */
   ResourceIds: Array<string>
+}
+
+/**
+ * ModifyCcnPolicyBasedRoutingNextHopAttribute请求参数结构体
+ */
+export interface ModifyCcnPolicyBasedRoutingNextHopAttributeRequest {
+  /**
+   * 云联网ID
+   */
+  CcnId: string
+  /**
+   * 策略路由下一跳ID
+   */
+  PolicyBasedRoutingNextHopId: string
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 下一跳地域
+   */
+  NextHopRegion?: string
+  /**
+   * 实例类型[VPC,DIRECTCONNECT,VPNGW]
+   */
+  InstanceType?: string
+  /**
+   * 关联实例ID
+   */
+  InstanceId?: string
+  /**
+   * 下一跳资源类型[HAVIP,GWLB_ENDPOINT]
+   */
+  NextHopResourceType?: string
+  /**
+   * 下一跳资源ID
+   */
+  NextHopResourceId?: string
+  /**
+   * 状态
+   */
+  State?: string
 }
 
 /**
@@ -4785,9 +4962,34 @@ export interface ModifyAddressTemplateAttributeRequest {
 }
 
 /**
- * CreateCdcLDCXList请求参数结构体
+ * 带宽上下限。
  */
-export type CreateCdcLDCXListRequest = null
+export interface BandwidthRange {
+  /**
+   * 资源ID。
+   */
+  ResourceId?: string
+  /**
+   * 带宽下限，单位：Mbps。计费类型以及对应的带宽下限：
+- TOP5_POSTPAID_BY_MONTH: 默认无下限
+- BANDWIDTH_POSTPAID_BY_DAY: 50
+- FIXED_PREPAID_BY_MONTH: 100
+- ENHANCED95_POSTPAID_BY_MONTH: 300
+- PEAK_BANDWIDTH_POSTPAID_BY_DAY: 50
+- PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 50
+   */
+  BandwidthLowerLimit?: number
+  /**
+   * 带宽上限，单位：Mbps。计费类型以及对应的带宽上限：
+- TOP5_POSTPAID_BY_MONTH: 默认无上限
+- BANDWIDTH_POSTPAID_BY_DAY: 300
+- FIXED_PREPAID_BY_MONTH: 5000
+- ENHANCED95_POSTPAID_BY_MONTH: 5000
+- PEAK_BANDWIDTH_POSTPAID_BY_DAY: 300
+- PRIMARY_TRAFFIC_POSTPAID_BY_HOUR: 2000
+   */
+  BandwidthUpperLimit?: number
+}
 
 /**
  * ModifyRoutePolicyAttribute请求参数结构体
@@ -5170,35 +5372,13 @@ export interface DeleteRoutePolicyEntriesResponse {
 }
 
 /**
- * DescribeBandwidthPackages请求参数结构体
+ * DeleteCcnPolicyBasedRoutingRule返回参数结构体
  */
-export interface DescribeBandwidthPackagesRequest {
+export interface DeleteCcnPolicyBasedRoutingRuleResponse {
   /**
-   * 带宽包唯一ID列表
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  BandwidthPackageIds?: Array<string>
-  /**
-   * 每次请求的`Filters`的上限为10。参数不支持同时指定`BandwidthPackageIds`和`Filters`。详细的过滤条件如下：
-<li> bandwidth-package-id - String - 是否必填：否 - （过滤条件）按照带宽包的唯一标识ID过滤。</li>
-<li> bandwidth-package-name - String - 是否必填：否 - （过滤条件）按照 带宽包名称过滤。不支持模糊过滤。</li>
-<li> network-type - String - 是否必填：否 - （过滤条件）按照带宽包的类型过滤。网络类型可参考[BandwidthPackage](https://cloud.tencent.com/document/api/215/15824#BandwidthPackage)。</li>
-<li> charge-type - String - 是否必填：否 - （过滤条件）按照带宽包的计费类型过滤。计费类型可参考[BandwidthPackage](https://cloud.tencent.com/document/api/215/15824#BandwidthPackage)。</li>
-<li> resource.resource-type - String - 是否必填：否 - （过滤条件）按照带宽包资源类型过滤。资源类型包括'Address'和'LoadBalance'</li>
-<li> resource.resource-id - String - 是否必填：否 - （过滤条件）按照带宽包资源Id过滤。资源Id形如'eip-xxxx','lb-xxxx'</li>
-<li> resource.address-ip - String - 是否必填：否 - （过滤条件）按照带宽包资源Ip过滤。</li>
-<li> tag-key - String - 是否必填：否 - （过滤条件）按照标签键进行过滤。</li>
-<li> tag-value - String - 是否必填：否 - （过滤条件）按照标签值进行过滤。</li>
-<li> tag:tag-key - String - 是否必填：否 - （过滤条件）按照标签键值对进行过滤。tag-key使用具体的标签键进行替换。</li>
-   */
-  Filters?: Array<Filter>
-  /**
-   * 查询带宽包偏移量，默认为0。关于Offset的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小结。
-   */
-  Offset?: number
-  /**
-   * 查询带宽包返回数量，默认为20，最大值为100。关于Limit的更进一步介绍请参考 API [简介](https://cloud.tencent.com/document/api/213/15688)中的相关小结。
-   */
-  Limit?: number
+  RequestId?: string
 }
 
 /**
@@ -5548,9 +5728,13 @@ export interface ResetTrafficMirrorFilterResponse {
 }
 
 /**
- * ModifyIpv6AddressesAttribute返回参数结构体
+ * CreateCcnPolicyBasedRoutingRules返回参数结构体
  */
-export interface ModifyIpv6AddressesAttributeResponse {
+export interface CreateCcnPolicyBasedRoutingRulesResponse {
+  /**
+   * 策略路由匹配规则ID
+   */
+  PolicyBasedRoutingRuleIdSet?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5795,20 +5979,6 @@ export interface CreateAddressTemplateGroupRequest {
 }
 
 /**
- * 用于修改入路由表ECMP算法。现在支持的算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。
- */
-export interface RouteECMPAlgorithm {
-  /**
-   *  目标网段
-   */
-  DestinationCidrBlock?: string
-  /**
-   * 支持的 ECMP算法有：ECMP_QUINTUPLE_HASH：五元组hash，ECMP_SOURCE_DESTINATION_IP_HASH：源和目的IP hash，ECMP_DESTINATION_IP_HASH：目的IP hash，ECMP_SOURCE_IP_HASH：源IP hash。
-   */
-  SubnetRouteAlgorithm?: string
-}
-
-/**
  * AssociateIPv6Address请求参数结构体
  */
 export interface AssociateIPv6AddressRequest {
@@ -5828,6 +5998,20 @@ export interface AssociateIPv6AddressRequest {
    * 要绑定的内网 IPv6。如果指定了 NetworkInterfaceId 则也必须指定 PrivateIPv6Address ，表示将 EIP 绑定到指定弹性网卡的指定内网 IP 上。同时要确保指定的 PrivateIPv6Address 是指定的 NetworkInterfaceId 上的一个内网 IPv6。指定弹性网卡的内网 IPv6 可通过登录[控制台](https://console.cloud.tencent.com/vpc/eni?rid=1)查询，也可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/api/215/15817)接口返回值中的Ipv6AddressSet.Address获取。
    */
   PrivateIPv6Address?: string
+}
+
+/**
+ * CreateCcnPolicyBasedRoutingNextHop返回参数结构体
+ */
+export interface CreateCcnPolicyBasedRoutingNextHopResponse {
+  /**
+   * 策略路由下一跳ID
+   */
+  PolicyBasedRoutingNextHopId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7801,6 +7985,16 @@ export interface ModifyIp6TranslatorRequest {
 }
 
 /**
+ * ModifyCcnPolicyBasedRoutingRuleAttribute返回参数结构体
+ */
+export interface ModifyCcnPolicyBasedRoutingRuleAttributeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateVpnConnection返回参数结构体
  */
 export interface CreateVpnConnectionResponse {
@@ -8115,6 +8309,44 @@ export interface ReplaceSecurityGroupPolicyRequest {
    * 旧的安全组规则集合对象，可选，日志记录用。
    */
   OriginalSecurityGroupPolicySet?: SecurityGroupPolicySet
+}
+
+/**
+ * 查询云联网策略路由匹配规则
+ */
+export interface CcnPolicyBasedRoutingRule {
+  /**
+   * 策略路由下一跳ID
+   */
+  PolicyBasedRoutingNextHopId: string
+  /**
+   * 实例类型[VPC,DIRECTCONNECT,VPNGW]
+   */
+  InstanceType: string
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 源地址CIDR
+   */
+  SourceCidrBlock: string
+  /**
+   * 目的地址CIDR
+   */
+  DestinationCidrBlock: string
+  /**
+   * 优先级
+   */
+  Priority: number
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 策略路由匹配策略ID
+   */
+  PolicyBasedRoutingRuleId?: string
 }
 
 /**
@@ -9885,6 +10117,24 @@ export interface DescribeSgSnapshotFileContentResponse {
 export type DescribeSecurityGroupLimitsRequest = null
 
 /**
+ * CreateIp6Translators请求参数结构体
+ */
+export interface CreateIp6TranslatorsRequest {
+  /**
+   * 转换实例名称
+   */
+  Ip6TranslatorName?: string
+  /**
+   * 创建转换实例数量，默认是1个
+   */
+  Ip6TranslatorCount?: number
+  /**
+   * 转换实例运营商属性，可取"CMCC","CTCC","CUCC","BGP"
+   */
+  Ip6InternetServiceProvider?: string
+}
+
+/**
  * ClearRouteTableSelectionPolicies返回参数结构体
  */
 export interface ClearRouteTableSelectionPoliciesResponse {
@@ -10486,13 +10736,9 @@ export interface CcnRouteTableInputPolicys {
 }
 
 /**
- * DescribeNetworkAccountType返回参数结构体
+ * DeleteCcnPolicyBasedRoutingNextHop返回参数结构体
  */
-export interface DescribeNetworkAccountTypeResponse {
-  /**
-   * 用户账号的网络类型，STANDARD为标准账户类型，LEGACY为传统账户类型
-   */
-  NetworkAccountType?: string
+export interface DeleteCcnPolicyBasedRoutingNextHopResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10586,34 +10832,21 @@ export interface UpgradeNatGatewayProductVersionResponse {
 }
 
 /**
- * DescribePrivateNatGateways请求参数结构体
+ * DescribeCcnPolicyBasedRoutingNextHop请求参数结构体
  */
-export interface DescribePrivateNatGatewaysRequest {
+export interface DescribeCcnPolicyBasedRoutingNextHopRequest {
   /**
-   * 私网网关唯一`ID`，形如：`intranat-0g3blj80`。
-注意：NatGatewayIds和Filters参数互斥，不能同时传入。
+   * 云联网 ID
    */
-  NatGatewayIds?: Array<string>
+  CcnId: string
   /**
-   * 过滤条件。<li>NatGatewayId - String - 私网网关唯一`ID`，形如：`intranat-0g3blj80`。</li><li>NatGatewayName - String - 专线网关名称，默认模糊查询。</li><li>VpcId - String - 私网网关所在`VpcId`。</li><li>TagKey - Tag数组 - 私网网关标签键值对数组</li><li>intranat-status - String - （过滤条件）NAT实例当前状态，形如：`AVAILABLE`。</li>
+   * 偏移量
    */
-  Filters?: Array<Filter>
+  Offset?: string
   /**
-   * 偏移量，默认为0。
+   * 返回数量
    */
-  Offset?: number
-  /**
-   * 返回数量，默认为20。
-   */
-  Limit?: number
-  /**
-   * 排序字段。可选值：NatGatewayId、NatGatewayName、CreatedTime。
-   */
-  OrderField?: string
-  /**
-   * 排序方式。可选值：ASC、DESC。分别表示升序、降序。
-   */
-  OrderDirection?: string
+  Limit?: string
 }
 
 /**
@@ -11986,29 +12219,17 @@ export interface CreateReserveIpAddressesResponse {
 }
 
 /**
- * CheckTrafficMirror请求参数结构体
+ * CreateRouteTable返回参数结构体
  */
-export interface CheckTrafficMirrorRequest {
+export interface CreateRouteTableResponse {
   /**
-   * 流量镜像所属的vpc
+   * 路由表对象。
    */
-  VpcId: string
+  RouteTable?: RouteTable
   /**
-   * 流量镜像的实例id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TrafficMirrorId?: string
-  /**
-   * 流量镜像的采集端IP列表
-   */
-  CollectorSources?: Array<string>
-  /**
-   * 流量镜像的接收端的子网
-   */
-  SubnetId?: string
-  /**
-   * 流量镜像采集端的
-   */
-  CollectorTarget?: Array<TrafficMirrorTarget>
+  RequestId?: string
 }
 
 /**
@@ -12769,6 +12990,24 @@ export interface ModifyNatGatewayAttributeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeCcnPolicyBasedRoutingRule请求参数结构体
+ */
+export interface DescribeCcnPolicyBasedRoutingRuleRequest {
+  /**
+   * 云联网 ID
+   */
+  CcnId: string
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 返回数量
+   */
+  Limit?: number
 }
 
 /**
@@ -14237,6 +14476,16 @@ export interface DescribeServiceTemplateGroupInstancesRequest {
 }
 
 /**
+ * ModifyCcnPolicyBasedRoutingNextHopAttribute返回参数结构体
+ */
+export interface ModifyCcnPolicyBasedRoutingNextHopAttributeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StartTrafficMirror请求参数结构体
  */
 export interface StartTrafficMirrorRequest {
@@ -14371,22 +14620,17 @@ export interface ModifySnapshotPoliciesRequest {
 }
 
 /**
- * ModifyAddressAttribute请求参数结构体
+ * CreateCcnPolicyBasedRoutingRules请求参数结构体
  */
-export interface ModifyAddressAttributeRequest {
+export interface CreateCcnPolicyBasedRoutingRulesRequest {
   /**
-   * 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：`eip-11112222`。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。
+   * 云联网ID
    */
-  AddressId: string
+  CcnId: string
   /**
-   * 修改后的 EIP 名称。长度上限为128个字符，允许使用大小写字母、汉字、数字、连字符"-"和下划线"\_"，不能包含空格。
+   * 云联网策略路由匹配规则
    */
-  AddressName?: string
-  /**
-   * 设定EIP是否直通，"TRUE"表示直通，"FALSE"表示非直通。
-注意：该参数仅对 EIP 直通功能可见的用户可以设定，EIP 必须为绑定状态，绑定的对象为 CVM 。
-   */
-  EipDirectConnection?: string
+  CcnPolicyBasedRoutingRuleSet?: Array<CcnPolicyBasedRoutingRule>
 }
 
 /**
@@ -14470,17 +14714,17 @@ export interface DisableVpnGatewaySslClientCertRequest {
 }
 
 /**
- * CreateRouteTable返回参数结构体
+ * DeleteVpnGatewaySslClient请求参数结构体
  */
-export interface CreateRouteTableResponse {
+export interface DeleteVpnGatewaySslClientRequest {
   /**
-   * 路由表对象。
+   * SSL-VPN-CLIENT 实例ID。不可和SslVpnClientIds同时使用。
    */
-  RouteTable?: RouteTable
+  SslVpnClientId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * SSL-VPN-CLIENT 实例ID列表。批量删除时使用。不可和SslVpnClientId同时使用。
    */
-  RequestId?: string
+  SslVpnClientIds?: Array<string>
 }
 
 /**
@@ -15705,6 +15949,16 @@ export interface BandwidthPackage {
 }
 
 /**
+ * ModifyIpv6AddressesAttribute返回参数结构体
+ */
+export interface ModifyIpv6AddressesAttributeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 云联网路由表信息
  */
 export interface CcnBatchRouteTable {
@@ -16411,6 +16665,34 @@ export interface CCN {
 }
 
 /**
+ * RemoveBandwidthPackageResources请求参数结构体
+ */
+export interface RemoveBandwidthPackageResourcesRequest {
+  /**
+   * 资源唯一ID，当前支持EIP资源和LB资源，形如'eip-xxxx', 'lb-xxxx'。EIP资源列表可通过[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取，LB资源列表可通过[DescribeLoadBalancers](https://cloud.tencent.com/document/api/214/30685)接口获取。
+   */
+  ResourceIds?: Array<string>
+  /**
+   * 带宽包唯一标识ID，形如'bwp-xxxx'，可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/product/215/19209)接口查询BandwidthPackageId。
+   */
+  BandwidthPackageId?: string
+  /**
+   * 资源类型，可选值：
+<li>Address：弹性公网IP</li>
+<li>LoadBalance：负载均衡</li>
+   */
+  ResourceType?: string
+  /**
+   * 用于移除带宽包内IP资源时指定IP的带宽值。<p>说明：当前功能处于内测中，如需使用，请提交[工单申请](https://console.cloud.tencent.com/workorder/category)。</p>
+   */
+  InternetMaxBandwidthOut?: number
+  /**
+   * 用于移除带宽包内IP资源时指定资源移除后的计费模式。<li>小时流量：TRAFFIC_POSTPAID_BY_HOUR；</li><li>小时带宽：BANDWIDTH_POSTPAID_BY_HOUR</li><p>说明：当前功能处于内测中，如需使用，请提交[工单申请](https://console.cloud.tencent.com/workorder/category)。</p>
+   */
+  InternetChargeType?: string
+}
+
+/**
  * 网络ACL五元组Entry
  */
 export interface NetworkAclQuintupleEntry {
@@ -16508,6 +16790,24 @@ export interface DeleteIp6TranslatorsRequest {
    * 待释放的IPV6转换实例的唯一ID，形如‘ip6-xxxxxxxx’
    */
   Ip6TranslatorIds: Array<string>
+}
+
+/**
+ * ModifyCcnPolicyBasedRoutingRuleAttribute请求参数结构体
+ */
+export interface ModifyCcnPolicyBasedRoutingRuleAttributeRequest {
+  /**
+   * 云联网ID
+   */
+  CcnId: string
+  /**
+   * 策略路由匹配规则ID
+   */
+  PolicyBasedRoutingRuleId: string
+  /**
+   * 描述
+   */
+  Description?: string
 }
 
 /**
@@ -17041,31 +17341,17 @@ export interface AssociateNatGatewayAddressResponse {
 }
 
 /**
- * RemoveBandwidthPackageResources请求参数结构体
+ * DeleteCcnPolicyBasedRoutingRule请求参数结构体
  */
-export interface RemoveBandwidthPackageResourcesRequest {
+export interface DeleteCcnPolicyBasedRoutingRuleRequest {
   /**
-   * 资源唯一ID，当前支持EIP资源和LB资源，形如'eip-xxxx', 'lb-xxxx'。EIP资源列表可通过[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取，LB资源列表可通过[DescribeLoadBalancers](https://cloud.tencent.com/document/api/214/30685)接口获取。
+   * 云联网ID
    */
-  ResourceIds?: Array<string>
+  CcnId: string
   /**
-   * 带宽包唯一标识ID，形如'bwp-xxxx'，可以使用[DescribeBandwidthPackages](https://cloud.tencent.com/document/product/215/19209)接口查询BandwidthPackageId。
+   * 策略路由匹配规则ID
    */
-  BandwidthPackageId?: string
-  /**
-   * 资源类型，可选值：
-<li>Address：弹性公网IP</li>
-<li>LoadBalance：负载均衡</li>
-   */
-  ResourceType?: string
-  /**
-   * 用于移除带宽包内IP资源时指定IP的带宽值。<p>说明：当前功能处于内测中，如需使用，请提交[工单申请](https://console.cloud.tencent.com/workorder/category)。</p>
-   */
-  InternetMaxBandwidthOut?: number
-  /**
-   * 用于移除带宽包内IP资源时指定资源移除后的计费模式。<li>小时流量：TRAFFIC_POSTPAID_BY_HOUR；</li><li>小时带宽：BANDWIDTH_POSTPAID_BY_HOUR</li><p>说明：当前功能处于内测中，如需使用，请提交[工单申请](https://console.cloud.tencent.com/workorder/category)。</p>
-   */
-  InternetChargeType?: string
+  PolicyBasedRoutingRuleIds: Array<string>
 }
 
 /**
@@ -17871,6 +18157,20 @@ export interface ModifyPrivateIpAddressesAttributeResponse {
 export type DeleteCdcNetPlanesRequest = null
 
 /**
+ * DisassociateAddress请求参数结构体
+ */
+export interface DisassociateAddressRequest {
+  /**
+   * 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：`eip-11112222`。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。
+   */
+  AddressId: string
+  /**
+   * 表示解绑 EIP 之后是否分配普通公网 IP。取值范围：<li>TRUE：表示解绑 EIP 之后分配普通公网 IP。</li><li>FALSE：表示解绑 EIP 之后不分配普通公网 IP。</li>默认取值：FALSE。<br><br>只有满足以下条件时才能指定该参数：<li>只有在解绑主网卡的主内网 IP 上的 EIP 时才能指定该参数。</li><li>解绑 EIP 后重新分配普通公网 IP 操作一个账号每天最多操作 10 次；详情可通过 [DescribeAddressQuota](https://cloud.tencent.com/document/api/213/1378) 接口获取。</li>
+   */
+  ReallocateNormalPublicIp?: boolean
+}
+
+/**
  * ModifyHaVipAttribute返回参数结构体
  */
 export interface ModifyHaVipAttributeResponse {
@@ -18627,27 +18927,13 @@ export interface ModifyRouteTableSelectionPoliciesResponse {
 }
 
 /**
- * AttachNetworkInterface请求参数结构体
+ * DeleteVpc返回参数结构体
  */
-export interface AttachNetworkInterfaceRequest {
+export interface DeleteVpcResponse {
   /**
-   * 弹性网卡实例ID，例如：eni-m6dyj72l。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。
-
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  NetworkInterfaceId: string
-  /**
-   * CVM实例ID。形如：ins-r8hr2upy。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)接口获取。
-
-   */
-  InstanceId: string
-  /**
-   * 网卡的挂载类型：0 标准型，1扩展型，默认值0。
-   */
-  AttachType?: number
-  /**
-   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
-   */
-  ClientToken?: string
+  RequestId?: string
 }
 
 /**
@@ -19655,21 +19941,29 @@ export interface CreateTrafficMirrorRequest {
 }
 
 /**
- * CreateIp6Translators请求参数结构体
+ * CheckTrafficMirror请求参数结构体
  */
-export interface CreateIp6TranslatorsRequest {
+export interface CheckTrafficMirrorRequest {
   /**
-   * 转换实例名称
+   * 流量镜像所属的vpc
    */
-  Ip6TranslatorName?: string
+  VpcId: string
   /**
-   * 创建转换实例数量，默认是1个
+   * 流量镜像的实例id
    */
-  Ip6TranslatorCount?: number
+  TrafficMirrorId?: string
   /**
-   * 转换实例运营商属性，可取"CMCC","CTCC","CUCC","BGP"
+   * 流量镜像的采集端IP列表
    */
-  Ip6InternetServiceProvider?: string
+  CollectorSources?: Array<string>
+  /**
+   * 流量镜像的接收端的子网
+   */
+  SubnetId?: string
+  /**
+   * 流量镜像采集端的
+   */
+  CollectorTarget?: Array<TrafficMirrorTarget>
 }
 
 /**
@@ -20638,6 +20932,20 @@ CCN：云联网路由，系统默认下发，不可编辑与删除。
 }
 
 /**
+ * DescribeNetworkAccountType返回参数结构体
+ */
+export interface DescribeNetworkAccountTypeResponse {
+  /**
+   * 用户账号的网络类型，STANDARD为标准账户类型，LEGACY为传统账户类型
+   */
+  NetworkAccountType?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * EnableVpnGatewaySslClientCert返回参数结构体
  */
 export interface EnableVpnGatewaySslClientCertResponse {
@@ -20698,17 +21006,21 @@ export interface ModifyVpcEndPointServiceWhiteListResponse {
 }
 
 /**
- * DisassociateAddress请求参数结构体
+ * DescribeCcnPolicyBasedRoutingNextHop返回参数结构体
  */
-export interface DisassociateAddressRequest {
+export interface DescribeCcnPolicyBasedRoutingNextHopResponse {
   /**
-   * 标识 EIP 的唯一 ID。EIP 唯一 ID 形如：`eip-11112222`。可以使用[DescribeAddresses](https://cloud.tencent.com/document/product/215/16702)接口获取AddressId。
+   * 云联网策略路由下一跳信息
    */
-  AddressId: string
+  CcnPolicyBasedRoutingNextHopSet?: Array<CcnPolicyBasedRoutingNextHop>
   /**
-   * 表示解绑 EIP 之后是否分配普通公网 IP。取值范围：<li>TRUE：表示解绑 EIP 之后分配普通公网 IP。</li><li>FALSE：表示解绑 EIP 之后不分配普通公网 IP。</li>默认取值：FALSE。<br><br>只有满足以下条件时才能指定该参数：<li>只有在解绑主网卡的主内网 IP 上的 EIP 时才能指定该参数。</li><li>解绑 EIP 后重新分配普通公网 IP 操作一个账号每天最多操作 10 次；详情可通过 [DescribeAddressQuota](https://cloud.tencent.com/document/api/213/1378) 接口获取。</li>
+   * 符合条件的对象数
    */
-  ReallocateNormalPublicIp?: boolean
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -20731,13 +21043,27 @@ export interface DescribeCrossBorderFlowMonitorResponse {
 export type DescribeBandwidthPackageQuotaRequest = null
 
 /**
- * DeleteVpc返回参数结构体
+ * AttachNetworkInterface请求参数结构体
  */
-export interface DeleteVpcResponse {
+export interface AttachNetworkInterfaceRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 弹性网卡实例ID，例如：eni-m6dyj72l。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。
+
    */
-  RequestId?: string
+  NetworkInterfaceId: string
+  /**
+   * CVM实例ID。形如：ins-r8hr2upy。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)接口获取。
+
+   */
+  InstanceId: string
+  /**
+   * 网卡的挂载类型：0 标准型，1扩展型，默认值0。
+   */
+  AttachType?: number
+  /**
+   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。
+   */
+  ClientToken?: string
 }
 
 /**
@@ -20752,6 +21078,60 @@ export interface InquiryPriceModifyAddressesBandwidthRequest {
    * 新带宽值，可调整的带宽上限值参考产品文档[带宽上限](https://cloud.tencent.com/document/product/1199/48333)。
    */
   InternetMaxBandwidthOut: number
+}
+
+/**
+ * 云联网策略路由下一跳
+ */
+export interface CcnPolicyBasedRoutingNextHop {
+  /**
+   * 策略路由下一跳ID
+   */
+  PolicyBasedRoutingNextHopId?: string
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 下一跳地域
+   */
+  NextHopRegion?: string
+  /**
+   * 关联实例ID
+   */
+  InstanceId?: string
+  /**
+   * 可用区
+   */
+  Zone?: string
+  /**
+   * 状态(ENABLE/DISABLE)
+   */
+  State?: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 关联实例类型[VPC,DIRECTCONNECT,VPNGW]
+   */
+  InstanceType?: string
+  /**
+   * 下一跳资源类型[HAVIP,GWLB_ENDPOINT]
+   */
+  NextHopResourceType?: string
+  /**
+   * 下一跳资源ID
+   */
+  NextHopResourceId?: string
+  /**
+   * 下一跳资源ip
+   */
+  NextHopIp?: string
+  /**
+   * 0
+   */
+  PolicyBasedRoutingRulesCount?: number
 }
 
 /**

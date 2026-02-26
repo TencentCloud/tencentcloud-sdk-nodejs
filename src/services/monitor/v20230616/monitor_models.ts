@@ -100,6 +100,16 @@ Trigger 告警触发; Recovery 告警恢复
 }
 
 /**
+ * DeleteNoticeContentTmpls请求参数结构体
+ */
+export interface DeleteNoticeContentTmplsRequest {
+  /**
+   * 要删除的模板id
+   */
+  TmplIDs?: Array<string>
+}
+
+/**
  * 分页请求参数
  */
 export interface PageByNoParams {
@@ -113,6 +123,28 @@ export interface PageByNoParams {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PageNo?: string
+}
+
+/**
+ * 官网通知内容模板元素
+ */
+export interface QCloudYeheWeChatNoticeTmplItem {
+  /**
+   * 告警内容模板
+   */
+  AlarmContentTmpl?: string
+  /**
+   * 告警对象模板
+   */
+  AlarmObjectTmpl?: string
+  /**
+   * 告警地域模板
+   */
+  AlarmRegionTmpl?: string
+  /**
+   * 告警时间模板
+   */
+  AlarmTimeTmpl?: string
 }
 
 /**
@@ -132,6 +164,55 @@ export interface PagerDutyRobotNoticeTmpl {
    * 标题模板
    */
   TitleTmpl?: string
+}
+
+/**
+ * 自定义通知内容模板
+ */
+export interface NoticeContentTmpl {
+  /**
+   * 自定义通知内容模板id，唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TmplID?: string
+  /**
+   * 自定义通知内容模板名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TmplName?: string
+  /**
+   * 通知内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TmplContents?: NoticeContentTmplItem
+  /**
+   * Unix时间戳，秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * Unix时间戳，秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: number
+  /**
+   * 最后修改人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastModifier?: string
+  /**
+   * 创建人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Creator?: string
+  /**
+   * 监控类型
+   */
+  MonitorType?: string
+  /**
+   * 模板语言 en/zh
+   */
+  TmplLanguage?: string
 }
 
 /**
@@ -219,25 +300,58 @@ export interface CreateNoticeContentTmplResponse {
 }
 
 /**
- * 官网通知内容模板元素
+ * 通知内容模板绑定告警策略数量
  */
-export interface QCloudYeheWeChatNoticeTmplItem {
+export interface NoticeContentTmplBindPolicyCount {
   /**
-   * 告警内容模板
+   * 通知内容模板ID
    */
-  AlarmContentTmpl?: string
+  NoticeContentTmplID?: string
   /**
-   * 告警对象模板
+   * 绑定告警策略数量
    */
-  AlarmObjectTmpl?: string
+  BindCount?: number
+}
+
+/**
+ * ModifyNoticeContentTmpl返回参数结构体
+ */
+export interface ModifyNoticeContentTmplResponse {
   /**
-   * 告警地域模板
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AlarmRegionTmpl?: string
+  RequestId?: string
+}
+
+/**
+ * DescribeNoticeContentTmpl返回参数结构体
+ */
+export interface DescribeNoticeContentTmplResponse {
   /**
-   * 告警时间模板
+   * 自定义通知内容模板
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  AlarmTimeTmpl?: string
+  NoticeContentTmpls?: Array<NoticeContentTmpl>
+  /**
+   * 通知内容模板绑定的告警策略数量
+   */
+  NoticeContentTmplBindPolicyCounts?: Array<NoticeContentTmplBindPolicyCount>
+  /**
+   * 分页数
+   */
+  PageNumber?: number
+  /**
+   * 分页大小
+   */
+  PageSize?: number
+  /**
+   * 结果总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -356,6 +470,16 @@ export interface WeWorkRobotNoticeTmpl {
 }
 
 /**
+ * DeleteNoticeContentTmpls返回参数结构体
+ */
+export interface DeleteNoticeContentTmplsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 官网通知内容模板
  */
 export interface QCloudYeheNoticeTmpl {
@@ -387,6 +511,58 @@ export interface QCloudYeheNoticeTmpl {
    * 安灯通知渠道
    */
   Andon?: QCloudYeheNoticeTmplItem
+}
+
+/**
+ * DescribeNoticeContentTmpl请求参数结构体
+ */
+export interface DescribeNoticeContentTmplRequest {
+  /**
+   * 分页数
+   */
+  PageNumber: number
+  /**
+   * 分页大小
+   */
+  PageSize: number
+  /**
+   * 指定模板ID查询，查询参数都为空则默认查询账号下所有模板
+   */
+  TmplIDs?: Array<string>
+  /**
+   * 指定模板名称查询，查询参数都为空则默认查询账号下所有模板
+   */
+  TmplName?: string
+  /**
+   * 指定通知模板ID查询，查询参数都为空则默认查询账号下所有模板
+   */
+  NoticeID?: string
+  /**
+   * 模板语言 en/zh 缺省不过滤
+   */
+  TmplLanguage?: string
+  /**
+   * 监控类型
+   */
+  MonitorType?: string
+}
+
+/**
+ * ModifyNoticeContentTmpl请求参数结构体
+ */
+export interface ModifyNoticeContentTmplRequest {
+  /**
+   * 模板名称
+   */
+  TmplName: string
+  /**
+   * 模板内容
+   */
+  TmplContents: NoticeContentTmplItem
+  /**
+   * 需要修改的模板ID
+   */
+  TmplID: string
 }
 
 /**

@@ -22,13 +22,18 @@ import {
   WebhookNoticeTmpl,
   TeamsRobotNoticeTmplMatcher,
   FeiShuRobotNoticeTmplMatcher,
+  DeleteNoticeContentTmplsRequest,
   PageByNoParams,
+  QCloudYeheWeChatNoticeTmplItem,
   PagerDutyRobotNoticeTmpl,
+  NoticeContentTmpl,
   WeWorkRobotNoticeTmplMatcher,
   NoticeContentTmplItem,
   QCloudYeheNoticeTmplItem,
   CreateNoticeContentTmplResponse,
-  QCloudYeheWeChatNoticeTmplItem,
+  NoticeContentTmplBindPolicyCount,
+  ModifyNoticeContentTmplResponse,
+  DescribeNoticeContentTmplResponse,
   PagerDutyRobotNoticeTmplHeader,
   DescribeAlarmNotifyHistoriesResponse,
   DingDingRobotNoticeTmpl,
@@ -38,7 +43,10 @@ import {
   DingDingRobotNoticeTmplMatcher,
   TeamsRobotNoticeTmpl,
   WeWorkRobotNoticeTmpl,
+  DeleteNoticeContentTmplsResponse,
   QCloudYeheNoticeTmpl,
+  DescribeNoticeContentTmplRequest,
+  ModifyNoticeContentTmplRequest,
   CreateNoticeContentTmplRequest,
   QCloudYeheNoticeTmplMatcher,
   WebhookNoticeTmplMatcher,
@@ -51,6 +59,36 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("monitor.tencentcloudapi.com", "2023-06-16", clientConfig)
+  }
+
+  /**
+   * 删除通知内容模板
+   */
+  async DeleteNoticeContentTmpls(
+    req: DeleteNoticeContentTmplsRequest,
+    cb?: (error: string, rep: DeleteNoticeContentTmplsResponse) => void
+  ): Promise<DeleteNoticeContentTmplsResponse> {
+    return this.request("DeleteNoticeContentTmpls", req, cb)
+  }
+
+  /**
+   * 根据查询条件获取自定义通知内容模板，若所有查询条件空，则获取账号下所有模板
+   */
+  async DescribeNoticeContentTmpl(
+    req: DescribeNoticeContentTmplRequest,
+    cb?: (error: string, rep: DescribeNoticeContentTmplResponse) => void
+  ): Promise<DescribeNoticeContentTmplResponse> {
+    return this.request("DescribeNoticeContentTmpl", req, cb)
+  }
+
+  /**
+   * 修改通知内容模板
+   */
+  async ModifyNoticeContentTmpl(
+    req: ModifyNoticeContentTmplRequest,
+    cb?: (error: string, rep: ModifyNoticeContentTmplResponse) => void
+  ): Promise<ModifyNoticeContentTmplResponse> {
+    return this.request("ModifyNoticeContentTmpl", req, cb)
   }
 
   /**

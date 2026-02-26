@@ -36,17 +36,18 @@ import {
   CreateReceiverDetailWithDataRequest,
   TimedEmailParam,
   DNSAttributes,
-  GetEmailTemplateResponse,
+  SendEmailStatus,
   ListAddressUnsubscribeConfigResponse,
   SendEmailRequest,
   UpdateEmailIdentityRequest,
   DeleteEmailIdentityResponse,
+  DeleteBlackListRequest,
   DeleteEmailTemplateResponse,
   ListCustomBlacklistRequest,
   DeleteEmailTemplateRequest,
-  SendEmailStatus,
+  AbuseReport,
   ListEmailTemplatesRequest,
-  DeleteBlackListRequest,
+  GetAbuseReportResponse,
   ReceiverInputData,
   ReceiverDetail,
   ListBlackEmailAddressResponse,
@@ -56,6 +57,7 @@ import {
   DeleteCustomBlackListRequest,
   UpdateAddressUnsubscribeConfigRequest,
   ListEmailIdentitiesRequest,
+  GetEmailTemplateResponse,
   CreateReceiverResponse,
   UpdateEmailSmtpPassWordResponse,
   ListReceiversRequest,
@@ -85,6 +87,7 @@ import {
   ListReceiverDetailsRequest,
   CreateEmailIdentityResponse,
   CreateEmailAddressResponse,
+  GetAbuseReportRequest,
   DeleteAddressUnsubscribeConfigResponse,
   BatchSendEmailRequest,
   CreateCustomBlacklistRequest,
@@ -210,13 +213,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 腾讯云发送的邮件一旦被收件方判断为硬退(Hard Bounce)，腾讯云会拉黑该地址，并不允许所有用户向该地址发送邮件。成为邮箱黑名单。如果业务方确认是误判，可以从黑名单中删除。
+   * 获取近期发送的统计情况，包含发送量、送达率、打开率、退信率等一系列数据。
    */
-  async ListBlackEmailAddress(
-    req: ListBlackEmailAddressRequest,
-    cb?: (error: string, rep: ListBlackEmailAddressResponse) => void
-  ): Promise<ListBlackEmailAddressResponse> {
-    return this.request("ListBlackEmailAddress", req, cb)
+  async GetStatisticsReport(
+    req: GetStatisticsReportRequest,
+    cb?: (error: string, rep: GetStatisticsReportResponse) => void
+  ): Promise<GetStatisticsReportResponse> {
+    return this.request("GetStatisticsReport", req, cb)
   }
 
   /**
@@ -421,6 +424,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取垃圾投诉数据
+   */
+  async GetAbuseReport(
+    req: GetAbuseReportRequest,
+    cb?: (error: string, rep: GetAbuseReportResponse) => void
+  ): Promise<GetAbuseReportResponse> {
+    return this.request("GetAbuseReport", req, cb)
+  }
+
+  /**
    * 获取自定义黑名单列表
    */
   async ListCustomBlacklist(
@@ -431,13 +444,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取近期发送的统计情况，包含发送量、送达率、打开率、退信率等一系列数据。
+   * 腾讯云发送的邮件一旦被收件方判断为硬退(Hard Bounce)，腾讯云会拉黑该地址，并不允许所有用户向该地址发送邮件。成为邮箱黑名单。如果业务方确认是误判，可以从黑名单中删除。
    */
-  async GetStatisticsReport(
-    req: GetStatisticsReportRequest,
-    cb?: (error: string, rep: GetStatisticsReportResponse) => void
-  ): Promise<GetStatisticsReportResponse> {
-    return this.request("GetStatisticsReport", req, cb)
+  async ListBlackEmailAddress(
+    req: ListBlackEmailAddressRequest,
+    cb?: (error: string, rep: ListBlackEmailAddressResponse) => void
+  ): Promise<ListBlackEmailAddressResponse> {
+    return this.request("ListBlackEmailAddress", req, cb)
   }
 
   /**

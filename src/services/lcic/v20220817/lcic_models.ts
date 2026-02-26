@@ -160,6 +160,17 @@ export interface CreateRoomRequest {
 }
 
 /**
+ * 转存配置
+ */
+export interface TransferItem {
+  /**
+   * 转存状态， 1正常 2停用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: number
+}
+
+/**
  * DescribeQuestionList请求参数结构体
  */
 export interface DescribeQuestionListRequest {
@@ -735,25 +746,21 @@ export interface BatchRegisterResponse {
 }
 
 /**
- * 课堂回放信息
+ * LoginOriginIdWithRoom请求参数结构体
  */
-export interface PlaybackItem {
+export interface LoginOriginIdWithRoomRequest {
   /**
-   * <p>房间id</p>
+   * <p>低代码互动课堂的SdkAppId。</p>
    */
-  RoomId?: number
+  SdkAppId: number
   /**
-   * <p>回放地址</p>
+   * <p>用户在客户系统的Id，需要在同一应用下唯一。</p>
    */
-  PlaybackUrl?: string
+  OriginId: string
   /**
-   * <p>录制时长</p>
+   * <p>课堂 ID</p>
    */
-  Duration?: number
-  /**
-   * <p>录制开始时间</p>
-   */
-  CreateTime?: number
+  RoomId: number
 }
 
 /**
@@ -1037,17 +1044,17 @@ export interface BatchCreateRoomResponse {
 }
 
 /**
- * StartRecord返回参数结构体
+ * LoginUserWithRoom请求参数结构体
  */
-export interface StartRecordResponse {
+export interface LoginUserWithRoomRequest {
   /**
-   * 任务ID
+   * <p>注册获取的用户id。</p>
    */
-  TaskId?: string
+  UserId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>课堂 ID</p>
    */
-  RequestId?: string
+  RoomId: number
 }
 
 /**
@@ -1466,6 +1473,28 @@ export interface DocumentInfo {
    * 转码后文档的最小分辨率，和创建文档时传入的参数一致。
    */
   MinScaleResolution?: string
+}
+
+/**
+ * 课堂回放信息
+ */
+export interface PlaybackItem {
+  /**
+   * <p>房间id</p>
+   */
+  RoomId?: number
+  /**
+   * <p>回放地址</p>
+   */
+  PlaybackUrl?: string
+  /**
+   * <p>录制时长</p>
+   */
+  Duration?: number
+  /**
+   * <p>录制开始时间</p>
+   */
+  CreateTime?: number
 }
 
 /**
@@ -2406,14 +2435,35 @@ export interface BatchAddGroupMemberRequest {
 }
 
 /**
- * 转存配置
+ * StartRecord返回参数结构体
  */
-export interface TransferItem {
+export interface StartRecordResponse {
   /**
-   * 转存状态， 1正常 2停用
-注意：此字段可能返回 null，表示取不到有效值。
+   * 任务ID
    */
-  State?: number
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * LoginUserWithRoom返回参数结构体
+ */
+export interface LoginUserWithRoomResponse {
+  /**
+   * <p>用户Id。</p>
+   */
+  UserId?: string
+  /**
+   * <p>注册成功后返回登录态token，有效期7天。token过期后可以通过调用“登录”或“源账号登录”进行更新。</p>
+   */
+  Token?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2622,6 +2672,24 @@ BMP = 4
    * 图片信息
    */
   ImageInfoList: Array<ImageInfo>
+}
+
+/**
+ * LoginOriginIdWithRoom返回参数结构体
+ */
+export interface LoginOriginIdWithRoomResponse {
+  /**
+   * <p>用户Id。</p>
+   */
+  UserId?: string
+  /**
+   * <p>登录/注册成功后返回登录态token。有效期7天。</p>
+   */
+  Token?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

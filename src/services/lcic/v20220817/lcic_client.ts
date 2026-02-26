@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateRoomRequest,
+  TransferItem,
   DescribeQuestionListRequest,
   ModifyRoomResponse,
   LoginOriginIdRequest,
@@ -51,7 +52,7 @@ import {
   GetWatermarkResponse,
   DescribePlaybackListResponse,
   BatchRegisterResponse,
-  PlaybackItem,
+  LoginOriginIdWithRoomRequest,
   BindDocumentToRoomResponse,
   StopRecordResponse,
   CreateGroupWithSubGroupRequest,
@@ -62,7 +63,7 @@ import {
   BatchDescribeDocumentRequest,
   RegisterUserRequest,
   BatchCreateRoomResponse,
-  StartRecordResponse,
+  LoginUserWithRoomRequest,
   UnbindDocumentFromRoomResponse,
   CreateDocumentResponse,
   DescribeMarqueeRequest,
@@ -83,6 +84,7 @@ import {
   DescribeDocumentsResponse,
   DescribeRecordRequest,
   DocumentInfo,
+  PlaybackItem,
   DeleteDocumentResponse,
   DeleteRecordRequest,
   BatchDeleteGroupMemberResponse,
@@ -126,10 +128,12 @@ import {
   GroupBaseInfo,
   BatchUserInfo,
   BatchAddGroupMemberRequest,
-  TransferItem,
+  StartRecordResponse,
+  LoginUserWithRoomResponse,
   DescribeUserDetailResponse,
   DescribeRoomResponse,
   ImageMsgContent,
+  LoginOriginIdWithRoomResponse,
   DescribeRecordStreamResponse,
   DescribeCurrentMemberListRequest,
   SendRoomNotificationMessageRequest,
@@ -456,6 +460,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 使用源账号登录课堂，源账号为注册时填入的originId
+   */
+  async LoginOriginIdWithRoom(
+    req: LoginOriginIdWithRoomRequest,
+    cb?: (error: string, rep: LoginOriginIdWithRoomResponse) => void
+  ): Promise<LoginOriginIdWithRoomResponse> {
+    return this.request("LoginOriginIdWithRoom", req, cb)
+  }
+
+  /**
    * 批量获取信令录制回放token，用于回放指定课堂时鉴权
    */
   async BatchGetPlaybackToken(
@@ -613,6 +627,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePlayRecordsResponse) => void
   ): Promise<DescribePlayRecordsResponse> {
     return this.request("DescribePlayRecords", req, cb)
+  }
+
+  /**
+   * 登录课堂
+   */
+  async LoginUserWithRoom(
+    req: LoginUserWithRoomRequest,
+    cb?: (error: string, rep: LoginUserWithRoomResponse) => void
+  ): Promise<LoginUserWithRoomResponse> {
+    return this.request("LoginUserWithRoom", req, cb)
   }
 
   /**

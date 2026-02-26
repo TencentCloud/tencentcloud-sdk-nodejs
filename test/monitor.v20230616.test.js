@@ -18,6 +18,36 @@ const client = new tencentcloud.monitor.v20230616.Client({
 })
 describe("monitor.v20230616.test.js", function () {
 
+it("monitor.v20230616.DeleteNoticeContentTmpls", async function () {
+    try {
+       const data = await client.DeleteNoticeContentTmpls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20230616.DescribeNoticeContentTmpl", async function () {
+    try {
+       const data = await client.DescribeNoticeContentTmpl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20230616.ModifyNoticeContentTmpl", async function () {
+    try {
+       const data = await client.ModifyNoticeContentTmpl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20230616.CreateNoticeContentTmpl", async function () {
     try {
        const data = await client.CreateNoticeContentTmpl({})

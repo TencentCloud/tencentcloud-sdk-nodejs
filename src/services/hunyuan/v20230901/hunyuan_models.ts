@@ -56,27 +56,33 @@ export interface Approximate {
 }
 
 /**
- * 翻译接口返回的回复，支持多个
+ * 术语条目
  */
-export interface TranslationChoice {
+export interface GlossaryEntry {
   /**
-   * 结束标志位，可能为 stop、 sensitive。
-stop 表示输出正常结束。
-sensitive 只在开启流式输出审核时会出现，表示安全审核未通过。
+   * 源语言术语，限制1000字符
+
    */
-  FinishReason?: string
+  SourceTerm?: string
   /**
-   * 索引值，流式调用时使用该字段。
+   * 目标语言术语，限制1000字符
+
    */
-  Index?: number
+  TargetTerm?: string
   /**
-   * 增量返回值，流式调用时使用该字段。
+   * 术语条目 ID
    */
-  Delta?: TranslationDelta
+  EntryId?: string
+}
+
+/**
+ * DeleteGlossary返回参数结构体
+ */
+export interface DeleteGlossaryResponse {
   /**
-   * 返回值，非流式调用时使用该字段。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Message?: TranslationMessage
+  RequestId?: string
 }
 
 /**
@@ -117,6 +123,20 @@ export interface LogoParam {
    * 水印图片位于融合结果图中的坐标，将按照坐标对标识图片进行位置和大小的拉伸匹配
    */
   LogoRect?: LogoRect
+}
+
+/**
+ * CreateGlossaryEntry请求参数结构体
+ */
+export interface CreateGlossaryEntryRequest {
+  /**
+   * 术语库 ID
+   */
+  GlossaryId: string
+  /**
+   * 术语条目列表，单次请求限制100个
+   */
+  Entries: Array<GlossaryEntryCreateItem>
 }
 
 /**
@@ -225,13 +245,25 @@ export interface PromptTokensDetails {
 }
 
 /**
- * QueryHunyuanImageChatJob请求参数结构体
+ * GetTokenCount返回参数结构体
  */
-export interface QueryHunyuanImageChatJobRequest {
+export interface GetTokenCountResponse {
   /**
-   * 任务 ID。
+   * token计数
    */
-  JobId?: string
+  TokenCount?: number
+  /**
+   * 字符计数
+   */
+  CharacterCount?: number
+  /**
+   * 切分后的列表
+   */
+  Tokens?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -334,6 +366,16 @@ export interface SubmitHunyuanImageJobResponse {
 }
 
 /**
+ * DeleteGlossaryEntry返回参数结构体
+ */
+export interface DeleteGlossaryEntryResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetThread返回参数结构体
  */
 export interface GetThreadResponse {
@@ -376,6 +418,30 @@ export interface Reference {
    * 译文
    */
   Translation?: string
+}
+
+/**
+ * 翻译接口返回的回复，支持多个
+ */
+export interface TranslationChoice {
+  /**
+   * 结束标志位，可能为 stop、 sensitive。
+stop 表示输出正常结束。
+sensitive 只在开启流式输出审核时会出现，表示安全审核未通过。
+   */
+  FinishReason?: string
+  /**
+   * 索引值，流式调用时使用该字段。
+   */
+  Index?: number
+  /**
+   * 增量返回值，流式调用时使用该字段。
+   */
+  Delta?: TranslationDelta
+  /**
+   * 返回值，非流式调用时使用该字段。
+   */
+  Message?: TranslationMessage
 }
 
 /**
@@ -456,6 +522,24 @@ export interface RunThreadResponse {
 }
 
 /**
+ * ListGlossaryEntry请求参数结构体
+ */
+export interface ListGlossaryEntryRequest {
+  /**
+   * 术语库 ID
+   */
+  GlossaryId: string
+  /**
+   * 页码，默认 1
+   */
+  Page?: number
+  /**
+   * 每页数量，默认 10，最大200
+   */
+  PageSize?: number
+}
+
+/**
  * ChatCompletions返回参数结构体
  */
 export interface ChatCompletionsResponse {
@@ -517,6 +601,16 @@ export interface ChatCompletionsResponse {
 }
 
 /**
+ * 术语条目
+ */
+export interface GlossaryEntryDeleteItem {
+  /**
+   * 术语条目 ID
+   */
+  EntryId: string
+}
+
+/**
  * 当type为video_url时使用，标识具体的视频链接内容
  */
 export interface VideoUrl {
@@ -574,6 +668,16 @@ export interface SubmitHunyuanImageChatJobResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteGlossary请求参数结构体
+ */
+export interface DeleteGlossaryRequest {
+  /**
+   * 术语库 ID
+   */
+  GlossaryId: string
 }
 
 /**
@@ -960,6 +1064,28 @@ export interface ImageMessage {
 }
 
 /**
+ * 模型生成的工具调用
+ */
+export interface ToolCall {
+  /**
+   * 工具调用id
+   */
+  Id: string
+  /**
+   * 工具调用类型，当前只支持function
+   */
+  Type: string
+  /**
+   * 具体的function调用
+   */
+  Function: ToolCallFunction
+  /**
+   * 索引值
+   */
+  Index?: number
+}
+
+/**
  * SetPayMode请求参数结构体
  */
 export interface SetPayModeRequest {
@@ -1036,6 +1162,17 @@ export interface FilesDeletionsResponse {
 }
 
 /**
+ * 会话消息附件
+ */
+export interface ThreadMessageAttachmentObject {
+  /**
+   * 文件 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileID?: string
+}
+
+/**
  * 已上传的文件对象。
  */
 export interface FileObject {
@@ -1066,25 +1203,35 @@ export interface FileObject {
 }
 
 /**
- * 模型生成的工具调用
+ * ListGlossary请求参数结构体
  */
-export interface ToolCall {
+export interface ListGlossaryRequest {
   /**
-   * 工具调用id
+   * 页码，默认 1
    */
-  Id: string
+  Page?: number
   /**
-   * 工具调用类型，当前只支持function
+   * 每页数量，默认 10，最大 100
    */
-  Type: string
+  PageSize?: number
+}
+
+/**
+ * GetEmbedding返回参数结构体
+ */
+export interface GetEmbeddingResponse {
   /**
-   * 具体的function调用
+   * 返回的 Embedding 信息。
    */
-  Function: ToolCallFunction
+  Data?: Array<EmbeddingData>
   /**
-   * 索引值
+   * Token 使用计数，按照总 Token 数量收费。
    */
-  Index?: number
+  Usage?: EmbeddingUsage
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1175,6 +1322,26 @@ export interface Replace {
  * CreateThread请求参数结构体
  */
 export type CreateThreadRequest = null
+
+/**
+ * 术语条目
+ */
+export interface GlossaryEntryUpdateItem {
+  /**
+   * 术语条目 ID
+   */
+  EntryId: string
+  /**
+   * 源语言术语，限制1000字符
+
+   */
+  SourceTerm?: string
+  /**
+   * 目标语言术语，限制1000字符
+
+   */
+  TargetTerm?: string
+}
 
 /**
  * 会话内容
@@ -1573,6 +1740,20 @@ export interface GroupChatCompletionsResponse {
 }
 
 /**
+ * UpdateGlossaryEntry请求参数结构体
+ */
+export interface UpdateGlossaryEntryRequest {
+  /**
+   * 术语库 ID
+   */
+  GlossaryId: string
+  /**
+   * 需要更新的术语条目列表，单次请求限制100个
+   */
+  Entries: Array<GlossaryEntryUpdateItem>
+}
+
+/**
  * SubmitHunyuanImageJob请求参数结构体
  */
 export interface SubmitHunyuanImageJobRequest {
@@ -1646,25 +1827,29 @@ export interface SubmitHunyuanImageJobRequest {
 }
 
 /**
- * GetTokenCount返回参数结构体
+ * QueryHunyuanImageChatJob请求参数结构体
  */
-export interface GetTokenCountResponse {
+export interface QueryHunyuanImageChatJobRequest {
   /**
-   * token计数
+   * 任务 ID。
    */
-  TokenCount?: number
+  JobId?: string
+}
+
+/**
+ * 术语条目
+ */
+export interface GlossaryEntryCreateItem {
   /**
-   * 字符计数
+   * 源语言术语，限制1000字符
+
    */
-  CharacterCount?: number
+  SourceTerm: string
   /**
-   * 切分后的列表
+   * 目标语言术语，限制1000字符
+
    */
-  Tokens?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  TargetTerm: string
 }
 
 /**
@@ -1712,6 +1897,32 @@ export interface Delta {
    * 思维链内容。用于展示模型思考过程，仅 Hunyuan-T1 系列模型可用。注意：在进行多轮对话时，请不要将此字段拼接到 messages 中。请求 messages 的请求参数中包含 reasoning_content，接口将报错。
    */
   ReasoningContent?: string
+}
+
+/**
+ * ListGlossary返回参数结构体
+ */
+export interface ListGlossaryResponse {
+  /**
+   * 术语库列表
+   */
+  Glossaries?: Array<Glossary>
+  /**
+   * 术语库总数量
+   */
+  Total?: number
+  /**
+   * 当前页码
+   */
+  Page?: number
+  /**
+   * 每页数量
+   */
+  PageSize?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1841,6 +2052,20 @@ export interface QueryHunyuanImageJobResponse {
 }
 
 /**
+ * UpdateGlossaryEntry返回参数结构体
+ */
+export interface UpdateGlossaryEntryResponse {
+  /**
+   * 成功更新的术语条目
+   */
+  Entries?: Array<GlossaryEntry>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 混元生图多轮对话历史记录。
  */
 export interface History {
@@ -1920,6 +2145,32 @@ export interface GroupChatConfig {
    * 角色描述
    */
   Characters?: Array<Character>
+}
+
+/**
+ * ListGlossaryEntry返回参数结构体
+ */
+export interface ListGlossaryEntryResponse {
+  /**
+   * 术语条目列表
+   */
+  Entries?: Array<GlossaryEntry>
+  /**
+   * 条目总数量
+   */
+  Total?: number
+  /**
+   * 当前页码
+   */
+  Page?: number
+  /**
+   * 每页数量
+   */
+  PageSize?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2050,6 +2301,42 @@ export interface ThreadMessageInCompleteDetailsObject {
 }
 
 /**
+ * DeleteGlossaryEntry请求参数结构体
+ */
+export interface DeleteGlossaryEntryRequest {
+  /**
+   * 术语库 ID
+   */
+  GlossaryId: string
+  /**
+   * 需要更新的术语条目列表，单次请求限制100个
+   */
+  Entries: Array<GlossaryEntryDeleteItem>
+}
+
+/**
+ * CreateGlossary请求参数结构体
+ */
+export interface CreateGlossaryRequest {
+  /**
+   * 术语库名称，限制50个字符
+   */
+  Name: string
+  /**
+   * 源语言代码，取值范围：zh(中文)、en(英语)、fr(法语)、pt(葡萄牙语)、es(西班牙语)、ja(日语)、tr(土耳其语)、ru(俄语)、ar(阿拉伯语)、ko(韩语)、th(泰语)、it(意大利语)、de(德语)、vi(越南语)、ms(马来语)、id(印尼语)、yue(粤语)、zh-TR(繁体中文)、hi(印地语)、fil(菲律宾语)、pl(波兰语)、cs(捷克语)、nl(荷兰语)、km(高棉语)、my(缅甸语)、fa(波斯语)、gu(古吉拉特语)、ur(乌尔都语)、te(泰卢固语)、mr(马拉地语)、he(希伯来语)、bn(孟加拉语)、ta(泰米尔语)、uk(乌克兰语)、bo(藏语)、kk(哈萨克语)、mn(蒙古语)、ug(维吾尔语)
+   */
+  Source: string
+  /**
+   * 目标语言代码，取值范围：zh(中文)、en(英语)、fr(法语)、pt(葡萄牙语)、es(西班牙语)、ja(日语)、tr(土耳其语)、ru(俄语)、ar(阿拉伯语)、ko(韩语)、th(泰语)、it(意大利语)、de(德语)、vi(越南语)、ms(马来语)、id(印尼语)、yue(粤语)、zh-TR(繁体中文)、hi(印地语)、fil(菲律宾语)、pl(波兰语)、cs(捷克语)、nl(荷兰语)、km(高棉语)、my(缅甸语)、fa(波斯语)、gu(古吉拉特语)、ur(乌尔都语)、te(泰卢固语)、mr(马拉地语)、he(希伯来语)、bn(孟加拉语)、ta(泰米尔语)、uk(乌克兰语)、bo(藏语)、kk(哈萨克语)、mn(蒙古语)、ug(维吾尔语)
+   */
+  Target: string
+  /**
+   * 术语库描述，限制255个字符
+   */
+  Description?: string
+}
+
+/**
  * ImageQuestion请求参数结构体
  */
 export interface ImageQuestionRequest {
@@ -2137,17 +2424,17 @@ export interface QueryHunyuanImageChatJobResponse {
 }
 
 /**
- * GetEmbedding返回参数结构体
+ * CreateGlossary返回参数结构体
  */
-export interface GetEmbeddingResponse {
+export interface CreateGlossaryResponse {
   /**
-   * 返回的 Embedding 信息。
+   * 术语库名称
    */
-  Data?: Array<EmbeddingData>
+  Name?: string
   /**
-   * Token 使用计数，按照总 Token 数量收费。
+   * 术语库唯一 ID
    */
-  Usage?: EmbeddingUsage
+  GlossaryId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2185,6 +2472,32 @@ export interface ToolCallFunction {
    * function参数，一般为json字符串
    */
   Arguments: string
+}
+
+/**
+ * 术语库
+ */
+export interface Glossary {
+  /**
+   * 术语库唯一 ID
+   */
+  GlossaryId?: string
+  /**
+   * 术语库名称
+   */
+  Name?: string
+  /**
+   * 术语库描述
+   */
+  Description?: string
+  /**
+   * 源语言代码
+   */
+  Source?: string
+  /**
+   * 目标语言代码
+   */
+  Target?: string
 }
 
 /**
@@ -2319,6 +2632,20 @@ export interface FilesListResponse {
 }
 
 /**
+ * CreateGlossaryEntry返回参数结构体
+ */
+export interface CreateGlossaryEntryResponse {
+  /**
+   * 成功创建的术语条目
+   */
+  Entries?: Array<GlossaryEntry>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Token 使用计数。
  */
 export interface EmbeddingUsage {
@@ -2330,15 +2657,4 @@ export interface EmbeddingUsage {
    * 总 Token 数。
    */
   TotalTokens?: number
-}
-
-/**
- * 会话消息附件
- */
-export interface ThreadMessageAttachmentObject {
-  /**
-   * 文件 ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FileID?: string
 }

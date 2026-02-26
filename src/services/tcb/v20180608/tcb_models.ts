@@ -309,6 +309,25 @@ export interface BindCloudBaseAccessDomainRequest {
 }
 
 /**
+ * ModifyEnvPlan请求参数结构体
+ */
+export interface ModifyEnvPlanRequest {
+  /**
+   * 所需变更套餐的环境ID
+   */
+  EnvId: string
+  /**
+   * 目标套餐Id。
+对于云开发环境套餐，可通过 [DescribeBaasPackageList](https://cloud.tencent.com/document/product/876/78167) 接口获取，对应其出参的PackageName
+   */
+  PackageId: string
+  /**
+   * 是否自动选择代金券支付。
+   */
+  AutoVoucher?: boolean
+}
+
+/**
  * http访问服务客户端限频
  */
 export interface CloudBaseClientQPSPolicy {
@@ -976,6 +995,10 @@ export interface DescribeCurveDataResponse {
    */
   NewValues?: Array<number>
   /**
+   * 聚合方式
+   */
+  Statistics?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1236,24 +1259,6 @@ export interface CloudBaseRunVolumeMount {
    * 挂载配置
    */
   MountPropagation?: string
-}
-
-/**
- * CreatePostpayPackage返回参数结构体
- */
-export interface CreatePostpayPackageResponse {
-  /**
-   * 后付费订单号
-   */
-  TranId?: string
-  /**
-   * 环境ID
-   */
-  EnvId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -1606,6 +1611,25 @@ export interface DescribeUserListResp {
 }
 
 /**
+ * RenewEnv请求参数结构体
+ */
+export interface RenewEnvRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 续费周期，单位：月。
+默认值为 1，即续费1个月。
+   */
+  Period?: number
+  /**
+   * 是否自动选择代金券支付。
+   */
+  AutoVoucher?: boolean
+}
+
+/**
  * 云开发新套餐详情
  */
 export interface BaasPackageInfo {
@@ -1800,6 +1824,20 @@ export interface FunctionInfo {
 }
 
 /**
+ * CreateEnv返回参数结构体
+ */
+export interface CreateEnvResponse {
+  /**
+   * 自动生成的环境ID
+   */
+  EnvId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 安全网关路由
  */
 export interface WxGatewayRountItem {
@@ -1990,6 +2028,16 @@ export interface DescribeEnvAccountCircleRequest {
    * 环境ID
    */
   EnvId: string
+}
+
+/**
+ * RenewEnv返回参数结构体
+ */
+export interface RenewEnvResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2376,6 +2424,38 @@ export interface CloudBaseCapabilities {
    * 禁用安全能力向列表
    */
   Drop?: Array<string>
+}
+
+/**
+ * 仓库信息
+ */
+export interface CbrRepoInfo {
+  /**
+   * 仓库名称
+   */
+  Repo?: string
+  /**
+   * 仓库平台
+   */
+  RepoType?: string
+  /**
+   * 仓库语言
+   */
+  RepoLanguage?: string
+  /**
+   * 分支名称
+   */
+  Branch?: string
+}
+
+/**
+ * ModifyEnvPlan返回参数结构体
+ */
+export interface ModifyEnvPlanResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2783,43 +2863,59 @@ export interface CreateBillDealRequest {
    */
   ProductType: string
   /**
-   * 目标下单产品/套餐Id
+   * 目标下单产品/套餐Id。
+对于云开发环境套餐，可通过 DescribeBaasPackageList 接口获取，对应其出参的PackageName
    */
   PackageId: string
   /**
-   * 默认只下单不支付，为ture则下单并支付
+   * 默认只下单不支付，为ture则下单并支付。
+如果需要下单并支付，请确保账户下有足够的余额，否则会导致下单失败。
    */
   CreateAndPay?: boolean
   /**
-   * 购买时长
+   * 购买时长，与TimeUnit字段搭配使用。
    */
   TimeSpan?: number
   /**
-   * 购买时长单位,按各产品规则可选d(天),m(月),y(年),p(一次性)
+   * 购买时长单位,按各产品规则可选d(天),m(月),y(年),p(一次性)。
+对于 云开发环境的 新购和续费，目前仅支持 按月购买（即 TimeUnit=m）。
    */
   TimeUnit?: string
   /**
-   * 资源唯一标识
+   * 资源唯一标识。
+在云开发环境 续费和变配 场景下必传，取值为环境ID。
    */
   ResourceId?: string
   /**
-   * 来源可选[qcloud,miniapp]，默认qcloud
+   * 来源可选[qcloud,miniapp]，默认qcloud。
+miniapp表示微信云开发，主要适用于[小程序云开发](https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/billing/price.html)。
+
    */
   Source?: string
   /**
-   * 资源别名
+   * 环境别名，用于新购云开发环境时，给云开发环境起别名。
+仅当 新购云开发环境（DealType=purchase 并且 ProductType=tcb-baas ）时有效。
+
+### 格式要求
+- 可选字符： 小写字母(a~z)、数字、减号(-)
+- 不能以 减号(-) 开头或结尾
+- 不能有连个连续的 减号(-)
+- 长度不超过20位
    */
   Alias?: string
   /**
-   * 环境id
+   * 环境id，当购买资源包和大促包时（ProductType取值为tcb-promotion 或 tcb-package）必传，表示资源包在哪个环境下生效。
    */
   EnvId?: string
   /**
-   * 开启超限按量
+   * 开启超限按量。
+开启后，当 套餐内的资源点 和 资源包 都用尽后，会自动按量计费。
+详见 [计费说明](https://cloud.tencent.com/document/product/876/127357)。
    */
   EnableExcess?: boolean
   /**
-   * 变配目标产品/套餐id
+   * 变配目标套餐id，对于云开发环境变配场景下必传。
+对于云开发环境套餐，可通过 DescribeBaasPackageList 接口获取，对应其出参的PackageName
    */
   ModifyPackageId?: string
   /**
@@ -2827,7 +2923,7 @@ export interface CreateBillDealRequest {
    */
   Extension?: string
   /**
-   * 是否自动选择代金券支付
+   * 是否自动选择代金券支付。
    */
   AutoVoucher?: boolean
   /**
@@ -3413,25 +3509,21 @@ export interface DeleteUsersRequest {
 }
 
 /**
- * 仓库信息
+ * CreatePostpayPackage返回参数结构体
  */
-export interface CbrRepoInfo {
+export interface CreatePostpayPackageResponse {
   /**
-   * 仓库名称
+   * 后付费订单号
    */
-  Repo?: string
+  TranId?: string
   /**
-   * 仓库平台
+   * 环境ID
    */
-  RepoType?: string
+  EnvId?: string
   /**
-   * 仓库语言
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RepoLanguage?: string
-  /**
-   * 分支名称
-   */
-  Branch?: string
+  RequestId?: string
 }
 
 /**
@@ -4234,7 +4326,7 @@ export interface CreateMySQLRequest {
    */
   EnvId: string
   /**
-   * Db类型 1. FLEXDB 2.MYSQL
+   * Db类型: MYSQL
    */
   DbInstanceType: string
   /**
@@ -6283,7 +6375,7 @@ export interface DescribeCreateMySQLResult {
    */
   FailReason?: string
   /**
-   * 是否冻结
+   * 是否已被冻结（只在 Status=success时有效）
    */
   FreezeStatus?: boolean
 }
@@ -6314,6 +6406,53 @@ export interface Tag {
    * 标签值
    */
   Value: string
+}
+
+/**
+ * CreateEnv请求参数结构体
+ */
+export interface CreateEnvRequest {
+  /**
+   * 环境别名。
+
+### 格式要求
+- 可选字符： 小写字母(a~z)、数字、减号(-)
+- 不能以 减号(-) 开头或结尾
+- 不能有连个连续的 减号(-)
+- 长度不超过20位
+示例值：cloud
+   */
+  Alias: string
+  /**
+   * 云开发环境套餐Id。
+对于云开发环境套餐，可通过 [DescribeBaasPackageList](https://cloud.tencent.com/document/product/876/78167) 接口获取，对应其出参的PackageName。
+   */
+  PackageId: string
+  /**
+   * 资源类型。代表新购环境时需要发货哪些资源。
+可取值以及含义：
+- flexdb : 表示文档型数据库
+- storage : 表示云存储
+- function : 表示云函数
+
+**该字段不可为空**
+   */
+  Resources: Array<string>
+  /**
+   * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24。
+默认值为1，即1个月。
+   */
+  Period?: number
+  /**
+   * 是否自动选择代金券支付。
+   */
+  AutoVoucher?: boolean
+  /**
+   * 环境标签。
+可取值通过接口 [tag:DescribeTags](https://cloud.tencent.com/document/product/651/35316) 可获取到。
+不传或为空则默认不打任何标签。
+   */
+  Tags?: Array<Tag>
 }
 
 /**

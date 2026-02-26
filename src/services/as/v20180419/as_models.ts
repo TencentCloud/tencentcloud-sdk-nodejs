@@ -1017,17 +1017,21 @@ export interface ExecuteScalingPolicyResponse {
  */
 export interface ForwardLoadBalancerIdentification {
   /**
-   * 负载均衡器ID
+   * <p>负载均衡器ID</p>
    */
   LoadBalancerId: string
   /**
-   * 应用型负载均衡监听器 ID
+   * <p>应用型负载均衡监听器 ID</p>
    */
   ListenerId: string
   /**
-   * 转发规则ID，注意：针对七层监听器此参数必填
+   * <p>转发规则ID，注意：针对七层监听器此参数必填</p>
    */
   LocationId?: string
+  /**
+   * <p>监听器或转发路径需解绑的端口号列表。</p><p>取值范围：[1, 65535]</p><p>不传递该参数时，默认解绑指定监听器或转发路径关联的所有端口。</p>
+   */
+  PortList?: Array<number | bigint>
 }
 
 /**

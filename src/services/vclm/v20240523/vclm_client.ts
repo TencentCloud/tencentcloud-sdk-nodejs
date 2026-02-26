@@ -25,6 +25,7 @@ import {
   SubmitHumanActorJobRequest,
   SubmitImageAnimateJobResponse,
   FaceTemplateInfo,
+  DescribeAigcVideoJobRequest,
   SubmitImageAnimateJobRequest,
   DescribeVideoVoiceJobRequest,
   SubmitImageToVideoGeneralJobResponse,
@@ -46,7 +47,9 @@ import {
   DescribeImageAnimateJobResponse,
   SubmitPortraitSingJobRequest,
   LogoRect,
+  DescribeAigcVideoJobResponse,
   SubmitVideoVoiceJobRequest,
+  SubmitAigcVideoJobRequest,
   SubmitHunyuanToVideoJobResponse,
   DescribeHumanActorJobResponse,
   ExtraParam,
@@ -62,6 +65,7 @@ import {
   DescribeVideoEditJobRequest,
   DescribeHumanActorJobRequest,
   DescribeImageToVideoGeneralJobRequest,
+  SubmitAigcVideoJobResponse,
   DescribeTemplateToVideoJobRequest,
   SubmitVideoEditJobRequest,
   DescribeImageAnimateJobRequest,
@@ -102,6 +106,47 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 用于提交图片唱演任务。
+支持提交音频和图片生成唱演视频，满足社交娱乐、互动营销等场景的需求。
+     */
+  async SubmitPortraitSingJob(
+    req: SubmitPortraitSingJobRequest,
+    cb?: (error: string, rep: SubmitPortraitSingJobResponse) => void
+  ): Promise<SubmitPortraitSingJobResponse> {
+    return this.request("SubmitPortraitSingJob", req, cb)
+  }
+
+  /**
+   * 提交视频人脸融合任务
+   */
+  async SubmitVideoFaceFusionJob(
+    req: SubmitVideoFaceFusionJobRequest,
+    cb?: (error: string, rep: SubmitVideoFaceFusionJobResponse) => void
+  ): Promise<SubmitVideoFaceFusionJobResponse> {
+    return this.request("SubmitVideoFaceFusionJob", req, cb)
+  }
+
+  /**
+   * 检查图片跳舞输入图
+   */
+  async CheckAnimateImageJob(
+    req: CheckAnimateImageJobRequest,
+    cb?: (error: string, rep: CheckAnimateImageJobResponse) => void
+  ): Promise<CheckAnimateImageJobResponse> {
+    return this.request("CheckAnimateImageJob", req, cb)
+  }
+
+  /**
+   * 查询图生视频通用能力任务接口
+   */
+  async DescribeImageToVideoGeneralJob(
+    req: DescribeImageToVideoGeneralJobRequest,
+    cb?: (error: string, rep: DescribeImageToVideoGeneralJobResponse) => void
+  ): Promise<DescribeImageToVideoGeneralJobResponse> {
+    return this.request("DescribeImageToVideoGeneralJob", req, cb)
+  }
+
+  /**
    * 用于查询视频特效任务。
    */
   async DescribeTemplateToVideoJob(
@@ -122,17 +167,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 用于提交图片唱演任务。
-支持提交音频和图片生成唱演视频，满足社交娱乐、互动营销等场景的需求。
-     */
-  async SubmitPortraitSingJob(
-    req: SubmitPortraitSingJobRequest,
-    cb?: (error: string, rep: SubmitPortraitSingJobResponse) => void
-  ): Promise<SubmitPortraitSingJobResponse> {
-    return this.request("SubmitPortraitSingJob", req, cb)
-  }
-
-  /**
      * 用于查询图片唱演任务。
 支持提交音频和图片生成唱演视频，满足社交娱乐、互动营销等场景的需求。
      */
@@ -141,6 +175,56 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePortraitSingJobResponse) => void
   ): Promise<DescribePortraitSingJobResponse> {
     return this.request("DescribePortraitSingJob", req, cb)
+  }
+
+  /**
+   * 查询生视频任务
+   */
+  async DescribeAigcVideoJob(
+    req: DescribeAigcVideoJobRequest,
+    cb?: (error: string, rep: DescribeAigcVideoJobResponse) => void
+  ): Promise<DescribeAigcVideoJobResponse> {
+    return this.request("DescribeAigcVideoJob", req, cb)
+  }
+
+  /**
+   * 用于提交视频编辑任务，支持上传视频、文本及图片素材开展编辑操作，涵盖风格迁移、元素替换、内容增减等核心能力。
+   */
+  async SubmitVideoEditJob(
+    req: SubmitVideoEditJobRequest,
+    cb?: (error: string, rep: SubmitVideoEditJobResponse) => void
+  ): Promise<SubmitVideoEditJobResponse> {
+    return this.request("SubmitVideoEditJob", req, cb)
+  }
+
+  /**
+   * 通过JobId提交请求，获取视频配音频任务的结果信息。
+   */
+  async DescribeVideoVoiceJob(
+    req: DescribeVideoVoiceJobRequest,
+    cb?: (error: string, rep: DescribeVideoVoiceJobResponse) => void
+  ): Promise<DescribeVideoVoiceJobResponse> {
+    return this.request("DescribeVideoVoiceJob", req, cb)
+  }
+
+  /**
+   * 提交生视频任务
+   */
+  async SubmitAigcVideoJob(
+    req: SubmitAigcVideoJobRequest,
+    cb?: (error: string, rep: SubmitAigcVideoJobResponse) => void
+  ): Promise<SubmitAigcVideoJobResponse> {
+    return this.request("SubmitAigcVideoJob", req, cb)
+  }
+
+  /**
+   * 提交视频配音效任务，输入视频后提交请求，会返回一个JobId，用于查询视频配音效的处理进度。
+   */
+  async SubmitVideoVoiceJob(
+    req: SubmitVideoVoiceJobRequest,
+    cb?: (error: string, rep: SubmitVideoVoiceJobResponse) => void
+  ): Promise<SubmitVideoVoiceJobResponse> {
+    return this.request("SubmitVideoVoiceJob", req, cb)
   }
 
   /**
@@ -155,43 +239,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交视频特效任务接口
+   * 查询混元生视频任务
    */
-  async SubmitTemplateToVideoJob(
-    req: SubmitTemplateToVideoJobRequest,
-    cb?: (error: string, rep: SubmitTemplateToVideoJobResponse) => void
-  ): Promise<SubmitTemplateToVideoJobResponse> {
-    return this.request("SubmitTemplateToVideoJob", req, cb)
-  }
-
-  /**
-   * 通过JobId提交请求，获取视频配音频任务的结果信息。
-   */
-  async DescribeVideoVoiceJob(
-    req: DescribeVideoVoiceJobRequest,
-    cb?: (error: string, rep: DescribeVideoVoiceJobResponse) => void
-  ): Promise<DescribeVideoVoiceJobResponse> {
-    return this.request("DescribeVideoVoiceJob", req, cb)
-  }
-
-  /**
-   * 用于提交视频编辑任务，支持上传视频、文本及图片素材开展编辑操作，涵盖风格迁移、元素替换、内容增减等核心能力。
-   */
-  async SubmitVideoEditJob(
-    req: SubmitVideoEditJobRequest,
-    cb?: (error: string, rep: SubmitVideoEditJobResponse) => void
-  ): Promise<SubmitVideoEditJobResponse> {
-    return this.request("SubmitVideoEditJob", req, cb)
-  }
-
-  /**
-   * 查询视频人脸融合任务
-   */
-  async DescribeVideoFaceFusionJob(
-    req: DescribeVideoFaceFusionJobRequest,
-    cb?: (error: string, rep: DescribeVideoFaceFusionJobResponse) => void
-  ): Promise<DescribeVideoFaceFusionJobResponse> {
-    return this.request("DescribeVideoFaceFusionJob", req, cb)
+  async DescribeHunyuanToVideoJob(
+    req: DescribeHunyuanToVideoJobRequest,
+    cb?: (error: string, rep: DescribeHunyuanToVideoJobResponse) => void
+  ): Promise<DescribeHunyuanToVideoJobResponse> {
+    return this.request("DescribeHunyuanToVideoJob", req, cb)
   }
 
   /**
@@ -215,46 +269,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交视频配音效任务，输入视频后提交请求，会返回一个JobId，用于查询视频配音效的处理进度。
-   */
-  async SubmitVideoVoiceJob(
-    req: SubmitVideoVoiceJobRequest,
-    cb?: (error: string, rep: SubmitVideoVoiceJobResponse) => void
-  ): Promise<SubmitVideoVoiceJobResponse> {
-    return this.request("SubmitVideoVoiceJob", req, cb)
-  }
-
-  /**
-   * 查询混元生视频任务
-   */
-  async DescribeHunyuanToVideoJob(
-    req: DescribeHunyuanToVideoJobRequest,
-    cb?: (error: string, rep: DescribeHunyuanToVideoJobResponse) => void
-  ): Promise<DescribeHunyuanToVideoJobResponse> {
-    return this.request("DescribeHunyuanToVideoJob", req, cb)
-  }
-
-  /**
-   * 图生视频通用能力接口
-   */
-  async SubmitImageToVideoGeneralJob(
-    req: SubmitImageToVideoGeneralJobRequest,
-    cb?: (error: string, rep: SubmitImageToVideoGeneralJobResponse) => void
-  ): Promise<SubmitImageToVideoGeneralJobResponse> {
-    return this.request("SubmitImageToVideoGeneralJob", req, cb)
-  }
-
-  /**
-   * 检查图片跳舞输入图
-   */
-  async CheckAnimateImageJob(
-    req: CheckAnimateImageJobRequest,
-    cb?: (error: string, rep: CheckAnimateImageJobResponse) => void
-  ): Promise<CheckAnimateImageJobResponse> {
-    return this.request("CheckAnimateImageJob", req, cb)
-  }
-
-  /**
    * 用于查询视频风格化任务。视频风格化支持将输入视频生成特定风格的视频。生成后的视频画面风格多样、流畅自然，能够满足社交娱乐、互动营销、视频素材制作等场景的需求。
    */
   async DescribeVideoStylizationJob(
@@ -265,26 +279,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询图生视频通用能力任务接口
-   */
-  async DescribeImageToVideoGeneralJob(
-    req: DescribeImageToVideoGeneralJobRequest,
-    cb?: (error: string, rep: DescribeImageToVideoGeneralJobResponse) => void
-  ): Promise<DescribeImageToVideoGeneralJobResponse> {
-    return this.request("DescribeImageToVideoGeneralJob", req, cb)
-  }
-
-  /**
-   * 提交视频人脸融合任务
-   */
-  async SubmitVideoFaceFusionJob(
-    req: SubmitVideoFaceFusionJobRequest,
-    cb?: (error: string, rep: SubmitVideoFaceFusionJobResponse) => void
-  ): Promise<SubmitVideoFaceFusionJobResponse> {
-    return this.request("SubmitVideoFaceFusionJob", req, cb)
-  }
-
-  /**
    * 通过JobId提交请求，获取人像驱动任务的结果信息。
    */
   async DescribeHumanActorJob(
@@ -292,5 +286,35 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeHumanActorJobResponse) => void
   ): Promise<DescribeHumanActorJobResponse> {
     return this.request("DescribeHumanActorJob", req, cb)
+  }
+
+  /**
+   * 查询视频人脸融合任务
+   */
+  async DescribeVideoFaceFusionJob(
+    req: DescribeVideoFaceFusionJobRequest,
+    cb?: (error: string, rep: DescribeVideoFaceFusionJobResponse) => void
+  ): Promise<DescribeVideoFaceFusionJobResponse> {
+    return this.request("DescribeVideoFaceFusionJob", req, cb)
+  }
+
+  /**
+   * 提交视频特效任务接口
+   */
+  async SubmitTemplateToVideoJob(
+    req: SubmitTemplateToVideoJobRequest,
+    cb?: (error: string, rep: SubmitTemplateToVideoJobResponse) => void
+  ): Promise<SubmitTemplateToVideoJobResponse> {
+    return this.request("SubmitTemplateToVideoJob", req, cb)
+  }
+
+  /**
+   * 图生视频通用能力接口
+   */
+  async SubmitImageToVideoGeneralJob(
+    req: SubmitImageToVideoGeneralJobRequest,
+    cb?: (error: string, rep: SubmitImageToVideoGeneralJobResponse) => void
+  ): Promise<SubmitImageToVideoGeneralJobResponse> {
+    return this.request("SubmitImageToVideoGeneralJob", req, cb)
   }
 }

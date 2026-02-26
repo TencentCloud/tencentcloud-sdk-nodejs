@@ -98,6 +98,16 @@ it("ocr.v20181119.MLIDPassportOCR", async function () {
     }
 })
 
+it("ocr.v20181119.SubmitMarkEssayAgentJob", async function () {
+    try {
+       const data = await client.SubmitMarkEssayAgentJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.TrainTicketOCR", async function () {
     try {
        const data = await client.TrainTicketOCR({})
@@ -578,6 +588,16 @@ it("ocr.v20181119.HmtResidentPermitOCR", async function () {
     }
 })
 
+it("ocr.v20181119.DescribeMarkEssayAgentJob", async function () {
+    try {
+       const data = await client.DescribeMarkEssayAgentJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.TollInvoiceOCR", async function () {
     try {
        const data = await client.TollInvoiceOCR({})
@@ -628,9 +648,9 @@ it("ocr.v20181119.BankSlipOCR", async function () {
     }
 })
 
-it("ocr.v20181119.ResidenceBookletOCR", async function () {
+it("ocr.v20181119.VehicleRegCertOCR", async function () {
     try {
-       const data = await client.ResidenceBookletOCR({})
+       const data = await client.VehicleRegCertOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -838,9 +858,9 @@ it("ocr.v20181119.AdvertiseOCR", async function () {
     }
 })
 
-it("ocr.v20181119.VehicleRegCertOCR", async function () {
+it("ocr.v20181119.ResidenceBookletOCR", async function () {
     try {
-       const data = await client.VehicleRegCertOCR({})
+       const data = await client.ResidenceBookletOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

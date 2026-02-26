@@ -18,79 +18,9 @@ const client = new tencentcloud.hunyuan.v20230901.Client({
 })
 describe("hunyuan.v20230901.test.js", function () {
 
-it("hunyuan.v20230901.SetPayMode", async function () {
-    try {
-       const data = await client.SetPayMode({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hunyuan.v20230901.ImageQuestion", async function () {
-    try {
-       const data = await client.ImageQuestion({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hunyuan.v20230901.FilesList", async function () {
-    try {
-       const data = await client.FilesList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("hunyuan.v20230901.GetThread", async function () {
     try {
        const data = await client.GetThread({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hunyuan.v20230901.SubmitHunyuanImageChatJob", async function () {
-    try {
-       const data = await client.SubmitHunyuanImageChatJob({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hunyuan.v20230901.CreateThread", async function () {
-    try {
-       const data = await client.CreateThread({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hunyuan.v20230901.GetTokenCount", async function () {
-    try {
-       const data = await client.GetTokenCount({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hunyuan.v20230901.QueryHunyuanImageJob", async function () {
-    try {
-       const data = await client.QueryHunyuanImageJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +38,9 @@ it("hunyuan.v20230901.SubmitHunyuanImageJob", async function () {
     }
 })
 
-it("hunyuan.v20230901.FilesDeletions", async function () {
+it("hunyuan.v20230901.QueryHunyuanImageJob", async function () {
     try {
-       const data = await client.FilesDeletions({})
+       const data = await client.QueryHunyuanImageJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +48,9 @@ it("hunyuan.v20230901.FilesDeletions", async function () {
     }
 })
 
-it("hunyuan.v20230901.GetThreadMessageList", async function () {
+it("hunyuan.v20230901.ListGlossary", async function () {
     try {
-       const data = await client.GetThreadMessageList({})
+       const data = await client.ListGlossary({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,49 +58,9 @@ it("hunyuan.v20230901.GetThreadMessageList", async function () {
     }
 })
 
-it("hunyuan.v20230901.GroupChatCompletions", async function () {
+it("hunyuan.v20230901.ListGlossaryEntry", async function () {
     try {
-       const data = await client.GroupChatCompletions({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hunyuan.v20230901.GetThreadMessage", async function () {
-    try {
-       const data = await client.GetThreadMessage({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hunyuan.v20230901.RunThread", async function () {
-    try {
-       const data = await client.RunThread({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hunyuan.v20230901.ChatCompletions", async function () {
-    try {
-       const data = await client.ChatCompletions({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hunyuan.v20230901.QueryHunyuanImageChatJob", async function () {
-    try {
-       const data = await client.QueryHunyuanImageChatJob({})
+       const data = await client.ListGlossaryEntry({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +78,139 @@ it("hunyuan.v20230901.ChatTranslations", async function () {
     }
 })
 
+it("hunyuan.v20230901.GetThreadMessageList", async function () {
+    try {
+       const data = await client.GetThreadMessageList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hunyuan.v20230901.GetEmbedding", async function () {
     try {
        const data = await client.GetEmbedding({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.ImageQuestion", async function () {
+    try {
+       const data = await client.ImageQuestion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.CreateGlossaryEntry", async function () {
+    try {
+       const data = await client.CreateGlossaryEntry({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.UpdateGlossaryEntry", async function () {
+    try {
+       const data = await client.UpdateGlossaryEntry({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.GroupChatCompletions", async function () {
+    try {
+       const data = await client.GroupChatCompletions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.RunThread", async function () {
+    try {
+       const data = await client.RunThread({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.SetPayMode", async function () {
+    try {
+       const data = await client.SetPayMode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.QueryHunyuanImageChatJob", async function () {
+    try {
+       const data = await client.QueryHunyuanImageChatJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.CreateThread", async function () {
+    try {
+       const data = await client.CreateThread({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.FilesDeletions", async function () {
+    try {
+       const data = await client.FilesDeletions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.GetThreadMessage", async function () {
+    try {
+       const data = await client.GetThreadMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.CreateGlossary", async function () {
+    try {
+       const data = await client.CreateGlossary({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.DeleteGlossary", async function () {
+    try {
+       const data = await client.DeleteGlossary({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +228,9 @@ it("hunyuan.v20230901.FilesUploads", async function () {
     }
 })
 
-it("hunyuan.v20230901.TextToImageLite", async function () {
+it("hunyuan.v20230901.ActivateService", async function () {
     try {
-       const data = await client.TextToImageLite({})
+       const data = await client.ActivateService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,9 +238,59 @@ it("hunyuan.v20230901.TextToImageLite", async function () {
     }
 })
 
-it("hunyuan.v20230901.ActivateService", async function () {
+it("hunyuan.v20230901.DeleteGlossaryEntry", async function () {
     try {
-       const data = await client.ActivateService({})
+       const data = await client.DeleteGlossaryEntry({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.FilesList", async function () {
+    try {
+       const data = await client.FilesList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.SubmitHunyuanImageChatJob", async function () {
+    try {
+       const data = await client.SubmitHunyuanImageChatJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.ChatCompletions", async function () {
+    try {
+       const data = await client.ChatCompletions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.GetTokenCount", async function () {
+    try {
+       const data = await client.GetTokenCount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hunyuan.v20230901.TextToImageLite", async function () {
+    try {
+       const data = await client.TextToImageLite({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

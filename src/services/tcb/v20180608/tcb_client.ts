@@ -28,6 +28,7 @@ import {
   DescribeEnvDealRegionResponse,
   DeleteCloudBaseRunServerVersionResponse,
   BindCloudBaseAccessDomainRequest,
+  ModifyEnvPlanRequest,
   CloudBaseClientQPSPolicy,
   ModifyClsTopicResponse,
   CreateIndex,
@@ -65,7 +66,6 @@ import {
   DescribeCloudBaseRunServerRequest,
   CloudBaseRunEmptyDirVolumeSource,
   CloudBaseRunVolumeMount,
-  CreatePostpayPackageResponse,
   DescribePostpayFreeQuotasRequest,
   DeleteGatewayVersionRequest,
   CloudBaseRunImageInfo,
@@ -77,6 +77,7 @@ import {
   DescribeHostingDomainTaskRequest,
   FreezeCloudBaseRunServersRequest,
   DescribeUserListResp,
+  RenewEnvRequest,
   BaasPackageInfo,
   ModifyGatewayVersionTrafficRequest,
   DescribeQuotaDataResponse,
@@ -86,6 +87,7 @@ import {
   KVPair,
   SmsFreeQuota,
   FunctionInfo,
+  CreateEnvResponse,
   WxGatewayRountItem,
   CommonServiceAPIRequest,
   StaticStoreInfo,
@@ -93,6 +95,7 @@ import {
   DescribeActivityRecordResponse,
   CreateUserResponse,
   DescribeEnvAccountCircleRequest,
+  RenewEnvResponse,
   DescribeMySQLClusterDetailRequest,
   CreateStaticStoreRequest,
   DeleteCloudBaseProjectLatestVersionResponse,
@@ -115,6 +118,8 @@ import {
   DescribeWxGatewaysRequest,
   DescribeEnvFreeQuotaRequest,
   CloudBaseCapabilities,
+  CbrRepoInfo,
+  ModifyEnvPlanResponse,
   DescribeExtensionUploadInfoRequest,
   DescribeCreateMySQLResultRequest,
   DescribeBillingInfoRequest,
@@ -155,7 +160,7 @@ import {
   DescribeCreateMySQLResultResponse,
   DescribeSafeRuleRequest,
   DeleteUsersRequest,
-  CbrRepoInfo,
+  CreatePostpayPackageResponse,
   DescribeBaasPackageListResponse,
   ReplaceActivityRecordRequest,
   DeleteWxGatewayRouteResponse,
@@ -265,6 +270,7 @@ import {
   DescribeCreateMySQLResult,
   DeleteCloudBaseGWAPIResponse,
   Tag,
+  CreateEnvRequest,
   DescribeCloudBaseRunVersionSnapshotResponse,
   ReinstateEnvRequest,
   CreateCloudBaseRunResourceRequest,
@@ -581,6 +587,20 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口用于购买云开发环境。
+该接口会自动下单并支付，会在腾讯云账户中扣除余额（余额不足会下单失败）。
+该接口支持自动扣除代金券（AutoVoucher=true时），符合条件的代金券会被自动扣除。
+环境下单成功之后会返回EnvId。EnvId是全局唯一表示。
+环境发货是异步行为，后续可以通过接口 [DescribeEnvs ](https://cloud.tencent.com/document/product/876/34820) 查询环境状态和各项资源信息；通过 [DescribeBillingInfo](https://cloud.tencent.com/document/product/876/94390) 查询环境套餐信息，包括 到期时间、当前套餐等。
+     */
+  async CreateEnv(
+    req: CreateEnvRequest,
+    cb?: (error: string, rep: CreateEnvResponse) => void
+  ): Promise<CreateEnvResponse> {
+    return this.request("CreateEnv", req, cb)
+  }
+
+  /**
    * 设置网关版本的流量比例
    */
   async ModifyGatewayVersionTraffic(
@@ -591,8 +611,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 增加安全域名
-   */
+     * 增加安全域名。
+云开发会校验网页应用请求的来源域名，您需要将来源域名加入到WEB安全域名列表中。
+可以通过接口 [DescribeAuthDomains](https://cloud.tencent.com/document/product/876/42151) 获取当前已绑定生效的安全域名。
+
+注意⚠️
+  安全域名绑定成功之后，需要几分钟时间逐步生效。
+     */
   async CreateAuthDomain(
     req: CreateAuthDomainRequest,
     cb?: (error: string, rep: CreateAuthDomainResponse) => void
@@ -681,8 +706,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询数据库安全规则
-   */
+     * 查询数据库安全规则。
+安全规则，用于控制C端用户的访问权限。详见 [安全规则介绍](https://cloud.tencent.com/document/product/876/123478) 。
+     */
   async DescribeSafeRule(
     req: DescribeSafeRuleRequest,
     cb?: (error: string, rep: DescribeSafeRuleResponse) => void
@@ -751,8 +777,16 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建云开发产品计费订单
-   */
+     * 创建云开发产品计费订单，用于以下几种场景：
+1. 购买云开发环境
+2. 续费云开发环境
+3. 变更云开发环境套餐
+4. 购买云开发资源包
+5. 购买云开发大促包
+
+该接口支持下单并支付(CreateAndPay=true时)，此时会自动在腾讯云账户中扣除余额（余额不足会下单失败）。
+该接口支持自动扣除代金券（AutoVoucher=true时），符合条件的代金券会被自动扣除。
+     */
   async CreateBillDeal(
     req: CreateBillDealRequest,
     cb?: (error: string, rep: CreateBillDealResponse) => void
@@ -951,8 +985,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 销毁环境
-   */
+     * 本接口用于销毁云开发环境。
+云开发环境遵循腾讯云包年包月预付费产品生命周期，因此环境销毁需要分两步：
+1. 资源退费。此时会根据当前环境剩余有效期，自动退还相关费用(代金券不退)。退款后，环境进入隔离期。
+2. 环境删除。环境在进入隔离期后15天会自动删除。也可以通过本接口，指定 IsForce=true 来强制删除隔离期环境。
+
+**注意**⚠️
+  1. 环境退费后进入隔离期，则所有资源均无法访问，控制台无法操作和管理。
+  2. 环境被彻底删除后，所有数据均无法找回。请谨慎操作。
+
+可以通过接口 [tcb:DescribeBillingInfo](https://cloud.tencent.com/document/product/876/94390) 查询环境计费状态。
+     */
   async DestroyEnv(
     req: DestroyEnvRequest,
     cb?: (error: string, rep: DestroyEnvResponse) => void
@@ -971,8 +1014,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询环境计费周期
-   */
+     * 查询环境计费周期。
+云开发环境的资源点都是按月结算的，每个月都有一定的抵扣额度。
+
+例如：
+  某个环境在 2026-01-05 购买了3个月个人版(到期时间: 2026-04-05)，则他可以在以下3个周期内，分别享有40000资源点的额度：
+  1. 2026-01-05 ~ 2026-02-05 23:59:59
+  2. 2026-02-06 ~ 2026-03-05 23:59:59
+  3. 2026-03-06 ~ 2026-04-05 23:59:59
+
+本接口，用于获取环境当前属于哪个计费周期内。
+     */
   async DescribeEnvAccountCircle(
     req: DescribeEnvAccountCircleRequest,
     cb?: (error: string, rep: DescribeEnvAccountCircleResponse) => void
@@ -991,7 +1043,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询开通Mysql结果
+   * 查询开通Mysql结果，Mysql开通成功后，可通过接口设置数据库账号相关功能包括但不限于【创建账号、删除账号、查询可授权权限列表、查询账号已有权限、修改主机、修改配置、修改账号库表权限】、集群操作相关【查询集群参数、修改集群参数】，连接设置相关【关闭外网、开通外网、查询集群信息】，备份回档相关【创建手动回档、删除手动回档、修改自动备份配置信息、查询备份文件列表、集群回档、查询任务列表、获取table列表、获取集群数据库列表、查询备份下载地址】，相关功能接口文档：[TDSQL-C MySQL API文档](https://cloud.tencent.com/document/product/1003/48106)
    */
   async DescribeCreateMySQLResult(
     req: DescribeCreateMySQLResultRequest,
@@ -1062,8 +1114,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取安全域名列表
-   */
+     * 本接口用于获取当前环境的安全域名列表。
+云开发会校验网页应用请求的来源域名，您需要将来源域名加入到WEB安全域名列表中。
+可以通过接口 [CreateAuthDomain](https://cloud.tencent.com/document/product/876/42764) 增加安全域名。
+     */
   async DescribeAuthDomains(
     req: DescribeAuthDomainsRequest,
     cb?: (error: string, rep: DescribeAuthDomainsResponse) => void
@@ -1099,6 +1153,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBillingInfoResponse) => void
   ): Promise<DescribeBillingInfoResponse> {
     return this.request("DescribeBillingInfo", req, cb)
+  }
+
+  /**
+     * 本接口用于云开发环境套餐续费。
+该接口会自动下单并支付，会在腾讯云账户中扣除余额（余额不足会下单失败）。
+该接口支持自动扣除代金券（AutoVoucher=true时），符合条件的代金券会被自动扣除。
+     */
+  async RenewEnv(
+    req: RenewEnvRequest,
+    cb?: (error: string, rep: RenewEnvResponse) => void
+  ): Promise<RenewEnvResponse> {
+    return this.request("RenewEnv", req, cb)
   }
 
   /**
@@ -1172,6 +1238,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口用于变更云开发环境套餐。
+该接口会自动下单并支付，会在腾讯云账户中扣除余额（余额不足会下单失败）。
+该接口支持自动扣除代金券（AutoVoucher=true时），符合条件的代金券会被自动扣除。
+     */
+  async ModifyEnvPlan(
+    req: ModifyEnvPlanRequest,
+    cb?: (error: string, rep: ModifyEnvPlanResponse) => void
+  ): Promise<ModifyEnvPlanResponse> {
+    return this.request("ModifyEnvPlan", req, cb)
+  }
+
+  /**
    * 查询活动记录信息
    */
   async DescribeActivityRecord(
@@ -1182,7 +1260,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 搜索CLS日志，TCB角色密钥访问
+   * 搜索用户调用日志
    */
   async SearchClsLog(
     req: SearchClsLogRequest,

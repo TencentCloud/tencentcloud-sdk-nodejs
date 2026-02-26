@@ -414,42 +414,77 @@ export interface BankCardOCRRequest {
 }
 
 /**
- * VatInvoiceVerifyNew返回参数结构体
+ * 增值税发票项目明细
  */
-export interface VatInvoiceVerifyNewResponse {
+export interface VatInvoiceItem {
   /**
-   * 增值税发票、购车发票、全电发票的基础要素字段信息。
+   * 行号
    */
-  Invoice?: VatInvoice
+  LineNo: string
   /**
-   * 机动车销售统一发票详细字段信息。
+   * 名称
    */
-  VehicleInvoiceInfo?: VehicleInvoiceInfo
+  Name: string
   /**
-   * 二手车销售统一发票详细字段信息。
+   * 规格
    */
-  UsedVehicleInvoiceInfo?: UsedVehicleInvoiceInfo
+  Spec: string
   /**
-   * 通行费发票详细字段信息。
+   * 单位
    */
-  PassInvoiceInfoList?: Array<PassInvoiceInfo>
+  Unit: string
   /**
-   * 全电发票（铁路电子客票）详细字段信息。
-
+   * 数量
    */
-  ElectronicTrainTicket?: ElectronicTrainTicket
+  Quantity: string
   /**
-   * 全电发票（航空运输电子客票行程单）详细字段信息。
+   * 单价
    */
-  ElectronicAirTransport?: ElectronicAirTransport
+  UnitPrice: string
   /**
-   * 财政发票详细字段信息
+   * 不含税金额
    */
-  FinancialBill?: FinancialBill
+  AmountWithoutTax: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 税率
    */
-  RequestId?: string
+  TaxRate: string
+  /**
+   * 税额
+   */
+  TaxAmount: string
+  /**
+   * 税收分类编码
+   */
+  TaxClassifyCode: string
+  /**
+   * 运输工具类型
+   */
+  VehicleType?: string
+  /**
+   * 运输工具牌号
+   */
+  VehicleBrand?: string
+  /**
+   * 起始地
+   */
+  DeparturePlace?: string
+  /**
+   * 到达地
+   */
+  ArrivalPlace?: string
+  /**
+   * 运输货物名称
+   */
+  TransportItemsName?: string
+  /**
+   * 建筑服务发生地
+   */
+  ConstructionPlace?: string
+  /**
+   * 建筑项目名称
+   */
+  ConstructionName?: string
 }
 
 /**
@@ -616,25 +651,33 @@ API默认false, demo默认使用的是true
 }
 
 /**
- * TrainTicketOCR请求参数结构体
+ * DescribeMarkEssayAgentJob返回参数结构体
  */
-export interface TrainTicketOCRRequest {
+export interface DescribeMarkEssayAgentJobResponse {
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负。
    */
-  ImageBase64?: string
+  Angle?: number
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 配置结构化文本信息。
    */
-  ImageUrl?: string
+  SentenceSuggests?: Array<MarkEssaySuggestions>
   /**
-   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+   * 任务执行错误码。当任务状态不为 FAIL 时，该值为""。
    */
-  IsPdf?: boolean
+  ErrorCode?: string
   /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+   * 任务执行错误信息。当任务状态不为 FAIL 时，该值为""。
    */
-  PdfPageNumber?: number
+  ErrorMessage?: string
+  /**
+   * 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功
+   */
+  JobStatus?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2297,24 +2340,39 @@ export interface WordPolygon {
 }
 
 /**
- * EnterpriseLicenseOCR请求参数结构体
+ * EnglishOCR请求参数结构体
  */
-export interface EnterpriseLicenseOCRRequest {
+export interface EnglishOCRRequest {
   /**
    * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。像素须介于20-10000px之间。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+
    */
   ImageBase64?: string
   /**
    * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。像素须介于20-10000px之间。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   ImageUrl?: string
+  /**
+   * 单词四点坐标开关，开启可返回图片中单词的四点坐标。
+该参数默认值为false。
+   */
+  EnableCoordPoint?: boolean
+  /**
+   * 候选字开关，开启可返回识别时多个可能的候选字（每个候选字对应其置信度）。
+该参数默认值为false。
+   */
+  EnableCandWord?: boolean
+  /**
+   * 预处理开关，功能是检测图片倾斜的角度，将原本倾斜的图片矫正。该参数默认值为true。
+   */
+  Preprocess?: boolean
 }
 
 /**
@@ -5964,6 +6022,28 @@ export interface FinancialBill {
 }
 
 /**
+ * SubmitMarkEssayAgentJob请求参数结构体
+ */
+export interface SubmitMarkEssayAgentJobRequest {
+  /**
+   * 图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。  示例值：/9j/4AAQSkZJRg.....s97n//2Q==
+   */
+  ImageBase64List?: Array<string>
+  /**
+   * 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。  示例值：https://ocr-demo-1254418846.cos.ap-guangzhou.myqcloud.com/general/GeneralAccurateOCR/GeneralAccurateOCR1.jpg
+   */
+  ImageUrlList?: Array<string>
+  /**
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，默认值为1。 示例值：1
+   */
+  PdfPageNumber?: number
+  /**
+   * 批改信息输出配置，当key对应为1表示开启配置开关。  当key为StructureAndContent  value为1 表示SentenceSuggest返回篇章结构和内容信息，默认只返回词汇、语句
+   */
+  QuestionConfigMap?: string
+}
+
+/**
  * LicensePlateOCR请求参数结构体
  */
 export interface LicensePlateOCRRequest {
@@ -6165,6 +6245,20 @@ export interface RecognizeTableMultiOCRRequest {
 * **Excelbase64** 返回 base64 编码的 excel 文件。
    */
   DataFormat?: string
+}
+
+/**
+ * SubmitMarkEssayAgentJob返回参数结构体
+ */
+export interface SubmitMarkEssayAgentJobResponse {
+  /**
+   * 任务唯一ID。由服务端生成。 示例值：1334797167793684480
+   */
+  JobIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6501,39 +6595,24 @@ export interface ExtractDocBasicResponse {
 }
 
 /**
- * EnglishOCR请求参数结构体
+ * EnterpriseLicenseOCR请求参数结构体
  */
-export interface EnglishOCRRequest {
+export interface EnterpriseLicenseOCRRequest {
   /**
    * 图片的 Base64 值。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。像素须介于20-10000px之间。
+支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-
    */
   ImageBase64?: string
   /**
    * 图片的 Url 地址。
 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。像素须介于20-10000px之间。
+支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   ImageUrl?: string
-  /**
-   * 单词四点坐标开关，开启可返回图片中单词的四点坐标。
-该参数默认值为false。
-   */
-  EnableCoordPoint?: boolean
-  /**
-   * 候选字开关，开启可返回识别时多个可能的候选字（每个候选字对应其置信度）。
-该参数默认值为false。
-   */
-  EnableCandWord?: boolean
-  /**
-   * 预处理开关，功能是检测图片倾斜的角度，将原本倾斜的图片矫正。该参数默认值为true。
-   */
-  Preprocess?: boolean
 }
 
 /**
@@ -7733,6 +7812,53 @@ export interface ContentInfo {
 1 字段有反光
    */
   IsKeyReflect?: number
+}
+
+/**
+ * 作文批改建议
+ */
+export interface MarkEssaySuggestions {
+  /**
+   * 作文批改序号
+   */
+  ID?: number
+  /**
+   * 批改类型：主要包括：词汇、语句
+   */
+  Type?: string
+  /**
+   * 子类型，基于Type返回二级类型
+
+词汇： 错别字、使用拼音、词语误用、词语冗余、词汇贫乏、多字/漏字
+
+语句：语法硬伤、逻辑问题、表达不佳、标点误用、优美句子
+   */
+  SubType?: string
+  /**
+   * 原文内容
+   */
+  Origin?: string
+  /**
+   * 批改后的内容
+   */
+  Replace?: string
+  /**
+   * 点评内容
+   */
+  Message?: string
+  /**
+   * array[][]二维数组，原文内容可能存在跨行的句子，会有多组坐标返回
+
+切图区域的4个角点坐标, 是个长度为8的数组
+
+[0,1,2,3,4,5,6,7]
+
+(0,1) 左上角坐标
+(2,3) 右上角坐标
+(4,5) 右下角坐标
+(6,7) 左下角坐标
+   */
+  Positions?: Array<Positions>
 }
 
 /**
@@ -9031,6 +9157,28 @@ export interface ClassifyDetectInfo {
    * 位置坐标
    */
   Rect?: Rect
+}
+
+/**
+ * TrainTicketOCR请求参数结构体
+ */
+export interface TrainTicketOCRRequest {
+  /**
+   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   */
+  ImageBase64?: string
+  /**
+   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   */
+  ImageUrl?: string
+  /**
+   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
+   */
+  IsPdf?: boolean
+  /**
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+   */
+  PdfPageNumber?: number
 }
 
 /**
@@ -10514,77 +10662,21 @@ WarnInfos，告警信息，Code 告警码列表和释义：
 }
 
 /**
- * 增值税发票项目明细
+ * 这是OCR在高精度识别下返回的坐标值，采用的是由一个数组表示4个顶点的坐标构成，如[0,1,2,3,4,5,6,7]
+- (0,1) 左上角坐标
+- (2,3) 右上角坐标
+- (4,5) 右下角坐标
+- (6,7) 左下角坐标
  */
-export interface VatInvoiceItem {
+export interface Positions {
   /**
-   * 行号
+   * 这是OCR在高精度识别下返回的坐标值，采用的是由一个数组表示4个顶点的坐标构成，如[0,1,2,3,4,5,6,7]
+- (0,1) 左上角坐标
+- (2,3) 右上角坐标
+- (4,5) 右下角坐标
+- (6,7) 左下角坐标
    */
-  LineNo: string
-  /**
-   * 名称
-   */
-  Name: string
-  /**
-   * 规格
-   */
-  Spec: string
-  /**
-   * 单位
-   */
-  Unit: string
-  /**
-   * 数量
-   */
-  Quantity: string
-  /**
-   * 单价
-   */
-  UnitPrice: string
-  /**
-   * 不含税金额
-   */
-  AmountWithoutTax: string
-  /**
-   * 税率
-   */
-  TaxRate: string
-  /**
-   * 税额
-   */
-  TaxAmount: string
-  /**
-   * 税收分类编码
-   */
-  TaxClassifyCode: string
-  /**
-   * 运输工具类型
-   */
-  VehicleType?: string
-  /**
-   * 运输工具牌号
-   */
-  VehicleBrand?: string
-  /**
-   * 起始地
-   */
-  DeparturePlace?: string
-  /**
-   * 到达地
-   */
-  ArrivalPlace?: string
-  /**
-   * 运输货物名称
-   */
-  TransportItemsName?: string
-  /**
-   * 建筑服务发生地
-   */
-  ConstructionPlace?: string
-  /**
-   * 建筑项目名称
-   */
-  ConstructionName?: string
+  Position?: Array<number | bigint>
 }
 
 /**
@@ -11289,6 +11381,45 @@ export interface RideHailingTransportLicenseOCRRequest {
 }
 
 /**
+ * VatInvoiceVerifyNew返回参数结构体
+ */
+export interface VatInvoiceVerifyNewResponse {
+  /**
+   * 增值税发票、购车发票、全电发票的基础要素字段信息。
+   */
+  Invoice?: VatInvoice
+  /**
+   * 机动车销售统一发票详细字段信息。
+   */
+  VehicleInvoiceInfo?: VehicleInvoiceInfo
+  /**
+   * 二手车销售统一发票详细字段信息。
+   */
+  UsedVehicleInvoiceInfo?: UsedVehicleInvoiceInfo
+  /**
+   * 通行费发票详细字段信息。
+   */
+  PassInvoiceInfoList?: Array<PassInvoiceInfo>
+  /**
+   * 全电发票（铁路电子客票）详细字段信息。
+
+   */
+  ElectronicTrainTicket?: ElectronicTrainTicket
+  /**
+   * 全电发票（航空运输电子客票行程单）详细字段信息。
+   */
+  ElectronicAirTransport?: ElectronicAirTransport
+  /**
+   * 财政发票详细字段信息
+   */
+  FinancialBill?: FinancialBill
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * MLIDCardOCR返回参数结构体
  */
 export interface MLIDCardOCRResponse {
@@ -11886,6 +12017,16 @@ export interface RecognizeValidIDCardOCRResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeMarkEssayAgentJob请求参数结构体
+ */
+export interface DescribeMarkEssayAgentJobRequest {
+  /**
+   * 任务唯一ID。由服务端生成。
+   */
+  JobId?: string
 }
 
 /**

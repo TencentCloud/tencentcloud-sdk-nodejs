@@ -699,7 +699,7 @@ export interface FaceInfo {
    */
   ImageUrls?: Array<string>
   /**
-   * 模版图人脸坐标。
+   * 模板图人脸坐标。
    */
   TemplateFaceRect?: Rect
 }

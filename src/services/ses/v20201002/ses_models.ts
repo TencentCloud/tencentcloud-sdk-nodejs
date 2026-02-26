@@ -352,25 +352,91 @@ export interface DNSAttributes {
 }
 
 /**
- * GetEmailTemplate返回参数结构体
+ * 描述邮件发送状态
  */
-export interface GetEmailTemplateResponse {
+export interface SendEmailStatus {
   /**
-   * 模板内容数据
+   * SendEmail返回的MessageId
    */
-  TemplateContent: TemplateContent
+  MessageId?: string
   /**
-   * 模板状态 0-审核通过 1-待审核 2-审核拒绝
+   * 收件人邮箱
    */
-  TemplateStatus: number
+  ToEmailAddress?: string
   /**
-   * 模板名称
+   * 发件人邮箱
    */
-  TemplateName: string
+  FromEmailAddress?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 腾讯云处理状态
+0: 处理成功
+1001: 内部系统异常
+1002: 内部系统异常
+1003: 内部系统异常
+1003: 内部系统异常
+1004: 发信超时
+1005: 内部系统异常
+1006: 触发频率控制，短时间内对同一地址发送过多邮件
+1007: 邮件地址在黑名单中
+1008: 域名被收件人拒收
+1009: 内部系统异常
+1010: 超出了每日发送限制
+1011: 无发送自定义内容权限，必须使用模板
+1013: 域名被收件人取消订阅
+2001: 找不到相关记录
+3007: 模板ID无效或者不可用
+3008: 被收信域名临时封禁
+3009: 无权限使用该模板
+3010: TemplateData字段格式不正确 
+3014: 发件域名没有经过认证，无法发送
+3020: 收件方邮箱类型在黑名单
+3024: 邮箱地址格式预检查失败
+3030: 退信率过高，临时限制发送
+3033: 余额不足，账号欠费等
    */
-  RequestId?: string
+  SendStatus?: number
+  /**
+   * 收件方处理状态
+0: 请求成功被腾讯云接受，进入发送队列
+1: 邮件递送成功，DeliverTime表示递送成功的时间
+2: 邮件因某种原因被丢弃，DeliverMessage表示丢弃原因
+3: 收件方ESP拒信，一般原因为邮箱地址不存在，或其它原因
+8: 邮件被ESP因某些原因延迟递送，DeliverMessage表示延迟原因
+   */
+  DeliverStatus?: number
+  /**
+   * 收件方处理状态描述
+   */
+  DeliverMessage?: string
+  /**
+   * 请求到达腾讯云时间戳
+   */
+  RequestTime?: number
+  /**
+   * 腾讯云执行递送时间戳
+   */
+  DeliverTime?: number
+  /**
+   * 用户是否打开该邮件
+   */
+  UserOpened?: boolean
+  /**
+   * 用户是否点击该邮件中的链接
+   */
+  UserClicked?: boolean
+  /**
+   * 用户是否取消该发送者的订阅
+   */
+  UserUnsubscribed?: boolean
+  /**
+   * 用户是否举报该发送者
+   * @deprecated
+   */
+  UserComplainted?: boolean
+  /**
+   * 用户是否举报该发送者
+   */
+  UserComplained?: boolean
 }
 
 /**
@@ -477,6 +543,16 @@ export interface DeleteEmailIdentityResponse {
 }
 
 /**
+ * DeleteBlackList请求参数结构体
+ */
+export interface DeleteBlackListRequest {
+  /**
+   * 需要清除的黑名单邮箱列表，数组长度至少为1
+   */
+  EmailAddressList: Array<string>
+}
+
+/**
  * DeleteEmailTemplate返回参数结构体
  */
 export interface DeleteEmailTemplateResponse {
@@ -519,91 +595,61 @@ export interface DeleteEmailTemplateRequest {
 }
 
 /**
- * 描述邮件发送状态
+ * 垃圾投诉数据
  */
-export interface SendEmailStatus {
+export interface AbuseReport {
   /**
-   * SendEmail返回的MessageId
+   * 发送时间
+   */
+  DeliverTime?: string
+  /**
+   * 发信地址
+   */
+  OriginalMailFrom?: string
+  /**
+   * 收信地址
+   */
+  OriginalRcptTo?: string
+  /**
+   * 发信域名
+   */
+  FromDomain?: string
+  /**
+   * 投诉时间
+   */
+  ComplainTime?: string
+  /**
+   * 收信域名
+   */
+  Mta?: string
+  /**
+   * 来源ip
+   */
+  SourceIp?: string
+  /**
+   * 数据时间
+   */
+  InsertTime?: string
+  /**
+   * 模板id
+   */
+  TemplateId?: string
+  /**
+   * bulkId
+   */
+  BulkId?: string
+  /**
+   * 邮件Message-Id
    */
   MessageId?: string
   /**
-   * 收件人邮箱
+   * 投诉时间
    */
-  ToEmailAddress?: string
+  AbuseTime?: string
   /**
-   * 发件人邮箱
+   * 邮件主题
    */
-  FromEmailAddress?: string
-  /**
-   * 腾讯云处理状态
-0: 处理成功
-1001: 内部系统异常
-1002: 内部系统异常
-1003: 内部系统异常
-1003: 内部系统异常
-1004: 发信超时
-1005: 内部系统异常
-1006: 触发频率控制，短时间内对同一地址发送过多邮件
-1007: 邮件地址在黑名单中
-1008: 域名被收件人拒收
-1009: 内部系统异常
-1010: 超出了每日发送限制
-1011: 无发送自定义内容权限，必须使用模板
-1013: 域名被收件人取消订阅
-2001: 找不到相关记录
-3007: 模板ID无效或者不可用
-3008: 被收信域名临时封禁
-3009: 无权限使用该模板
-3010: TemplateData字段格式不正确 
-3014: 发件域名没有经过认证，无法发送
-3020: 收件方邮箱类型在黑名单
-3024: 邮箱地址格式预检查失败
-3030: 退信率过高，临时限制发送
-3033: 余额不足，账号欠费等
-   */
-  SendStatus?: number
-  /**
-   * 收件方处理状态
-0: 请求成功被腾讯云接受，进入发送队列
-1: 邮件递送成功，DeliverTime表示递送成功的时间
-2: 邮件因某种原因被丢弃，DeliverMessage表示丢弃原因
-3: 收件方ESP拒信，一般原因为邮箱地址不存在，或其它原因
-8: 邮件被ESP因某些原因延迟递送，DeliverMessage表示延迟原因
-   */
-  DeliverStatus?: number
-  /**
-   * 收件方处理状态描述
-   */
-  DeliverMessage?: string
-  /**
-   * 请求到达腾讯云时间戳
-   */
-  RequestTime?: number
-  /**
-   * 腾讯云执行递送时间戳
-   */
-  DeliverTime?: number
-  /**
-   * 用户是否打开该邮件
-   */
-  UserOpened?: boolean
-  /**
-   * 用户是否点击该邮件中的链接
-   */
-  UserClicked?: boolean
-  /**
-   * 用户是否取消该发送者的订阅
-   */
-  UserUnsubscribed?: boolean
-  /**
-   * 用户是否举报该发送者
-   * @deprecated
-   */
-  UserComplainted?: boolean
-  /**
-   * 用户是否举报该发送者
-   */
-  UserComplained?: boolean
+  Subject?: string
 }
 
 /**
@@ -621,13 +667,21 @@ export interface ListEmailTemplatesRequest {
 }
 
 /**
- * DeleteBlackList请求参数结构体
+ * GetAbuseReport返回参数结构体
  */
-export interface DeleteBlackListRequest {
+export interface GetAbuseReportResponse {
   /**
-   * 需要清除的黑名单邮箱列表，数组长度至少为1
+   * 打开日志数据
    */
-  EmailAddressList: Array<string>
+  Data?: Array<AbuseReport>
+  /**
+   * 总条数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -795,6 +849,28 @@ export interface ListEmailIdentitiesRequest {
    * 分页 offset
    */
   Offset?: number
+}
+
+/**
+ * GetEmailTemplate返回参数结构体
+ */
+export interface GetEmailTemplateResponse {
+  /**
+   * 模板内容数据
+   */
+  TemplateContent: TemplateContent
+  /**
+   * 模板状态 0-审核通过 1-待审核 2-审核拒绝
+   */
+  TemplateStatus: number
+  /**
+   * 模板名称
+   */
+  TemplateName: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1313,6 +1389,48 @@ export interface CreateEmailAddressResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetAbuseReport请求参数结构体
+ */
+export interface GetAbuseReportRequest {
+  /**
+   * 起始时间
+   */
+  StartTime: string
+  /**
+   * 结束时间
+   */
+  EndTime: string
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 限制数量（默认为1000）
+   */
+  Limit?: number
+  /**
+   * 发信域名
+   */
+  FromDomain?: string
+  /**
+   * 发信地址
+   */
+  FromAddress?: string
+  /**
+   * 收信域名
+   */
+  Mta?: string
+  /**
+   * 收信地址
+   */
+  ToAddress?: string
+  /**
+   * 模版id
+   */
+  TemplateId?: string
 }
 
 /**

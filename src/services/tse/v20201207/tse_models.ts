@@ -1003,6 +1003,10 @@ ip service consumer credential path header
    */
   ExternalRedis?: ExternalRedis
   /**
+   * 全局配置中的redis配置
+   */
+  GlobalConfigId?: string
+  /**
    * 计数器策略 
 local 单机
 redis  默认redis

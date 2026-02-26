@@ -113,23 +113,19 @@ export interface IdCardVerificationRequest {
  */
 export interface ImageRecognitionV2Response {
   /**
-   * 相似度。
-- 取值范围 [0.00, 100.00]。
-- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
+   * <p>相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为万分之一）</p>
    */
   Sim?: number
   /**
-   * 业务错误码。
-- 成功情况返回Success。
-- 错误情况请参考下方错误码 列表中FailedOperation部分
+   * <p>业务错误码。</p><ul><li>成功情况返回Success。</li><li>错误情况请参考下方错误码 列表中FailedOperation部分</li></ul>
    */
   Result?: string
   /**
-   * 业务结果描述。
+   * <p>业务结果描述。</p>
    */
   Description?: string
   /**
-   * 调用接口中自定义的描述字段。
+   * <p>调用接口中自定义的描述字段。</p>
    */
   Extra?: string
   /**
@@ -468,51 +464,35 @@ export interface ParseNfcDataResponse {
  */
 export interface LivenessRecognitionRequest {
   /**
-   * 身份证号。
+   * <p>身份证号。</p>
    */
   IdCard: string
   /**
-   * 姓名。
-- 中文请使用UTF-8编码。
+   * <p>姓名。</p><ul><li>中文请使用UTF-8编码。</li></ul>
    */
   Name: string
   /**
-   * 活体检测类型。
-- 取值：LIP/ACTION/SILENT。
-- LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模式选择一种传入。
+   * <p>活体检测类型。</p><ul><li>取值：LIP/ACTION/SILENT。</li><li>LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模式选择一种传入。</li></ul>
    */
   LivenessType: string
   /**
-   * 用于活体检测的视频，视频的BASE64值；
-BASE64编码后的大小不超过8M，支持mp4、avi、flv格式。
+   * <p>用于活体检测的视频，视频的BASE64值；<br>BASE64编码后的大小不超过8M，支持mp4、avi、flv格式。</p>
    */
   VideoBase64?: string
   /**
-   * 用于活体检测的视频Url 地址。
-- 视频下载后经Base64编码不超过 8M，视频下载耗时不超过4S，支持mp4、avi、flv格式。
-- 视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。
-- 建议视频存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议视频存储于腾讯云。
-- 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * <p>用于活体检测的视频Url 地址。</p><ul><li>视频下载后经Base64编码不超过 8M，视频下载耗时不超过4S，支持mp4、avi、flv格式。</li><li>视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。</li><li>建议视频存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议视频存储于腾讯云。</li><li>非腾讯云存储的 Url 速度和稳定性可能受一定影响。</li></ul>
    */
   VideoUrl?: string
   /**
-   * 验证数据。
-- 数字模式传参：传数字验证码，验证码需先调用<a href="https://cloud.tencent.com/document/product/1007/31821">获取数字验证码接口</a>得到；
-- 动作模式传参：传动作顺序，动作顺序需先调用<a href="https://cloud.tencent.com/document/product/1007/31822">获取动作顺序接口</a>得到；
-- 静默模式传参：空。
+   * <p>验证数据。</p><ul><li>数字活体模式传参：传数字验证码，验证码需先调用<a href="https://cloud.tencent.com/document/product/1007/31821">获取数字验证码接口</a>得到；</li><li>动作活体模式传参：传动作顺序，动作顺序需先调用<a href="https://cloud.tencent.com/document/product/1007/31822">获取动作顺序接口</a>得到；</li><li>静默活体模式传参：空。</li></ul>
    */
   ValidateData?: string
   /**
-   * 额外配置，传入JSON字符串。
-- 格式如下：
-{
-"BestFrameNum": 2  //需要返回多张最佳截图，取值范围2-10
-}
+   * <p>额外配置，传入JSON字符串。</p><ul><li>格式如下：<br>{<br>&quot;BestFrameNum&quot;: 2  //需要返回多张最佳截图，取值范围2-10<br>}</li></ul>
    */
   Optional?: string
   /**
-   * 敏感数据加密信息。
-- 对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   * <p>敏感数据加密信息。</p><ul><li>对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。</li></ul>
    */
   Encryption?: Encryption
 }
@@ -714,30 +694,24 @@ export interface GetFaceIdRiskInfoResponse {
  */
 export interface LivenessCompareResponse {
   /**
-   * 验证通过后的视频最佳截图照片。
-- 照片为BASE64编码后的值，jpg格式。
+   * <p>验证通过后的视频最佳截图照片。</p><ul><li>照片为BASE64编码后的值，jpg格式。</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BestFrameBase64?: string
   /**
-   * 相似度。
-- 取值范围 [0.00, 100.00]。
-- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）。
+   * <p>相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为万分之一）。</p>
    */
   Sim?: number
   /**
-   * 业务错误码。
-- 成功情况返回Success。
-- 错误情况请参考下方错误码，列表中FailedOperation部分。
+   * <p>业务错误码。</p><ul><li>成功情况返回Success。</li><li>错误情况请参考下方错误码，列表中FailedOperation部分。</li></ul>
    */
   Result?: string
   /**
-   * 业务结果描述。
+   * <p>业务结果描述。</p>
    */
   Description?: string
   /**
-   * 最佳截图列表。
-- 仅在配置了返回多张最佳截图时返回。
+   * <p>最佳截图列表。</p><ul><li>仅在配置了返回多张最佳截图时返回。</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BestFrameList?: Array<string>
@@ -1312,55 +1286,31 @@ export interface IntentionVerifyData {
  */
 export interface LivenessCompareRequest {
   /**
-   * 活体检测类型。
-- 取值：LIP/ACTION/SILENT。
-- LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模式选择一种传入。
+   * <p>活体检测类型。</p><ul><li>取值：LIP/ACTION/SILENT。</li><li>LIP为数字模式，ACTION为动作模式，SILENT为静默模式，三种模式选择一种传入。</li></ul>
    */
   LivenessType: string
   /**
-   * 用于人脸比对的照片的Base64值。
-- Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
-- 请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
-- 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageBase64。
+   * <p>用于人脸比对的照片的Base64值。</p><ul><li>Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。</li><li>请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。</li><li>图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageBase64。</li></ul>
    */
   ImageBase64?: string
   /**
-   * 用于人脸比对照片的URL地址。
-- 图片下载后经Base64编码后的数据大小不超过3M，仅支持jpg、png格式。
-- 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageBase64。
-- 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-- 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * <p>用于人脸比对照片的URL地址。</p><ul><li>图片下载后经Base64编码后的数据大小不超过3M，仅支持jpg、png格式。</li><li>图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageBase64。</li><li>图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。</li><li>非腾讯云存储的 Url 速度和稳定性可能受一定影响。</li></ul>
    */
   ImageUrl?: string
   /**
-   * 验证数据。
-- 数字模式传参：传数字验证码，验证码需先调用<a href="https://cloud.tencent.com/document/product/1007/31821">获取数字验证码接口</a>得到；
-- 动作模式传参：传动作顺序，动作顺序需先调用<a href="https://cloud.tencent.com/document/product/1007/31822">获取动作顺序接口</a>得到；
-- 静默模式传参：空。
+   * <p>验证数据。</p><ul><li>数字模式传参：传数字验证码，验证码需先调用<a href="https://cloud.tencent.com/document/product/1007/31821">获取数字验证码接口</a>得到；</li><li>动作模式传参：传动作顺序，动作顺序需先调用<a href="https://cloud.tencent.com/document/product/1007/31822">获取动作顺序接口</a>得到；</li><li>静默模式传参：空。</li></ul>
    */
   ValidateData?: string
   /**
-   * 额外配置，传入JSON字符串。
-
-- 格式如下：
-{
-"BestFrameNum": 2  //需要返回多张最佳截图，取值范围2-10
-}
+   * <p>额外配置，传入JSON字符串。</p><ul><li>格式如下：<br>{<br>&quot;BestFrameNum&quot;: 2  //需要返回多张最佳截图，取值范围2-10<br>}</li></ul>
    */
   Optional?: string
   /**
-   * 用于活体检测的视频，视频的Base64值。
-- Base64编码后的大小不超过8M，支持mp4、avi、flv格式。
-- 请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
-- 视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。
+   * <p>用于活体检测的视频，视频的Base64值。</p><ul><li>Base64编码后的大小不超过8M，支持mp4、avi、flv格式。</li><li>请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。</li><li>视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。</li></ul>
    */
   VideoBase64?: string
   /**
-   * 用于活体检测的视频Url 地址。
-- 视频下载后经Base64编码后不超过 8M，视频下载耗时不超过4S，支持mp4、avi、flv格式。
-- 视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。
-- 建议视频存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议视频存储于腾讯云。
-- 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * <p>用于活体检测的视频Url 地址。</p><ul><li>视频下载后经Base64编码后不超过 8M，视频下载耗时不超过4S，支持mp4、avi、flv格式。</li><li>视频的 VideoUrl、VideoBase64 必须提供一个，如果都提供，只使用 VideoBase64。</li><li>建议视频存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议视频存储于腾讯云。</li><li>非腾讯云存储的 Url 速度和稳定性可能受一定影响。</li></ul>
    */
   VideoUrl?: string
 }
@@ -1586,75 +1536,60 @@ export interface GetWeChatBillDetailsResponse {
  */
 export interface CheckIdCardInformationResponse {
   /**
-   * 相似度。
-- 取值范围 [0.00, 100.00]。
-- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）。
+   * <p>相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为万分之一）。</p>
    */
   Sim?: number
   /**
-   * 业务错误码。- 成功情况返回Success。- 错误情况请参考下方错误码 列表中FailedOperation部分
+   * <p>业务错误码。- 成功情况返回Success。- 错误情况请参考下方错误码 列表中FailedOperation部分</p>
    */
   Result?: string
   /**
-   * 业务结果描述。
+   * <p>业务结果描述。</p>
    */
   Description?: string
   /**
-   * 姓名。
+   * <p>姓名。</p>
    */
   Name?: string
   /**
-   * 性别。
+   * <p>性别。</p>
    */
   Sex?: string
   /**
-   * 民族。
+   * <p>民族。</p>
    */
   Nation?: string
   /**
-   * 出生日期。
+   * <p>出生日期。</p>
    */
   Birth?: string
   /**
-   * 地址。
+   * <p>地址。</p>
    */
   Address?: string
   /**
-   * 身份证号。
+   * <p>身份证号。</p>
    */
   IdNum?: string
   /**
-   * 身份证头像照片的base64编码，如果抠图失败会拿整张身份证做比对并返回空。
+   * <p>身份证头像照片的base64编码，如果抠图失败会拿整张身份证做比对并返回空。</p>
    */
   Portrait?: string
   /**
-   * 告警信息。
-- 当在Config中配置了告警信息会停止人像比对，Result返回错误（FailedOperation.OcrWarningOccurred）并有此告警信息。
-- Code 告警码列表和释义：
-'-9101'：身份证边框不完整告警。
-'-9102'：身份证复印件告警。
-'-9103'：身份证翻拍告警。
-'-9105'：身份证框内遮挡告警。
-'-9104'：临时身份证告警。
-'-9106'：身份证 PS 告警（疑似存在PS痕迹）。
-'-8001'：图片模糊告警。
-
-- 多个会用“|” 隔开，如 "-9101|-9106|-9104"。
+   * <p>告警信息。</p><ul><li><p>当在Config中配置了告警信息会停止人像比对，Result返回错误（FailedOperation.OcrWarningOccurred）并有此告警信息。</p></li><li><p>Code 告警码列表和释义：<br>&#39;-9101&#39;：身份证边框不完整告警。<br>&#39;-9102&#39;：身份证复印件告警。<br>&#39;-9103&#39;：身份证翻拍告警。<br>&#39;-9105&#39;：身份证框内遮挡告警。<br>&#39;-9104&#39;：临时身份证告警。<br>&#39;-9106&#39;：身份证 PS 告警（疑似存在PS痕迹）。<br>&#39;-8001&#39;：图片模糊告警。</p></li><li><p>多个会用“|” 隔开，如 &quot;-9101|-9106|-9104&quot;。</p></li></ul>
    */
   Warnings?: string
   /**
-   * 图片质量分数。
-- 当请求Config中配置图片模糊告警该参数才有意义。
-- 取值范围（0～100），目前默认阈值是50分，低于50分会触发模糊告警。
+   * <p>图片质量分数。</p><ul><li>当请求Config中配置图片模糊告警该参数才有意义。</li><li>取值范围（0～100），目前默认阈值是50分，低于50分会触发模糊告警。</li></ul>
    */
   Quality?: number
   /**
-   * 敏感数据加密信息。
+   * <p>敏感数据加密信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Encryption?: Encryption
   /**
-   * 加密后的数据。
+   * <p>加密后的数据。</p>
    */
   EncryptedBody?: string
   /**
@@ -1998,50 +1933,27 @@ export interface PhoneVerificationCUCCResponse {
  */
 export interface CheckIdCardInformationRequest {
   /**
-   * 身份证人像面的 Base64 值。
-- 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-- 支持的图片大小：所下载图片经Base64编码后不超过 7M。
-- 请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
-- ImageBase64、ImageUrl二者必须提供其中之一。若都提供了，则按照ImageUrl>ImageBase64的优先级使用参数。
+   * <p>身份证人像面的 Base64 值。</p><ul><li>支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。</li><li>支持的图片大小：所下载图片经Base64编码后不超过 7M。</li><li>请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。</li><li>ImageBase64、ImageUrl二者必须提供其中之一。若都提供了，则按照ImageUrl&gt;ImageBase64的优先级使用参数。</li></ul>
    */
   ImageBase64?: string
   /**
-   * 身份证人像面的 Url 地址
-- 支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-- 支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。
-- 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-- 非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * <p>身份证人像面的 Url 地址</p><ul><li>支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。</li><li>支持的图片大小：所下载图片经 Base64 编码后不超过 3M。图片下载时间不超过 3 秒。</li><li>图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。</li><li>非腾讯云存储的 Url 速度和稳定性可能受一定影响。</li></ul>
    */
   ImageUrl?: string
   /**
-   * 配置。
-- 以下可选字段均为bool 类型，默认false。
-CopyWarn，复印件告警。
-BorderCheckWarn，边框和框内遮挡告警。
-ReshootWarn，翻拍告警。
-DetectPsWarn，PS检测告警（疑似存在PS痕迹）。
-TempIdWarn，临时身份证告警。
-Quality，图片质量告警（评价图片模糊程度）。
-
-- SDK 设置方式参考：
-Config = Json.stringify({"CopyWarn":true,"ReshootWarn":true})。
-
-- API 3.0 Explorer 设置方式参考：
-Config = {"CopyWarn":true,"ReshootWarn":true}。
+   * <p>配置。</p><ul><li><p>以下可选字段均为bool 类型，默认false。<br>CopyWarn，复印件告警。<br>BorderCheckWarn，边框和框内遮挡告警。<br>ReshootWarn，翻拍告警。<br>DetectPsWarn，PS检测告警（疑似存在PS痕迹）。<br>TempIdWarn，临时身份证告警。<br>Quality，图片质量告警（评价图片模糊程度）。</p></li><li><p>SDK 设置方式参考：<br>Config = Json.stringify({&quot;CopyWarn&quot;:true,&quot;ReshootWarn&quot;:true})。</p></li><li><p>API 3.0 Explorer 设置方式参考：<br>Config = {&quot;CopyWarn&quot;:true,&quot;ReshootWarn&quot;:true}。</p></li></ul>
    */
   Config?: string
   /**
-   * 是否需要对返回中的敏感信息进行加密。
-- 默认false。
-- 敏感信息包括：Response.IdNum、Response.Name。
+   * <p>是否需要对返回中的敏感信息进行加密。</p><ul><li>默认false。</li><li>敏感信息包括：Response.IdNum、Response.Name。</li></ul>
    */
   IsEncrypt?: boolean
   /**
-   * 是否需要对响应体加密。
+   * <p>是否需要对响应体加密。</p>
    */
   IsEncryptResponse?: boolean
   /**
-   * 是否需要对返回中的敏感信息进行加密,需指定加密算法Algorithm、CBC加密的初始向量、加密后的对称密钥。
+   * <p>是否需要对返回中的敏感信息进行加密,需指定加密算法Algorithm、CBC加密的初始向量、加密后的对称密钥。</p>
    */
   Encryption?: Encryption
 }
@@ -2279,209 +2191,157 @@ export interface PhoneVerificationCMCCRequest {
  */
 export interface DetectInfoText {
   /**
-   * 本次流程最终验证结果。
-- 取值范围：0为成功。
-- 仅包含活体人脸核身结果，不包含意愿核身结果。
+   * <p>本次流程最终验证结果。</p><ul><li>取值范围：0为成功。</li><li>仅包含活体人脸核身结果，不包含意愿核身结果。</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrCode?: number
   /**
-   * 本次流程最终验证结果描述。
-- 仅描述用，文案更新时不会通知。
+   * <p>本次流程最终验证结果描述。</p><ul><li>仅描述用，文案更新时不会通知。</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrMsg?: string
   /**
-   * 本次验证使用的身份证号。
+   * <p>本次验证使用的身份证号。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IdCard?: string
   /**
-   * 用户认证时使用的证件号码类型。
-- 取值范围：
-    0：二代身份证的证件号码。
-    1：港澳台居住证的证件号码。
-    2：其他（核验使用的证件号码非合法身份号码）。
+   * <p>用户认证时使用的证件号码类型。</p><ul><li>取值范围：<br>  0：二代身份证的证件号码。<br>  1：港澳台居住证的证件号码。<br>  2：其他（核验使用的证件号码非合法身份号码）。</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UseIDType?: number
   /**
-   * 本次验证使用的姓名。
+   * <p>本次验证使用的姓名。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 身份校验环节识别结果：民族。
+   * <p>身份校验环节识别结果：民族。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrNation?: string
   /**
-   * 身份校验环节识别结果：家庭住址。
+   * <p>身份校验环节识别结果：家庭住址。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrAddress?: string
   /**
-   * 身份校验环节识别结果：生日。
-- 格式为：YYYY/M/D
+   * <p>身份校验环节识别结果：生日。</p><ul><li>格式为：YYYY/M/D</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrBirth?: string
   /**
-   * 身份校验环节识别结果：签发机关。
+   * <p>身份校验环节识别结果：签发机关。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrAuthority?: string
   /**
-   * 身份校验环节识别结果：有效日期。
-- 格式为：YYYY.MM.DD-YYYY.MM.DD。
+   * <p>身份校验环节识别结果：有效日期。</p><ul><li>格式为：YYYY.MM.DD-YYYY.MM.DD。</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrValidDate?: string
   /**
-   * 身份校验环节识别结果：姓名。
+   * <p>身份校验环节识别结果：姓名。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrName?: string
   /**
-   * 身份校验环节识别结果：身份证号。
+   * <p>身份校验环节识别结果：身份证号。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrIdCard?: string
   /**
-   * 身份校验环节识别结果：性别。
+   * <p>身份校验环节识别结果：性别。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrGender?: string
   /**
-   * 身份校验环节采用的信息上传方式。
-- 取值有"NFC"、"OCR"、"手动输入"、"其他"
+   * <p>身份校验环节采用的信息上传方式。</p><ul><li>取值有&quot;NFC&quot;、&quot;OCR&quot;、&quot;手动输入&quot;、&quot;其他&quot;</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IdInfoFrom?: string
   /**
-   * 本次流程最终活体结果。
-- 0为成功
+   * <p>本次流程最终活体结果。</p><ul><li>0为成功</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LiveStatus?: number
   /**
-   * 本次流程最终活体结果描述。
-- 仅描述用，文案更新时不会通知。
+   * <p>本次流程最终活体结果描述。</p><ul><li>仅描述用，文案更新时不会通知。</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LiveMsg?: string
   /**
-   * 本次流程最终一比一结果。
-- 0为成功
+   * <p>本次流程最终一比一结果。</p><ul><li>0为成功</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Comparestatus?: number
   /**
-   * 本次流程最终一比一结果描述。
-- 仅描述用，文案更新时不会通知。
+   * <p>本次流程最终一比一结果描述。</p><ul><li>仅描述用，文案更新时不会通知。</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Comparemsg?: string
   /**
-   * 本次流程活体一比一的分数。
-- 取值范围 [0.00, 100.00]。
-- 相似度大于等于70时才判断为同一人，阈值不支持自定义。
-- 阈值70的误通过率为千分之一，阈值80的误通过率是万分之一。
+   * <p>本次流程活体一比一的分数。- 取值范围 [0.00, 100.00]。- 相似度大于等于70时才判断为同一人，阈值不支持自定义。- 阈值70的误通过率为万分之一。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Sim?: string
   /**
-   * 地理位置经纬度。
+   * <p>地理位置经纬度。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Location?: string
   /**
-   * Auth接口带入额外信息。
+   * <p>Auth接口带入额外信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Extra?: string
   /**
-   * 本次流程进行的活体一比一流水。
+   * <p>本次流程进行的活体一比一流水。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LivenessDetail?: Array<DetectDetail>
   /**
-   * 描述当前请求活体阶段被拒绝的详细原因，该参数仅限PLUS版本核身服务返回。
-- 详情如下：
-    01-用户全程闭眼
-    02-用户未完成指定动作
-    03-疑似翻拍攻击
-    04-疑似合成攻击
-    05-疑似黑产模版
-    06-疑似存在水印
-    07-反光校验未通过
-    08-疑似中途换人
-    09-人脸质量过差
-    10-距离校验不通过
-    11-疑似对抗样本攻击
-    12-嘴巴区域疑似存在攻击痕迹
-    13-眼睛区域疑似存在攻击痕迹
-    14-眼睛或嘴巴被遮挡
+   * <p>描述当前请求活体阶段被拒绝的详细原因，该参数仅限PLUS版本核身服务返回。</p><ul><li>详情如下：<br>  01-用户全程闭眼<br>  02-用户未完成指定动作<br>  03-疑似翻拍攻击<br>  04-疑似合成攻击<br>  05-疑似黑产模版<br>  06-疑似存在水印<br>  07-反光校验未通过<br>  08-疑似中途换人<br>  09-人脸质量过差<br>  10-距离校验不通过<br>  11-疑似对抗样本攻击<br>  12-嘴巴区域疑似存在攻击痕迹<br>  13-眼睛区域疑似存在攻击痕迹<br>  14-眼睛或嘴巴被遮挡</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LivenessInfoTag?: Array<string>
   /**
-   * 手机号码。
+   * <p>手机号码。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Mobile?: string
   /**
-   * 本次流程最终比对库源类型。
-- 取值范围：
-    权威库。
-    业务方自有库（用户上传照片、客户的混合库、混合部署库）。
-    二次验证库。
-    人工审核库。
+   * <p>本次流程最终比对库源类型。</p><ul><li>取值范围：<br>  权威库。<br>  业务方自有库（用户上传照片、客户的混合库、混合部署库）。<br>  二次验证库。<br>  人工审核库。</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CompareLibType?: string
   /**
-   * 本次流程最终活体类型。
-- 取值范围：
-    0：未知
-    1：数字活体
-    2：动作活体
-    3：静默活体
-    4：一闪活体（动作+光线）
-    5：远近活体
+   * <p>本次流程最终活体类型。</p><ul><li>取值范围：<br>  0：未知<br>  1：数字活体<br>  2：动作活体<br>  3：静默活体<br>  4：一闪活体（动作+光线）<br>  5：远近活体</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LivenessMode?: number
   /**
-   * nfc重复计费requestId列表。
+   * <p>nfc重复计费requestId列表。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NFCRequestIds?: Array<string>
   /**
-   * nfc重复计费计数。
+   * <p>nfc重复计费计数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NFCBillingCounts?: number
   /**
-   * 港澳台居住证通行证号码。
+   * <p>港澳台居住证通行证号码。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PassNo?: string
   /**
-   * 港澳台居住证签发次数。
+   * <p>港澳台居住证签发次数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VisaNum?: string
   /**
-   * 活体检测的动作顺序，多动作以“,”分隔。
-输出格式如：“1,2”表示“张嘴+眨眼”。
-- 详细序列值含义如下： 
-   1：张嘴
-2：眨眼
-3：点头
-4：摇头
-5：静默
-注：仅浮层H5产品返回
+   * <p>活体检测的动作顺序，多动作以“,”分隔。<br>输出格式如：“1,2”表示“张嘴+眨眼”。</p><ul><li>详细序列值含义如下：<br> 1：张嘴<br>2：眨眼<br>3：点头<br>4：摇头<br>5：静默<br>注：仅浮层H5产品返回</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LivenessActionSequence?: string
@@ -2727,29 +2587,24 @@ export interface GetDetectInfoEnhancedRequest {
  */
 export interface LivenessRecognitionResponse {
   /**
-   * 验证通过后的视频最佳截图照片。
-- 照片为BASE64编码后的值，jpg格式。
+   * <p>验证通过后的视频最佳截图照片。</p><ul><li>照片为BASE64编码后的值，jpg格式。</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BestFrameBase64?: string
   /**
-   * 相似度。
-- 取值范围 [0.00, 100.00]。
-- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为千分之一，阈值80的误通过率是万分之一）
+   * <p>相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为万分之一）</p>
    */
   Sim?: number
   /**
-   * 业务错误码。
-- 成功情况返回Success。
-- 错误情况请参考下方错误码 列表中FailedOperation部分
+   * <p>业务错误码。</p><ul><li>成功情况返回Success。</li><li>错误情况请参考下方错误码 列表中FailedOperation部分</li></ul>
    */
   Result?: string
   /**
-   * 业务结果描述。
+   * <p>业务结果描述。</p>
    */
   Description?: string
   /**
-   * 最佳截图列表，仅在配置了返回多张最佳截图时返回。
+   * <p>最佳截图列表，仅在配置了返回多张最佳截图时返回。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BestFrameList?: Array<string>
@@ -3090,33 +2945,27 @@ export interface BankCard2EVerificationRequest {
  */
 export interface ImageRecognitionV2Request {
   /**
-   * 身份证号。
+   * <p>身份证号。</p>
    */
   IdCard: string
   /**
-   * 姓名。
-- 中文请使用UTF-8编码。
+   * <p>姓名。</p><ul><li>中文请使用UTF-8编码。</li></ul>
    */
   Name: string
   /**
-   * 用于人脸比对的照片，图片的Base64值；
-Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。
-请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。
+   * <p>用于人脸比对的照片，图片的Base64值；<br>Base64编码后的图片数据大小不超过3M，仅支持jpg、png格式。<br>请使用标准的Base64编码方式(带=补位)，编码规范参考RFC4648。</p>
    */
   ImageBase64: string
   /**
-   * 本接口不需要传递此参数。
+   * <p>本接口不需要传递此参数。</p>
    */
   Optional?: string
   /**
-   * 敏感数据加密信息。
-- 对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   * <p>敏感数据加密信息。</p><ul><li>对传入信息（姓名、身份证号）有加密需求的用户可使用此参数，详情请点击左侧链接。</li></ul>
    */
   Encryption?: Encryption
   /**
-   * 自定义描述字段。
-- 用于描述调用业务信息，出参中将返回此描述字段。 
-- 每个自定义描述字段支持[1,10]个字符。
+   * <p>自定义描述字段。</p><ul><li>用于描述调用业务信息，出参中将返回此描述字段。 </li><li>每个自定义描述字段支持[1,10]个字符。</li></ul>
    */
   Extra?: string
 }

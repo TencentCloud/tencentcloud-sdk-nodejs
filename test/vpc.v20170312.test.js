@@ -138,6 +138,16 @@ it("vpc.v20170312.EnableGatewayFlowMonitor", async function () {
     }
 })
 
+it("vpc.v20170312.CreateCcnPolicyBasedRoutingNextHop", async function () {
+    try {
+       const data = await client.CreateCcnPolicyBasedRoutingNextHop({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeAddresses", async function () {
     try {
        const data = await client.DescribeAddresses({})
@@ -518,6 +528,16 @@ it("vpc.v20170312.DescribeRoutePolicyEntries", async function () {
     }
 })
 
+it("vpc.v20170312.DeleteCcnPolicyBasedRoutingNextHop", async function () {
+    try {
+       const data = await client.DeleteCcnPolicyBasedRoutingNextHop({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DeleteRoutePolicyAssociations", async function () {
     try {
        const data = await client.DeleteRoutePolicyAssociations({})
@@ -798,6 +818,16 @@ it("vpc.v20170312.ModifyVpcPeeringConnection", async function () {
     }
 })
 
+it("vpc.v20170312.DeleteHaVip", async function () {
+    try {
+       const data = await client.DeleteHaVip({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DeleteRoutePolicyEntries", async function () {
     try {
        const data = await client.DeleteRoutePolicyEntries({})
@@ -838,9 +868,9 @@ it("vpc.v20170312.DeleteTrafficMirror", async function () {
     }
 })
 
-it("vpc.v20170312.DeleteHaVip", async function () {
+it("vpc.v20170312.ModifyCcnPolicyBasedRoutingNextHopAttribute", async function () {
     try {
-       const data = await client.DeleteHaVip({})
+       const data = await client.ModifyCcnPolicyBasedRoutingNextHopAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1318,6 +1348,16 @@ it("vpc.v20170312.ModifyNetworkInterfaceQos", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyGlobalRoutes", async function () {
+    try {
+       const data = await client.ModifyGlobalRoutes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.AssociateNatGatewayAddress", async function () {
     try {
        const data = await client.AssociateNatGatewayAddress({})
@@ -1378,9 +1418,9 @@ it("vpc.v20170312.CheckTrafficMirror", async function () {
     }
 })
 
-it("vpc.v20170312.ModifyIPv6AddressesBandwidth", async function () {
+it("vpc.v20170312.DescribeVpcEndPointService", async function () {
     try {
-       const data = await client.ModifyIPv6AddressesBandwidth({})
+       const data = await client.DescribeVpcEndPointService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1481,6 +1521,16 @@ it("vpc.v20170312.DescribeVpnGatewayCcnRoutes", async function () {
 it("vpc.v20170312.DeleteRoutePolicy", async function () {
     try {
        const data = await client.DeleteRoutePolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DeleteCcnPolicyBasedRoutingRule", async function () {
+    try {
+       const data = await client.DeleteCcnPolicyBasedRoutingRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1751,6 +1801,16 @@ it("vpc.v20170312.DeleteSecurityGroupPolicies", async function () {
 it("vpc.v20170312.DescribeNetworkAclQuintupleEntries", async function () {
     try {
        const data = await client.DescribeNetworkAclQuintupleEntries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.CreateCcnPolicyBasedRoutingRules", async function () {
+    try {
+       const data = await client.CreateCcnPolicyBasedRoutingRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2708,6 +2768,16 @@ it("vpc.v20170312.CreateAssistantCidr", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyCcnPolicyBasedRoutingRuleAttribute", async function () {
+    try {
+       const data = await client.ModifyCcnPolicyBasedRoutingRuleAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeVpnGatewaySslClients", async function () {
     try {
        const data = await client.DescribeVpnGatewaySslClients({})
@@ -2978,6 +3048,16 @@ it("vpc.v20170312.CreateLocalGateway", async function () {
     }
 })
 
+it("vpc.v20170312.HaVipDisassociateAddressIp", async function () {
+    try {
+       const data = await client.HaVipDisassociateAddressIp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.ResetVpnGatewayInternetMaxBandwidth", async function () {
     try {
        const data = await client.ResetVpnGatewayInternetMaxBandwidth({})
@@ -3101,6 +3181,16 @@ it("vpc.v20170312.DescribeSecurityGroupAssociationStatistics", async function ()
 it("vpc.v20170312.DescribeIpGeolocationDatabaseUrl", async function () {
     try {
        const data = await client.DescribeIpGeolocationDatabaseUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DescribeCcnPolicyBasedRoutingRule", async function () {
+    try {
+       const data = await client.DescribeCcnPolicyBasedRoutingRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3278,9 +3368,9 @@ it("vpc.v20170312.DeleteSnapshotPolicies", async function () {
     }
 })
 
-it("vpc.v20170312.DescribeVpcEndPointService", async function () {
+it("vpc.v20170312.ModifyIPv6AddressesBandwidth", async function () {
     try {
-       const data = await client.DescribeVpcEndPointService({})
+       const data = await client.ModifyIPv6AddressesBandwidth({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3748,9 +3838,9 @@ it("vpc.v20170312.ModifyIpv6AddressesAttribute", async function () {
     }
 })
 
-it("vpc.v20170312.ModifyGlobalRoutes", async function () {
+it("vpc.v20170312.CreateNetDetect", async function () {
     try {
-       const data = await client.ModifyGlobalRoutes({})
+       const data = await client.CreateNetDetect({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3968,9 +4058,9 @@ it("vpc.v20170312.DescribeServiceTemplates", async function () {
     }
 })
 
-it("vpc.v20170312.HaVipDisassociateAddressIp", async function () {
+it("vpc.v20170312.DescribeCcnPolicyBasedRoutingNextHop", async function () {
     try {
-       const data = await client.HaVipDisassociateAddressIp({})
+       const data = await client.DescribeCcnPolicyBasedRoutingNextHop({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -4191,16 +4281,6 @@ it("vpc.v20170312.DeleteNatGatewayDestinationIpPortTranslationNatRule", async fu
 it("vpc.v20170312.CreateTrafficPackages", async function () {
     try {
        const data = await client.CreateTrafficPackages({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("vpc.v20170312.CreateNetDetect", async function () {
-    try {
-       const data = await client.CreateNetDetect({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
