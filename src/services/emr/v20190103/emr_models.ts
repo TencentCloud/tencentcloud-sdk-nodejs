@@ -107,6 +107,24 @@ export interface TerminateTasksRequest {
 }
 
 /**
+ * DescribeEMREventList返回参数结构体
+ */
+export interface DescribeEMREventListResponse {
+  /**
+   * 事件详情列表
+   */
+  EventList?: Array<EMREventListItem>
+  /**
+   * 符合的事件总量
+   */
+  TotalNum?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 节点磁盘信息
  */
 export interface DiskSpecInfo {
@@ -4274,6 +4292,32 @@ export interface DescribeResourceScheduleResponse {
 }
 
 /**
+ * 事件详情列表
+ */
+export interface EMREventListItem {
+  /**
+   * 事件受影响ip
+   */
+  Host?: string
+  /**
+   * 事件受影响的服务角色
+   */
+  Role?: string
+  /**
+   * 事件名称
+   */
+  Name?: string
+  /**
+   * 事件告警详情
+   */
+  Detail?: string
+  /**
+   * 事件发生时间
+   */
+  CreateTime?: string
+}
+
+/**
  * DescribeKyuubiQueryInfo请求参数结构体
  */
 export interface DescribeKyuubiQueryInfoRequest {
@@ -6138,6 +6182,44 @@ export interface NodeDetailPriceResult {
 }
 
 /**
+ * DescribeEMREventList请求参数结构体
+ */
+export interface DescribeEMREventListRequest {
+  /**
+   * 集群ID
+   */
+  InstanceId: string
+  /**
+   * 查询事件的开始时间
+   */
+  StartTime: number
+  /**
+   * 查询事件的结束时间
+   */
+  EndTime: number
+  /**
+   * 事件触发的IP
+   */
+  Host?: string
+  /**
+   * 事件受影响服务角色
+   */
+  Role?: string
+  /**
+   * 事件名称
+   */
+  Name?: string
+  /**
+   * 事件列表的偏移量
+   */
+  Offset?: number
+  /**
+   * 事件列表的Limit
+   */
+  Limit?: number
+}
+
+/**
  * 集群列表返回示例
  */
 export interface EmrListInstance {
@@ -6717,37 +6799,97 @@ key的取值信息如下：
 }
 
 /**
- * DescribeInsightList请求参数结构体
+ * DescribeNodeSpec请求参数结构体
  */
-export interface DescribeInsightListRequest {
+export interface DescribeNodeSpecRequest {
   /**
-   * 集群ID
+   * 可用区Id，可以通过https://document.capi.woa.com/document/api/1605/76892查询相关信息
    */
-  InstanceId: string
+  ZoneId: number
   /**
-   * 获取的洞察结果开始时间，此时间针对对App或者Hive查询的开始时间的过滤
+   * 0,按量，1包年包月，99按量+包年包月，错填将不会展示费用信息
    */
-  StartTime: number
+  CvmPayMode: number
   /**
-   * 获取的洞察结果结束时间，此时间针对对App或者Hive查询的开始时间的过滤
+   * 节点类型,Master,Core,Task,Router,All
    */
-  EndTime: number
+  NodeType: string
   /**
-   * 分页查询时的分页大小，最小1，最大100
+   * 0:旧计费页面,1:新计费页面。 错填，默认为旧计费
    */
-  PageSize: number
+  TradeType: number
   /**
-   * 分页查询时的页号，从1开始
+   * 产品Id，不填为0，则表示所有productId，前台使用必填
+
+44	EMR	V3.5.0
+43	EMR	V3.4.0.tlinux
+42	EMR	V2.7.0.tlinux
+41	DRUID	V1.1.0
+67	STARROCKS	V2.2.0
+45	DRUID	V1.1.0.tlinux
+40	EMRCLOUD	v3.2.0
+47	EMR	V4.0.0
+48	STARROCKS	V1.2.0
+49	STARROCKS	V1.3.0
+50	KAFKA	V2.0.0
+51	STARROCKS	V1.4.0
+52	EMR-TKE	V1.0.0
+53	EMR	V3.6.0
+54	STARROCKS	V2.0.0
+55	EMR-TKE	V1.0.1
+56	EMR-TKE	DLCV1.0.0
+57	EMR	V2.8.0
+58	EMR	V3.6.1
+59	SERVERLESS	V1.0.0
+60	EMR-TKE	V1.1.0
+62	STARROCKS	V2.1.1
+63	STARROCKS	V2.1.1.tlinux
+64	EMR-TKE	TCCV1.0.0
+65	EMR-TKE-AI	V1.0.0
+66	RSS	V1.0.0
+24	EMR	TianQiong-V1.0.0
+3	EMR	V2.0.1.tlinux
+4	EMR	V2.1.0
+7	EMR	V3.0.0
+8	EMR	V3.0.0.tlinux
+9	EMR	V2.2.0
+11	CLICKHOUSE	V1.0.0
+12	CLICKHOUSE	V1.0.0.tlinux
+16	EMR	V2.3.0
+17	CLICKHOUSE	V1.1.0
+18	CLICKHOUSE	V1.1.0.tlinux
+19	EMR	V2.4.0
+20	EMR	V2.5.0
+21	USERCUSTOM	V1.0.0
+22	CLICKHOUSE	V1.2.0
+39	STARROCKS	V1.1.0
+25	EMR	V3.1.0
+26	DORIS	V1.0.0
+27	KAFKA	V1.0.0
+28	EMR	V3.2.0
+29	EMR	V2.5.1
+30	EMR	V2.6.0
+32	DORIS	V1.1.0
+33	EMR	V3.2.1
+34	EMR	V3.3.0
+35	DORIS	V1.2.0
+36	STARROCKS	V1.0.0
+37	EMR	V3.4.0
+38	EMR	V2.7.0
    */
-  Page: number
+  ProductId: number
   /**
-   * 查询类型,支持HIVE,SPARK,DLC_SPARK,SPARK_SQL,SCHEDULE,MAPREDUCE,TRINO等类型,默认查询全部
+   * 场景名
    */
-  Type?: string
+  SceneName: string
   /**
-   * 是否包含具体参数建议等信息
+   * 类型为ComputeResource和EMR以及默认，默认为EMR
    */
-  MustHasContext?: boolean
+  ResourceBaseType?: string
+  /**
+   * 计算资源id
+   */
+  ComputeResourceId?: string
 }
 
 /**
@@ -6851,119 +6993,59 @@ export interface DescribeYarnScheduleHistoryResponse {
 }
 
 /**
- * DescribeNodeSpec请求参数结构体
+ * DescribeInsightList请求参数结构体
  */
-export interface DescribeNodeSpecRequest {
+export interface DescribeInsightListRequest {
   /**
-   * 可用区Id，可以通过https://document.capi.woa.com/document/api/1605/76892查询相关信息
-   */
-  ZoneId: number
-  /**
-   * 0,按量，1包年包月，99按量+包年包月，错填将不会展示费用信息
-   */
-  CvmPayMode: number
-  /**
-   * 节点类型,Master,Core,Task,Router,All
-   */
-  NodeType: string
-  /**
-   * 0:旧计费页面,1:新计费页面。 错填，默认为旧计费
-   */
-  TradeType: number
-  /**
-   * 产品Id，不填为0，则表示所有productId，前台使用必填
-
-44	EMR	V3.5.0
-43	EMR	V3.4.0.tlinux
-42	EMR	V2.7.0.tlinux
-41	DRUID	V1.1.0
-67	STARROCKS	V2.2.0
-45	DRUID	V1.1.0.tlinux
-40	EMRCLOUD	v3.2.0
-47	EMR	V4.0.0
-48	STARROCKS	V1.2.0
-49	STARROCKS	V1.3.0
-50	KAFKA	V2.0.0
-51	STARROCKS	V1.4.0
-52	EMR-TKE	V1.0.0
-53	EMR	V3.6.0
-54	STARROCKS	V2.0.0
-55	EMR-TKE	V1.0.1
-56	EMR-TKE	DLCV1.0.0
-57	EMR	V2.8.0
-58	EMR	V3.6.1
-59	SERVERLESS	V1.0.0
-60	EMR-TKE	V1.1.0
-62	STARROCKS	V2.1.1
-63	STARROCKS	V2.1.1.tlinux
-64	EMR-TKE	TCCV1.0.0
-65	EMR-TKE-AI	V1.0.0
-66	RSS	V1.0.0
-24	EMR	TianQiong-V1.0.0
-3	EMR	V2.0.1.tlinux
-4	EMR	V2.1.0
-7	EMR	V3.0.0
-8	EMR	V3.0.0.tlinux
-9	EMR	V2.2.0
-11	CLICKHOUSE	V1.0.0
-12	CLICKHOUSE	V1.0.0.tlinux
-16	EMR	V2.3.0
-17	CLICKHOUSE	V1.1.0
-18	CLICKHOUSE	V1.1.0.tlinux
-19	EMR	V2.4.0
-20	EMR	V2.5.0
-21	USERCUSTOM	V1.0.0
-22	CLICKHOUSE	V1.2.0
-39	STARROCKS	V1.1.0
-25	EMR	V3.1.0
-26	DORIS	V1.0.0
-27	KAFKA	V1.0.0
-28	EMR	V3.2.0
-29	EMR	V2.5.1
-30	EMR	V2.6.0
-32	DORIS	V1.1.0
-33	EMR	V3.2.1
-34	EMR	V3.3.0
-35	DORIS	V1.2.0
-36	STARROCKS	V1.0.0
-37	EMR	V3.4.0
-38	EMR	V2.7.0
-   */
-  ProductId: number
-  /**
-   * 场景名
-   */
-  SceneName: string
-  /**
-   * 类型为ComputeResource和EMR以及默认，默认为EMR
-   */
-  ResourceBaseType?: string
-  /**
-   * 计算资源id
-   */
-  ComputeResourceId?: string
-}
-
-/**
- * TerminateInstance请求参数结构体
- */
-export interface TerminateInstanceRequest {
-  /**
-   * 实例ID。
+   * 集群ID
    */
   InstanceId: string
   /**
-   * 销毁节点ID。该参数为预留参数，用户无需配置。
+   * 获取的洞察结果开始时间，此时间针对对App或者Hive查询的开始时间的过滤
    */
-  ResourceIds?: Array<string>
+  StartTime: number
   /**
-   * 类型为ComputeResource和EMR以及默认，默认为EMR,类型为EMR时,InstanceId生效,类型为ComputeResource时,使用ComputeResourceId标识
+   * 获取的洞察结果结束时间，此时间针对对App或者Hive查询的开始时间的过滤
    */
-  ResourceBaseType?: string
+  EndTime: number
   /**
-   * 计算资源ID
+   * 分页查询时的分页大小，最小1，最大100
    */
-  ComputeResourceId?: string
+  PageSize: number
+  /**
+   * 分页查询时的页号，从1开始
+   */
+  Page: number
+  /**
+   * 查询类型,支持HIVE,SPARK,DLC_SPARK,SPARK_SQL,SCHEDULE,MAPREDUCE,TRINO等类型,默认查询全部
+   */
+  Type?: string
+  /**
+   * 是否包含具体参数建议等信息
+   */
+  MustHasContext?: boolean
+}
+
+/**
+ * 各个可用区的参数信息
+ */
+export interface MultiZoneSetting {
+  /**
+   * "master"、"standby"、"third-party"
+   */
+  ZoneTag?: string
+  /**
+   * 无
+   */
+  VPCSettings?: VPCSettings
+  /**
+   * 无
+   */
+  Placement?: Placement
+  /**
+   * 无
+   */
+  ResourceSpec?: NewResourceSpec
 }
 
 /**
@@ -7544,25 +7626,25 @@ export interface ApplicationStatics {
 }
 
 /**
- * 各个可用区的参数信息
+ * TerminateInstance请求参数结构体
  */
-export interface MultiZoneSetting {
+export interface TerminateInstanceRequest {
   /**
-   * "master"、"standby"、"third-party"
+   * 实例ID。
    */
-  ZoneTag?: string
+  InstanceId: string
   /**
-   * 无
+   * 销毁节点ID。该参数为预留参数，用户无需配置。
    */
-  VPCSettings?: VPCSettings
+  ResourceIds?: Array<string>
   /**
-   * 无
+   * 类型为ComputeResource和EMR以及默认，默认为EMR,类型为EMR时,InstanceId生效,类型为ComputeResource时,使用ComputeResourceId标识
    */
-  Placement?: Placement
+  ResourceBaseType?: string
   /**
-   * 无
+   * 计算资源ID
    */
-  ResourceSpec?: NewResourceSpec
+  ComputeResourceId?: string
 }
 
 /**

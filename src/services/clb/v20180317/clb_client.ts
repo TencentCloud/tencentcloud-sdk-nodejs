@@ -47,7 +47,7 @@ import {
   DescribeTargetGroupInstancesRequest,
   DescribeLBOperateProtectRequest,
   DescribeIdleLoadBalancersResponse,
-  AssociateTargetGroupsRequest,
+  BindItem,
   DescribeLoadBalancersRequest,
   ClassicalTarget,
   ListenerItem,
@@ -58,6 +58,7 @@ import {
   BasicTargetGroupInfo,
   ModifyTargetWeightResponse,
   ZoneResource,
+  AssociateTargetGroupsRequest,
   DescribeTaskStatusRequest,
   DescribeTargetGroupInstanceStatusResponse,
   DescribeClassicalLBByInstanceIdResponse,
@@ -66,7 +67,7 @@ import {
   RuleHealth,
   DescribeExclusiveClustersResponse,
   ModifyDomainRequest,
-  IdleLoadBalancer,
+  DisassociateCustomizedConfigResponse,
   BatchModifyTargetTagRequest,
   RegisterTargetGroupInstancesResponse,
   ClassicalTargetInfo,
@@ -86,6 +87,7 @@ import {
   DeregisterFunctionTargetsResponse,
   DescribeCustomizedConfigListRequest,
   AutoRewriteRequest,
+  IdleLoadBalancer,
   DescribeCrossTargetsResponse,
   FunctionInfo,
   ModifyFunctionTargetsResponse,
@@ -101,6 +103,7 @@ import {
   Target,
   DescribeLoadBalancerTrafficRequest,
   DescribeBlockIPListRequest,
+  MigrateClassicalLoadBalancersResponse,
   CertIdRelatedWithLoadBalancers,
   ItemPrice,
   DescribeClassicalLBHealthStatusResponse,
@@ -111,6 +114,7 @@ import {
   SpecAvailability,
   ConfigListItem,
   RegisterTargetsWithClassicalLBRequest,
+  HealthCheck,
   ModifyDomainAttributesResponse,
   ReplaceCertForLoadBalancersResponse,
   DescribeTargetsResponse,
@@ -118,7 +122,7 @@ import {
   SetSecurityGroupForLoadbalancersResponse,
   DeregisterTargetGroupInstancesResponse,
   RegisterTargetsRequest,
-  HealthCheck,
+  DisassociateCustomizedConfigRequest,
   AssociateTargetGroupsResponse,
   CreateTopicRequest,
   DeleteListenerRequest,
@@ -149,6 +153,7 @@ import {
   ClassicalListener,
   DeleteLoadBalancerRequest,
   ModifyLoadBalancersProjectRequest,
+  AssociateCustomizedConfigRequest,
   CertificateInput,
   ResourceAvailability,
   SetLoadBalancerSecurityGroupsRequest,
@@ -157,7 +162,7 @@ import {
   SetCustomizedConfigForLoadBalancerRequest,
   CreateListenerResponse,
   CreateTargetGroupResponse,
-  MigrateClassicalLoadBalancersResponse,
+  AssociateCustomizedConfigResponse,
   CreateLoadBalancerSnatIpsResponse,
   ClassicalLoadBalancerInfo,
   DescribeListenersResponse,
@@ -345,6 +350,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 关联配置到server或location，根据配置类型关联到server或location。准备下线，请使用SetCustomizedConfigForLoadBalancer。
+   */
+  async AssociateCustomizedConfig(
+    req: AssociateCustomizedConfigRequest,
+    cb?: (error: string, rep: AssociateCustomizedConfigResponse) => void
+  ): Promise<AssociateCustomizedConfigResponse> {
+    return this.request("AssociateCustomizedConfig", req, cb)
+  }
+
+  /**
    * DeregisterTargetsFromClassicalLB 接口用于解绑负载均衡后端服务。本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
    */
   async DeregisterTargetsFromClassicalLB(
@@ -503,6 +518,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRewriteResponse) => void
   ): Promise<DeleteRewriteResponse> {
     return this.request("DeleteRewrite", req, cb)
+  }
+
+  /**
+   * 去关联个性化配置，准备下线，请使用SetCustomizedConfigForLoadBalancer。
+   */
+  async DisassociateCustomizedConfig(
+    req: DisassociateCustomizedConfigRequest,
+    cb?: (error: string, rep: DisassociateCustomizedConfigResponse) => void
+  ): Promise<DisassociateCustomizedConfigResponse> {
+    return this.request("DisassociateCustomizedConfig", req, cb)
   }
 
   /**

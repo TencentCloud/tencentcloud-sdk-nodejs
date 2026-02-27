@@ -21,6 +21,7 @@ import {
   AddNodeResourceConfigRequest,
   SchedulerTaskInfo,
   TerminateTasksRequest,
+  DescribeEMREventListResponse,
   DiskSpecInfo,
   Step,
   NodeSpecFamily,
@@ -157,6 +158,7 @@ import {
   DiskGroup,
   DeleteUserManagerUserListRequest,
   DescribeResourceScheduleResponse,
+  EMREventListItem,
   DescribeKyuubiQueryInfoRequest,
   DescribeNodeResourceConfigFastResponse,
   DescribeInsightListResponse,
@@ -218,6 +220,7 @@ import {
   DescribeAutoScaleGroupGlobalConfRequest,
   ModifyResourceScheduleConfigResponse,
   NodeDetailPriceResult,
+  DescribeEMREventListRequest,
   EmrListInstance,
   DescribeResourceScheduleDiffDetailResponse,
   DescribeYarnQueueResponse,
@@ -236,14 +239,14 @@ import {
   Placement,
   DescribeUsersForUserManagerRequest,
   ConfigSetInfo,
-  DescribeInsightListRequest,
+  DescribeNodeSpecRequest,
   DescribeYarnScheduleHistoryRequest,
   StartStopServiceOrMonitorResponse,
   DescribeYarnQueueRequest,
   ModifyAutoRenewFlagResponse,
   DescribeYarnScheduleHistoryResponse,
-  DescribeNodeSpecRequest,
-  TerminateInstanceRequest,
+  DescribeInsightListRequest,
+  MultiZoneSetting,
   PersistentVolumeContext,
   ScaleOutNodeConfig,
   ModifyResourcesTagsRequest,
@@ -270,7 +273,7 @@ import {
   AddUsersForUserManagerRequest,
   StorageSummaryDistribution,
   ApplicationStatics,
-  MultiZoneSetting,
+  TerminateInstanceRequest,
   DescribeEmrOverviewMetricsRequest,
   ServiceProcessFunctionInfo,
   PreExecuteFileSettings,
@@ -969,6 +972,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCloudInstanceResponse) => void
   ): Promise<CreateCloudInstanceResponse> {
     return this.request("CreateCloudInstance", req, cb)
+  }
+
+  /**
+   * 查询EMR事件监控数据
+   */
+  async DescribeEMREventList(
+    req: DescribeEMREventListRequest,
+    cb?: (error: string, rep: DescribeEMREventListResponse) => void
+  ): Promise<DescribeEMREventListResponse> {
+    return this.request("DescribeEMREventList", req, cb)
   }
 
   /**

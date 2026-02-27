@@ -588,6 +588,16 @@ it("emr.v20190103.CreateCloudInstance", async function () {
     }
 })
 
+it("emr.v20190103.DescribeEMREventList", async function () {
+    try {
+       const data = await client.DescribeEMREventList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.InquiryPriceScaleOutInstance", async function () {
     try {
        const data = await client.InquiryPriceScaleOutInstance({})

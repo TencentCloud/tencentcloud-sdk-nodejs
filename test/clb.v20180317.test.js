@@ -78,6 +78,16 @@ it("clb.v20180317.ModifyTargetGroupInstancesWeight", async function () {
     }
 })
 
+it("clb.v20180317.AssociateCustomizedConfig", async function () {
+    try {
+       const data = await client.AssociateCustomizedConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DeregisterTargetsFromClassicalLB", async function () {
     try {
        const data = await client.DeregisterTargetsFromClassicalLB({})
@@ -221,6 +231,16 @@ it("clb.v20180317.BatchModifyTargetWeight", async function () {
 it("clb.v20180317.DeleteRewrite", async function () {
     try {
        const data = await client.DeleteRewrite({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.DisassociateCustomizedConfig", async function () {
+    try {
+       const data = await client.DisassociateCustomizedConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

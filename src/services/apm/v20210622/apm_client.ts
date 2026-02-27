@@ -23,6 +23,7 @@ import {
   DescribeApmVulnerabilityCountResponse,
   DescribeServiceOverviewResponse,
   ApmSampleConfig,
+  DescribeApmSQLInjectionDetailResponse,
   AgentOperationConfigView,
   SelectorView,
   DescribeApmSampleConfigRequest,
@@ -80,6 +81,7 @@ import {
   ModifyApmPrometheusRuleResponse,
   DescribeMetricRecordsResponse,
   ApmTag,
+  DescribeApmSQLInjectionDetailRequest,
   Filter,
   DescribeGeneralOTSpanListRequest,
   AutoProfilingConfig,
@@ -307,6 +309,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyApmPrometheusRuleResponse) => void
   ): Promise<ModifyApmPrometheusRuleResponse> {
     return this.request("ModifyApmPrometheusRule", req, cb)
+  }
+
+  /**
+   * 查询SQL注入详情信息
+   */
+  async DescribeApmSQLInjectionDetail(
+    req: DescribeApmSQLInjectionDetailRequest,
+    cb?: (error: string, rep: DescribeApmSQLInjectionDetailResponse) => void
+  ): Promise<DescribeApmSQLInjectionDetailResponse> {
+    return this.request("DescribeApmSQLInjectionDetail", req, cb)
   }
 
   /**

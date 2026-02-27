@@ -178,6 +178,16 @@ it("apm.v20210622.ModifyApmPrometheusRule", async function () {
     }
 })
 
+it("apm.v20210622.DescribeApmSQLInjectionDetail", async function () {
+    try {
+       const data = await client.DescribeApmSQLInjectionDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apm.v20210622.CreateApmSampleConfig", async function () {
     try {
        const data = await client.CreateApmSampleConfig({})

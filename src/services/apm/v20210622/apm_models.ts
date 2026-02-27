@@ -153,6 +153,24 @@ export interface ApmSampleConfig {
 }
 
 /**
+ * DescribeApmSQLInjectionDetail返回参数结构体
+ */
+export interface DescribeApmSQLInjectionDetailResponse {
+  /**
+   * SQL相关维度信息
+   */
+  Tags?: Array<ApmTag>
+  /**
+   * 链路相关信息
+   */
+  Records?: Array<ApmMetricRecord>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 探针有关接口的相关配置
  */
 export interface AgentOperationConfigView {
@@ -1934,6 +1952,48 @@ export interface ApmTag {
    * 维度值（标签值）
    */
   Value: string
+}
+
+/**
+ * DescribeApmSQLInjectionDetail请求参数结构体
+ */
+export interface DescribeApmSQLInjectionDetailRequest {
+  /**
+   * 业务系统 ID
+   */
+  InstanceId: string
+  /**
+   * 限制
+   */
+  Limit?: number
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 秒级时间戳
+   */
+  StartTime?: number
+  /**
+   * 秒级时间戳
+   */
+  EndTime?: number
+  /**
+   * 排序
+   */
+  OrderBy?: OrderBy
+  /**
+   * 查询过滤条件
+   */
+  Filters?: Array<Filter>
+  /**
+   * 聚合维度
+   */
+  GroupBy?: Array<string>
+  /**
+   * 指标列表
+   */
+  Metrics?: Array<QueryMetricItem>
 }
 
 /**

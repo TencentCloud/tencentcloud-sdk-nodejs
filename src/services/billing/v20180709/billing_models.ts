@@ -5250,7 +5250,7 @@ export interface Conditions {
 }
 
 /**
- * 成本分返回值复杂类型
+ * 成本分析返回值复杂类型
  */
 export interface AnalyseTimeDetail {
   /**

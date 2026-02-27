@@ -3424,6 +3424,10 @@ export interface SubAccountInfo {
    * 子账号在Linux下的GID
    */
   LinuxGid?: number
+  /**
+   * 子账号在Linux下的用户名
+   */
+  LinuxUserName?: string
 }
 
 /**

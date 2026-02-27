@@ -568,14 +568,6 @@ export interface CreateTargetGroupRequest {
    */
   ForwardingMode?: string
   /**
-   * <p>TCP协议连接空闲超时时间，可配置60s-6000s，默认350s。</p>
-   */
-  TcpIdleConnectTimeout?: number
-  /**
-   * <p>其他协议连接空闲超时时间，可配置5s-180s，默认120s</p>
-   */
-  OthersIdleConnectTimeout?: number
-  /**
    * <p>重新调度功能内的解绑后端服务开关，开关打开后解绑后端服务会触发重新调度。</p>
    */
   RescheduleUnbindRs?: boolean
@@ -919,14 +911,6 @@ export interface ModifyTargetGroupAttributeRequest {
    * <p>是否支持全死全活。</p>
    */
   AllDeadToAlive?: boolean
-  /**
-   * <p>TCP协议连接空闲超时时间，可配置60s-6000s，默认350s。</p>
-   */
-  TcpIdleConnectTimeout?: number
-  /**
-   * <p>其他协议连接空闲超时时间，可配置5s-180s，默认120s</p>
-   */
-  OthersIdleConnectTimeout?: number
   /**
    * <p>重新调度功能内的解绑后端服务开关，开关打开后解绑后端服务会触发重新调度。</p>
    */

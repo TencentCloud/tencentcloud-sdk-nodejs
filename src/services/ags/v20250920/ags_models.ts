@@ -484,61 +484,65 @@ export interface PortConfiguration {
  */
 export interface SandboxTool {
   /**
-   * 沙箱工具唯一标识符
+   * <p>沙箱工具唯一标识符</p>
    */
   ToolId: string
   /**
-   * 沙箱工具名称，长度 1-50 字符，支持中英文、数字、下划线。同一 AppId 下沙箱工具名称必须唯一
+   * <p>沙箱工具名称，长度 1-50 字符，支持中英文、数字、下划线。同一 AppId 下沙箱工具名称必须唯一</p>
    */
   ToolName?: string
   /**
-   * 沙箱工具类型，取值：browser（浏览器工具）、code-interpreter（代码解释器工具）、computer（计算机控制工具）、mobile（移动设备工具）
+   * <p>沙箱工具类型，取值：browser（浏览器工具）、code-interpreter（代码解释器工具）、computer（计算机控制工具）、mobile（移动设备工具）</p>
    */
   ToolType?: string
   /**
-   * 沙箱工具状态，取值：CREATING（创建中）、ACTIVE（可用）、DELETING（删除中）、FAILED（失败）
+   * <p>沙箱工具状态，取值：CREATING（创建中）、ACTIVE（可用）、DELETING（删除中）、FAILED（失败）</p>
    */
   Status?: string
   /**
-   * 沙箱工具描述信息，最大长度 200 字符
+   * <p>沙箱工具描述信息，最大长度 200 字符</p>
    */
   Description?: string
   /**
-   * 默认超时时间，支持格式：5m、300s、1h 等，不指定则使用系统默认值（5 分钟）。最大 24 小时
+   * <p>默认超时时间，支持格式：5m、300s、1h 等，不指定则使用系统默认值（5 分钟）。最大 24 小时</p>
    */
   DefaultTimeoutSeconds?: number
   /**
-   * 网络配置
+   * <p>网络配置</p>
    */
   NetworkConfiguration?: NetworkConfiguration
   /**
-   * 标签规格，包含资源标签绑定关系。用于为沙箱工具绑定标签，支持多种资源类型的标签绑定
+   * <p>标签规格，包含资源标签绑定关系。用于为沙箱工具绑定标签，支持多种资源类型的标签绑定</p>
    */
   Tags?: Array<Tag>
   /**
-   * 沙箱工具创建时间，格式：ISO8601
+   * <p>沙箱工具创建时间，格式：ISO8601</p>
    */
   CreateTime?: string
   /**
-   * 沙箱工具更新时间，格式：ISO8601
+   * <p>沙箱工具更新时间，格式：ISO8601</p>
    */
   UpdateTime?: string
   /**
-   * 沙箱工具绑定角色ARN
+   * <p>沙箱工具绑定角色ARN</p>
    */
   RoleArn?: string
   /**
-   * 沙箱工具中实例存储挂载配置
+   * <p>沙箱工具中实例存储挂载配置</p>
    */
   StorageMounts?: Array<StorageMount>
   /**
-   * 沙箱工具自定义配置
+   * <p>沙箱工具自定义配置</p>
    */
   CustomConfiguration?: CustomConfigurationDetail
   /**
-   * 沙箱工具日志推送相关配置
+   * <p>沙箱工具日志推送相关配置</p>
    */
   LogConfiguration?: LogConfiguration
+  /**
+   * <p>用于说明沙箱工具处于该状态的原因</p>
+   */
+  StatusReason?: string
 }
 
 /**

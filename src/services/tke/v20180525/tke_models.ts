@@ -6293,7 +6293,7 @@ export interface CreateClusterEndpointRequest {
    */
   Domain?: string
   /**
-   * 使用的安全组，只有外网访问需要传递（开启外网访问且不使用已有clb时必传）。获取方式：https://cloud.tencent.com/document/api/215/15808
+   * 使用的安全组（开启内外网访问且不使用已有clb时可传，内网访问需要先找clb侧加白使用）。获取方式：https://cloud.tencent.com/document/api/215/15808
    */
   SecurityGroup?: string
   /**
@@ -6822,6 +6822,10 @@ export interface DescribeClusterEndpointsResponse {
    * 内网访问所属子网
    */
   ClusterIntranetSubnetId?: string
+  /**
+   * 内网安全组
+   */
+  IntranetSecurityGroup?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
