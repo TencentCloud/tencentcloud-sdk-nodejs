@@ -3792,80 +3792,11 @@ export interface DescribeAigcUsageDataResponse {
  */
 export interface AigcUsageDataItem {
   /**
-   * AIGC规格。
-取值有：
-<li>Qwen2.0</li>
-<li>Hunyuan3.0_1K</li>
-<li>Hunyuan3.0_2K</li>
-<li>Hunyuan3.0_4K</li>
-<li>Mingmou1.0_1K</li>
-<li>Mingmou1.0_2K</li>
-<li>Mingmou1.0_4K</li>
-<li>ViduQ2_T2i_1080P</li>
-<li>ViduQ2_T2i_2K</li>
-<li>ViduQ2_T2i_4K</li>
-<li>ViduQ2_I2i_1080P</li>
-<li>ViduQ2_I2i_2K</li>
-<li>ViduQ2_I2i_4K</li>
-<li>ViduQ2_Refer2i_1080P</li>
-<li>ViduQ2_Refer2i_2K</li>
-<li>ViduQ2_Refer2i_4K</li>
-<li>Kling2.1_T2i_1K2K</li>
-<li>Kling2.1_T2i_4K</li>
-<li>Kling2.1_Refer2i_1K</li>
-<li>Kling2.1_Refer2i_2K</li>
-<li>Kling2.1_Refer2i_4K</li>
-<li>Veo3.1Standard</li>
-<li>Veo3.1Fast</li>
-<li>Kling2.0&2.1std_720P</li>
-<li>Kling2.0&2.1pro_1080P</li>
-<li>Kling2.5pro_720P</li>
-<li>Kling2.5pro_1080P</li>
-<li>KlingO1_720P</li>
-<li>KlingO1_1080P</li>
-<li>KlingO1_NoVideo_720P</li>
-<li>KlingO1_NoVideo_1080P</li>
-<li>Kling2.6</li>
-<li>Kling2.6Sound</li>
-<li>Kling2.6MotionControl_720P</li>
-<li>Kling2.6MotionControl_1080P</li>
-<li>Kling_Avatar_I2v_720P</li>
-<li>Kling_Avatar_I2v_1080P</li>
-<li>Kling_Identifyface</li>
-<li>Hailuo02&2.3_768P</li>
-<li>Hailuo02&2.3_1080P</li>
-<li>Hailuo2.3fast_768P</li>
-<li>Hailuo2.3fast_1080P</li>
-<li>ViduQ2_720P</li>
-<li>ViduQ2_720P_OffPeak</li>
-<li>ViduQ2_1080P</li>
-<li>ViduQ2_1080P_OffPeak</li>
-<li>ViduQ2pro_720P</li>
-<li>ViduQ2pro_720P_OffPeak</li>
-<li>ViduQ2pro_1080P</li>
-<li>ViduQ2pro_1080P_OffPeak</li>
-<li>ViduQ2turbo_720P</li>
-<li>ViduQ2turbo_720P_OffPeak</li>
-<li>ViduQ2turbo_1080P</li>
-<li>ViduQ2turbo_1080P_OffPeak</li>
-<li>ViduQ3pro_720P</li>
-<li>ViduQ3pro_720P_OffPeak</li>
-<li>ViduQ3pro_1080P</li>
-<li>ViduQ3pro_1080P_OffPeak</li>
-<li>Vidu_TemplateEffect</li>
-<li>Hunyuan1.5_720P</li>
-<li>Hunyuan1.5_1080P</li>
-<li>Mingmou1.0_720P</li>
-<li>Mingmou1.0_1080P</li>
-<li>ImageProductImage</li>
-<li>ImageChangeClothes</li>
-<li>VideoProductShowcase</li>
-<li>ImageOutPainting</li>
-<li>unknown</li>
+   * <p>AIGC规格。<br>取值有：</p><li>Qwen2.0</li><li>Hunyuan3.0_1K</li><li>Hunyuan3.0_2K</li><li>Hunyuan3.0_4K</li><li>Mingmou1.0_1K</li><li>Mingmou1.0_2K</li><li>Mingmou1.0_4K</li><li>ViduQ2_T2i_1080P</li><li>ViduQ2_T2i_2K</li><li>ViduQ2_T2i_4K</li><li>ViduQ2_I2i_1080P</li><li>ViduQ2_I2i_2K</li><li>ViduQ2_I2i_4K</li><li>ViduQ2_Refer2i_1080P</li><li>ViduQ2_Refer2i_2K</li><li>ViduQ2_Refer2i_4K</li><li>Kling2.1_T2i_1K2K</li><li>Kling2.1_T2i_4K</li><li>Kling2.1_Refer2i_1K</li><li>Kling2.1_Refer2i_2K</li><li>Kling2.1_Refer2i_4K</li><li>Veo3.1Standard</li><li>Veo3.1Fast</li><li>Kling2.0&amp;2.1std_720P</li><li>Kling2.0&amp;2.1pro_1080P</li><li>Kling2.5pro_720P</li><li>Kling2.5pro_1080P</li><li>KlingO1_720P</li><li>KlingO1_1080P</li><li>KlingO1_NoVideo_720P</li><li>KlingO1_NoVideo_1080P</li><li>Kling2.6</li><li>Kling2.6Sound</li><li>Kling2.6MotionControl_720P</li><li>Kling2.6MotionControl_1080P</li><li>Kling_Avatar_I2v_720P</li><li>Kling_Avatar_I2v_1080P</li><li>Kling_Identifyface</li><li>Hailuo02&amp;2.3_768P</li><li>Hailuo02&amp;2.3_1080P</li><li>Hailuo2.3fast_768P</li><li>Hailuo2.3fast_1080P</li><li>ViduQ2_720P</li><li>ViduQ2_720P_OffPeak</li><li>ViduQ2_1080P</li><li>ViduQ2_1080P_OffPeak</li><li>ViduQ2_Refer_540P_OffPeak</li><li>ViduQ2_Refer_720P</li><li>ViduQ2_Refer_720P_OffPeak</li><li>ViduQ2_Refer_1080P</li><li>ViduQ2_Refer_1080P_OffPeak</li><li>ViduQ2pro_720P</li><li>ViduQ2pro_720P_OffPeak</li><li>ViduQ2pro_1080P</li><li>ViduQ2pro_1080P_OffPeak</li><li>ViduQ2pro_Refer_720P</li><li>ViduQ2pro_Refer_720P_OffPeak</li><li>ViduQ2pro_Refer_720P</li><li>ViduQ2pro_Refer_720P_OffPeak</li><li>ViduQ2pro_Refer_1080P</li><li>ViduQ2pro_Refer_1080P_OffPeak</li><li>ViduQ2turbo_720P</li><li>ViduQ2turbo_720P_OffPeak</li><li>ViduQ2turbo_1080P</li><li>ViduQ2turbo_1080P_OffPeak</li><li>ViduQ3pro_540P</li><li>ViduQ3pro_540P_OffPeak</li><li>ViduQ3pro_720P</li><li>ViduQ3pro_720P_OffPeak</li><li>ViduQ3pro_1080P</li><li>ViduQ3pro_1080P_OffPeak</li><li>Vidu_TemplateEffect</li><li>Hunyuan1.5_720P</li><li>Hunyuan1.5_1080P</li><li>Mingmou1.0_720P</li><li>Mingmou1.0_1080P</li><li>ImageProductImage</li><li>ImageChangeClothes</li><li>VideoProductShowcase</li><li>ImageOutPainting</li><li>unknown</li>
    */
   Specification?: string
   /**
-   * 用量数据。
+   * <p>用量数据。</p>
    */
   DataSet?: Array<TaskStatDataItem>
 }
@@ -5066,35 +4997,39 @@ export interface DescribeProcedureTemplatesRequest {
  */
 export interface ProcessImageAsyncRequest {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId: number
   /**
-   * 需要进行图片处理的FileId。
+   * <p>需要进行图片处理的FileId。不能与Url同时输入。</p>
    */
-  FileId: string
+  FileId?: string
   /**
-   * 图片处理参数。
+   * <p>需要进行图片处理的Url。不能与FileId同时输入。</p>
+   */
+  Url?: string
+  /**
+   * <p>图片处理参数。</p>
    */
   ImageTaskInput?: ProcessImageAsyncTaskInput
   /**
-   * 图片处理任务的输出媒体文件配置。
+   * <p>图片处理任务的输出媒体文件配置。</p>
    */
   OutputConfig?: ProcessImageAsyncOutputConfig
   /**
-   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   * <p>用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
    */
   SessionId?: string
   /**
-   * 来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。
+   * <p>来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。</p>
    */
   SessionContext?: string
   /**
-   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+   * <p>任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。</p>
    */
   TasksPriority?: number
   /**
-   * 保留字段，特殊用途时使用。
+   * <p>保留字段，特殊用途时使用。</p>
    */
   ExtInfo?: string
 }
@@ -7297,39 +7232,43 @@ export interface FileContent {
  */
 export interface AigcImageTask {
   /**
-   * 任务 ID。
+   * <p>任务 ID。</p>
    */
   TaskId?: string
   /**
-   * 任务状态，取值：<li>PROCESSING：处理中；</li><li>FINISH：已完成。</li>
+   * <p>任务状态，取值：<li>PROCESSING：处理中；</li><li>FINISH：已完成。</li></p>
    */
   Status?: string
   /**
-   * 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。
+   * <p>错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。</p>
    */
   ErrCode?: number
   /**
-   * 错误信息。
+   * <p>扩展错误码。空字符串表示成功，其它值表示失败。</p><p>枚举值：</p><ul><li>RequestLimitExceeded： 模型调用超出并发限制。</li><li>InvalidParameter.VoilationContent： 输入 prompt 违反内容安全策略。</li><li>InvalidParameterValue： 参数错误。</li><li>FailedOperation： 模型任务堆积。</li><li>InternalError： 内部错误。</li></ul>
+   */
+  ErrCodeExt?: string
+  /**
+   * <p>错误信息。</p>
    */
   Message?: string
   /**
-   * 任务进度，取值范围 [0-100] 。
+   * <p>任务进度，取值范围 [0-100] 。</p>
    */
   Progress?: number
   /**
-   * AIGC 生图任务的输入信息。
+   * <p>AIGC 生图任务的输入信息。</p>
    */
   Input?: AigcImageTaskInput
   /**
-   * AIGC 生图任务的输出信息。
+   * <p>AIGC 生图任务的输出信息。</p>
    */
   Output?: AigcImageTaskOutput
   /**
-   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   * <p>用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
    */
   SessionId?: string
   /**
-   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   * <p>来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。</p>
    */
   SessionContext?: string
 }
@@ -7573,7 +7512,7 @@ export interface DescribeFileAttributesResponse {
  */
 export interface ProcessImageAsyncResponse {
   /**
-   * 任务 ID。
+   * <p>任务 ID。</p>
    */
   TaskId?: string
   /**
@@ -8844,39 +8783,43 @@ export interface VideoTemplateInfo {
  */
 export interface AigcVideoTask {
   /**
-   * 任务 ID。
+   * <p>任务 ID。</p>
    */
   TaskId?: string
   /**
-   * 任务状态，取值：<li>PROCESSING：处理中；</li><li>FINISH：已完成。</li>
+   * <p>任务状态，取值：<li>PROCESSING：处理中；</li><li>FINISH：已完成。</li></p>
    */
   Status?: string
   /**
-   * 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。
+   * <p>错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。</p>
    */
   ErrCode?: number
   /**
-   * 错误信息。
+   * <p>扩展错误码。</p><p>枚举值：</p><ul><li>RequestLimitExceeded： 调用超出并发限制。</li><li>InvalidParameter.VoilationContent： 输入 prompt 违反内容安全策略。</li><li>InvalidParameterValue： 参数错误。</li><li>FailedOperation： 模型任务堆积。</li><li>InternalError： 内部错误。</li></ul>
+   */
+  ErrCodeExt?: string
+  /**
+   * <p>错误信息。</p>
    */
   Message?: string
   /**
-   * 任务进度，取值范围 [0-100] 。
+   * <p>任务进度，取值范围 [0-100] 。</p>
    */
   Progress?: number
   /**
-   * AIGC 生视频任务的输入信息。
+   * <p>AIGC 生视频任务的输入信息。</p>
    */
   Input?: AigcVideoTaskInput
   /**
-   * AIGC 生视频任务的输出信息。
+   * <p>AIGC 生视频任务的输出信息。</p>
    */
   Output?: AigcVideoTaskOutput
   /**
-   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   * <p>用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
    */
   SessionId?: string
   /**
-   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   * <p>来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。</p>
    */
   SessionContext?: string
 }
@@ -21496,11 +21439,11 @@ export interface CreateAigcImageTaskRequest {
    */
   SubAppId: number
   /**
-   * <p>模型名称。取值：</p><li>GEM：Gemini；</li><li>Qwen：千问。</li><li>Hunyuan：混元。</li><li>Vidu：生数。</li><li>Kling：可灵。</li>
+   * <p>模型名称。取值：</p><li>Qwen：千问。</li><li>Hunyuan：混元。</li><li>Vidu：生数。</li><li>Kling：可灵。</li>
    */
   ModelName: string
   /**
-   * <p>模型版本。取值：<li>当 ModelName 是 GEM，可选值为 2.5；</li><li>当 ModelName 是 Qwen，可选值为 0925；</li><li>当 ModelName 是 Hunyuan，可选值为 3.0；</li><li>当 ModelName 是 Vidu，可选值为 q2；</li><li>当 ModelName 是 Kling，可选值为 2.1；</li></p>
+   * <p>模型版本。取值：<li>当 ModelName 是 Qwen，可选值为 0925；</li><li>当 ModelName 是 Hunyuan，可选值为 3.0；</li><li>当 ModelName 是 Vidu，可选值为 q2；</li><li>当 ModelName 是 Kling，可选值为 2.1；</li></p>
    */
   ModelVersion: string
   /**

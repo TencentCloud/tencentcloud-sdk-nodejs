@@ -286,6 +286,7 @@ export interface CreateDataSourceRequest {
 - TDENGINE
 - TDSQLC
 - FileSystem
+- TCLake
 
    */
   Type: string

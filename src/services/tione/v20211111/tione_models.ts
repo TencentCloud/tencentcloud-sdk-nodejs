@@ -238,7 +238,7 @@ export interface DescribeLogsRequest {
    */
   EndTime?: string
   /**
-   * 日志查询条数，默认值100，最大值100
+   * 日志查询条数，默认值100，最大值1000
    */
   Limit?: number
   /**
@@ -286,6 +286,10 @@ export interface DescribeLogsRequest {
 3. Filter. Negative和Filter. Fuzzy没有使用
    */
   Filters?: Array<Filter>
+  /**
+   * 使用OFFSET分页查询时，指定返回的数据偏移量，默认为0
+   */
+  Offset?: number
 }
 
 /**
@@ -4116,7 +4120,7 @@ export interface WeightEntry {
    */
   ServiceId: string
   /**
-   * 流量权重值，同 ServiceGroup 下 总和应为 100
+   * 流量权重值，ServiceGroup 下，不同服务版本根据权重比例分配流量
    */
   Weight: number
 }

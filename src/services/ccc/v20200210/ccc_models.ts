@@ -1261,7 +1261,7 @@ export interface DescribeSessionDetailResponse {
    */
   QueuedSkillGroupName?: string
   /**
-   * 录音链接，带鉴权和有效期，获取之后请在短时间内拉取，不要持久化此链接
+   * 录音链接，带鉴权和有效期，获取之后请在24 小时内拉取，不要持久化此链接。如此链接已过期，请重新调用此接口获取新的链接
    */
   RecordURL?: string
   /**
@@ -1269,7 +1269,7 @@ export interface DescribeSessionDetailResponse {
    */
   CustomRecordURL?: string
   /**
-   * 录音文本信息链接，带鉴权和有效期，获取之后请在短时间内拉取，不要持久化此链接
+   * 录音文本信息链接，带鉴权和有效期，获取之后请在24 小时拉取，不要持久化此链接。如此链接已过期，请重新调用此接口获取新的链接
    */
   AsrURL?: string
   /**

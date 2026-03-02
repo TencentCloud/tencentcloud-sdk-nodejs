@@ -155,6 +155,10 @@ export interface DescribeAgentsRequest {
    * 智能体状态，为空时查询所有，如果填写则会根据AgentStatus筛选
    */
   AgentStatus?: string
+  /**
+   * 架构，共享版-intranet，企业版-userVpc
+   */
+  DeployPlace?: string
 }
 
 /**
@@ -190,23 +194,23 @@ export interface ModifyChatTitleResponse {
  */
 export interface CreateAgentInstanceRequest {
   /**
-   * 智能体ID
+   * <p>智能体ID</p>
    */
   AgentId?: string
   /**
-   * 智能体版本
+   * <p>智能体版本</p>
    */
   AgentVersion?: string
   /**
-   * 实例名
+   * <p>实例名</p>
    */
   InstanceName?: string
   /**
-   * 智能体实例的参数列表
+   * <p>智能体实例的参数列表</p>
    */
   Parameters?: Array<Parameter>
   /**
-   * 资源的标签信息
+   * <p>资源的标签信息</p>
    */
   Tags?: Array<TagItem>
 }
@@ -483,11 +487,11 @@ export interface ExtraInfo {
  */
 export interface CreateAgentInstanceResponse {
   /**
-   * 智能体实例ID
+   * <p>智能体实例ID</p>
    */
   InstanceId?: string
   /**
-   * 智能体实例名称
+   * <p>智能体实例名称</p>
    */
   InstanceName?: string
   /**
@@ -885,6 +889,10 @@ export interface Agent {
    * 智能体类型
    */
   AgentInternalName?: string
+  /**
+   * 架构：共享版-intranet，企业版-userVpc
+   */
+  DeployPlace?: string
   /**
    * 智能体状态
    */

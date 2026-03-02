@@ -4828,15 +4828,15 @@ export interface CreateSqlFilterResponse {
  */
 export interface DescribeSlowLogUserHostStatsRequest {
   /**
-   * 实例ID。
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
    */
   InstanceId: string
   /**
-   * 查询范围的开始时间，时间格式如：2019-09-10 12:13:14。
+   * 查询范围的开始时间，格式: "yyyy-MM-dd'T'HH:mm:ssXXX"。
    */
   StartTime: string
   /**
-   * 查询范围的结束时间，时间格式如：2019-09-10 12:13:14。
+   * 查询范围的结束时间，格式: "yyyy-MM-dd'T'HH:mm:ssXXX"。
    */
   EndTime: string
   /**
@@ -4847,6 +4847,14 @@ export interface DescribeSlowLogUserHostStatsRequest {
    * SQL模板的MD5值
    */
   Md5?: string
+  /**
+   * 仅Redis产品使用；实例Proxy ID。
+   */
+  InstanceProxyId?: string
+  /**
+   * 仅Redis产品使用；命令。
+   */
+  Cmd?: string
 }
 
 /**

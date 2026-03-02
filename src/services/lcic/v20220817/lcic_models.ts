@@ -2278,6 +2278,10 @@ export interface DescribePlaybackListRequest {
    */
   SdkAppId: number
   /**
+   * <p>房间ID</p>
+   */
+  RoomId?: number
+  /**
    * <p>分页查询当前页数，从1开始递增</p>
    */
   Page?: number
