@@ -3592,7 +3592,7 @@ export interface CreateWhiteListOrderRequest {
   /**
    * 订单类型, 1 试用 2 赠送 3 体验 4 SSL-证书赠送 5 cvm赠送
    */
-  SourceType?: number
+  SourceType: number
   /**
    * 地域, 1 广州 9新加坡, 默认为 1. 非必要情况不要选9
    */
@@ -7595,6 +7595,10 @@ export interface ModifyLogStorageConfigRequest {
    * 日志存储时长单位，年year/月month/天day
    */
   Granularity?: string
+  /**
+   * 语言类型
+   */
+  MsgLanguage?: string
 }
 
 /**
@@ -24309,6 +24313,10 @@ export interface DescribeLogStorageConfigResponse {
    * 日志存储时长单位，年year/月month/天day
    */
   Granularity?: string
+  /**
+   * 语言类型
+   */
+  MsgLanguage?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

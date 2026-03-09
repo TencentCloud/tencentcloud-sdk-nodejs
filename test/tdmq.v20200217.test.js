@@ -28,16 +28,6 @@ it("tdmq.v20200217.DeleteEnvironments", async function () {
     }
 })
 
-it("tdmq.v20200217.CreateCluster", async function () {
-    try {
-       const data = await client.CreateCluster({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tdmq.v20200217.DescribeRocketMQConsumeStats", async function () {
     try {
        const data = await client.DescribeRocketMQConsumeStats({})
@@ -48,9 +38,9 @@ it("tdmq.v20200217.DescribeRocketMQConsumeStats", async function () {
     }
 })
 
-it("tdmq.v20200217.DeleteRoles", async function () {
+it("tdmq.v20200217.DescribeRabbitMQVirtualHost", async function () {
     try {
-       const data = await client.DeleteRoles({})
+       const data = await client.DescribeRabbitMQVirtualHost({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1018,9 +1008,9 @@ it("tdmq.v20200217.CreateProCluster", async function () {
     }
 })
 
-it("tdmq.v20200217.DescribeRabbitMQVirtualHost", async function () {
+it("tdmq.v20200217.DeleteRoles", async function () {
     try {
-       const data = await client.DescribeRabbitMQVirtualHost({})
+       const data = await client.DeleteRoles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

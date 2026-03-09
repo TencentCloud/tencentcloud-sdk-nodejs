@@ -1441,32 +1441,32 @@ Number 数字
  */
 export interface DescribeTelCallInfoResponse {
   /**
-   * 呼出套餐包消耗分钟数
+   * <p>呼出套餐包消耗分钟数</p>
    */
   TelCallOutCount?: number
   /**
-   * 呼入套餐包消耗分钟数
+   * <p>呼入套餐包消耗分钟数</p>
    */
   TelCallInCount?: number
   /**
-   * 坐席使用统计个数
+   * <p>坐席使用统计个数</p>
    */
   SeatUsedCount?: number
   /**
-   * 音频套餐包消耗分钟数
+   * <p>音频套餐包消耗分钟数</p>
    * @deprecated
    */
   VoipCallInCount?: number
   /**
-   * 音频套餐包消耗分钟数
+   * <p>音频套餐包消耗分钟数</p>
    */
   VOIPCallInCount?: number
   /**
-   * 离线语音转文字套餐包消耗分钟数
+   * <p>离线语音转文字套餐包消耗分钟数</p>
    */
   AsrOfflineCount?: number
   /**
-   * 实时语音转文字套餐包消耗分钟数
+   * <p>实时语音转文字套餐包消耗分钟数</p>
    */
   AsrRealtimeCount?: number
   /**
@@ -2044,11 +2044,11 @@ export interface UploadIvrAudioRequest {
  */
 export interface DescribeStaffInfoListResponse {
   /**
-   * 坐席用户总数
+   * <p>坐席用户总数</p>
    */
   TotalCount?: number
   /**
-   * 坐席用户信息列表
+   * <p>坐席用户信息列表</p>
    */
   StaffList?: Array<StaffInfo>
   /**
@@ -2761,27 +2761,27 @@ export interface UpdatePredictiveDialingCampaignRequest {
  */
 export interface DescribeStaffInfoListRequest {
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * <p>应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc</p>
    */
   SdkAppId: number
   /**
-   * 分页尺寸，上限 9999
+   * <p>分页尺寸，上限 9999</p>
    */
   PageSize: number
   /**
-   * 分页页码，从 0 开始
+   * <p>分页页码，从 0 开始</p>
    */
   PageNumber: number
   /**
-   * 坐席账号，查询单个坐席时使用
+   * <p>坐席账号，查询单个坐席时使用</p>
    */
   StaffMail?: string
   /**
-   * 查询修改时间大于等于ModifiedTime的坐席时使用
+   * <p>查询修改时间大于等于ModifiedTime的坐席时使用</p>
    */
   ModifiedTime?: number
   /**
-   * 技能组ID
+   * <p>技能组ID</p>
    */
   SkillGroupId?: number
 }
@@ -3820,15 +3820,15 @@ export interface DescribePredictiveDialingCampaignsResponse {
  */
 export interface DescribeTelCallInfoRequest {
   /**
-   * 起始时间戳，Unix 时间戳(查询维度仅支持天，例如查询5月1日应该传startTime:"2023-05-01 00:00:00","endTime":"2023-05-01 23:59:59"的时间戳,查5月1日和5月2日的应该传startTime:"2023-05-01 00:00:00","endTime":"2023-05-02 23:59:59"的时间戳)
+   * <p>起始时间戳，Unix 时间戳(查询维度仅支持天，例如查询5月1日应该传startTime:&quot;2023-05-01 00:00:00&quot;,&quot;endTime&quot;:&quot;2023-05-01 23:59:59&quot;的时间戳,查5月1日和5月2日的应该传startTime:&quot;2023-05-01 00:00:00&quot;,&quot;endTime&quot;:&quot;2023-05-02 23:59:59&quot;的时间戳)</p>
    */
   StartTimeStamp: number
   /**
-   * 结束时间戳，Unix 时间戳，查询时间范围最大为90天(查询维度仅支持天，例如查询5月1日应该传startTime:"2023-05-01 00:00:00","endTime":"2023-05-01 23:59:59"的时间戳,查5月1日和5月2日的应该传startTime:"2023-05-01 00:00:00","endTime":"2023-05-02 23:59:59"的时间戳)
+   * <p>结束时间戳，Unix 时间戳，查询时间范围最大为90天(查询维度仅支持天，例如查询5月1日应该传startTime:&quot;2023-05-01 00:00:00&quot;,&quot;endTime&quot;:&quot;2023-05-01 23:59:59&quot;的时间戳,查5月1日和5月2日的应该传startTime:&quot;2023-05-01 00:00:00&quot;,&quot;endTime&quot;:&quot;2023-05-02 23:59:59&quot;的时间戳)</p>
    */
   EndTimeStamp: number
   /**
-   * 应用ID列表，多个ID时，返回值为多个ID使用总和
+   * <p>应用ID列表，多个ID时，返回值为多个ID使用总和</p>
    */
   SdkAppIdList: Array<number | bigint>
 }

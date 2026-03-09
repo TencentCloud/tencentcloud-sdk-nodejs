@@ -5195,6 +5195,40 @@ export interface CreateDealsRequest {
 }
 
 /**
+ * DescribeApiSecSensitiveRuleList请求参数结构体
+ */
+export interface DescribeApiSecSensitiveRuleListRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 是否查询api提取规则策略，true表示查询
+   */
+  IsQueryApiExtractRule?: boolean
+  /**
+   * 是否查询api鉴权规则
+   */
+  IsQueryApiPrivilegeRule?: boolean
+  /**
+   * 是否查询api场景规则
+   */
+  IsQueryApiSceneRule?: boolean
+  /**
+   * 查询鉴权配置的时候，该rule只返回鉴权配置的规则
+   */
+  RuleName?: string
+  /**
+   * 是否查询api自定义事件规则
+   */
+  IsQueryApiCustomEventRule?: boolean
+  /**
+   * 是否查询无效api排除策略
+   */
+  IsQueryApiExcludeRule?: boolean
+}
+
+/**
  * ModifyCustomWhiteRule返回参数结构体
  */
 export interface ModifyCustomWhiteRuleResponse {
@@ -6172,41 +6206,37 @@ export interface ModifyProtectionLevelResponse {
 }
 
 /**
- * 业务安全资源信息
+ * api安全敏感规则列表
  */
-export interface FraudPkg {
+export interface ApiSecSensitiveRule {
   /**
-   * 资源id
+   * 身份证号，唯一主键
    */
-  ResourceIds?: string
+  RuleName?: string
   /**
-   * 状态
+   * 表示OS系统内置，"custom"表示客户自定义
+   */
+  Source?: string
+  /**
+   * 开关状态，0：表示关，1表示开
    */
   Status?: number
   /**
-   * 地域
+   * 风险等级，100，200,300表示低中高三个等级
    */
-  Region?: number
+  Level?: string
   /**
-   * 开始时间
+   * 修改时间，默认0，表示没有进行修改
    */
-  BeginTime?: string
+  Timestamp?: number
   /**
-   * 结束时间
+   * 自定义规则部分
    */
-  EndTime?: string
+  CustomRule?: ApiSecCustomSensitiveRule
   /**
-   * 申请数量
+   * 是否泛化 0:不泛化，1:泛化
    */
-  InquireNum?: number
-  /**
-   * 使用数量
-   */
-  UsedNum?: number
-  /**
-   * 续费标志
-   */
-  RenewFlag?: number
+  IsPan?: number
 }
 
 /**
@@ -8311,6 +8341,44 @@ export interface ModifyBatchIpAccessControlResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 业务安全资源信息
+ */
+export interface FraudPkg {
+  /**
+   * 资源id
+   */
+  ResourceIds?: string
+  /**
+   * 状态
+   */
+  Status?: number
+  /**
+   * 地域
+   */
+  Region?: number
+  /**
+   * 开始时间
+   */
+  BeginTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 申请数量
+   */
+  InquireNum?: number
+  /**
+   * 使用数量
+   */
+  UsedNum?: number
+  /**
+   * 续费标志
+   */
+  RenewFlag?: number
 }
 
 /**
@@ -13952,6 +14020,60 @@ export interface ModifyHostStatusResponse {
    * 成功的状态码，需要JSON解码后再使用，返回的格式是{"域名":"状态"}，成功的状态码为Success，其它的为失败的状态码（yunapi定义的错误码）
    */
   Success?: ResponseCode
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeApiSecSensitiveRuleList返回参数结构体
+ */
+export interface DescribeApiSecSensitiveRuleListResponse {
+  /**
+   * api敏感规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<ApiSecSensitiveRule>
+  /**
+   * 规则数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * 自定义敏感检测规则总开关
+   */
+  Status?: number
+  /**
+   * 非内置规则的rulename列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleNameList?: Array<string>
+  /**
+   * api提取规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiExtractRule?: Array<ApiSecExtractRule>
+  /**
+   * api鉴权规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiSecPrivilegeRule?: Array<ApiSecPrivilegeRule>
+  /**
+   * api场景规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiSecSceneRule?: Array<ApiSecSceneRule>
+  /**
+   * 自定义事件规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiSecCustomEventRule?: Array<ApiSecCustomEventRule>
+  /**
+   * 无效api排除规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiExcludeRule?: Array<ApiSecExcludeRule>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

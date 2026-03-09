@@ -557,6 +557,11 @@ export interface NotebookSetItem {
    * 容器服务暴露端口配置
    */
   ExposePortConfig?: ExposePortConfig
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
 }
 
 /**
@@ -666,6 +671,10 @@ export interface AuthTokenBase {
    * token状态
    */
   Status?: string
+  /**
+   * token的唯一id，与value一一对应，重置后id也会一并变化
+   */
+  Id?: string
 }
 
 /**
@@ -1255,6 +1264,10 @@ export interface DescribeTrainingTaskRequest {
    * 训练任务ID
    */
   Id: string
+  /**
+   * 训练任务实例ID
+   */
+  InstanceId?: string
 }
 
 /**
@@ -2342,6 +2355,10 @@ GooseFSx：GooseFSx存储
    * GooseFS存储配置
    */
   VolumeSourceGooseFS?: GooseFS
+  /**
+   * 描述
+   */
+  Description?: string
 }
 
 /**
@@ -2468,6 +2485,10 @@ POSTPAID_BY_HOUR：按小时后付费
    * 自定义环境变量
    */
   Envs?: Array<EnvVar>
+  /**
+   * 描述
+   */
+  Description?: string
 }
 
 /**
@@ -5023,6 +5044,11 @@ export interface NotebookDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
 }
 
 /**

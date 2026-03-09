@@ -4392,6 +4392,32 @@ export interface AiAnalysisTaskCoverResult {
 }
 
 /**
+ * 大模型解析人脸识别配置
+ */
+export interface LLMComprehendFaceRecognitionForUpdate {
+  /**
+   *
+   */
+  Switch?: string
+  /**
+   *
+   */
+  Score?: number
+  /**
+   *
+   */
+  DefaultLibraryLabelSet?: Array<string>
+  /**
+   *
+   */
+  UserDefineLibraryLabelSet?: Array<string>
+  /**
+   *
+   */
+  FaceLibrary?: string
+}
+
+/**
  * DescribeEventConfig请求参数结构体
  */
 export interface DescribeEventConfigRequest {
@@ -9628,6 +9654,32 @@ export interface DeleteHeadTailTemplateRequest {
 }
 
 /**
+ * 大模型解析人脸识别配置
+ */
+export interface LLMComprehendFaceRecognition {
+  /**
+   *
+   */
+  Switch: string
+  /**
+   *
+   */
+  Score?: number
+  /**
+   *
+   */
+  DefaultLibraryLabelSet?: Array<string>
+  /**
+   *
+   */
+  UserDefineLibraryLabelSet?: Array<string>
+  /**
+   *
+   */
+  FaceLibrary?: string
+}
+
+/**
  * 智能标签结果类型
  */
 export interface AiAnalysisTaskTagResult {
@@ -10669,7 +10721,7 @@ export interface DescribeHeadTailTemplatesRequest {
  */
 export interface CreateLLMComprehendTemplateResponse {
   /**
-   * 大模型理解模板的唯一标识
+   * <p>大模型理解模板的唯一标识</p>
    */
   Definition?: number
   /**
@@ -11442,35 +11494,37 @@ export interface LiveRealTimeClipMediaSegmentInfo {
  */
 export interface ModifyLLMComprehendTemplateRequest {
   /**
-   * 大模型理解模板的唯一标识
+   * <p>大模型理解模板的唯一标识</p>
    */
   Definition: number
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 大模型解析模板名称，长度限制：64 个字符。
+   * <p>大模型解析模板名称，长度限制：64 个字符。</p>
    */
   Name?: string
   /**
-   * 大模型解析模板描述信息，长度限制：256 个字符。
+   * <p>大模型解析模板描述信息，长度限制：256 个字符。</p>
    */
   Comment?: string
   /**
-   * 解析模型，可选值为：
-- Basic: 基础模型
-- Pro: 优化模型
+   * <p>解析模型，可选值为：</p><ul><li>Basic: 基础模型</li><li>Pro: 优化模型</li></ul>
    */
   Model?: string
   /**
-   * 分段摘要解析配置
+   * <p>分段摘要解析配置</p>
    */
   Summary?: LLMComprehendSummaryForUpdate
   /**
-   * 文本转录解析配置
+   * <p>文本转录解析配置</p>
    */
   Asr?: LLMComprehendAsrForUpdate
+  /**
+   * <p>人脸识别配置</p>
+   */
+  FaceRecognition?: LLMComprehendFaceRecognitionForUpdate
 }
 
 /**
@@ -14802,31 +14856,33 @@ export interface DeleteReviewTemplateRequest {
  */
 export interface CreateLLMComprehendTemplateRequest {
   /**
-   * 解析级别，可选值为：
-- Audio: 音频级解析
-- Video: 视频级解析
+   * <p>解析级别，可选值为：</p><ul><li>Audio: 音频级解析</li><li>Video: 视频级解析</li></ul>
    */
   Level: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 大模型解析模板名称，长度限制：64 个字符。
+   * <p>大模型解析模板名称，长度限制：64 个字符。</p>
    */
   Name?: string
   /**
-   * 大模型解析模板描述信息，长度限制：256 个字符。
+   * <p>大模型解析模板描述信息，长度限制：256 个字符。</p>
    */
   Comment?: string
   /**
-   * 分段摘要解析配置
+   * <p>分段摘要解析配置</p>
    */
   Summary?: LLMComprehendSummary
   /**
-   * 文本转录解析配置
+   * <p>文本转录解析配置</p>
    */
   Asr?: LLMComprehendAsr
+  /**
+   * <p>人脸识别配置</p>
+   */
+  FaceRecognition?: LLMComprehendFaceRecognition
 }
 
 /**
@@ -18522,7 +18578,7 @@ SVG 水印不支持截图打水印。
  */
 export interface SearchMediaBySemanticsResponse {
   /**
-   * 媒体列表。
+   * <p>媒体列表。</p>
    */
   SearchResults?: Array<SemanticsSearchResult>
   /**
@@ -25349,29 +25405,31 @@ export interface DescribeJustInTimeTranscodeTemplatesRequest {
  */
 export interface SearchMediaBySemanticsRequest {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId: number
   /**
-   * 需要进行搜索的内容
+   * <p>需要进行搜索的内容</p>
    */
   Text: string
   /**
-   * 返回的记录条数，默认值：20。
+   * <p>返回的记录条数，默认值：20。</p><p>取值范围：[1, 100]</p>
    */
   Limit?: number
   /**
-   * 文件类型。匹配集合中的任意元素： <li>Video: 视频文件</li> <li>Audio: 音频文件</li> <li>Image: 图片文件</li>
+   * <p>文件类型。匹配集合中的任意元素： <li>Video: 视频文件</li> <li>Audio: 音频文件</li> <li>Image: 图片文件</li></p>
    */
   Categories?: Array<string>
   /**
-   * 标签集合，匹配集合中任意元素。 <li>单个标签长度限制：32个字符。</li> <li>数组长度限制：16。</li>
+   * <p>标签集合，匹配集合中任意元素。</p><p>入参限制：单个标签长度限制：32个字符。数组长度限制：16。</p>
    */
   Tags?: Array<string>
   /**
-   * 搜索的任务类型，可选值有： 
-- AiAnalysis.DescriptionTask 
-- SmartSubtitle.AsrFullTextTask
+   * <p>人物集合，匹配出现了所有传入人物的片段</p><p>入参限制：数组长度限制：16</p>
+   */
+  Persons?: Array<string>
+  /**
+   * <p>搜索的任务类型，可选值有： </p><ul><li>AiAnalysis.DescriptionTask </li><li>SmartSubtitle.AsrFullTextTask</li></ul>
    */
   TaskTypes?: Array<string>
 }

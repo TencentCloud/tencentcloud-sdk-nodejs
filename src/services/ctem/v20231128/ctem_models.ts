@@ -2987,11 +2987,11 @@ export interface DisplayApp {
  */
 export interface DescribeApiSecsResponse {
   /**
-   * 总数
+   * <p>总数</p>
    */
   Total?: number
   /**
-   * API安全数组
+   * <p>API安全数组</p>
    */
   List?: Array<DisplayApiSec>
   /**
@@ -5026,9 +5026,13 @@ export interface DescribeApiSecsRequest {
    */
   Filters?: Array<Filter>
   /**
-   * 企业ID
+   * <p>企业ID</p>
    */
   CustomerId?: number
+  /**
+   * <p>排序方式</p>
+   */
+  OrderBy?: string
 }
 
 /**

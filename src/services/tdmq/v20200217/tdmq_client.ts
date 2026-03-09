@@ -77,7 +77,6 @@ import {
   DescribeRocketMQClustersRequest,
   SendRocketMQMessageRequest,
   CreateRocketMQGroupV2Response,
-  CreateClusterResponse,
   DeleteRocketMQNamespaceRequest,
   DeleteRabbitMQPermissionRequest,
   CreateTopicResponse,
@@ -377,7 +376,6 @@ import {
   RocketMQClusterDetail,
   DescribeRocketMQGroupsResponse,
   DescribeRocketMQConsumerConnectionDetailResponse,
-  CreateClusterRequest,
   DeleteProClusterResponse,
   ModifyCmqQueueAttributeResponse,
   DescribeCmqQueuesRequest,
@@ -439,16 +437,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建用户的集群
-   */
-  async CreateCluster(
-    req: CreateClusterRequest,
-    cb?: (error: string, rep: CreateClusterResponse) => void
-  ): Promise<CreateClusterResponse> {
-    return this.request("CreateCluster", req, cb)
-  }
-
-  /**
      * 查询 RocketMQ 消费详情列表。
 当前 API 适用集群：4.x 虚拟集群，4.x 专享集群 和 4.x 通用集群。查询 5.x 集群消费详情的接口文档见 [DescribeConsumerGroup](https://cloud.tencent.com/document/api/1493/97941)。
      */
@@ -460,13 +448,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除角色，支持批量。
+   * 查询RabbitMQ vhost列表
    */
-  async DeleteRoles(
-    req: DeleteRolesRequest,
-    cb?: (error: string, rep: DeleteRolesResponse) => void
-  ): Promise<DeleteRolesResponse> {
-    return this.request("DeleteRoles", req, cb)
+  async DescribeRabbitMQVirtualHost(
+    req: DescribeRabbitMQVirtualHostRequest,
+    cb?: (error: string, rep: DescribeRabbitMQVirtualHostResponse) => void
+  ): Promise<DescribeRabbitMQVirtualHostResponse> {
+    return this.request("DescribeRabbitMQVirtualHost", req, cb)
   }
 
   /**
@@ -1471,13 +1459,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询RabbitMQ vhost列表
+   * 删除角色，支持批量。
    */
-  async DescribeRabbitMQVirtualHost(
-    req: DescribeRabbitMQVirtualHostRequest,
-    cb?: (error: string, rep: DescribeRabbitMQVirtualHostResponse) => void
-  ): Promise<DescribeRabbitMQVirtualHostResponse> {
-    return this.request("DescribeRabbitMQVirtualHost", req, cb)
+  async DeleteRoles(
+    req: DeleteRolesRequest,
+    cb?: (error: string, rep: DeleteRolesResponse) => void
+  ): Promise<DeleteRolesResponse> {
+    return this.request("DeleteRoles", req, cb)
   }
 
   /**

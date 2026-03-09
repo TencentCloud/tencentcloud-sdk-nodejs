@@ -752,14 +752,11 @@ export interface AddDBInstanceToReadOnlyGroupRequest {
  */
 export interface DescribeProductConfigRequest {
   /**
-   * 可用区名称
+   * <p>可用区名称</p>
    */
   Zone?: string
   /**
-   * 数据库引擎，支持：
-1、postgresql（云数据库PostgreSQL）；
-2、mssql_compatible（MSSQL兼容-云数据库PostgreSQL）；
-如不指定默认使用postgresql。
+   * <p>数据库引擎，支持：<br>1、postgresql（云数据库PostgreSQL）；<br>2、mssql_compatible（MSSQL兼容-云数据库PostgreSQL）；<br>如不指定默认使用postgresql。</p>
    */
   DBEngine?: string
 }
@@ -2766,17 +2763,15 @@ export interface DeleteParameterTemplateRequest {
  */
 export interface DescribeClassesRequest {
   /**
-   * 可用区名称。可以通过接口[DescribeZones](https://cloud.tencent.com/document/product/409/16769)获取。
+   * <p>可用区名称。可以通过接口<a href="https://cloud.tencent.com/document/product/409/16769">DescribeZones</a>获取。</p>
    */
   Zone: string
   /**
-   * 数据库引擎，支持：
-1、postgresql（云数据库PostgreSQL）；
-2、mssql_compatible（MSSQL兼容-云数据库PostgreSQL）；
+   * <p>数据库引擎，支持：<br>1、postgresql（云数据库PostgreSQL）；<br>2、mssql_compatible（MSSQL兼容-云数据库PostgreSQL）；</p>
    */
   DBEngine: string
   /**
-   * 数据库主版本号。例如12，13，可以通过接口[DescribeDBVersions](https://cloud.tencent.com/document/product/409/89018)获取。
+   * <p>数据库主版本号。例如12，13，可以通过接口<a href="https://cloud.tencent.com/document/product/409/89018">DescribeDBVersions</a>获取。</p>
    */
   DBMajorVersion: string
 }
@@ -3727,7 +3722,7 @@ export interface OpenAccountCAMRequest {
  */
 export interface DescribeClassesResponse {
   /**
-   * 数据库规格列表
+   * <p>数据库规格列表</p>
    */
   ClassInfoSet?: Array<ClassInfo>
   /**
@@ -4185,7 +4180,7 @@ export interface ModifyParameterTemplateRequest {
  */
 export interface DescribeDBVersionsResponse {
   /**
-   * 数据库版本号信息列表
+   * <p>数据库版本号信息列表</p>
    */
   VersionSet?: Array<Version>
   /**
@@ -4484,7 +4479,7 @@ export interface DescribeDatabasesResponse {
  */
 export interface DescribeProductConfigResponse {
   /**
-   * 售卖规格列表。
+   * <p>售卖规格列表。</p>
    */
   SpecInfoList?: Array<SpecInfo>
   /**
@@ -4950,11 +4945,11 @@ export interface ModifyDatabaseOwnerResponse {
  */
 export interface ModifySwitchTimePeriodRequest {
   /**
-   * 处于等待切换状态中的实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   * <p>处于等待切换状态中的实例ID。可通过<a href="https://cloud.tencent.com/document/api/409/16773">DescribeDBInstances</a>接口获取</p>
    */
   DBInstanceId: string
   /**
-   * 入参取值为 0 ，代表立即切换。
+   * <p>入参取值为 0 ，代表立即切换。</p>
    */
   SwitchTag: number
 }

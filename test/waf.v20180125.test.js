@@ -828,9 +828,9 @@ it("waf.v20180125.DescribePeakValue", async function () {
     }
 })
 
-it("waf.v20180125.ModifyWafThreatenIntelligence", async function () {
+it("waf.v20180125.DescribeApiSecSensitiveRuleList", async function () {
     try {
-       const data = await client.ModifyWafThreatenIntelligence({})
+       const data = await client.DescribeApiSecSensitiveRuleList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -981,6 +981,16 @@ it("waf.v20180125.DescribeTopAttackDomain", async function () {
 it("waf.v20180125.ModifyBotSceneStatus", async function () {
     try {
        const data = await client.ModifyBotSceneStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyWafThreatenIntelligence", async function () {
+    try {
+       const data = await client.ModifyWafThreatenIntelligence({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

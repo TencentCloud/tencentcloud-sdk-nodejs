@@ -820,6 +820,10 @@ export interface ModifyClusterMachineRequest {
    */
   SystemDisk?: Disk
   /**
+   * 安全组列表
+   */
+  SecurityGroupIDs?: Array<string>
+  /**
    * 节点预付费信息
    */
   InstanceChargePrepaid?: InstanceChargePrepaid
@@ -1153,13 +1157,19 @@ export interface UpdateNativeNodePoolParam {
    */
   Replicas?: number
   /**
-   * 是否更新存量节点
+   * 是否更新存量节点MetaData(包括： metadata、annotation、label)
    */
   UpdateExistedNode?: boolean
   /**
    * 数据盘列表
    */
   DataDisks?: Array<DataDisk>
+  /**
+   * 节点management参数存量更新开关，有enable（打开）、disable（关闭）两个状态可选
+
+management包括：nameserver、host、kubelet、kernel参数
+   */
+  UpdateMachineManagement?: string
   /**
    * ssh公钥id数组
    */

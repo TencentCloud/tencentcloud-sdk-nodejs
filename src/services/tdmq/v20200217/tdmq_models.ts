@@ -1889,20 +1889,6 @@ export interface CreateRocketMQGroupV2Response {
 }
 
 /**
- * CreateCluster返回参数结构体
- */
-export interface CreateClusterResponse {
-  /**
-   * 集群ID
-   */
-  ClusterId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DeleteRocketMQNamespace请求参数结构体
  */
 export interface DeleteRocketMQNamespaceRequest {
@@ -10249,32 +10235,6 @@ export interface DescribeRocketMQConsumerConnectionDetailResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * CreateCluster请求参数结构体
- */
-export interface CreateClusterRequest {
-  /**
-   * 集群名称，不支持中字以及除了短线和下划线外的特殊字符且不超过64个字符。
-   */
-  ClusterName: string
-  /**
-   * 用户专享物理集群ID，如果不传，则默认在公共集群上创建用户集群资源。
-   */
-  BindClusterId?: number
-  /**
-   * 说明，128个字符以内。
-   */
-  Remark?: string
-  /**
-   * 集群的标签列表(已废弃)
-   */
-  Tags?: Array<Tag>
-  /**
-   * 是否开启公网访问，不填时默认开启
-   */
-  PublicAccessEnabled?: boolean
 }
 
 /**

@@ -215,6 +215,7 @@ import {
   ModifyInstanceAttackLogPostRequest,
   GetInstanceQpsLimitResponse,
   CreateDealsRequest,
+  DescribeApiSecSensitiveRuleListRequest,
   ModifyCustomWhiteRuleResponse,
   SearchItem,
   ApiPkg,
@@ -250,7 +251,7 @@ import {
   PortInfo,
   AddAttackWhiteRuleRequest,
   ModifyProtectionLevelResponse,
-  FraudPkg,
+  ApiSecSensitiveRule,
   JWTConfig,
   UCBEntryValue,
   DescribeDomainDetailsClbResponse,
@@ -337,6 +338,7 @@ import {
   BotSceneActionRule,
   SessionItem,
   ModifyBatchIpAccessControlResponse,
+  FraudPkg,
   DescribeAccessExportsRequest,
   DescribeCustomWhiteRuleRequest,
   DeleteAntiFakeUrlResponse,
@@ -521,6 +523,7 @@ import {
   InOutputBotUCBRule,
   AttackLogInfo,
   ModifyHostStatusResponse,
+  DescribeApiSecSensitiveRuleListResponse,
   ModifyOwaspRuleTypeStatusRequest,
   QPSPackageNew,
   LogHistogramInfo,
@@ -1422,13 +1425,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 配置WAF威胁情报封禁模块详情
+   * 获取api安全敏感规则列表
    */
-  async ModifyWafThreatenIntelligence(
-    req: ModifyWafThreatenIntelligenceRequest,
-    cb?: (error: string, rep: ModifyWafThreatenIntelligenceResponse) => void
-  ): Promise<ModifyWafThreatenIntelligenceResponse> {
-    return this.request("ModifyWafThreatenIntelligence", req, cb)
+  async DescribeApiSecSensitiveRuleList(
+    req: DescribeApiSecSensitiveRuleListRequest,
+    cb?: (error: string, rep: DescribeApiSecSensitiveRuleListResponse) => void
+  ): Promise<DescribeApiSecSensitiveRuleListResponse> {
+    return this.request("DescribeApiSecSensitiveRuleList", req, cb)
   }
 
   /**
@@ -1579,6 +1582,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyBotSceneStatusResponse) => void
   ): Promise<ModifyBotSceneStatusResponse> {
     return this.request("ModifyBotSceneStatus", req, cb)
+  }
+
+  /**
+   * 配置WAF威胁情报封禁模块详情
+   */
+  async ModifyWafThreatenIntelligence(
+    req: ModifyWafThreatenIntelligenceRequest,
+    cb?: (error: string, rep: ModifyWafThreatenIntelligenceResponse) => void
+  ): Promise<ModifyWafThreatenIntelligenceResponse> {
+    return this.request("ModifyWafThreatenIntelligence", req, cb)
   }
 
   /**
