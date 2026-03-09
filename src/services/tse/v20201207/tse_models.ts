@@ -229,6 +229,20 @@ export interface DescribeCloudNativeAPIGatewayCertificatesRequest {
 }
 
 /**
+ * DeleteGovernanceLaneGroups返回参数结构体
+ */
+export interface DeleteGovernanceLaneGroupsResponse {
+  /**
+   * 是否创建成功
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 删除云原生API网关响应结果。
  */
 export interface DeleteCloudNativeAPIGatewayResult {
@@ -262,6 +276,62 @@ export interface CloseWafProtectionRequest {
    * 当资源类型 Type 是 Service 或 Route 的时候，传入的服务或路由的列表
    */
   List?: Array<string>
+}
+
+/**
+ * 泳道组
+ */
+export interface DeleteGovernanceLaneGroup {
+  /**
+   * 泳道名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * 泳道组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ID?: string
+  /**
+   * 泳道入口服务列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrafficEntries?: Array<LaneTrafficEntry>
+  /**
+   * 泳道服务列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Destinations?: Array<GovernanceServiceDestination>
+  /**
+   * 泳道组描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 规则内容摘要
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Revision?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 规则一致性状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Consistency?: string
+  /**
+   * 泳道规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rules?: Array<GovernanceLaneRule>
 }
 
 /**
@@ -340,6 +410,24 @@ export interface DescribePublicNetworkResult {
    * 客户端公网信息
    */
   PublicNetwork?: CloudNativeAPIGatewayConfig
+}
+
+/**
+ * DescribeGovernanceLaneGroups返回参数结构体
+ */
+export interface DescribeGovernanceLaneGroupsResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 泳道规则列表
+   */
+  LaneGroups?: Array<GovernanceLaneGroup>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -686,6 +774,27 @@ export interface DescribeCloudNativeAPIGatewayServicesRequest {
 }
 
 /**
+ * 服务实例组
+ */
+export interface GovernanceServiceDestination {
+  /**
+   * 命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace: string
+  /**
+   * 服务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Service: string
+  /**
+   * 实例标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Labels?: Array<RoutingDestinationRuleLabel>
+}
+
+/**
  * CreateCloudNativeAPIGatewayCanaryRule返回参数结构体
  */
 export interface CreateCloudNativeAPIGatewayCanaryRuleResponse {
@@ -707,6 +816,20 @@ export interface DeleteGovernanceNamespacesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 标签
+ */
+export interface Label {
+  /**
+   * 标签键名称
+   */
+  Key?: string
+  /**
+   * 标签值
+   */
+  Value?: string
 }
 
 /**
@@ -1539,75 +1662,45 @@ export interface ModifyCloudNativeAPIGatewayServiceRateLimitRequest {
 }
 
 /**
- * 云原生网关分组信息
+ * 云原生API网关节点信息。
  */
-export interface NativeGatewayServerGroup {
+export interface CloudNativeAPIGatewayNode {
   /**
-   * 云原生网关分组唯一id
+   * 云原生网关节点 id
+   */
+  NodeId?: string
+  /**
+   * 节点 ip
+   */
+  NodeIp?: string
+  /**
+   * Zone id
+   */
+  ZoneId?: string
+  /**
+   * Zone
+   */
+  Zone?: string
+  /**
+   * 分组ID
    */
   GroupId?: string
   /**
    * 分组名
    */
-  Name?: string
+  GroupName?: string
   /**
-   * 描述信息
-   */
-  Description?: string
-  /**
-   * 节点规格、节点数信息
-   */
-  NodeConfig?: CloudNativeAPIGatewayNodeConfig
-  /**
-   * 网关分组状态。
+   * 状态
    */
   Status?: string
   /**
-   * 创建时间
+   * 节点权重
    */
-  CreateTime?: string
+  Weight?: number
   /**
-   * 是否是默认分组。
-0：否。
-1：是。
+   * 是否默认权重
    */
-  IsFirstGroup?: number
-  /**
-   * 关联策略信息
-   */
-  BindingStrategy?: CloudNativeAPIGatewayStrategy
-  /**
-   * 网关实例 id
-   */
-  GatewayId?: string
-  /**
-   * 带宽
-   */
-  InternetMaxBandwidthOut?: number
-  /**
-   * 修改时间
-   */
-  ModifyTime?: string
-  /**
-   * 子网id
-   */
-  SubnetIds?: string
-  /**
-   * 分组默认权重
-   */
-  DefaultWeight?: number
-  /**
-   * 弹性节点
-   */
-  ElasticNumber?: number
-  /**
-   * 是否支持TOA
-   */
-  SupportTOA?: boolean
-  /**
-   * 是否支持IPV6
-   */
-  SupportIPV6?: boolean
+  IsDefaultWeight?: boolean
 }
 
 /**
@@ -1621,21 +1714,43 @@ export interface ModifyNetworkAccessStrategyResponse {
 }
 
 /**
- * RestartSREInstance请求参数结构体
+ * ModifyAutoScalerResourceStrategy请求参数结构体
  */
-export interface RestartSREInstanceRequest {
+export interface ModifyAutoScalerResourceStrategyRequest {
   /**
-   * 微服务引擎实例Id
+   * 网关实例ID
    */
-  InstanceId: string
+  GatewayId: string
   /**
-   * 重启的环境类型（PROD，DEV，UAT等）
+   * 策略ID
    */
-  EnvTypes?: Array<string>
+  StrategyId: string
   /**
-   * 指定需要重启的实例节点（当前仅支持zk单节点重启）
+   * 策略名称
    */
-  NodeName?: string
+  StrategyName?: string
+  /**
+   * 策略描述
+   */
+  Description?: string
+  /**
+   * 指标伸缩配置
+   */
+  Config?: CloudNativeAPIGatewayStrategyAutoScalerConfig
+  /**
+   * 定时伸缩配置
+   * @deprecated
+   */
+  CronScalerConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig
+  /**
+   * 最大节点数
+   * @deprecated
+   */
+  MaxReplicas?: number
+  /**
+   * 指标伸缩配置
+   */
+  CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig
 }
 
 /**
@@ -1729,13 +1844,17 @@ export interface ReleaseVersion {
 }
 
 /**
- * 查询Limiter的接入地址
+ * CreateConfigFileGroup返回参数结构体
  */
-export interface PolarisLimiterAddress {
+export interface CreateConfigFileGroupResponse {
   /**
-   * VPC接入IP列表
+   * 是否创建成功
    */
-  IntranetAddress?: string
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2494,6 +2613,20 @@ export interface DescribeSREInstanceAccessAddressRequest {
 }
 
 /**
+ * ModifyGovernanceLaneGroups请求参数结构体
+ */
+export interface ModifyGovernanceLaneGroupsRequest {
+  /**
+   * 引擎实例ID
+   */
+  InstanceId: string
+  /**
+   * 泳道组规则列表
+   */
+  LaneGroups: Array<GovernanceLaneGroup>
+}
+
+/**
  * ModifyGovernanceInstances返回参数结构体
  */
 export interface ModifyGovernanceInstancesResponse {
@@ -2866,17 +2999,31 @@ export interface CreateNativeGatewayServiceSourceRequest {
 }
 
 /**
- * 云原生网关限流插件Qps阈值
+ * CreateGovernanceLaneGroups请求参数结构体
  */
-export interface QpsThreshold {
+export interface CreateGovernanceLaneGroupsRequest {
   /**
-   * qps阈值控制维度,包含:second、minute、hour、day、month、year
+   * 引擎实例ID
    */
-  Unit: string
+  InstanceId: string
   /**
-   * 阈值
+   * 泳道组规则列表
    */
-  Max: number
+  LaneGroups: Array<GovernanceLaneGroup>
+}
+
+/**
+ * 获取云原生API网关实例策略响应结果。
+ */
+export interface ListCloudNativeAPIGatewayStrategyResult {
+  /**
+   * 总数。
+   */
+  TotalCount: number
+  /**
+   * 云原生API网关实例策略列表。
+   */
+  StrategyList: Array<CloudNativeAPIGatewayStrategy>
 }
 
 /**
@@ -4391,6 +4538,49 @@ export interface UpdateCloudNativeAPIGatewayResult {
 }
 
 /**
+ * 普通服务选择器
+ */
+export interface ServiceSelector {
+  /**
+   * 命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace: string
+  /**
+   * 服务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Service: string
+  /**
+   * 实例标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Labels?: Array<Label>
+}
+
+/**
+ * 泳道流量灰度规则
+ */
+export interface TrafficGray {
+  /**
+   * 流量灰度规则，按比例灰度或预热方式
+   */
+  Mode?: string
+  /**
+   * 按比例灰度的百分比值1-100
+   */
+  Percent?: number
+  /**
+   * 预热的间隔
+   */
+  IntervalSecond?: number
+  /**
+   * 预热的曲度
+   */
+  Curvature?: number
+}
+
+/**
  * 路由 WAF 状态
  */
 export interface RouteWafStatus {
@@ -4471,13 +4661,24 @@ export interface ModifyConfigFileGroupResponse {
 }
 
 /**
- * DescribeAllConfigFileTemplates请求参数结构体
+ * 被调服务配置表达式
  */
-export interface DescribeAllConfigFileTemplatesRequest {
+export interface ArgumentValue {
   /**
-   * TSE实例id
+   * 表达式类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  Type: string
+  /**
+   * 匹配值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value: string
+  /**
+   * 值类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValueType: string
 }
 
 /**
@@ -5018,6 +5219,32 @@ export interface DescribeGovernanceServiceContractVersionsResponse {
 }
 
 /**
+ * 目标服务实例实例标签信息
+ */
+export interface RoutingDestinationRuleLabel {
+  /**
+   * 标签键
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelKey?: string
+  /**
+   * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelValue?: string
+  /**
+   * 表达式类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelType?: string
+  /**
+   * 值类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelValueType?: string
+}
+
+/**
  * ModifyConfigFiles返回参数结构体
  */
 export interface ModifyConfigFilesResponse {
@@ -5382,6 +5609,20 @@ export interface DescribeInstanceInfoByIpResult {
 }
 
 /**
+ * CreateGovernanceLaneGroups返回参数结构体
+ */
+export interface CreateGovernanceLaneGroupsResponse {
+  /**
+   * 是否创建成功
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteEngine返回参数结构体
  */
 export interface DeleteEngineResponse {
@@ -5407,6 +5648,185 @@ export interface Location {
    * 机房
    */
   Campus?: string
+}
+
+/**
+ * CreateEngine请求参数结构体
+ */
+export interface CreateEngineRequest {
+  /**
+   * 引擎类型。参考值：
+- zookeeper
+- nacos
+- consul
+- apollo
+- eureka
+- polaris
+   */
+  EngineType: string
+  /**
+   * 引擎的开源版本。每种引擎支持的开源版本不同，请参考产品文档或者控制台购买页
+   */
+  EngineVersion: string
+  /**
+   * 引擎的产品版本。参考值：
+- STANDARD： 标准版
+- PROFESSIONAL: 专业版（Zookeeper）/企业版（PolarisMesh）
+
+引擎各版本及可选择的规格、节点数说明：
+apollo - STANDARD版本
+规格列表：1C2G、2C4G、4C8G、8C16G、16C32G
+节点数：1，2，3，4，5
+
+eureka - STANDARD版本
+规格列表：1C2G、2C4G、4C8G、8C16G、16C32G
+节点数：3，4，5
+
+polarismesh - STANDARD版本
+规格列表：NUM50、NUM100、NUM200、NUM500、NUM1000、NUM5000、NUM10000、NUM50000
+
+兼容原spec-xxxxxx形式的规格ID
+   */
+  EngineProductVersion: string
+  /**
+   * 引擎所在地域。参考值说明：
+中国区 参考值：
+- ap-guangzhou：广州
+- ap-beijing：北京
+- ap-chengdu：成都
+- ap-chongqing：重庆
+- ap-nanjing：南京
+- ap-shanghai：上海
+- ap-hongkong：香港
+- ap-taipei：台北
+亚太区 参考值：
+- ap-jakarta：雅加达
+- ap-singapore：新加坡
+北美区 参考值
+- na-siliconvalley：硅谷
+- na-ashburn: 弗吉尼亚
+金融专区 参考值
+- ap-beijing-fsi：北京金融
+- ap-shanghai-fsi：上海金融
+- ap-shenzhen-fsi：深圳金融
+   */
+  EngineRegion: string
+  /**
+   * 引擎名称。参考值：
+- eurek-test
+   */
+  EngineName: string
+  /**
+   * 付费类型。参考值：
+- 0：后付费
+- 1：预付费（接口暂不支持创建预付费实例）
+   */
+  TradeType: number
+  /**
+   * 引擎的节点规格 ID。参见EngineProductVersion字段说明
+北极星支持的引擎规格ID与节点数对应关系：
+基础版：
+spec-c160bas1 500
+spec-c160bas2 1000
+spec-c160bas3 2000
+spec-c160bas4 5000
+spec-c160bas5 10000
+spec-c160bas6 20000
+spec-c160bas7 50000
+企业版：
+spec-c160pro50 50
+spec-c160pro100 100
+spec-c160pro200 200
+spec-c160pro500 500
+spec-c160pro1k 1000
+spec-c160pro5k 5000
+spec-c160pro10k 10000
+spec-c160pro20k 20000
+spec-c160pro50k 50000
+开发版：
+spec-c160dev1 50
+   */
+  EngineResourceSpec?: string
+  /**
+   * 引擎的节点数量。参见EngineProductVersion字段说明
+   */
+  EngineNodeNum?: number
+  /**
+   * VPC ID。在 VPC 的子网内分配一个 IP 作为引擎的访问地址。参考值：
+- vpc-conz6aix
+   */
+  VpcId?: string
+  /**
+   * 子网 ID。在 VPC 的子网内分配一个 IP 作为引擎的访问地址。参考值：
+- subnet-ahde9me9
+   */
+  SubnetId?: string
+  /**
+   * Apollo 环境配置参数列表。参数说明：
+如果创建Apollo类型，此参数为必填的环境信息列表，最多可选4个环境。环境信息参数说明：
+- Name：环境名。参考值：prod, dev, fat, uat
+- EngineResourceSpec：环境内引擎的节点规格ID。参见EngineProductVersion参数说明
+- EngineNodeNum：环境内引擎的节点数量。参见EngineProductVersion参数说明，其中prod环境支持的节点数为2，3，4，5
+- StorageCapacity：配置存储空间大小，以GB为单位，步长为5.参考值：35
+- VpcId：VPC ID。参考值：vpc-conz6aix
+- SubnetId：子网 ID。参考值：subnet-ahde9me9
+   */
+  ApolloEnvParams?: Array<ApolloEnvParam>
+  /**
+   * 引擎的标签列表。用户自定义的key/value形式，无参考值
+   */
+  EngineTags?: Array<InstanceTagInfo>
+  /**
+   * 引擎的初始账号信息。可设置参数：
+- Name：控制台初始用户名
+- Password：控制台初始密码
+- Token：引擎接口的管理员 Token
+   */
+  EngineAdmin?: EngineAdmin
+  /**
+   * 预付费时长，以月为单位
+   */
+  PrepaidPeriod?: number
+  /**
+   * 自动续费标记，仅预付费使用。参考值：
+- 0：不自动续费
+- 1：自动续费
+   */
+  PrepaidRenewFlag?: number
+  /**
+   * 跨地域部署的引擎地域配置详情
+zk标准版没有跨地域部署，请不要填写
+zk专业版跨地域部署开启了固定Leader所在地域，需要满足以下条件
+- 固定Leader所在地域当前仅支持跨两个地域
+- leader地域的副本数必须是3/2 + 1，5/2+1，7/2+1，也就是 2，3，4
+   */
+  EngineRegionInfos?: Array<EngineRegionInfo>
+  /**
+   * zk标准版请填CLOUD_PREMIUM，zk标准版无法选择磁盘类型和磁盘容量，默认为CLOUD_PREMIUM
+zk专业版可以为：CLOUD_SSD,CLOUD_SSD_PLUS,CLOUD_PREMIUM
+   */
+  StorageType?: string
+  /**
+   * zk标准版请填50，zk标准版无法选择磁盘类型和磁盘容量，磁盘容量默认为50
+   */
+  StorageCapacity?: number
+  /**
+   * zk专业版至多有两个盘，且磁盘的容量在50-3200之间
+如果只有一个磁盘，storageCapacity与storageOption里面的capacity应该一致
+   */
+  StorageOption?: Array<StorageOption>
+  /**
+   * ZK引擎实例，可用区分布约束，STRICT:强约束，PERMISSIVE: 弱约束
+   */
+  AffinityConstraint?: string
+  /**
+   * 指定zone id列表
+   */
+  ZoneIds?: Array<number | bigint>
+  /**
+   * 地域特殊标签，用于区分相同地域，不通的业务属性
+   */
+  EngineRegionTag?: string
 }
 
 /**
@@ -5447,6 +5867,22 @@ export interface DescribeCloudNativeAPIGatewayPortsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 网关服务信息匹配条件
+ */
+export interface TSEGatewaySelector {
+  /**
+   * 网关引擎实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GatewayId: string
+  /**
+   * 网关服务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Services?: Array<string>
 }
 
 /**
@@ -5958,17 +6394,17 @@ export interface KongCertificatesList {
 }
 
 /**
- * 获取云原生API网关实例策略响应结果。
+ * 云原生网关限流插件Qps阈值
  */
-export interface ListCloudNativeAPIGatewayStrategyResult {
+export interface QpsThreshold {
   /**
-   * 总数。
+   * qps阈值控制维度,包含:second、minute、hour、day、month、year
    */
-  TotalCount: number
+  Unit: string
   /**
-   * 云原生API网关实例策略列表。
+   * 阈值
    */
-  StrategyList: Array<CloudNativeAPIGatewayStrategy>
+  Max: number
 }
 
 /**
@@ -6373,6 +6809,34 @@ export interface DescribeSREInstancesRequest {
 }
 
 /**
+ * 泳道入口信息
+ */
+export interface LaneTrafficEntry {
+  /**
+   *    // type == "polarismesh.cn/gateway/tse-gateway, 则 selector 为 TSEGatewaySelector
+   // type == "polarismesh.cn/gateway/spring-cloud-gateway", 则 selector 为 ServiceGatewaySelector
+   // type == "polarismesh.cn/service, 则 selector 为 ServiceSelector
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EntryType?: string
+  /**
+   * TSE云原生网关选择器
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TSEGatewaySelector?: TSEGatewaySelector
+  /**
+   * 微服务网关选择器
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceGatewaySelector?: ServiceGatewaySelector
+  /**
+   * 普通微服务选择器
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceSelector?: ServiceSelector
+}
+
+/**
  * DescribeCloudNativeAPIGatewayInfoByIp请求参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayInfoByIpRequest {
@@ -6515,6 +6979,62 @@ export interface ModifyCloudNativeAPIGatewayRequest {
 }
 
 /**
+ * 泳道组
+ */
+export interface GovernanceLaneGroup {
+  /**
+   * 泳道名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name: string
+  /**
+   * 泳道组ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ID?: string
+  /**
+   * 泳道入口服务列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrafficEntries?: Array<LaneTrafficEntry>
+  /**
+   * 泳道服务列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Destinations?: Array<GovernanceServiceDestination>
+  /**
+   * 泳道组描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 该泳道组下的所有泳道规则列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rules?: Array<GovernanceLaneRule>
+  /**
+   * 规则内容摘要
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Revision?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 规则一致性状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Consistency?: string
+}
+
+/**
  * DescribeNativeGatewayServerGroups返回参数结构体
  */
 export interface DescribeNativeGatewayServerGroupsResponse {
@@ -6592,6 +7112,20 @@ export interface CreateCloudNativeAPIGatewayServiceResponse {
    * 网关服务创建结果
    */
   Result?: CreateGatewayServiceResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyGovernanceLaneGroups返回参数结构体
+ */
+export interface ModifyGovernanceLaneGroupsResponse {
+  /**
+   * 是否创建成功
+   */
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7593,6 +8127,27 @@ export interface DeleteCloudNativeAPIGatewayServiceRequest {
 }
 
 /**
+ * 路由规则来源服务的请求规则配置详情
+ */
+export interface Argument {
+  /**
+   * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * key值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * 匹配条件参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: ArgumentValue
+}
+
+/**
  * 查询云原生网关访问控制配置出参
  */
 export interface DescribeKongIpRestrictionResult {
@@ -7621,6 +8176,27 @@ export interface DescribeKongIpRestrictionResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AddressList?: Array<string>
+}
+
+/**
+ * 微服务网关选择器
+ */
+export interface ServiceGatewaySelector {
+  /**
+   * 命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace: string
+  /**
+   * 服务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Service: string
+  /**
+   * 实例标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Labels?: Array<Label>
 }
 
 /**
@@ -7878,45 +8454,75 @@ export interface DeleteCloudNativeAPIGatewayCertificateRequest {
 }
 
 /**
- * 云原生API网关节点信息。
+ * 云原生网关分组信息
  */
-export interface CloudNativeAPIGatewayNode {
+export interface NativeGatewayServerGroup {
   /**
-   * 云原生网关节点 id
-   */
-  NodeId?: string
-  /**
-   * 节点 ip
-   */
-  NodeIp?: string
-  /**
-   * Zone id
-   */
-  ZoneId?: string
-  /**
-   * Zone
-   */
-  Zone?: string
-  /**
-   * 分组ID
+   * 云原生网关分组唯一id
    */
   GroupId?: string
   /**
    * 分组名
    */
-  GroupName?: string
+  Name?: string
   /**
-   * 状态
+   * 描述信息
+   */
+  Description?: string
+  /**
+   * 节点规格、节点数信息
+   */
+  NodeConfig?: CloudNativeAPIGatewayNodeConfig
+  /**
+   * 网关分组状态。
    */
   Status?: string
   /**
-   * 节点权重
+   * 创建时间
    */
-  Weight?: number
+  CreateTime?: string
   /**
-   * 是否默认权重
+   * 是否是默认分组。
+0：否。
+1：是。
    */
-  IsDefaultWeight?: boolean
+  IsFirstGroup?: number
+  /**
+   * 关联策略信息
+   */
+  BindingStrategy?: CloudNativeAPIGatewayStrategy
+  /**
+   * 网关实例 id
+   */
+  GatewayId?: string
+  /**
+   * 带宽
+   */
+  InternetMaxBandwidthOut?: number
+  /**
+   * 修改时间
+   */
+  ModifyTime?: string
+  /**
+   * 子网id
+   */
+  SubnetIds?: string
+  /**
+   * 分组默认权重
+   */
+  DefaultWeight?: number
+  /**
+   * 弹性节点
+   */
+  ElasticNumber?: number
+  /**
+   * 是否支持TOA
+   */
+  SupportTOA?: boolean
+  /**
+   * 是否支持IPV6
+   */
+  SupportIPV6?: boolean
 }
 
 /**
@@ -8008,43 +8614,21 @@ export interface Filter {
 }
 
 /**
- * ModifyAutoScalerResourceStrategy请求参数结构体
+ * RestartSREInstance请求参数结构体
  */
-export interface ModifyAutoScalerResourceStrategyRequest {
+export interface RestartSREInstanceRequest {
   /**
-   * 网关实例ID
+   * 微服务引擎实例Id
    */
-  GatewayId: string
+  InstanceId: string
   /**
-   * 策略ID
+   * 重启的环境类型（PROD，DEV，UAT等）
    */
-  StrategyId: string
+  EnvTypes?: Array<string>
   /**
-   * 策略名称
+   * 指定需要重启的实例节点（当前仅支持zk单节点重启）
    */
-  StrategyName?: string
-  /**
-   * 策略描述
-   */
-  Description?: string
-  /**
-   * 指标伸缩配置
-   */
-  Config?: CloudNativeAPIGatewayStrategyAutoScalerConfig
-  /**
-   * 定时伸缩配置
-   * @deprecated
-   */
-  CronScalerConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig
-  /**
-   * 最大节点数
-   * @deprecated
-   */
-  MaxReplicas?: number
-  /**
-   * 指标伸缩配置
-   */
-  CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig
+  NodeName?: string
 }
 
 /**
@@ -8141,6 +8725,20 @@ export interface DescribeZookeeperServerInterfacesRequest {
    * 返回的列表起始偏移量
    */
   Offset?: number
+}
+
+/**
+ * DeleteGovernanceLaneGroups请求参数结构体
+ */
+export interface DeleteGovernanceLaneGroupsRequest {
+  /**
+   * 引擎实例ID
+   */
+  InstanceId: string
+  /**
+   * 泳道组规则列表
+   */
+  LaneGroups: Array<DeleteGovernanceLaneGroup>
 }
 
 /**
@@ -8487,182 +9085,117 @@ export interface NativeGatewayServerGroups {
 }
 
 /**
- * CreateEngine请求参数结构体
+ * 泳道规则
  */
-export interface CreateEngineRequest {
+export interface GovernanceLaneRule {
   /**
-   * 引擎类型。参考值：
-- zookeeper
-- nacos
-- consul
-- apollo
-- eureka
-- polaris
+   * 泳道规则ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EngineType: string
+  ID?: string
   /**
-   * 引擎的开源版本。每种引擎支持的开源版本不同，请参考产品文档或者控制台购买页
+   * 泳道名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EngineVersion: string
+  Name?: string
   /**
-   * 引擎的产品版本。参考值：
-- STANDARD： 标准版
-- PROFESSIONAL: 专业版（Zookeeper）/企业版（PolarisMesh）
+   * 泳道所属泳道组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LaneGroup?: string
+  /**
+   * 泳道规则启用状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enable?: boolean
+  /**
+   * 流量标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrafficLabels?: Array<Argument>
+  /**
+   * 多个流量标签匹配方式
+AND：与
+OR：或
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrafficMatchMode?: string
+  /**
+   * 泳道匹配方式
+STRICT：严格匹配
+PERMISSIVE：宽松匹配
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LaneMatchMode?: string
+  /**
+   * 泳道灰度规则
+   */
+  TrafficGray?: TrafficGray
+  /**
+   * 泳道规则描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 泳道标签内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LaneLabelValue?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 启用时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableTime?: string
+  /**
+   * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 泳道规则优先级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Priority?: number
+  /**
+   * 规则摘要
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Revision?: string
+}
 
-引擎各版本及可选择的规格、节点数说明：
-apollo - STANDARD版本
-规格列表：1C2G、2C4G、4C8G、8C16G、16C32G
-节点数：1，2，3，4，5
-
-eureka - STANDARD版本
-规格列表：1C2G、2C4G、4C8G、8C16G、16C32G
-节点数：3，4，5
-
-polarismesh - STANDARD版本
-规格列表：NUM50、NUM100、NUM200、NUM500、NUM1000、NUM5000、NUM10000、NUM50000
-
-兼容原spec-xxxxxx形式的规格ID
-   */
-  EngineProductVersion: string
+/**
+ * DescribeGovernanceLaneGroups请求参数结构体
+ */
+export interface DescribeGovernanceLaneGroupsRequest {
   /**
-   * 引擎所在地域。参考值说明：
-中国区 参考值：
-- ap-guangzhou：广州
-- ap-beijing：北京
-- ap-chengdu：成都
-- ap-chongqing：重庆
-- ap-nanjing：南京
-- ap-shanghai：上海
-- ap-hongkong：香港
-- ap-taipei：台北
-亚太区 参考值：
-- ap-jakarta：雅加达
-- ap-singapore：新加坡
-北美区 参考值
-- na-siliconvalley：硅谷
-- na-ashburn: 弗吉尼亚
-金融专区 参考值
-- ap-beijing-fsi：北京金融
-- ap-shanghai-fsi：上海金融
-- ap-shenzhen-fsi：深圳金融
+   * 引擎实例ID
    */
-  EngineRegion: string
+  InstanceId: string
   /**
-   * 引擎名称。参考值：
-- eurek-test
+   * 分页查询偏移量
    */
-  EngineName: string
+  Offset: number
   /**
-   * 付费类型。参考值：
-- 0：后付费
-- 1：预付费（接口暂不支持创建预付费实例）
+   * 分页条数
    */
-  TradeType: number
+  Limit: number
   /**
-   * 引擎的节点规格 ID。参见EngineProductVersion字段说明
-北极星支持的引擎规格ID与节点数对应关系：
-基础版：
-spec-c160bas1 500
-spec-c160bas2 1000
-spec-c160bas3 2000
-spec-c160bas4 5000
-spec-c160bas5 10000
-spec-c160bas6 20000
-spec-c160bas7 50000
-企业版：
-spec-c160pro50 50
-spec-c160pro100 100
-spec-c160pro200 200
-spec-c160pro500 500
-spec-c160pro1k 1000
-spec-c160pro5k 5000
-spec-c160pro10k 10000
-spec-c160pro20k 20000
-spec-c160pro50k 50000
-开发版：
-spec-c160dev1 50
+   * 泳道名称
    */
-  EngineResourceSpec?: string
+  Name?: string
   /**
-   * 引擎的节点数量。参见EngineProductVersion字段说明
+   * 泳道ID
    */
-  EngineNodeNum?: number
+  GroupID?: string
   /**
-   * VPC ID。在 VPC 的子网内分配一个 IP 作为引擎的访问地址。参考值：
-- vpc-conz6aix
+   * 是否展示泳道规则列表
    */
-  VpcId?: string
-  /**
-   * 子网 ID。在 VPC 的子网内分配一个 IP 作为引擎的访问地址。参考值：
-- subnet-ahde9me9
-   */
-  SubnetId?: string
-  /**
-   * Apollo 环境配置参数列表。参数说明：
-如果创建Apollo类型，此参数为必填的环境信息列表，最多可选4个环境。环境信息参数说明：
-- Name：环境名。参考值：prod, dev, fat, uat
-- EngineResourceSpec：环境内引擎的节点规格ID。参见EngineProductVersion参数说明
-- EngineNodeNum：环境内引擎的节点数量。参见EngineProductVersion参数说明，其中prod环境支持的节点数为2，3，4，5
-- StorageCapacity：配置存储空间大小，以GB为单位，步长为5.参考值：35
-- VpcId：VPC ID。参考值：vpc-conz6aix
-- SubnetId：子网 ID。参考值：subnet-ahde9me9
-   */
-  ApolloEnvParams?: Array<ApolloEnvParam>
-  /**
-   * 引擎的标签列表。用户自定义的key/value形式，无参考值
-   */
-  EngineTags?: Array<InstanceTagInfo>
-  /**
-   * 引擎的初始账号信息。可设置参数：
-- Name：控制台初始用户名
-- Password：控制台初始密码
-- Token：引擎接口的管理员 Token
-   */
-  EngineAdmin?: EngineAdmin
-  /**
-   * 预付费时长，以月为单位
-   */
-  PrepaidPeriod?: number
-  /**
-   * 自动续费标记，仅预付费使用。参考值：
-- 0：不自动续费
-- 1：自动续费
-   */
-  PrepaidRenewFlag?: number
-  /**
-   * 跨地域部署的引擎地域配置详情
-zk标准版没有跨地域部署，请不要填写
-zk专业版跨地域部署开启了固定Leader所在地域，需要满足以下条件
-- 固定Leader所在地域当前仅支持跨两个地域
-- leader地域的副本数必须是3/2 + 1，5/2+1，7/2+1，也就是 2，3，4
-   */
-  EngineRegionInfos?: Array<EngineRegionInfo>
-  /**
-   * zk标准版请填CLOUD_PREMIUM，zk标准版无法选择磁盘类型和磁盘容量，默认为CLOUD_PREMIUM
-zk专业版可以为：CLOUD_SSD,CLOUD_SSD_PLUS,CLOUD_PREMIUM
-   */
-  StorageType?: string
-  /**
-   * zk标准版请填50，zk标准版无法选择磁盘类型和磁盘容量，磁盘容量默认为50
-   */
-  StorageCapacity?: number
-  /**
-   * zk专业版至多有两个盘，且磁盘的容量在50-3200之间
-如果只有一个磁盘，storageCapacity与storageOption里面的capacity应该一致
-   */
-  StorageOption?: Array<StorageOption>
-  /**
-   * ZK引擎实例，可用区分布约束，STRICT:强约束，PERMISSIVE: 弱约束
-   */
-  AffinityConstraint?: string
-  /**
-   * 指定zone id列表
-   */
-  ZoneIds?: Array<number | bigint>
-  /**
-   * 地域特殊标签，用于区分相同地域，不通的业务属性
-   */
-  EngineRegionTag?: string
+  Brief?: boolean
 }
 
 /**
@@ -8762,17 +9295,13 @@ export interface DescribeCloudNativeAPIGatewayCanaryRulesRequest {
 }
 
 /**
- * CreateConfigFileGroup返回参数结构体
+ * 查询Limiter的接入地址
  */
-export interface CreateConfigFileGroupResponse {
+export interface PolarisLimiterAddress {
   /**
-   * 是否创建成功
+   * VPC接入IP列表
    */
-  Result?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  IntranetAddress?: string
 }
 
 /**
@@ -8873,4 +9402,14 @@ export interface DescribeWafProtectionResult {
    * 对象防护状态
    */
   ObjectStatus?: string
+}
+
+/**
+ * DescribeAllConfigFileTemplates请求参数结构体
+ */
+export interface DescribeAllConfigFileTemplatesRequest {
+  /**
+   * TSE实例id
+   */
+  InstanceId: string
 }

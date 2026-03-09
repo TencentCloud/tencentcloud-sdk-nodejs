@@ -465,7 +465,7 @@ export interface DescribeApmApplicationConfigResponse {
    * Apm应用配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ApmAppConfig: ApmAppConfig
+  ApmAppConfig?: ApmAppConfig
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -963,260 +963,272 @@ export interface ApmServiceMetric {
  */
 export interface ApmAppConfig {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceKey?: string
   /**
-   * 服务名
+   * <p>服务名</p>
    */
   ServiceName?: string
   /**
-   * URL收敛开关
+   * <p>URL收敛开关</p>
    */
   UrlConvergenceSwitch?: number
   /**
-   * URL收敛阈值
+   * <p>URL收敛阈值</p>
    */
   UrlConvergenceThreshold?: number
   /**
-   * URL收敛正则
+   * <p>URL收敛正则</p>
    */
   UrlConvergence?: string
   /**
-   * 异常过滤正则
+   * <p>异常过滤正则</p>
    */
   ExceptionFilter?: string
   /**
-   * 错误码过滤
+   * <p>错误码过滤</p>
    */
   ErrorCodeFilter?: string
   /**
-   * 服务组件类型
+   * <p>服务组件类型</p>
    */
   Components?: string
   /**
-   * URL排除正则
+   * <p>URL排除正则</p>
    */
   UrlExclude?: string
   /**
-   * 日志来源
+   * <p>日志来源</p>
    */
   LogSource?: string
   /**
-   * 日志所在地域
+   * <p>日志所在地域</p>
    */
   LogRegion?: string
   /**
-   * 是否开启日志 0 关 1 开
+   * <p>是否开启日志 0 关 1 开</p>
    */
   IsRelatedLog?: number
   /**
-   * 日志主题ID
+   * <p>日志主题ID</p>
    */
   LogTopicID?: string
   /**
-   * 需过滤的接口名
+   * <p>需过滤的接口名</p>
    */
   IgnoreOperationName?: string
   /**
-   * CLS日志集 | ES集群ID
+   * <p>CLS日志集 | ES集群ID</p>
    */
   LogSet?: string
   /**
-   * 探针每秒上报trace数
+   * <p>探针每秒上报trace数</p>
    */
   TraceRateLimit?: number
   /**
-   * 是否开启线程剖析
+   * <p>是否开启线程剖析</p>
    */
   EnableSnapshot?: boolean
   /**
-   * 线程剖析超时阈值
+   * <p>线程剖析超时阈值</p>
    */
   SnapshotTimeout?: number
   /**
-   * 是否开启agent
+   * <p>是否开启agent</p>
    */
   AgentEnable?: boolean
   /**
-   * 组件列表
+   * <p>组件列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstrumentList?: Array<Instrument>
   /**
-   * 是否开启链路压缩
+   * <p>是否开启链路压缩</p>
    */
   TraceSquash?: boolean
   /**
-   * 是否开启应用诊断开关
+   * <p>是否开启应用诊断开关</p>
    */
   EventEnable?: boolean
   /**
-   * 探针接口相关配置
+   * <p>探针接口相关配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AgentOperationConfigView?: AgentOperationConfigView
   /**
-   * 是否开启应用日志配置
+   * <p>是否开启应用日志配置</p>
    */
   EnableLogConfig?: boolean
   /**
-   * 应用ID
+   * <p>应用ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceID?: string
   /**
-   * 应用是否开启dashboard配置： false 关（与业务系统保持一致）/true 开（应用级配置）
+   * <p>应用是否开启dashboard配置： false 关（与业务系统保持一致）/true 开（应用级配置）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableDashboardConfig?: boolean
   /**
-   * 是否关联dashboard： 0 关 1 开
+   * <p>是否关联dashboard： 0 关 1 开</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsRelatedDashboard?: number
   /**
-   * dashboard ID
+   * <p>dashboard ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DashboardTopicID?: string
   /**
-   * 是否开启应用级别配置
+   * <p>是否开启应用级别配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableSecurityConfig?: boolean
   /**
-   * 是否开启组件漏洞检测
+   * <p>是否开启组件漏洞检测</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsInstrumentationVulnerabilityScan?: number
   /**
-   * 是否开启SQL注入分析
+   * <p>是否开启SQL注入分析</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsSqlInjectionAnalysis?: number
   /**
-   * 是否开启远程命令执行分析
+   * <p>是否开启远程命令执行分析</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsRemoteCommandExecutionAnalysis?: number
   /**
-   * 是否开启内存马检测分析
+   * <p>是否开启内存马检测分析</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsMemoryHijackingAnalysis?: number
   /**
-   * CLS索引类型(0=全文索引，1=键值索引)
+   * <p>CLS索引类型(0=全文索引，1=键值索引)</p>
    */
   LogIndexType?: number
   /**
-   * traceId的索引key: 当CLS索引类型为键值索引时生效
+   * <p>traceId的索引key: 当CLS索引类型为键值索引时生效</p>
    */
   LogTraceIdKey?: string
   /**
-   * 是否开启删除任意文件检测（0-关闭，1-开启）
+   * <p>是否开启删除任意文件检测（0-关闭，1-开启）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDeleteAnyFileAnalysis?: number
   /**
-   * 是否开启读取任意文件检测（0-关闭，1-开启）
+   * <p>是否开启读取任意文件检测（0-关闭，1-开启）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsReadAnyFileAnalysis?: number
   /**
-   * 是否开启上传任意文件检测（0-关闭，1-开启）
+   * <p>是否开启上传任意文件检测（0-关闭，1-开启）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsUploadAnyFileAnalysis?: number
   /**
-   * 是否开启包含任意文件检测（0-关闭，1-开启）
+   * <p>是否开启包含任意文件检测（0-关闭，1-开启）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsIncludeAnyFileAnalysis?: number
   /**
-   * 是否开启目录遍历检测（0-关闭，1-开启）
+   * <p>是否开启目录遍历检测（0-关闭，1-开启）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDirectoryTraversalAnalysis?: number
   /**
-   * 是否开启模板引擎注入检测（0-关闭，1-开启）
+   * <p>是否开启模板引擎注入检测（0-关闭，1-开启）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsTemplateEngineInjectionAnalysis?: number
   /**
-   * 是否开启脚本引擎注入检测（0-关闭，1-开启）
+   * <p>是否开启脚本引擎注入检测（0-关闭，1-开启）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsScriptEngineInjectionAnalysis?: number
   /**
-   * 是否开启表达式注入检测（0-关闭，1-开启）
+   * <p>是否开启表达式注入检测（0-关闭，1-开启）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsExpressionInjectionAnalysis?: number
   /**
-   * 是否开启JNDI注入检测（0-关闭，1-开启）
+   * <p>是否开启JNDI注入检测（0-关闭，1-开启）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsJNDIInjectionAnalysis?: number
   /**
-   * 是否开启JNI注入检测（0-关闭，1-开启）
+   * <p>是否开启JNI注入检测（0-关闭，1-开启）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsJNIInjectionAnalysis?: number
   /**
-   * 是否开启Webshell后门检测（0-关闭，1-开启）
+   * <p>是否开启Webshell后门检测（0-关闭，1-开启）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsWebshellBackdoorAnalysis?: number
   /**
-   * 是否开启反序列化检测（0-关闭，1-开启）
+   * <p>是否开启反序列化检测（0-关闭，1-开启）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDeserializationAnalysis?: number
   /**
-   * 接口名称自动收敛开关（0-关闭，1-开启）
+   * <p>接口名称自动收敛开关（0-关闭，1-开启）</p>
    */
   UrlAutoConvergenceEnable?: boolean
   /**
-   * URL长分段收敛阈值
+   * <p>URL长分段收敛阈值</p>
    */
   UrlLongSegmentThreshold?: number
   /**
-   * URL数字分段收敛阈值
+   * <p>URL数字分段收敛阈值</p>
    */
   UrlNumberSegmentThreshold?: number
   /**
-   * 探针熔断内存阈值
+   * <p>探针熔断内存阈值</p>
    */
   DisableMemoryUsed?: number
   /**
-   * 探针熔断CPU阈值
+   * <p>探针熔断CPU阈值</p>
    */
   DisableCpuUsed?: number
   /**
-   * 是否开启SQL参数获取
+   * <p>是否开启SQL参数获取</p>
    */
   DbStatementParametersEnabled?: boolean
   /**
-   * 慢SQL阈值
+   * <p>慢SQL阈值</p>
    */
   SlowSQLThresholds?: Array<ApmTag>
   /**
-   * 是否开启脱敏规则
+   * <p>是否开启脱敏规则</p>
    */
   EnableDesensitizationRule?: number
   /**
-   * 脱敏规则
+   * <p>脱敏规则</p>
    */
   DesensitizationRule?: string
   /**
-   * spanId的索引key: 当CLS索引类型为键值索引时生效
+   * <p>spanId的索引key: 当CLS索引类型为键值索引时生效</p>
    */
   LogSpanIdKey?: string
   /**
-   * 自动性能剖析配置
+   * <p>自动性能剖析配置</p>
    */
   AutoProfilingConfig?: AutoProfilingConfig
+  /**
+   * <p>阈值配置开关。true 表示使用应用级阈值；false 表示使用业务系统级阈值</p>
+   */
+  EnableThresholdConfig?: boolean
+  /**
+   * <p>错误率阈值（%），用于判断应用健康状态为&quot;红色&quot;</p>
+   */
+  ErrRateThreshold?: number
+  /**
+   * <p>响应时间预警阈值（ms），用于判断应用健康状态为&quot;黄色&quot;</p>
+   */
+  ResponseDurationWarningThreshold?: number
 }
 
 /**
@@ -2855,109 +2867,205 @@ export interface ApmAgentInfo {
  */
 export interface ApmApplicationConfigView {
   /**
-   * 业务系统 ID
+   * <p>业务系统 ID</p>
    */
   InstanceKey?: string
   /**
-   * 应用名
+   * <p>应用名</p>
    */
   ServiceName?: string
   /**
-   * 接口过滤
+   * <p>接口过滤</p>
    */
   OperationNameFilter?: string
   /**
-   * 错误类型过滤
+   * <p>错误类型过滤</p>
    */
   ExceptionFilter?: string
   /**
-   * HTTP 状态码过滤
+   * <p>HTTP 状态码过滤</p>
    */
   ErrorCodeFilter?: string
   /**
-   * 应用诊断开关（已废弃）
+   * <p>应用诊断开关（已废弃）</p>
    */
   EventEnable?: boolean
   /**
-   * URL 收敛开关 0 关 1 开
+   * <p>URL 收敛开关 0 关 1 开</p>
    */
   UrlConvergenceSwitch?: number
   /**
-   * URL 收敛阈值
+   * <p>URL 收敛阈值</p>
    */
   UrlConvergenceThreshold?: number
   /**
-   * URL 收敛规则正则
+   * <p>URL 收敛规则正则</p>
    */
   UrlConvergence?: string
   /**
-   * URL 排除规则正则
+   * <p>URL 排除规则正则</p>
    */
   UrlExclude?: string
   /**
-   * 是否开启日志 0 关 1 开
+   * <p>是否开启日志 0 关 1 开</p>
    */
   IsRelatedLog?: number
   /**
-   * 日志源
+   * <p>日志源</p>
    */
   LogSource?: string
   /**
-   * 日志集
+   * <p>日志集</p>
    */
   LogSet?: string
   /**
-   * 日志主题
+   * <p>日志主题</p>
    */
   LogTopicID?: string
   /**
-   * 方法栈快照开关 true 开启 false 关闭
+   * <p>方法栈快照开关 true 开启 false 关闭</p>
    */
   SnapshotEnable?: boolean
   /**
-   * 慢调用监听触发阈值
+   * <p>慢调用监听触发阈值</p>
    */
   SnapshotTimeout?: number
   /**
-   * 探针总开关
+   * <p>探针总开关</p>
    */
   AgentEnable?: boolean
   /**
-   * 组件列表开关（已废弃）
+   * <p>组件列表开关（已废弃）</p>
    */
   InstrumentList?: Array<Instrument>
   /**
-   * 链路压缩开关（已废弃）
+   * <p>链路压缩开关（已废弃）</p>
    */
   TraceSquash?: boolean
   /**
-   * 探针熔断内存阈值
+   * <p>链路过滤配置</p>
+   */
+  AgentIgnoreOperation?: string
+  /**
+   * <p>开启应用安全开关</p>
+   */
+  EnableSecurityConfig?: boolean
+  /**
+   * <p>是否开启SQL注入检测</p>
+   */
+  IsSqlInjectionAnalysis?: number
+  /**
+   * <p>是否开启组件漏洞检测</p>
+   */
+  IsInstrumentationVulnerabilityScan?: number
+  /**
+   * <p>是否开启远程命令执行检测</p>
+   */
+  IsRemoteCommandExecutionAnalysis?: number
+  /**
+   * <p>是否开启内存泄漏检测</p>
+   */
+  IsMemoryHijackingAnalysis?: number
+  /**
+   * <p>是否开启删除任意文件检测</p>
+   */
+  IsDeleteAnyFileAnalysis?: number
+  /**
+   * <p>是否开启读取任意文件检测</p>
+   */
+  IsReadAnyFileAnalysis?: number
+  /**
+   * <p>是否开启上传任意文件检测</p>
+   */
+  IsUploadAnyFileAnalysis?: number
+  /**
+   * <p>是否开启包含任意文件检测</p>
+   */
+  IsIncludeAnyFileAnalysis?: number
+  /**
+   * <p>是否开启目录遍历检测</p>
+   */
+  IsDirectoryTraversalAnalysis?: number
+  /**
+   * <p>是否开启模板引擎注入检测</p>
+   */
+  IsTemplateEngineInjectionAnalysis?: number
+  /**
+   * <p>是否开启脚本引擎注入检测</p>
+   */
+  IsScriptEngineInjectionAnalysis?: number
+  /**
+   * <p>是否开启表达式注入检测</p>
+   */
+  IsExpressionInjectionAnalysis?: number
+  /**
+   * <p>是否开启JNDI注入检测</p>
+   */
+  IsJndiInjectionAnalysis?: number
+  /**
+   * <p>是否开启JNI注入检测</p>
+   */
+  IsJniInjectionAnalysis?: number
+  /**
+   * <p>是否开启Webshell后门检测</p>
+   */
+  IsWebshellBackdoorAnalysis?: number
+  /**
+   * <p>是否开启反序列化检测</p>
+   */
+  IsDeserializationAnalysis?: number
+  /**
+   * <p>是否开启控制台开关</p>
+   */
+  EnableDashboardConfig?: boolean
+  /**
+   * <p>是否关联Dashboard</p>
+   */
+  IsRelatedDashboard?: number
+  /**
+   * <p>Dashboard topic</p>
+   */
+  DashboardTopicID?: string
+  /**
+   * <p>探针熔断内存阈值</p>
    */
   DisableMemoryUsed?: number
   /**
-   * 探针熔断CPU阈值
+   * <p>探针熔断CPU阈值</p>
    */
   DisableCpuUsed?: number
   /**
-   * 是否开启SQL参数获取
+   * <p>是否开启SQL参数获取</p>
    */
   DbStatementParametersEnabled?: boolean
   /**
-   * 慢SQL阈值
+   * <p>慢SQL阈值</p>
    */
   SlowSQLThresholds?: Array<ApmTag>
   /**
-   * 是否开启脱敏规则
+   * <p>是否开启脱敏规则</p>
    */
   EnableDesensitizationRule?: number
   /**
-   * 脱敏规则
+   * <p>脱敏规则</p>
    */
   DesensitizationRule?: string
   /**
-   * 自动性能剖析任务配置
+   * <p>自动性能剖析任务配置</p>
    */
   AutoProfilingConfig?: AutoProfilingConfig
+  /**
+   * <p>阈值配置开关</p>
+   */
+  EnableThresholdConfig?: boolean
+  /**
+   * <p>错误率阈值</p><p>单位：%</p>
+   */
+  ErrRateThreshold?: number
+  /**
+   * <p>响应时间预警阈值</p><p>单位：ms</p>
+   */
+  ResponseDurationWarningThreshold?: number
 }
 
 /**
@@ -3088,225 +3196,237 @@ export interface Selectors {
  */
 export interface ModifyApmApplicationConfigRequest {
   /**
-   * 业务系统 ID
+   * <p>业务系统 ID</p>
    */
   InstanceId: string
   /**
-   * 应用名
+   * <p>应用名</p>
    */
   ServiceName: string
   /**
-   * URL收敛开关,0 关 | 1 开
+   * <p>URL收敛开关,0 关 | 1 开</p>
    */
   UrlConvergenceSwitch: number
   /**
-   * URL收敛阈值
+   * <p>URL收敛阈值</p>
    */
   UrlConvergenceThreshold?: number
   /**
-   * 异常过滤正则规则，逗号分隔
+   * <p>异常过滤正则规则，逗号分隔</p>
    */
   ExceptionFilter?: string
   /**
-   * URL收敛正则规则，逗号分隔
+   * <p>URL收敛正则规则，逗号分隔</p>
    */
   UrlConvergence?: string
   /**
-   * 错误码过滤，逗号分隔
+   * <p>错误码过滤，逗号分隔</p>
    */
   ErrorCodeFilter?: string
   /**
-   * URL排除正则规则，逗号分隔
+   * <p>URL排除正则规则，逗号分隔</p>
    */
   UrlExclude?: string
   /**
-   * 日志开关 0 关 1 开
+   * <p>日志开关 0 关 1 开</p>
    */
   IsRelatedLog?: number
   /**
-   * 日志地域
+   * <p>日志地域</p>
    */
   LogRegion?: string
   /**
-   * 日志主题ID
+   * <p>日志主题ID</p>
    */
   LogTopicID?: string
   /**
-   * CLS 日志集 | ES 集群ID
+   * <p>CLS 日志集 | ES 集群ID</p>
    */
   LogSet?: string
   /**
-   * 日志来源 CLS | ES
+   * <p>日志来源 CLS | ES</p>
    */
   LogSource?: string
   /**
-   * 需过滤的接口
+   * <p>需过滤的接口</p>
    */
   IgnoreOperationName?: string
   /**
-   * 是否开启线程剖析
+   * <p>是否开启线程剖析</p>
    */
   EnableSnapshot?: boolean
   /**
-   * 线程剖析超时阈值
+   * <p>线程剖析超时阈值</p>
    */
   SnapshotTimeout?: number
   /**
-   * 是否开启agent
+   * <p>是否开启agent</p>
    */
   AgentEnable?: boolean
   /**
-   * 是否开启链路压缩
+   * <p>是否开启链路压缩</p>
    */
   TraceSquash?: boolean
   /**
-   * 是否开启应用诊断的开关
+   * <p>是否开启应用诊断的开关</p>
    */
   EventEnable?: boolean
   /**
-   * 组件列表
+   * <p>组件列表</p>
    */
   InstrumentList?: Array<Instrument>
   /**
-   * 探针接口相关配置
+   * <p>探针接口相关配置</p>
    */
   AgentOperationConfigView?: AgentOperationConfigView
   /**
-   * 是否开启应用日志配置
+   * <p>是否开启应用日志配置</p>
    */
   EnableLogConfig?: boolean
   /**
-   * 应用是否开启dashboard配置： false 关（与业务系统保持一致）/true 开（应用级配置）
+   * <p>应用是否开启dashboard配置： false 关（与业务系统保持一致）/true 开（应用级配置）</p>
    */
   EnableDashboardConfig?: boolean
   /**
-   * 是否关联dashboard： 0 关 1 开
+   * <p>是否关联dashboard： 0 关 1 开</p>
    */
   IsRelatedDashboard?: number
   /**
-   * dashboard ID
+   * <p>dashboard ID</p>
    */
   DashboardTopicID?: string
   /**
-   * CLS索引类型(0=全文索引，1=键值索引)
+   * <p>CLS索引类型(0=全文索引，1=键值索引)</p>
    */
   LogIndexType?: number
   /**
-   * traceId的索引key: 当CLS索引类型为键值索引时生效
+   * <p>traceId的索引key: 当CLS索引类型为键值索引时生效</p>
    */
   LogTraceIdKey?: string
   /**
-   * 是否开启应用安全配置
+   * <p>是否开启应用安全配置</p>
    */
   EnableSecurityConfig?: boolean
   /**
-   * 是否开启SQL注入分析
+   * <p>是否开启SQL注入分析</p>
    */
   IsSqlInjectionAnalysis?: number
   /**
-   * 是否开启组件漏洞检测
+   * <p>是否开启组件漏洞检测</p>
    */
   IsInstrumentationVulnerabilityScan?: number
   /**
-   * 是否开启远程命令检测
+   * <p>是否开启远程命令检测</p>
    */
   IsRemoteCommandExecutionAnalysis?: number
   /**
-   * 是否开启内存马检测
+   * <p>是否开启内存马检测</p>
    */
   IsMemoryHijackingAnalysis?: number
   /**
-   * 是否开启删除任意文件检测（0-关闭，1-开启）
+   * <p>是否开启删除任意文件检测（0-关闭，1-开启）</p>
    */
   IsDeleteAnyFileAnalysis?: number
   /**
-   * 是否开启读取任意文件检测（0-关闭，1-开启）
+   * <p>是否开启读取任意文件检测（0-关闭，1-开启）</p>
    */
   IsReadAnyFileAnalysis?: number
   /**
-   * 是否开启上传任意文件检测（0-关闭，1-开启）
+   * <p>是否开启上传任意文件检测（0-关闭，1-开启）</p>
    */
   IsUploadAnyFileAnalysis?: number
   /**
-   * 是否开启包含任意文件检测（0-关闭，1-开启）
+   * <p>是否开启包含任意文件检测（0-关闭，1-开启）</p>
    */
   IsIncludeAnyFileAnalysis?: number
   /**
-   * 是否开启目录遍历检测（0-关闭，1-开启）
+   * <p>是否开启目录遍历检测（0-关闭，1-开启）</p>
    */
   IsDirectoryTraversalAnalysis?: number
   /**
-   * 是否开启模板引擎注入检测（0-关闭，1-开启）
+   * <p>是否开启模板引擎注入检测（0-关闭，1-开启）</p>
    */
   IsTemplateEngineInjectionAnalysis?: number
   /**
-   * 是否开启脚本引擎注入检测（0-关闭，1-开启）
+   * <p>是否开启脚本引擎注入检测（0-关闭，1-开启）</p>
    */
   IsScriptEngineInjectionAnalysis?: number
   /**
-   * 是否开启表达式注入检测（0-关闭，1-开启）
+   * <p>是否开启表达式注入检测（0-关闭，1-开启）</p>
    */
   IsExpressionInjectionAnalysis?: number
   /**
-   * 是否开启JNDI注入检测（0-关闭，1-开启）
+   * <p>是否开启JNDI注入检测（0-关闭，1-开启）</p>
    */
   IsJNDIInjectionAnalysis?: number
   /**
-   * 是否开启JNI注入检测（0-关闭，1-开启）
+   * <p>是否开启JNI注入检测（0-关闭，1-开启）</p>
    */
   IsJNIInjectionAnalysis?: number
   /**
-   * 是否开启Webshell后门检测（0-关闭，1-开启）
+   * <p>是否开启Webshell后门检测（0-关闭，1-开启）</p>
    */
   IsWebshellBackdoorAnalysis?: number
   /**
-   * 是否开启反序列化检测（0-关闭，1-开启）
+   * <p>是否开启反序列化检测（0-关闭，1-开启）</p>
    */
   IsDeserializationAnalysis?: number
   /**
-   * 接口自动收敛开关,0 关 | 1 开
+   * <p>接口自动收敛开关,0 关 | 1 开</p>
    */
   UrlAutoConvergenceEnable?: boolean
   /**
-   * URL长分段收敛阈值
+   * <p>URL长分段收敛阈值</p>
    */
   UrlLongSegmentThreshold?: number
   /**
-   * URL数字分段收敛阈值
+   * <p>URL数字分段收敛阈值</p>
    */
   UrlNumberSegmentThreshold?: number
   /**
-   * 探针熔断内存阈值
+   * <p>探针熔断内存阈值</p>
    */
   DisableMemoryUsed?: number
   /**
-   * 探针熔断CPU阈值
+   * <p>探针熔断CPU阈值</p>
    */
   DisableCpuUsed?: number
   /**
-   * 是否开启SQL参数获取
+   * <p>是否开启SQL参数获取</p>
    */
   DbStatementParametersEnabled?: boolean
   /**
-   * 慢SQL阈值
+   * <p>慢SQL阈值</p>
    */
   SlowSQLThresholds?: Array<ApmTag>
   /**
-   * 是否开启脱敏规则
+   * <p>是否开启脱敏规则</p>
    */
   EnableDesensitizationRule?: number
   /**
-   * 脱敏规则
+   * <p>脱敏规则</p>
    */
   DesensitizationRule?: string
   /**
-   * spanId的索引key: 当CLS索引类型为键值索引时生效
+   * <p>spanId的索引key: 当CLS索引类型为键值索引时生效</p>
    */
   LogSpanIdKey?: string
   /**
-   * 自动性能剖析任务配置
+   * <p>自动性能剖析任务配置</p>
    */
   AutoProfilingConfig?: AutoProfilingConfig
+  /**
+   * <p>阈值配置开关。true 表示使用应用级阈值；false 表示使用业务系统级阈值</p>
+   */
+  EnableThresholdConfig?: boolean
+  /**
+   * <p>错误率阈值（%），用于判断应用健康状态为&quot;红色&quot;</p>
+   */
+  ErrRateThreshold?: number
+  /**
+   * <p>响应时间预警阈值（ms），用于判断应用健康状态为&quot;黄色&quot;</p>
+   */
+  ResponseDurationWarningThreshold?: number
 }
 
 /**

@@ -189,14 +189,13 @@ import {
   LicensePlateOCRRequest,
   GeneralBasicOCRRequest,
   UsedVehicleInvoiceInfo,
-  RecognizeTableMultiOCRRequest,
+  TextVehicleBack,
   SubmitMarkEssayAgentJobResponse,
   GeneralEfficientOCRRequest,
   AdvertiseOCRRequest,
   AirTicketInfo,
   SubmitQuestionMarkAgentJobResponse,
   RideHailingDriverLicenseOCRResponse,
-  TextVehicleBack,
   ImageEnhancementRequest,
   ExtractDocBasicResponse,
   EnterpriseLicenseOCRRequest,
@@ -213,7 +212,7 @@ import {
   TemporaryIDCardInfo,
   VatInvoiceVerifyNewRequest,
   CarInvoiceInfo,
-  RecognizeTableMultiOCRResponse,
+  TableCellInfo,
   FlightInvoiceInfo,
   DetailInformationOfAirTicketTupleList,
   TextVehicleFront,
@@ -337,7 +336,6 @@ import {
   RideHailingTransportLicenseOCRRequest,
   VatInvoiceVerifyNewResponse,
   MLIDCardOCRResponse,
-  TableCellInfo,
   RecognizeTableOCRRequest,
   EstateCertOCRRequest,
   SaleInventory,
@@ -713,7 +711,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询文档处理任务。文档处理领域里常见的通用Agent 如抽取、比对之类的，目前我们提供的抽取，但未来可以根据实际情况和客户需求扩展。
+   * 模型参数更大，速度更慢。推荐场景：可以接受异步（超过30s返回），样本输入输出token大于2000，长文本类文档建议用异步模型。需要 SubmitExtractDocAgentJob（提交任务）、DescribeExtractDocAgentJob（查询任务）两个接口配套使用，计费发生在提交任务后。【备注：1.固定价格不限抽取字段数，2.自适应价格抽取字段大于10记两次费用，小于等于10记一次费用】
    */
   async DescribeExtractDocAgentJob(
     req: DescribeExtractDocAgentJobRequest,
@@ -1428,7 +1426,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询文档处理任务。文档处理领域里常见的通用Agent 如抽取、比对之类的，目前我们提供的抽取，但未来可以根据实际情况和客户需求扩展。
+   * 模型参数更小，速度更快。推荐场景：实时性要求高（30s以内）并且样本输入输出token2000以内，建议用实时模型。【备注：1.固定价格不限抽取字段数，2.自适应价格抽取字段大于10记两次费用，小于等于10记一次费用】
    */
   async ExtractDocAgent(
     req: ExtractDocAgentRequest,
@@ -1573,7 +1571,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 文档处理领域里常见的通用Agent 如抽取、比对之类的，目前我们提供的抽取，但未来可以根据实际情况和客户需求扩展。
+   * 模型参数更大，速度更慢。推荐场景：可以接受异步（超过30s返回），样本输入输出token大于2000，长文本类文档建议用异步模型。需要 SubmitExtractDocAgentJob（提交任务）、DescribeExtractDocAgentJob（查询任务）两个接口配套使用，计费发生在提交任务后。【备注：1.固定价格不限抽取字段数，2.自适应价格抽取字段大于10记两次费用，小于等于10记一次费用】
    */
   async SubmitExtractDocAgentJob(
     req: SubmitExtractDocAgentJobRequest,
@@ -1696,18 +1694,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RecognizeMedicalInvoiceOCRResponse) => void
   ): Promise<RecognizeMedicalInvoiceOCRResponse> {
     return this.request("RecognizeMedicalInvoiceOCR", req, cb)
-  }
-
-  /**
-     * 基于MLLM(多模态大语言模型)的表格识别能力，针对复杂表格的算法识别效果更佳，适配财务报表识别场景，并可输出直接对接业务系统的Excel数据。
-
-默认接口请求频率限制：1次/秒。
-     */
-  async RecognizeTableMultiOCR(
-    req: RecognizeTableMultiOCRRequest,
-    cb?: (error: string, rep: RecognizeTableMultiOCRResponse) => void
-  ): Promise<RecognizeTableMultiOCRResponse> {
-    return this.request("RecognizeTableMultiOCR", req, cb)
   }
 
   /**

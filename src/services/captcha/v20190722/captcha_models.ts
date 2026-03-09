@@ -100,18 +100,15 @@ export interface DescribeCaptchaMiniOperDataResponse {
  */
 export interface GetTotalTicketStatisticsRequest {
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTimeStr: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTimeStr: string
   /**
-   * 查询粒度
-分钟：“1”
-小时：“2”
-天：“3”
+   * <p>查询粒度<br>分钟：“1”<br>小时：“2”<br>天：“3”</p>
    */
   Dimension: string
 }
@@ -219,16 +216,16 @@ EvilLevel=100 请求有恶意
  */
 export interface GetRequestStatisticsResponse {
   /**
-   * 查询后数据块
+   * <p>查询后数据块</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: CaptchaStatisticObj
   /**
-   * 验证码返回码
+   * <p>验证码返回码</p>
    */
   CaptchaCode?: number
   /**
-   * 验证码返回信息
+   * <p>验证码返回信息</p>
    */
   CaptchaMsg?: string
   /**
@@ -242,19 +239,19 @@ export interface GetRequestStatisticsResponse {
  */
 export interface GetRequestStatisticsRequest {
   /**
-   * 验证码AppId
+   * <p>验证码AppId</p>
    */
   CaptchaAppId: string
   /**
-   * 开始时间字符串
+   * <p>开始时间字符串</p>
    */
   StartTimeStr: string
   /**
-   * 结束时间字符串
+   * <p>结束时间字符串</p>
    */
   EndTimeStr: string
   /**
-   * 查询粒度
+   * <p>查询粒度</p>
    */
   Dimension: string
 }
@@ -430,16 +427,16 @@ export type DescribeCaptchaUserAllAppIdRequest = null
  */
 export interface GetTotalTicketStatisticsResponse {
   /**
-   * 返回数据
+   * <p>返回数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: CaptchaStatisticObj
   /**
-   * 返回码
+   * <p>返回码</p>
    */
   CaptchaCode?: number
   /**
-   * 返回信息
+   * <p>返回信息</p>
    */
   CaptchaMsg?: string
   /**
@@ -872,15 +869,15 @@ export interface GetTicketStatisticsResponse {
  */
 export interface GetTotalRequestStatisticsRequest {
   /**
-   * 开始时间字符串
+   * <p>开始时间字符串</p>
    */
   StartTimeStr: string
   /**
-   * 结束时间字符串
+   * <p>结束时间字符串</p>
    */
   EndTimeStr: string
   /**
-   * 查询粒度
+   * <p>查询粒度</p>
    */
   Dimension: string
 }
@@ -904,16 +901,16 @@ export interface TicketAmountUnit {
  */
 export interface GetTotalRequestStatisticsResponse {
   /**
-   * 查询后数据块
+   * <p>查询后数据块</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: CaptchaStatisticObj
   /**
-   * 验证码返回码
+   * <p>验证码返回码</p>
    */
   CaptchaCode?: number
   /**
-   * 验证码返回信息
+   * <p>验证码返回信息</p>
    */
   CaptchaMsg?: string
   /**
@@ -1039,45 +1036,45 @@ export interface DescribeCaptchaResultRequest {
  */
 export interface CaptchaStatisticObj {
   /**
-   * 请求总量
+   * <p>请求总量</p>
    */
   ActionTotal: number
   /**
-   * 验证总量
+   * <p>验证总量</p>
    */
   VerifyTotal: number
   /**
-   * 验证通过总量
+   * <p>验证通过总量</p>
    */
   VerifyThroughTotal: number
   /**
-   * 验证拦截总量
+   * <p>验证拦截总量</p>
    */
   VerifyInterceptTotal: number
   /**
-   * 票据校验总量
+   * <p>票据校验总量</p>
    */
   TicketTotal: number
   /**
-   * 票据通过总量
+   * <p>票据通过总量</p>
    */
   TicketThroughTotal: number
   /**
-   * 票据拦截总量
+   * <p>票据拦截总量</p>
    */
   TicketInterceptTotal: number
   /**
-   * 请求趋势图
+   * <p>请求趋势图</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RequestTrend: Array<RequestTrendObj>
   /**
-   * 拦截率趋势图
+   * <p>拦截率趋势图</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InterceptPerTrend: Array<InterceptPerTrendObj>
   /**
-   * 票据校验趋势图
+   * <p>票据校验趋势图</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TicketCheckTrend: Array<TicketCheckTrendObj>

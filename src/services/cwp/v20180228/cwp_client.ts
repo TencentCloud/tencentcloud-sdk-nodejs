@@ -213,7 +213,7 @@ import {
   DescribeSecurityEventStatRequest,
   DescribeESAggregationsResponse,
   ExportVulInfoResponse,
-  EmergencyVul,
+  DescribeWindowsPatchListRequest,
   ExportAssetRecentMachineInfoRequest,
   ExportReverseShellEventsRequest,
   BashEventNew,
@@ -270,6 +270,7 @@ import {
   DescribeMalwareRiskWarningRequest,
   KeyValueInfo,
   StartBaselineDetectRequest,
+  ExportAssetUserListResponse,
   DescribeVulStoreListRequest,
   EditPrivilegeRulesRequest,
   DescribeAssetDiskListRequest,
@@ -289,6 +290,7 @@ import {
   DescribeRansomDefenseStrategyMachinesResponse,
   DescribeBaselineRuleIgnoreListRequest,
   DescribeAssetMachineDetailResponse,
+  RelateVulInfo,
   DescribeRansomDefenseStrategyListResponse,
   DescribeAttackTrendsRequest,
   DescribeBaselineDownloadListRequest,
@@ -328,6 +330,7 @@ import {
   ModifyBaselinePolicyStateRequest,
   DescribeLicenseBindScheduleResponse,
   DescribeMalwareInfoRequest,
+  ScanBaselineRequest,
   DescribeVersionStatisticsRequest,
   DescribeLogTypeResponse,
   LogInfo,
@@ -338,6 +341,7 @@ import {
   ModifyBaselinePolicyResponse,
   MachineSimple,
   DescribeReverseShellEventsRequest,
+  DescribePatchInfoResponse,
   DescribeCanNotSeparateMachineResponse,
   BaselineCategory,
   DescribeEventByTableResponse,
@@ -502,7 +506,7 @@ import {
   AssetUserBaseInfo,
   ModifyRiskEventsStatusRequest,
   ExportBaselineEffectHostListRequest,
-  ScanBaselineRequest,
+  ExportWindowsPatchListRequest,
   RansomDefenseRollbackRequest,
   EffectiveMachineInfo,
   DescribeVulCountByDatesResponse,
@@ -691,6 +695,7 @@ import {
   DescribeScreenRiskAssetsTopResponse,
   CommandLine,
   ScanBaselineResponse,
+  DescribePatchEffectHostListResponse,
   CheckLogKafkaConnectionStateRequest,
   ModifyNetAttackSettingRequest,
   DescribeRiskDnsListResponse,
@@ -713,6 +718,7 @@ import {
   BaselineRuleInfo,
   DescribeExportMachinesResponse,
   DescribeScanTaskStatusResponse,
+  PatchEffectHostList,
   DescribeBaselineItemRiskTopResponse,
   DescribeAssetLoadInfoResponse,
   DescribeMachineRiskCntResponse,
@@ -896,6 +902,7 @@ import {
   DescribeAssetWebAppCountRequest,
   DescribeAssetTypesRequest,
   BaselineEventLevelInfo,
+  ExportWindowsPatchListResponse,
   DescribeLoginWhiteCombinedListRequest,
   Strategy,
   AddLoginWhiteListsRequest,
@@ -932,6 +939,7 @@ import {
   ModifyRansomDefenseStrategyStatusResponse,
   ModifyLoginWhiteInfoResponse,
   Machine,
+  ExportPatchEffectHostListRequest,
   FileTamperRule,
   SecurityTrend,
   ScanTaskAgainResponse,
@@ -1017,6 +1025,7 @@ import {
   DescribeMaliciousRequestWhiteListRequest,
   NetAttackTopInfo,
   DescribeBashEventsNewRequest,
+  EventPatchInfo,
   MalwareRisk,
   DescribeWebPageProtectStatResponse,
   DescribeAssetPortInfoListRequest,
@@ -1109,6 +1118,7 @@ import {
   DescribeVersionCompareChartRequest,
   DescribeProtectDirRelatedServerRequest,
   Tags,
+  ExportPatchEffectHostListResponse,
   DescribeBaselineItemListResponse,
   DescribeMachinesSimpleRequest,
   StopBaselineDetectResponse,
@@ -1121,6 +1131,7 @@ import {
   DeleteLicenseRecordAllResponse,
   ModifyBanModeRequest,
   DescribeBaselineDefaultStrategyListResponse,
+  DescribePatchInfoRequest,
   BanWhiteListDetail,
   DeleteScanTaskResponse,
   ModifyFileTamperRuleStatusRequest,
@@ -1133,6 +1144,7 @@ import {
   DestroyOrderRequest,
   AssetWebAppBaseInfo,
   DescribeRiskDnsInfoRequest,
+  DescribeWindowsPatchListResponse,
   DescribeBaselineRuleDetectListResponse,
   UpdateBaselineStrategyRequest,
   AssetCoreModuleParam,
@@ -1252,6 +1264,7 @@ import {
   DescribeAttackTopRequest,
   DescribeBaselineAnalysisDataRequest,
   ModifyRiskEventsStatusResponse,
+  EmergencyVul,
   DescribeRaspRulesResponse,
   DescribeBaselineDetectListRequest,
   DescribeVulCveIdInfoRequest,
@@ -1283,7 +1296,7 @@ import {
   CreateSearchLogRequest,
   DescribeSearchTemplatesRequest,
   DescribeBaselineItemIgnoreListResponse,
-  ExportAssetUserListResponse,
+  DescribePatchEffectHostListRequest,
 } from "./cwp_models"
 
 /**
@@ -1906,6 +1919,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询补丁影响的主机信息列表
+   */
+  async DescribePatchEffectHostList(
+    req: DescribePatchEffectHostListRequest,
+    cb?: (error: string, rep: DescribePatchEffectHostListResponse) => void
+  ): Promise<DescribePatchEffectHostListResponse> {
+    return this.request("DescribePatchEffectHostList", req, cb)
+  }
+
+  /**
    * 本接口 (DescribeExportMachines) 用于导出区域主机列表。
    */
   async DescribeExportMachines(
@@ -1973,6 +1996,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMachineLicenseDetailResponse) => void
   ): Promise<DescribeMachineLicenseDetailResponse> {
     return this.request("DescribeMachineLicenseDetail", req, cb)
+  }
+
+  /**
+   * 获取补丁信息列表
+   */
+  async DescribeWindowsPatchList(
+    req: DescribeWindowsPatchListRequest,
+    cb?: (error: string, rep: DescribeWindowsPatchListResponse) => void
+  ): Promise<DescribeWindowsPatchListResponse> {
+    return this.request("DescribeWindowsPatchList", req, cb)
   }
 
   /**
@@ -4799,6 +4832,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 补丁详情
+   */
+  async DescribePatchInfo(
+    req: DescribePatchInfoRequest,
+    cb?: (error: string, rep: DescribePatchInfoResponse) => void
+  ): Promise<DescribePatchInfoResponse> {
+    return this.request("DescribePatchInfo", req, cb)
+  }
+
+  /**
    * 删除木马白名单
    */
   async DeleteMalwareWhiteList(
@@ -5532,6 +5575,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 导出Windows补丁列表
+   */
+  async ExportWindowsPatchList(
+    req: ExportWindowsPatchListRequest,
+    cb?: (error: string, rep: ExportWindowsPatchListResponse) => void
+  ): Promise<ExportWindowsPatchListResponse> {
+    return this.request("ExportWindowsPatchList", req, cb)
+  }
+
+  /**
    * 删除基线弱口令
    */
   async DeleteBaselineWeakPassword(
@@ -6149,6 +6202,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExportAssetRecentMachineInfoResponse) => void
   ): Promise<ExportAssetRecentMachineInfoResponse> {
     return this.request("ExportAssetRecentMachineInfo", req, cb)
+  }
+
+  /**
+   * 导出补丁影响主机列表
+   */
+  async ExportPatchEffectHostList(
+    req: ExportPatchEffectHostListRequest,
+    cb?: (error: string, rep: ExportPatchEffectHostListResponse) => void
+  ): Promise<ExportPatchEffectHostListResponse> {
+    return this.request("ExportPatchEffectHostList", req, cb)
   }
 
   /**

@@ -124,6 +124,7 @@ import {
   SlowLogHost,
   DescribeRedisCmdPerfTimeSeriesResponse,
   CreateMailProfileRequest,
+  InstanceBasicInfo,
   MonitorFloatMetricSeriesData,
   MailConfiguration,
   UpdateAgentSwitchResponse,
@@ -165,7 +166,7 @@ import {
   UserProfile,
   AddUserContactRequest,
   CreateSqlFilterRequest,
-  InstanceBasicInfo,
+  CreateMongoDBKillTaskRequest,
   DescribeTopSpaceTablesRequest,
   DescribeRedisTopCostCommandsResponse,
   SchemaSpaceData,
@@ -225,6 +226,7 @@ import {
   StatisticInfo,
   MonitorFloatMetric,
   ModifyAlarmPolicyRequest,
+  CreateMongoDBKillTaskResponse,
   DescribeRedisCommandOverviewRequest,
   DescribeAllUserGroupResponse,
   DescribeRedisProcessListResponse,
@@ -276,93 +278,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 自治中心-终止自治任务（单次）
+   * 查询实例无主键表。
    */
-  async DescribeDBAutonomyEvents(
-    req: DescribeDBAutonomyEventsRequest,
-    cb?: (error: string, rep: DescribeDBAutonomyEventsResponse) => void
-  ): Promise<DescribeDBAutonomyEventsResponse> {
-    return this.request("DescribeDBAutonomyEvents", req, cb)
-  }
-
-  /**
-   * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
-   */
-  async DescribeTopSpaceTableTimeSeries(
-    req: DescribeTopSpaceTableTimeSeriesRequest,
-    cb?: (error: string, rep: DescribeTopSpaceTableTimeSeriesResponse) => void
-  ): Promise<DescribeTopSpaceTableTimeSeriesResponse> {
-    return this.request("DescribeTopSpaceTableTimeSeries", req, cb)
-  }
-
-  /**
-   * 查询安全审计日志导出文件下载链接。目前日志文件下载仅提供腾讯云内网地址，请通过广州地域的腾讯云服务器进行下载。
-   */
-  async DescribeSecurityAuditLogDownloadUrls(
-    req: DescribeSecurityAuditLogDownloadUrlsRequest,
-    cb?: (error: string, rep: DescribeSecurityAuditLogDownloadUrlsResponse) => void
-  ): Promise<DescribeSecurityAuditLogDownloadUrlsResponse> {
-    return this.request("DescribeSecurityAuditLogDownloadUrls", req, cb)
-  }
-
-  /**
-   * 根据任务id删除健康报告生成任务
-   */
-  async DeleteDBDiagReportTasks(
-    req: DeleteDBDiagReportTasksRequest,
-    cb?: (error: string, rep: DeleteDBDiagReportTasksResponse) => void
-  ): Promise<DeleteDBDiagReportTasksResponse> {
-    return this.request("DeleteDBDiagReportTasks", req, cb)
-  }
-
-  /**
-   * 获取发送邮件的配置， 包括数据库巡检的邮件配置以及定期生成健康报告的邮件发送配置。
-   */
-  async DescribeMailProfile(
-    req: DescribeMailProfileRequest,
-    cb?: (error: string, rep: DescribeMailProfileResponse) => void
-  ): Promise<DescribeMailProfileResponse> {
-    return this.request("DescribeMailProfile", req, cb)
-  }
-
-  /**
-   * 该接口用于创建定期生成健康报告并邮件发送的配置，将健康报告的定期生成时间作为参数传入（周一至周日），用于设置健康报告的定期生成时间，同时保存相应的定期邮件发送的配置。
-   */
-  async CreateSchedulerMailProfile(
-    req: CreateSchedulerMailProfileRequest,
-    cb?: (error: string, rep: CreateSchedulerMailProfileResponse) => void
-  ): Promise<CreateSchedulerMailProfileResponse> {
-    return this.request("CreateSchedulerMailProfile", req, cb)
-  }
-
-  /**
-   * 查询SQL模板。
-   */
-  async DescribeSqlTemplate(
-    req: DescribeSqlTemplateRequest,
-    cb?: (error: string, rep: DescribeSqlTemplateResponse) => void
-  ): Promise<DescribeSqlTemplateResponse> {
-    return this.request("DescribeSqlTemplate", req, cb)
-  }
-
-  /**
-   * 根据实例ID获取指定时间段的性能趋势。
-   */
-  async DescribeDBPerfTimeSeries(
-    req: DescribeDBPerfTimeSeriesRequest,
-    cb?: (error: string, rep: DescribeDBPerfTimeSeriesResponse) => void
-  ): Promise<DescribeDBPerfTimeSeriesResponse> {
-    return this.request("DescribeDBPerfTimeSeries", req, cb)
-  }
-
-  /**
-   * 获取实例Top库的实时空间统计信息，默认返回按大小排序。
-   */
-  async DescribeTopSpaceSchemas(
-    req: DescribeTopSpaceSchemasRequest,
-    cb?: (error: string, rep: DescribeTopSpaceSchemasResponse) => void
-  ): Promise<DescribeTopSpaceSchemasResponse> {
-    return this.request("DescribeTopSpaceSchemas", req, cb)
+  async DescribeNoPrimaryKeyTables(
+    req: DescribeNoPrimaryKeyTablesRequest,
+    cb?: (error: string, rep: DescribeNoPrimaryKeyTablesResponse) => void
+  ): Promise<DescribeNoPrimaryKeyTablesResponse> {
+    return this.request("DescribeNoPrimaryKeyTables", req, cb)
   }
 
   /**
@@ -376,206 +298,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建邮件配置。其中入参ProfileType表示所创建配置的类型，ProfileType 取值包括：dbScan_mail_configuration（数据库巡检邮件配置）、scheduler_mail_configuration（定期生成健康报告的邮件发送配置）。Region统一选择广州，和实例所属地域无关。
-   */
-  async CreateMailProfile(
-    req: CreateMailProfileRequest,
-    cb?: (error: string, rep: CreateMailProfileResponse) => void
-  ): Promise<CreateMailProfileResponse> {
-    return this.request("CreateMailProfile", req, cb)
-  }
-
-  /**
-   * 查询健康报告生成任务列表。
-   */
-  async DescribeDBDiagReportTasks(
-    req: DescribeDBDiagReportTasksRequest,
-    cb?: (error: string, rep: DescribeDBDiagReportTasksResponse) => void
-  ): Promise<DescribeDBDiagReportTasksResponse> {
-    return this.request("DescribeDBDiagReportTasks", req, cb)
-  }
-
-  /**
-   * 热Key分析
-   */
-  async DescribeRedisTopHotKeys(
-    req: DescribeRedisTopHotKeysRequest,
-    cb?: (error: string, rep: DescribeRedisTopHotKeysResponse) => void
-  ): Promise<DescribeRedisTopHotKeysResponse> {
-    return this.request("DescribeRedisTopHotKeys", req, cb)
-  }
-
-  /**
-   * 更新Agent实例状态（停止或重连实例）
-   */
-  async UpdateMonitorSwitch(
-    req: UpdateMonitorSwitchRequest,
-    cb?: (error: string, rep: UpdateMonitorSwitchResponse) => void
-  ): Promise<UpdateMonitorSwitchResponse> {
-    return this.request("UpdateMonitorSwitch", req, cb)
-  }
-
-  /**
-   * 查询redis实例top key前缀列表。
-   */
-  async DescribeRedisTopKeyPrefixList(
-    req: DescribeRedisTopKeyPrefixListRequest,
-    cb?: (error: string, rep: DescribeRedisTopKeyPrefixListResponse) => void
-  ): Promise<DescribeRedisTopKeyPrefixListResponse> {
-    return this.request("DescribeRedisTopKeyPrefixList", req, cb)
-  }
-
-  /**
-   * 即时创建redis实例大key分析任务，限制正在运行的即时分析任务数量默认为5。
-   */
-  async CreateRedisBigKeyAnalysisTask(
-    req: CreateRedisBigKeyAnalysisTaskRequest,
-    cb?: (error: string, rep: CreateRedisBigKeyAnalysisTaskResponse) => void
-  ): Promise<CreateRedisBigKeyAnalysisTaskResponse> {
-    return this.request("CreateRedisBigKeyAnalysisTask", req, cb)
-  }
-
-  /**
-   * 用于删除云数据库实例的审计日志文件。
-   */
-  async DeleteAuditLogFile(
-    req: DeleteAuditLogFileRequest,
-    cb?: (error: string, rep: DeleteAuditLogFileResponse) => void
-  ): Promise<DeleteAuditLogFileResponse> {
-    return this.request("DeleteAuditLogFile", req, cb)
-  }
-
-  /**
-   * 获取邮件发送联系组的相关信息。
-   */
-  async DescribeAllUserGroup(
-    req: DescribeAllUserGroupRequest,
-    cb?: (error: string, rep: DescribeAllUserGroupResponse) => void
-  ): Promise<DescribeAllUserGroupResponse> {
-    return this.request("DescribeAllUserGroup", req, cb)
-  }
-
-  /**
-   * 获取指定时间段内的诊断事件列表，支持依据风险等级、实例ID等条件过滤。
-   */
-  async DescribeDBDiagEvents(
-    req: DescribeDBDiagEventsRequest,
-    cb?: (error: string, rep: DescribeDBDiagEventsResponse) => void
-  ): Promise<DescribeDBDiagEventsResponse> {
-    return this.request("DescribeDBDiagEvents", req, cb)
-  }
-
-  /**
-   * 查询实例列表
-   */
-  async DescribeAuditInstanceList(
-    req: DescribeAuditInstanceListRequest,
-    cb?: (error: string, rep: DescribeAuditInstanceListResponse) => void
-  ): Promise<DescribeAuditInstanceListResponse> {
-    return this.request("DescribeAuditInstanceList", req, cb)
-  }
-
-  /**
-   * 删除Redis实例的大key分析任务。
-   */
-  async DeleteRedisBigKeyAnalysisTasks(
-    req: DeleteRedisBigKeyAnalysisTasksRequest,
-    cb?: (error: string, rep: DeleteRedisBigKeyAnalysisTasksResponse) => void
-  ): Promise<DeleteRedisBigKeyAnalysisTasksResponse> {
-    return this.request("DeleteRedisBigKeyAnalysisTasks", req, cb)
-  }
-
-  /**
-   * 获取实例占用空间最大的前几个库在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
-   */
-  async DescribeTopSpaceSchemaTimeSeries(
-    req: DescribeTopSpaceSchemaTimeSeriesRequest,
-    cb?: (error: string, rep: DescribeTopSpaceSchemaTimeSeriesResponse) => void
-  ): Promise<DescribeTopSpaceSchemaTimeSeriesResponse> {
-    return this.request("DescribeTopSpaceSchemaTimeSeries", req, cb)
-  }
-
-  /**
-   * 查询MongoDB实时会话列表
-   */
-  async DescribeMongoDBProcessList(
-    req: DescribeMongoDBProcessListRequest,
-    cb?: (error: string, rep: DescribeMongoDBProcessListResponse) => void
-  ): Promise<DescribeMongoDBProcessListResponse> {
-    return this.request("DescribeMongoDBProcessList", req, cb)
-  }
-
-  /**
-   * 获取慢日志统计柱状图。
-   */
-  async DescribeSlowLogTimeSeriesStats(
-    req: DescribeSlowLogTimeSeriesStatsRequest,
-    cb?: (error: string, rep: DescribeSlowLogTimeSeriesStatsResponse) => void
-  ): Promise<DescribeSlowLogTimeSeriesStatsResponse> {
-    return this.request("DescribeSlowLogTimeSeriesStats", req, cb)
-  }
-
-  /**
-   * 获取 Redis 实例所有 proxy 节点的实时会话详情列表。
-   */
-  async DescribeRedisProcessList(
-    req: DescribeRedisProcessListRequest,
-    cb?: (error: string, rep: DescribeRedisProcessListResponse) => void
-  ): Promise<DescribeRedisProcessListResponse> {
-    return this.request("DescribeRedisProcessList", req, cb)
-  }
-
-  /**
-   * 获取慢日志来源地址统计分布图。
-   */
-  async DescribeSlowLogUserHostStats(
-    req: DescribeSlowLogUserHostStatsRequest,
-    cb?: (error: string, rep: DescribeSlowLogUserHostStatsResponse) => void
-  ): Promise<DescribeSlowLogUserHostStatsResponse> {
-    return this.request("DescribeSlowLogUserHostStats", req, cb)
-  }
-
-  /**
-   * 延迟分析-命令字分析-查询命令延迟趋势
-   */
-  async DescribeRedisCmdPerfTimeSeries(
-    req: DescribeRedisCmdPerfTimeSeriesRequest,
-    cb?: (error: string, rep: DescribeRedisCmdPerfTimeSeriesResponse) => void
-  ): Promise<DescribeRedisCmdPerfTimeSeriesResponse> {
-    return this.request("DescribeRedisCmdPerfTimeSeries", req, cb)
-  }
-
-  /**
-   * 创建实例SQL限流任务。
-   */
-  async CreateSqlFilter(
-    req: CreateSqlFilterRequest,
-    cb?: (error: string, rep: CreateSqlFilterResponse) => void
-  ): Promise<CreateSqlFilterResponse> {
-    return this.request("CreateSqlFilter", req, cb)
-  }
-
-  /**
-   * 获取指定时间段内的实例空间使用概览，包括磁盘增长量(MB)、磁盘剩余(MB)、磁盘总量(MB)及预计可用天数。
-   */
-  async DescribeDBSpaceStatus(
-    req: DescribeDBSpaceStatusRequest,
-    cb?: (error: string, rep: DescribeDBSpaceStatusResponse) => void
-  ): Promise<DescribeDBSpaceStatusResponse> {
-    return this.request("DescribeDBSpaceStatus", req, cb)
-  }
-
-  /**
-   * 根据会话ID中断当前会话，该接口分为两次提交：第一次为预提交阶段，Stage为"Prepare"，得到的返回值包含SqlExecId；第二次为确认提交， Stage为"Commit"， 将SqlExecId的值作为参数传入，最终终止会话进程。
-   */
-  async KillMySqlThreads(
-    req: KillMySqlThreadsRequest,
-    cb?: (error: string, rep: KillMySqlThreadsResponse) => void
-  ): Promise<KillMySqlThreadsResponse> {
-    return this.request("KillMySqlThreads", req, cb)
-  }
-
-  /**
    * 创建中止所有代理节点连接会话的异步任务。当前仅支持 Redis。得到的返回值为异步任务 id，可以作为参数传入接口 DescribeProxySessionKillTasks 查询kill会话任务执行状态。
    */
   async CreateProxySessionKillTask(
@@ -583,16 +305,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateProxySessionKillTaskResponse) => void
   ): Promise<CreateProxySessionKillTaskResponse> {
     return this.request("CreateProxySessionKillTask", req, cb)
-  }
-
-  /**
-   * 根据实例ID获取指定时间段（30分钟）的健康得分，以及异常扣分项。
-   */
-  async DescribeHealthScore(
-    req: DescribeHealthScoreRequest,
-    cb?: (error: string, rep: DescribeHealthScoreResponse) => void
-  ): Promise<DescribeHealthScoreResponse> {
-    return this.request("DescribeHealthScore", req, cb)
   }
 
   /**
@@ -606,13 +318,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更改实例限流任务状态，目前仅用于终止限流。
+   * 自治中心-查询自治事件任务详情。
    */
-  async ModifySqlFilters(
-    req: ModifySqlFiltersRequest,
-    cb?: (error: string, rep: ModifySqlFiltersResponse) => void
-  ): Promise<ModifySqlFiltersResponse> {
-    return this.request("ModifySqlFilters", req, cb)
+  async DescribeDBAutonomyAction(
+    req: DescribeDBAutonomyActionRequest,
+    cb?: (error: string, rep: DescribeDBAutonomyActionResponse) => void
+  ): Promise<DescribeDBAutonomyActionResponse> {
+    return this.request("DescribeDBAutonomyAction", req, cb)
   }
 
   /**
@@ -636,73 +348,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取SQL优化建议。【产品用户回馈，此接口限免开放，后续将并入dbbrain专业版】
+   * 更改实例限流任务状态，目前仅用于终止限流。
    */
-  async DescribeUserSqlAdvice(
-    req: DescribeUserSqlAdviceRequest,
-    cb?: (error: string, rep: DescribeUserSqlAdviceResponse) => void
-  ): Promise<DescribeUserSqlAdviceResponse> {
-    return this.request("DescribeUserSqlAdvice", req, cb)
-  }
-
-  /**
-   * 自治中心-终止自治任务（单次）
-   */
-  async CancelRedisBigKeyAnalysisTasks(
-    req: CancelRedisBigKeyAnalysisTasksRequest,
-    cb?: (error: string, rep: CancelRedisBigKeyAnalysisTasksResponse) => void
-  ): Promise<CancelRedisBigKeyAnalysisTasksResponse> {
-    return this.request("CancelRedisBigKeyAnalysisTasks", req, cb)
-  }
-
-  /**
-   * 删除安全审计日志导出任务。
-   */
-  async DeleteSecurityAuditLogExportTasks(
-    req: DeleteSecurityAuditLogExportTasksRequest,
-    cb?: (error: string, rep: DeleteSecurityAuditLogExportTasksResponse) => void
-  ): Promise<DeleteSecurityAuditLogExportTasksResponse> {
-    return this.request("DeleteSecurityAuditLogExportTasks", req, cb)
-  }
-
-  /**
-   * 自治中心-终止自治任务（单次）
-   */
-  async DescribeDBAutonomyActions(
-    req: DescribeDBAutonomyActionsRequest,
-    cb?: (error: string, rep: DescribeDBAutonomyActionsResponse) => void
-  ): Promise<DescribeDBAutonomyActionsResponse> {
-    return this.request("DescribeDBAutonomyActions", req, cb)
-  }
-
-  /**
-   * 查询redis大key分析任务列表。
-   */
-  async DescribeRedisBigKeyAnalysisTasks(
-    req: DescribeRedisBigKeyAnalysisTasksRequest,
-    cb?: (error: string, rep: DescribeRedisBigKeyAnalysisTasksResponse) => void
-  ): Promise<DescribeRedisBigKeyAnalysisTasksResponse> {
-    return this.request("DescribeRedisBigKeyAnalysisTasks", req, cb)
-  }
-
-  /**
-   * 延迟分析-查询命令延迟分布
-   */
-  async DescribeRedisCommandCostStatistics(
-    req: DescribeRedisCommandCostStatisticsRequest,
-    cb?: (error: string, rep: DescribeRedisCommandCostStatisticsResponse) => void
-  ): Promise<DescribeRedisCommandCostStatisticsResponse> {
-    return this.request("DescribeRedisCommandCostStatistics", req, cb)
-  }
-
-  /**
-   * 获取指定时间段内Redis 访问命令 cost top N
-   */
-  async DescribeRedisTopCostCommands(
-    req: DescribeRedisTopCostCommandsRequest,
-    cb?: (error: string, rep: DescribeRedisTopCostCommandsResponse) => void
-  ): Promise<DescribeRedisTopCostCommandsResponse> {
-    return this.request("DescribeRedisTopCostCommands", req, cb)
+  async ModifySqlFilters(
+    req: ModifySqlFiltersRequest,
+    cb?: (error: string, rep: ModifySqlFiltersResponse) => void
+  ): Promise<ModifySqlFiltersResponse> {
+    return this.request("ModifySqlFilters", req, cb)
   }
 
   /**
@@ -726,53 +378,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询安全审计日志导出任务列表。
+   * 查询redis大key分析任务列表。
    */
-  async DescribeSecurityAuditLogExportTasks(
-    req: DescribeSecurityAuditLogExportTasksRequest,
-    cb?: (error: string, rep: DescribeSecurityAuditLogExportTasksResponse) => void
-  ): Promise<DescribeSecurityAuditLogExportTasksResponse> {
-    return this.request("DescribeSecurityAuditLogExportTasks", req, cb)
-  }
-
-  /**
-   * 按照Sql模板+schema的聚合方式，统计排序指定时间段内的top慢sql。
-   */
-  async DescribeSlowLogTopSqls(
-    req: DescribeSlowLogTopSqlsRequest,
-    cb?: (error: string, rep: DescribeSlowLogTopSqlsResponse) => void
-  ): Promise<DescribeSlowLogTopSqlsResponse> {
-    return this.request("DescribeSlowLogTopSqls", req, cb)
-  }
-
-  /**
-   * 获取邮件发送中联系人的相关信息。
-   */
-  async DescribeAllUserContact(
-    req: DescribeAllUserContactRequest,
-    cb?: (error: string, rep: DescribeAllUserContactResponse) => void
-  ): Promise<DescribeAllUserContactResponse> {
-    return this.request("DescribeAllUserContact", req, cb)
-  }
-
-  /**
-   * 自治中心-终止自治事件
-   */
-  async CancelDBAutonomyEvent(
-    req: CancelDBAutonomyEventRequest,
-    cb?: (error: string, rep: CancelDBAutonomyEventResponse) => void
-  ): Promise<CancelDBAutonomyEventResponse> {
-    return this.request("CancelDBAutonomyEvent", req, cb)
-  }
-
-  /**
-   * 获取指定时间内某个sql模板的慢日志明细
-   */
-  async DescribeSlowLogs(
-    req: DescribeSlowLogsRequest,
-    cb?: (error: string, rep: DescribeSlowLogsResponse) => void
-  ): Promise<DescribeSlowLogsResponse> {
-    return this.request("DescribeSlowLogs", req, cb)
+  async DescribeRedisBigKeyAnalysisTasks(
+    req: DescribeRedisBigKeyAnalysisTasksRequest,
+    cb?: (error: string, rep: DescribeRedisBigKeyAnalysisTasksResponse) => void
+  ): Promise<DescribeRedisBigKeyAnalysisTasksResponse> {
+    return this.request("DescribeRedisBigKeyAnalysisTasks", req, cb)
   }
 
   /**
@@ -793,6 +405,446 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBDiagEventResponse) => void
   ): Promise<DescribeDBDiagEventResponse> {
     return this.request("DescribeDBDiagEvent", req, cb)
+  }
+
+  /**
+   * 自治中心-终止自治任务（单次）；注意：接口需要加白名单。
+   */
+  async ModifyUserAutonomyProfile(
+    req: ModifyUserAutonomyProfileRequest,
+    cb?: (error: string, rep: ModifyUserAutonomyProfileResponse) => void
+  ): Promise<ModifyUserAutonomyProfileResponse> {
+    return this.request("ModifyUserAutonomyProfile", req, cb)
+  }
+
+  /**
+   * 查询redis实例top key前缀列表。
+   */
+  async DescribeRedisTopKeyPrefixList(
+    req: DescribeRedisTopKeyPrefixListRequest,
+    cb?: (error: string, rep: DescribeRedisTopKeyPrefixListResponse) => void
+  ): Promise<DescribeRedisTopKeyPrefixListResponse> {
+    return this.request("DescribeRedisTopKeyPrefixList", req, cb)
+  }
+
+  /**
+   * 修改告警策略
+   */
+  async ModifyAlarmPolicy(
+    req: ModifyAlarmPolicyRequest,
+    cb?: (error: string, rep: ModifyAlarmPolicyResponse) => void
+  ): Promise<ModifyAlarmPolicyResponse> {
+    return this.request("ModifyAlarmPolicy", req, cb)
+  }
+
+  /**
+   * 添加邮件接收联系人的姓名， 邮件地址，返回值为添加成功的联系人id。
+   */
+  async AddUserContact(
+    req: AddUserContactRequest,
+    cb?: (error: string, rep: AddUserContactResponse) => void
+  ): Promise<AddUserContactResponse> {
+    return this.request("AddUserContact", req, cb)
+  }
+
+  /**
+   * 查询某张表的慢查模板概览，这个接口是对用户点击对应的推荐索引后，展示慢日志用的
+   */
+  async DescribeIndexRecommendAggregationSlowLogs(
+    req: DescribeIndexRecommendAggregationSlowLogsRequest,
+    cb?: (error: string, rep: DescribeIndexRecommendAggregationSlowLogsResponse) => void
+  ): Promise<DescribeIndexRecommendAggregationSlowLogsResponse> {
+    return this.request("DescribeIndexRecommendAggregationSlowLogs", req, cb)
+  }
+
+  /**
+   * 自治中心-终止自治任务（单次）
+   */
+  async CancelDBAutonomyAction(
+    req: CancelDBAutonomyActionRequest,
+    cb?: (error: string, rep: CancelDBAutonomyActionResponse) => void
+  ): Promise<CancelDBAutonomyActionResponse> {
+    return this.request("CancelDBAutonomyAction", req, cb)
+  }
+
+  /**
+   * 创建中断会话的任务。
+   */
+  async CreateKillTask(
+    req: CreateKillTaskRequest,
+    cb?: (error: string, rep: CreateKillTaskResponse) => void
+  ): Promise<CreateKillTaskResponse> {
+    return this.request("CreateKillTask", req, cb)
+  }
+
+  /**
+   * 更新Agent实例状态（停止或重连实例）
+   */
+  async UpdateMonitorSwitch(
+    req: UpdateMonitorSwitchRequest,
+    cb?: (error: string, rep: UpdateMonitorSwitchResponse) => void
+  ): Promise<UpdateMonitorSwitchResponse> {
+    return this.request("UpdateMonitorSwitch", req, cb)
+  }
+
+  /**
+   * 获取指定时间段内Redis Proxy 指标
+   */
+  async DescribeMetricTopProxies(
+    req: DescribeMetricTopProxiesRequest,
+    cb?: (error: string, rep: DescribeMetricTopProxiesResponse) => void
+  ): Promise<DescribeMetricTopProxiesResponse> {
+    return this.request("DescribeMetricTopProxies", req, cb)
+  }
+
+  /**
+   * 健康报告内容。
+   */
+  async DescribeDBDiagReportContent(
+    req: DescribeDBDiagReportContentRequest,
+    cb?: (error: string, rep: DescribeDBDiagReportContentResponse) => void
+  ): Promise<DescribeDBDiagReportContentResponse> {
+    return this.request("DescribeDBDiagReportContent", req, cb)
+  }
+
+  /**
+   * 延迟分析-查询命令延迟分布
+   */
+  async DescribeRedisCommandCostStatistics(
+    req: DescribeRedisCommandCostStatisticsRequest,
+    cb?: (error: string, rep: DescribeRedisCommandCostStatisticsResponse) => void
+  ): Promise<DescribeRedisCommandCostStatisticsResponse> {
+    return this.request("DescribeRedisCommandCostStatistics", req, cb)
+  }
+
+  /**
+   * 获取发送邮件的配置， 包括数据库巡检的邮件配置以及定期生成健康报告的邮件发送配置。
+   */
+  async DescribeMailProfile(
+    req: DescribeMailProfileRequest,
+    cb?: (error: string, rep: DescribeMailProfileResponse) => void
+  ): Promise<DescribeMailProfileResponse> {
+    return this.request("DescribeMailProfile", req, cb)
+  }
+
+  /**
+   * 该接口用于创建定期生成健康报告并邮件发送的配置，将健康报告的定期生成时间作为参数传入（周一至周日），用于设置健康报告的定期生成时间，同时保存相应的定期邮件发送的配置。
+   */
+  async CreateSchedulerMailProfile(
+    req: CreateSchedulerMailProfileRequest,
+    cb?: (error: string, rep: CreateSchedulerMailProfileResponse) => void
+  ): Promise<CreateSchedulerMailProfileResponse> {
+    return this.request("CreateSchedulerMailProfile", req, cb)
+  }
+
+  /**
+   * 查询实例的索引推荐信息，包括索引统计相关信息，推荐索引列表，无效索引列表等。
+   */
+  async DescribeIndexRecommendInfo(
+    req: DescribeIndexRecommendInfoRequest,
+    cb?: (error: string, rep: DescribeIndexRecommendInfoResponse) => void
+  ): Promise<DescribeIndexRecommendInfoResponse> {
+    return this.request("DescribeIndexRecommendInfo", req, cb)
+  }
+
+  /**
+   * 即时创建redis实例大key分析任务，限制正在运行的即时分析任务数量默认为5。
+   */
+  async CreateRedisBigKeyAnalysisTask(
+    req: CreateRedisBigKeyAnalysisTaskRequest,
+    cb?: (error: string, rep: CreateRedisBigKeyAnalysisTaskResponse) => void
+  ): Promise<CreateRedisBigKeyAnalysisTaskResponse> {
+    return this.request("CreateRedisBigKeyAnalysisTask", req, cb)
+  }
+
+  /**
+   * 获取实例占用空间最大的前几张表在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
+   */
+  async DescribeTopSpaceTableTimeSeries(
+    req: DescribeTopSpaceTableTimeSeriesRequest,
+    cb?: (error: string, rep: DescribeTopSpaceTableTimeSeriesResponse) => void
+  ): Promise<DescribeTopSpaceTableTimeSeriesResponse> {
+    return this.request("DescribeTopSpaceTableTimeSeries", req, cb)
+  }
+
+  /**
+   * 获取慢日志来源地址统计分布图。
+   */
+  async DescribeSlowLogUserHostStats(
+    req: DescribeSlowLogUserHostStatsRequest,
+    cb?: (error: string, rep: DescribeSlowLogUserHostStatsResponse) => void
+  ): Promise<DescribeSlowLogUserHostStatsResponse> {
+    return this.request("DescribeSlowLogUserHostStats", req, cb)
+  }
+
+  /**
+   * 获取实例Top表的实时空间统计信息，默认返回按大小排序。
+   */
+  async DescribeTopSpaceTables(
+    req: DescribeTopSpaceTablesRequest,
+    cb?: (error: string, rep: DescribeTopSpaceTablesResponse) => void
+  ): Promise<DescribeTopSpaceTablesResponse> {
+    return this.request("DescribeTopSpaceTables", req, cb)
+  }
+
+  /**
+   * 创建实例SQL限流任务。
+   */
+  async CreateSqlFilter(
+    req: CreateSqlFilterRequest,
+    cb?: (error: string, rep: CreateSqlFilterResponse) => void
+  ): Promise<CreateSqlFilterResponse> {
+    return this.request("CreateSqlFilter", req, cb)
+  }
+
+  /**
+   * 根据实例ID获取指定时间段（30分钟）的健康得分，以及异常扣分项。
+   */
+  async DescribeHealthScore(
+    req: DescribeHealthScoreRequest,
+    cb?: (error: string, rep: DescribeHealthScoreResponse) => void
+  ): Promise<DescribeHealthScoreResponse> {
+    return this.request("DescribeHealthScore", req, cb)
+  }
+
+  /**
+   * 删除安全审计日志导出任务。
+   */
+  async DeleteSecurityAuditLogExportTasks(
+    req: DeleteSecurityAuditLogExportTasksRequest,
+    cb?: (error: string, rep: DeleteSecurityAuditLogExportTasksResponse) => void
+  ): Promise<DeleteSecurityAuditLogExportTasksResponse> {
+    return this.request("DeleteSecurityAuditLogExportTasks", req, cb)
+  }
+
+  /**
+   * 自治中心-终止自治任务（单次）
+   */
+  async DescribeDBAutonomyActions(
+    req: DescribeDBAutonomyActionsRequest,
+    cb?: (error: string, rep: DescribeDBAutonomyActionsResponse) => void
+  ): Promise<DescribeDBAutonomyActionsResponse> {
+    return this.request("DescribeDBAutonomyActions", req, cb)
+  }
+
+  /**
+   * 获取指定时间内某个sql模板的慢日志明细
+   */
+  async DescribeSlowLogs(
+    req: DescribeSlowLogsRequest,
+    cb?: (error: string, rep: DescribeSlowLogsResponse) => void
+  ): Promise<DescribeSlowLogsResponse> {
+    return this.request("DescribeSlowLogs", req, cb)
+  }
+
+  /**
+   * 获取实例占用空间最大的前几个库在指定时间段内的每日由DBbrain定时采集的空间数据，默认返回按大小排序。
+   */
+  async DescribeTopSpaceSchemaTimeSeries(
+    req: DescribeTopSpaceSchemaTimeSeriesRequest,
+    cb?: (error: string, rep: DescribeTopSpaceSchemaTimeSeriesResponse) => void
+  ): Promise<DescribeTopSpaceSchemaTimeSeriesResponse> {
+    return this.request("DescribeTopSpaceSchemaTimeSeries", req, cb)
+  }
+
+  /**
+   * 查询Redis全量Key的内存分布情况。
+   */
+  async DescribeRedisUnExpiredKeyStatistics(
+    req: DescribeRedisUnExpiredKeyStatisticsRequest,
+    cb?: (error: string, rep: DescribeRedisUnExpiredKeyStatisticsResponse) => void
+  ): Promise<DescribeRedisUnExpiredKeyStatisticsResponse> {
+    return this.request("DescribeRedisUnExpiredKeyStatistics", req, cb)
+  }
+
+  /**
+   * 统计排序指定时间段内的top慢sql。
+   */
+  async DescribeRedisSlowLogTopSqls(
+    req: DescribeRedisSlowLogTopSqlsRequest,
+    cb?: (error: string, rep: DescribeRedisSlowLogTopSqlsResponse) => void
+  ): Promise<DescribeRedisSlowLogTopSqlsResponse> {
+    return this.request("DescribeRedisSlowLogTopSqls", req, cb)
+  }
+
+  /**
+   * 更新agent状态（停止或重连Agent）
+   */
+  async UpdateAgentSwitch(
+    req: UpdateAgentSwitchRequest,
+    cb?: (error: string, rep: UpdateAgentSwitchResponse) => void
+  ): Promise<UpdateAgentSwitchResponse> {
+    return this.request("UpdateAgentSwitch", req, cb)
+  }
+
+  /**
+   * 修改实例的配置信息。
+   */
+  async ModifyDiagDBInstanceConf(
+    req: ModifyDiagDBInstanceConfRequest,
+    cb?: (error: string, rep: ModifyDiagDBInstanceConfResponse) => void
+  ): Promise<ModifyDiagDBInstanceConfResponse> {
+    return this.request("ModifyDiagDBInstanceConf", req, cb)
+  }
+
+  /**
+   * 根据会话ID中断当前会话，该接口分为两次提交：第一次为预提交阶段，Stage为"Prepare"，得到的返回值包含SqlExecId；第二次为确认提交， Stage为"Commit"， 将SqlExecId的值作为参数传入，最终终止会话进程。
+   */
+  async KillMySqlThreads(
+    req: KillMySqlThreadsRequest,
+    cb?: (error: string, rep: KillMySqlThreadsResponse) => void
+  ): Promise<KillMySqlThreadsResponse> {
+    return this.request("KillMySqlThreads", req, cb)
+  }
+
+  /**
+   * 验证用户数据库账号权限，获取会话token。
+   */
+  async VerifyUserAccount(
+    req: VerifyUserAccountRequest,
+    cb?: (error: string, rep: VerifyUserAccountResponse) => void
+  ): Promise<VerifyUserAccountResponse> {
+    return this.request("VerifyUserAccount", req, cb)
+  }
+
+  /**
+   * 统计排序指定时间段内的top慢sql。
+   */
+  async DescribeSlowLogQueryTimeStats(
+    req: DescribeSlowLogQueryTimeStatsRequest,
+    cb?: (error: string, rep: DescribeSlowLogQueryTimeStatsResponse) => void
+  ): Promise<DescribeSlowLogQueryTimeStatsResponse> {
+    return this.request("DescribeSlowLogQueryTimeStats", req, cb)
+  }
+
+  /**
+   * 自治中心-终止自治任务（单次）
+   */
+  async DescribeDBAutonomyEvents(
+    req: DescribeDBAutonomyEventsRequest,
+    cb?: (error: string, rep: DescribeDBAutonomyEventsResponse) => void
+  ): Promise<DescribeDBAutonomyEventsResponse> {
+    return this.request("DescribeDBAutonomyEvents", req, cb)
+  }
+
+  /**
+   * 查询安全审计日志导出文件下载链接。目前日志文件下载仅提供腾讯云内网地址，请通过广州地域的腾讯云服务器进行下载。
+   */
+  async DescribeSecurityAuditLogDownloadUrls(
+    req: DescribeSecurityAuditLogDownloadUrlsRequest,
+    cb?: (error: string, rep: DescribeSecurityAuditLogDownloadUrlsResponse) => void
+  ): Promise<DescribeSecurityAuditLogDownloadUrlsResponse> {
+    return this.request("DescribeSecurityAuditLogDownloadUrls", req, cb)
+  }
+
+  /**
+   * 查询SQL模板。
+   */
+  async DescribeSqlTemplate(
+    req: DescribeSqlTemplateRequest,
+    cb?: (error: string, rep: DescribeSqlTemplateResponse) => void
+  ): Promise<DescribeSqlTemplateResponse> {
+    return this.request("DescribeSqlTemplate", req, cb)
+  }
+
+  /**
+   * 根据实例ID获取指定时间段的性能趋势。
+   */
+  async DescribeDBPerfTimeSeries(
+    req: DescribeDBPerfTimeSeriesRequest,
+    cb?: (error: string, rep: DescribeDBPerfTimeSeriesResponse) => void
+  ): Promise<DescribeDBPerfTimeSeriesResponse> {
+    return this.request("DescribeDBPerfTimeSeries", req, cb)
+  }
+
+  /**
+   * 查询健康报告生成任务列表。
+   */
+  async DescribeDBDiagReportTasks(
+    req: DescribeDBDiagReportTasksRequest,
+    cb?: (error: string, rep: DescribeDBDiagReportTasksResponse) => void
+  ): Promise<DescribeDBDiagReportTasksResponse> {
+    return this.request("DescribeDBDiagReportTasks", req, cb)
+  }
+
+  /**
+   * 获取邮件发送联系组的相关信息。
+   */
+  async DescribeAllUserGroup(
+    req: DescribeAllUserGroupRequest,
+    cb?: (error: string, rep: DescribeAllUserGroupResponse) => void
+  ): Promise<DescribeAllUserGroupResponse> {
+    return this.request("DescribeAllUserGroup", req, cb)
+  }
+
+  /**
+   * 查询实例列表
+   */
+  async DescribeAuditInstanceList(
+    req: DescribeAuditInstanceListRequest,
+    cb?: (error: string, rep: DescribeAuditInstanceListResponse) => void
+  ): Promise<DescribeAuditInstanceListResponse> {
+    return this.request("DescribeAuditInstanceList", req, cb)
+  }
+
+  /**
+   * 获取慢日志统计柱状图。
+   */
+  async DescribeSlowLogTimeSeriesStats(
+    req: DescribeSlowLogTimeSeriesStatsRequest,
+    cb?: (error: string, rep: DescribeSlowLogTimeSeriesStatsResponse) => void
+  ): Promise<DescribeSlowLogTimeSeriesStatsResponse> {
+    return this.request("DescribeSlowLogTimeSeriesStats", req, cb)
+  }
+
+  /**
+   * 延迟分析-命令字分析-查询命令延迟趋势
+   */
+  async DescribeRedisCmdPerfTimeSeries(
+    req: DescribeRedisCmdPerfTimeSeriesRequest,
+    cb?: (error: string, rep: DescribeRedisCmdPerfTimeSeriesResponse) => void
+  ): Promise<DescribeRedisCmdPerfTimeSeriesResponse> {
+    return this.request("DescribeRedisCmdPerfTimeSeries", req, cb)
+  }
+
+  /**
+   * 获取指定时间段内的实例空间使用概览，包括磁盘增长量(MB)、磁盘剩余(MB)、磁盘总量(MB)及预计可用天数。
+   */
+  async DescribeDBSpaceStatus(
+    req: DescribeDBSpaceStatusRequest,
+    cb?: (error: string, rep: DescribeDBSpaceStatusResponse) => void
+  ): Promise<DescribeDBSpaceStatusResponse> {
+    return this.request("DescribeDBSpaceStatus", req, cb)
+  }
+
+  /**
+   * 创建中断会话的任务。
+   */
+  async CreateMongoDBKillTask(
+    req: CreateMongoDBKillTaskRequest,
+    cb?: (error: string, rep: CreateMongoDBKillTaskResponse) => void
+  ): Promise<CreateMongoDBKillTaskResponse> {
+    return this.request("CreateMongoDBKillTask", req, cb)
+  }
+
+  /**
+   * 查询安全审计日志导出任务列表。
+   */
+  async DescribeSecurityAuditLogExportTasks(
+    req: DescribeSecurityAuditLogExportTasksRequest,
+    cb?: (error: string, rep: DescribeSecurityAuditLogExportTasksResponse) => void
+  ): Promise<DescribeSecurityAuditLogExportTasksResponse> {
+    return this.request("DescribeSecurityAuditLogExportTasks", req, cb)
+  }
+
+  /**
+   * 获取邮件发送中联系人的相关信息。
+   */
+  async DescribeAllUserContact(
+    req: DescribeAllUserContactRequest,
+    cb?: (error: string, rep: DescribeAllUserContactResponse) => void
+  ): Promise<DescribeAllUserContactResponse> {
+    return this.request("DescribeAllUserContact", req, cb)
   }
 
   /**
@@ -826,196 +878,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建健康报告，并可以选择是否发送邮件。
-   */
-  async CreateDBDiagReportTask(
-    req: CreateDBDiagReportTaskRequest,
-    cb?: (error: string, rep: CreateDBDiagReportTaskResponse) => void
-  ): Promise<CreateDBDiagReportTaskResponse> {
-    return this.request("CreateDBDiagReportTask", req, cb)
-  }
-
-  /**
-   * 获取实例信息列表。Region统一选择广州。
-   */
-  async DescribeDiagDBInstances(
-    req: DescribeDiagDBInstancesRequest,
-    cb?: (error: string, rep: DescribeDiagDBInstancesResponse) => void
-  ): Promise<DescribeDiagDBInstancesResponse> {
-    return this.request("DescribeDiagDBInstances", req, cb)
-  }
-
-  /**
-   * 获取指定时间段内的健康得分趋势
-   */
-  async DescribeHealthScoreTimeSeries(
-    req: DescribeHealthScoreTimeSeriesRequest,
-    cb?: (error: string, rep: DescribeHealthScoreTimeSeriesResponse) => void
-  ): Promise<DescribeHealthScoreTimeSeriesResponse> {
-    return this.request("DescribeHealthScoreTimeSeries", req, cb)
-  }
-
-  /**
-   * 删除实例SQL限流任务。
-   */
-  async DeleteSqlFilters(
-    req: DeleteSqlFiltersRequest,
-    cb?: (error: string, rep: DeleteSqlFiltersResponse) => void
-  ): Promise<DeleteSqlFiltersResponse> {
-    return this.request("DeleteSqlFilters", req, cb)
-  }
-
-  /**
-   * 修改告警策略
-   */
-  async ModifyAlarmPolicy(
-    req: ModifyAlarmPolicyRequest,
-    cb?: (error: string, rep: ModifyAlarmPolicyResponse) => void
-  ): Promise<ModifyAlarmPolicyResponse> {
-    return this.request("ModifyAlarmPolicy", req, cb)
-  }
-
-  /**
-   * 自治中心-终止自治任务（单次）；注意：接口需要加白名单。
-   */
-  async CreateUserAutonomyProfile(
-    req: CreateUserAutonomyProfileRequest,
-    cb?: (error: string, rep: CreateUserAutonomyProfileResponse) => void
-  ): Promise<CreateUserAutonomyProfileResponse> {
-    return this.request("CreateUserAutonomyProfile", req, cb)
-  }
-
-  /**
-   * 开启数据库审计服务
-   */
-  async OpenAuditService(
-    req: OpenAuditServiceRequest,
-    cb?: (error: string, rep: OpenAuditServiceResponse) => void
-  ): Promise<OpenAuditServiceResponse> {
-    return this.request("OpenAuditService", req, cb)
-  }
-
-  /**
-   * 添加邮件接收联系人的姓名， 邮件地址，返回值为添加成功的联系人id。
-   */
-  async AddUserContact(
-    req: AddUserContactRequest,
-    cb?: (error: string, rep: AddUserContactResponse) => void
-  ): Promise<AddUserContactResponse> {
-    return this.request("AddUserContact", req, cb)
-  }
-
-  /**
-   * 查询实例的索引推荐信息，包括索引统计相关信息，推荐索引列表，无效索引列表等。
-   */
-  async DescribeIndexRecommendInfo(
-    req: DescribeIndexRecommendInfoRequest,
-    cb?: (error: string, rep: DescribeIndexRecommendInfoResponse) => void
-  ): Promise<DescribeIndexRecommendInfoResponse> {
-    return this.request("DescribeIndexRecommendInfo", req, cb)
-  }
-
-  /**
-   * 验证用户数据库账号权限，获取会话token。
-   */
-  async VerifyUserAccount(
-    req: VerifyUserAccountRequest,
-    cb?: (error: string, rep: VerifyUserAccountResponse) => void
-  ): Promise<VerifyUserAccountResponse> {
-    return this.request("VerifyUserAccount", req, cb)
-  }
-
-  /**
-   * 修改审计配置相关信息，如高频存储时长等
-   */
-  async ModifyAuditService(
-    req: ModifyAuditServiceRequest,
-    cb?: (error: string, rep: ModifyAuditServiceResponse) => void
-  ): Promise<ModifyAuditServiceResponse> {
-    return this.request("ModifyAuditService", req, cb)
-  }
-
-  /**
-   * 查询某张表的慢查模板概览，这个接口是对用户点击对应的推荐索引后，展示慢日志用的
-   */
-  async DescribeIndexRecommendAggregationSlowLogs(
-    req: DescribeIndexRecommendAggregationSlowLogsRequest,
-    cb?: (error: string, rep: DescribeIndexRecommendAggregationSlowLogsResponse) => void
-  ): Promise<DescribeIndexRecommendAggregationSlowLogsResponse> {
-    return this.request("DescribeIndexRecommendAggregationSlowLogs", req, cb)
-  }
-
-  /**
-   * 修改实例的配置信息。
-   */
-  async ModifyDiagDBInstanceConf(
-    req: ModifyDiagDBInstanceConfRequest,
-    cb?: (error: string, rep: ModifyDiagDBInstanceConfResponse) => void
-  ): Promise<ModifyDiagDBInstanceConfResponse> {
-    return this.request("ModifyDiagDBInstanceConf", req, cb)
-  }
-
-  /**
-   * 自治中心-终止自治任务（单次）
-   */
-  async CancelDBAutonomyAction(
-    req: CancelDBAutonomyActionRequest,
-    cb?: (error: string, rep: CancelDBAutonomyActionResponse) => void
-  ): Promise<CancelDBAutonomyActionResponse> {
-    return this.request("CancelDBAutonomyAction", req, cb)
-  }
-
-  /**
-   * 统计排序指定时间段内的top慢sql。
-   */
-  async DescribeRedisSlowLogTopSqls(
-    req: DescribeRedisSlowLogTopSqlsRequest,
-    cb?: (error: string, rep: DescribeRedisSlowLogTopSqlsResponse) => void
-  ): Promise<DescribeRedisSlowLogTopSqlsResponse> {
-    return this.request("DescribeRedisSlowLogTopSqls", req, cb)
-  }
-
-  /**
-   * 创建中断会话的任务。
-   */
-  async CreateKillTask(
-    req: CreateKillTaskRequest,
-    cb?: (error: string, rep: CreateKillTaskResponse) => void
-  ): Promise<CreateKillTaskResponse> {
-    return this.request("CreateKillTask", req, cb)
-  }
-
-  /**
-   * 更新agent状态（停止或重连Agent）
-   */
-  async UpdateAgentSwitch(
-    req: UpdateAgentSwitchRequest,
-    cb?: (error: string, rep: UpdateAgentSwitchResponse) => void
-  ): Promise<UpdateAgentSwitchResponse> {
-    return this.request("UpdateAgentSwitch", req, cb)
-  }
-
-  /**
-   * 获取指定时间段内Redis Proxy 指标
-   */
-  async DescribeMetricTopProxies(
-    req: DescribeMetricTopProxiesRequest,
-    cb?: (error: string, rep: DescribeMetricTopProxiesResponse) => void
-  ): Promise<DescribeMetricTopProxiesResponse> {
-    return this.request("DescribeMetricTopProxies", req, cb)
-  }
-
-  /**
-   * 获取实例Top表的实时空间统计信息，默认返回按大小排序。
-   */
-  async DescribeTopSpaceTables(
-    req: DescribeTopSpaceTablesRequest,
-    cb?: (error: string, rep: DescribeTopSpaceTablesResponse) => void
-  ): Promise<DescribeTopSpaceTablesResponse> {
-    return this.request("DescribeTopSpaceTables", req, cb)
-  }
-
-  /**
    * 查询实例SQL限流任务列表。
    */
   async DescribeSqlFilters(
@@ -1036,26 +898,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于创建云数据库实例的审计日志文件
-   */
-  async DescribeAuditLogFiles(
-    req: DescribeAuditLogFilesRequest,
-    cb?: (error: string, rep: DescribeAuditLogFilesResponse) => void
-  ): Promise<DescribeAuditLogFilesResponse> {
-    return this.request("DescribeAuditLogFiles", req, cb)
-  }
-
-  /**
-   * 查询实例无主键表。
-   */
-  async DescribeNoPrimaryKeyTables(
-    req: DescribeNoPrimaryKeyTablesRequest,
-    cb?: (error: string, rep: DescribeNoPrimaryKeyTablesResponse) => void
-  ): Promise<DescribeNoPrimaryKeyTablesResponse> {
-    return this.request("DescribeNoPrimaryKeyTables", req, cb)
-  }
-
-  /**
    * 创建健康报告的浏览地址。
    */
   async CreateDBDiagReportUrl(
@@ -1063,36 +905,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDBDiagReportUrlResponse) => void
   ): Promise<CreateDBDiagReportUrlResponse> {
     return this.request("CreateDBDiagReportUrl", req, cb)
-  }
-
-  /**
-   * 健康报告内容。
-   */
-  async DescribeDBDiagReportContent(
-    req: DescribeDBDiagReportContentRequest,
-    cb?: (error: string, rep: DescribeDBDiagReportContentResponse) => void
-  ): Promise<DescribeDBDiagReportContentResponse> {
-    return this.request("DescribeDBDiagReportContent", req, cb)
-  }
-
-  /**
-   * 自治中心-查询自治事件任务详情。
-   */
-  async DescribeDBAutonomyAction(
-    req: DescribeDBAutonomyActionRequest,
-    cb?: (error: string, rep: DescribeDBAutonomyActionResponse) => void
-  ): Promise<DescribeDBAutonomyActionResponse> {
-    return this.request("DescribeDBAutonomyAction", req, cb)
-  }
-
-  /**
-   * 查询Redis全量Key的内存分布情况。
-   */
-  async DescribeRedisUnExpiredKeyStatistics(
-    req: DescribeRedisUnExpiredKeyStatisticsRequest,
-    cb?: (error: string, rep: DescribeRedisUnExpiredKeyStatisticsResponse) => void
-  ): Promise<DescribeRedisUnExpiredKeyStatisticsResponse> {
-    return this.request("DescribeRedisUnExpiredKeyStatistics", req, cb)
   }
 
   /**
@@ -1106,22 +918,222 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 自治中心-终止自治任务（单次）；注意：接口需要加白名单。
+   * 根据任务id删除健康报告生成任务
    */
-  async ModifyUserAutonomyProfile(
-    req: ModifyUserAutonomyProfileRequest,
-    cb?: (error: string, rep: ModifyUserAutonomyProfileResponse) => void
-  ): Promise<ModifyUserAutonomyProfileResponse> {
-    return this.request("ModifyUserAutonomyProfile", req, cb)
+  async DeleteDBDiagReportTasks(
+    req: DeleteDBDiagReportTasksRequest,
+    cb?: (error: string, rep: DeleteDBDiagReportTasksResponse) => void
+  ): Promise<DeleteDBDiagReportTasksResponse> {
+    return this.request("DeleteDBDiagReportTasks", req, cb)
   }
 
   /**
-   * 统计排序指定时间段内的top慢sql。
+   * 获取实例Top库的实时空间统计信息，默认返回按大小排序。
    */
-  async DescribeSlowLogQueryTimeStats(
-    req: DescribeSlowLogQueryTimeStatsRequest,
-    cb?: (error: string, rep: DescribeSlowLogQueryTimeStatsResponse) => void
-  ): Promise<DescribeSlowLogQueryTimeStatsResponse> {
-    return this.request("DescribeSlowLogQueryTimeStats", req, cb)
+  async DescribeTopSpaceSchemas(
+    req: DescribeTopSpaceSchemasRequest,
+    cb?: (error: string, rep: DescribeTopSpaceSchemasResponse) => void
+  ): Promise<DescribeTopSpaceSchemasResponse> {
+    return this.request("DescribeTopSpaceSchemas", req, cb)
+  }
+
+  /**
+   * 获取指定时间段内的健康得分趋势
+   */
+  async DescribeHealthScoreTimeSeries(
+    req: DescribeHealthScoreTimeSeriesRequest,
+    cb?: (error: string, rep: DescribeHealthScoreTimeSeriesResponse) => void
+  ): Promise<DescribeHealthScoreTimeSeriesResponse> {
+    return this.request("DescribeHealthScoreTimeSeries", req, cb)
+  }
+
+  /**
+   * 用于创建云数据库实例的审计日志文件
+   */
+  async DescribeAuditLogFiles(
+    req: DescribeAuditLogFilesRequest,
+    cb?: (error: string, rep: DescribeAuditLogFilesResponse) => void
+  ): Promise<DescribeAuditLogFilesResponse> {
+    return this.request("DescribeAuditLogFiles", req, cb)
+  }
+
+  /**
+   * 用于删除云数据库实例的审计日志文件。
+   */
+  async DeleteAuditLogFile(
+    req: DeleteAuditLogFileRequest,
+    cb?: (error: string, rep: DeleteAuditLogFileResponse) => void
+  ): Promise<DeleteAuditLogFileResponse> {
+    return this.request("DeleteAuditLogFile", req, cb)
+  }
+
+  /**
+   * 获取指定时间段内的诊断事件列表，支持依据风险等级、实例ID等条件过滤。
+   */
+  async DescribeDBDiagEvents(
+    req: DescribeDBDiagEventsRequest,
+    cb?: (error: string, rep: DescribeDBDiagEventsResponse) => void
+  ): Promise<DescribeDBDiagEventsResponse> {
+    return this.request("DescribeDBDiagEvents", req, cb)
+  }
+
+  /**
+   * 热Key分析
+   */
+  async DescribeRedisTopHotKeys(
+    req: DescribeRedisTopHotKeysRequest,
+    cb?: (error: string, rep: DescribeRedisTopHotKeysResponse) => void
+  ): Promise<DescribeRedisTopHotKeysResponse> {
+    return this.request("DescribeRedisTopHotKeys", req, cb)
+  }
+
+  /**
+   * 查询MongoDB实时会话列表
+   */
+  async DescribeMongoDBProcessList(
+    req: DescribeMongoDBProcessListRequest,
+    cb?: (error: string, rep: DescribeMongoDBProcessListResponse) => void
+  ): Promise<DescribeMongoDBProcessListResponse> {
+    return this.request("DescribeMongoDBProcessList", req, cb)
+  }
+
+  /**
+   * 获取SQL优化建议。【产品用户回馈，此接口限免开放，后续将并入dbbrain专业版】
+   */
+  async DescribeUserSqlAdvice(
+    req: DescribeUserSqlAdviceRequest,
+    cb?: (error: string, rep: DescribeUserSqlAdviceResponse) => void
+  ): Promise<DescribeUserSqlAdviceResponse> {
+    return this.request("DescribeUserSqlAdvice", req, cb)
+  }
+
+  /**
+   * 创建邮件配置。其中入参ProfileType表示所创建配置的类型，ProfileType 取值包括：dbScan_mail_configuration（数据库巡检邮件配置）、scheduler_mail_configuration（定期生成健康报告的邮件发送配置）。Region统一选择广州，和实例所属地域无关。
+   */
+  async CreateMailProfile(
+    req: CreateMailProfileRequest,
+    cb?: (error: string, rep: CreateMailProfileResponse) => void
+  ): Promise<CreateMailProfileResponse> {
+    return this.request("CreateMailProfile", req, cb)
+  }
+
+  /**
+   * 删除Redis实例的大key分析任务。
+   */
+  async DeleteRedisBigKeyAnalysisTasks(
+    req: DeleteRedisBigKeyAnalysisTasksRequest,
+    cb?: (error: string, rep: DeleteRedisBigKeyAnalysisTasksResponse) => void
+  ): Promise<DeleteRedisBigKeyAnalysisTasksResponse> {
+    return this.request("DeleteRedisBigKeyAnalysisTasks", req, cb)
+  }
+
+  /**
+   * 自治中心-终止自治任务（单次）
+   */
+  async CancelRedisBigKeyAnalysisTasks(
+    req: CancelRedisBigKeyAnalysisTasksRequest,
+    cb?: (error: string, rep: CancelRedisBigKeyAnalysisTasksResponse) => void
+  ): Promise<CancelRedisBigKeyAnalysisTasksResponse> {
+    return this.request("CancelRedisBigKeyAnalysisTasks", req, cb)
+  }
+
+  /**
+   * 修改审计配置相关信息，如高频存储时长等
+   */
+  async ModifyAuditService(
+    req: ModifyAuditServiceRequest,
+    cb?: (error: string, rep: ModifyAuditServiceResponse) => void
+  ): Promise<ModifyAuditServiceResponse> {
+    return this.request("ModifyAuditService", req, cb)
+  }
+
+  /**
+   * 获取指定时间段内Redis 访问命令 cost top N
+   */
+  async DescribeRedisTopCostCommands(
+    req: DescribeRedisTopCostCommandsRequest,
+    cb?: (error: string, rep: DescribeRedisTopCostCommandsResponse) => void
+  ): Promise<DescribeRedisTopCostCommandsResponse> {
+    return this.request("DescribeRedisTopCostCommands", req, cb)
+  }
+
+  /**
+   * 按照Sql模板+schema的聚合方式，统计排序指定时间段内的top慢sql。
+   */
+  async DescribeSlowLogTopSqls(
+    req: DescribeSlowLogTopSqlsRequest,
+    cb?: (error: string, rep: DescribeSlowLogTopSqlsResponse) => void
+  ): Promise<DescribeSlowLogTopSqlsResponse> {
+    return this.request("DescribeSlowLogTopSqls", req, cb)
+  }
+
+  /**
+   * 自治中心-终止自治事件
+   */
+  async CancelDBAutonomyEvent(
+    req: CancelDBAutonomyEventRequest,
+    cb?: (error: string, rep: CancelDBAutonomyEventResponse) => void
+  ): Promise<CancelDBAutonomyEventResponse> {
+    return this.request("CancelDBAutonomyEvent", req, cb)
+  }
+
+  /**
+   * 创建健康报告，并可以选择是否发送邮件。
+   */
+  async CreateDBDiagReportTask(
+    req: CreateDBDiagReportTaskRequest,
+    cb?: (error: string, rep: CreateDBDiagReportTaskResponse) => void
+  ): Promise<CreateDBDiagReportTaskResponse> {
+    return this.request("CreateDBDiagReportTask", req, cb)
+  }
+
+  /**
+   * 获取实例信息列表。Region统一选择广州。
+   */
+  async DescribeDiagDBInstances(
+    req: DescribeDiagDBInstancesRequest,
+    cb?: (error: string, rep: DescribeDiagDBInstancesResponse) => void
+  ): Promise<DescribeDiagDBInstancesResponse> {
+    return this.request("DescribeDiagDBInstances", req, cb)
+  }
+
+  /**
+   * 删除实例SQL限流任务。
+   */
+  async DeleteSqlFilters(
+    req: DeleteSqlFiltersRequest,
+    cb?: (error: string, rep: DeleteSqlFiltersResponse) => void
+  ): Promise<DeleteSqlFiltersResponse> {
+    return this.request("DeleteSqlFilters", req, cb)
+  }
+
+  /**
+   * 自治中心-终止自治任务（单次）；注意：接口需要加白名单。
+   */
+  async CreateUserAutonomyProfile(
+    req: CreateUserAutonomyProfileRequest,
+    cb?: (error: string, rep: CreateUserAutonomyProfileResponse) => void
+  ): Promise<CreateUserAutonomyProfileResponse> {
+    return this.request("CreateUserAutonomyProfile", req, cb)
+  }
+
+  /**
+   * 获取 Redis 实例所有 proxy 节点的实时会话详情列表。
+   */
+  async DescribeRedisProcessList(
+    req: DescribeRedisProcessListRequest,
+    cb?: (error: string, rep: DescribeRedisProcessListResponse) => void
+  ): Promise<DescribeRedisProcessListResponse> {
+    return this.request("DescribeRedisProcessList", req, cb)
+  }
+
+  /**
+   * 开启数据库审计服务
+   */
+  async OpenAuditService(
+    req: OpenAuditServiceRequest,
+    cb?: (error: string, rep: OpenAuditServiceResponse) => void
+  ): Promise<OpenAuditServiceResponse> {
+    return this.request("OpenAuditService", req, cb)
   }
 }

@@ -1554,58 +1554,43 @@ export interface VehicleRegCertInfo {
  */
 export interface IDCardOCRResponse {
   /**
-   * 姓名（人像面）
+   * <p>姓名（人像面）</p>
    */
   Name?: string
   /**
-   * 性别（人像面）
+   * <p>性别（人像面）</p>
    */
   Sex?: string
   /**
-   * 民族（人像面）
+   * <p>民族（人像面）</p>
    */
   Nation?: string
   /**
-   * 出生日期（人像面）
+   * <p>出生日期（人像面）</p>
    */
   Birth?: string
   /**
-   * 地址（人像面）
+   * <p>地址（人像面）</p>
    */
   Address?: string
   /**
-   * 身份证号（人像面）
+   * <p>身份证号（人像面）</p>
    */
   IdNum?: string
   /**
-   * 发证机关（国徽面）
+   * <p>发证机关（国徽面）</p>
    */
   Authority?: string
   /**
-   * 证件有效期（国徽面）
+   * <p>证件有效期（国徽面）</p>
    */
   ValidDate?: string
   /**
-   * 扩展信息，不请求则不返回，具体输入参考示例3和示例4。
-IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；
-Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；
-Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;
-BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;
-WarnInfos，告警信息，Code 告警码列表和释义：
--9100 身份证有效日期不合法告警，
--9101 身份证边框不完整告警，
--9102 身份证复印件告警（黑白及彩色复印件）,
--9108 身份证复印件告警（仅黑白复印件），
--9103 身份证翻拍告警，
--9105 身份证框内遮挡告警，
--9104 临时身份证告警，
--9106 身份证疑似存在PS痕迹告警，
--9107 身份证反光告警，
--9110 电子身份证告警
+   * <p>扩展信息，不请求则不返回，具体输入参考示例3和示例4。<br>IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；<br>Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；<br>Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;<br>BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;<br>WarnInfos，告警信息，Code 告警码列表和释义：<br>-9100 身份证有效日期不合法告警，<br>-9101 身份证边框不完整告警，<br>-9102 身份证复印件告警（黑白及彩色复印件）,<br>-9108 身份证复印件告警（仅黑白复印件），<br>-9103 身份证翻拍告警，<br>-9105 身份证框内遮挡告警，<br>-9104 临时身份证告警，<br>-9106 身份证疑似存在PS痕迹告警，<br>-9107 身份证反光告警，<br>-9110 电子身份证告警，<br>-9111 水印告警（仅CardWarnType参数为Advanced时）</p>
    */
   AdvancedInfo?: string
   /**
-   * 反光点覆盖区域详情结果，具体内容请点击左侧链接
+   * <p>反光点覆盖区域详情结果，具体内容请点击左侧链接</p>
    */
   ReflectDetailInfos?: Array<ReflectDetailInfo>
   /**
@@ -2888,56 +2873,39 @@ FailedOperation.UnKnowError：表示识别失败；
  */
 export interface RecognizeEncryptedIDCardOCRRequest {
   /**
-   * 请求体被加密后的密文（Base64编码），本接口只支持加密传输
+   * <p>请求体被加密后的密文（Base64编码），本接口只支持加密传输</p>
    */
   EncryptedBody: string
   /**
-   * 敏感数据加密信息。对传入信息有加密需求的用户可使用此参数，详情请点击左侧链接。
+   * <p>敏感数据加密信息。对传入信息有加密需求的用户可使用此参数，详情请点击左侧链接。</p>
    */
   Encryption: Encryption
   /**
-   * 图片的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * <p>图片的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。</p>
    */
   ImageBase64?: string
   /**
-   * 图片的 Url 地址。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+   * <p>图片的 Url 地址。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。</p>
    */
   ImageUrl?: string
   /**
-   * FRONT：身份证有照片的一面（人像面），
-BACK：身份证有国徽的一面（国徽面），
-该参数如果不填，将为您自动判断身份证正反面。
+   * <p>FRONT：身份证有照片的一面（人像面），<br>BACK：身份证有国徽的一面（国徽面），<br>该参数如果不填，将为您自动判断身份证正反面。</p>
    */
   CardSide?: string
   /**
-   * 以下可选字段均为bool 类型，默认false：
-CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）
-CropPortrait，人像照片裁剪（自动抠取身份证头像区域）
-CopyWarn，复印件告警
-BorderCheckWarn，边框不完整和框内遮挡告警
-ReshootWarn，屏幕翻拍告警
-DetectPsWarn，疑似存在PS痕迹告警（CardWarnType参数为 Advanced时同时开启电子身份证告警）
-TempIdWarn，临时身份证告警
-InvalidDateWarn，身份证有效日期不合法告警
-Quality，图片质量分数（评价图片的模糊程度）
-MultiCardDetect，是否开启正反面同框识别（仅支持二代身份证正反页同框识别或临时身份证正反页同框识别）
-ReflectWarn，是否开启反光检测
-SDK 设置方式参考：Config = Json.stringify({"CropIdCard":true,"CropPortrait":true})
-API 3.0 Explorer 设置方式参考：Config = {"CropIdCard":true,"CropPortrait":true}
+   * <p>以下可选字段均为bool 类型，默认false：<br>CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）<br>CropPortrait，人像照片裁剪（自动抠取身份证头像区域）<br>CopyWarn，复印件告警<br>BorderCheckWarn，边框不完整和框内遮挡告警<br>ReshootWarn，屏幕翻拍告警<br>DetectPsWarn，疑似存在PS痕迹告警（CardWarnType参数为 Advanced时同时开启电子身份证、水印告警）<br>TempIdWarn，临时身份证告警<br>InvalidDateWarn，身份证有效日期不合法告警<br>Quality，图片质量分数（评价图片的模糊程度）<br>MultiCardDetect，是否开启正反面同框识别（仅支持二代身份证正反页同框识别或临时身份证正反页同框识别）<br>ReflectWarn，是否开启反光检测<br>SDK 设置方式参考：Config = Json.stringify({&quot;CropIdCard&quot;:true,&quot;CropPortrait&quot;:true})<br>API 3.0 Explorer 设置方式参考：Config = {&quot;CropIdCard&quot;:true,&quot;CropPortrait&quot;:true}</p>
    */
   Config?: string
   /**
-   * 默认值为true，打开识别结果纠正开关。开关开启后，身份证号、出生日期、性别，三个字段会进行矫正补齐，统一结果输出；若关闭此开关，以上三个字段不会进行矫正补齐，保持原始识别结果输出，若原图出现篡改情况，这三个字段的识别结果可能会不统一。
+   * <p>默认值为true，打开识别结果纠正开关。开关开启后，身份证号、出生日期、性别，三个字段会进行矫正补齐，统一结果输出；若关闭此开关，以上三个字段不会进行矫正补齐，保持原始识别结果输出，若原图出现篡改情况，这三个字段的识别结果可能会不统一。</p>
    */
   EnableRecognitionRectify?: boolean
   /**
-   * 默认值为false。
-
-此开关需要在反光检测开关开启下才会生效（即此开关生效的前提是config入参里的"ReflectWarn":true），若EnableReflectDetail设置为true，则会返回反光点覆盖区域详情。反光点覆盖区域详情分为四部分：人像照片位置、国徽位置、识别字段位置、其他位置。一个反光点允许覆盖多个区域，且一张图片可能存在多个反光点。
+   * <p>默认值为false。</p><p>此开关需要在反光检测开关开启下才会生效（即此开关生效的前提是config入参里的&quot;ReflectWarn&quot;:true），若EnableReflectDetail设置为true，则会返回反光点覆盖区域详情。反光点覆盖区域详情分为四部分：人像照片位置、国徽位置、识别字段位置、其他位置。一个反光点允许覆盖多个区域，且一张图片可能存在多个反光点。</p>
    */
   EnableReflectDetail?: boolean
   /**
-   * Basic：使用基础卡证告警能力（含基础PS告警）； Advanced：开启进阶PS告警能力，PS告警效果更佳但需要更长耗时；建议测试对比后选用，默认值为 Basic
+   * <p>Basic：使用基础卡证告警能力（含基础PS告警）； Advanced：开启进阶PS告警能力，PS告警效果更佳但需要更长耗时；建议测试对比后选用，默认值为 Basic</p>
    */
   CardWarnType?: string
 }
@@ -6219,32 +6187,82 @@ export interface UsedVehicleInvoiceInfo {
 }
 
 /**
- * RecognizeTableMultiOCR请求参数结构体
+ * 行驶证副页正面的识别结果
  */
-export interface RecognizeTableMultiOCRRequest {
+export interface TextVehicleBack {
   /**
-   * 图片/PDF的 Base64 值。 要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。 图片支持的像素范围：需介于20-10000px之间。 图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 号牌号码
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageBase64?: string
+  PlateNo?: string
   /**
-   * 图片/PDF的 Url 地址。 要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。 图片支持的像素范围：需介于20-10000px之间。 图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 档案编号
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageUrl?: string
+  FileNo?: string
   /**
-   * 文档的起始页码。  当传入文件是PDF型时，用来指定识别的起始页码，识别的页码包含当前值。
+   * 核定人数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PdfStartPageNumber?: number
+  AllowNum?: string
   /**
-   * 文档的结束页码。 当传入文件是PDF类型时，用来指定识别的结束页码，识别的页码包含当前值。单次调用最多支持识别3页内容，即PdfEndPageNumber-PdfStartPageNumber需要不大于3。
+   * 总质量
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PdfEndPageNumber?: number
+  TotalMass?: string
   /**
-   * 配置选项，支持配置输出数据格式。
+   * 整备质量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurbWeight?: string
+  /**
+   * 核定载质量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadQuality?: string
+  /**
+   * 外廓尺寸
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExternalSize?: string
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Marks?: string
+  /**
+   * 检验记录
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Record?: string
+  /**
+   * 准牵引总质量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalQuasiMass?: string
+  /**
+   * 副页编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubPageCode?: string
+  /**
+   * 燃料种类
 
-* **Mdbase64** 返回 base64 编码的 markdown 格式文本。
-* **Excelbase64** 返回 base64 编码的 excel 文件。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DataFormat?: string
+  FuelType?: string
+  /**
+   * 住址
+   */
+  AddressElectronic?: string
+  /**
+   * 发证机关
+   */
+  IssueAuthorityElectronic?: string
+  /**
+   * 车身颜色
+   */
+  CarBodyColor?: string
 }
 
 /**
@@ -6449,85 +6467,6 @@ export interface RideHailingDriverLicenseOCRResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 行驶证副页正面的识别结果
- */
-export interface TextVehicleBack {
-  /**
-   * 号牌号码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PlateNo?: string
-  /**
-   * 档案编号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FileNo?: string
-  /**
-   * 核定人数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AllowNum?: string
-  /**
-   * 总质量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalMass?: string
-  /**
-   * 整备质量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CurbWeight?: string
-  /**
-   * 核定载质量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LoadQuality?: string
-  /**
-   * 外廓尺寸
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExternalSize?: string
-  /**
-   * 备注
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Marks?: string
-  /**
-   * 检验记录
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Record?: string
-  /**
-   * 准牵引总质量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalQuasiMass?: string
-  /**
-   * 副页编码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubPageCode?: string
-  /**
-   * 燃料种类
-
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FuelType?: string
-  /**
-   * 住址
-   */
-  AddressElectronic?: string
-  /**
-   * 发证机关
-   */
-  IssueAuthorityElectronic?: string
-  /**
-   * 车身颜色
-   */
-  CarBodyColor?: string
 }
 
 /**
@@ -7183,18 +7122,41 @@ export interface CarInvoiceInfo {
 }
 
 /**
- * RecognizeTableMultiOCR返回参数结构体
+ * 单元格数据
  */
-export interface RecognizeTableMultiOCRResponse {
+export interface TableCellInfo {
   /**
-   * Base64 编码后的 Excel 数据或 Markdown 数据。  注意：此字段可能返回空，表示取不到有效值。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 单元格左上角的列索引
    */
-  DataBase64?: string
+  ColTl: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 单元格左上角的行索引
    */
-  RequestId?: string
+  RowTl: number
+  /**
+   * 单元格右下角的列索引
+   */
+  ColBr: number
+  /**
+   * 单元格右下角的行索引
+   */
+  RowBr: number
+  /**
+   * 单元格内识别出的字符串文本，若文本存在多行，以换行符"\n"隔开
+   */
+  Text: string
+  /**
+   * 单元格类型
+   */
+  Type: string
+  /**
+   * 单元格置信度
+   */
+  Confidence: number
+  /**
+   * 单元格在图像中的四点坐标
+   */
+  Polygon: Array<Coord>
 }
 
 /**
@@ -10593,66 +10555,51 @@ export interface QuotaInvoiceOCRResponse {
  */
 export interface RecognizeEncryptedIDCardOCRResponse {
   /**
-   * 姓名（人像面）
+   * <p>姓名（人像面）</p>
    */
   Name?: string
   /**
-   * 性别（人像面）
+   * <p>性别（人像面）</p>
    */
   Sex?: string
   /**
-   * 民族（人像面）
+   * <p>民族（人像面）</p>
    */
   Nation?: string
   /**
-   * 出生日期（人像面）
+   * <p>出生日期（人像面）</p>
    */
   Birth?: string
   /**
-   * 地址（人像面）
+   * <p>地址（人像面）</p>
    */
   Address?: string
   /**
-   * 身份证号（人像面）
+   * <p>身份证号（人像面）</p>
    */
   IdNum?: string
   /**
-   * 发证机关（国徽面）
+   * <p>发证机关（国徽面）</p>
    */
   Authority?: string
   /**
-   * 证件有效期（国徽面）
+   * <p>证件有效期（国徽面）</p>
    */
   ValidDate?: string
   /**
-   * 扩展信息，不请求则不返回，具体输入参考示例3和示例4。
-IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；
-Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；
-Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;
-BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;
-WarnInfos，告警信息，Code 告警码列表和释义：
--9100 身份证有效日期不合法告警，
--9101 身份证边框不完整告警，
--9102 身份证复印件告警（黑白及彩色复印件）,
--9108 身份证复印件告警（仅黑白复印件），
--9103 身份证翻拍告警，
--9105 身份证框内遮挡告警，
--9104 临时身份证告警，
--9106 身份证疑似存在PS痕迹告警，
--9107 身份证反光告警，
--9110 电子身份证告警
+   * <p>扩展信息，不请求则不返回，具体输入参考示例3和示例4。<br>IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；<br>Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；<br>Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;<br>BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;<br>WarnInfos，告警信息，Code 告警码列表和释义：<br>-9100 身份证有效日期不合法告警，<br>-9101 身份证边框不完整告警，<br>-9102 身份证复印件告警（黑白及彩色复印件）,<br>-9108 身份证复印件告警（仅黑白复印件），<br>-9103 身份证翻拍告警，<br>-9105 身份证框内遮挡告警，<br>-9104 临时身份证告警，<br>-9106 身份证疑似存在PS痕迹告警，<br>-9107 身份证反光告警，<br>-9110 电子身份证告警，<br>-9111 水印告警（仅CardWarnType参数为Advanced时），</p>
    */
   AdvancedInfo?: string
   /**
-   * 反光点覆盖区域详情结果，具体内容请点击左侧链接
+   * <p>反光点覆盖区域详情结果，具体内容请点击左侧链接</p>
    */
   ReflectDetailInfos?: Array<ReflectDetailInfo>
   /**
-   * 加密后的数据（Base64编码）
+   * <p>加密后的数据（Base64编码）</p>
    */
   EncryptedBody?: string
   /**
-   * 敏感数据加密信息
+   * <p>敏感数据加密信息</p>
    */
   Encryption?: Encryption
   /**
@@ -11201,53 +11148,36 @@ export interface RecognizeOnlineTaxiItineraryOCRRequest {
  */
 export interface IDCardOCRRequest {
   /**
-   * 图片的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * <p>图片的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。</p>
    */
   ImageBase64?: string
   /**
-   * 图片的 Url 地址。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+   * <p>图片的 Url 地址。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。</p>
    */
   ImageUrl?: string
   /**
-   * FRONT：身份证有照片的一面（人像面），
-BACK：身份证有国徽的一面（国徽面），
-该参数如果不填，将为您自动判断身份证正反面。
+   * <p>FRONT：身份证有照片的一面（人像面），<br>BACK：身份证有国徽的一面（国徽面），<br>该参数如果不填，将为您自动判断身份证正反面。</p>
    */
   CardSide?: string
   /**
-   * 以下可选字段均为bool 类型，默认false：
-CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）
-CropPortrait，人像照片裁剪（自动抠取身份证头像区域）
-CopyWarn，复印件告警
-BorderCheckWarn，边框不完整和框内遮挡告警
-ReshootWarn，屏幕翻拍告警
-DetectPsWarn，疑似存在PS痕迹告警（CardWarnType参数为 Advanced时同时开启电子身份证告警）
-TempIdWarn，临时身份证告警
-InvalidDateWarn，身份证有效日期不合法告警
-Quality，图片质量分数（评价图片的模糊程度）
-MultiCardDetect，是否开启正反面同框识别（仅支持二代身份证正反页同框识别或临时身份证正反页同框识别）
-ReflectWarn，是否开启反光检测
-SDK 设置方式参考：Config = Json.stringify({"CropIdCard":true,"CropPortrait":true})
-API 3.0 Explorer 设置方式参考：Config = {"CropIdCard":true,"CropPortrait":true}
+   * <p>以下可选字段均为bool 类型，默认false：<br>CropIdCard，身份证照片裁剪（去掉证件外多余的边缘、自动矫正拍摄角度）<br>CropPortrait，人像照片裁剪（自动抠取身份证头像区域）<br>CopyWarn，复印件告警<br>BorderCheckWarn，边框不完整和框内遮挡告警<br>ReshootWarn，屏幕翻拍告警<br>DetectPsWarn，疑似存在PS痕迹告警（CardWarnType参数为 Advanced时同时开启电子身份证、水印告警）<br>TempIdWarn，临时身份证告警<br>InvalidDateWarn，身份证有效日期不合法告警<br>Quality，图片质量分数（评价图片的模糊程度）<br>MultiCardDetect，是否开启正反面同框识别（仅支持二代身份证正反页同框识别或临时身份证正反页同框识别）<br>ReflectWarn，是否开启反光检测<br>SDK 设置方式参考：Config = Json.stringify({&quot;CropIdCard&quot;:true,&quot;CropPortrait&quot;:true})<br>API 3.0 Explorer 设置方式参考：Config = {&quot;CropIdCard&quot;:true,&quot;CropPortrait&quot;:true}</p>
    */
   Config?: string
   /**
-   * 默认值为true，打开识别结果纠正开关。开关开启后，身份证号、出生日期、性别，三个字段会进行矫正补齐，统一结果输出；若关闭此开关，以上三个字段不会进行矫正补齐，保持原始识别结果输出，若原图出现篡改情况，这三个字段的识别结果可能会不统一。
+   * <p>默认值为true，打开识别结果纠正开关。开关开启后，身份证号、出生日期、性别，三个字段会进行矫正补齐，统一结果输出；若关闭此开关，以上三个字段不会进行矫正补齐，保持原始识别结果输出，若原图出现篡改情况，这三个字段的识别结果可能会不统一。</p>
    */
   EnableRecognitionRectify?: boolean
   /**
-   * 默认值为false。
-
-此开关需要在反光检测开关开启下才会生效（即此开关生效的前提是config入参里的"ReflectWarn":true），若EnableReflectDetail设置为true，则会返回反光点覆盖区域详情。反光点覆盖区域详情分为四部分：人像照片位置、国徽位置、识别字段位置、其他位置。一个反光点允许覆盖多个区域，且一张图片可能存在多个反光点。
+   * <p>默认值为false。</p><p>此开关需要在反光检测开关开启下才会生效（即此开关生效的前提是config入参里的&quot;ReflectWarn&quot;:true），若EnableReflectDetail设置为true，则会返回反光点覆盖区域详情。反光点覆盖区域详情分为四部分：人像照片位置、国徽位置、识别字段位置、其他位置。一个反光点允许覆盖多个区域，且一张图片可能存在多个反光点。</p>
    */
   EnableReflectDetail?: boolean
   /**
-   * 用于控制是否开启日期校验，默认值为true，打开会进行日期校验。
+   * <p>用于控制是否开启日期校验，默认值为true，打开会进行日期校验。</p>
    * @deprecated
    */
   EnableDateVerify?: boolean
   /**
-   * Basic：使用基础卡证告警能力（含基础PS告警）； Advanced：开启进阶PS告警能力，PS告警效果更佳但需要更长耗时；建议测试对比后选用，默认值为 Basic
+   * <p>Basic：使用基础卡证告警能力（含基础PS告警）； Advanced：开启进阶PS告警能力，PS告警效果更佳但需要更长耗时；建议测试对比后选用，默认值为 Basic</p>
    */
   CardWarnType?: string
 }
@@ -11487,44 +11417,6 @@ MyKid 儿童卡
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 单元格数据
- */
-export interface TableCellInfo {
-  /**
-   * 单元格左上角的列索引
-   */
-  ColTl: number
-  /**
-   * 单元格左上角的行索引
-   */
-  RowTl: number
-  /**
-   * 单元格右下角的列索引
-   */
-  ColBr: number
-  /**
-   * 单元格右下角的行索引
-   */
-  RowBr: number
-  /**
-   * 单元格内识别出的字符串文本，若文本存在多行，以换行符"\n"隔开
-   */
-  Text: string
-  /**
-   * 单元格类型
-   */
-  Type: string
-  /**
-   * 单元格置信度
-   */
-  Confidence: number
-  /**
-   * 单元格在图像中的四点坐标
-   */
-  Polygon: Array<Coord>
 }
 
 /**

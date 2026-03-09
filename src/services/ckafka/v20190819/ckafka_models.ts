@@ -86,7 +86,7 @@ export interface DescribeACLRequest {
  */
 export interface DescribeTopicSyncReplicaResponse {
   /**
-   * 返回topic 副本详情
+   * <p>返回topic 副本详情</p>
    */
   Result?: TopicInSyncReplicaResult
   /**
@@ -100,19 +100,19 @@ export interface DescribeTopicSyncReplicaResponse {
  */
 export interface FetchMessageByOffsetRequest {
   /**
-   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
+   * <p>ckafka集群实例Id，可通过<a href="https://cloud.tencent.com/document/product/597/40835">DescribeInstances</a>接口获取</p>
    */
   InstanceId: string
   /**
-   * 主题名，可通过[DescribeTopic](https://cloud.tencent.com/document/product/597/40847)接口获取
+   * <p>主题名，可通过<a href="https://cloud.tencent.com/document/product/597/40847">DescribeTopic</a>接口获取</p>
    */
   Topic: string
   /**
-   * 分区id
+   * <p>分区id</p>
    */
   Partition: number
   /**
-   * 位点信息
+   * <p>位点信息</p>
    */
   Offset: number
 }
@@ -463,23 +463,23 @@ export interface DeleteTopicRequest {
  */
 export interface FetchMessageListByOffsetRequest {
   /**
-   * ckafka集群实例Id
+   * <p>ckafka集群实例Id</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40835">DescribeInstances</a></p>
    */
   InstanceId: string
   /**
-   * 主题名
+   * <p>主题名</p>
    */
   Topic: string
   /**
-   * 分区id
+   * <p>分区id</p>
    */
   Partition: number
   /**
-   * 位点信息
+   * <p>位点信息</p>
    */
   Offset: number
   /**
-   * 最大查询条数，默认20，最大20
+   * <p>最大查询条数，默认20，最大20</p>
    */
   SinglePartitionRecordNumber?: number
 }
@@ -583,7 +583,7 @@ export interface RouteFilter {
  */
 export interface DescribeInstancesDetailResponse {
   /**
-   * 返回的实例详情结果对象
+   * <p>返回的实例详情结果对象</p>
    */
   Result?: InstanceDetailResponse
   /**
@@ -758,7 +758,7 @@ export interface Tag {
  */
 export interface ModifyAclRuleResponse {
   /**
-   * 规则的唯一表示Key
+   * <p>规则的唯一表示Key</p>
    */
   Result?: number
   /**
@@ -886,7 +886,7 @@ export interface MongoDBModifyConnectParam {
  */
 export interface FetchMessageListByOffsetResponse {
   /**
-   * 返回结果。注意，列表中不返回具体的消息内容（key、value），如果需要查询具体消息内容，请使用FetchMessageByOffset接口
+   * <p>返回结果。注意，列表中不返回具体的消息内容（key、value），如果需要查询具体消息内容，请使用FetchMessageByOffset接口</p>
    */
   Result?: Array<ConsumerRecord>
   /**
@@ -1040,7 +1040,7 @@ export interface AuthorizeTokenRequest {
  */
 export interface RenewCkafkaInstanceResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Result?: RenewCkafkaInstanceResp
   /**
@@ -1201,7 +1201,7 @@ export interface Partitions {
  */
 export interface DescribeTopicResponse {
   /**
-   * 返回的结果
+   * <p>返回的结果</p>
    */
   Result?: TopicResult
   /**
@@ -1297,75 +1297,75 @@ export interface FailureParam {
  */
 export interface CreateTopicRequest {
   /**
-   * 实例Id，可通过DescribeInstances接口获取。
+   * <p>实例Id</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40835">DescribeInstances</a></p>
    */
   InstanceId: string
   /**
-   * 只能包含字母、数字、下划线、“-”、“.”
+   * <p>只能包含字母、数字、下划线、“-”、“.”</p>
    */
   TopicName: string
   /**
-   * Partition个数，大于0
+   * <p>Partition个数，大于0</p>
    */
   PartitionNum: number
   /**
-   * 副本个数，不能多于 broker 数，最大为3
+   * <p>副本个数，不能多于 broker 数，最大为3</p>
    */
   ReplicaNum: number
   /**
-   * ip白名单开关, 1:打开  0:关闭，默认不打开
+   * <p>ip白名单开关, 1:打开  0:关闭，默认不打开</p>
    */
   EnableWhiteList?: number
   /**
-   * Ip白名单列表，配额限制，enableWhileList=1时必选
+   * <p>Ip白名单列表，配额限制，enableWhileList=1时必选</p>
    */
   IpWhiteList?: Array<string>
   /**
-   * 清理日志策略，日志清理模式，默认为"delete"。"delete"：日志按保存时间删除，"compact"：日志按 key 压缩，"compact, delete"：日志按 key 压缩且会按保存时间删除。
+   * <p>清理日志策略，日志清理模式，默认为&quot;delete&quot;。&quot;delete&quot;：日志按保存时间删除，&quot;compact&quot;：日志按 key 压缩，&quot;compact, delete&quot;：日志按 key 压缩且会按保存时间删除。</p>
    */
   CleanUpPolicy?: string
   /**
-   * 主题备注，是一个不超过 64 个字符的字符串，可以用字母和数字为首字符，剩余部分可以包含字母、数字和横划线(-)
+   * <p>主题备注</p><p>入参限制：不超过 64 个字符</p>
    */
   Note?: string
   /**
-   * 最小同步副本数，默认为1
+   * <p>最小同步副本数</p><p>默认值：1</p><p>最小值为1</p>
    */
   MinInsyncReplicas?: number
   /**
-   * 是否允许未同步的副本选为leader，0:不允许，1:允许，默认不允许
+   * <p>是否允许未同步的副本选为leader，0:不允许，1:允许，默认不允许</p>
    */
   UncleanLeaderElectionEnable?: number
   /**
-   * 可选参数。消息保留时间，单位ms，当前最小值为60000。默认值为7200000ms（2小时），最大值为7776000000 ms（90天）。
+   * <p>可选参数，消息保留时间</p><p>取值范围：[60000, 7776000000]</p><p>单位：毫秒</p><p>默认值：7200000</p>
    */
   RetentionMs?: number
   /**
-   * Segment分片滚动的时长，单位ms，最小值为86400000ms（1天）。
+   * <p>Segment分片滚动的时长</p><p>单位：毫秒</p><p>默认值：86400000</p><p>最小值为86400000ms（1天）</p>
    */
   SegmentMs?: number
   /**
-   * 主题消息最大值，单位为 Byte，最小值1024Bytes(即1KB)，最大值为12582912Bytes（即12MB）
+   * <p>主题消息最大值，单位为 Byte，最小值1024Bytes(即1KB)，最大值为12582912Bytes（即12MB）</p>
    */
   MaxMessageBytes?: number
   /**
-   * 预设ACL规则, 1:打开  0:关闭，默认不打开
+   * <p>预设ACL规则, 1:打开  0:关闭，默认不打开</p>
    */
   EnableAclRule?: number
   /**
-   * 预设ACL规则的名称
+   * <p>预设ACL规则的名称</p>
    */
   AclRuleName?: string
   /**
-   * 可选, 保留文件大小. 默认为-1,单位Byte, 当前最小值为1073741824。
+   * <p>可选, 保留文件大小. 默认为-1,单位Byte, 当前最小值为1073741824。</p><p>取值范围：[1073741824, 1099511627776]</p><p>单位：字节</p><p>特殊值：-1表示无限制</p>
    */
   RetentionBytes?: number
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<Tag>
   /**
-   * 消息保存的时间类型:CreateTime/LogAppendTime
+   * <p>消息保存的时间类型:CreateTime/LogAppendTime</p>
    */
   LogMsgTimestampType?: string
 }
@@ -1526,23 +1526,23 @@ export interface ScfParam {
  */
 export interface DescribeTopicRequest {
   /**
-   * ckafka集群实例Id
+   * <p>ckafka集群实例Id</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40835">DescribeInstances</a></p>
    */
   InstanceId: string
   /**
-   * 过滤条件，按照 topicName 过滤，支持模糊查询
+   * <p>过滤条件，按照 topicName 过滤，支持模糊查询</p>
    */
   SearchWord?: string
   /**
-   * 偏移量，不填默认为0
+   * <p>偏移量，不填默认为0</p>
    */
   Offset?: number
   /**
-   * 返回数量，不填则默认为20，最大值为50
+   * <p>返回数量，不填则默认为20，最大值为50</p>
    */
   Limit?: number
   /**
-   * Acl预设策略名称
+   * <p>Acl预设策略名称</p>
    */
   AclRuleName?: string
 }
@@ -1594,15 +1594,15 @@ export interface PostgreSQLModifyConnectParam {
  */
 export interface ModifyAclRuleRequest {
   /**
-   * ckafka集群实例Id
+   * <p>ckafka集群实例Id</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40835">DescribeInstances</a></p>
    */
   InstanceId: string
   /**
-   * ACL规则名
+   * <p>ACL规则名</p>
    */
   RuleName: string
   /**
-   * 修改预设规则时传入,是否应用到新增的Topic
+   * <p>修改预设规则时传入,是否应用到新增的Topic</p><p>枚举值：</p><ul><li>0： 不允许应用到新增的topic</li><li>1： 允许应用到新增的topic</li></ul><p>默认值：0</p>
    */
   IsApplied?: number
 }
@@ -1774,7 +1774,7 @@ export interface MariaDBModifyConnectParam {
  */
 export interface DescribeRegionResponse {
   /**
-   * 返回地域枚举结果列表
+   * <p>返回地域枚举结果列表</p>
    */
   Result?: Array<Region>
   /**
@@ -1788,7 +1788,7 @@ export interface DescribeRegionResponse {
  */
 export interface CreateTopicResponse {
   /**
-   * 返回创建结果
+   * <p>返回创建结果</p>
    */
   Result?: CreateTopicResp
   /**
@@ -1939,21 +1939,25 @@ export interface DescribeConsumerGroupResponse {
  */
 export interface CreateInstancePostData {
   /**
-   * CreateInstancePre返回固定为0，不能作为CheckTaskStatus的查询条件。只是为了保证和后台数据结构对齐。
+   * <p>CreateInstancePre返回固定为0，不能作为CheckTaskStatus的查询条件。只是为了保证和后台数据结构对齐。</p>
    */
   FlowId?: number
   /**
-   * 订单号列表
+   * <p>订单号列表</p>
    */
   DealNames?: Array<string>
   /**
-   * ckafka集群实例Id，当购买多个实例时，默认返回购买的第一个实例 id
+   * <p>ckafka集群实例Id，当购买多个实例时，默认返回购买的第一个实例 id</p>
    */
   InstanceId?: string
   /**
-   * 订单和购买实例对应映射列表
+   * <p>订单和购买实例对应映射列表</p>
    */
   DealNameInstanceIdMapping?: Array<DealInstanceDTO>
+  /**
+   * <p>CAM鉴权返回的eventId</p>
+   */
+  EventId?: string
 }
 
 /**
@@ -1963,26 +1967,11 @@ export interface DescModifyType {
   /**
    * 变配类型
    */
-  ModifyType: number
+  ModifyType?: number
   /**
    * 是否迁移标志
    */
-  MigrateFlag: boolean
-  /**
-   * 迁移预计耗时(稳定模式)秒
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MigrateCostTime: number
-  /**
-   * 升配模式(1:稳定模式，2:高速模式)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpgradeStrategy: number
-  /**
-   * 迁移预计耗时(高速模式)秒
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MigrateCostTimeHighSpeed: number
+  MigrateFlag?: boolean
 }
 
 /**
@@ -2187,6 +2176,14 @@ export interface InstanceAttributesResponse {
    * <p>实例删除保护开关: 1 开启 0 关闭</p>
    */
   DeleteProtectionEnable?: number
+  /**
+   * <p>实例级别消息保留大小</p>单位：bytes<br>默认值：-1
+   */
+  RetentionBytes?: number
+  /**
+   * <p>事务ID最大空闲时间，超时未提交的事务将被标记为过期</p>单位：ms
+   */
+  TransactionalIdExpirationMs?: number
 }
 
 /**
@@ -2527,35 +2524,35 @@ export interface SplitParam {
  */
 export interface DescribeTopicDetailRequest {
   /**
-   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
+   * <p>ckafka集群实例Id，可通过<a href="https://cloud.tencent.com/document/product/597/40835">DescribeInstances</a>接口获取</p>
    */
   InstanceId: string
   /**
-   * （过滤条件）按照topicName过滤，支持模糊查询
+   * <p>（过滤条件）按照topicName过滤，支持模糊查询</p>
    */
   SearchWord?: string
   /**
-   * 偏移量，不填默认为0
+   * <p>偏移量，不填默认为0</p>
    */
   Offset?: number
   /**
-   * 返回数量，不填则默认 20，取值要大于0
+   * <p>返回数量，不填则默认 20，取值要大于0</p>
    */
   Limit?: number
   /**
-   * Acl预设策略名称
+   * <p>Acl预设策略名称</p>
    */
   AclRuleName?: string
   /**
-   * 根据特定的属性排序(目前支持PartitionNum/CreateTime)，默认值为CreateTime。
+   * <p>根据特定的属性排序(目前支持PartitionNum/CreateTime)，默认值为CreateTime。</p><p>该参数为空时，默认按CreateTime倒序排序</p>
    */
   OrderBy?: string
   /**
-   * 0-顺序、1-倒序，默认值为0。
+   * <p>0-顺序、1-倒序，默认值为0。</p>
    */
   OrderType?: number
   /**
-   * 目前支持 ReplicaNum （副本数）筛选
+   * <p>目前支持 ReplicaNum （副本数）筛选</p>
    */
   Filters?: Array<Filter>
 }
@@ -2565,7 +2562,7 @@ export interface DescribeTopicDetailRequest {
  */
 export interface DescribeGroupOffsetsResponse {
   /**
-   * 返回结果
+   * <p>返回结果</p>
    */
   Result?: GroupOffsetResponse
   /**
@@ -2644,27 +2641,27 @@ export interface CreateTokenResponse {
  */
 export interface DescribeGroupOffsetsRequest {
   /**
-   * ckafka集群实例Id
+   * <p>ckafka集群实例Id</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40835">DescribeInstances</a></p>
    */
   InstanceId: string
   /**
-   * Kafka 消费分组
+   * <p>Kafka 消费分组</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40840">DescribeGroup</a></p>
    */
   Group: string
   /**
-   * group 订阅的主题名称数组，如果没有该数组，则表示指定的 group 下所有 topic 信息
+   * <p>group 订阅的主题名称数组，如果没有该数组，则表示指定的 group 下所有 topic 信息</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40847">DescribeTopic</a></p>
    */
   Topics?: Array<string>
   /**
-   * 模糊匹配 topicName
+   * <p>模糊匹配 topicName</p>
    */
   SearchWord?: string
   /**
-   * 本次查询的偏移位置，默认为0
+   * <p>本次查询的偏移位置，默认为0</p>
    */
   Offset?: number
   /**
-   * 本次返回结果的最大个数，默认为50，最大值为50
+   * <p>本次返回结果的最大个数，默认为50，最大值为50</p>
    */
   Limit?: number
 }
@@ -2847,6 +2844,10 @@ export interface InstanceDetail {
    * <p>实例功能列表</p>
    */
   Features?: Array<string>
+  /**
+   * <p>实例级别消息保留大小</p>单位：byte<br>默认值：-1<br><p>实例级别消息保留大小</p>
+   */
+  RetentionBytes?: number
 }
 
 /**
@@ -2870,7 +2871,7 @@ export interface InstanceQuotaConfigResp {
  */
 export interface DescribeTopicDetailResponse {
   /**
-   * 返回的主题详情实体
+   * <p>返回的主题详情实体</p>
    */
   Result?: TopicDetailResponse
   /**
@@ -3080,7 +3081,7 @@ export interface DescribeDatahubTasksResponse {
  */
 export interface FetchMessageByOffsetResponse {
   /**
-   * 返回结果
+   * <p>返回结果</p>
    */
   Result?: ConsumerRecord
   /**
@@ -3410,7 +3411,7 @@ export interface RouteResponse {
  */
 export interface DescribeGroupResponse {
   /**
-   * 返回结果
+   * <p>返回结果</p>
    */
   Result?: GroupResponse
   /**
@@ -3574,7 +3575,7 @@ export interface CreateDatahubTaskRes {
  */
 export interface ModifyInstanceAttributesResponse {
   /**
-   * 返回结果
+   * <p>返回结果</p>
    */
   Result?: JgwOperateResponse
   /**
@@ -3646,19 +3647,19 @@ export interface TopicInSyncReplicaInfo {
  */
 export interface DescribeRegionRequest {
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset?: number
   /**
-   * 返回最大结果数
+   * <p>返回最大结果数</p>
    */
   Limit?: number
   /**
-   * 业务字段，可忽略
+   * <p>业务字段，可忽略</p><p>枚举值：</p><ul><li>ckafka： ckafka业务</li><li>cmq： cmq业务</li></ul><p>默认值：ckafka</p>
    */
   Business?: string
   /**
-   * cdc专有集群业务字段，可忽略
+   * <p>cdc专有集群业务字段，可忽略</p>
    */
   CdcId?: string
 }
@@ -3792,50 +3793,62 @@ export interface CtsdbConnectParam {
  */
 export interface ModifyInstanceAttributesRequest {
   /**
-   * ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
+   * <p>ckafka集群实例Id,可通过<a href="https://cloud.tencent.com/document/product/597/40835">DescribeInstances</a>接口获取</p>
    */
   InstanceId: string
   /**
-   * 实例日志的最长保留时间，单位分钟，最大90天，最小为1min
+   * <p>实例日志的最长保留时间，单位分钟，最大90天，最小为1min</p>
    */
   MsgRetentionTime?: number
   /**
-   * ckafka集群实例Name
+   * <p>ckafka集群实例Name</p>
    */
   InstanceName?: string
   /**
-   * 实例配置
+   * <p>实例配置</p>
    */
   Config?: ModifyInstanceAttributesConfig
   /**
-   * 动态消息保留策略配置
+   * <p>动态消息保留策略配置</p>
    */
   DynamicRetentionConfig?: DynamicRetentionTime
   /**
-   * 用于修改升级版本或升配定时任务的执行时间，Unix时间戳，精确到秒
+   * <p>用于修改升级版本或升配定时任务的执行时间，Unix时间戳，精确到秒</p>
    */
   RebalanceTime?: number
   /**
-   * 公网带宽 最小3Mbps  最大999Mbps 仅专业版支持填写
+   * <p>公网带宽 最小3Mbps  最大999Mbps 仅专业版支持填写</p>
    */
   PublicNetwork?: number
   /**
-   * 动态硬盘扩容策略配置
+   * <p>动态硬盘扩容策略配置</p>
    * @deprecated
    */
   DynamicDiskConfig?: DynamicDiskConfig
   /**
-   * 实例级别单条消息大小（单位byte)  最大 12582912(不包含)  最小1024(不包含)
+   * <p>实例级别单条消息大小（单位byte)  最大 12582912(不包含)  最小1024(不包含)</p>
    */
   MaxMessageByte?: number
   /**
-   * 是否允许未同步的副本选为 leader: 1 开启  0 关闭
+   * <p>是否允许未同步的副本选为 leader: 1 开启  0 关闭</p>
    */
   UncleanLeaderElectionEnable?: number
   /**
-   * 实例删除保护开关: 1 开启  0 关闭
+   * <p>实例删除保护开关: 1 开启  0 关闭</p>
    */
   DeleteProtectionEnable?: number
+  /**
+   * <p>实例级别消息保留大小</p>单位：byte<br>默认值：-1<br><p>实例级别消息保留大小</p>
+   */
+  RetentionBytes?: number
+  /**
+   * <p>是否封禁高风险admin接口; true则封禁高风险adminApi; 关闭后不支持打开,仅专业版支持; 默认是false 对高风险admin接口不做处理</p>
+   */
+  AdminSecurity?: boolean
+  /**
+   * <p>事务ID最大空闲时间，超时未提交的事务将被标记为过期</p>取值范围：[3600000, 604800000]<br>单位：ms
+   */
+  TransactionalIdExpirationMs?: number
 }
 
 /**
@@ -3947,23 +3960,23 @@ export interface ModifyConnectResourceResponse {
  */
 export interface DescribeGroupRequest {
   /**
-   * ckafka集群实例Id
+   * <p>ckafka集群实例Id</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40835">DescribeInstances</a></p>
    */
   InstanceId: string
   /**
-   * 搜索关键字
+   * <p>搜索关键字</p>
    */
   SearchWord?: string
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset?: number
   /**
-   * 最大返回数量
+   * <p>最大返回数量</p><p>默认值：20</p>
    */
   Limit?: number
   /**
-   * 仅支持 GroupState 筛选,   支持的筛选状态有 Empty/Stable  注意：该参数只能在2.8/3.2 版本生效
+   * <p>仅支持 GroupState 筛选,   支持的筛选状态有 Empty/Stable  注意：该参数只能在2.8/3.2 版本生效</p>
    */
   Filters?: Array<Filter>
 }
@@ -4058,44 +4071,44 @@ export interface DeleteTopicIpWhiteListResponse {
  */
 export interface DescribeInstancesDetailRequest {
   /**
-   * （过滤条件）按照实例ID过滤
+   * <p>（过滤条件）按照实例ID过滤</p>
    */
   InstanceId?: string
   /**
-   * （过滤条件）按照实例名,实例Id,可用区,私有网络id,子网id 过滤，支持模糊查询
+   * <p>（过滤条件）按照实例名,实例Id,可用区,私有网络id,子网id 过滤，支持模糊查询</p>
    */
   SearchWord?: string
   /**
-   * （过滤条件）实例的状态。0：创建中，1：运行中，2：删除中，不填默认返回全部
+   * <p>（过滤条件）实例的状态，不填默认返回全部</p><p>枚举值：</p><ul><li>-1： 创建失败</li><li>0： 创建中</li><li>1： 运行中</li><li>2： 删除中</li><li>3： 已删除</li><li>4： 删除失败</li><li>5： 隔离中</li><li>7： 升级中</li></ul>
    */
   Status?: Array<number | bigint>
   /**
-   * 偏移量，不填默认为0。
+   * <p>偏移量，不填默认为0。</p>
    */
   Offset?: number
   /**
-   * 返回数量，不填则默认10，最大值20。
+   * <p>返回数量，不填则默认10，最大值20。</p>
    */
   Limit?: number
   /**
-   * 匹配标签key值。
+   * <p>匹配标签key值。</p>
    */
   TagKey?: string
   /**
-   * 过滤器。filter.Name 支持('Ip', 'VpcId', 'SubNetId', 'InstanceType','InstanceId') ,filter.Values最多传递10个值.
+   * <p>过滤器。filter.Name 支持(&#39;Ip&#39;, &#39;VpcId&#39;, &#39;SubNetId&#39;, &#39;InstanceType&#39;,&#39;InstanceId&#39;) ,filter.Values最多传递10个值.</p>
    */
   Filters?: Array<Filter>
   /**
-   * 已经废弃， 使用InstanceIdList
+   * <p>已经废弃， 使用InstanceIdList</p>
    * @deprecated
    */
   InstanceIds?: string
   /**
-   * 按照实例ID过滤
+   * <p>按照实例ID过滤</p>
    */
   InstanceIdList?: Array<string>
   /**
-   * 根据标签列表过滤实例（取交集）
+   * <p>根据标签列表过滤实例（取交集）</p>
    */
   TagList?: Array<Tag>
 }
@@ -4380,19 +4393,19 @@ Stable：消费分组中各个消费者已经加入，处于稳定状态
  */
 export interface BatchModifyGroupOffsetsRequest {
   /**
-   * 消费分组名称
+   * <p>消费分组名称</p>
    */
   GroupName: string
   /**
-   * ckafka集群实例Id
+   * <p>ckafka集群实例Id</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40835">DescribeInstances</a></p>
    */
   InstanceId: string
   /**
-   * partition信息
+   * <p>partition信息</p>
    */
   Partitions: Array<Partitions>
   /**
-   * 指定topic，默认所有topic
+   * <p>指定topic，默认所有topic</p>
    */
   TopicName?: Array<string>
 }
@@ -4450,24 +4463,19 @@ export interface DatahubTopicDTO {
  */
 export interface ModifyInstancePreRequest {
   /**
-   * ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
+   * <p>ckafka集群实例Id,可通过<a href="https://cloud.tencent.com/document/product/597/40835">DescribeInstances</a>接口获取</p>
    */
   InstanceId: string
   /**
-   * 磁盘大小 单位 GB     最大值为500000,步长100
-可以通过以下链接查看规格限制：https://cloud.tencent.com/document/product/597/122562
-
+   * <p>磁盘大小 单位 GB     最大值为500000,步长100可以通过以下链接查看规格限制：https://cloud.tencent.com/document/product/597/122562</p>
    */
   DiskSize?: number
   /**
-   * 峰值带宽 单位 MB/s
-可以通过以下链接查看规格限制及对应步长: https://cloud.tencent.com/document/product/597/11745
-
+   * <p>峰值带宽 单位 MB/s可以通过以下链接查看规格限制及对应步长: https://cloud.tencent.com/document/product/597/11745</p>
    */
   BandWidth?: number
   /**
-   * 分区上限 最大值: 40000, 步长: 100
-可以通过以下链接查看规格限制: https://cloud.tencent.com/document/product/597/122563
+   * <p>分区上限 最大值: 40000, 步长: 100可以通过以下链接查看规格限制: https://cloud.tencent.com/document/product/597/122563</p>
    */
   Partition?: number
 }
@@ -4654,27 +4662,27 @@ export interface EsModifyConnectParam {
  */
 export interface DescribeTypeInstancesRequest {
   /**
-   * （过滤条件）按照实例ID过滤
+   * <p>（过滤条件）按照实例ID过滤</p>
    */
   InstanceId?: string
   /**
-   * （过滤条件）按照实例名称过滤，支持模糊查询
+   * <p>（过滤条件）按照实例名称过滤，支持模糊查询</p>
    */
   SearchWord?: string
   /**
-   * （过滤条件）实例的状态。0：创建中，1：运行中，2：删除中，不填默认返回全部
+   * <p>（过滤条件）实例的状态，不填默认返回全部</p><p>枚举值：</p><ul><li>-1： 创建失败</li><li>0： 创建中</li><li>1： 运行中</li><li>2： 删除中</li><li>3： 已删除</li><li>4： 删除失败</li><li>5： 隔离中</li><li>7： 升级中</li></ul>
    */
   Status?: Array<number | bigint>
   /**
-   * 偏移量，不填默认为0
+   * <p>偏移量，不填默认为0</p>
    */
   Offset?: number
   /**
-   * 返回数量，不填则默认10，最大值100
+   * <p>返回数量，不填则默认10，最大值100</p>
    */
   Limit?: number
   /**
-   * 匹配标签key值。
+   * <p>匹配标签key值。</p>
    */
   TagKey?: string
 }
@@ -4908,29 +4916,33 @@ export interface ModifyDatahubTaskResponse {
  */
 export interface InstanceVersion {
   /**
-   * ckafka集群实例版本
+   * <p>ckafka集群实例版本</p>
    */
   KafkaVersion?: string
   /**
-   * broker版本信息
+   * <p>broker版本信息</p>
    */
   CurBrokerVersion?: string
   /**
-   * 最新版本信息
+   * <p>最新版本信息</p>
    */
   LatestBrokerVersion?: Array<LatestBrokerVersion>
   /**
-   * 允许跨大版本内核升级
+   * <p>允许跨大版本内核升级</p>
    */
   AllowUpgradeHighVersion?: boolean
   /**
-   * 允许升级的大版本
+   * <p>允许升级的大版本</p>
    */
   HighVersionSet?: Array<string>
   /**
-   * 允许小版本号配置自动删除消费者组
+   * <p>允许小版本号配置自动删除消费者组</p>
    */
   AllowAutoDeleteTimestamp?: boolean
+  /**
+   * <p>允许修改事务ID过期时间配置</p>
+   */
+  AllowModifyTxnIdExpiration?: boolean
 }
 
 /**
@@ -5191,7 +5203,7 @@ export interface DescribeDatahubTasksRes {
  */
 export interface DescribeInstancesResponse {
   /**
-   * 返回的结果
+   * <p>返回的结果</p>
    */
   Result?: InstanceResponse
   /**
@@ -5343,21 +5355,25 @@ export interface UpgradeBrokerVersionRequest {
  */
 export interface CreateInstancePreData {
   /**
-   * CreateInstancePre返回固定为0，不能作为CheckTaskStatus的查询条件。只是为了保证和后台数据结构对齐。
+   * <p>CreateInstancePre返回固定为0，不能作为CheckTaskStatus的查询条件。只是为了保证和后台数据结构对齐。</p>
    */
   FlowId?: number
   /**
-   * 订单号列表
+   * <p>订单号列表</p>
    */
   DealNames?: Array<string>
   /**
-   * ckafka集群实例Id，当购买多个实例时，默认返回购买的第一个实例 id
+   * <p>ckafka集群实例Id，当购买多个实例时，默认返回购买的第一个实例 id</p>
    */
   InstanceId?: string
   /**
-   * 订单和购买实例对应映射列表
+   * <p>订单和购买实例对应映射列表</p>
    */
   DealNameInstanceIdMapping?: Array<DealInstanceDTO>
+  /**
+   * <p>CAM鉴权返回的eventId</p>
+   */
+  EventId?: string
 }
 
 /**
@@ -5502,44 +5518,44 @@ export interface DorisModifyConnectParam {
  */
 export interface ZoneInfo {
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   ZoneId?: string
   /**
-   * 是否内部APP
+   * <p>是否内部APP</p><p>枚举值：</p><ul><li>0： 外部</li><li>1： 内部</li></ul><p>默认值：0</p>
    */
   IsInternalApp?: number
   /**
-   * 应用标识
+   * <p>应用标识</p>
    */
   AppId?: number
   /**
-   * 可用区是否售罄标识，true表示已售罄，false表示未售罄。
+   * <p>可用区是否售罄标识，true表示已售罄，false表示未售罄。</p>
    */
   Flag?: boolean
   /**
-   * 可用区名称
+   * <p>可用区名称</p>
    */
   ZoneName?: string
   /**
-   * 可用区状态  枚举示例:  3: 开启，4: 关闭;  可用区状态以SoldOut为准
+   * <p>可用区状态</p><p>枚举值：</p><ul><li>3： 开启</li><li>4： 关闭</li></ul><p>可用区状态以SoldOut为准</p>
    */
   ZoneStatus?: number
   /**
-   * 额外标识
+   * <p>额外标识</p>
    * @deprecated
    */
   Exflag?: string
   /**
-   * true为售罄，false为未售罄
+   * <p>true为售罄，false为未售罄</p>
    */
   SoldOut?: string
   /**
-   * 标准版售罄信息
+   * <p>标准版售罄信息</p>
    */
   SalesInfo?: Array<SaleInfo>
   /**
-   * 额外标识
+   * <p>额外标识</p>
    */
   ExtraFlag?: string
 }
@@ -5549,7 +5565,7 @@ export interface ZoneInfo {
  */
 export interface DescribeTopicSubscribeGroupResponse {
   /**
-   * 返回结果
+   * <p>返回结果</p>
    */
   Result?: TopicSubscribeGroup
   /**
@@ -5577,7 +5593,7 @@ export interface DeleteAclRuleRequest {
  */
 export interface DescribeTypeInstancesResponse {
   /**
-   * 返回的结果
+   * <p>返回的结果</p>
    */
   Result?: InstanceResponse
   /**
@@ -5769,37 +5785,41 @@ export interface DescribeTaskStatusResponse {
  */
 export interface DescribeModifyTypeRequest {
   /**
-   * ckafka集群实例Id
+   * <p>ckafka集群实例Id</p>
    */
   InstanceId: string
   /**
-   * 升配后的带宽，单位mb
+   * <p>升配后的带宽，单位mb</p>
    */
   BandWidth: number
   /**
-   * 升配后的磁盘，单位G
+   * <p>升配后的磁盘，单位G</p>
    */
   DiskSize: number
   /**
-   * 磁盘类型，例如 CLOUD_PREMIUM
+   * <p>磁盘类型，例如 CLOUD_PREMIUM</p>
    */
   DiskType: string
   /**
-   * 分区数量
+   * <p>分区数量</p>
    */
   Partition: number
   /**
-   * topic数量
+   * <p>topic数量</p>
    */
   Topic: number
   /**
-   * 实例类型例如 sp_ckafka_profession
+   * <p>实例类型例如 sp_ckafka_profession</p>
    */
   Type: string
   /**
-   * 变配入口
+   * <p>变配入口</p>
    */
   ModifyEntry?: string
+  /**
+   * <p>是否可用区变更  false: 非可用区变更  true: 可用区变更  默认false</p>
+   */
+  ModifyZone?: boolean
 }
 
 /**
@@ -5933,19 +5953,19 @@ export interface SubstrParam {
  */
 export interface DescribeTopicSubscribeGroupRequest {
   /**
-   * ckafka集群实例Id
+   * <p>ckafka集群实例Id</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40835">DescribeInstances</a></p>
    */
   InstanceId: string
   /**
-   * 主题名
+   * <p>主题名</p>
    */
   TopicName: string
   /**
-   * 分页时的起始位置
+   * <p>分页时的起始位置</p>
    */
   Offset?: number
   /**
-   * 分页时的个数
+   * <p>分页时的个数</p><p>默认值：20</p>
    */
   Limit?: number
 }
@@ -6115,7 +6135,7 @@ export interface DescribeDatahubTopicsRequest {
  */
 export interface DescribeUserResponse {
   /**
-   * 返回结果
+   * <p>返回结果</p>
    */
   Result?: UserResponse
   /**
@@ -6237,7 +6257,7 @@ export interface ZoneResponse {
  */
 export interface DeleteInstancePreRequest {
   /**
-   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
+   * <p>ckafka集群实例Id，可通过<a href="https://cloud.tencent.com/document/product/597/40835">DescribeInstances</a>接口获取</p>
    */
   InstanceId: string
 }
@@ -6335,32 +6355,32 @@ export interface PauseDatahubTaskRequest {
  */
 export interface DescribeInstancesRequest {
   /**
-   * （查询条件）按照ckafka集群实例Id过滤
+   * <p>（查询条件）按照ckafka集群实例Id过滤</p>
    */
   InstanceId?: string
   /**
-   * 搜索词   ex:（查询条件）按照实例名称过滤，支持模糊查询
+   * <p>搜索词   ex:（查询条件）按照实例名称过滤，支持模糊查询</p>
    */
   SearchWord?: string
   /**
-   * （查询条件）实例的状态  0：创建中，1：运行中，2：删除中，5: 隔离中,  7:升级中 不填默认返回全部
+   * <p>（查询条件）实例的状态 不填默认返回全部</p><p>枚举值：</p><ul><li>-1： 创建失败</li><li>0： 创建中</li><li>1： 运行中</li><li>2： 删除中</li><li>3： 已删除</li><li>4： 删除失败</li><li>5： 隔离中</li><li>7： 升级中</li></ul>
    */
   Status?: Array<number | bigint>
   /**
-   * 偏移量，不填默认为0
+   * <p>偏移量，不填默认为0</p>
    */
   Offset?: number
   /**
-   * 返回数量，不填则默认10，最大值100
+   * <p>返回数量，不填则默认10，最大值100</p>
    */
   Limit?: number
   /**
-   * 已废弃。匹配标签key值。
+   * <p>已废弃。匹配标签key值。</p>
    * @deprecated
    */
   TagKey?: string
   /**
-   * （查询条件）私有网络Id
+   * <p>（查询条件）私有网络Id</p>
    */
   VpcId?: string
 }
@@ -6384,7 +6404,7 @@ export interface DescribeCkafkaZoneResponse {
  */
 export interface ModifyInstancePreResponse {
   /**
-   * 变更预付费实例配置返回结构
+   * <p>变更预付费实例配置返回结构</p>
    */
   Result?: CreateInstancePreResp
   /**
@@ -6570,15 +6590,15 @@ export interface InstanceScalingDownResponse {
  */
 export interface DescribeRouteRequest {
   /**
-   * ckafka集群实例Id
+   * <p>ckafka集群实例Id</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40835">DescribeInstances</a></p>
    */
   InstanceId: string
   /**
-   * 路由Id
+   * <p>路由Id</p>
    */
   RouteId?: number
   /**
-   * 是否显示主路由，true时会在返回原路由列表的基础上,再额外展示实例创建时的主路由信息(且不被InternalFlag/UsedFor等参数过滤影响)
+   * <p>是否显示主路由，true时会在返回原路由列表的基础上,再额外展示实例创建时的主路由信息(且不被InternalFlag/UsedFor等参数过滤影响)</p>
    */
   MainRouteFlag?: boolean
 }
@@ -6733,7 +6753,7 @@ export interface DatahubTaskIdRes {
  */
 export interface DescribeRouteResponse {
   /**
-   * 返回的路由信息结果集
+   * <p>返回的路由信息结果集</p>
    */
   Result?: RouteResponse
   /**
@@ -6886,79 +6906,79 @@ export interface ResumeDatahubTaskResponse {
  */
 export interface ModifyTopicAttributesRequest {
   /**
-   * ckafka集群实例Id
+   * <p>ckafka集群实例Id</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40835">DescribeInstances</a></p>
    */
   InstanceId: string
   /**
-   * 主题名
+   * <p>主题名</p>
    */
   TopicName: string
   /**
-   * 主题备注，是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线-。
+   * <p>主题备注</p><p>入参限制：不超过64个字符</p><p>默认值：&quot;&quot;</p>
    */
   Note?: string
   /**
-   * IP 白名单开关，1：打开；0：关闭。
+   * <p>IP 白名单开关，1：打开；0：关闭。</p>
    */
   EnableWhiteList?: number
   /**
-   * 默认为1。
+   * <p>最小同步副本数</p><p>默认值：1</p><p>最小值为1</p>
    */
   MinInsyncReplicas?: number
   /**
-   * 默认为 0，0：false；1：true。
+   * <p>是否允许未同步的副本选为leader</p><p>枚举值：</p><ul><li>0： 不允许</li><li>1： 允许</li></ul><p>默认值：0</p>
    */
   UncleanLeaderElectionEnable?: number
   /**
-   * 消息保留时间，单位：ms，当前最小值为60000ms。
+   * <p>Segment分片滚动的时长</p><p>单位：毫秒</p><p>默认值：86400000</p><p>最小值为86400000ms（1天）</p>
    */
   RetentionMs?: number
   /**
-   * 主题消息最大值，单位为 Byte，最大值为12582912Byte（即12MB）。
+   * <p>主题消息最大值</p><p>取值范围：[1024, 12582912]</p><p>单位：Bytes</p>
    */
   MaxMessageBytes?: number
   /**
-   * Segment 分片滚动的时长，单位：ms，当前最小值86400000ms。
+   * <p>Segment 分片滚动的时长</p><p>单位：毫秒</p><p>最小值为86400000ms（1天）</p>
    */
   SegmentMs?: number
   /**
-   * 消息删除策略，可以选择delete 或者compact
+   * <p>消息删除策略，可以选择delete 或者compact</p>
    */
   CleanUpPolicy?: string
   /**
-   * Ip白名单列表，配额限制，enableWhileList=1时必选
+   * <p>Ip白名单列表，配额限制，enableWhileList=1时必选</p>
    */
   IpWhiteList?: Array<string>
   /**
-   * 预设ACL规则, 1:打开  0:关闭，默认不打开
+   * <p>预设ACL规则, 1:打开  0:关闭，默认不打开</p>
    */
   EnableAclRule?: number
   /**
-   * ACL规则名
+   * <p>ACL规则名</p>
    */
   AclRuleName?: string
   /**
-   * 可选, 保留文件大小. 默认为-1,单位bytes, 当前最小值为1048576B
+   * <p>可选, 保留文件大小</p><p>取值范围：[1073741824, 1099511627776]</p><p>单位：Bytes</p><p>默认值：-1</p><p>特殊值：-1表示无限制</p>
    */
   RetentionBytes?: number
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<Tag>
   /**
-   * 生产限流，单位 MB/s；设置为-1，则生产不限流
+   * <p>生产限流，单位 MB/s；设置为-1，则生产不限流</p>
    */
   QuotaProducerByteRate?: number
   /**
-   * 消费限流，单位 MB/s；设置为-1，则消费不限流
+   * <p>消费限流，单位 MB/s；设置为-1，则消费不限流</p>
    */
   QuotaConsumerByteRate?: number
   /**
-   * topic副本数  最小值 1,最大值 3
+   * <p>topic副本数  最小值 1,最大值 3</p>
    */
   ReplicaNum?: number
   /**
-   * 消息保存的时间类型：CreateTime/LogAppendTime
+   * <p>消息保存的时间类型：CreateTime/LogAppendTime</p>
    */
   LogMsgTimestampType?: string
 }
@@ -7915,7 +7935,7 @@ export interface Topic {
  */
 export interface BatchModifyGroupOffsetsResponse {
   /**
-   * 返回结果
+   * <p>返回结果</p>
    */
   Result?: JgwOperateResponse
   /**
@@ -8229,7 +8249,7 @@ export interface TransformParam {
  */
 export interface DeleteInstancePreResponse {
   /**
-   * 返回结果
+   * <p>返回结果</p>
    */
   Result?: CreateInstancePreResp
   /**
@@ -8405,19 +8425,19 @@ export interface DescribeConnectResource {
  */
 export interface DescribeUserRequest {
   /**
-   * ckafka集群实例Id
+   * <p>ckafka集群实例Id</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40835">DescribeInstances</a></p>
    */
   InstanceId: string
   /**
-   * 按照名称过滤
+   * <p>按照名称过滤</p><p>支持模糊匹配</p>
    */
   SearchWord?: string
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset?: number
   /**
-   * 返回数量
+   * <p>返回数量</p><p>默认值：20</p>
    */
   Limit?: number
 }
@@ -8427,7 +8447,7 @@ export interface DescribeUserRequest {
  */
 export interface DescribeModifyTypeResponse {
   /**
-   * 返回的变配类型结构
+   * <p>返回的变配类型结构</p>
    */
   Result?: DescModifyType
   /**
@@ -8534,7 +8554,7 @@ export interface DeleteDatahubTopicRequest {
  */
 export interface ModifyTopicAttributesResponse {
   /**
-   * 返回结果
+   * <p>返回结果</p>
    */
   Result?: JgwOperateResponse
   /**
@@ -8998,60 +9018,56 @@ export interface ModifyGroupOffsetsRequest {
  */
 export interface Route {
   /**
-   * 实例接入方式
-0：PLAINTEXT (明文方式，没有带用户信息老版本及社区版本都支持)
-1：SASL_PLAINTEXT（明文方式，不过在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）
-2：SSL（SSL加密通信，没有带用户信息，老版本及社区版本都支持）
-3：SASL_SSL（SSL加密通信，在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）
+   * <p>实例接入方式0：PLAINTEXT (明文方式，没有带用户信息老版本及社区版本都支持)1：SASL_PLAINTEXT（明文方式，不过在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）2：SSL（SSL加密通信，没有带用户信息，老版本及社区版本都支持）3：SASL_SSL（SSL加密通信，在数据开始时，会通过SASL方式登录鉴权，仅社区版本支持）</p>
    */
   AccessType?: number
   /**
-   * 路由Id
+   * <p>路由Id</p>
    */
   RouteId?: number
   /**
-   * 路由网络类型(3:vpc路由;7:内部支撑路由;1:公网路由)
+   * <p>路由网络类型(3:vpc路由;7:内部支撑路由;1:公网路由)</p>
    */
   VipType?: number
   /**
-   * 虚拟IP列表
+   * <p>虚拟IP列表</p>
    */
   VipList?: Array<VipEntity>
   /**
-   * 域名
+   * <p>域名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Domain?: string
   /**
-   * 域名port
+   * <p>域名port</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DomainPort?: number
   /**
-   * 时间戳
+   * <p>时间戳</p>
    */
   DeleteTimestamp?: string
   /**
-   * 子网Id
+   * <p>子网Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Subnet?: string
   /**
-   * 虚拟IP列表(1对1 broker节点)
+   * <p>虚拟IP列表(1对1 broker节点)</p>
    */
   BrokerVipList?: Array<VipEntity>
   /**
-   * 私有网络Id
+   * <p>私有网络Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
-   * 备注信息
+   * <p>备注信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Note?: string
   /**
-   * 路由的状态。1: 创建中，2: 创建成功，3: 创建失败，4: 删除中，6: 删除失败
+   * <p>路由的状态。1: 创建中，2: 创建成功，3: 创建失败，4: 删除中，6: 删除失败</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
@@ -9084,11 +9100,11 @@ export interface AclRuleInfo {
  */
 export interface RenewCkafkaInstanceRequest {
   /**
-   * ckafka集群实例Id,可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
+   * <p>ckafka集群实例Id,可通过<a href="https://cloud.tencent.com/document/product/597/40835">DescribeInstances</a>接口获取</p>
    */
   InstanceId: string
   /**
-   * 续费时长, 默认为1, 单位是月
+   * <p>续费时长, 默认为1, 单位是月</p>
    */
   TimeSpan?: number
 }
@@ -9227,23 +9243,23 @@ export interface ClickHouseConnectParam {
  */
 export interface DescribeTopicSyncReplicaRequest {
   /**
-   * 实例ID
+   * <p>实例ID</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40835">DescribeInstances</a></p>
    */
   InstanceId: string
   /**
-   * 主题名称
+   * <p>主题名称</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/40847">DescribeTopic</a></p>
    */
   TopicName: string
   /**
-   * 偏移量，不填默认为0
+   * <p>偏移量，不填默认为0</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认值为20，必须大于0。
+   * <p>返回数量，默认值为20，必须大于0。</p>
    */
   Limit?: number
   /**
-   * 仅筛选未同步副本
+   * <p>仅筛选未同步副本</p>
    */
   OutOfSyncReplicaOnly?: boolean
 }

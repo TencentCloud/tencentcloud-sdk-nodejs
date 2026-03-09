@@ -28,13 +28,16 @@ import {
   KeyValue,
   CreateNativeGatewayServerGroupRequest,
   DescribeCloudNativeAPIGatewayCertificatesRequest,
+  DeleteGovernanceLaneGroupsResponse,
   DeleteCloudNativeAPIGatewayResult,
   CloseWafProtectionRequest,
+  DeleteGovernanceLaneGroup,
   DescribeCloudNativeAPIGatewayNodesResponse,
   CreateCloudNativeAPIGatewayResponse,
   DescribeUpstreamHealthCheckConfigResponse,
   NetworkAccessControl,
   DescribePublicNetworkResult,
+  DescribeGovernanceLaneGroupsResponse,
   NativeGatewayServiceSourceItem,
   CreateNativeGatewayServiceSourceResponse,
   CreateCloudNativeAPIGatewayServiceRequest,
@@ -42,8 +45,10 @@ import {
   PublicAddressConfig,
   SREInstance,
   DescribeCloudNativeAPIGatewayServicesRequest,
+  GovernanceServiceDestination,
   CreateCloudNativeAPIGatewayCanaryRuleResponse,
   DeleteGovernanceNamespacesResponse,
+  Label,
   DescribeCloudNativeAPIGatewayRoutesResponse,
   DescribeWafProtectionResponse,
   DescribeZookeeperReplicasRequest,
@@ -77,14 +82,14 @@ import {
   DeleteCloudNativeAPIGatewayServiceRateLimitResponse,
   CreateGovernanceServicesRequest,
   ModifyCloudNativeAPIGatewayServiceRateLimitRequest,
-  NativeGatewayServerGroup,
+  CloudNativeAPIGatewayNode,
   ModifyNetworkAccessStrategyResponse,
-  RestartSREInstanceRequest,
+  ModifyAutoScalerResourceStrategyRequest,
   UnbindAutoScalerResourceStrategyFromGroupsRequest,
   ConfigFilePersistent,
   DeleteCloudNativeAPIGatewayPublicNetworkRequest,
   ReleaseVersion,
-  PolarisLimiterAddress,
+  CreateConfigFileGroupResponse,
   CreateGovernanceAliasRequest,
   ModifyCloudNativeAPIGatewayServiceRequest,
   DescribeAutoScalerResourceStrategyBindingGroupsRequest,
@@ -111,6 +116,7 @@ import {
   ModifyConsoleNetworkResponse,
   DescribeWafDomainsResponse,
   DescribeSREInstanceAccessAddressRequest,
+  ModifyGovernanceLaneGroupsRequest,
   ModifyGovernanceInstancesResponse,
   DeleteCloudNativeAPIGatewayPublicNetworkResponse,
   CreateOrUpdateConfigFileAndReleaseRequest,
@@ -129,7 +135,8 @@ import {
   DescribeConfigFilesResponse,
   DescribeCloudNativeAPIGatewayServicesResponse,
   CreateNativeGatewayServiceSourceRequest,
-  QpsThreshold,
+  CreateGovernanceLaneGroupsRequest,
+  ListCloudNativeAPIGatewayStrategyResult,
   GovernanceServiceInput,
   VpcInfo,
   ConfigFile,
@@ -191,11 +198,13 @@ import {
   ModifyCloudNativeAPIGatewayResponse,
   CreateCloudNativeAPIGatewayPublicNetworkRequest,
   UpdateCloudNativeAPIGatewayResult,
+  ServiceSelector,
+  TrafficGray,
   RouteWafStatus,
   ModifyGovernanceNamespacesRequest,
   SourceInstanceVpcInfo,
   ModifyConfigFileGroupResponse,
-  DescribeAllConfigFileTemplatesRequest,
+  ArgumentValue,
   RateLimitResponse,
   RollbackConfigFileReleasesRequest,
   DescribeCloudNativeAPIGatewayInfoByIpResponse,
@@ -218,6 +227,7 @@ import {
   CreateCloudNativeAPIGatewayRequest,
   CloudNativeAPIGatewayStrategyBindingGroupInfo,
   DescribeGovernanceServiceContractVersionsResponse,
+  RoutingDestinationRuleLabel,
   ModifyConfigFilesResponse,
   DescribeAllConfigFileTemplatesResponse,
   ConfigFileGroupTag,
@@ -233,10 +243,13 @@ import {
   CreateGovernanceInstancesResponse,
   CreateGatewayServiceResult,
   DescribeInstanceInfoByIpResult,
+  CreateGovernanceLaneGroupsResponse,
   DeleteEngineResponse,
   Location,
+  CreateEngineRequest,
   ModifyCloudNativeAPIGatewayCanaryRuleRequest,
   DescribeCloudNativeAPIGatewayPortsResponse,
+  TSEGatewaySelector,
   DeleteGovernanceNamespacesRequest,
   DescribeCloudNativeAPIGatewayConfigResponse,
   CreateCloudNativeAPIGatewayRouteResponse,
@@ -267,7 +280,7 @@ import {
   DescribeCloudNativeAPIGatewayRequest,
   DeleteConfigFileGroupRequest,
   KongCertificatesList,
-  ListCloudNativeAPIGatewayStrategyResult,
+  QpsThreshold,
   CreateCloudNativeAPIGatewayCanaryRuleRequest,
   OpenWafProtectionRequest,
   GovernanceInstance,
@@ -278,6 +291,7 @@ import {
   DescribeNacosServerInterfacesRequest,
   KongUpstreamInfo,
   DescribeSREInstancesRequest,
+  LaneTrafficEntry,
   DescribeCloudNativeAPIGatewayInfoByIpRequest,
   DescribeZookeeperReplicasResponse,
   ModifyConfigFileGroupRequest,
@@ -285,12 +299,14 @@ import {
   PublishConfigFilesRequest,
   DescribeConfigFileReleaseHistoriesRequest,
   ModifyCloudNativeAPIGatewayRequest,
+  GovernanceLaneGroup,
   DescribeNativeGatewayServerGroupsResponse,
   ModifyNativeGatewayServerGroupResponse,
   ConfigFileTag,
   DescribeNativeGatewayServiceSourcesResponse,
   ListCloudNativeAPIGatewayResult,
   CreateCloudNativeAPIGatewayServiceResponse,
+  ModifyGovernanceLaneGroupsResponse,
   DeleteCloudNativeAPIGatewayRouteRateLimitResponse,
   DescribeConfigFileGroupsRequest,
   CreateGovernanceNamespacesRequest,
@@ -336,7 +352,9 @@ import {
   DescribeCloudNativeAPIGatewaysRequest,
   DescribeCloudNativeAPIGatewayConfigResult,
   DeleteCloudNativeAPIGatewayServiceRequest,
+  Argument,
   DescribeKongIpRestrictionResult,
+  ServiceGatewaySelector,
   DescribePublicNetworkResponse,
   ZookeeperRegionInfo,
   DescribeInstanceTagInfosResponse,
@@ -350,20 +368,21 @@ import {
   CloudNativeAPIGatewayStrategyAutoScalerConfigMetric,
   DescribeCloudNativeAPIGatewayCanaryRulesResponse,
   DeleteCloudNativeAPIGatewayCertificateRequest,
-  CloudNativeAPIGatewayNode,
+  NativeGatewayServerGroup,
   DescribeZookeeperServerInterfacesResponse,
   DescribeConfigFileReleaseVersionsResponse,
   DeleteCloudNativeAPIGatewayRequest,
   DescribeCloudNativeAPIGatewayCertificateDetailsResponse,
   CreateGovernanceServicesResponse,
   Filter,
-  ModifyAutoScalerResourceStrategyRequest,
+  RestartSREInstanceRequest,
   CreateOrUpdateConfigFileAndReleaseResponse,
   DescribeOneCloudNativeAPIGatewayServiceResponse,
   DeleteNativeGatewayServiceSourceRequest,
   DescribeCloudNativeAPIGatewayServicesLightResponse,
   RestartSREInstanceResponse,
   DescribeZookeeperServerInterfacesRequest,
+  DeleteGovernanceLaneGroupsRequest,
   DeleteGovernanceServicesRequest,
   ModifyGovernanceServicesResponse,
   DeleteConfigFileReleasesRequest,
@@ -378,18 +397,20 @@ import {
   DescribePublicAddressConfigResult,
   CreateCloudNativeAPIGatewayRouteRequest,
   NativeGatewayServerGroups,
-  CreateEngineRequest,
+  GovernanceLaneRule,
+  DescribeGovernanceLaneGroupsRequest,
   KongServiceRouteList,
   DeleteWafDomainsResponse,
   CreateCloudNativeAPIGatewayResult,
   ModifyCloudNativeAPIGatewayRouteRateLimitResponse,
   DescribeConfigFileReleaseHistoriesResponse,
   DescribeCloudNativeAPIGatewayCanaryRulesRequest,
-  CreateConfigFileGroupResponse,
+  PolarisLimiterAddress,
   DescribeCloudNativeAPIGatewayPortsRequest,
   DescribeGovernanceServicesRequest,
   DescribeConfigFileReleaseResponse,
   DescribeWafProtectionResult,
+  DescribeAllConfigFileTemplatesRequest,
 } from "./tse_models"
 
 /**
@@ -399,6 +420,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tse.tencentcloudapi.com", "2020-12-07", clientConfig)
+  }
+
+  /**
+   * 删除泳道组
+   */
+  async DeleteGovernanceLaneGroups(
+    req: DeleteGovernanceLaneGroupsRequest,
+    cb?: (error: string, rep: DeleteGovernanceLaneGroupsResponse) => void
+  ): Promise<DeleteGovernanceLaneGroupsResponse> {
+    return this.request("DeleteGovernanceLaneGroups", req, cb)
   }
 
   /**
@@ -459,6 +490,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGovernanceAliasesResponse) => void
   ): Promise<DescribeGovernanceAliasesResponse> {
     return this.request("DescribeGovernanceAliases", req, cb)
+  }
+
+  /**
+   * 创建泳道组
+   */
+  async CreateGovernanceLaneGroups(
+    req: CreateGovernanceLaneGroupsRequest,
+    cb?: (error: string, rep: CreateGovernanceLaneGroupsResponse) => void
+  ): Promise<CreateGovernanceLaneGroupsResponse> {
+    return this.request("CreateGovernanceLaneGroups", req, cb)
   }
 
   /**
@@ -672,13 +713,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建云原生网关引擎分组
+   * 查询云原生API网关实例公网详情
    */
-  async CreateNativeGatewayServerGroup(
-    req: CreateNativeGatewayServerGroupRequest,
-    cb?: (error: string, rep: CreateNativeGatewayServerGroupResponse) => void
-  ): Promise<CreateNativeGatewayServerGroupResponse> {
-    return this.request("CreateNativeGatewayServerGroup", req, cb)
+  async DescribePublicNetwork(
+    req: DescribePublicNetworkRequest,
+    cb?: (error: string, rep: DescribePublicNetworkResponse) => void
+  ): Promise<DescribePublicNetworkResponse> {
+    return this.request("DescribePublicNetwork", req, cb)
   }
 
   /**
@@ -1122,6 +1163,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建泳道组
+   */
+  async ModifyGovernanceLaneGroups(
+    req: ModifyGovernanceLaneGroupsRequest,
+    cb?: (error: string, rep: ModifyGovernanceLaneGroupsResponse) => void
+  ): Promise<ModifyGovernanceLaneGroupsResponse> {
+    return this.request("ModifyGovernanceLaneGroups", req, cb)
+  }
+
+  /**
    * 弹性伸缩策略批量解绑网关分组
    */
   async UnbindAutoScalerResourceStrategyFromGroups(
@@ -1149,6 +1200,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeConfigFileReleaseVersionsResponse) => void
   ): Promise<DescribeConfigFileReleaseVersionsResponse> {
     return this.request("DescribeConfigFileReleaseVersions", req, cb)
+  }
+
+  /**
+   * 创建或更新配置文件并发布配置
+   */
+  async CreateOrUpdateConfigFileAndRelease(
+    req: CreateOrUpdateConfigFileAndReleaseRequest,
+    cb?: (error: string, rep: CreateOrUpdateConfigFileAndReleaseResponse) => void
+  ): Promise<CreateOrUpdateConfigFileAndReleaseResponse> {
+    return this.request("CreateOrUpdateConfigFileAndRelease", req, cb)
   }
 
   /**
@@ -1282,13 +1343,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询云原生API网关实例公网详情
+   * 创建云原生网关引擎分组
    */
-  async DescribePublicNetwork(
-    req: DescribePublicNetworkRequest,
-    cb?: (error: string, rep: DescribePublicNetworkResponse) => void
-  ): Promise<DescribePublicNetworkResponse> {
-    return this.request("DescribePublicNetwork", req, cb)
+  async CreateNativeGatewayServerGroup(
+    req: CreateNativeGatewayServerGroupRequest,
+    cb?: (error: string, rep: CreateNativeGatewayServerGroupResponse) => void
+  ): Promise<CreateNativeGatewayServerGroupResponse> {
+    return this.request("CreateNativeGatewayServerGroup", req, cb)
   }
 
   /**
@@ -1332,13 +1393,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建或更新配置文件并发布配置
+   * 查询泳道组列表
    */
-  async CreateOrUpdateConfigFileAndRelease(
-    req: CreateOrUpdateConfigFileAndReleaseRequest,
-    cb?: (error: string, rep: CreateOrUpdateConfigFileAndReleaseResponse) => void
-  ): Promise<CreateOrUpdateConfigFileAndReleaseResponse> {
-    return this.request("CreateOrUpdateConfigFileAndRelease", req, cb)
+  async DescribeGovernanceLaneGroups(
+    req: DescribeGovernanceLaneGroupsRequest,
+    cb?: (error: string, rep: DescribeGovernanceLaneGroupsResponse) => void
+  ): Promise<DescribeGovernanceLaneGroupsResponse> {
+    return this.request("DescribeGovernanceLaneGroups", req, cb)
   }
 
   /**

@@ -18,6 +18,16 @@ const client = new tencentcloud.tse.v20201207.Client({
 })
 describe("tse.v20201207.test.js", function () {
 
+it("tse.v20201207.DeleteGovernanceLaneGroups", async function () {
+    try {
+       const data = await client.DeleteGovernanceLaneGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DescribeOneCloudNativeAPIGatewayService", async function () {
     try {
        const data = await client.DescribeOneCloudNativeAPIGatewayService({})
@@ -71,6 +81,16 @@ it("tse.v20201207.DeleteCloudNativeAPIGatewayPublicNetwork", async function () {
 it("tse.v20201207.DescribeGovernanceAliases", async function () {
     try {
        const data = await client.DescribeGovernanceAliases({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.CreateGovernanceLaneGroups", async function () {
+    try {
+       const data = await client.CreateGovernanceLaneGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +308,9 @@ it("tse.v20201207.DescribeAllConfigFileTemplates", async function () {
     }
 })
 
-it("tse.v20201207.CreateNativeGatewayServerGroup", async function () {
+it("tse.v20201207.DescribePublicNetwork", async function () {
     try {
-       const data = await client.CreateNativeGatewayServerGroup({})
+       const data = await client.DescribePublicNetwork({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -738,6 +758,16 @@ it("tse.v20201207.DescribeCloudNativeAPIGatewayNodes", async function () {
     }
 })
 
+it("tse.v20201207.ModifyGovernanceLaneGroups", async function () {
+    try {
+       const data = await client.ModifyGovernanceLaneGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.UnbindAutoScalerResourceStrategyFromGroups", async function () {
     try {
        const data = await client.UnbindAutoScalerResourceStrategyFromGroups({})
@@ -761,6 +791,16 @@ it("tse.v20201207.ModifyCloudNativeAPIGatewayRouteRateLimit", async function () 
 it("tse.v20201207.DescribeConfigFileReleaseVersions", async function () {
     try {
        const data = await client.DescribeConfigFileReleaseVersions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.CreateOrUpdateConfigFileAndRelease", async function () {
+    try {
+       const data = await client.CreateOrUpdateConfigFileAndRelease({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -898,9 +938,9 @@ it("tse.v20201207.ModifyGovernanceNamespaces", async function () {
     }
 })
 
-it("tse.v20201207.DescribePublicNetwork", async function () {
+it("tse.v20201207.CreateNativeGatewayServerGroup", async function () {
     try {
-       const data = await client.DescribePublicNetwork({})
+       const data = await client.CreateNativeGatewayServerGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -948,9 +988,9 @@ it("tse.v20201207.DescribeCloudNativeAPIGatewayUpstream", async function () {
     }
 })
 
-it("tse.v20201207.CreateOrUpdateConfigFileAndRelease", async function () {
+it("tse.v20201207.DescribeGovernanceLaneGroups", async function () {
     try {
-       const data = await client.CreateOrUpdateConfigFileAndRelease({})
+       const data = await client.DescribeGovernanceLaneGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -2073,23 +2073,23 @@ export interface VideoEncodingPresetVideoSetting {
  */
 export interface MediaImageSpriteInfo {
   /**
-   * 雪碧图小图的高度。
+   * <p>雪碧图小图的高度。</p>
    */
   Height?: number
   /**
-   * 雪碧图小图的宽度。
+   * <p>雪碧图小图的宽度。</p>
    */
   Width?: number
   /**
-   * 雪碧图小图的总数量。
+   * <p>雪碧图小图的总数量。</p>
    */
   TotalCount?: number
   /**
-   * 截取雪碧图输出的地址。
+   * <p>截取雪碧图输出的地址。</p>
    */
   ImageUrlSet?: Array<string>
   /**
-   * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
+   * <p>雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。</p>
    */
   WebVttUrl?: string
 }
@@ -4044,50 +4044,35 @@ export interface VideoEditTemplateMaterial {
  */
 export interface VideoExportExtensionArgs {
   /**
-   * 封装格式，可选值：
-<li>mp4 </li>
-<li>mov </li>
-不填则使用视频导出编码配置。
+   * <p>封装格式，可选值：</p><li>mp4 </li><li>mov </li>不填则使用视频导出编码配置。
    */
   Container?: string
   /**
-   * 视频短边尺寸，取值范围： [128, 4096]，单位：px。
-视频最后的分辨率，根据短边尺寸和宽高比进行计算。
-例如：项目的宽高比是 16：9 ：
-<li>短边尺寸为 1080，则导出视频的分辨率为 1920 * 1080。</li>
-<li>短边尺寸为 720，则导出视频的分辨率为 1280 * 720</li>
-不填则使用视频导出编码配置。
+   * <p>视频短边尺寸，取值范围： [128, 4096]，单位：px。<br>视频最后的分辨率，根据短边尺寸和宽高比进行计算。<br>例如：项目的宽高比是 16：9 ：</p><li>短边尺寸为 1080，则导出视频的分辨率为 1920 * 1080。</li><li>短边尺寸为 720，则导出视频的分辨率为 1280 * 720</li>不填则使用视频导出编码配置。
    */
   ShortEdge?: number
   /**
-   * 指定码率，单位 bps。当该参数为 0 时则不强制限定码率。
-不填则使用视频导出编码配置。
+   * <p>指定码率，单位 bps。当该参数为 0 时则不强制限定码率。<br>不填则使用视频导出编码配置。</p>
    */
   VideoBitrate?: number
   /**
-   * 帧率。取值范围：[15, 60]，不填默认值为 25。
+   * <p>帧率。取值范围：[15, 60]，不填默认值为 25。</p><p>单位：帧</p>
    */
   FrameRate?: number
   /**
-   * 是否去除视频数据，可选值：
-<li>0：保留；</li>
-<li>1：去除。</li>
-不填则使用视频导出编码配置。
+   * <p>是否去除视频数据，可选值：</p><li>0：保留；</li><li>1：去除。</li>不填则使用视频导出编码配置。
    */
   RemoveVideo?: number
   /**
-   * 是否去除音频数据，可选值：
-<li>0：保留；</li>
-<li>1：去除。</li>
-不填则使用视频导出编码配置。
+   * <p>是否去除音频数据，可选值：</p><li>0：保留；</li><li>1：去除。</li>不填则使用视频导出编码配置。
    */
   RemoveAudio?: number
   /**
-   * 片段起始时间，单位：毫秒。
+   * <p>片段起始时间，单位：毫秒。</p>
    */
   StartTime?: number
   /**
-   * 片段结束时间，单位：毫秒。
+   * <p>片段结束时间，单位：毫秒。</p>
    */
   EndTime?: number
 }
@@ -4593,39 +4578,39 @@ export interface ExportVideoEditProjectResponse {
  */
 export interface MediaMetaData {
   /**
-   * 大小。
+   * <p>大小。</p>
    */
   Size?: number
   /**
-   * 容器类型。
+   * <p>容器类型。</p>
    */
   Container?: string
   /**
-   * 视频流码率平均值与音频流码率平均值之和，单位：bps。
+   * <p>视频流码率平均值与音频流码率平均值之和，单位：bps。</p>
    */
   Bitrate?: number
   /**
-   * 视频流高度的最大值，单位：px。
+   * <p>视频流高度的最大值，单位：px。</p>
    */
   Height?: number
   /**
-   * 视频流宽度的最大值，单位：px。
+   * <p>视频流宽度的最大值，单位：px。</p>
    */
   Width?: number
   /**
-   * 时长，单位：秒。
+   * <p>时长，单位：秒。</p>
    */
   Duration?: number
   /**
-   * 视频拍摄时的选择角度，单位：度
+   * <p>视频拍摄时的选择角度，单位：度</p>
    */
   Rotate?: number
   /**
-   * 视频流信息。
+   * <p>视频流信息。</p>
    */
   VideoStreamInfoSet?: Array<VideoStreamInfo>
   /**
-   * 音频流信息。
+   * <p>音频流信息。</p>
    */
   AudioStreamInfoSet?: Array<AudioStreamInfo>
 }

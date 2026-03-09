@@ -42,7 +42,7 @@ import {
   DescribeVpcLimitsRequest,
   ReleaseIp6AddressesBandwidthResponse,
   DescribeVpcIpv6AddressesRequest,
-  SslVpnClient,
+  MigrateNetworkInterfaceRequest,
   SourceIpTranslationNatRule,
   DescribeRoutesResponse,
   ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse,
@@ -103,6 +103,7 @@ import {
   RouteECMPAlgorithm,
   DescribeBandwidthPackageBillUsageRequest,
   CcnRouteTableSelectPolicy,
+  TrafficFlow,
   DescribeRouteTableSelectionPoliciesResponse,
   UnassignIpv6AddressesResponse,
   CreateIp6TranslatorsResponse,
@@ -161,6 +162,7 @@ import {
   NetDetectIpState,
   ResetRoutesResponse,
   DescribePrivateNatGatewayRegionsResponse,
+  SslVpnClient,
   ReplaceSecurityGroupPoliciesResponse,
   DescribeDirectConnectGatewaysRequest,
   DescribeSpecificTrafficPackageUsedDetailsResponse,
@@ -220,7 +222,7 @@ import {
   DescribeTenantCcnsRequest,
   DescribeIp6AddressesRequest,
   ReplaceCcnRouteTableInputPolicysResponse,
-  TrafficFlow,
+  DescribeDesignatedZonesResponse,
   DeleteCcnPolicyBasedRoutingNextHopRequest,
   CreateRoutePolicyRequest,
   DeleteRoutePolicyAssociationsResponse,
@@ -325,7 +327,7 @@ import {
   DescribeVpcIpv6AddressesResponse,
   ResetAttachCcnInstancesResponse,
   Ip6RuleInfo,
-  RejectAttachCcnInstancesRequest,
+  DesignatedZoneInfoDict,
   DescribeTrafficQosPolicyRequest,
   ModifyCcnRegionBandwidthLimitsTypeRequest,
   DescribeRouteListResponse,
@@ -726,7 +728,7 @@ import {
   DescribeServiceTemplateGroupInstancesRequest,
   ModifyCcnPolicyBasedRoutingNextHopAttributeResponse,
   StartTrafficMirrorRequest,
-  MigrateNetworkInterfaceRequest,
+  DnsServers,
   DescribeCustomerGatewaysRequest,
   ModifyDhcpIpAttributeResponse,
   ModifyReserveIpAddressResponse,
@@ -739,6 +741,7 @@ import {
   DisableVpnGatewaySslClientCertRequest,
   DeleteVpnGatewaySslClientRequest,
   SubnetInput,
+  DescribeDesignatedZonesRequest,
   DescribeNatGatewayDirectConnectGatewayRouteResponse,
   EnableVpcEndPointConnectResponse,
   CreateNetDetectResponse,
@@ -765,6 +768,7 @@ import {
   CreateVpcEndPointServiceResponse,
   ModifyNetworkAclAttributeRequest,
   CreateGlobalRoutesResponse,
+  RejectAttachCcnInstancesRequest,
   CreatePrivateNatGatewayTranslationAclRuleRequest,
   DeleteVpnGatewayResponse,
   BackupPolicy,
@@ -2153,6 +2157,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: ModifyPrivateNatGatewayTranslationAclRuleResponse) => void
   ): Promise<ModifyPrivateNatGatewayTranslationAclRuleResponse> {
     return this.request("ModifyPrivateNatGatewayTranslationAclRule", req, cb)
+  }
+
+  /**
+   * 用于查询用户创建带宽包时可指定的可用区信息
+   */
+  async DescribeDesignatedZones(
+    req?: DescribeDesignatedZonesRequest,
+    cb?: (error: string, rep: DescribeDesignatedZonesResponse) => void
+  ): Promise<DescribeDesignatedZonesResponse> {
+    return this.request("DescribeDesignatedZones", req, cb)
   }
 
   /**

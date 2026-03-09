@@ -48,6 +48,16 @@ it("cls.v20201016.DescribeExports", async function () {
     }
 })
 
+it("cls.v20201016.ModifyNetworkApplication", async function () {
+    try {
+       const data = await client.ModifyNetworkApplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.ModifyHostMetricConfig", async function () {
     try {
        const data = await client.ModifyHostMetricConfig({})
@@ -171,6 +181,16 @@ it("cls.v20201016.DeleteDataTransform", async function () {
 it("cls.v20201016.CreateLogset", async function () {
     try {
        const data = await client.CreateLogset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeNetworkApplications", async function () {
+    try {
+       const data = await client.DescribeNetworkApplications({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -418,6 +438,16 @@ it("cls.v20201016.DescribeConsumerOffsets", async function () {
     }
 })
 
+it("cls.v20201016.DescribeNetworkApplicationDetail", async function () {
+    try {
+       const data = await client.DescribeNetworkApplicationDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeTopicMetricConfigs", async function () {
     try {
        const data = await client.DescribeTopicMetricConfigs({})
@@ -638,6 +668,16 @@ it("cls.v20201016.DescribeKafkaConsumerGroupList", async function () {
     }
 })
 
+it("cls.v20201016.ModifySplunkDeliver", async function () {
+    try {
+       const data = await client.ModifySplunkDeliver({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeKafkaRecharges", async function () {
     try {
        const data = await client.DescribeKafkaRecharges({})
@@ -778,9 +818,9 @@ it("cls.v20201016.ModifyDashboard", async function () {
     }
 })
 
-it("cls.v20201016.DeleteIndex", async function () {
+it("cls.v20201016.CreateNetworkApplication", async function () {
     try {
-       const data = await client.DeleteIndex({})
+       const data = await client.CreateNetworkApplication({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1458,9 +1498,9 @@ it("cls.v20201016.DescribeConsumers", async function () {
     }
 })
 
-it("cls.v20201016.ModifySplunkDeliver", async function () {
+it("cls.v20201016.DeleteNetworkApplication", async function () {
     try {
-       const data = await client.ModifySplunkDeliver({})
+       const data = await client.DeleteNetworkApplication({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1621,6 +1661,16 @@ it("cls.v20201016.CreateMetricConfig", async function () {
 it("cls.v20201016.DescribeNoticeContents", async function () {
     try {
        const data = await client.DescribeNoticeContents({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DeleteIndex", async function () {
+    try {
+       const data = await client.DeleteIndex({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

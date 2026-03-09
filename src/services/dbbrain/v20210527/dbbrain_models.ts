@@ -2603,6 +2603,72 @@ export interface CreateMailProfileRequest {
 }
 
 /**
+ * 实例基础信息。
+ */
+export interface InstanceBasicInfo {
+  /**
+   * 实例ID。
+   */
+  InstanceId?: string
+  /**
+   * 实例名称。
+   */
+  InstanceName?: string
+  /**
+   * 实例内网IP。
+   */
+  Vip?: string
+  /**
+   * 实例内网Port。
+   */
+  Vport?: number
+  /**
+   * 实例产品。
+   */
+  Product?: string
+  /**
+   * 实例引擎版本。
+   */
+  EngineVersion?: string
+  /**
+   * CPU数量，对于Redis为0。
+   */
+  Cpu?: number
+  /**
+   * 实例部署模式。
+   */
+  DeployMode?: string
+  /**
+   * 实例内存配置。
+   */
+  InstanceConf?: RedisInstanceConf
+  /**
+   * DBbrain是否支持该实例。
+   */
+  IsSupported?: boolean
+  /**
+   * 实例内存，单位MB。
+   */
+  Memory?: number
+  /**
+   * 实例地域。
+   */
+  Region?: string
+  /**
+   * 实例子网统一ID，对于redis为空字符串。
+   */
+  UniqSubnetId?: string
+  /**
+   * 实例私有网络统一ID，对于redis为空字符串。
+   */
+  UniqVpcId?: string
+  /**
+   * 实例磁盘容量，对于Redis为0。
+   */
+  Volume?: number
+}
+
+/**
  * 单位时间间隔内的监控指标数据（浮点型）
  */
 export interface MonitorFloatMetricSeriesData {
@@ -3557,69 +3623,37 @@ REPLACE  - 替换
 }
 
 /**
- * 实例基础信息。
+ * CreateMongoDBKillTask请求参数结构体
  */
-export interface InstanceBasicInfo {
+export interface CreateMongoDBKillTaskRequest {
   /**
-   * 实例ID。
+   * kill会话任务的关联实例ID。
    */
-  InstanceId?: string
+  InstanceId: string
   /**
-   * 实例名称。
+   * 任务持续时间，单位秒，手动关闭任务传-1。
    */
-  InstanceName?: string
+  Duration: number
   /**
-   * 实例内网IP。
+   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
    */
-  Vip?: string
+  Product: string
   /**
-   * 实例内网Port。
+   * 任务过滤条件，客户端IP。
    */
-  Vport?: number
+  Host?: string
   /**
-   * 实例产品。
+   * 命名空间
    */
-  Product?: string
+  DB?: Array<string>
   /**
-   * 实例引擎版本。
+   * update,insert,query,getmore,remove,killcursors,command,compressed,none
    */
-  EngineVersion?: string
+  Type?: string
   /**
-   * CPU数量，对于Redis为0。
+   * kill任务过滤条件，会话持续时长，单位秒。
    */
-  Cpu?: number
-  /**
-   * 实例部署模式。
-   */
-  DeployMode?: string
-  /**
-   * 实例内存配置。
-   */
-  InstanceConf?: RedisInstanceConf
-  /**
-   * DBbrain是否支持该实例。
-   */
-  IsSupported?: boolean
-  /**
-   * 实例内存，单位MB。
-   */
-  Memory?: number
-  /**
-   * 实例地域。
-   */
-  Region?: string
-  /**
-   * 实例子网统一ID，对于redis为空字符串。
-   */
-  UniqSubnetId?: string
-  /**
-   * 实例私有网络统一ID，对于redis为空字符串。
-   */
-  UniqVpcId?: string
-  /**
-   * 实例磁盘容量，对于Redis为0。
-   */
-  Volume?: number
+  Time?: number
 }
 
 /**
@@ -5122,6 +5156,25 @@ information-通知，与Rules互斥
    * 自定义规则，与QuickRule互斥。
    */
   Rules?: Array<AlarmsRules>
+}
+
+/**
+ * CreateMongoDBKillTask返回参数结构体
+ */
+export interface CreateMongoDBKillTaskResponse {
+  /**
+   * kill会话任务创建成功返回1
+   */
+  Status?: number
+  /**
+   * 异常信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

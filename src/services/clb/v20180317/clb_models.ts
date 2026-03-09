@@ -2205,117 +2205,117 @@ export type DescribeClsLogSetRequest = null
  */
 export interface Listener {
   /**
-   * 负载均衡监听器 ID
+   * <p>负载均衡监听器 ID</p>
    */
   ListenerId?: string
   /**
-   * 监听器协议，可选值：TCP、UDP、HTTP、HTTPS、TCP_SSL、QUIC
+   * <p>监听器协议，可选值：TCP、UDP、HTTP、HTTPS、TCP_SSL、QUIC</p>
    */
   Protocol?: string
   /**
-   * 监听器端口，端口范围：1-65535
+   * <p>监听器端口，端口范围：1-65535</p>
    */
   Port?: number
   /**
-   * 监听器绑定的证书信息
+   * <p>监听器绑定的证书信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Certificate?: CertificateOutput
   /**
-   * 监听器的健康检查信息
+   * <p>监听器的健康检查信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthCheck?: HealthCheck
   /**
-   * 请求的调度方式。 WRR、LEAST_CONN、IP_HASH分别表示按权重轮询、最小连接数、IP Hash。
+   * <p>请求的调度方式。 WRR、LEAST_CONN、IP_HASH分别表示按权重轮询、最小连接数、IP Hash。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Scheduler?: string
   /**
-   * 会话保持时间，单位：秒。可选值：30~3600，默认 0，默认不开启。此参数仅适用于TCP/UDP监听器。
+   * <p>会话保持时间，单位：秒。可选值：30~3600，默认 0，默认不开启。此参数仅适用于TCP/UDP监听器。</p><p>单位：秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionExpireTime?: number
   /**
-   * 是否开启SNI特性，1：表示开启，0：表示不开启（本参数仅对于HTTPS监听器有意义）
+   * <p>是否开启SNI特性，1：表示开启，0：表示不开启（本参数仅对于HTTPS监听器有意义）</p>
    */
   SniSwitch?: number
   /**
-   * 监听器下的全部转发规则（本参数仅对于HTTP/HTTPS监听器有意义）
+   * <p>监听器下的全部转发规则（本参数仅对于HTTP/HTTPS监听器有意义）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Rules?: Array<RuleOutput>
   /**
-   * 监听器的名称
+   * <p>监听器的名称</p>
    */
   ListenerName?: string
   /**
-   * 监听器的创建时间。
+   * <p>监听器的创建时间。</p>
    */
   CreateTime?: string
   /**
-   * 端口段结束端口，端口范围：2-65535
+   * <p>端口段结束端口，端口范围：2-65535</p>
    */
   EndPort?: number
   /**
-   * 后端服务器类型，可选值：NODE、POLARIS、TARGETGROUP、TARGETGROUP-V2
+   * <p>后端服务器类型，可选值：NODE、POLARIS、TARGETGROUP、TARGETGROUP-V2</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetType?: string
   /**
-   * 绑定的目标组基本信息；当监听器绑定目标组时，会返回该字段
+   * <p>绑定的目标组基本信息；当监听器绑定目标组时，会返回该字段</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetGroup?: BasicTargetGroupInfo
   /**
-   * 会话保持类型。NORMAL表示默认会话保持类型。QUIC_CID 表示根据Quic Connection ID做会话保持。
+   * <p>会话保持类型。NORMAL表示默认会话保持类型。QUIC_CID 表示根据Quic Connection ID做会话保持。</p>
    */
   SessionType?: string
   /**
-   * 是否开启长连接，1开启，0关闭，（本参数仅对于HTTP/HTTPS监听器有意义）
+   * <p>是否开启长连接，1开启，0关闭，（本参数仅对于HTTP/HTTPS监听器有意义）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KeepaliveEnable?: number
   /**
-   * 仅支持Nat64 CLB TCP监听器
+   * <p>仅支持Nat64 CLB TCP监听器</p>
    */
   Toa?: boolean
   /**
-   * 重新调度功能，解绑后端服务开关，打开此开关，当解绑后端服务时触发重新调度。仅TCP/UDP监听器支持。
+   * <p>重新调度功能，解绑后端服务开关，打开此开关，当解绑后端服务时触发重新调度。仅TCP/UDP监听器支持。</p>
    */
   DeregisterTargetRst?: boolean
   /**
-   * 监听器的属性
+   * <p>监听器的属性</p>
    */
   AttrFlags?: Array<string>
   /**
-   * 绑定的目标组列表
+   * <p>绑定的目标组列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetGroupList?: Array<BasicTargetGroupInfo>
   /**
-   * 监听器最大连接数，-1表示监听器维度不限速。
+   * <p>监听器最大连接数，-1表示监听器维度不限速。</p>
    */
   MaxConn?: number
   /**
-   * 监听器最大新增连接数，-1表示监听器维度不限速。
+   * <p>监听器最大新增连接数，-1表示监听器维度不限速。</p>
    */
   MaxCps?: number
   /**
-   * 空闲连接超时时间，仅支持TCP监听器。默认值:900；共享型实例和独占型实例取值范围：300～900，性能容量型实例取值范围:300～1980。
+   * <p>空闲连接超时时间，仅支持TCP监听器。默认值:900；共享型实例和独占型实例取值范围：300～900，性能容量型实例取值范围:300～1980。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IdleConnectTimeout?: number
   /**
-   * 重新调度触发持续时间，取值0~3600s。仅TCP/UDP监听器支持。触发重新调度后，长连接将会在设置的调度时间内断开并完成重新分配。
+   * <p>重新调度触发持续时间，取值0~3600s。仅TCP/UDP监听器支持。触发重新调度后，长连接将会在设置的调度时间内断开并完成重新分配。</p><p>单位：秒</p>
    */
   RescheduleInterval?: number
   /**
-   * 数据压缩模式
+   * <p>数据压缩模式</p>
    */
   DataCompressMode?: string
   /**
-   * 重新调度启动时间，配置了重新调度启动时间后，会在启动时间到达时触发重新调度。
+   * <p>重新调度启动时间，配置了重新调度启动时间后，会在启动时间到达时触发重新调度。</p>
    */
   RescheduleStartTime?: number
 }
@@ -2612,7 +2612,7 @@ export interface ModifyListenerRequest {
    */
   SnatEnable?: boolean
   /**
-   * <p>数据压缩模式</p>
+   * <p>数据压缩模式</p><p>枚举值：</p><ul><li>transparent： 透明模式（默认值）</li><li>compatibility： 兼容模式（开启 gzip 兼容压缩配置）</li></ul>
    */
   DataCompressMode?: string
   /**
@@ -3339,75 +3339,75 @@ export interface LBChargePrepaid {
  */
 export interface ClassicalListener {
   /**
-   * 负载均衡监听器ID
+   * <p>负载均衡监听器ID</p>
    */
   ListenerId?: string
   /**
-   * 负载均衡监听器端口
+   * <p>负载均衡监听器端口</p>
    */
   ListenerPort?: number
   /**
-   * 监听器后端转发端口
+   * <p>监听器后端转发端口</p>
    */
   InstancePort?: number
   /**
-   * 监听器名称
+   * <p>监听器名称</p>
    */
   ListenerName?: string
   /**
-   * 监听器协议类型
+   * <p>监听器协议类型</p>
    */
   Protocol?: string
   /**
-   * 会话保持时间
+   * <p>会话保持时间</p>
    */
   SessionExpire?: number
   /**
-   * 是否开启了健康检查：1（开启）、0（关闭）
+   * <p>是否开启了健康检查：1（开启）、0（关闭）</p>
    */
   HealthSwitch?: number
   /**
-   * 响应超时时间
+   * <p>响应超时时间</p><p>单位：秒</p>
    */
   TimeOut?: number
   /**
-   * 检查间隔
+   * <p>检查间隔</p><p>单位：秒</p>
    */
   IntervalTime?: number
   /**
-   * 健康阈值
+   * <p>健康阈值</p>
    */
   HealthNum?: number
   /**
-   * 不健康阈值
+   * <p>不健康阈值</p>
    */
   UnhealthNum?: number
   /**
-   * 传统型公网负载均衡 监听器的请求均衡方法。空字符串或wrr 表示按权重轮询，ip_hash 表示根据访问的源 IP 进行一致性哈希方式来分发，least_conn表示按最小连接数。
+   * <p>传统型公网负载均衡 监听器的请求均衡方法。空字符串或wrr 表示按权重轮询，ip_hash 表示根据访问的源 IP 进行一致性哈希方式来分发，least_conn表示按最小连接数。</p>
    */
   HttpHash?: string
   /**
-   * 传统型公网负载均衡的 HTTP、HTTPS 监听器的健康检查返回码。具体可参考创建监听器中对该字段的解释
+   * <p>传统型公网负载均衡的 HTTP、HTTPS 监听器的健康检查返回码。具体可参考创建监听器中对该字段的解释</p>
    */
   HttpCode?: number
   /**
-   * 传统型公网负载均衡的 HTTP、HTTPS 监听器的健康检查路径
+   * <p>传统型公网负载均衡的 HTTP、HTTPS 监听器的健康检查路径</p>
    */
   HttpCheckPath?: string
   /**
-   * 传统型公网负载均衡的 HTTPS 监听器的认证方式
+   * <p>传统型公网负载均衡的 HTTPS 监听器的认证方式</p>
    */
   SSLMode?: string
   /**
-   * 传统型公网负载均衡的 HTTPS 监听器的服务端证书 ID
+   * <p>传统型公网负载均衡的 HTTPS 监听器的服务端证书 ID</p>
    */
   CertId?: string
   /**
-   * 传统型公网负载均衡的 HTTPS 监听器的客户端证书 ID
+   * <p>传统型公网负载均衡的 HTTPS 监听器的客户端证书 ID</p>
    */
   CertCaId?: string
   /**
-   * 监听器的状态，0 表示创建中，1 表示运行中
+   * <p>监听器的状态，0 表示创建中，1 表示运行中</p>
    */
   Status?: number
 }

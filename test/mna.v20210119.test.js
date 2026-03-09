@@ -38,9 +38,9 @@ it("mna.v20210119.UpdateHardware", async function () {
     }
 })
 
-it("mna.v20210119.DownloadActiveDeviceCount", async function () {
+it("mna.v20210119.GetApplication", async function () {
     try {
-       const data = await client.DownloadActiveDeviceCount({})
+       const data = await client.GetApplication({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +108,29 @@ it("mna.v20210119.GetPublicKey", async function () {
     }
 })
 
+it("mna.v20210119.UpdateApplicationInfo", async function () {
+    try {
+       const data = await client.UpdateApplicationInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.GroupAddDevice", async function () {
     try {
        const data = await client.GroupAddDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.DeleteApplication", async function () {
+    try {
+       const data = await client.DeleteApplication({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +208,29 @@ it("mna.v20210119.DeleteGroup", async function () {
     }
 })
 
+it("mna.v20210119.AddApplication", async function () {
+    try {
+       const data = await client.AddApplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.GetActiveDeviceCount", async function () {
     try {
        const data = await client.GetActiveDeviceCount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.UpdateApplicationKey", async function () {
+    try {
+       const data = await client.UpdateApplicationKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -421,6 +461,16 @@ it("mna.v20210119.AddDevice", async function () {
 it("mna.v20210119.GetFlowStatisticByRegion", async function () {
     try {
        const data = await client.GetFlowStatisticByRegion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.DownloadActiveDeviceCount", async function () {
+    try {
+       const data = await client.DownloadActiveDeviceCount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -513,54 +513,28 @@ export interface DescribeVpcIpv6AddressesRequest {
 }
 
 /**
- * SSL-VPN-CLIENT 出参
+ * MigrateNetworkInterface请求参数结构体
  */
-export interface SslVpnClient {
+export interface MigrateNetworkInterfaceRequest {
   /**
-   * VPC实例ID。
+   * 弹性网卡实例ID，例如：eni-m6dyj72l。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。
+
    */
-  VpcId?: string
+  NetworkInterfaceId: string
   /**
-   * SSL-VPN-SERVER 实例ID。
+   * 弹性网卡当前绑定的CVM实例ID。形如：ins-r8hr2upy。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)接口获取。
+
    */
-  SslVpnServerId?: string
+  SourceInstanceId: string
   /**
-   * 证书状态。
-0:创建中
-1:正常
-2:已停用
-3.已过期
-4.创建出错
+   * 待迁移的目的CVM实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)接口获取。
+
    */
-  CertStatus?: number
+  DestinationInstanceId: string
   /**
-   * SSL-VPN-CLIENT 实例ID。
+   * 网卡绑定类型：0 标准型 1 扩展型。默认：0。
    */
-  SslVpnClientId?: string
-  /**
-   * 证书开始时间。
-   */
-  CertBeginTime?: string
-  /**
-   * 证书到期时间。
-   */
-  CertEndTime?: string
-  /**
-   * CLIENT NAME。
-   */
-  Name?: string
-  /**
-   * 创建CLIENT 状态。
-0 创建中
-1 创建出错
-2 更新中
-3 更新出错
-4 销毁中
-5 销毁出错
-6 已连通
-7 未知
-   */
-  State?: string
+  AttachType?: number
 }
 
 /**
@@ -1306,7 +1280,7 @@ export interface CreateCcnPolicyBasedRoutingNextHopRequest {
    */
   Description?: string
   /**
-   * 下一跳资源类型[HAVIP, GWLB_ENDPOINT]]
+   * 下一跳资源类型[HAVIP, GWLB_ENDPOINT]
    */
   NextHopResourceType?: string
   /**
@@ -1873,6 +1847,24 @@ VPN网关：`VPNGW`
 }
 
 /**
+ * 流量描述。
+ */
+export interface TrafficFlow {
+  /**
+   * 实际流量，单位为 字节
+   */
+  Value?: number
+  /**
+   * 格式化后的流量，单位见参数 FormatUnit
+   */
+  FormatValue?: number
+  /**
+   * 格式化后流量的单位
+   */
+  FormatUnit?: string
+}
+
+/**
  * DescribeRouteTableSelectionPolicies返回参数结构体
  */
 export interface DescribeRouteTableSelectionPoliciesResponse {
@@ -2189,6 +2181,10 @@ export interface CreateVpnGatewaySslServerRequest {
    * 指定绑定的标签列表
    */
   Tags?: Array<Tag>
+  /**
+   * DNS Server 地址
+   */
+  DnsServers?: DnsServers
 }
 
 /**
@@ -3184,15 +3180,66 @@ export interface DescribePrivateNatGatewayRegionsResponse {
   /**
    * 地域对象
    */
-  RegionSet: Array<NatRegionInfoWithArea>
+  RegionSet?: Array<NatRegionInfoWithArea>
   /**
    * 返回可支持地域总数
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SSL-VPN-CLIENT 出参
+ */
+export interface SslVpnClient {
+  /**
+   * VPC实例ID。
+   */
+  VpcId?: string
+  /**
+   * SSL-VPN-SERVER 实例ID。
+   */
+  SslVpnServerId?: string
+  /**
+   * 证书状态。
+0:创建中
+1:正常
+2:已停用
+3.已过期
+4.创建出错
+   */
+  CertStatus?: number
+  /**
+   * SSL-VPN-CLIENT 实例ID。
+   */
+  SslVpnClientId?: string
+  /**
+   * 证书开始时间。
+   */
+  CertBeginTime?: string
+  /**
+   * 证书到期时间。
+   */
+  CertEndTime?: string
+  /**
+   * CLIENT NAME。
+   */
+  Name?: string
+  /**
+   * 创建CLIENT 状态。
+0 创建中
+1 创建出错
+2 更新中
+3 更新出错
+4 销毁中
+5 销毁出错
+6 已连通
+7 未知
+   */
+  State?: string
 }
 
 /**
@@ -4150,21 +4197,21 @@ export interface ReplaceCcnRouteTableInputPolicysResponse {
 }
 
 /**
- * 流量描述。
+ * DescribeDesignatedZones返回参数结构体
  */
-export interface TrafficFlow {
+export interface DescribeDesignatedZonesResponse {
   /**
-   * 实际流量，单位为 字节
+   * 用户可选的可用区总数
    */
-  Value?: number
+  TotalCount?: number
   /**
-   * 格式化后的流量，单位见参数 FormatUnit
+   * 用户可选的可用区详细信息
    */
-  FormatValue?: number
+  DesignatedZoneInfo?: Array<DesignatedZoneInfoDict>
   /**
-   * 格式化后流量的单位
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  FormatUnit?: string
+  RequestId?: string
 }
 
 /**
@@ -6305,17 +6352,21 @@ export interface Ip6RuleInfo {
 }
 
 /**
- * RejectAttachCcnInstances请求参数结构体
+ * 用户可选的可用区信息
  */
-export interface RejectAttachCcnInstancesRequest {
+export interface DesignatedZoneInfoDict {
   /**
-   * CCN实例ID。形如：ccn-f49l6u0z。
+   * 可用区Id
    */
-  CcnId: string
+  DesignatedZone?: string
   /**
-   * 拒绝关联实例列表。
+   * 可用区名称
    */
-  Instances: Array<CcnInstance>
+  DesignatedZoneName?: string
+  /**
+   * 可用区类型
+   */
+  DesignatedZoneType?: string
 }
 
 /**
@@ -9263,11 +9314,11 @@ export interface DescribePrivateNatGatewayLimitsResponse {
   /**
    * 查询返回结果个数。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 私网网关配额。
    */
-  PrivateNatGatewayLimitSet: Array<PrivateNatGatewayLimit>
+  PrivateNatGatewayLimitSet?: Array<PrivateNatGatewayLimit>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9347,7 +9398,7 @@ export interface CreateCcnRequest {
    */
   InstanceChargeType?: string
   /**
-   * 计量模式
+   * 计量模式,`BANDWIDTH`：表示带宽,即带宽计量模式，`TRAFFIC`：表示流量,即流量计量模式。
    */
   InstanceMeteringType?: string
   /**
@@ -11681,6 +11732,10 @@ export interface ModifyVpnGatewaySslServerRequest {
    * SAML-DATA
    */
   SamlData?: string
+  /**
+   * DNS Server地址
+   */
+  DnsServers?: DnsServers
 }
 
 /**
@@ -11962,6 +12017,10 @@ export interface SslVpnSever {
    * CAM服务提供商Name
    */
   SpName?: string
+  /**
+   * DNS Server地址
+   */
+  DnsServers?: DnsServers
 }
 
 /**
@@ -14496,28 +14555,17 @@ export interface StartTrafficMirrorRequest {
 }
 
 /**
- * MigrateNetworkInterface请求参数结构体
+ * SSL VPN Server DnsServers
  */
-export interface MigrateNetworkInterfaceRequest {
+export interface DnsServers {
   /**
-   * 弹性网卡实例ID，例如：eni-m6dyj72l。可通过[DescribeNetworkInterfaces](https://cloud.tencent.com/document/product/215/15817)接口获取。
-
+   * 主DNS配置
    */
-  NetworkInterfaceId: string
+  PrimaryDns?: string
   /**
-   * 弹性网卡当前绑定的CVM实例ID。形如：ins-r8hr2upy。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)接口获取。
-
+   * 备DNS配置
    */
-  SourceInstanceId: string
-  /**
-   * 待迁移的目的CVM实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/213/15728)接口获取。
-
-   */
-  DestinationInstanceId: string
-  /**
-   * 网卡绑定类型：0 标准型 1 扩展型。默认：0。
-   */
-  AttachType?: number
+  SecondaryDns?: string
 }
 
 /**
@@ -14748,6 +14796,11 @@ export interface SubnetInput {
    */
   RouteTableId?: string
 }
+
+/**
+ * DescribeDesignatedZones请求参数结构体
+ */
+export type DescribeDesignatedZonesRequest = null
 
 /**
  * DescribeNatGatewayDirectConnectGatewayRoute返回参数结构体
@@ -15242,6 +15295,20 @@ export interface CreateGlobalRoutesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RejectAttachCcnInstances请求参数结构体
+ */
+export interface RejectAttachCcnInstancesRequest {
+  /**
+   * CCN实例ID。形如：ccn-f49l6u0z。
+   */
+  CcnId: string
+  /**
+   * 拒绝关联实例列表。
+   */
+  Instances: Array<CcnInstance>
 }
 
 /**
@@ -19535,7 +19602,12 @@ export interface VpcLimit {
 /**
  * NAT地域地区对象
  */
-export type NatRegionInfoWithArea = null
+export interface NatRegionInfoWithArea {
+  /**
+   * 地域ID，如：ap-guangzhou。
+   */
+  Region?: string
+}
 
 /**
  * DetachClassicLinkVpc返回参数结构体

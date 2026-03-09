@@ -950,56 +950,56 @@ export interface ChannelCreateDynamicFlowApproverResponse {
  */
 export interface FlowFileInfo {
   /**
-   * 签署文件资源Id列表，目前仅支持单个文件
+   * <p>签署文件资源Id列表，目前仅支持单个文件</p>
    */
   FileIds: Array<string>
   /**
-   * 签署流程名称，长度不超过200个字符
+   * <p>签署流程名称，长度不超过200个字符</p>
    */
   FlowName: string
   /**
-   * 签署流程签约方列表，最多不超过5个参与方
+   * <p>签署流程签约方列表，最多不超过5个参与方</p>
    */
   FlowApprovers: Array<FlowApproverInfo>
   /**
-   * 签署流程截止时间，十位数时间戳，最大值为33162419560，即3020年
+   * <p>签署流程截止时间，十位数时间戳，最大值为33162419560，即3020年</p>
    */
   Deadline?: number
   /**
-   * 签署流程的描述，长度不超过1000个字符
+   * <p>签署流程的描述，长度不超过1000个字符</p>
    */
   FlowDescription?: string
   /**
-   * 签署流程的类型，长度不超过255个字符
+   * <p>签署流程的类型，长度不超过255个字符</p><p>枚举值：</p><ul><li>入职合同： 入职合同</li><li>劳动合同： 劳动合同</li></ul>
    */
   FlowType?: string
   /**
-   * 已废弃，请使用【应用号配置】中的回调地址统一接收消息
+   * <p>已废弃，请使用【应用号配置】中的回调地址统一接收消息</p>
    * @deprecated
    */
   CallbackUrl?: string
   /**
-   * 第三方应用的业务信息，最大长度1000个字符。
+   * <p>第三方应用的业务信息，最大长度1000个字符。</p>
    */
   CustomerData?: string
   /**
-   * 合同签署顺序类型(无序签,顺序签)，默认为false，即有序签署
+   * <p>合同签署顺序类型(无序签,顺序签)，默认为false，即有序签署</p>
    */
   Unordered?: boolean
   /**
-   * 签署文件中的发起方的填写控件，需要在发起的时候进行填充
+   * <p>签署文件中的发起方的填写控件，需要在发起的时候进行填充</p>
    */
   Components?: Array<Component>
   /**
-   * 合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始
+   * <p>合同显示的页卡模板，说明：只支持{合同名称}, {发起方企业}, {发起方姓名}, {签署方N企业}, {签署方N姓名}，且N不能超过签署人的数量，N从1开始</p>
    */
   CustomShowMap?: string
   /**
-   * 本企业(发起方企业)是否需要签署审批
+   * <p>本企业(发起方企业)是否需要签署审批</p>
    */
   NeedSignReview?: boolean
   /**
-   * 在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下：  <ul><li> <b>0</b> :合同（默认值）</li> <li> <b>1</b> :文件</li> <li> <b>2</b> :协议</li><li> <b>3</b> :文书</li></ul>效果如下:![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png)
+   * <p>在短信通知、填写、签署流程中，若标题、按钮、合同详情等地方存在“合同”字样时，可根据此配置指定文案，可选文案如下：  <ul><li> <b>0</b> :合同（默认值）</li> <li> <b>1</b> :文件</li> <li> <b>2</b> :协议</li><li> <b>3</b> :文书</li></ul>效果如下:<img src="https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png" alt="FlowDisplayType"></p>
    */
   FlowDisplayType?: number
 }
@@ -2836,71 +2836,51 @@ export interface FlowGroupApproverInfo {
  */
 export interface Recipient {
   /**
-   * 合同参与方的角色ID
+   * <p>合同参与方的角色ID</p>
    */
   RecipientId?: string
   /**
-   * 参与者类型, 可以选择的类型如下:
-<ul><li> **ENTERPRISE** :此角色为企业参与方</li>
-<li> **INDIVIDUAL** :此角色为个人参与方</li>
-<li> **PROMOTER** :此角色是发起方</li></ul>
+   * <p>参与者类型, 可以选择的类型如下:</p><ul><li> **ENTERPRISE** :此角色为企业参与方</li><li> **INDIVIDUAL** :此角色为个人参与方</li><li> **PROMOTER** :此角色是发起方</li></ul>
    */
   RecipientType?: string
   /**
-   * 合同参与方的角色描述，长度不能超过100，只能由中文、字母、数字和下划线组成。
+   * <p>合同参与方的角色描述，长度不能超过100，只能由中文、字母、数字和下划线组成。</p>
    */
   Description?: string
   /**
-   * 合同参与方的角色名字，长度不能超过20，只能由中文、字母、数字和下划线组成。
+   * <p>合同参与方的角色名字，长度不能超过20，只能由中文、字母、数字和下划线组成。</p>
    */
   RoleName?: string
   /**
-   * 是否需要校验，
-true-是，
-false-否
+   * <p>是否需要校验，<br>true-是，<br>false-否</p>
    */
   RequireValidation?: boolean
   /**
-   * 是否必须填写，
-true-是，
-false-否
+   * <p>是否必须填写，<br>true-是，<br>false-否</p>
    */
   RequireSign?: boolean
   /**
-   * 内部字段，签署类型
+   * <p>内部字段，签署类型</p><p>枚举值：</p><ul><li>0： 人脸</li></ul>
    */
   SignType?: number
   /**
-   * 签署顺序：数字越小优先级越高
+   * <p>签署顺序：数字越小优先级越高</p>
    */
   RoutingOrder?: number
   /**
-   * 是否是发起方，
-true-是 
-false-否
+   * <p>是否是发起方，<br>true-是<br>false-否</p>
    */
   IsPromoter?: boolean
   /**
-   * 签署人查看合同校验方式, 支持的类型如下:
-<ul><li> 1 :实名认证查看</li>
-<li> 2 :手机号校验查看</li></ul>
+   * <p>签署人查看合同校验方式, 支持的类型如下:</p><ul><li> 1 :实名认证查看</li><li> 2 :手机号校验查看</li></ul>
    */
   ApproverVerifyTypes?: Array<number | bigint>
   /**
-   * 签署人进行合同签署时的认证方式，支持的类型如下:
-<ul><li> 1 :人脸认证</li>
-<li> 2 :签署密码</li>
-<li> 3 :运营商三要素认证</li>
-<li> 4 :UKey认证</li>
-<li> 5 :设备指纹识别</li>
-<li> 6 :设备面容识别</li></ul>
+   * <p>签署人进行合同签署时的认证方式，支持的类型如下:</p><ul><li> 1 :人脸认证</li><li> 2 :签署密码</li><li> 3 :运营商三要素认证</li><li> 4 :UKey认证</li><li> 5 :设备指纹识别</li><li> 6 :设备面容识别</li></ul>
    */
   ApproverSignTypes?: Array<number | bigint>
   /**
-   * 签署方是否可以转他人处理
-
-<ul><li> **false** : ( 默认)可以转他人处理</li>
-<li> **true** :不可以转他人处理</li></ul>
+   * <p>签署方是否可以转他人处理</p><ul><li> **false** : ( 默认)可以转他人处理</li><li> **true** :不可以转他人处理</li></ul>
    */
   NoTransfer?: boolean
 }
@@ -3419,63 +3399,55 @@ export interface ChannelVerifyPdfResponse {
  */
 export interface OrganizationCommonInfo {
   /**
-   * 组织机构名称。
-请确认该名称与企业营业执照中注册的名称一致。
-如果名称中包含英文括号()，请使用中文括号（）代替。
+   * <p>组织机构名称。<br>请确认该名称与企业营业执照中注册的名称一致。<br>如果名称中包含英文括号()，请使用中文括号（）代替。</p>
    */
   OrganizationName: string
   /**
-   * 组织机构企业统一社会信用代码。
-请确认该企业统一社会信用代码与企业营业执照中注册的统一社会信用代码一致。
+   * <p>组织机构企业统一社会信用代码。<br>请确认该企业统一社会信用代码与企业营业执照中注册的统一社会信用代码一致。</p>
    */
   UniformSocialCreditCode: string
   /**
-   * 组织机构法人的姓名。
-请确认该企业统一社会信用代码与企业营业执照中注册的法人姓名一致。
+   * <p>组织机构法人的姓名。<br>请确认该企业统一社会信用代码与企业营业执照中注册的法人姓名一致。</p>
    */
   LegalName: string
   /**
-   * 组织机构法人的证件类型
+   * <p>组织机构法人的证件类型</p><p>枚举值：</p><ul><li>居民身份证： 中国大陆居民身份证</li></ul>
    */
   LegalIdCardType?: string
   /**
-   * 组织机构法人的证件号码
+   * <p>组织机构法人的证件号码</p>
    */
   LegalIdCardNumber?: string
   /**
-   * 组织机构超管姓名。
-
+   * <p>组织机构超管姓名。</p>
    */
   AdminName?: string
   /**
-   * 组织机构超管手机号。
-
+   * <p>组织机构超管手机号。</p>
    */
   AdminMobile?: string
   /**
-   * 组织机构超管证件类型
-
+   * <p>组织机构超管证件类型</p><p>枚举值：</p><ul><li>居民身份证： 中国大陆居民身份证</li></ul>
    */
   AdminIdCardType?: string
   /**
-   * 组织机构超管证件号码
-
+   * <p>组织机构超管证件号码</p>
    */
   AdminIdCardNumber?: string
   /**
-   * 原超管姓名
+   * <p>原超管姓名</p>
    */
   OldAdminName?: string
   /**
-   * 原超管手机号
+   * <p>原超管手机号</p>
    */
   OldAdminMobile?: string
   /**
-   * 原超管证件类型
+   * <p>原超管证件类型</p><p>枚举值：</p><ul><li>居民身份证： 中国大陆居民身份证</li></ul>
    */
   OldAdminIdCardType?: string
   /**
-   * 原超管证件号码
+   * <p>原超管证件号码</p>
    */
   OldAdminIdCardNumber?: string
 }

@@ -667,23 +667,23 @@ export interface AudioTrackItem {
  */
 export interface MediaAiAnalysisHighlightItem {
   /**
-   * 智能精彩集锦地址。
+   * <p>智能精彩集锦地址。</p>
    */
   HighlightUrl?: string
   /**
-   * 智能精彩集锦封面地址。
+   * <p>智能精彩集锦封面地址。</p>
    */
   CovImgUrl?: string
   /**
-   * 智能精彩集锦的可信度，取值范围是 0 到 100。
+   * <p>智能精彩集锦的可信度，取值范围是 0 到 100。</p>
    */
   Confidence?: number
   /**
-   * 智能精彩集锦持续时间。
+   * <p>智能精彩集锦持续时间。</p><p>单位：秒</p>
    */
   Duration?: number
   /**
-   * 智能精彩集锦子片段列表，精彩集锦片段由这些子片段拼接生成。
+   * <p>智能精彩集锦子片段列表，精彩集锦片段由这些子片段拼接生成。</p>
    */
   SegmentSet?: Array<HighlightSegmentItem>
 }
@@ -1298,6 +1298,25 @@ export interface ModifyJustInTimeTranscodeTemplateRequest {
  * DescribePrepaidProducts请求参数结构体
  */
 export type DescribePrepaidProductsRequest = null
+
+/**
+ * ManageTask请求参数结构体
+ */
+export interface ManageTaskRequest {
+  /**
+   * 视频处理的任务 ID。
+   */
+  TaskId: string
+  /**
+   * 操作类型，取值范围：
+<li>Abort：终止任务。只能终止已发起且状态为等待中（WAITING）的任务。</li>
+   */
+  OperationType: string
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+}
 
 /**
  * 音视频增强配置
@@ -7143,6 +7162,24 @@ export interface SplitMediaTaskSegmentInfo {
 }
 
 /**
+ * 鉴别涉及令人反感的信息的任务控制参数。
+ */
+export interface PornConfigureInfoForUpdate {
+  /**
+   * 画面鉴别涉及令人反感的信息的控制参数。
+   */
+  ImgReviewInfo?: PornImgReviewTemplateInfoForUpdate
+  /**
+   * 语音鉴别涉及令人反感的信息的控制参数。
+   */
+  AsrReviewInfo?: PornAsrReviewTemplateInfoForUpdate
+  /**
+   * 文本鉴别涉及令人反感的信息的控制参数。
+   */
+  OcrReviewInfo?: PornOcrReviewTemplateInfoForUpdate
+}
+
+/**
  * Asr 文字涉及令人反感的信息
  */
 export interface AiReviewPornAsrTaskOutput {
@@ -7968,6 +8005,40 @@ export interface DescribeAdaptiveDynamicStreamingTemplatesRequest {
 <li>Custom：用户自定义模板。</li>
    */
   Type?: string
+}
+
+/**
+ * 创建自定义主体输入。
+ */
+export interface CreateAigcAdvancedCustomElementInput {
+  /**
+   * <p>主体名称。</p>
+   */
+  ElementName?: string
+  /**
+   * <p>主体描述。</p>
+   */
+  ElementDescription?: string
+  /**
+   * <p>主体参考方式。</p>
+   */
+  ReferenceType?: string
+  /**
+   * <p>主体音色。</p>
+   */
+  ElementVoiceId?: string
+  /**
+   * <p>主体参考视频。</p>
+   */
+  ElementVideoList?: string
+  /**
+   * <p>主体参考图。</p>
+   */
+  ElementImageList?: string
+  /**
+   * <p>主体配置标签。</p>
+   */
+  TagList?: string
 }
 
 /**
@@ -9095,15 +9166,23 @@ export interface NoiseConfigureInfoForUpdate {
  */
 export interface LiveRecordInfo {
   /**
-   * 直播录制流 ID。
+   * <p>直播录制域名</p>
+   */
+  Domain?: string
+  /**
+   * <p>直播录制Path</p>
+   */
+  Path?: string
+  /**
+   * <p>直播录制流 ID。</p>
    */
   StreamId?: string
   /**
-   * 录制起始时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>录制起始时间，使用  <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   RecordStartTime?: string
   /**
-   * 录制结束时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>录制结束时间，使用  <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   RecordEndTime?: string
 }
@@ -9595,12 +9674,11 @@ export interface AiAnalysisTaskTagResult {
  */
 export interface SearchMediaResponse {
   /**
-   * 符合搜索条件的记录总数。
-<li>最大值：5000。当命中记录数超过5000时，该字段将返回 5000，而非实际命中总数。</li>
+   * <p>符合搜索条件的记录总数。</p><li>最大值：5000。当命中记录数超过5000时，该字段将返回 5000，而非实际命中总数。</li>
    */
   TotalCount?: number
   /**
-   * 媒体文件信息列表。
+   * <p>媒体文件信息列表。</p>
    */
   MediaInfoSet?: Array<MediaInfo>
   /**
@@ -10271,21 +10349,17 @@ export interface ImageUnderstandingItem {
 }
 
 /**
- * AIGC 人脸输入文件信息
+ * 自定义音色信息。
  */
-export interface AigcFaceInputFileInfo {
+export interface CustomVoiceInfo {
   /**
-   * 输入的视频文件类型。取值有： <li>File：点播媒体文件；</li> <li>Url：可访问的 Url；</li>
+   * <p>音色 ID。</p>
    */
-  Type?: string
+  VoiceId?: string
   /**
-   * 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。当 Type 取值为 File 时，本参数有效。
+   * <p>音色信息。</p>
    */
-  FileId?: string
-  /**
-   * 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。
-   */
-  Url?: string
+  VoiceInfo?: string
 }
 
 /**
@@ -10495,22 +10569,13 @@ export interface ComplexAdaptiveDynamicStreamingTaskAudioInput {
 }
 
 /**
- * ManageTask请求参数结构体
+ * 创建自定义音色回调输出信息。
  */
-export interface ManageTaskRequest {
+export interface CreateAigcCustomVoiceOutput {
   /**
-   * 视频处理的任务 ID。
+   * <p>自定义音色列表。</p>
    */
-  TaskId: string
-  /**
-   * 操作类型，取值范围：
-<li>Abort：终止任务。只能终止已发起且状态为等待中（WAITING）的任务。</li>
-   */
-  OperationType: string
-  /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
-   */
-  SubAppId?: number
+  InfoList?: Array<CustomVoiceInfo>
 }
 
 /**
@@ -10958,13 +11023,17 @@ export interface ImageWatermarkTemplate {
 }
 
 /**
- * ModifySubAppIdInfo返回参数结构体
+ * 自定义主体信息
  */
-export interface ModifySubAppIdInfoResponse {
+export interface AdvancedElementInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>主体 ID。</p>
    */
-  RequestId?: string
+  ElementId?: string
+  /**
+   * <p>主体信息。</p>
+   */
+  ElementInfo?: string
 }
 
 /**
@@ -11256,6 +11325,24 @@ export interface MediaAdaptiveDynamicStreamingInfo {
    * 转自适应码流信息数组。
    */
   AdaptiveDynamicStreamingSet: Array<AdaptiveDynamicStreamingInfoItem>
+}
+
+/**
+ * AIGC 人脸输入文件信息
+ */
+export interface AigcFaceInputFileInfo {
+  /**
+   * 输入的视频文件类型。取值有： <li>File：点播媒体文件；</li> <li>Url：可访问的 Url；</li>
+   */
+  Type?: string
+  /**
+   * 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。当 Type 取值为 File 时，本参数有效。
+   */
+  FileId?: string
+  /**
+   * 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。
+   */
+  Url?: string
 }
 
 /**
@@ -13792,25 +13879,15 @@ export interface ResolutionNameInfo {
 }
 
 /**
- * VerifyDomainRecord请求参数结构体
+ * 文本全文本识别任务控制参数
  */
-export interface VerifyDomainRecordRequest {
+export interface OcrFullTextConfigureInfo {
   /**
-   * 需要接入点播的加速域名。
+   * 文本全文识别任务开关，可选值：
+<li>ON：开启智能文本全文识别任务；</li>
+<li>OFF：关闭智能文本全文识别任务。</li>
    */
-  Domain: string
-  /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2024年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
-   */
-  SubAppId?: number
-  /**
-   * 验证方式：
-<li>dns：DNS 解析验证；</li>
-<li>fIle：文件验证。</li>
-
-默认值：dns。
-   */
-  VerifyType?: string
+  Switch: string
 }
 
 /**
@@ -14993,17 +15070,21 @@ export interface ScratchRepairInfo {
 }
 
 /**
- * 文件删除结果信息
+ * 创建自定义音色回调输入信息。
  */
-export interface FileDeleteResultItem {
+export interface CreateAigcCustomVoiceInput {
   /**
-   * 删除的文件 ID 。
+   * <p>音色名称。</p>
    */
-  FileId?: string
+  VoiceName?: string
   /**
-   * 本次删除的文件部分。
+   * <p>音色数据文件获取链接。</p>
    */
-  DeleteParts?: Array<MediaDeleteItem>
+  VoiceUrl?: string
+  /**
+   * <p>历史作品 ID，可通过引用历史作品提供音频素材。</p>
+   */
+  VideoId?: string
 }
 
 /**
@@ -15864,21 +15945,13 @@ export interface DescribeReviewDetailsRequest {
 }
 
 /**
- * 鉴别涉及令人反感的信息的任务控制参数。
+ * ModifySubAppIdInfo返回参数结构体
  */
-export interface PornConfigureInfoForUpdate {
+export interface ModifySubAppIdInfoResponse {
   /**
-   * 画面鉴别涉及令人反感的信息的控制参数。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ImgReviewInfo?: PornImgReviewTemplateInfoForUpdate
-  /**
-   * 语音鉴别涉及令人反感的信息的控制参数。
-   */
-  AsrReviewInfo?: PornAsrReviewTemplateInfoForUpdate
-  /**
-   * 文本鉴别涉及令人反感的信息的控制参数。
-   */
-  OcrReviewInfo?: PornOcrReviewTemplateInfoForUpdate
+  RequestId?: string
 }
 
 /**
@@ -16584,6 +16657,26 @@ export interface DescribeAigcFaceInfoResponse {
 }
 
 /**
+ * 综合增强控制
+ */
+export interface ImageQualityEnhanceInfo {
+  /**
+   * 综合增强控制开关，可选值：
+<li>ON：开启综合增强；</li>
+<li>OFF：关闭综合增强。</li>
+   */
+  Switch: string
+  /**
+   * 综合增强类型，仅当综合增强控制开关为 ON 时有效，可选值：
+<li>weak：轻综合增强；</li>
+<li>normal：正常综合增强；</li>
+<li>strong：强综合增强。</li>
+默认值：weak。
+   */
+  Type?: string
+}
+
+/**
  * CreateMPSTemplate返回参数结构体
  */
 export interface CreateMPSTemplateResponse {
@@ -16863,27 +16956,27 @@ export interface AccelerateAreaInfo {
  */
 export interface MediaImageSpriteItem {
   /**
-   * 雪碧图规格，参见[雪碧图参数模板](https://cloud.tencent.com/document/product/266/33480#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+   * <p>雪碧图规格，参见<a href="https://cloud.tencent.com/document/product/266/33480#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF">雪碧图参数模板</a>。</p>
    */
   Definition?: number
   /**
-   * 雪碧图小图的高度。
+   * <p>雪碧图小图的高度。</p>
    */
   Height?: number
   /**
-   * 雪碧图小图的宽度。
+   * <p>雪碧图小图的宽度。</p>
    */
   Width?: number
   /**
-   * 每一张雪碧图大图里小图的数量。
+   * <p>每一张雪碧图大图里小图的数量。</p>
    */
   TotalCount?: number
   /**
-   * 每一张雪碧图大图的地址。
+   * <p>每一张雪碧图大图的地址。</p>
    */
   ImageUrlSet?: Array<string>
   /**
-   * 雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
+   * <p>雪碧图子图位置与时间关系的 WebVtt 文件地址。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。</p>
    */
   WebVttUrl?: string
 }
@@ -16955,6 +17048,52 @@ export interface ProhibitedAsrReviewTemplateInfo {
    * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * 创建自定义主体任务信息。
+ */
+export interface CreateAigcAdvancedCustomElementTask {
+  /**
+   * <p>任务 ID。</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务状态。</p><p>枚举值：</p><ul><li>PROCESSING： 处理中</li><li>FINISH： 已完成</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。</p>
+   */
+  ErrCode?: number
+  /**
+   * <p>扩展错误码。空字符串表示成功，其它值表示失败。</p>
+   */
+  ErrCodeExt?: string
+  /**
+   * <p>错误信息。</p>
+   */
+  Message?: string
+  /**
+   * <p>任务进度，取值范围 [0-100] 。</p>
+   */
+  Progress?: number
+  /**
+   * <p>创建 AIGC 自定义主体任务的输入信息。</p>
+   */
+  Input?: CreateAigcAdvancedCustomElementInput
+  /**
+   * <p>创建 AIGC 自定义主体任务输出信息。</p>
+   */
+  Output?: CreateAigcAdvancedCustomElementOutput
+  /**
+   * <p>用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
+   */
+  SessionId?: string
+  /**
+   * <p>来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。</p>
+   */
+  SessionContext?: string
 }
 
 /**
@@ -17806,11 +17945,11 @@ export interface CreateAIRecognitionTemplateRequest {
  */
 export interface DescribeTaskDetailRequest {
   /**
-   * 视频处理任务的任务 ID。
+   * <p>视频处理任务的任务 ID。</p>
    */
   TaskId: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
 }
@@ -18641,6 +18780,52 @@ export interface DeleteRebuildMediaTemplateRequest {
 }
 
 /**
+ * 创建自定义音色任务信息。
+ */
+export interface CreateAigcCustomVoiceTask {
+  /**
+   * <p>任务 ID。</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务状态。</p><p>枚举值：</p><ul><li>PROCESSING： 处理中</li><li>FINISH： 已完成</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。</p>
+   */
+  ErrCode?: number
+  /**
+   * <p>扩展错误码。空字符串表示成功，其它值表示失败。</p>
+   */
+  ErrCodeExt?: string
+  /**
+   * <p>错误信息。</p>
+   */
+  Message?: string
+  /**
+   * <p>任务进度，取值范围 [0-100] 。</p>
+   */
+  Progress?: number
+  /**
+   * <p>创建 AIGC 自定义音色输入信息。</p>
+   */
+  Input?: CreateAigcCustomVoiceInput
+  /**
+   * <p>创建 AIGC 自定义音色输出信息。</p>
+   */
+  Output?: CreateAigcCustomVoiceOutput
+  /**
+   * <p>用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
+   */
+  SessionId?: string
+  /**
+   * <p>来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。</p>
+   */
+  SessionContext?: string
+}
+
+/**
  * CreateDomainVerifyRecord请求参数结构体
  */
 export interface CreateDomainVerifyRecordRequest {
@@ -19175,15 +19360,15 @@ export interface AiAnalysisTaskFrameTagInput {
  */
 export interface MediaAiAnalysisFrameTagSegmentItem {
   /**
-   * 按帧标签起始的偏移时间。
+   * <p>按帧标签起始的偏移时间。</p><p>单位：秒</p>
    */
   StartTimeOffset?: number
   /**
-   * 按帧标签结束的偏移时间。
+   * <p>按帧标签结束的偏移时间。</p><p>单位：秒</p>
    */
   EndTimeOffset?: number
   /**
-   * 时间片段内的标签列表。
+   * <p>时间片段内的标签列表。</p>
    */
   TagSet?: Array<MediaAiAnalysisFrameTagItem>
 }
@@ -19311,171 +19496,175 @@ export interface DescribeStorageDataRequest {
  */
 export interface DescribeTaskDetailResponse {
   /**
-   * 任务类型，取值：<li>Procedure：视频处理任务；</li><li>EditMedia：视频编辑任务；</li><li>SplitMedia：视频拆条任务；</li><li>ComposeMedia：制作媒体文件任务；</li><li>WechatPublish：微信发布任务；</li><li>WechatMiniProgramPublish：微信小程序视频发布任务；</li><li>PullUpload：拉取上传媒体文件任务；</li><li>FastClipMedia：快速剪辑任务；</li><li>RemoveWatermarkTask：智能去除水印任务；</li><li>DescribeFileAttributesTask：获取文件属性任务；</li><li>RebuildMedia：音画质重生任务（不推荐使用）；</li><li>ReviewAudioVideo：音视频审核任务；</li><li>ExtractTraceWatermark：提取溯源水印任务；</li><li>ExtractCopyRightWatermark：提取版权水印任务；</li><li>QualityInspect：音画质检测任务；</li><li>QualityEnhance：音画质重生任务；</li><li>ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；</li><li>ProcessMediaByMPS：MPS 视频处理任务；</li><li>AigcImageTask：AIGC 生图任务；</li><li>SceneAigcImageTask：场景化 AIGC 生图任务；</li><li>AigcVideoTask：AIGC 生视频任务；</li><li>ImportMediaKnowledge：导入媒体知识任务。</li><li>SceneAigcVideoTask：场景化 AIGC 生视频任务；</li><li> ExtractBlindWatermark：提取数字水印任务。</li>
+   * <p>任务类型，取值：<li>Procedure：视频处理任务；</li><li>EditMedia：视频编辑任务；</li><li>SplitMedia：视频拆条任务；</li><li>ComposeMedia：制作媒体文件任务；</li><li>WechatPublish：微信发布任务；</li><li>WechatMiniProgramPublish：微信小程序视频发布任务；</li><li>PullUpload：拉取上传媒体文件任务；</li><li>FastClipMedia：快速剪辑任务；</li><li>RemoveWatermarkTask：智能去除水印任务；</li><li>DescribeFileAttributesTask：获取文件属性任务；</li><li>RebuildMedia：音画质重生任务（不推荐使用）；</li><li>ReviewAudioVideo：音视频审核任务；</li><li>ExtractTraceWatermark：提取溯源水印任务；</li><li>ExtractCopyRightWatermark：提取版权水印任务；</li><li>QualityInspect：音画质检测任务；</li><li>QualityEnhance：音画质重生任务；</li><li>ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；</li><li>ProcessMediaByMPS：MPS 视频处理任务；</li><li>AigcImageTask：AIGC 生图任务；</li><li>SceneAigcImageTask：场景化 AIGC 生图任务；</li><li>AigcVideoTask：AIGC 生视频任务；</li><li>ImportMediaKnowledge：导入媒体知识任务。</li><li>SceneAigcVideoTask：场景化 AIGC 生视频任务；</li><li> ExtractBlindWatermark：提取数字水印任务。</li></p>
    */
   TaskType?: string
   /**
-   * 任务状态，取值：
-<li>WAITING：等待中；</li>
-<li>PROCESSING：处理中；</li>
-<li>FINISH：已完成；</li>
-<li>ABORTED：已终止。</li>
+   * <p>任务状态，取值：</p><li>WAITING：等待中；</li><li>PROCESSING：处理中；</li><li>FINISH：已完成；</li><li>ABORTED：已终止。</li>
    */
   Status?: string
   /**
-   * 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>任务的创建时间，采用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   CreateTime?: string
   /**
-   * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>任务开始执行的时间，采用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   BeginProcessTime?: string
   /**
-   * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>任务执行完毕的时间，采用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   FinishTime?: string
   /**
-   * 视频处理任务信息，仅当 TaskType 为 Procedure，该字段有值。
+   * <p>视频处理任务信息，仅当 TaskType 为 Procedure，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProcedureTask?: ProcedureTask
   /**
-   * 视频编辑任务信息，仅当 TaskType 为 EditMedia，该字段有值。
+   * <p>视频编辑任务信息，仅当 TaskType 为 EditMedia，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EditMediaTask?: EditMediaTask
   /**
-   * 微信发布任务信息，仅当 TaskType 为 WechatPublish，该字段有值。
+   * <p>微信发布任务信息，仅当 TaskType 为 WechatPublish，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WechatPublishTask?: WechatPublishTask
   /**
-   * 制作媒体文件任务信息，仅当 TaskType 为 ComposeMedia，该字段有值。
+   * <p>制作媒体文件任务信息，仅当 TaskType 为 ComposeMedia，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ComposeMediaTask?: ComposeMediaTask
   /**
-   * 视频拆条任务信息，仅当 TaskType 为 SplitMedia，该字段有值。
+   * <p>视频拆条任务信息，仅当 TaskType 为 SplitMedia，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SplitMediaTask?: SplitMediaTask
   /**
-   * 微信小程序发布任务信息，仅当 TaskType 为 WechatMiniProgramPublish，该字段有值。
+   * <p>微信小程序发布任务信息，仅当 TaskType 为 WechatMiniProgramPublish，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WechatMiniProgramPublishTask?: WechatMiniProgramPublishTask
   /**
-   * 拉取上传媒体文件任务信息，仅当 TaskType 为 PullUpload，该字段有值。
+   * <p>拉取上传媒体文件任务信息，仅当 TaskType 为 PullUpload，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PullUploadTask?: PullUploadTask
   /**
-   * 视频转码任务信息，仅当 TaskType 为 Transcode，该字段有值。
+   * <p>视频转码任务信息，仅当 TaskType 为 Transcode，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TranscodeTask?: TranscodeTask2017
   /**
-   * 视频拼接任务信息，仅当 TaskType 为 Concat，该字段有值。
+   * <p>视频拼接任务信息，仅当 TaskType 为 Concat，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConcatTask?: ConcatTask2017
   /**
-   * 视频剪辑任务信息，仅当 TaskType 为 Clip，该字段有值。
+   * <p>视频剪辑任务信息，仅当 TaskType 为 Clip，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClipTask?: ClipTask2017
   /**
-   * 截取雪碧图任务信息，仅当 TaskType 为 ImageSprite，该字段有值。
+   * <p>截取雪碧图任务信息，仅当 TaskType 为 ImageSprite，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateImageSpriteTask?: CreateImageSpriteTask2017
   /**
-   * 视频指定时间点截图任务信息，仅当 TaskType 为 SnapshotByTimeOffset，该字段有值。
+   * <p>视频指定时间点截图任务信息，仅当 TaskType 为 SnapshotByTimeOffset，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotByTimeOffsetTask?: SnapshotByTimeOffsetTask2017
   /**
-   * 智能去除水印任务信息，仅当 TaskType 为 RemoveWatermark，该字段有值。
+   * <p>智能去除水印任务信息，仅当 TaskType 为 RemoveWatermark，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoveWatermarkTask?: RemoveWatermarkTask
   /**
-   * 音画质重生任务信息，仅当 TaskType 为 RebuildMedia，该字段有值。
+   * <p>音画质重生任务信息，仅当 TaskType 为 RebuildMedia，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RebuildMediaTask?: RebuildMediaTask
   /**
-   * 提取溯源水印任务信息，仅当 TaskType 为 ExtractTraceWatermark，该字段有值。
+   * <p>提取溯源水印任务信息，仅当 TaskType 为 ExtractTraceWatermark，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtractTraceWatermarkTask?: ExtractTraceWatermarkTask
   /**
-   * 提取版权水印任务信息，仅当 TaskType 为 ExtractCopyRightWatermark，该字段有值。
+   * <p>提取版权水印任务信息，仅当 TaskType 为 ExtractCopyRightWatermark，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtractCopyRightWatermarkTask?: ExtractCopyRightWatermarkTask
   /**
-   * 音视频审核任务信息，仅当 TaskType 为 ReviewAudioVideo，该字段有值。
+   * <p>音视频审核任务信息，仅当 TaskType 为 ReviewAudioVideo，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReviewAudioVideoTask?: ReviewAudioVideoTask
   /**
-   * 该字段已无效。
+   * <p>该字段已无效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReduceMediaBitrateTask?: ReduceMediaBitrateTask
   /**
-   * 获取文件属性任务信息，仅当 TaskType 为 DescribeFileAttributes，该字段有值。
+   * <p>获取文件属性任务信息，仅当 TaskType 为 DescribeFileAttributes，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DescribeFileAttributesTask?: DescribeFileAttributesTask
   /**
-   * 音画质检测任务信息，仅当 TaskType 为 QualityInspect 时该字段有值。
+   * <p>音画质检测任务信息，仅当 TaskType 为 QualityInspect 时该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityInspectTask?: QualityInspectTask
   /**
-   * 音画质重生任务信息，仅当 TaskType 为 QualityEnhance，该字段有值。
+   * <p>音画质重生任务信息，仅当 TaskType 为 QualityEnhance，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityEnhanceTask?: QualityEnhanceTask
   /**
-   * 复杂自适应码流任务信息，仅当 TaskType 为 ComplexAdaptiveDynamicStreaming，该字段有值。
+   * <p>复杂自适应码流任务信息，仅当 TaskType 为 ComplexAdaptiveDynamicStreaming，该字段有值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ComplexAdaptiveDynamicStreamingTask?: ComplexAdaptiveDynamicStreamingTask
   /**
-   * MPS 视频处理任务信息，仅当 TaskType 为 ProcessMediaByMPS，该字段有值。
+   * <p>MPS 视频处理任务信息，仅当 TaskType 为 ProcessMediaByMPS，该字段有值。</p>
    */
   ProcessMediaByMPSTask?: ProcessMediaByMPS
   /**
-   * AIGC 生图任务信息，仅当 TaskType 为 AigcImageTask，该字段有值。
+   * <p>AIGC 生图任务信息，仅当 TaskType 为 AigcImageTask，该字段有值。</p>
    */
   AigcImageTask?: AigcImageTask
   /**
-   * AIGC 生视频任务信息，仅当 TaskType 为 AigcVideoTask，该字段有值。
+   * <p>AIGC 生视频任务信息，仅当 TaskType 为 AigcVideoTask，该字段有值。</p>
    */
   AigcVideoTask?: AigcVideoTask
   /**
-   * 媒体导入知识库任务信息，仅当 TaskType 为 ImportMediaKnowledge，该字段有值。
+   * <p>媒体导入知识库任务信息，仅当 TaskType 为 ImportMediaKnowledge，该字段有值。</p>
    */
   ImportMediaKnowledge?: ImportMediaKnowledgeTask
   /**
-   * 场景化 AIGC 生图任务信息，仅当 TaskType 为 SceneAigcImageTask，该字段有值。
+   * <p>场景化 AIGC 生图任务信息，仅当 TaskType 为 SceneAigcImageTask，该字段有值。</p>
    */
   SceneAigcImageTask?: SceneAigcImageTask
   /**
-   * 场景化 AIGC 生视频任务信息，仅当 TaskType 为 SceneAigcVideoTask，该字段有值。
+   * <p>场景化 AIGC 生视频任务信息，仅当 TaskType 为 SceneAigcVideoTask，该字段有值。</p>
    */
   SceneAigcVideoTask?: SceneAigcVideoTask
   /**
-   * 图像异步处理任务信息，仅当 TaskType 为 ProcessImageAsync，该字段有值。
+   * <p>图像异步处理任务信息，仅当 TaskType 为 ProcessImageAsync，该字段有值。</p>
    */
   ProcessImageAsyncTask?: ProcessImageAsync
   /**
-   * 提取数字水印任务信息，仅当 TaskType 为 ExtractBlindWatermark，该字段有值。
+   * <p>提取数字水印任务信息，仅当 TaskType 为 ExtractBlindWatermark，该字段有值。</p>
    */
   ExtractBlindWatermarkTask?: ExtractBlindWatermarkTask
+  /**
+   * <p>创建自定义主体信息，仅当 TaskType 为 CreateAigcAdvancedCustomElement，该字段有值。</p>
+   */
+  CreateAigcAdvancedCustomElementTask?: CreateAigcAdvancedCustomElementTask
+  /**
+   * <p>创建自定义音色信息，仅当 TaskType 为 CreateAigcCustomVoice，该字段有值。</p>
+   */
+  CreateAigcCustomVoiceTask?: CreateAigcCustomVoiceTask
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -19758,23 +19947,13 @@ export interface ReduceMediaBitrateMediaProcessTaskResult {
 }
 
 /**
- * 综合增强控制
+ * 创建自定义主体回调输出
  */
-export interface ImageQualityEnhanceInfo {
+export interface CreateAigcAdvancedCustomElementOutput {
   /**
-   * 综合增强控制开关，可选值：
-<li>ON：开启综合增强；</li>
-<li>OFF：关闭综合增强。</li>
+   * <p>自定义主体列表。</p>
    */
-  Switch: string
-  /**
-   * 综合增强类型，仅当综合增强控制开关为 ON 时有效，可选值：
-<li>weak：轻综合增强；</li>
-<li>normal：正常综合增强；</li>
-<li>strong：强综合增强。</li>
-默认值：weak。
-   */
-  Type?: string
+  InfoList?: Array<AdvancedElementInfo>
 }
 
 /**
@@ -22107,6 +22286,7 @@ export interface RemoveWatermarkRequest {
   TasksPriority?: number
   /**
    * 该字段已无效。
+   * @deprecated
    */
   TasksNotifyMode?: string
 }
@@ -22874,185 +23054,133 @@ export interface DescribeProcedureTemplatesResponse {
  */
 export interface SearchMediaRequest {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 文件 ID 集合，匹配集合中的任意元素。
-<li>数组长度限制：10。</li>
-<li>单个 ID 长度限制：40个字符。</li>
+   * <p>文件 ID 集合，匹配集合中的任意元素。</p><li>数组长度限制：10。</li><li>单个 ID 长度限制：40个字符。</li>
    */
   FileIds?: Array<string>
   /**
-   * 文件名集合，模糊匹配媒体文件的文件名，匹配度越高，排序越优先。
-<li>单个文件名长度限制：100个字符。</li>
-<li>数组长度限制：10。</li>
+   * <p>文件名集合，模糊匹配媒体文件的文件名，匹配度越高，排序越优先。</p><li>单个文件名长度限制：100个字符。</li><li>数组长度限制：10。</li>
    */
   Names?: Array<string>
   /**
-   * 文件名前缀，前缀匹配媒体文件的文件名。
-<li>单个文件名前缀长度限制：100个字符。</li>
-<li>数组长度限制：10。</li>
+   * <p>文件名前缀，前缀匹配媒体文件的文件名。</p><li>单个文件名前缀长度限制：100个字符。</li><li>数组长度限制：10。</li>
    */
   NamePrefixes?: Array<string>
   /**
-   * 文件描述集合，模糊匹配媒体文件的描述，匹配度越高，排序越优先。
-<li>单个描述长度限制：100个字符。</li>
-<li>数组长度限制：10。</li>
+   * <p>文件描述集合，模糊匹配媒体文件的描述，匹配度越高，排序越优先。</p><li>单个描述长度限制：100个字符。</li><li>数组长度限制：10。</li>
    */
   Descriptions?: Array<string>
   /**
-   * 分类 ID 集合，匹配集合指定 ID 的分类及其所有子类。
-<li>数组长度限制：10。</li>
+   * <p>分类 ID 集合，匹配集合指定 ID 的分类及其所有子类。</p><li>数组长度限制：10。</li>
    */
   ClassIds?: Array<number | bigint>
   /**
-   * 标签集合，匹配集合中任意元素。
-<li>单个标签长度限制：32个字符。</li>
-<li>数组长度限制：16。</li>
+   * <p>标签集合，匹配集合中任意元素。</p><li>单个标签长度限制：32个字符。</li><li>数组长度限制：16。</li>
    */
   Tags?: Array<string>
   /**
-   * 文件类型。匹配集合中的任意元素：
-<li>Video: 视频文件</li>
-<li>Audio: 音频文件</li>
-<li>Image: 图片文件</li>
+   * <p>文件类型。匹配集合中的任意元素：</p><li>Video: 视频文件</li><li>Audio: 音频文件</li><li>Image: 图片文件</li>
    */
   Categories?: Array<string>
   /**
-   * 媒体文件来源集合，来源取值参见 [SourceType](https://cloud.tencent.com/document/product/266/31773#MediaSourceData)。
-<li>数组长度限制：10。</li>
+   * <p>媒体文件来源集合，来源取值参见 <a href="https://cloud.tencent.com/document/product/266/31773#MediaSourceData">SourceType</a>。</p><li>数组长度限制：10。</li>
    */
   SourceTypes?: Array<string>
   /**
-   * 推流直播码集合。匹配集合中的任意元素。
-<li>数组长度限制：10。</li>
+   * <p>推流直播码集合。匹配集合中的任意元素。</p><li>数组长度限制：10。</li>
    */
   StreamIds?: Array<string>
   /**
-   * 匹配创建时间在此时间段内的文件。
-<li>包含所指定的头尾时间点。</li>
+   * <p>匹配创建时间在此时间段内的文件。</p><li>包含所指定的头尾时间点。</li>
    */
   CreateTime?: TimeRange
   /**
-   * 匹配过期时间在此时间段内的文件，无法检索到已过期文件。
-<li>包含所指定的头尾时间点。</li>
+   * <p>匹配过期时间在此时间段内的文件，无法检索到已过期文件。</p><li>包含所指定的头尾时间点。</li>
    */
   ExpireTime?: TimeRange
   /**
-   * 媒体文件存储地区，如 ap-chongqing，参见[地域列表](https://cloud.tencent.com/document/product/266/9760#.E5.B7.B2.E6.94.AF.E6.8C.81.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8)。
-<li>单个存储地区长度限制：20个字符。</li>
-<li>数组长度限制：20。</li>
+   * <p>媒体文件存储地区，如 ap-chongqing，参见<a href="https://cloud.tencent.com/document/product/266/9760#.E5.B7.B2.E6.94.AF.E6.8C.81.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">地域列表</a>。</p><li>单个存储地区长度限制：20个字符。</li><li>数组长度限制：20。</li>
    */
   StorageRegions?: Array<string>
   /**
-   * 存储类型数组。可选值有：
-<li> STANDARD：标准存储。</li>
-<li> STANDARD_IA：低频存储。</li>
-<li> ARCHIVE：归档存储。</li>
-<li> DEEP_ARCHIVE：深度归档存储。</li>
+   * <p>存储类型数组。可选值有：</p><li> STANDARD：标准存储。</li><li> STANDARD_IA：低频存储。</li><li> ARCHIVE：归档存储。</li><li> DEEP_ARCHIVE：深度归档存储。</li>
    */
   StorageClasses?: Array<string>
   /**
-   * 媒体文件封装格式集合，匹配集合中任意元素。
-<li>数组长度限制：10。</li>
+   * <p>媒体文件封装格式集合，匹配集合中任意元素。</p><li>数组长度限制：10。</li>
    */
   MediaTypes?: Array<string>
   /**
-   * 媒体文件状态，匹配集合中任意元素。
-<li> Normal：正常；</li>
-<li> SystemForbidden：平台封禁；</li>
-<li> Forbidden：主动封禁。</li>
+   * <p>媒体文件状态，匹配集合中任意元素。</p><li> Normal：正常；</li><li> SystemForbidden：平台封禁；</li><li> Forbidden：主动封禁。</li>
    */
   Status?: Array<string>
   /**
-   * 媒体文件审核结果，匹配集合中任意元素。
-<li> pass：审核通过；</li>
-<li> review：疑似违规，建议复审；</li>
-<li> block：确认违规，建议封禁；</li>
-<li> notModerated：未审核。</li>
+   * <p>媒体文件审核结果，匹配集合中任意元素。</p><li> pass：审核通过；</li><li> review：疑似违规，建议复审；</li><li> block：确认违规，建议封禁；</li><li> notModerated：未审核。</li>
    */
   ReviewResults?: Array<string>
   /**
-   * TRTC 应用 ID 集合。匹配集合中的任意元素。
-<li>数组长度限制：10。</li>
+   * <p>TRTC 应用 ID 集合。匹配集合中的任意元素。</p><li>数组长度限制：10。</li>
    */
   TrtcSdkAppIds?: Array<number | bigint>
   /**
-   * TRTC 房间 ID 集合。匹配集合中的任意元素。
-<li>单个房间 ID 长度限制：64个字符；</li>
-<li>数组长度限制：10。</li>
+   * <p>TRTC 房间 ID 集合。匹配集合中的任意元素。</p><li>单个房间 ID 长度限制：64个字符；</li><li>数组长度限制：10。</li>
    */
   TrtcRoomIds?: Array<string>
   /**
-   * 指定所有媒体文件需要返回的信息，可同时指定多个信息，N 从 0 开始递增。如果未填写该字段，默认返回所有信息。选项有：
-<li>basicInfo（视频基础信息）。</li>
-<li>metaData（视频元信息）。</li>
-<li>transcodeInfo（视频转码结果信息）。</li>
-<li>animatedGraphicsInfo（视频转动图结果信息）。</li>
-<li>imageSpriteInfo（视频雪碧图信息）。</li>
-<li>snapshotByTimeOffsetInfo（视频指定时间点截图信息）。</li>
-<li>sampleSnapshotInfo（采样截图信息）。</li>
-<li>keyFrameDescInfo（打点信息）。</li>
-<li>adaptiveDynamicStreamingInfo（转自适应码流信息）。</li>
-<li>miniProgramReviewInfo（小程序审核信息）。</li>
+   * <p>指定所有媒体文件需要返回的信息，可同时指定多个信息，N 从 0 开始递增。如果未填写该字段，默认返回所有信息。选项有：</p><li>basicInfo（视频基础信息）。</li><li>metaData（视频元信息）。</li><li>transcodeInfo（视频转码结果信息）。</li><li>animatedGraphicsInfo（视频转动图结果信息）。</li><li>imageSpriteInfo（视频雪碧图信息）。</li><li>snapshotByTimeOffsetInfo（视频指定时间点截图信息）。</li><li>sampleSnapshotInfo（采样截图信息）。</li><li>keyFrameDescInfo（打点信息）。</li><li>adaptiveDynamicStreamingInfo（转自适应码流信息）。</li><li>miniProgramReviewInfo（小程序审核信息）。</li>
    */
   Filters?: Array<string>
   /**
-   * 排序方式。
-<li>Sort.Field 可选 CreateTime 。</li>
-<li>当 Text、 Names 或 Descriptions 不为空时，Sort.Field 字段无效， 搜索结果将以匹配度排序。</li>
+   * <p>排序方式。</p><li>Sort.Field 可选 CreateTime 。</li><li>当 Text、 Names 或 Descriptions 不为空时，Sort.Field 字段无效， 搜索结果将以匹配度排序。</li>
    */
   Sort?: SortBy
   /**
-   * <div id="p_offset">分页返回的起始偏移量，默认值：0。将返回第 Offset 到第 Offset+Limit-1 条。
-<li>取值范围：Offset + Limit 不超过5000。（参见：<a href="#maxResultsDesc">接口返回结果数限制</a>）</li></div>
+   * <div id="p_offset">分页返回的起始偏移量，默认值：0。将返回第 Offset 到第 Offset+Limit-1 条。<li>取值范围：Offset + Limit 不超过5000。（参见：<a href="#maxResultsDesc">接口返回结果数限制</a>）</li></div>
    */
   Offset?: number
   /**
-   * <div id="p_limit">分页返回的记录条数，默认值：10。将返回第 Offset 到第 Offset+Limit-1 条。
-<li>取值范围：Offset + Limit 不超过5000。（参见：<a href="#maxResultsDesc">接口返回结果数限制</a>）</li></div>
+   * <div id="p_limit">分页返回的记录条数，默认值：10。将返回第 Offset 到第 Offset+Limit-1 条。<li>取值范围：Offset + Limit 不超过5000。（参见：<a href="#maxResultsDesc">接口返回结果数限制</a>）</li></div>
    */
   Limit?: number
   /**
-   * （不推荐：应使用 Names、NamePrefixes 或 Descriptions 替代）
-搜索文本，模糊匹配媒体文件名称或描述信息，匹配项越多，匹配度越高，排序越优先。长度限制：64个字符。
+   * <p>（不推荐：应使用 Names、NamePrefixes 或 Descriptions 替代）<br>搜索文本，模糊匹配媒体文件名称或描述信息，匹配项越多，匹配度越高，排序越优先。长度限制：64个字符。</p>
    */
   Text?: string
   /**
-   * （不推荐：应使用 SourceTypes 替代）
-媒体文件来源，来源取值参见 [SourceType](https://cloud.tencent.com/document/product/266/31773#MediaSourceData)。
+   * <p>（不推荐：应使用 SourceTypes 替代）<br>媒体文件来源，来源取值参见 <a href="https://cloud.tencent.com/document/product/266/31773#MediaSourceData">SourceType</a>。</p>
    */
   SourceType?: string
   /**
-   * （不推荐：应使用 StreamIds 替代）
-推流直播码。
+   * <p>（不推荐：应使用 StreamIds 替代）<br>推流直播码。</p>
    */
   StreamId?: string
   /**
-   * （不推荐：应使用 CreateTime 替代）
-创建时间的开始时间。
-<li>大于等于开始时间。</li>
-<li>当 CreateTime.After 也存在时，将优先使用 CreateTime.After。</li>
-<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。</li>
+   * <p>（不推荐：应使用 CreateTime 替代）<br>创建时间的开始时间。</p><li>大于等于开始时间。</li><li>当 CreateTime.After 也存在时，将优先使用 CreateTime.After。</li><li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。</li>
    */
   StartTime?: string
   /**
-   * （不推荐：应使用 CreateTime 替代）
-创建时间的结束时间。
-<li>小于结束时间。</li>
-<li>当 CreateTime.Before 也存在时，将优先使用 CreateTime.Before。</li>
-<li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。</li>
+   * <p>（不推荐：应使用 CreateTime 替代）<br>创建时间的结束时间。</p><li>小于结束时间。</li><li>当 CreateTime.Before 也存在时，将优先使用 CreateTime.Before。</li><li>格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。</li>
    */
   EndTime?: string
   /**
-   * 该字段已无效。
+   * <p>该字段已无效。</p>
    */
   Vids?: Array<string>
   /**
-   * 该字段已无效。
+   * <p>该字段已无效。</p>
    */
   Vid?: string
+  /**
+   * <p>直播推流Domain，当媒资来源是直播录制时有效。</p>
+   */
+  StreamDomains?: Array<string>
+  /**
+   * <p>直播推流Path，当媒资来源是直播录制时有效。</p>
+   */
+  StreamPaths?: Array<string>
 }
 
 /**
@@ -23715,15 +23843,17 @@ export interface AiReviewPoliticalOcrTaskOutput {
 }
 
 /**
- * 文本全文本识别任务控制参数
+ * 文件删除结果信息
  */
-export interface OcrFullTextConfigureInfo {
+export interface FileDeleteResultItem {
   /**
-   * 文本全文识别任务开关，可选值：
-<li>ON：开启智能文本全文识别任务；</li>
-<li>OFF：关闭智能文本全文识别任务。</li>
+   * 删除的文件 ID 。
    */
-  Switch: string
+  FileId?: string
+  /**
+   * 本次删除的文件部分。
+   */
+  DeleteParts?: Array<MediaDeleteItem>
 }
 
 /**
@@ -24609,6 +24739,28 @@ export interface AudioEnhanceConfig {
 }
 
 /**
+ * VerifyDomainRecord请求参数结构体
+ */
+export interface VerifyDomainRecordRequest {
+  /**
+   * 需要接入点播的加速域名。
+   */
+  Domain: string
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2024年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 验证方式：
+<li>dns：DNS 解析验证；</li>
+<li>fIle：文件验证。</li>
+
+默认值：dns。
+   */
+  VerifyType?: string
+}
+
+/**
  * 人脸识别结果
  */
 export interface AiRecognitionTaskFaceResultItem {
@@ -24994,15 +25146,15 @@ export interface EditMediaTaskOutput {
  */
 export interface HighlightSegmentItem {
   /**
-   * 置信度。
+   * <p>置信度。</p>
    */
   Confidence?: number
   /**
-   * 片段起始时间偏移。
+   * <p>片段起始时间偏移。</p><p>单位：秒</p>
    */
   StartTimeOffset?: number
   /**
-   * 片段结束时间偏移。
+   * <p>片段结束时间偏移。</p><p>单位：秒</p>
    */
   EndTimeOffset?: number
 }

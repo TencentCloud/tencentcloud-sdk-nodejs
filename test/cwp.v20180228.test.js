@@ -628,6 +628,16 @@ it("cwp.v20180228.DeleteLogExport", async function () {
     }
 })
 
+it("cwp.v20180228.DescribePatchEffectHostList", async function () {
+    try {
+       const data = await client.DescribePatchEffectHostList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeExportMachines", async function () {
     try {
        const data = await client.DescribeExportMachines({})
@@ -691,6 +701,16 @@ it("cwp.v20180228.ExportBashPolicies", async function () {
 it("cwp.v20180228.DescribeMachineLicenseDetail", async function () {
     try {
        const data = await client.DescribeMachineLicenseDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.DescribeWindowsPatchList", async function () {
+    try {
+       const data = await client.DescribeWindowsPatchList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -3518,6 +3538,16 @@ it("cwp.v20180228.DescribeSecurityEventsCnt", async function () {
     }
 })
 
+it("cwp.v20180228.DescribePatchInfo", async function () {
+    try {
+       const data = await client.DescribePatchInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DeleteMalwareWhiteList", async function () {
     try {
        const data = await client.DeleteMalwareWhiteList({})
@@ -4248,6 +4278,16 @@ it("cwp.v20180228.DescribeHotVulTop", async function () {
     }
 })
 
+it("cwp.v20180228.ExportWindowsPatchList", async function () {
+    try {
+       const data = await client.ExportWindowsPatchList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DeleteBaselineWeakPassword", async function () {
     try {
        const data = await client.DeleteBaselineWeakPassword({})
@@ -4861,6 +4901,16 @@ it("cwp.v20180228.DescribeRansomDefenseRollBackTaskList", async function () {
 it("cwp.v20180228.ExportAssetRecentMachineInfo", async function () {
     try {
        const data = await client.ExportAssetRecentMachineInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cwp.v20180228.ExportPatchEffectHostList", async function () {
+    try {
+       const data = await client.ExportPatchEffectHostList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

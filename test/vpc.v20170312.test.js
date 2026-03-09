@@ -958,6 +958,16 @@ it("vpc.v20170312.ModifyPrivateNatGatewayTranslationAclRule", async function () 
     }
 })
 
+it("vpc.v20170312.DescribeDesignatedZones", async function () {
+    try {
+       const data = await client.DescribeDesignatedZones({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DescribeAddressTemplateInstances", async function () {
     try {
        const data = await client.DescribeAddressTemplateInstances({})

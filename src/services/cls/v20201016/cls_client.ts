@@ -21,11 +21,13 @@ import {
   AlarmInfo,
   DescribeLogHistogramRequest,
   FilterStatistics,
+  DescribeNetworkApplicationDetailRequest,
   DeleteShipperRequest,
   ScheduledSqlResouceInfo,
   DynamicIndex,
   CreateRebuildIndexTaskResponse,
   CheckFunctionRequest,
+  ModifyNetworkApplicationResponse,
   NetInfo,
   CreateLogsetRequest,
   CreateScheduledSqlResponse,
@@ -48,7 +50,7 @@ import {
   Tag,
   ScheduledSqlTaskInfo,
   CreateDlcDeliverResponse,
-  JsonInfo,
+  CreateConsumerGroupRequest,
   Label,
   ModifyMachineGroupResponse,
   RuleInfo,
@@ -154,6 +156,7 @@ import {
   DeleteAlarmNoticeResponse,
   DeleteAlarmShieldRequest,
   ModifyEsRechargeRequest,
+  CreateNetworkApplicationRequest,
   DeleteLogsetResponse,
   TopicPartitionOffsetInfo,
   DeleteDlcDeliverResponse,
@@ -190,6 +193,7 @@ import {
   CreateConsumerResponse,
   DataTransformResouceInfo,
   DeleteMachineGroupRequest,
+  NetworkApplicationDetail,
   DescribeSplunkDeliversResponse,
   SearchDashboardSubscribeRequest,
   DescribePartitionsResponse,
@@ -219,7 +223,7 @@ import {
   NoticeContentInfo,
   ModifyMetricConfigResponse,
   DescribeConsumerResponse,
-  EstimateRebuildIndexTaskRequest,
+  DescribeNoticeContentsResponse,
   EsTimeInfo,
   DescribeClusterBaseMetricConfigsResponse,
   CreateIndexResponse,
@@ -227,7 +231,7 @@ import {
   DescribeSplunkPreviewRequest,
   ModifyConfigRequest,
   CreateMetricConfigResponse,
-  CreateConsumerGroupRequest,
+  DeleteConfigFromMachineGroupResponse,
   PreviewKafkaRechargeResponse,
   MonitorNotice,
   DescribeAlarmsResponse,
@@ -270,7 +274,8 @@ import {
   DescribeConsumerPreviewResponse,
   DeleteMachineGroupInfoResponse,
   CheckRechargeKafkaServerResponse,
-  InstanceData,
+  InstanceConfig,
+  DeleteNetworkApplicationResponse,
   DeleteShipperResponse,
   DeleteNoticeContentRequest,
   DescribeKafkaConsumerRequest,
@@ -294,10 +299,12 @@ import {
   MetricYamlSpec,
   DeleteCloudProductLogCollectionRequest,
   DescribeKafkaConsumerResponse,
+  JsonInfo,
   DeleteKafkaRechargeResponse,
   ContainerWorkLoadInfo,
   DeleteDlcDeliverRequest,
   CallBackInfo,
+  ModifyNetworkApplicationRequest,
   DescribeHostMetricConfigsRequest,
   SplitPartitionResponse,
   AlarmClassification,
@@ -309,7 +316,7 @@ import {
   KafkaProtocolInfo,
   ModifyAlarmShieldResponse,
   CreateCosRechargeRequest,
-  DescribeNoticeContentsResponse,
+  EstimateRebuildIndexTaskRequest,
   CreateAlarmShieldResponse,
   DescribeConsumerRequest,
   DeleteConfigExtraResponse,
@@ -336,8 +343,10 @@ import {
   ModifyCloudProductLogCollectionResponse,
   DeleteConsumerRequest,
   MetricSubscribeInfo,
+  CreateNetworkApplicationResponse,
   DeleteIndexRequest,
   DescribeAlertRecordHistoryRequest,
+  DeleteNetworkApplicationRequest,
   LogsetInfo,
   CreateExportRequest,
   DashboardTemplateVariable,
@@ -345,11 +354,13 @@ import {
   DescribeConsoleSharingListRequest,
   DescribeLogsetsResponse,
   DescribeKafkaConsumerPreviewResponse,
+  NetworkApplicationInfo,
   WebCallback,
   CreateAlarmNoticeResponse,
   ModifyTopicResponse,
   CreateConfigRequest,
   DeleteEsRechargeResponse,
+  DescribeNetworkApplicationsRequest,
   DescribeKafkaRechargesResponse,
   ModifyDlcDeliverRequest,
   ConsoleSharingInfo,
@@ -389,7 +400,6 @@ import {
   DeleteTopicResponse,
   CreateExportResponse,
   CancelRebuildIndexTaskResponse,
-  DeleteConfigFromMachineGroupResponse,
   UploadLogResponse,
   CreateAlarmResponse,
   CustomLabel,
@@ -404,6 +414,7 @@ import {
   SearchCosRechargeInfoRequest,
   DescribeNoticeContentsRequest,
   DescribeDlcDeliversRequest,
+  DescribeNetworkApplicationDetailResponse,
   DescribeShipperTasksRequest,
   CreateCloudProductLogCollectionRequest,
   DescribeIndexRequest,
@@ -423,6 +434,7 @@ import {
   DescribeCloudProductLogTasksResponse,
   CollectConfig,
   DescribeCosRechargesRequest,
+  DescribeNetworkApplicationsResponse,
   DescribeTopicBaseMetricConfigsResponse,
   CloseKafkaConsumerResponse,
   Relabeling,
@@ -454,7 +466,7 @@ import {
   ModifyKafkaConsumerGroupOffsetResponse,
   CreateShipperRequest,
   ConsumerGroupInfo,
-  InstanceConfig,
+  InstanceData,
   HostMetricConfig,
   CreateShipperResponse,
   ModifyCloudProductLogCollectionRequest,
@@ -540,6 +552,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeExportsResponse) => void
   ): Promise<DescribeExportsResponse> {
     return this.request("DescribeExports", req, cb)
+  }
+
+  /**
+   * 修改网络应用
+   */
+  async ModifyNetworkApplication(
+    req: ModifyNetworkApplicationRequest,
+    cb?: (error: string, rep: ModifyNetworkApplicationResponse) => void
+  ): Promise<ModifyNetworkApplicationResponse> {
+    return this.request("ModifyNetworkApplication", req, cb)
   }
 
   /**
@@ -671,6 +693,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateLogsetResponse) => void
   ): Promise<CreateLogsetResponse> {
     return this.request("CreateLogset", req, cb)
+  }
+
+  /**
+   * 获取网络应用列表
+   */
+  async DescribeNetworkApplications(
+    req: DescribeNetworkApplicationsRequest,
+    cb?: (error: string, rep: DescribeNetworkApplicationsResponse) => void
+  ): Promise<DescribeNetworkApplicationsResponse> {
+    return this.request("DescribeNetworkApplications", req, cb)
   }
 
   /**
@@ -914,6 +946,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取网络应用详情
+   */
+  async DescribeNetworkApplicationDetail(
+    req: DescribeNetworkApplicationDetailRequest,
+    cb?: (error: string, rep: DescribeNetworkApplicationDetailResponse) => void
+  ): Promise<DescribeNetworkApplicationDetailResponse> {
+    return this.request("DescribeNetworkApplicationDetail", req, cb)
+  }
+
+  /**
    * 获取指标订阅配置
    */
   async DescribeTopicMetricConfigs(
@@ -1134,6 +1176,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改splunk投递任务相关信息
+   */
+  async ModifySplunkDeliver(
+    req: ModifySplunkDeliverRequest,
+    cb?: (error: string, rep: ModifySplunkDeliverResponse) => void
+  ): Promise<ModifySplunkDeliverResponse> {
+    return this.request("ModifySplunkDeliver", req, cb)
+  }
+
+  /**
    * 本接口用于获取Kafka数据订阅任务
    */
   async DescribeKafkaRecharges(
@@ -1274,13 +1326,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于删除日志主题的索引配置，删除索引配置后将无法检索和查询采集到的日志。
+   * 创建网络应用
    */
-  async DeleteIndex(
-    req: DeleteIndexRequest,
-    cb?: (error: string, rep: DeleteIndexResponse) => void
-  ): Promise<DeleteIndexResponse> {
-    return this.request("DeleteIndex", req, cb)
+  async CreateNetworkApplication(
+    req: CreateNetworkApplicationRequest,
+    cb?: (error: string, rep: CreateNetworkApplicationResponse) => void
+  ): Promise<CreateNetworkApplicationResponse> {
+    return this.request("CreateNetworkApplication", req, cb)
   }
 
   /**
@@ -1954,7 +2006,7 @@ export class Client extends AbstractClient {
    * 获取时序label values列表
    */
   async GetMetricLabelValues(
-    req?: GetMetricLabelValuesRequest,
+    req: GetMetricLabelValuesRequest,
     cb?: (error: string, rep: GetMetricLabelValuesResponse) => void
   ): Promise<GetMetricLabelValuesResponse> {
     return this.request("GetMetricLabelValues", req, cb)
@@ -1971,13 +2023,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改splunk投递任务相关信息
+   * 删除网络应用
    */
-  async ModifySplunkDeliver(
-    req: ModifySplunkDeliverRequest,
-    cb?: (error: string, rep: ModifySplunkDeliverResponse) => void
-  ): Promise<ModifySplunkDeliverResponse> {
-    return this.request("ModifySplunkDeliver", req, cb)
+  async DeleteNetworkApplication(
+    req: DeleteNetworkApplicationRequest,
+    cb?: (error: string, rep: DeleteNetworkApplicationResponse) => void
+  ): Promise<DeleteNetworkApplicationResponse> {
+    return this.request("DeleteNetworkApplication", req, cb)
   }
 
   /**
@@ -2281,6 +2333,16 @@ API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Ac
     cb?: (error: string, rep: DescribeNoticeContentsResponse) => void
   ): Promise<DescribeNoticeContentsResponse> {
     return this.request("DescribeNoticeContents", req, cb)
+  }
+
+  /**
+   * 本接口用于删除日志主题的索引配置，删除索引配置后将无法检索和查询采集到的日志。
+   */
+  async DeleteIndex(
+    req: DeleteIndexRequest,
+    cb?: (error: string, rep: DeleteIndexResponse) => void
+  ): Promise<DeleteIndexResponse> {
+    return this.request("DeleteIndex", req, cb)
   }
 
   /**

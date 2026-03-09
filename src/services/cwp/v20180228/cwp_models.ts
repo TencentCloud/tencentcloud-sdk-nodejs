@@ -4599,77 +4599,32 @@ export interface ExportVulInfoResponse {
 }
 
 /**
- * 应急漏洞信息
+ * DescribeWindowsPatchList请求参数结构体
  */
-export interface EmergencyVul {
+export interface DescribeWindowsPatchListRequest {
   /**
-   * 漏洞id
+   * 分页参数
    */
-  VulId?: number
+  Limit?: number
   /**
-   * 漏洞级别
+   * 排序顺序：desc 默认asc
    */
-  Level?: number
+  Order?: string
   /**
-   * 漏洞名称
+   * 可选排序字段
+<li>PublishTime</li>
+<li>LastScanTime</li>
+<li>HostCount</li>
    */
-  VulName?: string
+  By?: string
   /**
-   * 发布日期
+   * 偏移量，默认为0
    */
-  PublishDate?: string
+  Offset?: number
   /**
-   * 漏洞分类
+   * 过滤条件。  <li>Status : string类型 非必填 处理状态 0待处理,1忽略,3修复</li><li>ShowNew : int类型 非必填 展示最新版本 1-开启 0-关闭</li><li>Name : string类型 非必填 补丁名称</li><li>KbNo : string类型 非必填 补丁编号</li><li>VulName : string类型 非必填 漏洞名称</li><li>CVEId : string类型 非必填 漏洞CVE编号</li><li>Uuid : string类型 非必填 主机uuid</li>
    */
-  Category?: number
-  /**
-   * 漏洞状态 0未检测 1有风险 ，2无风险 ，3 检查中展示progress
-   */
-  Status?: number
-  /**
-   * 最后扫描时间
-   */
-  LastScanTime?: string
-  /**
-   * 扫描进度
-   */
-  Progress?: number
-  /**
-   * cve编号
-   */
-  CveId?: string
-  /**
-   * CVSS评分
-   */
-  CvssScore?: number
-  /**
-   * 漏洞标签 多个逗号分割
-   */
-  Labels?: string
-  /**
-   * 影响机器数
-   */
-  HostCount?: number
-  /**
-   * 是否支持防御， 0:不支持 1:支持
-   */
-  IsSupportDefense?: number
-  /**
-   * 已防御的攻击次数
-   */
-  DefenseAttackCount?: number
-  /**
-   * 检测规则 0 - 版本比对, 1 - POC验证
-   */
-  Method?: number
-  /**
-   * 攻击热度级别
-   */
-  AttackLevel?: number
-  /**
-   * 是否有漏洞主机开启漏洞防御
-   */
-  DefenseState?: boolean
+  Filters?: Array<Filters>
 }
 
 /**
@@ -5896,6 +5851,20 @@ export interface StartBaselineDetectRequest {
 }
 
 /**
+ * ExportAssetUserList返回参数结构体
+ */
+export interface ExportAssetUserListResponse {
+  /**
+   * 异步下载任务ID，需要配合ExportTasks接口使用
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeVulStoreList请求参数结构体
  */
 export interface DescribeVulStoreListRequest {
@@ -6295,6 +6264,40 @@ export interface DescribeAssetMachineDetailResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Windows补丁关联的漏洞信息
+ */
+export interface RelateVulInfo {
+  /**
+   * CVEid
+   */
+  CveId?: string
+  /**
+   * 漏洞名
+   */
+  Name?: string
+  /**
+   * 漏洞标签
+   */
+  Label?: string
+  /**
+   * 漏洞等级
+   */
+  Level?: number
+  /**
+   * CVSS评分
+   */
+  CVSS?: number
+  /**
+   * 漏洞披露时间
+   */
+  PublishTime?: string
+  /**
+   * 漏洞id
+   */
+  Id?: number
 }
 
 /**
@@ -7227,6 +7230,32 @@ export interface DescribeMalwareInfoRequest {
 }
 
 /**
+ * ScanBaseline请求参数结构体
+ */
+export interface ScanBaselineRequest {
+  /**
+   * 策略id数组(StrategyIdList与CategoryIdList和RuleIdList三选一)
+   */
+  StrategyIdList?: Array<number | bigint>
+  /**
+   * 基线id数组(StrategyIdList与CategoryIdList和RuleIdList三选一)
+   */
+  CategoryIdList?: Array<number | bigint>
+  /**
+   * 检测项id数组(StrategyIdList与CategoryIdList和RuleIdList三选一)
+   */
+  RuleIdList?: Array<number | bigint>
+  /**
+   * 选择StrategyIdList时，不需要填写，其他情况必填
+   */
+  QuuidList?: Array<string>
+  /**
+   * 主机Uuid数组
+   */
+  UuidList?: Array<string>
+}
+
+/**
  * DescribeVersionStatistics请求参数结构体
  */
 export type DescribeVersionStatisticsRequest = null
@@ -7448,6 +7477,48 @@ export interface DescribeReverseShellEventsRequest {
    * 排序字段：CreateTime-发生时间
    */
   By?: string
+}
+
+/**
+ * DescribePatchInfo返回参数结构体
+ */
+export interface DescribePatchInfoResponse {
+  /**
+   * kb编号
+   */
+  KbNo?: string
+  /**
+   * kb名称
+   */
+  PatchName?: string
+  /**
+   * kb 发布日期
+   */
+  PublishTime?: string
+  /**
+   * 参考链接
+   */
+  ReferUrl?: string
+  /**
+   * 包含漏洞数
+   */
+  VulCount?: number
+  /**
+   * 补丁关联的漏洞详情列表
+   */
+  RelateVulInfoList?: Array<RelateVulInfo>
+  /**
+   * 补丁id
+   */
+  KbId?: number
+  /**
+   * 关联的漏洞CveId，多个id由","分隔
+   */
+  RelateVulCveId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11252,29 +11323,19 @@ export interface ExportBaselineEffectHostListRequest {
 }
 
 /**
- * ScanBaseline请求参数结构体
+ * ExportWindowsPatchList请求参数结构体
  */
-export interface ScanBaselineRequest {
+export interface ExportWindowsPatchListRequest {
   /**
-   * 策略id数组(StrategyIdList与CategoryIdList和RuleIdList三选一)
+   * 过滤条件。  
+<li>Status : String类型 非必填 处理状态 0待处理,1忽略,3修复</li>
+<li>ShowNew : int类型 非必填 展示最新版本 0-开启 1-关闭</li>
+<li>Name : string类型 非必填 补丁名称 </li>
+<li>KbNo : string类型 非必填 补丁编号 </li>
+<li>Uuid : string类型 非必填 主机uuid</li>
+
    */
-  StrategyIdList?: Array<number | bigint>
-  /**
-   * 基线id数组(StrategyIdList与CategoryIdList和RuleIdList三选一)
-   */
-  CategoryIdList?: Array<number | bigint>
-  /**
-   * 检测项id数组(StrategyIdList与CategoryIdList和RuleIdList三选一)
-   */
-  RuleIdList?: Array<number | bigint>
-  /**
-   * 选择StrategyIdList时，不需要填写，其他情况必填
-   */
-  QuuidList?: Array<string>
-  /**
-   * 主机Uuid数组
-   */
-  UuidList?: Array<string>
+  Filters?: Array<Filter>
 }
 
 /**
@@ -15739,6 +15800,24 @@ export interface ScanBaselineResponse {
 }
 
 /**
+ * DescribePatchEffectHostList返回参数结构体
+ */
+export interface DescribePatchEffectHostListResponse {
+  /**
+   * 影响主机总数
+   */
+  TotalCount?: number
+  /**
+   * 补丁影响主机列表
+   */
+  PatchEffectHostList?: Array<PatchEffectHostList>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CheckLogKafkaConnectionState请求参数结构体
  */
 export interface CheckLogKafkaConnectionStateRequest {
@@ -16321,6 +16400,76 @@ export interface DescribeScanTaskStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 补丁影响主机列表
+ */
+export interface PatchEffectHostList {
+  /**
+   * 版本信息：0-基础版 1-专业版 2-旗舰版 3-轻量版
+   */
+  HostVersion?: number
+  /**
+   * 实例状态: "PENDING"-创建中 "LAUNCH_FAILED"-创建失败 "RUNNING"-运行中 "STOPPED"-关机 "STARTING"-表示开机中 "STOPPING"-表示关机中 "REBOOTING"-重启中 "SHUTDOWN"-表示停止待销毁 "TERMINATING"-表示销毁中
+   */
+  InstanceState?: string
+  /**
+   * 首次扫描时间
+   */
+  FirstScanTime?: string
+  /**
+   * 最近扫描时间
+   */
+  LatestScanTime?: string
+  /**
+   * 修复状态：0-未进行修复；1-修复中；2-修复失败；3-修复成功；4-修复超时
+   */
+  FixStatus?: number
+  /**
+   * 主机基础信息
+   */
+  MachineExtraInfo?: MachineExtraInfo
+  /**
+   * 主机安全Uuid
+   */
+  Uuid?: string
+  /**
+   * CVM或BM机器唯一Uuid
+   */
+  Quuid?: string
+  /**
+   * 事件id
+   */
+  Id?: number
+  /**
+   * 状态：0: 待处理 1:忽略  3:已修复  5:检测中 6:修复中 7: 回滚中 8:修复失败
+   */
+  Status?: number
+  /**
+   * 修复时间
+   */
+  LatestFixTime?: string
+  /**
+   * KB id
+   */
+  KbId?: number
+  /**
+   * 是否需要重启 0不需要，1需要
+   */
+  RestartRequired?: number
+  /**
+   * 可用区ID
+   */
+  RegionId?: number
+  /**
+   * 机器类型信息
+   */
+  MachineType?: string
+  /**
+   * 修复任务是否创建了快照： 0-未创建，其他-已创建
+   */
+  HasSnapshot?: number
 }
 
 /**
@@ -20623,6 +20772,20 @@ export interface BaselineEventLevelInfo {
 }
 
 /**
+ * ExportWindowsPatchList返回参数结构体
+ */
+export interface ExportWindowsPatchListResponse {
+  /**
+   * 导出文件Id 可通过ExportTasks接口下载
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLoginWhiteCombinedList请求参数结构体
  */
 export interface DescribeLoginWhiteCombinedListRequest {
@@ -21606,6 +21769,27 @@ export interface Machine {
    * 主机安全agent版本
    */
   AgentVersion?: string
+}
+
+/**
+ * ExportPatchEffectHostList请求参数结构体
+ */
+export interface ExportPatchEffectHostListRequest {
+  /**
+   * 补丁id
+   */
+  KbId: number
+  /**
+   * 过滤条件：  
+<li>ProtectType : uint64类型 非必填 防护版本类型  0表示BASIC_VERSION，1表示Flagship </li>
+<li>InstanceState : string类型 非必填 主机状态 : "PENDING"-创建中 "LAUNCH_FAILED"-创建失败 "RUNNING"-运行中 "STOPPED"-关机 "STARTING"-开机中 "STOPPING"-关机中 "REBOOTING"-重启中 "SHUTDOWN"-待销毁 "TERMINATING"-销毁中 "UNKNOWN"-未知（针对非腾讯云机器，且客户端离线的场景） </li>
+<li>Status : uint64类型 非必填 处理状态 0表示待处理，1表示忽略，3表示已修复</li>
+<li>HostName : string类型 非必填 主机名称 </li>
+<li>InstanceID : string类型 非必填 主机id </li>
+<li>IpAddress : string类型 非必填 主机的ip地址 </li>
+<li>Uuid : string类型 非必填 主机uuid</li>
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -23532,6 +23716,64 @@ export interface DescribeBashEventsNewRequest {
    * 排序字段：CreateTime-发生时间。ModifyTime-处理时间
    */
   By?: string
+}
+
+/**
+ * 补丁详细信息
+ */
+export interface EventPatchInfo {
+  /**
+   * 补丁名
+   */
+  Name?: string
+  /**
+   * 补丁编号
+   */
+  KbNo?: string
+  /**
+   * 披露时间
+   */
+  PublishTime?: string
+  /**
+   * 影响主机数量
+   */
+  EffectHostCount?: number
+  /**
+   * 关联的漏洞数
+   */
+  RelateVulCount?: number
+  /**
+   * 关联的漏洞编号数组
+   */
+  RelateVulList?: Array<string>
+  /**
+   * 是否为最新披露，0否，1是，默认为否
+   */
+  IsNew?: number
+  /**
+   * 最后扫描时间
+   */
+  LastScanTime?: string
+  /**
+   * 0待处理,1忽略,3修复
+   */
+  Status?: number
+  /**
+   * 安装该kb的前置条件，一般为其他kb，且可能有多个，kb之间用", "分隔
+   */
+  KbPreCondition?: string
+  /**
+   * 该kb关联的windows product名称
+   */
+  RelatedProduct?: string
+  /**
+   * 补丁id
+   */
+  KbId?: number
+  /**
+   * 相关kb事件的id集合
+   */
+  Ids?: string
 }
 
 /**
@@ -25640,6 +25882,20 @@ export interface Tags {
 }
 
 /**
+ * ExportPatchEffectHostList返回参数结构体
+ */
+export interface ExportPatchEffectHostListResponse {
+  /**
+   * 导出任务Id , 可通过ExportTasks 接口下载
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBaselineItemList返回参数结构体
  */
 export interface DescribeBaselineItemListResponse {
@@ -25877,6 +26133,16 @@ export interface DescribeBaselineDefaultStrategyListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribePatchInfo请求参数结构体
+ */
+export interface DescribePatchInfoRequest {
+  /**
+   * 补丁id
+   */
+  KbId: number
 }
 
 /**
@@ -26261,6 +26527,24 @@ export interface DescribeRiskDnsInfoRequest {
    * 恶意请求-事件Id
    */
   Id: number
+}
+
+/**
+ * DescribeWindowsPatchList返回参数结构体
+ */
+export interface DescribeWindowsPatchListResponse {
+  /**
+   * 补丁和漏洞的总数
+   */
+  TotalCount?: number
+  /**
+   * Windows补丁信息列表
+   */
+  PatchInfoList?: Array<EventPatchInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -29224,6 +29508,80 @@ export interface ModifyRiskEventsStatusResponse {
 }
 
 /**
+ * 应急漏洞信息
+ */
+export interface EmergencyVul {
+  /**
+   * 漏洞id
+   */
+  VulId?: number
+  /**
+   * 漏洞级别
+   */
+  Level?: number
+  /**
+   * 漏洞名称
+   */
+  VulName?: string
+  /**
+   * 发布日期
+   */
+  PublishDate?: string
+  /**
+   * 漏洞分类
+   */
+  Category?: number
+  /**
+   * 漏洞状态 0未检测 1有风险 ，2无风险 ，3 检查中展示progress
+   */
+  Status?: number
+  /**
+   * 最后扫描时间
+   */
+  LastScanTime?: string
+  /**
+   * 扫描进度
+   */
+  Progress?: number
+  /**
+   * cve编号
+   */
+  CveId?: string
+  /**
+   * CVSS评分
+   */
+  CvssScore?: number
+  /**
+   * 漏洞标签 多个逗号分割
+   */
+  Labels?: string
+  /**
+   * 影响机器数
+   */
+  HostCount?: number
+  /**
+   * 是否支持防御， 0:不支持 1:支持
+   */
+  IsSupportDefense?: number
+  /**
+   * 已防御的攻击次数
+   */
+  DefenseAttackCount?: number
+  /**
+   * 检测规则 0 - 版本比对, 1 - POC验证
+   */
+  Method?: number
+  /**
+   * 攻击热度级别
+   */
+  AttackLevel?: number
+  /**
+   * 是否有漏洞主机开启漏洞防御
+   */
+  DefenseState?: boolean
+}
+
+/**
  * DescribeRaspRules返回参数结构体
  */
 export interface DescribeRaspRulesResponse {
@@ -29995,15 +30353,30 @@ export interface DescribeBaselineItemIgnoreListResponse {
 }
 
 /**
- * ExportAssetUserList返回参数结构体
+ * DescribePatchEffectHostList请求参数结构体
  */
-export interface ExportAssetUserListResponse {
+export interface DescribePatchEffectHostListRequest {
   /**
-   * 异步下载任务ID，需要配合ExportTasks接口使用
+   * 补丁id
    */
-  TaskId?: string
+  KbId: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 分页limit 最大100
    */
-  RequestId?: string
+  Limit: number
+  /**
+   * 分页偏移量
+   */
+  Offset: number
+  /**
+   * 过滤条件：  
+<li>HostVersion : uint64类型 非必填 版本信息 : 0-基础版 1-专业版 2-旗舰版 3-轻量版 </li>
+<li>InstanceState : string类型 非必填 主机状态 : "PENDING"-创建中 "LAUNCH_FAILED"-创建失败 "RUNNING"-运行中 "STOPPED"-关机 "STARTING"-开机中 "STOPPING"-关机中 "REBOOTING"-重启中 "SHUTDOWN"-待销毁 "TERMINATING"-销毁中 "UNKNOWN"-未知（针对非腾讯云机器，且客户端离线的场景）</li>
+<li>Status : uint64类型 非必填 处理状态 0表示待处理，1表示忽略，3表示已修复</li>
+<li>HostName : string类型 非必填 主机名称</li>
+<li>InstanceID : string类型 非必填 主机id</li>
+<li>IpAddress : string类型 非必填 主机的ip地址</li>
+<li>Uuid : string类型 非必填 主机uuid</li>
+   */
+  Filters?: Array<Filter>
 }

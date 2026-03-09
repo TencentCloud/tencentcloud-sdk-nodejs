@@ -110,6 +110,16 @@ export interface FlowDetails {
 }
 
 /**
+ * UpdateApplicationKey返回参数结构体
+ */
+export interface UpdateApplicationKeyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateL3Conn返回参数结构体
  */
 export interface UpdateL3ConnResponse {
@@ -259,6 +269,42 @@ export interface UpdateL3CidrResponse {
 }
 
 /**
+ * UpdateApplicationKey请求参数结构体
+ */
+export interface UpdateApplicationKeyRequest {
+  /**
+   * 应用的base64密钥字符串
+   */
+  MpApplicationKey: string
+  /**
+   * 应用ID
+   */
+  MpApplicationId: string
+}
+
+/**
+ * AddApplication请求参数结构体
+ */
+export interface AddApplicationRequest {
+  /**
+   * 新建应用的应用名
+   */
+  MpApplicationName: string
+  /**
+   * 新建设备的备注
+   */
+  Remark?: string
+  /**
+   * 新建应用的base64密钥字符串，非必选，如果不填写则由系统自动生成
+   */
+  MpApplicationKey?: string
+  /**
+   * 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。不填默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入）
+   */
+  AccessScope?: number
+}
+
+/**
  * ModifyPackageRenewFlag请求参数结构体
  */
 export interface ModifyPackageRenewFlagRequest {
@@ -323,6 +369,16 @@ export interface DeleteL3ConnRequest {
 }
 
 /**
+ * 应用id列表
+ */
+export interface DelApplicationList {
+  /**
+   * 应用id
+   */
+  MpApplicationId: string
+}
+
+/**
  * GetVendorHardware返回参数结构体
  */
 export interface GetVendorHardwareResponse {
@@ -338,6 +394,36 @@ export interface GetVendorHardwareResponse {
    * 总页数
    */
   TotalPage?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetApplication返回参数结构体
+ */
+export interface GetApplicationResponse {
+  /**
+   * 应用ID
+   */
+  MpApplicationId?: string
+  /**
+   * 经过加密算法加密后的base64格式密钥
+   */
+  MpApplicationKey?: string
+  /**
+   * 应用名
+   */
+  MpApplicationName?: string
+  /**
+   * 设备的备注
+   */
+  Remark?: string
+  /**
+   * 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。不填默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入）
+   */
+  AccessScope?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -572,6 +658,16 @@ export interface HardwareInfo {
 }
 
 /**
+ * DeleteApplication返回参数结构体
+ */
+export interface DeleteApplicationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetGroupDetail请求参数结构体
  */
 export interface GetGroupDetailRequest {
@@ -637,6 +733,28 @@ export interface GetStatisticDataResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateApplicationInfo请求参数结构体
+ */
+export interface UpdateApplicationInfoRequest {
+  /**
+   * 应用ID
+   */
+  MpApplicationId: string
+  /**
+   * 新建应用的应用名
+   */
+  MpApplicationName?: string
+  /**
+   * 新建设备的备注
+   */
+  Remark?: string
+  /**
+   * 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。不填默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入）
+   */
+  AccessScope?: number
 }
 
 /**
@@ -861,6 +979,28 @@ export interface GroupInfo {
    * 分组中的设备数量
    */
   DeviceNum?: number
+}
+
+/**
+ * AddApplication返回参数结构体
+ */
+export interface AddApplicationResponse {
+  /**
+   * 应用ID
+   */
+  MpApplicationId?: string
+  /**
+   * 经过加密算法加密后的base64格式密钥
+   */
+  MpApplicationKey?: string
+  /**
+   * 应用名
+   */
+  MpApplicationName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1163,6 +1303,16 @@ export interface GetDevicePayModeRequest {
    * 设备ID列表
    */
   DeviceIdList: Array<string>
+}
+
+/**
+ * DeleteApplication请求参数结构体
+ */
+export interface DeleteApplicationRequest {
+  /**
+   * 应用id列表
+   */
+  MpApplicationIdList: Array<DelApplicationList>
 }
 
 /**
@@ -2018,6 +2168,16 @@ export interface GetGroupListResponse {
 }
 
 /**
+ * UpdateApplicationInfo返回参数结构体
+ */
+export interface UpdateApplicationInfoResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * OrderFlowPackage返回参数结构体
  */
 export interface OrderFlowPackageResponse {
@@ -2151,6 +2311,16 @@ export interface GetStatisticDataRequest {
    * 设备分组ID，若不指定分组则不传，按分组下载数据时使用
    */
   GroupId?: string
+}
+
+/**
+ * GetApplication请求参数结构体
+ */
+export interface GetApplicationRequest {
+  /**
+   * 应用id
+   */
+  MpApplicationId?: string
 }
 
 /**

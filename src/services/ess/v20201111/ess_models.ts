@@ -2594,19 +2594,19 @@ export interface FeedbackInfoReason {
  */
 export interface PositionInfo {
   /**
-   * PDF文件页X坐标位置,以PDF单页左上角为坐标原点
+   * PDF文件页X坐标位置,以PDF单页左上角为坐标原点，单位是 “点”（Point，简称 pt）
    */
   X?: number
   /**
-   * PDF文件页Y坐标位置,以PDF单页左上角为坐标原点
+   * PDF文件页Y坐标位置,以PDF单页左上角为坐标原点，单位是 “点”（Point，简称 pt）
    */
   Y?: number
   /**
-   * 距离X坐标的宽度，用于在PDF文件进行画框。
+   * 距离X坐标的宽度，用于在PDF文件进行画框，单位是 “点”（Point，简称 pt）
    */
   Width?: number
   /**
-   * 距离Y坐标的高度，用于在PDF文件进行画框。
+   * 距离Y坐标的高度，用于在PDF文件进行画框，单位是 “点”（Point，简称 pt）
    */
   Height?: number
   /**
@@ -3145,6 +3145,20 @@ export interface ComparisonDetail {
    * 对比文本。
    */
   DiffText?: string
+  /**
+   * 合同文本的格式类型。
+类型如下：
+<ul><li> **0**：段落（正文）</li>
+<li> **1**：标点符号</li>
+<li> **2**：页眉页脚</li>
+<li> **3**：目录</li>
+<li> **4**：印章</li>
+<li> **5**：序号</li>
+<li> **6**：水印</li>
+<li> **7**：下划线内容（填写区）</li>
+</ul>
+   */
+  FormatType?: number
 }
 
 /**
@@ -5939,10 +5953,17 @@ export interface MiniAppCreateApproverInfo {
 export interface ExtendScene {
   /**
    * 印章来源类型
+印章来源类型包括下面几种：
+<ul>
+<li>CREATE-客户上传图片创建</li>
+<li>GENERATE-系统模版印章生成</li>
+<li>SIST_SEAL-深圳电子印章</li>
+</ul>
    */
   GenerateType?: string
   /**
    * 印章来源类型描述
+
    */
   GenerateTypeDesc?: string
   /**
@@ -6156,6 +6177,24 @@ export interface DescribeContractComparisonTaskRequest {
 注：`详细结果数据量可能较大，请按需开启。`
    */
   ShowDetail?: boolean
+  /**
+   * 搜索条件，具体参考Filter结构体。本接口取值：
+
+1. **format-type：**
+按照【 合同文本格式类型 】进行过滤；
+类型：String；
+是否必填项：否；
+类型如下：
+<ul><li> **0**：段落（正文）</li>
+<li> **1**：标点符号</li>
+<li> **2**：页眉页脚</li>
+<li> **3**：目录</li>
+<li> **4**：印章</li>
+<li> **5**：序号</li>
+<li> **7**：下划线内容（填写区）</li>
+</ul>
+   */
+  Filters?: Array<Filter>
 }
 
 /**

@@ -214,6 +214,10 @@ HYBRID_PAID:
    * 调度策略 [binpack] 优先占满整机，尽量避免碎卡（默认值）[spread] 优先分散在各个节点，确保服务高可用
    */
   SchedulingStrategy?: string
+  /**
+   * 网关日志投递相关配置
+   */
+  GatewayLogConfig?: LogConfig
 }
 
 /**
@@ -5424,6 +5428,10 @@ UPDATING 更新中
    * 子用户的 nickname
    */
   SubUinName?: string
+  /**
+   * 网关日志投递相关配置
+   */
+  GatewayLogConfig?: LogConfig
 }
 
 /**

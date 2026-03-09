@@ -23,6 +23,7 @@ import {
   GetMultiFlowStatisticResponse,
   OrderInfo,
   FlowDetails,
+  UpdateApplicationKeyResponse,
   UpdateL3ConnResponse,
   UpdateHardwareResponse,
   UpdateNetInfo,
@@ -32,21 +33,27 @@ import {
   GetFlowPackagesRequest,
   SetNotifyUrlResponse,
   UpdateL3CidrResponse,
+  UpdateApplicationKeyRequest,
+  AddApplicationRequest,
   ModifyPackageRenewFlagRequest,
   GetFlowPackagesResponse,
   ReportOrderRequest,
   DeleteL3ConnRequest,
+  DelApplicationList,
   GetVendorHardwareResponse,
+  GetApplicationResponse,
   GetActiveDeviceCountResponse,
   DestIpInfo,
   DeviceBaseInfo,
   AddGroupRequest,
   GetGroupListRequest,
   HardwareInfo,
+  DeleteApplicationResponse,
   GetGroupDetailRequest,
   GroupAddDeviceRequest,
   GroupDeleteDeviceResponse,
   GetStatisticDataResponse,
+  UpdateApplicationInfoRequest,
   GetPublicKeyRequest,
   GetFlowStatisticByGroupResponse,
   GetNetMonitorResponse,
@@ -61,6 +68,7 @@ import {
   UpdateL3SwitchResponse,
   GetL3ConnListResponse,
   GroupInfo,
+  AddApplicationResponse,
   ModifyPackageRenewFlagResponse,
   GetDestIPByNameResponse,
   VendorHardware,
@@ -74,6 +82,7 @@ import {
   GetStatisticDataByNameRequest,
   SetNotifyUrlRequest,
   GetDevicePayModeRequest,
+  DeleteApplicationRequest,
   SlotNetInfo,
   DeviceNetInfo,
   NetDetails,
@@ -104,6 +113,7 @@ import {
   GetNetMonitorRequest,
   GetNetMonitorByNameRequest,
   GetGroupListResponse,
+  UpdateApplicationInfoResponse,
   OrderFlowPackageResponse,
   UpdateDeviceResponse,
   L3ConnInfo,
@@ -111,6 +121,7 @@ import {
   GetMonitorDataByNameResponse,
   GroupAddDeviceResponse,
   GetStatisticDataRequest,
+  GetApplicationRequest,
   UpdateDeviceRequest,
   DeleteGroupResponse,
   GetPublicKeyResponse,
@@ -161,13 +172,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 下载活跃设备数量统计
+   * 应用查询
    */
-  async DownloadActiveDeviceCount(
-    req: DownloadActiveDeviceCountRequest,
-    cb?: (error: string, rep: DownloadActiveDeviceCountResponse) => void
-  ): Promise<DownloadActiveDeviceCountResponse> {
-    return this.request("DownloadActiveDeviceCount", req, cb)
+  async GetApplication(
+    req: GetApplicationRequest,
+    cb?: (error: string, rep: GetApplicationResponse) => void
+  ): Promise<GetApplicationResponse> {
+    return this.request("GetApplication", req, cb)
   }
 
   /**
@@ -231,6 +242,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新应用信息
+   */
+  async UpdateApplicationInfo(
+    req: UpdateApplicationInfoRequest,
+    cb?: (error: string, rep: UpdateApplicationInfoResponse) => void
+  ): Promise<UpdateApplicationInfoResponse> {
+    return this.request("UpdateApplicationInfo", req, cb)
+  }
+
+  /**
    * 向已存在分组中添加设备
    */
   async GroupAddDevice(
@@ -238,6 +259,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GroupAddDeviceResponse) => void
   ): Promise<GroupAddDeviceResponse> {
     return this.request("GroupAddDevice", req, cb)
+  }
+
+  /**
+   * 删除应用
+   */
+  async DeleteApplication(
+    req: DeleteApplicationRequest,
+    cb?: (error: string, rep: DeleteApplicationResponse) => void
+  ): Promise<DeleteApplicationResponse> {
+    return this.request("DeleteApplication", req, cb)
   }
 
   /**
@@ -311,6 +342,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 新建应用
+   */
+  async AddApplication(
+    req: AddApplicationRequest,
+    cb?: (error: string, rep: AddApplicationResponse) => void
+  ): Promise<AddApplicationResponse> {
+    return this.request("AddApplication", req, cb)
+  }
+
+  /**
    * 活跃设备数量统计
    */
   async GetActiveDeviceCount(
@@ -318,6 +359,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetActiveDeviceCountResponse) => void
   ): Promise<GetActiveDeviceCountResponse> {
     return this.request("GetActiveDeviceCount", req, cb)
+  }
+
+  /**
+   * 更新应用密钥
+   */
+  async UpdateApplicationKey(
+    req: UpdateApplicationKeyRequest,
+    cb?: (error: string, rep: UpdateApplicationKeyResponse) => void
+  ): Promise<UpdateApplicationKeyResponse> {
+    return this.request("UpdateApplicationKey", req, cb)
   }
 
   /**
@@ -548,6 +599,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetFlowStatisticByRegionResponse) => void
   ): Promise<GetFlowStatisticByRegionResponse> {
     return this.request("GetFlowStatisticByRegion", req, cb)
+  }
+
+  /**
+   * 下载活跃设备数量统计
+   */
+  async DownloadActiveDeviceCount(
+    req: DownloadActiveDeviceCountRequest,
+    cb?: (error: string, rep: DownloadActiveDeviceCountResponse) => void
+  ): Promise<DownloadActiveDeviceCountResponse> {
+    return this.request("DownloadActiveDeviceCount", req, cb)
   }
 
   /**

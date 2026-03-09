@@ -2065,7 +2065,7 @@ export interface HealthCheckTemplate {
  */
 export interface InternetAccessible {
   /**
-   * 带宽
+   * 带宽，单位为Mbps
    */
   MaxBandwidthOut: number
   /**
@@ -2234,7 +2234,7 @@ export interface Disk {
    */
   DiskType: string
   /**
-   * 云盘大小(G）
+   * 云盘大小 (G）
    */
   DiskSize: number
   /**
@@ -2254,6 +2254,16 @@ export interface Disk {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskId?: string
+  /**
+   * 加密系统盘
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Encrypt?: string
+  /**
+   * 自定义 KMS ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KmsKeyId?: string
 }
 
 /**

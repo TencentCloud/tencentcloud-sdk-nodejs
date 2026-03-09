@@ -886,30 +886,27 @@ export interface InquirePriceRenewInstancesRequest {
  */
 export interface DiscountDetail {
   /**
-   * 计费时长。
+   * <p>计费时长。</p>
    */
   TimeSpan?: number
   /**
-   * 时间单位。
-取值为：
-- m - 月
-- d - 日
+   * <p>时间单位。<br>取值为：</p><ul><li>m - 月</li><li>d - 日</li></ul>
    */
   TimeUnit?: string
   /**
-   * 总价。
+   * <p>总价。</p><p>单位：元</p>
    */
   TotalCost?: number
   /**
-   * 折后总价。
+   * <p>折后总价。</p><p>单位：元</p>
    */
   RealTotalCost?: number
   /**
-   * 折扣。
+   * <p>折扣。</p>
    */
   Discount?: number
   /**
-   * 具体折扣详情。
+   * <p>具体折扣详情。</p>
    */
   PolicyDetail?: PolicyDetail
 }
@@ -1840,27 +1837,23 @@ export interface DescribeInstancesDiskNumRequest {
  */
 export interface DetailPrice {
   /**
-   * 描述计费项目名称，目前取值
-<li>"DiskSpace"代表云硬盘空间收费项。</li>
-<li>"DiskBackupQuota"代表数据盘备份点配额收费项。</li>
-<li>"Instance"代表实例收费项。</li>
-<li>"SystemDiskBackupQuota"代表系统盘备份点配额收费项。</li>
+   * <p>描述计费项目名称，目前取值</p><li>"DiskSpace"代表云硬盘空间收费项。</li><li>"DiskBackupQuota"代表数据盘备份点配额收费项。</li><li>"Instance"代表实例收费项。</li><li>"SystemDiskBackupQuota"代表系统盘备份点配额收费项。</li>
    */
   PriceName?: string
   /**
-   * 计费项维度单价。
+   * <p>计费项维度单价。</p><p>单位：元</p>
    */
   OriginUnitPrice?: number
   /**
-   * 计费项维度总价。
+   * <p>计费项维度总价。</p><p>单位：元</p>
    */
   OriginalPrice?: number
   /**
-   * 计费项维度折扣。
+   * <p>计费项维度折扣。</p>
    */
   Discount?: number
   /**
-   * 计费项维度折后总价。
+   * <p>计费项维度折后总价。</p><p>单位：元</p>
    */
   DiscountPrice?: number
 }
@@ -2423,27 +2416,27 @@ export interface RemoveMcpServersResponse {
  */
 export interface DataDiskPrice {
   /**
-   * 云硬盘ID。
+   * <p>云硬盘ID。</p>
    */
   DiskId?: string
   /**
-   * 云硬盘单价。
+   * <p>云硬盘单价。</p><p>单位：元</p>
    */
   OriginalDiskPrice?: number
   /**
-   * 云硬盘总价。
+   * <p>云硬盘总价。</p><p>单位：元</p>
    */
   OriginalPrice?: number
   /**
-   * 折扣。
+   * <p>折扣。</p>
    */
   Discount?: number
   /**
-   * 折后总价。
+   * <p>折后总价。</p><p>单位：元</p>
    */
   DiscountPrice?: number
   /**
-   * 数据盘挂载的实例ID。
+   * <p>数据盘挂载的实例ID。</p>
    */
   InstanceId?: string
 }
@@ -3493,11 +3486,11 @@ export interface InquirePriceCreateInstancesResponse {
  */
 export interface TotalPrice {
   /**
-   * 原始总计价格。
+   * <p>原始总计价格。</p><p>单位：元</p>
    */
   OriginalPrice?: number
   /**
-   * 折扣总计价格。
+   * <p>折扣总计价格。</p><p>单位：元</p>
    */
   DiscountPrice?: number
 }
@@ -3656,31 +3649,27 @@ export interface Bundle {
  */
 export interface DiskConfig {
   /**
-   * 可用区。
+   * <p>可用区。</p>
    */
   Zone?: string
   /**
-   * 云硬盘类型。枚举值如下：
-
-<li>CLOUD_BASIC：普通云硬盘</li>
-<li>CLOUD_PREMIUM：高性能云硬盘</li>
-<li>CLOUD_SSD：SSD云硬盘</li>
+   * <p>云硬盘类型。枚举值如下：</p><li>CLOUD_BASIC：普通云硬盘</li><li>CLOUD_PREMIUM：高性能云硬盘</li><li>CLOUD_SSD：SSD云硬盘</li>
    */
   DiskType?: string
   /**
-   * 云硬盘可售卖状态。
+   * <p>云硬盘可售卖状态。</p>
    */
   DiskSalesState?: string
   /**
-   * 最大云硬盘大小。
+   * <p>最大云硬盘大小。</p><p>单位：GB</p>
    */
   MaxDiskSize?: number
   /**
-   * 最小云硬盘大小。
+   * <p>最小云硬盘大小。</p><p>单位：GB</p>
    */
   MinDiskSize?: number
   /**
-   * 云硬盘步长。
+   * <p>云硬盘步长。</p><p>单位：GB</p>
    */
   DiskStepSize?: number
 }
@@ -5595,27 +5584,27 @@ export interface AutoMountConfiguration {
  */
 export interface InstancePrice {
   /**
-   * 套餐单价原价。
+   * <p>套餐单价原价。</p><p>单位：元</p>
    */
   OriginalBundlePrice?: number
   /**
-   * 原价。
+   * <p>原价。</p><p>单位：元</p>
    */
   OriginalPrice?: number
   /**
-   * 折扣。
+   * <p>折扣。</p>
    */
   Discount?: number
   /**
-   * 折后价。
+   * <p>折后价。</p><p>单位：元</p>
    */
   DiscountPrice?: number
   /**
-   * 价格货币单位。取值范围CNY:人民币。USD:美元。
+   * <p>价格货币单位。取值范围CNY:人民币。USD:美元。</p>
    */
   Currency?: string
   /**
-   * 计费项目明细。
+   * <p>计费项目明细。</p>
    */
   DetailPrices?: Array<DetailPrice>
 }

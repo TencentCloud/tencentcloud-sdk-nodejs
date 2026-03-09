@@ -2511,7 +2511,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 同步执行 TWeSee 语义理解任务
+   * 上传文件并同步执行 TWeSee 语义理解任务
    */
   async InvokeTWeSeeRecognitionTaskWithFile(
     req: InvokeTWeSeeRecognitionTaskWithFileRequest,

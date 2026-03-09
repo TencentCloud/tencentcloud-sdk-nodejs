@@ -697,15 +697,15 @@ export interface RestoreTask {
  */
 export interface ModifyMountPointRequest {
   /**
-   * 挂载点ID
+   * <p>挂载点ID</p>
    */
   MountPointId: string
   /**
-   * 挂载点名称
+   * <p>挂载点名称</p>
    */
   MountPointName?: string
   /**
-   * 挂载点状态
+   * <p>挂载点状态</p><p>枚举值：</p><ul><li>1： 打开</li><li>2： 关闭</li></ul>
    */
   MountPointStatus?: number
 }

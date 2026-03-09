@@ -872,36 +872,35 @@ export interface CacheInfo {
  */
 export interface ClusterOption {
   /**
-   * 计算集群可用区。
+   * <p>计算集群可用区。</p>
    */
   Zone: string
   /**
-   * 计算集群类型，取值范围：
-- KUBERNETES
+   * <p>计算集群类型，取值范围：</p><ul><li>KUBERNETES</li></ul>
    */
   Type: string
   /**
-   * 计算集群Service CIDR，不能与VPC网段重合。
+   * <p>计算集群Service CIDR，不能与VPC网段重合。</p>
    */
   ServiceCidr?: string
   /**
-   * 资源配额。
+   * <p>资源配额。</p>
    */
   ResourceQuota?: ResourceQuota
   /**
-   * 限制范围。
+   * <p>限制范围。</p>
    */
   LimitRange?: LimitRange
   /**
-   * 系统节点池实例规格。
+   * <p>系统节点池实例规格。详情参见<a href="https://cloud.tencent.com/document/product/213/11518">实例规格</a>描述</p>
    */
   SystemNodeInstanceType?: string
   /**
-   * 系统节点池实例数量。
+   * <p>系统节点池实例数量。</p>
    */
   SystemNodeCount?: number
   /**
-   * 纳管环境自动升配
+   * <p>纳管环境自动升配</p>
    */
   AutoUpgradeClusterLevel?: boolean
 }
@@ -1846,11 +1845,11 @@ export interface Table {
  */
 export interface CVMOption {
   /**
-   * 云服务器可用区。
+   * <p>云服务器可用区。</p>
    */
   Zone: string
   /**
-   * 云服务器实例规格。
+   * <p>云服务器实例规格。详情参见<a href="https://cloud.tencent.com/document/product/213/11518">实例规格</a>描述</p>
    */
   InstanceType: string
 }

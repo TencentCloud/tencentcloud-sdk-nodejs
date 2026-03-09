@@ -2669,6 +2669,18 @@ export interface TalkAIBotInfo {
    * 自定义工具列表，最多可创建10个
    */
   CustomTools?: string
+  /**
+   * WebHook工具配置(JSON字符串格式)
+   */
+  WebhookTools?: string
+  /**
+   * 智能体模板类型
+   */
+  BotType?: string
+  /**
+   * 知识库相关配置(JSON字符串格式)
+   */
+  RAGConfig?: string
 }
 
 /**
@@ -2730,6 +2742,18 @@ export interface ModifyTWeTalkAIBotRequest {
    * 自定义工具配置，最多可创建10个
    */
   CustomTools?: string
+  /**
+   * WebHook工具配置(JSON字符串格式)
+   */
+  WebhookTools?: string
+  /**
+   * 智能体模板类型
+   */
+  BotType?: string
+  /**
+   * 知识库相关配置(JSON字符串格式)
+   */
+  RAGConfig?: string
 }
 
 /**
@@ -4279,6 +4303,18 @@ export interface TalkAgentConfigInfo {
    * 复刻音色
    */
   FastVoiceType?: string
+  /**
+   * 实时字幕回调地址，支持HTTP/HTTPS
+   */
+  SubtitleCallbackUrl?: string
+  /**
+   * 回调签名密钥，最大32字符，用于HMAC SHA256签名
+   */
+  SubtitleCallbackSignKey?: string
+  /**
+   * 字幕推送超时时间（秒），参考TRTC规范
+   */
+  SubtitleCallbackTimeout?: number
 }
 
 /**
@@ -9517,6 +9553,18 @@ export interface CreateTWeTalkAIBotRequest {
    * 自定义工具配置，最多可创建10个
    */
   CustomTools?: string
+  /**
+   * WebHook工具配置(JSON字符串格式)
+   */
+  WebhookTools?: string
+  /**
+   * 智能体模板类型
+   */
+  BotType?: string
+  /**
+   * 知识库相关配置(JSON字符串格式)
+   */
+  RAGConfig?: string
 }
 
 /**

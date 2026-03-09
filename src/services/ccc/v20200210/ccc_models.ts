@@ -1213,97 +1213,105 @@ export interface DescribeChatMessagesResponse {
  */
 export interface DescribeSessionDetailResponse {
   /**
-   * 主叫号码
+   * <p>主叫号码</p>
    */
   Caller?: string
   /**
-   * 被叫号码
+   * <p>被叫号码</p>
    */
   Callee?: string
   /**
-   * 通话类型 1 呼出 2 呼入 3 音频呼入 5 预测式外呼 6 内线呼叫
+   * <p>通话类型 1 呼出 2 呼入 3 音频呼入 5 预测式外呼 6 内线呼叫</p>
    */
   CallType?: number
   /**
-   * 开始时间戳，Unix 秒级时间戳
+   * <p>开始时间戳，Unix 秒级时间戳</p>
    */
   StartTimeStamp?: number
   /**
-   * 振铃时间戳，UNIX 秒级时间戳
+   * <p>振铃时间戳，UNIX 秒级时间戳</p>
    */
   RingTimestamp?: number
   /**
-   * 接听时间戳，UNIX 秒级时间戳
+   * <p>接听时间戳，UNIX 秒级时间戳</p>
    */
   AcceptTimestamp?: number
   /**
-   * 结束时间戳，UNIX 秒级时间戳
+   * <p>结束时间戳，UNIX 秒级时间戳</p>
    */
   EndedTimestamp?: number
   /**
-   * 进入排队时间，Unix 秒级时间戳
+   * <p>进入排队时间，Unix 秒级时间戳</p>
    */
   QueuedTimestamp?: number
   /**
-   * 座席账号
+   * <p>座席账号</p>
    */
   StaffUserId?: string
   /**
-   * 参考 DescribeTelCdr 接口 EndStatus 字段
+   * <p>参考 DescribeTelCdr 接口 EndStatus 字段</p>
    */
   EndStatus?: number
   /**
-   * 排队技能组 ID
+   * <p>排队技能组 ID</p>
    */
   QueuedSkillGroupId?: number
   /**
-   * 排队技能组名称
+   * <p>排队技能组名称</p>
    */
   QueuedSkillGroupName?: string
   /**
-   * 录音链接，带鉴权和有效期，获取之后请在24 小时内拉取，不要持久化此链接。如此链接已过期，请重新调用此接口获取新的链接
+   * <p>录音链接，带鉴权和有效期，获取之后请在24 小时内拉取，不要持久化此链接。如此链接已过期，请重新调用此接口获取新的链接</p>
    */
   RecordURL?: string
   /**
-   * 录音转存第三方 COS 链接
+   * <p>录音转存第三方 COS 链接</p>
    */
   CustomRecordURL?: string
   /**
-   * 录音文本信息链接，带鉴权和有效期，获取之后请在24 小时拉取，不要持久化此链接。如此链接已过期，请重新调用此接口获取新的链接
+   * <p>录音文本信息链接，带鉴权和有效期，获取之后请在24 小时拉取，不要持久化此链接。如此链接已过期，请重新调用此接口获取新的链接</p>
    */
   AsrURL?: string
   /**
-   * 语音留言录音链接
+   * <p>语音留言录音链接</p>
    */
   VoicemailRecordURL?: Array<string>
   /**
-   * 语音留言录音文本信息链接，需在控制台购买离线语音识别套餐包并开启离线语音识别开关
+   * <p>语音留言录音文本信息链接，需在控制台购买离线语音识别套餐包并开启离线语音识别开关</p>
    */
   VoicemailAsrURL?: Array<string>
   /**
-   * IVR 按键信息
+   * <p>IVR 按键信息</p>
    */
   IVRKeyPressed?: Array<IVRKeyPressedElement>
   /**
-   * 满意度按键信息
+   * <p>满意度按键信息</p>
    */
   PostIVRKeyPressed?: Array<IVRKeyPressedElement>
   /**
-   * 挂机方 seat 座席 user 用户 system 系统
+   * <p>挂机方 seat 座席 user 用户 system 系统</p>
    */
   HungUpSide?: string
   /**
-   * 客户自定义数据（User-to-User Interface）
+   * <p>客户自定义数据（User-to-User Interface）</p>
    */
   UUI?: string
   /**
-   * 通话中的事件列表
+   * <p>通话中的事件列表</p>
    */
   Events?: Array<SessionEvent>
   /**
-   * 服务参与者列表
+   * <p>服务参与者列表</p>
    */
   ServeParticipants?: Array<ServeParticipant>
+  /**
+   * <p>接通后系统挂断原因状态码</p><p><a href="https://cloud.tencent.com/document/product/679/123938">详见</a></p>
+   */
+  SysHangupReason?: number
+  /**
+   * <p>接通后系统挂断原因</p><p><a href="https://cloud.tencent.com/document/product/679/123938">详见</a></p>
+   */
+  SysHangupReasonString?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3290,11 +3298,11 @@ export interface Message {
  */
 export interface DescribeFlashSMSListResponse {
   /**
-   * 记录总数
+   * <p>记录总数</p>
    */
   Total?: number
   /**
-   * 闪信记录列表
+   * <p>闪信记录列表</p>
    */
   FlashSMSList?: Array<FlashSMSRecord>
   /**
@@ -3468,39 +3476,39 @@ export interface IVRKeyPressedElement {
  */
 export interface DescribeFlashSMSListRequest {
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * <p>应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc</p>
    */
   SdkAppId: number
   /**
-   * 起始时间戳，Unix 秒级时间戳，最大支持近180天。
+   * <p>起始时间戳，Unix 秒级时间戳，最大支持近180天。</p>
    */
   StartTimestamp: number
   /**
-   * 结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。
+   * <p>结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。</p>
    */
   EndTimestamp: number
   /**
-   * 闪信投递号码（被叫号码）
+   * <p>闪信投递号码（被叫号码）</p>
    */
   DeliveryNumber?: string
   /**
-   * 呼叫关联的系统号码
+   * <p>呼叫关联的系统号码</p>
    */
   ServingNumber?: string
   /**
-   * 会话 ID
+   * <p>会话 ID</p>
    */
   SessionId?: string
   /**
-   * 投递结果 1 为成功，其他为失败
+   * <p>投递结果 1 为成功，其他为失败</p>
    */
   DeliveryStatus?: number
   /**
-   * 分页大小，默认 20，最大 100
+   * <p>分页大小，默认 20，最大 1000</p><p>取值范围：[20, 1000]</p><p>单位：条</p><p>默认值：20</p>
    */
   PageSize?: number
   /**
-   * 分页页码，从 0 开始
+   * <p>分页页码，从 0 开始</p>
    */
   PageNumber?: number
 }
@@ -3604,19 +3612,19 @@ export interface UploadIvrAudioFailedInfo {
  */
 export interface DescribeSessionDetailRequest {
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * <p>应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc</p>
    */
   SdkAppId: number
   /**
-   * 通话的 session id
+   * <p>通话的 session id</p>
    */
   SessionId: string
   /**
-   * 起始时间戳，Unix 秒级时间戳，最大支持近180天。
+   * <p>起始时间戳，Unix 秒级时间戳，最大支持近180天。</p>
    */
   StartTimestamp: number
   /**
-   * 结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。
+   * <p>结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。</p>
    */
   EndTimestamp: number
 }

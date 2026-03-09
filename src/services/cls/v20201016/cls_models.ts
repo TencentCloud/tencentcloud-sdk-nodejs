@@ -165,6 +165,16 @@ export interface FilterStatistics {
 }
 
 /**
+ * DescribeNetworkApplicationDetail请求参数结构体
+ */
+export interface DescribeNetworkApplicationDetailRequest {
+  /**
+   * <p>网络应用id</p>
+   */
+  NetworkAppId: string
+}
+
+/**
  * DeleteShipper请求参数结构体
  */
 export interface DeleteShipperRequest {
@@ -261,6 +271,16 @@ export interface CheckFunctionRequest {
    * 数据加工目标主题的类型. 1 固定主题 2动态创建
    */
   FuncType?: number
+}
+
+/**
+ * ModifyNetworkApplication返回参数结构体
+ */
+export interface ModifyNetworkApplicationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -829,27 +849,26 @@ export interface CreateDlcDeliverResponse {
 }
 
 /**
- * JSON类型描述
+ * CreateConsumerGroup请求参数结构体
  */
-export interface JsonInfo {
+export interface CreateConsumerGroupRequest {
   /**
-   * 启用标志
+   * 创建的消费者组标识
+限制： 字母数字下划线，不允许数字开头，长度限制256
    */
-  EnableTag: boolean
+  ConsumerGroup: string
   /**
-   * 元数据信息列表, 可选值为 __SOURCE__、__FILENAME__、__TIMESTAMP__、__HOSTNAME__。
-
-- __SOURCE__：日志采集的源 IP，示例：10.0.1.2
-- __FILENAME__：日志采集的文件名，示例：/data/log/nginx/access.log
-- __TIMESTAMP__：日志时间戳（毫秒级别 Unix 时间戳），按时间范围检索日志时，将自动使用该时间对日志进行检索，在控制台显示为“日志时间”，示例：1640005601188
-- __HOSTNAME__：日志来源机器名称，需使用2.7.4及以上版本的 Loglistener 才会采集该字段，示例：localhost
-注意：此字段可能返回 null，表示取不到有效值。
+   * 消费者心跳超时时间（秒）
    */
-  MetaFields: Array<string>
+  Timeout: number
   /**
-   * 投递Json格式，0：字符串方式投递；1:以结构化方式投递
+   * 创建的消费者组包含的日志主题列表
    */
-  JsonType?: number
+  Topics: Array<string>
+  /**
+   * 日志集Id（日志主题所属的日志集）
+   */
+  LogsetId: string
 }
 
 /**
@@ -2402,15 +2421,15 @@ export interface CustomMetricSpec {
  */
 export interface DlcPartitionInfo {
   /**
-   * cls日志中的字段名
+   * <p>cls日志中的字段名</p>
    */
   ClsField: string
   /**
-   * dlc表的列名
+   * <p>dlc表的列名</p>
    */
   DlcField: string
   /**
-   * dlc字段类型
+   * <p>请参考 <a href="https://cloud.tencent.com/document/product/1342/53778#Column">DLC  cloumn中的Type 定义 </a></p><p>枚举值：</p><ul><li>int|string|array等： 请参考 <a href="https://cloud.tencent.com/document/product/1342/53778#Column">DLC  cloumn中的Type 定义 </a></li></ul>
    */
   DlcFieldType: string
 }
@@ -3761,6 +3780,24 @@ export interface ModifyEsRechargeRequest {
 }
 
 /**
+ * CreateNetworkApplication请求参数结构体
+ */
+export interface CreateNetworkApplicationRequest {
+  /**
+   * <p>网络应用名称：长度不超过64字符，名称不能重复。</p><ul><li>只能包含以下字符：<ul><li>英文字母（大小写）</li><li>数字</li><li>下划线</li><li>连字符（减号）</li><li>汉字</li></ul></li><li>至少包含一个字符</li><li>不能包含空格</li><li>不能包含其他特殊字符（如 @、#、$、% 等）</li></ul>
+   */
+  Name: string
+  /**
+   * <p>日志集ID</p><ul><li>通过<a href="https://cloud.tencent.com/document/product/614/58624">获取日志集列表</a>获取日志集Id。</li></ul>
+   */
+  LogsetId: string
+  /**
+   * <p>主题名称。名称限制如下：</p><ul><li>不能为空字符串</li><li>不能包含字符&#39;|&#39;</li><li>不能使用以下名称[&quot;cls_service_log&quot;,&quot;loglistener_status&quot;,&quot;loglistener_alarm&quot;,&quot;loglistener_business&quot;,&quot;cls_service_metric&quot;]</li></ul>
+   */
+  TopicName: string
+}
+
+/**
  * DeleteLogset返回参数结构体
  */
 export interface DeleteLogsetResponse {
@@ -4106,7 +4143,7 @@ export interface GroupPartitionInfo {
  */
 export interface GetMetricLabelValuesResponse {
   /**
-   * 时序metric label values
+   * <p>时序metric label values</p>
    */
   Values?: Array<string>
   /**
@@ -4677,6 +4714,52 @@ export interface DeleteMachineGroupRequest {
 }
 
 /**
+ * 网络应用任务详情
+ */
+export interface NetworkApplicationDetail {
+  /**
+   * 网络应用Id
+   */
+  NetworkAppId?: string
+  /**
+   * 网络应用名称
+   */
+  Name?: string
+  /**
+   * 地域code
+   */
+  Region?: string
+  /**
+   * 日志主题id
+   */
+  TopicId?: string
+  /**
+   * 日志集id
+   */
+  LogsetId?: string
+  /**
+   * 应用token
+   */
+  Token?: string
+  /**
+   * 主账号id
+   */
+  Uin?: number
+  /**
+   * 子账号id
+   */
+  SubUin?: number
+  /**
+   * 创建时间，秒级时间戳
+   */
+  CreateTime?: number
+  /**
+   * 更新时间，秒级时间戳
+   */
+  UpdateTime?: number
+}
+
+/**
  * DescribeSplunkDelivers返回参数结构体
  */
 export interface DescribeSplunkDeliversResponse {
@@ -4945,23 +5028,23 @@ Classifications元素的Value长度不能超过200个字符。
  */
 export interface DlcFiledInfo {
   /**
-   * cls日志中的字段名
+   * <p>cls日志中的字段名</p>
    */
   ClsField: string
   /**
-   * 数据湖计算服务表的列名
+   * <p>数据湖计算服务表的列名</p>
    */
   DlcField: string
   /**
-   * 数据湖计算服务字段类型
+   * <p>数据湖计算服务字段类型</p><p>枚举值：</p><ul><li>int|string|struct等： 参考 <a href="https://cloud.tencent.com/document/product/1342/53778#Column">DLC  cloumn中的Type 定义 </a></li></ul>
    */
   DlcFieldType: string
   /**
-   * 解析失败填充字段
+   * <p>解析失败填充字段</p>
    */
   FillField?: string
   /**
-   * 是否禁用
+   * <p>是否禁用</p>
    */
   Disable?: boolean
 }
@@ -5415,21 +5498,21 @@ export interface DescribeConsumerResponse {
 }
 
 /**
- * EstimateRebuildIndexTask请求参数结构体
+ * DescribeNoticeContents返回参数结构体
  */
-export interface EstimateRebuildIndexTaskRequest {
+export interface DescribeNoticeContentsResponse {
   /**
-   * 日志主题ID
+   * 通知内容模板列表。
    */
-  TopicId: string
+  NoticeContents?: Array<NoticeContentTemplate>
   /**
-   * 预估任务起始时间，毫秒
+   * 符合条件的通知内容模板总数。
    */
-  StartTime: number
+  TotalCount?: number
   /**
-   * 预估任务结束时间，毫秒
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EndTime: number
+  RequestId?: string
 }
 
 /**
@@ -5600,26 +5683,13 @@ export interface CreateMetricConfigResponse {
 }
 
 /**
- * CreateConsumerGroup请求参数结构体
+ * DeleteConfigFromMachineGroup返回参数结构体
  */
-export interface CreateConsumerGroupRequest {
+export interface DeleteConfigFromMachineGroupResponse {
   /**
-   * 创建的消费者组标识
-限制： 字母数字下划线，不允许数字开头，长度限制256
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ConsumerGroup: string
-  /**
-   * 消费者心跳超时时间（秒）
-   */
-  Timeout: number
-  /**
-   * 创建的消费者组包含的日志主题列表
-   */
-  Topics: Array<string>
-  /**
-   * 日志集Id（日志主题所属的日志集）
-   */
-  LogsetId: string
+  RequestId?: string
 }
 
 /**
@@ -6647,7 +6717,28 @@ export interface CreateDashboardResponse {
 /**
  * GetMetricLabelValues请求参数结构体
  */
-export type GetMetricLabelValuesRequest = null
+export interface GetMetricLabelValuesRequest {
+  /**
+   * <p>时序主题id</p>
+   */
+  TopicId: string
+  /**
+   * <p>时序label名称</p>
+   */
+  LabelName: string
+  /**
+   * <p>起始时间</p>
+   */
+  Start?: number
+  /**
+   * <p>结束时间</p>
+   */
+  End?: number
+  /**
+   * <p>Label匹配规则</p>
+   */
+  Match?: Array<string>
+}
 
 /**
  * ModifyMetricSubscribe返回参数结构体
@@ -6752,44 +6843,27 @@ export interface CheckRechargeKafkaServerResponse {
 }
 
 /**
- * 云产品指标订阅预览结果实例信息
+ * 实例配置信息
  */
-export interface InstanceData {
+export interface InstanceConfig {
   /**
-   * 云监控指标名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例维度
    */
-  MetricName?: string
+  InstanceDimension: Array<string>
   /**
-   * CLS指标名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例值
    */
-  CLSMetricName?: string
+  Instances: Array<Instance>
+}
+
+/**
+ * DeleteNetworkApplication返回参数结构体
+ */
+export interface DeleteNetworkApplicationResponse {
   /**
-   * 云产品命名空间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Namespace?: string
-  /**
-   * 实例信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Dimensions?: Array<Dimension>
-  /**
-   * 周期,单位：秒
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Period?: number
-  /**
-   * 指标统计值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value?: number
-  /**
-   * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrMsg?: string
+  RequestId?: string
 }
 
 /**
@@ -7449,6 +7523,30 @@ export interface DescribeKafkaConsumerResponse {
 }
 
 /**
+ * JSON类型描述
+ */
+export interface JsonInfo {
+  /**
+   * 启用标志
+   */
+  EnableTag: boolean
+  /**
+   * 元数据信息列表, 可选值为 __SOURCE__、__FILENAME__、__TIMESTAMP__、__HOSTNAME__。
+
+- __SOURCE__：日志采集的源 IP，示例：10.0.1.2
+- __FILENAME__：日志采集的文件名，示例：/data/log/nginx/access.log
+- __TIMESTAMP__：日志时间戳（毫秒级别 Unix 时间戳），按时间范围检索日志时，将自动使用该时间对日志进行检索，在控制台显示为“日志时间”，示例：1640005601188
+- __HOSTNAME__：日志来源机器名称，需使用2.7.4及以上版本的 Loglistener 才会采集该字段，示例：localhost
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetaFields: Array<string>
+  /**
+   * 投递Json格式，0：字符串方式投递；1:以结构化方式投递
+   */
+  JsonType?: number
+}
+
+/**
  * DeleteKafkaRecharge返回参数结构体
  */
 export interface DeleteKafkaRechargeResponse {
@@ -7532,6 +7630,20 @@ export interface CallBackInfo {
 ```
    */
   Headers?: Array<string>
+}
+
+/**
+ * ModifyNetworkApplication请求参数结构体
+ */
+export interface ModifyNetworkApplicationRequest {
+  /**
+   * <p>网络应用id</p>
+   */
+  NetworkAppId: string
+  /**
+   * <p>网络应用名称：长度不超过64字符，名称不能重复。</p><ul><li>只能包含以下字符：<ul><li>英文字母（大小写）</li><li>数字</li><li>下划线</li><li>连字符（减号）</li><li>汉字</li></ul></li><li>至少包含一个字符</li><li>不能包含空格</li><li>不能包含其他特殊字符（如 @、#、$、% 等）</li></ul>
+   */
+  Name?: string
 }
 
 /**
@@ -7858,21 +7970,21 @@ export interface CreateCosRechargeRequest {
 }
 
 /**
- * DescribeNoticeContents返回参数结构体
+ * EstimateRebuildIndexTask请求参数结构体
  */
-export interface DescribeNoticeContentsResponse {
+export interface EstimateRebuildIndexTaskRequest {
   /**
-   * 通知内容模板列表。
+   * 日志主题ID
    */
-  NoticeContents?: Array<NoticeContentTemplate>
+  TopicId: string
   /**
-   * 符合条件的通知内容模板总数。
+   * 预估任务起始时间，毫秒
    */
-  TotalCount?: number
+  StartTime: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 预估任务结束时间，毫秒
    */
-  RequestId?: string
+  EndTime: number
 }
 
 /**
@@ -8611,6 +8723,20 @@ export interface MetricSubscribeInfo {
 }
 
 /**
+ * CreateNetworkApplication返回参数结构体
+ */
+export interface CreateNetworkApplicationResponse {
+  /**
+   * <p>网络应用id</p>
+   */
+  NetworkAppId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteIndex请求参数结构体
  */
 export interface DeleteIndexRequest {
@@ -8650,6 +8776,16 @@ export interface DescribeAlertRecordHistoryRequest {
 每次请求的Filters的上限为10，Filter.Values的上限为100。
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * DeleteNetworkApplication请求参数结构体
+ */
+export interface DeleteNetworkApplicationRequest {
+  /**
+   * <p>网络应用id。</p>
+   */
+  NetworkAppId: string
 }
 
 /**
@@ -8797,6 +8933,48 @@ export interface DescribeKafkaConsumerPreviewResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 网络应用任务信息
+ */
+export interface NetworkApplicationInfo {
+  /**
+   * 网络应用Id
+   */
+  NetworkAppId?: string
+  /**
+   * 网络应用名称
+   */
+  Name?: string
+  /**
+   * 地域code
+   */
+  Region?: string
+  /**
+   * 日志主题id
+   */
+  TopicId?: string
+  /**
+   * 日志集id
+   */
+  LogsetId?: string
+  /**
+   * 主账号id
+   */
+  Uin?: number
+  /**
+   * 子账号id
+   */
+  SubUin?: number
+  /**
+   * 创建时间，秒级时间戳
+   */
+  CreateTime?: number
+  /**
+   * 更新时间，秒级时间戳
+   */
+  UpdateTime?: number
 }
 
 /**
@@ -8965,6 +9143,24 @@ export interface DeleteEsRechargeResponse {
 }
 
 /**
+ * DescribeNetworkApplications请求参数结构体
+ */
+export interface DescribeNetworkApplicationsRequest {
+  /**
+   * <p>过滤项</p><ul><li><p>name<br>按照【任务名称】进行过滤。模糊匹配方式查询。<br>类型：String<br>必选：否</p></li><li><p>networkAppId<br>按照【网络应用id】进行过滤。<br>类型：String<br>必选：否</p></li></ul><p>每次请求的Filters的上限为10，Filter.Values的上限为10。</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>分页的偏移量，默认值为0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>分页单页限制数目，默认值为20，最大值100。</p>
+   */
+  Limit?: number
+}
+
+/**
  * DescribeKafkaRecharges返回参数结构体
  */
 export interface DescribeKafkaRechargesResponse {
@@ -8987,48 +9183,47 @@ export interface DescribeKafkaRechargesResponse {
  */
 export interface ModifyDlcDeliverRequest {
   /**
-   * 日志主题id。
-- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   * <p>日志主题id。</p><ul><li>通过<a href="https://cloud.tencent.com/document/product/614/56454">获取日志主题列表</a>获取日志主题Id。</li></ul>
    */
   TopicId: string
   /**
-   * 任务id。
+   * <p>任务id。</p>
    */
   TaskId: string
   /**
-   * 名称：长度不超过64字符，以字母开头，接受0-9,a-z,A-Z, _,-,中文字符。
+   * <p>名称：长度不超过64字符，以字母开头，接受0-9,a-z,A-Z, _,-,中文字符。</p>
    */
   Name?: string
   /**
-   * 投递类型。0:批投递,1:实时投递
+   * <p>投递类型。0:批投递,1:实时投递</p>
    */
   DeliverType?: number
   /**
-   * 投递时间范围的开始时间
+   * <p>投递时间范围的开始时间</p>
    */
   StartTime?: number
   /**
-   * 投递时间范围的结束时间。 如果为空，则表示不限时
+   * <p>投递时间范围的结束时间。 如果为空，则表示不限时</p>
    */
   EndTime?: number
   /**
-   * 投递文件大小,单位MB。 DeliverType=0时必填，范围 5<= MaxSize <= 256。
+   * <p>投递文件大小,单位MB。 DeliverType=0时必填，范围 5&lt;= MaxSize &lt;= 256。</p>
    */
   MaxSize?: number
   /**
-   * 投递间隔，单位秒。 DeliverType=0时必填，范围 300<= Interval <=900。
+   * <p>投递间隔，单位秒。 DeliverType=0时必填，范围 300&lt;= Interval &lt;=900。</p>
    */
   Interval?: number
   /**
-   * dlc配置信息
+   * <p>dlc配置信息</p>
    */
   DlcInfo?: DlcInfo
   /**
-   * 是否开启投递服务日志。1关闭，2开启。默认开启
+   * <p>是否开启投递服务日志。1关闭，2开启。默认开启</p>
    */
   HasServicesLog?: number
   /**
-   * 任务状态。
+   * <p>任务状态。</p><p>枚举值：</p><ul><li>1： 运行</li><li>2： 停止</li></ul>
    */
   Status?: number
 }
@@ -9100,65 +9295,63 @@ export interface DeleteCloudProductLogCollectionResponse {
  */
 export interface ExportInfo {
   /**
-   * 日志主题ID
+   * <p>日志主题ID</p>
    */
   TopicId?: string
   /**
-   * 日志导出任务ID
+   * <p>日志导出任务ID</p>
    */
   ExportId?: string
   /**
-   * 日志导出查询语句
+   * <p>日志导出查询语句</p>
    */
   Query?: string
   /**
-   * 日志导出文件名
+   * <p>日志导出文件名</p>
    */
   FileName?: string
   /**
-   * 日志文件大小
+   * <p>日志文件大小</p><p>单位：Byte</p>
    */
   FileSize?: number
   /**
-   * 日志导出时间排序
+   * <p>日志导出时间排序</p>
    */
   Order?: string
   /**
-   * 日志导出格式
+   * <p>日志导出格式</p>
    */
   Format?: string
   /**
-   * 日志导出数量
+   * <p>日志导出数量</p>
    */
   Count?: number
   /**
-   * 日志下载状态。Processing:导出正在进行中，Completed:导出完成，Failed:导出失败，Expired:日志导出已过期(三天有效期), Queuing 排队中
+   * <p>日志下载状态。Processing:导出正在进行中，Completed:导出完成，Failed:导出失败，Expired:日志导出已过期(三天有效期), Queuing 排队中</p>
    */
   Status?: string
   /**
-   * 日志导出起始时间，毫秒时间戳
+   * <p>日志导出起始时间，毫秒时间戳</p>
    */
   From?: number
   /**
-   * 日志导出结束时间，毫秒时间戳
+   * <p>日志导出结束时间，毫秒时间戳</p>
    */
   To?: number
   /**
-   * 日志导出路径,有效期一个小时，请尽快使用该路径下载。
+   * <p>日志导出路径,有效期一个小时，请尽快使用该路径下载。</p>
    */
   CosPath?: string
   /**
-   * 日志导出创建时间
-时间格式：yyyy-MM-dd HH:mm:ss
+   * <p>日志导出创建时间<br>时间格式：yyyy-MM-dd HH:mm:ss</p>
    */
   CreateTime?: string
   /**
-   * 语法规则。 默认值为0。
-0：Lucene语法，1：CQL语法。
+   * <p>语法规则。 默认值为0。<br>0：Lucene语法，1：CQL语法。</p>
    */
   SyntaxRule?: number
   /**
-   * 导出字段
+   * <p>导出字段</p>
    */
   DerivedFields?: Array<string>
 }
@@ -10011,16 +10204,6 @@ export interface CancelRebuildIndexTaskResponse {
 }
 
 /**
- * DeleteConfigFromMachineGroup返回参数结构体
- */
-export interface DeleteConfigFromMachineGroupResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * UploadLog返回参数结构体
  */
 export interface UploadLogResponse {
@@ -10370,6 +10553,20 @@ export interface DescribeDlcDeliversRequest {
    * 分页单页限制数目，默认值为20，最大值100。
    */
   Limit?: number
+}
+
+/**
+ * DescribeNetworkApplicationDetail返回参数结构体
+ */
+export interface DescribeNetworkApplicationDetailResponse {
+  /**
+   * <p>查询指定的网络应用详情</p>
+   */
+  Info?: NetworkApplicationDetail
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10830,6 +11027,24 @@ export interface DescribeCosRechargesRequest {
    * 是否启用:   0： 未启用  ， 1：启用
    */
   Enable?: number
+}
+
+/**
+ * DescribeNetworkApplications返回参数结构体
+ */
+export interface DescribeNetworkApplicationsResponse {
+  /**
+   * <p>符合查询条件的大模型性能剖析任务列表</p>
+   */
+  Infos?: Array<NetworkApplicationInfo>
+  /**
+   * <p>符合查询条件的任务总数。</p>
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11823,17 +12038,44 @@ export interface ConsumerGroupInfo {
 }
 
 /**
- * 实例配置信息
+ * 云产品指标订阅预览结果实例信息
  */
-export interface InstanceConfig {
+export interface InstanceData {
   /**
-   * 实例维度
+   * 云监控指标名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceDimension: Array<string>
+  MetricName?: string
   /**
-   * 实例值
+   * CLS指标名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Instances: Array<Instance>
+  CLSMetricName?: string
+  /**
+   * 云产品命名空间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
+  /**
+   * 实例信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Dimensions?: Array<Dimension>
+  /**
+   * 周期,单位：秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Period?: number
+  /**
+   * 指标统计值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: number
+  /**
+   * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrMsg?: string
 }
 
 /**

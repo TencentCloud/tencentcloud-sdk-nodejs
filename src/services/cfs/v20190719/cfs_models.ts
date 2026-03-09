@@ -466,7 +466,7 @@ export interface ModifyFileSystemAutoScaleUpRuleRequest {
  */
 export interface ScaleUpFileSystemRequest {
   /**
-   * 文件系统Id,该参数通过查询文件系统列表接口获取
+   * 文件系统ID，通过查询文件系统列表获取；[DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170)
    */
   FileSystemId: string
   /**
@@ -2672,64 +2672,64 @@ export interface FileSystemByPolicy {
  */
 export interface SnapshotInfo {
   /**
-   * 创建快照时间
+   * <p>创建快照时间</p>
    */
   CreationTime?: string
   /**
-   * 快照名称
+   * <p>快照名称</p>
    */
   SnapshotName?: string
   /**
-   * 快照ID
+   * <p>快照ID</p>
    */
   SnapshotId?: string
   /**
-   * 快照状态，creating-创建中；available-运行中；deleting-删除中；rollbacking-new 创建新文件系统中；create-failed 创建失败
+   * <p>快照状态，creating-创建中；available-运行中；deleting-删除中；rollbacking-new 创建新文件系统中；create-failed 创建失败</p>
    */
   Status?: string
   /**
-   * 地域名称
+   * <p>地域名称</p>
    */
   RegionName?: string
   /**
-   * 文件系统ID
+   * <p>文件系统ID</p>
    */
   FileSystemId?: string
   /**
-   * 快照大小
+   * <p>快照大小</p><p>单位：MiB</p>
    */
   Size?: number
   /**
-   * 保留时长天
+   * <p>保留时长天</p>
    */
   AliveDay?: number
   /**
-   * 快照进度百分比，1表示1% 范围1-100
+   * <p>快照进度百分比，1表示1% 范围1-100</p>
    */
   Percent?: number
   /**
-   * 账号ID
+   * <p>账号ID</p>
    */
   AppId?: number
   /**
-   * 快照删除时间
+   * <p>快照删除时间</p>
    */
   DeleteTime?: string
   /**
-   * 文件系统名称
+   * <p>文件系统名称</p>
    */
   FsName?: string
   /**
-   * 快照标签
+   * <p>快照标签</p>
    */
   Tags?: Array<TagInfo>
   /**
-   * 快照类型，general为通用系列快照，turbo为Turbo系列快照
+   * <p>快照类型，general为通用系列快照，turbo为Turbo系列快照</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotType?: string
   /**
-   * 实际快照时间，反映快照对应文件系统某个时刻的数据。
+   * <p>实际快照时间，反映快照对应文件系统某个时刻的数据。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotTime?: string
@@ -2993,11 +2993,11 @@ export interface DeleteLifecyclePolicyRequest {
  */
 export interface TieringDetailInfo {
   /**
-   * 低频存储容量
+   * <p>低频存储容量</p><p>单位：Byte, B, 字节</p>
    */
   TieringSizeInBytes?: number
   /**
-   * 冷存储容量
+   * <p>冷存储容量</p><p>单位：Byte, B, 字节</p>
    */
   SecondaryTieringSizeInBytes?: number
 }

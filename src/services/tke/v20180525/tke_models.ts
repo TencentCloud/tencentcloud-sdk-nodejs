@@ -3017,6 +3017,10 @@ export interface AddExistedInstancesRequest {
    * 节点镜像
    */
   ImageId?: string
+  /**
+   * 直接添加为原生节点
+   */
+  NodeType?: string
 }
 
 /**
@@ -9014,7 +9018,7 @@ export interface CreateECMInstancesRequest {
    */
   Password?: string
   /**
-   * 公网带宽
+   * 公网带宽，单位为Mbps
    */
   InternetMaxBandwidthOut?: number
   /**
@@ -12917,7 +12921,7 @@ export interface ModifyNodePoolDesiredCapacityAboutAsgRequest {
    */
   NodePoolId: string
   /**
-   * 节点池所关联的伸缩组的期望实例数
+   * 节点池所关联的伸缩组的期望实例数，单位个
    */
   DesiredCapacity: number
 }

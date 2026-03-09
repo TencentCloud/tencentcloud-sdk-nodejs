@@ -140,6 +140,7 @@ import {
   CreateManageRequest,
   DisplayJobRecord,
   ModifySeedStatusRequest,
+  Equity,
   CreateCustomerRequest,
   DeleteEnterprisesRequest,
   DescribeLeakageDatasRequest,
