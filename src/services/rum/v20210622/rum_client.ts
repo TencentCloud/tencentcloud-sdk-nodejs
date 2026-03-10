@@ -24,6 +24,8 @@ import {
   CreateTawInstanceResponse,
   DeleteProjectRequest,
   DescribeProjectLimitsResponse,
+  DescribeTawInstancesRequest,
+  ResumeProjectResponse,
   DescribeRumLogListResponse,
   DescribeAppMetricsDataRequest,
   DescribeDataPvUrlInfoResponse,
@@ -31,7 +33,9 @@ import {
   DescribeDataFetchUrlResponse,
   DescribeErrorRequest,
   StopInstanceRequest,
+  DescribeDataStaticUrlV2Request,
   ModifyInstanceRequest,
+  DescribeDataStaticProjectV2Response,
   DescribeErrorResponse,
   DescribeAppMetricsDataResponse,
   DescribeAppSingleCaseDetailListResponse,
@@ -39,36 +43,44 @@ import {
   DescribePvListResponse,
   RumUvInfo,
   DescribeScoresRequest,
+  ScoreInfoV2,
   DescribeDataReportCountRequest,
+  DescribeDataStaticResourceV2Request,
   DescribeReleaseFilesRequest,
   CreateReleaseFileRequest,
   DescribeDataCustomUrlRequest,
   DescribeUvListResponse,
+  DescribeDataStaticUrlV2Response,
   Tag,
   DescribeDataPvUrlStatisticsV2Request,
-  DescribeRumGroupLogResponse,
+  DescribeDataFetchUrlV2Response,
+  CreateProjectRequest,
   DescribeDataStaticUrlRequest,
   ModifyInstanceResponse,
   DeleteStarProjectRequest,
   DescribeWhitelistsRequest,
   DescribeUvListRequest,
   DescribeDataReportCountV2Request,
+  DescribeDataPerformancePageV2Response,
   DescribeDataRequest,
+  DescribeDataEventUrlV2Request,
   StopProjectRequest,
   DescribeTawAreasResponse,
-  ResumeProjectResponse,
+  ResumeInstanceRequest,
   ModifyProjectLimitRequest,
+  DescribeDataEventUrlV2Response,
   DeleteInstanceResponse,
+  DescribeDataWebVitalsPageV2Request,
   DescribeAppSingleCaseListResponse,
   DescribeDataPerformancePageRequest,
   DeleteReleaseFileRequest,
-  ResumeInstanceRequest,
+  DescribeScoresV2Request,
   DescribeDataFetchUrlRequest,
   DescribeRumLogExportRequest,
   DescribeDataLogUrlStatisticsResponse,
   CreateProjectResponse,
-  StopInstanceResponse,
-  DescribeProjectLimitsRequest,
+  DescribeDataLogUrlStatisticsV2Response,
+  DescribeDataCustomUrlResponse,
   CreateStarProjectResponse,
   DeleteProjectResponse,
   DescribeDataPvUrlStatisticsRequest,
@@ -77,37 +89,43 @@ import {
   DescribeRumLogExportsResponse,
   DescribeDataStaticProjectRequest,
   DescribeRumStatsLogListRequest,
+  DescribeDataBridgeUrlV2Request,
   Kafka,
   ProjectLimit,
-  CreateProjectRequest,
+  DescribeRumGroupLogResponse,
   DescribeRumStatsLogListResponse,
   CreateWhitelistRequest,
+  StopInstanceResponse,
   DescribeDataPvUrlStatisticsResponse,
   DescribeDataLogUrlInfoRequest,
-  DescribeDataCustomUrlResponse,
+  DescribeProjectLimitsRequest,
   DescribeDataPvUrlStatisticsV2Response,
   RumAreaInfo,
   DescribeDataSetUrlStatisticsRequest,
+  DescribeDataWebVitalsPageV2Response,
   ResumeInstanceResponse,
   DescribeDataStaticProjectResponse,
   CreateStarProjectRequest,
   DescribeAppSingleCaseListRequest,
+  DescribeDataSetUrlStatisticsV2Request,
   DescribeReleaseFileSignRequest,
   DeleteWhitelistRequest,
   DescribeDataLogUrlInfoResponse,
   RumPvInfo,
   DeleteReleaseFileResponse,
-  DescribeScoresResponse,
+  DescribeDataCustomUrlV2Request,
   DescribeDataLogUrlStatisticsRequest,
-  DescribeReleaseFileSignResponse,
-  DescribeTawInstancesRequest,
+  DescribeDataBridgeUrlV2Response,
+  DescribeScoresResponse,
   DescribeTawAreasRequest,
+  DescribeDataCustomUrlV2Response,
   Filter,
   DeleteStarProjectResponse,
   DescribeDataPerformancePageResponse,
   DeleteInstanceRequest,
   DescribeDataStaticResourceResponse,
   DescribeDataEventUrlResponse,
+  DescribeReleaseFileSignResponse,
   DescribeDataWebVitalsPageRequest,
   DescribeDataFetchUrlInfoRequest,
   DescribeDataFetchUrlInfoResponse,
@@ -116,13 +134,16 @@ import {
   CreateWhitelistResponse,
   ScoreInfo,
   DescribeDataWebVitalsPageResponse,
+  DescribeDataStaticProjectV2Request,
   DescribeProjectsRequest,
   DescribeDataEventUrlRequest,
   DescribeAppDimensionMetricsResponse,
+  DescribeDataSetUrlStatisticsV2Response,
   ResumeProjectRequest,
   DescribeAppSingleCaseDetailListRequest,
   DescribeRumGroupLogRequest,
   DescribeWhitelistsResponse,
+  DescribeDataFetchUrlV2Request,
   DescribeProjectsResponse,
   DescribeDataReportCountV2Response,
   ModifyProjectResponse,
@@ -131,14 +152,18 @@ import {
   DescribeRumLogExportsRequest,
   ModifyProjectRequest,
   DescribeRumLogListRequest,
+  DescribeDataPerformancePageV2Request,
   DescribeDataStaticResourceRequest,
   DescribeTawInstancesResponse,
   DescribePvListRequest,
   DescribeDataPvUrlInfoRequest,
   CreateReleaseFileResponse,
   DescribeDataFetchProjectResponse,
+  DescribeScoresV2Response,
   Whitelist,
+  DescribeDataLogUrlStatisticsV2Request,
   RumProject,
+  DescribeDataStaticResourceV2Response,
   DescribeDataSetUrlStatisticsResponse,
   DescribeAppDimensionMetricsRequest,
   RumInstanceInfo,
@@ -164,13 +189,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取项目下的日志列表，分钟级
+   * 获取项目下的PV列表
    */
-  async DescribeRumStatsLogList(
-    req: DescribeRumStatsLogListRequest,
-    cb?: (error: string, rep: DescribeRumStatsLogListResponse) => void
-  ): Promise<DescribeRumStatsLogListResponse> {
-    return this.request("DescribeRumStatsLogList", req, cb)
+  async DescribePvList(
+    req: DescribePvListRequest,
+    cb?: (error: string, rep: DescribePvListResponse) => void
+  ): Promise<DescribePvListResponse> {
+    return this.request("DescribePvList", req, cb)
   }
 
   /**
@@ -184,13 +209,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取首页分数列表
+   * 获取loginfo信息
    */
-  async DescribeScores(
-    req: DescribeScoresRequest,
-    cb?: (error: string, rep: DescribeScoresResponse) => void
-  ): Promise<DescribeScoresResponse> {
-    return this.request("DescribeScores", req, cb)
+  async DescribeDataLogUrlInfo(
+    req: DescribeDataLogUrlInfoRequest,
+    cb?: (error: string, rep: DescribeDataLogUrlInfoResponse) => void
+  ): Promise<DescribeDataLogUrlInfoResponse> {
+    return this.request("DescribeDataLogUrlInfo", req, cb)
   }
 
   /**
@@ -234,23 +259,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取项目上报量
+   * 获取项目下的日志列表，分钟级
    */
-  async DescribeDataReportCountV2(
-    req: DescribeDataReportCountV2Request,
-    cb?: (error: string, rep: DescribeDataReportCountV2Response) => void
-  ): Promise<DescribeDataReportCountV2Response> {
-    return this.request("DescribeDataReportCountV2", req, cb)
+  async DescribeRumStatsLogList(
+    req: DescribeRumStatsLogListRequest,
+    cb?: (error: string, rep: DescribeRumStatsLogListResponse) => void
+  ): Promise<DescribeRumStatsLogListResponse> {
+    return this.request("DescribeRumStatsLogList", req, cb)
   }
 
   /**
-   * 获取DescribeDataFetchProject信息。已下线，请使用DescribeDataFetchUrl
+   * 获取首页分数列表
    */
-  async DescribeDataFetchProject(
-    req: DescribeDataFetchProjectRequest,
-    cb?: (error: string, rep: DescribeDataFetchProjectResponse) => void
-  ): Promise<DescribeDataFetchProjectResponse> {
-    return this.request("DescribeDataFetchProject", req, cb)
+  async DescribeScores(
+    req: DescribeScoresRequest,
+    cb?: (error: string, rep: DescribeScoresResponse) => void
+  ): Promise<DescribeScoresResponse> {
+    return this.request("DescribeScores", req, cb)
+  }
+
+  /**
+   * 获取PerformancePage信息
+   */
+  async DescribeDataPerformancePageV2(
+    req: DescribeDataPerformancePageV2Request,
+    cb?: (error: string, rep: DescribeDataPerformancePageV2Response) => void
+  ): Promise<DescribeDataPerformancePageV2Response> {
+    return this.request("DescribeDataPerformancePageV2", req, cb)
+  }
+
+  /**
+   * 获取DescribeDataFetchUrl信息
+   */
+  async DescribeDataFetchUrl(
+    req: DescribeDataFetchUrlRequest,
+    cb?: (error: string, rep: DescribeDataFetchUrlResponse) => void
+  ): Promise<DescribeDataFetchUrlResponse> {
+    return this.request("DescribeDataFetchUrl", req, cb)
   }
 
   /**
@@ -334,6 +379,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取DescribeDataFetchUrl信息
+   */
+  async DescribeDataFetchUrlV2(
+    req: DescribeDataFetchUrlV2Request,
+    cb?: (error: string, rep: DescribeDataFetchUrlV2Response) => void
+  ): Promise<DescribeDataFetchUrlV2Response> {
+    return this.request("DescribeDataFetchUrlV2", req, cb)
+  }
+
+  /**
    * 获取DescribeDataPvUrlStatistics信息
    */
   async DescribeDataPvUrlStatisticsV2(
@@ -354,13 +409,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取项目下的PV列表
+   * 获取应用上报抽样信息
    */
-  async DescribePvList(
-    req: DescribePvListRequest,
-    cb?: (error: string, rep: DescribePvListResponse) => void
-  ): Promise<DescribePvListResponse> {
-    return this.request("DescribePvList", req, cb)
+  async DescribeProjectLimits(
+    req: DescribeProjectLimitsRequest,
+    cb?: (error: string, rep: DescribeProjectLimitsResponse) => void
+  ): Promise<DescribeProjectLimitsResponse> {
+    return this.request("DescribeProjectLimits", req, cb)
+  }
+
+  /**
+   * 获取DescribeDataPvUrlStatistics信息
+   */
+  async DescribeDataPvUrlStatistics(
+    req: DescribeDataPvUrlStatisticsRequest,
+    cb?: (error: string, rep: DescribeDataPvUrlStatisticsResponse) => void
+  ): Promise<DescribeDataPvUrlStatisticsResponse> {
+    return this.request("DescribeDataPvUrlStatistics", req, cb)
   }
 
   /**
@@ -385,23 +450,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新增修改限流
+   * 获取DescribeDataFetchUrlInfo信息
    */
-  async ModifyProjectLimit(
-    req: ModifyProjectLimitRequest,
-    cb?: (error: string, rep: ModifyProjectLimitResponse) => void
-  ): Promise<ModifyProjectLimitResponse> {
-    return this.request("ModifyProjectLimit", req, cb)
+  async DescribeDataFetchUrlInfo(
+    req: DescribeDataFetchUrlInfoRequest,
+    cb?: (error: string, rep: DescribeDataFetchUrlInfoResponse) => void
+  ): Promise<DescribeDataFetchUrlInfoResponse> {
+    return this.request("DescribeDataFetchUrlInfo", req, cb)
   }
 
   /**
-   * 获取DescribeDataPvUrlStatistics信息
+   * 获取DescribeDataCustomUrl信息
    */
-  async DescribeDataPvUrlStatistics(
-    req: DescribeDataPvUrlStatisticsRequest,
-    cb?: (error: string, rep: DescribeDataPvUrlStatisticsResponse) => void
-  ): Promise<DescribeDataPvUrlStatisticsResponse> {
-    return this.request("DescribeDataPvUrlStatistics", req, cb)
+  async DescribeDataCustomUrlV2(
+    req: DescribeDataCustomUrlV2Request,
+    cb?: (error: string, rep: DescribeDataCustomUrlV2Response) => void
+  ): Promise<DescribeDataCustomUrlV2Response> {
+    return this.request("DescribeDataCustomUrlV2", req, cb)
+  }
+
+  /**
+   * 获取DescribeDataSetUrlStatistics信息
+   */
+  async DescribeDataSetUrlStatisticsV2(
+    req: DescribeDataSetUrlStatisticsV2Request,
+    cb?: (error: string, rep: DescribeDataSetUrlStatisticsV2Response) => void
+  ): Promise<DescribeDataSetUrlStatisticsV2Response> {
+    return this.request("DescribeDataSetUrlStatisticsV2", req, cb)
   }
 
   /**
@@ -445,6 +520,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 新增修改限流
+   */
+  async ModifyProjectLimit(
+    req: ModifyProjectLimitRequest,
+    cb?: (error: string, rep: ModifyProjectLimitResponse) => void
+  ): Promise<ModifyProjectLimitResponse> {
+    return this.request("ModifyProjectLimit", req, cb)
+  }
+
+  /**
+   * 获取DescribeDataEventUrl信息
+   */
+  async DescribeDataEventUrlV2(
+    req: DescribeDataEventUrlV2Request,
+    cb?: (error: string, rep: DescribeDataEventUrlV2Response) => void
+  ): Promise<DescribeDataEventUrlV2Response> {
+    return this.request("DescribeDataEventUrlV2", req, cb)
+  }
+
+  /**
    * 获取DescribeDataStaticResource信息
    */
   async DescribeDataStaticResource(
@@ -455,13 +550,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取应用上报抽样信息
+   * 获取DescribeDataStaticProject信息
    */
-  async DescribeProjectLimits(
-    req: DescribeProjectLimitsRequest,
-    cb?: (error: string, rep: DescribeProjectLimitsResponse) => void
-  ): Promise<DescribeProjectLimitsResponse> {
-    return this.request("DescribeProjectLimits", req, cb)
+  async DescribeDataStaticProjectV2(
+    req: DescribeDataStaticProjectV2Request,
+    cb?: (error: string, rep: DescribeDataStaticProjectV2Response) => void
+  ): Promise<DescribeDataStaticProjectV2Response> {
+    return this.request("DescribeDataStaticProjectV2", req, cb)
   }
 
   /**
@@ -482,6 +577,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDataCustomUrlResponse) => void
   ): Promise<DescribeDataCustomUrlResponse> {
     return this.request("DescribeDataCustomUrl", req, cb)
+  }
+
+  /**
+   * 获取DescribeDataStaticUrl信息
+   */
+  async DescribeDataStaticUrlV2(
+    req: DescribeDataStaticUrlV2Request,
+    cb?: (error: string, rep: DescribeDataStaticUrlV2Response) => void
+  ): Promise<DescribeDataStaticUrlV2Response> {
+    return this.request("DescribeDataStaticUrlV2", req, cb)
   }
 
   /**
@@ -515,6 +620,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取DescribeDataStaticResource信息
+   */
+  async DescribeDataStaticResourceV2(
+    req: DescribeDataStaticResourceV2Request,
+    cb?: (error: string, rep: DescribeDataStaticResourceV2Response) => void
+  ): Promise<DescribeDataStaticResourceV2Response> {
+    return this.request("DescribeDataStaticResourceV2", req, cb)
+  }
+
+  /**
    * 个人用户添加星标项目
    */
   async CreateStarProject(
@@ -535,13 +650,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取DescribeDataFetchUrlInfo信息
+   * 创建 RUM 业务系统
    */
-  async DescribeDataFetchUrlInfo(
-    req: DescribeDataFetchUrlInfoRequest,
-    cb?: (error: string, rep: DescribeDataFetchUrlInfoResponse) => void
-  ): Promise<DescribeDataFetchUrlInfoResponse> {
-    return this.request("DescribeDataFetchUrlInfo", req, cb)
+  async CreateTawInstance(
+    req: CreateTawInstanceRequest,
+    cb?: (error: string, rep: CreateTawInstanceResponse) => void
+  ): Promise<CreateTawInstanceResponse> {
+    return this.request("CreateTawInstance", req, cb)
   }
 
   /**
@@ -562,6 +677,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyProjectResponse) => void
   ): Promise<ModifyProjectResponse> {
     return this.request("ModifyProject", req, cb)
+  }
+
+  /**
+   * 获取LogUrlStatistics信息
+   */
+  async DescribeDataLogUrlStatisticsV2(
+    req: DescribeDataLogUrlStatisticsV2Request,
+    cb?: (error: string, rep: DescribeDataLogUrlStatisticsV2Response) => void
+  ): Promise<DescribeDataLogUrlStatisticsV2Response> {
+    return this.request("DescribeDataLogUrlStatisticsV2", req, cb)
   }
 
   /**
@@ -605,23 +730,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取loginfo信息
+   * 获取DescribeDataBridgeUrl信息
    */
-  async DescribeDataLogUrlInfo(
-    req: DescribeDataLogUrlInfoRequest,
-    cb?: (error: string, rep: DescribeDataLogUrlInfoResponse) => void
-  ): Promise<DescribeDataLogUrlInfoResponse> {
-    return this.request("DescribeDataLogUrlInfo", req, cb)
-  }
-
-  /**
-   * 获取项目下的UV列表
-   */
-  async DescribeUvList(
-    req: DescribeUvListRequest,
-    cb?: (error: string, rep: DescribeUvListResponse) => void
-  ): Promise<DescribeUvListResponse> {
-    return this.request("DescribeUvList", req, cb)
+  async DescribeDataBridgeUrlV2(
+    req: DescribeDataBridgeUrlV2Request,
+    cb?: (error: string, rep: DescribeDataBridgeUrlV2Response) => void
+  ): Promise<DescribeDataBridgeUrlV2Response> {
+    return this.request("DescribeDataBridgeUrlV2", req, cb)
   }
 
   /**
@@ -645,6 +760,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 获取DescribeDataWebVitalsPage信息，用户核心活动信息
+页面加载性能之Web Vitals。性能关键点
+     */
+  async DescribeDataWebVitalsPageV2(
+    req: DescribeDataWebVitalsPageV2Request,
+    cb?: (error: string, rep: DescribeDataWebVitalsPageV2Response) => void
+  ): Promise<DescribeDataWebVitalsPageV2Response> {
+    return this.request("DescribeDataWebVitalsPageV2", req, cb)
+  }
+
+  /**
    * 获取PvUrlInfo信息
    */
   async DescribeDataPvUrlInfo(
@@ -652,6 +778,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDataPvUrlInfoResponse) => void
   ): Promise<DescribeDataPvUrlInfoResponse> {
     return this.request("DescribeDataPvUrlInfo", req, cb)
+  }
+
+  /**
+   * 获取首页分数列表
+   */
+  async DescribeScoresV2(
+    req: DescribeScoresV2Request,
+    cb?: (error: string, rep: DescribeScoresV2Response) => void
+  ): Promise<DescribeScoresV2Response> {
+    return this.request("DescribeScoresV2", req, cb)
+  }
+
+  /**
+   * 获取项目上报量
+   */
+  async DescribeDataReportCountV2(
+    req: DescribeDataReportCountV2Request,
+    cb?: (error: string, rep: DescribeDataReportCountV2Response) => void
+  ): Promise<DescribeDataReportCountV2Response> {
+    return this.request("DescribeDataReportCountV2", req, cb)
   }
 
   /**
@@ -665,23 +811,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建 RUM 业务系统
+   * 获取项目下的UV列表
    */
-  async CreateTawInstance(
-    req: CreateTawInstanceRequest,
-    cb?: (error: string, rep: CreateTawInstanceResponse) => void
-  ): Promise<CreateTawInstanceResponse> {
-    return this.request("CreateTawInstance", req, cb)
+  async DescribeUvList(
+    req: DescribeUvListRequest,
+    cb?: (error: string, rep: DescribeUvListResponse) => void
+  ): Promise<DescribeUvListResponse> {
+    return this.request("DescribeUvList", req, cb)
   }
 
   /**
-   * 获取DescribeDataFetchUrl信息
+   * 获取DescribeDataFetchProject信息。已下线，请使用DescribeDataFetchUrl
    */
-  async DescribeDataFetchUrl(
-    req: DescribeDataFetchUrlRequest,
-    cb?: (error: string, rep: DescribeDataFetchUrlResponse) => void
-  ): Promise<DescribeDataFetchUrlResponse> {
-    return this.request("DescribeDataFetchUrl", req, cb)
+  async DescribeDataFetchProject(
+    req: DescribeDataFetchProjectRequest,
+    cb?: (error: string, rep: DescribeDataFetchProjectResponse) => void
+  ): Promise<DescribeDataFetchProjectResponse> {
+    return this.request("DescribeDataFetchProject", req, cb)
   }
 
   /**

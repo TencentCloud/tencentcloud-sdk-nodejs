@@ -56,7 +56,7 @@ export interface CreateTawInstanceRequest {
    */
   BuyingChannel?: string
   /**
-   * 预付费资源包类型(仅预付费需要)
+   * 资源包类型：1=5百万/30天，2=10百万/30天，3=50百万/180天，4=100百万/180天，5=300百万/180天，6=500百万/180天，7=1000百万/180天，8=2500百万/180天，9=10000百万/360天（单位：上报量=百万条，周期=天）
    */
   ResourcePackageType?: number
   /**
@@ -68,7 +68,7 @@ export interface CreateTawInstanceRequest {
    */
   InstanceType?: number
   /**
-   * 自动续费类型
+   * 自动续费类型：0=不自动续费，1=开启自动续费；开启时需填写 AutoRenewalThreshold（1~50%）；同一实例最多允许存在 1 个自动续费资源包。
    */
   AutoRenewalType?: number
   /**
@@ -162,7 +162,7 @@ export interface DescribeDataFetchProjectRequest {
    */
   Browser?: string
   /**
-   * 耗时计算方式
+   * 耗时口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。
    */
   CostType?: string
   /**
@@ -174,7 +174,7 @@ export interface DescribeDataFetchProjectRequest {
    */
   Env?: string
   /**
-   * httpcode响应码
+   * HTTP 状态码（tag 值）：用于过滤字段 status；取值一般为 200/301/404/500 等，也可配合 4xx/5xx 统计逻辑使用
    */
   Status?: string
   /**
@@ -233,6 +233,61 @@ export interface DescribeProjectLimitsResponse {
    * 上报率数组列表
    */
   ProjectLimitSet?: Array<ProjectLimit>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTawInstances请求参数结构体
+ */
+export interface DescribeTawInstancesRequest {
+  /**
+   * 计费状态
+   */
+  ChargeStatuses?: Array<number | bigint>
+  /**
+   * 计费类型
+   */
+  ChargeTypes?: Array<number | bigint>
+  /**
+   * 分页Limit
+   */
+  Limit?: number
+  /**
+   * 分页Offset
+   */
+  Offset?: number
+  /**
+   * 片区Id
+   */
+  AreaIds?: Array<number | bigint>
+  /**
+   * 实例状态(1=创建中，2=运行中，3=异常，4=重启中，5=停止中，6=已停止，7=销毁中，8=已销毁), 该参数已废弃，请在Filters内注明
+   * @deprecated
+   */
+  InstanceStatuses?: Array<number | bigint>
+  /**
+   * 实例Id, 该参数已废弃，请在Filters内注明
+   * @deprecated
+   */
+  InstanceIds?: Array<string>
+  /**
+   * 过滤参数；demo模式传{"Name": "IsDemo", "Values":["1"]}
+   */
+  Filters?: Array<Filter>
+  /**
+   * 该参数已废弃，demo模式请在Filters内注明
+   * @deprecated
+   */
+  IsDemo?: number
+}
+
+/**
+ * ResumeProject返回参数结构体
+ */
+export interface ResumeProjectResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -366,6 +421,136 @@ export interface StopInstanceRequest {
 }
 
 /**
+ * DescribeDataStaticUrlV2请求参数结构体
+ */
+export interface DescribeDataStaticUrlV2Request {
+  /**
+   * 开始时间
+   */
+  StartTime: number
+  /**
+   * pagepv：性能视图，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图//ext1视图等等
+   */
+  Type: string
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 项目ID
+   */
+  ID: number
+  /**
+   * 自定义2
+   */
+  ExtSecond?: string
+  /**
+   * 浏览器引擎
+   */
+  Engine?: string
+  /**
+   * 运营商
+   */
+  Isp?: string
+  /**
+   * 来源页面
+   */
+  From?: string
+  /**
+   * 日志等级
+   */
+  Level?: string
+  /**
+   * 品牌
+   */
+  Brand?: string
+  /**
+   * 地区
+   */
+  Area?: string
+  /**
+   * 版本
+   */
+  VersionNum?: string
+  /**
+   * 平台
+   */
+  Platform?: string
+  /**
+   * 自定义3
+   */
+  ExtThird?: string
+  /**
+   * 自定义1
+   */
+  ExtFirst?: string
+  /**
+   * 网络类型
+   */
+  NetType?: string
+  /**
+   * 机型
+   */
+  Device?: string
+  /**
+   * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
+   */
+  IsAbroad?: string
+  /**
+   * 操作系统
+   */
+  Os?: string
+  /**
+   * 浏览器
+   */
+  Browser?: string
+  /**
+   * 耗时计算方式
+   */
+  CostType?: string
+  /**
+   * 来源
+   */
+  Url?: string
+  /**
+   * 环境
+   */
+  Env?: string
+  /**
+   * 自定义4
+   */
+  ExtFourth?: string
+  /**
+   * 自定义5
+   */
+  ExtFifth?: string
+  /**
+   * 自定义6
+   */
+  ExtSixth?: string
+  /**
+   * 自定义7
+   */
+  ExtSeventh?: string
+  /**
+   * 自定义8
+   */
+  ExtEighth?: string
+  /**
+   * 自定义9
+   */
+  ExtNinth?: string
+  /**
+   * 自定义10
+   */
+  ExtTenth?: string
+  /**
+   * 时间段
+   */
+  Granularity?: string
+}
+
+/**
  * ModifyInstance请求参数结构体
  */
 export interface ModifyInstanceRequest {
@@ -381,6 +566,20 @@ export interface ModifyInstanceRequest {
    * 新的实例描述(长度最大不超过1024)
    */
   InstanceDesc?: string
+}
+
+/**
+ * DescribeDataStaticProjectV2返回参数结构体
+ */
+export interface DescribeDataStaticProjectV2Response {
+  /**
+   * 返回值
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -507,6 +706,104 @@ export interface DescribeScoresRequest {
 }
 
 /**
+ * project Score分数实体
+ */
+export interface ScoreInfoV2 {
+  /**
+   * 项目id
+   */
+  ProjectID?: number
+  /**
+   * 项目总分
+   */
+  Score?: number
+  /**
+   * API性能评分
+   */
+  ApiPerformanceScore?: number
+  /**
+   * API可用性评分
+   */
+  ApiAvailableScore?: number
+  /**
+   * API调用总数
+   */
+  ApiNum?: number
+  /**
+   * API失败次数
+   */
+  ApiFail?: number
+  /**
+   * API平均持续时间
+   */
+  ApiDuration?: number
+  /**
+   * 页面性能评分
+   */
+  PagePerformanceScore?: number
+  /**
+   * 页面浏览量
+   */
+  PagePv?: number
+  /**
+   * 独立访客数
+   */
+  PageUv?: number
+  /**
+   * 页面错误数
+   */
+  PageError?: number
+  /**
+   * 首屏时间
+   */
+  PageDuration?: number
+  /**
+   * 平均 LCP
+   */
+  PageLCP?: number
+  /**
+   * 平均 FID
+   */
+  PageFID?: number
+  /**
+   * 平均 CLS
+   */
+  PageCLS?: number
+  /**
+   * 平均 FCP
+   */
+  PageFCP?: number
+  /**
+   * 平均 INP
+   */
+  PageINP?: number
+  /**
+   * JavaScript错误评分
+   */
+  JsErrorScore?: number
+  /**
+   * 静态资源可用性评分
+   */
+  StaticAvailableScore?: number
+  /**
+   * 静态资源性能评分
+   */
+  StaticPerformanceScore?: number
+  /**
+   * 静态资源请求总数
+   */
+  StaticNum?: number
+  /**
+   * 静态资源加载失败数
+   */
+  StaticFail?: number
+  /**
+   * 静态资源加载时间
+   */
+  StaticDuration?: number
+}
+
+/**
  * DescribeDataReportCount请求参数结构体
  */
 export interface DescribeDataReportCountRequest {
@@ -530,6 +827,136 @@ export interface DescribeDataReportCountRequest {
    * 实例ID
    */
   InstanceID?: string
+}
+
+/**
+ * DescribeDataStaticResourceV2请求参数结构体
+ */
+export interface DescribeDataStaticResourceV2Request {
+  /**
+   * 开始时间
+   */
+  StartTime: number
+  /**
+   * top：资源top视图，count40x：40X视图，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图//ext1视图等等
+   */
+  Type: string
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 项目ID
+   */
+  ID: number
+  /**
+   * 自定义2
+   */
+  ExtSecond?: string
+  /**
+   * 浏览器引擎
+   */
+  Engine?: string
+  /**
+   * 运营商
+   */
+  Isp?: string
+  /**
+   * 来源页面
+   */
+  From?: string
+  /**
+   * 日志等级
+   */
+  Level?: string
+  /**
+   * 品牌
+   */
+  Brand?: string
+  /**
+   * 地区
+   */
+  Area?: string
+  /**
+   * 版本
+   */
+  VersionNum?: string
+  /**
+   * 平台
+   */
+  Platform?: string
+  /**
+   * 自定义3
+   */
+  ExtThird?: string
+  /**
+   * 自定义1
+   */
+  ExtFirst?: string
+  /**
+   * 网络类型
+   */
+  NetType?: string
+  /**
+   * 机型
+   */
+  Device?: string
+  /**
+   * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
+   */
+  IsAbroad?: string
+  /**
+   * 操作系统
+   */
+  Os?: string
+  /**
+   * 浏览器
+   */
+  Browser?: string
+  /**
+   * 耗时计算方式
+   */
+  CostType?: string
+  /**
+   * 来源
+   */
+  Url?: string
+  /**
+   * 环境
+   */
+  Env?: string
+  /**
+   * 自定义4
+   */
+  ExtFourth?: string
+  /**
+   * 自定义5
+   */
+  ExtFifth?: string
+  /**
+   * 自定义6
+   */
+  ExtSixth?: string
+  /**
+   * 自定义7
+   */
+  ExtSeventh?: string
+  /**
+   * 自定义8
+   */
+  ExtEighth?: string
+  /**
+   * 自定义9
+   */
+  ExtNinth?: string
+  /**
+   * 自定义10
+   */
+  ExtTenth?: string
+  /**
+   * 时间段
+   */
+  Granularity?: string
 }
 
 /**
@@ -649,7 +1076,7 @@ export interface DescribeDataCustomUrlRequest {
    */
   Browser?: string
   /**
-   * 耗时计算方式
+   * 耗时口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（使用 percentile2 计算分位数）；"avg" 表示均值（使用 avg 计算）。
    */
   CostType?: string
   /**
@@ -670,6 +1097,20 @@ export interface DescribeUvListResponse {
    * uv列表
    */
   ProjectUvSet: Array<RumUvInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDataStaticUrlV2返回参数结构体
+ */
+export interface DescribeDataStaticUrlV2Response {
+  /**
+   * 返回值
+   */
+  Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -755,7 +1196,7 @@ export interface DescribeDataPvUrlStatisticsV2Request {
    */
   ExtFirst?: string
   /**
-   * 网络类型
+   * 网络类型（1,2,3,4,5,100），1表示WIFI, 2表示2G, 3表示3G, 4表示4G, 5表示5G, 6表示6G, 100表示未知
    */
   NetType?: string
   /**
@@ -823,17 +1264,55 @@ export interface DescribeDataPvUrlStatisticsV2Request {
 }
 
 /**
- * DescribeRumGroupLog返回参数结构体
+ * DescribeDataFetchUrlV2返回参数结构体
  */
-export interface DescribeRumGroupLogResponse {
+export interface DescribeDataFetchUrlV2Response {
   /**
-   * 返回字符串
+   * 返回值
    */
   Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateProject请求参数结构体
+ */
+export interface CreateProjectRequest {
+  /**
+   * 应用名称(不为空且最长为 200)
+   */
+  Name: string
+  /**
+   * 业务系统 ID
+   */
+  InstanceID: string
+  /**
+   * 项目抽样率(大于等于 0)
+   */
+  Rate: string
+  /**
+   * 是否开启聚类
+   */
+  EnableURLGroup: number
+  /**
+   * 项目类型("web", "mp", "android", "ios", "node", "hippy", "weex", "viola", "rn")
+   */
+  Type: string
+  /**
+   * 项目对应仓库地址(可选，最长为 256)
+   */
+  Repo?: string
+  /**
+   * 项目对应网页地址(可选，最长为 256)
+   */
+  URL?: string
+  /**
+   * 应用描述(可选，最长为 1000)
+   */
+  Desc?: string
 }
 
 /**
@@ -901,7 +1380,7 @@ export interface DescribeDataStaticUrlRequest {
    */
   ExtFirst?: string
   /**
-   * 网络类型
+   * 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。
    */
   NetType?: string
   /**
@@ -921,7 +1400,7 @@ export interface DescribeDataStaticUrlRequest {
    */
   Browser?: string
   /**
-   * 耗时计算方式
+   * 耗时口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。
    */
   CostType?: string
   /**
@@ -1017,6 +1496,20 @@ export interface DescribeDataReportCountV2Request {
 }
 
 /**
+ * DescribeDataPerformancePageV2返回参数结构体
+ */
+export interface DescribeDataPerformancePageV2Response {
+  /**
+   * 返回值
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeData请求参数结构体
  */
 export interface DescribeDataRequest {
@@ -1028,6 +1521,132 @@ export interface DescribeDataRequest {
    * 项目ID
    */
   ID: number
+}
+
+/**
+ * DescribeDataEventUrlV2请求参数结构体
+ */
+export interface DescribeDataEventUrlV2Request {
+  /**
+   * 开始时间
+   */
+  StartTime: number
+  /**
+   * allcount：性能视图，day：14天数据，condition：条件列表，ckuv：获取uv趋势，ckpv：获取pv趋势，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
+   */
+  Type: string
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 项目ID
+   */
+  ID: number
+  /**
+   * 自定义2
+   */
+  ExtSecond?: string
+  /**
+   * 浏览器引擎
+   */
+  Engine?: string
+  /**
+   * 运营商
+   */
+  Isp?: string
+  /**
+   * 来源页面
+   */
+  From?: string
+  /**
+   * 日志等级
+   */
+  Level?: string
+  /**
+   * 品牌
+   */
+  Brand?: string
+  /**
+   * 地区
+   */
+  Area?: string
+  /**
+   * 版本
+   */
+  VersionNum?: string
+  /**
+   * 平台
+   */
+  Platform?: string
+  /**
+   * 自定义3
+   */
+  ExtThird?: string
+  /**
+   * 自定义1
+   */
+  ExtFirst?: string
+  /**
+   * 网络类型
+   */
+  NetType?: string
+  /**
+   * 机型
+   */
+  Device?: string
+  /**
+   * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
+   */
+  IsAbroad?: string
+  /**
+   * 操作系统
+   */
+  Os?: string
+  /**
+   * 浏览器
+   */
+  Browser?: string
+  /**
+   * 筛选条件
+   */
+  Name?: string
+  /**
+   * 环境
+   */
+  Env?: string
+  /**
+   * 自定义4
+   */
+  ExtFourth?: string
+  /**
+   * 自定义5
+   */
+  ExtFifth?: string
+  /**
+   * 自定义6
+   */
+  ExtSixth?: string
+  /**
+   * 自定义7
+   */
+  ExtSeventh?: string
+  /**
+   * 自定义8
+   */
+  ExtEighth?: string
+  /**
+   * 自定义9
+   */
+  ExtNinth?: string
+  /**
+   * 自定义10
+   */
+  ExtTenth?: string
+  /**
+   * 时间段
+   */
+  Granularity?: string
 }
 
 /**
@@ -1059,13 +1678,17 @@ export interface DescribeTawAreasResponse {
 }
 
 /**
- * ResumeProject返回参数结构体
+ * ResumeInstance请求参数结构体
  */
-export interface ResumeProjectResponse {
+export interface ResumeInstanceRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 需要恢复的实例id
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * 修改是否包括白名单
+   */
+  IsModifyAll?: boolean
 }
 
 /**
@@ -1095,6 +1718,20 @@ export interface ModifyProjectLimitRequest {
 }
 
 /**
+ * DescribeDataEventUrlV2返回参数结构体
+ */
+export interface DescribeDataEventUrlV2Response {
+  /**
+   * 返回值
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteInstance返回参数结构体
  */
 export interface DeleteInstanceResponse {
@@ -1102,6 +1739,104 @@ export interface DeleteInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDataWebVitalsPageV2请求参数结构体
+ */
+export interface DescribeDataWebVitalsPageV2Request {
+  /**
+   * 开始时间
+   */
+  StartTime: number
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 项目ID
+   */
+  ID: number
+  /**
+   * 自定义2
+   */
+  ExtSecond?: string
+  /**
+   * 浏览器引擎
+   */
+  Engine?: string
+  /**
+   * 运营商
+   */
+  Isp?: string
+  /**
+   * 来源页面
+   */
+  From?: string
+  /**
+   * 日志等级
+   */
+  Level?: string
+  /**
+   * 类型暂无
+   */
+  Type?: string
+  /**
+   * 品牌
+   */
+  Brand?: string
+  /**
+   * 地区
+   */
+  Area?: string
+  /**
+   * 版本
+   */
+  VersionNum?: string
+  /**
+   * 平台
+   */
+  Platform?: string
+  /**
+   * 自定义3
+   */
+  ExtThird?: string
+  /**
+   * 自定义1
+   */
+  ExtFirst?: string
+  /**
+   * 网络类型
+   */
+  NetType?: string
+  /**
+   * 机型
+   */
+  Device?: string
+  /**
+   * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
+   */
+  IsAbroad?: string
+  /**
+   * 操作系统
+   */
+  Os?: string
+  /**
+   * 浏览器
+   */
+  Browser?: string
+  /**
+   * 耗时计算
+   */
+  CostType?: string
+  /**
+   * 环境
+   */
+  Env?: string
+  /**
+   * 时间段
+   */
+  Granularity?: string
 }
 
 /**
@@ -1151,7 +1886,7 @@ export interface DescribeDataPerformancePageRequest {
    */
   Area?: string
   /**
-   * 网络类型
+   * 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。
    */
   NetType?: string
   /**
@@ -1203,7 +1938,7 @@ export interface DescribeDataPerformancePageRequest {
    */
   From?: string
   /**
-   * 耗时计算方式
+   * 耗时口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。
    */
   CostType?: string
   /**
@@ -1211,7 +1946,7 @@ export interface DescribeDataPerformancePageRequest {
    */
   Env?: string
   /**
-   * 网络状态
+   * 网络状态(tag 值):用于过滤/聚合字段 netStatus；枚举值：0(正常)、1(弱网)、2(断网)、3(其他)。
    */
   NetStatus?: string
   /**
@@ -1231,17 +1966,29 @@ export interface DeleteReleaseFileRequest {
 }
 
 /**
- * ResumeInstance请求参数结构体
+ * DescribeScoresV2请求参数结构体
  */
-export interface ResumeInstanceRequest {
+export interface DescribeScoresV2Request {
   /**
-   * 需要恢复的实例id
+   * 开始时间
    */
-  InstanceId: string
+  StartTime: string
   /**
-   * 修改是否包括白名单
+   * 结束时间
    */
-  IsModifyAll?: boolean
+  EndTime: string
+  /**
+   * 项目 ID 列表
+   */
+  IDList?: Array<number | bigint>
+  /**
+   * 查询粒度，hour 或 day
+   */
+  Type?: string
+  /**
+   * 环境
+   */
+  Env?: string
 }
 
 /**
@@ -1309,7 +2056,7 @@ export interface DescribeDataFetchUrlRequest {
    */
   ExtFirst?: string
   /**
-   * 网络类型
+   * 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。
    */
   NetType?: string
   /**
@@ -1329,7 +2076,7 @@ export interface DescribeDataFetchUrlRequest {
    */
   Browser?: string
   /**
-   * 耗时计算方式
+   * 耗时口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。
    */
   CostType?: string
   /**
@@ -1341,7 +2088,7 @@ export interface DescribeDataFetchUrlRequest {
    */
   Env?: string
   /**
-   * httpcode响应码
+   * HTTP 状态码（tag 值）：用于过滤字段 status；支持 4xx（status =~ /4[0-9]{2}/）和 5xx（status =~ /5[0-9]{2}/）等错误码统计。
    */
   Status?: string
   /**
@@ -1417,9 +2164,13 @@ export interface CreateProjectResponse {
 }
 
 /**
- * StopInstance返回参数结构体
+ * DescribeDataLogUrlStatisticsV2返回参数结构体
  */
-export interface StopInstanceResponse {
+export interface DescribeDataLogUrlStatisticsV2Response {
+  /**
+   * 返回值
+   */
+  Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1427,13 +2178,17 @@ export interface StopInstanceResponse {
 }
 
 /**
- * DescribeProjectLimits请求参数结构体
+ * DescribeDataCustomUrl返回参数结构体
  */
-export interface DescribeProjectLimitsRequest {
+export interface DescribeDataCustomUrlResponse {
   /**
-   * 项目ID
+   * 返回值
    */
-  ProjectID: number
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1473,7 +2228,7 @@ export interface DescribeDataPvUrlStatisticsRequest {
    */
   StartTime: number
   /**
-   * allcount：性能视图，day：14天数据，vp：性能，ckuv：uv，ckpv：pv，condition：条件列表，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
+   * allcount：性能视图，day：14天数据，vp：性能，ckuv：uv，ckpv：pv，condition：条件列表，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等
    */
   Type: string
   /**
@@ -1529,7 +2284,7 @@ export interface DescribeDataPvUrlStatisticsRequest {
    */
   ExtFirst?: string
   /**
-   * 网络类型
+   * 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。
    */
   NetType?: string
   /**
@@ -1703,7 +2458,7 @@ export interface DescribeDataStaticProjectRequest {
    */
   Browser?: string
   /**
-   * 耗时计算
+   * 耗时口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。
    */
   CostType?: string
   /**
@@ -1740,6 +2495,148 @@ export interface DescribeRumStatsLogListRequest {
    * 项目ID（必填）
    */
   ID: number
+}
+
+/**
+ * DescribeDataBridgeUrlV2请求参数结构体
+ */
+export interface DescribeDataBridgeUrlV2Request {
+  /**
+   * 项目ID
+   */
+  ID: number
+  /**
+   * 开始时间
+   */
+  StartTime: number
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * pagepv：性能视图，allcount：性能视图，falls：页面加载瀑布图，samp：首屏时间，day：14天数据，nettype：网络/平台视图，performance：页面性能TOP视图，version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：ISP视图/地区视图/浏览器视图等
+   */
+  Type: string
+  /**
+   * 日志等级
+   */
+  Level?: string
+  /**
+   * 运营商
+   */
+  Isp?: string
+  /**
+   * 地区
+   */
+  Area?: string
+  /**
+   * 网络类型
+   */
+  NetType?: string
+  /**
+   * 平台
+   */
+  Platform?: string
+  /**
+   * 机型
+   */
+  Device?: string
+  /**
+   * 版本
+   */
+  VersionNum?: string
+  /**
+   * 自定义1
+   */
+  ExtFirst?: string
+  /**
+   * 自定义2
+   */
+  ExtSecond?: string
+  /**
+   * 自定义3
+   */
+  ExtThird?: string
+  /**
+   * 是否海外
+   */
+  IsAbroad?: string
+  /**
+   * 浏览器
+   */
+  Browser?: string
+  /**
+   * 操作系统
+   */
+  Os?: string
+  /**
+   * 浏览器引擎
+   */
+  Engine?: string
+  /**
+   * 品牌
+   */
+  Brand?: string
+  /**
+   * 来源页面
+   */
+  From?: string
+  /**
+   * 耗时计算方式
+   */
+  CostType?: string
+  /**
+   * 环境变量
+   */
+  Env?: string
+  /**
+   * url名称
+   */
+  Name?: string
+  /**
+   * http状态码
+   */
+  Status?: string
+  /**
+   * retcode
+   */
+  Ret?: string
+  /**
+   * 网络状态
+   */
+  NetStatus?: string
+  /**
+   * 自定义4
+   */
+  ExtFourth?: string
+  /**
+   * 自定义5
+   */
+  ExtFifth?: string
+  /**
+   * 自定义6
+   */
+  ExtSixth?: string
+  /**
+   * 自定义7
+   */
+  ExtSeventh?: string
+  /**
+   * 自定义8
+   */
+  ExtEighth?: string
+  /**
+   * 自定义9
+   */
+  ExtNinth?: string
+  /**
+   * 自定义10
+   */
+  ExtTenth?: string
+  /**
+   * 时间段
+   */
+  Granularity?: string
 }
 
 /**
@@ -1809,41 +2706,17 @@ export interface ProjectLimit {
 }
 
 /**
- * CreateProject请求参数结构体
+ * DescribeRumGroupLog返回参数结构体
  */
-export interface CreateProjectRequest {
+export interface DescribeRumGroupLogResponse {
   /**
-   * 应用名称(不为空且最长为 200)
+   * 返回字符串
    */
-  Name: string
+  Result?: string
   /**
-   * 业务系统 ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceID: string
-  /**
-   * 项目抽样率(大于等于 0)
-   */
-  Rate: string
-  /**
-   * 是否开启聚类
-   */
-  EnableURLGroup: number
-  /**
-   * 项目类型("web", "mp", "android", "ios", "node", "hippy", "weex", "viola", "rn")
-   */
-  Type: string
-  /**
-   * 项目对应仓库地址(可选，最长为 256)
-   */
-  Repo?: string
-  /**
-   * 项目对应网页地址(可选，最长为 256)
-   */
-  URL?: string
-  /**
-   * 应用描述(可选，最长为 1000)
-   */
-  Desc?: string
+  RequestId?: string
 }
 
 /**
@@ -1883,6 +2756,16 @@ export interface CreateWhitelistRequest {
 }
 
 /**
+ * StopInstance返回参数结构体
+ */
+export interface StopInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDataPvUrlStatistics返回参数结构体
  */
 export interface DescribeDataPvUrlStatisticsResponse {
@@ -1915,17 +2798,13 @@ export interface DescribeDataLogUrlInfoRequest {
 }
 
 /**
- * DescribeDataCustomUrl返回参数结构体
+ * DescribeProjectLimits请求参数结构体
  */
-export interface DescribeDataCustomUrlResponse {
+export interface DescribeProjectLimitsRequest {
   /**
-   * 返回值
+   * 项目ID
    */
-  Result?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ProjectID: number
 }
 
 /**
@@ -2041,7 +2920,7 @@ export interface DescribeDataSetUrlStatisticsRequest {
    */
   ExtFirst?: string
   /**
-   * 网络类型
+   * 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。
    */
   NetType?: string
   /**
@@ -2061,7 +2940,7 @@ export interface DescribeDataSetUrlStatisticsRequest {
    */
   Browser?: string
   /**
-   * 耗时计算
+   * 耗时/数据量口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。
    */
   CostType?: string
   /**
@@ -2069,9 +2948,23 @@ export interface DescribeDataSetUrlStatisticsRequest {
    */
   Env?: string
   /**
-   * 获取package
+   * 小程序包类型（tag 值）：用于过滤字段 type（请求参数名为 PackageType）；取值由上报数据决定，可通过 Type=condition（show tag values）获取可选值集合。
    */
   PackageType?: string
+}
+
+/**
+ * DescribeDataWebVitalsPageV2返回参数结构体
+ */
+export interface DescribeDataWebVitalsPageV2Response {
+  /**
+   * 返回值
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2152,6 +3045,136 @@ export interface DescribeAppSingleCaseListRequest {
    * offset 参数
    */
   Offset?: number
+}
+
+/**
+ * DescribeDataSetUrlStatisticsV2请求参数结构体
+ */
+export interface DescribeDataSetUrlStatisticsV2Request {
+  /**
+   * 开始时间
+   */
+  StartTime: number
+  /**
+   * allcount：性能视图，data：小程序，component：小程序相关，day：14天数据，nettype：网络/平台视图，performance：页面性能TOP视图，version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：ISP视图/地区视图/浏览器视图等
+   */
+  Type: string
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 项目ID
+   */
+  ID: number
+  /**
+   * 自定义2
+   */
+  ExtSecond?: string
+  /**
+   * 浏览器引擎
+   */
+  Engine?: string
+  /**
+   * 运营商
+   */
+  Isp?: string
+  /**
+   * 来源页面
+   */
+  From?: string
+  /**
+   * 日志等级
+   */
+  Level?: string
+  /**
+   * 品牌
+   */
+  Brand?: string
+  /**
+   * 地区
+   */
+  Area?: string
+  /**
+   * 版本
+   */
+  VersionNum?: string
+  /**
+   * 平台
+   */
+  Platform?: string
+  /**
+   * 自定义3
+   */
+  ExtThird?: string
+  /**
+   * 自定义1
+   */
+  ExtFirst?: string
+  /**
+   * 网络类型
+   */
+  NetType?: string
+  /**
+   * 机型
+   */
+  Device?: string
+  /**
+   * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
+   */
+  IsAbroad?: string
+  /**
+   * 操作系统
+   */
+  Os?: string
+  /**
+   * 浏览器
+   */
+  Browser?: string
+  /**
+   * 耗时计算
+   */
+  CostType?: string
+  /**
+   * 环境
+   */
+  Env?: string
+  /**
+   * 获取package
+   */
+  PackageType?: string
+  /**
+   * 自定义4
+   */
+  ExtFourth?: string
+  /**
+   * 自定义5
+   */
+  ExtFifth?: string
+  /**
+   * 自定义6
+   */
+  ExtSixth?: string
+  /**
+   * 自定义7
+   */
+  ExtSeventh?: string
+  /**
+   * 自定义8
+   */
+  ExtEighth?: string
+  /**
+   * 自定义9
+   */
+  ExtNinth?: string
+  /**
+   * 自定义10
+   */
+  ExtTenth?: string
+  /**
+   * 时间段
+   */
+  Granularity?: string
 }
 
 /**
@@ -2237,17 +3260,133 @@ export interface DeleteReleaseFileResponse {
 }
 
 /**
- * DescribeScores返回参数结构体
+ * DescribeDataCustomUrlV2请求参数结构体
  */
-export interface DescribeScoresResponse {
+export interface DescribeDataCustomUrlV2Request {
   /**
-   * 数组
+   * 开始时间
    */
-  ScoreSet?: Array<ScoreInfo>
+  StartTime: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * top：资源top视图，allcount：性能视图，day：14天数据，condition：条件列表，pagepv：性能视图，area：请求速度分布，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
    */
-  RequestId?: string
+  Type: string
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 项目ID
+   */
+  ID: number
+  /**
+   * 自定义2
+   */
+  ExtSecond?: string
+  /**
+   * 浏览器引擎
+   */
+  Engine?: string
+  /**
+   * 运营商
+   */
+  Isp?: string
+  /**
+   * 来源页面
+   */
+  From?: string
+  /**
+   * 日志等级
+   */
+  Level?: string
+  /**
+   * 品牌
+   */
+  Brand?: string
+  /**
+   * 地区
+   */
+  Area?: string
+  /**
+   * 版本
+   */
+  VersionNum?: string
+  /**
+   * 平台
+   */
+  Platform?: string
+  /**
+   * 自定义3
+   */
+  ExtThird?: string
+  /**
+   * 自定义1
+   */
+  ExtFirst?: string
+  /**
+   * 网络类型（1,2,3,4,5,100），1表示WIFI, 2表示2G, 3表示3G, 4表示4G, 5表示5G, 6表示6G, 100表示未知。
+   */
+  NetType?: string
+  /**
+   * 机型
+   */
+  Device?: string
+  /**
+   * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
+   */
+  IsAbroad?: string
+  /**
+   * 操作系统
+   */
+  Os?: string
+  /**
+   * 浏览器
+   */
+  Browser?: string
+  /**
+   * 耗时计算方式
+   */
+  CostType?: string
+  /**
+   * 自定义测速的key的值
+   */
+  Url?: string
+  /**
+   * 环境
+   */
+  Env?: string
+  /**
+   * 自定义4
+   */
+  ExtFourth?: string
+  /**
+   * 自定义5
+   */
+  ExtFifth?: string
+  /**
+   * 自定义6
+   */
+  ExtSixth?: string
+  /**
+   * 自定义7
+   */
+  ExtSeventh?: string
+  /**
+   * 自定义8
+   */
+  ExtEighth?: string
+  /**
+   * 自定义9
+   */
+  ExtNinth?: string
+  /**
+   * 自定义10
+   */
+  ExtTenth?: string
+  /**
+   * 时间段
+   */
+  Granularity?: string
 }
 
 /**
@@ -2315,7 +3454,7 @@ export interface DescribeDataLogUrlStatisticsRequest {
    */
   ExtFirst?: string
   /**
-   * 网络类型
+   * 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。
    */
   NetType?: string
   /**
@@ -2345,29 +3484,13 @@ export interface DescribeDataLogUrlStatisticsRequest {
 }
 
 /**
- * DescribeReleaseFileSign返回参数结构体
+ * DescribeDataBridgeUrlV2返回参数结构体
  */
-export interface DescribeReleaseFileSignResponse {
+export interface DescribeDataBridgeUrlV2Response {
   /**
-   * 临时密钥key
+   * 返回值
    */
-  SecretKey?: string
-  /**
-   * 临时密钥 id
-   */
-  SecretID?: string
-  /**
-   * 临时密钥临时 token
-   */
-  SessionToken?: string
-  /**
-   * 开始时间戳
-   */
-  StartTime?: number
-  /**
-   * 过期时间戳
-   */
-  ExpiredTime?: number
+  Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2375,48 +3498,17 @@ export interface DescribeReleaseFileSignResponse {
 }
 
 /**
- * DescribeTawInstances请求参数结构体
+ * DescribeScores返回参数结构体
  */
-export interface DescribeTawInstancesRequest {
+export interface DescribeScoresResponse {
   /**
-   * 计费状态
+   * 数组
    */
-  ChargeStatuses?: Array<number | bigint>
+  ScoreSet?: Array<ScoreInfo>
   /**
-   * 计费类型
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ChargeTypes?: Array<number | bigint>
-  /**
-   * 分页Limit
-   */
-  Limit?: number
-  /**
-   * 分页Offset
-   */
-  Offset?: number
-  /**
-   * 片区Id
-   */
-  AreaIds?: Array<number | bigint>
-  /**
-   * 实例状态(1=创建中，2=运行中，3=异常，4=重启中，5=停止中，6=已停止，7=销毁中，8=已销毁), 该参数已废弃，请在Filters内注明
-   * @deprecated
-   */
-  InstanceStatuses?: Array<number | bigint>
-  /**
-   * 实例Id, 该参数已废弃，请在Filters内注明
-   * @deprecated
-   */
-  InstanceIds?: Array<string>
-  /**
-   * 过滤参数；demo模式传{"Name": "IsDemo", "Values":["1"]}
-   */
-  Filters?: Array<Filter>
-  /**
-   * 该参数已废弃，demo模式请在Filters内注明
-   * @deprecated
-   */
-  IsDemo?: number
+  RequestId?: string
 }
 
 /**
@@ -2443,6 +3535,20 @@ export interface DescribeTawAreasRequest {
    * 分页Offset，默认根据AreaKeys和AreaStatuses参数查询所有。
    */
   Offset?: number
+}
+
+/**
+ * DescribeDataCustomUrlV2返回参数结构体
+ */
+export interface DescribeDataCustomUrlV2Response {
+  /**
+   * 返回值
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2529,6 +3635,36 @@ export interface DescribeDataEventUrlResponse {
 }
 
 /**
+ * DescribeReleaseFileSign返回参数结构体
+ */
+export interface DescribeReleaseFileSignResponse {
+  /**
+   * 临时密钥key
+   */
+  SecretKey?: string
+  /**
+   * 临时密钥 id
+   */
+  SecretID?: string
+  /**
+   * 临时密钥临时 token
+   */
+  SessionToken?: string
+  /**
+   * 开始时间戳
+   */
+  StartTime?: number
+  /**
+   * 过期时间戳
+   */
+  ExpiredTime?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDataWebVitalsPage请求参数结构体
  */
 export interface DescribeDataWebVitalsPageRequest {
@@ -2557,7 +3693,7 @@ export interface DescribeDataWebVitalsPageRequest {
    */
   Isp?: string
   /**
-   * 来源页面
+   * 查询维度：from=按页面来源(from)聚合输出；其他值/空值=输出整体汇总。
    */
   From?: string
   /**
@@ -2593,7 +3729,7 @@ export interface DescribeDataWebVitalsPageRequest {
    */
   ExtFirst?: string
   /**
-   * 网络类型
+   * 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。
    */
   NetType?: string
   /**
@@ -2613,7 +3749,7 @@ export interface DescribeDataWebVitalsPageRequest {
    */
   Browser?: string
   /**
-   * 耗时计算
+   * Web Vitals 口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。
    */
   CostType?: string
   /**
@@ -2687,7 +3823,7 @@ export interface DescribeDataFetchUrlInfoRequest {
    */
   ExtFirst?: string
   /**
-   * 网络类型
+   * 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。
    */
   NetType?: string
   /**
@@ -2707,7 +3843,7 @@ export interface DescribeDataFetchUrlInfoRequest {
    */
   Browser?: string
   /**
-   * 耗时计算方式
+   * 耗时口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。
    */
   CostType?: string
   /**
@@ -2881,6 +4017,136 @@ export interface DescribeDataWebVitalsPageResponse {
 }
 
 /**
+ * DescribeDataStaticProjectV2请求参数结构体
+ */
+export interface DescribeDataStaticProjectV2Request {
+  /**
+   * 开始时间
+   */
+  StartTime: number
+  /**
+   * allcount：性能视图，day：14天数据，condition：条件列表，area：请求速度分布，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
+   */
+  Type: string
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 项目ID
+   */
+  ID: number
+  /**
+   * 自定义2
+   */
+  ExtSecond?: string
+  /**
+   * 浏览器引擎
+   */
+  Engine?: string
+  /**
+   * 运营商
+   */
+  Isp?: string
+  /**
+   * 来源页面
+   */
+  From?: string
+  /**
+   * 日志等级（1表示白名单日志，2表示一般日志，4表示错误日志，8表示Promise 错误，16表示Ajax 请求异常，32表示JS 加载异常，64表示图片加载异常，128表示css 加载异常，256表示console.error，512表示音视频资源异常，1024表示retcode 异常，2048表示aegis report，4096表示PV日志，8192表示自定义事件，16384表示小程序 页面不存在，32768表示websocket错误，65536表示js bridge错误）
+   */
+  Level?: string
+  /**
+   * 品牌
+   */
+  Brand?: string
+  /**
+   * 地区
+   */
+  Area?: string
+  /**
+   * 版本
+   */
+  VersionNum?: string
+  /**
+   * 平台
+   */
+  Platform?: string
+  /**
+   * 自定义3
+   */
+  ExtThird?: string
+  /**
+   * 自定义1
+   */
+  ExtFirst?: string
+  /**
+   * 网络类型（1,2,3,4,5,100），1表示WIFI, 2表示2G, 3表示3G, 4表示4G, 5表示5G, 6表示6G, 100表示未知。
+   */
+  NetType?: string
+  /**
+   * 机型
+   */
+  Device?: string
+  /**
+   * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
+   */
+  IsAbroad?: string
+  /**
+   * 操作系统
+   */
+  Os?: string
+  /**
+   * 浏览器
+   */
+  Browser?: string
+  /**
+   * 耗时计算
+   */
+  CostType?: string
+  /**
+   * 来源
+   */
+  Url?: Array<string>
+  /**
+   * 环境
+   */
+  Env?: string
+  /**
+   * 自定义4
+   */
+  ExtFourth?: string
+  /**
+   * 自定义5
+   */
+  ExtFifth?: string
+  /**
+   * 自定义6
+   */
+  ExtSixth?: string
+  /**
+   * 自定义7
+   */
+  ExtSeventh?: string
+  /**
+   * 自定义8
+   */
+  ExtEighth?: string
+  /**
+   * 自定义9
+   */
+  ExtNinth?: string
+  /**
+   * 自定义10
+   */
+  ExtTenth?: string
+  /**
+   * 时间段
+   */
+  Granularity?: string
+}
+
+/**
  * DescribeProjects请求参数结构体
  */
 export interface DescribeProjectsRequest {
@@ -2968,7 +4234,8 @@ export interface DescribeDataEventUrlRequest {
    */
   ExtFirst?: string
   /**
-   * 网络类型
+   * netType | 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。也可通过 Type=condition（show tag values）查询当前数据集中的实际可选值。
+
    */
   NetType?: string
   /**
@@ -3005,6 +4272,20 @@ export interface DescribeAppDimensionMetricsResponse {
    * 查询数据返回
    */
   Data?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDataSetUrlStatisticsV2返回参数结构体
+ */
+export interface DescribeDataSetUrlStatisticsV2Response {
+  /**
+   * 返回值
+   */
+  Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3113,6 +4394,148 @@ export interface DescribeWhitelistsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDataFetchUrlV2请求参数结构体
+ */
+export interface DescribeDataFetchUrlV2Request {
+  /**
+   * 开始时间
+   */
+  StartTime: number
+  /**
+   * allcount：性能视图，pagepv：pv视图，day：14天数据，count40x：40X视图，count50x：50X视图，count5xand4x：40∑50视图，top：资源top视图，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
+   */
+  Type: string
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 项目ID
+   */
+  ID: number
+  /**
+   * 自定义2
+   */
+  ExtSecond?: string
+  /**
+   * 浏览器引擎
+   */
+  Engine?: string
+  /**
+   * 运营商
+   */
+  Isp?: string
+  /**
+   * 来源页面
+   */
+  From?: string
+  /**
+   * 日志等级
+   */
+  Level?: string
+  /**
+   * 品牌
+   */
+  Brand?: string
+  /**
+   * 地区
+   */
+  Area?: string
+  /**
+   * 版本
+   */
+  VersionNum?: string
+  /**
+   * 平台
+   */
+  Platform?: string
+  /**
+   * 自定义3
+   */
+  ExtThird?: string
+  /**
+   * 自定义1
+   */
+  ExtFirst?: string
+  /**
+   * 网络类型
+   */
+  NetType?: string
+  /**
+   * 机型
+   */
+  Device?: string
+  /**
+   * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
+   */
+  IsAbroad?: string
+  /**
+   * 操作系统
+   */
+  Os?: string
+  /**
+   * 浏览器
+   */
+  Browser?: string
+  /**
+   * 耗时计算方式
+   */
+  CostType?: string
+  /**
+   * 来源
+   */
+  Url?: string
+  /**
+   * 环境
+   */
+  Env?: string
+  /**
+   * httpcode响应码
+   */
+  Status?: string
+  /**
+   * retcode
+   */
+  Ret?: string
+  /**
+   * 网络状态
+   */
+  NetStatus?: string
+  /**
+   * 自定义4
+   */
+  ExtFourth?: string
+  /**
+   * 自定义5
+   */
+  ExtFifth?: string
+  /**
+   * 自定义6
+   */
+  ExtSixth?: string
+  /**
+   * 自定义7
+   */
+  ExtSeventh?: string
+  /**
+   * 自定义8
+   */
+  ExtEighth?: string
+  /**
+   * 自定义9
+   */
+  ExtNinth?: string
+  /**
+   * 自定义10
+   */
+  ExtTenth?: string
+  /**
+   * 时间段
+   */
+  Granularity?: string
 }
 
 /**
@@ -3320,6 +4743,140 @@ export interface DescribeRumLogListRequest {
 }
 
 /**
+ * DescribeDataPerformancePageV2请求参数结构体
+ */
+export interface DescribeDataPerformancePageV2Request {
+  /**
+   * 项目ID
+   */
+  ID: number
+  /**
+   * 开始时间
+   */
+  StartTime: number
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * pagepv：pv视图，allcount：性能视图，falls：页面加载瀑布图，samp：首屏时间，day：14天数据，nettype：网络/平台视图，performance：页面性能TOP视图，version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：ISP视图/地区视图/浏览器视图等
+   */
+  Type: string
+  /**
+   * 日志等级
+   */
+  Level?: string
+  /**
+   * 运营商
+   */
+  Isp?: string
+  /**
+   * 地区
+   */
+  Area?: string
+  /**
+   * 网络类型
+   */
+  NetType?: string
+  /**
+   * 平台
+   */
+  Platform?: string
+  /**
+   * 机型
+   */
+  Device?: string
+  /**
+   * 版本
+   */
+  VersionNum?: string
+  /**
+   * 自定义1
+   */
+  ExtFirst?: string
+  /**
+   * 自定义2
+   */
+  ExtSecond?: string
+  /**
+   * 自定义3
+   */
+  ExtThird?: string
+  /**
+   * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
+   */
+  IsAbroad?: string
+  /**
+   * 浏览器
+   */
+  Browser?: string
+  /**
+   * 操作系统
+   */
+  Os?: string
+  /**
+   * 浏览器引擎
+   */
+  Engine?: string
+  /**
+   * 品牌
+   */
+  Brand?: string
+  /**
+   * 来源页面
+   */
+  From?: string
+  /**
+   * 耗时计算方式
+   */
+  CostType?: string
+  /**
+   * 环境变量
+   */
+  Env?: string
+  /**
+   * 网络状态
+   */
+  NetStatus?: string
+  /**
+   * 是否返回webvitals数据
+   */
+  WebVitals?: boolean
+  /**
+   * 自定义4
+   */
+  ExtFourth?: string
+  /**
+   * 自定义5
+   */
+  ExtFifth?: string
+  /**
+   * 自定义6
+   */
+  ExtSixth?: string
+  /**
+   * 自定义7
+   */
+  ExtSeventh?: string
+  /**
+   * 自定义8
+   */
+  ExtEighth?: string
+  /**
+   * 自定义9
+   */
+  ExtNinth?: string
+  /**
+   * 自定义10
+   */
+  ExtTenth?: string
+  /**
+   * 时间段
+   */
+  Granularity?: string
+}
+
+/**
  * DescribeDataStaticResource请求参数结构体
  */
 export interface DescribeDataStaticResourceRequest {
@@ -3384,7 +4941,7 @@ export interface DescribeDataStaticResourceRequest {
    */
   ExtFirst?: string
   /**
-   * 网络类型
+   * 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。
    */
   NetType?: string
   /**
@@ -3404,7 +4961,7 @@ export interface DescribeDataStaticResourceRequest {
    */
   Browser?: string
   /**
-   * 耗时计算方式
+   * 耗时口径："50"/"75"/"90"/"95"/"99"/"99.5" 分别表示 TP50/TP75/TP90/TP95/TP99/TP99.5（percentile2）；"avg" 表示均值（avg）。
    */
   CostType?: string
   /**
@@ -3466,7 +5023,177 @@ export interface DescribeDataPvUrlInfoRequest {
    */
   StartTime: number
   /**
-   * 类型
+   * 查询类型（string）：当前后端实现固定按 from 聚合统计，未使用该字段（保留字段，传值不会影响结果）。
+   */
+  Type: string
+  /**
+   * 结束时间
+   */
+  EndTime: number
+  /**
+   * 项目ID
+   */
+  ID: number
+  /**
+   * 自定义2
+   */
+  ExtSecond?: string
+  /**
+   * 浏览器引擎
+   */
+  Engine?: string
+  /**
+   * 运营商
+   */
+  Isp?: string
+  /**
+   * 来源页面
+   */
+  From?: string
+  /**
+   * 日志等级
+   */
+  Level?: string
+  /**
+   * 品牌
+   */
+  Brand?: string
+  /**
+   * 地区
+   */
+  Area?: string
+  /**
+   * 版本
+   */
+  VersionNum?: string
+  /**
+   * 平台
+   */
+  Platform?: string
+  /**
+   * 自定义3
+   */
+  ExtThird?: string
+  /**
+   * 自定义1
+   */
+  ExtFirst?: string
+  /**
+   * 网络类型(tag 值):用于过滤/聚合字段 netType；枚举值：1(WiFi)、2(2G)、3(3G)、4(4G)、5(5G)、6(6G)、100(未知网络)。
+   */
+  NetType?: string
+  /**
+   * 机型
+   */
+  Device?: string
+  /**
+   * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
+   */
+  IsAbroad?: string
+  /**
+   * 操作系统
+   */
+  Os?: string
+  /**
+   * 浏览器
+   */
+  Browser?: string
+  /**
+   * 环境
+   */
+  Env?: string
+}
+
+/**
+ * CreateReleaseFile返回参数结构体
+ */
+export interface CreateReleaseFileResponse {
+  /**
+   * 调用结果
+   */
+  Msg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDataFetchProject返回参数结构体
+ */
+export interface DescribeDataFetchProjectResponse {
+  /**
+   * 返回值
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeScoresV2返回参数结构体
+ */
+export interface DescribeScoresV2Response {
+  /**
+   * 项目得分数组
+   */
+  ScoreSet?: Array<ScoreInfoV2>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 白名单
+ */
+export interface Whitelist {
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 实例ID
+   */
+  InstanceID?: string
+  /**
+   * 截止时间
+   */
+  Ttl?: string
+  /**
+   * 白名单自增ID
+   */
+  ID?: string
+  /**
+   * 业务唯一标识
+   */
+  WhitelistUin?: string
+  /**
+   * 创建者ID
+   */
+  CreateUser?: string
+  /**
+   * aid标识
+   */
+  Aid?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+}
+
+/**
+ * DescribeDataLogUrlStatisticsV2请求参数结构体
+ */
+export interface DescribeDataLogUrlStatisticsV2Request {
+  /**
+   * 开始时间
+   */
+  StartTime: number
+  /**
+   * analysis：异常分析，compare：异常列表对比，allcount：性能视图，condition：条件列表，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等等
    */
   Type: string
   /**
@@ -3542,75 +5269,45 @@ export interface DescribeDataPvUrlInfoRequest {
    */
   Browser?: string
   /**
-   * 环境
+   * 环境区分
    */
   Env?: string
-}
-
-/**
- * CreateReleaseFile返回参数结构体
- */
-export interface CreateReleaseFileResponse {
   /**
-   * 调用结果
+   * js异常信息
    */
-  Msg?: string
+  ErrorMsg?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 自定义4
    */
-  RequestId?: string
-}
-
-/**
- * DescribeDataFetchProject返回参数结构体
- */
-export interface DescribeDataFetchProjectResponse {
+  ExtFourth?: string
   /**
-   * 返回值
+   * 自定义5
    */
-  Result?: string
+  ExtFifth?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 自定义6
    */
-  RequestId?: string
-}
-
-/**
- * 白名单
- */
-export interface Whitelist {
+  ExtSixth?: string
   /**
-   * 备注
+   * 自定义7
    */
-  Remark?: string
+  ExtSeventh?: string
   /**
-   * 实例ID
+   * 自定义8
    */
-  InstanceID?: string
+  ExtEighth?: string
   /**
-   * 截止时间
+   * 自定义9
    */
-  Ttl?: string
+  ExtNinth?: string
   /**
-   * 白名单自增ID
+   * 自定义10
    */
-  ID?: string
+  ExtTenth?: string
   /**
-   * 业务唯一标识
+   * 时间段
    */
-  WhitelistUin?: string
-  /**
-   * 创建者ID
-   */
-  CreateUser?: string
-  /**
-   * aid标识
-   */
-  Aid?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
+  Granularity?: string
 }
 
 /**
@@ -3689,6 +5386,20 @@ export interface RumProject {
    * kafka旁路配置信息
    */
   Kafka?: Kafka
+}
+
+/**
+ * DescribeDataStaticResourceV2返回参数结构体
+ */
+export interface DescribeDataStaticResourceV2Response {
+  /**
+   * 返回值
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

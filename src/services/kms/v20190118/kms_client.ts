@@ -44,7 +44,7 @@ import {
   EnableKeyRequest,
   GetKeyRotationStatusRequest,
   ListAlgorithmsRequest,
-  Tag,
+  MemberAccount,
   ListKeyDetailResponse,
   GenerateDataKeyRequest,
   UpdateAliasResponse,
@@ -164,6 +164,7 @@ import {
   UnbindCloudResourceResponse,
   DescribeKeyResponse,
   CancelKeyArchiveRequest,
+  Tag,
   DisableKeyRotationRequest,
 } from "./kms_models"
 

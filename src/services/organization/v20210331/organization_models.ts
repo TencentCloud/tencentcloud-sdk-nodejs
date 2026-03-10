@@ -1113,6 +1113,45 @@ export interface DisablePolicyTypeResponse {
 }
 
 /**
+ * CAM用户同步信息
+ */
+export interface UserSyncProvisioning {
+  /**
+   * 描述。
+   */
+  Description?: string
+  /**
+   * CAM 用户同步的身份 ID。取值：
+当PrincipalType取值为Group时，该值为CIC用户组 ID（g-********）。
+当PrincipalType取值为User时，该值为CIC用户 ID（u-********）。
+   */
+  PrincipalId?: string
+  /**
+   * CAM 用户同步的身份类型。取值：
+
+User：表示该 CAM 用户同步的身份是CIC用户。
+Group：表示该 CAM 用户同步的身份是CIC用户组。
+   */
+  PrincipalType?: string
+  /**
+   * 同步的集团账号目标账号的UIN。
+   */
+  TargetUin?: number
+  /**
+   * 冲突策略。当CIC 用户同步到 CAM 时，如果 CAM 中存在同名用户时的处理策略。取值： KeepBoth：两者都保留。当CIC 用户被同步到 CAM 时，如果 CAM 已经存在同名用户，则对CIC 用户的用户名添加后缀_cic后尝试创建该用户名的 CAM 用户。 TakeOver：替换。当CIC 用户被同步到 CAM 时，如果 CAM 已经存在同名用户，则直接将已经存在的 CAM 用户替换为CIC 同步用户。
+   */
+  DuplicationStrategy?: string
+  /**
+   * 删除策略。删除 CAM 用户同步时，对已同步的 CAM 用户的处理策略。取值： Delete：删除。删除 CAM 用户同步时，会删除从CIC 已经同步到 CAM 中的 CAM 用户。 Keep：保留。删除 RAM 用户同步时，会保留从CIC 已经同步到 CAM 中的 CAM 用户。
+   */
+  DeletionStrategy?: string
+  /**
+   * 同步的集团账号目标账号的类型，ManagerUin管理账号;MemberUin成员账号
+   */
+  TargetType?: string
+}
+
+/**
  * DescribeOrganizationMemberPolicies请求参数结构体
  */
 export interface DescribeOrganizationMemberPoliciesRequest {
@@ -1826,6 +1865,40 @@ export interface DescribeShareUnitsResponse {
 }
 
 /**
+ * saml 身份提供商配置信息。
+ */
+export interface SAMLIdentityProviderConfiguration {
+  /**
+   * IdP 标识。
+   */
+  EntityId?: string
+  /**
+   * SSO 登录的启用状态。取值：  Enabled：启用。 Disabled（默认值）：禁用。
+   */
+  SSOStatus?: string
+  /**
+   * IdP 元数据文档（Base64 编码）。
+   */
+  EncodedMetadataDocument?: string
+  /**
+   * X509证书ID。
+   */
+  CertificateIds?: Array<string>
+  /**
+   * IdP 的登录地址。
+   */
+  LoginUrl?: string
+  /**
+   * 创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间。
+   */
+  UpdateTime?: string
+}
+
+/**
  * UpdateOrganizationMemberEmailBind返回参数结构体
  */
 export interface UpdateOrganizationMemberEmailBindResponse {
@@ -1920,25 +1993,21 @@ export interface UpdateSCIMCredentialStatusResponse {
 }
 
 /**
- * UpdateOrganizationMembersPolicy请求参数结构体
+ * DescribeShareUnitNodes返回参数结构体
  */
-export interface UpdateOrganizationMembersPolicyRequest {
+export interface DescribeShareUnitNodesResponse {
   /**
-   * 成员Uin列表。最多10个
+   * <p>总数目。</p>
    */
-  MemberUins: Array<number | bigint>
+  Total?: number
   /**
-   * 成员访问策略Id。可通过DescribeOrganizationMemberPolicies获取
+   * <p>共享单元部门列表。</p>
    */
-  PolicyId: number
+  Items?: Array<ShareUnitNode>
   /**
-   * 成员访问身份ID。可通过ListOrganizationIdentity获取
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IdentityId: number
-  /**
-   * 策略描述。最大长度为128个字符
-   */
-  Description?: string
+  RequestId?: string
 }
 
 /**
@@ -2217,6 +2286,20 @@ export interface SAMLIdPCertificate {
    * PEM 格式的 X509 证书。
    */
   X509Certificate?: string
+}
+
+/**
+ * AddShareUnitNode请求参数结构体
+ */
+export interface AddShareUnitNodeRequest {
+  /**
+   * <p>共享单元ID。</p>
+   */
+  UnitId: string
+  /**
+   * <p>共享部门ID。</p>
+   */
+  NodeId: number
 }
 
 /**
@@ -2941,6 +3024,20 @@ export interface DescribeOrganizationMemberAuthAccountsResponse {
 }
 
 /**
+ * DeleteShareUnitNode请求参数结构体
+ */
+export interface DeleteShareUnitNodeRequest {
+  /**
+   * <p>共享单元ID。</p>
+   */
+  UnitId: string
+  /**
+   * <p>部门ID。</p>
+   */
+  NodeId: number
+}
+
+/**
  * 授权成员账号信息
  */
 export interface RoleAssignmentInfo {
@@ -3006,17 +3103,13 @@ export interface OrgNode {
 }
 
 /**
- * 标签键值对
+ * DeleteShareUnitNode返回参数结构体
  */
-export interface Tags {
+export interface DeleteShareUnitNodeResponse {
   /**
-   * 标签键。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TagKey?: string
-  /**
-   * 标签值。
-   */
-  TagValue?: string
+  RequestId?: string
 }
 
 /**
@@ -3717,42 +3810,17 @@ export interface CreateOrganizationMemberPolicyRequest {
 }
 
 /**
- * CAM用户同步信息
+ * 标签键值对
  */
-export interface UserSyncProvisioning {
+export interface Tags {
   /**
-   * 描述。
+   * 标签键。
    */
-  Description?: string
+  TagKey?: string
   /**
-   * CAM 用户同步的身份 ID。取值：
-当PrincipalType取值为Group时，该值为CIC用户组 ID（g-********）。
-当PrincipalType取值为User时，该值为CIC用户 ID（u-********）。
+   * 标签值。
    */
-  PrincipalId?: string
-  /**
-   * CAM 用户同步的身份类型。取值：
-
-User：表示该 CAM 用户同步的身份是CIC用户。
-Group：表示该 CAM 用户同步的身份是CIC用户组。
-   */
-  PrincipalType?: string
-  /**
-   * 同步的集团账号目标账号的UIN。
-   */
-  TargetUin?: number
-  /**
-   * 冲突策略。当CIC 用户同步到 CAM 时，如果 CAM 中存在同名用户时的处理策略。取值： KeepBoth：两者都保留。当CIC 用户被同步到 CAM 时，如果 CAM 已经存在同名用户，则对CIC 用户的用户名添加后缀_cic后尝试创建该用户名的 CAM 用户。 TakeOver：替换。当CIC 用户被同步到 CAM 时，如果 CAM 已经存在同名用户，则直接将已经存在的 CAM 用户替换为CIC 同步用户。
-   */
-  DuplicationStrategy?: string
-  /**
-   * 删除策略。删除 CAM 用户同步时，对已同步的 CAM 用户的处理策略。取值： Delete：删除。删除 CAM 用户同步时，会删除从CIC 已经同步到 CAM 中的 CAM 用户。 Keep：保留。删除 RAM 用户同步时，会保留从CIC 已经同步到 CAM 中的 CAM 用户。
-   */
-  DeletionStrategy?: string
-  /**
-   * 同步的集团账号目标账号的类型，ManagerUin管理账号;MemberUin成员账号
-   */
-  TargetType?: string
+  TagValue?: string
 }
 
 /**
@@ -4682,6 +4750,28 @@ export interface OrgMemberAuthAccount {
 }
 
 /**
+ * UpdateOrganizationMembersPolicy请求参数结构体
+ */
+export interface UpdateOrganizationMembersPolicyRequest {
+  /**
+   * 成员Uin列表。最多10个
+   */
+  MemberUins: Array<number | bigint>
+  /**
+   * 成员访问策略Id。可通过DescribeOrganizationMemberPolicies获取
+   */
+  PolicyId: number
+  /**
+   * 成员访问身份ID。可通过ListOrganizationIdentity获取
+   */
+  IdentityId: number
+  /**
+   * 策略描述。最大长度为128个字符
+   */
+  Description?: string
+}
+
+/**
  * CreateOrganizationMember请求参数结构体
  */
 export interface CreateOrganizationMemberRequest {
@@ -5082,6 +5172,28 @@ export interface DeleteAccountRequest {
    * 成员Uin。
    */
   MemberUin: number
+}
+
+/**
+ * DescribeShareUnitNodes请求参数结构体
+ */
+export interface DescribeShareUnitNodesRequest {
+  /**
+   * <p>共享单元ID。</p>
+   */
+  UnitId: string
+  /**
+   * <p>偏移量。取值是limit的整数倍，默认值 : 0</p>
+   */
+  Offset: number
+  /**
+   * <p>限制数目。取值范围：1~50。</p>
+   */
+  Limit: number
+  /**
+   * <p>搜索关键字。支持部门ID搜索。</p>
+   */
+  SearchKey?: string
 }
 
 /**
@@ -6024,6 +6136,20 @@ export interface UpdateOrganizationNodeRequest {
 }
 
 /**
+ * 共享单元部门
+ */
+export interface ShareUnitNode {
+  /**
+   * <p>共享部门ID。</p>
+   */
+  ShareNodeId?: number
+  /**
+   * <p>创建时间。</p>
+   */
+  CreateTime?: string
+}
+
+/**
  * CIC的空间统计
  */
 export interface ZoneStatistics {
@@ -6373,37 +6499,13 @@ export interface UpdateSCIMCredentialStatusRequest {
 }
 
 /**
- * saml 身份提供商配置信息。
+ * AddShareUnitNode返回参数结构体
  */
-export interface SAMLIdentityProviderConfiguration {
+export interface AddShareUnitNodeResponse {
   /**
-   * IdP 标识。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EntityId?: string
-  /**
-   * SSO 登录的启用状态。取值：  Enabled：启用。 Disabled（默认值）：禁用。
-   */
-  SSOStatus?: string
-  /**
-   * IdP 元数据文档（Base64 编码）。
-   */
-  EncodedMetadataDocument?: string
-  /**
-   * X509证书ID。
-   */
-  CertificateIds?: Array<string>
-  /**
-   * IdP 的登录地址。
-   */
-  LoginUrl?: string
-  /**
-   * 创建时间。
-   */
-  CreateTime?: string
-  /**
-   * 更新时间。
-   */
-  UpdateTime?: string
+  RequestId?: string
 }
 
 /**

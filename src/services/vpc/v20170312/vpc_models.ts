@@ -1776,7 +1776,7 @@ export interface DeleteHaVipResponse {
  */
 export interface VpnGatewayQuota {
   /**
-   * 带宽配额
+   * 带宽配额，单位：Mbps。
    */
   Bandwidth?: number
   /**
@@ -15652,7 +15652,7 @@ export interface VpnGateway {
    */
   InstanceChargeType?: string
   /**
-   * 网关出带宽。
+   * 网关出带宽，单位：Mbps。
    */
   InternetMaxBandwidthOut?: number
   /**

@@ -12986,7 +12986,7 @@ export interface ExportContractReviewResultRequest {
    */
   TaskId: string
   /**
-   * 导出文件类型。1  = 带风险批注文件; 2 = 审查结果＆摘要（.xIsx）
+   * 导出文件类型。1  = 带风险批注文件; 2 = 审查结果＆摘要（.xIsx）; 3 = 不带批注文件
    */
   FileType: number
   /**

@@ -2087,6 +2087,10 @@ export interface DescribeTablesRequest {
    * MongoConnector
    */
   MongoConnector?: MongoConnector
+  /**
+   * 指定表名过滤，为空时返回所有表
+   */
+  TableNames?: Array<string>
 }
 
 /**

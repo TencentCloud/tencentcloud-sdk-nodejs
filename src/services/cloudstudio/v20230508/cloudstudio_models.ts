@@ -30,7 +30,7 @@ export interface DescribeConfigRequest {
  */
 export interface DescribeWorkspacesRequest {
   /**
-   * 工作空间名称过滤条件
+   * <p>工作空间名称过滤条件</p>
    */
   Name?: string
 }
@@ -381,7 +381,7 @@ export type DescribeImagesRequest = null
  */
 export interface DescribeWorkspacesResponse {
   /**
-   * 工作空间列表
+   * <p>工作空间列表</p>
    */
   Data?: Array<WorkspaceStatusInfo>
   /**

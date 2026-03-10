@@ -28,9 +28,9 @@ it("hai.v20230812.UpdateServiceConfigs", async function () {
     }
 })
 
-it("hai.v20230812.InquirePriceUpdateServiceConfigs", async function () {
+it("hai.v20230812.InquirePriceRunInstances", async function () {
     try {
-       const data = await client.InquirePriceUpdateServiceConfigs({})
+       const data = await client.InquirePriceRunInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -61,6 +61,16 @@ it("hai.v20230812.DescribeApplications", async function () {
 it("hai.v20230812.DescribeMuskPrompts", async function () {
     try {
        const data = await client.DescribeMuskPrompts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.InquirePriceUpdateServiceConfigs", async function () {
+    try {
+       const data = await client.InquirePriceUpdateServiceConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +178,9 @@ it("hai.v20230812.DescribeServiceLoginSettings", async function () {
     }
 })
 
-it("hai.v20230812.InquirePriceRunInstances", async function () {
+it("hai.v20230812.DescribeServices", async function () {
     try {
-       const data = await client.InquirePriceRunInstances({})
+       const data = await client.DescribeServices({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -18,23 +18,29 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  NetworkStatus,
+  ComputeDetail,
   InquirePriceRunInstancesResponse,
   ResizeInstanceDiskResponse,
+  StorageInfo,
   DescribeServiceLoginSettingsResponse,
   ResetInstancesPasswordResponse,
   DescribeInstanceNetworkStatusResponse,
-  Instance,
+  ImageInfo,
+  UpdateServiceConfigsRequest,
   TerminateInstancesRequest,
   InquirePriceUpdateServiceConfigsRequest,
+  DescribeServicesResponse,
   TerminateInstancesResponse,
+  HiCacheInfo,
   DescribeApplicationsResponse,
   StartInstanceRequest,
   LoginSetting,
-  RegionInfo,
+  NetworkStatus,
+  HyperParam,
   ResizeInstanceDiskRequest,
   Price,
   StopInstanceRequest,
+  EnvParam,
   DescribeMuskPromptsRequest,
   DescribeScenesResponse,
   ServicePriceDetail,
@@ -43,27 +49,33 @@ import {
   CreateApplicationRequest,
   ResetInstancesPasswordRequest,
   RunInstancesRequest,
+  ContainerInfo,
   DescribeInstancesResponse,
   UpdateServiceConfigsResponse,
   SystemDisk,
-  UpdateServiceConfigsRequest,
+  ServiceDetail,
   RunInstancesResponse,
+  RegionInfo,
   DescribeInstancesRequest,
-  Filter,
+  COSStorage,
+  DescribeServiceLoginSettingsRequest,
   MuskPromptInfo,
   DescribeScenesRequest,
   DescribeRegionsResponse,
-  InquirePriceRunInstancesRequest,
+  DescribeServicesRequest,
   InquirePriceUpdateServiceConfigsResponse,
+  DeploymentConfig,
   StartInstanceResponse,
   CreateMuskPromptResponse,
-  DescribeServiceLoginSettingsRequest,
+  Filter,
   ApplicationInfo,
   CreateApplicationResponse,
+  Instance,
   ItemPriceDetail,
   CreateMuskPromptRequest,
   DescribeRegionsRequest,
   ItemPrice,
+  InquirePriceRunInstancesRequest,
   DescribeInstanceNetworkStatusRequest,
   LoginService,
   StopInstanceResponse,
@@ -91,13 +103,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(InquirePriceUpdateServiceConfigs)用于更新服务配置询价
+   * 本接口 (InquirePriceRunInstances) 用于实例询价。
    */
-  async InquirePriceUpdateServiceConfigs(
-    req?: InquirePriceUpdateServiceConfigsRequest,
-    cb?: (error: string, rep: InquirePriceUpdateServiceConfigsResponse) => void
-  ): Promise<InquirePriceUpdateServiceConfigsResponse> {
-    return this.request("InquirePriceUpdateServiceConfigs", req, cb)
+  async InquirePriceRunInstances(
+    req: InquirePriceRunInstancesRequest,
+    cb?: (error: string, rep: InquirePriceRunInstancesResponse) => void
+  ): Promise<InquirePriceRunInstancesResponse> {
+    return this.request("InquirePriceRunInstances", req, cb)
   }
 
   /**
@@ -128,6 +140,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMuskPromptsResponse) => void
   ): Promise<DescribeMuskPromptsResponse> {
     return this.request("DescribeMuskPrompts", req, cb)
+  }
+
+  /**
+   * 本接口(InquirePriceUpdateServiceConfigs)用于更新服务配置询价
+   */
+  async InquirePriceUpdateServiceConfigs(
+    req?: InquirePriceUpdateServiceConfigsRequest,
+    cb?: (error: string, rep: InquirePriceUpdateServiceConfigsResponse) => void
+  ): Promise<InquirePriceUpdateServiceConfigsResponse> {
+    return this.request("InquirePriceUpdateServiceConfigs", req, cb)
   }
 
   /**
@@ -232,13 +254,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (InquirePriceRunInstances) 用于实例询价。
+   * 本接口 (DescribeServices) 用于查询一个或多个服务
    */
-  async InquirePriceRunInstances(
-    req: InquirePriceRunInstancesRequest,
-    cb?: (error: string, rep: InquirePriceRunInstancesResponse) => void
-  ): Promise<InquirePriceRunInstancesResponse> {
-    return this.request("InquirePriceRunInstances", req, cb)
+  async DescribeServices(
+    req: DescribeServicesRequest,
+    cb?: (error: string, rep: DescribeServicesResponse) => void
+  ): Promise<DescribeServicesResponse> {
+    return this.request("DescribeServices", req, cb)
   }
 
   /**

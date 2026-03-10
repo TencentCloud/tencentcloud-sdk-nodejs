@@ -27,6 +27,10 @@ export interface UpdateAliasRequest {
    * CMK的全局唯一标识符
    */
   KeyId: string
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -69,6 +73,10 @@ export interface EnableKeyRotationRequest {
    * 密钥轮转周期，单位天，允许范围 7 ~ 365，默认值 365。
    */
   RotateDays?: number
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -156,6 +164,10 @@ export interface UpdateDataKeyDescriptionRequest {
    * 数据密钥 的描述，最大100字节
    */
   Description: string
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -190,6 +202,10 @@ export interface DescribeKeyRequest {
    * CMK全局唯一标识符
    */
   KeyId: string
+  /**
+   * 可信服务成员账号信息
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -254,6 +270,10 @@ export interface DescribeDataKeysRequest {
    * 查询DataKey的ID列表，批量查询一次最多支持100个DataKeyId
    */
   DataKeyIds: Array<string>
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -380,6 +400,10 @@ export interface EnableKeyRequest {
    * CMK唯一标识符
    */
   KeyId: string
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -390,6 +414,10 @@ export interface GetKeyRotationStatusRequest {
    * CMK唯一标识符
    */
   KeyId: string
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -398,17 +426,18 @@ export interface GetKeyRotationStatusRequest {
 export type ListAlgorithmsRequest = null
 
 /**
- * 标签键和标签值
+ * 共享成员账号信息
  */
-export interface Tag {
+export interface MemberAccount {
   /**
-   * 标签键
+   * 成员账号appid
+
    */
-  TagKey: string
+  MemberAppId?: number
   /**
-   * 标签值
+   * 成员账号uin
    */
-  TagValue: string
+  MemberUin?: number
 }
 
 /**
@@ -551,6 +580,10 @@ export interface UpdateDataKeyNameRequest {
    * 数据密钥的名称
    */
   DataKeyName: string
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -565,6 +598,10 @@ export interface ScheduleDataKeyDeletionRequest {
    * 计划删除时间区间[7,30]
    */
   PendingWindowInDays: number
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -575,6 +612,10 @@ export interface DescribeKeysRequest {
    * 查询CMK的ID列表，批量查询一次最多支持100个KeyId
    */
   KeyIds: Array<string>
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -783,6 +824,10 @@ export interface EnableKeysRequest {
    * 需要批量启用的CMK Id 列表， CMK数量最大支持100
    */
   KeyIds: Array<string>
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -927,6 +972,10 @@ export interface DescribeDataKeyRequest {
    * 数据密钥全局唯一标识符
    */
   DataKeyId: string
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -1045,6 +1094,18 @@ export interface DataKeyMetadata {
    * 同步的原始集群，如果为空，是公有云公共集群
    */
   SourceHsmClusterId?: string
+  /**
+   * 成员账号appId
+   */
+  AccountAppId?: number
+  /**
+   * 成员账号uin
+   */
+  AccountUin?: number
+  /**
+   * 成员账号名称
+   */
+  AccountName?: string
 }
 
 /**
@@ -1162,6 +1223,10 @@ export interface ListKeyDetailRequest {
    * KMS 高级版对应的 HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）。
    */
   HsmClusterId?: string
+  /**
+   * 可信服务成员账号信息数组
+   */
+  MemberAccounts?: Array<MemberAccount>
 }
 
 /**
@@ -1234,6 +1299,10 @@ export interface CancelKeyDeletionRequest {
    * 需要被取消删除的CMK的唯一标志
    */
   KeyId: string
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -1289,6 +1358,10 @@ export interface EnableDataKeysRequest {
    * 需要批量启用的DataKey Id 列表， 数据密钥数量最大支持100
    */
   DataKeyIds: Array<string>
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -1335,6 +1408,10 @@ export interface DisableDataKeyRequest {
    * 数据密钥唯一标识符
    */
   DataKeyId: string
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -1365,6 +1442,10 @@ export interface ArchiveKeyRequest {
    * CMK唯一标识符
    */
   KeyId: string
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -1501,6 +1582,10 @@ export interface GetDataKeyCiphertextBlobRequest {
    * 数据密钥的唯一标志符
    */
   DataKeyId: string
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -1771,6 +1856,10 @@ export interface ListDataKeyDetailRequest {
    * 标签过滤条件
    */
   TagFilters?: Array<TagFilter>
+  /**
+   * 成员账号信息数组
+   */
+  MemberAccounts?: Array<MemberAccount>
 }
 
 /**
@@ -1933,6 +2022,18 @@ export interface KeyMetadata {
    * 同步的原始集群，如果为空，是公有云公共集群
    */
   SourceHsmClusterId?: string
+  /**
+   * 成员账号appId
+   */
+  AccountAppId?: number
+  /**
+   * 成员账号uin
+   */
+  AccountUin?: number
+  /**
+   * 成员账号名称
+   */
+  AccountName?: string
 }
 
 /**
@@ -2079,6 +2180,10 @@ export interface DisableKeysRequest {
    * 需要批量禁用的CMK Id 列表，CMK数量最大支持100
    */
   KeyIds: Array<string>
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -2268,6 +2373,10 @@ export interface ScheduleKeyDeletionRequest {
    * 计划删除时间区间[7,30]
    */
   PendingWindowInDays: number
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -2278,6 +2387,10 @@ export interface CancelDataKeyDeletionRequest {
    * 数据密钥的唯一标志符
    */
   DataKeyId: string
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -2302,6 +2415,10 @@ export interface DisableKeyRequest {
    * CMK唯一标识符
    */
   KeyId: string
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -2322,6 +2439,10 @@ export interface EnableDataKeyRequest {
    * 数据密钥唯一标识符
    */
   DataKeyId: string
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -2453,6 +2574,10 @@ export interface DisableDataKeysRequest {
    * 需要批量禁用的DataKey Id 列表，数据密钥数量最大支持100
    */
   DataKeyIds: Array<string>
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -2467,6 +2592,10 @@ export interface UpdateKeyDescriptionRequest {
    * 需要修改描述信息的CMK ID
    */
   KeyId: string
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**
@@ -2501,6 +2630,24 @@ export interface CancelKeyArchiveRequest {
    * CMK唯一标识符
    */
   KeyId: string
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
+}
+
+/**
+ * 标签键和标签值
+ */
+export interface Tag {
+  /**
+   * 标签键
+   */
+  TagKey: string
+  /**
+   * 标签值
+   */
+  TagValue: string
 }
 
 /**
@@ -2511,4 +2658,8 @@ export interface DisableKeyRotationRequest {
    * CMK唯一标识符
    */
   KeyId: string
+  /**
+   * 可信服务成员账号信息,当前账号时管理员或者委派管理员时有效。
+   */
+  MemberAccount?: MemberAccount
 }

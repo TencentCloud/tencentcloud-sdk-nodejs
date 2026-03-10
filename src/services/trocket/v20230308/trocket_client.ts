@@ -24,110 +24,73 @@ import {
   DescribeSmoothMigrationTaskListRequest,
   ProductSKU,
   DescribeRoleListResponse,
-  DeleteMQTTTopicRequest,
-  SmoothMigrationTaskItem,
   CreateInstanceResponse,
   SourceClusterTopicConfig,
   ConsumeGroupItem,
-  ModifyRoleResponse,
   DescribeMessageListRequest,
-  DeleteMQTTInsPublicEndpointRequest,
   ModifyInstanceRequest,
   MigrationTaskItem,
   FusionInstanceItem,
   InstanceItemExtraInfo,
-  CreateMQTTInsPublicEndpointResponse,
+  DescribeConsumerGroupResponse,
   ImportSourceClusterConsumerGroupsResponse,
-  TopicStageChangeResult,
   DeleteTopicRequest,
-  MigratingTopic,
   DescribeSmoothMigrationTaskListResponse,
   DescribeMigrationTaskListResponse,
-  PublicAccessRule,
   VpcInfo,
-  DescribeMQTTProductSKUListResponse,
   DescribeRoleListRequest,
-  DescribeMQTTClientResponse,
-  DescribeMQTTMessageListResponse,
   DescribeMigratingTopicStatsResponse,
-  DescribeMQTTProductSKUListRequest,
+  ImportSourceClusterConsumerGroupsRequest,
   DescribeConsumerLagRequest,
   SendMessageRequest,
   DescribeMigratingGroupStatsRequest,
   Tag,
   DescribeSourceClusterGroupListResponse,
   DescribeMessageListResponse,
-  DescribeMQTTMessageResponse,
   DeleteSmoothMigrationTaskRequest,
-  MQTTInstanceItem,
   DescribeInstanceListResponse,
   DescribeConsumerClientListResponse,
   ModifyInstanceResponse,
   CreateConsumerGroupRequest,
   ClientSubscriptionInfo,
   ChangeMigratingTopicToNextStageResponse,
-  DescribeMQTTClientRequest,
   DescribeSourceClusterGroupListRequest,
-  DescribeMQTTInsVPCEndpointsResponse,
-  DescribeMQTTInsPublicEndpointsResponse,
   DescribeInstanceListRequest,
-  ResendDeadLetterMessageResponse,
-  MQTTMessageItem,
   DescribeMigrationTaskListRequest,
-  DeleteMQTTUserRequest,
-  ModifyMQTTInstanceCertBindingRequest,
   VerifyMessageConsumptionResponse,
-  CreateMQTTTopicResponse,
-  DescribeMQTTInstanceRequest,
+  ModifyRoleResponse,
+  TopicStageChangeResult,
   ImportSourceClusterTopicsRequest,
-  CreateMQTTUserResponse,
-  SourceClusterGroupConfig,
   DeleteInstanceResponse,
   DescribeTopicResponse,
-  DeleteMQTTInsPublicEndpointResponse,
-  DeleteInstanceRequest,
+  SmoothMigrationTaskItem,
   ModifyRoleRequest,
-  DescribeMQTTInsVPCEndpointsRequest,
   DescribeFusionInstanceListResponse,
   CreateTopicRequest,
   DescribeMessageRequest,
   DeleteRoleRequest,
-  MQTTProductSkuItem,
-  DescribeMQTTInstanceListResponse,
+  ResendDeadLetterMessageResponse,
+  ModifyConsumerGroupResponse,
   DescribeMigratingTopicStatsRequest,
-  TagFilter,
   DeleteConsumerGroupRequest,
   CreateConsumerGroupResponse,
   RollbackMigratingTopicStageRequest,
-  DescribeMQTTUserListResponse,
-  ModifyMQTTUserResponse,
-  PriceTag,
   DescribeTopicListByGroupResponse,
   DescribeMessageTraceResponse,
   DoHealthCheckOnMigratingTopicRequest,
   DescribeProducerListRequest,
   DescribeMigratingTopicListResponse,
-  ModifyMQTTInsPublicEndpointRequest,
-  ModifyMQTTInstanceCertBindingResponse,
   InstanceItem,
-  DeleteMQTTInstanceResponse,
   VerifyMessageConsumptionRequest,
   DescribeTopicRequest,
-  DeleteMQTTInstanceRequest,
   DescribeMessageTraceRequest,
   DeleteSmoothMigrationTaskResponse,
   CreateTopicResponse,
   DescribeMigratingGroupStatsResponse,
-  DescribeMQTTInstanceListRequest,
-  ModifyConsumerGroupResponse,
-  CreateMQTTInstanceResponse,
-  DescribeMQTTInstanceResponse,
-  ImportSourceClusterConsumerGroupsRequest,
-  MQTTEndpointItem,
+  TopicConsumeStats,
   RemoveMigratingTopicRequest,
   DescribeMessageResponse,
-  DoHealthCheckOnMigratingTopicResponse,
-  DeleteMQTTUserResponse,
+  ZoneScheduledItem,
   ImportSourceClusterTopicsResponse,
   DescribeTopicListRequest,
   ModifyConsumerGroupRequest,
@@ -137,71 +100,47 @@ import {
   SubscriptionData,
   CreateInstanceRequest,
   ConsumerClient,
-  DescribeConsumerGroupResponse,
+  MessageTraceItem,
   DescribeConsumerClientRequest,
   ModifyTopicResponse,
   SendMessageResponse,
   DescribeConsumerLagResponse,
-  DescribeMQTTInsPublicEndpointsRequest,
+  ChangeMigratingTopicToNextStageRequest,
   DeleteRoleResponse,
   DescribeTopicListByGroupRequest,
   DescribeMigratingTopicListRequest,
   Filter,
-  ModifyMQTTTopicResponse,
-  DescribeMQTTTopicListRequest,
-  MQTTClientSubscription,
-  MessageTraceItem,
   ModifyTopicRequest,
   DescribeInstanceResponse,
-  PacketStatistics,
-  DeleteMQTTTopicResponse,
   DescribeConsumerClientResponse,
-  DescribeMQTTInstanceCertRequest,
+  DeleteInstanceRequest,
   MessageTrackItem,
   DescribeProducerListResponse,
-  ModifyMQTTInsPublicEndpointResponse,
   ResendDeadLetterMessageRequest,
-  CreateMQTTUserRequest,
   RollbackMigratingTopicStageResponse,
   DescribeFusionInstanceListRequest,
-  DescribeMQTTMessageRequest,
-  CustomMapEntry,
+  DoHealthCheckOnMigratingTopicResponse,
   CreateRoleResponse,
-  DescribeMQTTTopicListResponse,
-  MQTTUserItem,
   ModifyInstanceEndpointRequest,
-  ZoneScheduledItem,
-  ChangeMigratingTopicToNextStageRequest,
-  DescribeMQTTUserListRequest,
-  ModifyMQTTInstanceRequest,
-  ModifyMQTTInstanceResponse,
-  CreateMQTTInstanceRequest,
+  SourceClusterGroupConfig,
   DescribeTopicListResponse,
   DescribeConsumerClientListRequest,
-  TopicConsumeStats,
-  DescribeMQTTTopicRequest,
+  MigratingTopic,
   CreateRoleRequest,
   DeleteConsumerGroupResponse,
   Endpoint,
-  ModifyMQTTTopicRequest,
-  StatisticsReport,
-  IpRule,
   MessageItem,
   RoleItem,
-  MQTTTopicItem,
+  TagFilter,
   DescribeConsumerGroupListResponse,
-  ModifyMQTTUserRequest,
-  CreateMQTTInsPublicEndpointRequest,
+  PriceTag,
   ProducerInfo,
-  CreateMQTTTopicRequest,
   DeleteTopicResponse,
-  DescribeMQTTInstanceCertResponse,
-  DescribeMQTTTopicResponse,
   ModifyInstanceEndpointResponse,
   DescribeInstanceRequest,
   DescribeProductSKUsResponse,
   RemoveMigratingTopicResponse,
-  DescribeMQTTMessageListRequest,
+  IpRule,
   ResetConsumerGroupOffsetRequest,
 } from "./trocket_models"
 
@@ -226,38 +165,25 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 下线trocket下mqtt接口
+     * 平滑迁移过程获取源集群group列表接口。
 
-查询消息列表，如查询死信，请设置ConsumerGroup参数
+Filters字段为查询过滤器，支持以下字段：
+* GroupName，消费组名称，支持模糊搜索
+* Imported，是否已导入
+* ImportStatus，导入状态，参考[SourceClusterGroupConfig](https://cloud.tencent.com/document/api/1493/96031#SourceClusterGroupConfig)的说明
+* Namespace，命名空间，仅4.x集群有效
+
+Filters示例：
+[{
+    "Name": "GroupName",
+    "Values": ["group-a"]
+}]
      */
-  async DescribeMQTTMessageList(
-    req: DescribeMQTTMessageListRequest,
-    cb?: (error: string, rep: DescribeMQTTMessageListResponse) => void
-  ): Promise<DescribeMQTTMessageListResponse> {
-    return this.request("DescribeMQTTMessageList", req, cb)
-  }
-
-  /**
-     * 下线trocket下mqtt接口
-
-更新MQTT集群绑定证书
-参数传空，则为删除证书
-     */
-  async ModifyMQTTInstanceCertBinding(
-    req: ModifyMQTTInstanceCertBindingRequest,
-    cb?: (error: string, rep: ModifyMQTTInstanceCertBindingResponse) => void
-  ): Promise<ModifyMQTTInstanceCertBindingResponse> {
-    return this.request("ModifyMQTTInstanceCertBinding", req, cb)
-  }
-
-  /**
-   * 修改 RocketMQ 5.x 集群接入点，操作前请先确认接入点已存在。
-   */
-  async ModifyInstanceEndpoint(
-    req: ModifyInstanceEndpointRequest,
-    cb?: (error: string, rep: ModifyInstanceEndpointResponse) => void
-  ): Promise<ModifyInstanceEndpointResponse> {
-    return this.request("ModifyInstanceEndpoint", req, cb)
+  async DescribeSourceClusterGroupList(
+    req: DescribeSourceClusterGroupListRequest,
+    cb?: (error: string, rep: DescribeSourceClusterGroupListResponse) => void
+  ): Promise<DescribeSourceClusterGroupListResponse> {
+    return this.request("DescribeSourceClusterGroupList", req, cb)
   }
 
   /**
@@ -320,18 +246,6 @@ Filters示例：
   }
 
   /**
-     * 下线trocket下mqtt接口
-
-修改主题属性
-     */
-  async ModifyMQTTTopic(
-    req: ModifyMQTTTopicRequest,
-    cb?: (error: string, rep: ModifyMQTTTopicResponse) => void
-  ): Promise<ModifyMQTTTopicResponse> {
-    return this.request("ModifyMQTTTopic", req, cb)
-  }
-
-  /**
    * 从迁移列表中移除主题，仅当主题处于初始状态时有效
    */
   async RemoveMigratingTopic(
@@ -339,18 +253,6 @@ Filters示例：
     cb?: (error: string, rep: RemoveMigratingTopicResponse) => void
   ): Promise<RemoveMigratingTopicResponse> {
     return this.request("RemoveMigratingTopic", req, cb)
-  }
-
-  /**
-     * 下线trocket下mqtt接口
-
-删除MQTT访问用户
-     */
-  async DeleteMQTTUser(
-    req: DeleteMQTTUserRequest,
-    cb?: (error: string, rep: DeleteMQTTUserResponse) => void
-  ): Promise<DeleteMQTTUserResponse> {
-    return this.request("DeleteMQTTUser", req, cb)
   }
 
   /**
@@ -430,37 +332,20 @@ Filters示例：
   }
 
   /**
-     * 下线trocket下mqtt接口
+     * 查询角色列表，Filter参数使用说明如下：
 
-获取产品售卖规格
+- RoleName 角色名称，支持模糊搜索，从本接口返回值或控制台获得
+- AccessKey AccessKey，支持模糊搜索，从本接口返回值或控制台获得
+
+Filters示例： 
+[{ "Name": "RoleName", "Values": ["test_role"] }]
+当前 API 适用集群：5.x 集群。4.x 集群的查询角色列表接口文档见 [DescribeRocketMQRoles](https://cloud.tencent.com/document/product/1179/107534)，查询角色授权列表接口文档见 [DescribeRocketMQEnvironmentRoles](https://cloud.tencent.com/document/product/1179/107535)。
      */
-  async DescribeMQTTProductSKUList(
-    req?: DescribeMQTTProductSKUListRequest,
-    cb?: (error: string, rep: DescribeMQTTProductSKUListResponse) => void
-  ): Promise<DescribeMQTTProductSKUListResponse> {
-    return this.request("DescribeMQTTProductSKUList", req, cb)
-  }
-
-  /**
-     * 平滑迁移过程获取源集群group列表接口。
-
-Filters字段为查询过滤器，支持以下字段：
-* GroupName，消费组名称，支持模糊搜索
-* Imported，是否已导入
-* ImportStatus，导入状态，参考[SourceClusterGroupConfig](https://cloud.tencent.com/document/api/1493/96031#SourceClusterGroupConfig)的说明
-* Namespace，命名空间，仅4.x集群有效
-
-Filters示例：
-[{
-    "Name": "GroupName",
-    "Values": ["group-a"]
-}]
-     */
-  async DescribeSourceClusterGroupList(
-    req: DescribeSourceClusterGroupListRequest,
-    cb?: (error: string, rep: DescribeSourceClusterGroupListResponse) => void
-  ): Promise<DescribeSourceClusterGroupListResponse> {
-    return this.request("DescribeSourceClusterGroupList", req, cb)
+  async DescribeRoleList(
+    req: DescribeRoleListRequest,
+    cb?: (error: string, rep: DescribeRoleListResponse) => void
+  ): Promise<DescribeRoleListResponse> {
+    return this.request("DescribeRoleList", req, cb)
   }
 
   /**
@@ -485,58 +370,14 @@ Filters示例：
   }
 
   /**
-     * 下线trocket下mqtt接口
-
-查询用户列表，Filter参数使用说明如下：
-
-1. Username，用户名称模糊搜索
+     * 重置消费位点。
+当前 API 适用集群：5.x 集群。4.x 集群的重置消费位点接口文档见 [ResetRocketMQConsumerOffSet](https://cloud.tencent.com/document/api/1179/71662)。
      */
-  async DescribeMQTTUserList(
-    req: DescribeMQTTUserListRequest,
-    cb?: (error: string, rep: DescribeMQTTUserListResponse) => void
-  ): Promise<DescribeMQTTUserListResponse> {
-    return this.request("DescribeMQTTUserList", req, cb)
-  }
-
-  /**
-     * 下线trocket下mqtt接口
-
-删除MQTT实例的公网接入点
-     */
-  async DeleteMQTTInsPublicEndpoint(
-    req: DeleteMQTTInsPublicEndpointRequest,
-    cb?: (error: string, rep: DeleteMQTTInsPublicEndpointResponse) => void
-  ): Promise<DeleteMQTTInsPublicEndpointResponse> {
-    return this.request("DeleteMQTTInsPublicEndpoint", req, cb)
-  }
-
-  /**
-     * 查询角色列表，Filter参数使用说明如下：
-
-- RoleName 角色名称，支持模糊搜索，从本接口返回值或控制台获得
-- AccessKey AccessKey，支持模糊搜索，从本接口返回值或控制台获得
-
-Filters示例： 
-[{ "Name": "RoleName", "Values": ["test_role"] }]
-当前 API 适用集群：5.x 集群。4.x 集群的查询角色列表接口文档见 [DescribeRocketMQRoles](https://cloud.tencent.com/document/product/1179/107534)，查询角色授权列表接口文档见 [DescribeRocketMQEnvironmentRoles](https://cloud.tencent.com/document/product/1179/107535)。
-     */
-  async DescribeRoleList(
-    req: DescribeRoleListRequest,
-    cb?: (error: string, rep: DescribeRoleListResponse) => void
-  ): Promise<DescribeRoleListResponse> {
-    return this.request("DescribeRoleList", req, cb)
-  }
-
-  /**
-     * 下线trocket下mqtt接口
-
-修改MQTT角色
-     */
-  async ModifyMQTTUser(
-    req: ModifyMQTTUserRequest,
-    cb?: (error: string, rep: ModifyMQTTUserResponse) => void
-  ): Promise<ModifyMQTTUserResponse> {
-    return this.request("ModifyMQTTUser", req, cb)
+  async ResetConsumerGroupOffset(
+    req: ResetConsumerGroupOffsetRequest,
+    cb?: (error: string, rep: ResetConsumerGroupOffsetResponse) => void
+  ): Promise<ResetConsumerGroupOffsetResponse> {
+    return this.request("ResetConsumerGroupOffset", req, cb)
   }
 
   /**
@@ -551,19 +392,6 @@ Filters示例：
   }
 
   /**
-     * 查询主题关联的生产者列表信息，Filters支持以下筛选条件：
-- ClientIP，客户端IP
-- ClientID，客户端ID
-当前 API 适用集群：5.x 集群。4.x 集群的查询生产者客户端列表接口文档见 [DescribeRocketMQProducers](https://cloud.tencent.com/document/api/1179/122749)。
-     */
-  async DescribeProducerList(
-    req: DescribeProducerListRequest,
-    cb?: (error: string, rep: DescribeProducerListResponse) => void
-  ): Promise<DescribeProducerListResponse> {
-    return this.request("DescribeProducerList", req, cb)
-  }
-
-  /**
      * 修改消费组属性。
 当前 API 适用集群：5.x 集群。4.x 集群的修改消费组属性接口文档见 [ModifyRocketMQGroup](https://cloud.tencent.com/document/api/1179/63416)。
      */
@@ -572,18 +400,6 @@ Filters示例：
     cb?: (error: string, rep: ModifyConsumerGroupResponse) => void
   ): Promise<ModifyConsumerGroupResponse> {
     return this.request("ModifyConsumerGroup", req, cb)
-  }
-
-  /**
-     * 下线trocket下mqtt接口
-
-查询MQTT实例公网接入点
-     */
-  async DescribeMQTTInsVPCEndpoints(
-    req: DescribeMQTTInsVPCEndpointsRequest,
-    cb?: (error: string, rep: DescribeMQTTInsVPCEndpointsResponse) => void
-  ): Promise<DescribeMQTTInsVPCEndpointsResponse> {
-    return this.request("DescribeMQTTInsVPCEndpoints", req, cb)
   }
 
   /**
@@ -619,39 +435,13 @@ Filters示例：
   }
 
   /**
-     * 下线trocket下mqtt接口
-
-删除MQTT实例
-     */
-  async DeleteMQTTInstance(
-    req: DeleteMQTTInstanceRequest,
-    cb?: (error: string, rep: DeleteMQTTInstanceResponse) => void
-  ): Promise<DeleteMQTTInstanceResponse> {
-    return this.request("DeleteMQTTInstance", req, cb)
-  }
-
-  /**
-     * 下线trocket下mqtt接口
-
-查询MQTT消息详情
-     */
-  async DescribeMQTTMessage(
-    req: DescribeMQTTMessageRequest,
-    cb?: (error: string, rep: DescribeMQTTMessageResponse) => void
-  ): Promise<DescribeMQTTMessageResponse> {
-    return this.request("DescribeMQTTMessage", req, cb)
-  }
-
-  /**
-     * 下线trocket下mqtt接口
-
-更新MQTT实例公网接入点
-     */
-  async ModifyMQTTInsPublicEndpoint(
-    req: ModifyMQTTInsPublicEndpointRequest,
-    cb?: (error: string, rep: ModifyMQTTInsPublicEndpointResponse) => void
-  ): Promise<ModifyMQTTInsPublicEndpointResponse> {
-    return this.request("ModifyMQTTInsPublicEndpoint", req, cb)
+   * 查询产品售卖规格，针对 RocketMQ 5.x 集群。
+   */
+  async DescribeProductSKUs(
+    req?: DescribeProductSKUsRequest,
+    cb?: (error: string, rep: DescribeProductSKUsResponse) => void
+  ): Promise<DescribeProductSKUsResponse> {
+    return this.request("DescribeProductSKUs", req, cb)
   }
 
   /**
@@ -676,36 +466,13 @@ Filters示例：
   }
 
   /**
-     * 下线trocket下mqtt接口
-
-查询mqtt主题详情
-     */
-  async DescribeMQTTTopic(
-    req: DescribeMQTTTopicRequest,
-    cb?: (error: string, rep: DescribeMQTTTopicResponse) => void
-  ): Promise<DescribeMQTTTopicResponse> {
-    return this.request("DescribeMQTTTopic", req, cb)
-  }
-
-  /**
-   * 查询产品售卖规格，针对 RocketMQ 5.x 集群。
+   * 导入topic列表
    */
-  async DescribeProductSKUs(
-    req?: DescribeProductSKUsRequest,
-    cb?: (error: string, rep: DescribeProductSKUsResponse) => void
-  ): Promise<DescribeProductSKUsResponse> {
-    return this.request("DescribeProductSKUs", req, cb)
-  }
-
-  /**
-     * 修改 RocketMQ 5.x 集群属性，仅支持修改运行中的集群。
-当前 API 适用集群：5.x 集群。修改 4.x 集群属性的接口文档见 [ModifyRocketMQInstance](https://cloud.tencent.com/document/product/1179/108862)。
-     */
-  async ModifyInstance(
-    req: ModifyInstanceRequest,
-    cb?: (error: string, rep: ModifyInstanceResponse) => void
-  ): Promise<ModifyInstanceResponse> {
-    return this.request("ModifyInstance", req, cb)
+  async ImportSourceClusterTopics(
+    req: ImportSourceClusterTopicsRequest,
+    cb?: (error: string, rep: ImportSourceClusterTopicsResponse) => void
+  ): Promise<ImportSourceClusterTopicsResponse> {
+    return this.request("ImportSourceClusterTopics", req, cb)
   }
 
   /**
@@ -731,67 +498,6 @@ Filters示例：
   }
 
   /**
-     * 查询消息列表。如果查询死信消息，请设置ConsumerGroup参数。
-当前 API 适用集群：5.x 集群。4.x 集群的查询消息列表接口文档见 [DescribeRocketMQTopicMsgs](https://cloud.tencent.com/document/product/1179/97761)。
-     */
-  async DescribeMessageList(
-    req: DescribeMessageListRequest,
-    cb?: (error: string, rep: DescribeMessageListResponse) => void
-  ): Promise<DescribeMessageListResponse> {
-    return this.request("DescribeMessageList", req, cb)
-  }
-
-  /**
-     * 重置消费位点。
-当前 API 适用集群：5.x 集群。4.x 集群的重置消费位点接口文档见 [ResetRocketMQConsumerOffSet](https://cloud.tencent.com/document/api/1179/71662)。
-     */
-  async ResetConsumerGroupOffset(
-    req: ResetConsumerGroupOffsetRequest,
-    cb?: (error: string, rep: ResetConsumerGroupOffsetResponse) => void
-  ): Promise<ResetConsumerGroupOffsetResponse> {
-    return this.request("ResetConsumerGroupOffset", req, cb)
-  }
-
-  /**
-     * 下线trocket下mqtt接口
-
-获取主题列表，Filter参数使用说明如下：
-
-1. TopicName，主题名称模糊搜索
-2. TopicType，主题类型查询，支持多选，可选值：Normal,Order,Transaction,DelayScheduled
-     */
-  async DescribeMQTTTopicList(
-    req: DescribeMQTTTopicListRequest,
-    cb?: (error: string, rep: DescribeMQTTTopicListResponse) => void
-  ): Promise<DescribeMQTTTopicListResponse> {
-    return this.request("DescribeMQTTTopicList", req, cb)
-  }
-
-  /**
-     * 下线trocket下mqtt接口
-
-查询实例信息
-     */
-  async DescribeMQTTInstance(
-    req: DescribeMQTTInstanceRequest,
-    cb?: (error: string, rep: DescribeMQTTInstanceResponse) => void
-  ): Promise<DescribeMQTTInstanceResponse> {
-    return this.request("DescribeMQTTInstance", req, cb)
-  }
-
-  /**
-     * 下线trocket下mqtt接口
-
-创建主题
-     */
-  async CreateMQTTTopic(
-    req: CreateMQTTTopicRequest,
-    cb?: (error: string, rep: CreateMQTTTopicResponse) => void
-  ): Promise<CreateMQTTTopicResponse> {
-    return this.request("CreateMQTTTopic", req, cb)
-  }
-
-  /**
      * 创建 RocketMQ 5.x 集群。
 当前 API 适用集群：5.x 集群。创建 4.x 专享/通用集群的接口文档见 [CreateRocketMQVipInstance](https://cloud.tencent.com/document/product/1179/95721)。
      */
@@ -803,15 +509,14 @@ Filters示例：
   }
 
   /**
-     * 下线trocket下mqtt接口
-
-删除MQTT主题
+     * 查询消息列表。如果查询死信消息，请设置ConsumerGroup参数。
+当前 API 适用集群：5.x 集群。4.x 集群的查询消息列表接口文档见 [DescribeRocketMQTopicMsgs](https://cloud.tencent.com/document/product/1179/97761)。
      */
-  async DeleteMQTTTopic(
-    req: DeleteMQTTTopicRequest,
-    cb?: (error: string, rep: DeleteMQTTTopicResponse) => void
-  ): Promise<DeleteMQTTTopicResponse> {
-    return this.request("DeleteMQTTTopic", req, cb)
+  async DescribeMessageList(
+    req: DescribeMessageListRequest,
+    cb?: (error: string, rep: DescribeMessageListResponse) => void
+  ): Promise<DescribeMessageListResponse> {
+    return this.request("DescribeMessageList", req, cb)
   }
 
   /**
@@ -826,13 +531,13 @@ Filters示例：
   }
 
   /**
-   * 导入topic列表
+   * 修改 RocketMQ 5.x 集群接入点，操作前请先确认接入点已存在。
    */
-  async ImportSourceClusterTopics(
-    req: ImportSourceClusterTopicsRequest,
-    cb?: (error: string, rep: ImportSourceClusterTopicsResponse) => void
-  ): Promise<ImportSourceClusterTopicsResponse> {
-    return this.request("ImportSourceClusterTopics", req, cb)
+  async ModifyInstanceEndpoint(
+    req: ModifyInstanceEndpointRequest,
+    cb?: (error: string, rep: ModifyInstanceEndpointResponse) => void
+  ): Promise<ModifyInstanceEndpointResponse> {
+    return this.request("ModifyInstanceEndpoint", req, cb)
   }
 
   /**
@@ -864,88 +569,16 @@ Filters示例：
   }
 
   /**
-     * 下线trocket下mqtt接口
-
-查询MQTT实例公网接入点
+     * 查询主题关联的生产者列表信息，Filters支持以下筛选条件：
+- ClientIP，客户端IP
+- ClientID，客户端ID
+当前 API 适用集群：5.x 集群。4.x 集群的查询生产者客户端列表接口文档见 [DescribeRocketMQProducers](https://cloud.tencent.com/document/api/1179/122749)。
      */
-  async DescribeMQTTInsPublicEndpoints(
-    req: DescribeMQTTInsPublicEndpointsRequest,
-    cb?: (error: string, rep: DescribeMQTTInsPublicEndpointsResponse) => void
-  ): Promise<DescribeMQTTInsPublicEndpointsResponse> {
-    return this.request("DescribeMQTTInsPublicEndpoints", req, cb)
-  }
-
-  /**
-     * 下线trocket下mqtt接口
-
-查询MQTT集群证书列表
-     */
-  async DescribeMQTTInstanceCert(
-    req: DescribeMQTTInstanceCertRequest,
-    cb?: (error: string, rep: DescribeMQTTInstanceCertResponse) => void
-  ): Promise<DescribeMQTTInstanceCertResponse> {
-    return this.request("DescribeMQTTInstanceCert", req, cb)
-  }
-
-  /**
-     * 下线trocket下mqtt接口
-
-修改实例属性
-     */
-  async ModifyMQTTInstance(
-    req: ModifyMQTTInstanceRequest,
-    cb?: (error: string, rep: ModifyMQTTInstanceResponse) => void
-  ): Promise<ModifyMQTTInstanceResponse> {
-    return this.request("ModifyMQTTInstance", req, cb)
-  }
-
-  /**
-     * 下线trocket下mqtt接口
-
-获取实例列表，Filters参数使用说明如下：
-1. InstanceName, 名称模糊查询
-2. InstanceId，实例ID查询
-3. InstanceType, 实例类型查询，支持多选
-3. InstanceStatus，实例状态查询，支持多选
-
-当使用TagFilters查询时，Filters参数失效。
-     */
-  async DescribeMQTTInstanceList(
-    req: DescribeMQTTInstanceListRequest,
-    cb?: (error: string, rep: DescribeMQTTInstanceListResponse) => void
-  ): Promise<DescribeMQTTInstanceListResponse> {
-    return this.request("DescribeMQTTInstanceList", req, cb)
-  }
-
-  /**
-     * 获取消费组列表，Filter参数使用说明如下：
-
-- ConsumerGroupName 消费组名称，支持模糊查询，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
-- ConsumeMessageOrderly，投递顺序性，枚举值如下：
-    - true 顺序投递
-    - false 并发投递
-
-Filters示例： 
-[{ "Name": "ConsumeMessageOrderly", "Values": ["true"] }]
-当前 API 适用集群：5.x 集群。4.x 集群的获取消费组列表接口文档见 [DescribeRocketMQGroups](https://cloud.tencent.com/document/api/1179/63420)。
-     */
-  async DescribeConsumerGroupList(
-    req: DescribeConsumerGroupListRequest,
-    cb?: (error: string, rep: DescribeConsumerGroupListResponse) => void
-  ): Promise<DescribeConsumerGroupListResponse> {
-    return this.request("DescribeConsumerGroupList", req, cb)
-  }
-
-  /**
-     * 下线trocket下mqtt接口
-
-购买新的MQTT实例
-     */
-  async CreateMQTTInstance(
-    req: CreateMQTTInstanceRequest,
-    cb?: (error: string, rep: CreateMQTTInstanceResponse) => void
-  ): Promise<CreateMQTTInstanceResponse> {
-    return this.request("CreateMQTTInstance", req, cb)
+  async DescribeProducerList(
+    req: DescribeProducerListRequest,
+    cb?: (error: string, rep: DescribeProducerListResponse) => void
+  ): Promise<DescribeProducerListResponse> {
+    return this.request("DescribeProducerList", req, cb)
   }
 
   /**
@@ -990,15 +623,22 @@ Filters示例：
   }
 
   /**
-     * 下线trocket下mqtt接口
+     * 获取消费组列表，Filter参数使用说明如下：
 
-添加mqtt角色
+- ConsumerGroupName 消费组名称，支持模糊查询，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
+- ConsumeMessageOrderly，投递顺序性，枚举值如下：
+    - true 顺序投递
+    - false 并发投递
+
+Filters示例： 
+[{ "Name": "ConsumeMessageOrderly", "Values": ["true"] }]
+当前 API 适用集群：5.x 集群。4.x 集群的获取消费组列表接口文档见 [DescribeRocketMQGroups](https://cloud.tencent.com/document/api/1179/63420)。
      */
-  async CreateMQTTUser(
-    req: CreateMQTTUserRequest,
-    cb?: (error: string, rep: CreateMQTTUserResponse) => void
-  ): Promise<CreateMQTTUserResponse> {
-    return this.request("CreateMQTTUser", req, cb)
+  async DescribeConsumerGroupList(
+    req: DescribeConsumerGroupListRequest,
+    cb?: (error: string, rep: DescribeConsumerGroupListResponse) => void
+  ): Promise<DescribeConsumerGroupListResponse> {
+    return this.request("DescribeConsumerGroupList", req, cb)
   }
 
   /**
@@ -1010,18 +650,6 @@ Filters示例：
     cb?: (error: string, rep: ModifyRoleResponse) => void
   ): Promise<ModifyRoleResponse> {
     return this.request("ModifyRole", req, cb)
-  }
-
-  /**
-     * 下线trocket下mqtt接口
-
-查询 MQTT 客户端详情
-     */
-  async DescribeMQTTClient(
-    req: DescribeMQTTClientRequest,
-    cb?: (error: string, rep: DescribeMQTTClientResponse) => void
-  ): Promise<DescribeMQTTClientResponse> {
-    return this.request("DescribeMQTTClient", req, cb)
   }
 
   /**
@@ -1106,14 +734,13 @@ Type，根据任务类型精确查找
   }
 
   /**
-     * 下线trocket下mqtt接口
-
-为MQTT实例创建公网接入点
+     * 修改 RocketMQ 5.x 集群属性，仅支持修改运行中的集群。
+当前 API 适用集群：5.x 集群。修改 4.x 集群属性的接口文档见 [ModifyRocketMQInstance](https://cloud.tencent.com/document/product/1179/108862)。
      */
-  async CreateMQTTInsPublicEndpoint(
-    req: CreateMQTTInsPublicEndpointRequest,
-    cb?: (error: string, rep: CreateMQTTInsPublicEndpointResponse) => void
-  ): Promise<CreateMQTTInsPublicEndpointResponse> {
-    return this.request("CreateMQTTInsPublicEndpoint", req, cb)
+  async ModifyInstance(
+    req: ModifyInstanceRequest,
+    cb?: (error: string, rep: ModifyInstanceResponse) => void
+  ): Promise<ModifyInstanceResponse> {
+    return this.request("ModifyInstance", req, cb)
   }
 }

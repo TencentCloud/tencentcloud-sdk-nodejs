@@ -28,9 +28,9 @@ it("rum.v20210622.DescribeTawAreas", async function () {
     }
 })
 
-it("rum.v20210622.DescribeRumStatsLogList", async function () {
+it("rum.v20210622.DescribePvList", async function () {
     try {
-       const data = await client.DescribeRumStatsLogList({})
+       const data = await client.DescribePvList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +48,9 @@ it("rum.v20210622.CreateReleaseFile", async function () {
     }
 })
 
-it("rum.v20210622.DescribeScores", async function () {
+it("rum.v20210622.DescribeDataLogUrlInfo", async function () {
     try {
-       const data = await client.DescribeScores({})
+       const data = await client.DescribeDataLogUrlInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +98,9 @@ it("rum.v20210622.DescribeDataLogUrlStatistics", async function () {
     }
 })
 
-it("rum.v20210622.DescribeDataReportCountV2", async function () {
+it("rum.v20210622.DescribeRumStatsLogList", async function () {
     try {
-       const data = await client.DescribeDataReportCountV2({})
+       const data = await client.DescribeRumStatsLogList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +108,29 @@ it("rum.v20210622.DescribeDataReportCountV2", async function () {
     }
 })
 
-it("rum.v20210622.DescribeDataFetchProject", async function () {
+it("rum.v20210622.DescribeScores", async function () {
     try {
-       const data = await client.DescribeDataFetchProject({})
+       const data = await client.DescribeScores({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataPerformancePageV2", async function () {
+    try {
+       const data = await client.DescribeDataPerformancePageV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataFetchUrl", async function () {
+    try {
+       const data = await client.DescribeDataFetchUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,6 +218,16 @@ it("rum.v20210622.StopProject", async function () {
     }
 })
 
+it("rum.v20210622.DescribeDataFetchUrlV2", async function () {
+    try {
+       const data = await client.DescribeDataFetchUrlV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rum.v20210622.DescribeDataPvUrlStatisticsV2", async function () {
     try {
        const data = await client.DescribeDataPvUrlStatisticsV2({})
@@ -218,9 +248,19 @@ it("rum.v20210622.DescribeAppSingleCaseList", async function () {
     }
 })
 
-it("rum.v20210622.DescribePvList", async function () {
+it("rum.v20210622.DescribeProjectLimits", async function () {
     try {
-       const data = await client.DescribePvList({})
+       const data = await client.DescribeProjectLimits({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataPvUrlStatistics", async function () {
+    try {
+       const data = await client.DescribeDataPvUrlStatistics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +288,9 @@ it("rum.v20210622.DescribeDataStaticUrl", async function () {
     }
 })
 
-it("rum.v20210622.ModifyProjectLimit", async function () {
+it("rum.v20210622.DescribeDataFetchUrlInfo", async function () {
     try {
-       const data = await client.ModifyProjectLimit({})
+       const data = await client.DescribeDataFetchUrlInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,9 +298,19 @@ it("rum.v20210622.ModifyProjectLimit", async function () {
     }
 })
 
-it("rum.v20210622.DescribeDataPvUrlStatistics", async function () {
+it("rum.v20210622.DescribeDataCustomUrlV2", async function () {
     try {
-       const data = await client.DescribeDataPvUrlStatistics({})
+       const data = await client.DescribeDataCustomUrlV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataSetUrlStatisticsV2", async function () {
+    try {
+       const data = await client.DescribeDataSetUrlStatisticsV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,6 +358,26 @@ it("rum.v20210622.ModifyInstance", async function () {
     }
 })
 
+it("rum.v20210622.ModifyProjectLimit", async function () {
+    try {
+       const data = await client.ModifyProjectLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataEventUrlV2", async function () {
+    try {
+       const data = await client.DescribeDataEventUrlV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rum.v20210622.DescribeDataStaticResource", async function () {
     try {
        const data = await client.DescribeDataStaticResource({})
@@ -318,9 +388,9 @@ it("rum.v20210622.DescribeDataStaticResource", async function () {
     }
 })
 
-it("rum.v20210622.DescribeProjectLimits", async function () {
+it("rum.v20210622.DescribeDataStaticProjectV2", async function () {
     try {
-       const data = await client.DescribeProjectLimits({})
+       const data = await client.DescribeDataStaticProjectV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -341,6 +411,16 @@ it("rum.v20210622.DescribeAppDimensionMetrics", async function () {
 it("rum.v20210622.DescribeDataCustomUrl", async function () {
     try {
        const data = await client.DescribeDataCustomUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataStaticUrlV2", async function () {
+    try {
+       const data = await client.DescribeDataStaticUrlV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,6 +458,16 @@ it("rum.v20210622.ResumeProject", async function () {
     }
 })
 
+it("rum.v20210622.DescribeDataStaticResourceV2", async function () {
+    try {
+       const data = await client.DescribeDataStaticResourceV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rum.v20210622.CreateStarProject", async function () {
     try {
        const data = await client.CreateStarProject({})
@@ -398,9 +488,9 @@ it("rum.v20210622.DeleteWhitelist", async function () {
     }
 })
 
-it("rum.v20210622.DescribeDataFetchUrlInfo", async function () {
+it("rum.v20210622.CreateTawInstance", async function () {
     try {
-       const data = await client.DescribeDataFetchUrlInfo({})
+       const data = await client.CreateTawInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -421,6 +511,16 @@ it("rum.v20210622.StopInstance", async function () {
 it("rum.v20210622.ModifyProject", async function () {
     try {
        const data = await client.ModifyProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataLogUrlStatisticsV2", async function () {
+    try {
+       const data = await client.DescribeDataLogUrlStatisticsV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,19 +568,9 @@ it("rum.v20210622.DescribeReleaseFileSign", async function () {
     }
 })
 
-it("rum.v20210622.DescribeDataLogUrlInfo", async function () {
+it("rum.v20210622.DescribeDataBridgeUrlV2", async function () {
     try {
-       const data = await client.DescribeDataLogUrlInfo({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeUvList", async function () {
-    try {
-       const data = await client.DescribeUvList({})
+       const data = await client.DescribeDataBridgeUrlV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,9 +598,39 @@ it("rum.v20210622.DescribeDataStaticProject", async function () {
     }
 })
 
+it("rum.v20210622.DescribeDataWebVitalsPageV2", async function () {
+    try {
+       const data = await client.DescribeDataWebVitalsPageV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rum.v20210622.DescribeDataPvUrlInfo", async function () {
     try {
        const data = await client.DescribeDataPvUrlInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeScoresV2", async function () {
+    try {
+       const data = await client.DescribeScoresV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataReportCountV2", async function () {
+    try {
+       const data = await client.DescribeDataReportCountV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,9 +648,9 @@ it("rum.v20210622.DeleteProject", async function () {
     }
 })
 
-it("rum.v20210622.CreateTawInstance", async function () {
+it("rum.v20210622.DescribeUvList", async function () {
     try {
-       const data = await client.CreateTawInstance({})
+       const data = await client.DescribeUvList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -538,9 +658,9 @@ it("rum.v20210622.CreateTawInstance", async function () {
     }
 })
 
-it("rum.v20210622.DescribeDataFetchUrl", async function () {
+it("rum.v20210622.DescribeDataFetchProject", async function () {
     try {
-       const data = await client.DescribeDataFetchUrl({})
+       const data = await client.DescribeDataFetchProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

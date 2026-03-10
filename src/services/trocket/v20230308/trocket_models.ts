@@ -157,78 +157,6 @@ export interface DescribeRoleListResponse {
 }
 
 /**
- * DeleteMQTTTopic请求参数结构体
- */
-export interface DeleteMQTTTopicRequest {
-  /**
-   * 集群ID
-   */
-  InstanceId: string
-  /**
-   * 主题名称
-   */
-  Topic: string
-}
-
-/**
- * 平滑迁移任务
- */
-export interface SmoothMigrationTaskItem {
-  /**
-   * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskId?: string
-  /**
-   * 任务名称	
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskName?: string
-  /**
-   * 源集群名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SourceClusterName?: string
-  /**
-   * 目标集群实例ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceId?: string
-  /**
-   * 网络连接类型， 
-PUBLIC 公网 
-VPC 私有网络 
-OTHER 其他
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConnectionType?: string
-  /**
-   * 源集群NameServer地址	
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SourceNameServer?: string
-  /**
-   * 任务状态:
-Configuration 迁移配置,
-SourceConnecting 连接源集群中,
- MetaDataImport 元数据导入,
-EndpointSetup 切换接入点,
-ServiceMigration 切流中,
-Completed 已完成,
-Cancelled 已取消
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskStatus?: string
-  /**
-   * 目标集群实例版本，
-4 表示4.x版本
-5 表示5.x版本
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceVersion?: string
-}
-
-/**
  * CreateInstance返回参数结构体
  */
 export interface CreateInstanceResponse {
@@ -372,16 +300,6 @@ export interface ConsumeGroupItem {
 }
 
 /**
- * ModifyRole返回参数结构体
- */
-export interface ModifyRoleResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeMessageList请求参数结构体
  */
 export interface DescribeMessageListRequest {
@@ -437,16 +355,6 @@ export interface DescribeMessageListRequest {
    * 消息 Tag，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口返回的 [MessageItem](https://cloud.tencent.com/document/api/1493/96031#MessageItem) 或业务日志中获得。
    */
   Tag?: string
-}
-
-/**
- * DeleteMQTTInsPublicEndpoint请求参数结构体
- */
-export interface DeleteMQTTInsPublicEndpointRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
 }
 
 /**
@@ -733,9 +641,56 @@ export interface InstanceItemExtraInfo {
 }
 
 /**
- * CreateMQTTInsPublicEndpoint返回参数结构体
+ * DescribeConsumerGroup返回参数结构体
  */
-export interface CreateMQTTInsPublicEndpointResponse {
+export interface DescribeConsumerGroupResponse {
+  /**
+   * 在线消费者数量
+   */
+  ConsumerNum?: number
+  /**
+   * TPS
+   */
+  Tps?: number
+  /**
+   * 消息堆积数量
+   */
+  ConsumerLag?: number
+  /**
+   * 消费类型，枚举值如下：
+
+- PULL：PULL 消费类型
+- PUSH：PUSH 消费类型
+- POP：POP 消费类型
+   */
+  ConsumeType?: string
+  /**
+   * 创建时间，**Unix时间戳（毫秒）**
+   */
+  CreatedTime?: number
+  /**
+   * 顺序投递：true
+并发投递：false
+   */
+  ConsumeMessageOrderly?: boolean
+  /**
+   * 是否开启消费
+   */
+  ConsumeEnable?: boolean
+  /**
+   * 最大重试次数
+   */
+  MaxRetryTimes?: number
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 消费模式：
+BROADCASTING 广播模式
+CLUSTERING 集群模式
+   */
+  MessageModel?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -753,24 +708,6 @@ export interface ImportSourceClusterConsumerGroupsResponse {
 }
 
 /**
- * 迁移主题修改状态后的结果
- */
-export interface TopicStageChangeResult {
-  /**
-   * 主题名称
-   */
-  TopicName?: string
-  /**
-   * 是否成功
-   */
-  Success?: boolean
-  /**
-   * 命名空间，仅4.x有效
-   */
-  Namespace?: string
-}
-
-/**
  * DeleteTopic请求参数结构体
  */
 export interface DeleteTopicRequest {
@@ -782,56 +719,6 @@ export interface DeleteTopicRequest {
    * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得。
    */
   Topic: string
-}
-
-/**
- * 迁移中的主题
- */
-export interface MigratingTopic {
-  /**
-   * 主题名称
-   */
-  TopicName?: string
-  /**
-   * 迁移状态 
-S_RW_D_NA 源集群读写，
-S_RW_D_R 源集群读写目标集群读，
-S_RW_D_RW 源集群读写目标集群读写，
-S_R_D_RW 源集群读目标集群读写，
-S_NA_D_RW 目标集群读写
-   */
-  MigrationStatus?: string
-  /**
-   * 是否完成健康检查
-   */
-  HealthCheckPassed?: boolean
-  /**
-   * 上次健康检查返回的错误信息，仅在HealthCheckPassed为false时有效。 NotChecked 未执行检查， Unknown 未知错误, TopicNotImported 主题未导入, TopicNotExistsInSourceCluster 主题在源集群中不存在, TopicNotExistsInTargetCluster 主题在目标集群中不存在, ConsumerConnectedOnTarget 目标集群上存在消费者连接, SourceTopicHasNewMessagesIn5Minutes 源集群主题前5分钟内有新消息写入, TargetTopicHasNewMessagesIn5Minutes 目标集群主题前5分钟内有新消息写入, SourceTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, TargetTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, ConsumerGroupCountNotMatch 订阅组数量不一致, SourceTopicHasUnconsumedMessages 源集群主题存在未消费消息,
-   */
-  HealthCheckError?: string
-  /**
-   * 命名空间，仅4.x集群有效
-   */
-  Namespace?: string
-  /**
-   * 4.x的命名空间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NamespaceV4?: string
-  /**
-   * 4.x的主题名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TopicNameV4?: string
-  /**
-   * 4.x的完整命名空间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FullNamespaceV4?: string
-  /**
-   * 上次健康检查返回的错误列表
-   */
-  HealthCheckErrorList?: Array<string>
 }
 
 /**
@@ -873,27 +760,6 @@ export interface DescribeMigrationTaskListResponse {
 }
 
 /**
- * 公网访问安全规则
- */
-export interface PublicAccessRule {
-  /**
-   * ip网段信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IpRule: string
-  /**
-   * 允许或者拒绝
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Allow: boolean
-  /**
-   * 备注信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark?: string
-}
-
-/**
  * VPC信息
  */
 export interface VpcInfo {
@@ -905,26 +771,6 @@ export interface VpcInfo {
    * 子网ID
    */
   SubnetId: string
-}
-
-/**
- * DescribeMQTTProductSKUList返回参数结构体
- */
-export interface DescribeMQTTProductSKUListResponse {
-  /**
-   * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCount?: number
-  /**
-   * mqtt商品配置信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MQTTProductSkuList?: Array<MQTTProductSkuItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -947,88 +793,6 @@ export interface DescribeRoleListRequest {
    * 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。
    */
   Filters?: Array<Filter>
-}
-
-/**
- * DescribeMQTTClient返回参数结构体
- */
-export interface DescribeMQTTClientResponse {
-  /**
-   * 客户端唯一标识
-   */
-  ClientId?: string
-  /**
-   * 客户端网络地址
-   */
-  ClientAddress?: string
-  /**
-   * MQTT 协议版本，4 表示 MQTT 3.1.1
-   */
-  ProtocolVersion?: number
-  /**
-   * 保持连接时间，单位：秒
-   */
-  Keepalive?: number
-  /**
-   * 连接状态，CONNECTED 已连接，DISCONNECTED 未连接
-   */
-  ConnectionStatus?: string
-  /**
-   * 客户端创建时间
-   */
-  CreateTime?: number
-  /**
-   * 上次建立连接时间
-   */
-  ConnectTime?: number
-  /**
-   * 上次断开连接时间，仅对持久会话（cleanSession=false）并且客户端当前未连接时有意义
-   */
-  DisconnectTime?: number
-  /**
-   * 客户端的订阅列表
-   */
-  MQTTClientSubscriptions?: Array<MQTTClientSubscription>
-  /**
-   * 服务端到客户端的流量统计
-   */
-  Inbound?: StatisticsReport
-  /**
-   * 客户端到服务端的流量统计
-   */
-  OutBound?: StatisticsReport
-  /**
-   * cleansession标志
-   */
-  CleanSession?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeMQTTMessageList返回参数结构体
- */
-export interface DescribeMQTTMessageListResponse {
-  /**
-   * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCount?: number
-  /**
-   * 消息记录列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: Array<MQTTMessageItem>
-  /**
-   * 请求任务id
-   */
-  TaskRequestId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -1058,9 +822,19 @@ export interface DescribeMigratingTopicStatsResponse {
 }
 
 /**
- * DescribeMQTTProductSKUList请求参数结构体
+ * ImportSourceClusterConsumerGroups请求参数结构体
  */
-export type DescribeMQTTProductSKUListRequest = null
+export interface ImportSourceClusterConsumerGroupsRequest {
+  /**
+   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
+
+   */
+  TaskId: string
+  /**
+   * 待导入的消费组列表
+   */
+  GroupList: Array<SourceClusterGroupConfig>
+}
 
 /**
  * DescribeConsumerLag请求参数结构体
@@ -1188,41 +962,6 @@ export interface DescribeMessageListResponse {
 }
 
 /**
- * DescribeMQTTMessage返回参数结构体
- */
-export interface DescribeMQTTMessageResponse {
-  /**
-   * 消息体
-   */
-  Body?: string
-  /**
-   * 详情参数
-   */
-  Properties?: Array<CustomMapEntry>
-  /**
-   * 生产时间
-   */
-  ProduceTime?: string
-  /**
-   * 消息ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MessageId?: string
-  /**
-   * 生产者地址
-   */
-  ProducerAddr?: string
-  /**
-   * Topic
-   */
-  ShowTopicName?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DeleteSmoothMigrationTask请求参数结构体
  */
 export interface DeleteSmoothMigrationTaskRequest {
@@ -1231,81 +970,6 @@ export interface DeleteSmoothMigrationTaskRequest {
 
    */
   TaskId: string
-}
-
-/**
- * MQTT 实例信息
- */
-export interface MQTTInstanceItem {
-  /**
-   * 实例ID
-   */
-  InstanceId?: string
-  /**
-   * 实例名称
-   */
-  InstanceName?: string
-  /**
-   * 实例版本
-   */
-  Version?: string
-  /**
-   * 实例类型，
-BASIC，基础版
-PRO，专业版
-   */
-  InstanceType?: string
-  /**
-   * 实例状态，
-RUNNING, 运行中
-MAINTAINING，维护中
-ABNORMAL，异常
-OVERDUE，欠费
-DESTROYED，已删除
-CREATING，创建中
-MODIFYING，变配中
-CREATE_FAILURE，创建失败
-MODIFY_FAILURE，变配失败
-DELETING，删除中
-   */
-  InstanceStatus?: string
-  /**
-   * 实例主题数上限
-   */
-  TopicNumLimit?: number
-  /**
-   * 备注信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark?: string
-  /**
-   * 主题数量
-   */
-  TopicNum?: number
-  /**
-   * 商品规格
-   */
-  SkuCode?: string
-  /**
-   * 弹性TPS限流值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TpsLimit?: number
-  /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: number
-  /**
-   * 订阅关系上限
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubscriptionNumLimit?: number
-  /**
-   * 客户端连接数上线
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClientNumLimit?: number
 }
 
 /**
@@ -1430,20 +1094,6 @@ export interface ChangeMigratingTopicToNextStageResponse {
 }
 
 /**
- * DescribeMQTTClient请求参数结构体
- */
-export interface DescribeMQTTClientRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-  /**
-   * 客户端详情
-   */
-  ClientId: string
-}
-
-/**
  * DescribeSourceClusterGroupList请求参数结构体
  */
 export interface DescribeSourceClusterGroupListRequest {
@@ -1464,55 +1114,6 @@ export interface DescribeSourceClusterGroupListRequest {
    * 过滤查询条件列表，请在引用此参数的API说明中了解使用方法。
    */
   Filters?: Array<Filter>
-}
-
-/**
- * DescribeMQTTInsVPCEndpoints返回参数结构体
- */
-export interface DescribeMQTTInsVPCEndpointsResponse {
-  /**
-   * 接入点
-   */
-  Endpoints?: Array<MQTTEndpointItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeMQTTInsPublicEndpoints返回参数结构体
- */
-export interface DescribeMQTTInsPublicEndpointsResponse {
-  /**
-   * 接入点
-   */
-  Endpoints?: Array<MQTTEndpointItem>
-  /**
-   * 实例id
-   */
-  InstanceId?: string
-  /**
-   * 带宽
-   */
-  Bandwidth?: number
-  /**
-   * 公网访问规则
-   */
-  Rules?: Array<PublicAccessRule>
-  /**
-   * 公网状态：
-    NORMAL-正常
-    CLOSING-关闭中
-    MODIFYING-修改中
-    CREATING-开启中
-    CLOSE-关闭
-   */
-  Status?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -1538,72 +1139,6 @@ export interface DescribeInstanceListRequest {
 }
 
 /**
- * ResendDeadLetterMessage返回参数结构体
- */
-export interface ResendDeadLetterMessageResponse {
-  /**
-   * 重发消息结果
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResendResult?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 消息记录
- */
-export interface MQTTMessageItem {
-  /**
-   * 消息ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MsgId?: string
-  /**
-   * 消息tag
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: string
-  /**
-   * 消息key
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Keys?: string
-  /**
-   * 客户端地址	
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProducerAddr?: string
-  /**
-   * 消息发送时间	
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProduceTime?: string
-  /**
-   * 死信重发次数	
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DeadLetterResendTimes?: number
-  /**
-   * 死信重发成功次数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DeadLetterResendSuccessTimes?: number
-  /**
-   * 子topic
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubTopic?: string
-  /**
-   * 消息质量等级
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Qos?: string
-}
-
-/**
  * DescribeMigrationTaskList请求参数结构体
  */
 export interface DescribeMigrationTaskListRequest {
@@ -1622,38 +1157,6 @@ export interface DescribeMigrationTaskListRequest {
 }
 
 /**
- * DeleteMQTTUser请求参数结构体
- */
-export interface DeleteMQTTUserRequest {
-  /**
-   * 集群ID
-   */
-  InstanceId: string
-  /**
-   * 用户名
-   */
-  Username: string
-}
-
-/**
- * ModifyMQTTInstanceCertBinding请求参数结构体
- */
-export interface ModifyMQTTInstanceCertBindingRequest {
-  /**
-   * 集群ID
-   */
-  InstanceId: string
-  /**
-   * 服务端证书id
-   */
-  SSLServerCertId: string
-  /**
-   * CA证书id
-   */
-  SSLCaCertId: string
-}
-
-/**
  * VerifyMessageConsumption返回参数结构体
  */
 export interface VerifyMessageConsumptionResponse {
@@ -1664,17 +1167,9 @@ export interface VerifyMessageConsumptionResponse {
 }
 
 /**
- * CreateMQTTTopic返回参数结构体
+ * ModifyRole返回参数结构体
  */
-export interface CreateMQTTTopicResponse {
-  /**
-   * 实例ID
-   */
-  InstanceId?: string
-  /**
-   * 主题
-   */
-  Topic?: string
+export interface ModifyRoleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1682,13 +1177,21 @@ export interface CreateMQTTTopicResponse {
 }
 
 /**
- * DescribeMQTTInstance请求参数结构体
+ * 迁移主题修改状态后的结果
  */
-export interface DescribeMQTTInstanceRequest {
+export interface TopicStageChangeResult {
   /**
-   * 集群ID
+   * 主题名称
    */
-  InstanceId: string
+  TopicName?: string
+  /**
+   * 是否成功
+   */
+  Success?: boolean
+  /**
+   * 命名空间，仅4.x有效
+   */
+  Namespace?: string
 }
 
 /**
@@ -1704,73 +1207,6 @@ export interface ImportSourceClusterTopicsRequest {
    * 待导入的主题列表
    */
   TopicList: Array<SourceClusterTopicConfig>
-}
-
-/**
- * CreateMQTTUser返回参数结构体
- */
-export interface CreateMQTTUserResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 消费组配置信息
- */
-export interface SourceClusterGroupConfig {
-  /**
-   * 消费组名称，可在[DescribeSourceClusterGroupList](https://cloud.tencent.com/document/api/1493/118006)接口返回的[SourceClusterGroupConfig](https://cloud.tencent.com/document/api/1493/96031#SourceClusterGroupConfig)数据中获取。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GroupName: string
-  /**
-   * 备注信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark?: string
-  /**
-   * 是否已导入，作为入参时无效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Imported?: boolean
-  /**
-   * 命名空间，仅4.x集群有效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Namespace?: string
-  /**
-   * 导入状态
-Unknown 未知
-Success 成功
-Failure 失败
-AlreadyExists 已存在
-
-仅作为出参时使用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ImportStatus?: string
-  /**
-   * 4.x的命名空间，出参使用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NamespaceV4?: string
-  /**
-   * 4.x的消费组名，出参使用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GroupNameV4?: string
-  /**
-   * 4.x的完整命名空间，出参使用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FullNamespaceV4?: string
-  /**
-   * 是否为顺序投递，5.0有效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConsumeMessageOrderly?: boolean
 }
 
 /**
@@ -1835,23 +1271,61 @@ TRANSACTION:事务消息
 }
 
 /**
- * DeleteMQTTInsPublicEndpoint返回参数结构体
+ * 平滑迁移任务
  */
-export interface DeleteMQTTInsPublicEndpointResponse {
+export interface SmoothMigrationTaskItem {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
-}
-
-/**
- * DeleteInstance请求参数结构体
- */
-export interface DeleteInstanceRequest {
+  TaskId?: string
   /**
-   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
+   * 任务名称	
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  TaskName?: string
+  /**
+   * 源集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceClusterName?: string
+  /**
+   * 目标集群实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 网络连接类型， 
+PUBLIC 公网 
+VPC 私有网络 
+OTHER 其他
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConnectionType?: string
+  /**
+   * 源集群NameServer地址	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceNameServer?: string
+  /**
+   * 任务状态:
+Configuration 迁移配置,
+SourceConnecting 连接源集群中,
+ MetaDataImport 元数据导入,
+EndpointSetup 切换接入点,
+ServiceMigration 切流中,
+Completed 已完成,
+Cancelled 已取消
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskStatus?: string
+  /**
+   * 目标集群实例版本，
+4 表示4.x版本
+5 表示5.x版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceVersion?: string
 }
 
 /**
@@ -1886,16 +1360,6 @@ export interface ModifyRoleRequest {
    * Topic&Group维度权限配置，权限类型为 TopicAndGroup 时必填
    */
   DetailedPerms?: Array<DetailedRolePerm>
-}
-
-/**
- * DescribeMQTTInsVPCEndpoints请求参数结构体
- */
-export interface DescribeMQTTInsVPCEndpointsRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
 }
 
 /**
@@ -2004,74 +1468,24 @@ export interface DeleteRoleRequest {
 }
 
 /**
- * MQTT ProductSkuItem
+ * ResendDeadLetterMessage返回参数结构体
  */
-export interface MQTTProductSkuItem {
+export interface ResendDeadLetterMessageResponse {
   /**
-   * 类型
+   * 重发消息结果
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceType?: string
+  ResendResult?: boolean
   /**
-   * cide
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SkuCode?: string
-  /**
-   * sale
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OnSale?: boolean
-  /**
-   * topic num限制
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TopicNumLimit?: number
-  /**
-   * tps
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TpsLimit?: number
-  /**
-   * 客户端连接数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClientNumLimit?: number
-  /**
-   * 订阅数限制
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubscriptionNumLimit?: number
-  /**
-   * 代理核
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProxySpecCore?: number
-  /**
-   * 代理内存
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProxySpecMemory?: number
-  /**
-   * 代理总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProxySpecCount?: number
+  RequestId?: string
 }
 
 /**
- * DescribeMQTTInstanceList返回参数结构体
+ * ModifyConsumerGroup返回参数结构体
  */
-export interface DescribeMQTTInstanceListResponse {
-  /**
-   * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCount?: number
-  /**
-   * 实例列表
-   */
-  Data?: Array<MQTTInstanceItem>
+export interface ModifyConsumerGroupResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2096,20 +1510,6 @@ export interface DescribeMigratingTopicStatsRequest {
    * 命名空间，仅迁移至4.x集群有效，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
    */
   Namespace?: string
-}
-
-/**
- * 标签过滤器
- */
-export interface TagFilter {
-  /**
-   * 标签键名称
-   */
-  TagKey: string
-  /**
-   * 标签值列表
-   */
-  TagValues: Array<string>
 }
 
 /**
@@ -2162,50 +1562,6 @@ export interface RollbackMigratingTopicStageRequest {
    * 命名空间，仅迁移至4.x集群有效，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
    */
   Namespace?: string
-}
-
-/**
- * DescribeMQTTUserList返回参数结构体
- */
-export interface DescribeMQTTUserListResponse {
-  /**
-   * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCount?: number
-  /**
-   * 角色信息列表
-   */
-  Data?: Array<MQTTUserItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyMQTTUser返回参数结构体
- */
-export interface ModifyMQTTUserResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 价格标签信息，一个完整的价格标签包含计价类别和计费项标签。
- */
-export interface PriceTag {
-  /**
-   * 计价名称（枚举值：tps：TPS基础价；stepTps：TPS步长）
-   */
-  Name?: string
-  /**
-   * 计费项对应的步长数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Step?: number
 }
 
 /**
@@ -2307,34 +1663,6 @@ export interface DescribeMigratingTopicListResponse {
    * 主题列表
    */
   MigrateTopics?: Array<MigratingTopic>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyMQTTInsPublicEndpoint请求参数结构体
- */
-export interface ModifyMQTTInsPublicEndpointRequest {
-  /**
-   * 集群ID
-   */
-  InstanceId: string
-  /**
-   * 带宽
-   */
-  Bandwidth: number
-  /**
-   * 公网访问规则
-   */
-  Rules: Array<PublicAccessRule>
-}
-
-/**
- * ModifyMQTTInstanceCertBinding返回参数结构体
- */
-export interface ModifyMQTTInstanceCertBindingResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2445,16 +1773,6 @@ DELETING，删除中
 }
 
 /**
- * DeleteMQTTInstance返回参数结构体
- */
-export interface DeleteMQTTInstanceResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * VerifyMessageConsumption请求参数结构体
  */
 export interface VerifyMessageConsumptionRequest {
@@ -2504,16 +1822,6 @@ export interface DescribeTopicRequest {
    * 查询结果限制数量，默认20。
    */
   Limit?: number
-}
-
-/**
- * DeleteMQTTInstance请求参数结构体
- */
-export interface DeleteMQTTInstanceRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
 }
 
 /**
@@ -2597,167 +1905,39 @@ export interface DescribeMigratingGroupStatsResponse {
 }
 
 /**
- * DescribeMQTTInstanceList请求参数结构体
+ * 主题消费进度
  */
-export interface DescribeMQTTInstanceListRequest {
+export interface TopicConsumeStats {
   /**
-   * 查询条件列表
+   * 主题名称
    */
-  Filters?: Array<Filter>
+  Topic?: string
   /**
-   * 查询起始位置
-   */
-  Offset?: number
-  /**
-   * 查询结果限制数量
-   */
-  Limit?: number
-  /**
-   * 是否包含新控制台集群：默认为包含
-   */
-  IncludeNew?: boolean
-}
+   * 主题类型，枚举值如下：
 
-/**
- * ModifyConsumerGroup返回参数结构体
- */
-export interface ModifyConsumerGroupResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+- UNSPECIFIED：未指定
+- NORMAL：普通消息
+- FIFO：顺序消息
+- DELAY：延时消息
+- TRANSACTION：事务消息
    */
-  RequestId?: string
-}
-
-/**
- * CreateMQTTInstance返回参数结构体
- */
-export interface CreateMQTTInstanceResponse {
+  TopicType?: string
   /**
-   * 实例ID
+   * 单节点主题队列数量
    */
-  InstanceId?: string
+  QueueNum?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 消费堆积
    */
-  RequestId?: string
-}
-
-/**
- * DescribeMQTTInstance返回参数结构体
- */
-export interface DescribeMQTTInstanceResponse {
+  ConsumerLag?: number
   /**
-   * 实例类型，
-EXPERIMENT 体验版
-BASIC 基础版
-PRO  专业版
-PLATINUM 铂金版
+   * 订阅规则，`*`表示订阅全部TAG
    */
-  InstanceType?: string
+  SubString?: string
   /**
-   * 实例ID
+   * 最后消费进度更新时间，**Unix时间戳（毫秒）**
    */
-  InstanceId?: string
-  /**
-   * 实例名称
-   */
-  InstanceName?: string
-  /**
-   * 主题数量
-   */
-  TopicNum?: number
-  /**
-   * 实例最大主题数量
-   */
-  TopicNumLimit?: number
-  /**
-   * TPS限流值
-   */
-  TpsLimit?: number
-  /**
-   * 创建时间，秒为单位
-   */
-  CreatedTime?: number
-  /**
-   * 备注信息
-   */
-  Remark?: string
-  /**
-   * 实例状态
-   */
-  InstanceStatus?: string
-  /**
-   * 实例规格
-   */
-  SkuCode?: string
-  /**
-   * 订阅数上限
-   */
-  SubscriptionNumLimit?: number
-  /**
-   * 客户端数量上限
-   */
-  ClientNumLimit?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ImportSourceClusterConsumerGroups请求参数结构体
- */
-export interface ImportSourceClusterConsumerGroupsRequest {
-  /**
-   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
-
-   */
-  TaskId: string
-  /**
-   * 待导入的消费组列表
-   */
-  GroupList: Array<SourceClusterGroupConfig>
-}
-
-/**
- * MQTTEndpoint
- */
-export interface MQTTEndpointItem {
-  /**
-   * 类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Type?: string
-  /**
-   * 接入点
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Url?: string
-  /**
-   * vpc信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VpcId?: string
-  /**
-   * 子网信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubnetId?: string
-  /**
-   * 主机
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Host?: string
-  /**
-   * 端口
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Port?: number
-  /**
-   * 接入点ip
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Ip?: string
+  LastUpdateTime?: number
 }
 
 /**
@@ -2825,49 +2005,17 @@ export interface DescribeMessageResponse {
 }
 
 /**
- * DoHealthCheckOnMigratingTopic返回参数结构体
+ * proxy调度时各个可用区有无调度任务
  */
-export interface DoHealthCheckOnMigratingTopicResponse {
+export interface ZoneScheduledItem {
   /**
-   * 是否通过
+   * 可用区ID
    */
-  Passed?: boolean
+  ZoneId?: string
   /**
-   * 健康检查返回的错误信息
-NotChecked 未执行检查， 
-Unknown 未知错误, 
-TopicNotImported 主题未导入,
-TopicNotExistsInSourceCluster 主题在源集群中不存在, 
-TopicNotExistsInTargetCluster 主题在目标集群中不存在, 
-ConsumerConnectedOnTarget 目标集群上存在消费者连接, 
-SourceTopicHasNewMessagesIn5Minutes 源集群主题前5分钟内有新消息写入, 
-TargetTopicHasNewMessagesIn5Minutes 目标集群主题前5分钟内有新消息写入, 
-SourceTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, 
-TargetTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, 
-ConsumerGroupCountNotMatch 订阅组数量不一致, 
-SourceTopicHasUnconsumedMessages 源集群主题存在未消费消息。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 有剔除的调度任务且没有切回的可用区时，该值为true，反之为false
    */
-  Reason?: string
-  /**
-   * 健康检查返回的错误信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReasonList?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteMQTTUser返回参数结构体
- */
-export interface DeleteMQTTUserResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  NodePermWipeFlag?: boolean
 }
 
 /**
@@ -3272,60 +2420,25 @@ export interface ConsumerClient {
 }
 
 /**
- * DescribeConsumerGroup返回参数结构体
+ * 消息轨迹
  */
-export interface DescribeConsumerGroupResponse {
+export interface MessageTraceItem {
   /**
-   * 在线消费者数量
-   */
-  ConsumerNum?: number
-  /**
-   * TPS
-   */
-  Tps?: number
-  /**
-   * 消息堆积数量
-   */
-  ConsumerLag?: number
-  /**
-   * 消费类型，枚举值如下：
+   * 消息处理阶段，枚举值如下：
 
-- PULL：PULL 消费类型
-- PUSH：PUSH 消费类型
-- POP：POP 消费类型
+- produce：消息生产
+
+- persist：消息存储
+
+- consume：消息消费
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConsumeType?: string
+  Stage?: string
   /**
-   * 创建时间，**Unix时间戳（毫秒）**
+   * 轨迹详情
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedTime?: number
-  /**
-   * 顺序投递：true
-并发投递：false
-   */
-  ConsumeMessageOrderly?: boolean
-  /**
-   * 是否开启消费
-   */
-  ConsumeEnable?: boolean
-  /**
-   * 最大重试次数
-   */
-  MaxRetryTimes?: number
-  /**
-   * 备注
-   */
-  Remark?: string
-  /**
-   * 消费模式：
-BROADCASTING 广播模式
-CLUSTERING 集群模式
-   */
-  MessageModel?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Data?: string
 }
 
 /**
@@ -3397,13 +2510,23 @@ export interface DescribeConsumerLagResponse {
 }
 
 /**
- * DescribeMQTTInsPublicEndpoints请求参数结构体
+ * ChangeMigratingTopicToNextStage请求参数结构体
  */
-export interface DescribeMQTTInsPublicEndpointsRequest {
+export interface ChangeMigratingTopicToNextStageRequest {
   /**
-   * 集群ID
+   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
+
    */
-  InstanceId: string
+  TaskId: string
+  /**
+   * 主题名称列表，主题名称可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
+
+   */
+  TopicNameList: Array<string>
+  /**
+   * 命名空间列表，仅4.x集群有效，与TopicNameList一一对应，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
+   */
+  NamespaceList?: Array<string>
 }
 
 /**
@@ -3477,74 +2600,6 @@ export interface Filter {
    * 过滤条件的值
    */
   Values: Array<string>
-}
-
-/**
- * ModifyMQTTTopic返回参数结构体
- */
-export interface ModifyMQTTTopicResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeMQTTTopicList请求参数结构体
- */
-export interface DescribeMQTTTopicListRequest {
-  /**
-   * 集群ID
-   */
-  InstanceId: string
-  /**
-   * 查询条件列表
-   */
-  Filters?: Array<Filter>
-  /**
-   * 查询起始位置
-   */
-  Offset?: number
-  /**
-   * 查询结果限制数量
-   */
-  Limit?: number
-}
-
-/**
- * MQTT 订阅关系
- */
-export interface MQTTClientSubscription {
-  /**
-   * topic 订阅
-   */
-  TopicFilter?: string
-  /**
-   * 服务质量等级
-   */
-  Qos?: number
-}
-
-/**
- * 消息轨迹
- */
-export interface MessageTraceItem {
-  /**
-   * 消息处理阶段，枚举值如下：
-
-- produce：消息生产
-
-- persist：消息存储
-
-- consume：消息消费
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Stage?: string
-  /**
-   * 轨迹详情
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: string
 }
 
 /**
@@ -3743,37 +2798,6 @@ PLATINUM 铂金版
 }
 
 /**
- * MQTT客户端监控
- */
-export interface PacketStatistics {
-  /**
-   * 类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MessageType?: string
-  /**
-   * 服务质量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Qos?: number
-  /**
-   * 指标值
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Count?: number
-}
-
-/**
- * DeleteMQTTTopic返回参数结构体
- */
-export interface DeleteMQTTTopicResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeConsumerClient返回参数结构体
  */
 export interface DescribeConsumerClientResponse {
@@ -3794,11 +2818,11 @@ export interface DescribeConsumerClientResponse {
 }
 
 /**
- * DescribeMQTTInstanceCert请求参数结构体
+ * DeleteInstance请求参数结构体
  */
-export interface DescribeMQTTInstanceCertRequest {
+export interface DeleteInstanceRequest {
   /**
-   * 集群ID
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
    */
   InstanceId: string
 }
@@ -3852,16 +2876,6 @@ export interface DescribeProducerListResponse {
 }
 
 /**
- * ModifyMQTTInsPublicEndpoint返回参数结构体
- */
-export interface ModifyMQTTInsPublicEndpointResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ResendDeadLetterMessage请求参数结构体
  */
 export interface ResendDeadLetterMessageRequest {
@@ -3877,36 +2891,6 @@ export interface ResendDeadLetterMessageRequest {
    * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
    */
   ConsumerGroup?: string
-}
-
-/**
- * CreateMQTTUser请求参数结构体
- */
-export interface CreateMQTTUserRequest {
-  /**
-   * 集群ID
-   */
-  InstanceId: string
-  /**
-   * 备注
-   */
-  Remark: string
-  /**
-   * 是否开启生产权限
-   */
-  PermWrite: boolean
-  /**
-   * 是否开启消费权限
-   */
-  PermRead: boolean
-  /**
-   * 用户名
-   */
-  Username: string
-  /**
-   * 密码，该字段为空时候则后端会默认生成
-   */
-  Password?: string
 }
 
 /**
@@ -3942,37 +2926,39 @@ export interface DescribeFusionInstanceListRequest {
 }
 
 /**
- * DescribeMQTTMessage请求参数结构体
+ * DoHealthCheckOnMigratingTopic返回参数结构体
  */
-export interface DescribeMQTTMessageRequest {
+export interface DoHealthCheckOnMigratingTopicResponse {
   /**
-   * 集群ID
+   * 是否通过
    */
-  InstanceId: string
+  Passed?: boolean
   /**
-   * 主题名称
-   */
-  Topic: string
-  /**
-   * 消息ID
-   */
-  MsgId: string
-}
-
-/**
- * map结构返回
- */
-export interface CustomMapEntry {
-  /**
-   * key
+   * 健康检查返回的错误信息
+NotChecked 未执行检查， 
+Unknown 未知错误, 
+TopicNotImported 主题未导入,
+TopicNotExistsInSourceCluster 主题在源集群中不存在, 
+TopicNotExistsInTargetCluster 主题在目标集群中不存在, 
+ConsumerConnectedOnTarget 目标集群上存在消费者连接, 
+SourceTopicHasNewMessagesIn5Minutes 源集群主题前5分钟内有新消息写入, 
+TargetTopicHasNewMessagesIn5Minutes 目标集群主题前5分钟内有新消息写入, 
+SourceTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, 
+TargetTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, 
+ConsumerGroupCountNotMatch 订阅组数量不一致, 
+SourceTopicHasUnconsumedMessages 源集群主题存在未消费消息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Key?: string
+  Reason?: string
   /**
-   * value
+   * 健康检查返回的错误信息列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value?: string
+  ReasonList?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3987,59 +2973,6 @@ export interface CreateRoleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeMQTTTopicList返回参数结构体
- */
-export interface DescribeMQTTTopicListResponse {
-  /**
-   * 查询总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCount?: number
-  /**
-   * 主题列表
-   */
-  Data?: Array<MQTTTopicItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * MQTT集群用户信息
- */
-export interface MQTTUserItem {
-  /**
-   * 用户名
-   */
-  Username?: string
-  /**
-   * 密码
-   */
-  Password?: string
-  /**
-   * 是否开启消费
-   */
-  PermRead?: boolean
-  /**
-   * 是否开启生产
-   */
-  PermWrite?: boolean
-  /**
-   * 备注信息
-   */
-  Remark?: string
-  /**
-   * 创建时间，秒为单位
-   */
-  CreatedTime?: number
-  /**
-   * 修改时间，秒为单位
-   */
-  ModifiedTime?: number
 }
 
 /**
@@ -4070,142 +3003,60 @@ PUBLIC 公网
 }
 
 /**
- * proxy调度时各个可用区有无调度任务
+ * 消费组配置信息
  */
-export interface ZoneScheduledItem {
+export interface SourceClusterGroupConfig {
   /**
-   * 可用区ID
+   * 消费组名称，可在[DescribeSourceClusterGroupList](https://cloud.tencent.com/document/api/1493/118006)接口返回的[SourceClusterGroupConfig](https://cloud.tencent.com/document/api/1493/96031#SourceClusterGroupConfig)数据中获取。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneId?: string
-  /**
-   * 有剔除的调度任务且没有切回的可用区时，该值为true，反之为false
-   */
-  NodePermWipeFlag?: boolean
-}
-
-/**
- * ChangeMigratingTopicToNextStage请求参数结构体
- */
-export interface ChangeMigratingTopicToNextStageRequest {
-  /**
-   * 任务ID，可在[DescribeSmoothMigrationTaskList](https://cloud.tencent.com/document/api/1493/119997)接口返回的[SmoothMigrationTaskItem](https://cloud.tencent.com/document/api/1493/96031#SmoothMigrationTaskItem)或控制台中获得。
-
-   */
-  TaskId: string
-  /**
-   * 主题名称列表，主题名称可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
-
-   */
-  TopicNameList: Array<string>
-  /**
-   * 命名空间列表，仅4.x集群有效，与TopicNameList一一对应，可在[DescribeMigratingTopicList](https://cloud.tencent.com/document/api/1493/118007)接口返回的[MigratingTopic](https://cloud.tencent.com/document/api/1493/96031#MigratingTopic)数据结构中获得。
-   */
-  NamespaceList?: Array<string>
-}
-
-/**
- * DescribeMQTTUserList请求参数结构体
- */
-export interface DescribeMQTTUserListRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-  /**
-   * 查询条件列表
-   */
-  Filters?: Array<Filter>
-  /**
-   * 查询起始位置
-   */
-  Offset?: number
-  /**
-   * 查询结果限制数量
-   */
-  Limit?: number
-}
-
-/**
- * ModifyMQTTInstance请求参数结构体
- */
-export interface ModifyMQTTInstanceRequest {
-  /**
-   * 集群ID
-   */
-  InstanceId: string
-  /**
-   * 实例名称
-   */
-  Name?: string
+  GroupName: string
   /**
    * 备注信息
-   */
-  Remark?: string
-}
-
-/**
- * ModifyMQTTInstance返回参数结构体
- */
-export interface ModifyMQTTInstanceResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateMQTTInstance请求参数结构体
- */
-export interface CreateMQTTInstanceRequest {
-  /**
-   * 实例类型，
-EXPERIMENT 体验版
-BASIC 基础版
-PRO  专业版
-PLATINUM 铂金版
-   */
-  InstanceType: string
-  /**
-   * 实例名称
-   */
-  Name: string
-  /**
-   * 商品规格，可用规格如下：
-basic_1k,
-   */
-  SkuCode: string
-  /**
-   * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
-   * 标签列表
+   * 是否已导入，作为入参时无效
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagList?: Array<Tag>
+  Imported?: boolean
   /**
-   * 实例绑定的VPC信息
+   * 命名空间，仅4.x集群有效
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcList?: Array<VpcInfo>
+  Namespace?: string
   /**
-   * 是否开启公网
+   * 导入状态
+Unknown 未知
+Success 成功
+Failure 失败
+AlreadyExists 已存在
+
+仅作为出参时使用
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnablePublic?: boolean
+  ImportStatus?: string
   /**
-   * 公网带宽（单位：兆）
+   * 4.x的命名空间，出参使用
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Bandwidth?: number
+  NamespaceV4?: string
   /**
-   * 公网访问白名单
+   * 4.x的消费组名，出参使用
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  IpRules?: Array<IpRule>
+  GroupNameV4?: string
   /**
-   * 是否自动续费（0: 不自动续费；1: 自动续费）
+   * 4.x的完整命名空间，出参使用
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RenewFlag?: number
+  FullNamespaceV4?: string
   /**
-   * 购买时长（单位：月）
+   * 是否为顺序投递，5.0有效
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TimeSpan?: number
+  ConsumeMessageOrderly?: boolean
 }
 
 /**
@@ -4253,53 +3104,53 @@ export interface DescribeConsumerClientListRequest {
 }
 
 /**
- * 主题消费进度
+ * 迁移中的主题
  */
-export interface TopicConsumeStats {
+export interface MigratingTopic {
   /**
    * 主题名称
    */
-  Topic?: string
+  TopicName?: string
   /**
-   * 主题类型，枚举值如下：
-
-- UNSPECIFIED：未指定
-- NORMAL：普通消息
-- FIFO：顺序消息
-- DELAY：延时消息
-- TRANSACTION：事务消息
+   * 迁移状态 
+S_RW_D_NA 源集群读写，
+S_RW_D_R 源集群读写目标集群读，
+S_RW_D_RW 源集群读写目标集群读写，
+S_R_D_RW 源集群读目标集群读写，
+S_NA_D_RW 目标集群读写
    */
-  TopicType?: string
+  MigrationStatus?: string
   /**
-   * 单节点主题队列数量
+   * 是否完成健康检查
    */
-  QueueNum?: number
+  HealthCheckPassed?: boolean
   /**
-   * 消费堆积
+   * 上次健康检查返回的错误信息，仅在HealthCheckPassed为false时有效。 NotChecked 未执行检查， Unknown 未知错误, TopicNotImported 主题未导入, TopicNotExistsInSourceCluster 主题在源集群中不存在, TopicNotExistsInTargetCluster 主题在目标集群中不存在, ConsumerConnectedOnTarget 目标集群上存在消费者连接, SourceTopicHasNewMessagesIn5Minutes 源集群主题前5分钟内有新消息写入, TargetTopicHasNewMessagesIn5Minutes 目标集群主题前5分钟内有新消息写入, SourceTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, TargetTopicHasNoMessagesIn5Minutes 源集群前5分钟内没有新消息写入, ConsumerGroupCountNotMatch 订阅组数量不一致, SourceTopicHasUnconsumedMessages 源集群主题存在未消费消息,
    */
-  ConsumerLag?: number
+  HealthCheckError?: string
   /**
-   * 订阅规则，`*`表示订阅全部TAG
+   * 命名空间，仅4.x集群有效
    */
-  SubString?: string
+  Namespace?: string
   /**
-   * 最后消费进度更新时间，**Unix时间戳（毫秒）**
+   * 4.x的命名空间
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  LastUpdateTime?: number
-}
-
-/**
- * DescribeMQTTTopic请求参数结构体
- */
-export interface DescribeMQTTTopicRequest {
+  NamespaceV4?: string
   /**
-   * 集群ID
+   * 4.x的主题名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  TopicNameV4?: string
   /**
-   * 主题名称
+   * 4.x的完整命名空间
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Topic: string
+  FullNamespaceV4?: string
+  /**
+   * 上次健康检查返回的错误列表
+   */
+  HealthCheckErrorList?: Array<string>
 }
 
 /**
@@ -4407,58 +3258,6 @@ POSTPAID 按量付费
 }
 
 /**
- * ModifyMQTTTopic请求参数结构体
- */
-export interface ModifyMQTTTopicRequest {
-  /**
-   * 集群ID
-   */
-  InstanceId: string
-  /**
-   * 主题名称
-   */
-  Topic: string
-  /**
-   * 备注信息
-   */
-  Remark?: string
-}
-
-/**
- * MQTT客户端数据流量统计
- */
-export interface StatisticsReport {
-  /**
-   * 字节数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Bytes?: number
-  /**
-   * 监控指标
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Items?: Array<PacketStatistics>
-}
-
-/**
- * IP规则
- */
-export interface IpRule {
-  /**
-   * IP地址
-   */
-  Ip: string
-  /**
-   * 是否允许放行，默认为false表示拒绝
-   */
-  Allow: boolean
-  /**
-   * 备注信息
-   */
-  Remark: string
-}
-
-/**
  * 消息记录
  */
 export interface MessageItem {
@@ -4547,22 +3346,17 @@ export interface RoleItem {
 }
 
 /**
- * MQTT 主题详情
+ * 标签过滤器
  */
-export interface MQTTTopicItem {
+export interface TagFilter {
   /**
-   * 实例 ID
+   * 标签键名称
    */
-  InstanceId?: string
+  TagKey: string
   /**
-   * 主题名称
+   * 标签值列表
    */
-  Topic?: string
-  /**
-   * 主题描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark?: string
+  TagValues: Array<string>
 }
 
 /**
@@ -4584,47 +3378,18 @@ export interface DescribeConsumerGroupListResponse {
 }
 
 /**
- * ModifyMQTTUser请求参数结构体
+ * 价格标签信息，一个完整的价格标签包含计价类别和计费项标签。
  */
-export interface ModifyMQTTUserRequest {
+export interface PriceTag {
   /**
-   * 集群ID
+   * 计价名称（枚举值：tps：TPS基础价；stepTps：TPS步长）
    */
-  InstanceId: string
+  Name?: string
   /**
-   * 用户名
+   * 计费项对应的步长数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Username: string
-  /**
-   * 是否开启消费
-   */
-  PermRead: boolean
-  /**
-   * 是否开启生产
-   */
-  PermWrite: boolean
-  /**
-   * 备注
-   */
-  Remark?: string
-}
-
-/**
- * CreateMQTTInsPublicEndpoint请求参数结构体
- */
-export interface CreateMQTTInsPublicEndpointRequest {
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-  /**
-   * 带宽
-   */
-  Bandwidth: number
-  /**
-   * 公网访问规则
-   */
-  Rules?: Array<PublicAccessRule>
+  Step?: number
 }
 
 /**
@@ -4680,78 +3445,9 @@ export interface ProducerInfo {
 }
 
 /**
- * CreateMQTTTopic请求参数结构体
- */
-export interface CreateMQTTTopicRequest {
-  /**
-   * 集群ID
-   */
-  InstanceId: string
-  /**
-   * 主题名称
-   */
-  Topic: string
-  /**
-   * 备注
-   */
-  Remark?: string
-}
-
-/**
  * DeleteTopic返回参数结构体
  */
 export interface DeleteTopicResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeMQTTInstanceCert返回参数结构体
- */
-export interface DescribeMQTTInstanceCertResponse {
-  /**
-   * 集群id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceId?: string
-  /**
-   * 服务端证书id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SSLServerCertId?: string
-  /**
-   * CA证书id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SSLCaCertId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeMQTTTopic返回参数结构体
- */
-export interface DescribeMQTTTopicResponse {
-  /**
-   * 实例ID
-   */
-  InstanceId?: string
-  /**
-   * 主题名称
-   */
-  Topic?: string
-  /**
-   * 备注
-   */
-  Remark?: string
-  /**
-   * 创建时间，秒为单位
-   */
-  CreatedTime?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4804,37 +3500,21 @@ export interface RemoveMigratingTopicResponse {
 }
 
 /**
- * DescribeMQTTMessageList请求参数结构体
+ * IP规则
  */
-export interface DescribeMQTTMessageListRequest {
+export interface IpRule {
   /**
-   * 集群ID
+   * IP地址
    */
-  InstanceId: string
+  Ip: string
   /**
-   * 主题名称
+   * 是否允许放行，默认为false表示拒绝
    */
-  Topic: string
+  Allow: boolean
   /**
-   * 开始时间
+   * 备注信息
    */
-  StartTime: number
-  /**
-   * 结束时间
-   */
-  EndTime: number
-  /**
-   * 请求任务id
-   */
-  TaskRequestId: string
-  /**
-   * 查询起始位置
-   */
-  Offset?: number
-  /**
-   * 查询结果限制数量
-   */
-  Limit?: number
+  Remark: string
 }
 
 /**

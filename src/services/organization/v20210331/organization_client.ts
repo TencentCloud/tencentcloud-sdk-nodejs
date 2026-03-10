@@ -70,6 +70,7 @@ import {
   DescribeOrganizationResponse,
   ListNonCompliantResourceRequest,
   DisablePolicyTypeResponse,
+  UserSyncProvisioning,
   DescribeOrganizationMemberPoliciesRequest,
   DescribeEffectivePolicyRequest,
   CreateOrgServiceAssignRequest,
@@ -105,12 +106,13 @@ import {
   ListPoliciesResponse,
   BindOrganizationMemberAuthAccountRequest,
   DescribeShareUnitsResponse,
+  SAMLIdentityProviderConfiguration,
   UpdateOrganizationMemberEmailBindResponse,
   GetZoneSAMLServiceProviderInfoResponse,
   DeleteOrganizationMembersResponse,
   ManagerShareUnit,
   UpdateSCIMCredentialStatusResponse,
-  UpdateOrganizationMembersPolicyRequest,
+  DescribeShareUnitNodesResponse,
   ShareUnitResource,
   DescribeOrganizationMemberAuthIdentitiesRequest,
   CreateOrganizationMemberAuthIdentityResponse,
@@ -124,6 +126,7 @@ import {
   MoveOrganizationNodeMembersRequest,
   GetTaskStatusResponse,
   SAMLIdPCertificate,
+  AddShareUnitNodeRequest,
   UpdateOrganizationMemberResponse,
   AuthNode,
   DeleteGroupRequest,
@@ -164,9 +167,10 @@ import {
   ListJoinedGroupsForUserResponse,
   DescribeShareAreasRequest,
   DescribeOrganizationMemberAuthAccountsResponse,
+  DeleteShareUnitNodeRequest,
   RoleAssignmentInfo,
   OrgNode,
-  Tags,
+  DeleteShareUnitNodeResponse,
   ListRoleConfigurationProvisioningsRequest,
   GetSCIMSynchronizationStatusRequest,
   OrgIdentity,
@@ -196,7 +200,7 @@ import {
   AddShareUnitMembersResponse,
   ListGroupsResponse,
   CreateOrganizationMemberPolicyRequest,
-  UserSyncProvisioning,
+  Tags,
   GetUserSyncProvisioningResponse,
   CreateOrganizationRequest,
   ListJoinedGroupsForUserRequest,
@@ -247,6 +251,7 @@ import {
   ListPoliciesRequest,
   BindOrganizationPolicySubAccountRequest,
   OrgMemberAuthAccount,
+  UpdateOrganizationMembersPolicyRequest,
   CreateOrganizationMemberRequest,
   AuthRelationFile,
   UpdateSCIMSynchronizationStatusResponse,
@@ -264,6 +269,7 @@ import {
   UpdateGroupRequest,
   ListExternalSAMLIdPCertificatesResponse,
   DeleteAccountRequest,
+  DescribeShareUnitNodesRequest,
   DescribeShareUnitMembersRequest,
   RemoveExternalSAMLIdPCertificateRequest,
   ListPoliciesForTarget,
@@ -312,6 +318,7 @@ import {
   ListTargetsForPolicyRequest,
   DeleteOrganizationIdentityRequest,
   UpdateOrganizationNodeRequest,
+  ShareUnitNode,
   ZoneStatistics,
   DeleteOrganizationNodesResponse,
   DescribeOrganizationFinancialByMemberResponse,
@@ -326,7 +333,7 @@ import {
   UserProvisioning,
   ListSCIMCredentialsRequest,
   UpdateSCIMCredentialStatusRequest,
-  SAMLIdentityProviderConfiguration,
+  AddShareUnitNodeResponse,
   RolePolicie,
   UpdateUserSyncProvisioningResponse,
   DeleteSCIMCredentialResponse,
@@ -465,6 +472,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 添加共享单元部门
+   */
+  async AddShareUnitNode(
+    req: AddShareUnitNodeRequest,
+    cb?: (error: string, rep: AddShareUnitNodeResponse) => void
+  ): Promise<AddShareUnitNodeResponse> {
+    return this.request("AddShareUnitNode", req, cb)
+  }
+
+  /**
    * 开通身份中心服务（CIC）
    */
   async OpenIdentityCenter(
@@ -562,6 +579,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOrganizationNodesResponse) => void
   ): Promise<DescribeOrganizationNodesResponse> {
     return this.request("DescribeOrganizationNodes", req, cb)
+  }
+
+  /**
+   * 删除共享单元部门
+   */
+  async DeleteShareUnitNode(
+    req: DeleteShareUnitNodeRequest,
+    cb?: (error: string, rep: DeleteShareUnitNodeResponse) => void
+  ): Promise<DeleteShareUnitNodeResponse> {
+    return this.request("DeleteShareUnitNode", req, cb)
   }
 
   /**
@@ -712,6 +739,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ProvisionRoleConfigurationResponse) => void
   ): Promise<ProvisionRoleConfigurationResponse> {
     return this.request("ProvisionRoleConfiguration", req, cb)
+  }
+
+  /**
+   * 获取共享单元部门列表。
+   */
+  async DescribeShareUnitNodes(
+    req: DescribeShareUnitNodesRequest,
+    cb?: (error: string, rep: DescribeShareUnitNodesResponse) => void
+  ): Promise<DescribeShareUnitNodesResponse> {
+    return this.request("DescribeShareUnitNodes", req, cb)
   }
 
   /**

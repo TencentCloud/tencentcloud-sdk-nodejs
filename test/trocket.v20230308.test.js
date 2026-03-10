@@ -28,29 +28,9 @@ it("trocket.v20230308.VerifyMessageConsumption", async function () {
     }
 })
 
-it("trocket.v20230308.DescribeMQTTMessageList", async function () {
+it("trocket.v20230308.DescribeSourceClusterGroupList", async function () {
     try {
-       const data = await client.DescribeMQTTMessageList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.ModifyMQTTInstanceCertBinding", async function () {
-    try {
-       const data = await client.ModifyMQTTInstanceCertBinding({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.ModifyInstanceEndpoint", async function () {
-    try {
-       const data = await client.ModifyInstanceEndpoint({})
+       const data = await client.DescribeSourceClusterGroupList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,29 +78,9 @@ it("trocket.v20230308.DescribeTopicListByGroup", async function () {
     }
 })
 
-it("trocket.v20230308.ModifyMQTTTopic", async function () {
-    try {
-       const data = await client.ModifyMQTTTopic({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("trocket.v20230308.RemoveMigratingTopic", async function () {
     try {
        const data = await client.RemoveMigratingTopic({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.DeleteMQTTUser", async function () {
-    try {
-       const data = await client.DeleteMQTTUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,19 +148,9 @@ it("trocket.v20230308.CreateConsumerGroup", async function () {
     }
 })
 
-it("trocket.v20230308.DescribeMQTTProductSKUList", async function () {
+it("trocket.v20230308.DescribeRoleList", async function () {
     try {
-       const data = await client.DescribeMQTTProductSKUList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.DescribeSourceClusterGroupList", async function () {
-    try {
-       const data = await client.DescribeSourceClusterGroupList({})
+       const data = await client.DescribeRoleList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,39 +178,9 @@ it("trocket.v20230308.DescribeMessage", async function () {
     }
 })
 
-it("trocket.v20230308.DescribeMQTTUserList", async function () {
+it("trocket.v20230308.ResetConsumerGroupOffset", async function () {
     try {
-       const data = await client.DescribeMQTTUserList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.DeleteMQTTInsPublicEndpoint", async function () {
-    try {
-       const data = await client.DeleteMQTTInsPublicEndpoint({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.DescribeRoleList", async function () {
-    try {
-       const data = await client.DescribeRoleList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.ModifyMQTTUser", async function () {
-    try {
-       const data = await client.ModifyMQTTUser({})
+       const data = await client.ResetConsumerGroupOffset({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,29 +198,9 @@ it("trocket.v20230308.DeleteConsumerGroup", async function () {
     }
 })
 
-it("trocket.v20230308.DescribeProducerList", async function () {
-    try {
-       const data = await client.DescribeProducerList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("trocket.v20230308.ModifyConsumerGroup", async function () {
     try {
        const data = await client.ModifyConsumerGroup({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.DescribeMQTTInsVPCEndpoints", async function () {
-    try {
-       const data = await client.DescribeMQTTInsVPCEndpoints({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,29 +238,9 @@ it("trocket.v20230308.DeleteRole", async function () {
     }
 })
 
-it("trocket.v20230308.DeleteMQTTInstance", async function () {
+it("trocket.v20230308.DescribeProductSKUs", async function () {
     try {
-       const data = await client.DeleteMQTTInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.DescribeMQTTMessage", async function () {
-    try {
-       const data = await client.DescribeMQTTMessage({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.ModifyMQTTInsPublicEndpoint", async function () {
-    try {
-       const data = await client.ModifyMQTTInsPublicEndpoint({})
+       const data = await client.DescribeProductSKUs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,29 +268,9 @@ it("trocket.v20230308.DescribeConsumerLag", async function () {
     }
 })
 
-it("trocket.v20230308.DescribeMQTTTopic", async function () {
+it("trocket.v20230308.ImportSourceClusterTopics", async function () {
     try {
-       const data = await client.DescribeMQTTTopic({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.DescribeProductSKUs", async function () {
-    try {
-       const data = await client.DescribeProductSKUs({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.ModifyInstance", async function () {
-    try {
-       const data = await client.ModifyInstance({})
+       const data = await client.ImportSourceClusterTopics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,56 +298,6 @@ it("trocket.v20230308.CreateTopic", async function () {
     }
 })
 
-it("trocket.v20230308.DescribeMessageList", async function () {
-    try {
-       const data = await client.DescribeMessageList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.ResetConsumerGroupOffset", async function () {
-    try {
-       const data = await client.ResetConsumerGroupOffset({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.DescribeMQTTTopicList", async function () {
-    try {
-       const data = await client.DescribeMQTTTopicList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.DescribeMQTTInstance", async function () {
-    try {
-       const data = await client.DescribeMQTTInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.CreateMQTTTopic", async function () {
-    try {
-       const data = await client.CreateMQTTTopic({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("trocket.v20230308.CreateInstance", async function () {
     try {
        const data = await client.CreateInstance({})
@@ -498,9 +308,9 @@ it("trocket.v20230308.CreateInstance", async function () {
     }
 })
 
-it("trocket.v20230308.DeleteMQTTTopic", async function () {
+it("trocket.v20230308.DescribeMessageList", async function () {
     try {
-       const data = await client.DeleteMQTTTopic({})
+       const data = await client.DescribeMessageList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -518,9 +328,9 @@ it("trocket.v20230308.DescribeInstance", async function () {
     }
 })
 
-it("trocket.v20230308.ImportSourceClusterTopics", async function () {
+it("trocket.v20230308.ModifyInstanceEndpoint", async function () {
     try {
-       const data = await client.ImportSourceClusterTopics({})
+       const data = await client.ModifyInstanceEndpoint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,59 +358,9 @@ it("trocket.v20230308.ResendDeadLetterMessage", async function () {
     }
 })
 
-it("trocket.v20230308.DescribeMQTTInsPublicEndpoints", async function () {
+it("trocket.v20230308.DescribeProducerList", async function () {
     try {
-       const data = await client.DescribeMQTTInsPublicEndpoints({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.DescribeMQTTInstanceCert", async function () {
-    try {
-       const data = await client.DescribeMQTTInstanceCert({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.ModifyMQTTInstance", async function () {
-    try {
-       const data = await client.ModifyMQTTInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.DescribeMQTTInstanceList", async function () {
-    try {
-       const data = await client.DescribeMQTTInstanceList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.DescribeConsumerGroupList", async function () {
-    try {
-       const data = await client.DescribeConsumerGroupList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.CreateMQTTInstance", async function () {
-    try {
-       const data = await client.CreateMQTTInstance({})
+       const data = await client.DescribeProducerList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -628,9 +388,9 @@ it("trocket.v20230308.DescribeFusionInstanceList", async function () {
     }
 })
 
-it("trocket.v20230308.CreateMQTTUser", async function () {
+it("trocket.v20230308.DescribeConsumerGroupList", async function () {
     try {
-       const data = await client.CreateMQTTUser({})
+       const data = await client.DescribeConsumerGroupList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -641,16 +401,6 @@ it("trocket.v20230308.CreateMQTTUser", async function () {
 it("trocket.v20230308.ModifyRole", async function () {
     try {
        const data = await client.ModifyRole({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trocket.v20230308.DescribeMQTTClient", async function () {
-    try {
-       const data = await client.DescribeMQTTClient({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,9 +478,9 @@ it("trocket.v20230308.RollbackMigratingTopicStage", async function () {
     }
 })
 
-it("trocket.v20230308.CreateMQTTInsPublicEndpoint", async function () {
+it("trocket.v20230308.ModifyInstance", async function () {
     try {
-       const data = await client.CreateMQTTInsPublicEndpoint({})
+       const data = await client.ModifyInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

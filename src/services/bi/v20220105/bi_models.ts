@@ -45,6 +45,9 @@ export interface DeleteProjectRequest {
   Seed?: string
   /**
    * 默认看板
+取值范围：
+1：项目看板 
+2：我的看板
    */
   DefaultPanelType?: number
 }
@@ -154,7 +157,16 @@ export interface ProjectConfigResult {
    */
   ModuleId?: string
   /**
-   * 配置方式
+   * 配置方式。
+取值范围：
+
+- usable：可用
+- visible：可见
+- disabled：不可用
+- hidden：隐藏
+
+默认值：disabled
+示例值：disabled
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IncludeType?: string
@@ -547,7 +559,16 @@ export interface PermissionComponent {
    */
   ModuleId?: string
   /**
-   * 可见/可用
+   * 可用性。
+取值范围：
+
+- usable：可用
+- visible：可见
+- disabled：不可用
+- hidden：隐藏
+
+默认值：disabled
+示例值：disabled
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IncludeType?: string
@@ -652,7 +673,14 @@ export interface DescribePermissionStatusInfoRequest {
    */
   TableId?: number
   /**
-   * 类型
+   * 类型。
+取值范围：
+
+- ROW：行权限
+- COLUMN：列权限
+
+默认值：ROW
+示例值：ROW
    */
   Type?: string
   /**
@@ -745,6 +773,9 @@ export interface CreateProjectRequest {
   IsApply?: boolean
   /**
    * 默认看板
+取值范围：
+1：项目看板 
+2：我的看板
    */
   DefaultPanelType?: number
   /**
@@ -855,11 +886,25 @@ export interface CreatePermissionRanksRequest {
    */
   TableId?: number
   /**
-   * 条数
+   * 模式。
+取值范围：
+- ALL：全部
+- Specify：指定
+- TAG：标签
+
+默认值：ALL
+示例值：ALL
    */
   Mode?: string
   /**
-   * 角色类型
+   * 角色类型。
+取值范围：
+
+- ROLES：按角色
+- Others：其它
+
+默认值：Others
+示例值：Others
    */
   RoleType?: string
   /**
@@ -871,11 +916,25 @@ export interface CreatePermissionRanksRequest {
    */
   RulerInfo?: string
   /**
-   * 类型
+   * 类型。
+取值范围：
+
+- ROW：行权限
+- COLUMN：列权限
+
+默认值：ROW
+示例值：ROW
    */
   Type?: string
   /**
-   * 状态
+   * 开启状态。
+取值范围：
+
+- Open：开启
+- Close：关闭
+
+默认值：Close
+示例值：Close
    */
   OpenStatus?: string
   /**
@@ -898,6 +957,9 @@ export interface DescribeProjectInfoRequest {
   Id: number
   /**
    * 默认看板
+取值范围：
+1：项目看板 
+2：我的看板
    */
   DefaultPanelType?: number
 }
@@ -1092,6 +1154,12 @@ export interface ModifyDatasourceRequest {
   ServiceType: string
   /**
    * 驱动
+取值范围：
+MYSQL：MySQL数据库
+PRESTO：PRESTO数据库
+POSTGRE：PostgreSQL数据库
+DLC：DLC数据库
+MSSQL：微软SQL Server数据库
    */
   DbType: string
   /**
@@ -1430,7 +1498,14 @@ export interface UserIdAndUserName {
    */
   LastLogin?: string
   /**
-   * 停启用状态
+   * 用户状态。
+取值范围：
+
+- 1：启用
+- 0：停用
+
+默认值：1
+示例值：1
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
@@ -2096,6 +2171,12 @@ export interface CreateDatasourceCloudRequest {
   ServiceType: string
   /**
    * 驱动
+取值范围：
+MYSQL：MySQL数据库
+PRESTO：PRESTO数据库
+POSTGRE：PostgreSQL数据库
+DLC：DLC数据库
+MSSQL：微软SQL Server数据库
    */
   DbType: string
   /**
@@ -2206,6 +2287,10 @@ export interface IdDTO {
   TranId?: string
   /**
    * 事务状态
+取值范围：
+1: 处理中
+2: 处理成功
+3: 处理失败
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TranStatus?: number
@@ -2221,6 +2306,12 @@ export interface ModifyDatasourceCloudRequest {
   ServiceType: string
   /**
    * 驱动
+取值范围：
+MYSQL：MySQL数据库
+PRESTO：PRESTO数据库
+POSTGRE：PostgreSQL数据库
+DLC：DLC数据库
+MSSQL：微软SQL Server数据库
    */
   DbType: string
   /**
@@ -2390,6 +2481,12 @@ export interface CreateDatasourceRequest {
   ServiceType: string
   /**
    * 驱动
+取值范围：
+MYSQL：MySQL数据库
+PRESTO：PRESTO数据库
+POSTGRE：PostgreSQL数据库
+DLC：DLC数据库
+MSSQL：微软SQL Server数据库
    */
   DbType: string
   /**
@@ -2831,6 +2928,9 @@ export interface ModifyProjectRequest {
   Seed?: string
   /**
    * 默认看板
+取值范围：
+1：项目看板 
+2：我的看板
    */
   DefaultPanelType?: number
   /**
@@ -3320,11 +3420,26 @@ export interface DescribePermissionRanksInfoRequest {
    */
   TableId?: number
   /**
-   * 条数
+   * 模式。
+取值范围：
+
+- ALL：全部
+- Specify：指定
+- TAG：标签
+
+默认值：ALL
+示例值：ALL
    */
   Mode?: string
   /**
-   * 角色类型
+   * 角色类型。
+取值范围：
+
+- ROLES：按角色
+- Others：其它
+
+默认值：Others
+示例值：Others
    */
   RoleType?: string
   /**
@@ -3332,7 +3447,14 @@ export interface DescribePermissionRanksInfoRequest {
    */
   RoleId?: number
   /**
-   * 类型
+   * 类型。
+取值范围：
+
+- ROW：行权限
+- COLUMN：列权限
+
+默认值：ROW
+示例值：ROW
    */
   Type?: string
   /**

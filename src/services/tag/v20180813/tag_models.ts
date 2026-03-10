@@ -228,31 +228,31 @@ export interface ModifyResourceTagsResponse {
  */
 export interface DescribeTagsRequest {
   /**
-   * 标签键,与标签值同时存在或同时不存在，不存在时表示查询该用户所有标签
+   * <p>标签键,与标签值同时存在或同时不存在，不存在时表示查询该用户所有标签</p>
    */
   TagKey?: string
   /**
-   * 标签值,与标签键同时存在或同时不存在，不存在时表示查询该用户所有标签
+   * <p>标签值,与标签键同时存在或同时不存在，不存在时表示查询该用户所有标签</p>
    */
   TagValue?: string
   /**
-   * 数据偏移量，默认为 0, 必须为Limit参数的整数倍
+   * <p>数据偏移量，默认为 0, 必须为Limit参数的整数倍</p>
    */
   Offset?: number
   /**
-   * 每页大小，默认为 15
+   * <p>每页大小，默认为 15，最大1000</p>
    */
   Limit?: number
   /**
-   * 创建者用户 Uin，不传或为空只将 Uin 作为条件查询
+   * <p>创建者用户 Uin，不传或为空只将 Uin 作为条件查询</p>
    */
   CreateUin?: number
   /**
-   * 标签键数组,与标签值同时存在或同时不存在，不存在时表示查询该用户所有标签,当与TagKey同时传递时只取本值
+   * <p>标签键数组,与标签值同时存在或同时不存在，不存在时表示查询该用户所有标签,当与TagKey同时传递时只取本值</p>
    */
   TagKeys?: Array<string>
   /**
-   * 是否展现项目标签。1:展示  0:不展示
+   * <p>是否展现项目标签。1:展示  0:不展示</p>
    */
   ShowProject?: number
 }
@@ -288,23 +288,23 @@ export interface DescribeProjectsRequest {
  */
 export interface DescribeTagValuesRequest {
   /**
-   * 标签键列表
+   * <p>标签键列表</p>
    */
   TagKeys: Array<string>
   /**
-   * 创建者用户 Uin，不传或为空只将 Uin 作为条件查询
+   * <p>创建者用户 Uin，不传或为空只将 Uin 作为条件查询</p>
    */
   CreateUin?: number
   /**
-   * 数据偏移量，默认为 0, 必须为Limit参数的整数倍
+   * <p>数据偏移量，默认为 0, 必须为Limit参数的整数倍</p>
    */
   Offset?: number
   /**
-   * 每页大小，默认为 15
+   * <p>每页大小，默认为 15，最大1000</p>
    */
   Limit?: number
   /**
-   * 标签类型。取值： Custom：自定义标签。 System：系统标签。 All：全部标签。 默认值：All。
+   * <p>标签类型。取值： Custom：自定义标签。 System：系统标签。 All：全部标签。 默认值：All。</p>
    */
   Category?: string
 }
@@ -394,19 +394,19 @@ export interface ModifyResourcesTagValueResponse {
  */
 export interface DescribeTagsResponse {
   /**
-   * 结果总数
+   * <p>结果总数</p>
    */
   TotalCount?: number
   /**
-   * 数据位移偏量
+   * <p>数据位移偏量</p>
    */
   Offset?: number
   /**
-   * 每页大小
+   * <p>每页大小</p>
    */
   Limit?: number
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<TagWithDelete>
   /**
@@ -898,19 +898,19 @@ export interface DescribeTagsSeqRequest {
  */
 export interface DescribeTagValuesResponse {
   /**
-   * 结果总数
+   * <p>结果总数</p>
    */
   TotalCount?: number
   /**
-   * 数据位移偏量
+   * <p>数据位移偏量</p>
    */
   Offset?: number
   /**
-   * 每页大小
+   * <p>每页大小</p>
    */
   Limit?: number
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<Tag>
   /**

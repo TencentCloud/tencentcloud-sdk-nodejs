@@ -38,11 +38,11 @@ export interface CreateAllocationUnitRequest {
  */
 export interface DescribeBillAdjustInfoResponse {
   /**
-   * 数据总量
+   * <p>数据总量</p>
    */
   Total?: number
   /**
-   * 明细数据
+   * <p>明细数据</p>
    */
   Data?: Array<AdjustInfoDetail>
   /**
@@ -1165,21 +1165,25 @@ export interface DeleteBudgetResponse {
  */
 export interface DescribeBillSummaryRequest {
   /**
-   * 账单月份，格式为2023-04
+   * <p>账单月份，格式为2023-04</p>
    */
   Month: string
   /**
-   * 账单维度类型，枚举值如下：business、project、region、payMode、tag
+   * <p>账单维度类型，枚举值如下：business、project、region、payMode、tag</p>
    */
   GroupType: string
   /**
-   * 标签键，GroupType=tag获取标签维度账单时传
+   * <p>标签键，GroupType=tag获取标签维度账单时传</p>
    */
   TagKey?: Array<string>
   /**
-   * 操作者UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的 ID 或者角色 ID ）
+   * <p>操作者UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的 ID 或者角色 ID ）</p>
    */
   OperateUin?: string
+  /**
+   * <p>支付者的账号 ID（账号 ID 是用户在腾讯云的唯一账号标识），默认查询本账号账单，如集团管理账号需查询成员账号自付的账单，该字段需入参成员账号UIN</p>
+   */
+  PayerUin?: string
 }
 
 /**
@@ -4635,20 +4639,21 @@ export interface DescribeBillSummaryByProjectResponse {
  */
 export interface DescribeBillAdjustInfoRequest {
   /**
-   * 格式：yyyy-MM
-账单月份，month和timeFrom&timeTo必传一个，如果有传timeFrom&timeTo则month字段无效
+   * <p>格式：yyyy-MM<br>账单月份，month和timeFrom&amp;timeTo必传一个，如果有传timeFrom&amp;timeTo则month字段无效</p>
    */
   Month?: string
   /**
-   * 格式：yyyy-MM-dd
-开始时间，month和timeFrom&timeTo必传一个，如果有该字段则month字段无效。timeFrom和timeTo必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据
+   * <p>格式：yyyy-MM-dd<br>开始时间，month和timeFrom&amp;timeTo必传一个，如果有该字段则month字段无效。timeFrom和timeTo必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据</p>
    */
   TimeFrom?: string
   /**
-   * 格式：yyyy-MM-dd
-截止时间，month和timeFrom&timeTo必传一个，如果有该字段则month字段无效。timeFrom和timeTo必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据
+   * <p>格式：yyyy-MM-dd<br>截止时间，month和timeFrom&amp;timeTo必传一个，如果有该字段则month字段无效。timeFrom和timeTo必须一起传，且为相同月份，不支持跨月查询，查询结果是整月数据</p>
    */
   TimeTo?: string
+  /**
+   * <p>支付者的账号 ID（账号 ID 是用户在腾讯云的唯一账号标识），默认查询本账号账单，如集团管理账号需查询成员账号自付的账单，该字段需入参成员账号UIN</p>
+   */
+  PayerUin?: string
 }
 
 /**
@@ -5128,11 +5133,11 @@ export interface AllocationBillTrendDetail {
  */
 export interface DescribeBillSummaryResponse {
   /**
-   * 数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）
+   * <p>数据是否准备好，0准备中，1已就绪。（Ready=0，为当前UIN首次进行初始化出账，预计需要5~10分钟出账，请于10分钟后重试即可）</p>
    */
   Ready?: number
   /**
-   * 账单多维度汇总消费详情
+   * <p>账单多维度汇总消费详情</p>
    */
   SummaryDetail?: Array<SummaryDetail>
   /**
