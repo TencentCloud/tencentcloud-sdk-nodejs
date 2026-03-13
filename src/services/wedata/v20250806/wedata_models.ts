@@ -677,6 +677,21 @@ export interface KVMap {
 }
 
 /**
+ * CreateTriggerWorkflowRun返回参数结构体
+ */
+export interface CreateTriggerWorkflowRunResponse {
+  /**
+   * 操作结果信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: CreateTriggerWorkflowRunResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ListResourceFiles返回参数结构体
  */
 export interface ListResourceFilesResponse {
@@ -3139,6 +3154,30 @@ export interface AddCalcEnginesToProjectRequest {
    * DLC集群信息
    */
   DLCInfo: Array<DLCClusterInfo>
+}
+
+/**
+ * 更新任务基本属性信息
+ */
+export interface UpdateTaskBaseAttribute {
+  /**
+   * 任务名称
+   */
+  TaskName: string
+  /**
+   * 任务负责人ID
+   */
+  OwnerUin: string
+  /**
+   * 任务描述
+   */
+  TaskDescription: string
+  /**
+   * 注意：
+- 路径上不要填写任务节点类型；例如，在 一个名为 wf01 的工作流，“通用” 分类下，现在想要在这个分类下的 tf_01 文件夹下，新建一个 shell 任务；则 填写 /tf_01 即可；
+- 如果 tf_01 文件夹不存在，则需要先创建这个文件夹（使用 CreateTaskFolder 接口）才能操作成功；
+   */
+  TaskFolderPath?: string
 }
 
 /**
@@ -6258,39 +6297,91 @@ export interface ListQualityRuleGroupExecResultsByPageResponse {
 }
 
 /**
- * 数据质量规则批量创建结果
+ * ListQualityRuleGroupsTable请求参数结构体
  */
-export interface CreateQualityRuleVO {
+export interface ListQualityRuleGroupsTableRequest {
   /**
-   * 操作结果文案
-注意：此字段可能返回 null，表示取不到有效值。
+   * 项目Id
    */
-  Msg?: string
+  ProjectId: string
   /**
-   * 单条数据新增结果对象
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分页序号，默认1
    */
-  Results?: Array<QualityRuleCreateResult>
+  PageNumber?: number
   /**
-   * 总新增条数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分页大小，默认10
    */
-  SumCount?: number
+  PageSize?: number
   /**
-   * 新增成功条数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 过滤条件, 可选过滤条件如下：
+1. GroupType
+描述：规则组类型，标识规则组所属的分类。
+取值：DEFAULT - 默认类型；DASHBOARD-仪表盘类型；WORKFLOW_NODE - 编排空间工作流节点类型
+
+2. DeployStatus
+描述：规则组部署状态，主要用于WORKFLOW_NODE类型的规则组
+取值：PRODUCTION - 生产环境；DRAFT - 草稿套
+
+3. RuleGroupName
+描述：规则组名称。
+取值：字符串
+
+4. RuleGroupId
+描述：规则组ID。
+取值：整数
+
+5. TableOwnerName
+描述：表负责人名称，支持模糊匹配。
+取值：字符串
+
+6. TableOwnerAccount
+描述：表负责人账号ID。
+取值：整数，支持多个值（OR关系）
+
+7. TableOwnerFlag
+描述：是否为当前表负责人。
+取值：true - 是；false - 否
+
+8. DatasourceType
+描述：数据源类型。
+取值：1 - MYSQL；2 - HIVE；3 - DLC；4 - GBASE；5 - TCHouse-P/CDW；6 - ICEBERG；7 - DORIS；8 - TCHouse-D；9 - EMR_STARROCKS；10 - TBDS_STARROCKS；11 - TCHouse-X
+
+9. DatasourceId
+描述：数据源ID。
+取值：字符串
+
+10. DatabaseName
+描述：数据库名称。
+取值：字符串
+
+11. SchemaName
+描述：Schema名称。
+取值：字符串
+
+12. TableName
+描述：数据源表名称，支持模糊匹配。
+取值：字符串
+
+13. BizCatalogIds
+描述：业务目录ID。
+取值：整数，支持多个值（OR关系）
+
+14. CatalogName
+描述：数据目录名称。
+取值：字符串
+
+
    */
-  SuccessCount?: number
+  Filters?: Array<Filter>
   /**
-   * 新增失败条数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 通用排序，
+支持的排序字段：
+UpdateTime - 按更新时间排序（默认）
+排序方向：
+1 - 升序（ASC）
+2 - 降序（DESC）
    */
-  FailedCount?: number
-  /**
-   * 新增成功的 ruleId集合
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SuccessRuleIds?: Array<number | bigint>
+  OrderFields?: Array<OrderField>
 }
 
 /**
@@ -10942,6 +11033,17 @@ export interface ResourceFolderPage {
 }
 
 /**
+ * 工作流调度模式下，工作流触发运行结果
+ */
+export interface CreateTriggerWorkflowRunResult {
+  /**
+   * 工作流执行id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowExecutionId?: string
+}
+
+/**
  * ListDownstreamTasks返回参数结构体
  */
 export interface ListDownstreamTasksResponse {
@@ -14240,27 +14342,33 @@ export interface GetAlarmMessageResponse {
 }
 
 /**
- * 更新任务基本属性信息
+ * CreateTriggerWorkflowRun请求参数结构体
  */
-export interface UpdateTaskBaseAttribute {
+export interface CreateTriggerWorkflowRunRequest {
   /**
-   * 任务名称
+   * 项目ID
    */
-  TaskName: string
+  ProjectId: string
   /**
-   * 任务负责人ID
+   * 工作流ID
    */
-  OwnerUin: string
+  WorkflowId: string
   /**
-   * 任务描述
+   * 自定义运行参数，如果为空或者null则使用工作流最新配置
    */
-  TaskDescription: string
+  AdvancedParams?: Array<SchedulingParameter>
   /**
-   * 注意：
-- 路径上不要填写任务节点类型；例如，在 一个名为 wf01 的工作流，“通用” 分类下，现在想要在这个分类下的 tf_01 文件夹下，新建一个 shell 任务；则 填写 /tf_01 即可；
-- 如果 tf_01 文件夹不存在，则需要先创建这个文件夹（使用 CreateTaskFolder 接口）才能操作成功；
+   * 本次需要运行指定的任务ID集合，如果为null或为空则运行全部
    */
-  TaskFolderPath?: string
+  TaskIds?: Array<string>
+  /**
+   * 指定的调度资源组id，为空默认原资源组
+   */
+  SchedulingResourceGroupId?: string
+  /**
+   * 指定的集成资源组id，为空默认原资源组
+   */
+  IntegrationResourceGroupId?: string
 }
 
 /**
@@ -16566,91 +16674,39 @@ export interface ParamInfo {
 }
 
 /**
- * ListQualityRuleGroupsTable请求参数结构体
+ * 数据质量规则批量创建结果
  */
-export interface ListQualityRuleGroupsTableRequest {
+export interface CreateQualityRuleVO {
   /**
-   * 项目Id
+   * 操作结果文案
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId: string
+  Msg?: string
   /**
-   * 分页序号，默认1
+   * 单条数据新增结果对象
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageNumber?: number
+  Results?: Array<QualityRuleCreateResult>
   /**
-   * 分页大小，默认10
+   * 总新增条数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageSize?: number
+  SumCount?: number
   /**
-   * 过滤条件, 可选过滤条件如下：
-1. GroupType
-描述：规则组类型，标识规则组所属的分类。
-取值：DEFAULT - 默认类型；DASHBOARD-仪表盘类型；WORKFLOW_NODE - 编排空间工作流节点类型
-
-2. DeployStatus
-描述：规则组部署状态，主要用于WORKFLOW_NODE类型的规则组
-取值：PRODUCTION - 生产环境；DRAFT - 草稿套
-
-3. RuleGroupName
-描述：规则组名称。
-取值：字符串
-
-4. RuleGroupId
-描述：规则组ID。
-取值：整数
-
-5. TableOwnerName
-描述：表负责人名称，支持模糊匹配。
-取值：字符串
-
-6. TableOwnerAccount
-描述：表负责人账号ID。
-取值：整数，支持多个值（OR关系）
-
-7. TableOwnerFlag
-描述：是否为当前表负责人。
-取值：true - 是；false - 否
-
-8. DatasourceType
-描述：数据源类型。
-取值：1 - MYSQL；2 - HIVE；3 - DLC；4 - GBASE；5 - TCHouse-P/CDW；6 - ICEBERG；7 - DORIS；8 - TCHouse-D；9 - EMR_STARROCKS；10 - TBDS_STARROCKS；11 - TCHouse-X
-
-9. DatasourceId
-描述：数据源ID。
-取值：字符串
-
-10. DatabaseName
-描述：数据库名称。
-取值：字符串
-
-11. SchemaName
-描述：Schema名称。
-取值：字符串
-
-12. TableName
-描述：数据源表名称，支持模糊匹配。
-取值：字符串
-
-13. BizCatalogIds
-描述：业务目录ID。
-取值：整数，支持多个值（OR关系）
-
-14. CatalogName
-描述：数据目录名称。
-取值：字符串
-
-
+   * 新增成功条数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Filters?: Array<Filter>
+  SuccessCount?: number
   /**
-   * 通用排序，
-支持的排序字段：
-UpdateTime - 按更新时间排序（默认）
-排序方向：
-1 - 升序（ASC）
-2 - 降序（DESC）
+   * 新增失败条数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  OrderFields?: Array<OrderField>
+  FailedCount?: number
+  /**
+   * 新增成功的 ruleId集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SuccessRuleIds?: Array<number | bigint>
 }
 
 /**

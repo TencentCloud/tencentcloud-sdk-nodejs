@@ -3371,6 +3371,11 @@ export interface DataServiceRequestParam {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
+  /**
+   * 关联标准编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StdCode?: string
 }
 
 /**
@@ -7638,17 +7643,23 @@ export interface ReportDatabaseRequest {
 }
 
 /**
- * DescribeInstanceLogList请求参数结构体
+ * 操作结果
  */
-export interface DescribeInstanceLogListRequest {
+export interface BatchReturn {
   /**
-   * 任务id
+   * 执行结果
    */
-  TaskId: string
+  Result: boolean
   /**
-   * 数据时间
+   * 执行情况备注
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CurRunDate: string
+  ErrorDesc: string
+  /**
+   * 执行情况id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorId: string
 }
 
 /**
@@ -10758,6 +10769,21 @@ export interface TaskDataRegistryDTO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TablePhysicalId: string
+  /**
+   * Catalog名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogName?: string
+  /**
+   * 数据源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceName?: string
+  /**
+   * Catalog(如有).数据库(如有).表名名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QualifiedName?: string
 }
 
 /**
@@ -11023,6 +11049,11 @@ export interface TaskImportInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskNameExistMode?: number
+  /**
+   * 工作流所属目录路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkFlowFolderPath?: string
 }
 
 /**
@@ -11199,39 +11230,44 @@ export interface DescribeTaskTemplatesRequest {
 }
 
 /**
- * 列血缘聚合信息
+ * 变更日志
  */
-export interface ColumnAggregationLineage {
+export interface ChangeLog {
   /**
-   * 表名
+   * 变更类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableName: string
+  ChangeType?: string
   /**
-   * 父节点ID
+   * 修改前的值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParentId: string
+  OldValue?: string
   /**
-   * 元数据类型
+   * 修改后的值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MetastoreType: string
+  NewValue?: string
   /**
-   * 字符串类型的父节点集合
+   * 修改人
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParentSet: string
+  ModifiedAccount?: string
   /**
-   * 字符串类型的子节点集合
+   * 修改时间
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ChildSet: string
+  ModifiedTime?: string
   /**
-   * 列信息集合
+   * 修改原因
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ColumnInfoSet: Array<SimpleColumnInfo>
+  ChangeReason?: string
+  /**
+   * 修改人名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifiedAccountName?: string
 }
 
 /**
@@ -11308,6 +11344,27 @@ export interface IntegrationNodeMapping {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtConfig?: Array<RecordField>
+}
+
+/**
+ * 维度简化对象
+ */
+export interface AssetDimSimpleVO {
+  /**
+   * ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DimName?: string
+  /**
+   * 编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DimCode?: string
 }
 
 /**
@@ -14682,6 +14739,27 @@ export interface CreateTaskAlarmRegularResponse {
 }
 
 /**
+ * 数据集成大屏趋势图统计结果
+ */
+export interface IntegrationStatisticsTrendResult {
+  /**
+   * 统计属性名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatisticName?: Array<string>
+  /**
+   * 统计值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatisticValue?: Array<number | bigint>
+  /**
+   * 统计项目
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatisticType?: string
+}
+
+/**
  * DeleteRuleTemplate请求参数结构体
  */
 export interface DeleteRuleTemplateRequest {
@@ -15059,6 +15137,26 @@ export interface IntegrationTaskInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMessage?: string
+  /**
+   * 任务子状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskSubType?: number
+  /**
+   * 是否存在SavePoint, 0-存在, 1-不存在, null 为未知
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NotExistsCheckPoint?: number
+  /**
+   * savepiontPath
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SavePointId?: string
+  /**
+   * savepiontId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SavePointPath?: string
 }
 
 /**
@@ -16707,6 +16805,67 @@ export interface DescribeIntegrationNodeRequest {
 }
 
 /**
+ * 实例日志信息
+ */
+export interface InstanceLogList {
+  /**
+   * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 数据时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurRunDate?: string
+  /**
+   * 重试次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tries?: string
+  /**
+   * 最后更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastUpdate?: string
+  /**
+   * 节点ip
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BrokerIp?: string
+  /**
+   * 文件大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileSize?: string
+  /**
+   * 原始文件名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginFileName?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 实例日志类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceLogType?: string
+  /**
+   * 任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName?: string
+  /**
+   * 耗费时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CostTime?: string
+}
+
+/**
  * SetTaskAlarmNew返回参数结构体
  */
 export interface SetTaskAlarmNewResponse {
@@ -17655,6 +17814,20 @@ export interface DescribeReportTaskDetailRequest {
    * 引擎任务id
    */
   EngineTaskId: string
+}
+
+/**
+ * 注册模型别名
+ */
+export interface RegisteredModelAlias {
+  /**
+   * 别名的名称
+   */
+  Alias?: string
+  /**
+   * 别名指向的模型版本号
+   */
+  Version?: string
 }
 
 /**
@@ -19908,64 +20081,47 @@ export interface GetOfflineInstanceListRequest {
 }
 
 /**
- * 实例日志信息
+ * DescribeDataAssets请求参数结构体
  */
-export interface InstanceLogList {
+export interface DescribeDataAssetsRequest {
   /**
-   * 任务ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 请求来源，WEB 前端；CLIENT 客户端
    */
-  TaskId?: string
+  RequestFromSource?: string
   /**
-   * 数据时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 过滤字段名称
+Name 取值如下
+      keyword 搜索关键字
+      bizCatalogIds 表示目录分类取值
+      DataAssetType 数据资产类型枚举取值：ALL-全部类型、TABLE-数据表
+      DatasourceType 数据源类型
+      datasourceIds 数据源ID列表
+      DatabaseName 数据库名称
+      InCharge 负责人
+      ProjectId 项目ID
+      Label 标签
+      ProjectId 数据资产归属的项目ID
+      AssetLevel 等级 取值：ALL-全部，40-核心，30-重要，20-一般，10-临时
+      OwnerMe 我负责的
+      PermissionMe 我有权限的
+      MyFavorite 我收藏的
    */
-  CurRunDate?: string
+  Filters?: Array<Filter>
   /**
-   * 重试次数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 排序字段列表
+取值：
+     Name： Table-按表名，LikeCount-按热度
+     Direction： ASC, DESC
    */
-  Tries?: string
+  OrderFields?: Array<OrderField>
   /**
-   * 最后更新时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 页码，配合pageSize使用
    */
-  LastUpdate?: string
+  PageNumber?: number
   /**
-   * 节点ip
-注意：此字段可能返回 null，表示取不到有效值。
+   * 每页数目，配合pageNumber使用
    */
-  BrokerIp?: string
-  /**
-   * 文件大小
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FileSize?: string
-  /**
-   * 原始文件名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OriginFileName?: string
-  /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: string
-  /**
-   * 实例日志类型
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceLogType?: string
-  /**
-   * 任务名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskName?: string
-  /**
-   * 耗费时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CostTime?: string
+  PageSize?: number
 }
 
 /**
@@ -20458,6 +20614,24 @@ export interface DeleteDsFolderRequest {
    * 文件夹ID
    */
   FolderId: string
+}
+
+/**
+ * 函数类型或函数分类
+ */
+export interface FunctionTypeOrKind {
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 函数分类英文名
+   */
+  ZhName?: string
+  /**
+   * 函数分类中文名
+   */
+  EnName?: string
 }
 
 /**
@@ -21570,6 +21744,20 @@ false：针对下游任务实例进行强制失败
 
    */
   DeleteMode?: boolean
+}
+
+/**
+ * DescribeInstanceLogList请求参数结构体
+ */
+export interface DescribeInstanceLogListRequest {
+  /**
+   * 任务id
+   */
+  TaskId: string
+  /**
+   * 数据时间
+   */
+  CurRunDate: string
 }
 
 /**
@@ -24511,7 +24699,7 @@ export interface DescribeTableMetaResponse {
    * 标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagVoteSumList?: TagVoteSum
+  TagVoteSumList?: Array<TagVoteSum>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -25337,24 +25525,38 @@ export interface EventDsDto {
 }
 
 /**
- * 数据集成大屏趋势图统计结果
+ * DescribeDataAssets返回参数结构体
  */
-export interface IntegrationStatisticsTrendResult {
+export interface DescribeDataAssetsResponse {
   /**
-   * 统计属性名称
+   * 数据资产记录列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StatisticName?: Array<string>
+  DataSetRecords?: Array<DataSetRecord>
   /**
-   * 统计值
+   * 总数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StatisticValue?: Array<number | bigint>
+  TotalCount?: number
   /**
-   * 统计项目
+   * 页码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  StatisticType?: string
+  PageNumber?: number
+  /**
+   * 每页数目
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize?: number
+  /**
+   * 指标列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndicatorRecords?: Array<IndicatorBaseInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -26581,40 +26783,28 @@ CI/CD工程生成的bundle唯一标识
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BundleInfo?: string
-}
-
-/**
- * 状态趋势统计
- */
-export interface TaskByStatus {
   /**
-   * 统计值
+   * 是否允许下游依赖 0 不允许 1 允许
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CountGroup?: string
+  AllowDownstreamDependency?: number
   /**
-   * 日期
+   * - 任务依赖运行条件，默认为ALL_SUCCESS，暂时只支持工作流调度项目下配置
+- ALL_SUCCESS： 全部成功：所有上游依赖任务都达到终态时，进行依赖判断，如果上游全部都成功，则依赖判断成功，否则如果上游有一个跳过运行，则标记为跳过运行，其余情况标记为上游失败
+- ALL_FAILED：全部失败：所有上游依赖任务都达到终态时，进行依赖判断，如果上游状态都是失败或者上游失败，则依赖判断成功，否则就标记为跳过运行
+- ALL_DONE：全部完成：所有上游依赖任务都达到终态时，进行依赖判断，直接是依赖判断成功
+- ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行
+- ALL_SKIPPED：上游全部都跳过: 所有上游依赖任务都达到终态时，进行依赖判断，所有的上游都是跳过状态才算依赖判断成功，否则当前节点就是跳过运行
+- ONE_FAILED：至少一个失败: 上游只要有一个失败了，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有失败，则跳过运行
+- ONE_SUCCESS：至少一个成功：上游只要有一个成功，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有成功，则跳过运行
+- ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游
+- NONE_FAILED：上游全部完成，没有失败: 所有上游依赖任务都达到终态时，进行依赖判断，如果上游都是成功或者跳过运行，则依赖判断成功，否则标记为上游失败
+- ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行
+- NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行
+- ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ShowTimeGroup?: string
-  /**
-   * 状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: string
-  /**
-   * 周期单位
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CycleUnit?: string
-  /**
-   * 1
-   */
-  ReportTime?: string
-  /**
-   * 1
-   */
-  Count?: number
+  DependencyTriggerPolicy?: string
 }
 
 /**
@@ -27454,6 +27644,28 @@ export interface ExtParam {
 }
 
 /**
+ * 实时任务同步速度趋势
+ */
+export interface RealTimeTaskSpeed {
+  /**
+   * 同步速度条/s列表
+   */
+  RecordsSpeedList?: Array<RecordsSpeed>
+  /**
+   * 同步速度字节/s列表
+   */
+  BytesSpeedList?: Array<BytesSpeed>
+  /**
+   * 日志条数速度
+   */
+  RecordsLogSpeed?: Array<RecordsSpeed>
+  /**
+   * 日志大小速度
+   */
+  BytesLogSpeed?: Array<BytesSpeed>
+}
+
+/**
  * DescribeSuccessorTaskInfoList请求参数结构体
  */
 export interface DescribeSuccessorTaskInfoListRequest {
@@ -28100,18 +28312,39 @@ export interface DescribeStatisticInstanceStatusTrendOpsRequest {
 }
 
 /**
- * DescribeEventCases返回参数结构体
+ * 列血缘聚合信息
  */
-export interface DescribeEventCasesResponse {
+export interface ColumnAggregationLineage {
   /**
-   * 事件实例分页查询结果
+   * 表名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: EventCaseAuditLogVOCollection
+  TableName: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 父节点ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  ParentId: string
+  /**
+   * 元数据类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetastoreType: string
+  /**
+   * 字符串类型的父节点集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentSet: string
+  /**
+   * 字符串类型的子节点集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChildSet: string
+  /**
+   * 列信息集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ColumnInfoSet: Array<SimpleColumnInfo>
 }
 
 /**
@@ -28298,21 +28531,18 @@ export interface StopIntegrationTaskRequest {
 }
 
 /**
- * 函数类型或函数分类
+ * DescribeEventCases返回参数结构体
  */
-export interface FunctionTypeOrKind {
+export interface DescribeEventCasesResponse {
   /**
-   * 名称
+   * 事件实例分页查询结果
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
+  Data?: EventCaseAuditLogVOCollection
   /**
-   * 函数分类英文名
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ZhName?: string
-  /**
-   * 函数分类中文名
-   */
-  EnName?: string
+  RequestId?: string
 }
 
 /**
@@ -28373,23 +28603,37 @@ export interface CreateDataSourceResponse {
 }
 
 /**
- * 操作结果
+ * 状态趋势统计
  */
-export interface BatchReturn {
+export interface TaskByStatus {
   /**
-   * 执行结果
-   */
-  Result: boolean
-  /**
-   * 执行情况备注
+   * 统计值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorDesc: string
+  CountGroup?: string
   /**
-   * 执行情况id
+   * 日期
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorId: string
+  ShowTimeGroup?: string
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 周期单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CycleUnit?: string
+  /**
+   * 1
+   */
+  ReportTime?: string
+  /**
+   * 1
+   */
+  Count?: number
 }
 
 /**
@@ -29944,6 +30188,349 @@ export interface DescribeRuleTemplatesByPageRequest {
 }
 
 /**
+ * 数据资产结构
+ */
+export interface DataSetRecord {
+  /**
+   * 资产 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetId?: string
+  /**
+   * 数据源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceName?: string
+  /**
+   * 数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseName?: string
+  /**
+   * 表名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
+  /**
+   * 数据资产名称展示名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableNameCn?: string
+  /**
+   * 数据资产名称展示名称EN
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableNameEn?: string
+  /**
+   * 资产描述信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 资产热度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeatValue?: number
+  /**
+   * 标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelNames?: Array<string>
+  /**
+   * 负责人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InCharge?: string
+  /**
+   * 元数据采集类型：Table View Index
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetaCrawlType?: string
+  /**
+   * 数据资产归属的项目ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 生命周期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LifeTime?: number
+  /**
+   * 判断是否是分区表1 是 0否
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsPartitionTable?: number
+  /**
+   * 表字段集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableRecordFieldSet?: Array<SearchColumnDocVO>
+  /**
+   * 表属性评分
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TablePropertyScore?: TablePropertyScore
+  /**
+   * 数据源类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MsType?: string
+  /**
+   * 数据存储大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageSize?: number
+  /**
+   * 数据资产等级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetLevel?: number
+  /**
+   * 数据资产状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetStatus?: number
+  /**
+   * 数据目录ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizCatalogIds?: Array<string>
+  /**
+   * 数据目录名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizCatalogNames?: Array<string>
+  /**
+   * 数据源 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceId?: number
+  /**
+   * 数据库 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseId?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 表 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableId?: string
+  /**
+   * 数据资产操作选项
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperateOption?: DataAssetOption
+  /**
+   * 数据库模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Schema?: string
+  /**
+   * 环境，取值 prod或者 dev
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Environment?: string
+  /**
+   * 是否为视图
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsView?: boolean
+  /**
+   * 数据来源技术类型
+取值： HIVE/MYSQL/HBASE/KAFKA等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TechnologyType?: string
+  /**
+   * 项目名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectName?: string
+  /**
+   * 项目展示名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectDisplayName?: string
+  /**
+   * 集群 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * 存储大小，已转为如9.31TB:
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageSizeWithUnit?: string
+  /**
+   * 多数据源信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CollectDatasourceList?: Array<GovDatasourceInfo>
+  /**
+   * 集群名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterName?: string
+  /**
+   * 数据源Category: 系统源-CLUSTER, DB-自定义源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataSourceCategory?: string
+  /**
+   * 采集任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CollectId?: number
+  /**
+   * 采集唯一性urn
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Urn?: string
+  /**
+   * 数据资产名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetName?: string
+  /**
+   * 资产运行状态： 任务运行状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetRunningStatus?: string
+  /**
+   * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskTypeId?: number
+  /**
+   * 资产运行时间， 任务最近执行时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecuteTime?: string
+  /**
+   * 资产日志，任务资产取 自动转交日志
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetLog?: string
+  /**
+   * 资产类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetType?: string
+  /**
+   * 任务 Job名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobName?: string
+  /**
+   * 资产失效时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: string
+  /**
+   * 安全等级值范围1-10
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LevelRank?: number
+  /**
+   * 安全等级名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LevelName?: string
+  /**
+   * 资产编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetCode?: string
+  /**
+   * 责任人 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerAccount?: number
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 最近访问时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastAccessTime?: string
+  /**
+   * 引擎侧创建人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerByEngine?: string
+  /**
+   * 数仓分层 UUID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataLayerUuid?: string
+  /**
+   * 数仓分层名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataLayerName?: string
+  /**
+   * 字段数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ColumnCount?: number
+  /**
+   * 关键字搜索命中的表字段列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SearchHitColumns?: Array<SearchColumnDocVO>
+  /**
+   * 标签对象集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelTagList?: Array<LabelTag>
+  /**
+   * 模型别名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Aliases?: Array<RegisteredModelAlias>
+  /**
+   * 是否已经部署服务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsDeployed?: boolean
+  /**
+   * 模型标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<RegisteredModelTag>
+  /**
+   * 模型类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelType?: string
+  /**
+   * 资产全称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FullName?: string
+  /**
+   * Catalog名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
+  /**
+   * Catalog来源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetaFrom?: string
+}
+
+/**
  * RemoveDatabase请求参数结构体
  */
 export interface RemoveDatabaseRequest {
@@ -30855,6 +31442,20 @@ export interface RunTasksByMultiWorkflowRequest {
    * 是否补录中间实例 0.不补录 1.补录实例
    */
   EnableMakeUp: number
+}
+
+/**
+ * 注册模型标签
+ */
+export interface RegisteredModelTag {
+  /**
+   * tag key
+   */
+  Key?: string
+  /**
+   * tag value
+   */
+  Value?: string
 }
 
 /**
@@ -32883,25 +33484,48 @@ export interface LogContent {
 }
 
 /**
- * 实时任务同步速度趋势
+ * 数据资产操作标记
  */
-export interface RealTimeTaskSpeed {
+export interface DataAssetOption {
   /**
-   * 同步速度条/s列表
+   * 是否拥有权限
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecordsSpeedList?: Array<RecordsSpeed>
+  HasPermission?: boolean
   /**
-   * 同步速度字节/s列表
+   * 是否已收藏
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  BytesSpeedList?: Array<BytesSpeed>
+  HasFavorite?: boolean
   /**
-   * 日志条数速度
+   * 其他的操作类型:
+取值：
+ProjectIdNull -当前表未设置归属项目；
+NotCluster - 非系统源不支持权限申请；
+ProjectDisabled - 当前项目已被禁用；
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RecordsLogSpeed?: Array<RecordsSpeed>
+  OtherOperate?: string
   /**
-   * 日志大小速度
+   * 被收藏数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  BytesLogSpeed?: Array<BytesSpeed>
+  FavoriteCount?: number
+  /**
+   * 是否有修改业务权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasBizPermission?: boolean
+  /**
+   * 是否有修改归属项目权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasProjectPermission?: boolean
+  /**
+   * 用户无映射账户，请先完成账户映射后再来申请。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorTips?: string
 }
 
 /**
@@ -33054,6 +33678,227 @@ export interface ModifyTaskNameRequest {
    * 备注
    */
   Notes?: string
+}
+
+/**
+ * 指标查询出参
+ */
+export interface IndicatorBaseInfo {
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 指标编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndicatorCode?: string
+  /**
+   * 指标类型（1-原子指标 2-衍生指标 3-复合指标）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndicatorType?: number
+  /**
+   * 业务负责人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizOwner?: string
+  /**
+   * 技术负责人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TechOwner?: string
+  /**
+   * 业务口径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizCaliber?: string
+  /**
+   * 指标描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 等级：40-L4核心 30-L3重要 20-L2一般 10-L1临时
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Level?: number
+  /**
+   * 计算逻辑
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CalLogic?: string
+  /**
+   * 计算频次
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CalFreq?: string
+  /**
+   * 度量单位
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MeasureUnit?: number
+  /**
+   * 精度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Accuracy?: number
+  /**
+   * 关联指标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceIndicatorIds?: Array<IndicatorBaseSimpleInfo>
+  /**
+   * ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 维度列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DimensionIds?: Array<AssetDimSimpleVO>
+  /**
+   * 文件夹ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FolderId?: number
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 业务负责人名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizOwnerName?: string
+  /**
+   * 技术负责人名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TechOwnerName?: string
+  /**
+   * 发布时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublishTime?: string
+  /**
+   * 发布人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublishAccount?: string
+  /**
+   * 发布人名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublishAccountName?: string
+  /**
+   * 最后修订时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastModifyTime?: string
+  /**
+   * 最后修订人ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastModifyAccount?: string
+  /**
+   * 最后修订人名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastModifyAccountName?: string
+  /**
+   * 变更日志
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChangeLogList?: Array<ChangeLog>
+  /**
+   * 字段列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableColumns?: Array<AssetDimTableColumn>
+  /**
+   * 关联指标(包含多层级关联指标)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AllSourceIndicatorIds?: Array<IndicatorBaseInfo>
+  /**
+   * 资产guid
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetId?: string
+  /**
+   * 类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetType?: string
+  /**
+   * 资产编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetCode?: string
+  /**
+   * 被关联的指标
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RelatedIndicatorIds?: Array<IndicatorBaseInfo>
+  /**
+   * 数据目录ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizCatalogIds?: Array<number | bigint>
+  /**
+   * 数据目录名称列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BizCatalogNames?: Array<string>
+  /**
+   * 资产等级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetLevel?: number
+  /**
+   * 资产发布状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetStatus?: number
+  /**
+   * 资产发布时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetPublishTime?: string
+  /**
+   * 资产发布人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetPublishAccount?: string
+  /**
+   * 资产发布人名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssetPublishAccountName?: string
+  /**
+   * 指标权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndicatorPermission?: PermissionStatus
+  /**
+   * 资产权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperateOption?: DataAssetOption
+  /**
+   * 项目 ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 项目名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectName?: string
 }
 
 /**

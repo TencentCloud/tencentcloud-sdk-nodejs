@@ -218,7 +218,7 @@ import {
   StartTaskInfo,
   DescribeIntegrationStatisticsInstanceTrendResponse,
   ReportDatabaseRequest,
-  DescribeInstanceLogListRequest,
+  BatchReturn,
   WorkflowExtOpsDto,
   ReportTableResponse,
   IntegrationNodeInfo,
@@ -307,11 +307,12 @@ import {
   ReportTaskDetail,
   FreezeOpsTasksResponse,
   DescribeTaskTemplatesRequest,
-  ColumnAggregationLineage,
+  ChangeLog,
   ModifyRuleGroupSubscriptionResponse,
   CreateWorkflowDsResponse,
   CreateHiveTableByDDLResponse,
   IntegrationNodeMapping,
+  AssetDimSimpleVO,
   DescribeTaskByCycleResponse,
   DescribeExecStrategyResponse,
   DescribeSuccessorOpsTaskInfosResponse,
@@ -414,6 +415,7 @@ import {
   MakePlanAlarmRule,
   DescribeDsTaskVersionListRequest,
   CreateTaskAlarmRegularResponse,
+  IntegrationStatisticsTrendResult,
   DeleteRuleTemplateRequest,
   DescribeOpsMakePlanTasksRequest,
   TaskVersionInstance,
@@ -465,6 +467,7 @@ import {
   BatchResultDs,
   DeleteDataModelResponse,
   DescribeIntegrationNodeRequest,
+  InstanceLogList,
   SetTaskAlarmNewResponse,
   DescribeRelatedTasksByTaskIdResponse,
   DescribeDatasourceResponse,
@@ -490,6 +493,7 @@ import {
   CheckIntegrationNodeNameExistsRequest,
   InstanceLifeCycleVO,
   DescribeReportTaskDetailRequest,
+  RegisteredModelAlias,
   DescribeWorkflowExecuteByIdResponse,
   DescribeOpsMakePlansRequest,
   CreateOpsMakePlanRequest,
@@ -569,7 +573,7 @@ import {
   ApproveModify,
   DescribeOpsMakePlanTasksResponse,
   GetOfflineInstanceListRequest,
-  InstanceLogList,
+  DescribeDataAssetsRequest,
   ModifyMonitorStatusRequest,
   DescribeColumnLineageResponse,
   SchedulerTaskInstanceInfo,
@@ -589,6 +593,7 @@ import {
   SourceFieldInfo,
   GetTaskInstanceRequest,
   DeleteDsFolderRequest,
+  FunctionTypeOrKind,
   SaveCustomFunctionResponse,
   TaskLinkDsDTO,
   ModifyDsFolderRequest,
@@ -622,6 +627,7 @@ import {
   RemoveWorkflowDsRequest,
   BatchKillIntegrationTaskInstancesRequest,
   DeleteTaskDsRequest,
+  DescribeInstanceLogListRequest,
   BatchStopOpsTasksResponse,
   InstanceLogInfoOpsDto,
   DeleteFilePathResponse,
@@ -730,7 +736,7 @@ import {
   DeleteOfflineTaskResponse,
   IntegrationInstanceLog,
   EventDsDto,
-  IntegrationStatisticsTrendResult,
+  DescribeDataAssetsResponse,
   ResourcePoolInfo,
   RuntimeInstanceCntTop,
   ColumnMeta,
@@ -747,7 +753,6 @@ import {
   Table,
   DescribeTasksForCodeTemplateRequest,
   TaskDsDTO,
-  TaskByStatus,
   CreateIntegrationTaskRequest,
   BatchRunOpsTaskRequest,
   FieldConfig,
@@ -774,6 +779,7 @@ import {
   RuleExecResultPage,
   DescribeTaskByStatusReportRequest,
   ExtParam,
+  RealTimeTaskSpeed,
   DescribeSuccessorTaskInfoListRequest,
   BatchForceSuccessIntegrationTaskInstancesRequest,
   DescribeRealTimeTaskInstanceNodeInfoResponse,
@@ -798,7 +804,7 @@ import {
   DescribeDatasourceRequest,
   RuleExecStat,
   DescribeStatisticInstanceStatusTrendOpsRequest,
-  DescribeEventCasesResponse,
+  ColumnAggregationLineage,
   DescribeTableSchemaInfoResponse,
   DiagnoseProResponse,
   DescribeReportTaskDetailResponse,
@@ -810,11 +816,11 @@ import {
   StartIntegrationTaskRequest,
   DescribeProjectResponse,
   StopIntegrationTaskRequest,
-  FunctionTypeOrKind,
+  DescribeEventCasesResponse,
   DescribeApply,
   KVPair,
   CreateDataSourceResponse,
-  BatchReturn,
+  TaskByStatus,
   DescribeFolderWorkflowListResponse,
   RecordField,
   DescribeIntegrationVersionNodesInfoResponse,
@@ -866,6 +872,7 @@ import {
   EventCaseAuditLogVOCollection,
   BatchStopIntegrationTasksRequest,
   DescribeRuleTemplatesByPageRequest,
+  DataSetRecord,
   RemoveDatabaseRequest,
   DatabaseSchemaIInfo,
   TaskOpsDto,
@@ -880,6 +887,7 @@ import {
   AiopsScriptInfo,
   BatchKillIntegrationTaskInstancesResponse,
   RunTasksByMultiWorkflowRequest,
+  RegisteredModelTag,
   EventListenerOpsDto,
   CheckIntegrationTaskNameExistsRequest,
   DescribeWorkflowSchedulerInfoDsResponse,
@@ -951,13 +959,14 @@ import {
   GetInstanceLogRequest,
   RuleConfig,
   LogContent,
-  RealTimeTaskSpeed,
+  DataAssetOption,
   TagVoteSum,
   BatchCreateIntegrationTaskAlarmsResponse,
   DescribeIntegrationStatisticsRequest,
   DescribeRuleGroupRequest,
   ListBatchDetailRequest,
   ModifyTaskNameRequest,
+  IndicatorBaseInfo,
   DescribeTrendStatRequest,
   ExecutorUsageTrendInfo,
   DescribeOpsInstanceLogListResponse,
@@ -1249,13 +1258,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 资源管理-上传资源
+   * 质量报告-修改维度权限
    */
-  async UploadResource(
-    req: UploadResourceRequest,
-    cb?: (error: string, rep: UploadResourceResponse) => void
-  ): Promise<UploadResourceResponse> {
-    return this.request("UploadResource", req, cb)
+  async ModifyDimensionWeight(
+    req: ModifyDimensionWeightRequest,
+    cb?: (error: string, rep: ModifyDimensionWeightResponse) => void
+  ): Promise<ModifyDimensionWeightResponse> {
+    return this.request("ModifyDimensionWeight", req, cb)
   }
 
   /**
@@ -2041,13 +2050,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 质量报告-修改维度权限
+   * 查询数据资产列表
    */
-  async ModifyDimensionWeight(
-    req: ModifyDimensionWeightRequest,
-    cb?: (error: string, rep: ModifyDimensionWeightResponse) => void
-  ): Promise<ModifyDimensionWeightResponse> {
-    return this.request("ModifyDimensionWeight", req, cb)
+  async DescribeDataAssets(
+    req: DescribeDataAssetsRequest,
+    cb?: (error: string, rep: DescribeDataAssetsResponse) => void
+  ): Promise<DescribeDataAssetsResponse> {
+    return this.request("DescribeDataAssets", req, cb)
   }
 
   /**
@@ -2449,6 +2458,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDatabaseInfoListResponse) => void
   ): Promise<DescribeDatabaseInfoListResponse> {
     return this.request("DescribeDatabaseInfoList", req, cb)
+  }
+
+  /**
+   * 资源管理-上传资源
+   */
+  async UploadResource(
+    req: UploadResourceRequest,
+    cb?: (error: string, rep: UploadResourceResponse) => void
+  ): Promise<UploadResourceResponse> {
+    return this.request("UploadResource", req, cb)
   }
 
   /**

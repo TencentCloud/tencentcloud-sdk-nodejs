@@ -39,6 +39,7 @@ import {
   DeleteResourceFolderResponse,
   UpdateTaskRequest,
   KVMap,
+  CreateTriggerWorkflowRunResponse,
   ListResourceFilesResponse,
   ListDownstreamTaskInstancesRequest,
   UpdateProjectRequest,
@@ -105,6 +106,7 @@ import {
   SQLScriptConfig,
   CodeFile,
   AddCalcEnginesToProjectRequest,
+  UpdateTaskBaseAttribute,
   CreateWorkflowResult,
   RelateTask,
   QualityThresholdValue,
@@ -209,7 +211,7 @@ import {
   SubmitTriggerTaskResponse,
   AuthorizePrivilegesRequest,
   ListQualityRuleGroupExecResultsByPageResponse,
-  CreateQualityRuleVO,
+  ListQualityRuleGroupsTableRequest,
   GetSQLFolderRequest,
   TaskFolder,
   AlarmWayWebHook,
@@ -363,6 +365,7 @@ import {
   GetDataSourceRelatedTasksRequest,
   UpdateTriggerTaskBaseAttribute,
   ResourceFolderPage,
+  CreateTriggerWorkflowRunResult,
   ListDownstreamTasksResponse,
   ListQualityRuleTemplatesRequest,
   AuthorizePrivilegesRsp,
@@ -492,7 +495,7 @@ import {
   GetResourceFolderResponse,
   WorkflowFolder,
   GetAlarmMessageResponse,
-  UpdateTaskBaseAttribute,
+  CreateTriggerWorkflowRunRequest,
   GetOpsTaskCodeRequest,
   GetTaskFolderResponse,
   GetDataBackfillPlanRequest,
@@ -581,7 +584,7 @@ import {
   SetSuccessTaskInstancesAsyncResponse,
   UpdateSQLScriptRequest,
   ParamInfo,
-  ListQualityRuleGroupsTableRequest,
+  CreateQualityRuleVO,
   UpdateTriggerTaskPart,
   DeleteTriggerTaskRequest,
   DeleteDataSourceResponse,
@@ -890,6 +893,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetMyWorkflowMaxPermissionResponse) => void
   ): Promise<GetMyWorkflowMaxPermissionResponse> {
     return this.request("GetMyWorkflowMaxPermission", req, cb)
+  }
+
+  /**
+   * 更新工作流（包括工作流基本信息与工作流参数）
+   */
+  async UpdateTriggerWorkflowPartially(
+    req: UpdateTriggerWorkflowPartiallyRequest,
+    cb?: (error: string, rep: UpdateTriggerWorkflowPartiallyResponse) => void
+  ): Promise<UpdateTriggerWorkflowPartiallyResponse> {
+    return this.request("UpdateTriggerWorkflowPartially", req, cb)
   }
 
   /**
@@ -2186,13 +2199,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新工作流（包括工作流基本信息与工作流参数）
+   * 工作流调度模型下运行工作流
    */
-  async UpdateTriggerWorkflowPartially(
-    req: UpdateTriggerWorkflowPartiallyRequest,
-    cb?: (error: string, rep: UpdateTriggerWorkflowPartiallyResponse) => void
-  ): Promise<UpdateTriggerWorkflowPartiallyResponse> {
-    return this.request("UpdateTriggerWorkflowPartially", req, cb)
+  async CreateTriggerWorkflowRun(
+    req: CreateTriggerWorkflowRunRequest,
+    cb?: (error: string, rep: CreateTriggerWorkflowRunResponse) => void
+  ): Promise<CreateTriggerWorkflowRunResponse> {
+    return this.request("CreateTriggerWorkflowRun", req, cb)
   }
 
   /**

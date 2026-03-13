@@ -439,31 +439,31 @@ export interface PullSmsSendStatusRequest {
  */
 export interface SmsPackagesStatistics {
   /**
-   * 套餐包创建时间，UNIX 时间戳（单位：秒）。
+   * <p>套餐包创建时间，UNIX 时间戳。</p><p>单位：秒</p>
    */
   PackageCreateTime?: number
   /**
-   * 套餐包生效时间，UNIX 时间戳（单位：秒）。
+   * <p>套餐包生效时间，UNIX 时间戳。</p><p>单位：秒</p>
    */
   PackageEffectiveTime?: number
   /**
-   * 套餐包过期时间，UNIX 时间戳（单位：秒）。
+   * <p>套餐包过期时间，UNIX 时间戳。</p><p>单位：秒</p>
    */
   PackageExpiredTime?: number
   /**
-   * 套餐包条数。
+   * <p>套餐包条数。</p><p>单位：条</p>
    */
   PackageAmount?: number
   /**
-   * 套餐包类别，0表示赠送套餐包，1表示购买套餐包。
+   * <p>套餐包类别。</p><p>枚举值：</p><ul><li>0： 赠送套餐</li><li>1： 购买套餐包</li></ul>
    */
   PackageType?: number
   /**
-   * 套餐包 ID。
+   * <p>套餐包 ID。</p>
    */
   PackageId?: number
   /**
-   * 当前使用套餐包条数。
+   * <p>当前使用套餐包条数。</p><p>单位：条</p>
    */
   CurrentUsage?: number
 }
@@ -837,39 +837,39 @@ export interface DescribeSmsTemplateListRequest {
  */
 export interface CallbackStatusStatistics {
   /**
-   * 短信回执量统计。
+   * <p>短信回执量统计。</p><p>单位：数</p>
    */
   CallbackCount?: number
   /**
-   * 短信提交成功量统计。
+   * <p>短信提交成功量统计。</p><p>单位：数</p>
    */
   RequestSuccessCount?: number
   /**
-   * 短信回执失败量统计。
+   * <p>短信回执失败量统计。</p><p>单位：数</p>
    */
   CallbackFailCount?: number
   /**
-   * 短信回执成功量统计。
+   * <p>短信回执成功量统计。</p><p>单位：数</p>
    */
   CallbackSuccessCount?: number
   /**
-   * 运营商内部错误统计。
+   * <p>运营商内部错误统计。</p><p>单位：数</p>
    */
   InternalErrorCount?: number
   /**
-   * 号码无效或空号统计。
+   * <p>号码无效或空号统计。</p><p>单位：数</p>
    */
   InvalidNumberCount?: number
   /**
-   * 停机、关机等错误统计。
+   * <p>停机、关机等错误统计。</p><p>单位：数</p>
    */
   ShutdownErrorCount?: number
   /**
-   * 号码拉入黑名单统计。
+   * <p>号码拉入免打扰名单统计。</p><p>单位：数</p>
    */
   BlackListCount?: number
   /**
-   * 运营商频率限制统计。
+   * <p>运营商频率限制统计。</p><p>单位：数</p>
    */
   FrequencyLimitCount?: number
 }
@@ -1150,11 +1150,11 @@ export interface SmsPackagesStatisticsResponse {
  */
 export interface DeleteSignStatus {
   /**
-   * 删除状态信息。
+   * <p>删除状态信息。</p>
    */
   DeleteStatus: string
   /**
-   * 删除时间，UNIX 时间戳（单位：秒）。
+   * <p>删除时间，UNIX 时间戳（单位：秒）。</p>
    */
   DeleteTime: number
 }

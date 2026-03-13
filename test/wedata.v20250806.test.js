@@ -248,6 +248,16 @@ it("wedata.v20250806.GetMyWorkflowMaxPermission", async function () {
     }
 })
 
+it("wedata.v20250806.UpdateTriggerWorkflowPartially", async function () {
+    try {
+       const data = await client.UpdateTriggerWorkflowPartially({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20250806.ListCatalog", async function () {
     try {
        const data = await client.ListCatalog({})
@@ -1538,9 +1548,9 @@ it("wedata.v20250806.GetSQLScript", async function () {
     }
 })
 
-it("wedata.v20250806.UpdateTriggerWorkflowPartially", async function () {
+it("wedata.v20250806.CreateTriggerWorkflowRun", async function () {
     try {
-       const data = await client.UpdateTriggerWorkflowPartially({})
+       const data = await client.CreateTriggerWorkflowRun({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

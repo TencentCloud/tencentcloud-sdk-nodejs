@@ -268,9 +268,9 @@ it("wedata.v20210820.DescribeIntegrationNode", async function () {
     }
 })
 
-it("wedata.v20210820.UploadResource", async function () {
+it("wedata.v20210820.ModifyDimensionWeight", async function () {
     try {
-       const data = await client.UploadResource({})
+       const data = await client.ModifyDimensionWeight({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1058,9 +1058,9 @@ it("wedata.v20210820.DisableProject", async function () {
     }
 })
 
-it("wedata.v20210820.ModifyDimensionWeight", async function () {
+it("wedata.v20210820.DescribeDataAssets", async function () {
     try {
-       const data = await client.ModifyDimensionWeight({})
+       const data = await client.DescribeDataAssets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1461,6 +1461,16 @@ it("wedata.v20210820.FindAllFolder", async function () {
 it("wedata.v20210820.DescribeDatabaseInfoList", async function () {
     try {
        const data = await client.DescribeDatabaseInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("wedata.v20210820.UploadResource", async function () {
+    try {
+       const data = await client.UploadResource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
