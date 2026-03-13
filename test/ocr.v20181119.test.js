@@ -748,6 +748,16 @@ it("ocr.v20181119.QuestionSplitOCR", async function () {
     }
 })
 
+it("ocr.v20181119.VerifyBizLicenseEnterprise4", async function () {
+    try {
+       const data = await client.VerifyBizLicenseEnterprise4({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.MLIDCardOCR", async function () {
     try {
        const data = await client.MLIDCardOCR({})

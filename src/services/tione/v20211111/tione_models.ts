@@ -6494,6 +6494,11 @@ export interface DataConfig {
    * 主机路径信息
    */
   HostPathSource?: HostPath
+  /**
+   * 公有云数据源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicDataSource?: PublicDataSourceFS
 }
 
 /**

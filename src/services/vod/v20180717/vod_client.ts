@@ -58,7 +58,7 @@ import {
   DeleteLLMComprehendTemplateRequest,
   QualityInspectTaskOutput,
   QualityEnhanceTaskInput,
-  ResetProcedureTemplateResponse,
+  CreateAigcAdvancedCustomElementRequest,
   MediaSnapshotByTimeOffsetItem,
   RebuildMediaTargetInfo,
   ModifySampleSnapshotTemplateRequest,
@@ -115,7 +115,7 @@ import {
   DeletePersonSampleRequest,
   ProcedureReviewAudioVideoTaskInput,
   AiRecognitionTaskAsrWordsSegmentItem,
-  ModifyProcessImageAsyncTemplateRequest,
+  CreateAigcAdvancedCustomElementResponse,
   TextWatermarkTemplateInput,
   UserDefineAsrTextReviewTemplateInfoForUpdate,
   QualityEvaluationConfigureInfoForUpdate,
@@ -260,8 +260,10 @@ import {
   CreateWordSamplesResponse,
   ClassificationConfigureInfoForUpdate,
   DeleteAdaptiveDynamicStreamingTemplateResponse,
+  ImageSceneAigcEncodeConfig,
   CreateWordSamplesRequest,
   FrameTagConfigureInfo,
+  DeleteVodDomainRequest,
   BlurConfigureInfo,
   PoliticalAsrReviewTemplateInfoForUpdate,
   WechatMiniProgramPublishTaskInput,
@@ -433,7 +435,7 @@ import {
   AiRecognitionTaskAsrWordsResultOutput,
   DescribeHeadTailTemplatesRequest,
   CreateLLMComprehendTemplateResponse,
-  ImageSceneAigcEncodeConfig,
+  DescribeCdnLogsRequest,
   BlurConfigureInfoForUpdate,
   ProcessMediaByUrlResponse,
   EditMediaVideoStream,
@@ -568,7 +570,7 @@ import {
   PullEventsResponse,
   MediaProcessTaskTranscodeResult,
   AiRecognitionTaskObjectResultInput,
-  DescribeCdnLogsRequest,
+  CreateCLSLogsetResponse,
   MediaProcessTaskInput,
   OutputVideoStream,
   ModifyDefaultDistributionConfigRequest,
@@ -705,7 +707,7 @@ import {
   DescribeDrmDataKeyRequest,
   AsrFullTextConfigureInfo,
   TerrorismImageResult,
-  DeleteVodDomainRequest,
+  CreateAigcCustomVoiceResponse,
   ImageEnhanceConfig,
   DescribeDrmKeyProviderInfoResponse,
   ExtractTraceWatermarkResponse,
@@ -717,6 +719,7 @@ import {
   AiReviewPornTaskOutput,
   SDMCDrmKeyProviderInfo,
   PullUploadRequest,
+  ResetProcedureTemplateResponse,
   CreateSceneAigcVideoTaskResponse,
   AiRecognitionTaskAsrFullTextResult,
   DeleteQualityInspectTemplateResponse,
@@ -848,6 +851,7 @@ import {
   ExtractCopyRightWatermarkTaskInput,
   AsrTranslateConfigureInfo,
   DescribeSampleSnapshotTemplatesResponse,
+  ModifyProcessImageAsyncTemplateRequest,
   TaskSimpleInfo,
   MediaContentReviewSegmentItem,
   AiContentReviewResult,
@@ -954,7 +958,7 @@ import {
   DescribeHeadTailTemplatesResponse,
   HandleCurrentPlaylistRequest,
   TerrorismConfigureInfo,
-  CreateCLSLogsetResponse,
+  CreateAigcCustomVoiceRequest,
   PoliticalAsrReviewTemplateInfo,
   LLMComprehendAsr,
   SceneAigcImageTaskInput,
@@ -1056,6 +1060,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExtractTraceWatermarkResponse) => void
   ): Promise<ExtractTraceWatermarkResponse> {
     return this.request("ExtractTraceWatermark", req, cb)
+  }
+
+  /**
+     * 修改用户自定义图像异步处理模板。
+
+注意：模板 ID 10000 以下的为系统预置模板，不允许修改。
+     */
+  async ModifyProcessImageAsyncTemplate(
+    req: ModifyProcessImageAsyncTemplateRequest,
+    cb?: (error: string, rep: ModifyProcessImageAsyncTemplateResponse) => void
+  ): Promise<ModifyProcessImageAsyncTemplateResponse> {
+    return this.request("ModifyProcessImageAsyncTemplate", req, cb)
   }
 
   /**
@@ -1863,15 +1879,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 修改用户自定义图像异步处理模板。
-
-注意：模板 ID 10000 以下的为系统预置模板，不允许修改。
-     */
-  async ModifyProcessImageAsyncTemplate(
-    req: ModifyProcessImageAsyncTemplateRequest,
-    cb?: (error: string, rep: ModifyProcessImageAsyncTemplateResponse) => void
-  ): Promise<ModifyProcessImageAsyncTemplateResponse> {
-    return this.request("ModifyProcessImageAsyncTemplate", req, cb)
+   * 查询雪碧图模板，支持根据条件，分页查询。
+   */
+  async DescribeImageSpriteTemplates(
+    req: DescribeImageSpriteTemplatesRequest,
+    cb?: (error: string, rep: DescribeImageSpriteTemplatesResponse) => void
+  ): Promise<DescribeImageSpriteTemplatesResponse> {
+    return this.request("DescribeImageSpriteTemplates", req, cb)
   }
 
   /**
@@ -2635,6 +2649,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用于创建 AIGC 自定义音色。
+   */
+  async CreateAigcCustomVoice(
+    req: CreateAigcCustomVoiceRequest,
+    cb?: (error: string, rep: CreateAigcCustomVoiceResponse) => void
+  ): Promise<CreateAigcCustomVoiceResponse> {
+    return this.request("CreateAigcCustomVoice", req, cb)
+  }
+
+  /**
    * 修改用户自定义指定时间点截图模板。
    */
   async ModifySnapshotByTimeOffsetTemplate(
@@ -2803,13 +2827,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询雪碧图模板，支持根据条件，分页查询。
+   * 该接口用于创建 AIGC 高级自定义主体。
    */
-  async DescribeImageSpriteTemplates(
-    req: DescribeImageSpriteTemplatesRequest,
-    cb?: (error: string, rep: DescribeImageSpriteTemplatesResponse) => void
-  ): Promise<DescribeImageSpriteTemplatesResponse> {
-    return this.request("DescribeImageSpriteTemplates", req, cb)
+  async CreateAigcAdvancedCustomElement(
+    req: CreateAigcAdvancedCustomElementRequest,
+    cb?: (error: string, rep: CreateAigcAdvancedCustomElementResponse) => void
+  ): Promise<CreateAigcAdvancedCustomElementResponse> {
+    return this.request("CreateAigcAdvancedCustomElement", req, cb)
   }
 
   /**

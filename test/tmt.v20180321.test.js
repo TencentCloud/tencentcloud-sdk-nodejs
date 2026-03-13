@@ -18,56 +18,6 @@ const client = new tencentcloud.tmt.v20180321.Client({
 })
 describe("tmt.v20180321.test.js", function () {
 
-it("tmt.v20180321.LanguageDetect", async function () {
-    try {
-       const data = await client.LanguageDetect({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tmt.v20180321.TextTranslateBatch", async function () {
-    try {
-       const data = await client.TextTranslateBatch({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tmt.v20180321.ImageTranslateLLM", async function () {
-    try {
-       const data = await client.ImageTranslateLLM({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tmt.v20180321.GetFileTranslate", async function () {
-    try {
-       const data = await client.GetFileTranslate({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tmt.v20180321.ImageTranslate", async function () {
-    try {
-       const data = await client.ImageTranslate({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tmt.v20180321.TextTranslate", async function () {
     try {
        const data = await client.TextTranslate({})
@@ -78,19 +28,9 @@ it("tmt.v20180321.TextTranslate", async function () {
     }
 })
 
-it("tmt.v20180321.FileTranslate", async function () {
+it("tmt.v20180321.ImageTranslateLLM", async function () {
     try {
-       const data = await client.FileTranslate({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tmt.v20180321.SpeechTranslate", async function () {
-    try {
-       const data = await client.SpeechTranslate({})
+       const data = await client.ImageTranslateLLM({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

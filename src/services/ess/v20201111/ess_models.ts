@@ -777,6 +777,10 @@ export interface CreateFlowGroupByTemplatesResponse {
    */
   Approvers?: Array<FlowGroupApprovers>
   /**
+   * FlowGroupNeedWorkflow
+   */
+  WorkflowInstanceId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1385,6 +1389,10 @@ export interface CreateFlowByFilesRequest {
    * 是否开启动态签署合同：<ul><li> **true**：开启动态签署合同，可在发起时可以不传签署人，在签署过程中追加签署人（必须满足：1，发起方企业开启了模块化计费能力；2，发起方企业在企业应用管理中开启了动态签署人2.0能力）    。</li><li> **false**：不开启动态签署合同。</li></ul>
    */
   OpenDynamicSignFlow?: boolean
+  /**
+   * 是否开启发起合同审批，默认：false（不开启），开启后，发起合同（StartFlow），会提交电子签内置的审批流
+   */
+  Workflow?: boolean
 }
 
 /**
@@ -5476,6 +5484,10 @@ export interface CreateFlowByFilesResponse {
    */
   Approvers?: Array<ApproverItem>
   /**
+   * 发起审批流id，仅在CreateFlowByFiles时指定了WorkFlow=true时返回
+   */
+  WorkflowInstanceId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -5956,7 +5968,7 @@ export interface ExtendScene {
 印章来源类型包括下面几种：
 <ul>
 <li>CREATE-客户上传图片创建</li>
-<li>GENERATE-系统模版印章生成</li>
+<li>GENERATE-系统模板印章生成</li>
 <li>SIST_SEAL-深圳电子印章</li>
 </ul>
    */
@@ -8994,6 +9006,10 @@ export interface FlowGroupOptions {
 <ul><li>sms : 短信 (默认值)</li><li>none : 不通知</li></ul>
    */
   OtherApproverNotifyType?: string
+  /**
+   * 是否开启发起合同组的发起审批，默认：false(不开启)，开启后，发起合同组会提交电子签内置审批流
+   */
+  FlowGroupNeedWorkflow?: boolean
 }
 
 /**
@@ -9579,6 +9595,10 @@ export interface CreatePrepareFlowGroupRequest {
 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
+  /**
+   * 合同组发起控制参数，当前仅支持FlowGroupNeedWorkflow，表示开启嵌入式合同组发起审批
+   */
+  FlowGroupOptions?: FlowGroupOptions
 }
 
 /**
@@ -9790,6 +9810,10 @@ export interface CreatePrepareFlowRequest {
    * @deprecated
    */
   SignComponentConfig?: SignComponentConfig
+  /**
+   * 是否开启嵌入式合同发起时，提交发起审批流，默认：false（不开启），开启后，嵌入式合同发起后，会提交电子签内置审批流
+   */
+  Workflow?: boolean
 }
 
 /**
@@ -11231,6 +11255,10 @@ export interface StartFlowResponse {
    */
   Status?: string
   /**
+   * 发起审批流id，仅在CreateFlow时指定了WorkFlow=true时返回
+   */
+  WorkflowInstanceId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -11520,6 +11548,10 @@ export interface CreateFlowRequest {
 ![FlowDisplayType](https://qcloudimg.tencent-cloud.cn/raw/e4a2c4d638717cc901d3dbd5137c9bbc.png)
    */
   FlowDisplayType?: number
+  /**
+   * 是否开启发起合同审批，默认：false（不开启），开启后，发起合同（StartFlow），会提交电子签内置的审批流
+   */
+  Workflow?: boolean
 }
 
 /**
@@ -12866,6 +12898,10 @@ export interface CreateFlowGroupByFilesResponse {
    * 合同组签署方信息。
    */
   Approvers?: Array<FlowGroupApprovers>
+  /**
+   * 发起审批流id，仅在发起时指定FlowGroupOptions.FlowGroupNeedWorkflow=true时返回
+   */
+  WorkflowInstanceId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

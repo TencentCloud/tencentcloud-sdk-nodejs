@@ -1586,7 +1586,7 @@ export interface IDCardOCRResponse {
    */
   ValidDate?: string
   /**
-   * <p>扩展信息，不请求则不返回，具体输入参考示例3和示例4。<br>IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；<br>Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；<br>Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;<br>BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;<br>WarnInfos，告警信息，Code 告警码列表和释义：<br>-9100 身份证有效日期不合法告警，<br>-9101 身份证边框不完整告警，<br>-9102 身份证复印件告警（黑白及彩色复印件）,<br>-9108 身份证复印件告警（仅黑白复印件），<br>-9103 身份证翻拍告警，<br>-9105 身份证框内遮挡告警，<br>-9104 临时身份证告警，<br>-9106 身份证疑似存在PS痕迹告警，<br>-9107 身份证反光告警，<br>-9110 电子身份证告警，<br>-9111 水印告警（仅CardWarnType参数为Advanced时）</p>
+   * <p>扩展信息，不请求则不返回，具体输入参考示例3和示例4。<br>IdCard，裁剪后身份证照片的base64编码，请求 Config.CropIdCard 时返回；<br>Portrait，身份证头像照片的base64编码，请求 Config.CropPortrait 时返回；<br>Quality，图片质量分数，请求 Config.Quality 时返回（取值范围：0 ~ 100，分数越低越模糊，建议阈值≥50）;<br>BorderCodeValue，身份证边框不完整告警阈值分数，请求 Config.BorderCheckWarn时返回（取值范围：0 ~ 100，分数越低边框遮挡可能性越低，建议阈值≤50）;<br>WarnInfos，告警信息，Code 告警码列表和释义：<br>-9109 身份证有效日期不合法告警，<br>-9101 身份证边框不完整告警，<br>-9102 身份证复印件告警（黑白及彩色复印件）,<br>-9108 身份证复印件告警（仅黑白复印件），<br>-9103 身份证翻拍告警，<br>-9105 身份证框内遮挡告警，<br>-9104 临时身份证告警，<br>-9106 身份证疑似存在PS痕迹告警，<br>-9107 身份证反光告警，<br>-9110 电子身份证告警，<br>-9111 水印告警（仅CardWarnType参数为Advanced时）</p>
    */
   AdvancedInfo?: string
   /**
@@ -1939,6 +1939,48 @@ DOUBLE 支持自动识别驾驶证正副页单面，和正副双面同框识别
 默认值为：FRONT。
    */
   CardSide?: string
+}
+
+/**
+ * VerifyBizLicenseEnterprise4返回参数结构体
+ */
+export interface VerifyBizLicenseEnterprise4Response {
+  /**
+   * <p>请求状态</p><p>枚举值：</p><ul><li>0： 成功，计费</li><li>1： 系统异常，不计费</li></ul>
+   */
+  StatusCode?: number
+  /**
+   * <p>验证结果<br>1：四要素完全匹配<br>0：四要素不完全匹配<br>仅StatusCode为0时返回</p>
+   */
+  VerifyResult?: number
+  /**
+   * <p>统一社会信用代码是否一致<br>仅StatusCode为0时返回</p>
+   */
+  IsCreditCodeConsistent?: boolean
+  /**
+   * <p>企业名称是否一致<br>仅StatusCode为0时返回</p>
+   */
+  IsEntNameConsistent?: boolean
+  /**
+   * <p>法人代表是否一致<br>仅StatusCode为0时返回，企业名称与统一社会信用代码均未查得时，固定返回false</p>
+   */
+  IsLrNameConsistent?: boolean
+  /**
+   * <p>注册登记证件号码是否一致<br>仅StatusCode为0时返回，企业名称与统一社会信用代码均未查得时，固定返回false</p>
+   */
+  IsIdNumConsistent?: boolean
+  /**
+   * <p>经营状态</p><p>枚举值：</p><ul><li>1： 开业（在营）</li><li>2： 迁出</li><li>3： 注销</li><li>4： 吊销</li><li>5： 撤销</li><li>6： 停业</li><li>0： 其他</li><li>-10002： 企业信息不正确，无法查询</li></ul>
+   */
+  OperatingStatus?: string
+  /**
+   * <p>营业期限：一般包括营业开始时间和结束时间</p><p>参数格式：yyyy-MM-dd/yyyy-MM-dd</p><p>无固定期限的格式为：yyyy-MM-dd/<br>部分企业历史数据可能为空，将返回：/<br>企业信息不正确，无法查询，将返回：-10002</p>
+   */
+  OperatingPeriod?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7839,17 +7881,21 @@ export interface TableTitle {
  */
 export interface RecognizeTableAccurateOCRRequest {
   /**
-   * 图片/PDF的 Base64 值。要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，且长宽比小于3（短边分辨率大于600, 长边分辨率小于等于短边分辨率的三倍）。支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * <p>图片/PDF的 Base64 值。要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，且长宽比小于3（短边分辨率大于600, 长边分辨率小于等于短边分辨率的三倍）。支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。</p>
    */
   ImageBase64?: string
   /**
-   * 图片/PDF的 Url 地址。要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，且长宽比小于3（短边分辨率大于600, 长边分辨率小于等于短边分辨率的三倍）。支持PNG、JPG、JPEG、BMP、PDF格式。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * <p>图片/PDF的 Url 地址。要求图片/PDF经Base64编码后不超过 10M，分辨率建议600*800以上，且长宽比小于3（短边分辨率大于600, 长边分辨率小于等于短边分辨率的三倍）。支持PNG、JPG、JPEG、BMP、PDF格式。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。</p>
    */
   ImageUrl?: string
   /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF有效，默认值为1。
+   * <p>需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF有效，默认值为1。</p>
    */
   PdfPageNumber?: number
+  /**
+   * <p>是否使用新模型</p><p>枚举值：</p><ul><li>false： 使用当前默认模型，耗时短且支持坐标返回</li><li>true： 使用新模型，复杂表格识别效果更好，耗时稍长</li></ul><p>默认值：false</p>
+   */
+  UseNewModel?: boolean
 }
 
 /**
@@ -8896,6 +8942,28 @@ export interface HandwritingEssayOCRResponse {
 }
 
 /**
+ * VerifyBizLicenseEnterprise4请求参数结构体
+ */
+export interface VerifyBizLicenseEnterprise4Request {
+  /**
+   * <p>统一社会信用代码</p>
+   */
+  CreditCode: string
+  /**
+   * <p>企业名称</p>
+   */
+  EntName: string
+  /**
+   * <p>法人代表</p>
+   */
+  LrName: string
+  /**
+   * <p>注册登记证件号码</p>
+   */
+  IdNum: string
+}
+
+/**
  * 保险单据信息
  */
 export interface InsuranceBillInfo {
@@ -9465,21 +9533,21 @@ BACK：无照片的一面（国徽面），
  */
 export interface RecognizeTableAccurateOCRResponse {
   /**
-   * 检测到的文本信息，具体内容请点击左侧链接。
+   * <p>检测到的文本信息，具体内容请点击左侧链接。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TableDetections?: Array<TableInfo>
   /**
-   * Base64 编码后的 Excel 数据。
+   * <p>Base64 编码后的 Excel 数据。</p>
    */
   Data?: string
   /**
-   * 图片为PDF时，返回PDF的总页数，默认为0
+   * <p>图片为PDF时，返回PDF的总页数，默认为0</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PdfPageSize?: number
   /**
-   * 图片旋转角度（角度制），文本的水平方向为0°。
+   * <p>图片旋转角度（角度制），文本的水平方向为0°。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Angle?: number

@@ -288,9 +288,9 @@ it("rum.v20210622.DescribeDataStaticUrl", async function () {
     }
 })
 
-it("rum.v20210622.DescribeDataFetchUrlInfo", async function () {
+it("rum.v20210622.ModifyProjectLimit", async function () {
     try {
-       const data = await client.DescribeDataFetchUrlInfo({})
+       const data = await client.ModifyProjectLimit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -351,16 +351,6 @@ it("rum.v20210622.DescribeDataSetUrlStatistics", async function () {
 it("rum.v20210622.ModifyInstance", async function () {
     try {
        const data = await client.ModifyInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.ModifyProjectLimit", async function () {
-    try {
-       const data = await client.ModifyProjectLimit({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,9 +478,9 @@ it("rum.v20210622.DeleteWhitelist", async function () {
     }
 })
 
-it("rum.v20210622.CreateTawInstance", async function () {
+it("rum.v20210622.DescribeDataFetchUrlInfo", async function () {
     try {
-       const data = await client.CreateTawInstance({})
+       const data = await client.DescribeDataFetchUrlInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -571,16 +561,6 @@ it("rum.v20210622.DescribeReleaseFileSign", async function () {
 it("rum.v20210622.DescribeDataBridgeUrlV2", async function () {
     try {
        const data = await client.DescribeDataBridgeUrlV2({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.CreateProject", async function () {
-    try {
-       const data = await client.CreateProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

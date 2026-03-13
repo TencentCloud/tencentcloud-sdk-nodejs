@@ -382,31 +382,33 @@ export interface ModifyInitNodeScriptsRequest {
  */
 export interface AttachNodesRequest {
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   ClusterId: string
   /**
-   * 节点的实例id列表
+   * <p>节点的实例id列表</p>
    */
   ResourceSet: Array<string>
   /**
-   * 队列名称。不指定则为默认队列：
-SLURM默认队列为：compute。 
-
+   * <p>队列名称。不指定则为默认队列：<br>SLURM默认队列为：compute。</p>
    */
   QueueName?: string
   /**
-   * 指定有效的镜像ID，格式形如img-xxx。目前仅支持公有镜像和特定自定义镜像。如不指定，则该字段是默认镜像。
+   * <p>指定有效的镜像ID，格式形如img-xxx。目前仅支持公有镜像和特定自定义镜像。如不指定，则该字段是默认镜像。</p>
    */
   ImageId?: string
   /**
-   * 要新增节点的资源类型。<li>CVM：CVM实例类型资源</li><li>WORKSPACE：工作空间类型实例资源</li>默认值：CVM。
+   * <p>要新增节点的资源类型。<li>CVM：CVM实例类型资源</li><li>WORKSPACE：工作空间类型实例资源</li>默认值：CVM。</p>
    */
   ResourceType?: string
   /**
-   * 提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。关于获取此参数的详细介绍，请参阅[Windows](https://cloud.tencent.com/document/product/213/17526)和[Linux](https://cloud.tencent.com/document/product/213/17525)启动时运行命令。
+   * <p>提供给实例使用的用户数据，需要以 base64 方式编码，支持的最大数据大小为 16KB。关于获取此参数的详细介绍，请参阅<a href="https://cloud.tencent.com/document/product/213/17526">Windows</a>和<a href="https://cloud.tencent.com/document/product/213/17525">Linux</a>启动时运行命令。</p>
    */
   UserData?: string
+  /**
+   * <p>控制实例加入集群是否跳过重装系统</p><p>默认值：False</p>
+   */
+  SkipResetInstance?: boolean
 }
 
 /**

@@ -5988,68 +5988,67 @@ export interface ModifyCdbProxyParamRequest {
  */
 export interface RoGroup {
   /**
-   * 只读组模式，可选值为：alone-系统自动分配只读组；allinone-新建只读组；join-使用现有只读组。
+   * <p>只读组模式，可选值为：alone-系统自动分配只读组；allinone-新建只读组；join-使用现有只读组。</p>
    */
   RoGroupMode: string
   /**
-   * 只读组 ID。
-说明：若此数据结构在购买实例操作中被使用，则当只读组模式选择 join 时，此项为必填。
+   * <p>只读组 ID。<br>说明：若此数据结构在购买实例操作中被使用，则当只读组模式选择 join 时，此项为必填。</p>
    */
   RoGroupId?: string
   /**
-   * 只读组名称。
+   * <p>只读组名称。</p>
    */
   RoGroupName?: string
   /**
-   * 是否启用延迟超限剔除功能，启用该功能后，只读实例与主实例的延迟超过延迟阈值，只读实例将被隔离。可选值：1-启用；0-不启用。
+   * <p>是否启用延迟超限剔除功能，启用该功能后，只读实例与主实例的延迟超过延迟阈值，只读实例将被隔离。可选值：1-启用；0-不启用。</p>
    */
   RoOfflineDelay?: number
   /**
-   * 延迟阈值。单位：秒。值范围：1-10000，整数。
+   * <p>延迟阈值。单位：秒。值范围：1-10000，整数。</p>
    */
   RoMaxDelayTime?: number
   /**
-   * 最少实例保留个数，若购买只读实例数量小于设置数量将不做剔除。
+   * <p>最少实例保留个数，若购买只读实例数量小于设置数量将不做剔除。</p>
    */
   MinRoInGroup?: number
   /**
-   * 读写权重分配模式，可选值：system-系统自动分配；custom-自定义。
+   * <p>读写权重分配模式，可选值：system-系统自动分配；custom-自定义。</p>
    */
   WeightMode?: string
   /**
-   * 该字段已经废弃，无意义。查看只读实例的权重，请查看 RoInstances 字段里的 Weight 值。
+   * <p>该字段已经废弃，无意义。查看只读实例的权重，请查看 RoInstances 字段里的 Weight 值。</p>
    */
   Weight?: number
   /**
-   * 只读组中的只读实例详情。
+   * <p>只读组中的只读实例详情。</p>
    */
   RoInstances?: Array<RoInstanceInfo>
   /**
-   * 只读组的内网 IP。
+   * <p>只读组的内网 IP。</p>
    */
   Vip?: string
   /**
-   * 只读组的内网端口号。
+   * <p>只读组的内网端口号。</p>
    */
   Vport?: number
   /**
-   * 私有网络 ID。
+   * <p>私有网络 ID。</p>
    */
   UniqVpcId?: string
   /**
-   * 子网 ID。
+   * <p>子网 ID。</p>
    */
   UniqSubnetId?: string
   /**
-   * 只读组所在的地域。
+   * <p>只读组所在的地域。</p>
    */
   RoGroupRegion?: string
   /**
-   * 只读组所在的可用区。
+   * <p>只读组所在的可用区。</p>
    */
   RoGroupZone?: string
   /**
-   * 延迟复制时间。单位：秒。值范围：1-259200，整数。
+   * <p>延迟复制时间。单位：秒。值范围：1-259200，整数。</p>
    */
   DelayReplicationTime?: number
 }

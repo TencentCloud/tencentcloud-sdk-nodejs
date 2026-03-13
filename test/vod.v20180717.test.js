@@ -68,6 +68,16 @@ it("vod.v20180717.ExtractTraceWatermark", async function () {
     }
 })
 
+it("vod.v20180717.ModifyProcessImageAsyncTemplate", async function () {
+    try {
+       const data = await client.ModifyProcessImageAsyncTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeFileAttributes", async function () {
     try {
        const data = await client.DescribeFileAttributes({})
@@ -748,9 +758,9 @@ it("vod.v20180717.ModifySampleSnapshotTemplate", async function () {
     }
 })
 
-it("vod.v20180717.ModifyProcessImageAsyncTemplate", async function () {
+it("vod.v20180717.DescribeImageSpriteTemplates", async function () {
     try {
-       const data = await client.ModifyProcessImageAsyncTemplate({})
+       const data = await client.DescribeImageSpriteTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1438,6 +1448,16 @@ it("vod.v20180717.ModifyAIAnalysisTemplate", async function () {
     }
 })
 
+it("vod.v20180717.CreateAigcCustomVoice", async function () {
+    try {
+       const data = await client.CreateAigcCustomVoice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.ModifySnapshotByTimeOffsetTemplate", async function () {
     try {
        const data = await client.ModifySnapshotByTimeOffsetTemplate({})
@@ -1578,9 +1598,9 @@ it("vod.v20180717.ModifyEnhanceMediaTemplate", async function () {
     }
 })
 
-it("vod.v20180717.DescribeImageSpriteTemplates", async function () {
+it("vod.v20180717.CreateAigcAdvancedCustomElement", async function () {
     try {
-       const data = await client.DescribeImageSpriteTemplates({})
+       const data = await client.CreateAigcAdvancedCustomElement({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

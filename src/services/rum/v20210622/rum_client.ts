@@ -18,10 +18,8 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  CreateTawInstanceRequest,
   DescribeDataFetchProjectRequest,
   DescribeDataResponse,
-  CreateTawInstanceResponse,
   DeleteProjectRequest,
   DescribeProjectLimitsResponse,
   DescribeTawInstancesRequest,
@@ -54,7 +52,7 @@ import {
   Tag,
   DescribeDataPvUrlStatisticsV2Request,
   DescribeDataFetchUrlV2Response,
-  CreateProjectRequest,
+  DescribeRumGroupLogResponse,
   DescribeDataStaticUrlRequest,
   ModifyInstanceResponse,
   DeleteStarProjectRequest,
@@ -78,7 +76,6 @@ import {
   DescribeDataFetchUrlRequest,
   DescribeRumLogExportRequest,
   DescribeDataLogUrlStatisticsResponse,
-  CreateProjectResponse,
   DescribeDataLogUrlStatisticsV2Response,
   DescribeDataCustomUrlResponse,
   CreateStarProjectResponse,
@@ -92,7 +89,7 @@ import {
   DescribeDataBridgeUrlV2Request,
   Kafka,
   ProjectLimit,
-  DescribeRumGroupLogResponse,
+  DescribeWhitelistsResponse,
   DescribeRumStatsLogListResponse,
   CreateWhitelistRequest,
   StopInstanceResponse,
@@ -142,7 +139,6 @@ import {
   ResumeProjectRequest,
   DescribeAppSingleCaseDetailListRequest,
   DescribeRumGroupLogRequest,
-  DescribeWhitelistsResponse,
   DescribeDataFetchUrlV2Request,
   DescribeProjectsResponse,
   DescribeDataReportCountV2Response,
@@ -450,13 +446,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取DescribeDataFetchUrlInfo信息
+   * 新增修改限流
    */
-  async DescribeDataFetchUrlInfo(
-    req: DescribeDataFetchUrlInfoRequest,
-    cb?: (error: string, rep: DescribeDataFetchUrlInfoResponse) => void
-  ): Promise<DescribeDataFetchUrlInfoResponse> {
-    return this.request("DescribeDataFetchUrlInfo", req, cb)
+  async ModifyProjectLimit(
+    req: ModifyProjectLimitRequest,
+    cb?: (error: string, rep: ModifyProjectLimitResponse) => void
+  ): Promise<ModifyProjectLimitResponse> {
+    return this.request("ModifyProjectLimit", req, cb)
   }
 
   /**
@@ -517,16 +513,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstanceResponse) => void
   ): Promise<ModifyInstanceResponse> {
     return this.request("ModifyInstance", req, cb)
-  }
-
-  /**
-   * 新增修改限流
-   */
-  async ModifyProjectLimit(
-    req: ModifyProjectLimitRequest,
-    cb?: (error: string, rep: ModifyProjectLimitResponse) => void
-  ): Promise<ModifyProjectLimitResponse> {
-    return this.request("ModifyProjectLimit", req, cb)
   }
 
   /**
@@ -650,13 +636,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建 RUM 业务系统
+   * 获取DescribeDataFetchUrlInfo信息
    */
-  async CreateTawInstance(
-    req: CreateTawInstanceRequest,
-    cb?: (error: string, rep: CreateTawInstanceResponse) => void
-  ): Promise<CreateTawInstanceResponse> {
-    return this.request("CreateTawInstance", req, cb)
+  async DescribeDataFetchUrlInfo(
+    req: DescribeDataFetchUrlInfoRequest,
+    cb?: (error: string, rep: DescribeDataFetchUrlInfoResponse) => void
+  ): Promise<DescribeDataFetchUrlInfoResponse> {
+    return this.request("DescribeDataFetchUrlInfo", req, cb)
   }
 
   /**
@@ -737,16 +723,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDataBridgeUrlV2Response) => void
   ): Promise<DescribeDataBridgeUrlV2Response> {
     return this.request("DescribeDataBridgeUrlV2", req, cb)
-  }
-
-  /**
-   * 创建 RUM 应用（归属于某个团队）
-   */
-  async CreateProject(
-    req: CreateProjectRequest,
-    cb?: (error: string, rep: CreateProjectResponse) => void
-  ): Promise<CreateProjectResponse> {
-    return this.request("CreateProject", req, cb)
   }
 
   /**

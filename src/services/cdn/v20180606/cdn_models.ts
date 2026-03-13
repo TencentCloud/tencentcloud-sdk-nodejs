@@ -1844,14 +1844,14 @@ unlicensed：域名未备案/备案注销，自动关闭加速服务，备案完
 capping：触发配置的带宽阈值上限
 readonly：域名存在特殊配置，被锁定
    */
-  Disable: string
+  Disable?: string
   /**
    * 加速区域
 mainland：中国境内加速
 overseas：中国境外加速
 global：全球加速
    */
-  Area: string
+  Area?: string
   /**
    * 域名锁定状态
 normal：未锁定
@@ -1859,15 +1859,15 @@ mainland：中国境内锁定
 overseas：中国境外锁定
 global：全球锁定
    */
-  Readonly: string
+  Readonly?: string
   /**
    * 域名所属产品，cdn/ecdn
    */
-  Product: string
+  Product?: string
   /**
    * 主域名
    */
-  ParentHost: string
+  ParentHost?: string
 }
 
 /**
