@@ -828,6 +828,16 @@ it("vod.v20180717.ModifyImageSpriteTemplate", async function () {
     }
 })
 
+it("vod.v20180717.CreateAigcSubject", async function () {
+    try {
+       const data = await client.CreateAigcSubject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.ParseStreamingManifest", async function () {
     try {
        const data = await client.ParseStreamingManifest({})

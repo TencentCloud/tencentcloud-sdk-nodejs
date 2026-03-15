@@ -18,85 +18,97 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  CreateFileSystemResponse,
-  CreateFilesetRequest,
-  DescribeFilesetsRequest,
-  ClientNodeAttribute,
   DistributedLoadAttrs,
   LoadTaskAttrs,
-  UpdateLoadTaskPriorityResponse,
-  DescribeClusterRoleTokenRequest,
-  DescribeFileSystemsResponse,
-  DescribeLoadTaskResponse,
-  DescribeFilesetGeneralConfigResponse,
-  DetachFileSystemBucketResponse,
-  DeleteFilesetRequest,
-  FSAttribute,
-  MetadataLoadAttrs,
-  DescribeClusterRoleTokenResponse,
-  BatchDeleteClientNodesResponse,
-  CreateLoadTaskResponse,
-  QueryCrossVpcSubnetSupportForClientNodeRequest,
   ChargeAttribute,
-  DeleteCrossVpcSubnetSupportForClientNodeRequest,
-  AttachFileSystemBucketRequest,
-  SubnetInfo,
+  UpdateFilesetGeneralConfigResponse,
+  CreateDataRepositoryTaskResponse,
   DeleteFileSystemRequest,
-  CancelLoadTaskResponse,
-  LoadTaskCreationAttrs,
-  BatchAddClientNodesResponse,
-  GooseFSxBuildElement,
-  AttachFileSystemBucketResponse,
+  DeleteFilesetResponse,
+  ListLoadTasksResponse,
+  UpdateLoadTaskPriorityResponse,
   DescribeFilesetGeneralConfigRequest,
   UpdateLoadTaskPriorityRequest,
-  CreateFileSystemRequest,
   DescribeFilesetsResponse,
-  BuildClientNodeMountCommandRequest,
-  DeleteFileSystemResponse,
-  ExpandCapacityRequest,
-  DetachFileSystemBucketRequest,
-  CancelLoadTaskRequest,
-  ClientToken,
-  DescribeFileSystemBucketsRequest,
-  UpdateFilesetRequest,
-  ModifyDataRepositoryBandwidthResponse,
-  QueryDataRepositoryBandwidthResponse,
-  QueryDataRepositoryBandwidthRequest,
-  DescribeLoadTaskRequest,
-  ClientClusterManagerNodeInfo,
   FilesetInfo,
+  ExpandCapacityRequest,
+  ClusterMountAttr,
+  CancelLoadTaskRequest,
+  BatchDeleteClientNodesRequest,
+  SubnetInfo,
   UpdateFilesetResponse,
   LinuxNodeAttribute,
-  BatchDeleteClientNodesRequest,
-  CreateFilesetResponse,
-  UpdateFilesetGeneralConfigResponse,
-  QueryCrossVpcSubnetSupportForClientNodeResponse,
   DescribeFileSystemsRequest,
-  UpdateFilesetGeneralConfigRequest,
-  DescribeClusterClientTokenRequest,
-  AddCrossVpcSubnetSupportForClientNodeResponse,
-  CreateDataRepositoryTaskResponse,
-  ExpandCapacityResponse,
-  DeleteCrossVpcSubnetSupportForClientNodeResponse,
-  DeleteFilesetResponse,
-  DescribeDataRepositoryTaskStatusResponse,
-  ListLoadTasksResponse,
-  ListLoadTasksRequest,
-  BatchAddClientNodesRequest,
-  AddCrossVpcSubnetSupportForClientNodeRequest,
-  DescribeDataRepositoryTaskStatusRequest,
-  RoleToken,
-  DescribeFileSystemBucketsResponse,
-  GooseFSxAttribute,
-  DescribeClientNodesRequest,
+  AttachFileSystemBucketRequest,
   Tag,
-  ModifyDataRepositoryBandwidthRequest,
+  MountMultipleStorageFileSystemResponse,
   CreateDataRepositoryTaskRequest,
-  DescribeClientNodesResponse,
-  CreateLoadTaskRequest,
-  BuildClientNodeMountCommandResponse,
-  DescribeClusterClientTokenResponse,
   MappedBucket,
+  CreateFilesetRequest,
+  ClientNodeAttribute,
+  DescribeClusterRoleTokenRequest,
+  MountMultipleStorageFileSystemRequest,
+  DescribeLoadTaskRequest,
+  DescribeFileSystemBucketsRequest,
+  DescribeDataRepositoryTaskStatusResponse,
+  CreateFileSystemRequest,
+  DescribeLoadTaskResponse,
+  DetachFileSystemBucketRequest,
+  ModifyDataRepositoryBandwidthRequest,
+  UpdateFilesetRequest,
+  DescribeCustomerClusterRequest,
+  DescribeFilesetGeneralConfigResponse,
+  CreateFilesetResponse,
+  QueryCrossVpcSubnetSupportForClientNodeResponse,
+  FSAttribute,
+  DeleteCrossVpcSubnetSupportForClientNodeResponse,
+  BatchAddClientNodesRequest,
+  BuildClientNodeMountCommandResponse,
+  CreateLoadTaskRequest,
+  LoadTaskCreationAttrs,
+  ModifyDataRepositoryBandwidthResponse,
+  ExpandCapacityResponse,
+  DeleteFilesetRequest,
+  AddCrossVpcSubnetSupportForClientNodeResponse,
+  QueryClientNodeMountCommandRequest,
+  DescribeClusterRoleTokenResponse,
+  GooseFSxBuildElement,
+  CancelLoadTaskResponse,
+  BatchAddClientNodesResponse,
+  QueryClientNodeMountCommandResponse,
+  DeleteFileSystemResponse,
+  ClientToken,
+  QueryDataRepositoryBandwidthResponse,
+  QueryDataRepositoryBandwidthRequest,
+  DescribeClientNodesResponse,
+  DescribeDataRepositoryTaskStatusRequest,
+  DescribeCustomerClusterResponse,
+  DetachFileSystemBucketResponse,
+  DescribeFileSystemBucketsResponse,
+  DescribeClientNodesRequest,
+  DescribeClusterClientTokenRequest,
+  ListLoadTasksRequest,
+  DescribeClusterClientTokenResponse,
+  CreateFileSystemResponse,
+  GooseFSxAttribute,
+  DescribeFilesetsRequest,
+  CreateLoadTaskResponse,
+  MetadataLoadAttrs,
+  DescribeFileSystemsResponse,
+  BatchDeleteClientNodesResponse,
+  QueryCrossVpcSubnetSupportForClientNodeRequest,
+  DeleteCrossVpcSubnetSupportForClientNodeRequest,
+  AttachFileSystemBucketResponse,
+  BuildClientNodeMountCommandRequest,
+  BuildCustomerClusterRequest,
+  ClientClusterManagerNodeInfo,
+  UpdateFilesetGeneralConfigRequest,
+  BuildCustomerClusterResponse,
+  DeleteCustomerClusterResponse,
+  AddCrossVpcSubnetSupportForClientNodeRequest,
+  RoleToken,
+  CustomerClusterAttr,
+  DeleteCustomerClusterRequest,
 } from "./goosefs_models"
 
 /**
@@ -109,6 +121,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 客户端集群挂载存储集群
+   */
+  async MountMultipleStorageFileSystem(
+    req: MountMultipleStorageFileSystemRequest,
+    cb?: (error: string, rep: MountMultipleStorageFileSystemResponse) => void
+  ): Promise<MountMultipleStorageFileSystemResponse> {
+    return this.request("MountMultipleStorageFileSystem", req, cb)
+  }
+
+  /**
    * 扩展文件系统容量
    */
   async ExpandCapacity(
@@ -116,6 +138,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExpandCapacityResponse) => void
   ): Promise<ExpandCapacityResponse> {
     return this.request("ExpandCapacity", req, cb)
+  }
+
+  /**
+   * 删除客户端集群
+   */
+  async DeleteCustomerCluster(
+    req: DeleteCustomerClusterRequest,
+    cb?: (error: string, rep: DeleteCustomerClusterResponse) => void
+  ): Promise<DeleteCustomerClusterResponse> {
+    return this.request("DeleteCustomerCluster", req, cb)
   }
 
   /**
@@ -149,6 +181,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询客户端集群
+   */
+  async DescribeCustomerCluster(
+    req: DescribeCustomerClusterRequest,
+    cb?: (error: string, rep: DescribeCustomerClusterResponse) => void
+  ): Promise<DescribeCustomerClusterResponse> {
+    return this.request("DescribeCustomerCluster", req, cb)
+  }
+
+  /**
    * 查询单个预热任务执行情况。注意，该接口需要 GooseFS 集群版本 ≥ 1.5.1。
    */
   async DescribeLoadTask(
@@ -179,13 +221,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建数据流通任务,包括从将文件系统的数据上传到存储桶下, 以及从存储桶下载到文件系统里。
+   * 查询Fileset通用配置
    */
-  async CreateDataRepositoryTask(
-    req: CreateDataRepositoryTaskRequest,
-    cb?: (error: string, rep: CreateDataRepositoryTaskResponse) => void
-  ): Promise<CreateDataRepositoryTaskResponse> {
-    return this.request("CreateDataRepositoryTask", req, cb)
+  async DescribeFilesetGeneralConfig(
+    req: DescribeFilesetGeneralConfigRequest,
+    cb?: (error: string, rep: DescribeFilesetGeneralConfigResponse) => void
+  ): Promise<DescribeFilesetGeneralConfigResponse> {
+    return this.request("DescribeFilesetGeneralConfig", req, cb)
   }
 
   /**
@@ -236,6 +278,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteFileSystemResponse) => void
   ): Promise<DeleteFileSystemResponse> {
     return this.request("DeleteFileSystem", req, cb)
+  }
+
+  /**
+   * 生成客户端的挂载命令
+   */
+  async QueryClientNodeMountCommand(
+    req: QueryClientNodeMountCommandRequest,
+    cb?: (error: string, rep: QueryClientNodeMountCommandResponse) => void
+  ): Promise<QueryClientNodeMountCommandResponse> {
+    return this.request("QueryClientNodeMountCommand", req, cb)
   }
 
   /**
@@ -299,6 +351,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 构建客户端集群
+   */
+  async BuildCustomerCluster(
+    req: BuildCustomerClusterRequest,
+    cb?: (error: string, rep: BuildCustomerClusterResponse) => void
+  ): Promise<BuildCustomerClusterResponse> {
+    return this.request("BuildCustomerCluster", req, cb)
+  }
+
+  /**
    * 查询GooseFS集群角色凭证
    */
   async DescribeClusterRoleToken(
@@ -309,13 +371,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Fileset通用配置
+   * 创建数据流通任务,包括从将文件系统的数据上传到存储桶下, 以及从存储桶下载到文件系统里。
    */
-  async DescribeFilesetGeneralConfig(
-    req: DescribeFilesetGeneralConfigRequest,
-    cb?: (error: string, rep: DescribeFilesetGeneralConfigResponse) => void
-  ): Promise<DescribeFilesetGeneralConfigResponse> {
-    return this.request("DescribeFilesetGeneralConfig", req, cb)
+  async CreateDataRepositoryTask(
+    req: CreateDataRepositoryTaskRequest,
+    cb?: (error: string, rep: CreateDataRepositoryTaskResponse) => void
+  ): Promise<CreateDataRepositoryTaskResponse> {
+    return this.request("CreateDataRepositoryTask", req, cb)
   }
 
   /**

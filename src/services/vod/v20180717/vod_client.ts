@@ -50,6 +50,7 @@ import {
   AiRecognitionTaskAsrFullTextResultOutput,
   AiReviewProhibitedOcrTaskOutput,
   DescribeAigcFaceInfoRequest,
+  NoiseConfigureInfo,
   MediaMiniProgramReviewElem,
   ManageTaskResponse,
   CreateImageProcessingTemplateRequest,
@@ -90,7 +91,7 @@ import {
   DeleteAIRecognitionTemplateResponse,
   VideoEnhanceConfig,
   DeleteContentReviewTemplateRequest,
-  NoiseConfigureInfo,
+  CreateAigcSubjectResponse,
   AiReviewPoliticalTaskInput,
   VerifyDomainRecordResponse,
   AudioTransform,
@@ -150,6 +151,7 @@ import {
   CLSTopicInfo,
   AbnormalLightingConfigureInfo,
   TextWatermarkTemplateInputForUpdate,
+  SetVodDomainCertificateRequest,
   DeleteSuperPlayerConfigRequest,
   AiReviewTerrorismOcrTaskInput,
   AiRecognitionTaskOcrWordsResultInput,
@@ -193,7 +195,7 @@ import {
   ImportMediaKnowledgeRequest,
   AigcImageSceneInfo,
   AiAnalysisTaskHighlightResult,
-  SetVodDomainCertificateRequest,
+  DescribeEnhanceMediaTemplatesResponse,
   CreateAigcVideoTaskResponse,
   ModifyAdaptiveDynamicStreamingTemplateResponse,
   CreateRebuildMediaTemplateResponse,
@@ -201,7 +203,7 @@ import {
   AiSampleFaceInfo,
   ImageUnderstandingInfo,
   QualityInspectTask,
-  DescribeEnhanceMediaTemplatesResponse,
+  CreateAigcSubjectTask,
   ImageBlur,
   CreateBlindWatermarkTemplateRequest,
   ModifyVodDomainAccelerateConfigRequest,
@@ -399,6 +401,7 @@ import {
   ModifyMediaStorageClassRequest,
   AiAnalysisTaskTagOutput,
   MosaicConfigureInfo,
+  DescribeTranscodeTemplatesResponse,
   DeleteBlindWatermarkTemplateResponse,
   DescribeRebuildMediaTemplatesRequest,
   ReviewImageSegmentItem,
@@ -461,6 +464,7 @@ import {
   MediaAdaptiveDynamicStreamingInfo,
   AigcFaceInputFileInfo,
   DescribeDailyPlayStatFileListRequest,
+  AiReviewTaskTerrorismResult,
   DescribeSuperPlayerConfigsResponse,
   AsrWordsConfigureInfoForUpdate,
   DescribeDailyMostPlayedStatRequest,
@@ -576,7 +580,7 @@ import {
   ModifyDefaultDistributionConfigRequest,
   ProcedureTemplate,
   DomainDetailInfo,
-  AiReviewTaskTerrorismResult,
+  CreateAigcSubjectOutput,
   SemanticsSearchResult,
   MPSAiMediaTask,
   DescribeImageReviewUsageDataRequest,
@@ -587,6 +591,7 @@ import {
   AigcVideoTaskOutput,
   DeletePersonSampleResponse,
   ProductShowcaseConfig,
+  CreateAigcSubjectRequest,
   CreateSnapshotByTimeOffsetTemplateResponse,
   VoiceConfigureInfoForUpdate,
   ModifyContentReviewTemplateRequest,
@@ -597,7 +602,7 @@ import {
   AiContentReviewTaskInput,
   CreateAdaptiveDynamicStreamingTemplateResponse,
   DeleteSampleSnapshotTemplateRequest,
-  DescribeTranscodeTemplatesResponse,
+  AiAnalysisTaskInput,
   MediaAiAnalysisTagItem,
   DescribeStorageDataResponse,
   AiRecognitionTaskOcrFullTextSegmentTextItem,
@@ -653,6 +658,7 @@ import {
   CrashScreenConfigureInfoForUpdate,
   DescribeSampleSnapshotTemplatesRequest,
   CoverConfigureInfoForUpdate,
+  AigcVideoTaskInputSubjectInfo,
   AiAnalysisTaskClassificationResult,
   PoliticalImgReviewTemplateInfoForUpdate,
   UserDefineOcrTextReviewTemplateInfo,
@@ -940,7 +946,7 @@ import {
   SnapshotByTimeOffsetTask2017,
   ProhibitedConfigureInfoForUpdate,
   MediaClassInfo,
-  AiAnalysisTaskInput,
+  CreateAigcSubjectInput,
   DeleteAnimatedGraphicsTemplateRequest,
   DeleteSnapshotByTimeOffsetTemplateRequest,
   DescribeAnimatedGraphicsTemplatesResponse,
@@ -1952,6 +1958,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyImageSpriteTemplateResponse) => void
   ): Promise<ModifyImageSpriteTemplateResponse> {
     return this.request("ModifyImageSpriteTemplate", req, cb)
+  }
+
+  /**
+   * 该接口用于创建 AIGC 自定义主体（Vidu）。注意，调用本接口会产生费用，请参考[计费文档](https://cloud.tencent.com/document/product/266/95125#96b3b59a-f9e1-49e9-966a-bedb70a4bf12)。
+   */
+  async CreateAigcSubject(
+    req: CreateAigcSubjectRequest,
+    cb?: (error: string, rep: CreateAigcSubjectResponse) => void
+  ): Promise<CreateAigcSubjectResponse> {
+    return this.request("CreateAigcSubject", req, cb)
   }
 
   /**

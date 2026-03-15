@@ -1287,7 +1287,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 枚举地域,只支持广州地域
+   * 枚举地域信息
    */
   async DescribeRegion(
     req: DescribeRegionRequest,

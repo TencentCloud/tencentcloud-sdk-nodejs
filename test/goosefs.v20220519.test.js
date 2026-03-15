@@ -18,9 +18,29 @@ const client = new tencentcloud.goosefs.v20220519.Client({
 })
 describe("goosefs.v20220519.test.js", function () {
 
+it("goosefs.v20220519.MountMultipleStorageFileSystem", async function () {
+    try {
+       const data = await client.MountMultipleStorageFileSystem({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("goosefs.v20220519.ExpandCapacity", async function () {
     try {
        const data = await client.ExpandCapacity({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("goosefs.v20220519.DeleteCustomerCluster", async function () {
+    try {
+       const data = await client.DeleteCustomerCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,6 +78,16 @@ it("goosefs.v20220519.DescribeClusterClientToken", async function () {
     }
 })
 
+it("goosefs.v20220519.DescribeCustomerCluster", async function () {
+    try {
+       const data = await client.DescribeCustomerCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("goosefs.v20220519.DescribeLoadTask", async function () {
     try {
        const data = await client.DescribeLoadTask({})
@@ -88,9 +118,9 @@ it("goosefs.v20220519.BatchDeleteClientNodes", async function () {
     }
 })
 
-it("goosefs.v20220519.CreateDataRepositoryTask", async function () {
+it("goosefs.v20220519.DescribeFilesetGeneralConfig", async function () {
     try {
-       const data = await client.CreateDataRepositoryTask({})
+       const data = await client.DescribeFilesetGeneralConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,6 +171,16 @@ it("goosefs.v20220519.CancelLoadTask", async function () {
 it("goosefs.v20220519.DeleteFileSystem", async function () {
     try {
        const data = await client.DeleteFileSystem({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("goosefs.v20220519.QueryClientNodeMountCommand", async function () {
+    try {
+       const data = await client.QueryClientNodeMountCommand({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,6 +248,16 @@ it("goosefs.v20220519.DescribeFilesets", async function () {
     }
 })
 
+it("goosefs.v20220519.BuildCustomerCluster", async function () {
+    try {
+       const data = await client.BuildCustomerCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("goosefs.v20220519.DescribeClusterRoleToken", async function () {
     try {
        const data = await client.DescribeClusterRoleToken({})
@@ -218,9 +268,9 @@ it("goosefs.v20220519.DescribeClusterRoleToken", async function () {
     }
 })
 
-it("goosefs.v20220519.DescribeFilesetGeneralConfig", async function () {
+it("goosefs.v20220519.CreateDataRepositoryTask", async function () {
     try {
-       const data = await client.DescribeFilesetGeneralConfig({})
+       const data = await client.CreateDataRepositoryTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

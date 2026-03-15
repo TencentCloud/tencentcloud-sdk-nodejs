@@ -837,39 +837,39 @@ export interface DescribeSmsTemplateListRequest {
  */
 export interface CallbackStatusStatistics {
   /**
-   * <p>短信回执量统计。</p><p>单位：数</p>
+   * <p>短信回执量统计。</p><p>单位：个</p>
    */
   CallbackCount?: number
   /**
-   * <p>短信提交成功量统计。</p><p>单位：数</p>
+   * <p>短信提交成功量统计。</p><p>单位：个</p>
    */
   RequestSuccessCount?: number
   /**
-   * <p>短信回执失败量统计。</p><p>单位：数</p>
+   * <p>短信回执失败量统计。</p><p>单位：个</p>
    */
   CallbackFailCount?: number
   /**
-   * <p>短信回执成功量统计。</p><p>单位：数</p>
+   * <p>短信回执成功量统计。</p><p>单位：个</p>
    */
   CallbackSuccessCount?: number
   /**
-   * <p>运营商内部错误统计。</p><p>单位：数</p>
+   * <p>运营商内部错误统计。</p><p>单位：个</p>
    */
   InternalErrorCount?: number
   /**
-   * <p>号码无效或空号统计。</p><p>单位：数</p>
+   * <p>号码无效或空号统计。</p><p>单位：个</p>
    */
   InvalidNumberCount?: number
   /**
-   * <p>停机、关机等错误统计。</p><p>单位：数</p>
+   * <p>停机、关机等错误统计。</p><p>单位：个</p>
    */
   ShutdownErrorCount?: number
   /**
-   * <p>号码拉入免打扰名单统计。</p><p>单位：数</p>
+   * <p>号码拉入免打扰名单统计。</p><p>单位：个</p>
    */
   BlackListCount?: number
   /**
-   * <p>运营商频率限制统计。</p><p>单位：数</p>
+   * <p>运营商频率限制统计。</p><p>单位：个</p>
    */
   FrequencyLimitCount?: number
 }

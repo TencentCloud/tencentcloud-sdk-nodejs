@@ -20,23 +20,17 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ArchiveLogInterval,
   IsolateDBInstanceRequest,
-  ModifyBinlogStatusResponse,
   DescribeFlowRequest,
   ModifyDBSBackupSetCommentResponse,
   ModifyInstanceNameResponse,
-  DescribeDatabaseTableRequest,
   ModifyDBInstanceSecurityGroupsResponse,
   DescribeDBParametersRequest,
-  DescribeDatabaseTableResponse,
   DescribeDatabaseObjectsResponse,
   SecurityGroupBound,
   CreateDBSBackupResponse,
   CreateDBSBackupRequest,
-  DescribeBillingEnableResponse,
   DestroyInstancesRequest,
-  DescribeBillingEnableRequest,
   DescribeDBSecurityGroupsRequest,
-  TableColumn,
   ModifyDBParametersResponse,
   ModifyInstanceNameRequest,
   ParamDesc,
@@ -67,7 +61,6 @@ import {
   DatabaseProcedure,
   DBParamValue,
   ParamConstraint,
-  ModifyBinlogStatusRequest,
   ModifyDBParametersRequest,
   ModifyDBInstanceSecurityGroupsRequest,
   DeleteDBSBackupSetsRequest,
@@ -91,18 +84,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDatabaseObjectsResponse) => void
   ): Promise<DescribeDatabaseObjectsResponse> {
     return this.request("DescribeDatabaseObjects", req, cb)
-  }
-
-  /**
-     * 冗余接口，无人调用
-
-本接口（DescribeDatabaseTable）用于查询云数据库实例的表信息。
-     */
-  async DescribeDatabaseTable(
-    req: DescribeDatabaseTableRequest,
-    cb?: (error: string, rep: DescribeDatabaseTableResponse) => void
-  ): Promise<DescribeDatabaseTableResponse> {
-    return this.request("DescribeDatabaseTable", req, cb)
   }
 
   /**
@@ -136,18 +117,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口功能已被 ModifyInstanceCdc 完全覆盖
-
-修改binlog状态
-     */
-  async ModifyBinlogStatus(
-    req: ModifyBinlogStatusRequest,
-    cb?: (error: string, rep: ModifyBinlogStatusResponse) => void
-  ): Promise<ModifyBinlogStatusResponse> {
-    return this.request("ModifyBinlogStatus", req, cb)
-  }
-
-  /**
    * 可恢复时间查询
    */
   async DescribeDBSAvailableRecoveryTime(
@@ -155,18 +124,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBSAvailableRecoveryTimeResponse) => void
   ): Promise<DescribeDBSAvailableRecoveryTimeResponse> {
     return this.request("DescribeDBSAvailableRecoveryTime", req, cb)
-  }
-
-  /**
-     * 已无地方调用
-
-本接口（DescribeBillingEnable）用于查询计费是否开启
-     */
-  async DescribeBillingEnable(
-    req?: DescribeBillingEnableRequest,
-    cb?: (error: string, rep: DescribeBillingEnableResponse) => void
-  ): Promise<DescribeBillingEnableResponse> {
-    return this.request("DescribeBillingEnable", req, cb)
   }
 
   /**

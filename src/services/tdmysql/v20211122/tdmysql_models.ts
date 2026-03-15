@@ -52,20 +52,6 @@ export interface IsolateDBInstanceRequest {
 }
 
 /**
- * ModifyBinlogStatus返回参数结构体
- */
-export interface ModifyBinlogStatusResponse {
-  /**
-   * flow的流程id
-   */
-  FlowId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeFlow请求参数结构体
  */
 export type DescribeFlowRequest = null
@@ -99,24 +85,6 @@ export interface ModifyInstanceNameResponse {
 }
 
 /**
- * DescribeDatabaseTable请求参数结构体
- */
-export interface DescribeDatabaseTableRequest {
-  /**
-   * 实例 ID，形如：tdsql3-ow7t8lmc。
-   */
-  InstanceId: string
-  /**
-   * 数据库名称，通过 DescribeDatabases 接口获取。
-   */
-  DbName: string
-  /**
-   * 表名称，通过 DescribeDatabaseObjects 接口获取。
-   */
-  Table: string
-}
-
-/**
  * ModifyDBInstanceSecurityGroups返回参数结构体
  */
 export interface ModifyDBInstanceSecurityGroupsResponse {
@@ -134,34 +102,6 @@ export interface DescribeDBParametersRequest {
    * 实例 ID，形如：tdsql3-ow728lmc。
    */
   InstanceId: string
-}
-
-/**
- * DescribeDatabaseTable返回参数结构体
- */
-export interface DescribeDatabaseTableResponse {
-  /**
-   * 实例名称。
-   */
-  InstanceId: string
-  /**
-   * 数据库名称。
-   */
-  DbName: string
-  /**
-   * 表名称。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Table: string
-  /**
-   * 列信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Cols: Array<TableColumn>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -265,16 +205,6 @@ export interface CreateDBSBackupRequest {
 }
 
 /**
- * DescribeBillingEnable返回参数结构体
- */
-export interface DescribeBillingEnableResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DestroyInstances请求参数结构体
  */
 export interface DestroyInstancesRequest {
@@ -285,11 +215,6 @@ export interface DestroyInstancesRequest {
 }
 
 /**
- * DescribeBillingEnable请求参数结构体
- */
-export type DescribeBillingEnableRequest = null
-
-/**
  * DescribeDBSecurityGroups请求参数结构体
  */
 export interface DescribeDBSecurityGroupsRequest {
@@ -297,20 +222,6 @@ export interface DescribeDBSecurityGroupsRequest {
    * 实例ID。
    */
   InstanceId: string
-}
-
-/**
- * 数据库列信息
- */
-export interface TableColumn {
-  /**
-   * 列名称
-   */
-  Col: string
-  /**
-   * 列类型
-   */
-  Type: string
 }
 
 /**
@@ -387,11 +298,11 @@ export interface ParamDesc {
  */
 export interface ModifyAutoRenewFlagRequest {
   /**
-   * 需要修改的实例列表
+   * <p>需要修改的实例列表</p>
    */
   InstanceIds: Array<string>
   /**
-   * 1表示开启自动续费，0为关闭自动续费
+   * <p>1表示开启自动续费，0为关闭自动续费</p>
    */
   AutoRenewFlag: number
 }
@@ -879,20 +790,6 @@ export interface ParamConstraint {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   String: string
-}
-
-/**
- * ModifyBinlogStatus请求参数结构体
- */
-export interface ModifyBinlogStatusRequest {
-  /**
-   * 实例id
-   */
-  InstanceId: string
-  /**
-   * 1打开0关闭
-   */
-  Status: number
 }
 
 /**

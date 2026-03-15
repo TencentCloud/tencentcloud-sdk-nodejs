@@ -983,6 +983,18 @@ export interface DescribeAigcFaceInfoRequest {
 }
 
 /**
+ * 视频画面噪点检测的控制参数。
+ */
+export interface NoiseConfigureInfo {
+  /**
+   * 视频画面噪点检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+   */
+  Switch: string
+}
+
+/**
  * 小程序音视频审核概要元信息
  */
 export interface MediaMiniProgramReviewElem {
@@ -2104,15 +2116,17 @@ export interface DeleteContentReviewTemplateRequest {
 }
 
 /**
- * 视频画面噪点检测的控制参数。
+ * CreateAigcSubject返回参数结构体
  */
-export interface NoiseConfigureInfo {
+export interface CreateAigcSubjectResponse {
   /**
-   * 视频画面噪点检测开关，可选值：
-<li>ON：开启；</li>
-<li>OFF：关闭。</li>
+   * <p>任务ID。</p>
    */
-  Switch: string
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3603,6 +3617,30 @@ export interface TextWatermarkTemplateInputForUpdate {
 }
 
 /**
+ * SetVodDomainCertificate请求参数结构体
+ */
+export interface SetVodDomainCertificateRequest {
+  /**
+   * 域名。
+   */
+  Domain: string
+  /**
+   * 本次接口调用的操作类型，可选值：
+<li>Set：设置域名的 HTTPS 所需证书；</li>
+<li>Clear: 清空域名 HTTPS 配置，清空后该域名无法支持 HTTPS 访问。</li>
+   */
+  Operation: string
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * [腾讯云SSL](/document/product/400/7572) 上传的证书 ID。清空域名 HTTPS 配置时无需填写该字段。
+   */
+  CertID?: string
+}
+
+/**
  * DeleteSuperPlayerConfig请求参数结构体
  */
 export interface DeleteSuperPlayerConfigRequest {
@@ -4643,27 +4681,21 @@ export interface AiAnalysisTaskHighlightResult {
 }
 
 /**
- * SetVodDomainCertificate请求参数结构体
+ * DescribeEnhanceMediaTemplates返回参数结构体
  */
-export interface SetVodDomainCertificateRequest {
+export interface DescribeEnhanceMediaTemplatesResponse {
   /**
-   * 域名。
+   * 符合过滤条件的记录总数。
    */
-  Domain: string
+  TotalCount?: number
   /**
-   * 本次接口调用的操作类型，可选值：
-<li>Set：设置域名的 HTTPS 所需证书；</li>
-<li>Clear: 清空域名 HTTPS 配置，清空后该域名无法支持 HTTPS 访问。</li>
+   * 音画质重生模板详情列表。
    */
-  Operation: string
+  RebuildMediaTemplateSet?: Array<RebuildMediaTemplate>
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SubAppId?: number
-  /**
-   * [腾讯云SSL](/document/product/400/7572) 上传的证书 ID。清空域名 HTTPS 配置时无需填写该字段。
-   */
-  CertID?: string
+  RequestId?: string
 }
 
 /**
@@ -4671,7 +4703,7 @@ export interface SetVodDomainCertificateRequest {
  */
 export interface CreateAigcVideoTaskResponse {
   /**
-   * 任务 ID。
+   * <p>任务 ID。</p>
    */
   TaskId?: string
   /**
@@ -4793,21 +4825,45 @@ export interface QualityInspectTask {
 }
 
 /**
- * DescribeEnhanceMediaTemplates返回参数结构体
+ * 创建主体任务信息。
  */
-export interface DescribeEnhanceMediaTemplatesResponse {
+export interface CreateAigcSubjectTask {
   /**
-   * 符合过滤条件的记录总数。
+   * <p>任务ID。</p>
    */
-  TotalCount?: number
+  TaskId?: string
   /**
-   * 音画质重生模板详情列表。
+   * <p>任务状态。</p><p>枚举值：</p><ul><li>PROCESSING： 处理中</li><li>FINISH： 已完成</li></ul>
    */
-  RebuildMediaTemplateSet?: Array<RebuildMediaTemplate>
+  Status?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。</p>
    */
-  RequestId?: string
+  ErrCode?: number
+  /**
+   * <p>扩展错误码。空字符串表示成功，其它值表示失败。</p>
+   */
+  ErrCodeExt?: string
+  /**
+   * <p>错误信息。</p>
+   */
+  Message?: string
+  /**
+   * <p>创建 AIGC 主体输入信息。</p>
+   */
+  Input?: CreateAigcSubjectInput
+  /**
+   * <p>创建 AIGC 主体输出信息。</p>
+   */
+  Output?: CreateAigcSubjectOutput
+  /**
+   * <p>用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
+   */
+  SessionId?: string
+  /**
+   * <p>来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。</p>
+   */
+  SessionContext?: string
 }
 
 /**
@@ -5081,6 +5137,10 @@ export interface ProcessImageAsyncRequest {
    * <p>需要进行图片处理的Url。不能与FileId同时输入。</p>
    */
   Url?: string
+  /**
+   * <p>需要进行图片处理的Base64，要求图片文件小于4MB。使用 Base64 时，请不要添加任何前缀如 <code>data:image/png;base64,</code>，只需提供 Base64 编码字符串本身。</p>
+   */
+  Base64?: string
   /**
    * <p>图片处理参数。</p>
    */
@@ -9906,6 +9966,24 @@ export interface MosaicConfigureInfo {
 }
 
 /**
+ * DescribeTranscodeTemplates返回参数结构体
+ */
+export interface DescribeTranscodeTemplatesResponse {
+  /**
+   * 符合过滤条件的记录总数。
+   */
+  TotalCount?: number
+  /**
+   * 转码模板详情列表。
+   */
+  TranscodeTemplateSet?: Array<TranscodeTemplate>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteBlindWatermarkTemplate返回参数结构体
  */
 export interface DeleteBlindWatermarkTemplateResponse {
@@ -10557,92 +10635,71 @@ export interface CreateJustInTimeTranscodeTemplateRequest {
  */
 export interface CreateAigcVideoTaskRequest {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId: number
   /**
-   * 模型名称。取值：<li>Hailuo：海螺；</li><li>Kling：可灵；</li><li> Jimeng：即梦；</li><li>Vidu；</li><li>Hunyuan：混元；</li><li>Mingmou：明眸；</li>
+   * <p>模型名称。取值：<li>Hailuo：海螺；</li><li>Kling：可灵；</li><li> Jimeng：即梦；</li><li>Vidu；</li><li>Hunyuan：混元；</li><li>Mingmou：明眸；</li></p>
    */
   ModelName: string
   /**
-   * 模型版本。取值：<li>当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；</li><li>当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、O1；</li><li>当 ModelName 是 Jimeng，可选值为 3.0pro；</li><li>当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo；</li><li>当 ModelName 是 GV，可选值为 3.1、3.1-fast；</li><li>当 ModelName 是 OS，可选值为 2.0；</li><li>当 ModelName 是 Hunyuan，可选值为 1.5；</li><li>当 ModelName 是 Mingmou，可选值为 1.0；</li>
+   * <p>模型版本。取值：<li>当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；</li><li>当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、O1；</li><li>当 ModelName 是 Jimeng，可选值为 3.0pro；</li><li>当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo、q3-pro、q3-turbo；</li><li>当 ModelName 是 GV，可选值为 3.1、3.1-fast；</li><li>当 ModelName 是 OS，可选值为 2.0；</li><li>当 ModelName 是 Hunyuan，可选值为 1.5；</li><li>当 ModelName 是 Mingmou，可选值为 1.0；</li></p>
    */
   ModelVersion: string
   /**
-   * 最多包含三张素材资源文件的列表，用于描述模型在生成视频时要使用的资源文件。
-
-首尾帧视频生成：用 FileInfos 第一张表示首帧（此时 FileInfos 最多包含一张图片），LastFrameFileId 或者 LastFrameUrl 表示尾帧。
-
-支持多图输入的模型：
-1. GV，使用多图输入时，不可使用 LastFrameFileId 和 LastFrameUrl。
-2. Vidu，支持多图参考生视频。q2 模型1-7张图片，可通过 FileInfos 里面的 ObjectId 作为主体 id 来传入。
-
-注意：
-1. 图片大小不超过10M。
-2. 支持的图片格式：jpeg、png。
+   * <p>最多包含三张素材资源文件的列表，用于描述模型在生成视频时要使用的资源文件。</p><p>首尾帧视频生成：用 FileInfos 第一张表示首帧（此时 FileInfos 最多包含一张图片），LastFrameFileId 或者 LastFrameUrl 表示尾帧。</p><p>支持多图输入的模型：</p><ol><li>GV，使用多图输入时，不可使用 LastFrameFileId 和 LastFrameUrl。</li><li>Vidu，支持多图参考生视频。q2 模型1-7张图片，可通过 FileInfos 里面的 ObjectId 作为主体 id 来传入。</li></ol><p>注意：</p><ol><li>图片大小不超过10M。</li><li>支持的图片格式：jpeg、png。</li></ol>
    */
   FileInfos?: Array<AigcVideoTaskInputFileInfo>
   /**
-   * 用于作为尾帧画面来生成视频的媒体文件 ID。该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。说明：
-1. 只支持模型 GV 、Kling、Vidu，其他模型暂不支持。当 ModelName 为 GV 时，如果指定该参数，则需同时指定 FileInfos 作为待生成视频的首帧。当 ModelName 为 Kling 、ModelVersion 为 2.1 并且指定输出分辨率 Resolution 为 1080P 时，才能指定该参数。当 ModelName 为 Vidu、ModelVersion 为 q2-pro、q2-turbo 时，才能指定该参数。
-2. 图片大小需小于5M。
-3. 图片格式的取值为：jpeg，jpg, png, webp。
+   * <p>固定主体输入信息。</p>
+   */
+  SubjectInfos?: Array<AigcVideoTaskInputSubjectInfo>
+  /**
+   * <p>用于作为尾帧画面来生成视频的媒体文件 ID。该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 <a href="/document/product/266/7830">视频上传完成事件通知</a> 或 <a href="https://console.cloud.tencent.com/vod/media">云点播控制台</a> 获取该字段。说明：</p><ol><li>只支持模型 GV 、Kling、Vidu，其他模型暂不支持。当 ModelName 为 GV 时，如果指定该参数，则需同时指定 FileInfos 作为待生成视频的首帧。当 ModelName 为 Kling 、ModelVersion 为 2.1 并且指定输出分辨率 Resolution 为 1080P 时，才能指定该参数。当 ModelName 为 Vidu、ModelVersion 为 q2-pro、q2-turbo 时，才能指定该参数。</li><li>图片大小需小于5M。</li><li>图片格式的取值为：jpeg，jpg, png, webp。</li></ol>
    */
   LastFrameFileId?: string
   /**
-   * 用于作为尾帧画面来生成视频的媒体文件 URL。说明：
-1. 只支持模型 GV 、Kling、Vidu，其他模型暂不支持。当 ModelName 为 GV 时，如果指定该参数，则需同时指定 FileInfos 作为待生成视频的首帧。当 ModelName 为 Kling 、ModelVersion 为 2.1 并且指定输出分辨率 Resolution 为 1080P 时，才能指定该参数。当 ModelName 为 Vidu、ModelVersion 为 q2-pro、q2-turbo 时，才能指定该参数。
-2. 图片大小需小于5M。
-3. 3. 图片格式的取值为：jpeg，jpg, png, webp。
+   * <p>用于作为尾帧画面来生成视频的媒体文件 URL。说明：</p><ol><li>只支持模型 GV 、Kling、Vidu，其他模型暂不支持。当 ModelName 为 GV 时，如果指定该参数，则需同时指定 FileInfos 作为待生成视频的首帧。当 ModelName 为 Kling 、ModelVersion 为 2.1 并且指定输出分辨率 Resolution 为 1080P 时，才能指定该参数。当 ModelName 为 Vidu、ModelVersion 为 q2-pro、q2-turbo 时，才能指定该参数。</li><li>图片大小需小于5M。</li><li><ol start="3"><li>图片格式的取值为：jpeg，jpg, png, webp。</li></ol></li></ol>
    */
   LastFrameUrl?: string
   /**
-   * 生成视频的提示词。当 FileInfos 为空时，此参数必填。
-示例值：move the picture
+   * <p>生成视频的提示词。当 FileInfos 为空时，此参数必填。<br>示例值：move the picture</p>
    */
   Prompt?: string
   /**
-   * 要阻止模型生成视频的提示词。
+   * <p>要阻止模型生成视频的提示词。</p>
    */
   NegativePrompt?: string
   /**
-   * 是否自动优化提示词。开启时将自动优化传入的 Prompt，以提升生成质量。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li>
+   * <p>是否自动优化提示词。开启时将自动优化传入的 Prompt，以提升生成质量。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li></p>
    */
   EnhancePrompt?: string
   /**
-   * 生视频任务的输出媒体文件配置。
+   * <p>生视频任务的输出媒体文件配置。</p>
    */
   OutputConfig?: AigcVideoOutputConfig
   /**
-   * 输入文件的区域信息。当文件url是国外地址时候，可选Oversea。默认Mainland。
+   * <p>输入文件的区域信息。当文件url是国外地址时候，可选Oversea。默认Mainland。</p>
    */
   InputRegion?: string
   /**
-   * 场景类型。取值如下：
-<li>当 ModelName 为 Kling 时：
-    motion_control 表示动作控制；
-    avatar_i2v 表示数字人；
-    lip_sync 表示对口型；</li>
-<li>当 ModelName 为 Vidu 时：
-    template_effect 表示特效模板；
-</li>
-<li>其他 ModelName 暂不支持。</li>
+   * <p>场景类型。取值如下：</p><li>当 ModelName 为 Kling 时：    motion_control 表示动作控制；    avatar_i2v 表示数字人；    lip_sync 表示对口型；</li><li>当 ModelName 为 Vidu 时：    template_effect 表示特效模板；</li><li>其他 ModelName 暂不支持。</li>
    */
   SceneType?: string
   /**
-   * 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   * <p>用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
    */
   SessionId?: string
   /**
-   * 来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。
+   * <p>来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。</p>
    */
   SessionContext?: string
   /**
-   * 任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+   * <p>任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。</p>
    */
   TasksPriority?: number
   /**
-   * 保留字段，特殊用途时使用。
+   * <p>保留字段，特殊用途时使用。</p>
    */
   ExtInfo?: string
 }
@@ -11485,6 +11542,40 @@ export interface DescribeDailyPlayStatFileListRequest {
    * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
+}
+
+/**
+ * 音视频审核涉及令人不安全的信息的任务结果类型
+ */
+export interface AiReviewTaskTerrorismResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 音视频审核涉及令人不安全的信息的任务输入。
+   */
+  Input?: AiReviewTerrorismTaskInput
+  /**
+   * 音视频审核涉及令人不安全的信息的任务输出。
+   */
+  Output?: AiReviewTerrorismTaskOutput
+  /**
+   * 音视频审核涉及令人不安全的信息的任务进度，取值范围 [0-100] 。
+   */
+  Progress?: number
 }
 
 /**
@@ -14435,37 +14526,17 @@ export interface DomainDetailInfo {
 }
 
 /**
- * 音视频审核涉及令人不安全的信息的任务结果类型
+ * 创建主体输出信息。
  */
-export interface AiReviewTaskTerrorismResult {
+export interface CreateAigcSubjectOutput {
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   * <p>主体ID。</p>
    */
-  Status?: string
+  SubjectId?: string
   /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   * <p>主体信息。</p>
    */
-  ErrCodeExt?: string
-  /**
-   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
-   */
-  ErrCode?: number
-  /**
-   * 错误信息。
-   */
-  Message?: string
-  /**
-   * 音视频审核涉及令人不安全的信息的任务输入。
-   */
-  Input?: AiReviewTerrorismTaskInput
-  /**
-   * 音视频审核涉及令人不安全的信息的任务输出。
-   */
-  Output?: AiReviewTerrorismTaskOutput
-  /**
-   * 音视频审核涉及令人不安全的信息的任务进度，取值范围 [0-100] 。
-   */
-  Progress?: number
+  SubjectInfo?: string
 }
 
 /**
@@ -14727,6 +14798,44 @@ export interface ProductShowcaseConfig {
    * 镜头运动方式。支持的值：AutoMatch（自动匹配）、ZoomIn（推进）、ZoomOut（拉远）、GlideRight（右移）、GlideLeft（左移）、CraneDown（下降）
    */
   CameraMovement?: string
+}
+
+/**
+ * CreateAigcSubject请求参数结构体
+ */
+export interface CreateAigcSubjectRequest {
+  /**
+   * <p><b>点播<a href="https://cloud.tencent.com/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
+   */
+  SubAppId?: number
+  /**
+   * <p>主体名称。</p>
+   */
+  SubjectName?: string
+  /**
+   * <p>主体图片，至少上传 1 张主体图片。</p><ul><li>注1：支持传入图片 Base64 编码或图片URL（确保可访问）；</li><li>注2：最多支持输入 3 张图；</li><li>注3：图片支持 png、jpeg、jpg、webp格式；</li><li>注4：图片比例需要小于 1:4 或者 4:1 ；</li><li>注5：图片大小不超过 50 MB；</li></ul>
+   */
+  SubjectImages?: Array<string>
+  /**
+   * <p>视频参考支持上传 1 个主体视频</p><ul><li>注1：仅参考生viduq2-pro模型支持使用视频主体</li><li>注2：最多支持上传 1个5秒 的视频</li><li>注3：视频支持 mp4、avi、mov格式</li><li>注4：视频像素不能小于 128*128，且比例需要小于1:4或者4:1，且大小不超过100M。</li></ul>
+   */
+  SubjectVideos?: Array<string>
+  /**
+   * <p>主体音色Id，该信息仅在创建音视频直出任务时使用</p><ul><li>注1：不传音色id 生成音视频直出任务时，系统会自动推荐音色</li><li>注2：q2-pro不支持使用音色id</li></ul>
+   */
+  VoiceId?: string
+  /**
+   * <p>用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
+   */
+  SessionId?: string
+  /**
+   * <p>来源上下文，用于透传用户请求信息，任务完成回调将返回该字段值，最长 1000 个字符。</p>
+   */
+  SessionContext?: string
+  /**
+   * <p>任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。</p>
+   */
+  TasksPriority?: number
 }
 
 /**
@@ -14999,21 +15108,13 @@ export interface DeleteSampleSnapshotTemplateRequest {
 }
 
 /**
- * DescribeTranscodeTemplates返回参数结构体
+ * AI 视频智能分析输入参数类型
  */
-export interface DescribeTranscodeTemplatesResponse {
+export interface AiAnalysisTaskInput {
   /**
-   * 符合过滤条件的记录总数。
+   * 视频内容分析模板 ID。
    */
-  TotalCount?: number
-  /**
-   * 转码模板详情列表。
-   */
-  TranscodeTemplateSet?: Array<TranscodeTemplate>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Definition: number
 }
 
 /**
@@ -16383,6 +16484,20 @@ export interface CoverConfigureInfoForUpdate {
 <li>OFF：关闭智能封面任务。</li>
    */
   Switch?: string
+}
+
+/**
+ * AIGC 固定主体输入信息。
+ */
+export interface AigcVideoTaskInputSubjectInfo {
+  /**
+   * <p>固定主体Id。</p><ul><li>Kling主体<strong>必选</strong>；</li><li>Vidu主体可选。</li></ul>
+   */
+  Id?: string
+  /**
+   * <p>固定名称。</p><ul><li>Vidu主体<strong>必选</strong>；</li><li>Kling主体可选。</li></ul>
+   */
+  Name?: string
 }
 
 /**
@@ -19618,7 +19733,7 @@ export interface DescribeStorageDataRequest {
  */
 export interface DescribeTaskDetailResponse {
   /**
-   * <p>任务类型，取值：<li>Procedure：视频处理任务；</li><li>EditMedia：视频编辑任务；</li><li>SplitMedia：视频拆条任务；</li><li>ComposeMedia：制作媒体文件任务；</li><li>WechatPublish：微信发布任务；</li><li>WechatMiniProgramPublish：微信小程序视频发布任务；</li><li>PullUpload：拉取上传媒体文件任务；</li><li>FastClipMedia：快速剪辑任务；</li><li>RemoveWatermarkTask：智能去除水印任务；</li><li>DescribeFileAttributesTask：获取文件属性任务；</li><li>RebuildMedia：音画质重生任务（不推荐使用）；</li><li>ReviewAudioVideo：音视频审核任务；</li><li>ExtractTraceWatermark：提取溯源水印任务；</li><li>ExtractCopyRightWatermark：提取版权水印任务；</li><li>QualityInspect：音画质检测任务；</li><li>QualityEnhance：音画质重生任务；</li><li>ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；</li><li>ProcessMediaByMPS：MPS 视频处理任务；</li><li>AigcImageTask：AIGC 生图任务；</li><li>SceneAigcImageTask：场景化 AIGC 生图任务；</li><li>AigcVideoTask：AIGC 生视频任务；</li><li>ImportMediaKnowledge：导入媒体知识任务。</li><li>SceneAigcVideoTask：场景化 AIGC 生视频任务；</li><li> ExtractBlindWatermark：提取数字水印任务。</li></p>
+   * <p>任务类型，取值：<li>Procedure：视频处理任务；</li><li>EditMedia：视频编辑任务；</li><li>SplitMedia：视频拆条任务；</li><li>ComposeMedia：制作媒体文件任务；</li><li>WechatPublish：微信发布任务；</li><li>WechatMiniProgramPublish：微信小程序视频发布任务；</li><li>PullUpload：拉取上传媒体文件任务；</li><li>FastClipMedia：快速剪辑任务；</li><li>RemoveWatermarkTask：智能去除水印任务；</li><li>DescribeFileAttributesTask：获取文件属性任务；</li><li>RebuildMedia：音画质重生任务（不推荐使用）；</li><li>ReviewAudioVideo：音视频审核任务；</li><li>ExtractTraceWatermark：提取溯源水印任务；</li><li>ExtractCopyRightWatermark：提取版权水印任务；</li><li>QualityInspect：音画质检测任务；</li><li>QualityEnhance：音画质重生任务；</li><li>ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；</li><li>ProcessMediaByMPS：MPS 视频处理任务；</li><li>AigcImageTask：AIGC 生图任务；</li><li>SceneAigcImageTask：场景化 AIGC 生图任务；</li><li>AigcVideoTask：AIGC 生视频任务；</li><li>ImportMediaKnowledge：导入媒体知识任务。</li><li>SceneAigcVideoTask：场景化 AIGC 生视频任务；</li><li> ExtractBlindWatermark：提取数字水印任务。</li><li> ExtractBlindWatermark：提取数字水印任务。</li><li> CreateAigcAdvancedCustomElementTask：创建自定义主体任务</li><li>CreateAigcCustomVoiceTask：创建自定义音色任务</li><li>CreateAigcSubjectTask：创建主体任务</li></p>
    */
   TaskType?: string
   /**
@@ -19787,6 +19902,10 @@ export interface DescribeTaskDetailResponse {
    * <p>创建自定义音色信息，仅当 TaskType 为 CreateAigcCustomVoice，该字段有值。</p>
    */
   CreateAigcCustomVoiceTask?: CreateAigcCustomVoiceTask
+  /**
+   * <p>创建主体信息，仅当 TaskType 为 CreateAigcSubject，该字段有值。</p>
+   */
+  CreateAigcSubjectTask?: CreateAigcSubjectTask
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -24104,13 +24223,25 @@ export interface MediaClassInfo {
 }
 
 /**
- * AI 视频智能分析输入参数类型
+ * 创建主体输入信息。
  */
-export interface AiAnalysisTaskInput {
+export interface CreateAigcSubjectInput {
   /**
-   * 视频内容分析模板 ID。
+   * <p>主体名称。</p>
    */
-  Definition: number
+  SubjectName?: string
+  /**
+   * <p>主体图片。</p>
+   */
+  SubjectImages?: Array<string>
+  /**
+   * <p>主体视频。</p>
+   */
+  SubjectVideos?: Array<string>
+  /**
+   * <p>主体音色ID。</p>
+   */
+  VoiceId?: string
 }
 
 /**
@@ -24786,54 +24917,55 @@ export interface SampleSnapshotTemplate {
  */
 export interface AigcVideoTaskInput {
   /**
-   * 模型名称。
+   * <p>模型名称。</p>
    */
   ModelName?: string
   /**
-   * 模型版本。
+   * <p>模型版本。</p>
    */
   ModelVersion?: string
   /**
-   * AIGC生图任务输入文件信息。
+   * <p>AIGC 生视频任务输入文件信息。</p>
    */
   FileInfos?: Array<AigcVideoTaskInputFileInfo>
   /**
-   * 用于作为尾帧画面来生成视频的媒体文件 ID。该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。
+   * <p>AIGC 任务固定主体输入信息。</p>
+   */
+  SubjectInfos?: Array<AigcVideoTaskInputSubjectInfo>
+  /**
+   * <p>用于作为尾帧画面来生成视频的媒体文件 ID。该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 <a href="/document/product/266/7830">视频上传完成事件通知</a> 或 <a href="https://console.cloud.tencent.com/vod/media">云点播控制台</a> 获取该字段。</p>
    */
   LastFrameFileId?: string
   /**
-   * 用于作为尾帧画面来生成视频的媒体文件 URL。说明：
-1. 只支持模型 GV 、Kling、Vidu，其他模型暂不支持。当 ModelName 为 GV 时，如果指定该参数，则需同时指定 FileInfos 作为待生成视频的首帧。当 ModelName 为 Kling 、ModelVersion 为 2.1 并且指定输出分辨率 Resolution 为 1080P 时，才能指定该参数。当 ModelName 为 Vidu、ModelVersion 为 q2-pro、q2-turbo 时，才能指定该参数。
-2. 图片大小需小于5M。
-3. 3. 图片格式的取值为：jpeg，jpg, png, webp。
+   * <p>用于作为尾帧画面来生成视频的媒体文件 URL。说明：</p><ol><li>只支持模型 GV 、Kling、Vidu，其他模型暂不支持。当 ModelName 为 GV 时，如果指定该参数，则需同时指定 FileInfos 作为待生成视频的首帧。当 ModelName 为 Kling 、ModelVersion 为 2.1 并且指定输出分辨率 Resolution 为 1080P 时，才能指定该参数。当 ModelName 为 Vidu、ModelVersion 为 q2-pro、q2-turbo 时，才能指定该参数。</li><li>图片大小需小于5M。</li><li><ol start="3"><li>图片格式的取值为：jpeg，jpg, png, webp。</li></ol></li></ol>
    */
   LastFrameUrl?: string
   /**
-   * 生成视频的提示词。最大支持1000字符，当 FileInfos 为空时，此参数必填。
+   * <p>生成视频的提示词。最大支持1000字符，当 FileInfos 为空时，此参数必填。</p>
    */
   Prompt?: string
   /**
-   * 要阻止模型生成视频的提示词。最大支持1000字符。
+   * <p>要阻止模型生成视频的提示词。最大支持1000字符。</p>
    */
   NegativePrompt?: string
   /**
-   * 是否自动优化提示词。开启时将自动优化传入的Prompt，以提升生成质量。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li>
+   * <p>是否自动优化提示词。开启时将自动优化传入的Prompt，以提升生成质量。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li></p>
    */
   EnhancePrompt?: string
   /**
-   * 生成模式。取值有： <li>Standard：标准模式；</li> <li>Professional：高品质模式；</li>
+   * <p>生成模式。取值有： <li>Standard：标准模式；</li> <li>Professional：高品质模式；</li></p>
    */
   GenerationMode?: string
   /**
-   * AIGC 生图输出结果文件输出。
+   * <p>AIGC 生图输出结果文件输出。</p>
    */
   OutputConfig?: AigcVideoOutputConfig
   /**
-   * 输入文件的区域信息。当文件url是国外地址时候，可选Oversea。默认Mainland。
+   * <p>输入文件的区域信息。当文件url是国外地址时候，可选Oversea。默认Mainland。</p>
    */
   InputRegion?: string
   /**
-   * 场景类型。取值如下：<li>当 ModelName 为 Kling 时，取值 motion_control 表示动作控制；</li><li>其他 ModelName 暂不支持。</li>
+   * <p>场景类型。取值如下：<li>当 ModelName 为 Kling 时，取值 motion_control 表示动作控制；</li><li>其他 ModelName 暂不支持。</li></p>
    */
   SceneType?: string
 }

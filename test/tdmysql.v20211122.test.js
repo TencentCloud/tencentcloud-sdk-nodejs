@@ -28,16 +28,6 @@ it("tdmysql.v20211122.DescribeDatabaseObjects", async function () {
     }
 })
 
-it("tdmysql.v20211122.DescribeDatabaseTable", async function () {
-    try {
-       const data = await client.DescribeDatabaseTable({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tdmysql.v20211122.DescribeDBParameters", async function () {
     try {
        const data = await client.DescribeDBParameters({})
@@ -68,29 +58,9 @@ it("tdmysql.v20211122.CancelIsolateDBInstances", async function () {
     }
 })
 
-it("tdmysql.v20211122.ModifyBinlogStatus", async function () {
-    try {
-       const data = await client.ModifyBinlogStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tdmysql.v20211122.DescribeDBSAvailableRecoveryTime", async function () {
     try {
        const data = await client.DescribeDBSAvailableRecoveryTime({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdmysql.v20211122.DescribeBillingEnable", async function () {
-    try {
-       const data = await client.DescribeBillingEnable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1164,6 +1164,22 @@ export interface BackupFileInfo {
    * 备份文件备注
    */
   BackupName?: string
+  /**
+   * 投递状态
+   */
+  CopyStatus?: string
+  /**
+   * 秘钥id
+   */
+  EncryptKeyId?: string
+  /**
+   * 秘钥地域
+   */
+  EncryptRegion?: string
+  /**
+   * 保险箱信息
+   */
+  VaultInfos?: Array<VaultInfo>
 }
 
 /**
@@ -2619,6 +2635,10 @@ export interface SnapshotBackupConfig {
    * 自动数据备份触发策略，periodically:自动周期备份,frequent:高频备份
    */
   BackupTriggerStrategy?: string
+  /**
+   * 保险箱信息
+   */
+  AutoCopyVaults?: Array<CreateBackupVaultItem>
 }
 
 /**
@@ -7653,6 +7673,32 @@ export interface OfflineLibraDBInstanceResponse {
 }
 
 /**
+ * 保险箱信息
+ */
+export interface VaultInfo {
+  /**
+   * 保险箱id
+   */
+  VaultId?: string
+  /**
+   * 保险箱name
+   */
+  VaultName?: string
+  /**
+   * 保险箱地域
+   */
+  VaultRegion?: string
+  /**
+   * 保险箱状态
+   */
+  VaultStatus?: string
+  /**
+   * 备份保留时间
+   */
+  BackupSaveSeconds?: number
+}
+
+/**
  * RemoveClusterSlaveZone请求参数结构体
  */
 export interface RemoveClusterSlaveZoneRequest {
@@ -8996,6 +9042,14 @@ export interface BizTaskInfo {
    * 全球数据库网络任务
    */
   GdnTaskInfo?: GdnTaskInfo
+  /**
+   * 保险箱id
+   */
+  VaultId?: string
+  /**
+   * 保险箱名称
+   */
+  VaultName?: string
 }
 
 /**
@@ -9444,6 +9498,22 @@ export interface BinlogItem {
    * binlog所跨地域
    */
   CrossRegions?: Array<string>
+  /**
+   * 备份投递状态
+   */
+  CopyStatus?: string
+  /**
+   * 保险箱信息
+   */
+  VaultInfos?: Array<VaultInfo>
+  /**
+   * 加密秘钥key
+   */
+  EncryptKeyId?: string
+  /**
+   * 加密秘钥地域
+   */
+  EncryptRegion?: string
 }
 
 /**
@@ -10587,6 +10657,22 @@ export interface RedoLogItem {
    * 完成时间
    */
   FinishTime?: string
+  /**
+   * 保险箱信息
+   */
+  VaultInfos?: Array<VaultInfo>
+  /**
+   * 备份投递状态
+   */
+  CopyStatus?: string
+  /**
+   * 加密秘钥key
+   */
+  EncryptKeyId?: string
+  /**
+   * 加密秘钥地域
+   */
+  EncryptRegion?: string
 }
 
 /**
@@ -11274,6 +11360,10 @@ export interface BinlogConfigInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BinlogCrossRegions?: Array<string>
+  /**
+   * 保险箱信息
+   */
+  AutoCopyVaults?: Array<CreateBackupVaultItem>
 }
 
 /**
@@ -12011,6 +12101,22 @@ export interface ClusterInstanceDetail {
 }
 
 /**
+ * 保险箱信息
+ */
+export interface CreateBackupVaultItem {
+  /**
+   * 保险箱id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VaultId?: string
+  /**
+   * 保险箱地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VaultRegion?: string
+}
+
+/**
  * 集群从可用区信息
  */
 export interface ClusterSlaveData {
@@ -12615,6 +12721,10 @@ export interface LogicBackupConfigInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogicCrossRegions?: Array<string>
+  /**
+   * 备份投递关系
+   */
+  AutoCopyVaults?: Array<CreateBackupVaultItem>
 }
 
 /**
@@ -13227,9 +13337,13 @@ no-关闭
    */
   CrossRegions?: Array<string>
   /**
-   * 动数据备份触发策略，periodically:自动周期备份,frequent:高频备份
+   * 自动数据备份触发策略，periodically:自动周期备份,frequent:高频备份
    */
   BackupTriggerStrategy?: string
+  /**
+   * 备份投递关系
+   */
+  AutoCopyVaults?: Array<CreateBackupVaultItem>
 }
 
 /**
@@ -14292,6 +14406,10 @@ export interface ModifyServerlessStrategyRequest {
    * 升级类型。 默认值：upgradeImmediate。 可选值： upgradeImmediate：立即完成修改 upgradeInMaintain：在维护时间窗口内完成修改
    */
   UpgradeType?: string
+  /**
+   * 新增的只读实例需要绑定的安全组列表。仅仅针对于在这次调整策略过程中新产生的只读实例绑定安全组，存量的实例不绑定。
+   */
+  SecurityGroupIdsForNewRo?: Array<string>
 }
 
 /**
