@@ -628,6 +628,16 @@ it("ess.v20201111.DescribeFlowBriefs", async function () {
     }
 })
 
+it("ess.v20201111.ArchiveDynamicFlow", async function () {
+    try {
+       const data = await client.ArchiveDynamicFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeSignFaceVideo", async function () {
     try {
        const data = await client.DescribeSignFaceVideo({})
@@ -1118,6 +1128,16 @@ it("ess.v20201111.ModifyApplicationCallbackInfo", async function () {
     }
 })
 
+it("ess.v20201111.ModifyPartnerAuthorization", async function () {
+    try {
+       const data = await client.ModifyPartnerAuthorization({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CancelFlow", async function () {
     try {
        const data = await client.CancelFlow({})
@@ -1298,9 +1318,9 @@ it("ess.v20201111.DescribeContractReviewChecklistWebUrl", async function () {
     }
 })
 
-it("ess.v20201111.ArchiveDynamicFlow", async function () {
+it("ess.v20201111.CreatePartnerAuthorizationLink", async function () {
     try {
-       const data = await client.ArchiveDynamicFlow({})
+       const data = await client.CreatePartnerAuthorizationLink({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -207,13 +207,21 @@ export interface SubnetInfos {
 }
 
 /**
- * ModifyClusterImage返回参数结构体
+ * DeleteExternalNodePool请求参数结构体
  */
-export interface ModifyClusterImageResponse {
+export interface DeleteExternalNodePoolRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 集群ID
    */
-  RequestId?: string
+  ClusterId: string
+  /**
+   * 第三方节点池ID列表
+   */
+  NodePoolIds: Array<string>
+  /**
+   * 是否强制删除，在第三方节点上有pod的情况下，如果选择非强制删除，则删除会失败
+   */
+  Force?: boolean
 }
 
 /**
@@ -1671,6 +1679,133 @@ export interface DeleteClusterNodePoolRequest {
 }
 
 /**
+ * CreateExternalNodePool请求参数结构体
+ */
+export interface CreateExternalNodePoolRequest {
+  /**
+   * 集群Id
+   */
+  ClusterId: string
+  /**
+   * 节点池名称
+   */
+  Name: string
+  /**
+   * 运行时
+   */
+  ContainerRuntime: string
+  /**
+   * 运行时版本
+   */
+  RuntimeVersion: string
+  /**
+   * 第三方节点label
+   */
+  Labels?: Array<Label>
+  /**
+   * 第三方节点taint
+   */
+  Taints?: Array<Taint>
+  /**
+   * 第三方节点高级设置
+   */
+  InstanceAdvancedSettings?: InstanceAdvancedSettings
+  /**
+   * 删除保护开关
+   */
+  DeletionProtection?: boolean
+  /**
+   * 节点类型
+   */
+  NodeType?: string
+}
+
+/**
+ * ModifyClusterImage返回参数结构体
+ */
+export interface ModifyClusterImageResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * amp告警渠道配置
+ */
+export interface PrometheusNotification {
+  /**
+   * 是否启用
+   */
+  Enabled: boolean
+  /**
+   * 收敛时间
+   */
+  RepeatInterval: string
+  /**
+   * 生效起始时间
+   */
+  TimeRangeStart: string
+  /**
+   * 生效结束时间
+   */
+  TimeRangeEnd: string
+  /**
+   * 告警通知方式。目前有SMS、EMAIL、CALL、WECHAT方式。
+分别代表：短信、邮件、电话、微信
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NotifyWay?: Array<string>
+  /**
+   * 告警接收组（用户组）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReceiverGroups?: Array<number | bigint>
+  /**
+   * 电话告警顺序。
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PhoneNotifyOrder?: Array<number | bigint>
+  /**
+   * 电话告警次数。
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PhoneCircleTimes?: number
+  /**
+   * 电话告警轮内间隔。单位：秒
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PhoneInnerInterval?: number
+  /**
+   * 电话告警轮外间隔。单位：秒
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PhoneCircleInterval?: number
+  /**
+   * 电话告警触达通知
+注：NotifyWay选择CALL，采用该参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PhoneArriveNotice?: boolean
+  /**
+   * 通道类型，默认为amp，支持以下
+amp
+webhook
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 如果Type为webhook, 则该字段为必填项
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebHook?: string
+}
+
+/**
  * DescribeEKSClusterCredential返回参数结构体
  */
 export interface DescribeEKSClusterCredentialResponse {
@@ -2248,6 +2383,29 @@ export interface DescribeEdgeAvailableExtraArgsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 开启第三方节点池支持配置信息
+ */
+export interface ClusterExternalConfig {
+  /**
+   * 集群网络插件类型，支持：Flannel、CiliumBGP、CiliumVXLan
+   */
+  NetworkType: string
+  /**
+   * 子网ID
+   */
+  SubnetId: string
+  /**
+   * Pod CIDR
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterCIDR?: string
+  /**
+   * 是否开启第三方节点池支持
+   */
+  Enabled?: boolean
 }
 
 /**
@@ -2935,6 +3093,16 @@ export interface UpgradeClusterInstancesResponse {
 }
 
 /**
+ * EnableExternalNodeSupport返回参数结构体
+ */
+export interface EnableExternalNodeSupportResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 自定义驱动信息
  */
 export interface CustomDriver {
@@ -2967,6 +3135,44 @@ export interface DescribePrometheusAgentInstancesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 与云监控融合托管prometheus实例，关联集群基础信息
+ */
+export interface PrometheusClusterAgentBasic {
+  /**
+   * 地域
+   */
+  Region: string
+  /**
+   * 集群类型
+   */
+  ClusterType: string
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 是否开启公网CLB
+   */
+  EnableExternal: boolean
+  /**
+   * 集群内部署组件的pod配置
+   */
+  InClusterPodConfig?: PrometheusClusterAgentPodConfig
+  /**
+   * 该集群采集的所有指标都会带上这些labels
+   */
+  ExternalLabels?: Array<Label>
+  /**
+   * 是否安装默认采集配置
+   */
+  NotInstallBasicScrape?: boolean
+  /**
+   * 是否采集指标，true代表drop所有指标，false代表采集默认指标
+   */
+  NotScrape?: boolean
 }
 
 /**
@@ -3141,6 +3347,20 @@ export type DescribeClusterRouteTablesRequest = null
 export type DescribeRegionsRequest = null
 
 /**
+ * DescribeRollOutSequences请求参数结构体
+ */
+export interface DescribeRollOutSequencesRequest {
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+  /**
+   * 最大输出条目数，默认为20
+   */
+  Limit?: number
+}
+
+/**
  * DeleteClusterRoute请求参数结构体
  */
 export interface DeleteClusterRouteRequest {
@@ -3225,28 +3445,17 @@ export interface DescribePrometheusTempSyncRequest {
 }
 
 /**
- * DescribePrometheusGlobalConfig返回参数结构体
+ * DescribePrometheusClusterAgents返回参数结构体
  */
-export interface DescribePrometheusGlobalConfigResponse {
+export interface DescribePrometheusClusterAgentsResponse {
   /**
-   * 配置内容
+   * 被关联集群信息
    */
-  Config?: string
+  Agents?: Array<PrometheusAgentOverview>
   /**
-   * ServiceMonitors列表以及对应targets信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 被关联集群总量
    */
-  ServiceMonitors?: Array<PrometheusConfigItem>
-  /**
-   * PodMonitors列表以及对应targets信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PodMonitors?: Array<PrometheusConfigItem>
-  /**
-   * RawJobs列表以及对应targets信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RawJobs?: Array<PrometheusConfigItem>
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3400,6 +3609,48 @@ export interface DescribeClusterAsGroupOptionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 第三方节点
+ */
+export interface ExternalNode {
+  /**
+   * 第三方节点名称
+   */
+  Name: string
+  /**
+   * 第三方节点所属节点池
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodePoolId: string
+  /**
+   * 第三方IP地址
+   */
+  IP: string
+  /**
+   * 第三方地域
+   */
+  Location: string
+  /**
+   * 第三方节点状态
+   */
+  Status: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedTime: string
+  /**
+   * 异常原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Reason: string
+  /**
+   * 是否封锁。true表示已封锁，false表示未封锁
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Unschedulable: boolean
 }
 
 /**
@@ -3994,78 +4245,23 @@ export interface DescribeBatchModifyTagsStatusResponse {
 }
 
 /**
- * amp告警渠道配置
+ * DescribeExternalNode返回参数结构体
  */
-export interface PrometheusNotification {
+export interface DescribeExternalNodeResponse {
   /**
-   * 是否启用
-   */
-  Enabled: boolean
-  /**
-   * 收敛时间
-   */
-  RepeatInterval: string
-  /**
-   * 生效起始时间
-   */
-  TimeRangeStart: string
-  /**
-   * 生效结束时间
-   */
-  TimeRangeEnd: string
-  /**
-   * 告警通知方式。目前有SMS、EMAIL、CALL、WECHAT方式。
-分别代表：短信、邮件、电话、微信
+   * 节点列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NotifyWay?: Array<string>
+  Nodes: Array<ExternalNode>
   /**
-   * 告警接收组（用户组）
+   * 节点总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReceiverGroups?: Array<number | bigint>
+  TotalCount: number
   /**
-   * 电话告警顺序。
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PhoneNotifyOrder?: Array<number | bigint>
-  /**
-   * 电话告警次数。
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PhoneCircleTimes?: number
-  /**
-   * 电话告警轮内间隔。单位：秒
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PhoneInnerInterval?: number
-  /**
-   * 电话告警轮外间隔。单位：秒
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PhoneCircleInterval?: number
-  /**
-   * 电话告警触达通知
-注：NotifyWay选择CALL，采用该参数。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PhoneArriveNotice?: boolean
-  /**
-   * 通道类型，默认为amp，支持以下
-amp
-webhook
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Type?: string
-  /**
-   * 如果Type为webhook, 则该字段为必填项
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WebHook?: string
+  RequestId?: string
 }
 
 /**
@@ -4191,6 +4387,20 @@ export interface DeleteClusterMaintenanceWindowAndExclusionRequest {
    * 集群ID，可以从容器服务控制台计划升级功能集群维护窗口页面获取（https://console.cloud.tencent.com/tke2/upgrade-plan）。
    */
   ClusterID: string
+}
+
+/**
+ * UpdateEKSContainerInstance返回参数结构体
+ */
+export interface UpdateEKSContainerInstanceResponse {
+  /**
+   * 容器实例 ID
+   */
+  EksCiId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4668,21 +4878,25 @@ export interface HttpGet {
 }
 
 /**
- * 集群资源使用量
+ * DescribeExternalNodeScript返回参数结构体
  */
-export interface ResourceUsage {
+export interface DescribeExternalNodeScriptResponse {
   /**
-   * 资源类型，参考k8s 官方资源
+   * 添加脚本cos下载链接
    */
-  Name?: string
+  Link?: string
   /**
-   * 资源使用量，单位：个数
+   * cos临时密钥
    */
-  Usage?: number
+  Token?: string
   /**
-   * 资源使用详情
+   * 添加脚本下载命令
    */
-  Details?: Array<ResourceUsageDetail>
+  Command?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5086,6 +5300,20 @@ export interface CancelUpgradePlanResponse {
 }
 
 /**
+ * DrainExternalNode请求参数结构体
+ */
+export interface DrainExternalNodeRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 节点名
+   */
+  Name: string
+}
+
+/**
  * 集群容器网络相关参数
  */
 export interface ClusterCIDRSettings {
@@ -5263,6 +5491,35 @@ export interface DescribeOSImagesResponse {
 }
 
 /**
+ * DescribePrometheusGlobalConfig返回参数结构体
+ */
+export interface DescribePrometheusGlobalConfigResponse {
+  /**
+   * 配置内容
+   */
+  Config?: string
+  /**
+   * ServiceMonitors列表以及对应targets信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceMonitors?: Array<PrometheusConfigItem>
+  /**
+   * PodMonitors列表以及对应targets信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PodMonitors?: Array<PrometheusConfigItem>
+  /**
+   * RawJobs列表以及对应targets信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RawJobs?: Array<PrometheusConfigItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCluster请求参数结构体
  */
 export interface CreateClusterRequest {
@@ -5397,17 +5654,17 @@ export interface DescribeEdgeClusterExtraArgsRequest {
 }
 
 /**
- * DescribePrometheusClusterAgents返回参数结构体
+ * DescribeClusters返回参数结构体
  */
-export interface DescribePrometheusClusterAgentsResponse {
+export interface DescribeClustersResponse {
   /**
-   * 被关联集群信息
+   * 集群总个数
    */
-  Agents?: Array<PrometheusAgentOverview>
+  TotalCount?: number
   /**
-   * 被关联集群总量
+   * 集群信息列表
    */
-  Total?: number
+  Clusters?: Array<Cluster>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5503,17 +5760,37 @@ export interface DescribePrometheusTemplatesResponse {
 }
 
 /**
- * UpdateEKSContainerInstance返回参数结构体
+ * ModifyExternalNodePool请求参数结构体
  */
-export interface UpdateEKSContainerInstanceResponse {
+export interface ModifyExternalNodePoolRequest {
   /**
-   * 容器实例 ID
+   * 集群ID
    */
-  EksCiId?: string
+  ClusterId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 节点池ID
    */
-  RequestId?: string
+  NodePoolId: string
+  /**
+   * 节点池名称
+   */
+  Name?: string
+  /**
+   * 第三方节点label
+   */
+  Labels?: Array<Label>
+  /**
+   * 第三方节点taint
+   */
+  Taints?: Array<Taint>
+  /**
+   * 删除保护开关
+   */
+  DeletionProtection?: boolean
+  /**
+   * base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看
+   */
+  UserScript?: string
 }
 
 /**
@@ -5682,6 +5959,16 @@ export interface RenewReservedInstancesResponse {
 }
 
 /**
+ * DescribeExternalNodePools请求参数结构体
+ */
+export interface DescribeExternalNodePoolsRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+}
+
+/**
  * 边缘计算集群内网访问LB信息
  */
 export interface EdgeClusterInternalLB {
@@ -5783,6 +6070,16 @@ export interface ModifyClusterMaintenanceWindowAndExclusionsRequest {
  * DisableControlPlaneLogs返回参数结构体
  */
 export interface DisableControlPlaneLogsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyExternalNodePool返回参数结构体
+ */
+export interface ModifyExternalNodePoolResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6117,6 +6414,20 @@ export interface DescribeClusterEndpointStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * EnableExternalNodeSupport请求参数结构体
+ */
+export interface EnableExternalNodeSupportRequest {
+  /**
+   * 集群Id
+   */
+  ClusterId: string
+  /**
+   * 开启第三方节点池支持配置信息
+   */
+  ClusterExternalConfig: ClusterExternalConfig
 }
 
 /**
@@ -7149,6 +7460,32 @@ CUCC：中国联通
 }
 
 /**
+ * DescribeExternalNodeScript请求参数结构体
+ */
+export interface DescribeExternalNodeScriptRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 节点池ID
+   */
+  NodePoolId: string
+  /**
+   * 网卡名
+   */
+  Interface?: string
+  /**
+   * 节点名称
+   */
+  Name?: string
+  /**
+   * 是否内网获取节点初始化脚本
+   */
+  Internal?: boolean
+}
+
+/**
  * UpdateAddon返回参数结构体
  */
 export interface UpdateAddonResponse {
@@ -7208,6 +7545,24 @@ export interface DescribeClusterControllersRequest {
    * 集群ID
    */
   ClusterId: string
+}
+
+/**
+ * DescribeExternalNode请求参数结构体
+ */
+export interface DescribeExternalNodeRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 节点池ID
+   */
+  NodePoolId?: string
+  /**
+   * 节点名称
+   */
+  Names?: Array<string>
 }
 
 /**
@@ -9854,32 +10209,13 @@ export interface DescribePrometheusInstanceResponse {
 }
 
 /**
- * 托管prometheus中grafana的信息
+ * DeleteExternalNodePool返回参数结构体
  */
-export interface PrometheusGrafanaInfo {
+export interface DeleteExternalNodePoolResponse {
   /**
-   * 是否启用
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Enabled?: boolean
-  /**
-   * 域名，只有开启外网访问才有效果
-   */
-  Domain?: string
-  /**
-   * 内网地址，或者外网地址
-   */
-  Address?: string
-  /**
-   * 是否开启了外网访问
-close = 未开启外网访问
-opening = 正在开启外网访问
-open  = 已开启外网访问
-   */
-  Internet?: string
-  /**
-   * grafana管理员用户名
-   */
-  AdminUser?: string
+  RequestId?: string
 }
 
 /**
@@ -10082,6 +10418,16 @@ export interface DescribePrometheusClusterAgentsRequest {
    * 用于分页
    */
   Limit?: number
+}
+
+/**
+ * DeleteExternalNode返回参数结构体
+ */
+export interface DeleteExternalNodeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10341,41 +10687,21 @@ export interface Task {
 }
 
 /**
- * 与云监控融合托管prometheus实例，关联集群基础信息
+ * DeleteExternalNode请求参数结构体
  */
-export interface PrometheusClusterAgentBasic {
-  /**
-   * 地域
-   */
-  Region: string
-  /**
-   * 集群类型
-   */
-  ClusterType: string
+export interface DeleteExternalNodeRequest {
   /**
    * 集群ID
    */
   ClusterId: string
   /**
-   * 是否开启公网CLB
+   * 第三方节点列表
    */
-  EnableExternal: boolean
+  Names: Array<string>
   /**
-   * 集群内部署组件的pod配置
+   * 是否强制删除：如果第三方节点上有运行中Pod，则非强制删除状态下不会进行删除
    */
-  InClusterPodConfig?: PrometheusClusterAgentPodConfig
-  /**
-   * 该集群采集的所有指标都会带上这些labels
-   */
-  ExternalLabels?: Array<Label>
-  /**
-   * 是否安装默认采集配置
-   */
-  NotInstallBasicScrape?: boolean
-  /**
-   * 是否采集指标，true代表drop所有指标，false代表采集默认指标
-   */
-  NotScrape?: boolean
+  Force?: boolean
 }
 
 /**
@@ -12901,17 +13227,17 @@ export interface DescribePrometheusRecordRulesResponse {
 }
 
 /**
- * DescribeRollOutSequences请求参数结构体
+ * CreateExternalNodePool返回参数结构体
  */
-export interface DescribeRollOutSequencesRequest {
+export interface CreateExternalNodePoolResponse {
   /**
-   * 偏移量，默认为0
+   * 节点池ID
    */
-  Offset?: number
+  NodePoolId?: string
   /**
-   * 最大输出条目数，默认为20
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit?: number
+  RequestId?: string
 }
 
 /**
@@ -13374,6 +13700,24 @@ export interface GrantUserPermissionsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 集群资源使用量
+ */
+export interface ResourceUsage {
+  /**
+   * 资源类型，参考k8s 官方资源
+   */
+  Name?: string
+  /**
+   * 资源使用量，单位：个数
+   */
+  Usage?: number
+  /**
+   * 资源使用详情
+   */
+  Details?: Array<ResourceUsageDetail>
 }
 
 /**
@@ -14358,6 +14702,56 @@ export interface DescribeVpcCniPodLimitsRequest {
 }
 
 /**
+ * 第三方节点池信息
+ */
+export interface ExternalNodePool {
+  /**
+   * 第三方节点池ID
+   */
+  NodePoolId: string
+  /**
+   * 第三方节点池名称
+   */
+  Name: string
+  /**
+   * 节点池生命周期
+   */
+  LifeState: string
+  /**
+   * 集群CIDR
+   */
+  ClusterCIDR: string
+  /**
+   * 集群网络插件类型
+   */
+  NetworkType: string
+  /**
+   * 第三方节点Runtime配置
+   */
+  RuntimeConfig: RuntimeConfig
+  /**
+   * 第三方节点label
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Labels: Array<Label>
+  /**
+   * 第三方节点taint
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Taints: Array<Taint>
+  /**
+   * 第三方节点高级设置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceAdvancedSettings: InstanceAdvancedSettings
+  /**
+   * 删除保护开关
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeletionProtection: boolean
+}
+
+/**
  * DeleteImageCaches返回参数结构体
  */
 export interface DeleteImageCachesResponse {
@@ -14381,6 +14775,16 @@ export interface EtcdOverrideConfig {
  * ModifyClusterRollOutSequenceTags返回参数结构体
  */
 export interface ModifyClusterRollOutSequenceTagsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DrainExternalNode返回参数结构体
+ */
+export interface DrainExternalNodeResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14629,24 +15033,6 @@ export interface DeletePrometheusRecordRuleYamlRequest {
 }
 
 /**
- * DescribeClusters返回参数结构体
- */
-export interface DescribeClustersResponse {
-  /**
-   * 集群总个数
-   */
-  TotalCount?: number
-  /**
-   * 集群信息列表
-   */
-  Clusters?: Array<Cluster>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * InstallAddon请求参数结构体
  */
 export interface InstallAddonRequest {
@@ -14670,6 +15056,26 @@ export interface InstallAddonRequest {
    * 是否仅做安装检查，设置为true时仅做检查，不会安装组件。默认值为 false。
    */
   DryRun?: boolean
+}
+
+/**
+ * DescribeExternalNodePools返回参数结构体
+ */
+export interface DescribeExternalNodePoolsResponse {
+  /**
+   * 节点池总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount: number
+  /**
+   * 第三方节点池列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodePoolSet: Array<ExternalNodePool>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -14977,6 +15383,35 @@ export interface ModifyReservedInstanceScopeRequest {
    * 预留券抵扣范围信息
    */
   ReservedInstanceScope: ReservedInstanceScope
+}
+
+/**
+ * 托管prometheus中grafana的信息
+ */
+export interface PrometheusGrafanaInfo {
+  /**
+   * 是否启用
+   */
+  Enabled?: boolean
+  /**
+   * 域名，只有开启外网访问才有效果
+   */
+  Domain?: string
+  /**
+   * 内网地址，或者外网地址
+   */
+  Address?: string
+  /**
+   * 是否开启了外网访问
+close = 未开启外网访问
+opening = 正在开启外网访问
+open  = 已开启外网访问
+   */
+  Internet?: string
+  /**
+   * grafana管理员用户名
+   */
+  AdminUser?: string
 }
 
 /**

@@ -3036,7 +3036,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 上报table元数据
+   * 上报table元数据,当前列数量限制在300
    */
   async ReportTable(
     req: ReportTableRequest,

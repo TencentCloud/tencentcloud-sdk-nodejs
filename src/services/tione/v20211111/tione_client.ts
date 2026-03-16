@@ -27,24 +27,30 @@ import {
   DescribeExportResponse,
   NotebookSetItem,
   ModifyNotebookTagsRequest,
-  SSHConfig,
+  DescribeDataSourcesResponse,
   ModifyServiceGroupWeightsResponse,
   Usage,
+  GatewayConfig,
   AuthTokenBase,
   DeleteNotebookRequest,
   PushTrainingMetricsRequest,
   Filter,
   DescribeTrainingModelVersionsRequest,
-  CodeRepoConfig,
+  CreateDatasetRequest,
   CreateDatasetResponse,
   Service,
   CrossTenantENIInfo,
   HyperParameter,
+  DescribeDataSourcesRequest,
+  CreateDataSourceRequest,
   ModifyServiceGroupWeightsRequest,
   DescribeTrainingTasksRequest,
   RollingUpdate,
-  VolumeMount,
+  CodeRepoConfig,
+  DescribeMountInstanceResponse,
+  DescribeMountInstancesRequest,
   ModifyNotebookTagsResponse,
+  UpdateDataSourceRequest,
   DescribeBillingResourceGroupResponse,
   SpecUnit,
   ServiceCallInfo,
@@ -59,15 +65,20 @@ import {
   ImageFIlter,
   DefaultNginxGatewayCallInfo,
   CFSConfig,
+  DescribeMountInstanceRequest,
   StartNotebookRequest,
   NumOrPercent,
   InferTemplate,
   DescribeModelAccelerateVersionsResponse,
   DescribeBuildInImagesRequest,
+  MountConfigureInfo,
   StartTrainingTaskRequest,
   ContainerStatus,
+  DescribeMountInstancesResponse,
+  UpdateMountLimitRequest,
   ModifyModelServiceRequest,
   ChatCompletionRequest,
+  CreateMountLimitResponse,
   TrainingTaskSetItem,
   DescribeModelServiceCallInfoRequest,
   DataPoint,
@@ -80,25 +91,30 @@ import {
   Event,
   DescribeModelServiceGroupsResponse,
   Spec,
+  DescribeDataSourceRequest,
   HTTPGetAction,
   DescribeBillingResourceInstanceRunningJobsResponse,
   InferGatewayCallInfo,
+  CreateDataSourceResponse,
   ResourceGroupInfo,
   CreateNotebookRequest,
   CreatePresignedNotebookUrlResponse,
   ModifyNotebookRequest,
   HorizontalPodAutoscaler,
+  CreateTrainingModelResponse,
   ResourceConfigInfo,
   PublicDataSourceFS,
   ExposePortConfig,
   DescribeBillingResourceGroupsRequest,
   Option,
+  DescribeMountLimitsRequest,
   DeleteExportResponse,
   DefaultInnerCallInfo,
   Choice,
   ModifyModelServiceAuthTokenRequest,
   SchedulingPolicy,
   LogIdentity,
+  MountInstanceInfo,
   DescribeDatasetsRequest,
   ModelAccelerateVersion,
   DeleteTrainingModelResponse,
@@ -114,6 +130,7 @@ import {
   CronScaleJob,
   PrivateLinkInfo,
   DescribeNotebooksResponse,
+  DescribeMountLimitsResponse,
   InferTemplateGroup,
   DescribeModelServiceHotUpdatedResponse,
   DatasetInfo,
@@ -131,7 +148,7 @@ import {
   ModifyModelServiceAuthTokenResponse,
   ModifyModelServiceAuthorizationResponse,
   DeleteModelServiceRequest,
-  DescribeModelServiceGroupRequest,
+  DeleteModelServiceAuthTokenRequest,
   CreateTrainingTaskRequest,
   Message,
   CreatePresignedNotebookUrlRequest,
@@ -150,6 +167,7 @@ import {
   CreateExportRequest,
   DescribeBillingSpecsResponse,
   DeleteTrainingTaskResponse,
+  CreateMountLimitRequest,
   AuthToken,
   DescribeEventsResponse,
   DatasetGroup,
@@ -173,7 +191,9 @@ import {
   ProbeAction,
   DeleteModelServiceAuthTokenResponse,
   ModelInfo,
-  CreateDatasetRequest,
+  UpdateDataSourceResponse,
+  DescribeDataSourceResponse,
+  VolumeMount,
   CreateModelServiceResponse,
   DeleteExportRequest,
   ServiceGroup,
@@ -182,21 +202,25 @@ import {
   Attribute,
   ResourceGroup,
   AuthTokenLimit,
-  CreateTrainingModelResponse,
+  DeleteDataSourceRequest,
+  DeleteMountLimitRequest,
   HostPath,
   StopModelAccelerateTaskResponse,
   IngressPrivateLinkInfo,
   UpdateSubAccountLinuxUserInfoResponse,
   ServiceEIPInfo,
   DescribeTrainingTasksResponse,
+  UpdateMountLimitResponse,
   DescribeModelAccelerateTaskRequest,
   Container,
   DeleteDatasetResponse,
+  MountLimitInfo,
   ExecAction,
   TrainingTaskDetail,
   DescribeExportRequest,
   UpdateSubAccountLinuxUserInfoRequest,
   DescribeNotebookRequest,
+  StorageExtraConf,
   LocalDisk,
   DescribeLogsResponse,
   EncodedStartCmdInfo,
@@ -206,7 +230,9 @@ import {
   CreateModelServiceAuthTokenRequest,
   ExposeNetworkConfig,
   ServiceCallInfoV2,
+  DataSourceInfo,
   DescribeBillingResourceGroupRequest,
+  SSHConfig,
   DescribeSubAccountLinuxUserInfosRequest,
   ChatCompletionResponse,
   GooseFSx,
@@ -217,18 +243,20 @@ import {
   DeleteDatasetRequest,
   DataConfig,
   ResourceConf,
-  DeleteModelServiceAuthTokenRequest,
+  DescribeModelServiceGroupRequest,
   PushTrainingMetricsResponse,
   StopTrainingTaskResponse,
   HealthProbe,
   HDFSConfig,
   DescribeTrainingTaskPodsResponse,
+  DeleteDataSourceResponse,
   ModelAccelerateTask,
   Pod,
   DescribeEventsRequest,
   DeleteTrainingModelRequest,
   DescribeModelServiceHotUpdatedRequest,
   DescribeTrainingTaskResponse,
+  DeleteMountLimitResponse,
   PlatformImageInfo,
   DescribePlatformImagesRequest,
   Probe,
@@ -315,13 +343,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量查询子账号Linux用户信息
+   * 启动模型训练任务
    */
-  async DescribeSubAccountLinuxUserInfos(
-    req?: DescribeSubAccountLinuxUserInfosRequest,
-    cb?: (error: string, rep: DescribeSubAccountLinuxUserInfosResponse) => void
-  ): Promise<DescribeSubAccountLinuxUserInfosResponse> {
-    return this.request("DescribeSubAccountLinuxUserInfos", req, cb)
+  async StartTrainingTask(
+    req: StartTrainingTaskRequest,
+    cb?: (error: string, rep: StartTrainingTaskResponse) => void
+  ): Promise<StartTrainingTaskResponse> {
+    return this.request("StartTrainingTask", req, cb)
+  }
+
+  /**
+   * DescribeMountInstance
+   */
+  async DescribeMountInstance(
+    req: DescribeMountInstanceRequest,
+    cb?: (error: string, rep: DescribeMountInstanceResponse) => void
+  ): Promise<DescribeMountInstanceResponse> {
+    return this.request("DescribeMountInstance", req, cb)
   }
 
   /**
@@ -332,6 +370,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTrainingTaskResponse) => void
   ): Promise<DescribeTrainingTaskResponse> {
     return this.request("DescribeTrainingTask", req, cb)
+  }
+
+  /**
+   * 获取挂载限制列表
+   */
+  async DescribeMountLimits(
+    req: DescribeMountLimitsRequest,
+    cb?: (error: string, rep: DescribeMountLimitsResponse) => void
+  ): Promise<DescribeMountLimitsResponse> {
+    return this.request("DescribeMountLimits", req, cb)
   }
 
   /**
@@ -425,13 +473,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 训练任务pod列表
+   * 获取数据源详情
    */
-  async DescribeTrainingTaskPods(
-    req: DescribeTrainingTaskPodsRequest,
-    cb?: (error: string, rep: DescribeTrainingTaskPodsResponse) => void
-  ): Promise<DescribeTrainingTaskPodsResponse> {
-    return this.request("DescribeTrainingTaskPods", req, cb)
+  async DescribeDataSource(
+    req: DescribeDataSourceRequest,
+    cb?: (error: string, rep: DescribeDataSourceResponse) => void
+  ): Promise<DescribeDataSourceResponse> {
+    return this.request("DescribeDataSource", req, cb)
   }
 
   /**
@@ -518,13 +566,13 @@ https://cloud.tencent.com/document/product/1278/85305
   }
 
   /**
-   * 启动模型训练任务
+   * 非数据源挂载时获取实例列表
    */
-  async StartTrainingTask(
-    req: StartTrainingTaskRequest,
-    cb?: (error: string, rep: StartTrainingTaskResponse) => void
-  ): Promise<StartTrainingTaskResponse> {
-    return this.request("StartTrainingTask", req, cb)
+  async DescribeMountInstances(
+    req: DescribeMountInstancesRequest,
+    cb?: (error: string, rep: DescribeMountInstancesResponse) => void
+  ): Promise<DescribeMountInstancesResponse> {
+    return this.request("DescribeMountInstances", req, cb)
   }
 
   /**
@@ -538,6 +586,16 @@ https://cloud.tencent.com/document/product/1278/85305
   }
 
   /**
+   * 创建挂载限制
+   */
+  async UpdateMountLimit(
+    req: UpdateMountLimitRequest,
+    cb?: (error: string, rep: UpdateMountLimitResponse) => void
+  ): Promise<UpdateMountLimitResponse> {
+    return this.request("UpdateMountLimit", req, cb)
+  }
+
+  /**
    * 根据服务组id删除服务组下所有模型服务
    */
   async DeleteModelServiceGroup(
@@ -545,6 +603,26 @@ https://cloud.tencent.com/document/product/1278/85305
     cb?: (error: string, rep: DeleteModelServiceGroupResponse) => void
   ): Promise<DeleteModelServiceGroupResponse> {
     return this.request("DeleteModelServiceGroup", req, cb)
+  }
+
+  /**
+   * 更新数据源
+   */
+  async UpdateDataSource(
+    req: UpdateDataSourceRequest,
+    cb?: (error: string, rep: UpdateDataSourceResponse) => void
+  ): Promise<UpdateDataSourceResponse> {
+    return this.request("UpdateDataSource", req, cb)
+  }
+
+  /**
+   * 训练任务pod列表
+   */
+  async DescribeTrainingTaskPods(
+    req: DescribeTrainingTaskPodsRequest,
+    cb?: (error: string, rep: DescribeTrainingTaskPodsResponse) => void
+  ): Promise<DescribeTrainingTaskPodsResponse> {
+    return this.request("DescribeTrainingTaskPods", req, cb)
   }
 
   /**
@@ -578,6 +656,16 @@ https://cloud.tencent.com/document/product/1278/85305
   }
 
   /**
+   * 批量查询子账号Linux用户信息
+   */
+  async DescribeSubAccountLinuxUserInfos(
+    req?: DescribeSubAccountLinuxUserInfosRequest,
+    cb?: (error: string, rep: DescribeSubAccountLinuxUserInfosResponse) => void
+  ): Promise<DescribeSubAccountLinuxUserInfosResponse> {
+    return this.request("DescribeSubAccountLinuxUserInfos", req, cb)
+  }
+
+  /**
    * 修改一个 AuthToken
    */
   async ModifyModelServiceAuthToken(
@@ -595,6 +683,16 @@ https://cloud.tencent.com/document/product/1278/85305
     cb?: (error: string, rep: CreateModelServiceResponse) => void
   ): Promise<CreateModelServiceResponse> {
     return this.request("CreateModelService", req, cb)
+  }
+
+  /**
+   * 获取数据源列表
+   */
+  async DescribeDataSources(
+    req: DescribeDataSourcesRequest,
+    cb?: (error: string, rep: DescribeDataSourcesResponse) => void
+  ): Promise<DescribeDataSourcesResponse> {
+    return this.request("DescribeDataSources", req, cb)
   }
 
   /**
@@ -658,13 +756,23 @@ https://cloud.tencent.com/document/product/1278/85305
   }
 
   /**
-   * 查询资源组节点运行中的任务
+   * 创建挂载限制
    */
-  async DescribeBillingResourceInstanceRunningJobs(
-    req: DescribeBillingResourceInstanceRunningJobsRequest,
-    cb?: (error: string, rep: DescribeBillingResourceInstanceRunningJobsResponse) => void
-  ): Promise<DescribeBillingResourceInstanceRunningJobsResponse> {
-    return this.request("DescribeBillingResourceInstanceRunningJobs", req, cb)
+  async CreateMountLimit(
+    req: CreateMountLimitRequest,
+    cb?: (error: string, rep: CreateMountLimitResponse) => void
+  ): Promise<CreateMountLimitResponse> {
+    return this.request("CreateMountLimit", req, cb)
+  }
+
+  /**
+   * 删除数据源
+   */
+  async DeleteDataSource(
+    req: DeleteDataSourceRequest,
+    cb?: (error: string, rep: DeleteDataSourceResponse) => void
+  ): Promise<DeleteDataSourceResponse> {
+    return this.request("DeleteDataSource", req, cb)
   }
 
   /**
@@ -725,6 +833,26 @@ https://cloud.tencent.com/document/product/1278/85305
     cb?: (error: string, rep: StopModelAccelerateTaskResponse) => void
   ): Promise<StopModelAccelerateTaskResponse> {
     return this.request("StopModelAccelerateTask", req, cb)
+  }
+
+  /**
+   * 查询资源组节点运行中的任务
+   */
+  async DescribeBillingResourceInstanceRunningJobs(
+    req: DescribeBillingResourceInstanceRunningJobsRequest,
+    cb?: (error: string, rep: DescribeBillingResourceInstanceRunningJobsResponse) => void
+  ): Promise<DescribeBillingResourceInstanceRunningJobsResponse> {
+    return this.request("DescribeBillingResourceInstanceRunningJobs", req, cb)
+  }
+
+  /**
+   * 创建数据源
+   */
+  async CreateDataSource(
+    req: CreateDataSourceRequest,
+    cb?: (error: string, rep: CreateDataSourceResponse) => void
+  ): Promise<CreateDataSourceResponse> {
+    return this.request("CreateDataSource", req, cb)
   }
 
   /**
@@ -827,6 +955,16 @@ https://cloud.tencent.com/document/product/1278/85305
     cb?: (error: string, rep: CreateExportResponse) => void
   ): Promise<CreateExportResponse> {
     return this.request("CreateExport", req, cb)
+  }
+
+  /**
+   * 删除挂载限制。注意：删除挂载限制后，该存储对应的所有数据源也会被删除
+   */
+  async DeleteMountLimit(
+    req: DeleteMountLimitRequest,
+    cb?: (error: string, rep: DeleteMountLimitResponse) => void
+  ): Promise<DeleteMountLimitResponse> {
+    return this.request("DeleteMountLimit", req, cb)
   }
 
   /**

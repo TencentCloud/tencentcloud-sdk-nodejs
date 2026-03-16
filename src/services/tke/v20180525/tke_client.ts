@@ -29,7 +29,7 @@ import {
   ContainerState,
   CreateClusterRouteTableResponse,
   SubnetInfos,
-  ModifyClusterImageResponse,
+  DeleteExternalNodePoolRequest,
   CbsVolume,
   DescribeAddonResponse,
   DescribeEKSClustersRequest,
@@ -97,6 +97,9 @@ import {
   PrometheusConfigItem,
   DescribeUpgradeTaskDetailRequest,
   DeleteClusterNodePoolRequest,
+  CreateExternalNodePoolRequest,
+  ModifyClusterImageResponse,
+  PrometheusNotification,
   DescribeEKSClusterCredentialResponse,
   CreateClusterMaintenanceWindowAndExclusionsResponse,
   CheckInstancesUpgradeAbleRequest,
@@ -122,6 +125,7 @@ import {
   Event,
   Exec,
   DescribeEdgeAvailableExtraArgsResponse,
+  ClusterExternalConfig,
   CreatePrometheusRecordRuleYamlRequest,
   DescribeMasterComponentResponse,
   Instance,
@@ -157,22 +161,25 @@ import {
   UpgradeAbleInstancesItem,
   ModifyClusterImageRequest,
   UpgradeClusterInstancesResponse,
+  EnableExternalNodeSupportResponse,
   CustomDriver,
   DescribeClusterAsGroupOptionRequest,
   DescribePrometheusAgentInstancesResponse,
+  PrometheusClusterAgentBasic,
   AddExistedInstancesRequest,
   ClusterAsGroupOption,
   DeletePrometheusTempResponse,
   DescribeClusterNodePoolsRequest,
   DescribeClusterRouteTablesRequest,
   DescribeRegionsRequest,
+  DescribeRollOutSequencesRequest,
   DeleteClusterRouteRequest,
   CreateCLSLogConfigResponse,
   DeleteClusterEndpointRequest,
   DeleteClusterVirtualNodeRequest,
   DescribeClusterNodePoolDetailRequest,
   DescribePrometheusTempSyncRequest,
-  DescribePrometheusGlobalConfigResponse,
+  DescribePrometheusClusterAgentsResponse,
   KubeJarvisStateInspectionResultsItem,
   DescribeClusterReleaseHistoryResponse,
   DescribeImagesRequest,
@@ -182,6 +189,7 @@ import {
   DescribePrometheusAlertHistoryResponse,
   ExistedInstancesPara,
   DescribeClusterAsGroupOptionResponse,
+  ExternalNode,
   CreateTKEEdgeClusterResponse,
   DescribeEdgeClusterExtraArgsResponse,
   ResourceDeleteOption,
@@ -209,12 +217,13 @@ import {
   NfsVolume,
   RIUtilizationDetail,
   DescribeBatchModifyTagsStatusResponse,
-  PrometheusNotification,
+  DescribeExternalNodeResponse,
   CreateGlobalMaintenanceWindowAndExclusionsResponse,
   DescribeRIUtilizationDetailRequest,
   ClusterCondition,
   BackupStorageLocation,
   DeleteClusterMaintenanceWindowAndExclusionRequest,
+  UpdateEKSContainerInstanceResponse,
   DescribeEKSClustersResponse,
   VolumeMount,
   DescribeClusterRollOutSequenceTagsResponse,
@@ -242,7 +251,7 @@ import {
   DescribePrometheusGlobalNotificationResponse,
   DescribeBatchModifyTagsStatusRequest,
   HttpGet,
-  ResourceUsage,
+  DescribeExternalNodeScriptResponse,
   ModifyClusterAttributeResponse,
   CreateClusterVirtualNodeRequest,
   DescribeTKEEdgeClustersRequest,
@@ -262,6 +271,7 @@ import {
   Flag,
   UninstallClusterReleaseResponse,
   CancelUpgradePlanResponse,
+  DrainExternalNodeRequest,
   ClusterCIDRSettings,
   Taint,
   ReservedInstanceUtilizationRate,
@@ -269,19 +279,20 @@ import {
   AddClusterCIDRRequest,
   OIDCConfigAuthenticationOptions,
   DescribeOSImagesResponse,
+  DescribePrometheusGlobalConfigResponse,
   CreateClusterRequest,
   CreateEdgeCVMInstancesRequest,
   DescribeClusterReleaseHistoryRequest,
   NodePoolOption,
   DescribeEdgeClusterExtraArgsRequest,
-  DescribePrometheusClusterAgentsResponse,
+  DescribeClustersResponse,
   DeleteClusterVirtualNodeResponse,
   PrometheusAgentInfo,
   CreateEdgeCVMInstancesResponse,
   DescribeEdgeLogSwitchesResponse,
   CreatePrometheusClusterAgentResponse,
   DescribePrometheusTemplatesResponse,
-  UpdateEKSContainerInstanceResponse,
+  ModifyExternalNodePoolRequest,
   DnsServerConf,
   EksCluster,
   ModifyNodePoolInstanceTypesResponse,
@@ -289,12 +300,14 @@ import {
   GetClusterLevelPriceResponse,
   DescribeResourceUsageResponse,
   RenewReservedInstancesResponse,
+  DescribeExternalNodePoolsRequest,
   EdgeClusterInternalLB,
   ReservedInstanceScope,
   DescribeAvailableClusterVersionRequest,
   UpgradeClusterReleaseResponse,
   ModifyClusterMaintenanceWindowAndExclusionsRequest,
   DisableControlPlaneLogsResponse,
+  ModifyExternalNodePoolResponse,
   DescribePrometheusAlertPolicyRequest,
   DeleteClusterAsGroupsResponse,
   ModifyClusterRuntimeConfigRequest,
@@ -311,6 +324,7 @@ import {
   DescribePrometheusTempSyncResponse,
   CreatePrometheusConfigResponse,
   DescribeClusterEndpointStatusResponse,
+  EnableExternalNodeSupportRequest,
   RunAutomationServiceEnabled,
   AddExistedInstancesResponse,
   RestartEKSContainerInstancesResponse,
@@ -355,9 +369,11 @@ import {
   KMSConfiguration,
   CreateRollOutSequenceResponse,
   EipAttribute,
+  DescribeExternalNodeScriptRequest,
   UpdateAddonResponse,
   DescribeEKSContainerInstancesRequest,
   DescribeClusterControllersRequest,
+  DescribeExternalNodeRequest,
   ModifyPrometheusAlertRuleRequest,
   DescribeClusterSecurityResponse,
   RouteInfo,
@@ -473,7 +489,7 @@ import {
   ReleaseDetails,
   DescribeAddonRequest,
   DescribePrometheusInstanceResponse,
-  PrometheusGrafanaInfo,
+  DeleteExternalNodePoolResponse,
   Switch,
   ImageInstance,
   GlobalMaintenanceWindowAndExclusion,
@@ -484,6 +500,7 @@ import {
   CheckEdgeClusterCIDRResponse,
   DescribeUserPermissionsResponse,
   DescribePrometheusClusterAgentsRequest,
+  DeleteExternalNodeResponse,
   DescribeTKEEdgeExternalKubeconfigResponse,
   EdgeArgsFlag,
   CheckInstancesUpgradeAbleResponse,
@@ -498,7 +515,7 @@ import {
   ModifyClusterAsGroupOptionAttributeResponse,
   UninstallLogAgentResponse,
   Task,
-  PrometheusClusterAgentBasic,
+  DeleteExternalNodeRequest,
   DeleteTKEEdgeClusterResponse,
   ModifyClusterExtraArgsRequest,
   CreatePrometheusTempResponse,
@@ -623,7 +640,7 @@ import {
   UpdateEKSClusterResponse,
   DescribeEdgeCVMInstancesResponse,
   DescribePrometheusRecordRulesResponse,
-  DescribeRollOutSequencesRequest,
+  CreateExternalNodePoolResponse,
   ModifyNodePoolDesiredCapacityAboutAsgRequest,
   ReservedInstance,
   DeleteClusterRouteResponse,
@@ -642,6 +659,7 @@ import {
   DescribeClusterStatusResponse,
   ImageRegistryCredential,
   GrantUserPermissionsResponse,
+  ResourceUsage,
   DescribeRouteTableConflictsResponse,
   EnableControlPlaneLogsRequest,
   DescribeVersionsRequest,
@@ -686,9 +704,11 @@ import {
   ClusterStatus,
   DescribePrometheusAgentsResponse,
   DescribeVpcCniPodLimitsRequest,
+  ExternalNodePool,
   DeleteImageCachesResponse,
   EtcdOverrideConfig,
   ModifyClusterRollOutSequenceTagsResponse,
+  DrainExternalNodeResponse,
   DescribeEKSContainerInstanceRegionsResponse,
   ModifyClusterRuntimeConfigResponse,
   ModifyPrometheusRecordRuleYamlResponse,
@@ -703,8 +723,8 @@ import {
   RollOutSequence,
   DescribePodChargeInfoResponse,
   DeletePrometheusRecordRuleYamlRequest,
-  DescribeClustersResponse,
   InstallAddonRequest,
+  DescribeExternalNodePoolsResponse,
   DescribeGlobalMaintenanceWindowAndExclusionsResponse,
   InstanceUpgradePreCheckResult,
   ScaleInClusterMasterResponse,
@@ -721,6 +741,7 @@ import {
   InstallAddonResponse,
   DeleteLogConfigsResponse,
   ModifyReservedInstanceScopeRequest,
+  PrometheusGrafanaInfo,
   DisableEncryptionProtectionRequest,
   PrometheusInstanceOverview,
   DescribeClusterVirtualNodeResponse,
@@ -738,6 +759,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tke.tencentcloudapi.com", "2018-05-25", clientConfig)
+  }
+
+  /**
+   * 查看第三方节点列表
+   */
+  async DescribeExternalNode(
+    req: DescribeExternalNodeRequest,
+    cb?: (error: string, rep: DescribeExternalNodeResponse) => void
+  ): Promise<DescribeExternalNodeResponse> {
+    return this.request("DescribeExternalNode", req, cb)
   }
 
   /**
@@ -778,6 +809,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterResponse) => void
   ): Promise<CreateClusterResponse> {
     return this.request("CreateCluster", req, cb)
+  }
+
+  /**
+   * 删除第三方节点池
+   */
+  async DeleteExternalNodePool(
+    req: DeleteExternalNodePoolRequest,
+    cb?: (error: string, rep: DeleteExternalNodePoolResponse) => void
+  ): Promise<DeleteExternalNodePoolResponse> {
+    return this.request("DeleteExternalNodePool", req, cb)
   }
 
   /**
@@ -908,6 +949,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePostNodeResourcesResponse) => void
   ): Promise<DescribePostNodeResourcesResponse> {
     return this.request("DescribePostNodeResources", req, cb)
+  }
+
+  /**
+   * 开启第三方节点池支持
+   */
+  async EnableExternalNodeSupport(
+    req: EnableExternalNodeSupportRequest,
+    cb?: (error: string, rep: EnableExternalNodeSupportResponse) => void
+  ): Promise<EnableExternalNodeSupportResponse> {
+    return this.request("EnableExternalNodeSupport", req, cb)
   }
 
   /**
@@ -1321,6 +1372,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除第三方节点
+   */
+  async DeleteExternalNode(
+    req: DeleteExternalNodeRequest,
+    cb?: (error: string, rep: DeleteExternalNodeResponse) => void
+  ): Promise<DeleteExternalNodeResponse> {
+    return this.request("DeleteExternalNode", req, cb)
+  }
+
+  /**
    * 升级集群 Master 组件到指定版本
    */
   async UpdateClusterVersion(
@@ -1658,6 +1719,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterEndpointStatusResponse) => void
   ): Promise<DescribeClusterEndpointStatusResponse> {
     return this.request("DescribeClusterEndpointStatus", req, cb)
+  }
+
+  /**
+   * 创建第三方节点池
+   */
+  async CreateExternalNodePool(
+    req: CreateExternalNodePoolRequest,
+    cb?: (error: string, rep: CreateExternalNodePoolResponse) => void
+  ): Promise<CreateExternalNodePoolResponse> {
+    return this.request("CreateExternalNodePool", req, cb)
   }
 
   /**
@@ -2061,6 +2132,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取第三方节点添加脚本
+   */
+  async DescribeExternalNodeScript(
+    req: DescribeExternalNodeScriptRequest,
+    cb?: (error: string, rep: DescribeExternalNodeScriptResponse) => void
+  ): Promise<DescribeExternalNodeScriptResponse> {
+    return this.request("DescribeExternalNodeScript", req, cb)
+  }
+
+  /**
    * 创建一个云原生Prometheus模板
    */
   async CreatePrometheusTemp(
@@ -2298,6 +2379,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePrometheusGlobalNotificationResponse) => void
   ): Promise<DescribePrometheusGlobalNotificationResponse> {
     return this.request("DescribePrometheusGlobalNotification", req, cb)
+  }
+
+  /**
+   * 驱逐第三方节点
+   */
+  async DrainExternalNode(
+    req: DrainExternalNodeRequest,
+    cb?: (error: string, rep: DrainExternalNodeResponse) => void
+  ): Promise<DrainExternalNodeResponse> {
+    return this.request("DrainExternalNode", req, cb)
   }
 
   /**
@@ -2588,6 +2679,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetMostSuitableImageCacheResponse) => void
   ): Promise<GetMostSuitableImageCacheResponse> {
     return this.request("GetMostSuitableImageCache", req, cb)
+  }
+
+  /**
+   * 查看第三方节点池列表
+   */
+  async DescribeExternalNodePools(
+    req: DescribeExternalNodePoolsRequest,
+    cb?: (error: string, rep: DescribeExternalNodePoolsResponse) => void
+  ): Promise<DescribeExternalNodePoolsResponse> {
+    return this.request("DescribeExternalNodePools", req, cb)
   }
 
   /**
@@ -3078,6 +3179,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePrometheusAlertRuleResponse) => void
   ): Promise<DescribePrometheusAlertRuleResponse> {
     return this.request("DescribePrometheusAlertRule", req, cb)
+  }
+
+  /**
+   * 修改第三方节点池
+   */
+  async ModifyExternalNodePool(
+    req: ModifyExternalNodePoolRequest,
+    cb?: (error: string, rep: ModifyExternalNodePoolResponse) => void
+  ): Promise<ModifyExternalNodePoolResponse> {
+    return this.request("ModifyExternalNodePool", req, cb)
   }
 
   /**

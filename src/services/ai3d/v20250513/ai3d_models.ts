@@ -88,7 +88,7 @@ export interface Convert3DFormatResponse {
  */
 export interface QueryHunyuanTo3DProJobRequest {
   /**
-   * 任务ID。
+   * <p>任务ID。</p>
    */
   JobId: string
 }
@@ -150,24 +150,19 @@ export interface QueryHunyuanTo3DRapidJobResponse {
  */
 export interface SubmitTextureTo3DJobRequest {
   /**
-   * 源3D模型文件。
-Type可选值：OBJ，GLB
+   * <p>源3D模型文件。<br>Type可选值：OBJ，GLB</p>
    */
   File3D: File3D
   /**
-   * 文生3D，3D内容的描述，中文正向提示词。
-最多支持200个 utf-8 字符。
-文生3D, image、image_url和 prompt必填其一，且prompt和image/image_url不能同时存在。
+   * <p>文生3D，3D内容的描述，中文正向提示词。<br>最多支持200个 utf-8 字符。<br>文生3D, image、image_url和 prompt必填其一，且prompt和image/image_url不能同时存在。</p>
    */
   Prompt?: string
   /**
-   * 3D模型纹理参考图 Base64 数据和参考图图 Url。
-- Base64 和 Url 必须提供一个，如果都提供以 Url 为准。
-- 图片限制：单边分辨率小于4096且大于128，转成 Base64 字符串后小于 10MB，格式支持 jpg、jpeg、png。
+   * <p>3D模型纹理参考图 Base64 数据和参考图 Url。</p><ul><li>Base64 和 Url 必须提供一个，如果都提供以 Url 为准。</li><li>图片限制：单边分辨率小于4096且大于128，转成 Base64 字符串后小于 10MB，格式支持 jpg、jpeg、png。</li></ul>
    */
   Image?: Image
   /**
-   * 是否开启 PBR材质生成，默认 false。
+   * <p>是否开启 PBR材质生成，默认 false。</p>
    */
   EnablePBR?: boolean
 }
@@ -464,7 +459,7 @@ export interface SubmitHunyuanTo3DProJobRequest {
    */
   FaceCount?: number
   /**
-   * <p>生成任务类型，默认Normal，参考值：<br>Normal：可生成带纹理的几何模型。<br>LowPoly：可生成智能拓扑后的模型，FaceCount参数不生效。<br>Geometry：可生成不带纹理的几何模型（白模），EnablePBR参数不生效。<br>Sketch：可输入草图或线稿图生成模型，此模式下prompt和ImageUrl/ImageBase64可一起输入。</p><p>枚举值：</p><ul><li>Normal： 可生成带纹理的几何模型</li><li>LowPoly： 可生成智能拓扑后的模型，FaceCount参数不生效。</li><li>Geometry： 可生成不带纹理的几何模型（白模），EnablePBR参数不生效。</li><li>Sketch： 可输入草图或线稿图生成模型，此模式下prompt和ImageUrl/ImageBase64可一起输入。</li></ul>
+   * <p>生成任务类型，默认Normal</p><p>枚举值：</p><ul><li>Normal： 可生成带纹理的几何模型</li><li>LowPoly： 可生成智能拓扑后的模型，FaceCount参数不生效。</li><li>Geometry： 可生成不带纹理的几何模型（白模），EnablePBR参数不生效。</li><li>Sketch： 可输入草图或线稿图生成模型，此模式下prompt和ImageUrl/ImageBase64可一起输入。</li></ul>
    */
   GenerateType?: string
   /**
@@ -604,7 +599,7 @@ export interface SubmitHunyuanTo3DProJobResponse {
  */
 export interface SubmitTextureTo3DJobResponse {
   /**
-   * 任务ID（有效期24小时）
+   * <p>任务ID（有效期24小时）</p>
    */
   JobId?: string
   /**
@@ -632,21 +627,29 @@ export interface Image {
  */
 export interface QueryHunyuanTo3DProJobResponse {
   /**
-   * 任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功
+   * <p>任务状态。WAIT：等待中，RUN：执行中，FAIL：任务失败，DONE：任务成功</p>
    */
   Status?: string
   /**
-   * 错误码
+   * <p>错误码</p>
    */
   ErrorCode?: string
   /**
-   * 错误信息
+   * <p>错误信息</p>
    */
   ErrorMessage?: string
   /**
-   * 生成的3D文件数组。
+   * <p>生成的3D文件数组。</p>
    */
   ResultFile3Ds?: Array<File3D>
+  /**
+   * <p>接口任务功能参数及积分详情，返回形式为字符串。Generate参数返回对应模式及消耗积分，如：Generate-Normal：20<br>附加参数返回参数名称及消耗积分，如：MultiViewImages：10</p>
+   */
+  ResultCreditDetails?: string
+  /**
+   * <p>任务总消耗积分。</p>
+   */
+  ResultCreditConsumed?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

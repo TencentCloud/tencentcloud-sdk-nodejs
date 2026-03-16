@@ -371,7 +371,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询文档转码任务的执行进度与转码结果
+   * 查询文档转码任务的执行进度与转码结果，支持查询最近半年内的任务结果
    */
   async DescribeTranscode(
     req: DescribeTranscodeRequest,

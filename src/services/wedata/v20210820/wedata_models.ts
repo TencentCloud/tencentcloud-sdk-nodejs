@@ -2709,6 +2709,11 @@ TABLE, VIEW, MANAGED_TABLE(Hive管理表), EXTERNAL_TABLE(Hive外部表), VIRTUA
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EngineCreator?: string
+  /**
+   * 项目状态：0：禁用，1：启用，-3:禁用中，2：启用中
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectStatus?: number
 }
 
 /**
@@ -3012,35 +3017,35 @@ export interface TablePropertyScore {
   /**
    * 表ID
    */
-  TableId: string
+  TableId?: string
   /**
    * 统计日期
    */
-  DayTime: string
+  DayTime?: string
   /**
    * 表完整性评分
    */
-  Integrity: number
+  Integrity?: number
   /**
    * 表保障性评分
    */
-  Safety: number
+  Safety?: number
   /**
    * 表及时性评分
    */
-  Timeliness: number
+  Timeliness?: number
   /**
    * 表稳定性评分
    */
-  Stability: number
+  Stability?: number
   /**
    * 表规范性评分
    */
-  Normative: number
+  Normative?: number
   /**
    * 资产评分平均分
    */
-  Average: number
+  Average?: number
 }
 
 /**
@@ -31203,22 +31208,22 @@ export interface TableHeat {
    * 表ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TableId: string
+  TableId?: string
   /**
    * 统计日期
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DayTime: string
+  DayTime?: string
   /**
    * 表热度
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Heat: number
+  Heat?: number
   /**
    * 表热度最大值
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  MaxHeat: number
+  MaxHeat?: number
 }
 
 /**

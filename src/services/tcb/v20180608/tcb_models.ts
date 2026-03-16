@@ -102,6 +102,71 @@ export interface ListTablesResponse {
 }
 
 /**
+ * 订单信息
+ */
+export interface OrderInfo {
+  /**
+   * 订单号
+   */
+  TranId?: string
+  /**
+   * 订单要切换的套餐ID
+   */
+  PackageId?: string
+  /**
+   * 订单类型
+<li>1 购买</li>
+<li>2 续费</li>
+<li>3 变配</li>
+   */
+  TranType?: string
+  /**
+   * 订单状态。
+<li>1未支付</li>
+<li>2 支付中</li>
+<li>3 发货中</li>
+<li>4 发货成功</li>
+<li>5 发货失败</li>
+<li>6 已退款</li>
+<li>7 已取消</li>
+<li>100 已删除</li>
+   */
+  TranStatus?: string
+  /**
+   * 订单更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 订单创建时间
+   */
+  CreateTime?: string
+  /**
+   * 付费模式.
+<li>prepayment 预付费</li>
+<li>postpaid 后付费</li>
+   */
+  PayMode?: string
+  /**
+   * 订单绑定的扩展ID
+   */
+  ExtensionId?: string
+  /**
+   * 资源初始化结果(仅当ExtensionId不为空时有效): successful(初始化成功), failed(初始化失败), doing(初始化进行中), init(准备初始化)
+   */
+  ResourceReady?: string
+  /**
+   * 安装标记。建议使用方统一转大小写之后再判断。
+<li>QuickStart：快速启动来源</li>
+<li>Activity：活动来源</li>
+   */
+  Flag?: string
+  /**
+   * 下单时的参数
+   */
+  ReqBody?: string
+}
+
+/**
  * CheckTcbService返回参数结构体
  */
 export interface CheckTcbServiceResponse {
@@ -116,32 +181,190 @@ export interface CheckTcbServiceResponse {
 }
 
 /**
- * ModifySafeRule请求参数结构体
+ * DescribeCloudBaseRunServerVersion请求参数结构体
  */
-export interface ModifySafeRuleRequest {
+export interface DescribeCloudBaseRunServerVersionRequest {
   /**
    * 环境ID
    */
   EnvId: string
   /**
-   * 集合名称
+   * 服务名称
    */
-  CollectionName: string
+  ServerName: string
   /**
-   * 权限标签。包含以下取值：
-<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
-<li> PRIVATE：仅创建者及管理员可读写</li>
-<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
-<li> ADMINONLY：仅管理员可读写</li>
-<li> CUSTOM：自定义安全规则</li>
+   * 版本名称
    */
-  AclTag: string
+  VersionName: string
+}
+
+/**
+ * DescribeCloudBaseRunServerVersion返回参数结构体
+ */
+export interface DescribeCloudBaseRunServerVersionResponse {
   /**
-   * 安全规则内容。
-当 AclTag=CUSTOM 时，此参数必填。
-详情参考：[文档型数据库安全规则](https://docs.cloudbase.net/database/security-rules)
+   * 版本名称
    */
-  Rule?: string
+  VersionName?: string
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * Dockerfile的路径
+   */
+  DockerfilePath?: string
+  /**
+   * DockerBuild的目录
+   */
+  BuildDir?: string
+  /**
+   * 请使用CPUSize
+   */
+  Cpu?: number
+  /**
+   * 请使用MemSize
+   */
+  Mem?: number
+  /**
+   * 副本最小值
+   */
+  MinNum?: number
+  /**
+   * 副本最大值
+   */
+  MaxNum?: number
+  /**
+   * 策略类型
+   */
+  PolicyType?: string
+  /**
+   * 策略阈值
+   */
+  PolicyThreshold?: number
+  /**
+   * 环境变量
+   */
+  EnvParams?: string
+  /**
+   * 创建时间
+   */
+  CreatedTime?: string
+  /**
+   * 更新时间
+   */
+  UpdatedTime?: string
+  /**
+   * 版本的IP
+   */
+  VersionIP?: string
+  /**
+   * 版本的端口号
+   */
+  VersionPort?: number
+  /**
+   * 版本状态
+   */
+  Status?: string
+  /**
+   * 代码包的名字
+   */
+  PackageName?: string
+  /**
+   * 代码版本的名字
+   */
+  PackageVersion?: string
+  /**
+   * 枚举（package/repository/image)
+   */
+  UploadType?: string
+  /**
+   * Repo的类型(gitlab/github/coding)
+   */
+  RepoType?: string
+  /**
+   * 地址
+   */
+  Repo?: string
+  /**
+   * 分支
+   */
+  Branch?: string
+  /**
+   * 服务名字
+   */
+  ServerName?: string
+  /**
+   * 是否对于外网开放
+   */
+  IsPublic?: boolean
+  /**
+   * vpc id
+   */
+  VpcId?: string
+  /**
+   * 子网实例id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetIds?: Array<string>
+  /**
+   * 日志采集路径
+   */
+  CustomLogs?: string
+  /**
+   * 监听端口
+   */
+  ContainerPort?: number
+  /**
+   * 延迟多长时间开始健康检查（单位s）
+   */
+  InitialDelaySeconds?: number
+  /**
+   * 镜像地址
+   */
+  ImageUrl?: string
+  /**
+   * CPU 大小
+   */
+  CpuSize?: number
+  /**
+   * MEM 大小
+   */
+  MemSize?: number
+  /**
+   * 是否有Dockerfile：0-default has, 1-has, 2-has not
+   */
+  HasDockerfile?: number
+  /**
+   * 基础镜像
+   */
+  BaseImage?: string
+  /**
+   * 容器启动入口命令
+   */
+  EntryPoint?: string
+  /**
+   * 仓库语言
+   */
+  RepoLanguage?: string
+  /**
+   * 自动扩缩容策略组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PolicyDetail?: Array<HpaPolicy>
+  /**
+   * Tke集群信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TkeClusterInfo?: TkeClusterInfo
+  /**
+   * 版本工作负载类型；deployment/deamonset
+   */
+  TkeWorkloadType?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -623,6 +846,24 @@ export interface CreateHostingDomainRequest {
 }
 
 /**
+ * tke集群信息
+ */
+export interface TkeClusterInfo {
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
+   * 集群的vpcId
+   */
+  VpcId?: string
+  /**
+   * 版本内网CLB所在子网Id
+   */
+  VersionClbSubnetId?: string
+}
+
+/**
  * ModifyDatabaseACL请求参数结构体
  */
 export interface ModifyDatabaseACLRequest {
@@ -967,6 +1208,20 @@ export interface CreateStaticStoreRequest {
 }
 
 /**
+ * DescribeBillingInfo返回参数结构体
+ */
+export interface DescribeBillingInfoResponse {
+  /**
+   * 环境计费信息列表
+   */
+  EnvBillingInfoList?: Array<EnvBillingInfoItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateAuthDomain返回参数结构体
  */
 export interface CreateAuthDomainResponse {
@@ -1092,6 +1347,30 @@ export interface DescribeCreateMySQLResultRequest {
    * OpenMysql 返回任务 Id
    */
   TaskId?: string
+}
+
+/**
+ * DescribeBillingInfo请求参数结构体
+ */
+export interface DescribeBillingInfoRequest {
+  /**
+   * 环境ID
+   */
+  EnvId?: string
+}
+
+/**
+ * 扩缩容策略
+ */
+export interface HpaPolicy {
+  /**
+   * 策略类型
+   */
+  PolicyType?: string
+  /**
+   * 策略阈值
+   */
+  PolicyThreshold?: number
 }
 
 /**
@@ -1376,6 +1655,87 @@ export interface DestroyMySQLRequest {
    * 云开发环境ID
    */
   EnvId: string
+}
+
+/**
+ * 环境计费信息
+ */
+export interface EnvBillingInfoItem {
+  /**
+   * 环境ID
+   */
+  EnvId?: string
+  /**
+   * tcb产品套餐ID，参考DescribePackages接口的返回值。
+   */
+  PackageId?: string
+  /**
+   * 自动续费标记
+   */
+  IsAutoRenew?: boolean
+  /**
+   * 状态。包含以下取值：
+<li> 空字符串：初始化中</li>
+<li> NORMAL：正常</li>
+<li> ISOLATE：隔离</li>
+   */
+  Status?: string
+  /**
+   * 支付方式。包含以下取值：
+<li> PREPAYMENT：预付费</li>
+<li> POSTPAID：后付费</li>
+   */
+  PayMode?: string
+  /**
+   * 隔离时间，最近一次隔离的时间
+   */
+  IsolatedTime?: string
+  /**
+   * 过期时间，套餐即将到期的时间
+   */
+  ExpireTime?: string
+  /**
+   * 创建时间，第一次接入计费方案的时间。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间，计费信息最近一次更新的时间。
+   */
+  UpdateTime?: string
+  /**
+   * true表示从未升级过付费版。
+   */
+  IsAlwaysFree?: boolean
+  /**
+   * 付费渠道。
+<li> miniapp：小程序</li>
+<li> qcloud：腾讯云</li>
+   */
+  PaymentChannel?: string
+  /**
+   * 最新的订单信息
+   */
+  OrderInfo?: OrderInfo
+  /**
+   * 免费配额信息。
+   */
+  FreeQuota?: string
+  /**
+   * 是否开启 `超过套餐额度部分转按量付费`
+   */
+  EnableOverrun?: boolean
+  /**
+   * 环境套餐类型
+   */
+  ExtPackageType?: string
+  /**
+   * 是否付费期环境，可取值：yes/no。
+   */
+  EnvCharged?: string
+  /**
+   * 是否已激活，可取值：yes/no。
+   */
+  EnvActivated?: string
 }
 
 /**
@@ -2537,6 +2897,35 @@ export interface PermissionInfo {
 }
 
 /**
+ * ModifySafeRule请求参数结构体
+ */
+export interface ModifySafeRuleRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 集合名称
+   */
+  CollectionName: string
+  /**
+   * 权限标签。包含以下取值：
+<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
+<li> PRIVATE：仅创建者及管理员可读写</li>
+<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
+<li> ADMINONLY：仅管理员可读写</li>
+<li> CUSTOM：自定义安全规则</li>
+   */
+  AclTag: string
+  /**
+   * 安全规则内容。
+当 AclTag=CUSTOM 时，此参数必填。
+详情参考：[文档型数据库安全规则](https://docs.cloudbase.net/database/security-rules)
+   */
+  Rule?: string
+}
+
+/**
  * DescribeHostingDomainTask返回参数结构体
  */
 export interface DescribeHostingDomainTaskResponse {
@@ -2551,21 +2940,17 @@ export interface DescribeHostingDomainTaskResponse {
 }
 
 /**
- * DescribeTable返回参数结构体
+ * DeleteAuthDomain请求参数结构体
  */
-export interface DescribeTableResponse {
+export interface DeleteAuthDomainRequest {
   /**
-   * 索引相关信息
+   * 开发者的环境ID
    */
-  Indexes?: Array<IndexInfo>
+  EnvId: string
   /**
-   * 索引个数
+   * 域名ID列表，支持批量
    */
-  IndexNum?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  DomainIds: Array<string>
 }
 
 /**
@@ -3054,17 +3439,21 @@ export interface CreateUserRequest {
 }
 
 /**
- * DeleteAuthDomain请求参数结构体
+ * DescribeTable返回参数结构体
  */
-export interface DeleteAuthDomainRequest {
+export interface DescribeTableResponse {
   /**
-   * 开发者的环境ID
+   * 索引相关信息
    */
-  EnvId: string
+  Indexes?: Array<IndexInfo>
   /**
-   * 域名ID列表，支持批量
+   * 索引个数
    */
-  DomainIds: Array<string>
+  IndexNum?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

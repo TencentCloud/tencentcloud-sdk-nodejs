@@ -45,6 +45,7 @@ import {
   Tag,
   CreateFlowForwardsResponse,
   DescribeFlowEvidenceReportRequest,
+  ModifyPartnerAuthorizationResponse,
   DeleteSealPoliciesRequest,
   CreateFlowGroupByTemplatesResponse,
   DetectInfoVideoData,
@@ -175,6 +176,7 @@ import {
   FailedUpdateStaffData,
   GetTaskResultApiRequest,
   Checklist,
+  CreatePartnerAuthorizationLinkRequest,
   DynamicSignOption,
   FlowDetailInfo,
   CreatePersonAuthCertificateImageRequest,
@@ -189,6 +191,7 @@ import {
   FileInfo,
   FeedbackInfo,
   CreatePartnerAutoSignAuthUrlRequest,
+  CreatePartnerAuthorizationLinkResponse,
   CreateExtendedServiceAuthInfosResponse,
   ExtractionTaskResult,
   ApproverRestriction,
@@ -265,6 +268,7 @@ import {
   DescribeExtendedServiceAuthDetailRequest,
   CreateOrganizationAuthFileRequest,
   ComponentLimit,
+  ModifyPartnerAuthorizationRequest,
   CreateIntegrationSubOrganizationActiveRecordResponse,
   FillApproverInfo,
   CreatePersonAuthCertificateImageResponse,
@@ -417,6 +421,7 @@ import {
   DeleteIntegrationEmployeesResponse,
   DescribeContractReviewChecklistWebUrlRequest,
   PermissionGroup,
+  ProxyOrganizationInfo,
   CreateFlowRemindsRequest,
   DescribeSignFaceVideoResponse,
   VerifyPdfResponse,
@@ -1530,6 +1535,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 该接口用于结束动态签署方2.0的合同流程。
+
+
+**功能开通**
+- 动态签署方2.0功能的使用需要先<font color="red">联系产品经理开通模块化计费功能</font>，然后到控制台中打开此功能。详细的使用说明请参考<a href="https://qian.tencent.com/developers/company/dynamic_signer_v2" target="_blank">动态签署方2.0</a>文档。
+
+**使用条件**
+- 此接口只能在<font color="red">合同处于非终态且<b>所有的签署方都已经完成签署</b></font>。一旦合同进入终态（例如：过期、拒签、撤销或者调用过此接口成功过），将无法通过此接口结束合同流程。
+
+**整体流程**
+![image](https://qcloudimg.tencent-cloud.cn/raw/75d323c66e44b05bbc8e949c18664455.png)
+     */
+  async ArchiveDynamicFlow(
+    req: ArchiveDynamicFlowRequest,
+    cb?: (error: string, rep: ArchiveDynamicFlowResponse) => void
+  ): Promise<ArchiveDynamicFlowResponse> {
+    return this.request("ArchiveDynamicFlow", req, cb)
+  }
+
+  /**
      * 该接口用于在使用视频认证方式签署合同后，获取用户的签署人脸认证视频。
 
 1. 该接口**仅适用于在H5端签署**的合同，**在通过视频认证后**获取人脸视频。
@@ -2410,6 +2435,21 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
   }
 
   /**
+     * 管理他方企业授权的第三方应用
+
+注: 
+1. BusinessId “集成方业务标记”需要与“第三方应用id”一致
+2. 不支持客户自己创建“已有第三方应用id”进行变更。（即“已有第三方应用id”的集成方业务标记为空，不能进行变更）。
+3. 当前仅支持修改回调地址和加密key。
+     */
+  async ModifyPartnerAuthorization(
+    req: ModifyPartnerAuthorizationRequest,
+    cb?: (error: string, rep: ModifyPartnerAuthorizationResponse) => void
+  ): Promise<ModifyPartnerAuthorizationResponse> {
+    return this.request("ModifyPartnerAuthorization", req, cb)
+  }
+
+  /**
      * 用于撤销合同流程<br/>
 适用场景：如果某个合同流程当前至少还有一方没有签署，则可通过该接口取消该合同流程。常用于合同发错、内容填错，需要及时撤销的场景。<br/>
 - **可撤回合同状态**：未全部签署完成
@@ -2726,23 +2766,23 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
   }
 
   /**
-     * 该接口用于结束动态签署方2.0的合同流程。
+     * 获取他方企业第三方应用的创建及授权及企业用户初始化链接
+此链接在 7 天内有效，若失效请重新生成。
+若第一次初始化，打开此链接，会进行应用号的创建，子客的创建，打开此链接的人，必须是合作方企业的超管或者法人，否则无法认证成功。
+若传递了应用号Id，若之前的初始化还未创建子客成功，则可以继续创建子客企业。
 
-
-**功能开通**
-- 动态签署方2.0功能的使用需要先<font color="red">联系产品经理开通模块化计费功能</font>，然后到控制台中打开此功能。详细的使用说明请参考<a href="https://qian.tencent.com/developers/company/dynamic_signer_v2" target="_blank">动态签署方2.0</a>文档。
-
-**使用条件**
-- 此接口只能在<font color="red">合同处于非终态且<b>所有的签署方都已经完成签署</b></font>。一旦合同进入终态（例如：过期、拒签、撤销或者调用过此接口成功过），将无法通过此接口结束合同流程。
-
-**整体流程**
-![image](https://qcloudimg.tencent-cloud.cn/raw/75d323c66e44b05bbc8e949c18664455.png)
+注: 
+1. BusinessId “集成方业务标记”唯一，不可变更， 此标记由电子签产品经理提供，请调用方保存。
+2. 若“第三方应用id”不为空，需要其“集成方业务标记”与接口一致。
+3. 不支持客户自己创建“已有第三方应用id”进行授权。（即“已有第三方应用id”的集成方业务标记为空，不能进行授权）。
+4. 创建的子客企业与合作企业一致，其中包括超管姓名，企业名称。
+5. 创建好的第三方应用号，不支持在页面进行修改编辑，只能通过接口的方式进行管理。
      */
-  async ArchiveDynamicFlow(
-    req: ArchiveDynamicFlowRequest,
-    cb?: (error: string, rep: ArchiveDynamicFlowResponse) => void
-  ): Promise<ArchiveDynamicFlowResponse> {
-    return this.request("ArchiveDynamicFlow", req, cb)
+  async CreatePartnerAuthorizationLink(
+    req: CreatePartnerAuthorizationLinkRequest,
+    cb?: (error: string, rep: CreatePartnerAuthorizationLinkResponse) => void
+  ): Promise<CreatePartnerAuthorizationLinkResponse> {
+    return this.request("CreatePartnerAuthorizationLink", req, cb)
   }
 
   /**

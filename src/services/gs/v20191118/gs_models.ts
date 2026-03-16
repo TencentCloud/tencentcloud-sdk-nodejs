@@ -79,6 +79,10 @@ export interface CreateAndroidInstanceADBRequest {
    * 安卓实例 ID
    */
   AndroidInstanceId: string
+  /**
+   * 过期时间。默认 1 小时，最长 30 天。格式为 2025-07-02T10:15:36Z
+   */
+  ExpiredTime?: string
 }
 
 /**

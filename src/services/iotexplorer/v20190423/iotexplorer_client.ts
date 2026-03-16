@@ -36,6 +36,7 @@ import {
   DescribeCsReportCountDataInfoRequest,
   CreateFreeCloudStorageResponse,
   DescribeTWeTalkProductConfigResponse,
+  TalkActivateRecordLogInfo,
   ModifyPositionFenceResponse,
   DescribeTWeSeeRecognitionTaskResponse,
   DescribeCloudStorageAIServiceTaskRequest,
@@ -74,7 +75,9 @@ import {
   GetAuthMiniProgramAppListRequest,
   DescribeFenceEventListRequest,
   DescribeAISearchTaskAsyncRequest,
+  ActivateTWeTalkResponse,
   ActivateTWeCallLicenseResponse,
+  ActivateTWeTalkRequest,
   DeleteTopicPolicyRequest,
   ResetCloudStorageEventRequest,
   TopicItem,
@@ -110,6 +113,7 @@ import {
   PauseTWeCallDeviceRequest,
   DescribeDeviceDataHistoryResponse,
   CreateTWeSeeRecognitionTaskWithFileResponse,
+  GetTWeTalkActiveRecordListRequest,
   DeviceUser,
   ProductModelDefinition,
   GetBatchProductionsListRequest,
@@ -144,13 +148,14 @@ import {
   InvokeVideosKeywordsAnalyzerResponse,
   ModifyTWeTalkAIBotRequest,
   DescribeDevicePositionListRequest,
-  InvokeExternalSourceAIServiceTaskResponse,
+  DeleteOtaModuleRequest,
   CreateStudioProductRequest,
   TransferCloudStorageRequest,
   CreateTWeSeeServiceRequest,
   FenceAlarmPoint,
   UploadFirmwareRequest,
   DescribeFirmwareRequest,
+  TalkActivationInfo,
   ModifyTWeTalkProductConfigV2Response,
   DescribeP2PRouteResponse,
   ListTopicPolicyResponse,
@@ -165,6 +170,7 @@ import {
   DescribeProductCloudStorageAIServiceResponse,
   DescribeLoRaFrequencyRequest,
   ModifyTWeTalkProductConfigResponse,
+  GetTWeTalkActiveRecordListResponse,
   DeleteCloudStorageEventRequest,
   SearchPositionSpaceRequest,
   DescribeCloudStorageAIServiceCallbackResponse,
@@ -246,6 +252,7 @@ import {
   DescribeSubscribedTopicPolicyResponse,
   ResetCloudStorageRequest,
   DescribeCloudStorageEventsWithAITasksRequest,
+  GetTWeTalkActiveStatusResponse,
   DismissRoomByStrRoomIdFromTRTCRequest,
   CloudStorageTimeData,
   DescribeVideoLicenseRequest,
@@ -375,7 +382,7 @@ import {
   TargetInfo,
   CreateTWeTalkProductConfigRequest,
   BindDevicesResponse,
-  DeleteOtaModuleRequest,
+  InvokeExternalSourceAIServiceTaskResponse,
   DescribeCloudStorageAIServiceRequest,
   DescribeCloudStorageOrderResponse,
   DescribeActivateLicenseServiceRequest,
@@ -447,12 +454,14 @@ import {
   CreateTWeTalkAIBotRequest,
   AuthMiniProgramAppInfo,
   FamilySubDevice,
+  TalkActivationStatusInfo,
   DescribeModelDefinitionRequest,
   DescribeFirmwareTasksResponse,
   ModifyTWeTalkProductConfigRequest,
   GetDeviceLocationHistoryResponse,
   ModifyFenceBindRequest,
   GetLoRaGatewayListResponse,
+  GetTWeTalkActiveStatusRequest,
   DeviceData,
   DirectBindDeviceInFamilyResponse,
   TopicRule,
@@ -774,6 +783,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyFenceBindResponse) => void
   ): Promise<ModifyFenceBindResponse> {
     return this.request("ModifyFenceBind", req, cb)
+  }
+
+  /**
+   * 查询TWeTalk设备激活状态。
+   */
+  async GetTWeTalkActiveStatus(
+    req: GetTWeTalkActiveStatusRequest,
+    cb?: (error: string, rep: GetTWeTalkActiveStatusResponse) => void
+  ): Promise<GetTWeTalkActiveStatusResponse> {
+    return this.request("GetTWeTalkActiveStatus", req, cb)
   }
 
   /**
@@ -1519,6 +1538,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * TWeTalk消耗账单明细。
+   */
+  async GetTWeTalkActiveRecordList(
+    req: GetTWeTalkActiveRecordListRequest,
+    cb?: (error: string, rep: GetTWeTalkActiveRecordListResponse) => void
+  ): Promise<GetTWeTalkActiveRecordListResponse> {
+    return this.request("GetTWeTalkActiveRecordList", req, cb)
+  }
+
+  /**
    * 创建围栏。
    */
   async CreatePositionFence(
@@ -1828,6 +1857,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGatewaySubProductsResponse) => void
   ): Promise<DescribeGatewaySubProductsResponse> {
     return this.request("DescribeGatewaySubProducts", req, cb)
+  }
+
+  /**
+   * TWeTalk设备激活接口。
+   */
+  async ActivateTWeTalk(
+    req: ActivateTWeTalkRequest,
+    cb?: (error: string, rep: ActivateTWeTalkResponse) => void
+  ): Promise<ActivateTWeTalkResponse> {
+    return this.request("ActivateTWeTalk", req, cb)
   }
 
   /**

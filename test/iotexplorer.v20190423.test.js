@@ -268,6 +268,16 @@ it("iotexplorer.v20190423.ModifyFenceBind", async function () {
     }
 })
 
+it("iotexplorer.v20190423.GetTWeTalkActiveStatus", async function () {
+    try {
+       const data = await client.GetTWeTalkActiveStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.InvokeAISearchService", async function () {
     try {
        const data = await client.InvokeAISearchService({})
@@ -1008,6 +1018,16 @@ it("iotexplorer.v20190423.DismissRoomByStrRoomIdFromTRTC", async function () {
     }
 })
 
+it("iotexplorer.v20190423.GetTWeTalkActiveRecordList", async function () {
+    try {
+       const data = await client.GetTWeTalkActiveRecordList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.CreatePositionFence", async function () {
     try {
        const data = await client.CreatePositionFence({})
@@ -1311,6 +1331,16 @@ it("iotexplorer.v20190423.CreateTWeSeeService", async function () {
 it("iotexplorer.v20190423.DescribeGatewaySubProducts", async function () {
     try {
        const data = await client.DescribeGatewaySubProducts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ActivateTWeTalk", async function () {
+    try {
+       const data = await client.ActivateTWeTalk({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

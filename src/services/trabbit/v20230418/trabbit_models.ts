@@ -983,117 +983,133 @@ export interface DeleteRabbitMQServerlessUserResponse {
  */
 export interface RabbitMQClusterInfo {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName?: string
   /**
-   * 地域信息
+   * <p>地域信息</p>
    */
   Region?: string
   /**
-   * 创建时间，毫秒为单位
+   * <p>创建时间，毫秒为单位</p>
    */
   CreateTime?: number
   /**
-   * 集群说明信息
+   * <p>集群说明信息</p>
    */
   Remark?: string
   /**
-   * VPC及网络信息
+   * <p>VPC及网络信息</p>
    */
   Vpcs?: Array<VpcEndpointInfo>
   /**
-   * 可用区信息
+   * <p>可用区信息</p>
    */
   ZoneIds?: Array<number | bigint>
   /**
-   * 虚拟主机数量
+   * <p>虚拟主机数量</p>
    */
   VirtualHostNumber?: number
   /**
-   * 队列数量
+   * <p>队列数量</p>
    */
   QueueNumber?: number
   /**
-   * 每秒生产消息数 单位：条/秒
+   * <p>每秒生产消息数 单位：条/秒</p>
    */
   MessagePublishRate?: number
   /**
-   * 堆积消息数 单位：条
+   * <p>堆积消息数 单位：条</p>
    */
   MessageStackNumber?: number
   /**
-   * 过期时间
+   * <p>过期时间</p>
    */
   ExpireTime?: number
   /**
-   * Channel数量
+   * <p>Channel数量</p>
    */
   ChannelNumber?: number
   /**
-   * Connection数量
+   * <p>Connection数量</p>
    */
   ConnectionNumber?: number
   /**
-   * Consumer数量
+   * <p>Consumer数量</p>
    */
   ConsumerNumber?: number
   /**
-   * Exchang数量
+   * <p>Exchang数量</p>
    */
   ExchangeNumber?: number
   /**
-   * 集群异常信息
+   * <p>集群异常信息</p>
    */
   ExceptionInformation?: string
   /**
-   * 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败
+   * <p>实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败</p>
    */
   ClusterStatus?: number
   /**
-   * 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)
+   * <p>自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)</p>
    */
   AutoRenewFlag?: number
   /**
-   * 是否开启镜像队列策略。1表示开启，0表示没开启。
+   * <p>是否开启镜像队列策略。1表示开启，0表示没开启。</p>
    */
   MirrorQueuePolicyFlag?: number
   /**
-   * 每秒消费消息数 单位：条/秒
+   * <p>每秒消费消息数 单位：条/秒</p>
    */
   MessageConsumeRate?: number
   /**
-   * 集群版本信息
+   * <p>集群版本信息</p>
    */
   ClusterVersion?: string
   /**
-   * 计费模式，0-后付费，1-预付费
+   * <p>计费模式，0-后付费，1-预付费</p>
    */
   PayMode?: number
   /**
-   * 集群类型
+   * <p>集群类型</p>
    */
   InstanceType?: number
   /**
-   * 消息保留时间，单位小时
+   * <p>消息保留时间，单位小时</p>
    */
   MessageRetainTime?: number
   /**
-   * 发送消息流量比例
+   * <p>发送消息流量比例</p>
    */
   SendReceiveRatio?: number
   /**
-   * 消息轨迹保留时间，单位小时
+   * <p>消息轨迹保留时间，单位小时</p>
    */
   TraceTime?: number
   /**
-   * 实例标签列表
+   * <p>实例标签列表</p>
    */
   Tags?: Array<RabbitMQServerlessTag>
+  /**
+   * <p>是否开启弹性tps</p>
+   */
+  ElasticTpsFlag?: boolean
+  /**
+   * <p>弹性tps倍数，默认弹1倍</p>
+   */
+  ElasticTpsRatio?: number
+  /**
+   * <p>最大重投次数</p>
+   */
+  MaxRedeliverCount?: number
+  /**
+   * <p>消费超时时间，单位min</p>
+   */
+  ConsumerTimeout?: number
 }
 
 /**
@@ -1101,11 +1117,11 @@ export interface RabbitMQClusterInfo {
  */
 export interface DescribeRabbitMQServerlessBindingsResponse {
   /**
-   * 路由关系列表
+   * <p>路由关系列表</p>
    */
   BindingInfoList?: Array<RabbitMQBindingListInfo>
   /**
-   * 数量
+   * <p>数量</p>
    */
   TotalCount?: number
   /**
@@ -2164,35 +2180,35 @@ MessageRateOut - 消费速率；
  */
 export interface DescribeRabbitMQServerlessBindingsRequest {
   /**
-   * 实例Id
+   * <p>实例Id</p>
    */
   InstanceId: string
   /**
-   * Vhost参数
+   * <p>Vhost参数</p>
    */
   VirtualHost: string
   /**
-   * 分页offset
+   * <p>分页offset</p>
    */
   Offset?: number
   /**
-   * 分页limit
+   * <p>分页limit</p>
    */
   Limit?: number
   /**
-   * 搜索关键词，根据源exchange名称/目标资源名称/绑定key进行模糊搜索
+   * <p>搜索关键词，根据源exchange名称/目标资源名称进行模糊搜索</p>
    */
   SearchWord?: string
   /**
-   * 根据源Exchange精准搜索过滤
+   * <p>根据源Exchange精准搜索过滤</p>
    */
   SourceExchange?: string
   /**
-   * 根据目标QueueName精准搜索过滤，和DestinationExchange过滤不可同时设置
+   * <p>根据目标QueueName精准搜索过滤，和DestinationExchange过滤不可同时设置</p>
    */
   QueueName?: string
   /**
-   * 根据目标Exchange精准搜索过滤，和QueueName过滤不可同时设置
+   * <p>根据目标Exchange精准搜索过滤，和QueueName过滤不可同时设置</p>
    */
   DestinationExchange?: string
 }
@@ -2285,6 +2301,10 @@ export interface ModifyRabbitMQServerlessExchangeRequest {
    * 备注信息
    */
   Remark?: string
+  /**
+   * 备用交换机
+   */
+  AlternateExchange?: string
 }
 
 /**

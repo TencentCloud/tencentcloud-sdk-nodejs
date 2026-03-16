@@ -218,6 +218,10 @@ HYBRID_PAID:
    * 网关日志投递相关配置
    */
   GatewayLogConfig?: LogConfig
+  /**
+   * 网关相关配置
+   */
+  GatewayConfig?: GatewayConfig
 }
 
 /**
@@ -579,39 +583,21 @@ export interface ModifyNotebookTagsRequest {
 }
 
 /**
- * notebook ssh端口配置
+ * DescribeDataSources返回参数结构体
  */
-export interface SSHConfig {
+export interface DescribeDataSourcesResponse {
   /**
-   * 是否开启ssh
-注意：此字段可能返回 null，表示取不到有效值。
+   * 数据源列表
    */
-  Enable?: boolean
+  DataSourceInfos?: Array<DataSourceInfo>
   /**
-   * 公钥信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 总条数
    */
-  PublicKey?: string
+  TotalCount?: number
   /**
-   * 端口号
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Port?: number
-  /**
-   * 登录命令
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LoginCommand?: string
-  /**
-   * 登录地址是否改变
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsAddressChanged?: boolean
-  /**
-   * POD访问信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PodSSHInfo?: PodSSHInfo
+  RequestId?: string
 }
 
 /**
@@ -645,6 +631,24 @@ export interface Usage {
    * 总共token数目
    */
   TotalTokens?: number
+}
+
+/**
+ * 描述网关相关配置
+ */
+export interface GatewayConfig {
+  /**
+   * 网关类型
+   */
+  GatewayType?: string
+  /**
+   * 网关调度算法：轮询、一致性哈希等
+   */
+  SchedulingAlgorithm?: string
+  /**
+   * 一致性哈希使用的Header字段名
+   */
+  HashHeaderKey?: string
 }
 
 /**
@@ -742,17 +746,87 @@ Filter.Values: 当长度为1时，支持模糊查询; 不为1时，精确查询
 }
 
 /**
- * 代码仓库配置
+ * CreateDataset请求参数结构体
  */
-export interface CodeRepoConfig {
+export interface CreateDatasetRequest {
   /**
-   * 代码仓库Id
+   * 数据集名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头
    */
-  Id: string
+  DatasetName: string
   /**
-   * 代码仓下载目标地址
+   * 数据集类型:
+TYPE_DATASET_TEXT，文本
+TYPE_DATASET_IMAGE，图片
+TYPE_DATASET_TABLE，表格
+TYPE_DATASET_OTHER，其他
    */
-  TargetPath: string
+  DatasetType?: string
+  /**
+   * 数据源cos路径
+   */
+  StorageDataPath?: CosPathInfo
+  /**
+   * 数据集标签cos存储路径
+   */
+  StorageLabelPath?: CosPathInfo
+  /**
+   * 数据集标签
+   */
+  DatasetTags?: Array<Tag>
+  /**
+   * 数据集标注状态:
+STATUS_NON_ANNOTATED，未标注
+STATUS_ANNOTATED，已标注
+   */
+  AnnotationStatus?: string
+  /**
+   * 标注类型:
+ANNOTATION_TYPE_CLASSIFICATION，图片分类
+ANNOTATION_TYPE_DETECTION，目标检测
+ANNOTATION_TYPE_SEGMENTATION，图片分割
+ANNOTATION_TYPE_TRACKING，目标跟踪
+ANNOTATION_TYPE_OCR，OCR
+ANNOTATION_TYPE_TEXT_CLASSIFICATION，文本分类
+   */
+  AnnotationType?: string
+  /**
+   * 标注格式:
+ANNOTATION_FORMAT_TI，TI平台格式
+ANNOTATION_FORMAT_PASCAL，Pascal Voc
+ANNOTATION_FORMAT_COCO，COCO
+ANNOTATION_FORMAT_FILE，文件目录结构
+ANNOTATION_FORMAT_TEXT_TI，文本类型TI平台格式
+ANNOTATION_FORMAT_TXT，文本类型TXT格式
+ANNOTATION_FORMAT_CSV，文本类型CSV格式
+ANNOTATION_FORMAT_JSON，文本类型JSON格式
+   */
+  AnnotationFormat?: string
+  /**
+   * 表头信息
+   */
+  SchemaInfos?: Array<SchemaInfo>
+  /**
+   * 数据是否存在表头
+   */
+  IsSchemaExisted?: boolean
+  /**
+   * 导入文件粒度
+TYPE_TEXT_LINE，按行
+TYPE_TEXT_FILE，按文件
+   */
+  ContentType?: string
+  /**
+   * 数据集建模一级类别。LLM,CV,STRUCTURE,OTHER
+   */
+  DatasetScene?: string
+  /**
+   * 数据集标签。
+   */
+  SceneTags?: Array<string>
+  /**
+   * 数据集CFS配置。仅支持LLM场景
+   */
+  CFSConfig?: CFSConfig
 }
 
 /**
@@ -1033,6 +1107,66 @@ export interface HyperParameter {
 }
 
 /**
+ * DescribeDataSources请求参数结构体
+ */
+export interface DescribeDataSourcesRequest {
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+  /**
+   * 标签过滤条件
+   */
+  TagFilters?: Array<TagFilter>
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 排序的依据字段
+   */
+  OrderField?: string
+  /**
+   * 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列
+   */
+  Order?: string
+}
+
+/**
+ * CreateDataSource请求参数结构体
+ */
+export interface CreateDataSourceRequest {
+  /**
+   * 数据源名称
+   */
+  Name?: string
+  /**
+   * 数据源类型英文名
+   */
+  Type?: string
+  /**
+   * 数据源权限，取值有RW RO
+   */
+  Permission?: string
+  /**
+   * 存储实例ID
+   */
+  StorageId?: string
+  /**
+   * 数据源挂载配置
+   */
+  MountConfigure?: MountConfigureInfo
+  /**
+   * 标签配置
+   */
+  Tags?: Array<Tag>
+}
+
+/**
  * ModifyServiceGroupWeights请求参数结构体
  */
 export interface ModifyServiceGroupWeightsRequest {
@@ -1100,26 +1234,49 @@ export interface RollingUpdate {
 }
 
 /**
- * 外部挂载信息
+ * 代码仓库配置
  */
-export interface VolumeMount {
+export interface CodeRepoConfig {
   /**
-   * cfs的配置信息
+   * 代码仓库Id
    */
-  CFSConfig?: CFSConfig
+  Id: string
   /**
-   * 挂载源类型，CFS、COS、PUBLIC_DATA_SOURCE，默认为CFS
+   * 代码仓下载目标地址
    */
-  VolumeSourceType?: string
+  TargetPath: string
+}
+
+/**
+ * DescribeMountInstance返回参数结构体
+ */
+export interface DescribeMountInstanceResponse {
   /**
-   * 自定义容器内挂载路径
-注意：此字段可能返回 null，表示取不到有效值。
+   * 挂载的实例详情
    */
-  MountPath?: string
+  MountInstance?: MountInstanceInfo
   /**
-   * 挂载数据源时的配置信息
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PublicDataSource?: PublicDataSourceFS
+  RequestId?: string
+}
+
+/**
+ * DescribeMountInstances请求参数结构体
+ */
+export interface DescribeMountInstancesRequest {
+  /**
+   * 数据源类型英文名
+   */
+  Type: string
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 分页大小
+   */
+  Limit?: number
 }
 
 /**
@@ -1130,6 +1287,28 @@ export interface ModifyNotebookTagsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateDataSource请求参数结构体
+ */
+export interface UpdateDataSourceRequest {
+  /**
+   * 数据源ID
+   */
+  Id?: string
+  /**
+   * 数据源名称
+   */
+  Name?: string
+  /**
+   * 数据源权限，取值有RW RO
+   */
+  Permission?: string
+  /**
+   * 数据源挂载配置
+   */
+  MountConfigure?: MountConfigureInfo
 }
 
 /**
@@ -1404,6 +1583,20 @@ export interface CFSConfig {
 }
 
 /**
+ * DescribeMountInstance请求参数结构体
+ */
+export interface DescribeMountInstanceRequest {
+  /**
+   * 数据源类型英文名
+   */
+  Type: string
+  /**
+   * 存储实例ID
+   */
+  StorageId?: string
+}
+
+/**
  * StartNotebook请求参数结构体
  */
 export interface StartNotebookRequest {
@@ -1473,6 +1666,16 @@ export interface DescribeBuildInImagesRequest {
 }
 
 /**
+ * 数据源挂载配置
+ */
+export interface MountConfigureInfo {
+  /**
+   * 数据源的相对路径，支持<@subaccount>这样的占位符
+   */
+  WorkDir?: string
+}
+
+/**
  * StartTrainingTask请求参数结构体
  */
 export interface StartTrainingTaskRequest {
@@ -1511,6 +1714,42 @@ export interface ContainerStatus {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Message: string
+}
+
+/**
+ * DescribeMountInstances返回参数结构体
+ */
+export interface DescribeMountInstancesResponse {
+  /**
+   * 挂载的实例列表
+   */
+  MountInstances?: Array<MountInstanceInfo>
+  /**
+   * 总条数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateMountLimit请求参数结构体
+ */
+export interface UpdateMountLimitRequest {
+  /**
+   * 数据源类型英文名
+   */
+  Type: string
+  /**
+   * 存储实例ID
+   */
+  StorageId: string
+  /**
+   * 限制开关是否开启，只有开启时才有限制，默认关闭
+   */
+  LimitMount: boolean
 }
 
 /**
@@ -1680,6 +1919,10 @@ HYBRID_PAID:
    * 调度策略 [binpack] 优先占满整机，尽量避免碎卡（默认值）[spread] 优先分散在各个节点，确保服务高可用
    */
   SchedulingStrategy?: string
+  /**
+   * 目标工作空间，不为0则进行迁移，源服务只允许在默认空间
+   */
+  TargetProjectId?: number
 }
 
 /**
@@ -1707,6 +1950,16 @@ export interface ChatCompletionRequest {
    * 仅当模型为自行部署的开源大模型时生效。默认 512，模型可生成内容的最长 token 数量，最大不能超过模型支持的上下文长度。
    */
   MaxTokens?: number
+}
+
+/**
+ * CreateMountLimit返回参数结构体
+ */
+export interface CreateMountLimitResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2174,6 +2427,16 @@ export interface Spec {
 }
 
 /**
+ * DescribeDataSource请求参数结构体
+ */
+export interface DescribeDataSourceRequest {
+  /**
+   * 数据源id
+   */
+  Id?: string
+}
+
+/**
  * http get 行为
  */
 export interface HTTPGetAction {
@@ -2231,6 +2494,20 @@ export interface InferGatewayCallInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId: string
+}
+
+/**
+ * CreateDataSource返回参数结构体
+ */
+export interface CreateDataSourceResponse {
+  /**
+   * 数据源ID
+   */
+  Id?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2523,6 +2800,24 @@ export interface HorizontalPodAutoscaler {
 }
 
 /**
+ * CreateTrainingModel返回参数结构体
+ */
+export interface CreateTrainingModelResponse {
+  /**
+   * 模型ID，TrainingModel ID
+   */
+  Id?: string
+  /**
+   * 模型版本ID
+   */
+  TrainingModelVersionId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 资源配置
  */
 export interface ResourceConfigInfo {
@@ -2686,6 +2981,32 @@ export interface Option {
 }
 
 /**
+ * DescribeMountLimits请求参数结构体
+ */
+export interface DescribeMountLimitsRequest {
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列
+   */
+  Order?: string
+  /**
+   * 排序的依据字段
+   */
+  OrderField?: string
+}
+
+/**
  * DeleteExport返回参数结构体
  */
 export interface DeleteExportResponse {
@@ -2781,6 +3102,33 @@ export interface LogIdentity {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Timestamp: string
+}
+
+/**
+ * 挂载的实例列表
+ */
+export interface MountInstanceInfo {
+  /**
+   * 类型英文名
+   */
+  Type?: string
+  /**
+   * 存储实例ID
+   */
+  StorageId?: string
+  /**
+   * 存储实例名称
+   */
+  StorageName?: string
+  /**
+   * 状态，0可挂载 1不可挂载(挂载限制)
+   */
+  Status?: number
+  /**
+   * 额外配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtraConf?: StorageExtraConf
 }
 
 /**
@@ -3112,6 +3460,24 @@ export interface DescribeNotebooksResponse {
   NotebookSet?: Array<NotebookSetItem>
   /**
    * 总条数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMountLimits返回参数结构体
+ */
+export interface DescribeMountLimitsResponse {
+  /**
+   * 挂载限制列表
+   */
+  MountLimits?: Array<MountLimitInfo>
+  /**
+   * 总数
    */
   TotalCount?: number
   /**
@@ -3794,18 +4160,17 @@ export interface DeleteModelServiceRequest {
 }
 
 /**
- * DescribeModelServiceGroup请求参数结构体
+ * DeleteModelServiceAuthToken请求参数结构体
  */
-export interface DescribeModelServiceGroupRequest {
+export interface DeleteModelServiceAuthTokenRequest {
   /**
-   * 服务组ID
+   * 服务组 id
    */
   ServiceGroupId: string
   /**
-   * 服务分类
-   * @deprecated
+   * token 值
    */
-  ServiceCategory?: string
+  AuthTokenValue?: string
 }
 
 /**
@@ -4327,6 +4692,24 @@ export interface DeleteTrainingTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateMountLimit请求参数结构体
+ */
+export interface CreateMountLimitRequest {
+  /**
+   * 数据源类型英文名
+   */
+  Type: string
+  /**
+   * 存储实例ID
+   */
+  StorageId: string
+  /**
+   * 限制开关是否开启，只有开启时才有限制，默认关闭
+   */
+  LimitMount?: boolean
 }
 
 /**
@@ -5218,87 +5601,50 @@ export interface ModelInfo {
 }
 
 /**
- * CreateDataset请求参数结构体
+ * UpdateDataSource返回参数结构体
  */
-export interface CreateDatasetRequest {
+export interface UpdateDataSourceResponse {
   /**
-   * 数据集名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DatasetName: string
+  RequestId?: string
+}
+
+/**
+ * DescribeDataSource返回参数结构体
+ */
+export interface DescribeDataSourceResponse {
   /**
-   * 数据集类型:
-TYPE_DATASET_TEXT，文本
-TYPE_DATASET_IMAGE，图片
-TYPE_DATASET_TABLE，表格
-TYPE_DATASET_OTHER，其他
+   * 数据源信息
    */
-  DatasetType?: string
+  DataSourceInfo?: DataSourceInfo
   /**
-   * 数据源cos路径
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  StorageDataPath?: CosPathInfo
+  RequestId?: string
+}
+
+/**
+ * 外部挂载信息
+ */
+export interface VolumeMount {
   /**
-   * 数据集标签cos存储路径
-   */
-  StorageLabelPath?: CosPathInfo
-  /**
-   * 数据集标签
-   */
-  DatasetTags?: Array<Tag>
-  /**
-   * 数据集标注状态:
-STATUS_NON_ANNOTATED，未标注
-STATUS_ANNOTATED，已标注
-   */
-  AnnotationStatus?: string
-  /**
-   * 标注类型:
-ANNOTATION_TYPE_CLASSIFICATION，图片分类
-ANNOTATION_TYPE_DETECTION，目标检测
-ANNOTATION_TYPE_SEGMENTATION，图片分割
-ANNOTATION_TYPE_TRACKING，目标跟踪
-ANNOTATION_TYPE_OCR，OCR
-ANNOTATION_TYPE_TEXT_CLASSIFICATION，文本分类
-   */
-  AnnotationType?: string
-  /**
-   * 标注格式:
-ANNOTATION_FORMAT_TI，TI平台格式
-ANNOTATION_FORMAT_PASCAL，Pascal Voc
-ANNOTATION_FORMAT_COCO，COCO
-ANNOTATION_FORMAT_FILE，文件目录结构
-ANNOTATION_FORMAT_TEXT_TI，文本类型TI平台格式
-ANNOTATION_FORMAT_TXT，文本类型TXT格式
-ANNOTATION_FORMAT_CSV，文本类型CSV格式
-ANNOTATION_FORMAT_JSON，文本类型JSON格式
-   */
-  AnnotationFormat?: string
-  /**
-   * 表头信息
-   */
-  SchemaInfos?: Array<SchemaInfo>
-  /**
-   * 数据是否存在表头
-   */
-  IsSchemaExisted?: boolean
-  /**
-   * 导入文件粒度
-TYPE_TEXT_LINE，按行
-TYPE_TEXT_FILE，按文件
-   */
-  ContentType?: string
-  /**
-   * 数据集建模一级类别。LLM,CV,STRUCTURE,OTHER
-   */
-  DatasetScene?: string
-  /**
-   * 数据集标签。
-   */
-  SceneTags?: Array<string>
-  /**
-   * 数据集CFS配置。仅支持LLM场景
+   * cfs的配置信息
    */
   CFSConfig?: CFSConfig
+  /**
+   * 挂载源类型，CFS、COS、PUBLIC_DATA_SOURCE，默认为CFS
+   */
+  VolumeSourceType?: string
+  /**
+   * 自定义容器内挂载路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MountPath?: string
+  /**
+   * 挂载数据源时的配置信息
+   */
+  PublicDataSource?: PublicDataSourceFS
 }
 
 /**
@@ -5458,6 +5804,10 @@ UPDATING 更新中
    * 网关日志投递相关配置
    */
   GatewayLogConfig?: LogConfig
+  /**
+   * 网关路由相关配置
+   */
+  GatewayConfig?: GatewayConfig
 }
 
 /**
@@ -5580,21 +5930,27 @@ export interface AuthTokenLimit {
 }
 
 /**
- * CreateTrainingModel返回参数结构体
+ * DeleteDataSource请求参数结构体
  */
-export interface CreateTrainingModelResponse {
+export interface DeleteDataSourceRequest {
   /**
-   * 模型ID，TrainingModel ID
+   * 数据源ID
    */
   Id?: string
+}
+
+/**
+ * DeleteMountLimit请求参数结构体
+ */
+export interface DeleteMountLimitRequest {
   /**
-   * 模型版本ID
+   * 数据源类型英文名
    */
-  TrainingModelVersionId?: string
+  Type?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 存储实例ID
    */
-  RequestId?: string
+  StorageId?: string
 }
 
 /**
@@ -5708,6 +6064,16 @@ export interface DescribeTrainingTasksResponse {
 }
 
 /**
+ * UpdateMountLimit返回参数结构体
+ */
+export interface UpdateMountLimitResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeModelAccelerateTask请求参数结构体
  */
 export interface DescribeModelAccelerateTaskRequest {
@@ -5755,6 +6121,49 @@ export interface DeleteDatasetResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 挂载限制
+ */
+export interface MountLimitInfo {
+  /**
+   * 数据源类型英文名
+   */
+  Type?: string
+  /**
+   * 数据源所属存储实例ID
+   */
+  StorageId?: string
+  /**
+   * 数据源所属存储实例名称
+   */
+  StorageName?: string
+  /**
+   * 限制开关是否开启，只有开启时才有限制
+   */
+  LimitMount?: boolean
+  /**
+   * 创建者uin
+   */
+  Creator?: string
+  /**
+   * 创建者名称
+   */
+  CreatorName?: string
+  /**
+   * 创建时间, 格式为yyyy-mm-ddThh:mm:ssZ
+   */
+  CreateTime?: string
+  /**
+   * 更新时间, 格式为yyyy-mm-ddThh:mm:ssZ
+   */
+  UpdateTime?: string
+  /**
+   * 额外配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtraConf?: StorageExtraConf
 }
 
 /**
@@ -5994,6 +6403,25 @@ export interface DescribeNotebookRequest {
    * notebook id
    */
   Id: string
+}
+
+/**
+ * 存储额外配置
+ */
+export interface StorageExtraConf {
+  /**
+   * cfs的存储类型
+  // HP:通用性能型
+  // SD:通用标准型
+  // TP:turbo性能型
+  // TB:turbo标准型
+  // THP:吞吐型
+   */
+  CFSStorageType?: string
+  /**
+   * cfs的协议
+   */
+  CFSProtocol?: string
 }
 
 /**
@@ -6276,6 +6704,73 @@ export interface ServiceCallInfoV2 {
    * 访问grpc时需携带的虚拟Host
    */
   GrpcHost?: string
+  /**
+   * 网关相关配置
+   */
+  GatewayConfig?: GatewayConfig
+}
+
+/**
+ * 数据源信息
+ */
+export interface DataSourceInfo {
+  /**
+   * 数据源ID
+   */
+  Id?: string
+  /**
+   * 数据源名称
+   */
+  Name?: string
+  /**
+   * 创建者uin
+   */
+  Creator?: string
+  /**
+   * 创建者名称
+   */
+  CreatorName?: string
+  /**
+   * 数据源类型英文名
+   */
+  Type?: string
+  /**
+   * 数据源权限，取值有RW RO
+   */
+  Permission?: string
+  /**
+   * 数据源所属存储实例ID
+   */
+  StorageId?: string
+  /**
+   * 数据源所属存储实例名称
+   */
+  StorageName?: string
+  /**
+   * 数据源挂载配置
+   */
+  MountConfigure?: MountConfigureInfo
+  /**
+   * 创建时间, 格式为yyyy-mm-ddThh:mm:ssZ
+   */
+  CreateTime?: string
+  /**
+   * 更新时间, 格式为yyyy-mm-ddThh:mm:ssZ
+   */
+  UpdateTime?: string
+  /**
+   * 限制开关是否开启，只有开启时才有限制
+   */
+  LimitMount?: boolean
+  /**
+   * 标签配置
+   */
+  Tags?: Array<Tag>
+  /**
+   * 额外配置,对应存储实例的额外配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtraConf?: StorageExtraConf
 }
 
 /**
@@ -6314,6 +6809,42 @@ export interface DescribeBillingResourceGroupRequest {
    * 排序字段; 枚举值: CreateTime (创建时间) ｜ ExpireTime (到期时间)；默认CreateTime
    */
   OrderField?: string
+}
+
+/**
+ * notebook ssh端口配置
+ */
+export interface SSHConfig {
+  /**
+   * 是否开启ssh
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enable?: boolean
+  /**
+   * 公钥信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicKey?: string
+  /**
+   * 端口号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
+  /**
+   * 登录命令
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoginCommand?: string
+  /**
+   * 登录地址是否改变
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsAddressChanged?: boolean
+  /**
+   * POD访问信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PodSSHInfo?: PodSSHInfo
 }
 
 /**
@@ -6549,17 +7080,18 @@ TI.GN7.20XLARGE320.POST: 80C320G T4*4
 }
 
 /**
- * DeleteModelServiceAuthToken请求参数结构体
+ * DescribeModelServiceGroup请求参数结构体
  */
-export interface DeleteModelServiceAuthTokenRequest {
+export interface DescribeModelServiceGroupRequest {
   /**
-   * 服务组 id
+   * 服务组ID
    */
   ServiceGroupId: string
   /**
-   * token 值
+   * 服务分类
+   * @deprecated
    */
-  AuthTokenValue?: string
+  ServiceCategory?: string
 }
 
 /**
@@ -6630,6 +7162,16 @@ export interface DescribeTrainingTaskPodsResponse {
    * pod详细信息
    */
   PodInfoList?: Array<PodInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteDataSource返回参数结构体
+ */
+export interface DeleteDataSourceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6992,6 +7534,16 @@ export interface DescribeTrainingTaskResponse {
    * 训练任务详情
    */
   TrainingTaskDetail?: TrainingTaskDetail
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteMountLimit返回参数结构体
+ */
+export interface DeleteMountLimitResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

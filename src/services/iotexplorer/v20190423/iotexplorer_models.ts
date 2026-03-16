@@ -352,6 +352,40 @@ export interface DescribeTWeTalkProductConfigResponse {
 }
 
 /**
+ * Talk激活审计信息。
+ */
+export interface TalkActivateRecordLogInfo {
+  /**
+   * 产品ID
+   */
+  ProductId?: string
+  /**
+   * 设备名称
+   */
+  DeviceName?: string
+  /**
+   * 激活时间，秒级时间戳
+   */
+  ActiveTime?: number
+  /**
+   * 过期时间，秒级时间戳
+   */
+  ExpireTime?: number
+  /**
+   * TWeTalk类型：1-基础版；2-高级版；3-多模态；
+   */
+  ServiceType?: number
+  /**
+   * 状态: 0-未激活, 1-已激活, 2-已过期, 3-已作废
+   */
+  Status?: number
+  /**
+   * 错误信息
+   */
+  ErrorMsg?: string
+}
+
+/**
  * ModifyPositionFence返回参数结构体
  */
 export interface ModifyPositionFenceResponse {
@@ -1116,6 +1150,24 @@ export interface DescribeAISearchTaskAsyncRequest {
 }
 
 /**
+ * ActivateTWeTalk返回参数结构体
+ */
+export interface ActivateTWeTalkResponse {
+  /**
+   * 设备激活失败返回数据
+   */
+  FailureRecords?: Array<TalkActivationInfo>
+  /**
+   * 设备激活成功返回数据
+   */
+  SuccessRecords?: Array<TalkActivationInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ActivateTWeCallLicense返回参数结构体
  */
 export interface ActivateTWeCallLicenseResponse {
@@ -1136,6 +1188,20 @@ export interface ActivateTWeCallLicenseResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ActivateTWeTalk请求参数结构体
+ */
+export interface ActivateTWeTalkRequest {
+  /**
+   * TWeTalk类型：1-基础版；2-高级版；3-多模态；
+   */
+  ServiceType: number
+  /**
+   * 设备列表, 产品ID_设备名；
+   */
+  DeviceIds?: Array<string>
 }
 
 /**
@@ -1857,6 +1923,42 @@ export interface CreateTWeSeeRecognitionTaskWithFileResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetTWeTalkActiveRecordList请求参数结构体
+ */
+export interface GetTWeTalkActiveRecordListRequest {
+  /**
+   * 最早的时间。
+   */
+  StartTime?: number
+  /**
+   * 查询的最晚时间。
+跟StartTime形成时间段，用于查询时间段中的记录。
+   */
+  EndTime?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 分页的大小。
+默认为10，最大不超过500。
+   */
+  Limit?: number
+  /**
+   * 产品ID
+   */
+  ProductId?: string
+  /**
+   * 设备名称
+   */
+  DeviceName?: string
+  /**
+   * TWeTalk类型：1-基础版；2-高级版；3-多模态；
+   */
+  ServiceType?: Array<number | bigint>
 }
 
 /**
@@ -2779,25 +2881,17 @@ export interface DescribeDevicePositionListRequest {
 }
 
 /**
- * InvokeExternalSourceAIServiceTask返回参数结构体
+ * DeleteOtaModule请求参数结构体
  */
-export interface InvokeExternalSourceAIServiceTaskResponse {
+export interface DeleteOtaModuleRequest {
   /**
-   * 任务是否执行完成
+   * 产品ID
    */
-  Completed?: boolean
+  ProductID: string
   /**
-   * 任务 ID
+   * 模块类型
    */
-  TaskId?: string
-  /**
-   * 任务信息
-   */
-  TaskInfo?: CloudStorageAIServiceTask
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  FwType: string
 }
 
 /**
@@ -2952,6 +3046,28 @@ export interface DescribeFirmwareRequest {
    * 固件模块
    */
   FwType?: string
+}
+
+/**
+ * Talk设备激活信息。
+ */
+export interface TalkActivationInfo {
+  /**
+   * 设备ID，产品ID_设备名称
+   */
+  DeviceId?: string
+  /**
+   * 设备激活状态，0：激活成功；60001：激活码类型不匹配；60002：激活码数量不足；60003：设备不存在；60004：产品不存在；60005：权限不足；60006：设备已激活；60007：无效的参数；60008：系统错误；60009：产品不是码音视频类型
+   */
+  ErrCode?: number
+  /**
+   * 激活错误信息
+   */
+  ErrMessage?: string
+  /**
+   * 过期时间，秒级时间戳
+   */
+  ExpireTime?: number
 }
 
 /**
@@ -3196,6 +3312,24 @@ export interface DescribeLoRaFrequencyRequest {
  * ModifyTWeTalkProductConfig返回参数结构体
  */
 export interface ModifyTWeTalkProductConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetTWeTalkActiveRecordList返回参数结构体
+ */
+export interface GetTWeTalkActiveRecordListResponse {
+  /**
+   * 设备激活记录列表。
+   */
+  ActiveRecords?: Array<TalkActivateRecordLogInfo>
+  /**
+   * 数据总数量。
+   */
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4874,6 +5008,20 @@ export interface DescribeCloudStorageEventsWithAITasksRequest {
    * 通道ID 非NVR设备则不填 NVR设备则必填 默认为无
    */
   ChannelId?: number
+}
+
+/**
+ * GetTWeTalkActiveStatus返回参数结构体
+ */
+export interface GetTWeTalkActiveStatusResponse {
+  /**
+   * 激活状态
+   */
+  TalkActivationRecords?: Array<TalkActivationStatusInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7818,17 +7966,25 @@ export interface BindDevicesResponse {
 }
 
 /**
- * DeleteOtaModule请求参数结构体
+ * InvokeExternalSourceAIServiceTask返回参数结构体
  */
-export interface DeleteOtaModuleRequest {
+export interface InvokeExternalSourceAIServiceTaskResponse {
   /**
-   * 产品ID
+   * 任务是否执行完成
    */
-  ProductID: string
+  Completed?: boolean
   /**
-   * 模块类型
+   * 任务 ID
    */
-  FwType: string
+  TaskId?: string
+  /**
+   * 任务信息
+   */
+  TaskInfo?: CloudStorageAIServiceTask
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9644,6 +9800,24 @@ export interface FamilySubDevice {
 }
 
 /**
+ * Talk激活状态响应定义。
+ */
+export interface TalkActivationStatusInfo {
+  /**
+   * 设备ID，产品ID_设备名称
+   */
+  DeviceId?: string
+  /**
+   * 过期时间，秒级时间戳
+   */
+  ExpireTime?: number
+  /**
+   * TWeTalk类型：1-基础版；2-高级版；3-多模态；
+   */
+  ServiceType?: number
+}
+
+/**
  * DescribeModelDefinition请求参数结构体
  */
 export interface DescribeModelDefinitionRequest {
@@ -9747,6 +9921,16 @@ export interface GetLoRaGatewayListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetTWeTalkActiveStatus请求参数结构体
+ */
+export interface GetTWeTalkActiveStatusRequest {
+  /**
+   * 设备列表， 产品ID_设备名称
+   */
+  DeviceIds?: Array<string>
 }
 
 /**
