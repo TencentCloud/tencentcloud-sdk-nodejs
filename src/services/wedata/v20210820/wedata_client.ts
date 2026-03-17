@@ -163,6 +163,7 @@ import {
   DescribeTaskTableMetricOverviewResponse,
   BaseRole,
   BatchRerunIntegrationTaskInstancesRequest,
+  TaskTypeExtDsVO,
   ParameterTaskInDsDto,
   DescribeWorkflowTaskCountResponse,
   TaskTag,
@@ -170,7 +171,7 @@ import {
   ExtResourceFlagDto,
   DescribeTopTableStatRequest,
   SearchCondition,
-  Rule,
+  DescribeTableSelectRequest,
   AddProjectUserRoleRequest,
   ModifyRuleGroupSubscriptionRequest,
   DescribeDataSourceListResponse,
@@ -182,6 +183,7 @@ import {
   GetCosTokenResponse,
   MoveTasksToFolderRequest,
   OrderFields,
+  BizParams,
   MoveTasksToFolderResponse,
   ParameterTaskOutDsDto,
   GetOfflineDIInstanceListResponse,
@@ -220,6 +222,7 @@ import {
   ReportDatabaseRequest,
   BatchReturn,
   WorkflowExtOpsDto,
+  DatabaseRealViewVO,
   ReportTableResponse,
   IntegrationNodeInfo,
   DescribeRuleGroupResponse,
@@ -331,7 +334,7 @@ import {
   DescribeDsParentFolderTreeRequest,
   DescribeDataServicePublishedApiListResp,
   KillScheduleInstancesResponse,
-  TablePartition,
+  DescribeTaskParamDsResponse,
   ModifyProjectRequest,
   DescribeWorkflowTaskCountRequest,
   DescribeInstanceListRequest,
@@ -370,6 +373,7 @@ import {
   WorkflowScheduleDtoDs,
   Property,
   ModifyRuleTemplateRequest,
+  DescribeTableDdlResponse,
   DescribeRuleExecStatResponse,
   TaskByCycle,
   DagInstancesResponse,
@@ -385,6 +389,7 @@ import {
   LabelTag,
   DescribeEventResponse,
   DescribeOpsMakePlanInstancesRequest,
+  DutyPerson,
   AlarmQuietInterval,
   GenHiveTableDDLSqlRequest,
   BatchCreateIntegrationTaskAlarmsRequest,
@@ -402,6 +407,7 @@ import {
   DescribePendingSubmitTaskInfo,
   BatchUpdateIntegrationTasksResponse,
   TaskLogResponse,
+  TableRecordField,
   QuietPeriod,
   AdhocDetail,
   DescribeInstanceLastLogRequest,
@@ -532,7 +538,7 @@ import {
   TableBasicInfo,
   DescribeAlarmEventsResponse,
   ModifyIntegrationNodeResponse,
-  TaskTypeExtDsVO,
+  DescribeTableContentPreviewResponse,
   TaskTypeExtParamDsVO,
   DescribeIntegrationStatisticsTaskStatusTrendRequest,
   DescribeTableMetaRequest,
@@ -555,6 +561,7 @@ import {
   DeleteOfflineTaskRequest,
   DependencyConfigTimeoutDTO,
   WeightInfo,
+  DescribeDatabaseByNameResponse,
   DescribeDatabaseInfoListResponse,
   ModifyDsFolderResponse,
   CommonContent,
@@ -632,11 +639,14 @@ import {
   InstanceLogInfoOpsDto,
   DeleteFilePathResponse,
   TableScoreStatisticsInfo,
+  DescribeDatabaseMetaRequest,
   FailMessage,
+  DescribeTableSelectResponse,
   RunRerunScheduleInstancesResponse,
   WorkspaceExt,
   DependencyConfig,
   RobAndLockIntegrationTaskRequest,
+  DescribeRealViewDatabasePageRequest,
   GetPaginationTaskScriptRequest,
   InstanceLogVO,
   ModifyTaskInfoResponse,
@@ -721,6 +731,7 @@ import {
   RenewWorkflowOwnerDsResponse,
   RegisterEventListenerRequest,
   BatchRunOpsTaskResponse,
+  DescribeRealViewDatabasePageResponse,
   CheckIntegrationNodeNameExistsResponse,
   AlarmGroup,
   MakePlanInstanceOpsDtoCollection,
@@ -731,7 +742,7 @@ import {
   DescribeInstanceLogFileRequest,
   RuleGroupSubscribe,
   EventListenerDTO,
-  DutyPerson,
+  DescribeTableDdlRequest,
   DeleteTaskLineageRequest,
   DeleteOfflineTaskResponse,
   IntegrationInstanceLog,
@@ -809,7 +820,7 @@ import {
   DiagnoseProResponse,
   DescribeReportTaskDetailResponse,
   UpdateWorkflowOwnerResponse,
-  SetTaskAlarmNewRequest,
+  DescribeLineageColumnsRequest,
   DescribeInstanceListResponse,
   DescribeOpsInstanceLogListRequest,
   UploadContentRequest,
@@ -845,10 +856,11 @@ import {
   DescribeRulesByPageResponse,
   LineageProcessVO,
   AttributeItemDsVO,
-  DescribeTaskParamDsResponse,
+  DescribeDatabaseMetaResponse,
   RuleDimCnt,
   BatchOperateResult,
   DutySchedule,
+  DescribeLineageColumnsResponse,
   DescribeDimensionScoreRequest,
   FindAllFolderRequest,
   DescribeTableSchemaInfoRequest,
@@ -894,9 +906,11 @@ import {
   DescribeRuleGroupTableResponse,
   DailyScoreInfo,
   SuspendIntegrationTaskRequest,
+  TablePartition,
   TaskSubmitPreCheckDetailInfo,
   DescribeDependOpsTasksResponse,
   DeleteRuleTemplateResponse,
+  Rule,
   DescribeRuleTemplateRequest,
   SqlExpression,
   DescribeTaskByCycleRequest,
@@ -904,7 +918,9 @@ import {
   CommonId,
   CreateRuleTemplateRequest,
   DlcRewriteDataInfo,
+  TableRecord,
   WorkFlowExecuteDtoByPage,
+  SetTaskAlarmNewRequest,
   TopTableStat,
   DescribeCodeTemplateDetailRequest,
   DescribeRuleExecDetailResponse,
@@ -939,6 +955,7 @@ import {
   GetIntegrationNodeColumnSchemaResponse,
   StopIntegrationTaskResponse,
   DescribeDsTaskVersionInfoRequest,
+  DescribeTableContentPreviewRequest,
   OpsTaskCanvasDto,
   DescribeRuleTemplatesRequest,
   DescribeDataCheckStatResponse,
@@ -957,12 +974,14 @@ import {
   GetPaginationTaskScriptResponse,
   UserFileDTONew,
   GetInstanceLogRequest,
+  DatabaseRealViewVOPageVO,
   RuleConfig,
   LogContent,
   DataAssetOption,
   TagVoteSum,
   BatchCreateIntegrationTaskAlarmsResponse,
-  DescribeIntegrationStatisticsRequest,
+  DescribeIntegrationTasksRequest,
+  DescribeDatabaseByNameRequest,
   DescribeRuleGroupRequest,
   ListBatchDetailRequest,
   ModifyTaskNameRequest,
@@ -991,7 +1010,7 @@ import {
   RuleGroupPage,
   DeleteDataModelRequest,
   DescribeApproveListResponse,
-  DescribeIntegrationTasksRequest,
+  DescribeIntegrationStatisticsRequest,
   BatchMakeUpIntegrationTasksResponse,
   FunctionResource,
   TaskLockStatus,
@@ -1298,13 +1317,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 元数据模型-字段基础信息查询接口
+   * 根据数据库Id查询数据库元数据，带有数据源和项目信息
    */
-  async DescribeFieldBasicInfo(
-    req: DescribeFieldBasicInfoRequest,
-    cb?: (error: string, rep: DescribeFieldBasicInfoResponse) => void
-  ): Promise<DescribeFieldBasicInfoResponse> {
-    return this.request("DescribeFieldBasicInfo", req, cb)
+  async DescribeDatabaseMeta(
+    req: DescribeDatabaseMetaRequest,
+    cb?: (error: string, rep: DescribeDatabaseMetaResponse) => void
+  ): Promise<DescribeDatabaseMetaResponse> {
+    return this.request("DescribeDatabaseMeta", req, cb)
   }
 
   /**
@@ -1709,14 +1728,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <p style="color:red;">[该接口为 ds 中开发]</p>
-更新工作流（包括工作流基本信息与工作流参数）
-     */
-  async UpdateWorkflowInfo(
-    req: UpdateWorkflowInfoRequest,
-    cb?: (error: string, rep: UpdateWorkflowInfoResponse) => void
-  ): Promise<UpdateWorkflowInfoResponse> {
-    return this.request("UpdateWorkflowInfo", req, cb)
+   * 离线通过表名称获取表信息
+   */
+  async DescribeRealViewDatabasePage(
+    req: DescribeRealViewDatabasePageRequest,
+    cb?: (error: string, rep: DescribeRealViewDatabasePageResponse) => void
+  ): Promise<DescribeRealViewDatabasePageResponse> {
+    return this.request("DescribeRealViewDatabasePage", req, cb)
   }
 
   /**
@@ -1920,6 +1938,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
+修改任务脚本。本接口已废弃，请使用接口ModifyTaskInfoDs。
+     */
+  async ModifyTaskScript(
+    req: ModifyTaskScriptRequest,
+    cb?: (error: string, rep: ModifyTaskScriptResponse) => void
+  ): Promise<ModifyTaskScriptResponse> {
+    return this.request("ModifyTaskScript", req, cb)
+  }
+
+  /**
    * 查询规则详情
    */
   async DescribeRule(
@@ -1970,13 +1999,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 事件管理-触发事件
+   * 查询质量规则列表
    */
-  async TriggerDsEvent(
-    req: TriggerDsEventRequest,
-    cb?: (error: string, rep: TriggerDsEventResponse) => void
-  ): Promise<TriggerDsEventResponse> {
-    return this.request("TriggerDsEvent", req, cb)
+  async DescribeRules(
+    req: DescribeRulesRequest,
+    cb?: (error: string, rep: DescribeRulesResponse) => void
+  ): Promise<DescribeRulesResponse> {
+    return this.request("DescribeRules", req, cb)
   }
 
   /**
@@ -2390,6 +2419,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * <p style="color:red;">[该接口为 ds 中开发]</p>
+更新工作流（包括工作流基本信息与工作流参数）
+     */
+  async UpdateWorkflowInfo(
+    req: UpdateWorkflowInfoRequest,
+    cb?: (error: string, rep: UpdateWorkflowInfoResponse) => void
+  ): Promise<UpdateWorkflowInfoResponse> {
+    return this.request("UpdateWorkflowInfo", req, cb)
+  }
+
+  /**
    * 获取实例列表
    */
   async GetTaskInstance(
@@ -2420,14 +2460,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <p style="color:red;">[注意：该版本只满足广州区部分白名单客户使用]</p>
-修改任务脚本。本接口已废弃，请使用接口ModifyTaskInfoDs。
-     */
-  async ModifyTaskScript(
-    req: ModifyTaskScriptRequest,
-    cb?: (error: string, rep: ModifyTaskScriptResponse) => void
-  ): Promise<ModifyTaskScriptResponse> {
-    return this.request("ModifyTaskScript", req, cb)
+   * 列出血缘中心字段信息
+   */
+  async DescribeLineageColumns(
+    req: DescribeLineageColumnsRequest,
+    cb?: (error: string, rep: DescribeLineageColumnsResponse) => void
+  ): Promise<DescribeLineageColumnsResponse> {
+    return this.request("DescribeLineageColumns", req, cb)
   }
 
   /**
@@ -2518,6 +2557,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CommitIntegrationTaskResponse) => void
   ): Promise<CommitIntegrationTaskResponse> {
     return this.request("CommitIntegrationTask", req, cb)
+  }
+
+  /**
+   * 查询表的select语句
+   */
+  async DescribeTableSelect(
+    req: DescribeTableSelectRequest,
+    cb?: (error: string, rep: DescribeTableSelectResponse) => void
+  ): Promise<DescribeTableSelectResponse> {
+    return this.request("DescribeTableSelect", req, cb)
   }
 
   /**
@@ -2826,13 +2875,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取异步任务执行结果
+   * 查询表的数据预览
    */
-  async GetJobStatus(
-    req: GetJobStatusRequest,
-    cb?: (error: string, rep: GetJobStatusResponse) => void
-  ): Promise<GetJobStatusResponse> {
-    return this.request("GetJobStatus", req, cb)
+  async DescribeTableContentPreview(
+    req: DescribeTableContentPreviewRequest,
+    cb?: (error: string, rep: DescribeTableContentPreviewResponse) => void
+  ): Promise<DescribeTableContentPreviewResponse> {
+    return this.request("DescribeTableContentPreview", req, cb)
   }
 
   /**
@@ -2873,6 +2922,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDsTaskVersionListResponse) => void
   ): Promise<DescribeDsTaskVersionListResponse> {
     return this.request("DescribeDsTaskVersionList", req, cb)
+  }
+
+  /**
+   * 元数据模型-字段基础信息查询接口
+   */
+  async DescribeFieldBasicInfo(
+    req: DescribeFieldBasicInfoRequest,
+    cb?: (error: string, rep: DescribeFieldBasicInfoResponse) => void
+  ): Promise<DescribeFieldBasicInfoResponse> {
+    return this.request("DescribeFieldBasicInfo", req, cb)
   }
 
   /**
@@ -3136,13 +3195,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询质量规则列表
+   * 根据数据库名称和数据源id获取数据库信息
    */
-  async DescribeRules(
-    req: DescribeRulesRequest,
-    cb?: (error: string, rep: DescribeRulesResponse) => void
-  ): Promise<DescribeRulesResponse> {
-    return this.request("DescribeRules", req, cb)
+  async DescribeDatabaseByName(
+    req: DescribeDatabaseByNameRequest,
+    cb?: (error: string, rep: DescribeDatabaseByNameResponse) => void
+  ): Promise<DescribeDatabaseByNameResponse> {
+    return this.request("DescribeDatabaseByName", req, cb)
   }
 
   /**
@@ -3243,6 +3302,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTableInfoListResponse) => void
   ): Promise<DescribeTableInfoListResponse> {
     return this.request("DescribeTableInfoList", req, cb)
+  }
+
+  /**
+   * 事件管理-触发事件
+   */
+  async TriggerDsEvent(
+    req: TriggerDsEventRequest,
+    cb?: (error: string, rep: TriggerDsEventResponse) => void
+  ): Promise<TriggerDsEventResponse> {
+    return this.request("TriggerDsEvent", req, cb)
   }
 
   /**
@@ -3648,6 +3717,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询表的DDL
+   */
+  async DescribeTableDdl(
+    req: DescribeTableDdlRequest,
+    cb?: (error: string, rep: DescribeTableDdlResponse) => void
+  ): Promise<DescribeTableDdlResponse> {
+    return this.request("DescribeTableDdl", req, cb)
+  }
+
+  /**
    * 查询工作流画布
    */
   async DescribeWorkflowCanvasInfo(
@@ -3977,6 +4056,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIntegrationStatisticsResponse) => void
   ): Promise<DescribeIntegrationStatisticsResponse> {
     return this.request("DescribeIntegrationStatistics", req, cb)
+  }
+
+  /**
+   * 获取异步任务执行结果
+   */
+  async GetJobStatus(
+    req: GetJobStatusRequest,
+    cb?: (error: string, rep: GetJobStatusResponse) => void
+  ): Promise<GetJobStatusResponse> {
+    return this.request("GetJobStatus", req, cb)
   }
 
   /**

@@ -148,42 +148,39 @@ export interface SourceConditionForManage {
  */
 export interface ListAggregateConfigRulesRequest {
   /**
-   * 每页限制
+   * <p>每页限制</p>
    */
   Limit: number
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset: number
   /**
-   * 账号组ID
+   * <p>账号组ID</p>
    */
   AccountGroupId: string
   /**
-   * 排序类型, 倒序：desc，顺序：asc
+   * <p>排序类型, 倒序：desc，顺序：asc</p>
    */
   OrderType?: string
   /**
-   * 风险等级
-1：高风险。
-2：中风险。
-3：低风险。
+   * <p>风险等级<br>1：高风险。<br>2：中风险。<br>3：低风险。</p>
    */
   RiskLevel?: Array<number | bigint>
   /**
-   * 规则状态
+   * <p>规则状态</p>
    */
   State?: string
   /**
-   * 评估结果
+   * <p>评估结果</p>
    */
   ComplianceResult?: Array<string>
   /**
-   * 规则名
+   * <p>规则名</p>
    */
   RuleName?: string
   /**
-   * 规则所属账号ID
+   * <p>规则所属账号ID</p>
    */
   RuleOwnerId?: number
 }
@@ -575,11 +572,11 @@ export interface Filter {
  */
 export interface ListAggregateConfigRulesResponse {
   /**
-   * 总数
+   * <p>总数</p>
    */
   Total?: number
   /**
-   * 详情
+   * <p>详情</p>
    */
   Items?: Array<ConfigRule>
   /**

@@ -5303,13 +5303,17 @@ export interface RenewDBInstanceRequest {
  */
 export interface DeleteDBRequest {
   /**
-   * 实例ID，形如mssql-rljoi3bf
+   * <p>实例ID，形如mssql-rljoi3bf</p>
    */
   InstanceId: string
   /**
-   * 数据库名数组
+   * <p>数据库名数组</p>
    */
   Names: Array<string>
+  /**
+   * <p>删除数据库前是否创建备份。</p><p>取值范围：[0, 1]</p><p>默认值：0</p>
+   */
+  NoDoBackup?: number
 }
 
 /**
@@ -6575,9 +6579,9 @@ export interface ModifyDBInstanceNoteRequest {
  */
 export interface DeleteDBResponse {
   /**
-   * 任务流ID
+   * <p>任务流ID</p>
    */
-  FlowId: number
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

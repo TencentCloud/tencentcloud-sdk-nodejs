@@ -626,6 +626,16 @@ export interface DescribeAssetComponentListResponse {
 }
 
 /**
+ * DescribeReverseShellRegexpWhiteListInfo请求参数结构体
+ */
+export interface DescribeReverseShellRegexpWhiteListInfoRequest {
+  /**
+   * 规则ID
+   */
+  RuleID: string
+}
+
+/**
  * DescribeVulImageList请求参数结构体
  */
 export interface DescribeVulImageListRequest {
@@ -661,6 +671,24 @@ export interface DescribeVulImageListRequest {
    * 排序字段
    */
   By?: string
+}
+
+/**
+ * DescribeReverseShellRegexpWhiteList返回参数结构体
+ */
+export interface DescribeReverseShellRegexpWhiteListResponse {
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 列表
+   */
+  List?: Array<RegexpRuleListItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2489,6 +2517,20 @@ export interface CreateVulDefenceEventExportJobRequest {
 }
 
 /**
+ * DescribeReverseShellRegexpWhiteListInfo返回参数结构体
+ */
+export interface DescribeReverseShellRegexpWhiteListInfoResponse {
+  /**
+   * 规则详情
+   */
+  RuleInfo?: RegexpRuleInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 集群自定义参数
  */
 export interface ClusterCustomParameters {
@@ -2513,17 +2555,17 @@ export interface DeleteIgnoreVulRequest {
 }
 
 /**
- * DescribeReverseShellEvents返回参数结构体
+ * DescribeImageDenyEventList返回参数结构体
  */
-export interface DescribeReverseShellEventsResponse {
+export interface DescribeImageDenyEventListResponse {
   /**
-   * 事件总数量
+   * 镜像拦截列表
+   */
+  List?: Array<ImageDenyEvent>
+  /**
+   * 总数量
    */
   TotalCount?: number
-  /**
-   * 反弹shell数组
-   */
-  EventSet?: Array<ReverseShellEventInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2902,6 +2944,16 @@ export interface AbnormalProcessEventTendencyInfo {
    * 待处理自定义规则事件数
    */
   UserDefinedRuleEventCount?: number
+}
+
+/**
+ * UninstallClusterContainerSecurity返回参数结构体
+ */
+export interface UninstallClusterContainerSecurityResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3500,6 +3552,56 @@ export interface DescribeAssetSuperNodeListRequest {
 }
 
 /**
+ * 镜像拦截规则
+ */
+export interface ImageDenyRule {
+  /**
+   * 规则RuleID
+   */
+  RuleID: string
+  /**
+   * 规则名称
+   */
+  RuleName: string
+  /**
+   * 规则类型 RULE_RISK：风险， RULE_PRIVILEGE：特权
+   */
+  RuleType: string
+  /**
+   * 生效的镜像数量
+   */
+  EffectImageCount: number
+  /**
+   * 是否对全部扫描镜像生效。0:全选镜像，1:自选镜像
+   */
+  IsEffectAllImage: number
+  /**
+   * 规则开始生效时间
+   */
+  EffectTime: string
+  /**
+   * 更新时间
+   */
+  UpdateTime: string
+  /**
+   * 操作用户
+   */
+  OperationUin: string
+  /**
+   * 启用状态
+   */
+  Status: number
+  /**
+   * 生效状态 IN_THE_TEST ：观察中，IN_EFFECT：生效中
+   */
+  EffectStatus: string
+  /**
+   * 规则ID
+   */
+  ID: number
+}
+
+/**
  * DescribeVulDefenceHost请求参数结构体
  */
 export interface DescribeVulDefenceHostRequest {
@@ -3871,6 +3973,35 @@ export interface DescribeAssetImageRegistryVulListExportRequest {
    * 镜像唯一ID，可通过DescribeAssetImageRegistryList接口获取
    */
   Id?: number
+}
+
+/**
+ * DescribeMaliciousConnectionWhiteList请求参数结构体
+ */
+export interface DescribeMaliciousConnectionWhiteListRequest {
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤条件。
+<li>RequestType- string - 是否必填：是 - 请求类型，全部请求类型：ALL；域名：DOMAIN；IP: IP</li>
+<li>WhiteDomain- string - 是否必填：否 - 自定义白域名</li>
+<li>WhiteIP- string - 是否必填：否 - 自定义白名单IP</li>
+   */
+  Filters?: Array<RunTimeFilters>
+  /**
+   * 排序方式
+   */
+  Order?: string
+  /**
+   * 排序字段
+   */
+  By?: string
 }
 
 /**
@@ -4962,6 +5093,24 @@ export interface DescribeAccessControlEventsExportRequest {
 }
 
 /**
+ * ModifyAsset返回参数结构体
+ */
+export interface ModifyAssetResponse {
+  /**
+   * 同步任务发送结果
+   */
+  Status?: string
+  /**
+   * 任务id
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ExportVirusList返回参数结构体
  */
 export interface ExportVirusListResponse {
@@ -5055,6 +5204,24 @@ export interface DescribeAssetImageBindRuleInfoResponse {
    * 镜像绑定规则列表
    */
   ImageBindRuleSet?: Array<ImagesBindRuleInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMaliciousConnectionBlackList返回参数结构体
+ */
+export interface DescribeMaliciousConnectionBlackListResponse {
+  /**
+   * 恶意请求白名单总数
+   */
+  TotalCount: number
+  /**
+   * 恶意请求白名单列表
+   */
+  List: Array<MaliciousConnectionRuleInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5481,9 +5648,22 @@ export interface ComplianceContainerDetailInfo {
 }
 
 /**
- * DescribeReverseShellEvents请求参数结构体
+ * DescribeImageDenyEventList请求参数结构体
  */
-export interface DescribeReverseShellEventsRequest {
+export interface DescribeImageDenyEventListRequest {
+  /**
+   * 过滤条件。
+<li>EventType- String - 是否必填：否 -事件类型 EVENT_RISK:风险事件类型，EVENT_PRIVILEGE:特权。</li>
+<li>DealBehavior- String - 是否必填：否 - 执行动作,BEHAVIOR_ALERT:告警，BEHAVIOR_HOLDUP_SUCCESSED:拦截。</li>
+<li>RuleName- string - 是否必填：否 - 规则名称。</li>
+<li>NodeName- string - 是否必填：否 - 节点名称。</li>
+<li>NodeIP- string - 是否必填：否 - 内外IP。</li>
+<li>PublicIP- string - 是否必填：否 - 外网IP。</li>
+<li>ImageName- string - 是否必填：否 - 镜像名称。</li>
+<li>ImageID- string - 是否必填：否 - 镜像ID。</li>
+<li>TimeRange- String -是否必填: 否 -  时间范围，第一个值表示开始时间，第二个值表示结束时间 </li>
+   */
+  Filters?: Array<RunTimeFilters>
   /**
    * 需要返回的数量，默认为10，最大值为100
    */
@@ -5493,16 +5673,11 @@ export interface DescribeReverseShellEventsRequest {
    */
   Offset?: number
   /**
-   * 过滤参数
-InnerNetAlarmShow- int - 是否必填：1 - 内网告警展示 0 - 不展示
-   */
-  Filters?: Array<RunTimeFilters>
-  /**
-   * 升序降序,asc desc
+   * 排序方式：asc/desc
    */
   Order?: string
   /**
-   * 排序字段
+   * 排序字段：告警数量：EventCount，最近生成时间：LatestFoundTime
    */
   By?: string
 }
@@ -6044,6 +6219,11 @@ EVENT_ADD_WHITE：加白
    */
   EventType?: Array<string>
 }
+
+/**
+ * DescribeSecLogDeliveryClsSetting请求参数结构体
+ */
+export type DescribeSecLogDeliveryClsSettingRequest = null
 
 /**
  * 查询镜像绑定的运行时规则信息
@@ -6771,6 +6951,40 @@ export interface DescribeESHitsResponse {
 }
 
 /**
+ * DescribeImageDenyRuleList请求参数结构体
+ */
+export interface DescribeImageDenyRuleListRequest {
+  /**
+   * 过滤条件。
+<li>RuleType- String - 是否必填：否 -规则类型 RULE_RISK：风险， RULE_PRIVILEGE：特权</li>
+<li>EffectStatus- String - 是否必填：否 - 生效状态 IN_THE_TEST ：观察中，IN_EFFECT：生效中。</li>
+<li>RuleName- string - 是否必填：否 - 规则名称。</li>
+<li>Status- string - 是否必填：否 - 开启状态 0：开启，1：关闭。</li>
+   */
+  Filters?: Array<RunTimeFilters>
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 排序方式：asc/desc
+   */
+  Order?: string
+  /**
+   * 排序字段：生效时间：EffectTime，更新时间：UpdateTime
+   */
+  By?: string
+  /**
+   * 置顶已开启规则 true：是 ，否：false
+   */
+  TopTurnOn?: boolean
+}
+
+/**
  * DescribeImageRegistryTimingScanTask返回参数结构体
  */
 export interface DescribeImageRegistryTimingScanTaskResponse {
@@ -7330,6 +7544,159 @@ export interface DescribeAgentDaemonSetCmdRequest {
    * 集群自定义参数
    */
   ClusterCustomParameters?: Array<ClusterCustomParameters>
+}
+
+/**
+ * DescribeImageDenyEventDetail返回参数结构体
+ */
+export interface DescribeImageDenyEventDetailResponse {
+  /**
+   * 事件ID
+   */
+  EventID?: number
+  /**
+   * 事件类型 EVENT_RISK:风险事件类型，EVENT_PRIVILEGE:特权
+   */
+  EventType?: string
+  /**
+   * 规则名称
+   */
+  RuleName?: string
+  /**
+   * 规则RuleID
+   */
+  RuleID?: string
+  /**
+   * 规则类型
+   */
+  RuleType?: string
+  /**
+   * 规则启用状态 0:开启，1:关闭
+   */
+  RuleStatus?: number
+  /**
+   * 规则策略状态 IN_THE_TEST ：观察中，IN_EFFECT：生效中
+   */
+  RuleEffectStatus?: string
+  /**
+   * 规则内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleInfo?: Array<string>
+  /**
+   * 规则描述
+   */
+  RuleDescription?: string
+  /**
+   * 镜像ID
+   */
+  ImageID?: string
+  /**
+   * 镜像名称
+   */
+  ImageName?: string
+  /**
+   * 节点名称
+   */
+  NodeName?: string
+  /**
+   * 内网IP
+   */
+  NodeIP?: string
+  /**
+   * 外网IP
+   */
+  PublicIP?: string
+  /**
+   * 主机Quuid
+   */
+  QUUID?: string
+  /**
+   * 首次生成时间
+   */
+  FoundTime?: string
+  /**
+   * 最近生成时间
+   */
+  LatestFoundTime?: string
+  /**
+   * 事件数量
+   */
+  EventCount?: number
+  /**
+   * 执行动作:
+BEHAVIOR_ALERT:告警，
+BEHAVIOR_HOLDUP_SUCCESSED:拦截
+   */
+  DealBehavior?: string
+  /**
+   * Pod名称
+   */
+  PodName?: string
+  /**
+   * 规则开始拦截时间
+   */
+  RuleEffectTime?: string
+  /**
+   * 事件描述
+   */
+  Description?: string
+  /**
+   * 镜像启动参数
+   */
+  StartParam?: string
+  /**
+   * 解决方案
+   */
+  Solution?: string
+  /**
+   * pod ip
+   */
+  PodIP?: string
+  /**
+   *  pod状态
+   */
+  PodStatus?: string
+  /**
+   * 集群id
+   */
+  ClusterID?: string
+  /**
+   * 节点类型
+   */
+  NodeType?: string
+  /**
+   * 节点id
+   */
+  NodeID?: string
+  /**
+   * 节点唯一id
+   */
+  NodeUniqueID?: string
+  /**
+   * 节点子网id
+   */
+  NodeSubNetID?: string
+  /**
+   * 节点子网名称
+   */
+  NodeSubNetName?: string
+  /**
+   * 节点子网cidr
+   */
+  NodeSubNetCIDR?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 镜像仓库信息
+   */
+  ImageRegistryInfo?: ImageRegistryInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9958,6 +10325,32 @@ export interface ModifyAssetImageScanStopRequest {
 }
 
 /**
+ * DescribeImageDenyRuleSummary返回参数结构体
+ */
+export interface DescribeImageDenyRuleSummaryResponse {
+  /**
+   * 镜像拦截规则总数(含关闭的和开启的)
+   */
+  RuleTotalCount: number
+  /**
+   * 开启的镜像拦截规则数
+   */
+  EnabledRuleCount: number
+  /**
+   * 观察期中的镜像拦截规则数
+   */
+  ObservedRuleCount: number
+  /**
+   * 已生效的镜像拦截规则数
+   */
+  EffectiveRuleCount: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateRefreshTask请求参数结构体
  */
 export interface CreateRefreshTaskRequest {
@@ -10049,6 +10442,27 @@ export interface DescribeESAggregationsRequest {
    * 日志类型列表
    */
   LogTypes?: Array<string>
+}
+
+/**
+ * 白名单正则表达式信息
+ */
+export interface WhiteListRegexpExpressionInfo {
+  /**
+   * 逻辑符号
+与 (AND)
+或 (OR)
+非 (NOT)
+   */
+  LogicSymbol?: string
+  /**
+   * 匹配字段
+   */
+  MatchField?: string
+  /**
+   * 匹配内容
+   */
+  MatchContent?: string
 }
 
 /**
@@ -10411,6 +10825,24 @@ export interface DescribeAbnormalProcessEventsResponse {
 }
 
 /**
+ * DescribeImageDenyRuleList返回参数结构体
+ */
+export interface DescribeImageDenyRuleListResponse {
+  /**
+   * 规则列表
+   */
+  List: Array<ImageDenyRule>
+  /**
+   * 规则总数量
+   */
+  TotalCount: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * InitializeUserComplianceEnvironment返回参数结构体
  */
 export interface InitializeUserComplianceEnvironmentResponse {
@@ -10496,6 +10928,84 @@ export interface VulAffectedImageInfo {
    * 组件列表
    */
   ComponentList?: Array<VulAffectedImageComponentInfo>
+}
+
+/**
+ * 超级节点Pod列表Item信息
+ */
+export interface SuperNodePodListItem {
+  /**
+   * pod名称
+   */
+  PodName?: string
+  /**
+   * podIP
+   */
+  PodIP?: string
+  /**
+   * 节点唯一id
+   */
+  NodeUniqueID?: string
+  /**
+   * 运行状态
+   */
+  Status?: string
+  /**
+   * cpu需求核数
+   */
+  CpuRequest?: number
+  /**
+   * cpu限制核数
+   */
+  CpuLimit?: number
+  /**
+   * 内存需求大小
+   */
+  MemRequest?: number
+  /**
+   * 内存限制大小
+   */
+  MemLimit?: number
+  /**
+   * 命名空间
+   */
+  Namespace?: string
+  /**
+   * 工作负载名称
+   */
+  DeploymentName?: string
+  /**
+   * 工作负载id
+   */
+  DeploymentID?: string
+  /**
+   * 启动时间
+   */
+  StartTime?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 关联容器个数
+   */
+  RelateContainerCount?: number
+  /**
+   * 运行时间
+   */
+  RunningTime?: string
+  /**
+   * PodUid
+   */
+  PodUid?: string
+  /**
+   * 计费核数
+   */
+  ChargeCoresCnt?: number
+  /**
+   * 防护状态
+   */
+  DefendStatus?: string
 }
 
 /**
@@ -12324,6 +12834,11 @@ export interface DescribeRiskDnsListResponse {
 }
 
 /**
+ * DescribeImageDenyRuleSummary请求参数结构体
+ */
+export type DescribeImageDenyRuleSummaryRequest = null
+
+/**
  * DescribeNetworkFirewallPolicyDiscover请求参数结构体
  */
 export interface DescribeNetworkFirewallPolicyDiscoverRequest {
@@ -12579,9 +13094,32 @@ export interface ModifyImageAuthorizedRequest {
 export type DescribeAssetImageScanTaskRequest = null
 
 /**
- * DescribeSecLogDeliveryClsSetting请求参数结构体
+ * DescribeReverseShellRegexpWhiteList请求参数结构体
  */
-export type DescribeSecLogDeliveryClsSettingRequest = null
+export interface DescribeReverseShellRegexpWhiteListRequest {
+  /**
+   * 过滤条件。
+
+RuleName- String - 是否必填：否 - 规则名称
+   */
+  Filters?: Array<RunTimeFilters>
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 排序字段
+   */
+  By?: string
+  /**
+   * 排序方式
+   */
+  Order?: string
+}
 
 /**
  * UpdateNetworkFirewallPolicyDetail返回参数结构体
@@ -12640,6 +13178,20 @@ Name 可取值：ClusterName,ClusterId,ClusterType,Region,ClusterCheckMode,Clust
    * 排序方式 asc,desc
    */
   Order?: string
+}
+
+/**
+ * 镜像拦截事件趋势
+ */
+export interface ImageDenyEventTendency {
+  /**
+   * 日期
+   */
+  Date: string
+  /**
+   * 事件数量
+   */
+  EventCount: number
 }
 
 /**
@@ -12935,6 +13487,33 @@ export interface ModifyVirusScanTimeoutSettingResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeReverseShellEvents请求参数结构体
+ */
+export interface DescribeReverseShellEventsRequest {
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤参数
+InnerNetAlarmShow- int - 是否必填：1 - 内网告警展示 0 - 不展示
+   */
+  Filters?: Array<RunTimeFilters>
+  /**
+   * 升序降序,asc desc
+   */
+  Order?: string
+  /**
+   * 排序字段
+   */
+  By?: string
 }
 
 /**
@@ -13572,6 +14151,24 @@ export interface DescribeAssetImageVirusListExportResponse {
 }
 
 /**
+ * ModifyCompliancePeriodTask请求参数结构体
+ */
+export interface ModifyCompliancePeriodTaskRequest {
+  /**
+   * 要修改的定时任务的ID，由DescribeCompliancePeriodTaskList接口返回。
+   */
+  PeriodTaskId: number
+  /**
+   * 定时任务的周期规则。不填时，不修改。
+   */
+  PeriodRule?: CompliancePeriodTaskRule
+  /**
+   * 设置合规标准。不填时，不修改。
+   */
+  StandardSettings?: Array<ComplianceBenchmarkStandardEnable>
+}
+
+/**
  * DescribeVirusScanSetting请求参数结构体
  */
 export type DescribeVirusScanSettingRequest = null
@@ -13640,6 +14237,35 @@ export interface DescribeExportJobDownloadURLRequest {
    * 任务ID
    */
   JobID: string
+}
+
+/**
+ * DescribeMaliciousConnectionBlackList请求参数结构体
+ */
+export interface DescribeMaliciousConnectionBlackListRequest {
+  /**
+   * 需要返回的数量，默认为10，最大值为100
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤条件。
+<li>RequestType- string - 是否必填：否 - 请求类型，全部请求类型：ALL；域名：DOMAIN；IP: IP</li>
+<li>BlackDomain- string - 是否必填：否 - 自定义黑域名</li>
+<li>BlackIP- string - 是否必填：否 - 自定义黑IP</li>
+   */
+  Filters?: Array<RunTimeFilters>
+  /**
+   * 排序方式
+   */
+  Order?: string
+  /**
+   * 排序字段
+   */
+  By?: string
 }
 
 /**
@@ -16037,13 +16663,39 @@ export interface DescribeVulTopRankingRequest {
 }
 
 /**
- * UninstallClusterContainerSecurity返回参数结构体
+ * 正则规则详情
  */
-export interface UninstallClusterContainerSecurityResponse {
+export interface RegexpRuleInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 规则名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  RuleName: string
+  /**
+   * 启用状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status: boolean
+  /**
+   * 正则表达式列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpressionList: Array<WhiteListRegexpExpressionInfo>
+  /**
+   * 规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleID?: string
+  /**
+   * 最近更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 最近操作账号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperatorUIN?: string
 }
 
 /**
@@ -16109,81 +16761,130 @@ export interface DeleteSearchTemplateResponse {
 }
 
 /**
- * 超级节点Pod列表Item信息
+ * DescribeImageDenyRuleDetail返回参数结构体
  */
-export interface SuperNodePodListItem {
+export interface DescribeImageDenyRuleDetailResponse {
   /**
-   * pod名称
+   * 规则ID
    */
-  PodName?: string
+  ID: number
   /**
-   * podIP
+   * 规则名称
    */
-  PodIP?: string
+  RuleName: string
   /**
-   * 节点唯一id
+   * 规则类型 RULE_RISK：风险， RULE_PRIVILEGE：特权
    */
-  NodeUniqueID?: string
+  RuleType: string
   /**
-   * 运行状态
+   * 生效的镜像数量
    */
-  Status?: string
+  EffectImageCount: number
   /**
-   * cpu需求核数
+   * 是否对全部扫描镜像生效。0:全选镜像，1:自选镜像
    */
-  CpuRequest?: number
+  IsEffectAllImage: number
   /**
-   * cpu限制核数
+   * 规则开始生效时间
    */
-  CpuLimit?: number
+  EffectTime: string
   /**
-   * 内存需求大小
+   * 更新时间
    */
-  MemRequest?: number
+  UpdateTime: string
   /**
-   * 内存限制大小
+   * 操作用户
    */
-  MemLimit?: number
+  OperationUin: string
   /**
-   * 命名空间
+   * 生效状态 IN_THE_TEST ：观察中，IN_EFFECT：生效中
    */
-  Namespace?: string
+  EffectStatus: string
   /**
-   * 工作负载名称
+   * 规则描述
    */
-  DeploymentName?: string
+  RuleDescription: string
   /**
-   * 工作负载id
+   * 启用状态 0:开启，1:关闭
    */
-  DeploymentID?: string
+  Status: number
   /**
-   * 启动时间
+   * 漏洞，0:未选中，1:选中
    */
-  StartTime?: string
+  Vul: number
   /**
-   * 创建时间
+   * cve编号
    */
-  CreateTime?: string
+  CVEIDSet: Array<string>
   /**
-   * 关联容器个数
+   * 组件编号
    */
-  RelateContainerCount?: number
+  ComponentSet: Array<string>
   /**
-   * 运行时间
+   * 漏洞分类
    */
-  RunningTime?: string
+  VulClassSet: Array<string>
   /**
-   * PodUid
+   * 漏洞等级
    */
-  PodUid?: string
+  VulLevelSet: Array<string>
   /**
-   * 计费核数
+   * 漏洞标签
    */
-  ChargeCoresCnt?: number
+  VulLabelSet: Array<string>
   /**
-   * 防护状态
+   * 木马，0:未选中，1:选中
    */
-  DefendStatus?: string
+  Virus: number
+  /**
+   * 木马md5列表
+   */
+  VirusMD5Set: Array<string>
+  /**
+   * 木马等级
+   */
+  VirusLevelSet: Array<string>
+  /**
+   * 病毒名
+   */
+  VirusName: Array<string>
+  /**
+   * 敏感信息，0:未选中，1:选中
+   */
+  Risk: number
+  /**
+   * 敏感等级
+   */
+  RiskLevelSet: Array<string>
+  /**
+   * 敏感信息分类
+   */
+  RiskType: Array<string>
+  /**
+   * 特权启动 0:不允许，1:允许
+   */
+  PrivilegeRun: number
+  /**
+   * 特权类型,
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivilegeDetail: Array<string>
+  /**
+   * 镜像ID列表
+   */
+  EffectImageSet: Array<string>
+  /**
+   * 多少天后生效
+   */
+  EffectDay: number
+  /**
+   * 规则RuelD
+   */
+  RuleID: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -17052,6 +17753,40 @@ export interface ModifyAbnormalProcessStatusRequest {
 }
 
 /**
+ * DescribeNewestVul返回参数结构体
+ */
+export interface DescribeNewestVulResponse {
+  /**
+   * 漏洞PocID
+   */
+  PocID?: string
+  /**
+   * 漏洞名称
+   */
+  VulName?: string
+  /**
+   * 披露时间
+   */
+  SubmitTime?: string
+  /**
+   * 应急漏洞风险情况：NOT_SCAN：未扫描，SCANNING：扫描中，SCANNED：已扫描
+   */
+  Status?: string
+  /**
+   * 漏洞CVEID
+   */
+  CVEID?: string
+  /**
+   * 漏洞是否支持防御 0:不支持 1:支持
+   */
+  SupportDefense?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeVulDetail请求参数结构体
  */
 export interface DescribeVulDetailRequest {
@@ -17635,21 +18370,13 @@ export interface DeleteAbnormalProcessRulesRequest {
 export type CreateNetworkFirewallClusterRefreshRequest = null
 
 /**
- * ModifyCompliancePeriodTask请求参数结构体
+ * DescribeImageDenyEventDetail请求参数结构体
  */
-export interface ModifyCompliancePeriodTaskRequest {
+export interface DescribeImageDenyEventDetailRequest {
   /**
-   * 要修改的定时任务的ID，由DescribeCompliancePeriodTaskList接口返回。
+   * 事件ID
    */
-  PeriodTaskId: number
-  /**
-   * 定时任务的周期规则。不填时，不修改。
-   */
-  PeriodRule?: CompliancePeriodTaskRule
-  /**
-   * 设置合规标准。不填时，不修改。
-   */
-  StandardSettings?: Array<ComplianceBenchmarkStandardEnable>
+  EventID: number
 }
 
 /**
@@ -18163,6 +18890,122 @@ export interface EventEscapeImageInfo {
    * 解决方案
    */
   Solution?: string
+}
+
+/**
+ * 镜像拦截事件
+ */
+export interface ImageDenyEvent {
+  /**
+   * 事件类型 EVENT_RISK:风险事件类型，EVENT_PRIVILEGE:特权
+   */
+  EventType?: string
+  /**
+   * 规则名称
+   */
+  RuleName?: string
+  /**
+   * 规则RuleID
+   */
+  RuleID?: string
+  /**
+   * 规则类型
+   */
+  RuleType?: string
+  /**
+   * 规则启用状态 0:开启，1:关闭
+   */
+  RuleStatus?: number
+  /**
+   * 规则策略状态 IN_THE_TEST ：观察中，IN_EFFECT：生效中
+   */
+  RuleEffectStatus?: string
+  /**
+   * 规则内容
+   */
+  RuleInfo?: Array<string>
+  /**
+   * 规则描述
+   */
+  RuleDescription?: string
+  /**
+   * 镜像ID
+   */
+  ImageID?: string
+  /**
+   * 镜像名称
+   */
+  ImageName?: string
+  /**
+   * 节点名称
+   */
+  NodeName?: string
+  /**
+   * 内网IP
+   */
+  NodeIP?: string
+  /**
+   * 主机Quuid
+   */
+  QUUID?: string
+  /**
+   * 首次生成时间
+   */
+  FoundTime?: string
+  /**
+   * 最近生成时间
+   */
+  LatestFoundTime?: string
+  /**
+   * 事件数量
+   */
+  EventCount?: number
+  /**
+   * 执行动作:
+BEHAVIOR_ALERT:告警，
+BEHAVIOR_HOLDUP_SUCCESSED:拦截
+   */
+  DealBehavior?: string
+  /**
+   * 事件ID
+   */
+  EventID?: number
+  /**
+   * 外网IP
+   */
+  PublicIP?: string
+  /**
+   * 节点ID
+   */
+  NodeID?: string
+  /**
+   * 集群ID
+   */
+  ClusterID?: string
+  /**
+   * 节点类型
+   */
+  NodeType?: string
+  /**
+   * 超级节点唯一id
+   */
+  NodeUniqueID?: string
+  /**
+   * pod ip
+   */
+  PodIP?: string
+  /**
+   * pod name
+   */
+  PodName?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 镜像仓库信息
+   */
+  ImageRegistryInfo?: ImageRegistryInfo
 }
 
 /**
@@ -18984,6 +19827,24 @@ export interface DescribeReverseShellDetailResponse {
 }
 
 /**
+ * DescribeReverseShellEvents返回参数结构体
+ */
+export interface DescribeReverseShellEventsResponse {
+  /**
+   * 事件总数量
+   */
+  TotalCount?: number
+  /**
+   * 反弹shell数组
+   */
+  EventSet?: Array<ReverseShellEventInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClusterSummary请求参数结构体
  */
 export type DescribeClusterSummaryRequest = null
@@ -19020,6 +19881,74 @@ export interface ModifyAbnormalProcessStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 恶意外连黑白名单信息
+ */
+export interface MaliciousConnectionRuleInfo {
+  /**
+   * 枚举：
+IP: 表示ipv4或者ipv6
+DOMAIN: 表示域名
+   */
+  RuleType: string
+  /**
+   * 自定义黑白名单的域名/IP
+   */
+  Address: string
+  /**
+   * 创建时间
+   */
+  CreatedTime: string
+  /**
+   * 更新时间
+   */
+  UpdateTime: string
+  /**
+   * 备注
+   */
+  Remark: string
+  /**
+   * 规则ID
+   */
+  RuleID: number
+}
+
+/**
+ * 正则规则列表Item
+ */
+export interface RegexpRuleListItem {
+  /**
+   * 规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleID?: string
+  /**
+   * 规则名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleName?: string
+  /**
+   * 生效表达式个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EffectiveExpression?: number
+  /**
+   * 最新编辑时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 最近编辑账号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperatorUin?: string
+  /**
+   * 启用状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: boolean
 }
 
 /**
@@ -19821,21 +20750,17 @@ export interface DescribeSearchLogsResponse {
 }
 
 /**
- * ModifyAsset返回参数结构体
+ * DescribeImageDenyEventTendency请求参数结构体
  */
-export interface ModifyAssetResponse {
+export interface DescribeImageDenyEventTendencyRequest {
   /**
-   * 同步任务发送结果
+   * 开始时间
    */
-  Status?: string
+  StartTime: string
   /**
-   * 任务id
+   * 结束时间
    */
-  TaskId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  EndTime: string
 }
 
 /**
@@ -20094,6 +21019,24 @@ export interface CheckNetworkFirewallPolicyYamlResponse {
 }
 
 /**
+ * DescribeImageDenyEventTendency返回参数结构体
+ */
+export interface DescribeImageDenyEventTendencyResponse {
+  /**
+   * 镜像拦截成功事件趋势
+   */
+  DenyList: Array<ImageDenyEventTendency>
+  /**
+   * 镜像拦截告警事件趋势
+   */
+  AlarmList: Array<ImageDenyEventTendency>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeComplianceTaskAssetSummary返回参数结构体
  */
 export interface DescribeComplianceTaskAssetSummaryResponse {
@@ -20164,6 +21107,24 @@ export interface DescribeNetworkFirewallClusterRefreshStatusResponse {
    * 任务状态，可能为：Task_Running,Task_Succ,Task_Error,Task_NoExist
    */
   TaskStatus?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMaliciousConnectionWhiteList返回参数结构体
+ */
+export interface DescribeMaliciousConnectionWhiteListResponse {
+  /**
+   * 恶意请求白名单总数
+   */
+  TotalCount: number
+  /**
+   * 恶意请求白名单列表
+   */
+  List: Array<MaliciousConnectionRuleInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -21494,37 +22455,13 @@ export interface RiskSyscallWhiteListInfo {
 }
 
 /**
- * DescribeNewestVul返回参数结构体
+ * DescribeImageDenyRuleDetail请求参数结构体
  */
-export interface DescribeNewestVulResponse {
+export interface DescribeImageDenyRuleDetailRequest {
   /**
-   * 漏洞PocID
+   * 规则RuleID
    */
-  PocID?: string
-  /**
-   * 漏洞名称
-   */
-  VulName?: string
-  /**
-   * 披露时间
-   */
-  SubmitTime?: string
-  /**
-   * 应急漏洞风险情况：NOT_SCAN：未扫描，SCANNING：扫描中，SCANNED：已扫描
-   */
-  Status?: string
-  /**
-   * 漏洞CVEID
-   */
-  CVEID?: string
-  /**
-   * 漏洞是否支持防御 0:不支持 1:支持
-   */
-  SupportDefense?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  RuleID: string
 }
 
 /**

@@ -410,7 +410,7 @@ export interface DescribeLoginEventRequest {
    */
   Offset?: number
   /**
-   * 分页每页记录数，默认20
+   * 分页每页记录数，默认20，最大200
    */
   Limit?: number
 }
@@ -2093,6 +2093,10 @@ export interface CreateAclRequest {
    * 是否允许键盘记录
    */
   AllowKeyboardLogger?: boolean
+  /**
+   * 访问串有效期最大时长，秒数，允许使用访问串时需大于0且必须为86400整数倍
+   */
+  MaxAccessCredentialDuration?: number
 }
 
 /**
@@ -2669,6 +2673,10 @@ export interface ModifyAclRequest {
    * 是否允许键盘记录
    */
   AllowKeyboardLogger?: boolean
+  /**
+   * 访问串有效期最大时长，秒数，允许使用访问串时需大于0且必须为86400整数倍
+   */
+  MaxAccessCredentialDuration?: number
 }
 
 /**
@@ -4425,7 +4433,7 @@ export interface DescribeOperationEventRequest {
    */
   Offset?: number
   /**
-   * 分页每页记录数，默认20
+   * 分页每页记录数，默认20，最大200
    */
   Limit?: number
 }
@@ -5704,6 +5712,22 @@ export interface Resource {
    * 堡垒机实例对应的零信任实例id
    */
   IOAResourceId?: string
+  /**
+   * 资源类型 免费版/标准版/专业版 /国密版 free/standard/pro/gm
+   */
+  ResourceEdition?: string
+  /**
+   * 计费周期 年：y，月：m，日：d，时：h，分：M，秒：s，一次性购买：p
+   */
+  TimeUnit?: string
+  /**
+   * 计费时长
+   */
+  TimeSpan?: number
+  /**
+   * 计费模式 0后付费，1预付费
+   */
+  PayMode?: number
 }
 
 /**
@@ -6005,6 +6029,10 @@ export interface Acl {
    * 权限所属工单名称
    */
   TicketName?: string
+  /**
+   * 访问串有效期最大时长，秒数，允许使用访问串时需大于0且必须为86400整数倍
+   */
+  MaxAccessCredentialDuration?: number
 }
 
 /**

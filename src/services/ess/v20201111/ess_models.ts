@@ -1403,6 +1403,10 @@ export interface CreateFlowByFilesRequest {
    * 是否开启发起合同审批，默认：false（不开启），开启后，发起合同（StartFlow），会提交电子签内置的审批流
    */
   Workflow?: boolean
+  /**
+   * 发起合同流程时对合同流程的部分操作加以限制的配置。
+   */
+  FlowOperateLimit?: FlowOperateLimit
 }
 
 /**
@@ -3004,20 +3008,13 @@ export interface DescribeBillUsageDetailResponse {
 }
 
 /**
- * 合同摘要
+ * 发起合同流程时对合同流程的部分操作加以限制的配置。
  */
-export interface ContractSummary {
+export interface FlowOperateLimit {
   /**
-   * 提取内容分类：
-Base 合同信息
-Identity 主体信息
-Performance 履约条款
+   * 发起合同流程时，对签署完成后是否能发起对应的解除合同加以限制：<ul><li><b>false（默认值）</b>: 合同流程完成签署后，支持发起对应的解除协议。</li><li><b>true </b>: 合同流程完成签署后，<b>不支持</b>发起对应的解除协议。</li></ul>
    */
-  Name?: string
-  /**
-   * 详细信息
-   */
-  Infos?: Array<ContractSummaryInfo>
+  NoRelease?: boolean
 }
 
 /**
@@ -4540,9 +4537,9 @@ export interface CreateBatchContractReviewTaskRequest {
    */
   Operator: UserInfo
   /**
-   * 合同审查的PDF文件资源编号列表，通过[UploadFiles](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)接口获取PDF文件资源编号。 
+   * 合同审查的PDF、WORD文件资源编号列表，通过[UploadFiles](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)接口获取PDF、WORD文件资源编号。 
 
-注:  `目前，此接口仅支持5个文件发起。每个文件限制在10M以下，文件必须是PDF格式`
+注:  `目前，此接口仅支持5个文件发起。每个文件限制在10M以下，文件必须是PDF、WORD格式`
    */
   ResourceIds: Array<string>
   /**
@@ -4557,14 +4554,21 @@ export interface CreateBatchContractReviewTaskRequest {
    */
   PolicyType?: number
   /**
-   * 合同审查中的角色信息，通过明确入参角色的名称和描述，可以提高合同审查的效率和准确性。用户不做配置时大模型会根据合同内容推荐出风险识别角色的名称和描述信息。
+   * 合同审查中的角色信息，通过明确入参角色的名称和描述，可以提高合同审查的效率和准确性。用户不做配置时大模型会根据合同内容推荐出风险识别角色的名称和描述信息。(Depricated)
    */
   Role?: RiskIdentificationRoleInfo
   /**
-   * 用户配置的审查清单ID，基于此清单ID批量创建合同审查任务，为32位字符串。
-[点击查看审查清单ID在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/2c6588549e28ca49bd8bb7f4a072b19e.png)。如果用户不做此配置大模型会根据合同内容在当前企业下的审查清单和系统默认的清单中选择一个清单进行审查。
+   * 合同审查中的角色信息，通过明确入参角色的名称和描述，可以提高合同审查的效率和准确性。用户不做配置时大模型会根据合同内容推荐出风险识别角色的名称和描述信息。
+   */
+  Roles?: Array<RiskIdentificationRoleInfo>
+  /**
+   * 用户配置的审查清单ID，基于此清单ID批量创建合同审查任务，为32位字符串。[点击查看审查清单ID在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/2c6588549e28ca49bd8bb7f4a072b19e.png)。如果用户不做此配置大模型会根据合同内容在当前企业下的审查清单和系统默认的清单中选择一个清单进行审查。(Depricated)
    */
   ChecklistId?: string
+  /**
+   * 用户配置的审查清单ID，基于此清单ID批量创建合同审查任务，为32位字符串。[点击查看审查清单ID在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/2c6588549e28ca49bd8bb7f4a072b19e.png)。如果用户不做此配置大模型会根据合同内容在当前企业下的审查清单和系统默认的清单中选择一个清单进行审查。
+   */
+  ChecklistIds?: Array<string>
   /**
    * 代理企业和员工的信息。
 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
@@ -4686,6 +4690,23 @@ export interface DescribeThirdPartyAuthCodeRequest {
 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
    */
   Agent?: Agent
+}
+
+/**
+ * 合同摘要
+ */
+export interface ContractSummary {
+  /**
+   * 提取内容分类：
+Base 合同信息
+Identity 主体信息
+Performance 履约条款
+   */
+  Name?: string
+  /**
+   * 详细信息
+   */
+  Infos?: Array<ContractSummaryInfo>
 }
 
 /**
@@ -10006,9 +10027,13 @@ export interface CreateSealPolicyRequest {
  */
 export interface DescribeContractReviewTaskResponse {
   /**
-   * 用于审查任务的审查清单ID。注意：如果用户没有配置清单时此值可能为空，需要等大模型根据合同内容推荐出可以使用的审查清单。
+   * 用于审查任务的审查清单ID（Depricated）。注意：如果用户没有配置清单时此值可能为空，需要等大模型根据合同内容推荐出可以使用的审查清单。
    */
   ChecklistId?: string
+  /**
+   * 用于审查任务的审查清单ID。注意：如果用户没有配置清单时此值可能为空，需要等大模型根据合同内容推荐出可以使用的审查清单。
+   */
+  ChecklistIds?: Array<string>
   /**
    * 合同审查任务创建时间。
    */
@@ -10029,7 +10054,7 @@ export interface DescribeContractReviewTaskResponse {
    */
   PolicyType?: number
   /**
-   * 合同审查的PDF文件资源ID。
+   * 合同审查的PDF、WORD文件资源ID。
    */
   ResourceId?: string
   /**
@@ -10039,10 +10064,14 @@ export interface DescribeContractReviewTaskResponse {
    */
   Risks?: Array<OutputRisk>
   /**
-   * 合同审查中的角色信息。注意： `如果用户没有配置审查角色时此值可能为null，需要等大模型根据合同内容推荐出审查角色信息。`
+   * 合同审查中的角色信息（Depricated）。注意： `如果用户没有配置审查角色时此值可能为null，需要等大模型根据合同内容推荐出审查角色信息。`
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Role?: RiskIdentificationRoleInfo
+  /**
+   * 合同审查中的角色信息。注意： `如果用户没有配置审查角色时此值可能为null，需要等大模型根据合同内容推荐出审查角色信息。`
+   */
+  Roles?: Array<RiskIdentificationRoleInfo>
   /**
    * 合同审查任务状态。
 状态如下：
@@ -11652,6 +11681,10 @@ export interface CreateFlowRequest {
    * 是否开启发起合同审批，默认：false（不开启），开启后，发起合同（StartFlow），会提交电子签内置的审批流
    */
   Workflow?: boolean
+  /**
+   * 发起合同流程时对合同流程的部分操作加以限制的配置。
+   */
+  FlowOperateLimit?: FlowOperateLimit
 }
 
 /**

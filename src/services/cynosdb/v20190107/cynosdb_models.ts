@@ -7752,6 +7752,14 @@ export interface DescribeRollbackTimeRangeRequest {
    * 集群ID
    */
   ClusterId: string
+  /**
+   * 保险箱id
+   */
+  VaultId?: string
+  /**
+   * 保险箱地域
+   */
+  VaultRegion?: string
 }
 
 /**
@@ -10619,6 +10627,10 @@ export interface CreateBackupRequest {
    * 备注名
    */
   BackupName?: string
+  /**
+   * 	投递到保险箱的信息
+   */
+  Vaults?: Array<CreateBackupVaultItem>
 }
 
 /**
@@ -11730,6 +11742,10 @@ export interface RollBackClusterRequest {
    * 按时间点回档模式，full: 普通; db: 快速; table: 极速  （默认是普通）
    */
   RollbackMode?: string
+  /**
+   * 保险箱id
+   */
+  VaultId?: string
 }
 
 /**

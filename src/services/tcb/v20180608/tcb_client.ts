@@ -42,6 +42,7 @@ import {
   ModifyEnvResponse,
   BindCloudBaseAccessDomainResponse,
   LogServiceInfo,
+  DescribeCurveDataResponse,
   DescribeBaasPackageListRequest,
   ClsInfo,
   DescribeAuthDomainsResponse,
@@ -132,6 +133,7 @@ import {
   DeleteCloudBaseGWDomainRequest,
   DescribeTablesRequest,
   DescribeUserListRequest,
+  DescribeCurveDataRequest,
   DescribeStaticStoreResponse,
   ListTablesRequest,
   DescribeQuotaDataRequest,
@@ -718,13 +720,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 销毁静态托管资源，该接口创建异步销毁任务，资源最终状态可从DestroyStaticStore接口查看
+   * 根据指定指标名称，查询某环境在指定时间范围内的监控数据，返回按统计粒度聚合后的时序数据。
    */
-  async DestroyStaticStore(
-    req: DestroyStaticStoreRequest,
-    cb?: (error: string, rep: DestroyStaticStoreResponse) => void
-  ): Promise<DestroyStaticStoreResponse> {
-    return this.request("DestroyStaticStore", req, cb)
+  async DescribeCurveData(
+    req: DescribeCurveDataRequest,
+    cb?: (error: string, rep: DescribeCurveDataResponse) => void
+  ): Promise<DescribeCurveDataResponse> {
+    return this.request("DescribeCurveData", req, cb)
   }
 
   /**
@@ -785,6 +787,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteCloudBaseGWDomainResponse) => void
   ): Promise<DeleteCloudBaseGWDomainResponse> {
     return this.request("DeleteCloudBaseGWDomain", req, cb)
+  }
+
+  /**
+   * 销毁静态托管资源，该接口创建异步销毁任务，资源最终状态可从DestroyStaticStore接口查看
+   */
+  async DestroyStaticStore(
+    req: DestroyStaticStoreRequest,
+    cb?: (error: string, rep: DestroyStaticStoreResponse) => void
+  ): Promise<DestroyStaticStoreResponse> {
+    return this.request("DestroyStaticStore", req, cb)
   }
 
   /**

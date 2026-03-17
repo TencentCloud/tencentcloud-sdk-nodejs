@@ -18,88 +18,92 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  TagSpecification,
-  StartMachinesResponse,
-  NativeNodeInfo,
-  HealthCheckTemplateRule,
-  DescribeClustersRequest,
-  GPUConfig,
-  DescribeClusterMachinesRequest,
-  HealthCheckPolicyRule,
-  DeleteHealthCheckPolicyRequest,
-  CreateNodePoolResponse,
-  SetMachineLoginResponse,
   CreateNativeNodePoolParam,
-  DescribeNodePoolsResponse,
-  ExternalNodeInfo,
   DescribeClusterInstancesResponse,
-  AutoUpgradeOptions,
   AutoscalingAdded,
-  Instance,
   DescribeHealthCheckPolicyBindingsRequest,
-  NodeCountSummary,
-  SuperNodePoolInfo,
-  RuntimeConfig,
-  Label,
-  HealthCheckPolicyBinding,
-  CreateHealthCheckPolicyRequest,
-  ModifyClusterMachineRequest,
-  InstanceExtraArgs,
-  MachineUpgradeSettings,
-  DeleteClusterMachinesResponse,
-  StartMachinesRequest,
-  RebootMachinesResponse,
-  InstanceChargePrepaid,
-  DeleteNodePoolResponse,
-  Tag,
-  MachineSetScaling,
-  ModifyNodePoolRequest,
+  DescribeGPUInfoResponse,
   SuperNodeInfo,
-  UpdateNativeNodePoolParam,
-  DeleteNodePoolRequest,
+  DescribeClusterMachinesResponse,
   Annotation,
-  ModifyClusterMachineResponse,
-  DescribeClusterInstancesRequest,
-  DeleteHealthCheckPolicyResponse,
-  Machine,
-  SetMachineLoginRequest,
-  GPUParams,
+  GPUConfig,
   DeleteClusterMachinesRequest,
-  LifecycleConfig,
   RebootMachinesRequest,
-  ModifyNodePoolResponse,
-  RegularNodePoolInfo,
-  StopMachinesRequest,
-  Taint,
-  Filter,
-  DescribeHealthCheckPoliciesRequest,
-  DescribeHealthCheckTemplateResponse,
+  IntOrString,
   CreateNodePoolRequest,
-  RegularNodeInfo,
   DescribeHealthCheckPolicyBindingsResponse,
-  NativeNodePoolInfo,
   DescribeNodePoolsRequest,
   NodePool,
-  DescribeClusterMachinesResponse,
-  InstanceAdvancedSettings,
-  IntOrString,
-  ExternalNodePoolInfo,
-  StopMachinesResponse,
-  DescribeHealthCheckTemplateRequest,
-  DescribeHealthCheckPoliciesResponse,
-  ManagementConfig,
-  HealthCheckTemplate,
-  InternetAccessible,
-  ModifyHealthCheckPolicyRequest,
-  Cluster,
+  Instance,
+  NativeNodeInfo,
   ManuallyAdded,
-  DescribeClustersResponse,
+  Tag,
   ModifyHealthCheckPolicyResponse,
-  SortBy,
-  HealthCheckPolicy,
+  StopMachinesResponse,
+  HealthCheckTemplate,
+  DescribeClustersRequest,
+  Label,
+  CreateHealthCheckPolicyRequest,
+  MachineUpgradeSettings,
+  DescribeZoneInstanceConfigInfosResponse,
+  StartMachinesRequest,
+  ModifyNodePoolRequest,
+  ModifyClusterMachineResponse,
+  SetMachineLoginRequest,
+  ModifyNodePoolResponse,
+  Taint,
+  RegularNodeInfo,
+  HealthCheckPolicyRule,
+  NativeNodePoolInfo,
   Disk,
-  CreateHealthCheckPolicyResponse,
+  DescribeHealthCheckTemplateRequest,
+  InstanceExtraArgs,
+  DescribeClustersResponse,
+  SortBy,
   DataDisk,
+  HealthCheckTemplateRule,
+  CreateNodePoolResponse,
+  ModifyHealthCheckPolicyRequest,
+  ExternalNodeInfo,
+  MachineSetScaling,
+  StartMachinesResponse,
+  RegularNodePoolInfo,
+  TagSpecification,
+  DeleteClusterMachinesResponse,
+  DeleteNodePoolResponse,
+  DescribeClusterInstancesRequest,
+  DeleteHealthCheckPolicyResponse,
+  DescribeGPUInfoRequest,
+  Filter,
+  ManagementConfig,
+  DeleteNodePoolRequest,
+  SetMachineLoginResponse,
+  Machine,
+  RuntimeConfig,
+  DescribeZoneInstanceConfigInfosRequest,
+  Cluster,
+  ExternalNodePoolInfo,
+  DescribeClusterMachinesRequest,
+  DeleteHealthCheckPolicyRequest,
+  DescribeNodePoolsResponse,
+  AutoUpgradeOptions,
+  SuperNodePoolInfo,
+  InternetAccessible,
+  ModifyClusterMachineRequest,
+  DescribeHealthCheckPoliciesResponse,
+  RebootMachinesResponse,
+  GPUParams,
+  StopMachinesRequest,
+  DescribeHealthCheckPoliciesRequest,
+  DescribeHealthCheckTemplateResponse,
+  InstanceAdvancedSettings,
+  LifecycleConfig,
+  InstanceChargePrepaid,
+  NodeCountSummary,
+  UpdateNativeNodePoolParam,
+  HealthCheckPolicy,
+  HealthCheckPolicyBinding,
+  CreateHealthCheckPolicyResponse,
 } from "./tke_models"
 
 /**
@@ -109,6 +113,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tke.tencentcloudapi.com", "2022-05-01", clientConfig)
+  }
+
+  /**
+   * 查询原生节点机型配置
+   */
+  async DescribeZoneInstanceConfigInfos(
+    req: DescribeZoneInstanceConfigInfosRequest,
+    cb?: (error: string, rep: DescribeZoneInstanceConfigInfosResponse) => void
+  ): Promise<DescribeZoneInstanceConfigInfosResponse> {
+    return this.request("DescribeZoneInstanceConfigInfos", req, cb)
   }
 
   /**
@@ -258,6 +272,21 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口 (StartMachines) 用于启动一个或多个原生节点实例。
+
+只有状态为 Stopped 的实例才可以进行此操作。
+接口调用成功后，等待一分钟左右，实例会进入 Running 状态。
+支持批量操作。每次请求批量实例的上限为100。
+本接口为同步接口，启动实例请求发送成功后会返回一个RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeClusterInstances 接口查询，如果实例的状态为 Running，则代表启动实例操作成功。
+     */
+  async StartMachines(
+    req: StartMachinesRequest,
+    cb?: (error: string, rep: StartMachinesResponse) => void
+  ): Promise<StartMachinesResponse> {
+    return this.request("StartMachines", req, cb)
+  }
+
+  /**
    * 查询集群列表
    */
   async DescribeClusters(
@@ -278,18 +307,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 (StartMachines) 用于启动一个或多个原生节点实例。
-
-只有状态为 Stopped 的实例才可以进行此操作。
-接口调用成功后，等待一分钟左右，实例会进入 Running 状态。
-支持批量操作。每次请求批量实例的上限为100。
-本接口为同步接口，启动实例请求发送成功后会返回一个RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeClusterInstances 接口查询，如果实例的状态为 Running，则代表启动实例操作成功。
-     */
-  async StartMachines(
-    req: StartMachinesRequest,
-    cb?: (error: string, rep: StartMachinesResponse) => void
-  ): Promise<StartMachinesResponse> {
-    return this.request("StartMachines", req, cb)
+   * 请求该接口，会返回所有适配该机型和操作系统组合的gpu驱动版本
+   */
+  async DescribeGPUInfo(
+    req: DescribeGPUInfoRequest,
+    cb?: (error: string, rep: DescribeGPUInfoResponse) => void
+  ): Promise<DescribeGPUInfoResponse> {
+    return this.request("DescribeGPUInfo", req, cb)
   }
 
   /**

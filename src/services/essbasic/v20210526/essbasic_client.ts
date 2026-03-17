@@ -111,6 +111,7 @@ import {
   AutoSignConfig,
   StaffRole,
   CreateBatchOrganizationRegistrationTasksResponse,
+  FlowOperateLimit,
   ChannelVerifyPdfRequest,
   CreateChannelFlowEvidenceReportRequest,
   ChannelCancelFlowRequest,

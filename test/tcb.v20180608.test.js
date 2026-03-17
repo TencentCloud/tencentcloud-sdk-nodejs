@@ -488,9 +488,9 @@ it("tcb.v20180608.CreateBillDeal", async function () {
     }
 })
 
-it("tcb.v20180608.DestroyStaticStore", async function () {
+it("tcb.v20180608.DescribeCurveData", async function () {
     try {
-       const data = await client.DestroyStaticStore({})
+       const data = await client.DescribeCurveData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -551,6 +551,16 @@ it("tcb.v20180608.DescribeEnvLimit", async function () {
 it("tcb.v20180608.DeleteCloudBaseGWDomain", async function () {
     try {
        const data = await client.DeleteCloudBaseGWDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DestroyStaticStore", async function () {
+    try {
+       const data = await client.DestroyStaticStore({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

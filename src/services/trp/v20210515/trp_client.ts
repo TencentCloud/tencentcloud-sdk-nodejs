@@ -42,6 +42,7 @@ import {
   DescribeProductsResponse,
   CreateTraceChainResponse,
   DescribeTraceDataListResponse,
+  ReportScanDetailResponse,
   AttrItem,
   DescribeTraceCodesRequest,
   CreateTraceCodesAsyncRequest,
@@ -87,6 +88,7 @@ import {
   ChainData,
   PhaseData,
   DescribeRawScanLogsRequest,
+  ReportScanDetailRequest,
   DeleteProductRequest,
   ModifyTraceDataRanksRequest,
   ModifyCustomRuleStatusResponse,
@@ -123,6 +125,7 @@ import {
   DescribeTraceCodesResponse,
   UsageQuota,
   CreateCorporationOrderRequest,
+  ReportScanDetailResult,
   CreateTraceCodesResponse,
   DeleteTraceDataRequest,
   DescribeScanLogsRequest,
@@ -143,6 +146,7 @@ import {
   DeleteCodeBatchResponse,
   CreateTraceChainRequest,
   DescribeMerchantByIdRequest,
+  ScanDetailItem,
   DescribeTraceDataByIdRequest,
   DescribeProductByIdResponse,
   DescribeCodePacksRequest,
@@ -394,6 +398,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCodeBatchesResponse) => void
   ): Promise<DescribeCodeBatchesResponse> {
     return this.request("DescribeCodeBatches", req, cb)
+  }
+
+  /**
+   * 扫码数据上报
+   */
+  async ReportScanDetail(
+    req: ReportScanDetailRequest,
+    cb?: (error: string, rep: ReportScanDetailResponse) => void
+  ): Promise<ReportScanDetailResponse> {
+    return this.request("ReportScanDetail", req, cb)
   }
 
   /**

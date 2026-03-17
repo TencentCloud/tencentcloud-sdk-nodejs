@@ -1795,49 +1795,64 @@ export interface QueryMetricItem {
  */
 export interface ServiceDetail {
   /**
-   * 应用ID
+   * <p>应用ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceID?: string
   /**
-   * 业务系统ID
+   * <p>业务系统ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceKey?: string
   /**
-   * 用户appid
+   * <p>用户appid</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppID?: number
   /**
-   * 主账号uin
+   * <p>主账号uin</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateUIN?: string
   /**
-   * 应用名
+   * <p>应用名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceName?: string
   /**
-   * 应用描述
+   * <p>应用描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceDescription?: string
   /**
-   * 地域
+   * <p>地域</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
-   * 标签
+   * <p>标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<ApmTag>
   /**
-   * 业务系统名称
+   * <p>业务系统名称</p>
    */
   InstanceName?: string
+  /**
+   * <p>阈值配置开关。true 表示使用应用级阈值；false 表示使用业务系统级阈值</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableThresholdConfig?: boolean
+  /**
+   * <p>错误率阈值（%），用于判断应用健康状态为&quot;红色&quot;</p><p>单位：%</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrRateThreshold?: number
+  /**
+   * <p>响应时间预警阈值（ms），用于判断应用健康状态为&quot;黄色&quot;</p><p>单位：ms</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResponseDurationWarningThreshold?: number
 }
 
 /**

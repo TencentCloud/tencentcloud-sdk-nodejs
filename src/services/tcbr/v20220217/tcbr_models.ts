@@ -484,7 +484,7 @@ export interface TaskStepInfo {
  */
 export interface DescribeCloudRunEnvsResponse {
   /**
-   * 环境信息列表
+   * <p>环境信息列表</p>
    */
   EnvList?: Array<EnvInfo>
   /**
@@ -544,16 +544,15 @@ export interface ServerBaseInfo {
  */
 export interface DescribeCloudRunEnvsRequest {
   /**
-   * 环境ID，如果传了这个参数则只返回该环境的相关信息
+   * <p>环境ID，如果传了这个参数则只返回该环境的相关信息</p>
    */
   EnvId?: string
   /**
-   * 指定Channels字段为可见渠道列表或不可见渠道列表
-如只想获取渠道A的环境 就填写IsVisible= true,Channels = ["A"], 过滤渠道A拉取其他渠道环境时填写IsVisible= false,Channels = ["A"]
+   * <p>指定Channels字段为可见渠道列表或不可见渠道列表<br>如只想获取渠道A的环境 就填写IsVisible= true,Channels = [&quot;A&quot;], 过滤渠道A拉取其他渠道环境时填写IsVisible= false,Channels = [&quot;A&quot;]</p>
    */
   IsVisible?: boolean
   /**
-   * 渠道列表，代表可见或不可见渠道由IsVisible参数指定
+   * <p>渠道列表，代表可见或不可见渠道由IsVisible参数指定</p>
    */
   Channels?: Array<string>
 }

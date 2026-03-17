@@ -18,6 +18,16 @@ const client = new tencentcloud.tke.v20220501.Client({
 })
 describe("tke.v20220501.test.js", function () {
 
+it("tke.v20220501.DescribeZoneInstanceConfigInfos", async function () {
+    try {
+       const data = await client.DescribeZoneInstanceConfigInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20220501.ModifyClusterMachine", async function () {
     try {
        const data = await client.ModifyClusterMachine({})
@@ -158,6 +168,16 @@ it("tke.v20220501.DescribeHealthCheckTemplate", async function () {
     }
 })
 
+it("tke.v20220501.StartMachines", async function () {
+    try {
+       const data = await client.StartMachines({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20220501.DescribeClusters", async function () {
     try {
        const data = await client.DescribeClusters({})
@@ -178,9 +198,9 @@ it("tke.v20220501.CreateHealthCheckPolicy", async function () {
     }
 })
 
-it("tke.v20220501.StartMachines", async function () {
+it("tke.v20220501.DescribeGPUInfo", async function () {
     try {
-       const data = await client.StartMachines({})
+       const data = await client.DescribeGPUInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

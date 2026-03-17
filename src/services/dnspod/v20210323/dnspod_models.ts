@@ -660,11 +660,11 @@ export interface DescribePackageDetailResponse {
  */
 export interface DescribeDomainFilterListResponse {
   /**
-   * 列表页统计信息
+   * <p>列表页统计信息</p>
    */
   DomainCountInfo?: DomainCountInfo
   /**
-   * 域名列表
+   * <p>域名列表</p>
    */
   DomainList?: Array<DomainListItem>
   /**
@@ -3655,53 +3655,57 @@ export interface CreateDomainAliasResponse {
  */
 export interface DescribeRecordListRequest {
   /**
-   * 域名
+   * <p>域名</p>
    */
   Domain: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   * <p>域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId</p>
    */
   DomainId?: number
   /**
-   * 解析记录的主机头，如果传了此参数，则只会返回此主机头对应的解析记录
+   * <p>解析记录的主机头，如果传了此参数，则只会返回此主机头对应的解析记录</p>
    */
   Subdomain?: string
   /**
-   * 获取某种类型的解析记录，如 A，CNAME，NS，AAAA，显性URL，隐性URL，CAA，SPF等
+   * <p>获取某种类型的解析记录，如 A，CNAME，NS，AAAA，显性URL，隐性URL，CAA，SPF等</p>
    */
   RecordType?: string
   /**
-   * 获取某条线路名称的解析记录。可以通过接口DescribeRecordLineList查看当前域名允许的线路信息
+   * <p>获取某条线路名称的解析记录。可以通过接口DescribeRecordLineList查看当前域名允许的线路信息</p>
    */
   RecordLine?: string
   /**
-   * 获取某个线路Id对应的解析记录，如果传RecordLineId，系统会忽略RecordLine参数。可以通过接口DescribeRecordLineList查看当前域名允许的线路信息
+   * <p>获取某个线路Id对应的解析记录，如果传RecordLineId，系统会忽略RecordLine参数。可以通过接口DescribeRecordLineList查看当前域名允许的线路信息</p>
    */
   RecordLineId?: string
   /**
-   * 获取某个分组下的解析记录时，传这个分组Id。可通过DescribeRecordGroupList接口获取所有分组
+   * <p>获取某个分组下的解析记录时，传这个分组Id。可通过DescribeRecordGroupList接口获取所有分组</p>
    */
   GroupId?: number
   /**
-   * 通过关键字搜索解析记录，当前支持搜索主机头和记录值
+   * <p>通过关键字搜索解析记录，当前支持搜索主机头和记录值</p>
    */
   Keyword?: string
   /**
-   * 排序字段，支持 name,line,type,value,weight,mx,ttl,updated_on 几个字段。
+   * <p>排序字段，支持 name,line,type,value,weight,mx,ttl,updated_on 几个字段。</p>
    */
   SortField?: string
   /**
-   * 排序方式，正序：ASC，逆序：DESC。默认值为ASC。
+   * <p>排序方式，正序：ASC，逆序：DESC。默认值为ASC。</p>
    */
   SortType?: string
   /**
-   * 偏移量，默认值为0。
+   * <p>偏移量，默认值为0。</p>
    */
   Offset?: number
   /**
-   * 限制数量，当前Limit最大支持3000。默认值为100。
+   * <p>限制数量，当前Limit最大支持3000。默认值为100。</p>
    */
   Limit?: number
+  /**
+   * <p>查询不到数据时是否报错</p>枚举值：<ul><li> yes： 报错</li><li> no： 不报错，返回空列表</li></ul>默认值：yes
+   */
+  ErrorOnEmpty?: string
 }
 
 /**
@@ -3943,13 +3947,17 @@ export interface DescribeDomainPurviewResponse {
  */
 export interface Deals {
   /**
-   * 子订单ID
+   * <p>子订单ID</p>
    */
-  DealId: string
+  DealId?: string
   /**
-   * 子订单号
+   * <p>子订单号</p>
    */
-  DealName: string
+  DealName?: string
+  /**
+   * <p>资源ID</p>
+   */
+  ResourceId?: string
 }
 
 /**
@@ -4637,80 +4645,67 @@ export interface LineGroupSum {
  */
 export interface DescribeDomainFilterListRequest {
   /**
-   * 根据域名分组类型获取域名。可取值为 ALL，MINE，SHARE，RECENT。
-ALL：全部
-MINE：我的域名
-SHARE：共享给我的域名
-RECENT：最近操作过的域名
+   * <p>根据域名分组类型获取域名。可取值为 ALL，MINE，SHARE，RECENT。<br>ALL：全部<br>MINE：我的域名<br>SHARE：共享给我的域名<br>RECENT：最近操作过的域名</p>
    */
   Type: string
   /**
-   * 记录开始的偏移, 第一条记录为 0, 依次类推。默认值为 0。
+   * <p>记录开始的偏移, 第一条记录为 0, 依次类推。默认值为 0。</p>
    */
   Offset?: number
   /**
-   * 要获取的域名数量, 比如获取 20 个, 则为 20。默认值为 5000。如果账户中的域名数量超过了 5000, 将会强制分页并且只返回前 5000 条, 这时需要通过 Offset 和 Limit 参数去获取其它域名。
+   * <p>要获取的域名数量, 比如获取 20 个, 则为 20。默认值为 5000。如果账户中的域名数量超过了 5000, 将会强制分页并且只返回前 5000 条, 这时需要通过 Offset 和 Limit 参数去获取其它域名。</p>
    */
   Limit?: number
   /**
-   * 根据域名分组 id 获取域名
+   * <p>根据域名分组 id 获取域名</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/1427/56172">DescribeDomainList</a></p>
    */
   GroupId?: Array<number | bigint>
   /**
-   * 根据关键字获取域名。
+   * <p>根据关键字获取域名。</p>
    */
   Keyword?: string
   /**
-   * 排序字段。可取值为 NAME，STATUS，RECORDS，GRADE，UPDATED_ON。
-NAME：域名名称
-STATUS：域名状态
-RECORDS：记录数量
-GRADE：套餐等级
-UPDATED_ON：更新时间
+   * <p>排序字段。可取值为 NAME，STATUS，RECORDS，GRADE，UPDATED_ON。<br>NAME：域名名称<br>STATUS：域名状态<br>RECORDS：记录数量<br>GRADE：套餐等级<br>UPDATED_ON：更新时间</p>
    */
   SortField?: string
   /**
-   * 排序类型，升序：ASC，降序：DESC。
+   * <p>排序类型，升序：ASC，降序：DESC。</p>
    */
   SortType?: string
   /**
-   * 根据域名状态获取域名。可取值为 ENABLE，LOCK，PAUSE，SPAM。
-ENABLE：正常
-LOCK：锁定
-PAUSE：暂停
-SPAM：封禁
+   * <p>根据域名状态获取域名。可取值为 ENABLE，LOCK，PAUSE，SPAM。<br>ENABLE：正常<br>LOCK：锁定<br>PAUSE：暂停<br>SPAM：封禁</p>
    */
   Status?: Array<string>
   /**
-   * 根据套餐获取域名，可通过 DescribeDomain 或 DescribeDomainList 接口 Grade 字段获取。
+   * <p>根据套餐获取域名，可通过 DescribeDomain 或 DescribeDomainList 接口 Grade 字段获取。</p>
    */
   Package?: Array<string>
   /**
-   * 根据备注信息获取域名。
+   * <p>根据备注信息获取域名。</p>
    */
   Remark?: string
   /**
-   * 要获取域名的更新时间起始时间点，如 '2021-05-01 03:00:00'。
+   * <p>要获取域名的更新时间起始时间点，如 &#39;2021-05-01 03:00:00&#39;。</p>
    */
   UpdatedAtBegin?: string
   /**
-   * 要获取域名的更新时间终止时间点，如 '2021-05-10 20:00:00'。
+   * <p>要获取域名的更新时间终止时间点，如 &#39;2021-05-10 20:00:00&#39;。</p>
    */
   UpdatedAtEnd?: string
   /**
-   * 要获取域名的记录数查询区间起点。
+   * <p>要获取域名的记录数查询区间起点。</p>
    */
   RecordCountBegin?: number
   /**
-   * 要获取域名的记录数查询区间终点。
+   * <p>要获取域名的记录数查询区间终点。</p>
    */
   RecordCountEnd?: number
   /**
-   * 项目ID，"帐号中心-项目管理"拿到项目ID
+   * <p>项目ID，&quot;账号中心-项目管理&quot;拿到项目ID</p>
    */
   ProjectId?: number
   /**
-   * 标签过滤
+   * <p>标签过滤</p>
    */
   Tags?: Array<TagItemFilter>
 }
@@ -5110,11 +5105,11 @@ export interface ModifyDomainLockResponse {
  */
 export interface DescribeRecordListResponse {
   /**
-   * 记录的数量统计信息
+   * <p>记录的数量统计信息</p>
    */
   RecordCountInfo?: RecordCountInfo
   /**
-   * 获取的记录列表
+   * <p>获取的记录列表</p>
    */
   RecordList?: Array<RecordListItem>
   /**

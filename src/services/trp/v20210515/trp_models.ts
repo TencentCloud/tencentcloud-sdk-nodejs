@@ -841,6 +841,20 @@ export interface DescribeTraceDataListResponse {
 }
 
 /**
+ * ReportScanDetail返回参数结构体
+ */
+export interface ReportScanDetailResponse {
+  /**
+   * <p>结果返回，成功数</p>
+   */
+  Data?: ReportScanDetailResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 通用属性
 
 Type 的枚举值
@@ -2054,6 +2068,16 @@ export interface DescribeRawScanLogsRequest {
 }
 
 /**
+ * ReportScanDetail请求参数结构体
+ */
+export interface ReportScanDetailRequest {
+  /**
+   * <p>请求参数</p>
+   */
+  ScanDetails: Array<ScanDetailItem>
+}
+
+/**
  * DeleteProduct请求参数结构体
  */
 export interface DeleteProductRequest {
@@ -2744,6 +2768,16 @@ export interface CreateCorporationOrderRequest {
 }
 
 /**
+ * 扫码明细上报响应，成功数
+ */
+export interface ReportScanDetailResult {
+  /**
+   * <p>成功数量</p>
+   */
+  Count?: number
+}
+
+/**
  * CreateTraceCodes返回参数结构体
  */
 export interface CreateTraceCodesResponse {
@@ -3240,6 +3274,48 @@ export interface DescribeMerchantByIdRequest {
    * 企业ID
    */
   CorpId?: number
+}
+
+/**
+ * 扫码信息
+ */
+export interface ScanDetailItem {
+  /**
+   * <p>用户ID，也可以为手机号</p>
+   */
+  Uid: string
+  /**
+   * <p>时间</p><p>参数格式：YYYYMMDDHHMMSS</p>
+   */
+  Time: string
+  /**
+   * <p>省</p>
+   */
+  ProvinceName: string
+  /**
+   * <p>市</p>
+   */
+  CityName: string
+  /**
+   * <p>区</p>
+   */
+  RegionName: string
+  /**
+   * <p>品牌</p>
+   */
+  BrandName: string
+  /**
+   * <p>品规</p>
+   */
+  SpecName?: string
+  /**
+   * <p>IP，可选，需符合IP格式</p>
+   */
+  IP?: string
+  /**
+   * <p>码</p>
+   */
+  Code?: string
 }
 
 /**
