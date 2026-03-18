@@ -233,6 +233,11 @@ export interface RulePayloadItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RelateOption?: string
+  /**
+   * 值类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValueType?: string
 }
 
 /**
@@ -1326,6 +1331,10 @@ export interface AggrCategorySoftDetailRow {
    * 有新版本可升级的设备数量
    */
   UpgradableDeviceNum?: number
+  /**
+   * 有新版本可升级的设备数量
+   */
+  UpgradeDeviceNum?: number
 }
 
 /**

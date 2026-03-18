@@ -360,82 +360,82 @@ TaskStatus定义如下:
  */
 export interface TaskInfo {
   /**
-   * 任务ID
+   * <p>任务ID</p>
    */
   TaskId?: string
   /**
-   * 描述任务名称，指定后可根据名称筛选
+   * <p>描述任务名称，指定后可根据名称筛选</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskName?: string
   /**
-   * 媒资文件ID
+   * <p>媒资文件ID</p>
    */
   MediaId?: string
   /**
-   * 任务执行状态
+   * <p>任务执行状态</p>
    */
   TaskStatus?: number
   /**
-   * 任务进度，范围为[0，100]
+   * <p>任务进度，范围为[0，100]</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskProgress?: number
   /**
-   * 任务执行时间
+   * <p>任务执行时间</p><p>单位：秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskTimeCost?: number
   /**
-   * 任务创建时间
+   * <p>任务创建时间</p>
    */
   TaskCreateTime?: string
   /**
-   * 任务开始执行时间
+   * <p>任务开始执行时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskStartTime?: string
   /**
-   * 任务失败原因
+   * <p>任务失败原因</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedReason?: string
   /**
-   * 任务执行时指定的先验知识
+   * <p>任务执行时指定的先验知识</p>
    */
   MediaPreknownInfo?: MediaPreknownInfo
   /**
-   * 媒资文件名称
+   * <p>媒资文件名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MediaName?: string
   /**
-   * 媒资自定义标签
+   * <p>媒资自定义标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Label?: string
   /**
-   * 任务分析完成后的后调地址
+   * <p>任务分析完成后的后调地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CallbackURL?: string
   /**
-   * 任务对应的媒资文件元信息，仅在MediaType为Audio时有效
+   * <p>任务对应的媒资文件元信息，仅在MediaType为Audio时有效</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AudioMetadata?: AudioMetadata
   /**
-   * 任务对应的媒资文件元信息，仅在MediaType为Audio时有效
+   * <p>任务对应的媒资文件元信息，仅在MediaType为Audio时有效</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageMetadata?: ImageMetadata
   /**
-   * 任务对应的媒资文件元信息，仅在MediaType为Text时有效
+   * <p>任务对应的媒资文件元信息，仅在MediaType为Text时有效</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TextMetadata?: TextMetadata
   /**
-   * 任务对应的媒资文件元信息，仅在MediaType为Video时有效
+   * <p>任务对应的媒资文件元信息，仅在MediaType为Video时有效</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Metadata?: MediaMetadata
@@ -603,27 +603,27 @@ export interface TextData {
  */
 export interface ImageMetadata {
   /**
-   * 媒资图片文件大小，单位为Byte
+   * <p>媒资图片文件大小，单位为Byte</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileSize: number
   /**
-   * 媒资图片文件MD5
+   * <p>媒资图片文件MD5</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MD5: string
   /**
-   * 媒资图片文件宽度
+   * <p>媒资图片文件宽度</p><p>单位：像素（px）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Width: number
   /**
-   * 媒资图片文件高度
+   * <p>媒资图片文件高度</p><p>单位：像素（px）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Height: number
   /**
-   * 媒资图片文件格式
+   * <p>媒资图片文件格式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Format: string
@@ -644,27 +644,27 @@ export interface CreateCustomGroupRequest {
  */
 export interface TextMetadata {
   /**
-   * 媒资文本文件大小，单位为字节
+   * <p>媒资文本文件大小，单位为字节</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileSize?: number
   /**
-   * 媒资文本文件MD5
+   * <p>媒资文本文件MD5</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MD5?: string
   /**
-   * 媒资文本文件字符数
+   * <p>媒资文本文件字符数</p><p>单位：字符</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Length?: number
   /**
-   * 媒资文本文件格式
+   * <p>媒资文本文件格式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Format?: string
   /**
-   * 封装格式短后缀
+   * <p>封装格式短后缀</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ShortFormat?: string
@@ -1009,22 +1009,22 @@ export interface DeleteMediaResponse {
  */
 export interface Rectf {
   /**
-   * 矩形框左上角水平座标
+   * <p>矩形框左上角水平座标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   X: number
   /**
-   * 矩形框左上角竖直座标
+   * <p>矩形框左上角竖直座标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Y: number
   /**
-   * 矩形框宽度
+   * <p>矩形框宽度</p><p>单位：像素（px）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Width: number
   /**
-   * 矩形框长度
+   * <p>矩形框长度</p><p>单位：像素（px）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Height: number

@@ -2971,7 +2971,7 @@ export interface InstanceGroups {
  */
 export interface PrometheusAgentInfo {
   /**
-   * 集群类型。可填入tke、eks、tkeedge、tdcc，分别代表标准集群、弹性集群、边缘集群、注册集群
+   * 集群类型。可填入tke、eks、tkeedge、tdcc、external，分别代表标准集群、弹性集群、边缘集群、注册集群、外部集群
    */
   ClusterType: string
   /**
@@ -8396,7 +8396,7 @@ export interface PrometheusClusterScrapeStatistics {
    */
   ClusterID?: string
   /**
-   * 被采集的点数
+   * 被采集的点个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScrapedRate?: number
@@ -8406,7 +8406,7 @@ export interface PrometheusClusterScrapeStatistics {
    */
   Jobs?: Array<PrometheusJobScrapeStatistics>
   /**
-   * 过滤前的指标采集速率
+   * 每秒过滤前的指标采集速率
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SamplesRate?: number
@@ -9626,7 +9626,7 @@ export interface PrometheusInstanceScrapeStatistics {
    */
   InstanceId?: string
   /**
-   * 被采集的点数
+   * 每秒被采集的点数
    */
   ScrapedRate?: number
   /**
@@ -9639,7 +9639,7 @@ export interface PrometheusInstanceScrapeStatistics {
    */
   Global?: Array<PrometheusClusterScrapeStatistics>
   /**
-   * 过滤前的指标采集速率
+   * 过滤前的每秒指标采集速率
    */
   SamplesRate?: number
 }
@@ -9994,12 +9994,12 @@ export interface PrometheusInstanceTenantUsage {
    */
   Total?: number
   /**
-   * 基础指标用量
+   * 基础指标用量个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Basic?: number
   /**
-   * 付费指标用量
+   * 付费指标用量个数
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Fee?: number

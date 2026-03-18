@@ -1768,19 +1768,19 @@ Number 数字
  */
 export interface AICallExtractResultInfo {
   /**
-   * 提取的类型是文本
+   * <p>提取的类型是文本</p>
    */
   Text?: string
   /**
-   * 提取的内型是选项
+   * <p>提取的类型是选项</p>
    */
   Chosen?: Array<string>
   /**
-   * 提取类型是布尔值
+   * <p>提取类型是布尔值</p>
    */
   Boolean?: boolean
   /**
-   * 提取类型是数字
+   * <p>提取类型是数字</p>
    */
   Number?: number
 }
@@ -1980,11 +1980,11 @@ export interface DescribeSkillGroupInfoListResponse {
  */
 export interface DescribeNumbersResponse {
   /**
-   * 总数量
+   * <p>总数量</p>
    */
   TotalCount?: number
   /**
-   * 号码列表
+   * <p>号码列表</p>
    */
   Numbers?: Array<NumberInfo>
   /**
@@ -3350,15 +3350,15 @@ export interface DescribeIMCdrsResponse {
  */
 export interface DescribeNumbersRequest {
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * <p>应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc</p>
    */
   SdkAppId: number
   /**
-   * 页数，从0开始
+   * <p>页数，从0开始</p>
    */
   PageNumber?: number
   /**
-   * 分页大小，默认20
+   * <p>分页大小，默认20</p>
    */
   PageSize?: number
 }
@@ -3662,17 +3662,21 @@ export interface DescribeCompanyListResponse {
  */
 export interface NumberInfo {
   /**
-   * 号码
+   * <p>号码</p>
    */
   Number?: string
   /**
-   * 绑定的外呼技能组
+   * <p>绑定的外呼技能组</p>
    */
   CallOutSkillGroupIds?: Array<number | bigint>
   /**
-   * 号码状态，1-正常，2-欠费停用，4-管理员停用，5-违规停用
+   * <p>号码状态，1-正常，2-欠费停用，4-管理员停用，5-违规停用</p>
    */
   State?: number
+  /**
+   * <p>是否自携号码</p><p>枚举值：</p><ul><li>0： 非自携</li><li>1： 自携</li></ul>
+   */
+  CostType?: number
 }
 
 /**
@@ -3680,11 +3684,11 @@ export interface NumberInfo {
  */
 export interface DeleteStaffRequest {
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * <p>应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc</p>
    */
   SdkAppId: number
   /**
-   * 待删除客服邮箱列表，一次最大支持200个。
+   * <p>待删除客服邮箱列表，一次最大支持200个。</p>
    */
   StaffList: Array<string>
 }
@@ -5074,9 +5078,13 @@ export interface DescribeStaffStatusMetricsRequest {
  */
 export interface DeleteStaffResponse {
   /**
-   * 无法删除的状态为在线的客服列表
+   * <p>无法删除的状态为在线的客服列表</p>
    */
   OnlineStaffList?: Array<string>
+  /**
+   * <p>坐席删除详情</p>
+   */
+  DeleteStatusInfo?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

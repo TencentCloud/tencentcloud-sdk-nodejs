@@ -338,6 +338,16 @@ it("tione.v20211111.DeleteModelServiceGroup", async function () {
     }
 })
 
+it("tione.v20211111.DescribePublicAlgoVersionList", async function () {
+    try {
+       const data = await client.DescribePublicAlgoVersionList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.UpdateDataSource", async function () {
     try {
        const data = await client.UpdateDataSource({})

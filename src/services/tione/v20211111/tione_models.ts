@@ -652,33 +652,21 @@ export interface GatewayConfig {
 }
 
 /**
- * AuthToken 的基础信息
+ * 对话结果
  */
-export interface AuthTokenBase {
+export interface Choice {
   /**
-   * token 值
+   * 对话结果
    */
-  Value?: string
+  Message?: Message
   /**
-   * token 别名
+   * 结束理由: stop, length, content_filter, null
    */
-  Name?: string
+  FinishReason?: string
   /**
-   * token 描述
+   * 序号
    */
-  Description?: string
-  /**
-   * token 创建时间
-   */
-  CreateTime?: string
-  /**
-   * token状态
-   */
-  Status?: string
-  /**
-   * token的唯一id，与value一一对应，重置后id也会一并变化
-   */
-  Id?: string
+  Index?: number
 }
 
 /**
@@ -1037,6 +1025,22 @@ DEFAULT: 其他来源
    * 外部的资源组信息，表示借调了哪些资源组的资源
    */
   ExternalResourceGroups?: Array<ResourceGroupInfo>
+}
+
+/**
+ * 设备对应的镜像信息
+ */
+export interface DeviceImageInfo {
+  /**
+   * 设备类型, 支持GPU等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceType?: string
+  /**
+   * 镜像信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageInfo?: ImageInfo
 }
 
 /**
@@ -1683,6 +1687,24 @@ export interface StartTrainingTaskRequest {
    * 训练任务ID
    */
   Id: string
+}
+
+/**
+ * DescribePlatformImages返回参数结构体
+ */
+export interface DescribePlatformImagesResponse {
+  /**
+   * 数量
+   */
+  TotalCount?: number
+  /**
+   * 镜像列表
+   */
+  PlatformImageInfos?: Array<PlatformImageInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2437,17 +2459,28 @@ export interface DescribeDataSourceRequest {
 }
 
 /**
- * http get 行为
+ * DescribePublicAlgoVersionList返回参数结构体
  */
-export interface HTTPGetAction {
+export interface DescribePublicAlgoVersionListResponse {
   /**
-   * http 路径
+   * 算法版本数量
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Path?: string
+  TotalCount?: number
   /**
-   * 调用端口
+   * 公共算法版本列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Port?: number
+  PublicAlgoVersions?: Array<PublicAlgoVersion>
+  /**
+   * 聚合后的公共算法版本列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AggregatePublicAlgoVersions?: Array<AggregatePublicAlgoVersion>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3033,21 +3066,33 @@ export interface DefaultInnerCallInfo {
 }
 
 /**
- * 对话结果
+ * AuthToken 的基础信息
  */
-export interface Choice {
+export interface AuthTokenBase {
   /**
-   * 对话结果
+   * token 值
    */
-  Message?: Message
+  Value?: string
   /**
-   * 结束理由: stop, length, content_filter, null
+   * token 别名
    */
-  FinishReason?: string
+  Name?: string
   /**
-   * 序号
+   * token 描述
    */
-  Index?: number
+  Description?: string
+  /**
+   * token 创建时间
+   */
+  CreateTime?: string
+  /**
+   * token状态
+   */
+  Status?: string
+  /**
+   * token的唯一id，与value一一对应，重置后id也会一并变化
+   */
+  Id?: string
 }
 
 /**
@@ -3322,6 +3367,48 @@ export interface InferCodeInfo {
 }
 
 /**
+ * 训练超参
+ */
+export interface TrainParam {
+  /**
+   * 参数名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 默认参数值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultValue?: string
+  /**
+   * 参数注释
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: string
+  /**
+   * 参数类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 是否必选
+   */
+  Required?: boolean
+  /**
+   * 参数值
+   */
+  Value?: string
+  /**
+   * 参数范围
+   */
+  Range?: Array<string>
+  /**
+   * 参数选项
+   */
+  Enum?: Array<string>
+}
+
+/**
  * DescribeInferTemplates请求参数结构体
  */
 export type DescribeInferTemplatesRequest = null
@@ -3348,6 +3435,22 @@ export interface DeleteModelServiceGroupResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 对应设备的物料信息
+ */
+export interface DeviceMaterialInfo {
+  /**
+   * 设备信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeviceType?: string
+  /**
+   * 物料信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaterialInfo?: MaterialInfo
 }
 
 /**
@@ -3823,6 +3926,16 @@ export interface SubAccountInfo {
    * 子账号在Linux下的用户名
    */
   LinuxUserName?: string
+}
+
+/**
+ * UpdateSubAccountLinuxUserInfo返回参数结构体
+ */
+export interface UpdateSubAccountLinuxUserInfoResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4959,6 +5072,20 @@ export interface StatefulSetCondition {
 }
 
 /**
+ * http get 行为
+ */
+export interface HTTPGetAction {
+  /**
+   * http 路径
+   */
+  Path?: string
+  /**
+   * 调用端口
+   */
+  Port?: number
+}
+
+/**
  * sidecar容器配置
  */
 export interface SidecarSpec {
@@ -6015,13 +6142,138 @@ export interface IngressPrivateLinkInfo {
 }
 
 /**
- * UpdateSubAccountLinuxUserInfo返回参数结构体
+ * 公共算法版本信息
  */
-export interface UpdateSubAccountLinuxUserInfoResponse {
+export interface PublicAlgoVersion {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 公共算法版本Id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  PublicAlgoVersionId?: string
+  /**
+   * 对应的公共算法组Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicAlgoGroupId?: string
+  /**
+   * 版本号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: string
+  /**
+   * 模型简介
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Introduction?: string
+  /**
+   * 预览信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PreviewInfo?: string
+  /**
+   * 预置训练镜像信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PresetTrainImageInfo?: ImageInfo
+  /**
+   * 预置训练代码信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PresetTrainCodeInfo?: MaterialInfo
+  /**
+   * 预置模型信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PresetModelInfo?: MaterialInfo
+  /**
+   * 是否已经被导入到我的算法
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsImported?: boolean
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 默认训练资源规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultResourceSpec?: ResourceSpec
+  /**
+   * 默认推理资源规格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultInferenceResourceSpec?: ResourceSpec
+  /**
+   * 是否支持直接部署推理服务
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SupportDeploy?: boolean
+  /**
+   * 内置训练数据集
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PresetTrainDataset?: MaterialInfo
+  /**
+   * 训练代码包下载路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrainCodeDownloadUrl?: string
+  /**
+   * 内置数据下载路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrainDataDownloadUrl?: string
+  /**
+   * 训练参数列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrainParams?: Array<TrainParam>
+  /**
+   * 训练启动命令
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PresetTrainCodeStartCmd?: string
+  /**
+   * 是否非公开模型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsPrivateModel?: boolean
+  /**
+   * 各种设备下的训练镜像
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PresetTrainImageInfoList?: Array<DeviceImageInfo>
+  /**
+   * 各种设备下的推理镜像
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PresetInferenceImageInfoList?: Array<DeviceImageInfo>
+  /**
+   * 各种设备下的训练代码信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PresetTrainCodeInfoList?: Array<DeviceMaterialInfo>
+  /**
+   * 各种设备下的内置模型信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PresetModelInfoList?: Array<DeviceMaterialInfo>
+  /**
+   * 模型类别，比如LLM/MultiModal
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelCategory?: string
+  /**
+   * 公共算法Id
+   */
+  PublicAlgoSeriesId?: string
 }
 
 /**
@@ -6406,6 +6658,28 @@ export interface DescribeNotebookRequest {
 }
 
 /**
+ * DescribePublicAlgoVersionList请求参数结构体
+ */
+export interface DescribePublicAlgoVersionListRequest {
+  /**
+   * 过滤器
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 返回记录条数，默认10
+   */
+  Limit?: number
+  /**
+   * 是否需要聚合
+   */
+  NeedsAggregate?: boolean
+}
+
+/**
  * 存储额外配置
  */
 export interface StorageExtraConf {
@@ -6438,6 +6712,27 @@ export interface LocalDisk {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalPath?: string
+}
+
+/**
+ * TI资源规格
+ */
+export interface ResourceSpec {
+  /**
+   * 规格简称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpecAlias?: string
+  /**
+   * 规格Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpecId?: string
+  /**
+   * 规则名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SpecName?: string
 }
 
 /**
@@ -6893,21 +7188,19 @@ export interface GooseFSx {
 }
 
 /**
- * DescribePlatformImages返回参数结构体
+ * 聚合后的公共算法版本
  */
-export interface DescribePlatformImagesResponse {
+export interface AggregatePublicAlgoVersion {
   /**
-   * 数量
+   * 用于聚合的系列名字
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount?: number
+  GroupName?: string
   /**
-   * 镜像列表
+   * 算法公共版本列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PlatformImageInfos?: Array<PlatformImageInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  PublicAlgoVersions?: Array<PublicAlgoVersion>
 }
 
 /**
@@ -6960,6 +7253,37 @@ export interface DeleteDatasetRequest {
    * 是否删除cos标签文件
    */
   DeleteLabelEnable: boolean
+}
+
+/**
+ * 物料信息
+ */
+export interface MaterialInfo {
+  /**
+   * 存储类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageType?: string
+  /**
+   * Cos存储信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CosPathInfo?: CosPathInfo
+  /**
+   * 物料名，支持Code、Model
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaterialName?: string
+  /**
+   * 物料类型，支持PreSet(预置)、 Custom(自定义)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaterialType?: string
+  /**
+   * 训练任务挂载路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MountPath?: string
 }
 
 /**

@@ -78,47 +78,47 @@ export interface StartSandboxInstanceRequest {
  */
 export interface SandboxInstance {
   /**
-   * 沙箱实例唯一标识符
+   * <p>沙箱实例唯一标识符</p>
    */
   InstanceId: string
   /**
-   * 所属沙箱工具 ID
+   * <p>所属沙箱工具 ID</p>
    */
   ToolId: string
   /**
-   * 所属沙箱工具名称
+   * <p>所属沙箱工具名称</p>
    */
   ToolName: string
   /**
-   * 实例状态：STARTING（启动中）、RUNNING（运行中）、STOPPING（停止中）、STOPPED（已停止）、STOP_FAILED（停止失败）、FAILED（失败状态）
+   * <p>实例状态：STARTING（启动中）、RUNNING（运行中）、STOPPING（停止中）、STOPPED（已停止）、STOP_FAILED（停止失败）、FAILED（失败状态）</p>
    */
   Status: string
   /**
-   * 超时时间（秒），null 表示无超时设置
+   * <p>超时时间（秒），null 表示无超时设置</p>
    */
   TimeoutSeconds?: number
   /**
-   * 过期时间（ISO 8601 格式），null 表示无过期时间
+   * <p>过期时间（ISO 8601 格式），null 表示无过期时间</p>
    */
   ExpiresAt?: string
   /**
-   * 停止原因：manual（手动）、timeout（超时）、error（错误）、system（系统），仅在状态为 STOPPED、STOP_FAILED 或 FAILED 时有值。当 provider 停止失败时，状态为 STOP_FAILED，原因为 error
+   * <p>停止原因：manual（手动）、timeout（超时）、error（错误）、system（系统），仅在状态为 STOPPED、STOP_FAILED 或 FAILED 时有值。当 provider 停止失败时，状态为 STOP_FAILED，原因为 error</p>
    */
   StopReason?: string
   /**
-   * 创建时间（ISO 8601 格式）
+   * <p>创建时间（ISO 8601 格式）</p>
    */
   CreateTime?: string
   /**
-   * 更新时间（ISO 8601 格式）
+   * <p>更新时间（ISO 8601 格式）</p>
    */
   UpdateTime?: string
   /**
-   * 存储挂载选项
+   * <p>存储挂载选项</p>
    */
   MountOptions?: Array<MountOption>
   /**
-   * 沙箱实例自定义配置
+   * <p>沙箱实例自定义配置</p>
    */
   CustomConfiguration?: CustomConfigurationDetail
 }
@@ -214,47 +214,47 @@ export interface DescribeSandboxToolListRequest {
  */
 export interface CreateSandboxToolRequest {
   /**
-   * 沙箱工具名称，长度 1-50 字符，支持英文、数字、下划线和连接线。同一 AppId 下沙箱工具名称必须唯一
+   * <p>沙箱工具名称，长度 1-50 字符，支持英文、数字、下划线和连接线。同一 AppId 下沙箱工具名称必须唯一</p>
    */
   ToolName: string
   /**
-   * 沙箱工具类型，目前支持：browser、code-interpreter、custom
+   * <p>沙箱工具类型，目前支持：browser、code-interpreter、custom</p>
    */
   ToolType: string
   /**
-   * 网络配置
+   * <p>网络配置</p>
    */
   NetworkConfiguration: NetworkConfiguration
   /**
-   * 沙箱工具描述，最大长度 200 字符
+   * <p>沙箱工具描述，最大长度 200 字符</p>
    */
   Description?: string
   /**
-   * 默认超时时间，支持格式：5m、300s、1h 等，不指定则使用系统默认值（5 分钟）。最大 24 小时
+   * <p>默认超时时间，支持格式：5m、300s、1h 等，不指定则使用系统默认值（5 分钟）。最大 24 小时</p>
    */
   DefaultTimeout?: string
   /**
-   * 标签规格，为沙箱工具绑定标签，支持多种资源类型的标签绑定
+   * <p>标签规格，为沙箱工具绑定标签，支持多种资源类型的标签绑定</p>
    */
   Tags?: Array<Tag>
   /**
-   * 幂等性 Token，长度不超过 64 字符
+   * <p>幂等性 Token，长度不超过 64 字符</p>
    */
   ClientToken?: string
   /**
-   * 角色ARN
+   * <p>角色ARN</p>
    */
   RoleArn?: string
   /**
-   * 沙箱工具存储配置
+   * <p>沙箱工具存储配置</p>
    */
   StorageMounts?: Array<StorageMount>
   /**
-   * 沙箱工具自定义配置
+   * <p>沙箱工具自定义配置</p>
    */
   CustomConfiguration?: CustomConfiguration
   /**
-   * 沙箱工具日志推送相关配置
+   * <p>沙箱工具日志推送相关配置</p>
    */
   LogConfiguration?: LogConfiguration
 }
@@ -386,15 +386,15 @@ export interface DescribePreCacheImageTaskRequest {
  */
 export interface StorageSource {
   /**
-   * 对象存储桶配置
+   * <p>对象存储桶配置</p>
    */
   Cos?: CosStorageSource
   /**
-   * 镜像卷配置
+   * <p>镜像卷配置</p>
    */
   Image?: ImageStorageSource
   /**
-   * 文件存储配置
+   * <p>文件存储配置</p>
    */
   Cfs?: CfsStorageSource
 }
@@ -418,7 +418,7 @@ export interface ResourceConfiguration {
  */
 export interface CreateSandboxToolResponse {
   /**
-   * 创建的沙箱工具 ID
+   * <p>创建的沙箱工具 ID</p>
    */
   ToolId?: string
   /**

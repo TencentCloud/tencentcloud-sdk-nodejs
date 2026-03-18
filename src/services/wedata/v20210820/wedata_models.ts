@@ -1945,6 +1945,11 @@ export interface EventCaseAuditLogOptDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
+  /**
+   * 消费次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumeCount?: number
 }
 
 /**
@@ -4245,6 +4250,11 @@ export interface InstanceOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Ext?: StrToStrMap
+  /**
+   * 事件列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RelatedEventList?: Array<EventCaseAuditLogOptDto>
 }
 
 /**
@@ -5506,6 +5516,31 @@ export interface AiOpsEventListenerDTO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventBroadcastType?: string
+  /**
+   * 事件生产者任务Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProducerTaskId?: string
+  /**
+   * 事件维度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Dimension?: string
+  /**
+   * 事件状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 事件触发时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EventTriggerTs?: string
+  /**
+   * 事件ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CaseId?: string
 }
 
 /**
@@ -14563,6 +14598,10 @@ export interface BatchCreateTaskVersionAsyncRequest {
    * 是否需要补录中间实例
    */
   EnableMakeUp?: boolean
+  /**
+   * 指定审批人列表
+   */
+  AssignApprovalList?: Array<string>
 }
 
 /**
@@ -15686,6 +15725,11 @@ export interface MakePlanOpsDto {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MapParamList?: Array<StrToStrMap>
+  /**
+   * 补录扩展属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MakeExtList?: Array<StrToStrMap>
   /**
    * 创建人ID
 注意：此字段可能返回 null，表示取不到有效值。
@@ -18402,6 +18446,11 @@ export interface TaskFormParams {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestSavedVersionId?: string
+  /**
+   * 任务状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
 }
 
 /**
@@ -19539,6 +19588,10 @@ export interface CreateTaskVersionDsRequest {
    * 是否需要补录中间实例
    */
   EnableMakeUp?: boolean
+  /**
+   * 指定审批人列表
+   */
+  AssignApprovalList?: Array<string>
 }
 
 /**
@@ -27481,6 +27534,10 @@ export interface CreateCodeTemplateVersionRequest {
 false表示：针对所有状态的任务均仅生成开发态保存版本。
    */
   NeedSubmitScheduleForTemplate?: boolean
+  /**
+   * 指定审批人列表
+   */
+  AssignApprovalList?: Array<string>
 }
 
 /**
@@ -31045,6 +31102,11 @@ CAN_MANAGE : 有权限管理操作
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskExtDTO?: TaskExtOpsDto
+  /**
+   * 任务时区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScheduleTimeZone?: string
 }
 
 /**

@@ -90,31 +90,31 @@ export interface Coord {
  */
 export interface TransDetail {
   /**
-   * 当前行的原文本
+   * <p>当前行的原文本</p>
    */
   SourceLineText?: string
   /**
-   * 当前行的译文
+   * <p>当前行的译文</p>
    */
   TargetLineText?: string
   /**
-   * 段落文本框位置
+   * <p>段落文本框位置</p>
    */
   BoundingBox?: BoundingBox
   /**
-   * 行数
+   * <p>行数</p>
    */
   LinesCount?: number
   /**
-   * 行高
+   * <p>行高</p><p>单位：px</p>
    */
   LineHeight?: number
   /**
-   * 正常段落spam_code字段为0；如果存在spam_code字段且值大于0（1: 命中垃圾检查；2: 命中安全策略；3: 其他。），则命中安全检查被过滤。
+   * <p>正常段落spam_code字段为0；如果存在spam_code字段且值大于0（1: 命中垃圾检查；2: 命中安全策略；3: 其他。），则命中安全检查被过滤。</p>
    */
   SpamCode?: number
   /**
-   * 段落文本旋转信息，只在valid为true时表示坐标有效
+   * <p>段落文本旋转信息，只在valid为true时表示坐标有效</p>
    */
   RotateParagraphRect?: RotateParagraphRect
 }
@@ -196,19 +196,19 @@ hi：印地语
  */
 export interface BoundingBox {
   /**
-   * 左上顶点x坐标
+   * <p>左上顶点x坐标</p>
    */
   X?: number
   /**
-   * 左上顶点y坐标
+   * <p>左上顶点y坐标</p>
    */
   Y?: number
   /**
-   * 宽
+   * <p>宽</p><p>单位：px</p>
    */
   Width?: number
   /**
-   * 高
+   * <p>高</p><p>单位：px</p>
    */
   Height?: number
 }

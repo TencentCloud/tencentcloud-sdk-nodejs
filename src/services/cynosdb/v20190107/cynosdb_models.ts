@@ -212,6 +212,20 @@ export interface ModifyMaintainPeriodConfigRequest {
 }
 
 /**
+ * DescribeZones请求参数结构体
+ */
+export interface DescribeZonesRequest {
+  /**
+   * 是否包含虚拟区
+   */
+  IncludeVirtualZones?: boolean
+  /**
+   * 是否展示地域下所有可用区，并显示用户每个可用区权限
+   */
+  ShowPermission?: boolean
+}
+
+/**
  * 实例参数修改任务详情
  */
 export interface BizTaskModifyInstanceParam {
@@ -259,6 +273,32 @@ export interface ModifyClusterStorageRequest {
    * 交易模式 0-下单并支付 1-下单
    */
   DealMode?: number
+}
+
+/**
+ * 集群信息
+ */
+export interface DescribeVaultBackupClusterInfo {
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 集群状态
+   */
+  ClusterStatus?: string
+  /**
+   * 集群所在地域
+   */
+  ClusterRegion?: string
+  /**
+   * 集群所在可用区
+   */
+  ClusterZone?: string
 }
 
 /**
@@ -407,6 +447,34 @@ export interface ModifyBackupDownloadRestrictionResponse {
 }
 
 /**
+ * 将被删除的备份文件列表
+ */
+export interface WillDeleteItem {
+  /**
+   * 备份文件ID
+   */
+  BackupId?: number
+  /**
+   * 备份文件名称
+   */
+  BackupName?: string
+}
+
+/**
+ * TransferClusterZone返回参数结构体
+ */
+export interface TransferClusterZoneResponse {
+  /**
+   * 异步任务id
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClusterDatabaseTables请求参数结构体
  */
 export interface DescribeClusterDatabaseTablesRequest {
@@ -431,6 +499,20 @@ export interface DescribeClusterDatabaseTablesRequest {
 "view"表示只返回 view，"base_table" 表示只返回基本表，"all" 表示返回 view 和表。默认为 all。
    */
   TableType?: string
+}
+
+/**
+ * ModifyClusterBinlogRedoLogAutoCopyVault请求参数结构体
+ */
+export interface ModifyClusterBinlogRedoLogAutoCopyVaultRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 自动拷贝保险箱配置列表
+   */
+  AutoCopyVaults?: Array<CreateBackupVaultItem>
 }
 
 /**
@@ -538,6 +620,20 @@ export interface DescribeAuditInstanceListResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Items?: Array<InstanceAuditStatus>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVaultBackupClusterInfo返回参数结构体
+ */
+export interface DescribeVaultBackupClusterInfoResponse {
+  /**
+   * 保险箱信息
+   */
+  ClusterInfos?: Array<DescribeVaultBackupClusterInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -698,6 +794,32 @@ export interface CreateClustersResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 访问代理配置
+ */
+export interface ProxyConfigInfo {
+  /**
+   * 数据库代理组节点个数。该参数不再建议使用,建议使用ProxyZones
+   */
+  ProxyCount?: number
+  /**
+   * cpu核数
+   */
+  Cpu?: number
+  /**
+   * 内存
+   */
+  Mem?: number
+  /**
+   * 描述说明
+   */
+  Description?: string
+  /**
+   * 数据库节点信息（该参数与ProxyCount需要任选一个输入）
+   */
+  ProxyZones?: Array<ProxyZone>
 }
 
 /**
@@ -914,6 +1036,25 @@ export interface StopCLSDeliveryRequest {
 }
 
 /**
+ * OpenWan请求参数结构体
+ */
+export interface OpenWanRequest {
+  /**
+   * 实例组id
+   * @deprecated
+   */
+  InstanceGrpId?: string
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 实例组id
+   */
+  InstanceGroupId?: string
+}
+
+/**
  * ExportResourcePackageDeductDetails返回参数结构体
  */
 export interface ExportResourcePackageDeductDetailsResponse {
@@ -1060,6 +1201,20 @@ export interface DescribeClusterDetailRequest {
    * 集群Id
    */
   ClusterId: string
+}
+
+/**
+ * CopyBackupToVault返回参数结构体
+ */
+export interface CopyBackupToVaultResponse {
+  /**
+   * 任务ID
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1926,6 +2081,52 @@ export interface DescribeIntegrateTaskRequest {
 }
 
 /**
+ * DescribeBinlogListByVault请求参数结构体
+ */
+export interface DescribeBinlogListByVaultRequest {
+  /**
+   * 保险箱ID
+   */
+  VaultId: string
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
+   * 备份ID列表
+   */
+  BackupIds?: Array<number | bigint>
+  /**
+   * 备份名称列表
+   */
+  BackupNames?: Array<string>
+  /**
+   * 文件名列表
+   */
+  FileNames?: Array<string>
+  /**
+   * 返回数量，范围: (0, 100]，默认100
+   */
+  Limit?: number
+  /**
+   * 偏移量，范围: [0, INF)，默认0
+   */
+  Offset?: number
+  /**
+   * 排序字段，可选值: VaultId, VaultName, BackupSaveSeconds, LockedTime, CreateTime, UpdateTime，默认createTime
+   */
+  OrderBy?: string
+  /**
+   * 排序方式，可选值: desc, asc, DESC, ASC，默认desc
+   */
+  OrderByType?: string
+  /**
+   * 状态
+   */
+  Status?: string
+}
+
+/**
  * 安全组规则
  */
 export interface PolicyRule {
@@ -2238,6 +2439,24 @@ export interface ExportResourcePackageDeductDetailsRequest {
    * 导出数据格式，目前仅支持csv格式，留作扩展
    */
   FileType?: string
+}
+
+/**
+ * redolog信息
+ */
+export interface DescribeRedoLogListByVaultItem {
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * RedoLog文件信息
+   */
+  RedoFileInfo?: RedoLogItem
 }
 
 /**
@@ -3298,29 +3517,55 @@ export interface OpenSSLRequest {
 }
 
 /**
- * UpgradeProxyVersion请求参数结构体
+ * DescribeVaults请求参数结构体
  */
-export interface UpgradeProxyVersionRequest {
+export interface DescribeVaultsRequest {
   /**
-   * 集群ID
+   * 保险箱ID列表，用于精确筛选
    */
-  ClusterId: string
+  VaultIds?: Array<string>
   /**
-   * 数据库代理当前版本
+   * 保险箱名称，用于模糊筛选
    */
-  SrcProxyVersion: string
+  VaultName?: string
   /**
-   * 数据库代理升级版本
+   * 保险箱状态列表，用于筛选
    */
-  DstProxyVersion: string
+  Status?: Array<string>
   /**
-   * 数据库代理组ID
+   * 每页数量，范围(0,100]，默认100
    */
-  ProxyGroupId?: string
+  Limit?: number
   /**
-   * 升级时间 ：no（升级完成时）yes（实例维护时间）
+   * 偏移量，范围[0,+∞)，默认0
    */
-  IsInMaintainPeriod?: string
+  Offset?: number
+  /**
+   * 排序字段，可选值：VaultId, VaultName, BackupSaveSeconds, LockedTime, CreateTime, UpdateTime
+   */
+  OrderBy?: string
+  /**
+   * 排序方式，可选值：desc, asc, DESC, ASC
+   */
+  OrderByType?: string
+}
+
+/**
+ * CheckTransferClusterZone返回参数结构体
+ */
+export interface CheckTransferClusterZoneResponse {
+  /**
+   * 是否check成功
+   */
+  CheckStatus?: boolean
+  /**
+   * check失败的原因
+   */
+  CheckMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3695,6 +3940,84 @@ export interface DescribeClusterParamsRequest {
 }
 
 /**
+ * 保险箱信息
+ */
+export interface DescribeVaultsItem {
+  /**
+   * 保险箱ID
+   */
+  VaultId?: string
+  /**
+   * 保险箱名称
+   */
+  VaultName?: string
+  /**
+   * 保险箱描述
+   */
+  VaultDescribe?: string
+  /**
+   * 加密密钥ID
+   */
+  KeyId?: string
+  /**
+   * 密钥所在地域
+   */
+  KeyRegion?: string
+  /**
+   * 密钥类型
+   */
+  KeyType?: string
+  /**
+   * 备份文件数量
+   */
+  BackupFileCount?: number
+  /**
+   * 备份文件总大小（字节）
+   */
+  BackupFileSize?: number
+  /**
+   * Binlog文件数量
+   */
+  BinlogFileCount?: number
+  /**
+   * Binlog文件总大小（字节）
+   */
+  BinlogFileSize?: number
+  /**
+   * RedoLog文件数量
+   */
+  RedoLogFileCount?: number
+  /**
+   * RedoLog文件总大小（字节）
+   */
+  RedoLogFileSize?: number
+  /**
+   * 保险箱状态
+   */
+  Status?: string
+  /**
+   * 备份保留时长（秒）
+   */
+  BackupSaveSeconds?: number
+  /**
+   * 锁定时间
+   */
+  LockedTime?: string
+  /**
+   * 关联任务列表
+   */
+  Tasks?: Array<ObjectTask>
+  /**
+   * 保险箱所在地域
+   */
+  VaultRegion?: string
+  /**
+   * 自动投递关系
+   */
+  AutoCopyConfigs?: Array<AutoCopyConfig>
+}
+
+/**
  * ModifyAccountHost返回参数结构体
  */
 export interface ModifyAccountHostResponse {
@@ -3944,6 +4267,32 @@ export interface ModifyLibraDBClusterReplicationObjectResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpgradeProxyVersion请求参数结构体
+ */
+export interface UpgradeProxyVersionRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 数据库代理当前版本
+   */
+  SrcProxyVersion: string
+  /**
+   * 数据库代理升级版本
+   */
+  DstProxyVersion: string
+  /**
+   * 数据库代理组ID
+   */
+  ProxyGroupId?: string
+  /**
+   * 升级时间 ：no（升级完成时）yes（实例维护时间）
+   */
+  IsInMaintainPeriod?: string
 }
 
 /**
@@ -4680,6 +5029,20 @@ export interface DescribeClusterTransparentEncryptInfoRequest {
 }
 
 /**
+ * DeleteVaults返回参数结构体
+ */
+export interface DeleteVaultsResponse {
+  /**
+   * 删除任务列表，每个保险箱对应一个任务
+   */
+  VaultTask?: Array<DeleteVaultTask>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 同步对象详情
  */
 export interface MigrateOpt {
@@ -5307,17 +5670,21 @@ export interface SwitchClusterVpcResponse {
 }
 
 /**
- * DescribeZones请求参数结构体
+ * DescribeRedoLogListByVault返回参数结构体
  */
-export interface DescribeZonesRequest {
+export interface DescribeRedoLogListByVaultResponse {
   /**
-   * 是否包含虚拟区
+   * 符合条件的RedoLog文件总数
    */
-  IncludeVirtualZones?: boolean
+  TotalCount?: number
   /**
-   * 是否展示地域下所有可用区，并显示用户每个可用区权限
+   * RedoLog文件列表
    */
-  ShowPermission?: boolean
+  RedoLogList?: Array<DescribeRedoLogListByVaultItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5544,6 +5911,52 @@ export interface CreateClusterDatabaseResponse {
 }
 
 /**
+ * DescribeRedoLogListByVault请求参数结构体
+ */
+export interface DescribeRedoLogListByVaultRequest {
+  /**
+   * 保险箱ID
+   */
+  VaultId: string
+  /**
+   * 备份ID列表
+   */
+  BackupIds?: Array<number | bigint>
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
+   * 备份名称列表
+   */
+  BackupNames?: Array<string>
+  /**
+   * 文件名称列表
+   */
+  FileNames?: Array<string>
+  /**
+   * 每页数量，范围(0,100]，默认100
+   */
+  Limit?: number
+  /**
+   * 偏移量，范围[0,INF)，默认0
+   */
+  Offset?: number
+  /**
+   * 排序字段，可选值：VaultId,VaultName,BackupSaveSeconds,LockedTime,CreateTime,UpdateTime，默认createTime
+   */
+  OrderBy?: string
+  /**
+   * 排序方式，可选值：desc,asc,DESC,ASC，默认desc
+   */
+  OrderByType?: string
+  /**
+   * 状态
+   */
+  Status?: string
+}
+
+/**
  * DescribeClusters返回参数结构体
  */
 export interface DescribeClustersResponse {
@@ -5602,6 +6015,28 @@ export interface DescribeBackupConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 保险箱自动投递关系
+ */
+export interface AutoCopyConfig {
+  /**
+   * 集群id
+   */
+  ClusterId?: string
+  /**
+   * 保险箱ID
+   */
+  VaultId?: string
+  /**
+   * 保险箱地域
+   */
+  VaultRegion?: string
+  /**
+   * 投递类型：binlog, redolog, snapshot, logic
+   */
+  CopyType?: string
 }
 
 /**
@@ -5883,22 +6318,21 @@ export interface InstanceAuditStatus {
 }
 
 /**
- * OpenWan请求参数结构体
+ * DescribeVaults返回参数结构体
  */
-export interface OpenWanRequest {
+export interface DescribeVaultsResponse {
   /**
-   * 实例组id
-   * @deprecated
+   * 保险箱列表
    */
-  InstanceGrpId?: string
+  Vaults?: Array<DescribeVaultsItem>
   /**
-   * 实例ID
+   * 总数量
    */
-  InstanceId?: string
+  TotalCount?: number
   /**
-   * 实例组id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceGroupId?: string
+  RequestId?: string
 }
 
 /**
@@ -6271,6 +6705,56 @@ export interface DescribeLibraDBClusterDetailResponse {
 }
 
 /**
+ * 全球数据库任务信息
+ */
+export interface GdnTaskInfo {
+  /**
+   * 全球数据库唯一标识
+   */
+  GdnId?: string
+  /**
+   * 全球数据库唯一别名
+   */
+  GdnName?: string
+  /**
+   * 主集群ID
+   */
+  PrimaryClusterId?: string
+  /**
+   * 主集群所在地域
+   */
+  PrimaryClusterRegion?: string
+  /**
+   * 从集群所在地域
+   */
+  StandbyClusterRegion?: string
+  /**
+   * 从集群ID
+   */
+  StandbyClusterId?: string
+  /**
+   * 从集群名称
+   */
+  StandbyClusterName?: string
+  /**
+   * 是否已强切
+   */
+  ForceSwitchGdn?: string
+  /**
+   * 返回码
+   */
+  Code?: number
+  /**
+   * 提示信息
+   */
+  Message?: string
+  /**
+   * 是否支持强切
+   */
+  IsSupportForce?: string
+}
+
+/**
  * GrantAccountPrivileges返回参数结构体
  */
 export interface GrantAccountPrivilegesResponse {
@@ -6406,53 +6890,17 @@ export interface ResumeServerlessResponse {
 }
 
 /**
- * 全球数据库任务信息
+ * DeleteBackupVault返回参数结构体
  */
-export interface GdnTaskInfo {
+export interface DeleteBackupVaultResponse {
   /**
-   * 全球数据库唯一标识
+   * 任务ID，用于查询任务执行状态
    */
-  GdnId?: string
+  TaskId?: number
   /**
-   * 全球数据库唯一别名
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  GdnName?: string
-  /**
-   * 主集群ID
-   */
-  PrimaryClusterId?: string
-  /**
-   * 主集群所在地域
-   */
-  PrimaryClusterRegion?: string
-  /**
-   * 从集群所在地域
-   */
-  StandbyClusterRegion?: string
-  /**
-   * 从集群ID
-   */
-  StandbyClusterId?: string
-  /**
-   * 从集群名称
-   */
-  StandbyClusterName?: string
-  /**
-   * 是否已强切
-   */
-  ForceSwitchGdn?: string
-  /**
-   * 返回码
-   */
-  Code?: number
-  /**
-   * 提示信息
-   */
-  Message?: string
-  /**
-   * 是否支持强切
-   */
-  IsSupportForce?: string
+  RequestId?: string
 }
 
 /**
@@ -6731,6 +7179,20 @@ reuse:使用已有日志集，使用GroupId指定日志集。
 }
 
 /**
+ * DeleteBackupVault请求参数结构体
+ */
+export interface DeleteBackupVaultRequest {
+  /**
+   * 备份保险箱ID，长度必须大于0
+   */
+  VaultId: string
+  /**
+   * 待删除的备份文件ID列表，不能为空
+   */
+  BackupIds: Array<number | bigint>
+}
+
+/**
  * 高级映射，自动映射规则
  */
 export interface AutoMapRule {
@@ -6956,6 +7418,20 @@ export interface AddInstancesRequest {
 }
 
 /**
+ * ModifyVault返回参数结构体
+ */
+export interface ModifyVaultResponse {
+  /**
+   * 任务ID
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 实例详情
  */
 export interface CynosdbInstanceDetail {
@@ -7122,17 +7598,125 @@ export interface DescribeBackupDownloadRestrictionRequest {
 }
 
 /**
- * 账号，包含accountName和host
+ * libra集群详情
  */
-export interface InputAccount {
+export interface LibraDBClusterDetail {
   /**
-   * 账号
+   * 集群id
    */
-  AccountName: string
+  ClusterId?: string
   /**
-   * 主机，默认‘%’
+   * 集群名称
    */
-  Host?: string
+  ClusterName?: string
+  /**
+   * 地域
+   */
+  Region?: string
+  /**
+   * 状态
+   */
+  Status?: string
+  /**
+   * 状态描述
+   */
+  StatusDesc?: string
+  /**
+   * 存储大小
+   */
+  Storage?: number
+  /**
+   * VPC名称
+   */
+  VpcName?: string
+  /**
+   * vpc唯一id
+   */
+  VpcId?: string
+  /**
+   * 子网名称
+   */
+  SubnetName?: string
+  /**
+   * 子网ID
+   */
+  SubnetId?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 数据库版本
+   */
+  DbVersion?: string
+  /**
+   * 使用容量
+   */
+  UsedStorage?: number
+  /**
+   * vip地址
+   */
+  Vip?: string
+  /**
+   * vport端口
+   */
+  Vport?: number
+  /**
+   * 集群只读实例的vip地址和vport端口
+   */
+  RoAddr?: Array<RoAddr>
+  /**
+   * cynos版本
+   */
+  CynosVersion?: string
+  /**
+   * 是否冻结
+   */
+  IsFreeze?: string
+  /**
+   * 任务列表
+   */
+  Tasks?: Array<ObjectTask>
+  /**
+   * 主可用区
+   */
+  MasterZone?: string
+  /**
+   * 实例集合
+   */
+  InstanceSet?: Array<InstanceSet>
+  /**
+   * 付费模式
+   */
+  PayMode?: number
+  /**
+   * 到期时间
+   */
+  PeriodEndTime?: string
+  /**
+   * 项目id
+   */
+  ProjectID?: number
+  /**
+   * 自动续费标识
+   */
+  RenewFlag?: number
+  /**
+   * 版本标签
+   */
+  CynosVersionTag?: string
+  /**
+   * 不支持添加ro yes-不支持添加ro， no/null/"" 支持添加ro
+   */
+  NoSupportAddRo?: string
+  /**
+   * 可用区
+   */
+  Zone?: string
+  /**
+   * 物理可用区
+   */
+  PhysicalZone?: string
 }
 
 /**
@@ -7956,6 +8540,16 @@ export interface DescribeAccountsRequest {
 }
 
 /**
+ * DescribeVaultBackupClusterInfo请求参数结构体
+ */
+export interface DescribeVaultBackupClusterInfoRequest {
+  /**
+   * 备份保险箱ID
+   */
+  VaultId: string
+}
+
+/**
  * DescribeRollbackTimeRange返回参数结构体
  */
 export interface DescribeRollbackTimeRangeResponse {
@@ -7975,6 +8569,24 @@ export interface DescribeRollbackTimeRangeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * binlog备份信息
+ */
+export interface DescribeBinlogListByVaultItem {
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * Binlog文件信息
+   */
+  BinlogFileInfo?: BinlogItem
 }
 
 /**
@@ -8096,6 +8708,24 @@ export interface ModifyClusterGlobalEncryptionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CheckTransferClusterZone请求参数结构体
+ */
+export interface CheckTransferClusterZoneRequest {
+  /**
+   * 源集群Id
+   */
+  ClusterId: string
+  /**
+   * 目标可用区
+   */
+  DstZone: string
+  /**
+   * proxy迁移的目标可用区信息
+   */
+  ProxyZones?: Array<ProxyZone>
 }
 
 /**
@@ -8420,6 +9050,36 @@ export interface DescribeFlowResponse {
 }
 
 /**
+ * CalculateBackupSaveSecExpires请求参数结构体
+ */
+export interface CalculateBackupSaveSecExpiresRequest {
+  /**
+   * 备份保险箱ID
+   */
+  VaultId: string
+  /**
+   * 备份保留时长（秒），必须大于0
+   */
+  BackupSaveSeconds?: number
+  /**
+   * 每页数量，范围(0,100]，默认10
+   */
+  Limit?: number
+  /**
+   * 偏移量，范围[0,INF)，默认0
+   */
+  Offset?: number
+  /**
+   * 排序字段，可选值：VaultId,VaultName,BackupSaveSeconds,LockedTime,CreateTime,UpdateTime，默认endTime
+   */
+  OrderBy?: string
+  /**
+   * 排序方式，可选值：desc,asc,DESC,ASC，默认desc
+   */
+  OrderByType?: string
+}
+
+/**
  * ExportInstanceErrorLogs请求参数结构体
  */
 export interface ExportInstanceErrorLogsRequest {
@@ -8531,20 +9191,6 @@ export interface DescribeLibraDBClusterTableMappingResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DeleteClusterDatabase请求参数结构体
- */
-export interface DeleteClusterDatabaseRequest {
-  /**
-   * 集群ID
-   */
-  ClusterId: string
-  /**
-   * 数据库名
-   */
-  DbNames: Array<string>
 }
 
 /**
@@ -9173,6 +9819,20 @@ export interface ModifyParamsData {
 }
 
 /**
+ * CreateVault返回参数结构体
+ */
+export interface CreateVaultResponse {
+  /**
+   * 任务ID，用于查询任务执行状态
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 资源包绑定的实例信息
  */
 export interface BindInstanceInfo {
@@ -9561,6 +10221,40 @@ export interface ReloadBalanceProxyNodeResponse {
 }
 
 /**
+ * CreateVault请求参数结构体
+ */
+export interface CreateVaultRequest {
+  /**
+   * 保险箱名称，长度必须大于0
+   */
+  VaultName: string
+  /**
+   * 备份保留时长（秒），必须大于0
+   */
+  BackupSaveSeconds: number
+  /**
+   * 保险箱描述
+   */
+  VaultDescribe?: string
+  /**
+   * KMS密钥ID，长度0-36字符
+   */
+  KeyId?: string
+  /**
+   * 密钥类型，可选值：cloud（云托管密钥）、custom（自定义密钥）
+   */
+  KeyType?: string
+  /**
+   * 密钥所在地域，长度0-32字符
+   */
+  KeyRegion?: string
+  /**
+   * 锁定时间，格式：YYYY-MM-DD HH:mm:ss
+   */
+  LockedTime?: string
+}
+
+/**
  * CloseAuditService返回参数结构体
  */
 export interface CloseAuditServiceResponse {
@@ -9777,17 +10471,21 @@ export interface CreateProxyRequest {
 }
 
 /**
- * DeleteLibraDBCluster返回参数结构体
+ * DescribeBackupListByVaultItem
  */
-export interface DeleteLibraDBClusterResponse {
+export interface DescribeBackupListByVaultItem {
   /**
-   * flow id
+   * 集群id
    */
-  FlowId?: number
+  ClusterId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 集群name
    */
-  RequestId?: string
+  ClusterName?: string
+  /**
+   * 备份信息
+   */
+  BackupFileInfo?: BackupFileInfo
 }
 
 /**
@@ -9806,6 +10504,24 @@ export interface DescribeResourcePackageSaleSpecResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * OpenClusterReadOnlyInstanceGroupAccess请求参数结构体
+ */
+export interface OpenClusterReadOnlyInstanceGroupAccessRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 端口
+   */
+  Port: string
+  /**
+   * 安全组ID
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -9841,122 +10557,19 @@ export interface QuerySimpleFilter {
 }
 
 /**
- * 集群列表信息
+ * DescribeResourcesByDealName请求参数结构体
  */
-export interface LibraDBClusterSet {
+export interface DescribeResourcesByDealNameRequest {
   /**
-   * 用户id
+   * 计费订单ID（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）。
+DealName与DealNames至少应输入一项，两者都传时以DealName为准。
    */
-  AppId?: number
+  DealName?: string
   /**
-   * 集群ID
+   * 计费订单ID列表，可以一次查询若干条订单ID对应资源信息（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）。
+DealName与DealNames至少应输入一项，两者都传时以DealName为准。
    */
-  ClusterId?: string
-  /**
-   * 集群名称
-   */
-  ClusterName?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * cynos版本
-   */
-  CynosVersion?: string
-  /**
-   * 版本标签
-   */
-  CynosVersionTag?: string
-  /**
-   * 数据库版本
-   */
-  DbVersion?: string
-  /**
-   * 实例数量
-   */
-  InstanceNum?: number
-  /**
-   * 是否冻结
-   */
-  IsFreeze?: string
-  /**
-   * 网络地址
-   */
-  NetAddrs?: Array<NetAddr>
-  /**
-   * 付费模式
-   */
-  PayMode?: number
-  /**
-   * 到期时间
-
-   */
-  PeriodEndTime?: string
-  /**
-   * 项目id
-   */
-  ProjectID?: number
-  /**
-   * 地域
-   */
-  Region?: string
-  /**
-   * 自动续费标识，1为自动续费，0为到期不续
-   */
-  RenewFlag?: number
-  /**
-   * 状态
-   */
-  Status?: string
-  /**
-   * 状态描述
-   */
-  StatusDesc?: string
-  /**
-   * 存储大小，单位为G
-   */
-  Storage?: number
-  /**
-   * 子网ID
-   */
-  SubnetId?: string
-  /**
-   * 任务列表
-   */
-  Tasks?: Array<ObjectTask>
-  /**
-   * 账户id
-   */
-  Uin?: string
-  /**
-   * vip地址
-   */
-  Vip?: string
-  /**
-   * vpc唯一id
-   */
-  VpcId?: string
-  /**
-   * vport端口
-   */
-  Vport?: number
-  /**
-   * 更新时间
-   */
-  UpdateTime?: string
-  /**
-   * 主可用区
-   */
-  MasterZone?: string
-  /**
-   * 物理可用区
-   */
-  PhysicalZone?: string
-  /**
-   * 可用区
-   */
-  Zone?: string
+  DealNames?: Array<string>
 }
 
 /**
@@ -10069,6 +10682,20 @@ offlined 已下线
    * 集群类型，取值范围<li> CYNOSDB：事务集群 </li><li> LIBRADB：分析集群 </li><li> ALL：全部 </li>，缺省为 ALL
    */
   ClusterType?: string
+}
+
+/**
+ * CopyBackupToVault请求参数结构体
+ */
+export interface CopyBackupToVaultRequest {
+  /**
+   * 目标保险箱ID，备份文件将复制到此保险箱
+   */
+  VaultId?: string
+  /**
+   * 备份文件ID列表，支持批量复制多个备份文件
+   */
+  BackupIds?: Array<number | bigint>
 }
 
 /**
@@ -10207,6 +10834,24 @@ export interface PauseServerlessRequest {
    * 是否强制暂停，忽略当前的用户链接  0:不强制  1:强制， 默认为1
    */
   ForcePause?: number
+}
+
+/**
+ * DescribeBinlogListByVault返回参数结构体
+ */
+export interface DescribeBinlogListByVaultResponse {
+  /**
+   * 总数量
+   */
+  TotalCount?: number
+  /**
+   * Binlog文件列表
+   */
+  BinlogList?: Array<DescribeBinlogListByVaultItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10488,6 +11133,24 @@ export interface ClusterTaskId {
  * DeleteLibraDBClusterAccounts返回参数结构体
  */
 export interface DeleteLibraDBClusterAccountsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSSLStatus返回参数结构体
+ */
+export interface DescribeSSLStatusResponse {
+  /**
+   * yes-开启，no-关闭
+   */
+  IsOpenSSL?: string
+  /**
+   * 证书下载地址
+   */
+  DownloadUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10882,17 +11545,33 @@ export interface CreateAuditLogFileRequest {
 }
 
 /**
- * DescribeSSLStatus返回参数结构体
+ * CalculateBackupSaveSecExpires返回参数结构体
  */
-export interface DescribeSSLStatusResponse {
+export interface CalculateBackupSaveSecExpiresResponse {
   /**
-   * yes-开启，no-关闭
+   * 将被删除的备份文件总数
    */
-  IsOpenSSL?: string
+  WillDeleteBackupFileCount?: number
   /**
-   * 证书下载地址
+   * 将被删除的备份文件列表
    */
-  DownloadUrl?: string
+  WillDeleteBackupFiles?: Array<WillDeleteItem>
+  /**
+   * 将被删除的Binlog文件总数
+   */
+  WillDeleteBinlogFileCount?: number
+  /**
+   * 将被删除的Binlog文件列表
+   */
+  WillDeleteBinlogFiles?: Array<WillDeleteItem>
+  /**
+   * 将被删除的Redolog文件总数
+   */
+  WillDeleteRedoLogFileCount?: number
+  /**
+   * 将被删除的Redolog文件列表
+   */
+  WillDeleteRedoLogFiles?: Array<WillDeleteItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11535,125 +12214,17 @@ export interface ModifyResourcePackageClustersResponse {
 }
 
 /**
- * libra集群详情
+ * 账号，包含accountName和host
  */
-export interface LibraDBClusterDetail {
+export interface InputAccount {
   /**
-   * 集群id
+   * 账号
    */
-  ClusterId?: string
+  AccountName: string
   /**
-   * 集群名称
+   * 主机，默认‘%’
    */
-  ClusterName?: string
-  /**
-   * 地域
-   */
-  Region?: string
-  /**
-   * 状态
-   */
-  Status?: string
-  /**
-   * 状态描述
-   */
-  StatusDesc?: string
-  /**
-   * 存储大小
-   */
-  Storage?: number
-  /**
-   * VPC名称
-   */
-  VpcName?: string
-  /**
-   * vpc唯一id
-   */
-  VpcId?: string
-  /**
-   * 子网名称
-   */
-  SubnetName?: string
-  /**
-   * 子网ID
-   */
-  SubnetId?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 数据库版本
-   */
-  DbVersion?: string
-  /**
-   * 使用容量
-   */
-  UsedStorage?: number
-  /**
-   * vip地址
-   */
-  Vip?: string
-  /**
-   * vport端口
-   */
-  Vport?: number
-  /**
-   * 集群只读实例的vip地址和vport端口
-   */
-  RoAddr?: Array<RoAddr>
-  /**
-   * cynos版本
-   */
-  CynosVersion?: string
-  /**
-   * 是否冻结
-   */
-  IsFreeze?: string
-  /**
-   * 任务列表
-   */
-  Tasks?: Array<ObjectTask>
-  /**
-   * 主可用区
-   */
-  MasterZone?: string
-  /**
-   * 实例集合
-   */
-  InstanceSet?: Array<InstanceSet>
-  /**
-   * 付费模式
-   */
-  PayMode?: number
-  /**
-   * 到期时间
-   */
-  PeriodEndTime?: string
-  /**
-   * 项目id
-   */
-  ProjectID?: number
-  /**
-   * 自动续费标识
-   */
-  RenewFlag?: number
-  /**
-   * 版本标签
-   */
-  CynosVersionTag?: string
-  /**
-   * 不支持添加ro yes-不支持添加ro， no/null/"" 支持添加ro
-   */
-  NoSupportAddRo?: string
-  /**
-   * 可用区
-   */
-  Zone?: string
-  /**
-   * 物理可用区
-   */
-  PhysicalZone?: string
+  Host?: string
 }
 
 /**
@@ -11749,29 +12320,17 @@ export interface RollBackClusterRequest {
 }
 
 /**
- * 访问代理配置
+ * ModifyClusterBinlogRedoLogAutoCopyVault返回参数结构体
  */
-export interface ProxyConfigInfo {
+export interface ModifyClusterBinlogRedoLogAutoCopyVaultResponse {
   /**
-   * 数据库代理组节点个数。该参数不再建议使用,建议使用ProxyZones
+   * 任务ID
    */
-  ProxyCount?: number
+  TaskId?: number
   /**
-   * cpu核数
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Cpu?: number
-  /**
-   * 内存
-   */
-  Mem?: number
-  /**
-   * 描述说明
-   */
-  Description?: string
-  /**
-   * 数据库节点信息（该参数与ProxyCount需要任选一个输入）
-   */
-  ProxyZones?: Array<ProxyZone>
+  RequestId?: string
 }
 
 /**
@@ -12707,40 +13266,17 @@ export interface DescribeAuditRuleTemplatesResponse {
 }
 
 /**
- * 逻辑备份配置信息
+ * DeleteClusterDatabase请求参数结构体
  */
-export interface LogicBackupConfigInfo {
+export interface DeleteClusterDatabaseRequest {
   /**
-   * 是否开启自动逻辑备份
+   * 集群ID
    */
-  LogicBackupEnable?: string
+  ClusterId: string
   /**
-   * 自动逻辑备份开始时间
+   * 数据库名
    */
-  LogicBackupTimeBeg?: number
-  /**
-   * 自动逻辑备份结束时间
-   */
-  LogicBackupTimeEnd?: number
-  /**
-   * 自动逻辑备份保留时间
-单位：秒
-   */
-  LogicReserveDuration?: number
-  /**
-   * 是否开启跨地域逻辑备份
-可选值：ON/OFF
-   */
-  LogicCrossRegionsEnable?: string
-  /**
-   * 逻辑备份所跨地域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LogicCrossRegions?: Array<string>
-  /**
-   * 备份投递关系
-   */
-  AutoCopyVaults?: Array<CreateBackupVaultItem>
+  DbNames: Array<string>
 }
 
 /**
@@ -12815,6 +13351,20 @@ export interface DescribeProjectSecurityGroupsResponse {
    * 总数量
    */
   Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteLibraDBCluster返回参数结构体
+ */
+export interface DeleteLibraDBClusterResponse {
+  /**
+   * flow id
+   */
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13049,6 +13599,10 @@ export interface DescribeBackupListRequest {
    * 是否跨地域备份
    */
   IsCrossRegionsBackup?: string
+  /**
+   * 需要查询的状态
+   */
+  BackupStatus?: Array<string>
 }
 
 /**
@@ -13085,6 +13639,52 @@ export interface SwitchClusterLogBin {
    * 状态
    */
   Status?: string
+}
+
+/**
+ * ModifyVault请求参数结构体
+ */
+export interface ModifyVaultRequest {
+  /**
+   * 保险箱ID
+   */
+  VaultId: string
+  /**
+   * 保险箱名称，最大255字符
+   */
+  VaultName?: string
+  /**
+   * 保险箱描述，最大1024字符
+   */
+  VaultDescribe?: string
+  /**
+   * 备份保留时长（秒），范围: (0, 632448000]
+   */
+  BackupSaveSeconds?: number
+  /**
+   * 加密密钥ID，最大36字符
+   */
+  KeyId?: string
+  /**
+   * 密钥类型，可选值: cloud、custom
+   */
+  KeyType?: string
+  /**
+   * 密钥所在地域，最大32字符
+   */
+  KeyRegion?: string
+  /**
+   * 是否锁定保险箱
+   */
+  IsLock?: boolean
+  /**
+   * 锁定到期时间，格式: 2006-01-02 15:04:05，锁定时间距当前最多15天
+   */
+  LockedTime?: string
+  /**
+   * 是否加密
+   */
+  IsEncryption?: boolean
 }
 
 /**
@@ -13779,6 +14379,16 @@ export interface LibraDBVersion {
 }
 
 /**
+ * DeleteVaults请求参数结构体
+ */
+export interface DeleteVaultsRequest {
+  /**
+   * 待删除的备份保险箱ID列表，不能为空，保险箱内必须已清空所有文件
+   */
+  VaultIds: Array<string>
+}
+
+/**
  * 任务进度查询
  */
 export interface TaskProgressInfo {
@@ -13942,19 +14552,122 @@ export interface RollbackToNewClusterResponse {
 }
 
 /**
- * DescribeResourcesByDealName请求参数结构体
+ * 集群列表信息
  */
-export interface DescribeResourcesByDealNameRequest {
+export interface LibraDBClusterSet {
   /**
-   * 计费订单ID（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）。
-DealName与DealNames至少应输入一项，两者都传时以DealName为准。
+   * 用户id
    */
-  DealName?: string
+  AppId?: number
   /**
-   * 计费订单ID列表，可以一次查询若干条订单ID对应资源信息（如果计费还没回调业务发货，可能出现错误码InvalidParameterValue.DealNameNotFound，这种情况需要业务重试DescribeResourcesByDealName接口直到成功）。
-DealName与DealNames至少应输入一项，两者都传时以DealName为准。
+   * 集群ID
    */
-  DealNames?: Array<string>
+  ClusterId?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * cynos版本
+   */
+  CynosVersion?: string
+  /**
+   * 版本标签
+   */
+  CynosVersionTag?: string
+  /**
+   * 数据库版本
+   */
+  DbVersion?: string
+  /**
+   * 实例数量
+   */
+  InstanceNum?: number
+  /**
+   * 是否冻结
+   */
+  IsFreeze?: string
+  /**
+   * 网络地址
+   */
+  NetAddrs?: Array<NetAddr>
+  /**
+   * 付费模式
+   */
+  PayMode?: number
+  /**
+   * 到期时间
+
+   */
+  PeriodEndTime?: string
+  /**
+   * 项目id
+   */
+  ProjectID?: number
+  /**
+   * 地域
+   */
+  Region?: string
+  /**
+   * 自动续费标识，1为自动续费，0为到期不续
+   */
+  RenewFlag?: number
+  /**
+   * 状态
+   */
+  Status?: string
+  /**
+   * 状态描述
+   */
+  StatusDesc?: string
+  /**
+   * 存储大小，单位为G
+   */
+  Storage?: number
+  /**
+   * 子网ID
+   */
+  SubnetId?: string
+  /**
+   * 任务列表
+   */
+  Tasks?: Array<ObjectTask>
+  /**
+   * 账户id
+   */
+  Uin?: string
+  /**
+   * vip地址
+   */
+  Vip?: string
+  /**
+   * vpc唯一id
+   */
+  VpcId?: string
+  /**
+   * vport端口
+   */
+  Vport?: number
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 主可用区
+   */
+  MasterZone?: string
+  /**
+   * 物理可用区
+   */
+  PhysicalZone?: string
+  /**
+   * 可用区
+   */
+  Zone?: string
 }
 
 /**
@@ -14179,6 +14892,36 @@ expireTime-过期时间，packageUsedSpec-使用容量，packageTotalSpec-总存
 }
 
 /**
+ * TransferClusterZone请求参数结构体
+ */
+export interface TransferClusterZoneRequest {
+  /**
+   * 源集群Id
+   */
+  ClusterId: string
+  /**
+   * 目标可用区
+   */
+  DstZone: string
+  /**
+   * 跨可用区迁移主从数据延迟校验阈值，单位毫秒(ms)
+   */
+  MaxLag: number
+  /**
+   * Immediate:立即执行，InMaintain:时间窗口执行
+   */
+  TransferType: string
+  /**
+   * 多可用区备区
+   */
+  DstSlaveZone?: string
+  /**
+   * proxy迁移的目标可用区信息
+   */
+  ProxyZones?: Array<ProxyZone>
+}
+
+/**
  * CloseSSL返回参数结构体
  */
 export interface CloseSSLResponse {
@@ -14233,21 +14976,21 @@ export interface OpenClusterPasswordComplexityResponse {
 }
 
 /**
- * OpenClusterReadOnlyInstanceGroupAccess请求参数结构体
+ * DescribeBackupListByVault返回参数结构体
  */
-export interface OpenClusterReadOnlyInstanceGroupAccessRequest {
+export interface DescribeBackupListByVaultResponse {
   /**
-   * 集群ID
+   * 符合条件的备份文件总数
    */
-  ClusterId: string
+  TotalCount?: number
   /**
-   * 端口
+   * 备份文件列表
    */
-  Port: string
+  BackupList?: Array<DescribeBackupListByVaultItem>
   /**
-   * 安全组ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SecurityGroupIds?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -14613,6 +15356,43 @@ export interface ClusterParamModifyLog {
 }
 
 /**
+ * 逻辑备份配置信息
+ */
+export interface LogicBackupConfigInfo {
+  /**
+   * 是否开启自动逻辑备份
+   */
+  LogicBackupEnable?: string
+  /**
+   * 自动逻辑备份开始时间
+   */
+  LogicBackupTimeBeg?: number
+  /**
+   * 自动逻辑备份结束时间
+   */
+  LogicBackupTimeEnd?: number
+  /**
+   * 自动逻辑备份保留时间
+单位：秒
+   */
+  LogicReserveDuration?: number
+  /**
+   * 是否开启跨地域逻辑备份
+可选值：ON/OFF
+   */
+  LogicCrossRegionsEnable?: string
+  /**
+   * 逻辑备份所跨地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogicCrossRegions?: Array<string>
+  /**
+   * 备份投递关系
+   */
+  AutoCopyVaults?: Array<CreateBackupVaultItem>
+}
+
+/**
  * 实例组信息
  */
 export interface CynosdbInstanceGroup {
@@ -14873,6 +15653,20 @@ export interface ErrorLogItemExport {
 }
 
 /**
+ * 删除保险箱任务信息
+ */
+export interface DeleteVaultTask {
+  /**
+   * 保险箱ID
+   */
+  VaultId?: string
+  /**
+   * 任务ID
+   */
+  TaskId?: number
+}
+
+/**
  * DescribeParamTemplateDetail返回参数结构体
  */
 export interface DescribeParamTemplateDetailResponse {
@@ -14956,6 +15750,52 @@ export interface ClusterReadOnlyValue {
    * 只读开关值
    */
   ReadOnlyValue?: string
+}
+
+/**
+ * DescribeBackupListByVault请求参数结构体
+ */
+export interface DescribeBackupListByVaultRequest {
+  /**
+   * 保险箱ID，长度必须大于0
+   */
+  VaultId: string
+  /**
+   * 备份文件ID列表，用于筛选特定备份
+   */
+  BackupIds?: Array<number | bigint>
+  /**
+   * 集群ID，用于筛选特定集群的备份
+   */
+  ClusterId?: string
+  /**
+   * 备份名称列表，用于精确匹配筛选
+   */
+  BackupNames?: Array<string>
+  /**
+   * 文件名称列表，用于精确匹配筛选
+   */
+  FileNames?: Array<string>
+  /**
+   * 分页数量，取值范围：(0, 100]，默认100
+   */
+  Limit?: number
+  /**
+   * 分页偏移量，取值范围：[0, INF)，默认0
+   */
+  Offset?: number
+  /**
+   * 排序字段，可选值：VaultId, VaultName, BackupSaveSeconds, LockedTime, CreateTime, UpdateTime，默认createTime
+   */
+  OrderBy?: string
+  /**
+   * 排序方式，可选值：desc, asc, DESC, ASC，默认desc
+   */
+  OrderByType?: string
+  /**
+   * 状态
+   */
+  Status?: string
 }
 
 /**

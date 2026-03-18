@@ -48,9 +48,29 @@ it("tcb.v20180608.DescribeUserList", async function () {
     }
 })
 
+it("tcb.v20180608.RunSql", async function () {
+    try {
+       const data = await client.RunSql({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.CreateHostingDomain", async function () {
     try {
        const data = await client.CreateHostingDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeEnvAccountCircle", async function () {
+    try {
+       const data = await client.DescribeEnvAccountCircle({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,6 +88,16 @@ it("tcb.v20180608.CreateMySQL", async function () {
     }
 })
 
+it("tcb.v20180608.UpdateTable", async function () {
+    try {
+       const data = await client.UpdateTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.CreateTable", async function () {
     try {
        const data = await client.CreateTable({})
@@ -78,9 +108,19 @@ it("tcb.v20180608.CreateTable", async function () {
     }
 })
 
-it("tcb.v20180608.ModifyCloudBaseGWAPI", async function () {
+it("tcb.v20180608.CreateEnvResource", async function () {
     try {
-       const data = await client.ModifyCloudBaseGWAPI({})
+       const data = await client.CreateEnvResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DestroyStaticStore", async function () {
+    try {
+       const data = await client.DestroyStaticStore({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +158,9 @@ it("tcb.v20180608.RunCommands", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeBaasPackageList", async function () {
+it("tcb.v20180608.DescribeBillingInfo", async function () {
     try {
-       const data = await client.DescribeBaasPackageList({})
+       const data = await client.DescribeBillingInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,6 +181,16 @@ it("tcb.v20180608.CreateAuthDomain", async function () {
 it("tcb.v20180608.DescribeCloudBaseGWAPI", async function () {
     try {
        const data = await client.DescribeCloudBaseGWAPI({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.ModifyProvider", async function () {
+    try {
+       const data = await client.ModifyProvider({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +258,19 @@ it("tcb.v20180608.DescribeMySQLClusterDetail", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeBillingInfo", async function () {
+it("tcb.v20180608.DescribeBaasPackageList", async function () {
     try {
-       const data = await client.DescribeBillingInfo({})
+       const data = await client.DescribeBaasPackageList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.ModifyClient", async function () {
+    try {
+       const data = await client.ModifyClient({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,9 +348,9 @@ it("tcb.v20180608.DescribeTable", async function () {
     }
 })
 
-it("tcb.v20180608.UpdateTable", async function () {
+it("tcb.v20180608.ModifyEnv", async function () {
     try {
-       const data = await client.UpdateTable({})
+       const data = await client.ModifyEnv({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,6 +368,26 @@ it("tcb.v20180608.DeleteCloudBaseGWAPI", async function () {
     }
 })
 
+it("tcb.v20180608.DeleteProvider", async function () {
+    try {
+       const data = await client.DeleteProvider({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.ModifyLoginConfig", async function () {
+    try {
+       const data = await client.ModifyLoginConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.CheckTcbService", async function () {
     try {
        const data = await client.CheckTcbService({})
@@ -318,9 +398,9 @@ it("tcb.v20180608.CheckTcbService", async function () {
     }
 })
 
-it("tcb.v20180608.ListTables", async function () {
+it("tcb.v20180608.DescribeVmSpec", async function () {
     try {
-       const data = await client.ListTables({})
+       const data = await client.DescribeVmSpec({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,9 +478,9 @@ it("tcb.v20180608.ModifyUser", async function () {
     }
 })
 
-it("tcb.v20180608.ModifyEnv", async function () {
+it("tcb.v20180608.GetProviders", async function () {
     try {
-       const data = await client.ModifyEnv({})
+       const data = await client.GetProviders({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,9 +488,9 @@ it("tcb.v20180608.ModifyEnv", async function () {
     }
 })
 
-it("tcb.v20180608.RunSql", async function () {
+it("tcb.v20180608.DescribeLoginConfig", async function () {
     try {
-       const data = await client.RunSql({})
+       const data = await client.DescribeLoginConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,9 +568,9 @@ it("tcb.v20180608.CreateBillDeal", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeCurveData", async function () {
+it("tcb.v20180608.DescribeClient", async function () {
     try {
-       const data = await client.DescribeCurveData({})
+       const data = await client.DescribeClient({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -501,6 +581,16 @@ it("tcb.v20180608.DescribeCurveData", async function () {
 it("tcb.v20180608.CreateCloudBaseGWAPI", async function () {
     try {
        const data = await client.CreateCloudBaseGWAPI({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.ModifyCloudBaseGWAPI", async function () {
+    try {
+       const data = await client.ModifyCloudBaseGWAPI({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -558,9 +648,9 @@ it("tcb.v20180608.DeleteCloudBaseGWDomain", async function () {
     }
 })
 
-it("tcb.v20180608.DestroyStaticStore", async function () {
+it("tcb.v20180608.DescribeCurveData", async function () {
     try {
-       const data = await client.DestroyStaticStore({})
+       const data = await client.DescribeCurveData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -568,9 +658,9 @@ it("tcb.v20180608.DestroyStaticStore", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeEnvAccountCircle", async function () {
+it("tcb.v20180608.AddProvider", async function () {
     try {
-       const data = await client.DescribeEnvAccountCircle({})
+       const data = await client.AddProvider({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -581,6 +671,16 @@ it("tcb.v20180608.DescribeEnvAccountCircle", async function () {
 it("tcb.v20180608.DescribeTables", async function () {
     try {
        const data = await client.DescribeTables({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.ListTables", async function () {
+    try {
+       const data = await client.ListTables({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

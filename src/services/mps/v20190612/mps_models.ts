@@ -7948,20 +7948,19 @@ export interface AiAnalysisTaskFrameTagOutput {
  */
 export interface AiAnalysisTaskDubbingOutput {
   /**
-   * 译制视频路径。
+   * <p>译制视频路径。</p>
    */
   VideoPath?: string
   /**
-   * 标记文件路径
-
+   * <p>标记文件路径</p>
    */
   SpeakerPath?: string
   /**
-   * 音色id
+   * <p>音色id</p>
    */
   VoiceId?: string
   /**
-   * 译制视频存储位置。
+   * <p>译制视频存储位置。</p>
    */
   OutputStorage?: TaskOutputStorage
 }

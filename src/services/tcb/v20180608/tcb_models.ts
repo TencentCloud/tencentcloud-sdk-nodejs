@@ -102,6 +102,16 @@ export interface ListTablesResponse {
 }
 
 /**
+ * GetProviders请求参数结构体
+ */
+export interface GetProvidersRequest {
+  /**
+   * 环境 ID，用于指定需要查询配置第三方身份源的云开发环境。
+   */
+  EnvId: string
+}
+
+/**
  * 订单信息
  */
 export interface OrderInfo {
@@ -178,6 +188,20 @@ export interface CheckTcbServiceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 可以为每种语言配置一个字符串。比如：name，中文展示为：名字，英文展示为 name，韩文展示为：이름
+ */
+export interface LocalizedMessage {
+  /**
+   * 默认展示的文本
+   */
+  Message: string
+  /**
+   * 针对每种语言展示的文字
+   */
+  Localized?: Array<MessageLocalized>
 }
 
 /**
@@ -413,23 +437,91 @@ export interface ModifyEnvPlanRequest {
 }
 
 /**
- * http访问服务客户端限频
+ * AddProvider请求参数结构体
  */
-export interface CloudBaseClientQPSPolicy {
+export interface AddProviderRequest {
   /**
-   * UserID 或 ClientIP 或 None，如果为 None 代表不限制
+   * 云开发环境 ID，用于唯一标识当前操作所属的云开发环境。
    */
-  LimitBy?: string
+  EnvId: string
   /**
-   * 限制值
+   * 身份源的显示名称，支持国际化多语言配置。用户在登录页面看到的身份源名称将使用该字段，建议根据实际业务场景填写易于识别的名称，例如：企业微信、GitHub 等。
    */
-  LimitValue?: number
+  Name: LocalizedMessage
+  /**
+   * 身份源协议类型，决定该身份源使用何种认证协议与第三方平台对接。可选值：
+OAUTH：标准 OAuth 2.0 协议
+OIDC：OpenID Connect 协议
+SAML：SAML 2.0 协议
+WX_MICRO_APP：微信小程序登录
+WX_QRCODE_MICRO_APP：微信小程序扫码登录
+WX_CLOUDBASE_MICRO_APP：云开发托管小程序登录
+WX_MP：微信公众号网页授权登录
+WX_OPEN：微信开放平台扫码登录
+WX_WORK_INTERNAL：企业微信自建应用登录
+WX_WORK_AGENT：企业微信代开发应用登录
+WX_WORK_THIRD_PARTY：企业微信第三方应用登录
+WX_WORK_THIRD_PARTY_ASSOCIATION：企业微信第三方应用关联登录
+CUSTOM：自定义登录
+EMAIL：邮箱登录
+   */
+  ProviderType: string
+  /**
+   * 身份源的唯一标识符，用于在系统内区分不同的身份源。格式要求：2~32 位，仅支持小写英文字母和数字，不可包含空格或特殊字符。若不填写，系统将自动生成。例如：github、google。
+   */
+  Id?: string
+  /**
+   * 身份源图标的访问地址，将展示在登录页的身份源按钮上。建议使用 64×64 像素的 SVG 格式图片以保证清晰度，支持 HTTP/HTTPS 公网可访问的图片链接。
+   */
+  Picture?: string
+  /**
+   * 身份源对应的官方主页地址。该信息将在用户查看自己的第三方账号绑定列表时展示，帮助用户识别已绑定的身份源来源。例如 GitHub 身份源可填写：https://github.com。
+   */
+  Homepage?: string
+  /**
+   * 身份认证源协议连接配置，包含与第三方平台对接所需的核心参数，如 ClientId、ClientSecret、授权端点、Token 端点、回调地址、Scope、SAML Metadata、请求和响应参数映射等。不同 ProviderType 对应不同的配置项要求。
+   */
+  Config?: ProviderConfig
+  /**
+   * 是否开启透传登录模式。可选值：TRUE（开启）、FALSE（关闭）、UNSPECIFIED（默认为 FALSE，企业微信代开发应用 WX_WORK_AGENT 类型默认为 TRUE）。开启后，平台不会持久化存储用户数据，仅将第三方身份源返回的用户信息透传给业务方，适用于不希望平台留存用户数据的场景。注意：开启透传模式时，ReuseUserId 将自动设为 TRUE，AutoSignUpWithProviderUser 将自动设为 FALSE。
+   */
+  TransparentMode?: string
+  /**
+   * 身份源的详细描述信息，支持国际化多语言配置。可用于向用户说明该身份源的用途或使用场景，例如：谷歌授权登录。
+   */
+  Description?: LocalizedMessage
+  /**
+   * 是否直接复用第三方身份源的用户 ID 作为平台的用户 ID。可选值：TRUE（直接复用，适用于已有用户体系迁移场景）、FALSE（不复用，由平台生成独立用户 ID）、UNSPECIFIED（默认为 FALSE，但当 TransparentMode 为 TRUE 时自动设为 TRUE）。注意：开启后需确保第三方用户 ID 的唯一性，避免 ID 冲突。
+   */
+  ReuseUserId?: string
+  /**
+   * 身份源的启用状态。可选值：TRUE（启用，用户可通过该身份源登录）、FALSE（禁用，登录入口将被隐藏，已有绑定关系不受影响）、UNSPECIFIED（默认为 TRUE）。
+   */
+  On?: string
+  /**
+   * 是否开启邮箱自动关联登录。可选值：TRUE（开启）、FALSE（关闭）、UNSPECIFIED（默认为 FALSE）。开启后，若第三方身份源返回的邮箱与系统中已有用户的邮箱一致，则自动将该第三方账号与已有用户关联并完成登录，无需用户手动绑定。
+   */
+  AutoSignInWhenEmailMatch?: string
+  /**
+   * 是否开启手机号自动关联登录。可选值：TRUE（开启）、FALSE（关闭）、UNSPECIFIED（默认行为等同 TRUE）。开启后，若第三方身份源返回的手机号与系统中已有用户的手机号一致，则自动将该第三方账号与已有用户关联并完成登录，无需用户手动绑定。注意：该字段默认行为（UNSPECIFIED）与 AutoSignInWhenEmailMatch 不同，手机号匹配在未显式关闭时默认生效。
+   */
+  AutoSignInWhenPhoneNumberMatch?: string
 }
 
 /**
  * ModifyClsTopic返回参数结构体
  */
 export interface ModifyClsTopicResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteProvider返回参数结构体
+ */
+export interface DeleteProviderResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -686,33 +778,33 @@ export interface BindCloudBaseAccessDomainResponse {
 }
 
 /**
- * 云日志服务相关信息
+ * 邮箱smtp配置
  */
-export interface LogServiceInfo {
+export interface EmailSmtpConfig {
   /**
-   * log名
+   * 邮件发送者的邮箱地址，即收件人看到的发件人地址。需为有效的邮箱格式，且须与 SMTP 服务器的授权账号一致，否则可能被邮件服务商拒绝发送。例如：abc@example.com
    */
-  LogsetName?: string
+  SenderAddress?: string
   /**
-   * log-id
+   * SMTP 邮件服务器的域名或 IP 地址，用于建立邮件发送连接。不同邮件服务商的 SMTP 地址不同，例如 QQ 邮箱为 smtp.qq.com，Gmail 为 smtp.gmail.com，请以实际服务商提供的地址为准。
    */
-  LogsetId?: string
+  ServerHost?: string
   /**
-   * topic名
+   * SMTP 邮件服务器的端口号，需与所选安全模式（SecurityMode）匹配。常用端口：465（SSL 加密）、587（STARTTLS 加密）、25（无加密，不推荐）。建议优先使用 465 或 587 以保障传输安全。
    */
-  TopicName?: string
+  ServerPort?: number
   /**
-   * topic-id
+   * SMTP 服务器的登录账号，通常为发件人的完整邮箱地址。部分邮件服务商支持使用独立的 SMTP 授权账号，请以实际服务商的要求为准。
    */
-  TopicId?: string
+  AccountUsername?: string
   /**
-   * cls日志所属地域
+   * SMTP 服务器的登录密码。注意：部分邮件服务商（如 QQ 邮箱、163 邮箱）不支持直接使用账号登录密码，需在邮箱设置中开启 SMTP 服务并生成专用的授权码，请以实际服务商的要求为准。
    */
-  Region?: string
+  AccountPassword?: string
   /**
-   * topic保存时长 默认7天
+   * SMTP 连接的加密模式，用于保障邮件传输安全。可选值：AUTO（自动选择，优先使用安全连接）、SSL（全程 SSL/TLS 加密，通常配合端口 465 使用）、STARTSSL（通过 STARTTLS 命令升级为加密连接，通常配合端口 587 使用）、NO_SSL（不使用加密，仅建议在内网或测试环境中使用）。推荐使用 AUTO 或 SSL 以确保传输安全。
    */
-  Period?: number
+  SecurityMode?: string
 }
 
 /**
@@ -870,6 +962,16 @@ export interface ModifyClsTopicRequest {
 }
 
 /**
+ * DescribeLoginConfig请求参数结构体
+ */
+export interface DescribeLoginConfigRequest {
+  /**
+   * 环境id
+   */
+  EnvId: string
+}
+
+/**
  * CreateHostingDomain请求参数结构体
  */
 export interface CreateHostingDomainRequest {
@@ -903,6 +1005,44 @@ export interface TkeClusterInfo {
    * 版本内网CLB所在子网Id
    */
   VersionClbSubnetId?: string
+}
+
+/**
+ * ModifyLoginConfig请求参数结构体
+ */
+export interface ModifyLoginConfigRequest {
+  /**
+   * 环境 ID，用于指定需要修改登录策略的云开发环境。
+   */
+  EnvId: string
+  /**
+   * 手机号短信登录开关。设置为 true 开启手机号短信登录，允许用户使用手机号和短信验证码进行登录和注册；设置为 false 关闭手机号短信登录。
+   */
+  PhoneNumberLogin: boolean
+  /**
+   * 邮箱登录开关。设置为 true 开启邮箱登录，允许用户使用邮箱和密码进行登录和注册；设置为 false 关闭邮箱登录。
+   */
+  EmailLogin: boolean
+  /**
+   * 用户名密码登录开关。设置为 true 开启用户名密码登录，允许用户使用用户名和密码进行登录和注册；设置为 false 关闭用户名密码登录。
+   */
+  UserNameLogin: boolean
+  /**
+   * 匿名登录开关。设置为 true 开启匿名登录，允许用户无需注册即可以匿名身份访问应用；设置为 false 关闭匿名登录。
+   */
+  AnonymousLogin: boolean
+  /**
+   * 短信验证码发送配置，用于设置短信验证码的发送通道类型和日发送限额。不传则不修改当前配置。
+   */
+  SmsVerificationConfig?: VerificationConfig
+  /**
+   * MFA 多因子认证登录配置，用于设置多因子认证开关及验证方式（短信、邮箱、TOTP、强制绑定手机号）。不传则不修改当前配置。
+   */
+  MfaConfig?: MFALoginConfig
+  /**
+   * 密码更新策略配置，用于设置首次登录强制修改密码和定期强制修改密码策略。不传则不修改当前配置。
+   */
+  PwdUpdateStrategy?: PasswordUpdateLoginConfig
 }
 
 /**
@@ -983,6 +1123,20 @@ export interface MySQLNetDetail {
 }
 
 /**
+ * CreateEnvResource请求参数结构体
+ */
+export interface CreateEnvResourceRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 资源类型。代表本次开通哪些资源。 可取值以及含义： - log : 表示日志资源，当前仅支持 log（日志资源类型），后续版本可能扩展，该数组不能为空，且每个元素必须为合法的资源类型值
+   */
+  Resources: Array<string>
+}
+
+/**
  * 本类型用于接口中描述待创建索引结构
  */
 export interface MgoKeySchema {
@@ -1008,6 +1162,20 @@ export interface DescribeHostingDomainTaskRequest {
    * 环境ID
    */
   EnvId: string
+}
+
+/**
+ * 邮箱登录配置
+ */
+export interface EmailProviderConfig {
+  /**
+   * smtp配置
+   */
+  SmtpConfig?: EmailSmtpConfig
+  /**
+   * 可选：TRUE，FALSE，如果On为TRUE，则表示采用默认代发。
+   */
+  On?: string
 }
 
 /**
@@ -1102,6 +1270,20 @@ export interface CreateBillDealResponse {
 }
 
 /**
+ * DestroyMySQL返回参数结构体
+ */
+export interface DestroyMySQLResponse {
+  /**
+   * 销毁结果
+   */
+  Data?: DestroyMySQLResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 开通Mysql 结果
  */
 export interface CreateMySQLResult {
@@ -1109,6 +1291,49 @@ export interface CreateMySQLResult {
    * 任务ID
    */
   TaskId?: string
+}
+
+/**
+ * http访问服务客户端限频
+ */
+export interface CloudBaseClientQPSPolicy {
+  /**
+   * UserID 或 ClientIP 或 None，如果为 None 代表不限制
+   */
+  LimitBy?: string
+  /**
+   * 限制值
+   */
+  LimitValue?: number
+}
+
+/**
+ * ModifySafeRule请求参数结构体
+ */
+export interface ModifySafeRuleRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 集合名称
+   */
+  CollectionName: string
+  /**
+   * 权限标签。包含以下取值：
+<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
+<li> PRIVATE：仅创建者及管理员可读写</li>
+<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
+<li> ADMINONLY：仅管理员可读写</li>
+<li> CUSTOM：自定义安全规则</li>
+   */
+  AclTag: string
+  /**
+   * 安全规则内容。
+当 AclTag=CUSTOM 时，此参数必填。
+详情参考：[文档型数据库安全规则](https://docs.cloudbase.net/database/security-rules)
+   */
+  Rule?: string
 }
 
 /**
@@ -1170,6 +1395,43 @@ export interface RunCommandsResponse {
 }
 
 /**
+ * 静态托管资源信息
+ */
+export interface StaticStoreInfo {
+  /**
+   * 环境ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnvId?: string
+  /**
+   * 静态域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CdnDomain?: string
+  /**
+   * COS桶
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Bucket?: string
+  /**
+   * cos区域
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  Regoin?: string
+  /**
+   * 资源状态:init(初始化)/process(处理中)/online(上线)/destroying(销毁中)/offline(下线))
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+}
+
+/**
  * RunSql返回参数结构体
  */
 export interface RunSqlResponse {
@@ -1189,6 +1451,64 @@ export interface RunSqlResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 三方认证入参映射。如果您的对接方不标准，则可以使用这个参数。默认情况下，该参数可以为空。比如：github,google,apple 接入，这些参数为空，但是国内的腾讯，新浪等则需要配置该参数。原因主要是：腾讯等公司在实现oauth时，未能完全遵循oauth标准。
+ */
+export interface ProviderRequestParametersMap {
+  /**
+   * OAuth 标准协议中的 client_id。不同第三方平台的字段名称可能不同，例如微信平台对应 appid、新浪微博对应 app_id。
+   */
+  ClientId?: string
+  /**
+   * OAuth 标准协议中的 client_secret，用于身份认证源的密钥鉴权。请妥善保管，避免泄露。
+   */
+  ClientSecret?: string
+  /**
+   * OAuth 标准协议中的 redirect_uri，即授权回调地址。用户完成第三方认证后将重定向至该地址。
+   */
+  RedirectUri?: string
+  /**
+   * 身份源注册用户时自动绑定的角色 ID。配置后，通过该身份源注册的新用户将自动关联指定角色。
+   */
+  RegisterUserRoleId?: string
+  /**
+   * 身份源注册用户时是否自动授予许可证。取值范围：
+TRUE：自动授权许可证
+FALSE：不自动授权（默认值）
+   */
+  RegisterUserAutoLicense?: string
+  /**
+   * OAuth 获取 Token 时认证信息的请求位置。取值范围：
+URL：将认证信息放在请求 URL 参数中
+Headers：将认证信息放在请求 Header 中
+Body：将认证信息放在请求 Body 中
+   */
+  AuthPosition?: string
+  /**
+   * OAuth 授权模式匹配的参数字段名。用于指定获取 Token 请求中 grant_type 参数对应的字段名称。
+   */
+  GrantType?: string
+  /**
+   * OAuth 授权模式类型。用于指定 grant_type 的值，例如 client_credentials 表示客户端凭证模式。
+   */
+  ClientCredentials?: string
+  /**
+   * OAuth 返回中 access_token 的映射字段名。若第三方平台返回的 Token 字段名不是标准的 access_token，可通过此字段指定实际字段名。
+   */
+  AccessToken?: string
+  /**
+   * OAuth 返回中 Token 有效期的映射字段名。若第三方平台返回的有效期字段名不是标准的 expires_in，可通过此字段指定实际字段名。
+   */
+  ExpiresIn?: string
+  /**
+   * 身份源注册用户时的用户类型。取值范围：
+externalUser：外部用户
+internalUser：内部用户
+默认值为 externalUser。
+   */
+  RegisterUserType?: string
 }
 
 /**
@@ -1315,6 +1635,16 @@ export interface Tag {
 }
 
 /**
+ * ModifyClient返回参数结构体
+ */
+export interface ModifyClientResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * EditAuthConfig返回参数结构体
  */
 export interface EditAuthConfigResponse {
@@ -1344,13 +1674,38 @@ export interface RenewEnvRequest {
 }
 
 /**
- * DestroyMySQL返回参数结构体
+ * DescribeClient返回参数结构体
  */
-export interface DestroyMySQLResponse {
+export interface DescribeClientResponse {
   /**
-   * 销毁结果
+   * 客户端的唯一标识符（Client ID），在 OAuth/OIDC 授权流程中作为 client_id 参数使用。创建时仅可传入环境 ID 或留空：传入环境 ID 时将直接使用该值作为客户端 ID（一个环境仅允许一个）；留空时由系统自动生成与环境 ID 关联的唯一 ID。创建后不可修改。
    */
-  Data?: DestroyMySQLResult
+  Id?: string
+  /**
+   * 客户端的创建时间，格式遵循 ISO 8601 标准（如：2024-01-01T00:00:00Z），由系统自动生成，不可手动修改。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedAt?: string
+  /**
+   * 客户端信息的最后修改时间，格式遵循 ISO 8601 标准（如：2024-01-01T00:00:00Z），每次更新应用配置时由系统自动更新。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdatedAt?: string
+  /**
+   * Refresh Token 的有效期，单位为秒。超过该时间后 Refresh Token 将失效，用户需重新登录。取值范围：最小 1800 秒（30 分钟），最大 2592000 秒（30 天），超出上限将自动截断为 30 天。若不设置则默认为 30 天。当该值小于等于 7200 秒时，系统会自动将 AccessTokenExpiresIn 调整为 RefreshTokenExpiresIn - 660 秒。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RefreshTokenExpiresIn?: number
+  /**
+   * Access Token 的有效期，单位为秒。超过该时间后 Access Token 将失效，需通过 Refresh Token 换取新的 Access Token。若不设置则默认为 7200 秒（2 小时）。设置值小于 1800 秒时将被忽略，使用系统默认值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessTokenExpiresIn?: number
+  /**
+   * 单个用户在该客户端下允许同时登录的最大会话数量。取值范围：-1 至 50。-1 表示不限制设备数量；0 或不填默认按 User-Agent 区分设备（相同 User-Agent 共享一个会话，不同 User-Agent 各独立一个会话）；1 表示单设备登录，新登录将踢出旧会话；大于 1 时按真实设备 ID 限制，超出限制后最早登录的会话将被自动踢出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxDevice?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1375,6 +1730,28 @@ export interface ModifyEnvPlanResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RunSql请求参数结构体
+ */
+export interface RunSqlRequest {
+  /**
+   * 要执行的SQL语句
+   */
+  Sql: string
+  /**
+   * 云开发环境ID
+   */
+  EnvId: string
+  /**
+   * 数据库连接器实例信息
+   */
+  DbInstance?: DbInstance
+  /**
+   * 是否只读；当 `true` 时仅允许以 `SELECT/WITH/SHOW/DESCRIBE/DESC/EXPLAIN` 开头的 SQL
+   */
+  ReadOnly?: boolean
 }
 
 /**
@@ -1542,6 +1919,82 @@ export interface DeleteAuthDomainResponse {
 }
 
 /**
+ * ModifyProvider请求参数结构体
+ */
+export interface ModifyProviderRequest {
+  /**
+   * 云开发环境 ID，用于唯一标识当前操作所属的云开发环境。
+   */
+  EnvId: string
+  /**
+   * 身份源的唯一标识符，用于指定需要修改的目标身份源。格式要求：2~32 位，仅支持小写英文字母和数字，不可包含空格或特殊字符。例如：github、google。
+   */
+  Id: string
+  /**
+   * 身份源的显示名称，支持国际化多语言配置。用户在登录页面看到的身份源名称将使用该字段，建议根据实际业务场景填写易于识别的名称，例如：GitHub、Google 等。
+   */
+  Name?: LocalizedMessage
+  /**
+   * 身份源图标的访问地址，将展示在登录页的身份源按钮上。建议使用 64×64 像素的 SVG 格式图片以保证清晰度，支持 HTTP/HTTPS 公网可访问的图片链接。
+   */
+  Picture?: string
+  /**
+   * 身份源对应的官方主页地址。该信息将在用户查看自己的第三方账号绑定列表时展示，帮助用户识别已绑定的身份源来源。例如 GitHub 身份源可填写：https://github.com。
+   */
+  Homepage?: string
+  /**
+   * 身份源协议类型，决定该身份源使用何种认证协议与第三方平台对接。可选值：
+OAUTH：标准 OAuth 2.0 协议
+OIDC：OpenID Connect 协议
+SAML：SAML 2.0 协议
+WX_MICRO_APP：微信小程序登录
+WX_QRCODE_MICRO_APP：微信小程序扫码登录
+WX_CLOUDBASE_MICRO_APP：云开发托管小程序登录
+WX_MP：微信公众号网页授权登录
+WX_OPEN：微信开放平台扫码登录
+WX_WORK_INTERNAL：企业微信自建应用登录
+WX_WORK_AGENT：企业微信代开发应用登录
+WX_WORK_THIRD_PARTY：企业微信第三方应用登录
+WX_WORK_THIRD_PARTY_ASSOCIATION：企业微信第三方应用关联登录
+CUSTOM：自定义登录
+EMAIL：邮箱登录
+   */
+  ProviderType?: string
+  /**
+   * 身份认证源协议连接配置，包含与第三方平台对接所需的核心参数，如 ClientId、ClientSecret、授权端点、Token 端点、回调地址、Scope、SAML Metadata、请求和响应参数映射等。不同 ProviderType 对应不同的配置项要求。注意：CUSTOM 和 EMAIL 类型的身份源，其存储后端类型（StorageDb）不可修改。
+   */
+  Config?: ProviderConfig
+  /**
+   * 是否开启透传登录模式。可选值：TRUE（开启）、FALSE（关闭，默认值）。开启后，平台不会持久化存储用户数据，仅将第三方身份源返回的用户信息透传给业务方，适用于不希望平台留存用户数据的场景。注意：开启透传模式时，ReuseUserId 将被强制设为 TRUE，AutoSignUpWithProviderUser 将被强制设为 FALSE。
+   */
+  TransparentMode?: string
+  /**
+   * 身份源的启用状态。可选值：TRUE（启用，用户可通过该身份源登录）、FALSE（禁用，登录入口将被隐藏，已有绑定关系不受影响）、UNSPECIFIED（默认为 TRUE）。
+   */
+  On?: string
+  /**
+   * 身份源的详细描述信息，支持国际化多语言配置。可用于向用户说明该身份源的用途或使用场景，例如：谷歌授权登录。
+   */
+  Description?: LocalizedMessage
+  /**
+   * 是否直接复用第三方身份源的用户 ID 作为平台用户 ID。可选值：TRUE（开启，返回的用户 ID 将直接使用第三方身份源的用户 ID，适用于已有用户体系迁移场景）、FALSE（关闭，由平台生成独立用户 ID）、UNSPECIFIED（默认为 FALSE，但当 TransparentMode 为 TRUE 时将被强制设为 TRUE）。注意：开启后需确保第三方用户 ID 的全局唯一性，避免 ID 冲突。
+   */
+  ReuseUserId?: string
+  /**
+   * 邮箱身份源的专项配置，包含邮件服务商、发件人地址、SMTP 配置等参数，用于支持通过邮箱验证码或邮箱密码方式进行身份认证。仅当身份源 ID 为 email 时有效。若该身份源不存在，系统将自动创建一个默认关闭的邮箱身份源。
+   */
+  EmailConfig?: EmailProviderConfig
+  /**
+   * 是否开启邮箱自动关联登录。可选值：TRUE（开启）、FALSE（关闭）、UNSPECIFIED（默认为 FALSE）。开启后，若第三方身份源返回的邮箱与系统中已有用户的邮箱一致，则自动将该第三方账号与已有用户关联并完成登录，无需用户手动绑定。
+   */
+  AutoSignInWhenEmailMatch?: string
+  /**
+   * 是否开启手机号自动关联登录。可选值：TRUE（开启）、FALSE（关闭）、UNSPECIFIED（默认行为等同 TRUE）。开启后，若第三方身份源返回的手机号与系统中已有用户的手机号一致，则自动将该第三方账号与已有用户关联并完成登录，无需用户手动绑定。注意：该字段默认行为（UNSPECIFIED）与 AutoSignInWhenEmailMatch 不同，手机号匹配在未显式关闭时默认生效。
+   */
+  AutoSignInWhenPhoneNumberMatch?: string
+}
+
+/**
  * DeleteTable请求参数结构体
  */
 export interface DeleteTableRequest {
@@ -1668,25 +2121,13 @@ export interface DeleteTableResponse {
 }
 
 /**
- * RunSql请求参数结构体
+ * AddProvider返回参数结构体
  */
-export interface RunSqlRequest {
+export interface AddProviderResponse {
   /**
-   * 要执行的SQL语句
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Sql: string
-  /**
-   * 云开发环境ID
-   */
-  EnvId: string
-  /**
-   * 数据库连接器实例信息
-   */
-  DbInstance?: DbInstance
-  /**
-   * 是否只读；当 `true` 时仅允许以 `SELECT/WITH/SHOW/DESCRIBE/DESC/EXPLAIN` 开头的 SQL
-   */
-  ReadOnly?: boolean
+  RequestId?: string
 }
 
 /**
@@ -1796,6 +2237,44 @@ export interface DescribeEnvsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ListTables请求参数结构体
+ */
+export interface ListTablesRequest {
+  /**
+   * 每页返回数量（0-1000)
+   */
+  MgoLimit: number
+  /**
+   * FlexDB实例ID
+   */
+  Tag?: string
+  /**
+   * 分页偏移量
+   */
+  MgoOffset?: number
+  /**
+   * 过滤标签数组，用于过滤表名，可选值如：HIDDEN、WEDA、WEDA_SYSTEM
+   */
+  Filters?: Array<string>
+  /**
+   * 模糊搜索查询值
+   */
+  SearchValue?: string
+  /**
+   * 是否展示隐藏表
+   */
+  ShowHidden?: boolean
+  /**
+   * 云开发环境ID
+   */
+  EnvId?: string
+  /**
+   * mongo连接器信息
+   */
+  MongoConnector?: MongoConnector
 }
 
 /**
@@ -1979,6 +2458,79 @@ export interface SearchClsLogResponse {
 }
 
 /**
+ * 身份源配置信息。描述云开发环境下用户登录身份源的完整配置，定义了用户通过何种方式进入系统并完成身份认证。支持多种类型：包括标准协议身份源（OAuth 2.0、OIDC、SAML 2.0）、内置身份源（邮箱登录、自定义登录）以及通过插件机制扩展的身份源（如 CAS）。每个身份源包含认证配置、启用状态、用户自动注册策略、信息透传模式等核心属性，是登录认证流程的核心数据结构。
+ */
+export interface Provider {
+  /**
+   * 身份源的唯一标识符，用于在系统内区分不同的身份源。格式要求：2~32 位，仅支持小写英文字母和数字，不可包含空格或特殊字符。创建后不可修改
+   */
+  Id: string
+  /**
+   * 身份源的安全认证配置，包含与第三方平台对接所需的核心参数，如 ClientId、ClientSecret、授权端点、Token 端点、回调地址、Scope 等。不同 ProviderType 对应不同的配置项。CUSTOM 类型无需手动配置（系统自动填充），OIDC 类型会根据 Issuer 自动补全端点信息，SAML 类型需提供 SamlMetadata（最大 10KB）
+   */
+  Config: ProviderConfig
+  /**
+   * 身份源的显示名称，支持国际化多语言配置。用户在登录页面看到的身份源名称将使用该字段，建议根据实际业务场景填写易于识别的名称。未传入时默认使用 Id 值作为显示名称
+   */
+  Name?: LocalizedMessage
+  /**
+   * 身份源图标的访问地址，将展示在登录页的身份源按钮上。建议使用 64×64 像素的 SVG 格式图片以保证清晰度，支持 HTTP/HTTPS 公网可访问的图片链接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Picture?: string
+  /**
+   * 身份源对应的官方主页地址。该信息将在用户查看自己的第三方账号绑定列表时展示，帮助用户识别已绑定的身份源来源。例如 GitHub 身份源可填写：https://github.com
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Homepage?: string
+  /**
+   * 身份源协议类型，决定该身份源使用何种认证协议与第三方平台对接。可选值：OAUTH（标准 OAuth 2.0 协议）、OIDC（OpenID Connect 协议）、SAML（SAML 2.0 协议）、CUSTOM（自定义登录，使用 RSA 密钥对签名验证）、EMAIL（邮箱登录，需配合 EmailConfig 使用）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProviderType?: string
+  /**
+   * 控制第三方身份源登录时是否自动注册系统用户。可选值：TRUE（始终自动注册，无论第三方返回的用户信息是否包含手机号或邮箱）、FALSE（不自动注册，需用户手动绑定）、UNSPECIFIED（默认行为：仅当第三方身份源返回的用户信息中包含手机号或邮箱时才自动注册，否则登录完成后要求用户绑定手机号方可继续使用）。注意：企业微信类型（WX_WORK_AGENT/WX_WORK_INTERNAL/WX_WORK_THIRD_PARTY/WX_WORK_THIRD_PARTY_ASSOCIATION）和微信小程序类型（WX_MICRO_APP/WX_QRCODE_MICRO_APP/WX_OPEN）在 UNSPECIFIED 时会自动设为 TRUE。当 TransparentMode 为 TRUE 时，该字段将被强制设为 FALSE
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoSignUpWithProviderUser?: string
+  /**
+   * 身份源的启用状态。可选值：TRUE（启用，用户可通过该身份源登录）、FALSE（禁用，已有绑定关系不受影响）。未传入时默认为 TRUE（启用）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  On?: string
+  /**
+   * 身份源的详细描述信息，支持国际化多语言配置。可用于向用户说明该身份源的用途或使用场景。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: LocalizedMessage
+  /**
+   * 是否开启信息透传模式。可选值：TRUE（仅登录模式：平台不持久化存储用户数据，仅将第三方身份源返回的用户信息透传给业务方，适用于不希望平台留存用户数据的场景）、FALSE（登录且注册模式：平台正常注册并存储用户信息，默认值）。注意：开启透传模式时，AutoSignUpWithProviderUser 将被强制设为 FALSE；若 ReuseUserId 为 UNSPECIFIED，将被自动设为 TRUE。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TransparentMode?: string
+  /**
+   * 是否直接复用第三方身份源返回的用户标识（如 OpenID、UnionID 等）作为平台用户 ID。可选值：TRUE（开启，平台用户 ID 将直接使用第三方身份源返回的用户标识，适用于已有用户体系迁移场景）、FALSE（关闭，由平台生成独立用户 ID）。注意：开启后需确保第三方用户标识的全局唯一性，避免 ID 冲突。当 TransparentMode 为 TRUE 且该字段为 UNSPECIFIED 时，将被自动设为 TRUE
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReuseUserId?: string
+  /**
+   * 邮箱身份源的专项配置，仅当 ProviderType 为 EMAIL 时有效且必填。包含邮件服务商、发件人地址、SMTP 配置等参数，用于支持通过邮箱验证码方式进行身份认证。支持两种模式：自有 SMTP 服务器（需填写完整的 SMTP 配置）和平台代发（EmailConfig.On 设为 TRUE 时由平台随机分配 SMTP 服务器）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EmailConfig?: EmailProviderConfig
+  /**
+   * 是否开启邮箱自动关联登录。可选值：TRUE（开启）、FALSE（关闭）、UNSPECIFIED（默认为 FALSE）。开启后，若第三方身份源返回的邮箱与系统中已有用户的邮箱一致，则自动将该第三方账号与已有用户关联绑定并完成登录，无需用户手动绑定
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoSignInWhenEmailMatch?: string
+  /**
+   * 是否开启手机号自动关联登录。可选值：TRUE（开启）、FALSE（关闭）、UNSPECIFIED（默认行为等同于 TRUE，即默认开启）。开启后，若第三方身份源返回的手机号与系统中已有用户的手机号一致，则自动将该第三方账号与已有用户关联绑定并完成登录，无需用户手动绑定
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoSignInWhenPhoneNumberMatch?: string
+}
+
+/**
  * 本类型用于UpdateTable接口中描述待创建索引信息
  */
 export interface MgoIndexKeys {
@@ -2037,6 +2589,44 @@ export interface DescribeSafeRuleResponse {
 }
 
 /**
+ * 登录短信验证码发送配置。用于管理登录时使用的短信验证码发送的通道相关设置，目前提供云开发默认短信包和客户自定义短信包，推荐使用云开发默认短信包。
+如果使用自定义APIs发送短信，方法命名规则
+方法名称：发送验证码
+方法标识：SendVerificationCode
+入参
+Mobile：字符串（手机号，如：“+86 + 手机号”）
+VerificationCode：字符串（验证码，如：“123456”）
+返回值
+ErrorCode：int（0 表示成功，非 0 表示失败）
+ErrorMessage：字符串（ErrorCode 非 0 时，返回错误信息）
+ */
+export interface VerificationConfig {
+  /**
+   * 短信验证码发送通道类型。取值范围：
+default：使用默认云开发短信包发送短信。
+apis：使用云开发自定义 APIs 作为短信发送通道，需配合 Name 和 Method 参数使用。
+不传则不修改当前配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 自定义 APIs 数据源唯一标识，当 Type 为 apis 时必填。用于定位微搭 APIs 中对应的数据源。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 自定义 APIs 方法名，当 Type 为 apis 时必填。指定微搭 APIs 中用于发送验证码的方法。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Method?: string
+  /**
+   * 单个手机号每日短信发送上限。默认值为 30，传 -1 表示不限制，如果设置为不限制，需要注意恶意攻击，导致短信套餐用量计费问题。仅支持正整数或 -1。不传则不修改当前配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SmsDayLimit?: number
+}
+
+/**
  * DescribeTables返回参数结构体
  */
 export interface DescribeTablesResponse {
@@ -2075,45 +2665,41 @@ export interface DescribeEnvAccountCircleResponse {
 }
 
 /**
- * 用户信息
+ * 多因子认证登录配置，用于管理 MFA（Multi-Factor Authentication）相关设置。包括 MFA 总开关、短信验证、邮箱验证、强制绑定手机号、TOTP 动态验证码等认证方式的独立开关配置。当 MFA 总开关（On）开启时，用户在登录后需完成额外的身份验证步骤。各子开关可独立控制具体的验证方式。不传则不修改当前配置。
  */
-export interface User {
+export interface MFALoginConfig {
   /**
-   * 用户ID
+   * MFA 多因子认证开关。取值范围：
+TRUE：开启 MFA 多因子认证
+FALSE：关闭 MFA 多因子认证
+不传则不修改当前配置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Uid?: string
+  On?: string
   /**
-   * 用户名
+   * 短信验证开关，控制是否在 MFA 流程中启用短信验证码校验。取值范围：
+TRUE：开启短信验证
+FALSE：关闭短信验证
+不传则不修改当前配置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
+  Sms?: string
   /**
-   * 用户类型：internalUser-内部用户、externalUser-外部用户
-   */
-  Type?: string
-  /**
-   * 用户状态：ACTIVE（激活）、BLOCKED（冻结）
-   */
-  UserStatus?: string
-  /**
-   * 用户昵称
-   */
-  NickName?: string
-  /**
-   * 手机号
-   */
-  Phone?: string
-  /**
-   * 邮箱
+   * 邮箱验证开关，控制是否在 MFA 流程中启用邮箱验证码校验。取值范围：
+TRUE：开启邮箱验证
+FALSE：关闭邮箱验证
+不传则不修改当前配置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Email?: string
   /**
-   * 头像链接
+   * 强制绑定手机号开关，控制用户在完成 MFA 认证前是否必须绑定手机号。取值范围：
+TRUE：要求绑定手机号
+FALSE：不要求绑定手机号
+不传则不修改当前配置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  AvatarUrl?: string
-  /**
-   * 用户描述
-   */
-  Description?: string
+  RequiredBindPhone?: string
 }
 
 /**
@@ -2132,6 +2718,26 @@ export interface MgoCommandParam {
    * 待执行命令
    */
   Command: string
+}
+
+/**
+ * VM规格
+ */
+export interface VMSpec {
+  /**
+   * LightHouse=轻量云服务器
+CVM=云服务器
+   */
+  Type?: string
+  /**
+   * 轻量云服务器规格。
+当Type=LightHouse时有效
+   */
+  LightHouseSpec?: VMSpecLightHouse
+  /**
+   * 价格信息
+   */
+  Price?: VMPrice
 }
 
 /**
@@ -2178,6 +2784,48 @@ export interface CreateTableResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 用户信息
+ */
+export interface User {
+  /**
+   * 用户ID
+   */
+  Uid?: string
+  /**
+   * 用户名
+   */
+  Name?: string
+  /**
+   * 用户类型：internalUser-内部用户、externalUser-外部用户
+   */
+  Type?: string
+  /**
+   * 用户状态：ACTIVE（激活）、BLOCKED（冻结）
+   */
+  UserStatus?: string
+  /**
+   * 用户昵称
+   */
+  NickName?: string
+  /**
+   * 手机号
+   */
+  Phone?: string
+  /**
+   * 邮箱
+   */
+  Email?: string
+  /**
+   * 头像链接
+   */
+  AvatarUrl?: string
+  /**
+   * 用户描述
+   */
+  Description?: string
 }
 
 /**
@@ -2230,6 +2878,86 @@ export interface DescribeCloudBaseGWAPIResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 身份认证源协议连接配置。包含 OAuth 2.0 / OIDC 协议端点（授权端点、令牌端点、用户信息端点、JWKS 端点等）、客户端凭证（ClientId、ClientSecret）、SAML 元数据、请求与响应参数的字段映射等配置信息。OIDC 类型的认证源字段定义参考 https://openid.net/specs/openid-connect-discovery-1_0.html 规范。
+ */
+export interface ProviderConfig {
+  /**
+   * 身份提供方的唯一标识符（Issuer URL），用于验证 ID Token 中的 iss 字段。仅当 ProviderType 为 OIDC 时需要填写，值通常为第三方 OIDC 服务的根地址，例如：https://accounts.google.com。填写后平台将自动通过 /.well-known/openid-configuration 发现并填充 AuthorizationEndpoint、TokenEndpoint、UserinfoEndpoint、JwksUri 等端点地址。详情参考 OpenID Connect Discovery 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Issuer?: string
+  /**
+   * 第三方身份提供方的 JSON Web Key Set 地址，用于获取公钥以验证 ID Token 签名。仅当 ProviderType 为 OIDC 时需要填写。若已填写 Issuer，该字段将通过 OpenID Connect Discovery 自动获取，无需手动填写。详情参考 OpenID Connect Discovery 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JwksUri?: string
+  /**
+   * 在第三方身份提供方注册的应用客户端 ID，用于标识当前接入应用。当 ProviderType 为 OIDC 或 OAUTH 时必须填写，可在对应平台的开发者控制台中获取。详情参考 OAuth 2.0 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientId?: string
+  /**
+   * 在第三方身份提供方注册的应用客户端密钥，与 ClientId 配合使用，用于在 Token 端点进行身份验证。当 ProviderType 为 OIDC 或 OAUTH 时必须填写，请妥善保管，避免泄露。详情参考 OAuth 2.0 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientSecret?: string
+  /**
+   * OAuth 授权完成后第三方平台回调的地址，需与在第三方平台注册的回调地址完全一致，否则授权将失败。当 ProviderType 为 OIDC 或 OAUTH 时必须填写，并需在对应平台的开发者控制台中配置该地址为合法回调地址。详情参考 OAuth 2.0 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RedirectUri?: string
+  /**
+   * 向第三方身份提供方申请的权限范围，多个 scope 之间用空格分隔。当 ProviderType 为 OIDC 或 OAUTH 时必须填写，OIDC 场景下通常至少包含 openid，如需获取用户邮箱或手机号可追加 email、phone 等。若已填写 Issuer 且未指定 Scope，将自动使用 OpenID Connect Discovery 返回的 scopes_supported。详情参考 OAuth 2.0 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Scope?: string
+  /**
+   * 第三方身份提供方的授权端点地址，用于发起 OAuth/OIDC 授权请求，引导用户跳转至第三方登录页面。当 ProviderType 为 OIDC 或 OAUTH 时必须填写。若已填写 Issuer，该字段将通过 OpenID Connect Discovery 自动获取，无需手动填写。详情参考 OAuth 2.0 / OIDC 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthorizationEndpoint?: string
+  /**
+   * 第三方身份提供方的 Token 端点地址，用于通过授权码（code）换取 Access Token 和 ID Token。当 ProviderType 为 OIDC 或 OAUTH 时必须填写。若已填写 Issuer，该字段将通过 OpenID Connect Discovery 自动获取，无需手动填写。详情参考 OAuth 2.0 / OIDC 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TokenEndpoint?: string
+  /**
+   * 第三方身份提供方的用户信息端点地址，用于通过 Access Token 获取用户的基本信息（如昵称、头像、邮箱等）。当 ProviderType 为 OIDC 或 OAUTH 且需要获取用户详细信息时填写。若已填写 Issuer，该字段将通过 OpenID Connect Discovery 自动获取，无需手动填写。详情参考 OIDC 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserinfoEndpoint?: string
+  /**
+   * OAuth/OIDC 授权请求的响应类型，决定授权端点返回的内容。可选值：code（授权码模式，推荐）、token（隐式模式，直接返回 Access Token）、id_token（直接返回 ID Token）。当 ProviderType 为 OIDC 时默认使用 id_token，其他类型默认使用 code。当 ProviderType 为 OIDC 或 OAUTH 时可选填写。详情参考 OAuth 2.0 / OIDC 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResponseType?: string
+  /**
+   * 第三方身份提供方的单点退出端点地址。配置后，用户退出当前应用时将被跳转至该地址，使第三方 IDP 的登录态也一并失效，实现单点退出（SLO）。适用于 OIDC、OAUTH、SAML 等所有支持单点退出的身份源类型。不填则退出时仅清除本平台登录态。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SignoutEndpoint?: string
+  /**
+   * Token 端点的客户端身份验证方式，决定请求 Token 时如何传递 ClientId 和 ClientSecret。可选值：CLIENT_SECRET_POST（将凭证放在请求 Body 中传递）、CLIENT_SECRET_BASIC（将凭证通过 HTTP Basic Auth Header 传递）。当 ProviderType 为 OIDC 或 OAUTH 时可选填写，默认使用 CLIENT_SECRET_POST。详情参考 OIDC 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TokenEndpointAuthMethod?: string
+  /**
+   * SAML 身份提供方的 Metadata XML 内容，包含 IDP 的实体 ID、SSO 端点地址、签名证书等关键信息，平台将据此完成 SAML 协议的对接配置。仅当 ProviderType 为 SAML 时可填写，通常可从第三方 IDP 的管理控制台中下载获取。详情参考 SAML 2.0 标准。
+   */
+  SamlMetadata?: string
+  /**
+   * 请求参数映射配置，用于处理非标准 OAuth 协议的参数转换。默认情况下平台严格遵循 OAuth 2.0 标准进行参数传递，若对接的第三方平台（如微信、企业微信等）使用了非标准的参数名称或传参方式，可通过该字段配置自定义的参数映射规则，以确保请求参数与第三方平台的要求一致。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestParametersMap?: ProviderRequestParametersMap
+  /**
+   * 响应参数映射配置，用于处理非标准 OAuth 协议的响应参数转换。默认情况下平台严格遵循 OAuth 2.0 标准解析响应参数，若对接的第三方平台（如微信、企业微信等）返回了非标准的字段名称或数据结构，可通过该字段配置自定义的响应参数映射规则，将第三方返回的字段映射为平台标准字段。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResponseParametersMap?: ProviderResponseParametersMap
 }
 
 /**
@@ -2336,6 +3064,36 @@ export interface DatabasesInfo {
 }
 
 /**
+ * 虚拟主机价格
+ */
+export interface VMPrice {
+  /**
+   * 价格货币单位。取值范围CNY:人民币。USD:美元。
+   */
+  Currency?: string
+  /**
+   * 原始价格
+   */
+  OriginalPrice?: number
+  /**
+   * 折扣率
+   */
+  Discount?: number
+  /**
+   * 折扣后的价格
+   */
+  DiscountPrice?: number
+  /**
+   * 折扣前每天资源点
+   */
+  OriginalCredits?: number
+  /**
+   * 折扣后每天所需资源点
+   */
+  DiscountCredits?: number
+}
+
+/**
  * DescribeCloudBaseGWService返回参数结构体
  */
 export interface DescribeCloudBaseGWServiceResponse {
@@ -2383,6 +3141,36 @@ export interface DescribeCloudBaseGWServiceResponse {
 }
 
 /**
+ * 登录配置中密码更新配置策略，用于管理使用用户名密码登录方式时，密码的过期策略和更新策略。例如，首次登录需要更新密码、定期过期密码等策略。
+ */
+export interface PasswordUpdateLoginConfig {
+  /**
+   * 首次登录强制修改密码开关。开启后，用户首次登录时将强制要求修改密码。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FirstLoginUpdate?: boolean
+  /**
+   * 定期强制修改密码开关。开启后，用户需按照 PeriodValue 和 PeriodType 指定的周期定期修改密码，超过周期未修改将在登录时强制要求修改。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PeriodUpdate?: boolean
+  /**
+   * 定期修改密码的周期数值，与 PeriodType 配合使用。例如 PeriodValue 为 6，PeriodType 为 MONTH，表示每 6 个月需修改一次密码。当 PeriodUpdate 为 true 时必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PeriodValue?: number
+  /**
+   * 定期修改密码的周期时间单位，与 PeriodValue 配合使用。取值范围：
+WEEK：周
+MONTH：月
+YEAR：年
+当 PeriodUpdate 为 true 时必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PeriodType?: string
+}
+
+/**
  * ReinstateEnv请求参数结构体
  */
 export interface ReinstateEnvRequest {
@@ -2404,6 +3192,20 @@ export interface DescribeDatabaseACLRequest {
    * 集合名称
    */
   CollectionName: string
+}
+
+/**
+ * vm规格
+ */
+export interface VMSpecLightHouse {
+  /**
+   * LH主机的BundleId
+   */
+  BundleId?: string
+  /**
+   * 主机配置详情json
+   */
+  BundleConfig?: string
 }
 
 /**
@@ -2452,6 +3254,46 @@ export interface TableInfo {
 }
 
 /**
+ * DescribeLoginConfig返回参数结构体
+ */
+export interface DescribeLoginConfigResponse {
+  /**
+   * 是否开启邮箱登录方式。true 表示已开启，允许用户使用邮箱和密码进行登录；false 表示已关闭。
+   */
+  EmailLogin?: boolean
+  /**
+   * 是否开启匿名登录方式。true 表示已开启，允许用户无需注册即可以匿名身份登录；false 表示已关闭。
+   */
+  AnonymousLogin?: boolean
+  /**
+   * 是否开启用户名密码登录方式。true 表示已开启，允许用户使用用户名和密码进行登录；false 表示已关闭。
+   */
+  UserNameLogin?: boolean
+  /**
+   * 短信验证码发送配置，包含短信发送通道类型、自定义 APIs 数据源、调用方法及每日发送限额等信息。
+   */
+  SmsVerificationConfig?: VerificationConfig
+  /**
+   * 是否开启手机号短信登录方式。true 表示已开启，允许用户使用手机号和短信验证码进行登录和注册；false 表示已关闭。
+   */
+  PhoneNumberLogin?: boolean
+  /**
+   * MFA 多因子认证登录配置，包含 MFA 开关及各验证方式（短信、邮箱、TOTP、强制绑定手机号）的启用状态。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MfaConfig?: MFALoginConfig
+  /**
+   * 密码修改策略配置，包含首次登录强制修改密码开关及定期修改密码策略（周期和时间单位）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PwdUpdateStrategy?: PasswordUpdateLoginConfig
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteCloudBaseGWDomain请求参数结构体
  */
 export interface DeleteCloudBaseGWDomainRequest {
@@ -2463,6 +3305,16 @@ export interface DeleteCloudBaseGWDomainRequest {
    * 服务域名
    */
   Domain: string
+}
+
+/**
+ * CreateEnvResource返回参数结构体
+ */
+export interface CreateEnvResourceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2662,41 +3514,23 @@ export interface DescribeStaticStoreResponse {
 }
 
 /**
- * ListTables请求参数结构体
+ * GetProviders返回参数结构体
  */
-export interface ListTablesRequest {
+export interface GetProvidersResponse {
   /**
-   * 每页返回数量（0-1000)
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  MgoLimit: number
+  Total?: number
   /**
-   * FlexDB实例ID
+   * 三方认证源列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tag?: string
+  Data?: Array<Provider>
   /**
-   * 分页偏移量
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  MgoOffset?: number
-  /**
-   * 过滤标签数组，用于过滤表名，可选值如：HIDDEN、WEDA、WEDA_SYSTEM
-   */
-  Filters?: Array<string>
-  /**
-   * 模糊搜索查询值
-   */
-  SearchValue?: string
-  /**
-   * 是否展示隐藏表
-   */
-  ShowHidden?: boolean
-  /**
-   * 云开发环境ID
-   */
-  EnvId?: string
-  /**
-   * mongo连接器信息
-   */
-  MongoConnector?: MongoConnector
+  RequestId?: string
 }
 
 /**
@@ -3034,54 +3868,47 @@ export interface CloudBaseGWAPIQPSPolicy {
 }
 
 /**
- * FlexDB数据库权限信息
+ * 云日志服务相关信息
  */
-export interface PermissionInfo {
+export interface LogServiceInfo {
   /**
-   * "READONLY",   //公有读，私有写。所有用户可读，仅创建者及管理员可写  
-"PRIVATE",    //私有读写，仅创建者及管理员可读写  
-"ADMINWRITE", //所有用户可读，仅管理员可写  
-"ADMINONLY",  //仅管理员可操作  
-"CUSTOM",     // 安全规则
+   * log名
    */
-  AclTag: string
+  LogsetName?: string
   /**
-   * 云开发环境ID
+   * log-id
    */
-  EnvId: string
+  LogsetId?: string
   /**
-   * 自定义规则
+   * topic名
    */
-  Rule?: string
+  TopicName?: string
+  /**
+   * topic-id
+   */
+  TopicId?: string
+  /**
+   * cls日志所属地域
+   */
+  Region?: string
+  /**
+   * topic保存时长 默认7天
+   */
+  Period?: number
 }
 
 /**
- * ModifySafeRule请求参数结构体
+ * DescribeClient请求参数结构体
  */
-export interface ModifySafeRuleRequest {
+export interface DescribeClientRequest {
   /**
    * 环境ID
    */
   EnvId: string
   /**
-   * 集合名称
+   * 客户端的唯一标识符（Client ID），在 OAuth/OIDC 授权流程中作为 client_id 参数使用，创建后不可修改，一般使用环境id
    */
-  CollectionName: string
-  /**
-   * 权限标签。包含以下取值：
-<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
-<li> PRIVATE：仅创建者及管理员可读写</li>
-<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
-<li> ADMINONLY：仅管理员可读写</li>
-<li> CUSTOM：自定义安全规则</li>
-   */
-  AclTag: string
-  /**
-   * 安全规则内容。
-当 AclTag=CUSTOM 时，此参数必填。
-详情参考：[文档型数据库安全规则](https://docs.cloudbase.net/database/security-rules)
-   */
-  Rule?: string
+  Id: string
 }
 
 /**
@@ -3107,7 +3934,7 @@ export interface DeleteAuthDomainRequest {
    */
   EnvId: string
   /**
-   * 域名ID列表，支持批量
+   * 域名ID列表，支持批量传递
    */
   DomainIds: Array<string>
 }
@@ -3249,6 +4076,32 @@ export interface IndexInfo {
 }
 
 /**
+ * ModifyClient请求参数结构体
+ */
+export interface ModifyClientRequest {
+  /**
+   * 客户端所属的云开发环境 ID，用于标识该应用归属的云开发环境。不同环境之间的应用数据相互隔离。
+   */
+  EnvId: string
+  /**
+   * 需要修改的客户端唯一标识符（Client ID），在 OAuth/OIDC 授权流程中作为 client_id 参数使用。该字段为定位参数，仅用于指定目标客户端，不可修改。
+   */
+  Id: string
+  /**
+   * Refresh Token 的有效期，单位为秒。超过该时间后 Refresh Token 将失效，用户需重新登录。取值范围：1800~2592000（即 30 分钟至 30 天），超出上限将被截断为 2592000。默认值为 2592000（即 30 天）。注意：当该值 ≤ 7200 时，AccessTokenExpiresIn 将被自动设为该值减去 660 秒。
+   */
+  RefreshTokenExpiresIn?: number
+  /**
+   * 单个用户在该应用下允许同时登录的最大会话数量。取值范围：-1~50。特殊值说明：-1 表示不限制设备数；0 表示按客户端 User-Agent 区分设备（相同 User-Agent 视为同一设备）；1~50 为精确的最大会话数限制，超出限制后最早登录的会话将被自动踢出。不传则保持原有配置不变。
+   */
+  MaxDevice?: number
+  /**
+   * Access Token 的有效期，单位为秒。超过该时间后 Access Token 将失效，需使用 Refresh Token 重新换取。最小有效值为 1800 秒（小于 1800 将被忽略，使用默认值），默认值为 7200（即 2 小时）。该值应小于 RefreshTokenExpiresIn。
+   */
+  AccessTokenExpiresIn?: number
+}
+
+/**
  * DescribeCloudBaseGWService请求参数结构体
  */
 export interface DescribeCloudBaseGWServiceRequest {
@@ -3268,6 +4121,47 @@ export interface DescribeCloudBaseGWServiceRequest {
    * 是否启用统一域名
    */
   EnableUnion?: boolean
+}
+
+/**
+ * 三方认证出参映射。如果您的对接方不标准，则可以使用这个参数。默认情况下，该参数可以为空。比如：microsoft, github,google,apple 接入，这些参数为空，但是国内的腾讯，新浪等则需要配置该参数。原因主要是：腾讯等公司在实现oauth时，未能完全遵循oauth标准。
+ */
+export interface ProviderResponseParametersMap {
+  /**
+   * 用户唯一标识（sub）的映射字段名。对应 OIDC 标准中的 sub 字段，值为第三方平台返回的用户信息 JSON 中表示用户 ID 的字段路径。例如github平台填sub。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Sub?: string
+  /**
+   * 用户名称（name）的映射字段名。对应 OIDC 标准中的 name 字段，值为第三方平台返回的用户信息 JSON 中表示用户昵称或姓名的字段路径。例如github平台填 name。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 用户头像（picture）的映射字段名。对应 OIDC 标准中的 picture 字段，值为第三方平台返回的用户信息 JSON 中表示用户头像 URL 的字段路径。需要公网可访问的url。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Picture?: string
+  /**
+   * 用户登录名（username）的映射字段名。对应 OIDC 标准中的 preferred_username 字段，值为第三方平台返回的用户信息 JSON 中表示用户唯一登录名的字段, 例如可使用sub或email等唯一值的字段。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Username?: string
+  /**
+   * 用户邮箱（email）的映射字段名。对应 OIDC 标准中的 email 字段，值为第三方平台返回的用户信息 JSON 中表示用户邮箱地址的字段。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Email?: string
+  /**
+   * 用户手机号（phone_number）的映射字段名。对应 OIDC 标准中的 phone_number 字段，值为第三方平台返回的用户信息 JSON 中表示用户手机号的字段。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PhoneNumber?: string
+  /**
+   * 用户角色/分组（groups）的映射字段名。对应 OIDC 标准中的 groups 字段，值为第三方平台返回的用户信息 JSON 中表示用户所属角色或分组的字段路径。支持字符串数组类型的返回值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Groups?: string
 }
 
 /**
@@ -3352,6 +4246,28 @@ export interface MongoConnector {
  * CheckTcbService请求参数结构体
  */
 export type CheckTcbServiceRequest = null
+
+/**
+ * FlexDB数据库权限信息
+ */
+export interface PermissionInfo {
+  /**
+   * "READONLY",   //公有读，私有写。所有用户可读，仅创建者及管理员可写  
+"PRIVATE",    //私有读写，仅创建者及管理员可读写  
+"ADMINWRITE", //所有用户可读，仅管理员可写  
+"ADMINONLY",  //仅管理员可操作  
+"CUSTOM",     // 安全规则
+   */
+  AclTag: string
+  /**
+   * 云开发环境ID
+   */
+  EnvId: string
+  /**
+   * 自定义规则
+   */
+  Rule?: string
+}
 
 /**
  * 分页信息
@@ -3511,40 +4427,31 @@ export interface DescribeAuthDomainsRequest {
 }
 
 /**
- * 静态托管资源信息
+ * DescribeVmSpec返回参数结构体
  */
-export interface StaticStoreInfo {
+export interface DescribeVmSpecResponse {
   /**
-   * 环境ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 规格列表
    */
-  EnvId?: string
+  SpecList?: Array<VMSpec>
   /**
-   * 静态域名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CdnDomain?: string
+  RequestId?: string
+}
+
+/**
+ * 多语言文字，在 Locale 中 展示的 Message
+ */
+export interface MessageLocalized {
   /**
-   * COS桶
-注意：此字段可能返回 null，表示取不到有效值。
+   * 字符串
    */
-  Bucket?: string
+  Message: string
   /**
-   * cos区域
-注意：此字段可能返回 null，表示取不到有效值。
-   * @deprecated
+   * 在该语言中
    */
-  Regoin?: string
-  /**
-   * 资源状态:init(初始化)/process(处理中)/online(上线)/destroying(销毁中)/offline(下线))
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: string
-  /**
-   * 地域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Region?: string
+  Locale: string
 }
 
 /**
@@ -3678,9 +4585,45 @@ export interface DescribeDatabaseACLResponse {
 }
 
 /**
+ * DeleteProvider请求参数结构体
+ */
+export interface DeleteProviderRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 认证源ID，比如：github, 格式必须为：2-32位小写英文字符串或数字
+   */
+  Id: string
+}
+
+/**
+ * DescribeVmSpec请求参数结构体
+ */
+export interface DescribeVmSpecRequest {
+  /**
+   * 类型：
+LightHouse = 轻量云服务器
+CVM = 云服务器
+   */
+  Type?: string
+}
+
+/**
  * ReinstateEnv返回参数结构体
  */
 export interface ReinstateEnvResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyProvider返回参数结构体
+ */
+export interface ModifyProviderResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3956,4 +4899,14 @@ Type为2时，该值为容器的代理IP:PORT数组。
    * QPS策略
    */
   QPSPolicy?: CloudBaseGWAPIQPSPolicy
+}
+
+/**
+ * ModifyLoginConfig返回参数结构体
+ */
+export interface ModifyLoginConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

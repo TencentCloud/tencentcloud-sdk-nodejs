@@ -1954,6 +1954,16 @@ export interface DescribeUserGroupsRequest {
 }
 
 /**
+ * DisableClientTcpAccess请求参数结构体
+ */
+export interface DisableClientTcpAccessRequest {
+  /**
+   * 堡垒机id
+   */
+  ResourceId: string
+}
+
+/**
  * DescribeUserDirectory返回参数结构体
  */
 export interface DescribeUserDirectoryResponse {
@@ -2186,6 +2196,16 @@ export interface DisableExternalAccessRequest {
 }
 
 /**
+ * DisableWebAccess请求参数结构体
+ */
+export interface DisableWebAccessRequest {
+  /**
+   * 堡垒机id
+   */
+  ResourceId: string
+}
+
+/**
  * RunOperationTask返回参数结构体
  */
 export interface RunOperationTaskResponse {
@@ -2391,6 +2411,16 @@ export interface Departments {
    * 当前操作UIN是否是根部门管理员
    */
   RootManager?: boolean
+}
+
+/**
+ * DisableClientTcpAccess返回参数结构体
+ */
+export interface DisableClientTcpAccessResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2983,9 +3013,9 @@ export interface DeployResourceRequest {
 }
 
 /**
- * EnableExternalAccess返回参数结构体
+ * EnableClientTcpAccess返回参数结构体
  */
-export interface EnableExternalAccessResponse {
+export interface EnableClientTcpAccessResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3308,6 +3338,16 @@ export interface UnlockUserResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * EnableWebAccess请求参数结构体
+ */
+export interface EnableWebAccessRequest {
+  /**
+   * 堡垒机id
+   */
+  ResourceId: string
 }
 
 /**
@@ -3949,6 +3989,24 @@ export interface CreateSyncUserTaskRequest {
 }
 
 /**
+ * SearchSession返回参数结构体
+ */
+export interface SearchSessionResponse {
+  /**
+   * 记录数
+   */
+  TotalCount?: number
+  /**
+   * 会话信息列表
+   */
+  SessionSet?: Array<SessionResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAccountGroups返回参数结构体
  */
 export interface DescribeAccountGroupsResponse {
@@ -4570,21 +4628,23 @@ export interface ChangePwdTaskDetail {
 }
 
 /**
- * SearchSession返回参数结构体
+ * EnableExternalAccess返回参数结构体
  */
-export interface SearchSessionResponse {
-  /**
-   * 记录数
-   */
-  TotalCount?: number
-  /**
-   * 会话信息列表
-   */
-  SessionSet?: Array<SessionResult>
+export interface EnableExternalAccessResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * EnableClientTcpAccess请求参数结构体
+ */
+export interface EnableClientTcpAccessRequest {
+  /**
+   * 堡垒机id
+   */
+  ResourceId: string
 }
 
 /**
@@ -4692,6 +4752,110 @@ export interface UnlockUserRequest {
    * 用户id
    */
   IdSet: Array<number | bigint>
+}
+
+/**
+ * 文件传输检索结果
+ */
+export interface SearchFileResult {
+  /**
+   * 文件传输的时间
+   */
+  Time?: string
+  /**
+   * 用户名
+   */
+  UserName?: string
+  /**
+   * 姓名
+   */
+  RealName?: string
+  /**
+   * 资产ID
+   */
+  InstanceId?: string
+  /**
+   * 资产名称
+   */
+  DeviceName?: string
+  /**
+   * 资产公网IP
+   */
+  PublicIp?: string
+  /**
+   * 资产内网IP
+   */
+  PrivateIp?: string
+  /**
+   * 操作结果：1 - 已执行，2 - 已阻断
+   */
+  Action?: number
+  /**
+   * 操作类型：1 - 文件上传，2 - 文件下载，3 - 文件删除，4 - 文件(夹)移动，5 - 文件(夹)重命名，6 - 新建文件夹，9 - 删除文件夹
+   */
+  Method?: number
+  /**
+   * 下载的文件（夹）路径及名称
+   */
+  FileCurr?: string
+  /**
+   * 上传或新建文件（夹）路径及名称
+   */
+  FileNew?: string
+  /**
+   * 会话id
+   */
+  Sid?: string
+  /**
+   * 账号
+   */
+  Account?: string
+  /**
+   * 来源id
+   */
+  FromIp?: string
+  /**
+   * 协议
+   */
+  Protocol?: string
+  /**
+   * 文件大小
+   */
+  Size?: number
+  /**
+   * 复核时间
+   */
+  ConfirmTime?: string
+  /**
+   * 用户部门id
+   */
+  UserDepartmentId?: string
+  /**
+   * 用户部门name
+   */
+  UserDepartmentName?: string
+  /**
+   * 设备部门id
+   */
+  DeviceDepartmentId?: string
+  /**
+   * 设备部门name
+   */
+  DeviceDepartmentName?: string
+  /**
+   * 签名值
+   */
+  SignValue?: string
+}
+
+/**
+ * EnableWebAccess返回参数结构体
+ */
+export interface EnableWebAccessResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6296,97 +6460,13 @@ export interface ModifyUserDirectoryRequest {
 }
 
 /**
- * 文件传输检索结果
+ * DisableWebAccess返回参数结构体
  */
-export interface SearchFileResult {
+export interface DisableWebAccessResponse {
   /**
-   * 文件传输的时间
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Time?: string
-  /**
-   * 用户名
-   */
-  UserName?: string
-  /**
-   * 姓名
-   */
-  RealName?: string
-  /**
-   * 资产ID
-   */
-  InstanceId?: string
-  /**
-   * 资产名称
-   */
-  DeviceName?: string
-  /**
-   * 资产公网IP
-   */
-  PublicIp?: string
-  /**
-   * 资产内网IP
-   */
-  PrivateIp?: string
-  /**
-   * 操作结果：1 - 已执行，2 - 已阻断
-   */
-  Action?: number
-  /**
-   * 操作类型：1 - 文件上传，2 - 文件下载，3 - 文件删除，4 - 文件(夹)移动，5 - 文件(夹)重命名，6 - 新建文件夹，9 - 删除文件夹
-   */
-  Method?: number
-  /**
-   * 下载的文件（夹）路径及名称
-   */
-  FileCurr?: string
-  /**
-   * 上传或新建文件（夹）路径及名称
-   */
-  FileNew?: string
-  /**
-   * 会话id
-   */
-  Sid?: string
-  /**
-   * 账号
-   */
-  Account?: string
-  /**
-   * 来源id
-   */
-  FromIp?: string
-  /**
-   * 协议
-   */
-  Protocol?: string
-  /**
-   * 文件大小
-   */
-  Size?: number
-  /**
-   * 复核时间
-   */
-  ConfirmTime?: string
-  /**
-   * 用户部门id
-   */
-  UserDepartmentId?: string
-  /**
-   * 用户部门name
-   */
-  UserDepartmentName?: string
-  /**
-   * 设备部门id
-   */
-  DeviceDepartmentId?: string
-  /**
-   * 设备部门name
-   */
-  DeviceDepartmentName?: string
-  /**
-   * 签名值
-   */
-  SignValue?: string
+  RequestId?: string
 }
 
 /**

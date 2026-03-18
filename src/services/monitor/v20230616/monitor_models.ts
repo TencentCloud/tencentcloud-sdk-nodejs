@@ -148,22 +148,37 @@ export interface QCloudYeheWeChatNoticeTmplItem {
 }
 
 /**
- * 告警通知自定义PagerDutyRobot内容模板
+ * 官网通知内容模板
  */
-export interface PagerDutyRobotNoticeTmpl {
+export interface QCloudYeheNoticeTmpl {
   /**
-   * 请求体模板 仅支持json
+   * 邮件通知渠道
    */
-  Body?: string
+  Email?: QCloudYeheNoticeTmplItem
   /**
-   * 请求头 暂时未支持
-注意：此字段可能返回 null，表示取不到有效值。
+   * 企业微信通知渠道
    */
-  Headers?: Array<PagerDutyRobotNoticeTmplHeader>
+  QYWX?: QCloudYeheNoticeTmplItem
   /**
-   * 标题模板
+   * 短信通知渠道
    */
-  TitleTmpl?: string
+  SMS?: QCloudYeheNoticeTmplItem
+  /**
+   * 语音通知渠道
+   */
+  Voice?: QCloudYeheNoticeTmplItem
+  /**
+   * 微信通知渠道
+   */
+  WeChat?: QCloudYeheWeChatNoticeTmplItem
+  /**
+   * 站内信通知渠道
+   */
+  Site?: QCloudYeheNoticeTmplItem
+  /**
+   * 安灯通知渠道
+   */
+  Andon?: QCloudYeheNoticeTmplItem
 }
 
 /**
@@ -269,6 +284,10 @@ export interface NoticeContentTmplItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PagerDutyRobot?: Array<PagerDutyRobotNoticeTmplMatcher>
+  /**
+   * GoogleChat
+   */
+  GoogleChatRobot?: Array<GoogleChatRobotNoticeTmplMatcher>
 }
 
 /**
@@ -379,6 +398,16 @@ export interface DescribeAlarmNotifyHistoriesResponse {
 }
 
 /**
+ * Google Chat 机器人内容模板配置
+ */
+export interface GoogleChatRobotNoticeTmpl {
+  /**
+   * 内容模板
+   */
+  ContentTmpl: string
+}
+
+/**
  * 钉钉机器人内容模板配置
  */
 export interface DingDingRobotNoticeTmpl {
@@ -460,6 +489,21 @@ export interface TeamsRobotNoticeTmpl {
 }
 
 /**
+ * Google Chat 机器人通知模板的匹配器
+ */
+export interface GoogleChatRobotNoticeTmplMatcher {
+  /**
+   * 匹配状态 Invalid;
+Trigger 告警触发; Recovery 告警恢复
+   */
+  MatchingStatus: Array<string>
+  /**
+   * 模板配置
+   */
+  Template: GoogleChatRobotNoticeTmpl
+}
+
+/**
  * 企业微信机器人内容模板配置
  */
 export interface WeWorkRobotNoticeTmpl {
@@ -480,37 +524,22 @@ export interface DeleteNoticeContentTmplsResponse {
 }
 
 /**
- * 官网通知内容模板
+ * 告警通知自定义PagerDutyRobot内容模板
  */
-export interface QCloudYeheNoticeTmpl {
+export interface PagerDutyRobotNoticeTmpl {
   /**
-   * 邮件通知渠道
+   * 请求体模板 仅支持json
    */
-  Email?: QCloudYeheNoticeTmplItem
+  Body?: string
   /**
-   * 企业微信通知渠道
+   * 请求头 暂时未支持
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  QYWX?: QCloudYeheNoticeTmplItem
+  Headers?: Array<PagerDutyRobotNoticeTmplHeader>
   /**
-   * 短信通知渠道
+   * 标题模板
    */
-  SMS?: QCloudYeheNoticeTmplItem
-  /**
-   * 语音通知渠道
-   */
-  Voice?: QCloudYeheNoticeTmplItem
-  /**
-   * 微信通知渠道
-   */
-  WeChat?: QCloudYeheWeChatNoticeTmplItem
-  /**
-   * 站内信通知渠道
-   */
-  Site?: QCloudYeheNoticeTmplItem
-  /**
-   * 安灯通知渠道
-   */
-  Andon?: QCloudYeheNoticeTmplItem
+  TitleTmpl?: string
 }
 
 /**

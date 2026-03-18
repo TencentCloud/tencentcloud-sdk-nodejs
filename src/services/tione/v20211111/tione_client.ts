@@ -31,7 +31,7 @@ import {
   ModifyServiceGroupWeightsResponse,
   Usage,
   GatewayConfig,
-  AuthTokenBase,
+  Choice,
   DeleteNotebookRequest,
   PushTrainingMetricsRequest,
   Filter,
@@ -39,6 +39,7 @@ import {
   CreateDatasetRequest,
   CreateDatasetResponse,
   Service,
+  DeviceImageInfo,
   CrossTenantENIInfo,
   HyperParameter,
   DescribeDataSourcesRequest,
@@ -73,6 +74,7 @@ import {
   DescribeBuildInImagesRequest,
   MountConfigureInfo,
   StartTrainingTaskRequest,
+  DescribePlatformImagesResponse,
   ContainerStatus,
   DescribeMountInstancesResponse,
   UpdateMountLimitRequest,
@@ -92,7 +94,7 @@ import {
   DescribeModelServiceGroupsResponse,
   Spec,
   DescribeDataSourceRequest,
-  HTTPGetAction,
+  DescribePublicAlgoVersionListResponse,
   DescribeBillingResourceInstanceRunningJobsResponse,
   InferGatewayCallInfo,
   CreateDataSourceResponse,
@@ -110,7 +112,7 @@ import {
   DescribeMountLimitsRequest,
   DeleteExportResponse,
   DefaultInnerCallInfo,
-  Choice,
+  AuthTokenBase,
   ModifyModelServiceAuthTokenRequest,
   SchedulingPolicy,
   LogIdentity,
@@ -122,9 +124,11 @@ import {
   DescribeBillingSpecsRequest,
   RDMAConfig,
   InferCodeInfo,
+  TrainParam,
   DescribeInferTemplatesRequest,
   ModifyModelServiceAuthorizationRequest,
   DeleteModelServiceGroupResponse,
+  DeviceMaterialInfo,
   GpuDetail,
   CreateExportResponse,
   CronScaleJob,
@@ -139,6 +143,7 @@ import {
   PodSSHInfo,
   DescribeModelServiceGroupsRequest,
   SubAccountInfo,
+  UpdateSubAccountLinuxUserInfoResponse,
   ImageInfo,
   Tag,
   ServiceInfo,
@@ -172,6 +177,7 @@ import {
   DescribeEventsResponse,
   DatasetGroup,
   StatefulSetCondition,
+  HTTPGetAction,
   SidecarSpec,
   TCPSocketAction,
   ResourceInfo,
@@ -207,7 +213,7 @@ import {
   HostPath,
   StopModelAccelerateTaskResponse,
   IngressPrivateLinkInfo,
-  UpdateSubAccountLinuxUserInfoResponse,
+  PublicAlgoVersion,
   ServiceEIPInfo,
   DescribeTrainingTasksResponse,
   UpdateMountLimitResponse,
@@ -220,8 +226,10 @@ import {
   DescribeExportRequest,
   UpdateSubAccountLinuxUserInfoRequest,
   DescribeNotebookRequest,
+  DescribePublicAlgoVersionListRequest,
   StorageExtraConf,
   LocalDisk,
+  ResourceSpec,
   DescribeLogsResponse,
   EncodedStartCmdInfo,
   StopNotebookRequest,
@@ -236,11 +244,12 @@ import {
   DescribeSubAccountLinuxUserInfosRequest,
   ChatCompletionResponse,
   GooseFSx,
-  DescribePlatformImagesResponse,
+  AggregatePublicAlgoVersion,
   DescribeTrainingTaskPodsRequest,
   DescribeTrainingModelVersionsResponse,
   DescribeSubAccountLinuxUserInfosResponse,
   DeleteDatasetRequest,
+  MaterialInfo,
   DataConfig,
   ResourceConf,
   DescribeModelServiceGroupRequest,
@@ -603,6 +612,16 @@ https://cloud.tencent.com/document/product/1278/85305
     cb?: (error: string, rep: DeleteModelServiceGroupResponse) => void
   ): Promise<DeleteModelServiceGroupResponse> {
     return this.request("DeleteModelServiceGroup", req, cb)
+  }
+
+  /**
+   * 公共算法版本列表
+   */
+  async DescribePublicAlgoVersionList(
+    req: DescribePublicAlgoVersionListRequest,
+    cb?: (error: string, rep: DescribePublicAlgoVersionListResponse) => void
+  ): Promise<DescribePublicAlgoVersionListResponse> {
+    return this.request("DescribePublicAlgoVersionList", req, cb)
   }
 
   /**

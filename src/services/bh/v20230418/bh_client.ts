@@ -106,6 +106,7 @@ import {
   DescribeAssetSyncStatusResponse,
   ModifyChangePwdTaskResponse,
   DescribeUserGroupsRequest,
+  DisableClientTcpAccessRequest,
   DescribeUserDirectoryResponse,
   CreateAclRequest,
   DescribeLoginEventResponse,
@@ -113,6 +114,7 @@ import {
   SearchSubtaskResultByIdRequest,
   CreateDeviceGroupRequest,
   DisableExternalAccessRequest,
+  DisableWebAccessRequest,
   RunOperationTaskResponse,
   DeleteDeviceGroupMembersRequest,
   OperationTask,
@@ -123,6 +125,7 @@ import {
   CreateAclResponse,
   DescribeAclsResponse,
   Departments,
+  DisableClientTcpAccessResponse,
   ModifyUserRequest,
   CreateCmdTemplateResponse,
   DeleteOperationTasksResponse,
@@ -138,7 +141,7 @@ import {
   DescribeResourcesResponse,
   DescribeUsersRequest,
   DeployResourceRequest,
-  EnableExternalAccessResponse,
+  EnableClientTcpAccessResponse,
   AssetSyncFlags,
   CreateCmdTemplateRequest,
   ModifyCmdTemplateResponse,
@@ -152,6 +155,7 @@ import {
   CreateAssetSyncJobRequest,
   Group,
   UnlockUserResponse,
+  EnableWebAccessRequest,
   DescribeAssetSyncStatusRequest,
   Clb,
   AccessDevicesResponse,
@@ -178,6 +182,7 @@ import {
   Device,
   DeleteUserGroupsRequest,
   CreateSyncUserTaskRequest,
+  SearchSessionResponse,
   DescribeAccountGroupsResponse,
   SourceType,
   CreateDeviceAccountResponse,
@@ -201,12 +206,15 @@ import {
   ModifyDeviceResponse,
   ModifyUserResponse,
   ChangePwdTaskDetail,
-  SearchSessionResponse,
+  EnableExternalAccessResponse,
+  EnableClientTcpAccessRequest,
   ModifyCmdTemplateRequest,
   CreateOperationTaskRequest,
   ModifyAclResponse,
   DescribeCmdTemplatesResponse,
   UnlockUserRequest,
+  SearchFileResult,
+  EnableWebAccessResponse,
   ReplayInformation,
   CreateDeviceAccountRequest,
   AddDeviceGroupMembersResponse,
@@ -261,7 +269,7 @@ import {
   DescribeDomainsResponse,
   EnableIntranetAccessResponse,
   ModifyUserDirectoryRequest,
-  SearchFileResult,
+  DisableWebAccessResponse,
   ReplaySessionResponse,
   AccountGroup,
   DeleteAclsResponse,
@@ -440,6 +448,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccessWhiteListRulesResponse) => void
   ): Promise<DescribeAccessWhiteListRulesResponse> {
     return this.request("DescribeAccessWhiteListRules", req, cb)
+  }
+
+  /**
+   * 关闭客户端TCP访问堡垒机
+   */
+  async DisableClientTcpAccess(
+    req: DisableClientTcpAccessRequest,
+    cb?: (error: string, rep: DisableClientTcpAccessResponse) => void
+  ): Promise<DisableClientTcpAccessResponse> {
+    return this.request("DisableClientTcpAccess", req, cb)
   }
 
   /**
@@ -643,6 +661,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 关闭web访问堡垒机
+   */
+  async DisableWebAccess(
+    req: DisableWebAccessRequest,
+    cb?: (error: string, rep: DisableWebAccessResponse) => void
+  ): Promise<DisableWebAccessResponse> {
+    return this.request("DisableWebAccess", req, cb)
+  }
+
+  /**
    * 搜索会话
    */
   async SearchSession(
@@ -723,6 +751,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 开启客户端TCP访问堡垒机
+   */
+  async EnableClientTcpAccess(
+    req: EnableClientTcpAccessRequest,
+    cb?: (error: string, rep: EnableClientTcpAccessResponse) => void
+  ): Promise<EnableClientTcpAccessResponse> {
+    return this.request("EnableClientTcpAccess", req, cb)
+  }
+
+  /**
    * 新建高危命令模板
    */
   async CreateCmdTemplate(
@@ -743,13 +781,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 清除设备账号绑定的密钥
+   * 创建堡垒机实例
    */
-  async ResetDeviceAccountPrivateKey(
-    req: ResetDeviceAccountPrivateKeyRequest,
-    cb?: (error: string, rep: ResetDeviceAccountPrivateKeyResponse) => void
-  ): Promise<ResetDeviceAccountPrivateKeyResponse> {
-    return this.request("ResetDeviceAccountPrivateKey", req, cb)
+  async CreateResource(
+    req: CreateResourceRequest,
+    cb?: (error: string, rep: CreateResourceResponse) => void
+  ): Promise<CreateResourceResponse> {
+    return this.request("CreateResource", req, cb)
   }
 
   /**
@@ -763,13 +801,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改认证方式配置信息
+   * 修改资产自动同步开关
    */
-  async ModifyAuthModeSetting(
-    req: ModifyAuthModeSettingRequest,
-    cb?: (error: string, rep: ModifyAuthModeSettingResponse) => void
-  ): Promise<ModifyAuthModeSettingResponse> {
-    return this.request("ModifyAuthModeSetting", req, cb)
+  async ModifyAssetSyncFlag(
+    req: ModifyAssetSyncFlagRequest,
+    cb?: (error: string, rep: ModifyAssetSyncFlagResponse) => void
+  ): Promise<ModifyAssetSyncFlagResponse> {
+    return this.request("ModifyAssetSyncFlag", req, cb)
   }
 
   /**
@@ -1153,6 +1191,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 开启web访问堡垒机
+   */
+  async EnableWebAccess(
+    req: EnableWebAccessRequest,
+    cb?: (error: string, rep: EnableWebAccessResponse) => void
+  ): Promise<EnableWebAccessResponse> {
+    return this.request("EnableWebAccess", req, cb)
+  }
+
+  /**
    * 删除访问白名单规则
    */
   async DeleteAccessWhiteListRules(
@@ -1173,13 +1221,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建堡垒机实例
+   * 清除设备账号绑定的密钥
    */
-  async CreateResource(
-    req: CreateResourceRequest,
-    cb?: (error: string, rep: CreateResourceResponse) => void
-  ): Promise<CreateResourceResponse> {
-    return this.request("CreateResource", req, cb)
+  async ResetDeviceAccountPrivateKey(
+    req: ResetDeviceAccountPrivateKeyRequest,
+    cb?: (error: string, rep: ResetDeviceAccountPrivateKeyResponse) => void
+  ): Promise<ResetDeviceAccountPrivateKeyResponse> {
+    return this.request("ResetDeviceAccountPrivateKey", req, cb)
   }
 
   /**
@@ -1223,13 +1271,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改资产自动同步开关
+   * 修改认证方式配置信息
    */
-  async ModifyAssetSyncFlag(
-    req: ModifyAssetSyncFlagRequest,
-    cb?: (error: string, rep: ModifyAssetSyncFlagResponse) => void
-  ): Promise<ModifyAssetSyncFlagResponse> {
-    return this.request("ModifyAssetSyncFlag", req, cb)
+  async ModifyAuthModeSetting(
+    req: ModifyAuthModeSettingRequest,
+    cb?: (error: string, rep: ModifyAuthModeSettingResponse) => void
+  ): Promise<ModifyAuthModeSettingResponse> {
+    return this.request("ModifyAuthModeSetting", req, cb)
   }
 
   /**

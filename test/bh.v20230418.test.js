@@ -178,6 +178,16 @@ it("bh.v20230418.DescribeAccessWhiteListRules", async function () {
     }
 })
 
+it("bh.v20230418.DisableClientTcpAccess", async function () {
+    try {
+       const data = await client.DisableClientTcpAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bh.v20230418.DescribeAssetSyncStatus", async function () {
     try {
        const data = await client.DescribeAssetSyncStatus({})
@@ -378,6 +388,16 @@ it("bh.v20230418.BindDeviceResource", async function () {
     }
 })
 
+it("bh.v20230418.DisableWebAccess", async function () {
+    try {
+       const data = await client.DisableWebAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bh.v20230418.SearchSession", async function () {
     try {
        const data = await client.SearchSession({})
@@ -458,6 +478,16 @@ it("bh.v20230418.ModifyCmdTemplate", async function () {
     }
 })
 
+it("bh.v20230418.EnableClientTcpAccess", async function () {
+    try {
+       const data = await client.EnableClientTcpAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bh.v20230418.CreateCmdTemplate", async function () {
     try {
        const data = await client.CreateCmdTemplate({})
@@ -478,9 +508,9 @@ it("bh.v20230418.ReplaySession", async function () {
     }
 })
 
-it("bh.v20230418.ResetDeviceAccountPrivateKey", async function () {
+it("bh.v20230418.CreateResource", async function () {
     try {
-       const data = await client.ResetDeviceAccountPrivateKey({})
+       const data = await client.CreateResource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -498,9 +528,9 @@ it("bh.v20230418.SearchAuditLog", async function () {
     }
 })
 
-it("bh.v20230418.ModifyAuthModeSetting", async function () {
+it("bh.v20230418.ModifyAssetSyncFlag", async function () {
     try {
-       const data = await client.ModifyAuthModeSetting({})
+       const data = await client.ModifyAssetSyncFlag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -888,6 +918,16 @@ it("bh.v20230418.DeleteDeviceGroups", async function () {
     }
 })
 
+it("bh.v20230418.EnableWebAccess", async function () {
+    try {
+       const data = await client.EnableWebAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bh.v20230418.DeleteAccessWhiteListRules", async function () {
     try {
        const data = await client.DeleteAccessWhiteListRules({})
@@ -908,9 +948,9 @@ it("bh.v20230418.DescribeUserSyncStatus", async function () {
     }
 })
 
-it("bh.v20230418.CreateResource", async function () {
+it("bh.v20230418.ResetDeviceAccountPrivateKey", async function () {
     try {
-       const data = await client.CreateResource({})
+       const data = await client.ResetDeviceAccountPrivateKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -958,9 +998,9 @@ it("bh.v20230418.ModifyResource", async function () {
     }
 })
 
-it("bh.v20230418.ModifyAssetSyncFlag", async function () {
+it("bh.v20230418.ModifyAuthModeSetting", async function () {
     try {
-       const data = await client.ModifyAssetSyncFlag({})
+       const data = await client.ModifyAuthModeSetting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
