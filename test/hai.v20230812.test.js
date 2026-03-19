@@ -18,6 +18,36 @@ const client = new tencentcloud.hai.v20230812.Client({
 })
 describe("hai.v20230812.test.js", function () {
 
+it("hai.v20230812.DescribeServiceLoginSettings", async function () {
+    try {
+       const data = await client.DescribeServiceLoginSettings({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.ResizeInstanceDisk", async function () {
+    try {
+       const data = await client.ResizeInstanceDisk({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.DescribeDeployTemplates", async function () {
+    try {
+       const data = await client.DescribeDeployTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hai.v20230812.UpdateServiceConfigs", async function () {
     try {
        const data = await client.UpdateServiceConfigs({})
@@ -38,36 +68,6 @@ it("hai.v20230812.InquirePriceRunInstances", async function () {
     }
 })
 
-it("hai.v20230812.DescribeInstances", async function () {
-    try {
-       const data = await client.DescribeInstances({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hai.v20230812.DescribeApplications", async function () {
-    try {
-       const data = await client.DescribeApplications({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hai.v20230812.DescribeMuskPrompts", async function () {
-    try {
-       const data = await client.DescribeMuskPrompts({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("hai.v20230812.InquirePriceUpdateServiceConfigs", async function () {
     try {
        const data = await client.InquirePriceUpdateServiceConfigs({})
@@ -78,29 +78,9 @@ it("hai.v20230812.InquirePriceUpdateServiceConfigs", async function () {
     }
 })
 
-it("hai.v20230812.DescribeScenes", async function () {
+it("hai.v20230812.DescribeInstances", async function () {
     try {
-       const data = await client.DescribeScenes({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hai.v20230812.ResizeInstanceDisk", async function () {
-    try {
-       const data = await client.ResizeInstanceDisk({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hai.v20230812.DescribeRegions", async function () {
-    try {
-       const data = await client.DescribeRegions({})
+       const data = await client.DescribeInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,69 +98,9 @@ it("hai.v20230812.RunInstances", async function () {
     }
 })
 
-it("hai.v20230812.StartInstance", async function () {
+it("hai.v20230812.DeployInferService", async function () {
     try {
-       const data = await client.StartInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hai.v20230812.TerminateInstances", async function () {
-    try {
-       const data = await client.TerminateInstances({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hai.v20230812.CreateMuskPrompt", async function () {
-    try {
-       const data = await client.CreateMuskPrompt({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hai.v20230812.ResetInstancesPassword", async function () {
-    try {
-       const data = await client.ResetInstancesPassword({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hai.v20230812.DescribeInstanceNetworkStatus", async function () {
-    try {
-       const data = await client.DescribeInstanceNetworkStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hai.v20230812.DescribeServiceLoginSettings", async function () {
-    try {
-       const data = await client.DescribeServiceLoginSettings({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("hai.v20230812.DescribeServices", async function () {
-    try {
-       const data = await client.DescribeServices({})
+       const data = await client.DeployInferService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +118,129 @@ it("hai.v20230812.StopInstance", async function () {
     }
 })
 
+it("hai.v20230812.StartInstance", async function () {
+    try {
+       const data = await client.StartInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.ResetInstancesPassword", async function () {
+    try {
+       const data = await client.ResetInstancesPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.DescribeMuskPrompts", async function () {
+    try {
+       const data = await client.DescribeMuskPrompts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.DescribeRegions", async function () {
+    try {
+       const data = await client.DescribeRegions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.DescribeServices", async function () {
+    try {
+       const data = await client.DescribeServices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.CreateMuskPrompt", async function () {
+    try {
+       const data = await client.CreateMuskPrompt({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.TerminateInstances", async function () {
+    try {
+       const data = await client.TerminateInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hai.v20230812.CreateApplication", async function () {
     try {
        const data = await client.CreateApplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.DescribeModels", async function () {
+    try {
+       const data = await client.DescribeModels({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.DescribeApplications", async function () {
+    try {
+       const data = await client.DescribeApplications({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.DescribeScenes", async function () {
+    try {
+       const data = await client.DescribeScenes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.DescribeInstanceNetworkStatus", async function () {
+    try {
+       const data = await client.DescribeInstanceNetworkStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.CreateInferServiceByTemplate", async function () {
+    try {
+       const data = await client.CreateInferServiceByTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

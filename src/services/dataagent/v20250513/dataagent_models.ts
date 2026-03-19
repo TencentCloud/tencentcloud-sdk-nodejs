@@ -883,55 +883,57 @@ export interface QueryUserAuthorityRequest {
  */
 export interface FileInfo {
   /**
-   * 文件名称
+   * <p>文件名称</p>
    */
   FileName: string
   /**
-   * 文件大小，字节
+   * <p>文件大小，字节</p>
    */
   FileSize: number
   /**
-   * 文件类型,0=文本,1=表格，默认0
-
+   * <p>文件类型,0=文本,1=表格，默认0</p>
    */
   Type: number
   /**
-   * 文件ID
+   * <p>文件ID</p>
    */
   FileId: string
   /**
-   * 状态，0：数据处理中  1：可用 -1：错误
+   * <p>状态，0：数据处理中  1：可用 -1：错误</p>
    */
   Status?: number
   /**
-   * 操作者
-
+   * <p>操作者</p>
    */
   CreateUser?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 分片策略
+   * <p>分片策略</p>
    */
   ChunkConfig?: KnowledgeTaskConfig
   /**
-   * 文件来源0=unknow,1=user_cos,2=local
+   * <p>文件来源0=unknow,1=user_cos,2=local</p>
    */
   Source?: number
   /**
-   * 文件url
+   * <p>文件url</p>
    */
   FileUrl?: string
   /**
-   * 是否官方示例，0=否，1=是
+   * <p>是否官方示例，0=否，1=是</p>
    */
   IsShowCase?: number
   /**
-   * 文档摘要
+   * <p>文档摘要</p>
    */
   DocumentSummary?: string
+  /**
+   * <p>网页地址</p>
+   */
+  WebUrl?: string
 }
 
 /**

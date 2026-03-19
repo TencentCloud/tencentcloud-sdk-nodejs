@@ -810,117 +810,25 @@ export interface CreateGroupWithSubGroupRequest {
 }
 
 /**
- * 房间列表
+ * DescribeLiveRelayConfig返回参数结构体
  */
-export interface RoomItem {
+export interface DescribeLiveRelayConfigResponse {
   /**
-   * 名称
+   * <p>转推类型</p><p>枚举值：</p><ul><li>0： 单流</li><li>1： 混流</li></ul>
    */
-  Name?: string
+  RelayType?: number
   /**
-   * 房间ID
+   * <p>转推URL</p>
    */
-  RoomId?: number
+  Urls?: Array<string>
   /**
-   * 房间状态。0 未开始 ；1进行中  ；2 已结束；3已过期
+   * <p>是否是腾讯云CDN。</p><p>枚举值：</p><ul><li>0： 转推非腾讯云CDN</li><li>1： 转推腾讯CDN</li></ul>
    */
-  Status?: number
+  IsTencentCdn?: number
   /**
-   * 开始时间
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  StartTime?: number
-  /**
-   * 结束时间
-   */
-  EndTime?: number
-  /**
-   * 实际开始时间
-   */
-  RealStartTime?: number
-  /**
-   * 实际结束时间
-   */
-  RealEndTime?: number
-  /**
-   * 头像区域，摄像头视频画面的分辨率。可以有如下取值：
-1 标清
-2 高清
-3 全高清
-   */
-  Resolution?: number
-  /**
-   * 最大允许连麦人数。已废弃，使用字段 MaxMicNumber
-   */
-  MaxRTCMember?: number
-  /**
-   * 房间录制地址。已废弃，使用新字段 RecordUrl
-   */
-  ReplayUrl?: string
-  /**
-   * 录制地址（协议为https)。仅在房间结束后存在。
-   */
-  RecordUrl?: string
-  /**
-   * 课堂同时最大可与老师进行连麦互动的人数，该参数支持正式上课/开播前调用修改房间修改。小班课取值范围[0,16]，大班课取值范围[0,1]，当取值为0时表示当前课堂/直播，不支持连麦互动。
-   */
-  MaxMicNumber?: number
-  /**
-   * 打开学生麦克风/摄像头的授权开关
-   */
-  EnableDirectControl?: number
-  /**
-   * 开启专注模式。 0 收看全部角色音视频(默认) 1 只看老师和助教
-   */
-  InteractionMode?: number
-  /**
-   * 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型
-   */
-  VideoOrientation?: number
-  /**
-   * 开启课后评分。 0：不开启(默认)  1：开启
-   */
-  IsGradingRequiredPostClass?: number
-  /**
-   * 房间类型。0:小班课（默认值）；1:大班课；2:1V1（后续扩展）
-注：大班课的布局(layout)只有三分屏
-   */
-  RoomType?: number
-  /**
-   * 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟
-   */
-  EndDelayTime?: number
-  /**
-   * 直播类型：0 常规（默认）1 伪直播
-   */
-  LiveType?: number
-  /**
-   * 伪直播回放链接
-   */
-  RecordLiveUrl?: string
-  /**
-   * 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效
-   */
-  EnableAutoStart?: number
-  /**
-   * 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道
-   */
-  RecordBackground?: string
-  /**
-   * 录制自定义场景，仅recordlayout=9的时候此参数有效,数据内容为用户自定义场景参数，数据格式为json键值对方式，其中键值对的value为string类型。
-   */
-  RecordScene?: string
-  /**
-   * 录制自定义语言，仅recordlayout=9的时候此参数有效
-   */
-  RecordLang?: string
-  /**
-   * 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式
-   */
-  WhiteBoardSnapshotMode?: number
-  /**
-   * 字幕转写功能开关：0关闭，1开启，默认关闭
-   */
-  SubtitlesTranscription?: number
+  RequestId?: string
 }
 
 /**
@@ -1480,6 +1388,120 @@ export interface DocumentInfo {
 }
 
 /**
+ * 房间列表
+ */
+export interface RoomItem {
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 房间ID
+   */
+  RoomId?: number
+  /**
+   * 房间状态。0 未开始 ；1进行中  ；2 已结束；3已过期
+   */
+  Status?: number
+  /**
+   * 开始时间
+   */
+  StartTime?: number
+  /**
+   * 结束时间
+   */
+  EndTime?: number
+  /**
+   * 实际开始时间
+   */
+  RealStartTime?: number
+  /**
+   * 实际结束时间
+   */
+  RealEndTime?: number
+  /**
+   * 头像区域，摄像头视频画面的分辨率。可以有如下取值：
+1 标清
+2 高清
+3 全高清
+   */
+  Resolution?: number
+  /**
+   * 最大允许连麦人数。已废弃，使用字段 MaxMicNumber
+   */
+  MaxRTCMember?: number
+  /**
+   * 房间录制地址。已废弃，使用新字段 RecordUrl
+   */
+  ReplayUrl?: string
+  /**
+   * 录制地址（协议为https)。仅在房间结束后存在。
+   */
+  RecordUrl?: string
+  /**
+   * 课堂同时最大可与老师进行连麦互动的人数，该参数支持正式上课/开播前调用修改房间修改。小班课取值范围[0,16]，大班课取值范围[0,1]，当取值为0时表示当前课堂/直播，不支持连麦互动。
+   */
+  MaxMicNumber?: number
+  /**
+   * 打开学生麦克风/摄像头的授权开关
+   */
+  EnableDirectControl?: number
+  /**
+   * 开启专注模式。 0 收看全部角色音视频(默认) 1 只看老师和助教
+   */
+  InteractionMode?: number
+  /**
+   * 横竖屏。0：横屏开播（默认值）; 1：竖屏开播，当前仅支持移动端的纯视频类型
+   */
+  VideoOrientation?: number
+  /**
+   * 开启课后评分。 0：不开启(默认)  1：开启
+   */
+  IsGradingRequiredPostClass?: number
+  /**
+   * 房间类型。0:小班课（默认值）；1:大班课；2:1V1（后续扩展）
+注：大班课的布局(layout)只有三分屏
+   */
+  RoomType?: number
+  /**
+   * 拖堂时间：单位分钟，0为不限制(默认值), -1为不能拖堂，大于0为拖堂的时间，最大值120分钟
+   */
+  EndDelayTime?: number
+  /**
+   * 直播类型：0 常规（默认）1 伪直播
+   */
+  LiveType?: number
+  /**
+   * 伪直播回放链接
+   */
+  RecordLiveUrl?: string
+  /**
+   * 是否自动开始上课：0 不自动上课（默认） 1 自动上课 live_type=1的时候有效
+   */
+  EnableAutoStart?: number
+  /**
+   * 录制文件背景图片，支持png、jpg、jpeg、bmp格式，暂不支持透明通道
+   */
+  RecordBackground?: string
+  /**
+   * 录制自定义场景，仅recordlayout=9的时候此参数有效,数据内容为用户自定义场景参数，数据格式为json键值对方式，其中键值对的value为string类型。
+   */
+  RecordScene?: string
+  /**
+   * 录制自定义语言，仅recordlayout=9的时候此参数有效
+   */
+  RecordLang?: string
+  /**
+   * 板书截图生成类型。0 不生成板书；1 全量模式；2 单页去重模式
+   */
+  WhiteBoardSnapshotMode?: number
+  /**
+   * 字幕转写功能开关：0关闭，1开启，默认关闭
+   */
+  SubtitlesTranscription?: number
+}
+
+/**
  * 课堂回放信息
  */
 export interface PlaybackItem {
@@ -1499,6 +1521,10 @@ export interface PlaybackItem {
    * <p>录制开始时间</p>
    */
   CreateTime?: number
+  /**
+   * <p>文件大小。</p><p>单位：MB</p>
+   */
+  FileSize?: number
 }
 
 /**
@@ -2264,13 +2290,17 @@ export interface RegisterUserResponse {
 }
 
 /**
- * StartRoom返回参数结构体
+ * DescribeLiveRelayConfig请求参数结构体
  */
-export interface StartRoomResponse {
+export interface DescribeLiveRelayConfigRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>低代码互动课堂的SdkAppId</p>
    */
-  RequestId?: string
+  SdkAppId: number
+  /**
+   * <p>房间ID</p>
+   */
+  RoomId: number
 }
 
 /**
@@ -3218,6 +3248,16 @@ export interface GetRoomEventResponse {
 }
 
 /**
+ * ModifyLiveRelayConfig返回参数结构体
+ */
+export interface ModifyLiveRelayConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 每个选项答题人数统计
  */
 export interface AnswerStat {
@@ -4025,6 +4065,16 @@ TIMCustomElem（自定义消息）
 }
 
 /**
+ * StartRoom返回参数结构体
+ */
+export interface StartRoomResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateSupervisor返回参数结构体
  */
 export interface CreateSupervisorResponse {
@@ -4086,6 +4136,32 @@ export interface BatchCreateGroupWithMembersRequest {
    * 群组绑定的成员列表，一次性最多200个
    */
   MemberIds?: Array<string>
+}
+
+/**
+ * ModifyLiveRelayConfig请求参数结构体
+ */
+export interface ModifyLiveRelayConfigRequest {
+  /**
+   * <p>低代码互动课堂的SdkAppId</p>
+   */
+  SdkAppId: number
+  /**
+   * <p>房间ID</p>
+   */
+  RoomId: number
+  /**
+   * <p>转推类型</p><p>枚举值：</p><ul><li>0： 单流</li><li>1： 混流</li></ul>
+   */
+  RelayType: number
+  /**
+   * <p>转推URL</p>
+   */
+  Urls: Array<string>
+  /**
+   * <p>是否是腾讯云CDN（默认为0）</p><p>枚举值：</p><ul><li>0： 转推非腾讯CDN</li><li>1： 转推腾讯CDN</li></ul>
+   */
+  IsTencentCdn?: number
 }
 
 /**

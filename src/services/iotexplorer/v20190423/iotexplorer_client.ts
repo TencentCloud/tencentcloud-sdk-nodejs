@@ -211,6 +211,7 @@ import {
   DescribeInstanceResponse,
   GetLoRaGatewayListRequest,
   DescribeProjectRequest,
+  SeeEventIdFilterConfig,
   DescribeSubscribedTopicPolicyRequest,
   UploadFirmwareResponse,
   ModifyTopicPolicyRequest,

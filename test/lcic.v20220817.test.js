@@ -188,6 +188,16 @@ it("lcic.v20220817.ModifyApp", async function () {
     }
 })
 
+it("lcic.v20220817.DescribeLiveRelayConfig", async function () {
+    try {
+       const data = await client.DescribeLiveRelayConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.DescribeDocument", async function () {
     try {
        const data = await client.DescribeDocument({})
@@ -601,6 +611,16 @@ it("lcic.v20220817.SetAppCustomContent", async function () {
 it("lcic.v20220817.BatchDescribeDocument", async function () {
     try {
        const data = await client.BatchDescribeDocument({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.ModifyLiveRelayConfig", async function () {
+    try {
+       const data = await client.ModifyLiveRelayConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

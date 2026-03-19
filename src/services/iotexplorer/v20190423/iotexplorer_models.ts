@@ -1438,6 +1438,10 @@ export interface ModifyTWeSeeConfigRequest {
    * 视频摘要配置参数，不传则不修改
    */
   SummaryConfig?: VisionSummaryConfig
+  /**
+   * 云存事件 ID 过滤规则配置，不传则不修改
+   */
+  EventIdFilterConfig?: SeeEventIdFilterConfig
 }
 
 /**
@@ -4100,6 +4104,20 @@ export interface DescribeProjectRequest {
 }
 
 /**
+ * TWeSee 处理云存事件 EventId 的过滤规则配置
+ */
+export interface SeeEventIdFilterConfig {
+  /**
+   * 包含的云存事件 ID 集合
+   */
+  IncludeOnly?: Array<string>
+  /**
+   * 排除的云存事件 ID 集合
+   */
+  Exclude?: Array<string>
+}
+
+/**
  * DescribeSubscribedTopicPolicy请求参数结构体
  */
 export interface DescribeSubscribedTopicPolicyRequest {
@@ -6556,6 +6574,14 @@ export interface DescribeTWeSeeConfigResponse {
    * 配置参数
    */
   Config?: string
+  /**
+   * 摘要配置参数
+   */
+  SummaryConfig?: VisionSummaryConfig
+  /**
+   * 云存事件 ID 过滤规则配置项
+   */
+  EventIdFilterConfig?: SeeEventIdFilterConfig
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

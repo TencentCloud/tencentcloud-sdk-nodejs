@@ -56,7 +56,7 @@ import {
   BindDocumentToRoomResponse,
   StopRecordResponse,
   CreateGroupWithSubGroupRequest,
-  RoomItem,
+  DescribeLiveRelayConfigResponse,
   ClassScoreItem,
   DescribeRoomForbiddenUserRequest,
   DescribeRoomRequest,
@@ -84,6 +84,7 @@ import {
   DescribeDocumentsResponse,
   DescribeRecordRequest,
   DocumentInfo,
+  RoomItem,
   PlaybackItem,
   DeleteDocumentResponse,
   DeleteRecordRequest,
@@ -120,7 +121,7 @@ import {
   SetAppCustomContentRequest,
   DescribeUserRequest,
   RegisterUserResponse,
-  StartRoomResponse,
+  DescribeLiveRelayConfigRequest,
   DescribePlaybackListRequest,
   BindDocumentToRoomRequest,
   CreateDocumentRequest,
@@ -161,6 +162,7 @@ import {
   StopRecordRequest,
   SingleStreamInfo,
   GetRoomEventResponse,
+  ModifyLiveRelayConfigResponse,
   AnswerStat,
   GetPlaybackTokenResponse,
   SendRoomNormalMessageResponse,
@@ -194,10 +196,12 @@ import {
   DescribeSdkAppIdUsersRequest,
   AddGroupMemberResponse,
   MsgBody,
+  StartRoomResponse,
   CreateSupervisorResponse,
   SceneItem,
   DeleteRoomRequest,
   BatchCreateGroupWithMembersRequest,
+  ModifyLiveRelayConfigRequest,
   DescribeGroupRequest,
   CreateSupervisorRequest,
   DeletePlaybackItemRequest,
@@ -397,6 +401,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyAppResponse) => void
   ): Promise<ModifyAppResponse> {
     return this.request("ModifyApp", req, cb)
+  }
+
+  /**
+   * 获取转推配置
+   */
+  async DescribeLiveRelayConfig(
+    req: DescribeLiveRelayConfigRequest,
+    cb?: (error: string, rep: DescribeLiveRelayConfigResponse) => void
+  ): Promise<DescribeLiveRelayConfigResponse> {
+    return this.request("DescribeLiveRelayConfig", req, cb)
   }
 
   /**
@@ -839,6 +853,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchDescribeDocumentResponse) => void
   ): Promise<BatchDescribeDocumentResponse> {
     return this.request("BatchDescribeDocument", req, cb)
+  }
+
+  /**
+   * 修改转推配置
+   */
+  async ModifyLiveRelayConfig(
+    req: ModifyLiveRelayConfigRequest,
+    cb?: (error: string, rep: ModifyLiveRelayConfigResponse) => void
+  ): Promise<ModifyLiveRelayConfigResponse> {
+    return this.request("ModifyLiveRelayConfig", req, cb)
   }
 
   /**

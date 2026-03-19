@@ -82,35 +82,32 @@ off：关闭
  */
 export interface AdvanceHttps {
   /**
-   * 自定义Tls数据开关
+   * <p>自定义Tls数据开关<br>on - 开<br>off - 关</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomTlsStatus?: string
   /**
-   * Tls版本列表，支持设置 TLSv1, TLSV1.1, TLSV1.2, TLSv1.3，修改时必须开启连续的版本
+   * <p>Tls版本列表，支持设置 TLSv1, TLSV1.1, TLSV1.2, TLSv1.3，修改时必须开启连续的版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TlsVersion?: Array<string>
   /**
-   * 自定义加密套件
+   * <p>自定义加密套件</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Cipher?: string
   /**
-   * 回源双向校验开启状态
-off - 关闭校验
-oneWay - 校验源站
-twoWay - 双向校验
+   * <p>回源双向校验开启状态<br>off - 关闭校验<br>oneWay - 校验源站<br>twoWay - 双向校验</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VerifyOriginType?: string
   /**
-   * 回源层证书配置信息
+   * <p>回源层证书配置信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CertInfo?: ServerCert
   /**
-   * 源站证书配置信息
+   * <p>源站证书配置信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OriginCertInfo?: ClientCert
@@ -645,50 +642,39 @@ export interface SpecificConfig {
  */
 export interface DescribeTopDataRequest {
   /**
-   * 查询起始日期：yyyy-MM-dd HH:mm:ss
-仅支持按天粒度的数据查询，取入参中的天信息作为起始日期
-返回大于等于起始日期当天 00:00:00 点产生的数据，如 StartTime为2018-09-04 10:40:00，返回数据的起始时间为2018-09-04 00:00:00
-仅支持 90 天内数据查询
+   * <p>查询起始日期：yyyy-MM-dd<br>仅支持按天粒度的数据查询，取入参中的天信息作为起始日期<br>返回大于等于起始日期当天 00:00:00 点产生的数据，如 StartTime为2018-09-04，返回数据的起始时间为2018-09-04 00:00:00<br>仅支持 90 天内数据查询</p>
    */
   StartTime: string
   /**
-   * 查询结束日期：yyyy-MM-dd HH:mm:ss
-仅支持按天粒度的数据查询，取入参中的天信息作为结束日期
-返回小于等于结束日期当天 23:59:59 产生的数据，如EndTime为2018-09-05 22:40:00，返回数据的结束时间为2018-09-05 23:59:59
-EndTime 需要大于等于 StartTime
+   * <p>查询结束日期：yyyy-MM-dd<br>仅支持按天粒度的数据查询，取入参中的天信息作为结束日期<br>返回小于等于结束日期当天 23:59:59 产生的数据，如EndTime为2018-09-05，返回数据的结束时间为2018-09-05 23:59:59<br>EndTime 需要大于等于 StartTime</p>
    */
   EndTime: string
   /**
-   * 排序对象，支持以下几种形式：
-ip、ua_device、ua_browser、ua_os、referer
+   * <p>排序对象，支持以下几种形式：<br>ip、ua_device、ua_browser、ua_os、referer</p>
    */
   Metric: string
   /**
-   * 排序使用的指标名称：
-flux：Metric 为 host 时指代访问流量
-request：Metric 为 host 时指代访问请求数
+   * <p>排序使用的指标名称：<br>flux：Metric 为 host 时指代访问流量<br>request：Metric 为 host 时指代访问请求数</p>
    */
   Filter: string
   /**
-   * 指定查询域名列表，最多可一次性查询 30 个加速域名明细
+   * <p>指定查询域名列表，最多可一次性查询 30 个加速域名明细</p>
    */
   Domains?: Array<string>
   /**
-   * 未填充域名情况下，指定项目查询，若填充了具体域名信息，以域名为主
+   * <p>未填充域名情况下，指定项目查询，若填充了具体域名信息，以域名为主</p>
    */
   Project?: number
   /**
-   * 是否详细显示每个域名的的具体数值
+   * <p>是否详细显示每个域名的的具体数值</p>
    */
   Detail?: boolean
   /**
-   * 指定服务地域查询，不填充表示查询中国境内 CDN 数据
-mainland：指定查询中国境内 CDN 数据
-overseas：指定查询中国境外 CDN 数据
+   * <p>指定服务地域查询，不填充表示查询中国境内 CDN 数据<br>mainland：指定查询中国境内 CDN 数据<br>overseas：指定查询中国境外 CDN 数据</p>
    */
   Area?: string
   /**
-   * 指定查询的产品数据，目前仅可使用cdn
+   * <p>指定查询的产品数据，目前仅可使用cdn</p>
    */
   Product?: string
 }
@@ -1561,62 +1547,43 @@ off：关闭
  */
 export interface DescribeBillingDataRequest {
   /**
-   * 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间
-根据指定时间粒度参数不同，会进行向前取整，如指定起始时间为 2018-09-04 10:40:00 按小时粒度查询，返回的第一个数据对应时间点为 2018-09-04 10:00:00
-起始时间与结束时间间隔小于等于 90 天
+   * <p>查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间<br>根据指定时间粒度参数不同，会进行向前取整，如指定起始时间为 2018-09-04 10:40:00 按小时粒度查询，返回的第一个数据对应时间点为 2018-09-04 10:00:00<br>起始时间与结束时间间隔小于等于 90 天</p>
    */
   StartTime: string
   /**
-   * 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间
-根据指定时间粒度参数不同，会进行向前取整，如指定结束时间为  2018-09-04 10:40:00 按小时粒度查询时，返回的最后一个数据对应时间点为 2018-09-04 10:00:00
-起始时间与结束时间间隔小于等于 90 天
+   * <p>查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间<br>根据指定时间粒度参数不同，会进行向前取整，如指定结束时间为  2018-09-04 10:40:00 按小时粒度查询时，返回的最后一个数据对应时间点为 2018-09-04 10:00:00<br>起始时间与结束时间间隔小于等于 90 天</p>
    */
   EndTime: string
   /**
-   * 时间粒度，支持模式如下：
-min：1 分钟粒度，查询区间需要小于等于 24 小时
-5min：5 分钟粒度，查询区间需要小于等于 31 天(计费数据粒度)
-hour：1 小时粒度，查询区间需要小于等于 31 天内
-day：天粒度，查询区间需要大于 31 天
-
-Area 字段为 overseas 时暂不支持1分钟粒度数据查询
+   * <p>时间粒度，支持模式如下：<br>min：1 分钟粒度，查询区间需要小于等于 24 小时<br>5min：5 分钟粒度，查询区间需要小于等于 31 天(计费数据粒度)<br>hour：1 小时粒度，查询区间需要小于等于 31 天内<br>day：天粒度，查询区间需要大于 31 天</p><p>Area 字段为 overseas 时暂不支持1分钟粒度数据查询</p>
    */
   Interval?: string
   /**
-   * 指定域名查询计费数据
+   * <p>指定域名查询计费数据</p>
    */
   Domain?: string
   /**
-   * 指定项目 ID 查询，[前往查看项目 ID](https://console.cloud.tencent.com/project)
-若 Domain 参数填充了具体域名信息，则返回该域名的计费数据，而非指定项目计费数据
+   * <p>指定项目 ID 查询，<a href="https://console.cloud.tencent.com/project">前往查看项目 ID</a><br>若 Domain 参数填充了具体域名信息，则返回该域名的计费数据，而非指定项目计费数据</p>
    */
   Project?: number
   /**
-   * 指定加速区域查询计费数据：
-mainland：中国境内
-overseas：中国境外
-不填充时，默认为 mainland
+   * <p>指定加速区域查询计费数据：<br>mainland：中国境内<br>overseas：中国境外<br>不填充时，默认为 mainland</p>
    */
   Area?: string
   /**
-   * Area 为 overseas 时，指定国家/地区查询
-省份、国家/地区编码可以查看 [省份编码映射](https://cloud.tencent.com/document/product/228/6316#.E7.9C.81.E4.BB.BD.E6.98.A0.E5.B0.84)
-不填充时，查询所有国家/地区
+   * <p>Area 为 overseas 时，指定国家/地区查询<br>省份、国家/地区编码可以查看 <a href="https://cloud.tencent.com/document/product/228/6316#.E7.9C.81.E4.BB.BD.E6.98.A0.E5.B0.84">省份编码映射</a><br>不填充时，查询所有国家/地区</p>
    */
   District?: number
   /**
-   * 计费统计类型
-flux：计费流量
-bandwidth：计费带宽
-默认为 bandwidth
+   * <p>计费统计类型<br>flux：计费流量<br>bandwidth：计费带宽<br>https：https请求数<br>默认为 bandwidth</p>
    */
   Metric?: string
   /**
-   * 指定查询的产品数据，可选为cdn或者ecdn，默认为cdn
+   * <p>指定查询的产品数据，可选为cdn或者ecdn，默认为cdn</p>
    */
   Product?: string
   /**
-   * 指定查询时间的时区，默认UTC+08:00
+   * <p>指定查询时间的时区，默认UTC+08:00</p>
    */
   TimeZone?: string
 }
@@ -1696,7 +1663,7 @@ export interface DeleteClsLogTopicRequest {
  */
 export interface DescribeDistrictIspDataResponse {
   /**
-   * 地区运营商数据明细
+   * <p>地区运营商数据明细</p>
    */
   Data?: Array<DistrictIspInfo>
   /**
@@ -2206,17 +2173,17 @@ export interface DescribeHttpsPackagesRequest {
  */
 export interface FilterRules {
   /**
-   * 封禁类型
+   * <p>封禁类型<br>forbidden - 封禁</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FilterType: string
   /**
-   * 封禁规则类型
+   * <p>封禁规则类型<br>all - 全部请求<br>file - 指定后缀的文件请求</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleType: string
   /**
-   * 封禁规则路径
+   * <p>封禁规则路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RulePaths: Array<string>
@@ -3729,24 +3696,22 @@ export interface ServerCert {
  */
 export interface AccessControlRule {
   /**
-   * requestHeader ：对请求头部进行访问控制
-url ： 对访问url进行访问控制
+   * <p>规则类型：<br>requestHeader ：对请求头部进行访问控制<br>url ： 对访问url进行访问控制</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleType: string
   /**
-   * 封禁内容
+   * <p>封禁内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleContent: string
   /**
-   * on ：正则匹配
-off ：字面匹配
+   * <p>on ：正则匹配<br>off ：字面匹配</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Regex: string
   /**
-   * RuleType为requestHeader时必填，否则不需要填
+   * <p>RuleType为requestHeader时必填，否则不需要填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleHeader?: string
@@ -5656,15 +5621,11 @@ export interface DeleteClsLogTopicResponse {
  */
 export interface DescribeBillingDataResponse {
   /**
-   * 时间粒度，根据查询时传递参数指定：
-min：1 分钟粒度
-5min：5 分钟粒度
-hour：1 小时粒度
-day：天粒度
+   * <p>时间粒度，根据查询时传递参数指定：<br>min：1 分钟粒度<br>5min：5 分钟粒度<br>hour：1 小时粒度<br>day：天粒度</p>
    */
   Interval?: string
   /**
-   * 数据明细
+   * <p>数据明细</p>
    */
   Data?: Array<ResourceBillingData>
   /**
@@ -5847,61 +5808,39 @@ export interface DescribeIpStatusResponse {
  */
 export interface DescribeDistrictIspDataRequest {
   /**
-   * 域名列表，最多支持20个域名
+   * <p>域名列表，最多支持20个域名</p>
    */
   Domains: Array<string>
   /**
-   * 查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间
-支持近 60 天内的数据查询，每次查询时间区间为 3 小时
+   * <p>查询起始时间，如：2018-09-04 10:40:00，返回结果大于等于指定时间<br>支持近 60 天内的数据查询，每次查询时间区间为 3 小时</p>
    */
   StartTime: string
   /**
-   * 查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间
-结束时间与起始时间区间最大为 3 小时
+   * <p>查询结束时间，如：2018-09-04 10:40:00，返回结果小于等于指定时间<br>结束时间与起始时间区间最大为 3 小时</p>
    */
   EndTime: string
   /**
-   * 指定查询指标，支持:
-bandwidth：带宽，单位为 bps
-flux：流量，单位为 byte
-request：请求数，单位为 次
-statusCode：状态码，返回 0、2xx、3xx、4xx、5xx 汇总数据，单位为 次
-2xx：返回 2xx 状态码汇总及各 2 开头状态码数据，单位为 次
-3xx：返回 3xx 状态码汇总及各 3 开头状态码数据，单位为 次
-4xx：返回 4xx 状态码汇总及各 4 开头状态码数据，单位为 次
-5xx：返回 5xx 状态码汇总及各 5 开头状态码数据，单位为 次
-支持指定具体状态码查询，若未产生过，则返回为空
+   * <p>指定查询指标，支持:<br>bandwidth：带宽，单位为 bps<br>flux：流量，单位为 byte<br>request：请求数，单位为 次<br>statusCode：状态码，返回 0、2xx、3xx、4xx、5xx 汇总数据，单位为 次<br>2xx：返回 2xx 状态码汇总及各 2 开头状态码数据，单位为 次<br>3xx：返回 3xx 状态码汇总及各 3 开头状态码数据，单位为 次<br>4xx：返回 4xx 状态码汇总及各 4 开头状态码数据，单位为 次<br>5xx：返回 5xx 状态码汇总及各 5 开头状态码数据，单位为 次<br>支持指定具体状态码查询，若未产生过，则返回为空</p>
    */
   Metric: string
   /**
-   * 指定省份查询，不填充表示查询所有省份
-省份、国家/地区编码可以查看 [省份编码映射](https://cloud.tencent.com/document/product/228/6316#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
+   * <p>指定省份查询，不填充表示查询所有省份（注：指定条件查询只支持映射表范围）<br>省份、国家/地区编码可以查看 <a href="https://cloud.tencent.com/document/product/228/6316#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8">省份编码映射</a></p>
    */
   Districts?: Array<number | bigint>
   /**
-   * 指定运营商查询，不填充表示查询所有运营商
-运营商编码可以查看 [运营商编码映射](https://cloud.tencent.com/document/product/228/6316#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8)
+   * <p>指定运营商查询，不填充表示查询所有运营商（注：指定条件查询只支持映射表范围）<br>运营商编码可以查看 <a href="https://cloud.tencent.com/document/product/228/6316#.E5.8C.BA.E5.9F.9F-.2F-.E8.BF.90.E8.90.A5.E5.95.86.E6.98.A0.E5.B0.84.E8.A1.A8">运营商编码映射</a></p>
    */
   Isps?: Array<number | bigint>
   /**
-   * 指定协议查询，不填充表示查询所有协议
-all：所有协议
-http：指定查询 HTTP 对应指标
-https：指定查询 HTTPS 对应指标
+   * <p>指定协议查询，不填充表示查询所有协议<br>all：所有协议<br>http：指定查询 HTTP 对应指标<br>https：指定查询 HTTPS 对应指标</p>
    */
   Protocol?: string
   /**
-   * 指定IP协议查询，不填充表示查询所有协议
-all：所有协议
-ipv4：指定查询 ipv4 对应指标
-ipv6：指定查询 ipv6 对应指标
-指定IP协议查询时，不可同时指定省份、运营商查询
+   * <p>指定IP协议查询，不填充表示查询所有协议<br>all：所有协议<br>ipv4：指定查询 ipv4 对应指标<br>ipv6：指定查询 ipv6 对应指标<br>指定IP协议查询时，不可同时指定省份、运营商查询</p>
    */
   IpProtocol?: string
   /**
-   * 时间粒度，支持以下几种模式（默认5min）：
-min：1 分钟粒度，支持近 60 天内的数据查询，每次查询时间区间不超过10分钟，可返回 1 分钟粒度明细数据
-5min：5 分钟粒度，支持近 60 天内的数据查询，每次查询时间区间不超过3 小时，可返回 5 分钟粒度明细数据
+   * <p>时间粒度，支持以下几种模式（默认5min）：<br>min：1 分钟粒度，支持近 60 天内的数据查询，每次查询时间区间不超过10分钟，可返回 1 分钟粒度明细数据<br>5min：5 分钟粒度，支持近 60 天内的数据查询，每次查询时间区间不超过3 小时，可返回 5 分钟粒度明细数据</p>
    */
   Interval?: string
 }
@@ -7573,7 +7512,7 @@ file: 文件验证
  */
 export interface DescribeTopDataResponse {
   /**
-   * 各个资源的Top 访问数据详情。
+   * <p>各个资源的Top 访问数据详情。</p>
    */
   Data?: Array<TopDataMore>
   /**

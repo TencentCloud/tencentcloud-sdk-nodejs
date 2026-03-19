@@ -1008,6 +1008,14 @@ export interface DescribeCloudNativeAPIGatewayResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AvailableVersions?: Array<string>
+  /**
+   * 网关可以升级的版本号列表
+   */
+  AvailableUpgradeVersions?: Array<string>
+  /**
+   * 是否提示可升级
+   */
+  AvailableUpgrade?: boolean
 }
 
 /**
@@ -3810,6 +3818,10 @@ export interface KongRoutePreview {
    * 正则优先级
    */
   RegexPriority?: number
+  /**
+   * querystring参数
+   */
+  QueryStringParameters?: Array<KVMapping>
 }
 
 /**
@@ -7277,6 +7289,10 @@ export interface ModifyCloudNativeAPIGatewayRouteRequest {
    * 增加优先级
    */
   RegexPriority?: number
+  /**
+   * querysring参数
+   */
+  QueryStringParameters?: Array<KVMapping>
 }
 
 /**
@@ -9068,6 +9084,10 @@ export interface CreateCloudNativeAPIGatewayRouteRequest {
    * 正则优先级
    */
   RegexPriority?: number
+  /**
+   * queryString参数
+   */
+  QueryStringParameters?: Array<KVMapping>
 }
 
 /**

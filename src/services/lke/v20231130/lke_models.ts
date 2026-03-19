@@ -290,7 +290,8 @@ export interface CreateSharedKnowledgeRequest {
  */
 export interface AttrLabelRefer {
   /**
-   * 标签来源，1：标签
+   * 标签来源，1：标签。
+使用标签引用信息时，Source、AttributeBizId和LabelBizIds都需填写。
    */
   Source?: number
   /**
@@ -5106,6 +5107,10 @@ export interface ReleaseConfigs {
   UpdateTime?: string
   /**
    * 状态
+2：待发布
+3：发布中
+4：已发布
+5：发布失败
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Action?: number

@@ -74,17 +74,23 @@ export interface ResizeInstanceDiskResponse {
 }
 
 /**
- * 存储信息
+ * StopInstance请求参数结构体
  */
-export interface StorageInfo {
+export interface StopInstanceRequest {
   /**
-   * 挂载路径
+   * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1721/101612) API获取实例ID。
    */
-  MountPath: string
+  InstanceId: string
   /**
-   * cos挂载信息
+   * hai实例关机的模式，目前仅支持关机不收费：
+STOP_CHARGE -- 关闭hai实例，释放计算资源，停止收取计算资源的费用。
+注意：默认值为STOP_CHARGE
    */
-  COSStorage?: COSStorage
+  StopMode?: string
+  /**
+   * 默认为False，True代表只验证接口连通性
+   */
+  DryRun?: boolean
 }
 
 /**
@@ -205,6 +211,20 @@ export interface TerminateInstancesResponse {
 }
 
 /**
+ * RunInstances返回参数结构体
+ */
+export interface RunInstancesResponse {
+  /**
+   * 实例ID列表
+   */
+  InstanceIdSet?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * HiCache信息
  */
 export interface HiCacheInfo {
@@ -215,22 +235,9 @@ export interface HiCacheInfo {
 }
 
 /**
- * DescribeApplications返回参数结构体
+ * DescribeRegions请求参数结构体
  */
-export interface DescribeApplicationsResponse {
-  /**
-   * 应用总数
-   */
-  TotalCount?: number
-  /**
-   * 分页返回的应用列表
-   */
-  ApplicationSet?: Array<ApplicationInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeRegionsRequest = null
 
 /**
  * StartInstance请求参数结构体
@@ -247,17 +254,17 @@ export interface StartInstanceRequest {
 }
 
 /**
- * 某服务的登录配置
+ * CreateInferServiceByTemplate返回参数结构体
  */
-export interface LoginSetting {
+export interface CreateInferServiceByTemplateResponse {
   /**
-   * 服务名称
+   * 服务ID
    */
-  ServiceName?: string
+  ServiceId?: string
   /**
-   * 服务登录url
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Url?: string
+  RequestId?: string
 }
 
 /**
@@ -289,6 +296,36 @@ export interface NetworkStatus {
 }
 
 /**
+ * 资源相关信息
+ */
+export interface ComputeInfo {
+  /**
+   * 资源类型及数量
+   */
+  ComputeResources?: Array<ComputeResource>
+  /**
+   * 副本数
+   */
+  Replicas?: number
+}
+
+/**
+ * 场景详情
+ */
+export interface SceneInfo {
+  /**
+   * 场景id
+
+   */
+  SceneId?: string
+  /**
+   * 场景名
+
+   */
+  SceneName?: string
+}
+
+/**
  * 描述了服务的超参数配置
  */
 export interface HyperParam {
@@ -313,6 +350,46 @@ export interface ResizeInstanceDiskRequest {
 }
 
 /**
+ * DescribeDeployTemplates返回参数结构体
+ */
+export interface DescribeDeployTemplatesResponse {
+  /**
+   * 模板列表
+   */
+  TemplateSet?: Array<TemplateDetail>
+  /**
+   * 支持的推理引擎
+   */
+  EngineTypes?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 推理集群的网络设置
+ */
+export interface NetworkSetting {
+  /**
+   * 公网访问
+   */
+  PublicEndpointEnable?: boolean
+  /**
+   * 内网访问
+   */
+  VpcEndpointEnable?: boolean
+  /**
+   * vpc内网ID
+   */
+  VpcId?: string
+  /**
+   * 子网ID
+   */
+  SubnetId?: string
+}
+
+/**
  * 费用数据结构体
  */
 export interface Price {
@@ -331,37 +408,31 @@ export interface Price {
 }
 
 /**
- * StopInstance请求参数结构体
+ * DeployInferService返回参数结构体
  */
-export interface StopInstanceRequest {
+export interface DeployInferServiceResponse {
   /**
-   * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1721/101612) API获取实例ID。
+   * 服务ID
    */
-  InstanceId: string
+  ServiceId?: string
   /**
-   * hai实例关机的模式，目前仅支持关机不收费：
-STOP_CHARGE -- 关闭hai实例，释放计算资源，停止收取计算资源的费用。
-注意：默认值为STOP_CHARGE
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  StopMode?: string
-  /**
-   * 默认为False，True代表只验证接口连通性
-   */
-  DryRun?: boolean
+  RequestId?: string
 }
 
 /**
- * 环境变量键值对
+ * 推理服务的算力资源
  */
-export interface EnvParam {
+export interface ComputeResource {
   /**
-   * 环境变量名
+   * 算力套餐的类型
    */
-  Name?: string
+  BundleType: string
   /**
-   * 环境变量值
+   * 节点数量
    */
-  Value?: string
+  Count: number
 }
 
 /**
@@ -415,6 +486,20 @@ export interface ServicePriceDetail {
 }
 
 /**
+ * 存储信息
+ */
+export interface StorageInfo {
+  /**
+   * 挂载路径
+   */
+  MountPath: string
+  /**
+   * cos挂载信息
+   */
+  COSStorage?: COSStorage
+}
+
+/**
  * DescribeApplications请求参数结构体
  */
 export interface DescribeApplicationsRequest {
@@ -445,19 +530,17 @@ export interface DescribeApplicationsRequest {
 }
 
 /**
- * 场景详情
+ * InquirePriceUpdateServiceConfigs返回参数结构体
  */
-export interface SceneInfo {
+export interface InquirePriceUpdateServiceConfigsResponse {
   /**
-   * 场景id
-
+   * 发货参数对应的价格组合。
    */
-  SceneId?: string
+  Price?: ServicePriceDetail
   /**
-   * 场景名
-
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SceneName?: string
+  RequestId?: string
 }
 
 /**
@@ -531,6 +614,16 @@ export interface RunInstancesRequest {
 }
 
 /**
+ * DescribeDeployTemplates请求参数结构体
+ */
+export interface DescribeDeployTemplatesRequest {
+  /**
+   * 模型ID
+   */
+  ModelId: string
+}
+
+/**
  * 容器信息
  */
 export interface ContainerInfo {
@@ -574,6 +667,20 @@ export interface DescribeInstancesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 环境变量键值对
+ */
+export interface EnvParam {
+  /**
+   * 环境变量名
+   */
+  Name?: string
+  /**
+   * 环境变量值
+   */
+  Value?: string
 }
 
 /**
@@ -651,17 +758,17 @@ export interface ServiceDetail {
 }
 
 /**
- * RunInstances返回参数结构体
+ * 某服务的登录配置
  */
-export interface RunInstancesResponse {
+export interface LoginSetting {
   /**
-   * 实例ID列表
+   * 服务名称
    */
-  InstanceIdSet?: Array<string>
+  ServiceName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 服务登录url
    */
-  RequestId?: string
+  Url?: string
 }
 
 /**
@@ -719,6 +826,44 @@ export interface COSStorage {
    * cos桶uri
    */
   URI?: string
+}
+
+/**
+ * 模型详情
+ */
+export interface ModelDetail {
+  /**
+   * 模型名称
+   */
+  ModelName?: string
+  /**
+   * 模型ID
+   */
+  ModelId?: string
+  /**
+   * 应用描述
+   */
+  Description?: string
+  /**
+   * 官方社区链接
+   */
+  CommunityUrl?: string
+  /**
+   * 最佳实践链接
+   */
+  GuideUrl?: string
+  /**
+   * 模型状态
+   */
+  ModelState?: string
+  /**
+   * 应用对应的标签，如机器学习
+   */
+  Tags?: Array<string>
+  /**
+   * 配置环境
+   */
+  ConfigEnvironment?: string
 }
 
 /**
@@ -823,17 +968,29 @@ export interface DescribeServicesRequest {
 }
 
 /**
- * InquirePriceUpdateServiceConfigs返回参数结构体
+ * DeployInferService请求参数结构体
  */
-export interface InquirePriceUpdateServiceConfigsResponse {
+export interface DeployInferServiceRequest {
   /**
-   * 发货参数对应的价格组合。
+   * 服务元数据信息，如服务名
    */
-  Price?: ServicePriceDetail
+  ServiceMetaData?: ServiceMetaData
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 资源相关信息
    */
-  RequestId?: string
+  ComputeInfo?: ComputeInfo
+  /**
+   * 服务部署信息
+   */
+  DeploymentConfigs?: Array<DeploymentConfig>
+  /**
+   * 服务超参数配置
+   */
+  HyperParam?: HyperParam
+  /**
+   * 网络设置
+   */
+  NetworkSetting?: NetworkSetting
 }
 
 /**
@@ -879,6 +1036,20 @@ export interface CreateMuskPromptResponse {
 }
 
 /**
+ * 服务元数据信息，如服务名
+ */
+export interface ServiceMetaData {
+  /**
+   * 服务名称
+   */
+  ServiceName?: string
+  /**
+   * 收费类型
+   */
+  ServiceChargeType?: string
+}
+
+/**
  * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
 
 - 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
@@ -893,6 +1064,36 @@ export interface Filter {
    * 字段的过滤值。
    */
   Values: Array<string>
+}
+
+/**
+ * CreateInferServiceByTemplate请求参数结构体
+ */
+export interface CreateInferServiceByTemplateRequest {
+  /**
+   * 模版ID
+   */
+  TemplateId: string
+  /**
+   * 服务名称
+   */
+  ServiceName?: string
+  /**
+   * 副本数
+   */
+  Replicas?: number
+  /**
+   * 付费方式，POSTPAID_BY_HOUR按量后付费
+   */
+  ServiceChargeType?: string
+  /**
+   * 描述了服务的超参数配置
+   */
+  HyperParam?: HyperParam
+  /**
+   * 网络设置
+   */
+  NetworkSetting?: NetworkSetting
 }
 
 /**
@@ -1065,6 +1266,24 @@ FAILED：表示操作失败
 }
 
 /**
+ * DescribeModels返回参数结构体
+ */
+export interface DescribeModelsResponse {
+  /**
+   * 模型总数
+   */
+  TotalCount?: number
+  /**
+   * 分页返回的模型列表
+   */
+  ModelSet?: Array<ModelDetail>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 分实例价格
  */
 export interface ItemPriceDetail {
@@ -1087,6 +1306,28 @@ export interface ItemPriceDetail {
 }
 
 /**
+ * DescribeModels请求参数结构体
+ */
+export interface DescribeModelsRequest {
+  /**
+   * 模型id
+   */
+  ModelIds?: Array<string>
+  /**
+   * 过滤器。Name的可选值有scene-id
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，不得小于0，默认为0
+   */
+  Offset?: number
+  /**
+   * 返回量，不得大于100，默认为20
+   */
+  Limit?: number
+}
+
+/**
  * CreateMuskPrompt请求参数结构体
  */
 export interface CreateMuskPromptRequest {
@@ -1105,9 +1346,22 @@ export interface CreateMuskPromptRequest {
 }
 
 /**
- * DescribeRegions请求参数结构体
+ * DescribeApplications返回参数结构体
  */
-export type DescribeRegionsRequest = null
+export interface DescribeApplicationsResponse {
+  /**
+   * 应用总数
+   */
+  TotalCount?: number
+  /**
+   * 分页返回的应用列表
+   */
+  ApplicationSet?: Array<ApplicationInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * 套餐价格
@@ -1194,6 +1448,32 @@ export interface DescribeInstanceNetworkStatusRequest {
    * 实例ID数组，单次请求最多不超过100个实例；实例ID通过调用接口[DescribeInstances](https://cloud.tencent.com/document/api/1721/101612)获取。
    */
   InstanceIds: Array<string>
+}
+
+/**
+ * 模板详情
+ */
+export interface TemplateDetail {
+  /**
+   * 模板id
+   */
+  TemplateId?: string
+  /**
+   * 部署方式
+   */
+  DeployMode?: string
+  /**
+   * 推理引擎
+   */
+  EngineType?: string
+  /**
+   * 算力详情
+   */
+  ComputeSet?: Array<ComputeDetail>
+  /**
+   * 当前部署模板所支持的增强功能
+   */
+  SupportFunc?: Array<string>
 }
 
 /**

@@ -2939,6 +2939,28 @@ export interface MiniAppCreateFlowOption {
 }
 
 /**
+ * VerifyDigitalDataSign请求参数结构体
+ */
+export interface VerifyDigitalDataSignRequest {
+  /**
+   * 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
+  /**
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator?: UserInfo
+  /**
+   * 加签原文
+   */
+  PlainText?: string
+  /**
+   * 签名值
+   */
+  SignValue?: string
+}
+
+/**
  * 部门信息
  */
 export interface IntegrationDepartment {
@@ -3341,6 +3363,32 @@ export interface CreateBatchAdminChangeInvitationsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 签署证书信息结构体
+ */
+export interface SignCertificate {
+  /**
+   * 证书序列号
+   */
+  SerialNumber?: string
+  /**
+   * 证书持有者名称
+   */
+  CommonName?: string
+  /**
+   * 证书生效时间
+   */
+  NotBefore?: number
+  /**
+   * 证书失效时间
+   */
+  NotAfter?: number
+  /**
+   * 证书颁发者名称
+   */
+  IssuerCommonName?: string
 }
 
 /**
@@ -10439,6 +10487,24 @@ export interface CreateBatchOrganizationAuthorizationUrlRequest {
 }
 
 /**
+ * CreateDigitalDataSign请求参数结构体
+ */
+export interface CreateDigitalDataSignRequest {
+  /**
+   * 执行本接口操作的员工信息。使用此接口时，必须填写userId。支持填入集团子公司经办人 userId 代发合同。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   */
+  Operator: UserInfo
+  /**
+   * 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   */
+  Agent?: Agent
+  /**
+   * 数据加签的原文
+   */
+  PlainText?: string
+}
+
+/**
  * CreateBatchCancelFlowUrl请求参数结构体
  */
 export interface CreateBatchCancelFlowUrlRequest {
@@ -11355,6 +11421,32 @@ export interface BindEmployeeUserIdWithClientOpenIdResponse {
 <ul><li>**0**：失败</li><li>**1**：成功</li></ul>
    */
   Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateDigitalDataSign返回参数结构体
+ */
+export interface CreateDigitalDataSignResponse {
+  /**
+   * 加签签名值
+   */
+  SignValue?: string
+  /**
+   * 加签时间戳
+   */
+  SignTimestamp?: string
+  /**
+   * 签署证书信息
+   */
+  Certificate?: SignCertificate
+  /**
+   * 签署算法
+   */
+  SignAlgorithm?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13163,6 +13255,24 @@ export interface CreateIntegrationEmployeesResponse {
    * 创建员工的结果。包含创建成功的数据与创建失败数据。
    */
   CreateEmployeeResult?: CreateStaffResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * VerifyDigitalDataSign返回参数结构体
+ */
+export interface VerifyDigitalDataSignResponse {
+  /**
+   * 签名值验证结果；1-验证成功；2-验证失败
+   */
+  VerifyResult?: number
+  /**
+   * 签名证书信息
+   */
+  Certificate?: SignCertificate
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

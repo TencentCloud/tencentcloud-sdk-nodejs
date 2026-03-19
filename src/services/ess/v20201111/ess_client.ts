@@ -96,6 +96,7 @@ import {
   OutputReference,
   CreateSealResponse,
   MiniAppCreateFlowOption,
+  VerifyDigitalDataSignRequest,
   IntegrationDepartment,
   DescribeIntegrationRolesResponse,
   DescribeBillUsageDetailResponse,
@@ -115,6 +116,7 @@ import {
   DescribePersonCertificateResponse,
   FlowBatchUrlInfo,
   CreateBatchAdminChangeInvitationsResponse,
+  SignCertificate,
   DescribeFileCounterSignResultRequest,
   CreateContractDiffTaskWebUrlRequest,
   DescribeContractReviewTaskRequest,
@@ -329,6 +331,7 @@ import {
   SignUrl,
   DescribeOrganizationSealsRequest,
   CreateBatchOrganizationAuthorizationUrlRequest,
+  CreateDigitalDataSignRequest,
   CreateBatchCancelFlowUrlRequest,
   CreateMultiFlowSignQRCodeRequest,
   DeleteExtendedServiceAuthInfosRequest,
@@ -350,6 +353,7 @@ import {
   DescribeThirdPartyAuthCodeResponse,
   CreateBatchInitOrganizationUrlResponse,
   BindEmployeeUserIdWithClientOpenIdResponse,
+  CreateDigitalDataSignResponse,
   CreateOrganizationAuthFileResponse,
   FlowBatchApproverInfo,
   StartFlowResponse,
@@ -402,6 +406,7 @@ import {
   DeleteIntegrationRoleUsersRequest,
   CreateFlowSignUrlRequest,
   CreateIntegrationEmployeesResponse,
+  VerifyDigitalDataSignResponse,
   ExportContractReviewResultRequest,
   CreateModifyAdminAuthorizationUrlRequest,
   ApproverInfo,
@@ -1109,6 +1114,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateBatchContractReviewTaskResponse) => void
   ): Promise<CreateBatchContractReviewTaskResponse> {
     return this.request("CreateBatchContractReviewTask", req, cb)
+  }
+
+  /**
+   * 数据加签验签接口
+   */
+  async VerifyDigitalDataSign(
+    req: VerifyDigitalDataSignRequest,
+    cb?: (error: string, rep: VerifyDigitalDataSignResponse) => void
+  ): Promise<VerifyDigitalDataSignResponse> {
+    return this.request("VerifyDigitalDataSign", req, cb)
   }
 
   /**
@@ -2922,6 +2937,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: DescribeOrganizationSealsResponse) => void
   ): Promise<DescribeOrganizationSealsResponse> {
     return this.request("DescribeOrganizationSeals", req, cb)
+  }
+
+  /**
+   * 创建数据加签请求
+   */
+  async CreateDigitalDataSign(
+    req: CreateDigitalDataSignRequest,
+    cb?: (error: string, rep: CreateDigitalDataSignResponse) => void
+  ): Promise<CreateDigitalDataSignResponse> {
+    return this.request("CreateDigitalDataSign", req, cb)
   }
 
   /**

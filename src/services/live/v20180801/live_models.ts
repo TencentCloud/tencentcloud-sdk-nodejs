@@ -60,6 +60,24 @@ export interface DescribeLiveXP2PDetailInfoListResponse {
 }
 
 /**
+ * 数字人形象信息。
+ */
+export interface AvatarImageInfo {
+  /**
+   * 数字人原始缩放系数。数字人展示大小=原始大小*缩放系数。
+   */
+  OriginZoom?: number
+  /**
+   * 数字人KEY。
+   */
+  AvatarKey?: string
+  /**
+   * 分辨率。
+   */
+  Resolution?: string
+}
+
+/**
  * DescribeLiveWatermarkRules返回参数结构体
  */
 export interface DescribeLiveWatermarkRulesResponse {
@@ -71,6 +89,28 @@ export interface DescribeLiveWatermarkRulesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * StartLiveAvatarRoom请求参数结构体
+ */
+export interface StartLiveAvatarRoomRequest {
+  /**
+   * 数字人直播间 ID。
+   */
+  RoomId: string
+  /**
+   * 目标地址描述。
+   */
+  Comment: string
+  /**
+   * 推流目标地址。
+   */
+  ToUrl: string
+  /**
+   * 操作者。
+   */
+  Operator?: string
 }
 
 /**
@@ -1520,6 +1560,36 @@ export interface DescribeCasterMarkWordInfosResponse {
 }
 
 /**
+ * 拉流转推任务流数据信息。
+ */
+export interface TurnPushInfo {
+  /**
+   * 视频帧率，单位fps。
+   */
+  VideoFps: number
+  /**
+   * 音频帧率，单位fps。
+   */
+  AudioFps: number
+  /**
+   * 视频码率，单位bps。
+   */
+  VideoRate: number
+  /**
+   * 音频码率，单位bps。
+   */
+  AudioRate: number
+  /**
+   * 流标识。
+   */
+  StreamFlag: string
+  /**
+   * 时间，utc格式：yyyy-mm-ddTHH:MM:SSZ，参考https://cloud.tencent.com/document/product/266/11732#I。
+   */
+  Time: string
+}
+
+/**
  * DescribeStreamPushInfoList返回参数结构体
  */
 export interface DescribeStreamPushInfoListResponse {
@@ -1814,6 +1884,20 @@ export interface DeleteCasterMarkWordInfoResponse {
 }
 
 /**
+ * CreateLiveAvatarRoom请求参数结构体
+ */
+export interface CreateLiveAvatarRoomRequest {
+  /**
+   * 直播间名称。
+   */
+  Name: string
+  /**
+   * 操作者。
+   */
+  Operator?: string
+}
+
+/**
  * DescribeLogDownloadList返回参数结构体
  */
 export interface DescribeLogDownloadListResponse {
@@ -1925,13 +2009,13 @@ export interface DomainCertInfo {
 }
 
 /**
- * DescribePullTransformPushInfoList返回参数结构体
+ * DescribeLiveAvatarTemporaryScriptList返回参数结构体
  */
-export interface DescribePullTransformPushInfoListResponse {
+export interface DescribeLiveAvatarTemporaryScriptListResponse {
   /**
-   * 拉流任务流信息列表。
+   * 临时话术列表。
    */
-  DataInfoList: Array<TurnPushInfo>
+  InfoList?: Array<AvatarTemporaryScriptInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1997,6 +2081,16 @@ export interface DeleteLiveTranscodeTemplateRequest {
 }
 
 /**
+ * StopLiveAvatarRoom返回参数结构体
+ */
+export interface StopLiveAvatarRoomResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StopRecordTask返回参数结构体
  */
 export interface StopRecordTaskResponse {
@@ -2040,6 +2134,20 @@ export interface DescribeTranscodeTaskNumResponse {
    * 任务数列表。
    */
   DataInfoList: Array<TranscodeTaskNum>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeStreamPlayInfoList返回参数结构体
+ */
+export interface DescribeStreamPlayInfoListResponse {
+  /**
+   * 统计信息列表，时间粒度是1分钟。
+   */
+  DataInfoList?: Array<DayStreamPlayInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2384,17 +2492,25 @@ export interface DescribeLiveTimeShiftTemplatesResponse {
 }
 
 /**
- * ModifyCasterOutputInfo请求参数结构体
+ * DescribeLiveAvatarRooms请求参数结构体
  */
-export interface ModifyCasterOutputInfoRequest {
+export interface DescribeLiveAvatarRoomsRequest {
   /**
-   * 导播台ID。
+   * 数字人直播间 ID。
    */
-  CasterId: number
+  RoomId?: string
   /**
-   * 导播台推流参数信息。
+   * 数字人直播间名称。
    */
-  OutputInfo: CasterOutputInfo
+  Name?: string
+  /**
+   * 分页查询的页数。
+   */
+  PageIndex?: number
+  /**
+   * 分页查询的每页个数。
+   */
+  PageSize?: number
 }
 
 /**
@@ -2809,34 +2925,13 @@ export interface CreateLiveStreamMonitorRequest {
 }
 
 /**
- * DescribeScreenShotSheetNumList请求参数结构体
+ * CreateLiveRecordRule返回参数结构体
  */
-export interface DescribeScreenShotSheetNumListRequest {
+export interface CreateLiveRecordRuleResponse {
   /**
-   * 起始时间点，接口查询支持两种时间格式：
-1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
-2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  StartTime: string
-  /**
-   * 结束时间点，接口查询支持两种时间格式：
-1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
-2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
-支持最近三个月的查询，查询开始和结束时间跨度不支持超过31天。
-   */
-  EndTime: string
-  /**
-   * 地域信息，可选值包括Mainland，Oversea，前者是查询中国大陆范围内的数据，后者是除中国大陆范围之外的数据，若不传该参数，则查询所有地区的数据。
-   */
-  Zone?: string
-  /**
-   * 推流域名（支持查询2019年11 月1日之后的域名维度数据）。
-   */
-  PushDomains?: Array<string>
-  /**
-   * 数据维度，数据延迟1个半小时，可选值包括：1、Minute（5分钟粒度，最大支持查询时间范围是31天），2、Day（天粒度，默认值，按照北京时间做跨天处理，最大支持查询时间范围是186天当天）。
-   */
-  Granularity?: string
+  RequestId?: string
 }
 
 /**
@@ -2851,37 +2946,29 @@ export interface DescribeLiveTranscodeTemplateRequest {
 }
 
 /**
- * 监控播放数据
+ * GenerateLiveAvatarScriptBroadcast请求参数结构体
  */
-export interface MonitorStreamPlayInfo {
+export interface GenerateLiveAvatarScriptBroadcastRequest {
   /**
-   * 播放域名。
+   * 数字人直播间 ID。
    */
-  PlayDomain?: string
+  RoomId: string
   /**
-   * 流id。
+   * 话术 ID。
    */
-  StreamName?: string
+  ScriptId: string
   /**
-   * 播放码率，0表示原始码率。
+   * 音色 Key。如果不填，则默认使用数字人直播已经保存的音色。
    */
-  Rate?: number
+  TimbreKey?: string
   /**
-   * 播放协议，可选值包括 Unknown，Flv，Hls，Rtmp，Huyap2p。
+   * 语速（1.0为正常语速，范围[0.6-2.5]，值为0.6时播报语速最慢，值为2.5时播报语速最快。不传默认使用数字人直播间已设置的语速。
    */
-  Protocol?: string
+  SpeechSpeed?: number
   /**
-   * 带宽，单位是Mbps。
+   * 音量大小，范围[0，10]，对应音量大小。默认为5，代表正常音量，值越大音量越高。不传使用数字人直播已设置的音量。
    */
-  Bandwidth?: number
-  /**
-   * 在线人数，1分钟采样一个点，统计采样点的tcp链接数目。
-   */
-  Online?: number
-  /**
-   * 请求数。
-   */
-  Request?: number
+  SpeechVolume?: number
 }
 
 /**
@@ -2914,6 +3001,32 @@ export interface DeleteRecordTaskRequest {
    * 任务ID，CreateRecordTask返回。删除TaskId指定的录制任务。
    */
   TaskId: string
+}
+
+/**
+ * 数字人声音信息。
+ */
+export interface AvatarTimbreInfo {
+  /**
+   * 音色 Key。
+   */
+  TimbreKey?: string
+  /**
+   * 音色名称。
+   */
+  TimbreName?: string
+  /**
+   * 音色描述。
+   */
+  TimbreDesc?: string
+  /**
+   * 音色试听样例 URL。
+   */
+  TimbreSample?: string
+  /**
+   * 音色性别，male:男音，femal:女音。
+   */
+  TimbreGender?: string
 }
 
 /**
@@ -3097,6 +3210,16 @@ export interface DescribeCasterTransitionTypesResponse {
 }
 
 /**
+ * StartLiveAvatarRoom返回参数结构体
+ */
+export interface StartLiveAvatarRoomResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCaster请求参数结构体
  */
 export interface CreateCasterRequest {
@@ -3228,6 +3351,16 @@ export interface DescribeLiveTranscodeDetailInfoResponse {
  * DeleteLiveTranscodeTemplate返回参数结构体
  */
 export interface DeleteLiveTranscodeTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StartLiveStreamMonitor返回参数结构体
+ */
+export interface StartLiveStreamMonitorResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3392,6 +3525,16 @@ export interface CreateLiveTimeShiftRuleResponse {
  * DeleteLiveTranscodeRule返回参数结构体
  */
 export interface DeleteLiveTranscodeRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SendTemporaryScriptToAvatarRoom返回参数结构体
+ */
+export interface SendTemporaryScriptToAvatarRoomResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3570,13 +3713,13 @@ export interface DeleteLivePullStreamTaskRequest {
 }
 
 /**
- * DescribeCasterMarkPicInfos返回参数结构体
+ * CopyLiveAvatarRoom返回参数结构体
  */
-export interface DescribeCasterMarkPicInfosResponse {
+export interface CopyLiveAvatarRoomResponse {
   /**
-   * 导播台的水印信息列表。
+   * 数字人直播间 ID。
    */
-  MarkPicInfos?: Array<CasterMarkPicInfo>
+  RoomId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3595,6 +3738,20 @@ export interface CreateAuditKeywordsRequest {
    * 直播审核词库Id。
    */
   LibId: string
+}
+
+/**
+ * DescribeLiveAvatarImageList返回参数结构体
+ */
+export interface DescribeLiveAvatarImageListResponse {
+  /**
+   * 数字人形象信息列表。
+   */
+  ImageInfoList?: Array<AvatarAnchorInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3640,6 +3797,11 @@ export interface DeleteCasterResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeLiveAvatarBackgroundList请求参数结构体
+ */
+export type DescribeLiveAvatarBackgroundListRequest = null
 
 /**
  * DeleteScreenshotTask请求参数结构体
@@ -4222,13 +4384,34 @@ export interface ModifyLivePlayDomainResponse {
 }
 
 /**
- * CreateLiveRecordRule返回参数结构体
+ * DescribeScreenShotSheetNumList请求参数结构体
  */
-export interface CreateLiveRecordRuleResponse {
+export interface DescribeScreenShotSheetNumListRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 起始时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
    */
-  RequestId?: string
+  StartTime: string
+  /**
+   * 结束时间点，接口查询支持两种时间格式：
+1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
+2）YYYY-MM-DD hh:mm:ss：使用此格式时，默认代表北京时间。
+支持最近三个月的查询，查询开始和结束时间跨度不支持超过31天。
+   */
+  EndTime: string
+  /**
+   * 地域信息，可选值包括Mainland，Oversea，前者是查询中国大陆范围内的数据，后者是除中国大陆范围之外的数据，若不传该参数，则查询所有地区的数据。
+   */
+  Zone?: string
+  /**
+   * 推流域名（支持查询2019年11 月1日之后的域名维度数据）。
+   */
+  PushDomains?: Array<string>
+  /**
+   * 数据维度，数据延迟1个半小时，可选值包括：1、Minute（5分钟粒度，最大支持查询时间范围是31天），2、Day（天粒度，默认值，按照北京时间做跨天处理，最大支持查询时间范围是186天当天）。
+   */
+  Granularity?: string
 }
 
 /**
@@ -4243,6 +4426,16 @@ export interface DescribeLiveDomainCertBindingsResponse {
    * 总的记录行数，便于分页。
    */
   TotalNum?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyLiveAvatarScript返回参数结构体
+ */
+export interface ModifyLiveAvatarScriptResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4342,6 +4535,40 @@ export interface BackupStreamGroupInfo {
 }
 
 /**
+ * 监控播放数据
+ */
+export interface MonitorStreamPlayInfo {
+  /**
+   * 播放域名。
+   */
+  PlayDomain?: string
+  /**
+   * 流id。
+   */
+  StreamName?: string
+  /**
+   * 播放码率，0表示原始码率。
+   */
+  Rate?: number
+  /**
+   * 播放协议，可选值包括 Unknown，Flv，Hls，Rtmp，Huyap2p。
+   */
+  Protocol?: string
+  /**
+   * 带宽，单位是Mbps。
+   */
+  Bandwidth?: number
+  /**
+   * 在线人数，1分钟采样一个点，统计采样点的tcp链接数目。
+   */
+  Online?: number
+  /**
+   * 请求数。
+   */
+  Request?: number
+}
+
+/**
  * DescribeLivePadStreamList返回参数结构体
  */
 export interface DescribeLivePadStreamListResponse {
@@ -4437,6 +4664,24 @@ export interface ModifyLivePlayDomainRequest {
  * InsertTaskTemporaryFiles返回参数结构体
  */
 export interface InsertTaskTemporaryFilesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePlayErrorCodeDetailInfoList返回参数结构体
+ */
+export interface DescribePlayErrorCodeDetailInfoListResponse {
+  /**
+   * 统计信息列表。
+   */
+  HttpCodeList?: Array<HttpCodeInfo>
+  /**
+   * 统计类型。
+   */
+  StatType?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4615,6 +4860,16 @@ export interface ModifyCasterLayoutInfoRequest {
    * <p>导播台布局参数信息。</p>
    */
   LayoutInfo: CasterLayoutInfo
+}
+
+/**
+ * DeleteLiveAvatarRoom返回参数结构体
+ */
+export interface DeleteLiveAvatarRoomResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4892,21 +5147,66 @@ URL中禁止包含的字符：
 }
 
 /**
- * DescribePlayErrorCodeDetailInfoList返回参数结构体
+ * CreateLiveRecord请求参数结构体
  */
-export interface DescribePlayErrorCodeDetailInfoListResponse {
+export interface CreateLiveRecordRequest {
   /**
-   * 统计信息列表。
+   * 流名称。
    */
-  HttpCodeList?: Array<HttpCodeInfo>
+  StreamName: string
   /**
-   * 统计类型。
+   * 推流路径，与推流和播放地址中的 AppName保持一致，默认为 live。
    */
-  StatType?: string
+  AppName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 推流域名。多域名推流必须设置。
    */
-  RequestId?: string
+  DomainName?: string
+  /**
+   * 录制开始时间。中国标准时间，需要 URLEncode(rfc3986)。如 2017-01-01 10:10:01，编码为：2017-01-01+10%3a10%3a01。
+定时录制模式，必须设置该字段；实时视频录制模式，忽略该字段。
+   */
+  StartTime?: string
+  /**
+   * 录制结束时间。中国标准时间，需要 URLEncode(rfc3986)。如 2017-01-01 10:30:01，编码为：2017-01-01+10%3a30%3a01。
+定时录制模式，必须设置该字段；实时录制模式，为可选字段。如果通过Highlight参数，设置录制为实时视频录制模式，其设置的结束时间不应超过当前时间+30分钟，如果设置的结束时间超过当前时间+30分钟或者小于当前时间或者不设置该参数，则实际结束时间为当前时间+30分钟。
+   */
+  EndTime?: string
+  /**
+   * 录制类型。
+“video” : 音视频录制【默认】。
+“audio” : 纯音频录制。
+在定时录制模式或实时视频录制模式下，该参数均有效，不区分大小写。
+   */
+  RecordType?: string
+  /**
+   * 录制文件格式。其值为：
+“flv”【默认】,“hls”,”mp4”,“aac”,”mp3”。
+在定时录制模式或实时视频录制模式下，该参数均有效，不区分大小写。
+   */
+  FileFormat?: string
+  /**
+   * 开启实时视频录制模式标志。
+0：不开启实时视频录制模式，即定时录制模式【默认】。见[示例一](#.E7.A4.BA.E4.BE.8B1-.E5.88.9B.E5.BB.BA.E5.AE.9A.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1)。
+1：开启实时视频录制模式。见[示例二](#.E7.A4.BA.E4.BE.8B2-.E5.88.9B.E5.BB.BA.E5.AE.9E.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1)。
+   */
+  Highlight?: number
+  /**
+   * 开启 A+B=C混流C流录制标志。
+0：不开启 A+B=C混流C流录制【默认】。
+1：开启 A+B=C混流C流录制。
+在定时录制模式或实时视频录制模式下，该参数均有效。
+   */
+  MixStream?: number
+  /**
+   * 录制流参数。当前支持以下参数：
+record_interval - 录制分片时长，单位 秒，1800 - 7200。
+storage_time - 录制文件存储时长，单位 秒。
+eg. record_interval=3600&storage_time=2592000。
+注：参数需要url encode。
+在定时录制模式或实时视频录制模式下，该参数均有效。
+   */
+  StreamParam?: string
 }
 
 /**
@@ -5088,6 +5388,11 @@ export interface CancelCommonMixStreamRequest {
 }
 
 /**
+ * DescribeLiveAvatarImageList请求参数结构体
+ */
+export type DescribeLiveAvatarImageListRequest = null
+
+/**
  * 直播时移写入量数据。
  */
 export interface TimeShiftWriteSizeData {
@@ -5136,25 +5441,25 @@ export interface SwitchBackupStreamRequest {
 }
 
 /**
- * StartLivePadStream请求参数结构体
+ * DescribePullTransformPushInfoList请求参数结构体
  */
-export interface StartLivePadStreamRequest {
+export interface DescribePullTransformPushInfoListRequest {
   /**
-   * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+   * utc开始时间，格式为：yyyy-mm-ddTHH:MM:SSZ，参考https://cloud.tencent.com/document/product/266/11732#I，
+例如：北京时间2019-01-08 10:00:00，对应utc时间为：2019-01-08T10:00:00+08:00。
+支持最近一个月的查询。
    */
-  AppName: string
+  StartTime: string
   /**
-   * 您的推流域名。
+   * utc结束时间，格式为：yyyy-mm-ddTHH:MM:SSZ，参考https://cloud.tencent.com/document/product/266/11732#I，
+例如：北京时间2019-01-08 10:00:00，对应utc时间为：2019-01-08T10:00:00+08:00。
+支持最近一个月的查询，时间跨度为一个月。
    */
-  PushDomainName: string
+  EndTime: string
   /**
-   * 流名称。
+   * 拉流转推任务Id。
    */
-  StreamName: string
-  /**
-   * 操作人备注信息。
-   */
-  Operator?: string
+  TaskId: string
 }
 
 /**
@@ -5326,66 +5631,17 @@ export interface UnBindLiveDomainCertResponse {
 }
 
 /**
- * CreateLiveRecord请求参数结构体
+ * CreateLiveAvatarScript返回参数结构体
  */
-export interface CreateLiveRecordRequest {
+export interface CreateLiveAvatarScriptResponse {
   /**
-   * 流名称。
+   * 话术 ID。
    */
-  StreamName: string
+  ScriptId?: string
   /**
-   * 推流路径，与推流和播放地址中的 AppName保持一致，默认为 live。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AppName?: string
-  /**
-   * 推流域名。多域名推流必须设置。
-   */
-  DomainName?: string
-  /**
-   * 录制开始时间。中国标准时间，需要 URLEncode(rfc3986)。如 2017-01-01 10:10:01，编码为：2017-01-01+10%3a10%3a01。
-定时录制模式，必须设置该字段；实时视频录制模式，忽略该字段。
-   */
-  StartTime?: string
-  /**
-   * 录制结束时间。中国标准时间，需要 URLEncode(rfc3986)。如 2017-01-01 10:30:01，编码为：2017-01-01+10%3a30%3a01。
-定时录制模式，必须设置该字段；实时录制模式，为可选字段。如果通过Highlight参数，设置录制为实时视频录制模式，其设置的结束时间不应超过当前时间+30分钟，如果设置的结束时间超过当前时间+30分钟或者小于当前时间或者不设置该参数，则实际结束时间为当前时间+30分钟。
-   */
-  EndTime?: string
-  /**
-   * 录制类型。
-“video” : 音视频录制【默认】。
-“audio” : 纯音频录制。
-在定时录制模式或实时视频录制模式下，该参数均有效，不区分大小写。
-   */
-  RecordType?: string
-  /**
-   * 录制文件格式。其值为：
-“flv”【默认】,“hls”,”mp4”,“aac”,”mp3”。
-在定时录制模式或实时视频录制模式下，该参数均有效，不区分大小写。
-   */
-  FileFormat?: string
-  /**
-   * 开启实时视频录制模式标志。
-0：不开启实时视频录制模式，即定时录制模式【默认】。见[示例一](#.E7.A4.BA.E4.BE.8B1-.E5.88.9B.E5.BB.BA.E5.AE.9A.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1)。
-1：开启实时视频录制模式。见[示例二](#.E7.A4.BA.E4.BE.8B2-.E5.88.9B.E5.BB.BA.E5.AE.9E.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1)。
-   */
-  Highlight?: number
-  /**
-   * 开启 A+B=C混流C流录制标志。
-0：不开启 A+B=C混流C流录制【默认】。
-1：开启 A+B=C混流C流录制。
-在定时录制模式或实时视频录制模式下，该参数均有效。
-   */
-  MixStream?: number
-  /**
-   * 录制流参数。当前支持以下参数：
-record_interval - 录制分片时长，单位 秒，1800 - 7200。
-storage_time - 录制文件存储时长，单位 秒。
-eg. record_interval=3600&storage_time=2592000。
-注：参数需要url encode。
-在定时录制模式或实时视频录制模式下，该参数均有效。
-   */
-  StreamParam?: string
+  RequestId?: string
 }
 
 /**
@@ -5417,31 +5673,25 @@ export interface StreamOnlineInfo {
 }
 
 /**
- * 每个域名的统计信息。
+ * CopyLiveAvatarRoom请求参数结构体
  */
-export interface DomainDetailInfo {
+export interface CopyLiveAvatarRoomRequest {
   /**
-   * 国内还是国外:
-Mainland: 表示国内数据。
-Oversea: 表示国外数据。
+   * 新直播间名称。
    */
-  MainlandOrOversea?: string
+  Name: string
   /**
-   * 带宽，单位: Mbps。
+   * 源数字人直播间 ID。
    */
-  Bandwidth?: number
+  SourceRoomId: string
   /**
-   * 流量，单位: MB。
+   * 是否复制话术列表。默认：true。
    */
-  Flux?: number
+  IsCopyScript?: boolean
   /**
-   * 人数。
+   * 操作者。
    */
-  Online?: number
-  /**
-   * 请求数。
-   */
-  Request?: number
+  Operator?: string
 }
 
 /**
@@ -5643,13 +5893,39 @@ export interface DescribeLivePullStreamTasksResponse {
 }
 
 /**
- * CreateLiveCallbackRule返回参数结构体
+ * SendTemporaryScriptToAvatarRoom请求参数结构体
  */
-export interface CreateLiveCallbackRuleResponse {
+export interface SendTemporaryScriptToAvatarRoomRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 数字人直播间 ID。
    */
-  RequestId?: string
+  RoomId: string
+  /**
+   * 临时话术，最长不超过500字。
+   */
+  Content: string
+}
+
+/**
+ * CreateAuditKeywordLib请求参数结构体
+ */
+export interface CreateAuditKeywordLibRequest {
+  /**
+   * <p>自定义词库名称。</p>
+   */
+  Name: string
+  /**
+   * <p>自定义词库名称描述。</p>
+   */
+  Description: string
+  /**
+   * <p>处理建议。<br>可取值：Review 疑似，Block 违规。</p>
+   */
+  Suggestion: string
+  /**
+   * <p>匹配模式。<br>可取值：ExactMatch 精确匹配， FuzzyMatch 模糊匹配。</p>
+   */
+  MatchType: string
 }
 
 /**
@@ -5860,6 +6136,35 @@ export interface XP2PDetailInfo {
    * AppId。
    */
   AppId?: string
+}
+
+/**
+ * ModifyLiveAvatarScript请求参数结构体
+ */
+export interface ModifyLiveAvatarScriptRequest {
+  /**
+   * 数字人直播间话术 ID。
+   */
+  ScriptId: string
+  /**
+   * 话术标题，限制500字节。
+   */
+  Title?: string
+  /**
+   * 话术内容，限制1000字节。
+   */
+  Content?: string
+  /**
+   * 修改已有话术的位置。
+比如已有话术三条，位置分别为100，200，300。
+可将第三条话术改到第一条和第二条中间，则可指定第三条话术的位置为 150。
+每次指定尽量取两条话术的中间位置，如50,150等，为后面顺序调整预留位置。
+   */
+  SpecifyPosition?: number
+  /**
+   * 操作者。
+   */
+  Operator?: string
 }
 
 /**
@@ -6093,6 +6398,21 @@ export interface SwitchCasterToEmergencyRequest {
 }
 
 /**
+ * 数字人直播间临时话术信息。
+ */
+export interface AvatarTemporaryScriptInfo {
+  /**
+   * 话术内容。
+   */
+  Content?: string
+  /**
+   * 话术创建时间，UTC时间。
+注意：UTC时间和北京时间相差八小时。
+   */
+  CreateTime?: string
+}
+
+/**
  * DeleteLiveRecordRule返回参数结构体
  */
 export interface DeleteLiveRecordRuleResponse {
@@ -6227,6 +6547,20 @@ export interface AddCasterLayoutInfoRequest {
    * <p>导播台布局参数信息。</p>
    */
   LayoutInfo: CasterLayoutInfo
+}
+
+/**
+ * GenerateLiveAvatarScriptBroadcast返回参数结构体
+ */
+export interface GenerateLiveAvatarScriptBroadcastResponse {
+  /**
+   * 音频播报 URL。
+   */
+  PreviewAudioUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6683,13 +7017,21 @@ export interface ConcurrentRecordStreamNum {
 }
 
 /**
- * DescribeStreamPlayInfoList返回参数结构体
+ * DescribeLiveAvatarScripts返回参数结构体
  */
-export interface DescribeStreamPlayInfoListResponse {
+export interface DescribeLiveAvatarScriptsResponse {
   /**
-   * 统计信息列表，时间粒度是1分钟。
+   * 数字人直播间话术信息列表。
    */
-  DataInfoList?: Array<DayStreamPlayInfo>
+  InfoList?: Array<AvatarScriptInfo>
+  /**
+   * 限制可创建的数字人直播间话术总条数。
+   */
+  LimitCreateNum?: number
+  /**
+   * 当前数字人直播间话术总条数。
+   */
+  TotalNum?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6871,6 +7213,16 @@ export interface CreateLiveTimeShiftRuleRequest {
  * StopCasterPvw返回参数结构体
  */
 export interface StopCasterPvwResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteLiveAvatarScript返回参数结构体
+ */
+export interface DeleteLiveAvatarScriptResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7127,6 +7479,28 @@ export interface DescribeLiveWatermarkRequest {
 }
 
 /**
+ * DescribeLiveAvatarRooms返回参数结构体
+ */
+export interface DescribeLiveAvatarRoomsResponse {
+  /**
+   * 数字人直播间信息列表。
+   */
+  InfoList?: Array<AvatarRoomInfo>
+  /**
+   * 限制可创建的数字人直播间总数。
+   */
+  LimitCreateNum?: number
+  /**
+   * 当前数字人直播间总个数。
+   */
+  TotalNum?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 混流抠图参数
  */
 export interface MixPortraitSegmentParams {
@@ -7243,6 +7617,34 @@ export interface ModifyLiveDomainCertBindingsResponse {
  * DescribeLiveRecordRules请求参数结构体
  */
 export type DescribeLiveRecordRulesRequest = null
+
+/**
+ * 每个域名的统计信息。
+ */
+export interface DomainDetailInfo {
+  /**
+   * 国内还是国外:
+Mainland: 表示国内数据。
+Oversea: 表示国外数据。
+   */
+  MainlandOrOversea?: string
+  /**
+   * 带宽，单位: Mbps。
+   */
+  Bandwidth?: number
+  /**
+   * 流量，单位: MB。
+   */
+  Flux?: number
+  /**
+   * 人数。
+   */
+  Online?: number
+  /**
+   * 请求数。
+   */
+  Request?: number
+}
 
 /**
  * DescribeCasterUserStatus请求参数结构体
@@ -7457,6 +7859,20 @@ export interface DeleteRecordTaskResponse {
 }
 
 /**
+ * ModifyCasterOutputInfo请求参数结构体
+ */
+export interface ModifyCasterOutputInfoRequest {
+  /**
+   * 导播台ID。
+   */
+  CasterId: number
+  /**
+   * 导播台推流参数信息。
+   */
+  OutputInfo: CasterOutputInfo
+}
+
+/**
  * CreateLiveTranscodeRule请求参数结构体
  */
 export interface CreateLiveTranscodeRuleRequest {
@@ -7479,6 +7895,48 @@ export interface CreateLiveTranscodeRuleRequest {
 }
 
 /**
+ * 数字人主播信息。
+ */
+export interface AvatarAnchorInfo {
+  /**
+   * 主播昵称。同一个主播可以存在多个数字人ID。
+   */
+  AnchorName?: string
+  /**
+   * 主播 ID。用于标识主播形象。同一个主播ID可存在竖屏和横屏两种数字人。
+   */
+  AnchorId?: string
+  /**
+   * 主播性别。male-男性，femal-女性。
+   */
+  AnchorGender?: string
+  /**
+   * 形象图片。
+   */
+  PoseImage?: string
+  /**
+   * 主播形象图片的分辨率。
+   */
+  PoseImageResolution?: string
+  /**
+   * 形象预览视频段。
+   */
+  ReferenceVideoSegmentUrl?: string
+  /**
+   * 横屏数字人信息。
+   */
+  HorizontalAvatar?: AvatarImageInfo
+  /**
+   * 竖屏数字人信息。
+   */
+  VerticalAvatar?: AvatarImageInfo
+  /**
+   * 推荐音色。
+   */
+  SuggestTimbreKey?: string
+}
+
+/**
  * DropLiveStream请求参数结构体
  */
 export interface DropLiveStreamRequest {
@@ -7494,6 +7952,23 @@ export interface DropLiveStreamRequest {
    * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
    */
   AppName: string
+}
+
+/**
+ * 播放错误码信息
+ */
+export interface HttpStatusData {
+  /**
+   * 数据时间点，
+使用UTC格式时间，
+例如：2019-01-08T10:00:00Z。
+注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  Time: string
+  /**
+   * 播放状态码详细信息。
+   */
+  HttpStatusInfoList: Array<HttpStatusInfo>
 }
 
 /**
@@ -7739,6 +8214,16 @@ export interface DescribeLivePadTemplateRequest {
 }
 
 /**
+ * DeleteLiveAvatarScript请求参数结构体
+ */
+export interface DeleteLiveAvatarScriptRequest {
+  /**
+   * 话术ID。
+   */
+  ScriptId: string
+}
+
+/**
  * DescribeHttpStatusInfoList请求参数结构体
  */
 export interface DescribeHttpStatusInfoListRequest {
@@ -7965,6 +8450,49 @@ export interface DescribeLivePackageInfoResponse {
 }
 
 /**
+ * 数字人直播间话术信息。
+ */
+export interface AvatarScriptInfo {
+  /**
+   * 数字人直播间话术 ID。
+   */
+  ScriptId?: string
+  /**
+   * 话术标题。
+   */
+  Title?: string
+  /**
+   * 话术内容。
+   */
+  Content?: string
+  /**
+   * 话术状态。
+PENDING --未生成。
+PROCESSING --生成中。
+READY --已生成。
+   */
+  Status?: string
+  /**
+   * 时长。单位：毫秒。
+   */
+  Duration?: number
+  /**
+   * 话术位置。
+   */
+  Position?: number
+  /**
+   * 话术创建时间，UTC时间。
+注意：UTC时间和北京时间相差八小时。
+   */
+  CreateTime?: string
+  /**
+   * 话术最后更新时间，UTC时间。
+注意：UTC时间和北京时间相差八小时。
+   */
+  UpdateTime?: string
+}
+
+/**
  * CreateLiveCallbackRule请求参数结构体
  */
 export interface CreateLiveCallbackRuleRequest {
@@ -7998,6 +8526,117 @@ export interface TimeShiftRecord {
    * 录制会话结束时间，Unix 时间戳。
    */
   EndTime?: number
+}
+
+/**
+ * 数字人直播间信息。
+ */
+export interface AvatarRoomInfo {
+  /**
+   * 数字人直播间 ID。
+   */
+  RoomId?: string
+  /**
+   * 数字人直播间名称。
+   */
+  Name?: string
+  /**
+   * 数字人直播间状态，
+CLOSE - 未开播。
+OPEN - 直播中。
+
+   */
+  Status?: string
+  /**
+   * 数字人形象 KEY。
+   */
+  AvatarKey?: string
+  /**
+   * 音色 KEy。
+   */
+  TimbreKey?: string
+  /**
+   * 数字人形象图片 URL。
+   */
+  AvatarImageUrl?: string
+  /**
+   * 背景图片 URL。
+   */
+  BackgroundUrl?: string
+  /**
+   * 推流目标描述。
+   */
+  Comment?: string
+  /**
+   * 目标推流地址。
+   */
+  ToUrl?: string
+  /**
+   * 主播大小，默认1.00。 取值范围(0, 15.00]。
+   */
+  AnchorScale?: number
+  /**
+   * 主播纵向位置。默认-1贴底部。
+   */
+  AnchorVerticalPos?: number
+  /**
+   * 主播横向位置。默认-1居中。
+   */
+  AnchorHorizontalPos?: number
+  /**
+   * 语速（1.0为正常语速，范围[0.5-1.5]，值为0.5时播报语速最慢，值为1.5时播报语速最快。
+   */
+  SpeechSpeed?: number
+  /**
+   * 音量大小，范围[0，10]，对应音量大小。默认为0，代表正常音量，值越大音量越高。
+   */
+  SpeechVolume?: number
+  /**
+   * 直播间创建时间，UTC时间。
+注意：UTC时间和北京时间相差八小时。
+   */
+  CreateTime?: string
+  /**
+   * 直播间最后更新时间，UTC时间。
+注意：UTC时间和北京时间相差八小时。
+   */
+  UpdateTime?: string
+}
+
+/**
+ * 数字人背景信息。
+ */
+export interface AvatarBackgroundInfo {
+  /**
+   * 背景 ID。
+   */
+  BackgroundId?: string
+  /**
+   * 背景场景。如：带货，娱乐等。
+   */
+  Scene?: string
+  /**
+   * 竖屏背景图片 URL。
+   */
+  VerticalImageUrl?: string
+  /**
+   * 横屏背景图片 URL。
+   */
+  HorizontalImageUrl?: string
+}
+
+/**
+ * DescribeLiveAvatarBackgroundList返回参数结构体
+ */
+export interface DescribeLiveAvatarBackgroundListResponse {
+  /**
+   * 数字人背景图片信息列表。
+   */
+  InfoList?: Array<AvatarBackgroundInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8302,6 +8941,20 @@ export interface DeleteScreenshotTaskResponse {
 }
 
 /**
+ * 数字人音色信息列表。
+ */
+export interface AvatarTimbreList {
+  /**
+   * 音色 类型。
+   */
+  TimbreType?: string
+  /**
+   * 音色信息列表。
+   */
+  TimbreInfoList?: Array<AvatarTimbreInfo>
+}
+
+/**
  * DescribePullTransformPushInfo返回参数结构体
  */
 export interface DescribePullTransformPushInfoResponse {
@@ -8389,6 +9042,18 @@ export interface AddCasterMarkWordInfoRequest {
    * 文本的详细配置。
    */
   MarkWordInfo: CasterMarkWordInfo
+}
+
+/**
+ * DescribeLiveAvatarTimbreList请求参数结构体
+ */
+export interface DescribeLiveAvatarTimbreListRequest {
+  /**
+   * 过滤音色性别。默认不过滤。
+male - 男性，
+female -女性。
+   */
+  TimbreGender?: string
 }
 
 /**
@@ -8620,6 +9285,20 @@ export interface StopLiveStreamMonitorRequest {
    * 监播ID
    */
   MonitorId: string
+}
+
+/**
+ * StopLiveAvatarRoom请求参数结构体
+ */
+export interface StopLiveAvatarRoomRequest {
+  /**
+   * 数字人直播间 ID。
+   */
+  RoomId: string
+  /**
+   * 操作者。
+   */
+  Operator?: string
 }
 
 /**
@@ -9055,25 +9734,13 @@ export interface DescribeLiveRecordTemplatesRequest {
 }
 
 /**
- * CreateAuditKeywordLib请求参数结构体
+ * CreateLiveCallbackRule返回参数结构体
  */
-export interface CreateAuditKeywordLibRequest {
+export interface CreateLiveCallbackRuleResponse {
   /**
-   * <p>自定义词库名称。</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name: string
-  /**
-   * <p>自定义词库名称描述。</p>
-   */
-  Description: string
-  /**
-   * <p>处理建议。<br>可取值：Review 疑似，Block 违规。</p>
-   */
-  Suggestion: string
-  /**
-   * <p>匹配模式。<br>可取值：ExactMatch 精确匹配， FuzzyMatch 模糊匹配。</p>
-   */
-  MatchType: string
+  RequestId?: string
 }
 
 /**
@@ -9325,25 +9992,17 @@ export interface DeleteCasterOutputInfoResponse {
 export type DescribeLivePadRulesRequest = null
 
 /**
- * DescribePullTransformPushInfoList请求参数结构体
+ * DescribeCasterMarkPicInfos返回参数结构体
  */
-export interface DescribePullTransformPushInfoListRequest {
+export interface DescribeCasterMarkPicInfosResponse {
   /**
-   * utc开始时间，格式为：yyyy-mm-ddTHH:MM:SSZ，参考https://cloud.tencent.com/document/product/266/11732#I，
-例如：北京时间2019-01-08 10:00:00，对应utc时间为：2019-01-08T10:00:00+08:00。
-支持最近一个月的查询。
+   * 导播台的水印信息列表。
    */
-  StartTime: string
+  MarkPicInfos?: Array<CasterMarkPicInfo>
   /**
-   * utc结束时间，格式为：yyyy-mm-ddTHH:MM:SSZ，参考https://cloud.tencent.com/document/product/266/11732#I，
-例如：北京时间2019-01-08 10:00:00，对应utc时间为：2019-01-08T10:00:00+08:00。
-支持最近一个月的查询，时间跨度为一个月。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EndTime: string
-  /**
-   * 拉流转推任务Id。
-   */
-  TaskId: string
+  RequestId?: string
 }
 
 /**
@@ -9636,6 +10295,16 @@ export interface StopCasterPgmRequest {
    * 导播台ID。
    */
   CasterId: number
+}
+
+/**
+ * DeleteLiveAvatarRoom请求参数结构体
+ */
+export interface DeleteLiveAvatarRoomRequest {
+  /**
+   * 直播间ID。
+   */
+  RoomId: string
 }
 
 /**
@@ -10702,33 +11371,13 @@ export interface DeleteAuditKeywordsResponse {
 }
 
 /**
- * 拉流转推任务流数据信息。
+ * DescribeLiveAvatarTemporaryScriptList请求参数结构体
  */
-export interface TurnPushInfo {
+export interface DescribeLiveAvatarTemporaryScriptListRequest {
   /**
-   * 视频帧率，单位fps。
+   * 数字人直播间 ID。
    */
-  VideoFps: number
-  /**
-   * 音频帧率，单位fps。
-   */
-  AudioFps: number
-  /**
-   * 视频码率，单位bps。
-   */
-  VideoRate: number
-  /**
-   * 音频码率，单位bps。
-   */
-  AudioRate: number
-  /**
-   * 流标识。
-   */
-  StreamFlag: string
-  /**
-   * 时间，utc格式：yyyy-mm-ddTHH:MM:SSZ，参考https://cloud.tencent.com/document/product/266/11732#I。
-   */
-  Time: string
+  RoomId: string
 }
 
 /**
@@ -11152,9 +11801,9 @@ export interface DescribeProvinceIspPlayInfoListRequest {
 }
 
 /**
- * StartLiveStreamMonitor返回参数结构体
+ * ModifyLiveAvatarRoom返回参数结构体
  */
-export interface StartLiveStreamMonitorResponse {
+export interface ModifyLiveAvatarRoomResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11452,6 +12101,76 @@ export interface DescribeRecordTaskResponse {
 }
 
 /**
+ * CreateLiveAvatarRoom返回参数结构体
+ */
+export interface CreateLiveAvatarRoomResponse {
+  /**
+   * 数字人直播间 ID。
+   */
+  RoomId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyLiveAvatarRoom请求参数结构体
+ */
+export interface ModifyLiveAvatarRoomRequest {
+  /**
+   * 数字人直播间 ID。
+   */
+  RoomId: string
+  /**
+   * 直播间名称。
+   */
+  Name?: string
+  /**
+   * 数字人形象KEY。
+   */
+  AvatarKey?: string
+  /**
+   * 音色KEY。
+   */
+  TimbreKey?: string
+  /**
+   * 背景图片URL。
+   */
+  BackgroundUrl?: string
+  /**
+   * 主播大小，默认1.00。
+取值范围(0, 15.00]。
+精度：使用小数点后两位。
+   */
+  AnchorScale?: number
+  /**
+   * 主播纵向位置。默认-1贴底部。
+左上角为原点，形象顶部离屏幕顶部的距离，最大不能使形象底部超出屏幕。
+即该纵向位置最大为：数字人分辨率的高 - 形象高。
+   */
+  AnchorVerticalPos?: number
+  /**
+   * 主播横向位置。默认-1居中。
+左上角为原点，形象左侧离左侧屏幕的距离。最大值不可使形象右侧超出右侧屏幕。
+即最大值为：数字人分辨率的宽 - 形象宽。
+   */
+  AnchorHorizontalPos?: number
+  /**
+   * 语速（1.0为正常语速，范围[0.6-2.5]，值为0.6时播报语速最慢，值为2.5时播报语速最快。
+   */
+  SpeechSpeed?: number
+  /**
+   * 音量大小，范围[0，10]，对应音量大小。默认为5，代表正常音量，值越大音量越高。
+   */
+  SpeechVolume?: number
+  /**
+   * 操作者。
+   */
+  Operator?: string
+}
+
+/**
  * DescribeCasterPlayUrl请求参数结构体
  */
 export interface DescribeCasterPlayUrlRequest {
@@ -11492,6 +12211,28 @@ export interface ForbidLiveDomainRequest {
    * 待停用的直播域名。
    */
   DomainName: string
+}
+
+/**
+ * DescribeLiveAvatarScripts请求参数结构体
+ */
+export interface DescribeLiveAvatarScriptsRequest {
+  /**
+   * 数字人直播间 ID。
+   */
+  RoomId: string
+  /**
+   * 数字人直播间话术 ID。
+   */
+  ScriptId?: string
+  /**
+   * 分页查询的页数。
+   */
+  PageIndex?: number
+  /**
+   * 分页查询的每页个数。
+   */
+  PageSize?: number
 }
 
 /**
@@ -11656,6 +12397,28 @@ export interface ModifyLiveRecordTemplateRequest {
 }
 
 /**
+ * StartLivePadStream请求参数结构体
+ */
+export interface StartLivePadStreamRequest {
+  /**
+   * 推流路径，与推流和播放地址中的AppName保持一致，默认为 live。
+   */
+  AppName: string
+  /**
+   * 您的推流域名。
+   */
+  PushDomainName: string
+  /**
+   * 流名称。
+   */
+  StreamName: string
+  /**
+   * 操作人备注信息。
+   */
+  Operator?: string
+}
+
+/**
  * DescribeLiveDomainReferer请求参数结构体
  */
 export interface DescribeLiveDomainRefererRequest {
@@ -11666,20 +12429,17 @@ export interface DescribeLiveDomainRefererRequest {
 }
 
 /**
- * 播放错误码信息
+ * DescribeLiveAvatarTimbreList返回参数结构体
  */
-export interface HttpStatusData {
+export interface DescribeLiveAvatarTimbreListResponse {
   /**
-   * 数据时间点，
-使用UTC格式时间，
-例如：2019-01-08T10:00:00Z。
-注意：北京时间值为 UTC 时间值 + 8 小时，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   * 数字人声音信息列表。
    */
-  Time: string
+  TimbreList?: Array<AvatarTimbreList>
   /**
-   * 播放状态码详细信息。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  HttpStatusInfoList: Array<HttpStatusInfo>
+  RequestId?: string
 }
 
 /**
@@ -12140,6 +12900,20 @@ export interface DescribeLiveXP2PDetailInfoListRequest {
 }
 
 /**
+ * DescribePullTransformPushInfoList返回参数结构体
+ */
+export interface DescribePullTransformPushInfoListResponse {
+  /**
+   * 拉流任务流信息列表。
+   */
+  DataInfoList: Array<TurnPushInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCasterPgmFromPvw请求参数结构体
  */
 export interface CreateCasterPgmFromPvwRequest {
@@ -12147,6 +12921,34 @@ export interface CreateCasterPgmFromPvwRequest {
    * 导播台ID。
    */
   CasterId: number
+}
+
+/**
+ * CreateLiveAvatarScript请求参数结构体
+ */
+export interface CreateLiveAvatarScriptRequest {
+  /**
+   * 话术标题。限制500字节。
+   */
+  Title: string
+  /**
+   * 话术内容。中文最大支持150个汉字（全角标点符号算一个汉字）；英文最大支持500个字母（半角标点符号算一个字母）。
+   */
+  Content: string
+  /**
+   * 话术所属的数字人直播间 ID。
+   */
+  RoomId: string
+  /**
+   * 话术插入时，可根据已有话术位置，指定新话术插入位置。
+如已有三条话术100，200，300。
+新话术可选择150插入到第一条和第二条中间。
+   */
+  SpecifyPosition?: number
+  /**
+   * 操作者。
+   */
+  Operator?: string
 }
 
 /**

@@ -28,9 +28,9 @@ it("live.v20180801.DescribeCasterList", async function () {
     }
 })
 
-it("live.v20180801.DropLiveStream", async function () {
+it("live.v20180801.DescribeLiveAvatarScripts", async function () {
     try {
-       const data = await client.DropLiveStream({})
+       const data = await client.DescribeLiveAvatarScripts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,6 +118,16 @@ it("live.v20180801.CreateLiveWatermarkRule", async function () {
     }
 })
 
+it("live.v20180801.DropLiveStream", async function () {
+    try {
+       const data = await client.DropLiveStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeLiveStreamEventList", async function () {
     try {
        const data = await client.DescribeLiveStreamEventList({})
@@ -191,6 +201,16 @@ it("live.v20180801.StartLiveStreamMonitor", async function () {
 it("live.v20180801.DescribeLiveSnapshotRules", async function () {
     try {
        const data = await client.DescribeLiveSnapshotRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.StartLiveAvatarRoom", async function () {
+    try {
+       const data = await client.StartLiveAvatarRoom({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -351,6 +371,16 @@ it("live.v20180801.CreateScreenshotTask", async function () {
 it("live.v20180801.DescribeLiveRecordTemplates", async function () {
     try {
        const data = await client.DescribeLiveRecordTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.StopLiveAvatarRoom", async function () {
+    try {
+       const data = await client.StopLiveAvatarRoom({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -588,6 +618,16 @@ it("live.v20180801.DeletePullStreamConfig", async function () {
     }
 })
 
+it("live.v20180801.ModifyCasterLayoutInfo", async function () {
+    try {
+       const data = await client.ModifyCasterLayoutInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeTimeShiftRecordDetail", async function () {
     try {
        const data = await client.DescribeTimeShiftRecordDetail({})
@@ -668,9 +708,9 @@ it("live.v20180801.DescribeLiveStreamMonitor", async function () {
     }
 })
 
-it("live.v20180801.SwitchBackupStream", async function () {
+it("live.v20180801.DescribeLiveCloudEffectConfig", async function () {
     try {
-       const data = await client.SwitchBackupStream({})
+       const data = await client.DescribeLiveCloudEffectConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -828,6 +868,16 @@ it("live.v20180801.DeleteLivePullStreamTask", async function () {
     }
 })
 
+it("live.v20180801.DescribeLiveTranscodeDetailInfo", async function () {
+    try {
+       const data = await client.DescribeLiveTranscodeDetailInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.ModifyLivePadTemplate", async function () {
     try {
        const data = await client.ModifyLivePadTemplate({})
@@ -841,6 +891,16 @@ it("live.v20180801.ModifyLivePadTemplate", async function () {
 it("live.v20180801.DescribeLiveWatermark", async function () {
     try {
        const data = await client.DescribeLiveWatermark({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.ModifyLiveAvatarRoom", async function () {
+    try {
+       const data = await client.ModifyLiveAvatarRoom({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1008,6 +1068,16 @@ it("live.v20180801.DeleteLiveDomain", async function () {
     }
 })
 
+it("live.v20180801.ModifyLiveAvatarScript", async function () {
+    try {
+       const data = await client.ModifyLiveAvatarScript({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.ModifyLiveCallbackTemplate", async function () {
     try {
        const data = await client.ModifyLiveCallbackTemplate({})
@@ -1058,9 +1128,9 @@ it("live.v20180801.DescribePullTransformPushInfoList", async function () {
     }
 })
 
-it("live.v20180801.DescribeCasterUserStatus", async function () {
+it("live.v20180801.CreateCaster", async function () {
     try {
-       const data = await client.DescribeCasterUserStatus({})
+       const data = await client.CreateCaster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1081,6 +1151,16 @@ it("live.v20180801.DescribeCasterLayoutInfos", async function () {
 it("live.v20180801.DescribeLivePullStreamTaskStatus", async function () {
     try {
        const data = await client.DescribeLivePullStreamTaskStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.SwitchBackupStream", async function () {
+    try {
+       const data = await client.SwitchBackupStream({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1218,9 +1298,9 @@ it("live.v20180801.DeleteRecordTask", async function () {
     }
 })
 
-it("live.v20180801.DescribeLiveTranscodeDetailInfo", async function () {
+it("live.v20180801.DescribeLiveAvatarImageList", async function () {
     try {
-       const data = await client.DescribeLiveTranscodeDetailInfo({})
+       const data = await client.DescribeLiveAvatarImageList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1231,6 +1311,16 @@ it("live.v20180801.DescribeLiveTranscodeDetailInfo", async function () {
 it("live.v20180801.DescribeLogDownloadList", async function () {
     try {
        const data = await client.DescribeLogDownloadList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.GenerateLiveAvatarScriptBroadcast", async function () {
+    try {
+       const data = await client.GenerateLiveAvatarScriptBroadcast({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1268,9 +1358,9 @@ it("live.v20180801.DeleteCasterOutputInfo", async function () {
     }
 })
 
-it("live.v20180801.ModifyCasterLayoutInfo", async function () {
+it("live.v20180801.DeleteLiveAvatarRoom", async function () {
     try {
-       const data = await client.ModifyCasterLayoutInfo({})
+       const data = await client.DeleteLiveAvatarRoom({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1348,6 +1438,16 @@ it("live.v20180801.DeleteLivePadRule", async function () {
     }
 })
 
+it("live.v20180801.DescribeLiveAvatarBackgroundList", async function () {
+    try {
+       const data = await client.DescribeLiveAvatarBackgroundList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.CreateLiveCallbackRule", async function () {
     try {
        const data = await client.CreateLiveCallbackRule({})
@@ -1361,6 +1461,16 @@ it("live.v20180801.CreateLiveCallbackRule", async function () {
 it("live.v20180801.DescribeStreamPlayInfoList", async function () {
     try {
        const data = await client.DescribeStreamPlayInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.CreateLiveAvatarScript", async function () {
+    try {
+       const data = await client.CreateLiveAvatarScript({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1498,9 +1608,9 @@ it("live.v20180801.DeleteLivePadTemplate", async function () {
     }
 })
 
-it("live.v20180801.DescribeLiveCloudEffectConfig", async function () {
+it("live.v20180801.CreateLiveAvatarRoom", async function () {
     try {
-       const data = await client.DescribeLiveCloudEffectConfig({})
+       const data = await client.CreateLiveAvatarRoom({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1608,6 +1718,16 @@ it("live.v20180801.ForbidLiveDomain", async function () {
     }
 })
 
+it("live.v20180801.CopyLiveAvatarRoom", async function () {
+    try {
+       const data = await client.CopyLiveAvatarRoom({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.CreateLiveTranscodeRule", async function () {
     try {
        const data = await client.CreateLiveTranscodeRule({})
@@ -1648,9 +1768,29 @@ it("live.v20180801.DescribeLivePadTemplates", async function () {
     }
 })
 
+it("live.v20180801.DescribeLiveAvatarTimbreList", async function () {
+    try {
+       const data = await client.DescribeLiveAvatarTimbreList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.ModifyLivePushAuthKey", async function () {
     try {
        const data = await client.ModifyLivePushAuthKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeLiveAvatarTemporaryScriptList", async function () {
+    try {
+       const data = await client.DescribeLiveAvatarTemporaryScriptList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1818,6 +1958,16 @@ it("live.v20180801.DescribeCasterTransitionTypes", async function () {
     }
 })
 
+it("live.v20180801.DescribeLiveAvatarRooms", async function () {
+    try {
+       const data = await client.DescribeLiveAvatarRooms({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DescribeCasterDisplayInfo", async function () {
     try {
        const data = await client.DescribeCasterDisplayInfo({})
@@ -1838,9 +1988,19 @@ it("live.v20180801.ModifyLiveStreamMonitor", async function () {
     }
 })
 
-it("live.v20180801.CreateCaster", async function () {
+it("live.v20180801.SendTemporaryScriptToAvatarRoom", async function () {
     try {
-       const data = await client.CreateCaster({})
+       const data = await client.SendTemporaryScriptToAvatarRoom({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.DescribeCasterUserStatus", async function () {
+    try {
+       const data = await client.DescribeCasterUserStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1938,9 +2098,9 @@ it("live.v20180801.InsertTaskTemporaryFiles", async function () {
     }
 })
 
-it("live.v20180801.ResumeDelayLiveStream", async function () {
+it("live.v20180801.DeleteLiveAvatarScript", async function () {
     try {
-       const data = await client.ResumeDelayLiveStream({})
+       const data = await client.DeleteLiveAvatarScript({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2031,6 +2191,16 @@ it("live.v20180801.DescribeLivePackageInfo", async function () {
 it("live.v20180801.CreatePullStreamConfig", async function () {
     try {
        const data = await client.CreatePullStreamConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.ResumeDelayLiveStream", async function () {
+    try {
+       const data = await client.ResumeDelayLiveStream({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

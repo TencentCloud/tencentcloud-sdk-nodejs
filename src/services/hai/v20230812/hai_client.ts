@@ -21,7 +21,7 @@ import {
   ComputeDetail,
   InquirePriceRunInstancesResponse,
   ResizeInstanceDiskResponse,
-  StorageInfo,
+  StopInstanceRequest,
   DescribeServiceLoginSettingsResponse,
   ResetInstancesPasswordResponse,
   DescribeInstanceNetworkStatusResponse,
@@ -31,52 +31,66 @@ import {
   InquirePriceUpdateServiceConfigsRequest,
   DescribeServicesResponse,
   TerminateInstancesResponse,
+  RunInstancesResponse,
   HiCacheInfo,
-  DescribeApplicationsResponse,
+  DescribeRegionsRequest,
   StartInstanceRequest,
-  LoginSetting,
+  CreateInferServiceByTemplateResponse,
   NetworkStatus,
+  ComputeInfo,
+  SceneInfo,
   HyperParam,
   ResizeInstanceDiskRequest,
+  DescribeDeployTemplatesResponse,
+  NetworkSetting,
   Price,
-  StopInstanceRequest,
-  EnvParam,
+  DeployInferServiceResponse,
+  ComputeResource,
   DescribeMuskPromptsRequest,
   DescribeScenesResponse,
   ServicePriceDetail,
+  StorageInfo,
   DescribeApplicationsRequest,
-  SceneInfo,
+  InquirePriceUpdateServiceConfigsResponse,
   CreateApplicationRequest,
   ResetInstancesPasswordRequest,
   RunInstancesRequest,
+  DescribeDeployTemplatesRequest,
   ContainerInfo,
   DescribeInstancesResponse,
+  EnvParam,
   UpdateServiceConfigsResponse,
   SystemDisk,
   ServiceDetail,
-  RunInstancesResponse,
+  LoginSetting,
   RegionInfo,
   DescribeInstancesRequest,
   COSStorage,
+  ModelDetail,
   DescribeServiceLoginSettingsRequest,
   MuskPromptInfo,
   DescribeScenesRequest,
   DescribeRegionsResponse,
   DescribeServicesRequest,
-  InquirePriceUpdateServiceConfigsResponse,
+  DeployInferServiceRequest,
   DeploymentConfig,
   StartInstanceResponse,
   CreateMuskPromptResponse,
+  ServiceMetaData,
   Filter,
+  CreateInferServiceByTemplateRequest,
   ApplicationInfo,
   CreateApplicationResponse,
   Instance,
+  DescribeModelsResponse,
   ItemPriceDetail,
+  DescribeModelsRequest,
   CreateMuskPromptRequest,
-  DescribeRegionsRequest,
+  DescribeApplicationsResponse,
   ItemPrice,
   InquirePriceRunInstancesRequest,
   DescribeInstanceNetworkStatusRequest,
+  TemplateDetail,
   LoginService,
   StopInstanceResponse,
   InstanceChargePrepaid,
@@ -90,6 +104,36 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("hai.tencentcloudapi.com", "2023-08-12", clientConfig)
+  }
+
+  /**
+   * 本接口（DescribeServiceLoginSettings）用于查询服务登录配置
+   */
+  async DescribeServiceLoginSettings(
+    req: DescribeServiceLoginSettingsRequest,
+    cb?: (error: string, rep: DescribeServiceLoginSettingsResponse) => void
+  ): Promise<DescribeServiceLoginSettingsResponse> {
+    return this.request("DescribeServiceLoginSettings", req, cb)
+  }
+
+  /**
+   * 本接口（ResizeInstanceDisk）用于对指定HAI实例进行扩容云硬盘操作。
+   */
+  async ResizeInstanceDisk(
+    req: ResizeInstanceDiskRequest,
+    cb?: (error: string, rep: ResizeInstanceDiskResponse) => void
+  ): Promise<ResizeInstanceDiskResponse> {
+    return this.request("ResizeInstanceDisk", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeDeployTemplates)用于查询模型支持的部署模板
+   */
+  async DescribeDeployTemplates(
+    req: DescribeDeployTemplatesRequest,
+    cb?: (error: string, rep: DescribeDeployTemplatesResponse) => void
+  ): Promise<DescribeDeployTemplatesResponse> {
+    return this.request("DescribeDeployTemplates", req, cb)
   }
 
   /**
@@ -113,36 +157,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeInstances）用户查询实例
-   */
-  async DescribeInstances(
-    req: DescribeInstancesRequest,
-    cb?: (error: string, rep: DescribeInstancesResponse) => void
-  ): Promise<DescribeInstancesResponse> {
-    return this.request("DescribeInstances", req, cb)
-  }
-
-  /**
-   * 本接口（DescribeApplications）用于查询应用
-   */
-  async DescribeApplications(
-    req: DescribeApplicationsRequest,
-    cb?: (error: string, rep: DescribeApplicationsResponse) => void
-  ): Promise<DescribeApplicationsResponse> {
-    return this.request("DescribeApplications", req, cb)
-  }
-
-  /**
-   * 获取prompt任务列表
-   */
-  async DescribeMuskPrompts(
-    req: DescribeMuskPromptsRequest,
-    cb?: (error: string, rep: DescribeMuskPromptsResponse) => void
-  ): Promise<DescribeMuskPromptsResponse> {
-    return this.request("DescribeMuskPrompts", req, cb)
-  }
-
-  /**
    * 本接口(InquirePriceUpdateServiceConfigs)用于更新服务配置询价
    */
   async InquirePriceUpdateServiceConfigs(
@@ -153,33 +167,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeScenes）用于查询场景
+   * 本接口（DescribeInstances）用户查询实例
    */
-  async DescribeScenes(
-    req: DescribeScenesRequest,
-    cb?: (error: string, rep: DescribeScenesResponse) => void
-  ): Promise<DescribeScenesResponse> {
-    return this.request("DescribeScenes", req, cb)
-  }
-
-  /**
-   * 本接口（ResizeInstanceDisk）用于对指定HAI实例进行扩容云硬盘操作。
-   */
-  async ResizeInstanceDisk(
-    req: ResizeInstanceDiskRequest,
-    cb?: (error: string, rep: ResizeInstanceDiskResponse) => void
-  ): Promise<ResizeInstanceDiskResponse> {
-    return this.request("ResizeInstanceDisk", req, cb)
-  }
-
-  /**
-   * 本接口（DescribeRegions）用于查询地域列表
-   */
-  async DescribeRegions(
-    req?: DescribeRegionsRequest,
-    cb?: (error: string, rep: DescribeRegionsResponse) => void
-  ): Promise<DescribeRegionsResponse> {
-    return this.request("DescribeRegions", req, cb)
+  async DescribeInstances(
+    req: DescribeInstancesRequest,
+    cb?: (error: string, rep: DescribeInstancesResponse) => void
+  ): Promise<DescribeInstancesResponse> {
+    return this.request("DescribeInstances", req, cb)
   }
 
   /**
@@ -193,74 +187,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 (StartInstance) 用于主动启动实例。
-‘运行中’、‘预付费’的实例不支持启动实例
-     */
-  async StartInstance(
-    req: StartInstanceRequest,
-    cb?: (error: string, rep: StartInstanceResponse) => void
-  ): Promise<StartInstanceResponse> {
-    return this.request("StartInstance", req, cb)
-  }
-
-  /**
-   * 本接口 (TerminateInstances) 用于主动退还实例。
+   * 本接口(DeployInferService)用于部署推理服务
    */
-  async TerminateInstances(
-    req: TerminateInstancesRequest,
-    cb?: (error: string, rep: TerminateInstancesResponse) => void
-  ): Promise<TerminateInstancesResponse> {
-    return this.request("TerminateInstances", req, cb)
-  }
-
-  /**
-   * 创建musk prompt 任务
-   */
-  async CreateMuskPrompt(
-    req: CreateMuskPromptRequest,
-    cb?: (error: string, rep: CreateMuskPromptResponse) => void
-  ): Promise<CreateMuskPromptResponse> {
-    return this.request("CreateMuskPrompt", req, cb)
-  }
-
-  /**
-   * 本接口 (ResetInstancesPassword) 用于重置实例的用户密码。
-   */
-  async ResetInstancesPassword(
-    req: ResetInstancesPasswordRequest,
-    cb?: (error: string, rep: ResetInstancesPasswordResponse) => void
-  ): Promise<ResetInstancesPasswordResponse> {
-    return this.request("ResetInstancesPassword", req, cb)
-  }
-
-  /**
-   * 本接口（DescribeInstanceNetworkStatus）用于查询实例的网络配置及消耗情况
-   */
-  async DescribeInstanceNetworkStatus(
-    req: DescribeInstanceNetworkStatusRequest,
-    cb?: (error: string, rep: DescribeInstanceNetworkStatusResponse) => void
-  ): Promise<DescribeInstanceNetworkStatusResponse> {
-    return this.request("DescribeInstanceNetworkStatus", req, cb)
-  }
-
-  /**
-   * 本接口（DescribeServiceLoginSettings）用于查询服务登录配置
-   */
-  async DescribeServiceLoginSettings(
-    req: DescribeServiceLoginSettingsRequest,
-    cb?: (error: string, rep: DescribeServiceLoginSettingsResponse) => void
-  ): Promise<DescribeServiceLoginSettingsResponse> {
-    return this.request("DescribeServiceLoginSettings", req, cb)
-  }
-
-  /**
-   * 本接口 (DescribeServices) 用于查询一个或多个服务
-   */
-  async DescribeServices(
-    req: DescribeServicesRequest,
-    cb?: (error: string, rep: DescribeServicesResponse) => void
-  ): Promise<DescribeServicesResponse> {
-    return this.request("DescribeServices", req, cb)
+  async DeployInferService(
+    req: DeployInferServiceRequest,
+    cb?: (error: string, rep: DeployInferServiceResponse) => void
+  ): Promise<DeployInferServiceResponse> {
+    return this.request("DeployInferService", req, cb)
   }
 
   /**
@@ -275,6 +208,77 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口 (StartInstance) 用于主动启动实例。
+‘运行中’、‘预付费’的实例不支持启动实例
+     */
+  async StartInstance(
+    req: StartInstanceRequest,
+    cb?: (error: string, rep: StartInstanceResponse) => void
+  ): Promise<StartInstanceResponse> {
+    return this.request("StartInstance", req, cb)
+  }
+
+  /**
+   * 本接口 (ResetInstancesPassword) 用于重置实例的用户密码。
+   */
+  async ResetInstancesPassword(
+    req: ResetInstancesPasswordRequest,
+    cb?: (error: string, rep: ResetInstancesPasswordResponse) => void
+  ): Promise<ResetInstancesPasswordResponse> {
+    return this.request("ResetInstancesPassword", req, cb)
+  }
+
+  /**
+   * 获取prompt任务列表
+   */
+  async DescribeMuskPrompts(
+    req: DescribeMuskPromptsRequest,
+    cb?: (error: string, rep: DescribeMuskPromptsResponse) => void
+  ): Promise<DescribeMuskPromptsResponse> {
+    return this.request("DescribeMuskPrompts", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeRegions）用于查询地域列表
+   */
+  async DescribeRegions(
+    req?: DescribeRegionsRequest,
+    cb?: (error: string, rep: DescribeRegionsResponse) => void
+  ): Promise<DescribeRegionsResponse> {
+    return this.request("DescribeRegions", req, cb)
+  }
+
+  /**
+   * 本接口 (DescribeServices) 用于查询一个或多个服务
+   */
+  async DescribeServices(
+    req: DescribeServicesRequest,
+    cb?: (error: string, rep: DescribeServicesResponse) => void
+  ): Promise<DescribeServicesResponse> {
+    return this.request("DescribeServices", req, cb)
+  }
+
+  /**
+   * 创建musk prompt 任务
+   */
+  async CreateMuskPrompt(
+    req: CreateMuskPromptRequest,
+    cb?: (error: string, rep: CreateMuskPromptResponse) => void
+  ): Promise<CreateMuskPromptResponse> {
+    return this.request("CreateMuskPrompt", req, cb)
+  }
+
+  /**
+   * 本接口 (TerminateInstances) 用于主动退还实例。
+   */
+  async TerminateInstances(
+    req: TerminateInstancesRequest,
+    cb?: (error: string, rep: TerminateInstancesResponse) => void
+  ): Promise<TerminateInstancesResponse> {
+    return this.request("TerminateInstances", req, cb)
+  }
+
+  /**
    * 本接口（CreateApplication）用于对HAI实例制作自定义应用。
    */
   async CreateApplication(
@@ -282,5 +286,55 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateApplicationResponse) => void
   ): Promise<CreateApplicationResponse> {
     return this.request("CreateApplication", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeModels)用于查询模型
+   */
+  async DescribeModels(
+    req: DescribeModelsRequest,
+    cb?: (error: string, rep: DescribeModelsResponse) => void
+  ): Promise<DescribeModelsResponse> {
+    return this.request("DescribeModels", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeApplications）用于查询应用
+   */
+  async DescribeApplications(
+    req: DescribeApplicationsRequest,
+    cb?: (error: string, rep: DescribeApplicationsResponse) => void
+  ): Promise<DescribeApplicationsResponse> {
+    return this.request("DescribeApplications", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeScenes）用于查询场景
+   */
+  async DescribeScenes(
+    req: DescribeScenesRequest,
+    cb?: (error: string, rep: DescribeScenesResponse) => void
+  ): Promise<DescribeScenesResponse> {
+    return this.request("DescribeScenes", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeInstanceNetworkStatus）用于查询实例的网络配置及消耗情况
+   */
+  async DescribeInstanceNetworkStatus(
+    req: DescribeInstanceNetworkStatusRequest,
+    cb?: (error: string, rep: DescribeInstanceNetworkStatusResponse) => void
+  ): Promise<DescribeInstanceNetworkStatusResponse> {
+    return this.request("DescribeInstanceNetworkStatus", req, cb)
+  }
+
+  /**
+   * 本接口(CreateInferServiceByTemplate)用于根据模板创建服务
+   */
+  async CreateInferServiceByTemplate(
+    req: CreateInferServiceByTemplateRequest,
+    cb?: (error: string, rep: CreateInferServiceByTemplateResponse) => void
+  ): Promise<CreateInferServiceByTemplateResponse> {
+    return this.request("CreateInferServiceByTemplate", req, cb)
   }
 }

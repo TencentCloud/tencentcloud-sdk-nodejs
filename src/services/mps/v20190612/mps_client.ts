@@ -48,7 +48,7 @@ import {
   MediaAiAnalysisDescriptionItem,
   DeleteAnimatedGraphicsTemplateResponse,
   AiReviewTaskProhibitedOcrResult,
-  StreamUrlDetail,
+  DescribeSubtitleEmbedTemplatesRequest,
   AiRecognitionTaskAsrFullTextResultOutput,
   AsrHotwordsSetItem,
   AiReviewProhibitedOcrTaskOutput,
@@ -124,6 +124,7 @@ import {
   AiRecognitionTaskAsrWordsSegmentItem,
   DescribeStreamLinkFlowRealtimeStatusResponse,
   ParseLiveStreamProcessNotificationResponse,
+  SubtitleShadowConfig,
   DescribeVideoDatabaseEntryTaskDetailRequest,
   AiRecognitionTaskInput,
   SmartSubtitleTaskTextResultOutput,
@@ -149,6 +150,7 @@ import {
   AiReviewTerrorismOcrTaskInput,
   AiRecognitionTaskOcrWordsResultInput,
   CreateQualityControlTemplateResponse,
+  FlowMediaAudio,
   AiAnalysisTaskReelInput,
   QualityControlResult,
   AiReviewPornTaskInput,
@@ -187,6 +189,7 @@ import {
   ComposeTransitionOperation,
   CreateAigcVideoTaskResponse,
   UserDefineAsrTextReviewTemplateInfo,
+  SubtitleBoardConfig,
   ComposeTrackTime,
   AiSampleFaceInfo,
   CreateInputRTSPPullSettings,
@@ -267,7 +270,7 @@ import {
   AiQualityControlTaskInput,
   VideoDBEntryTaskResult,
   PornConfigureInfoForUpdate,
-  BatchSubTaskResult,
+  AiAnalysisTaskSegmentInput,
   AiReviewPornAsrTaskOutput,
   ComposeTransitionItem,
   DeleteAIAnalysisTemplateRequest,
@@ -298,6 +301,7 @@ import {
   CreatePersonSampleResponse,
   CreateContentReviewTemplateResponse,
   ModifyBlindWatermarkTemplateResponse,
+  DescribeAIAnalysisTemplatesRequest,
   ProhibitedConfigureInfoForUpdate,
   ComposeEmptyItem,
   PidSelector,
@@ -439,7 +443,6 @@ import {
   CreateScheduleRequest,
   StreamLinkRegionInfo,
   CreateVideoSearchTaskResponse,
-  AiAnalysisTaskSegmentInput,
   CreateVideoSearchTaskRequest,
   LiveStreamTagRecognitionResult,
   ExecuteFunctionResponse,
@@ -477,7 +480,7 @@ import {
   BlindWatermarkInput,
   DescribeBlindWatermarkTemplatesResponse,
   ImageWatermarkInputForUpdate,
-  DescribeAIAnalysisTemplatesRequest,
+  BatchSubTaskResult,
   AigcStoreCosParam,
   FlowVideo,
   AiRecognitionTaskOcrWordsResultItem,
@@ -489,7 +492,9 @@ import {
   AiAnalysisTaskDescriptionResult,
   DeleteSmartSubtitleTemplateResponse,
   ResetWorkflowRequest,
+  DeleteSubtitleEmbedTemplateRequest,
   AiRecognitionTaskObjectResultInput,
+  StreamUrlDetail,
   AiReviewTaskTerrorismResult,
   DescribeOutput,
   LiveStreamAiReviewVoicePornResult,
@@ -528,6 +533,7 @@ import {
   ProhibitedAsrReviewTemplateInfo,
   WithdrawsWatermarkResponse,
   SegmentRecognitionItem,
+  DescribeSubtitleEmbedTemplatesResponse,
   AiReviewPoliticalAsrTaskInput,
   LiveStreamAiAnalysisResultInfo,
   SegmentSpecificInfo,
@@ -588,6 +594,7 @@ import {
   ActivityResult,
   DescribeAsrHotwordsResponse,
   DescribeInputHLSPullSettings,
+  CreateSubtitleEmbedTemplateResponse,
   ResetWorkflowResponse,
   DescribeStreamLinkFlowsRequest,
   HLSConfigureInfo,
@@ -642,6 +649,7 @@ import {
   ImageEraseLogoConfig,
   ModifyStreamLinkInputRequest,
   ScheduleReviewTaskResult,
+  ModifySubtitleEmbedTemplateRequest,
   DescribeStreamLinkEventAttachedFlowsResponse,
   ModifyTranscodeTemplateResponse,
   LiveStreamRecordResultInfo,
@@ -676,8 +684,10 @@ import {
   DeleteProcessImageTemplateResponse,
   DescribeStreamLinkSecurityGroupsRequest,
   OcrFullTextConfigureInfoForUpdate,
+  SubtitleLayoutConfig,
   FlowSRTInfo,
   AiRecognitionTaskOcrFullTextResultInput,
+  SubtitleOutlineConfig,
   DeleteStreamLinkEventResponse,
   DescribeTasksResponse,
   ModifyImageSpriteTemplateRequest,
@@ -700,6 +710,7 @@ import {
   SmartEraseSubtitleConfig,
   DeleteLiveRecordTemplateResponse,
   SearchTaskResult,
+  ModifySubtitleEmbedTemplateResponse,
   DescribeSnapshotByTimeOffsetTemplatesResponse,
   MediaVideoStreamItem,
   SnapshotByTimeOffsetTemplate,
@@ -738,6 +749,7 @@ import {
   DescribeSampleSnapshotTemplatesResponse,
   DescribeProcessImageTemplatesRequest,
   ComposeImageItem,
+  SubtitleEmbedConfig,
   TaskSimpleInfo,
   MediaContentReviewSegmentItem,
   AiContentReviewResult,
@@ -746,7 +758,7 @@ import {
   TerrorismImgReviewTemplateInfo,
   AsrHotwordsSet,
   AiAnalysisTaskHeadTailInput,
-  FlowMediaAudio,
+  DeleteSubtitleEmbedTemplateResponse,
   QualityControlStrategy,
   DescribeTranscodeTemplatesRequest,
   DescribeSmartSubtitleTemplatesResponse,
@@ -823,6 +835,7 @@ import {
   ActivityResItem,
   LiveActivityResItem,
   UpdateSmartEraseSubtitleConfig,
+  CreateSubtitleEmbedTemplateRequest,
   EraseTimeArea,
   SearchValueInput,
   EditMediaFileInfo,
@@ -839,6 +852,7 @@ import {
   ImageProcessOutputConfig,
   SampleSnapshotTemplate,
   RTSPPullSourceAddress,
+  SubtitleEmbedTemplateItem,
   DescribeHLSPullSourceAddress,
   MediaImageSpriteItem,
   AudioEnhanceConfig,
@@ -1222,6 +1236,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除用户自定义字幕压制模板。
+   */
+  async DeleteSubtitleEmbedTemplate(
+    req: DeleteSubtitleEmbedTemplateRequest,
+    cb?: (error: string, rep: DeleteSubtitleEmbedTemplateResponse) => void
+  ): Promise<DeleteSubtitleEmbedTemplateResponse> {
+    return this.request("DeleteSubtitleEmbedTemplate", req, cb)
+  }
+
+  /**
    * * 该接口用于查询任务列表；
    * 当列表数据比较多时，单次接口调用无法拉取整个列表，可通过 ScrollToken 参数，分批拉取；
    * 只能查询到最近七天（168小时）内的任务。
@@ -1487,6 +1511,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建自定义字幕压制模板
+   */
+  async CreateSubtitleEmbedTemplate(
+    req: CreateSubtitleEmbedTemplateRequest,
+    cb?: (error: string, rep: CreateSubtitleEmbedTemplateResponse) => void
+  ): Promise<CreateSubtitleEmbedTemplateResponse> {
+    return this.request("CreateSubtitleEmbedTemplate", req, cb)
+  }
+
+  /**
      * 发起视频评测任务，功能包括：
 
 1. 对一个原视频和多个转码后的视频进行评分。
@@ -1700,6 +1734,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAIAnalysisTemplateResponse) => void
   ): Promise<CreateAIAnalysisTemplateResponse> {
     return this.request("CreateAIAnalysisTemplate", req, cb)
+  }
+
+  /**
+   * 修改用户自定义字幕压制模板。
+   */
+  async ModifySubtitleEmbedTemplate(
+    req: ModifySubtitleEmbedTemplateRequest,
+    cb?: (error: string, rep: ModifySubtitleEmbedTemplateResponse) => void
+  ): Promise<ModifySubtitleEmbedTemplateResponse> {
+    return this.request("ModifySubtitleEmbedTemplate", req, cb)
   }
 
   /**
@@ -2208,6 +2252,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteWatermarkTemplateResponse) => void
   ): Promise<DeleteWatermarkTemplateResponse> {
     return this.request("DeleteWatermarkTemplate", req, cb)
+  }
+
+  /**
+   * 根据字幕压制模板唯一标识，获取字幕压制模板详情列表。返回结果包含符合条件的所有用户自定义字幕压制模板及系统预置字幕压制模板
+   */
+  async DescribeSubtitleEmbedTemplates(
+    req: DescribeSubtitleEmbedTemplatesRequest,
+    cb?: (error: string, rep: DescribeSubtitleEmbedTemplatesResponse) => void
+  ): Promise<DescribeSubtitleEmbedTemplatesResponse> {
+    return this.request("DescribeSubtitleEmbedTemplates", req, cb)
   }
 
   /**

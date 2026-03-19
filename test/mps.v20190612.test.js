@@ -328,6 +328,16 @@ it("mps.v20190612.ModifyStreamLinkFlow", async function () {
     }
 })
 
+it("mps.v20190612.DeleteSubtitleEmbedTemplate", async function () {
+    try {
+       const data = await client.DeleteSubtitleEmbedTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DescribeTasks", async function () {
     try {
        const data = await client.DescribeTasks({})
@@ -588,6 +598,16 @@ it("mps.v20190612.DeleteWorkflow", async function () {
     }
 })
 
+it("mps.v20190612.CreateSubtitleEmbedTemplate", async function () {
+    try {
+       const data = await client.CreateSubtitleEmbedTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.CreateMediaEvaluation", async function () {
     try {
        const data = await client.CreateMediaEvaluation({})
@@ -791,6 +811,16 @@ it("mps.v20190612.DeleteStreamLinkSecurityGroup", async function () {
 it("mps.v20190612.CreateAIAnalysisTemplate", async function () {
     try {
        const data = await client.CreateAIAnalysisTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.ModifySubtitleEmbedTemplate", async function () {
+    try {
+       const data = await client.ModifySubtitleEmbedTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1271,6 +1301,16 @@ it("mps.v20190612.ModifyAdaptiveDynamicStreamingTemplate", async function () {
 it("mps.v20190612.DeleteWatermarkTemplate", async function () {
     try {
        const data = await client.DeleteWatermarkTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeSubtitleEmbedTemplates", async function () {
+    try {
+       const data = await client.DescribeSubtitleEmbedTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

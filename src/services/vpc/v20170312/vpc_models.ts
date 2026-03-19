@@ -2232,11 +2232,11 @@ export interface ModifyBandwidthPackageAttributeRequest {
   /**
    * 带宽包唯一标识ID
    */
-  BandwidthPackageId: string
+  BandwidthPackageId?: string
   /**
    * 带宽包名称
    */
-  BandwidthPackageName: string
+  BandwidthPackageName?: string
   /**
    * 带宽包计费模式，可选值:
 <li>ENHANCED95_POSTPAID_BY_MONTH: 后付费-增强型95计费</li>
@@ -15177,6 +15177,10 @@ export interface ModifyCcnAttributeRequest {
    * 是否开启qos功能。`False` 不开启，`True` 开启。
    */
   TrafficMarkingPolicyFlag?: boolean
+  /**
+   * 是否切换为混合计费
+   */
+  MixedBillingFlag?: boolean
 }
 
 /**
