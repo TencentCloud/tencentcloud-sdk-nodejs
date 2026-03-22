@@ -20,7 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ResetDeviceAccountPasswordResponse,
   CreateUserDirectoryResponse,
-  ModifyAccessWhiteListStatusResponse,
+  Domain,
   AccessInfo,
   ModifyResourceResponse,
   BindDeviceAccountPasswordRequest,
@@ -92,6 +92,7 @@ import {
   DeleteUserDirectoryRequest,
   CreateDeviceGroupResponse,
   DescribeUserGroupMembersRequest,
+  DescribeDeviceCountRequest,
   OperationEvent,
   Department,
   AccessDevicesRequest,
@@ -146,10 +147,12 @@ import {
   CreateCmdTemplateRequest,
   ModifyCmdTemplateResponse,
   ModifyUserDirectoryResponse,
+  DescribeDeviceCountResponse,
   ResetDeviceAccountPrivateKeyRequest,
   DeleteUserDirectoryResponse,
   CreateAssetSyncJobResponse,
   BindDeviceAccountPrivateKeyRequest,
+  DescribeDeviceCountSummaryRequest,
   ModifyLDAPSettingRequest,
   ModifyChangePwdTaskRequest,
   CreateAssetSyncJobRequest,
@@ -189,7 +192,7 @@ import {
   ExternalDevice,
   SearchSessionRequest,
   ModifyDeviceGroupRequest,
-  Domain,
+  DescribeDeviceCountSummaryResponse,
   Filter,
   DescribeUsersResponse,
   DeployResourceResponse,
@@ -240,6 +243,7 @@ import {
   CreateUserGroupResponse,
   DeleteDevicesRequest,
   DescribeDeviceAccountsResponse,
+  DeviceCount,
   DescribeDomainsRequest,
   DescribeCmdTemplatesRequest,
   EnableIntranetAccessRequest,
@@ -248,6 +252,7 @@ import {
   DeleteDeviceGroupsRequest,
   DescribeDeviceGroupMembersResponse,
   SearchAuditLogResponse,
+  ModifyAccessWhiteListStatusResponse,
   DescribeDepartmentsRequest,
   SessionResult,
   Resource,
@@ -718,6 +723,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: EnableExternalAccessResponse) => void
   ): Promise<EnableExternalAccessResponse> {
     return this.request("EnableExternalAccess", req, cb)
+  }
+
+  /**
+   * 查询用户导入的主机数
+   */
+  async DescribeDeviceCount(
+    req: DescribeDeviceCountRequest,
+    cb?: (error: string, rep: DescribeDeviceCountResponse) => void
+  ): Promise<DescribeDeviceCountResponse> {
+    return this.request("DescribeDeviceCount", req, cb)
   }
 
   /**
@@ -1298,6 +1313,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCmdTemplatesResponse) => void
   ): Promise<DescribeCmdTemplatesResponse> {
     return this.request("DescribeCmdTemplates", req, cb)
+  }
+
+  /**
+   * 查询用户导入的主机数
+   */
+  async DescribeDeviceCountSummary(
+    req?: DescribeDeviceCountSummaryRequest,
+    cb?: (error: string, rep: DescribeDeviceCountSummaryResponse) => void
+  ): Promise<DescribeDeviceCountSummaryResponse> {
+    return this.request("DescribeDeviceCountSummary", req, cb)
   }
 
   /**

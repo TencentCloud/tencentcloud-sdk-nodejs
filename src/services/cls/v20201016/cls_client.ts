@@ -412,6 +412,7 @@ import {
   CreateSplunkDeliverRequest,
   CreateMachineGroupResponse,
   RuleTagInfo,
+  OpenClawServiceRequest,
   SearchCosRechargeInfoRequest,
   DescribeNoticeContentsRequest,
   DescribeDlcDeliversRequest,
@@ -471,6 +472,7 @@ import {
   HostMetricConfig,
   CreateShipperResponse,
   ModifyCloudProductLogCollectionRequest,
+  OpenClawServiceResponse,
   CosRechargeInfo,
   Column,
   DescribeDataTransformInfoRequest,
@@ -543,6 +545,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateKafkaRechargeResponse) => void
   ): Promise<CreateKafkaRechargeResponse> {
     return this.request("CreateKafkaRecharge", req, cb)
+  }
+
+  /**
+   * 本接口用于创建OpenClaw依赖的资源与索引
+   */
+  async OpenClawService(
+    req: OpenClawServiceRequest,
+    cb?: (error: string, rep: OpenClawServiceResponse) => void
+  ): Promise<OpenClawServiceResponse> {
+    return this.request("OpenClawService", req, cb)
   }
 
   /**

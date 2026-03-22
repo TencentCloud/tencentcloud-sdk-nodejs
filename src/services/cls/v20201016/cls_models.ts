@@ -10419,6 +10419,16 @@ export interface RuleTagInfo {
 }
 
 /**
+ * OpenClawService请求参数结构体
+ */
+export interface OpenClawServiceRequest {
+  /**
+   * <p>标签类型</p><p>枚举值：</p><ul><li>OpenClaw： OpenClaw类型</li><li>ClawPro： ClawPro类型</li></ul>
+   */
+  Tag: string
+}
+
+/**
  * SearchCosRechargeInfo请求参数结构体
  */
 export interface SearchCosRechargeInfoRequest {
@@ -12122,6 +12132,64 @@ export interface ModifyCloudProductLogCollectionRequest {
    * 日志配置拓展信息， 一般用于存储额外的日志投递配置
    */
   Extend?: string
+}
+
+/**
+ * OpenClawService返回参数结构体
+ */
+export interface OpenClawServiceResponse {
+  /**
+   * <p>日志集id</p><p><a href="https://cloud.tencent.com/document/product/614/41034">日志集文档</a></p>
+   */
+  LogsetId?: string
+  /**
+   * <p>日志集名称</p>
+   */
+  LogsetName?: string
+  /**
+   * <p>日志主题id</p><p><a href="https://cloud.tencent.com/document/product/614/41035">日志主题文档</a></p>
+   */
+  TopicId?: string
+  /**
+   * <p>日志主题名称</p>
+   */
+  TopicName?: string
+  /**
+   * <p>指标主题id</p><p><a href="https://cloud.tencent.com/document/product/614/90328">指标主题文档</a></p>
+   */
+  MetricTopicId?: string
+  /**
+   * <p>指标主题名称</p>
+   */
+  MetricTopicName?: string
+  /**
+   * <p>机器组id</p><p><a href="https://cloud.tencent.com/document/product/614/17412">机器组文档</a></p>
+   */
+  MachineGroupId?: string
+  /**
+   * <p>机器组名称</p>
+   */
+  MachineGroupName?: string
+  /**
+   * <p>采集配置id。应用日志</p><p><a href="https://cloud.tencent.com/document/product/614/33494">采集概述文档</a> - <a href="https://cloud.tencent.com/document/product/614/57497">LogListener 采集配置导入</a></p>
+   */
+  AppLogConfigId?: string
+  /**
+   * <p>采集配置名称。应用日志</p>
+   */
+  AppLogConfigName?: string
+  /**
+   * <p>采集配置id。会话日志</p><p><a href="https://cloud.tencent.com/document/product/614/33494">采集概述文档</a> - <a href="https://cloud.tencent.com/document/product/614/57497">LogListener 采集配置导入</a></p>
+   */
+  SessionLogConfigId?: string
+  /**
+   * <p>采集配置名称。会话日志</p>
+   */
+  SessionLogConfigName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

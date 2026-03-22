@@ -40,13 +40,45 @@ export interface CreateUserDirectoryResponse {
 }
 
 /**
- * ModifyAccessWhiteListStatus返回参数结构体
+ * 网络域
  */
-export interface ModifyAccessWhiteListStatusResponse {
+export interface Domain {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 自增id
    */
-  RequestId?: string
+  Id?: number
+  /**
+   * 网络域id
+   */
+  DomainId?: string
+  /**
+   * 网络域名称
+   */
+  DomainName?: string
+  /**
+   * 堡垒机id
+   */
+  ResourceId?: string
+  /**
+   * ip，网段
+   */
+  WhiteIpSet?: Array<string>
+  /**
+   * 是否启用  默认 1启用 0禁用
+   */
+  Enabled?: number
+  /**
+   * 状态 0-已断开  1-已连接
+   */
+  Status?: number
+  /**
+   * 网络域创建时间
+   */
+  CreateTime?: string
+  /**
+   * 是否资源默认网络域 1-资源默认网络域 0-用户添加网络域
+   */
+  Default?: number
 }
 
 /**
@@ -1617,6 +1649,32 @@ export interface DescribeUserGroupMembersRequest {
 }
 
 /**
+ * DescribeDeviceCount请求参数结构体
+ */
+export interface DescribeDeviceCountRequest {
+  /**
+   * 地域码
+   */
+  ApCode?: string
+  /**
+   * 用户VPC实例ID
+   */
+  VpcId?: string
+  /**
+   * 堡垒机服务ID
+   */
+  ResourceId?: string
+  /**
+   * 资产类型,1-Linux, 2-Windows,3-MySQL,4-SqlServer 不传-全部
+   */
+  Kind?: number
+  /**
+   * 是否绑定服务,1-已绑定, 2-未绑定， 不传-全部
+   */
+  BindResource?: number
+}
+
+/**
  * 操作日志
  */
 export interface OperationEvent {
@@ -3075,6 +3133,20 @@ export interface ModifyUserDirectoryResponse {
 }
 
 /**
+ * DescribeDeviceCount返回参数结构体
+ */
+export interface DescribeDeviceCountResponse {
+  /**
+   * 主机总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResetDeviceAccountPrivateKey请求参数结构体
  */
 export interface ResetDeviceAccountPrivateKeyRequest {
@@ -3121,6 +3193,11 @@ export interface BindDeviceAccountPrivateKeyRequest {
    */
   PrivateKeyPassword?: string
 }
+
+/**
+ * DescribeDeviceCountSummary请求参数结构体
+ */
+export type DescribeDeviceCountSummaryRequest = null
 
 /**
  * ModifyLDAPSetting请求参数结构体
@@ -4227,45 +4304,21 @@ export interface ModifyDeviceGroupRequest {
 }
 
 /**
- * 网络域
+ * DescribeDeviceCountSummary返回参数结构体
  */
-export interface Domain {
+export interface DescribeDeviceCountSummaryResponse {
   /**
-   * 自增id
+   * 各种类型的资产总数
    */
-  Id?: number
+  DeviceCountSet?: Array<DeviceCount>
   /**
-   * 网络域id
+   * 各种类型应用资产总数
    */
-  DomainId?: string
+  AppAssetCountSet?: Array<DeviceCount>
   /**
-   * 网络域名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DomainName?: string
-  /**
-   * 堡垒机id
-   */
-  ResourceId?: string
-  /**
-   * ip，网段
-   */
-  WhiteIpSet?: Array<string>
-  /**
-   * 是否启用  默认 1启用 0禁用
-   */
-  Enabled?: number
-  /**
-   * 状态 0-已断开  1-已连接
-   */
-  Status?: number
-  /**
-   * 网络域创建时间
-   */
-  CreateTime?: string
-  /**
-   * 是否资源默认网络域 1-资源默认网络域 0-用户添加网络域
-   */
-  Default?: number
+  RequestId?: string
 }
 
 /**
@@ -5346,6 +5399,20 @@ export interface DescribeDeviceAccountsResponse {
 }
 
 /**
+ * 资产数目
+ */
+export interface DeviceCount {
+  /**
+   * 资产类型
+   */
+  Kind?: number
+  /**
+   * 资产数目
+   */
+  Count?: number
+}
+
+/**
  * DescribeDomains请求参数结构体
  */
 export interface DescribeDomainsRequest {
@@ -5523,6 +5590,16 @@ export interface SearchAuditLogResponse {
    * 日志总数量
    */
   TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAccessWhiteListStatus返回参数结构体
+ */
+export interface ModifyAccessWhiteListStatusResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

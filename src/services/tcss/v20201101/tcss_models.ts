@@ -1690,27 +1690,23 @@ export interface UpdateAndPublishNetworkFirewallPolicyDetailResponse {
  */
 export interface DescribeAssetImageListRequest {
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * <p>需要返回的数量，默认为10，最大值为100</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
   /**
-   * 过滤条件。
-<li>ImageName- String - 是否必填：否 - 镜像名称筛选，</li>
-<li>ScanStatus - String - 是否必填：否 - 镜像扫描状态notScan，scanning，scanned，scanErr</li>
-<li>ImageID- String - 是否必填：否 - 镜像ID筛选，</li>
-<li>SecurityRisk- String - 是否必填：否 - 安全风险，VulCnt 、VirusCnt、RiskCnt、IsTrustImage</li>
+   * <p>过滤条件。</p><li>ImageName- String - 是否必填：否 - 镜像名称筛选，</li><li>ScanStatus - String - 是否必填：否 - 镜像扫描状态notScan，scanning，scanned，scanErr</li><li>ImageID- String - 是否必填：否 - 镜像ID筛选，</li><li>SecurityRisk- String - 是否必填：否 - 安全风险，VirusCnt、RiskCnt、IsTrustImage、CriticalLevelVul、HighLevelVul、MediumLevelVul、LowLevelVul</li>
    */
   Filters?: Array<AssetFilters>
   /**
-   * 排序字段
+   * <p>排序字段</p>
    */
   By?: string
   /**
-   * 排序方式 asc,desc
+   * <p>排序方式 asc,desc</p>
    */
   Order?: string
 }
@@ -20829,11 +20825,11 @@ EventType取值：
  */
 export interface DescribeAssetImageListResponse {
   /**
-   * 镜像列表
+   * <p>镜像列表</p>
    */
   List?: Array<ImagesInfo>
   /**
-   * 总数量
+   * <p>总数量</p>
    */
   TotalCount?: number
   /**

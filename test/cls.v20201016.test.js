@@ -38,6 +38,16 @@ it("cls.v20201016.CreateKafkaRecharge", async function () {
     }
 })
 
+it("cls.v20201016.OpenClawService", async function () {
+    try {
+       const data = await client.OpenClawService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeExports", async function () {
     try {
        const data = await client.DescribeExports({})

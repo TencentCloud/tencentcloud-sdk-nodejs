@@ -187,40 +187,31 @@ export interface FaceMorphOutput {
  */
 export interface MorphFaceRequest {
   /**
-   * 图片 base64 数据，base64 编码后大小不可超过5M。 
-jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。 
-人员人脸总数量至少2张，不可超过5张。 
-若图片中包含多张人脸，只选取其中人脸面积最大的人脸。 
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。
+   * <p>图片 base64 数据，base64 编码后大小不可超过5M。<br>jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。<br>人员人脸总数量至少2张，不可超过5张。<br>若图片中包含多张人脸，只选取其中人脸面积最大的人脸。<br>支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。</p>
    */
   Images?: Array<string>
   /**
-   * 图片的 Url 。对应图片 base64 编码后大小不可超过5M。jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。 
-Url、Image必须提供一个，如果都提供，只使用 Url。图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。 
-非腾讯云存储的Url速度和稳定性可能受一定影响。 
-支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。 
-人员人脸总数量不可超过5张。 
-若图片中包含多张人脸，只选取其中人脸面积最大的人脸。
+   * <p>图片的 Url 。对应图片 base64 编码后大小不可超过5M。jpg格式长边像素不可超过4000，其他格式图片长边像素不可超2000。<br>Url、Image必须提供一个，如果都提供，只使用 Url。图片存储于腾讯云的Url可保障更高下载速度和稳定性，建议图片存储于腾讯云。<br>非腾讯云存储的Url速度和稳定性可能受一定影响。<br>支持PNG、JPG、JPEG、BMP，不支持 GIF 图片。<br>人员人脸总数量不可超过5张。<br>若图片中包含多张人脸，只选取其中人脸面积最大的人脸。</p>
    */
   Urls?: Array<string>
   /**
-   * 人脸渐变参数。可调整每张图片的展示时长、人像渐变的最长时间
+   * <p>人脸渐变参数。可调整每张图片的展示时长、人像渐变的最长时间</p>
    */
   GradientInfos?: Array<GradientInfo>
   /**
-   * 视频帧率，取值[1,25]。默认10
+   * <p>视频帧率，取值[1,25]。默认10</p>
    */
   Fps?: number
   /**
-   * 视频类型，取值0。目前仅支持MP4格式，默认为MP4格式
+   * <p>视频类型，取值0。目前仅支持MP4格式，默认为MP4格式</p>
    */
   OutputType?: number
   /**
-   * 视频宽度，取值[128,1280]。默认值720
+   * <p>视频宽度，取值[128,1280]。<br>单位：px<br>默认值：720</p>
    */
   OutputWidth?: number
   /**
-   * 视频高度，取值[128,1280]。默认值1280
+   * <p>视频高度，取值[128,1280]。<br>单位：px<br>默认值：1280</p>
    */
   OutputHeight?: number
 }
@@ -341,11 +332,11 @@ export interface FaceCartoonPicResponse {
  */
 export interface MorphFaceResponse {
   /**
-   * 人像渐变任务的Job id
+   * <p>人像渐变任务的Job id</p>
    */
   JobId?: string
   /**
-   * 预估处理时间，粒度为秒
+   * <p>预估处理时间，粒度为秒</p>
    */
   EstimatedProcessTime?: number
   /**

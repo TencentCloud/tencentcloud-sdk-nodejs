@@ -7190,6 +7190,10 @@ false:  不通知下游任务责任人
    * 项目Id
    */
   ProjectId: string
+  /**
+   * 删除任务时是否删除脚本文件
+   */
+  DeleteScript?: boolean
 }
 
 /**

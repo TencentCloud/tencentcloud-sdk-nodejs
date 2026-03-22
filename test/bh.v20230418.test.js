@@ -448,6 +448,16 @@ it("bh.v20230418.EnableExternalAccess", async function () {
     }
 })
 
+it("bh.v20230418.DescribeDeviceCount", async function () {
+    try {
+       const data = await client.DescribeDeviceCount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bh.v20230418.DisableExternalAccess", async function () {
     try {
        const data = await client.DisableExternalAccess({})
@@ -1021,6 +1031,16 @@ it("bh.v20230418.ModifyUser", async function () {
 it("bh.v20230418.DescribeCmdTemplates", async function () {
     try {
        const data = await client.DescribeCmdTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bh.v20230418.DescribeDeviceCountSummary", async function () {
+    try {
+       const data = await client.DescribeDeviceCountSummary({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
