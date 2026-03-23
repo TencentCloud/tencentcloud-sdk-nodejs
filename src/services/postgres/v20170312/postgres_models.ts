@@ -339,6 +339,10 @@ export interface CreateInstancesRequest {
    * <p>实例是否开启删除保护: true-开启删除保护；false-关闭删除保护。</p>
    */
   DeletionProtection?: boolean
+  /**
+   * <p>实例存储类型，可选值：PHYSICAL_LOCAL_SSD：物理机本地ssd硬盘 CLOUD_PREMIUM：高性能云硬盘 CLOUD_SSD：ssd云硬盘 CLOUD_HSSD：增强型ssd云硬盘</p>
+   */
+  StorageType?: string
 }
 
 /**
@@ -759,6 +763,10 @@ export interface DescribeProductConfigRequest {
    * <p>数据库引擎，支持：<br>1、postgresql（云数据库PostgreSQL）；<br>2、mssql_compatible（MSSQL兼容-云数据库PostgreSQL）；<br>如不指定默认使用postgresql。</p>
    */
   DBEngine?: string
+  /**
+   * <p>实例存储类型，根据存储类型返回支持的版本和规格</p><p>枚举值：</p><ul><li>PHYSICAL_LOCAL_SSD： 物理机本地ssd硬盘</li><li>CLOUD_PREMIUM： 高性能云硬盘</li><li>CLOUD_SSD： ssd云硬盘</li><li>CLOUD_HSSD： 增强型ssd云硬盘</li></ul><p>默认值：PHYSICAL_LOCAL_SSD</p>
+   */
+  StorageType?: string
 }
 
 /**
@@ -1745,6 +1753,10 @@ export interface InquiryPriceCreateDBInstancesRequest {
    * <p>DB引擎，默认postgresql，支持如下：<br>postgresql（云数据库PostgreSQL）<br>mssql_compatible（MSSQL兼容-云数据库PostgreSQL）</p>
    */
   DBEngine?: string
+  /**
+   * <p>实例存储类型，可选值：PHYSICAL_LOCAL_SSD：物理机本地ssd硬盘 CLOUD_PREMIUM：高性能云硬盘 CLOUD_SSD：ssd云硬盘 CLOUD_HSSD：增强型ssd云硬盘</p>
+   */
+  StorageType?: string
 }
 
 /**
@@ -2774,6 +2786,10 @@ export interface DescribeClassesRequest {
    * <p>数据库主版本号。例如12，13，可以通过接口<a href="https://cloud.tencent.com/document/product/409/89018">DescribeDBVersions</a>获取。</p>
    */
   DBMajorVersion: string
+  /**
+   * <p>实例存储类型，根据存储类型返回支持的规格。</p><p>枚举值：</p><ul><li>PHYSICAL_LOCAL_SSD： 物理机本地ssd硬盘</li><li>CLOUD_PREMIUM： 高性能云硬盘</li><li>CLOUD_SSD： ssd云硬盘</li><li>CLOUD_HSSD： 增强型ssd云硬盘</li></ul><p>默认值：PHYSICAL_LOCAL_SSD</p>
+   */
+  StorageType?: string
 }
 
 /**
@@ -3951,6 +3967,10 @@ export interface DBInstance {
    * <p>实例是否开启删除保护，取值如下：</p><ul><li>true：开启删除保护</li><li>false：关闭删除保护</li></ul>
    */
   DeletionProtection?: boolean
+  /**
+   * <p>实例存储类型，可选值：PHYSICAL_LOCAL_SSD：物理机本地ssd硬盘 CLOUD_PREMIUM：高性能云硬盘 CLOUD_SSD：ssd云硬盘 CLOUD_HSSD：增强型ssd云硬盘</p>
+   */
+  DBInstanceStorageType?: string
 }
 
 /**
@@ -5521,7 +5541,12 @@ export interface UpgradeDBInstanceKernelVersionResponse {
 /**
  * DescribeDBVersions请求参数结构体
  */
-export type DescribeDBVersionsRequest = null
+export interface DescribeDBVersionsRequest {
+  /**
+   * <p>实例存储类型，根据磁盘类型返回支持的版本</p><p>枚举值：</p><ul><li>PHYSICAL_LOCAL_SSD： 物理机本地ssd硬盘</li><li>CLOUD_PREMIUM： 高性能云硬盘</li><li>CLOUD_SSD： ssd云硬盘</li><li>CLOUD_HSSD： 增强型ssd云硬盘</li></ul><p>默认值：PHYSICAL_LOCAL_SSD</p>
+   */
+  StorageType?: string
+}
 
 /**
  * ModifyDBInstancesProject请求参数结构体

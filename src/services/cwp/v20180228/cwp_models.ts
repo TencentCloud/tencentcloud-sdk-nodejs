@@ -21453,6 +21453,40 @@ export interface DescribeMalwareInfoResponse {
 }
 
 /**
+ * Skill 的信息
+ */
+export interface SkillInfo {
+  /**
+   * Skill名称
+   */
+  SkillName?: string
+  /**
+   * Skill 描述
+   */
+  SkillDesc?: string
+  /**
+   * Skill来源
+   */
+  SkillSource?: string
+  /**
+   * Skill风险标签
+   */
+  Tags?: Array<string>
+  /**
+   * skill风险描述
+   */
+  RiskDesc?: string
+  /**
+   * 证据链
+   */
+  Evidence?: string
+  /**
+   * 事件ID
+   */
+  Id?: number
+}
+
+/**
  * DeleteRiskDnsPolicy返回参数结构体
  */
 export interface DeleteRiskDnsPolicyResponse {
@@ -26381,6 +26415,24 @@ export interface ModifyWarningSettingRequest {
 }
 
 /**
+ * ExportBruteAttacks返回参数结构体
+ */
+export interface ExportBruteAttacksResponse {
+  /**
+   * 该参数已废弃
+   */
+  DownloadUrl?: string
+  /**
+   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ExportVulDetectionReport返回参数结构体
  */
 export interface ExportVulDetectionReportResponse {
@@ -28252,6 +28304,20 @@ export interface DescribePatchInfoRequest {
 }
 
 /**
+ * DescribeSkillInfo返回参数结构体
+ */
+export interface DescribeSkillInfoResponse {
+  /**
+   * skill信息列表
+   */
+  SkillInfoList?: Array<SkillInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 阻断白名单展示列表，包含了机器的信息
  */
 export interface BanWhiteListDetail {
@@ -29863,21 +29929,13 @@ export interface DescribeAccountStatisticsRequest {
 }
 
 /**
- * ExportBruteAttacks返回参数结构体
+ * DescribeSkillInfo请求参数结构体
  */
-export interface ExportBruteAttacksResponse {
+export interface DescribeSkillInfoRequest {
   /**
-   * 该参数已废弃
+   * 事件id
    */
-  DownloadUrl?: string
-  /**
-   * 任务ID,需要到接口“异步导出任务”ExportTasks获取DownloadUrl下载地址
-   */
-  TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Ids: Array<number | bigint>
 }
 
 /**

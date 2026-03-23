@@ -538,6 +538,16 @@ it("cwp.v20180228.ModifyLoginWhiteRecord", async function () {
     }
 })
 
+it("cwp.v20180228.DescribeSkillInfo", async function () {
+    try {
+       const data = await client.DescribeSkillInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeBaselineScanSchedule", async function () {
     try {
        const data = await client.DescribeBaselineScanSchedule({})

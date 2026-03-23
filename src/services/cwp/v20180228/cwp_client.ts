@@ -912,6 +912,7 @@ import {
   ExportBaselineItemDetectListRequest,
   CreateNetAttackWhiteListRequest,
   DescribeMalwareInfoResponse,
+  SkillInfo,
   DeleteRiskDnsPolicyResponse,
   DuplicateHosts,
   DescribeLogStorageRecordRequest,
@@ -1104,6 +1105,7 @@ import {
   DescribeLoginWhiteListRequest,
   DescribeAssetDatabaseCountRequest,
   ModifyWarningSettingRequest,
+  ExportBruteAttacksResponse,
   ExportVulDetectionReportResponse,
   DescribeScanScheduleRequest,
   CheckFirstScanBaselineRequest,
@@ -1185,6 +1187,7 @@ import {
   ModifyBanModeRequest,
   DescribeBaselineDefaultStrategyListResponse,
   DescribePatchInfoRequest,
+  DescribeSkillInfoResponse,
   BanWhiteListDetail,
   DeleteScanTaskResponse,
   ModifyFileTamperRuleStatusRequest,
@@ -1244,7 +1247,7 @@ import {
   DescribeLicenseBindListRequest,
   DeleteLicenseRecordAllRequest,
   DescribeAccountStatisticsRequest,
-  ExportBruteAttacksResponse,
+  DescribeSkillInfoRequest,
   JavaMemShellDetail,
   WarningObject,
   DescribeBaselineHostDetectListResponse,
@@ -1883,6 +1886,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyLoginWhiteRecordResponse) => void
   ): Promise<ModifyLoginWhiteRecordResponse> {
     return this.request("ModifyLoginWhiteRecord", req, cb)
+  }
+
+  /**
+   * 补丁详情
+   */
+  async DescribeSkillInfo(
+    req: DescribeSkillInfoRequest,
+    cb?: (error: string, rep: DescribeSkillInfoResponse) => void
+  ): Promise<DescribeSkillInfoResponse> {
+    return this.request("DescribeSkillInfo", req, cb)
   }
 
   /**

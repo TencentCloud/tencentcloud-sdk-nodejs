@@ -10083,6 +10083,10 @@ export interface SyncDubbingRequest {
    */
   AudioLang?: string
   /**
+   * <p>输出相关参数</p><p>可以指定输出形式等</p>
+   */
+  Output?: SyncDubbingOutputOption
+  /**
    * <p>扩展参数，json字符串</p><p>synExt    Object    语音合成扩展参数<br>    -duration    Float    合成音频时长，单位秒，示例：5.2<br>    -sampleRate    Integer    合成音频采样率，默认16000，支持[8000,16000,22050,32000,44100]<br>    -pitch    Integer    音调，默认0原音色输出，取值[-12, 12]<br>cloneExt    Object    音色克隆扩展参数<br>    -timeRanges    Float[][]    指定克隆音频时间范围，默认[[0, 20]]，示例[[5.2, 10], [45, 59.8]]</p>
    */
   ExtParam?: string
@@ -14433,7 +14437,7 @@ export interface DescribeBatchTaskDetailRequest {
  */
 export interface DescribeUsageDataResponse {
   /**
-   * 媒体处理统计数据概览，展示所查询任务的概览以及详细数据。
+   * <p>媒体处理统计数据概览，展示所查询任务的概览以及详细数据。</p>
    */
   Data?: Array<TaskStatData>
   /**
@@ -15875,6 +15879,16 @@ export interface ArtifactRepairConfig {
 <li>strong</li>
 默认值：weak。
 注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+}
+
+/**
+ * 同步配音输出参数设置
+ */
+export interface SyncDubbingOutputOption {
+  /**
+   * <p>合成结果输出类型</p><p>枚举值：</p><ul><li>data： 音频base64编码</li><li>url： 音频url，有效期24小时</li></ul>
    */
   Type?: string
 }
@@ -17984,10 +17998,18 @@ export interface SyncDubbingResponse {
    */
   AudioData?: string
   /**
+   * <p>合成音频url，有效期24小时</p>
+   */
+  AudioUrl?: string
+  /**
    * <p>克隆的音色Id。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VoiceId?: string
+  /**
+   * <p>扩展信息，json字符串</p><p>duration: 结果音频时长，单位秒</p>
+   */
+  ExtInfo?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20235,49 +20257,19 @@ export interface DescribeSmartSubtitleTemplatesResponse {
  */
 export interface DescribeUsageDataRequest {
   /**
-   * 起始日期。使用 ISO 日期格式。
+   * <p>起始日期。使用 ISO 日期格式。</p>
    */
   StartTime: string
   /**
-   * 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+   * <p>结束日期，需大于等于起始日期。使用 <a href="https://cloud.tencent.com/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F">ISO 日期格式</a>。</p>
    */
   EndTime: string
   /**
-   * 查询媒体处理任务类型，默认查询转码。
-<li>Transcode：转码</li>
-<li>Enhance：增强</li>
-<li>AIAnalysis：智能分析</li>
-<li>AIRecognition：智能识别</li>
-<li>AIReview：内容审核</li>
-<li>Snapshot：截图</li>
-<li>AnimatedGraphics：转动图</li>
-<li>AiQualityControl：质检</li>
-<li>Evaluation：视频评测</li>
-<li>ImageProcess: 图片处理</li>
-<li>AddBlindWatermark: 添加基础版权数字水印</li>
-<li>AddNagraWatermark: 添加NAGRA数字水印</li>
-<li>ExtractBlindWatermark: 提取基础版权数字水印</li>
-<li>AIGC: AIGC</li>
+   * <p>查询媒体处理任务类型，默认查询转码。</p><li>Transcode：转码</li><li>Enhance：增强</li><li>AIAnalysis：智能分析</li><li>AIRecognition：智能识别</li><li>AIReview：内容审核</li><li>Snapshot：截图</li><li>AnimatedGraphics：转动图</li><li>AiQualityControl：质检</li><li>Evaluation：视频评测</li><li>ImageProcess: 图片处理</li><li>AddBlindWatermark: 添加基础版权数字水印</li><li>AddNagraWatermark: 添加NAGRA数字水印</li><li>ExtractBlindWatermark: 提取基础版权数字水印</li><li>AIGC: AIGCVideo</li>
    */
   Types?: Array<string>
   /**
-   * 媒体处理园区，默认返回 ap-guangzhou 园区。
-<li>ap-guangzhou：广州</li>
-<li>ap-hongkong：中国香港</li>
-<li>ap-taipei：中国台北</li>
-<li>ap-singapore：新加坡</li>
-<li>ap-mumbai：印度</li>
-<li>ap-jakarta：雅加达</li>
-<li>ap-seoul：首尔</li>
-<li>ap-bangkok：泰国</li>
-<li>ap-tokyo：日本</li>
-<li>na-siliconvalley：美国硅谷</li>
-<li>na-ashburn：弗吉尼亚</li>
-<li>na-toronto：多伦多</li>
-<li>sa-saopaulo：圣保罗</li>
-<li>eu-frankfurt：法兰克福</li>
-<li>eu-moscow：俄罗斯</li>
-<li>aws：AWS</li>
+   * <p>媒体处理园区，默认返回 ap-guangzhou 园区。</p><li>ap-guangzhou：广州</li><li>ap-hongkong：中国香港</li><li>ap-taipei：中国台北</li><li>ap-singapore：新加坡</li><li>ap-mumbai：印度</li><li>ap-jakarta：雅加达</li><li>ap-seoul：首尔</li><li>ap-bangkok：泰国</li><li>ap-tokyo：日本</li><li>na-siliconvalley：美国硅谷</li><li>na-ashburn：弗吉尼亚</li><li>na-toronto：多伦多</li><li>sa-saopaulo：圣保罗</li><li>eu-frankfurt：法兰克福</li><li>eu-moscow：俄罗斯</li><li>aws：AWS</li>
    */
   ProcessRegions?: Array<string>
 }

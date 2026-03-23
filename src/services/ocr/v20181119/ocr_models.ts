@@ -89,33 +89,37 @@ export interface NonTaxItem {
  */
 export interface TextWaybill {
   /**
-   * 收件人姓名
+   * <p>收件人姓名</p>
    */
   RecName?: WaybillObj
   /**
-   * 收件人手机号
+   * <p>收件人手机号</p>
    */
   RecNum?: WaybillObj
   /**
-   * 收件人地址
+   * <p>收件人地址</p>
    */
   RecAddr?: WaybillObj
   /**
-   * 寄件人姓名
+   * <p>寄件人姓名</p>
    */
   SenderName?: WaybillObj
   /**
-   * 寄件人手机号
+   * <p>寄件人手机号</p>
    */
   SenderNum?: WaybillObj
   /**
-   * 寄件人地址
+   * <p>寄件人地址</p>
    */
   SenderAddr?: WaybillObj
   /**
-   * 运单号
+   * <p>运单号, 当同时存在 母 / 子 运单号时， 该字段为子运单号</p>
    */
   WaybillNum?: WaybillObj
+  /**
+   * <p>母运单号， 当不存在母运单号时， 该字段为不存在</p>
+   */
+  MainWaybillNum?: WaybillObj
 }
 
 /**

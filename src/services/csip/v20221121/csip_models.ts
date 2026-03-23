@@ -402,6 +402,40 @@ export interface AccessKeyAlarmInfo {
 }
 
 /**
+ * DescribeOtherCloudAssets返回参数结构体
+ */
+export interface DescribeOtherCloudAssetsResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 资产总数
+   */
+  Data?: Array<DBAssetVO>
+  /**
+   * 地域枚举
+   */
+  RegionList?: Array<FilterDataObject>
+  /**
+   * 资产类型枚举
+   */
+  AssetTypeList?: Array<FilterDataObject>
+  /**
+   * Vpc枚举
+   */
+  VpcList?: Array<FilterDataObject>
+  /**
+   * Appid枚举
+   */
+  AppIdList?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAssetViewVulRiskList返回参数结构体
  */
 export interface DescribeAssetViewVulRiskListResponse {
@@ -473,6 +507,20 @@ export interface DescribeOrganizationUserInfoRequest {
    * 不支持多云
    */
   NotSupportCloud?: boolean
+}
+
+/**
+ * DescribeTaskLogURL返回参数结构体
+ */
+export interface DescribeTaskLogURLResponse {
+  /**
+   * 返回报告临时下载url
+   */
+  Data?: Array<TaskLogURL>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5239,97 +5287,17 @@ export interface DescribeCVMAssetInfoRequest {
 }
 
 /**
- * 资产视角的弱口令风险
+ * DescribeAIAgentAssetList请求参数结构体
  */
-export interface AssetViewWeakPassRisk {
+export interface DescribeAIAgentAssetListRequest {
   /**
-   * 影响资产
+   * 集团账号的成员id
    */
-  AffectAsset?: string
+  MemberId?: Array<string>
   /**
-   * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
+   * 筛选
    */
-  Level?: string
-  /**
-   * 资产类型
-   */
-  InstanceType?: string
-  /**
-   * 组件
-   */
-  Component?: string
-  /**
-   * 服务
-   */
-  Service?: string
-  /**
-   * 最近识别时间
-   */
-  RecentTime?: string
-  /**
-   * 首次识别时间
-   */
-  FirstTime?: string
-  /**
-   * 状态，0未处理、1已处置、2已忽略
-   */
-  Status?: number
-  /**
-   * ID，处理风险使用
-   */
-  Id?: string
-  /**
-   * 前端索引
-   */
-  Index?: string
-  /**
-   * 实例id
-   */
-  InstanceId?: string
-  /**
-   * 实例名
-   */
-  InstanceName?: string
-  /**
-   * 用户appid
-   */
-  AppId?: string
-  /**
-   * 用户昵称
-   */
-  Nick?: string
-  /**
-   * 用户uin
-   */
-  Uin?: string
-  /**
-   * 弱口令类型
-   */
-  PasswordType?: string
-  /**
-   * 来源
-   */
-  From?: string
-  /**
-   * 漏洞类型
-   */
-  VULType?: string
-  /**
-   * 漏洞url
-   */
-  VULURL?: string
-  /**
-   * 修复建议
-   */
-  Fix?: string
-  /**
-   * 证明
-   */
-  Payload?: string
-  /**
-   * 端口
-   */
-  Port?: number
+  Filter?: Filter
 }
 
 /**
@@ -6349,13 +6317,17 @@ export interface DescribeRiskRulesRequest {
 }
 
 /**
- * DescribeTaskLogURL返回参数结构体
+ * DescribeAIAgentAssetList返回参数结构体
  */
-export interface DescribeTaskLogURLResponse {
+export interface DescribeAIAgentAssetListResponse {
   /**
-   * 返回报告临时下载url
+   * 资产列表
    */
-  Data?: Array<TaskLogURL>
+  AssetList?: Array<AIAgentAsset>
+  /**
+   * 资产总数
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6977,90 +6949,50 @@ export interface Filter {
 }
 
 /**
- * 访问密钥资产信息
+ * Ai Agent 资产信息列表项
  */
-export interface AccessKeyAsset {
+export interface AIAgentAsset {
   /**
-   * AK 的id
+   * ID 标识
    */
-  ID?: number
+  ID?: string
   /**
-   * AK名称
+   * agent 名称
    */
-  Name?: string
+  AgentName?: string
   /**
-   * 备注
+   * agent 使用模型名称
    */
-  Remark?: string
+  AgentModel?: Array<string>
   /**
-   * 账号所属APPID
+   * 实例 ID
    */
-  AppID?: number
+  InstanceID?: string
   /**
-   * 所属主账号Uin
+   * metadata 风险列表。有如下枚举值: 1. AK_TMP  2. USER_DATA
    */
-  Uin?: string
+  MetadataRiskList?: Array<string>
   /**
-   * 主账号昵称
+   * 首次检出时间
    */
-  Nickname?: string
+  IdentityTimeFirst?: string
   /**
-   * 所属子账号Uin
+   * 最近检出时间
    */
-  SubUin?: string
+  IdentityTimeLast?: string
   /**
-   * 所属子账号昵称
+   * 检出方式。有如下枚举值 1. FINGER 资产指纹方式检出 2. NETWORK 网络访问方式检出
    */
-  SubNickname?: string
+  IdentityMethod?: string
   /**
-   * 0 主账号AK
-1 子账号AK
-2 临时密钥
+   * 暴露状态。有如下枚举值。1. EXPOSED；2.UNEXPOSED；
+3. UNKNOWN;
    */
-  Type?: number
+  ExposureStatus?: string
   /**
-   * 安全建议 枚举
-0 正常
-1 立即处理
-2 建议加固
+   * metadata 有风险时对应路径
    */
-  Advice?: number
-  /**
-   * 告警信息列表
-   */
-  AccessKeyAlarmList?: Array<AccessKeyAlarmInfo>
-  /**
-   * 风险信息列表
-   */
-  AccessKeyRiskList?: Array<AccessKeyAlarmInfo>
-  /**
-   * 源IP数量
-   */
-  IPCount?: number
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 最近访问时间
-   */
-  LastAccessTime?: string
-  /**
-   * AK状态 
-0:禁用
-1:已启用
-2:已删除(已在cam侧删除，安全中心仍然存留之前的记录)
-   */
-  Status?: number
-  /**
-   * 0 表示已检测
-1 表示检测中
-   */
-  CheckStatus?: number
-  /**
-   * 云厂商类型 0:腾讯云 1:亚马逊云 2:微软云 3:谷歌云 4:阿里云 5:华为云
-   */
-  CloudType?: number
+  MetadataRiskURL?: string
 }
 
 /**
@@ -9724,6 +9656,36 @@ export interface ClbListenerListInfo {
 }
 
 /**
+ * UpdateAccessKeyRemark请求参数结构体
+ */
+export interface UpdateAccessKeyRemarkRequest {
+  /**
+   * 备注
+   */
+  Remark: string
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 源IP 名称
+   */
+  SourceIPList?: Array<string>
+  /**
+   * ak名称
+   */
+  AccessKeyList?: Array<string>
+  /**
+   * 源IP的ID
+   */
+  SourceIPIDList?: Array<number | bigint>
+  /**
+   * AK的ID
+   */
+  AccessKeyIDList?: Array<number | bigint>
+}
+
+/**
  * 调用源IP 外部账号信息
  */
 export interface SourceIPVpcInfo {
@@ -9985,37 +9947,97 @@ export interface DescribeRiskCallRecordRequest {
 }
 
 /**
- * DescribeOtherCloudAssets返回参数结构体
+ * 资产视角的弱口令风险
  */
-export interface DescribeOtherCloudAssetsResponse {
+export interface AssetViewWeakPassRisk {
   /**
-   * 总数
+   * 影响资产
    */
-  Total?: number
+  AffectAsset?: string
   /**
-   * 资产总数
+   * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
    */
-  Data?: Array<DBAssetVO>
+  Level?: string
   /**
-   * 地域枚举
+   * 资产类型
    */
-  RegionList?: Array<FilterDataObject>
+  InstanceType?: string
   /**
-   * 资产类型枚举
+   * 组件
    */
-  AssetTypeList?: Array<FilterDataObject>
+  Component?: string
   /**
-   * Vpc枚举
+   * 服务
    */
-  VpcList?: Array<FilterDataObject>
+  Service?: string
   /**
-   * Appid枚举
+   * 最近识别时间
    */
-  AppIdList?: Array<FilterDataObject>
+  RecentTime?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 首次识别时间
    */
-  RequestId?: string
+  FirstTime?: string
+  /**
+   * 状态，0未处理、1已处置、2已忽略
+   */
+  Status?: number
+  /**
+   * ID，处理风险使用
+   */
+  Id?: string
+  /**
+   * 前端索引
+   */
+  Index?: string
+  /**
+   * 实例id
+   */
+  InstanceId?: string
+  /**
+   * 实例名
+   */
+  InstanceName?: string
+  /**
+   * 用户appid
+   */
+  AppId?: string
+  /**
+   * 用户昵称
+   */
+  Nick?: string
+  /**
+   * 用户uin
+   */
+  Uin?: string
+  /**
+   * 弱口令类型
+   */
+  PasswordType?: string
+  /**
+   * 来源
+   */
+  From?: string
+  /**
+   * 漏洞类型
+   */
+  VULType?: string
+  /**
+   * 漏洞url
+   */
+  VULURL?: string
+  /**
+   * 修复建议
+   */
+  Fix?: string
+  /**
+   * 证明
+   */
+  Payload?: string
+  /**
+   * 端口
+   */
+  Port?: number
 }
 
 /**
@@ -10167,33 +10189,90 @@ export interface CreateDomainAndIpResponse {
 }
 
 /**
- * UpdateAccessKeyRemark请求参数结构体
+ * 访问密钥资产信息
  */
-export interface UpdateAccessKeyRemarkRequest {
+export interface AccessKeyAsset {
+  /**
+   * AK 的id
+   */
+  ID?: number
+  /**
+   * AK名称
+   */
+  Name?: string
   /**
    * 备注
    */
-  Remark: string
+  Remark?: string
   /**
-   * 集团账号的成员id
+   * 账号所属APPID
    */
-  MemberId?: Array<string>
+  AppID?: number
   /**
-   * 源IP 名称
+   * 所属主账号Uin
    */
-  SourceIPList?: Array<string>
+  Uin?: string
   /**
-   * ak名称
+   * 主账号昵称
    */
-  AccessKeyList?: Array<string>
+  Nickname?: string
   /**
-   * 源IP的ID
+   * 所属子账号Uin
    */
-  SourceIPIDList?: Array<number | bigint>
+  SubUin?: string
   /**
-   * AK的ID
+   * 所属子账号昵称
    */
-  AccessKeyIDList?: Array<number | bigint>
+  SubNickname?: string
+  /**
+   * 0 主账号AK
+1 子账号AK
+2 临时密钥
+   */
+  Type?: number
+  /**
+   * 安全建议 枚举
+0 正常
+1 立即处理
+2 建议加固
+   */
+  Advice?: number
+  /**
+   * 告警信息列表
+   */
+  AccessKeyAlarmList?: Array<AccessKeyAlarmInfo>
+  /**
+   * 风险信息列表
+   */
+  AccessKeyRiskList?: Array<AccessKeyAlarmInfo>
+  /**
+   * 源IP数量
+   */
+  IPCount?: number
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 最近访问时间
+   */
+  LastAccessTime?: string
+  /**
+   * AK状态 
+0:禁用
+1:已启用
+2:已删除(已在cam侧删除，安全中心仍然存留之前的记录)
+   */
+  Status?: number
+  /**
+   * 0 表示已检测
+1 表示检测中
+   */
+  CheckStatus?: number
+  /**
+   * 云厂商类型 0:腾讯云 1:亚马逊云 2:微软云 3:谷歌云 4:阿里云 5:华为云
+   */
+  CloudType?: number
 }
 
 /**

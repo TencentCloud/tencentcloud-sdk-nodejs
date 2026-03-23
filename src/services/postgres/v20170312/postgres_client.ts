@@ -748,7 +748,7 @@ export class Client extends AbstractClient {
    * 本接口（DescribeDBVersions）用于查询支持的数据库版本。
    */
   async DescribeDBVersions(
-    req?: DescribeDBVersionsRequest,
+    req: DescribeDBVersionsRequest,
     cb?: (error: string, rep: DescribeDBVersionsResponse) => void
   ): Promise<DescribeDBVersionsResponse> {
     return this.request("DescribeDBVersions", req, cb)

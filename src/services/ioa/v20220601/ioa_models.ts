@@ -576,7 +576,7 @@ export interface CreateDeviceVirtualGroupRequest {
    */
   Description?: string
   /**
-   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios ； 默认值0）(只支持32位)
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)
    */
   OsType?: number
   /**
@@ -1026,7 +1026,7 @@ export interface CreateDLPFileDetectionTaskRequest {
  */
 export interface ExportDeviceDownloadTaskRequest {
   /**
-   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios；默认值0）
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)
    */
   OsType?: number
   /**
@@ -1229,7 +1229,7 @@ export interface DescribeDeviceVirtualGroupsRequest {
    */
   Condition?: Condition
   /**
-   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios   默认值0）
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)
    */
   OsType?: number
   /**
@@ -2371,7 +2371,7 @@ export interface ModifyVirtualDeviceGroupsRequest {
    */
   DeviceVirtualGroupIds?: Array<number | bigint>
   /**
-   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios   默认值0）
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)
    */
   OsType?: number
 }
@@ -2481,7 +2481,7 @@ export interface DescribeVirtualDevicesRequest {
    */
   DeviceVirtualGroupId?: number
   /**
-   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios   默认值0）
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)
    */
   OsType?: number
   /**
@@ -2758,7 +2758,7 @@ SaaS需要调用分组接口DescribeDeviceChildGroups获取对应分组id
    */
   GroupId?: number
   /**
-   * 操作系统类型（0: win，1：linux，2: mac，4：android，5：ios   默认值0），需要和GroupId或者GroupIds匹配
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)，需要和GroupId或者GroupIds匹配
    */
   OsType?: number
   /**
@@ -2899,7 +2899,7 @@ export interface DescribeDeviceHardwareInfoListRequest {
    */
   GroupId: number
   /**
-   * 【必填】操作系统类型（0: win，1：linux，2: mac，4：android，5：ios   默认值0），需要和GroupId或者GroupIds匹配
+   * 【必填】系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)，需要和GroupId或者GroupIds匹配
    */
   OsType: number
   /**

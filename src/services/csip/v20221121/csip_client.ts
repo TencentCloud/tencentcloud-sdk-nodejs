@@ -28,9 +28,11 @@ import {
   StandardItem,
   HighBaseLineRiskItem,
   AccessKeyAlarmInfo,
+  DescribeOtherCloudAssetsResponse,
   DescribeAssetViewVulRiskListResponse,
   DescribeRepositoryImageAssetsRequest,
   DescribeOrganizationUserInfoRequest,
+  DescribeTaskLogURLResponse,
   ModifyUebaRuleSwitchResponse,
   FilterDataObject,
   ReportItemKey,
@@ -144,7 +146,7 @@ import {
   DescribePublicIpAssetsRequest,
   AssetClusterPod,
   DescribeCVMAssetInfoRequest,
-  AssetViewWeakPassRisk,
+  DescribeAIAgentAssetListRequest,
   UpdateAccessKeyAlarmStatusResponse,
   CFGViewCFGRisk,
   ServiceSupport,
@@ -176,7 +178,7 @@ import {
   DescribeVulViewVulRiskListRequest,
   DescribeAssetRiskListRequest,
   DescribeRiskRulesRequest,
-  DescribeTaskLogURLResponse,
+  DescribeAIAgentAssetListResponse,
   VulTrend,
   DescribeSourceIPAssetRequest,
   DescribeVulRiskListRequest,
@@ -189,7 +191,7 @@ import {
   DescribeVulViewVulRiskListResponse,
   CreateAccessKeyCheckTaskRequest,
   Filter,
-  AccessKeyAsset,
+  AIAgentAsset,
   DescribeRiskCenterWebsiteRiskListRequest,
   DescribeCallRecordRequest,
   VulRiskItem,
@@ -260,6 +262,7 @@ import {
   DescribeOtherCloudAssetsRequest,
   ModifyRiskCenterScanTaskRequest,
   ClbListenerListInfo,
+  UpdateAccessKeyRemarkRequest,
   SourceIPVpcInfo,
   AccessKeyUser,
   DescribeRiskCenterServerRiskListResponse,
@@ -272,10 +275,10 @@ import {
   DescribeCFWAssetStatisticsRequest,
   DescribeAccessKeyUserListResponse,
   DescribeRiskCallRecordRequest,
-  DescribeOtherCloudAssetsResponse,
+  AssetViewWeakPassRisk,
   AssetCluster,
   CreateDomainAndIpResponse,
-  UpdateAccessKeyRemarkRequest,
+  AccessKeyAsset,
   DescribeTaskLogListResponse,
   DescribeDbAssetsResponse,
   RiskCallRecord,
@@ -422,6 +425,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddNewBindRoleUserResponse) => void
   ): Promise<AddNewBindRoleUserResponse> {
     return this.request("AddNewBindRoleUser", req, cb)
+  }
+
+  /**
+   * 获取 AI agent 资产列表
+   */
+  async DescribeAIAgentAssetList(
+    req: DescribeAIAgentAssetListRequest,
+    cb?: (error: string, rep: DescribeAIAgentAssetListResponse) => void
+  ): Promise<DescribeAIAgentAssetListResponse> {
+    return this.request("DescribeAIAgentAssetList", req, cb)
   }
 
   /**

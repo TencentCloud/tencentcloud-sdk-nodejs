@@ -498,130 +498,133 @@ export interface UpdateOrganizationResponse {
  */
 export interface DescribeDeviceData {
   /**
-   * 设备ID
+   * <p>设备ID</p>
    */
   DeviceId?: string
   /**
-   * 设备编码（国标设备即我们为设备生成的20位国标编码，rtmp 设备为10 位设备编码）
+   * <p>设备编码（国标设备即我们为设备生成的20位国标编码，rtmp 设备为10 位设备编码）</p>
    */
   Code?: string
   /**
-   * 设备名称
+   * <p>设备名称</p>
    */
   Name?: string
   /**
-   * 设备接入协议，1:RTMP,2:GB,3:GW
+   * <p>设备接入协议，1:RTMP,2:GB,3:GW</p>
    */
   AccessProtocol?: number
   /**
-   * 设备类型，1:IPC,2:NVR
+   * <p>设备类型，1:IPC,2:NVR</p>
    */
   Type?: number
   /**
-   * 设备接入服务节点id
+   * <p>设备接入服务节点id</p>
    */
   ClusterId?: string
   /**
-   * 设备接入服务节点名称
-
+   * <p>设备接入服务节点名称</p>
    */
   ClusterName?: string
   /**
-   * 设备流传输协议，1:UDP,2:TCP
+   * <p>设备流传输协议，1:UDP,2:TCP</p>
    */
   TransportProtocol?: number
   /**
-   * 设备密码
+   * <p>设备密码</p>
    */
   Password?: string
   /**
-   * 设备描述
+   * <p>设备描述</p>
    */
   Description?: string
   /**
-   * sip服务ID
+   * <p>sip服务ID</p>
    */
   SipId?: string
   /**
-   * sip服务域
+   * <p>sip服务域</p>
    */
   SipDomain?: string
   /**
-   * sip服务IP地址
+   * <p>sip服务IP地址</p>
    */
   SipIp?: string
   /**
-   * sip服务端口
+   * <p>sip服务端口</p>
    */
   SipPort?: number
   /**
-   * Rtmp设备推流地址(仅rtmp设备有效)
+   * <p>Rtmp设备推流地址(仅rtmp设备有效)</p>
    */
   PushStreamUrl?: string
   /**
-   * 设备状态，0:未注册,1:在线,2:离线,3:禁用
+   * <p>设备状态，0:未注册,1:在线,2:离线,3:禁用</p>
    */
   Status?: number
   /**
-   * 设备所属组织ID
+   * <p>设备所属组织ID</p>
    */
   OrganizationId?: string
   /**
-   * 设备接入网关ID，从查询网关列表接口中获取（仅网关接入需要）
+   * <p>设备接入网关ID，从查询网关列表接口中获取（仅网关接入需要）</p>
    */
   GatewayId?: string
   /**
-   * 设备所属网关名称
+   * <p>设备所属网关名称</p>
    */
   GatewayName?: string
   /**
-   * 设备网关协议名称
+   * <p>设备网关协议名称</p>
    */
   ProtocolTypeName?: string
   /**
-   * 网关接入协议类型，1.海康SDK，2.大华SDK，3.宇视SDK，4.Onvif（仅网关接入需要）
+   * <p>网关接入协议类型，1.海康SDK，2.大华SDK，3.宇视SDK，4.Onvif（仅网关接入需要）</p>
    */
   ProtocolType?: number
   /**
-   * 设备接入IP
+   * <p>设备接入IP</p>
    */
   Ip?: string
   /**
-   * 设备Port
+   * <p>设备Port</p>
    */
   Port?: number
   /**
-   * 设备用户名
+   * <p>设备用户名</p>
    */
   Username?: string
   /**
-   * 设备地域
+   * <p>设备地域</p>
    */
   Region?: string
   /**
-   * 设备厂商
+   * <p>设备厂商</p>
    */
   Manufacturer?: string
   /**
-   * 音频关开（0：关闭；1：开启）关闭时丢弃音频
+   * <p>音频关开（0：关闭；1：开启）关闭时丢弃音频</p>
    */
   AudioSwitch?: number
   /**
-   * 订阅开关（0：关闭；1：开启）默认开启，开启状态下会订阅设备通道变化，仅国标NVR设备有效
+   * <p>订阅开关（0：关闭；1：开启）默认开启，开启状态下会订阅设备通道变化，仅国标NVR设备有效</p>
    */
   SubscribeSwitch?: number
   /**
-   * RTMP推流地址自定义appName
+   * <p>RTMP推流地址自定义appName</p>
    */
   AppName?: string
   /**
-   * RTMP推流地址自定义streamName
+   * <p>RTMP推流地址自定义streamName</p>
    */
   StreamName?: string
   /**
-   * 是否开启静音帧（0：关闭；1 开启）
+   * <p>是否开启静音帧（0：关闭；1 开启）</p>
    */
   SilentFrameSwitch?: number
+  /**
+   * <p>Rtmp设备安全认证推流地址(仅rtmp设备有效)</p>
+   */
+  PushStreamSecureUrl?: string
 }
 
 /**

@@ -617,6 +617,7 @@ import {
   AsrFullTextConfigureInfo,
   AiAnalysisTaskVideoRemakeResult,
   ArtifactRepairConfig,
+  SyncDubbingOutputOption,
   CreateAIRecognitionTemplateRequest,
   DescribeTaskDetailRequest,
   AiAnalysisTaskDubbingInput,

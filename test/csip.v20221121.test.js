@@ -148,6 +148,16 @@ it("csip.v20221121.AddNewBindRoleUser", async function () {
     }
 })
 
+it("csip.v20221121.DescribeAIAgentAssetList", async function () {
+    try {
+       const data = await client.DescribeAIAgentAssetList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeVULList", async function () {
     try {
        const data = await client.DescribeVULList({})
