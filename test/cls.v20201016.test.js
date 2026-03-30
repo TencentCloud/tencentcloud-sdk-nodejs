@@ -428,9 +428,9 @@ it("cls.v20201016.DeleteSplunkDeliver", async function () {
     }
 })
 
-it("cls.v20201016.DescribeClusterBaseMetricConfigs", async function () {
+it("cls.v20201016.DescribeConsoles", async function () {
     try {
-       const data = await client.DescribeClusterBaseMetricConfigs({})
+       const data = await client.DescribeConsoles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -878,9 +878,9 @@ it("cls.v20201016.ModifyConfigExtra", async function () {
     }
 })
 
-it("cls.v20201016.ModifyAlarmShield", async function () {
+it("cls.v20201016.DescribeClusterBaseMetricConfigs", async function () {
     try {
-       const data = await client.ModifyAlarmShield({})
+       const data = await client.DescribeClusterBaseMetricConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1058,6 +1058,16 @@ it("cls.v20201016.DescribeIndex", async function () {
     }
 })
 
+it("cls.v20201016.DeleteConsole", async function () {
+    try {
+       const data = await client.DeleteConsole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeWebCallbacks", async function () {
     try {
        const data = await client.DescribeWebCallbacks({})
@@ -1211,6 +1221,16 @@ it("cls.v20201016.DeleteConfigExtra", async function () {
 it("cls.v20201016.CheckFunction", async function () {
     try {
        const data = await client.CheckFunction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyConsole", async function () {
+    try {
+       const data = await client.ModifyConsole({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1391,6 +1411,16 @@ it("cls.v20201016.DescribeKafkaConsumerTopics", async function () {
 it("cls.v20201016.DescribeConsumerGroups", async function () {
     try {
        const data = await client.DescribeConsumerGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyAlarmShield", async function () {
+    try {
+       const data = await client.ModifyAlarmShield({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1621,6 +1651,16 @@ it("cls.v20201016.DescribeMachineGroupConfigs", async function () {
 it("cls.v20201016.ModifyDataTransform", async function () {
     try {
        const data = await client.ModifyDataTransform({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.CreateConsole", async function () {
+    try {
+       const data = await client.CreateConsole({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -34,7 +34,7 @@ import {
   DescribeOrganizationUserInfoRequest,
   DescribeTaskLogURLResponse,
   ModifyUebaRuleSwitchResponse,
-  FilterDataObject,
+  DescribeAKAnalysisDetailResponse,
   ReportItemKey,
   CreateAccessKeySyncTaskRequest,
   AddNewBindRoleUserRequest,
@@ -59,6 +59,7 @@ import {
   DescribeConfigCheckRulesRequest,
   DescribeRiskCallRecordResponse,
   DescribeScanReportListRequest,
+  ModifyRiskCenterRiskStatusRequest,
   NewAlertKey,
   IpAssetListVO,
   UebaCustomRule,
@@ -102,6 +103,7 @@ import {
   DescribeSourceIPAssetResponse,
   DescribeScanReportListResponse,
   DescribeSearchBugInfoRequest,
+  DescribeRiskCallRecordRequest,
   TaskLogURL,
   CheckViewRiskItem,
   AssetViewVULRiskData,
@@ -126,7 +128,7 @@ import {
   DescribeVpcAssetsRequest,
   TaskAssetObject,
   DbAssetInfo,
-  ModifyRiskCenterRiskStatusRequest,
+  FilterDataObject,
   DescribeExposePathRequest,
   RiskCenterStatusKey,
   ExposesItem,
@@ -241,7 +243,7 @@ import {
   ModifyOrganizationAccountStatusRequest,
   DescribeClusterAssetsResponse,
   DescribeVULListResponse,
-  DescribeExposeAssetCategoryRequest,
+  DescribeAKAnalysisDetailRequest,
   DescribeAbnormalCallRecordResponse,
   DescribeSubUserInfoResponse,
   DescribeVulRiskListResponse,
@@ -274,7 +276,8 @@ import {
   DescribeGatewayAssetsRequest,
   DescribeCFWAssetStatisticsRequest,
   DescribeAccessKeyUserListResponse,
-  DescribeRiskCallRecordRequest,
+  SkillState,
+  DescribeExposeAssetCategoryRequest,
   AssetViewWeakPassRisk,
   AssetCluster,
   CreateDomainAndIpResponse,
@@ -485,6 +488,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopRiskCenterTaskResponse) => void
   ): Promise<StopRiskCenterTaskResponse> {
     return this.request("StopRiskCenterTask", req, cb)
+  }
+
+  /**
+   * 访问密钥告警记录AI分析结果详情
+   */
+  async DescribeAKAnalysisDetail(
+    req: DescribeAKAnalysisDetailRequest,
+    cb?: (error: string, rep: DescribeAKAnalysisDetailResponse) => void
+  ): Promise<DescribeAKAnalysisDetailResponse> {
+    return this.request("DescribeAKAnalysisDetail", req, cb)
   }
 
   /**

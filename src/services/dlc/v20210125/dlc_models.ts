@@ -3841,6 +3841,14 @@ export interface NotebookSessions {
    * 资源组名字
    */
   ResourceGroupName?: string
+  /**
+   * Kernel id
+   */
+  KernelId?: string
+  /**
+   * spark app名称
+   */
+  SparkAppName?: string
 }
 
 /**
@@ -12167,6 +12175,10 @@ export interface NotebookSessionInfo {
    * pod数量
    */
   PodNumbers?: number
+  /**
+   * spark app名称
+   */
+  SparkAppName?: string
 }
 
 /**
@@ -12325,7 +12337,7 @@ export interface WrittenAdvancePolicy {
 }
 
 /**
- * 查询列表过滤条件参数
+ * 筛选条件定义
  */
 export interface Filter {
   /**
@@ -13254,6 +13266,21 @@ export interface DatabaseResponseInfo {
    * 数据库ID（无效字段）
    */
   DatabaseId?: string
+  /**
+   * 所属catalog名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogName?: string
+  /**
+   * 所属catalog 类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CatalogType?: string
+  /**
+   * 是否InformationSchema
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsInformationSchema?: boolean
 }
 
 /**

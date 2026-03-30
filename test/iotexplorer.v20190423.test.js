@@ -488,6 +488,16 @@ it("iotexplorer.v20190423.DeleteLoRaGateway", async function () {
     }
 })
 
+it("iotexplorer.v20190423.PublishFirmwareUpdateMessage", async function () {
+    try {
+       const data = await client.PublishFirmwareUpdateMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.CreateStudioProduct", async function () {
     try {
        const data = await client.CreateStudioProduct({})
@@ -678,9 +688,9 @@ it("iotexplorer.v20190423.ListFirmwares", async function () {
     }
 })
 
-it("iotexplorer.v20190423.PublishFirmwareUpdateMessage", async function () {
+it("iotexplorer.v20190423.ModifyCloudStorageAIServiceCallback", async function () {
     try {
-       const data = await client.PublishFirmwareUpdateMessage({})
+       const data = await client.ModifyCloudStorageAIServiceCallback({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1308,9 +1318,9 @@ it("iotexplorer.v20190423.GetTWeTalkProductConfigListV2", async function () {
     }
 })
 
-it("iotexplorer.v20190423.GetTWeCallActiveStatus", async function () {
+it("iotexplorer.v20190423.DescribeProductDynamicRegister", async function () {
     try {
-       const data = await client.GetTWeCallActiveStatus({})
+       const data = await client.DescribeProductDynamicRegister({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1618,6 +1628,16 @@ it("iotexplorer.v20190423.CreateProject", async function () {
     }
 })
 
+it("iotexplorer.v20190423.PublishMessage", async function () {
+    try {
+       const data = await client.PublishMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.GenerateCloudStorageAIServiceTaskFileURL", async function () {
     try {
        const data = await client.GenerateCloudStorageAIServiceTaskFileURL({})
@@ -1648,9 +1668,9 @@ it("iotexplorer.v20190423.DeleteTWeTalkAIBot", async function () {
     }
 })
 
-it("iotexplorer.v20190423.PublishMessage", async function () {
+it("iotexplorer.v20190423.ModifyProductDynamicRegister", async function () {
     try {
-       const data = await client.PublishMessage({})
+       const data = await client.ModifyProductDynamicRegister({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1888,9 +1908,9 @@ it("iotexplorer.v20190423.DeletePositionFence", async function () {
     }
 })
 
-it("iotexplorer.v20190423.ModifyCloudStorageAIServiceCallback", async function () {
+it("iotexplorer.v20190423.GetTWeCallActiveStatus", async function () {
     try {
-       const data = await client.ModifyCloudStorageAIServiceCallback({})
+       const data = await client.GetTWeCallActiveStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

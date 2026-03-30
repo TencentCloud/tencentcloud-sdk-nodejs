@@ -53,7 +53,7 @@ export interface ModifySampleSnapshotTemplateResponse {
  */
 export interface AigcVideoOutputConfig {
   /**
-   * <p>存储模式。取值有： <li>Permanent：永久存储，生成的视频文件将存储到云点播，可在事件通知中获取到 FileId；</li> <li>Temporary：临时存储，生成的视频文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；</li><br>默认值：Temporary</p>
+   * <p>存储模式</p><p>枚举值：</p><ul><li>Temporary： 临时存储，生成的视频文件不会存储到云点播，可在事件通知中获取到临时访问的 URL，有效期 7 天</li><li>Permanent： 永久存储，生成的视频文件将存储到云点播，可在事件通知中获取到 FileId</li></ul><p>默认值：Temporary</p>
    */
   StorageMode?: string
   /**
@@ -508,58 +508,53 @@ export interface SvgWatermarkInput {
  */
 export interface CreateTranscodeTemplateRequest {
   /**
-   * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。
+   * <p>封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。</p>
    */
   Container: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 转码模板名称，长度限制：64 个字符。
+   * <p>转码模板名称，长度限制：64 个字符。</p>
    */
   Name?: string
   /**
-   * 模板描述信息，长度限制：256 个字符。
+   * <p>模板描述信息，长度限制：256 个字符。</p>
    */
   Comment?: string
   /**
-   * 是否去除视频数据，可选值：
-<li>0：保留</li>
-<li>1：去除</li>
-默认值：0。
+   * <p>是否去除视频数据，可选值：</p><li>0：保留</li><li>1：去除</li>默认值：0。
    */
   RemoveVideo?: number
   /**
-   * 是否去除音频数据，可选值：
-<li>0：保留</li>
-<li>1：去除</li>
-默认值：0。
+   * <p>是否去除音频数据，可选值：</p><li>0：保留</li><li>1：去除</li>默认值：0。
    */
   RemoveAudio?: number
   /**
-   * 视频流配置参数，当 RemoveVideo 为 0，该字段必填。
+   * <p>视频流配置参数，当 RemoveVideo 为 0，该字段必填。</p>
    */
   VideoTemplate?: VideoTemplateInfo
   /**
-   * 音频流配置参数，当 RemoveAudio 为 0，该字段必填。
+   * <p>音频流配置参数，当 RemoveAudio 为 0，该字段必填。</p>
    */
   AudioTemplate?: AudioTemplateInfo
   /**
-   * 极速高清转码参数。
+   * <p>极速高清转码参数。</p>
    */
   TEHDConfig?: TEHDConfig
   /**
-   * 音视频增强配置。
+   * <p>音视频增强配置。</p>
    */
   EnhanceConfig?: EnhanceConfig
   /**
-   * 切片类型，当 Container 为 hls 时有效，可选值：
-<li>ts：ts 切片；</li>
-<li>fmp4：fmp4 切片。</li>
-默认值：ts。
+   * <p>切片类型，当 Container 为 hls 时有效，可选值：</p><li>ts：ts 切片；</li><li>fmp4：fmp4 切片。</li>默认值：ts。
    */
   SegmentType?: string
+  /**
+   * <p>扩展参数。</p>
+   */
+  StdExtInfo?: string
 }
 
 /**
@@ -3356,59 +3351,57 @@ export interface AiRecognitionTaskOcrFullTextResultOutput {
  */
 export interface ModifyTranscodeTemplateRequest {
   /**
-   * 转码模板唯一标识。
+   * <p>转码模板唯一标识。</p>
    */
   Definition: number
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。
+   * <p>封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。</p>
    */
   Container?: string
   /**
-   * 转码模板名称，长度限制：64 个字符。
+   * <p>转码模板名称，长度限制：64 个字符。</p>
    */
   Name?: string
   /**
-   * 模板描述信息，长度限制：256 个字符。
+   * <p>模板描述信息，长度限制：256 个字符。</p>
    */
   Comment?: string
   /**
-   * 是否去除视频数据，可选值：
-<li>0：保留</li>
-<li>1：去除</li>
+   * <p>是否去除视频数据，可选值：</p><li>0：保留</li><li>1：去除</li>
    */
   RemoveVideo?: number
   /**
-   * 是否去除音频数据，可选值：
-<li>0：保留</li>
-<li>1：去除</li>
+   * <p>是否去除音频数据，可选值：</p><li>0：保留</li><li>1：去除</li>
    */
   RemoveAudio?: number
   /**
-   * 视频流配置参数。
+   * <p>视频流配置参数。</p>
    */
   VideoTemplate?: VideoTemplateInfoForUpdate
   /**
-   * 音频流配置参数。
+   * <p>音频流配置参数。</p>
    */
   AudioTemplate?: AudioTemplateInfoForUpdate
   /**
-   * 极速高清转码参数。
+   * <p>极速高清转码参数。</p>
    */
   TEHDConfig?: TEHDConfigForUpdate
   /**
-   * 音视频增强配置。
+   * <p>音视频增强配置。</p>
    */
   EnhanceConfig?: EnhanceConfigForUpdate
   /**
-   * 切片类型，当 Container 为 hls 时有效，可选值：
-<li>ts：ts 切片；</li>
-<li>fmp4：fmp4 切片。</li>
+   * <p>切片类型，当 Container 为 hls 时有效，可选值：</p><li>ts：ts 切片；</li><li>fmp4：fmp4 切片。</li>
    */
   SegmentType?: string
+  /**
+   * <p>扩展参数。</p>
+   */
+  StdExtInfo?: string
 }
 
 /**
@@ -6672,52 +6665,39 @@ export interface DescribeProcessImageAsyncTemplatesRequest {
  */
 export interface AigcImageOutputConfig {
   /**
-   * 存储模式。取值有： <li>Permanent：永久存储，生成的图片文件将存储到云点播，可在事件通知中获取到 FileId；</li> <li>Temporary：临时存储，生成的图片文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；</li>
-默认值：Temporary
+   * <p>存储模式</p><p>枚举值：</p><ul><li>Temporary： 临时存储，生成的视频文件不会存储到云点播，可在事件通知中获取到临时访问的 URL，有效期 7 天</li><li>Permanent： 永久存储，生成的视频文件将存储到云点播，可在事件通知中获取到 FileId</li></ul><p>默认值：Temporary</p>
    */
   StorageMode?: string
   /**
-   * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。
+   * <p>输出文件名，最长 64 个字符。缺省由系统指定生成文件名。</p>
    */
   MediaName?: string
   /**
-   * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
-<li>默认值：0，表示其他分类。</li>
+   * <p>分类ID，用于对媒体进行分类管理，可通过 <a href="/document/product/266/7812">创建分类</a> 接口，创建分类，获得分类 ID。</p><li>默认值：0，表示其他分类。</li>
    */
   ClassId?: number
   /**
-   * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式说明</a>。</p>
    */
   ExpireTime?: string
   /**
-   * 生成图片的分辨率。
-
-* GEM 2.5 可选值：1K、2K、4K，默认1K；
-* GEM 3.0 可选值：1K、2K、4K，默认1K；
-* Vidu q2 可选值：1080p、2K、4K，默认1080p；
-* Kling 2.1 可选值：1k、2k，默认1k；
-* Hunyuan 3.0 可选值：720P、1080P、2K、4K。
+   * <p>生成图片的分辨率。各模型可选值：</p><ul><li>GG 2.5：1K、2K、4K，默认1K；</li><li>GG 3.0：1K、2K、4K，默认1K；</li><li>GG 3.1：512、1K、2K、4K，默认1K；</li><li>Kling 2.1：1k、2k，默认1k；</li><li>Kling 3.0：1k、2k，默认1k；</li><li>Kling 3.0-Omni：1k、2k、4k，默认1k；</li><li>SI 4.0：1K、2K、4K，默认1K；</li><li>SI 4.5：2K、4K，默认2K；</li><li>SI 5.0-lite：2K、3K，默认2K；</li><li>Vidu q2：1080p、2K、4K，默认1080p；</li><li>Hunyuan 3.0：宽、高均在 [512, 2048] 像素范围内，宽高乘积 ≤ 1024:1024 像素。示例：1024:1024；</li><li>Qwen 2.0：支持自由设置宽高，输出图像总像素需在512 * 512 至 2048 * 2048之间。默认分辨率为1024*1024；</li><li>Qwen 0925：不支持；</li></ul>
    */
   Resolution?: string
   /**
-   * 指定所生成图片的宽高比。
-<li>当 ModelName 是 GEM，可选值是 1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9 和 21:9；</li>
-<li>当 ModelName 是 Qwen，则暂不支持。</li>
-<li>当 ModelName 是 Hunyuan，可选值16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。</li>
-<li>当 ModelName 是 Vidu，可选值16:9、9:16、1:1、3:4、4:3、21:9、2:3、3:2。</li>
-<li>当 ModelName 是 Kling，可选值16:9、9:16、1:1、4:3、3:4、3:2、2:3、21:9。</li>
+   * <p>指定所生成图片的宽高比。</p><ul><li>GG 2.5：1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9；</li><li>GG 3.0：1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9；</li><li>GG 3.1：1:1, 1:4, 1:8, 2:3, 3:2, 3:4, 4:1, 4:3, 4:5, 5:4, 8:1, 9:16, 16:9, 21:9；</li><li>Kling 2.1：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；</li><li>Kling 3.0：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；</li><li>Kling 3.0-Omni：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；</li><li>Vidu q2：16:9、9:16、1:1、3:4、4:3、21:9、2:3、3:2；</li><li>SI 4.0：<strong>不支持</strong>此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；</li><li>SI 4.5：<strong>不支持</strong>此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；</li><li>SI 5.0-lite：<strong>不支持</strong>此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；</li><li>Hunyuan 3.0：不支持；</li><li>Qwen 2.0：不支持；</li><li>Qwen 0925：不支持；</li></ul>
    */
   AspectRatio?: string
   /**
-   * 是否允许人物或人脸生成。取值有： <li>AllowAdult：允许生成成人；</li> <li>Disallowed：禁止在图片中包含人物或人脸；</li>
+   * <p>是否允许人物或人脸生成。取值有： <li>AllowAdult：允许生成成人；</li> <li>Disallowed：禁止在图片中包含人物或人脸；</li></p>
    */
   PersonGeneration?: string
   /**
-   * 是否开启输入内容的合规性检查。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li>
+   * <p>是否开启输入内容的合规性检查。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li></p>
    */
   InputComplianceCheck?: string
   /**
-   * 是否开启输出内容的合规性检查。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li>
+   * <p>是否开启输出内容的合规性检查。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li></p>
    */
   OutputComplianceCheck?: string
 }
@@ -8639,52 +8619,41 @@ export interface EmptyTrackItem {
  */
 export interface AigcVideoTaskInputFileInfo {
   /**
-   * 输入的视频文件类型。取值有： <li>File：点播媒体文件；</li> <li>Url：可访问的 Url；</li>
+   * <p>输入的视频文件类型。取值有： <li>File：点播媒体文件；</li> <li>Url：可访问的 Url；</li></p>
    */
   Type?: string
   /**
-   * 文件分类。取值为：
-<li>Image: 图片；</li>
-<li>Video: 视频。</li>
+   * <p>文件分类。取值为：</p><li>Image: 图片；</li><li>Video: 视频。</li>
    */
   Category?: string
   /**
-   * 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。当 Type 取值为 File 时，本参数有效。说明：
-1. 推荐使用小于10M的图片；
-2. 图片格式的取值为：jpeg，jpg, png。
+   * <p>媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 <a href="/document/product/266/7830">视频上传完成事件通知</a> 或 <a href="https://console.cloud.tencent.com/vod/media">云点播控制台</a> 获取该字段。当 Type 取值为 File 时，本参数有效。说明：</p><ol><li>推荐使用小于10M的图片；</li><li>图片格式的取值为：jpeg，jpg, png。</li></ol>
    */
   FileId?: string
   /**
-   * 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。
-说明：
-1. 推荐使用小于10M的图片；
-2. 图片格式的取值为：jpeg，jpg, png。
+   * <p>可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。<br>说明：</p><ol><li>推荐使用小于10M的图片；</li><li>图片格式的取值为：jpeg，jpg, png。</li></ol>
    */
   Url?: string
   /**
-   * 参考类型，GV模型适用。
-注意：
-当使用 GV 模型时，可作为参考方式，可选值：asset 表示素材、style 表示风格；
-当使用 Kling 模型以及 Category 为 Video 时，可区分参考视频类型，feature 表示特征参考视频，base 表示待编辑视频。
+   * <p>参考类型，GV模型适用。<br>注意：<br>当使用 GV 模型时，可作为参考方式，可选值：asset 表示素材、style 表示风格；<br>当使用 Kling 模型以及 Category 为 Video 时，可区分参考视频类型，feature 表示特征参考视频，base 表示待编辑视频。</p>
    */
   ReferenceType?: string
   /**
-   * 主体 Id。
-适用模型：Vidu-q2.
-当需要对图片标识主体时，需要每个图片都带主体 Id，后续生成时可以通过@主体 Id 的方式使用。当 Category 为 Image 时有效。
+   * <p>用法：Vidu主体Id、参考图模式。<br>参考图模式：只有一张图时候，ObjectId必须不为空（一张图、ObjectId为空，为首帧模式）。<br>Vidu主体Id：prompt可以通过 @主体Id 的方式使用。当 Category 为 Image 时有效。</p>
    */
   ObjectId?: string
   /**
-   * 适用于 Vidu-q2 模型。
-当全部图片携带主体 Id 时，可针对主体设置音色 Id。 当 Category 为 Image 时有效。音色列表：https://shengshu.feishu.cn/sheets/EgFvs6DShhiEBStmjzccr5gonOg
+   * <p>适用于 Vidu-q2 模型。<br>当全部图片携带主体 Id 时，可针对主体设置音色 Id。 当 Category 为 Image 时有效。音色列表：https://shengshu.feishu.cn/sheets/EgFvs6DShhiEBStmjzccr5gonOg</p>
    */
   VoiceId?: string
   /**
-   * 是否保留视频原声。当 Category 为 Video 时有效。取值如下：
-<li>Enabled：保留</li>
-<li>Disabled：不保留</li>
+   * <p>是否保留视频原声。当 Category 为 Video 时有效。取值如下：</p><li>Enabled：保留</li><li>Disabled：不保留</li>
    */
   KeepOriginalSound?: string
+  /**
+   * <p>用于区分输入是首帧或参考帧。可选值：</p><ul><li>FirstFrame：首帧；</li><li>Reference：参考帧；</li></ul>
+   */
+  Usage?: string
 }
 
 /**
@@ -8894,88 +8863,65 @@ export interface DescribeMediaPlayStatDetailsResponse {
  */
 export interface VideoTemplateInfo {
   /**
-   * 视频流的编码格式，可选值：
-<li>libx264：H.264 编码；</li>
-<li>libx265：H.265 编码；</li>
-<li>av1：AOMedia Video 1 编码；</li>
-<li>H.266：H.266 编码。</li>
-<font color=red>注意：</font>
-<li> av1，H.266 编码容器目前只支持 mp4 ；</li>
-<li> H.266 目前只支持恒定 CRF 码率控制方式。 </li>
+   * <p>视频流的编码格式，可选值：</p><li>libx264：H.264 编码；</li><li>libx265：H.265 编码；</li><li>av1：AOMedia Video 1 编码；</li><li>H.266：H.266 编码。</li><font color="red">注意：</font><li> av1，H.266 编码容器目前只支持 mp4 ；</li><li> H.266 目前只支持恒定 CRF 码率控制方式。 </li>
    */
   Codec: string
   /**
-   * 视频帧率，取值范围：[0, 100]，单位：Hz。
-当取值为 0，表示帧率和原始视频保持一致。
+   * <p>视频帧率，取值范围：[0, 100]，单位：Hz。<br>当取值为 0，表示帧率和原始视频保持一致。</p>
    */
   Fps: number
   /**
-   * 视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。
-当取值为 0，表示由云点播自动设置码率。
+   * <p>视频流的码率，取值范围：0 和 [128, 100000]，单位：kbps。<br>当取值为 0，表示由云点播自动设置码率。</p>
    */
   Bitrate: number
   /**
-   * 分辨率自适应，可选值：
-<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
-<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
-默认值：open。
+   * <p>分辨率自适应，可选值：</p><li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li><li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>默认值：open。
    */
   ResolutionAdaptive?: string
   /**
-   * 视频流宽度（或长边）的最大值，取值范围：0 和 [128, 8192]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
+   * <p>视频流宽度（或长边）的最大值，取值范围：0 和 [128, 8192]，单位：px。</p><li>当 Width、Height 均为 0，则分辨率同源；</li><li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li><li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li><li>当 Width、Height 均非 0，则分辨率按用户指定。</li>默认值：0。
    */
   Width?: number
   /**
-   * 视频流高度（或短边）的最大值，取值范围：0 和 [128, 8192]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
+   * <p>视频流高度（或短边）的最大值，取值范围：0 和 [128, 8192]，单位：px。</p><li>当 Width、Height 均为 0，则分辨率同源；</li><li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li><li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li><li>当 Width、Height 均非 0，则分辨率按用户指定。</li>默认值：0。
    */
   Height?: number
   /**
-   * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
-<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
-<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
-<li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
-<li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊填充。</li>
-默认值：black 。
+   * <p>填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：</p><li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li><li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li><li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li><li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊填充。</li>默认值：black 。
    */
   FillType?: string
   /**
-   * 视频恒定码率控制因子，取值范围为[1, 51]。
-
-<font color=red>注意：</font>
-<li>如果指定该参数，将使用 CRF 的码率控制方式做转码（视频码率将不再生效）；</li>
-<li>当指定视频流编码格式为 H.266 时，该字段必填，推荐值为 28；</li>
-<li>如果没有特殊需求，不建议指定该参数。</li>
+   * <p>视频恒定码率控制因子，取值范围为[1, 51]。</p><p><font color="red">注意：</font></p><li>如果指定该参数，将使用 CRF 的码率控制方式做转码（视频码率将不再生效）；</li><li>当指定视频流编码格式为 H.266 时，该字段必填，推荐值为 28；</li><li>如果没有特殊需求，不建议指定该参数。</li>
    */
   Vcrf?: number
   /**
-   * 关键帧 I 帧之间的间隔，取值范围：0 和 [1, 100000]，单位：帧数。
-当填 0 或不填时，系统将自动设置 gop 长度。
+   * <p>关键帧 I 帧之间的间隔，取值范围：0 和 [1, 100000]，单位：帧数。<br>当填 0 或不填时，系统将自动设置 gop 长度。</p>
    */
   Gop?: number
   /**
-   * 当原始视频为 HDR（High Dynamic Range）时，转码输出是否依然保持 HDR。取值范围：
-<li>ON: 如果原始文件是 HDR，则转码输出保持 HDR；否则转码输出为 SDR （Standard Dynamic Range）。</li>
-<li>OFF: 无论原始文件是 HDR 还是 SDR，转码输出均为 SDR。</li>
-默认值：OFF。
+   * <p>Gop数值单位。</p><p>枚举值：</p><ul><li>frame： 表示帧数。</li><li>second： 表示秒数。</li></ul><p>默认值：frame</p>
+   */
+  GopUnit?: string
+  /**
+   * <p>当原始视频为 HDR（High Dynamic Range）时，转码输出是否依然保持 HDR。取值范围：</p><li>ON: 如果原始文件是 HDR，则转码输出保持 HDR；否则转码输出为 SDR （Standard Dynamic Range）。</li><li>OFF: 无论原始文件是 HDR 还是 SDR，转码输出均为 SDR。</li>默认值：OFF。
    */
   PreserveHDRSwitch?: string
   /**
-   * 编码标签，仅当视频流的编码格式为 H.265 编码时有效，可选值：
-<li>hvc1 表示 hvc1 标签；</li>
-<li>hev1 表示 hev1 标签。 </li>
-默认值：hvc1。
+   * <p>编码标签，仅当视频流的编码格式为 H.265 编码时有效，可选值：</p><li>hvc1 表示 hvc1 标签；</li><li>hev1 表示 hev1 标签。 </li>默认值：hvc1。
    */
   CodecTag?: string
+  /**
+   * <p>码率控制模式。</p><p>枚举值：</p><ul><li>VBR： Variable Bit Rate，动态比特率，根据视频画面的复杂度动态调整输出的码率，使得画面质量更高，适用于存储场景和对画面质量要求较高的应用。</li><li>ABR： Average Bit Rate，平均比特率，尽量保持输出视频的平均码率稳定，但允许短期内的码率波动，适用于需要在保持一定画质的情况下尽量减少整体码率的场景。</li><li>CBR： Constant Bit Rate，恒定比特率，指视频编码时输出的码率保持恒定不变，不考虑画面复杂度的变化，适用于对网络带宽要求较为严格的场景，如直播等。</li><li>VCRF： 恒定质量因子，通过设定一个质量因子来控制视频质量，实现视频的恒定质量编码，码率会根据内容的复杂度自动调整，适用于希望保持一定画质的场景。</li></ul><p>默认值：VBR</p>
+   */
+  Mode?: string
+  /**
+   * <p>参考帧之间的B帧数，默认为自动。</p><p>取值范围：[0, 16]</p>
+   */
+  Bframes?: number
+  /**
+   * <p>分片平均时长。0或不填表示自动，将根据视频的 GOP 等特征自动选择合适的分片时长。</p><p>取值范围：[0, 10]</p><p>单位：秒</p><p>只支持转码模板，暂不支持自适应码流模板。</p>
+   */
+  HlsTime?: number
 }
 
 /**
@@ -10626,15 +10572,15 @@ export interface CreateAigcVideoTaskRequest {
    */
   SubAppId: number
   /**
-   * <p>模型名称。取值：<li>Hailuo：海螺；</li><li>Kling：可灵；</li><li> Jimeng：即梦；</li><li>Vidu；</li><li>Hunyuan：混元；</li><li>Mingmou：明眸；</li></p>
+   * <p>模型名称。取值：<br>Kling：可灵；<br>Vidu；<br>Hailuo：海螺；<br>Jimeng：即梦；<br>Hunyuan：混元；<br>Mingmou：明眸；<br>GV；<br>OS；</p>
    */
   ModelName: string
   /**
-   * <p>模型版本。取值：<li>当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；</li><li>当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、O1；</li><li>当 ModelName 是 Jimeng，可选值为 3.0pro；</li><li>当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo、q3-pro、q3-turbo；</li><li>当 ModelName 是 GV，可选值为 3.1、3.1-fast；</li><li>当 ModelName 是 OS，可选值为 2.0；</li><li>当 ModelName 是 Hunyuan，可选值为 1.5；</li><li>当 ModelName 是 Mingmou，可选值为 1.0；</li></p>
+   * <p>模型版本。取值：<br>当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；<br>当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、2.6、O1、3.0、3.0-Omni；<br>当 ModelName 是 Jimeng，可选值为 3.0pro；<br>当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo、q3、q3-pro、q3-turbo；<br>当 ModelName 是 GV，可选值为 3.1、3.1-fast；<br>当 ModelName 是 OS，可选值为 2.0；<br>当 ModelName 是 Hunyuan，可选值为 1.5；<br>当 ModelName 是 Mingmou，可选值为 1.0；</p>
    */
   ModelVersion: string
   /**
-   * <p>最多包含三张素材资源文件的列表，用于描述模型在生成视频时要使用的资源文件。</p><p>首尾帧视频生成：用 FileInfos 第一张表示首帧（此时 FileInfos 最多包含一张图片），LastFrameFileId 或者 LastFrameUrl 表示尾帧。</p><p>支持多图输入的模型：</p><ol><li>GV，使用多图输入时，不可使用 LastFrameFileId 和 LastFrameUrl。</li><li>Vidu，支持多图参考生视频。q2 模型1-7张图片，可通过 FileInfos 里面的 ObjectId 作为主体 id 来传入。</li></ol><p>注意：</p><ol><li>图片大小不超过10M。</li><li>支持的图片格式：jpeg、png。</li></ol>
+   * <p>用于描述模型在生成视频时要使用的资源文件，分为首尾帧模式、参考图、视频参考、视频编辑等模式。</p><p><strong>首尾帧视频生成</strong>：FileInfos 第一张表示首帧（此时 FileInfos 最多包含一张图片），LastFrameFileId 或者 LastFrameUrl 表示尾帧。可以单独传首帧，不能单独传尾帧。<strong>首尾帧生成会参考图片比例</strong>。<br><strong>参考图片生成</strong>：可传入单张图片或者多张，<strong>单张时候ObjectId字段必须不为空</strong>（区别于首帧生成）；参考图片，可以调整生成视频的宽高比例。<br><strong>视频编辑、视频参考</strong>：Vidu、Kling可输入视频作为参考或者进行编辑。传入视频的同时也可以传入图片。</p><p>注意：</p><ol><li>图片大小不超过10M。</li><li>支持的图片格式：jpeg、jpg、png。</li><li>关于模型某个版本是否支持参考图、首尾帧、视频编辑等功能，可向我们索取文档或者参考原厂文档信息。</li></ol>
    */
   FileInfos?: Array<AigcVideoTaskInputFileInfo>
   /**
@@ -10642,15 +10588,15 @@ export interface CreateAigcVideoTaskRequest {
    */
   SubjectInfos?: Array<AigcVideoTaskInputSubjectInfo>
   /**
-   * <p>用于作为尾帧画面来生成视频的媒体文件 ID。该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 <a href="/document/product/266/7830">视频上传完成事件通知</a> 或 <a href="https://console.cloud.tencent.com/vod/media">云点播控制台</a> 获取该字段。说明：</p><ol><li>只支持模型 GV 、Kling、Vidu，其他模型暂不支持。当 ModelName 为 GV 时，如果指定该参数，则需同时指定 FileInfos 作为待生成视频的首帧。当 ModelName 为 Kling 、ModelVersion 为 2.1 并且指定输出分辨率 Resolution 为 1080P 时，才能指定该参数。当 ModelName 为 Vidu、ModelVersion 为 q2-pro、q2-turbo 时，才能指定该参数。</li><li>图片大小需小于5M。</li><li>图片格式的取值为：jpeg，jpg, png, webp。</li></ol>
+   * <p>用于作为尾帧画面来生成视频的媒体文件 ID。该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 <a href="/document/product/266/7830">视频上传完成事件通知</a> 或 <a href="https://console.cloud.tencent.com/vod/media">云点播控制台</a> 获取该字段。</p><ol><li>指定该参数时，须同时通过 FileInfos 指定首帧画面。</li><li>图片大小需小于10M。</li><li>图片格式的取值为：jpeg，jpg, png, webp。</li></ol>
    */
   LastFrameFileId?: string
   /**
-   * <p>用于作为尾帧画面来生成视频的媒体文件 URL。说明：</p><ol><li>只支持模型 GV 、Kling、Vidu，其他模型暂不支持。当 ModelName 为 GV 时，如果指定该参数，则需同时指定 FileInfos 作为待生成视频的首帧。当 ModelName 为 Kling 、ModelVersion 为 2.1 并且指定输出分辨率 Resolution 为 1080P 时，才能指定该参数。当 ModelName 为 Vidu、ModelVersion 为 q2-pro、q2-turbo 时，才能指定该参数。</li><li>图片大小需小于5M。</li><li><ol start="3"><li>图片格式的取值为：jpeg，jpg, png, webp。</li></ol></li></ol>
+   * <p>用于作为尾帧画面来生成视频的媒体文件 URL。说明：</p><ol><li>指定该参数时，须同时通过 FileInfos 指定首帧画面。</li><li>图片大小需小于5M。</li><li>图片格式的取值为：jpeg，jpg, png, webp。</li></ol>
    */
   LastFrameUrl?: string
   /**
-   * <p>生成视频的提示词。当 FileInfos 为空时，此参数必填。<br>示例值：move the picture</p>
+   * <p>生成视频的提示词。<br>当未传入参考文件，没有使用场景类型，ExtInfo不为空，Prompt 为必填。</p>
    */
   Prompt?: string
   /**
@@ -10686,7 +10632,7 @@ export interface CreateAigcVideoTaskRequest {
    */
   TasksPriority?: number
   /**
-   * <p>保留字段，特殊用途时使用。</p>
+   * <p>保留字段，特殊用途时使用。<br>可用于传入模型特殊参数、分镜prompt等</p>
    */
   ExtInfo?: string
 }
@@ -12054,7 +12000,7 @@ export interface ModifyImageSpriteTemplateResponse {
  */
 export interface SceneAigcImageOutputConfig {
   /**
-   * <p>存储模式。取值有： <li>Permanent：永久存储，生成的图片文件将存储到云点播，可在事件通知中获取到 FileId；</li> <li>Temporary：临时存储，生成的图片文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；</li><br>默认值：Temporary</p>
+   * <p>存储模式</p><p>枚举值：</p><ul><li>Temporary： 临时存储，生成的视频文件不会存储到云点播，可在事件通知中获取到临时访问的 URL，有效期 7 天</li><li>Permanent： 永久存储，生成的视频文件将存储到云点播，可在事件通知中获取到 FileId</li></ul><p>默认值：Temporary</p>
    */
   StorageMode?: string
   /**
@@ -15859,75 +15805,71 @@ export interface ClipTask2017 {
  */
 export interface TranscodeTemplate {
   /**
-   * 转码模板唯一标识。
+   * <p>转码模板唯一标识。</p>
    */
   Definition?: string
   /**
-   * 封装格式，取值：mp4、flv、hls、mp3、flac、ogg。
+   * <p>封装格式，取值：mp4、flv、hls、mp3、flac、ogg。</p>
    */
   Container?: string
   /**
-   * 转码模板名称。
+   * <p>转码模板名称。</p>
    */
   Name?: string
   /**
-   * 模板描述信息。
+   * <p>模板描述信息。</p>
    */
   Comment?: string
   /**
-   * 模板类型，取值：
-<li>Preset：系统预置模板；</li>
-<li>Custom：用户自定义模板。</li>
+   * <p>模板类型，取值：</p><li>Preset：系统预置模板；</li><li>Custom：用户自定义模板。</li>
    */
   Type?: string
   /**
-   * 是否去除视频数据，取值：
-<li>0：保留；</li>
-<li>1：去除。</li>
+   * <p>是否去除视频数据，取值：</p><li>0：保留；</li><li>1：去除。</li>
    */
   RemoveVideo?: number
   /**
-   * 是否去除音频数据，取值：
-<li>0：保留；</li>
-<li>1：去除。</li>
+   * <p>是否去除音频数据，取值：</p><li>0：保留；</li><li>1：去除。</li>
    */
   RemoveAudio?: number
   /**
-   * 视频流配置参数，仅当 RemoveVideo 为 0，该字段有效。
+   * <p>视频流配置参数，仅当 RemoveVideo 为 0，该字段有效。</p>
    */
   VideoTemplate?: VideoTemplateInfo
   /**
-   * 音频流配置参数，仅当 RemoveAudio 为 0，该字段有效 。
+   * <p>音频流配置参数，仅当 RemoveAudio 为 0，该字段有效 。</p>
    */
   AudioTemplate?: AudioTemplateInfo
   /**
-   * 极速高清转码参数。
+   * <p>极速高清转码参数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TEHDConfig?: TEHDConfig
   /**
-   * 音视频增强配置。
+   * <p>音视频增强配置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnhanceConfig?: EnhanceConfig
   /**
-   * 封装格式过滤条件，可选值：
-<li>Video：视频格式，可以同时包含视频流和音频流的封装格式；</li>
-<li>PureAudio：纯音频格式，只能包含音频流的封装格式板。</li>
+   * <p>封装格式过滤条件，可选值：</p><li>Video：视频格式，可以同时包含视频流和音频流的封装格式；</li><li>PureAudio：纯音频格式，只能包含音频流的封装格式板。</li>
    */
   ContainerType?: string
   /**
-   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>模板创建时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   CreateTime?: string
   /**
-   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>模板最后修改时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   UpdateTime?: string
   /**
-   * 切片类型，仅当 Container 为 hls 时有效。
+   * <p>切片类型，仅当 Container 为 hls 时有效。</p>
    */
   SegmentType?: string
+  /**
+   * <p>扩展参数。</p>
+   */
+  StdExtInfo?: string
 }
 
 /**
@@ -16605,35 +16547,35 @@ export interface DescribeVodDomainsResponse {
  */
 export interface AdaptiveStreamTemplate {
   /**
-   * 视频参数信息。
+   * <p>视频参数信息。</p>
    */
   Video: VideoTemplateInfo
   /**
-   * 音频参数信息。
+   * <p>音频参数信息。</p>
    */
   Audio: AudioTemplateInfo
   /**
-   * 是否移除音频流，取值范围：
-<li>0：否，</li>
-<li>1：是。</li>
+   * <p>是否移除音频流，取值范围：</p><li>0：否，</li><li>1：是。</li>
    */
   RemoveAudio?: number
   /**
-   * 是否移除视频流，取值范围：
-<li>0：否，</li>
-<li>1：是。</li>
+   * <p>是否移除视频流，取值范围：</p><li>0：否，</li><li>1：是。</li>
    */
   RemoveVideo?: number
   /**
-   * 极速高清转码参数。
+   * <p>极速高清转码参数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TEHDConfig?: TEHDConfig
   /**
-   * 音视频增强配置。
+   * <p>音视频增强配置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnhanceConfig?: EnhanceConfig
+  /**
+   * <p>扩展参数。</p>
+   */
+  StdExtInfo?: string
 }
 
 /**
@@ -19224,6 +19166,22 @@ export interface VideoTemplateInfoForUpdate {
    * <p>编码标签，仅当视频流的编码格式为 H.265 编码时有效，可选值：</p><li>hvc1 表示 hvc1 标签；</li><li>hev1 表示 hev1 标签。 </li>默认值：hvc1。
    */
   CodecTag?: string
+  /**
+   * <p>Gop数值单位。</p><p>枚举值：</p><ul><li>frame： 表示帧数。</li><li>second： 表示秒数。</li></ul><p>默认值：frame</p>
+   */
+  GopUnit?: string
+  /**
+   * <p>码率控制模式。</p><p>枚举值：</p><ul><li>VBR： Variable Bit Rate，动态比特率，根据视频画面的复杂度动态调整输出的码率，使得画面质量更高，适用于存储场景和对画面质量要求较高的应用。</li><li>ABR： Average Bit Rate，平均比特率，尽量保持输出视频的平均码率稳定，但允许短期内的码率波动，适用于需要在保持一定画质的情况下尽量减少整体码率的场景。</li><li>CBR： Constant Bit Rate，恒定比特率，指视频编码时输出的码率保持恒定不变，不考虑画面复杂度的变化，适用于对网络带宽要求较为严格的场景，如直播等。</li><li>VCRF： Constant Rate Factor，恒定质量因子，通过设定一个质量因子来控制视频质量，实现视频的恒定质量编码，码率会根据内容的复杂度自动调整，适用于希望保持一定画质的场景。</li></ul><p>默认值：VBR</p>
+   */
+  Mode?: string
+  /**
+   * <p>最大连续B帧数，默认为自动， -1 表示修改为自动值。</p><p>取值范围：[-1, 16]</p>
+   */
+  Bframes?: number
+  /**
+   * <p>分片平均时长。0或不填表示自动，将根据视频的 GOP 等特征自动选择合适的分片时长。</p><p>取值范围：[0, 10]</p><p>单位：秒</p><p>只支持转码模板，暂不支持自适应码流模板。</p>
+   */
+  HlsTime?: number
 }
 
 /**
@@ -20943,7 +20901,7 @@ export interface DescribeReviewDetailsResponse {
  */
 export interface CreateTranscodeTemplateResponse {
   /**
-   * 转码模板唯一标识。
+   * <p>转码模板唯一标识。</p>
    */
   Definition?: number
   /**
@@ -21838,15 +21796,15 @@ export interface CreateAigcImageTaskRequest {
    */
   SubAppId: number
   /**
-   * <p>模型名称。取值：</p><li>Qwen：千问。</li><li>Hunyuan：混元。</li><li>Vidu：生数。</li><li>Kling：可灵。</li><li>MJ：Midjourney。</li>
+   * <p>模型名称。取值：</p><li>GG</li><li>SI</li><li>Qwen</li><li>Hunyuan</li><li>Vidu</li><li>Kling</li>
    */
   ModelName: string
   /**
-   * <p>模型版本。取值：<li>当 ModelName 是 Qwen，可选值为 0925；</li><li>当 ModelName 是 Hunyuan，可选值为 3.0；</li><li>当 ModelName 是 Vidu，可选值为 q2；</li><li>当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni；</li><li>当 ModelName 是 MJ，可选值为 v7；</li></p>
+   * <p>模型版本。取值：</p><li>当 ModelName 是 GG，可选值为 2.5、3.0、3.1；</li><li>当 ModelName 是 Jimeng，可选值为 4.0；</li><li>当 ModelName 是 SI，可选值为 4.0、4.5、5.0-lite；</li><li>当 ModelName 是 Qwen，可选值为 0925、2.0；</li><li>当 ModelName 是 Hunyuan，可选值为 3.0；</li><li>当 ModelName 是 Vidu，可选值为 q2；</li><li>当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni；</li>
    */
   ModelVersion: string
   /**
-   * <p>AIGC 生图任务的输入图片的文件信息。默认只支持指定1个。下列模型可传多张参考图：<li>GEM 2.5：0～3张图片；</li><li>Vidu q2：0～7张图片，图片支持 png、jpeg、jpg、webp格式，图片像素不能小于 128x128，且比例需要小于1:4或4:1；</li></p>
+   * <p>AIGC 生图任务的输入图片的文件信息。各模型支持最大参考图数量：</p><ul><li>GG 2.5： 3张；</li><li>GG 3.0：14张；</li><li>GG 3.1：14张；</li><li>Kling 2.1：4张；</li><li>Kling 3.0：1张；</li><li>Kling 3.0-Omni：1张；</li><li>SI 4.0：14张；</li><li>SI 4.5：14张；</li><li>SI 5.0-lite：14张；</li><li>Vidu q2：7张；</li><li>Hunyuan 3.0：3张；</li><li>Qwen 0925：1张；</li><li>Qwen 2.0：3张；</li><li>MJ v7：3张。</li></ul>
    */
   FileInfos?: Array<AigcImageTaskInputFileInfo>
   /**
@@ -21866,7 +21824,7 @@ export interface CreateAigcImageTaskRequest {
    */
   OutputConfig?: AigcImageOutputConfig
   /**
-   * <p>输入文件的区域信息。当文件url是国外地址时候，可选Oversea。默认Mainland。</p>
+   * <p>输入的区域信息。可选值：</p><ul><li>Mainland：中国大陆；</li><li>Oversea：海外；</li><li>OverseaUSWest：海外-美西；</li></ul>
    */
   InputRegion?: string
   /**

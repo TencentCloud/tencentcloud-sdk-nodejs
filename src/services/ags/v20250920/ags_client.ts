@@ -65,6 +65,7 @@ import {
   CreatePreCacheImageTaskRequest,
   CLSConfig,
   LogConfiguration,
+  MetadataVar,
   Tag,
   UpdateSandboxToolRequest,
   ResumeSandboxInstanceResponse,

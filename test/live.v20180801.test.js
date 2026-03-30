@@ -408,9 +408,9 @@ it("live.v20180801.AuthenticateDomainOwner", async function () {
     }
 })
 
-it("live.v20180801.ModifyLiveSnapshotTemplate", async function () {
+it("live.v20180801.ModifyLivePlayAuthKey", async function () {
     try {
-       const data = await client.ModifyLiveSnapshotTemplate({})
+       const data = await client.ModifyLivePlayAuthKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1238,9 +1238,9 @@ it("live.v20180801.StopLiveRecord", async function () {
     }
 })
 
-it("live.v20180801.ModifyLivePlayAuthKey", async function () {
+it("live.v20180801.DescribeAIGCTaskStatus", async function () {
     try {
-       const data = await client.ModifyLivePlayAuthKey({})
+       const data = await client.DescribeAIGCTaskStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1521,6 +1521,16 @@ it("live.v20180801.DescribeLiveStreamPublishedList", async function () {
 it("live.v20180801.DescribeScreenshotTask", async function () {
     try {
        const data = await client.DescribeScreenshotTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.CreateVideoRedrawTask", async function () {
+    try {
+       const data = await client.CreateVideoRedrawTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1861,6 +1871,16 @@ it("live.v20180801.CreateLiveSnapshotRule", async function () {
 it("live.v20180801.CreateLiveTimeShiftTemplate", async function () {
     try {
        const data = await client.CreateLiveTimeShiftTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.ModifyLiveSnapshotTemplate", async function () {
+    try {
+       const data = await client.ModifyLiveSnapshotTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

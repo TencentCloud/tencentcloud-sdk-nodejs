@@ -102,6 +102,7 @@ import {
   DeleteLivePadTemplateResponse,
   DomainCertInfo,
   DescribeLiveAvatarTemporaryScriptListResponse,
+  CreateVideoRedrawTaskRequest,
   BandwidthInfo,
   LiveStreamMonitorOutputInfo,
   DeleteLiveTranscodeTemplateRequest,
@@ -136,6 +137,7 @@ import {
   DescribeCasterOutputInfosRequest,
   CreateLiveCallbackTemplateResponse,
   DescribeLiveCallbackTemplateRequest,
+  DescribeLiveCloudEffectConfigResponse,
   CreateLiveStreamMonitorRequest,
   CreateLiveRecordRuleResponse,
   DescribeLiveTranscodeTemplateRequest,
@@ -181,7 +183,7 @@ import {
   CopyLiveAvatarRoomResponse,
   CreateAuditKeywordsRequest,
   DescribeLiveAvatarImageListResponse,
-  CopyCasterResponse,
+  DescribeAIGCTaskStatusRequest,
   RestartLivePullStreamTaskResponse,
   StopLiveRecordResponse,
   DeleteCasterResponse,
@@ -286,6 +288,7 @@ import {
   LiveDomainCertBindings,
   XP2PDetailInfo,
   ModifyLiveAvatarScriptRequest,
+  VideoRedrawInput,
   DescribeCasterLayoutInfosResponse,
   ModifyLiveCallbackTemplateResponse,
   DescribeLiveCallbackTemplatesResponse,
@@ -375,7 +378,7 @@ import {
   DescribeHttpStatusInfoListRequest,
   StartLiveStreamMonitorRequest,
   DescribeCasterRequest,
-  AuthenticateDomainOwnerRequest,
+  DescribeAIGCTaskStatusResponse,
   DeleteLiveDomainRequest,
   DeleteLiveTimeShiftTemplateResponse,
   ModifyLivePushAuthKeyResponse,
@@ -447,6 +450,7 @@ import {
   ResumeDelayLiveStreamResponse,
   DescribeLiveDomainCertBindingsRequest,
   CreateLiveRecordTemplateRequest,
+  CreateVideoRedrawTaskResponse,
   AddCasterOutputInfoResponse,
   DescribeHttpStatusInfoListResponse,
   DescribeUploadStreamNumsRequest,
@@ -458,8 +462,9 @@ import {
   DeleteLiveAvatarRoomRequest,
   CreateLiveStreamMonitorResponse,
   DescribeCasterLayoutInfosRequest,
-  DescribeLiveCloudEffectConfigResponse,
+  AuthenticateDomainOwnerRequest,
   AddCasterMarkPicInfoResponse,
+  CopyCasterResponse,
   AddCasterInputInfoRequest,
   ModifyLivePlayAuthKeyRequest,
   DescribeLiveDelayInfoListRequest,
@@ -573,6 +578,7 @@ import {
   CreateCasterPgmFromPvwRequest,
   CreateLiveAvatarScriptRequest,
   GroupProIspDataInfo,
+  VideoRedrawCosInfo,
   DeleteCasterOutputInfoRequest,
   RecordTask,
   DescribeTimeShiftRecordDetailResponse,
@@ -1021,13 +1027,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改截图模板配置。
+   * 修改播放鉴权key
    */
-  async ModifyLiveSnapshotTemplate(
-    req: ModifyLiveSnapshotTemplateRequest,
-    cb?: (error: string, rep: ModifyLiveSnapshotTemplateResponse) => void
-  ): Promise<ModifyLiveSnapshotTemplateResponse> {
-    return this.request("ModifyLiveSnapshotTemplate", req, cb)
+  async ModifyLivePlayAuthKey(
+    req: ModifyLivePlayAuthKeyRequest,
+    cb?: (error: string, rep: ModifyLivePlayAuthKeyResponse) => void
+  ): Promise<ModifyLivePlayAuthKeyResponse> {
+    return this.request("ModifyLivePlayAuthKey", req, cb)
   }
 
   /**
@@ -1877,13 +1883,13 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 修改播放鉴权key
+   * 查询视频转绘任务
    */
-  async ModifyLivePlayAuthKey(
-    req: ModifyLivePlayAuthKeyRequest,
-    cb?: (error: string, rep: ModifyLivePlayAuthKeyResponse) => void
-  ): Promise<ModifyLivePlayAuthKeyResponse> {
-    return this.request("ModifyLivePlayAuthKey", req, cb)
+  async DescribeAIGCTaskStatus(
+    req: DescribeAIGCTaskStatusRequest,
+    cb?: (error: string, rep: DescribeAIGCTaskStatusResponse) => void
+  ): Promise<DescribeAIGCTaskStatusResponse> {
+    return this.request("DescribeAIGCTaskStatus", req, cb)
   }
 
   /**
@@ -2173,6 +2179,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: DescribeScreenshotTaskResponse) => void
   ): Promise<DescribeScreenshotTaskResponse> {
     return this.request("DescribeScreenshotTask", req, cb)
+  }
+
+  /**
+   * 创建AI转绘任务
+   */
+  async CreateVideoRedrawTask(
+    req: CreateVideoRedrawTaskRequest,
+    cb?: (error: string, rep: CreateVideoRedrawTaskResponse) => void
+  ): Promise<CreateVideoRedrawTaskResponse> {
+    return this.request("CreateVideoRedrawTask", req, cb)
   }
 
   /**
@@ -2536,6 +2552,16 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
     cb?: (error: string, rep: CreateLiveTimeShiftTemplateResponse) => void
   ): Promise<CreateLiveTimeShiftTemplateResponse> {
     return this.request("CreateLiveTimeShiftTemplate", req, cb)
+  }
+
+  /**
+   * 修改截图模板配置。
+   */
+  async ModifyLiveSnapshotTemplate(
+    req: ModifyLiveSnapshotTemplateRequest,
+    cb?: (error: string, rep: ModifyLiveSnapshotTemplateResponse) => void
+  ): Promise<ModifyLiveSnapshotTemplateResponse> {
+    return this.request("ModifyLiveSnapshotTemplate", req, cb)
   }
 
   /**

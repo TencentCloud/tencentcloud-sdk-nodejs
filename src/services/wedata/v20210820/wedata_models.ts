@@ -1499,7 +1499,7 @@ export interface TriggerManualTasksRequest {
    */
   DataTimeList: Array<string>
   /**
-   * 工作流ID
+   * 手动工作流ID
    */
   WorkflowId: string
   /**
@@ -1507,8 +1507,7 @@ export interface TriggerManualTasksRequest {
    */
   Remark?: string
   /**
-   * 需要运行的任务列表
-TriggerScope=ENTIRE_WORKFLOW 时无需传此参数，TriggerScope=SPECIFIED_TASK此参数必传
+   * 需要运行的手动工作流任务列表TriggerScope=ENTIRE_WORKFLOW 时无需传此参数，TriggerScope=SPECIFIED_TASK此参数必传
    */
   TaskIds?: Array<string>
   /**
@@ -6526,6 +6525,16 @@ export interface ProdSchedulerTask {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InChargeNameList?: Array<string>
+  /**
+   * 生产调度任务状态，参考调度任务侧状态信息，“DELETED”状态为质量侧单独加的，查不到任务时认为任务“DELETED”
+'Y': '调度中',
+'F': '已下线',
+'O': '已暂停',
+'INVALID': '已失效',
+'DELETED': '已删除' 
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskStatus?: string
 }
 
 /**
@@ -30584,6 +30593,11 @@ export interface DataSetRecord {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MetaFrom?: string
+  /**
+   * 引擎侧责任人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineOwner?: string
 }
 
 /**
@@ -35140,15 +35154,20 @@ export interface CommitTaskDataDto {
  */
 export interface RuleGroupPage {
   /**
-   * 记录数
+   * 查询结果总数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 规则组列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items: Array<RuleGroup>
+  Items?: Array<RuleGroup>
+  /**
+   * 已开启监控任务数量（在查询结果总量中）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MonitorEnabledCount?: number
 }
 
 /**

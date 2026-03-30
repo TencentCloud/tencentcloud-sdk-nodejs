@@ -1229,6 +1229,10 @@ export interface ApmAppConfig {
    * <p>响应时间预警阈值（ms），用于判断应用健康状态为&quot;黄色&quot;</p>
    */
   ResponseDurationWarningThreshold?: number
+  /**
+   * <p>是否默认使用探针自带熔断阈值</p>
+   */
+  UseDefaultFuseConfig?: boolean
 }
 
 /**
@@ -3081,6 +3085,10 @@ export interface ApmApplicationConfigView {
    * <p>响应时间预警阈值</p><p>单位：ms</p>
    */
   ResponseDurationWarningThreshold?: number
+  /**
+   * <p>是否使用探针默认熔断阈值</p>
+   */
+  UseDefaultFuseConfig?: boolean
 }
 
 /**
@@ -3442,6 +3450,10 @@ export interface ModifyApmApplicationConfigRequest {
    * <p>响应时间预警阈值（ms），用于判断应用健康状态为&quot;黄色&quot;</p>
    */
   ResponseDurationWarningThreshold?: number
+  /**
+   * <p>是否使用探针默认熔断阈值</p>
+   */
+  UseDefaultFuseConfig?: boolean
 }
 
 /**

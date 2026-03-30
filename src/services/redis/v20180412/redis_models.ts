@@ -40,6 +40,20 @@ export interface UpgradeProxyVersionRequest {
 }
 
 /**
+ * DescribeInstanceMonitorSIP返回参数结构体
+ */
+export interface DescribeInstanceMonitorSIPResponse {
+  /**
+   * 访问来源信息
+   */
+  Data?: Array<SourceInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RemoveReplicationGroup请求参数结构体
  */
 export interface RemoveReplicationGroupRequest {
@@ -71,6 +85,48 @@ export interface UpgradeSmallVersionRequest {
 - 0：维护时间窗口升级。
    */
   InstanceTypeUpgradeNow: number
+}
+
+/**
+ * DescribeLogs请求参数结构体
+ */
+export interface DescribeLogsRequest {
+  /**
+   * <p>指定实例 ID。例如：crs-xjhsdj****。请登录<a href="https://console.cloud.tencent.com/redis">Redis控制台</a>在实例列表复制实例 ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>日志检索的起始时间。</p><p>参数格式：YYYY-MM-DD HH:mm:ss，例如 2026-03-06 00:00:00。返回结果中仅包含该时间点及之后的日志。</p>
+   */
+  StartTime: string
+  /**
+   * <p>日志检索的结束时间。</p><p>参数格式：YYYY-MM-DD HH:mm:ss，例如 2026-03-06 23:59:59。返回结果中仅包含该时间点及之前的日志。</p>
+   */
+  EndTime: string
+  /**
+   * <p>日志类型。</p><p>枚举值：</p><ul><li>auditLog： 审计日志。</li></ul>
+   */
+  LogType: string
+  /**
+   * <p>过滤条件</p>
+   */
+  LogFilter?: Array<LogFilter>
+  /**
+   * <p>每页返回的日志列表大小。</p><ul><li>默认值：20。</li><li>取值范围：[1,100]。</li></ul>
+   */
+  Limit?: number
+  /**
+   * <p>分页的起始偏移量。</p><ul><li>默认：0。</li><li>取值：Limit 整数倍。计算公式：offset=limit*(页码-1)。</li></ul>
+   */
+  Offset?: number
+  /**
+   * <p>日志排序方式，默认值为 DESC。取值如下：</p><ul><li>ASC：按时间升序排列，最早的日志在前。</li><li>DESC：按时间降序排列，最新的日志在前。</li></ul>
+   */
+  Order?: string
+  /**
+   * <p>排序字段，指定按哪个字段对日志进行排序。</p>
+   */
+  OrderBy?: string
 }
 
 /**
@@ -211,6 +267,16 @@ export interface DescribeInstanceMonitorTopNCmdResponse {
    * 访问命令信息
    */
   Data?: Array<SourceCommand>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteExportTask返回参数结构体
+ */
+export interface DeleteExportTaskResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -510,6 +576,57 @@ export interface CreateReplicationGroupRequest {
    * 备注信息。
    */
   Remark?: string
+}
+
+/**
+ * 导出文件
+ */
+export interface ExportFile {
+  /**
+   * <p>文件名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileName?: string
+  /**
+   * <p>状态值。</p><p>枚举值：</p><ul><li>creating： 文件创建中。</li><li>success： 文件已生成。</li><li>failed： 文件生成失败。</li><li>deleted： 文件已删除。</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * <p>文件大小，单位：byte。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileSize?: number
+  /**
+   * <p>文件创建时间。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * <p>文件下载地址。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DownloadUrl?: string
+  /**
+   * <p>导出文件的错误信息。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrMsg?: string
+  /**
+   * <p>导出文件的进度。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Progress?: number
+  /**
+   * <p>导出文件的完成时间。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FinishTime?: string
+  /**
+   * <p>异步请求 ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsyncRequestId?: number
 }
 
 /**
@@ -896,52 +1013,31 @@ export interface ModifyBackupDownloadRestrictionResponse {
 }
 
 /**
- * DescribeBackupUrl请求参数结构体
+ * DeleteParamTemplate请求参数结构体
  */
-export interface DescribeBackupUrlRequest {
+export interface DeleteParamTemplateRequest {
   /**
-   * 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。
+   * 参数模板 ID。请登录 [Redis 控制台的参数模板](https://console.cloud.tencent.com/redis/templates)页面获取模板 ID。
    */
-  InstanceId: string
-  /**
-   * 备份 ID，可通过 [DescribeInstanceBackups ](https://cloud.tencent.com/document/product/239/20011)接口返回的参数 RedisBackupSet 获取。
-   */
-  BackupId: string
-  /**
-   * 下载备份文件的网络限制类型，如果不配置该参数，则使用用户自定义的配置。
-- NoLimit：不限制，腾讯云内外网均可以下载备份文件。
--  LimitOnlyIntranet：仅腾讯云自动分配的内网地址可下载备份文件。
-- Customize：指用户自定义的私有网络可下载备份文件。
-   */
-  LimitType?: string
-  /**
-   * 该参数仅支持输入 In，表示自定义的**LimitVpc**可以下载备份文件。
-   */
-  VpcComparisonSymbol?: string
-  /**
-   * 标识自定义的 LimitIp 地址是否可下载备份文件。
-- In: 自定义的 IP 地址可以下载。默认为 In。
-- NotIn: 自定义的 IP 不可以下载。
-   */
-  IpComparisonSymbol?: string
-  /**
-   * 自定义的可下载备份文件的 VPC ID。当参数**LimitType**为**Customize **时，需配置该参数。
-   */
-  LimitVpc?: Array<BackupLimitVpcItem>
-  /**
-   * 自定义的可下载备份文件的 VPC IP 地址。当参数**LimitType**为**Customize **时，需配置该参数。
-   */
-  LimitIp?: Array<string>
+  TemplateId: string
 }
 
 /**
- * DeleteParamTemplate返回参数结构体
+ * DeleteExportTask请求参数结构体
  */
-export interface DeleteParamTemplateResponse {
+export interface DeleteExportTaskRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>指定删除的日志类型。</p><p>枚举值：</p><ul><li>auditLog： 审计日志。</li></ul>
    */
-  RequestId?: string
+  LogType: string
+  /**
+   * <p>指定删除日志的文件名。</p>
+   */
+  FileName: string
+  /**
+   * <p>指定实例 ID。例如：crs-xjhsdj****。请登录<a href="https://console.cloud.tencent.com/redis">Redis控制台</a>在实例列表复制实例 ID。</p>
+   */
+  InstanceId: string
 }
 
 /**
@@ -1125,33 +1221,37 @@ export interface Account {
  */
 export interface InstanceProxySlowlogDetail {
   /**
-   * 慢查询耗时时长。单位：毫秒。
+   * <p>慢查询耗时时长。单位：毫秒。</p>
    */
   Duration?: number
   /**
-   * 客户端地址。
+   * <p>客户端地址。</p>
    */
   Client?: string
   /**
-   * 慢查询的命令。
+   * <p>慢查询的命令。</p>
    */
   Command?: string
   /**
-   * 慢查询详细命令行信息。
+   * <p>慢查询详细命令行信息。</p>
    */
   CommandLine?: string
   /**
-   * 执行时间。
+   * <p>执行时间。</p>
    */
   ExecuteTime?: string
   /**
-   * 收客户端请求时长(ms)
+   * <p>收客户端请求时长(ms)</p>
    */
   RecvClientEnd?: number
   /**
-   * 发送客户端请求时长(ms)
+   * <p>发送客户端请求时长(ms)</p>
    */
   SendClientEnd?: number
+  /**
+   * <p>Proxy节点ID。</p>
+   */
+  Node?: string
 }
 
 /**
@@ -1179,17 +1279,33 @@ export interface SecurityGroupsInboundAndOutbound {
 }
 
 /**
- * ResetPassword返回参数结构体
+ * ModifyLog请求参数结构体
  */
-export interface ResetPasswordResponse {
+export interface ModifyLogRequest {
   /**
-   * 任务ID（修改密码时的任务ID，如果时切换免密码或者非免密码实例，则无需关注此返回值）
+   * <p>指定实例 ID。例如：crs-xjhsdj****。请登录<a href="https://console.cloud.tencent.com/redis">Redis控制台</a>在实例列表复制实例 ID。</p>
    */
-  TaskId?: number
+  InstanceId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>日志类型。</p><p>枚举值：</p><ul><li>auditLog： 审计日志</li></ul>
    */
-  RequestId?: string
+  LogType: string
+  /**
+   * <p>日志子类型。</p><p>枚举值：</p><ul><li>write： 写命令</li><li>read： 读命令</li><li>all： 全部命令</li></ul>
+   */
+  LogSubType: string
+  /**
+   * <p>日志过期时间，单位：天。</p><p>枚举值：</p><ul><li>7：  7 天</li><li>30： 30 天</li></ul>
+   */
+  LogExpireDay: number
+  /**
+   * <p>高频日志过期时间，单位：天。</p><p>枚举值：</p><ul><li>7： 7 天</li></ul><p>默认值： 7</p>
+   */
+  HighLogExpireDay: number
+  /**
+   * <p>降级策略，单位：毫秒，实例P99达到降级策略后，审计数据自动丢弃，优先保障业务的可用性，默认值：500毫秒。</p><p>取值范围：[300, 1000]</p>
+   */
+  DegradeStrategy: number
 }
 
 /**
@@ -1604,29 +1720,23 @@ export interface KillMasterGroupResponse {
 }
 
 /**
- * Redis节点的运行信息
+ * OpenLog返回参数结构体
  */
-export interface RedisNode {
+export interface OpenLogResponse {
   /**
-   * Redis 节点上 Key 的个数。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Keys: number
+  RequestId?: string
+}
+
+/**
+ * ModifyLog返回参数结构体
+ */
+export interface ModifyLogResponse {
   /**
-   * Redis 节点 Slot 分布范围。例如：0-5460。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Slot: string
-  /**
-   * 节点的序列 ID。
-   */
-  NodeId: string
-  /**
-   * 节点的状态。
-   */
-  Status: string
-  /**
-   * 节点角色。
-   */
-  Role: string
+  RequestId?: string
 }
 
 /**
@@ -1892,6 +2002,32 @@ export interface InstanceTagInfo {
    * 标签值。
    */
   TagValue: string
+}
+
+/**
+ * Redis节点的运行信息
+ */
+export interface RedisNode {
+  /**
+   * Redis 节点上 Key 的个数。
+   */
+  Keys: number
+  /**
+   * Redis 节点 Slot 分布范围。例如：0-5460。
+   */
+  Slot: string
+  /**
+   * 节点的序列 ID。
+   */
+  NodeId: string
+  /**
+   * 节点的状态。
+   */
+  Status: string
+  /**
+   * 节点角色。
+   */
+  Role: string
 }
 
 /**
@@ -2219,6 +2355,24 @@ export interface DescribeInstanceDTSInfoRequest {
 }
 
 /**
+ * DescribeLogInstanceList返回参数结构体
+ */
+export interface DescribeLogInstanceListResponse {
+  /**
+   * <p>查询到的日志的数量。</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>日志平台实例信息。</p>
+   */
+  Items?: Array<LogInstance>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateParamTemplate请求参数结构体
  */
 export interface CreateParamTemplateRequest {
@@ -2395,22 +2549,27 @@ export interface DescribeBackupUrlResponse {
  */
 export interface InquiryPriceRenewInstanceResponse {
   /**
-   * 价格
+   * <p>折扣后价格</p>
    */
   Price?: number
   /**
-   * 高精度价格
+   * <p>高精度折扣后价格</p>
    */
   HighPrecisionPrice?: number
   /**
-   * 币种
+   * <p>原价</p>
+   */
+  OriginalPrice?: number
+  /**
+   * <p>高精度原价</p>
+   */
+  HighPrecisionOriginalPrice?: number
+  /**
+   * <p>币种</p>
    */
   Currency?: string
   /**
-   * 价格金额单位
-
-- pent: 分
-- microPent: 微分
+   * <p>价格金额单位</p><ul><li>pent: 分</li><li>microPent: 微分</li></ul>
    */
   AmountUnit?: string
   /**
@@ -2435,51 +2594,17 @@ export interface DescribeDBSecurityGroupsRequest {
 }
 
 /**
- * ModifyInstanceLogDelivery请求参数结构体
+ * CloseLog请求参数结构体
  */
-export interface ModifyInstanceLogDeliveryRequest {
+export interface CloseLogRequest {
   /**
-   * 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。
+   * <p>实例ID</p>
    */
   InstanceId: string
   /**
-   * 日志类型。当前仅支持设置为slowlog，指慢查询日志。
+   * <p>日志类型</p>
    */
   LogType: string
-  /**
-   * 日志投递开启状态。
-- true：开启。
-- false：关闭。
-   */
-  Enabled: boolean
-  /**
-   * 投递的日志集ID。通过接口[DescribeLogsets](https://cloud.tencent.com/document/api/614/58624)获取到日志集ID。
-   */
-  LogsetId?: string
-  /**
-   * 投递的日志主题ID。通过接口[DescribeTopics](https://cloud.tencent.com/document/api/614/56454)获取到日志主题ID。
-   */
-  TopicId?: string
-  /**
-   * 日志集名称。**LogsetId**为空时必传，系统会以LogsetName为名称来创建新的日志集并投递日志。
-   */
-  LogsetName?: string
-  /**
-   * 日志主题名称。**TopicId**为空时必传，系统会以TopicName为名称来创建新的日志主题并投递日志。
-   */
-  TopicName?: string
-  /**
-   * 日志集所在地域，不传默认使用实例所在地域。
-   */
-  LogRegion?: string
-  /**
-   * 日志存储时间，默认为30天，可选范围1-3600天。
-   */
-  Period?: number
-  /**
-   * 创建日志主题时，是否创建索引。
-   */
-  CreateIndex?: boolean
 }
 
 /**
@@ -2492,22 +2617,27 @@ export type DescribeProductInfoRequest = null
  */
 export interface InquiryPriceCreateInstanceResponse {
   /**
-   * 价格
+   * <p>折扣后价格</p>
    */
   Price?: number
   /**
-   * 高精度价格
+   * <p>高精度折扣后价格</p>
    */
   HighPrecisionPrice?: number
   /**
-   * 币种
+   * <p>原价</p>
+   */
+  OriginalPrice?: number
+  /**
+   * <p>高精度原价</p>
+   */
+  HighPrecisionOriginalPrice?: number
+  /**
+   * <p>币种</p>
    */
   Currency?: string
   /**
-   * 价格金额单位
-
-- pent: 分
-- microPent: 微分
+   * <p>价格金额单位</p><ul><li>pent: 分</li><li>microPent: 微分</li></ul>
    */
   AmountUnit?: string
   /**
@@ -2590,6 +2720,16 @@ export interface DescribeReplicationGroupInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * StartupInstance请求参数结构体
+ */
+export interface StartupInstanceRequest {
+  /**
+   * 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在回收站复制需解隔离的实例 ID。
+   */
+  InstanceId: string
 }
 
 /**
@@ -2745,6 +2885,21 @@ export interface DescribeInstanceBackupsResponse {
    * 实例的备份数组。
    */
   BackupSet?: Array<RedisBackupSet>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StartupInstance返回参数结构体
+ */
+export interface StartupInstanceResponse {
+  /**
+   * 该字段已废弃，请通过查询实例接口获取到的状态来判断实例是否已解隔离
+   * @deprecated
+   */
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2954,6 +3109,43 @@ export interface CloneInstancesResponse {
    * 订单号。
    */
   DealName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeBackupDownloadRestriction返回参数结构体
+ */
+export interface DescribeBackupDownloadRestrictionResponse {
+  /**
+   * 下载备份文件的网络限制类型：
+
+- NoLimit：不限制，腾讯云内外网均可以下载备份文件。
+-  LimitOnlyIntranet：仅腾讯云自动分配的内网地址可下载备份文件。
+- Customize：指用户自定义的私有网络可下载备份文件。
+   */
+  LimitType?: string
+  /**
+   * 该参数仅支持输入 In，表示自定义的**LimitVpc**可以下载备份文件。
+   */
+  VpcComparisonSymbol?: string
+  /**
+   * 标识自定义的 LimitIp 地址是否可下载备份文件。
+
+- In: 自定义的 IP 地址可以下载。
+- NotIn: 自定义的 IP 不可以下载。
+   */
+  IpComparisonSymbol?: string
+  /**
+   * 自定义的可下载备份文件的 VPC ID。当参数**LimitType**为**Customize **时，显示该参数。
+   */
+  LimitVpc?: Array<BackupLimitVpcItem>
+  /**
+   * 自定义的可下载备份文件的 VPC IP 地址。当参数**LimitType**为**Customize **时，显示该参数。
+   */
+  LimitIp?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3526,6 +3718,34 @@ export interface ApplyParamsTemplateResponse {
 }
 
 /**
+ * CreateExportTask返回参数结构体
+ */
+export interface CreateExportTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 日志过滤条件
+ */
+export interface LogFilter {
+  /**
+   * <p>过滤条件名称。</p><p>枚举值：</p><ul><li>Timestamp： 创建时间（格式：2006-01-02 15:04:05.000）</li><li>UserName： 用户名</li><li>CacheCode： 缓存代码，后端redis节点</li><li>ClientAddr： 客户端地址</li><li>CommandDetail： 命令详情</li><li>CommandLatency： 命令延迟（毫秒）</li><li>CommandType： 命令类型</li><li>DBId： 数据库ID</li><li>ErrMsg： 错误信息</li></ul>
+   */
+  Type?: string
+  /**
+   * <p>过滤条件匹配类型。</p><p>枚举值：</p><ul><li>INC： 包含，多个值之前是||的关系</li><li>EXC： 不包含，多个值之前是||的关系</li><li>EQS： 等于，多个值之前是||的关系</li><li>NEQ： 不等于，多个值之前是&amp;&amp;的关系</li><li>RA： 范围</li></ul>
+   */
+  Compare?: string
+  /**
+   * <p>过滤条件匹配值。当Compare=RA时，例如：[&quot;1-100&quot;,&quot;200-300&quot;]。</p>
+   */
+  Value?: Array<string>
+}
+
+/**
  * DescribeReplicationGroup请求参数结构体
  */
 export interface DescribeReplicationGroupRequest {
@@ -3545,6 +3765,23 @@ export interface DescribeReplicationGroupRequest {
    * 模糊查询的关键字，可以设置为复制组ID或复制组名称进行模糊查询。请登录[Redis 控制台](https://console.cloud.tencent.com/redis/replication)的全球复制组列表获取复制组 ID及名称。
    */
   SearchKey?: string
+}
+
+/**
+ * DescribeInstanceSupportFeature请求参数结构体
+ */
+export interface DescribeInstanceSupportFeatureRequest {
+  /**
+   * 指定实例 ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis#/)在实例列表复制实例 ID。
+   */
+  InstanceId: string
+  /**
+   * 支持查询的功能特性如下所示。
+- read-local-node-only：就近接入。
+- multi-account：多账号管理。
+- auto-failback：故障恢复场景，主节点是否开启自动回切。
+   */
+  FeatureName: string
 }
 
 /**
@@ -3588,49 +3825,33 @@ export interface DescribeInstanceMonitorTopNCmdRequest {
 }
 
 /**
- * ModifyNetworkConfig请求参数结构体
+ * CreateExportTask请求参数结构体
  */
-export interface ModifyNetworkConfigRequest {
+export interface CreateExportTaskRequest {
   /**
-   * 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。
+   * <p>指定实例 ID。例如：crs-xjhsdj****。请登录<a href="https://console.cloud.tencent.com/redis">Redis控制台</a>在实例列表复制实例 ID。</p>
    */
   InstanceId: string
   /**
-   * 指预修改网络的类别，包括：
-- changeVip：指切换私有网络，包含其内网IPv4地址及端口。
-- changeVpc：指切换私有网络所属子网。
-- changeBaseToVpc：指基础网络切换为私有网络。
-- changeVPort：指仅修改实例网络端口。
+   * <p>日志类型。</p><p>枚举值：</p><ul><li>auditLog： 审计日志。</li></ul>
    */
-  Operation: string
+  LogType: string
   /**
-   * 指实例私有网络内网 IPv4 地址。当**Operation**为**changeVip**时，需配置该参数。
+   * <p>日志检索的起始时间。</p><p>参数格式：YYYY-MM-DD HH:mm:ss，例如 2026-03-06 00:00:00。返回结果中仅包含该时间点及之后的日志。</p>
    */
-  Vip?: string
+  StartTime: string
   /**
-   * 指修改后的私有网络 ID。
-- 当**Operation**为**changeVpc**或**changeBaseToVpc**时，需配置该参数。
-- 请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)，切换至**实例详情**页面，在**网络信息**区域，单击所属网络后面的私有网络名称，获取私有网络 ID。
-
+   * <p>日志检索的结束时间。</p><p>参数格式：YYYY-MM-DD HH:mm:ss，例如 2026-03-06 23:59:59。返回结果中仅包含该时间点及之前的日志。</p>
    */
-  VpcId?: string
+  EndTime: string
   /**
-   * 指修改后的私有网络所属子网 ID。
-- 当**Operation**为**changeVpc**或**changeBaseToVpc**时，需配置该参数。
-- 请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)，切换至**实例详情**页面，在**网络信息**区域，单击所属网络后面的子网名称，获取子网ID。
+   * <p>设置日志筛选字段，过滤并下载符合条件的日志。</p>
    */
-  SubnetId?: string
+  LogFilter?: Array<LogFilter>
   /**
-   * 原内网 IPv4 地址保留时长。
-- 单位：天。
-- 取值范围：0、1、2、3、7、15。
-**说明**：保留时长不设置或者设置为0，原网络地址将立即释放。
+   * <p>自定义下载的日志字段，多个字段以逗号分隔，例如 &quot;timestamp,operation,user&quot;。指定后仅下载所选字段的数据。不传该参数时，默认下载所有字段。</p>
    */
-  Recycle?: number
-  /**
-   * 指修改后的网络端口。当**Operation**为**changeVPort**或**changeVip**时，需配置该参数。取值范围为[1024,65535]。
-   */
-  VPort?: number
+  ColumnFilter?: Array<string>
 }
 
 /**
@@ -3694,6 +3915,69 @@ export interface CleanUpInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 实例
+ */
+export interface LogInstance {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>日志状态，create：创建中；normal：开启；close：关闭中。</p>
+   */
+  Status?: string
+  /**
+   * <p>是否可以切换日志查询-取值：yes-可以，no-不可以。该参数主要为控制存量日志迁移到日志平台做查询使用，只有为yes状态才可以调用查询日志接口。</p>
+   */
+  EnableQuery?: string
+  /**
+   * <p>开启时间</p>
+   */
+  CreateAt?: string
+  /**
+   * <p>高频存储天数</p>
+   */
+  HighLogExpireDay?: number
+  /**
+   * <p>低频存储天数</p>
+   */
+  LowLogExpireDay?: number
+  /**
+   * <p>总存储时长</p>
+   */
+  LogExpireDay?: number
+  /**
+   * <p>高频存储量，单位：MB</p>
+   */
+  HighStorage?: number
+  /**
+   * <p>低频存储量，单位：MB</p>
+   */
+  LowStorage?: number
+  /**
+   * <p>总存储量</p>
+   */
+  LogStorage?: number
+  /**
+   * <p>是否开启投递：ON，OFF</p>
+   */
+  Deliver?: string
+  /**
+   * <p>日志投递信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeliverSummary?: Array<DeliverSummary>
+  /**
+   * <p>业务侧实例相关信息，根据业务不同，返回相关信息不同。</p>
+   */
+  InstanceInfo?: InstanceInfo
+  /**
+   * <p>审计子类型</p>
+   */
+  LogSubType?: string
 }
 
 /**
@@ -3824,21 +4108,19 @@ export interface DescribeAutoBackupConfigResponse {
  */
 export interface InquiryPriceUpgradeInstanceRequest {
   /**
-   * 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。
+   * <p>实例 ID，请登录<a href="https://console.cloud.tencent.com/redis/instance/list">Redis控制台</a>在实例列表复制实例 ID。</p>
    */
   InstanceId: string
   /**
-   * 分片大小，单位：MB。
+   * <p>分片大小，单位：MB。</p>
    */
   MemSize: number
   /**
-   * 分片数量。
-- 实例为标准架构，RedisShardNum 默认为1。
-- Redis 2.8主从版、CKV主从版和 Redis 2.8单机版不需要填写。
+   * <p>分片数量。- 实例为标准架构，RedisShardNum 默认为1。- Redis 2.8主从版、CKV主从版和 Redis 2.8单机版不需要填写。</p>
    */
   RedisShardNum?: number
   /**
-   * 副本数量，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写。
+   * <p>副本数量，Redis2.8主从版、CKV主从版和Redis2.8单机版不需要填写。</p>
    */
   RedisReplicasNum?: number
 }
@@ -3909,6 +4191,48 @@ export interface DescribeInstanceEventsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 日志结果
+ */
+export interface LogResult {
+  /**
+   * <p>数据库ID</p>
+   */
+  DBId?: number
+  /**
+   * <p>命令延迟（毫秒）</p>
+   */
+  CommandLatency?: number
+  /**
+   * <p>创建时间（格式：2006-01-02 15:04:05.000）</p>
+   */
+  Timestamp?: string
+  /**
+   * <p>客户端地址</p>
+   */
+  ClientAddr?: string
+  /**
+   * <p>用户名</p>
+   */
+  UserName?: string
+  /**
+   * <p>命令类型</p>
+   */
+  CommandType?: string
+  /**
+   * <p>缓存代码，后端redis节点</p>
+   */
+  CacheCode?: string
+  /**
+   * <p>命令详情</p>
+   */
+  CommandDetail?: string
+  /**
+   * <p>错误信息</p>
+   */
+  ErrMsg?: string
 }
 
 /**
@@ -4083,17 +4407,17 @@ export interface DescribeInstanceSecurityGroupResponse {
 }
 
 /**
- * ReleaseWanAddress返回参数结构体
+ * DescribeExportTasks返回参数结构体
  */
-export interface ReleaseWanAddressResponse {
+export interface DescribeExportTasksResponse {
   /**
-   * 异步流程ID
+   * <p>查询日志记录的总数目。</p>
    */
-  FlowId?: number
+  TotalCount?: number
   /**
-   * 关闭外网的状态
+   * <p>日志文件属性信息，包含：文件名、文件大小、下载地址等。</p>
    */
-  WanStatus?: string
+  Items?: Array<ExportFile>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4260,12 +4584,11 @@ export interface SwitchProxyResponse {
 }
 
 /**
- * StartupInstance返回参数结构体
+ * ResetPassword返回参数结构体
  */
-export interface StartupInstanceResponse {
+export interface ResetPasswordResponse {
   /**
-   * 该字段已废弃，请通过查询实例接口获取到的状态来判断实例是否已解隔离
-   * @deprecated
+   * 任务ID（修改密码时的任务ID，如果时切换免密码或者非免密码实例，则无需关注此返回值）
    */
   TaskId?: number
   /**
@@ -4809,6 +5132,24 @@ export interface DescribeSlowLogRequest {
 }
 
 /**
+ * 业务侧实例过滤参数
+ */
+export interface Filter {
+  /**
+   * <p>过滤字段。</p><p>枚举值：</p><ul><li>InstanceId： 实例 ID。</li><li>InstanceName： 实例名称。</li><li>TagKey： 标签键。</li><li>InstanceTags： 实例标签键值，标签key值&amp;标签value值。</li></ul>
+   */
+  Name: string
+  /**
+   * <p>过滤字段的值。</p>
+   */
+  Values: Array<string>
+  /**
+   * <p>精确匹配开关。</p><ul><li>false：关闭。</li><li>true：开启。</li></ul>
+   */
+  ExactMatch?: boolean
+}
+
+/**
  * ModifyInstancePassword请求参数结构体
  */
 export interface ModifyInstancePasswordRequest {
@@ -4840,13 +5181,71 @@ export interface ModifyReplicationGroupResponse {
 }
 
 /**
- * DeleteParamTemplate请求参数结构体
+ * 实例信息
  */
-export interface DeleteParamTemplateRequest {
+export interface InstanceInfo {
   /**
-   * 参数模板 ID。请登录 [Redis 控制台的参数模板](https://console.cloud.tencent.com/redis/templates)页面获取模板 ID。
+   * <p>实例名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TemplateId: string
+  InstanceName?: string
+  /**
+   * <p>项目ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: number
+  /**
+   * <p>实例状态</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * <p>流程中的实例返回的子状态。</p><p>枚举值：</p><ul><li>0： 磁盘只读，</li></ul>
+   */
+  SubStatus?: number
+  /**
+   * <p>地域</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * <p>区</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
+  /**
+   * <p>降级策略，单位：毫秒，实例P99达到降级策略后，审计数据自动丢弃，优先保障业务的可用性,默认值：500毫秒，范围值：300-1000毫秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DegradeStrategy?: number
+  /**
+   * <p>标签信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceTags?: Array<InstanceTagInfo>
+  /**
+   * <p>架构版本</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
+}
+
+/**
+ * ReleaseWanAddress返回参数结构体
+ */
+export interface ReleaseWanAddressResponse {
+  /**
+   * 异步流程ID
+   */
+  FlowId?: number
+  /**
+   * 关闭外网的状态
+   */
+  WanStatus?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4860,17 +5259,42 @@ export interface DescribeAutoBackupConfigRequest {
 }
 
 /**
- * DescribeInstanceMonitorSIP返回参数结构体
+ * DescribeBackupUrl请求参数结构体
  */
-export interface DescribeInstanceMonitorSIPResponse {
+export interface DescribeBackupUrlRequest {
   /**
-   * 访问来源信息
+   * 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。
    */
-  Data?: Array<SourceInfo>
+  InstanceId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 备份 ID，可通过 [DescribeInstanceBackups ](https://cloud.tencent.com/document/product/239/20011)接口返回的参数 RedisBackupSet 获取。
    */
-  RequestId?: string
+  BackupId: string
+  /**
+   * 下载备份文件的网络限制类型，如果不配置该参数，则使用用户自定义的配置。
+- NoLimit：不限制，腾讯云内外网均可以下载备份文件。
+-  LimitOnlyIntranet：仅腾讯云自动分配的内网地址可下载备份文件。
+- Customize：指用户自定义的私有网络可下载备份文件。
+   */
+  LimitType?: string
+  /**
+   * 该参数仅支持输入 In，表示自定义的**LimitVpc**可以下载备份文件。
+   */
+  VpcComparisonSymbol?: string
+  /**
+   * 标识自定义的 LimitIp 地址是否可下载备份文件。
+- In: 自定义的 IP 地址可以下载。默认为 In。
+- NotIn: 自定义的 IP 不可以下载。
+   */
+  IpComparisonSymbol?: string
+  /**
+   * 自定义的可下载备份文件的 VPC ID。当参数**LimitType**为**Customize **时，需配置该参数。
+   */
+  LimitVpc?: Array<BackupLimitVpcItem>
+  /**
+   * 自定义的可下载备份文件的 VPC IP 地址。当参数**LimitType**为**Customize **时，需配置该参数。
+   */
+  LimitIp?: Array<string>
 }
 
 /**
@@ -4904,20 +5328,13 @@ export interface ChangeInstanceRoleRequest {
 }
 
 /**
- * DescribeInstanceSupportFeature请求参数结构体
+ * CloseLog返回参数结构体
  */
-export interface DescribeInstanceSupportFeatureRequest {
+export interface CloseLogResponse {
   /**
-   * 指定实例 ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis#/)在实例列表复制实例 ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
-  /**
-   * 支持查询的功能特性如下所示。
-- read-local-node-only：就近接入。
-- multi-account：多账号管理。
-- auto-failback：故障恢复场景，主节点是否开启自动回切。
-   */
-  FeatureName: string
+  RequestId?: string
 }
 
 /**
@@ -4953,36 +5370,9 @@ export interface DescribeInstanceMonitorHotKeyRequest {
 }
 
 /**
- * DescribeBackupDownloadRestriction返回参数结构体
+ * DeleteParamTemplate返回参数结构体
  */
-export interface DescribeBackupDownloadRestrictionResponse {
-  /**
-   * 下载备份文件的网络限制类型：
-
-- NoLimit：不限制，腾讯云内外网均可以下载备份文件。
--  LimitOnlyIntranet：仅腾讯云自动分配的内网地址可下载备份文件。
-- Customize：指用户自定义的私有网络可下载备份文件。
-   */
-  LimitType?: string
-  /**
-   * 该参数仅支持输入 In，表示自定义的**LimitVpc**可以下载备份文件。
-   */
-  VpcComparisonSymbol?: string
-  /**
-   * 标识自定义的 LimitIp 地址是否可下载备份文件。
-
-- In: 自定义的 IP 地址可以下载。
-- NotIn: 自定义的 IP 不可以下载。
-   */
-  IpComparisonSymbol?: string
-  /**
-   * 自定义的可下载备份文件的 VPC ID。当参数**LimitType**为**Customize **时，显示该参数。
-   */
-  LimitVpc?: Array<BackupLimitVpcItem>
-  /**
-   * 自定义的可下载备份文件的 VPC IP 地址。当参数**LimitType**为**Customize **时，显示该参数。
-   */
-  LimitIp?: Array<string>
+export interface DeleteParamTemplateResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5386,13 +5776,11 @@ export interface ReleaseWanAddressRequest {
  */
 export interface InquiryPriceRenewInstanceRequest {
   /**
-   * 包年包月实例的购买时长。
-- 单位：月。
-- 取值范围 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。
+   * <p>包年包月实例的购买时长。- 单位：月。- 取值范围 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。</p>
    */
   Period: number
   /**
-   * 指定实例 ID。例如：crs-xjhsdj****。请登录 [Redis 控制台](https://console.cloud.tencent.com/redis)在实例列表复制包年包月实例 ID。
+   * <p>指定实例 ID。例如：crs-xjhsdj****。请登录 <a href="https://console.cloud.tencent.com/redis">Redis 控制台</a>在实例列表复制包年包月实例 ID。</p>
    */
   InstanceId: string
 }
@@ -5495,6 +5883,37 @@ export interface DestroyPrepaidInstanceResponse {
 }
 
 /**
+ * 投递信息
+ */
+export interface DeliverSummary {
+  /**
+   * <p>投递类型，store（存储类），mq（消息通道）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeliverType?: string
+  /**
+   * <p>投递子类型：cls，ckafka。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeliverSubType?: string
+  /**
+   * <p>投递订阅者</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeliverConsumer?: string
+  /**
+   * <p>投递订阅者名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeliverConsumerName?: string
+  /**
+   * <p>投递</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeliverError?: string
+}
+
+/**
  * 实例节点组信息
  */
 export interface ReplicaGroup {
@@ -5532,6 +5951,75 @@ export interface DescribeRedisClusterOverviewRequest {
 }
 
 /**
+ * OpenLog请求参数结构体
+ */
+export interface OpenLogRequest {
+  /**
+   * <p>指定实例 ID。例如：crs-xjhsdj****。请登录<a href="https://console.cloud.tencent.com/redis">Redis控制台</a>在实例列表复制实例 ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>日志类型。</p><p>枚举值：</p><ul><li>auditLog： 审计日志。</li></ul>
+   */
+  LogType: string
+  /**
+   * <p>日志子类型。</p><p>枚举值：</p><ul><li>write： 写命令。</li><li>read： 读命令。</li><li>all： 读写命令。</li></ul>
+   */
+  LogSubType: string
+  /**
+   * <p>日志有效期, 单位：天。</p><p>枚举值：</p><ul><li>7：  7 天</li><li>30： 30 天</li></ul><p>默认值：7</p>
+   */
+  LogExpireDay: number
+  /**
+   * <p>高频日志有效期, 单位：天。</p><p>枚举值：</p><ul><li>7： 7天</li></ul><p>默认值：7</p>
+   */
+  HighLogExpireDay: number
+  /**
+   * <p>日志降级策略阈值。当实例 P99 延迟达到该阈值后，系统将自动丢弃审计日志数据，以优先保障业务可用性。</p><ul><li>单位：毫秒。</li><li>默认值：500。</li><li>取值范围：[300, 1000]。</li></ul>
+   */
+  DegradeStrategy?: number
+}
+
+/**
+ * UpgradeInstance请求参数结构体
+ */
+export interface UpgradeInstanceRequest {
+  /**
+   * 待变更实例 ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。
+   */
+  InstanceId: string
+  /**
+   * 指实例每个分片内存变更后的大小。
+- 单位 MB。
+- 每次只能修改参数MemSize、RedisShardNum和RedisReplicasNum其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。
+- 缩容时，缩容后的规格务必要大于等于使用容量的1.3倍，否则将执行失败。
+   */
+  MemSize: number
+  /**
+   * 指实例变更后的分片数量。
+- 标准架构不需要配置该参数，集群架构为必填参数。
+- 集群架构，每次只能修改参数RedisShardNum、MemSize和RedisReplicasNum其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。
+   */
+  RedisShardNum?: number
+  /**
+   * 指实例变更后的副本数量。
+- 每次只能修改参数 RedisReplicasNum、MemSize 和 RedisShardNum 其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。
+- 多AZ实例修改副本时必须要传入 NodeSet。
+   */
+  RedisReplicasNum?: number
+  /**
+   * 多AZ实例，增加副本时的节点信息，包括副本的 ID 编号及可用区信息。非多AZ实例不需要配置该参数。
+   */
+  NodeSet?: Array<RedisNodeInfo>
+  /**
+   * 切换时间。 
+- 1：维护时间窗操作：指升级规格在设置的维护时间窗内执行。请通过接口[DescribeMaintenanceWindow](https://cloud.tencent.com/document/product/239/46336)查询设置的维护时间窗时间段。增减副本、增减分片、扩缩内存均支持在维护时间窗执行操作。维护时间窗升级规格正在分地域逐步测试发布中，部分区域已支持，未覆盖地域若需紧急接入，请[提交工单](https://console.cloud.tencent.com/workorder/category)申请白名单。
+- 2：立即操作：操作将立即执行，无需等待维护时间窗。系统默认设置为立即操作。
+   */
+  SwitchOption?: number
+}
+
+/**
  * DescribeCommonDBInstances返回参数结构体
  */
 export interface DescribeCommonDBInstancesResponse {
@@ -5554,69 +6042,47 @@ export interface DescribeCommonDBInstancesResponse {
  */
 export interface InquiryPriceCreateInstanceRequest {
   /**
-   * 实例类型。
-- 2：Redis 2.8 内存版（标准架构）。
-- 6：Redis 4.0 内存版（标准架构）。
-- 7：Redis 4.0 内存版（集群架构）。
-- 8：Redis 5.0 内存版（标准架构）。
-- 9：Redis 5.0 内存版（集群架构）。
-- 15：Redis 6.2 内存版（标准架构）。
-- 16：Redis 6.2 内存版（集群架构）。
-- 17：Redis 7.0 内存版（标准架构）。
-- 18：Redis 7.0 内存版（集群架构）。
-- 200:Memcached 1.6 内存版（集群架构）。
+   * <p>实例类型。- 2：Redis 2.8 内存版（标准架构）。- 6：Redis 4.0 内存版（标准架构）。- 7：Redis 4.0 内存版（集群架构）。- 8：Redis 5.0 内存版（标准架构）。- 9：Redis 5.0 内存版（集群架构）。- 15：Redis 6.2 内存版（标准架构）。- 16：Redis 6.2 内存版（集群架构）。- 17：Redis 7.0 内存版（标准架构）。- 18：Redis 7.0 内存版（集群架构）。- 200:Memcached 1.6 内存版（集群架构）。</p>
    */
   TypeId: number
   /**
-   * 内存容量，单位为MB， 数值需为1024的整数倍，具体规格以 [查询产品售卖规格](https://cloud.tencent.com/document/api/239/30600) 返回的规格为准。
-TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架构时，MemSize是单分片内存容量。
+   * <p>内存容量，单位为MB， 数值需为1024的整数倍，具体规格以 <a href="https://cloud.tencent.com/document/api/239/30600">查询产品售卖规格</a> 返回的规格为准。TypeId为标准架构时，MemSize是实例总内存容量；TypeId为集群架构时，MemSize是单分片内存容量。</p>
    */
   MemSize: number
   /**
-   * 实例数量，单次购买实例数量以 [查询产品售卖规格](https://cloud.tencent.com/document/api/239/30600) 返回的规格为准。
+   * <p>实例数量，单次购买实例数量以 <a href="https://cloud.tencent.com/document/api/239/30600">查询产品售卖规格</a> 返回的规格为准。</p>
    */
   GoodsNum: number
   /**
-   * 购买时长，在创建包年包月实例的时候需要填写，按量计费实例填1即可，单位：月，取值范围 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。
+   * <p>购买时长，在创建包年包月实例的时候需要填写，按量计费实例填1即可，单位：月，取值范围 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。</p>
    */
   Period: number
   /**
-   * 付费方式。
-- 0：按量计费。
-- 1：包年包月。
+   * <p>付费方式。- 0：按量计费。- 1：包年包月。</p>
    */
   BillingMode: number
   /**
-   * 实例所属的可用区 ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
-   **说明**：请在 **ZoneId** 与 **ZoneName** 中至少指定一个参数。
+   * <p>实例所属的可用区 ID，可参考<a href="https://cloud.tencent.com/document/product/239/4106">地域和可用区</a>  。<strong>说明</strong>：请在 <strong>ZoneId</strong> 与 <strong>ZoneName</strong> 中至少指定一个参数。</p>
    */
   ZoneId?: number
   /**
-   * 实例分片数量。
-- 标准架构需要配置分片数量为1。
-- 集群架构分片数量支持设置为1、3、5、8、12、16、24、32、40、48、64、80、96、128。
+   * <p>实例分片数量。- 标准架构需要配置分片数量为1。- 集群架构分片数量支持设置为1、3、5、8、12、16、24、32、40、48、64、80、96、128。</p>
    */
   RedisShardNum?: number
   /**
-   * 实例副本数量。取值范围为：1、2、3、4、5。
+   * <p>实例副本数量。取值范围为：1、2、3、4、5。</p>
    */
   RedisReplicasNum?: number
   /**
-   * 是否支持副本只读。Redis2.8标准架构、CKV标准架构无需填写。
-- true：无需支持副本只读。
-- false：需支持。
+   * <p>是否支持副本只读。Redis2.8标准架构、CKV标准架构无需填写。- true：无需支持副本只读。- false：需支持。</p>
    */
   ReplicasReadonly?: boolean
   /**
-   * 实例所属的可用区名称，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
-   **说明**：请在 **ZoneId** 与 **ZoneName** 中至少指定一个参数。
+   * <p>实例所属的可用区名称，可参考<a href="https://cloud.tencent.com/document/product/239/4106">地域和可用区</a>  。<strong>说明</strong>：请在 <strong>ZoneId</strong> 与 <strong>ZoneName</strong> 中至少指定一个参数。</p>
    */
   ZoneName?: string
   /**
-   * 部署方式。
-- local：本地盘版，默认为 local。
-- cloud：云盘版。
-- cdc：独享集群版。
+   * <p>部署方式。- local：本地盘版，默认为 local。- cloud：云盘版。- cdc：独享集群版。</p>
    */
   ProductVersion?: string
 }
@@ -5782,13 +6248,22 @@ export interface DescribeInstanceNodeInfoRequest {
 }
 
 /**
- * DescribeMaintenanceWindow请求参数结构体
+ * DescribeLogs返回参数结构体
  */
-export interface DescribeMaintenanceWindowRequest {
+export interface DescribeLogsResponse {
   /**
-   * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
+   * <p>查询的日志总数量。</p>
    */
-  InstanceId: string
+  TotalCount?: number
+  /**
+   * <p>日志详情。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<LogResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5938,33 +6413,25 @@ export interface DescribeSSLStatusResponse {
 }
 
 /**
- * DescribeTendisSlowLog请求参数结构体
+ * DescribeExportTasks请求参数结构体
  */
-export interface DescribeTendisSlowLogRequest {
+export interface DescribeExportTasksRequest {
   /**
-   * 实例 ID，请登录[Tendis控制台](https://console.cloud.tencent.com/tendis)在实例列表复制实例 ID。
+   * <p>日志类型。</p><p>枚举值：</p><ul><li>auditLog： 审计日志。</li></ul>
+   */
+  LogType: string
+  /**
+   * <p>每页输出的任务列表大小。</p><ul><li>默认值：20。</li><li>取值范围：[1,100]。</li></ul>
+   */
+  Limit: number
+  /**
+   * <p>分页偏移量。</p><ul><li>默认值：0。</li><li>取值：Limit 整数倍。计算公式：offset=limit*(页码-1)。</li></ul>
+   */
+  Offset: number
+  /**
+   * <p>指定查询的实例 ID。请登录<a href="https://console.cloud.tencent.com/redis">Redis 控制台</a>在实例列表复制实例 ID。</p>
    */
   InstanceId: string
-  /**
-   * 开始时间：2019-09-08 12:12:41，查询时间最大跨度30天。
-   */
-  BeginTime: string
-  /**
-   * 结束时间：2019-09-09 12:12:41，查询时间最大跨度30天。
-   */
-  EndTime: string
-  /**
-   * 慢查询阈值，取值为大于0的正整数，单位：毫秒。
-   */
-  MinQueryTime?: number
-  /**
-   * 页面大小。默认为20，最小为1，最大为100。
-   */
-  Limit?: number
-  /**
-   * 分页偏移量。默认为0，取值为 Limit 整数倍，计算公式：offset=limit*(页码-1)。
-   */
-  Offset?: number
 }
 
 /**
@@ -6014,6 +6481,36 @@ export interface DescribeRedisClustersResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeLogInstanceList请求参数结构体
+ */
+export interface DescribeLogInstanceListRequest {
+  /**
+   * <p>日志类型。</p><p>枚举值：</p><ul><li>auditLog： 审计日志。</li></ul>
+   */
+  LogType: string
+  /**
+   * <p>每页输出的任务列表大小。</p><ul><li>取值范围：[1,100]。</li><li>默认值：20。</li></ul>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移量。默认为0。取值为 Limit 整数倍。计算公式：offset=limit*(页码-1)。</p>
+   */
+  Offset?: number
+  /**
+   * <p>设置日志筛选字段，过滤并返回符合条件的日志。</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>日志子类型。</p><p>枚举值：</p><ul><li>write： 写日志。</li><li>read： 读日志。</li><li>all： 读写日志。</li></ul>
+   */
+  LogSubType?: string
+  /**
+   * <p>日志开关。不传查询所有日志实例。</p><ul><li>on：开启。</li><li>off：关闭。</li></ul>
+   */
+  LogSwitch?: string
 }
 
 /**
@@ -6266,13 +6763,49 @@ export interface DisassociateSecurityGroupsRequest {
 }
 
 /**
- * StartupInstance请求参数结构体
+ * ModifyNetworkConfig请求参数结构体
  */
-export interface StartupInstanceRequest {
+export interface ModifyNetworkConfigRequest {
   /**
-   * 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在回收站复制需解隔离的实例 ID。
+   * 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。
    */
   InstanceId: string
+  /**
+   * 指预修改网络的类别，包括：
+- changeVip：指切换私有网络，包含其内网IPv4地址及端口。
+- changeVpc：指切换私有网络所属子网。
+- changeBaseToVpc：指基础网络切换为私有网络。
+- changeVPort：指仅修改实例网络端口。
+   */
+  Operation: string
+  /**
+   * 指实例私有网络内网 IPv4 地址。当**Operation**为**changeVip**时，需配置该参数。
+   */
+  Vip?: string
+  /**
+   * 指修改后的私有网络 ID。
+- 当**Operation**为**changeVpc**或**changeBaseToVpc**时，需配置该参数。
+- 请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)，切换至**实例详情**页面，在**网络信息**区域，单击所属网络后面的私有网络名称，获取私有网络 ID。
+
+   */
+  VpcId?: string
+  /**
+   * 指修改后的私有网络所属子网 ID。
+- 当**Operation**为**changeVpc**或**changeBaseToVpc**时，需配置该参数。
+- 请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)，切换至**实例详情**页面，在**网络信息**区域，单击所属网络后面的子网名称，获取子网ID。
+   */
+  SubnetId?: string
+  /**
+   * 原内网 IPv4 地址保留时长。
+- 单位：天。
+- 取值范围：0、1、2、3、7、15。
+**说明**：保留时长不设置或者设置为0，原网络地址将立即释放。
+   */
+  Recycle?: number
+  /**
+   * 指修改后的网络端口。当**Operation**为**changeVPort**或**changeVip**时，需配置该参数。取值范围为[1024,65535]。
+   */
+  VPort?: number
 }
 
 /**
@@ -6347,6 +6880,16 @@ export interface CreateInstanceAccountResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeMaintenanceWindow请求参数结构体
+ */
+export interface DescribeMaintenanceWindowRequest {
+  /**
+   * 指定实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
+   */
+  InstanceId: string
 }
 
 /**
@@ -6458,22 +7001,27 @@ export interface SecurityGroupDetail {
  */
 export interface InquiryPriceUpgradeInstanceResponse {
   /**
-   * 价格
+   * <p>折扣后价格</p>
    */
   Price?: number
   /**
-   * 高精度价格
+   * <p>高精度折扣后价格</p>
    */
   HighPrecisionPrice?: number
   /**
-   * 币种
+   * <p>原价</p>
+   */
+  OriginalPrice?: number
+  /**
+   * <p>高精度原价</p>
+   */
+  HighPrecisionOriginalPrice?: number
+  /**
+   * <p>币种</p>
    */
   Currency?: string
   /**
-   * 价格金额单位
-
-- pent: 分
-- microPent: 微分
+   * <p>价格金额单位</p><ul><li>pent: 分</li><li>microPent: 微分</li></ul>
    */
   AmountUnit?: string
   /**
@@ -6579,29 +7127,51 @@ export interface OpenSSLResponse {
 }
 
 /**
- * Tendis慢查询详情
+ * ModifyInstanceLogDelivery请求参数结构体
  */
-export interface TendisSlowLogDetail {
+export interface ModifyInstanceLogDeliveryRequest {
   /**
-   * 执行时间
+   * 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。
    */
-  ExecuteTime?: string
+  InstanceId: string
   /**
-   * 慢查询耗时（毫秒）
+   * 日志类型。当前仅支持设置为slowlog，指慢查询日志。
    */
-  Duration?: number
+  LogType: string
   /**
-   * 命令
+   * 日志投递开启状态。
+- true：开启。
+- false：关闭。
    */
-  Command?: string
+  Enabled: boolean
   /**
-   * 详细命令行信息
+   * 投递的日志集ID。通过接口[DescribeLogsets](https://cloud.tencent.com/document/api/614/58624)获取到日志集ID。
    */
-  CommandLine?: string
+  LogsetId?: string
   /**
-   * 节点ID
+   * 投递的日志主题ID。通过接口[DescribeTopics](https://cloud.tencent.com/document/api/614/56454)获取到日志主题ID。
    */
-  Node?: string
+  TopicId?: string
+  /**
+   * 日志集名称。**LogsetId**为空时必传，系统会以LogsetName为名称来创建新的日志集并投递日志。
+   */
+  LogsetName?: string
+  /**
+   * 日志主题名称。**TopicId**为空时必传，系统会以TopicName为名称来创建新的日志主题并投递日志。
+   */
+  TopicName?: string
+  /**
+   * 日志集所在地域，不传默认使用实例所在地域。
+   */
+  LogRegion?: string
+  /**
+   * 日志存储时间，默认为30天，可选范围1-3600天。
+   */
+  Period?: number
+  /**
+   * 创建日志主题时，是否创建索引。
+   */
+  CreateIndex?: boolean
 }
 
 /**
@@ -6683,42 +7253,29 @@ export interface ModifyInstanceEventResponse {
 }
 
 /**
- * UpgradeInstance请求参数结构体
+ * Tendis慢查询详情
  */
-export interface UpgradeInstanceRequest {
+export interface TendisSlowLogDetail {
   /**
-   * 待变更实例 ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。
+   * 执行时间
    */
-  InstanceId: string
+  ExecuteTime?: string
   /**
-   * 指实例每个分片内存变更后的大小。
-- 单位 MB。
-- 每次只能修改参数MemSize、RedisShardNum和RedisReplicasNum其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。
-- 缩容时，缩容后的规格务必要大于等于使用容量的1.3倍，否则将执行失败。
+   * 慢查询耗时（毫秒）
    */
-  MemSize: number
+  Duration?: number
   /**
-   * 指实例变更后的分片数量。
-- 标准架构不需要配置该参数，集群架构为必填参数。
-- 集群架构，每次只能修改参数RedisShardNum、MemSize和RedisReplicasNum其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。
+   * 命令
    */
-  RedisShardNum?: number
+  Command?: string
   /**
-   * 指实例变更后的副本数量。
-- 每次只能修改参数 RedisReplicasNum、MemSize 和 RedisShardNum 其中的一个，不能同时修改。且修改其中一个参数时，其他两个参数需输入实例原有的配置规格。
-- 多AZ实例修改副本时必须要传入 NodeSet。
+   * 详细命令行信息
    */
-  RedisReplicasNum?: number
+  CommandLine?: string
   /**
-   * 多AZ实例，增加副本时的节点信息，包括副本的 ID 编号及可用区信息。非多AZ实例不需要配置该参数。
+   * 节点ID
    */
-  NodeSet?: Array<RedisNodeInfo>
-  /**
-   * 切换时间。 
-- 1：维护时间窗操作：指升级规格在设置的维护时间窗内执行。请通过接口[DescribeMaintenanceWindow](https://cloud.tencent.com/document/product/239/46336)查询设置的维护时间窗时间段。增减副本、增减分片、扩缩内存均支持在维护时间窗执行操作。维护时间窗升级规格正在分地域逐步测试发布中，部分区域已支持，未覆盖地域若需紧急接入，请[提交工单](https://console.cloud.tencent.com/workorder/category)申请白名单。
-- 2：立即操作：操作将立即执行，无需等待维护时间窗。系统默认设置为立即操作。
-   */
-  SwitchOption?: number
+  Node?: string
 }
 
 /**
@@ -6919,6 +7476,36 @@ export interface ClearInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeTendisSlowLog请求参数结构体
+ */
+export interface DescribeTendisSlowLogRequest {
+  /**
+   * 实例 ID，请登录[Tendis控制台](https://console.cloud.tencent.com/tendis)在实例列表复制实例 ID。
+   */
+  InstanceId: string
+  /**
+   * 开始时间：2019-09-08 12:12:41，查询时间最大跨度30天。
+   */
+  BeginTime: string
+  /**
+   * 结束时间：2019-09-09 12:12:41，查询时间最大跨度30天。
+   */
+  EndTime: string
+  /**
+   * 慢查询阈值，取值为大于0的正整数，单位：毫秒。
+   */
+  MinQueryTime?: number
+  /**
+   * 页面大小。默认为20，最小为1，最大为100。
+   */
+  Limit?: number
+  /**
+   * 分页偏移量。默认为0，取值为 Limit 整数倍，计算公式：offset=limit*(页码-1)。
+   */
+  Offset?: number
 }
 
 /**

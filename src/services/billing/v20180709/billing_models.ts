@@ -7792,15 +7792,15 @@ export interface AnalyseZoneDetail {
  */
 export interface DescribeVoucherInfoResponse {
   /**
-   * 券总数
+   * <p>券总数</p>
    */
   TotalCount?: number
   /**
-   * 总余额（微分）
+   * <p>总余额（微分）</p>
    */
   TotalBalance?: number
   /**
-   * 代金券相关信息
+   * <p>代金券相关信息</p>
    */
   VoucherInfos?: Array<VoucherInfos>
   /**
@@ -8081,97 +8081,101 @@ export interface DescribeAllocateConditionsResponse {
  */
 export interface DescribeVoucherInfoRequest {
   /**
-   * 一页多少条数据，默认是20条，最大不超过1000
+   * <p>一页多少条数据，默认是20条，最大不超过1000</p>
    */
   Limit: number
   /**
-   * 第多少页，默认是1
+   * <p>第多少页，默认是1</p>
    */
   Offset: number
   /**
-   * 券状态：待使用：unUsed，已使用： used，已发货：delivered，已作废： cancel，已过期：overdue
+   * <p>券状态：待使用：unUsed，已使用：&nbsp;used，已发货：delivered，已作废：&nbsp;cancel，已过期：overdue</p>
    */
   Status?: string
   /**
-   * 代金券id
+   * <p>代金券id</p>
    */
   VoucherId?: string
   /**
-   * 代金券订单id
+   * <p>代金券订单id</p>
    */
   CodeId?: string
   /**
-   * 商品码
+   * <p>商品码</p>
    */
   ProductCode?: string
   /**
-   * 活动id
+   * <p>活动id</p>
    */
   ActivityId?: string
   /**
-   * 代金券名称
+   * <p>代金券名称</p>
    */
   VoucherName?: string
   /**
-   * 发放开始时间,例：2021-01-01
+   * <p>发放开始时间,例：2021-01-01</p>
    */
   TimeFrom?: string
   /**
-   * 发放结束时间，例：2021-01-01
+   * <p>发放结束时间，例：2021-01-01</p>
    */
   TimeTo?: string
   /**
-   * 指定排序字段：BeginTime开始时间、EndTime到期时间、CreateTime创建时间
+   * <p>指定排序字段：BeginTime开始时间、EndTime到期时间、CreateTime创建时间</p>
    */
   SortField?: string
   /**
-   * 指定升序降序：desc、asc
+   * <p>指定升序降序：desc、asc</p>
    */
   SortOrder?: string
   /**
-   * 付费模式，postPay后付费/prePay预付费/riPay预留实例/""或者"*"表示全部模式，如果payMode为""或"*"，那么productCode与subProductCode必须传空
+   * <p>付费模式，postPay后付费/prePay预付费/riPay预留实例/&quot;&quot;或者&quot;*&quot;表示全部模式，如果payMode为&quot;&quot;或&quot;*&quot;，那么productCode与subProductCode必须传空</p>
    */
   PayMode?: string
   /**
-   * 付费场景PayMode=postPay时：spotpay-竞价实例,"settle account"-普通后付费PayMode=prePay时：purchase-包年包月新购，renew-包年包月续费（自动续费），modify-包年包月配置变更(变配）PayMode=riPay时：oneOffFee-预留实例预付，hourlyFee-预留实例每小时扣费，*-支持全部付费场景
+   * <p>付费场景PayMode=postPay时：spotpay-竞价实例,&quot;settle account&quot;-普通后付费PayMode=prePay时：purchase-包年包月新购，renew-包年包月续费（自动续费），modify-包年包月配置变更(变配）PayMode=riPay时：oneOffFee-预留实例预付，hourlyFee-预留实例每小时扣费，*-支持全部付费场景</p>
    */
   PayScene?: string
   /**
-   * 操作人，默认就是用户uin
+   * <p>操作人，默认就是用户uin</p>
    */
   Operator?: string
   /**
-   * 代金券主类型 has_price 为有价现金券 no_price 为无价代金券
+   * <p>代金券主类型 has_price 为有价现金券 no_price 为无价代金券</p>
    */
   VoucherMainType?: string
   /**
-   * 代金券副类型 discount 为折扣券 deduct 为抵扣券
+   * <p>代金券副类型 discount 为折扣券 deduct 为抵扣券</p>
    */
   VoucherSubType?: string
   /**
-   * 券有效时间开始时间
+   * <p>券有效时间开始时间</p>
    */
   StartTimeFrom?: string
   /**
-   * 券有效时间结束时间
+   * <p>券有效时间结束时间</p>
    */
   StartTimeTo?: string
   /**
-   * 券失效时间开始时间
+   * <p>券失效时间开始时间</p>
    */
   EndTimeFrom?: string
   /**
-   * 券失效时间结束时间
+   * <p>券失效时间结束时间</p>
    */
   EndTimeTo?: string
   /**
-   * 发券时间开始时间
+   * <p>发券时间开始时间</p>
    */
   CreateTimeFrom?: string
   /**
-   * 发券时间结束时间
+   * <p>发券时间结束时间</p>
    */
   CreateTimeTo?: string
+  /**
+   * <p>语言参数</p><p>默认值：zh</p><p>期望返回产品名称中文或其他语言，目前仅支持中文、英文；填&quot;zh&quot;或不填时返回中文，其他情况返回英文</p>
+   */
+  Lang?: string
 }
 
 /**

@@ -85,6 +85,21 @@ Trigger 告警触发; Recovery 告警恢复
 }
 
 /**
+ * 企业微信机器人通知模板的匹配器
+ */
+export interface WeWorkRobotNoticeTmplMatcher {
+  /**
+   * 匹配状态 Invalid;
+Trigger 告警触发; Recovery 告警恢复
+   */
+  MatchingStatus: Array<string>
+  /**
+   * 模板配置
+   */
+  Template: WeWorkRobotNoticeTmpl
+}
+
+/**
  * 飞书机器人通知模板的匹配器
  */
 export interface FeiShuRobotNoticeTmplMatcher {
@@ -148,37 +163,33 @@ export interface QCloudYeheWeChatNoticeTmplItem {
 }
 
 /**
- * 官网通知内容模板
+ * AI工作台SRE数字分身任务
  */
-export interface QCloudYeheNoticeTmpl {
+export interface AIWorkbenchSREDigitalTwinTask {
   /**
-   * 邮件通知渠道
+   * 任务名称
    */
-  Email?: QCloudYeheNoticeTmplItem
+  Name: string
   /**
-   * 企业微信通知渠道
+   * 任务类型
    */
-  QYWX?: QCloudYeheNoticeTmplItem
+  TaskType: string
   /**
-   * 短信通知渠道
+   * 任务配置
    */
-  SMS?: QCloudYeheNoticeTmplItem
+  TaskConfig: string
   /**
-   * 语音通知渠道
+   * 唯一标识
    */
-  Voice?: QCloudYeheNoticeTmplItem
+  ID?: number
   /**
-   * 微信通知渠道
+   * 创建时间
    */
-  WeChat?: QCloudYeheWeChatNoticeTmplItem
+  CreatedAt?: string
   /**
-   * 站内信通知渠道
+   * 所属数字分身ID
    */
-  Site?: QCloudYeheNoticeTmplItem
-  /**
-   * 安灯通知渠道
-   */
-  Andon?: QCloudYeheNoticeTmplItem
+  TwinID?: number
 }
 
 /**
@@ -231,18 +242,35 @@ export interface NoticeContentTmpl {
 }
 
 /**
- * 企业微信机器人通知模板的匹配器
+ * DescribeAIWorkbenchSREDigitalTwinTaskList请求参数结构体
  */
-export interface WeWorkRobotNoticeTmplMatcher {
+export interface DescribeAIWorkbenchSREDigitalTwinTaskListRequest {
   /**
-   * 匹配状态 Invalid;
-Trigger 告警触发; Recovery 告警恢复
+   * 数字分身ID
    */
-  MatchingStatus: Array<string>
+  TwinID: number
   /**
-   * 模板配置
+   * 偏移量
    */
-  Template: WeWorkRobotNoticeTmpl
+  Offset?: number
+  /**
+   * 数量限制
+   */
+  Limit?: number
+}
+
+/**
+ * AI工作台SRE数字分身工作日志列表
+ */
+export interface AIWorkbenchSREDigitalTwinWorkLogList {
+  /**
+   * 工作日志列表
+   */
+  WorkLogs?: Array<AIWorkbenchSREDigitalTwinWorkLog>
+  /**
+   * 总数
+   */
+  Total?: number
 }
 
 /**
@@ -333,6 +361,104 @@ export interface NoticeContentTmplBindPolicyCount {
 }
 
 /**
+ * AI工作台SRE数字分身工作日志
+ */
+export interface AIWorkbenchSREDigitalTwinWorkLog {
+  /**
+   * 唯一标识符
+   */
+  ID?: number
+  /**
+   * 创建时间
+   */
+  CreatedAt?: string
+  /**
+   * 所属数字分身ID
+   */
+  TwinID?: number
+  /**
+   * 所属数字分身任务ID
+   */
+  TaskID?: number
+  /**
+   * 分析时间
+   */
+  StartTime?: string
+  /**
+   * 分析状态
+   */
+  Status?: string
+  /**
+   * 分析结果摘要
+   */
+  Result?: string
+  /**
+   * 所属任务名称
+   */
+  TaskName?: string
+  /**
+   * 所属任务类型
+   */
+  TaskType?: string
+}
+
+/**
+ * TriggerAIWorkbenchSREDigitalTwinTask请求参数结构体
+ */
+export interface TriggerAIWorkbenchSREDigitalTwinTaskRequest {
+  /**
+   * 数字分身任务ID
+   */
+  TaskID: number
+}
+
+/**
+ * TriggerAIWorkbenchSREDigitalTwinTask返回参数结构体
+ */
+export interface TriggerAIWorkbenchSREDigitalTwinTaskResponse {
+  /**
+   * Json序列化路径
+   */
+  JSONStrPaths?: Array<string>
+  /**
+   * 数字分身任务信息
+   */
+  Data?: TriggerDigitalTwinTaskResp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAIWorkbenchSREDigitalTwinWorkLogList返回参数结构体
+ */
+export interface DescribeAIWorkbenchSREDigitalTwinWorkLogListResponse {
+  /**
+   * Json序列化路径
+   */
+  JSONStrPaths?: Array<string>
+  /**
+   * 数字分身工作日志列表
+   */
+  Data?: AIWorkbenchSREDigitalTwinWorkLogList
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 触发数字分身任务响应
+ */
+export interface TriggerDigitalTwinTaskResp {
+  /**
+   * 数字分身任务ID
+   */
+  TaskID?: number
+}
+
+/**
  * ModifyNoticeContentTmpl返回参数结构体
  */
 export interface ModifyNoticeContentTmplResponse {
@@ -374,6 +500,16 @@ export interface DescribeNoticeContentTmplResponse {
 }
 
 /**
+ * DescribeAIWorkbenchSREDigitalTwinWorkLogDetail请求参数结构体
+ */
+export interface DescribeAIWorkbenchSREDigitalTwinWorkLogDetailRequest {
+  /**
+   * 工作日志ID
+   */
+  WorkLogID: number
+}
+
+/**
  * 告警通知自定义PagerDutyRobot模板中的请求体头部描述
  */
 export interface PagerDutyRobotNoticeTmplHeader {
@@ -395,6 +531,16 @@ export interface DescribeAlarmNotifyHistoriesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 企业微信机器人内容模板配置
+ */
+export interface TeamsRobotNoticeTmpl {
+  /**
+   * 内容模板
+   */
+  ContentTmpl: string
 }
 
 /**
@@ -450,6 +596,24 @@ export interface WebhookNoticeTmplHeader {
 }
 
 /**
+ * DescribeAIWorkbenchSREDigitalTwinTaskList返回参数结构体
+ */
+export interface DescribeAIWorkbenchSREDigitalTwinTaskListResponse {
+  /**
+   * Json序列化路径
+   */
+  JSONStrPaths?: Array<string>
+  /**
+   * 数字分身任务列表
+   */
+  Data?: AIWorkbenchSREDigitalTwinTaskList
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 飞书机器人内容模板配置
  */
 export interface FeiShuRobotNoticeTmpl {
@@ -479,13 +643,46 @@ Trigger 告警触发; Recovery 告警恢复
 }
 
 /**
+ * AI工作台SRE数字分身工作日志详细信息
+ */
+export interface AIWorkbenchSREDigitalTwinWorkLogDetail {
+  /**
+   * 工作日志详细内容
+   */
+  Content?: string
+  /**
+   * 工作日志任务类型
+   */
+  TaskType?: string
+  /**
+   * 工作日志相关对话ID
+   */
+  DialogID?: number
+}
+
+/**
  * 企业微信机器人内容模板配置
  */
-export interface TeamsRobotNoticeTmpl {
+export interface WeWorkRobotNoticeTmpl {
   /**
    * 内容模板
    */
   ContentTmpl: string
+}
+
+/**
+ * 官网内容通知模板的匹配器
+ */
+export interface QCloudYeheNoticeTmplMatcher {
+  /**
+   * 匹配状态 Invalid;
+Trigger 告警触发; Recovery 告警恢复
+   */
+  MatchingStatus: Array<string>
+  /**
+   * 模板配置
+   */
+  Template: QCloudYeheNoticeTmpl
 }
 
 /**
@@ -504,13 +701,37 @@ Trigger 告警触发; Recovery 告警恢复
 }
 
 /**
- * 企业微信机器人内容模板配置
+ * 官网通知内容模板
  */
-export interface WeWorkRobotNoticeTmpl {
+export interface QCloudYeheNoticeTmpl {
   /**
-   * 内容模板
+   * 邮件通知渠道
    */
-  ContentTmpl: string
+  Email?: QCloudYeheNoticeTmplItem
+  /**
+   * 企业微信通知渠道
+   */
+  QYWX?: QCloudYeheNoticeTmplItem
+  /**
+   * 短信通知渠道
+   */
+  SMS?: QCloudYeheNoticeTmplItem
+  /**
+   * 语音通知渠道
+   */
+  Voice?: QCloudYeheNoticeTmplItem
+  /**
+   * 微信通知渠道
+   */
+  WeChat?: QCloudYeheWeChatNoticeTmplItem
+  /**
+   * 站内信通知渠道
+   */
+  Site?: QCloudYeheNoticeTmplItem
+  /**
+   * 安灯通知渠道
+   */
+  Andon?: QCloudYeheNoticeTmplItem
 }
 
 /**
@@ -540,6 +761,20 @@ export interface PagerDutyRobotNoticeTmpl {
    * 标题模板
    */
   TitleTmpl?: string
+}
+
+/**
+ * AI工作台SRE数字分身任务列表
+ */
+export interface AIWorkbenchSREDigitalTwinTaskList {
+  /**
+   * 任务列表
+   */
+  Tasks?: Array<AIWorkbenchSREDigitalTwinTask>
+  /**
+   * 任务总数
+   */
+  Total?: number
 }
 
 /**
@@ -617,18 +852,21 @@ export interface CreateNoticeContentTmplRequest {
 }
 
 /**
- * 官网内容通知模板的匹配器
+ * DescribeAIWorkbenchSREDigitalTwinWorkLogList请求参数结构体
  */
-export interface QCloudYeheNoticeTmplMatcher {
+export interface DescribeAIWorkbenchSREDigitalTwinWorkLogListRequest {
   /**
-   * 匹配状态 Invalid;
-Trigger 告警触发; Recovery 告警恢复
+   * 数字分身ID
    */
-  MatchingStatus: Array<string>
+  TwinID: number
   /**
-   * 模板配置
+   * 分页偏移量
    */
-  Template: QCloudYeheNoticeTmpl
+  Offset?: number
+  /**
+   * 分页限制条数
+   */
+  Limit?: number
 }
 
 /**
@@ -643,4 +881,22 @@ export interface WebhookNoticeTmplMatcher {
    * 自定义Webhook内容模板
    */
   Template?: WebhookNoticeTmpl
+}
+
+/**
+ * DescribeAIWorkbenchSREDigitalTwinWorkLogDetail返回参数结构体
+ */
+export interface DescribeAIWorkbenchSREDigitalTwinWorkLogDetailResponse {
+  /**
+   * Json序列化路径
+   */
+  JSONStrPaths?: Array<string>
+  /**
+   * 数字分身详细信息
+   */
+  Data?: AIWorkbenchSREDigitalTwinWorkLogDetail
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

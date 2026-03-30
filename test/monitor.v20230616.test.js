@@ -38,9 +38,9 @@ it("monitor.v20230616.DescribeNoticeContentTmpl", async function () {
     }
 })
 
-it("monitor.v20230616.ModifyNoticeContentTmpl", async function () {
+it("monitor.v20230616.DescribeAIWorkbenchSREDigitalTwinWorkLogDetail", async function () {
     try {
-       const data = await client.ModifyNoticeContentTmpl({})
+       const data = await client.DescribeAIWorkbenchSREDigitalTwinWorkLogDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +58,49 @@ it("monitor.v20230616.CreateNoticeContentTmpl", async function () {
     }
 })
 
+it("monitor.v20230616.TriggerAIWorkbenchSREDigitalTwinTask", async function () {
+    try {
+       const data = await client.TriggerAIWorkbenchSREDigitalTwinTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20230616.ModifyNoticeContentTmpl", async function () {
+    try {
+       const data = await client.ModifyNoticeContentTmpl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20230616.DescribeAIWorkbenchSREDigitalTwinWorkLogList", async function () {
+    try {
+       const data = await client.DescribeAIWorkbenchSREDigitalTwinWorkLogList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20230616.DescribeAlarmNotifyHistories", async function () {
     try {
        const data = await client.DescribeAlarmNotifyHistories({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20230616.DescribeAIWorkbenchSREDigitalTwinTaskList", async function () {
+    try {
+       const data = await client.DescribeAIWorkbenchSREDigitalTwinTaskList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

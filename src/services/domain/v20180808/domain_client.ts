@@ -97,9 +97,11 @@ import {
   DeleteReservedPreDomainInfoRequest,
   ReservedPreDomainInfo,
   DeleteBiddingResponse,
+  ModifyDomainOwnerResponse,
   DescribeTemplateResponse,
   DescribePayWaitDetailRequest,
   DescribeDomainSimpleInfoRequest,
+  ModifyDomainOwnerRequest,
   TransferProhibitionBatchRequest,
   DescribeDomainSimpleInfoResponse,
   DescribeBiddingSuccessfulListResponse,
@@ -374,6 +376,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBiddingSuccessfulListResponse) => void
   ): Promise<DescribeBiddingSuccessfulListResponse> {
     return this.request("DescribeBiddingSuccessfulList", req, cb)
+  }
+
+  /**
+   * 本接口 (ModifyDomainOwner) 用于域名过户。
+   */
+  async ModifyDomainOwner(
+    req: ModifyDomainOwnerRequest,
+    cb?: (error: string, rep: ModifyDomainOwnerResponse) => void
+  ): Promise<ModifyDomainOwnerResponse> {
+    return this.request("ModifyDomainOwner", req, cb)
   }
 
   /**

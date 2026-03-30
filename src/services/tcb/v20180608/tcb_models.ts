@@ -223,198 +223,13 @@ export interface DescribeCloudBaseRunServerVersionRequest {
 }
 
 /**
- * DescribeCloudBaseRunServerVersion返回参数结构体
+ * CreateVmInstance返回参数结构体
  */
-export interface DescribeCloudBaseRunServerVersionResponse {
-  /**
-   * 版本名称
-   */
-  VersionName?: string
-  /**
-   * 备注
-   */
-  Remark?: string
-  /**
-   * Dockerfile的路径
-   */
-  DockerfilePath?: string
-  /**
-   * DockerBuild的目录
-   */
-  BuildDir?: string
-  /**
-   * 请使用CPUSize
-   */
-  Cpu?: number
-  /**
-   * 请使用MemSize
-   */
-  Mem?: number
-  /**
-   * 副本最小值
-   */
-  MinNum?: number
-  /**
-   * 副本最大值
-   */
-  MaxNum?: number
-  /**
-   * 策略类型
-   */
-  PolicyType?: string
-  /**
-   * 策略阈值
-   */
-  PolicyThreshold?: number
-  /**
-   * 环境变量
-   */
-  EnvParams?: string
-  /**
-   * 创建时间
-   */
-  CreatedTime?: string
-  /**
-   * 更新时间
-   */
-  UpdatedTime?: string
-  /**
-   * 版本的IP
-   */
-  VersionIP?: string
-  /**
-   * 版本的端口号
-   */
-  VersionPort?: number
-  /**
-   * 版本状态
-   */
-  Status?: string
-  /**
-   * 代码包的名字
-   */
-  PackageName?: string
-  /**
-   * 代码版本的名字
-   */
-  PackageVersion?: string
-  /**
-   * 枚举（package/repository/image)
-   */
-  UploadType?: string
-  /**
-   * Repo的类型(gitlab/github/coding)
-   */
-  RepoType?: string
-  /**
-   * 地址
-   */
-  Repo?: string
-  /**
-   * 分支
-   */
-  Branch?: string
-  /**
-   * 服务名字
-   */
-  ServerName?: string
-  /**
-   * 是否对于外网开放
-   */
-  IsPublic?: boolean
-  /**
-   * vpc id
-   */
-  VpcId?: string
-  /**
-   * 子网实例id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubnetIds?: Array<string>
-  /**
-   * 日志采集路径
-   */
-  CustomLogs?: string
-  /**
-   * 监听端口
-   */
-  ContainerPort?: number
-  /**
-   * 延迟多长时间开始健康检查（单位s）
-   */
-  InitialDelaySeconds?: number
-  /**
-   * 镜像地址
-   */
-  ImageUrl?: string
-  /**
-   * CPU 大小
-   */
-  CpuSize?: number
-  /**
-   * MEM 大小
-   */
-  MemSize?: number
-  /**
-   * 是否有Dockerfile：0-default has, 1-has, 2-has not
-   */
-  HasDockerfile?: number
-  /**
-   * 基础镜像
-   */
-  BaseImage?: string
-  /**
-   * 容器启动入口命令
-   */
-  EntryPoint?: string
-  /**
-   * 仓库语言
-   */
-  RepoLanguage?: string
-  /**
-   * 自动扩缩容策略组
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PolicyDetail?: Array<HpaPolicy>
-  /**
-   * Tke集群信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TkeClusterInfo?: TkeClusterInfo
-  /**
-   * 版本工作负载类型；deployment/deamonset
-   */
-  TkeWorkloadType?: string
+export interface CreateVmInstanceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * BindCloudBaseAccessDomain请求参数结构体
- */
-export interface BindCloudBaseAccessDomainRequest {
-  /**
-   * 服务Id，目前是指环境Id
-   */
-  ServiceId: string
-  /**
-   * 自定义域名
-   */
-  Domain: string
-  /**
-   * 腾讯云证书Id
-   */
-  CertId?: string
-  /**
-   * 默认1，1 绑定默认Cdn，2 绑定TcbIngress（不经过cdn），4 绑定自定义cdn
-   */
-  BindFlag?: number
-  /**
-   * 自定义cdn cname域名
-   */
-  CustomCname?: string
 }
 
 /**
@@ -631,6 +446,75 @@ export interface DescribeMySQLClusterDetailResponse {
 }
 
 /**
+ * HTTP访问服务路径重写配置
+ */
+export interface HTTPServicePathRewrite {
+  /**
+   * 路径前缀重写。StaticStorePrefix、Prefix只能填一个
+   */
+  Prefix?: string
+}
+
+/**
+ * CreateVmInstance请求参数结构体
+ */
+export interface CreateVmInstanceRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 服务器类型：
+LightHouse = 轻量云服务器
+CVM = 云服务器
+   */
+  Type: string
+  /**
+   * 轻量云服务器套餐ID。 当Type=LightHouse时必传
+   */
+  LightHouseBundleId?: string
+  /**
+   * 轻量云服务器镜像ID。当Type=LightHouse时必传
+   */
+  LightHouseBlueprintId?: string
+  /**
+   * 服务器别名
+   */
+  InstanceName?: string
+  /**
+   * 登录方式
+   */
+  LoginConfiguration?: VMLoginConfiguration
+}
+
+/**
+ * DescribeEnvs请求参数结构体
+ */
+export interface DescribeEnvsRequest {
+  /**
+   * 环境ID，如果传了这个参数则只返回该环境的相关信息
+   */
+  EnvId?: string
+  /**
+   * 指定Channels字段为可见渠道列表或不可见渠道列表
+如只想获取渠道A的环境 就填写IsVisible= true,Channels = ["A"], 过滤渠道A拉取其他渠道环境时填写IsVisible= false,Channels = ["A"]
+   */
+  IsVisible?: boolean
+  /**
+   * 渠道列表，代表可见或不可见渠道由IsVisible参数指定
+   */
+  Channels?: Array<string>
+  /**
+   * 分页参数，单页限制个数
+   */
+  Limit?: number
+  /**
+   * 分页参数，偏移量
+   */
+  Offset?: number
+}
+
+/**
  * 删除tcb用户返回值
  */
 export interface DeleteUsersResp {
@@ -688,6 +572,56 @@ export interface DescribeCloudBaseBuildServiceResponse {
 }
 
 /**
+ * 查询HTTP访问服务输出路由信息
+ */
+export interface HTTPServiceRoute {
+  /**
+   * 路径
+   */
+  Path?: string
+  /**
+   * 路径重写
+   */
+  PathRewrite?: HTTPServicePathRewrite
+  /**
+   * 上游服务类型。SCF: 云函数，CBR: 云托管，STATIC_STORE: 静态托管，WEB_SCF: WEB云函数，LH: Lighthouse
+   */
+  UpstreamResourceType?: string
+  /**
+   * 上游服务名
+   */
+  UpstreamResourceName?: string
+  /**
+   * 是否开启安全域名
+   */
+  EnableSafeDomain?: boolean
+  /**
+   * 是否开启身份认证
+   */
+  EnableAuth?: boolean
+  /**
+   * 是否开启路径透传
+   */
+  EnablePathTransmission?: boolean
+  /**
+   * QPS限频策略
+   */
+  QPSPolicy?: HTTPServiceRouteQPSPolicy
+  /**
+   * 是否开启路由
+   */
+  Enable?: boolean
+  /**
+   * 路由创建时间
+   */
+  CreateTime?: string
+  /**
+   * 路由更新时间
+   */
+  UpdateTime?: string
+}
+
+/**
  * DescribeMySQLTaskStatus请求参数结构体
  */
 export interface DescribeMySQLTaskStatusRequest {
@@ -706,13 +640,25 @@ export interface DescribeMySQLTaskStatusRequest {
 }
 
 /**
- * 本类型用于UpdateTable接口中描述待删除索引信息
+ * 封禁配置
  */
-export interface DropIndex {
+export interface BanConfig {
   /**
-   * 索引名称
+   * ip白名单，支持ipv4、ipv6，支持CIDR
    */
-  IndexName?: string
+  IpWhiteList?: Array<string>
+  /**
+   * ip黑名单，支持ipv4、ipv6，支持CIDR
+   */
+  IpBlackList?: Array<string>
+  /**
+   * 地域白名单（国家英文名）
+   */
+  CountryWhiteList?: Array<string>
+  /**
+   * 地域黑名单（国家英文名）
+   */
+  CountryBlackList?: Array<string>
 }
 
 /**
@@ -763,18 +709,17 @@ export interface ModifyEnvResponse {
 }
 
 /**
- * BindCloudBaseAccessDomain返回参数结构体
+ * 索引的key值
  */
-export interface BindCloudBaseAccessDomainResponse {
+export interface Indexkey {
   /**
-   * 服务Id，目前是指环境Id
-注意：此字段可能返回 null，表示取不到有效值。
+   * 键名
    */
-  ServiceId?: string
+  Name?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 方向：specify 1 for ascending or -1 for descending
    */
-  RequestId?: string
+  Direction?: string
 }
 
 /**
@@ -805,6 +750,42 @@ export interface EmailSmtpConfig {
    * SMTP 连接的加密模式，用于保障邮件传输安全。可选值：AUTO（自动选择，优先使用安全连接）、SSL（全程 SSL/TLS 加密，通常配合端口 465 使用）、STARTSSL（通过 STARTTLS 命令升级为加密连接，通常配合端口 587 使用）、NO_SSL（不使用加密，仅建议在内网或测试环境中使用）。推荐使用 AUTO 或 SSL 以确保传输安全。
    */
   SecurityMode?: string
+}
+
+/**
+ * DescribeHTTPServiceRoute请求参数结构体
+ */
+export interface DescribeHTTPServiceRouteRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 过滤条件。Key的含义参考对应字段，Value精确匹配。可过滤: Domain、Path、DomainType、UpstreamResourceType。可过滤的Values单条不超过100
+   */
+  Filters?: Array<Filter>
+  /**
+   * 分页偏移量。默认 0
+   */
+  Offset?: number
+  /**
+   * 分页限制。默认20，最大值1000
+   */
+  Limit?: number
+}
+
+/**
+ * MongoDB连接器配置
+ */
+export interface MongoConnector {
+  /**
+   * 连接器实例ID
+   */
+  InstanceId?: string
+  /**
+   * MongoDB数据库名
+   */
+  DatabaseName?: string
 }
 
 /**
@@ -916,6 +897,52 @@ export interface ClsInfo {
 }
 
 /**
+ * 网关版本详情
+ */
+export interface GatewayVersionItem {
+  /**
+   * 版本名
+   */
+  VersionName: string
+  /**
+   * 版本流量权重
+   */
+  Weight: number
+  /**
+   * 创建状态
+   */
+  Status?: string
+  /**
+   * 创建时间
+   */
+  CreatedTime?: string
+  /**
+   * 更新时间
+   */
+  UpdatedTime?: string
+  /**
+   * 构建ID
+   */
+  BuildId?: number
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 优先级
+   */
+  Priority?: number
+  /**
+   * 是否默认版本
+   */
+  IsDefault?: boolean
+  /**
+   * 网关版本自定义配置
+   */
+  CustomConfig?: WxGatewayCustomConfig
+}
+
+/**
  * DescribeAuthDomains返回参数结构体
  */
 export interface DescribeAuthDomainsResponse {
@@ -930,21 +957,21 @@ export interface DescribeAuthDomainsResponse {
 }
 
 /**
- * ModifyCloudBaseGWAPI请求参数结构体
+ * 云主机实例
  */
-export interface ModifyCloudBaseGWAPIRequest {
+export interface VmInstance {
   /**
-   * Service ID
+   * 实例id
    */
-  ServiceId: string
+  InstanceId?: string
   /**
-   * API ID
+   * 实例状态
    */
-  APIId: string
+  Status?: string
   /**
-   * 选项列表，key取值：domain, path。
+   * 实例地域
    */
-  Options: Array<CloudBaseOption>
+  Region?: string
 }
 
 /**
@@ -969,6 +996,20 @@ export interface DescribeLoginConfigRequest {
    * 环境id
    */
   EnvId: string
+}
+
+/**
+ * CreateHTTPServiceRoute请求参数结构体
+ */
+export interface CreateHTTPServiceRouteRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 域名路由信息
+   */
+  Domain: HTTPServiceDomainParam
 }
 
 /**
@@ -1068,58 +1109,194 @@ export interface ModifyDatabaseACLRequest {
 }
 
 /**
- * DestroyStaticStore请求参数结构体
+ * DescribeCloudBaseRunServerVersion返回参数结构体
  */
-export interface DestroyStaticStoreRequest {
+export interface DescribeCloudBaseRunServerVersionResponse {
   /**
-   * 环境ID
+   * 版本名称
    */
-  EnvId: string
+  VersionName?: string
   /**
-   * cdn域名
+   * 备注
    */
-  CdnDomain?: string
-}
-
-/**
- * TDSQL-C网络信息类型
- */
-export interface MySQLNetDetail {
+  Remark?: string
   /**
-   * 内网地址
-注意：此字段可能返回 null，表示取不到有效值。
+   * Dockerfile的路径
    */
-  PrivateNetAddress?: string
+  DockerfilePath?: string
   /**
-   * 外网地址
-注意：此字段可能返回 null，表示取不到有效值。
+   * DockerBuild的目录
    */
-  PubNetAddress?: string
+  BuildDir?: string
   /**
-   * 网络信息（VPCID/SubnetID）
-注意：此字段可能返回 null，表示取不到有效值。
+   * 请使用CPUSize
    */
-  Net?: string
+  Cpu?: number
   /**
-   * 是否开通公网
+   * 请使用MemSize
    */
-  PubNetAccessEnabled?: boolean
+  Mem?: number
+  /**
+   * 副本最小值
+   */
+  MinNum?: number
+  /**
+   * 副本最大值
+   */
+  MaxNum?: number
+  /**
+   * 策略类型
+   */
+  PolicyType?: string
+  /**
+   * 策略阈值
+   */
+  PolicyThreshold?: number
+  /**
+   * 环境变量
+   */
+  EnvParams?: string
+  /**
+   * 创建时间
+   */
+  CreatedTime?: string
+  /**
+   * 更新时间
+   */
+  UpdatedTime?: string
+  /**
+   * 版本的IP
+   */
+  VersionIP?: string
+  /**
+   * 版本的端口号
+   */
+  VersionPort?: number
+  /**
+   * 版本状态
+   */
+  Status?: string
+  /**
+   * 代码包的名字
+   */
+  PackageName?: string
+  /**
+   * 代码版本的名字
+   */
+  PackageVersion?: string
+  /**
+   * 枚举（package/repository/image)
+   */
+  UploadType?: string
+  /**
+   * Repo的类型(gitlab/github/coding)
+   */
+  RepoType?: string
+  /**
+   * 地址
+   */
+  Repo?: string
+  /**
+   * 分支
+   */
+  Branch?: string
+  /**
+   * 服务名字
+   */
+  ServerName?: string
+  /**
+   * 是否对于外网开放
+   */
+  IsPublic?: boolean
   /**
    * vpc id
    */
   VpcId?: string
   /**
-   * vpc name
+   * 子网实例id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcName?: string
+  SubnetIds?: Array<string>
   /**
-   * 子网ID
+   * 日志采集路径
    */
-  SubnetId?: string
+  CustomLogs?: string
   /**
-   * 子网名
+   * 监听端口
    */
-  SubnetName?: string
+  ContainerPort?: number
+  /**
+   * 延迟多长时间开始健康检查（单位s）
+   */
+  InitialDelaySeconds?: number
+  /**
+   * 镜像地址
+   */
+  ImageUrl?: string
+  /**
+   * CPU 大小
+   */
+  CpuSize?: number
+  /**
+   * MEM 大小
+   */
+  MemSize?: number
+  /**
+   * 是否有Dockerfile：0-default has, 1-has, 2-has not
+   */
+  HasDockerfile?: number
+  /**
+   * 基础镜像
+   */
+  BaseImage?: string
+  /**
+   * 容器启动入口命令
+   */
+  EntryPoint?: string
+  /**
+   * 仓库语言
+   */
+  RepoLanguage?: string
+  /**
+   * 自动扩缩容策略组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PolicyDetail?: Array<HpaPolicy>
+  /**
+   * Tke集群信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TkeClusterInfo?: TkeClusterInfo
+  /**
+   * 版本工作负载类型；deployment/deamonset
+   */
+  TkeWorkloadType?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeGatewayVersions返回参数结构体
+ */
+export interface DescribeGatewayVersionsResponse {
+  /**
+   * 网关id
+   */
+  GatewayId?: string
+  /**
+   * 版本总数
+   */
+  TotalCount?: number
+  /**
+   * 版本信息详情
+   */
+  GatewayVersionItems?: Array<GatewayVersionItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1137,21 +1314,17 @@ export interface CreateEnvResourceRequest {
 }
 
 /**
- * 本类型用于接口中描述待创建索引结构
+ * DescribeVmInstances请求参数结构体
  */
-export interface MgoKeySchema {
+export interface DescribeVmInstancesRequest {
   /**
-   * 索引字段
+   * 环境ID
    */
-  MgoIndexKeys?: Array<MgoIndexKeys>
+  EnvId: string
   /**
-   * 是否唯一索引
+   * 服务器类型： LightHouse = 轻量云服务器 CVM = 云服务器
    */
-  MgoIsUnique?: boolean
-  /**
-   * 是否稀疏索引
-   */
-  MgoIsSparse?: boolean
+  Type: string
 }
 
 /**
@@ -1238,6 +1411,20 @@ export interface BaasPackageInfo {
 }
 
 /**
+ * ModifyHTTPServiceRoute请求参数结构体
+ */
+export interface ModifyHTTPServiceRouteRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 域名路由信息
+   */
+  Domain: HTTPServiceDomainParam
+}
+
+/**
  * DescribeQuotaData返回参数结构体
  */
 export interface DescribeQuotaDataResponse {
@@ -1294,17 +1481,105 @@ export interface CreateMySQLResult {
 }
 
 /**
- * http访问服务客户端限频
+ * DescribeHTTPServiceRoute返回参数结构体
  */
-export interface CloudBaseClientQPSPolicy {
+export interface DescribeHTTPServiceRouteResponse {
   /**
-   * UserID 或 ClientIP 或 None，如果为 None 代表不限制
+   * 域名路由信息列表
    */
-  LimitBy?: string
+  Domains?: Array<HTTPServiceDomain>
   /**
-   * 限制值
+   * 自定义接入的源站域名（HTTPService接入层域名）
    */
-  LimitValue?: number
+  OriginDomain?: string
+  /**
+   * 域名总数，分页查询使用总数判断是否已经拉取到所有数据
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 身份认证源协议连接配置。包含 OAuth 2.0 / OIDC 协议端点（授权端点、令牌端点、用户信息端点、JWKS 端点等）、客户端凭证（ClientId、ClientSecret）、SAML 元数据、请求与响应参数的字段映射等配置信息。OIDC 类型的认证源字段定义参考 https://openid.net/specs/openid-connect-discovery-1_0.html 规范。
+ */
+export interface ProviderConfig {
+  /**
+   * 身份提供方的唯一标识符（Issuer URL），用于验证 ID Token 中的 iss 字段。仅当 ProviderType 为 OIDC 时需要填写，值通常为第三方 OIDC 服务的根地址，例如：https://accounts.google.com。填写后平台将自动通过 /.well-known/openid-configuration 发现并填充 AuthorizationEndpoint、TokenEndpoint、UserinfoEndpoint、JwksUri 等端点地址。详情参考 OpenID Connect Discovery 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Issuer?: string
+  /**
+   * 第三方身份提供方的 JSON Web Key Set 地址，用于获取公钥以验证 ID Token 签名。仅当 ProviderType 为 OIDC 时需要填写。若已填写 Issuer，该字段将通过 OpenID Connect Discovery 自动获取，无需手动填写。详情参考 OpenID Connect Discovery 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JwksUri?: string
+  /**
+   * 在第三方身份提供方注册的应用客户端 ID，用于标识当前接入应用。当 ProviderType 为 OIDC 或 OAUTH 时必须填写，可在对应平台的开发者控制台中获取。详情参考 OAuth 2.0 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientId?: string
+  /**
+   * 在第三方身份提供方注册的应用客户端密钥，与 ClientId 配合使用，用于在 Token 端点进行身份验证。当 ProviderType 为 OIDC 或 OAUTH 时必须填写，请妥善保管，避免泄露。详情参考 OAuth 2.0 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientSecret?: string
+  /**
+   * OAuth 授权完成后第三方平台回调的地址，需与在第三方平台注册的回调地址完全一致，否则授权将失败。当 ProviderType 为 OIDC 或 OAUTH 时必须填写，并需在对应平台的开发者控制台中配置该地址为合法回调地址。详情参考 OAuth 2.0 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RedirectUri?: string
+  /**
+   * 向第三方身份提供方申请的权限范围，多个 scope 之间用空格分隔。当 ProviderType 为 OIDC 或 OAUTH 时必须填写，OIDC 场景下通常至少包含 openid，如需获取用户邮箱或手机号可追加 email、phone 等。若已填写 Issuer 且未指定 Scope，将自动使用 OpenID Connect Discovery 返回的 scopes_supported。详情参考 OAuth 2.0 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Scope?: string
+  /**
+   * 第三方身份提供方的授权端点地址，用于发起 OAuth/OIDC 授权请求，引导用户跳转至第三方登录页面。当 ProviderType 为 OIDC 或 OAUTH 时必须填写。若已填写 Issuer，该字段将通过 OpenID Connect Discovery 自动获取，无需手动填写。详情参考 OAuth 2.0 / OIDC 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthorizationEndpoint?: string
+  /**
+   * 第三方身份提供方的 Token 端点地址，用于通过授权码（code）换取 Access Token 和 ID Token。当 ProviderType 为 OIDC 或 OAUTH 时必须填写。若已填写 Issuer，该字段将通过 OpenID Connect Discovery 自动获取，无需手动填写。详情参考 OAuth 2.0 / OIDC 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TokenEndpoint?: string
+  /**
+   * 第三方身份提供方的用户信息端点地址，用于通过 Access Token 获取用户的基本信息（如昵称、头像、邮箱等）。当 ProviderType 为 OIDC 或 OAUTH 且需要获取用户详细信息时填写。若已填写 Issuer，该字段将通过 OpenID Connect Discovery 自动获取，无需手动填写。详情参考 OIDC 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserinfoEndpoint?: string
+  /**
+   * OAuth/OIDC 授权请求的响应类型，决定授权端点返回的内容。可选值：code（授权码模式，推荐）、token（隐式模式，直接返回 Access Token）、id_token（直接返回 ID Token）。当 ProviderType 为 OIDC 时默认使用 id_token，其他类型默认使用 code。当 ProviderType 为 OIDC 或 OAUTH 时可选填写。详情参考 OAuth 2.0 / OIDC 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResponseType?: string
+  /**
+   * 第三方身份提供方的单点退出端点地址。配置后，用户退出当前应用时将被跳转至该地址，使第三方 IDP 的登录态也一并失效，实现单点退出（SLO）。适用于 OIDC、OAUTH、SAML 等所有支持单点退出的身份源类型。不填则退出时仅清除本平台登录态。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SignoutEndpoint?: string
+  /**
+   * Token 端点的客户端身份验证方式，决定请求 Token 时如何传递 ClientId 和 ClientSecret。可选值：CLIENT_SECRET_POST（将凭证放在请求 Body 中传递）、CLIENT_SECRET_BASIC（将凭证通过 HTTP Basic Auth Header 传递）。当 ProviderType 为 OIDC 或 OAUTH 时可选填写，默认使用 CLIENT_SECRET_POST。详情参考 OIDC 标准。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TokenEndpointAuthMethod?: string
+  /**
+   * SAML 身份提供方的 Metadata XML 内容，包含 IDP 的实体 ID、SSO 端点地址、签名证书等关键信息，平台将据此完成 SAML 协议的对接配置。仅当 ProviderType 为 SAML 时可填写，通常可从第三方 IDP 的管理控制台中下载获取。详情参考 SAML 2.0 标准。
+   */
+  SamlMetadata?: string
+  /**
+   * 请求参数映射配置，用于处理非标准 OAuth 协议的参数转换。默认情况下平台严格遵循 OAuth 2.0 标准进行参数传递，若对接的第三方平台（如微信、企业微信等）使用了非标准的参数名称或传参方式，可通过该字段配置自定义的参数映射规则，以确保请求参数与第三方平台的要求一致。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestParametersMap?: ProviderRequestParametersMap
+  /**
+   * 响应参数映射配置，用于处理非标准 OAuth 协议的响应参数转换。默认情况下平台严格遵循 OAuth 2.0 标准解析响应参数，若对接的第三方平台（如微信、企业微信等）返回了非标准的字段名称或数据结构，可通过该字段配置自定义的响应参数映射规则，将第三方返回的字段映射为平台标准字段。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResponseParametersMap?: ProviderResponseParametersMap
 }
 
 /**
@@ -1432,6 +1707,24 @@ export interface StaticStoreInfo {
 }
 
 /**
+ * DescribeApiKeyList返回参数结构体
+ */
+export interface DescribeApiKeyListResponse {
+  /**
+   * API Key列表
+   */
+  Data?: Array<ApiKeyToken>
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RunSql返回参数结构体
  */
 export interface RunSqlResponse {
@@ -1536,6 +1829,97 @@ export interface DescribeEnvAccountCircleRequest {
 }
 
 /**
+ * CreateBillDeal请求参数结构体
+ */
+export interface CreateBillDealRequest {
+  /**
+   * 当前下单的操作类型，可取[purchase,renew,modify]三种值，分别代表新购，续费，变配。
+   */
+  DealType: string
+  /**
+   * 购买的产品类型，可取[tcb-baas,tcb-promotion,tcb-package], 分别代表baas套餐、大促包、资源包
+   */
+  ProductType: string
+  /**
+   * 目标下单产品/套餐Id。
+对于云开发环境套餐，可通过 DescribeBaasPackageList 接口获取，对应其出参的PackageName
+   */
+  PackageId: string
+  /**
+   * 默认只下单不支付，为ture则下单并支付。
+如果需要下单并支付，请确保账户下有足够的余额，否则会导致下单失败。
+   */
+  CreateAndPay?: boolean
+  /**
+   * 购买时长，与TimeUnit字段搭配使用。
+   */
+  TimeSpan?: number
+  /**
+   * 购买时长单位,按各产品规则可选d(天),m(月),y(年),p(一次性)。
+对于 云开发环境的 新购和续费，目前仅支持 按月购买（即 TimeUnit=m）。
+   */
+  TimeUnit?: string
+  /**
+   * 资源唯一标识。
+在云开发环境 续费和变配 场景下必传，取值为环境ID。
+   */
+  ResourceId?: string
+  /**
+   * 来源可选[qcloud,miniapp]，默认qcloud。
+miniapp表示微信云开发，主要适用于[小程序云开发](https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/billing/price.html)。
+
+   */
+  Source?: string
+  /**
+   * 环境别名，用于新购云开发环境时，给云开发环境起别名。
+仅当 新购云开发环境（DealType=purchase 并且 ProductType=tcb-baas ）时有效。
+
+### 格式要求
+- 可选字符： 小写字母(a~z)、数字、减号(-)
+- 不能以 减号(-) 开头或结尾
+- 不能有连个连续的 减号(-)
+- 长度不超过20位
+   */
+  Alias?: string
+  /**
+   * 环境id，当购买资源包和大促包时（ProductType取值为tcb-promotion 或 tcb-package）必传，表示资源包在哪个环境下生效。
+   */
+  EnvId?: string
+  /**
+   * 开启超限按量。
+开启后，当 套餐内的资源点 和 资源包 都用尽后，会自动按量计费。
+详见 [计费说明](https://cloud.tencent.com/document/product/876/127357)。
+   */
+  EnableExcess?: boolean
+  /**
+   * 变配目标套餐id，对于云开发环境变配场景下必传。
+对于云开发环境套餐，可通过 DescribeBaasPackageList 接口获取，对应其出参的PackageName
+   */
+  ModifyPackageId?: string
+  /**
+   * jsonstr附加信息
+   */
+  Extension?: string
+  /**
+   * 是否自动选择代金券支付。
+   */
+  AutoVoucher?: boolean
+  /**
+   * 资源类型。
+代表新购环境（DealType=purchase 并且 ProductType=tcb-baas ）时需要发货哪些资源。
+可取值：flexdb, cos, cdn, scf
+
+   */
+  ResourceTypes?: Array<string>
+  /**
+   * 环境标签。
+ 代表新购环境（DealType=purchase 并且 ProductType=tcb-baas ）时需要打的标签。
+
+   */
+  EnvTags?: Array<Tag>
+}
+
+/**
  * RenewEnv返回参数结构体
  */
 export interface RenewEnvResponse {
@@ -1567,6 +1951,10 @@ export interface CreateStaticStoreRequest {
    * 是否启用统一域名
    */
   EnableUnion?: boolean
+  /**
+   * 外部存储源。
+   */
+  ExternalStorage?: ExternalStorage
 }
 
 /**
@@ -1594,44 +1982,27 @@ export interface CreateAuthDomainResponse {
 }
 
 /**
- * DescribeEnvs请求参数结构体
+ * DeleteApiKey返回参数结构体
  */
-export interface DescribeEnvsRequest {
+export interface DeleteApiKeyResponse {
   /**
-   * 环境ID，如果传了这个参数则只返回该环境的相关信息
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EnvId?: string
-  /**
-   * 指定Channels字段为可见渠道列表或不可见渠道列表
-如只想获取渠道A的环境 就填写IsVisible= true,Channels = ["A"], 过滤渠道A拉取其他渠道环境时填写IsVisible= false,Channels = ["A"]
-   */
-  IsVisible?: boolean
-  /**
-   * 渠道列表，代表可见或不可见渠道由IsVisible参数指定
-   */
-  Channels?: Array<string>
-  /**
-   * 分页参数，单页限制个数
-   */
-  Limit?: number
-  /**
-   * 分页参数，偏移量
-   */
-  Offset?: number
+  RequestId?: string
 }
 
 /**
- * 标签键值对
+ * DestroyStaticStore请求参数结构体
  */
-export interface Tag {
+export interface DestroyStaticStoreRequest {
   /**
-   * 标签键
+   * 环境ID
    */
-  Key: string
+  EnvId: string
   /**
-   * 标签值
+   * cdn域名
    */
-  Value: string
+  CdnDomain?: string
 }
 
 /**
@@ -1652,6 +2023,28 @@ export interface EditAuthConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 云服务器登录方式
+ */
+export interface VMLoginConfiguration {
+  /**
+   * 登录方式。扫码登录时指定为 SCAN_LOGIN
+   */
+  LoginType?: string
+  /**
+   * 是否自动生成密码
+   */
+  AutoGeneratePassword?: string
+  /**
+   * 指定密码登录
+   */
+  Password?: string
+  /**
+   * 绑定密钥ID
+   */
+  KeyIds?: Array<string>
 }
 
 /**
@@ -1710,6 +2103,75 @@ export interface DescribeClientResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteHTTPServiceRoute返回参数结构体
+ */
+export interface DeleteHTTPServiceRouteResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * TDSQL-C网络信息类型
+ */
+export interface MySQLNetDetail {
+  /**
+   * 内网地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivateNetAddress?: string
+  /**
+   * 外网地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PubNetAddress?: string
+  /**
+   * 网络信息（VPCID/SubnetID）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Net?: string
+  /**
+   * 是否开通公网
+   */
+  PubNetAccessEnabled?: boolean
+  /**
+   * vpc id
+   */
+  VpcId?: string
+  /**
+   * vpc name
+   */
+  VpcName?: string
+  /**
+   * 子网ID
+   */
+  SubnetId?: string
+  /**
+   * 子网名
+   */
+  SubnetName?: string
+}
+
+/**
+ * 本类型用于接口中描述待创建索引结构
+ */
+export interface MgoKeySchema {
+  /**
+   * 索引字段
+   */
+  MgoIndexKeys?: Array<MgoIndexKeys>
+  /**
+   * 是否唯一索引
+   */
+  MgoIsUnique?: boolean
+  /**
+   * 是否稀疏索引
+   */
+  MgoIsSparse?: boolean
 }
 
 /**
@@ -1793,6 +2255,20 @@ export interface HpaPolicy {
 }
 
 /**
+ * 云开发路由限频策略
+ */
+export interface HTTPServiceRouteQPSPolicy {
+  /**
+   * QPS值，每秒请求次数
+   */
+  QPSTotal?: number
+  /**
+   * 客户端限频配置
+   */
+  QPSPerClient?: HTTPServiceQPSPerClient
+}
+
+/**
  * CLS日志单条信息
  */
 export interface LogObject {
@@ -1837,17 +2313,17 @@ export interface DestroyStaticStoreResponse {
 }
 
 /**
- * DeleteUsers返回参数结构体
+ * DeleteVmInstance请求参数结构体
  */
-export interface DeleteUsersResponse {
+export interface DeleteVmInstanceRequest {
   /**
-   * 删除用户结果
+   * 服务器实例id
    */
-  Data?: DeleteUsersResp
+  InstanceId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 环境id
    */
-  RequestId?: string
+  EnvId: string
 }
 
 /**
@@ -1916,6 +2392,20 @@ export interface DeleteAuthDomainResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteApiKey请求参数结构体
+ */
+export interface DeleteApiKeyRequest {
+  /**
+   * 环境 ID，用于标识该密钥归属的云开发环境，不同环境之间的数据相互隔离
+   */
+  EnvId: string
+  /**
+   * 密钥的唯一标识符，用于精确定位指定的 API 密钥。可通过查询密钥列表接口获取
+   */
+  KeyId: string
 }
 
 /**
@@ -2017,69 +2507,115 @@ export interface DeleteTableRequest {
 }
 
 /**
- * CreateCloudBaseGWAPI请求参数结构体
+ * 环境信息
  */
-export interface CreateCloudBaseGWAPIRequest {
+export interface EnvInfo {
   /**
-   * Service ID
+   * 账户下该环境唯一标识
    */
-  ServiceId: string
+  EnvId?: string
   /**
-   * API Path
+   * 环境来源。包含以下取值：
+<li>miniapp：微信小程序</li>
+<li>qcloud ：腾讯云</li>
    */
-  Path: string
+  Source?: string
   /**
-   * API类型（1表示云函数，2表示容器）
+   * 环境别名，要以a-z开头，不能包含 a-zA-z0-9- 以外的字符
    */
-  Type: number
+  Alias?: string
   /**
-   * API Name
+   * 创建时间
    */
-  Name: string
+  CreateTime?: string
   /**
-   * APIId，如果非空，表示修改绑定Path
+   * 最后修改时间
    */
-  APIId?: string
+  UpdateTime?: string
   /**
-   * 自定义值通用字段（当Type为容器时必填）
+   * 环境状态。包含以下取值：
+<li>NORMAL：正常可用</li>
+<li>UNAVAILABLE：服务不可用，可能是尚未初始化或者初始化过程中</li>
    */
-  Custom?: string
+  Status?: string
   /**
-   * 认证开关 1为开启 2为关闭
+   * 数据库列表
    */
-  AuthSwitch?: number
+  Databases?: Array<DatabasesInfo>
   /**
-   * 是否开启多地域
+   * 存储列表
    */
-  EnableRegion?: boolean
+  Storages?: Array<StorageInfo>
   /**
-   * 是否启用统一域名
+   * 函数列表
    */
-  EnableUnion?: boolean
+  Functions?: Array<FunctionInfo>
   /**
-   * 域名
+   * tcb产品套餐ID，参考DescribePackages接口的返回值。
    */
-  Domain?: string
+  PackageId?: string
   /**
-   * 访问类型："OA", "PUBLIC", "MINIAPP", "VPC" （不传默认PUBLIC+MINIAPP+VPC）
+   * 套餐中文名称，参考DescribePackages接口的返回值。
    */
-  AccessTypes?: Array<string>
+  PackageName?: string
   /**
-   * 是否开启路径透传，默认true表示短路径，即不开启路径透传(已弃用)
+   * 云日志服务列表
    */
-  IsShortPath?: boolean
+  LogServices?: Array<LogServiceInfo>
   /**
-   * 路径透传，默认0关闭，1开启，2关闭
+   * 静态资源信息
    */
-  PathTransmission?: number
+  StaticStorages?: Array<StaticStorageInfo>
   /**
-   * 跨域校验，默认0开启，1开启，2关闭
+   * 是否到期自动降为免费版
    */
-  EnableCheckAcrossDomain?: number
+  IsAutoDegrade?: boolean
   /**
-   * 静态托管资源目录
+   * 环境渠道
    */
-  StaticFileDirectory?: string
+  EnvChannel?: string
+  /**
+   * 支付方式。包含以下取值：
+<li> prepayment：预付费</li>
+<li> postpaid：后付费</li>
+   */
+  PayMode?: string
+  /**
+   * 是否为默认环境
+   */
+  IsDefault?: boolean
+  /**
+   * 环境所属地域
+   */
+  Region?: string
+  /**
+   * 环境标签列表
+   */
+  Tags?: Array<Tag>
+  /**
+   * 自定义日志服务
+   */
+  CustomLogServices?: Array<ClsInfo>
+  /**
+   * 环境类型：baas, run, hoting, weda
+   */
+  EnvType?: string
+  /**
+   * 是否是dau新套餐
+   */
+  IsDauPackage?: boolean
+  /**
+   * 套餐类型:空\baas\tcbr
+   */
+  PackageType?: string
+  /**
+   * 架构类型
+   */
+  ArchitectureType?: string
+  /**
+   * 回收标志，默认为空
+   */
+  Recycle?: string
 }
 
 /**
@@ -2335,55 +2871,6 @@ export interface DescribeCreateMySQLResult {
 }
 
 /**
- * DeleteCloudBaseGWAPI请求参数结构体
- */
-export interface DeleteCloudBaseGWAPIRequest {
-  /**
-   * 服务ID
-   */
-  ServiceId: string
-  /**
-   * API Path
-   */
-  Path?: string
-  /**
-   * API ID
-   */
-  APIId?: string
-  /**
-   * API类型
-   */
-  Type?: number
-  /**
-   * API Name
-   */
-  Name?: string
-  /**
-   * 自定义值字段（Type为2时，传递容器服务名表示需要删除JNSGW）
-   */
-  Custom?: string
-  /**
-   * 域名
-   */
-  Domain?: string
-}
-
-/**
- * CreateCloudBaseGWAPI返回参数结构体
- */
-export interface CreateCloudBaseGWAPIResponse {
-  /**
-   * API ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  APIId: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeCreateMySQLResult返回参数结构体
  */
 export interface DescribeCreateMySQLResultResponse {
@@ -2531,6 +3018,82 @@ export interface Provider {
 }
 
 /**
+ * DescribeSafeRule返回参数结构体
+ */
+export interface DescribeSafeRuleResponse {
+  /**
+   * 规则内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rule?: string
+  /**
+   * 权限标签。包含以下取值：
+<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
+<li> PRIVATE：仅创建者及管理员可读写</li>
+<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
+<li> ADMINONLY：仅管理员可读写</li>
+<li> CUSTOM：自定义安全规则</li>
+   */
+  AclTag?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 安全网关自定义日志配置
+ */
+export interface CustomLogConfig {
+  /**
+   * 是否需要请求体
+   */
+  NeedReqBodyLog?: boolean
+  /**
+   * 是否需要请求头
+   */
+  NeedReqHeaderLog?: boolean
+  /**
+   * 是否需要回包体
+   */
+  NeedRspBodyLog?: boolean
+  /**
+   * 是否需要回包头部信息
+   */
+  NeedRspHeaderLog?: boolean
+  /**
+   * cls set信息
+   */
+  LogSetId?: string
+  /**
+   * cls topicId
+   */
+  LogTopicId?: string
+}
+
+/**
+ * DescribeApiKeyList请求参数结构体
+ */
+export interface DescribeApiKeyListRequest {
+  /**
+   * 环境 ID，用于标识该密钥归属的云开发环境，不同环境之间的数据相互隔离
+   */
+  EnvId: string
+  /**
+   * 分页查询的页码，从 1 开始。与 PageSize 配合使用，不传则默认返回第 1 页
+   */
+  PageNumber?: number
+  /**
+   * 分页查询每页返回的记录条数。与 PageNumber 配合使用，不传则使用系统默认值
+   */
+  PageSize?: number
+  /**
+   * 密钥类型过滤条件。可选值：api_key（服务端调用使用的 API 密钥，具有完整权限）、publish_key（客户端使用的公开密钥，权限受限）密钥类型过滤条件。不传默认值为api_key
+   */
+  KeyType?: string
+}
+
+/**
  * 本类型用于UpdateTable接口中描述待创建索引信息
  */
 export interface MgoIndexKeys {
@@ -2555,33 +3118,27 @@ export interface DescribeStaticStoreRequest {
 }
 
 /**
- * ModifyCloudBaseGWAPI返回参数结构体
+ * http访问服务客户端限频
  */
-export interface ModifyCloudBaseGWAPIResponse {
+export interface HTTPServiceQPSPerClient {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 客户端维度限频标识。限制当前资源被单个客户端调用的频率，客户端标识支持 用户ID（UserID） 或 客户端 IP（ClientIP）。UserID 包括 云开发用户 ID 或 微信 openid，如果请求无 UserID 信息，则不会限制。
    */
-  RequestId?: string
+  LimitBy?: string
+  /**
+   * 限制QPS值，每秒请求次数
+   */
+  LimitValue?: number
 }
 
 /**
- * DescribeSafeRule返回参数结构体
+ * DeleteUsers返回参数结构体
  */
-export interface DescribeSafeRuleResponse {
+export interface DeleteUsersResponse {
   /**
-   * 规则内容
-注意：此字段可能返回 null，表示取不到有效值。
+   * 删除用户结果
    */
-  Rule?: string
-  /**
-   * 权限标签。包含以下取值：
-<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
-<li> PRIVATE：仅创建者及管理员可读写</li>
-<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
-<li> ADMINONLY：仅管理员可读写</li>
-<li> CUSTOM：自定义安全规则</li>
-   */
-  AclTag?: string
+  Data?: DeleteUsersResp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2847,166 +3404,6 @@ export interface DestroyMySQLResult {
 }
 
 /**
- * DescribeCloudBaseGWAPI返回参数结构体
- */
-export interface DescribeCloudBaseGWAPIResponse {
-  /**
-   * API列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  APISet?: Array<CloudBaseGWAPI>
-  /**
-   * 是否开启http调用
-   */
-  EnableService?: boolean
-  /**
-   * 查询结果的数据总量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Total?: number
-  /**
-   * 查询的分页参数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Offset?: number
-  /**
-   * 查询的分页参数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Limit?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 身份认证源协议连接配置。包含 OAuth 2.0 / OIDC 协议端点（授权端点、令牌端点、用户信息端点、JWKS 端点等）、客户端凭证（ClientId、ClientSecret）、SAML 元数据、请求与响应参数的字段映射等配置信息。OIDC 类型的认证源字段定义参考 https://openid.net/specs/openid-connect-discovery-1_0.html 规范。
- */
-export interface ProviderConfig {
-  /**
-   * 身份提供方的唯一标识符（Issuer URL），用于验证 ID Token 中的 iss 字段。仅当 ProviderType 为 OIDC 时需要填写，值通常为第三方 OIDC 服务的根地址，例如：https://accounts.google.com。填写后平台将自动通过 /.well-known/openid-configuration 发现并填充 AuthorizationEndpoint、TokenEndpoint、UserinfoEndpoint、JwksUri 等端点地址。详情参考 OpenID Connect Discovery 标准。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Issuer?: string
-  /**
-   * 第三方身份提供方的 JSON Web Key Set 地址，用于获取公钥以验证 ID Token 签名。仅当 ProviderType 为 OIDC 时需要填写。若已填写 Issuer，该字段将通过 OpenID Connect Discovery 自动获取，无需手动填写。详情参考 OpenID Connect Discovery 标准。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  JwksUri?: string
-  /**
-   * 在第三方身份提供方注册的应用客户端 ID，用于标识当前接入应用。当 ProviderType 为 OIDC 或 OAUTH 时必须填写，可在对应平台的开发者控制台中获取。详情参考 OAuth 2.0 标准。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClientId?: string
-  /**
-   * 在第三方身份提供方注册的应用客户端密钥，与 ClientId 配合使用，用于在 Token 端点进行身份验证。当 ProviderType 为 OIDC 或 OAUTH 时必须填写，请妥善保管，避免泄露。详情参考 OAuth 2.0 标准。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClientSecret?: string
-  /**
-   * OAuth 授权完成后第三方平台回调的地址，需与在第三方平台注册的回调地址完全一致，否则授权将失败。当 ProviderType 为 OIDC 或 OAUTH 时必须填写，并需在对应平台的开发者控制台中配置该地址为合法回调地址。详情参考 OAuth 2.0 标准。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RedirectUri?: string
-  /**
-   * 向第三方身份提供方申请的权限范围，多个 scope 之间用空格分隔。当 ProviderType 为 OIDC 或 OAUTH 时必须填写，OIDC 场景下通常至少包含 openid，如需获取用户邮箱或手机号可追加 email、phone 等。若已填写 Issuer 且未指定 Scope，将自动使用 OpenID Connect Discovery 返回的 scopes_supported。详情参考 OAuth 2.0 标准。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Scope?: string
-  /**
-   * 第三方身份提供方的授权端点地址，用于发起 OAuth/OIDC 授权请求，引导用户跳转至第三方登录页面。当 ProviderType 为 OIDC 或 OAUTH 时必须填写。若已填写 Issuer，该字段将通过 OpenID Connect Discovery 自动获取，无需手动填写。详情参考 OAuth 2.0 / OIDC 标准。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AuthorizationEndpoint?: string
-  /**
-   * 第三方身份提供方的 Token 端点地址，用于通过授权码（code）换取 Access Token 和 ID Token。当 ProviderType 为 OIDC 或 OAUTH 时必须填写。若已填写 Issuer，该字段将通过 OpenID Connect Discovery 自动获取，无需手动填写。详情参考 OAuth 2.0 / OIDC 标准。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TokenEndpoint?: string
-  /**
-   * 第三方身份提供方的用户信息端点地址，用于通过 Access Token 获取用户的基本信息（如昵称、头像、邮箱等）。当 ProviderType 为 OIDC 或 OAUTH 且需要获取用户详细信息时填写。若已填写 Issuer，该字段将通过 OpenID Connect Discovery 自动获取，无需手动填写。详情参考 OIDC 标准。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UserinfoEndpoint?: string
-  /**
-   * OAuth/OIDC 授权请求的响应类型，决定授权端点返回的内容。可选值：code（授权码模式，推荐）、token（隐式模式，直接返回 Access Token）、id_token（直接返回 ID Token）。当 ProviderType 为 OIDC 时默认使用 id_token，其他类型默认使用 code。当 ProviderType 为 OIDC 或 OAUTH 时可选填写。详情参考 OAuth 2.0 / OIDC 标准。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResponseType?: string
-  /**
-   * 第三方身份提供方的单点退出端点地址。配置后，用户退出当前应用时将被跳转至该地址，使第三方 IDP 的登录态也一并失效，实现单点退出（SLO）。适用于 OIDC、OAUTH、SAML 等所有支持单点退出的身份源类型。不填则退出时仅清除本平台登录态。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SignoutEndpoint?: string
-  /**
-   * Token 端点的客户端身份验证方式，决定请求 Token 时如何传递 ClientId 和 ClientSecret。可选值：CLIENT_SECRET_POST（将凭证放在请求 Body 中传递）、CLIENT_SECRET_BASIC（将凭证通过 HTTP Basic Auth Header 传递）。当 ProviderType 为 OIDC 或 OAUTH 时可选填写，默认使用 CLIENT_SECRET_POST。详情参考 OIDC 标准。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TokenEndpointAuthMethod?: string
-  /**
-   * SAML 身份提供方的 Metadata XML 内容，包含 IDP 的实体 ID、SSO 端点地址、签名证书等关键信息，平台将据此完成 SAML 协议的对接配置。仅当 ProviderType 为 SAML 时可填写，通常可从第三方 IDP 的管理控制台中下载获取。详情参考 SAML 2.0 标准。
-   */
-  SamlMetadata?: string
-  /**
-   * 请求参数映射配置，用于处理非标准 OAuth 协议的参数转换。默认情况下平台严格遵循 OAuth 2.0 标准进行参数传递，若对接的第三方平台（如微信、企业微信等）使用了非标准的参数名称或传参方式，可通过该字段配置自定义的参数映射规则，以确保请求参数与第三方平台的要求一致。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RequestParametersMap?: ProviderRequestParametersMap
-  /**
-   * 响应参数映射配置，用于处理非标准 OAuth 协议的响应参数转换。默认情况下平台严格遵循 OAuth 2.0 标准解析响应参数，若对接的第三方平台（如微信、企业微信等）返回了非标准的字段名称或数据结构，可通过该字段配置自定义的响应参数映射规则，将第三方返回的字段映射为平台标准字段。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResponseParametersMap?: ProviderResponseParametersMap
-}
-
-/**
- * DescribeCloudBaseGWAPI请求参数结构体
- */
-export interface DescribeCloudBaseGWAPIRequest {
-  /**
-   * 服务ID
-   */
-  ServiceId?: string
-  /**
-   * API域名
-   */
-  Domain?: string
-  /**
-   * API Path
-   */
-  Path?: string
-  /**
-   * API ID
-   */
-  APIId?: string
-  /**
-   * API类型，1为云函数，2为容器
-   */
-  Type?: number
-  /**
-   * API名，Type为1时为云函数名，Type为2时为容器服务名
-   */
-  Name?: string
-  /**
-   * 查询的分页参数，用于设置查询的偏移位置，0表示从头开始
-   */
-  Offset?: number
-  /**
-   * 查询的分页参数，用于表示每次查询的最大返回数据量
-   */
-  Limit?: number
-  /**
-   * 是否启用多地域
-   */
-  EnableRegion?: boolean
-  /**
-   * 是否使用统一域名
-   */
-  EnableUnion?: boolean
-}
-
-/**
  * CreateMySQL请求参数结构体
  */
 export interface CreateMySQLRequest {
@@ -3064,80 +3461,85 @@ export interface DatabasesInfo {
 }
 
 /**
- * 虚拟主机价格
+ * 查询HTTP访问服务输出的域名信息，每个域名内包含所有路由信息
  */
-export interface VMPrice {
+export interface HTTPServiceDomain {
   /**
-   * 价格货币单位。取值范围CNY:人民币。USD:美元。
+   * 域名
    */
-  Currency?: string
+  Domain?: string
   /**
-   * 原始价格
+   * 域名类型。 HTTPSERVICE: HTTP访问服务，CBR: 云托管服务，ANYSERVICE: 任意服务，AI_AGENT: AI agent，VM: 主机，INTEGRATION_CALLBACK: 集成回调
    */
-  OriginalPrice?: number
+  DomainType?: string
   /**
-   * 折扣率
+   * 绑定类型。默认DIRECT。DIRECT: 直连到HTTP访问服务， CDN: 接入云开发CDN，CUSTOM: 自定义接入类型（其他CDN或者WAF）
    */
-  Discount?: number
+  AccessType?: string
   /**
-   * 折扣后的价格
+   * 证书ID。当前账户下SSL平台的证书ID
    */
-  DiscountPrice?: number
+  CertId?: string
   /**
-   * 折扣前每天资源点
+   * 协议类型。默认HTTP_AND_HTTPS。HTTP_AND_HTTPS: 同时开启http和https，HTTP_TO_HTTPS: http重定向成https，HTTPS_TO_HTTP: https重定向成http。如果未配置证书无法访问https或者进行重定向
    */
-  OriginalCredits?: number
+  Protocol?: string
   /**
-   * 折扣后每天所需资源点
+   * 配置DNS解析的CNAME。根据AccessType返回不同的CNAME值。
    */
-  DiscountCredits?: number
+  Cname?: string
+  /**
+   * 是否是默认域名
+   */
+  IsDefault?: boolean
+  /**
+   * 域名开启状态
+   */
+  Enable?: boolean
+  /**
+   * 状态。PROCESSING、FAIL，SUCCESS。
+   */
+  Status?: string
+  /**
+   * DNS解析状态。OK： 解析正常，INVALID：解析不正确，域名未解析到当前Cname域名。
+   */
+  DNSStatus?: string
+  /**
+   * HTTP访问服务路由信息
+   */
+  Routes?: Array<HTTPServiceRoute>
+  /**
+   * 域名创建时间
+   */
+  CreateTime?: string
+  /**
+   * 域名更新时间
+   */
+  UpdateTime?: string
 }
 
 /**
- * DescribeCloudBaseGWService返回参数结构体
+ * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
  */
-export interface DescribeCloudBaseGWServiceResponse {
+export interface Filter {
   /**
-   * 服务列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 需要过滤的字段。过滤条件数量限制为10。
    */
-  ServiceSet?: Array<CloudBaseGWService>
+  Name?: string
   /**
-   * 是否开启服务
+   * 字段的过滤值。
    */
-  EnableService?: boolean
+  Values?: Array<string>
+}
+
+/**
+ * 本类型用于UpdateTable接口中描述待删除索引信息
+ */
+export interface DropIndex {
   /**
-   * 默认域名信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 索引名称
    */
-  DefaultDomain?: string
-  /**
-   * 是否开启CDN迁移
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnableUnion?: boolean
-  /**
-   * 是否开启跨域校验，默认开启 true
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnableCheckAcrossDomain?: boolean
-  /**
-   * 自定义路由规则
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CustomRoutingRules?: string
-  /**
-   * 默认域名绑定类型，1绑定TCB-CDN，2绑定tcbingres（不经过cdn）
-   */
-  AccessFlag?: number
-  /**
-   * 云接入源站域名
-   */
-  OriginDomain?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  IndexName?: string
 }
 
 /**
@@ -3192,6 +3594,39 @@ export interface DescribeDatabaseACLRequest {
    * 集合名称
    */
   CollectionName: string
+}
+
+/**
+ * CreateApiKey返回参数结构体
+ */
+export interface CreateApiKeyResponse {
+  /**
+   * API Key 的唯一标识符，由系统基于 JWT Access Token Hash 自动生成。后续对该 API Key 进行查询、修改名称或删除操作时，均需使用该值作为定位参数
+   */
+  KeyId?: string
+  /**
+   * API Key 的名称，即创建时传入的 KeyName 参数值。对于 publish_key 类型，该值固定为 publish_key
+   */
+  Name?: string
+  /**
+   * API Key 的令牌值（JWT 格式），用于服务端接口调用时的身份认证。出于安全考虑，仅在创建时返回一次完整明文；后续通过列表查询接口获取时，api_key 类型将进行脱敏处理；publish_key 类型始终返回完整明文。请在创建后妥善保存
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiKey?: string
+  /**
+   * API Key 的过期时间。对于 api_key 类型：若创建时未指定有效期，则该字段不返回，表示永不过期；若指定了有效期，则返回具体的过期时间。对于 publish_key 类型：始终返回，固定为 2099 年
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireAt?: string
+  /**
+   * API Key 的创建时间。对于 api_key 类型：为实际创建该 Key 时的时间。对于 publish_key 类型：若环境下已存在 publish_key，则返回首次创建的时间而非本次调用时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateAt?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3294,17 +3729,21 @@ export interface DescribeLoginConfigResponse {
 }
 
 /**
- * DeleteCloudBaseGWDomain请求参数结构体
+ * DescribeGatewayVersions请求参数结构体
  */
-export interface DeleteCloudBaseGWDomainRequest {
+export interface DescribeGatewayVersionsRequest {
   /**
-   * 服务ID
+   * 环境id
    */
-  ServiceId: string
+  EnvId: string
   /**
-   * 服务域名
+   * 网关id
    */
-  Domain: string
+  GatewayId: string
+  /**
+   * 版本名
+   */
+  VersionName?: string
 }
 
 /**
@@ -3514,6 +3953,16 @@ export interface DescribeStaticStoreResponse {
 }
 
 /**
+ * ModifyHTTPServiceRoute返回参数结构体
+ */
+export interface ModifyHTTPServiceRouteResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetProviders返回参数结构体
  */
 export interface GetProvidersResponse {
@@ -3619,17 +4068,46 @@ export interface EditAuthConfigRequest {
 }
 
 /**
- * 索引的key值
+ * DescribeVmInstances返回参数结构体
  */
-export interface Indexkey {
+export interface DescribeVmInstancesResponse {
   /**
-   * 键名
+   * 主机实例列表
+   */
+  InstanceList?: Array<VmInstance>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * API Key 访问凭证信息。描述云开发环境下 API Key 的完整信息，包括标识符、名称、令牌值、创建时间和过期时间。支持两种类型：api_key（服务端管理员访问凭证，用于服务端接口调用的身份认证，可设置有效期，单个环境最多 5 个）和 publish_key（前端匿名访问凭证，固定有效期，每个环境仅保留一个）。注意：令牌值（ApiKey 字段）仅在创建时返回完整明文，列表查询时将进行脱敏处理。
+ */
+export interface ApiKeyToken {
+  /**
+   * API Key 的唯一标识符，由系统基于 UUID 自动生成的 Base64 URL 编码字符串。后续对该 API Key 进行删除、修改名称或精确查询操作时，均需使用该值作为定位参数
+   */
+  KeyId?: string
+  /**
+   * API Key 的名称，即创建时传入的 KeyName 参数值。对于 publish_key 类型，该值固定为 publish_key
    */
   Name?: string
   /**
-   * 方向：specify 1 for ascending or -1 for descending
+   * API Key 的令牌值（JWT 格式），用于服务端接口调用时的身份认证。出于安全考虑，仅在创建时返回一次完整明文；后续通过列表查询接口获取时，api_key 类型将进行脱敏处理；publish_key 类型始终返回完整明文。请在创建后妥善保存
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Direction?: string
+  ApiKey?: string
+  /**
+   * API Key 的过期时间，格式遵循 ISO 8601 标准。对于 api_key 类型：若创建时未指定有效期（ExpireIn），则该字段不返回，表示永不过期；若指定了有效期，则返回具体的过期时间。对于 publish_key 类型：始终返回，固定为约 2099 年
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireAt?: string
+  /**
+   * API Key 的创建时间，格式遵循 ISO 8601 标准。对于 api_key 类型：为该 Key 实际创建时的时间。对于 publish_key 类型：若环境下已存在 publish_key 记录，则返回首次创建的时间而非本次调用时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateAt?: string
 }
 
 /**
@@ -3676,16 +4154,6 @@ export interface ModifySafeRuleResponse {
 }
 
 /**
- * BindCloudBaseGWDomain返回参数结构体
- */
-export interface BindCloudBaseGWDomainResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeTable请求参数结构体
  */
 export interface DescribeTableRequest {
@@ -3708,115 +4176,62 @@ export interface DescribeTableRequest {
 }
 
 /**
- * 环境信息
+ * UpdateTable请求参数结构体
  */
-export interface EnvInfo {
+export interface UpdateTableRequest {
   /**
-   * 账户下该环境唯一标识
+   * 表名
+   */
+  TableName: string
+  /**
+   * FlexDB实例ID
+   */
+  Tag?: string
+  /**
+   * 待删除索引信息
+   */
+  DropIndexes?: Array<DropIndex>
+  /**
+   * 待创建索引信息
+   */
+  CreateIndexes?: Array<CreateIndex>
+  /**
+   * 云开发环境ID
    */
   EnvId?: string
   /**
-   * 环境来源。包含以下取值：
-<li>miniapp：微信小程序</li>
-<li>qcloud ：腾讯云</li>
+   * MongoDB连接器配置
    */
-  Source?: string
+  MongoConnector?: MongoConnector
+}
+
+/**
+ * 外部存储。
+标识该存储介质，并非由云开发CloudBase创建，而是绑定的其他存储介质。
+目前仅支持 [腾讯云-对象存储](https://cloud.tencent.com/document/product/436)。
+ */
+export interface ExternalStorage {
   /**
-   * 环境别名，要以a-z开头，不能包含 a-zA-z0-9- 以外的字符
+   * 桶名。
+当 Provider=cos 时，表示腾讯云对象存储桶。
    */
-  Alias?: string
+  BucketName: string
   /**
-   * 创建时间
+   * Bucket所属地域。
+当 Provider=cos 时，表示腾讯云对象存储桶的所属地域。
    */
-  CreateTime?: string
+  Region: string
   /**
-   * 最后修改时间
+   * 基础路径。
+绑定之后，用户访问云存储内的文件，后台会自动以BasePath作为前缀，拼接到所访问的文件中。
+例如：
+  BasePath=my-cloudbase-path ， 当用户访问云存储内的 /tencentcloud.png 时，实际访问的完整路径是：/my-cloudbase-path/tencentcloud.png
    */
-  UpdateTime?: string
+  BasePath: string
   /**
-   * 环境状态。包含以下取值：
-<li>NORMAL：正常可用</li>
-<li>UNAVAILABLE：服务不可用，可能是尚未初始化或者初始化过程中</li>
+   * 是否启用外部存储
    */
-  Status?: string
-  /**
-   * 数据库列表
-   */
-  Databases?: Array<DatabasesInfo>
-  /**
-   * 存储列表
-   */
-  Storages?: Array<StorageInfo>
-  /**
-   * 函数列表
-   */
-  Functions?: Array<FunctionInfo>
-  /**
-   * tcb产品套餐ID，参考DescribePackages接口的返回值。
-   */
-  PackageId?: string
-  /**
-   * 套餐中文名称，参考DescribePackages接口的返回值。
-   */
-  PackageName?: string
-  /**
-   * 云日志服务列表
-   */
-  LogServices?: Array<LogServiceInfo>
-  /**
-   * 静态资源信息
-   */
-  StaticStorages?: Array<StaticStorageInfo>
-  /**
-   * 是否到期自动降为免费版
-   */
-  IsAutoDegrade?: boolean
-  /**
-   * 环境渠道
-   */
-  EnvChannel?: string
-  /**
-   * 支付方式。包含以下取值：
-<li> prepayment：预付费</li>
-<li> postpaid：后付费</li>
-   */
-  PayMode?: string
-  /**
-   * 是否为默认环境
-   */
-  IsDefault?: boolean
-  /**
-   * 环境所属地域
-   */
-  Region?: string
-  /**
-   * 环境标签列表
-   */
-  Tags?: Array<Tag>
-  /**
-   * 自定义日志服务
-   */
-  CustomLogServices?: Array<ClsInfo>
-  /**
-   * 环境类型：baas, run, hoting, weda
-   */
-  EnvType?: string
-  /**
-   * 是否是dau新套餐
-   */
-  IsDauPackage?: boolean
-  /**
-   * 套餐类型:空\baas\tcbr
-   */
-  PackageType?: string
-  /**
-   * 架构类型
-   */
-  ArchitectureType?: string
-  /**
-   * 回收标志，默认为空
-   */
-  Recycle?: string
+  Enabled?: boolean
 }
 
 /**
@@ -3851,20 +4266,6 @@ export interface AuthDomain {
    * 更新时间
    */
   UpdateTime?: string
-}
-
-/**
- * http访问服务路由qps策略
- */
-export interface CloudBaseGWAPIQPSPolicy {
-  /**
-   * qps限额总量
-   */
-  QPSTotal?: number
-  /**
-   * 客户端限频，如果不限制，LimitBy=None
-   */
-  QPSPerClient?: CloudBaseClientQPSPolicy
 }
 
 /**
@@ -3940,108 +4341,13 @@ export interface DeleteAuthDomainRequest {
 }
 
 /**
- * CreateBillDeal请求参数结构体
+ * CreateHTTPServiceRoute返回参数结构体
  */
-export interface CreateBillDealRequest {
+export interface CreateHTTPServiceRouteResponse {
   /**
-   * 当前下单的操作类型，可取[purchase,renew,modify]三种值，分别代表新购，续费，变配。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DealType: string
-  /**
-   * 购买的产品类型，可取[tcb-baas,tcb-promotion,tcb-package], 分别代表baas套餐、大促包、资源包
-   */
-  ProductType: string
-  /**
-   * 目标下单产品/套餐Id。
-对于云开发环境套餐，可通过 DescribeBaasPackageList 接口获取，对应其出参的PackageName
-   */
-  PackageId: string
-  /**
-   * 默认只下单不支付，为ture则下单并支付。
-如果需要下单并支付，请确保账户下有足够的余额，否则会导致下单失败。
-   */
-  CreateAndPay?: boolean
-  /**
-   * 购买时长，与TimeUnit字段搭配使用。
-   */
-  TimeSpan?: number
-  /**
-   * 购买时长单位,按各产品规则可选d(天),m(月),y(年),p(一次性)。
-对于 云开发环境的 新购和续费，目前仅支持 按月购买（即 TimeUnit=m）。
-   */
-  TimeUnit?: string
-  /**
-   * 资源唯一标识。
-在云开发环境 续费和变配 场景下必传，取值为环境ID。
-   */
-  ResourceId?: string
-  /**
-   * 来源可选[qcloud,miniapp]，默认qcloud。
-miniapp表示微信云开发，主要适用于[小程序云开发](https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/billing/price.html)。
-
-   */
-  Source?: string
-  /**
-   * 环境别名，用于新购云开发环境时，给云开发环境起别名。
-仅当 新购云开发环境（DealType=purchase 并且 ProductType=tcb-baas ）时有效。
-
-### 格式要求
-- 可选字符： 小写字母(a~z)、数字、减号(-)
-- 不能以 减号(-) 开头或结尾
-- 不能有连个连续的 减号(-)
-- 长度不超过20位
-   */
-  Alias?: string
-  /**
-   * 环境id，当购买资源包和大促包时（ProductType取值为tcb-promotion 或 tcb-package）必传，表示资源包在哪个环境下生效。
-   */
-  EnvId?: string
-  /**
-   * 开启超限按量。
-开启后，当 套餐内的资源点 和 资源包 都用尽后，会自动按量计费。
-详见 [计费说明](https://cloud.tencent.com/document/product/876/127357)。
-   */
-  EnableExcess?: boolean
-  /**
-   * 变配目标套餐id，对于云开发环境变配场景下必传。
-对于云开发环境套餐，可通过 DescribeBaasPackageList 接口获取，对应其出参的PackageName
-   */
-  ModifyPackageId?: string
-  /**
-   * jsonstr附加信息
-   */
-  Extension?: string
-  /**
-   * 是否自动选择代金券支付。
-   */
-  AutoVoucher?: boolean
-  /**
-   * 资源类型。
-代表新购环境（DealType=purchase 并且 ProductType=tcb-baas ）时需要发货哪些资源。
-可取值：flexdb, cos, cdn, scf
-
-   */
-  ResourceTypes?: Array<string>
-  /**
-   * 环境标签。
- 代表新购环境（DealType=purchase 并且 ProductType=tcb-baas ）时需要打的标签。
-
-   */
-  EnvTags?: Array<Tag>
-}
-
-/**
- * http service选项
- */
-export interface CloudBaseOption {
-  /**
-   * 键
-   */
-  Key: string
-  /**
-   * 值
-   */
-  Value: string
+  RequestId?: string
 }
 
 /**
@@ -4099,28 +4405,6 @@ export interface ModifyClientRequest {
    * Access Token 的有效期，单位为秒。超过该时间后 Access Token 将失效，需使用 Refresh Token 重新换取。最小有效值为 1800 秒（小于 1800 将被忽略，使用默认值），默认值为 7200（即 2 小时）。该值应小于 RefreshTokenExpiresIn。
    */
   AccessTokenExpiresIn?: number
-}
-
-/**
- * DescribeCloudBaseGWService请求参数结构体
- */
-export interface DescribeCloudBaseGWServiceRequest {
-  /**
-   * 服务ID
-   */
-  ServiceId?: string
-  /**
-   * 服务域名
-   */
-  Domain?: string
-  /**
-   * 是否启用多地域
-   */
-  EnableRegion?: boolean
-  /**
-   * 是否启用统一域名
-   */
-  EnableUnion?: boolean
 }
 
 /**
@@ -4229,23 +4513,64 @@ export interface SearchClsLogRequest {
 }
 
 /**
- * MongoDB连接器配置
+ * InquireVmPrice请求参数结构体
  */
-export interface MongoConnector {
+export interface InquireVmPriceRequest {
   /**
-   * 连接器实例ID
+   * 服务器类型：
+LightHouse = 轻量云服务器
+CVM = 云服务器
    */
-  InstanceId?: string
+  Type: string
   /**
-   * MongoDB数据库名
+   * 轻量云服务器套餐ID。
+当Type=LightHouse时必传
    */
-  DatabaseName?: string
+  LightHouseBundleId?: string
+  /**
+   * 轻量云服务器镜像ID。当Type=LightHouse时必传
+   */
+  LightHouseBlueprintId?: string
 }
 
 /**
  * CheckTcbService请求参数结构体
  */
 export type CheckTcbServiceRequest = null
+
+/**
+ * 创建或修改HTTP访问服务输入的域名信息，修改HTTP访问服务域名时对应字段不传参数表示不需要修改。
+ */
+export interface HTTPServiceDomainParam {
+  /**
+   * 域名。全局唯一。如果域名在其他环境下占用或者腾讯云CDN占用，可能会导致创建失败
+   */
+  Domain: string
+  /**
+   * 绑定类型。默认DIRECT。DIRECT: 直连到HTTP访问服务， CDN: 接入云开发CDN，CUSTOM: 自定义接入类型（其他CDN或者WAF）
+   */
+  AccessType?: string
+  /**
+   * 证书ID。当前账户下SSL平台的证书ID
+   */
+  CertId?: string
+  /**
+   * 协议类型。默认HTTP_AND_HTTPS。HTTP_AND_HTTPS: 同时开启http和https，HTTP_TO_HTTPS: http重定向成https，HTTPS_TO_HTTP: https重定向成http。如果未配置证书无法访问https或者进行重定向
+   */
+  Protocol?: string
+  /**
+   * 自定义CNAME。对应AccessType: Custom
+   */
+  CustomCname?: string
+  /**
+   * 域名开启状态，不传默认开启
+   */
+  Enable?: boolean
+  /**
+   * 创建/修改的HTTP访问服务路由列表。如果不传，仅创建或修改域名信息。列表最大支持传入20个
+   */
+  Routes?: Array<HTTPServiceRouteParam>
+}
 
 /**
  * FlexDB数据库权限信息
@@ -4291,17 +4616,27 @@ export interface Pager {
 }
 
 /**
- * DeleteCloudBaseGWAPI返回参数结构体
+ * DeleteVmInstance返回参数结构体
  */
-export interface DeleteCloudBaseGWAPIResponse {
-  /**
-   * 最终删除API个数
-   */
-  Count?: number
+export interface DeleteVmInstanceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 标签键值对
+ */
+export interface Tag {
+  /**
+   * 标签键
+   */
+  Key: string
+  /**
+   * 标签值
+   */
+  Value: string
 }
 
 /**
@@ -4358,6 +4693,24 @@ export interface CreateEnvRequest {
 若该参数指定为NOTIFY_AND_AUTO_RENEW（即：自动续费），在账户余额充足的情况下，实例到期后将按月自动续费；但如果账户余额不足，将无法自动续费。请留意腾讯云短信和邮件通知。
    */
   RenewFlag?: string
+}
+
+/**
+ * DeleteHTTPServiceRoute请求参数结构体
+ */
+export interface DeleteHTTPServiceRouteRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 路径列表。为空则表示删除此域名和所有路由
+   */
+  Paths?: Array<string>
 }
 
 /**
@@ -4455,6 +4808,32 @@ export interface MessageLocalized {
 }
 
 /**
+ * 安全网关自定义配置
+ */
+export interface WxGatewayCustomConfig {
+  /**
+   * 是否开启x-real-ip
+   */
+  IsOpenXRealIp?: boolean
+  /**
+   * 封禁配置
+   */
+  BanConfig?: BanConfig
+  /**
+   * 获取源ip方式，PPV1(Proxy Protocol V1)、PPV2(Proxy Protocol V2)、TOA(tcp option address)
+   */
+  SourceIpType?: string
+  /**
+   * 日志信息
+   */
+  LogConfig?: CustomLogConfig
+  /**
+   * 是否开启http1.0
+   */
+  IsAcceptHttpOne?: boolean
+}
+
+/**
  * CreateUser请求参数结构体
  */
 export interface CreateUserRequest {
@@ -4523,50 +4902,6 @@ export interface DescribeTableResponse {
 }
 
 /**
- * UpdateTable请求参数结构体
- */
-export interface UpdateTableRequest {
-  /**
-   * 表名
-   */
-  TableName: string
-  /**
-   * FlexDB实例ID
-   */
-  Tag?: string
-  /**
-   * 待删除索引信息
-   */
-  DropIndexes?: Array<DropIndex>
-  /**
-   * 待创建索引信息
-   */
-  CreateIndexes?: Array<CreateIndex>
-  /**
-   * 云开发环境ID
-   */
-  EnvId?: string
-  /**
-   * MongoDB连接器配置
-   */
-  MongoConnector?: MongoConnector
-}
-
-/**
- * DeleteCloudBaseGWDomain返回参数结构体
- */
-export interface DeleteCloudBaseGWDomainResponse {
-  /**
-   * 删除个数
-   */
-  Count?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeDatabaseACL返回参数结构体
  */
 export interface DescribeDatabaseACLResponse {
@@ -4582,6 +4917,36 @@ export interface DescribeDatabaseACLResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 虚拟主机价格
+ */
+export interface VMPrice {
+  /**
+   * 价格货币单位。取值范围CNY:人民币。USD:美元。
+   */
+  Currency?: string
+  /**
+   * 原始价格
+   */
+  OriginalPrice?: number
+  /**
+   * 折扣率
+   */
+  Discount?: number
+  /**
+   * 折扣后的价格
+   */
+  DiscountPrice?: number
+  /**
+   * 折扣前每天资源点
+   */
+  OriginalCredits?: number
+  /**
+   * 折扣后每天所需资源点
+   */
+  DiscountCredits?: number
 }
 
 /**
@@ -4628,86 +4993,6 @@ export interface ModifyProviderResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 网关服务
- */
-export interface CloudBaseGWService {
-  /**
-   * 服务ID
-   */
-  ServiceId?: string
-  /**
-   * 服务域名
-   */
-  Domain?: string
-  /**
-   * 开启时间
-   */
-  OpenTime?: number
-  /**
-   * 绑定状态，1 绑定中；2绑定失败；3绑定成功
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: number
-  /**
-   * 是否被抢占, 被抢占表示域名被其他环境绑定了，需要解绑或者重新绑定。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsPreempted?: boolean
-  /**
-   * 是否开启多地域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnableRegion?: boolean
-  /**
-   * cdn CName地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Cname?: string
-  /**
-   * 统一域名状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UnionStatus?: number
-  /**
-   * CName状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CnameStatus?: number
-  /**
-   * 证书Id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CertId?: string
-  /**
-   * 是否强制https
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ForceHttps?: boolean
-  /**
-   * icp黑名单封禁状态，0-未封禁，1-封禁
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IcpForbidStatus?: number
-  /**
-   * 自定义路由规则
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CustomRoutingRules?: string
-  /**
-   * 绑定类型，1绑定cdn，2源站，4自定义
-   */
-  BindFlag?: number
-  /**
-   * TcbIngress源站cname
-   */
-  OriginCname?: string
-  /**
-   * 自定义cname
-   */
-  CustomCname?: string
 }
 
 /**
@@ -4775,25 +5060,79 @@ export interface ModifyUserRequest {
 }
 
 /**
- * BindCloudBaseGWDomain请求参数结构体
+ * 创建或修改HTTP访问服务输入的路由信息，修改HTTP访问服务路由信息时对应字段不传参数表示不用修改。
  */
-export interface BindCloudBaseGWDomainRequest {
+export interface HTTPServiceRouteParam {
   /**
-   * 服务ID
+   * 路径
    */
-  ServiceId: string
+  Path: string
   /**
-   * 服务域名
+   * 上游服务类型。创建时必填，修改时可选填。SCF: 云函数，CBR: 云托管，STATIC_STORE: 静态托管，WEB_SCF: WEB云函数，LH: Lighthouse
    */
-  Domain: string
+  UpstreamResourceType?: string
   /**
-   * 证书ID
+   * 上游服务名。创建时必填，修改时可选填
    */
-  CertId?: string
+  UpstreamResourceName?: string
   /**
-   * 是否启用多地域
+   * 路径重写
    */
-  EnableRegion?: boolean
+  PathRewrite?: HTTPServicePathRewrite
+  /**
+   * 是否开启安全域名。默认开启
+   */
+  EnableSafeDomain?: boolean
+  /**
+   * 是否开启身份认证。默认关闭
+   */
+  EnableAuth?: boolean
+  /**
+   * 是否开启路径透传。默认关闭
+   */
+  EnablePathTransmission?: boolean
+  /**
+   * QPS限频策略
+   */
+  QPSPolicy?: HTTPServiceRouteQPSPolicy
+  /**
+   * 是否开启路由
+   */
+  Enable?: boolean
+}
+
+/**
+ * InquireVmPrice返回参数结构体
+ */
+export interface InquireVmPriceResponse {
+  /**
+   * 价格货币单位。取值范围CNY:人民币。USD:美元。
+   */
+  Currency?: string
+  /**
+   * 原价（主机原始每月价格）
+   */
+  OriginalPrice?: number
+  /**
+   * 折扣率
+   */
+  Discount?: number
+  /**
+   * 折扣后每月价格
+   */
+  DiscountPrice?: number
+  /**
+   * 折扣前每天资源点
+   */
+  OriginalCredits?: number
+  /**
+   * 折扣后每天资源点
+   */
+  DiscountCredits?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4807,101 +5146,6 @@ export interface CreateUserResp {
 }
 
 /**
- * tcb 网关API
- */
-export interface CloudBaseGWAPI {
-  /**
-   * 服务ID
-   */
-  ServiceId?: string
-  /**
-   * API ID
-   */
-  APIId?: string
-  /**
-   * API Path
-   */
-  Path?: string
-  /**
-   * API 类型
-   */
-  Type?: number
-  /**
-   * API 名
-   */
-  Name?: string
-  /**
-   * API创建时间
-   */
-  CreateTime?: number
-  /**
-   * 自定义值通用字段：
-Type为1时，该值为空。
-Type为2时，该值为容器的代理IP:PORT数组。
-   */
-  Custom?: string
-  /**
-   * 表示是否开启认证
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnableAuth?: boolean
-  /**
-   * 云开发环境ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnvId?: string
-  /**
-   * 访问类型（该参数暂不对外暴露）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AccessType?: number
-  /**
-   * 统一发布状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UnionStatus?: number
-  /**
-   * 域名（*表示所有域名）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Domain?: string
-  /**
-   * 是否有路径冲突
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConflictFlag?: boolean
-  /**
-   * 域名状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DomainStatus?: number
-  /**
-   * 是否开启路径透传，默认true表示短路径，即不开启(已弃用)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsShortPath?: boolean
-  /**
-   * 路径透传，默认0关闭，1开启，2关闭
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PathTransmission?: number
-  /**
-   * 跨域校验，默认0开启，1开启，2关闭
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnableCheckAcrossDomain?: number
-  /**
-   * 静态托管文件目录
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StaticFileDirectory?: string
-  /**
-   * QPS策略
-   */
-  QPSPolicy?: CloudBaseGWAPIQPSPolicy
-}
-
-/**
  * ModifyLoginConfig返回参数结构体
  */
 export interface ModifyLoginConfigResponse {
@@ -4909,4 +5153,26 @@ export interface ModifyLoginConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateApiKey请求参数结构体
+ */
+export interface CreateApiKeyRequest {
+  /**
+   * 环境 ID，用于标识该密钥归属的云开发环境，不同环境之间的数据相互隔离
+   */
+  EnvId: string
+  /**
+   * 密钥类型。可选值：api_key（服务端调用使用的 API 密钥，具有完整权限，请勿暴露在客户端）、publish_key（客户端使用的公开密钥，权限受限，可安全用于前端或移动端）。
+   */
+  KeyType: string
+  /**
+   * 密钥的自定义名称，用于在管理列表中标识和区分不同的密钥，建议填写能体现用途或归属的描述性名称，例如：server-prod、mobile-test
+   */
+  KeyName?: string
+  /**
+   * 密钥的有效期，单位为秒，最短不得低于 7200 秒。超过有效期后密钥将自动失效。不设置或设置为 0 则表示永不过期，建议根据安全需求合理设置有效期
+   */
+  ExpireIn?: number
 }

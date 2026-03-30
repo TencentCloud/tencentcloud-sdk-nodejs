@@ -3876,7 +3876,7 @@ export interface ModifyListenerResponse {
  */
 export interface DescribeTargetHealthResponse {
   /**
-   * 负载均衡实例列表。
+   * <p>负载均衡实例列表。</p>
    */
   LoadBalancers?: Array<LoadBalancerHealth>
   /**
@@ -4839,11 +4839,11 @@ export interface LbRsTargets {
  */
 export interface BatchModifyTargetWeightRequest {
   /**
-   * 负载均衡实例 ID。
+   * <p>负载均衡实例 ID。</p>
    */
   LoadBalancerId: string
   /**
-   * 要批量修改权重的列表。
+   * <p>要批量修改权重的列表。ModifyList数组最多100个元素，ModifyList[i].Targets最多50个，全部Targets累加不超过500。</p>
    */
   ModifyList: Array<RsWeightRule>
 }
@@ -4951,15 +4951,15 @@ export interface TargetRegionInfo {
  */
 export interface DescribeTargetHealthRequest {
   /**
-   * 要查询的负载均衡实例ID列表。
+   * <p>要查询的负载均衡实例ID列表。数组大小最大支持30。</p>
    */
   LoadBalancerIds: Array<string>
   /**
-   * 要查询的监听器ID列表。
+   * <p>要查询的监听器ID列表。</p>
    */
   ListenerIds?: Array<string>
   /**
-   * 要查询的转发规则ID列表。
+   * <p>要查询的转发规则ID列表。</p>
    */
   LocationIds?: Array<string>
 }

@@ -80,25 +80,25 @@ export interface CreateRabbitMQBindingResponse {
  */
 export interface ModifyRocketMQInstanceSpecRequest {
   /**
-   * 专享实例ID
+   * <p>专享实例ID</p>
    */
   InstanceId: string
   /**
-   * 实例规格，
-rocket-vip-basic-1 基础型
-rocket-vip-basic-2 标准型
-rocket-vip-basic-3 高阶Ⅰ型
-rocket-vip-basic-4 高阶Ⅱ型
+   * <p>实例规格，<br>rocket-vip-basic-1 基础型<br>rocket-vip-basic-2 标准型<br>rocket-vip-basic-3 高阶Ⅰ型<br>rocket-vip-basic-4 高阶Ⅱ型</p>
    */
   Specification?: string
   /**
-   * 节点数量
+   * <p>节点数量</p>
    */
   NodeCount?: number
   /**
-   * 存储空间，GB为单位
+   * <p>存储空间，GB为单位</p>
    */
   StorageSize?: number
+  /**
+   * <p>部署可用区列表</p>
+   */
+  ZoneIds?: Array<string>
 }
 
 /**
@@ -3780,15 +3780,15 @@ export interface RabbitMQQueueListConsumerDetailInfo {
  */
 export interface CreateRocketMQRoleResponse {
   /**
-   * 角色名称
+   * <p>角色名称</p>
    */
   RoleName?: string
   /**
-   * 角色token
+   * <p>角色token</p>
    */
   Token?: string
   /**
-   * 备注说明
+   * <p>备注说明</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
@@ -4826,7 +4826,7 @@ export interface AMQPClusterInfo {
  */
 export interface ModifyRocketMQInstanceSpecResponse {
   /**
-   * 订单号
+   * <p>订单号</p>
    */
   OrderId?: string
   /**
@@ -5625,13 +5625,13 @@ export interface VerifyRocketMQConsumeRequest {
    */
   MsgId: string
   /**
-   * 客户端ID
-   */
-  ClientId: string
-  /**
    * 主题名称
    */
   TopicName: string
+  /**
+   * 客户端 ID，不指定该参数时消息将被发送到对应消费组内任意客户端
+   */
+  ClientId?: string
 }
 
 /**
@@ -7732,21 +7732,33 @@ export interface SendMessagesRequest {
  */
 export interface CreateRocketMQRoleRequest {
   /**
-   * 角色名称，不支持中字以及除了短线和下划线外的特殊字符且长度必须大于0且小等于32。
+   * <p>角色名称，不支持中字以及除了短线和下划线外的特殊字符且长度必须大于0且小等于32。</p>
    */
   RoleName: string
   /**
-   * 必填字段，集群Id
+   * <p>必填字段，集群Id</p>
    */
   ClusterId: string
   /**
-   * 备注说明，长度必须大等于0且小等于128。
+   * <p>备注说明，长度必须大等于0且小等于128。</p>
    */
   Remark?: string
   /**
-   * 角色授权类型（集群：Cluster; 主题或消费组：TopicAndGroup）
+   * <p>角色授权类型（集群：Cluster; 主题或消费组：TopicAndGroup）</p>
    */
   PermType?: string
+  /**
+   * <p>AK、SK的生成方式，AUTO：后端自动生成，MANUAL：用户手动输入</p>
+   */
+  RoleGenerateMode?: string
+  /**
+   * <p>选择MANUAL模式下，需要手动输入AK值</p>
+   */
+  AccessKey?: string
+  /**
+   * <p>选择MANUAL模式下，需要手动输入SK值</p>
+   */
+  SecretKey?: string
 }
 
 /**

@@ -228,6 +228,16 @@ it("domain.v20180808.DescribeBiddingSuccessfulList", async function () {
     }
 })
 
+it("domain.v20180808.ModifyDomainOwner", async function () {
+    try {
+       const data = await client.ModifyDomainOwner({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("domain.v20180808.CheckDomain", async function () {
     try {
        const data = await client.CheckDomain({})

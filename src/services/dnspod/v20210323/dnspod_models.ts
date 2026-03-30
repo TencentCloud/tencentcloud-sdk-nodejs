@@ -78,21 +78,33 @@ export interface CreateRecordRequest {
 }
 
 /**
- * DescribeRecordFilterList返回参数结构体
+ * DescribeDomainList请求参数结构体
  */
-export interface DescribeRecordFilterListResponse {
+export interface DescribeDomainListRequest {
   /**
-   * 记录的数量统计信息
+   * 域名分组类型，默认为ALL。可取值为ALL，MINE，SHARE，ISMARK，PAUSE，VIP，RECENT，SHARE_OUT，FREE。
    */
-  RecordCountInfo?: RecordCountInfo
+  Type?: string
   /**
-   * 获取的记录列表
+   * 记录开始的偏移, 第一条记录为 0, 依次类推。默认值为0。
    */
-  RecordList?: Array<RecordListItem>
+  Offset?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 要获取的域名数量, 比如获取20个, 则为20。默认值为3000。
    */
-  RequestId?: string
+  Limit?: number
+  /**
+   * 分组ID, 获取指定分组的域名，可以通过接口DescribeDomainGroupList查看当前域名分组信息
+   */
+  GroupId?: number
+  /**
+   * 根据关键字搜索域名
+   */
+  Keyword?: string
+  /**
+   * 标签过滤
+   */
+  Tags?: Array<TagItemFilter>
 }
 
 /**
@@ -3005,6 +3017,24 @@ export interface CheckSnapshotRollbackResponse {
 }
 
 /**
+ * CreateAndPayDeal返回参数结构体
+ */
+export interface CreateAndPayDealResponse {
+  /**
+   * <p>大订单号，一个大订单号下可以有多个子订单，说明是同一次下单</p>
+   */
+  BigDealId?: string
+  /**
+   * <p>子订单列表</p>
+   */
+  DealList?: Array<Deals>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRecordType请求参数结构体
  */
 export interface DescribeRecordTypeRequest {
@@ -4807,13 +4837,17 @@ export interface ModifySnapshotConfigResponse {
 }
 
 /**
- * RollbackRecordSnapshot返回参数结构体
+ * DescribeRecordFilterList返回参数结构体
  */
-export interface RollbackRecordSnapshotResponse {
+export interface DescribeRecordFilterListResponse {
   /**
-   * 回滚任务 ID
+   * 记录的数量统计信息
    */
-  JobId?: number
+  RecordCountInfo?: RecordCountInfo
+  /**
+   * 获取的记录列表
+   */
+  RecordList?: Array<RecordListItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4882,33 +4916,45 @@ export interface ModifyRecordRemarkResponse {
 }
 
 /**
- * DescribeDomainList请求参数结构体
+ * CreateAndPayDeal请求参数结构体
  */
-export interface DescribeDomainListRequest {
+export interface CreateAndPayDealRequest {
   /**
-   * 域名分组类型，默认为ALL。可取值为ALL，MINE，SHARE，ISMARK，PAUSE，VIP，RECENT，SHARE_OUT，FREE。
+   * <p>询价类型，1 新购，2 续费，3 套餐升级（增值服务暂时只支持新购）</p>
    */
-  Type?: string
+  DealType: number
   /**
-   * 记录开始的偏移, 第一条记录为 0, 依次类推。默认值为0。
+   * <p>商品类型，1 域名套餐 2 增值服务</p>
    */
-  Offset?: number
+  GoodsType: number
   /**
-   * 要获取的域名数量, 比如获取20个, 则为20。默认值为3000。
+   * <p>套餐类型：<br>DP_PLUS：专业版<br>DP_EXPERT：企业版<br>DP_ULTRA：尊享版</p><p>增值服务类型<br>LB：负载均衡<br>URL：URL转发<br>DMONITOR_TASKS：D监控任务数<br>DMONITOR_IP：D监控备用 IP 数<br>CUSTOMLINE：自定义线路数</p>
    */
-  Limit?: number
+  GoodsChildType: string
   /**
-   * 分组ID, 获取指定分组的域名，可以通过接口DescribeDomainGroupList查看当前域名分组信息
+   * <p>增值服务购买数量，如果是域名套餐固定为1，如果是增值服务则按以下规则：<br>负载均衡、D监控任务数、D监控备用 IP 数、自定义线路数、URL 转发（必须是5的正整数倍，如 5、10、15 等）</p>
    */
-  GroupId?: number
+  GoodsNum: number
   /**
-   * 根据关键字搜索域名
+   * <p>是否开启自动续费，1 开启，2 不开启（增值服务暂不支持自动续费），默认值为 2 不开启</p>
    */
-  Keyword?: string
+  AutoRenew: number
   /**
-   * 标签过滤
+   * <p>需要绑定套餐的域名，如 dnspod.cn，如果是续费或升级，domain 参数必须要传，新购可不传。</p>
    */
-  Tags?: Array<TagItemFilter>
+  Domain?: string
+  /**
+   * <p>套餐时长：</p><ol><li>套餐以月为单位（按月只能是 3、6 还有 12 的倍数），套餐例如购买一年则传12，最大120 。（续费最低一年）</li><li>升级套餐时不需要传。</li><li>增值服务的时长单位为年，买一年传1（增值服务新购按年只能是 1，增值服务续费最大为 10）</li></ol>
+   */
+  TimeSpan?: number
+  /**
+   * <p>套餐类型，需要升级到的套餐类型，只有升级时需要。</p>
+   */
+  NewPackageType?: string
+  /**
+   * <p>可重入ID，避免接口重试场景生成额外订单和实例</p><p>入参限制：长度不超过70个字符</p>
+   */
+  ClientToken?: string
 }
 
 /**
@@ -5160,6 +5206,20 @@ export interface CreateDomainCustomLineRequest {
    * 域名ID，如果传了DomainId，系统将会忽略Domain参数，优先使用DomainId
    */
   DomainId?: number
+}
+
+/**
+ * RollbackRecordSnapshot返回参数结构体
+ */
+export interface RollbackRecordSnapshotResponse {
+  /**
+   * 回滚任务 ID
+   */
+  JobId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

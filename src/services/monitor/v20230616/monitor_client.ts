@@ -21,37 +21,51 @@ import {
   DescribeAlarmNotifyHistoriesRequest,
   WebhookNoticeTmpl,
   TeamsRobotNoticeTmplMatcher,
+  WeWorkRobotNoticeTmplMatcher,
   FeiShuRobotNoticeTmplMatcher,
   DeleteNoticeContentTmplsRequest,
   PageByNoParams,
   QCloudYeheWeChatNoticeTmplItem,
-  QCloudYeheNoticeTmpl,
+  AIWorkbenchSREDigitalTwinTask,
   NoticeContentTmpl,
-  WeWorkRobotNoticeTmplMatcher,
+  DescribeAIWorkbenchSREDigitalTwinTaskListRequest,
+  AIWorkbenchSREDigitalTwinWorkLogList,
   NoticeContentTmplItem,
   QCloudYeheNoticeTmplItem,
   CreateNoticeContentTmplResponse,
   NoticeContentTmplBindPolicyCount,
+  AIWorkbenchSREDigitalTwinWorkLog,
+  TriggerAIWorkbenchSREDigitalTwinTaskRequest,
+  TriggerAIWorkbenchSREDigitalTwinTaskResponse,
+  DescribeAIWorkbenchSREDigitalTwinWorkLogListResponse,
+  TriggerDigitalTwinTaskResp,
   ModifyNoticeContentTmplResponse,
   DescribeNoticeContentTmplResponse,
+  DescribeAIWorkbenchSREDigitalTwinWorkLogDetailRequest,
   PagerDutyRobotNoticeTmplHeader,
   DescribeAlarmNotifyHistoriesResponse,
+  TeamsRobotNoticeTmpl,
   GoogleChatRobotNoticeTmpl,
   DingDingRobotNoticeTmpl,
   PagerDutyRobotNoticeTmplMatcher,
   WebhookNoticeTmplHeader,
+  DescribeAIWorkbenchSREDigitalTwinTaskListResponse,
   FeiShuRobotNoticeTmpl,
   DingDingRobotNoticeTmplMatcher,
-  TeamsRobotNoticeTmpl,
-  GoogleChatRobotNoticeTmplMatcher,
+  AIWorkbenchSREDigitalTwinWorkLogDetail,
   WeWorkRobotNoticeTmpl,
+  QCloudYeheNoticeTmplMatcher,
+  GoogleChatRobotNoticeTmplMatcher,
+  QCloudYeheNoticeTmpl,
   DeleteNoticeContentTmplsResponse,
   PagerDutyRobotNoticeTmpl,
+  AIWorkbenchSREDigitalTwinTaskList,
   DescribeNoticeContentTmplRequest,
   ModifyNoticeContentTmplRequest,
   CreateNoticeContentTmplRequest,
-  QCloudYeheNoticeTmplMatcher,
+  DescribeAIWorkbenchSREDigitalTwinWorkLogListRequest,
   WebhookNoticeTmplMatcher,
+  DescribeAIWorkbenchSREDigitalTwinWorkLogDetailResponse,
 } from "./monitor_models"
 
 /**
@@ -84,13 +98,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改通知内容模板
+   * 查询AI工作台SRE数字分身工作日志详细信息
    */
-  async ModifyNoticeContentTmpl(
-    req: ModifyNoticeContentTmplRequest,
-    cb?: (error: string, rep: ModifyNoticeContentTmplResponse) => void
-  ): Promise<ModifyNoticeContentTmplResponse> {
-    return this.request("ModifyNoticeContentTmpl", req, cb)
+  async DescribeAIWorkbenchSREDigitalTwinWorkLogDetail(
+    req: DescribeAIWorkbenchSREDigitalTwinWorkLogDetailRequest,
+    cb?: (error: string, rep: DescribeAIWorkbenchSREDigitalTwinWorkLogDetailResponse) => void
+  ): Promise<DescribeAIWorkbenchSREDigitalTwinWorkLogDetailResponse> {
+    return this.request("DescribeAIWorkbenchSREDigitalTwinWorkLogDetail", req, cb)
   }
 
   /**
@@ -104,6 +118,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 触发数字分身任务请求
+   */
+  async TriggerAIWorkbenchSREDigitalTwinTask(
+    req: TriggerAIWorkbenchSREDigitalTwinTaskRequest,
+    cb?: (error: string, rep: TriggerAIWorkbenchSREDigitalTwinTaskResponse) => void
+  ): Promise<TriggerAIWorkbenchSREDigitalTwinTaskResponse> {
+    return this.request("TriggerAIWorkbenchSREDigitalTwinTask", req, cb)
+  }
+
+  /**
+   * 修改通知内容模板
+   */
+  async ModifyNoticeContentTmpl(
+    req: ModifyNoticeContentTmplRequest,
+    cb?: (error: string, rep: ModifyNoticeContentTmplResponse) => void
+  ): Promise<ModifyNoticeContentTmplResponse> {
+    return this.request("ModifyNoticeContentTmpl", req, cb)
+  }
+
+  /**
+   * 查询AI工作台SRE数字分身任务工作日志列表
+   */
+  async DescribeAIWorkbenchSREDigitalTwinWorkLogList(
+    req: DescribeAIWorkbenchSREDigitalTwinWorkLogListRequest,
+    cb?: (error: string, rep: DescribeAIWorkbenchSREDigitalTwinWorkLogListResponse) => void
+  ): Promise<DescribeAIWorkbenchSREDigitalTwinWorkLogListResponse> {
+    return this.request("DescribeAIWorkbenchSREDigitalTwinWorkLogList", req, cb)
+  }
+
+  /**
    * 按需查询告警的通知历史
    */
   async DescribeAlarmNotifyHistories(
@@ -111,5 +155,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAlarmNotifyHistoriesResponse) => void
   ): Promise<DescribeAlarmNotifyHistoriesResponse> {
     return this.request("DescribeAlarmNotifyHistories", req, cb)
+  }
+
+  /**
+   * 查询AI工作台SRE数字分身任务列表
+   */
+  async DescribeAIWorkbenchSREDigitalTwinTaskList(
+    req: DescribeAIWorkbenchSREDigitalTwinTaskListRequest,
+    cb?: (error: string, rep: DescribeAIWorkbenchSREDigitalTwinTaskListResponse) => void
+  ): Promise<DescribeAIWorkbenchSREDigitalTwinTaskListResponse> {
+    return this.request("DescribeAIWorkbenchSREDigitalTwinTaskList", req, cb)
   }
 }

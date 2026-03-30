@@ -9685,7 +9685,7 @@ export interface RiskDnsEvent {
    */
   ReferenceLink?: string
   /**
-   * 处理状态；[0:待处理|2:已加白|3:非信任状态|4:已处理|5:已忽略]
+   * 处理状态；[0:待处理|2:已加白|3:非信任状态|4:已处理|5:已忽略|6:已拦截]
    */
   HandleStatus?: number
   /**
@@ -14035,6 +14035,10 @@ export interface ModifyLicenseUnBindsRequest {
   ResourceId: string
   /**
    * 授权类型
+- 0 按量付费-专业版
+- 1 包年包月-专业版
+- 2 包年包月-旗舰版
+- 3 包年包月-轻量版
    */
   LicenseType: number
   /**

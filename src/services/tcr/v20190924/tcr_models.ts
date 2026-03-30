@@ -3027,33 +3027,37 @@ export interface RegistryChargePrepaid {
  */
 export interface ModifyNamespaceRequest {
   /**
-   * 实例Id
+   * <p>实例Id</p>
    */
   RegistryId: string
   /**
-   * 命名空间名称
+   * <p>命名空间名称</p>
    */
   NamespaceName: string
   /**
-   * 访问级别，True为公开，False为私有
+   * <p>访问级别，True为公开，False为私有</p>
    */
   IsPublic?: boolean
   /**
-   * 扫描级别，True为自动，False为手动
+   * <p>扫描级别，True为自动，False为手动</p>
    */
   IsAutoScan?: boolean
   /**
-   * 阻断开关，True为开放，False为关闭
+   * <p>阻断开关，True为开放，False为关闭</p>
    */
   IsPreventVUL?: boolean
   /**
-   * 阻断漏洞等级，目前仅支持 low、medium、high
+   * <p>阻断漏洞等级，目前仅支持 low、medium、high</p>
    */
   Severity?: string
   /**
-   * 漏洞白名单列表
+   * <p>漏洞白名单列表</p>
    */
   CVEWhitelistItems?: Array<CVEWhitelistItem>
+  /**
+   * <p>tag列表</p>
+   */
+  TagSpecification?: TagSpecification
 }
 
 /**
@@ -3456,80 +3460,74 @@ export interface GCJobInfo {
  */
 export interface Registry {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   RegistryId?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   RegistryName?: string
   /**
-   * 实例规格
+   * <p>实例规格</p>
    */
   RegistryType?: string
   /**
-   * 实例状态。有以下状态：
-Pending, 初始化中
-Deploying, 创建中
-Running, 运行中
-Unhealthy, 状态异常
-FailedCreated, 创建失败
-FailedUpdated, 更新失败
-Bucket-Error, 存储桶异常
-Isolate, 待回收
-Deleting, 删除中
-DeleteBucketFailed, 实例删除存储桶失败
-DeleteFailed, 实例删除失败
+   * <p>实例状态。有以下状态：<br>Pending, 初始化中<br>Deploying, 创建中<br>Running, 运行中<br>Unhealthy, 状态异常<br>FailedCreated, 创建失败<br>FailedUpdated, 更新失败<br>Bucket-Error, 存储桶异常<br>Isolate, 待回收<br>Deleting, 删除中<br>DeleteBucketFailed, 实例删除存储桶失败<br>DeleteFailed, 实例删除失败</p>
    */
   Status?: string
   /**
-   * 实例的公共访问地址
+   * <p>实例的公共访问地址</p>
    */
   PublicDomain?: string
   /**
-   * 实例创建时间
+   * <p>实例创建时间</p>
    */
   CreatedAt?: string
   /**
-   * 地域名称
+   * <p>地域名称</p>
    */
   RegionName?: string
   /**
-   * 地域Id
+   * <p>地域Id</p>
    */
   RegionId?: number
   /**
-   * 是否支持匿名
+   * <p>是否支持匿名</p>
    */
   EnableAnonymous?: boolean
   /**
-   * Token有效时间
+   * <p>Token有效时间</p>
    */
   TokenValidTime?: number
   /**
-   * 实例内部访问地址
+   * <p>实例内部访问地址</p>
    */
   InternalEndpoint?: string
   /**
-   * 实例云标签
+   * <p>实例云标签</p>
    */
   TagSpecification?: TagSpecification
   /**
-   * 实例过期时间（预付费）
+   * <p>实例过期时间（预付费）</p>
    */
   ExpiredAt?: string
   /**
-   * 实例付费类型，0表示后付费，1表示预付费
+   * <p>实例付费类型，0表示后付费，1表示预付费</p>
    */
   PayMod?: number
   /**
-   * 预付费续费标识，0表示手动续费，1表示自动续费，2不续费并且不通知
+   * <p>预付费续费标识，0表示手动续费，1表示自动续费，2不续费并且不通知</p>
    */
   RenewFlag?: number
   /**
-   * 是否开启实例删除保护，false表示不开启
+   * <p>是否开启实例删除保护，false表示不开启</p>
    */
   DeletionProtection?: boolean
+  /**
+   * <p>是否支持AI特性</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AIFeature?: boolean
 }
 
 /**

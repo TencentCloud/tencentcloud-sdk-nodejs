@@ -408,6 +408,16 @@ it("redis.v20180412.DescribeInstanceDTSInfo", async function () {
     }
 })
 
+it("redis.v20180412.DeleteExportTask", async function () {
+    try {
+       const data = await client.DeleteExportTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.InquiryPriceUpgradeInstance", async function () {
     try {
        const data = await client.InquiryPriceUpgradeInstance({})
@@ -778,6 +788,36 @@ it("redis.v20180412.AssociateSecurityGroups", async function () {
     }
 })
 
+it("redis.v20180412.ModifyLog", async function () {
+    try {
+       const data = await client.ModifyLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.DescribeExportTasks", async function () {
+    try {
+       const data = await client.DescribeExportTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.DescribeLogs", async function () {
+    try {
+       const data = await client.DescribeLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.DescribeSSLStatus", async function () {
     try {
        const data = await client.DescribeSSLStatus({})
@@ -868,6 +908,16 @@ it("redis.v20180412.DescribeInstanceEvents", async function () {
     }
 })
 
+it("redis.v20180412.CloseLog", async function () {
+    try {
+       const data = await client.CloseLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.SwitchInstanceVip", async function () {
     try {
        const data = await client.SwitchInstanceVip({})
@@ -918,9 +968,19 @@ it("redis.v20180412.ModifyMaintenanceWindow", async function () {
     }
 })
 
-it("redis.v20180412.ModifyNetworkConfig", async function () {
+it("redis.v20180412.CreateExportTask", async function () {
     try {
-       const data = await client.ModifyNetworkConfig({})
+       const data = await client.CreateExportTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.DescribeLogInstanceList", async function () {
+    try {
+       const data = await client.DescribeLogInstanceList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -968,6 +1028,16 @@ it("redis.v20180412.RemoveReplicationGroup", async function () {
     }
 })
 
+it("redis.v20180412.OpenLog", async function () {
+    try {
+       const data = await client.OpenLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.OpenSSL", async function () {
     try {
        const data = await client.OpenSSL({})
@@ -981,6 +1051,16 @@ it("redis.v20180412.OpenSSL", async function () {
 it("redis.v20180412.DescribeAutoBackupConfig", async function () {
     try {
        const data = await client.DescribeAutoBackupConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("redis.v20180412.ModifyNetworkConfig", async function () {
+    try {
+       const data = await client.ModifyNetworkConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -208,6 +208,16 @@ it("csip.v20221121.StopRiskCenterTask", async function () {
     }
 })
 
+it("csip.v20221121.DescribeAKAnalysisDetail", async function () {
+    try {
+       const data = await client.DescribeAKAnalysisDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeAccessKeyUserDetail", async function () {
     try {
        const data = await client.DescribeAccessKeyUserDetail({})

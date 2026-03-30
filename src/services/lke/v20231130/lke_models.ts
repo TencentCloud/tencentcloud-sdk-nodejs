@@ -3265,6 +3265,10 @@ export interface CreateWorkflowRunRequest {
    * API参数配置
    */
   CustomVariables?: Array<CustomVariable>
+  /**
+   * 用户ID
+   */
+  VisitorId?: string
 }
 
 /**

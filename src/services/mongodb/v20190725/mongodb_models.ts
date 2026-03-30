@@ -2156,6 +2156,36 @@ export interface InstanceIntegerParam {
 }
 
 /**
+ * ModifyInstanceAz请求参数结构体
+ */
+export interface ModifyInstanceAzRequest {
+  /**
+   * <p>实例 ID，例如：cmgo-p8vn****。请登录 <a href="https://console.cloud.tencent.com/mongodb">MongoDB 控制台</a>在实例列表复制实例 ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>主节点所在的可用区 ID。获取方式，请参见<a href="https://cloud.tencent.com/document/product/240/3637">地域和可用区</a>。</p>
+   */
+  PrimaryNodeZone: string
+  /**
+   * <p>从节点所在的可用区 ID 列表。<br><strong>注意</strong>：不可包含主节点与 Hidden 节点所在的可用区。</p>
+   */
+  SecondaryNodeZone: Array<string>
+  /**
+   * <p>若当前实例未配置 Hidden 节点，则无需传入此参数。</p>
+   */
+  HiddenNodeZone?: string
+  /**
+   * <p>只读节点所在的可用区 ID 列表。<br><strong>注意</strong>：若当前实例已包含只读节点，则此参数为必填项。</p>
+   */
+  ReadonlyNodeZone?: Array<string>
+  /**
+   * <p>指定切换可用区的执行时间策略。</p><ul><li>0：立即执行切换。</li><li>1：在设定的维护时间窗执行切换。具体信息，请参见<a href="https://cloud.tencent.com/document/product/240/19910">设置实例维护时间</a>。</li></ul>
+   */
+  InMaintenance?: number
+}
+
+/**
  * 修改数据库地址
  */
 export interface ModifyNetworkAddress {
@@ -3694,6 +3724,20 @@ export interface DropDBInstanceParamTplRequest {
    * 参数模板 ID。请通过接口 [DescribeDBInstanceParamTpl](https://cloud.tencent.com/document/product/240/109155) 获取模板 ID。
    */
   TplId: string
+}
+
+/**
+ * ModifyInstanceAz返回参数结构体
+ */
+export interface ModifyInstanceAzResponse {
+  /**
+   * <p>可用区调整订单ID。</p>
+   */
+  DealId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

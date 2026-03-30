@@ -110,6 +110,7 @@ import {
   DeleteWorkSpaceResponse,
   HadoopYarnItem,
   TriggerJobSavepointResponse,
+  VariableItem,
   DeleteJobsResponse,
   Property,
   JobGraphEdge,

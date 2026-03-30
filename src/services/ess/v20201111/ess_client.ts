@@ -99,6 +99,7 @@ import {
   VerifyDigitalDataSignRequest,
   IntegrationDepartment,
   DescribeIntegrationRolesResponse,
+  ModifyExtendedServiceResponse,
   DescribeBillUsageDetailResponse,
   FlowOperateLimit,
   DescribeFlowBriefsResponse,
@@ -125,6 +126,7 @@ import {
   CreateFlowApproversResponse,
   ModifyExtendedServiceRequest,
   DeleteOrganizationAuthorizationInfo,
+  CreateDraftContractByPromptsTaskRequest,
   CreateLMInformationExtractionTaskFieldFeedbackRequest,
   ReviewerInfo,
   CreateContractReviewWebUrlResponse,
@@ -199,8 +201,10 @@ import {
   ExtractionTaskResult,
   ApproverRestriction,
   IntentionAction,
+  DescribeDraftContractByPromptsTaskResponse,
   CreateOrganizationBatchSignUrlRequest,
   IntegrateRole,
+  CreateDraftContractByPromptsTaskResponse,
   DeleteIntegrationDepartmentRequest,
   MiniAppCreateApproverInfo,
   ExtendScene,
@@ -217,6 +221,7 @@ import {
   Caller,
   ExportContractComparisonTaskResponse,
   EmbedUrlOption,
+  DescribeContractReviewMarkedRiskExportTaskRequest,
   DescribeContractComparisonTaskResponse,
   CreateModifyAdminAuthorizationUrlResponse,
   CreateOrganizationInfoChangeUrlResponse,
@@ -319,7 +324,7 @@ import {
   VerifyDigitFileResult,
   CreatePrepareFlowRequest,
   DescribeCancelFlowsTaskRequest,
-  ModifyExtendedServiceResponse,
+  DescribeContractReviewMarkedRiskExportTaskResponse,
   CreateSealPolicyRequest,
   DescribeContractReviewTaskResponse,
   CancelFlowRequest,
@@ -402,6 +407,7 @@ import {
   CreateContractReviewChecklistWebUrlRequest,
   CreateUserMobileChangeUrlRequest,
   CreateEmbedWebUrlRequest,
+  ExportContractReviewMarkedRiskResponse,
   CreateFlowGroupByFilesResponse,
   DeleteIntegrationRoleUsersRequest,
   CreateFlowSignUrlRequest,
@@ -416,6 +422,7 @@ import {
   DeleteOrganizationAuthorizationsRequest,
   CancelUserAutoSignEnableUrlRequest,
   DescribeUserVerifyStatusResponse,
+  ExportContractReviewMarkedRiskRequest,
   OrgBillSummary,
   SubOrgBillSummary,
   DescribeBillUsageRequest,
@@ -429,6 +436,7 @@ import {
   PermissionGroup,
   ProxyOrganizationInfo,
   CreateFlowRemindsRequest,
+  DescribeDraftContractByPromptsTaskRequest,
   DescribeSignFaceVideoResponse,
   VerifyPdfResponse,
   DeleteStaffsResult,
@@ -767,6 +775,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 此接口（CreateDraftContractByPromptsTask）用于创建智能合同起草任务。
+   */
+  async CreateDraftContractByPromptsTask(
+    req: CreateDraftContractByPromptsTaskRequest,
+    cb?: (error: string, rep: CreateDraftContractByPromptsTaskResponse) => void
+  ): Promise<CreateDraftContractByPromptsTaskResponse> {
+    return this.request("CreateDraftContractByPromptsTask", req, cb)
+  }
+
+  /**
      * 通过此接口获取个人用户自动签的开通状态。
 
 注意: `处方单等特殊场景专用，此接口为白名单功能，使用前请联系对接的客户经理沟通。`
@@ -912,6 +930,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIntegrationEmployeesResponse) => void
   ): Promise<DescribeIntegrationEmployeesResponse> {
     return this.request("DescribeIntegrationEmployees", req, cb)
+  }
+
+  /**
+   * 本接口（ExportContractReviewMarkedRisk）用于创建导出任务，可以导出合同审查标注风险项,包括忽略的、标记错误的、人工标注的风险等
+   */
+  async ExportContractReviewMarkedRisk(
+    req: ExportContractReviewMarkedRiskRequest,
+    cb?: (error: string, rep: ExportContractReviewMarkedRiskResponse) => void
+  ): Promise<ExportContractReviewMarkedRiskResponse> {
+    return this.request("ExportContractReviewMarkedRisk", req, cb)
   }
 
   /**
@@ -1723,13 +1751,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口（ModifyIntegrationDepartment）用于更新企业的部门信息，支持更新部门名称、客户系统部门ID和部门序号等信息。
+   * 本接口（DescribeContractReviewMarkedRiskExportTask）用于查询由 ExportContractReviewMarkedRisk 接口创建的导出任务状态。
    */
-  async ModifyIntegrationDepartment(
-    req: ModifyIntegrationDepartmentRequest,
-    cb?: (error: string, rep: ModifyIntegrationDepartmentResponse) => void
-  ): Promise<ModifyIntegrationDepartmentResponse> {
-    return this.request("ModifyIntegrationDepartment", req, cb)
+  async DescribeContractReviewMarkedRiskExportTask(
+    req: DescribeContractReviewMarkedRiskExportTaskRequest,
+    cb?: (error: string, rep: DescribeContractReviewMarkedRiskExportTaskResponse) => void
+  ): Promise<DescribeContractReviewMarkedRiskExportTaskResponse> {
+    return this.request("DescribeContractReviewMarkedRiskExportTask", req, cb)
   }
 
   /**
@@ -2302,6 +2330,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
   }
 
   /**
+   * 此接口（DescribeDraftContractByPromptsTask）用于查询智能合同起草任务状态。
+   */
+  async DescribeDraftContractByPromptsTask(
+    req: DescribeDraftContractByPromptsTaskRequest,
+    cb?: (error: string, rep: DescribeDraftContractByPromptsTaskResponse) => void
+  ): Promise<DescribeDraftContractByPromptsTaskResponse> {
+    return this.request("DescribeDraftContractByPromptsTask", req, cb)
+  }
+
+  /**
      * 此接口（CreateContractReviewChecklistWebUrl）用来创建新建审查要点清单web页面链接（此web页面可以通过iframe方式嵌入到贵方系统的网页中）。
 
 适用场景：根据合同内容识别出合同的风险信息。审查结果由AI生成，仅供参考。请结合相关法律法规和公司制度要求综合判断。
@@ -2728,6 +2766,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: DescribeFileCounterSignResultResponse) => void
   ): Promise<DescribeFileCounterSignResultResponse> {
     return this.request("DescribeFileCounterSignResult", req, cb)
+  }
+
+  /**
+   * 此接口（ModifyIntegrationDepartment）用于更新企业的部门信息，支持更新部门名称、客户系统部门ID和部门序号等信息。
+   */
+  async ModifyIntegrationDepartment(
+    req: ModifyIntegrationDepartmentRequest,
+    cb?: (error: string, rep: ModifyIntegrationDepartmentResponse) => void
+  ): Promise<ModifyIntegrationDepartmentResponse> {
+    return this.request("ModifyIntegrationDepartment", req, cb)
   }
 
   /**

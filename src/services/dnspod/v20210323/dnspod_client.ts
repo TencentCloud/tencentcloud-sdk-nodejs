@@ -19,7 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateRecordRequest,
-  DescribeRecordFilterListResponse,
+  DescribeDomainListRequest,
   CreateSubdomainValidateTXTValueRequest,
   CreateTXTRecordResponse,
   DescribeBatchTaskDetail,
@@ -148,6 +148,7 @@ import {
   ModifyRecordBatchResponse,
   CheckSnapshotRollbackRequest,
   CheckSnapshotRollbackResponse,
+  CreateAndPayDealResponse,
   DescribeRecordTypeRequest,
   DeleteDomainCustomLineResponse,
   DescribeSnapshotRollbackTaskResponse,
@@ -224,13 +225,13 @@ import {
   DescribeRecordExistExceptDefaultNSRequest,
   ModifyDomainCNAMESpeedupStatusBatchResponse,
   ModifySnapshotConfigResponse,
-  RollbackRecordSnapshotResponse,
+  DescribeRecordFilterListResponse,
   DescribeUserDetailRequest,
   ResolveCountAliasItem,
   DescribeFileInfoByJobIdResponse,
   ModifyDomainStatusRequest,
   ModifyRecordRemarkResponse,
-  DescribeDomainListRequest,
+  CreateAndPayDealRequest,
   DomainCreateInfo,
   DescribeDomainCustomLineListResponse,
   ModifyRecordRemarkRequest,
@@ -244,6 +245,7 @@ import {
   DescribeRecordListResponse,
   CreateLineGroupRequest,
   CreateDomainCustomLineRequest,
+  RollbackRecordSnapshotResponse,
   LineItem,
   CreateDealResponse,
   ResolveCountInfo,
@@ -910,6 +912,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePackageDetailResponse) => void
   ): Promise<DescribePackageDetailResponse> {
     return this.request("DescribePackageDetail", req, cb)
+  }
+
+  /**
+   * DNSPod商品下单并支付
+   */
+  async CreateAndPayDeal(
+    req: CreateAndPayDealRequest,
+    cb?: (error: string, rep: CreateAndPayDealResponse) => void
+  ): Promise<CreateAndPayDealResponse> {
+    return this.request("CreateAndPayDeal", req, cb)
   }
 
   /**

@@ -237,7 +237,7 @@ export interface ModifyJobResponse {
  */
 export interface CreateJobConfigResponse {
   /**
-   * 作业配置版本号
+   * <p>作业配置版本号</p>
    */
   Version?: number
   /**
@@ -265,157 +265,161 @@ export interface CreateResourceConfigResponse {
  */
 export interface CreateJobConfigRequest {
   /**
-   * 作业Id
+   * <p>作业Id</p>
    */
   JobId: string
   /**
-   * 主类
+   * <p>主类</p>
    */
   EntrypointClass?: string
   /**
-   * 主类入参，需要区分下Sql作业配置，Jar作业配置，Python作业配置，具体参考下面的示例值
+   * <p>主类入参，需要区分下Sql作业配置，Jar作业配置，Python作业配置，具体参考下面的示例值</p>
    */
   ProgramArgs?: string
   /**
-   * 备注
+   * <p>备注</p>
    */
   Remark?: string
   /**
-   * 资源引用数组
+   * <p>资源引用数组</p>
    */
   ResourceRefs?: Array<ResourceRef>
   /**
-   * 作业默认并行度
+   * <p>作业默认并行度</p>
    */
   DefaultParallelism?: number
   /**
-   * 系统参数
+   * <p>系统参数</p>
    */
   Properties?: Array<Property>
   /**
-   * 1: 作业配置达到上限之后，自动删除可删除的最早版本
+   * <p>1: 作业配置达到上限之后，自动删除可删除的最早版本</p>
    */
   AutoDelete?: number
   /**
-   * 作业使用的 COS 存储桶名
+   * <p>作业使用的 COS 存储桶名</p>
    */
   COSBucket?: string
   /**
-   * 是否采集作业日志
+   * <p>是否采集作业日志</p>
    */
   LogCollect?: boolean
   /**
-   * JobManager规格
+   * <p>JobManager规格</p>
    */
   JobManagerSpec?: number
   /**
-   * TaskManager规格
+   * <p>TaskManager规格</p>
    */
   TaskManagerSpec?: number
   /**
-   * CLS日志集ID
+   * <p>CLS日志集ID</p>
    */
   ClsLogsetId?: string
   /**
-   * CLS日志主题ID
+   * <p>CLS日志主题ID</p>
    */
   ClsTopicId?: string
   /**
-   * 日志采集类型 2：CLS；3：COS
+   * <p>日志采集类型 2：CLS；3：COS</p>
    */
   LogCollectType?: number
   /**
-   * pyflink作业运行时使用的python版本
+   * <p>pyflink作业运行时使用的python版本</p>
    */
   PythonVersion?: string
   /**
-   * 工作空间 SerialId
+   * <p>工作空间 SerialId</p>
    */
   WorkSpaceId?: string
   /**
-   * 日志级别
+   * <p>日志级别</p>
    */
   LogLevel?: string
   /**
-   * Oceanus 平台恢复作业开关 1:开启 -1: 关闭
+   * <p>Oceanus 平台恢复作业开关 1:开启 -1: 关闭</p>
    */
   AutoRecover?: number
   /**
-   * 类日志级别
+   * <p>类日志级别</p>
    */
   ClazzLevels?: Array<ClazzLevel>
   /**
-   * 是否打开专家模式
+   * <p>是否打开专家模式</p>
    */
   ExpertModeOn?: boolean
   /**
-   * 专家模式的配置
+   * <p>专家模式的配置</p>
    */
   ExpertModeConfiguration?: ExpertModeConfiguration
   /**
-   * trace链路
+   * <p>trace链路</p>
    */
   TraceModeOn?: boolean
   /**
-   * trace链路配置
+   * <p>trace链路配置</p>
    */
   TraceModeConfiguration?: TraceModeConfiguration
   /**
-   * checkpoint保留个数
+   * <p>checkpoint保留个数</p>
    */
   CheckpointRetainedNum?: number
   /**
-   * 算子拓扑图
+   * <p>算子拓扑图</p>
    */
   JobGraph?: JobGraph
   /**
-   * es索引名称
+   * <p>es索引名称</p>
    */
   EsServerlessIndex?: string
   /**
-   * es索引空间
+   * <p>es索引空间</p>
    */
   EsServerlessSpace?: string
   /**
-   * flink版本
+   * <p>flink版本</p>
    */
   FlinkVersion?: string
   /**
-   * JobManager cpu
+   * <p>JobManager cpu</p>
    */
   JobManagerCpu?: number
   /**
-   * JobManager 内存
+   * <p>JobManager 内存</p>
    */
   JobManagerMem?: number
   /**
-   * jdk版本
+   * <p>jdk版本</p>
    */
   JdkVersion?: string
   /**
-   * TaskManager cpu
+   * <p>TaskManager cpu</p>
    */
   TaskManagerCpu?: number
   /**
-   * TaskManager 内存
+   * <p>TaskManager 内存</p>
    */
   TaskManagerMem?: number
   /**
-   * 0=默认使用老的 1=使用新的
+   * <p>0=默认使用老的 1=使用新的</p>
    */
   UseOldSystemConnector?: number
   /**
-   * 压缩参数
+   * <p>压缩参数</p>
    */
   ProgramArgsAfterGzip?: string
   /**
-   * checkpoint 超时时间
+   * <p>checkpoint 超时时间</p>
    */
   CheckpointTimeoutSecond?: number
   /**
-   * checkpoint 间隔时间
+   * <p>checkpoint 间隔时间</p>
    */
   CheckpointIntervalSecond?: number
+  /**
+   * <p>变量替换模式</p><p>枚举值：</p><ul><li>0： 表变量替换</li><li>1： SQL全局变量替换</li></ul><p>默认值：1</p>
+   */
+  VariableReplaceMode?: number
 }
 
 /**
@@ -1813,6 +1817,10 @@ export interface DeleteResourceConfigsRequest {
  */
 export interface DescribeVariablesResponse {
   /**
+   * ["x","y"]
+   */
+  VariableSet?: Array<VariableItem>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1932,32 +1940,32 @@ export interface CreateResourceResponse {
  */
 export interface ResourceRefLatest {
   /**
-   * 资源id
+   * <p>资源id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceId?: string
   /**
-   * 版本号
+   * <p>版本号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: number
   /**
-   * 资源类型
+   * <p>资源类型</p><p>枚举值：</p><ul><li>1： Main资源</li><li>2： 依赖资源</li><li>3： python文件</li><li>4： 数据文件</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: number
   /**
-   * 状态
+   * <p>状态</p><p>枚举值：</p><ul><li>1： 活跃</li><li>-2： 删除</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
-   * 空间id
+   * <p>空间id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkspaceId?: string
   /**
-   * 资源名称
+   * <p>资源名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
@@ -2394,37 +2402,37 @@ export interface DeleteWorkSpaceResponse {
  */
 export interface HadoopYarnItem {
   /**
-   * ClusterGroupSerialId
+   * <p>ClusterGroupSerialId</p>
    */
   ClusterGroupSerialId: string
   /**
-   * 状态
+   * <p>状态</p><p>枚举值：</p><ul><li>1： 停止</li><li>2： 开启中</li><li>3： 启动</li><li>4： 开启失败</li><li>5： 停止中</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status: number
   /**
-   * cpu
+   * <p>cpu</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Cpu: number
   /**
-   * mem
+   * <p>mem</p>
    */
   Mem?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 配置文件内容
+   * <p>配置文件内容</p>
    */
   Config?: string
   /**
-   * CreatorUin
+   * <p>CreatorUin</p>
    */
   CreatorUin?: string
 }
@@ -2456,6 +2464,47 @@ export interface TriggerJobSavepointResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 变量信息列表
+ */
+export interface VariableItem {
+  /**
+   * 变量id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SerialId?: string
+  /**
+   * 变量名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 变量值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+  /**
+   * 变量值是否隐藏
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
+  /**
+   * 变量描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+  /**
+   * 变量创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 变量创建人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatorUin?: string
 }
 
 /**
@@ -3793,204 +3842,208 @@ export interface JobV1 {
  */
 export interface JobConfig {
   /**
-   * 作业Id
+   * <p>作业Id</p>
    */
   JobId?: string
   /**
-   * 主类
+   * <p>主类</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EntrypointClass?: string
   /**
-   * 主类入参
+   * <p>主类入参</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProgramArgs?: string
   /**
-   * 备注
+   * <p>备注</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
-   * 作业配置创建时间
+   * <p>作业配置创建时间</p>
    */
   CreateTime?: string
   /**
-   * 作业配置的版本号
+   * <p>作业配置的版本号</p>
    */
   Version?: number
   /**
-   * 作业默认并行度
+   * <p>作业默认并行度</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DefaultParallelism?: number
   /**
-   * 系统参数
+   * <p>系统参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Properties?: Array<Property>
   /**
-   * 引用资源
+   * <p>引用资源</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceRefDetails?: Array<ResourceRefDetail>
   /**
-   * 创建者uin
+   * <p>创建者uin</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatorUin?: string
   /**
-   * 作业配置上次启动时间
+   * <p>作业配置上次启动时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
-   * 作业绑定的存储桶
+   * <p>作业绑定的存储桶</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   COSBucket?: string
   /**
-   * 是否启用日志收集，0-未启用，1-采集到cls，4-采集到cos，5-采集到es
+   * <p>是否启用日志收集，0-未启用，1-采集到cls，4-采集到cos，5-采集到es</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogCollect?: number
   /**
-   * 作业的最大并行度
+   * <p>作业的最大并行度</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxParallelism?: number
   /**
-   * JobManager规格
+   * <p>JobManager规格</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobManagerSpec?: number
   /**
-   * TaskManager规格
+   * <p>TaskManager规格</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskManagerSpec?: number
   /**
-   * CLS日志集ID
+   * <p>CLS日志集ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClsLogsetId?: string
   /**
-   * CLS日志主题ID
+   * <p>CLS日志主题ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClsTopicId?: string
   /**
-   * pyflink作业运行的python版本
+   * <p>pyflink作业运行的python版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PythonVersion?: string
   /**
-   * Oceanus 平台恢复作业开关 1:开启 -1: 关闭
+   * <p>Oceanus 平台恢复作业开关 1:开启 -1: 关闭</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRecover?: number
   /**
-   * 日志级别
+   * <p>日志级别</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogLevel?: string
   /**
-   * 类日志级别
+   * <p>类日志级别</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClazzLevels?: Array<ClazzLevel>
   /**
-   * 是否开启专家模式
+   * <p>是否开启专家模式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpertModeOn?: boolean
   /**
-   * 专家模式的配置
+   * <p>专家模式的配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpertModeConfiguration?: ExpertModeConfiguration
   /**
-   * trace链路
+   * <p>trace链路</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TraceModeOn?: boolean
   /**
-   * trace链路配置
+   * <p>trace链路配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TraceModeConfiguration?: TraceModeConfiguration
   /**
-   * checkpoint保留个数
+   * <p>checkpoint保留个数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckpointRetainedNum?: number
   /**
-   * 算子拓扑图
+   * <p>算子拓扑图</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobGraph?: JobGraph
   /**
-   * es索引
+   * <p>es索引</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EsServerlessIndex?: string
   /**
-   * es空间
+   * <p>es空间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EsServerlessSpace?: string
   /**
-   * es索引中文
+   * <p>es索引中文</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexName?: string
   /**
-   * es空间中文
+   * <p>es空间中文</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkspaceName?: string
   /**
-   * flink 版本
+   * <p>flink 版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FlinkVersion?: string
   /**
-   * jdk版本
+   * <p>jdk版本</p>
    */
   JdkVersion?: string
   /**
-   * jm使用cpu数目
+   * <p>jm使用cpu数目</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobManagerCpu?: number
   /**
-   * jm使用内存数目
+   * <p>jm使用内存数目</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobManagerMem?: number
   /**
-   * tm使用cpu数
+   * <p>tm使用cpu数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskManagerCpu?: number
   /**
-   * tm使用mem数
+   * <p>tm使用mem数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskManagerMem?: number
   /**
-   * 运行中配置
+   * <p>运行中配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobConfigItem?: JobConfig
   /**
-   * checkpoint 超时时间
+   * <p>checkpoint 超时时间</p>
    */
   CheckpointTimeoutSecond?: number
   /**
-   * checkpoint 间隔时间
+   * <p>checkpoint 间隔时间</p>
    */
   CheckpointIntervalSecond?: number
+  /**
+   * <p>变量替换模式</p><p>枚举值：</p><ul><li>0： 表变量替换</li><li>1： 全局SQL变量替换</li></ul><p>默认值：0</p>
+   */
+  VariableReplaceMode?: number
 }
 
 /**
@@ -4200,7 +4253,7 @@ export interface DescribeFolderRequest {
  */
 export interface Warehouse {
   /**
-   * <p>状态</p>
+   * <p>状态</p><p>枚举值：</p><ul><li>0： 未开启</li><li>1： 开启中</li><li>2： 已开启</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
@@ -4210,7 +4263,7 @@ export interface Warehouse {
    */
   Location?: string
   /**
-   * <p>catalogtype</p>
+   * <p>catalog类型</p><p>枚举值：</p><ul><li>hadoop： hadoop catalog</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CatalogType?: string
@@ -4686,27 +4739,27 @@ export interface CreateConnectorRequest {
  */
 export interface CopyJobItem {
   /**
-   * 需要复制的作业serial id
+   * <p>需要复制的作业serial id</p>
    */
   SourceId: string
   /**
-   * 目标集群的cluster serial id
+   * <p>目标集群的cluster serial id</p>
    */
   TargetClusterId: string
   /**
-   * 需要复制的作业名称
+   * <p>需要复制的作业名称</p>
    */
   SourceName?: string
   /**
-   * 新作业的名称
+   * <p>新作业的名称</p>
    */
   TargetName?: string
   /**
-   * 新作业的目录id
+   * <p>新作业的目录id</p>
    */
   TargetFolderId?: string
   /**
-   * 源作业类型
+   * <p>作业类型</p><p>枚举值：</p><ul><li>1： sql作业</li><li>2： jar作业</li><li>4： python作业</li></ul>
    */
   JobType?: number
 }

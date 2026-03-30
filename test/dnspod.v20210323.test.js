@@ -648,6 +648,16 @@ it("dnspod.v20210323.DescribePackageDetail", async function () {
     }
 })
 
+it("dnspod.v20210323.CreateAndPayDeal", async function () {
+    try {
+       const data = await client.CreateAndPayDeal({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.DescribeRecordFilterList", async function () {
     try {
        const data = await client.DescribeRecordFilterList({})

@@ -168,6 +168,16 @@ it("ess.v20201111.DescribeRiskIdentificationTaskFeedback", async function () {
     }
 })
 
+it("ess.v20201111.CreateDraftContractByPromptsTask", async function () {
+    try {
+       const data = await client.CreateDraftContractByPromptsTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeUserAutoSignStatus", async function () {
     try {
        const data = await client.DescribeUserAutoSignStatus({})
@@ -251,6 +261,16 @@ it("ess.v20201111.DescribeContractReviewChecklistsWebUrl", async function () {
 it("ess.v20201111.DescribeIntegrationEmployees", async function () {
     try {
        const data = await client.DescribeIntegrationEmployees({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.ExportContractReviewMarkedRisk", async function () {
+    try {
+       const data = await client.ExportContractReviewMarkedRisk({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,9 +748,9 @@ it("ess.v20201111.DescribeIntegrationDepartments", async function () {
     }
 })
 
-it("ess.v20201111.ModifyIntegrationDepartment", async function () {
+it("ess.v20201111.DescribeContractReviewMarkedRiskExportTask", async function () {
     try {
-       const data = await client.ModifyIntegrationDepartment({})
+       const data = await client.DescribeContractReviewMarkedRiskExportTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1058,6 +1078,16 @@ it("ess.v20201111.DescribeUserFlowType", async function () {
     }
 })
 
+it("ess.v20201111.DescribeDraftContractByPromptsTask", async function () {
+    try {
+       const data = await client.DescribeDraftContractByPromptsTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateContractReviewChecklistWebUrl", async function () {
     try {
        const data = await client.CreateContractReviewChecklistWebUrl({})
@@ -1291,6 +1321,16 @@ it("ess.v20201111.DescribeFlowEvidenceReport", async function () {
 it("ess.v20201111.DescribeFileCounterSignResult", async function () {
     try {
        const data = await client.DescribeFileCounterSignResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.ModifyIntegrationDepartment", async function () {
+    try {
+       const data = await client.ModifyIntegrationDepartment({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -48,6 +48,26 @@ it("hai.v20230812.DescribeDeployTemplates", async function () {
     }
 })
 
+it("hai.v20230812.TerminateInstances", async function () {
+    try {
+       const data = await client.TerminateInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("hai.v20230812.DeleteService", async function () {
+    try {
+       const data = await client.DeleteService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("hai.v20230812.UpdateServiceConfigs", async function () {
     try {
        const data = await client.UpdateServiceConfigs({})
@@ -108,9 +128,9 @@ it("hai.v20230812.DeployInferService", async function () {
     }
 })
 
-it("hai.v20230812.StopInstance", async function () {
+it("hai.v20230812.DescribeServicesCallInfo", async function () {
     try {
-       const data = await client.StopInstance({})
+       const data = await client.DescribeServicesCallInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,9 +198,9 @@ it("hai.v20230812.CreateMuskPrompt", async function () {
     }
 })
 
-it("hai.v20230812.TerminateInstances", async function () {
+it("hai.v20230812.StopInstance", async function () {
     try {
-       const data = await client.TerminateInstances({})
+       const data = await client.StopInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

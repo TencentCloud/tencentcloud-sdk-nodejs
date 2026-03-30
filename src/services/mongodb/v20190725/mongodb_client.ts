@@ -95,6 +95,7 @@ import {
   CreateAuditLogFileResponse,
   AuditInstance,
   InstanceIntegerParam,
+  ModifyInstanceAzRequest,
   ModifyNetworkAddress,
   EnableSRVConnectionUrlResponse,
   DescribeAsyncRequestInfoResponse,
@@ -160,6 +161,7 @@ import {
   FlashBackDBInstanceResponse,
   RenameInstanceResponse,
   DropDBInstanceParamTplRequest,
+  ModifyInstanceAzResponse,
   DescribeTransparentDataEncryptionStatusResponse,
   DescribeAuditConfigRequest,
   CreateBackupDBInstanceRequest,
@@ -820,6 +822,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetDBInstanceDeletionProtectionResponse) => void
   ): Promise<SetDBInstanceDeletionProtectionResponse> {
     return this.request("SetDBInstanceDeletionProtection", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyInstanceAz)用于调整 MongoDB 云数据库的节点可用区分布，可通过指定主可用区和全部可用区分布信息完成云数据库的节点分布调整。
+   */
+  async ModifyInstanceAz(
+    req: ModifyInstanceAzRequest,
+    cb?: (error: string, rep: ModifyInstanceAzResponse) => void
+  ): Promise<ModifyInstanceAzResponse> {
+    return this.request("ModifyInstanceAz", req, cb)
   }
 
   /**

@@ -108,6 +108,20 @@ export interface DescribeServiceLoginSettingsResponse {
 }
 
 /**
+ * DescribeServicesCallInfo返回参数结构体
+ */
+export interface DescribeServicesCallInfoResponse {
+  /**
+   * 调用信息
+   */
+  CallInfoSet?: Array<CallInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResetInstancesPassword返回参数结构体
  */
 export interface ResetInstancesPasswordResponse {
@@ -122,17 +136,9 @@ export interface ResetInstancesPasswordResponse {
 }
 
 /**
- * DescribeInstanceNetworkStatus返回参数结构体
+ * DeleteService返回参数结构体
  */
-export interface DescribeInstanceNetworkStatusResponse {
-  /**
-   * 查询结果集长度
-   */
-  TotalCount?: number
-  /**
-   * 查询结果集
-   */
-  NetworkStatusSet?: Array<NetworkStatus>
+export interface DeleteServiceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -240,17 +246,25 @@ export interface HiCacheInfo {
 export type DescribeRegionsRequest = null
 
 /**
- * StartInstance请求参数结构体
+ * 服务调用信息
  */
-export interface StartInstanceRequest {
+export interface CallInfo {
   /**
-   * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1721/101612) API获取实例ID。
+   * 服务ID
    */
-  InstanceId: string
+  ServiceId?: string
   /**
-   * 默认为False，True代表只验证接口连通性
+   * 服务调用地址
    */
-  DryRun?: boolean
+  PublicEndpoint?: string
+  /**
+   * 服务调用的API_KEY
+   */
+  ApiKey?: string
+  /**
+   * 内网调用地址
+   */
+  VpcEndpoint?: string
 }
 
 /**
@@ -387,6 +401,20 @@ export interface NetworkSetting {
    * 子网ID
    */
   SubnetId?: string
+}
+
+/**
+ * StartInstance请求参数结构体
+ */
+export interface StartInstanceRequest {
+  /**
+   * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/api/1721/101612) API获取实例ID。
+   */
+  InstanceId: string
+  /**
+   * 默认为False，True代表只验证接口连通性
+   */
+  DryRun?: boolean
 }
 
 /**
@@ -562,21 +590,45 @@ export interface CreateApplicationRequest {
 }
 
 /**
- * ResetInstancesPassword请求参数结构体
+ * InquirePriceRunInstances请求参数结构体
  */
-export interface ResetInstancesPasswordRequest {
+export interface InquirePriceRunInstancesRequest {
   /**
-   * 实例ID列表
+   * 应用ID通过调用接口[DescribeApplications](https://cloud.tencent.com/document/api/1721/101609)获取。
    */
-  InstanceIds: Array<string>
+  ApplicationId: string
   /**
-   * 实例密码必须8-30位，推荐使用12位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：<br><li>小写字母：[a-z]</li><br><li>大写字母：[A-Z]</li><br><li>数字：0-9</li><br><li>特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;'<>,.?/</li>
+   * 算力套餐类型, 枚举：XL,XL_2X, 3XL, 3XL_2X, 4XL, 24GB_A.
    */
-  Password: string
+  BundleType: string
   /**
-   * 默认为False，True代表只验证接口连通性
+   * 实例系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
+   */
+  SystemDisk?: SystemDisk
+  /**
+   * 购买实例数量，单次请求实例数量上限为10。
+   */
+  InstanceCount?: number
+  /**
+   * 实例显示名称，名称长度限制为128个字符。
+   */
+  InstanceName?: string
+  /**
+   * 幂等请求token
+   */
+  ClientToken?: string
+  /**
+   * DryRun为True就是只验接口连通性，默认为False
    */
   DryRun?: boolean
+  /**
+   * 付费方式，POSTPAID_BY_HOUR按量后付费，PREPAID_BY_MONTH预付费按月，PREPAID_BY_DAY预付费按天
+   */
+  InstanceChargeType?: string
+  /**
+   * 预付费参数
+   */
+  InstanceChargePrepaid?: InstanceChargePrepaid
 }
 
 /**
@@ -621,6 +673,24 @@ export interface DescribeDeployTemplatesRequest {
    * 模型ID
    */
   ModelId: string
+}
+
+/**
+ * DescribeServices请求参数结构体
+ */
+export interface DescribeServicesRequest {
+  /**
+   * 服务列表
+   */
+  ServiceIds?: Array<string>
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 偏移量
+   */
+  Offset?: number
 }
 
 /**
@@ -819,6 +889,24 @@ export interface DescribeInstancesRequest {
 }
 
 /**
+ * DescribeServicesCallInfo请求参数结构体
+ */
+export interface DescribeServicesCallInfoRequest {
+  /**
+   * 推理服务ID列表
+   */
+  ServiceIds?: Array<string>
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 偏移量
+   */
+  Offset?: number
+}
+
+/**
  * cos挂载信息
  */
 export interface COSStorage {
@@ -950,21 +1038,13 @@ export interface DescribeRegionsResponse {
 }
 
 /**
- * DescribeServices请求参数结构体
+ * DeleteService请求参数结构体
  */
-export interface DescribeServicesRequest {
+export interface DeleteServiceRequest {
   /**
-   * 服务列表
+   * 服务ID
    */
-  ServiceIds?: Array<string>
-  /**
-   * 分页大小
-   */
-  Limit?: number
-  /**
-   * 偏移量
-   */
-  Offset?: number
+  ServiceId: string
 }
 
 /**
@@ -1399,45 +1479,39 @@ export interface ItemPrice {
 }
 
 /**
- * InquirePriceRunInstances请求参数结构体
+ * DescribeInstanceNetworkStatus返回参数结构体
  */
-export interface InquirePriceRunInstancesRequest {
+export interface DescribeInstanceNetworkStatusResponse {
   /**
-   * 应用ID通过调用接口[DescribeApplications](https://cloud.tencent.com/document/api/1721/101609)获取。
+   * 查询结果集长度
    */
-  ApplicationId: string
+  TotalCount?: number
   /**
-   * 算力套餐类型, 枚举：XL,XL_2X, 3XL, 3XL_2X, 4XL, 24GB_A.
+   * 查询结果集
    */
-  BundleType: string
+  NetworkStatusSet?: Array<NetworkStatus>
   /**
-   * 实例系统盘配置信息。若不指定该参数，则按照系统默认值进行分配。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SystemDisk?: SystemDisk
+  RequestId?: string
+}
+
+/**
+ * ResetInstancesPassword请求参数结构体
+ */
+export interface ResetInstancesPasswordRequest {
   /**
-   * 购买实例数量，单次请求实例数量上限为10。
+   * 实例ID列表
    */
-  InstanceCount?: number
+  InstanceIds: Array<string>
   /**
-   * 实例显示名称，名称长度限制为128个字符。
+   * 实例密码必须8-30位，推荐使用12位以上密码，不能以“/”开头，至少包含以下字符中的三种不同字符，字符种类：<br><li>小写字母：[a-z]</li><br><li>大写字母：[A-Z]</li><br><li>数字：0-9</li><br><li>特殊字符： ()\`\~!@#$%^&\*-+=\_|{}[]:;'<>,.?/</li>
    */
-  InstanceName?: string
+  Password: string
   /**
-   * 幂等请求token
-   */
-  ClientToken?: string
-  /**
-   * DryRun为True就是只验接口连通性，默认为False
+   * 默认为False，True代表只验证接口连通性
    */
   DryRun?: boolean
-  /**
-   * 付费方式，POSTPAID_BY_HOUR按量后付费，PREPAID_BY_MONTH预付费按月，PREPAID_BY_DAY预付费按天
-   */
-  InstanceChargeType?: string
-  /**
-   * 预付费参数
-   */
-  InstanceChargePrepaid?: InstanceChargePrepaid
 }
 
 /**

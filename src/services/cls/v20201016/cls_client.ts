@@ -20,10 +20,10 @@ import { ClientConfig } from "../../../common/interface"
 import {
   AlarmInfo,
   DescribeLogHistogramRequest,
-  FilterStatistics,
+  DlcPartitionInfo,
   DescribeNetworkApplicationDetailRequest,
   DeleteShipperRequest,
-  ScheduledSqlResouceInfo,
+  DeleteConsoleResponse,
   DynamicIndex,
   CreateRebuildIndexTaskResponse,
   CheckFunctionRequest,
@@ -44,6 +44,7 @@ import {
   DescribeClusterBaseMetricConfigsRequest,
   DescribeConfigExtrasResponse,
   DeleteMetricSubscribeRequest,
+  ScheduledSqlResouceInfo,
   ConditionInfo,
   EsInfo,
   DeleteMachineGroupResponse,
@@ -70,6 +71,7 @@ import {
   MachineGroupInfo,
   DeleteAlarmShieldResponse,
   CreateIndexRequest,
+  CreateConsoleResponse,
   CreateTopicRequest,
   ModifyDataTransformRequest,
   CreateDlcDeliverRequest,
@@ -78,7 +80,7 @@ import {
   DeleteConfigResponse,
   CreateDeliverCloudFunctionRequest,
   ModifyDlcDeliverResponse,
-  ModifyWebCallbackResponse,
+  ModifyDashboardResponse,
   DescribeMetricSubscribesResponse,
   CreateWebCallbackRequest,
   DescribeClusterMetricConfigsRequest,
@@ -107,7 +109,7 @@ import {
   GetAlarmLogRequest,
   DeleteCosRechargeResponse,
   CustomMetricSpec,
-  DlcPartitionInfo,
+  FilterStatistics,
   GroupTriggerConditionInfo,
   KafkaRechargeInfo,
   ConfigInfo,
@@ -169,6 +171,7 @@ import {
   ModifyConsoleSharingRequest,
   AppointLabel,
   CommitConsumerOffsetsRequest,
+  ModifyConsoleResponse,
   ConsumerInfo,
   DescribeAlarmsRequest,
   DescribeShippersResponse,
@@ -192,6 +195,7 @@ import {
   ShipperTaskInfo,
   CreateConsumerResponse,
   DataTransformResouceInfo,
+  AnonymousLoginInfo,
   DeleteMachineGroupRequest,
   NetworkApplicationDetail,
   DescribeSplunkDeliversResponse,
@@ -206,7 +210,7 @@ import {
   DeleteScheduledSqlResponse,
   EscalateNoticeInfo,
   ExcludePathInfo,
-  DeleteConfigExtraRequest,
+  DescribeConsumersResponse,
   FilterRuleInfo,
   DescribeEsRechargesResponse,
   AdvanceFilterRuleInfo,
@@ -215,6 +219,7 @@ import {
   DeleteDashboardSubscribeResponse,
   DescribeLogHistogramResponse,
   DescribeConsumerGroupsRequest,
+  ConsoleAccount,
   CreateWebCallbackResponse,
   DeleteConsumerGroupRequest,
   OpenKafkaConsumerRequest,
@@ -266,7 +271,7 @@ import {
   Ckafka,
   MultiCondition,
   ModifyLogsetResponse,
-  HostMetricItem,
+  CollectConfig,
   CreateDashboardResponse,
   GetMetricLabelValuesRequest,
   ModifyMetricSubscribeResponse,
@@ -329,6 +334,7 @@ import {
   FullTextInfo,
   DescribeConfigMachineGroupsResponse,
   ModifySplunkDeliverRequest,
+  HighLightItem,
   EsRechargeInfo,
   CreateMetricSubscribeRequest,
   NoticeContentTemplate,
@@ -341,6 +347,8 @@ import {
   RetryShipperTaskRequest,
   DeleteCosRechargeRequest,
   CreateHostMetricConfigRequest,
+  AccessControlRule,
+  ModifyWebCallbackResponse,
   ModifyCloudProductLogCollectionResponse,
   DeleteConsumerRequest,
   MetricSubscribeInfo,
@@ -372,11 +380,12 @@ import {
   DescribeWebCallbacksResponse,
   DeleteExportRequest,
   ModifyKafkaConsumerGroupOffsetRequest,
+  DescribeConsolesRequest,
   AlarmShieldInfo,
   EsImportInfo,
   ModifyConfigResponse,
   MetricConfig,
-  ModifyDashboardResponse,
+  ModifyConsoleRequest,
   DescribeRebuildIndexTasksResponse,
   ModifyAlarmNoticeResponse,
   DescribeConsumerOffsetsResponse,
@@ -402,6 +411,7 @@ import {
   CreateExportResponse,
   CancelRebuildIndexTaskResponse,
   UploadLogResponse,
+  Console,
   CreateAlarmResponse,
   CustomLabel,
   MetadataInfo,
@@ -421,6 +431,7 @@ import {
   CreateCloudProductLogCollectionRequest,
   DescribeIndexRequest,
   DescribeKafkaConsumerGroupListRequest,
+  CreateConsoleRequest,
   DeleteMachineGroupInfoRequest,
   ModifyNoticeContentResponse,
   DeleteWebCallbackResponse,
@@ -429,12 +440,12 @@ import {
   AdvancedConsumerConfiguration,
   DescribeTopicsResponse,
   EventLog,
-  HighLightItem,
+  ConsumerGroupInfo,
   DescribeRebuildIndexTasksRequest,
   DlcDeliverInfo,
   DescribeShippersRequest,
   DescribeCloudProductLogTasksResponse,
-  CollectConfig,
+  HostMetricItem,
   DescribeCosRechargesRequest,
   DescribeNetworkApplicationsResponse,
   DescribeTopicBaseMetricConfigsResponse,
@@ -463,11 +474,10 @@ import {
   CloseKafkaConsumerRequest,
   ModifyAlarmShieldRequest,
   AlarmNoticeDeliverConfig,
-  DescribeConsumersResponse,
+  DeleteConfigExtraRequest,
   DlcTableInfo,
   ModifyKafkaConsumerGroupOffsetResponse,
   CreateShipperRequest,
-  ConsumerGroupInfo,
   InstanceData,
   HostMetricConfig,
   CreateShipperResponse,
@@ -481,6 +491,7 @@ import {
   Filter,
   TopicPartitionInfo,
   ModifyTopicRequest,
+  DeleteSplunkDeliverRequest,
   ModifyEsRechargeResponse,
   ModifyConsumerGroupResponse,
   CreateKafkaRechargeRequest,
@@ -493,6 +504,7 @@ import {
   MetricSpec,
   DescribeMachinesResponse,
   DeleteEsRechargeRequest,
+  AuthRoleInfo,
   LogContextInfo,
   ModifyMetricSubscribeRequest,
   DeleteConfigFromMachineGroupRequest,
@@ -505,12 +517,13 @@ import {
   SearchLogRequest,
   DescribeKafkaConsumerGroupDetailRequest,
   DescribeConsumerOffsetsRequest,
+  DeleteConsoleRequest,
   ModifyConfigExtraRequest,
   CreateDataTransformRequest,
   DescribeMachineGroupsResponse,
   DescribeLogsetsRequest,
   ParquetInfo,
-  DeleteSplunkDeliverRequest,
+  DescribeConsolesResponse,
   ConsoleSharingParam,
   SendConsumerHeartbeatRequest,
   CommitConsumerOffsetsResponse,
@@ -939,13 +952,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取指标订阅配置
+   * 查询DataSight控制台实例列表
    */
-  async DescribeClusterBaseMetricConfigs(
-    req: DescribeClusterBaseMetricConfigsRequest,
-    cb?: (error: string, rep: DescribeClusterBaseMetricConfigsResponse) => void
-  ): Promise<DescribeClusterBaseMetricConfigsResponse> {
-    return this.request("DescribeClusterBaseMetricConfigs", req, cb)
+  async DescribeConsoles(
+    req: DescribeConsolesRequest,
+    cb?: (error: string, rep: DescribeConsolesResponse) => void
+  ): Promise<DescribeConsolesResponse> {
+    return this.request("DescribeConsoles", req, cb)
   }
 
   /**
@@ -1389,13 +1402,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于修改告警屏蔽规则。当告警屏蔽规则为失效中时，无法对其进行修改
+   * 获取指标订阅配置
    */
-  async ModifyAlarmShield(
-    req: ModifyAlarmShieldRequest,
-    cb?: (error: string, rep: ModifyAlarmShieldResponse) => void
-  ): Promise<ModifyAlarmShieldResponse> {
-    return this.request("ModifyAlarmShield", req, cb)
+  async DescribeClusterBaseMetricConfigs(
+    req: DescribeClusterBaseMetricConfigsRequest,
+    cb?: (error: string, rep: DescribeClusterBaseMetricConfigsResponse) => void
+  ): Promise<DescribeClusterBaseMetricConfigsResponse> {
+    return this.request("DescribeClusterBaseMetricConfigs", req, cb)
   }
 
   /**
@@ -1569,6 +1582,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于删除DataSight控制台
+   */
+  async DeleteConsole(
+    req: DeleteConsoleRequest,
+    cb?: (error: string, rep: DeleteConsoleResponse) => void
+  ): Promise<DeleteConsoleResponse> {
+    return this.request("DeleteConsole", req, cb)
+  }
+
+  /**
    * 获取告警渠道回调配置列表。
    */
   async DescribeWebCallbacks(
@@ -1739,6 +1762,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CheckFunctionResponse) => void
   ): Promise<CheckFunctionResponse> {
     return this.request("CheckFunction", req, cb)
+  }
+
+  /**
+   * 本接口用于编辑DataSight控制台
+   */
+  async ModifyConsole(
+    req: ModifyConsoleRequest,
+    cb?: (error: string, rep: ModifyConsoleResponse) => void
+  ): Promise<ModifyConsoleResponse> {
+    return this.request("ModifyConsole", req, cb)
   }
 
   /**
@@ -1923,6 +1956,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeConsumerGroupsResponse) => void
   ): Promise<DescribeConsumerGroupsResponse> {
     return this.request("DescribeConsumerGroups", req, cb)
+  }
+
+  /**
+   * 该接口用于修改告警屏蔽规则。当告警屏蔽规则为失效中时，无法对其进行修改
+   */
+  async ModifyAlarmShield(
+    req: ModifyAlarmShieldRequest,
+    cb?: (error: string, rep: ModifyAlarmShieldResponse) => void
+  ): Promise<ModifyAlarmShieldResponse> {
+    return this.request("ModifyAlarmShield", req, cb)
   }
 
   /**
@@ -2295,6 +2338,16 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: ModifyDataTransformResponse) => void
   ): Promise<ModifyDataTransformResponse> {
     return this.request("ModifyDataTransform", req, cb)
+  }
+
+  /**
+   * 本接口用于创建DataSight控制台
+   */
+  async CreateConsole(
+    req: CreateConsoleRequest,
+    cb?: (error: string, rep: CreateConsoleResponse) => void
+  ): Promise<CreateConsoleResponse> {
+    return this.request("CreateConsole", req, cb)
   }
 
   /**

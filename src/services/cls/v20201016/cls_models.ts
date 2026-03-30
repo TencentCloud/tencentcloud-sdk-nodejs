@@ -147,21 +147,21 @@ export interface DescribeLogHistogramRequest {
 }
 
 /**
- * 投递类任务数据过滤统计信息
+ * 数据湖计算服务（Data Lake Compute，简称DLC）数据分区配置
  */
-export interface FilterStatistics {
+export interface DlcPartitionInfo {
   /**
-   * <p>原始日志数</p>
+   * <p>cls日志中的字段名</p>
    */
-  OriginalCount?: number
+  ClsField: string
   /**
-   * <p>过滤后日志数</p>
+   * <p>dlc表的列名</p>
    */
-  FilteredCount?: number
+  DlcField: string
   /**
-   * <p>过滤后结果</p>
+   * <p>请参考 <a href="https://cloud.tencent.com/document/product/1342/53778#Column">DLC  cloumn中的Type 定义 </a></p><p>枚举值：</p><ul><li>int|string|array等： 请参考 <a href="https://cloud.tencent.com/document/product/1342/53778#Column">DLC  cloumn中的Type 定义 </a></li></ul>
    */
-  FilteredResult?: Array<string>
+  DlcFieldType: string
 }
 
 /**
@@ -186,43 +186,13 @@ export interface DeleteShipperRequest {
 }
 
 /**
- * ScheduledSql的资源信息
+ * DeleteConsole返回参数结构体
  */
-export interface ScheduledSqlResouceInfo {
+export interface DeleteConsoleResponse {
   /**
-   * 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TopicId: string
-  /**
-   * 主题的地域信息，当前不支持跨地域，支持地域参考 [地域列表](https://cloud.tencent.com/document/api/614/56474#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8) 文档。
-   */
-  Region?: string
-  /**
-   * 主题类型：0为日志主题，1为指标主题
-   */
-  BizType?: number
-  /**
-   * 指标名称。当BizType为1时，MetricName需要填写
-   */
-  MetricName?: string
-  /**
-   * 指标名称
-BizType为1时，优先使用MetricNames字段多指标只能填充到MetricNames字段，单指标建议填充到MetricName字段
-   */
-  MetricNames?: Array<string>
-  /**
-   * 指标维度，不接受时间类型。
-   */
-  MetricLabels?: Array<string>
-  /**
-   * 指标时间戳，默认值为SQL查询时间范围的左侧时间点，您也可以指定其他字段（类型为uinx时间、TimeStamp，精度毫秒）为指标时间戳。
-   */
-  CustomTime?: string
-  /**
-   * 除了MetricLabels，您还可以使用该参数，为指标补充静态的维度。
-维度名以字母或下划线开头，后面可以跟字母、数字或下划线，长度小于等于1024 字节
-   */
-  CustomMetricLabels?: Array<MetricLabel>
+  RequestId?: string
 }
 
 /**
@@ -659,6 +629,46 @@ export interface DeleteMetricSubscribeRequest {
    * 指标采集任务配置的日志主题id。
    */
   TopicId: string
+}
+
+/**
+ * ScheduledSql的资源信息
+ */
+export interface ScheduledSqlResouceInfo {
+  /**
+   * 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。
+   */
+  TopicId: string
+  /**
+   * 主题的地域信息，当前不支持跨地域，支持地域参考 [地域列表](https://cloud.tencent.com/document/api/614/56474#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8) 文档。
+   */
+  Region?: string
+  /**
+   * 主题类型：0为日志主题，1为指标主题
+   */
+  BizType?: number
+  /**
+   * 指标名称。当BizType为1时，MetricName需要填写
+   */
+  MetricName?: string
+  /**
+   * 指标名称
+BizType为1时，优先使用MetricNames字段多指标只能填充到MetricNames字段，单指标建议填充到MetricName字段
+   */
+  MetricNames?: Array<string>
+  /**
+   * 指标维度，不接受时间类型。
+   */
+  MetricLabels?: Array<string>
+  /**
+   * 指标时间戳，默认值为SQL查询时间范围的左侧时间点，您也可以指定其他字段（类型为uinx时间、TimeStamp，精度毫秒）为指标时间戳。
+   */
+  CustomTime?: string
+  /**
+   * 除了MetricLabels，您还可以使用该参数，为指标补充静态的维度。
+维度名以字母或下划线开头，后面可以跟字母、数字或下划线，长度小于等于1024 字节
+   */
+  CustomMetricLabels?: Array<MetricLabel>
 }
 
 /**
@@ -1416,6 +1426,20 @@ export interface CreateIndexRequest {
 }
 
 /**
+ * CreateConsole返回参数结构体
+ */
+export interface CreateConsoleResponse {
+  /**
+   * <p>DataSight控制台Id</p>
+   */
+  ConsoleId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateTopic请求参数结构体
  */
 export interface CreateTopicRequest {
@@ -1732,9 +1756,9 @@ export interface ModifyDlcDeliverResponse {
 }
 
 /**
- * ModifyWebCallback返回参数结构体
+ * ModifyDashboard返回参数结构体
  */
-export interface ModifyWebCallbackResponse {
+export interface ModifyDashboardResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2405,21 +2429,21 @@ export interface CustomMetricSpec {
 }
 
 /**
- * 数据湖计算服务（Data Lake Compute，简称DLC）数据分区配置
+ * 投递类任务数据过滤统计信息
  */
-export interface DlcPartitionInfo {
+export interface FilterStatistics {
   /**
-   * <p>cls日志中的字段名</p>
+   * <p>原始日志数</p>
    */
-  ClsField: string
+  OriginalCount?: number
   /**
-   * <p>dlc表的列名</p>
+   * <p>过滤后日志数</p>
    */
-  DlcField: string
+  FilteredCount?: number
   /**
-   * <p>请参考 <a href="https://cloud.tencent.com/document/product/1342/53778#Column">DLC  cloumn中的Type 定义 </a></p><p>枚举值：</p><ul><li>int|string|array等： 请参考 <a href="https://cloud.tencent.com/document/product/1342/53778#Column">DLC  cloumn中的Type 定义 </a></li></ul>
+   * <p>过滤后结果</p>
    */
-  DlcFieldType: string
+  FilteredResult?: Array<string>
 }
 
 /**
@@ -3965,6 +3989,20 @@ export interface CommitConsumerOffsetsRequest {
 }
 
 /**
+ * ModifyConsole返回参数结构体
+ */
+export interface ModifyConsoleResponse {
+  /**
+   * <p>DataSight控制台Id</p>
+   */
+  ConsoleId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 投递规则
  */
 export interface ConsumerInfo {
@@ -4696,6 +4734,22 @@ export interface DataTransformResouceInfo {
 }
 
 /**
+ * DataSight内网匿名登录账号信息
+ */
+export interface AnonymousLoginInfo {
+  /**
+   * <p>匿名登录账号secretId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretId: string
+  /**
+   * <p>匿名登录账号secretKey</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretKey?: string
+}
+
+/**
  * DeleteMachineGroup请求参数结构体
  */
 export interface DeleteMachineGroupRequest {
@@ -5082,14 +5136,22 @@ export interface ExcludePathInfo {
 }
 
 /**
- * DeleteConfigExtra请求参数结构体
+ * DescribeConsumers返回参数结构体
  */
-export interface DeleteConfigExtraRequest {
+export interface DescribeConsumersResponse {
   /**
-   * 特殊采集规则扩展配置ID
-- 通过[获取特殊采集配置](https://cloud.tencent.com/document/api/614/71164)特殊采集规则扩展配置ID。
+   * 投递规则列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ConfigExtraId: string
+  Consumers?: Array<ConsumerInfo>
+  /**
+   * 本次查询获取到的总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5273,6 +5335,37 @@ export interface DescribeConsumerGroupsRequest {
    * topic列表
    */
   Topics?: Array<string>
+}
+
+/**
+ * DataSight控制台用户账号信息
+ */
+export interface ConsoleAccount {
+  /**
+   * <p>用户名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName: string
+  /**
+   * <p>用户密码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password: string
+  /**
+   * <p>腾讯云账号SecretId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretId: string
+  /**
+   * <p>腾讯云账号SecretKey</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretKey: string
+  /**
+   * <p>电子邮箱，用于发送验证码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Email?: string
 }
 
 /**
@@ -6664,19 +6757,17 @@ export interface ModifyLogsetResponse {
 }
 
 /**
- * 主机指标采集项
+ * 采集配置信息
  */
-export interface HostMetricItem {
+export interface CollectConfig {
   /**
-   * 主机指标采集项类型。支持"cpu"，"mem"，"net"，"disk"，"system"。
-
-- cpu：CPU
-- mem：内存
-- net：网络
-- disk：磁盘
-- system：系统
+   * 指定采集类型的采集配置名称信息。
+<li>当CollectInfo中Type为0：表示元数据配置，name为元数据名称。
+目前支持"container_id"，"container_name"，"image_name"，"namespace"，"pod_uid"，"pod_name"，"pod_ip"。
+</li>
+<li>当CollectInfo中Type为1：指定pod label，name为指定pod label名称。</li>
    */
-  Type: string
+  Name: string
 }
 
 /**
@@ -8318,6 +8409,20 @@ export interface ModifySplunkDeliverRequest {
 }
 
 /**
+ * 符合检索条件的关键词，一般用于高亮显示。仅支持键值检索，不支持全文检索
+ */
+export interface HighLightItem {
+  /**
+   * 高亮的日志字段名称
+   */
+  Key?: string
+  /**
+   * 高亮的关键词
+   */
+  Values?: Array<string>
+}
+
+/**
  * es导入配置信息
  */
 export interface EsRechargeInfo {
@@ -8632,6 +8737,27 @@ export interface CreateHostMetricConfigRequest {
 - system：系统
    */
   HostMetricItems: Array<HostMetricItem>
+}
+
+/**
+ * DataSight访问控制规则
+ */
+export interface AccessControlRule {
+  /**
+   * 访问方式：public - 公网，internal - 内网
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessMode: string
+}
+
+/**
+ * ModifyWebCallback返回参数结构体
+ */
+export interface ModifyWebCallbackResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9461,6 +9587,24 @@ export interface DeleteExportRequest {
 export type ModifyKafkaConsumerGroupOffsetRequest = null
 
 /**
+ * DescribeConsoles请求参数结构体
+ */
+export interface DescribeConsolesRequest {
+  /**
+   * <p>分页的偏移量，默认值为0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>分页单页限制数目，默认值为100，最大值100。</p>
+   */
+  Limit?: number
+  /**
+   * <li> DomainPrefix按照【域名前缀】进行过滤。类型：String必选：否</li><li> ConsoleId按照【DataSight实例ID】进行过滤。类型：String必选：否</li><li> tagKey按照【标签键】进行过滤。类型：String必选：否</li><li> tag:tagKey按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换，例如tag:exampleKey。类型：String必选：否</li>
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * 告警屏蔽任务配置
  */
 export interface AlarmShieldInfo {
@@ -9578,13 +9722,69 @@ export interface MetricConfig {
 }
 
 /**
- * ModifyDashboard返回参数结构体
+ * ModifyConsole请求参数结构体
  */
-export interface ModifyDashboardResponse {
+export interface ModifyConsoleRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>DataSight控制台ConsoleId</p>
    */
-  RequestId?: string
+  ConsoleId: string
+  /**
+   * <p>访问方式：public - 公网，internal - 内网</p>
+   */
+  AccessMode?: Array<string>
+  /**
+   * <p>登录方式：0 - 账号密码鉴权，1 - 匿名登陆，2 - 第三方认证登录</p>
+   */
+  LoginMode?: number
+  /**
+   * <p>自定义域名前缀</p>
+   */
+  DomainPrefix?: string
+  /**
+   * <p>用户账号信息</p><p>“账号密码鉴权“登录方式必传</p>
+   */
+  Accounts?: Array<ConsoleAccount>
+  /**
+   * <p>匿名登录账号信息</p><p>“匿名登录”登录方式必传</p>
+   */
+  AnonymousLogin?: AnonymousLoginInfo
+  /**
+   * <p>内网类型，默认为0</p>
+   */
+  IntranetType?: number
+  /**
+   * <p>内网地域</p>
+   */
+  IntranetRegion?: string
+  /**
+   * <p>内网私有网络VpcId</p>
+   */
+  VpcId?: string
+  /**
+   * <p>内网子网SubnetId</p>
+   */
+  SubnetId?: string
+  /**
+   * <p>Auth用户角色信息</p><p>“第三方认证登录”登录方式必传</p>
+   */
+  AuthRoles?: Array<AuthRoleInfo>
+  /**
+   * <p>自定义隐藏参数</p>
+   */
+  HideParams?: Array<string>
+  /**
+   * <p>访问控制规则</p><p>“第三方认证登录”登录方式必传 AccessMode: internal &amp;&amp; Action: ACCEPT 规则</p>
+   */
+  AccessControlRules?: Array<AccessControlRule>
+  /**
+   * <p>备注</p>
+   */
+  Remarks?: string
+  /**
+   * <p>自定义显示菜单</p>
+   */
+  Menus?: Array<string>
 }
 
 /**
@@ -10183,6 +10383,88 @@ export interface UploadLogResponse {
 }
 
 /**
+ * DataSight控制台实例
+ */
+export interface Console {
+  /**
+   * <p>DataSight控制台Id</p>
+   */
+  ConsoleId?: string
+  /**
+   * <p>访问方式：public-公网，internal-内网</p>
+   */
+  AccessMode?: Array<string>
+  /**
+   * <p>登录方式：0-账号密码鉴权，1-匿名登录，2-第三方认证登录</p>
+   */
+  LoginMode?: number
+  /**
+   * <p>自定义域名前缀</p>
+   */
+  DomainPrefix?: string
+  /**
+   * <p>用户账号信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Accounts?: Array<ConsoleAccount>
+  /**
+   * <p>内网类型，默认为0</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IntranetType?: number
+  /**
+   * <p>内网地域</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IntranetRegion?: string
+  /**
+   * <p>内网私有网络VpcId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * <p>内网子网SubnetId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * <p>匿名登录账号信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AnonymousLogin?: AnonymousLoginInfo
+  /**
+   * <p>auth用户角色信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthRoles?: Array<AuthRoleInfo>
+  /**
+   * <p>绑定的标签信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>自定义隐藏参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HideParams?: Array<string>
+  /**
+   * <p>访问控制规则</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessControlRules?: Array<AccessControlRule>
+  /**
+   * <p>备注</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remarks?: string
+  /**
+   * <p>自定义显示菜单</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Menus?: Array<string>
+}
+
+/**
  * CreateAlarm返回参数结构体
  */
 export interface CreateAlarmResponse {
@@ -10664,6 +10946,72 @@ export interface DescribeKafkaConsumerGroupListRequest {
 }
 
 /**
+ * CreateConsole请求参数结构体
+ */
+export interface CreateConsoleRequest {
+  /**
+   * <p>访问方式：public - 公网，internal - 内网</p>
+   */
+  AccessMode: Array<string>
+  /**
+   * <p>登录方式：0 - 账号密码鉴权，1 - 匿名登陆，2 - 第三方认证登录</p>
+   */
+  LoginMode: number
+  /**
+   * <p>自定义域名前缀</p>
+   */
+  DomainPrefix: string
+  /**
+   * <p>用户账号信息</p><p>“账号密码鉴权“登录方式必传</p>
+   */
+  Accounts?: Array<ConsoleAccount>
+  /**
+   * <p>匿名登录账号信息</p><p>“匿名登录”登录方式必传</p>
+   */
+  AnonymousLogin?: AnonymousLoginInfo
+  /**
+   * <p>内网类型，默认为0</p>
+   */
+  IntranetType?: number
+  /**
+   * <p>内网地域</p>
+   */
+  IntranetRegion?: string
+  /**
+   * <p>内网私有网络VpcId</p>
+   */
+  VpcId?: string
+  /**
+   * <p>内网子网SubnetId</p>
+   */
+  SubnetId?: string
+  /**
+   * <p>Auth角色信息</p><p>“第三方认证登录”登录方式必传</p>
+   */
+  AuthRoles?: Array<AuthRoleInfo>
+  /**
+   * <p>标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>自定义隐藏参数</p>
+   */
+  HideParams?: Array<string>
+  /**
+   * <p>访问控制规则</p><p>“第三方认证登录”登录方式必传 AccessMode: internal &amp;&amp; Action: ACCEPT 规则</p>
+   */
+  AccessControlRules?: Array<AccessControlRule>
+  /**
+   * <p>备注</p>
+   */
+  Remarks?: string
+  /**
+   * <p>自定义显示菜单</p>
+   */
+  Menus?: Array<string>
+}
+
+/**
  * DeleteMachineGroupInfo请求参数结构体
  */
 export interface DeleteMachineGroupInfoRequest {
@@ -10804,17 +11152,21 @@ export interface EventLog {
 }
 
 /**
- * 符合检索条件的关键词，一般用于高亮显示。仅支持键值检索，不支持全文检索
+ * 消费组信息
  */
-export interface HighLightItem {
+export interface ConsumerGroupInfo {
   /**
-   * 高亮的日志字段名称
+   * 消费组标识
    */
-  Key?: string
+  ConsumerGroup?: string
   /**
-   * 高亮的关键词
+   * 消费者心跳超时时间（秒）
    */
-  Values?: Array<string>
+  Timeout?: number
+  /**
+   * topic列表
+   */
+  Topics?: Array<string>
 }
 
 /**
@@ -10967,17 +11319,19 @@ export interface DescribeCloudProductLogTasksResponse {
 }
 
 /**
- * 采集配置信息
+ * 主机指标采集项
  */
-export interface CollectConfig {
+export interface HostMetricItem {
   /**
-   * 指定采集类型的采集配置名称信息。
-<li>当CollectInfo中Type为0：表示元数据配置，name为元数据名称。
-目前支持"container_id"，"container_name"，"image_name"，"namespace"，"pod_uid"，"pod_name"，"pod_ip"。
-</li>
-<li>当CollectInfo中Type为1：指定pod label，name为指定pod label名称。</li>
+   * 主机指标采集项类型。支持"cpu"，"mem"，"net"，"disk"，"system"。
+
+- cpu：CPU
+- mem：内存
+- net：网络
+- disk：磁盘
+- system：系统
    */
-  Name: string
+  Type: string
 }
 
 /**
@@ -11852,22 +12206,14 @@ export interface AlarmNoticeDeliverConfig {
 }
 
 /**
- * DescribeConsumers返回参数结构体
+ * DeleteConfigExtra请求参数结构体
  */
-export interface DescribeConsumersResponse {
+export interface DeleteConfigExtraRequest {
   /**
-   * 投递规则列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 特殊采集规则扩展配置ID
+- 通过[获取特殊采集配置](https://cloud.tencent.com/document/api/614/71164)特殊采集规则扩展配置ID。
    */
-  Consumers?: Array<ConsumerInfo>
-  /**
-   * 本次查询获取到的总数
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ConfigExtraId: string
 }
 
 /**
@@ -11987,24 +12333,6 @@ export interface CreateShipperRequest {
    * 外部ID
    */
   ExternalId?: string
-}
-
-/**
- * 消费组信息
- */
-export interface ConsumerGroupInfo {
-  /**
-   * 消费组标识
-   */
-  ConsumerGroup?: string
-  /**
-   * 消费者心跳超时时间（秒）
-   */
-  Timeout?: number
-  /**
-   * topic列表
-   */
-  Topics?: Array<string>
 }
 
 /**
@@ -12509,6 +12837,21 @@ export interface ModifyTopicRequest {
 }
 
 /**
+ * DeleteSplunkDeliver请求参数结构体
+ */
+export interface DeleteSplunkDeliverRequest {
+  /**
+   * 任务id
+   */
+  TaskId: string
+  /**
+   * 日志主题id
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   */
+  TopicId: string
+}
+
+/**
  * ModifyEsRecharge返回参数结构体
  */
 export interface ModifyEsRechargeResponse {
@@ -12899,6 +13242,25 @@ export interface DeleteEsRechargeRequest {
 }
 
 /**
+ * dataSight 第三方验证登录角色配置信息
+ */
+export interface AuthRoleInfo {
+  /**
+   * <p>Auth角色名称</p>
+   */
+  RoleName: string
+  /**
+   * <p>Auth角色对应权限SecretId</p>
+   */
+  SecretId: string
+  /**
+   * <p>Auth角色对应权限SecretKey</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretKey?: string
+}
+
+/**
  * 日志上下文信息
  */
 export interface LogContextInfo {
@@ -13252,6 +13614,16 @@ export interface DescribeConsumerOffsetsRequest {
 }
 
 /**
+ * DeleteConsole请求参数结构体
+ */
+export interface DeleteConsoleRequest {
+  /**
+   * <p>DataSight控制台Id</p>
+   */
+  ConsoleId: string
+}
+
+/**
  * ModifyConfigExtra请求参数结构体
  */
 export interface ModifyConfigExtraRequest {
@@ -13530,18 +13902,21 @@ export interface ParquetInfo {
 }
 
 /**
- * DeleteSplunkDeliver请求参数结构体
+ * DescribeConsoles返回参数结构体
  */
-export interface DeleteSplunkDeliverRequest {
+export interface DescribeConsolesResponse {
   /**
-   * 任务id
+   * <p>DataSight控制台实例列表</p>
    */
-  TaskId: string
+  Consoles?: Array<Console>
   /**
-   * 日志主题id
-- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   * <p>实例总数</p>
    */
-  TopicId: string
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

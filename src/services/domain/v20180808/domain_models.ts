@@ -1760,6 +1760,21 @@ export interface DeleteBiddingResponse {
 }
 
 /**
+ * ModifyDomainOwner返回参数结构体
+ */
+export interface ModifyDomainOwnerResponse {
+  /**
+   * null: 未转移对应的 DNS 解析域名，false: 转移对应的 DNS 解析域名失败，true: 转移对应的 DNS 解析域名成功
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TransferDnsResult?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTemplate返回参数结构体
  */
 export interface DescribeTemplateResponse {
@@ -1792,6 +1807,28 @@ export interface DescribeDomainSimpleInfoRequest {
    * 域名
    */
   DomainName: string
+}
+
+/**
+ * ModifyDomainOwner请求参数结构体
+ */
+export interface ModifyDomainOwnerRequest {
+  /**
+   * 域名ID
+   */
+  DomainId: string
+  /**
+   * 新用户UIN
+   */
+  NewOwnerUin: string
+  /**
+   * 新用户APPID
+   */
+  NewOwnerAppId?: string
+  /**
+   * 是否同时转移对应的 DNS 解析域名，默认false
+   */
+  TransferDns?: boolean
 }
 
 /**

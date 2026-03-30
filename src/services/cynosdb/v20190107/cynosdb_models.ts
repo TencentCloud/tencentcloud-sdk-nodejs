@@ -359,6 +359,8 @@ export interface UpgradeInstanceRequest {
   UpgradeType: string
   /**
    * 实例机器类型
+1. common，通用型。
+2. exclusive，独享型。
    */
   DeviceType?: string
   /**
@@ -4736,7 +4738,8 @@ export interface DescribeProxiesRequest {
    */
   OrderByType?: string
   /**
-   * 搜索条件，若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+   * 搜索条件，若存在多个 Filter 时，Filter 间的关系为逻辑与（AND）关系。
+说明：此参数当前仅支持 Status 和 ProxyGroupId 两种过滤条件。
    */
   Filters?: Array<QueryParamFilter>
 }
@@ -8820,6 +8823,10 @@ export interface Account {
    */
   AccountName?: string
   /**
+   * 主机
+   */
+  Host?: string
+  /**
    * 数据库账号描述
    */
   Description?: string
@@ -8832,13 +8839,13 @@ export interface Account {
    */
   UpdateTime?: string
   /**
-   * 主机
-   */
-  Host?: string
-  /**
    * 用户最大连接数
    */
   MaxUserConnections?: number
+  /**
+   * 是否开启密码轮转(0:关闭;1:开启)
+   */
+  PasswordRotation?: number
 }
 
 /**
@@ -9775,7 +9782,7 @@ export interface QueryParamFilter {
 }
 
 /**
- * x08新创建的账号
+ * 新建账号
  */
 export interface NewAccount {
   /**
@@ -9783,13 +9790,17 @@ export interface NewAccount {
    */
   AccountName: string
   /**
+   * 主机(%或ipv4地址)
+   */
+  Host: string
+  /**
    * 密码，密码长度范围为8到64个字符
    */
   AccountPassword: string
   /**
-   * 主机(%或ipv4地址)
+   * 是否开启密码轮转(0:关闭;1:开启)
    */
-  Host: string
+  PasswordRotation?: number
   /**
    * 描述
    */

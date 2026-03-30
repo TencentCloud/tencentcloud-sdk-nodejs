@@ -23,8 +23,9 @@ import {
   ResizeInstanceDiskResponse,
   StopInstanceRequest,
   DescribeServiceLoginSettingsResponse,
+  DescribeServicesCallInfoResponse,
   ResetInstancesPasswordResponse,
-  DescribeInstanceNetworkStatusResponse,
+  DeleteServiceResponse,
   ImageInfo,
   UpdateServiceConfigsRequest,
   TerminateInstancesRequest,
@@ -34,7 +35,7 @@ import {
   RunInstancesResponse,
   HiCacheInfo,
   DescribeRegionsRequest,
-  StartInstanceRequest,
+  CallInfo,
   CreateInferServiceByTemplateResponse,
   NetworkStatus,
   ComputeInfo,
@@ -43,6 +44,7 @@ import {
   ResizeInstanceDiskRequest,
   DescribeDeployTemplatesResponse,
   NetworkSetting,
+  StartInstanceRequest,
   Price,
   DeployInferServiceResponse,
   ComputeResource,
@@ -53,9 +55,10 @@ import {
   DescribeApplicationsRequest,
   InquirePriceUpdateServiceConfigsResponse,
   CreateApplicationRequest,
-  ResetInstancesPasswordRequest,
+  InquirePriceRunInstancesRequest,
   RunInstancesRequest,
   DescribeDeployTemplatesRequest,
+  DescribeServicesRequest,
   ContainerInfo,
   DescribeInstancesResponse,
   EnvParam,
@@ -65,13 +68,14 @@ import {
   LoginSetting,
   RegionInfo,
   DescribeInstancesRequest,
+  DescribeServicesCallInfoRequest,
   COSStorage,
   ModelDetail,
   DescribeServiceLoginSettingsRequest,
   MuskPromptInfo,
   DescribeScenesRequest,
   DescribeRegionsResponse,
-  DescribeServicesRequest,
+  DeleteServiceRequest,
   DeployInferServiceRequest,
   DeploymentConfig,
   StartInstanceResponse,
@@ -88,7 +92,8 @@ import {
   CreateMuskPromptRequest,
   DescribeApplicationsResponse,
   ItemPrice,
-  InquirePriceRunInstancesRequest,
+  DescribeInstanceNetworkStatusResponse,
+  ResetInstancesPasswordRequest,
   DescribeInstanceNetworkStatusRequest,
   TemplateDetail,
   LoginService,
@@ -134,6 +139,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeployTemplatesResponse) => void
   ): Promise<DescribeDeployTemplatesResponse> {
     return this.request("DescribeDeployTemplates", req, cb)
+  }
+
+  /**
+   * 本接口 (TerminateInstances) 用于主动退还实例。
+   */
+  async TerminateInstances(
+    req: TerminateInstancesRequest,
+    cb?: (error: string, rep: TerminateInstancesResponse) => void
+  ): Promise<TerminateInstancesResponse> {
+    return this.request("TerminateInstances", req, cb)
+  }
+
+  /**
+   * 本接口 (DeleteService) 用于删除一个指定配置的实例。
+   */
+  async DeleteService(
+    req: DeleteServiceRequest,
+    cb?: (error: string, rep: DeleteServiceResponse) => void
+  ): Promise<DeleteServiceResponse> {
+    return this.request("DeleteService", req, cb)
   }
 
   /**
@@ -197,14 +222,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口 (StopInstance) 用于主动关闭实例。
-‘已关机’、‘预付费’的实例不支持关机
-     */
-  async StopInstance(
-    req: StopInstanceRequest,
-    cb?: (error: string, rep: StopInstanceResponse) => void
-  ): Promise<StopInstanceResponse> {
-    return this.request("StopInstance", req, cb)
+   * 本接口 (DescribeServciesCallInfo) 用于查询服务调用信息。
+   */
+  async DescribeServicesCallInfo(
+    req: DescribeServicesCallInfoRequest,
+    cb?: (error: string, rep: DescribeServicesCallInfoResponse) => void
+  ): Promise<DescribeServicesCallInfoResponse> {
+    return this.request("DescribeServicesCallInfo", req, cb)
   }
 
   /**
@@ -269,13 +293,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (TerminateInstances) 用于主动退还实例。
-   */
-  async TerminateInstances(
-    req: TerminateInstancesRequest,
-    cb?: (error: string, rep: TerminateInstancesResponse) => void
-  ): Promise<TerminateInstancesResponse> {
-    return this.request("TerminateInstances", req, cb)
+     * 本接口 (StopInstance) 用于主动关闭实例。
+‘已关机’、‘预付费’的实例不支持关机
+     */
+  async StopInstance(
+    req: StopInstanceRequest,
+    cb?: (error: string, rep: StopInstanceResponse) => void
+  ): Promise<StopInstanceResponse> {
+    return this.request("StopInstance", req, cb)
   }
 
   /**

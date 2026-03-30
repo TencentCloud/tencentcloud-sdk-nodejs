@@ -2023,6 +2023,20 @@ export interface DescribeLiveAvatarTemporaryScriptListResponse {
 }
 
 /**
+ * CreateVideoRedrawTask请求参数结构体
+ */
+export interface CreateVideoRedrawTaskRequest {
+  /**
+   * <p>输入待转绘视频url信息</p>
+   */
+  Input: VideoRedrawInput
+  /**
+   * <p>用户自定义cos信息</p>
+   */
+  CosInfo?: VideoRedrawCosInfo
+}
+
+/**
  * 带宽信息
  */
 export interface BandwidthInfo {
@@ -2145,7 +2159,7 @@ export interface DescribeTranscodeTaskNumResponse {
  */
 export interface DescribeStreamPlayInfoListResponse {
   /**
-   * 统计信息列表，时间粒度是1分钟。
+   * <p>统计信息列表，时间粒度是1分钟。</p>
    */
   DataInfoList?: Array<DayStreamPlayInfo>
   /**
@@ -2854,6 +2868,20 @@ export interface DescribeLiveCallbackTemplateRequest {
 }
 
 /**
+ * DescribeLiveCloudEffectConfig返回参数结构体
+ */
+export interface DescribeLiveCloudEffectConfigResponse {
+  /**
+   * <p>模板生礼物的模板信息列表。</p>
+   */
+  EffectTemplateList?: Array<CloudEffectTemplateInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateLiveStreamMonitor请求参数结构体
  */
 export interface CreateLiveStreamMonitorRequest {
@@ -3396,36 +3424,27 @@ export interface DeleteLiveCallbackRuleResponse {
  */
 export interface DescribeStreamPlayInfoListRequest {
   /**
-   * 起始时间点，接口查询支持两种时间格式：
-1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
-2）yyyy-MM-dd HH:mm:ss：使用此格式时，默认代表北京时间。
-开始时间和结束时间的格式需要保持一致。
+   * <p>起始时间点，接口查询支持两种时间格式：<br>1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I<br>2）yyyy-MM-dd HH:mm:ss：使用此格式时，默认代表北京时间。<br>开始时间和结束时间的格式需要保持一致。</p>
    */
   StartTime: string
   /**
-   * 结束时间点，接口查询支持两种时间格式：
-1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I
-2）yyyy-MM-dd HH:mm:ss：使用此格式时，默认代表北京时间。
-开始时间和结束时间的格式需要保持一致。结束时间和开始时间跨度不支持超过24小时，支持距当前时间一个月内的数据查询。
+   * <p>结束时间点，接口查询支持两种时间格式：<br>1）YYYY-MM-DDThh:mm:ssZ：UTC时间格式，详见IOS日期格式说明文档: https://cloud.tencent.com/document/product/266/11732#I<br>2）yyyy-MM-dd HH:mm:ss：使用此格式时，默认代表北京时间。<br>开始时间和结束时间的格式需要保持一致。结束时间和开始时间跨度不支持超过24小时，支持距当前时间一个月内的数据查询。</p>
    */
   EndTime: string
   /**
-   * 播放域名，
-若不填，则为查询所有播放域名的在线流数据。
+   * <p>播放域名，<br>若不填，则为查询所有播放域名的在线流数据。</p>
    */
   PlayDomain?: string
   /**
-   * 流名称，精确匹配。
-若不填，则为查询总体播放数据。
+   * <p>流名称，精确匹配。<br>若不填，则为查询总体播放数据。</p>
    */
   StreamName?: string
   /**
-   * 推流路径，与播放地址中的AppName保持一致，会精确匹配，在同时传递了StreamName时生效。
-若不填，则为查询总体播放数据。
+   * <p>该参数暂不可用。</p>
    */
   AppName?: string
   /**
-   * 服务名称，可选值包括LVB(标准直播)，LEB(快直播)，不填则查LVB+LEB总值。
+   * <p>服务名称，可选值包括LVB(标准直播)，LEB(快直播)，不填则查LVB+LEB总值。</p>
    */
   ServiceName?: string
 }
@@ -3755,17 +3774,13 @@ export interface DescribeLiveAvatarImageListResponse {
 }
 
 /**
- * CopyCaster返回参数结构体
+ * DescribeAIGCTaskStatus请求参数结构体
  */
-export interface CopyCasterResponse {
+export interface DescribeAIGCTaskStatusRequest {
   /**
-   * 复制生成的导播台ID
+   * <p>任务ID</p>
    */
-  CasterId?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  TaskId: string
 }
 
 /**
@@ -6168,6 +6183,16 @@ export interface ModifyLiveAvatarScriptRequest {
 }
 
 /**
+ * 视频转绘的输入源
+ */
+export interface VideoRedrawInput {
+  /**
+   * <p>输入待转绘的视频URL</p>
+   */
+  Url: string
+}
+
+/**
  * DescribeCasterLayoutInfos返回参数结构体
  */
 export interface DescribeCasterLayoutInfosResponse {
@@ -8274,20 +8299,46 @@ export interface DescribeCasterRequest {
 }
 
 /**
- * AuthenticateDomainOwner请求参数结构体
+ * DescribeAIGCTaskStatus返回参数结构体
  */
-export interface AuthenticateDomainOwnerRequest {
+export interface DescribeAIGCTaskStatusResponse {
   /**
-   * 要验证的域名。
+   * <p>任务ID</p>
    */
-  DomainName: string
+  TaskId?: string
   /**
-   * 验证类型。可取值：
-dnsCheck ：立即验证配置 dns 的解析记录是否与待验证内容一致，成功则保存记录。
-fileCheck ：立即验证 web 文件是否与待验证内容一致，成功则保存记录。
-dbCheck :  检查是否已经验证成功过。
+   * <p>状态</p><p>枚举值：</p><ul><li>FINISHED： 1</li></ul>
    */
-  VerifyType: string
+  TaskStatus?: string
+  /**
+   * <p>输出url</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputUrl?: string
+  /**
+   * <p>任务创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>任务调度时间</p>
+   */
+  ScheduledTime?: string
+  /**
+   * <p>任务完成时间</p>
+   */
+  FinishedTime?: string
+  /**
+   * <p>任务错误码</p>
+   */
+  TaskResultCode?: number
+  /**
+   * <p>任务返回错误信息</p>
+   */
+  TaskResultMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10162,6 +10213,20 @@ export interface CreateLiveRecordTemplateRequest {
 }
 
 /**
+ * CreateVideoRedrawTask返回参数结构体
+ */
+export interface CreateVideoRedrawTaskResponse {
+  /**
+   * <p>任务id</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddCasterOutputInfo返回参数结构体
  */
 export interface AddCasterOutputInfoResponse {
@@ -10332,13 +10397,26 @@ export interface DescribeCasterLayoutInfosRequest {
 }
 
 /**
- * DescribeLiveCloudEffectConfig返回参数结构体
+ * AuthenticateDomainOwner请求参数结构体
  */
-export interface DescribeLiveCloudEffectConfigResponse {
+export interface AuthenticateDomainOwnerRequest {
   /**
-   * <p>模板生礼物的模板信息列表。</p>
+   * 要验证的域名。
    */
-  EffectTemplateList?: Array<CloudEffectTemplateInfo>
+  DomainName: string
+  /**
+   * 验证类型。可取值：
+dnsCheck ：立即验证配置 dns 的解析记录是否与待验证内容一致，成功则保存记录。
+fileCheck ：立即验证 web 文件是否与待验证内容一致，成功则保存记录。
+dbCheck :  检查是否已经验证成功过。
+   */
+  VerifyType: string
+}
+
+/**
+ * AddCasterMarkPicInfo返回参数结构体
+ */
+export interface AddCasterMarkPicInfoResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10346,9 +10424,13 @@ export interface DescribeLiveCloudEffectConfigResponse {
 }
 
 /**
- * AddCasterMarkPicInfo返回参数结构体
+ * CopyCaster返回参数结构体
  */
-export interface AddCasterMarkPicInfoResponse {
+export interface CopyCasterResponse {
+  /**
+   * 复制生成的导播台ID
+   */
+  CasterId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12967,6 +13049,36 @@ export interface GroupProIspDataInfo {
    * 分钟维度的明细数据。
    */
   DetailInfoList?: Array<CdnPlayStatData>
+}
+
+/**
+ * aigc cos信息，存储用户请求时填写的cos信息，存放结果
+ */
+export interface VideoRedrawCosInfo {
+  /**
+   * <p>cos所在地域</p>
+   */
+  Region?: string
+  /**
+   * <p>cos桶信息</p>
+   */
+  Bucket?: string
+  /**
+   * <p>任务存放cos的目录</p>
+   */
+  Dir?: string
+  /**
+   * <p>临时Cos SecretId</p>
+   */
+  TmpSecretId?: string
+  /**
+   * <p>临时Cos SecretKey</p>
+   */
+  TmpSecretKey?: string
+  /**
+   * <p>临时token</p>
+   */
+  Token?: string
 }
 
 /**

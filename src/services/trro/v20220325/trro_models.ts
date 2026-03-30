@@ -324,7 +324,7 @@ export interface DescribeDeviceInfoRequest {
  */
 export interface DescribeSessionStatisticsByIntervalResponse {
   /**
-   * 各时间段的会话统计数据
+   * <p>各时间段的会话统计数据</p>
    */
   SessionStatistics?: Array<SessionIntervalStatistic>
   /**
@@ -402,27 +402,27 @@ export interface SessionInfo {
  */
 export interface DescribeRecentSessionListRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 页码，从1开始
+   * <p>页码，从1开始</p>
    */
   PageNumber: number
   /**
-   * 每页个数
+   * <p>每页个数</p>
    */
   PageSize: number
   /**
-   * 设备ID，支持过滤远端设备或现场设备
+   * <p>设备ID，支持过滤远端设备或现场设备</p>
    */
   DeviceId?: string
   /**
-   * 时间范围的起始时间。时间范围最大为最近两小时，若不传或超出范围，则起始时间按两小时前计算
+   * <p>时间范围的起始时间。时间范围最大为最近两小时，若不传或超出范围，则起始时间按两小时前计算</p>
    */
   StartTime?: number
   /**
-   * 时间范围的结束时间。时间范围最大为最近两小时，若不传或超出范围，则结束时间按当前时间计算
+   * <p>时间范围的结束时间。时间范围最大为最近两小时，若不传或超出范围，则结束时间按当前时间计算</p>
    */
   EndTime?: number
 }
@@ -715,19 +715,19 @@ export interface DeleteCloudRecordingResponse {
  */
 export interface DescribeSessionStatisticsRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 设备ID
+   * <p>设备ID</p>
    */
   DeviceId?: string
   /**
-   * 起始时间，单位：秒
+   * <p>起始时间，单位：秒</p>
    */
   StartTime?: number
   /**
-   * 结束时间，单位：秒
+   * <p>结束时间，单位：秒</p>
    */
   EndTime?: number
 }
@@ -803,15 +803,15 @@ export interface ModifyProjectRequest {
  */
 export interface DescribeRecentSessionListResponse {
   /**
-   * 总个数
+   * <p>总个数</p>
    */
   Total?: number
   /**
-   * 会话列表
+   * <p>会话列表</p>
    */
   RecentSessionList?: Array<RecentSessionInfo>
   /**
-   * 本页数量
+   * <p>本页数量</p>
    */
   Num?: number
   /**
@@ -1333,23 +1333,23 @@ export interface MultiNet {
  */
 export interface DescribeSessionStatisticsByIntervalRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 统计时间间隔：hour|day|month
+   * <p>统计时间间隔：hour|day|month</p>
    */
   StatisticInterval: string
   /**
-   * 设备ID
+   * <p>设备ID</p>
    */
   DeviceId?: string
   /**
-   * 起始时间，单位：秒
+   * <p>起始时间，单位：秒</p>
    */
   StartTime?: number
   /**
-   * 结束时间，单位：秒
+   * <p>结束时间，单位：秒</p>
    */
   EndTime?: number
 }
@@ -1395,23 +1395,23 @@ export interface StopPublishLiveStreamResponse {
  */
 export interface DescribeSessionStatisticsResponse {
   /**
-   * 会话数量
+   * <p>会话数量</p>
    */
   SessionNum?: number
   /**
-   * 通话时长，单位：分钟
+   * <p>通话时长，单位：分钟</p>
    */
   TotalDuration?: number
   /**
-   * 活跃现场设备数
+   * <p>活跃现场设备数</p>
    */
   ActiveFieldDeviceNum?: number
   /**
-   * 活跃远端设备数
+   * <p>活跃远端设备数</p>
    */
   ActiveRemoteDeviceNum?: number
   /**
-   * 优良会话占比，单位：%
+   * <p>优良会话占比，单位：%</p>
    */
   NotBadSessionRatio?: number
   /**
@@ -1595,27 +1595,27 @@ export interface DurationDetails {
  */
 export interface DescribeDeviceSessionListRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 页码，从1开始
+   * <p>页码，从1开始</p>
    */
   PageNumber: number
   /**
-   * 每页个数
+   * <p>每页个数</p>
    */
   PageSize: number
   /**
-   * 设备ID
+   * <p>设备ID</p>
    */
   DeviceId?: string
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime?: number
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime?: number
 }
@@ -1713,15 +1713,15 @@ export interface GetTotalDurationRequest {
  */
 export interface DescribeDeviceSessionListResponse {
   /**
-   * 总个数
+   * <p>总个数</p>
    */
   Total?: number
   /**
-   * 会话列表
+   * <p>会话列表</p>
    */
   DeviceSessionList?: Array<SessionInfo>
   /**
-   * 本页数量
+   * <p>本页数量</p>
    */
   Num?: number
   /**

@@ -19,13 +19,16 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   UpgradeProxyVersionRequest,
+  DescribeInstanceMonitorSIPResponse,
   RemoveReplicationGroupRequest,
   UpgradeSmallVersionRequest,
+  DescribeLogsRequest,
   ModifyInstanceParamsResponse,
   EnableReplicaReadonlyRequest,
   ModifyInstanceAvailabilityZonesRequest,
   RedisBackupSet,
   DescribeInstanceMonitorTopNCmdResponse,
+  DeleteExportTaskResponse,
   ModifyInstanceAvailabilityZonesResponse,
   ModifyAutoBackupConfigResponse,
   RestoreInstanceRequest,
@@ -35,6 +38,7 @@ import {
   UpgradeInstanceVersionResponse,
   CreateInstancesRequest,
   CreateReplicationGroupRequest,
+  ExportFile,
   DescribeInstanceSpecBandwidthResponse,
   DescribeInstanceZoneInfoRequest,
   ModifyConnectionConfigResponse,
@@ -53,15 +57,15 @@ import {
   RestoreInstanceResponse,
   RedisNodeInfo,
   ModifyBackupDownloadRestrictionResponse,
-  DescribeBackupUrlRequest,
-  DeleteParamTemplateResponse,
+  DeleteParamTemplateRequest,
+  DeleteExportTaskRequest,
   DescribeInstancesResponse,
   TaskInfoDetail,
   DescribeInstanceZoneInfoResponse,
   Account,
   InstanceProxySlowlogDetail,
   SecurityGroupsInboundAndOutbound,
-  ResetPasswordResponse,
+  ModifyLogRequest,
   ClearInstanceRequest,
   UpgradeInstanceVersionRequest,
   RegionConf,
@@ -78,7 +82,8 @@ import {
   InstanceMultiParam,
   DescribeInstanceDealDetailRequest,
   KillMasterGroupResponse,
-  RedisNode,
+  OpenLogResponse,
+  ModifyLogResponse,
   DescribeProjectSecurityGroupRequest,
   ParameterDetail,
   DescribeInstanceShardsResponse,
@@ -91,6 +96,7 @@ import {
   DestroyPrepaidInstanceRequest,
   CreateParamTemplateResponse,
   InstanceTagInfo,
+  RedisNode,
   DescribeInstanceDTSInfoResponse,
   DescribeInstanceEventsRequest,
   DescribeGlobalReplicationAreaRequest,
@@ -105,6 +111,7 @@ import {
   ModifyDBInstanceSecurityGroupsResponse,
   ChangeMasterInstanceRequest,
   DescribeInstanceDTSInfoRequest,
+  DescribeLogInstanceListResponse,
   CreateParamTemplateRequest,
   DescribeTendisSlowLogResponse,
   DescribeProductInfoResponse,
@@ -114,12 +121,13 @@ import {
   DescribeBackupUrlResponse,
   InquiryPriceRenewInstanceResponse,
   DescribeDBSecurityGroupsRequest,
-  ModifyInstanceLogDeliveryRequest,
+  CloseLogRequest,
   DescribeProductInfoRequest,
   InquiryPriceCreateInstanceResponse,
   InstanceSecurityGroupDetail,
   DescribeInstanceParamsResponse,
   DescribeReplicationGroupInstanceResponse,
+  StartupInstanceRequest,
   UpgradeProxyVersionResponse,
   ResetPasswordRequest,
   ModifyInstanceAccountResponse,
@@ -129,6 +137,7 @@ import {
   DescribeBackupDetailRequest,
   DescribeInstanceMonitorTookDistResponse,
   DescribeInstanceBackupsResponse,
+  StartupInstanceResponse,
   InstanceIntegerParam,
   UpgradeVersionToMultiAvailabilityZonesRequest,
   ModfiyInstancePasswordResponse,
@@ -140,6 +149,7 @@ import {
   KillMasterGroupRequest,
   SwitchAccessNewInstanceResponse,
   CloneInstancesResponse,
+  DescribeBackupDownloadRestrictionResponse,
   ParamTemplateInfo,
   DescribeInstanceMonitorTopNCmdTookResponse,
   CloseSSLRequest,
@@ -158,14 +168,18 @@ import {
   DescribeTaskInfoRequest,
   CloneInstancesRequest,
   ApplyParamsTemplateResponse,
+  CreateExportTaskResponse,
+  LogFilter,
   DescribeReplicationGroupRequest,
+  DescribeInstanceSupportFeatureRequest,
   RedisNodes,
   DescribeInstanceMonitorTopNCmdRequest,
-  ModifyNetworkConfigRequest,
+  CreateExportTaskRequest,
   DescribeInstanceSecurityGroupRequest,
   InstanceParamHistory,
   DescribeInstanceParamsRequest,
   CleanUpInstanceResponse,
+  LogInstance,
   ModifyDBInstanceSecurityGroupsRequest,
   DescribeParamTemplatesResponse,
   DescribeInstanceShardsRequest,
@@ -176,20 +190,21 @@ import {
   DescribeProjectSecurityGroupsRequest,
   DescribeInstanceMonitorBigKeySizeDistResponse,
   DescribeInstanceEventsResponse,
+  LogResult,
   CreateInstanceAccountRequest,
   RemoveReplicationInstanceRequest,
   EnableReplicaReadonlyResponse,
   ModifyInstanceRequest,
   DescribeMaintenanceWindowResponse,
   DescribeInstanceSecurityGroupResponse,
-  ReleaseWanAddressResponse,
+  DescribeExportTasksResponse,
   ProductConf,
   ModifyConnectionConfigRequest,
   ManualBackupInstanceResponse,
   InstanceNode,
   ModifyInstanceBackupModeResponse,
   SwitchProxyResponse,
-  StartupInstanceResponse,
+  ResetPasswordResponse,
   DescribeInstanceDTSInstanceInfo,
   TradeDealDetail,
   ResourceTag,
@@ -206,17 +221,19 @@ import {
   SourceCommand,
   ModfiyInstancePasswordRequest,
   DescribeSlowLogRequest,
+  Filter,
   ModifyInstancePasswordRequest,
   ModifyReplicationGroupResponse,
-  DeleteParamTemplateRequest,
+  InstanceInfo,
+  ReleaseWanAddressResponse,
   DescribeAutoBackupConfigRequest,
-  DescribeInstanceMonitorSIPResponse,
+  DescribeBackupUrlRequest,
   DestroyPostpaidInstanceRequest,
   ChangeInstanceRoleRequest,
-  DescribeInstanceSupportFeatureRequest,
+  CloseLogResponse,
   DeleteInstanceAccountRequest,
   DescribeInstanceMonitorHotKeyRequest,
-  DescribeBackupDownloadRestrictionResponse,
+  DeleteParamTemplateResponse,
   UpgradeInstanceResponse,
   ResourceBundle,
   ManualBackupInstanceRequest,
@@ -232,8 +249,11 @@ import {
   DescribeInstanceMonitorBigKeyTypeDistRequest,
   DescribeInstanceMonitorTopNCmdTookRequest,
   DestroyPrepaidInstanceResponse,
+  DeliverSummary,
   ReplicaGroup,
   DescribeRedisClusterOverviewRequest,
+  OpenLogRequest,
+  UpgradeInstanceRequest,
   DescribeCommonDBInstancesResponse,
   InquiryPriceCreateInstanceRequest,
   DescribeRedisClustersRequest,
@@ -244,15 +264,16 @@ import {
   BackupDownloadInfo,
   BigKeyTypeInfo,
   DescribeInstanceNodeInfoRequest,
-  DescribeMaintenanceWindowRequest,
+  DescribeLogsResponse,
   DescribeInstanceSupportFeatureResponse,
   DescribeInstanceLogDeliveryRequest,
   AddReplicationInstanceRequest,
   InstanceClusterNode,
   DescribeSSLStatusResponse,
-  DescribeTendisSlowLogRequest,
+  DescribeExportTasksRequest,
   DescribeProxySlowLogRequest,
   DescribeRedisClustersResponse,
+  DescribeLogInstanceListRequest,
   ModifyInstanceBackupModeRequest,
   DescribeProxySlowLogResponse,
   ModifyInstanceReadOnlyRequest,
@@ -266,10 +287,11 @@ import {
   SwitchInstanceVipResponse,
   BackupLimitVpcItem,
   DisassociateSecurityGroupsRequest,
-  StartupInstanceRequest,
+  ModifyNetworkConfigRequest,
   HotKeyInfo,
   InstanceEnumParam,
   CreateInstanceAccountResponse,
+  DescribeMaintenanceWindowRequest,
   DescribeInstanceBackupsRequest,
   RemoveReplicationInstanceResponse,
   DescribeSecondLevelBackupInfoRequest,
@@ -279,12 +301,12 @@ import {
   DescribeInstanceMonitorSIPRequest,
   InstanceClusterShard,
   OpenSSLResponse,
-  TendisSlowLogDetail,
+  ModifyInstanceLogDeliveryRequest,
   ChangeInstanceRoleResponse,
   DescribeGlobalReplicationAreaResponse,
   ZoneCapacityConf,
   ModifyInstanceEventResponse,
-  UpgradeInstanceRequest,
+  TendisSlowLogDetail,
   DescribeInstanceNodeInfoResponse,
   DescribeProjectSecurityGroupResponse,
   Instances,
@@ -292,6 +314,7 @@ import {
   InstanceParam,
   DisassociateSecurityGroupsResponse,
   ClearInstanceResponse,
+  DescribeTendisSlowLogRequest,
   InstanceSlowlogDetail,
 } from "./redis_models"
 
@@ -697,6 +720,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除日志下载任务
+   */
+  async DeleteExportTask(
+    req: DeleteExportTaskRequest,
+    cb?: (error: string, rep: DeleteExportTaskResponse) => void
+  ): Promise<DeleteExportTaskResponse> {
+    return this.request("DeleteExportTask", req, cb)
+  }
+
+  /**
    * 本接口（InquiryPriceUpgradeInstance）用于查询实例扩容价格。
    */
   async InquiryPriceUpgradeInstance(
@@ -1067,6 +1100,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改日志
+   */
+  async ModifyLog(
+    req: ModifyLogRequest,
+    cb?: (error: string, rep: ModifyLogResponse) => void
+  ): Promise<ModifyLogResponse> {
+    return this.request("ModifyLog", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeExportTasks）用于查询日志文件的下载任务。
+   */
+  async DescribeExportTasks(
+    req: DescribeExportTasksRequest,
+    cb?: (error: string, rep: DescribeExportTasksResponse) => void
+  ): Promise<DescribeExportTasksResponse> {
+    return this.request("DescribeExportTasks", req, cb)
+  }
+
+  /**
+   * 查询日志
+   */
+  async DescribeLogs(
+    req: DescribeLogsRequest,
+    cb?: (error: string, rep: DescribeLogsResponse) => void
+  ): Promise<DescribeLogsResponse> {
+    return this.request("DescribeLogs", req, cb)
+  }
+
+  /**
    * 本接口（DescribeSSLStatus）用于查询实例 SSL 认证相关信息，包括开启状态、配置状态、证书地址等。
    */
   async DescribeSSLStatus(
@@ -1157,6 +1220,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 关闭日志
+   */
+  async CloseLog(
+    req: CloseLogRequest,
+    cb?: (error: string, rep: CloseLogResponse) => void
+  ): Promise<CloseLogResponse> {
+    return this.request("CloseLog", req, cb)
+  }
+
+  /**
    * 在通过 DTS 支持跨可用区灾备的场景中，通过该接口（SwitchInstanceVip）交换实例 VIP 完成实例灾备切换。交换 VIP 后目标实例可写，源和目标实例VIP互换，同时源与目标实例间 DTS 同步任务断开。
    */
   async SwitchInstanceVip(
@@ -1207,13 +1280,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyNetworkConfig）用于修改实例网络配置。
+   * 创建日志下载任务
    */
-  async ModifyNetworkConfig(
-    req: ModifyNetworkConfigRequest,
-    cb?: (error: string, rep: ModifyNetworkConfigResponse) => void
-  ): Promise<ModifyNetworkConfigResponse> {
-    return this.request("ModifyNetworkConfig", req, cb)
+  async CreateExportTask(
+    req: CreateExportTaskRequest,
+    cb?: (error: string, rep: CreateExportTaskResponse) => void
+  ): Promise<CreateExportTaskResponse> {
+    return this.request("CreateExportTask", req, cb)
+  }
+
+  /**
+   * 日志实例列表查询
+   */
+  async DescribeLogInstanceList(
+    req: DescribeLogInstanceListRequest,
+    cb?: (error: string, rep: DescribeLogInstanceListResponse) => void
+  ): Promise<DescribeLogInstanceListResponse> {
+    return this.request("DescribeLogInstanceList", req, cb)
   }
 
   /**
@@ -1257,6 +1340,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 开启日志
+   */
+  async OpenLog(
+    req: OpenLogRequest,
+    cb?: (error: string, rep: OpenLogResponse) => void
+  ): Promise<OpenLogResponse> {
+    return this.request("OpenLog", req, cb)
+  }
+
+  /**
    * 本接口（OpenSSL）用于开启 SSL 加密认证功能。
    */
   async OpenSSL(
@@ -1274,6 +1367,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAutoBackupConfigResponse) => void
   ): Promise<DescribeAutoBackupConfigResponse> {
     return this.request("DescribeAutoBackupConfig", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyNetworkConfig）用于修改实例网络配置。
+   */
+  async ModifyNetworkConfig(
+    req: ModifyNetworkConfigRequest,
+    cb?: (error: string, rep: ModifyNetworkConfigResponse) => void
+  ): Promise<ModifyNetworkConfigResponse> {
+    return this.request("ModifyNetworkConfig", req, cb)
   }
 
   /**

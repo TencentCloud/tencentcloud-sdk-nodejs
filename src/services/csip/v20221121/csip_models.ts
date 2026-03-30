@@ -542,17 +542,37 @@ export interface ModifyUebaRuleSwitchResponse {
 }
 
 /**
- * 过滤数据对象
+ * DescribeAKAnalysisDetail返回参数结构体
  */
-export interface FilterDataObject {
+export interface DescribeAKAnalysisDetailResponse {
   /**
-   * 英文翻译
+   * 告警AI分析状态 -1 分析失败 0 未分析 1 分析中 2 分析成功，真实告警 3 分析成功，可疑告警
    */
-  Value?: string
+  AIStatus?: number
   /**
-   * 中文翻译
+   * AI分析任务ID
    */
-  Text?: string
+  AITaskID?: string
+  /**
+   * 告警AI分析结果，base64格式，避免数据被拦截
+   */
+  AIResult?: string
+  /**
+   * 反馈建议
+   */
+  Feedback?: string
+  /**
+   * 反馈状态  0表示没有反馈，1表示认可，2表示不认可
+   */
+  FeedbackResult?: number
+  /**
+   * 失败原因
+   */
+  FailedReason?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1595,6 +1615,28 @@ export interface DescribeScanReportListRequest {
    * 列表过滤条件
    */
   Filter?: Filter
+}
+
+/**
+ * ModifyRiskCenterRiskStatus请求参数结构体
+ */
+export interface ModifyRiskCenterRiskStatusRequest {
+  /**
+   * 风险资产相关数据
+   */
+  RiskStatusKeys: Array<RiskCenterStatusKey>
+  /**
+   * 处置状态，1为已处置、2为已忽略，3为取消已处置，4为取消已忽略
+   */
+  Status: number
+  /**
+   * 风险类型，0-端口风险， 1-漏洞风险，2-弱口令风险， 3-网站内容风险，4-配置风险，5-风险服务暴露
+   */
+  Type: number
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -3114,6 +3156,24 @@ export interface DescribeSearchBugInfoRequest {
 }
 
 /**
+ * DescribeRiskCallRecord请求参数结构体
+ */
+export interface DescribeRiskCallRecordRequest {
+  /**
+   * 风险记录ID
+   */
+  RiskID: number
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 过滤器
+   */
+  Filter?: Filter
+}
+
+/**
  * 报告pdf下载的临时链接
  */
 export interface TaskLogURL {
@@ -4273,25 +4333,17 @@ export interface DbAssetInfo {
 }
 
 /**
- * ModifyRiskCenterRiskStatus请求参数结构体
+ * 过滤数据对象
  */
-export interface ModifyRiskCenterRiskStatusRequest {
+export interface FilterDataObject {
   /**
-   * 风险资产相关数据
+   * 英文翻译
    */
-  RiskStatusKeys: Array<RiskCenterStatusKey>
+  Value?: string
   /**
-   * 处置状态，1为已处置、2为已忽略，3为取消已处置，4为取消已忽略
+   * 中文翻译
    */
-  Status: number
-  /**
-   * 风险类型，0-端口风险， 1-漏洞风险，2-弱口令风险， 3-网站内容风险，4-配置风险，5-风险服务暴露
-   */
-  Type: number
-  /**
-   * 集团账号的成员id
-   */
-  MemberId?: Array<string>
+  Text?: string
 }
 
 /**
@@ -6993,6 +7045,10 @@ export interface AIAgentAsset {
    * metadata 有风险时对应路径
    */
   MetadataRiskURL?: string
+  /**
+   * 无
+   */
+  SkillState?: SkillState
 }
 
 /**
@@ -9135,9 +9191,13 @@ export interface DescribeVULListResponse {
 }
 
 /**
- * DescribeExposeAssetCategory请求参数结构体
+ * DescribeAKAnalysisDetail请求参数结构体
  */
-export interface DescribeExposeAssetCategoryRequest {
+export interface DescribeAKAnalysisDetailRequest {
+  /**
+   * 告警记录ID
+   */
+  ID: number
   /**
    * 集团账号的成员id
    */
@@ -9929,21 +9989,39 @@ export interface DescribeAccessKeyUserListResponse {
 }
 
 /**
- * DescribeRiskCallRecord请求参数结构体
+ * SKILL安装状态信息
  */
-export interface DescribeRiskCallRecordRequest {
+export interface SkillState {
   /**
-   * 风险记录ID
+   * SKILL安装状态
+枚举值：
+0：未安装
+1：安装中
+2：已安装
+3：安装失败
+4：卸载中
+5：卸载失败
    */
-  RiskID: number
+  SkillInstallStatus?: number
+  /**
+   * SKILL安装/卸载操作时间
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   */
+  SkillInstallTime?: string
+  /**
+   * SKILL安装/卸载结果描述信息
+   */
+  SkillInstallResult?: string
+}
+
+/**
+ * DescribeExposeAssetCategory请求参数结构体
+ */
+export interface DescribeExposeAssetCategoryRequest {
   /**
    * 集团账号的成员id
    */
   MemberId?: Array<string>
-  /**
-   * 过滤器
-   */
-  Filter?: Filter
 }
 
 /**

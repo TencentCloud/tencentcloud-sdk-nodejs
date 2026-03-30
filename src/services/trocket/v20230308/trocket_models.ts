@@ -297,6 +297,10 @@ export interface ConsumeGroupItem {
    * 绑定的标签列表
    */
   TagList?: Array<Tag>
+  /**
+   * 重试策略
+   */
+  RetryPolicy?: RetryPolicy
 }
 
 /**
@@ -358,6 +362,23 @@ export interface DescribeMessageListRequest {
 }
 
 /**
+ * 重试策略
+ */
+export interface RetryPolicy {
+  /**
+   * 重试策略类型，枚举值如下：
+
+- EXPONENTIAL：固定间隔
+- CUSTOMIZED：阶梯退避
+   */
+  PolicyType: string
+  /**
+   * 固定重试间隔，仅在重试策略为固定间隔时生效
+   */
+  RetryInterval?: number
+}
+
+/**
  * ModifyInstance请求参数结构体
  */
 export interface ModifyInstanceRequest {
@@ -412,6 +433,10 @@ export interface ModifyInstanceRequest {
    * 是否开启删除保护
    */
   EnableDeletionProtection?: boolean
+  /**
+   * 部署可用区列表
+   */
+  ZoneIds?: Array<string>
 }
 
 /**
@@ -691,6 +716,10 @@ BROADCASTING 广播模式
 CLUSTERING 集群模式
    */
   MessageModel?: string
+  /**
+   * 重试策略
+   */
+  RetryPolicy?: RetryPolicy
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1051,6 +1080,10 @@ export interface CreateConsumerGroupRequest {
    * 标签列表
    */
   TagList?: Array<Tag>
+  /**
+   * 重试策略
+   */
+  RetryPolicy?: RetryPolicy
 }
 
 /**
@@ -1785,13 +1818,13 @@ export interface VerifyMessageConsumptionRequest {
    */
   Topic: string
   /**
-   * 客户端ID
-   */
-  ClientId: string
-  /**
    * 消息ID
    */
   MsgId: string
+  /**
+   * 客户端 ID，不指定该参数时消息将被发送到对应消费组内任意客户端
+   */
+  ClientId?: string
   /**
    * 消费组名称，从 [DescribeConsumerGroupList](https://cloud.tencent.com/document/api/1493/101535) 接口返回的 [ConsumeGroupItem](https://cloud.tencent.com/document/api/1493/96031#ConsumeGroupItem) 或控制台获得。
    */
@@ -2087,6 +2120,10 @@ export interface ModifyConsumerGroupRequest {
    * 备注信息，最多 128 个字符
    */
   Remark?: string
+  /**
+   * 重试策略
+   */
+  RetryPolicy?: RetryPolicy
 }
 
 /**
@@ -3185,6 +3222,18 @@ export interface CreateRoleRequest {
    * Topic&Group维度权限配置，权限类型为 TopicAndGroup 时必填
    */
   DetailedPerms?: Array<DetailedRolePerm>
+  /**
+   * AK、SK的生成方式，AUTO：后端自动生成，MANUAL：用户手动输入
+   */
+  RoleGenerateMode?: string
+  /**
+   * 选择MANUAL模式下，需要手动输入AK值
+   */
+  AccessKey?: string
+  /**
+   * 选择MANUAL模式下，需要手动输入SK值
+   */
+  SecretKey?: string
 }
 
 /**

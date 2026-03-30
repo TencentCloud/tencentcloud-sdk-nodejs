@@ -78,6 +78,7 @@ import {
   ActivateTWeTalkResponse,
   ActivateTWeCallLicenseResponse,
   ActivateTWeTalkRequest,
+  DescribeProductDynamicRegisterRequest,
   DeleteTopicPolicyRequest,
   ResetCloudStorageEventRequest,
   TopicItem,
@@ -136,6 +137,7 @@ import {
   UnbindDevicesRequest,
   PublishBroadcastMessageRequest,
   DeleteCloudStorageEventResponse,
+  ModifyProductDynamicRegisterResponse,
   DescribeCloudStorageTimeResponse,
   GetPositionSpaceListRequest,
   DescribeGatewaySubProductsResponse,
@@ -230,6 +232,7 @@ import {
   ResetCloudStorageEventResponse,
   DescribeCloudStorageAIServiceTasksResponse,
   DeletePositionSpaceResponse,
+  PauseTWeCallDeviceResponse,
   DescribeActivateDeviceResponse,
   ResetTWeCallDeviceResponse,
   AppDeviceInfo,
@@ -298,7 +301,7 @@ import {
   GetTWeTalkAIBotListResponse,
   GetTWeCallActiveStatusResponse,
   InvokeTWeSeeRecognitionTaskRequest,
-  PauseTWeCallDeviceResponse,
+  ModifyProductDynamicRegisterRequest,
   BatchProductionInfo,
   DeleteDeviceRequest,
   CreateDeviceSDPAnswerRequest,
@@ -513,6 +516,7 @@ import {
   DeleteLoRaFrequencyRequest,
   CreatePositionFenceRequest,
   DescribeCloudStorageThumbnailResponse,
+  DescribeProductDynamicRegisterResponse,
   PublishFirmwareUpdateMessageRequest,
   UpdateDevicesEnableStateRequest,
   DeleteTWeTalkAIBotResponse,
@@ -1007,6 +1011,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（PublishFirmwareUpdateMessage）用于用户确认升级后，云端向设备发起固件升级请求。
+   */
+  async PublishFirmwareUpdateMessage(
+    req: PublishFirmwareUpdateMessageRequest,
+    cb?: (error: string, rep: PublishFirmwareUpdateMessageResponse) => void
+  ): Promise<PublishFirmwareUpdateMessageResponse> {
+    return this.request("PublishFirmwareUpdateMessage", req, cb)
+  }
+
+  /**
    * 为用户提供新建产品的能力，用于管理用户的设备
    */
   async CreateStudioProduct(
@@ -1197,13 +1211,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（PublishFirmwareUpdateMessage）用于用户确认升级后，云端向设备发起固件升级请求。
+   * 修改云存AI分析回调配置
    */
-  async PublishFirmwareUpdateMessage(
-    req: PublishFirmwareUpdateMessageRequest,
-    cb?: (error: string, rep: PublishFirmwareUpdateMessageResponse) => void
-  ): Promise<PublishFirmwareUpdateMessageResponse> {
-    return this.request("PublishFirmwareUpdateMessage", req, cb)
+  async ModifyCloudStorageAIServiceCallback(
+    req: ModifyCloudStorageAIServiceCallbackRequest,
+    cb?: (error: string, rep: ModifyCloudStorageAIServiceCallbackResponse) => void
+  ): Promise<ModifyCloudStorageAIServiceCallbackResponse> {
+    return this.request("ModifyCloudStorageAIServiceCallback", req, cb)
   }
 
   /**
@@ -1831,13 +1845,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询激活状态
+   * 获取产品动态注册详情
    */
-  async GetTWeCallActiveStatus(
-    req: GetTWeCallActiveStatusRequest,
-    cb?: (error: string, rep: GetTWeCallActiveStatusResponse) => void
-  ): Promise<GetTWeCallActiveStatusResponse> {
-    return this.request("GetTWeCallActiveStatus", req, cb)
+  async DescribeProductDynamicRegister(
+    req: DescribeProductDynamicRegisterRequest,
+    cb?: (error: string, rep: DescribeProductDynamicRegisterResponse) => void
+  ): Promise<DescribeProductDynamicRegisterResponse> {
+    return this.request("DescribeProductDynamicRegister", req, cb)
   }
 
   /**
@@ -2141,6 +2155,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
+   */
+  async PublishMessage(
+    req: PublishMessageRequest,
+    cb?: (error: string, rep: PublishMessageResponse) => void
+  ): Promise<PublishMessageResponse> {
+    return this.request("PublishMessage", req, cb)
+  }
+
+  /**
    * 获取云存 AI 分析任务输出文件的下载地址
    */
   async GenerateCloudStorageAIServiceTaskFileURL(
@@ -2171,13 +2195,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（PublishMessage）用于使用自定义透传协议进行设备远控
+   * 修改产品动态注册
    */
-  async PublishMessage(
-    req: PublishMessageRequest,
-    cb?: (error: string, rep: PublishMessageResponse) => void
-  ): Promise<PublishMessageResponse> {
-    return this.request("PublishMessage", req, cb)
+  async ModifyProductDynamicRegister(
+    req: ModifyProductDynamicRegisterRequest,
+    cb?: (error: string, rep: ModifyProductDynamicRegisterResponse) => void
+  ): Promise<ModifyProductDynamicRegisterResponse> {
+    return this.request("ModifyProductDynamicRegister", req, cb)
   }
 
   /**
@@ -2411,13 +2435,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改云存AI分析回调配置
+   * 查询激活状态
    */
-  async ModifyCloudStorageAIServiceCallback(
-    req: ModifyCloudStorageAIServiceCallbackRequest,
-    cb?: (error: string, rep: ModifyCloudStorageAIServiceCallbackResponse) => void
-  ): Promise<ModifyCloudStorageAIServiceCallbackResponse> {
-    return this.request("ModifyCloudStorageAIServiceCallback", req, cb)
+  async GetTWeCallActiveStatus(
+    req: GetTWeCallActiveStatusRequest,
+    cb?: (error: string, rep: GetTWeCallActiveStatusResponse) => void
+  ): Promise<GetTWeCallActiveStatusResponse> {
+    return this.request("GetTWeCallActiveStatus", req, cb)
   }
 
   /**

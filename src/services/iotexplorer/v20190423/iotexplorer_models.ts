@@ -264,6 +264,10 @@ export interface DeviceActiveResult {
    */
   ErrCode?: number
   /**
+   * 错误信息
+   */
+  ErrMessage?: string
+  /**
    * 过期时间
    */
   ExpireTime?: number
@@ -1202,6 +1206,16 @@ export interface ActivateTWeTalkRequest {
    * 设备列表, 产品ID_设备名；
    */
   DeviceIds?: Array<string>
+}
+
+/**
+ * DescribeProductDynamicRegister请求参数结构体
+ */
+export interface DescribeProductDynamicRegisterRequest {
+  /**
+   * 产品Id
+   */
+  ProductId: string
 }
 
 /**
@@ -2566,6 +2580,28 @@ export interface PublishBroadcastMessageRequest {
  * DeleteCloudStorageEvent返回参数结构体
  */
 export interface DeleteCloudStorageEventResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyProductDynamicRegister返回参数结构体
+ */
+export interface ModifyProductDynamicRegisterResponse {
+  /**
+   * 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备
+   */
+  RegisterType: number
+  /**
+   * 动态注册产品密钥
+   */
+  ProductSecret: string
+  /**
+   * 动态注册设备上限
+   */
+  RegisterLimit: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4508,6 +4544,16 @@ export interface DeletePositionSpaceResponse {
 }
 
 /**
+ * PauseTWeCallDevice返回参数结构体
+ */
+export interface PauseTWeCallDeviceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeActivateDevice返回参数结构体
  */
 export interface DescribeActivateDeviceResponse {
@@ -6061,13 +6107,21 @@ export interface InvokeTWeSeeRecognitionTaskRequest {
 }
 
 /**
- * PauseTWeCallDevice返回参数结构体
+ * ModifyProductDynamicRegister请求参数结构体
  */
-export interface PauseTWeCallDeviceResponse {
+export interface ModifyProductDynamicRegisterRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 产品Id
    */
-  RequestId?: string
+  ProductId: string
+  /**
+   * 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备
+   */
+  RegisterType: number
+  /**
+   * 动态注册设备上限
+   */
+  RegisterLimit: number
 }
 
 /**
@@ -11114,6 +11168,28 @@ export interface DescribeCloudStorageThumbnailResponse {
    * 缩略图访问地址的过期时间
    */
   ExpireTime?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeProductDynamicRegister返回参数结构体
+ */
+export interface DescribeProductDynamicRegisterResponse {
+  /**
+   * 动态注册类型，0-关闭 1-预创建设备 2-自动创建设备
+   */
+  RegisterType: number
+  /**
+   * 动态注册产品密钥
+   */
+  ProductSecret: string
+  /**
+   * 动态注册设备上限
+   */
+  RegisterLimit: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -48,29 +48,37 @@ export interface CosStorageSource {
  */
 export interface StartSandboxInstanceRequest {
   /**
-   * 沙箱工具 ID，与 ToolName 至少有一个要填
+   * <p>沙箱工具 ID，与 ToolName 至少有一个要填</p>
    */
   ToolId?: string
   /**
-   * 沙箱工具名称，与 ToolId 至少有一个要填
+   * <p>沙箱工具名称，与 ToolId 至少有一个要填</p>
    */
   ToolName?: string
   /**
-   * 超时时间，超过这个时间就自动回收实例。支持格式：5m、300s、1h 等，默认 5m。最小 30s，最大 24h
+   * <p>超时时间，超过这个时间就自动回收实例。支持格式：5m、300s、1h 等，默认 5m。最小 30s，最大 24h</p>
    */
   Timeout?: string
   /**
-   * 幂等性 Token，长度不超过 64 字符
+   * <p>幂等性 Token，长度不超过 64 字符</p>
    */
   ClientToken?: string
   /**
-   * 沙箱实例存储挂载配置
+   * <p>沙箱实例存储挂载配置</p>
    */
   MountOptions?: Array<MountOption>
   /**
-   * 沙箱实例自定义配置
+   * <p>沙箱实例自定义配置</p>
    */
   CustomConfiguration?: CustomConfiguration
+  /**
+   * <p>沙箱访问认证模式</p><p>枚举值：</p><ul><li>DEFAULT： 跟随系统策略</li><li>TOKEN： Token认证</li><li>NONE： 免认证 </li></ul><p>默认值：DEFAULT</p>
+   */
+  AuthMode?: string
+  /**
+   * <p>沙箱元数据</p>
+   */
+  Metadata?: Array<MetadataVar>
 }
 
 /**
@@ -121,6 +129,14 @@ export interface SandboxInstance {
    * <p>沙箱实例自定义配置</p>
    */
   CustomConfiguration?: CustomConfigurationDetail
+  /**
+   * <p>网络模式</p><p>枚举值：</p><ul><li>PUBLIC： 公网访问</li><li>SANDBOX： 无网络</li><li>INTERNAL_SERVICE： 腾讯云内部公共服务</li></ul><p>可以覆盖工具级别的网络配置。但如果一个工具本身就不支持 VPC 网络，那么即便在实例设置里选了 VPC 模式，也是无效的</p>
+   */
+  NetworkMode?: string
+  /**
+   * <p>沙箱实例元数据</p>
+   */
+  Metadata?: Array<MetadataVar>
 }
 
 /**
@@ -586,7 +602,7 @@ export interface Filter {
  */
 export interface StartSandboxInstanceResponse {
   /**
-   * 创建的沙箱实例完整信息
+   * <p>创建的沙箱实例完整信息</p>
    */
   Instance?: SandboxInstance
   /**
@@ -670,7 +686,7 @@ export interface AcquireSandboxInstanceTokenRequest {
  */
 export interface PauseSandboxInstanceRequest {
   /**
-   * 沙箱实例ID
+   * <p>沙箱实例ID</p>
    */
   InstanceId: string
 }
@@ -793,13 +809,17 @@ export type DescribeAPIKeyListRequest = null
  */
 export interface UpdateSandboxInstanceRequest {
   /**
-   * 沙箱实例ID
+   * <p>沙箱实例ID</p>
    */
   InstanceId: string
   /**
-   * 新的超时时间（从设置时开始重新计算超时），支持格式：5m、300s、1h等。最小30s，最大24h。如果不指定则保持原有超时设置
+   * <p>新的超时时间（从设置时开始重新计算超时），支持格式：5m、300s、1h等。最小30s，最大24h。如果不指定则保持原有超时设置</p>
    */
   Timeout?: string
+  /**
+   * <p>沙箱实例元数据</p>
+   */
+  Metadata?: Array<MetadataVar>
 }
 
 /**
@@ -926,6 +946,20 @@ export interface LogConfiguration {
    * 日志推送CLS的配置。
    */
   CLSConfig?: CLSConfig
+}
+
+/**
+ * metadata 项
+ */
+export interface MetadataVar {
+  /**
+   * <p>沙箱元数据名</p>
+   */
+  Name?: string
+  /**
+   * <p>沙箱元数据值</p>
+   */
+  Value?: string
 }
 
 /**
