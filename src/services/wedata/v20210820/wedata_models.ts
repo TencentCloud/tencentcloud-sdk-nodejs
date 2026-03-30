@@ -4945,6 +4945,11 @@ export interface ProjectUserRole {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
+  /**
+   * 0: 普通用户 1: entraId用户
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserTag?: number
 }
 
 /**
@@ -11097,6 +11102,11 @@ export interface BaseUser {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Email?: string
+  /**
+   * 0: 普通用户 1: entraId用户
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserTag?: number
 }
 
 /**

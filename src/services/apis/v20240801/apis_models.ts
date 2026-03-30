@@ -87,6 +87,14 @@ export interface CreateModelServiceRequest {
    * 超时配置，秒
    */
   Timeout?: number
+  /**
+   * 是否开启提示词安全检测
+   */
+  PromptModerateStatus?: boolean
+  /**
+   * 提示词安全检测配置
+   */
+  PromptModerateConfig?: PromptModerateConfigDTO
 }
 
 /**
@@ -729,6 +737,14 @@ export interface ModifyModelServiceRequest {
    * 超时配置，秒
    */
   Timeout?: number
+  /**
+   * 是否开启提示词安全检测配置
+   */
+  PromptModerateStatus?: boolean
+  /**
+   * 提示词安全检测配置
+   */
+  PromptModerateConfig?: PromptModerateConfigDTO
 }
 
 /**
@@ -2083,6 +2099,22 @@ export interface DeleteAgentAppMcpServersResponse {
 }
 
 /**
+ * 提示词安全配置
+ */
+export interface PromptModerateConfigDTO {
+  /**
+   * 执行动作
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Action?: string
+  /**
+   * 响应拦截内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InterceptMessage?: string
+}
+
+/**
  * TargetHostDTO
  */
 export interface TargetHostDTO {
@@ -2555,6 +2587,16 @@ export interface DescribeModelServiceResponseVO {
    * 请求路径
    */
   Url?: string
+  /**
+   * 是否开启提示词安全检测
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PromptModerateStatus?: boolean
+  /**
+   * 提示词安全检测配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PromptModerateConfig?: PromptModerateConfigDTO
 }
 
 /**

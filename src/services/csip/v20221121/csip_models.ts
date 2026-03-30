@@ -1183,6 +1183,26 @@ export interface Vpc {
 }
 
 /**
+ * STS临时密钥凭据（出参专用），用于查询详情接口的响应。SecretID和SecretKey字段返回打码后的值，System返回原文
+ */
+export interface STSCredentialOutput {
+  /**
+   * 凭据提供商标识（原文），如tencentCam、aws、aliyun等
+   */
+  System?: string
+  /**
+   * SecretID（打码后）
+补充说明：保留前3后4位，中间用***替代；长度不足7位时全部替换为***
+   */
+  SecretID?: string
+  /**
+   * SecretKey（打码后）
+补充说明：保留前3后4位，中间用***替代；长度不足7位时全部替换为***
+   */
+  SecretKey?: string
+}
+
+/**
  * 端口风险高级配置项
  */
 export interface PortRiskAdvanceCFGParamItem {
@@ -1927,17 +1947,17 @@ export interface DescribeTopAttackInfoResponse {
 }
 
 /**
- * 弱口令风险高级配置
+ * DescribeAccessKeyAsset请求参数结构体
  */
-export interface TaskCenterWeakPwdRiskInputParam {
+export interface DescribeAccessKeyAssetRequest {
   /**
-   * 检测项ID
+   * 集团账号的成员id
    */
-  CheckItemId: number
+  MemberId?: Array<string>
   /**
-   * 是否开启，0-不开启，1-开启
+   * 过滤器
    */
-  Enable: number
+  Filter?: Filter
 }
 
 /**
@@ -2123,6 +2143,20 @@ export interface DescribeRiskCenterWebsiteRiskListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 弱口令风险高级配置
+ */
+export interface TaskCenterWeakPwdRiskInputParam {
+  /**
+   * 检测项ID
+   */
+  CheckItemId: number
+  /**
+   * 是否开启，0-不开启，1-开启
+   */
+  Enable: number
 }
 
 /**
@@ -3142,17 +3176,17 @@ export interface DescribeScanReportListResponse {
 }
 
 /**
- * DescribeSearchBugInfo请求参数结构体
+ * DescribeKeySandboxCredential请求参数结构体
  */
-export interface DescribeSearchBugInfoRequest {
+export interface DescribeKeySandboxCredentialRequest {
   /**
-   * 1的时候返回应急漏洞，2的时候返回应急漏洞列表，3的时候搭配输入CVEId字段展示该漏洞数据
+   * 凭证ID
    */
-  Id: string
+  CredentialId: string
   /**
-   * id=3时传入该参数
+   * 集团账号的成员id
    */
-  CVEId?: string
+  MemberId?: Array<string>
 }
 
 /**
@@ -3191,6 +3225,20 @@ export interface TaskLogURL {
   TaskLogName?: string
   /**
    * APP ID
+   */
+  AppId?: string
+}
+
+/**
+ * 报告中的task_id list
+ */
+export interface ReportTaskIdList {
+  /**
+   * 任务id列表
+   */
+  TaskIdList: Array<string>
+  /**
+   * 租户ID
    */
   AppId?: string
 }
@@ -4189,6 +4237,24 @@ export interface DescribeSubnetAssetsResponse {
 }
 
 /**
+ * UpdateAlertStatusList返回参数结构体
+ */
+export interface UpdateAlertStatusListResponse {
+  /**
+   * 结果信息
+   */
+  Msg?: string
+  /**
+   * 结果代码
+   */
+  Code?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRiskCenterAssetViewPortRiskList请求参数结构体
  */
 export interface DescribeRiskCenterAssetViewPortRiskListRequest {
@@ -4613,37 +4679,21 @@ export interface DescribeUserCallRecordRequest {
 }
 
 /**
- * DescribeTopAttackInfo请求参数结构体
+ * DescribeKeySandboxCredentialList返回参数结构体
  */
-export interface DescribeTopAttackInfoRequest {
+export interface DescribeKeySandboxCredentialListResponse {
   /**
-   * 起始时间
+   * 凭证数据列表
    */
-  StartTime: string
+  Data?: Array<KeySandboxCredential>
   /**
-   * 结束时间
+   * 总数量
    */
-  EndTime: string
+  TotalCount?: number
   /**
-   * 1:攻击类型 2:攻击者
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  QueryType: number
-  /**
-   * 集团账号的成员id
-   */
-  MemberId?: Array<string>
-  /**
-   * 被调用的集团账号的成员id
-   */
-  OperatedMemberId?: Array<string>
-  /**
-   * 资产名称
-   */
-  AssetName?: string
-  /**
-   * 0: 默认全部 1:资产ID 2:域名
-   */
-  AssetType?: number
+  RequestId?: string
 }
 
 /**
@@ -5329,6 +5379,57 @@ export interface AssetClusterPod {
 }
 
 /**
+ * DescribeKeySandboxCredential返回参数结构体
+ */
+export interface DescribeKeySandboxCredentialResponse {
+  /**
+   * 凭证ID
+   */
+  CredentialId?: string
+  /**
+   * 凭证名称
+   */
+  CredentialName?: string
+  /**
+   * 凭证类型
+枚举值：
+access：常规密钥
+sts：STS临时密钥
+   */
+  CredentialType?: string
+  /**
+   * 生效机器范围
+   */
+  CredentialEffectScope?: CredentialEffectScope
+  /**
+   * 常规密钥凭据数据（打码后），CredentialType为access时返回
+补充说明：Key为原文，Value为打码后的值（保留前3后4位，中间用***替代）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Access?: Array<AccessCredentialOutput>
+  /**
+   * STS凭据数据（打码后），CredentialType为sts时返回
+补充说明：System为原文，SecretID和SecretKey为打码后的值（保留前3后4位，中间用***替代）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  STS?: STSCredentialOutput
+  /**
+   * 创建时间
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   */
+  UpdateTime?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCVMAssetInfo请求参数结构体
  */
 export interface DescribeCVMAssetInfoRequest {
@@ -5534,21 +5635,38 @@ export interface CreateRiskCenterScanTaskRequest {
 }
 
 /**
- * UpdateAlertStatusList返回参数结构体
+ * 凭证数据结构，用于列表查询和详情查询的响应
  */
-export interface UpdateAlertStatusListResponse {
+export interface KeySandboxCredential {
   /**
-   * 结果信息
+   * 凭证ID
    */
-  Msg?: string
+  CredentialId?: string
   /**
-   * 结果代码
+   * 凭证名称
    */
-  Code?: string
+  CredentialName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 凭证类型
+枚举值：
+access：常规密钥（Key/Value键值对）
+sts：STS临时密钥凭据
    */
-  RequestId?: string
+  CredentialType?: string
+  /**
+   * 生效机器范围
+   */
+  CredentialEffectScope?: CredentialEffectScope
+  /**
+   * 创建时间
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -5642,17 +5760,18 @@ export interface DescribeConfigCheckRulesResponse {
 }
 
 /**
- * DescribeAccessKeyAsset请求参数结构体
+ * 常规密钥凭据（出参专用），用于查询详情接口的响应。Value字段返回打码后的值，不暴露明文
  */
-export interface DescribeAccessKeyAssetRequest {
+export interface AccessCredentialOutput {
   /**
-   * 集团账号的成员id
+   * 凭据键名（原文），如SecretId、SecretKey、Token等
    */
-  MemberId?: Array<string>
+  Key?: string
   /**
-   * 过滤器
+   * 凭据键值（打码后）
+补充说明：保留前3后4位，中间用***替代；长度不足7位时全部替换为***
    */
-  Filter?: Filter
+  Value?: string
 }
 
 /**
@@ -5784,6 +5903,28 @@ export interface UpdateAlertStatusListRequest {
    * 被调用的集团账号的成员id
    */
   OperatedMemberId?: Array<string>
+}
+
+/**
+ * DescribeTaskLogURL请求参数结构体
+ */
+export interface DescribeTaskLogURLRequest {
+  /**
+   * 0: 预览， 1: 下载
+   */
+  Type: number
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 任务报告Id 列表
+   */
+  ReportItemKeyList?: Array<ReportItemKey>
+  /**
+   * 报告中任务id列表
+   */
+  ReportTaskIdList?: Array<ReportTaskIdList>
 }
 
 /**
@@ -6366,6 +6507,40 @@ export interface DescribeRiskRulesRequest {
    * 排序字段
    */
   By?: string
+}
+
+/**
+ * DescribeTopAttackInfo请求参数结构体
+ */
+export interface DescribeTopAttackInfoRequest {
+  /**
+   * 起始时间
+   */
+  StartTime: string
+  /**
+   * 结束时间
+   */
+  EndTime: string
+  /**
+   * 1:攻击类型 2:攻击者
+   */
+  QueryType: number
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 被调用的集团账号的成员id
+   */
+  OperatedMemberId?: Array<string>
+  /**
+   * 资产名称
+   */
+  AssetName?: string
+  /**
+   * 0: 默认全部 1:资产ID 2:域名
+   */
+  AssetType?: number
 }
 
 /**
@@ -8035,17 +8210,19 @@ export interface ServerRisk {
 }
 
 /**
- * 报告中的task_id list
+ * DescribeKeySandboxCredentialList请求参数结构体
  */
-export interface ReportTaskIdList {
+export interface DescribeKeySandboxCredentialListRequest {
   /**
-   * 任务id列表
+   * 过滤条件列表，支持的过滤条件如下：
+CredentialName - 凭证名称（模糊匹配）
+CredentialType - 凭证类型（精确匹配），取值：access、sts
    */
-  TaskIdList: Array<string>
+  Filter?: Filter
   /**
-   * 租户ID
+   * 集团账号的成员id
    */
-  AppId?: string
+  MemberId?: Array<string>
 }
 
 /**
@@ -9086,6 +9263,24 @@ export interface DescribeAccessKeyRiskDetailRequest {
    * 集团账号的成员id
    */
   MemberId?: Array<string>
+}
+
+/**
+ * 生效机器范围，用于指定凭证在哪些机器上生效
+ */
+export interface CredentialEffectScope {
+  /**
+   * 是否排除模式
+枚举值：
+0：包含模式（仅Instances中的机器生效），此时Instances必填
+1：排除模式（Instances中的机器不生效，其余机器生效），此时Instances可选（空列表表示全部机器生效）
+   */
+  Exclude?: number
+  /**
+   * 机器实例ID列表。Exclude为0时必填，表示仅这些机器可访问凭证；Exclude为1时可选，表示这些机器不可访问凭证（空列表表示全部机器生效）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Instances?: Array<string>
 }
 
 /**
@@ -10542,23 +10737,15 @@ export interface DescribeHighBaseLineRiskListRequest {
 }
 
 /**
- * DescribeTaskLogURL请求参数结构体
+ * DescribeSearchBugInfo请求参数结构体
  */
-export interface DescribeTaskLogURLRequest {
+export interface DescribeSearchBugInfoRequest {
   /**
-   * 0: 预览， 1: 下载
+   * 1的时候返回应急漏洞，2的时候返回应急漏洞列表，3的时候搭配输入CVEId字段展示该漏洞数据
    */
-  Type: number
+  Id: string
   /**
-   * 集团账号的成员id
+   * id=3时传入该参数
    */
-  MemberId?: Array<string>
-  /**
-   * 任务报告Id 列表
-   */
-  ReportItemKeyList?: Array<ReportItemKey>
-  /**
-   * 报告中任务id列表
-   */
-  ReportTaskIdList?: Array<ReportTaskIdList>
+  CVEId?: string
 }

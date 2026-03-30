@@ -188,6 +188,16 @@ it("tse.v20201207.DeleteGovernanceAliases", async function () {
     }
 })
 
+it("tse.v20201207.ModifyGovernanceInstances", async function () {
+    try {
+       const data = await client.ModifyGovernanceInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tse.v20201207.DescribeZookeeperReplicas", async function () {
     try {
        const data = await client.DescribeZookeeperReplicas({})
@@ -231,6 +241,16 @@ it("tse.v20201207.DeleteNativeGatewayServiceSource", async function () {
 it("tse.v20201207.DescribeCloudNativeAPIGatewayCertificateDetails", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayCertificateDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.CreateOrModifyCloudNativeAPIGatewayCORS", async function () {
+    try {
+       const data = await client.CreateOrModifyCloudNativeAPIGatewayCORS({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1208,9 +1228,9 @@ it("tse.v20201207.DeleteGovernanceNamespaces", async function () {
     }
 })
 
-it("tse.v20201207.ModifyGovernanceInstances", async function () {
+it("tse.v20201207.DeleteCloudNativeAPIGatewayCORS", async function () {
     try {
-       const data = await client.ModifyGovernanceInstances({})
+       const data = await client.DeleteCloudNativeAPIGatewayCORS({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1281,6 +1301,16 @@ it("tse.v20201207.DescribeNativeGatewayServerGroups", async function () {
 it("tse.v20201207.UpdateUpstreamHealthCheckConfig", async function () {
     try {
        const data = await client.UpdateUpstreamHealthCheckConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.DescribeCloudNativeAPIGatewayCORS", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGatewayCORS({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

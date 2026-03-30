@@ -768,69 +768,59 @@ export interface AiReviewTaskProhibitedAsrResult {
  */
 export interface AdaptiveDynamicStreamingTemplate {
   /**
-   * 转自适应码流模板唯一标识。
+   * <p>转自适应码流模板唯一标识。</p>
    */
   Definition?: number
   /**
-   * 模板类型，取值范围：
-<li>Preset：系统预置模板；</li>
-<li>Custom：用户自定义模板。</li>
+   * <p>模板类型，取值范围：</p><li>Preset：系统预置模板；</li><li>Custom：用户自定义模板。</li>
    */
   Type?: string
   /**
-   * 转自适应码流模板名称。
+   * <p>转自适应码流模板名称。</p>
    */
   Name?: string
   /**
-   * 转自适应码流模板描述信息。
+   * <p>转自适应码流模板描述信息。</p>
    */
   Comment?: string
   /**
-   * 自适应转码格式，取值范围：
-<li>HLS。</li>
+   * <p>自适应转码格式，取值范围：</p><li>HLS。</li>
    */
   Format?: string
   /**
-   * DRM 类型，取值范围：
-<li>SimpleAES</li>
-<li>Widevine</li>
-<li>FairPlay</li>
-如果取值为空字符串，代表不对视频做 DRM 保护。
+   * <p>DRM 类型，取值范围：</p><li>SimpleAES</li><li>Widevine</li><li>FairPlay</li><li>Widevine+FairPlay</li>如果取值为空字符串，代表不对视频做 DRM 保护。
    */
   DrmType?: string
   /**
-   * DRM 的密钥提供商，取值范围：
-<li>SDMC：华曦达；</li>
-<li>VOD：云点播。</li>
-默认值为 VOD 。
+   * <p>DRM 的密钥提供商，取值范围：</p><li>SDMC：华曦达；</li><li>VOD：云点播。</li>默认值为 VOD 。<p>华曦达服务后续逐步下线，请使用VOD DRM加密服务。</p>
    */
   DrmKeyProvider?: string
   /**
-   * 自适应转码输入流参数信息，最多输入10路流。
+   * <p>DRM的加密类型，取值范围：{&quot;cbcs&quot;, &quot;cenc&quot;}</p>
+   */
+  DrmEncryptType?: string
+  /**
+   * <p>自适应转码输入流参数信息，最多输入10路流。</p>
    */
   StreamInfos?: Array<AdaptiveStreamTemplate>
   /**
-   * 是否禁止视频低码率转高码率，取值范围：
-<li>0：否，</li>
-<li>1：是。</li>
+   * <p>是否禁止视频低码率转高码率，取值范围：</p><li>0：否，</li><li>1：是。</li>
    */
   DisableHigherVideoBitrate?: number
   /**
-   * 是否禁止视频分辨率转高分辨率，取值范围：
-<li>0：否，</li>
-<li>1：是。</li>
+   * <p>是否禁止视频分辨率转高分辨率，取值范围：</p><li>0：否，</li><li>1：是。</li>
    */
   DisableHigherVideoResolution?: number
   /**
-   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>模板创建时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   CreateTime?: string
   /**
-   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>模板最后修改时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   UpdateTime?: string
   /**
-   * 切片类型，仅当 Format 为 HLS 时有效。
+   * <p>切片类型，仅当 Format 为 HLS 时有效。</p>
    */
   SegmentType?: string
 }
@@ -3140,62 +3130,47 @@ export interface CreateAigcCustomElementResponse {
  */
 export interface CreateAdaptiveDynamicStreamingTemplateRequest {
   /**
-   * 自适应转码格式，取值范围：
-<li>HLS；</li>
-<li>MPEG-DASH。</li>
+   * <p>自适应转码格式，取值范围：</p><li>HLS；</li><li>MPEG-DASH。</li>
    */
   Format: string
   /**
-   * 自适应转码输出子流参数信息，最多输出10路子流。
-注意：各个子流的帧率必须保持一致；如果不一致，采用第一个子流的帧率作为输出帧率。
+   * <p>自适应转码输出子流参数信息，最多输出10路子流。<br>注意：各个子流的帧率必须保持一致；如果不一致，采用第一个子流的帧率作为输出帧率。</p>
    */
   StreamInfos: Array<AdaptiveStreamTemplate>
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 模板名称，长度限制：64 个字符。
+   * <p>模板名称，长度限制：64 个字符。</p>
    */
   Name?: string
   /**
-   * DRM 方案类型，取值范围：
-<li>SimpleAES</li>
-<li>Widevine</li>
-<li>FairPlay</li>
-默认值为空字符串，如果取值为空字符串，代表不对视频做 DRM 保护。
+   * <p>DRM 方案类型，取值范围：</p><li>SimpleAES</li><li>Widevine</li><li>FairPlay</li><li>Widevine+FairPlay</li>默认值为空字符串，如果取值为空字符串，代表不对视频做 DRM 保护。
    */
   DrmType?: string
   /**
-   * DRM 的密钥提供商，取值范围：
-<li>SDMC：华曦达；</li>
-<li>VOD：云点播。</li>
-默认为 VOD 。
+   * <p>DRM 的密钥提供商，取值范围：</p><li>SDMC：华曦达；</li><li>VOD：云点播。</li>默认为 VOD 。<p>华曦达服务后续逐步下线，请使用VOD DRM加密服务。</p>
    */
   DrmKeyProvider?: string
   /**
-   * 是否禁止视频低码率转高码率，取值范围：
-<li>0：否，</li>
-<li>1：是。</li>
-默认为否。
+   * <p>加密方式，可选值：<br>cbcs：Widevine，FairPlay，WideVine+FairPlay支持；<br>cenc：Widevine支持；   </p><p>若不填<br>FairPlay 默认cbcs;<br>Widevine 默认cenc;<br>WideVine+FairPlay默认cbcs;</p>
+   */
+  DrmEncryptType?: string
+  /**
+   * <p>是否禁止视频低码率转高码率，取值范围：</p><li>0：否，</li><li>1：是。</li>默认为否。
    */
   DisableHigherVideoBitrate?: number
   /**
-   * 是否禁止视频分辨率转高分辨率，取值范围：
-<li>0：否，</li>
-<li>1：是。</li>
-默认为否。
+   * <p>是否禁止视频分辨率转高分辨率，取值范围：</p><li>0：否，</li><li>1：是。</li>默认为否。
    */
   DisableHigherVideoResolution?: number
   /**
-   * 模板描述信息，长度限制：256 个字符。
+   * <p>模板描述信息，长度限制：256 个字符。</p>
    */
   Comment?: string
   /**
-   * 切片类型，当 Format 为 HLS 时有效，可选值：
-<li>ts：ts 切片；</li>
-<li>fmp4：fmp4 切片。</li>
-默认值：ts。
+   * <p>切片类型，当 Format 为 HLS 时有效，可选值：</p><li>ts：ts 切片；</li><li>fmp4：fmp4 切片。</li>默认值：ts。
    */
   SegmentType?: string
 }
@@ -12351,7 +12326,7 @@ FINISH：已完成。
  */
 export interface DescribeDrmKeyProviderInfoRequest {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
 }
@@ -15013,7 +14988,7 @@ export interface AiContentReviewTaskInput {
  */
 export interface CreateAdaptiveDynamicStreamingTemplateResponse {
   /**
-   * 自适应转码模板唯一标识。
+   * <p>自适应转码模板唯一标识。</p>
    */
   Definition?: number
   /**
@@ -18010,7 +17985,7 @@ export interface ImageEnhanceConfig {
  */
 export interface DescribeDrmKeyProviderInfoResponse {
   /**
-   * 华曦达（SDMC）相关的 DRM 密钥提供商信息。
+   * <p>华曦达（SDMC）相关的 DRM 密钥提供商信息。</p><p>华曦达服务后续逐步下线，请使用VOD DRM加密服务。</p>
    */
   SDMCInfo?: SDMCDrmKeyProviderInfo
   /**
@@ -18714,57 +18689,53 @@ export interface AiSampleWordInfo {
  */
 export interface AdaptiveDynamicStreamingInfoItem {
   /**
-   * 转自适应码流规格。
+   * <p>转自适应码流规格。</p>
    */
   Definition?: number
   /**
-   * 打包格式，取值范围：
-<li>HLS；</li>
-<li>DASH。</li>
+   * <p>打包格式，取值范围：</p><li>HLS；</li><li>DASH。</li>
    */
   Package?: string
   /**
-   * 加密类型。
+   * <p>加密类型。</p>
    */
   DrmType?: string
   /**
-   * 播放地址。
+   * <p>播放地址。</p>
    */
   Url?: string
   /**
-   * 媒体文件大小，单位：字节。
-<li>当媒体文件为 HLS 时，大小是 m3u8 和 ts 文件大小的总和；</li>
-<li>当媒体文件为 DASH 时，大小是 mpd 和分片文件大小的总和；</li>
-<li><font color=red>注意</font>：在 2022-01-10T16:00:00Z 前处理生成的自适应码流文件此字段为0。</li>
+   * <p>媒体文件大小，单位：字节。</p><li>当媒体文件为 HLS 时，大小是 m3u8 和 ts 文件大小的总和；</li><li>当媒体文件为 DASH 时，大小是 mpd 和分片文件大小的总和；</li><li><font color="red">注意</font>：在 2022-01-10T16:00:00Z 前处理生成的自适应码流文件此字段为0。</li>
    */
   Size?: number
   /**
-   * 数字水印类型。可选值：
-<li>Trace 表示经过溯源水印处理；</li>
-<li>CopyRight 表示经过版权水印处理；</li>
-<li>None 表示没有经过数字水印处理。</li>
+   * <p>数字水印类型。可选值：</p><li>Trace 表示经过溯源水印处理；</li><li>CopyRight 表示经过版权水印处理；</li><li>None 表示没有经过数字水印处理。</li>
    */
   DigitalWatermarkType?: string
   /**
-   * 子流信息列表。
+   * <p>子流信息列表。</p>
    */
   SubStreamSet?: Array<MediaSubStreamInfoItem>
   /**
-   * 版权信息。
+   * <p>版权信息。</p>
    */
   CopyRightWatermarkText?: string
   /**
-   * 数字水印模板id。
+   * <p>数字水印模板id。</p>
    */
   BlindWatermarkDefinition?: number
   /**
-   * 字幕信息列表。
+   * <p>字幕信息列表。</p>
    */
   SubtitleSet?: Array<MediaSubtitleItem>
   /**
-   * 默认字幕的唯一标识。
+   * <p>默认字幕的唯一标识。</p>
    */
   DefaultSubtitleId?: string
+  /**
+   * <p>DRM加密方法。</p>
+   */
+  DrmEncryptType?: string
 }
 
 /**
@@ -20711,11 +20682,11 @@ export interface DeleteAigcApiTokenRequest {
  */
 export interface SetDrmKeyProviderInfoRequest {
   /**
-   * 华曦达（SDMC）相关的 DRM 密钥提供商信息。
+   * <p>华曦达（SDMC）相关的 DRM 密钥提供商信息。</p><p>华曦达服务后续逐步下线，请使用VOD DRM加密服务。</p>
    */
   SDMCInfo?: SDMCDrmKeyProviderInfo
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
 }

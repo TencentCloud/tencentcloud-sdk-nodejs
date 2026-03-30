@@ -658,6 +658,44 @@ export interface UpdateProtectionModesResponse {
 }
 
 /**
+ * 大模型安全检测综合结果
+ */
+export interface LLMDetectResult {
+  /**
+   *  仅输出侧：涉敏信息
+   */
+  SensitiveResult?: Array<LLMSensitiveValueLevel>
+  /**
+   *  输入输出均检测：关键词库命中信息
+   */
+  KeyWordsResult?: Array<KeyWordInfo>
+  /**
+   * 输入输出均检测：数据分类分级结果
+   */
+  DataCategoryResult?: Array<string>
+  /**
+   *  仅输入侧检出：prompt检测的结果
+   */
+  PromptInjectionResult?: PromptDetectResult
+  /**
+   * 命中的规则ID
+   */
+  RuleId?: string
+  /**
+   * 命中的规则名称
+   */
+  RuleName?: string
+  /**
+   * 规则动作
+   */
+  Action?: string
+  /**
+   * 攻击payload
+   */
+  Payload?: string
+}
+
+/**
  * ModifyApiSecSensitiveRule返回参数结构体
  */
 export interface ModifyApiSecSensitiveRuleResponse {
@@ -902,9 +940,18 @@ export interface ModifyBotSceneStatusResponse {
 }
 
 /**
- * GetAttackDownloadRecords请求参数结构体
+ * DescribeAreaBanAreas返回参数结构体
  */
-export type GetAttackDownloadRecordsRequest = null
+export interface DescribeAreaBanAreasResponse {
+  /**
+   * 回包内容
+   */
+  Data?: DescribeAreaBanAreasRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * 免鉴权条件信息
@@ -1277,6 +1324,16 @@ export interface DeleteAttackWhiteRuleResponse {
 }
 
 /**
+ * LLMRisks
+ */
+export interface LLMRisks {
+  /**
+   * 分数
+   */
+  Risks?: Array<ClawRiskItem>
+}
+
+/**
  * DescribeWebshellStatus请求参数结构体
  */
 export interface DescribeWebshellStatusRequest {
@@ -1316,6 +1373,20 @@ export interface GetAttackHistogramResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 大模型安全检测敏感词库命中信息结构体
+ */
+export interface KeyWordInfo {
+  /**
+   * 命中的词库id
+   */
+  Id?: string
+  /**
+   * 命中的词库名称
+   */
+  Name?: string
 }
 
 /**
@@ -1859,7 +1930,7 @@ export interface UCBActionProportion {
  */
 export interface DeleteIpAccessControlRequest {
   /**
-   * 域名
+   * 域名，当操作对象为全局规则时，Domain参数应填写为"global"
    */
   Domain: string
   /**
@@ -1875,7 +1946,7 @@ export interface DeleteIpAccessControlRequest {
    */
   DeleteAll?: boolean
   /**
-   * 是否为多域名黑白名单
+   * 用于按数据来源删除黑白名单记录，非必填，默认为custom。 custom（自定义），用户在控制台手动添加的黑白名单规则 cc（CC 防护	），由 CC 防护模块自动添加的 IP 黑白名单 bot（Bot 防护），由 Bot 防护模块自动添加的 IP 黑白名单 batch（批量域名防护），批量域名维度添加的黑白名单规则
    */
   SourceType?: string
   /**
@@ -2059,33 +2130,25 @@ export interface PostAttackDownloadTaskResponse {
 }
 
 /**
- * DescribeAttackWhiteRule请求参数结构体
+ * ClawRiskItem
  */
-export interface DescribeAttackWhiteRuleRequest {
+export interface ClawRiskItem {
   /**
-   * 需要查询的域名
+   * 风险类别
    */
-  Domain: string
+  RiskType?: string
   /**
-   * 分页
+   * 规则id
    */
-  Offset: number
+  RuleId?: string
   /**
-   * 每页容量
+   * 规则名称
    */
-  Limit: number
+  RuleName?: string
   /**
-   * 排序的字段，支持user_id, signature_id, modify_time
+   * 分数
    */
-  By?: string
-  /**
-   * 排序方式
-   */
-  Order?: string
-  /**
-   * 筛选条件，支持SignatureId, MatchContent
-   */
-  Filters?: Array<FiltersItemNew>
+  Score?: number
 }
 
 /**
@@ -2521,22 +2584,29 @@ export interface DescribeHostRequest {
 }
 
 /**
- * DescribeAccessIndex
+ * GenerateDealsAndPayNew返回参数结构体
  */
-export interface AccessFullTextInfo {
+export interface GenerateDealsAndPayNewResponse {
   /**
-   * 是否大小写敏感
+   * 计费下单响应结构体
    */
-  CaseSensitive?: boolean
+  Data?: DealData
   /**
-   * 全文索引的分词符，字符串中每个字符代表一个分词符
+   * 1:成功，0:失败
    */
-  Tokenizer?: string
+  Status?: number
   /**
-   * 是否包含中文
-注意：此字段可能返回 null，表示取不到有效值。
+   * 返回message
    */
-  ContainZH?: boolean
+  ReturnMessage?: string
+  /**
+   * 购买的实例ID
+   */
+  InstanceId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3345,7 +3415,7 @@ export interface ImportIpAccessControlRequest {
    */
   Domain: string
   /**
-   * 是否为批量防护IP黑白名单，当为批量防护IP黑白名单时，取值为batch，否则为空
+   * 用于按数据来源导入黑白名单记录，必填。 custom（自定义），用户在控制台手动添加的黑白名单规则 cc（CC 防护	），由 CC 防护模块自动添加的 IP 黑白名单 bot（Bot 防护），由 Bot 防护模块自动添加的 IP 黑白名单 batch（批量域名防护），批量域名维度添加的黑白名单规则
    */
   SourceType: string
   /**
@@ -4416,18 +4486,9 @@ public：公有云域名
 }
 
 /**
- * DescribeAreaBanAreas返回参数结构体
+ * GetAttackDownloadRecords请求参数结构体
  */
-export interface DescribeAreaBanAreasResponse {
-  /**
-   * 回包内容
-   */
-  Data?: DescribeAreaBanAreasRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type GetAttackDownloadRecordsRequest = null
 
 /**
  * DescribeDomains返回参数结构体
@@ -4851,6 +4912,11 @@ export interface ApiAsset {
 }
 
 /**
+ * QueryBypassAllStatus请求参数结构体
+ */
+export type QueryBypassAllStatusRequest = null
+
+/**
  * DescribeOwaspRules请求参数结构体
  */
 export interface DescribeOwaspRulesRequest {
@@ -5140,6 +5206,20 @@ export interface DescribeLogHistogramResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 涉敏信息结果结构体
+ */
+export interface LLMSensitiveValueLevel {
+  /**
+   * 敏感数据标签，如政治、色情
+   */
+  Label?: string
+  /**
+   * 敏感数据等级，250,300，400分别代表超严格、严格、标准等级
+   */
+  Level?: number
 }
 
 /**
@@ -6357,7 +6437,7 @@ export interface ExportAccessInfo {
  */
 export interface DescribeIpAccessControlRequest {
   /**
-   * 域名
+   * 域名，当操作对象为全局规则时，Domain参数应填写为"global"
    */
   Domain: string
   /**
@@ -6395,7 +6475,7 @@ export interface DescribeIpAccessControlRequest {
    */
   Limit?: number
   /**
-   * 来源
+   * 用于按数据来源过滤黑白名单记录，非必填（默认为空字符串，表示不过滤/查询全部）。 "" (空字符串)	，不按来源过滤，返回所有记录（默认值） custom（自定义），用户在控制台手动添加的黑白名单规则 cc（CC 防护	），由 CC 防护模块自动添加的 IP 黑白名单 bot（Bot 防护），由 Bot 防护模块自动添加的 IP 黑白名单 batch（批量域名防护），批量域名维度添加的黑白名单规则 batch-group（防护对象组），防护对象组维度添加的黑白名单规则
    */
   Source?: string
   /**
@@ -6448,6 +6528,20 @@ export interface CreateRateLimitV2Response {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * prompt注入检测结果结构体
+ */
+export interface PromptDetectResult {
+  /**
+   * 检测结果
+   */
+  Result?: string
+  /**
+   * 置信度
+   */
+  Confidence?: number
 }
 
 /**
@@ -8186,6 +8280,28 @@ export interface DescribeFlowTrendResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeQClawContentSecCheck请求参数结构体
+ */
+export interface DescribeQClawContentSecCheckRequest {
+  /**
+   *  服务id,使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则
+   */
+  ServiceId: string
+  /**
+   * 要审核的内容
+   */
+  Content: ApiGuardContent
+  /**
+   * 标识用户的id，限速使用，不填，则限速会不生效
+   */
+  UserId?: string
+  /**
+   * 会话id
+   */
+  SessionId?: string
 }
 
 /**
@@ -10815,7 +10931,7 @@ export interface ModifyOwaspRuleStatusRequest {
  */
 export interface DeleteIpAccessControlV2Request {
   /**
-   * 域名
+   * 域名，当操作对象为全局规则时，Domain参数应填写为"global"
    */
   Domain: string
   /**
@@ -10827,7 +10943,7 @@ export interface DeleteIpAccessControlV2Request {
    */
   DeleteAll?: boolean
   /**
-   * batch表示为批量防护的IP黑白名单
+   * 用于按数据来源删除黑白名单记录，非必填，默认为custom。 custom（自定义），用户在控制台手动添加的黑白名单规则 cc（CC 防护	），由 CC 防护模块自动添加的 IP 黑白名单 bot（Bot 防护），由 Bot 防护模块自动添加的 IP 黑白名单 batch（批量域名防护），批量域名维度添加的黑白名单规则
    */
   SourceType?: string
   /**
@@ -11055,29 +11171,22 @@ export interface ModifyWebshellStatusResponse {
 }
 
 /**
- * GenerateDealsAndPayNew返回参数结构体
+ * DescribeAccessIndex
  */
-export interface GenerateDealsAndPayNewResponse {
+export interface AccessFullTextInfo {
   /**
-   * 计费下单响应结构体
+   * 是否大小写敏感
    */
-  Data?: DealData
+  CaseSensitive?: boolean
   /**
-   * 1:成功，0:失败
+   * 全文索引的分词符，字符串中每个字符代表一个分词符
    */
-  Status?: number
+  Tokenizer?: string
   /**
-   * 返回message
+   * 是否包含中文
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReturnMessage?: string
-  /**
-   * 购买的实例ID
-   */
-  InstanceId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ContainZH?: boolean
 }
 
 /**
@@ -11971,6 +12080,16 @@ export interface IpHitItemsData {
 }
 
 /**
+ * guard content
+ */
+export interface ApiGuardContent {
+  /**
+   * prompt
+   */
+  Prompt: string
+}
+
+/**
  * 域名的webshell开启状态
  */
 export interface WebshellStatus {
@@ -12380,6 +12499,20 @@ export interface ModifyDomainWhiteRuleRequest {
 }
 
 /**
+ * DescribeLLMContentSecCheck返回参数结构体
+ */
+export interface DescribeLLMContentSecCheckResponse {
+  /**
+   * 检测结果
+   */
+  Data?: LLMDetectResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePeakPoints请求参数结构体
  */
 export interface DescribePeakPointsRequest {
@@ -12688,9 +12821,34 @@ export interface ModifyDomainIpv6StatusRequest {
 }
 
 /**
- * QueryBypassAllStatus请求参数结构体
+ * DescribeAttackWhiteRule请求参数结构体
  */
-export type QueryBypassAllStatusRequest = null
+export interface DescribeAttackWhiteRuleRequest {
+  /**
+   * 需要查询的域名
+   */
+  Domain: string
+  /**
+   * 分页
+   */
+  Offset: number
+  /**
+   * 每页容量
+   */
+  Limit: number
+  /**
+   * 排序的字段，支持user_id, signature_id, modify_time
+   */
+  By?: string
+  /**
+   * 排序方式
+   */
+  Order?: string
+  /**
+   * 筛选条件，支持SignatureId, MatchContent
+   */
+  Filters?: Array<FiltersItemNew>
+}
 
 /**
  * DescribeAntiInfoLeakageRules返回参数结构体
@@ -13695,6 +13853,7 @@ https：使用https协议回源
   UpstreamScheme?: string
   /**
    * HTTPS回源端口,仅UpstreamScheme为http时需要填当前字段
+   * @deprecated
    */
   HttpsUpstreamPort?: string
   /**
@@ -15215,6 +15374,40 @@ export interface DescribeDomainWhiteRulesResponse {
 }
 
 /**
+ * DescribeLLMContentSecCheck请求参数结构体
+ */
+export interface DescribeLLMContentSecCheckRequest {
+  /**
+   *  服务id,使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则
+   */
+  ServiceId: string
+  /**
+   * 要审核的内容
+   */
+  Content: string
+  /**
+   * 流量类型，是入向流量还是出向流量，入向：1，出向：2；入向和出向必填
+   */
+  Type: number
+  /**
+   * 实例id，必传
+   */
+  InstanceId: string
+  /**
+   * 对话的id
+   */
+  ChatId?: string
+  /**
+   * 标识用户的id，限速使用，不填，则限速会不生效
+   */
+  UserId?: string
+  /**
+   * token使用量，不填，会采用默认的token计算方法，计算的是模型的消耗，因为该值时在出向方向上添加，即Type=2
+   */
+  TokenUsage?: number
+}
+
+/**
  * ModifyWafAutoDenyRules请求参数结构体
  */
 export interface ModifyWafAutoDenyRulesRequest {
@@ -15728,6 +15921,20 @@ export interface DescribeAttackWhiteRuleResponse {
    * 规则白名单列表
    */
   List?: Array<UserWhiteRule>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeQClawContentSecCheck返回参数结构体
+ */
+export interface DescribeQClawContentSecCheckResponse {
+  /**
+   * 检测结果
+   */
+  Data?: LLMRisks
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -165,6 +165,95 @@ export interface DeleteApplicationAndVideoLicenseResponse {
 }
 
 /**
+ * 视立方应用license
+ */
+export interface OverviewLicense {
+  /**
+   * 所属应用
+   */
+  Application?: OverviewAppInfo
+  /**
+   * license生效时间
+   */
+  StartTime?: string
+  /**
+   * license失效时间
+   */
+  EndTime?: string
+  /**
+   * license对应的功能Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FeatureId?: number
+  /**
+   * license是测试：test还是正式：formal
+   */
+  LicenseType?: string
+  /**
+   * license索引
+   */
+  LicenseId?: number
+  /**
+   * license名称
+   */
+  Name?: string
+  /**
+   * 返回还有多少秒过期，过期返回负值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RestTime?: number
+  /**
+   * 创建时间
+   */
+  CreatedAt?: string
+  /**
+   * 更新时间
+   */
+  UpdatedAt?: string
+  /**
+   * 优图套餐名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Plan?: string
+  /**
+   * licenseType
+   */
+  Type?: string
+}
+
+/**
+ * 自动续期资源info
+ */
+export interface RenewResource {
+  /**
+   * 资源Id
+   */
+  ResourceId?: string
+  /**
+   * 自动续期标记，0：默认，1：自动续期，2：不续期
+   */
+  AutoRenewFlag?: number
+  /**
+   * 资源冻结时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsolatedTimestamp?: string
+  /**
+   * 资源销毁状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Refund?: boolean
+  /**
+   * 子产品码
+   */
+  SubProductCode?: string
+  /**
+   * 资源到期时间
+   */
+  EndTime?: string
+}
+
+/**
  * license 资源信息
  */
 export interface LicenseResourceSimpleInfo {
@@ -407,6 +496,24 @@ export interface CreateActivityLicenseRequest {
    * 活动Id
    */
   Activity: string
+}
+
+/**
+ * 总览统计数据
+ */
+export interface Overview {
+  /**
+   * 过期license数量
+   */
+  Expired: number
+  /**
+   * 有效license数量
+   */
+  Valid: number
+  /**
+   * 临期license数量
+   */
+  Near: number
 }
 
 /**
@@ -670,35 +777,42 @@ export interface RenewLicenseRequest {
 }
 
 /**
- * 自动续期资源info
+ * 应用包名信息
  */
-export interface RenewResource {
+export interface OverviewAppInfo {
   /**
-   * 资源Id
+   * 应用Id
    */
-  ResourceId?: string
+  Id?: number
   /**
-   * 自动续期标记，0：默认，1：自动续期，2：不续期
+   * 应用名称
    */
-  AutoRenewFlag?: number
+  AppName?: string
   /**
-   * 资源冻结时间
+   * Ios 包名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsolatedTimestamp?: string
+  BundleId?: string
   /**
-   * 资源销毁状态
+   * Andorid 包名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Refund?: boolean
+  PackageName?: string
   /**
-   * 子产品码
+   * Mac 进程名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SubProductCode?: string
+  MacBundleId?: string
   /**
-   * 资源到期时间
+   * windows 进程名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime?: string
+  WinProcessName?: string
+  /**
+   * 域名列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DomainList?: Array<string>
 }
 
 /**
@@ -1287,6 +1401,22 @@ export interface XMagicResource {
  * DescribeLicenseList返回参数结构体
  */
 export interface DescribeLicenseListResponse {
+  /**
+   * 临期license数量
+   */
+  Count?: number
+  /**
+   * 正式license总览统计数据
+   */
+  Overview?: Overview
+  /**
+   * 临期license列表
+   */
+  LicenseList?: Array<OverviewLicense>
+  /**
+   * 测试license总览统计数据
+   */
+  TrialOverview?: Overview
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

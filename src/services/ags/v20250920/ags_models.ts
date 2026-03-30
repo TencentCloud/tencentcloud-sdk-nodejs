@@ -496,6 +496,24 @@ export interface PortConfiguration {
 }
 
 /**
+ * 沙箱自定义 dns 配置
+ */
+export interface DNSConfig {
+  /**
+   * <p>DNS 服务器地址</p><p>参数格式：需要有效 IP 地址</p><p>默认值：10.0.0.1</p>
+   */
+  Servers: Array<string>
+  /**
+   * <p>搜索域(对应 resolv.conf 的 search 指令)</p>
+   */
+  Searches?: Array<string>
+  /**
+   * <p>配置项(对应  resolv.conf 选项)</p>
+   */
+  Options?: Array<string>
+}
+
+/**
  * 沙箱工具结构体
  */
 export interface SandboxTool {
@@ -616,37 +634,41 @@ export interface StartSandboxInstanceResponse {
  */
 export interface CustomConfiguration {
   /**
-   * 镜像地址
+   * <p>镜像地址</p>
    */
   Image?: string
   /**
-   * 镜像仓库类型：`enterprise`、`personal`。
+   * <p>镜像仓库类型：<code>enterprise</code>、<code>personal</code>。</p>
    */
   ImageRegistryType?: string
   /**
-   * 启动命令
+   * <p>启动命令</p>
    */
   Command?: Array<string>
   /**
-   * 启动参数
+   * <p>启动参数</p>
    */
   Args?: Array<string>
   /**
-   * 环境变量
+   * <p>环境变量</p>
    */
   Env?: Array<EnvVar>
   /**
-   * 端口配置
+   * <p>端口配置</p>
    */
   Ports?: Array<PortConfiguration>
   /**
-   * 资源配置
+   * <p>资源配置</p>
    */
   Resources?: ResourceConfiguration
   /**
-   * 探针配置
+   * <p>探针配置</p>
    */
   Probe?: ProbeConfiguration
+  /**
+   * <p>沙箱 DNS 配置</p>
+   */
+  DNSConfig?: DNSConfig
 }
 
 /**
@@ -762,41 +784,45 @@ export interface DescribeSandboxInstanceListRequest {
  */
 export interface CustomConfigurationDetail {
   /**
-   * 镜像地址
+   * <p>镜像地址</p>
    */
   Image?: string
   /**
-   * 镜像仓库类型：`TCR`、`CCR`。
+   * <p>镜像仓库类型：<code>TCR</code>、<code>CCR</code>。</p>
    */
   ImageRegistryType?: string
   /**
-   * 镜像 Digest
+   * <p>镜像 Digest</p>
    */
   ImageDigest?: string
   /**
-   * 启动命令
+   * <p>启动命令</p>
    */
   Command?: Array<string>
   /**
-   * 启动参数
+   * <p>启动参数</p>
    */
   Args?: Array<string>
   /**
-   * 环境变量
+   * <p>环境变量</p>
    */
   Env?: Array<EnvVar>
   /**
-   * 端口配置
+   * <p>端口配置</p>
    */
   Ports?: Array<PortConfiguration>
   /**
-   * 资源配置
+   * <p>资源配置</p>
    */
   Resources?: ResourceConfiguration
   /**
-   * 探针配置
+   * <p>探针配置</p>
    */
   Probe?: ProbeConfiguration
+  /**
+   * <p>沙箱 DNS 配置</p>
+   */
+  DNSConfig?: DNSConfig
 }
 
 /**

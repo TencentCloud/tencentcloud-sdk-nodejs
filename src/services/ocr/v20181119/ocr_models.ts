@@ -1963,11 +1963,11 @@ export interface VerifyBizLicenseEnterprise4Response {
    */
   IsIdNumConsistent?: boolean
   /**
-   * <p>经营状态</p><p>枚举值：</p><ul><li>1： 开业（在营）</li><li>2： 迁出</li><li>3： 注销</li><li>4： 吊销</li><li>5： 撤销</li><li>6： 停业</li><li>0： 其他</li><li>-10002： 企业信息不正确，无法查询</li></ul>
+   * <p>经营状态</p><p>枚举值：</p><ul><li>1： 开业（在营）</li><li>2： 迁出</li><li>3： 注销</li><li>4： 吊销</li><li>5： 撤销</li><li>6： 停业</li><li>7： 撤销登记</li><li>0： 其他</li><li>/： 无法查询</li></ul>
    */
   OperatingStatus?: string
   /**
-   * <p>营业期限：一般包括营业开始时间和结束时间</p><p>参数格式：yyyy-MM-dd/yyyy-MM-dd</p><p>无固定期限的格式为：yyyy-MM-dd/<br>部分企业历史数据可能为空，将返回：/<br>企业信息不正确，无法查询，将返回：-10002</p>
+   * <p>营业期限：一般包括营业开始时间和结束时间</p><p>参数格式：yyyy-MM-dd/yyyy-MM-dd</p><p>无固定期限的格式为：yyyy-MM-dd/<br>部分企业历史数据可能为空，将返回：/<br>无法查询，将返回：/</p>
    */
   OperatingPeriod?: string
   /**
@@ -2017,35 +2017,38 @@ export interface OtherInvoiceItem {
  */
 export interface TextDetection {
   /**
-   * 识别出的文本行内容
+   * <p>识别出的文本行内容</p>
    */
-  DetectedText: string
+  DetectedText?: string
   /**
-   * 置信度 0 ~100
+   * <p>置信度 0 ~100</p>
    */
-  Confidence: number
+  Confidence?: number
   /**
-   * 文本行坐标，以四个顶点坐标表示
+   * <p>文本行坐标，以四个顶点坐标表示</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Polygon: Array<Coord>
+  Polygon?: Array<Coord>
   /**
-   * 此字段为扩展字段。
-GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。
+   * <p>此字段为扩展字段。<br>GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。</p>
    */
-  AdvancedInfo: string
+  AdvancedInfo?: string
   /**
-   * 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）
+   * <p>文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）</p>
    */
-  ItemPolygon: ItemCoord
+  ItemPolygon?: ItemCoord
   /**
-   * 识别出来的单字信息包括单字（包括单字Character和单字置信度confidence）， 支持识别的接口：GeneralBasicOCR、GeneralAccurateOCR
+   * <p>识别出来的单字信息包括单字（包括单字Character和单字置信度confidence）， 支持识别的接口：GeneralBasicOCR、GeneralAccurateOCR</p>
    */
-  Words: Array<DetectedWords>
+  Words?: Array<DetectedWords>
   /**
-   * 单字在原图中的四点坐标， 支持识别的接口：GeneralBasicOCR、GeneralAccurateOCR
+   * <p>单字在原图中的四点坐标， 支持识别的接口：GeneralBasicOCR、GeneralAccurateOCR</p>
    */
-  WordCoordPoint: Array<DetectedWordCoordPoint>
+  WordCoordPoint?: Array<DetectedWordCoordPoint>
+  /**
+   * <p>语种信息。zh:中文; en:英文; th:泰语; id:印尼语; ja:日语; ko:韩语; es:西班牙语; fr:法语; de:德语; pt:葡萄牙语; vi:越南语; ms:马来语; ru:俄语; it:意大利语; nl:荷兰语; sv:瑞典语; fi:芬兰语; no:挪威语; hu:匈牙利语; ar:阿拉伯语; hi:印地语</p>
+   */
+  Language?: string
 }
 
 /**
@@ -5543,67 +5546,65 @@ export interface RecognizeHealthCodeOCRResponse {
  */
 export interface PassportRecognizeInfos {
   /**
-   * 证件类型（护照信息页识别结果）
+   * <p>证件类型（护照信息页识别结果）</p>
    */
   Type?: string
   /**
-   * 发行国家（护照信息页识别结果）
+   * <p>发行国家（护照信息页识别结果）</p>
    */
   IssuingCountry?: string
   /**
-   * 护照号码（护照信息页识别结果）
+   * <p>护照号码（护照信息页识别结果）</p>
    */
   PassportID?: string
   /**
-   * 姓（护照信息页识别结果）
+   * <p>姓（护照信息页识别结果）</p>
    */
   Surname?: string
   /**
-   * 名（护照信息页识别结果）
+   * <p>名（护照信息页识别结果）</p>
    */
   GivenName?: string
   /**
-   * 姓名（护照信息页识别结果）
+   * <p>姓名（护照信息页识别结果）</p>
    */
   Name?: string
   /**
-   * 国籍信息（护照信息页识别结果）
+   * <p>国籍信息（护照信息页识别结果）</p>
    */
   Nationality?: string
   /**
-   * 出生日期（护照信息页识别结果）
+   * <p>出生日期（护照信息页识别结果）</p>
    */
   DateOfBirth?: string
   /**
-   * 性别（护照信息页识别结果）
+   * <p>性别（护照信息页识别结果）</p>
    */
   Sex?: string
   /**
-   * 发行日期（护照信息页识别结果）
+   * <p>发行日期（护照信息页识别结果）</p>
    */
   DateOfIssuance?: string
   /**
-   * 截止日期（护照信息页识别结果）
+   * <p>截止日期（护照信息页识别结果）</p>
    */
   DateOfExpiration?: string
   /**
-   * 持证人签名（护照信息页识别结果）
-
-仅中国大陆护照支持返回此字段，港澳台及境外护照不支持
+   * <p>持证人签名（护照信息页识别结果）</p><p>仅中国大陆护照支持返回此字段，港澳台及境外护照不支持</p>
    */
   Signature?: string
   /**
-   * 签发地点（护照信息页识别结果）
-
-仅中国大陆护照支持返回此字段，港澳台及境外护照不支持
+   * <p>签发地点（护照信息页识别结果）</p><p>仅中国大陆护照支持返回此字段，港澳台及境外护照不支持</p>
    */
   IssuePlace?: string
   /**
-   * 签发机关（护照信息页识别结果）
-
-仅中国大陆护照支持返回此字段，港澳台及境外护照不支持
+   * <p>签发机关（护照信息页识别结果）</p><p>仅中国大陆护照支持返回此字段，港澳台及境外护照不支持</p>
    */
   IssuingAuthority?: string
+  /**
+   * <p>出生地（护照信息页识别结果）</p>
+   */
+  BirthPlace?: string
 }
 
 /**

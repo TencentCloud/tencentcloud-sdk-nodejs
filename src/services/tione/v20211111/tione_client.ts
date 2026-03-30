@@ -678,7 +678,7 @@ https://cloud.tencent.com/document/product/1278/85305
    * 批量查询子账号Linux用户信息
    */
   async DescribeSubAccountLinuxUserInfos(
-    req?: DescribeSubAccountLinuxUserInfosRequest,
+    req: DescribeSubAccountLinuxUserInfosRequest,
     cb?: (error: string, rep: DescribeSubAccountLinuxUserInfosResponse) => void
   ): Promise<DescribeSubAccountLinuxUserInfosResponse> {
     return this.request("DescribeSubAccountLinuxUserInfos", req, cb)

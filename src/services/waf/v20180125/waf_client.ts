@@ -41,6 +41,7 @@ import {
   SearchLogResponse,
   ModifyUserSignatureClassResponse,
   UpdateProtectionModesResponse,
+  LLMDetectResult,
   ModifyApiSecSensitiveRuleResponse,
   CCRuleItem,
   DescribeCertificateVerifyResultResponse,
@@ -52,7 +53,7 @@ import {
   DeleteCustomWhiteRuleResponse,
   ModifyHostModeResponse,
   ModifyBotSceneStatusResponse,
-  GetAttackDownloadRecordsRequest,
+  DescribeAreaBanAreasResponse,
   ConditionInfo,
   MajorEventsPkg,
   DescribeDomainRulesRequest,
@@ -66,9 +67,11 @@ import {
   BotToken,
   UpdateRateLimitV2Request,
   DeleteAttackWhiteRuleResponse,
+  LLMRisks,
   DescribeWebshellStatusRequest,
   LogItems,
   GetAttackHistogramResponse,
+  KeyWordInfo,
   FiltersItemNew,
   DeleteExportResponse,
   PiechartItem,
@@ -98,7 +101,7 @@ import {
   DescribeCustomRuleListRequest,
   DeleteIpAccessControlV2Response,
   PostAttackDownloadTaskResponse,
-  DescribeAttackWhiteRuleRequest,
+  ClawRiskItem,
   DescribeOwaspRulesResponse,
   StrategyForAntiInfoLeak,
   AddSpartaProtectionResponse,
@@ -120,7 +123,7 @@ import {
   ModifyInstanceAttackLogPostResponse,
   UpsertCCRuleResponse,
   DescribeHostRequest,
-  AccessFullTextInfo,
+  GenerateDealsAndPayNewResponse,
   DeleteCustomRuleRequest,
   DescribeUserSignatureRuleV2Request,
   ModifyApiSecEventChangeRequest,
@@ -180,7 +183,7 @@ import {
   DescribeAccessIndexRequest,
   BotDataFilter,
   DomainInfo,
-  DescribeAreaBanAreasResponse,
+  GetAttackDownloadRecordsRequest,
   DescribeDomainsResponse,
   BotActionScopeRuleEntry,
   AddAntiFakeUrlResponse,
@@ -197,6 +200,7 @@ import {
   ModifyAreaBanAreasResponse,
   ModifyAntiFakeUrlStatusRequest,
   ApiAsset,
+  QueryBypassAllStatusRequest,
   DescribeOwaspRulesRequest,
   DescribeCCRuleListRequest,
   ResponseCode,
@@ -211,6 +215,7 @@ import {
   ModifyHostFlowModeRequest,
   GetOrganizationRoleResponse,
   DescribeLogHistogramResponse,
+  LLMSensitiveValueLevel,
   CreateHostRequest,
   ModifyInstanceAttackLogPostRequest,
   GetInstanceQpsLimitResponse,
@@ -259,6 +264,7 @@ import {
   ExportAccessInfo,
   DescribeIpAccessControlRequest,
   CreateRateLimitV2Response,
+  PromptDetectResult,
   ModifyOwaspRuleTypeActionRequest,
   ModifyWafThreatenIntelligenceRequest,
   DescribeApiListVersionTwoRequest,
@@ -333,6 +339,7 @@ import {
   SearchAttackLogRequest,
   AddCustomRuleResponse,
   DescribeFlowTrendResponse,
+  DescribeQClawContentSecCheckRequest,
   CreateIpAccessControlResponse,
   UpsertIpAccessControlRequest,
   BotSceneActionRule,
@@ -434,7 +441,7 @@ import {
   CacheUrlItems,
   ModifyUserSignatureRuleV2Request,
   ModifyWebshellStatusResponse,
-  GenerateDealsAndPayNewResponse,
+  AccessFullTextInfo,
   ModifyUserLevelRequest,
   DescribeCCRuleRequest,
   BatchOperateUserSignatureRulesRequest,
@@ -471,6 +478,7 @@ import {
   ModifyDomainPostActionResponse,
   RefreshAccessCheckResultRequest,
   IpHitItemsData,
+  ApiGuardContent,
   WebshellStatus,
   DescribeSpartaProtectionInfoResponse,
   DescribeRateLimitsV2Response,
@@ -483,6 +491,7 @@ import {
   ModifyCustomRuleRequest,
   ModifyOwaspRuleTypeLevelResponse,
   ModifyDomainWhiteRuleRequest,
+  DescribeLLMContentSecCheckResponse,
   DescribePeakPointsRequest,
   DescribeTopAttackDomainResponse,
   DescribeAntiInfoLeakRulesStrategyItem,
@@ -491,7 +500,7 @@ import {
   CreatePostCLSFlowRequest,
   CCRuleItems,
   ModifyDomainIpv6StatusRequest,
-  QueryBypassAllStatusRequest,
+  DescribeAttackWhiteRuleRequest,
   DescribeAntiInfoLeakageRulesResponse,
   AddAreaBanAreasResponse,
   DescribeScanIpResponse,
@@ -582,6 +591,7 @@ import {
   DeleteAccessExportRequest,
   DescribeTlsVersionResponse,
   DescribeDomainWhiteRulesResponse,
+  DescribeLLMContentSecCheckRequest,
   ModifyWafAutoDenyRulesRequest,
   DescribeSessionResponse,
   SearchLogRequest,
@@ -597,6 +607,7 @@ import {
   CreateOwaspWhiteRuleResponse,
   DomainURI,
   DescribeAttackWhiteRuleResponse,
+  DescribeQClawContentSecCheckResponse,
   AccessRuleKeyValueInfo,
   DescribeObjectsRequest,
   FilterCls,
@@ -1805,6 +1816,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 大模型请求内容和响应内容审核接口
+   */
+  async DescribeQClawContentSecCheck(
+    req: DescribeQClawContentSecCheckRequest,
+    cb?: (error: string, rep: DescribeQClawContentSecCheckResponse) => void
+  ): Promise<DescribeQClawContentSecCheckResponse> {
+    return this.request("DescribeQClawContentSecCheck", req, cb)
+  }
+
+  /**
    * 创建限流规则
    */
   async CreateRateLimitV2(
@@ -2285,6 +2306,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyModuleStatusResponse) => void
   ): Promise<ModifyModuleStatusResponse> {
     return this.request("ModifyModuleStatus", req, cb)
+  }
+
+  /**
+   * 大模型请求内容和响应内容审核接口
+   */
+  async DescribeLLMContentSecCheck(
+    req: DescribeLLMContentSecCheckRequest,
+    cb?: (error: string, rep: DescribeLLMContentSecCheckResponse) => void
+  ): Promise<DescribeLLMContentSecCheckResponse> {
+    return this.request("DescribeLLMContentSecCheck", req, cb)
   }
 
   /**

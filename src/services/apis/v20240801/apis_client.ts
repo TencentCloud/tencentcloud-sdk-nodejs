@@ -98,6 +98,7 @@ import {
   CreateModelServiceResponse,
   DescribeAgentCredentialsResponse,
   DeleteAgentAppMcpServersResponse,
+  PromptModerateConfigDTO,
   TargetHostDTO,
   DescribeModelsRequest,
   DescribeAgentCredentialRequest,

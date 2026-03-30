@@ -37,8 +37,10 @@ import {
   InquiryPriceResetInstancesInternetMaxBandwidthResponse,
   DescribeZonesRequest,
   Metadata,
+  ResourceCount,
   ModifyKeyPairAttributeRequest,
   AssociateSecurityGroupsRequest,
+  TerminateResourcePoolPacksRequest,
   PostPaidQuota,
   ResetInstancesTypeRequest,
   ChcHost,
@@ -46,6 +48,7 @@ import {
   DeleteLaunchTemplateVersionsRequest,
   DeleteImagesRequest,
   DeleteLaunchTemplateRequest,
+  PurchaseResourcePoolPacksResponse,
   DescribeInstancesResponse,
   DescribeHostsResponse,
   DeleteKeyPairsRequest,
@@ -58,6 +61,7 @@ import {
   RepairTaskControlRequest,
   AllocateHostsRequest,
   DescribeImageFromFamilyRequest,
+  ResourcePoolPack,
   DescribeRegionsResponse,
   ImportImageDataDisk,
   RebootInstancesRequest,
@@ -72,6 +76,8 @@ import {
   ZoneInfo,
   ModifyHpcClusterAttributeResponse,
   LaunchTemplateVersionInfo,
+  PurchaseResourcePoolPacksRequest,
+  DescribeResourcePoolPackInstancesResponse,
   InquiryPriceModifyInstancesChargeTypeResponse,
   ImportInstancesActionTimerResponse,
   DescribeKeyPairsResponse,
@@ -91,6 +97,7 @@ import {
   DescribeInstanceVncUrlRequest,
   StopInstancesResponse,
   ModifyImageSharePermissionRequest,
+  TerminateResourcePoolPacksResponse,
   DisassociateInstancesKeyPairsResponse,
   DescribeLaunchTemplateVersionsRequest,
   InquiryPriceResizeInstanceDisksRequest,
@@ -101,6 +108,7 @@ import {
   ModifyImageSharePermissionResponse,
   DescribeInstancesOperationLimitResponse,
   SyncImagesResponse,
+  ModifyChcAttributeRequest,
   DescribeZoneInstanceConfigInfosResponse,
   ModifyInstancesAttributeRequest,
   RenewHostsRequest,
@@ -110,8 +118,9 @@ import {
   StartInstancesRequest,
   Tag,
   ProgramFpgaImageResponse,
+  DescribeResourcePoolPackTypeConfigsRequest,
   DescribeInstanceInternetBandwidthConfigsResponse,
-  RunSecurityServiceEnabled,
+  DescribeResourcePoolPackTypeConfigsResponse,
   CreateHpcClusterResponse,
   Placement,
   DescribeDisasterRecoverGroupsRequest,
@@ -187,6 +196,7 @@ import {
   DescribeInstanceTypeConfigsRequest,
   InquiryPriceResetInstanceResponse,
   RunInstancesRequest,
+  DescribeResourcePoolPacksRequest,
   Filter,
   CreateHpcClusterRequest,
   InquiryPriceResetInstancesInternetMaxBandwidthRequest,
@@ -197,6 +207,7 @@ import {
   DeleteLaunchTemplateVersionsResponse,
   StartInstancesResponse,
   ModifyInstancesVpcAttributeRequest,
+  InquirePricePurchaseResourcePoolPacksResponse,
   ChargePrepaid,
   ModifyInstancesChargeTypeRequest,
   ResizeInstanceDisksRequest,
@@ -214,7 +225,7 @@ import {
   TagSpecification,
   DescribeHostsRequest,
   DescribeAccountQuotaRequest,
-  ModifyChcAttributeRequest,
+  InquirePricePurchaseResourcePoolPacksRequest,
   ModifyInstancesRenewFlagResponse,
   ModifyLaunchTemplateDefaultVersionResponse,
   DescribeInstancesStatusRequest,
@@ -248,10 +259,12 @@ import {
   InquiryPriceRenewHostsResponse,
   ResizeInstanceDisksResponse,
   LoginSettings,
+  RunSecurityServiceEnabled,
   ModifyInstancesRenewFlagRequest,
   DisassociateSecurityGroupsRequest,
   ModifyHostsAttributeRequest,
   RenewInstancesRequest,
+  DescribeResourcePoolPackInstancesRequest,
   ImportKeyPairRequest,
   SyncImage,
   KeyPair,
@@ -271,6 +284,8 @@ import {
   DescribeInstanceTypeConfigsResponse,
   DescribeInstancesActionTimerRequest,
   LaunchTemplateInfo,
+  ResourcePoolPackInstance,
+  DescribeResourcePoolPacksResponse,
   DescribeInstanceFamilyConfigsRequest,
   DescribeInstanceInternetBandwidthConfigsRequest,
   HpcClusterInfo,
@@ -353,6 +368,19 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口(PurchaseResourcePoolPacks)用于创建一个或多个实例资源池，每个资源池绑定一个整机或半整机规格的物理资源容量。
+
+* 实例资源池为剩余容量按量付费模式，购买前请确保账户余额充足。
+* 本接口为异步接口，创建请求发送成功后会返回DedicatedResourcePackIds，此时创建任务并未完成。
+     */
+  async PurchaseResourcePoolPacks(
+    req: PurchaseResourcePoolPacksRequest,
+    cb?: (error: string, rep: PurchaseResourcePoolPacksResponse) => void
+  ): Promise<PurchaseResourcePoolPacksResponse> {
+    return this.request("PurchaseResourcePoolPacks", req, cb)
+  }
+
+  /**
      * 本接口 (ImportKeyPair) 用于导入密钥对。
 
 * 本接口的功能是将密钥对导入到用户账户，并不会自动绑定到实例。如需绑定可以使用[AssociateInstancesKeyPairs](https://cloud.tencent.com/document/product/213/15698)接口。
@@ -413,6 +441,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDisasterRecoverGroupQuotaResponse) => void
   ): Promise<DescribeDisasterRecoverGroupQuotaResponse> {
     return this.request("DescribeDisasterRecoverGroupQuota", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeResourcePoolPackInstances)用于查询指定实例资源池内已创建的实例列表及其物理拓扑信息。
+   */
+  async DescribeResourcePoolPackInstances(
+    req: DescribeResourcePoolPackInstancesRequest,
+    cb?: (error: string, rep: DescribeResourcePoolPackInstancesResponse) => void
+  ): Promise<DescribeResourcePoolPackInstancesResponse> {
+    return this.request("DescribeResourcePoolPackInstances", req, cb)
   }
 
   /**
@@ -795,6 +833,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 提供导出自定义镜像到指定COS存储桶的能力
+   */
+  async ExportImages(
+    req: ExportImagesRequest,
+    cb?: (error: string, rep: ExportImagesResponse) => void
+  ): Promise<ExportImagesResponse> {
+    return this.request("ExportImages", req, cb)
+  }
+
+  /**
    * 本接口（EnterRescueMode）用于进入救援模式。
    */
   async EnterRescueMode(
@@ -876,6 +924,21 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateKeyPairResponse) => void
   ): Promise<CreateKeyPairResponse> {
     return this.request("CreateKeyPair", req, cb)
+  }
+
+  /**
+     * 本接口(TerminateResourcePoolPacks)用于销毁指定的实例资源池。
+
+* 销毁资源池不会销毁池内已创建的实例。
+* 池内实例会从专属资源池解绑，转移至公共资源池，继续按原生命周期运行。
+* 转移后无法再查询底层物理拓扑信息。
+* 释放底层物理资源并删除资源池记录。
+     */
+  async TerminateResourcePoolPacks(
+    req: TerminateResourcePoolPacksRequest,
+    cb?: (error: string, rep: TerminateResourcePoolPacksResponse) => void
+  ): Promise<TerminateResourcePoolPacksResponse> {
+    return this.request("TerminateResourcePoolPacks", req, cb)
   }
 
   /**
@@ -962,13 +1025,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeLaunchTemplates）用于查询一个或者多个实例启动模板。
+   * 本接口(DescribeResourcePoolPacks)用于查询用户已创建的实例资源池列表，包括资源池基本信息、剩余容量、底层物理拓扑信息等。
    */
-  async DescribeLaunchTemplates(
-    req: DescribeLaunchTemplatesRequest,
-    cb?: (error: string, rep: DescribeLaunchTemplatesResponse) => void
-  ): Promise<DescribeLaunchTemplatesResponse> {
-    return this.request("DescribeLaunchTemplates", req, cb)
+  async DescribeResourcePoolPacks(
+    req: DescribeResourcePoolPacksRequest,
+    cb?: (error: string, rep: DescribeResourcePoolPacksResponse) => void
+  ): Promise<DescribeResourcePoolPacksResponse> {
+    return this.request("DescribeResourcePoolPacks", req, cb)
   }
 
   /**
@@ -1146,6 +1209,16 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
   }
 
   /**
+   * 本接口(InquirePricePurchaseResourcePoolPacks)用于查询创建实例资源池的价格。
+   */
+  async InquirePricePurchaseResourcePoolPacks(
+    req: InquirePricePurchaseResourcePoolPacksRequest,
+    cb?: (error: string, rep: InquirePricePurchaseResourcePoolPacksResponse) => void
+  ): Promise<InquirePricePurchaseResourcePoolPacksResponse> {
+    return this.request("InquirePricePurchaseResourcePoolPacks", req, cb)
+  }
+
+  /**
    * 本接口(DescribeImageFromFamily) 用于查看镜像族内可用镜像信息。
    */
   async DescribeImageFromFamily(
@@ -1153,6 +1226,16 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
     cb?: (error: string, rep: DescribeImageFromFamilyResponse) => void
   ): Promise<DescribeImageFromFamilyResponse> {
     return this.request("DescribeImageFromFamily", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeLaunchTemplates）用于查询一个或者多个实例启动模板。
+   */
+  async DescribeLaunchTemplates(
+    req: DescribeLaunchTemplatesRequest,
+    cb?: (error: string, rep: DescribeLaunchTemplatesResponse) => void
+  ): Promise<DescribeLaunchTemplatesResponse> {
+    return this.request("DescribeLaunchTemplates", req, cb)
   }
 
   /**
@@ -1417,13 +1500,13 @@ https://img.qcloud.com/qcloud/app/active_vnc/index.html?InstanceVncUrl=wss%3A%2F
   }
 
   /**
-   * 提供导出自定义镜像到指定COS存储桶的能力
+   * 本接口(DescribeResourcePoolPackTypeConfigs)用于查询当前地域/可用区支持创建实例资源池的整机/半整机规格列表。
    */
-  async ExportImages(
-    req: ExportImagesRequest,
-    cb?: (error: string, rep: ExportImagesResponse) => void
-  ): Promise<ExportImagesResponse> {
-    return this.request("ExportImages", req, cb)
+  async DescribeResourcePoolPackTypeConfigs(
+    req: DescribeResourcePoolPackTypeConfigsRequest,
+    cb?: (error: string, rep: DescribeResourcePoolPackTypeConfigsResponse) => void
+  ): Promise<DescribeResourcePoolPackTypeConfigsResponse> {
+    return this.request("DescribeResourcePoolPackTypeConfigs", req, cb)
   }
 
   /**

@@ -1016,6 +1016,10 @@ export interface DescribeCloudNativeAPIGatewayResult {
    * 是否提示可升级
    */
   AvailableUpgrade?: boolean
+  /**
+   * 可回退的版本
+   */
+  AvailableRollbackVersion?: string
 }
 
 /**
@@ -1652,21 +1656,28 @@ export interface CreateGovernanceServicesRequest {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayServiceRateLimit请求参数结构体
+ * 弹性伸缩配置指标
  */
-export interface ModifyCloudNativeAPIGatewayServiceRateLimitRequest {
+export interface CloudNativeAPIGatewayStrategyAutoScalerConfigMetric {
   /**
-   * 网关ID
+   * 指标类型
+- Resource
    */
-  GatewayId: string
+  Type?: string
   /**
-   * 服务名称，或服务ID
+   * 指标资源名称
+- cpu
+- memory
    */
-  Name: string
+  ResourceName?: string
   /**
-   * 限流配置
+   * 指标目标类型，目前只支持百分比Utilization
    */
-  LimitDetail: CloudNativeAPIGatewayRateLimitDetail
+  TargetType?: string
+  /**
+   * 指标目标值
+   */
+  TargetValue?: number
 }
 
 /**
@@ -2025,6 +2036,24 @@ export interface RuleFilter {
    * header或query对应的name
    */
   Name?: string
+}
+
+/**
+ * DeleteCloudNativeAPIGatewayCORS请求参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayCORSRequest {
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   * 跨域插件绑定的资源类型：route|service
+   */
+  SourceType: string
+  /**
+   * 路由或服务的id
+   */
+  SourceId: string
 }
 
 /**
@@ -2938,6 +2967,24 @@ export interface CreateConfigFileRequest {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayCORS请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayCORSRequest {
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   * 跨域插件绑定的资源类型：route|service
+   */
+  SourceType: string
+  /**
+   * 路由或服务的id
+   */
+  SourceId: string
+}
+
+/**
  * DescribeConfigFiles返回参数结构体
  */
 export interface DescribeConfigFilesResponse {
@@ -3286,13 +3333,17 @@ export interface KongServicePreview {
 }
 
 /**
- * nacos服务端接口列表，用于云监控
+ * DescribeAutoScalerResourceStrategyBindingGroups返回参数结构体
  */
-export interface NacosServerInterface {
+export interface DescribeAutoScalerResourceStrategyBindingGroupsResponse {
   /**
-   * 接口名
+   * 云原生API网关实例策略绑定网关分组列表响应结果
    */
-  Interface?: string
+  Result?: ListCloudNativeAPIGatewayStrategyBindingGroupInfoResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4115,6 +4166,16 @@ export interface ZookeeperRegionMyIdInfo {
    * myid 的结束号段
    */
   MyIdEnd?: number
+}
+
+/**
+ * DeleteCloudNativeAPIGatewayCORS返回参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayCORSResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5104,6 +5165,56 @@ export interface ModifyNetworkBasicInfoResponse {
 }
 
 /**
+ * CreateOrModifyCloudNativeAPIGatewayCORS请求参数结构体
+ */
+export interface CreateOrModifyCloudNativeAPIGatewayCORSRequest {
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   * 跨域插件绑定的资源类型：route|service
+   */
+  SourceType: string
+  /**
+   * 路由或服务的id
+   */
+  SourceId: string
+  /**
+   * 是否启用插件
+   */
+  Enabled: boolean
+  /**
+   * 跨域 Access-Control-Allow-Origin
+   */
+  Origins?: Array<string>
+  /**
+   * 跨域 Access-Control-Allow-Headers header
+   */
+  Headers?: Array<string>
+  /**
+   * 跨域 Access-Control-Allow-Methods
+   */
+  Methods?: Array<string>
+  /**
+   * 跨域 Access-Control-Expose-Headers
+   */
+  ExposedHeaders?: Array<string>
+  /**
+   * preflight 请求缓存时间
+   */
+  MaxAge?: number
+  /**
+   * 跨域 Access-Control-Allow-Credentials
+   */
+  Credentials?: boolean
+  /**
+   * 是否把OPTIONS请求透传后端
+   */
+  PreFlightContinue?: boolean
+}
+
+/**
  * DescribeCloudNativeAPIGateway返回参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayResponse {
@@ -5663,6 +5774,52 @@ export interface Location {
 }
 
 /**
+ * 查询跨域配置出参
+ */
+export interface DescribeKongCORSResult {
+  /**
+   * 资源类型
+   */
+  SourceType?: string
+  /**
+   * 资源id
+   */
+  SourceId?: string
+  /**
+   * 是否启用
+   */
+  Enabled?: boolean
+  /**
+   * 跨域 Origins
+   */
+  Origins?: Array<string>
+  /**
+   * 跨域 Headers
+   */
+  Headers?: Array<string>
+  /**
+   * 跨域 Methods
+   */
+  Methods?: Array<string>
+  /**
+   * 跨域 ExposedHeaders
+   */
+  ExposedHeaders?: Array<string>
+  /**
+   * 跨域OPTIONS请求缓存时间
+   */
+  MaxAge?: number
+  /**
+   * 跨域请求是否允许携带身份信息
+   */
+  Credentials?: boolean
+  /**
+   * 跨域请求是否透传后端
+   */
+  PreFlightContinue?: boolean
+}
+
+/**
  * CreateEngine请求参数结构体
  */
 export interface CreateEngineRequest {
@@ -6052,6 +6209,21 @@ export interface ListCloudNativeAPIGatewayStrategyBindingGroupInfoResult {
    * 云原生API网关实例策略绑定网关分组列表
    */
   GroupInfos: Array<CloudNativeAPIGatewayStrategyBindingGroupInfo>
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayCORS返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayCORSResponse {
+  /**
+   * 出参
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: DescribeKongCORSResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7155,6 +7327,16 @@ export interface DeleteCloudNativeAPIGatewayRouteRateLimitResponse {
 }
 
 /**
+ * CreateOrModifyCloudNativeAPIGatewayCORS返回参数结构体
+ */
+export interface CreateOrModifyCloudNativeAPIGatewayCORSResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeConfigFileGroups请求参数结构体
  */
 export interface DescribeConfigFileGroupsRequest {
@@ -7450,17 +7632,13 @@ export interface ModifyCloudNativeAPIGatewayServiceResponse {
 }
 
 /**
- * DescribeAutoScalerResourceStrategyBindingGroups返回参数结构体
+ * nacos服务端接口列表，用于云监控
  */
-export interface DescribeAutoScalerResourceStrategyBindingGroupsResponse {
+export interface NacosServerInterface {
   /**
-   * 云原生API网关实例策略绑定网关分组列表响应结果
+   * 接口名
    */
-  Result?: ListCloudNativeAPIGatewayStrategyBindingGroupInfoResult
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Interface?: string
 }
 
 /**
@@ -8417,28 +8595,21 @@ export interface ModifyNetworkBasicInfoRequest {
 }
 
 /**
- * 弹性伸缩配置指标
+ * ModifyCloudNativeAPIGatewayServiceRateLimit请求参数结构体
  */
-export interface CloudNativeAPIGatewayStrategyAutoScalerConfigMetric {
+export interface ModifyCloudNativeAPIGatewayServiceRateLimitRequest {
   /**
-   * 指标类型
-- Resource
+   * 网关ID
    */
-  Type?: string
+  GatewayId: string
   /**
-   * 指标资源名称
-- cpu
-- memory
+   * 服务名称，或服务ID
    */
-  ResourceName?: string
+  Name: string
   /**
-   * 指标目标类型，目前只支持百分比Utilization
+   * 限流配置
    */
-  TargetType?: string
-  /**
-   * 指标目标值
-   */
-  TargetValue?: number
+  LimitDetail: CloudNativeAPIGatewayRateLimitDetail
 }
 
 /**

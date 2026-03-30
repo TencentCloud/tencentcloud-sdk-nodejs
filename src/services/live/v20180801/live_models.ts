@@ -2570,37 +2570,35 @@ export interface ModifyLiveStreamMonitorResponse {
  */
 export interface CreateRecordTaskRequest {
   /**
-   * 流名称。
+   * <p>流名称。</p>
    */
   StreamName: string
   /**
-   * 推流域名。
+   * <p>推流域名。</p>
    */
   DomainName: string
   /**
-   * 推流路径。
+   * <p>推流路径。</p>
    */
   AppName: string
   /**
-   * 录制任务结束时间，Unix时间戳。设置时间必须大于StartTime及当前时间，且小于当前时间+7天。
+   * <p>录制任务结束时间，Unix时间戳。设置时间必须大于StartTime及当前时间，且小于当前时间+7天。</p>
    */
   EndTime: number
   /**
-   * 录制任务开始时间，Unix时间戳。如果不填表示立即启动录制。EndTime - StartTime不能超过24小时。
+   * <p>录制任务开始时间，Unix时间戳。如果不填表示立即启动录制。EndTime - StartTime不能超过24小时。</p>
    */
   StartTime?: number
   /**
-   * 推流类型，默认0。取值：
-0-直播推流。
-1-合成流，即 A+B=C 类型混流。
+   * <p>推流类型，默认0。取值：<br>0-直播推流。<br>1-合成流，即 A+B=C 类型混流。</p>
    */
   StreamType?: number
   /**
-   * 录制模板ID，CreateLiveRecordTemplate 返回值。如果不填或者传入错误ID，则默认录制HLS格式、永久存储。
+   * <p>录制模板ID，CreateLiveRecordTemplate 返回值。如果不填或者传入错误ID，则默认录制 HLS 格式、永久存储至 VOD 主应用下。<br>示例值：0。</p>
    */
   TemplateId?: number
   /**
-   * 扩展字段，暂无定义。默认为空。
+   * <p>扩展字段，暂无定义。默认为空。</p>
    */
   Extension?: string
 }
@@ -10107,7 +10105,7 @@ export interface DescribeLiveCallbackRulesResponse {
  */
 export interface CreateRecordTaskResponse {
   /**
-   * 任务ID，全局唯一标识录制任务。返回TaskId字段说明录制任务创建成功。
+   * <p>任务ID，全局唯一标识录制任务。返回TaskId字段说明录制任务创建成功。</p>
    */
   TaskId?: string
   /**

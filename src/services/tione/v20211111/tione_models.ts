@@ -3926,6 +3926,14 @@ export interface SubAccountInfo {
    * 子账号在Linux下的用户名
    */
   LinuxUserName?: string
+  /**
+   * 是否开启 root 登录
+   */
+  EnableRootLogin?: boolean
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -7145,7 +7153,20 @@ export interface SSHConfig {
 /**
  * DescribeSubAccountLinuxUserInfos请求参数结构体
  */
-export type DescribeSubAccountLinuxUserInfosRequest = null
+export interface DescribeSubAccountLinuxUserInfosRequest {
+  /**
+   * 分页偏移量（0 表示全量）
+   */
+  Offset?: number
+  /**
+   * 每页数量（0 表示全量）
+   */
+  Limit?: number
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+}
 
 /**
  * ChatCompletion返回参数结构体
@@ -7235,6 +7256,10 @@ export interface DescribeSubAccountLinuxUserInfosResponse {
    * 子账号信息列表
    */
   SubAccountList?: Array<SubAccountInfo>
+  /**
+   * 总数（配合分页使用）
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

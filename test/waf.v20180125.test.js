@@ -1208,6 +1208,16 @@ it("waf.v20180125.DescribeProtectionModes", async function () {
     }
 })
 
+it("waf.v20180125.DescribeQClawContentSecCheck", async function () {
+    try {
+       const data = await client.DescribeQClawContentSecCheck({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.CreateRateLimitV2", async function () {
     try {
        const data = await client.CreateRateLimitV2({})
@@ -1681,6 +1691,16 @@ it("waf.v20180125.ModifyInstanceName", async function () {
 it("waf.v20180125.ModifyModuleStatus", async function () {
     try {
        const data = await client.ModifyModuleStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeLLMContentSecCheck", async function () {
+    try {
+       const data = await client.DescribeLLMContentSecCheck({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

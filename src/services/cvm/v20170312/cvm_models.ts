@@ -330,6 +330,32 @@ export interface Metadata {
 }
 
 /**
+ * 实例资源池容量
+ */
+export interface ResourceCount {
+  /**
+   * vCPU核数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Cpu?: number
+  /**
+   * 内存大小，单位：GB。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Memory?: number
+  /**
+   * GPU数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Gpu?: number
+  /**
+   * 本地盘大小，单位：GB。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Disk?: number
+}
+
+/**
  * ModifyKeyPairAttribute请求参数结构体
  */
 export interface ModifyKeyPairAttributeRequest {
@@ -361,6 +387,16 @@ export interface AssociateSecurityGroupsRequest {
    * 被绑定的`实例ID`，类似ins-lesecurk，支持指定多个实例，每次请求批量实例的上限为100。可通过 [DescribeInstances](https://cloud.tencent.com/document/api/213/15728) 接口返回值中的`InstanceId`获取。
    */
   InstanceIds: Array<string>
+}
+
+/**
+ * TerminateResourcePoolPacks请求参数结构体
+ */
+export interface TerminateResourcePoolPacksRequest {
+  /**
+   * 实例资源池ID列表，支持批量销毁。形如：rpp-6rk3550n。每次请求的实例的上限为100。
+   */
+  DedicatedResourcePackIds: Array<string>
 }
 
 /**
@@ -786,6 +822,20 @@ export interface DeleteLaunchTemplateRequest {
 }
 
 /**
+ * PurchaseResourcePoolPacks返回参数结构体
+ */
+export interface PurchaseResourcePoolPacksResponse {
+  /**
+   * 创建的实例资源池ID列表。形如：rpp-39kj2fsb。
+   */
+  DedicatedResourcePackIdSet?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeInstances返回参数结构体
  */
 export interface DescribeInstancesResponse {
@@ -1051,6 +1101,80 @@ export interface DescribeImageFromFamilyRequest {
    * 镜像族
    */
   ImageFamily?: string
+}
+
+/**
+ * 实例资源池
+ */
+export interface ResourcePoolPack {
+  /**
+   * 实例资源池ID。形如：rpp-rn99mzt2。
+   */
+  DedicatedResourcePackId?: string
+  /**
+   * 实例资源池的名称。
+   */
+  DedicatedResourcePackName?: string
+  /**
+   * 实例资源池预扣包所在可用区。形如：ap-guangzhou-6。
+返回项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a>
+   */
+  Zone?: string
+  /**
+   * 实例资源池预扣包的规格，仅支持半整机/整机规格。形如：SA9.96XLARGE1152（SA9半整机）。
+   */
+  InstanceType?: string
+  /**
+   * 实例资源池预扣包的实例类型。形如：SA9。
+   */
+  InstanceFamily?: string
+  /**
+   * 实例资源池类型。
+返回项：EXCLUSIVE (独享) | SHARED (共享)。
+   */
+  ResourcePoolPackType?: string
+  /**
+   * 实例资源池状态。
+返回项：CREATING (创建中) | ACTIVE (运行中) | FAILED (创建失败) | RETIRED (已过期)。
+   */
+  Status?: string
+  /**
+   * 实例资源池总容量。
+   */
+  TotalCapacity?: ResourceCount
+  /**
+   * 实例资源池剩余容量。
+   */
+  AvailableCapacity?: ResourceCount
+  /**
+   * 底层物理机IP（已加密）。
+   */
+  HostIp?: string
+  /**
+   * 机架ID（已加密）。
+   */
+  RackId?: string
+  /**
+   * 交换机ID（已加密）。
+   */
+  SwitchId?: string
+  /**
+   * 自动放置开关状态。开启则在不指定实例资源池创建实例时，系统会在开启了该能力的实例资源池里寻找合适的池子创建实例。关闭则在不指定实例资源池创建实例时，系统不会在该池子里创建实例，只有在指定实例资源池创建实例时，指定了该池子的ID，才允许在池子内创建实例。
+   */
+  AutoPlacement?: boolean
+  /**
+   * 自动续费标识。
+返回项：NOTIFY_AND_AUTO_RENEW (通知且自动续费) | NOTIFY_AND_MANUAL_RENEW (通知不自动续费) | DISABLE_NOTIFY_AND_MANUAL_RENEW (不通知不自动续费)。
+   */
+  RenewFlag?: string
+  /**
+   * 实例资源池预扣包创建时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。
+   */
+  StartTime?: string
+  /**
+   * 实例资源池到期时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。
+   */
+  EndTime?: string
 }
 
 /**
@@ -1332,6 +1456,72 @@ export interface LaunchTemplateVersionInfo {
    * 创建者的AppId。
    */
   CreatedBy?: string
+}
+
+/**
+ * PurchaseResourcePoolPacks请求参数结构体
+ */
+export interface PurchaseResourcePoolPacksRequest {
+  /**
+   * 实例资源池预扣包所在可用区。形如：ap-guangzhou-6。可通过[DescribeZones](https://cloud.tencent.com/document/product/213/15707)接口获取可用区列表。
+   */
+  Zone: string
+  /**
+   * 实例资源池预扣包的规格，仅支持半整机/整机规格。形如：SA9.96XLARGE1152（SA9半整机）。
+   */
+  InstanceType: string
+  /**
+   * 实例资源池预扣包的数量。1个数量代表1个半整机/整机资源池。取值范围：1-100。
+   */
+  InstanceCount: number
+  /**
+   * 实例资源池预扣包的时长，单位：月。取值范围：1-60。
+   */
+  Period: number
+  /**
+   * 实例资源池类型。取值范围：
+<li>EXCLUSIVE：独享（默认值）</li>
+<li>SHARED：共享</li>
+注意：第一期仅支持EXCLUSIVE类型。
+   */
+  ResourcePoolPackType?: string
+  /**
+   * 自动放置开关，默认开启（true）。
+<li>开启：在不指定实例资源池创建实例时，系统会在开启了该能力的实例资源池里寻找合适的池子创建实例。</li>
+<li>关闭：在不指定实例资源池创建实例时，系统不会在该池子里创建实例，只有在指定实例资源池创建实例时，指定了该池子的ID，才允许在池子内创建实例。</li>
+   */
+  AutoPlacement?: boolean
+  /**
+   * 实例资源池的名称。长度限制：1-60个字符，支持中文、英文、数字、连接线"-"、下划线"_"。
+   */
+  DedicatedResourcePoolPackName?: string
+  /**
+   * 自动续费标识。取值范围：
+<li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li>
+<li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费（默认值）</li>
+<li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li>
+   */
+  RenewFlag?: string
+  /**
+   * 试运行，用于校验请求参数是否正确。默认为false。
+<li>true：发送检查请求，不会创建实例资源池。检查项包括是否填写了必需参数，请求格式，业务限制等。如果检查不通过，则返回对应错误码；如果检查通过，则返回RequestId。</li>
+<li>false（默认值）：发送正常请求，通过检查后直接创建实例资源池。</li>
+   */
+  DryRun?: boolean
+}
+
+/**
+ * DescribeResourcePoolPackInstances返回参数结构体
+ */
+export interface DescribeResourcePoolPackInstancesResponse {
+  /**
+   * 实例资源池内已创建的实例详情列表。
+   */
+  DedicatedResourcePackInstanceSet?: Array<ResourcePoolPackInstance>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1633,6 +1823,16 @@ export interface ModifyImageSharePermissionRequest {
 }
 
 /**
+ * TerminateResourcePoolPacks返回参数结构体
+ */
+export interface TerminateResourcePoolPacksResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DisassociateInstancesKeyPairs返回参数结构体
  */
 export interface DisassociateInstancesKeyPairsResponse {
@@ -1812,6 +2012,36 @@ export interface SyncImagesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyChcAttribute请求参数结构体
+ */
+export interface ModifyChcAttributeRequest {
+  /**
+   * CHC物理服务器ID。
+   */
+  ChcIds: Array<string>
+  /**
+   * CHC物理服务器名称
+   */
+  InstanceName?: string
+  /**
+   * 服务器类型
+   */
+  DeviceType?: string
+  /**
+   * 合法字符为字母,数字, 横线和下划线
+   */
+  BmcUser?: string
+  /**
+   * 密码8-16位字符, 允许数字，字母， 和特殊字符()`~!@#$%^&*-+=_|{}[]:;'<>,.?/
+   */
+  Password?: string
+  /**
+   * bmc网络的安全组列表
+   */
+  BmcSecurityGroupIds?: Array<string>
 }
 
 /**
@@ -1995,6 +2225,22 @@ export interface ProgramFpgaImageResponse {
 }
 
 /**
+ * DescribeResourcePoolPackTypeConfigs请求参数结构体
+ */
+export interface DescribeResourcePoolPackTypeConfigsRequest {
+  /**
+   * <li><strong>zone</strong></li>
+<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。形如：ap-guangzhou-6。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：是</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<li><strong>instance-family</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例族</strong>】进行过滤。形如：SA9。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>instance-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例规格</strong>】进行过滤。形如：SA9.96XLARGE1152。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+每次请求的`Filters`的上限为10。
+   */
+  Filters: Array<Filter>
+}
+
+/**
  * DescribeInstanceInternetBandwidthConfigs返回参数结构体
  */
 export interface DescribeInstanceInternetBandwidthConfigsResponse {
@@ -2009,13 +2255,17 @@ export interface DescribeInstanceInternetBandwidthConfigsResponse {
 }
 
 /**
- * 描述了 “云安全” 服务相关的信息
+ * DescribeResourcePoolPackTypeConfigs返回参数结构体
  */
-export interface RunSecurityServiceEnabled {
+export interface DescribeResourcePoolPackTypeConfigsResponse {
   /**
-   * 是否开启[云安全](/document/product/296)服务。取值范围：<br><li>true：表示开启云安全服务<br><li>false：表示不开启云安全服务<br><br>默认取值：true。
+   * 支持实例资源池的机型规格列表。
    */
-  Enabled?: boolean
+  InstanceTypeConfigSet?: Array<InstanceTypeConfig>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2052,6 +2302,10 @@ export interface Placement {
    * 实例所属的专用宿主机ID，仅用于出参。
    */
   HostId?: string
+  /**
+   * 实例所属的实例资源池机架ID，仅用于出参。
+   */
+  RackId?: string
 }
 
 /**
@@ -4410,6 +4664,34 @@ false（默认）：发送正常请求，通过检查后直接创建实例
 }
 
 /**
+ * DescribeResourcePoolPacks请求参数结构体
+ */
+export interface DescribeResourcePoolPacksRequest {
+  /**
+   * 返回数量，默认值为10，最小值为10，最大值为100。
+   */
+  MaxResults?: number
+  /**
+   * 分页标记，用于获取下一页数据。
+   */
+  NextToken?: string
+  /**
+   * <li><strong>dedicated-resource-pack-id</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例资源池ID</strong>】进行过滤。形如：rpp-rn99mzt2。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>zone</strong></li>
+<p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤。形如：ap-guangzhou-6。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：<a href="https://cloud.tencent.com/document/product/213/6091">可用区列表</a></p>
+<li><strong>instance-family</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例类型</strong>】进行过滤。形如：SA9。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>instance-type</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例规格</strong>】进行过滤。形如：SA9.96XLARGE1152。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p>
+<li><strong>status</strong></li>
+<p style="padding-left: 30px;">按照【<strong>实例资源池状态</strong>】进行过滤。</p><p style="padding-left: 30px;">类型：String</p><p style="padding-left: 30px;">必选：否</p><p style="padding-left: 30px;">可选项：CREATING (创建中) | ACTIVE (运行中) | RETIRED (已过期)</p>
+每次请求的`Filters`的上限为10。
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * >描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
 > * 若存在多个`Filter`时，`Filter`间的关系为逻辑与（`AND`）关系。
 > * 若同一个`Filter`存在多个`Values`，同一`Filter`下`Values`间的关系为逻辑或（`OR`）关系。
@@ -4569,6 +4851,20 @@ export interface ModifyInstancesVpcAttributeRequest {
    * 是否保留主机名。默认为false。
    */
   ReserveHostName?: boolean
+}
+
+/**
+ * InquirePricePurchaseResourcePoolPacks返回参数结构体
+ */
+export interface InquirePricePurchaseResourcePoolPacksResponse {
+  /**
+   * 实例资源池价格信息。
+   */
+  Price?: ItemPrice
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5014,33 +5310,25 @@ export interface DescribeAccountQuotaRequest {
 }
 
 /**
- * ModifyChcAttribute请求参数结构体
+ * InquirePricePurchaseResourcePoolPacks请求参数结构体
  */
-export interface ModifyChcAttributeRequest {
+export interface InquirePricePurchaseResourcePoolPacksRequest {
   /**
-   * CHC物理服务器ID。
+   * 实例资源池预扣包所在可用区。形如：ap-guangzhou-6。可通过[DescribeZones](https://cloud.tencent.com/document/product/213/15707)接口获取可用区列表。
    */
-  ChcIds: Array<string>
+  Zone: string
   /**
-   * CHC物理服务器名称
+   * 实例资源池的规格，仅支持整机/半整机规格。形如：SA9.96XLARGE1152。
    */
-  InstanceName?: string
+  InstanceType: string
   /**
-   * 服务器类型
+   * 实例资源池的数量。1个数量代表1个半整机/整机资源池。
    */
-  DeviceType?: string
+  InstanceCount: number
   /**
-   * 合法字符为字母,数字, 横线和下划线
+   * 实例资源池的时长，单位：月。取值范围：1-60。
    */
-  BmcUser?: string
-  /**
-   * 密码8-16位字符, 允许数字，字母， 和特殊字符()`~!@#$%^&*-+=_|{}[]:;'<>,.?/
-   */
-  Password?: string
-  /**
-   * bmc网络的安全组列表
-   */
-  BmcSecurityGroupIds?: Array<string>
+  Period: number
 }
 
 /**
@@ -5569,6 +5857,16 @@ export interface LoginSettings {
 }
 
 /**
+ * 描述了 “云安全” 服务相关的信息
+ */
+export interface RunSecurityServiceEnabled {
+  /**
+   * 是否开启[云安全](/document/product/296)服务。取值范围：<br><li>true：表示开启云安全服务<br><li>false：表示不开启云安全服务<br><br>默认取值：true。
+   */
+  Enabled?: boolean
+}
+
+/**
  * ModifyInstancesRenewFlag请求参数结构体
  */
 export interface ModifyInstancesRenewFlagRequest {
@@ -5635,6 +5933,16 @@ export interface RenewInstancesRequest {
    * 是否续费弹性数据盘。取值范围：<br><li>true：表示续费包年包月实例同时续费其挂载的弹性数据盘</li><li>false：表示续费包年包月实例同时不再续费其挂载的弹性数据盘</li><br>默认取值：true。
    */
   RenewPortableDataDisk?: boolean
+}
+
+/**
+ * DescribeResourcePoolPackInstances请求参数结构体
+ */
+export interface DescribeResourcePoolPackInstancesRequest {
+  /**
+   * 实例资源池ID列表。形如：rpp-39kj2fsb。每次请求的实例的上限为100。
+   */
+  DedicatedResourcePackIds: Array<string>
 }
 
 /**
@@ -6020,6 +6328,51 @@ export interface LaunchTemplateInfo {
    * 创建该模板的时间。
    */
   CreationTime?: string
+}
+
+/**
+ * 描述实例资源池内已创建实例的信息
+ */
+export interface ResourcePoolPackInstance {
+  /**
+   * 实例资源池ID。形如：rpp-fb7bzcyt。
+   */
+  DedicatedResourcePackId?: string
+  /**
+   * 实例资源池内的实例ID列表。形如：["ins-5u8lxsum"]。
+   */
+  InstanceIdSet?: Array<string>
+  /**
+   * 实例族。形如：SA9。
+   */
+  InstanceFamily?: string
+  /**
+   * 实例规格。形如：SA9.96XLARGE1152。
+   */
+  InstanceType?: string
+  /**
+   * 可用区。形如：ap-guangzhou-6。
+   */
+  Zone?: string
+}
+
+/**
+ * DescribeResourcePoolPacks返回参数结构体
+ */
+export interface DescribeResourcePoolPacksResponse {
+  /**
+   * 符合条件的实例资源池列表。
+   */
+  DedicatedResourcePackSet?: Array<ResourcePoolPack>
+  /**
+   * 下一页数据的标记，用于分页查询。值为空时表示已到最后一页。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NextToken?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

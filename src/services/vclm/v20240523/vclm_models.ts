@@ -344,19 +344,19 @@ export interface DescribeVideoFaceFusionJobRequest {
  */
 export interface FaceRect {
   /**
-   * 人脸框左上角横坐标。
+   * <p>人脸框左上角横坐标。</p>
    */
   X?: number
   /**
-   * 人脸框左上角纵坐标。
+   * <p>人脸框左上角纵坐标。</p>
    */
   Y?: number
   /**
-   * 人脸框宽度。
+   * <p>人脸框宽度。<br>单位：px</p>
    */
   Width?: number
   /**
-   * 人脸框高度。
+   * <p>人脸框高度。<br>单位：px</p>
    */
   Height?: number
 }

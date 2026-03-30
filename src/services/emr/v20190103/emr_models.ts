@@ -6464,6 +6464,10 @@ export interface StopParams {
    * 线程数
    */
   ThreadCount?: number
+  /**
+   * 安全停止超时时间，单位秒
+   */
+  GraceDownTime?: number
 }
 
 /**

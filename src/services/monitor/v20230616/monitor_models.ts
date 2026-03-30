@@ -85,18 +85,34 @@ Trigger 告警触发; Recovery 告警恢复
 }
 
 /**
- * 企业微信机器人通知模板的匹配器
+ * 分页结果参数
  */
-export interface WeWorkRobotNoticeTmplMatcher {
+export interface PageByNoResult {
   /**
-   * 匹配状态 Invalid;
-Trigger 告警触发; Recovery 告警恢复
+   * 总共有多少数据
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  MatchingStatus: Array<string>
+  TotalCount?: number
   /**
-   * 模板配置
+   * 总共有多少个分页
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Template: WeWorkRobotNoticeTmpl
+  TotalPage?: number
+  /**
+   * 当前的分页号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrentPageNo?: number
+  /**
+   * 【已弃用】是否遍历到末尾
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  IsEnd?: boolean
+  /**
+   * 是否遍历到末尾
+   */
+  End?: boolean
 }
 
 /**
@@ -193,52 +209,24 @@ export interface AIWorkbenchSREDigitalTwinTask {
 }
 
 /**
- * 自定义通知内容模板
+ * 接受人详情信息
  */
-export interface NoticeContentTmpl {
+export interface ChannelsReceivers {
   /**
-   * 自定义通知内容模板id，唯一id
+   * 通知渠道名称
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TmplID?: string
+  ChannelName?: string
   /**
-   * 自定义通知内容模板名
+   * 接收者
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TmplName?: string
+  Receivers?: Array<string>
   /**
-   * 通知内容
+   * 发送结果,0-无效,1-成功,2-失败,3-无需发送
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TmplContents?: NoticeContentTmplItem
-  /**
-   * Unix时间戳，秒
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: number
-  /**
-   * Unix时间戳，秒
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UpdateTime?: number
-  /**
-   * 最后修改人
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LastModifier?: string
-  /**
-   * 创建人
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Creator?: string
-  /**
-   * 监控类型
-   */
-  MonitorType?: string
-  /**
-   * 模板语言 en/zh
-   */
-  TmplLanguage?: string
+  SendStatus?: string
 }
 
 /**
@@ -271,6 +259,20 @@ export interface AIWorkbenchSREDigitalTwinWorkLogList {
    * 总数
    */
   Total?: number
+}
+
+/**
+ * 通知历史中关联的通知模板信息
+ */
+export interface NotifyRelatedNotice {
+  /**
+   * 通知模板ID
+   */
+  NoticeId?: string
+  /**
+   * 通知模板的名称
+   */
+  NoticeName?: string
 }
 
 /**
@@ -358,6 +360,20 @@ export interface NoticeContentTmplBindPolicyCount {
    * 绑定告警策略数量
    */
   BindCount?: number
+}
+
+/**
+ * 告警中的Label
+ */
+export interface AlarmLable {
+  /**
+   * label name
+   */
+  Name?: string
+  /**
+   * label value
+   */
+  Value?: string
 }
 
 /**
@@ -528,6 +544,14 @@ export interface PagerDutyRobotNoticeTmplHeader {
  */
 export interface DescribeAlarmNotifyHistoriesResponse {
   /**
+   * 告警历史
+   */
+  AlarmNotifyHistoryList?: Array<AlarmNotifyHistory>
+  /**
+   * 分页情况
+   */
+  PageResult?: PageByNoResult
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -658,6 +682,96 @@ export interface AIWorkbenchSREDigitalTwinWorkLogDetail {
    * 工作日志相关对话ID
    */
   DialogID?: number
+}
+
+/**
+ * 企业微信机器人通知模板的匹配器
+ */
+export interface WeWorkRobotNoticeTmplMatcher {
+  /**
+   * 匹配状态 Invalid;
+Trigger 告警触发; Recovery 告警恢复
+   */
+  MatchingStatus: Array<string>
+  /**
+   * 模板配置
+   */
+  Template: WeWorkRobotNoticeTmpl
+}
+
+/**
+ * 单个告警通知历史
+ */
+export interface AlarmNotifyHistory {
+  /**
+   * 通知的唯一ID
+   */
+  NotifyId?: string
+  /**
+   * 告警策略ID
+   */
+  PolicyId?: string
+  /**
+   * 告警周期iD
+   */
+  SessionId?: string
+  /**
+   * 通知时间 unix秒级时间戳
+   */
+  NotifyTime?: number
+  /**
+   * 触发时间 unix秒级时间戳
+   */
+  TriggerTime?: number
+  /**
+   * 告警级别 None 非分级告警级别; Note 提示级别; Warn 严重级别; Serious 紧急级别
+   */
+  TriggerLevel?: string
+  /**
+   * 告警内容
+   */
+  AlarmContent?: string
+  /**
+   * 告警对象
+   */
+  AlarmObject?: string
+  /**
+   * 本次告警通知涉及到的渠道合集
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChannelSet?: Array<string>
+  /**
+   * 渠道的接收人信息
+   */
+  ChannelsReceivers?: Array<ChannelsReceivers>
+  /**
+   * 告警策略名称
+   */
+  PolicyName?: string
+  /**
+   * Prometheus实例ID, 仅当 MT_PROME 时有效
+   */
+  PromeInstanceID?: string
+  /**
+   * Prometheus实例所在的地域, 仅当 MT_PROME 时有效
+   */
+  PromeInstanceRegion?: string
+  /**
+   * 通知模板相关的配置信息
+   */
+  Notices?: Array<NotifyRelatedNotice>
+  /**
+   * 告警触发状态  Trigger 告警状态触发; Recovery 告警状态恢复
+   */
+  TriggerStatus?: string
+  /**
+   * 与当前Prometheus通知历史相关控制台页面地址，仅当 MR_PROME 时有效
+   */
+  PromeConsoleURL?: string
+  /**
+   * 告警的lable
+   */
+  Labels?: Array<AlarmLable>
 }
 
 /**
@@ -899,4 +1013,53 @@ export interface DescribeAIWorkbenchSREDigitalTwinWorkLogDetailResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 自定义通知内容模板
+ */
+export interface NoticeContentTmpl {
+  /**
+   * 自定义通知内容模板id，唯一id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TmplID?: string
+  /**
+   * 自定义通知内容模板名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TmplName?: string
+  /**
+   * 通知内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TmplContents?: NoticeContentTmplItem
+  /**
+   * Unix时间戳，秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * Unix时间戳，秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: number
+  /**
+   * 最后修改人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastModifier?: string
+  /**
+   * 创建人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Creator?: string
+  /**
+   * 监控类型
+   */
+  MonitorType?: string
+  /**
+   * 模板语言 en/zh
+   */
+  TmplLanguage?: string
 }

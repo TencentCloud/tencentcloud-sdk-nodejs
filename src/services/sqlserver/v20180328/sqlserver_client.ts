@@ -59,6 +59,7 @@ import {
   SwitchCloudInstanceHARequest,
   DescribeInstanceByOrdersResponse,
   CreateReadOnlyDBInstancesResponse,
+  CreateExportTaskRequest,
   CreatePublishSubscribeResponse,
   DescribeInstanceParamsRequest,
   TerminateDBInstanceRequest,
@@ -67,6 +68,7 @@ import {
   AccountPassword,
   DeleteAccountRequest,
   DescribeDBCharsetsRequest,
+  RestoreInstanceRequest,
   StartIncrementalMigrationResponse,
   ModifyDBInstanceNetworkResponse,
   AssociateSecurityGroupsResponse,
@@ -82,7 +84,9 @@ import {
   DescribeUpgradeInstanceCheckResponse,
   DescribeRestoreTimeRangeResponse,
   ModifyDatabasePrivilegeResponse,
+  CloseLogResponse,
   CreateIncrementalMigrationResponse,
+  RunMigrationResponse,
   DescribeZonesResponse,
   UpgradeDBInstanceRequest,
   ModifyDBInstanceSSLResponse,
@@ -95,8 +99,10 @@ import {
   BackupFile,
   DescribeRegularBackupPlanResponse,
   InquiryPriceUpgradeDBInstanceResponse,
+  DescribeLogsResponse,
   ModifyMigrationRequest,
   CrossBackupAddr,
+  DescribeExportTasksRequest,
   QueryMigrationCheckProcessRequest,
   RestartDBInstanceResponse,
   DescribeRollbackTimeResponse,
@@ -113,6 +119,7 @@ import {
   CreateDBInstancesResponse,
   DeleteAccountResponse,
   TDEConfigAttribute,
+  DeleteExportTaskResponse,
   SummaryDetailRes,
   ModifyDReadableRequest,
   DeleteBusinessIntelligenceFileRequest,
@@ -126,7 +133,7 @@ import {
   DeleteIncrementalMigrationRequest,
   CutXEventsResponse,
   DescribeBackupsRequest,
-  RestoreInstanceRequest,
+  DescribeInstanceParamRecordsResponse,
   ModifyDatabaseShrinkMDFRequest,
   DescribeInstanceTradeParameterResponse,
   RunMigrationRequest,
@@ -139,8 +146,10 @@ import {
   ModifyDBEncryptAttributesResponse,
   ModifyMaintenanceSpanRequest,
   RecycleDBInstanceRequest,
+  LogFilter,
   DescribeOrdersResponse,
   ModifyCloseWanIpRequest,
+  DescribeLogInstanceListResponse,
   InterInstanceFlow,
   ModifyDBInstanceNoteResponse,
   Parameter,
@@ -151,7 +160,6 @@ import {
   ModifyInstanceParamRequest,
   DescribeCrossRegionZoneResponse,
   MigrateSource,
-  DescribeProductConfigResponse,
   ModifyBackupMigrationResponse,
   ReadOnlyGroup,
   DescribeDBsNormalResponse,
@@ -161,6 +169,7 @@ import {
   CompleteExpansionRequest,
   ModifyDatabaseMdfRequest,
   DescribeBackupsResponse,
+  CreateExportTaskResponse,
   StopMigrationRequest,
   TerminateDBInstanceResponse,
   ModifyDBRemarkRequest,
@@ -180,14 +189,16 @@ import {
   DescribeBackupCommandResponse,
   CreateBasicDBInstancesRequest,
   DescribeDBInstancesAttributeResponse,
+  ExportFile,
   Backup,
   OpenInterCommunicationRequest,
   QueryMigrationCheckProcessResponse,
   ModifyDBInstanceNameResponse,
-  BalanceReadOnlyGroupResponse,
+  DescribeProductConfigResponse,
   DescribeOrdersRequest,
   CreateBackupMigrationResponse,
   DescribeMaintenanceSpanRequest,
+  DeliverSummary,
   ModifyAccountRemarkRequest,
   DeletePublishSubscribeResponse,
   Price,
@@ -201,6 +212,7 @@ import {
   ModifyReadOnlyGroupDetailsRequest,
   SlowLog,
   DescribeInquiryPriceParameterRequest,
+  LogInstance,
   DescribeUploadBackupInfoRequest,
   DescribeAccountsResponse,
   DeleteDBInstanceResponse,
@@ -210,6 +222,8 @@ import {
   DisassociateSecurityGroupsResponse,
   DescribeHASwitchLogResponse,
   ModifyBackupMigrationRequest,
+  TagList,
+  DescribeLogsRequest,
   CloneDBResponse,
   CreateBasicDBInstancesResponse,
   DataBasePrivilegeModifyInfo,
@@ -219,7 +233,8 @@ import {
   DeletePublishSubscribeRequest,
   StartBackupMigrationResponse,
   ModifyOpenWanIpResponse,
-  RunMigrationResponse,
+  DeleteExportTaskRequest,
+  OpenLogRequest,
   DescribeProductConfigRequest,
   CreateAccountRequest,
   DescribeReadOnlyGroupByReadOnlyInstanceResponse,
@@ -255,8 +270,10 @@ import {
   ReadOnlyInstanceWeightPair,
   DescribeBusinessIntelligenceFileRequest,
   Events,
+  DescribeExportTasksResponse,
   RecycleReadOnlyGroupRequest,
   AccountDetail,
+  InstanceInfo,
   DescribeDBInstanceInterRequest,
   ModifyDatabaseCTResponse,
   SwitchLog,
@@ -277,6 +294,7 @@ import {
   DescribeCrossRegionZoneRequest,
   ModifyReadOnlyGroupDetailsResponse,
   DescribeBackupStatisticalRequest,
+  RestoreTask,
   ModifyDBInstanceProjectRequest,
   MigrationStep,
   RenewPostpaidDBInstanceRequest,
@@ -285,6 +303,7 @@ import {
   DescribeReadOnlyGroupDetailsRequest,
   CreateDBInstancesRequest,
   ModifyCrossBackupStrategyRequest,
+  OpenLogResponse,
   DescribeReadOnlyGroupAutoWeightResponse,
   DrZoneInfo,
   ModifyBackupStrategyRequest,
@@ -293,7 +312,7 @@ import {
   CreateMigrationResponse,
   DescribeCollationTimeZoneRequest,
   ModifyDBInstanceNoteRequest,
-  DeleteDBResponse,
+  RegionInfo,
   ModifyIncrementalMigrationRequest,
   DescribeDBSecurityGroupsResponse,
   CreateIncrementalMigrationRequest,
@@ -317,13 +336,15 @@ import {
   PublishSubscribe,
   DescribeRestoreTaskResponse,
   DescribeCrossRegionsRequest,
+  ModifyLogResponse,
   OpenInterCommunicationResponse,
-  DescribeDatabaseNamesRequest,
+  ResetAccountPasswordRequest,
   DBCreateInfo,
   ModifyDatabaseShrinkMDFResponse,
   DescribeDatabaseNamesResponse,
   RecycleReadOnlyGroupResponse,
   DescribeHASwitchLogRequest,
+  CloseLogRequest,
   SlowlogInfo,
   DescribeMigrationsResponse,
   DescribeProjectSecurityGroupsResponse,
@@ -347,6 +368,7 @@ import {
   ModifyCloseWanIpResponse,
   ModifyDBInstanceSecurityGroupsResponse,
   DescribeDBPrivilegeByAccountRequest,
+  LogResult,
   ReadOnlyInstance,
   MigrateDetail,
   DescribeBackupMigrationRequest,
@@ -360,13 +382,13 @@ import {
   DbNormalDetail,
   CreateBackupResponse,
   DescribeBackupMigrationResponse,
-  RestoreTask,
+  BalanceReadOnlyGroupResponse,
   DescribeUploadBackupInfoResponse,
   OldVip,
   StartMigrationCheckRequest,
+  Filter,
   DescribeBackupCommandRequest,
   CrossSummaryDetailRes,
-  DescribeInstanceParamRecordsResponse,
   DescribeBackupSummaryRequest,
   RenewDBInstanceResponse,
   DescribeReadOnlyGroupAutoWeightRequest,
@@ -379,13 +401,15 @@ import {
   CloneDBRequest,
   DescribeMigrationDetailResponse,
   DeleteDBInstanceRequest,
-  RegionInfo,
+  DescribeLogInstanceListRequest,
+  DeleteDBResponse,
   CreateDBResponse,
   CreateBusinessDBInstancesRequest,
-  ResetAccountPasswordRequest,
+  DescribeDatabaseNamesRequest,
   DescribeSlowlogsRequest,
   ModifyDReadableResponse,
   StopMigrationResponse,
+  ModifyLogRequest,
   UpgradeDBInstanceResponse,
   DescribePublishSubscribeResponse,
   ModifyDBRemarkResponse,
@@ -584,13 +608,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeMaintenanceSpan）根据实例ID查询该实例的可维护时间窗。
+   * 本接口（DescribeRegularBackupPlan）用于查询实例定期备份保留计划
    */
-  async DescribeMaintenanceSpan(
-    req: DescribeMaintenanceSpanRequest,
-    cb?: (error: string, rep: DescribeMaintenanceSpanResponse) => void
-  ): Promise<DescribeMaintenanceSpanResponse> {
-    return this.request("DescribeMaintenanceSpan", req, cb)
+  async DescribeRegularBackupPlan(
+    req: DescribeRegularBackupPlanRequest,
+    cb?: (error: string, rep: DescribeRegularBackupPlanResponse) => void
+  ): Promise<DescribeRegularBackupPlanResponse> {
+    return this.request("DescribeRegularBackupPlan", req, cb)
   }
 
   /**
@@ -624,13 +648,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeRegularBackupPlan）用于查询实例定期备份保留计划
+   * 本接口（DescribeMaintenanceSpan）根据实例ID查询该实例的可维护时间窗。
    */
-  async DescribeRegularBackupPlan(
-    req: DescribeRegularBackupPlanRequest,
-    cb?: (error: string, rep: DescribeRegularBackupPlanResponse) => void
-  ): Promise<DescribeRegularBackupPlanResponse> {
-    return this.request("DescribeRegularBackupPlan", req, cb)
+  async DescribeMaintenanceSpan(
+    req: DescribeMaintenanceSpanRequest,
+    cb?: (error: string, rep: DescribeMaintenanceSpanResponse) => void
+  ): Promise<DescribeMaintenanceSpanResponse> {
+    return this.request("DescribeMaintenanceSpan", req, cb)
   }
 
   /**
@@ -731,6 +755,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisassociateSecurityGroupsResponse) => void
   ): Promise<DisassociateSecurityGroupsResponse> {
     return this.request("DisassociateSecurityGroups", req, cb)
+  }
+
+  /**
+   * 查询日志
+   */
+  async DescribeLogs(
+    req: DescribeLogsRequest,
+    cb?: (error: string, rep: DescribeLogsResponse) => void
+  ): Promise<DescribeLogsResponse> {
+    return this.request("DescribeLogs", req, cb)
   }
 
   /**
@@ -851,6 +885,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIncrementalMigrationResponse) => void
   ): Promise<DescribeIncrementalMigrationResponse> {
     return this.request("DescribeIncrementalMigration", req, cb)
+  }
+
+  /**
+   * 删除日志下载任务
+   */
+  async DeleteExportTask(
+    req: DeleteExportTaskRequest,
+    cb?: (error: string, rep: DeleteExportTaskResponse) => void
+  ): Promise<DeleteExportTaskResponse> {
+    return this.request("DeleteExportTask", req, cb)
   }
 
   /**
@@ -1306,6 +1350,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改日志
+   */
+  async ModifyLog(
+    req: ModifyLogRequest,
+    cb?: (error: string, rep: ModifyLogResponse) => void
+  ): Promise<ModifyLogResponse> {
+    return this.request("ModifyLog", req, cb)
+  }
+
+  /**
+   * 查询日志下载任务
+   */
+  async DescribeExportTasks(
+    req: DescribeExportTasksRequest,
+    cb?: (error: string, rep: DescribeExportTasksResponse) => void
+  ): Promise<DescribeExportTasksResponse> {
+    return this.request("DescribeExportTasks", req, cb)
+  }
+
+  /**
    * 本接口（OpenInterCommunication）用于打开实例的互通，实例互通可以实现商业智能服务相互联通。
    */
   async OpenInterCommunication(
@@ -1446,6 +1510,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(SwitchCloudInstanceHA)用于手动主备切换。
+   */
+  async SwitchCloudInstanceHA(
+    req: SwitchCloudInstanceHARequest,
+    cb?: (error: string, rep: SwitchCloudInstanceHAResponse) => void
+  ): Promise<SwitchCloudInstanceHAResponse> {
+    return this.request("SwitchCloudInstanceHA", req, cb)
+  }
+
+  /**
    * 本接口（DescribeMigrationDatabases）的作用是查询待迁移数据库列表
    */
   async DescribeMigrationDatabases(
@@ -1486,13 +1560,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(SwitchCloudInstanceHA)用于手动主备切换。
+   * 关闭日志
    */
-  async SwitchCloudInstanceHA(
-    req: SwitchCloudInstanceHARequest,
-    cb?: (error: string, rep: SwitchCloudInstanceHAResponse) => void
-  ): Promise<SwitchCloudInstanceHAResponse> {
-    return this.request("SwitchCloudInstanceHA", req, cb)
+  async CloseLog(
+    req: CloseLogRequest,
+    cb?: (error: string, rep: CloseLogResponse) => void
+  ): Promise<CloseLogResponse> {
+    return this.request("CloseLog", req, cb)
   }
 
   /**
@@ -1546,6 +1620,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建日志下载任务
+   */
+  async CreateExportTask(
+    req: CreateExportTaskRequest,
+    cb?: (error: string, rep: CreateExportTaskResponse) => void
+  ): Promise<CreateExportTaskResponse> {
+    return this.request("CreateExportTask", req, cb)
+  }
+
+  /**
    * 本接口（DescribeInstanceTradeParameter）用于查询实例的计费参数
    */
   async DescribeInstanceTradeParameter(
@@ -1563,6 +1647,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBackupMonitorResponse) => void
   ): Promise<DescribeBackupMonitorResponse> {
     return this.request("DescribeBackupMonitor", req, cb)
+  }
+
+  /**
+   * 日志实例列表查询
+   */
+  async DescribeLogInstanceList(
+    req: DescribeLogInstanceListRequest,
+    cb?: (error: string, rep: DescribeLogInstanceListResponse) => void
+  ): Promise<DescribeLogInstanceListResponse> {
+    return this.request("DescribeLogInstanceList", req, cb)
   }
 
   /**
@@ -1613,6 +1707,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAccountResponse) => void
   ): Promise<DeleteAccountResponse> {
     return this.request("DeleteAccount", req, cb)
+  }
+
+  /**
+   * 开启审计日志
+   */
+  async OpenLog(
+    req: OpenLogRequest,
+    cb?: (error: string, rep: OpenLogResponse) => void
+  ): Promise<OpenLogResponse> {
+    return this.request("OpenLog", req, cb)
   }
 
   /**

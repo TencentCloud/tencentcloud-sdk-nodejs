@@ -28,7 +28,7 @@ export interface CreatePrivilegeCodeRequest {
    */
   DomainInstanceId?: string
   /**
-   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios ）；默认值0
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)
    */
   OsType?: number
 }
@@ -1263,7 +1263,7 @@ export interface DescribeDeviceChildGroupsRequest {
    */
   ParentId?: number
   /**
-   * 操作系统类型（0：win，1：linux，2：mac，4：android，5：ios；默认0：系统win）
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)
    */
   OsType?: number
 }

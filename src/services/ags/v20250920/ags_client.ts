@@ -42,6 +42,7 @@ import {
   NetworkConfiguration,
   DeleteSandboxToolResponse,
   PortConfiguration,
+  DNSConfig,
   SandboxTool,
   MountOption,
   Filter,
