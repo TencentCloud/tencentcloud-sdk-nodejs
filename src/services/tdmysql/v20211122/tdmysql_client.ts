@@ -117,7 +117,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 可恢复时间查询
+   * 获取可恢复时间 DescribeDBSAvailableRecoveryTime
    */
   async DescribeDBSAvailableRecoveryTime(
     req: DescribeDBSAvailableRecoveryTimeRequest,
@@ -127,7 +127,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改备份集备注
+   * 修改实例备份备注 ModifyDBSBackupSetComment
    */
   async ModifyDBSBackupSetComment(
     req: ModifyDBSBackupSetCommentRequest,
@@ -137,7 +137,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除实例备份集
+   * 删除实例手工备份 DeleteDBSBackupSets
    */
   async DeleteDBSBackupSets(
     req: DeleteDBSBackupSetsRequest,
@@ -147,7 +147,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例备份策略
+   * 修改实例备份策略 ModifyDBSBackupPolicy
    */
   async ModifyDBSBackupPolicy(
     req: ModifyDBSBackupPolicyRequest,
@@ -177,7 +177,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建实例备份集
+   * 创建实例手工备份  CreateDBSBackup
    */
   async CreateDBSBackup(
     req: CreateDBSBackupRequest,
@@ -207,7 +207,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例克隆列表
+   * 查询实例克隆列表 DescribeDBSCloneInstances
    */
   async DescribeDBSCloneInstances(
     req: DescribeDBSCloneInstancesRequest,

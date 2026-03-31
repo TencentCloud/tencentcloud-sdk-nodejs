@@ -2636,6 +2636,14 @@ UpdateFailed：更新失败
    * 腾讯云标签
    */
   Tags?: Array<Tag>
+  /**
+   * 镜像缓存类型
+   */
+  ImageCacheType?: string
+  /**
+   * 镜像缓存所属snapshotter类型
+   */
+  Snapshotter?: string
 }
 
 /**
@@ -15172,6 +15180,10 @@ export interface GetMostSuitableImageCacheRequest {
    * 容器镜像列表
    */
   Images: Array<string>
+  /**
+   * 容器镜像制作snapshotter
+   */
+  Snapshotter?: string
 }
 
 /**

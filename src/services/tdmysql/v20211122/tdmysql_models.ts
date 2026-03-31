@@ -187,7 +187,7 @@ export interface CreateDBSBackupResponse {
  */
 export interface CreateDBSBackupRequest {
   /**
-   * <p>备份方式：physical、snapshot 这个值和DescribeDBSBackupPolicy接口返回的backupMethod保持一致</p>枚举值：<ul><li> physical： 物理备份</li><li> snapshot： 快照备份</li></ul>
+   * <p>备份方式：physical、snapshot 这个值和DescribeDBSBackupPolicy接口返回的backupMethod保持一致</p><p>枚举值：</p><ul><li>physical： 物理备份</li><li>snapshot： 快照备份</li></ul>
    */
   BackupMethod: string
   /**
@@ -312,11 +312,11 @@ export interface ModifyAutoRenewFlagRequest {
  */
 export interface ModifyDBSBackupPolicyResponse {
   /**
-   * 是否成功
+   * <p>是否成功</p>
    */
   IsSuccess?: boolean
   /**
-   * 消息
+   * <p>消息</p>
    */
   Msg?: string
   /**
@@ -429,11 +429,11 @@ export interface DatabaseFunction {
  */
 export interface ModifyDBSBackupPolicyRequest {
   /**
-   * 备份策略
+   * <p>备份策略</p>
    */
   BackupPolicy: BackupPolicyModelInput
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId: string
 }
@@ -622,7 +622,7 @@ export interface IsolateDBInstanceResponse {
  */
 export interface DescribeDBSAvailableRecoveryTimeRequest {
   /**
-   * <p>db实例ID</p>
+   * <p>实例ID</p>
    */
   InstanceId: string
   /**

@@ -85,19 +85,19 @@ export interface DescribeMaterialListResponse {
  */
 export interface FaceInfo {
   /**
-   * 人脸框的横坐标
+   * <p>人脸框的横坐标</p>
    */
   X?: number
   /**
-   * 人脸框的纵坐标
+   * <p>人脸框的纵坐标</p>
    */
   Y?: number
   /**
-   * 人脸框的宽度
+   * <p>人脸框的宽度。<br>单位：px</p>
    */
   Width?: number
   /**
-   * 人脸框的高度
+   * <p>人脸框的高度。<br>单位：px</p>
    */
   Height?: number
 }

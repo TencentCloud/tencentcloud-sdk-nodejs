@@ -70,43 +70,43 @@ export interface DescribeTrustedIDResponse {
  */
 export interface DescribeFraudUltimateRequest {
   /**
-   * 客户端通过SDK获取的设备Token
+   * <p>客户端通过SDK获取的设备Token</p>
    */
   DeviceToken: string
   /**
-   * 使用场景。目前仅支持login-登录场景、register-注册场景
+   * <p>使用场景。目前仅支持login-登录场景、register-注册场景</p>
    */
   SceneCode: string
   /**
-   * 用户唯一标识
+   * <p>用户唯一标识</p>
    */
   UserId: string
   /**
-   * 事件时间戳（毫秒）
+   * <p>事件时间戳（毫秒）</p>
    */
   EventTime: number
   /**
-   * 事件耗时（毫秒），例如进入登录界面到点击登录按钮耗时
+   * <p>事件耗时（毫秒），例如进入登录界面到点击登录按钮耗时</p>
    */
   ElapsedTime?: number
   /**
-   * 微信的OpenId
+   * <p>微信的OpenId</p>
    */
   WeChatOpenId?: string
   /**
-   * 手机号码（注：不需要带国家代码 例如：13430421011）。可以传入原文或MD5
+   * <p>手机号码（注：不需要带国家代码 例如：13430421011）。可以传入原文或MD5</p>
    */
   PhoneNumber?: string
   /**
-   * 客户端IP
+   * <p>客户端IP</p>
    */
   ClientIP?: string
   /**
-   * QQ的OpenId
+   * <p>QQ的OpenId</p>
    */
   QQOpenId?: string
   /**
-   * 数据授权信息
+   * <p>数据授权信息</p>
    */
   DataAuthorization?: DataAuthorizationInfo
 }
@@ -174,43 +174,43 @@ export interface DescribeFraudPremiumResponse {
  */
 export interface DescribeFinanceFraudUltimateRequest {
   /**
-   * 客户端通过SDK获取的设备Token
+   * <p>客户端通过SDK获取的设备Token</p>
    */
   DeviceToken: string
   /**
-   * 使用场景。目前仅支持login-登录场景、register-注册场景
+   * <p>使用场景。目前仅支持login-登录场景、register-注册场景</p>
    */
   SceneCode: string
   /**
-   * 用户唯一标识
+   * <p>用户唯一标识</p>
    */
   UserId: string
   /**
-   * 事件时间戳（毫秒）
+   * <p>事件时间戳（毫秒）</p>
    */
   EventTime: number
   /**
-   * 事件耗时（毫秒），例如进入登录界面到点击登录按钮耗时
+   * <p>事件耗时（毫秒），例如进入登录界面到点击登录按钮耗时</p>
    */
   ElapsedTime?: number
   /**
-   * 微信的OpenId
+   * <p>微信的OpenId</p>
    */
   WeChatOpenId?: string
   /**
-   * 手机号码（注：不需要带国家代码 例如：13430421011）。可以传入原文或MD5
+   * <p>手机号码（注：不需要带国家代码 例如：13430421011）。可以传入原文或MD5</p>
    */
   PhoneNumber?: string
   /**
-   * 业务客户端IP
+   * <p>业务客户端IP</p>
    */
   BizClientIp?: string
   /**
-   * QQ的OpenId
+   * <p>QQ的OpenId</p>
    */
   QQOpenId?: string
   /**
-   * 数据授权信息
+   * <p>数据授权信息</p>
    */
   DataAuthorization?: DataAuthorizationInfo
 }
@@ -346,65 +346,73 @@ export interface DataAuthorizationInfo {
  */
 export interface DescribeFinanceFraudUltimateResponse {
   /**
-   * App版本信息
+   * <p>App版本信息</p>
    */
   AppVersion?: string
   /**
-   * 品牌
+   * <p>品牌</p>
    */
   Brand?: string
   /**
-   * 客户端IP
+   * <p>客户端IP</p>
    */
   ClientIp?: string
   /**
-   * 机型
+   * <p>机型</p>
    */
   Model?: string
   /**
-   * 网络类型
+   * <p>网络类型</p>
    */
   NetworkType?: string
   /**
-   * 应用包名
+   * <p>应用包名</p>
    */
   PackageName?: string
   /**
-   * 平台（2-Android，3-iOS，4-H5，5-微信小程序）
+   * <p>平台（2-Android，3-iOS，4-H5，5-微信小程序）</p>
    */
   Platform?: string
   /**
-   * 系统版本
+   * <p>系统版本</p>
    */
   SystemVersion?: string
   /**
-   * SDK版本号
+   * <p>SDK版本号</p>
    */
   SdkBuildNo?: string
   /**
-   * 实时风险信息
+   * <p>实时风险信息</p>
    */
   RiskInfos?: Array<RiskInfo>
   /**
-   * 离线风险信息
+   * <p>离线风险信息</p>
    */
   HistRiskInfos?: Array<RiskInfo>
   /**
-   * 设备匿名标识
+   * <p>设备匿名标识</p>
    */
   Openid?: string
   /**
-   * 场景风险信息
+   * <p>场景风险信息</p>
    */
   SceneRiskInfos?: Array<RiskInfo>
   /**
-   * 建议等级。1-极差，2-较差，3-中等，4-良好，5-优秀
+   * <p>建议等级。1-极差，2-较差，3-中等，4-良好，5-优秀</p>
    */
   SuggestionLevel?: number
   /**
-   * 图灵盾统一ID
+   * <p>图灵盾统一ID</p>
    */
   Unionid?: string
+  /**
+   * <p>检测时间戳（毫秒）</p>
+   */
+  RiskCheckTimestamp?: string
+  /**
+   * <p>额外信息</p>
+   */
+  ExtraInfos?: Array<ExtraInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -436,65 +444,73 @@ export interface DescribeFraudPremiumRequest {
  */
 export interface DescribeFraudUltimateResponse {
   /**
-   * App版本信息
+   * <p>App版本信息</p>
    */
   AppVersion?: string
   /**
-   * 品牌
+   * <p>品牌</p>
    */
   Brand?: string
   /**
-   * 客户端IP
+   * <p>客户端IP</p>
    */
   ClientIp?: string
   /**
-   * 机型
+   * <p>机型</p>
    */
   Model?: string
   /**
-   * 网络类型
+   * <p>网络类型</p>
    */
   NetworkType?: string
   /**
-   * 应用包名
+   * <p>应用包名</p>
    */
   PackageName?: string
   /**
-   * 平台（2-Android，3-iOS，4-H5，5-微信小程序）
+   * <p>平台（2-Android，3-iOS，4-H5，5-微信小程序）</p>
    */
   Platform?: string
   /**
-   * 系统版本
+   * <p>系统版本</p>
    */
   SystemVersion?: string
   /**
-   * SDK版本号
+   * <p>SDK版本号</p>
    */
   SdkBuildNo?: string
   /**
-   * 实时风险信息
+   * <p>实时风险信息</p>
    */
   RiskInfos?: Array<RiskInfo>
   /**
-   * 离线风险信息
+   * <p>离线风险信息</p>
    */
   HistRiskInfos?: Array<RiskInfo>
   /**
-   * 设备匿名标识
+   * <p>设备匿名标识</p>
    */
   Openid?: string
   /**
-   * 场景风险信息
+   * <p>场景风险信息</p>
    */
   SceneRiskInfos?: Array<RiskInfo>
   /**
-   * 建议等级。1-极差，2-较差，3-中等，4-良好，5-优秀
+   * <p>建议等级。1-极差，2-较差，3-中等，4-良好，5-优秀</p>
    */
   SuggestionLevel?: number
   /**
-   * 图灵盾统一ID
+   * <p>图灵盾统一ID</p>
    */
   Unionid?: string
+  /**
+   * <p>检测时间戳（毫秒）</p>
+   */
+  RiskCheckTimestamp?: string
+  /**
+   * <p>额外信息</p>
+   */
+  ExtraInfos?: Array<ExtraInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

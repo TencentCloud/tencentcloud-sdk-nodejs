@@ -1626,35 +1626,35 @@ export interface DeleteCfsFileSystemResponse {
  */
 export interface CreateCfsFileSystemResponse {
   /**
-   * 文件系统创建时间
+   * <p>文件系统创建时间</p>
    */
   CreationTime?: string
   /**
-   * 用户自定义文件系统名称
+   * <p>用户自定义文件系统名称</p>
    */
   CreationToken?: string
   /**
-   * 文件系统 ID
+   * <p>文件系统 ID</p>
    */
   FileSystemId?: string
   /**
-   * 文件系统状态，可能出现状态包括：“creating”  创建中, “create_failed” 创建失败, “available” 可用, “unserviced” 不可用, “upgrading” 升级中， “deleting” 删除中。
+   * <p>文件系统状态，可能出现状态包括：“creating”  创建中, “create_failed” 创建失败, “available” 可用, “unserviced” 不可用, “upgrading” 升级中， “deleting” 删除中。</p>
    */
   LifeCycleState?: string
   /**
-   * 文件系统已使用容量大小，单位为 Byte
+   * <p>文件系统已使用容量大小，单位为 Byte</p>
    */
   SizeByte?: number
   /**
-   * 可用区 ID
+   * <p>可用区 ID</p>
    */
   ZoneId?: number
   /**
-   * 用户自定义文件系统名称
+   * <p>用户自定义文件系统名称</p>
    */
   FsName?: string
   /**
-   * 文件系统是否加密
+   * <p>文件系统是否加密</p>
    */
   Encrypted?: boolean
   /**
@@ -2243,89 +2243,83 @@ export interface AvailableRegion {
  */
 export interface CreateCfsFileSystemRequest {
   /**
-   * 可用区名称，例如ap-beijing-1，请参考 [概览](https://cloud.tencent.com/document/product/582/13225) 文档中的地域与可用区列表
+   * <p>可用区名称，例如ap-beijing-1，请参考 <a href="https://cloud.tencent.com/document/product/582/13225">概览</a> 文档中的地域与可用区列表</p>
    */
   Zone: string
   /**
-   * 网络类型，可选值为 VPC，CCN；其中 VPC 为私有网络， CCN 为云联网。通用标准型/性能型请选择VPC，Turbo标准型/性能型请选择CCN。
+   * <p>网络类型，可选值为 VPC，CCN；其中 VPC 为私有网络， CCN 为云联网。通用标准型/性能型请选择VPC，Turbo标准型/性能型请选择CCN。</p>
    */
   NetInterface: string
   /**
-   * 权限组 ID,pgroupbasic 是默认权限组，通过控制查询权限组列表接口获取[DescribeCfsPGroups](https://cloud.tencent.com/document/product/582/38157)
+   * <p>权限组 ID,pgroupbasic 是默认权限组，通过控制查询权限组列表接口获取<a href="https://cloud.tencent.com/document/product/582/38157">DescribeCfsPGroups</a></p>
    */
   PGroupId: string
   /**
-   * 文件系统协议类型， 值为 NFS、CIFS、TURBO ; 若留空则默认为 NFS协议，turbo系列必须选择TURBO，不支持NFS、CIFS
+   * <p>文件系统协议类型， 值为 NFS、CIFS、TURBO ; 若留空则默认为 NFS协议，turbo系列必须选择TURBO，不支持NFS、CIFS</p>
    */
   Protocol?: string
   /**
-   * 文件系统存储类型，默认值为 SD ；其中 SD 为通用标准型存储， HP为通用性能型存储， TB为Turbo标准型， TP 为Turbo性能型。
+   * <p>文件系统存储类型，默认值为 SD ；其中 SD 为通用标准型存储， HP为通用性能型存储， TB为Turbo标准型， TP 为Turbo性能型。</p>
    */
   StorageType?: string
   /**
-   * 私有网络（VPC） ID，若网络类型选择的是VPC，该字段为必填.通过查询私有网络接口获取，
-[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)
+   * <p>私有网络（VPC） ID，若网络类型选择的是VPC，该字段为必填.通过查询私有网络接口获取，<br><a href="https://cloud.tencent.com/document/product/215/15778">DescribeVpcs</a></p>
    */
   VpcId?: string
   /**
-   * 子网 ID，若网络类型选择的是VPC，该字段为必填。通过查询子网接口获取，
-[DescribeSubnets](https://cloud.tencent.com/document/product/215/15784)
+   * <p>子网 ID，若网络类型选择的是VPC，该字段为必填。通过查询子网接口获取，<br><a href="https://cloud.tencent.com/document/product/215/15784">DescribeSubnets</a></p>
    */
   SubnetId?: string
   /**
-   * 指定IP地址，仅VPC网络支持；若不填写、将在该子网下随机分配 IP，Turbo系列当前不支持指定
+   * <p>指定IP地址，仅VPC网络支持；若不填写、将在该子网下随机分配 IP，Turbo系列当前不支持指定</p>
    */
   MountIP?: string
   /**
-   * 用户自定义文件系统名称
+   * <p>用户自定义文件系统名称</p>
    */
   FsName?: string
   /**
-   * 文件系统标签
+   * <p>文件系统是否加密，若留空则默认为不加密</p>
+   */
+  Encrypted?: boolean
+  /**
+   * <p>文件系统标签</p>
    */
   ResourceTags?: Array<TagInfo>
   /**
-   * 用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。用于保证请求幂等性的字符串失效时间为2小时。
+   * <p>用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。用于保证请求幂等性的字符串失效时间为2小时。</p>
    */
   ClientToken?: string
   /**
-   * 云联网ID， 若网络类型选择的是CCN，该字段为必填;通过查询云联网列表接口获取，通过接口
-[DescribeCcns](https://cloud.tencent.com/document/product/215/19199)
-
+   * <p>云联网ID， 若网络类型选择的是CCN，该字段为必填;通过查询云联网列表接口获取，通过接口<br><a href="https://cloud.tencent.com/document/product/215/19199">DescribeCcns</a></p>
    */
   CcnId?: string
   /**
-   * 云联网中CFS使用的网段， 若网络类型选择的是Ccn，该字段为必填，且不能和Ccn中已经绑定的网段冲突
+   * <p>云联网中CFS使用的网段， 若网络类型选择的是Ccn，该字段为必填，且不能和Ccn中已经绑定的网段冲突</p>
    */
   CidrBlock?: string
   /**
-   * 文件系统容量，turbo系列必填，单位为GiB。 turbo标准型单位GB，起售20TiB，即20480 GiB；扩容步长10TiB，即10240 GiB。turbo性能型起售10TiB，即10240 GiB；扩容步长10TiB，10240 GiB。
+   * <p>文件系统容量，turbo系列必填，单位为GiB。 turbo标准型单位GB，起售20TiB，即20480 GiB；扩容步长10TiB，即10240 GiB。turbo性能型起售10TiB，即10240 GiB；扩容步长10TiB，10240 GiB。</p>
    */
   Capacity?: number
   /**
-   * 文件系统快照ID，通过查询快照列表获取该参数，
-[DescribeCfsSnapshots](https://cloud.tencent.com/document/product/582/80206)
+   * <p>文件系统快照ID，通过查询快照列表获取该参数，<br><a href="https://cloud.tencent.com/document/product/582/80206">DescribeCfsSnapshots</a></p>
    */
   SnapshotId?: string
   /**
-   * 定期快照策略ID，通过查询快照策略信息获取,
-[DescribeAutoSnapshotPolicies](https://cloud.tencent.com/document/product/582/38157)
+   * <p>定期快照策略ID，通过查询快照策略信息获取,<br><a href="https://cloud.tencent.com/document/product/582/38157">DescribeAutoSnapshotPolicies</a></p>
    */
   AutoSnapshotPolicyId?: string
   /**
-   * 是否开启默认扩容，仅turbo类型文件存储支持
+   * <p>是否开启默认扩容，仅turbo类型文件存储支持</p>
    */
   EnableAutoScaleUp?: boolean
   /**
-   * v1.5：创建普通版的通用文件系统；
-v3.1：创建增强版的通用文件系统
-说明：增强版的通用系统需要开通白名单才能使用，如有需要请提交工单与我们联系。
+   * <p>v1.5：创建普通版的通用文件系统；<br>v3.1：创建增强版的通用文件系统<br>说明：增强版的通用系统需要开通白名单才能使用，如有需要请提交工单与我们联系。</p>
    */
   CfsVersion?: string
   /**
-   * turbo文件系统元数据属性
-basic：创建标准型的元数据
-enhanced：创建增强型的元数据
+   * <p>turbo文件系统元数据属性<br>basic：创建标准型的元数据<br>enhanced：创建增强型的元数据</p>
    */
   MetaType?: string
 }

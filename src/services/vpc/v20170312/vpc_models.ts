@@ -8544,6 +8544,14 @@ export interface TrafficMirror {
    * 流量镜接收目标资源信息，当接收目标为ENI和CLB时返回。
    */
   TargetInfo?: Array<TrafficMirrorTargetResourceInfo>
+  /**
+   * 流量镜像入站过滤规则。
+   */
+  IngressFilterRules?: Array<TrafficMirrorFilter>
+  /**
+   * 流量镜像出站过滤规则。
+   */
+  EgressFilterRules?: Array<TrafficMirrorFilter>
 }
 
 /**
@@ -11466,7 +11474,7 @@ export interface HaVip {
    */
   HaVipAssociationSet?: Array<HaVipAssociation>
   /**
-   * 是否开启`HAVIP`的飘移范围校验。
+   * 是否开启`HAVIP`的漂移范围校验。
    */
   CheckAssociate?: boolean
   /**
@@ -11474,7 +11482,7 @@ export interface HaVip {
    */
   CdcId?: string
   /**
-   * HAVIP 刷新时间。该参数只作为出参数。以下场景会触发 FlushTime 被刷新：1）子机发出免费 ARP 触发 HAVIP 漂移；2）手动HAVIP解绑网卡; 没有更新时默认值：0000-00-00 00:00:00
+   * HAVIP 刷新时间。该参数只作为出参数。以下场景会触发FlushedTime 被刷新：1）子机发出免费 ARP 触发 HAVIP 漂移；2）手动HAVIP解绑网卡; 没有更新时默认值：0000-00-00 00:00:00
    */
   FlushedTime?: string
   /**
@@ -17130,15 +17138,15 @@ export interface TrafficMirrorFilter {
   /**
    * 过滤规则的源网段
    */
-  SrcNet: string
+  SrcNet?: string
   /**
    * 过滤规则的目的网段
    */
-  DstNet: string
+  DstNet?: string
   /**
    * 过滤规则的协议
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 过滤规则的源端口，默认值1-65535
    */
@@ -17147,6 +17155,26 @@ export interface TrafficMirrorFilter {
    * 过滤规则的目的端口，默认值1-65535
    */
   DstPort?: string
+  /**
+   * 流量镜像过滤规则唯一ID。
+   */
+  TrafficMirrorFilterRuleId?: string
+  /**
+   * 流量镜像过滤规则优先级。
+   */
+  Priority?: number
+  /**
+   * 流量镜像过滤规则策略，支持类型："ACCEPT", "DROP"。
+   */
+  Action?: string
+  /**
+   * 流量镜像过滤规则描述。
+   */
+  Description?: string
+  /**
+   * 创建时间。
+   */
+  CreatedTime?: string
 }
 
 /**

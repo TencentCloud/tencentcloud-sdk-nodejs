@@ -291,6 +291,11 @@ export interface LogstashInstanceInfo {
    * 多可用区部署时可用区的详细信息
    */
   MultiZoneInfo?: Array<ZoneDetail>
+  /**
+   * 客户自定义dns配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserDnsIp?: string
 }
 
 /**
@@ -2050,6 +2055,10 @@ export interface UpdateLogstashInstanceRequest {
    * 实例YML配置
    */
   YMLConfig?: string
+  /**
+   * 客户自定义dns配置
+   */
+  UserDnsIp?: string
   /**
    * 实例绑定的ES集群信息
    */

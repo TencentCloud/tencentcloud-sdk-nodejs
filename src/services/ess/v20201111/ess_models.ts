@@ -3720,15 +3720,15 @@ export interface CreateDraftContractByPromptsTaskRequest {
    */
   Operator: UserInfo
   /**
-   * 起草要求
+   * 起草要求，范围要求 5-1000 字
    */
   Requirement: string
   /**
-   * 参考模板文件资源id（PDF/Word格式）
+   * 参考模板文件资源id（PDF/Word格式），大小不超过1M，通过[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)接口来获取。
    */
   ReferenceTemplateId?: string
   /**
-   * 相关规定文件资源id列表（PDF/Word格式）
+   * 相关规定文件资源id列表（PDF/Word格式），最多3个文件，每个大小不超过1M，通过[上传文件](https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles)接口来获取。
    */
   RequirementFileIds?: Array<string>
   /**
@@ -6011,6 +6011,10 @@ export interface DescribeDraftContractByPromptsTaskResponse {
    * 生成的合同文件资源id
    */
   ResourceId?: string
+  /**
+   * 生成的合同文件下载链接，有效期2小时
+   */
+  ContractUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

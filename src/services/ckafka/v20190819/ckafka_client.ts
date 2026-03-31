@@ -96,6 +96,7 @@ import {
   KafkaParam,
   Connection,
   BatchCreateAclResponse,
+  IpWhitelistDTO,
   DeleteRouteRequest,
   MongoDBConnectParam,
   BatchModifyTopicAttributesResponse,

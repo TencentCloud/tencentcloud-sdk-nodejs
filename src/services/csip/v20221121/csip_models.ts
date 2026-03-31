@@ -9751,17 +9751,14 @@ export interface DescribeAccessKeyAlarmDetailResponse {
 export interface Filters {
   /**
    * 实例ID
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
    * 实例ID内容
-注意：此字段可能返回 null，表示取不到有效值。
    */
   Values?: Array<string>
   /**
    * 模糊匹配
-注意：此字段可能返回 null，表示取不到有效值。
    */
   ExactMatch?: string
 }
