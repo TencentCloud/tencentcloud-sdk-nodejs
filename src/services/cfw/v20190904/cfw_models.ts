@@ -4872,6 +4872,14 @@ log：观察
    * 规则最近更新时间
    */
   UpdateTime?: string
+  /**
+   * 目的值的类型，与TargetType或DestType所代表的目的类型含义有所不同，如目的类型是template,但template分ip模板和域名模板，故需通过DestValueType进一步区分
+   */
+  DestValueType?: string
+  /**
+   * 规则分区，1最前分区，2中间分区，3最后分区，增删改查规则时无需传入此参数
+   */
+  RulePartition?: number
 }
 
 /**
@@ -7001,6 +7009,14 @@ export interface DescAcItem {
    * 规则最近更新时间
    */
   UpdateTime?: string
+  /**
+   * 目的值的类型，与TargetType或DestType所代表的目的类型含义有所不同，如目的类型是template,但template分ip模板和域名模板，故需通过DestValueType进一步区分
+   */
+  DestValueType?: string
+  /**
+   * 规则分区，1最前分区，2中间分区，3最后分区
+   */
+  RulePartition?: number
 }
 
 /**

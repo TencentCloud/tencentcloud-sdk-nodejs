@@ -89,6 +89,7 @@ import {
   AutoUpgradeOptions,
   SuperNodePoolInfo,
   InternetAccessible,
+  ScaleNodePoolResponse,
   ModifyClusterMachineRequest,
   DescribeHealthCheckPoliciesResponse,
   RebootMachinesResponse,
@@ -96,6 +97,7 @@ import {
   StopMachinesRequest,
   DescribeHealthCheckPoliciesRequest,
   DescribeHealthCheckTemplateResponse,
+  ScaleNodePoolRequest,
   InstanceAdvancedSettings,
   LifecycleConfig,
   InstanceChargePrepaid,
@@ -116,66 +118,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询原生节点机型配置
-   */
-  async DescribeZoneInstanceConfigInfos(
-    req: DescribeZoneInstanceConfigInfosRequest,
-    cb?: (error: string, rep: DescribeZoneInstanceConfigInfosResponse) => void
-  ): Promise<DescribeZoneInstanceConfigInfosResponse> {
-    return this.request("DescribeZoneInstanceConfigInfos", req, cb)
-  }
-
-  /**
-   * 修改原生节点
-   */
-  async ModifyClusterMachine(
-    req: ModifyClusterMachineRequest,
-    cb?: (error: string, rep: ModifyClusterMachineResponse) => void
-  ): Promise<ModifyClusterMachineResponse> {
-    return this.request("ModifyClusterMachine", req, cb)
-  }
-
-  /**
-   * 查询托原生点列表
-   */
-  async DescribeClusterMachines(
-    req: DescribeClusterMachinesRequest,
-    cb?: (error: string, rep: DescribeClusterMachinesResponse) => void
-  ): Promise<DescribeClusterMachinesResponse> {
-    return this.request("DescribeClusterMachines", req, cb)
-  }
-
-  /**
-   * 删除原生节点池节点
-   */
-  async DeleteClusterMachines(
-    req: DeleteClusterMachinesRequest,
-    cb?: (error: string, rep: DeleteClusterMachinesResponse) => void
-  ): Promise<DeleteClusterMachinesResponse> {
-    return this.request("DeleteClusterMachines", req, cb)
-  }
-
-  /**
-   * 重启原生节点实例
-   */
-  async RebootMachines(
-    req: RebootMachinesRequest,
-    cb?: (error: string, rep: RebootMachinesResponse) => void
-  ): Promise<RebootMachinesResponse> {
-    return this.request("RebootMachines", req, cb)
-  }
-
-  /**
-   * 更新 TKE 节点池
-   */
-  async ModifyNodePool(
-    req: ModifyNodePoolRequest,
-    cb?: (error: string, rep: ModifyNodePoolResponse) => void
-  ): Promise<ModifyNodePoolResponse> {
-    return this.request("ModifyNodePool", req, cb)
-  }
-
-  /**
    * 设置是否开启节点登录
    */
   async SetMachineLogin(
@@ -183,32 +125,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetMachineLoginResponse) => void
   ): Promise<SetMachineLoginResponse> {
     return this.request("SetMachineLogin", req, cb)
-  }
-
-  /**
-     * 本接口 (StopMachines) 用于关闭一个或多个原生节点实例。
-
-只有状态为 Running 的实例才可以进行此操作。
-接口调用成功时，实例会进入 Stopping 状态；关闭实例成功时，实例会进入 Stopped 状态。
-支持强制关闭。强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
-支持批量操作。每次请求批量实例的上限为 100。
-本接口为同步接口，关闭实例请求发送成功后会返回一个RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeClusterInstances 接口查询，如果实例的状态为stopped_with_charging，则代表关闭实例操作成功。
-     */
-  async StopMachines(
-    req: StopMachinesRequest,
-    cb?: (error: string, rep: StopMachinesResponse) => void
-  ): Promise<StopMachinesResponse> {
-    return this.request("StopMachines", req, cb)
-  }
-
-  /**
-   * 删除健康检测策略
-   */
-  async DeleteHealthCheckPolicy(
-    req: DeleteHealthCheckPolicyRequest,
-    cb?: (error: string, rep: DeleteHealthCheckPolicyResponse) => void
-  ): Promise<DeleteHealthCheckPolicyResponse> {
-    return this.request("DeleteHealthCheckPolicy", req, cb)
   }
 
   /**
@@ -232,46 +148,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改健康检测策略
-   */
-  async ModifyHealthCheckPolicy(
-    req: ModifyHealthCheckPolicyRequest,
-    cb?: (error: string, rep: ModifyHealthCheckPolicyResponse) => void
-  ): Promise<ModifyHealthCheckPolicyResponse> {
-    return this.request("ModifyHealthCheckPolicy", req, cb)
-  }
-
-  /**
-   * 查询健康检测策略绑定关系
-   */
-  async DescribeHealthCheckPolicyBindings(
-    req: DescribeHealthCheckPolicyBindingsRequest,
-    cb?: (error: string, rep: DescribeHealthCheckPolicyBindingsResponse) => void
-  ): Promise<DescribeHealthCheckPolicyBindingsResponse> {
-    return this.request("DescribeHealthCheckPolicyBindings", req, cb)
-  }
-
-  /**
-   * 创建 TKE 节点池
-   */
-  async CreateNodePool(
-    req: CreateNodePoolRequest,
-    cb?: (error: string, rep: CreateNodePoolResponse) => void
-  ): Promise<CreateNodePoolResponse> {
-    return this.request("CreateNodePool", req, cb)
-  }
-
-  /**
-   * 查询健康检测策略模板
-   */
-  async DescribeHealthCheckTemplate(
-    req?: DescribeHealthCheckTemplateRequest,
-    cb?: (error: string, rep: DescribeHealthCheckTemplateResponse) => void
-  ): Promise<DescribeHealthCheckTemplateResponse> {
-    return this.request("DescribeHealthCheckTemplate", req, cb)
-  }
-
-  /**
      * 本接口 (StartMachines) 用于启动一个或多个原生节点实例。
 
 只有状态为 Stopped 的实例才可以进行此操作。
@@ -287,6 +163,56 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建 TKE 节点池
+   */
+  async CreateNodePool(
+    req: CreateNodePoolRequest,
+    cb?: (error: string, rep: CreateNodePoolResponse) => void
+  ): Promise<CreateNodePoolResponse> {
+    return this.request("CreateNodePool", req, cb)
+  }
+
+  /**
+   * 查询健康检测策略绑定关系
+   */
+  async DescribeHealthCheckPolicyBindings(
+    req: DescribeHealthCheckPolicyBindingsRequest,
+    cb?: (error: string, rep: DescribeHealthCheckPolicyBindingsResponse) => void
+  ): Promise<DescribeHealthCheckPolicyBindingsResponse> {
+    return this.request("DescribeHealthCheckPolicyBindings", req, cb)
+  }
+
+  /**
+   * 查询健康检测策略模板
+   */
+  async DescribeHealthCheckTemplate(
+    req?: DescribeHealthCheckTemplateRequest,
+    cb?: (error: string, rep: DescribeHealthCheckTemplateResponse) => void
+  ): Promise<DescribeHealthCheckTemplateResponse> {
+    return this.request("DescribeHealthCheckTemplate", req, cb)
+  }
+
+  /**
+   * 删除原生节点池节点
+   */
+  async DeleteClusterMachines(
+    req: DeleteClusterMachinesRequest,
+    cb?: (error: string, rep: DeleteClusterMachinesResponse) => void
+  ): Promise<DeleteClusterMachinesResponse> {
+    return this.request("DeleteClusterMachines", req, cb)
+  }
+
+  /**
+   * 设置 TKE 节点池期望节点数
+   */
+  async ScaleNodePool(
+    req: ScaleNodePoolRequest,
+    cb?: (error: string, rep: ScaleNodePoolResponse) => void
+  ): Promise<ScaleNodePoolResponse> {
+    return this.request("ScaleNodePool", req, cb)
+  }
+
+  /**
    * 查询集群列表
    */
   async DescribeClusters(
@@ -297,13 +223,53 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建健康检测策略
+   * 修改原生节点
    */
-  async CreateHealthCheckPolicy(
-    req: CreateHealthCheckPolicyRequest,
-    cb?: (error: string, rep: CreateHealthCheckPolicyResponse) => void
-  ): Promise<CreateHealthCheckPolicyResponse> {
-    return this.request("CreateHealthCheckPolicy", req, cb)
+  async ModifyClusterMachine(
+    req: ModifyClusterMachineRequest,
+    cb?: (error: string, rep: ModifyClusterMachineResponse) => void
+  ): Promise<ModifyClusterMachineResponse> {
+    return this.request("ModifyClusterMachine", req, cb)
+  }
+
+  /**
+   * 修改健康检测策略
+   */
+  async ModifyHealthCheckPolicy(
+    req: ModifyHealthCheckPolicyRequest,
+    cb?: (error: string, rep: ModifyHealthCheckPolicyResponse) => void
+  ): Promise<ModifyHealthCheckPolicyResponse> {
+    return this.request("ModifyHealthCheckPolicy", req, cb)
+  }
+
+  /**
+   * 查询托原生点列表
+   */
+  async DescribeClusterMachines(
+    req: DescribeClusterMachinesRequest,
+    cb?: (error: string, rep: DescribeClusterMachinesResponse) => void
+  ): Promise<DescribeClusterMachinesResponse> {
+    return this.request("DescribeClusterMachines", req, cb)
+  }
+
+  /**
+   * 重启原生节点实例
+   */
+  async RebootMachines(
+    req: RebootMachinesRequest,
+    cb?: (error: string, rep: RebootMachinesResponse) => void
+  ): Promise<RebootMachinesResponse> {
+    return this.request("RebootMachines", req, cb)
+  }
+
+  /**
+   * 删除健康检测策略
+   */
+  async DeleteHealthCheckPolicy(
+    req: DeleteHealthCheckPolicyRequest,
+    cb?: (error: string, rep: DeleteHealthCheckPolicyResponse) => void
+  ): Promise<DeleteHealthCheckPolicyResponse> {
+    return this.request("DeleteHealthCheckPolicy", req, cb)
   }
 
   /**
@@ -327,6 +293,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询原生节点机型配置
+   */
+  async DescribeZoneInstanceConfigInfos(
+    req: DescribeZoneInstanceConfigInfosRequest,
+    cb?: (error: string, rep: DescribeZoneInstanceConfigInfosResponse) => void
+  ): Promise<DescribeZoneInstanceConfigInfosResponse> {
+    return this.request("DescribeZoneInstanceConfigInfos", req, cb)
+  }
+
+  /**
    * 查询 TKE 节点池列表
    */
   async DescribeNodePools(
@@ -334,5 +310,41 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNodePoolsResponse) => void
   ): Promise<DescribeNodePoolsResponse> {
     return this.request("DescribeNodePools", req, cb)
+  }
+
+  /**
+   * 更新 TKE 节点池
+   */
+  async ModifyNodePool(
+    req: ModifyNodePoolRequest,
+    cb?: (error: string, rep: ModifyNodePoolResponse) => void
+  ): Promise<ModifyNodePoolResponse> {
+    return this.request("ModifyNodePool", req, cb)
+  }
+
+  /**
+     * 本接口 (StopMachines) 用于关闭一个或多个原生节点实例。
+
+只有状态为 Running 的实例才可以进行此操作。
+接口调用成功时，实例会进入 Stopping 状态；关闭实例成功时，实例会进入 Stopped 状态。
+支持强制关闭。强制关机的效果等同于关闭物理计算机的电源开关。强制关机可能会导致数据丢失或文件系统损坏，请仅在服务器不能正常关机时使用。
+支持批量操作。每次请求批量实例的上限为 100。
+本接口为同步接口，关闭实例请求发送成功后会返回一个RequestId，此时操作并未立即完成。实例操作结果可以通过调用 DescribeClusterInstances 接口查询，如果实例的状态为stopped_with_charging，则代表关闭实例操作成功。
+     */
+  async StopMachines(
+    req: StopMachinesRequest,
+    cb?: (error: string, rep: StopMachinesResponse) => void
+  ): Promise<StopMachinesResponse> {
+    return this.request("StopMachines", req, cb)
+  }
+
+  /**
+   * 创建健康检测策略
+   */
+  async CreateHealthCheckPolicy(
+    req: CreateHealthCheckPolicyRequest,
+    cb?: (error: string, rep: CreateHealthCheckPolicyResponse) => void
+  ): Promise<CreateHealthCheckPolicyResponse> {
+    return this.request("CreateHealthCheckPolicy", req, cb)
   }
 }

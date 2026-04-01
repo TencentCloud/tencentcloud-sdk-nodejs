@@ -66,7 +66,7 @@ export interface DescribeACLRequest {
   /**
    * 资源名称，和resourceType相关，如当resourceType为TOPIC时，则该字段表示topic名称，当resourceType为GROUP时，该字段表示group名称，当resourceType为CLUSTER时，该字段可为空。
    */
-  ResourceName: string
+  ResourceName?: string
   /**
    * 偏移位置
    */
@@ -77,6 +77,7 @@ export interface DescribeACLRequest {
   Limit?: number
   /**
    * 关键字匹配
+   * @deprecated
    */
   SearchWord?: string
 }

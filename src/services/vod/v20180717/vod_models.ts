@@ -4417,23 +4417,23 @@ export interface AiAnalysisTaskCoverResult {
  */
 export interface LLMComprehendFaceRecognitionForUpdate {
   /**
-   *
+   * <p>人脸识别任务开关</p><p>枚举值：</p><ul><li>ON： 开启智能人脸识别任务</li><li>OFF： 关闭智能人脸识别任务</li></ul><p>默认值：OFF</p>
    */
   Switch?: string
   /**
-   *
+   * <p>人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果</p><p>取值范围：[0, 100]</p>
    */
   Score?: number
   /**
-   *
+   * <p>默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。</p><p>枚举值：</p><ul><li>entertainment： 娱乐明星</li><li>sport： 体育明星</li><li>politician： 政治人物</li></ul>
    */
   DefaultLibraryLabelSet?: Array<string>
   /**
-   *
+   * <p>用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。 </p><p>入参限制：标签个数最多 100 个，每个标签长度最多 16 个字符。</p>
    */
   UserDefineLibraryLabelSet?: Array<string>
   /**
-   *
+   * <p>人物库选择</p><p>枚举值：</p><ul><li>Default： 使用默认人物库</li><li>UserDefine： 使用用户自定义人物库</li><li>All： 同时使用默认人物库和用户自定义人物库</li></ul><p>默认值：All</p>
    */
   FaceLibrary?: string
 }
@@ -6482,37 +6482,39 @@ export interface SetCLSPushTargetRequest {
  */
 export interface LLMComprehendTemplateItem {
   /**
-   * 图片异步处理模板唯一标识。
+   * <p>图片异步处理模板唯一标识。</p>
    */
   Definition?: number
   /**
-   * 图片异步处理模板名称。
+   * <p>图片异步处理模板名称。</p>
    */
   Name?: string
   /**
-   * 图片异步处理模板描述信息。
+   * <p>图片异步处理模板描述信息。</p>
    */
   Comment?: string
   /**
-   * 解析级别，可选值为：
-- Audio: 音频级解析
-- Video: 视频级解析
+   * <p>解析级别，可选值为：</p><ul><li>Audio: 音频级解析</li><li>Video: 视频级解析</li></ul>
    */
   Level?: string
   /**
-   * 分段摘要解析配置
+   * <p>分段摘要解析配置</p>
    */
   Summary?: LLMComprehendSummary
   /**
-   * 文本转录解析配置
+   * <p>文本转录解析配置</p>
    */
   Asr?: LLMComprehendAsr
   /**
-   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>人脸识别解析配置</p>
+   */
+  FaceRecognition?: LLMComprehendFaceRecognition
+  /**
+   * <p>模板创建时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   CreateTime?: string
   /**
-   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>模板最后修改时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   UpdateTime?: string
 }
@@ -9682,23 +9684,23 @@ export interface DeleteHeadTailTemplateRequest {
  */
 export interface LLMComprehendFaceRecognition {
   /**
-   *
+   * <p>人脸识别任务开关</p><p>枚举值：</p><ul><li>ON： 开启智能人脸识别任务</li><li>OFF： 关闭智能人脸识别任务</li></ul><p>默认值：OFF</p>
    */
   Switch: string
   /**
-   *
+   * <p>人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果</p><p>取值范围：[0, 100]</p><p>默认值：95</p>
    */
   Score?: number
   /**
-   *
+   * <p>默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。</p><p>枚举值：</p><ul><li>entertainment： 娱乐明星</li><li>sport： 体育明星</li><li>politician： 政治人物</li></ul>
    */
   DefaultLibraryLabelSet?: Array<string>
   /**
-   *
+   * <p>用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。 </p><p>入参限制：标签个数最多 100 个，每个标签长度最多 16 个字符。</p>
    */
   UserDefineLibraryLabelSet?: Array<string>
   /**
-   *
+   * <p>人物库选择</p><p>枚举值：</p><ul><li>Default： 使用默认人物库</li><li>UserDefine： 使用用户自定义人物库</li><li>All： 同时使用默认人物库和用户自定义人物库</li></ul><p>默认值：All</p>
    */
   FaceLibrary?: string
 }
@@ -10191,11 +10193,11 @@ export interface ModifyMediaInfoResponse {
  */
 export interface DescribeLLMComprehendTemplatesResponse {
   /**
-   * 符合过滤条件的记录总数。
+   * <p>符合过滤条件的记录总数。</p>
    */
   TotalCount?: number
   /**
-   * 图片异步处理模板详情列表。
+   * <p>大模型解析模板详情列表。</p>
    */
   LLMComprehendTemplateSet?: Array<LLMComprehendTemplateItem>
   /**
@@ -14717,7 +14719,7 @@ export interface CreateAigcSubjectRequest {
    */
   SubjectName?: string
   /**
-   * <p>主体图片，至少上传 1 张主体图片。</p><ul><li>注1：支持传入图片 Base64 编码或图片URL（确保可访问）；</li><li>注2：最多支持输入 3 张图；</li><li>注3：图片支持 png、jpeg、jpg、webp格式；</li><li>注4：图片比例需要小于 1:4 或者 4:1 ；</li><li>注5：图片大小不超过 50 MB；</li></ul>
+   * <p>主体图片，至少上传 1 张主体图片。* 注1：支持传入图片URL（确保可访问）；* 注2：最多支持输入 3 张图；* 注3：图片支持 png、jpeg、jpg、webp格式；* 注4：图片比例需要小于 1:4 或者 4:1 ；* 注5：图片大小不超过 50 MB；</p>
    */
   SubjectImages?: Array<string>
   /**
@@ -15952,19 +15954,19 @@ export interface PornOcrReviewTemplateInfo {
  */
 export interface DescribeLLMComprehendTemplatesRequest {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 大模型解析模板唯一标识过滤条件，数组长度最大值：100。
+   * <p>大模型解析模板唯一标识过滤条件，数组长度最大值：100。</p>
    */
   Definitions?: Array<number | bigint>
   /**
-   * 分页偏移量，默认值：0。
+   * <p>分页偏移量，默认值：0。</p>
    */
   Offset?: number
   /**
-   * 返回记录条数，默认值：10，最大值：100。
+   * <p>返回记录条数，默认值：10，最大值：100。</p>
    */
   Limit?: number
 }

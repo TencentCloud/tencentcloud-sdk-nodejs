@@ -218,13 +218,25 @@ export interface ConfigSubmitContext {
  */
 export interface InstanceConfigItem {
   /**
-   * key
+   * <p>key</p>
    */
   ConfKey: string
   /**
-   * value
+   * <p>value</p>
    */
   ConfValue: string
+  /**
+   * <p>add/delete/update</p>
+   */
+  ModifyType?: string
+  /**
+   * <p>是否需要重启</p>
+   */
+  NeedRestart?: boolean
+  /**
+   * <p>修改前的值</p>
+   */
+  OriginalConfValue?: string
 }
 
 /**
@@ -1326,41 +1338,47 @@ export interface InstanceNode {
  */
 export interface InstanceStateInfo {
   /**
-   * 集群状态，例如：Serving
+   * <p>集群状态，例如：Serving</p>
    */
   InstanceState?: string
   /**
-   * 集群操作创建时间
+   * <p>集群操作创建时间</p>
    */
   FlowCreateTime?: string
   /**
-   * 集群操作名称
+   * <p>集群操作名称</p>
    */
   FlowName?: string
   /**
-   * 集群操作进度
+   * <p>集群操作进度</p>
    */
   FlowProgress?: number
   /**
-   * 集群状态描述，例如：运行中
+   * <p>集群状态描述，例如：运行中</p>
    */
   InstanceStateDesc?: string
   /**
-   * 集群流程错误信息，例如：“创建失败，资源不足”
+   * <p>集群流程错误信息，例如：“创建失败，资源不足”</p>
    */
   FlowMsg?: string
   /**
-   * 当前步骤的名称，例如：”购买资源中“
+   * <p>当前步骤的名称，例如：”购买资源中“</p>
    */
   ProcessName?: string
   /**
-   * 请求id
+   * <p>请求id</p>
    */
   RequestId?: string
   /**
-   * 流程的二级名称
+   * <p>流程的二级名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ProcessSubName?: string
+  /**
+   * <p>请求ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestID?: string
 }
 
 /**
@@ -1382,232 +1400,233 @@ export interface DescribeInstanceClustersResponse {
  */
 export interface InstanceInfo {
   /**
-   * 集群实例ID, "cdw-xxxx" 字符串类型
+   * <p>集群实例ID, &quot;cdw-xxxx&quot; 字符串类型</p>
    */
   InstanceId?: string
   /**
-   * 集群实例名称
+   * <p>集群实例名称</p>
    */
   InstanceName?: string
   /**
-   * 状态,
-Init 创建中; Serving 运行中； 
-Deleted已销毁；Deleting 销毁中；
-Modify 集群变更中；
+   * <p>状态,<br>Init 创建中; Serving 运行中；<br>Deleted已销毁；Deleting 销毁中；<br>Modify 集群变更中；</p>
    */
   Status?: string
   /**
-   * 版本
+   * <p>版本</p>
    */
   Version?: string
   /**
-   * 地域, ap-guangzhou
+   * <p>地域, ap-guangzhou</p>
    */
   Region?: string
   /**
-   * 可用区， ap-guangzhou-3
+   * <p>可用区， ap-guangzhou-3</p>
    */
   Zone?: string
   /**
-   * 私有网络名称
+   * <p>私有网络名称</p>
    */
   VpcId?: string
   /**
-   * 子网名称
+   * <p>子网名称</p>
    */
   SubnetId?: string
   /**
-   * 付费类型，"hour", "prepay"
+   * <p>付费类型，&quot;hour&quot;, &quot;prepay&quot;</p>
    */
   PayMode?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 过期时间
+   * <p>过期时间</p>
    */
   ExpireTime?: string
   /**
-   * 数据节点描述信息
+   * <p>数据节点描述信息</p>
    */
   MasterSummary?: NodesSummary
   /**
-   * zookeeper节点描述信息
+   * <p>zookeeper节点描述信息</p>
    */
   CommonSummary?: NodesSummary
   /**
-   * 高可用,"true" "false"
+   * <p>高可用,&quot;true&quot; &quot;false&quot;</p>
    */
   HA?: string
   /**
-   * 访问地址，例如 "10.0.0.1:9000"
+   * <p>访问地址，例如 &quot;10.0.0.1:9000&quot;</p>
    */
   AccessInfo?: string
   /**
-   * 记录ID，数值型
+   * <p>记录ID，数值型</p>
    */
   Id?: number
   /**
-   * regionId, 表示地域
+   * <p>regionId, 表示地域</p>
    */
   RegionId?: number
   /**
-   * 可用区说明，例如 "广州二区"
+   * <p>可用区说明，例如 &quot;广州二区&quot;</p>
    */
   ZoneDesc?: string
   /**
-   * 错误流程说明信息
+   * <p>错误流程说明信息</p>
    */
   FlowMsg?: string
   /**
-   * 状态描述，例如“运行中”等
+   * <p>状态描述，例如“运行中”等</p>
    */
   StatusDesc?: string
   /**
-   * 自动续费标记
+   * <p>自动续费标记</p>
    */
   RenewFlag?: boolean
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<Tag>
   /**
-   * 监控信息
+   * <p>监控信息</p>
    */
   Monitor?: string
   /**
-   * 是否开通日志
+   * <p>是否开通日志</p>
    */
   HasClsTopic?: boolean
   /**
-   * 日志主题ID
+   * <p>日志主题ID</p>
    */
   ClsTopicId?: string
   /**
-   * 日志集ID
+   * <p>日志集ID</p>
    */
   ClsLogSetId?: string
   /**
-   * 是否支持xml配置管理
+   * <p>是否支持xml配置管理</p>
    */
   EnableXMLConfig?: number
   /**
-   * 区域
+   * <p>区域</p>
    */
   RegionDesc?: string
   /**
-   * 弹性网卡地址
+   * <p>弹性网卡地址</p>
    */
   Eip?: string
   /**
-   * 冷热分层系数
+   * <p>冷热分层系数</p>
    */
   CosMoveFactor?: number
   /**
-   * external/local/yunti
+   * <p>external/local/yunti</p>
    */
   Kind?: string
   /**
-   * 是否弹性ck
+   * <p>是否弹性ck</p>
    */
   IsElastic?: boolean
   /**
-   * 集群详细状态
+   * <p>集群详细状态</p>
    */
   InstanceStateInfo?: InstanceStateInfo
   /**
-   * ZK高可用
+   * <p>ZK高可用</p>
    */
   HAZk?: boolean
   /**
-   * 挂载盘,默认0:没有类型；1:裸盘;2:lvm
+   * <p>挂载盘,默认0:没有类型；1:裸盘;2:lvm</p>
    */
   MountDiskType?: number
   /**
-   * chproxy连接ip
+   * <p>chproxy连接ip</p>
    */
   CHProxyVip?: string
   /**
-   * cos buket的名字
+   * <p>cos buket的名字</p>
    */
   CosBucketName?: string
   /**
-   * 是否可以挂载云盘
+   * <p>是否可以挂载云盘</p>
    */
   CanAttachCbs?: boolean
   /**
-   * 是否可以挂载云盘阵列
+   * <p>是否可以挂载云盘阵列</p>
    */
   CanAttachCbsLvm?: boolean
   /**
-   * 是否可以挂载cos
+   * <p>是否可以挂载cos</p>
    */
   CanAttachCos?: boolean
   /**
-   * 服务信息
+   * <p>服务信息</p>
    */
   Components?: Array<ServiceInfo>
   /**
-   * 可升级的内核版本
+   * <p>可升级的内核版本</p>
    */
   UpgradeVersions?: string
   /**
-   * ex-index
+   * <p>ex-index</p>
    */
   EsIndexId?: string
   /**
-   * username
+   * <p>username</p>
    */
   EsIndexUsername?: string
   /**
-   * password
+   * <p>password</p>
    */
   EsIndexPassword?: string
   /**
-   * true
+   * <p>true</p>
    */
   HasEsIndex?: boolean
   /**
-   * true
+   * <p>true</p>
    */
   IsSecondaryZone?: boolean
   /**
-   * desc
+   * <p>desc</p>
    */
   SecondaryZoneInfo?: string
   /**
-   * 是否clickhouse-keeper
+   * <p>是否clickhouse-keeper</p>
    */
   ClickHouseKeeper?: boolean
   /**
-   * 实例扩展信息
+   * <p>实例扩展信息</p>
    */
   Details?: InstanceDetail
   /**
-   * 安全组白名单
+   * <p>安全组白名单</p>
    */
   IsWhiteSGs?: boolean
   /**
-   * 绑定的安全组
+   * <p>绑定的安全组</p>
    */
   BindSGs?: Array<string>
   /**
-   * 是否开启公网clb
+   * <p>是否开启公网clb</p>
    */
   HasPublicCloudClb?: boolean
   /**
-   * 可升级的zk版本
+   * <p>可升级的zk版本</p>
    */
   UpgradeZkVersions?: string
   /**
-   * 是否显示rip
+   * <p>是否显示rip</p>
    */
   ShowRip?: string
   /**
-   * 实例类型：标准型 standard，无keeper节点类型noKeeper；
+   * <p>实例类型：标准型 standard，无keeper节点类型noKeeper；</p>
    */
   InstanceType?: string
+  /**
+   * <p>keyvalue视图</p>
+   */
+  EnableConfigKeyValue?: string
 }
 
 /**
@@ -1715,7 +1734,7 @@ export interface CreateBackUpScheduleResponse {
  */
 export interface DescribeInstanceResponse {
   /**
-   * 实例描述信息
+   * <p>实例描述信息</p>
    */
   InstanceInfo?: InstanceInfo
   /**
@@ -1773,49 +1792,57 @@ export interface SecondaryZoneInfo {
  */
 export interface InstanceConfigInfo {
   /**
-   * 配置项名称
+   * <p>配置项名称</p>
    */
   ConfKey: string
   /**
-   * 配置项内容
+   * <p>配置项内容</p>
    */
   ConfValue: string
   /**
-   * 默认值
+   * <p>默认值</p>
    */
   DefaultValue?: string
   /**
-   * 是否需要重启
+   * <p>是否需要重启</p>
    */
   NeedRestart?: boolean
   /**
-   * 是否可编辑
+   * <p>是否可编辑</p>
    */
   Editable?: boolean
   /**
-   * 配置项解释
+   * <p>配置项解释</p>
    */
   ConfDesc?: string
   /**
-   * 文件名称
+   * <p>文件名称</p>
    */
   FileName?: string
   /**
-   * 规则名称类型
+   * <p>规则名称类型</p>
    */
   ModifyRuleType?: string
   /**
-   * 规则名称内容
+   * <p>规则名称内容</p>
    */
   ModifyRuleValue?: string
   /**
-   * 修改人的uin
+   * <p>修改人的uin</p>
    */
   Uin?: string
   /**
-   * 修改时间
+   * <p>修改时间</p>
    */
   ModifyTime?: string
+  /**
+   * <p>取值范围</p>
+   */
+  ValueRange?: string
+  /**
+   * <p>标记异常</p>
+   */
+  AbnormalParam?: string
 }
 
 /**
@@ -2372,11 +2399,11 @@ export interface NodeSpec {
  */
 export interface DescribeInstanceRequest {
   /**
-   * 集群实例ID
+   * <p>集群实例ID</p>
    */
   InstanceId: string
   /**
-   * 是否是open api查询
+   * <p>是否是open api查询</p>
    */
   IsOpenApi?: boolean
 }
