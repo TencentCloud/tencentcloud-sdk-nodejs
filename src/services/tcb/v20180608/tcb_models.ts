@@ -612,6 +612,10 @@ export interface HTTPServiceRoute {
    */
   Enable?: boolean
   /**
+   * 扩展字段，内部包含headers处理等
+   */
+  Extension?: HTTPServiceExtension
+  /**
    * 路由创建时间
    */
   CreateTime?: string
@@ -894,6 +898,24 @@ export interface ClsInfo {
    * 创建时间
    */
   CreateTime: string
+}
+
+/**
+ * HTTP访问服务路由添加header
+ */
+export interface HTTPServiceHeaderToAdd {
+  /**
+   * 添加头部的key
+   */
+  Key?: string
+  /**
+   * 添加头部的值
+   */
+  Value?: string
+  /**
+   * 添加头部的处理行为。默认：OVERWRITE_IF_EXISTS_OR_ADD。APPEND_IF_EXISTS_OR_ADD: 已存在时追加值，不存在时添加，ADD_IF_ABSENT:  仅在 header 不存在时添加，已存在时不做任何操作，OVERWRITE_IF_EXISTS_OR_ADD: 已存在时覆盖值，不存在时添加（默认值），OVERWRITE_IF_EXISTS: 仅在 header 已存在时覆盖值，不存在时不做任何操作
+   */
+  Action?: string
 }
 
 /**
@@ -1342,13 +1364,18 @@ export interface DescribeHostingDomainTaskRequest {
  */
 export interface EmailProviderConfig {
   /**
-   * smtp配置
+   * <p>smtp配置</p>
    */
   SmtpConfig?: EmailSmtpConfig
   /**
-   * 可选：TRUE，FALSE，如果On为TRUE，则表示采用默认代发。
+   * <p>可选：TRUE，FALSE，如果On为TRUE，则表示采用默认代发。</p>
    */
   On?: string
+  /**
+   * <p>邮件模板配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateConfig?: EmailTemplateConfig
 }
 
 /**
@@ -1958,6 +1985,16 @@ export interface CreateStaticStoreRequest {
 }
 
 /**
+ * HTTP访问服务路由扩展字段
+ */
+export interface HTTPServiceExtension {
+  /**
+   * 添加请求头列表
+   */
+  HeadersHandler?: HTTPServiceHeadersHandler
+}
+
+/**
  * DescribeBillingInfo返回参数结构体
  */
 export interface DescribeBillingInfoResponse {
@@ -2195,6 +2232,16 @@ export interface ModifyEnvPlanResponse {
 }
 
 /**
+ * CreateCustomLoginKey请求参数结构体
+ */
+export interface CreateCustomLoginKeyRequest {
+  /**
+   * 环境id
+   */
+  EnvId: string
+}
+
+/**
  * RunSql请求参数结构体
  */
 export interface RunSqlRequest {
@@ -2214,6 +2261,22 @@ export interface RunSqlRequest {
    * 是否只读；当 `true` 时仅允许以 `SELECT/WITH/SHOW/DESCRIBE/DESC/EXPLAIN` 开头的 SQL
    */
   ReadOnly?: boolean
+}
+
+/**
+ * 多语言模板
+ */
+export interface LocalizedTemplate {
+  /**
+   * <p>中文</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZhCN?: string
+  /**
+   * <p>英文</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnUS?: string
 }
 
 /**
@@ -2255,17 +2318,19 @@ export interface HpaPolicy {
 }
 
 /**
- * 云开发路由限频策略
+ * 邮件模板配置
  */
-export interface HTTPServiceRouteQPSPolicy {
+export interface EmailTemplateConfig {
   /**
-   * QPS值，每秒请求次数
+   * <p>注册登录模板</p><p>入参限制：模板中必须包含{{.VerificationCode}}变量，用于邮件中验证码的展示，可选变量有{{.Usage}}、{{.ExpireMinutes}}、{{.Email}}。邮件模板中禁止包含 script、javascript、onclick、onload、iframe、link 标签及 CSS expression、CSS url() 等</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  QPSTotal?: number
+  RegisterSignIn?: LocalizedTemplate
   /**
-   * 客户端限频配置
+   * <p>默认模板</p><p>入参限制：模板中必须包含{{.VerificationCode}}变量，用于邮件中验证码的展示，可选变量有{{.Usage}}、{{.ExpireMinutes}}、{{.Email}}。邮件模板中禁止包含 script、javascript、onclick、onload、iframe、link 标签及 CSS expression、CSS url() 等</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  QPSPerClient?: HTTPServiceQPSPerClient
+  DefaultTpl?: LocalizedTemplate
 }
 
 /**
@@ -2664,6 +2729,28 @@ export interface AddProviderResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * HTTP访问服务路由headers处理
+ */
+export interface HTTPServiceHeadersHandler {
+  /**
+   * 添加请求头列表
+   */
+  RequestHeadersToAdd?: Array<HTTPServiceHeaderToAdd>
+  /**
+   * 删除请求头列表
+   */
+  RequestHeadersToRemove?: Array<string>
+  /**
+   * 添加返回头列表
+   */
+  ResponseHeadersToAdd?: Array<HTTPServiceHeaderToAdd>
+  /**
+   * 删除返回头列表
+   */
+  ResponseHeadersToRemove?: Array<string>
 }
 
 /**
@@ -3509,6 +3596,10 @@ export interface HTTPServiceDomain {
    */
   Routes?: Array<HTTPServiceRoute>
   /**
+   * 扩展字段，内部包含headers处理等
+   */
+  Extension?: HTTPServiceExtension
+  /**
    * 域名创建时间
    */
   CreateTime?: string
@@ -3580,6 +3671,20 @@ export interface ReinstateEnvRequest {
    * 环境ID
    */
   EnvId: string
+}
+
+/**
+ * 云开发路由限频策略
+ */
+export interface HTTPServiceRouteQPSPolicy {
+  /**
+   * QPS值，每秒请求次数
+   */
+  QPSTotal?: number
+  /**
+   * 客户端限频配置
+   */
+  QPSPerClient?: HTTPServiceQPSPerClient
 }
 
 /**
@@ -4235,37 +4340,21 @@ export interface ExternalStorage {
 }
 
 /**
- * 合法域名
+ * CreateCustomLoginKey返回参数结构体
  */
-export interface AuthDomain {
+export interface CreateCustomLoginKeyResponse {
   /**
-   * 域名ID
+   * 自定义登录的 RSA 私钥（1024 位），PEM 编码格式（PKCS#1）。调用方需使用该私钥对包含用户身份信息的 JSON 数据进行 JWS 签名，生成 JWT Token 后传入自定义登录接口完成身份认证。出于安全考虑，系统仅存储公钥，私钥仅在创建时返回一次且无法恢复，请妥善保存。创建新密钥后，该环境下原有未设置过期时间的旧密钥将被自动标记为 2 小时后过期
    */
-  Id?: string
+  PrivateKey?: string
   /**
-   * 域名
+   * 密钥对的唯一标识符（UUID 格式），由系统自动生成。在自定义登录时，需将该 KeyID 拼接到 ProviderToken 参数中（格式：{KeyID}/{algorithm}/{signedJWT}），服务端通过 KeyID 查找对应的公钥以验证签名
    */
-  Domain?: string
+  KeyID?: string
   /**
-   * 域名类型。包含以下取值：
-<li>SYSTEM</li>
-<li>USER</li>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Type?: string
-  /**
-   * 状态。包含以下取值：
-<li>ENABLE</li>
-<li>DISABLE</li>
-   */
-  Status?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 更新时间
-   */
-  UpdateTime?: string
+  RequestId?: string
 }
 
 /**
@@ -4351,34 +4440,37 @@ export interface CreateHTTPServiceRouteResponse {
 }
 
 /**
- * 索引信息
+ * 合法域名
  */
-export interface IndexInfo {
+export interface AuthDomain {
   /**
-   * 索引名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 域名ID
    */
-  Name?: string
+  Id?: string
   /**
-   * 索引大小，单位: 字节
-注意：此字段可能返回 null，表示取不到有效值。
+   * 域名
    */
-  Size?: number
+  Domain?: string
   /**
-   * 索引键值
-注意：此字段可能返回 null，表示取不到有效值。
+   * 域名类型。包含以下取值：
+<li>SYSTEM</li>
+<li>USER</li>
    */
-  Keys?: Array<Indexkey>
+  Type?: string
   /**
-   * 索引使用信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 状态。包含以下取值：
+<li>ENABLE</li>
+<li>DISABLE</li>
    */
-  Accesses?: IndexAccesses
+  Status?: string
   /**
-   * 是否为唯一索引
-注意：此字段可能返回 null，表示取不到有效值。
+   * 创建时间
    */
-  Unique?: boolean
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -4543,33 +4635,37 @@ export type CheckTcbServiceRequest = null
  */
 export interface HTTPServiceDomainParam {
   /**
-   * 域名。全局唯一。如果域名在其他环境下占用或者腾讯云CDN占用，可能会导致创建失败
+   * <p>域名。全局唯一。如果域名在其他环境下占用或者腾讯云CDN占用，可能会导致创建失败</p>
    */
   Domain: string
   /**
-   * 绑定类型。默认DIRECT。DIRECT: 直连到HTTP访问服务， CDN: 接入云开发CDN，CUSTOM: 自定义接入类型（其他CDN或者WAF）
+   * <p>绑定类型。默认DIRECT。DIRECT: 直连到HTTP访问服务， CDN: 接入云开发CDN，CUSTOM: 自定义接入类型（其他CDN或者WAF）</p>
    */
   AccessType?: string
   /**
-   * 证书ID。当前账户下SSL平台的证书ID
+   * <p>证书ID。当前账户下SSL平台的证书ID</p>
    */
   CertId?: string
   /**
-   * 协议类型。默认HTTP_AND_HTTPS。HTTP_AND_HTTPS: 同时开启http和https，HTTP_TO_HTTPS: http重定向成https，HTTPS_TO_HTTP: https重定向成http。如果未配置证书无法访问https或者进行重定向
+   * <p>协议类型。默认HTTP_AND_HTTPS。HTTP_AND_HTTPS: 同时开启http和https，HTTP_TO_HTTPS: http重定向成https，HTTPS_TO_HTTP: https重定向成http。如果未配置证书无法访问https或者进行重定向</p>
    */
   Protocol?: string
   /**
-   * 自定义CNAME。对应AccessType: Custom
+   * <p>自定义CNAME。对应AccessType: Custom</p>
    */
   CustomCname?: string
   /**
-   * 域名开启状态，不传默认开启
+   * <p>域名开启状态，不传默认开启</p>
    */
   Enable?: boolean
   /**
-   * 创建/修改的HTTP访问服务路由列表。如果不传，仅创建或修改域名信息。列表最大支持传入20个
+   * <p>创建/修改的HTTP访问服务路由列表。如果不传，仅创建或修改域名信息。列表最大支持传入20个</p>
    */
   Routes?: Array<HTTPServiceRouteParam>
+  /**
+   * <p>扩展字段，内部包含headers处理等</p>
+   */
+  Extension?: HTTPServiceExtension
 }
 
 /**
@@ -5099,6 +5195,41 @@ export interface HTTPServiceRouteParam {
    * 是否开启路由
    */
   Enable?: boolean
+  /**
+   * 扩展字段，内部包含headers处理等
+   */
+  Extension?: HTTPServiceExtension
+}
+
+/**
+ * 索引信息
+ */
+export interface IndexInfo {
+  /**
+   * 索引名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 索引大小，单位: 字节
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: number
+  /**
+   * 索引键值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Keys?: Array<Indexkey>
+  /**
+   * 索引使用信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Accesses?: IndexAccesses
+  /**
+   * 是否为唯一索引
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Unique?: boolean
 }
 
 /**

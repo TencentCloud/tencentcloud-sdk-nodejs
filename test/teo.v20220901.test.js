@@ -408,6 +408,16 @@ it("teo.v20220901.DescribeOverviewL7Data", async function () {
     }
 })
 
+it("teo.v20220901.ModifySharedCNAME", async function () {
+    try {
+       const data = await client.ModifySharedCNAME({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.CreateAccelerationDomain", async function () {
     try {
        const data = await client.CreateAccelerationDomain({})
@@ -1601,6 +1611,16 @@ it("teo.v20220901.DescribeDeployHistory", async function () {
 it("teo.v20220901.DeployConfigGroupVersion", async function () {
     try {
        const data = await client.DeployConfigGroupVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeSharedCNAME", async function () {
+    try {
+       const data = await client.DescribeSharedCNAME({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

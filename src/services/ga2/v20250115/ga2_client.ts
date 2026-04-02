@@ -18,6 +18,9 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  CreateGlobalAcceleratorResponse,
+  Tag,
+  CreateGlobalAcceleratorRequest,
   DescribeCrossBorderSettlementRequest,
   DescribeCrossBorderSettlementResponse,
 } from "./ga2_models"
@@ -29,6 +32,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ga2.tencentcloudapi.com", "2025-01-15", clientConfig)
+  }
+
+  /**
+   * 创建全球加速实例
+   */
+  async CreateGlobalAccelerator(
+    req: CreateGlobalAcceleratorRequest,
+    cb?: (error: string, rep: CreateGlobalAcceleratorResponse) => void
+  ): Promise<CreateGlobalAcceleratorResponse> {
+    return this.request("CreateGlobalAccelerator", req, cb)
   }
 
   /**

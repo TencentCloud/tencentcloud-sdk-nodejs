@@ -38,9 +38,9 @@ it("tcb.v20180608.DescribeGatewayVersions", async function () {
     }
 })
 
-it("tcb.v20180608.ModifyClsTopic", async function () {
+it("tcb.v20180608.CreateCustomLoginKey", async function () {
     try {
-       const data = await client.ModifyClsTopic({})
+       const data = await client.CreateCustomLoginKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -181,6 +181,16 @@ it("tcb.v20180608.DeleteHTTPServiceRoute", async function () {
 it("tcb.v20180608.DescribeHTTPServiceRoute", async function () {
     try {
        const data = await client.DescribeHTTPServiceRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.ModifyClsTopic", async function () {
+    try {
+       const data = await client.ModifyClsTopic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

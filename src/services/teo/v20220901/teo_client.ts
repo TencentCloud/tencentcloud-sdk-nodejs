@@ -149,6 +149,7 @@ import {
   CAPTCHAPageChallenge,
   ModifyZoneSettingRequest,
   DetectLengthLimitRule,
+  IPSSLConfig,
   OriginGroupHealthStatus,
   ModifyDnsRecordsResponse,
   BillingDataFilter,
@@ -172,6 +173,7 @@ import {
   CreateSecurityIPGroupRequest,
   ModifyPlanRequest,
   DescribeOriginACLResponse,
+  SharedCNAMEInfo,
   FailReason,
   ModifyL4ProxyRulesRequest,
   DescribeRulesSettingRequest,
@@ -186,7 +188,7 @@ import {
   CacheKeyConfigParameters,
   MaxNewSessionTriggerConfig,
   CreateOriginGroupRequest,
-  TopDataRecord,
+  ModifyDDoSProtectionRequest,
   DescribeDDoSProtectionResponse,
   CreateSecurityIPGroupResponse,
   CreateSharedCNAMEResponse,
@@ -200,6 +202,7 @@ import {
   DescribeSecurityTemplateBindingsRequest,
   L4ProxyRemoteAuth,
   AlgDetectResult,
+  ModifySharedCNAMERequest,
   DefaultServerCertInfo,
   RuleEngineItem,
   ModifySecurityAPIServiceResponse,
@@ -225,7 +228,7 @@ import {
   DiffIPWhitelist,
   DeleteSecurityIPGroupResponse,
   ModifyRuleRequest,
-  SetContentIdentifierParameters,
+  DescribeSharedCNAMEResponse,
   RenewPlanRequest,
   DescribePrefetchTasksResponse,
   ManagedRuleDetail,
@@ -236,6 +239,7 @@ import {
   FileVerification,
   ModifyWebSecurityTemplateResponse,
   ModifySecurityPolicyRequest,
+  ModifySharedCNAMEResponse,
   DeleteL7AccRulesRequest,
   SmartRouting,
   CreateApplicationProxyResponse,
@@ -292,6 +296,7 @@ import {
   CustomRules,
   ModifyRealtimeLogDeliveryTaskRequest,
   VideoTemplateInfo,
+  TopDataRecord,
   HandleFunctionRuntimeEnvironmentResponse,
   DestroyPlanRequest,
   BlockIPActionParameters,
@@ -359,6 +364,7 @@ import {
   DescribeSecurityAPIServiceResponse,
   CreateAccelerationDomainRequest,
   BotRatings,
+  ReferenceHolder,
   NormalAction,
   DenyActionParameters,
   TopDetailData,
@@ -478,6 +484,7 @@ import {
   MultiPathGatewayNextOriginACL,
   RuleChoicePropertiesItem,
   DescribeSecurityTemplateBindingsResponse,
+  SetContentIdentifierParameters,
   ModifyAliasDomainStatusResponse,
   DeleteFunctionRulesRequest,
   DescribeTimingL7AnalysisDataRequest,
@@ -656,6 +663,7 @@ import {
   ModifyMultiPathGatewaySecretKeyResponse,
   DescribeMultiPathGatewaySecretKeyRequest,
   DDoSBlockData,
+  IPSSLSetting,
   DescribeMultiPathGatewaysRequest,
   DeleteL4ProxyRulesResponse,
   ModifyMultiPathGatewaySecretKeyRequest,
@@ -668,7 +676,7 @@ import {
   DeleteFunctionResponse,
   BotManagementLite,
   IPWhitelist,
-  ModifyDDoSProtectionRequest,
+  DescribeSharedCNAMERequest,
   ModifyL7AccSettingRequest,
   ModifyFunctionRulePriorityResponse,
   CreateCustomizeErrorPageRequest,
@@ -1171,6 +1179,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOverviewL7DataResponse) => void
   ): Promise<DescribeOverviewL7DataResponse> {
     return this.request("DescribeOverviewL7Data", req, cb)
+  }
+
+  /**
+   * 用于修改共享 CNAME。当前仅支持修改共享 CNAME 的描述和设置 IP SSL类型的共享CNAME关联IP SSL 域名，共享 CNAME 本身创建后不支持修改。该功能白名单内测中。
+   */
+  async ModifySharedCNAME(
+    req: ModifySharedCNAMERequest,
+    cb?: (error: string, rep: ModifySharedCNAMEResponse) => void
+  ): Promise<ModifySharedCNAMEResponse> {
+    return this.request("ModifySharedCNAME", req, cb)
   }
 
   /**
@@ -2415,6 +2433,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DeployConfigGroupVersionResponse) => void
   ): Promise<DeployConfigGroupVersionResponse> {
     return this.request("DeployConfigGroupVersion", req, cb)
+  }
+
+  /**
+   * 查询共享CNAME列表，支持模糊搜索、分页、排序等。
+   */
+  async DescribeSharedCNAME(
+    req: DescribeSharedCNAMERequest,
+    cb?: (error: string, rep: DescribeSharedCNAMEResponse) => void
+  ): Promise<DescribeSharedCNAMEResponse> {
+    return this.request("DescribeSharedCNAME", req, cb)
   }
 
   /**

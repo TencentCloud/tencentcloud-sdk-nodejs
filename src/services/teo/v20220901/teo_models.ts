@@ -3135,6 +3135,25 @@ export interface DetectLengthLimitRule {
 }
 
 /**
+ * IP SSL相关信息
+ */
+export interface IPSSLConfig {
+  /**
+   * IP SSL关联的域名。如果Status值为 unbound 时，该字段为空值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssociatedDomain?: string
+  /**
+   * 关联状态， 取值如下：
+<li>bound：IP SSL配置已绑定</li>
+<li>binding：IP SSL配置绑定中</li>
+<li>unbinding：IP SSL配置解绑中</li>
+<li>unbound：IP SSL配置未绑定</li>
+   */
+  Status?: string
+}
+
+/**
  * 源站组健康状态。
  */
 export interface OriginGroupHealthStatus {
@@ -3575,6 +3594,38 @@ export interface DescribeOriginACLResponse {
 }
 
 /**
+ * 共享CNAME明细
+ */
+export interface SharedCNAMEInfo {
+  /**
+   * 共享CNAME类型：取值范围如下：
+<li>custom：由用户创建的自定义共享CNAME</li>
+<li>ip-ssl：IP SSL类型的共享CNAME</li>
+   */
+  Type?: string
+  /**
+   * 共享CNAME名称。
+   */
+  SharedCNAME?: string
+  /**
+   * 描述。
+   */
+  Description?: string
+  /**
+   * 当type为ip-ssl时，展示该共享CNAME关联的 IP SSL 配置信息。
+   */
+  IPSSLConfig?: IPSSLConfig
+  /**
+   * 共享CNAME绑定的加速域名数量。
+   */
+  BindDomainCount?: number
+  /**
+   * 加入该共享CNAME的加速域名列表。当加入的域名数量超过100个时，只返回前100个加速域名。
+   */
+  AccelerationDomains?: Array<ReferenceHolder>
+}
+
+/**
  * 失败原因
  */
 export interface FailReason {
@@ -3788,17 +3839,17 @@ export interface CreateOriginGroupRequest {
 }
 
 /**
- * Top类数据记录
+ * ModifyDDoSProtection请求参数结构体
  */
-export interface TopDataRecord {
+export interface ModifyDDoSProtectionRequest {
   /**
-   * 查询维度值。
+   * 站点 ID。
    */
-  TypeKey: string
+  ZoneId: string
   /**
-   * top数据排行。
+   * 独立 DDoS 防护配置。
    */
-  DetailData: Array<TopDetailData>
+  DDoSProtection: DDoSProtection
 }
 
 /**
@@ -4044,6 +4095,28 @@ export interface AlgDetectResult {
 <li>longdelay：（长时间）等待后响应。</li>
    */
   Action?: string
+}
+
+/**
+ * ModifySharedCNAME请求参数结构体
+ */
+export interface ModifySharedCNAMERequest {
+  /**
+   * 共享 CNAME 所属站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 共享 CNAME。
+   */
+  SharedCNAME: string
+  /**
+   * 请输入调整后的描述。
+   */
+  Description?: string
+  /**
+   * 设置IP SSL 类型的共享CNAME 的 IP SSL 信息。
+   */
+  IPSSLSetting?: IPSSLSetting
 }
 
 /**
@@ -4603,13 +4676,21 @@ export interface ModifyRuleRequest {
 }
 
 /**
- * 内容标识配置参数。
+ * DescribeSharedCNAME返回参数结构体
  */
-export interface SetContentIdentifierParameters {
+export interface DescribeSharedCNAMEResponse {
   /**
-   * 内容标识id
+   * 符合过滤条件的共享CNAME总数。
    */
-  ContentIdentifier?: string
+  TotalCount?: number
+  /**
+   * 共享CNAME列表明细。
+   */
+  SharedCNAMEInfo?: Array<SharedCNAMEInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4786,6 +4867,16 @@ export interface ModifySecurityPolicyRequest {
    * 指定策略模板 ID。当 Entity 参数值为 Template 时，使用本参数指定策略模板的 ID。
    */
   TemplateId?: string
+}
+
+/**
+ * ModifySharedCNAME返回参数结构体
+ */
+export interface ModifySharedCNAMEResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6325,6 +6416,20 @@ export interface VideoTemplateInfo {
 }
 
 /**
+ * Top类数据记录
+ */
+export interface TopDataRecord {
+  /**
+   * 查询维度值。
+   */
+  TypeKey: string
+  /**
+   * top数据排行。
+   */
+  DetailData: Array<TopDetailData>
+}
+
+/**
  * HandleFunctionRuntimeEnvironment返回参数结构体
  */
 export interface HandleFunctionRuntimeEnvironmentResponse {
@@ -7804,6 +7909,25 @@ export interface BotRatings {
    * 正常 Bot 请求的执行动作。 SecurityAction 的 Name 取值支持：<li>Allow：放行。</li>
    */
   HumanRequestsAction?: SecurityAction
+}
+
+/**
+ * 引用/被引用的实例信息。
+ */
+export interface ReferenceHolder {
+  /**
+   * 站点ID。
+   */
+  ZoneId: string
+  /**
+   * 实例类型，取值如下：
+<li>acceleration-domain：加速域名；</li>
+   */
+  Type: string
+  /**
+   * 被引用/引用的实例信息。
+   */
+  Instance: string
 }
 
 /**
@@ -10327,6 +10451,16 @@ export interface DescribeSecurityTemplateBindingsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 内容标识配置参数。
+ */
+export interface SetContentIdentifierParameters {
+  /**
+   * 内容标识id
+   */
+  ContentIdentifier?: string
 }
 
 /**
@@ -14788,6 +14922,20 @@ export interface DDoSBlockData {
 }
 
 /**
+ * IP SSL 配置信息
+ */
+export interface IPSSLSetting {
+  /**
+   * 操作类型， 取值如下： <li>bind：绑定</li> <li>unbind：解绑</li>
+   */
+  Operation: string
+  /**
+   * 要绑定的IP SSL的所属域名。
+   */
+  AssociatedDomain: string
+}
+
+/**
  * DescribeMultiPathGateways请求参数结构体
  */
 export interface DescribeMultiPathGatewaysRequest {
@@ -15022,17 +15170,46 @@ export interface IPWhitelist {
 }
 
 /**
- * ModifyDDoSProtection请求参数结构体
+ * DescribeSharedCNAME请求参数结构体
  */
-export interface ModifyDDoSProtectionRequest {
+export interface DescribeSharedCNAMERequest {
   /**
-   * 站点 ID。
+   * 共享CNAME所属站点ID。
    */
   ZoneId: string
   /**
-   * 独立 DDoS 防护配置。
+   * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
+<li>shared-cname<br>   按照【<strong>共享CNAME</strong>】进行过滤。<br>   类型：String<br>   必选：否</li>
+<li>type<br>   按照【<strong>共享canme类型</strong>】进行过滤。<br>   类型：String<br>   必选：否</li>
+<li>description<br>   按照【<strong>描述</strong>】进行过滤。<br>   类型：String<br>   必选：否</li>
    */
-  DDoSProtection: DDoSProtection
+  Filters?: Array<AdvancedFilter>
+  /**
+   * 列表排序方式，取值有：
+<li>asc：升序排列；</li>
+<li>desc：降序排列。</li>默认值为asc。
+   */
+  Direction?: string
+  /**
+   * 匹配方式，取值有：
+<li>all：返回匹配所有查询条件的共享CNAME；</li>
+<li>any：返回匹配任意一个查询条件的共享CNAME。</li>默认值为all。
+   */
+  Match?: string
+  /**
+   * 排序依据，取值有：
+<li>create-time：创建时间；</li>
+<li>shared-cname：共享CNAME；</li>默认根据shared-cname属性排序。
+   */
+  Order?: string
+  /**
+   * 分页查询偏移量，默认为 0。
+   */
+  Offset?: number
+  /**
+   * 分页查询限制数目，默认值：20，上限：200。
+   */
+  Limit?: number
 }
 
 /**

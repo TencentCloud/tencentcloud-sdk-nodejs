@@ -147,21 +147,21 @@ export interface DescribeLogHistogramRequest {
 }
 
 /**
- * 数据湖计算服务（Data Lake Compute，简称DLC）数据分区配置
+ * 投递类任务数据过滤统计信息
  */
-export interface DlcPartitionInfo {
+export interface FilterStatistics {
   /**
-   * <p>cls日志中的字段名</p>
+   * <p>原始日志数</p>
    */
-  ClsField: string
+  OriginalCount?: number
   /**
-   * <p>dlc表的列名</p>
+   * <p>过滤后日志数</p>
    */
-  DlcField: string
+  FilteredCount?: number
   /**
-   * <p>请参考 <a href="https://cloud.tencent.com/document/product/1342/53778#Column">DLC  cloumn中的Type 定义 </a></p><p>枚举值：</p><ul><li>int|string|array等： 请参考 <a href="https://cloud.tencent.com/document/product/1342/53778#Column">DLC  cloumn中的Type 定义 </a></li></ul>
+   * <p>过滤后结果</p>
    */
-  DlcFieldType: string
+  FilteredResult?: Array<string>
 }
 
 /**
@@ -1383,6 +1383,17 @@ export interface DeleteAlarmShieldResponse {
 }
 
 /**
+ * 日志主题扩展信息
+ */
+export interface TopicExtendInfo {
+  /**
+   * 日志主题免鉴权配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AnonymousAccess?: AnonymousInfo
+}
+
+/**
  * CreateIndex请求参数结构体
  */
 export interface CreateIndexRequest {
@@ -2422,21 +2433,21 @@ export interface CustomMetricSpec {
 }
 
 /**
- * 投递类任务数据过滤统计信息
+ * 数据湖计算服务（Data Lake Compute，简称DLC）数据分区配置
  */
-export interface FilterStatistics {
+export interface DlcPartitionInfo {
   /**
-   * <p>原始日志数</p>
+   * <p>cls日志中的字段名</p>
    */
-  OriginalCount?: number
+  ClsField: string
   /**
-   * <p>过滤后日志数</p>
+   * <p>dlc表的列名</p>
    */
-  FilteredCount?: number
+  DlcField: string
   /**
-   * <p>过滤后结果</p>
+   * <p>请参考 <a href="https://cloud.tencent.com/document/product/1342/53778#Column">DLC  cloumn中的Type 定义 </a></p><p>枚举值：</p><ul><li>int|string|array等： 请参考 <a href="https://cloud.tencent.com/document/product/1342/53778#Column">DLC  cloumn中的Type 定义 </a></li></ul>
    */
-  FilteredResult?: Array<string>
+  DlcFieldType: string
 }
 
 /**
@@ -3929,6 +3940,24 @@ export interface ModifyConsoleSharingRequest {
 }
 
 /**
+ * 消耗量
+ */
+export interface ChatUsage {
+  /**
+   * 输入token数
+   */
+  PromptTokens?: number
+  /**
+   * 输出token数
+   */
+  CompletionTokens?: number
+  /**
+   * 总token数
+   */
+  TotalTokens?: number
+}
+
+/**
  * 元数据Pod label标签结构体
  */
 export interface AppointLabel {
@@ -4326,20 +4355,45 @@ export interface MetaTagInfo {
 }
 
 /**
- * DescribeExports请求参数结构体
+ * DescribeMachineGroups请求参数结构体
  */
-export interface DescribeExportsRequest {
+export interface DescribeMachineGroupsRequest {
   /**
-   * 日志主题Id
-- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+   * 过滤条件
+machineGroupName
+- 按照【机器组名称】进行过滤。
+- 类型：String
+- 必选：否
+
+machineGroupId
+- 按照【机器组ID】进行过滤。
+- 类型：String
+- 必选：否
+
+osType
+- 按照【操作系统类型】进行过滤。0： Linux；1： Windows
+- 类型：Int
+- 必选：否
+
+tagKey
+- 按照【标签键】进行过滤。
+- 类型：String
+- 必选：否
+
+tag:tagKey
+- 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。
+- 类型：String
+- 必选：否
+
+每次请求的Filters的上限为10，Filter.Values的上限为5。
    */
-  TopicId: string
+  Filters?: Array<Filter>
   /**
    * 分页的偏移量，默认值为0
    */
   Offset?: number
   /**
-   * 分页单页限制数目，默认值为20，最大值100
+   * 分页单页的限制数目，默认值为20，最大值100
    */
   Limit?: number
 }
@@ -4906,14 +4960,17 @@ export interface ModifyAlarmNoticeRequest {
 }
 
 /**
- * 日志主题扩展信息
+ * 具体的Tool Call Function调用
  */
-export interface TopicExtendInfo {
+export interface ToolCallFunction {
   /**
-   * 日志主题免鉴权配置信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>Function名称</p>
    */
-  AnonymousAccess?: AnonymousInfo
+  Name?: string
+  /**
+   * <p>Function参数，一般为json字符串</p>
+   */
+  Arguments?: string
 }
 
 /**
@@ -5859,6 +5916,28 @@ export interface MetricCollectConfig {
    * 更新时间戳 秒级
    */
   UpdateTime?: number
+}
+
+/**
+ * 返回的内容
+ */
+export interface Delta {
+  /**
+   * <p>角色</p><p>枚举值：</p><ul><li>user： 用户</li><li>assistant： AI助手</li></ul>
+   */
+  Role?: string
+  /**
+   * <p>内容详情</p>
+   */
+  Content?: string
+  /**
+   * <p>思维链内容。<br>用于展示模型思考过程，仅深度思考模式可用。仅作为输出参数返回，在进行多轮对话时，无需传入输入参数中。</p>
+   */
+  ReasoningContent?: string
+  /**
+   * <p>模型生成的工具调用。仅支持输出参数返回。<br>对于每一次的输出值应该以Id为标识对Type、Name、Arguments字段进行合并。</p>
+   */
+  ToolCalls?: Array<ToolCall>
 }
 
 /**
@@ -6882,13 +6961,80 @@ export interface DeleteNetworkApplicationResponse {
 }
 
 /**
- * DeleteShipper返回参数结构体
+ * cos导入配置信息
  */
-export interface DeleteShipperResponse {
+export interface CosRechargeInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * COS导入配置ID
    */
-  RequestId?: string
+  Id?: string
+  /**
+   * 日志主题ID
+   */
+  TopicId?: string
+  /**
+   * 日志集ID
+   */
+  LogsetId?: string
+  /**
+   * COS导入任务名称
+   */
+  Name?: string
+  /**
+   * COS存储桶
+   */
+  Bucket?: string
+  /**
+   * COS存储桶所在地域。
+
+- 通过[地域和访问域名](https://cloud.tencent.com/document/product/436/6224)获取地域信息。
+   */
+  BucketRegion?: string
+  /**
+   * COS文件所在文件夹的前缀
+   */
+  Prefix?: string
+  /**
+   * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文；
+默认为minimalist_log
+   */
+  LogType?: string
+  /**
+   * 状态   status 0: 已创建, 1: 运行中, 2: 已停止, 3: 已完成, 4: 运行失败。
+   */
+  Status?: number
+  /**
+   * 是否启用:   0： 未启用  ， 1：启用
+   */
+  Enable?: number
+  /**
+   * 创建时间。时间格式：YYYY-MM-DD HH:mm:ss
+   */
+  CreateTime?: string
+  /**
+   * 更新时间。时间格式：YYYY-MM-DD HH:mm:ss
+   */
+  UpdateTime?: string
+  /**
+   * 进度条百分值
+   */
+  Progress?: number
+  /**
+   * 压缩方式supported: "", "gzip", "lzop", "snappy”;  默认空不压缩
+   */
+  Compress?: string
+  /**
+   * 见： ExtractRuleInfo 结构描述
+   */
+  ExtractRuleInfo?: ExtractRuleInfo
+  /**
+   * COS导入任务类型。1：一次性导入任务；2：持续性导入任务。
+   */
+  TaskType?: number
+  /**
+   * 元数据。支持 bucket，object。
+   */
+  Metadata?: Array<string>
 }
 
 /**
@@ -7151,6 +7297,28 @@ export interface DeleteHostMetricConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 返回的回复, 支持多个
+ */
+export interface Choice {
+  /**
+   * <p>结束标志位，可能为 stop、 sensitive或者tool_calls。<br>stop 表示输出正常结束。<br>sensitive 表示安全审核未通过。<br>tool_calls 标识函数调用。</p><p>注意：<br>可能会出现部分内容已输出，但中间某一段响应中的 FinishReason 值为 sensitive，此时说明安全审核未通过。如果业务场景有实时文字上屏的需求，需要自行撤回已上屏的内容，并建议自定义替换为一条提示语，如 “这个问题我不方便回答，不如我们换个话题试试”，以保障终端体验。</p>
+   */
+  FinishReason?: string
+  /**
+   * <p>增量返回值，流式调用时使用该字段。</p>
+   */
+  Delta?: Delta
+  /**
+   * <p>返回值，非流式调用时使用该字段。</p>
+   */
+  Message?: Message
+  /**
+   * <p>索引值，流式调用时使用该字段。</p>
+   */
+  Index?: number
 }
 
 /**
@@ -7992,6 +8160,36 @@ export interface CreateCosRechargeRequest {
    * 元数据。
    */
   Metadata?: Array<string>
+}
+
+/**
+ * ChatCompletions返回参数结构体
+ */
+export interface ChatCompletionsResponse {
+  /**
+   * <p>Unix 时间戳，单位为秒。</p>
+   */
+  Created?: number
+  /**
+   * <p>Token 统计信息。</p>
+   */
+  Usage?: ChatUsage
+  /**
+   * <p>本次请求的 Id。</p>
+   */
+  Id?: string
+  /**
+   * <p>回复内容。</p>
+   */
+  Choices?: Array<Choice>
+  /**
+   * <p>功能名称</p><p>枚举值：</p><ul><li>text2sql： 智能生成检索分析语句</li><li>text2sql-reasoning： 智能生成检索分析语句-深度思考</li></ul>
+   */
+  Model?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8843,6 +9041,28 @@ export interface DescribeAlertRecordHistoryRequest {
 }
 
 /**
+ * ChatCompletions请求参数结构体
+ */
+export interface ChatCompletionsRequest {
+  /**
+   * <p>功能名称</p><p>枚举值：</p><ul><li>text2sql： 智能生成检索分析语句</li><li>text2sql-reasoning： 智能生成检索分析语句-深度思考</li></ul>
+   */
+  Model: string
+  /**
+   * <p>聊天上下文信息。<br>说明：</p><ol><li>长度最多为 11 (5轮历史会话 + user新提问) ，按对话时间从旧到新在数组中排列。超出此长度会丢弃旧会话数据。</li><li>Message.Role 可选值：user、assistant。<br>user 和 assistant 需交替出现，以 user 提问开始，user 提问结束，Content 不能为空。Role 的顺序示例：[user assistant user assistant user ...]。</li></ol>
+   */
+  Messages: Array<Message>
+  /**
+   * <p>流式调用开关。<br>说明：</p><ol><li>未传值时默认为非流式调用（false）。</li><li>流式调用时以 SSE 协议增量返回结果（返回值取 Choices[n].Delta 中的值，需要拼接增量数据才能获得完整结果）。</li><li>非流式调用时：<br>调用方式与普通 HTTP 请求无异。<br>接口响应耗时较长，如需更低时延建议设置为 true。<br>只返回一次最终结果（返回值取 Choices[n].Message 中的值）。</li></ol><p>注意：</p><ol><li>通过 SDK 调用时，流式和非流式调用需用不同的方式获取返回值，具体参考 SDK 中的注释或示例（在各语言 SDK 代码仓库的 examples/hunyuan/v20230901/ 目录中）。</li><li>可能会出现部分内容已输出，但中间某一段响应中的 FinishReason 值为 sensitive，此时说明安全审核未通过。如果业务场景有实时文字上屏的需求，需要自行撤回已上屏的内容，并建议自定义替换为一条提示语，如 “这个问题我不方便回答，不如我们换个话题试试”，以保障终端体验。</li></ol>
+   */
+  Stream?: boolean
+  /**
+   * <p>额外元数据信息。例如：[{&quot;Key&quot;:&quot;topic_id&quot;,&quot;Value&quot;:&quot;xxxxxxxx-xxxx&quot;},{&quot;Key&quot;:&quot;topic_region&quot;,&quot;Value&quot;:&quot;ap-guangzhou&quot;}]</p>
+   */
+  Metadata?: Array<MetadataItem>
+}
+
+/**
  * DeleteNetworkApplication请求参数结构体
  */
 export interface DeleteNetworkApplicationRequest {
@@ -9338,6 +9558,28 @@ export interface ConsoleSharingInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ContentSafetyCode?: number
+}
+
+/**
+ * 模型生成的工具调用
+ */
+export interface ToolCall {
+  /**
+   * <p>工具调用id</p>
+   */
+  Id?: string
+  /**
+   * <p>工具调用类型，当前只支持function</p>
+   */
+  Type?: string
+  /**
+   * <p>具体的function调用</p>
+   */
+  Function?: ToolCallFunction
+  /**
+   * <p>索引值</p>
+   */
+  Index?: number
 }
 
 /**
@@ -10646,6 +10888,20 @@ export interface CreateMachineGroupResponse {
 }
 
 /**
+ * 过滤器
+ */
+export interface Filter {
+  /**
+   * 需要过滤的字段。
+   */
+  Key: string
+  /**
+   * 需要过滤的值。
+   */
+  Values: Array<string>
+}
+
+/**
  * 元字段索引配置
  */
 export interface RuleTagInfo {
@@ -11497,45 +11753,20 @@ export interface CreateDashboardSubscribeResponse {
 }
 
 /**
- * DescribeMachineGroups请求参数结构体
+ * DescribeExports请求参数结构体
  */
-export interface DescribeMachineGroupsRequest {
+export interface DescribeExportsRequest {
   /**
-   * 过滤条件
-machineGroupName
-- 按照【机器组名称】进行过滤。
-- 类型：String
-- 必选：否
-
-machineGroupId
-- 按照【机器组ID】进行过滤。
-- 类型：String
-- 必选：否
-
-osType
-- 按照【操作系统类型】进行过滤。0： Linux；1： Windows
-- 类型：Int
-- 必选：否
-
-tagKey
-- 按照【标签键】进行过滤。
-- 类型：String
-- 必选：否
-
-tag:tagKey
-- 按照【标签键值对】进行过滤。tagKey使用具体的标签键进行替换。
-- 类型：String
-- 必选：否
-
-每次请求的Filters的上限为10，Filter.Values的上限为5。
+   * 日志主题Id
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
    */
-  Filters?: Array<Filter>
+  TopicId: string
   /**
    * 分页的偏移量，默认值为0
    */
   Offset?: number
   /**
-   * 分页单页的限制数目，默认值为20，最大值100
+   * 分页单页限制数目，默认值为20，最大值100
    */
   Limit?: number
 }
@@ -11780,6 +12011,28 @@ export interface CreateMetricConfigRequest {
    * 采集配置yaml格式字符串, Flag=1时必填
    */
   YamlSpec?: MetricYamlSpec
+}
+
+/**
+ * 会话内容
+ */
+export interface Message {
+  /**
+   * <p>角色</p><p>枚举值：</p><ul><li>user： 用户</li><li>assistant： AI助手</li></ul>
+   */
+  Role?: string
+  /**
+   * <p>文本内容</p>
+   */
+  Content?: string
+  /**
+   * <p>思维链内容。<br>用于展示模型思考过程，仅深度思考模式可用。仅作为输出参数返回，在进行多轮对话时，无需传入输入参数中。</p>
+   */
+  ReasoningContent?: string
+  /**
+   * <p>模型生成的工具调用。仅支持输出参数返回。</p>
+   */
+  ToolCalls?: Array<ToolCall>
 }
 
 /**
@@ -12471,83 +12724,6 @@ export interface OpenClawServiceResponse {
 }
 
 /**
- * cos导入配置信息
- */
-export interface CosRechargeInfo {
-  /**
-   * COS导入配置ID
-   */
-  Id?: string
-  /**
-   * 日志主题ID
-   */
-  TopicId?: string
-  /**
-   * 日志集ID
-   */
-  LogsetId?: string
-  /**
-   * COS导入任务名称
-   */
-  Name?: string
-  /**
-   * COS存储桶
-   */
-  Bucket?: string
-  /**
-   * COS存储桶所在地域。
-
-- 通过[地域和访问域名](https://cloud.tencent.com/document/product/436/6224)获取地域信息。
-   */
-  BucketRegion?: string
-  /**
-   * COS文件所在文件夹的前缀
-   */
-  Prefix?: string
-  /**
-   * 采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文；
-默认为minimalist_log
-   */
-  LogType?: string
-  /**
-   * 状态   status 0: 已创建, 1: 运行中, 2: 已停止, 3: 已完成, 4: 运行失败。
-   */
-  Status?: number
-  /**
-   * 是否启用:   0： 未启用  ， 1：启用
-   */
-  Enable?: number
-  /**
-   * 创建时间。时间格式：YYYY-MM-DD HH:mm:ss
-   */
-  CreateTime?: string
-  /**
-   * 更新时间。时间格式：YYYY-MM-DD HH:mm:ss
-   */
-  UpdateTime?: string
-  /**
-   * 进度条百分值
-   */
-  Progress?: number
-  /**
-   * 压缩方式supported: "", "gzip", "lzop", "snappy”;  默认空不压缩
-   */
-  Compress?: string
-  /**
-   * 见： ExtractRuleInfo 结构描述
-   */
-  ExtractRuleInfo?: ExtractRuleInfo
-  /**
-   * COS导入任务类型。1：一次性导入任务；2：持续性导入任务。
-   */
-  TaskType?: number
-  /**
-   * 元数据。支持 bucket，object。
-   */
-  Metadata?: Array<string>
-}
-
-/**
  * 日志分析的列属性
  */
 export interface Column {
@@ -12671,17 +12847,13 @@ export interface CreateRebuildIndexTaskRequest {
 }
 
 /**
- * 过滤器
+ * DeleteShipper返回参数结构体
  */
-export interface Filter {
+export interface DeleteShipperResponse {
   /**
-   * 需要过滤的字段。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Key: string
-  /**
-   * 需要过滤的值。
-   */
-  Values: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -13813,6 +13985,20 @@ tag:tagKey
    * 分页单页的限制数目，默认值为20，最大值100
    */
   Limit?: number
+}
+
+/**
+ * Metadata数组项
+ */
+export interface MetadataItem {
+  /**
+   * <p>元数据标签键</p>
+   */
+  Key?: string
+  /**
+   * <p>元数据标签值</p>
+   */
+  Value?: string
 }
 
 /**

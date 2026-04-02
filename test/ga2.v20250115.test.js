@@ -18,6 +18,16 @@ const client = new tencentcloud.ga2.v20250115.Client({
 })
 describe("ga2.v20250115.test.js", function () {
 
+it("ga2.v20250115.CreateGlobalAccelerator", async function () {
+    try {
+       const data = await client.CreateGlobalAccelerator({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ga2.v20250115.DescribeCrossBorderSettlement", async function () {
     try {
        const data = await client.DescribeCrossBorderSettlement({})

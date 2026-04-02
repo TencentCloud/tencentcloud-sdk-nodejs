@@ -241,73 +241,65 @@ export interface RotateProductSecretRequest {
  */
 export interface CreateProductSecretRequest {
   /**
-   * 凭据名称，同一region内不可重复，最长128字节，使用字母、数字或者 - _ 的组合，第一个字符必须为字母或者数字。
+   * <p>凭据名称，同一region内不可重复，最长128字节，使用字母、数字或者 - _ 的组合，第一个字符必须为字母或者数字。</p>
    */
   SecretName: string
   /**
-   * 用户账号名前缀，由用户自行指定，长度限定在8个字符以内，
-可选字符集包括：
-数字字符：[0, 9]，
-小写字符：[a, z]，
-大写字符：[A, Z]，
-特殊字符(全英文符号)：下划线(_)，
-前缀必须以大写或小写字母开头。
+   * <p>用户账号名前缀，由用户自行指定，长度限定在8个字符以内，<br>可选字符集包括：<br>数字字符：[0, 9]，<br>小写字符：[a, z]，<br>大写字符：[A, Z]，<br>特殊字符(全英文符号)：下划线(_)，<br>前缀必须以大写或小写字母开头。</p>
    */
   UserNamePrefix: string
   /**
-   * 凭据所绑定的云产品名称，如Mysql，可以通过DescribeSupportedProducts接口获取所支持的云产品名称。
+   * <p>凭据所绑定的云产品名称，如Mysql，可以通过DescribeSupportedProducts接口获取所支持的云产品名称。</p>
    */
   ProductName: string
   /**
-   * 云产品实例ID。
+   * <p>云产品实例ID。</p>
    */
   InstanceID: string
   /**
-   * 账号的域名，IP形式，支持填入%。
+   * <p>账号的域名，IP形式，支持填入%。</p>
    */
   Domains: Array<string>
   /**
-   * 将凭据与云产品实例绑定时，需要授予的权限列表。
+   * <p>将凭据与云产品实例绑定时，需要授予的权限列表。</p>
    */
   PrivilegesList: Array<ProductPrivilegeUnit>
   /**
-   * 描述信息，用于详细描述用途等，最大支持2048字节。
+   * <p>描述信息，用于详细描述用途等，最大支持2048字节。</p>
    */
   Description?: string
   /**
-   * 指定对凭据进行加密的KMS CMK。
-如果为空则表示使用Secrets Manager为您默认创建的CMK进行加密。
-您也可以指定在同region 下自行创建的KMS CMK进行加密。
+   * <p>指定对凭据进行加密的KMS CMK。<br>如果为空则表示使用Secrets Manager为您默认创建的CMK进行加密。<br>您也可以指定在同region 下自行创建的KMS CMK进行加密。</p>
    */
   KmsKeyId?: string
   /**
-   * 标签列表。
+   * <p>标签列表。</p>
    */
   Tags?: Array<Tag>
   /**
-   * 用户自定义的开始轮转时间，格式：2006-01-02 15:04:05。
-当EnableRotation为True时，此参数必填。
+   * <p>用户自定义的开始轮转时间，格式：2006-01-02 15:04:05。<br>当EnableRotation为True时，此参数必填。</p>
    */
   RotationBeginTime?: string
   /**
-   * 是否开启轮转
-True -- 开启
-False -- 不开启
-如果不指定，默认为False。
+   * <p>是否开启轮转<br>True -- 开启<br>False -- 不开启<br>如果不指定，默认为False。</p>
    */
   EnableRotation?: boolean
   /**
-   * 轮转周期，以天为单位，默认为1天。
+   * <p>轮转周期，以天为单位，默认为1天。</p>
    */
   RotationFrequency?: number
   /**
-   * KMS的独享集群的ID。当KmsKeyId为空,并且用户的KMS存在有效的HsmClusterId时有效。
+   * <p>KMS的独享集群的ID。当KmsKeyId为空,并且用户的KMS存在有效的HsmClusterId时有效。</p>
    */
   KmsHsmClusterId?: string
   /**
-   * 账户备注
+   * <p>账户备注</p>
    */
   AccountRemark?: string
+  /**
+   * <p>数据库账号类型，目前仅在创建sqlserver凭据场景会使用到，仅支持L3</p><p>枚举值：</p><ul><li>L3： 普通权限账号</li></ul>
+   */
+  AccountType?: string
 }
 
 /**
@@ -1182,19 +1174,19 @@ export interface DisableSecretRequest {
  */
 export interface CreateProductSecretResponse {
   /**
-   * 创建的凭据名称。
+   * <p>创建的凭据名称。</p>
    */
   SecretName?: string
   /**
-   * 标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误。
+   * <p>标签操作的返回码. 0: 成功；1: 内部错误；2: 业务处理错误。</p>
    */
   TagCode?: number
   /**
-   * 标签操作的返回信息。
+   * <p>标签操作的返回信息。</p>
    */
   TagMsg?: string
   /**
-   * 创建云产品凭据异步任务ID号。
+   * <p>创建云产品凭据异步任务ID号。</p>
    */
   FlowID?: number
   /**

@@ -20,7 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   AlarmInfo,
   DescribeLogHistogramRequest,
-  DlcPartitionInfo,
+  FilterStatistics,
   DescribeNetworkApplicationDetailRequest,
   DeleteShipperRequest,
   DeleteConsoleResponse,
@@ -70,6 +70,7 @@ import {
   CreateAlarmShieldRequest,
   MachineGroupInfo,
   DeleteAlarmShieldResponse,
+  TopicExtendInfo,
   CreateIndexRequest,
   CreateConsoleResponse,
   CreateTopicRequest,
@@ -109,7 +110,7 @@ import {
   GetAlarmLogRequest,
   DeleteCosRechargeResponse,
   CustomMetricSpec,
-  FilterStatistics,
+  DlcPartitionInfo,
   GroupTriggerConditionInfo,
   KafkaRechargeInfo,
   ConfigInfo,
@@ -169,6 +170,7 @@ import {
   DeleteConsoleSharingRequest,
   UploadLogRequest,
   ModifyConsoleSharingRequest,
+  ChatUsage,
   AppointLabel,
   CommitConsumerOffsetsRequest,
   ModifyConsoleResponse,
@@ -187,7 +189,7 @@ import {
   ModifyScheduledSqlResponse,
   QueryRangeMetricRequest,
   MetaTagInfo,
-  DescribeExportsRequest,
+  DescribeMachineGroupsRequest,
   DescribeConfigsResponse,
   ExtractRuleInfo,
   TopicInfo,
@@ -204,7 +206,7 @@ import {
   ModifyHostMetricConfigResponse,
   DescribeMetricCorrectDimensionResponse,
   ModifyAlarmNoticeRequest,
-  TopicExtendInfo,
+  ToolCallFunction,
   CreateAlarmRequest,
   DlcFiledInfo,
   DeleteScheduledSqlResponse,
@@ -241,6 +243,7 @@ import {
   MonitorNotice,
   DescribeAlarmsResponse,
   MetricCollectConfig,
+  Delta,
   DeleteIndexResponse,
   AlarmAnalysisConfig,
   SearchLogErrors,
@@ -281,7 +284,7 @@ import {
   CheckRechargeKafkaServerResponse,
   InstanceConfig,
   DeleteNetworkApplicationResponse,
-  DeleteShipperResponse,
+  CosRechargeInfo,
   DeleteNoticeContentRequest,
   DescribeKafkaConsumerRequest,
   ModifyDataTransformResponse,
@@ -295,6 +298,7 @@ import {
   ModifyDashboardRequest,
   SendConsumerHeartbeatResponse,
   DeleteHostMetricConfigResponse,
+  Choice,
   DeleteMetricConfigRequest,
   CreateEsRechargeRequest,
   ConsumerGroup,
@@ -322,6 +326,7 @@ import {
   KafkaProtocolInfo,
   ModifyAlarmShieldResponse,
   CreateCosRechargeRequest,
+  ChatCompletionsResponse,
   EstimateRebuildIndexTaskRequest,
   CreateAlarmShieldResponse,
   DescribeConsumerRequest,
@@ -355,6 +360,7 @@ import {
   CreateNetworkApplicationResponse,
   DeleteIndexRequest,
   DescribeAlertRecordHistoryRequest,
+  ChatCompletionsRequest,
   DeleteNetworkApplicationRequest,
   LogsetInfo,
   CreateExportRequest,
@@ -373,6 +379,7 @@ import {
   DescribeKafkaRechargesResponse,
   ModifyDlcDeliverRequest,
   ConsoleSharingInfo,
+  ToolCall,
   DeleteCloudProductLogCollectionResponse,
   ExportInfo,
   MetricConfigLabel,
@@ -421,6 +428,7 @@ import {
   DescribeCosRechargesResponse,
   CreateSplunkDeliverRequest,
   CreateMachineGroupResponse,
+  Filter,
   RuleTagInfo,
   OpenClawServiceRequest,
   SearchCosRechargeInfoRequest,
@@ -454,7 +462,7 @@ import {
   GetAlarmLogResponse,
   DescribeKafkaRechargesRequest,
   CreateDashboardSubscribeResponse,
-  DescribeMachineGroupsRequest,
+  DescribeExportsRequest,
   AlarmTarget,
   CreateKafkaRechargeResponse,
   DashboardSubscribeData,
@@ -464,6 +472,7 @@ import {
   BaseMetricCollectConfig,
   SearchLogTopics,
   CreateMetricConfigRequest,
+  Message,
   ModifyConsumerResponse,
   PartitionOffsetInfo,
   KafkaConsumerContent,
@@ -483,12 +492,11 @@ import {
   CreateShipperResponse,
   ModifyCloudProductLogCollectionRequest,
   OpenClawServiceResponse,
-  CosRechargeInfo,
   Column,
   DescribeDataTransformInfoRequest,
   AlarmShieldCount,
   CreateRebuildIndexTaskRequest,
-  Filter,
+  DeleteShipperResponse,
   TopicPartitionInfo,
   ModifyTopicRequest,
   DeleteSplunkDeliverRequest,
@@ -522,6 +530,7 @@ import {
   CreateDataTransformRequest,
   DescribeMachineGroupsResponse,
   DescribeLogsetsRequest,
+  MetadataItem,
   ParquetInfo,
   DescribeConsolesResponse,
   ConsoleSharingParam,
@@ -1835,6 +1844,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteExportResponse) => void
   ): Promise<DeleteExportResponse> {
     return this.request("DeleteExport", req, cb)
+  }
+
+  /**
+     * 调用接口，发起一次对话请求。
+本接口支持智能生成检索分析语句等日志服务AI功能。
+⚠️注意：通过SSE流式调用此接口时，请务必设置请求域名（Endpoint）为 cls.ai.tencentcloudapi.com。
+     */
+  async ChatCompletions(
+    req: ChatCompletionsRequest,
+    cb?: (error: string, rep: ChatCompletionsResponse) => void
+  ): Promise<ChatCompletionsResponse> {
+    return this.request("ChatCompletions", req, cb)
   }
 
   /**

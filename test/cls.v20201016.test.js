@@ -1298,6 +1298,16 @@ it("cls.v20201016.DeleteExport", async function () {
     }
 })
 
+it("cls.v20201016.ChatCompletions", async function () {
+    try {
+       const data = await client.ChatCompletions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.SplitPartition", async function () {
     try {
        const data = await client.SplitPartition({})

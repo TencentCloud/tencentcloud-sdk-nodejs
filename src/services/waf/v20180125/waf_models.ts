@@ -662,35 +662,35 @@ export interface UpdateProtectionModesResponse {
  */
 export interface LLMDetectResult {
   /**
-   *  仅输出侧：涉敏信息
+   * <p>仅输出侧：涉敏信息</p>
    */
   SensitiveResult?: Array<LLMSensitiveValueLevel>
   /**
-   *  输入输出均检测：关键词库命中信息
+   * <p>输入输出均检测：关键词库命中信息</p>
    */
   KeyWordsResult?: Array<KeyWordInfo>
   /**
-   * 输入输出均检测：数据分类分级结果
+   * <p>输入输出均检测：数据分类分级结果</p>
    */
   DataCategoryResult?: Array<string>
   /**
-   *  仅输入侧检出：prompt检测的结果
+   * <p>仅输入侧检出：prompt检测的结果</p>
    */
   PromptInjectionResult?: PromptDetectResult
   /**
-   * 命中的规则ID
+   * <p>命中的规则ID</p>
    */
   RuleId?: string
   /**
-   * 命中的规则名称
+   * <p>命中的规则名称</p>
    */
   RuleName?: string
   /**
-   * 规则动作
+   * <p>规则动作</p>
    */
   Action?: string
   /**
-   * 攻击payload
+   * <p>攻击payload</p>
    */
   Payload?: string
 }
@@ -8287,21 +8287,29 @@ export interface DescribeFlowTrendResponse {
  */
 export interface DescribeQClawContentSecCheckRequest {
   /**
-   *  服务id,使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则
+   * <p>服务id,使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则</p>
    */
   ServiceId: string
   /**
-   * 要审核的内容
+   * <p>要审核的内容</p>
    */
-  Content: ApiGuardContent
+  Content?: ApiGuardContent
   /**
-   * 标识用户的id，限速使用，不填，则限速会不生效
+   * <p>标识用户的id，限速使用，不填，则限速会不生效</p>
    */
   UserId?: string
   /**
-   * 会话id
+   * <p>会话id</p>
    */
   SessionId?: string
+  /**
+   * <p>工具名称</p>
+   */
+  ToolName?: string
+  /**
+   * <p>工具执行的参数</p>
+   */
+  ToolArgs?: string
 }
 
 /**
@@ -15932,7 +15940,7 @@ export interface DescribeAttackWhiteRuleResponse {
  */
 export interface DescribeQClawContentSecCheckResponse {
   /**
-   * 检测结果
+   * <p>检测结果</p>
    */
   Data?: LLMRisks
   /**
