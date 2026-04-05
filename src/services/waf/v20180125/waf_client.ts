@@ -53,7 +53,7 @@ import {
   DeleteCustomWhiteRuleResponse,
   ModifyHostModeResponse,
   ModifyBotSceneStatusResponse,
-  DescribeAreaBanAreasResponse,
+  GetAttackDownloadRecordsRequest,
   ConditionInfo,
   MajorEventsPkg,
   DescribeDomainRulesRequest,
@@ -67,7 +67,6 @@ import {
   BotToken,
   UpdateRateLimitV2Request,
   DeleteAttackWhiteRuleResponse,
-  LLMRisks,
   DescribeWebshellStatusRequest,
   LogItems,
   GetAttackHistogramResponse,
@@ -101,7 +100,7 @@ import {
   DescribeCustomRuleListRequest,
   DeleteIpAccessControlV2Response,
   PostAttackDownloadTaskResponse,
-  ClawRiskItem,
+  DescribeAttackWhiteRuleRequest,
   DescribeOwaspRulesResponse,
   StrategyForAntiInfoLeak,
   AddSpartaProtectionResponse,
@@ -123,7 +122,7 @@ import {
   ModifyInstanceAttackLogPostResponse,
   UpsertCCRuleResponse,
   DescribeHostRequest,
-  GenerateDealsAndPayNewResponse,
+  AccessFullTextInfo,
   DeleteCustomRuleRequest,
   DescribeUserSignatureRuleV2Request,
   ModifyApiSecEventChangeRequest,
@@ -183,7 +182,7 @@ import {
   DescribeAccessIndexRequest,
   BotDataFilter,
   DomainInfo,
-  GetAttackDownloadRecordsRequest,
+  DescribeAreaBanAreasResponse,
   DescribeDomainsResponse,
   BotActionScopeRuleEntry,
   AddAntiFakeUrlResponse,
@@ -200,7 +199,6 @@ import {
   ModifyAreaBanAreasResponse,
   ModifyAntiFakeUrlStatusRequest,
   ApiAsset,
-  QueryBypassAllStatusRequest,
   DescribeOwaspRulesRequest,
   DescribeCCRuleListRequest,
   ResponseCode,
@@ -339,7 +337,6 @@ import {
   SearchAttackLogRequest,
   AddCustomRuleResponse,
   DescribeFlowTrendResponse,
-  DescribeQClawContentSecCheckRequest,
   CreateIpAccessControlResponse,
   UpsertIpAccessControlRequest,
   BotSceneActionRule,
@@ -441,7 +438,7 @@ import {
   CacheUrlItems,
   ModifyUserSignatureRuleV2Request,
   ModifyWebshellStatusResponse,
-  AccessFullTextInfo,
+  GenerateDealsAndPayNewResponse,
   ModifyUserLevelRequest,
   DescribeCCRuleRequest,
   BatchOperateUserSignatureRulesRequest,
@@ -478,7 +475,6 @@ import {
   ModifyDomainPostActionResponse,
   RefreshAccessCheckResultRequest,
   IpHitItemsData,
-  ApiGuardContent,
   WebshellStatus,
   DescribeSpartaProtectionInfoResponse,
   DescribeRateLimitsV2Response,
@@ -500,7 +496,7 @@ import {
   CreatePostCLSFlowRequest,
   CCRuleItems,
   ModifyDomainIpv6StatusRequest,
-  DescribeAttackWhiteRuleRequest,
+  QueryBypassAllStatusRequest,
   DescribeAntiInfoLeakageRulesResponse,
   AddAreaBanAreasResponse,
   DescribeScanIpResponse,
@@ -607,7 +603,6 @@ import {
   CreateOwaspWhiteRuleResponse,
   DomainURI,
   DescribeAttackWhiteRuleResponse,
-  DescribeQClawContentSecCheckResponse,
   AccessRuleKeyValueInfo,
   DescribeObjectsRequest,
   FilterCls,
@@ -1813,16 +1808,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProtectionModesResponse) => void
   ): Promise<DescribeProtectionModesResponse> {
     return this.request("DescribeProtectionModes", req, cb)
-  }
-
-  /**
-   * 大模型请求内容和响应内容审核接口
-   */
-  async DescribeQClawContentSecCheck(
-    req: DescribeQClawContentSecCheckRequest,
-    cb?: (error: string, rep: DescribeQClawContentSecCheckResponse) => void
-  ): Promise<DescribeQClawContentSecCheckResponse> {
-    return this.request("DescribeQClawContentSecCheck", req, cb)
   }
 
   /**

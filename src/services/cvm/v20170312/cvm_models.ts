@@ -1692,6 +1692,20 @@ export interface DeleteHpcClustersResponse {
 }
 
 /**
+ * DeleteInstancesDisasterRecoverGroups请求参数结构体
+ */
+export interface DeleteInstancesDisasterRecoverGroupsRequest {
+  /**
+   * 一个或多个待操作的实例ID。可通过[`DescribeInstances`](https://cloud.tencent.com/document/api/213/15728)接口返回值中的`InstanceId`获取。每次请求批量实例的上限为100。
+   */
+  InstanceIds: Array<string>
+  /**
+   * 分散置放群组ID列表，可通过[DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/api/213/17810)接口获取。
+   */
+  DisasterRecoverGroupIds: Array<string>
+}
+
+/**
  * DescribeInstancesActionTimer返回参数结构体
  */
 export interface DescribeInstancesActionTimerResponse {
@@ -2493,6 +2507,20 @@ export interface ImportKeyPairResponse {
    * 密钥对ID。
    */
   KeyId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * InquirePricePurchaseResourcePoolPacks返回参数结构体
+ */
+export interface InquirePricePurchaseResourcePoolPacksResponse {
+  /**
+   * 实例资源池价格信息。
+   */
+  Price?: ItemPrice
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4862,13 +4890,9 @@ export interface ModifyInstancesVpcAttributeRequest {
 }
 
 /**
- * InquirePricePurchaseResourcePoolPacks返回参数结构体
+ * DeleteInstancesDisasterRecoverGroups返回参数结构体
  */
-export interface InquirePricePurchaseResourcePoolPacksResponse {
-  /**
-   * 实例资源池价格信息。
-   */
-  Price?: ItemPrice
+export interface DeleteInstancesDisasterRecoverGroupsResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

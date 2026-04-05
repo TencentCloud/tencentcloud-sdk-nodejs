@@ -18,6 +18,36 @@ const client = new tencentcloud.omics.v20221128.Client({
 })
 describe("omics.v20221128.test.js", function () {
 
+it("omics.v20221128.GetRunStatus", async function () {
+    try {
+       const data = await client.GetRunStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("omics.v20221128.CreateVolume", async function () {
+    try {
+       const data = await client.CreateVolume({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("omics.v20221128.RetryRuns", async function () {
+    try {
+       const data = await client.RetryRuns({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("omics.v20221128.ImportTableFile", async function () {
     try {
        const data = await client.ImportTableFile({})
@@ -28,9 +58,29 @@ it("omics.v20221128.ImportTableFile", async function () {
     }
 })
 
-it("omics.v20221128.DescribeRunGroups", async function () {
+it("omics.v20221128.TerminateRunGroup", async function () {
     try {
-       const data = await client.DescribeRunGroups({})
+       const data = await client.TerminateRunGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("omics.v20221128.RunApplication", async function () {
+    try {
+       const data = await client.RunApplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("omics.v20221128.DeleteVolume", async function () {
+    try {
+       const data = await client.DeleteVolume({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -48,9 +98,9 @@ it("omics.v20221128.DescribeTablesRows", async function () {
     }
 })
 
-it("omics.v20221128.DeleteVolumeData", async function () {
+it("omics.v20221128.DescribeHPCClusters", async function () {
     try {
-       const data = await client.DeleteVolumeData({})
+       const data = await client.DescribeHPCClusters({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -78,39 +128,9 @@ it("omics.v20221128.GetRunMetadataFile", async function () {
     }
 })
 
-it("omics.v20221128.CreateVolume", async function () {
+it("omics.v20221128.RebootHPCNodes", async function () {
     try {
-       const data = await client.CreateVolume({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("omics.v20221128.DescribeVolumes", async function () {
-    try {
-       const data = await client.DescribeVolumes({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("omics.v20221128.GetRunStatus", async function () {
-    try {
-       const data = await client.GetRunStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("omics.v20221128.RunApplication", async function () {
-    try {
-       const data = await client.RunApplication({})
+       const data = await client.RebootHPCNodes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,26 +158,6 @@ it("omics.v20221128.CreateEnvironment", async function () {
     }
 })
 
-it("omics.v20221128.RetryRuns", async function () {
-    try {
-       const data = await client.RetryRuns({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("omics.v20221128.TerminateRunGroup", async function () {
-    try {
-       const data = await client.TerminateRunGroup({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("omics.v20221128.DescribeRuns", async function () {
     try {
        const data = await client.DescribeRuns({})
@@ -168,19 +168,9 @@ it("omics.v20221128.DescribeRuns", async function () {
     }
 })
 
-it("omics.v20221128.DeleteVolume", async function () {
+it("omics.v20221128.DescribeRunGroups", async function () {
     try {
-       const data = await client.DeleteVolume({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("omics.v20221128.ModifyVolume", async function () {
-    try {
-       const data = await client.ModifyVolume({})
+       const data = await client.DescribeRunGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +188,9 @@ it("omics.v20221128.DeleteEnvironment", async function () {
     }
 })
 
-it("omics.v20221128.DescribeTables", async function () {
+it("omics.v20221128.GetRunCalls", async function () {
     try {
-       const data = await client.DescribeTables({})
+       const data = await client.GetRunCalls({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +198,49 @@ it("omics.v20221128.DescribeTables", async function () {
     }
 })
 
-it("omics.v20221128.GetRunCalls", async function () {
+it("omics.v20221128.DeleteVolumeData", async function () {
     try {
-       const data = await client.GetRunCalls({})
+       const data = await client.DeleteVolumeData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("omics.v20221128.DescribeVolumes", async function () {
+    try {
+       const data = await client.DescribeVolumes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("omics.v20221128.DescribeHPCNodes", async function () {
+    try {
+       const data = await client.DescribeHPCNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("omics.v20221128.ModifyVolume", async function () {
+    try {
+       const data = await client.ModifyVolume({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("omics.v20221128.DescribeTables", async function () {
+    try {
+       const data = await client.DescribeTables({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

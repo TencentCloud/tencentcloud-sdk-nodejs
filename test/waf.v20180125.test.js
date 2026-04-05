@@ -1208,16 +1208,6 @@ it("waf.v20180125.DescribeProtectionModes", async function () {
     }
 })
 
-it("waf.v20180125.DescribeQClawContentSecCheck", async function () {
-    try {
-       const data = await client.DescribeQClawContentSecCheck({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("waf.v20180125.CreateRateLimitV2", async function () {
     try {
        const data = await client.CreateRateLimitV2({})

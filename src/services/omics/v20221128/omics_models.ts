@@ -30,20 +30,6 @@ export interface DeleteVolumeDataRequest {
 }
 
 /**
- * 任务批次超时通知。
- */
-export interface RunGroupTimeoutNotification {
-  /**
-   * 任务批次超时时间，单位分钟。
-   */
-  TimeoutMinutes?: number
-  /**
-   * 通知类型。
-   */
-  NotificationType?: NotificationType
-}
-
-/**
  * RetryRuns返回参数结构体
  */
 export interface RetryRunsResponse {
@@ -55,52 +41,6 @@ export interface RetryRunsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * RunApplication返回参数结构体
- */
-export interface RunApplicationResponse {
-  /**
-   * 任务批次ID。
-   */
-  RunGroupId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 执行时间。
- */
-export interface ExecutionTime {
-  /**
-   * 提交时间。
-   */
-  SubmitTime?: string
-  /**
-   * 开始时间。
-   */
-  StartTime?: string
-  /**
-   * 结束时间。
-   */
-  EndTime?: string
-}
-
-/**
- * 任务运行状态。
- */
-export interface RunStatusCount {
-  /**
-   * 状态。
-   */
-  Status?: string
-  /**
-   * 数量。
-   */
-  Count?: number
 }
 
 /**
@@ -118,24 +58,6 @@ export interface EnvironmentRuntimeConfig {
 }
 
 /**
- * DescribeRuns返回参数结构体
- */
-export interface DescribeRunsResponse {
-  /**
-   * 符合条件的数量。
-   */
-  TotalCount?: number
-  /**
-   * 任务列表。
-   */
-  Runs?: Array<Run>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ImportTableFile返回参数结构体
  */
 export interface ImportTableFileResponse {
@@ -147,438 +69,6 @@ export interface ImportTableFileResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * RunApplication请求参数结构体
- */
-export interface RunApplicationRequest {
-  /**
-   * 应用ID。
-   */
-  ApplicationId: string
-  /**
-   * 任务批次名称。
-   */
-  Name: string
-  /**
-   * 投递环境ID。
-   */
-  EnvironmentId: string
-  /**
-   * 项目ID。（不填使用指定地域下的默认项目）
-   */
-  ProjectId?: string
-  /**
-   * 任务批次描述。
-   */
-  Description?: string
-  /**
-   * 任务输入COS地址。（InputBase64和InputCosUri必选其一）
-   */
-  InputCosUri?: string
-  /**
-   * 任务输入JSON。需要进行base64编码。（InputBase64和InputCosUri必选其一）
-   */
-  InputBase64?: string
-  /**
-   * 批量投递表格ID，不填表示单例投递。
-   */
-  TableId?: string
-  /**
-   * 批量投递表格行UUID。不填表示表格全部行。
-   */
-  TableRowUuids?: Array<string>
-  /**
-   * 任务缓存清理时间（小时）。不填或0表示不清理。
-   */
-  CacheClearDelay?: number
-  /**
-   * 应用版本ID。不填表示使用当前最新版本。
-   */
-  ApplicationVersionId?: string
-  /**
-   * WDL运行选项。
-   */
-  Option?: RunOption
-  /**
-   * Nextflow运行选项。
-   */
-  NFOption?: NFOption
-  /**
-   * 工作目录，当前仅支持Nextflow。可填写指定缓存卷内的绝对路径或者COS路径，不填使用默认缓存卷内的默认路径。如果使用COS路径，NFOption中LaunchDir需填写指定缓存卷内的绝对路径作为启动路径。
-   */
-  WorkDir?: string
-  /**
-   * 访问模式，不填默认私有。取值范围
-- PRIVATE：私有应用
-- PUBLIC：公共应用
-   */
-  AccessMode?: string
-  /**
-   * 缓存卷ID，不填使用默认缓存卷，暂时仅支持Nextflow。
-   */
-  VolumeIds?: Array<string>
-  /**
-   * 是否开启结果通知。
-   */
-  ResultNotification?: boolean
-  /**
-   * 是否开启超时通知。
-   */
-  TimeoutNotification?: boolean
-  /**
-   * 任务超时通知时间（单位：分钟），支持5到2880分钟。
-   */
-  TimeoutNotificationMinutes?: number
-  /**
-   * 接受通知邮件地址列表。
-   */
-  EmailForNotification?: Array<string>
-}
-
-/**
- * GetRunMetadataFile返回参数结构体
- */
-export interface GetRunMetadataFileResponse {
-  /**
-   * 文件预签名链接，一分钟内有效。
-   */
-  CosSignedUrl?: string
-  /**
-   * 批量文件预签名链接，一分钟内有效。
-   */
-  CosSignedUrls?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateVolume返回参数结构体
- */
-export interface CreateVolumeResponse {
-  /**
-   * 缓存卷ID。
-   */
-  VolumeId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteEnvironment返回参数结构体
- */
-export interface DeleteEnvironmentResponse {
-  /**
-   * 工作流UUID。
-   */
-  WorkflowUuid?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 运行应用选项。
- */
-export interface RunOption {
-  /**
-   * 运行失败模式，取值范围：
-- ContinueWhilePossible
-- NoNewCalls
-   */
-  FailureMode: string
-  /**
-   * 是否使用Call-Caching功能。
-   */
-  UseCallCache: boolean
-  /**
-   * 是否使用错误挂起功能。
-   */
-  UseErrorOnHold: boolean
-  /**
-   * 输出归档COS路径。
-   */
-  FinalWorkflowOutputsDir?: string
-  /**
-   * 是否使用相对目录归档输出。
-   */
-  UseRelativeOutputPaths?: boolean
-  /**
-   * 是否添加运行信息到输出目录中
-   */
-  AddRunInfoToOutputDir?: boolean
-}
-
-/**
- * 组学平台环境详情。
- */
-export interface Environment {
-  /**
-   * 环境ID。
-   */
-  EnvironmentId?: string
-  /**
-   * 环境名称。
-   */
-  Name?: string
-  /**
-   * 环境描述信息。
-   */
-  Description?: string
-  /**
-   * 环境地域。
-   */
-  Region?: string
-  /**
-   * 环境类型，取值范围：
-- KUBERNETES：Kubernetes容器集群
-- HPC：HPC高性能计算集群
-   */
-  Type?: string
-  /**
-   * 环境状态，取值范围：
-- INITIALIZING：创建中
-- INITIALIZATION_ERROR：创建失败
-- RUNNING：运行中
-- ERROR：异常
-- DELETING：正在删除
-- DELETE_ERROR：删除失败
-   */
-  Status?: string
-  /**
-   * 环境是否可用。环境需要可用才能投递计算任务。
-   */
-  Available?: boolean
-  /**
-   * 环境是否为默认环境。
-   */
-  IsDefault?: boolean
-  /**
-   * 环境是否为托管环境。
-   */
-  IsManaged?: boolean
-  /**
-   * 环境信息。
-   */
-  Message?: string
-  /**
-   * 云资源ID。
-   */
-  ResourceIds?: ResourceIds
-  /**
-   * 上个工作流UUID。
-   */
-  LastWorkflowUuid?: string
-  /**
-   * 创建时间。
-   */
-  CreationTime?: string
-  /**
-   * 运行时配置。
-   */
-  RuntimeConfig?: EnvironmentRuntimeConfig
-}
-
-/**
- * GetRunCalls请求参数结构体
- */
-export interface GetRunCallsRequest {
-  /**
-   * 任务Uuid。
-   */
-  RunUuid: string
-  /**
-   * 作业路径
-   */
-  Path: string
-  /**
-   * 项目ID。
-（不填使用指定地域下的默认项目）
-   */
-  ProjectId?: string
-}
-
-/**
- * RunWorkflow请求参数结构体
- */
-export interface RunWorkflowRequest {
-  /**
-   * 任务批次名称。
-   */
-  Name: string
-  /**
-   * 投递环境ID。
-   */
-  EnvironmentId: string
-  /**
-   * 工作流Git仓库信息。
-   */
-  GitSource: GitInfo
-  /**
-   * 工作流类型。
-
-支持类型：
-- NEXTFLOW
-   */
-  Type: string
-  /**
-   * Nextflow选项。
-   */
-  NFOption: NFOption
-  /**
-   * 项目ID。
-（不填使用指定地域下的默认项目）
-   */
-  ProjectId?: string
-  /**
-   * 任务批次描述。
-   */
-  Description?: string
-  /**
-   * 任务输入JSON。需要进行base64编码。
-（InputBase64和InputCosUri必选其一）
-   */
-  InputBase64?: string
-  /**
-   * 任务输入COS地址。
-（InputBase64和InputCosUri必选其一）
-   */
-  InputCosUri?: string
-  /**
-   * 任务缓存清理时间（小时）。不填或0表示不清理。
-   */
-  CacheClearDelay?: number
-  /**
-   * 工作目录，可填写指定缓存卷内的绝对路径，不填使用默认缓存卷内的默认路径，暂时仅支持Nextflow。
-   */
-  WorkDir?: string
-  /**
-   * 缓存卷ID，不填使用默认缓存卷，暂时仅支持Nextflow。
-   */
-  VolumeIds?: Array<string>
-  /**
-   * 工作流入口文件，不填使用默认入口文件。
-   */
-  Entrypoint?: string
-}
-
-/**
- * DescribeRuns请求参数结构体
- */
-export interface DescribeRunsRequest {
-  /**
-   * 项目ID。
-（不填使用指定地域下的默认项目）
-   */
-  ProjectId?: string
-  /**
-   * 返回数量，默认为10，最大值为100。
-   */
-  Limit?: number
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
-  /**
-   * 过滤器，支持过滤字段：
-- RunGroupId：任务批次ID
-- Status：任务状态
-- RunUuid：任务UUID
-- ApplicationId：应用ID
-- UserDefinedId：用户定义ID（批量运行表格第一列）
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * 任务。
- */
-export interface Run {
-  /**
-   * 任务UUID。
-   */
-  RunUuid?: string
-  /**
-   * 项目ID。
-   */
-  ProjectId?: string
-  /**
-   * 应用ID。
-   */
-  ApplicationId?: string
-  /**
-   * 任务批次ID。
-   */
-  RunGroupId?: string
-  /**
-   * 环境ID。
-   */
-  EnvironmentId?: string
-  /**
-   * 用户定义ID，单例运行为空。
-   */
-  UserDefinedId?: string
-  /**
-   * 表格ID，单例运行为空。
-   */
-  TableId?: string
-  /**
-   * 表格行UUID，单例运行为空。
-   */
-  TableRowUuid?: string
-  /**
-   * 任务状态。
-   */
-  Status?: string
-  /**
-   * 任务输入。
-   */
-  Input?: string
-  /**
-   * 运行选项。
-   * @deprecated
-   */
-  Option?: RunOption
-  /**
-   * 执行时间。
-   */
-  ExecutionTime?: ExecutionTime
-  /**
-   * 缓存信息。
-   */
-  Cache?: CacheInfo
-  /**
-   * 错误信息。
-   */
-  ErrorMessage?: string
-  /**
-   * 创建时间。
-   */
-  CreateTime?: string
-  /**
-   * 更新时间。
-   */
-  UpdateTime?: string
-}
-
-/**
- * 表格列。
- */
-export interface TableColumn {
-  /**
-   * 列名称
-   */
-  Header?: string
-  /**
-   * 列数据类型
-   */
-  DataType?: string
 }
 
 /**
@@ -626,90 +116,6 @@ export interface CreateVolumeRequest {
 }
 
 /**
- * 安全组配置。
- */
-export interface SecurityGroupOption {
-  /**
-   * 安全组ID。
-   */
-  SecurityGroupId: string
-}
-
-/**
- * 通知类型
- */
-export interface NotificationType {
-  /**
-   * 腾讯健康组学平台站点信息。
-   */
-  StationMessage?: boolean
-  /**
-   * 邮箱列表。
-   */
-  Email?: Array<string>
-  /**
-   * 当前用户邮箱。
-   */
-  CurrentUserEmail?: boolean
-}
-
-/**
- * DescribeTablesRows请求参数结构体
- */
-export interface DescribeTablesRowsRequest {
-  /**
-   * 项目ID。
-   */
-  ProjectId: string
-  /**
-   * 表格ID。
-   */
-  TableId: string
-  /**
-   * 返回数量，默认为10，最大值为100。
-   */
-  Limit?: number
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
-  /**
-   * 过滤器，支持过滤字段：
-- Tr：表格数据，支持模糊查询
-- TableRowUuid：表格行UUID
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * DescribeEnvironments返回参数结构体
- */
-export interface DescribeEnvironmentsResponse {
-  /**
-   * 符合条件的数量。
-   */
-  TotalCount?: number
-  /**
-   * 环境详情列表。
-   */
-  Environments?: Array<Environment>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyVolume返回参数结构体
- */
-export interface ModifyVolumeResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 资源限制范围。
  */
 export interface LimitRange {
@@ -742,129 +148,47 @@ export interface DescribeTablesResponse {
 }
 
 /**
- * COS 文件信息
+ * RetryRuns请求参数结构体
  */
-export interface CosFileInfo {
+export interface RetryRunsRequest {
   /**
-   * 存储桶。
+   * 项目ID。（不填使用指定地域下的默认项目）
    */
-  Bucket: string
+  ProjectId?: string
   /**
-   * COS文件地址。
+   * 需要重试的任务批次ID。
    */
-  Uri: string
+  RunGroupId?: string
   /**
-   * 地域。
+   * 需要重试的任务UUID。
    */
-  Region?: string
+  RunUuids?: Array<string>
+  /**
+   * WDL运行选项，不填使用被重试的任务批次运行选项。
+   */
+  WDLOption?: RunOption
+  /**
+   * Nextflow运行选项，不填使用被重试的任务批次运行选项。
+   */
+  NFOption?: NFOption
 }
 
 /**
- * 私有网络配置。
+ * HPC实例硬盘
  */
-export interface VPCOption {
+export interface HPCDisk {
   /**
-   * <p>私有网络ID（VPCId和VPCCIDRBlock必选其一。若使用VPCId，则使用现用私有网络；若使用VPCCIDRBlock，则创建新的私有网络）</p>
+   * 硬盘ID。仅作为出参。
    */
-  VPCId?: string
+  DiskId?: string
   /**
-   * <p>子网ID（SubnetId和SubnetZone&amp;SubnetCIDRBlock必选其一。若使用SubnetId，则使用现用子网；若使用SubnetZone&amp;SubnetCIDRBlock，则创建新的子网）</p>
+   * 硬盘大小
    */
-  SubnetId?: string
+  Size?: number
   /**
-   * <p>子网可用区。</p>
+   * 类型
    */
-  SubnetZone?: string
-  /**
-   * <p>私有网络CIDR。</p>
-   */
-  VPCCIDRBlock?: string
-  /**
-   * <p>子网CIDR。</p>
-   */
-  SubnetCIDRBlock?: string
-}
-
-/**
- * 资源配额。
- */
-export interface ResourceQuota {
-  /**
-   * CPU Limit设置。
-   */
-  CPULimit?: string
-  /**
-   * 内存Limit设置（单位：Mi，Gi，Ti，M，G，T）
-   */
-  MemoryLimit?: string
-  /**
-   * Pods数量设置
-   */
-  Pods?: string
-}
-
-/**
- * Nextflow工作流引擎设置
- */
-export interface NextflowConfig {
-  /**
-   * 工作流任务并发数
-   */
-  ExecutorQueueSize: number
-}
-
-/**
- * ImportTableFile请求参数结构体
- */
-export interface ImportTableFileRequest {
-  /**
-   * 表格关联的项目ID。
-   */
-  ProjectId: string
-  /**
-   * 表格名称。最多支持200个字符。
-   */
-  Name: string
-  /**
-   * 表格文件Cos对象路径。
-   */
-  CosUri: string
-  /**
-   * 表格文件中每列的数据类型，支持的类型包括：Int、Float、String、File、Boolean、Array[Int]、Array[Float]、Array[String]、Array[File]、Array[Boolean]
-   */
-  DataType: Array<string>
-  /**
-   * 表格描述。最多支持500个字符。
-   */
-  Description?: string
-}
-
-/**
- * DeleteVolume返回参数结构体
- */
-export interface DeleteVolumeResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 缓存信息。
- */
-export interface CacheInfo {
-  /**
-   * 缓存清理时间(小时)。
-   */
-  CacheClearDelay?: number
-  /**
-   * 缓存清理计划时间。
-   */
-  CacheClearTime?: string
-  /**
-   * 缓存是否已被清理。
-   */
-  CacheCleared?: boolean
+  Type?: string
 }
 
 /**
@@ -1008,52 +332,6 @@ export interface ApplicationVersion {
    * COS信息。
    */
   CosSource?: CosFileInfo
-}
-
-/**
- * DeleteVolume请求参数结构体
- */
-export interface DeleteVolumeRequest {
-  /**
-   * 缓存卷ID。
-   */
-  VolumeId: string
-}
-
-/**
- * RetryRuns请求参数结构体
- */
-export interface RetryRunsRequest {
-  /**
-   * 项目ID。（不填使用指定地域下的默认项目）
-   */
-  ProjectId?: string
-  /**
-   * 需要重试的任务批次ID。
-   */
-  RunGroupId?: string
-  /**
-   * 需要重试的任务UUID。
-   */
-  RunUuids?: Array<string>
-  /**
-   * WDL运行选项，不填使用被重试的任务批次运行选项。
-   */
-  WDLOption?: RunOption
-  /**
-   * Nextflow运行选项，不填使用被重试的任务批次运行选项。
-   */
-  NFOption?: NFOption
-}
-
-/**
- * DeleteEnvironment请求参数结构体
- */
-export interface DeleteEnvironmentRequest {
-  /**
-   * 环境ID。
-   */
-  EnvironmentId: string
 }
 
 /**
@@ -1202,45 +480,404 @@ export interface RunGroup {
 }
 
 /**
- * 数据库配置。
+ * GetRunStatus请求参数结构体
  */
-export interface DatabaseOption {
+export interface GetRunStatusRequest {
   /**
-   * 数据库可用区。
+   * 任务Uuid。
    */
-  Zone: string
+  RunUuid: string
+  /**
+   * 项目ID。
+（不填使用指定地域下的默认项目）
+   */
+  ProjectId?: string
 }
 
 /**
- * Nextflow选项。
+ * HPC实例
  */
-export interface NFOption {
+export interface HPCInstance {
   /**
-   * Config。
+   * 实例ID
    */
-  Config?: string
+  InstanceId?: string
   /**
-   * Profile。
+   * 名称
    */
-  Profile?: string
+  Name?: string
   /**
-   * Report。
+   * CPU数量
    */
-  Report?: boolean
+  CPU?: number
   /**
-   * Resume。
+   * 内存
    */
-  Resume?: boolean
+  Memory?: number
   /**
-   * Nextflow引擎版本，取值范围：
-- 22.10.7
-- 23.10.1
+   * 状态
    */
-  NFVersion?: string
+  State?: string
   /**
-   * 启动路径。可填写指定缓存卷内的绝对路径，nextflow run 命令将在此路径执行。当WorkDir为COS路径时必填；当WorkDir为缓存卷路径时选填，不填默认使用WorkDir作为LaunchDir。
+   * 类型
    */
-  LaunchDir?: string
+  Type?: string
+  /**
+   * 计费类型
+   */
+  ChargeType?: string
+  /**
+   * 系统名称
+   */
+  OSName?: string
+  /**
+   * 系统盘
+   */
+  SystemDisk?: HPCDisk
+  /**
+   * GPU
+   */
+  GPUInfo?: HPCGPUInfo
+  /**
+   * 内网IP地址
+   */
+  PrivateIPAddresses?: Array<string>
+  /**
+   * 公网IP地址
+   */
+  PublicIPAddresses?: Array<string>
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 到期时间
+   */
+  ExpireTime?: string
+  /**
+   * Uuid
+   */
+  Uuid?: string
+  /**
+   * 节点网络信息
+   */
+  InternetInfo?: HPCInternetInfo
+}
+
+/**
+ * CreateEnvironment返回参数结构体
+ */
+export interface CreateEnvironmentResponse {
+  /**
+   * 环境ID。
+   */
+  EnvironmentId?: string
+  /**
+   * 工作流UUID。
+   */
+  WorkflowUuid?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RebootHPCNodes请求参数结构体
+ */
+export interface RebootHPCNodesRequest {
+  /**
+   * <p>集群Id</p>
+   */
+  ClusterId: string
+  /**
+   * <p>节点Id，例如ins-d1fc42ss</p>
+   */
+  NodeIds: Array<string>
+  /**
+   * <p>重启的关机类型。</p><p>枚举值：</p><ul><li>SOFT： 软关机</li><li>HARD： 硬关机</li><li>SOFT_FIRST： 优先软关机，失败再执行硬关机</li></ul><p>默认值：SOFT</p>
+   */
+  StopType?: string
+}
+
+/**
+ * 任务运行状态。
+ */
+export interface RunStatusCount {
+  /**
+   * 状态。
+   */
+  Status?: string
+  /**
+   * 数量。
+   */
+  Count?: number
+}
+
+/**
+ * 标签
+ */
+export interface Tag {
+  /**
+   * 标签键
+   */
+  Key: string
+  /**
+   * 标签值
+   */
+  Value: string
+}
+
+/**
+ * 任务批次通知。
+ */
+export interface RunGroupNotification {
+  /**
+   * 结果通知。
+   */
+  ResultNotification?: RunGroupResultNotification
+  /**
+   * 超时通知。
+   */
+  TimeoutNotification?: RunGroupTimeoutNotification
+}
+
+/**
+ * CreateEnvironment请求参数结构体
+ */
+export interface CreateEnvironmentRequest {
+  /**
+   * 环境名称。
+   */
+  Name: string
+  /**
+   * 环境配置信息。
+   */
+  Config: EnvironmentConfig
+  /**
+   * 环境描述。
+   */
+  Description?: string
+  /**
+   * 是否为默认环境。
+   */
+  IsDefault?: boolean
+}
+
+/**
+ * Nextflow工作流引擎设置
+ */
+export interface NextflowConfig {
+  /**
+   * 工作流任务并发数
+   */
+  ExecutorQueueSize: number
+}
+
+/**
+ * DescribeTablesRows返回参数结构体
+ */
+export interface DescribeTablesRowsResponse {
+  /**
+   * 结果总数。
+   */
+  TotalCount?: number
+  /**
+   * 表格行列表。
+   */
+  Rows?: Array<TableRow>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 任务。
+ */
+export interface Run {
+  /**
+   * 任务UUID。
+   */
+  RunUuid?: string
+  /**
+   * 项目ID。
+   */
+  ProjectId?: string
+  /**
+   * 应用ID。
+   */
+  ApplicationId?: string
+  /**
+   * 任务批次ID。
+   */
+  RunGroupId?: string
+  /**
+   * 环境ID。
+   */
+  EnvironmentId?: string
+  /**
+   * 用户定义ID，单例运行为空。
+   */
+  UserDefinedId?: string
+  /**
+   * 表格ID，单例运行为空。
+   */
+  TableId?: string
+  /**
+   * 表格行UUID，单例运行为空。
+   */
+  TableRowUuid?: string
+  /**
+   * 任务状态。
+   */
+  Status?: string
+  /**
+   * 任务输入。
+   */
+  Input?: string
+  /**
+   * 运行选项。
+   * @deprecated
+   */
+  Option?: RunOption
+  /**
+   * 执行时间。
+   */
+  ExecutionTime?: ExecutionTime
+  /**
+   * 缓存信息。
+   */
+  Cache?: CacheInfo
+  /**
+   * 错误信息。
+   */
+  ErrorMessage?: string
+  /**
+   * 创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间。
+   */
+  UpdateTime?: string
+}
+
+/**
+ * 通知类型
+ */
+export interface NotificationType {
+  /**
+   * 腾讯健康组学平台站点信息。
+   */
+  StationMessage?: boolean
+  /**
+   * 邮箱列表。
+   */
+  Email?: Array<string>
+  /**
+   * 当前用户邮箱。
+   */
+  CurrentUserEmail?: boolean
+}
+
+/**
+ * DescribeTablesRows请求参数结构体
+ */
+export interface DescribeTablesRowsRequest {
+  /**
+   * 项目ID。
+   */
+  ProjectId: string
+  /**
+   * 表格ID。
+   */
+  TableId: string
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤器，支持过滤字段：
+- Tr：表格数据，支持模糊查询
+- TableRowUuid：表格行UUID
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * DescribeEnvironments请求参数结构体
+ */
+export interface DescribeEnvironmentsRequest {
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 过滤器，支持过滤字段：
+- EnvironmentId：环境ID
+- Name：名称
+- Status：环境状态
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * 资源配额。
+ */
+export interface ResourceQuota {
+  /**
+   * CPU Limit设置。
+   */
+  CPULimit?: string
+  /**
+   * 内存Limit设置（单位：Mi，Gi，Ti，M，G，T）
+   */
+  MemoryLimit?: string
+  /**
+   * Pods数量设置
+   */
+  Pods?: string
+}
+
+/**
+ * 缓存信息。
+ */
+export interface CacheInfo {
+  /**
+   * 缓存清理时间(小时)。
+   */
+  CacheClearDelay?: number
+  /**
+   * 缓存清理计划时间。
+   */
+  CacheClearTime?: string
+  /**
+   * 缓存是否已被清理。
+   */
+  CacheCleared?: boolean
+}
+
+/**
+ * HPC节点网络信息
+ */
+export interface HPCInternetInfo {
+  /**
+   * <p>网络出口带宽，单位Mbps</p>
+   */
+  InternetMaxBandwidthOut?: number
+  /**
+   * <p>网络收费类型</p><p>枚举值：</p><ul><li>BANDWIDTH_PREPAID： 预付费按带宽结算</li><li>TRAFFIC_POSTPAID_BY_HOUR： 流量按小时后付费</li><li>BANDWIDTH_POSTPAID_BY_HOUR： 带宽按小时后付费</li></ul>
+   */
+  InternetChargeType?: string
 }
 
 /**
@@ -1255,6 +892,516 @@ export interface GetRunCallsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetRunMetadataFile请求参数结构体
+ */
+export interface GetRunMetadataFileRequest {
+  /**
+   * 任务Uuid。
+   */
+  RunUuid: string
+  /**
+   * 项目ID。
+（不填使用指定地域下的默认项目）
+   */
+  ProjectId?: string
+  /**
+   * 需要获取的文件名。
+
+默认支持以下文件：
+- nextflow.log
+
+提交时NFOption中report指定为true时，额外支持以下文件：
+- execution_report.html
+- execution_timeline.html
+- execution_trace.txt
+- pipeline_dag.html
+   */
+  Key?: string
+  /**
+   * 需要批量获取的文件名。
+
+默认支持以下文件：
+- nextflow.log
+
+提交时NFOption中report指定为true时，额外支持以下文件：
+- execution_report.html
+- execution_timeline.html
+- execution_trace.txt
+- pipeline_dag.html
+   */
+  Keys?: Array<string>
+}
+
+/**
+ * 表格行。
+ */
+export interface TableRow {
+  /**
+   * 表格行UUID。
+   */
+  TableRowUuid?: string
+  /**
+   * 表格行内容。
+   */
+  Content?: Array<string>
+}
+
+/**
+ * 文件存储配置。
+ */
+export interface StorageOption {
+  /**
+   * 文件存储类型，取值范围：
+- SD：通用标准型
+- HP：通用性能型
+- TB：turbo标准型
+- TP：turbo性能型
+   */
+  StorageType: string
+  /**
+   * 文件存储可用区。
+   */
+  Zone: string
+  /**
+   * 文件系统容量，turbo系列必填，单位为GiB。 
+- turbo标准型起售40TiB，即40960GiB；扩容步长20TiB，即20480 GiB。
+- turbo性能型起售20TiB，即20480 GiB；扩容步长10TiB，即10240 GiB。
+   */
+  Capacity?: number
+  /**
+   * 是否开启默认扩容，仅turbo类型文件存储支持
+   */
+  EnableAutoScaleUp?: boolean
+  /**
+   * turbo文件系统元数据属性，basic：标准型元数据；enhanced：增强型元数据
+   */
+  MetaType?: string
+}
+
+/**
+ * 运行应用选项。
+ */
+export interface RunOption {
+  /**
+   * 运行失败模式，取值范围：
+- ContinueWhilePossible
+- NoNewCalls
+   */
+  FailureMode: string
+  /**
+   * 是否使用Call-Caching功能。
+   */
+  UseCallCache: boolean
+  /**
+   * 是否使用错误挂起功能。
+   */
+  UseErrorOnHold: boolean
+  /**
+   * 输出归档COS路径。
+   */
+  FinalWorkflowOutputsDir?: string
+  /**
+   * 是否使用相对目录归档输出。
+   */
+  UseRelativeOutputPaths?: boolean
+  /**
+   * 是否添加运行信息到输出目录中
+   */
+  AddRunInfoToOutputDir?: boolean
+}
+
+/**
+ * DescribeHPCNodes返回参数结构体
+ */
+export interface DescribeHPCNodesResponse {
+  /**
+   * HPC节点。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Nodes?: Array<HPCNode>
+  /**
+   * 符合条件的数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 安全组配置。
+ */
+export interface SecurityGroupOption {
+  /**
+   * 安全组ID。
+   */
+  SecurityGroupId: string
+}
+
+/**
+ * 执行时间。
+ */
+export interface ExecutionTime {
+  /**
+   * 提交时间。
+   */
+  SubmitTime?: string
+  /**
+   * 开始时间。
+   */
+  StartTime?: string
+  /**
+   * 结束时间。
+   */
+  EndTime?: string
+}
+
+/**
+ * 组学平台环境详情。
+ */
+export interface Environment {
+  /**
+   * 环境ID。
+   */
+  EnvironmentId?: string
+  /**
+   * 环境名称。
+   */
+  Name?: string
+  /**
+   * 环境描述信息。
+   */
+  Description?: string
+  /**
+   * 环境地域。
+   */
+  Region?: string
+  /**
+   * 环境类型，取值范围：
+- KUBERNETES：Kubernetes容器集群
+- HPC：HPC高性能计算集群
+   */
+  Type?: string
+  /**
+   * 环境状态，取值范围：
+- INITIALIZING：创建中
+- INITIALIZATION_ERROR：创建失败
+- RUNNING：运行中
+- ERROR：异常
+- DELETING：正在删除
+- DELETE_ERROR：删除失败
+   */
+  Status?: string
+  /**
+   * 环境是否可用。环境需要可用才能投递计算任务。
+   */
+  Available?: boolean
+  /**
+   * 环境是否为默认环境。
+   */
+  IsDefault?: boolean
+  /**
+   * 环境是否为托管环境。
+   */
+  IsManaged?: boolean
+  /**
+   * 环境信息。
+   */
+  Message?: string
+  /**
+   * 云资源ID。
+   */
+  ResourceIds?: ResourceIds
+  /**
+   * 上个工作流UUID。
+   */
+  LastWorkflowUuid?: string
+  /**
+   * 创建时间。
+   */
+  CreationTime?: string
+  /**
+   * 运行时配置。
+   */
+  RuntimeConfig?: EnvironmentRuntimeConfig
+}
+
+/**
+ * GetRunMetadataFile返回参数结构体
+ */
+export interface GetRunMetadataFileResponse {
+  /**
+   * 文件预签名链接，一分钟内有效。
+   */
+  CosSignedUrl?: string
+  /**
+   * 批量文件预签名链接，一分钟内有效。
+   */
+  CosSignedUrls?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteEnvironment返回参数结构体
+ */
+export interface DeleteEnvironmentResponse {
+  /**
+   * 工作流UUID。
+   */
+  WorkflowUuid?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetRunCalls请求参数结构体
+ */
+export interface GetRunCallsRequest {
+  /**
+   * 任务Uuid。
+   */
+  RunUuid: string
+  /**
+   * 作业路径
+   */
+  Path: string
+  /**
+   * 项目ID。
+（不填使用指定地域下的默认项目）
+   */
+  ProjectId?: string
+}
+
+/**
+ * RunWorkflow请求参数结构体
+ */
+export interface RunWorkflowRequest {
+  /**
+   * 任务批次名称。
+   */
+  Name: string
+  /**
+   * 投递环境ID。
+   */
+  EnvironmentId: string
+  /**
+   * 工作流Git仓库信息。
+   */
+  GitSource: GitInfo
+  /**
+   * 工作流类型。
+
+支持类型：
+- NEXTFLOW
+   */
+  Type: string
+  /**
+   * Nextflow选项。
+   */
+  NFOption: NFOption
+  /**
+   * 项目ID。
+（不填使用指定地域下的默认项目）
+   */
+  ProjectId?: string
+  /**
+   * 任务批次描述。
+   */
+  Description?: string
+  /**
+   * 任务输入JSON。需要进行base64编码。
+（InputBase64和InputCosUri必选其一）
+   */
+  InputBase64?: string
+  /**
+   * 任务输入COS地址。
+（InputBase64和InputCosUri必选其一）
+   */
+  InputCosUri?: string
+  /**
+   * 任务缓存清理时间（小时）。不填或0表示不清理。
+   */
+  CacheClearDelay?: number
+  /**
+   * 工作目录，可填写指定缓存卷内的绝对路径，不填使用默认缓存卷内的默认路径，暂时仅支持Nextflow。
+   */
+  WorkDir?: string
+  /**
+   * 缓存卷ID，不填使用默认缓存卷，暂时仅支持Nextflow。
+   */
+  VolumeIds?: Array<string>
+  /**
+   * 工作流入口文件，不填使用默认入口文件。
+   */
+  Entrypoint?: string
+}
+
+/**
+ * DescribeRuns请求参数结构体
+ */
+export interface DescribeRunsRequest {
+  /**
+   * 项目ID。
+（不填使用指定地域下的默认项目）
+   */
+  ProjectId?: string
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤器，支持过滤字段：
+- RunGroupId：任务批次ID
+- Status：任务状态
+- RunUuid：任务UUID
+- ApplicationId：应用ID
+- UserDefinedId：用户定义ID（批量运行表格第一列）
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * RebootHPCNodes返回参数结构体
+ */
+export interface RebootHPCNodesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 表格列。
+ */
+export interface TableColumn {
+  /**
+   * 列名称
+   */
+  Header?: string
+  /**
+   * 列数据类型
+   */
+  DataType?: string
+}
+
+/**
+ * DescribeHPCNodes请求参数结构体
+ */
+export interface DescribeHPCNodesRequest {
+  /**
+   * 集群ID。
+   */
+  ClusterId?: string
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤器，支持过滤字段：
+- ClusterId：集群ID
+- QueueId：队列ID
+- NodeId：节点ID
+- Name：名称
+- Role：角色
+- Type：类型
+- Zone：可用区
+- InstanceState：实例状态
+- InstanceType：实例机型
+- InstanceFamily：实例机型族
+- InstanceChargeType：实例计费类型
+- Tag：标签，Value格式为tagKey:tagValue
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * DescribeEnvironments返回参数结构体
+ */
+export interface DescribeEnvironmentsResponse {
+  /**
+   * 符合条件的数量。
+   */
+  TotalCount?: number
+  /**
+   * 环境详情列表。
+   */
+  Environments?: Array<Environment>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RunApplication返回参数结构体
+ */
+export interface RunApplicationResponse {
+  /**
+   * 任务批次ID。
+   */
+  RunGroupId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeHPCClusters返回参数结构体
+ */
+export interface DescribeHPCClustersResponse {
+  /**
+   * HPC集群。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Clusters?: Array<HPCCluster>
+  /**
+   * 符合条件的数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteEnvironment请求参数结构体
+ */
+export interface DeleteEnvironmentRequest {
+  /**
+   * 环境ID。
+   */
+  EnvironmentId: string
+}
+
+/**
+ * 数据库配置。
+ */
+export interface DatabaseOption {
+  /**
+   * 数据库可用区。
+   */
+  Zone: string
 }
 
 /**
@@ -1276,71 +1423,83 @@ export interface Filter {
 }
 
 /**
- * 云资源ID。
+ * 缓存卷信息。
  */
-export interface ResourceIds {
+export interface VolumeInfo {
   /**
-   * 私有网络ID。
+   * 缓存卷ID。
    */
-  VPCId?: string
+  VolumeId?: string
   /**
-   * 子网ID。
+   * 名称。
    */
-  SubnetId?: string
+  Name?: string
   /**
-   * 安全组ID。
+   * 挂载路径。
    */
-  SecurityGroupId?: string
-  /**
-   * TDSQL-C Mysql版数据库ID。
-   */
-  TDSQLCId?: string
-  /**
-   * 文件存储ID。
-   */
-  CFSId?: string
-  /**
-   * 文件存储类型：取值范围：
-- SD：通用标准型
-- HP：通用性能型
-- TB：turbo标准型
-- TP：turbo性能型
-   */
-  CFSStorageType?: string
-  /**
-   * 云服务器ID。
-   */
-  CVMId?: string
-  /**
-   * 弹性容器集群ID。
-   */
-  EKSId?: string
-  /**
-   * TKE容器集群ID。
-   */
-  TKEId?: string
-  /**
-   * TKE系统节点池ID。
-   */
-  TKESystemNodePoolId?: string
+  MountPath?: string
 }
 
 /**
- * DescribeRunGroups返回参数结构体
+ * HPC集群
  */
-export interface DescribeRunGroupsResponse {
+export interface HPCCluster {
   /**
-   * 符合条件的数量。
+   * 集群ID
    */
-  TotalCount?: number
+  ClusterId?: string
   /**
-   * 任务批次列表。
+   * 名称
    */
-  RunGroups?: Array<RunGroup>
+  Name?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 描述
    */
-  RequestId?: string
+  Description?: string
+  /**
+   * 状态
+   */
+  Status?: string
+  /**
+   * 调度器
+   */
+  Scheduler?: string
+  /**
+   * VPC ID
+   */
+  VPCId?: string
+  /**
+   * 节点数量
+   */
+  NodeCount?: number
+  /**
+   * 标签
+   */
+  Tags?: Array<Tag>
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 集群类型
+   */
+  Type?: string
+  /**
+   * 系统名称
+   */
+  OsName?: string
+  /**
+   * 调度器版本
+   */
+  SchedulerVersion?: string
+  /**
+   * 集群VPC CIDR
+   */
+  VPCCIDRBlock?: string
+  /**
+   * 集群确认交付截止日期
+   */
+  ConfirmDeadline?: string
 }
 
 /**
@@ -1360,6 +1519,199 @@ export interface VolumeAutoScaleUpRule {
    * 扩容后使用量跟集群总量比例,范围[10-90]
    */
   TargetThreshold?: number
+}
+
+/**
+ * TerminateRunGroup请求参数结构体
+ */
+export interface TerminateRunGroupRequest {
+  /**
+   * 任务批次ID。
+   */
+  RunGroupId: string
+  /**
+   * 项目ID。
+（不填使用指定地域下的默认项目）
+   */
+  ProjectId?: string
+}
+
+/**
+ * GetRunStatus返回参数结构体
+ */
+export interface GetRunStatusResponse {
+  /**
+   * 作业详情。
+   */
+  Metadata?: RunMetadata
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTables请求参数结构体
+ */
+export interface DescribeTablesRequest {
+  /**
+   * 项目ID。
+   */
+  ProjectId: string
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤器，支持过滤字段：
+- Name：表格名称
+- TableId：表格ID
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * DeleteVolumeData返回参数结构体
+ */
+export interface DeleteVolumeDataResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVolumes请求参数结构体
+ */
+export interface DescribeVolumesRequest {
+  /**
+   * 环境ID。
+   */
+  EnvironmentId: string
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤器，支持过滤字段：
+- Name：名称
+- IsDefault：是否为默认
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * RunWorkflow返回参数结构体
+ */
+export interface RunWorkflowResponse {
+  /**
+   * 任务批次ID。
+   */
+  RunGroupId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * HPC实例GPU
+ */
+export interface HPCGPUInfo {
+  /**
+   * GPU类型
+   */
+  GPUType?: string
+  /**
+   * GPU数量
+   */
+  GPUCount?: number
+}
+
+/**
+ * 任务批次超时通知。
+ */
+export interface RunGroupTimeoutNotification {
+  /**
+   * 任务批次超时时间，单位分钟。
+   */
+  TimeoutMinutes?: number
+  /**
+   * 通知类型。
+   */
+  NotificationType?: NotificationType
+}
+
+/**
+ * DescribeHPCClusters请求参数结构体
+ */
+export interface DescribeHPCClustersRequest {
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤器，支持过滤字段：
+- ClusterId：集群ID
+- Name：名称
+- Status：状态
+- ConfirmDeadlineLt: 交付确认截止日期小于给定值的集群，如2026-01-13T16:00:00+08:00
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * DescribeRuns返回参数结构体
+ */
+export interface DescribeRunsResponse {
+  /**
+   * 符合条件的数量。
+   */
+  TotalCount?: number
+  /**
+   * 任务列表。
+   */
+  Runs?: Array<Run>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateVolume返回参数结构体
+ */
+export interface CreateVolumeResponse {
+  /**
+   * 缓存卷ID。
+   */
+  VolumeId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteVolume请求参数结构体
+ */
+export interface DeleteVolumeRequest {
+  /**
+   * 缓存卷ID。
+   */
+  VolumeId: string
 }
 
 /**
@@ -1435,51 +1787,263 @@ export interface Volume {
 }
 
 /**
- * 缓存卷信息。
+ * ModifyVolume返回参数结构体
  */
-export interface VolumeInfo {
+export interface ModifyVolumeResponse {
   /**
-   * 缓存卷ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  VolumeId?: string
-  /**
-   * 名称。
-   */
-  Name?: string
-  /**
-   * 挂载路径。
-   */
-  MountPath?: string
+  RequestId?: string
 }
 
 /**
- * TerminateRunGroup请求参数结构体
+ * COS 文件信息
  */
-export interface TerminateRunGroupRequest {
+export interface CosFileInfo {
   /**
-   * 任务批次ID。
+   * 存储桶。
    */
-  RunGroupId: string
+  Bucket: string
   /**
-   * 项目ID。
-（不填使用指定地域下的默认项目）
+   * COS文件地址。
    */
-  ProjectId?: string
+  Uri: string
+  /**
+   * 地域。
+   */
+  Region?: string
 }
 
 /**
- * GetRunStatus请求参数结构体
+ * 私有网络配置。
  */
-export interface GetRunStatusRequest {
+export interface VPCOption {
   /**
-   * 任务Uuid。
+   * <p>私有网络ID（VPCId和VPCCIDRBlock必选其一。若使用VPCId，则使用现用私有网络；若使用VPCCIDRBlock，则创建新的私有网络）</p>
    */
-  RunUuid: string
+  VPCId?: string
   /**
-   * 项目ID。
-（不填使用指定地域下的默认项目）
+   * <p>子网ID（SubnetId和SubnetZone&amp;SubnetCIDRBlock必选其一。若使用SubnetId，则使用现用子网；若使用SubnetZone&amp;SubnetCIDRBlock，则创建新的子网）</p>
+   */
+  SubnetId?: string
+  /**
+   * <p>子网可用区。</p>
+   */
+  SubnetZone?: string
+  /**
+   * <p>私有网络CIDR。</p>
+   */
+  VPCCIDRBlock?: string
+  /**
+   * <p>子网CIDR。</p>
+   */
+  SubnetCIDRBlock?: string
+}
+
+/**
+ * ImportTableFile请求参数结构体
+ */
+export interface ImportTableFileRequest {
+  /**
+   * 表格关联的项目ID。
+   */
+  ProjectId: string
+  /**
+   * 表格名称。最多支持200个字符。
+   */
+  Name: string
+  /**
+   * 表格文件Cos对象路径。
+   */
+  CosUri: string
+  /**
+   * 表格文件中每列的数据类型，支持的类型包括：Int、Float、String、File、Boolean、Array[Int]、Array[Float]、Array[String]、Array[File]、Array[Boolean]
+   */
+  DataType: Array<string>
+  /**
+   * 表格描述。最多支持500个字符。
+   */
+  Description?: string
+}
+
+/**
+ * DeleteVolume返回参数结构体
+ */
+export interface DeleteVolumeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RunApplication请求参数结构体
+ */
+export interface RunApplicationRequest {
+  /**
+   * 应用ID。
+   */
+  ApplicationId: string
+  /**
+   * 任务批次名称。
+   */
+  Name: string
+  /**
+   * 投递环境ID。
+   */
+  EnvironmentId: string
+  /**
+   * 项目ID。（不填使用指定地域下的默认项目）
    */
   ProjectId?: string
+  /**
+   * 任务批次描述。
+   */
+  Description?: string
+  /**
+   * 任务输入COS地址。（InputBase64和InputCosUri必选其一）
+   */
+  InputCosUri?: string
+  /**
+   * 任务输入JSON。需要进行base64编码。（InputBase64和InputCosUri必选其一）
+   */
+  InputBase64?: string
+  /**
+   * 批量投递表格ID，不填表示单例投递。
+   */
+  TableId?: string
+  /**
+   * 批量投递表格行UUID。不填表示表格全部行。
+   */
+  TableRowUuids?: Array<string>
+  /**
+   * 任务缓存清理时间（小时）。不填或0表示不清理。
+   */
+  CacheClearDelay?: number
+  /**
+   * 应用版本ID。不填表示使用当前最新版本。
+   */
+  ApplicationVersionId?: string
+  /**
+   * WDL运行选项。
+   */
+  Option?: RunOption
+  /**
+   * Nextflow运行选项。
+   */
+  NFOption?: NFOption
+  /**
+   * 工作目录，当前仅支持Nextflow。可填写指定缓存卷内的绝对路径或者COS路径，不填使用默认缓存卷内的默认路径。如果使用COS路径，NFOption中LaunchDir需填写指定缓存卷内的绝对路径作为启动路径。
+   */
+  WorkDir?: string
+  /**
+   * 访问模式，不填默认私有。取值范围
+- PRIVATE：私有应用
+- PUBLIC：公共应用
+   */
+  AccessMode?: string
+  /**
+   * 缓存卷ID，不填使用默认缓存卷，暂时仅支持Nextflow。
+   */
+  VolumeIds?: Array<string>
+  /**
+   * 是否开启结果通知。
+   */
+  ResultNotification?: boolean
+  /**
+   * 是否开启超时通知。
+   */
+  TimeoutNotification?: boolean
+  /**
+   * 任务超时通知时间（单位：分钟），支持5到2880分钟。
+   */
+  TimeoutNotificationMinutes?: number
+  /**
+   * 接受通知邮件地址列表。
+   */
+  EmailForNotification?: Array<string>
+}
+
+/**
+ * Cromwell工作流引擎设置
+ */
+export interface CromwellConfig {
+  /**
+   * 工作流并发数
+   */
+  MaxConcurrentWorkflows: number
+  /**
+   * 作业并发数
+   */
+  ConcurrentJobLimit: number
+}
+
+/**
+ * 云资源ID。
+ */
+export interface ResourceIds {
+  /**
+   * 私有网络ID。
+   */
+  VPCId?: string
+  /**
+   * 子网ID。
+   */
+  SubnetId?: string
+  /**
+   * 安全组ID。
+   */
+  SecurityGroupId?: string
+  /**
+   * TDSQL-C Mysql版数据库ID。
+   */
+  TDSQLCId?: string
+  /**
+   * 文件存储ID。
+   */
+  CFSId?: string
+  /**
+   * 文件存储类型：取值范围：
+- SD：通用标准型
+- HP：通用性能型
+- TB：turbo标准型
+- TP：turbo性能型
+   */
+  CFSStorageType?: string
+  /**
+   * 云服务器ID。
+   */
+  CVMId?: string
+  /**
+   * 弹性容器集群ID。
+   */
+  EKSId?: string
+  /**
+   * TKE容器集群ID。
+   */
+  TKEId?: string
+  /**
+   * TKE系统节点池ID。
+   */
+  TKESystemNodePoolId?: string
+}
+
+/**
+ * DescribeRunGroups返回参数结构体
+ */
+export interface DescribeRunGroupsResponse {
+  /**
+   * 符合条件的数量。
+   */
+  TotalCount?: number
+  /**
+   * 任务批次列表。
+   */
+  RunGroups?: Array<RunGroup>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1510,97 +2074,6 @@ export interface EnvironmentConfig {
    * 安全组配置。
    */
   SecurityGroupOption?: SecurityGroupOption
-}
-
-/**
- * DescribeTablesRows返回参数结构体
- */
-export interface DescribeTablesRowsResponse {
-  /**
-   * 结果总数。
-   */
-  TotalCount?: number
-  /**
-   * 表格行列表。
-   */
-  Rows?: Array<TableRow>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateEnvironment返回参数结构体
- */
-export interface CreateEnvironmentResponse {
-  /**
-   * 环境ID。
-   */
-  EnvironmentId?: string
-  /**
-   * 工作流UUID。
-   */
-  WorkflowUuid?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * GetRunMetadataFile请求参数结构体
- */
-export interface GetRunMetadataFileRequest {
-  /**
-   * 任务Uuid。
-   */
-  RunUuid: string
-  /**
-   * 项目ID。
-（不填使用指定地域下的默认项目）
-   */
-  ProjectId?: string
-  /**
-   * 需要获取的文件名。
-
-默认支持以下文件：
-- nextflow.log
-
-提交时NFOption中report指定为true时，额外支持以下文件：
-- execution_report.html
-- execution_timeline.html
-- execution_trace.txt
-- pipeline_dag.html
-   */
-  Key?: string
-  /**
-   * 需要批量获取的文件名。
-
-默认支持以下文件：
-- nextflow.log
-
-提交时NFOption中report指定为true时，额外支持以下文件：
-- execution_report.html
-- execution_timeline.html
-- execution_trace.txt
-- pipeline_dag.html
-   */
-  Keys?: Array<string>
-}
-
-/**
- * RunWorkflow返回参数结构体
- */
-export interface RunWorkflowResponse {
-  /**
-   * 任务批次ID。
-   */
-  RunGroupId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -1650,146 +2123,89 @@ export interface DescribeRunGroupsRequest {
 }
 
 /**
- * GetRunStatus返回参数结构体
+ * HPC节点
  */
-export interface GetRunStatusResponse {
+export interface HPCNode {
   /**
-   * 作业详情。
+   * <p>节点ID</p>
    */
-  Metadata?: RunMetadata
+  NodeId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>队列ID</p>
    */
-  RequestId?: string
+  QueueId?: string
+  /**
+   * <p>集群ID</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>角色</p>
+   */
+  Role?: string
+  /**
+   * <p>类型</p>
+   */
+  Type?: string
+  /**
+   * <p>可用区</p>
+   */
+  Zone?: string
+  /**
+   * <p>镜像ID</p>
+   */
+  ImageId?: string
+  /**
+   * <p>实例信息</p>
+   */
+  Instance?: HPCInstance
+  /**
+   * <p>标签</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>节点名称</p>
+   */
+  Name?: string
+  /**
+   * <p>队列名称</p>
+   */
+  QueueName?: string
+  /**
+   * <p>节点状态。取值范围：<br>IDLE 空闲<br>DOWN 节点下线<br>MIXED 节点部分使用<br>ALLOC  节点完全分配<br>DRAIN 排空，不接受新任务</p>
+   */
+  Status?: string
 }
 
 /**
- * 文件存储配置。
+ * Nextflow选项。
  */
-export interface StorageOption {
+export interface NFOption {
   /**
-   * 文件存储类型，取值范围：
-- SD：通用标准型
-- HP：通用性能型
-- TB：turbo标准型
-- TP：turbo性能型
+   * Config。
    */
-  StorageType: string
+  Config?: string
   /**
-   * 文件存储可用区。
+   * Profile。
    */
-  Zone: string
+  Profile?: string
   /**
-   * 文件系统容量，turbo系列必填，单位为GiB。 
-- turbo标准型起售40TiB，即40960GiB；扩容步长20TiB，即20480 GiB。
-- turbo性能型起售20TiB，即20480 GiB；扩容步长10TiB，即10240 GiB。
+   * Report。
    */
-  Capacity?: number
+  Report?: boolean
   /**
-   * 是否开启默认扩容，仅turbo类型文件存储支持
+   * Resume。
    */
-  EnableAutoScaleUp?: boolean
+  Resume?: boolean
   /**
-   * turbo文件系统元数据属性，basic：标准型元数据；enhanced：增强型元数据
+   * Nextflow引擎版本，取值范围：
+- 22.10.7
+- 23.10.1
    */
-  MetaType?: string
-}
-
-/**
- * DescribeTables请求参数结构体
- */
-export interface DescribeTablesRequest {
+  NFVersion?: string
   /**
-   * 项目ID。
+   * 启动路径。可填写指定缓存卷内的绝对路径，nextflow run 命令将在此路径执行。当WorkDir为COS路径时必填；当WorkDir为缓存卷路径时选填，不填默认使用WorkDir作为LaunchDir。
    */
-  ProjectId: string
-  /**
-   * 返回数量，默认为10，最大值为100。
-   */
-  Limit?: number
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
-  /**
-   * 过滤器，支持过滤字段：
-- Name：表格名称
-- TableId：表格ID
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * 表格行。
- */
-export interface TableRow {
-  /**
-   * 表格行UUID。
-   */
-  TableRowUuid?: string
-  /**
-   * 表格行内容。
-   */
-  Content?: Array<string>
-}
-
-/**
- * DeleteVolumeData返回参数结构体
- */
-export interface DeleteVolumeDataResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeEnvironments请求参数结构体
- */
-export interface DescribeEnvironmentsRequest {
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
-  /**
-   * 返回数量，默认为20，最大值为100。
-   */
-  Limit?: number
-  /**
-   * 过滤器，支持过滤字段：
-- EnvironmentId：环境ID
-- Name：名称
-- Status：环境状态
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * 任务批次通知。
- */
-export interface RunGroupNotification {
-  /**
-   * 结果通知。
-   */
-  ResultNotification?: RunGroupResultNotification
-  /**
-   * 超时通知。
-   */
-  TimeoutNotification?: RunGroupTimeoutNotification
-}
-
-/**
- * Cromwell工作流引擎设置
- */
-export interface CromwellConfig {
-  /**
-   * 工作流并发数
-   */
-  MaxConcurrentWorkflows: number
-  /**
-   * 作业并发数
-   */
-  ConcurrentJobLimit: number
+  LaunchDir?: string
 }
 
 /**
@@ -1946,50 +2362,4 @@ export interface RunMetadata {
    * 其他信息。
    */
   Meta?: string
-}
-
-/**
- * DescribeVolumes请求参数结构体
- */
-export interface DescribeVolumesRequest {
-  /**
-   * 环境ID。
-   */
-  EnvironmentId: string
-  /**
-   * 返回数量，默认为20，最大值为100。
-   */
-  Limit?: number
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
-  /**
-   * 过滤器，支持过滤字段：
-- Name：名称
-- IsDefault：是否为默认
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * CreateEnvironment请求参数结构体
- */
-export interface CreateEnvironmentRequest {
-  /**
-   * 环境名称。
-   */
-  Name: string
-  /**
-   * 环境配置信息。
-   */
-  Config: EnvironmentConfig
-  /**
-   * 环境描述。
-   */
-  Description?: string
-  /**
-   * 是否为默认环境。
-   */
-  IsDefault?: boolean
 }

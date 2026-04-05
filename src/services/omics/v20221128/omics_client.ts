@@ -19,81 +19,94 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DeleteVolumeDataRequest,
-  RunGroupTimeoutNotification,
   RetryRunsResponse,
-  RunApplicationResponse,
-  ExecutionTime,
-  RunStatusCount,
   EnvironmentRuntimeConfig,
-  DescribeRunsResponse,
   ImportTableFileResponse,
-  RunApplicationRequest,
-  GetRunMetadataFileResponse,
-  CreateVolumeResponse,
-  DeleteEnvironmentResponse,
-  RunOption,
-  Environment,
-  GetRunCallsRequest,
-  RunWorkflowRequest,
-  DescribeRunsRequest,
-  Run,
-  TableColumn,
   CreateVolumeRequest,
-  SecurityGroupOption,
-  NotificationType,
-  DescribeTablesRowsRequest,
-  DescribeEnvironmentsResponse,
-  ModifyVolumeResponse,
   LimitRange,
   DescribeTablesResponse,
-  CosFileInfo,
-  VPCOption,
-  ResourceQuota,
-  NextflowConfig,
-  ImportTableFileRequest,
-  DeleteVolumeResponse,
-  CacheInfo,
+  RetryRunsRequest,
+  HPCDisk,
   ClusterOption,
   TerminateRunGroupResponse,
   DescribeVolumesResponse,
   GitInfo,
   ApplicationVersion,
-  DeleteVolumeRequest,
-  RetryRunsRequest,
-  DeleteEnvironmentRequest,
   RunGroup,
-  DatabaseOption,
-  NFOption,
+  GetRunStatusRequest,
+  HPCInstance,
+  CreateEnvironmentResponse,
+  RebootHPCNodesRequest,
+  RunStatusCount,
+  Tag,
+  RunGroupNotification,
+  CreateEnvironmentRequest,
+  NextflowConfig,
+  DescribeTablesRowsResponse,
+  Run,
+  NotificationType,
+  DescribeTablesRowsRequest,
+  DescribeEnvironmentsRequest,
+  ResourceQuota,
+  CacheInfo,
+  HPCInternetInfo,
   GetRunCallsResponse,
+  GetRunMetadataFileRequest,
+  TableRow,
+  StorageOption,
+  RunOption,
+  DescribeHPCNodesResponse,
+  SecurityGroupOption,
+  ExecutionTime,
+  Environment,
+  GetRunMetadataFileResponse,
+  DeleteEnvironmentResponse,
+  GetRunCallsRequest,
+  RunWorkflowRequest,
+  DescribeRunsRequest,
+  RebootHPCNodesResponse,
+  TableColumn,
+  DescribeHPCNodesRequest,
+  DescribeEnvironmentsResponse,
+  RunApplicationResponse,
+  DescribeHPCClustersResponse,
+  DeleteEnvironmentRequest,
+  DatabaseOption,
   Filter,
+  VolumeInfo,
+  HPCCluster,
+  VolumeAutoScaleUpRule,
+  TerminateRunGroupRequest,
+  GetRunStatusResponse,
+  DescribeTablesRequest,
+  DeleteVolumeDataResponse,
+  DescribeVolumesRequest,
+  RunWorkflowResponse,
+  HPCGPUInfo,
+  RunGroupTimeoutNotification,
+  DescribeHPCClustersRequest,
+  DescribeRunsResponse,
+  CreateVolumeResponse,
+  DeleteVolumeRequest,
+  Volume,
+  ModifyVolumeResponse,
+  CosFileInfo,
+  VPCOption,
+  ImportTableFileRequest,
+  DeleteVolumeResponse,
+  RunApplicationRequest,
+  CromwellConfig,
   ResourceIds,
   DescribeRunGroupsResponse,
-  VolumeAutoScaleUpRule,
-  Volume,
-  VolumeInfo,
-  TerminateRunGroupRequest,
-  GetRunStatusRequest,
   EnvironmentConfig,
-  DescribeTablesRowsResponse,
-  CreateEnvironmentResponse,
-  GetRunMetadataFileRequest,
-  RunWorkflowResponse,
   ModifyVolumeRequest,
   DescribeRunGroupsRequest,
-  GetRunStatusResponse,
-  StorageOption,
-  DescribeTablesRequest,
-  TableRow,
-  DeleteVolumeDataResponse,
-  DescribeEnvironmentsRequest,
-  RunGroupNotification,
-  CromwellConfig,
+  HPCNode,
+  NFOption,
   RunGroupResultNotification,
   Table,
   CVMOption,
   RunMetadata,
-  DescribeVolumesRequest,
-  CreateEnvironmentRequest,
 } from "./omics_models"
 
 /**
@@ -103,6 +116,36 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("omics.tencentcloudapi.com", "2022-11-28", clientConfig)
+  }
+
+  /**
+   * 查询任务详情。
+   */
+  async GetRunStatus(
+    req: GetRunStatusRequest,
+    cb?: (error: string, rep: GetRunStatusResponse) => void
+  ): Promise<GetRunStatusResponse> {
+    return this.request("GetRunStatus", req, cb)
+  }
+
+  /**
+   * 创建缓存卷。
+   */
+  async CreateVolume(
+    req: CreateVolumeRequest,
+    cb?: (error: string, rep: CreateVolumeResponse) => void
+  ): Promise<CreateVolumeResponse> {
+    return this.request("CreateVolume", req, cb)
+  }
+
+  /**
+   * 重试任务。
+   */
+  async RetryRuns(
+    req: RetryRunsRequest,
+    cb?: (error: string, rep: RetryRunsResponse) => void
+  ): Promise<RetryRunsResponse> {
+    return this.request("RetryRuns", req, cb)
   }
 
   /**
@@ -116,13 +159,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询任务批次列表。
+   * 终止任务批次。
    */
-  async DescribeRunGroups(
-    req: DescribeRunGroupsRequest,
-    cb?: (error: string, rep: DescribeRunGroupsResponse) => void
-  ): Promise<DescribeRunGroupsResponse> {
-    return this.request("DescribeRunGroups", req, cb)
+  async TerminateRunGroup(
+    req: TerminateRunGroupRequest,
+    cb?: (error: string, rep: TerminateRunGroupResponse) => void
+  ): Promise<TerminateRunGroupResponse> {
+    return this.request("TerminateRunGroup", req, cb)
+  }
+
+  /**
+   * 运行应用。
+   */
+  async RunApplication(
+    req: RunApplicationRequest,
+    cb?: (error: string, rep: RunApplicationResponse) => void
+  ): Promise<RunApplicationResponse> {
+    return this.request("RunApplication", req, cb)
+  }
+
+  /**
+   * 删除缓存卷。
+   */
+  async DeleteVolume(
+    req: DeleteVolumeRequest,
+    cb?: (error: string, rep: DeleteVolumeResponse) => void
+  ): Promise<DeleteVolumeResponse> {
+    return this.request("DeleteVolume", req, cb)
   }
 
   /**
@@ -136,13 +199,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除缓存卷数据。
+   * 查询HPC集群列表。
    */
-  async DeleteVolumeData(
-    req: DeleteVolumeDataRequest,
-    cb?: (error: string, rep: DeleteVolumeDataResponse) => void
-  ): Promise<DeleteVolumeDataResponse> {
-    return this.request("DeleteVolumeData", req, cb)
+  async DescribeHPCClusters(
+    req: DescribeHPCClustersRequest,
+    cb?: (error: string, rep: DescribeHPCClustersResponse) => void
+  ): Promise<DescribeHPCClustersResponse> {
+    return this.request("DescribeHPCClusters", req, cb)
   }
 
   /**
@@ -166,43 +229,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建缓存卷。
+   * 重启HPC节点
    */
-  async CreateVolume(
-    req: CreateVolumeRequest,
-    cb?: (error: string, rep: CreateVolumeResponse) => void
-  ): Promise<CreateVolumeResponse> {
-    return this.request("CreateVolume", req, cb)
-  }
-
-  /**
-   * 查询缓存卷列表。
-   */
-  async DescribeVolumes(
-    req: DescribeVolumesRequest,
-    cb?: (error: string, rep: DescribeVolumesResponse) => void
-  ): Promise<DescribeVolumesResponse> {
-    return this.request("DescribeVolumes", req, cb)
-  }
-
-  /**
-   * 查询任务详情。
-   */
-  async GetRunStatus(
-    req: GetRunStatusRequest,
-    cb?: (error: string, rep: GetRunStatusResponse) => void
-  ): Promise<GetRunStatusResponse> {
-    return this.request("GetRunStatus", req, cb)
-  }
-
-  /**
-   * 运行应用。
-   */
-  async RunApplication(
-    req: RunApplicationRequest,
-    cb?: (error: string, rep: RunApplicationResponse) => void
-  ): Promise<RunApplicationResponse> {
-    return this.request("RunApplication", req, cb)
+  async RebootHPCNodes(
+    req: RebootHPCNodesRequest,
+    cb?: (error: string, rep: RebootHPCNodesResponse) => void
+  ): Promise<RebootHPCNodesResponse> {
+    return this.request("RebootHPCNodes", req, cb)
   }
 
   /**
@@ -226,26 +259,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重试任务。
-   */
-  async RetryRuns(
-    req: RetryRunsRequest,
-    cb?: (error: string, rep: RetryRunsResponse) => void
-  ): Promise<RetryRunsResponse> {
-    return this.request("RetryRuns", req, cb)
-  }
-
-  /**
-   * 终止任务批次。
-   */
-  async TerminateRunGroup(
-    req: TerminateRunGroupRequest,
-    cb?: (error: string, rep: TerminateRunGroupResponse) => void
-  ): Promise<TerminateRunGroupResponse> {
-    return this.request("TerminateRunGroup", req, cb)
-  }
-
-  /**
    * 查询任务列表。
    */
   async DescribeRuns(
@@ -256,23 +269,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除缓存卷。
+   * 查询任务批次列表。
    */
-  async DeleteVolume(
-    req: DeleteVolumeRequest,
-    cb?: (error: string, rep: DeleteVolumeResponse) => void
-  ): Promise<DeleteVolumeResponse> {
-    return this.request("DeleteVolume", req, cb)
-  }
-
-  /**
-   * 修改缓存卷。
-   */
-  async ModifyVolume(
-    req: ModifyVolumeRequest,
-    cb?: (error: string, rep: ModifyVolumeResponse) => void
-  ): Promise<ModifyVolumeResponse> {
-    return this.request("ModifyVolume", req, cb)
+  async DescribeRunGroups(
+    req: DescribeRunGroupsRequest,
+    cb?: (error: string, rep: DescribeRunGroupsResponse) => void
+  ): Promise<DescribeRunGroupsResponse> {
+    return this.request("DescribeRunGroups", req, cb)
   }
 
   /**
@@ -286,16 +289,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询表格。
-   */
-  async DescribeTables(
-    req: DescribeTablesRequest,
-    cb?: (error: string, rep: DescribeTablesResponse) => void
-  ): Promise<DescribeTablesResponse> {
-    return this.request("DescribeTables", req, cb)
-  }
-
-  /**
    * 查询作业详情。
    */
   async GetRunCalls(
@@ -303,5 +296,55 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetRunCallsResponse) => void
   ): Promise<GetRunCallsResponse> {
     return this.request("GetRunCalls", req, cb)
+  }
+
+  /**
+   * 删除缓存卷数据。
+   */
+  async DeleteVolumeData(
+    req: DeleteVolumeDataRequest,
+    cb?: (error: string, rep: DeleteVolumeDataResponse) => void
+  ): Promise<DeleteVolumeDataResponse> {
+    return this.request("DeleteVolumeData", req, cb)
+  }
+
+  /**
+   * 查询缓存卷列表。
+   */
+  async DescribeVolumes(
+    req: DescribeVolumesRequest,
+    cb?: (error: string, rep: DescribeVolumesResponse) => void
+  ): Promise<DescribeVolumesResponse> {
+    return this.request("DescribeVolumes", req, cb)
+  }
+
+  /**
+   * 查询HPC节点列表。
+   */
+  async DescribeHPCNodes(
+    req: DescribeHPCNodesRequest,
+    cb?: (error: string, rep: DescribeHPCNodesResponse) => void
+  ): Promise<DescribeHPCNodesResponse> {
+    return this.request("DescribeHPCNodes", req, cb)
+  }
+
+  /**
+   * 修改缓存卷。
+   */
+  async ModifyVolume(
+    req: ModifyVolumeRequest,
+    cb?: (error: string, rep: ModifyVolumeResponse) => void
+  ): Promise<ModifyVolumeResponse> {
+    return this.request("ModifyVolume", req, cb)
+  }
+
+  /**
+   * 查询表格。
+   */
+  async DescribeTables(
+    req: DescribeTablesRequest,
+    cb?: (error: string, rep: DescribeTablesResponse) => void
+  ): Promise<DescribeTablesResponse> {
+    return this.request("DescribeTables", req, cb)
   }
 }

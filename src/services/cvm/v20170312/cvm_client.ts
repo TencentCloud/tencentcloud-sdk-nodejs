@@ -89,6 +89,7 @@ import {
   CpuTopology,
   DescribeLaunchTemplatesResponse,
   DeleteHpcClustersResponse,
+  DeleteInstancesDisasterRecoverGroupsRequest,
   DescribeInstancesActionTimerResponse,
   DescribeInstancesOperationLimitRequest,
   ResetInstancesPasswordResponse,
@@ -132,6 +133,7 @@ import {
   ConfigureChcDeployVpcRequest,
   DescribeInstanceFamilyConfigsResponse,
   ImportKeyPairResponse,
+  InquirePricePurchaseResourcePoolPacksResponse,
   CreateImageResponse,
   DeleteInstancesActionTimerResponse,
   DescribeInstancesModificationRequest,
@@ -207,7 +209,7 @@ import {
   DeleteLaunchTemplateVersionsResponse,
   StartInstancesResponse,
   ModifyInstancesVpcAttributeRequest,
-  InquirePricePurchaseResourcePoolPacksResponse,
+  DeleteInstancesDisasterRecoverGroupsResponse,
   ChargePrepaid,
   ModifyInstancesChargeTypeRequest,
   ResizeInstanceDisksRequest,
@@ -1078,6 +1080,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDisasterRecoverGroupsResponse) => void
   ): Promise<DeleteDisasterRecoverGroupsResponse> {
     return this.request("DeleteDisasterRecoverGroups", req, cb)
+  }
+
+  /**
+   * 本接口 (DeleteInstancesDisasterRecoverGroups) 用于将云服务器实例从指定的置放群组中批量移除。
+   */
+  async DeleteInstancesDisasterRecoverGroups(
+    req: DeleteInstancesDisasterRecoverGroupsRequest,
+    cb?: (error: string, rep: DeleteInstancesDisasterRecoverGroupsResponse) => void
+  ): Promise<DeleteInstancesDisasterRecoverGroupsResponse> {
+    return this.request("DeleteInstancesDisasterRecoverGroups", req, cb)
   }
 
   /**

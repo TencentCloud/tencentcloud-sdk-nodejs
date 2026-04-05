@@ -940,18 +940,9 @@ export interface ModifyBotSceneStatusResponse {
 }
 
 /**
- * DescribeAreaBanAreas返回参数结构体
+ * GetAttackDownloadRecords请求参数结构体
  */
-export interface DescribeAreaBanAreasResponse {
-  /**
-   * 回包内容
-   */
-  Data?: DescribeAreaBanAreasRsp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type GetAttackDownloadRecordsRequest = null
 
 /**
  * 免鉴权条件信息
@@ -1321,16 +1312,6 @@ export interface DeleteAttackWhiteRuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * LLMRisks
- */
-export interface LLMRisks {
-  /**
-   * 分数
-   */
-  Risks?: Array<ClawRiskItem>
 }
 
 /**
@@ -2130,25 +2111,33 @@ export interface PostAttackDownloadTaskResponse {
 }
 
 /**
- * ClawRiskItem
+ * DescribeAttackWhiteRule请求参数结构体
  */
-export interface ClawRiskItem {
+export interface DescribeAttackWhiteRuleRequest {
   /**
-   * 风险类别
+   * 需要查询的域名
    */
-  RiskType?: string
+  Domain: string
   /**
-   * 规则id
+   * 分页
    */
-  RuleId?: string
+  Offset: number
   /**
-   * 规则名称
+   * 每页容量
    */
-  RuleName?: string
+  Limit: number
   /**
-   * 分数
+   * 排序的字段，支持user_id, signature_id, modify_time
    */
-  Score?: number
+  By?: string
+  /**
+   * 排序方式
+   */
+  Order?: string
+  /**
+   * 筛选条件，支持SignatureId, MatchContent
+   */
+  Filters?: Array<FiltersItemNew>
 }
 
 /**
@@ -2584,29 +2573,22 @@ export interface DescribeHostRequest {
 }
 
 /**
- * GenerateDealsAndPayNew返回参数结构体
+ * DescribeAccessIndex
  */
-export interface GenerateDealsAndPayNewResponse {
+export interface AccessFullTextInfo {
   /**
-   * 计费下单响应结构体
+   * 是否大小写敏感
    */
-  Data?: DealData
+  CaseSensitive?: boolean
   /**
-   * 1:成功，0:失败
+   * 全文索引的分词符，字符串中每个字符代表一个分词符
    */
-  Status?: number
+  Tokenizer?: string
   /**
-   * 返回message
+   * 是否包含中文
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReturnMessage?: string
-  /**
-   * 购买的实例ID
-   */
-  InstanceId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ContainZH?: boolean
 }
 
 /**
@@ -4486,9 +4468,18 @@ public：公有云域名
 }
 
 /**
- * GetAttackDownloadRecords请求参数结构体
+ * DescribeAreaBanAreas返回参数结构体
  */
-export type GetAttackDownloadRecordsRequest = null
+export interface DescribeAreaBanAreasResponse {
+  /**
+   * 回包内容
+   */
+  Data?: DescribeAreaBanAreasRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DescribeDomains返回参数结构体
@@ -4910,11 +4901,6 @@ export interface ApiAsset {
    */
   HostList?: Array<string>
 }
-
-/**
- * QueryBypassAllStatus请求参数结构体
- */
-export type QueryBypassAllStatusRequest = null
 
 /**
  * DescribeOwaspRules请求参数结构体
@@ -8283,36 +8269,6 @@ export interface DescribeFlowTrendResponse {
 }
 
 /**
- * DescribeQClawContentSecCheck请求参数结构体
- */
-export interface DescribeQClawContentSecCheckRequest {
-  /**
-   * <p>服务id,使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则</p>
-   */
-  ServiceId: string
-  /**
-   * <p>要审核的内容</p>
-   */
-  Content?: ApiGuardContent
-  /**
-   * <p>标识用户的id，限速使用，不填，则限速会不生效</p>
-   */
-  UserId?: string
-  /**
-   * <p>会话id</p>
-   */
-  SessionId?: string
-  /**
-   * <p>工具名称</p>
-   */
-  ToolName?: string
-  /**
-   * <p>工具执行的参数</p>
-   */
-  ToolArgs?: string
-}
-
-/**
  * CreateIpAccessControl返回参数结构体
  */
 export interface CreateIpAccessControlResponse {
@@ -11179,22 +11135,29 @@ export interface ModifyWebshellStatusResponse {
 }
 
 /**
- * DescribeAccessIndex
+ * GenerateDealsAndPayNew返回参数结构体
  */
-export interface AccessFullTextInfo {
+export interface GenerateDealsAndPayNewResponse {
   /**
-   * 是否大小写敏感
+   * 计费下单响应结构体
    */
-  CaseSensitive?: boolean
+  Data?: DealData
   /**
-   * 全文索引的分词符，字符串中每个字符代表一个分词符
+   * 1:成功，0:失败
    */
-  Tokenizer?: string
+  Status?: number
   /**
-   * 是否包含中文
-注意：此字段可能返回 null，表示取不到有效值。
+   * 返回message
    */
-  ContainZH?: boolean
+  ReturnMessage?: string
+  /**
+   * 购买的实例ID
+   */
+  InstanceId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -12088,16 +12051,6 @@ export interface IpHitItemsData {
 }
 
 /**
- * guard content
- */
-export interface ApiGuardContent {
-  /**
-   * prompt
-   */
-  Prompt: string
-}
-
-/**
  * 域名的webshell开启状态
  */
 export interface WebshellStatus {
@@ -12829,34 +12782,9 @@ export interface ModifyDomainIpv6StatusRequest {
 }
 
 /**
- * DescribeAttackWhiteRule请求参数结构体
+ * QueryBypassAllStatus请求参数结构体
  */
-export interface DescribeAttackWhiteRuleRequest {
-  /**
-   * 需要查询的域名
-   */
-  Domain: string
-  /**
-   * 分页
-   */
-  Offset: number
-  /**
-   * 每页容量
-   */
-  Limit: number
-  /**
-   * 排序的字段，支持user_id, signature_id, modify_time
-   */
-  By?: string
-  /**
-   * 排序方式
-   */
-  Order?: string
-  /**
-   * 筛选条件，支持SignatureId, MatchContent
-   */
-  Filters?: Array<FiltersItemNew>
-}
+export type QueryBypassAllStatusRequest = null
 
 /**
  * DescribeAntiInfoLeakageRules返回参数结构体
@@ -15929,20 +15857,6 @@ export interface DescribeAttackWhiteRuleResponse {
    * 规则白名单列表
    */
   List?: Array<UserWhiteRule>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeQClawContentSecCheck返回参数结构体
- */
-export interface DescribeQClawContentSecCheckResponse {
-  /**
-   * <p>检测结果</p>
-   */
-  Data?: LLMRisks
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

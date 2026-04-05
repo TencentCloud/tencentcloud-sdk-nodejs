@@ -11361,6 +11361,42 @@ export interface FlowRealtimeStatusRTP {
 }
 
 /**
+ * 人脸识别任务控制参数
+ */
+export interface FaceConfigureInfo {
+  /**
+   * 人脸识别任务开关，可选值：
+<li>ON：开启智能人脸识别任务；</li>
+<li>OFF：关闭智能人脸识别任务。</li>
+   */
+  Switch: string
+  /**
+   * 人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果。默认 95 分。取值范围：0 - 100。
+   */
+  Score?: number
+  /**
+   * 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：
+<li>entertainment：娱乐明星；</li>
+<li>sport：体育明星；</li>
+<li>politician：敏感人物。</li>
+   */
+  DefaultLibraryLabelSet?: Array<string>
+  /**
+   * 用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。
+标签个数最多 100 个，每个标签长度最多 16 个字符。
+   */
+  UserDefineLibraryLabelSet?: Array<string>
+  /**
+   * 人物库选择，可选值：
+<li>Default：使用默认人物库；</li>
+<li>UserDefine：使用用户自定义人物库。</li>
+<li>All：同时使用默认人物库和用户自定义人物库。</li>
+默认值：All，使用系统默认人物库及用户自定义人物库。
+   */
+  FaceLibrary?: string
+}
+
+/**
  * 转动图任务类型。
  */
 export interface AnimatedGraphicTaskInput {
@@ -18264,6 +18300,48 @@ export interface ModifySubtitleEmbedTemplateResponse {
 }
 
 /**
+ * 音色信息
+ */
+export interface VoiceInfo {
+  /**
+   * <p>音色ID</p>
+   */
+  VoiceId?: string
+  /**
+   * <p>音色名</p>
+   */
+  Name?: string
+  /**
+   * <p>音色描述信息</p>
+   */
+  Description?: string
+  /**
+   * <p>音色类别</p><p>枚举值：</p><ul><li>system： 系统音色</li></ul>
+   */
+  Category?: string
+  /**
+   * <p>性别</p><p>枚举值：</p><ul><li>male： 男</li><li>famale： 女</li></ul>
+   */
+  Gender?: string
+  /**
+   * <p>支持语种列表</p><p>如：en</p>
+   */
+  Languages?: Array<string>
+  /**
+   * <p>试听音频URL</p>
+   */
+  AudioUrl?: string
+  /**
+   * <p>标签列表</p><p>如：温柔</p>
+   */
+  Labels?: Array<string>
+  /**
+   * <p>推荐场景</p><p>如：教育</p>
+   */
+  Scenes?: Array<string>
+}
+
+/**
  * DescribeSnapshotByTimeOffsetTemplates返回参数结构体
  */
 export interface DescribeSnapshotByTimeOffsetTemplatesResponse {
@@ -20644,6 +20722,29 @@ export interface AiAnalysisTaskHeadTailOutput {
 }
 
 /**
+ * DescribeVoices返回参数结构体
+ */
+export interface DescribeVoicesResponse {
+  /**
+   * <p>错误码，成功时返回0</p>
+   */
+  ErrorCode?: number
+  /**
+   * <p>错误信息，成功时返回success</p>
+   */
+  Msg?: string
+  /**
+   * <p>可用音色列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Voices?: Array<VoiceInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 提取盲水印配置
  */
 export interface ExtractBlindWatermarkConfig {
@@ -21470,39 +21571,17 @@ export interface AddOnImageInput {
 }
 
 /**
- * 人脸识别任务控制参数
+ * DescribeVoices请求参数结构体
  */
-export interface FaceConfigureInfo {
+export interface DescribeVoicesRequest {
   /**
-   * 人脸识别任务开关，可选值：
-<li>ON：开启智能人脸识别任务；</li>
-<li>OFF：关闭智能人脸识别任务。</li>
+   * <p>音色类别</p><p>枚举值：</p><ul><li>system： 系统音色</li></ul>
    */
-  Switch: string
+  VoiceType?: string
   /**
-   * 人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果。默认 95 分。取值范围：0 - 100。
+   * <p>扩展参数，json字符串</p><p>其他筛选条件voiceName String 音色名，模糊匹配labels Array of String 标签，匹配包含这些标签的音色</p>
    */
-  Score?: number
-  /**
-   * 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：
-<li>entertainment：娱乐明星；</li>
-<li>sport：体育明星；</li>
-<li>politician：敏感人物。</li>
-   */
-  DefaultLibraryLabelSet?: Array<string>
-  /**
-   * 用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。
-标签个数最多 100 个，每个标签长度最多 16 个字符。
-   */
-  UserDefineLibraryLabelSet?: Array<string>
-  /**
-   * 人物库选择，可选值：
-<li>Default：使用默认人物库；</li>
-<li>UserDefine：使用用户自定义人物库。</li>
-<li>All：同时使用默认人物库和用户自定义人物库。</li>
-默认值：All，使用系统默认人物库及用户自定义人物库。
-   */
-  FaceLibrary?: string
+  ExtParam?: string
 }
 
 /**

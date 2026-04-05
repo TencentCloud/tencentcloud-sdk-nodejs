@@ -70,15 +70,17 @@ export interface TopEntryValue {
 }
 
 /**
- * 预付费套餐自动续费配置项。
+ * ModifyZoneWorkMode请求参数结构体
  */
-export interface RenewFlag {
+export interface ModifyZoneWorkModeRequest {
   /**
-   * 预付费套餐的自动续费标志，取值有：
-<li> on：开启自动续费；</li>
-<li> off：不开启自动续费。</li>
+   * 站点 ID。
    */
-  Switch: string
+  ZoneId: string
+  /**
+   * 版本管理配置组工作模式。站点各配置模块可按照配置组维度开启「版本管理模式」或「即时生效模式」，详情请参考 [版本管理](https://cloud.tencent.com/document/product/1552/113690)。
+   */
+  WorkModeInfos?: Array<ConfigGroupWorkModeInfo>
 }
 
 /**
@@ -236,33 +238,15 @@ export interface AdaptiveFrequencyControl {
 }
 
 /**
- * 慢速攻击配置。
+ * 预付费套餐自动续费配置项。
  */
-export interface SlowPostConfig {
+export interface RenewFlag {
   /**
-   * 开关，取值有：
-<li>on：开启；</li>
-<li>off：关闭。</li>
+   * 预付费套餐的自动续费标志，取值有：
+<li> on：开启自动续费；</li>
+<li> off：不开启自动续费。</li>
    */
   Switch: string
-  /**
-   * 首包配置。
-   */
-  FirstPartConfig?: FirstPartConfig
-  /**
-   * 基础配置。
-   */
-  SlowRateConfig?: SlowRateConfig
-  /**
-   * 慢速攻击的处置动作，取值有：
-<li>monitor：观察；</li>
-<li>drop：拦截。</li>
-   */
-  Action?: string
-  /**
-   * 本规则的Id。
-   */
-  RuleId?: number
 }
 
 /**
@@ -582,83 +566,21 @@ export interface HeaderAction {
 }
 
 /**
- * 实时日志投递任务。
+ * ModifyEdgeKVNamespace请求参数结构体
  */
-export interface RealtimeLogDeliveryTask {
+export interface ModifyEdgeKVNamespaceRequest {
   /**
-   * 实时日志投递任务 ID。
+   * 站点 ID。
    */
-  TaskId?: string
+  ZoneId: string
   /**
-   * 实时日志投递任务的名称。
+   * 命名空间名称。
    */
-  TaskName?: string
+  Namespace: string
   /**
-   * 实时日志投递任务的状态，取值有： <li>enabled: 已启用；</li> <li>disabled: 已停用；</li><li>deleted: 异常删除状态，请检查目的地腾讯云 CLS 日志集/日志主题是否已被删除。</li>
+   * 命名空间描述。用于说明命名空间的用途或业务含义。最大支持 256 个字符。
    */
-  DeliveryStatus?: string
-  /**
-   * 实时日志投递任务类型，取值有： <li>cls: 推送到腾讯云 CLS；</li> <li>custom_endpoint：推送到自定义 HTTP(S) 地址；</li> <li>s3：推送到 AWS S3 兼容存储桶地址；</li><li>log_analysis：推送到 EdgeOne 日志分析。</li>
-   */
-  TaskType?: string
-  /**
-   * 实时日志投递任务对应的实体（七层域名或者四层代理实例）列表。取值示例如下： <li>七层域名：domain.example.com；</li> <li>四层代理实例：sid-2s69eb5wcms7。</li>
-   */
-  EntityList?: Array<string>
-  /**
-   * 数据投递类型，取值有： <li>domain：站点加速日志；</li> <li>application：四层代理日志；</li> <li>web-rateLiming：速率限制和 CC 攻击防护日志；</li> <li>web-attack：托管规则日志；</li> <li>web-rule：自定义规则日志；</li> <li>web-bot：Bot管理日志。</li>
-   */
-  LogType?: string
-  /**
-   * 数据投递区域，取值有： <li>mainland：中国大陆境内；</li> <li>overseas：全球（不含中国大陆）。</li>
-   */
-  Area?: string
-  /**
-   * 投递的预设字段列表。
-   */
-  Fields?: Array<string>
-  /**
-   * 投递的自定义字段列表。
-   */
-  CustomFields?: Array<CustomField>
-  /**
-   * 日志投递的过滤条件。
-   */
-  DeliveryConditions?: Array<DeliveryCondition>
-  /**
-   * 采样比例，采用千分制，取值范围为1-1000，例如：605 表示采样比例为 60.5%。
-   */
-  Sample?: number
-  /**
-   * 日志投递的输出格式。出参为 null 时表示为默认格式，默认格式逻辑如下：
-<li>当 TaskType 取值为 custom_endpoint 时，默认格式为多个 JSON 对象组成的数组，每个 JSON 对象为一条日志；</li>
-<li>当 TaskType 取值为 s3 时，默认格式为 JSON Lines。</li>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LogFormat?: LogFormat
-  /**
-   * CLS 的配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CLS?: CLSTopic
-  /**
-   * 自定义 HTTP 服务的配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CustomEndpoint?: CustomEndpoint
-  /**
-   * AWS S3 兼容存储桶的配置信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  S3?: S3
-  /**
-   * 创建时间。
-   */
-  CreateTime?: string
-  /**
-   * 更新时间。
-   */
-  UpdateTime?: string
+  Remark?: string
 }
 
 /**
@@ -1339,6 +1261,63 @@ export interface ModifyL7AccRulePriorityRequest {
 }
 
 /**
+ * EdgeKVList请求参数结构体
+ */
+export interface EdgeKVListRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 命名空间名称。
+   */
+  Namespace: string
+  /**
+   * 键名前缀过滤。只返回以指定前缀开头的键名，长度为 1-512 个字符。不填写表示返回所有键名；不允许传入空字符串。
+   */
+  Prefix?: string
+  /**
+   * 游标位置。标识当前查询的起始位置，用于遍历大量数据。首次查询时不填写，从头开始遍历；后续查询时填写上一次返回的 Cursor 值，从该位置继续向后遍历。
+
+   */
+  Cursor?: string
+  /**
+   * 返回的键名数量。默认值：20，最大值：1000。
+   */
+  Limit?: number
+}
+
+/**
+ * 慢速攻击配置。
+ */
+export interface SlowPostConfig {
+  /**
+   * 开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch: string
+  /**
+   * 首包配置。
+   */
+  FirstPartConfig?: FirstPartConfig
+  /**
+   * 基础配置。
+   */
+  SlowRateConfig?: SlowRateConfig
+  /**
+   * 慢速攻击的处置动作，取值有：
+<li>monitor：观察；</li>
+<li>drop：拦截。</li>
+   */
+  Action?: string
+  /**
+   * 本规则的Id。
+   */
+  RuleId?: number
+}
+
+/**
  * WebSocket配置
  */
 export interface WebSocket {
@@ -1397,9 +1376,37 @@ export interface ModifyAccelerationDomainRequest {
 }
 
 /**
+ * EdgeKVGet请求参数结构体
+ */
+export interface EdgeKVGetRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 命名空间名称。可通过 DescribeEdgeKVNamespaces 接口获取站点下的命名空间列表。
+   */
+  Namespace: string
+  /**
+   * 键名列表。数组长度上限为 20。每个键名不能为空，长度为 1-512 个字符，允许的字符为字母、数字、中划线和下划线。查询单个键时传入包含一个元素的数组。
+   */
+  Keys: Array<string>
+}
+
+/**
  * ModifyContentIdentifier返回参数结构体
  */
 export interface ModifyContentIdentifierResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteEdgeKVNamespace返回参数结构体
+ */
+export interface DeleteEdgeKVNamespaceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1874,6 +1881,24 @@ export interface CreateFunctionRuleRequest {
 }
 
 /**
+ * 规则引擎条件使用StatusCode字段动作参数
+ */
+export interface RuleCodeActionParams {
+  /**
+   * 状态 Code。
+   */
+  StatusCode: number
+  /**
+   * 参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
+   */
+  Name: string
+  /**
+   * 参数值。
+   */
+  Values: Array<string>
+}
+
+/**
  * 子规则分支。
  */
 export interface RuleBranch {
@@ -1894,9 +1919,54 @@ export interface RuleBranch {
 }
 
 /**
+ * 组件被引用的实例信息，用于展示该组件与边缘函数等资源的绑定关系。当边缘函数需要访问组件（如 KV 命名空间）时，会建立引用关系，通过此结构体可查看引用的具体实例详情及所属站点信息。
+ */
+export interface ComponentReference {
+  /**
+   * 引用的实例类型。取值有：
+<li>edge-function：边缘函数。</li>
+   */
+  ReferenceType?: string
+  /**
+   * 引用的实例 ID。根据 ReferenceType 的取值不同，返回对应的实例 ID：
+<li>当 ReferenceType 为 edge-function 时：返回边缘函数 ID，格式形如：ef-2vc5oe9mzqhm。</li>
+
+   */
+  ReferenceId?: string
+  /**
+   * 引用的实例名称。根据 ReferenceType 的取值不同，返回对应的实例名称：
+<li>当 ReferenceType 为 edge-function 时：返回边缘函数名称。</li>
+
+   */
+  ReferenceName?: string
+  /**
+   * 站点 ID。引用该命名空间的实例所属的站点标识。
+   */
+  ZoneId?: string
+  /**
+   * 站点名称。引用该命名空间的实例所属的站点名称。
+   */
+  ZoneName?: string
+  /**
+   * 引用该命名空间的实例所属站点的别名。若未设置站点别名，则返回空字符串。
+   */
+  AliasZoneName?: string
+}
+
+/**
  * ConfirmOriginACLUpdate返回参数结构体
  */
 export interface ConfirmOriginACLUpdateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyEdgeKVNamespace返回参数结构体
+ */
+export interface ModifyEdgeKVNamespaceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2397,38 +2467,38 @@ export interface CachePrefresh {
 }
 
 /**
- * 七层加速域名/四层代理实例与回源 IP 网段的绑定关系，同时包含回源 IP 网段详情和选择可切换的回源 IP 网段列表。
+ * DescribePurgeTasks请求参数结构体
  */
-export interface OriginACLInfo {
+export interface DescribePurgeTasksRequest {
   /**
-   * 启用了特定回源 IP 网段回源的七层加速域名列表。源站防护未开启时为空。
+   * 站点 ID。此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。
    */
-  L7Hosts?: Array<string>
+  ZoneId?: string
   /**
-   * 启用了特定回源 IP 网段回源的四层代理实例列表。源站防护未开启时为空。
+   * 查询起始时间，时间与 job-id 必填一个。
    */
-  L4ProxyIds?: Array<string>
+  StartTime?: string
   /**
-   * 当前生效的回源 IP 网段。源站防护未开启时为空。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 查询结束时间，时间与 job-id 必填一个。
    */
-  CurrentOriginACL?: CurrentOriginACL
+  EndTime?: string
   /**
-   * 当回源 IP 网段发生更新时，该字段会返回下一个版本将要生效的回源 IP 网段，包含与当前回源 IP 网段的对比。无更新或者源站防护未开启时该字段为空。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分页查询偏移量，默认为 0。
    */
-  NextOriginACL?: NextOriginACL
+  Offset?: number
   /**
-   * 源站防护状态，取值有：
-<li>online：已生效；</li>
-<li>offline：已停用；</li>
-<li>updating: 配置部署中。</li>
+   * 分页查询限制数目，默认值：20，最大值：1000。
    */
-  Status?: string
+  Limit?: number
   /**
-   * 源站防护回源ACL控制域。
+   * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
+<li>job-id：按照任务 ID 进行过滤。job-id 形如：1379afjk91u32h，暂不支持多值，不支持模糊查询；</li>
+<li>target：按照目标资源信息进行过滤，target 形如：http://www.qq.com/1.txt 或者 tag1，暂不支持多值，支持模糊查询；</li>
+<li>domains：按照域名进行过滤，形如：www.qq.com，不支持模糊查询；</li>
+<li>statuses：按照任务状态进行过滤，不支持模糊查询。可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时<br>   canceled：已取消</li>
+<li>type：按照清除缓存类型进行过滤，暂不支持多值，不支持模糊查询。可选项：<br>   purge_url：URL<br>   purge_prefix：前缀<br>   purge_all：全部缓存内容<br>   purge_host：Hostname<br>   purge_cache_tag：CacheTag</li>
    */
-  OriginACLFamily?: string
+  Filters?: Array<AdvancedFilter>
 }
 
 /**
@@ -2474,6 +2544,86 @@ export interface CreateL7AccRulesRequest {
    * 规则内容。
    */
   Rules: Array<RuleEngineItem>
+}
+
+/**
+ * 实时日志投递任务。
+ */
+export interface RealtimeLogDeliveryTask {
+  /**
+   * 实时日志投递任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 实时日志投递任务的名称。
+   */
+  TaskName?: string
+  /**
+   * 实时日志投递任务的状态，取值有： <li>enabled: 已启用；</li> <li>disabled: 已停用；</li><li>deleted: 异常删除状态，请检查目的地腾讯云 CLS 日志集/日志主题是否已被删除。</li>
+   */
+  DeliveryStatus?: string
+  /**
+   * 实时日志投递任务类型，取值有： <li>cls: 推送到腾讯云 CLS；</li> <li>custom_endpoint：推送到自定义 HTTP(S) 地址；</li> <li>s3：推送到 AWS S3 兼容存储桶地址；</li><li>log_analysis：推送到 EdgeOne 日志分析。</li>
+   */
+  TaskType?: string
+  /**
+   * 实时日志投递任务对应的实体（七层域名或者四层代理实例）列表。取值示例如下： <li>七层域名：domain.example.com；</li> <li>四层代理实例：sid-2s69eb5wcms7。</li>
+   */
+  EntityList?: Array<string>
+  /**
+   * 数据投递类型，取值有： <li>domain：站点加速日志；</li> <li>application：四层代理日志；</li> <li>web-rateLiming：速率限制和 CC 攻击防护日志；</li> <li>web-attack：托管规则日志；</li> <li>web-rule：自定义规则日志；</li> <li>web-bot：Bot管理日志。</li>
+   */
+  LogType?: string
+  /**
+   * 数据投递区域，取值有： <li>mainland：中国大陆境内；</li> <li>overseas：全球（不含中国大陆）。</li>
+   */
+  Area?: string
+  /**
+   * 投递的预设字段列表。
+   */
+  Fields?: Array<string>
+  /**
+   * 投递的自定义字段列表。
+   */
+  CustomFields?: Array<CustomField>
+  /**
+   * 日志投递的过滤条件。
+   */
+  DeliveryConditions?: Array<DeliveryCondition>
+  /**
+   * 采样比例，采用千分制，取值范围为1-1000，例如：605 表示采样比例为 60.5%。
+   */
+  Sample?: number
+  /**
+   * 日志投递的输出格式。出参为 null 时表示为默认格式，默认格式逻辑如下：
+<li>当 TaskType 取值为 custom_endpoint 时，默认格式为多个 JSON 对象组成的数组，每个 JSON 对象为一条日志；</li>
+<li>当 TaskType 取值为 s3 时，默认格式为 JSON Lines。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogFormat?: LogFormat
+  /**
+   * CLS 的配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CLS?: CLSTopic
+  /**
+   * 自定义 HTTP 服务的配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomEndpoint?: CustomEndpoint
+  /**
+   * AWS S3 兼容存储桶的配置信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  S3?: S3
+  /**
+   * 创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间。
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -2577,21 +2727,38 @@ export interface DescribeSecurityJSInjectionRuleResponse {
 }
 
 /**
- * 规则引擎条件使用StatusCode字段动作参数
+ * 七层加速域名/四层代理实例与回源 IP 网段的绑定关系，同时包含回源 IP 网段详情和选择可切换的回源 IP 网段列表。
  */
-export interface RuleCodeActionParams {
+export interface OriginACLInfo {
   /**
-   * 状态 Code。
+   * 启用了特定回源 IP 网段回源的七层加速域名列表。源站防护未开启时为空。
    */
-  StatusCode: number
+  L7Hosts?: Array<string>
   /**
-   * 参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
+   * 启用了特定回源 IP 网段回源的四层代理实例列表。源站防护未开启时为空。
    */
-  Name: string
+  L4ProxyIds?: Array<string>
   /**
-   * 参数值。
+   * 当前生效的回源 IP 网段。源站防护未开启时为空。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Values: Array<string>
+  CurrentOriginACL?: CurrentOriginACL
+  /**
+   * 当回源 IP 网段发生更新时，该字段会返回下一个版本将要生效的回源 IP 网段，包含与当前回源 IP 网段的对比。无更新或者源站防护未开启时该字段为空。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NextOriginACL?: NextOriginACL
+  /**
+   * 源站防护状态，取值有：
+<li>online：已生效；</li>
+<li>offline：已停用；</li>
+<li>updating: 配置部署中。</li>
+   */
+  Status?: string
+  /**
+   * 源站防护回源ACL控制域。
+   */
+  OriginACLFamily?: string
 }
 
 /**
@@ -2966,17 +3133,17 @@ export interface ZoneInfo {
 }
 
 /**
- * 状态码缓存 TTL 配置参数内部结构。
+ * EdgeKVGet返回参数结构体
  */
-export interface StatusCodeCacheParam {
+export interface EdgeKVGetResponse {
   /**
-   * 状态码，取值为 400、 401、403、 404、 405、 407、 414、 500、 501、 502、 503、 504、 509、 514 之一。
+   * 键值对数据列表。按入参 Keys 的顺序依次返回结果，若某键不存在，则对应项的 Value 字段返回空字符串。
    */
-  StatusCode?: number
+  Data?: Array<KeyValuePair>
   /**
-   * 缓存时间数值，单位为秒，取值：0～31536000。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CacheTime?: number
+  RequestId?: string
 }
 
 /**
@@ -3490,15 +3657,21 @@ export interface CurrentOriginACL {
 }
 
 /**
- * Ipv6访问配置
+ * CreateEdgeKVNamespace请求参数结构体
  */
-export interface Ipv6 {
+export interface CreateEdgeKVNamespaceRequest {
   /**
-   * Ipv6 访问功能配置，取值有：
-<li>on：开启Ipv6访问功能；</li>
-<li>off：关闭Ipv6访问功能。</li>
+   * 站点 ID。
    */
-  Switch: string
+  ZoneId: string
+  /**
+   * 命名空间名称。输入内容有以下限制：支持输入 1-50 个字符，允许的字符为 a-z、A-Z、0-9、-，且 - 不能单独注册或连续使用，不能放在开头或结尾。在同站点下，名称需保证唯一。
+   */
+  Namespace: string
+  /**
+   * 命名空间描述。用于说明命名空间的用途或业务含义。最大支持 256 个字符。
+   */
+  Remark?: string
 }
 
 /**
@@ -3626,17 +3799,19 @@ export interface SharedCNAMEInfo {
 }
 
 /**
- * 失败原因
+ * 默认拦截动作配置。当安全规则命中并触发拦截处置动作时，若 SecurityAction 仅指定了 Name 为 Deny 且未指定 DenyActionParameters，则按功能模块维度匹配并使用此处定义的默认参数配置：
+<li>ManagedRules 托管规则默认拦截处置动作配置。</li>
+<li>OtherModules 除托管规则外的安全防护规则（自定义规则、速率限制 和 Bot 管理功能）默认拦截处置动作配置。</li>
  */
-export interface FailReason {
+export interface DefaultDenySecurityActionParameters {
   /**
-   * 失败原因。
+   * 托管规则默认拦截处置动作配置。	DenyActionParameters 支持的配置参数：<li>ReturnCustomPage：是否使用自定义页面。</li><li>ResponseCode：自定义页面的状态码。</li><li>ErrorPageId：自定义页面的 PageId。</li>
    */
-  Reason: string
+  ManagedRules?: DenyActionParameters
   /**
-   * 处理失败的资源列表。
+   * 除托管规则外的安全防护规则（自定义规则、速率限制 和 Bot 管理功能）默认拦截处置动作配置。	DenyActionParameters 支持的配置参数：<li>ReturnCustomPage：是否使用自定义页面。</li><li>ResponseCode：自定义页面的状态码。</li><li>ErrorPageId：自定义页面的 PageId。</li>
    */
-  Targets: Array<string>
+  OtherModules?: DenyActionParameters
 }
 
 /**
@@ -3895,6 +4070,20 @@ export interface CreateSharedCNAMEResponse {
 }
 
 /**
+ * 状态码缓存 TTL 配置参数内部结构。
+ */
+export interface StatusCodeCacheParam {
+  /**
+   * 状态码，取值为 400、 401、403、 404、 405、 407、 414、 500、 501、 502、 503、 504、 509、 514 之一。
+   */
+  StatusCode?: number
+  /**
+   * 缓存时间数值，单位为秒，取值：0～31536000。
+   */
+  CacheTime?: number
+}
+
+/**
  * DeleteMultiPathGateway返回参数结构体
  */
 export interface DeleteMultiPathGatewayResponse {
@@ -3996,40 +4185,21 @@ export interface AccelerationDomainCertificate {
 }
 
 /**
- * 源站组记录
+ * DescribeFunctionComponentBindings返回参数结构体
  */
-export interface OriginRecord {
+export interface DescribeFunctionComponentBindingsResponse {
   /**
-   * 源站记录值，不包含端口信息，可以为：IPv4，IPv6，域名格式。
+   * 符合条件的函数绑定总数。
    */
-  Record: string
+  TotalCount?: number
   /**
-   * 源站类型，取值有：
-<li>IP_DOMAIN：IPV4、IPV6、域名类型源站；</li>
-<li>COS：COS源。</li>
-<li>AWS_S3：AWS S3对象存储源站。</li>
+   * 函数组件绑定列表。
    */
-  Type?: string
+  FunctionComponentBindings?: Array<FunctionComponentBinding>
   /**
-   * 源站记录ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RecordId?: string
-  /**
-   * 【源站权重】：用于控制流量分配优先级的参数，取值范围：0-100（整数）：<li>空值：不设置权重，系统按默认策略调度；</li><li>0 值：明确设置权重为0，流量将不会分配到该源站，注意事项：必须确保至少有一个源站的权重值大于0；</li><li>正常值：数值越大分配流量越多 ；</li>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Weight?: number
-  /**
-   * 是否私有鉴权，当源站类型 RecordType=COS/AWS_S3 时生效，取值有：
-<li>true：使用私有鉴权；</li>
-<li>false：不使用私有鉴权。</li>不填写，默认值为：false。
-
-   */
-  Private?: boolean
-  /**
-   * 私有鉴权参数，当源站类型Private=true时有效。
-   */
-  PrivateParameters?: Array<PrivateParameter>
+  RequestId?: string
 }
 
 /**
@@ -4095,6 +4265,25 @@ export interface AlgDetectResult {
 <li>longdelay：（长时间）等待后响应。</li>
    */
   Action?: string
+}
+
+/**
+ * EdgeKVList返回参数结构体
+ */
+export interface EdgeKVListResponse {
+  /**
+   * 键名列表。
+   */
+  Keys?: Array<string>
+  /**
+   * 游标位置。标识当前遍历的位置，用于获取下一批数据。将此值填入下次请求的 Cursor 参数中，可继续向后遍历。若为空字符串，表示已遍历完所有数据。
+
+   */
+  Cursor?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4369,6 +4558,16 @@ export interface LoadBalancer {
    * 负载均衡被引用实例的列表。
    */
   References?: Array<OriginGroupReference>
+}
+
+/**
+ * EdgeKVDelete返回参数结构体
+ */
+export interface EdgeKVDeleteResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5338,7 +5537,7 @@ export interface ManagedRuleAutoUpdate {
 }
 
 /**
- * Web安全的自定义规则
+ * Web 防护功能下的自定义规则。
  */
 export interface CustomRule {
   /**
@@ -5346,27 +5545,27 @@ export interface CustomRule {
    */
   Name: string
   /**
-   * 自定义规则的具体内容，需符合表达式语法，详细规范参见产品文档。
+   * 自定义规则的具体内容，需符合表达式语法，详细规范参见 [产品文档](https://cloud.tencent.com/document/product/1552/125343) 。
    */
   Condition: string
   /**
-   * 自定义规则的执行动作。	SecurityAction 的 Name 取值支持：<li>Deny：拦截；</li><li>Monitor：观察；</li><li>ReturnCustomPage：使用指定页面拦截；</li><li>Redirect：重定向至 URL；</li><li>BlockIP：IP 封禁；</li><li>JSChallenge：JavaScript 挑战；</li><li>ManagedChallenge：托管挑战；</li><li>Allow：放行。</li>
+   * 自定义规则的处置动作。SecurityAction.Name 取值范围如下：<ul><li>Deny：拦截；</li><li>Monitor：观察；</li><li>ReturnCustomPage：使用指定页面拦截；</li><li>Redirect：重定向至 URL；</li><li>BlockIP：IP 封禁；</li><li>JSChallenge：JavaScript 挑战；</li><li>ManagedChallenge：托管挑战；</li><li>Allow：放行。</li></ul>
    */
   Action: SecurityAction
   /**
-   * 自定义规则是否开启。取值有：<li>on：开启</li><li>off：关闭</li>
+   * 自定义规则是否开启。取值有：<ul><li>on：开启</li><li>off：关闭</li></ul>
    */
   Enabled: string
   /**
-   * 自定义规则的 ID。<br>通过规则 ID 可支持不同的规则配置操作：<br> - 增加新规则：ID 为空或不指定 ID 参数；<br> - 修改已有规则：指定需要更新/修改的规则 ID；<br> - 删除已有规则：CustomRules 参数中，Rules 列表中未包含的已有规则将被删除。
+   * 自定义规则的 ID。通过规则 ID 可支持不同的规则配置操作：<ul><li>增加新规则：ID 为空或不指定 ID 参数；</li><li>修改已有规则：指定需要更新/修改的规则 ID；</li><li>删除已有规则：CustomRules 参数中，Rules 列表中未包含的已有规则将被删除。</li></ul>
    */
   Id?: string
   /**
-   * 自定义规则的类型。取值有：<li>BasicAccessRule：基础访问管控；</li><li>PreciseMatchRule：精准匹配规则，默认；</li><li>ManagedAccessRule：专家定制规则，仅出参。</li><br/>默认为PreciseMatchRule。
+   * 自定义规则的类型。取值有：<ul><li>BasicAccessRule：基础访问管控；</li><li>PreciseMatchRule：精准匹配规则；</li><li>ManagedAccessRule：专家定制规则，仅出参支持。</li></ul>说明：当未指定 RuleType 时，默认为 `PreciseMatchRule`。
    */
   RuleType?: string
   /**
-   * 自定义规则的优先级，范围是 0 ~ 100，默认为 0，仅支持精准匹配规则（PreciseMatchRule）。
+   * 自定义规则的优先级，范围是 0 ~ 100，默认为 0，仅支持精准匹配规则（`PreciseMatchRule`）。
    */
   Priority?: number
 }
@@ -6269,19 +6468,13 @@ export interface DescribeZoneConfigImportResultResponse {
 }
 
 /**
- * 标签配置
+ * ModifyFunctionComponentBindings返回参数结构体
  */
-export interface Tag {
+export interface ModifyFunctionComponentBindingsResponse {
   /**
-   * 标签键。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TagKey: string
-  /**
-   * 标签值。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TagValue: string
+  RequestId?: string
 }
 
 /**
@@ -7419,7 +7612,7 @@ export interface CreatePlanForZoneRequest {
  */
 export interface DeviceProfile {
   /**
-   * 客户端设备类型。取值有：<li>iOS；</li><li>Android；</li><li>WebView。</li>
+   * 客户端设备类型。取值有：<li>iOS；</li><li>Android；</li><li>WebView；</li><li>WeChatMiniProgram。</li>
    */
   ClientType: string
   /**
@@ -7765,6 +7958,20 @@ export interface DescribeMultiPathGatewayRegionsResponse {
 }
 
 /**
+ * DeleteEdgeKVNamespace请求参数结构体
+ */
+export interface DeleteEdgeKVNamespaceRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 要删除的命名空间名称。
+   */
+  Namespace: string
+}
+
+/**
  * DescribeL4Proxy请求参数结构体
  */
 export interface DescribeL4ProxyRequest {
@@ -8002,6 +8209,40 @@ export interface TopDetailData {
 }
 
 /**
+ * KV 命名空间信息，包含命名空间的基本属性、存储容量使用情况以及被引用关系。KV 命名空间是边缘函数存储键值对数据的容器，可在边缘函数中通过绑定方式进行读写操作。
+ */
+export interface KVNamespace {
+  /**
+   * 命名空间名称。在同站点下具有唯一性。
+   */
+  Namespace?: string
+  /**
+   * 命名空间描述。创建时填写的备注信息，用于说明命名空间的用途或业务含义。最大支持 256 个字符。
+   */
+  Remark?: string
+  /**
+   * KV 存储空间可用容量，单位为字节（Byte）。表示该命名空间可存储数据的最大容量上限，当前默认为 1 GB。
+   */
+  Capacity?: number
+  /**
+   * KV 存储空间已用容量，单位为字节（Byte）。表示该命名空间当前已使用的存储空间大小。
+   */
+  CapacityUsed?: number
+  /**
+   * 命名空间被引用实例的列表。展示当前命名空间被哪些边缘函数实例引用，以及引用的站点信息。若未被引用，则返回空数组。
+   */
+  References?: Array<ComponentReference>
+  /**
+   * 命名空间的创建时间，遵循 ISO 8601 标准，格式为 YYYY-MM-DDThh:mm:ssZ（UTC 时间）。
+   */
+  CreatedOn?: string
+  /**
+   * 命名空间的最后修改时间，遵循 ISO 8601 标准，格式为 YYYY-MM-DDThh:mm:ssZ（UTC 时间）。
+   */
+  ModifiedOn?: string
+}
+
+/**
  * DescribeZoneSetting返回参数结构体
  */
 export interface DescribeZoneSettingResponse {
@@ -8041,38 +8282,13 @@ export interface DeleteJustInTimeTranscodeTemplatesResponse {
 }
 
 /**
- * DescribePurgeTasks请求参数结构体
+ * DeleteRules返回参数结构体
  */
-export interface DescribePurgeTasksRequest {
+export interface DeleteRulesResponse {
   /**
-   * 站点 ID。此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ZoneId?: string
-  /**
-   * 查询起始时间，时间与 job-id 必填一个。
-   */
-  StartTime?: string
-  /**
-   * 查询结束时间，时间与 job-id 必填一个。
-   */
-  EndTime?: string
-  /**
-   * 分页查询偏移量，默认为 0。
-   */
-  Offset?: number
-  /**
-   * 分页查询限制数目，默认值：20，最大值：1000。
-   */
-  Limit?: number
-  /**
-   * 过滤条件，Filters.Values的上限为20。详细的过滤条件如下：
-<li>job-id：按照任务 ID 进行过滤。job-id 形如：1379afjk91u32h，暂不支持多值，不支持模糊查询；</li>
-<li>target：按照目标资源信息进行过滤，target 形如：http://www.qq.com/1.txt 或者 tag1，暂不支持多值，支持模糊查询；</li>
-<li>domains：按照域名进行过滤，形如：www.qq.com，不支持模糊查询；</li>
-<li>statuses：按照任务状态进行过滤，不支持模糊查询。可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时<br>   canceled：已取消</li>
-<li>type：按照清除缓存类型进行过滤，暂不支持多值，不支持模糊查询。可选项：<br>   purge_url：URL<br>   purge_prefix：前缀<br>   purge_all：全部缓存内容<br>   purge_host：Hostname<br>   purge_cache_tag：CacheTag</li>
-   */
-  Filters?: Array<AdvancedFilter>
+  RequestId?: string
 }
 
 /**
@@ -8143,6 +8359,24 @@ export interface DescribeL7AccSettingRequest {
    * 站点 ID。
    */
   ZoneId: string
+}
+
+/**
+ * DescribeEdgeKVNamespaces返回参数结构体
+ */
+export interface DescribeEdgeKVNamespacesResponse {
+  /**
+   * 符合条件的命名空间总数。
+   */
+  TotalCount?: number
+  /**
+   * KV 命名空间信息列表。若无符合条件的命名空间，则返回空数组。
+   */
+  KVNamespaces?: Array<KVNamespace>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8369,6 +8603,35 @@ export interface IPExpireInfo {
 }
 
 /**
+ * DescribeFunctionComponentBindings请求参数结构体
+ */
+export interface DescribeFunctionComponentBindingsRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 函数 ID。
+   */
+  FunctionId: string
+  /**
+   * 分页查询偏移量。默认值：0。
+   */
+  Offset?: number
+  /**
+   * 分页查询限制数目。默认值：20，最大值：1000。
+   */
+  Limit?: number
+  /**
+   * 过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：
+<li>name：按照绑定的变量名进行过滤，支持模糊查询；</li>
+<li>type：按照绑定类型进行过滤，不支持模糊查询。</li>
+
+   */
+  Filters?: Array<AdvancedFilter>
+}
+
+/**
  * 访问 URL 重定向 配置参数。
  */
 export interface AccessURLRedirectParameters {
@@ -8401,59 +8664,6 @@ export interface AccessURLRedirectParameters {
 }
 
 /**
- * DescribeDDoSAttackEvent请求参数结构体
- */
-export interface DescribeDDoSAttackEventRequest {
-  /**
-   * 开始时间，时间范围为 30 天。
-   */
-  StartTime: string
-  /**
-   * 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。
-   */
-  EndTime: string
-  /**
-   * ddos策略组集合，不填默认选择全部策略。
-   */
-  PolicyIds?: Array<number | bigint>
-  /**
-   * 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
-   */
-  ZoneIds?: Array<string>
-  /**
-   * 分页查询的限制数目，默认值为20，最大查询条目为1000。
-   */
-  Limit?: number
-  /**
-   * 分页的偏移量，默认值为0。
-   */
-  Offset?: number
-  /**
-   * 展示攻击详情的参数，若填false，默认只返回攻击次数，不返回攻击详情；若填true，返回攻击详情。
-   */
-  ShowDetail?: boolean
-  /**
-   * 数据归属地区，取值有：
-<li>overseas：全球（除中国大陆地区）数据；</li>
-<li>mainland：中国大陆地区数据；</li>
-<li>global：全球数据；</li>不填默认取值为global。
-   */
-  Area?: string
-  /**
-   * 排序字段，取值有：
-<li>MaxBandWidth：带宽峰值；</li>
-<li>AttackStartTime：攻击开始时间。</li>不填默认值为：AttackStartTime。
-   */
-  OrderBy?: string
-  /**
-   * 排序方式，取值有：
-<li>asc：升序方式；</li>
-<li>desc：降序方式。</li>不填默认值为：desc。
-   */
-  OrderType?: string
-}
-
-/**
  * 节点缓存 TTL 配置参数。
  */
 export interface CacheConfigParameters {
@@ -8472,6 +8682,31 @@ export interface CacheConfigParameters {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomTime?: CacheConfigCustomTime
+}
+
+/**
+ * 边缘函数组件绑定配置，用于建立边缘函数与组件（如 KV 命名空间）的关联关系。通过绑定配置，边缘函数代码可在运行时通过指定的变量名访问绑定的资源。
+ */
+export interface FunctionComponentBinding {
+  /**
+   * 绑定的组件类型。取值有：
+<li>kv_namespace：KV 命名空间。</li>
+
+   */
+  Type: string
+  /**
+   * 用于绑定的变量名。限制 1-50 个字符，允许的字符为字母、数字和下划线，其中数字不能在开头。在边缘函数代码中通过该变量名访问绑定的组件。根据 Type 的取值不同，使用方式如下：
+<li>当 Type 为 kv_namespace 时：在代码中可通过该变量名访问 KV 命名空间，例如设置为 "MY_KV" 时，可通过 MY_KV.get("key") 进行读写操作。</li>
+
+   */
+  VariableName: string
+  /**
+   * KV 命名空间配置参数。用于指定绑定的 KV 命名空间详情。当 Type 为 kv_namespace 时，此字段必填。
+
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KVNamespaceParameters?: KVNamespaceParameters
 }
 
 /**
@@ -9119,17 +9354,17 @@ export interface UpstreamURLRewriteParameters {
 }
 
 /**
- * ModifyZoneWorkMode请求参数结构体
+ * 失败原因
  */
-export interface ModifyZoneWorkModeRequest {
+export interface FailReason {
   /**
-   * 站点 ID。
+   * 失败原因。
    */
-  ZoneId: string
+  Reason: string
   /**
-   * 版本管理配置组工作模式。站点各配置模块可按照配置组维度开启「版本管理模式」或「即时生效模式」，详情请参考 [版本管理](https://cloud.tencent.com/document/product/1552/113690)。
+   * 处理失败的资源列表。
    */
-  WorkModeInfos?: Array<ConfigGroupWorkModeInfo>
+  Targets: Array<string>
 }
 
 /**
@@ -9376,6 +9611,16 @@ export interface BillingData {
    * 数据点所属计费大区 ID。计费大区以实际服务用户客户端的 EdgeOne 节点所在区域为准。取值有：<li>CH：中国大陆境内</li><li>AF：非洲</li><li>AS1：亚太一区</li><li>AS2：亚太二区</li><li>AS3：亚太三区</li><li>EU：欧洲</li><li>MidEast：中东</li><li>NA：北美</li><li> SA：南美</li>
    */
   RegionId?: string
+}
+
+/**
+ * ModifySecurityPolicy返回参数结构体
+ */
+export interface ModifySecurityPolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10653,6 +10898,10 @@ export interface SecurityPolicy {
    * 基础 Bot 管理配置。
    */
   BotManagementLite?: BotManagementLite
+  /**
+   * 默认拦截动作配置。
+   */
+  DefaultDenySecurityActionParameters?: DefaultDenySecurityActionParameters
 }
 
 /**
@@ -11281,6 +11530,43 @@ export interface CreateApplicationProxyRuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 源站组记录
+ */
+export interface OriginRecord {
+  /**
+   * 源站记录值，不包含端口信息，可以为：IPv4，IPv6，域名格式。
+   */
+  Record: string
+  /**
+   * 源站类型，取值有：
+<li>IP_DOMAIN：IPV4、IPV6、域名类型源站；</li>
+<li>COS：COS源。</li>
+<li>AWS_S3：AWS S3对象存储源站。</li>
+   */
+  Type?: string
+  /**
+   * 源站记录ID。
+   */
+  RecordId?: string
+  /**
+   * 【源站权重】：用于控制流量分配优先级的参数，取值范围：0-100（整数）：<li>空值：不设置权重，系统按默认策略调度；</li><li>0 值：明确设置权重为0，流量将不会分配到该源站，注意事项：必须确保至少有一个源站的权重值大于0；</li><li>正常值：数值越大分配流量越多 ；</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Weight?: number
+  /**
+   * 是否私有鉴权，当源站类型 RecordType=COS/AWS_S3 时生效，取值有：
+<li>true：使用私有鉴权；</li>
+<li>false：不使用私有鉴权。</li>不填写，默认值为：false。
+
+   */
+  Private?: boolean
+  /**
+   * 私有鉴权参数，当源站类型Private=true时有效。
+   */
+  PrivateParameters?: Array<PrivateParameter>
 }
 
 /**
@@ -12215,6 +12501,24 @@ export interface FollowOrigin {
 }
 
 /**
+ * EdgeKVDelete请求参数结构体
+ */
+export interface EdgeKVDeleteRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 命名空间名称。
+   */
+  Namespace: string
+  /**
+   * 键名列表。数组长度上限为 20。每个键名不能为空，长度为 1-512 个字符，允许的字符为字母、数字、中划线和下划线。删除单个键时传入包含一个元素的数组。
+   */
+  Keys: Array<string>
+}
+
+/**
  * DescribeMultiPathGateway返回参数结构体
  */
 export interface DescribeMultiPathGatewayResponse {
@@ -12714,13 +13018,56 @@ export interface DescribeHostsSettingRequest {
 }
 
 /**
- * DeleteRules返回参数结构体
+ * DescribeDDoSAttackEvent请求参数结构体
  */
-export interface DeleteRulesResponse {
+export interface DescribeDDoSAttackEventRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 开始时间，时间范围为 30 天。
    */
-  RequestId?: string
+  StartTime: string
+  /**
+   * 结束时间。查询时间范围（`EndTime` - `StartTime`）需小于等于 31 天。
+   */
+  EndTime: string
+  /**
+   * ddos策略组集合，不填默认选择全部策略。
+   */
+  PolicyIds?: Array<number | bigint>
+  /**
+   * 站点 ID 集合，此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。最多传入 100 个站点 ID。若需查询腾讯云主账号下所有站点数据，请用 `*` 代替，查询账号级别数据需具备本接口全部站点资源权限。
+   */
+  ZoneIds?: Array<string>
+  /**
+   * 分页查询的限制数目，默认值为20，最大查询条目为1000。
+   */
+  Limit?: number
+  /**
+   * 分页的偏移量，默认值为0。
+   */
+  Offset?: number
+  /**
+   * 展示攻击详情的参数，若填false，默认只返回攻击次数，不返回攻击详情；若填true，返回攻击详情。
+   */
+  ShowDetail?: boolean
+  /**
+   * 数据归属地区，取值有：
+<li>overseas：全球（除中国大陆地区）数据；</li>
+<li>mainland：中国大陆地区数据；</li>
+<li>global：全球数据；</li>不填默认取值为global。
+   */
+  Area?: string
+  /**
+   * 排序字段，取值有：
+<li>MaxBandWidth：带宽峰值；</li>
+<li>AttackStartTime：攻击开始时间。</li>不填默认值为：AttackStartTime。
+   */
+  OrderBy?: string
+  /**
+   * 排序方式，取值有：
+<li>asc：升序方式；</li>
+<li>desc：降序方式。</li>不填默认值为：desc。
+   */
+  OrderType?: string
 }
 
 /**
@@ -13019,6 +13366,33 @@ export interface BotConfig {
 }
 
 /**
+ * ModifyFunctionComponentBindings请求参数结构体
+ */
+export interface ModifyFunctionComponentBindingsRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 函数 ID。
+   */
+  FunctionId: string
+  /**
+   * 操作类型，取值有：
+<li>bind：绑定组件；</li>
+<li>bind-override：绑定组件。若绑定已存在则为重绑定行为，否则为绑定行为；</li>
+<li>unbind：解绑组件；</li>
+<li>rebind：重置绑定关系。清空所有现有绑定，并设置为传入的绑定列表。若传入空列表，则清空所有绑定。</li>
+
+   */
+  Operation: string
+  /**
+   * 操作的函数组件绑定列表。当 Operation 为 rebind 且传入空列表时，表示清空所有绑定。
+   */
+  FunctionComponentBindings: Array<FunctionComponentBinding>
+}
+
+/**
  * EnableOriginACL请求参数结构体
  */
 export interface EnableOriginACLRequest {
@@ -13057,6 +13431,16 @@ export interface EnableOriginACLRequest {
 <li>plat-emc：精简全球(不含中国大陆)可用区控制域；</li>
    */
   OriginACLFamily?: string
+}
+
+/**
+ * CreateEdgeKVNamespace返回参数结构体
+ */
+export interface CreateEdgeKVNamespaceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -14266,6 +14650,24 @@ export interface NetworkErrorLogging {
 }
 
 /**
+ * KV 键值对数据，包含键名、键值和过期时间信息。
+ */
+export interface KeyValuePair {
+  /**
+   * 键名。每个键名不能为空，长度为 1-512 个字符，允许的字符为字母、数字、中划线和下划线。
+   */
+  Key?: string
+  /**
+   * 键值。入参时不能为空，最大支持 1 MB。出参时若键不存在，则返回空字符串。
+   */
+  Value?: string
+  /**
+   * 过期时间，遵循 ISO 8601 标准，格式为 YYYY-MM-DDThh:mm:ssZ（UTC 时间）。出参时若为空字符串，表示该键值对永不过期。
+   */
+  Expiration?: string
+}
+
+/**
  * DescribeDDoSAttackTopData请求参数结构体
  */
 export interface DescribeDDoSAttackTopDataRequest {
@@ -14635,6 +15037,18 @@ export interface DescribeMultiPathGatewayOriginACLRequest {
    * 网关 ID。
    */
   GatewayId: string
+}
+
+/**
+ * Ipv6访问配置
+ */
+export interface Ipv6 {
+  /**
+   * Ipv6 访问功能配置，取值有：
+<li>on：开启Ipv6访问功能；</li>
+<li>off：关闭Ipv6访问功能。</li>
+   */
+  Switch: string
 }
 
 /**
@@ -15108,6 +15522,22 @@ export interface HSTSParameters {
 }
 
 /**
+ * 标签配置
+ */
+export interface Tag {
+  /**
+   * 标签键。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagKey: string
+  /**
+   * 标签值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagValue: string
+}
+
+/**
  * DeleteSecurityAPIResource返回参数结构体
  */
 export interface DeleteSecurityAPIResourceResponse {
@@ -15352,6 +15782,46 @@ export interface HTTPResponseParameters {
    * 响应页面 ID。
    */
   ResponsePage?: string
+}
+
+/**
+ * DescribeEdgeKVNamespaces请求参数结构体
+ */
+export interface DescribeEdgeKVNamespacesRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 分页查询偏移量。默认值：0。
+   */
+  Offset?: number
+  /**
+   * 分页查询限制数目。默认值：20，最大值：1000。
+   */
+  Limit?: number
+  /**
+   * 排序依据，取值有：
+<li>created-on：创建时间；</li>
+<li>updated-on：更新时间。</li>
+默认值为 created-on。
+   */
+  SortBy?: string
+  /**
+   * 列表排序方式，取值有：
+<li>asc：升序排列；</li>
+<li>desc：降序排列。</li>
+默认值为 desc。
+
+   */
+  SortOrder?: string
+  /**
+   * 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回站点 ID 下全部 KV 命名空间。详细的过滤条件如下：
+<li>namespace：按照 KV 命名空间名称进行过滤，支持模糊查询；</li>
+<li>remark：按照命名空间描述进行过滤，支持模糊查询。</li>
+
+   */
+  Filters?: Array<AdvancedFilter>
 }
 
 /**
@@ -15764,9 +16234,39 @@ export interface FunctionRuleCondition {
 }
 
 /**
- * ModifySecurityPolicy返回参数结构体
+ * EdgeKVPut请求参数结构体
  */
-export interface ModifySecurityPolicyResponse {
+export interface EdgeKVPutRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 命名空间名称。
+   */
+  Namespace: string
+  /**
+   * 键名，长度为 1-512 个字符，允许的字符为字母、数字、中划线和下划线。
+   */
+  Key: string
+  /**
+   * 键值。不能为空，最大支持 1 MB。支持存储字符串数据。
+   */
+  Value: string
+  /**
+   * 过期时间，绝对时间。表示从 1970 年 1 月 1 日（UTC/GMT 的午夜）开始所经过的秒数，不能小于当前时间。若 Expiration 和 ExpirationTTL 都填写，以 ExpirationTTL 为准。若 Expiration 和 ExpirationTTL 都不填写，则该键值对永不过期。
+   */
+  Expiration?: number
+  /**
+   * 过期时间，相对时间，单位为秒。表示数据将在指定秒数后过期，必须大于 0。若 Expiration 和 ExpirationTTL 都填写，以 ExpirationTTL 为准。若 Expiration 和 ExpirationTTL 都不填写，则该键值对永不过期。
+   */
+  ExpirationTTL?: number
+}
+
+/**
+ * EdgeKVPut返回参数结构体
+ */
+export interface EdgeKVPutResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16208,6 +16708,20 @@ export interface DescribeWebSecurityTemplatesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 边缘函数绑定 KV 命名空间时所需的详细配置参数，用于指定绑定的命名空间来源。通过此配置，边缘函数可操作指定站点下的 KV 命名空间。
+ */
+export interface KVNamespaceParameters {
+  /**
+   * KV 命名空间所属的站点 ID。指定要绑定的 KV 命名空间所在的站点，支持跨站点绑定。
+   */
+  ZoneId: string
+  /**
+   * KV 命名空间名称。指定要绑定的具体命名空间，可通过 DescribeKVNamespace 接口获取站点下的命名空间列表。
+   */
+  Namespace: string
 }
 
 /**

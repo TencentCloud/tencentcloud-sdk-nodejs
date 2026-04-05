@@ -447,6 +447,7 @@ import {
   LiveStreamTagRecognitionResult,
   ExecuteFunctionResponse,
   FlowRealtimeStatusRTP,
+  FaceConfigureInfo,
   AnimatedGraphicTaskInput,
   OutputAddress,
   LiveSmartSubtitlesTaskInput,
@@ -712,6 +713,7 @@ import {
   DeleteLiveRecordTemplateResponse,
   SearchTaskResult,
   ModifySubtitleEmbedTemplateResponse,
+  VoiceInfo,
   DescribeSnapshotByTimeOffsetTemplatesResponse,
   MediaVideoStreamItem,
   SnapshotByTimeOffsetTemplate,
@@ -780,6 +782,7 @@ import {
   ExecuteFunctionRequest,
   DescribeStreamLinkFlowLogsResponse,
   AiAnalysisTaskHeadTailOutput,
+  DescribeVoicesResponse,
   ExtractBlindWatermarkConfig,
   DescribeVideoDatabaseEntryTaskDetailResponse,
   SimpleAesDrm,
@@ -812,7 +815,7 @@ import {
   ComposeAudioStream,
   SmartSubtitleTaskTransTextSegmentItem,
   AddOnImageInput,
-  FaceConfigureInfo,
+  DescribeVoicesRequest,
   LiveAiParagraphInfo,
   AiRecognitionTaskFaceResultOutput,
   PornImgReviewTemplateInfoForUpdate,
@@ -1459,6 +1462,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVideoSearchTaskDetailResponse) => void
   ): Promise<DescribeVideoSearchTaskDetailResponse> {
     return this.request("DescribeVideoSearchTaskDetail", req, cb)
+  }
+
+  /**
+   * 同步接口。查询可用音色，支持通过类型、标签、语言等条件检索音色
+   */
+  async DescribeVoices(
+    req: DescribeVoicesRequest,
+    cb?: (error: string, rep: DescribeVoicesResponse) => void
+  ): Promise<DescribeVoicesResponse> {
+    return this.request("DescribeVoices", req, cb)
   }
 
   /**

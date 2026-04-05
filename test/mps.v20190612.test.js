@@ -548,6 +548,16 @@ it("mps.v20190612.DescribeVideoSearchTaskDetail", async function () {
     }
 })
 
+it("mps.v20190612.DescribeVoices", async function () {
+    try {
+       const data = await client.DescribeVoices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.ModifyWordSample", async function () {
     try {
        const data = await client.ModifyWordSample({})

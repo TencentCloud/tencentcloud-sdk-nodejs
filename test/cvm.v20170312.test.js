@@ -658,6 +658,16 @@ it("cvm.v20170312.DeleteDisasterRecoverGroups", async function () {
     }
 })
 
+it("cvm.v20170312.DeleteInstancesDisasterRecoverGroups", async function () {
+    try {
+       const data = await client.DeleteInstancesDisasterRecoverGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cvm.v20170312.TerminateInstances", async function () {
     try {
        const data = await client.TerminateInstances({})

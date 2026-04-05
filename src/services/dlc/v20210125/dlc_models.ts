@@ -5509,7 +5509,7 @@ export interface TaskFullRespInfo {
  */
 export interface DeleteDataEngineRequest {
   /**
-   * 删除虚拟集群的名称数组
+   * <p>删除虚拟集群的名称数组</p>
    */
   DataEngineNames: Array<string>
 }

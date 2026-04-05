@@ -438,6 +438,16 @@ it("teo.v20220901.CreateMultiPathGatewayLine", async function () {
     }
 })
 
+it("teo.v20220901.EdgeKVDelete", async function () {
+    try {
+       const data = await client.EdgeKVDelete({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.ModifyAliasDomain", async function () {
     try {
        const data = await client.ModifyAliasDomain({})
@@ -451,6 +461,16 @@ it("teo.v20220901.ModifyAliasDomain", async function () {
 it("teo.v20220901.DescribeZones", async function () {
     try {
        const data = await client.DescribeZones({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.CreateEdgeKVNamespace", async function () {
+    try {
+       const data = await client.CreateEdgeKVNamespace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,6 +698,16 @@ it("teo.v20220901.DescribeTimingL7CacheData", async function () {
     }
 })
 
+it("teo.v20220901.EdgeKVList", async function () {
+    try {
+       const data = await client.EdgeKVList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.VerifyOwnership", async function () {
     try {
        const data = await client.VerifyOwnership({})
@@ -701,6 +731,16 @@ it("teo.v20220901.ModifyFunctionRule", async function () {
 it("teo.v20220901.DescribeConfigGroupVersions", async function () {
     try {
        const data = await client.DescribeConfigGroupVersions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.EdgeKVGet", async function () {
+    try {
+       const data = await client.EdgeKVGet({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1078,6 +1118,16 @@ it("teo.v20220901.DescribeSecurityJSInjectionRule", async function () {
     }
 })
 
+it("teo.v20220901.ModifyEdgeKVNamespace", async function () {
+    try {
+       const data = await client.ModifyEdgeKVNamespace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.CreateRule", async function () {
     try {
        const data = await client.CreateRule({})
@@ -1418,6 +1468,16 @@ it("teo.v20220901.DeleteSecurityClientAttester", async function () {
     }
 })
 
+it("teo.v20220901.DescribeEdgeKVNamespaces", async function () {
+    try {
+       const data = await client.DescribeEdgeKVNamespaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.ModifyHostsCertificate", async function () {
     try {
        const data = await client.ModifyHostsCertificate({})
@@ -1438,9 +1498,9 @@ it("teo.v20220901.ModifyFunctionRulePriority", async function () {
     }
 })
 
-it("teo.v20220901.ModifySecurityIPGroup", async function () {
+it("teo.v20220901.DeleteEdgeKVNamespace", async function () {
     try {
-       const data = await client.ModifySecurityIPGroup({})
+       const data = await client.DeleteEdgeKVNamespace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1478,9 +1538,9 @@ it("teo.v20220901.CreateCLSIndex", async function () {
     }
 })
 
-it("teo.v20220901.ConfirmOriginACLUpdate", async function () {
+it("teo.v20220901.DescribeDeployHistory", async function () {
     try {
-       const data = await client.ConfirmOriginACLUpdate({})
+       const data = await client.DescribeDeployHistory({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1598,9 +1658,9 @@ it("teo.v20220901.CreateJustInTimeTranscodeTemplate", async function () {
     }
 })
 
-it("teo.v20220901.DescribeDeployHistory", async function () {
+it("teo.v20220901.ConfirmOriginACLUpdate", async function () {
     try {
-       const data = await client.DescribeDeployHistory({})
+       const data = await client.ConfirmOriginACLUpdate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1798,6 +1858,16 @@ it("teo.v20220901.DescribeMultiPathGatewaySecretKey", async function () {
     }
 })
 
+it("teo.v20220901.ModifySecurityIPGroup", async function () {
+    try {
+       const data = await client.ModifySecurityIPGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribeFunctions", async function () {
     try {
        const data = await client.DescribeFunctions({})
@@ -1958,9 +2028,29 @@ it("teo.v20220901.DeleteSharedCNAME", async function () {
     }
 })
 
+it("teo.v20220901.ModifyFunctionComponentBindings", async function () {
+    try {
+       const data = await client.ModifyFunctionComponentBindings({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribeAliasDomains", async function () {
     try {
        const data = await client.DescribeAliasDomains({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeFunctionComponentBindings", async function () {
+    try {
+       const data = await client.DescribeFunctionComponentBindings({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2001,6 +2091,16 @@ it("teo.v20220901.DescribeBillingData", async function () {
 it("teo.v20220901.DeleteJustInTimeTranscodeTemplates", async function () {
     try {
        const data = await client.DeleteJustInTimeTranscodeTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.EdgeKVPut", async function () {
+    try {
+       const data = await client.EdgeKVPut({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

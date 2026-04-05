@@ -4274,57 +4274,57 @@ export interface AppModel {
  */
 export interface WorkflowRunNodeInfo {
   /**
-   * 节点ID
+   * <p>节点ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeId?: string
   /**
-   * 节点类型
+   * <p>节点类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeType?: number
   /**
-   * 节点名称
+   * <p>节点名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeName?: string
   /**
-   * 状态
+   * <p>状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
-   * 输入
+   * <p>输入</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Input?: string
   /**
-   * 输出
+   * <p>输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: string
   /**
-   * 任务输出
+   * <p>任务输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskOutput?: string
   /**
-   * 错误信息
+   * <p>错误信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FailMessage?: string
   /**
-   * 花费时长
+   * <p>花费时长，单位为毫秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CostMilliSeconds?: number
   /**
-   * 大模型输出信息
+   * <p>大模型输出信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StatisticInfos?: Array<StatisticInfo>
   /**
-   * 错误代码
+   * <p>错误代码</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FailCode?: string
@@ -9903,64 +9903,50 @@ export interface RetryReleaseResponse {
  */
 export interface NodeRunBase {
   /**
-   * 节点运行的ID
+   * <p>节点运行的ID</p>
    */
   NodeRunId?: string
   /**
-   * 节点ID
+   * <p>节点ID</p>
    */
   NodeId?: string
   /**
-   * 工作流运行实例的ID
+   * <p>工作流运行实例的ID</p>
    */
   WorkflowRunId?: string
   /**
-   * 节点名称
+   * <p>节点名称</p>
    */
   NodeName?: string
   /**
-   * 节点类型。
-1： 开始节点
-2：参数提取节点
-3：大模型节点
-4：知识问答节点
-5：知识检索节点
-6：标签提取节点
-7：代码执行节点
-8：工具节点
-9：逻辑判断节点
-10：回复节点
-11：选项卡节点
-12：循环节点
-13：意图识别节点
-14：工作流节点
-15：插件节点
-16：结束节点
-17: 变量聚合节点数据
-18: 批处理节点
-19: 消息队列节点
+   * <p>节点类型。<br>1： 开始节点<br>2：参数提取节点<br>3：大模型节点<br>4：知识问答节点<br>5：知识检索节点<br>6：标签提取节点<br>7：代码执行节点<br>8：工具节点<br>9：逻辑判断节点<br>10：回复节点<br>11：选项卡节点<br>12：循环节点<br>13：意图识别节点<br>14：工作流节点<br>15：插件节点<br>16：结束节点<br>17: 变量聚合节点数据<br>18: 批处理节点<br>19: 消息队列节点</p>
    */
   NodeType?: number
   /**
-   * 运行状态。0: 初始状态；1: 运行中；2: 运行成功； 3: 运行失败； 4: 已取消
+   * <p>运行状态。0: 初始状态；1: 运行中；2: 运行成功； 3: 运行失败； 4: 已取消</p>
    */
   State?: number
   /**
-   * 错误码
+   * <p>错误码</p>
    */
   FailCode?: string
   /**
-   * 错误信息
+   * <p>错误信息</p>
    */
   FailMessage?: string
   /**
-   * 消耗时间（毫秒）
+   * <p>消耗时间（毫秒）</p>
    */
   CostMilliseconds?: number
   /**
-   * 消耗的token总数
+   * <p>消耗的token总数</p>
    */
   TotalTokens?: number
+  /**
+   * <p>分支下标列表</p><p>单位：无</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BranchIndexList?: Array<number | bigint>
 }
 
 /**
