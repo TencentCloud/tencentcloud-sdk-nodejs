@@ -113,7 +113,7 @@ export interface IdCardVerificationRequest {
  */
 export interface ImageRecognitionV2Response {
   /**
-   * <p>相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为万分之一）</p>
+   * <p>相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人（采用固定阈值70，误通过率为万分之一，不支持调整阈值）</p>
    */
   Sim?: number
   /**
@@ -698,7 +698,7 @@ export interface LivenessCompareResponse {
    */
   BestFrameBase64?: string
   /**
-   * <p>相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为万分之一）。</p>
+   * <p>相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人（采用固定阈值70，误通过率为万分之一，不支持调整阈值）。</p>
    */
   Sim?: number
   /**
@@ -1487,7 +1487,7 @@ export interface GetWeChatBillDetailsResponse {
  */
 export interface CheckIdCardInformationResponse {
   /**
-   * <p>相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为万分之一）。</p>
+   * <p>相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人（采用固定阈值70，误通过率为万分之一，不支持调整阈值）。</p>
    */
   Sim?: number
   /**
@@ -2543,7 +2543,7 @@ export interface LivenessRecognitionResponse {
    */
   BestFrameBase64?: string
   /**
-   * <p>相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，可根据具体场景自行调整阈值（阈值70的误通过率为万分之一）</p>
+   * <p>相似度。- 取值范围 [0.00, 100.00]。- 推荐相似度大于等于70时可判断为同一人，（采用固定阈值70，误通过率为万分之一，不支持调整阈值）</p>
    */
   Sim?: number
   /**

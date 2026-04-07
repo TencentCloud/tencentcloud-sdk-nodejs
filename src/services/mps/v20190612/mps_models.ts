@@ -212,6 +212,24 @@ export interface ModifyWatermarkTemplateRequest {
 }
 
 /**
+ * CreateStreamPackageSSAIChannel请求参数结构体
+ */
+export interface CreateStreamPackageSSAIChannelRequest {
+  /**
+   * 广告插入配置名称，全局唯一，不能与其他频道重复。
+   */
+  Name: string
+  /**
+   * 源流地址前缀
+   */
+  ContentSource: string
+  /**
+   * 广告插入配置
+   */
+  SSAIInfo: SSAIConf
+}
+
+/**
  * 查询输入的RTP配置信息。
  */
 export interface DescribeInputRTPSettings {
@@ -361,6 +379,34 @@ export interface DeleteStreamLinkSecurityGroupResponse {
 }
 
 /**
+ * DeleteStreamPackageLinearAssemblyProgramsByChannel请求参数结构体
+ */
+export interface DeleteStreamPackageLinearAssemblyProgramsByChannelRequest {
+  /**
+   * <p>频道的ID</p>
+   */
+  ChannelID: string
+  /**
+   * <p>需要删除的Id数组</p>
+   */
+  IDs: Array<string>
+}
+
+/**
+ * Metadata。
+ */
+export interface Metadata {
+  /**
+   * Key。
+   */
+  Key?: string
+  /**
+   * Value。
+   */
+  Value?: string
+}
+
+/**
  * 智能分类任务输入类型
  */
 export interface AiAnalysisTaskClassificationInput {
@@ -401,17 +447,17 @@ export interface SvgWatermarkInput {
 }
 
 /**
- * 流的统计数据列表。
+ * Alias-value配置信息。
  */
-export interface FlowStatisticsArray {
+export interface AliasValueConf {
   /**
-   * 时间戳。
+   * Alias。
    */
-  Timestamp: number
+  Alias?: string
   /**
-   * 每个会话的统计数据。
+   * Value。
    */
-  FlowStatistics: Array<FlowStatistics>
+  Value?: string
 }
 
 /**
@@ -629,48 +675,17 @@ export interface DescribeAnimatedGraphicsTemplatesRequest {
 }
 
 /**
- * 提取视频数字水印任务信息
+ * DescribeStreamLinkSecurityGroups返回参数结构体
  */
-export interface ExtractBlindWatermarkTask {
+export interface DescribeStreamLinkSecurityGroupsResponse {
   /**
-   * 媒体处理任务 ID。
+   * 安全组信息列表。
    */
-  TaskId?: string
+  Infos?: Array<SecurityGroupInfo>
   /**
-   * 任务流状态，取值：
-<li>WAITING：等待中；</li>
-<li>PROCESSING：处理中；</li>
-<li>FINISH：已完成。</li>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Status?: string
-  /**
-   * 错误码，0 表示成功，其他值表示失败。
-   */
-  ErrCode?: number
-  /**
-   * 错误信息。
-   */
-  Message?: string
-  /**
-   * 媒体处理的目标文件信息。
-   */
-  InputInfo?: MediaInputInfo
-  /**
-   * 数字水印类型，可选值：<li>blind-basic：基础版权数字水印；</li> <li>blind-ab：ab版权数字水印；</li>
-   */
-  Type?: string
-  /**
-   * 标记是否检测到水印，如果该参数为true， Result字段将返回水印提取结果，如果该参数为false，Result字段不会返回。
-   */
-  IsDetected?: boolean
-  /**
-   * 提取出的数字水印内容，当没有检测到水印时该字段不会返回。
-   */
-  Result?: string
-  /**
-   * 提取数字水印配置。
-   */
-  ExtractBlindWatermarkConfig?: ExtractBlindWatermarkTaskConfig
+  RequestId?: string
 }
 
 /**
@@ -778,6 +793,45 @@ export interface AdaptiveDynamicStreamingTemplate {
 }
 
 /**
+ * 对视频截雪碧图任务结果类型
+ */
+export interface MediaProcessTaskImageSpriteResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 对视频截雪碧图任务的输入。
+   */
+  Input?: ImageSpriteTaskInput
+  /**
+   * 对视频截雪碧图任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: MediaImageSpriteItem
+  /**
+   * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  BeginProcessTime?: string
+  /**
+   * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  FinishTime?: string
+}
+
+/**
  * AI解说二创结果信息
  */
 export interface AiAnalysisTaskReelOutput {
@@ -846,6 +900,30 @@ export interface MediaAiAnalysisDescriptionItem {
    * 摘要文件存储位置。
    */
   OutputStorage?: TaskOutputStorage
+}
+
+/**
+ * 切片特殊配置信息。
+ */
+export interface SegmentSpecificInfo {
+  /**
+   * 启动分片时长开关，可选值：
+on：打开
+off：关闭
+默认off
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Switch?: string
+  /**
+   * 启动时分片时长，单位：秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FragmentTime?: number
+  /**
+   * 生效分片数，表示前FragmentEndNum个分片以FragmentTime时长切片，取值>=1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FragmentEndNum?: number
 }
 
 /**
@@ -1007,6 +1085,28 @@ export interface ManageTaskResponse {
 }
 
 /**
+ * ModifyStreamPackageSSAIChannel请求参数结构体
+ */
+export interface ModifyStreamPackageSSAIChannelRequest {
+  /**
+   * 广告插入配置名称，全局唯一，不能与其他频道重复。
+   */
+  Name: string
+  /**
+   * 通配广告源地址。
+   */
+  ContentSource: string
+  /**
+   * 广告插入配置信息。
+   */
+  SSAIInfo: SSAIConf
+  /**
+   * 广告插入配置ID。
+   */
+  ID: string
+}
+
+/**
  * BatchDeleteStreamLinkFlow请求参数结构体
  */
 export interface BatchDeleteStreamLinkFlowRequest {
@@ -1128,25 +1228,41 @@ eu-west-3
 }
 
 /**
- * 字词信息。
+ * AdBreakInfo。
  */
-export interface WordResult {
+export interface AdBreakInfo {
   /**
-   * 字词文本。
+   * SourceLocationId。
    */
-  Word?: string
+  SourceLocationId?: string
   /**
-   * 字词起始时间戳，单位秒。
+   * VodSourceName。
    */
-  Start?: number
+  VodSourceName?: string
   /**
-   * 字词结束时间戳，单位秒。
+   * Offset。
    */
-  End?: number
+  Offset?: number
   /**
-   * 翻译文本
+   * MessageType，分SpliceInsert和TimeSignal。
    */
-  Trans?: string
+  MessageType?: string
+  /**
+   * TimeSignalConf。
+   */
+  TimeSignalConf?: TimeSignalInfo
+  /**
+   * SpliceInsertConf。
+   */
+  SpliceInsertConf?: SpliceInsertInfo
+  /**
+   * Metadatas。
+   */
+  Metadatas?: Array<Metadata>
+  /**
+   * SourceLocationName。
+   */
+  SourceLocationName?: string
 }
 
 /**
@@ -1172,6 +1288,44 @@ export interface UserDefineOcrTextReviewTemplateInfoForUpdate {
    * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * 编排视频分析任务结果类型
+ */
+export interface ScheduleAnalysisTaskResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 分析任务的输入。
+   */
+  Input?: AiAnalysisTaskInput
+  /**
+   * 分析任务的输出。
+   */
+  Output?: Array<AiAnalysisResult>
+  /**
+   * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  BeginProcessTime?: string
+  /**
+   * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  FinishTime?: string
 }
 
 /**
@@ -1399,6 +1553,16 @@ export interface AiReviewPoliticalOcrTaskInput {
    * 模板 ID。
    */
   Definition: number
+}
+
+/**
+ * ModifyStreamPackageSourceLocation返回参数结构体
+ */
+export interface ModifyStreamPackageSourceLocationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1852,77 +2016,27 @@ Info：一般性的流信息。
 }
 
 /**
- * 智能擦除任务
+ * DescribeStreamPackageLinearAssemblyChannels请求参数结构体
  */
-export interface SmartEraseTaskInput {
+export interface DescribeStreamPackageLinearAssemblyChannelsRequest {
   /**
-   * 智能擦除模板id。
+   * 页数，取值范围为[1, 1000]。
    */
-  Definition?: number
+  PageNum?: number
   /**
-   * 智能擦除自定义参数，当 Definition 填 0 时有效。 该参数用于高度定制场景，建议您优先使用 Definition 指定智能擦除参数。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 每页大小，取值范围为[1, 1000]。
    */
-  RawParameter?: RawSmartEraseParameter
-  /**
-   * 智能擦除自定义参数，当 Definition 不填 0 时有效。 当填写了该结构中的部分擦除参数时，将使用填写的参数覆盖智能擦除模板中的参数。 该参数用于高度定制场景，建议您仅使用 Definition 指定智能擦除参数。
-   */
-  OverrideParameter?: OverrideEraseParameter
-  /**
-   * 文件的目标存储，不填则继承上层的 OutputStorage 值。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OutputStorage?: TaskOutputStorage
-  /**
-   * 文件的输出路径，可以为相对路径或者绝对路径。
-若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。
-相对路径示例：
-<li>文件名_{变量名}.{format}</li>
-<li>文件名.{format}</li>
-绝对路径示例：
-<li>/自定义路径/文件名_{变量名}.{format}</li>
-
-**注意**：目前不支持`BatchProcessMedia`接口。
-   */
-  OutputObjectPath?: string
+  PageSize?: number
 }
 
 /**
- * 自定义水印规格参数。
+ * EnableWorkflow请求参数结构体
  */
-export interface RawWatermarkParameter {
+export interface EnableWorkflowRequest {
   /**
-   * 水印类型，可选值：
-<li>image：图片水印。</li>
+   * 工作流 ID。
    */
-  Type: string
-  /**
-   * 原点位置，可选值：
-<li>TopLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角。</li>
-<li>TopRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；</li>
-<li>BottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；</li>
-<li>BottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下角。</li>
-默认值：TopLeft。
-   */
-  CoordinateOrigin?: string
-  /**
-   * 水印原点距离视频图像坐标原点的水平位置。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示水印 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 XPos 为指定像素，如 100px 表示 XPos 为 100 像素。</li>
-默认值：0px。
-   */
-  XPos?: string
-  /**
-   * 水印原点距离视频图像坐标原点的垂直位置。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示水印 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 YPos 为指定像素，如 100px 表示 YPos 为 100 像素。</li>
-默认值：0px。
-   */
-  YPos?: string
-  /**
-   * 图片水印模板，当 Type 为 image，该字段必填。当 Type 为 text，该字段无效。
-   */
-  ImageTemplate?: RawImageWatermarkInput
+  WorkflowId: number
 }
 
 /**
@@ -1954,6 +2068,40 @@ export interface AiReviewTaskPoliticalOcrResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiReviewPoliticalOcrTaskOutput
+}
+
+/**
+ * ModifyAIAnalysisTemplate请求参数结构体
+ */
+export interface ModifyAIAnalysisTemplateRequest {
+  /**
+   * 视频内容分析模板唯一标识。
+   */
+  Definition: number
+  /**
+   * 视频内容分析模板名称，长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 视频内容分析模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 智能分类任务控制参数。
+   */
+  ClassificationConfigure?: ClassificationConfigureInfoForUpdate
+  /**
+   * 智能标签任务控制参数。
+   */
+  TagConfigure?: TagConfigureInfoForUpdate
+  /**
+   * 智能封面任务控制参数。
+   */
+  CoverConfigure?: CoverConfigureInfoForUpdate
+  /**
+   * 智能按帧标签任务控制参数。
+   */
+  FrameTagConfigure?: FrameTagConfigureInfoForUpdate
 }
 
 /**
@@ -2188,6 +2336,16 @@ export interface AddOnParameter {
 }
 
 /**
+ * DeleteStreamPackageSSAIChannel请求参数结构体
+ */
+export interface DeleteStreamPackageSSAIChannelRequest {
+  /**
+   * 需要删除的广告插入配置ID。
+   */
+  ID: string
+}
+
+/**
  * 用户自定义人物审核任务控制参数
  */
 export interface UserDefineFaceReviewTemplateInfo {
@@ -2413,25 +2571,13 @@ export interface DeleteContentReviewTemplateRequest {
 }
 
 /**
- * 智能字幕结果
+ * ActivateStreamPackage返回参数结构体
  */
-export interface SubtitleResult {
+export interface ActivateStreamPackageResponse {
   /**
-   * <p>字幕文件语言</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Language?: string
-  /**
-   * <p>处理是否成功</p>
-   */
-  Status?: string
-  /**
-   * <p>字幕文件路径。</p>
-   */
-  Path?: string
-  /**
-   * <p>字幕压制视频路径。</p>
-   */
-  SubtitleEmbedPath?: string
+  RequestId?: string
 }
 
 /**
@@ -2505,6 +2651,36 @@ export interface ModifyScheduleRequest {
 }
 
 /**
+ * DescribeWatermarkTemplates请求参数结构体
+ */
+export interface DescribeWatermarkTemplatesRequest {
+  /**
+   * 水印模板唯一标识过滤条件，数组长度限制：100。
+   */
+  Definitions?: Array<number | bigint>
+  /**
+   * 水印类型过滤条件，可选值：
+<li>image：图片水印；</li>
+<li>text：文字水印。</li>
+   */
+  Type?: string
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数
+<li>默认值：10；</li>
+<li>最大值：100。</li>
+   */
+  Limit?: number
+  /**
+   * 水印模板标识过滤条件，长度限制：64 个字符。
+   */
+  Name?: string
+}
+
+/**
  * 点播媒体文件元信息
  */
 export interface MediaMetaData {
@@ -2566,6 +2742,21 @@ export interface CreateOutputRTPSettingsDestinations {
    * 转推的目标端口。
    */
   Port: number
+}
+
+/**
+ * DescribeStreamLinkActivateState请求参数结构体
+ */
+export type DescribeStreamLinkActivateStateRequest = null
+
+/**
+ * ResetWorkflow返回参数结构体
+ */
+export interface ResetWorkflowResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2752,6 +2943,16 @@ export interface AudioTemplateInfoForUpdate {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StreamSelects?: Array<number | bigint>
+}
+
+/**
+ * ModifyStreamPackageSource返回参数结构体
+ */
+export interface ModifyStreamPackageSourceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3075,6 +3276,79 @@ export interface DescribeVideoDatabaseEntryTaskDetailRequest {
 }
 
 /**
+ * 用户自定义语音审核任务控制参数
+ */
+export interface UserDefineAsrTextReviewTemplateInfoForUpdate {
+  /**
+   * 用户自定语音审核任务开关，可选值：
+<li>ON：开启自定义语音审核任务；</li>
+<li>OFF：关闭自定义语音审核任务。</li>
+   */
+  Switch?: string
+  /**
+   * 用户自定义语音过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回。如果要使用标签过滤功能，添加自定义语音关键词素材时需要添加对应标签。
+标签个数最多 10 个，每个标签长度最多 16 个字符。
+   */
+  LabelSet?: Array<string>
+  /**
+   * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
+   */
+  BlockConfidence?: number
+  /**
+   * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核。取值范围：0~100。
+   */
+  ReviewConfidence?: number
+}
+
+/**
+ * CreateStreamPackageLinearAssemblyProgram请求参数结构体
+ */
+export interface CreateStreamPackageLinearAssemblyProgramRequest {
+  /**
+   * Program名称。
+   */
+  Name: string
+  /**
+   * 绑定的channel。
+   */
+  AttachedChannel: string
+  /**
+   * 编排的目标source的类型，分直播Live和点播VOD。Tier为Basic时只支持VOD，Tier为Standard时支持Live和VOD
+   */
+  SourceType?: string
+  /**
+   * 关联的source location。
+   */
+  SourceLocationId?: string
+  /**
+   * 关联的直播or点播，source名称，location下全局唯一。
+   */
+  SourceName?: string
+  /**
+   * PlaybackConf。
+   */
+  PlaybackConf?: PlaybackInfoReq
+  /**
+   * AdBreaks，只有source类型为Vod时有效。
+   */
+  AdBreaks?: Array<AdBreakInfo>
+}
+
+/**
+ * SourceLocation垫片配置。
+ */
+export interface SegmentDeliverInfo {
+  /**
+   * 默认内容源地址。
+   */
+  DefaultSegmentUrl?: string
+  /**
+   * 自定义服务器地址。
+   */
+  NameServers?: Array<NameServer>
+}
+
+/**
  * 视频内容识别输入参数类型
  */
 export interface AiRecognitionTaskInput {
@@ -3138,6 +3412,32 @@ export interface AiAnalysisTaskFrameTagResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiAnalysisTaskFrameTagOutput
+}
+
+/**
+ * HLS配置参数
+ */
+export interface HLSConfigureInfo {
+  /**
+   * 单个 TS 文件时长，单位：秒，取值范围 5-30 秒。
+
+不填默认为 30 秒。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ItemDuration?: number
+  /**
+   * 录制周期，单位：秒，取值范围 10 分钟到  12 小时。
+
+不填默认为 10分钟（3600 秒）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Interval?: number
+  /**
+   * 续录等待时间，单位：秒。取值范围为60秒-1800秒。
+不填默认为0（不启用续录）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContinueTimeout?: number
 }
 
 /**
@@ -3395,6 +3695,26 @@ export interface AiRecognitionTaskFaceResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiRecognitionTaskFaceResultOutput
+}
+
+/**
+ * StartStreamPackageLinearAssemblyChannel返回参数结构体
+ */
+export interface StartStreamPackageLinearAssemblyChannelResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyStreamPackageLinearAssemblyProgram返回参数结构体
+ */
+export interface ModifyStreamPackageLinearAssemblyProgramResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3721,6 +4041,20 @@ export interface AiRecognitionTaskOcrWordsResultInput {
 }
 
 /**
+ * 线性组装频道垫片配置。
+ */
+export interface SlateInfo {
+  /**
+   * source location的ID。
+   */
+  SourceLocationId?: string
+  /**
+   * 对应的vod垫片内容源名称。
+   */
+  VodSourceName?: string
+}
+
+/**
  * CreateQualityControlTemplate返回参数结构体
  */
 export interface CreateQualityControlTemplateResponse {
@@ -3764,6 +4098,16 @@ export interface AiAnalysisTaskReelInput {
    * 智能成片模板 ID。
    */
   Definition?: number
+}
+
+/**
+ * DeleteStreamPackageLinearAssemblyProgram请求参数结构体
+ */
+export interface DeleteStreamPackageLinearAssemblyProgramRequest {
+  /**
+   * Program id。
+   */
+  Id: string
 }
 
 /**
@@ -3869,6 +4213,24 @@ export interface ScheduleTask {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ActivityResultSet?: Array<ActivityResult>
+}
+
+/**
+ * 查询输入的RIST配置信息。
+ */
+export interface DescribeInputRISTSettings {
+  /**
+   * RIST模式，可选[LISTENER|CALLER]，默认为LISTENER。
+   */
+  Mode?: string
+  /**
+   * RIST配置方案，可选[MAIN|SIMPLE]，默认为MAIN。
+   */
+  Profile?: string
+  /**
+   * RIST缓冲区大小，单位为毫秒。最小值为50毫秒，最大值为5000毫秒。默认值：120
+   */
+  Buffer?: number
 }
 
 /**
@@ -4035,6 +4397,56 @@ export interface TagConfigureInfo {
 <li>OFF：关闭智能标签任务。</li>
    */
   Switch: string
+}
+
+/**
+ * 频道线性组装program信息。
+ */
+export interface LinearAssemblyProgramInfo {
+  /**
+   * program名称。
+   */
+  Name?: string
+  /**
+   * 编排的目标source的类型，分直播和点播。
+   */
+  SourceType?: string
+  /**
+   * 关联的source location id。
+   */
+  SourceLocationId?: string
+  /**
+   * SourceId，唯一标识一个source。
+   */
+  SourceId?: string
+  /**
+   * 关联的直播or点播，source名称，location下全局唯一。
+   */
+  SourceName?: string
+  /**
+   * 绑定的channel。
+   */
+  AttachedChannel?: string
+  /**
+   * 播放配置。
+   */
+  PlaybackConf?: PlaybackInfo
+  /**
+   * AdBreaks。
+   */
+  AdBreaks?: Array<AdBreakInfo>
+  /**
+   * Id。
+   */
+  Id?: string
+  /**
+   * Region。
+   */
+  Region?: string
+  /**
+   * SourceLocation名称。
+   */
+  SourceLocationName?: string
 }
 
 /**
@@ -4254,13 +4666,34 @@ export interface DescribeStreamLinkEventResponse {
 }
 
 /**
- * EnableWorkflow请求参数结构体
+ * DescribeStreamPackageSources返回参数结构体
  */
-export interface EnableWorkflowRequest {
+export interface DescribeStreamPackageSourcesResponse {
   /**
-   * 工作流 ID。
+   * Source列表。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkflowId: number
+  Infos?: Array<SourceInfo>
+  /**
+   * 页数。
+   */
+  PageNum?: number
+  /**
+   * 每页大小。
+   */
+  PageSize?: number
+  /**
+   * 总数量。
+   */
+  TotalNum?: number
+  /**
+   * 总页数。
+   */
+  TotalPage?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4373,52 +4806,31 @@ export interface DescribeSmartSubtitleTemplatesRequest {
 }
 
 /**
- * 流状态实时查询接口的流状态信息
+ * DescribeMDPMPSUserInfo返回参数结构体
  */
-export interface FlowRealtimeStatusItem {
+export interface DescribeMDPMPSUserInfoResponse {
   /**
-   * 类型，Input|Output。
+   * 用户状态，取值为：
+<li> InvalidMpsUser：未开通mps；</li>
+<li>Normal：正常 ；</li>
+<li> Closed：下线；</li>
+<li> Arrearage：欠费停服</li>
    */
-  Type: string
+  Status?: string
   /**
-   * 输入Id，如果Type为Input，此字段不为空。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InputId: string
+  RequestId?: string
+}
+
+/**
+ * DeleteStreamPackageLinearAssemblyPrograms请求参数结构体
+ */
+export interface DeleteStreamPackageLinearAssemblyProgramsRequest {
   /**
-   * 输出Id，如果Type为Output，此字段不为空。
+   * Program id列表。
    */
-  OutputId: string
-  /**
-   * 流Id。
-   */
-  FlowId: string
-  /**
-   * 协议， SRT | RTMP。
-   */
-  Protocol: string
-  /**
-   * 共同状态信息。
-   */
-  CommonStatus: FlowRealtimeStatusCommon
-  /**
-   * 如果是SRT协议则有此字段。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SRTStatus: FlowRealtimeStatusSRT
-  /**
-   * 如果是RTMP协议则有此字段。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RTMPStatus: FlowRealtimeStatusRTMP
-  /**
-   * 服务器IP。
-   */
-  ConnectServerIP: string
-  /**
-   * 如果是RTP协议则有此字段。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RTPStatus: FlowRealtimeStatusRTP
+  Ids: Array<string>
 }
 
 /**
@@ -4525,6 +4937,16 @@ export interface CreateAigcVideoTaskResponse {
    * <p>任务创建成功后，返回的任务ID。<br>调用查询接口，轮询获取任务进度及生成结果。</p>
    */
   TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAdaptiveDynamicStreamingTemplate返回参数结构体
+ */
+export interface ModifyAdaptiveDynamicStreamingTemplateResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4666,6 +5088,40 @@ export interface AiSampleFaceInfo {
    * 人脸图片地址。
    */
   Url?: string
+}
+
+/**
+ * 雪碧图信息
+ */
+export interface MediaImageSpriteItem {
+  /**
+   * 雪碧图规格，参见[雪碧图参数模板](https://cloud.tencent.com/document/product/266/33480#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+   */
+  Definition?: number
+  /**
+   * 雪碧图小图的高度。
+   */
+  Height?: number
+  /**
+   * 雪碧图小图的宽度。
+   */
+  Width?: number
+  /**
+   * 每一张雪碧图大图里小图的数量。
+   */
+  TotalCount?: number
+  /**
+   * 每一张雪碧图大图的路径。
+   */
+  ImagePathSet?: Array<string>
+  /**
+   * 雪碧图子图位置与时间关系的 WebVtt 文件路径。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
+   */
+  WebVttPath?: string
+  /**
+   * 雪碧图文件的存储位置。
+   */
+  Storage?: TaskOutputStorage
 }
 
 /**
@@ -4905,30 +5361,17 @@ export interface WatermarkTemplate {
 }
 
 /**
- * 媒体质检任务结果类型
+ * ModifyStreamLinkOutputInfo请求参数结构体
  */
-export interface ScheduleExecRuleTaskResult {
+export interface ModifyStreamLinkOutputInfoRequest {
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   * 流Id。
    */
-  Status?: string
+  FlowId: string
   /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   * 需要修改的Output配置。
    */
-  ErrCodeExt?: string
-  /**
-   * 错误信息。
-   */
-  Message?: string
-  /**
-   * 条件判断任务的输入。
-   */
-  Input?: ExecRulesTask
-  /**
-   * 条件判断任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Output?: ExecRuleTaskData
+  Output: ModifyOutputInfo
 }
 
 /**
@@ -5056,6 +5499,20 @@ export interface ScratchRepairConfig {
 }
 
 /**
+ * 流的统计数据列表。
+ */
+export interface FlowStatisticsArray {
+  /**
+   * 时间戳。
+   */
+  Timestamp: number
+  /**
+   * 每个会话的统计数据。
+   */
+  FlowStatistics: Array<FlowStatistics>
+}
+
+/**
  * DescribeImageTaskDetail请求参数结构体
  */
 export interface DescribeImageTaskDetailRequest {
@@ -5100,6 +5557,28 @@ export interface PoliticalOcrReviewTemplateInfoForUpdate {
 }
 
 /**
+ * 字词信息。
+ */
+export interface WordResult {
+  /**
+   * 字词文本。
+   */
+  Word?: string
+  /**
+   * 字词起始时间戳，单位秒。
+   */
+  Start?: number
+  /**
+   * 字词结束时间戳，单位秒。
+   */
+  End?: number
+  /**
+   * 翻译文本
+   */
+  Trans?: string
+}
+
+/**
  * ExtractBlindWatermark返回参数结构体
  */
 export interface ExtractBlindWatermarkResponse {
@@ -5111,6 +5590,72 @@ export interface ExtractBlindWatermarkResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SSAI广告插入配置。
+ */
+export interface SSAIConf {
+  /**
+   * <p>广告决策服务器URL(ADS)。</p>
+   */
+  AdsUrl?: string
+  /**
+   * <p>参数配置。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigAliases?: Array<ConfigAliasesInfo>
+  /**
+   * <p>是否开启广告标记透传。</p>
+   */
+  AdMarkerPassthrough?: boolean
+  /**
+   * <p>如何处理广告中的标记,可选值[1-2]：<br>1:所有SCTE-35类型标记全部处理-all（默认）<br>2:SCTE-35enhanced，解析部分类型。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SCTE35AdType?: number
+  /**
+   * <p>默认广告url。</p>
+   */
+  SlateAd?: string
+  /**
+   * <p>未填充的最大时长，单位：秒。</p>
+   */
+  Threshold?: number
+  /**
+   * <p>是否开启mpd location, true对应enable， false对应disable。</p>
+   */
+  DashMPDLocation?: boolean
+  /**
+   * <p>被视作广告的标记类型，可选值[1-8]：</p><ol><li>Splice insert<br>2.Provider advertisement</li><li>Distributor advertisement</li><li>Provider placement opportunity</li><li>Distributor placement opportunity</li><li>Break</li><li>Provider overlay placement opportunity</li><li>Distributor overlay placement opportunity。</li></ol>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdTriggers?: Array<number | bigint>
+  /**
+   * <p>被视作广告的分发限制类型，可选值[1-4]：<br>1:None<br>2:Restricted（默认） 3:Unrestricted<br>4.Both</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeliveryRestrictions?: number
+  /**
+   * <p>源流CDN前缀，需要以http://或者https://开头。</p>
+   */
+  SourceCDNPrefix?: string
+  /**
+   * <p>广告CDN前缀，需要以http://或者https://开头。</p>
+   */
+  AdCDNPrefix?: string
+  /**
+   * <p>预加载广告决策服务地址。</p>
+   */
+  PreRollAdsUrl?: string
+  /**
+   * <p>预加载广告最大允许时长，0-3600。</p>
+   */
+  PreRollMaxAllowedDuration?: number
+  /**
+   * <p>是否开启多次请求ADS,开启后将优先请求ADS，请求失败后再请求兜底广告</p>
+   */
+  MultiRequest?: boolean
 }
 
 /**
@@ -5665,21 +6210,17 @@ export interface AiAnalysisTaskHorizontalToVerticalResult {
 }
 
 /**
- * 查询输入的RIST配置信息。
+ * 参数配置。
  */
-export interface DescribeInputRISTSettings {
+export interface ConfigAliasesInfo {
   /**
-   * RIST模式，可选[LISTENER|CALLER]，默认为LISTENER。
+   * 参数名。
    */
-  Mode?: string
+  ParamName?: string
   /**
-   * RIST配置方案，可选[MAIN|SIMPLE]，默认为MAIN。
+   * alias-value配置。
    */
-  Profile?: string
-  /**
-   * RIST缓冲区大小，单位为毫秒。最小值为50毫秒，最大值为5000毫秒。默认值：120
-   */
-  Buffer?: number
+  AliasValueList?: Array<AliasValueConf>
 }
 
 /**
@@ -5915,6 +6456,20 @@ export interface SmartEraseWatermarkConfig {
 }
 
 /**
+ * CreateMediaEvaluation返回参数结构体
+ */
+export interface CreateMediaEvaluationResponse {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeStreamLinkEvents返回参数结构体
  */
 export interface DescribeStreamLinkEventsResponse {
@@ -5977,6 +6532,16 @@ export interface DescribeSmartEraseTemplatesRequest {
    * 智能擦除模板名过滤条件，长度限制：64 个字符。
    */
   Name?: string
+}
+
+/**
+ * StartStreamPackageLinearAssemblyChannel请求参数结构体
+ */
+export interface StartStreamPackageLinearAssemblyChannelRequest {
+  /**
+   * Channel ID。
+   */
+  Id: string
 }
 
 /**
@@ -6119,6 +6684,16 @@ export interface AiReviewTaskTerrorismOcrResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiReviewTerrorismOcrTaskOutput
+}
+
+/**
+ * DescribeStreamPackageSSAIChannel请求参数结构体
+ */
+export interface DescribeStreamPackageSSAIChannelRequest {
+  /**
+   * 广告插入配置ID。
+   */
+  ID: string
 }
 
 /**
@@ -6279,6 +6854,16 @@ export interface LiveSmartSubtitleResult {
 }
 
 /**
+ * ModifyStreamPackageSSAIChannel返回参数结构体
+ */
+export interface ModifyStreamPackageSSAIChannelResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 语音违禁任务控制参数
  */
 export interface ProhibitedAsrReviewTemplateInfoForUpdate {
@@ -6319,13 +6904,17 @@ export interface ModifyAnimatedGraphicsTemplateResponse {
 }
 
 /**
- * DeleteSmartSubtitleTemplate请求参数结构体
+ * 线性组装频道告警返回信息。
  */
-export interface DeleteSmartSubtitleTemplateRequest {
+export interface ChannelAlertResp {
   /**
-   * 智能字幕模板唯一标识。
+   * Program告警聚合信息。
    */
-  Definition: number
+  ProgramAlertCounts?: Array<ProgramAlertCounts>
+  /**
+   * Program告警明细信息。
+   */
+  ProgramAlertInfos?: Array<ProgramAlertInfos>
 }
 
 /**
@@ -6426,6 +7015,36 @@ export interface ScheduleQualityControlTaskResult {
    * 任务执行进度。
    */
   Progress?: number
+}
+
+/**
+ * ModifyStreamPackageSourceLocation请求参数结构体
+ */
+export interface ModifyStreamPackageSourceLocationRequest {
+  /**
+   * SourceLocation Id。
+   */
+  Id: string
+  /**
+   * 修改后的名称。
+   */
+  Name?: string
+  /**
+   * 基准URL。
+   */
+  BaseUrl?: string
+  /**
+   * 是否开启补片。
+   */
+  SegmentDeliverEnable?: boolean
+  /**
+   * 补片配置。
+   */
+  SegmentDeliverConf?: SegmentDeliverInfo
+  /**
+   * 是否开启package分发分片，默认开启。
+   */
+  SegmentDeliverUsePackageEnable?: boolean
 }
 
 /**
@@ -6532,6 +7151,16 @@ export interface ComposeTransitionItem {
 }
 
 /**
+ * DeleteStreamPackageSource请求参数结构体
+ */
+export interface DeleteStreamPackageSourceRequest {
+  /**
+   * Source Id。
+   */
+  Id: string
+}
+
+/**
  * DeleteAIAnalysisTemplate请求参数结构体
  */
 export interface DeleteAIAnalysisTemplateRequest {
@@ -6542,49 +7171,42 @@ export interface DeleteAIAnalysisTemplateRequest {
 }
 
 /**
- * EditMedia请求参数结构体
+ * DescribeMDPMPSUserInfo请求参数结构体
  */
-export interface EditMediaRequest {
+export type DescribeMDPMPSUserInfoRequest = null
+
+/**
+ * 广告插入频道配置信息。
+ */
+export interface SSAIChannelInfo {
   /**
-   * <p>输入的视频文件信息。</p>
+   * 频道ID，全局唯一标识。
    */
-  FileInfos: Array<EditMediaFileInfo>
+  ID?: string
   /**
-   * <p>媒体处理输出文件的目标存储。</p>
+   * 频道名称。
    */
-  OutputStorage: TaskOutputStorage
+  Name?: string
   /**
-   * <p>媒体处理输出文件的目标路径。</p><p>注意：对于复杂合成任务，路径中的文件名只可为数字、字母、-、_ 的组合，最长 64 个字符。</p>
+   * 广告源信息。
    */
-  OutputObjectPath: string
+  ContentSource?: string
   /**
-   * <p>【剪辑】任务生成的文件配置。</p>
+   * 播放地址。
    */
-  OutputConfig?: EditMediaOutputConfig
+  PlaybackPrefix?: string
   /**
-   * <p>【合成】任务配置。</p><p>注意：当其不为空时，认为是合成任务，否则按剪辑任务处理。</p>
+   * 广告插入SSAI配置信息。
    */
-  ComposeConfig?: ComposeMediaConfig
+  SSAIInfo?: SSAIConf
   /**
-   * <p>任务的事件通知信息，不填代表不获取事件通知。</p>
+   * 地域信息。
    */
-  TaskNotifyConfig?: TaskNotifyConfig
+  Region?: string
   /**
-   * <p>任务优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。</p>
+   * 用于clickthrough地址
    */
-  TasksPriority?: number
-  /**
-   * <p>用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
-   */
-  SessionId?: string
-  /**
-   * <p>来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。</p>
-   */
-  SessionContext?: string
-  /**
-   * <p>资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。</p>
-   */
-  ResourceId?: string
+  SessionInitPrefix?: string
 }
 
 /**
@@ -6679,42 +7301,25 @@ eu-west-3
 }
 
 /**
- * 对视频截雪碧图任务结果类型
+ * DescribeStreamPackageLinearAssemblyPrograms请求参数结构体
  */
-export interface MediaProcessTaskImageSpriteResult {
+export interface DescribeStreamPackageLinearAssemblyProgramsRequest {
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   * 页数，取值范围为[1, 1000]。
    */
-  Status?: string
+  PageNum?: number
   /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   * 每页大小，取值范围为[1, 10000]。
    */
-  ErrCodeExt?: string
+  PageSize?: number
   /**
-   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   * 查询某个Channel下面的所有Program。
    */
-  ErrCode?: number
+  ChannelId?: string
   /**
-   * 错误信息。
+   * 按Name过滤，模糊匹配
    */
-  Message?: string
-  /**
-   * 对视频截雪碧图任务的输入。
-   */
-  Input?: ImageSpriteTaskInput
-  /**
-   * 对视频截雪碧图任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Output?: MediaImageSpriteItem
-  /**
-   * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
-   */
-  BeginProcessTime?: string
-  /**
-   * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
-   */
-  FinishTime?: string
+  Name?: string
 }
 
 /**
@@ -6803,6 +7408,37 @@ export interface RTPAddressDestination {
 }
 
 /**
+ * DescribeStreamPackageLinearAssemblyProgramSchedules返回参数结构体
+ */
+export interface DescribeStreamPackageLinearAssemblyProgramSchedulesResponse {
+  /**
+   * Program的调度列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Infos?: Array<LinearAssemblyProgramInfo>
+  /**
+   * 页数。
+   */
+  PageNum?: number
+  /**
+   * 每页大小。
+   */
+  PageSize?: number
+  /**
+   * 总数量。
+   */
+  TotalNum?: number
+  /**
+   * 总页数。
+   */
+  TotalPage?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAdaptiveDynamicStreamingTemplates返回参数结构体
  */
 export interface DescribeAdaptiveDynamicStreamingTemplatesResponse {
@@ -6819,6 +7455,11 @@ export interface DescribeAdaptiveDynamicStreamingTemplatesResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeStreamPackageActivateState请求参数结构体
+ */
+export type DescribeStreamPackageActivateStateRequest = null
 
 /**
  * 内容审核 Ocr 文字审核嫌疑片段
@@ -6878,13 +7519,41 @@ export interface AiAnalysisTaskHighlightOutput {
 }
 
 /**
- * StopStreamLinkFlow请求参数结构体
+ * 源信息。
  */
-export interface StopStreamLinkFlowRequest {
+export interface SourceInfo {
   /**
-   * 流Id。
+   * 名称。
    */
-  FlowId: string
+  Name?: string
+  /**
+   * source类型，区分直播Live和点播Vod。
+   */
+  Type?: string
+  /**
+   * 源配置。
+   */
+  PackageConf?: Array<SourcePackageConf>
+  /**
+   * ID。
+   */
+  Id?: string
+  /**
+   * 创建时间戳。
+   */
+  CreateTime?: number
+  /**
+   * 更新时间戳。
+   */
+  UpdateTime?: number
+  /**
+   * Region。
+   */
+  Region?: string
+  /**
+   * 源标签
+   */
+  SourceTags?: Array<SourceTag>
 }
 
 /**
@@ -6949,6 +7618,16 @@ export interface ImageWatermarkInput {
 }
 
 /**
+ * DescribeStreamPackageLinearAssemblyChannel请求参数结构体
+ */
+export interface DescribeStreamPackageLinearAssemblyChannelRequest {
+  /**
+   * 频道id。
+   */
+  Id: string
+}
+
+/**
  * SRT FEC 设置
  */
 export interface SRTFECSimpleOptions {
@@ -7010,6 +7689,42 @@ export interface AsrFullTextConfigureInfoForUpdate {
 }
 
 /**
+ * 智能擦除任务
+ */
+export interface SmartEraseTaskInput {
+  /**
+   * 智能擦除模板id。
+   */
+  Definition?: number
+  /**
+   * 智能擦除自定义参数，当 Definition 填 0 时有效。 该参数用于高度定制场景，建议您优先使用 Definition 指定智能擦除参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RawParameter?: RawSmartEraseParameter
+  /**
+   * 智能擦除自定义参数，当 Definition 不填 0 时有效。 当填写了该结构中的部分擦除参数时，将使用填写的参数覆盖智能擦除模板中的参数。 该参数用于高度定制场景，建议您仅使用 Definition 指定智能擦除参数。
+   */
+  OverrideParameter?: OverrideEraseParameter
+  /**
+   * 文件的目标存储，不填则继承上层的 OutputStorage 值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputStorage?: TaskOutputStorage
+  /**
+   * 文件的输出路径，可以为相对路径或者绝对路径。
+若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。
+相对路径示例：
+<li>文件名_{变量名}.{format}</li>
+<li>文件名.{format}</li>
+绝对路径示例：
+<li>/自定义路径/文件名_{变量名}.{format}</li>
+
+**注意**：目前不支持`BatchProcessMedia`接口。
+   */
+  OutputObjectPath?: string
+}
+
+/**
  * 直播录制输出文件信息
  */
 export interface LiveRecordFile {
@@ -7038,6 +7753,20 @@ export interface LiveRecordFile {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
+}
+
+/**
+ * DescribeStreamPackageActivateState返回参数结构体
+ */
+export interface DescribeStreamPackageActivateStateResponse {
+  /**
+   * 用户已激活为0，否则为非0。
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7114,6 +7843,32 @@ export interface CreateContentReviewTemplateResponse {
  * ModifyBlindWatermarkTemplate返回参数结构体
  */
 export interface ModifyBlindWatermarkTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeStreamPackageSSAIChannels返回参数结构体
+ */
+export interface DescribeStreamPackageSSAIChannelsResponse {
+  /**
+   * 广告插入配置信息。
+   */
+  Infos?: Array<SSAIChannelInfo>
+  /**
+   * 页码。
+   */
+  PageNum?: number
+  /**
+   * 每页大小。
+   */
+  PageSize?: number
+  /**
+   * 总条目数。
+   */
+  TotalNum?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7239,6 +7994,20 @@ export interface EnableScheduleRequest {
    * 编排唯一标识。
    */
   ScheduleId: number
+}
+
+/**
+ * 自定义服务器信息。
+ */
+export interface NameServer {
+  /**
+   * 名称。
+   */
+  Name?: string
+  /**
+   * 地址。
+   */
+  Url?: string
 }
 
 /**
@@ -7739,33 +8508,17 @@ export interface DescribeLiveRecordTemplatesRequest {
 }
 
 /**
- * DescribeWatermarkTemplates请求参数结构体
+ * DescribeStreamPackageSourceLocations请求参数结构体
  */
-export interface DescribeWatermarkTemplatesRequest {
+export interface DescribeStreamPackageSourceLocationsRequest {
   /**
-   * 水印模板唯一标识过滤条件，数组长度限制：100。
+   * 页数，取值范围为[1, 1000]。
    */
-  Definitions?: Array<number | bigint>
+  PageNum?: number
   /**
-   * 水印类型过滤条件，可选值：
-<li>image：图片水印；</li>
-<li>text：文字水印。</li>
+   * 每页大小，取值范围为[1, 1000]。
    */
-  Type?: string
-  /**
-   * 分页偏移量，默认值：0。
-   */
-  Offset?: number
-  /**
-   * 返回记录条数
-<li>默认值：10；</li>
-<li>最大值：100。</li>
-   */
-  Limit?: number
-  /**
-   * 水印模板标识过滤条件，长度限制：64 个字符。
-   */
-  Name?: string
+  PageSize?: number
 }
 
 /**
@@ -7838,6 +8591,20 @@ export interface CreateOutputInfo {
    * 对于含有多个音/视频轨的流，可以指定需要使用的轨道。PidSelector 与 TrackSelector 只能存在一个
    */
   StreamSelector?: StreamSelector
+}
+
+/**
+ * DescribeStreamPackageSourceLocation返回参数结构体
+ */
+export interface DescribeStreamPackageSourceLocationResponse {
+  /**
+   * SourceLocation信息。
+   */
+  Info?: SourceLocationInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7916,37 +8683,13 @@ export interface MediaProcessTaskResult {
 }
 
 /**
- * ModifyAIAnalysisTemplate请求参数结构体
+ * DeleteStreamPackageLinearAssemblyChannel请求参数结构体
  */
-export interface ModifyAIAnalysisTemplateRequest {
+export interface DeleteStreamPackageLinearAssemblyChannelRequest {
   /**
-   * 视频内容分析模板唯一标识。
+   * 频道id。
    */
-  Definition: number
-  /**
-   * 视频内容分析模板名称，长度限制：64 个字符。
-   */
-  Name?: string
-  /**
-   * 视频内容分析模板描述信息，长度限制：256 个字符。
-   */
-  Comment?: string
-  /**
-   * 智能分类任务控制参数。
-   */
-  ClassificationConfigure?: ClassificationConfigureInfoForUpdate
-  /**
-   * 智能标签任务控制参数。
-   */
-  TagConfigure?: TagConfigureInfoForUpdate
-  /**
-   * 智能封面任务控制参数。
-   */
-  CoverConfigure?: CoverConfigureInfoForUpdate
-  /**
-   * 智能按帧标签任务控制参数。
-   */
-  FrameTagConfigure?: FrameTagConfigureInfoForUpdate
+  Id: string
 }
 
 /**
@@ -7985,6 +8728,128 @@ export interface DeleteQualityControlTemplateRequest {
    * 媒体质检模板唯一标识。
    */
   Definition: number
+}
+
+/**
+ * 广告配置及广告类型维度下的SSAI用量详情
+ */
+export interface UsageDetail {
+  /**
+   * <p>广告配置uniq_id</p>
+   */
+  UniqId?: string
+  /**
+   * <p>广告配置id</p>
+   */
+  ChannelId?: string
+  /**
+   * <p>广告配置名称</p>
+   */
+  ChannelName?: string
+  /**
+   * <p>广告类型</p>
+   */
+  AdType?: string
+  /**
+   * <p>广告请求成功数</p>
+   */
+  AdRequestSuccess?: number
+  /**
+   * <p>广告请求失败数</p>
+   */
+  AdRequestFail?: number
+  /**
+   * <p>广告曝光数</p>
+   */
+  Impression?: number
+  /**
+   * <p>广告开始播放数</p>
+   */
+  Start?: number
+  /**
+   * <p>广告播放到1/4处数</p>
+   */
+  FirstQuarter?: number
+  /**
+   * <p>广告播放到1/2处数</p>
+   */
+  Midpoint?: number
+  /**
+   * <p>广告播放到3/4处数</p>
+   */
+  ThirdQuarter?: number
+  /**
+   * <p>广告播放完成数</p>
+   */
+  Complete?: number
+  /**
+   * <p>中贴广告标记时间</p>
+   */
+  AdMarkerTime?: number
+  /**
+   * <p>中贴个性化替换时间</p>
+   */
+  ReplacedTime?: number
+  /**
+   * <p>中贴个性化广告填充率</p>
+   */
+  MidFillRate?: number
+  /**
+   * <p>前贴广告请求数</p>
+   */
+  PreReqNum?: number
+  /**
+   * <p>前贴广告替换数</p>
+   */
+  PreReplacedNum?: number
+  /**
+   * <p>前贴广告替换率</p>
+   */
+  PreReplaceRate?: number
+  /**
+   * <p>在清单中发现了广告标记次数</p>
+   */
+  ADMarkerFound?: number
+  /**
+   * <p>向ADS请求广告次数</p>
+   */
+  MakeAdsRequest?: number
+  /**
+   * <p>从ADS收到VAST返回次数</p>
+   */
+  VASTResponse?: number
+  /**
+   * <p>成功填充了广告次数</p>
+   */
+  FilledAvail?: number
+  /**
+   * <p>执行广告替换时遇到问题次数</p>
+   */
+  WarningNoAd?: number
+  /**
+   * <p>ADS返回超时次数</p>
+   */
+  ErrorAdsTimeout?: number
+  /**
+   * <p>ADS 返回了一个空的 VAST 响应次数</p>
+   */
+  EmptyVASTResponse?: number
+  /**
+   * <p>ADS 返回了一个空的VMAP 响应次数</p>
+   */
+  EmptyVMAPResponse?: number
+  /**
+   * <p>日期</p>
+   */
+  Date?: string
+  /**
+   * <p>开始时间</p>
+   */
+  StartTime?: string
+  /**
+   * <p>结束时间</p>
+   */
+  EndTime?: string
 }
 
 /**
@@ -8359,82 +9224,49 @@ export interface AiRecognitionTaskFaceSegmentItem {
 }
 
 /**
- * 图片缩放配置
+ * DeleteStreamPackageSourceLocation返回参数结构体
  */
-export interface ImageResizeConfig {
-  /**
-   * 能力配置开关，可选值：
-<li>ON：开启</li>
-<li>OFF：关闭</li>
-默认值：ON。
-   */
-  Switch?: string
-  /**
-   * 输出图片模式，可选模式：
-<li>percent: 指定缩放倍率，可以为小数</li>
-<li>mfit: 缩放至指定宽高的较大矩形</li>
-<li>lfit: 缩放至指定宽高的较小矩形</li>
-<li>fill: 缩放至指定宽高的较大矩形，并居中裁剪指定宽高</li>
-<li>pad: 缩放至指定宽高的较小矩形，并填充到指定宽高</li>
-<li>fixed: 缩放至固定宽高，强制缩放</li>
-默认值：percent。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Mode?: string
-  /**
-   * 缩放倍率，可以为小数，当Mode为percent时使用。
-
-默认值：1.0。
-取值范围：[0.1，10.0]
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Percent?: number
-  /**
-   * 目标图片宽度。
-
-取值范围：[1，16384]。
-注意：此字段在Mode非percent时优先使用。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Width?: number
-  /**
-   * 目标图片高度。
-
-取值范围：[1，16384]。
-注意：此字段在Mode非percent时优先使用。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Height?: number
-  /**
-   * 目标图片长边。
-
-取值范围：[1，16384]。
-注意：此字段在Mode非percent且未配置Width和Height时使用。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LongSide?: number
-  /**
-   * 目标图片短边。
-
-取值范围：[1，16384]。
-注意：此字段在Mode非percent且未配置Width和Height时使用。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ShortSide?: number
-}
-
-/**
- * CreateMediaEvaluation返回参数结构体
- */
-export interface CreateMediaEvaluationResponse {
-  /**
-   * 任务 ID。
-   */
-  TaskId?: string
+export interface DeleteStreamPackageSourceLocationResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateStreamPackageSource请求参数结构体
+ */
+export interface CreateStreamPackageSourceRequest {
+  /**
+   * 该source所属的location id，必填且唯一绑定一个location。
+   */
+  AttachedLocation: string
+  /**
+   * Source名称，在location下面全局唯一。
+   */
+  Name: string
+  /**
+   * 区分直播Live和点播VOD source类型，可选值：Live、VOD。
+   */
+  Type: string
+  /**
+   * source具体配置。
+   */
+  PackageConfs?: Array<SourcePackageConf>
+  /**
+   * sourcetag标签，ADS可以根据Source Tag信息，返回更精准的广告
+   */
+  SourceTags?: Array<SourceTag>
+}
+
+/**
+ * DescribeStreamPackageLinearAssemblyProgram请求参数结构体
+ */
+export interface DescribeStreamPackageLinearAssemblyProgramRequest {
+  /**
+   * program id。
+   */
+  Id: string
 }
 
 /**
@@ -8466,6 +9298,24 @@ export interface AiAnalysisTaskTagResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Output?: AiAnalysisTaskTagOutput
+}
+
+/**
+ * DescribeStreamPackageLinearAssemblyChannelAlerts请求参数结构体
+ */
+export interface DescribeStreamPackageLinearAssemblyChannelAlertsRequest {
+  /**
+   * 频道ID。
+   */
+  ChannelId: string
+  /**
+   * 查询开始时间，Unix时间戳，支持最近七天的查询。
+   */
+  StartTime?: number
+  /**
+   * 查询结束时间，Unix时间戳，支持最近七天的查询。
+   */
+  EndTime?: number
 }
 
 /**
@@ -8547,6 +9397,16 @@ export interface BatchStopStreamLinkFlowRequest {
 }
 
 /**
+ * DeleteStreamPackageLinearAssemblyProgramsByChannel返回参数结构体
+ */
+export interface DeleteStreamPackageLinearAssemblyProgramsByChannelResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RTMP转推的目标地址信息。
  */
 export interface RTMPAddressDestination {
@@ -8606,6 +9466,25 @@ export interface AiAnalysisTaskTagOutput {
    * 视频智能标签列表。
    */
   TagSet: Array<MediaAiAnalysisTagItem>
+}
+
+/**
+ * 细节增强配置
+ */
+export interface SharpEnhanceConfig {
+  /**
+   * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+   */
+  Switch?: string
+  /**
+   * 强度，取值范围：0.0~1.0。
+默认：0.0。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Intensity?: number
 }
 
 /**
@@ -8802,25 +9681,13 @@ export interface CreateStreamLinkEventResponse {
 }
 
 /**
- * 转自适应码流信息
+ * DeleteStreamLinkEvent请求参数结构体
  */
-export interface AdaptiveDynamicStreamingInfoItem {
+export interface DeleteStreamLinkEventRequest {
   /**
-   * 转自适应码流规格。
+   * 媒体传输事件Id，删除前需要保证该Event关联的所有Flow都已经删除。
    */
-  Definition?: number
-  /**
-   * 打包格式，可能为 HLS和 MPEG-DASH 两种。
-   */
-  Package?: string
-  /**
-   * 播放路径。
-   */
-  Path?: string
-  /**
-   * 自适应码流文件的存储位置。
-   */
-  Storage?: TaskOutputStorage
+  EventId: string
 }
 
 /**
@@ -8934,6 +9801,87 @@ export interface ProcessMediaRequest {
 }
 
 /**
+ * SSAI用量信息
+ */
+export interface SSAIUsageInfo {
+  /**
+   * 广告请求成功次数
+   */
+  AdRequestSuccess?: number
+  /**
+   * 广告请求失败次数
+   */
+  AdRequestFail?: number
+  /**
+   * 曝光次数
+   */
+  Impression?: number
+  /**
+   * 中贴个性化广告填充率
+   */
+  MidFillRate?: number
+  /**
+   * 中贴广告标记时间
+   */
+  AdMarkerTime?: number
+  /**
+   * 中贴个性化替换时间
+   */
+  ReplacedTime?: number
+  /**
+   * 前贴广告替换率
+   */
+  PreReplaceRate?: number
+  /**
+   * 前贴广告请求数
+   */
+  PreReqNum?: number
+  /**
+   * 前贴广告替换数
+   */
+  PreReplacedNum?: number
+  /**
+   * 各广告配置用量详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsageDetails?: Array<UsageDetail>
+}
+
+/**
+ * ModifyStreamPackageLinearAssemblyProgram请求参数结构体
+ */
+export interface ModifyStreamPackageLinearAssemblyProgramRequest {
+  /**
+   * Program Id。
+   */
+  Id: string
+  /**
+   * 修改后的名称。
+   */
+  Name?: string
+  /**
+   * 编排的目标source的类型，分直播和点播。Tier为Basic时只支持VOD，Tier为Standard时支持Live和VOD
+   */
+  SourceType?: string
+  /**
+   * 关联的source location。
+   */
+  SourceLocationId?: string
+  /**
+   * 关联的直播or点播，source名称，location下全局唯一。
+   */
+  SourceName?: string
+  /**
+   * PlaybackConf。
+   */
+  PlaybackConf?: PlaybackInfoReq
+  /**
+   * AdBreaks。
+   */
+  AdBreaks?: Array<AdBreakInfo>
+}
+
+/**
  * ProcessImage返回参数结构体
  */
 export interface ProcessImageResponse {
@@ -8959,6 +9907,28 @@ export interface DescribeRTSPPullSourceAddress {
 }
 
 /**
+ * Type为DASH时manifest配置使用的字段。
+ */
+export interface DashManifestInfo {
+  /**
+   * 每个清单的总持续时间（以秒为单位）。[30, 3600]，类型：整数，默认值60。
+   */
+  Windows?: number
+  /**
+   * 播放器在缓冲区中保持的最小缓存时间（以秒为单位）。[2, 60]，类型：整数，默认值30。
+   */
+  MinBufferTime?: number
+  /**
+   * 播放器在请求更新清单之前应等待的最短时间（以秒为单位）。[2, 60]，类型：整数，默认值2。
+   */
+  MinUpdatePeriod?: number
+  /**
+   * 播放器启播时距离最新直播时间点的时间，是一个回退量（以秒为单位）。[2, 60]，类型：整数，默认值10。
+   */
+  SuggestedPresentationDelay?: number
+}
+
+/**
  * 查询输出的RTSP拉流配置信息。
  */
 export interface DescribeOutputRTSPPullSettings {
@@ -8967,6 +9937,36 @@ export interface DescribeOutputRTSPPullSettings {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServerUrls: Array<DescribeOutputRTSPPullServerUrl>
+}
+
+/**
+ * 线性组装Location告警信息
+ */
+export interface SourceAlert {
+  /**
+   * Source ID。
+   */
+  SourceId?: string
+  /**
+   * Source名称。
+   */
+  SourceName?: string
+  /**
+   * 告警事件码。
+   */
+  Code?: number
+  /**
+   * 告警分类。
+   */
+  Category?: string
+  /**
+   * 告警消息。
+   */
+  Message?: string
+  /**
+   * 更新时间。
+   */
+  LastModifiedTime?: number
 }
 
 /**
@@ -9122,21 +10122,13 @@ export interface LiveStreamOcrFullTextRecognitionResult {
 }
 
 /**
- * 媒体处理 VOD（点播专业版） 输出对象信息。
+ * DeleteStreamPackageSSAIChannel返回参数结构体
  */
-export interface VODOutputStorage {
+export interface DeleteStreamPackageSSAIChannelResponse {
   /**
-   * 媒体处理生成的文件输出的目标 *Bucket ID*
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Bucket?: string
-  /**
-   * 媒体处理生成的文件输出的目标 Bucket 的园区
-   */
-  Region?: string
-  /**
-   * 点播专业版应用Id
-   */
-  SubAppId?: number
+  RequestId?: string
 }
 
 /**
@@ -9176,6 +10168,16 @@ export interface MediaProcessTaskSnapshotByTimeOffsetResult {
    * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
   FinishTime?: string
+}
+
+/**
+ * DeleteStreamPackageSource返回参数结构体
+ */
+export interface DeleteStreamPackageSourceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9300,6 +10302,28 @@ export interface DescribeSchedulesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifySubtitleEmbedTemplate请求参数结构体
+ */
+export interface ModifySubtitleEmbedTemplateRequest {
+  /**
+   * <p>字幕压制模板唯一标识</p>
+   */
+  Definition: number
+  /**
+   * <p>字幕压制名称<br>长度限制：64 个字符。</p>
+   */
+  Name?: string
+  /**
+   * <p>字幕压制模板描述信息<br>长度限制：256 个字符。</p>
+   */
+  Comment?: string
+  /**
+   * <p>字幕压制相关配置</p>
+   */
+  SubtitleEmbedConfig?: SubtitleEmbedConfig
 }
 
 /**
@@ -9466,17 +10490,21 @@ export interface AiRecognitionTaskAsrFullTextResultInput {
 }
 
 /**
- * DescribeStreamLinkFlowStatistics返回参数结构体
+ * DescribeStreamLinkFlowRealtimeStatus请求参数结构体
  */
-export interface DescribeStreamLinkFlowStatisticsResponse {
+export interface DescribeStreamLinkFlowRealtimeStatusRequest {
   /**
-   * 传输流的媒体数据列表。
+   * 流ID。
    */
-  Infos?: Array<FlowStatisticsArray>
+  FlowId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 输入id数组，如果输入输出数组都为空，则代表全量查询。
    */
-  RequestId?: string
+  InputIds?: Array<string>
+  /**
+   * 输出id数组，如果输入输出数组都为空，则代表全量查询。
+   */
+  OutputIds?: Array<string>
 }
 
 /**
@@ -9532,9 +10560,9 @@ export interface LiveStreamProcessErrorInfo {
 }
 
 /**
- * ModifyAdaptiveDynamicStreamingTemplate返回参数结构体
+ * DeleteStreamPackageLinearAssemblyChannels返回参数结构体
  */
-export interface ModifyAdaptiveDynamicStreamingTemplateResponse {
+export interface DeleteStreamPackageLinearAssemblyChannelsResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9736,6 +10764,32 @@ export interface ImageWatermarkTemplate {
 }
 
 /**
+ * DescribeStreamPackageSSAIUsage请求参数结构体
+ */
+export interface DescribeStreamPackageSSAIUsageRequest {
+  /**
+   * 起始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 需要查询的channel_id
+   */
+  ChannelIds?: Array<string>
+  /**
+   * 需要查询的广告类型。可选Pre-roll/Mid-roll/VOD；若为空，默认查询所有类型
+   */
+  Types?: Array<string>
+  /**
+   * 维度，可选值：summary对应false；detail 对应true
+   */
+  Dimension?: boolean
+}
+
+/**
  * ModifyQualityControlTemplate返回参数结构体
  */
 export interface ModifyQualityControlTemplateResponse {
@@ -9836,6 +10890,45 @@ export interface FlowMediaVideo {
 }
 
 /**
+ * SpliceInsertInfo。
+ */
+export interface SpliceInsertInfo {
+  /**
+   * EventID。
+   */
+  EventID?: string
+  /**
+   * AvailNum。
+   */
+  AvailNum?: string
+  /**
+   * AvailExpected。
+   */
+  AvailExpected?: string
+  /**
+   * ProgramID。
+   */
+  ProgramID?: string
+}
+
+/**
+ * type SourceTag struct {
+	Key   string `json:"Key"`
+	Value string `json:"Value"`
+}
+ */
+export interface SourceTag {
+  /**
+   * sourcetag的key，支持1-50位的大写字母、数字、下划线、中划线
+   */
+  Key?: string
+  /**
+   * sourcetag的value，支持1-200位的字母、数字下划线、中划线、英文句号、百分号（%）
+   */
+  Value?: string
+}
+
+/**
  * RecognizeMediaForZhiXue返回参数结构体
  */
 export interface RecognizeMediaForZhiXueResponse {
@@ -9847,6 +10940,33 @@ export interface RecognizeMediaForZhiXueResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 媒体质检任务结果类型
+ */
+export interface ScheduleExecRuleTaskResult {
+  /**
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   */
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 条件判断任务的输入。
+   */
+  Input?: ExecRulesTask
+  /**
+   * 条件判断任务的输出。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Output?: ExecRuleTaskData
 }
 
 /**
@@ -10659,6 +11779,16 @@ export interface HLSPullSourceAddress {
 }
 
 /**
+ * DescribeStreamPackageSourceLocation请求参数结构体
+ */
+export interface DescribeStreamPackageSourceLocationRequest {
+  /**
+   * SourceLocation Id。
+   */
+  Id: string
+}
+
+/**
  * 视频评测任务的视频来源信息
  */
 export interface EvaluationMediaInputInfo {
@@ -10756,6 +11886,28 @@ export interface ActivityPara {
 }
 
 /**
+ * DescribeStreamPackageSources请求参数结构体
+ */
+export interface DescribeStreamPackageSourcesRequest {
+  /**
+   * 页数，取值范围为[1, 1000]。
+   */
+  PageNum?: number
+  /**
+   * 每页大小，取值范围为[1, 1000]。
+   */
+  PageSize?: number
+  /**
+   * Location Id，查询该location下面所有source。
+   */
+  LocationId?: string
+  /**
+   * Source的类型，分直播Live和点播VOD。
+   */
+  Type?: string
+}
+
+/**
  * ModifyAsrHotwords返回参数结构体
  */
 export interface ModifyAsrHotwordsResponse {
@@ -10766,28 +11918,17 @@ export interface ModifyAsrHotwordsResponse {
 }
 
 /**
- * 用户自定义语音审核任务控制参数
+ * CreateStreamPackageLinearAssemblyChannel返回参数结构体
  */
-export interface UserDefineAsrTextReviewTemplateInfoForUpdate {
+export interface CreateStreamPackageLinearAssemblyChannelResponse {
   /**
-   * 用户自定语音审核任务开关，可选值：
-<li>ON：开启自定义语音审核任务；</li>
-<li>OFF：关闭自定义语音审核任务。</li>
+   * channel信息。
    */
-  Switch?: string
+  Info?: LinearAssemblyChannelInfo
   /**
-   * 用户自定义语音过滤标签，审核结果包含选择的标签则返回结果，如果过滤标签为空，则审核结果全部返回。如果要使用标签过滤功能，添加自定义语音关键词素材时需要添加对应标签。
-标签个数最多 10 个，每个标签长度最多 16 个字符。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  LabelSet?: Array<string>
-  /**
-   * 判定涉嫌违规的分数阈值，当智能审核达到该分数以上，认为涉嫌违规。取值范围：0~100。
-   */
-  BlockConfidence?: number
-  /**
-   * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核。取值范围：0~100。
-   */
-  ReviewConfidence?: number
+  RequestId?: string
 }
 
 /**
@@ -10904,41 +12045,43 @@ export interface CreateWatermarkTemplateRequest {
 }
 
 /**
- * 编排视频分析任务结果类型
+ * 线性组装output信息。
  */
-export interface ScheduleAnalysisTaskResult {
+export interface OutputReq {
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   * 输出类型，区分HLS DASH。
    */
-  Status?: string
+  Type?: string
   /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   * output group名称，可以和source的group名称对应关联起来。
    */
-  ErrCodeExt?: string
+  GroupName?: string
   /**
-   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   * channel program调度后输出的文件名。
    */
-  ErrCode?: number
+  ManifestName?: string
   /**
-   * 错误信息。
+   * Type为HLS时manifest配置使用的字段。
    */
-  Message?: string
+  ManifestConf?: ManifestInfo
   /**
-   * 分析任务的输入。
+   * Type为DASH时manifest配置使用的字段。
    */
-  Input?: AiAnalysisTaskInput
+  DashManifestConf?: DashManifestInfo
+}
+
+/**
+ * 线性组装频道配置。
+ */
+export interface ManifestInfo {
   /**
-   * 分析任务的输出。
+   * 单位秒。
    */
-  Output?: Array<AiAnalysisResult>
+  Windows?: number
   /**
-   * 任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   * 打到output广告标签的格式，可选Date Range和Enhanced SCTE-35。
    */
-  BeginProcessTime?: string
-  /**
-   * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
-   */
-  FinishTime?: string
+  AdMarkupType?: string
 }
 
 /**
@@ -11297,6 +12440,36 @@ export interface CreateVideoSearchTaskResponse {
 }
 
 /**
+ * 线性组装output信息。
+ */
+export interface OutputInfo {
+  /**
+   * HLS DASH。
+   */
+  Type?: string
+  /**
+   * output group名称，可以和source的group名称对应关联起来。
+   */
+  GroupName?: string
+  /**
+   * channel program调度后输出的文件名。
+   */
+  ManifestName?: string
+  /**
+   * Type为HLS时manifest配置使用的字段。
+   */
+  ManifestConf?: ManifestInfo
+  /**
+   * 播放地址。
+   */
+  PlaybackURL?: string
+  /**
+   * Type为DASH时manifest配置使用的字段。
+   */
+  DashManifestConf?: DashManifestInfo
+}
+
+/**
  * CreateVideoSearchTask请求参数结构体
  */
 export interface CreateVideoSearchTaskRequest {
@@ -11397,6 +12570,16 @@ export interface FaceConfigureInfo {
 }
 
 /**
+ * DeleteStreamPackageLinearAssemblyChannels请求参数结构体
+ */
+export interface DeleteStreamPackageLinearAssemblyChannelsRequest {
+  /**
+   * 频道id列表。
+   */
+  Ids: Array<string>
+}
+
+/**
  * 转动图任务类型。
  */
 export interface AnimatedGraphicTaskInput {
@@ -11428,6 +12611,40 @@ export interface AnimatedGraphicTaskInput {
 如果不填，则默认为相对路径：`{inputName}_animatedGraphic_{definition}.{format}`。
    */
   OutputObjectPath?: string
+}
+
+/**
+ * 分段信息。
+ */
+export interface LiveAiParagraphInfo {
+  /**
+   * 分段摘要
+   */
+  Summary?: string
+  /**
+   * 分段标题
+   */
+  Title?: string
+  /**
+   * 分段关键词
+   */
+  Keywords?: Array<string>
+  /**
+   * 分段起始时间点，秒
+   */
+  StartTimeOffset?: number
+  /**
+   * 分段结束时间点，秒
+   */
+  EndTimeOffset?: number
+  /**
+   * 直播切片对应直播起始时间点，采用 ISO 日期格式。
+   */
+  BeginTime?: string
+  /**
+   * 直播切片对应直播结束时间点，采用 ISO 日期格式。
+   */
+  EndTime?: string
 }
 
 /**
@@ -11529,9 +12746,26 @@ export interface LiveRecordTaskInput {
 }
 
 /**
- * DescribeStreamLinkActivateState请求参数结构体
+ * 垫片配置。
  */
-export type DescribeStreamLinkActivateStateRequest = null
+export interface ClipRangeInfo {
+  /**
+   * vod类型有效，内容有效起始时间，可选Entire和SpecifyTimeRange。
+   */
+  Type?: string
+  /**
+   * 偏移量,Type为SpecifyTimeRange时有效。
+   */
+  Offset?: number
+  /**
+   * 开始偏移量,Type为SpecifyTimeRange时有效。
+   */
+  StartOffset?: number
+  /**
+   * 结束偏移量,Type为SpecifyTimeRange时有效。
+   */
+  EndOffset?: number
+}
 
 /**
  * AI 智能分析模板详情
@@ -11598,6 +12832,20 @@ export interface AiRecognitionTaskObjectResultItem {
    * 物体出现的片段列表。
    */
   SegmentSet?: Array<AiRecognitionTaskObjectSeqmentItem>
+}
+
+/**
+ * 直播流分析结果
+ */
+export interface LiveStreamAiAnalysisResultInfo {
+  /**
+   * 直播分析子任务结果，支持：
+<li>直播拆条</li>
+<li>直播高光集锦</li>
+<li>直播摘要</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResultSet?: Array<LiveStreamAiAnalysisResultItem>
 }
 
 /**
@@ -12065,6 +13313,16 @@ export interface CreateProcessImageTemplateRequest {
 }
 
 /**
+ * StopStreamLinkFlow请求参数结构体
+ */
+export interface StopStreamLinkFlowRequest {
+  /**
+   * 流Id。
+   */
+  FlowId: string
+}
+
+/**
  * DescribeStreamLinkFlowSRTStatistics返回参数结构体
  */
 export interface DescribeStreamLinkFlowSRTStatisticsResponse {
@@ -12220,6 +13478,20 @@ export interface AiAnalysisResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReelTask?: AiAnalysisTaskReelResult
+}
+
+/**
+ * DescribeStreamLinkFlowStatistics返回参数结构体
+ */
+export interface DescribeStreamLinkFlowStatisticsResponse {
+  /**
+   * 传输流的媒体数据列表。
+   */
+  Infos?: Array<FlowStatisticsArray>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -12585,6 +13857,51 @@ export interface ResetWorkflowRequest {
 }
 
 /**
+ * 提取视频数字水印任务信息
+ */
+export interface ExtractBlindWatermarkTask {
+  /**
+   * 媒体处理任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 任务流状态，取值：
+<li>WAITING：等待中；</li>
+<li>PROCESSING：处理中；</li>
+<li>FINISH：已完成。</li>
+   */
+  Status?: string
+  /**
+   * 错误码，0 表示成功，其他值表示失败。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 媒体处理的目标文件信息。
+   */
+  InputInfo?: MediaInputInfo
+  /**
+   * 数字水印类型，可选值：<li>blind-basic：基础版权数字水印；</li> <li>blind-ab：ab版权数字水印；</li>
+   */
+  Type?: string
+  /**
+   * 标记是否检测到水印，如果该参数为true， Result字段将返回水印提取结果，如果该参数为false，Result字段不会返回。
+   */
+  IsDetected?: boolean
+  /**
+   * 提取出的数字水印内容，当没有检测到水印时该字段不会返回。
+   */
+  Result?: string
+  /**
+   * 提取数字水印配置。
+   */
+  ExtractBlindWatermarkConfig?: ExtractBlindWatermarkTaskConfig
+}
+
+/**
  * DeleteSubtitleEmbedTemplate请求参数结构体
  */
 export interface DeleteSubtitleEmbedTemplateRequest {
@@ -12605,21 +13922,33 @@ export interface AiRecognitionTaskObjectResultInput {
 }
 
 /**
- * 描述 URL 的完整信息
+ * program播放配置请求。
  */
-export interface StreamUrlDetail {
+export interface PlaybackInfoReq {
   /**
-   * 会描述运营商信息等
+   * program启动方式，直播只支持Absolute，点播还支持Relative。PlaybackMode类型为Linear的VOD支持Absolute和Relative。PlaybackMode类型为Loop的VOD只支持Relative
    */
-  Label?: string
+  TransitionType?: string
   /**
-   * URL
+   * unix时间戳，absolute场景下program的开始执行时间。最多大于当前90天（7776000）。
    */
-  Url?: string
+  StartTime?: number
   /**
-   * Playback: 拉流播放地址； RelayDestination：转推目的地址；SourceCaptureUrl：回源拉流地址；IngestEndpoint：推流地址
+   * program持续时间，单位毫秒，直播有效。支持600000-86400000。默认600000。
    */
-  Type?: string
+  Duration?: number
+  /**
+   * 和所选program的插入顺序关系，分After和Before。
+   */
+  RelativePosition?: string
+  /**
+   * 所选的插入参考program id。
+   */
+  RelativeProgramId?: string
+  /**
+   * 垫片配置。
+   */
+  ClipRangeConf?: ClipRangeInfo
 }
 
 /**
@@ -13022,6 +14351,66 @@ OcrFullTextRecognition 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagRecognitionResultSet?: Array<LiveStreamTagRecognitionResult>
+}
+
+/**
+ * 查询输出的SRT配置信息。
+ */
+export interface DescribeOutputSRTSettings {
+  /**
+   * 转推的目标的地址信息列表，SRT模式为CALLER时使用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Destinations?: Array<SRTAddressDestination>
+  /**
+   * 流Id。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StreamId?: string
+  /**
+   * 延迟。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Latency?: number
+  /**
+   * 接收延迟。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecvLatency?: number
+  /**
+   * 对端延迟。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PeerLatency?: number
+  /**
+   * 对端空闲超时时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PeerIdleTimeout?: number
+  /**
+   * 加密密钥。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Passphrase?: string
+  /**
+   * 加密密钥长度。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PbKeyLen?: number
+  /**
+   * SRT模式。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mode?: string
+  /**
+   * 服务器监听地址，SRT模式为LISTENER时使用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceAddresses?: Array<OutputSRTSourceAddressResp>
+  /**
+   * FEC 配置
+   */
+  FEC?: SRTFECFullOptions
 }
 
 /**
@@ -13678,42 +15067,23 @@ export interface AiReviewPoliticalAsrTaskInput {
 }
 
 /**
- * 直播流分析结果
+ * DescribeStreamPackageSSAIChannel返回参数结构体
  */
-export interface LiveStreamAiAnalysisResultInfo {
+export interface DescribeStreamPackageSSAIChannelResponse {
   /**
-   * 直播分析子任务结果，支持：
-<li>直播拆条</li>
-<li>直播高光集锦</li>
-<li>直播摘要</li>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 广告插入配置信息。
    */
-  ResultSet?: Array<LiveStreamAiAnalysisResultItem>
+  Info?: SSAIChannelInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
- * 切片特殊配置信息。
+ * ActivateStreamPackage请求参数结构体
  */
-export interface SegmentSpecificInfo {
-  /**
-   * 启动分片时长开关，可选值：
-on：打开
-off：关闭
-默认off
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Switch?: string
-  /**
-   * 启动时分片时长，单位：秒
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FragmentTime?: number
-  /**
-   * 生效分片数，表示前FragmentEndNum个分片以FragmentTime时长切片，取值>=1
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FragmentEndNum?: number
-}
+export type ActivateStreamPackageRequest = null
 
 /**
  * 动作识别参数配置
@@ -13735,6 +15105,36 @@ export interface AiAnalysisTaskVideoComprehensionInput {
    * 视频（音频）理解模板ID
    */
   Definition?: number
+}
+
+/**
+ * 延播平滑吐流配置。
+ */
+export interface ResilientStreamConf {
+  /**
+   * 是否开启延播平滑吐流，true开启，false不开启，默认不开启。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enable?: boolean
+  /**
+   * 延播时间，单位秒，目前支持的范围为10~300秒。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BufferTime?: number
+}
+
+/**
+ * DescribeSSAIActivateState返回参数结构体
+ */
+export interface DescribeSSAIActivateStateResponse {
+  /**
+   * SSAI开通状态，0表示正常开通，-1表示未开通
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13856,6 +15256,32 @@ export interface TranslateConfigureInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubtitleFormat?: string
+}
+
+/**
+ * 线性组装Program聚合告警信息
+ */
+export interface ProgramAlertCounts {
+  /**
+   * <p>Program ID。</p>
+   */
+  ProgramId?: string
+  /**
+   * <p>Program名称。</p>
+   */
+  ProgramName?: string
+  /**
+   * <p>告警分类。</p>
+   */
+  Category?: string
+  /**
+   * <p>出现次数</p>
+   */
+  Count?: number
+  /**
+   * <p>更新时间。</p>
+   */
+  LastModifiedTime?: number
 }
 
 /**
@@ -14179,6 +15605,16 @@ export interface SubtitleTemplate {
 }
 
 /**
+ * StopStreamPackageLinearAssemblyChannel返回参数结构体
+ */
+export interface StopStreamPackageLinearAssemblyChannelResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 查询Flow的配置信息。
  */
 export interface DescribeFlow {
@@ -14324,45 +15760,29 @@ export interface ExtractBlindWatermarkTaskConfig {
 }
 
 /**
- * 识别音频单句结果
+ * 智能擦除，指定擦除区域配置。
+对指定时间段内的指定区域直接进行擦除。
+当BeginMs和EndMs均取0时对整个视频内的指定区域直接进行擦除。
  */
-export interface RecognizeAudioSentence {
+export interface EraseTimeArea {
   /**
-   * 在音频中的起始时间，单位秒
+   * 开始时间，单位:毫秒
    */
-  Start?: number
+  BeginMs: number
   /**
-   * 在音频中的截止时间，单位秒
+   * 结束时间，单位:毫秒
    */
-  End?: number
+  EndMs: number
   /**
-   * 音频识别结果
+   * 时间段内擦除区域列表
    */
-  Text?: string
-  /**
-   * 字词时间戳结果
-   */
-  WordsInfo?: Array<WordResult>
+  Areas: Array<EraseArea>
 }
 
 /**
- * 细节增强配置
+ * DescribeSSAIActivateState请求参数结构体
  */
-export interface SharpEnhanceConfig {
-  /**
-   * 能力配置开关，可选值：
-<li>ON：开启；</li>
-<li>OFF：关闭。</li>
-默认值：ON。
-   */
-  Switch?: string
-  /**
-   * 强度，取值范围：0.0~1.0。
-默认：0.0。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Intensity?: number
-}
+export type DescribeSSAIActivateStateRequest = null
 
 /**
  * 图片编码格式参数
@@ -14579,13 +15999,37 @@ export interface SmartEraseTaskResult {
 }
 
 /**
- * 直播流 AI 审核结果
+ * 线性组装信息查询
  */
-export interface LiveStreamAiReviewResultInfo {
+export interface AssemblyUsageDetail {
   /**
-   * 内容审核结果列表。
+   * <p>频道id</p>
    */
-  ResultSet: Array<LiveStreamAiReviewResultItem>
+  ChannelID?: string
+  /**
+   * <p>日期</p>
+   */
+  Date?: string
+  /**
+   * <p>查询开始时间</p>
+   */
+  StartTime?: string
+  /**
+   * <p>查询结束时间</p>
+   */
+  EndTime?: string
+  /**
+   * <p>持续时间</p>
+   */
+  Duration?: number
+  /**
+   * <p>频道类型</p>
+   */
+  ChannelTier?: string
+  /**
+   * <p>频道名称</p>
+   */
+  ChannelName?: string
 }
 
 /**
@@ -14632,6 +16076,16 @@ export interface CoverConfigureInfoForUpdate {
  * DisableWorkflow返回参数结构体
  */
 export interface DisableWorkflowResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteStreamPackageLinearAssemblyPrograms返回参数结构体
+ */
+export interface DeleteStreamPackageLinearAssemblyProgramsResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14821,17 +16275,13 @@ export interface AdaptiveStreamTemplate {
 }
 
 /**
- * ModifyStreamLinkOutputInfo请求参数结构体
+ * DescribeStreamPackageSource请求参数结构体
  */
-export interface ModifyStreamLinkOutputInfoRequest {
+export interface DescribeStreamPackageSourceRequest {
   /**
-   * 流Id。
+   * Source Id。
    */
-  FlowId: string
-  /**
-   * 需要修改的Output配置。
-   */
-  Output: ModifyOutputInfo
+  Id: string
 }
 
 /**
@@ -15281,6 +16731,16 @@ export interface CreateSampleSnapshotTemplateResponse {
 }
 
 /**
+ * ParseLiveStreamProcessNotification请求参数结构体
+ */
+export interface ParseLiveStreamProcessNotificationRequest {
+  /**
+   * 从 CMQ 获取到的直播流事件通知内容。
+   */
+  Content: string
+}
+
+/**
  * 超分配置
  */
 export interface SuperResolutionConfig {
@@ -15450,9 +16910,13 @@ export interface CreateSubtitleEmbedTemplateResponse {
 }
 
 /**
- * ResetWorkflow返回参数结构体
+ * CreateStreamPackageSourceLocation返回参数结构体
  */
-export interface ResetWorkflowResponse {
+export interface CreateStreamPackageSourceLocationResponse {
+  /**
+   * SourceLocation信息。
+   */
+  Info?: SourceLocationInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15460,43 +16924,35 @@ export interface ResetWorkflowResponse {
 }
 
 /**
- * DescribeStreamLinkFlows请求参数结构体
+ * DeleteSmartSubtitleTemplate请求参数结构体
  */
-export interface DescribeStreamLinkFlowsRequest {
+export interface DeleteSmartSubtitleTemplateRequest {
   /**
-   * 当前页数，默认1。
+   * 智能字幕模板唯一标识。
    */
-  PageNum?: number
-  /**
-   * 每页大小，默认10。
-   */
-  PageSize?: number
+  Definition: number
 }
 
 /**
- * HLS配置参数
+ * DescribeStreamPackageLinearAssemblyProgramSchedules请求参数结构体
  */
-export interface HLSConfigureInfo {
+export interface DescribeStreamPackageLinearAssemblyProgramSchedulesRequest {
   /**
-   * 单个 TS 文件时长，单位：秒，取值范围 5-30 秒。
-
-不填默认为 30 秒。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 查询某个Channel下面的所有Program。
    */
-  ItemDuration?: number
+  ChannelId: string
   /**
-   * 录制周期，单位：秒，取值范围 10 分钟到  12 小时。
-
-不填默认为 10分钟（3600 秒）。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 窗口时长信息，单位秒。最大7776000s
    */
-  Interval?: number
+  TimeWindow?: number
   /**
-   * 续录等待时间，单位：秒。取值范围为60秒-1800秒。
-不填默认为0（不启用续录）。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 页数，取值范围为[1, 10000]。
    */
-  ContinueTimeout?: number
+  PageNum?: number
+  /**
+   * 每页大小，取值范围为[1, 1000]。
+   */
+  PageSize?: number
 }
 
 /**
@@ -15765,6 +17221,20 @@ export interface TEHDConfigForUpdate {
 }
 
 /**
+ * DescribeStreamPackageSource返回参数结构体
+ */
+export interface DescribeStreamPackageSourceResponse {
+  /**
+   * Source信息。
+   */
+  Info?: SourceInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * WithdrawsWatermark请求参数结构体
  */
 export interface WithdrawsWatermarkRequest {
@@ -15917,6 +17387,20 @@ export interface ArtifactRepairConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
+}
+
+/**
+ * CreateStreamPackageSSAIChannel返回参数结构体
+ */
+export interface CreateStreamPackageSSAIChannelResponse {
+  /**
+   * 创建的广告插入配置信息。
+   */
+  Info?: SSAIChannelInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -16113,6 +17597,82 @@ export interface ModifyAIRecognitionTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SourceLocation配置信息。
+ */
+export interface SourceLocationInfo {
+  /**
+   * <p>ID，唯一标识。</p>
+   */
+  Id?: string
+  /**
+   * <p>SourceLocation名称。</p>
+   */
+  Name?: string
+  /**
+   * <p>地域。</p>
+   */
+  Region?: string
+  /**
+   * <p>BaseUrl信息。</p>
+   */
+  BaseUrl?: string
+  /**
+   * <p>是否开启补片。</p>
+   */
+  SegmentDeliverEnable?: boolean
+  /**
+   * <p>补片配置。</p>
+   */
+  SegmentDeliverConf?: SegmentDeliverInfo
+  /**
+   * <p>绑定的直播source id列表。</p>
+   */
+  AttachedLiveSources?: Array<string>
+  /**
+   * <p>绑定的点播source id列表。</p>
+   */
+  AttachedVodSources?: Array<string>
+  /**
+   * <p>source location创建时间，Unix时间戳。</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>source location最近一次修改时间，Unix时间戳。</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>是否开启package分发分片，默认开启。</p>
+   */
+  SegmentDeliverUsePackageEnable?: boolean
+}
+
+/**
+ * DescribeStreamPackageLinearAssemblyUsage请求参数结构体
+ */
+export interface DescribeStreamPackageLinearAssemblyUsageRequest {
+  /**
+   * 查询开始时间
+   */
+  StartTime?: string
+  /**
+   * 查询结束时间
+   */
+  EndTime?: string
+  /**
+   * 维度，可选值：summary对应false；detail 对应true
+   */
+  Dimension?: boolean
+  /**
+   * 要查询的频道ID列表
+   */
+  ChannelIds?: Array<string>
+  /**
+   * 要查询的频道类型，可选Basic/Standard；若为空，默认查询所有类型
+   */
+  ChannelTiers?: Array<string>
 }
 
 /**
@@ -16549,13 +18109,25 @@ export interface AiSampleWordInfo {
 }
 
 /**
- * DeleteStreamLinkEvent请求参数结构体
+ * 转自适应码流信息
  */
-export interface DeleteStreamLinkEventRequest {
+export interface AdaptiveDynamicStreamingInfoItem {
   /**
-   * 媒体传输事件Id，删除前需要保证该Event关联的所有Flow都已经删除。
+   * 转自适应码流规格。
    */
-  EventId: string
+  Definition?: number
+  /**
+   * 打包格式，可能为 HLS和 MPEG-DASH 两种。
+   */
+  Package?: string
+  /**
+   * 播放路径。
+   */
+  Path?: string
+  /**
+   * 自适应码流文件的存储位置。
+   */
+  Storage?: TaskOutputStorage
 }
 
 /**
@@ -16690,25 +18262,29 @@ export interface ScheduleReviewTaskResult {
 }
 
 /**
- * ModifySubtitleEmbedTemplate请求参数结构体
+ * ModifyStreamPackageSource请求参数结构体
  */
-export interface ModifySubtitleEmbedTemplateRequest {
+export interface ModifyStreamPackageSourceRequest {
   /**
-   * <p>字幕压制模板唯一标识</p>
+   * Source Id。
    */
-  Definition: number
+  Id: string
   /**
-   * <p>字幕压制名称<br>长度限制：64 个字符。</p>
+   * 修改后的名称。
    */
   Name?: string
   /**
-   * <p>字幕压制模板描述信息<br>长度限制：256 个字符。</p>
+   * 区分直播Live和点播VOD source类型。
    */
-  Comment?: string
+  Type?: string
   /**
-   * <p>字幕压制相关配置</p>
+   * source配置。
    */
-  SubtitleEmbedConfig?: SubtitleEmbedConfig
+  PackageConfs?: Array<SourcePackageConf>
+  /**
+   * ADS可以根据Source Tag信息，返回更精准的广告。
+   */
+  SourceTags?: Array<SourceTag>
 }
 
 /**
@@ -17226,6 +18802,24 @@ export interface ModifyStreamLinkInputResponse {
 }
 
 /**
+ * 媒体处理 VOD（点播专业版） 输出对象信息。
+ */
+export interface VODOutputStorage {
+  /**
+   * 媒体处理生成的文件输出的目标 *Bucket ID*
+   */
+  Bucket?: string
+  /**
+   * 媒体处理生成的文件输出的目标 Bucket 的园区
+   */
+  Region?: string
+  /**
+   * 点播专业版应用Id
+   */
+  SubAppId?: number
+}
+
+/**
  * 片头片尾参数
  */
 export interface HeadTailParameter {
@@ -17392,6 +18986,40 @@ export interface AiAnalysisTaskDubbingResult {
 }
 
 /**
+ * program播放配置。
+ */
+export interface PlaybackInfo {
+  /**
+   * <p>program持续时间，单位毫秒，直播有效。</p>
+   */
+  Duration?: number
+  /**
+   * <p>program启动方式，直播只支持Absolute，点播还支持Relative。</p>
+   */
+  TransitionType?: string
+  /**
+   * <p>unix时间戳，Absolute场景下program的开始执行时间。</p>
+   */
+  StartTime?: number
+  /**
+   * <p>和所选program的插入顺序关系，分After和Before。</p>
+   */
+  RelativePosition?: string
+  /**
+   * <p>所选的插入参考program id。</p>
+   */
+  RelativeProgramId?: string
+  /**
+   * <p>垫片配置。</p>
+   */
+  ClipRangeConf?: ClipRangeInfo
+  /**
+   * <p>RelativeProgramName。</p>
+   */
+  RelativeProgramName?: string
+}
+
+/**
  * DeleteImageSpriteTemplate请求参数结构体
  */
 export interface DeleteImageSpriteTemplateRequest {
@@ -17508,6 +19136,24 @@ RTMP的推流地址拼接规则为：rtmp://Ip:1935/AppName/StreamKey
 }
 
 /**
+ * 描述 URL 的完整信息
+ */
+export interface StreamUrlDetail {
+  /**
+   * 会描述运营商信息等
+   */
+  Label?: string
+  /**
+   * URL
+   */
+  Url?: string
+  /**
+   * Playback: 拉流播放地址； RelayDestination：转推目的地址；SourceCaptureUrl：回源拉流地址；IngestEndpoint：推流地址
+   */
+  Type?: string
+}
+
+/**
  * DeleteProcessImageTemplate返回参数结构体
  */
 export interface DeleteProcessImageTemplateResponse {
@@ -17559,6 +19205,44 @@ export interface SubtitleLayoutConfig {
 
    */
   Alignment?: string
+}
+
+/**
+ * 自定义水印规格参数。
+ */
+export interface RawWatermarkParameter {
+  /**
+   * 水印类型，可选值：
+<li>image：图片水印。</li>
+   */
+  Type: string
+  /**
+   * 原点位置，可选值：
+<li>TopLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角。</li>
+<li>TopRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；</li>
+<li>BottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；</li>
+<li>BottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下角。</li>
+默认值：TopLeft。
+   */
+  CoordinateOrigin?: string
+  /**
+   * 水印原点距离视频图像坐标原点的水平位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 XPos 为指定像素，如 100px 表示 XPos 为 100 像素。</li>
+默认值：0px。
+   */
+  XPos?: string
+  /**
+   * 水印原点距离视频图像坐标原点的垂直位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 YPos 为指定像素，如 100px 表示 YPos 为 100 像素。</li>
+默认值：0px。
+   */
+  YPos?: string
+  /**
+   * 图片水印模板，当 Type 为 image，该字段必填。当 Type 为 text，该字段无效。
+   */
+  ImageTemplate?: RawImageWatermarkInput
 }
 
 /**
@@ -17614,6 +19298,71 @@ export interface AiRecognitionTaskOcrFullTextResultInput {
 }
 
 /**
+ * 图片缩放配置
+ */
+export interface ImageResizeConfig {
+  /**
+   * 能力配置开关，可选值：
+<li>ON：开启</li>
+<li>OFF：关闭</li>
+默认值：ON。
+   */
+  Switch?: string
+  /**
+   * 输出图片模式，可选模式：
+<li>percent: 指定缩放倍率，可以为小数</li>
+<li>mfit: 缩放至指定宽高的较大矩形</li>
+<li>lfit: 缩放至指定宽高的较小矩形</li>
+<li>fill: 缩放至指定宽高的较大矩形，并居中裁剪指定宽高</li>
+<li>pad: 缩放至指定宽高的较小矩形，并填充到指定宽高</li>
+<li>fixed: 缩放至固定宽高，强制缩放</li>
+默认值：percent。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mode?: string
+  /**
+   * 缩放倍率，可以为小数，当Mode为percent时使用。
+
+默认值：1.0。
+取值范围：[0.1，10.0]
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Percent?: number
+  /**
+   * 目标图片宽度。
+
+取值范围：[1，16384]。
+注意：此字段在Mode非percent时优先使用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Width?: number
+  /**
+   * 目标图片高度。
+
+取值范围：[1，16384]。
+注意：此字段在Mode非percent时优先使用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Height?: number
+  /**
+   * 目标图片长边。
+
+取值范围：[1，16384]。
+注意：此字段在Mode非percent且未配置Width和Height时使用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LongSide?: number
+  /**
+   * 目标图片短边。
+
+取值范围：[1，16384]。
+注意：此字段在Mode非percent且未配置Width和Height时使用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShortSide?: number
+}
+
+/**
  * 字幕压制模块文字描边配置
  */
 export interface SubtitleOutlineConfig {
@@ -17640,6 +19389,37 @@ export interface SubtitleOutlineConfig {
 }
 
 /**
+ * DescribeStreamPackageLinearAssemblyPrograms返回参数结构体
+ */
+export interface DescribeStreamPackageLinearAssemblyProgramsResponse {
+  /**
+   * Program列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Infos?: Array<LinearAssemblyProgramInfo>
+  /**
+   * 页数。
+   */
+  PageNum?: number
+  /**
+   * 每页大小。
+   */
+  PageSize?: number
+  /**
+   * 总数量。
+   */
+  TotalNum?: number
+  /**
+   * 总页数。
+   */
+  TotalPage?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteStreamLinkEvent返回参数结构体
  */
 export interface DeleteStreamLinkEventResponse {
@@ -17647,6 +19427,24 @@ export interface DeleteStreamLinkEventResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeStreamPackageSourceAlerts请求参数结构体
+ */
+export interface DescribeStreamPackageSourceAlertsRequest {
+  /**
+   * Source ID。
+   */
+  SourceId: string
+  /**
+   * 查询开始时间，Unix时间戳，支持最近七天的查询。
+   */
+  StartTime?: number
+  /**
+   * 查询结束时间，Unix时间戳，支持最近七天的查询。
+   */
+  EndTime?: number
 }
 
 /**
@@ -17746,63 +19544,17 @@ export interface ModifyImageSpriteTemplateRequest {
 }
 
 /**
- * 查询输出的SRT配置信息。
+ * CreateStreamPackageSource返回参数结构体
  */
-export interface DescribeOutputSRTSettings {
+export interface CreateStreamPackageSourceResponse {
   /**
-   * 转推的目标的地址信息列表，SRT模式为CALLER时使用。
-注意：此字段可能返回 null，表示取不到有效值。
+   * Source信息。
    */
-  Destinations?: Array<SRTAddressDestination>
+  Info?: SourceInfo
   /**
-   * 流Id。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  StreamId?: string
-  /**
-   * 延迟。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Latency?: number
-  /**
-   * 接收延迟。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RecvLatency?: number
-  /**
-   * 对端延迟。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PeerLatency?: number
-  /**
-   * 对端空闲超时时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PeerIdleTimeout?: number
-  /**
-   * 加密密钥。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Passphrase?: string
-  /**
-   * 加密密钥长度。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PbKeyLen?: number
-  /**
-   * SRT模式。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Mode?: string
-  /**
-   * 服务器监听地址，SRT模式为LISTENER时使用。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SourceAddresses?: Array<OutputSRTSourceAddressResp>
-  /**
-   * FEC 配置
-   */
-  FEC?: SRTFECFullOptions
+  RequestId?: string
 }
 
 /**
@@ -17816,24 +19568,49 @@ export interface AiRecognitionTaskFaceResultInput {
 }
 
 /**
- * 音量均衡配置
+ * EditMedia请求参数结构体
  */
-export interface VolumeBalanceConfig {
+export interface EditMediaRequest {
   /**
-   * 能力配置开关，可选值：
-<li>ON：开启；</li>
-<li>OFF：关闭。</li>
-默认值：ON。
+   * <p>输入的视频文件信息。</p>
    */
-  Switch?: string
+  FileInfos: Array<EditMediaFileInfo>
   /**
-   * 类型，可选值：
-<li>loudNorm：响度标准化</li>
-<li>gainControl：减小突变</li>
-默认值：loudNorm。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>媒体处理输出文件的目标存储。</p>
    */
-  Type?: string
+  OutputStorage: TaskOutputStorage
+  /**
+   * <p>媒体处理输出文件的目标路径。</p><p>注意：对于复杂合成任务，路径中的文件名只可为数字、字母、-、_ 的组合，最长 64 个字符。</p>
+   */
+  OutputObjectPath: string
+  /**
+   * <p>【剪辑】任务生成的文件配置。</p>
+   */
+  OutputConfig?: EditMediaOutputConfig
+  /**
+   * <p>【合成】任务配置。</p><p>注意：当其不为空时，认为是合成任务，否则按剪辑任务处理。</p>
+   */
+  ComposeConfig?: ComposeMediaConfig
+  /**
+   * <p>任务的事件通知信息，不填代表不获取事件通知。</p>
+   */
+  TaskNotifyConfig?: TaskNotifyConfig
+  /**
+   * <p>任务优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。</p>
+   */
+  TasksPriority?: number
+  /**
+   * <p>用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
+   */
+  SessionId?: string
+  /**
+   * <p>来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。</p>
+   */
+  SessionContext?: string
+  /**
+   * <p>资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。</p>
+   */
+  ResourceId?: string
 }
 
 /**
@@ -18629,6 +20406,40 @@ export interface AiRecognitionTaskAsrWordsResultInput {
 }
 
 /**
+ * CreateStreamPackageLinearAssemblyChannel请求参数结构体
+ */
+export interface CreateStreamPackageLinearAssemblyChannelRequest {
+  /**
+   * Channel名称。
+   */
+  Name: string
+  /**
+   * 定义channel的特性，Standard支持直播和点播源，Basic只支持点播源编排，可选值：Standard、Basic。
+   */
+  Tier?: string
+  /**
+   * 频道中的source切换的模式，分Linear线性和Loop循环，Basic只支持Linear，Standard两种都支持。
+   */
+  PlaybackMode?: string
+  /**
+   * 时移开启开关，只有Tier为Standard时有效。
+   */
+  TimeShiftEnable?: boolean
+  /**
+   * 时移配置，时移开关开启时有效。
+   */
+  TimeShiftConf?: TimeShiftInfo
+  /**
+   * 垫片配置，只有PlaybackMode为Linear时有效。
+   */
+  SlateConf?: SlateInfo
+  /**
+   * 输出配置。
+   */
+  Outputs?: Array<OutputReq>
+}
+
+/**
  * CreateAIAnalysisTemplate请求参数结构体
  */
 export interface CreateAIAnalysisTemplateRequest {
@@ -18666,6 +20477,55 @@ export interface AiReviewTerrorismTaskInput {
    * 模板 ID。
    */
   Definition: number
+}
+
+/**
+ * 流状态实时查询接口的流状态信息
+ */
+export interface FlowRealtimeStatusItem {
+  /**
+   * 类型，Input|Output。
+   */
+  Type: string
+  /**
+   * 输入Id，如果Type为Input，此字段不为空。
+   */
+  InputId: string
+  /**
+   * 输出Id，如果Type为Output，此字段不为空。
+   */
+  OutputId: string
+  /**
+   * 流Id。
+   */
+  FlowId: string
+  /**
+   * 协议， SRT | RTMP。
+   */
+  Protocol: string
+  /**
+   * 共同状态信息。
+   */
+  CommonStatus: FlowRealtimeStatusCommon
+  /**
+   * 如果是SRT协议则有此字段。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SRTStatus: FlowRealtimeStatusSRT
+  /**
+   * 如果是RTMP协议则有此字段。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RTMPStatus: FlowRealtimeStatusRTMP
+  /**
+   * 服务器IP。
+   */
+  ConnectServerIP: string
+  /**
+   * 如果是RTP协议则有此字段。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RTPStatus: FlowRealtimeStatusRTP
 }
 
 /**
@@ -20132,6 +21992,44 @@ export interface TerrorismImgReviewTemplateInfo {
 }
 
 /**
+ * 线性组装program告警信息详情。
+ */
+export interface ProgramAlertInfos {
+  /**
+   * <p>频道ID。</p>
+   */
+  ChannelId?: string
+  /**
+   * <p>频道名称。</p>
+   */
+  ChannelName?: string
+  /**
+   * <p>ProgramName。</p>
+   */
+  ProgramId?: string
+  /**
+   * <p>ProgramName。</p>
+   */
+  ProgramName?: string
+  /**
+   * <p>告警事件码。</p>
+   */
+  Code?: number
+  /**
+   * <p>告警分类。</p>
+   */
+  Category?: string
+  /**
+   * <p>告警消息。</p>
+   */
+  Message?: string
+  /**
+   * <p>更新时间。</p>
+   */
+  LastModifiedTime?: number
+}
+
+/**
  * 热词库查询返回结果集
  */
 export interface AsrHotwordsSet {
@@ -20194,6 +22092,20 @@ export interface AiAnalysisTaskHeadTailInput {
  * DeleteSubtitleEmbedTemplate返回参数结构体
  */
 export interface DeleteSubtitleEmbedTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeStreamPackageSSAIUsage返回参数结构体
+ */
+export interface DescribeStreamPackageSSAIUsageResponse {
+  /**
+   * SSAI用量信息
+   */
+  Info?: SSAIUsageInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20353,13 +22265,9 @@ export interface DescribeUsageDataRequest {
 }
 
 /**
- * DescribeStreamLinkSecurityGroups返回参数结构体
+ * DeleteStreamPackageLinearAssemblyChannel返回参数结构体
  */
-export interface DescribeStreamLinkSecurityGroupsResponse {
-  /**
-   * 安全组信息列表。
-   */
-  Infos?: Array<SecurityGroupInfo>
+export interface DeleteStreamPackageLinearAssemblyChannelResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20521,6 +22429,27 @@ strong
 }
 
 /**
+ * 音量均衡配置
+ */
+export interface VolumeBalanceConfig {
+  /**
+   * 能力配置开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
+默认值：ON。
+   */
+  Switch?: string
+  /**
+   * 类型，可选值：
+<li>loudNorm：响度标准化</li>
+<li>gainControl：减小突变</li>
+默认值：loudNorm。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+}
+
+/**
  * DescribeWatermarkTemplates返回参数结构体
  */
 export interface DescribeWatermarkTemplatesResponse {
@@ -20576,6 +22505,82 @@ UTC时间，如'2020-01-01T12:00:00Z'。
    * 页码，默认1，范围为[1, 1000]。
    */
   PageNum?: number
+}
+
+/**
+ * TimeSignalInfo。
+ */
+export interface TimeSignalInfo {
+  /**
+   * EventID。
+   */
+  EventID?: string
+  /**
+   * UPIDType。
+   */
+  UPIDType?: string
+  /**
+   * UPID。
+   */
+  UPID?: string
+  /**
+   * TypeID。
+   */
+  TypeID?: string
+  /**
+   * Num。
+   */
+  Num?: string
+  /**
+   * Expected。
+   */
+  Expected?: string
+  /**
+   * SubsegmentNum。
+   */
+  SubsegmentNum?: string
+  /**
+   * SubsegmentsExpected。
+   */
+  SubsegmentsExpected?: string
+}
+
+/**
+ * ModifyStreamPackageLinearAssemblyChannel请求参数结构体
+ */
+export interface ModifyStreamPackageLinearAssemblyChannelRequest {
+  /**
+   * Channel Id。
+   */
+  Id: string
+  /**
+   * 修改后的名称。
+   */
+  Name?: string
+  /**
+   * 定义channel的特性，Standard支持直播和点播源，Basic只支持点播源编排。
+   */
+  Tier?: string
+  /**
+   * 频道中的source切换的模式，分Linear线性和Loop循环，直播只支持Linear。
+   */
+  PlaybackMode?: string
+  /**
+   * 时移开启开关。
+   */
+  TimeShiftEnable?: boolean
+  /**
+   * 时移配置。
+   */
+  TimeShiftConf?: TimeShiftInfo
+  /**
+   * 垫片配置。
+   */
+  SlateConf?: SlateInfo
+  /**
+   * 输出配置。
+   */
+  Outputs?: Array<OutputInfo>
 }
 
 /**
@@ -20649,6 +22654,28 @@ export interface FrameTagConfigureInfo {
 <li>OFF：关闭智能按帧标签任务。</li>
    */
   Switch: string
+}
+
+/**
+ * 识别音频单句结果
+ */
+export interface RecognizeAudioSentence {
+  /**
+   * 在音频中的起始时间，单位秒
+   */
+  Start?: number
+  /**
+   * 在音频中的截止时间，单位秒
+   */
+  End?: number
+  /**
+   * 音频识别结果
+   */
+  Text?: string
+  /**
+   * 字词时间戳结果
+   */
+  WordsInfo?: Array<WordResult>
 }
 
 /**
@@ -20846,6 +22873,37 @@ export interface LiveStreamObjectRecognitionResult {
 }
 
 /**
+ * DescribeStreamPackageSourceLocations返回参数结构体
+ */
+export interface DescribeStreamPackageSourceLocationsResponse {
+  /**
+   * SourceLocation列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Infos?: Array<SourceLocationInfo>
+  /**
+   * 页数。
+   */
+  PageNum?: number
+  /**
+   * 每页大小。
+   */
+  PageSize?: number
+  /**
+   * 总数量。
+   */
+  TotalNum?: number
+  /**
+   * 总页数。
+   */
+  TotalPage?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeImageTaskDetail返回参数结构体
  */
 export interface DescribeImageTaskDetailResponse {
@@ -20912,6 +22970,38 @@ export interface DescribePersonSamplesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 源文件信息。
+ */
+export interface SourcePackageConf {
+  /**
+   * group名称，当channel为Linear模式并且选择了vod source的时候，该group 名称和channel output的输出组名称对应。
+   */
+  GroupName?: string
+  /**
+   * 类型，区分HLS和DASH，可选值：HLS、DASH。
+   */
+  Type?: string
+  /**
+   * 访问路径。
+   */
+  Path?: string
+}
+
+/**
+ * DescribeStreamLinkFlows请求参数结构体
+ */
+export interface DescribeStreamLinkFlowsRequest {
+  /**
+   * 当前页数，默认1。
+   */
+  PageNum?: number
+  /**
+   * 每页大小，默认10。
+   */
+  PageSize?: number
 }
 
 /**
@@ -21108,21 +23198,13 @@ export interface AiRecognitionTaskObjectResult {
 }
 
 /**
- * DescribeStreamLinkFlowRealtimeStatus请求参数结构体
+ * ActivateSSAI返回参数结构体
  */
-export interface DescribeStreamLinkFlowRealtimeStatusRequest {
+export interface ActivateSSAIResponse {
   /**
-   * 流ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  FlowId: string
-  /**
-   * 输入id数组，如果输入输出数组都为空，则代表全量查询。
-   */
-  InputIds?: Array<string>
-  /**
-   * 输出id数组，如果输入输出数组都为空，则代表全量查询。
-   */
-  OutputIds?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -21174,13 +23256,17 @@ export interface AigcVideoExtraParam {
 }
 
 /**
- * ParseLiveStreamProcessNotification请求参数结构体
+ * DescribeStreamPackageLinearAssemblyChannelAlerts返回参数结构体
  */
-export interface ParseLiveStreamProcessNotificationRequest {
+export interface DescribeStreamPackageLinearAssemblyChannelAlertsResponse {
   /**
-   * 从 CMQ 获取到的直播流事件通知内容。
+   * 频道告警信息。
    */
-  Content: string
+  Infos?: ChannelAlertResp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -21448,6 +23534,16 @@ export interface AiReviewTaskPornAsrResult {
 }
 
 /**
+ * ModifyStreamPackageLinearAssemblyChannel返回参数结构体
+ */
+export interface ModifyStreamPackageLinearAssemblyChannelResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyBlindWatermarkTemplate请求参数结构体
  */
 export interface ModifyBlindWatermarkTemplateRequest {
@@ -21585,38 +23681,9 @@ export interface DescribeVoicesRequest {
 }
 
 /**
- * 分段信息。
+ * ActivateSSAI请求参数结构体
  */
-export interface LiveAiParagraphInfo {
-  /**
-   * 分段摘要
-   */
-  Summary?: string
-  /**
-   * 分段标题
-   */
-  Title?: string
-  /**
-   * 分段关键词
-   */
-  Keywords?: Array<string>
-  /**
-   * 分段起始时间点，秒
-   */
-  StartTimeOffset?: number
-  /**
-   * 分段结束时间点，秒
-   */
-  EndTimeOffset?: number
-  /**
-   * 直播切片对应直播起始时间点，采用 ISO 日期格式。
-   */
-  BeginTime?: string
-  /**
-   * 直播切片对应直播结束时间点，采用 ISO 日期格式。
-   */
-  EndTime?: string
-}
+export type ActivateSSAIRequest = null
 
 /**
  * 智能人脸识别输出。
@@ -21654,6 +23721,20 @@ export interface PornImgReviewTemplateInfoForUpdate {
    * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * DescribeStreamPackageSSAIChannels请求参数结构体
+ */
+export interface DescribeStreamPackageSSAIChannelsRequest {
+  /**
+   * 页码，默认1。
+   */
+  PageNum?: number
+  /**
+   * 每页大小，默认10。
+   */
+  PageSize?: number
 }
 
 /**
@@ -21733,6 +23814,30 @@ export interface PornImgReviewTemplateInfo {
    * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 0 分。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * DeleteStreamPackageSourceLocation请求参数结构体
+ */
+export interface DeleteStreamPackageSourceLocationRequest {
+  /**
+   * SourceLocation Id。
+   */
+  Id: string
+}
+
+/**
+ * DescribeStreamPackageLinearAssemblyProgram返回参数结构体
+ */
+export interface DescribeStreamPackageLinearAssemblyProgramResponse {
+  /**
+   * Program信息。
+   */
+  Info?: LinearAssemblyProgramInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -22203,23 +24308,31 @@ export interface CreateSubtitleEmbedTemplateRequest {
 }
 
 /**
- * 智能擦除，指定擦除区域配置。
-对指定时间段内的指定区域直接进行擦除。
-当BeginMs和EndMs均取0时对整个视频内的指定区域直接进行擦除。
+ * DescribeStreamPackageSourceAlerts返回参数结构体
  */
-export interface EraseTimeArea {
+export interface DescribeStreamPackageSourceAlertsResponse {
   /**
-   * 开始时间，单位:毫秒
+   * Source告警信息。
    */
-  BeginMs: number
+  Infos?: Array<SourceAlert>
   /**
-   * 结束时间，单位:毫秒
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EndMs: number
+  RequestId?: string
+}
+
+/**
+ * DescribeStreamPackageLinearAssemblyChannel返回参数结构体
+ */
+export interface DescribeStreamPackageLinearAssemblyChannelResponse {
   /**
-   * 时间段内擦除区域列表
+   * Channel信息。
    */
-  Areas: Array<EraseArea>
+  Info?: LinearAssemblyChannelInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -22327,6 +24440,50 @@ export interface SampleSnapshotTaskInput {
 }
 
 /**
+ * 直播流 AI 审核结果
+ */
+export interface LiveStreamAiReviewResultInfo {
+  /**
+   * 内容审核结果列表。
+   */
+  ResultSet: Array<LiveStreamAiReviewResultItem>
+}
+
+/**
+ * 该channel下面Program的调度信息。
+ */
+export interface ProgramScheduleInfo {
+  /**
+   * <p>program名称。</p>
+   */
+  ProgramName?: string
+  /**
+   * <p>program id。</p>
+   */
+  ProgramId?: string
+  /**
+   * <p>source类型。</p>
+   */
+  SourceType?: string
+  /**
+   * <p>source id。</p>
+   */
+  SourceId?: string
+  /**
+   * <p>source location的id。</p>
+   */
+  SourceLocationId?: string
+  /**
+   * <p>开始时间戳。</p>
+   */
+  StartTime?: number
+  /**
+   * <p>持续时长。</p>
+   */
+  Duration?: string
+}
+
+/**
  * 音轨信息
  */
 export interface TrackInfo {
@@ -22399,6 +24556,24 @@ export interface QualityControlTemplate {
 }
 
 /**
+ * 线性组装用量查询响应
+ */
+export interface AssemblyUsageInfo {
+  /**
+   * 频道线性组装用量明细
+   */
+  AssemblyUsageDetails?: Array<AssemblyUsageDetail>
+  /**
+   * Basic频道类型总时长
+   */
+  SumBasicChannelDuration?: number
+  /**
+   * Standard频道类型总时长
+   */
+  SumStandardChannelDuration?: number
+}
+
+/**
  * 涉敏任务控制参数
  */
 export interface TerrorismConfigureInfo {
@@ -22410,6 +24585,20 @@ export interface TerrorismConfigureInfo {
    * 文本涉敏任务控制参数。
    */
   OcrReviewInfo?: TerrorismOcrReviewTemplateInfo
+}
+
+/**
+ * CreateStreamPackageLinearAssemblyProgram返回参数结构体
+ */
+export interface CreateStreamPackageLinearAssemblyProgramResponse {
+  /**
+   * channel信息。
+   */
+  Info?: LinearAssemblyProgramInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -22728,37 +24917,13 @@ export interface DescribeHLSPullSourceAddress {
 }
 
 /**
- * 雪碧图信息
+ * DeleteStreamPackageLinearAssemblyProgram返回参数结构体
  */
-export interface MediaImageSpriteItem {
+export interface DeleteStreamPackageLinearAssemblyProgramResponse {
   /**
-   * 雪碧图规格，参见[雪碧图参数模板](https://cloud.tencent.com/document/product/266/33480#.E9.9B.AA.E7.A2.A7.E5.9B.BE.E6.A8.A1.E6.9D.BF)。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Definition?: number
-  /**
-   * 雪碧图小图的高度。
-   */
-  Height?: number
-  /**
-   * 雪碧图小图的宽度。
-   */
-  Width?: number
-  /**
-   * 每一张雪碧图大图里小图的数量。
-   */
-  TotalCount?: number
-  /**
-   * 每一张雪碧图大图的路径。
-   */
-  ImagePathSet?: Array<string>
-  /**
-   * 雪碧图子图位置与时间关系的 WebVtt 文件路径。WebVtt 文件表明了各个雪碧图小图对应的时间点，以及在雪碧大图里的坐标位置，一般被播放器用于实现预览。
-   */
-  WebVttPath?: string
-  /**
-   * 雪碧图文件的存储位置。
-   */
-  Storage?: TaskOutputStorage
+  RequestId?: string
 }
 
 /**
@@ -23065,6 +25230,16 @@ export interface CreateSmartSubtitleTemplateResponse {
 }
 
 /**
+ * 线性组装频道时移配置信息。
+ */
+export interface TimeShiftInfo {
+  /**
+   * 回看窗口，单位秒。
+   */
+  TimeWindows?: number
+}
+
+/**
  * 直播流 AI 分析结果
  */
 export interface LiveStreamAiAnalysisResultItem {
@@ -23129,6 +25304,28 @@ export interface AiRecognitionTaskTransTextResult {
 }
 
 /**
+ * 智能字幕结果
+ */
+export interface SubtitleResult {
+  /**
+   * <p>字幕文件语言</p>
+   */
+  Language?: string
+  /**
+   * <p>处理是否成功</p>
+   */
+  Status?: string
+  /**
+   * <p>字幕文件路径。</p>
+   */
+  Path?: string
+  /**
+   * <p>字幕压制视频路径。</p>
+   */
+  SubtitleEmbedPath?: string
+}
+
+/**
  * DescribeGroupAttachFlowsById返回参数结构体
  */
 export interface DescribeGroupAttachFlowsByIdResponse {
@@ -23143,6 +25340,20 @@ export interface DescribeGroupAttachFlowsByIdResponse {
 }
 
 /**
+ * DescribeStreamPackageLinearAssemblyUsage返回参数结构体
+ */
+export interface DescribeStreamPackageLinearAssemblyUsageResponse {
+  /**
+   * 线性组装用量详情
+   */
+  Info?: AssemblyUsageInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * BatchStopStreamLinkFlow返回参数结构体
  */
 export interface BatchStopStreamLinkFlowResponse {
@@ -23150,6 +25361,64 @@ export interface BatchStopStreamLinkFlowResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 线性组装频道信息。
+ */
+export interface LinearAssemblyChannelInfo {
+  /**
+   * <p>线性组装频道名称。</p>
+   */
+  Name?: string
+  /**
+   * <p>定义channel的特性，Standard支持直播和点播源，Basic只支持点播源编排。</p>
+   */
+  Tier?: string
+  /**
+   * <p>频道中的source切换的模式，分Linear线性和Loop循环，直播只支持Linear。</p>
+   */
+  PlaybackMode?: string
+  /**
+   * <p>时移配置，vod有效。</p>
+   */
+  TimeShiftConf?: TimeShiftInfo
+  /**
+   * <p>垫片配置。</p>
+   */
+  SlateConf?: SlateInfo
+  /**
+   * <p>output信息。</p>
+   */
+  Outputs?: Array<OutputInfo>
+  /**
+   * <p>该channel绑定的program列表。</p>
+   */
+  AttachedPrograms?: Array<string>
+  /**
+   * <p>program信息。</p>
+   */
+  ProgramSchedules?: Array<ProgramScheduleInfo>
+  /**
+   * <p>Id。</p>
+   */
+  Id?: string
+  /**
+   * <p>Region。</p>
+   */
+  Region?: string
+  /**
+   * <p>State。</p>
+   */
+  State?: string
+  /**
+   * <p>时移开启开关。</p>
+   */
+  TimeShiftEnable?: boolean
+  /**
+   * <p>channel创建时间，unix秒时间戳。</p>
+   */
+  CreateTime?: number
 }
 
 /**
@@ -23342,6 +25611,32 @@ export interface SmartEraseTemplateItem {
 }
 
 /**
+ * CreateStreamPackageSourceLocation请求参数结构体
+ */
+export interface CreateStreamPackageSourceLocationRequest {
+  /**
+   * SourceLocation名称。
+   */
+  Name: string
+  /**
+   * 基准URL。
+   */
+  BaseUrl: string
+  /**
+   * 是否开启补片。
+   */
+  SegmentDeliverEnable?: boolean
+  /**
+   * 补片配置。
+   */
+  SegmentDeliverConf?: SegmentDeliverInfo
+  /**
+   * 是否开启package分发分片，默认开启。
+   */
+  SegmentDeliverUsePackageEnable?: boolean
+}
+
+/**
  * DeleteWatermarkTemplate返回参数结构体
  */
 export interface DeleteWatermarkTemplateResponse {
@@ -23352,19 +25647,44 @@ export interface DeleteWatermarkTemplateResponse {
 }
 
 /**
- * 延播平滑吐流配置。
+ * DescribeStreamPackageLinearAssemblyChannels返回参数结构体
  */
-export interface ResilientStreamConf {
+export interface DescribeStreamPackageLinearAssemblyChannelsResponse {
   /**
-   * 是否开启延播平滑吐流，true开启，false不开启，默认不开启。
+   * Channel列表。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Enable?: boolean
+  Infos?: Array<LinearAssemblyChannelInfo>
   /**
-   * 延播时间，单位秒，目前支持的范围为10~300秒。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 页数。
    */
-  BufferTime?: number
+  PageNum?: number
+  /**
+   * 每页大小。
+   */
+  PageSize?: number
+  /**
+   * 总数量。
+   */
+  TotalNum?: number
+  /**
+   * 总页数。
+   */
+  TotalPage?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StopStreamPackageLinearAssemblyChannel请求参数结构体
+ */
+export interface StopStreamPackageLinearAssemblyChannelRequest {
+  /**
+   * Channel ID。
+   */
+  Id: string
 }
 
 /**

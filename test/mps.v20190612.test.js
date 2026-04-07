@@ -48,19 +48,9 @@ it("mps.v20190612.DescribeStreamLinkFlowRealtimeStatus", async function () {
     }
 })
 
-it("mps.v20190612.CreateAnimatedGraphicsTemplate", async function () {
+it("mps.v20190612.DeleteStreamPackageLinearAssemblyProgram", async function () {
     try {
-       const data = await client.CreateAnimatedGraphicsTemplate({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("mps.v20190612.ModifySmartSubtitleTemplate", async function () {
-    try {
-       const data = await client.ModifySmartSubtitleTemplate({})
+       const data = await client.DeleteStreamPackageLinearAssemblyProgram({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,6 +108,16 @@ it("mps.v20190612.CreateAigcImageTask", async function () {
     }
 })
 
+it("mps.v20190612.DeleteStreamPackageSSAIChannel", async function () {
+    try {
+       const data = await client.DeleteStreamPackageSSAIChannel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DeleteAnimatedGraphicsTemplate", async function () {
     try {
        const data = await client.DeleteAnimatedGraphicsTemplate({})
@@ -158,6 +158,16 @@ it("mps.v20190612.ParseLiveStreamProcessNotification", async function () {
     }
 })
 
+it("mps.v20190612.ModifyStreamPackageSourceLocation", async function () {
+    try {
+       const data = await client.ModifyStreamPackageSourceLocation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DeleteTranscodeTemplate", async function () {
     try {
        const data = await client.DeleteTranscodeTemplate({})
@@ -171,6 +181,16 @@ it("mps.v20190612.DeleteTranscodeTemplate", async function () {
 it("mps.v20190612.DescribeTaskDetail", async function () {
     try {
        const data = await client.DescribeTaskDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.CreateStreamPackageSource", async function () {
+    try {
+       const data = await client.CreateStreamPackageSource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -348,9 +368,59 @@ it("mps.v20190612.DescribeTasks", async function () {
     }
 })
 
+it("mps.v20190612.DescribeStreamPackageLinearAssemblyProgramSchedules", async function () {
+    try {
+       const data = await client.DescribeStreamPackageLinearAssemblyProgramSchedules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DeleteStreamPackageSourceLocation", async function () {
+    try {
+       const data = await client.DeleteStreamPackageSourceLocation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.BatchStartStreamLinkFlow", async function () {
     try {
        const data = await client.BatchStartStreamLinkFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeStreamPackageSSAIChannels", async function () {
+    try {
+       const data = await client.DescribeStreamPackageSSAIChannels({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeStreamPackageSourceLocation", async function () {
+    try {
+       const data = await client.DescribeStreamPackageSourceLocation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DeleteStreamPackageLinearAssemblyChannels", async function () {
+    try {
+       const data = await client.DeleteStreamPackageLinearAssemblyChannels({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -371,6 +441,16 @@ it("mps.v20190612.CreateTranscodeTemplate", async function () {
 it("mps.v20190612.CreateStreamLinkFlow", async function () {
     try {
        const data = await client.CreateStreamLinkFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeStreamPackageLinearAssemblyUsage", async function () {
+    try {
+       const data = await client.DescribeStreamPackageLinearAssemblyUsage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,6 +488,16 @@ it("mps.v20190612.ModifyProcessImageTemplate", async function () {
     }
 })
 
+it("mps.v20190612.RecognizeAudio", async function () {
+    try {
+       const data = await client.RecognizeAudio({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.BatchProcessMedia", async function () {
     try {
        const data = await client.BatchProcessMedia({})
@@ -418,9 +508,9 @@ it("mps.v20190612.BatchProcessMedia", async function () {
     }
 })
 
-it("mps.v20190612.DescribeStreamLinkFlows", async function () {
+it("mps.v20190612.DeleteStreamPackageLinearAssemblyChannel", async function () {
     try {
-       const data = await client.DescribeStreamLinkFlows({})
+       const data = await client.DeleteStreamPackageLinearAssemblyChannel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,9 +558,9 @@ it("mps.v20190612.CreateContentReviewTemplate", async function () {
     }
 })
 
-it("mps.v20190612.ModifyStreamLinkOutputInfo", async function () {
+it("mps.v20190612.DescribeStreamPackageLinearAssemblyProgram", async function () {
     try {
-       const data = await client.ModifyStreamLinkOutputInfo({})
+       const data = await client.DescribeStreamPackageLinearAssemblyProgram({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,9 +568,9 @@ it("mps.v20190612.ModifyStreamLinkOutputInfo", async function () {
     }
 })
 
-it("mps.v20190612.ModifyBlindWatermarkTemplate", async function () {
+it("mps.v20190612.DeleteStreamPackageSource", async function () {
     try {
-       const data = await client.ModifyBlindWatermarkTemplate({})
+       const data = await client.DeleteStreamPackageSource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,6 +618,16 @@ it("mps.v20190612.ModifySchedule", async function () {
     }
 })
 
+it("mps.v20190612.ModifyStreamLinkSecurityGroup", async function () {
+    try {
+       const data = await client.ModifyStreamLinkSecurityGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DescribeMediaMetaData", async function () {
     try {
        const data = await client.DescribeMediaMetaData({})
@@ -541,6 +641,16 @@ it("mps.v20190612.DescribeMediaMetaData", async function () {
 it("mps.v20190612.DescribeVideoSearchTaskDetail", async function () {
     try {
        const data = await client.DescribeVideoSearchTaskDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeStreamLinkFlows", async function () {
+    try {
+       const data = await client.DescribeStreamLinkFlows({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -568,6 +678,26 @@ it("mps.v20190612.ModifyWordSample", async function () {
     }
 })
 
+it("mps.v20190612.DescribeStreamPackageSSAIUsage", async function () {
+    try {
+       const data = await client.DescribeStreamPackageSSAIUsage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.ModifyStreamLinkOutputInfo", async function () {
+    try {
+       const data = await client.ModifyStreamLinkOutputInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.ModifySampleSnapshotTemplate", async function () {
     try {
        const data = await client.ModifySampleSnapshotTemplate({})
@@ -578,9 +708,39 @@ it("mps.v20190612.ModifySampleSnapshotTemplate", async function () {
     }
 })
 
+it("mps.v20190612.ModifySmartSubtitleTemplate", async function () {
+    try {
+       const data = await client.ModifySmartSubtitleTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeStreamPackageLinearAssemblyChannel", async function () {
+    try {
+       const data = await client.DescribeStreamPackageLinearAssemblyChannel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.ResetWorkflow", async function () {
     try {
        const data = await client.ResetWorkflow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.StartStreamPackageLinearAssemblyChannel", async function () {
+    try {
+       const data = await client.StartStreamPackageLinearAssemblyChannel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -658,9 +818,19 @@ it("mps.v20190612.DescribeTranscodeTemplates", async function () {
     }
 })
 
-it("mps.v20190612.ModifyStreamLinkSecurityGroup", async function () {
+it("mps.v20190612.DescribeSSAIActivateState", async function () {
     try {
-       const data = await client.ModifyStreamLinkSecurityGroup({})
+       const data = await client.DescribeSSAIActivateState({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.CreateStreamPackageLinearAssemblyChannel", async function () {
+    try {
+       const data = await client.CreateStreamPackageLinearAssemblyChannel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -718,9 +888,9 @@ it("mps.v20190612.DescribeSmartEraseTemplates", async function () {
     }
 })
 
-it("mps.v20190612.ModifySmartEraseTemplate", async function () {
+it("mps.v20190612.CreateStreamPackageSourceLocation", async function () {
     try {
-       const data = await client.ModifySmartEraseTemplate({})
+       const data = await client.CreateStreamPackageSourceLocation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,9 +898,9 @@ it("mps.v20190612.ModifySmartEraseTemplate", async function () {
     }
 })
 
-it("mps.v20190612.RecognizeAudio", async function () {
+it("mps.v20190612.CreateStreamPackageLinearAssemblyProgram", async function () {
     try {
-       const data = await client.RecognizeAudio({})
+       const data = await client.CreateStreamPackageLinearAssemblyProgram({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -768,6 +938,16 @@ it("mps.v20190612.DescribeSchedules", async function () {
     }
 })
 
+it("mps.v20190612.ModifySmartEraseTemplate", async function () {
+    try {
+       const data = await client.ModifySmartEraseTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.ModifyPersonSample", async function () {
     try {
        const data = await client.ModifyPersonSample({})
@@ -781,6 +961,16 @@ it("mps.v20190612.ModifyPersonSample", async function () {
 it("mps.v20190612.CreateLiveRecordTemplate", async function () {
     try {
        const data = await client.CreateLiveRecordTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.StopStreamPackageLinearAssemblyChannel", async function () {
+    try {
+       const data = await client.StopStreamPackageLinearAssemblyChannel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -858,6 +1048,26 @@ it("mps.v20190612.StopStreamLinkFlow", async function () {
     }
 })
 
+it("mps.v20190612.CreateStreamPackageSSAIChannel", async function () {
+    try {
+       const data = await client.CreateStreamPackageSSAIChannel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeStreamPackageLinearAssemblyChannels", async function () {
+    try {
+       const data = await client.DescribeStreamPackageLinearAssemblyChannels({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DescribeStreamLinkEventAttachedFlows", async function () {
     try {
        const data = await client.DescribeStreamLinkEventAttachedFlows({})
@@ -888,9 +1098,9 @@ it("mps.v20190612.ModifyAIRecognitionTemplate", async function () {
     }
 })
 
-it("mps.v20190612.DescribeWorkflows", async function () {
+it("mps.v20190612.DescribeStreamPackageSource", async function () {
     try {
-       const data = await client.DescribeWorkflows({})
+       const data = await client.DescribeStreamPackageSource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -968,6 +1178,16 @@ it("mps.v20190612.CreateStreamLinkOutputInfo", async function () {
     }
 })
 
+it("mps.v20190612.DescribeStreamPackageLinearAssemblyPrograms", async function () {
+    try {
+       const data = await client.DescribeStreamPackageLinearAssemblyPrograms({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DeleteBlindWatermarkTemplate", async function () {
     try {
        const data = await client.DeleteBlindWatermarkTemplate({})
@@ -988,9 +1208,9 @@ it("mps.v20190612.ModifyWatermarkTemplate", async function () {
     }
 })
 
-it("mps.v20190612.CreateVideoSearchTask", async function () {
+it("mps.v20190612.DeleteWordSamples", async function () {
     try {
-       const data = await client.CreateVideoSearchTask({})
+       const data = await client.DeleteWordSamples({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1068,9 +1288,19 @@ it("mps.v20190612.DescribeAnimatedGraphicsTemplates", async function () {
     }
 })
 
-it("mps.v20190612.DeleteWordSamples", async function () {
+it("mps.v20190612.DescribeStreamPackageSourceAlerts", async function () {
     try {
-       const data = await client.DeleteWordSamples({})
+       const data = await client.DescribeStreamPackageSourceAlerts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.CreateVideoSearchTask", async function () {
+    try {
+       const data = await client.CreateVideoSearchTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1088,9 +1318,29 @@ it("mps.v20190612.DescribeAigcVideoTask", async function () {
     }
 })
 
+it("mps.v20190612.ModifyBlindWatermarkTemplate", async function () {
+    try {
+       const data = await client.ModifyBlindWatermarkTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.ManageTask", async function () {
     try {
        const data = await client.ManageTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeStreamPackageSources", async function () {
+    try {
+       const data = await client.DescribeStreamPackageSources({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1108,9 +1358,29 @@ it("mps.v20190612.DescribeVideoDatabaseEntryTaskDetail", async function () {
     }
 })
 
+it("mps.v20190612.DescribeWorkflows", async function () {
+    try {
+       const data = await client.DescribeWorkflows({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.ModifySnapshotByTimeOffsetTemplate", async function () {
     try {
        const data = await client.ModifySnapshotByTimeOffsetTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeStreamPackageLinearAssemblyChannelAlerts", async function () {
+    try {
+       const data = await client.DescribeStreamPackageLinearAssemblyChannelAlerts({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1131,6 +1401,16 @@ it("mps.v20190612.CreateWordSamples", async function () {
 it("mps.v20190612.CreateWorkflow", async function () {
     try {
        const data = await client.CreateWorkflow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeStreamPackageActivateState", async function () {
+    try {
+       const data = await client.DescribeStreamPackageActivateState({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1268,9 +1548,39 @@ it("mps.v20190612.DescribeBlindWatermarkTemplates", async function () {
     }
 })
 
+it("mps.v20190612.ModifyStreamPackageLinearAssemblyProgram", async function () {
+    try {
+       const data = await client.ModifyStreamPackageLinearAssemblyProgram({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.ActivateSSAI", async function () {
+    try {
+       const data = await client.ActivateSSAI({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.WithdrawsWatermark", async function () {
     try {
        const data = await client.WithdrawsWatermark({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.ModifyStreamPackageSource", async function () {
+    try {
+       const data = await client.ModifyStreamPackageSource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1338,9 +1648,19 @@ it("mps.v20190612.DeletePersonSample", async function () {
     }
 })
 
-it("mps.v20190612.DeleteSnapshotByTimeOffsetTemplate", async function () {
+it("mps.v20190612.CreateAnimatedGraphicsTemplate", async function () {
     try {
-       const data = await client.DeleteSnapshotByTimeOffsetTemplate({})
+       const data = await client.CreateAnimatedGraphicsTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.ModifyStreamPackageSSAIChannel", async function () {
+    try {
+       const data = await client.ModifyStreamPackageSSAIChannel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1361,6 +1681,16 @@ it("mps.v20190612.EnableSchedule", async function () {
 it("mps.v20190612.CreateVideoDatabaseEntryTask", async function () {
     try {
        const data = await client.CreateVideoDatabaseEntryTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DeleteSnapshotByTimeOffsetTemplate", async function () {
+    try {
+       const data = await client.DeleteSnapshotByTimeOffsetTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1408,9 +1738,29 @@ it("mps.v20190612.DeleteSampleSnapshotTemplate", async function () {
     }
 })
 
+it("mps.v20190612.ModifyStreamPackageLinearAssemblyChannel", async function () {
+    try {
+       const data = await client.ModifyStreamPackageLinearAssemblyChannel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.TextTranslation", async function () {
     try {
        const data = await client.TextTranslation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.ActivateStreamPackage", async function () {
+    try {
+       const data = await client.ActivateStreamPackage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1438,6 +1788,16 @@ it("mps.v20190612.CreateAsrHotwords", async function () {
     }
 })
 
+it("mps.v20190612.DeleteStreamPackageLinearAssemblyPrograms", async function () {
+    try {
+       const data = await client.DeleteStreamPackageLinearAssemblyPrograms({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.CreateStreamLinkEvent", async function () {
     try {
        const data = await client.CreateStreamLinkEvent({})
@@ -1451,6 +1811,16 @@ it("mps.v20190612.CreateStreamLinkEvent", async function () {
 it("mps.v20190612.CreatePersonSample", async function () {
     try {
        const data = await client.CreatePersonSample({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeStreamPackageSourceLocations", async function () {
+    try {
+       const data = await client.DescribeStreamPackageSourceLocations({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1578,9 +1948,39 @@ it("mps.v20190612.DeleteStreamLinkEvent", async function () {
     }
 })
 
+it("mps.v20190612.DeleteStreamPackageLinearAssemblyProgramsByChannel", async function () {
+    try {
+       const data = await client.DeleteStreamPackageLinearAssemblyProgramsByChannel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DescribeStreamLinkFlowLogs", async function () {
     try {
        const data = await client.DescribeStreamLinkFlowLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeMDPMPSUserInfo", async function () {
+    try {
+       const data = await client.DescribeMDPMPSUserInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeStreamPackageSSAIChannel", async function () {
+    try {
+       const data = await client.DescribeStreamPackageSSAIChannel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

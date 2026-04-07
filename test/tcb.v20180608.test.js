@@ -338,16 +338,6 @@ it("tcb.v20180608.RenewEnv", async function () {
     }
 })
 
-it("tcb.v20180608.ReinstateEnv", async function () {
-    try {
-       const data = await client.ReinstateEnv({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tcb.v20180608.DescribeDatabaseACL", async function () {
     try {
        const data = await client.DescribeDatabaseACL({})
@@ -468,9 +458,9 @@ it("tcb.v20180608.DescribeMySQLTaskStatus", async function () {
     }
 })
 
-it("tcb.v20180608.RunSql", async function () {
+it("tcb.v20180608.SearchClsLog", async function () {
     try {
-       const data = await client.RunSql({})
+       const data = await client.SearchClsLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -561,16 +551,6 @@ it("tcb.v20180608.DescribeBillingInfo", async function () {
 it("tcb.v20180608.DescribeCloudBaseBuildService", async function () {
     try {
        const data = await client.DescribeCloudBaseBuildService({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tcb.v20180608.SearchClsLog", async function () {
-    try {
-       const data = await client.SearchClsLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,9 +658,9 @@ it("tcb.v20180608.DescribeEnvLimit", async function () {
     }
 })
 
-it("tcb.v20180608.EditAuthConfig", async function () {
+it("tcb.v20180608.RunSql", async function () {
     try {
-       const data = await client.EditAuthConfig({})
+       const data = await client.RunSql({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

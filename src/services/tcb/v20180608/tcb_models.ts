@@ -2053,16 +2053,6 @@ export interface ModifyClientResponse {
 }
 
 /**
- * EditAuthConfig返回参数结构体
- */
-export interface EditAuthConfigResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 云服务器登录方式
  */
 export interface VMLoginConfiguration {
@@ -3664,16 +3654,6 @@ YEAR：年
 }
 
 /**
- * ReinstateEnv请求参数结构体
- */
-export interface ReinstateEnvRequest {
-  /**
-   * 环境ID
-   */
-  EnvId: string
-}
-
-/**
  * 云开发路由限频策略
  */
 export interface HTTPServiceRouteQPSPolicy {
@@ -4148,28 +4128,6 @@ export interface CreateStaticStoreResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * EditAuthConfig请求参数结构体
- */
-export interface EditAuthConfigRequest {
-  /**
-   * 环境id
-   */
-  EnvId: string
-  /**
-   * 手机号登录配置 "TRUE",  "FALSE", "LOGIN_ONLY"
-   */
-  PhoneNumberLogin?: string
-  /**
-   * 匿名登录配置 "TRUE",  "FALSE"
-   */
-  AnonymousLogin?: string
-  /**
-   * 用户名密码登录配置 "TRUE",  "FALSE"
-   */
-  UsernameLogin?: string
 }
 
 /**
@@ -5069,16 +5027,6 @@ LightHouse = 轻量云服务器
 CVM = 云服务器
    */
   Type?: string
-}
-
-/**
- * ReinstateEnv返回参数结构体
- */
-export interface ReinstateEnvResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

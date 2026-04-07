@@ -177,6 +177,7 @@ import {
   ModifyProxyRwSplitRequest,
   DescribeResourcePackageListResponse,
   DescribeLibraDBInstanceDetailResponse,
+  DescribeInstanceSpecsByOperationTypeResponse,
   ObjectTask,
   ModifyAuditRuleTemplatesRequest,
   CreateClustersData,
@@ -271,7 +272,6 @@ import {
   ModifyLibraDBClusterAccountDescriptionRequest,
   ModifyAuditServiceRequest,
   DescribeLibraDBClusterDetailResponse,
-  GdnTaskInfo,
   GrantAccountPrivilegesResponse,
   ModifyClusterNameResponse,
   CrossRegionBackupItem,
@@ -317,7 +317,7 @@ import {
   AuditLog,
   CreateProxyResponse,
   BizTaskModifyParamsData,
-  OfflineLibraDBClusterResponse,
+  InstanceInitInfo,
   DescribeAuditLogFilesRequest,
   OpenClusterTransparentEncryptResponse,
   ModifyBackupConfigRequest,
@@ -383,7 +383,7 @@ import {
   SwitchClusterZoneRequest,
   DescribeLibraDBClusterAutoMapRuleResponse,
   Ability,
-  InstanceInitInfo,
+  GdnTaskInfo,
   InquirePriceModifyRequest,
   BizTaskInfo,
   RemoveClusterSlaveZoneResponse,
@@ -471,6 +471,7 @@ import {
   DescribeLibraDBClusterAccountsResponse,
   BinlogConfigInfo,
   DescribeAccountPrivilegesRequest,
+  DescribeInstanceSpecsByOperationTypeRequest,
   ModifyAccountParamsResponse,
   DescribeInstanceSpecsResponse,
   OpenSSLResponse,
@@ -594,6 +595,7 @@ import {
   DescribeResourcePackageListRequest,
   TransferClusterZoneRequest,
   CloseSSLResponse,
+  OfflineLibraDBClusterResponse,
   RevokeAccountPrivilegesRequest,
   OpenClusterPasswordComplexityResponse,
   DescribeBackupListByVaultResponse,
@@ -1784,6 +1786,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyLibraDBClusterAccountPrivilegeResponse) => void
   ): Promise<ModifyLibraDBClusterAccountPrivilegeResponse> {
     return this.request("ModifyLibraDBClusterAccountPrivilege", req, cb)
+  }
+
+  /**
+   * 根据操作类型查询实例规格
+   */
+  async DescribeInstanceSpecsByOperationType(
+    req: DescribeInstanceSpecsByOperationTypeRequest,
+    cb?: (error: string, rep: DescribeInstanceSpecsByOperationTypeResponse) => void
+  ): Promise<DescribeInstanceSpecsByOperationTypeResponse> {
+    return this.request("DescribeInstanceSpecsByOperationType", req, cb)
   }
 
   /**

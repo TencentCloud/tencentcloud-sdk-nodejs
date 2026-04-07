@@ -1158,6 +1158,16 @@ it("cynosdb.v20190107.ModifyLibraDBClusterAccountPrivilege", async function () {
     }
 })
 
+it("cynosdb.v20190107.DescribeInstanceSpecsByOperationType", async function () {
+    try {
+       const data = await client.DescribeInstanceSpecsByOperationType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.OpenClusterTransparentEncrypt", async function () {
     try {
        const data = await client.OpenClusterTransparentEncrypt({})

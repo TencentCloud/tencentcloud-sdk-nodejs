@@ -408,19 +408,21 @@ export interface ResetYarnConfigRequest {
  */
 export interface ComputeResourceAdvanceParams {
   /**
-   * 节点Label数组
+   * <p>节点Label数组</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Labels?: Array<TkeLabel>
   /**
-   * 节点污点
+   * <p>节点污点</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Taints?: Array<Taint>
   /**
-   * base64 编码的用户脚本，在初始化节点之前执行
+   * <p>base64 编码的用户脚本，在初始化节点之前执行</p>
    */
   PreStartUserScript?: string
   /**
-   * base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看
+   * <p>base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看</p>
    */
   UserScript?: string
 }
@@ -1344,99 +1346,97 @@ true 表示安装kerberos，false表示不安装kerberos。
  */
 export interface ScaleOutClusterRequest {
   /**
-   * 节点计费模式。取值范围：
-<li>PREPAID：预付费，即包年包月。</li>
-<li>POSTPAID_BY_HOUR：按小时后付费。</li>
-<li>SPOTPAID：竞价付费（仅支持TASK节点）。</li>
+   * <p>节点计费模式。取值范围：</p><li>PREPAID：预付费，即包年包月。</li><li>POSTPAID_BY_HOUR：按小时后付费。</li><li>SPOTPAID：竞价付费（仅支持TASK节点）。</li>
    */
   InstanceChargeType: string
   /**
-   * 集群实例ID。
+   * <p>集群实例ID。</p>
    */
   InstanceId: string
   /**
-   * 扩容节点类型以及数量
+   * <p>扩容节点类型以及数量</p>
    */
   ScaleOutNodeConfig: ScaleOutNodeConfig
   /**
-   * 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-****-****-****-fae36063280
+   * <p>唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-<strong><strong>-</strong></strong>-****-fae36063280</p>
    */
   ClientToken?: string
   /**
-   * 即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+   * <p>即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。</p>
    */
   InstanceChargePrepaid?: InstanceChargePrepaid
   /**
-   * [引导操作](https://cloud.tencent.com/document/product/589/35656)脚本设置。
+   * <p><a href="https://cloud.tencent.com/document/product/589/35656">引导操作</a>脚本设置。</p>
    */
   ScriptBootstrapActionConfig?: Array<ScriptBootstrapActionConfig>
   /**
-   * 扩容部署服务，新增节点将默认继承当前节点类型中所部署服务，部署服务含默认可选服务，该参数仅支持可选服务填写，如：存量task节点已部署HDFS、YARN、impala；使用api扩容task节不部署impala时，部署服务仅填写HDFS、YARN。[组件名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)。
+   * <p>扩容部署服务，新增节点将默认继承当前节点类型中所部署服务，部署服务含默认可选服务，该参数仅支持可选服务填写，如：存量task节点已部署HDFS、YARN、impala；使用api扩容task节不部署impala时，部署服务仅填写HDFS、YARN。<a href="https://cloud.tencent.com/document/product/589/98760">组件名对应的映射关系表</a>。</p>
    */
   SoftDeployInfo?: Array<number | bigint>
   /**
-   * 部署进程，默认部署扩容服务的全部进程，支持修改部署进程，如：当前task节点部署服务为：HDFS、YARN、impala，默认部署服务为：DataNode,NodeManager,ImpalaServer，若用户需修改部署进程信息，部署进程：	DataNode,NodeManager,ImpalaServerCoordinator或DataNode,NodeManager,ImpalaServerExecutor。[进程名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)。
+   * <p>部署进程，默认部署扩容服务的全部进程，支持修改部署进程，如：当前task节点部署服务为：HDFS、YARN、impala，默认部署服务为：DataNode,NodeManager,ImpalaServer，若用户需修改部署进程信息，部署进程：    DataNode,NodeManager,ImpalaServerCoordinator或DataNode,NodeManager,ImpalaServerExecutor。<a href="https://cloud.tencent.com/document/product/589/98760">进程名对应的映射关系表</a>。</p>
    */
   ServiceNodeInfo?: Array<number | bigint>
   /**
-   * 分散置放群组ID列表，当前只支持指定一个。
-该参数可以通过调用 [DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/product/213/17810)的返回值中的DisasterRecoverGroupId字段来获取。
+   * <p>分散置放群组ID列表，当前只支持指定一个。<br>该参数可以通过调用 <a href="https://cloud.tencent.com/document/product/213/17810">DescribeDisasterRecoverGroups</a>的返回值中的DisasterRecoverGroupId字段来获取。</p>
    */
   DisasterRecoverGroupIds?: Array<string>
   /**
-   * 扩容节点绑定标签列表。
+   * <p>扩容节点绑定标签列表。</p>
    */
   Tags?: Array<Tag>
   /**
-   * 扩容所选资源类型，可选范围为"HOST","POD","MNode"，HOST为普通的CVM资源，POD为TKE集群或EKS集群提供的资源,MNode为全托管资源类型
+   * <p>扩容所选资源类型，可选范围为&quot;HOST&quot;,&quot;POD&quot;,&quot;MNode&quot;，HOST为普通的CVM资源，POD为TKE集群或EKS集群提供的资源,MNode为全托管资源类型</p>
    */
   HardwareSourceType?: string
   /**
-   * Pod相关资源信息
+   * <p>Pod相关资源信息</p>
    */
   PodSpecInfo?: PodSpecInfo
   /**
-   * 使用clickhouse集群扩容时，选择的机器分组名称
+   * <p>使用clickhouse集群扩容时，选择的机器分组名称</p>
    */
   ClickHouseClusterName?: string
   /**
-   * 使用clickhouse集群扩容时，选择的机器分组类型。new为新增，old为选择旧分组
+   * <p>使用clickhouse集群扩容时，选择的机器分组类型。new为新增，old为选择旧分组</p>
    */
   ClickHouseClusterType?: string
   /**
-   * 扩容指定 Yarn Node Label
+   * <p>扩容指定 Yarn Node Label</p>
    */
   YarnNodeLabel?: string
   /**
-   * 扩容后是否启动服务，默认取值否
-<li>true：是</li>
-<li>false：否</li>
+   * <p>扩容后是否启动服务，默认取值否</p><li>true：是</li><li>false：否</li>
    */
   EnableStartServiceFlag?: boolean
   /**
-   * 规格设置
+   * <p>规格设置</p>
    */
   ResourceSpec?: NodeResourceSpec
   /**
-   * 实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用[DescribeZones](https://cloud.tencent.com/document/product/213/15707) 的返回值中的Zone字段来获取。
+   * <p>实例所属的可用区，例如ap-guangzhou-1。该参数也可以通过调用<a href="https://cloud.tencent.com/document/product/213/15707">DescribeZones</a> 的返回值中的Zone字段来获取。</p>
    */
   Zone?: string
   /**
-   * 子网，默认是集群创建时的子网
+   * <p>子网，默认是集群创建时的子网</p>
    */
   SubnetId?: string
   /**
-   * 扩容指定配置组
+   * <p>扩容指定配置组</p>
    */
   ScaleOutServiceConfGroupsInfo?: Array<ScaleOutServiceConfGroupsInfo>
   /**
-   * 节点标记信息，当前只提供给tf平台使用
+   * <p>节点标记信息，当前只提供给tf平台使用</p>
    */
   NodeMarks?: NodeMark
   /**
-   * 扩容指定计算组名称
+   * <p>扩容指定计算组名称</p>
    */
   WarehouseName?: string
+  /**
+   * <p>分区置放群组分区</p>
+   */
+  PartitionNumber?: number
 }
 
 /**
@@ -1500,7 +1500,7 @@ export interface ResultItem {
  */
 export interface CreateClusterResponse {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
@@ -3187,140 +3187,133 @@ export interface CreateCloudInstanceResponse {
  */
 export interface ScaleOutInstanceRequest {
   /**
-   * 扩容的时间单位。取值范围：
-<li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li>
-<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
+   * <p>扩容的时间单位。取值范围：</p><li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li><li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
    */
   TimeUnit: string
   /**
-   * 扩容的时长。结合TimeUnit一起使用。
-<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
-<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
+   * <p>扩容的时长。结合TimeUnit一起使用。</p><li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li><li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
    */
   TimeSpan: number
   /**
-   * 实例ID。
+   * <p>实例ID。</p>
    */
   InstanceId: string
   /**
-   * 实例计费模式。取值范围：
-<li>0：表示按量计费。</li>
-<li>1：表示包年包月。</li>
+   * <p>实例计费模式。取值范围：</p><li>0：表示按量计费。</li><li>1：表示包年包月。</li>
    */
   PayMode: number
   /**
-   * 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-****-****-****-fae36063280
+   * <p>唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-<strong><strong>-</strong></strong>-****-fae36063280</p>
    */
   ClientToken?: string
   /**
-   * 引导操作脚本设置。
+   * <p>引导操作脚本设置。</p>
    */
   PreExecutedFileSettings?: Array<PreExecuteFileSettings>
   /**
-   * 扩容的Task节点数量。
+   * <p>扩容的Task节点数量。</p>
    */
   TaskCount?: number
   /**
-   * 扩容的Core节点数量。
+   * <p>扩容的Core节点数量。</p>
    */
   CoreCount?: number
   /**
-   * 扩容时不需要安装的进程。
+   * <p>扩容时不需要安装的进程。</p>
    */
   UnNecessaryNodeList?: Array<number | bigint>
   /**
-   * 扩容的Router节点数量。
+   * <p>扩容的Router节点数量。</p>
    */
   RouterCount?: number
   /**
-   * 部署的服务。
-<li>SoftDeployInfo和ServiceNodeInfo是同组参数，和UnNecessaryNodeList参数互斥。</li>
-<li>建议使用SoftDeployInfo和ServiceNodeInfo组合。</li>
+   * <p>部署的服务。</p><li>SoftDeployInfo和ServiceNodeInfo是同组参数，和UnNecessaryNodeList参数互斥。</li><li>建议使用SoftDeployInfo和ServiceNodeInfo组合。</li>
    */
   SoftDeployInfo?: Array<number | bigint>
   /**
-   * 启动的进程。
+   * <p>启动的进程。</p>
    */
   ServiceNodeInfo?: Array<number | bigint>
   /**
-   * 分散置放群组ID列表，当前仅支持指定一个。
+   * <p>分散置放群组ID列表，当前仅支持指定一个。</p>
    */
   DisasterRecoverGroupIds?: Array<string>
   /**
-   * 扩容节点绑定标签列表。
+   * <p>扩容节点绑定标签列表。</p>
    */
   Tags?: Array<Tag>
   /**
-   * 扩容所选资源类型，可选范围为"HOST","POD","MNode"，HOST为普通的CVM资源，POD为TKE集群或EKS集群提供的资源,MNode为全托管资源类型
+   * <p>扩容所选资源类型，可选范围为&quot;HOST&quot;,&quot;POD&quot;,&quot;MNode&quot;，HOST为普通的CVM资源，POD为TKE集群或EKS集群提供的资源,MNode为全托管资源类型</p>
    */
   HardwareResourceType?: string
   /**
-   * 使用Pod资源扩容时，指定的Pod规格以及来源等信息
+   * <p>使用Pod资源扩容时，指定的Pod规格以及来源等信息</p>
    */
   PodSpec?: PodSpec
   /**
-   * 使用clickhouse集群扩容时，选择的机器分组名称
+   * <p>使用clickhouse集群扩容时，选择的机器分组名称</p>
    */
   ClickHouseClusterName?: string
   /**
-   * 使用clickhouse集群扩容时，选择的机器分组类型。new为新增，old为选择旧分组
+   * <p>使用clickhouse集群扩容时，选择的机器分组类型。new为新增，old为选择旧分组</p>
    */
   ClickHouseClusterType?: string
   /**
-   * 规则扩容指定 yarn node label
+   * <p>规则扩容指定 yarn node label</p>
    */
   YarnNodeLabel?: string
   /**
-   * POD自定义权限和自定义参数
+   * <p>POD自定义权限和自定义参数</p>
    */
   PodParameter?: PodParameter
   /**
-   * 扩容的Master节点的数量。
-使用clickhouse集群扩容时，该参数不生效。
-使用kafka集群扩容时，该参数不生效。
-当HardwareResourceType=POD时，该参数不生效。
+   * <p>扩容的Master节点的数量。<br>使用clickhouse集群扩容时，该参数不生效。<br>使用kafka集群扩容时，该参数不生效。<br>当HardwareResourceType=POD时，该参数不生效。</p>
    */
   MasterCount?: number
   /**
-   * 扩容后是否启动服务，true：启动，false：不启动
+   * <p>扩容后是否启动服务，true：启动，false：不启动</p>
    */
   StartServiceAfterScaleOut?: string
   /**
-   * 可用区，默认是集群的主可用区
+   * <p>可用区，默认是集群的主可用区</p>
    */
   ZoneId?: number
   /**
-   * 子网，默认是集群创建时的子网
+   * <p>子网，默认是集群创建时的子网</p>
    */
   SubnetId?: string
   /**
-   * 预设配置组
+   * <p>预设配置组</p>
    */
   ScaleOutServiceConfAssign?: string
   /**
-   * 0表示关闭自动续费，1表示开启自动续费
+   * <p>0表示关闭自动续费，1表示开启自动续费</p>
    */
   AutoRenew?: number
   /**
-   * 类型为ComputeResource和EMR以及默认，默认为EMR,类型为EMR时,InstanceId生效,类型为ComputeResource时,使用ComputeResourceId标识
+   * <p>类型为ComputeResource和EMR以及默认，默认为EMR,类型为EMR时,InstanceId生效,类型为ComputeResource时,使用ComputeResourceId标识</p>
    */
   ResourceBaseType?: string
   /**
-   * 计算资源id
+   * <p>计算资源id</p>
    */
   ComputeResourceId?: string
   /**
-   * 计算资源高级设置
+   * <p>计算资源高级设置</p>
    */
   ComputeResourceAdvanceParams?: ComputeResourceAdvanceParams
   /**
-   * 节点标记信息，目前只提供tf平台使用
+   * <p>节点标记信息，目前只提供tf平台使用</p>
    */
   NodeMarks?: NodeMark
   /**
-   * 扩容指定计算组
+   * <p>扩容指定计算组</p>
    */
   WarehouseName?: string
+  /**
+   * <p>分区置放群组分区</p>
+   */
+  PartitionNumber?: number
 }
 
 /**
@@ -4487,220 +4480,161 @@ export interface ComponentBasicRestartInfo {
  */
 export interface CreateInstanceRequest {
   /**
-   * 产品ID，不同产品ID表示不同的EMR产品版本。取值范围：
-51:表示STARROCKS-V1.4.0
-54:表示STARROCKS-V2.0.0
-27:表示KAFKA-V1.0.0
-50:表示KAFKA-V2.0.0
-16:表示EMR-V2.3.0
-20:表示EMR-V2.5.0
-30:表示EMR-V2.6.0
-38:表示EMR-V2.7.0
-25:表示EMR-V3.1.0
-33:表示EMR-V3.2.1
-34:表示EMR-V3.3.0
-37:表示EMR-V3.4.0
-44:表示EMR-V3.5.0
-53:表示EMR-V3.6.0
-58:表示EMR-3.6.1
-59:表示EMR-serverless-1.0.0
-60:表示EMR-TKE-1.1.0
-61:表示SR-V2.1.0
-62:表示SR-V2.1.0-SharedData
-63:表示SR-V2.1.0.tlinux
-64:表示统一元数据管理项目
-65:表示EMR-TKE-AI-1.0.0
-66:表示RSS-1.0.0
-67:表示SR-V2.2.0
-68:表示SR-V2.2.0.tlinux
-69:表示EMR-AI-1.1.0
-70:表示SR-V2.2.1
-71:表示EMR-3.7.0
-72:表示EMR-serverless-1.0.1
-73:表示KAFKA-2.0.1
-74:表示SR-V2.2.2
-75:表示EMR-TKE-AI-1.1.0
-76:表示EMR-V3.7.1
-77:表示SERVERLESS-TCBASE-1.0.0
-78:表示EMR-V3.6.2
-79:表示STARROCKS-V2.2.2
-80:表示EMR-AI-V1.1.1
-
+   * <p>产品ID，不同产品ID表示不同的EMR产品版本。取值范围：<br>51:表示STARROCKS-V1.4.0<br>54:表示STARROCKS-V2.0.0<br>27:表示KAFKA-V1.0.0<br>50:表示KAFKA-V2.0.0<br>16:表示EMR-V2.3.0<br>20:表示EMR-V2.5.0<br>30:表示EMR-V2.6.0<br>38:表示EMR-V2.7.0<br>25:表示EMR-V3.1.0<br>33:表示EMR-V3.2.1<br>34:表示EMR-V3.3.0<br>37:表示EMR-V3.4.0<br>44:表示EMR-V3.5.0<br>53:表示EMR-V3.6.0<br>58:表示EMR-3.6.1<br>59:表示EMR-serverless-1.0.0<br>60:表示EMR-TKE-1.1.0<br>61:表示SR-V2.1.0<br>62:表示SR-V2.1.0-SharedData<br>63:表示SR-V2.1.0.tlinux<br>64:表示统一元数据管理项目<br>65:表示EMR-TKE-AI-1.0.0<br>66:表示RSS-1.0.0<br>67:表示SR-V2.2.0<br>68:表示SR-V2.2.0.tlinux<br>69:表示EMR-AI-1.1.0<br>70:表示SR-V2.2.1<br>71:表示EMR-3.7.0<br>72:表示EMR-serverless-1.0.1<br>73:表示KAFKA-2.0.1<br>74:表示SR-V2.2.2<br>75:表示EMR-TKE-AI-1.1.0<br>76:表示EMR-V3.7.1<br>77:表示SERVERLESS-TCBASE-1.0.0<br>78:表示EMR-V3.6.2<br>79:表示STARROCKS-V2.2.2<br>80:表示EMR-AI-V1.1.1</p>
    */
   ProductId: number
   /**
-   * 部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）对应不同可选组件列表，不同产品版本可选组件列表查询：[组件版本](https://cloud.tencent.com/document/product/589/20279) ；
-填写实例值：hive、flink。
+   * <p>部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）对应不同可选组件列表，不同产品版本可选组件列表查询：<a href="https://cloud.tencent.com/document/product/589/20279">组件版本</a> ；<br>填写实例值：hive、flink。</p>
    */
   Software: Array<string>
   /**
-   * 是否开启节点高可用。取值范围：
-<li>0：表示不开启节点高可用。</li>
-<li>1：表示开启节点高可用。</li>
+   * <p>是否开启节点高可用。取值范围：</p><li>0：表示不开启节点高可用。</li><li>1：表示开启节点高可用。</li>
    */
   SupportHA: number
   /**
-   * 实例名称。
-<li>长度限制为6-36个字符。</li>
-<li>只允许包含中文、字母、数字、-、_。</li>
+   * <p>实例名称。</p><li>长度限制为6-36个字符。</li><li>只允许包含中文、字母、数字、-、_。</li>
    */
   InstanceName: string
   /**
-   * 实例计费模式。取值范围：
-<li>0：表示按量计费。</li>
-<li>1：表示包年包月。</li>
+   * <p>实例计费模式。取值范围：</p><li>0：表示按量计费。</li><li>1：表示包年包月。</li>
    */
   PayMode: number
   /**
-   * 购买实例的时长。结合TimeUnit一起使用。
-<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
-<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
+   * <p>购买实例的时长。结合TimeUnit一起使用。</p><li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li><li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
    */
   TimeSpan: number
   /**
-   * 购买实例的时间单位。取值范围：
-<li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li>
-<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
+   * <p>购买实例的时间单位。取值范围：</p><li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li><li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
    */
   TimeUnit: string
   /**
-   * 实例登录设置。通过该参数可以设置所购买节点的登录方式密码或者密钥。
-<li>设置密钥时，密码仅用于组件原生WebUI快捷入口登录。</li>
-<li>未设置密钥时，密码用于登录所购节点以及组件原生WebUI快捷入口登录。</li>
+   * <p>实例登录设置。通过该参数可以设置所购买节点的登录方式密码或者密钥。</p><li>设置密钥时，密码仅用于组件原生WebUI快捷入口登录。</li><li>未设置密钥时，密码用于登录所购节点以及组件原生WebUI快捷入口登录。</li>
    */
   LoginSettings: LoginSettings
   /**
-   * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。
+   * <p>私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。</p>
    */
   VPCSettings?: VPCSettings
   /**
-   * 节点资源的规格。
+   * <p>节点资源的规格。</p>
    */
   ResourceSpec?: NewResourceSpec
   /**
-   * 开启COS访问需要设置的参数。
+   * <p>开启COS访问需要设置的参数。</p>
    */
   COSSettings?: COSSettings
   /**
-   * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
+   * <p>实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。</p>
    */
   Placement?: Placement
   /**
-   * 实例所属安全组的ID，形如sg-xxxxxxxx。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的SecurityGroupId字段来获取。
+   * <p>实例所属安全组的ID，形如sg-xxxxxxxx。该参数可以通过调用 <a href="https://cloud.tencent.com/document/api/215/15808">DescribeSecurityGroups</a> 的返回值中的SecurityGroupId字段来获取。</p>
    */
   SgId?: string
   /**
-   * [引导操作](https://cloud.tencent.com/document/product/589/35656)脚本设置。
+   * <p><a href="https://cloud.tencent.com/document/product/589/35656">引导操作</a>脚本设置。</p>
    */
   PreExecutedFileSettings?: Array<PreExecuteFileSettings>
   /**
-   * 包年包月实例是否自动续费。取值范围：
-<li>0：表示不自动续费。</li>
-<li>1：表示自动续费。</li>
+   * <p>包年包月实例是否自动续费。取值范围：</p><li>0：表示不自动续费。</li><li>1：表示自动续费。</li>
    */
   AutoRenew?: number
   /**
-   * 唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-****-****-****-fae36063280
+   * <p>唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-<strong><strong>-</strong></strong>-****-fae36063280</p>
    */
   ClientToken?: string
   /**
-   * 是否开启集群Master节点公网。取值范围：
-<li>NEED_MASTER_WAN：表示开启集群Master节点公网。</li>
-<li>NOT_NEED_MASTER_WAN：表示不开启。</li>默认开启集群Master节点公网。
+   * <p>是否开启集群Master节点公网。取值范围：</p><li>NEED_MASTER_WAN：表示开启集群Master节点公网。</li><li>NOT_NEED_MASTER_WAN：表示不开启。</li>默认开启集群Master节点公网。
    */
   NeedMasterWan?: string
   /**
-   * 是否需要开启外网远程登录，即22号端口。在SgId不为空时，该参数无效。
+   * <p>是否需要开启外网远程登录，即22号端口。在SgId不为空时，该参数无效。</p>
    */
   RemoteLoginAtCreate?: number
   /**
-   * 是否开启安全集群。0表示不开启，非0表示开启。
+   * <p>是否开启安全集群。0表示不开启，非0表示开启。</p>
    */
   CheckSecurity?: number
   /**
-   * 访问外部文件系统。
+   * <p>访问外部文件系统。</p>
    */
   ExtendFsField?: string
   /**
-   * 标签描述列表。通过指定该参数可以同时绑定标签到相应的实例。
+   * <p>标签描述列表。通过指定该参数可以同时绑定标签到相应的实例。</p>
    */
   Tags?: Array<Tag>
   /**
-   * 分散置放群组ID列表，当前只支持指定一个。
-该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/product/213/15486 ) 的返回值中的SecurityGroupId字段来获取。
+   * <p>分散置放群组ID列表，当前只支持指定一个。<br>该参数可以通过调用 <a href="https://cloud.tencent.com/document/product/213/15486">DescribeSecurityGroups</a> 的返回值中的SecurityGroupId字段来获取。</p>
    */
   DisasterRecoverGroupIds?: Array<string>
   /**
-   * 集群维度CBS加密盘，默认0表示不加密，1表示加密
+   * <p>集群维度CBS加密盘，默认0表示不加密，1表示加密</p>
    */
   CbsEncrypt?: number
   /**
-   * hive共享元数据库类型。取值范围：
-<li>EMR_DEFAULT_META：表示集群默认创建</li>
-<li>EMR_EXIST_META：表示集群使用指定EMR-MetaDB。</li>
-<li>USER_CUSTOM_META：表示集群使用自定义MetaDB。</li>
+   * <p>hive共享元数据库类型。取值范围：</p><li>EMR_DEFAULT_META：表示集群默认创建</li><li>EMR_EXIST_META：表示集群使用指定EMR-MetaDB。</li><li>USER_CUSTOM_META：表示集群使用自定义MetaDB。</li>
    */
   MetaType?: string
   /**
-   * EMR-MetaDB实例
+   * <p>EMR-MetaDB实例</p>
    */
   UnifyMetaInstanceId?: string
   /**
-   * 自定义MetaDB信息
+   * <p>自定义MetaDB信息</p>
    */
   MetaDBInfo?: CustomMetaInfo
   /**
-   * 自定义应用角色。
+   * <p>自定义应用角色。</p>
    */
   ApplicationRole?: string
   /**
-   * 场景化取值：
-Hadoop-Kudu
-Hadoop-Zookeeper
-Hadoop-Presto
-Hadoop-Hbase
+   * <p>场景化取值：<br>Hadoop-Kudu<br>Hadoop-Zookeeper<br>Hadoop-Presto<br>Hadoop-Hbase</p>
    */
   SceneName?: string
   /**
-   * 共享组件信息
+   * <p>共享组件信息</p>
    */
   ExternalService?: Array<ExternalService>
   /**
-   * 如果为0，则MultiZone、MultiDeployStrategy、MultiZoneSettings是disable的状态，如果为1，则废弃ResourceSpec，使用MultiZoneSettings。
+   * <p>如果为0，则MultiZone、MultiDeployStrategy、MultiZoneSettings是disable的状态，如果为1，则废弃ResourceSpec，使用MultiZoneSettings。</p>
    */
   VersionID?: number
   /**
-   * true表示开启跨AZ部署；仅为新建集群时的用户参数，后续不支持调整。
+   * <p>true表示开启跨AZ部署；仅为新建集群时的用户参数，后续不支持调整。</p>
    */
   MultiZone?: boolean
   /**
-   * 节点资源的规格，有几个可用区，就填几个，按顺序第一个为主可用区，第二个为备可用区，第三个为仲裁可用区。如果没有开启跨AZ，则长度为1即可。
+   * <p>节点资源的规格，有几个可用区，就填几个，按顺序第一个为主可用区，第二个为备可用区，第三个为仲裁可用区。如果没有开启跨AZ，则长度为1即可。</p>
    */
   MultiZoneSettings?: Array<MultiZoneSetting>
   /**
-   * cos桶路径，创建StarRocks存算分离集群时用到
+   * <p>cos桶路径，创建StarRocks存算分离集群时用到</p>
    */
   CosBucket?: string
   /**
-   * 节点标识信息，目前只提供给tf平台使用
+   * <p>节点标识信息，目前只提供给tf平台使用</p>
    */
   NodeMarks?: Array<NodeMark>
   /**
-   * CLB id
+   * <p>CLB id</p>
    */
   LoadBalancerId?: string
   /**
-   * 数据库类型：mysql8/tdsql8
+   * <p>数据库类型：mysql8/tdsql8</p>
    */
   DefaultMetaVersion?: string
   /**
-   * 是否开通审计：0:不开通,1:开通
+   * <p>是否开通审计：0:不开通,1:开通</p>
    */
   NeedCdbAudit?: number
   /**
-   * 安全组指定来源ip
+   * <p>安全组指定来源ip</p>
    */
   SgIP?: string
+  /**
+   * <p>分区置放群组分区</p>
+   */
+  PartitionNumber?: number
 }
 
 /**
@@ -5726,28 +5660,28 @@ export interface DescribeSparkApplicationsResponse {
  */
 export interface ScaleOutInstanceResponse {
   /**
-   * 实例ID。
+   * <p>实例ID。</p>
    */
   InstanceId?: string
   /**
-   * 订单号。
+   * <p>订单号。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DealNames?: Array<string>
   /**
-   * 客户端Token。
+   * <p>客户端Token。</p>
    */
   ClientToken?: string
   /**
-   * 扩容流程ID。
+   * <p>扩容流程ID。</p>
    */
   FlowId?: number
   /**
-   * 大订单号。
+   * <p>大订单号。</p>
    */
   BillId?: string
   /**
-   * 扩容TraceId
+   * <p>扩容TraceId</p>
    */
   TraceId?: string
   /**
@@ -5885,7 +5819,7 @@ export interface ImpalaQuery {
  */
 export interface CreateInstanceResponse {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
@@ -7838,94 +7772,63 @@ export interface DescribeStarRocksQueryInfoRequest {
  */
 export interface Resource {
   /**
-   * 节点规格描述，如CVM.SA2。
+   * <p>节点规格描述，如CVM.SA2。</p>
    */
   Spec: string
   /**
-   * 取值范围:
-"LOCAL_SSD"   3     //本地SSD 
-"CLOUD_SSD"   4     //云SSD 
-"CLOUD_PREMIUM"  5  //高效云盘
-"CLOUD_HSSD"   6    //增强型SSD云硬盘 
-"CLOUD_THROUGHPUT" 11//吞吐型云硬盘 
-"CLOUD_TSSD"  12     //极速型SSD云硬盘 
-"CLOUD_BSSD"    13   //通用型SSD云硬盘 
-"CLOUD_BIGDATA" 14   //大数据型云硬盘
-"CLOUD_HIGHIO"  15   //高IO型云硬盘 
-
-该类型字段为无效字段，实际系统盘类型会根据数据盘类型和节点类型判断，如果节点支持所选的数据盘类型，系统盘类型会跟数据盘保持一致，建议使用CreateCluster接口
+   * <p>取值范围:<br>&quot;LOCAL_SSD&quot;   3     //本地SSD<br>&quot;CLOUD_SSD&quot;   4     //云SSD<br>&quot;CLOUD_PREMIUM&quot;  5  //高效云盘<br>&quot;CLOUD_HSSD&quot;   6    //增强型SSD云硬盘<br>&quot;CLOUD_THROUGHPUT&quot; 11//吞吐型云硬盘<br>&quot;CLOUD_TSSD&quot;  12     //极速型SSD云硬盘<br>&quot;CLOUD_BSSD&quot;    13   //通用型SSD云硬盘<br>&quot;CLOUD_BIGDATA&quot; 14   //大数据型云硬盘<br>&quot;CLOUD_HIGHIO&quot;  15   //高IO型云硬盘 </p><p>该类型字段为无效字段，实际系统盘类型会根据数据盘类型和节点类型判断，如果节点支持所选的数据盘类型，系统盘类型会跟数据盘保持一致，建议使用CreateCluster接口</p>
    */
   StorageType: number
   /**
-   * 数据盘类型 取值范围：
-
-CLOUD_SSD：表示云SSD。
-
-CLOUD_PREMIUM：表示高效云盘。
-
-CLOUD_BASIC：表示云硬盘。
-
-LOCAL_BASIC：表示本地盘。
-
-LOCAL_SSD：表示本地SSD。
-
-CLOUD_HSSD：表示增强型SSD云硬盘。
-
-CLOUD_THROUGHPUT：表示吞吐型云硬盘。
-
-CLOUD_TSSD：表示极速型SSD云硬盘。
-
-CLOUD_BIGDATA：表示大数据型云硬盘。
-
-CLOUD_HIGHIO：表示高IO型云硬盘。
-
-CLOUD_BSSD：表示通用型SSD云硬盘。
-
-REMOTE_SSD：表示远端SSD盘。
+   * <p>数据盘类型 取值范围：</p><p>CLOUD_SSD：表示云SSD。</p><p>CLOUD_PREMIUM：表示高效云盘。</p><p>CLOUD_BASIC：表示云硬盘。</p><p>LOCAL_BASIC：表示本地盘。</p><p>LOCAL_SSD：表示本地SSD。</p><p>CLOUD_HSSD：表示增强型SSD云硬盘。</p><p>CLOUD_THROUGHPUT：表示吞吐型云硬盘。</p><p>CLOUD_TSSD：表示极速型SSD云硬盘。</p><p>CLOUD_BIGDATA：表示大数据型云硬盘。</p><p>CLOUD_HIGHIO：表示高IO型云硬盘。</p><p>CLOUD_BSSD：表示通用型SSD云硬盘。</p><p>REMOTE_SSD：表示远端SSD盘。</p>
    */
   DiskType: string
   /**
-   * 内存容量,单位为M
+   * <p>内存容量,单位为M</p>
    */
   MemSize: number
   /**
-   * CPU核数
+   * <p>CPU核数</p>
    */
   Cpu: number
   /**
-   * 数据盘容量
+   * <p>数据盘容量</p>
    */
   DiskSize: number
   /**
-   * 系统盘容量
+   * <p>系统盘容量</p>
    */
   RootSize?: number
   /**
-   * 云盘列表，当数据盘为一块云盘时，直接使用DiskType和DiskSize参数，超出部分使用MultiDisks
+   * <p>云盘列表，当数据盘为一块云盘时，直接使用DiskType和DiskSize参数，超出部分使用MultiDisks</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MultiDisks?: Array<MultiDisk>
   /**
-   * 需要绑定的标签列表
+   * <p>需要绑定的标签列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
-   * 规格类型，如S2.MEDIUM8
+   * <p>规格类型，如S2.MEDIUM8</p>
    */
   InstanceType?: string
   /**
-   * 本地盘数量，该字段已废弃
+   * <p>本地盘数量，该字段已废弃</p>
    */
   LocalDiskNum?: number
   /**
-   * 本地盘数量，如2
+   * <p>本地盘数量，如2</p>
    */
   DiskNum?: number
   /**
-   * GPU信息
+   * <p>GPU信息</p>
    */
   GpuDesc?: string
+  /**
+   * <p>分区置放群组分区数</p>
+   */
+  PartitionNumber?: number
 }
 
 /**
@@ -8132,28 +8035,28 @@ export interface ResizeDataDisksRequest {
  */
 export interface ScaleOutClusterResponse {
   /**
-   * 实例ID。
+   * <p>实例ID。</p>
    */
   InstanceId?: string
   /**
-   * 客户端Token。
+   * <p>客户端Token。</p>
    */
   ClientToken?: string
   /**
-   * 扩容流程ID。
+   * <p>扩容流程ID。</p>
    */
   FlowId?: number
   /**
-   * 查询流程状态，流程额外信息
+   * <p>查询流程状态，流程额外信息</p>
    */
   TraceId?: string
   /**
-   * 订单号。
+   * <p>订单号。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DealNames?: Array<string>
   /**
-   * 大订单号。
+   * <p>大订单号。</p>
    */
   BillId?: string
   /**
@@ -10069,128 +9972,113 @@ export interface ModifySLInstanceRequest {
  */
 export interface CreateClusterRequest {
   /**
-   * EMR产品版本名称如EMR-V2.3.0 表示2.3.0版本的EMR， 当前支持产品版本名称查询：[产品版本名称](https://cloud.tencent.com/document/product/589/66338)
+   * <p>EMR产品版本名称如EMR-V2.3.0 表示2.3.0版本的EMR， 当前支持产品版本名称查询：<a href="https://cloud.tencent.com/document/product/589/66338">产品版本名称</a></p>
    */
   ProductVersion: string
   /**
-   * 是否开启节点高可用。取值范围：
-<li>true：表示开启节点高可用。</li>
-<li>false：表示不开启节点高可用。</li>
+   * <p>是否开启节点高可用。取值范围：</p><li>true：表示开启节点高可用。</li><li>false：表示不开启节点高可用。</li>
    */
   EnableSupportHAFlag: boolean
   /**
-   * 实例名称。
-<li>长度限制为6-36个字符。</li>
-<li>只允许包含中文、字母、数字、-、_。</li>
+   * <p>实例名称。</p><li>长度限制为6-36个字符。</li><li>只允许包含中文、字母、数字、-、_。</li>
    */
   InstanceName: string
   /**
-   * 实例计费模式。取值范围：
-<li>PREPAID：预付费，即包年包月。</li>
-<li>POSTPAID_BY_HOUR：按小时后付费。</li>
+   * <p>实例计费模式。取值范围：</p><li>PREPAID：预付费，即包年包月。</li><li>POSTPAID_BY_HOUR：按小时后付费。</li>
    */
   InstanceChargeType: string
   /**
-   * 实例登录设置。通过该参数可以设置所购买节点的登录方式密码或者密钥。
-<li>设置密钥时，密码仅用于组件原生WebUI快捷入口登录。</li>
-<li>未设置密钥时，密码用于登录所购节点以及组件原生WebUI快捷入口登录。</li>
+   * <p>实例登录设置。通过该参数可以设置所购买节点的登录方式密码或者密钥。</p><li>设置密钥时，密码仅用于组件原生WebUI快捷入口登录。</li><li>未设置密钥时，密码用于登录所购节点以及组件原生WebUI快捷入口登录。</li>
    */
   LoginSettings: LoginSettings
   /**
-   * 集群应用场景以及支持部署组件配置
+   * <p>集群应用场景以及支持部署组件配置</p>
    */
   SceneSoftwareConfig: SceneSoftwareConfig
   /**
-   * 即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+   * <p>即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。</p>
    */
   InstanceChargePrepaid?: InstanceChargePrepaid
   /**
-   * 实例所属安全组的ID，形如sg-xxxxxxxx。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的SecurityGroupId字段来获取。
+   * <p>实例所属安全组的ID，形如sg-xxxxxxxx。该参数可以通过调用 <a href="https://cloud.tencent.com/document/api/215/15808">DescribeSecurityGroups</a> 的返回值中的SecurityGroupId字段来获取。</p>
    */
   SecurityGroupIds?: Array<string>
   /**
-   * [引导操作](https://cloud.tencent.com/document/product/589/35656)脚本设置。
+   * <p><a href="https://cloud.tencent.com/document/product/589/35656">引导操作</a>脚本设置。</p>
    */
   ScriptBootstrapActionConfig?: Array<ScriptBootstrapActionConfig>
   /**
-   * 唯一随机标识，时效性为5分钟，需要调用者指定 防止客户端重复创建资源，例如 a9a90aa6-****-****-****-fae360632808
+   * <p>唯一随机标识，时效性为5分钟，需要调用者指定 防止客户端重复创建资源，例如 a9a90aa6-<strong><strong>-</strong></strong>-****-fae360632808</p>
    */
   ClientToken?: string
   /**
-   * 是否开启集群Master节点公网。取值范围：
-<li>NEED_MASTER_WAN：表示开启集群Master节点公网。</li>
-<li>NOT_NEED_MASTER_WAN：表示不开启。</li>默认开启集群Master节点公网。
+   * <p>是否开启集群Master节点公网。取值范围：</p><li>NEED_MASTER_WAN：表示开启集群Master节点公网。</li><li>NOT_NEED_MASTER_WAN：表示不开启。</li>默认开启集群Master节点公网。
    */
   NeedMasterWan?: string
   /**
-   * 是否开启外网远程登录。（在SecurityGroupId不为空时，该参数无效）不填默认为不开启 取值范围：
-<li>true：表示开启</li>
-<li>false：表示不开启</li>
+   * <p>是否开启外网远程登录。（在SecurityGroupId不为空时，该参数无效）不填默认为不开启 取值范围：</p><li>true：表示开启</li><li>false：表示不开启</li>
    */
   EnableRemoteLoginFlag?: boolean
   /**
-   * 是否开启Kerberos认证。默认不开启 取值范围：
-<li>true：表示开启</li>
-<li>false：表示不开启</li>
+   * <p>是否开启Kerberos认证。默认不开启 取值范围：</p><li>true：表示开启</li><li>false：表示不开启</li>
    */
   EnableKerberosFlag?: boolean
   /**
-   * [自定义软件配置](https://cloud.tencent.com/document/product/589/35655?from_cn_redirect=1)
+   * <p><a href="https://cloud.tencent.com/document/product/589/35655?from_cn_redirect=1">自定义软件配置</a></p>
    */
   CustomConf?: string
   /**
-   * 标签描述列表。通过指定该参数可以同时绑定标签到相应的实例。
+   * <p>标签描述列表。通过指定该参数可以同时绑定标签到相应的实例。</p>
    */
   Tags?: Array<Tag>
   /**
-   * 分散置放群组ID列表，当前只支持指定一个。
-该参数可以通过调用 [DescribeDisasterRecoverGroups](https://cloud.tencent.com/document/product/213/17810)的返回值中的DisasterRecoverGroupId字段来获取。
+   * <p>分散置放群组ID列表，当前只支持指定一个。<br>该参数可以通过调用 <a href="https://cloud.tencent.com/document/product/213/17810">DescribeDisasterRecoverGroups</a>的返回值中的DisasterRecoverGroupId字段来获取。</p>
    */
   DisasterRecoverGroupIds?: Array<string>
   /**
-   * 是否开启集群维度CBS加密。默认不加密 取值范围：
-<li>true：表示加密</li>
-<li>false：表示不加密</li>
+   * <p>是否开启集群维度CBS加密。默认不加密 取值范围：</p><li>true：表示加密</li><li>false：表示不加密</li>
    */
   EnableCbsEncryptFlag?: boolean
   /**
-   * MetaDB信息，当MetaType选择EMR_NEW_META时，MetaDataJdbcUrl MetaDataUser MetaDataPass UnifyMetaInstanceId不用填
-当MetaType选择EMR_EXIT_META时，填写UnifyMetaInstanceId
-当MetaType选择USER_CUSTOM_META时，填写MetaDataJdbcUrl MetaDataUser MetaDataPass
+   * <p>MetaDB信息，当MetaType选择EMR_NEW_META时，MetaDataJdbcUrl MetaDataUser MetaDataPass UnifyMetaInstanceId不用填<br>当MetaType选择EMR_EXIT_META时，填写UnifyMetaInstanceId<br>当MetaType选择USER_CUSTOM_META时，填写MetaDataJdbcUrl MetaDataUser MetaDataPass</p>
    */
   MetaDBInfo?: CustomMetaDBInfo
   /**
-   * 共享组件信息
+   * <p>共享组件信息</p>
    */
   DependService?: Array<DependService>
   /**
-   * 节点资源的规格，有几个可用区，就填几个，按顺序第一个为主可用区，第二个为备可用区，第三个为仲裁可用区。如果没有开启跨AZ，则长度为1即可。
+   * <p>节点资源的规格，有几个可用区，就填几个，按顺序第一个为主可用区，第二个为备可用区，第三个为仲裁可用区。如果没有开启跨AZ，则长度为1即可。</p>
    */
   ZoneResourceConfiguration?: Array<ZoneResourceConfiguration>
   /**
-   * cos桶路径，创建StarRocks存算分离集群时用到
+   * <p>cos桶路径，创建StarRocks存算分离集群时用到</p>
    */
   CosBucket?: string
   /**
-   * 节点标识信息，目前只提供给tf平台使用
+   * <p>节点标识信息，目前只提供给tf平台使用</p>
    */
   NodeMarks?: Array<NodeMark>
   /**
-   * clb id
+   * <p>clb id</p>
    */
   LoadBalancerId?: string
   /**
-   * 数据库版本：mysql8/tdsql8/mysql5
+   * <p>数据库版本：mysql8/tdsql8/mysql5</p>
    */
   DefaultMetaVersion?: string
   /**
-   * 是否开通数据库审计
+   * <p>是否开通数据库审计</p>
    */
   NeedCdbAudit?: number
   /**
-   * 安全指定来源ip
+   * <p>安全指定来源ip</p>
    */
   SgIP?: string
+  /**
+   * <p>分区置放群组分区</p>
+   */
+  PartitionNumber?: number
 }
 
 /**

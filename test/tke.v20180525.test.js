@@ -698,6 +698,16 @@ it("tke.v20180525.DescribeTKEEdgeScript", async function () {
     }
 })
 
+it("tke.v20180525.DescribeClusterSchedulerPolicy", async function () {
+    try {
+       const data = await client.DescribeClusterSchedulerPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20180525.ModifyPrometheusAlertPolicy", async function () {
     try {
        const data = await client.ModifyPrometheusAlertPolicy({})
@@ -1788,9 +1798,9 @@ it("tke.v20180525.DescribeBackupStorageLocations", async function () {
     }
 })
 
-it("tke.v20180525.ModifyPrometheusTemp", async function () {
+it("tke.v20180525.ModifyClusterSchedulerPolicy", async function () {
     try {
-       const data = await client.ModifyPrometheusTemp({})
+       const data = await client.ModifyClusterSchedulerPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2111,6 +2121,16 @@ it("tke.v20180525.CheckInstancesUpgradeAble", async function () {
 it("tke.v20180525.DescribeTasks", async function () {
     try {
        const data = await client.DescribeTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.ModifyPrometheusTemp", async function () {
+    try {
+       const data = await client.ModifyPrometheusTemp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

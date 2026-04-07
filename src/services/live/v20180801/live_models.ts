@@ -8503,40 +8503,39 @@ export interface DescribeLivePackageInfoResponse {
  */
 export interface AvatarScriptInfo {
   /**
-   * 数字人直播间话术 ID。
+   * <p>数字人直播间话术 ID。</p>
    */
   ScriptId?: string
   /**
-   * 话术标题。
+   * <p>数字人直播间产品 ID。</p>
+   */
+  ProductId?: string
+  /**
+   * <p>话术标题。</p>
    */
   Title?: string
   /**
-   * 话术内容。
+   * <p>话术内容。</p>
    */
   Content?: string
   /**
-   * 话术状态。
-PENDING --未生成。
-PROCESSING --生成中。
-READY --已生成。
+   * <p>话术状态。PENDING --未生成。PROCESSING --生成中。READY --已生成。FAILED-失败</p><p>枚举值：</p><ul><li>FAILED： 失败</li></ul>
    */
   Status?: string
   /**
-   * 时长。单位：毫秒。
+   * <p>时长。单位：毫秒。</p>
    */
   Duration?: number
   /**
-   * 话术位置。
+   * <p>话术位置。</p>
    */
   Position?: number
   /**
-   * 话术创建时间，UTC时间。
-注意：UTC时间和北京时间相差八小时。
+   * <p>话术创建时间，UTC时间。<br>注意：UTC时间和北京时间相差八小时。</p>
    */
   CreateTime?: string
   /**
-   * 话术最后更新时间，UTC时间。
-注意：UTC时间和北京时间相差八小时。
+   * <p>话术最后更新时间，UTC时间。<br>注意：UTC时间和北京时间相差八小时。</p>
    */
   UpdateTime?: string
 }

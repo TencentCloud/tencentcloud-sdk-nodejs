@@ -877,6 +877,20 @@ export interface RouteTableInfo {
 }
 
 /**
+ * 调度策略权重
+ */
+export interface SchedulerPolicyPriority {
+  /**
+   * 打分函数名称
+   */
+  Name?: string
+  /**
+   * 权重
+   */
+  Weight?: number
+}
+
+/**
  * EnableClusterDeletionProtection返回参数结构体
  */
 export interface EnableClusterDeletionProtectionResponse {
@@ -3927,6 +3941,37 @@ export interface NodeCountSummary {
 }
 
 /**
+ * DescribeClusterSchedulerPolicy返回参数结构体
+ */
+export interface DescribeClusterSchedulerPolicyResponse {
+  /**
+   * <p>调度策略json字符串</p>
+   */
+  Policy?: string
+  /**
+   * <p>SchedulerPolicy配置信息</p>
+   */
+  SchedulerPolicyConfig?: Array<SchedulerPolicyConfig>
+  /**
+   * <p>客户端连接</p>
+   */
+  ClientConnection?: ClientConnection
+  /**
+   * <p>扩展调度器</p>
+   */
+  Extenders?: Array<Extenders>
+  /**
+   * <p>高性能模式</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HighPerformance?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 边缘计算集群信息
  */
 export interface EdgeCluster {
@@ -4345,6 +4390,16 @@ export interface ClusterCondition {
    * 转换到该过程的更多信息
    */
   Message?: string
+}
+
+/**
+ * 扩展调度器(Extender)管理的扩展资源
+ */
+export interface ExtenderManagedResource {
+  /**
+   * 自定义资源的名称
+   */
+  Name?: string
 }
 
 /**
@@ -5238,6 +5293,28 @@ export interface CreateClusterMaintenanceWindowAndExclusionsRequest {
 }
 
 /**
+ * DescribePrometheusTemp请求参数结构体
+ */
+export interface DescribePrometheusTempRequest {
+  /**
+   * 模糊过滤条件，支持
+Level 按模板级别过滤
+Name 按名称过滤
+Describe 按描述过滤
+ID 按templateId过滤
+   */
+  Filters?: Array<Filter>
+  /**
+   * 分页偏移
+   */
+  Offset?: number
+  /**
+   * 总数限制
+   */
+  Limit?: number
+}
+
+/**
  * DeleteBackupStorageLocation请求参数结构体
  */
 export interface DeleteBackupStorageLocationRequest {
@@ -5525,6 +5602,22 @@ export interface DescribePrometheusGlobalConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 调度器plugin配置参数
+ */
+export interface SchedulerPluginConfigs {
+  /**
+   * 配置的插件的名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 初始化时传递给插件的参数，对{"apiVersion":"kubescheduler.config.k8s.io/v1beta3","kind":"NodeResourcesFitArgs","scoringStrategy":{"type":"LeastAllocated"}}base64后的结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Args?: string
 }
 
 /**
@@ -6082,6 +6175,32 @@ export interface DisableControlPlaneLogsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 调度器访问自定义 Extender 服务 URL 的设置
+ */
+export interface ServiceReference {
+  /**
+   * 命名空间
+   */
+  Namespace: string
+  /**
+   * 服务名称
+   */
+  Name: string
+  /**
+   * 服务端口
+   */
+  Port?: number
+  /**
+   * 服务路径
+   */
+  Path?: string
+  /**
+   * 服务协议
+   */
+  Scheme?: string
 }
 
 /**
@@ -7268,6 +7387,16 @@ export interface InstanceUpgradePreCheckResultItem {
 }
 
 /**
+ * DescribeClusterSchedulerPolicy请求参数结构体
+ */
+export interface DescribeClusterSchedulerPolicyRequest {
+  /**
+   * <p>集群ID</p>
+   */
+  ClusterId: string
+}
+
+/**
  * ModifyRollOutSequence请求参数结构体
  */
 export interface ModifyRollOutSequenceRequest {
@@ -8334,6 +8463,32 @@ abort 取消并回退任务
 }
 
 /**
+ * ModifyClusterSchedulerPolicy请求参数结构体
+ */
+export interface ModifyClusterSchedulerPolicyRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * SchedulerPolicy配置信息
+   */
+  SchedulerPolicyConfig?: Array<SchedulerPolicyConfig>
+  /**
+   * 客户端连接
+   */
+  ClientConnection?: ClientConnection
+  /**
+   * 扩展调度器
+   */
+  Extenders?: Array<Extenders>
+  /**
+   * 高性能模式
+   */
+  HighPerformance?: boolean
+}
+
+/**
  * UninstallClusterRelease请求参数结构体
  */
 export interface UninstallClusterReleaseRequest {
@@ -9287,17 +9442,17 @@ export interface DescribeClusterLevelAttributeRequest {
 }
 
 /**
- * DescribeClusterMaintenanceWindowAndExclusions返回参数结构体
+ * DescribePrometheusAgents返回参数结构体
  */
-export interface DescribeClusterMaintenanceWindowAndExclusionsResponse {
+export interface DescribePrometheusAgentsResponse {
   /**
-   * 维护时间窗口和排除项
+   * 被关联集群信息
    */
-  MaintenanceWindowAndExclusions?: Array<MaintenanceWindowAndExclusion>
+  Agents?: Array<PrometheusAgentOverview>
   /**
-   * 总条目数
+   * 被关联集群总量
    */
-  TotalCount?: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10316,6 +10471,16 @@ export interface CreatePrometheusAlertPolicyRequest {
    * 告警配置
    */
   AlertRule: PrometheusAlertPolicyItem
+}
+
+/**
+ * 扩展调度器(Extenders)客户端配置
+ */
+export interface ExtenderClientConfig {
+  /**
+   * 访问extender服务url设置
+   */
+  Service?: ServiceReference
 }
 
 /**
@@ -11656,6 +11821,26 @@ export interface EnableControlPlaneLogsResponse {
 }
 
 /**
+ * SchedulerPolicy配置信息
+ */
+export interface SchedulerPolicyConfig {
+  /**
+   * 调度器名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchedulerName?: string
+  /**
+   * 调度器plugin配置参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PluginConfigs?: Array<SchedulerPluginConfigs>
+  /**
+   * 插件配置
+   */
+  PluginSet?: PluginSet
+}
+
+/**
  * CreateClusterVirtualNodePool返回参数结构体
  */
 export interface CreateClusterVirtualNodePoolResponse {
@@ -12589,6 +12774,32 @@ export interface DeletePrometheusAlertRuleRequest {
 }
 
 /**
+ * 扩展调度器(Extenders)
+ */
+export interface Extenders {
+  /**
+   * 过滤阶段接口
+   */
+  FilterVerb?: string
+  /**
+   * 打分阶段扩展接口
+   */
+  PrioritizeVerb?: string
+  /**
+   * 打分阶段节点分数的权重,取值范围限定(0,2】
+   */
+  Weight?: number
+  /**
+   * 扩展调度器(Extender)管理的扩展资源
+   */
+  ManagedResources?: Array<ExtenderManagedResource>
+  /**
+   * extender客户端配置
+   */
+  ExtenderClientConfig?: ExtenderClientConfig
+}
+
+/**
  * NodePool的运行时配置
  */
 export interface NodePoolRuntime {
@@ -12971,6 +13182,20 @@ export interface DescribeClusterKubeconfigRequest {
    * 默认false 获取内网，是否获取外网访问的kubeconfig
    */
   IsExtranet?: boolean
+}
+
+/**
+ * 管理调度插件(plugins)的启用和禁用
+ */
+export interface PluginSet {
+  /**
+   * 指定需要额外启用的插件列表
+   */
+  Enabled?: Array<SchedulerPolicyPriority>
+  /**
+   * 指定需要禁用的默认插件列表
+   */
+  Disabled?: Array<SchedulerPolicyPriority>
 }
 
 /**
@@ -13770,25 +13995,17 @@ export interface EnableControlPlaneLogsRequest {
 export type DescribeVersionsRequest = null
 
 /**
- * DescribePrometheusTemp请求参数结构体
+ * 调度器客户端连接配置参数
  */
-export interface DescribePrometheusTempRequest {
+export interface ClientConnection {
   /**
-   * 模糊过滤条件，支持
-Level 按模板级别过滤
-Name 按名称过滤
-Describe 按描述过滤
-ID 按templateId过滤
+   * 客户端与服务器连接时每秒允许的最大查询数
    */
-  Filters?: Array<Filter>
+  QPS?: number
   /**
-   * 分页偏移
+   * 客户端在短时间内超过QPS限制的突发请求数量
    */
-  Offset?: number
-  /**
-   * 总数限制
-   */
-  Limit?: number
+  Burst?: number
 }
 
 /**
@@ -14695,17 +14912,17 @@ AllAbnormal
 }
 
 /**
- * DescribePrometheusAgents返回参数结构体
+ * DescribeClusterMaintenanceWindowAndExclusions返回参数结构体
  */
-export interface DescribePrometheusAgentsResponse {
+export interface DescribeClusterMaintenanceWindowAndExclusionsResponse {
   /**
-   * 被关联集群信息
+   * 维护时间窗口和排除项
    */
-  Agents?: Array<PrometheusAgentOverview>
+  MaintenanceWindowAndExclusions?: Array<MaintenanceWindowAndExclusion>
   /**
-   * 被关联集群总量
+   * 总条目数
    */
-  Total?: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15503,6 +15720,16 @@ running = 运行中
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BoundNormal?: number
+}
+
+/**
+ * ModifyClusterSchedulerPolicy返回参数结构体
+ */
+export interface ModifyClusterSchedulerPolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -3219,6 +3219,18 @@ export interface ModifyOwnNumberApplyRequest {
    * 同市固话去掉区号
    */
   LocalNumberTrimAC?: boolean
+  /**
+   * 被叫格式透传 （完成透传用户输入，不做处理）
+   */
+  CalleeFormatPassthrough?: boolean
+  /**
+   * 主叫格式透传 （完成透传用户输入，不做处理）
+   */
+  CallerFormatPassthrough?: boolean
+  /**
+   * 国际长途前缀码
+   */
+  InternationalNumberPrefix?: string
 }
 
 /**
@@ -5825,6 +5837,18 @@ export interface CreateOwnNumberApplyRequest {
    * 同市固话去掉区号
    */
   LocalNumberTrimAC?: boolean
+  /**
+   * 被叫格式透传 （完成透传用户输入，不做处理）
+   */
+  CalleeFormatPassthrough?: boolean
+  /**
+   * 主叫格式透传 （完成透传用户输入，不做处理）
+   */
+  CallerFormatPassthrough?: boolean
+  /**
+   * 国际长途前缀码
+   */
+  InternationalNumberPrefix?: string
 }
 
 /**

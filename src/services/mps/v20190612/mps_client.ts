@@ -24,6 +24,7 @@ import {
   ContainerDiagnoseResultItem,
   UnattachSecurityGroupInOutInfo,
   ModifyWatermarkTemplateRequest,
+  CreateStreamPackageSSAIChannelRequest,
   DescribeInputRTPSettings,
   AiRecognitionTaskAsrFullTextSegmentItem,
   DeleteStreamLinkFlowRequest,
@@ -31,9 +32,11 @@ import {
   ExtractBlindWatermarkRequest,
   AiAnalysisTaskVideoComprehensionResult,
   DeleteStreamLinkSecurityGroupResponse,
+  DeleteStreamPackageLinearAssemblyProgramsByChannelRequest,
+  Metadata,
   AiAnalysisTaskClassificationInput,
   SvgWatermarkInput,
-  FlowStatisticsArray,
+  AliasValueConf,
   CreateTranscodeTemplateRequest,
   ProcessLiveStreamResponse,
   LiveStreamAiQualityControlResultInfo,
@@ -41,11 +44,13 @@ import {
   MediaAiAnalysisHighlightItem,
   DeleteLiveRecordTemplateRequest,
   DescribeAnimatedGraphicsTemplatesRequest,
-  ExtractBlindWatermarkTask,
+  DescribeStreamLinkSecurityGroupsResponse,
   AiReviewTaskProhibitedAsrResult,
   AdaptiveDynamicStreamingTemplate,
+  MediaProcessTaskImageSpriteResult,
   AiAnalysisTaskReelOutput,
   MediaAiAnalysisDescriptionItem,
+  SegmentSpecificInfo,
   DeleteAnimatedGraphicsTemplateResponse,
   AiReviewTaskProhibitedOcrResult,
   DescribeSubtitleEmbedTemplatesRequest,
@@ -55,20 +60,23 @@ import {
   DeleteScheduleResponse,
   DisableScheduleResponse,
   ManageTaskResponse,
+  ModifyStreamPackageSSAIChannelRequest,
   BatchDeleteStreamLinkFlowRequest,
   FlowMediaInfo,
   DeleteWorkflowRequest,
   DescribeRTMPPullSourceAddress,
   DescribeOutputRTMPPullSettings,
   AwsS3FileUploadTrigger,
-  WordResult,
+  AdBreakInfo,
   UserDefineOcrTextReviewTemplateInfoForUpdate,
+  ScheduleAnalysisTaskResult,
   ModifyOutputInfo,
   MediaSnapshotByTimeOffsetItem,
   SmartSubtitleTaskAsrFullTextResult,
   NumberFormat,
   ModifySampleSnapshotTemplateRequest,
   AiReviewPoliticalOcrTaskInput,
+  ModifyStreamPackageSourceLocationResponse,
   SmartSubtitleTaskTransTextResult,
   ManageTaskRequest,
   CreateSmartEraseTemplateRequest,
@@ -83,9 +91,10 @@ import {
   AudioTrackChannelInfo,
   AiAnalysisTaskCutoutOutput,
   DiagnoseResult,
-  SmartEraseTaskInput,
-  RawWatermarkParameter,
+  DescribeStreamPackageLinearAssemblyChannelsRequest,
+  EnableWorkflowRequest,
   AiReviewTaskPoliticalOcrResult,
+  ModifyAIAnalysisTemplateRequest,
   AiSampleWord,
   OverrideTranscodeParameter,
   PoliticalOcrReviewTemplateInfo,
@@ -94,6 +103,7 @@ import {
   MediaSnapshotByTimePicInfoItem,
   DescribeAigcImageTaskRequest,
   AddOnParameter,
+  DeleteStreamPackageSSAIChannelRequest,
   UserDefineFaceReviewTemplateInfo,
   CreateInputHLSPullSettings,
   DeleteStreamLinkSecurityGroupRequest,
@@ -103,19 +113,23 @@ import {
   DeleteAIRecognitionTemplateResponse,
   VideoEnhanceConfig,
   DeleteContentReviewTemplateRequest,
-  SubtitleResult,
+  ActivateStreamPackageResponse,
   StartStreamLinkFlowResponse,
   AiReviewPoliticalTaskInput,
   ModifyContentReviewTemplateResponse,
   ModifyScheduleRequest,
+  DescribeWatermarkTemplatesRequest,
   MediaMetaData,
   CreateOutputRTPSettingsDestinations,
+  DescribeStreamLinkActivateStateRequest,
+  ResetWorkflowResponse,
   SRTFECFullOptions,
   MediaTranscodeItem,
   ClassificationConfigureInfo,
   MediaAiAnalysisClassificationItem,
   ModifyWordSampleResponse,
   AudioTemplateInfoForUpdate,
+  ModifyStreamPackageSourceResponse,
   UpdateSmartEraseWatermarkConfig,
   WorkflowInfo,
   ModifyProcessImageTemplateRequest,
@@ -126,9 +140,13 @@ import {
   ParseLiveStreamProcessNotificationResponse,
   SubtitleShadowConfig,
   DescribeVideoDatabaseEntryTaskDetailRequest,
+  UserDefineAsrTextReviewTemplateInfoForUpdate,
+  CreateStreamPackageLinearAssemblyProgramRequest,
+  SegmentDeliverInfo,
   AiRecognitionTaskInput,
   SmartSubtitleTaskTextResultOutput,
   AiAnalysisTaskFrameTagResult,
+  HLSConfigureInfo,
   AudioTemplateInfo,
   DescribeBatchTaskDetailResponse,
   CoverConfigureInfo,
@@ -136,6 +154,8 @@ import {
   AIRecognitionTemplateItem,
   AiReviewPornAsrTaskInput,
   AiRecognitionTaskFaceResult,
+  StartStreamPackageLinearAssemblyChannelResponse,
+  ModifyStreamPackageLinearAssemblyProgramResponse,
   CreateAdaptiveDynamicStreamingTemplateRequest,
   CreateProcessImageTemplateResponse,
   CreateInputRTMPPullSettings,
@@ -149,13 +169,16 @@ import {
   SubtitleTransResultItem,
   AiReviewTerrorismOcrTaskInput,
   AiRecognitionTaskOcrWordsResultInput,
+  SlateInfo,
   CreateQualityControlTemplateResponse,
   FlowMediaAudio,
   AiAnalysisTaskReelInput,
+  DeleteStreamPackageLinearAssemblyProgramRequest,
   QualityControlResult,
   AiReviewPornTaskInput,
   HdrConfig,
   ScheduleTask,
+  DescribeInputRISTSettings,
   CreateStreamLinkEventRequest,
   DeleteProcessImageTemplateRequest,
   ImageTaskInput,
@@ -165,6 +188,7 @@ import {
   CosInputInfo,
   CreateScheduleResponse,
   TagConfigureInfo,
+  LinearAssemblyProgramInfo,
   AiRecognitionTaskOcrWordsResultOutput,
   ModifyLiveRecordTemplateResponse,
   AiParagraphInfo,
@@ -175,23 +199,26 @@ import {
   AudioBeautifyConfig,
   CreateStreamLinkSecurityGroupRequest,
   DescribeStreamLinkEventResponse,
-  EnableWorkflowRequest,
+  DescribeStreamPackageSourcesResponse,
   CreateStreamLinkFlowResponse,
   AigcImageExtraParam,
   AiAnalysisTaskClassificationOutput,
   SRTAddressDestination,
   DescribeFlowId,
   DescribeSmartSubtitleTemplatesRequest,
-  FlowRealtimeStatusItem,
+  DescribeMDPMPSUserInfoResponse,
+  DeleteStreamPackageLinearAssemblyProgramsRequest,
   DisassociateSecurityGroupResponse,
   AiRecognitionTaskOcrFullTextResultOutput,
   AiAnalysisTaskHighlightResult,
   ComposeTransitionOperation,
   CreateAigcVideoTaskResponse,
+  ModifyAdaptiveDynamicStreamingTemplateResponse,
   UserDefineAsrTextReviewTemplateInfo,
   SubtitleBoardConfig,
   ComposeTrackTime,
   AiSampleFaceInfo,
+  MediaImageSpriteItem,
   CreateInputRTSPPullSettings,
   CreateVideoDatabaseEntryTaskRequest,
   CreateStreamLinkFlowRequest,
@@ -201,17 +228,20 @@ import {
   MediaProcessTaskAdaptiveDynamicStreamingResult,
   OcrWordsConfigureInfoForUpdate,
   WatermarkTemplate,
-  ScheduleExecRuleTaskResult,
+  ModifyStreamLinkOutputInfoRequest,
   OverrideEraseParameter,
   TextWatermarkTemplateInput,
   ModifyAIAnalysisTemplateResponse,
   DescribeWordSamplesResponse,
   DescribeAIRecognitionTemplatesResponse,
   ScratchRepairConfig,
+  FlowStatisticsArray,
   DescribeImageTaskDetailRequest,
   EditMediaResponse,
   PoliticalOcrReviewTemplateInfoForUpdate,
+  WordResult,
   ExtractBlindWatermarkResponse,
+  SSAIConf,
   TEHDConfig,
   CreateOutputRtmpSettingsDestinations,
   AudioDenoiseConfig,
@@ -231,7 +261,7 @@ import {
   MediaProcessTaskInput,
   DisableScheduleRequest,
   AiAnalysisTaskHorizontalToVerticalResult,
-  DescribeInputRISTSettings,
+  ConfigAliasesInfo,
   RTMPPullSourceAddress,
   CosOutputStorage,
   LiveStreamAiSmartSubtitleResultInfo,
@@ -245,62 +275,75 @@ import {
   ImageEraseConfig,
   CreateWordSamplesRequest,
   SmartEraseWatermarkConfig,
+  CreateMediaEvaluationResponse,
   DescribeStreamLinkEventsResponse,
   DescribeSmartEraseTemplatesRequest,
+  StartStreamPackageLinearAssemblyChannelRequest,
   PoliticalAsrReviewTemplateInfoForUpdate,
   DescribeStreamLinkFlowStatisticsRequest,
   AiSampleFaceOperation,
   SvgWatermarkInputForUpdate,
   AiReviewTaskTerrorismOcrResult,
+  DescribeStreamPackageSSAIChannelRequest,
   Rules,
   AiRecognitionTaskOcrWordsResult,
   PornAsrReviewTemplateInfo,
   CreateAigcImageTaskResponse,
   ComposeVideoStream,
   LiveSmartSubtitleResult,
+  ModifyStreamPackageSSAIChannelResponse,
   ProhibitedAsrReviewTemplateInfoForUpdate,
   AiAnalysisTaskCutoutInput,
   ModifyAnimatedGraphicsTemplateResponse,
-  DeleteSmartSubtitleTemplateRequest,
+  ChannelAlertResp,
   DeleteAdaptiveDynamicStreamingTemplateRequest,
   AiRecognitionTaskOcrFullTextSegmentItem,
   EditMediaOutputConfig,
   ModifyPersonSampleResponse,
   ScheduleQualityControlTaskResult,
+  ModifyStreamPackageSourceLocationRequest,
   AiQualityControlTaskInput,
   VideoDBEntryTaskResult,
   PornConfigureInfoForUpdate,
   AiAnalysisTaskSegmentInput,
   AiReviewPornAsrTaskOutput,
   ComposeTransitionItem,
+  DeleteStreamPackageSourceRequest,
   DeleteAIAnalysisTemplateRequest,
-  EditMediaRequest,
+  DescribeMDPMPSUserInfoRequest,
+  SSAIChannelInfo,
   DescribeBlindWatermarkTemplatesRequest,
   PureSubtitleTransResultOutput,
   CreateStreamLinkOutputInfoResponse,
   S3InputInfo,
-  MediaProcessTaskImageSpriteResult,
+  DescribeStreamPackageLinearAssemblyProgramsRequest,
   DescribeAsrHotwordsListRequest,
   AiAnalysisTaskDescriptionOutput,
   DescribeStreamLinkEventAttachedFlowsRequest,
   RTPAddressDestination,
+  DescribeStreamPackageLinearAssemblyProgramSchedulesResponse,
   DescribeAdaptiveDynamicStreamingTemplatesResponse,
+  DescribeStreamPackageActivateStateRequest,
   MediaContentReviewOcrTextSegmentItem,
   AiAnalysisTaskHighlightOutput,
-  StopStreamLinkFlowRequest,
+  SourceInfo,
   SmartSubtitleTaskResultInput,
   BatchStartStreamLinkFlowRequest,
   ImageWatermarkInput,
+  DescribeStreamPackageLinearAssemblyChannelRequest,
   SRTFECSimpleOptions,
   BatchProcessMediaResponse,
   LiveRecordResult,
   AsrFullTextConfigureInfoForUpdate,
+  SmartEraseTaskInput,
   LiveRecordFile,
+  DescribeStreamPackageActivateStateResponse,
   ComposeSourceMedia,
   TagConfigureInfoForUpdate,
   CreatePersonSampleResponse,
   CreateContentReviewTemplateResponse,
   ModifyBlindWatermarkTemplateResponse,
+  DescribeStreamPackageSSAIChannelsResponse,
   DescribeAIAnalysisTemplatesRequest,
   ProhibitedConfigureInfoForUpdate,
   ComposeEmptyItem,
@@ -309,6 +352,7 @@ import {
   SRTSourceAddressReq,
   DescribeLiveRecordTemplatesResponse,
   EnableScheduleRequest,
+  NameServer,
   RawTranscodeParameter,
   LiveStreamTaskNotifyConfig,
   VideoTemplateInfo,
@@ -317,14 +361,16 @@ import {
   PornOcrReviewTemplateInfoForUpdate,
   AiReviewTaskPornOcrResult,
   DescribeLiveRecordTemplatesRequest,
-  DescribeWatermarkTemplatesRequest,
+  DescribeStreamPackageSourceLocationsRequest,
   CreateOutputInfo,
+  DescribeStreamPackageSourceLocationResponse,
   TaskOutputStorage,
   MediaProcessTaskResult,
-  ModifyAIAnalysisTemplateRequest,
+  DeleteStreamPackageLinearAssemblyChannelRequest,
   UserDefineConfigureInfo,
   SubtitlePosition,
   DeleteQualityControlTemplateRequest,
+  UsageDetail,
   ColorEnhanceConfig,
   DescribeOutputRTPSettings,
   ComposeAudioItem,
@@ -339,40 +385,50 @@ import {
   ModifyWordSampleRequest,
   EditMediaTask,
   AiRecognitionTaskFaceSegmentItem,
-  ImageResizeConfig,
-  CreateMediaEvaluationResponse,
+  DeleteStreamPackageSourceLocationResponse,
+  CreateStreamPackageSourceRequest,
+  DescribeStreamPackageLinearAssemblyProgramRequest,
   AiAnalysisTaskTagResult,
+  DescribeStreamPackageLinearAssemblyChannelAlertsRequest,
   AiAnalysisTaskDelLogoInput,
   DescribeAigcImageTaskResponse,
   SmartSubtitleTaskBatchOutput,
   BatchStopStreamLinkFlowRequest,
+  DeleteStreamPackageLinearAssemblyProgramsByChannelResponse,
   RTMPAddressDestination,
   PureSubtitleTransResult,
   AiAnalysisTaskTagOutput,
+  SharpEnhanceConfig,
   CreateAsrHotwordsResponse,
   DeleteBlindWatermarkTemplateResponse,
   QualityControlItemConfig,
   CreateSnapshotByTimeOffsetTemplateRequest,
   CreateStreamLinkEventResponse,
-  AdaptiveDynamicStreamingInfoItem,
+  DeleteStreamLinkEventRequest,
   DescribeProcessImageTemplatesResponse,
   ProcessMediaRequest,
+  SSAIUsageInfo,
+  ModifyStreamPackageLinearAssemblyProgramRequest,
   ProcessImageResponse,
   DescribeRTSPPullSourceAddress,
+  DashManifestInfo,
   DescribeOutputRTSPPullSettings,
+  SourceAlert,
   CreateBlindWatermarkTemplateResponse,
   AiRecognitionTaskOcrFullTextResult,
   AiAnalysisTaskSegmentOutput,
   ModifyProcessImageTemplateResponse,
   ComposeVideoItem,
   LiveStreamOcrFullTextRecognitionResult,
-  VODOutputStorage,
+  DeleteStreamPackageSSAIChannelResponse,
   MediaProcessTaskSnapshotByTimeOffsetResult,
+  DeleteStreamPackageSourceResponse,
   DescribeOutputHLSPullSettings,
   AddBlindWatermarkConfig,
   CreateAigcVideoTaskRequest,
   AiRecognitionTaskTransTextResultInput,
   DescribeSchedulesResponse,
+  ModifySubtitleEmbedTemplateRequest,
   ImageQualityEnhanceConfig,
   AiAnalysisTaskVideoRemakeOutput,
   DescribeStreamLinkRegionsResponse,
@@ -380,11 +436,11 @@ import {
   AiAnalysisTaskSegmentResult,
   RawSmartSubtitleParameter,
   AiRecognitionTaskAsrFullTextResultInput,
-  DescribeStreamLinkFlowStatisticsResponse,
+  DescribeStreamLinkFlowRealtimeStatusRequest,
   AiRecognitionTaskAsrWordsResultOutput,
   LiveStreamOcrWordsRecognitionResult,
   LiveStreamProcessErrorInfo,
-  ModifyAdaptiveDynamicStreamingTemplateResponse,
+  DeleteStreamPackageLinearAssemblyChannelsResponse,
   MediaProcessTaskTranscodeResult,
   SnapshotByTimeOffsetTaskInput,
   ImageSpriteTaskInput,
@@ -392,13 +448,17 @@ import {
   DeleteContentReviewTemplateResponse,
   VODInputInfo,
   ImageWatermarkTemplate,
+  DescribeStreamPackageSSAIUsageRequest,
   ModifyQualityControlTemplateResponse,
   AsrWordsConfigureInfo,
   AiAnalysisTaskVideoRemakeInput,
   LiveStreamAsrWordsRecognitionResult,
   MediaAiAnalysisFrameTagItem,
   FlowMediaVideo,
+  SpliceInsertInfo,
+  SourceTag,
   RecognizeMediaForZhiXueResponse,
+  ScheduleExecRuleTaskResult,
   AiSamplePerson,
   FlowStatistics,
   BatchSmartSubtitlesResult,
@@ -420,16 +480,19 @@ import {
   CreateOutputRTMPSettings,
   WorkflowTrigger,
   HLSPullSourceAddress,
+  DescribeStreamPackageSourceLocationRequest,
   EvaluationMediaInputInfo,
   LiveStreamAiRecognitionResultInfo,
   ActivityPara,
+  DescribeStreamPackageSourcesRequest,
   ModifyAsrHotwordsResponse,
-  UserDefineAsrTextReviewTemplateInfoForUpdate,
+  CreateStreamPackageLinearAssemblyChannelResponse,
   ModifyImageSpriteTemplateResponse,
   MediaContentReviewAsrTextSegmentItem,
   CreateInputRISTSettings,
   CreateWatermarkTemplateRequest,
-  ScheduleAnalysisTaskResult,
+  OutputReq,
+  ManifestInfo,
   ComposeMediaItem,
   AdvancedSuperResolutionConfig,
   CreateMediaEvaluationRequest,
@@ -443,19 +506,23 @@ import {
   CreateScheduleRequest,
   StreamLinkRegionInfo,
   CreateVideoSearchTaskResponse,
+  OutputInfo,
   CreateVideoSearchTaskRequest,
   LiveStreamTagRecognitionResult,
   ExecuteFunctionResponse,
   FlowRealtimeStatusRTP,
   FaceConfigureInfo,
+  DeleteStreamPackageLinearAssemblyChannelsRequest,
   AnimatedGraphicTaskInput,
+  LiveAiParagraphInfo,
   OutputAddress,
   LiveSmartSubtitlesTaskInput,
   MosaicInput,
   LiveRecordTaskInput,
-  DescribeStreamLinkActivateStateRequest,
+  ClipRangeInfo,
   AIAnalysisTemplateItem,
   AiRecognitionTaskObjectResultItem,
+  LiveStreamAiAnalysisResultInfo,
   ComposeMediaConfig,
   LiveStreamAiReviewImagePoliticalResult,
   RawImageWatermarkInput,
@@ -474,10 +541,12 @@ import {
   DisassociateSecurityGroupRequest,
   ProhibitedConfigureInfo,
   CreateProcessImageTemplateRequest,
+  StopStreamLinkFlowRequest,
   DescribeStreamLinkFlowSRTStatisticsResponse,
   AiReviewTerrorismOcrTaskOutput,
   DescribeAsrHotwordsListResponse,
   AiAnalysisResult,
+  DescribeStreamLinkFlowStatisticsResponse,
   BlindWatermarkInput,
   DescribeBlindWatermarkTemplatesResponse,
   ImageWatermarkInputForUpdate,
@@ -493,9 +562,10 @@ import {
   AiAnalysisTaskDescriptionResult,
   DeleteSmartSubtitleTemplateResponse,
   ResetWorkflowRequest,
+  ExtractBlindWatermarkTask,
   DeleteSubtitleEmbedTemplateRequest,
   AiRecognitionTaskObjectResultInput,
-  StreamUrlDetail,
+  PlaybackInfoReq,
   AiReviewTaskTerrorismResult,
   DescribeOutput,
   LiveStreamAiReviewVoicePornResult,
@@ -508,6 +578,7 @@ import {
   ModifyStreamLinkOutputInfoResponse,
   ModifyContentReviewTemplateRequest,
   LiveStreamAiRecognitionResultItem,
+  DescribeOutputSRTSettings,
   StopStreamLinkFlowResponse,
   AiAnalysisTaskCoverOutput,
   AiContentReviewTaskInput,
@@ -536,19 +607,23 @@ import {
   SegmentRecognitionItem,
   DescribeSubtitleEmbedTemplatesResponse,
   AiReviewPoliticalAsrTaskInput,
-  LiveStreamAiAnalysisResultInfo,
-  SegmentSpecificInfo,
+  DescribeStreamPackageSSAIChannelResponse,
+  ActivateStreamPackageRequest,
   ActionConfigInfo,
   AiAnalysisTaskVideoComprehensionInput,
+  ResilientStreamConf,
+  DescribeSSAIActivateStateResponse,
   MediaAiAnalysisTagItem,
   TranscodeTemplate,
   TranslateConfigureInfo,
+  ProgramAlertCounts,
   DescribeStreamLinkFlowMediaStatisticsResponse,
   PornOcrReviewTemplateInfo,
   CreateOutputInfoRTPSettings,
   AiReviewTaskPoliticalAsrResult,
   DescribeInputRTSPPullSettings,
   SubtitleTemplate,
+  StopStreamPackageLinearAssemblyChannelResponse,
   DescribeFlow,
   CreateVideoDatabaseEntryTaskResponse,
   AiReviewProhibitedAsrTaskInput,
@@ -556,8 +631,8 @@ import {
   SmartSubtitleTaskAsrFullTextResultOutput,
   TerrorismOcrReviewTemplateInfo,
   ExtractBlindWatermarkTaskConfig,
-  RecognizeAudioSentence,
-  SharpEnhanceConfig,
+  EraseTimeArea,
+  DescribeSSAIActivateStateRequest,
   ImageEncodeConfig,
   AiReviewTaskPornResult,
   AiRecognitionTaskObjectResultOutput,
@@ -567,10 +642,11 @@ import {
   AiReviewProhibitedAsrTaskOutput,
   LiveStreamFaceRecognitionResult,
   SmartEraseTaskResult,
-  LiveStreamAiReviewResultInfo,
+  AssemblyUsageDetail,
   DescribeSampleSnapshotTemplatesRequest,
   CoverConfigureInfoForUpdate,
   DisableWorkflowResponse,
+  DeleteStreamPackageLinearAssemblyProgramsResponse,
   ImageProcessTaskResult,
   AiAnalysisTaskClassificationResult,
   DescribeQualityControlTemplatesResponse,
@@ -578,7 +654,7 @@ import {
   FlowRealtimeStatusRTMP,
   UserDefineOcrTextReviewTemplateInfo,
   AdaptiveStreamTemplate,
-  ModifyStreamLinkOutputInfoRequest,
+  DescribeStreamPackageSourceRequest,
   DescribeStreamLinkEventsRequest,
   SmartSubtitleTaskFullTextResult,
   TranscodeTaskInput,
@@ -589,6 +665,7 @@ import {
   RemoveBlindWatermarkConfig,
   ComposeImageOperation,
   CreateSampleSnapshotTemplateResponse,
+  ParseLiveStreamProcessNotificationRequest,
   SuperResolutionConfig,
   CreateLiveRecordTemplateResponse,
   TrackSelector,
@@ -596,9 +673,9 @@ import {
   DescribeAsrHotwordsResponse,
   DescribeInputHLSPullSettings,
   CreateSubtitleEmbedTemplateResponse,
-  ResetWorkflowResponse,
-  DescribeStreamLinkFlowsRequest,
-  HLSConfigureInfo,
+  CreateStreamPackageSourceLocationResponse,
+  DeleteSmartSubtitleTemplateRequest,
+  DescribeStreamPackageLinearAssemblyProgramSchedulesRequest,
   CreateAIAnalysisTemplateResponse,
   CreateSmartEraseTemplateResponse,
   MediaProcessTaskSampleSnapshotResult,
@@ -611,6 +688,7 @@ import {
   FlowRealtimeStatusSRT,
   SpecificationDataItem,
   TEHDConfigForUpdate,
+  DescribeStreamPackageSourceResponse,
   WithdrawsWatermarkRequest,
   DeleteStreamLinkOutputRequest,
   ModifyPersonSampleRequest,
@@ -618,6 +696,7 @@ import {
   AsrFullTextConfigureInfo,
   AiAnalysisTaskVideoRemakeResult,
   ArtifactRepairConfig,
+  CreateStreamPackageSSAIChannelResponse,
   SyncDubbingOutputOption,
   CreateAIRecognitionTemplateRequest,
   DescribeTaskDetailRequest,
@@ -628,6 +707,8 @@ import {
   AiAnalysisTaskVideoComprehensionOutput,
   AiRecognitionTaskAsrFullTextResult,
   ModifyAIRecognitionTemplateResponse,
+  SourceLocationInfo,
+  DescribeStreamPackageLinearAssemblyUsageRequest,
   PoliticalImgReviewTemplateInfo,
   ExecRulesTask,
   PoliticalConfigureInfo,
@@ -644,14 +725,14 @@ import {
   EnableWorkflowResponse,
   Activity,
   AiSampleWordInfo,
-  DeleteStreamLinkEventRequest,
+  AdaptiveDynamicStreamingInfoItem,
   CreateStreamLinkOutputInfoRequest,
   ComposeMediaTrack,
   ProhibitedOcrReviewTemplateInfo,
   ImageEraseLogoConfig,
   ModifyStreamLinkInputRequest,
   ScheduleReviewTaskResult,
-  ModifySubtitleEmbedTemplateRequest,
+  ModifyStreamPackageSourceRequest,
   DescribeStreamLinkEventAttachedFlowsResponse,
   ModifyTranscodeTemplateResponse,
   LiveStreamRecordResultInfo,
@@ -674,28 +755,35 @@ import {
   DescribeStreamLinkRegionsRequest,
   ImageTransformConfig,
   ModifyStreamLinkInputResponse,
+  VODOutputStorage,
   HeadTailParameter,
   DescribeStreamLinkFlowMediaStatisticsRequest,
   DescribeTaskDetailResponse,
   AiAnalysisTaskDubbingResult,
+  PlaybackInfo,
   DeleteImageSpriteTemplateRequest,
   LiveScheduleLiveRecordTaskResult,
   AiSampleFailFaceInfo,
   UserDefineFaceReviewTemplateInfoForUpdate,
   DescribeInputRTMPSettings,
+  StreamUrlDetail,
   DeleteProcessImageTemplateResponse,
   DescribeStreamLinkSecurityGroupsRequest,
   OcrFullTextConfigureInfoForUpdate,
   SubtitleLayoutConfig,
+  RawWatermarkParameter,
   FlowSRTInfo,
   AiRecognitionTaskOcrFullTextResultInput,
+  ImageResizeConfig,
   SubtitleOutlineConfig,
+  DescribeStreamPackageLinearAssemblyProgramsResponse,
   DeleteStreamLinkEventResponse,
+  DescribeStreamPackageSourceAlertsRequest,
   DescribeTasksResponse,
   ModifyImageSpriteTemplateRequest,
-  DescribeOutputSRTSettings,
+  CreateStreamPackageSourceResponse,
   AiRecognitionTaskFaceResultInput,
-  VolumeBalanceConfig,
+  EditMediaRequest,
   AiReviewPoliticalTaskOutput,
   AiReviewTaskPoliticalResult,
   SelectingSubtitleAreasConfig,
@@ -724,8 +812,10 @@ import {
   CreateTranscodeTemplateResponse,
   DescribeStreamLinkFlowResponse,
   AiRecognitionTaskAsrWordsResultInput,
+  CreateStreamPackageLinearAssemblyChannelRequest,
   CreateAIAnalysisTemplateRequest,
   AiReviewTerrorismTaskInput,
+  FlowRealtimeStatusItem,
   DescribeWorkflowsRequest,
   DescribeSchedulesRequest,
   MediaAudioStreamItem,
@@ -759,25 +849,31 @@ import {
   LiveActivityResult,
   CreateAigcImageTaskRequest,
   TerrorismImgReviewTemplateInfo,
+  ProgramAlertInfos,
   AsrHotwordsSet,
   AiAnalysisTaskHeadTailInput,
   DeleteSubtitleEmbedTemplateResponse,
+  DescribeStreamPackageSSAIUsageResponse,
   QualityControlStrategy,
   DescribeTranscodeTemplatesRequest,
   DescribeSmartSubtitleTemplatesResponse,
   DescribeUsageDataRequest,
-  DescribeStreamLinkSecurityGroupsResponse,
+  DeleteStreamPackageLinearAssemblyChannelResponse,
   BatchDeleteStreamLinkFlowResponse,
   SchedulesInfo,
   DisableWorkflowRequest,
   FrameRateWithDenConfig,
   PoliticalConfigureInfoForUpdate,
   DiffusionEnhanceConfig,
+  VolumeBalanceConfig,
   DescribeWatermarkTemplatesResponse,
   DescribeStreamLinkFlowLogsRequest,
+  TimeSignalInfo,
+  ModifyStreamPackageLinearAssemblyChannelRequest,
   DeleteQualityControlTemplateResponse,
   CreateAnimatedGraphicsTemplateRequest,
   FrameTagConfigureInfo,
+  RecognizeAudioSentence,
   DeleteWorkflowResponse,
   ExecuteFunctionRequest,
   DescribeStreamLinkFlowLogsResponse,
@@ -788,8 +884,11 @@ import {
   SimpleAesDrm,
   DeleteTranscodeTemplateResponse,
   LiveStreamObjectRecognitionResult,
+  DescribeStreamPackageSourceLocationsResponse,
   DescribeImageTaskDetailResponse,
   DescribePersonSamplesResponse,
+  SourcePackageConf,
+  DescribeStreamLinkFlowsRequest,
   ModifyScheduleResponse,
   PornConfigureInfo,
   AiRecognitionTaskObjectSeqmentItem,
@@ -797,10 +896,10 @@ import {
   ImageDenoiseConfig,
   VideoDenoiseConfig,
   AiRecognitionTaskObjectResult,
-  DescribeStreamLinkFlowRealtimeStatusRequest,
+  ActivateSSAIResponse,
   DescribeAIAnalysisTemplatesResponse,
   AigcVideoExtraParam,
-  ParseLiveStreamProcessNotificationRequest,
+  DescribeStreamPackageLinearAssemblyChannelAlertsResponse,
   AiRecognitionTaskAsrWordsResult,
   DescribeAigcVideoTaskRequest,
   AiAnalysisTaskHeadTailResult,
@@ -809,6 +908,7 @@ import {
   DescribeAigcVideoTaskResponse,
   DeleteSmartEraseTemplateResponse,
   AiReviewTaskPornAsrResult,
+  ModifyStreamPackageLinearAssemblyChannelResponse,
   ModifyBlindWatermarkTemplateRequest,
   DescribeStreamLinkFlowRequest,
   UrlInputInfo,
@@ -816,12 +916,15 @@ import {
   SmartSubtitleTaskTransTextSegmentItem,
   AddOnImageInput,
   DescribeVoicesRequest,
-  LiveAiParagraphInfo,
+  ActivateSSAIRequest,
   AiRecognitionTaskFaceResultOutput,
   PornImgReviewTemplateInfoForUpdate,
+  DescribeStreamPackageSSAIChannelsRequest,
   DescribeAdaptiveDynamicStreamingTemplatesRequest,
   CreateWatermarkTemplateResponse,
   PornImgReviewTemplateInfo,
+  DeleteStreamPackageSourceLocationRequest,
+  DescribeStreamPackageLinearAssemblyProgramResponse,
   AiReviewPoliticalOcrTaskOutput,
   OcrFullTextConfigureInfo,
   CreateStreamLinkInputRequest,
@@ -840,14 +943,19 @@ import {
   LiveActivityResItem,
   UpdateSmartEraseSubtitleConfig,
   CreateSubtitleEmbedTemplateRequest,
-  EraseTimeArea,
+  DescribeStreamPackageSourceAlertsResponse,
+  DescribeStreamPackageLinearAssemblyChannelResponse,
   SearchValueInput,
   EditMediaFileInfo,
   AiAnalysisTaskDelLogoResult,
   SampleSnapshotTaskInput,
+  LiveStreamAiReviewResultInfo,
+  ProgramScheduleInfo,
   TrackInfo,
   QualityControlTemplate,
+  AssemblyUsageInfo,
   TerrorismConfigureInfo,
+  CreateStreamPackageLinearAssemblyProgramResponse,
   PoliticalAsrReviewTemplateInfo,
   CreatePersonSampleRequest,
   SmartSubtitlesTaskInput,
@@ -858,7 +966,7 @@ import {
   RTSPPullSourceAddress,
   SubtitleEmbedTemplateItem,
   DescribeHLSPullSourceAddress,
-  MediaImageSpriteItem,
+  DeleteStreamPackageLinearAssemblyProgramResponse,
   AudioEnhanceConfig,
   AiRecognitionTaskFaceResultItem,
   AiAnalysisTaskDescriptionInput,
@@ -869,17 +977,23 @@ import {
   CreateStreamLinkInputResponse,
   ComposeAudioOperation,
   CreateSmartSubtitleTemplateResponse,
+  TimeShiftInfo,
   LiveStreamAiAnalysisResultItem,
   AiRecognitionTaskTransTextResult,
+  SubtitleResult,
   DescribeGroupAttachFlowsByIdResponse,
+  DescribeStreamPackageLinearAssemblyUsageResponse,
   BatchStopStreamLinkFlowResponse,
+  LinearAssemblyChannelInfo,
   EditMediaTaskOutput,
   ProcessImageTemplate,
   HighlightSegmentItem,
   AiAnalysisTaskCutoutResult,
   SmartEraseTemplateItem,
+  CreateStreamPackageSourceLocationRequest,
   DeleteWatermarkTemplateResponse,
-  ResilientStreamConf,
+  DescribeStreamPackageLinearAssemblyChannelsResponse,
+  StopStreamPackageLinearAssemblyChannelRequest,
   DescribeOutputRTSPPullServerUrl,
   FailOverOption,
   LowLightEnhanceConfig,
@@ -933,23 +1047,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建用户自定义转动图模板，数量上限：16。
+   * 删除线性组装Program。
    */
-  async CreateAnimatedGraphicsTemplate(
-    req: CreateAnimatedGraphicsTemplateRequest,
-    cb?: (error: string, rep: CreateAnimatedGraphicsTemplateResponse) => void
-  ): Promise<CreateAnimatedGraphicsTemplateResponse> {
-    return this.request("CreateAnimatedGraphicsTemplate", req, cb)
-  }
-
-  /**
-   * 修改用户自定义智能字幕模板。
-   */
-  async ModifySmartSubtitleTemplate(
-    req: ModifySmartSubtitleTemplateRequest,
-    cb?: (error: string, rep: ModifySmartSubtitleTemplateResponse) => void
-  ): Promise<ModifySmartSubtitleTemplateResponse> {
-    return this.request("ModifySmartSubtitleTemplate", req, cb)
+  async DeleteStreamPackageLinearAssemblyProgram(
+    req: DeleteStreamPackageLinearAssemblyProgramRequest,
+    cb?: (error: string, rep: DeleteStreamPackageLinearAssemblyProgramResponse) => void
+  ): Promise<DeleteStreamPackageLinearAssemblyProgramResponse> {
+    return this.request("DeleteStreamPackageLinearAssemblyProgram", req, cb)
   }
 
   /**
@@ -1015,6 +1119,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除广告插入配置。
+   */
+  async DeleteStreamPackageSSAIChannel(
+    req: DeleteStreamPackageSSAIChannelRequest,
+    cb?: (error: string, rep: DeleteStreamPackageSSAIChannelResponse) => void
+  ): Promise<DeleteStreamPackageSSAIChannelResponse> {
+    return this.request("DeleteStreamPackageSSAIChannel", req, cb)
+  }
+
+  /**
    * 删除用户自定义转动图模板。
    */
   async DeleteAnimatedGraphicsTemplate(
@@ -1056,6 +1170,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改媒体包装SourceLocation信息。
+   */
+  async ModifyStreamPackageSourceLocation(
+    req: ModifyStreamPackageSourceLocationRequest,
+    cb?: (error: string, rep: ModifyStreamPackageSourceLocationResponse) => void
+  ): Promise<ModifyStreamPackageSourceLocationResponse> {
+    return this.request("ModifyStreamPackageSourceLocation", req, cb)
+  }
+
+  /**
    * 删除用户自定义转码模板。
    */
   async DeleteTranscodeTemplate(
@@ -1073,6 +1197,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskDetailResponse) => void
   ): Promise<DescribeTaskDetailResponse> {
     return this.request("DescribeTaskDetail", req, cb)
+  }
+
+  /**
+   * 创建媒体包装频道。
+   */
+  async CreateStreamPackageSource(
+    req: CreateStreamPackageSourceRequest,
+    cb?: (error: string, rep: CreateStreamPackageSourceResponse) => void
+  ): Promise<CreateStreamPackageSourceResponse> {
+    return this.request("CreateStreamPackageSource", req, cb)
   }
 
   /**
@@ -1262,6 +1396,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Programe信息列表。
+   */
+  async DescribeStreamPackageLinearAssemblyProgramSchedules(
+    req: DescribeStreamPackageLinearAssemblyProgramSchedulesRequest,
+    cb?: (error: string, rep: DescribeStreamPackageLinearAssemblyProgramSchedulesResponse) => void
+  ): Promise<DescribeStreamPackageLinearAssemblyProgramSchedulesResponse> {
+    return this.request("DescribeStreamPackageLinearAssemblyProgramSchedules", req, cb)
+  }
+
+  /**
+   * 删除媒体包装SourceLocation。
+   */
+  async DeleteStreamPackageSourceLocation(
+    req: DeleteStreamPackageSourceLocationRequest,
+    cb?: (error: string, rep: DeleteStreamPackageSourceLocationResponse) => void
+  ): Promise<DeleteStreamPackageSourceLocationResponse> {
+    return this.request("DeleteStreamPackageSourceLocation", req, cb)
+  }
+
+  /**
    * 批量启动媒体传输流。
    */
   async BatchStartStreamLinkFlow(
@@ -1269,6 +1423,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchStartStreamLinkFlowResponse) => void
   ): Promise<BatchStartStreamLinkFlowResponse> {
     return this.request("BatchStartStreamLinkFlow", req, cb)
+  }
+
+  /**
+   * 批量查询广告插入配置。
+   */
+  async DescribeStreamPackageSSAIChannels(
+    req: DescribeStreamPackageSSAIChannelsRequest,
+    cb?: (error: string, rep: DescribeStreamPackageSSAIChannelsResponse) => void
+  ): Promise<DescribeStreamPackageSSAIChannelsResponse> {
+    return this.request("DescribeStreamPackageSSAIChannels", req, cb)
+  }
+
+  /**
+   * 查询媒体包装SourceLocation信息。
+   */
+  async DescribeStreamPackageSourceLocation(
+    req: DescribeStreamPackageSourceLocationRequest,
+    cb?: (error: string, rep: DescribeStreamPackageSourceLocationResponse) => void
+  ): Promise<DescribeStreamPackageSourceLocationResponse> {
+    return this.request("DescribeStreamPackageSourceLocation", req, cb)
+  }
+
+  /**
+   * 批量删除媒体包装Channel。
+   */
+  async DeleteStreamPackageLinearAssemblyChannels(
+    req: DeleteStreamPackageLinearAssemblyChannelsRequest,
+    cb?: (error: string, rep: DeleteStreamPackageLinearAssemblyChannelsResponse) => void
+  ): Promise<DeleteStreamPackageLinearAssemblyChannelsResponse> {
+    return this.request("DeleteStreamPackageLinearAssemblyChannels", req, cb)
   }
 
   /**
@@ -1289,6 +1473,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateStreamLinkFlowResponse) => void
   ): Promise<CreateStreamLinkFlowResponse> {
     return this.request("CreateStreamLinkFlow", req, cb)
+  }
+
+  /**
+   * 频道线性组装用量查询
+   */
+  async DescribeStreamPackageLinearAssemblyUsage(
+    req: DescribeStreamPackageLinearAssemblyUsageRequest,
+    cb?: (error: string, rep: DescribeStreamPackageLinearAssemblyUsageResponse) => void
+  ): Promise<DescribeStreamPackageLinearAssemblyUsageResponse> {
+    return this.request("DescribeStreamPackageLinearAssemblyUsage", req, cb)
   }
 
   /**
@@ -1322,6 +1516,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 同步接口，返回语音识别结果
+   */
+  async RecognizeAudio(
+    req: RecognizeAudioRequest,
+    cb?: (error: string, rep: RecognizeAudioResponse) => void
+  ): Promise<RecognizeAudioResponse> {
+    return this.request("RecognizeAudio", req, cb)
+  }
+
+  /**
      * 对 URL视频链接批量发起处理任务，功能包括：
 智能字幕（语音全文、语音热词、语音翻译）
      */
@@ -1333,13 +1537,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量查询媒体输入流的配置信息。
+   * 删除媒体包装Channel。
    */
-  async DescribeStreamLinkFlows(
-    req: DescribeStreamLinkFlowsRequest,
-    cb?: (error: string, rep: DescribeStreamLinkFlowsResponse) => void
-  ): Promise<DescribeStreamLinkFlowsResponse> {
-    return this.request("DescribeStreamLinkFlows", req, cb)
+  async DeleteStreamPackageLinearAssemblyChannel(
+    req: DeleteStreamPackageLinearAssemblyChannelRequest,
+    cb?: (error: string, rep: DeleteStreamPackageLinearAssemblyChannelResponse) => void
+  ): Promise<DeleteStreamPackageLinearAssemblyChannelResponse> {
+    return this.request("DeleteStreamPackageLinearAssemblyChannel", req, cb)
   }
 
   /**
@@ -1383,23 +1587,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改媒体传输流的输出配置。
+   * 查询媒体包装Program信息。
    */
-  async ModifyStreamLinkOutputInfo(
-    req: ModifyStreamLinkOutputInfoRequest,
-    cb?: (error: string, rep: ModifyStreamLinkOutputInfoResponse) => void
-  ): Promise<ModifyStreamLinkOutputInfoResponse> {
-    return this.request("ModifyStreamLinkOutputInfo", req, cb)
+  async DescribeStreamPackageLinearAssemblyProgram(
+    req: DescribeStreamPackageLinearAssemblyProgramRequest,
+    cb?: (error: string, rep: DescribeStreamPackageLinearAssemblyProgramResponse) => void
+  ): Promise<DescribeStreamPackageLinearAssemblyProgramResponse> {
+    return this.request("DescribeStreamPackageLinearAssemblyProgram", req, cb)
   }
 
   /**
-   * 修改用户自定义数字水印模板，数字水印类型不允许修改。
+   * 批量删除媒体包装Source。
    */
-  async ModifyBlindWatermarkTemplate(
-    req: ModifyBlindWatermarkTemplateRequest,
-    cb?: (error: string, rep: ModifyBlindWatermarkTemplateResponse) => void
-  ): Promise<ModifyBlindWatermarkTemplateResponse> {
-    return this.request("ModifyBlindWatermarkTemplate", req, cb)
+  async DeleteStreamPackageSource(
+    req: DeleteStreamPackageSourceRequest,
+    cb?: (error: string, rep: DeleteStreamPackageSourceResponse) => void
+  ): Promise<DeleteStreamPackageSourceResponse> {
+    return this.request("DeleteStreamPackageSource", req, cb)
   }
 
   /**
@@ -1445,6 +1649,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新安全组。
+   */
+  async ModifyStreamLinkSecurityGroup(
+    req: ModifyStreamLinkSecurityGroupRequest,
+    cb?: (error: string, rep: ModifyStreamLinkSecurityGroupResponse) => void
+  ): Promise<ModifyStreamLinkSecurityGroupResponse> {
+    return this.request("ModifyStreamLinkSecurityGroup", req, cb)
+  }
+
+  /**
    * 获取媒体的元信息，包括视频画面宽、高、编码格式、时长、帧率等。
    */
   async DescribeMediaMetaData(
@@ -1462,6 +1676,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVideoSearchTaskDetailResponse) => void
   ): Promise<DescribeVideoSearchTaskDetailResponse> {
     return this.request("DescribeVideoSearchTaskDetail", req, cb)
+  }
+
+  /**
+   * 批量查询媒体输入流的配置信息。
+   */
+  async DescribeStreamLinkFlows(
+    req: DescribeStreamLinkFlowsRequest,
+    cb?: (error: string, rep: DescribeStreamLinkFlowsResponse) => void
+  ): Promise<DescribeStreamLinkFlowsResponse> {
+    return this.request("DescribeStreamLinkFlows", req, cb)
   }
 
   /**
@@ -1485,6 +1709,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * SSAI广告替换用量查询
+   */
+  async DescribeStreamPackageSSAIUsage(
+    req: DescribeStreamPackageSSAIUsageRequest,
+    cb?: (error: string, rep: DescribeStreamPackageSSAIUsageResponse) => void
+  ): Promise<DescribeStreamPackageSSAIUsageResponse> {
+    return this.request("DescribeStreamPackageSSAIUsage", req, cb)
+  }
+
+  /**
+   * 修改媒体传输流的输出配置。
+   */
+  async ModifyStreamLinkOutputInfo(
+    req: ModifyStreamLinkOutputInfoRequest,
+    cb?: (error: string, rep: ModifyStreamLinkOutputInfoResponse) => void
+  ): Promise<ModifyStreamLinkOutputInfoResponse> {
+    return this.request("ModifyStreamLinkOutputInfo", req, cb)
+  }
+
+  /**
    * 修改用户自定义采样截图模板。
    */
   async ModifySampleSnapshotTemplate(
@@ -1495,6 +1739,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改用户自定义智能字幕模板。
+   */
+  async ModifySmartSubtitleTemplate(
+    req: ModifySmartSubtitleTemplateRequest,
+    cb?: (error: string, rep: ModifySmartSubtitleTemplateResponse) => void
+  ): Promise<ModifySmartSubtitleTemplateResponse> {
+    return this.request("ModifySmartSubtitleTemplate", req, cb)
+  }
+
+  /**
+   * 查询媒体包装线性组装频道信息。
+   */
+  async DescribeStreamPackageLinearAssemblyChannel(
+    req: DescribeStreamPackageLinearAssemblyChannelRequest,
+    cb?: (error: string, rep: DescribeStreamPackageLinearAssemblyChannelResponse) => void
+  ): Promise<DescribeStreamPackageLinearAssemblyChannelResponse> {
+    return this.request("DescribeStreamPackageLinearAssemblyChannel", req, cb)
+  }
+
+  /**
    * 重新设置一个已经存在且处于禁用状态的工作流。
    */
   async ResetWorkflow(
@@ -1502,6 +1766,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ResetWorkflowResponse) => void
   ): Promise<ResetWorkflowResponse> {
     return this.request("ResetWorkflow", req, cb)
+  }
+
+  /**
+   * 启动媒体包装频道。
+   */
+  async StartStreamPackageLinearAssemblyChannel(
+    req: StartStreamPackageLinearAssemblyChannelRequest,
+    cb?: (error: string, rep: StartStreamPackageLinearAssemblyChannelResponse) => void
+  ): Promise<StartStreamPackageLinearAssemblyChannelResponse> {
+    return this.request("StartStreamPackageLinearAssemblyChannel", req, cb)
   }
 
   /**
@@ -1578,13 +1852,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新安全组。
+   * 查询SSAI开通状态
    */
-  async ModifyStreamLinkSecurityGroup(
-    req: ModifyStreamLinkSecurityGroupRequest,
-    cb?: (error: string, rep: ModifyStreamLinkSecurityGroupResponse) => void
-  ): Promise<ModifyStreamLinkSecurityGroupResponse> {
-    return this.request("ModifyStreamLinkSecurityGroup", req, cb)
+  async DescribeSSAIActivateState(
+    req?: DescribeSSAIActivateStateRequest,
+    cb?: (error: string, rep: DescribeSSAIActivateStateResponse) => void
+  ): Promise<DescribeSSAIActivateStateResponse> {
+    return this.request("DescribeSSAIActivateState", req, cb)
+  }
+
+  /**
+   * 创建媒体包装频道。
+   */
+  async CreateStreamPackageLinearAssemblyChannel(
+    req: CreateStreamPackageLinearAssemblyChannelRequest,
+    cb?: (error: string, rep: CreateStreamPackageLinearAssemblyChannelResponse) => void
+  ): Promise<CreateStreamPackageLinearAssemblyChannelResponse> {
+    return this.request("CreateStreamPackageLinearAssemblyChannel", req, cb)
   }
 
   /**
@@ -1641,23 +1925,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改用户自定义智能擦除模板。
+   * 创建媒体包装频道。
    */
-  async ModifySmartEraseTemplate(
-    req: ModifySmartEraseTemplateRequest,
-    cb?: (error: string, rep: ModifySmartEraseTemplateResponse) => void
-  ): Promise<ModifySmartEraseTemplateResponse> {
-    return this.request("ModifySmartEraseTemplate", req, cb)
+  async CreateStreamPackageSourceLocation(
+    req: CreateStreamPackageSourceLocationRequest,
+    cb?: (error: string, rep: CreateStreamPackageSourceLocationResponse) => void
+  ): Promise<CreateStreamPackageSourceLocationResponse> {
+    return this.request("CreateStreamPackageSourceLocation", req, cb)
   }
 
   /**
-   * 同步接口，返回语音识别结果
+   * 创建线性组装Program。
    */
-  async RecognizeAudio(
-    req: RecognizeAudioRequest,
-    cb?: (error: string, rep: RecognizeAudioResponse) => void
-  ): Promise<RecognizeAudioResponse> {
-    return this.request("RecognizeAudio", req, cb)
+  async CreateStreamPackageLinearAssemblyProgram(
+    req: CreateStreamPackageLinearAssemblyProgramRequest,
+    cb?: (error: string, rep: CreateStreamPackageLinearAssemblyProgramResponse) => void
+  ): Promise<CreateStreamPackageLinearAssemblyProgramResponse> {
+    return this.request("CreateStreamPackageLinearAssemblyProgram", req, cb)
   }
 
   /**
@@ -1691,6 +1975,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改用户自定义智能擦除模板。
+   */
+  async ModifySmartEraseTemplate(
+    req: ModifySmartEraseTemplateRequest,
+    cb?: (error: string, rep: ModifySmartEraseTemplateResponse) => void
+  ): Promise<ModifySmartEraseTemplateResponse> {
+    return this.request("ModifySmartEraseTemplate", req, cb)
+  }
+
+  /**
    * 该接口用于根据素材 ID，修改素材样本信息，包括名称、描述的修改，以及五官、标签的添加、删除、重置操作。五官删除操作需保证至少剩余 1 张图片，否则，请使用重置操作。
    */
   async ModifyPersonSample(
@@ -1708,6 +2002,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateLiveRecordTemplateResponse) => void
   ): Promise<CreateLiveRecordTemplateResponse> {
     return this.request("CreateLiveRecordTemplate", req, cb)
+  }
+
+  /**
+   * 停止线性组装频道。
+   */
+  async StopStreamPackageLinearAssemblyChannel(
+    req: StopStreamPackageLinearAssemblyChannelRequest,
+    cb?: (error: string, rep: StopStreamPackageLinearAssemblyChannelResponse) => void
+  ): Promise<StopStreamPackageLinearAssemblyChannelResponse> {
+    return this.request("StopStreamPackageLinearAssemblyChannel", req, cb)
   }
 
   /**
@@ -1781,6 +2085,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建SSAI广告插入配置。
+   */
+  async CreateStreamPackageSSAIChannel(
+    req: CreateStreamPackageSSAIChannelRequest,
+    cb?: (error: string, rep: CreateStreamPackageSSAIChannelResponse) => void
+  ): Promise<CreateStreamPackageSSAIChannelResponse> {
+    return this.request("CreateStreamPackageSSAIChannel", req, cb)
+  }
+
+  /**
+   * 查询线性组装频道信息列表。
+   */
+  async DescribeStreamPackageLinearAssemblyChannels(
+    req: DescribeStreamPackageLinearAssemblyChannelsRequest,
+    cb?: (error: string, rep: DescribeStreamPackageLinearAssemblyChannelsResponse) => void
+  ): Promise<DescribeStreamPackageLinearAssemblyChannelsResponse> {
+    return this.request("DescribeStreamPackageLinearAssemblyChannels", req, cb)
+  }
+
+  /**
    * 查询媒体传输事件关联的所有媒体输入流的配置信息。
    */
   async DescribeStreamLinkEventAttachedFlows(
@@ -1811,13 +2135,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据工作流 ID，获取工作流详情列表。
+   * 查询媒体包装Source信息。
    */
-  async DescribeWorkflows(
-    req: DescribeWorkflowsRequest,
-    cb?: (error: string, rep: DescribeWorkflowsResponse) => void
-  ): Promise<DescribeWorkflowsResponse> {
-    return this.request("DescribeWorkflows", req, cb)
+  async DescribeStreamPackageSource(
+    req: DescribeStreamPackageSourceRequest,
+    cb?: (error: string, rep: DescribeStreamPackageSourceResponse) => void
+  ): Promise<DescribeStreamPackageSourceResponse> {
+    return this.request("DescribeStreamPackageSource", req, cb)
   }
 
   /**
@@ -1891,6 +2215,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Programe信息列表。
+   */
+  async DescribeStreamPackageLinearAssemblyPrograms(
+    req: DescribeStreamPackageLinearAssemblyProgramsRequest,
+    cb?: (error: string, rep: DescribeStreamPackageLinearAssemblyProgramsResponse) => void
+  ): Promise<DescribeStreamPackageLinearAssemblyProgramsResponse> {
+    return this.request("DescribeStreamPackageLinearAssemblyPrograms", req, cb)
+  }
+
+  /**
    * 删除用户自定义数字水印模板。
    */
   async DeleteBlindWatermarkTemplate(
@@ -1911,13 +2245,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 使用检索值检索库中最接近检索值的若干视频。
+   * 该接口用于批量删除关键词样本。
    */
-  async CreateVideoSearchTask(
-    req: CreateVideoSearchTaskRequest,
-    cb?: (error: string, rep: CreateVideoSearchTaskResponse) => void
-  ): Promise<CreateVideoSearchTaskResponse> {
-    return this.request("CreateVideoSearchTask", req, cb)
+  async DeleteWordSamples(
+    req: DeleteWordSamplesRequest,
+    cb?: (error: string, rep: DeleteWordSamplesResponse) => void
+  ): Promise<DeleteWordSamplesResponse> {
+    return this.request("DeleteWordSamples", req, cb)
   }
 
   /**
@@ -1991,13 +2325,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于批量删除关键词样本。
+   * 查询线性组装Source告警信息。
    */
-  async DeleteWordSamples(
-    req: DeleteWordSamplesRequest,
-    cb?: (error: string, rep: DeleteWordSamplesResponse) => void
-  ): Promise<DeleteWordSamplesResponse> {
-    return this.request("DeleteWordSamples", req, cb)
+  async DescribeStreamPackageSourceAlerts(
+    req: DescribeStreamPackageSourceAlertsRequest,
+    cb?: (error: string, rep: DescribeStreamPackageSourceAlertsResponse) => void
+  ): Promise<DescribeStreamPackageSourceAlertsResponse> {
+    return this.request("DescribeStreamPackageSourceAlerts", req, cb)
+  }
+
+  /**
+   * 使用检索值检索库中最接近检索值的若干视频。
+   */
+  async CreateVideoSearchTask(
+    req: CreateVideoSearchTaskRequest,
+    cb?: (error: string, rep: CreateVideoSearchTaskResponse) => void
+  ): Promise<CreateVideoSearchTaskResponse> {
+    return this.request("CreateVideoSearchTask", req, cb)
   }
 
   /**
@@ -2011,6 +2355,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改用户自定义数字水印模板，数字水印类型不允许修改。
+   */
+  async ModifyBlindWatermarkTemplate(
+    req: ModifyBlindWatermarkTemplateRequest,
+    cb?: (error: string, rep: ModifyBlindWatermarkTemplateResponse) => void
+  ): Promise<ModifyBlindWatermarkTemplateResponse> {
+    return this.request("ModifyBlindWatermarkTemplate", req, cb)
+  }
+
+  /**
    * 对已发起的任务进行管理。
    */
   async ManageTask(
@@ -2018,6 +2372,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ManageTaskResponse) => void
   ): Promise<ManageTaskResponse> {
     return this.request("ManageTask", req, cb)
+  }
+
+  /**
+   * 查询Source信息列表。
+   */
+  async DescribeStreamPackageSources(
+    req: DescribeStreamPackageSourcesRequest,
+    cb?: (error: string, rep: DescribeStreamPackageSourcesResponse) => void
+  ): Promise<DescribeStreamPackageSourcesResponse> {
+    return this.request("DescribeStreamPackageSources", req, cb)
   }
 
   /**
@@ -2031,6 +2395,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据工作流 ID，获取工作流详情列表。
+   */
+  async DescribeWorkflows(
+    req: DescribeWorkflowsRequest,
+    cb?: (error: string, rep: DescribeWorkflowsResponse) => void
+  ): Promise<DescribeWorkflowsResponse> {
+    return this.request("DescribeWorkflows", req, cb)
+  }
+
+  /**
    * 修改用户自定义指定时间点截图模板。
    */
   async ModifySnapshotByTimeOffsetTemplate(
@@ -2038,6 +2412,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySnapshotByTimeOffsetTemplateResponse) => void
   ): Promise<ModifySnapshotByTimeOffsetTemplateResponse> {
     return this.request("ModifySnapshotByTimeOffsetTemplate", req, cb)
+  }
+
+  /**
+   * 查询线性组装频道告警信息。
+   */
+  async DescribeStreamPackageLinearAssemblyChannelAlerts(
+    req: DescribeStreamPackageLinearAssemblyChannelAlertsRequest,
+    cb?: (error: string, rep: DescribeStreamPackageLinearAssemblyChannelAlertsResponse) => void
+  ): Promise<DescribeStreamPackageLinearAssemblyChannelAlertsResponse> {
+    return this.request("DescribeStreamPackageLinearAssemblyChannelAlerts", req, cb)
   }
 
   /**
@@ -2069,6 +2453,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateWorkflowResponse) => void
   ): Promise<CreateWorkflowResponse> {
     return this.request("CreateWorkflow", req, cb)
+  }
+
+  /**
+   * 查询媒体封装用户开通情况。
+   */
+  async DescribeStreamPackageActivateState(
+    req?: DescribeStreamPackageActivateStateRequest,
+    cb?: (error: string, rep: DescribeStreamPackageActivateStateResponse) => void
+  ): Promise<DescribeStreamPackageActivateStateResponse> {
+    return this.request("DescribeStreamPackageActivateState", req, cb)
   }
 
   /**
@@ -2219,6 +2613,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改媒体包装Program信息。
+   */
+  async ModifyStreamPackageLinearAssemblyProgram(
+    req: ModifyStreamPackageLinearAssemblyProgramRequest,
+    cb?: (error: string, rep: ModifyStreamPackageLinearAssemblyProgramResponse) => void
+  ): Promise<ModifyStreamPackageLinearAssemblyProgramResponse> {
+    return this.request("ModifyStreamPackageLinearAssemblyProgram", req, cb)
+  }
+
+  /**
+   * 开通SSAI
+   */
+  async ActivateSSAI(
+    req?: ActivateSSAIRequest,
+    cb?: (error: string, rep: ActivateSSAIResponse) => void
+  ): Promise<ActivateSSAIResponse> {
+    return this.request("ActivateSSAI", req, cb)
+  }
+
+  /**
    * 提取视频中的盲水印。
    */
   async WithdrawsWatermark(
@@ -2226,6 +2640,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: WithdrawsWatermarkResponse) => void
   ): Promise<WithdrawsWatermarkResponse> {
     return this.request("WithdrawsWatermark", req, cb)
+  }
+
+  /**
+   * 修改媒体包装Source信息。
+   */
+  async ModifyStreamPackageSource(
+    req: ModifyStreamPackageSourceRequest,
+    cb?: (error: string, rep: ModifyStreamPackageSourceResponse) => void
+  ): Promise<ModifyStreamPackageSourceResponse> {
+    return this.request("ModifyStreamPackageSource", req, cb)
   }
 
   /**
@@ -2289,13 +2713,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除用户自定义指定时间点截图模板。
+   * 创建用户自定义转动图模板，数量上限：16。
    */
-  async DeleteSnapshotByTimeOffsetTemplate(
-    req: DeleteSnapshotByTimeOffsetTemplateRequest,
-    cb?: (error: string, rep: DeleteSnapshotByTimeOffsetTemplateResponse) => void
-  ): Promise<DeleteSnapshotByTimeOffsetTemplateResponse> {
-    return this.request("DeleteSnapshotByTimeOffsetTemplate", req, cb)
+  async CreateAnimatedGraphicsTemplate(
+    req: CreateAnimatedGraphicsTemplateRequest,
+    cb?: (error: string, rep: CreateAnimatedGraphicsTemplateResponse) => void
+  ): Promise<CreateAnimatedGraphicsTemplateResponse> {
+    return this.request("CreateAnimatedGraphicsTemplate", req, cb)
+  }
+
+  /**
+   * 修改广告插入配置。
+   */
+  async ModifyStreamPackageSSAIChannel(
+    req: ModifyStreamPackageSSAIChannelRequest,
+    cb?: (error: string, rep: ModifyStreamPackageSSAIChannelResponse) => void
+  ): Promise<ModifyStreamPackageSSAIChannelResponse> {
+    return this.request("ModifyStreamPackageSSAIChannel", req, cb)
   }
 
   /**
@@ -2317,6 +2751,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateVideoDatabaseEntryTaskResponse) => void
   ): Promise<CreateVideoDatabaseEntryTaskResponse> {
     return this.request("CreateVideoDatabaseEntryTask", req, cb)
+  }
+
+  /**
+   * 删除用户自定义指定时间点截图模板。
+   */
+  async DeleteSnapshotByTimeOffsetTemplate(
+    req: DeleteSnapshotByTimeOffsetTemplateRequest,
+    cb?: (error: string, rep: DeleteSnapshotByTimeOffsetTemplateResponse) => void
+  ): Promise<DeleteSnapshotByTimeOffsetTemplateResponse> {
+    return this.request("DeleteSnapshotByTimeOffsetTemplate", req, cb)
   }
 
   /**
@@ -2368,6 +2812,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改媒体包装Source信息。
+   */
+  async ModifyStreamPackageLinearAssemblyChannel(
+    req: ModifyStreamPackageLinearAssemblyChannelRequest,
+    cb?: (error: string, rep: ModifyStreamPackageLinearAssemblyChannelResponse) => void
+  ): Promise<ModifyStreamPackageLinearAssemblyChannelResponse> {
+    return this.request("ModifyStreamPackageLinearAssemblyChannel", req, cb)
+  }
+
+  /**
    * 文本翻译
    */
   async TextTranslation(
@@ -2375,6 +2829,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TextTranslationResponse) => void
   ): Promise<TextTranslationResponse> {
     return this.request("TextTranslation", req, cb)
+  }
+
+  /**
+   * 创建媒体封装用户。
+   */
+  async ActivateStreamPackage(
+    req?: ActivateStreamPackageRequest,
+    cb?: (error: string, rep: ActivateStreamPackageResponse) => void
+  ): Promise<ActivateStreamPackageResponse> {
+    return this.request("ActivateStreamPackage", req, cb)
   }
 
   /**
@@ -2398,6 +2862,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量删除线性组装Program。
+   */
+  async DeleteStreamPackageLinearAssemblyPrograms(
+    req: DeleteStreamPackageLinearAssemblyProgramsRequest,
+    cb?: (error: string, rep: DeleteStreamPackageLinearAssemblyProgramsResponse) => void
+  ): Promise<DeleteStreamPackageLinearAssemblyProgramsResponse> {
+    return this.request("DeleteStreamPackageLinearAssemblyPrograms", req, cb)
+  }
+
+  /**
    * 创建媒体传输的事件Event。
    */
   async CreateStreamLinkEvent(
@@ -2415,6 +2889,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePersonSampleResponse) => void
   ): Promise<CreatePersonSampleResponse> {
     return this.request("CreatePersonSample", req, cb)
+  }
+
+  /**
+   * 查询SourceLocation信息列表。
+   */
+  async DescribeStreamPackageSourceLocations(
+    req: DescribeStreamPackageSourceLocationsRequest,
+    cb?: (error: string, rep: DescribeStreamPackageSourceLocationsResponse) => void
+  ): Promise<DescribeStreamPackageSourceLocationsResponse> {
+    return this.request("DescribeStreamPackageSourceLocations", req, cb)
   }
 
   /**
@@ -2538,6 +3022,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量删除同一Channel下的ID
+   */
+  async DeleteStreamPackageLinearAssemblyProgramsByChannel(
+    req: DeleteStreamPackageLinearAssemblyProgramsByChannelRequest,
+    cb?: (error: string, rep: DeleteStreamPackageLinearAssemblyProgramsByChannelResponse) => void
+  ): Promise<DeleteStreamPackageLinearAssemblyProgramsByChannelResponse> {
+    return this.request("DeleteStreamPackageLinearAssemblyProgramsByChannel", req, cb)
+  }
+
+  /**
    * 查询媒体传输流的日志信息。
    */
   async DescribeStreamLinkFlowLogs(
@@ -2545,6 +3039,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStreamLinkFlowLogsResponse) => void
   ): Promise<DescribeStreamLinkFlowLogsResponse> {
     return this.request("DescribeStreamLinkFlowLogs", req, cb)
+  }
+
+  /**
+   * 查询用户开通mps信息，是否开通/授权。
+   */
+  async DescribeMDPMPSUserInfo(
+    req?: DescribeMDPMPSUserInfoRequest,
+    cb?: (error: string, rep: DescribeMDPMPSUserInfoResponse) => void
+  ): Promise<DescribeMDPMPSUserInfoResponse> {
+    return this.request("DescribeMDPMPSUserInfo", req, cb)
+  }
+
+  /**
+   * 查询广告插入配置。
+   */
+  async DescribeStreamPackageSSAIChannel(
+    req: DescribeStreamPackageSSAIChannelRequest,
+    cb?: (error: string, rep: DescribeStreamPackageSSAIChannelResponse) => void
+  ): Promise<DescribeStreamPackageSSAIChannelResponse> {
+    return this.request("DescribeStreamPackageSSAIChannel", req, cb)
   }
 
   /**

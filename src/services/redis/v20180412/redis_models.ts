@@ -40,6 +40,24 @@ export interface UpgradeProxyVersionRequest {
 }
 
 /**
+ * ModifyInstanceChargeType请求参数结构体
+ */
+export interface ModifyInstanceChargeTypeRequest {
+  /**
+   * <p>实例ID数组</p><p>入参限制：批量操作数组长度不超过20</p>
+   */
+  InstanceIds: Array<string>
+  /**
+   * <p>修改计费模式的操作类型</p><p>枚举值：</p><ul><li>PREPAID： 按量计费转包年包月</li><li>POSTPAID： 包年包月转按量计费</li></ul>
+   */
+  InstanceChargeType: string
+  /**
+   * <p>购买时长，仅当InstanceChargeType=PREPAID时需要传</p><p>取值范围：[1, 36]</p><p>单位：月</p>
+   */
+  Period?: number
+}
+
+/**
  * DescribeInstanceMonitorSIP返回参数结构体
  */
 export interface DescribeInstanceMonitorSIPResponse {
@@ -401,161 +419,111 @@ export interface UpgradeInstanceVersionResponse {
  */
 export interface CreateInstancesRequest {
   /**
-   * 实例类型。
-- 2：Redis 2.8 内存版（标准架构）。
-- 3：CKV 3.2 内存版（标准架构）。
-- 4：CKV 3.2 内存版（集群架构）。
-- 6：Redis 4.0 内存版（标准架构）。
-- 7：Redis 4.0 内存版（集群架构）。
-- 8：Redis 5.0 内存版（标准架构）。
-- 9：Redis 5.0 内存版（集群架构）。
-- 15：Redis 6.2 内存版（标准架构）。
-- 16：Redis 6.2 内存版（集群架构）。
-- 17：Redis 7.0 内存版（标准架构）。
-- 18：Redis 7.0 内存版（集群架构）。
-- 200：Memcached 1.6 内存版（集群架构）。
-**说明**：CKV 版本当前有存量用户使用，暂时保留。
+   * <p>实例类型。</p><ul><li>2：Redis 2.8 内存版（标准架构）。</li><li>3：CKV 3.2 内存版（标准架构）。</li><li>4：CKV 3.2 内存版（集群架构）。</li><li>6：Redis 4.0 内存版（标准架构）。</li><li>7：Redis 4.0 内存版（集群架构）。</li><li>8：Redis 5.0 内存版（标准架构）。</li><li>9：Redis 5.0 内存版（集群架构）。</li><li>15：Redis 6.2 内存版（标准架构）。</li><li>16：Redis 6.2 内存版（集群架构）。</li><li>17：Redis 7.0 内存版（标准架构）。</li><li>18：Redis 7.0 内存版（集群架构）。</li><li>200：Memcached 1.6 内存版（集群架构）。<br><strong>说明</strong>：CKV 版本当前有存量用户使用，暂时保留。</li></ul>
    */
   TypeId: number
   /**
-   * 内存容量，单位为MB， 数值需为1024的整数倍。具体规格，请通过 [DescribeProductInfo](https://cloud.tencent.com/document/api/239/30600) 接口查询全地域的售卖规格。
-- **TypeId**为标准架构时，**MemSize**是实例总内存容量；
-- **TypeId**为集群架构时，**MemSize**是单分片内存容量。
+   * <p>内存容量，单位为MB， 数值需为1024的整数倍。具体规格，请通过 <a href="https://cloud.tencent.com/document/api/239/30600">DescribeProductInfo</a> 接口查询全地域的售卖规格。</p><ul><li><strong>TypeId</strong>为标准架构时，<strong>MemSize</strong>是实例总内存容量；</li><li><strong>TypeId</strong>为集群架构时，<strong>MemSize</strong>是单分片内存容量。</li></ul>
    */
   MemSize: number
   /**
-   * 实例数量，单次购买实例数量。具体信息，请通过 [DescribeProductInfo](https://cloud.tencent.com/document/api/239/30600) 接口查询全地域的售卖规格。
+   * <p>实例数量，单次购买实例数量。具体信息，请通过 <a href="https://cloud.tencent.com/document/api/239/30600">DescribeProductInfo</a> 接口查询全地域的售卖规格。</p>
    */
   GoodsNum: number
   /**
-   * 购买实例的时长。
-- 若 **BillingMode**为**1**，即计费方式为包年包月时，需设置该参数，指定所购买实例的时长。单位：月，取值范围 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。
-- 若 **BillingMode**为**0**，即计费方式为按量计费时，该参数配置为1。
+   * <p>购买实例的时长。</p><ul><li>若 <strong>BillingMode</strong>为<strong>1</strong>，即计费方式为包年包月时，需设置该参数，指定所购买实例的时长。单位：月，取值范围 [1,2,3,4,5,6,7,8,9,10,11,12,24,36]。</li><li>若 <strong>BillingMode</strong>为<strong>0</strong>，即计费方式为按量计费时，该参数配置为1。</li></ul>
    */
   Period: number
   /**
-   * 计费方式。
-- 0：按量计费。
-- 1：包年包月。
+   * <p>计费方式。</p><ul><li>0：按量计费。</li><li>1：包年包月。</li></ul>
    */
   BillingMode: number
   /**
-   * 实例所属的可用区ID，可参考[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
+   * <p>实例所属的可用区ID，可参考<a href="https://cloud.tencent.com/document/product/239/4106">地域和可用区</a>  。</p>
    */
   ZoneId?: number
   /**
-   * 访问实例的密码。
-- 当输入参数**NoAuth**为**true**时，指设置实例为免密码访问，Password可不用配置，否则Password为必填参数。
-- 当实例类型**TypeId**为Redis 2.8 内存版标准架构、Redis 4.0、5.0、6.2、7.0内存版标准架构或集群架构时，其密码复杂度要求为：8-64个字符，至少包含小写字母、大写字母、数字和字符()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的2种，不能以"/"开头。
-- 当实例类型**TypeId**为CKV 3.2 内存版标准架构或集群架构时，其密码复杂度为：8-30个字符，必须包含字母和数字，且不包含其他字符。
+   * <p>访问实例的密码。</p><ul><li>当输入参数<strong>NoAuth</strong>为<strong>true</strong>时，指设置实例为免密码访问，Password可不用配置，否则Password为必填参数。</li><li>当实例类型<strong>TypeId</strong>为Redis 2.8 内存版标准架构、Redis 4.0、5.0、6.2、7.0内存版标准架构或集群架构时，其密码复杂度要求为：8-64个字符，至少包含小写字母、大写字母、数字和字符()`~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/ 中的2种，不能以&quot;/&quot;开头。</li><li>当实例类型<strong>TypeId</strong>为CKV 3.2 内存版标准架构或集群架构时，其密码复杂度为：8-30个字符，必须包含字母和数字，且不包含其他字符。</li></ul>
    */
   Password?: string
   /**
-   * 私有网络ID。如果不配置该参数则默认选择基础网络。请登录 [私有网络](https://console.cloud.tencent.com/vpc)控制台查询具体的ID。
+   * <p>私有网络ID。如果不配置该参数则默认选择基础网络。请登录 <a href="https://console.cloud.tencent.com/vpc">私有网络</a>控制台查询具体的ID。</p>
    */
   VpcId?: string
   /**
-   * 私有网络VPC的子网。基础网络下， 该参数无需配置。请登录 [私有网络](https://console.cloud.tencent.com/vpc)控制台查询子网列表获取具体的 ID。
+   * <p>私有网络VPC的子网。基础网络下， 该参数无需配置。请登录 <a href="https://console.cloud.tencent.com/vpc">私有网络</a>控制台查询子网列表获取具体的 ID。</p>
    */
   SubnetId?: string
   /**
-   * 项目 ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis#/)，在右上角的账户信息菜单中，选择**项目管理**查询项目 ID。
+   * <p>项目 ID。请登录<a href="https://console.cloud.tencent.com/redis#/">Redis控制台</a>，在右上角的账户信息菜单中，选择<strong>项目管理</strong>查询项目 ID。</p>
    */
   ProjectId?: number
   /**
-   * 自动续费标识。
-- 0：默认状态（手动续费）。
-- 1：自动续费。
-- 2：到期不续费。
+   * <p>自动续费标识。</p><ul><li>0：默认状态（手动续费）。</li><li>1：自动续费。</li><li>2：到期不续费。</li></ul>
    */
   AutoRenew?: number
   /**
-   * 安全组 ID 数组。
-- 安全组是一种虚拟防火墙，对云数据库实例的网络访问进行控制。创建实例时，建议绑定相应的安全组。
-- 请通过 [DescribeInstanceSecurityGroup](https://cloud.tencent.com/document/product/239/34447) 接口获取实例的安全组 ID。
+   * <p>安全组 ID 数组。</p><ul><li>安全组是一种虚拟防火墙，对云数据库实例的网络访问进行控制。创建实例时，建议绑定相应的安全组。</li><li>请通过 <a href="https://cloud.tencent.com/document/product/239/34447">DescribeInstanceSecurityGroup</a> 接口获取实例的安全组 ID。</li></ul>
    */
   SecurityGroupIdList?: Array<string>
   /**
-   * 用户自定义的网络端口。默认为6379，范围为 [1024,65535]。
+   * <p>用户自定义的网络端口。默认为6379，范围为 [1024,65535]。</p>
    */
   VPort?: number
   /**
-   * 实例分片数量。
-- 标准版实例无需配置该参数。
-- 集群版实例，分片数量范围为：[1、3、5、8、12、16、24、32、40、48、64、80、96、128]。
+   * <p>实例分片数量。</p><ul><li>标准版实例无需配置该参数。</li><li>集群版实例，分片数量范围为：[1、3、5、8、12、16、24、32、40、48、64、80、96、128]。</li></ul>
    */
   RedisShardNum?: number
   /**
-   * 实例副本数量。
-- Redis 内存版 4.0、5.0、6.2、7.0 标准架构和集群架构支持副本数量范围为[1,5]。
-- Redis 2.8标准版、CKV标准版只支持1副本。
+   * <p>实例副本数量。</p><ul><li>Redis 内存版 4.0、5.0、6.2、7.0 标准架构和集群架构支持副本数量范围为[1,5]。</li><li>Redis 2.8标准版、CKV标准版只支持1副本。</li></ul>
    */
   RedisReplicasNum?: number
   /**
-   * 标识实例是否需支持副本只读。
-- Redis 2.8 标准版、CKV标准版不支持副本只读。
-- 开启副本只读，实例将自动读写分离，写请求路由到主节点，读请求路由到副本节点。
-- 如需开启副本只读，建议副本数量大于等于2。
+   * <p>标识实例是否需支持副本只读。</p><ul><li>Redis 2.8 标准版、CKV标准版不支持副本只读。</li><li>开启副本只读，实例将自动读写分离，写请求路由到主节点，读请求路由到副本节点。</li><li>如需开启副本只读，建议副本数量大于等于2。</li></ul>
    */
   ReplicasReadonly?: boolean
   /**
-   * 实例名称。命名要求：仅支持长度小于60的中文、英文或者数字，短划线"-"、下划线"_"。
+   * <p>实例名称。命名要求：仅支持长度小于60的中文、英文或者数字，短划线&quot;-&quot;、下划线&quot;_&quot;。</p>
    */
   InstanceName?: string
   /**
-   * 配置实例是否支持免密码访问。
-- true：免密访问实例。
-- false：非免密访问实例。默认为非免密方式，仅VPC网络的实例支持免密码访问。
+   * <p>配置实例是否支持免密码访问。</p><ul><li>true：免密访问实例。</li><li>false：非免密访问实例。默认为非免密方式，仅VPC网络的实例支持免密码访问。</li></ul>
    */
   NoAuth?: boolean
   /**
-   * 实例的节点信息，包含节点 ID、节点类型、节点可用区 ID等。具体信息，请参见[RedisNodeInfo ](https://cloud.tencent.com/document/product/239/20022)。
-目前支持传入节点的类型（主节点或者副本节点），节点的可用区。单可用区部署不需要传递此参数。
+   * <p>实例的节点信息，包含节点 ID、节点类型、节点可用区 ID等。具体信息，请参见<a href="https://cloud.tencent.com/document/product/239/20022">RedisNodeInfo </a>。<br>目前支持传入节点的类型（主节点或者副本节点），节点的可用区。未指定该参数时，在支持多可用区部署的地域，系统将默认创建多可用区架构实例。</p>
    */
   NodeSet?: Array<RedisNodeInfo>
   /**
-   * 给实例设定标签。
+   * <p>给实例设定标签。</p>
    */
   ResourceTags?: Array<ResourceTag>
   /**
-   * 指定实例所属的可用区名称。具体信息，请参见[地域和可用区](https://cloud.tencent.com/document/product/239/4106)  。
+   * <p>指定实例所属的可用区名称。具体信息，请参见<a href="https://cloud.tencent.com/document/product/239/4106">地域和可用区</a>  。</p>
    */
   ZoneName?: string
   /**
-   * 指定实例相关的参数模板 ID。
-- 若不配置该参数，则系统会依据所选择的兼容版本及架构，自动适配对应的默认模板。
-- 请通过[DescribeParamTemplates](https://cloud.tencent.com/document/product/239/58750)接口，查询实例的参数模板列表，获取模板 ID 编号。
+   * <p>指定实例相关的参数模板 ID。</p><ul><li>若不配置该参数，则系统会依据所选择的兼容版本及架构，自动适配对应的默认模板。</li><li>请通过<a href="https://cloud.tencent.com/document/product/239/58750">DescribeParamTemplates</a>接口，查询实例的参数模板列表，获取模板 ID 编号。</li></ul>
    */
   TemplateId?: string
   /**
-   * 内部参数，标识创建实例是否需要检查。
-- false ：默认值。发送正常请求，通过检查后直接创建实例。
-- true：发送检查请求，不会创建实例。
+   * <p>内部参数，标识创建实例是否需要检查。</p><ul><li>false ：默认值。发送正常请求，通过检查后直接创建实例。</li><li>true：发送检查请求，不会创建实例。</li></ul>
    */
   DryRun?: boolean
   /**
-   * 指实例部署模式。
-- local：传统架构，默认为 local。
-- cdc：独享集群。
-- cloud：云原生，当前已暂停售卖。
+   * <p>指实例部署模式。</p><ul><li>local：传统架构，默认为 local。</li><li>cdc：独享集群。</li><li>cloud：云原生，当前已暂停售卖。</li></ul>
    */
   ProductVersion?: string
   /**
-   * 独享集群 ID。
-
-- 当 **ProductVersion** 设置为 **cdc** 时，该参数必须设置。
-- 请通过接口[ DescribeRedisClusters](https://cloud.tencent.com/document/product/239/109628) 获取集群 ID。
+   * <p>独享集群 ID。</p><ul><li>当 <strong>ProductVersion</strong> 设置为 <strong>cdc</strong> 时，该参数必须设置。</li><li>请通过接口<a href="https://cloud.tencent.com/document/product/239/109628"> DescribeRedisClusters</a> 获取集群 ID。</li></ul>
    */
   RedisClusterId?: string
   /**
-   * 告警策略 ID 数组。
-
-- 请登录[腾讯云可观测平台-告警管理-策略管理](https://console.cloud.tencent.com/monitor/alarm/policy)获取告警策略 ID。
-- 若不配置该参数，则绑定默认告警策略。默认告警策略具体信息，请登录[腾讯云可观测平台-告警管理-策略管理](https://console.cloud.tencent.com/monitor/alarm/policy)查看。
+   * <p>告警策略 ID 数组。</p><ul><li>请登录<a href="https://console.cloud.tencent.com/monitor/alarm/policy">腾讯云可观测平台-告警管理-策略管理</a>获取告警策略 ID。</li><li>若不配置该参数，则绑定默认告警策略。默认告警策略具体信息，请登录<a href="https://console.cloud.tencent.com/monitor/alarm/policy">腾讯云可观测平台-告警管理-策略管理</a>查看。</li></ul>
    */
   AlarmPolicyList?: Array<string>
   /**
-   * 是否加密密码
+   * <p>是否加密密码</p>
    */
   EncryptPassword?: boolean
 }
@@ -3579,16 +3547,16 @@ export interface ChangeReplicaToMasterResponse {
  */
 export interface CreateInstancesResponse {
   /**
-   * 交易的ID。
+   * <p>交易的ID。</p>
    * @deprecated
    */
   DealId?: string
   /**
-   * 实例ID。
+   * <p>实例ID。</p>
    */
   InstanceIds?: Array<string>
   /**
-   * 订单号。
+   * <p>订单号。</p>
    */
   DealName?: string
   /**
@@ -5492,273 +5460,17 @@ export interface AvailableRegion {
 }
 
 /**
- * 实例详细信息列表。
+ * 转换失败的实例信息
  */
-export interface InstanceSet {
+export interface FailedInstance {
   /**
-   * 实例名称。
-   */
-  InstanceName?: string
-  /**
-   * 实例 ID。
+   * <p>失败实例ID</p>
    */
   InstanceId?: string
   /**
-   * 用户AppId。AppId是与账号ID有唯一对应关系的应用 ID，部分腾讯云产品会使用此 AppId。
-
+   * <p>失败信息</p>
    */
-  Appid?: number
-  /**
-   * 项目 ID。
-   */
-  ProjectId?: number
-  /**
-   * 地域 ID。<ul><li>1：广州。</li><li>4：上海。</li><li>5：中国香港。</li><li>7：上海金融。</li> <li>8：北京。</li> <li>9：新加坡。</li> <li>11：深圳金融。</li> <li>15：美西（硅谷）。</li><li>16：成都。</li><li>17：法兰克福。</li><li>18：首尔。</li><li>19：重庆。</li><li>22：美东（弗吉尼亚）。</li><li>23：曼谷。</li><li>25：东京。</li></ul>
-   */
-  RegionId?: number
-  /**
-   * 区域 ID。
-   */
-  ZoneId?: number
-  /**
-   * vpc网络 ID，例如75101。
-   */
-  VpcId?: number
-  /**
-   * vpc网络下子网ID，如：46315。
-   */
-  SubnetId?: number
-  /**
-   * 实例当前状态。<ul><li>0：待初始化。</li><li>1：实例在流程中。</li><li>2：实例运行中。</li><li>-2：实例已隔离。</li><li>-3：实例待删除。</li></ul>
-   */
-  Status?: number
-  /**
-   * 实例 VIP。
-   */
-  WanIp?: string
-  /**
-   * 实例端口号。
-   */
-  Port?: number
-  /**
-   * 实例创建时间。格式如：2020-01-15 10:20:00。
-   */
-  Createtime?: string
-  /**
-   * 实例内存容量大小。单位：MB，1MB=1024KB。
-   */
-  Size?: number
-  /**
-   * 该字段已废弃。请使用腾讯云可观测平台API 接口 [GetMonitorData](https://cloud.tencent.com/document/product/248/31014) 获取实例已使用的内存容量。
-   * @deprecated
-   */
-  SizeUsed?: number
-  /**
-   * 实例类型。
-- 2：Redis 2.8 内存版（标准架构）。
-- 3：CKV 3.2 内存版（标准架构）。
-- 4：CKV 3.2 内存版（集群架构）。
-- 5：Redis 2.8 内存版（单机）。
-- 6：Redis 4.0 内存版（标准架构）。
-- 7：Redis 4.0 内存版（集群架构）。
-- 8：Redis 5.0 内存版（标准架构）。
-- 9：Redis 5.0 内存版（集群架构）。
-- 15：Redis 6.2 内存版（标准架构）。
-- 16：Redis 6.2 内存版（集群架构）。
-- 17：Redis 7.0 内存版（标准架构）。
-- 18：Redis 7.0 内存版（集群架构）。
-- 200:Memcached 1.6 内存版（集群架构）。
-   */
-  Type?: number
-  /**
-   * 实例是否设置自动续费标识。<ul><li>1：设置自动续费。</li><li>0：未设置自动续费。</li></ul>
-   */
-  AutoRenewFlag?: number
-  /**
-   * 包年包月计费实例到期的时间。
-   */
-  DeadlineTime?: string
-  /**
-   * 引擎：社区版Redis、腾讯云CKV。
-   */
-  Engine?: string
-  /**
-   * 产品类型。<ul><li>standalone：标准版。</li><li>cluster ：集群版。</li></ul>
-   */
-  ProductType?: string
-  /**
-   * vpc网络id，例如vpc-fk33jsf43kgv。
-   */
-  UniqVpcId?: string
-  /**
-   * vpc网络下子网id，例如：subnet-fd3j6l35mm0。
-   */
-  UniqSubnetId?: string
-  /**
-   * 计费模式。<ul><li>0：按量计费。</li><li>1：包年包月。</li></ul>
-   */
-  BillingMode?: number
-  /**
-   * 实例运行状态描述：如”实例运行中“。
-   */
-  InstanceTitle?: string
-  /**
-   * 已隔离实例默认下线时间。按量计费实例隔离后默认两小时后下线，包年包月默认7天后下线。格式如：2020-02-15 10:20:00。
-   */
-  OfflineTime?: string
-  /**
-   * 流程中的实例返回的子状态。
-- 0：磁盘读写状态。
-- 1：磁盘超限只读状态。
-   */
-  SubStatus?: number
-  /**
-   * 反亲和性标签。
-   */
-  Tags?: Array<string>
-  /**
-   * 实例节点信息。
-   */
-  InstanceNode?: Array<InstanceNode>
-  /**
-   * 分片大小。
-   */
-  RedisShardSize?: number
-  /**
-   * 分片数量。
-   */
-  RedisShardNum?: number
-  /**
-   * 副本数量。
-   */
-  RedisReplicasNum?: number
-  /**
-   * 计费 ID。
-   */
-  PriceId?: number
-  /**
-   * 实例隔离开始的时间。
-   */
-  CloseTime?: string
-  /**
-   * 从节点读取权重。
-- 0：表示关闭副本只读。
-- 100：表示开启副本只读。
-   */
-  SlaveReadWeight?: number
-  /**
-   * 实例关联的标签信息。
-   */
-  InstanceTags?: Array<InstanceTagInfo>
-  /**
-   * 项目名称。
-   */
-  ProjectName?: string
-  /**
-   * 是否为免密实例。<ul><li>true：免密实例。</li><li>false：非免密实例。</li></ul>
-   */
-  NoAuth?: boolean
-  /**
-   * 客户端连接数。
-   */
-  ClientLimit?: number
-  /**
-   * DTS状态（内部参数，用户可忽略）。
-   */
-  DtsStatus?: number
-  /**
-   * 分片带宽上限，单位MB。
-   */
-  NetLimit?: number
-  /**
-   * 免密实例标识（内部参数，用户可忽略）。
-   */
-  PasswordFree?: number
-  /**
-   * 该参数存在命名不规范问题，建议用参数IPv6取代。内部参数，用户可忽略。
-   */
-  Vip6?: string
-  /**
-   * 内部参数，用户可忽略。
-   */
-  IPv6?: string
-  /**
-   * 实例只读标识（内部参数，用户可忽略）。
-   */
-  ReadOnly?: number
-  /**
-   * 内部参数，用户可忽略。
-   */
-  RemainBandwidthDuration?: string
-  /**
-   * Redis实例请忽略该参数。
-   */
-  DiskSize?: number
-  /**
-   * 监控版本。<ul><li>1m：1分钟粒度监控。目前该监控粒度已下线，具体信息，请参见[云数据库 Redis 1分钟粒度下线公告](https://cloud.tencent.com/document/product/239/80653)。</li><li>5s：5秒粒度监控。</li></ul>
-   */
-  MonitorVersion?: string
-  /**
-   * 客户端最大连接数可设置的最小值。
-   */
-  ClientLimitMin?: number
-  /**
-   * 客户端最大连接数可设置的最大值。
-   */
-  ClientLimitMax?: number
-  /**
-   * 实例的节点详细信息。
-只有多可用区实例会返回。
-   */
-  NodeSet?: Array<RedisNodeInfo>
-  /**
-   * 实例所在的地域信息，比如ap-guangzhou。
-   */
-  Region?: string
-  /**
-   * 外网地址。
-   */
-  WanAddress?: string
-  /**
-   * 北极星服务地址，内部使用。
-   */
-  PolarisServer?: string
-  /**
-   * CDC Redis集群ID。
-   */
-  RedisClusterId?: string
-  /**
-   * CDC 集群ID。
-   */
-  DedicatedClusterId?: string
-  /**
-   * 产品版本。<ul><li>local：本地盘。</li><li>cloud：云盘版。</li><li>cdc：CDC 集群版本。</li></ul>
-   */
-  ProductVersion?: string
-  /**
-   * 实例当前Proxy版本。
-   */
-  CurrentProxyVersion?: string
-  /**
-   * 实例当前Cache小版本。如果实例加入全球复制组，显示全球复制的内核版本。
-   */
-  CurrentRedisVersion?: string
-  /**
-   * 实例可升级Proxy版本。
-   */
-  UpgradeProxyVersion?: string
-  /**
-   * 实例可升级Cache小版本。
-   */
-  UpgradeRedisVersion?: string
-  /**
-   * 备份模式：- SecondLevelBackup   秒级备份- NormalLevelBackup    普通备份
-   */
-  BackupMode?: string
-  /**
-   * 删除保护开关，0关闭，1开启
-   */
-  DeleteProtectionSwitch?: number
+  Message?: string
 }
 
 /**
@@ -6530,6 +6242,276 @@ export interface ModifyInstanceBackupModeRequest {
 }
 
 /**
+ * 实例详细信息列表。
+ */
+export interface InstanceSet {
+  /**
+   * 实例名称。
+   */
+  InstanceName?: string
+  /**
+   * 实例 ID。
+   */
+  InstanceId?: string
+  /**
+   * 用户AppId。AppId是与账号ID有唯一对应关系的应用 ID，部分腾讯云产品会使用此 AppId。
+
+   */
+  Appid?: number
+  /**
+   * 项目 ID。
+   */
+  ProjectId?: number
+  /**
+   * 地域 ID。<ul><li>1：广州。</li><li>4：上海。</li><li>5：中国香港。</li><li>7：上海金融。</li> <li>8：北京。</li> <li>9：新加坡。</li> <li>11：深圳金融。</li> <li>15：美西（硅谷）。</li><li>16：成都。</li><li>17：法兰克福。</li><li>18：首尔。</li><li>19：重庆。</li><li>22：美东（弗吉尼亚）。</li><li>23：曼谷。</li><li>25：东京。</li></ul>
+   */
+  RegionId?: number
+  /**
+   * 区域 ID。
+   */
+  ZoneId?: number
+  /**
+   * vpc网络 ID，例如75101。
+   */
+  VpcId?: number
+  /**
+   * vpc网络下子网ID，如：46315。
+   */
+  SubnetId?: number
+  /**
+   * 实例当前状态。<ul><li>0：待初始化。</li><li>1：实例在流程中。</li><li>2：实例运行中。</li><li>-2：实例已隔离。</li><li>-3：实例待删除。</li></ul>
+   */
+  Status?: number
+  /**
+   * 实例 VIP。
+   */
+  WanIp?: string
+  /**
+   * 实例端口号。
+   */
+  Port?: number
+  /**
+   * 实例创建时间。格式如：2020-01-15 10:20:00。
+   */
+  Createtime?: string
+  /**
+   * 实例内存容量大小。单位：MB，1MB=1024KB。
+   */
+  Size?: number
+  /**
+   * 该字段已废弃。请使用腾讯云可观测平台API 接口 [GetMonitorData](https://cloud.tencent.com/document/product/248/31014) 获取实例已使用的内存容量。
+   * @deprecated
+   */
+  SizeUsed?: number
+  /**
+   * 实例类型。
+- 2：Redis 2.8 内存版（标准架构）。
+- 3：CKV 3.2 内存版（标准架构）。
+- 4：CKV 3.2 内存版（集群架构）。
+- 5：Redis 2.8 内存版（单机）。
+- 6：Redis 4.0 内存版（标准架构）。
+- 7：Redis 4.0 内存版（集群架构）。
+- 8：Redis 5.0 内存版（标准架构）。
+- 9：Redis 5.0 内存版（集群架构）。
+- 15：Redis 6.2 内存版（标准架构）。
+- 16：Redis 6.2 内存版（集群架构）。
+- 17：Redis 7.0 内存版（标准架构）。
+- 18：Redis 7.0 内存版（集群架构）。
+- 200:Memcached 1.6 内存版（集群架构）。
+   */
+  Type?: number
+  /**
+   * 实例是否设置自动续费标识。<ul><li>1：设置自动续费。</li><li>0：未设置自动续费。</li></ul>
+   */
+  AutoRenewFlag?: number
+  /**
+   * 包年包月计费实例到期的时间。
+   */
+  DeadlineTime?: string
+  /**
+   * 引擎：社区版Redis、腾讯云CKV。
+   */
+  Engine?: string
+  /**
+   * 产品类型。<ul><li>standalone：标准版。</li><li>cluster ：集群版。</li></ul>
+   */
+  ProductType?: string
+  /**
+   * vpc网络id，例如vpc-fk33jsf43kgv。
+   */
+  UniqVpcId?: string
+  /**
+   * vpc网络下子网id，例如：subnet-fd3j6l35mm0。
+   */
+  UniqSubnetId?: string
+  /**
+   * 计费模式。<ul><li>0：按量计费。</li><li>1：包年包月。</li></ul>
+   */
+  BillingMode?: number
+  /**
+   * 实例运行状态描述：如”实例运行中“。
+   */
+  InstanceTitle?: string
+  /**
+   * 已隔离实例默认下线时间。按量计费实例隔离后默认两小时后下线，包年包月默认7天后下线。格式如：2020-02-15 10:20:00。
+   */
+  OfflineTime?: string
+  /**
+   * 流程中的实例返回的子状态。
+- 0：磁盘读写状态。
+- 1：磁盘超限只读状态。
+   */
+  SubStatus?: number
+  /**
+   * 反亲和性标签。
+   */
+  Tags?: Array<string>
+  /**
+   * 实例节点信息。
+   */
+  InstanceNode?: Array<InstanceNode>
+  /**
+   * 分片大小。
+   */
+  RedisShardSize?: number
+  /**
+   * 分片数量。
+   */
+  RedisShardNum?: number
+  /**
+   * 副本数量。
+   */
+  RedisReplicasNum?: number
+  /**
+   * 计费 ID。
+   */
+  PriceId?: number
+  /**
+   * 实例隔离开始的时间。
+   */
+  CloseTime?: string
+  /**
+   * 从节点读取权重。
+- 0：表示关闭副本只读。
+- 100：表示开启副本只读。
+   */
+  SlaveReadWeight?: number
+  /**
+   * 实例关联的标签信息。
+   */
+  InstanceTags?: Array<InstanceTagInfo>
+  /**
+   * 项目名称。
+   */
+  ProjectName?: string
+  /**
+   * 是否为免密实例。<ul><li>true：免密实例。</li><li>false：非免密实例。</li></ul>
+   */
+  NoAuth?: boolean
+  /**
+   * 客户端连接数。
+   */
+  ClientLimit?: number
+  /**
+   * DTS状态（内部参数，用户可忽略）。
+   */
+  DtsStatus?: number
+  /**
+   * 分片带宽上限，单位MB。
+   */
+  NetLimit?: number
+  /**
+   * 免密实例标识（内部参数，用户可忽略）。
+   */
+  PasswordFree?: number
+  /**
+   * 该参数存在命名不规范问题，建议用参数IPv6取代。内部参数，用户可忽略。
+   */
+  Vip6?: string
+  /**
+   * 内部参数，用户可忽略。
+   */
+  IPv6?: string
+  /**
+   * 实例只读标识（内部参数，用户可忽略）。
+   */
+  ReadOnly?: number
+  /**
+   * 内部参数，用户可忽略。
+   */
+  RemainBandwidthDuration?: string
+  /**
+   * Redis实例请忽略该参数。
+   */
+  DiskSize?: number
+  /**
+   * 监控版本。<ul><li>1m：1分钟粒度监控。目前该监控粒度已下线，具体信息，请参见[云数据库 Redis 1分钟粒度下线公告](https://cloud.tencent.com/document/product/239/80653)。</li><li>5s：5秒粒度监控。</li></ul>
+   */
+  MonitorVersion?: string
+  /**
+   * 客户端最大连接数可设置的最小值。
+   */
+  ClientLimitMin?: number
+  /**
+   * 客户端最大连接数可设置的最大值。
+   */
+  ClientLimitMax?: number
+  /**
+   * 实例的节点详细信息。
+只有多可用区实例会返回。
+   */
+  NodeSet?: Array<RedisNodeInfo>
+  /**
+   * 实例所在的地域信息，比如ap-guangzhou。
+   */
+  Region?: string
+  /**
+   * 外网地址。
+   */
+  WanAddress?: string
+  /**
+   * 北极星服务地址，内部使用。
+   */
+  PolarisServer?: string
+  /**
+   * CDC Redis集群ID。
+   */
+  RedisClusterId?: string
+  /**
+   * CDC 集群ID。
+   */
+  DedicatedClusterId?: string
+  /**
+   * 产品版本。<ul><li>local：本地盘。</li><li>cloud：云盘版。</li><li>cdc：CDC 集群版本。</li></ul>
+   */
+  ProductVersion?: string
+  /**
+   * 实例当前Proxy版本。
+   */
+  CurrentProxyVersion?: string
+  /**
+   * 实例当前Cache小版本。如果实例加入全球复制组，显示全球复制的内核版本。
+   */
+  CurrentRedisVersion?: string
+  /**
+   * 实例可升级Proxy版本。
+   */
+  UpgradeProxyVersion?: string
+  /**
+   * 实例可升级Cache小版本。
+   */
+  UpgradeRedisVersion?: string
+  /**
+   * 备份模式：- SecondLevelBackup   秒级备份- NormalLevelBackup    普通备份
+   */
+  BackupMode?: string
+  /**
+   * 删除保护开关，0关闭，1开启
+   */
+  DeleteProtectionSwitch?: number
+}
+
+/**
  * DescribeProxySlowLog返回参数结构体
  */
 export interface DescribeProxySlowLogResponse {
@@ -6824,6 +6806,20 @@ export interface HotKeyInfo {
    * 某段时间内热 Key 的访问次数
    */
   Count?: number
+}
+
+/**
+ * ModifyInstanceChargeType返回参数结构体
+ */
+export interface ModifyInstanceChargeTypeResponse {
+  /**
+   * <p>修改失败的实例信息汇总</p>
+   */
+  FailedInstanceIds?: Array<FailedInstance>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

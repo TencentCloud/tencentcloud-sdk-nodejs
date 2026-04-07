@@ -3807,9 +3807,13 @@ export interface CreateK8sApiAbnormalEventExportJobRequest {
  */
 export interface DescribeK8sApiAbnormalTendencyResponse {
   /**
-   * 趋势列表
+   * <p>趋势列表</p>
    */
   List?: Array<K8sApiAbnormalTendencyItem>
+  /**
+   * <p>规则类型对应中文</p>
+   */
+  RuleTypeZhSet?: Array<K8SAPIRuleTypeZhItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5426,17 +5430,17 @@ export interface CreateDefenceVulExportJobResponse {
 }
 
 /**
- * StopVirusScanTask请求参数结构体
+ * k8s告警类型和对应的告警数量
  */
-export interface StopVirusScanTaskRequest {
+export interface K8SAPIRuleTypeCountItem {
   /**
-   * 任务ID
+   * <p>规则类型</p><p>枚举值：</p><ul><li>ABNORMAL_CREATE_POD： 可疑容器创建</li></ul>
    */
-  TaskId: string
+  RuleType?: string
   /**
-   * 需要停止的容器id 为空默认停止整个任务
+   * <p>规则对应告警数量</p>
    */
-  ContainerIds?: Array<string>
+  EventCount?: number
 }
 
 /**
@@ -5543,6 +5547,20 @@ export interface CreateRiskDnsEventExportJobRequest {
    * 排序字段：事件数量：EventCount
    */
   By?: string
+}
+
+/**
+ * k8s告警类型和中文映射
+ */
+export interface K8SAPIRuleTypeZhItem {
+  /**
+   * <p>规则类型</p><p>枚举值：</p><ul><li>&quot;rule_type&quot;: &quot;ABNORMAL_CREATE_POD&quot;,： 可疑容器创建</li></ul>
+   */
+  RuleType?: string
+  /**
+   * <p>规则类型对应中文</p>
+   */
+  RuleTypeZh?: string
 }
 
 /**
@@ -8196,33 +8214,23 @@ Name 可取值：ClusterName,ClusterId,ClusterType,Region,ClusterCheckMode,Clust
  */
 export interface DescribeK8sApiAbnormalEventListRequest {
   /**
-   * 过滤条件。
-<li>TimeRange - string -是否必填: 否 - 时间范围筛选 ["2022-03-31 16:55:00", "2022-03-31 17:00:00"]</li>
-<li>MatchRules - string  - 是否必填: 否 -命中规则筛选</li>
-<li>RiskLevel - string  - 是否必填: 否 -威胁等级筛选</li>
-<li>Status - string  - 是否必填: 否 -事件状态筛选</li>
-<li>MatchRuleType - string  - 是否必填: 否 -命中规则类型筛选</li>
-<li>ClusterRunningStatus - string  - 是否必填: 否 -集群运行状态</li>
-<li>ClusterName - string  - 是否必填: 否 -集群名称</li>
-<li>ClusterID - string  - 是否必填: 否 -集群ID</li>
+   * <p>过滤条件。</p><li>TimeRange - string -是否必填: 否 - 时间范围筛选 ["2022-03-31 16:55:00", "2022-03-31 17:00:00"]</li><li>MatchRules - string  - 是否必填: 否 -命中规则筛选</li><li>RiskLevel - string  - 是否必填: 否 -威胁等级筛选</li><li>Status - string  - 是否必填: 否 -事件状态筛选</li><li>MatchRuleType - string  - 是否必填: 否 -命中规则类型筛选</li><li>ClusterRunningStatus - string  - 是否必填: 否 -集群运行状态</li><li>ClusterName - string  - 是否必填: 否 -集群名称</li><li>ClusterID - string  - 是否必填: 否 -集群ID</li>
    */
   Filters?: Array<RunTimeFilters>
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * <p>需要返回的数量，默认为10，最大值为100</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
   /**
-   * 排序方式
+   * <p>排序方式</p>
    */
   Order?: string
   /**
-   * 排序字段
-LatestFoundTime: 最近生成时间
-AlarmCount: 告警数量
+   * <p>排序字段<br>LatestFoundTime: 最近生成时间<br>AlarmCount: 告警数量</p>
    */
   By?: string
 }
@@ -9636,37 +9644,29 @@ export interface DescribeABTestConfigRequest {
  */
 export interface K8sApiAbnormalRuleScopeInfo {
   /**
-   * 范围
-系统事件:
-ANONYMOUS_ACCESS: 匿名访问
-ABNORMAL_UA_REQ: 异常UA请求
-ANONYMOUS_ABNORMAL_PERMISSION: 匿名用户权限异动
-GET_CREDENTIALS: 凭据信息获取
-MOUNT_SENSITIVE_PATH: 敏感路径挂载
-COMMAND_RUN: 命令执行
-PRIVILEGE_CONTAINER: 特权容器
-EXCEPTION_CRONTAB_TASK: 异常定时任务
-STATICS_POD: 静态pod创建
-ABNORMAL_CREATE_POD: 异常pod创建
-USER_DEFINED: 用户自定义
+   * <p>范围<br>系统事件:<br>ANONYMOUS_ACCESS: 匿名访问<br>ABNORMAL_UA_REQ: 异常UA请求<br>ANONYMOUS_ABNORMAL_PERMISSION: 匿名用户权限异动<br>GET_CREDENTIALS: 凭据信息获取<br>MOUNT_SENSITIVE_PATH: 敏感路径挂载<br>COMMAND_RUN: 命令执行<br>PRIVILEGE_CONTAINER: 特权容器<br>EXCEPTION_CRONTAB_TASK: 异常定时任务<br>STATICS_POD: 静态pod创建<br>ABNORMAL_CREATE_POD: 异常pod创建<br>USER_DEFINED: 用户自定义</p>
    */
   Scope: string
   /**
-   * 动作(RULE_MODE_ALERT: 告警 RULE_MODE_RELEASE:放行)
+   * <p>动作(RULE_MODE_ALERT: 告警 RULE_MODE_RELEASE:放行)</p>
    */
   Action: string
   /**
-   * 威胁等级 HIGH:高级 MIDDLE: 中级 LOW:低级 NOTICE:提示
+   * <p>威胁等级 HIGH:高级 MIDDLE: 中级 LOW:低级 NOTICE:提示</p>
    */
   RiskLevel?: string
   /**
-   * 开关状态(true:开 false:关) 适用于系统规则
+   * <p>开关状态(true:开 false:关) 适用于系统规则</p>
    */
   Status?: boolean
   /**
-   * 是否被删除 适用于自定义规则入参
+   * <p>是否被删除 适用于自定义规则入参</p>
    */
   IsDelete?: boolean
+  /**
+   * <p>规则类型对应中文</p>
+   */
+  RuleTypeZH?: string
 }
 
 /**
@@ -10365,13 +10365,17 @@ export interface CreateRefreshTaskRequest {
  */
 export interface DescribeK8sApiAbnormalEventListResponse {
   /**
-   * 事件列表
+   * <p>事件列表</p>
    */
   List?: Array<K8sApiAbnormalEventListItem>
   /**
-   * 总数量
+   * <p>总数量</p>
    */
   TotalCount?: number
+  /**
+   * <p>k8s告警类型和对应中文翻译</p>
+   */
+  RuleTypeZhSet?: Array<K8SAPIRuleTypeZhItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10561,6 +10565,20 @@ ASSET_K8S, K8S资产
    * 需要返回的数量，默认为10，最大值为100。
    */
   Limit?: number
+}
+
+/**
+ * StopVirusScanTask请求参数结构体
+ */
+export interface StopVirusScanTaskRequest {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+  /**
+   * 需要停止的容器id 为空默认停止整个任务
+   */
+  ContainerIds?: Array<string>
 }
 
 /**
@@ -12522,53 +12540,57 @@ export interface ModifyEscapeRuleRequest {
  */
 export interface K8sApiAbnormalTendencyItem {
   /**
-   * 日期
+   * <p>日期</p>
    */
   Date?: string
   /**
-   * 异常UA请求事件数
+   * <p>异常UA请求事件数</p>
    */
   ExceptionUARequestCount?: number
   /**
-   * 匿名用户权限事件数
+   * <p>匿名用户权限事件数</p>
    */
   AnonymousUserRightCount?: number
   /**
-   * 凭据信息获取事件数
+   * <p>凭据信息获取事件数</p>
    */
   CredentialInformationObtainCount?: number
   /**
-   * 敏感数据挂载事件数
+   * <p>敏感数据挂载事件数</p>
    */
   SensitiveDataMountCount?: number
   /**
-   * 命令执行事件数
+   * <p>命令执行事件数</p>
    */
   CmdExecCount?: number
   /**
-   * 异常定时任务事件数
+   * <p>异常定时任务事件数</p>
    */
   AbnormalScheduledTaskCount?: number
   /**
-   * 静态Pod创建数
+   * <p>静态Pod创建数</p>
    */
   StaticsPodCreateCount?: number
   /**
-   * 可疑容器创建数
+   * <p>可疑容器创建数</p>
    */
   DoubtfulContainerCreateCount?: number
   /**
-   * 自定义规则事件数
+   * <p>自定义规则事件数</p>
    */
   UserDefinedRuleCount?: number
   /**
-   * 匿名访问事件数
+   * <p>匿名访问事件数</p>
    */
   AnonymousAccessCount?: number
   /**
-   * 特权容器事件数
+   * <p>特权容器事件数</p>
    */
   PrivilegeContainerCount?: number
+  /**
+   * <p>规则类型对应告警数量</p>
+   */
+  RuleTypeCountSet?: Array<K8SAPIRuleTypeCountItem>
 }
 
 /**
@@ -20541,86 +20563,89 @@ export interface StopVirusScanTaskResponse {
  */
 export interface K8sApiAbnormalEventInfo {
   /**
-   * 命中规则名称
+   * <p>命中规则名称</p>
    */
   MatchRuleName?: string
   /**
-   * 命中规则类型
+   * <p>命中规则类型</p>
    */
   MatchRuleType?: string
   /**
-   * 告警等级
+   * <p>告警等级</p>
    */
   RiskLevel?: string
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterID?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName?: string
   /**
-   * 集群运行状态，CSR_RUNNING-运行中，CSR_EXCEPTION-异常，CSR_CREATING-创建中
+   * <p>集群运行状态，CSR_RUNNING-运行中，CSR_EXCEPTION-异常，CSR_CREATING-创建中</p>
    */
   ClusterRunningStatus?: string
   /**
-   * 初次生成时间
+   * <p>初次生成时间</p>
    */
   FirstCreateTime?: string
   /**
-   * 最近一次生成时间
+   * <p>最近一次生成时间</p>
    */
   LastCreateTime?: string
   /**
-   * 告警数量
+   * <p>告警数量</p>
    */
   AlarmCount?: number
   /**
-   * 状态
-"EVENT_UNDEAL":未处理
-"EVENT_DEALED": 已处理
-"EVENT_IGNORE": 忽略
-"EVENT_DEL": 删除
-"EVENT_ADD_WHITE": 加白
+   * <p>状态<br>&quot;EVENT_UNDEAL&quot;:未处理<br>&quot;EVENT_DEALED&quot;: 已处理<br>&quot;EVENT_IGNORE&quot;: 忽略<br>&quot;EVENT_DEL&quot;: 删除<br>&quot;EVENT_ADD_WHITE&quot;: 加白</p>
    */
   Status?: string
   /**
-   * 集群masterIP
+   * <p>集群masterIP</p>
    */
   ClusterMasterIP?: string
   /**
-   * k8s版本
+   * <p>k8s版本</p>
    */
   K8sVersion?: string
   /**
-   * 运行时组件
+   * <p>运行时组件</p>
    */
   RunningComponent?: Array<string>
   /**
-   * 描述
+   * <p>描述</p>
    */
   Desc?: string
   /**
-   * 建议
+   * <p>建议</p>
    */
   Suggestion?: string
   /**
-   * 请求信息
+   * <p>请求信息</p>
    */
   Info?: string
   /**
-   * 规则ID
+   * <p>规则ID</p>
    */
   MatchRuleID?: string
   /**
-   * 高亮字段数组
+   * <p>高亮字段数组</p>
    */
   HighLightFields?: Array<string>
   /**
-   * 命中规则
+   * <p>命中规则</p>
    */
   MatchRule?: K8sApiAbnormalRuleScopeInfo
+  /**
+   * <p>高亮字段对应的命中规则内容(JSON字符串, 如: {&quot;field1&quot;:&quot;value1&quot;,&quot;field2&quot;:&quot;value2&quot;})</p><p>参数格式：{&quot;field1&quot;:&quot;value1&quot;,&quot;field2&quot;:&quot;value2&quot;}</p>
+   */
+  HighLightFieldsVal?: string
+  /**
+   * <p>规则中文</p>
+   */
+  RuleTypeZH?: string
 }
 
 /**
@@ -22423,7 +22448,7 @@ export interface DeleteNetworkFirewallPolicyDetailResponse {
  */
 export interface DescribeK8sApiAbnormalTendencyRequest {
   /**
-   * 趋势周期(默认为7天)
+   * <p>趋势周期(默认为7天)</p>
    */
   TendencyPeriod: number
 }

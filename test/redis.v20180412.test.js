@@ -538,6 +538,16 @@ it("redis.v20180412.DescribeInstanceMonitorBigKeyTypeDist", async function () {
     }
 })
 
+it("redis.v20180412.ModifyInstanceChargeType", async function () {
+    try {
+       const data = await client.ModifyInstanceChargeType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("redis.v20180412.ReleaseWanAddress", async function () {
     try {
        const data = await client.ReleaseWanAddress({})

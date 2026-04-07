@@ -55,6 +55,7 @@ import {
   DescribeUpgradeTasksRequest,
   DescribeEKSContainerInstanceEventResponse,
   RouteTableInfo,
+  SchedulerPolicyPriority,
   EnableClusterDeletionProtectionResponse,
   ClusterAsGroup,
   DeleteRollOutSequenceResponse,
@@ -202,6 +203,7 @@ import {
   ModifyOpenPolicyListRequest,
   Probe,
   NodeCountSummary,
+  DescribeClusterSchedulerPolicyResponse,
   EdgeCluster,
   DescribeClusterNodePoolDetailResponse,
   DescribeEKSContainerInstanceEventRequest,
@@ -221,6 +223,7 @@ import {
   CreateGlobalMaintenanceWindowAndExclusionsResponse,
   DescribeRIUtilizationDetailRequest,
   ClusterCondition,
+  ExtenderManagedResource,
   BackupStorageLocation,
   DeleteClusterMaintenanceWindowAndExclusionRequest,
   UpdateEKSContainerInstanceResponse,
@@ -266,6 +269,7 @@ import {
   DriverVersion,
   CreateClusterInstancesRequest,
   CreateClusterMaintenanceWindowAndExclusionsRequest,
+  DescribePrometheusTempRequest,
   DeleteBackupStorageLocationRequest,
   ModifyClusterMaintenanceWindowAndExclusionsResponse,
   Flag,
@@ -280,6 +284,7 @@ import {
   OIDCConfigAuthenticationOptions,
   DescribeOSImagesResponse,
   DescribePrometheusGlobalConfigResponse,
+  SchedulerPluginConfigs,
   CreateClusterRequest,
   CreateEdgeCVMInstancesRequest,
   DescribeClusterReleaseHistoryRequest,
@@ -307,6 +312,7 @@ import {
   UpgradeClusterReleaseResponse,
   ModifyClusterMaintenanceWindowAndExclusionsRequest,
   DisableControlPlaneLogsResponse,
+  ServiceReference,
   ModifyExternalNodePoolResponse,
   DescribePrometheusAlertPolicyRequest,
   DeleteClusterAsGroupsResponse,
@@ -359,6 +365,7 @@ import {
   DescribeClusterLevelChangeRecordsRequest,
   UpdateClusterVersionResponse,
   InstanceUpgradePreCheckResultItem,
+  DescribeClusterSchedulerPolicyRequest,
   ModifyRollOutSequenceRequest,
   CreateClusterNodePoolRequest,
   DeleteClusterNodePoolResponse,
@@ -405,6 +412,7 @@ import {
   NodePool,
   ModifyPrometheusGlobalNotificationResponse,
   ModifyClusterExtraArgsTaskStateRequest,
+  ModifyClusterSchedulerPolicyRequest,
   UninstallClusterReleaseRequest,
   ModifyPrometheusTempResponse,
   UpgradeTask,
@@ -447,7 +455,7 @@ import {
   RestartEKSContainerInstancesRequest,
   DrainClusterVirtualNodeRequest,
   DescribeClusterLevelAttributeRequest,
-  DescribeClusterMaintenanceWindowAndExclusionsResponse,
+  DescribePrometheusAgentsResponse,
   DescribeClusterReleaseDetailsRequest,
   KubeJarvisStateResultsItem,
   CreateECMInstancesRequest,
@@ -494,6 +502,7 @@ import {
   ImageInstance,
   GlobalMaintenanceWindowAndExclusion,
   CreatePrometheusAlertPolicyRequest,
+  ExtenderClientConfig,
   DescribeImageCachesResponse,
   ResourceUsageDetail,
   DescribeClusterVirtualNodePoolsResponse,
@@ -558,6 +567,7 @@ import {
   CreateTKEEdgeClusterRequest,
   DescribeSupportedRuntimeResponse,
   EnableControlPlaneLogsResponse,
+  SchedulerPolicyConfig,
   CreateClusterVirtualNodePoolResponse,
   CreateEKSClusterResponse,
   CreateImageCacheResponse,
@@ -605,6 +615,7 @@ import {
   TaskStepInfo,
   DescribeTasksRequest,
   DeletePrometheusAlertRuleRequest,
+  Extenders,
   NodePoolRuntime,
   ModifyReservedInstanceScopeResponse,
   AvailableExtraArgs,
@@ -622,6 +633,7 @@ import {
   DeleteLogConfigsRequest,
   ModifyClusterTagsRequest,
   DescribeClusterKubeconfigRequest,
+  PluginSet,
   DeletePrometheusTempSyncRequest,
   CreatePrometheusTemplateResponse,
   CreateClusterEndpointVipRequest,
@@ -663,7 +675,7 @@ import {
   DescribeRouteTableConflictsResponse,
   EnableControlPlaneLogsRequest,
   DescribeVersionsRequest,
-  DescribePrometheusTempRequest,
+  ClientConnection,
   DeleteAddonResponse,
   DeleteClusterRouteTableRequest,
   DescribeClusterEndpointsRequest,
@@ -702,7 +714,7 @@ import {
   DescribeRollOutSequencesResponse,
   UpdateTKEEdgeClusterResponse,
   ClusterStatus,
-  DescribePrometheusAgentsResponse,
+  DescribeClusterMaintenanceWindowAndExclusionsResponse,
   DescribeVpcCniPodLimitsRequest,
   ExternalNodePool,
   DeleteImageCachesResponse,
@@ -744,6 +756,7 @@ import {
   PrometheusGrafanaInfo,
   DisableEncryptionProtectionRequest,
   PrometheusInstanceOverview,
+  ModifyClusterSchedulerPolicyResponse,
   DescribeClusterVirtualNodeResponse,
   ScaleInMaster,
   RunPrometheusInstanceRequest,
@@ -1439,6 +1452,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTKEEdgeScriptResponse) => void
   ): Promise<DescribeTKEEdgeScriptResponse> {
     return this.request("DescribeTKEEdgeScript", req, cb)
+  }
+
+  /**
+   * 查询集群调度策略
+   */
+  async DescribeClusterSchedulerPolicy(
+    req: DescribeClusterSchedulerPolicyRequest,
+    cb?: (error: string, rep: DescribeClusterSchedulerPolicyResponse) => void
+  ): Promise<DescribeClusterSchedulerPolicyResponse> {
+    return this.request("DescribeClusterSchedulerPolicy", req, cb)
   }
 
   /**
@@ -2532,13 +2555,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改模板内容
+   * 修改集群调度策略
    */
-  async ModifyPrometheusTemp(
-    req: ModifyPrometheusTempRequest,
-    cb?: (error: string, rep: ModifyPrometheusTempResponse) => void
-  ): Promise<ModifyPrometheusTempResponse> {
-    return this.request("ModifyPrometheusTemp", req, cb)
+  async ModifyClusterSchedulerPolicy(
+    req: ModifyClusterSchedulerPolicyRequest,
+    cb?: (error: string, rep: ModifyClusterSchedulerPolicyResponse) => void
+  ): Promise<ModifyClusterSchedulerPolicyResponse> {
+    return this.request("ModifyClusterSchedulerPolicy", req, cb)
   }
 
   /**
@@ -2859,6 +2882,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTasksResponse) => void
   ): Promise<DescribeTasksResponse> {
     return this.request("DescribeTasks", req, cb)
+  }
+
+  /**
+   * 修改模板内容
+   */
+  async ModifyPrometheusTemp(
+    req: ModifyPrometheusTempRequest,
+    cb?: (error: string, rep: ModifyPrometheusTempResponse) => void
+  ): Promise<ModifyPrometheusTempResponse> {
+    return this.request("ModifyPrometheusTemp", req, cb)
   }
 
   /**

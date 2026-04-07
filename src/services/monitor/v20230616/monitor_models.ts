@@ -280,44 +280,48 @@ export interface NotifyRelatedNotice {
  */
 export interface NoticeContentTmplItem {
   /**
-   * 官网通知渠道配置
+   * <p>官网通知渠道配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QCloudYehe?: Array<QCloudYeheNoticeTmplMatcher>
   /**
-   * 企业微信机器人通知渠道配置
+   * <p>企业微信机器人通知渠道配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WeWorkRobot?: Array<WeWorkRobotNoticeTmplMatcher>
   /**
-   * 钉钉机器人通知渠道配置
+   * <p>钉钉机器人通知渠道配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DingDingRobot?: Array<DingDingRobotNoticeTmplMatcher>
   /**
-   * 飞书机器人通知渠道配置
+   * <p>飞书机器人通知渠道配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FeiShuRobot?: Array<FeiShuRobotNoticeTmplMatcher>
   /**
-   * 自定义Webhook通知渠道配置
+   * <p>自定义Webhook通知渠道配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Webhook?: Array<WebhookNoticeTmplMatcher>
   /**
-   * Teams机器人通知渠道配置
+   * <p>Teams机器人通知渠道配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TeamsRobot?: Array<TeamsRobotNoticeTmplMatcher>
   /**
-   * PagerDutyRobot机器人通知渠道配置
+   * <p>PagerDutyRobot机器人通知渠道配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PagerDutyRobot?: Array<PagerDutyRobotNoticeTmplMatcher>
   /**
-   * GoogleChat
+   * <p>GoogleChat</p>
    */
   GoogleChatRobot?: Array<GoogleChatRobotNoticeTmplMatcher>
+  /**
+   * <p>Slack</p>
+   */
+  SlackRobot?: Array<SlackRobotNoticeTmplMatcher>
 }
 
 /**
@@ -667,6 +671,20 @@ Trigger 告警触发; Recovery 告警恢复
 }
 
 /**
+ * 企业微信机器人通知模板的匹配器
+ */
+export interface SlackRobotNoticeTmplMatcher {
+  /**
+   * <p>匹配状态 Invalid;<br>Trigger 告警触发; Recovery 告警恢复</p>
+   */
+  MatchingStatus: Array<string>
+  /**
+   * <p>模板配置</p>
+   */
+  Template: SlackRobotNoticeTmpl
+}
+
+/**
  * AI工作台SRE数字分身工作日志详细信息
  */
 export interface AIWorkbenchSREDigitalTwinWorkLogDetail {
@@ -875,6 +893,16 @@ export interface PagerDutyRobotNoticeTmpl {
    * 标题模板
    */
   TitleTmpl?: string
+}
+
+/**
+ * 企业微信机器人内容模板配置
+ */
+export interface SlackRobotNoticeTmpl {
+  /**
+   * <p>内容模板</p>
+   */
+  ContentTmpl: string
 }
 
 /**

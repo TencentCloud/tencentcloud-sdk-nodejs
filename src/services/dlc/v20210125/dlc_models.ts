@@ -12238,51 +12238,55 @@ export interface BindWorkGroupsToUserRequest {
  */
 export interface Column {
   /**
-   * 列名称，不区分大小写，最大支持25个字符。
+   * <p>列名称，不区分大小写，最大支持25个字符。</p>
    */
   Name: string
   /**
-   * string|tinyint|smallint|int|bigint|boolean|float|double|decimal|timestamp|date|binary|array|map|struct|uniontype
+   * <p>string|tinyint|smallint|int|bigint|boolean|float|double|decimal|timestamp|date|binary|array|map|struct|uniontype</p>
    */
   Type: string
   /**
-   * 对该类的注释。
+   * <p>对该类的注释。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
   /**
-   * 表示整个 numeric 的长度
+   * <p>表示整个 numeric 的长度</p>
    */
   Precision?: number
   /**
-   * 表示小数部分的长度
+   * <p>表示小数部分的长度</p>
    */
   Scale?: number
   /**
-   * 是否为null
+   * <p>是否为null</p>
    */
   Nullable?: string
   /**
-   * 字段位置，小的在前
+   * <p>字段位置，小的在前</p>
    */
   Position?: number
   /**
-   * 字段创建时间
+   * <p>字段创建时间</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
    */
   CreateTime?: string
   /**
-   * 字段修改时间
+   * <p>字段修改时间</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
    */
   ModifiedTime?: string
   /**
-   * 是否为分区字段
+   * <p>是否为分区字段</p>
    */
   IsPartition?: boolean
   /**
-   * 数据脱敏策略信息
+   * <p>数据脱敏策略信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataMaskStrategyInfo?: DataMaskStrategyInfo
+  /**
+   * <p>数据字段说明</p>
+   */
+  TypeText?: string
 }
 
 /**

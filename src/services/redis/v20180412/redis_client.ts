@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   UpgradeProxyVersionRequest,
+  ModifyInstanceChargeTypeRequest,
   DescribeInstanceMonitorSIPResponse,
   RemoveReplicationGroupRequest,
   UpgradeSmallVersionRequest,
@@ -240,7 +241,7 @@ import {
   DescribeReplicationGroupResponse,
   ModifyParamTemplateRequest,
   AvailableRegion,
-  InstanceSet,
+  FailedInstance,
   ReleaseWanAddressRequest,
   InquiryPriceRenewInstanceRequest,
   CloseSSLResponse,
@@ -275,6 +276,7 @@ import {
   DescribeRedisClustersResponse,
   DescribeLogInstanceListRequest,
   ModifyInstanceBackupModeRequest,
+  InstanceSet,
   DescribeProxySlowLogResponse,
   ModifyInstanceReadOnlyRequest,
   DescribeInstanceAccountResponse,
@@ -289,6 +291,7 @@ import {
   DisassociateSecurityGroupsRequest,
   ModifyNetworkConfigRequest,
   HotKeyInfo,
+  ModifyInstanceChargeTypeResponse,
   InstanceEnumParam,
   CreateInstanceAccountResponse,
   DescribeMaintenanceWindowRequest,
@@ -847,6 +850,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceMonitorBigKeyTypeDistResponse) => void
   ): Promise<DescribeInstanceMonitorBigKeyTypeDistResponse> {
     return this.request("DescribeInstanceMonitorBigKeyTypeDist", req, cb)
+  }
+
+  /**
+   * 本接口用于变更实例的计费类型
+   */
+  async ModifyInstanceChargeType(
+    req: ModifyInstanceChargeTypeRequest,
+    cb?: (error: string, rep: ModifyInstanceChargeTypeResponse) => void
+  ): Promise<ModifyInstanceChargeTypeResponse> {
+    return this.request("ModifyInstanceChargeType", req, cb)
   }
 
   /**

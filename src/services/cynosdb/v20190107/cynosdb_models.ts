@@ -1920,19 +1920,20 @@ export interface ProxySpec {
  */
 export interface AddInstancesResponse {
   /**
-   * 冻结流水，一次开通一个冻结流水。
+   * <p>冻结流水，一次开通一个冻结流水。</p>
    */
   TranId?: string
   /**
-   * 后付费订单号。
+   * <p>付费的订单号。说明：建议您使用 <a href="https://cloud.tencent.com/document/product/1003/52131">DescribeResourcesByDealName</a> 接口查询订单关联实例。</p>
    */
   DealNames?: Array<string>
   /**
-   * 发货资源id列表。
+   * <p>发货资源id列表。</p>
+   * @deprecated
    */
   ResourceIds?: Array<string>
   /**
-   * 大订单号
+   * <p>大订单号</p>
    */
   BigDealIds?: Array<string>
   /**
@@ -4590,6 +4591,20 @@ export interface DescribeLibraDBInstanceDetailResponse {
 }
 
 /**
+ * DescribeInstanceSpecsByOperationType返回参数结构体
+ */
+export interface DescribeInstanceSpecsByOperationTypeResponse {
+  /**
+   * 实例规格信息
+   */
+  InstanceSpecSet?: Array<InstanceSpec>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 任务信息
  */
 export interface ObjectTask {
@@ -6708,56 +6723,6 @@ export interface DescribeLibraDBClusterDetailResponse {
 }
 
 /**
- * 全球数据库任务信息
- */
-export interface GdnTaskInfo {
-  /**
-   * 全球数据库唯一标识
-   */
-  GdnId?: string
-  /**
-   * 全球数据库唯一别名
-   */
-  GdnName?: string
-  /**
-   * 主集群ID
-   */
-  PrimaryClusterId?: string
-  /**
-   * 主集群所在地域
-   */
-  PrimaryClusterRegion?: string
-  /**
-   * 从集群所在地域
-   */
-  StandbyClusterRegion?: string
-  /**
-   * 从集群ID
-   */
-  StandbyClusterId?: string
-  /**
-   * 从集群名称
-   */
-  StandbyClusterName?: string
-  /**
-   * 是否已强切
-   */
-  ForceSwitchGdn?: string
-  /**
-   * 返回码
-   */
-  Code?: number
-  /**
-   * 提示信息
-   */
-  Message?: string
-  /**
-   * 是否支持强切
-   */
-  IsSupportForce?: string
-}
-
-/**
  * GrantAccountPrivileges返回参数结构体
  */
 export interface GrantAccountPrivilegesResponse {
@@ -7343,79 +7308,76 @@ export interface IsolateClusterRequest {
  */
 export interface AddInstancesRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * Cpu核数
+   * <p>Cpu核数</p>
    */
   Cpu: number
   /**
-   * 内存，单位为GB
+   * <p>内存，单位为GB</p>
    */
   Memory: number
   /**
-   * 新增只读实例数，取值范围为(0,15]
+   * <p>新增只读实例数，取值范围为(0,15]</p>
    */
   ReadOnlyCount: number
   /**
-   * 实例机器类型，支持值如下：
-- common：表示通用型
-- exclusive：表示独享型
+   * <p>实例机器类型，支持值如下：</p><ul><li>common：表示通用型</li><li>exclusive：表示独享型</li></ul>
    */
   DeviceType?: string
   /**
-   * 实例组ID，在已有RO组中新增实例时使用，不传则新增RO组。当前版本不建议传输该值。
+   * <p>实例组ID，在已有RO组中新增实例时使用，不传则新增RO组。当前版本不建议传输该值。</p>
    * @deprecated
    */
   InstanceGrpId?: string
   /**
-   * 所属VPC网络ID。
+   * <p>所属VPC网络ID。</p>
    */
   VpcId?: string
   /**
-   * 所属子网ID，如果设置了VpcId，则SubnetId必填。
+   * <p>所属子网ID，如果设置了VpcId，则SubnetId必填。</p>
    */
   SubnetId?: string
   /**
-   * 新增RO组时使用的Port，取值范围为[0,65535)
+   * <p>新增RO组时使用的Port，取值范围为[0,65535)</p>
    */
   Port?: number
   /**
-   * 实例名称，字符串长度范围为[0,64)，取值范围为大小写字母，0-9数字，'_','-','.'
+   * <p>实例名称，字符串长度范围为[0,64)，取值范围为大小写字母，0-9数字，&#39;_&#39;,&#39;-&#39;,&#39;.&#39;</p>
    */
   InstanceName?: string
   /**
-   * 是否自动选择代金券 1是 0否 默认为0
+   * <p>是否自动选择代金券 1是 0否 默认为0</p>
    */
   AutoVoucher?: number
   /**
-   * 数据库类型，取值范围: 
-<li> MYSQL </li>
+   * <p>数据库类型，取值范围: </p><li> MYSQL </li>
    */
   DbType?: string
   /**
-   * 订单来源，字符串长度范围为[0,64)
+   * <p>订单来源，字符串长度范围为[0,64)</p>
    */
   OrderSource?: string
   /**
-   * 交易模式 0-下单并支付 1-下单
+   * <p>交易模式 0-下单并支付 1-下单</p>
    */
   DealMode?: number
   /**
-   * 参数模板ID
+   * <p>参数模板ID</p>
    */
   ParamTemplateId?: number
   /**
-   * 参数列表，ParamTemplateId 传入时InstanceParams才有效
+   * <p>参数列表，ParamTemplateId 传入时InstanceParams才有效</p>
    */
   InstanceParams?: Array<ModifyParamItem>
   /**
-   * 安全组ID，新建只读实例时可以指定安全组。
+   * <p>安全组ID，新建只读实例时可以指定安全组。</p>
    */
   SecurityGroupIds?: Array<string>
   /**
-   * proxy同步升级
+   * <p>proxy同步升级</p>
    */
   UpgradeProxy?: UpgradeProxy
 }
@@ -8124,17 +8086,47 @@ export interface BizTaskModifyParamsData {
 }
 
 /**
- * OfflineLibraDBCluster返回参数结构体
+ * 实例初始化配置信息
  */
-export interface OfflineLibraDBClusterResponse {
+export interface InstanceInitInfo {
   /**
-   * flow id
+   * 实例cpu
    */
-  FlowId?: number
+  Cpu: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例内存
    */
-  RequestId?: string
+  Memory: number
+  /**
+   * 实例类型 rw/ro
+   */
+  InstanceType: string
+  /**
+   * 实例个数,范围[1,15]
+   */
+  InstanceCount: number
+  /**
+   * Serverless实例个数最小值，范围[1,15]
+   */
+  MinRoCount?: number
+  /**
+   * Serverless实例个数最大值，范围[1,15]
+   */
+  MaxRoCount?: number
+  /**
+   * Serverless实例最小规格
+   */
+  MinRoCpu?: number
+  /**
+   * Serverless实例最大规格
+   */
+  MaxRoCpu?: number
+  /**
+   * 实例机器类型
+1. common，通用型。
+2. exclusive，独享型。
+   */
+  DeviceType?: string
 }
 
 /**
@@ -9463,47 +9455,53 @@ export interface Ability {
 }
 
 /**
- * 实例初始化配置信息
+ * 全球数据库任务信息
  */
-export interface InstanceInitInfo {
+export interface GdnTaskInfo {
   /**
-   * 实例cpu
+   * 全球数据库唯一标识
    */
-  Cpu: number
+  GdnId?: string
   /**
-   * 实例内存
+   * 全球数据库唯一别名
    */
-  Memory: number
+  GdnName?: string
   /**
-   * 实例类型 rw/ro
+   * 主集群ID
    */
-  InstanceType: string
+  PrimaryClusterId?: string
   /**
-   * 实例个数,范围[1,15]
+   * 主集群所在地域
    */
-  InstanceCount: number
+  PrimaryClusterRegion?: string
   /**
-   * Serverless实例个数最小值，范围[1,15]
+   * 从集群所在地域
    */
-  MinRoCount?: number
+  StandbyClusterRegion?: string
   /**
-   * Serverless实例个数最大值，范围[1,15]
+   * 从集群ID
    */
-  MaxRoCount?: number
+  StandbyClusterId?: string
   /**
-   * Serverless实例最小规格
+   * 从集群名称
    */
-  MinRoCpu?: number
+  StandbyClusterName?: string
   /**
-   * Serverless实例最大规格
+   * 是否已强切
    */
-  MaxRoCpu?: number
+  ForceSwitchGdn?: string
   /**
-   * 实例机器类型
-1. common，通用型。
-2. exclusive，独享型。
+   * 返回码
    */
-  DeviceType?: string
+  Code?: number
+  /**
+   * 提示信息
+   */
+  Message?: string
+  /**
+   * 是否支持强切
+   */
+  IsSupportForce?: string
 }
 
 /**
@@ -12096,6 +12094,30 @@ export interface DescribeAccountPrivilegesRequest {
    * 当Type="table"时，用来指定表名
    */
   TableName?: string
+}
+
+/**
+ * DescribeInstanceSpecsByOperationType请求参数结构体
+ */
+export interface DescribeInstanceSpecsByOperationTypeRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 操作类型
+addROInstance：新增RO实例
+modifyInstance：变配
+   */
+  OperationType: string
+  /**
+   * 实例ID，查询变配规格时必传
+   */
+  InstanceId?: string
+  /**
+   * 实例机器类型
+   */
+  DeviceType?: string
 }
 
 /**
@@ -14707,6 +14729,10 @@ export interface DescribeSlaveZonesRequest {
    * 云架集群ID
    */
   OssClusterId?: number
+  /**
+   * 存储架构类型。枚举值：1.0/2.0  默认值：1.0
+   */
+  StorageVersion?: string
 }
 
 /**
@@ -14944,6 +14970,20 @@ export interface CloseSSLResponse {
    * 任务id
    */
   TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * OfflineLibraDBCluster返回参数结构体
+ */
+export interface OfflineLibraDBClusterResponse {
+  /**
+   * flow id
+   */
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
