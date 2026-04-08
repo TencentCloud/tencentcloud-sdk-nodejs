@@ -7235,73 +7235,85 @@ export interface BudgetInfoApiResponse {
  */
 export interface CostDetail {
   /**
-   * 支付者uin
+   * <p>支付者uin</p>
    */
   PayerUin?: string
   /**
-   * 产品名称
+   * <p>产品名称</p>
    */
   BusinessCodeName?: string
   /**
-   * 子产品名称
+   * <p>子产品名称</p>
    */
   ProductCodeName?: string
   /**
-   * 计费模式名称
+   * <p>计费模式名称</p>
    */
   PayModeName?: string
   /**
-   * 项目名称
+   * <p>项目名称</p>
    */
   ProjectName?: string
   /**
-   * 区域名称
+   * <p>区域名称</p>
    */
   RegionName?: string
   /**
-   * 地区名称
+   * <p>地区名称</p>
    */
   ZoneName?: string
   /**
-   * 资源id
+   * <p>资源id</p>
    */
   ResourceId?: string
   /**
-   * 资源名称
+   * <p>资源名称</p>
    */
   ResourceName?: string
   /**
-   * 类型名称
+   * <p>类型名称</p>
    */
   ActionTypeName?: string
   /**
-   * 订单id
+   * <p>订单id</p>
    */
   OrderId?: string
   /**
-   * 交易id
+   * <p>交易id</p>
    */
   BillId?: string
   /**
-   * 费用开始时间
+   * <p>费用开始时间</p>
    */
   FeeBeginTime?: string
   /**
-   * 费用结束时间
+   * <p>费用结束时间</p>
    */
   FeeEndTime?: string
   /**
-   * 组件明细
+   * <p>组件明细</p>
    */
   ComponentSet?: Array<CostComponentSet>
   /**
-   * 子产品名称代码
+   * <p>子产品名称代码</p>
    */
   ProductCode?: string
   /**
-   * 标签信息
+   * <p>标签信息</p>
    */
   Tags?: Array<BillTagInfo>
+  /**
+   * <p>操作者UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的 ID 或者角色 ID ）</p>
+   */
+  OperateUin?: string
+  /**
+   * <p>使用者UIN：实际使用资源的账号 ID</p>
+   */
+  OwnerUin?: string
+  /**
+   * <p>扣费时间：结算扣费时间</p>
+   */
+  PayTime?: string
 }
 
 /**

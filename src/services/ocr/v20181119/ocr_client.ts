@@ -119,8 +119,9 @@ import {
   BizLicenseOCRRequest,
   MixedInvoiceDetectResponse,
   RideHailingDriverLicenseOCRRequest,
+  SealOCRRequest,
   VatInvoiceUserInfo,
-  GeneralMachineItem,
+  CropEnhanceImageOCRResponse,
   GeneralAccurateOCRResponse,
   ElectronicTrainTicketFull,
   BusInvoice,
@@ -137,6 +138,7 @@ import {
   ClassifyDetectOCRResponse,
   VinOCRRequest,
   ExtractDocAgentResponse,
+  RecognizeStoreNameResponse,
   OCRResult,
   VehicleLicenseOCRResponse,
   VatInvoiceOCRRequest,
@@ -221,6 +223,7 @@ import {
   TextTable,
   FinanBillSliceInfo,
   ShoppingReceipt,
+  EraseHandwrittenImageOCRResponse,
   Encryption,
   ArithmeticOCRRequest,
   NonTaxIncomeBill,
@@ -237,6 +240,7 @@ import {
   RecognizeTableAccurateOCRRequest,
   Coord,
   SealOCRResponse,
+  InsuranceBillOCRResponse,
   DutyPaidProofInfo,
   FinanBillOCRResponse,
   HandwritingEssayOCRRequest,
@@ -279,13 +283,13 @@ import {
   QuestionOCRRequest,
   TextTractorVehicleBack,
   RecognizeMedicalInvoiceOCRRequest,
-  InsuranceBillOCRResponse,
+  GeneralMachineItem,
   ClassifyDetectInfo,
   TrainTicketOCRRequest,
   GeneralEfficientOCRResponse,
   ShipInvoiceOCRRequest,
   MLIDPassportOCRResponse,
-  SealOCRRequest,
+  CropEnhanceImageOCRRequest,
   VerifyOfdVatInvoiceOCRResponse,
   MedicalInvoice,
   HmtResidentPermitOCRRequest,
@@ -294,7 +298,7 @@ import {
   GetOCRResultRequest,
   BusInvoiceOCRResponse,
   VatInvoiceInfo,
-  QrcodeResultsInfo,
+  EraseHandwrittenImageOCRRequest,
   GetOCRResultResponse,
   MainlandPermitOCRResponse,
   VatInvoice,
@@ -332,7 +336,7 @@ import {
   IDCardOCRRequest,
   MixedInvoiceDetectRequest,
   VatRollItem,
-  RecognizeStoreNameResponse,
+  QrcodeResultsInfo,
   BusinessCertificateInfo,
   WaybillOCRRequest,
   RideHailingTransportLicenseOCRRequest,
@@ -769,6 +773,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FlightInvoiceOCRResponse) => void
   ): Promise<FlightInvoiceOCRResponse> {
     return this.request("FlightInvoiceOCR", req, cb)
+  }
+
+  /**
+   * 图像切边矫正增强是面向文档类图片提供的图像增强处理能力，包括切边增强、图像矫正、阴影去除、摩尔纹去除等；可以有效优化文档类的图片质量，提升文字的清晰度，可以作为所有识别场景的图像预处理原子能力，从而提升识别效果。
+   */
+  async CropEnhanceImageOCR(
+    req: CropEnhanceImageOCRRequest,
+    cb?: (error: string, rep: CropEnhanceImageOCRResponse) => void
+  ): Promise<CropEnhanceImageOCRResponse> {
+    return this.request("CropEnhanceImageOCR", req, cb)
   }
 
   /**
@@ -1217,6 +1231,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BankCardOCRResponse) => void
   ): Promise<BankCardOCRResponse> {
     return this.request("BankCardOCR", req, cb)
+  }
+
+  /**
+   * 本功能可自动清除试卷图片中的手写与批改痕迹，并输出洁净的空白试卷。也可以配合集成图像切边矫正技术，能自动定位、拉平试卷区域，从而在最优预处理基础上实现更佳的擦除效果。
+   */
+  async EraseHandwrittenImageOCR(
+    req: EraseHandwrittenImageOCRRequest,
+    cb?: (error: string, rep: EraseHandwrittenImageOCRResponse) => void
+  ): Promise<EraseHandwrittenImageOCRResponse> {
+    return this.request("EraseHandwrittenImageOCR", req, cb)
   }
 
   /**

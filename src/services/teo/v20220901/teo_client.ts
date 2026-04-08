@@ -63,6 +63,7 @@ import {
   CreateCLSIndexResponse,
   DescribeRealtimeLogDeliveryTasksRequest,
   DescribeOriginProtectionResponse,
+  TCEOCaptchaOption,
   DescribeBillingDataRequest,
   LogFormat,
   DescribeEnvironmentsRequest,

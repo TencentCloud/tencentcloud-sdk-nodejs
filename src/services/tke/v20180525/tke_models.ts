@@ -4397,9 +4397,13 @@ export interface ClusterCondition {
  */
 export interface ExtenderManagedResource {
   /**
-   * 自定义资源的名称
+   * <p>自定义资源的名称</p>
    */
   Name?: string
+  /**
+   * <p>调度器是否忽略该资源的默认处理</p>
+   */
+  IgnoredByScheduler?: boolean
 }
 
 /**
@@ -12778,25 +12782,33 @@ export interface DeletePrometheusAlertRuleRequest {
  */
 export interface Extenders {
   /**
-   * 过滤阶段接口
+   * <p>过滤阶段接口</p>
    */
   FilterVerb?: string
   /**
-   * 打分阶段扩展接口
+   * <p>打分阶段扩展接口</p>
    */
   PrioritizeVerb?: string
   /**
-   * 打分阶段节点分数的权重,取值范围限定(0,2】
+   * <p>打分阶段节点分数的权重,取值范围限定(0,2】</p>
    */
   Weight?: number
   /**
-   * 扩展调度器(Extender)管理的扩展资源
+   * <p>扩展调度器(Extender)管理的扩展资源</p>
    */
   ManagedResources?: Array<ExtenderManagedResource>
   /**
-   * extender客户端配置
+   * <p>extender客户端配置</p>
    */
   ExtenderClientConfig?: ExtenderClientConfig
+  /**
+   * <p>抢占接口</p>
+   */
+  PreemptVerb?: string
+  /**
+   * <p>节点缓存能力</p>
+   */
+  NodeCacheCapable?: boolean
 }
 
 /**

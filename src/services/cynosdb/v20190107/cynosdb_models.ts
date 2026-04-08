@@ -2449,15 +2449,15 @@ export interface ExportResourcePackageDeductDetailsRequest {
  */
 export interface DescribeRedoLogListByVaultItem {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName?: string
   /**
-   * RedoLog文件信息
+   * <p>RedoLog文件信息</p>
    */
   RedoFileInfo?: RedoLogItem
 }
@@ -8571,15 +8571,15 @@ export interface DescribeRollbackTimeRangeResponse {
  */
 export interface DescribeBinlogListByVaultItem {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName?: string
   /**
-   * Binlog文件信息
+   * <p>Binlog文件信息</p>
    */
   BinlogFileInfo?: BinlogItem
 }
@@ -10484,15 +10484,15 @@ export interface CreateProxyRequest {
  */
 export interface DescribeBackupListByVaultItem {
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   ClusterId?: string
   /**
-   * 集群name
+   * <p>集群name</p>
    */
   ClusterName?: string
   /**
-   * 备份信息
+   * <p>备份信息</p>
    */
   BackupFileInfo?: BackupFileInfo
 }

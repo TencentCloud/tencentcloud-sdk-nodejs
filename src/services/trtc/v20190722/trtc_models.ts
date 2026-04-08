@@ -2830,7 +2830,7 @@ export interface StartStreamIngestRequest {
    */
   UserSig: string
   /**
-   * 源流URL【必填】。如果是视频流，分辨率请保持不变。
+   * 源流URL【必填】。如果是视频流，分辨率请保持不变，视频流的最大分辨率限制1080p，最大帧率限制30fps。
    */
   StreamUrl?: string
   /**
@@ -2872,7 +2872,7 @@ export interface StartStreamIngestRequest {
    */
   MaxDuration?: number
   /**
-   * 音量，取值范围[0, 100]，默认100，表示原音量。
+   * 音量，取值范围[0, 200]，默认100，表示原音量。
    */
   Volume?: number
   /**
@@ -2883,6 +2883,10 @@ export interface StartStreamIngestRequest {
    * 播放倍速，默认1.0，可取[0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0]
    */
   Tempo?: number
+  /**
+   * 播放任务处于空闲状态的最大时长（秒）, 不填时任务会自适应销毁，可取[0, 600]，空闲状态超过设置的 IdleTimeout 后，该播放任务会自动销毁
+   */
+  IdleTimeout?: number
 }
 
 /**
@@ -4964,7 +4968,7 @@ export interface UpdateStreamIngestRequest {
    */
   StreamUrl?: string
   /**
-   * 音量，取值范围[0, 100]，默认100，表示原音量。
+   * 音量，取值范围[0, 200]，默认100，表示原音量。
    */
   Volume?: number
   /**

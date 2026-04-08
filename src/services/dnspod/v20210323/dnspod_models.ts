@@ -1640,53 +1640,13 @@ export interface DescribeSnapshotConfigRequest {
 }
 
 /**
- * 增值服务信息
+ * ModifyRecordBatchV3请求参数结构体
  */
-export interface VasListItem {
+export interface ModifyRecordBatchV3Request {
   /**
-   * 规格总数
+   * 需要修改的记录列表
    */
-  LimitNumber: number
-  /**
-   * 购买时间
-   */
-  StartedAt: string
-  /**
-   * 到期时间
-   */
-  EndedAt: string
-  /**
-   * 资源唯一 ID
-   */
-  ResourceId: string
-  /**
-   * 自动续费标识
-   */
-  AutoRenew: string
-  /**
-   * 已绑定的域名
-   */
-  Domain: string
-  /**
-   * 绑定类型
-   */
-  BindType: string
-  /**
-   * 增值服务类型
-   */
-  Key: string
-  /**
-   * 增值服务名
-   */
-  Name: string
-  /**
-   * 是否可续费
-   */
-  CanRenew: boolean
-  /**
-   * 是否只允许付费套餐域名可购买
-   */
-  VipDomain: boolean
+  ModifyRecordList: Array<ModifyRecordItem>
 }
 
 /**
@@ -2045,6 +2005,20 @@ export interface DescribeRecordRequest {
    * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
    */
   DomainId?: number
+}
+
+/**
+ * ModifyRecordBatchV3返回参数结构体
+ */
+export interface ModifyRecordBatchV3Response {
+  /**
+   * 批量任务ID
+   */
+  JobId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3334,6 +3308,52 @@ export interface ModifyRecordBatchDetail {
 }
 
 /**
+ * 批量修改记录入参，指定修改的记录ID和记录内容
+ */
+export interface ModifyRecordItem {
+  /**
+   * 记录 ID
+   */
+  RecordId: number
+  /**
+   * 主机记录
+   */
+  SubDomain?: string
+  /**
+   * 记录类型
+   */
+  RecordType?: string
+  /**
+   * 记录线路
+   */
+  RecordLine?: string
+  /**
+   * 记录值
+   */
+  Value?: string
+  /**
+   * 解析记录状态 1：开启 0：暂停
+   */
+  Enabled?: string
+  /**
+   * 备注信息
+   */
+  Remark?: string
+  /**
+   * 权重
+   */
+  Weight?: number
+  /**
+   * MX优先级
+   */
+  MX?: number
+  /**
+   * TTL缓存时间
+   */
+  TTL?: number
+}
+
+/**
  * DescribeSnapshotRollbackResult请求参数结构体
  */
 export interface DescribeSnapshotRollbackResultRequest {
@@ -3988,6 +4008,56 @@ export interface Deals {
    * <p>资源ID</p>
    */
   ResourceId?: string
+}
+
+/**
+ * 增值服务信息
+ */
+export interface VasListItem {
+  /**
+   * 规格总数
+   */
+  LimitNumber: number
+  /**
+   * 购买时间
+   */
+  StartedAt: string
+  /**
+   * 到期时间
+   */
+  EndedAt: string
+  /**
+   * 资源唯一 ID
+   */
+  ResourceId: string
+  /**
+   * 自动续费标识
+   */
+  AutoRenew: string
+  /**
+   * 已绑定的域名
+   */
+  Domain: string
+  /**
+   * 绑定类型
+   */
+  BindType: string
+  /**
+   * 增值服务类型
+   */
+  Key: string
+  /**
+   * 增值服务名
+   */
+  Name: string
+  /**
+   * 是否可续费
+   */
+  CanRenew: boolean
+  /**
+   * 是否只允许付费套餐域名可购买
+   */
+  VipDomain: boolean
 }
 
 /**

@@ -118,6 +118,16 @@ it("vpc.v20170312.AssociateHaVipInstance", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyTrafficMirrorFilterRules", async function () {
+    try {
+       const data = await client.ModifyTrafficMirrorFilterRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.AcceptVpcPeeringConnection", async function () {
     try {
        const data = await client.AcceptVpcPeeringConnection({})
@@ -548,6 +558,16 @@ it("vpc.v20170312.DeleteRoutePolicyAssociations", async function () {
     }
 })
 
+it("vpc.v20170312.DeleteHaVip", async function () {
+    try {
+       const data = await client.DeleteHaVip({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DeleteNetworkInterface", async function () {
     try {
        const data = await client.DeleteNetworkInterface({})
@@ -818,9 +838,9 @@ it("vpc.v20170312.ModifyVpcPeeringConnection", async function () {
     }
 })
 
-it("vpc.v20170312.DeleteHaVip", async function () {
+it("vpc.v20170312.DescribeTrafficMirrorFilterRules", async function () {
     try {
-       const data = await client.DeleteHaVip({})
+       const data = await client.DescribeTrafficMirrorFilterRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1858,6 +1878,16 @@ it("vpc.v20170312.DescribePrivateNatGatewayTranslationAclRules", async function 
     }
 })
 
+it("vpc.v20170312.UnlockCcns", async function () {
+    try {
+       const data = await client.UnlockCcns({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DisableFlowLogs", async function () {
     try {
        const data = await client.DisableFlowLogs({})
@@ -2001,6 +2031,16 @@ it("vpc.v20170312.CreateNatGatewaySourceIpTranslationNatRule", async function ()
 it("vpc.v20170312.RemoveIp6Rules", async function () {
     try {
        const data = await client.RemoveIp6Rules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vpc.v20170312.DescribeCdcLDCXList", async function () {
+    try {
+       const data = await client.DescribeCdcLDCXList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2588,9 +2628,9 @@ it("vpc.v20170312.DisassociateAddress", async function () {
     }
 })
 
-it("vpc.v20170312.DescribeCdcLDCXList", async function () {
+it("vpc.v20170312.CreateTrafficMirrorFilterRules", async function () {
     try {
-       const data = await client.DescribeCdcLDCXList({})
+       const data = await client.CreateTrafficMirrorFilterRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -4088,9 +4128,9 @@ it("vpc.v20170312.DescribeNatGatewayDirectConnectGatewayRoute", async function (
     }
 })
 
-it("vpc.v20170312.UnlockCcns", async function () {
+it("vpc.v20170312.DeleteTrafficMirrorFilterRules", async function () {
     try {
-       const data = await client.UnlockCcns({})
+       const data = await client.DeleteTrafficMirrorFilterRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

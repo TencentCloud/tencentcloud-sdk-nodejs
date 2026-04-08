@@ -91,7 +91,7 @@ import {
   ModifyPackageDomainResponse,
   DomainShareInfo,
   DescribeSnapshotConfigRequest,
-  VasListItem,
+  ModifyRecordBatchV3Request,
   LineInfo,
   DeleteLineGroupResponse,
   DescribeRecordLineListRequest,
@@ -108,6 +108,7 @@ import {
   ModifyDomainStatusResponse,
   AddRecordBatch,
   DescribeRecordRequest,
+  ModifyRecordBatchV3Response,
   CreateDomainGroupResponse,
   DescribeSubdomainAnalyticsRequest,
   DeleteRecordRequest,
@@ -162,6 +163,7 @@ import {
   ModifyDomainRecursiveStatusBatchRequest,
   CustomLineInfo,
   ModifyRecordBatchDetail,
+  ModifyRecordItem,
   DescribeSnapshotRollbackResultRequest,
   DescribeDomainShareUserListRequest,
   DeleteDomainBatchDetail,
@@ -188,6 +190,7 @@ import {
   DeleteSnapshotResponse,
   DescribeDomainPurviewResponse,
   Deals,
+  VasListItem,
   ModifySubdomainStatusResponse,
   DescribeSubdomainValidateStatusResponse,
   DescribeDomainAnalyticsResponse,
@@ -1219,6 +1222,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDomainFilterListResponse) => void
   ): Promise<DescribeDomainFilterListResponse> {
     return this.request("DescribeDomainFilterList", req, cb)
+  }
+
+  /**
+   * 批量修改记录
+   */
+  async ModifyRecordBatchV3(
+    req: ModifyRecordBatchV3Request,
+    cb?: (error: string, rep: ModifyRecordBatchV3Response) => void
+  ): Promise<ModifyRecordBatchV3Response> {
+    return this.request("ModifyRecordBatchV3", req, cb)
   }
 
   /**

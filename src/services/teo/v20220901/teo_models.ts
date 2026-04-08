@@ -895,6 +895,16 @@ export interface DescribeOriginProtectionResponse {
 }
 
 /**
+ * EdgeOne 人机校验认证实例信息。
+ */
+export interface TCEOCaptchaOption {
+  /**
+   * EdgeOne 人机校验模式，取值有：<li> Invisible：无感验证；</li><li>Adaptive：自适应交互验证。</li>
+   */
+  CaptchaMode?: string
+}
+
+/**
  * DescribeBillingData请求参数结构体
  */
 export interface DescribeBillingDataRequest {
@@ -8986,7 +8996,8 @@ export interface ClientAttester {
   /**
    * 认证方法。取值有：
 <li>TC-RCE: 使用风险识别 RCE 进行认证；</li>
-<li>TC-CAPTCHA: 使用天御验证码进行认证。</li>
+<li>TC-CAPTCHA: 使用天御验证码进行认证；</li>
+<li>TC-EO-CAPTCHA: 使用 EdgeOne 人机校验进行认证。</li>
    */
   AttesterSource?: string
   /**
@@ -9006,6 +9017,11 @@ export interface ClientAttester {
 <li>当 AttesterSource 参数值为 TC-CAPTCHA 时，此字段必填。</li>
    */
   TCCaptchaOption?: TCCaptchaOption
+  /**
+   * TC-EO-CAPTCHA 认证的配置信息。
+<li>当 AttesterSource 参数值为 TC-EO-CAPTCHA 时，此字段必填。</li>
+   */
+  TCEOCaptchaOption?: TCEOCaptchaOption
 }
 
 /**

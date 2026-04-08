@@ -41,11 +41,12 @@ import {
   DescribeNetworkInterfacesRequest,
   DescribeVpcLimitsRequest,
   ReleaseIp6AddressesBandwidthResponse,
+  SetCcnRegionBandwidthLimitsResponse,
   DescribeVpcIpv6AddressesRequest,
   MigrateNetworkInterfaceRequest,
   SourceIpTranslationNatRule,
-  DescribeRoutesResponse,
-  ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse,
+  AssignIpv6CidrBlockRequest,
+  CreateTrafficMirrorFilterRulesRequest,
   ModifyIp6RuleResponse,
   DeleteCdcLDCXListResponse,
   SetVpnGatewaysRenewFlagRequest,
@@ -125,6 +126,7 @@ import {
   SecurityGroupPolicySet,
   DescribeHighPriorityRoutesRequest,
   DescribeSecurityGroupExpandedPoliciesResponse,
+  DeleteTrafficMirrorFilterRulesRequest,
   ModifyFlowLogAttributeRequest,
   UnassignIpv6SubnetCidrBlockResponse,
   ReplaceHighPriorityRoutesResponse,
@@ -195,12 +197,12 @@ import {
   IKEOptionsSpecification,
   DescribeTaskResultRequest,
   ModifyAddressInternetChargeTypeResponse,
-  SetCcnRegionBandwidthLimitsResponse,
+  ModifyNatGatewayDestinationIpPortTranslationNatRuleResponse,
   CreateRoutePolicyResponse,
   ModifyIPv6AddressesBandwidthRequest,
   DescribeAccountAttributesResponse,
   ModifyNetworkAclQuintupleEntriesResponse,
-  AssignIpv6CidrBlockRequest,
+  CreateTrafficMirrorFilterRulesResponse,
   CreateSecurityGroupPoliciesResponse,
   UnassignIpv6CidrBlockResponse,
   ModifyVpnGatewayRoutesRequest,
@@ -260,6 +262,7 @@ import {
   TrafficQosPolicySet,
   DeleteAddressTemplateRequest,
   CreateNatGatewaySourceIpTranslationNatRuleRequest,
+  DescribeTrafficMirrorFilterRulesRequest,
   NetworkInterface,
   TransformAddressRequest,
   ReplaceDirectConnectGatewayCcnRoutesRequest,
@@ -334,6 +337,7 @@ import {
   DescribeVpcResourceDashboardRequest,
   ModifyIp6RuleRequest,
   ReplaceRouteTableAssociationRequest,
+  ReplaceSecurityGroupPolicyRequest,
   PrivateNatCrossDomainInfo,
   LocalDestinationIpPortTranslationNatRule,
   AssociateNetworkAclSubnetsRequest,
@@ -415,6 +419,7 @@ import {
   AddressTemplateSpecification,
   VpcIpv6Address,
   AssignIpv6AddressesRequest,
+  DeleteTrafficMirrorFilterRulesResponse,
   RouteSelectionPolicy,
   CreateServiceTemplateGroupResponse,
   NetDetect,
@@ -424,7 +429,7 @@ import {
   ModifyPrivateNatGatewayDestinationIpPortTranslationNatRuleRequest,
   ReplaceHighPriorityRoutesRequest,
   DeleteHighPriorityRoutesResponse,
-  ReplaceSecurityGroupPolicyRequest,
+  ModifyTrafficMirrorFilterRulesRequest,
   CcnPolicyBasedRoutingRule,
   ModifyVpcEndPointServiceAttributeResponse,
   DeletePrivateNatGatewayDestinationIpPortTranslationNatRuleResponse,
@@ -498,7 +503,7 @@ import {
   DescribePrivateNatGatewayDestinationIpPortTranslationNatRulesRequest,
   DescribeDhcpIpsRequest,
   DescribeAssistantCidrRequest,
-  RenewVpnGatewayResponse,
+  DescribeTrafficMirrorFilterRulesResponse,
   DescribeCcnRouteTablesResponse,
   DeleteDirectConnectGatewayResponse,
   DescribeIPv6AddressesRequest,
@@ -792,6 +797,7 @@ import {
   AllocateAddressesResponse,
   MigrateBandwidthPackageResourcesResponse,
   DescribeCdcUsedIdcVlanRequest,
+  DescribeRoutesResponse,
   BandwidthPackage,
   ModifyIpv6AddressesAttributeResponse,
   CcnBatchRouteTable,
@@ -898,6 +904,7 @@ import {
   DescribeServiceTemplatesResponse,
   AcceptVpcPeeringConnectionResponse,
   DescribeSgSnapshotFileContentRequest,
+  ModifyTrafficMirrorFilterRulesResponse,
   DescribeSecurityGroupExpandedPoliciesRequest,
   CreateBandwidthPackageResponse,
   CreateNetworkAclEntriesResponse,
@@ -925,6 +932,7 @@ import {
   CreateNetworkInterfaceResponse,
   DescribeAddressQuotaRequest,
   LockCcnsResponse,
+  RenewVpnGatewayResponse,
   BatchModifySnapshotPolicy,
   AssignIpv6AddressesResponse,
   CreateRoutesResponse,
@@ -1207,6 +1215,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AssociateHaVipInstanceResponse) => void
   ): Promise<AssociateHaVipInstanceResponse> {
     return this.request("AssociateHaVipInstance", req, cb)
+  }
+
+  /**
+   * 修改流量镜像五元组过滤规则。
+   */
+  async ModifyTrafficMirrorFilterRules(
+    req: ModifyTrafficMirrorFilterRulesRequest,
+    cb?: (error: string, rep: ModifyTrafficMirrorFilterRulesResponse) => void
+  ): Promise<ModifyTrafficMirrorFilterRulesResponse> {
+    return this.request("ModifyTrafficMirrorFilterRules", req, cb)
   }
 
   /**
@@ -1695,6 +1713,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口（DeleteHaVip）用于删除高可用虚拟IP（HAVIP）。<br />
+本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
+     */
+  async DeleteHaVip(
+    req: DeleteHaVipRequest,
+    cb?: (error: string, rep: DeleteHaVipResponse) => void
+  ): Promise<DeleteHaVipResponse> {
+    return this.request("DeleteHaVip", req, cb)
+  }
+
+  /**
      * 本接口（DeleteNetworkInterface）用于删除弹性网卡。
 * 弹性网卡上绑定了云服务器时，不能被删除。
 * 删除指定弹性网卡，弹性网卡必须先和子机解绑才能删除。删除之后弹性网卡上所有内网IP都将被退还。
@@ -1980,14 +2009,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（DeleteHaVip）用于删除高可用虚拟IP（HAVIP）。<br />
-本接口是异步完成，如需查询异步任务执行结果，请使用本接口返回的`RequestId`轮询`DescribeVpcTaskResult`接口。
-     */
-  async DeleteHaVip(
-    req: DeleteHaVipRequest,
-    cb?: (error: string, rep: DeleteHaVipResponse) => void
-  ): Promise<DeleteHaVipResponse> {
-    return this.request("DeleteHaVip", req, cb)
+   * 查询流量镜像五元组过滤规则。
+   */
+  async DescribeTrafficMirrorFilterRules(
+    req: DescribeTrafficMirrorFilterRulesRequest,
+    cb?: (error: string, rep: DescribeTrafficMirrorFilterRulesResponse) => void
+  ): Promise<DescribeTrafficMirrorFilterRulesResponse> {
+    return this.request("DescribeTrafficMirrorFilterRules", req, cb)
   }
 
   /**
@@ -3141,6 +3169,20 @@ LimitTypes取值范围：
   }
 
   /**
+     * 本接口（UnlockCcns）用于解锁云联网实例
+
+该接口一般用来解封禁出口限速的云联网实例, 目前联通内部运营系统通过云API调用, 因为出口限速无法按地域间解封禁, 只能按更粗的云联网实例粒度解封禁, 如果是地域间限速, 一般可以通过更细的限速实例粒度解封禁（UnlockCcnBandwidths）
+
+如有需要, 可以封禁任意限速实例, 可接入到内部运营系统
+     */
+  async UnlockCcns(
+    req?: UnlockCcnsRequest,
+    cb?: (error: string, rep: UnlockCcnsResponse) => void
+  ): Promise<UnlockCcnsResponse> {
+    return this.request("UnlockCcns", req, cb)
+  }
+
+  /**
    * 本接口（DisableFlowLogs）用于停止流日志。
    */
   async DisableFlowLogs(
@@ -3299,6 +3341,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: RemoveIp6RulesResponse) => void
   ): Promise<RemoveIp6RulesResponse> {
     return this.request("RemoveIp6Rules", req, cb)
+  }
+
+  /**
+   * 查询 IDC通道信息
+   */
+  async DescribeCdcLDCXList(
+    req?: DescribeCdcLDCXListRequest,
+    cb?: (error: string, rep: DescribeCdcLDCXListResponse) => void
+  ): Promise<DescribeCdcLDCXListResponse> {
+    return this.request("DescribeCdcLDCXList", req, cb)
   }
 
   /**
@@ -3938,13 +3990,13 @@ LimitTypes取值范围：
   }
 
   /**
-   * 查询 IDC通道信息
+   * 创建流量镜像五元组过滤规则。
    */
-  async DescribeCdcLDCXList(
-    req?: DescribeCdcLDCXListRequest,
-    cb?: (error: string, rep: DescribeCdcLDCXListResponse) => void
-  ): Promise<DescribeCdcLDCXListResponse> {
-    return this.request("DescribeCdcLDCXList", req, cb)
+  async CreateTrafficMirrorFilterRules(
+    req: CreateTrafficMirrorFilterRulesRequest,
+    cb?: (error: string, rep: CreateTrafficMirrorFilterRulesResponse) => void
+  ): Promise<CreateTrafficMirrorFilterRulesResponse> {
+    return this.request("CreateTrafficMirrorFilterRules", req, cb)
   }
 
   /**
@@ -5513,17 +5565,13 @@ LimitTypes取值范围：
   }
 
   /**
-     * 本接口（UnlockCcns）用于解锁云联网实例
-
-该接口一般用来解封禁出口限速的云联网实例, 目前联通内部运营系统通过云API调用, 因为出口限速无法按地域间解封禁, 只能按更粗的云联网实例粒度解封禁, 如果是地域间限速, 一般可以通过更细的限速实例粒度解封禁（UnlockCcnBandwidths）
-
-如有需要, 可以封禁任意限速实例, 可接入到内部运营系统
-     */
-  async UnlockCcns(
-    req?: UnlockCcnsRequest,
-    cb?: (error: string, rep: UnlockCcnsResponse) => void
-  ): Promise<UnlockCcnsResponse> {
-    return this.request("UnlockCcns", req, cb)
+   * 删除流量镜像五元组过滤规则。
+   */
+  async DeleteTrafficMirrorFilterRules(
+    req: DeleteTrafficMirrorFilterRulesRequest,
+    cb?: (error: string, rep: DeleteTrafficMirrorFilterRulesResponse) => void
+  ): Promise<DeleteTrafficMirrorFilterRulesResponse> {
+    return this.request("DeleteTrafficMirrorFilterRules", req, cb)
   }
 
   /**

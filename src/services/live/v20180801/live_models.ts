@@ -96,21 +96,25 @@ export interface DescribeLiveWatermarkRulesResponse {
  */
 export interface StartLiveAvatarRoomRequest {
   /**
-   * 数字人直播间 ID。
+   * <p>数字人直播间 ID。</p>
    */
   RoomId: string
   /**
-   * 目标地址描述。
+   * <p>目标地址描述。</p>
    */
   Comment: string
   /**
-   * 推流目标地址。
+   * <p>推流目标地址。</p>
    */
   ToUrl: string
   /**
-   * 操作者。
+   * <p>操作者。</p>
    */
   Operator?: string
+  /**
+   * <p>房间类型。AIGC：AIGC形象房间；PRESET：预设形象房间</p><p>枚举值：</p><ul><li>AIGC： AIGC形象房间</li><li>PRESET： 预设形象房间</li></ul>
+   */
+  RoomType?: string
 }
 
 /**
@@ -5648,7 +5652,7 @@ export interface UnBindLiveDomainCertResponse {
  */
 export interface CreateLiveAvatarScriptResponse {
   /**
-   * 话术 ID。
+   * <p>话术 ID。</p>
    */
   ScriptId?: string
   /**
@@ -7044,15 +7048,15 @@ export interface ConcurrentRecordStreamNum {
  */
 export interface DescribeLiveAvatarScriptsResponse {
   /**
-   * 数字人直播间话术信息列表。
+   * <p>数字人直播间话术信息列表。</p>
    */
   InfoList?: Array<AvatarScriptInfo>
   /**
-   * 限制可创建的数字人直播间话术总条数。
+   * <p>限制可创建的数字人直播间话术总条数。</p>
    */
   LimitCreateNum?: number
   /**
-   * 当前数字人直播间话术总条数。
+   * <p>当前数字人直播间话术总条数。</p>
    */
   TotalNum?: number
   /**
@@ -12198,55 +12202,53 @@ export interface CreateLiveAvatarRoomResponse {
  */
 export interface ModifyLiveAvatarRoomRequest {
   /**
-   * 数字人直播间 ID。
+   * <p>数字人直播间 ID。</p>
    */
   RoomId: string
   /**
-   * 直播间名称。
+   * <p>直播间名称。</p>
    */
   Name?: string
   /**
-   * 数字人形象KEY。
+   * <p>数字人形象KEY。</p>
    */
   AvatarKey?: string
   /**
-   * 音色KEY。
+   * <p>音色KEY。</p>
    */
   TimbreKey?: string
   /**
-   * 背景图片URL。
+   * <p>背景图片URL。</p>
    */
   BackgroundUrl?: string
   /**
-   * 主播大小，默认1.00。
-取值范围(0, 15.00]。
-精度：使用小数点后两位。
+   * <p>主播大小，默认1.00。<br>取值范围(0, 15.00]。<br>精度：使用小数点后两位。</p>
    */
   AnchorScale?: number
   /**
-   * 主播纵向位置。默认-1贴底部。
-左上角为原点，形象顶部离屏幕顶部的距离，最大不能使形象底部超出屏幕。
-即该纵向位置最大为：数字人分辨率的高 - 形象高。
+   * <p>主播纵向位置。默认-1贴底部。<br>左上角为原点，形象顶部离屏幕顶部的距离，最大不能使形象底部超出屏幕。<br>即该纵向位置最大为：数字人分辨率的高 - 形象高。</p>
    */
   AnchorVerticalPos?: number
   /**
-   * 主播横向位置。默认-1居中。
-左上角为原点，形象左侧离左侧屏幕的距离。最大值不可使形象右侧超出右侧屏幕。
-即最大值为：数字人分辨率的宽 - 形象宽。
+   * <p>主播横向位置。默认-1居中。<br>左上角为原点，形象左侧离左侧屏幕的距离。最大值不可使形象右侧超出右侧屏幕。<br>即最大值为：数字人分辨率的宽 - 形象宽。</p>
    */
   AnchorHorizontalPos?: number
   /**
-   * 语速（1.0为正常语速，范围[0.6-2.5]，值为0.6时播报语速最慢，值为2.5时播报语速最快。
+   * <p>语速（1.0为正常语速，范围[0.6-2.5]，值为0.6时播报语速最慢，值为2.5时播报语速最快。</p>
    */
   SpeechSpeed?: number
   /**
-   * 音量大小，范围[0，10]，对应音量大小。默认为5，代表正常音量，值越大音量越高。
+   * <p>音量大小，范围[0，10]，对应音量大小。默认为5，代表正常音量，值越大音量越高。</p>
    */
   SpeechVolume?: number
   /**
-   * 操作者。
+   * <p>操作者。</p>
    */
   Operator?: string
+  /**
+   * <p>房间类型。AIGC：AIGC形象房间；PRESET：预设形象房间</p><p>枚举值：</p><ul><li>AIGC： AIGC形象房间</li><li>PRESET： 预设形象房间</li></ul>
+   */
+  RoomType?: string
 }
 
 /**
@@ -12297,21 +12299,25 @@ export interface ForbidLiveDomainRequest {
  */
 export interface DescribeLiveAvatarScriptsRequest {
   /**
-   * 数字人直播间 ID。
+   * <p>数字人直播间 ID。</p>
    */
   RoomId: string
   /**
-   * 数字人直播间话术 ID。
+   * <p>数字人直播间话术 ID。</p>
    */
   ScriptId?: string
   /**
-   * 分页查询的页数。
+   * <p>分页查询的页数。</p>
    */
   PageIndex?: number
   /**
-   * 分页查询的每页个数。
+   * <p>分页查询的每页个数。</p>
    */
   PageSize?: number
+  /**
+   * <p>数字人该话术所属的产品 ID。</p>
+   */
+  ProductId?: string
 }
 
 /**
@@ -12980,27 +12986,29 @@ export interface CreateCasterPgmFromPvwRequest {
  */
 export interface CreateLiveAvatarScriptRequest {
   /**
-   * 话术标题。限制500字节。
+   * <p>话术标题。限制500字节。</p>
    */
   Title: string
   /**
-   * 话术内容。中文最大支持150个汉字（全角标点符号算一个汉字）；英文最大支持500个字母（半角标点符号算一个字母）。
+   * <p>话术内容。中文最大支持150个汉字（全角标点符号算一个汉字）；英文最大支持500个字母（半角标点符号算一个字母）。</p>
    */
   Content: string
   /**
-   * 话术所属的数字人直播间 ID。
+   * <p>话术所属的数字人直播间 ID。</p>
    */
   RoomId: string
   /**
-   * 话术插入时，可根据已有话术位置，指定新话术插入位置。
-如已有三条话术100，200，300。
-新话术可选择150插入到第一条和第二条中间。
+   * <p>话术插入时，可根据已有话术位置，指定新话术插入位置。<br>如已有三条话术100，200，300。<br>新话术可选择150插入到第一条和第二条中间。</p>
    */
   SpecifyPosition?: number
   /**
-   * 操作者。
+   * <p>操作者。</p>
    */
   Operator?: string
+  /**
+   * <p>话术所属的数字人产品 ID。</p>
+   */
+  ProductId?: string
 }
 
 /**

@@ -2200,41 +2200,41 @@ export interface KnowledgeDetail {
  */
 export interface FileInfoContent {
   /**
-   * 实时文档解析接口返回的 DocBizId
+   * <p>实时文档解析接口返回的 DocBizId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
-  DocBizId?: number
+  DocBizId?: string
   /**
-   * 文件名称
+   * <p>文件名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileName?: string
   /**
-   * 文件类型
+   * <p>文件类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileType?: string
   /**
-   * 文件大小
+   * <p>文件大小，单位为Byte</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileSize?: number
+  FileSize?: string
   /**
-   * 文件 URL
+   * <p>文件 URL</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileUrl?: string
   /**
-   * 实时文档解析接口返回的 doc_id。
+   * <p>实时文档解析接口返回的 doc_id。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DocId?: number
+  DocId?: string
   /**
-   * 文件创建时间
+   * <p>文件创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime?: number
+  CreateTime?: string
 }
 
 /**
@@ -2583,41 +2583,69 @@ export interface OptionCardIndex {
 }
 
 /**
- * ListReleaseDocPreview请求参数结构体
+ * 当前执行的 token 统计信息
  */
-export interface ListReleaseDocPreviewRequest {
+export interface TokenStat {
   /**
-   * 应用ID（获取方法参看如何获取   [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)）
+   * 会话 ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  BotBizId: string
+  SessionId?: string
   /**
-   * 页码（必须大于0）
+   * 请求 ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageNumber: number
+  RequestId?: string
   /**
-   * 每页数量（取值范围为1-200）
+   * 对应哪条会话, 会话 ID, 用于回答的消息存储使用, 可提前生成, 保存消息时使用
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageSize: number
+  RecordId?: string
   /**
-   * 查询内容关键字，用于模糊查询，若未提供该参数，默认为查询全部。
+   * token 已使用数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Query?: string
+  UsedCount?: number
   /**
-   * 发布单ID（可以通过[ListRelease](https://cloud.tencent.com/document/product/1759/105077)获得）
+   * 免费 token 数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReleaseBizId?: string
+  FreeCount?: number
   /**
-   * 开始时间。Unix 时间戳，单位是秒，默认为空。
+   * 订单总 token 数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime?: string
+  OrderCount?: number
   /**
-   * 结束时间。Unix 时间戳，单位是秒，默认为空。
+   * 当前执行状态汇总, 常量: 使用中: processing, 成功: success, 失败: failed
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime?: string
+  StatusSummary?: string
   /**
-   * 状态(1新增2修改3删除)，其和ReleaseStatus的区别为： Actions表示的是对数据/内容的操作状态，ReleaseStatus表示数据 / 内容本身的发布状态
+   * 当前执行状态汇总后中文展示
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Actions?: Array<number | bigint>
+  StatusSummaryTitle?: string
+  /**
+   * 当前请求执行时间, 单位 ms
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Elapsed?: number
+  /**
+   * 当前请求消耗 token 数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TokenCount?: number
+  /**
+   * 执行过程信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Procedures?: Array<Procedure>
+  /**
+   * 执行过程信息TraceId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TraceId?: string
 }
 
 /**
@@ -3926,69 +3954,55 @@ export interface FileCollection {
 }
 
 /**
- * 当前执行的 token 统计信息
+ * ListReleaseDocPreview请求参数结构体
  */
-export interface TokenStat {
+export interface ListReleaseDocPreviewRequest {
   /**
-   * 会话 ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 应用ID（获取方法参看如何获取   [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)）
    */
-  SessionId?: string
+  BotBizId: string
   /**
-   * 请求 ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 页码（必须大于0）
    */
-  RequestId?: string
+  PageNumber: number
   /**
-   * 对应哪条会话, 会话 ID, 用于回答的消息存储使用, 可提前生成, 保存消息时使用
-注意：此字段可能返回 null，表示取不到有效值。
+   * 每页数量（取值范围为1-200）
    */
-  RecordId?: string
+  PageSize: number
   /**
-   * token 已使用数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 查询内容关键字，用于模糊查询，若未提供该参数，默认为查询全部。
    */
-  UsedCount?: number
+  Query?: string
   /**
-   * 免费 token 数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 发布单ID（可以通过[ListRelease](https://cloud.tencent.com/document/product/1759/105077)获得）
    */
-  FreeCount?: number
+  ReleaseBizId?: string
   /**
-   * 订单总 token 数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 开始时间。Unix 时间戳，单位是秒，默认为空。
    */
-  OrderCount?: number
+  StartTime?: string
   /**
-   * 当前执行状态汇总, 常量: 使用中: processing, 成功: success, 失败: failed
-注意：此字段可能返回 null，表示取不到有效值。
+   * 结束时间。Unix 时间戳，单位是秒，默认为空。
    */
-  StatusSummary?: string
+  EndTime?: string
   /**
-   * 当前执行状态汇总后中文展示
-注意：此字段可能返回 null，表示取不到有效值。
+   * 状态(1新增2修改3删除)，其和ReleaseStatus的区别为： Actions表示的是对数据/内容的操作状态，ReleaseStatus表示数据 / 内容本身的发布状态
    */
-  StatusSummaryTitle?: string
+  Actions?: Array<number | bigint>
+}
+
+/**
+ * 问题可选项
+ */
+export interface QuestionOption {
   /**
-   * 当前请求执行时间, 单位 ms
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>选项的标签</p>
    */
-  Elapsed?: number
+  Label?: string
   /**
-   * 当前请求消耗 token 数
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>选项的描述</p>
    */
-  TokenCount?: number
-  /**
-   * 执行过程信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Procedures?: Array<Procedure>
-  /**
-   * 执行过程信息TraceId
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TraceId?: string
+  Description?: string
 }
 
 /**
@@ -4017,6 +4031,64 @@ export interface DigitalHumanConfig {
  * ExportUnsatisfiedReply返回参数结构体
  */
 export interface ExportUnsatisfiedReplyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeStorageCredential返回参数结构体
+ */
+export interface DescribeStorageCredentialResponse {
+  /**
+   * 密钥信息
+   */
+  Credentials?: Credentials
+  /**
+   * 失效时间
+   */
+  ExpiredTime?: number
+  /**
+   * 开始时间
+   */
+  StartTime?: number
+  /**
+   * 对象存储桶
+   */
+  Bucket?: string
+  /**
+   * 对象存储可用区
+   */
+  Region?: string
+  /**
+   * 文件存储目录
+   */
+  FilePath?: string
+  /**
+   * 存储类型
+   */
+  Type?: string
+  /**
+   * 企业主账号
+   */
+  CorpUin?: string
+  /**
+   * 图片存储目录
+   */
+  ImagePath?: string
+  /**
+   * 上传存储路径，到具体文件
+   */
+  UploadPath?: string
+  /**
+   * 文件上传地址，使用put请求上传文件到该地址
+   */
+  UploadUrl?: string
+  /**
+   * 文件的预签名地址，支持下载
+   */
+  FileUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4075,6 +4147,32 @@ export interface ListDocCateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 问卷的问题
+ */
+export interface QuestionnaireQuestion {
+  /**
+   * <p>问题的序号</p>
+   */
+  Index?: number
+  /**
+   * <p>问题的内容</p>
+   */
+  Question?: string
+  /**
+   * <p>问题类型</p>
+   */
+  Type?: number
+  /**
+   * <p>是否必选</p>
+   */
+  Required?: boolean
+  /**
+   * <p>问题的选项</p>
+   */
+  Options?: Array<QuestionOption>
 }
 
 /**
@@ -6204,6 +6302,24 @@ export interface ExportAttributeLabelRequest {
 }
 
 /**
+ * 智能体任务信息
+ */
+export interface AgentTask {
+  /**
+   * <p>任务序号</p>
+   */
+  Index?: number
+  /**
+   * <p>任务内容</p>
+   */
+  Content?: string
+  /**
+   * <p>任务状态</p>
+   */
+  Status?: string
+}
+
+/**
  * ModifyQACate请求参数结构体
  */
 export interface ModifyQACateRequest {
@@ -7554,6 +7670,24 @@ export interface DescribeSharedKnowledgeRequest {
 }
 
 /**
+ * 问卷信息
+ */
+export interface Questionnaire {
+  /**
+   * <p>问卷的标题</p>
+   */
+  Title?: string
+  /**
+   * <p>问卷的问题列表</p>
+   */
+  Questions?: Array<QuestionnaireQuestion>
+  /**
+   * <p>问卷的答案列表</p>
+   */
+  Answers?: Array<QuestionnaireQuestionAnswer>
+}
+
+/**
  * ModifyDoc请求参数结构体
  */
 export interface ModifyDocRequest {
@@ -7866,85 +8000,88 @@ export interface MsgFileInfo {
  */
 export interface Content {
   /**
-   * 消息内容类型
-text：文本
-image：图片
-file：文件
-option_cards：选项卡
-custom_params：用户自定义业务参数
-sandbox：云桌面
-custom_variables：自定义输入参数
-web_search: 网页搜索内容
-file_collection：文件收集信息
-widget：widget信息
-widget_action：用户端widget动作信息
+   * <p>消息内容类型<br>text：文本<br>image：图片<br>file：文件<br>option_cards：选项卡<br>custom_params：用户自定义业务参数<br>sandbox：云桌面<br>custom_variables：自定义输入参数<br>web_search: 网页搜索内容<br>file_collection：文件收集信息<br>widget：widget信息<br>widget_action：用户端widget动作信息</p>
    */
   Type?: string
   /**
-   * 文本内容
+   * <p>文本内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Text?: string
   /**
-   * 引用信息
+   * <p>引用信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QuoteInfos?: Array<QuoteInfo>
   /**
-   * 参考文献信息
+   * <p>参考文献信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   References?: Array<ContentReference>
   /**
-   * 图片信息
+   * <p>图片信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Image?: ImageInfoContent
   /**
-   * 文件信息
+   * <p>文件信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   File?: FileInfoContent
   /**
-   * 选项卡信息
+   * <p>选项卡信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OptionCards?: Array<string>
   /**
-   * 用户自定义业务参数信息
+   * <p>用户自定义业务参数信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomParams?: Array<string>
   /**
-   * 自定义变量
+   * <p>自定义变量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomVariables?: Array<string>
   /**
-   * 沙盒信息
+   * <p>沙盒信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Sandbox?: SandboxContent
   /**
-   * 网页搜索内容
+   * <p>网页搜索内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WebSearch?: WebSearchContent
   /**
-   * 文件收集信息
+   * <p>文件收集信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileCollection?: FileCollection
   /**
-   * Widget信息
+   * <p>Widget信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Widget?: Widget
   /**
-   * Widget动作信息
+   * <p>Widget动作信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WidgetAction?: WidgetAction
+  /**
+   * <p>任务列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tasks?: Array<AgentTask>
+  /**
+   * <p>问卷信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Questionnaire?: Questionnaire
+  /**
+   * <p>选项卡模式</p>
+   */
+  OptionMode?: number
 }
 
 /**
@@ -8131,61 +8268,78 @@ export interface DescribeCallStatsGraphResponse {
 }
 
 /**
- * DescribeStorageCredential返回参数结构体
+ * 引用来源详情
  */
-export interface DescribeStorageCredentialResponse {
+export interface ReferDetail {
   /**
-   * 密钥信息
+   * 引用ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Credentials?: Credentials
+  ReferBizId?: string
   /**
-   * 失效时间
+   * 文档类型 (1 QA, 2 文档段)
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExpiredTime?: number
+  DocType?: number
   /**
-   * 开始时间
+   * 文档名称
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime?: number
+  DocName?: string
   /**
-   * 对象存储桶
+   * 分片内容
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Bucket?: string
+  PageContent?: string
   /**
-   * 对象存储可用区
+   * 问题
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Region?: string
+  Question?: string
   /**
-   * 文件存储目录
+   * 答案
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  FilePath?: string
+  Answer?: string
   /**
-   * 存储类型
+   * 置信度
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type?: string
+  Confidence?: number
   /**
-   * 企业主账号
+   * 标记
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CorpUin?: string
+  Mark?: number
   /**
-   * 图片存储目录
+   * 分片高亮内容
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImagePath?: string
+  Highlights?: Array<Highlight>
   /**
-   * 上传存储路径，到具体文件
+   * 原始内容
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  UploadPath?: string
+  OrgData?: string
   /**
-   * 文件上传地址，使用put请求上传文件到该地址
+   * 页码信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  UploadUrl?: string
+  PageInfos?: Array<number | bigint>
   /**
-   * 文件的预签名地址，支持下载
+   * sheet信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  FileUrl?: string
+  SheetInfos?: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 文档ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  DocBizId?: string
+  /**
+   * 知识库ID
+   */
+  KnowledgeBizId?: string
 }
 
 /**
@@ -8944,78 +9098,17 @@ export interface SandboxContent {
 }
 
 /**
- * 引用来源详情
+ * 问卷问题的答案
  */
-export interface ReferDetail {
+export interface QuestionnaireQuestionAnswer {
   /**
-   * 引用ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReferBizId?: string
-  /**
-   * 文档类型 (1 QA, 2 文档段)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DocType?: number
-  /**
-   * 文档名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DocName?: string
-  /**
-   * 分片内容
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PageContent?: string
-  /**
-   * 问题
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>问题</p>
    */
   Question?: string
   /**
-   * 答案
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>选中的答案标签</p>
    */
-  Answer?: string
-  /**
-   * 置信度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Confidence?: number
-  /**
-   * 标记
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Mark?: number
-  /**
-   * 分片高亮内容
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Highlights?: Array<Highlight>
-  /**
-   * 原始内容
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OrgData?: string
-  /**
-   * 页码信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PageInfos?: Array<number | bigint>
-  /**
-   * sheet信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SheetInfos?: Array<string>
-  /**
-   * 文档ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DocBizId?: string
-  /**
-   * 知识库ID
-   */
-  KnowledgeBizId?: string
+  SelectedLabels?: Array<string>
 }
 
 /**
@@ -9821,38 +9914,38 @@ export interface DescribeConcurrencyUsageGraphResponse {
  */
 export interface AgentPluginInfo {
   /**
-   * 插件id
+   * <p>插件id</p>
    */
   PluginId?: string
   /**
-   * 应用配置的插件header信息
+   * <p>应用配置的插件header信息</p>
    */
   Headers?: Array<AgentPluginHeader>
   /**
-   * 插件调用LLM时使用的模型配置，一般用于指定知识库问答插件的生成模型
+   * <p>插件调用LLM时使用的模型配置，一般用于指定知识库问答插件的生成模型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Model?: AgentModelInfo
   /**
-   * 插件信息类型; 0: 未指定类型; 1: 知识库问答插件
+   * <p>插件信息类型; 0: 未指定类型; 1: 知识库问答插件</p>
    */
   PluginInfoType?: number
   /**
-   * 知识库问答插件配置
+   * <p>知识库问答插件配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KnowledgeQa?: AgentKnowledgeQAPlugin
   /**
-   * 是否使用一键授权
+   * <p>是否使用一键授权</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableRoleAuth?: boolean
   /**
-   * 应用配置的插件query信息
+   * <p>应用配置的插件query信息</p>
    */
   Query?: Array<AgentPluginQuery>
   /**
-   * MCP类型
+   * <p>MCP类型</p><p>枚举值：</p><ul><li>0： SSE 模式</li><li>1： Streamable Http 模式</li></ul>
    */
   McpType?: number
 }
