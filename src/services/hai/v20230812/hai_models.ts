@@ -272,7 +272,7 @@ export interface CallInfo {
  */
 export interface CreateInferServiceByTemplateResponse {
   /**
-   * 服务ID
+   * <p>服务ID</p>
    */
   ServiceId?: string
   /**
@@ -698,25 +698,29 @@ export interface DescribeServicesRequest {
  */
 export interface ContainerInfo {
   /**
-   * 镜像相关信息
+   * <p>镜像相关信息</p>
    */
   Image?: ImageInfo
   /**
-   * 服务监听端口
+   * <p>服务监听端口</p>
    */
   Port?: string
   /**
-   * 启动命令
+   * <p>启动命令</p>
    */
   Scripts?: Array<string>
   /**
-   * 环境变量列表
+   * <p>环境变量列表</p>
    */
   Envs?: Array<EnvParam>
   /**
-   * 存储挂载配置
+   * <p>存储挂载配置</p>
    */
   Storages?: Array<StorageInfo>
+  /**
+   * <p>探针信息</p>
+   */
+  Probe?: ProbeInfo
 }
 
 /**
@@ -737,6 +741,20 @@ export interface DescribeInstancesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 服务元数据信息，如服务名
+ */
+export interface ServiceMetaData {
+  /**
+   * 服务名称
+   */
+  ServiceName?: string
+  /**
+   * 收费类型
+   */
+  ServiceChargeType?: string
 }
 
 /**
@@ -864,6 +882,36 @@ AVAILABLE：可用
 NO_NEED_SUPPORT表示不需支持；NOT_SUPPORT_YET表示暂未支持；ALREADY_SUPPORT表示已经支持。
    */
   ScholarRocketSupportState?: string
+}
+
+/**
+ * 探针配置信息
+ */
+export interface ProbeConfig {
+  /**
+   * <p>HTTP GET请求进行健康检查</p>
+   */
+  HttpGet?: HttpConfig
+  /**
+   * <p>容器启动后，等待多少秒开始第一次探测</p>
+   */
+  InitialDelaySeconds?: number
+  /**
+   * <p>每次执行探测的间隔时间（秒）</p>
+   */
+  PeriodSeconds?: number
+  /**
+   * <p>每次探测等待响应的超时时间（秒）</p>
+   */
+  TimeoutSeconds?: number
+  /**
+   * <p>探测失败后，最小连续成功次数才被认为成功</p>
+   */
+  SuccessThreshold?: number
+  /**
+   * <p>探测失败后，Kubernetes的重试次数</p>
+   */
+  FailureThreshold?: number
 }
 
 /**
@@ -1116,17 +1164,21 @@ export interface CreateMuskPromptResponse {
 }
 
 /**
- * 服务元数据信息，如服务名
+ * 探针信息
  */
-export interface ServiceMetaData {
+export interface ProbeInfo {
   /**
-   * 服务名称
+   * <p>存活探针</p>
    */
-  ServiceName?: string
+  LivenessProbe?: ProbeConfig
   /**
-   * 收费类型
+   * <p>就绪探针</p>
    */
-  ServiceChargeType?: string
+  ReadinessProbe?: ProbeConfig
+  /**
+   * <p>启动探针</p>
+   */
+  StartupProbe?: ProbeConfig
 }
 
 /**
@@ -1151,27 +1203,27 @@ export interface Filter {
  */
 export interface CreateInferServiceByTemplateRequest {
   /**
-   * 模版ID
+   * <p>模版ID</p>
    */
   TemplateId: string
   /**
-   * 服务名称
+   * <p>服务名称</p>
    */
   ServiceName?: string
   /**
-   * 副本数
+   * <p>副本数</p>
    */
   Replicas?: number
   /**
-   * 付费方式，POSTPAID_BY_HOUR按量后付费
+   * <p>付费方式，POSTPAID_BY_HOUR按量后付费</p>
    */
   ServiceChargeType?: string
   /**
-   * 描述了服务的超参数配置
+   * <p>描述了服务的超参数配置</p>
    */
   HyperParam?: HyperParam
   /**
-   * 网络设置
+   * <p>网络设置</p>
    */
   NetworkSetting?: NetworkSetting
 }
@@ -1441,6 +1493,20 @@ export interface DescribeApplicationsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * http配置信息
+ */
+export interface HttpConfig {
+  /**
+   * <p>指定健康检查的URL路径</p>
+   */
+  Path?: string
+  /**
+   * <p>指定健康检查的端口</p>
+   */
+  Port?: number
 }
 
 /**

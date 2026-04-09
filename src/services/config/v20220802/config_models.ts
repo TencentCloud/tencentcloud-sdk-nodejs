@@ -414,11 +414,11 @@ export interface UpdateConfigRecorderRequest {
  */
 export interface ListAggregateCompliancePacksResponse {
   /**
-   * 总数
+   * <p>总数</p>
    */
   Total?: number
   /**
-   * 详情
+   * <p>详情</p>
    */
   Items?: Array<ConfigCompliancePack>
   /**
@@ -2051,41 +2051,41 @@ export interface DetachAggregateConfigRuleToCompliancePackRequest {
  */
 export interface ListAggregateCompliancePacksRequest {
   /**
-   * 数量
+   * <p>数量</p>
    */
   Limit: number
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset: number
   /**
-   * 账号组ID
+   * <p>账号组ID</p>
    */
   AccountGroupId: string
   /**
-   * 合规包名称
+   * <p>合规包名称</p>
    */
   CompliancePackName?: string
   /**
-   * 风险等级
-1：高风险。
-2：中风险。
-3：低风险。
+   * <p>风险等级<br>1：高风险。<br>2：中风险。<br>3：低风险。</p>
    */
   RiskLevel?: Array<number | bigint>
   /**
-   * 合规包状态 ACTIVE、NO_ACTIVE
+   * <p>合规包状态 ACTIVE、NO_ACTIVE</p>
    */
   Status?: string
   /**
-   * 评估状态合规： 'COMPLIANT'
-不合规： 'NON_COMPLIANT'
+   * <p>评估状态合规： &#39;COMPLIANT&#39;<br>不合规： &#39;NON_COMPLIANT&#39;</p>
    */
   ComplianceResult?: Array<string>
   /**
-   * 排序类型, 倒序：desc，顺序：asc
+   * <p>排序类型, 倒序：desc，顺序：asc</p>
    */
   OrderType?: string
+  /**
+   * <p>包含合规包结果定义</p><p>枚举值：</p><ul><li>NO： 不包含</li></ul><p>默认值：空</p><p>此字段为新增，因此不传或者传了YES都会默认返回包含合规结果数据，其他枚举值后面视情况丰富</p>
+   */
+  IncludeCompliancePackRuleResult?: string
 }
 
 /**

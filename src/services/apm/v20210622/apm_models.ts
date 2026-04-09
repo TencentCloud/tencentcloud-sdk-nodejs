@@ -414,25 +414,29 @@ export interface DescribeApmServiceMetricResponse {
  */
 export interface ModifyApmAssociationRequest {
   /**
-   * 关联的产品名，当前只支持Prometheus、CKafka
+   * <p>关联的产品名，当前只支持Prometheus、CKafka</p>
    */
   ProductName: string
   /**
-   * 关联关系的状态：// 关联关系状态：1（启用）、2（不启用）
+   * <p>关联关系的状态：// 关联关系状态：1（启用）、2（不启用）</p>
    */
   Status: number
   /**
-   * 业务系统ID
+   * <p>业务系统ID</p>
    */
   InstanceId: string
   /**
-   * 关联的产品实例ID
+   * <p>关联的产品实例ID</p>
    */
   PeerId?: string
   /**
-   * CKafka消息主题
+   * <p>CKafka消息主题</p>
    */
   Topic?: string
+  /**
+   * <p>Ckafka消息主题</p>
+   */
+  MetricTopic?: string
 }
 
 /**
@@ -3168,19 +3172,23 @@ export interface DescribeGeneralSpanListResponse {
  */
 export interface ApmAssociation {
   /**
-   * 关联产品的实例ID
+   * <p>关联产品的实例ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PeerId?: string
   /**
-   * 关联关系状态：1（启用）、2（不启用）、3（已失效）
+   * <p>关联关系状态：1（启用）、2（不启用）、3（已失效）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
-   * CKafka消息主题
+   * <p>CKafka消息主题</p>
    */
   Topic?: string
+  /**
+   * <p>Ckafka消费主题</p><p>用于Kafka指标投递</p>
+   */
+  MetricTopic?: string
 }
 
 /**

@@ -7180,48 +7180,51 @@ export interface Filter {
  */
 export interface AIAgentAsset {
   /**
-   * ID 标识
+   * <p>ID 标识</p>
    */
   ID?: string
   /**
-   * agent 名称
+   * <p>agent 名称</p>
    */
   AgentName?: string
   /**
-   * agent 使用模型名称
+   * <p>agent 使用模型名称</p>
    */
   AgentModel?: Array<string>
   /**
-   * 实例 ID
+   * <p>实例 ID</p>
    */
   InstanceID?: string
   /**
-   * metadata 风险列表。有如下枚举值: 1. AK_TMP  2. USER_DATA
+   * <p>实例名称</p>
+   */
+  InstanceName?: string
+  /**
+   * <p>metadata 风险列表。有如下枚举值: 1. AK_TMP  2. USER_DATA</p>
    */
   MetadataRiskList?: Array<string>
   /**
-   * 首次检出时间
+   * <p>首次检出时间</p>
    */
   IdentityTimeFirst?: string
   /**
-   * 最近检出时间
+   * <p>最近检出时间</p>
    */
   IdentityTimeLast?: string
   /**
-   * 检出方式。有如下枚举值 1. FINGER 资产指纹方式检出 2. NETWORK 网络访问方式检出
+   * <p>检出方式。有如下枚举值 1. FINGER 资产指纹方式检出 2. NETWORK 网络访问方式检出</p>
    */
   IdentityMethod?: string
   /**
-   * 暴露状态。有如下枚举值。1. EXPOSED；2.UNEXPOSED；
-3. UNKNOWN;
+   * <p>暴露状态。有如下枚举值。1. EXPOSED；2.UNEXPOSED；</p><ol start="3"><li>UNKNOWN;</li></ol>
    */
   ExposureStatus?: string
   /**
-   * metadata 有风险时对应路径
+   * <p>metadata 有风险时对应路径</p>
    */
   MetadataRiskURL?: string
   /**
-   * 无
+   * <p>无</p>
    */
   SkillState?: SkillState
 }

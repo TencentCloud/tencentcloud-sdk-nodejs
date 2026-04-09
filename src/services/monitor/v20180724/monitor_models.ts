@@ -3374,7 +3374,32 @@ export interface DescribeServiceDiscoveryResponse {
 /**
  * ExportPrometheusReadOnlyDynamicAPI请求参数结构体
  */
-export type ExportPrometheusReadOnlyDynamicAPIRequest = null
+export interface ExportPrometheusReadOnlyDynamicAPIRequest {
+  /**
+   * Prometheus 实例 ID
+   */
+  InstanceId: string
+  /**
+   * HTTP 方法名 GET/POST/PUT/DELETE 等
+   */
+  Method: string
+  /**
+   * HTTP 路径（包括 query string）
+   */
+  Path: string
+  /**
+   * HTTP 请求体，任何数据
+   */
+  RequestBody?: string
+  /**
+   * HTTP 请求头
+   */
+  Headers?: Array<PrometheusStringKeyValuePair>
+  /**
+   * 是否请求自监控数据。自监控仅支持 /api/v1/query 与 /api/v1/query_range 接口。
+   */
+  SelfMonitor?: boolean
+}
 
 /**
  * Prometheus 托管服务标签
@@ -4113,6 +4138,10 @@ export interface DescribeMonitorTypesRequest {
  * ExportPrometheusReadOnlyDynamicAPI返回参数结构体
  */
 export interface ExportPrometheusReadOnlyDynamicAPIResponse {
+  /**
+   * HTTP 响应数据
+   */
+  HTTP?: PrometheusDynamicAPIResponseHTTP
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5371,6 +5400,20 @@ export interface UninstallGrafanaPluginsRequest {
    * Grafana 实例 ID，例如：grafana-abcdefg
    */
   InstanceId: string
+}
+
+/**
+ * Prometheus 通用字符串类型 kv
+ */
+export interface PrometheusStringKeyValuePair {
+  /**
+   * 键
+   */
+  Key: string
+  /**
+   * 值
+   */
+  Value: string
 }
 
 /**
@@ -7240,6 +7283,20 @@ export interface NoticeBindPolicys {
    * 告警通知模板绑定的告警策略ID列表
    */
   PolicyIds?: Array<string>
+}
+
+/**
+ * Prometheus 内部动态 api 代理响应
+ */
+export interface PrometheusDynamicAPIResponseHTTP {
+  /**
+   * HTTP 状态码
+   */
+  StatusCode?: number
+  /**
+   * HTTP 响应体
+   */
+  ResponseBody?: string
 }
 
 /**

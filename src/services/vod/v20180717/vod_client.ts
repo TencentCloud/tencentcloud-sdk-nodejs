@@ -1000,6 +1000,7 @@ import {
   DeleteWatermarkTemplateResponse,
   DeleteQualityInspectTemplateRequest,
   ComposeMediaOutput,
+  SubtitleInfoInput,
   DeleteJustInTimeTranscodeTemplateResponse,
   ModifyWatermarkTemplateResponse,
   DescribeJustInTimeTranscodeTemplatesRequest,

@@ -7816,6 +7816,10 @@ export interface DescribeVoucherInfoResponse {
    */
   VoucherInfos?: Array<VoucherInfos>
   /**
+   * <p>接口返回的金额字段单位</p><p>默认值：micro</p><p>金额单位：micro（微分）<br>代金券发放和使用按8位高精度处理，所以金额单位默认为micro（微分），如需CNY或USD请按以下公式换算<br>CNY：1 micro = 10⁻⁸ 元<br>USD：1 micro = 10⁻⁸ 美元</p>
+   */
+  Unit?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -8101,7 +8105,7 @@ export interface DescribeVoucherInfoRequest {
    */
   Offset: number
   /**
-   * <p>券状态：待使用：unUsed，已使用：&nbsp;used，已发货：delivered，已作废：&nbsp;cancel，已过期：overdue</p>
+   * <p>券状态：待使用：unUsed，已使用：xa0used，已发货：delivered，已作废：xa0cancel，已过期：overdue</p>
    */
   Status?: string
   /**

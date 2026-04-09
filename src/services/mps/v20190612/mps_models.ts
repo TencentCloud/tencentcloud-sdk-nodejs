@@ -20,10 +20,14 @@
  */
 export interface AiAnalysisTaskHorizontalToVerticalInput {
   /**
-   * 视频智能横转竖模板 ID
+   * <p>视频智能横转竖模板 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Definition?: number
+  /**
+   * <p>扩展参数。</p>
+   */
+  ExtendedParameter?: string
 }
 
 /**
@@ -411,9 +415,13 @@ export interface Metadata {
  */
 export interface AiAnalysisTaskClassificationInput {
   /**
-   * 视频智能分类模板 ID。
+   * <p>视频智能分类模板 ID。</p>
    */
   Definition?: number
+  /**
+   * <p>扩展参数。</p>
+   */
+  ExtendedParameter?: string
 }
 
 /**
@@ -4095,9 +4103,13 @@ export interface FlowMediaAudio {
  */
 export interface AiAnalysisTaskReelInput {
   /**
-   * 智能成片模板 ID。
+   * <p>智能成片模板 ID。</p>
    */
   Definition?: number
+  /**
+   * <p>扩展参数。</p>
+   */
+  ExtendedParameter?: string
 }
 
 /**
@@ -6888,9 +6900,13 @@ export interface ProhibitedAsrReviewTemplateInfoForUpdate {
  */
 export interface AiAnalysisTaskCutoutInput {
   /**
-   * 视频智能抠图模板 ID。
+   * <p>视频智能抠图模板 ID。</p>
    */
   Definition: number
+  /**
+   * <p>扩展参数。</p>
+   */
+  ExtendedParameter?: string
 }
 
 /**
@@ -7102,9 +7118,13 @@ export interface PornConfigureInfoForUpdate {
  */
 export interface AiAnalysisTaskSegmentInput {
   /**
-   * 拆条任务模板 ID。
+   * <p>拆条任务模板 ID。</p>
    */
   Definition?: number
+  /**
+   * <p>扩展参数。</p>
+   */
+  ExtendedParameter?: string
 }
 
 /**
@@ -9323,9 +9343,13 @@ export interface DescribeStreamPackageLinearAssemblyChannelAlertsRequest {
  */
 export interface AiAnalysisTaskDelLogoInput {
   /**
-   * 视频智能擦除模板 ID。
+   * <p>视频智能擦除模板 ID。</p>
    */
   Definition?: number
+  /**
+   * <p>扩展参数。</p>
+   */
+  ExtendedParameter?: string
 }
 
 /**
@@ -10821,9 +10845,13 @@ export interface AsrWordsConfigureInfo {
  */
 export interface AiAnalysisTaskVideoRemakeInput {
   /**
-   * 视频智能去重模板 ID
+   * <p>视频智能去重模板 ID</p>
    */
   Definition?: number
+  /**
+   * <p>扩展参数。</p>
+   */
+  ExtendedParameter?: string
 }
 
 /**
@@ -13763,9 +13791,13 @@ export interface DeleteSampleSnapshotTemplateResponse {
  */
 export interface AiAnalysisTaskTagInput {
   /**
-   * 视频智能标签模板 ID。
+   * <p>视频智能标签模板 ID。</p>
    */
   Definition?: number
+  /**
+   * <p>扩展参数。</p>
+   */
+  ExtendedParameter?: string
 }
 
 /**
@@ -14933,9 +14965,13 @@ export interface CreateAsrHotwordsRequest {
  */
 export interface AiAnalysisTaskHighlightInput {
   /**
-   * 视频智能精彩片段模板 ID。
+   * <p>视频智能精彩片段模板 ID。</p>
    */
   Definition?: number
+  /**
+   * <p>扩展参数。</p>
+   */
+  ExtendedParameter?: string
 }
 
 /**
@@ -15102,9 +15138,13 @@ export interface ActionConfigInfo {
  */
 export interface AiAnalysisTaskVideoComprehensionInput {
   /**
-   * 视频（音频）理解模板ID
+   * <p>视频（音频）理解模板ID</p>
    */
   Definition?: number
+  /**
+   * <p>扩展参数。</p>
+   */
+  ExtendedParameter?: string
 }
 
 /**
@@ -17466,9 +17506,13 @@ export interface DescribeTaskDetailRequest {
  */
 export interface AiAnalysisTaskDubbingInput {
   /**
-   * 视频译制模板 ID。
+   * <p>视频译制模板 ID。</p>
    */
   Definition?: number
+  /**
+   * <p>扩展参数。</p>
+   */
+  ExtendedParameter?: string
 }
 
 /**
@@ -18734,9 +18778,13 @@ PicUrlExpireTime 时间点后图片将被删除）。
  */
 export interface AiAnalysisTaskFrameTagInput {
   /**
-   * 视频智能按帧标签模板 ID。
+   * <p>视频智能按帧标签模板 ID。</p>
    */
   Definition?: number
+  /**
+   * <p>扩展参数。</p>
+   */
+  ExtendedParameter?: string
 }
 
 /**
@@ -21066,27 +21114,31 @@ export interface LiveStreamProcessTask {
  */
 export interface QualityControlData {
   /**
-   * 为true时表示视频无音频轨。
+   * <p>为true时表示视频无音频轨。</p>
    */
   NoAudio?: boolean
   /**
-   * 为true时表示视频无视频轨。
+   * <p>为true时表示视频无视频轨。</p>
    */
   NoVideo?: boolean
   /**
-   * 视频无参考质量评分，百分制。
+   * <p>视频无参考质量评分，百分制。</p>
    */
   QualityEvaluationScore?: number
   /**
-   * 视频无参考质量评分，MOS分数。
+   * <p>视频无参考质量评分，MOS分数。</p>
    */
   QualityEvaluationMeanOpinionScore?: number
   /**
-   * 内容质检检出异常项。
+   * <p>视频美学评分，范围：[0,100]。</p>
+   */
+  AestheticEvaluationScore?: number
+  /**
+   * <p>内容质检检出异常项。</p>
    */
   QualityControlResultSet?: Array<QualityControlResult>
   /**
-   * 格式诊断检出异常项。
+   * <p>格式诊断检出异常项。</p>
    */
   ContainerDiagnoseResultSet?: Array<ContainerDiagnoseResultItem>
 }
@@ -22083,9 +22135,13 @@ Status 不为 0，表示该热词库不能被删除。
  */
 export interface AiAnalysisTaskHeadTailInput {
   /**
-   * 片头片尾识别模板 ID。
+   * <p>片头片尾识别模板 ID。</p>
    */
   Definition?: number
+  /**
+   * <p>扩展参数。</p>
+   */
+  ExtendedParameter?: string
 }
 
 /**
@@ -25023,9 +25079,13 @@ export interface AiRecognitionTaskFaceResultItem {
  */
 export interface AiAnalysisTaskDescriptionInput {
   /**
-   * 视频智能描述模板 ID。
+   * <p>视频智能描述模板 ID。</p>
    */
   Definition?: number
+  /**
+   * <p>扩展参数。</p>
+   */
+  ExtendedParameter?: string
 }
 
 /**
@@ -25033,9 +25093,13 @@ export interface AiAnalysisTaskDescriptionInput {
  */
 export interface AiAnalysisTaskCoverInput {
   /**
-   * 视频智能封面模板 ID。
+   * <p>视频智能封面模板 ID。</p>
    */
   Definition?: number
+  /**
+   * <p>扩展参数。</p>
+   */
+  ExtendedParameter?: string
 }
 
 /**

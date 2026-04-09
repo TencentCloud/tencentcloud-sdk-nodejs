@@ -258,9 +258,9 @@ it("cfw.v20190904.DeleteRemoteAccessDomain", async function () {
     }
 })
 
-it("cfw.v20190904.RemoveAclRule", async function () {
+it("cfw.v20190904.DeleteNatFwDnatRule", async function () {
     try {
-       const data = await client.RemoveAclRule({})
+       const data = await client.DeleteNatFwDnatRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -431,6 +431,16 @@ it("cfw.v20190904.DescribeAssetSync", async function () {
 it("cfw.v20190904.CreateSecurityGroupRules", async function () {
     try {
        const data = await client.CreateSecurityGroupRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.CreateNatFwDnatRule", async function () {
+    try {
+       const data = await client.CreateNatFwDnatRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -741,6 +751,16 @@ it("cfw.v20190904.DeleteAddressTemplate", async function () {
 it("cfw.v20190904.ModifySequenceRules", async function () {
     try {
        const data = await client.ModifySequenceRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.RemoveAclRule", async function () {
+    try {
+       const data = await client.RemoveAclRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

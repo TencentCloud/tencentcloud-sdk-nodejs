@@ -248,6 +248,7 @@ import {
   DeleteAlarmPolicyResponse,
   RemoteWriteHeader,
   UninstallGrafanaPluginsRequest,
+  PrometheusStringKeyValuePair,
   DeleteSSOAccountResponse,
   DescribePolicyGroupListGroup,
   GrafanaAccountInfo,
@@ -323,6 +324,7 @@ import {
   AlarmPolicyFilter,
   ModifyAlarmPolicyNoticeResponse,
   NoticeBindPolicys,
+  PrometheusDynamicAPIResponseHTTP,
   PrometheusAlertRule,
   CleanGrafanaInstanceResponse,
   UnbindPrometheusManagedGrafanaResponse,
@@ -588,7 +590,7 @@ export class Client extends AbstractClient {
    * Prometheus 内部动态 api 代理，仅内部使用
    */
   async ExportPrometheusReadOnlyDynamicAPI(
-    req?: ExportPrometheusReadOnlyDynamicAPIRequest,
+    req: ExportPrometheusReadOnlyDynamicAPIRequest,
     cb?: (error: string, rep: ExportPrometheusReadOnlyDynamicAPIResponse) => void
   ): Promise<ExportPrometheusReadOnlyDynamicAPIResponse> {
     return this.request("ExportPrometheusReadOnlyDynamicAPI", req, cb)

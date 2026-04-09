@@ -44,87 +44,87 @@ export interface DescribeActionFieldConfigListRequest {
  */
 export interface TaskGroupAction {
   /**
-   * 任务分组动作ID
+   * <p>任务分组动作ID</p>
    */
   TaskGroupActionId: number
   /**
-   * 任务分组动作实例列表
+   * <p>任务分组动作实例列表</p>
    */
   TaskGroupInstances: Array<TaskGroupInstance>
   /**
-   * 动作ID
+   * <p>动作ID</p>
    */
   ActionId: number
   /**
-   * 分组动作顺序
+   * <p>分组动作顺序</p>
    */
   TaskGroupActionOrder: number
   /**
-   * 分组动作通用配置
+   * <p>分组动作通用配置</p>
    */
   TaskGroupActionGeneralConfiguration: string
   /**
-   * 分组动作自定义配置
+   * <p>分组动作自定义配置</p>
    */
   TaskGroupActionCustomConfiguration: string
   /**
-   * 分组动作状态
+   * <p>分组动作状态</p><p>枚举值：</p><ul><li>2001： 未开始</li><li>2002： 待执行</li><li>2003： 执行中</li><li>2004： 执行结束</li></ul>
    */
   TaskGroupActionStatus: number
   /**
-   * 动作分组创建时间
+   * <p>动作分组创建时间</p>
    */
   TaskGroupActionCreateTime: string
   /**
-   * 动作分组更新时间
+   * <p>动作分组更新时间</p>
    */
   TaskGroupActionUpdateTime: string
   /**
-   * 动作名称
+   * <p>动作名称</p>
    */
   ActionTitle: string
   /**
-   * 状态类型: 0 -- 无状态，1 -- 成功，2-- 失败，3--终止，4--跳过
+   * <p>状态类型: 0 -- 无状态，1 -- 成功，2-- 失败，3--终止，4--跳过</p>
    */
   TaskGroupActionStatusType: number
   /**
-   * RandomId
+   * <p>RandomId</p>
    */
   TaskGroupActionRandomId: number
   /**
-   * RecoverId
+   * <p>RecoverId</p>
    */
   TaskGroupActionRecoverId: number
   /**
-   * ExecuteId
+   * <p>ExecuteId</p>
    */
   TaskGroupActionExecuteId: number
   /**
-   * 调用api类型，0:tat, 1:云api
+   * <p>调用api类型，0:tat, 1:云api</p>
    */
   ActionApiType?: number
   /**
-   * 1:故障，2:恢复
+   * <p>1:故障，2:恢复</p>
    */
   ActionAttribute?: number
   /**
-   * 动作类型：平台、自定义
+   * <p>动作类型：平台、自定义</p>
    */
   ActionType?: string
   /**
-   * 是否可重试
+   * <p>是否可重试</p>
    */
   IsExecuteRedo?: boolean
   /**
-   * 动作风险级别
+   * <p>动作风险级别</p>
    */
   ActionRisk?: string
   /**
-   * 动作运行时间
+   * <p>动作运行时间</p><p>单位：秒</p>
    */
   TaskGroupActionExecuteTime?: number
   /**
-   * 动作开始执行时间
+   * <p>动作开始执行时间</p>
    */
   TaskGroupActionStartTime?: string
 }
@@ -152,15 +152,15 @@ export interface ApmServiceInfo {
  */
 export interface TaskGroupInstancesExecuteRules {
   /**
-   * 实例选取模式
+   * <p>实例选取模式</p><p>枚举值：</p><ul><li>1： 全部注入</li><li>2： 随机选取指定比例注入</li><li>3： 随机选取指定数量注入</li></ul>
    */
   TaskGroupInstancesExecuteMode?: number
   /**
-   * 按比例选取模式下选取比例
+   * <p>按比例选取模式下选取比例</p>
    */
   TaskGroupInstancesExecutePercent?: number
   /**
-   * 按数量选取模式下选取数量
+   * <p>按数量选取模式下选取数量</p>
    */
   TaskGroupInstancesExecuteNum?: number
 }
@@ -632,6 +632,10 @@ export interface ModifyTaskRunStatusRequest {
    * 演练记录
    */
   Record?: string
+  /**
+   *
+   */
+  IncludeRecordInReport?: number
 }
 
 /**
@@ -653,19 +657,19 @@ export interface DescribeTemplateResponse {
  */
 export interface DescribePolicy {
   /**
-   * 保护策略ID列表
+   * <p>保护策略ID列表</p>
    */
   TaskPolicyIdList: Array<string>
   /**
-   * 保护策略状态
+   * <p>保护策略状态</p><p>枚举值：</p><ul><li>已触发： 表示已触发护栏策略</li><li>未触发： 表示未触发护栏策略</li><li>已恢复： 表示护栏策略已恢复</li></ul>
    */
   TaskPolicyStatus: string
   /**
-   * 策略规则
+   * <p>策略规则</p>
    */
   TaskPolicyRule: string
   /**
-   * 护栏策略生效处理策略 1:顺序执行，2:暂停
+   * <p>护栏策略生效处理策略 1:顺序执行，2:暂停</p>
    */
   TaskPolicyDealType: number
 }
@@ -715,24 +719,23 @@ export interface PolicyTriggerLog {
  */
 export interface TaskTarget {
   /**
-   * 目标标签ID
+   * <p>目标标签ID</p>
    */
   TargetId?: number
   /**
-   * 目标描述
+   * <p>目标描述</p>
    */
   TargetDesc?: string
   /**
-   * 1:演练场景
-2:演练目标
+   * <p>1:演练场景<br>2:演练目标</p>
    */
   Type?: number
   /**
-   * 1:平台 2:用户个人
+   * <p>1:平台 2:用户个人</p>
    */
   Source?: number
   /**
-   * 目标标签是否已被删除
+   * <p>目标标签是否已被删除</p><p>枚举值：</p><ul><li>0： 未删除</li><li>1： 已删除</li></ul>
    */
   TargetStatus?: number
 }
@@ -1778,49 +1781,49 @@ export interface TemplatePolicy {
  */
 export interface TaskGroupInstance {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   TaskGroupInstanceId: number
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   TaskGroupInstanceObjectId: string
   /**
-   * 实例动作执行状态
+   * <p>实例动作执行状态</p><p>枚举值：</p><ul><li>3001： 未开始</li><li>3002： 执行中</li><li>3003： 执行结束</li><li>3004： 准备中</li></ul>
    */
   TaskGroupInstanceStatus: number
   /**
-   * 实例创建时间
+   * <p>实例创建时间</p>
    */
   TaskGroupInstanceCreateTime: string
   /**
-   * 实例更新时间
+   * <p>实例更新时间</p>
    */
   TaskGroupInstanceUpdateTime: string
   /**
-   * 状态类型: 0 -- 无状态，1 -- 成功，2-- 失败，3--终止，4--跳过
+   * <p>状态类型: 0 -- 无状态，1 -- 成功，2-- 失败，3--终止，4--跳过</p>
    */
   TaskGroupInstanceStatusType: number
   /**
-   * 执行开始时间
+   * <p>执行开始时间</p>
    */
   TaskGroupInstanceStartTime: string
   /**
-   * 执行结束时间
+   * <p>执行结束时间</p>
    */
   TaskGroupInstanceEndTime: string
   /**
-   * 实例动作执行日志
+   * <p>实例动作执行日志</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   TaskGroupInstanceExecuteLog?: string
   /**
-   * 实例是否可重试
+   * <p>实例是否可重试</p>
    */
   TaskGroupInstanceIsRedo?: boolean
   /**
-   * 动作实例执行时间
+   * <p>动作实例执行时间</p><p>单位：秒</p>
    */
   TaskGroupInstanceExecuteTime?: number
 }
