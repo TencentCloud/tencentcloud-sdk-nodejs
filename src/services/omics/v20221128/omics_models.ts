@@ -58,17 +58,21 @@ export interface EnvironmentRuntimeConfig {
 }
 
 /**
- * ImportTableFile返回参数结构体
+ * RebootHPCNodes请求参数结构体
  */
-export interface ImportTableFileResponse {
+export interface RebootHPCNodesRequest {
   /**
-   * 表格ID。
+   * <p>集群Id</p>
    */
-  TableId?: string
+  ClusterId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>节点Id，例如ins-d1fc42ss</p>
    */
-  RequestId?: string
+  NodeIds: Array<string>
+  /**
+   * <p>重启的关机类型。</p><p>枚举值：</p><ul><li>SOFT： 软关机</li><li>HARD： 硬关机</li><li>SOFT_FIRST： 优先软关机，失败再执行硬关机</li></ul><p>默认值：SOFT</p>
+   */
+  StopType?: string
 }
 
 /**
@@ -480,6 +484,123 @@ export interface RunGroup {
 }
 
 /**
+ * 项目信息
+ */
+export interface Project {
+  /**
+   * <p>项目ID</p>
+   */
+  ProjectId?: string
+  /**
+   * <p>名称</p>
+   */
+  Name?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>地域</p>
+   */
+  Region?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>创建人</p>
+   */
+  Creator?: string
+  /**
+   * <p>是否默认项目</p>
+   */
+  IsDefault?: boolean
+}
+
+/**
+ * DescribeApplicationVersions请求参数结构体
+ */
+export interface DescribeApplicationVersionsRequest {
+  /**
+   * <p>项目ID</p>
+   */
+  ProjectId: string
+  /**
+   * <p>运行应用ID</p>
+   */
+  ApplicationId: string
+  /**
+   * <p>翻页入参</p>
+   */
+  Offset?: number
+  /**
+   * <p>翻页入参</p>
+   */
+  Limit?: number
+}
+
+/**
+ * 运行参数模板
+ */
+export interface InputTemplate {
+  /**
+   * <p>唯一ID</p>
+   */
+  Uuid?: string
+  /**
+   * <p>应用输入模板ID</p>
+   */
+  InputTemplateId?: string
+  /**
+   * <p>关联项目ID</p>
+   */
+  ProjectId?: string
+  /**
+   * <p>关联应用ID</p>
+   */
+  ApplicationId?: string
+  /**
+   * <p>关联应用版本</p>
+   */
+  ApplicationVersionId?: string
+  /**
+   * <p>名称</p>
+   */
+  Name?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>创建人</p>
+   */
+  Creator?: string
+  /**
+   * <p>创建人ID</p>
+   */
+  CreatorId?: string
+}
+
+/**
+ * ImportCommonApplication返回参数结构体
+ */
+export interface ImportCommonApplicationResponse {
+  /**
+   * <p>应用ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApplicationId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetRunStatus请求参数结构体
  */
 export interface GetRunStatusRequest {
@@ -583,21 +704,43 @@ export interface CreateEnvironmentResponse {
 }
 
 /**
- * RebootHPCNodes请求参数结构体
+ * ImportTableFile返回参数结构体
  */
-export interface RebootHPCNodesRequest {
+export interface ImportTableFileResponse {
   /**
-   * <p>集群Id</p>
+   * 表格ID。
    */
-  ClusterId: string
+  TableId?: string
   /**
-   * <p>节点Id，例如ins-d1fc42ss</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  NodeIds: Array<string>
+  RequestId?: string
+}
+
+/**
+ * ImportTableFile请求参数结构体
+ */
+export interface ImportTableFileRequest {
   /**
-   * <p>重启的关机类型。</p><p>枚举值：</p><ul><li>SOFT： 软关机</li><li>HARD： 硬关机</li><li>SOFT_FIRST： 优先软关机，失败再执行硬关机</li></ul><p>默认值：SOFT</p>
+   * 表格关联的项目ID。
    */
-  StopType?: string
+  ProjectId: string
+  /**
+   * 表格名称。最多支持200个字符。
+   */
+  Name: string
+  /**
+   * 表格文件Cos对象路径。
+   */
+  CosUri: string
+  /**
+   * 表格文件中每列的数据类型，支持的类型包括：Int、Float、String、File、Boolean、Array[Int]、Array[Float]、Array[String]、Array[File]、Array[Boolean]
+   */
+  DataType: Array<string>
+  /**
+   * 表格描述。最多支持500个字符。
+   */
+  Description?: string
 }
 
 /**
@@ -615,17 +758,42 @@ export interface RunStatusCount {
 }
 
 /**
- * 标签
+ * DescribeApplications返回参数结构体
  */
-export interface Tag {
+export interface DescribeApplicationsResponse {
   /**
-   * 标签键
+   * <p>应用列表总数</p>
    */
-  Key: string
+  TotalCount?: number
   /**
-   * 标签值
+   * <p>应用列表</p>
    */
-  Value: string
+  Applications?: Array<Application>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeEnvironments请求参数结构体
+ */
+export interface DescribeEnvironmentsRequest {
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 过滤器，支持过滤字段：
+- EnvironmentId：环境ID
+- Name：名称
+- Status：环境状态
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -665,6 +833,106 @@ export interface CreateEnvironmentRequest {
 }
 
 /**
+ * DescribeInputTemplates请求参数结构体
+ */
+export interface DescribeInputTemplatesRequest {
+  /**
+   * <p>项目ID</p>
+   */
+  ProjectId?: string
+  /**
+   * <p>翻页入参</p>
+   */
+  Limit?: number
+  /**
+   * <p>翻页入参</p>
+   */
+  Offset?: number
+  /**
+   * <p>过滤器，支持过滤字段：</p><ul><li>Name：模板名称</li><li>InputTemplateId：模板ID</li></ul>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>运行应用版本ID</p>
+   */
+  ApplicationVersionId?: string
+  /**
+   * <p>运行应用ID</p>
+   */
+  ApplicationId?: string
+}
+
+/**
+ * 应用详情
+ */
+export interface Application {
+  /**
+   * <p>应用ID</p>
+   */
+  ApplicationId?: string
+  /**
+   * <p>项目ID</p>
+   */
+  ProjectId?: string
+  /**
+   * <p>名称</p>
+   */
+  Name?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>类型</p><p>枚举值：</p><ul><li>WDL： WDL</li><li>NEXTFLOW： NEXTFLOW</li></ul>
+   */
+  Type?: string
+  /**
+   * <p>代码入口</p>
+   */
+  Entrypoint?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>创建人</p>
+   */
+  Creator?: string
+  /**
+   * <p>创建人ID</p>
+   */
+  CreatorId?: string
+  /**
+   * <p>版本数量</p>
+   */
+  VersionCount?: number
+  /**
+   * <p>版本列表</p>
+   */
+  Versions?: Array<ApplicationVersion>
+  /**
+   * <p>GIT信息</p>
+   */
+  GitSource?: GitInfo
+  /**
+   * <p>运行限制</p>
+   */
+  RunConstraints?: RunConstraints
+  /**
+   * <p>应用COS文件信息</p>
+   */
+  CosSource?: CosFileInfo
+  /**
+   * <p>排序顺序</p>
+   */
+  SortOrder?: number
+}
+
+/**
  * Nextflow工作流引擎设置
  */
 export interface NextflowConfig {
@@ -672,24 +940,6 @@ export interface NextflowConfig {
    * 工作流任务并发数
    */
   ExecutorQueueSize: number
-}
-
-/**
- * DescribeTablesRows返回参数结构体
- */
-export interface DescribeTablesRowsResponse {
-  /**
-   * 结果总数。
-   */
-  TotalCount?: number
-  /**
-   * 表格行列表。
-   */
-  Rows?: Array<TableRow>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -810,24 +1060,17 @@ export interface DescribeTablesRowsRequest {
 }
 
 /**
- * DescribeEnvironments请求参数结构体
+ * 标签
  */
-export interface DescribeEnvironmentsRequest {
+export interface Tag {
   /**
-   * 偏移量，默认为0。
+   * 标签键
    */
-  Offset?: number
+  Key: string
   /**
-   * 返回数量，默认为20，最大值为100。
+   * 标签值
    */
-  Limit?: number
-  /**
-   * 过滤器，支持过滤字段：
-- EnvironmentId：环境ID
-- Name：名称
-- Status：环境状态
-   */
-  Filters?: Array<Filter>
+  Value: string
 }
 
 /**
@@ -1365,6 +1608,26 @@ export interface RunApplicationResponse {
 }
 
 /**
+ * DescribeInputTemplates返回参数结构体
+ */
+export interface DescribeInputTemplatesResponse {
+  /**
+   * <p>运行应用参数模板列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputTemplates?: Array<InputTemplate>
+  /**
+   * <p>运行参数模板列表总数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeHPCClusters返回参数结构体
  */
 export interface DescribeHPCClustersResponse {
@@ -1651,6 +1914,26 @@ export interface RunGroupTimeoutNotification {
 }
 
 /**
+ * GetInputTemplateFile返回参数结构体
+ */
+export interface GetInputTemplateFileResponse {
+  /**
+   * <p>COS签名url</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CosSignedUrl?: string
+  /**
+   * <p>模板内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Content?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeHPCClusters请求参数结构体
  */
 export interface DescribeHPCClustersRequest {
@@ -1673,21 +1956,57 @@ export interface DescribeHPCClustersRequest {
 }
 
 /**
- * DescribeRuns返回参数结构体
+ * DescribeApplicationVersions返回参数结构体
  */
-export interface DescribeRunsResponse {
+export interface DescribeApplicationVersionsResponse {
   /**
-   * 符合条件的数量。
+   * <p>应用运行版本列表</p>
+   */
+  ApplicationVersions?: Array<ApplicationVersion>
+  /**
+   * <p>应用运行版本列表总数</p>
    */
   TotalCount?: number
-  /**
-   * 任务列表。
-   */
-  Runs?: Array<Run>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeTablesRows返回参数结构体
+ */
+export interface DescribeTablesRowsResponse {
+  /**
+   * 结果总数。
+   */
+  TotalCount?: number
+  /**
+   * 表格行列表。
+   */
+  Rows?: Array<TableRow>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeProjects请求参数结构体
+ */
+export interface DescribeProjectsRequest {
+  /**
+   * <p>翻页入参</p>
+   */
+  Limit?: number
+  /**
+   * <p>翻页入参</p>
+   */
+  Offset?: number
+  /**
+   * <p>过滤器，支持过滤字段：</p><ul><li>Name：项目名称</li><li>ProjectId：项目ID</li><li>Region：地域</li></ul>
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1712,6 +2031,24 @@ export interface DeleteVolumeRequest {
    * 缓存卷ID。
    */
   VolumeId: string
+}
+
+/**
+ * DescribeProjects返回参数结构体
+ */
+export interface DescribeProjectsResponse {
+  /**
+   * <p>项目列表总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>项目列表</p>
+   */
+  Projects?: Array<Project>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1797,6 +2134,32 @@ export interface ModifyVolumeResponse {
 }
 
 /**
+ * DescribeApplications请求参数结构体
+ */
+export interface DescribeApplicationsRequest {
+  /**
+   * <p>项目ID</p>
+   */
+  ProjectId: string
+  /**
+   * <p>翻页入参</p>
+   */
+  Limit?: number
+  /**
+   * <p>翻页入参</p>
+   */
+  Offset?: number
+  /**
+   * <p>过滤器，支持过滤字段：</p><ul><li>Name：应用名称</li><li>ApplicationId：应用ID</li><li>HasRun</li><li>CreatorId：创建人ID</li><li>Type：应用类型</li></ul>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>排序</p>
+   */
+  OrderBy?: string
+}
+
+/**
  * COS 文件信息
  */
 export interface CosFileInfo {
@@ -1841,29 +2204,25 @@ export interface VPCOption {
 }
 
 /**
- * ImportTableFile请求参数结构体
+ * GetInputTemplateFile请求参数结构体
  */
-export interface ImportTableFileRequest {
+export interface GetInputTemplateFileRequest {
   /**
-   * 表格关联的项目ID。
+   * <p>运行参数模板ID</p>
    */
-  ProjectId: string
+  InputTemplateId: string
   /**
-   * 表格名称。最多支持200个字符。
+   * <p>项目ID</p>
    */
-  Name: string
+  ProjectId?: string
   /**
-   * 表格文件Cos对象路径。
+   * <p>运行应用版本ID</p>
    */
-  CosUri: string
+  ApplicationVersionId?: string
   /**
-   * 表格文件中每列的数据类型，支持的类型包括：Int、Float、String、File、Boolean、Array[Int]、Array[Float]、Array[String]、Array[File]、Array[Boolean]
+   * <p>运行应用ID</p>
    */
-  DataType: Array<string>
-  /**
-   * 表格描述。最多支持500个字符。
-   */
-  Description?: string
+  ApplicationId?: string
 }
 
 /**
@@ -1962,6 +2321,16 @@ export interface RunApplicationRequest {
    * 接受通知邮件地址列表。
    */
   EmailForNotification?: Array<string>
+}
+
+/**
+ * 运行限制
+ */
+export interface RunConstraints {
+  /**
+   * <p>运行时可选的Nextflow版本</p>
+   */
+  NextflowVersion?: Array<string>
 }
 
 /**
@@ -2074,6 +2443,118 @@ export interface EnvironmentConfig {
    * 安全组配置。
    */
   SecurityGroupOption?: SecurityGroupOption
+}
+
+/**
+ * DescribeRuns返回参数结构体
+ */
+export interface DescribeRunsResponse {
+  /**
+   * 符合条件的数量。
+   */
+  TotalCount?: number
+  /**
+   * 任务列表。
+   */
+  Runs?: Array<Run>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 任务作业详情。
+ */
+export interface RunMetadata {
+  /**
+   * 任务类型。
+   */
+  RunType?: string
+  /**
+   * 任务ID。
+   */
+  RunId?: string
+  /**
+   * 父层ID。
+   */
+  ParentId?: string
+  /**
+   * 作业ID。
+   */
+  JobId?: string
+  /**
+   * 作业名称。
+   */
+  CallName?: string
+  /**
+   * Scatter索引。
+   */
+  ScatterIndex?: string
+  /**
+   * 输入。
+   */
+  Input?: string
+  /**
+   * 输出。
+   */
+  Output?: string
+  /**
+   * 状态
+   */
+  Status?: string
+  /**
+   * 错误信息。
+   */
+  ErrorMessage?: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 提交时间。
+   */
+  SubmitTime?: string
+  /**
+   * 结束时间。
+   */
+  EndTime?: string
+  /**
+   * 命令行。
+   */
+  Command?: string
+  /**
+   * 运行时。
+   */
+  Runtime?: string
+  /**
+   * 预处理。
+   */
+  Preprocess?: boolean
+  /**
+   * 后处理。
+   */
+  PostProcess?: boolean
+  /**
+   * Cache命中
+   */
+  CallCached?: boolean
+  /**
+   * 工作目录。
+   */
+  WorkDir?: string
+  /**
+   * 标准输出。
+   */
+  Stdout?: string
+  /**
+   * 错误输出。
+   */
+  Stderr?: string
+  /**
+   * 其他信息。
+   */
+  Meta?: string
 }
 
 /**
@@ -2271,95 +2752,31 @@ export interface CVMOption {
 }
 
 /**
- * 任务作业详情。
+ * ImportCommonApplication请求参数结构体
  */
-export interface RunMetadata {
+export interface ImportCommonApplicationRequest {
   /**
-   * 任务类型。
+   * <p>公共应用ID</p>
    */
-  RunType?: string
+  CommonAppUuid: string
   /**
-   * 任务ID。
+   * <p>公共应用重命名</p>
    */
-  RunId?: string
+  CommonAppNewName: string
   /**
-   * 父层ID。
+   * <p>项目ID</p>
    */
-  ParentId?: string
+  ProjectId: string
   /**
-   * 作业ID。
+   * <p>公共应用类型</p><p>枚举值：</p><ul><li>WDL： WDL</li><li>NEXTFLOW： NEXTFLOW</li></ul>
    */
-  JobId?: string
+  Type: string
   /**
-   * 作业名称。
+   * <p>NEXTFLOW版本</p>
    */
-  CallName?: string
+  NextflowVersion: string
   /**
-   * Scatter索引。
+   * <p>是否内部应用</p>
    */
-  ScatterIndex?: string
-  /**
-   * 输入。
-   */
-  Input?: string
-  /**
-   * 输出。
-   */
-  Output?: string
-  /**
-   * 状态
-   */
-  Status?: string
-  /**
-   * 错误信息。
-   */
-  ErrorMessage?: string
-  /**
-   * 开始时间
-   */
-  StartTime?: string
-  /**
-   * 提交时间。
-   */
-  SubmitTime?: string
-  /**
-   * 结束时间。
-   */
-  EndTime?: string
-  /**
-   * 命令行。
-   */
-  Command?: string
-  /**
-   * 运行时。
-   */
-  Runtime?: string
-  /**
-   * 预处理。
-   */
-  Preprocess?: boolean
-  /**
-   * 后处理。
-   */
-  PostProcess?: boolean
-  /**
-   * Cache命中
-   */
-  CallCached?: boolean
-  /**
-   * 工作目录。
-   */
-  WorkDir?: string
-  /**
-   * 标准输出。
-   */
-  Stdout?: string
-  /**
-   * 错误输出。
-   */
-  Stderr?: string
-  /**
-   * 其他信息。
-   */
-  Meta?: string
+  Internal?: boolean
 }

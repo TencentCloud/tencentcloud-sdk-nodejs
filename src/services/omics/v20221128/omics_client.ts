@@ -21,7 +21,7 @@ import {
   DeleteVolumeDataRequest,
   RetryRunsResponse,
   EnvironmentRuntimeConfig,
-  ImportTableFileResponse,
+  RebootHPCNodesRequest,
   CreateVolumeRequest,
   LimitRange,
   DescribeTablesResponse,
@@ -33,20 +33,27 @@ import {
   GitInfo,
   ApplicationVersion,
   RunGroup,
+  Project,
+  DescribeApplicationVersionsRequest,
+  InputTemplate,
+  ImportCommonApplicationResponse,
   GetRunStatusRequest,
   HPCInstance,
   CreateEnvironmentResponse,
-  RebootHPCNodesRequest,
+  ImportTableFileResponse,
+  ImportTableFileRequest,
   RunStatusCount,
-  Tag,
+  DescribeApplicationsResponse,
+  DescribeEnvironmentsRequest,
   RunGroupNotification,
   CreateEnvironmentRequest,
+  DescribeInputTemplatesRequest,
+  Application,
   NextflowConfig,
-  DescribeTablesRowsResponse,
   Run,
   NotificationType,
   DescribeTablesRowsRequest,
-  DescribeEnvironmentsRequest,
+  Tag,
   ResourceQuota,
   CacheInfo,
   HPCInternetInfo,
@@ -69,6 +76,7 @@ import {
   DescribeHPCNodesRequest,
   DescribeEnvironmentsResponse,
   RunApplicationResponse,
+  DescribeInputTemplatesResponse,
   DescribeHPCClustersResponse,
   DeleteEnvironmentRequest,
   DatabaseOption,
@@ -84,21 +92,29 @@ import {
   RunWorkflowResponse,
   HPCGPUInfo,
   RunGroupTimeoutNotification,
+  GetInputTemplateFileResponse,
   DescribeHPCClustersRequest,
-  DescribeRunsResponse,
+  DescribeApplicationVersionsResponse,
+  DescribeTablesRowsResponse,
+  DescribeProjectsRequest,
   CreateVolumeResponse,
   DeleteVolumeRequest,
+  DescribeProjectsResponse,
   Volume,
   ModifyVolumeResponse,
+  DescribeApplicationsRequest,
   CosFileInfo,
   VPCOption,
-  ImportTableFileRequest,
+  GetInputTemplateFileRequest,
   DeleteVolumeResponse,
   RunApplicationRequest,
+  RunConstraints,
   CromwellConfig,
   ResourceIds,
   DescribeRunGroupsResponse,
   EnvironmentConfig,
+  DescribeRunsResponse,
+  RunMetadata,
   ModifyVolumeRequest,
   DescribeRunGroupsRequest,
   HPCNode,
@@ -106,7 +122,7 @@ import {
   RunGroupResultNotification,
   Table,
   CVMOption,
-  RunMetadata,
+  ImportCommonApplicationRequest,
 } from "./omics_models"
 
 /**
@@ -116,6 +132,26 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("omics.tencentcloudapi.com", "2022-11-28", clientConfig)
+  }
+
+  /**
+   * 导入公共应用到项目
+   */
+  async ImportCommonApplication(
+    req: ImportCommonApplicationRequest,
+    cb?: (error: string, rep: ImportCommonApplicationResponse) => void
+  ): Promise<ImportCommonApplicationResponse> {
+    return this.request("ImportCommonApplication", req, cb)
+  }
+
+  /**
+   * 查询应用版本列表
+   */
+  async DescribeApplicationVersions(
+    req: DescribeApplicationVersionsRequest,
+    cb?: (error: string, rep: DescribeApplicationVersionsResponse) => void
+  ): Promise<DescribeApplicationVersionsResponse> {
+    return this.request("DescribeApplicationVersions", req, cb)
   }
 
   /**
@@ -136,6 +172,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateVolumeResponse) => void
   ): Promise<CreateVolumeResponse> {
     return this.request("CreateVolume", req, cb)
+  }
+
+  /**
+   * 查询运行参数模板内容
+   */
+  async GetInputTemplateFile(
+    req: GetInputTemplateFileRequest,
+    cb?: (error: string, rep: GetInputTemplateFileResponse) => void
+  ): Promise<GetInputTemplateFileResponse> {
+    return this.request("GetInputTemplateFile", req, cb)
   }
 
   /**
@@ -239,6 +285,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询项目列表
+   */
+  async DescribeProjects(
+    req: DescribeProjectsRequest,
+    cb?: (error: string, rep: DescribeProjectsResponse) => void
+  ): Promise<DescribeProjectsResponse> {
+    return this.request("DescribeProjects", req, cb)
+  }
+
+  /**
    * 运行工作流。
    */
   async RunWorkflow(
@@ -299,6 +355,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询项目应用列表
+   */
+  async DescribeApplications(
+    req: DescribeApplicationsRequest,
+    cb?: (error: string, rep: DescribeApplicationsResponse) => void
+  ): Promise<DescribeApplicationsResponse> {
+    return this.request("DescribeApplications", req, cb)
+  }
+
+  /**
    * 删除缓存卷数据。
    */
   async DeleteVolumeData(
@@ -316,6 +382,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVolumesResponse) => void
   ): Promise<DescribeVolumesResponse> {
     return this.request("DescribeVolumes", req, cb)
+  }
+
+  /**
+   * 查询运行参数模板列表
+   */
+  async DescribeInputTemplates(
+    req: DescribeInputTemplatesRequest,
+    cb?: (error: string, rep: DescribeInputTemplatesResponse) => void
+  ): Promise<DescribeInputTemplatesResponse> {
+    return this.request("DescribeInputTemplates", req, cb)
   }
 
   /**
