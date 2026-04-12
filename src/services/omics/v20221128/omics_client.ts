@@ -59,6 +59,7 @@ import {
   HPCInternetInfo,
   GetRunCallsResponse,
   GetRunMetadataFileRequest,
+  ToolRepoTag,
   TableRow,
   StorageOption,
   RunOption,
@@ -80,7 +81,9 @@ import {
   DescribeHPCClustersResponse,
   DeleteEnvironmentRequest,
   DatabaseOption,
+  DescribePublicApplicationsRequest,
   Filter,
+  PublicApplication,
   VolumeInfo,
   HPCCluster,
   VolumeAutoScaleUpRule,
@@ -117,6 +120,7 @@ import {
   RunMetadata,
   ModifyVolumeRequest,
   DescribeRunGroupsRequest,
+  DescribePublicApplicationsResponse,
   HPCNode,
   NFOption,
   RunGroupResultNotification,
@@ -232,6 +236,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteVolumeResponse) => void
   ): Promise<DeleteVolumeResponse> {
     return this.request("DeleteVolume", req, cb)
+  }
+
+  /**
+   * 查询公共应用列表。
+   */
+  async DescribePublicApplications(
+    req: DescribePublicApplicationsRequest,
+    cb?: (error: string, rep: DescribePublicApplicationsResponse) => void
+  ): Promise<DescribePublicApplicationsResponse> {
+    return this.request("DescribePublicApplications", req, cb)
   }
 
   /**

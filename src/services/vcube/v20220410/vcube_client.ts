@@ -344,7 +344,7 @@ export class Client extends AbstractClient {
    * 总览页查询临期License列表，和统计数据
    */
   async DescribeLicenseList(
-    req?: DescribeLicenseListRequest,
+    req: DescribeLicenseListRequest,
     cb?: (error: string, rep: DescribeLicenseListResponse) => void
   ): Promise<DescribeLicenseListResponse> {
     return this.request("DescribeLicenseList", req, cb)

@@ -118,6 +118,16 @@ it("omics.v20221128.DeleteVolume", async function () {
     }
 })
 
+it("omics.v20221128.DescribePublicApplications", async function () {
+    try {
+       const data = await client.DescribePublicApplications({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("omics.v20221128.DescribeTablesRows", async function () {
     try {
        const data = await client.DescribeTablesRows({})

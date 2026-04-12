@@ -1749,35 +1749,43 @@ export interface SealInfo {
  */
 export interface SubmitQuestionMarkAgentJobRequest {
   /**
-   * 图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。  示例值：/9j/4AAQSkZJRg.....s97n//2Q==
+   * <p>图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。  示例值：/9j/4AAQSkZJRg.....s97n//2Q==</p>
    */
   ImageBase64?: string
   /**
-   * 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。  示例值：https://ocr-demo-1254418846.cos.ap-guangzhou.myqcloud.com/general/GeneralAccurateOCR/GeneralAccurateOCR1.jpg
+   * <p>图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。  示例值：https://ocr-demo-1254418846.cos.ap-guangzhou.myqcloud.com/general/GeneralAccurateOCR/GeneralAccurateOCR1.jpg</p>
    */
   ImageUrl?: string
   /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，默认值为1。
+   * <p>需要识别的PDF页面的对应页码，仅支持PDF单页识别，默认值为1。</p>
    */
   PdfPageNumber?: number
   /**
-   * 表示整张试卷批改需要先切题，默认为false
+   * <p>表示整张试卷批改需要先切题，默认为false</p>
    * @deprecated
    */
   BoolSingleQuestion?: boolean
   /**
-   * 默认false 表示关闭深度思考  true 表示打开深度思考，更深层次推理分析，速度更慢
+   * <p>默认false 表示关闭深度思考  true 表示打开深度思考，更深层次推理分析，速度更慢</p>
    * @deprecated
    */
   EnableDeepThink?: boolean
   /**
-   * 题目信息输出配置，当key对应为true表示开启配置开关。     当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；当key为TrueAnswer  value为true 表示输出每道题的正确答案 ；当key为ReturnAnswerPosition  value为false表示不输出手写答案坐标（降低处理耗时，按需输出）； 设置方式参考  {"KnowledgePoints":true,"TrueAnswer":true}
+   * <p>题目信息输出配置，当key对应为true表示开启配置开关。</p><p>当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；<br>当key为TrueAnswer  value为true 表示输出每道题的正确答案 ；<br>当key为StepCorrection  value为true表示启用步骤级批改；</p><p> 设置方式参考  {&quot;KnowledgePoints&quot;:true,&quot;TrueAnswer&quot;:true}</p><p>参数格式：{&quot;KnowledgePoints&quot;:true,&quot;TrueAnswer&quot;:true}</p>
    */
   QuestionConfigMap?: string
   /**
-   * 仅有单题有效，如果切题有多题则不生效，单题批改的时候作为参考答案输入到批改模型中
+   * <p>仅有单题有效，如果切题有多题则不生效，单题批改的时候作为参考答案输入到批改模型中</p>
    */
   ReferenceAnswer?: string
+  /**
+   * <p>图片/PDF的 Base64 列表值，最多三张。每张图片要求参考ImageBase64  1. 如果ImageBase64List或者ImageUrlList 都没值则取ImageBase64 或者ImageUrl  2.如果ImageBase64List或者ImageUrlList 有一个值，则不取ImageBase64 或者ImageUrl值，优先去list  3.如果ImageBase64List或者ImageUrlList 都有值，则取ImageUrlList</p>
+   */
+  ImageBase64List?: Array<string>
+  /**
+   * <p>图片/PDF的 Url 地址Base64 列表值，最多三张。每张图片要求参考ImageUrl。  图片生效规则同ImageBase64List</p>
+   */
+  ImageUrlList?: Array<string>
 }
 
 /**
@@ -6503,15 +6511,15 @@ export interface AirTicketInfo {
  */
 export interface SubmitQuestionMarkAgentJobResponse {
   /**
-   * 任务唯一ID。由服务端生成.
+   * <p>任务唯一ID。由服务端生成.</p>
    */
   JobId?: string
   /**
-   * 切题题目边框坐标列表 （如果BoolSingleQuestion为true则返回空）
+   * <p>切题题目边框坐标列表 （如果BoolSingleQuestion为true则返回空）</p>
    */
   QuestionInfo?: Array<QuestionInfo>
   /**
-   * 题目切题数量，作为计费题目数总量
+   * <p>题目切题数量，作为计费题目数总量</p>
    */
   QuestionCount?: string
   /**
@@ -9061,19 +9069,29 @@ export interface InsuranceBillInfo {
  */
 export interface MarkInfo {
   /**
-   * 题目的题干信息 
-
-
+   * <p>题目的题干信息</p>
    */
   MarkItemTitle?: string
   /**
-   * 批改答案列表（每个小题存在多个答案，比如多个填空区域答案，循序按照从左到右，从上到下排列）
+   * <p>批改答案列表（每个小题存在多个答案，比如多个填空区域答案，循序按照从左到右，从上到下排列）</p>
    */
   AnswerInfos?: Array<AnswerInfo>
   /**
-   * 嵌套题目结构（如果有多层嵌套则会返回子题信息，如果没有嵌套题目则返回空）
+   * <p>嵌套题目结构（如果有多层嵌套则会返回子题信息，如果没有嵌套题目则返回空）</p>
    */
   MarkInfos?: Array<MarkInfo>
+  /**
+   * <p>题干坐标</p><p>单位：px</p>
+   */
+  QuestionPositions?: Array<number | bigint>
+  /**
+   * <p>题干插图坐标列表，每个元素包含一张插图的4个角点坐标</p>
+   */
+  QuestionImagePositions?: Array<Positions>
+  /**
+   * <p>题目级正确答案（步骤批改时使用，包含完整解题步骤）</p>
+   */
+  RightAnswer?: string
 }
 
 /**

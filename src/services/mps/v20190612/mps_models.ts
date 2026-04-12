@@ -5529,7 +5529,7 @@ export interface FlowStatisticsArray {
  */
 export interface DescribeImageTaskDetailRequest {
   /**
-   * 图片处理任务的任务 ID。
+   * <p>图片处理任务的任务 ID。</p>
    */
   TaskId: string
 }
@@ -7662,7 +7662,7 @@ export interface SRTFECSimpleOptions {
  */
 export interface BatchProcessMediaResponse {
   /**
-   * 任务 ID。
+   * <p>任务 ID。</p>
    */
   TaskId?: string
   /**
@@ -9379,28 +9379,28 @@ export interface DescribeAigcImageTaskResponse {
  */
 export interface SmartSubtitleTaskBatchOutput {
   /**
-   * 任务进度。
+   * <p>任务进度。</p>
    */
   Progress?: number
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   * <p>任务状态，有 PROCESSING，SUCCESS，WAITING 和 FAIL 四种。</p>
    */
   Status?: string
   /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   * <p>错误码，空字符串表示成功，其他值表示失败，取值请参考 <a href="https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81">媒体处理类错误码</a> 列表。</p>
    */
   ErrCodeExt?: string
   /**
-   * 错误信息。
+   * <p>错误信息。</p>
    */
   Message?: string
   /**
-   * 翻译任务输出信息。
+   * <p>翻译任务输出信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TransTextTask?: SmartSubtitleTaskTransTextResultOutput
   /**
-   * 语音全文识别任务输出信息。
+   * <p>语音全文识别任务输出信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AsrFullTextTask?: SmartSubtitleTaskAsrFullTextResultOutput
@@ -17894,46 +17894,45 @@ export interface AiRecognitionTaskOcrWordsSegmentItem {
  */
 export interface BatchProcessMediaRequest {
   /**
-   * 媒体处理的文件输入信息。
+   * <p>媒体处理的文件输入信息。</p>
    */
   InputInfo: Array<MediaInputInfo>
   /**
-   * 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。
-注意：当InputInfo.Type为URL时，该参数是必填项，目前只支持COS输出
+   * <p>媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。<br>注意：当InputInfo.Type为URL时，该参数是必填项，目前只支持COS输出</p>
    */
   OutputStorage?: TaskOutputStorage
   /**
-   * 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。
-如果不填，表示与 InputInfo 中文件所在的目录一致。
+   * <p>媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如<code>/movie/201907/</code>。<br>如果不填，表示与 InputInfo 中文件所在的目录一致。</p>
    */
   OutputDir?: string
   /**
-   * 智能字幕
+   * <p>智能字幕</p>
    */
   SmartSubtitlesTask?: SmartSubtitlesTaskInput
   /**
-   * 任务的事件通知信息，不填代表不获取事件通知。
+   * <p>任务的事件通知信息，不填代表不获取事件通知。</p>
    */
   TaskNotifyConfig?: TaskNotifyConfig
   /**
-   * 任务流的优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。
+   * <p>任务流的优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。</p>
    */
   TasksPriority?: number
   /**
-   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   * <p>来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。</p>
    */
   SessionContext?: string
   /**
-   * 资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。
+   * <p>资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。</p>
    */
   ResourceId?: string
   /**
-   * 是否跳过元信息获取，可选值： 
-0：表示不跳过 
-1：表示跳过 
-默认值：0	
+   * <p>是否跳过元信息获取，可选值：<br>0：表示不跳过<br>1：表示跳过<br>默认值：0</p>
    */
   SkipMateData?: number
+  /**
+   * <p>执行模式，可选值：</p><li>Parallel: 并发执行</li><li>Serial: 串行执行</li>注意：默认并发执行。
+   */
+  TaskMode?: string
 }
 
 /**
@@ -22964,46 +22963,54 @@ export interface DescribeStreamPackageSourceLocationsResponse {
  */
 export interface DescribeImageTaskDetailResponse {
   /**
-   * 任务类型，目前取值有：
-<li>WorkflowTask：工作流处理任务。</li>
+   * <p>任务类型，目前取值有：</p><li>WorkflowTask：工作流处理任务。</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskType?: string
   /**
-   * 任务状态，取值：
-<li>WAITING：等待中；</li>
-<li>PROCESSING：处理中；</li>
-<li>FINISH：已完成。</li>
+   * <p>任务状态，取值：</p><li>WAITING：等待中；</li><li>PROCESSING：处理中；</li><li>FINISH：已完成。</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
-   * 任务失败时的错误码。
+   * <p>任务失败时的错误码。</p>
    */
   ErrCode?: number
   /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   * <p>错误码，空字符串表示成功，其他值表示失败，取值请参考 <a href="https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81">媒体处理类错误码</a> 列表。</p>
    */
   ErrMsg?: string
   /**
-   * 任务异常Message。
+   * <p>任务异常Message。</p>
    */
   Message?: string
   /**
-   * 图片处理任务的执行状态与结果。
+   * <p>图片处理任务的执行状态与结果。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageProcessTaskResultSet?: Array<ImageProcessTaskResult>
   /**
-   * 任务的创建时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   * <p>任务的创建时间，采用 <a href="https://cloud.tencent.com/document/product/862/37710#52">ISO 日期格式</a>。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   * <p>任务执行完毕的时间，采用 <a href="https://cloud.tencent.com/document/product/862/37710#52">ISO 日期格式</a>。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FinishTime?: string
+  /**
+   * <p>模板唯一标识。</p>
+   */
+  Definition?: number
+  /**
+   * <p>任务发起参数。</p>
+   */
+  ImageTask?: ImageTaskInput
+  /**
+   * <p>图片任务输入信息。</p>
+   */
+  InputInfo?: MediaInputInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

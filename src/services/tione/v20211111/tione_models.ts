@@ -1989,129 +1989,132 @@ export interface CreateMountLimitResponse {
  */
 export interface TrainingTaskSetItem {
   /**
-   * 训练任务ID
+   * <p>训练任务ID</p>
    */
   Id?: string
   /**
-   * 训练任务名称
+   * <p>训练任务名称</p>
    */
   Name?: string
   /**
-   * 框架名称
+   * <p>框架名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FrameworkName?: string
   /**
-   * 训练框架版本
+   * <p>训练框架版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FrameworkVersion?: string
   /**
-   * 框架运行环境
+   * <p>框架运行环境</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FrameworkEnvironment?: string
   /**
-   * 计费模式
+   * <p>计费模式</p>
    */
   ChargeType?: string
   /**
-   * 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中
+   * <p>计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中</p>
    */
   ChargeStatus?: string
   /**
-   * 预付费专用资源组
+   * <p>预付费专用资源组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupId?: string
   /**
-   * 资源配置
+   * <p>资源配置</p>
    */
   ResourceConfigInfos?: Array<ResourceConfigInfo>
   /**
-   * 训练模式eg：PS_WORKER、DDP、MPI、HOROVOD
+   * <p>训练模式eg：PS_WORKER、DDP、MPI、HOROVOD</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TrainingMode?: string
   /**
-   * 任务状态，eg：SUBMITTING提交中、PENDING排队中、
-STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成
+   * <p>任务状态，eg：SUBMITTING提交中、PENDING排队中、<br>STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成</p>
    */
   Status?: string
   /**
-   * 运行时长
+   * <p>运行时长</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuntimeInSeconds?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 训练开始时间
+   * <p>训练开始时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
-   * 训练结束时间
+   * <p>训练结束时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
-   * 训练输出
+   * <p>训练输出</p>
    */
   Output?: CosPathInfo
   /**
-   * 失败原因
+   * <p>失败原因</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FailureReason?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 计费金额信息，eg：2.00元/小时 (按量计费)
+   * <p>计费金额信息，eg：2.00元/小时 (按量计费)</p>
    */
   BillingInfo?: string
   /**
-   * 预付费专用资源组名称
+   * <p>预付费专用资源组名称</p>
    */
   ResourceGroupName?: string
   /**
-   * 自定义镜像信息
+   * <p>自定义镜像信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageInfo?: ImageInfo
   /**
-   * 任务信息
+   * <p>任务信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
-   * 标签配置
+   * <p>标签配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
-   * 回调地址
+   * <p>回调地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CallbackUrl?: string
   /**
-   * 任务subUin信息
+   * <p>任务subUin信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubUin?: string
   /**
-   * 任务创建者名称
+   * <p>任务创建者名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubUinName?: string
   /**
-   * 任务AppId
+   * <p>任务AppId</p>
    */
   AppId?: string
+  /**
+   * <p>环境变量</p>
+   */
+  Envs?: Array<EnvVar>
 }
 
 /**
@@ -3154,23 +3157,23 @@ export interface LogIdentity {
  */
 export interface MountInstanceInfo {
   /**
-   * 类型英文名
+   * <p>类型英文名</p>
    */
   Type?: string
   /**
-   * 存储实例ID
+   * <p>存储实例ID</p>
    */
   StorageId?: string
   /**
-   * 存储实例名称
+   * <p>存储实例名称</p>
    */
   StorageName?: string
   /**
-   * 状态，0可挂载 1不可挂载(挂载限制)
+   * <p>状态</p><p>枚举值：</p><ul><li>0： 可挂载（正常）</li><li>1： 不可挂载（挂载限制）</li><li>2： 不可挂载（存储配置关闭）</li></ul>
    */
   Status?: number
   /**
-   * 额外配置
+   * <p>额外配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtraConf?: StorageExtraConf
@@ -4236,7 +4239,7 @@ export interface DescribeModelServiceRequest {
  */
 export interface CreateTrainingTaskResponse {
   /**
-   * 训练任务ID
+   * <p>训练任务ID</p>
    */
   Id?: string
   /**
@@ -4299,106 +4302,109 @@ export interface DeleteModelServiceAuthTokenRequest {
  */
 export interface CreateTrainingTaskRequest {
   /**
-   * 训练任务名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头
+   * <p>训练任务名称，不超过60个字符，仅支持中英文、数字、下划线&quot;_&quot;、短横&quot;-&quot;，只能以中英文、数字开头</p>
    */
   Name: string
   /**
-   * 计费模式，eg：PREPAID 包年包月（资源组）;
-POSTPAID_BY_HOUR 按量计费
+   * <p>计费模式，eg：PREPAID 包年包月（资源组）;<br>POSTPAID_BY_HOUR 按量计费</p>
    */
   ChargeType: string
   /**
-   * 资源配置，需填写对应算力规格ID和节点数量，算力规格ID查询接口为DescribeBillingSpecsPrice，eg：[{"Role":"WORKER", "InstanceType": "TI.S.MEDIUM.POST", "InstanceNum": 1}]
+   * <p>资源配置，需填写对应算力规格ID和节点数量，算力规格ID查询接口为DescribeBillingSpecsPrice，eg：[{&quot;Role&quot;:&quot;WORKER&quot;, &quot;InstanceType&quot;: &quot;TI.S.MEDIUM.POST&quot;, &quot;InstanceNum&quot;: 1}]</p>
    */
   ResourceConfigInfos: Array<ResourceConfigInfo>
   /**
-   * 训练框架名称，通过DescribeTrainingFrameworks接口查询，eg：SPARK、PYSPARK、TENSORFLOW、PYTORCH
+   * <p>训练框架名称，通过DescribeTrainingFrameworks接口查询，eg：SPARK、PYSPARK、TENSORFLOW、PYTORCH</p>
    */
   FrameworkName?: string
   /**
-   * 训练框架版本，通过DescribeTrainingFrameworks接口查询，eg：1.15、1.9
+   * <p>训练框架版本，通过DescribeTrainingFrameworks接口查询，eg：1.15、1.9</p>
    */
   FrameworkVersion?: string
   /**
-   * 训练框架环境，通过DescribeTrainingFrameworks接口查询，eg：tf1.15-py3.7-cpu、torch1.9-py3.8-cuda11.1-gpu
+   * <p>训练框架环境，通过DescribeTrainingFrameworks接口查询，eg：tf1.15-py3.7-cpu、torch1.9-py3.8-cuda11.1-gpu</p>
    */
   FrameworkEnvironment?: string
   /**
-   * 预付费专用资源组ID，通过DescribeBillingResourceGroups接口查询
+   * <p>预付费专用资源组ID，通过DescribeBillingResourceGroups接口查询</p>
    */
   ResourceGroupId?: string
   /**
-   * 标签配置
+   * <p>标签配置</p>
    */
   Tags?: Array<Tag>
   /**
-   * 自定义镜像信息
+   * <p>自定义镜像信息</p>
    */
   ImageInfo?: ImageInfo
   /**
-   * COS代码包路径
+   * <p>COS代码包路径</p>
    */
   CodePackagePath?: CosPathInfo
   /**
-   * 任务的启动命令，按任务训练模式输入，如遇特殊字符导致配置失败，可使用EncodedStartCmdInfo参数
+   * <p>任务的启动命令，按任务训练模式输入，如遇特殊字符导致配置失败，可使用EncodedStartCmdInfo参数</p>
    */
   StartCmdInfo?: StartCmdInfo
   /**
-   * 训练模式，通过DescribeTrainingFrameworks接口查询，eg：PS_WORKER、DDP、MPI、HOROVOD
+   * <p>训练模式，通过DescribeTrainingFrameworks接口查询，eg：PS_WORKER、DDP、MPI、HOROVOD</p>
    */
   TrainingMode?: string
   /**
-   * 数据配置，依赖DataSource字段，数量不超过10个
+   * <p>数据配置，依赖DataSource字段，数量不超过10个</p>
    */
   DataConfigs?: Array<DataConfig>
   /**
-   * VPC Id
+   * <p>VPC Id</p>
    */
   VpcId?: string
   /**
-   * 子网Id
+   * <p>子网Id</p>
    */
   SubnetId?: string
   /**
-   * COS训练输出路径
+   * <p>COS训练输出路径</p>
    */
   Output?: CosPathInfo
   /**
-   * CLS日志配置
+   * <p>CLS日志配置</p>
    */
   LogConfig?: LogConfig
   /**
-   * 调优参数，不超过2048个字符
+   * <p>调优参数，不超过2048个字符</p>
    */
   TuningParameters?: string
   /**
-   * 是否上报日志
+   * <p>是否上报日志</p>
    */
   LogEnable?: boolean
   /**
-   * 备注，不超过1024个字符
+   * <p>备注，不超过1024个字符</p>
    */
   Remark?: string
   /**
-   * 数据来源，eg：DATASET、COS、CFS、CFSTurbo、HDFS、GooseFSx
+   * <p>数据来源，eg：DATASET、COS、CFS、CFSTurbo、HDFS、GooseFSx</p>
    */
   DataSource?: string
   /**
-   * 回调地址，用于创建/启动/停止训练任务的异步回调。回调格式&内容详见：[[TI-ONE接口回调说明]](https://cloud.tencent.com/document/product/851/84292)
+   * <p>回调地址，用于创建/启动/停止训练任务的异步回调。回调格式&amp;内容详见：<a href="https://cloud.tencent.com/document/product/851/84292">[TI-ONE接口回调说明]</a></p>
    */
   CallbackUrl?: string
   /**
-   * 编码后的任务启动命令，与StartCmdInfo同时配置时，仅当前参数生效
+   * <p>编码后的任务启动命令，与StartCmdInfo同时配置时，仅当前参数生效</p>
    */
   EncodedStartCmdInfo?: EncodedStartCmdInfo
   /**
-   * 代码仓库配置
+   * <p>代码仓库配置</p>
    */
   CodeRepos?: Array<CodeRepoConfig>
   /**
-   * 网络暴露配置
+   * <p>网络暴露配置</p>
    */
   ExposeNetworkConfig?: ExposeNetworkConfig
+  /**
+   * <p>环境变量</p>
+   */
+  Envs?: Array<EnvVar>
 }
 
 /**
@@ -6388,39 +6394,39 @@ export interface DeleteDatasetResponse {
  */
 export interface MountLimitInfo {
   /**
-   * 数据源类型英文名
+   * <p>数据源类型英文名</p>
    */
   Type?: string
   /**
-   * 数据源所属存储实例ID
+   * <p>数据源所属存储实例ID</p>
    */
   StorageId?: string
   /**
-   * 数据源所属存储实例名称
+   * <p>数据源所属存储实例名称</p>
    */
   StorageName?: string
   /**
-   * 限制开关是否开启，只有开启时才有限制
+   * <p>限制开关是否开启，只有开启时才有限制</p>
    */
   LimitMount?: boolean
   /**
-   * 创建者uin
+   * <p>创建者uin</p>
    */
   Creator?: string
   /**
-   * 创建者名称
+   * <p>创建者名称</p>
    */
   CreatorName?: string
   /**
-   * 创建时间, 格式为yyyy-mm-ddThh:mm:ssZ
+   * <p>创建时间, 格式为yyyy-mm-ddThh:mm:ssZ</p>
    */
   CreateTime?: string
   /**
-   * 更新时间, 格式为yyyy-mm-ddThh:mm:ssZ
+   * <p>更新时间, 格式为yyyy-mm-ddThh:mm:ssZ</p>
    */
   UpdateTime?: string
   /**
-   * 额外配置
+   * <p>额外配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtraConf?: StorageExtraConf
@@ -7018,59 +7024,59 @@ export interface ServiceCallInfoV2 {
  */
 export interface DataSourceInfo {
   /**
-   * 数据源ID
+   * <p>数据源ID</p>
    */
   Id?: string
   /**
-   * 数据源名称
+   * <p>数据源名称</p>
    */
   Name?: string
   /**
-   * 创建者uin
+   * <p>创建者uin</p>
    */
   Creator?: string
   /**
-   * 创建者名称
+   * <p>创建者名称</p>
    */
   CreatorName?: string
   /**
-   * 数据源类型英文名
+   * <p>数据源类型英文名</p>
    */
   Type?: string
   /**
-   * 数据源权限，取值有RW RO
+   * <p>数据源权限，取值有RW RO</p>
    */
   Permission?: string
   /**
-   * 数据源所属存储实例ID
+   * <p>数据源所属存储实例ID</p>
    */
   StorageId?: string
   /**
-   * 数据源所属存储实例名称
+   * <p>数据源所属存储实例名称</p>
    */
   StorageName?: string
   /**
-   * 数据源挂载配置
+   * <p>数据源挂载配置</p>
    */
   MountConfigure?: MountConfigureInfo
   /**
-   * 创建时间, 格式为yyyy-mm-ddThh:mm:ssZ
+   * <p>创建时间, 格式为yyyy-mm-ddThh:mm:ssZ</p>
    */
   CreateTime?: string
   /**
-   * 更新时间, 格式为yyyy-mm-ddThh:mm:ssZ
+   * <p>更新时间, 格式为yyyy-mm-ddThh:mm:ssZ</p>
    */
   UpdateTime?: string
   /**
-   * 限制开关是否开启，只有开启时才有限制
+   * <p>限制开关是否开启，只有开启时才有限制</p>
    */
   LimitMount?: boolean
   /**
-   * 标签配置
+   * <p>标签配置</p>
    */
   Tags?: Array<Tag>
   /**
-   * 额外配置,对应存储实例的额外配置
+   * <p>额外配置,对应存储实例的额外配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtraConf?: StorageExtraConf

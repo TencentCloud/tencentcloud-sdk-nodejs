@@ -2009,35 +2009,33 @@ export interface ModifyNamespaceResponse {
  */
 export interface ModifyLaneRuleRequest {
   /**
-   * 灰度发布规则ID。该参数可以通过调用 [DescribeLaneRules](https://cloud.tencent.com/document/product/649/44505) 的返回值中的 RuleId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=grayscale&subTab=lanerule)查看；也可以调用[CreateLaneRule](https://cloud.tencent.com/document/product/649/44507)创建新的灰度发布规则。
+   * <p>灰度发布规则ID。该参数可以通过调用 <a href="https://cloud.tencent.com/document/product/649/44505">DescribeLaneRules</a> 的返回值中的 RuleId 字段来获取或通过登录<a href="https://console.cloud.tencent.com/tse/tsf-consul?tab=grayscale&amp;subTab=lanerule">控制台</a>查看；也可以调用<a href="https://cloud.tencent.com/document/product/649/44507">CreateLaneRule</a>创建新的灰度发布规则。</p>
    */
   RuleId: string
   /**
-   * 灰度发布规则名称，最多支持60个字符，支持中英文字符。
+   * <p>灰度发布规则名称，最多支持60个字符，支持中英文字符。</p>
    */
   RuleName: string
   /**
-   * 灰度发布规则备注，最多支持200个字符。
+   * <p>灰度发布规则备注，最多支持200个字符。</p>
    */
   Remark: string
   /**
-   * 灰度发布规则标签列表。
+   * <p>灰度发布规则标签列表。</p>
    */
   RuleTagList: Array<LaneRuleTag>
   /**
-   * 灰度发布规则标签关系。- RELEATION_AND：与- RELEATION_OR：或
-   */
-  RuleTagRelationship: string
-  /**
-   * 泳道配置ID。该参数可以通过调用 [DescribeLanes](https://cloud.tencent.com/document/product/649/44504) 的返回值中的 LaneId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=grayscale&subTab=lane)查看；也可以调用[CreateLane](https://cloud.tencent.com/document/product/649/44508)创建新的泳道配置。
+   * <p>泳道配置ID。该参数可以通过调用 <a href="https://cloud.tencent.com/document/product/649/44504">DescribeLanes</a> 的返回值中的 LaneId 字段来获取或通过登录<a href="https://console.cloud.tencent.com/tse/tsf-consul?tab=grayscale&amp;subTab=lane">控制台</a>查看；也可以调用<a href="https://cloud.tencent.com/document/product/649/44508">CreateLane</a>创建新的泳道配置。</p>
    */
   LaneId: string
   /**
-   * 开启状态。
-- true：开启
-- false：关闭
+   * <p>开启状态。</p><ul><li>true：开启</li><li>false：关闭</li></ul>
    */
   Enable: boolean
+  /**
+   * <p>灰度发布规则标签关系。- RELEATION_AND：与- RELEATION_OR：或</p>
+   */
+  RuleTagRelationship?: string
 }
 
 /**
@@ -4409,6 +4407,10 @@ export interface UpdateApiRateLimitRulesRequest {
    * QPS值。开启限流规则时，必填
    */
   MaxQps?: number
+  /**
+   * 旧格式 method 与 path 分开，新格式 path-<Method>,如 /checkToken-GET，默认为新格式
+   */
+  UsePathAndMethodFormat?: boolean
 }
 
 /**
@@ -7648,45 +7650,55 @@ export interface DescribeGroupUseDetailRequest {
  */
 export interface Microservice {
   /**
-   * 微服务ID
+   * <p>微服务ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MicroserviceId?: string
   /**
-   * 微服务名称
+   * <p>微服务名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MicroserviceName?: string
   /**
-   * 微服务描述
+   * <p>微服务描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MicroserviceDesc?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
   /**
-   * 更新时间
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: number
   /**
-   * 命名空间ID
+   * <p>命名空间ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NamespaceId?: string
   /**
-   * 微服务的运行实例数目
+   * <p>微服务的运行实例数目</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunInstanceCount?: number
   /**
-   * 微服务的离线实例数目
+   * <p>微服务的离线实例数目</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CriticalInstanceCount?: number
+  /**
+   * <p>是否禁用删除按钮，true：是；false：否。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeleteDisabled?: boolean
+  /**
+   * <p>禁用删除原因。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeleteDisabledReason?: string
 }
 
 /**
@@ -8852,93 +8864,97 @@ export interface DescribeApiUseDetailResponse {
  */
 export interface ServiceSetting {
   /**
-   * 0:公网, 1:集群内访问, 2：NodePort, 3: VPC 内网访问
+   * <p>0:公网, 1:集群内访问, 2：NodePort, 3: VPC 内网访问</p>
    */
   AccessType: number
   /**
-   * 容器端口映射
+   * <p>容器端口映射</p>
    */
   ProtocolPorts: Array<ProtocolPort>
   /**
-   * 子网ID
+   * <p>子网ID</p>
    */
   SubnetId?: string
   /**
-   * 是否创建 k8s service，默认为 false
+   * <p>是否创建 k8s service，默认为 false</p>
    */
   DisableService?: boolean
   /**
-   * service 是否为 headless 类型
+   * <p>service 是否为 headless 类型</p>
    */
   HeadlessService?: boolean
   /**
-   * 当为 true 且 DisableService 也为 true 时，会删除之前创建的 service，请小心使用
+   * <p>当为 true 且 DisableService 也为 true 时，会删除之前创建的 service，请小心使用</p>
    */
   AllowDeleteService?: boolean
   /**
-   * 开启SessionAffinity，true为开启，false为不开启，默认为false
+   * <p>开启SessionAffinity，true为开启，false为不开启，默认为false</p>
    */
   OpenSessionAffinity?: boolean
   /**
-   * SessionAffinity会话时间，默认10800
+   * <p>SessionAffinity会话时间，默认10800</p>
    */
   SessionAffinityTimeoutSeconds?: number
   /**
-   * 服务名称
+   * <p>服务名称</p>
    */
   ServiceName?: string
   /**
-   * 外部流量策略
+   * <p>外部流量策略</p>
    */
   ExternalTrafficStrategy?: string
   /**
-   * 外部流量策略
+   * <p>外部流量策略</p>
    */
   ExternalTrafficPolicy?: string
   /**
-   * 负载均衡提供者
+   * <p>负载均衡提供者</p>
    */
   LoadBalancerProvisioner?: string
   /**
-   * 负载均衡类型，Intranet表示内网，Internet表示外网
+   * <p>负载均衡类型，Intranet表示内网，Internet表示外网</p>
    */
   LoadBalancingType?: string
   /**
-   * k8s负载均衡内网vip
+   * <p>k8s负载均衡内网vip</p>
    */
   ClusterIp?: string
   /**
-   * 禁用服务Int记录
+   * <p>禁用服务Int记录</p>
    */
   DisableServiceInt?: number
   /**
-   * 开启SessionAffinity Int记录
+   * <p>开启SessionAffinity Int记录</p>
    */
   OpenSessionAffinityInt?: number
   /**
-   * 开启HeadlessService int记录
+   * <p>开启HeadlessService int记录</p>
    */
   HeadlessServiceInt?: number
   /**
-   * 服务名称
+   * <p>服务名称</p>
    */
   Name?: string
   /**
-   * VPC网络ID
+   * <p>VPC网络ID</p>
    */
   VpcId?: string
   /**
-   * 负载均衡VIP
+   * <p>负载均衡VIP</p>
    */
   LoadBalancingIp?: string
   /**
-   * 负载均衡id
+   * <p>负载均衡id</p>
    */
   LoadBalancerId?: string
   /**
-   * 已存在的负载均衡id
+   * <p>已存在的负载均衡id</p>
    */
   ExistingLoadBalancerId?: string
+  /**
+   * <p>是否为全局服务（仅TCS环境使用）</p>
+   */
+  EnableGlobalService?: boolean
 }
 
 /**
@@ -9479,135 +9495,143 @@ export interface EnableTaskFlowResponse {
  */
 export interface ApiDetailInfo {
   /**
-   * API ID
+   * <p>API ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiId?: string
   /**
-   * 命名空间ID
+   * <p>命名空间ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NamespaceId?: string
   /**
-   * 命名空间名称
+   * <p>命名空间名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NamespaceName?: string
   /**
-   * 服务ID
+   * <p>服务ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MicroserviceId?: string
   /**
-   * 服务名称
+   * <p>服务名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MicroserviceName?: string
   /**
-   * API 请求路径
+   * <p>API 请求路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Path?: string
   /**
-   * Api 映射路径
+   * <p>Api 映射路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PathMapping?: string
   /**
-   * 请求方法
+   * <p>请求方法</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Method?: string
   /**
-   * 所属分组ID
+   * <p>所属分组ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: string
   /**
-   * 是否禁用
+   * <p>是否禁用</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UsableStatus?: string
   /**
-   * 发布状态
+   * <p>发布状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReleaseStatus?: string
   /**
-   * 开启限流
+   * <p>开启限流</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RateLimitStatus?: string
   /**
-   * 是否开启mock
+   * <p>是否开启mock</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MockStatus?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedTime?: string
   /**
-   * 发布时间
+   * <p>发布时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReleasedTime?: string
   /**
-   * 所属分组名称
+   * <p>所属分组名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupName?: string
   /**
-   * API 超时，单位毫秒
+   * <p>API 超时，单位毫秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Timeout?: number
   /**
-   * Api所在服务host
+   * <p>Api所在服务host</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Host?: string
   /**
-   * API类型。 ms ： 微服务API； external :外部服务Api
+   * <p>API类型。 ms ： 微服务API； external :外部服务Api</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiType?: string
   /**
-   * Api描述信息
+   * <p>Api描述信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * API路径匹配类型。normal：普通API；wildcard：通配API。
+   * <p>API路径匹配类型。normal：普通API；wildcard：通配API。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiMatchType?: string
   /**
-   * RPC 额外信息
+   * <p>RPC 额外信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RpcExt?: string
   /**
-   * 部署组id
+   * <p>部署组id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayDeployGroupId?: string
   /**
-   * md5
+   * <p>md5</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Md5?: string
   /**
-   * RPC 类型
+   * <p>RPC 类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RpcType?: string
+  /**
+   * <p>是否禁用短路径访问开关</p>
+   */
+  PathMappingUnsupported?: boolean
+  /**
+   * <p>禁用短路径访问开关原因</p>
+   */
+  PathMappingUnsupportedMsg?: string
 }
 
 /**
@@ -10213,6 +10237,14 @@ export interface SimpleGroup {
    * k8s 命名空间名称
    */
   K8sNamespaceName?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdatedTime?: string
 }
 
 /**
@@ -12311,9 +12343,7 @@ export interface RevocationPublicConfigRequest {
  */
 export interface ModifyLaneRuleResponse {
   /**
-   * 修改结果。
-- true：成功
-- false：失败
+   * <p>修改结果。</p><ul><li>true：成功</li><li>false：失败</li></ul>
    */
   Result?: boolean
   /**
@@ -14581,70 +14611,74 @@ false：操作失败。
  */
 export interface ApiRateLimitRule {
   /**
-   * rule Id
+   * <p>rule Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleId?: string
   /**
-   * API ID
+   * <p>API ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiId?: string
   /**
-   * 限流名称
+   * <p>限流名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleName?: string
   /**
-   * 最大限流qps
+   * <p>最大限流qps</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxQps?: number
   /**
-   * 生效/禁用, enabled/disabled
+   * <p>生效/禁用, enabled/disabled</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UsableStatus?: string
   /**
-   * 规则内容
+   * <p>规则内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleContent?: string
   /**
-   * Tsf Rule ID
+   * <p>Tsf Rule ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TsfRuleId?: string
   /**
-   * 描述
+   * <p>描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedTime?: string
   /**
-   * 分页参数limit
+   * <p>分页参数limit</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Limit?: number
   /**
-   * 分页参数offset
+   * <p>分页参数offset</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Offset?: number
   /**
-   * AppId
+   * <p>AppId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: string
+  /**
+   * <p>旧格式 method 与 path 分开，新格式 path-Method,如 /checkToken-GET，默认为新格式</p>
+   */
+  UsePathAndMethodFormat?: boolean
 }
 
 /**

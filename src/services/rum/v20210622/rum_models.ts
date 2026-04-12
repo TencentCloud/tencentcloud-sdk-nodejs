@@ -146,6 +146,62 @@ export interface DeleteProjectRequest {
 }
 
 /**
+ * StopProject请求参数结构体
+ */
+export interface StopProjectRequest {
+  /**
+   * 项目 id
+   */
+  ProjectId: number
+}
+
+/**
+ * DescribeFOOMMallocReportList请求参数结构体
+ */
+export interface DescribeFOOMMallocReportListRequest {
+  /**
+   * 产品Id
+   */
+  ProductId: string
+  /**
+   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
+   */
+  FormListString?: string
+  /**
+   * 提供给前端使用，当填写本字段时，会覆盖 formlist 的值
+   */
+  ParamToken?: string
+  /**
+   * 特征
+   */
+  Feature?: string
+  /**
+   * 当前页码
+   */
+  PageNumber?: number
+  /**
+   * 每页展示最大数量
+   */
+  PageSize?: number
+  /**
+   * 排序字段
+   */
+  SortField?: string
+  /**
+   * 排序类型
+   */
+  SortType?: string
+  /**
+   * 拓展数据
+   */
+  ExtraData?: string
+  /**
+   * 请求头
+   */
+  RequestHeader?: string
+}
+
+/**
  * DescribeProjectLimits返回参数结构体
  */
 export interface DescribeProjectLimitsResponse {
@@ -205,6 +261,28 @@ export interface DescribeTawInstancesRequest {
 }
 
 /**
+ * DescribeToken返回参数结构体
+ */
+export interface DescribeTokenResponse {
+  /**
+   * 返回值
+   */
+  Data?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResumeProject返回参数结构体
  */
 export interface ResumeProjectResponse {
@@ -215,17 +293,57 @@ export interface ResumeProjectResponse {
 }
 
 /**
- * DescribeRumLogList返回参数结构体
+ * DescribeIssuesStatisticsTrend请求参数结构体
  */
-export interface DescribeRumLogListResponse {
+export interface DescribeIssuesStatisticsTrendRequest {
   /**
-   * 返回字符串
+   * 产品Id
    */
-  Result?: string
+  ProductId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 提供给前端使用，当填写本字段时，会覆盖 form_list 的值
    */
-  RequestId?: string
+  ParamToken?: string
+  /**
+   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
+   */
+  FormList?: string
+  /**
+   * 问题Id
+   */
+  IssueId?: string
+  /**
+   * 问题类型
+   */
+  IssueType?: number
+  /**
+   * 时间窗口
+   */
+  TimeWindow?: number
+  /**
+   * 累计值
+   */
+  TotalSize?: boolean
+  /**
+   * 无
+   */
+  Stat?: number
+  /**
+   * 指标类型
+   */
+  MetricType?: number
+  /**
+   * 拓展字段
+   */
+  ExtraData?: string
+  /**
+   * 请求头
+   */
+  RequestHeader?: string
+  /**
+   * 无
+   */
+  TrendStat?: number
 }
 
 /**
@@ -286,6 +404,32 @@ export interface DescribeDataPvUrlInfoResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeToken请求参数结构体
+ */
+export interface DescribeTokenRequest {
+  /**
+   * 筛选条件
+   */
+  FormListString?: string
+  /**
+   * 仅对比模式下填写，筛选条件A
+   */
+  FormListAString?: string
+  /**
+   * 仅对比模式下填写，筛选条件B
+   */
+  FormListBString?: string
+  /**
+   * 请求头
+   */
+  RequestHeader?: string
+  /**
+   * 拓展字段
+   */
+  ExtraData?: string
 }
 
 /**
@@ -525,6 +669,40 @@ export interface DescribeErrorResponse {
 }
 
 /**
+ * DescribeFOOMProblemDetail请求参数结构体
+ */
+export interface DescribeFOOMProblemDetailRequest {
+  /**
+   * 产品Id
+   */
+  ProductId: string
+  /**
+   * 消息唯一标识
+   */
+  ClientIdentify?: string
+  /**
+   * 特征
+   */
+  Feature?: string
+  /**
+   * 事件开始时间
+   */
+  StartEventTime?: number
+  /**
+   * 事件结束时间
+   */
+  EndEventTime?: number
+  /**
+   * 拓展数据
+   */
+  ExtraData?: string
+  /**
+   * 请求头
+   */
+  RequestHeader?: string
+}
+
+/**
  * DescribeAppMetricsData返回参数结构体
  */
 export interface DescribeAppMetricsDataResponse {
@@ -560,6 +738,28 @@ export interface DeleteWhitelistResponse {
    * 消息success
    */
   Msg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeFOOMMallocReportList返回参数结构体
+ */
+export interface DescribeFOOMMallocReportListResponse {
+  /**
+   * 返回值
+   */
+  Data?: string
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 状态码
+   */
+  Code?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -747,6 +947,168 @@ export interface DescribeDataReportCountRequest {
    * 实例ID
    */
   InstanceID?: string
+}
+
+/**
+ * DescribeIssuesList请求参数结构体
+ */
+export interface DescribeIssuesListRequest {
+  /**
+   * 产品Id
+   */
+  ProductId?: string
+  /**
+   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
+   */
+  FormList?: string
+  /**
+   * 接口调试专用，对比模式下条件A，当 token 为空时，以这里的 value 作为筛选表单信息
+   */
+  FormListA?: string
+  /**
+   * 接口调试专用，对比模式下条件B，当 token 为空时，以这里的 value 作为筛选表单信息
+   */
+  FormListB?: string
+  /**
+   * 提供给前端使用，当填写本字段时，会覆盖 form_list 的值
+   */
+  ParamToken?: string
+  /**
+   * 问题类型
+   */
+  IssueType?: number
+  /**
+   * 排序字段
+   */
+  SortField?: string
+  /**
+   * 排序方式
+   */
+  SortType?: string
+  /**
+   * 每页数目
+   */
+  PageSize?: number
+  /**
+   * 页码
+   */
+  PageNumber?: number
+  /**
+   * 问题对比列表模式下，用于标识是按照sort_field字段的A值排序还是B值还是ratio值
+   */
+  SortABRatio?: string
+  /**
+   * 模式：false:问题列表模式，true:对比列表模式
+   */
+  Compare?: boolean
+  /**
+   * 对比状态 0:所有 1:新增 2：遗留 3:已解决
+   */
+  CompareStatus?: number
+  /**
+   * 拓展字段
+   */
+  ExtraData?: string
+  /**
+   * 请求头
+   */
+  RequestHeader?: string
+}
+
+/**
+ * DescribeIssuesDistribution请求参数结构体
+ */
+export interface DescribeIssuesDistributionRequest {
+  /**
+   * 产品Id
+   */
+  ProductId?: string
+  /**
+   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
+   */
+  FormListString?: string
+  /**
+   * 分布维度是自定义维度时，填‘user_custom’
+   */
+  DimType?: string
+  /**
+   * 维度，e.g. os_version, app_version, model等
+   */
+  Dimension?: string
+  /**
+   * 数字类型字段的区间范围
+   */
+  Intervals?: Array<number | bigint>
+  /**
+   * 提供给前端使用，当填写本字段时，会覆盖 form_list 的值
+   */
+  ParamToken?: string
+  /**
+   * 问题Id
+   */
+  IssueId?: string
+  /**
+   * 问题类型
+   */
+  IssueType?: number
+  /**
+   * 限制返回的个数，默认返回所有值
+   */
+  ParamLimit?: number
+  /**
+   * 键
+   */
+  MapKey?: string
+  /**
+   * 名称
+   */
+  MapName?: string
+  /**
+   * 指标类型
+   */
+  MetricType?: number
+  /**
+   * 每页数目
+   */
+  PageSize?: number
+  /**
+   * 页码
+   */
+  PageNumber?: number
+  /**
+   * 用户自定义维度key
+   */
+  UserCustomKey?: string
+  /**
+   * 拓展字段
+   */
+  ExtraData?: string
+  /**
+   * 请求头
+   */
+  RequestHeader?: string
+}
+
+/**
+ * DescribeFOOMProblemDetail返回参数结构体
+ */
+export interface DescribeFOOMProblemDetailResponse {
+  /**
+   * 返回值
+   */
+  Data?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1010,17 +1372,53 @@ export interface DescribeDataCustomUrlRequest {
 }
 
 /**
- * DescribeUvList返回参数结构体
+ * DescribeExceptionReportList请求参数结构体
  */
-export interface DescribeUvListResponse {
+export interface DescribeExceptionReportListRequest {
   /**
-   * uv列表
+   * 产品Id
    */
-  ProjectUvSet: Array<RumUvInfo>
+  ProductId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
    */
-  RequestId?: string
+  FormListString?: string
+  /**
+   * 提供给前端使用，当填写本字段时，会覆盖 form_list 的值
+   */
+  ParamToken?: string
+  /**
+   * 问题类型
+   */
+  IssueType?: number
+  /**
+   * 排序字段
+   */
+  SortField?: string
+  /**
+   * 排序方式
+   */
+  SortType?: string
+  /**
+   * 特征
+   */
+  Feature?: string
+  /**
+   * 每页数目
+   */
+  PageSize?: number
+  /**
+   * 页码
+   */
+  PageNumber?: number
+  /**
+   * 拓展字段
+   */
+  ExtraData?: string
+  /**
+   * 请求头
+   */
+  RequestHeader?: string
 }
 
 /**
@@ -1344,6 +1742,40 @@ export interface DescribeWhitelistsRequest {
 }
 
 /**
+ * DescribeApplicationExitReportDetail请求参数结构体
+ */
+export interface DescribeApplicationExitReportDetailRequest {
+  /**
+   * 产品Id
+   */
+  ProductId: string
+  /**
+   * 提供给前端使用，当填写本字段时，会覆盖 formlist 的值
+   */
+  ParamToken?: string
+  /**
+   * 问题Id
+   */
+  ClientIdentify?: string
+  /**
+   * 开始时间
+   */
+  StartEventTime?: number
+  /**
+   * 结束时间
+   */
+  EndEventTime?: number
+  /**
+   * 拓展数据
+   */
+  ExtraData?: string
+  /**
+   * 请求头
+   */
+  RequestHeader?: string
+}
+
+/**
  * DescribeUvList请求参数结构体
  */
 export interface DescribeUvListRequest {
@@ -1392,6 +1824,28 @@ export interface DescribeDataReportCountV2Request {
 }
 
 /**
+ * BugLY比较结构体
+ */
+export interface CompareCondition {
+  /**
+   * App版本
+   */
+  AppVersion?: string
+  /**
+   * 筛选条件
+   */
+  Filters?: Filters
+  /**
+   * 开始时间
+   */
+  StartTime?: number
+  /**
+   * 结束时间
+   */
+  EndTime?: number
+}
+
+/**
  * DescribeDataPerformancePageV2返回参数结构体
  */
 export interface DescribeDataPerformancePageV2Response {
@@ -1399,6 +1853,64 @@ export interface DescribeDataPerformancePageV2Response {
    * 返回值
    */
   Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLagANRProblemFeatureAccounts返回参数结构体
+ */
+export interface DescribeLagANRProblemFeatureAccountsResponse {
+  /**
+   * 返回值
+   */
+  Data?: string
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeFOOMMallocProblemDetail返回参数结构体
+ */
+export interface DescribeFOOMMallocProblemDetailResponse {
+  /**
+   * 返回值
+   */
+  Data?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeUvList返回参数结构体
+ */
+export interface DescribeUvListResponse {
+  /**
+   * uv列表
+   */
+  ProjectUvSet: Array<RumUvInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1546,13 +2058,25 @@ export interface DescribeDataEventUrlV2Request {
 }
 
 /**
- * StopProject请求参数结构体
+ * DescribeTopIssues返回参数结构体
  */
-export interface StopProjectRequest {
+export interface DescribeTopIssuesResponse {
   /**
-   * 项目 id
+   * 返回值
    */
-  ProjectId: number
+  Data?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1574,17 +2098,45 @@ export interface DescribeTawAreasResponse {
 }
 
 /**
- * ResumeInstance请求参数结构体
+ * DescribeApplicationExitReportList请求参数结构体
  */
-export interface ResumeInstanceRequest {
+export interface DescribeApplicationExitReportListRequest {
   /**
-   * 需要恢复的实例id
+   * 产品Id
    */
-  InstanceId: string
+  ProductId: string
   /**
-   * 修改是否包括白名单
+   * 提供给前端使用，当填写本字段时，会覆盖 formlist 的值
    */
-  IsModifyAll?: boolean
+  ParamToken?: string
+  /**
+   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
+   */
+  FormListString?: string
+  /**
+   * 当前页码
+   */
+  PageNumber?: number
+  /**
+   * 每页展示最大数量
+   */
+  PageSize?: number
+  /**
+   * 排序字段
+   */
+  SortField?: string
+  /**
+   * 排序类型
+   */
+  SortType?: string
+  /**
+   * 拓展数据
+   */
+  ExtraData?: string
+  /**
+   * 请求头
+   */
+  RequestHeader?: string
 }
 
 /**
@@ -1736,6 +2288,28 @@ export interface DescribeDataWebVitalsPageV2Request {
 }
 
 /**
+ * DescribeLagANRProblemList返回参数结构体
+ */
+export interface DescribeLagANRProblemListResponse {
+  /**
+   * 返回值
+   */
+  Data?: string
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAppSingleCaseList返回参数结构体
  */
 export interface DescribeAppSingleCaseListResponse {
@@ -1747,6 +2321,20 @@ export interface DescribeAppSingleCaseListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ResumeInstance请求参数结构体
+ */
+export interface ResumeInstanceRequest {
+  /**
+   * 需要恢复的实例id
+   */
+  InstanceId: string
+  /**
+   * 修改是否包括白名单
+   */
+  IsModifyAll?: boolean
 }
 
 /**
@@ -1862,6 +2450,20 @@ export interface DeleteReleaseFileRequest {
 }
 
 /**
+ * DescribeRumLogList返回参数结构体
+ */
+export interface DescribeRumLogListResponse {
+  /**
+   * 返回字符串
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeScoresV2请求参数结构体
  */
 export interface DescribeScoresV2Request {
@@ -1885,6 +2487,84 @@ export interface DescribeScoresV2Request {
    * 环境
    */
   Env?: string
+}
+
+/**
+ * Rum 项目信息
+ */
+export interface RumProject {
+  /**
+   * 项目名
+   */
+  Name?: string
+  /**
+   * 创建者 id
+   */
+  Creator?: string
+  /**
+   * 实例 id
+   */
+  InstanceID?: string
+  /**
+   * 项目类型
+   */
+  Type?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 项目仓库地址
+   */
+  Repo?: string
+  /**
+   * 项目网址地址
+   */
+  URL?: string
+  /**
+   * 项目采样频率
+   */
+  Rate?: string
+  /**
+   * 项目唯一key（长度 12 位）
+   */
+  Key?: string
+  /**
+   * 是否开启url聚类
+   */
+  EnableURLGroup?: number
+  /**
+   * 实例名
+   */
+  InstanceName?: string
+  /**
+   * 项目 ID
+   */
+  ID?: number
+  /**
+   * 实例 key
+   */
+  InstanceKey?: string
+  /**
+   * 项目描述
+   */
+  Desc?: string
+  /**
+   * 是否星标  1:是 0:否
+   */
+  IsStar?: number
+  /**
+   * 项目状态(1 创建中，2 运行中，3 异常，4 重启中，5 停止中，6 已停止， 7 销毁中，8 已销毁)
+   */
+  ProjectStatus?: number
+  /**
+   * 日志接入点，用户忽略。
+   */
+  AccessPoint?: string
+  /**
+   * kafka旁路配置信息
+   */
+  Kafka?: Kafka
 }
 
 /**
@@ -2098,6 +2778,20 @@ export interface DeleteProjectResponse {
 }
 
 /**
+ * DescribeScoresV2返回参数结构体
+ */
+export interface DescribeScoresV2Response {
+  /**
+   * 项目得分数组
+   */
+  ScoreSet?: Array<ScoreInfoV2>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDataPvUrlStatistics请求参数结构体
  */
 export interface DescribeDataPvUrlStatisticsRequest {
@@ -2195,6 +2889,48 @@ export interface DescribeDataPvUrlStatisticsRequest {
 0: 走旧逻辑，已下线，勿使用
    */
   IsNewData?: number
+}
+
+/**
+ * DescribeFOOMProblemList请求参数结构体
+ */
+export interface DescribeFOOMProblemListRequest {
+  /**
+   * 产品Id
+   */
+  ProductId: string
+  /**
+   * 提供给前端使用，当填写本字段时，会覆盖 formlist 的值
+   */
+  ParamToken?: string
+  /**
+   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
+   */
+  FormListString?: string
+  /**
+   * 当前页码
+   */
+  PageNumber?: number
+  /**
+   * 每页展示最大数量
+   */
+  PageSize?: number
+  /**
+   * 排序字段
+   */
+  SortField?: string
+  /**
+   * 排序类型
+   */
+  SortType?: string
+  /**
+   * 拓展数据
+   */
+  ExtraData?: string
+  /**
+   * 请求头
+   */
+  RequestHeader?: string
 }
 
 /**
@@ -2376,6 +3112,28 @@ export interface DescribeRumStatsLogListRequest {
 }
 
 /**
+ * DescribeFOOMMallocProblemList返回参数结构体
+ */
+export interface DescribeFOOMMallocProblemListResponse {
+  /**
+   * 返回值
+   */
+  Data?: string
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDataBridgeUrlV2请求参数结构体
  */
 export interface DescribeDataBridgeUrlV2Request {
@@ -2515,6 +3273,28 @@ export interface DescribeDataBridgeUrlV2Request {
    * 时间段
    */
   Granularity?: string
+}
+
+/**
+ * DescribeFOOMProblemList返回参数结构体
+ */
+export interface DescribeFOOMProblemListResponse {
+  /**
+   * 返回值
+   */
+  Data?: string
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2697,6 +3477,24 @@ export interface DescribeDataPvUrlStatisticsV2Response {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * rum 日志对象
+ */
+export interface RumPvInfo {
+  /**
+   * 项目ID
+   */
+  ProjectId?: number
+  /**
+   * pv访问量
+   */
+  Pv?: string
+  /**
+   * 时间
+   */
+  CreateTime?: string
 }
 
 /**
@@ -3106,21 +3904,89 @@ export interface DescribeDataLogUrlInfoResponse {
 }
 
 /**
- * rum 日志对象
+ * DescribeFOOMMallocProblemList请求参数结构体
  */
-export interface RumPvInfo {
+export interface DescribeFOOMMallocProblemListRequest {
   /**
-   * 项目ID
+   * 产品Id
    */
-  ProjectId?: number
+  ProductId: string
   /**
-   * pv访问量
+   * 提供给前端使用，当填写本字段时，会覆盖 formlist 的值
    */
-  Pv?: string
+  ParamToken?: string
   /**
-   * 时间
+   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
    */
-  CreateTime?: string
+  FormListString?: string
+  /**
+   * 当前页码
+   */
+  PageNumber?: number
+  /**
+   * 每页展示最大数量
+   */
+  PageSize?: number
+  /**
+   * 排序字段
+   */
+  SortField?: string
+  /**
+   * 排序类型
+   */
+  SortType?: string
+  /**
+   * 拓展数据
+   */
+  ExtraData?: string
+  /**
+   * 请求头
+   */
+  RequestHeader?: string
+}
+
+/**
+ * DescribeExceptionDetail返回参数结构体
+ */
+export interface DescribeExceptionDetailResponse {
+  /**
+   * 返回值
+   */
+  Data?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeExceptionReportList返回参数结构体
+ */
+export interface DescribeExceptionReportListResponse {
+  /**
+   * 返回值
+   */
+  Data?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3362,6 +4228,40 @@ export interface DescribeDataLogUrlStatisticsRequest {
 }
 
 /**
+ * DescribeLagANRProblemAccountDetail请求参数结构体
+ */
+export interface DescribeLagANRProblemAccountDetailRequest {
+  /**
+   * 产品Id
+   */
+  ProductId: string
+  /**
+   * 消息唯一标识
+   */
+  ClientIdentify?: string
+  /**
+   * 特征
+   */
+  Feature?: string
+  /**
+   * 事件开始时间
+   */
+  StartEventTime?: number
+  /**
+   * 事件结束时间
+   */
+  EndEventTime?: number
+  /**
+   * 拓展数据
+   */
+  ExtraData?: string
+  /**
+   * 请求头
+   */
+  RequestHeader?: string
+}
+
+/**
  * DescribeDataBridgeUrlV2返回参数结构体
  */
 export interface DescribeDataBridgeUrlV2Response {
@@ -3482,6 +4382,28 @@ export interface DeleteInstanceRequest {
    * 需要删除的实例id
    */
   InstanceId: string
+}
+
+/**
+ * DescribeIssuesList返回参数结构体
+ */
+export interface DescribeIssuesListResponse {
+  /**
+   * 返回值
+   */
+  Data?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3750,6 +4672,28 @@ export interface DescribeDataFetchUrlInfoResponse {
 }
 
 /**
+ * DescribeFOOMReportList返回参数结构体
+ */
+export interface DescribeFOOMReportListResponse {
+  /**
+   * 返回值
+   */
+  Data?: string
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeReleaseFiles返回参数结构体
  */
 export interface DescribeReleaseFilesResponse {
@@ -3771,6 +4715,28 @@ export interface DescribeDataStaticUrlResponse {
    * 返回值
    */
   Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeIssuesDistribution返回参数结构体
+ */
+export interface DescribeIssuesDistributionResponse {
+  /**
+   * 返回值
+   */
+  Data?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 消息
+   */
+  Message?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4262,6 +5228,48 @@ export interface DescribeRumGroupLogRequest {
 }
 
 /**
+ * DescribeExceptionDetail请求参数结构体
+ */
+export interface DescribeExceptionDetailRequest {
+  /**
+   * 产品Id
+   */
+  ProductId: string
+  /**
+   * 消息唯一标识
+   */
+  ClientIdentify?: string
+  /**
+   * 集群堆栈类型
+   */
+  ClusterStackType?: number
+  /**
+   * 特征
+   */
+  Feature?: string
+  /**
+   * 问题类型
+   */
+  IssueType?: number
+  /**
+   * 事件开始时间
+   */
+  StartEventTime?: number
+  /**
+   * 事件结束时间
+   */
+  EndEventTime?: number
+  /**
+   * 拓展数据
+   */
+  ExtraData?: string
+  /**
+   * 请求头
+   */
+  RequestHeader?: string
+}
+
+/**
  * DescribeDataFetchUrlV2请求参数结构体
  */
 export interface DescribeDataFetchUrlV2Request {
@@ -4468,6 +5476,50 @@ export interface DescribeDataReportCountResponse {
 }
 
 /**
+ * DescribeApplicationExitReportList返回参数结构体
+ */
+export interface DescribeApplicationExitReportListResponse {
+  /**
+   * 返回值
+   */
+  Data?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLagANRProblemAccountDetail返回参数结构体
+ */
+export interface DescribeLagANRProblemAccountDetailResponse {
+  /**
+   * 返回值
+   */
+  Data?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRumLogExport返回参数结构体
  */
 export interface DescribeRumLogExportResponse {
@@ -4497,6 +5549,28 @@ export interface DescribeRumLogExportsRequest {
    * 项目ID（必填）
    */
   ID: number
+}
+
+/**
+ * DescribeIssuesStatisticsTrend返回参数结构体
+ */
+export interface DescribeIssuesStatisticsTrendResponse {
+  /**
+   * 返回值
+   */
+  Data?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4858,6 +5932,28 @@ export interface DescribeTawInstancesResponse {
 }
 
 /**
+ * DescribeApplicationExitReportDetail返回参数结构体
+ */
+export interface DescribeApplicationExitReportDetailResponse {
+  /**
+   * 返回值
+   */
+  Data?: string
+  /**
+   * 状态码
+   */
+  Code?: number
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePvList请求参数结构体
  */
 export interface DescribePvListRequest {
@@ -4998,17 +6094,95 @@ export interface DescribeDataFetchProjectResponse {
 }
 
 /**
- * DescribeScoresV2返回参数结构体
+ * DescribeFOOMReportList请求参数结构体
  */
-export interface DescribeScoresV2Response {
+export interface DescribeFOOMReportListRequest {
   /**
-   * 项目得分数组
+   * 产品Id
    */
-  ScoreSet?: Array<ScoreInfoV2>
+  ProductId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
    */
-  RequestId?: string
+  FormListString?: string
+  /**
+   * 提供给前端使用，当填写本字段时，会覆盖 formlist 的值
+   */
+  ParamToken?: string
+  /**
+   * 特征
+   */
+  Feature?: string
+  /**
+   * 当前页码
+   */
+  PageNumber?: number
+  /**
+   * 每页展示最大数量
+   */
+  PageSize?: number
+  /**
+   * 排序字段
+   */
+  SortField?: string
+  /**
+   * 排序类型
+   */
+  SortType?: string
+  /**
+   * 拓展数据
+   */
+  ExtraData?: string
+  /**
+   * 请求头
+   */
+  RequestHeader?: string
+}
+
+/**
+ * DescribeLagANRProblemFeatureAccounts请求参数结构体
+ */
+export interface DescribeLagANRProblemFeatureAccountsRequest {
+  /**
+   * 产品Id
+   */
+  ProductId: string
+  /**
+   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
+   */
+  FormListString?: string
+  /**
+   * 提供给前端使用，当填写本字段时，会覆盖 formlist 的值
+   */
+  ParamToken?: string
+  /**
+   * 问题特征
+   */
+  Feature?: string
+  /**
+   * 排序字段
+   */
+  SortField?: string
+  /**
+   * 排序类型
+   */
+  SortType?: string
+  /**
+   * 当前页码
+   */
+  PageNumber?: number
+  /**
+   * 每页展示最大数量
+   */
+  PageSize?: number
+  /**
+   * 拓展数据
+   */
+  ExtraData?: string
+  /**
+   * 请求头
+   */
+  RequestHeader?: string
 }
 
 /**
@@ -5176,81 +6350,45 @@ export interface DescribeDataLogUrlStatisticsV2Request {
 }
 
 /**
- * Rum 项目信息
+ * DescribeLagANRProblemList请求参数结构体
  */
-export interface RumProject {
+export interface DescribeLagANRProblemListRequest {
   /**
-   * 项目名
+   * 产品Id
    */
-  Name?: string
+  ProductId: string
   /**
-   * 创建者 id
+   * 提供给前端使用，当填写本字段时，会覆盖 formlist 的值
    */
-  Creator?: string
+  ParamToken?: string
   /**
-   * 实例 id
+   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
    */
-  InstanceID?: string
+  FormListString?: string
   /**
-   * 项目类型
+   * 当前页码
    */
-  Type?: string
+  PageNumber?: number
   /**
-   * 创建时间
+   * 每页展示最大数量
    */
-  CreateTime?: string
+  PageSize?: number
   /**
-   * 项目仓库地址
+   * 排序字段
    */
-  Repo?: string
+  SortField?: string
   /**
-   * 项目网址地址
+   * 排序类型
    */
-  URL?: string
+  SortType?: string
   /**
-   * 项目采样频率
+   * 拓展数据
    */
-  Rate?: string
+  ExtraData?: string
   /**
-   * 项目唯一key（长度 12 位）
+   * 请求头
    */
-  Key?: string
-  /**
-   * 是否开启url聚类
-   */
-  EnableURLGroup?: number
-  /**
-   * 实例名
-   */
-  InstanceName?: string
-  /**
-   * 项目 ID
-   */
-  ID?: number
-  /**
-   * 实例 key
-   */
-  InstanceKey?: string
-  /**
-   * 项目描述
-   */
-  Desc?: string
-  /**
-   * 是否星标  1:是 0:否
-   */
-  IsStar?: number
-  /**
-   * 项目状态(1 创建中，2 运行中，3 异常，4 重启中，5 停止中，6 已停止， 7 销毁中，8 已销毁)
-   */
-  ProjectStatus?: number
-  /**
-   * 日志接入点，用户忽略。
-   */
-  AccessPoint?: string
-  /**
-   * kafka旁路配置信息
-   */
-  Kafka?: Kafka
+  RequestHeader?: string
 }
 
 /**
@@ -5268,6 +6406,48 @@ export interface DescribeDataStaticResourceV2Response {
 }
 
 /**
+ * DescribeTopIssues请求参数结构体
+ */
+export interface DescribeTopIssuesRequest {
+  /**
+   * 产品Id
+   */
+  ProductId: string
+  /**
+   * 需要对比的查询条件，没有则不填
+   */
+  Compare?: CompareCondition
+  /**
+   * 查询条件
+   */
+  Condition?: CompareCondition
+  /**
+   * 问题类型
+   */
+  IssueType?: number
+  /**
+   * 排序字段
+   */
+  SortField?: string
+  /**
+   * 排序方式
+   */
+  SortType?: string
+  /**
+   * topN
+   */
+  TopNum?: number
+  /**
+   * 拓展字段
+   */
+  ExtraData?: string
+  /**
+   * 请求头
+   */
+  RequestHeader?: string
+}
+
+/**
  * DescribeDataSetUrlStatistics返回参数结构体
  */
 export interface DescribeDataSetUrlStatisticsResponse {
@@ -5279,6 +6459,36 @@ export interface DescribeDataSetUrlStatisticsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * BugLY筛选结构体
+ */
+export interface Filters {
+  /**
+   * 是否反转
+   */
+  IsReversed?: boolean
+  /**
+   * 键
+   */
+  Key?: string
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 运算符
+   */
+  Operator?: string
+  /**
+   * 类型
+   */
+  Type?: number
+  /**
+   * 值
+   */
+  Values?: Array<string>
 }
 
 /**
@@ -5325,6 +6535,40 @@ export interface DescribeAppDimensionMetricsRequest {
    * 业务上下文参数
    */
   BusinessContext?: string
+}
+
+/**
+ * DescribeFOOMMallocProblemDetail请求参数结构体
+ */
+export interface DescribeFOOMMallocProblemDetailRequest {
+  /**
+   * 产品Id
+   */
+  ProductId: string
+  /**
+   * 消息唯一标识
+   */
+  ClientIdentify?: string
+  /**
+   * 特征
+   */
+  Feature?: string
+  /**
+   * 事件开始时间
+   */
+  StartEventTime?: number
+  /**
+   * 事件结束时间
+   */
+  EndEventTime?: number
+  /**
+   * 拓展数据
+   */
+  ExtraData?: string
+  /**
+   * 请求头
+   */
+  RequestHeader?: string
 }
 
 /**

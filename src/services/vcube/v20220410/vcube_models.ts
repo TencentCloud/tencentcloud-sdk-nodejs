@@ -1402,19 +1402,19 @@ export interface XMagicResource {
  */
 export interface DescribeLicenseListResponse {
   /**
-   * 临期license数量
+   * <p>临期license数量</p>
    */
   Count?: number
   /**
-   * 正式license总览统计数据
+   * <p>正式license总览统计数据</p>
    */
   Overview?: Overview
   /**
-   * 临期license列表
+   * <p>临期license列表</p>
    */
   LicenseList?: Array<OverviewLicense>
   /**
-   * 测试license总览统计数据
+   * <p>测试license总览统计数据</p>
    */
   TrialOverview?: Overview
   /**
@@ -1917,7 +1917,20 @@ export interface UpdateXMagicRequest {
 /**
  * DescribeLicenseList请求参数结构体
  */
-export type DescribeLicenseListRequest = null
+export interface DescribeLicenseListRequest {
+  /**
+   * <p>页码，从0开始</p>
+   */
+  PageNumber: number
+  /**
+   * <p>每页数据量</p>
+   */
+  PageSize: number
+  /**
+   * <p>pc端还是mobile端</p>
+   */
+  Platform: string
+}
 
 /**
  * DescribeVcubeApplicationAndPlayList请求参数结构体

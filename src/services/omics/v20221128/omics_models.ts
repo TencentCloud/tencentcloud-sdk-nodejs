@@ -1179,6 +1179,20 @@ export interface GetRunMetadataFileRequest {
 }
 
 /**
+ * 应用分类标签
+ */
+export interface ToolRepoTag {
+  /**
+   * <p>应用分类标签ID</p>
+   */
+  TagId?: string
+  /**
+   * <p>应用分类标签名称</p>
+   */
+  TagName?: string
+}
+
+/**
  * 表格行。
  */
 export interface TableRow {
@@ -1668,6 +1682,20 @@ export interface DatabaseOption {
 }
 
 /**
+ * DescribePublicApplications请求参数结构体
+ */
+export interface DescribePublicApplicationsRequest {
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+}
+
+/**
  * 描述键值对过滤器，用于条件过滤查询。
 
 - 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
@@ -1683,6 +1711,40 @@ export interface Filter {
    * 过滤字段值。
    */
   Values: Array<string>
+}
+
+/**
+ * 公共应用。
+ */
+export interface PublicApplication {
+  /**
+   * <p>应用ID。</p>
+   */
+  ApplicationId?: string
+  /**
+   * <p>名称。</p>
+   */
+  Name?: string
+  /**
+   * <p>类型。</p>
+   */
+  Type?: string
+  /**
+   * <p>应用标记</p><p>枚举值：</p><ul><li>SUB_APP： 子应用</li><li>APP_COLLECTION： 合集</li><li>STANDALONE_APP： 独立应用</li></ul>
+   */
+  AppGroupType?: string
+  /**
+   * <p>Nextflow版本</p>
+   */
+  NextflowVersion?: Array<string>
+  /**
+   * <p>应用分类</p>
+   */
+  AppTags?: Array<ToolRepoTag>
+  /**
+   * <p>应用标识</p>
+   */
+  AppId?: string
 }
 
 /**
@@ -2601,6 +2663,26 @@ export interface DescribeRunGroupsRequest {
 - Type：类型（支持WDL，NEXTFLOW）
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * DescribePublicApplications返回参数结构体
+ */
+export interface DescribePublicApplicationsResponse {
+  /**
+   * 公共应用。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Applications?: Array<PublicApplication>
+  /**
+   * 符合条件的数量。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
