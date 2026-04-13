@@ -2581,150 +2581,150 @@ export interface CreateUserRequest {
  */
 export interface DescribeInstanceResponse {
   /**
-   * 实例类型
-BASIC 基础版
-PRO  专业版
-PLATINUM 铂金版
+   * <p>实例类型<br>BASIC 基础版<br>PRO  专业版<br>PLATINUM 铂金版</p>
    */
   InstanceType?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 主题数量
+   * <p>主题数量</p>
    */
   TopicNum?: number
   /**
-   * 实例最大主题数量
+   * <p>实例最大主题数量</p>
    */
   TopicNumLimit?: number
   /**
-   * TPS限流值
+   * <p>TPS限流值</p>
    */
   TpsLimit?: number
   /**
-   * 创建时间，秒为单位
+   * <p>创建时间，秒为单位</p>
    */
   CreatedTime?: number
   /**
-   * 备注信息
+   * <p>备注信息</p>
    */
   Remark?: string
   /**
-   * 实例状态， RUNNING, 运行中 MAINTAINING，维护中 ABNORMAL，异常 OVERDUE，欠费 DESTROYED，已删除 CREATING，创建中 MODIFYING，变配中 CREATE_FAILURE，创建失败 MODIFY_FAILURE，变配失败 DELETING，删除中
+   * <p>实例状态， RUNNING, 运行中 MAINTAINING，维护中 ABNORMAL，异常 OVERDUE，欠费 DESTROYED，已删除 CREATING，创建中 MODIFYING，变配中 CREATE_FAILURE，创建失败 MODIFY_FAILURE，变配失败 DELETING，删除中</p>
    */
   InstanceStatus?: string
   /**
-   * 实例规格
+   * <p>实例规格</p>
    */
   SkuCode?: string
   /**
-   * 单客户端最大订阅数
+   * <p>单客户端最大订阅数</p>
    */
   MaxSubscriptionPerClient?: number
   /**
-   * 授权规则条数
+   * <p>授权规则条数</p>
    */
   AuthorizationPolicyLimit?: number
   /**
-   * 客户端数量上限
+   * <p>客户端数量上限</p>
    */
   ClientNumLimit?: number
   /**
-   * 客户端证书注册方式：
-JITP：自动注册
-API：通过API手动注册
+   * <p>客户端证书注册方式：<br>JITP：自动注册<br>API：通过API手动注册</p>
    */
   DeviceCertificateProvisionType?: string
   /**
-   * 自动注册设备证书时是否自动激活
+   * <p>自动注册设备证书时是否自动激活</p>
    */
   AutomaticActivation?: boolean
   /**
-   * 是否自动续费。仅包年包月集群生效。 1:自动续费 0:非自动续费
+   * <p>是否自动续费。仅包年包月集群生效。 1:自动续费 0:非自动续费</p>
    */
   RenewFlag?: number
   /**
-   * 计费模式， POSTPAID，按量计费 PREPAID，包年包月
+   * <p>计费模式， POSTPAID，按量计费 PREPAID，包年包月</p>
    */
   PayMode?: string
   /**
-   * 到期时间，毫秒级时间戳
+   * <p>到期时间，毫秒级时间戳</p>
    */
   ExpiryTime?: number
   /**
-   * 预销毁时间，毫秒级时间戳
+   * <p>预销毁时间，毫秒级时间戳</p>
    */
   DestroyTime?: number
   /**
-   * TLS,单向认证    mTLS,双向认证    BYOC;一机一证
+   * <p>TLS,单向认证    mTLS,双向认证    BYOC;一机一证</p>
    */
   X509Mode?: string
   /**
-   * 最大Ca配额
+   * <p>最大Ca配额</p>
    */
   MaxCaNum?: number
   /**
-   * 证书注册码
+   * <p>证书注册码</p>
    */
   RegistrationCode?: string
   /**
-   * 集群最大订阅数
+   * <p>集群最大订阅数</p>
    */
   MaxSubscription?: number
   /**
-   * 授权策略开关
+   * <p>授权策略开关</p>
    */
   AuthorizationPolicy?: boolean
   /**
-   * 共享订阅组数最大限制
+   * <p>共享订阅组数最大限制</p>
    */
   SharedSubscriptionGroupLimit?: number
   /**
-   * 单个共享订阅组TopicFilter数限制
+   * <p>单个共享订阅组TopicFilter数限制</p>
+   * @deprecated
    */
   MaxTopicFilterPerSharedSubscriptionGroup?: number
   /**
-   * 自动订阅规则条数限制
+   * <p>自动订阅规则条数限制</p>
    */
   AutoSubscriptionPolicyLimit?: number
   /**
-   * 单条自动订阅规则TopicFilter数限制
+   * <p>单条自动订阅规则TopicFilter数限制</p>
    */
   MaxTopicFilterPerAutoSubscriptionPolicy?: number
   /**
-   * 是否使用默认的服务端证书
+   * <p>是否使用默认的服务端证书</p>
    */
   UseDefaultServerCert?: boolean
   /**
-   * 服务端CA最大数量
+   * <p>服务端CA最大数量</p>
    */
   TrustedCaLimit?: number
   /**
-   * 服务端证书最大数量
+   * <p>服务端证书最大数量</p>
    */
   ServerCertLimit?: number
   /**
-   * topic前缀最大层级
+   * <p>topic前缀最大层级</p>
    */
   TopicPrefixSlashLimit?: number
   /**
-   * 单客户端发送消息限速，单位 条/秒
+   * <p>单客户端发送消息限速，单位 条/秒</p>
    */
   MessageRate?: number
   /**
-   * 服务端tls支持的协议，使用“,”分割。例如：TLSv1.3,TLSv1.2,TLSv1.1,TLSv1
+   * <p>服务端tls支持的协议，使用“,”分割。例如：TLSv1.3,TLSv1.2,TLSv1.1,TLSv1</p>
    */
   TransportLayerSecurity?: string
   /**
-   * 消息属性增强规则配额
+   * <p>消息属性增强规则配额</p>
    */
   MessageEnrichmentRuleLimit?: number
+  /**
+   * <p>封禁规则最大数量</p>
+   */
+  BlockRuleLimit?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3688,7 +3688,7 @@ export interface ModifyHttpAuthenticatorRequest {
  */
 export interface DescribeInstanceRequest {
   /**
-   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   * <p>腾讯云MQTT实例ID，从 <a href="https://cloud.tencent.com/document/api/1778/111029">DescribeInstanceList</a>接口或控制台获得。</p>
    */
   InstanceId: string
 }

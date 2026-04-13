@@ -23,6 +23,7 @@ import {
   AddAggregateCompliancePackResponse,
   CloseAggregateConfigRuleResponse,
   AddCompliancePackRequest,
+  CompliancePackRules,
   ListRemediationsRequest,
   DescribeAggregatorRequest,
   PutEvaluationsResponse,
@@ -39,19 +40,20 @@ import {
   UpdateRemediationResponse,
   ListSystemRulesResponse,
   CreateAggregatorResponse,
-  UpdateConfigRecorderRequest,
+  DeleteAlarmPolicyRequest,
   ListAggregateCompliancePacksResponse,
   ListSystemCompliancePacksResponse,
+  Remediation,
   ListAggregateConfigRuleEvaluationResultsResponse,
   CloseAggregateConfigRuleRequest,
   DescribeAggregateDiscoveredResourceResponse,
   AggregatorAccount,
-  InputParameterForManage,
   ListConfigRulesRequest,
   DescribeAggregateConfigRuleRequest,
   Control,
   ListAggregateConfigRulesRequest,
   ListConfigRuleEvaluationResultsResponse,
+  UpdateAlarmPolicyResponse,
   DescribeCompliancePackRequest,
   ListDiscoveredResourcesResponse,
   UpdateAggregateCompliancePackStatusResponse,
@@ -65,12 +67,13 @@ import {
   UpdateCompliancePackStatusResponse,
   UpdateAggregateCompliancePackStatusRequest,
   UpdateConfigRecorderResponse,
+  ListAlarmPolicyRequest,
   DescribeSystemCompliancePackResponse,
-  CompliancePackRules,
+  InputParameterForManage,
   ComplianceConfigRule,
   OpenAggregateConfigRuleRequest,
   ListSystemCompliancePacksRequest,
-  Tag,
+  ListAlarmPolicyResponse,
   ListAggregatorsResponse,
   ListConfigRuleEvaluationResultsRequest,
   DeleteAggregateConfigRuleResponse,
@@ -79,6 +82,7 @@ import {
   UpdateAggregateCompliancePackRequest,
   CreateRemediationRequest,
   AddCompliancePackResponse,
+  TriggerType,
   ConfigResource,
   DescribeAggregateConfigDeliverRequest,
   ListAggregatorsRequest,
@@ -98,6 +102,7 @@ import {
   ListCompliancePacksResponse,
   DescribeConfigDeliverResponse,
   DetachConfigRuleToCompliancePackResponse,
+  UpdateAlarmPolicyRequest,
   CloseConfigRuleRequest,
   DescribeSystemCompliancePackRequest,
   Evaluation,
@@ -105,6 +110,7 @@ import {
   OpenConfigRuleResponse,
   DescribeDiscoveredResourceResponse,
   RemediationExecutions,
+  DescribeConfigDeliverRequest,
   UpdateConfigRuleResponse,
   DetachAggregateConfigRuleToCompliancePackRequest,
   ListAggregateCompliancePacksRequest,
@@ -124,7 +130,7 @@ import {
   ListSystemRulesRequest,
   AggregateResourceInfo,
   DescribeAggregatorResponse,
-  TriggerType,
+  AddAlarmPolicyResponse,
   EvaluationResult,
   ConfigCompliancePack,
   DescribeAggregateConfigRuleResponse,
@@ -139,9 +145,11 @@ import {
   DescribeConfigRuleRequest,
   UpdateConfigDeliverRequest,
   ListDiscoveredResourcesRequest,
-  Remediation,
+  AddAlarmPolicyRequest,
   ConfigRule,
+  Tag,
   ListResourceTypesRequest,
+  UpdateConfigRecorderRequest,
   UpdateCompliancePackResponse,
   ListAggregateConfigRulesResponse,
   StartRemediationResponse,
@@ -152,9 +160,10 @@ import {
   StartRemediationRequest,
   CloseConfigRuleResponse,
   DescribeSystemRuleResponse,
-  DescribeConfigDeliverRequest,
+  AlarmPolicyRsp,
   UpdateAggregateConfigRuleRequest,
   OpenConfigRecorderRequest,
+  DeleteAlarmPolicyResponse,
   AddAggregateConfigRuleRequest,
   DeleteCompliancePackRequest,
   StartConfigRuleEvaluationResponse,
@@ -175,13 +184,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 账号组触发评估
+   * 新建 规则
    */
-  async StartAggregateConfigRuleEvaluation(
-    req: StartAggregateConfigRuleEvaluationRequest,
-    cb?: (error: string, rep: StartAggregateConfigRuleEvaluationResponse) => void
-  ): Promise<StartAggregateConfigRuleEvaluationResponse> {
-    return this.request("StartAggregateConfigRuleEvaluation", req, cb)
+  async AddConfigRule(
+    req: AddConfigRuleRequest,
+    cb?: (error: string, rep: AddConfigRuleResponse) => void
+  ): Promise<AddConfigRuleResponse> {
+    return this.request("AddConfigRule", req, cb)
   }
 
   /**
@@ -195,13 +204,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 手动执行规则修复
+   * 账号组触发评估
    */
-  async StartRemediation(
-    req: StartRemediationRequest,
-    cb?: (error: string, rep: StartRemediationResponse) => void
-  ): Promise<StartRemediationResponse> {
-    return this.request("StartRemediation", req, cb)
+  async StartAggregateConfigRuleEvaluation(
+    req: StartAggregateConfigRuleEvaluationRequest,
+    cb?: (error: string, rep: StartAggregateConfigRuleEvaluationResponse) => void
+  ): Promise<StartAggregateConfigRuleEvaluationResponse> {
+    return this.request("StartAggregateConfigRuleEvaluation", req, cb)
   }
 
   /**
@@ -285,6 +294,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除告警规则
+   */
+  async DeleteAlarmPolicy(
+    req: DeleteAlarmPolicyRequest,
+    cb?: (error: string, rep: DeleteAlarmPolicyResponse) => void
+  ): Promise<DeleteAlarmPolicyResponse> {
+    return this.request("DeleteAlarmPolicy", req, cb)
+  }
+
+  /**
    * 账号组新建规则
    */
   async AddAggregateConfigRule(
@@ -365,6 +384,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 手动执行规则修复
+   */
+  async StartRemediation(
+    req: StartRemediationRequest,
+    cb?: (error: string, rep: StartRemediationResponse) => void
+  ): Promise<StartRemediationResponse> {
+    return this.request("StartRemediation", req, cb)
+  }
+
+  /**
    * 获取投递设置详情
    */
   async DescribeConfigDeliver(
@@ -435,6 +464,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 告警规则列表
+   */
+  async ListAlarmPolicy(
+    req: ListAlarmPolicyRequest,
+    cb?: (error: string, rep: ListAlarmPolicyResponse) => void
+  ): Promise<ListAlarmPolicyResponse> {
+    return this.request("ListAlarmPolicy", req, cb)
+  }
+
+  /**
    * 账号组编辑规则
    */
   async UpdateAggregateConfigRule(
@@ -455,13 +494,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新建 规则
+   * 新增告警监控规则
    */
-  async AddConfigRule(
-    req: AddConfigRuleRequest,
-    cb?: (error: string, rep: AddConfigRuleResponse) => void
-  ): Promise<AddConfigRuleResponse> {
-    return this.request("AddConfigRule", req, cb)
+  async AddAlarmPolicy(
+    req: AddAlarmPolicyRequest,
+    cb?: (error: string, rep: AddAlarmPolicyResponse) => void
+  ): Promise<AddAlarmPolicyResponse> {
+    return this.request("AddAlarmPolicy", req, cb)
   }
 
   /**
@@ -552,6 +591,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDiscoveredResourceResponse) => void
   ): Promise<DescribeDiscoveredResourceResponse> {
     return this.request("DescribeDiscoveredResource", req, cb)
+  }
+
+  /**
+   * 更新告警规则
+   */
+  async UpdateAlarmPolicy(
+    req: UpdateAlarmPolicyRequest,
+    cb?: (error: string, rep: UpdateAlarmPolicyResponse) => void
+  ): Promise<UpdateAlarmPolicyResponse> {
+    return this.request("UpdateAlarmPolicy", req, cb)
   }
 
   /**

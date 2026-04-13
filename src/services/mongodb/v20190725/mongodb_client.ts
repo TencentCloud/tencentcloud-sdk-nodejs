@@ -137,6 +137,7 @@ import {
   InquirePriceModifyDBInstanceSpecResponse,
   CreateDBInstanceHourRequest,
   SecurityGroupBound,
+  RestoreDBInstanceResponse,
   BackupTotalSize,
   DescribeDBInstanceNodePropertyResponse,
   CloseAuditServiceResponse,
@@ -165,6 +166,7 @@ import {
   DescribeTransparentDataEncryptionStatusResponse,
   DescribeAuditConfigRequest,
   CreateBackupDBInstanceRequest,
+  RestoreDatabases,
   SetAccountUserPrivilegeRequest,
   UpgradeDbInstanceVersionResponse,
   DescribeMongodbLogsResponse,
@@ -214,6 +216,8 @@ import {
   InstanceDetail,
   DescribeSlowLogPatternsRequest,
   Filters,
+  RestoreCollection,
+  RestoreDBInstanceRequest,
   InstanceChargePrepaid,
   RenewDBInstancesRequest,
   UpgradeDBInstanceKernelVersionRequest,
@@ -852,6 +856,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTransparentDataEncryptionStatusResponse) => void
   ): Promise<DescribeTransparentDataEncryptionStatusResponse> {
     return this.request("DescribeTransparentDataEncryptionStatus", req, cb)
+  }
+
+  /**
+   * 本接口(RestoreDBInstance)用于回档数据库实例到指定时间点。
+   */
+  async RestoreDBInstance(
+    req: RestoreDBInstanceRequest,
+    cb?: (error: string, rep: RestoreDBInstanceResponse) => void
+  ): Promise<RestoreDBInstanceResponse> {
+    return this.request("RestoreDBInstance", req, cb)
   }
 
   /**

@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DetailedRolePerm,
   DescribeProductSKUsRequest,
+  CreateMigrationTaskRequest,
   ResetConsumerGroupOffsetResponse,
   DescribeSmoothMigrationTaskListRequest,
   ProductSKU,
@@ -62,6 +63,7 @@ import {
   ModifyRoleResponse,
   TopicStageChangeResult,
   ImportSourceClusterTopicsRequest,
+  SourceClusterGroupConfig,
   DeleteInstanceResponse,
   DescribeTopicResponse,
   SmoothMigrationTaskItem,
@@ -123,7 +125,7 @@ import {
   DoHealthCheckOnMigratingTopicResponse,
   CreateRoleResponse,
   ModifyInstanceEndpointRequest,
-  SourceClusterGroupConfig,
+  CreateMigrationTaskResponse,
   DescribeTopicListResponse,
   DescribeConsumerClientListRequest,
   MigratingTopic,
@@ -567,6 +569,16 @@ Filters示例：
     cb?: (error: string, rep: ResendDeadLetterMessageResponse) => void
   ): Promise<ResendDeadLetterMessageResponse> {
     return this.request("ResendDeadLetterMessage", req, cb)
+  }
+
+  /**
+   * 创建元数据迁移上云任务
+   */
+  async CreateMigrationTask(
+    req: CreateMigrationTaskRequest,
+    cb?: (error: string, rep: CreateMigrationTaskResponse) => void
+  ): Promise<CreateMigrationTaskResponse> {
+    return this.request("CreateMigrationTask", req, cb)
   }
 
   /**

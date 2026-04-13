@@ -138,6 +138,24 @@ export interface AddCompliancePackRequest {
 }
 
 /**
+ * 合规包规则信息
+ */
+export interface CompliancePackRules {
+  /**
+   * <p>规则标识</p>
+   */
+  Identifier: string
+  /**
+   * <p>规则编号信息</p>
+   */
+  Control?: Array<Control>
+  /**
+   * <p>资源类型</p>
+   */
+  ResourceTypes?: Array<string>
+}
+
+/**
  * ListRemediations请求参数结构体
  */
 export interface ListRemediationsRequest {
@@ -400,13 +418,13 @@ export interface CreateAggregatorResponse {
 }
 
 /**
- * UpdateConfigRecorder请求参数结构体
+ * DeleteAlarmPolicy请求参数结构体
  */
-export interface UpdateConfigRecorderRequest {
+export interface DeleteAlarmPolicyRequest {
   /**
-   * 资源类型列表
+   * 告警策略id
    */
-  ResourceTypes?: Array<string>
+  AlarmPolicyId: number
 }
 
 /**
@@ -444,6 +462,42 @@ export interface ListSystemCompliancePacksResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 修复设置
+ */
+export interface Remediation {
+  /**
+   * 修正模板 ID。
+   */
+  RemediationTemplateId?: string
+  /**
+   * 修正设置 ID。
+   */
+  RemediationId?: string
+  /**
+   * 执行修正的模板来源
+   */
+  RemediationSourceType?: string
+  /**
+   * 修正类型。取值：
+SCF：函数计算（自定义修正）。
+   */
+  RemediationType?: string
+  /**
+   * 账号ID
+   */
+  OwnerUin?: string
+  /**
+   * 修正执行方式。取值：
+MANUAL_EXECUTION：手动执行。
+   */
+  InvokeType?: string
+  /**
+   * 规则 ID。
+   */
+  RuleId?: string
 }
 
 /**
@@ -537,32 +591,6 @@ export interface AggregatorAccount {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MemberName: string
-}
-
-/**
- * 规则入参
- */
-export interface InputParameterForManage {
-  /**
-   * 值类型。数值：Integer， 字符串：String
-   */
-  ValueType?: string
-  /**
-   * 参数Key
-   */
-  ParameterKey?: string
-  /**
-   * 参数类型。必填类型：Require，可选类型：Optional。
-   */
-  Type?: string
-  /**
-   * 默认值
-   */
-  DefaultValue?: string
-  /**
-   * 描述
-   */
-  Description?: string
 }
 
 /**
@@ -693,6 +721,16 @@ export interface ListConfigRuleEvaluationResultsResponse {
    * 详情
    */
   Items: Array<EvaluationResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateAlarmPolicy返回参数结构体
+ */
+export interface UpdateAlarmPolicyResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -967,6 +1005,16 @@ export interface UpdateConfigRecorderResponse {
 }
 
 /**
+ * ListAlarmPolicy请求参数结构体
+ */
+export interface ListAlarmPolicyRequest {
+  /**
+   * 页码
+   */
+  Offset: number
+}
+
+/**
  * DescribeSystemCompliancePack返回参数结构体
  */
 export interface DescribeSystemCompliancePackResponse {
@@ -997,21 +1045,29 @@ export interface DescribeSystemCompliancePackResponse {
 }
 
 /**
- * 合规包规则信息
+ * 规则入参
  */
-export interface CompliancePackRules {
+export interface InputParameterForManage {
   /**
-   * <p>规则标识</p>
+   * 值类型。数值：Integer， 字符串：String
    */
-  Identifier: string
+  ValueType?: string
   /**
-   * <p>规则编号信息</p>
+   * 参数Key
    */
-  Control?: Array<Control>
+  ParameterKey?: string
   /**
-   * <p>资源类型</p>
+   * 参数类型。必填类型：Require，可选类型：Optional。
    */
-  ResourceTypes?: Array<string>
+  Type?: string
+  /**
+   * 默认值
+   */
+  DefaultValue?: string
+  /**
+   * 描述
+   */
+  Description?: string
 }
 
 /**
@@ -1111,17 +1167,21 @@ export interface ListSystemCompliancePacksRequest {
 }
 
 /**
- * 标签
+ * ListAlarmPolicy返回参数结构体
  */
-export interface Tag {
+export interface ListAlarmPolicyResponse {
   /**
-   * 标签key
+   * 返回记录的数量
    */
-  TagKey?: string
+  Total?: number
   /**
-   * 标签value
+   * 告警策略返回值
    */
-  TagValue?: string
+  AlarmPolicyList?: Array<AlarmPolicyRsp>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1307,6 +1367,20 @@ export interface AddCompliancePackResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 规则支持触发类型
+ */
+export interface TriggerType {
+  /**
+   * 触发类型
+   */
+  MessageType: string
+  /**
+   * 触发时间周期
+   */
+  MaximumExecutionFrequency?: string
 }
 
 /**
@@ -1719,6 +1793,10 @@ export interface DescribeAggregateDiscoveredResourceRequest {
  */
 export interface AddConfigRuleResponse {
   /**
+   * <p>规则ID</p>
+   */
+  RuleId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1755,51 +1833,47 @@ export interface SourceConditionForManage {
  */
 export interface AddConfigRuleRequest {
   /**
-   * 规则模板标识，预设规则模板为Identifier, 自定义规则为云函数arn（region:functionName）
+   * <p>规则模板标识，预设规则模板为Identifier, 自定义规则为云函数arn（region:functionName）</p>
    */
   Identifier: string
   /**
-   * 规则模板类型，SYSTEM, CUSTOMIZE
+   * <p>规则模板类型，SYSTEM, CUSTOMIZE</p>
    */
   IdentifierType: string
   /**
-   * 规则名称
+   * <p>规则名称</p>
    */
   RuleName: string
   /**
-   * 规则支持的资源
+   * <p>规则支持的资源</p>
    */
   ResourceType: Array<string>
   /**
-   * 触发类型，最多支持两种
+   * <p>触发类型，最多支持两种</p>
    */
   TriggerType: Array<TriggerType>
   /**
-   * 风险等级
-1：高风险。
-2：中风险。
-3：低风险。
+   * <p>风险等级<br>1：高风险。<br>2：中风险。<br>3：低风险。</p>
    */
   RiskLevel: number
   /**
-   * 入参
+   * <p>入参</p>
    */
   InputParameter?: Array<InputParameter>
   /**
-   * 规则描述。长度范围0~1024字符
+   * <p>规则描述。长度范围0~1024字符</p>
    */
   Description?: string
   /**
-   * 规则评估地域范围，规则仅对指定地域中的资源生效。
-支持的地域范围config:ListResourceRegions返回的地域
+   * <p>规则评估地域范围，规则仅对指定地域中的资源生效。<br>支持的地域范围config:ListResourceRegions返回的地域</p>
    */
   RegionsScope?: Array<string>
   /**
-   * 规则评估标签范围，规则仅对绑定指定标签的资源生效。
+   * <p>规则评估标签范围，规则仅对绑定指定标签的资源生效。</p>
    */
   TagsScope?: Array<Tag>
   /**
-   * 规则对指定资源ID无效，即不对该资源执行评估。
+   * <p>规则对指定资源ID无效，即不对该资源执行评估。</p>
    */
   ExcludeResourceIdsScope?: Array<string>
 }
@@ -1873,6 +1947,48 @@ export interface DetachConfigRuleToCompliancePackResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateAlarmPolicy请求参数结构体
+ */
+export interface UpdateAlarmPolicyRequest {
+  /**
+   * 告警策略id
+   */
+  AlarmPolicyId: number
+  /**
+   * 告警策略名
+   */
+  Name?: string
+  /**
+   * 事件范围  1：当前账号  2：多账号
+   */
+  EventScope?: Array<number | bigint>
+  /**
+   * 风险等级 1：高风险  2：中风险 3：低风险
+   */
+  RiskLevel?: Array<number | bigint>
+  /**
+   * 通知时间段
+   */
+  NoticeTime?: string
+  /**
+   * 通知机制
+   */
+  NotificationMechanism?: string
+  /**
+   * 状态 1：启用 2：停用
+   */
+  Status?: number
+  /**
+   * 通知周期,1-7数字分别代表周一到周日
+   */
+  NoticePeriod?: Array<number | bigint>
+  /**
+   * 策略描述
+   */
+  Description?: string
 }
 
 /**
@@ -2017,6 +2133,11 @@ export interface RemediationExecutions {
    */
   ExecutionResourceIds?: string
 }
+
+/**
+ * DescribeConfigDeliver请求参数结构体
+ */
+export type DescribeConfigDeliverRequest = null
 
 /**
  * UpdateConfigRule返回参数结构体
@@ -2417,17 +2538,18 @@ export interface DescribeAggregatorResponse {
 }
 
 /**
- * 规则支持触发类型
+ * AddAlarmPolicy返回参数结构体
  */
-export interface TriggerType {
+export interface AddAlarmPolicyResponse {
   /**
-   * 触发类型
+   * 告警策略唯一id
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  MessageType: string
+  AlarmPolicyId?: number
   /**
-   * 触发时间周期
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  MaximumExecutionFrequency?: string
+  RequestId?: string
 }
 
 /**
@@ -2781,39 +2903,41 @@ export interface ListDiscoveredResourcesRequest {
 }
 
 /**
- * 修复设置
+ * AddAlarmPolicy请求参数结构体
  */
-export interface Remediation {
+export interface AddAlarmPolicyRequest {
   /**
-   * 修正模板 ID。
+   * 告警策略名
    */
-  RemediationTemplateId?: string
+  Name: string
   /**
-   * 修正设置 ID。
+   * 事件范围  1：当前账号  2：多账号
    */
-  RemediationId?: string
+  EventScope: Array<number | bigint>
   /**
-   * 执行修正的模板来源
+   * 风险等级 1：高风险  2：中风险 3：低风险
    */
-  RemediationSourceType?: string
+  RiskLevel: Array<number | bigint>
   /**
-   * 修正类型。取值：
-SCF：函数计算（自定义修正）。
+   * 通知时间段
    */
-  RemediationType?: string
+  NoticeTime: string
   /**
-   * 账号ID
+   * 通知机制
    */
-  OwnerUin?: string
+  NotificationMechanism: string
   /**
-   * 修正执行方式。取值：
-MANUAL_EXECUTION：手动执行。
+   * 状态 1：启用 2：停用
    */
-  InvokeType?: string
+  Status: number
   /**
-   * 规则 ID。
+   * 通知周期
    */
-  RuleId?: string
+  NoticePeriod: Array<number | bigint>
+  /**
+   * 策略描述
+   */
+  Description?: string
 }
 
 /**
@@ -2945,9 +3069,33 @@ ConfigurationItemChangeNotification：变更触发
 }
 
 /**
+ * 标签
+ */
+export interface Tag {
+  /**
+   * 标签key
+   */
+  TagKey?: string
+  /**
+   * 标签value
+   */
+  TagValue?: string
+}
+
+/**
  * ListResourceTypes请求参数结构体
  */
 export type ListResourceTypesRequest = null
+
+/**
+ * UpdateConfigRecorder请求参数结构体
+ */
+export interface UpdateConfigRecorderRequest {
+  /**
+   * 资源类型列表
+   */
+  ResourceTypes?: Array<string>
+}
 
 /**
  * UpdateCompliancePack返回参数结构体
@@ -3096,9 +3244,51 @@ export interface DescribeSystemRuleResponse {
 }
 
 /**
- * DescribeConfigDeliver请求参数结构体
+ * 告警策略列表单个记录结构体
  */
-export type DescribeConfigDeliverRequest = null
+export interface AlarmPolicyRsp {
+  /**
+   * 告警策略唯一标识id
+   */
+  AlarmPolicyId?: number
+  /**
+   * 策略名称
+   */
+  Name?: string
+  /**
+   * 事件类型
+   */
+  Type?: number
+  /**
+   * 1：当前账号  2：多账号
+   */
+  EventScope?: Array<number | bigint>
+  /**
+   * 1：高风险  2：中风险 3：低风险
+   */
+  RiskLevel?: Array<number | bigint>
+  /**
+   * 通知周期，1-7数字分别代表周一至周日
+   */
+  NoticePeriod?: Array<number | bigint>
+  /**
+   * 通知时间段
+   */
+  NoticeTime?: string
+  /**
+   * 通知机制
+   */
+  NotificationMechanism?: string
+  /**
+   * 策略状态 1：启动  2：停止
+   */
+  Status?: number
+  /**
+   * 策略描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+}
 
 /**
  * UpdateAggregateConfigRule请求参数结构体
@@ -3153,6 +3343,16 @@ export interface UpdateAggregateConfigRuleRequest {
  * OpenConfigRecorder请求参数结构体
  */
 export type OpenConfigRecorderRequest = null
+
+/**
+ * DeleteAlarmPolicy返回参数结构体
+ */
+export interface DeleteAlarmPolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * AddAggregateConfigRule请求参数结构体

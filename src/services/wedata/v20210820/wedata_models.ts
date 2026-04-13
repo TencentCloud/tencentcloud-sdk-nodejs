@@ -16503,45 +16503,50 @@ export interface BatchStopIntegrationTasksResponse {
  */
 export interface EventListenerTaskInfo {
   /**
-   * 任务id
+   * <p>任务id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId: string
   /**
-   * 任务名称
+   * <p>任务名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskName: string
   /**
-   * 工作流id
+   * <p>工作流id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowId: string
   /**
-   * 工作流名称
+   * <p>工作流名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowName: string
   /**
-   * 任务类型id
+   * <p>任务类型id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskTypeId: number
   /**
-   * 任务类型名称
+   * <p>任务类型名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskType: string
   /**
-   * 项目id
+   * <p>项目id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId: string
   /**
-   * 任务周期类型
+   * <p>任务周期类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleType?: string
+  /**
+   * <p>事件名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EventName?: string
 }
 
 /**

@@ -49,6 +49,33 @@ export interface DetailedRolePerm {
 export type DescribeProductSKUsRequest = null
 
 /**
+ * CreateMigrationTask请求参数结构体
+ */
+export interface CreateMigrationTaskRequest {
+  /**
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * 0 - 未指定（存量）
+1 - 元数据导入
+   */
+  Type: number
+  /**
+   * 待导入的消费组列表
+   */
+  Topics?: Array<TopicItem>
+  /**
+   * 待导入的消费组列表
+   */
+  Groups?: Array<ConsumeGroupItem>
+  /**
+   * 待导入的角色列表
+   */
+  Roles?: Array<RoleItem>
+}
+
+/**
  * ResetConsumerGroupOffset返回参数结构体
  */
 export interface ResetConsumerGroupOffsetResponse {
@@ -1240,6 +1267,63 @@ export interface ImportSourceClusterTopicsRequest {
    * 待导入的主题列表
    */
   TopicList: Array<SourceClusterTopicConfig>
+}
+
+/**
+ * 消费组配置信息
+ */
+export interface SourceClusterGroupConfig {
+  /**
+   * 消费组名称，可在[DescribeSourceClusterGroupList](https://cloud.tencent.com/document/api/1493/118006)接口返回的[SourceClusterGroupConfig](https://cloud.tencent.com/document/api/1493/96031#SourceClusterGroupConfig)数据中获取。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupName: string
+  /**
+   * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+  /**
+   * 是否已导入，作为入参时无效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Imported?: boolean
+  /**
+   * 命名空间，仅4.x集群有效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
+  /**
+   * 导入状态
+Unknown 未知
+Success 成功
+Failure 失败
+AlreadyExists 已存在
+
+仅作为出参时使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImportStatus?: string
+  /**
+   * 4.x的命名空间，出参使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NamespaceV4?: string
+  /**
+   * 4.x的消费组名，出参使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupNameV4?: string
+  /**
+   * 4.x的完整命名空间，出参使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FullNamespaceV4?: string
+  /**
+   * 是否为顺序投递，5.0有效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumeMessageOrderly?: boolean
 }
 
 /**
@@ -3040,60 +3124,13 @@ PUBLIC 公网
 }
 
 /**
- * 消费组配置信息
+ * CreateMigrationTask返回参数结构体
  */
-export interface SourceClusterGroupConfig {
+export interface CreateMigrationTaskResponse {
   /**
-   * 消费组名称，可在[DescribeSourceClusterGroupList](https://cloud.tencent.com/document/api/1493/118006)接口返回的[SourceClusterGroupConfig](https://cloud.tencent.com/document/api/1493/96031#SourceClusterGroupConfig)数据中获取。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  GroupName: string
-  /**
-   * 备注信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark?: string
-  /**
-   * 是否已导入，作为入参时无效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Imported?: boolean
-  /**
-   * 命名空间，仅4.x集群有效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Namespace?: string
-  /**
-   * 导入状态
-Unknown 未知
-Success 成功
-Failure 失败
-AlreadyExists 已存在
-
-仅作为出参时使用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ImportStatus?: string
-  /**
-   * 4.x的命名空间，出参使用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NamespaceV4?: string
-  /**
-   * 4.x的消费组名，出参使用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  GroupNameV4?: string
-  /**
-   * 4.x的完整命名空间，出参使用
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FullNamespaceV4?: string
-  /**
-   * 是否为顺序投递，5.0有效
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConsumeMessageOrderly?: boolean
+  RequestId?: string
 }
 
 /**

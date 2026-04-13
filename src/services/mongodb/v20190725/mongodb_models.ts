@@ -3104,6 +3104,20 @@ export interface SecurityGroupBound {
 }
 
 /**
+ * RestoreDBInstance返回参数结构体
+ */
+export interface RestoreDBInstanceResponse {
+  /**
+   * <p>回档任务流程 ID。</p>
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 实例备份总大小
  */
 export interface BackupTotalSize {
@@ -3793,6 +3807,20 @@ export interface CreateBackupDBInstanceRequest {
    * 备份备注信息。
    */
   BackupRemark?: string
+}
+
+/**
+ * 库表回档到新实例，库表信息
+ */
+export interface RestoreDatabases {
+  /**
+   * DB名称。
+   */
+  Db: string
+  /**
+   * 待回档的集合信息。
+   */
+  Collections: Array<RestoreCollection>
 }
 
 /**
@@ -5187,6 +5215,38 @@ export interface Filters {
    * 筛选值
    */
   Values: Array<string>
+}
+
+/**
+ * 待回档collection
+ */
+export interface RestoreCollection {
+  /**
+   * 待回档的原collection
+   */
+  OldCollection: string
+  /**
+   * 回档后的collection
+   */
+  NewCollection: string
+}
+
+/**
+ * RestoreDBInstance请求参数结构体
+ */
+export interface RestoreDBInstanceRequest {
+  /**
+   * <p>实例 ID。请登录 <a href="https://console.cloud.tencent.com/mongodb/instance">MongoDB 控制台</a>在实例列表复制实例 ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>指定回档的目标时间点。该时间必须处于实例的备份保留期内。</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
+   */
+  RestoreTime: string
+  /**
+   * <p>回档的库表信息。</p>
+   */
+  Databases: Array<RestoreDatabases>
 }
 
 /**

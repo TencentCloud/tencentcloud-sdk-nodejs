@@ -18,9 +18,9 @@ const client = new tencentcloud.config.v20220802.Client({
 })
 describe("config.v20220802.test.js", function () {
 
-it("config.v20220802.StartAggregateConfigRuleEvaluation", async function () {
+it("config.v20220802.AddConfigRule", async function () {
     try {
-       const data = await client.StartAggregateConfigRuleEvaluation({})
+       const data = await client.AddConfigRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +38,9 @@ it("config.v20220802.DescribeCompliancePack", async function () {
     }
 })
 
-it("config.v20220802.StartRemediation", async function () {
+it("config.v20220802.StartAggregateConfigRuleEvaluation", async function () {
     try {
-       const data = await client.StartRemediation({})
+       const data = await client.StartAggregateConfigRuleEvaluation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,6 +128,16 @@ it("config.v20220802.StartConfigRuleEvaluation", async function () {
     }
 })
 
+it("config.v20220802.DeleteAlarmPolicy", async function () {
+    try {
+       const data = await client.DeleteAlarmPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("config.v20220802.AddAggregateConfigRule", async function () {
     try {
        const data = await client.AddAggregateConfigRule({})
@@ -208,6 +218,16 @@ it("config.v20220802.UpdateCompliancePack", async function () {
     }
 })
 
+it("config.v20220802.StartRemediation", async function () {
+    try {
+       const data = await client.StartRemediation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("config.v20220802.DescribeConfigDeliver", async function () {
     try {
        const data = await client.DescribeConfigDeliver({})
@@ -278,6 +298,16 @@ it("config.v20220802.DescribeConfigRecorder", async function () {
     }
 })
 
+it("config.v20220802.ListAlarmPolicy", async function () {
+    try {
+       const data = await client.ListAlarmPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("config.v20220802.UpdateAggregateConfigRule", async function () {
     try {
        const data = await client.UpdateAggregateConfigRule({})
@@ -298,9 +328,9 @@ it("config.v20220802.UpdateCompliancePackStatus", async function () {
     }
 })
 
-it("config.v20220802.AddConfigRule", async function () {
+it("config.v20220802.AddAlarmPolicy", async function () {
     try {
-       const data = await client.AddConfigRule({})
+       const data = await client.AddAlarmPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -391,6 +421,16 @@ it("config.v20220802.CloseConfigRecorder", async function () {
 it("config.v20220802.DescribeDiscoveredResource", async function () {
     try {
        const data = await client.DescribeDiscoveredResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("config.v20220802.UpdateAlarmPolicy", async function () {
+    try {
+       const data = await client.UpdateAlarmPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1686,13 +1686,21 @@ export interface DatabaseOption {
  */
 export interface DescribePublicApplicationsRequest {
   /**
-   * 返回数量，默认为20，最大值为100。
+   * <p>返回数量，默认为20，最大值为100。</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
+  /**
+   * <p>父应用ID</p>
+   */
+  ParentAppId?: string
+  /**
+   * <p>应用类型</p><p>枚举值：</p><ul><li>WDL： WDL</li><li>NEXTFLOW： NEXTFLOW</li></ul>
+   */
+  AppType?: string
 }
 
 /**
@@ -2670,12 +2678,12 @@ export interface DescribeRunGroupsRequest {
  */
 export interface DescribePublicApplicationsResponse {
   /**
-   * 公共应用。
+   * <p>公共应用。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Applications?: Array<PublicApplication>
   /**
-   * 符合条件的数量。
+   * <p>符合条件的数量。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number

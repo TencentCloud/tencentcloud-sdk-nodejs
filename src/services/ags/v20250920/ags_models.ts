@@ -969,7 +969,7 @@ export interface CLSConfig {
  */
 export interface LogConfiguration {
   /**
-   * 日志推送CLS的配置。
+   * <p>日志推送CLS的配置。</p>
    */
   CLSConfig?: CLSConfig
 }

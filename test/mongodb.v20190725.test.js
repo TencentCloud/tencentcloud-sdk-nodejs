@@ -638,6 +638,16 @@ it("mongodb.v20190725.DescribeTransparentDataEncryptionStatus", async function (
     }
 })
 
+it("mongodb.v20190725.RestoreDBInstance", async function () {
+    try {
+       const data = await client.RestoreDBInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.UpgradeDbInstanceVersion", async function () {
     try {
        const data = await client.UpgradeDbInstanceVersion({})

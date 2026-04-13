@@ -20,206 +20,183 @@
  */
 export interface CreateModelServiceRequest {
   /**
-   * 新增版本时需要填写
+   * <p>新增版本时需要填写</p>
    */
   ServiceGroupId?: string
   /**
-   * 不超过60个字，仅支持英文、数字、下划线"_"、短横"-"，只能以英文、数字开头
+   * <p>不超过60个字，仅支持英文、数字、下划线&quot;_&quot;、短横&quot;-&quot;，只能以英文、数字开头</p>
    */
   ServiceGroupName?: string
   /**
-   * 模型服务的描述
+   * <p>模型服务的描述</p>
    */
   ServiceDescription?: string
   /**
-   * 付费模式,有 PREPAID （包年包月）和 POSTPAID_BY_HOUR（按量付费）
+   * <p>付费模式,有 PREPAID （包年包月）和 POSTPAID_BY_HOUR（按量付费）</p>
    */
   ChargeType?: string
   /**
-   * 预付费模式下所属的资源组id，同服务组下唯一
+   * <p>预付费模式下所属的资源组id，同服务组下唯一</p>
    */
   ResourceGroupId?: string
   /**
-   * 模型信息，需要挂载模型时填写
+   * <p>模型信息，需要挂载模型时填写</p>
    */
   ModelInfo?: ModelInfo
   /**
-   * 镜像信息，配置服务运行所需的镜像地址等信息
+   * <p>镜像信息，配置服务运行所需的镜像地址等信息</p>
    */
   ImageInfo?: ImageInfo
   /**
-   * 环境变量，可选参数，用于配置容器中的环境变量
+   * <p>环境变量，可选参数，用于配置容器中的环境变量</p>
    */
   Env?: Array<EnvVar>
   /**
-   * 资源描述，指定包年包月模式下的cpu,mem,gpu等信息，后付费无需填写
+   * <p>资源描述，指定包年包月模式下的cpu,mem,gpu等信息，后付费无需填写</p>
    */
   Resources?: ResourceInfo
   /**
-   * 使用DescribeBillingSpecs接口返回的规格列表中的值，或者参考实例列表:
-TI.S.MEDIUM.POST	2C4G
-TI.S.LARGE.POST	4C8G
-TI.S.2XLARGE16.POST	8C16G
-TI.S.2XLARGE32.POST	8C32G
-TI.S.4XLARGE32.POST	16C32G
-TI.S.4XLARGE64.POST	16C64G
-TI.S.6XLARGE48.POST	24C48G
-TI.S.6XLARGE96.POST	24C96G
-TI.S.8XLARGE64.POST	32C64G
-TI.S.8XLARGE128.POST 32C128G
-TI.GN7.LARGE20.POST	4C20G T4*1/4
-TI.GN7.2XLARGE40.POST	10C40G T4*1/2
-TI.GN7.2XLARGE32.POST	8C32G T4*1
-TI.GN7.5XLARGE80.POST	20C80G T4*1
-TI.GN7.8XLARGE128.POST	32C128G T4*1
-TI.GN7.10XLARGE160.POST	40C160G T4*2
-TI.GN7.20XLARGE320.POST	80C320G T4*4
+   * <p>使用DescribeBillingSpecs接口返回的规格列表中的值，或者参考实例列表:<br>TI.S.MEDIUM.POST    2C4G<br>TI.S.LARGE.POST    4C8G<br>TI.S.2XLARGE16.POST    8C16G<br>TI.S.2XLARGE32.POST    8C32G<br>TI.S.4XLARGE32.POST    16C32G<br>TI.S.4XLARGE64.POST    16C64G<br>TI.S.6XLARGE48.POST    24C48G<br>TI.S.6XLARGE96.POST    24C96G<br>TI.S.8XLARGE64.POST    32C64G<br>TI.S.8XLARGE128.POST 32C128G<br>TI.GN7.LARGE20.POST    4C20G T4<em>1/4<br>TI.GN7.2XLARGE40.POST    10C40G T4</em>1/2<br>TI.GN7.2XLARGE32.POST    8C32G T4<em>1<br>TI.GN7.5XLARGE80.POST    20C80G T4</em>1<br>TI.GN7.8XLARGE128.POST    32C128G T4<em>1<br>TI.GN7.10XLARGE160.POST    40C160G T4</em>2<br>TI.GN7.20XLARGE320.POST    80C320G T4*4</p>
    */
   InstanceType?: string
   /**
-   * 扩缩容类型 支持：自动 - "AUTO", 手动 - "MANUAL",默认为MANUAL
+   * <p>扩缩容类型 支持：自动 - &quot;AUTO&quot;, 手动 - &quot;MANUAL&quot;,默认为MANUAL</p>
    */
   ScaleMode?: string
   /**
-   * 实例数量, 不同计费模式和调节模式下对应关系如下
-PREPAID 和 POSTPAID_BY_HOUR:
-手动调节模式下对应 实例数量
-自动调节模式下对应 基于时间的默认策略的实例数量
-HYBRID_PAID:
-后付费实例手动调节模式下对应 实例数量
-后付费实例自动调节模式下对应 时间策略的默认策略的实例数量
+   * <p>实例数量, 不同计费模式和调节模式下对应关系如下<br>PREPAID 和 POSTPAID_BY_HOUR:<br>手动调节模式下对应 实例数量<br>自动调节模式下对应 基于时间的默认策略的实例数量<br>HYBRID_PAID:<br>后付费实例手动调节模式下对应 实例数量<br>后付费实例自动调节模式下对应 时间策略的默认策略的实例数量</p>
    */
   Replicas?: number
   /**
-   * 自动伸缩信息
+   * <p>自动伸缩信息</p>
    */
   HorizontalPodAutoscaler?: HorizontalPodAutoscaler
   /**
-   * 是否开启日志投递，开启后需填写配置投递到指定cls
+   * <p>是否开启日志投递，开启后需填写配置投递到指定cls</p>
    */
   LogEnable?: boolean
   /**
-   * 日志配置，需要投递服务日志到指定cls时填写
+   * <p>日志配置，需要投递服务日志到指定cls时填写</p>
    */
   LogConfig?: LogConfig
   /**
-   * 是否开启接口鉴权，开启后自动生成token信息，访问需要token鉴权
+   * <p>是否开启接口鉴权，开启后自动生成token信息，访问需要token鉴权</p>
    */
   AuthorizationEnable?: boolean
   /**
-   * 腾讯云标签
+   * <p>腾讯云标签</p>
    */
   Tags?: Array<Tag>
   /**
-   * 是否新增版本
+   * <p>是否新增版本</p>
    */
   NewVersion?: boolean
   /**
-   * 定时任务配置，使用定时策略时填写
+   * <p>定时任务配置，使用定时策略时填写</p>
    */
   CronScaleJobs?: Array<CronScaleJob>
   /**
-   * 自动伸缩策略配置 HPA : 通过HPA进行弹性伸缩 CRON 通过定时任务进行伸缩
+   * <p>自动伸缩策略配置 HPA : 通过HPA进行弹性伸缩 CRON 通过定时任务进行伸缩</p>
    */
   ScaleStrategy?: string
   /**
-   * 计费模式[HYBRID_PAID]时生效, 用于标识混合计费模式下的预付费实例数
+   * <p>计费模式[HYBRID_PAID]时生效, 用于标识混合计费模式下的预付费实例数</p>
    */
   HybridBillingPrepaidReplicas?: number
   /**
-   * [AUTO_ML 自动学习，自动学习正式发布 AUTO_ML_FORMAL, DEFAULT 默认]
+   * <p>[AUTO_ML 自动学习，自动学习正式发布 AUTO_ML_FORMAL, DEFAULT 默认]</p>
    */
   CreateSource?: string
   /**
-   * 是否开启模型的热更新。默认不开启
+   * <p>是否开启模型的热更新。默认不开启</p>
    */
   ModelHotUpdateEnable?: boolean
   /**
-   * 定时停止配置
+   * <p>定时停止配置</p>
    */
   ScheduledAction?: ScheduledAction
   /**
-   * 挂载配置，目前只支持CFS
+   * <p>挂载配置，目前只支持CFS</p>
    */
   VolumeMount?: VolumeMount
   /**
-   * 服务限速限流相关配置
+   * <p>服务限速限流相关配置</p>
    */
   ServiceLimit?: ServiceLimit
   /**
-   * 回调地址，用于回调创建服务状态信息，回调格式&内容详情见：[TI-ONE 接口回调说明](https://cloud.tencent.com/document/product/851/84292)
+   * <p>回调地址，用于回调创建服务状态信息，回调格式&amp;内容详情见：<a href="https://cloud.tencent.com/document/product/851/84292">TI-ONE 接口回调说明</a></p>
    */
   CallbackUrl?: string
   /**
-   * 是否开启模型的加速, 仅对StableDiffusion(动态加速)格式的模型有效。
+   * <p>是否开启模型的加速, 仅对StableDiffusion(动态加速)格式的模型有效。</p>
    */
   ModelTurboEnable?: boolean
   /**
-   * 服务分类
+   * <p>服务分类</p>
    */
   ServiceCategory?: string
   /**
-   * 服务的启动命令，如遇特殊字符导致配置失败，可使用CommandBase64参数
+   * <p>服务的启动命令，如遇特殊字符导致配置失败，可使用CommandBase64参数</p>
    */
   Command?: string
   /**
-   * 是否开启TIONE内网访问外部，此功能仅支持后付费机型与从TIONE平台购买的预付费机型；使用从CVM选择资源组时此配置不生效。
+   * <p>是否开启TIONE内网访问外部，此功能仅支持后付费机型与从TIONE平台购买的预付费机型；使用从CVM选择资源组时此配置不生效。</p>
    */
   ServiceEIP?: ServiceEIP
   /**
-   * 服务的启动命令，以base64格式进行输入，与Command同时配置时，仅当前参数生效
+   * <p>服务的启动命令，以base64格式进行输入，与Command同时配置时，仅当前参数生效</p>
    */
   CommandBase64?: string
   /**
-   * 服务端口，仅在非内置镜像时生效，默认8501。不支持输入8501-8510,6006,9092
+   * <p>服务端口，仅在非内置镜像时生效，默认8501。不支持输入8501-8510,6006,9092</p>
    */
   ServicePort?: number
   /**
-   * 服务的部署类型 [STANDARD 标准部署，DIST 分布式多机部署] 默认STANDARD
+   * <p>服务的部署类型 [标准部署，分布式多机部署，] 默认STANDARD</p><p>枚举值：</p><ul><li>STANDARD： 标准部署</li><li>DIST： 多机分布式部署</li><li>ROLE_SET： 多角色部署</li></ul>
    */
   DeployType?: string
   /**
-   * 单副本下的实例数，仅在部署类型为DIST时生效，默认1
+   * <p>单副本下的实例数，仅在部署类型为DIST时生效，默认1</p>
    */
   InstancePerReplicas?: number
   /**
-   * 服务的优雅退出时限。单位为秒，默认值为30，最小为1
+   * <p>服务的优雅退出时限。单位为秒，默认值为30，最小为1</p>
    */
   TerminationGracePeriodSeconds?: number
   /**
-   * 服务实例停止前执行的命令，执行完毕或执行时间超过优雅退出时限后实例结束
+   * <p>服务实例停止前执行的命令，执行完毕或执行时间超过优雅退出时限后实例结束</p>
    */
   PreStopCommand?: Array<string>
   /**
-   * 是否启用 grpc 端口
+   * <p>是否启用 grpc 端口</p>
    */
   GrpcEnable?: boolean
   /**
-   * 健康探针
+   * <p>健康探针</p>
    */
   HealthProbe?: HealthProbe
   /**
-   * 滚动更新策略
+   * <p>滚动更新策略</p>
    */
   RollingUpdate?: RollingUpdate
   /**
-   * sidecar配置
+   * <p>sidecar配置</p>
    */
   Sidecar?: SidecarSpec
   /**
-   * 数据盘批量挂载配置，当前仅支持CFS，仅针对“模型来源-腾讯云存储、模型来源-腾讯云容器镜像、模型来源-资源组、模型来源-数据源”。
+   * <p>数据盘批量挂载配置，当前仅支持CFS，仅针对“模型来源-腾讯云存储、模型来源-腾讯云容器镜像、模型来源-资源组、模型来源-数据源”。</p>
    */
   VolumeMounts?: Array<VolumeMount>
   /**
-   * 调度策略 [binpack] 优先占满整机，尽量避免碎卡（默认值）[spread] 优先分散在各个节点，确保服务高可用
+   * <p>调度策略 [binpack] 优先占满整机，尽量避免碎卡（默认值）[spread] 优先分散在各个节点，确保服务高可用</p>
    */
   SchedulingStrategy?: string
   /**
-   * 网关日志投递相关配置
+   * <p>网关日志投递相关配置</p>
    */
   GatewayLogConfig?: LogConfig
   /**
-   * 网关相关配置
+   * <p>网关相关配置</p>
    */
   GatewayConfig?: GatewayConfig
 }
@@ -229,73 +206,47 @@ HYBRID_PAID:
  */
 export interface DescribeLogsRequest {
   /**
-   * 服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测
-枚举值：
-- TRAIN
-- NOTEBOOK
-- INFER
-- BATCH
+   * <p>服务类型，TRAIN为任务式建模, NOTEBOOK为Notebook, INFER为在线服务, BATCH为批量预测<br>枚举值：</p><ul><li>TRAIN</li><li>NOTEBOOK</li><li>INFER</li><li>BATCH</li></ul>
    */
   Service: string
   /**
-   * 日志查询开始时间（RFC3339格式的时间字符串），默认值为当前时间的前一个小时
+   * <p>日志查询开始时间（RFC3339格式的时间字符串），默认值为当前时间的前一个小时</p>
    */
   StartTime?: string
   /**
-   * 日志查询结束时间（RFC3339格式的时间字符串），默认值为当前时间
+   * <p>日志查询结束时间（RFC3339格式的时间字符串），默认值为当前时间</p>
    */
   EndTime?: string
   /**
-   * 日志查询条数，默认值100，最大值1000
+   * <p>日志查询条数，默认值100，最大值1000</p>
    */
   Limit?: number
   /**
-   * 服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：
-- Service类型为TRAIN：
-  调用[DescribeTrainingTask接口](/document/product/851/75089)查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId
-- Service类型为NOTEBOOK：
-  调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName
-- Service类型为INFER：
-  调用[DescribeModelServiceGroup接口](/document/product/851/82285)查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId
-- Service类型为BATCH：
-  调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId
+   * <p>服务ID，和Service参数对应，不同Service的服务ID获取方式不同，具体如下：</p><ul><li>Service类型为TRAIN：<br>调用<a href="/document/product/851/75089">DescribeTrainingTask接口</a>查询训练任务详情，ServiceId为接口返回值中Response.TrainingTaskDetail.LatestInstanceId</li><li>Service类型为NOTEBOOK：<br>调用<a href="/document/product/851/95662">DescribeNotebook接口</a>查询Notebook详情，ServiceId为接口返回值中Response.NotebookDetail.PodName</li><li>Service类型为INFER：<br>调用<a href="/document/product/851/82285">DescribeModelServiceGroup接口</a>查询服务组详情，ServiceId为接口返回值中Response.ServiceGroup.Services.ServiceId</li><li>Service类型为BATCH：<br>调用<a href="/document/product/851/80180">DescribeBatchTask接口</a>查询跑批任务详情，ServiceId为接口返回值中Response.BatchTaskDetail.LatestInstanceId</li></ul>
    */
   ServiceId?: string
   /**
-   * Pod的名称，即需要查询服务对应的Pod，和Service参数对应，不同Service的PodName获取方式不同，具体如下：
-- Service类型为TRAIN：
-  调用[DescribeTrainingTaskPods接口](/document/product/851/75088)查询训练任务pod列表，PodName为接口返回值中Response.PodNames
-- Service类型为NOTEBOOK：
-  调用[DescribeNotebook接口](/document/product/851/95662)查询Notebook详情，PodName为接口返回值中Response.NotebookDetail.PodName
-- Service类型为INFER：
-  调用[DescribeModelService接口](/document/product/851/82287)查询单个服务详情，PodName为接口返回值中Response.Service.ServiceInfo.PodInfos
-- Service类型为BATCH：
-  调用[DescribeBatchTask接口](/document/product/851/80180)查询跑批任务详情，PodName为接口返回值中Response.BatchTaskDetail. PodList
-注：支持结尾通配符*
+   * <p>Pod的名称，即需要查询服务对应的Pod，和Service参数对应，不同Service的PodName获取方式不同，具体如下：</p><ul><li>Service类型为TRAIN：<br>调用<a href="/document/product/851/75088">DescribeTrainingTaskPods接口</a>查询训练任务pod列表，PodName为接口返回值中Response.PodNames</li><li>Service类型为NOTEBOOK：<br>调用<a href="/document/product/851/95662">DescribeNotebook接口</a>查询Notebook详情，PodName为接口返回值中Response.NotebookDetail.PodName</li><li>Service类型为INFER：<br>调用<a href="/document/product/851/82287">DescribeModelService接口</a>查询单个服务详情，PodName为接口返回值中Response.Service.ServiceInfo.PodInfos</li><li>Service类型为BATCH：<br>调用<a href="/document/product/851/80180">DescribeBatchTask接口</a>查询跑批任务详情，PodName为接口返回值中Response.BatchTaskDetail. PodList<br>注：支持结尾通配符*</li></ul>
    */
   PodName?: string
   /**
-   * 排序方向（可选值为ASC, DESC ），默认为DESC
+   * <p>排序方向（可选值为ASC, DESC ），默认为DESC</p>
    */
   Order?: string
   /**
-   * 按哪个字段排序（可选值为Timestamp），默认值为Timestamp
+   * <p>按哪个字段排序（可选值为Timestamp），默认值为Timestamp</p>
    */
   OrderField?: string
   /**
-   * 日志查询上下文，查询下一页的时候需要回传这个字段，该字段来自本接口的返回
+   * <p>日志查询上下文，查询下一页的时候需要回传这个字段，该字段来自本接口的返回</p>
    */
   Context?: string
   /**
-   * 过滤条件
-注意: 
-1. Filter.Name：目前只支持Key（也就是按关键字过滤日志）
-2. Filter.Values：表示过滤日志的关键字；Values为多个的时候表示同时满足
-3. Filter. Negative和Filter. Fuzzy没有使用
+   * <p>过滤条件<br>注意: </p><ol><li>Filter.Name：目前只支持Key（也就是按关键字过滤日志）</li><li>Filter.Values：表示过滤日志的关键字；Values为多个的时候表示同时满足</li><li>Filter. Negative和Filter. Fuzzy没有使用</li></ol>
    */
   Filters?: Array<Filter>
   /**
-   * 使用OFFSET分页查询时，指定返回的数据偏移量，默认为0
+   * <p>使用OFFSET分页查询时，指定返回的数据偏移量，默认为0</p>
    */
   Offset?: number
 }
@@ -930,6 +881,16 @@ export interface Service {
   AppId?: number
   /**
    * 服务的业务状态
+CREATING 创建中
+CREATE_FAILED 创建失败
+CREATE_SUCCEED 创建成功
+ARREARS_STOP 因欠费停止
+WHITELIST_STOP 白名单额度不足
+RELEASE_FAILED 资源释放失败
+WHITELIST_RELEASE_FAILED 白名单资源释放失败
+TIMEOUT_EXCEPTION 创建超时异常
+BILLING 计费中
+WHITELIST_USING 白名单试用中
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BusinessStatus?: string
@@ -952,8 +913,9 @@ export interface Service {
    * 服务状态
 CREATING 创建中
 CREATE_FAILED 创建失败
-Normal	正常运行中
-Stopped  已停止
+TIMEOUT_EXCEPTION 创建超时异常
+Normal 正常运行中
+Stopped 已停止
 Stopping 停止中
 Abnormal 异常
 Pending 启动中
@@ -4009,202 +3971,194 @@ export interface Tag {
  */
 export interface ServiceInfo {
   /**
-   * 期望运行的Pod数量，停止状态是0
-不同计费模式和调节模式下对应关系如下
-PREPAID 和 POSTPAID_BY_HOUR:
-手动调节模式下对应 实例数量
-自动调节模式下对应 基于时间的默认策略的实例数量
-HYBRID_PAID:
-后付费实例手动调节模式下对应 实例数量
-后付费实例自动调节模式下对应 时间策略的默认策略的实例数量
+   * <p>期望运行的Pod数量，停止状态是0<br>不同计费模式和调节模式下对应关系如下<br>PREPAID 和 POSTPAID_BY_HOUR:<br>手动调节模式下对应 实例数量<br>自动调节模式下对应 基于时间的默认策略的实例数量<br>HYBRID_PAID:<br>后付费实例手动调节模式下对应 实例数量<br>后付费实例自动调节模式下对应 时间策略的默认策略的实例数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Replicas: number
   /**
-   * 镜像信息
+   * <p>镜像信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageInfo: ImageInfo
   /**
-   * 环境变量
+   * <p>环境变量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Env: Array<EnvVar>
   /**
-   * 资源信息
+   * <p>资源信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Resources: ResourceInfo
   /**
-   * 后付费实例对应的机型规格
+   * <p>后付费实例对应的机型规格</p>
    */
   InstanceType: string
   /**
-   * 模型信息
+   * <p>模型信息</p>
    */
   ModelInfo: ModelInfo
   /**
-   * 是否启用日志
+   * <p>是否启用日志</p>
    */
   LogEnable: boolean
   /**
-   * 日志配置
+   * <p>日志配置</p>
    */
   LogConfig: LogConfig
   /**
-   * 是否开启鉴权
+   * <p>是否开启鉴权</p>
    */
   AuthorizationEnable: boolean
   /**
-   * hpa配置
+   * <p>hpa配置</p>
    */
   HorizontalPodAutoscaler: HorizontalPodAutoscaler
   /**
-   * 服务的状态描述
+   * <p>服务的状态描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status: WorkloadStatus
   /**
-   * 权重
+   * <p>权重</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Weight: number
   /**
-   * 资源总量
+   * <p>资源总量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceTotal: ResourceInfo
   /**
-   * 历史实例数
+   * <p>历史实例数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OldReplicas: number
   /**
-   * 计费模式[HYBRID_PAID]时生效, 用于标识混合计费模式下的预付费实例数, 若不填则默认为1
+   * <p>计费模式[HYBRID_PAID]时生效, 用于标识混合计费模式下的预付费实例数, 若不填则默认为1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HybridBillingPrepaidReplicas: number
   /**
-   * 历史 HYBRID_PAID 时的实例数，用户恢复服务
+   * <p>历史 HYBRID_PAID 时的实例数，用户恢复服务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OldHybridBillingPrepaidReplicas: number
   /**
-   * 是否开启模型的热更新。默认不开启
+   * <p>是否开启模型的热更新。默认不开启</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelHotUpdateEnable: boolean
   /**
-   * 服务的规格别名
+   * <p>服务的规格别名</p>
    */
   InstanceAlias?: string
   /**
-   * 实例数量调节方式,默认为手动
-支持：自动 - "AUTO", 手动 - "MANUAL"
+   * <p>实例数量调节方式,默认为手动<br>支持：自动 - &quot;AUTO&quot;, 手动 - &quot;MANUAL&quot;</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScaleMode?: string
   /**
-   * 定时伸缩任务
+   * <p>定时伸缩任务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CronScaleJobs?: Array<CronScaleJob>
   /**
-   * 定时伸缩策略
+   * <p>定时伸缩策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScaleStrategy?: string
   /**
-   * 定时停止的配置
+   * <p>定时停止的配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduledAction?: ScheduledAction
   /**
-   * 实例列表
+   * <p>实例列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   PodList?: Array<string>
   /**
-   * Pod列表信息
+   * <p>Pod列表信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   Pods?: Pod
   /**
-   * Pod列表信息
+   * <p>Pod列表信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PodInfos?: Array<Pod>
   /**
-   * 服务限速限流相关配置
+   * <p>服务限速限流相关配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceLimit?: ServiceLimit
   /**
-   * 是否开启模型的加速, 仅对StableDiffusion(动态加速)格式的模型有效。
+   * <p>是否开启模型的加速, 仅对StableDiffusion(动态加速)格式的模型有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelTurboEnable?: boolean
   /**
-   * 挂载
+   * <p>挂载</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeMount?: VolumeMount
   /**
-   * 推理代码信息
+   * <p>推理代码信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InferCodeInfo?: InferCodeInfo
   /**
-   * 服务的启动命令
+   * <p>服务的启动命令</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Command?: string
   /**
-   * 开启TIONE内网访问外部设置
+   * <p>开启TIONE内网访问外部设置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceEIP?: ServiceEIP
   /**
-   * 服务端口，默认为8501
+   * <p>服务端口，默认为8501</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServicePort?: number
   /**
-   * 服务的优雅退出时限。单位为秒，默认值为30，最小为1
+   * <p>服务的优雅退出时限。单位为秒，默认值为30，最小为1</p>
    */
   TerminationGracePeriodSeconds?: number
   /**
-   * 服务实例停止前执行的命令，执行完毕或执行时间超过优雅退出时限后实例结束
+   * <p>服务实例停止前执行的命令，执行完毕或执行时间超过优雅退出时限后实例结束</p>
    */
   PreStopCommand?: Array<string>
   /**
-   * 是否启用grpc端口
+   * <p>是否启用grpc端口</p>
    */
   GrpcEnable?: boolean
   /**
-   * 健康探针
+   * <p>健康探针</p>
    */
   HealthProbe?: HealthProbe
   /**
-   * 滚动更新配置
+   * <p>滚动更新配置</p>
    */
   RollingUpdate?: RollingUpdate
   /**
-   * 单副本下的实例数，仅在部署类型为DIST、ROLE时生效，默认1
+   * <p>单副本下的实例数，仅在部署类型为DIST、ROLE时生效，默认1</p>
    */
   InstancePerReplicas?: number
   /**
-   * 批量数据盘挂载配置
+   * <p>批量数据盘挂载配置</p>
    */
   VolumeMounts?: Array<VolumeMount>
   /**
-   * 调度策略 [binpack] 优先占满整机，尽量避免碎卡（默认值）[spread] 优先分散在各个节点，确保服务高可用
+   * <p>调度策略 [binpack] 优先占满整机，尽量避免碎卡（默认值）[spread] 优先分散在各个节点，确保服务高可用</p>
    */
   SchedulingStrategy?: string
   /**
-   * 服务实际运行的节点数
+   * <p>服务实际运行的节点数</p>
    */
   NodeCount?: number
 }
@@ -5682,61 +5636,60 @@ export interface DeleteModelServiceAuthTokenResponse {
  */
 export interface ModelInfo {
   /**
-   * 模型版本id, DescribeTrainingModelVersion查询模型接口时的id
-自动学习类型的模型填写自动学习的任务id
+   * <p>模型版本id, DescribeTrainingModelVersion查询模型接口时的id<br>自动学习类型的模型填写自动学习的任务id</p>
    */
   ModelVersionId: string
   /**
-   * 模型id
+   * <p>模型id</p>
    */
   ModelId?: string
   /**
-   * 模型名
+   * <p>模型名</p>
    */
   ModelName?: string
   /**
-   * 模型版本
+   * <p>模型版本</p>
    */
   ModelVersion?: string
   /**
-   * 模型来源
+   * <p>模型来源</p>
    */
   ModelSource?: string
   /**
-   * cos路径信息
+   * <p>cos路径信息</p>
    */
   CosPathInfo?: CosPathInfo
   /**
-   * GooseFSx的配置，ModelSource为GooseFSx时有效
+   * <p>GooseFSx的配置，ModelSource为GooseFSx时有效</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GooseFSx?: GooseFSx
   /**
-   * 模型对应的算法框架，预留
+   * <p>模型对应的算法框架，预留</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlgorithmFramework?: string
   /**
-   * 默认为 NORMAL, 已加速模型: ACCELERATE, 自动学习模型 AUTO_ML
+   * <p>默认为 NORMAL, 已加速模型: ACCELERATE, 自动学习模型 AUTO_ML</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelType?: string
   /**
-   * 模型格式
+   * <p>模型格式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelFormat?: string
   /**
-   * 是否为私有化大模型
+   * <p>是否为私有化大模型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsPrivateModel?: boolean
   /**
-   * 模型的类别 多模态MultiModal, 文本大模型 LLM
+   * <p>模型的类别 多模态MultiModal, 文本大模型 LLM</p>
    */
   ModelCategory?: string
   /**
-   * 数据源的配置
+   * <p>数据源的配置</p>
    */
   PublicDataSource?: PublicDataSourceFS
 }
@@ -5770,20 +5723,20 @@ export interface DescribeDataSourceResponse {
  */
 export interface VolumeMount {
   /**
-   * cfs的配置信息
+   * <p>cfs的配置信息</p>
    */
   CFSConfig?: CFSConfig
   /**
-   * 挂载源类型，CFS、COS、PUBLIC_DATA_SOURCE，默认为CFS
+   * <p>挂载源类型，CFS、COS、PUBLIC_DATA_SOURCE，默认为CFS</p>
    */
   VolumeSourceType?: string
   /**
-   * 自定义容器内挂载路径
+   * <p>自定义容器内挂载路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MountPath?: string
   /**
-   * 挂载数据源时的配置信息
+   * <p>挂载数据源时的配置信息</p>
    */
   PublicDataSource?: PublicDataSourceFS
 }
@@ -5793,7 +5746,7 @@ export interface VolumeMount {
  */
 export interface CreateModelServiceResponse {
   /**
-   * 生成的模型服务
+   * <p>生成的模型服务</p>
    */
   Service?: Service
   /**
@@ -5817,136 +5770,119 @@ export interface DeleteExportRequest {
  */
 export interface ServiceGroup {
   /**
-   * 服务组id
+   * <p>服务组id</p>
    */
   ServiceGroupId?: string
   /**
-   * 服务组名
+   * <p>服务组名</p>
    */
   ServiceGroupName?: string
   /**
-   * 创建者
+   * <p>创建者</p>
    */
   CreatedBy?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 主账号
+   * <p>主账号</p>
    */
   Uin?: string
   /**
-   * 服务组下服务总数
+   * <p>服务组下服务总数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceCount?: number
   /**
-   * 服务组下在运行的服务数量
+   * <p>服务组下在运行的服务数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningServiceCount?: number
   /**
-   * 服务描述
+   * <p>服务描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Services?: Array<Service>
   /**
-   * 服务组状态，与服务一致
- CREATING 创建中
-     CREATE_FAILED 创建失败
-     Normal	正常运行中
-     Stopped  已停止
-     Stopping 停止中
-     Abnormal 异常
-     Pending 启动中
-     Waiting 就绪中
+   * <p>服务组状态，与服务一致<br> CREATING 创建中<br>     CREATE_FAILED 创建失败<br>     Normal    正常运行中<br>     Stopped  已停止<br>     Stopping 停止中<br>     Abnormal 异常<br>     Pending 启动中<br>     Waiting 就绪中</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
-   * 服务组标签
+   * <p>服务组标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
-   * 服务组下最高版本
+   * <p>服务组下最高版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestVersion?: string
   /**
-   * 服务的业务状态
-CREATING 创建中
-     CREATE_FAILED 创建失败
-     ARREARS_STOP 因欠费被强制停止
-     BILLING 计费中
-     WHITELIST_USING 白名单试用中
-     WHITELIST_STOP 白名单额度不足
+   * <p>服务的业务状态<br>CREATING 创建中<br>     CREATE_FAILED 创建失败<br>     ARREARS_STOP 因欠费被强制停止<br>     BILLING 计费中<br>     WHITELIST_USING 白名单试用中<br>     WHITELIST_STOP 白名单额度不足</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BusinessStatus?: string
   /**
-   * 服务的计费信息
+   * <p>服务的计费信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingInfo?: string
   /**
-   * 服务的创建来源
+   * <p>服务的创建来源</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateSource?: string
   /**
-   * 服务组的权重更新状态 
-UPDATING 更新中
-     UPDATED 更新成功
-     UPDATE_FAILED 更新失败
+   * <p>服务组的权重更新状态<br>UPDATING 更新中<br>     UPDATED 更新成功<br>     UPDATE_FAILED 更新失败</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WeightUpdateStatus?: string
   /**
-   * 服务组下运行的pod数量
+   * <p>服务组下运行的pod数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReplicasCount?: number
   /**
-   * 服务组下期望的pod数
+   * <p>服务组下期望的pod数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AvailableReplicasCount?: number
   /**
-   * 服务组的subuin
+   * <p>服务组的subuin</p>
    */
   SubUin?: string
   /**
-   * 服务组的app_id
+   * <p>服务组的app_id</p>
    */
   AppId?: number
   /**
-   * 是否开启鉴权
+   * <p>是否开启鉴权</p>
    */
   AuthorizationEnable?: boolean
   /**
-   * 限流鉴权 token 列表
+   * <p>限流鉴权 token 列表</p>
    */
   AuthTokens?: Array<AuthToken>
   /**
-   * 用于监控的创建来源字段
+   * <p>用于监控的创建来源字段</p>
    */
   MonitorSource?: string
   /**
-   * 子用户的 nickname
+   * <p>子用户的 nickname</p>
    */
   SubUinName?: string
   /**
-   * 网关日志投递相关配置
+   * <p>网关日志投递相关配置</p>
    */
   GatewayLogConfig?: LogConfig
   /**
-   * 网关路由相关配置
+   * <p>网关路由相关配置</p>
    */
   GatewayConfig?: GatewayConfig
 }
@@ -6754,12 +6690,12 @@ export interface ResourceSpec {
  */
 export interface DescribeLogsResponse {
   /**
-   * 分页的游标
+   * <p>分页的游标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Context?: string
   /**
-   * 日志数组
+   * <p>日志数组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Content?: Array<LogIdentity>

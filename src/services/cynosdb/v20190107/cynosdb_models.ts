@@ -8043,6 +8043,10 @@ export interface AuditLog {
    * 事务ID
    */
   TrxId?: number
+  /**
+   * 客户端端口
+   */
+  ClientPort?: number
 }
 
 /**

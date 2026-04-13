@@ -398,9 +398,9 @@ it("tcb.v20180608.DeleteProvider", async function () {
     }
 })
 
-it("tcb.v20180608.ModifyLoginConfig", async function () {
+it("tcb.v20180608.ExecutePGSql", async function () {
     try {
-       const data = await client.ModifyLoginConfig({})
+       const data = await client.ExecutePGSql({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -571,6 +571,16 @@ it("tcb.v20180608.DescribeEnvs", async function () {
 it("tcb.v20180608.DestroyMySQL", async function () {
     try {
        const data = await client.DestroyMySQL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.ModifyLoginConfig", async function () {
+    try {
+       const data = await client.ModifyLoginConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -69,15 +69,15 @@ export interface AigcVideoOutputConfig {
    */
   ExpireTime?: string
   /**
-   * <p>生成视频的时长，单位：秒。<li>当 ModelName 是 Kling，可选值为 5、10，默认为 5；</li><li>当 ModelName 是 Hailuo，可选值为 6、10，默认为 6；</li><li>当 ModelName 是 Vidu，可指定1-10；</li><li>当 ModelName 是 GV，可选值为 8，默认为 8；</li><li>当 ModelName 是 OS，可选值为 4、8、12，默认为 8；</li></p>
+   * <p>生成视频的时长，单位：秒。</p><li>当 ModelName 是 Kling，可选值为 5、10，默认为 5；</li><li>当 ModelName 是 Hailuo，可选值为 6、10，默认为 6；</li><li>当 ModelName 是 Vidu，可指定1-10；</li><li>当 ModelName 是 GV，可选值为 8，默认为 8；</li><li>当 ModelName 是 OS，可选值为 4、8、12，默认为 8；</li><li>当 ModelName 是 PixVerse，可指定1-15，默认为5；</li>
    */
   Duration?: number
   /**
-   * <p>生成视频的分辨率。</p><li>当 ModelName 是 Kling，可选值为 720P、1080P，默认为 720P；</li><li>当 ModelName 是 Hailuo，可选值为 768P、1080P，默认为 768P；</li><li>当 ModelName 是 Vidu，可选值为 720P、1080P，默认为 720P；</li><li>当 ModelName 是 GV，可选值为 720P、1080P，默认为 720P；</li><li>当 ModelName 是 OS，可选值为 720P；</li>
+   * <p>生成视频的分辨率。</p><li>当 ModelName 是 Kling，可选值为 720P、1080P，默认为 720P；</li><li>当 ModelName 是 Hailuo，可选值为 768P、1080P，默认为 768P；</li><li>当 ModelName 是 Vidu，可选值为 720P、1080P，默认为 720P；</li><li>当 ModelName 是 GV，可选值为 720P、1080P，默认为 720P；</li><li>当 ModelName 是 OS，可选值为 720P；</li><li>当 ModelName 是 PixVerse，可选值为 540p、720p、1080p、2k、4k，默认为720p；</li>
    */
   Resolution?: string
   /**
-   * <p>指定所生成视频的宽高比。</p><li>当 ModelName 是 Kling，当文生视频时，则可选值为 16:9、9:16、 1:1，默认为16:9；</li><li>当 ModelName 是 Vidu，当文生视频时和使用参考图片生成时，则可选值为 16:9、9:16、4:3、3:4、1:1，其中仅版本q2支持4:3、3:4</li><li>当 ModelName 是 GV，则可选值为 16:9、9:16，默认为 16:9；</li><li>当 ModelName 是 OS，当文生视频时，则可选值为 16:9、9:16，默认为 16:9；</li><li>当 ModelName 是 Hailuo，则暂不支持。</li>
+   * <p>指定所生成视频的宽高比。</p><li>当 ModelName 是 Kling，当文生视频时，则可选值为 16:9、9:16、 1:1，默认为16:9；</li><li>当 ModelName 是 Vidu，当文生视频时和使用参考图片生成时，则可选值为 16:9、9:16、4:3、3:4、1:1，其中仅版本q2支持4:3、3:4</li><li>当 ModelName 是 GV，则可选值为 16:9、9:16，默认为 16:9；</li><li>当 ModelName 是 OS，当文生视频时，则可选值为 16:9、9:16，默认为 16:9；</li><li>当 ModelName 是 Hailuo，则暂不支持;</li><li>当 ModelName 是PixVerse，则可选值为 16:9，4:3，1:1，3:4，9:16，2:3，3:2，21:9;</li>
    */
   AspectRatio?: string
   /**
@@ -10566,11 +10566,11 @@ export interface CreateAigcVideoTaskRequest {
    */
   SubAppId: number
   /**
-   * <p>模型名称。取值：<br>Kling：可灵；<br>Vidu；<br>Hailuo：海螺；<br>Jimeng：即梦；<br>Hunyuan：混元；<br>Mingmou：明眸；<br>GV；<br>OS；</p>
+   * <p>模型名称。取值：<br>Kling：可灵；<br>Vidu；<br>Hailuo：海螺；<br>Jimeng：即梦；<br>Hunyuan：混元；<br>Mingmou：明眸；<br>GV；<br>OS；<br>PixVerse;</p>
    */
   ModelName: string
   /**
-   * <p>模型版本。取值：<br>当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；<br>当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、2.6、O1、3.0、3.0-Omni；<br>当 ModelName 是 Jimeng，可选值为 3.0pro；<br>当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo、q3、q3-pro、q3-turbo；<br>当 ModelName 是 GV，可选值为 3.1、3.1-fast；<br>当 ModelName 是 OS，可选值为 2.0；<br>当 ModelName 是 Hunyuan，可选值为 1.5；<br>当 ModelName 是 Mingmou，可选值为 1.0；</p>
+   * <p>模型版本。取值：<br>当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；<br>当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、2.6、O1、3.0、3.0-Omni；<br>当 ModelName 是 Jimeng，可选值为 3.0pro；<br>当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo、q3、q3-pro、q3-turbo；<br>当 ModelName 是 GV，可选值为 3.1、3.1-fast；<br>当 ModelName 是 OS，可选值为 2.0；<br>当 ModelName 是 Hunyuan，可选值为 1.5；<br>当 ModelName 是 Mingmou，可选值为 1.0；<br>当 ModelName 是 PixVerse，可选值为 v5.6、v6、c1；</p>
    */
   ModelVersion: string
   /**
@@ -10613,6 +10613,10 @@ export interface CreateAigcVideoTaskRequest {
    * <p>场景类型。取值如下：</p><li>当 ModelName 为 Kling 时：    motion_control 表示动作控制；    avatar_i2v 表示数字人；    lip_sync 表示对口型；</li><li>当 ModelName 为 Vidu 时：    template_effect 表示特效模板；</li><li>其他 ModelName 暂不支持。</li>
    */
   SceneType?: string
+  /**
+   * <p>模型随机种子。</p>
+   */
+  Seed?: number
   /**
    * <p>用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
    */
@@ -19102,37 +19106,41 @@ export interface MediaInfo {
  */
 export interface AigcImageTaskInput {
   /**
-   * 模型名称。
+   * <p>模型名称。</p>
    */
   ModelName?: string
   /**
-   * 模型版本。
+   * <p>模型版本。</p>
    */
   ModelVersion?: string
   /**
-   * AIGC生图任务输入文件信息。
+   * <p>AIGC生图任务输入文件信息。</p>
    */
   FileInfos?: Array<AigcImageTaskInputFileInfo>
   /**
-   * 生成图片的提示词。最大支持1000字符，当 FileInfos 为空时，此参数必填。
+   * <p>生成图片的提示词。最大支持1000字符，当 FileInfos 为空时，此参数必填。</p>
    */
   Prompt?: string
   /**
-   * 要阻止模型生成图片的提示词。最大支持1000字符。
+   * <p>要阻止模型生成图片的提示词。最大支持1000字符。</p>
    */
   NegativePrompt?: string
   /**
-   * 是否自动优化提示词。开启时将自动优化传入的Prompt，以提升生成质量。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li>
+   * <p>是否自动优化提示词。开启时将自动优化传入的Prompt，以提升生成质量。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li></p>
    */
   EnhancePrompt?: string
   /**
-   * 生成模式。取值有： <li>Standard：标准模式；</li> <li>Professional：高品质模式；</li>
+   * <p>生成模式。取值有： <li>Standard：标准模式；</li> <li>Professional：高品质模式；</li></p>
    */
   GenerationMode?: string
   /**
-   * AIGC 生图输出结果文件输出。
+   * <p>AIGC 生图输出结果文件输出。</p>
    */
   OutputConfig?: AigcImageOutputConfig
+  /**
+   * <p>模型随机种子。</p>
+   */
+  Seed?: number
 }
 
 /**
@@ -21862,6 +21870,10 @@ export interface CreateAigcImageTaskRequest {
    * <p>输入的区域信息。可选值：</p><ul><li>Mainland：中国大陆；</li><li>Oversea：海外；</li><li>OverseaUSWest：海外-美西；</li></ul>
    */
   InputRegion?: string
+  /**
+   * <p>模型随机种子。</p>
+   */
+  Seed?: number
   /**
    * <p>用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
    */
@@ -24914,6 +24926,10 @@ export interface AigcVideoTaskInput {
    * <p>场景类型。取值如下：<li>当 ModelName 为 Kling 时，取值 motion_control 表示动作控制；</li><li>其他 ModelName 暂不支持。</li></p>
    */
   SceneType?: string
+  /**
+   * <p>模型随机种子。</p>
+   */
+  Seed?: number
 }
 
 /**

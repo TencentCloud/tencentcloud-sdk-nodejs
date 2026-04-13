@@ -1697,6 +1697,24 @@ export interface RunCommandsResponse {
 }
 
 /**
+ * ExecutePGSql请求参数结构体
+ */
+export interface ExecutePGSqlRequest {
+  /**
+   * <p>云开发环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>要执行的SQL语句</p>
+   */
+  Sql: string
+  /**
+   * <p>指定 role 执行 SQL</p>
+   */
+  Role?: string
+}
+
+/**
  * 静态托管资源信息
  */
 export interface StaticStoreInfo {
@@ -1767,6 +1785,34 @@ export interface RunSqlResponse {
    * 受影响的行数（INSERT/UPDATE/DELETE 等语句）
    */
   RowsAffected?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ExecutePGSql返回参数结构体
+ */
+export interface ExecutePGSqlResponse {
+  /**
+   * <p>影响行数</p>
+   */
+  AffectedRows?: number
+  /**
+   * <p>字段名列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Columns?: Array<string>
+  /**
+   * <p>数据行。每一行数据都是一个JSON串，将JSON进行反序列化将得到了每列的值。值可能是 null 或者 字符串，如果是 null 说明该列的值为 &lt;null&gt;，如果是字符串则为该列的值的字符串表示形式。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rows?: Array<string>
+  /**
+   * <p>SQL执行耗时</p><p>单位：毫秒</p>
+   */
+  ExecutionTimeMs?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
