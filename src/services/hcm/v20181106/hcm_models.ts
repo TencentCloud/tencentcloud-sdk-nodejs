@@ -145,19 +145,19 @@ export interface EvaluationResponse {
  */
 export interface ItemCoord {
   /**
-   * 算式高度
+   * <p>算式高度（单位：px）</p>
    */
   Height: number
   /**
-   * 算式宽度
+   * <p>算式宽度（单位：px）</p>
    */
   Width: number
   /**
-   * 算式图的左上角横坐标
+   * <p>算式图的左上角横坐标</p>
    */
   X: number
   /**
-   * 算式图的左上角纵坐标
+   * <p>算式图的左上角纵坐标</p>
    */
   Y: number
 }

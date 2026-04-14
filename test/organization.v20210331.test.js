@@ -838,9 +838,9 @@ it("organization.v20210331.DeleteSCIMCredential", async function () {
     }
 })
 
-it("organization.v20210331.UpdateUserSyncProvisioning", async function () {
+it("organization.v20210331.UpdateIPWhitelist", async function () {
     try {
-       const data = await client.UpdateUserSyncProvisioning({})
+       const data = await client.UpdateIPWhitelist({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1141,6 +1141,16 @@ it("organization.v20210331.UpdateRoleConfiguration", async function () {
 it("organization.v20210331.ListRoleConfigurations", async function () {
     try {
        const data = await client.ListRoleConfigurations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.UpdateUserSyncProvisioning", async function () {
+    try {
+       const data = await client.UpdateUserSyncProvisioning({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

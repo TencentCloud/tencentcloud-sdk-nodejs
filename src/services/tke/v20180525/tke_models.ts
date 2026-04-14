@@ -215,11 +215,11 @@ export interface DeleteExternalNodePoolRequest {
    */
   ClusterId: string
   /**
-   * 第三方节点池ID列表
+   * 注册节点池ID列表
    */
   NodePoolIds: Array<string>
   /**
-   * 是否强制删除，在第三方节点上有pod的情况下，如果选择非强制删除，则删除会失败
+   * 是否强制删除，在注册节点上有pod的情况下，如果选择非强制删除，则删除会失败
    */
   Force?: boolean
 }
@@ -341,10 +341,12 @@ export interface Step {
   Name?: string
   /**
    * 开始时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
   StartAt?: string
   /**
    * 结束时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
   EndAt?: string
   /**
@@ -355,6 +357,10 @@ export interface Step {
    * 执行信息
    */
   Message?: string
+  /**
+   * 错误详情
+   */
+  Detail?: string
 }
 
 /**
@@ -1152,41 +1158,45 @@ export interface DescribePrometheusAgentInstancesRequest {
  */
 export interface ModifyClusterAttributeRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/457/31862">DescribeClusters</a></p>
    */
   ClusterId: string
   /**
-   * 集群所属项目
+   * <p>集群所属项目</p>
    */
   ProjectId?: number
   /**
-   * 集群名称,字符长度50
+   * <p>集群名称,字符长度50</p>
    */
   ClusterName?: string
   /**
-   * 集群描述
+   * <p>集群描述</p>
    */
   ClusterDesc?: string
   /**
-   * 集群等级，等级类型：L20、L50、L100、L200、L500、L1000、L3000、L5000
+   * <p>集群等级，等级类型：L20、L50、L100、L200、L500、L1000、L3000、L5000</p>
    */
   ClusterLevel?: string
   /**
-   * 自动变配集群等级
+   * <p>自动变配集群等级</p>
    */
   AutoUpgradeClusterLevel?: AutoUpgradeClusterLevel
   /**
-   * 是否开启QGPU共享
+   * <p>是否开启QGPU共享</p>
    */
   QGPUShareEnable?: boolean
   /**
-   * 集群属性
+   * <p>集群属性</p>
    */
   ClusterProperty?: ClusterProperty
   /**
-   * 集群是否启用高可用模式。用于指导跨可用区资源打散等高可用策略的执行
+   * <p>集群是否启用高可用模式。用于指导跨可用区资源打散等高可用策略的执行</p>
    */
   IsHighAvailability?: boolean
+  /**
+   * <p>集群安全模式配置</p>
+   */
+  SecurityModeConfig?: SecurityModeConfig
 }
 
 /**
@@ -1300,13 +1310,17 @@ major 大版本原地升级
    */
   SkipPreCheck?: boolean
   /**
-   * 最大可容忍的不可用Pod比例
+   * 最大可容忍的不可用Pod比例，如果设置 0 表示不做校验
    */
   MaxNotReadyPercent?: number
   /**
    * 是否升级节点运行时，默认false不升级
    */
   UpgradeRunTime?: boolean
+  /**
+   * 支持多个节点并行升级，默认值为 1，最大并行数为15
+   */
+  Concurrent?: number
 }
 
 /**
@@ -1713,15 +1727,15 @@ export interface CreateExternalNodePoolRequest {
    */
   RuntimeVersion: string
   /**
-   * 第三方节点label
+   * 注册节点标签
    */
   Labels?: Array<Label>
   /**
-   * 第三方节点taint
+   * 注册节点污点
    */
   Taints?: Array<Taint>
   /**
-   * 第三方节点高级设置
+   * 注册节点高级设置
    */
   InstanceAdvancedSettings?: InstanceAdvancedSettings
   /**
@@ -1729,7 +1743,7 @@ export interface CreateExternalNodePoolRequest {
    */
   DeletionProtection?: boolean
   /**
-   * 节点类型
+   * 节点类型，支持 CPU、GPU
    */
   NodeType?: string
 }
@@ -2400,11 +2414,11 @@ export interface DescribeEdgeAvailableExtraArgsResponse {
 }
 
 /**
- * 开启第三方节点池支持配置信息
+ * 开启注册节点池支持配置信息
  */
 export interface ClusterExternalConfig {
   /**
-   * 集群网络插件类型，支持：Flannel、CiliumBGP、CiliumVXLan
+   * 容器网络类型，支持：HostNetwork、CiliumBGP
    */
   NetworkType: string
   /**
@@ -2412,12 +2426,12 @@ export interface ClusterExternalConfig {
    */
   SubnetId: string
   /**
-   * Pod CIDR
+   * 集群CIDR，网络模式HostNetwork 时无需填写
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterCIDR?: string
   /**
-   * 是否开启第三方节点池支持
+   * 【已废弃】是否开启专线连接能力
    */
   Enabled?: boolean
 }
@@ -3033,7 +3047,7 @@ export interface DescribePrometheusTemplateSyncRequest {
  */
 export interface DescribeExternalNodeSupportConfigRequest {
   /**
-   * 集群Id
+   * 集群Id，可通过查看集群的基本信息->基础信息页获取
    */
   ClusterId: string
 }
@@ -3249,6 +3263,14 @@ export interface AddExistedInstancesRequest {
    * 直接添加为原生节点
    */
   NodeType?: string
+  /**
+   * 云标签列表
+   */
+  Tags?: Array<Tag>
+  /**
+   * 自动续费标识，NOTIFY_AND_AUTO_RENEW（通知过期且自动续费）、NOTIFY_AND_MANUAL_RENEW（通知过期不自动续费）
+   */
+  RenewFlag?: string
 }
 
 /**
@@ -3634,45 +3656,45 @@ export interface DescribeClusterAsGroupOptionResponse {
 }
 
 /**
- * 第三方节点
+ * 注册节点
  */
 export interface ExternalNode {
   /**
-   * 第三方节点名称
+   * <p>注册节点名称</p>
    */
-  Name: string
+  Name?: string
   /**
-   * 第三方节点所属节点池
+   * <p>注册节点所属节点池</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodePoolId: string
+  NodePoolId?: string
   /**
-   * 第三方IP地址
+   * <p>注册节点IP地址</p>
    */
-  IP: string
+  IP?: string
   /**
-   * 第三方地域
+   * <p>注册节点地域</p>
    */
-  Location: string
+  Location?: string
   /**
-   * 第三方节点状态
+   * <p>注册节点状态</p><p>枚举值：</p><ul><li>Running： 运行中</li><li>Failed： 异常状态</li><li>Terminating： 删除中</li><li>Draining： 驱逐中</li></ul>
    */
-  Status: string
+  Status?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
-   * 异常原因
+   * <p>异常原因</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Reason: string
+  Reason?: string
   /**
-   * 是否封锁。true表示已封锁，false表示未封锁
+   * <p>是否封锁。true表示已封锁，false表示未封锁</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Unschedulable: boolean
+  Unschedulable?: boolean
 }
 
 /**
@@ -4305,12 +4327,12 @@ export interface DescribeExternalNodeResponse {
    * 节点列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Nodes: Array<ExternalNode>
+  Nodes?: Array<ExternalNode>
   /**
    * 节点总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4971,37 +4993,41 @@ export interface DescribeExternalNodeScriptResponse {
  */
 export interface ModifyClusterAttributeResponse {
   /**
-   * 集群所属项目
+   * <p>集群所属项目</p>
    */
   ProjectId?: number
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName?: string
   /**
-   * 集群描述
+   * <p>集群描述</p>
    */
   ClusterDesc?: string
   /**
-   * 集群等级
+   * <p>集群等级</p>
    */
   ClusterLevel?: string
   /**
-   * 自动变配集群等级
+   * <p>自动变配集群等级</p>
    */
   AutoUpgradeClusterLevel?: AutoUpgradeClusterLevel
   /**
-   * 是否开启QGPU共享
+   * <p>是否开启QGPU共享</p>
    */
   QGPUShareEnable?: boolean
   /**
-   * 集群属性
+   * <p>集群属性</p>
    */
   ClusterProperty?: ClusterProperty
   /**
-   * 集群是否启用高可用模式。用于指导跨可用区资源打散等高可用策略的执行
+   * <p>集群是否启用高可用模式。用于指导跨可用区资源打散等高可用策略的执行</p>
    */
   IsHighAvailability?: boolean
+  /**
+   * <p>集群安全模式配置</p>
+   */
+  SecurityModeConfig?: SecurityModeConfig
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5881,11 +5907,11 @@ export interface ModifyExternalNodePoolRequest {
    */
   Name?: string
   /**
-   * 第三方节点label
+   * 注册节点标签
    */
   Labels?: Array<Label>
   /**
-   * 第三方节点taint
+   * 注册节点污点
    */
   Taints?: Array<Taint>
   /**
@@ -6416,7 +6442,7 @@ export interface DescribeExternalNodeSupportConfigResponse {
    */
   ClusterCIDR?: string
   /**
-   * 集群网络插件类型，支持：CiliumBGP、CiliumVXLan
+   * 集群网络插件类型，支持：CiliumOverlay、HostNetwork
    */
   NetworkType?: string
   /**
@@ -6424,7 +6450,7 @@ export interface DescribeExternalNodeSupportConfigResponse {
    */
   SubnetId?: string
   /**
-   * 是否开启第三方节点专线连接支持
+   * 是否开启注册节点专线连接支持
    */
   Enabled?: boolean
   /**
@@ -6436,7 +6462,7 @@ export interface DescribeExternalNodeSupportConfigResponse {
    */
   SwitchIP?: string
   /**
-   * 开启第三方节点池状态
+   * 开启注册节点池状态，支持 Initializing、InitFailed、Enabled、Disabled
    */
   Status?: string
   /**
@@ -6452,12 +6478,12 @@ export interface DescribeExternalNodeSupportConfigResponse {
    */
   Proxy?: string
   /**
-   * 用于记录开启第三方节点的过程进行到哪一步了
+   * 开启注册节点能力的进度
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Progress?: Array<Step>
   /**
-   * 是否开启第三方节点公网连接支持
+   * 是否开启注册节点公网连接支持
    */
   EnabledPublicConnect?: boolean
   /**
@@ -6556,7 +6582,7 @@ export interface EnableExternalNodeSupportRequest {
    */
   ClusterId: string
   /**
-   * 开启第三方节点池支持配置信息
+   * 开启注册节点池支持配置信息
    */
   ClusterExternalConfig: ClusterExternalConfig
 }
@@ -7609,7 +7635,7 @@ export interface DescribeExternalNodeScriptRequest {
    */
   ClusterId: string
   /**
-   * 节点池ID
+   * 注册节点池ID
    */
   NodePoolId: string
   /**
@@ -8865,110 +8891,114 @@ export interface CreateRollOutSequenceRequest {
  */
 export interface Cluster {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName?: string
   /**
-   * 集群描述
+   * <p>集群描述</p>
    */
   ClusterDescription?: string
   /**
-   * 集群版本（默认值为1.10.5）
+   * <p>集群版本（默认值为1.10.5）</p>
    */
   ClusterVersion?: string
   /**
-   * 集群系统。centos7.2x86_64 或者 ubuntu16.04.1 LTSx86_64，默认取值为ubuntu16.04.1 LTSx86_64
+   * <p>集群系统。centos7.2x86_64 或者 ubuntu16.04.1 LTSx86_64，默认取值为ubuntu16.04.1 LTSx86_64</p>
    */
   ClusterOs?: string
   /**
-   * 集群类型，托管集群：MANAGED_CLUSTER，独立集群：INDEPENDENT_CLUSTER。
+   * <p>集群类型，托管集群：MANAGED_CLUSTER，独立集群：INDEPENDENT_CLUSTER。</p>
    */
   ClusterType?: string
   /**
-   * 集群网络相关参数
+   * <p>集群网络相关参数</p>
    */
   ClusterNetworkSettings?: ClusterNetworkSettings
   /**
-   * 集群当前node数量
+   * <p>集群当前node数量</p>
    */
   ClusterNodeNum?: number
   /**
-   * 集群所属的项目ID
+   * <p>集群所属的项目ID</p>
    */
   ProjectId?: number
   /**
-   * 标签描述列表。
+   * <p>标签描述列表。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagSpecification?: Array<TagSpecification>
   /**
-   * 集群状态 (Trading 集群开通中,Creating 创建中,Running 运行中,Deleting 删除中,Idling 闲置中,Recovering 唤醒中,Scaling 规模调整中,Upgrading 升级中,WaittingForConnect 等待注册,Trading 集群开通中,Isolated 欠费隔离中,Pause 集群升级暂停,NodeUpgrading 节点升级中,RuntimeUpgrading 节点运行时升级中,MasterScaling Master扩缩容中,ClusterLevelUpgrading 调整规格中,ResourceIsolate 隔离中,ResourceIsolated 已隔离,ResourceReverse 冲正中,Abnormal 异常)
+   * <p>集群状态 (Trading 集群开通中,Creating 创建中,Running 运行中,Deleting 删除中,Idling 闲置中,Recovering 唤醒中,Scaling 规模调整中,Upgrading 升级中,WaittingForConnect 等待注册,Trading 集群开通中,Isolated 欠费隔离中,Pause 集群升级暂停,NodeUpgrading 节点升级中,RuntimeUpgrading 节点运行时升级中,MasterScaling Master扩缩容中,ClusterLevelUpgrading 调整规格中,ResourceIsolate 隔离中,ResourceIsolated 已隔离,ResourceReverse 冲正中,Abnormal 异常)</p>
    */
   ClusterStatus?: string
   /**
-   * 集群属性(包括集群不同属性的MAP，属性字段包括NodeNameType (lan-ip模式和hostname 模式，默认无lan-ip模式))
+   * <p>集群属性(包括集群不同属性的MAP，属性字段包括NodeNameType (lan-ip模式和hostname 模式，默认无lan-ip模式))</p>
    */
   Property?: string
   /**
-   * 集群当前master数量
+   * <p>集群当前master数量</p>
    */
   ClusterMaterNodeNum?: number
   /**
-   * 集群使用镜像id
+   * <p>集群使用镜像id</p>
    */
   ImageId?: string
   /**
-   * OsCustomizeType 系统定制类型
+   * <p>OsCustomizeType 系统定制类型</p>
    */
   OsCustomizeType?: string
   /**
-   * 集群运行环境docker或container
+   * <p>集群运行环境docker或container</p>
    */
   ContainerRuntime?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreatedTime?: string
   /**
-   * 集群删除保护开关，打开：true，关闭：false
+   * <p>集群删除保护开关，打开：true，关闭：false</p>
    */
   DeletionProtection?: boolean
   /**
-   * 集群是否开启第三方节点支持，开启：true，关闭：false
+   * <p>集群是否开启第三方节点支持，开启：true，关闭：false</p>
    */
   EnableExternalNode?: boolean
   /**
-   * 集群等级，针对托管集群生效
+   * <p>集群等级，针对托管集群生效</p>
    */
   ClusterLevel?: string
   /**
-   * 自动变配集群等级，针对托管集群生效。开启：true，关闭：false
+   * <p>自动变配集群等级，针对托管集群生效。开启：true，关闭：false</p>
    */
   AutoUpgradeClusterLevel?: boolean
   /**
-   * 是否开启QGPU共享，开启：true，关闭：false
+   * <p>是否开启QGPU共享，开启：true，关闭：false</p>
    */
   QGPUShareEnable?: boolean
   /**
-   * 运行时版本
+   * <p>运行时版本</p>
    */
   RuntimeVersion?: string
   /**
-   * 集群当前etcd数量
+   * <p>集群当前etcd数量</p>
    */
   ClusterEtcdNodeNum?: number
   /**
-   * 本地专用集群Id
+   * <p>本地专用集群Id</p>
    */
   CdcId?: string
   /**
-   * 集群是否启用高可用模式。用于指导跨可用区资源打散等高可用策略的执行
+   * <p>集群是否启用高可用模式。用于指导跨可用区资源打散等高可用策略的执行</p>
    */
   IsHighAvailability?: boolean
+  /**
+   * <p>开启后会下发Gatekeeper和网络策略</p>
+   */
+  SecurityModeConfig?: SecurityModeConfig
 }
 
 /**
@@ -10872,11 +10902,11 @@ export interface DeleteExternalNodeRequest {
    */
   ClusterId: string
   /**
-   * 第三方节点列表
+   * 注册节点列表
    */
   Names: Array<string>
   /**
-   * 是否强制删除：如果第三方节点上有运行中Pod，则非强制删除状态下不会进行删除
+   * 是否强制删除：如果注册节点上有运行中Pod，则非强制删除状态下不会进行删除
    */
   Force?: boolean
 }
@@ -11088,6 +11118,24 @@ export interface SwitchClusterEndpointResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 集群安全模式相关参数
+ */
+export interface SecurityModeConfig {
+  /**
+   * <p>安全模式开关（true 开启 / false 关闭）</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>灰度 namespace 列表</p>
+   */
+  Namespaces?: Array<string>
+  /**
+   * <p>灰度 Pod label</p>
+   */
+  Labels?: Array<Label>
 }
 
 /**
@@ -14575,102 +14623,97 @@ export interface PermissionItem {
  */
 export interface ClusterAdvancedSettings {
   /**
-   * 是否启用集群节点自动扩缩容(创建集群流程不支持开启此功能)
+   * <p>是否启用集群节点自动扩缩容(创建集群流程不支持开启此功能)</p>
    */
   AsEnabled?: boolean
   /**
-   * 是否开启审计开关
+   * <p>是否开启审计开关</p>
    */
   AuditEnabled?: boolean
   /**
-   * 审计日志上传到的topic
+   * <p>审计日志上传到的topic</p>
    */
   AuditLogTopicId?: string
   /**
-   * 审计日志上传到的logset日志集
+   * <p>审计日志上传到的logset日志集</p>
    */
   AuditLogsetId?: string
   /**
-   * 自定义模式下的基础pod数量
+   * <p>自定义模式下的基础pod数量</p>
    */
   BasePodNumber?: number
   /**
-   * 启用 CiliumMode 的模式，空值表示不启用，“clusterIP” 表示启用 Cilium 支持 ClusterIP
+   * <p>启用 CiliumMode 的模式，空值表示不启用，“clusterIP” 表示启用 Cilium 支持 ClusterIP</p>
    */
   CiliumMode?: string
   /**
-   * 集群使用的runtime类型，包括"docker"和"containerd"两种类型，默认为"docker"
+   * <p>集群使用的runtime类型，包括&quot;docker&quot;和&quot;containerd&quot;两种类型，默认为&quot;docker&quot;</p>
    */
   ContainerRuntime?: string
   /**
-   * 是否启用 DataPlaneV2（cilium替代kube-proxy）
+   * <p>是否启用 DataPlaneV2（cilium替代kube-proxy）</p>
    */
   DataPlaneV2?: boolean
   /**
-   * 是否启用集群删除保护
+   * <p>是否启用集群删除保护</p>
    */
   DeletionProtection?: boolean
   /**
-   * 是否开节点podCIDR大小的自定义模式
+   * <p>是否开节点podCIDR大小的自定义模式</p>
    */
   EnableCustomizedPodCIDR?: boolean
   /**
-   * 元数据拆分存储Etcd配置
+   * <p>元数据拆分存储Etcd配置</p>
    */
   EtcdOverrideConfigs?: Array<EtcdOverrideConfig>
   /**
-   * 集群自定义参数
+   * <p>集群自定义参数</p>
    */
   ExtraArgs?: ClusterExtraArgs
   /**
-   * 是否启用IPVS
+   * <p>是否启用IPVS</p>
    */
   IPVS?: boolean
   /**
-   * 集群VPC-CNI模式下是否是双栈集群，默认false，表明非双栈集群。
+   * <p>集群VPC-CNI模式下是否是双栈集群，默认false，表明非双栈集群。</p>
    */
   IsDualStack?: boolean
   /**
-   * 集群VPC-CNI模式是否为非固定IP，默认: FALSE 固定IP。
+   * <p>集群VPC-CNI模式是否为非固定IP，默认: FALSE 固定IP。</p>
    */
   IsNonStaticIpMode?: boolean
   /**
-   * 集群的网络代理模型，目前tke集群支持的网络代理模式有三种：iptables,ipvs,ipvs-bpf，此参数仅在使用ipvs-bpf模式时使用，三种网络模式的参数设置关系如下：
-iptables模式：IPVS和KubeProxyMode都不设置
-ipvs模式: 设置IPVS为true, KubeProxyMode不设置
-ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf
-使用ipvs-bpf的网络模式需要满足以下条件：
-1. 集群版本必须为1.14及以上；
-2. 系统镜像必须是: Tencent Linux 2.4；
+   * <p>集群的网络代理模型，目前tke集群支持的网络代理模式有三种：iptables,ipvs,ipvs-bpf，此参数仅在使用ipvs-bpf模式时使用，三种网络模式的参数设置关系如下：<br>iptables模式：IPVS和KubeProxyMode都不设置<br>ipvs模式: 设置IPVS为true, KubeProxyMode不设置<br>ipvs-bpf模式: 设置KubeProxyMode为kube-proxy-bpf<br>使用ipvs-bpf的网络模式需要满足以下条件：</p><ol><li>集群版本必须为1.14及以上；</li><li>系统镜像必须是: Tencent Linux 2.4；</li></ol>
    */
   KubeProxyMode?: string
   /**
-   * 集群网络类型，默认为GR。
-- GR: 全局路由
-- VPC-CNI: VPC-CNI模式
-- CiliumOverlay: CiliumOverlay模式
+   * <p>集群网络类型，默认为GR。</p><ul><li>GR: 全局路由</li><li>VPC-CNI: VPC-CNI模式</li><li>CiliumOverlay: CiliumOverlay模式</li></ul>
    */
   NetworkType?: string
   /**
-   * 集群中节点NodeName类型（包括 hostname,lan-ip两种形式，默认为lan-ip。如果开启了hostname模式，创建节点时需要设置HostName参数，并且InstanceName需要和HostName一致）
+   * <p>集群中节点NodeName类型（包括 hostname,lan-ip两种形式，默认为lan-ip。如果开启了hostname模式，创建节点时需要设置HostName参数，并且InstanceName需要和HostName一致）</p>
    */
   NodeNameType?: string
   /**
-   * 是否开启QGPU共享
+   * <p>是否开启QGPU共享</p>
    */
   QGPUShareEnable?: boolean
   /**
-   * 运行时版本
+   * <p>运行时版本</p>
    */
   RuntimeVersion?: string
   /**
-   * 区分共享网卡多IP模式和独立网卡模式，共享网卡多 IP 模式填写"tke-route-eni"，独立网卡模式填写"tke-direct-eni"，默认为共享网卡模式
+   * <p>区分共享网卡多IP模式和独立网卡模式，共享网卡多 IP 模式填写&quot;tke-route-eni&quot;，独立网卡模式填写&quot;tke-direct-eni&quot;，默认为共享网卡模式</p>
    */
   VpcCniType?: string
   /**
-   * 集群是否启用高可用模式。用于指导跨可用区资源打散等高可用策略的执行，默认为true
+   * <p>集群是否启用高可用模式。用于指导跨可用区资源打散等高可用策略的执行，默认为true</p>
    */
   IsHighAvailability?: boolean
+  /**
+   * <p>集群安全模式配置</p>
+   */
+  SecurityModeConfig?: SecurityModeConfig
 }
 
 /**
@@ -14960,53 +15003,57 @@ export interface DescribeVpcCniPodLimitsRequest {
 }
 
 /**
- * 第三方节点池信息
+ * 注册节点池信息
  */
 export interface ExternalNodePool {
   /**
-   * 第三方节点池ID
+   * 注册节点池ID
    */
-  NodePoolId: string
+  NodePoolId?: string
   /**
-   * 第三方节点池名称
+   * 注册节点池名称
    */
-  Name: string
+  Name?: string
   /**
    * 节点池生命周期
    */
-  LifeState: string
+  LifeState?: string
   /**
    * 集群CIDR
    */
-  ClusterCIDR: string
+  ClusterCIDR?: string
   /**
    * 集群网络插件类型
    */
-  NetworkType: string
+  NetworkType?: string
   /**
-   * 第三方节点Runtime配置
+   * 注册节点运行时配置
    */
-  RuntimeConfig: RuntimeConfig
+  RuntimeConfig?: RuntimeConfig
   /**
-   * 第三方节点label
+   * 注册节点标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Labels: Array<Label>
+  Labels?: Array<Label>
   /**
-   * 第三方节点taint
+   * 注册节点污点
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Taints: Array<Taint>
+  Taints?: Array<Taint>
   /**
-   * 第三方节点高级设置
+   * 注册节点高级设置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceAdvancedSettings: InstanceAdvancedSettings
+  InstanceAdvancedSettings?: InstanceAdvancedSettings
   /**
    * 删除保护开关
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeletionProtection: boolean
+  DeletionProtection?: boolean
+  /**
+   * 注册节点类型
+   */
+  NodeType?: string
 }
 
 /**
@@ -15324,12 +15371,12 @@ export interface DescribeExternalNodePoolsResponse {
    * 节点池总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
-   * 第三方节点池列表
+   * 注册节点池列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodePoolSet: Array<ExternalNodePool>
+  NodePoolSet?: Array<ExternalNodePool>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

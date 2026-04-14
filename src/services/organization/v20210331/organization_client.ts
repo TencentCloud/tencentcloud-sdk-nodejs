@@ -273,6 +273,7 @@ import {
   DescribeShareUnitMembersRequest,
   RemoveExternalSAMLIdPCertificateRequest,
   ListPoliciesForTarget,
+  UpdateIPWhitelistRequest,
   GetUserSyncProvisioningRequest,
   CreateOrganizationMemberAuthIdentityRequest,
   DescribeOrganizationFinancialByMonthRequest,
@@ -292,6 +293,7 @@ import {
   ListSCIMCredentialsResponse,
   DescribeOrganizationNodesRequest,
   UpdateCustomPolicyForRoleConfigurationRequest,
+  UpdateIPWhitelistResponse,
   ShareResourceToMember,
   InviteOrganizationMemberResponse,
   BindOrganizationMemberAuthAccountResponse,
@@ -1172,13 +1174,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建子用户同步任务
+   * 更新新建ip白名单
    */
-  async UpdateUserSyncProvisioning(
-    req: UpdateUserSyncProvisioningRequest,
-    cb?: (error: string, rep: UpdateUserSyncProvisioningResponse) => void
-  ): Promise<UpdateUserSyncProvisioningResponse> {
-    return this.request("UpdateUserSyncProvisioning", req, cb)
+  async UpdateIPWhitelist(
+    req: UpdateIPWhitelistRequest,
+    cb?: (error: string, rep: UpdateIPWhitelistResponse) => void
+  ): Promise<UpdateIPWhitelistResponse> {
+    return this.request("UpdateIPWhitelist", req, cb)
   }
 
   /**
@@ -1479,6 +1481,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListRoleConfigurationsResponse) => void
   ): Promise<ListRoleConfigurationsResponse> {
     return this.request("ListRoleConfigurations", req, cb)
+  }
+
+  /**
+   * 创建子用户同步任务
+   */
+  async UpdateUserSyncProvisioning(
+    req: UpdateUserSyncProvisioningRequest,
+    cb?: (error: string, rep: UpdateUserSyncProvisioningResponse) => void
+  ): Promise<UpdateUserSyncProvisioningResponse> {
+    return this.request("UpdateUserSyncProvisioning", req, cb)
   }
 
   /**

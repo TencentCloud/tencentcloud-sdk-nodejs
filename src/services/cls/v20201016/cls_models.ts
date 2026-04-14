@@ -9927,7 +9927,7 @@ export interface ModifyConsoleRequest {
    */
   AccessMode?: Array<string>
   /**
-   * <p>登录方式：0 - 账号密码鉴权，1 - 匿名登陆，2 - 第三方认证登录</p>
+   * <p>登录方式</p><p>枚举值：</p><ul><li>0： 账号密码鉴权</li><li>1： 匿名登录</li><li>2： 第三方认证登录</li></ul>
    */
   LoginMode?: number
   /**
@@ -9935,7 +9935,7 @@ export interface ModifyConsoleRequest {
    */
   DomainPrefix?: string
   /**
-   * <p>用户账号信息</p><p>“账号密码鉴权“登录方式必传</p>
+   * <p>用户账号信息</p><p>“账号密码鉴权”登录方式必传</p>
    */
   Accounts?: Array<ConsoleAccount>
   /**
@@ -11169,7 +11169,7 @@ export interface CreateConsoleRequest {
    */
   AccessMode: Array<string>
   /**
-   * <p>登录方式：0 - 账号密码鉴权，1 - 匿名登陆，2 - 第三方认证登录</p>
+   * <p>登录方式</p><p>枚举值：</p><ul><li>0： 账号密码鉴权</li><li>1： 匿名登录</li><li>2： 第三方认证登录</li></ul>
    */
   LoginMode: number
   /**
@@ -11177,7 +11177,7 @@ export interface CreateConsoleRequest {
    */
   DomainPrefix: string
   /**
-   * <p>用户账号信息</p><p>“账号密码鉴权“登录方式必传</p>
+   * <p>用户账号信息</p><p>“账号密码鉴权”登录方式必传</p>
    */
   Accounts?: Array<ConsoleAccount>
   /**

@@ -275,6 +275,18 @@ export interface SuperNodeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceAttribute?: string
+  /**
+   * 节点名称
+   */
+  NodeName?: string
+  /**
+   * 包销时长
+   */
+  Duration?: string
+  /**
+   * 预付费资源ID
+   */
+  ResourceId?: string
 }
 
 /**
@@ -784,6 +796,11 @@ export interface NativeNodeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
+  /**
+   * 原生节点云标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -1108,6 +1125,11 @@ export interface RegularNodeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoscalingGroupId?: string
+  /**
+   * 普通节点云标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -1605,6 +1627,10 @@ InstanceIds(实例ID),InstanceType(实例类型：Regular，Native，Super，Ext
    * 排序信息
    */
   SortBy?: SortBy
+  /**
+   * 是否返回节点云标签
+   */
+  NeedTags?: boolean
 }
 
 /**

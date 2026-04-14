@@ -108,9 +108,9 @@ it("mps.v20190612.CreateAigcImageTask", async function () {
     }
 })
 
-it("mps.v20190612.DeleteStreamPackageSSAIChannel", async function () {
+it("mps.v20190612.DeletePersonSample", async function () {
     try {
-       const data = await client.DeleteStreamPackageSSAIChannel({})
+       const data = await client.DeletePersonSample({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -441,6 +441,26 @@ it("mps.v20190612.CreateTranscodeTemplate", async function () {
 it("mps.v20190612.CreateStreamLinkFlow", async function () {
     try {
        const data = await client.CreateStreamLinkFlow({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DeleteContentReviewTemplate", async function () {
+    try {
+       const data = await client.DeleteContentReviewTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.UpdateProject", async function () {
+    try {
+       const data = await client.UpdateProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -978,6 +998,16 @@ it("mps.v20190612.StopStreamPackageLinearAssemblyChannel", async function () {
     }
 })
 
+it("mps.v20190612.CreateProject", async function () {
+    try {
+       const data = await client.CreateProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.CreateBlindWatermarkTemplate", async function () {
     try {
        const data = await client.CreateBlindWatermarkTemplate({})
@@ -1388,6 +1418,16 @@ it("mps.v20190612.DescribeStreamPackageLinearAssemblyChannelAlerts", async funct
     }
 })
 
+it("mps.v20190612.QueryProject", async function () {
+    try {
+       const data = await client.QueryProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.CreateWordSamples", async function () {
     try {
        const data = await client.CreateWordSamples({})
@@ -1638,9 +1678,9 @@ it("mps.v20190612.DescribeSubtitleEmbedTemplates", async function () {
     }
 })
 
-it("mps.v20190612.DeletePersonSample", async function () {
+it("mps.v20190612.DeleteStreamPackageSSAIChannel", async function () {
     try {
-       const data = await client.DeletePersonSample({})
+       const data = await client.DeleteStreamPackageSSAIChannel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1718,9 +1758,9 @@ it("mps.v20190612.DeleteLiveRecordTemplate", async function () {
     }
 })
 
-it("mps.v20190612.DeleteContentReviewTemplate", async function () {
+it("mps.v20190612.DeleteProject", async function () {
     try {
-       const data = await client.DeleteContentReviewTemplate({})
+       const data = await client.DeleteProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -102,6 +102,7 @@ import {
   DescribeTopicMsgsRequest,
   DeleteCmqQueueRequest,
   DeleteRabbitMQUserResponse,
+  CreateRocketMQMigrationTaskRequest,
   SetRocketMQPublicAccessPointResponse,
   DescribeRocketMQTopicMsgsRequest,
   ModifyEnvironmentRoleRequest,
@@ -294,6 +295,7 @@ import {
   CreateCmqTopicResponse,
   CmqDeadLetterSource,
   DescribeRocketMQTopicRequest,
+  CreateRocketMQMigrationTaskResponse,
   DescribeRocketMQSubscriptionsRequest,
   ResetMsgSubOffsetByTimestampRequest,
   DescribeBindVpcsResponse,
@@ -339,6 +341,7 @@ import {
   RocketMQClusterRecentStats,
   DescribeRocketMQPublicAccessPointRequest,
   RabbitMQPrivateNode,
+  RocketMQRoleConfig,
   RetryRocketMQDlqMessageRequest,
   DescribeRocketMQTopicsByGroupRequest,
   DescribeRocketMQConsumeStatsResponse,
@@ -1765,13 +1768,13 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
-   * 获取生产者信息列表
+   * 创建RocketMQ元数据迁移任务，用于批量创建主题和消费组数据
    */
-  async DescribePublishers(
-    req: DescribePublishersRequest,
-    cb?: (error: string, rep: DescribePublishersResponse) => void
-  ): Promise<DescribePublishersResponse> {
-    return this.request("DescribePublishers", req, cb)
+  async CreateRocketMQMigrationTask(
+    req: CreateRocketMQMigrationTaskRequest,
+    cb?: (error: string, rep: CreateRocketMQMigrationTaskResponse) => void
+  ): Promise<CreateRocketMQMigrationTaskResponse> {
+    return this.request("CreateRocketMQMigrationTask", req, cb)
   }
 
   /**
@@ -1885,6 +1888,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: DeleteRocketMQVipInstanceResponse) => void
   ): Promise<DeleteRocketMQVipInstanceResponse> {
     return this.request("DeleteRocketMQVipInstance", req, cb)
+  }
+
+  /**
+   * 获取生产者信息列表
+   */
+  async DescribePublishers(
+    req: DescribePublishersRequest,
+    cb?: (error: string, rep: DescribePublishersResponse) => void
+  ): Promise<DescribePublishersResponse> {
+    return this.request("DescribePublishers", req, cb)
   }
 
   /**

@@ -3001,73 +3001,17 @@ export interface UpdateSmartEraseWatermarkConfig {
 }
 
 /**
- * 工作流信息详情。
+ * CreateProject返回参数结构体
  */
-export interface WorkflowInfo {
+export interface CreateProjectResponse {
   /**
-   * 工作流 ID。
+   * <p>项目id</p>
    */
-  WorkflowId: number
+  ProjectId?: string
   /**
-   * 工作流名称。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  WorkflowName: string
-  /**
-   * 工作流状态，取值范围：
-<li>Enabled：已启用，</li>
-<li>Disabled：已禁用。</li>
-   */
-  Status: string
-  /**
-   * 工作流绑定的输入规则，当上传视频命中该规则到该对象时即触发工作流。
-   */
-  Trigger: WorkflowTrigger
-  /**
-   * 媒体处理的文件输出存储位置。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OutputStorage: TaskOutputStorage
-  /**
-   * 媒体处理类型任务参数。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MediaProcessTask: MediaProcessTaskInput
-  /**
-   * 视频内容审核类型任务参数。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AiContentReviewTask: AiContentReviewTaskInput
-  /**
-   * 视频内容分析类型任务参数。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AiAnalysisTask: AiAnalysisTaskInput
-  /**
-   * 视频内容识别类型任务参数。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AiRecognitionTask: AiRecognitionTaskInput
-  /**
-   * 任务的事件通知信息，不填代表不获取事件通知。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TaskNotifyConfig: TaskNotifyConfig
-  /**
-   * 任务流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
-   */
-  TaskPriority: number
-  /**
-   * 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。
-   */
-  OutputDir: string
-  /**
-   * 工作流创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
-   */
-  CreateTime: string
-  /**
-   * 工作流最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
-   */
-  UpdateTime: string
+  RequestId?: string
 }
 
 /**
@@ -3103,29 +3047,9 @@ export interface DeletePersonSampleRequest {
 }
 
 /**
- * DescribeStreamLinkFlows返回参数结构体
+ * DeleteProject返回参数结构体
  */
-export interface DescribeStreamLinkFlowsResponse {
-  /**
-   * 流的配置信息列表。
-   */
-  Infos?: Array<DescribeFlow>
-  /**
-   * 当前页数。
-   */
-  PageNum?: number
-  /**
-   * 每页大小。
-   */
-  PageSize?: number
-  /**
-   * 总数量。
-   */
-  TotalNum?: number
-  /**
-   * 总页数。
-   */
-  TotalPage?: number
+export interface DeleteProjectResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5474,6 +5398,32 @@ export interface DescribeWordSamplesResponse {
 }
 
 /**
+ * UpdateProject请求参数结构体
+ */
+export interface UpdateProjectRequest {
+  /**
+   * <p>项目id</p>
+   */
+  ProjectId: string
+  /**
+   * <p>项目名称</p>
+   */
+  ProjectName?: string
+  /**
+   * <p>项目术语表</p>
+   */
+  TermBase?: Array<TermBase>
+  /**
+   * <p>项目描述</p>
+   */
+  Description?: string
+  /**
+   * <p>角色列表</p>
+   */
+  Speakers?: Array<Speakers>
+}
+
+/**
  * DescribeAIRecognitionTemplates返回参数结构体
  */
 export interface DescribeAIRecognitionTemplatesResponse {
@@ -6788,6 +6738,20 @@ export interface PornAsrReviewTemplateInfo {
 }
 
 /**
+ * 术语表
+ */
+export interface TermBase {
+  /**
+   * <p>术语原语言</p>
+   */
+  Src: string
+  /**
+   * <p>术语目标语言</p>
+   */
+  Dst: string
+}
+
+/**
  * CreateAigcImageTask返回参数结构体
  */
 export interface CreateAigcImageTaskResponse {
@@ -7227,6 +7191,36 @@ export interface SSAIChannelInfo {
    * 用于clickthrough地址
    */
   SessionInitPrefix?: string
+}
+
+/**
+ * 角色列表
+ */
+export interface Speakers {
+  /**
+   * <p>角色唯一标识</p>
+   */
+  SpeakerId: string
+  /**
+   * <p>绑定的音色 ID</p>
+   */
+  VoiceId: string
+  /**
+   * <p>性别：male / female，默认 male</p>
+   */
+  Gender?: string
+  /**
+   * <p>年龄段：child / teenager / youth / middle_aged/ senior，默认 youth</p>
+   */
+  AgeGroup?: string
+  /**
+   * <p>角色描述</p>
+   */
+  Description?: string
+  /**
+   * <p>角色人名术语表</p>
+   */
+  NameTerms?: Array<TermBase>
 }
 
 /**
@@ -11078,6 +11072,24 @@ export interface BatchSmartSubtitlesResult {
 }
 
 /**
+ * QueryProject返回参数结构体
+ */
+export interface QueryProjectResponse {
+  /**
+   * <p>符合条件的总数量</p>
+   */
+  Total?: number
+  /**
+   * <p>项目数据</p>
+   */
+  Data?: Array<Project>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 创建的输入SRT的配置信息。
  */
 export interface CreateInputSRTSettings {
@@ -11817,6 +11829,28 @@ export interface DescribeStreamPackageSourceLocationRequest {
 }
 
 /**
+ * QueryProject请求参数结构体
+ */
+export interface QueryProjectRequest {
+  /**
+   * <p>项目id</p>
+   */
+  ProjectId?: string
+  /**
+   * <p>项目名称</p>
+   */
+  ProjectName?: string
+  /**
+   * <p>页码，从 1 开始，默认 1</p>
+   */
+  Page?: number
+  /**
+   * <p>每页数量，默认 20</p>
+   */
+  PageSize?: number
+}
+
+/**
  * 视频评测任务的视频来源信息
  */
 export interface EvaluationMediaInputInfo {
@@ -12345,6 +12379,40 @@ export interface EnableScheduleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 剧集项目信息
+ */
+export interface Project {
+  /**
+   * <p>项目id</p>
+   */
+  ProjectId?: string
+  /**
+   * <p>项目名称</p>
+   */
+  ProjectName?: string
+  /**
+   * <p>项目描述</p>
+   */
+  Description?: string
+  /**
+   * <p>项目术语库</p>
+   */
+  TermBase?: Array<TermBase>
+  /**
+   * <p>角色列表</p>
+   */
+  Speakers?: Array<Speakers>
+  /**
+   * <p>创建时间（Unix 时间戳）</p>
+   */
+  CreatedAt?: number
+  /**
+   * <p>更新时间（Unix 时间戳）</p>
+   */
+  UpdatedAt?: number
 }
 
 /**
@@ -13619,6 +13687,28 @@ export interface AigcStoreCosParam {
 示例值：my_file
    */
   CosBucketPath?: string
+}
+
+/**
+ * CreateProject请求参数结构体
+ */
+export interface CreateProjectRequest {
+  /**
+   * <p>项目名称</p>
+   */
+  ProjectName: string
+  /**
+   * <p>项目术语表</p>
+   */
+  TermBase?: Array<TermBase>
+  /**
+   * <p>项目描述</p>
+   */
+  Description?: string
+  /**
+   * <p>角色列表</p>
+   */
+  Speakers?: Array<Speakers>
 }
 
 /**
@@ -15332,6 +15422,36 @@ export interface DescribeStreamLinkFlowMediaStatisticsResponse {
    * 传输流的媒体数据列表。
    */
   Infos?: Array<FlowMediaInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeStreamLinkFlows返回参数结构体
+ */
+export interface DescribeStreamLinkFlowsResponse {
+  /**
+   * 流的配置信息列表。
+   */
+  Infos?: Array<DescribeFlow>
+  /**
+   * 当前页数。
+   */
+  PageNum?: number
+  /**
+   * 每页大小。
+   */
+  PageSize?: number
+  /**
+   * 总数量。
+   */
+  TotalNum?: number
+  /**
+   * 总页数。
+   */
+  TotalPage?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18712,6 +18832,16 @@ export interface TaskNotifyConfig {
 }
 
 /**
+ * UpdateProject返回参数结构体
+ */
+export interface UpdateProjectResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 人脸增强配置
  */
 export interface FaceEnhanceConfig {
@@ -18770,6 +18900,16 @@ PicUrlExpireTime 时间点后图片将被删除）。
    * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
    */
   PicUrlExpireTime?: string
+}
+
+/**
+ * DeleteProject请求参数结构体
+ */
+export interface DeleteProjectRequest {
+  /**
+   * <p>项目id</p>
+   */
+  ProjectId: string
 }
 
 /**
@@ -19838,6 +19978,76 @@ TransTextRecognition 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OcrFullTextTask?: SmartSubtitleTaskFullTextResult
+}
+
+/**
+ * 工作流信息详情。
+ */
+export interface WorkflowInfo {
+  /**
+   * 工作流 ID。
+   */
+  WorkflowId: number
+  /**
+   * 工作流名称。
+   */
+  WorkflowName: string
+  /**
+   * 工作流状态，取值范围：
+<li>Enabled：已启用，</li>
+<li>Disabled：已禁用。</li>
+   */
+  Status: string
+  /**
+   * 工作流绑定的输入规则，当上传视频命中该规则到该对象时即触发工作流。
+   */
+  Trigger: WorkflowTrigger
+  /**
+   * 媒体处理的文件输出存储位置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputStorage: TaskOutputStorage
+  /**
+   * 媒体处理类型任务参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MediaProcessTask: MediaProcessTaskInput
+  /**
+   * 视频内容审核类型任务参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AiContentReviewTask: AiContentReviewTaskInput
+  /**
+   * 视频内容分析类型任务参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AiAnalysisTask: AiAnalysisTaskInput
+  /**
+   * 视频内容识别类型任务参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AiRecognitionTask: AiRecognitionTaskInput
+  /**
+   * 任务的事件通知信息，不填代表不获取事件通知。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskNotifyConfig: TaskNotifyConfig
+  /**
+   * 任务流的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。
+   */
+  TaskPriority: number
+  /**
+   * 媒体处理生成的文件输出的目标目录，如`/movie/201907/`。
+   */
+  OutputDir: string
+  /**
+   * 工作流创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  CreateTime: string
+  /**
+   * 工作流最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  UpdateTime: string
 }
 
 /**

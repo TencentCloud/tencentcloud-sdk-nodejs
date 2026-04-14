@@ -131,10 +131,10 @@ import {
   AudioTemplateInfoForUpdate,
   ModifyStreamPackageSourceResponse,
   UpdateSmartEraseWatermarkConfig,
-  WorkflowInfo,
+  CreateProjectResponse,
   ModifyProcessImageTemplateRequest,
   DeletePersonSampleRequest,
-  DescribeStreamLinkFlowsResponse,
+  DeleteProjectResponse,
   AiRecognitionTaskAsrWordsSegmentItem,
   DescribeStreamLinkFlowRealtimeStatusResponse,
   ParseLiveStreamProcessNotificationResponse,
@@ -233,6 +233,7 @@ import {
   TextWatermarkTemplateInput,
   ModifyAIAnalysisTemplateResponse,
   DescribeWordSamplesResponse,
+  UpdateProjectRequest,
   DescribeAIRecognitionTemplatesResponse,
   ScratchRepairConfig,
   FlowStatisticsArray,
@@ -288,6 +289,7 @@ import {
   Rules,
   AiRecognitionTaskOcrWordsResult,
   PornAsrReviewTemplateInfo,
+  TermBase,
   CreateAigcImageTaskResponse,
   ComposeVideoStream,
   LiveSmartSubtitleResult,
@@ -312,6 +314,7 @@ import {
   DeleteAIAnalysisTemplateRequest,
   DescribeMDPMPSUserInfoRequest,
   SSAIChannelInfo,
+  Speakers,
   DescribeBlindWatermarkTemplatesRequest,
   PureSubtitleTransResultOutput,
   CreateStreamLinkOutputInfoResponse,
@@ -462,6 +465,7 @@ import {
   AiSamplePerson,
   FlowStatistics,
   BatchSmartSubtitlesResult,
+  QueryProjectResponse,
   CreateInputSRTSettings,
   ModifySmartEraseTemplateRequest,
   DescribeGroupAttachFlowsByIdRequest,
@@ -481,6 +485,7 @@ import {
   WorkflowTrigger,
   HLSPullSourceAddress,
   DescribeStreamPackageSourceLocationRequest,
+  QueryProjectRequest,
   EvaluationMediaInputInfo,
   LiveStreamAiRecognitionResultInfo,
   ActivityPara,
@@ -500,6 +505,7 @@ import {
   TerrorismConfigureInfoForUpdate,
   DescribePersonSamplesRequest,
   EnableScheduleResponse,
+  Project,
   OutputSRTSourceAddressResp,
   ClassificationConfigureInfoForUpdate,
   SecurityGroupInfo,
@@ -552,6 +558,7 @@ import {
   ImageWatermarkInputForUpdate,
   BatchSubTaskResult,
   AigcStoreCosParam,
+  CreateProjectRequest,
   FlowVideo,
   AiRecognitionTaskOcrWordsResultItem,
   UpdateSmartErasePrivacyConfig,
@@ -618,6 +625,7 @@ import {
   TranslateConfigureInfo,
   ProgramAlertCounts,
   DescribeStreamLinkFlowMediaStatisticsResponse,
+  DescribeStreamLinkFlowsResponse,
   PornOcrReviewTemplateInfo,
   CreateOutputInfoRTPSettings,
   AiReviewTaskPoliticalAsrResult,
@@ -747,8 +755,10 @@ import {
   DescribeImageSpriteTemplatesResponse,
   FlowRealtimeStatusCommon,
   TaskNotifyConfig,
+  UpdateProjectResponse,
   FaceEnhanceConfig,
   LiveStreamAiReviewImagePornResult,
+  DeleteProjectRequest,
   AiAnalysisTaskFrameTagInput,
   MediaAiAnalysisFrameTagSegmentItem,
   AiRecognitionTaskAsrWordsResultItem,
@@ -790,6 +800,7 @@ import {
   BeautyEffectItemConfig,
   AiRecognitionTaskTransTextResultOutput,
   SmartSubtitlesResult,
+  WorkflowInfo,
   SyncDubbingResponse,
   ModifySnapshotByTimeOffsetTemplateRequest,
   AsrHotWordsConfigure,
@@ -1119,13 +1130,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除广告插入配置。
+   * 该接口用于根据素材 ID，删除素材样本。
    */
-  async DeleteStreamPackageSSAIChannel(
-    req: DeleteStreamPackageSSAIChannelRequest,
-    cb?: (error: string, rep: DeleteStreamPackageSSAIChannelResponse) => void
-  ): Promise<DeleteStreamPackageSSAIChannelResponse> {
-    return this.request("DeleteStreamPackageSSAIChannel", req, cb)
+  async DeletePersonSample(
+    req: DeletePersonSampleRequest,
+    cb?: (error: string, rep: DeletePersonSampleResponse) => void
+  ): Promise<DeletePersonSampleResponse> {
+    return this.request("DeletePersonSample", req, cb)
   }
 
   /**
@@ -1473,6 +1484,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateStreamLinkFlowResponse) => void
   ): Promise<CreateStreamLinkFlowResponse> {
     return this.request("CreateStreamLinkFlow", req, cb)
+  }
+
+  /**
+   * 删除用户自定义内容审核模板。
+   */
+  async DeleteContentReviewTemplate(
+    req: DeleteContentReviewTemplateRequest,
+    cb?: (error: string, rep: DeleteContentReviewTemplateResponse) => void
+  ): Promise<DeleteContentReviewTemplateResponse> {
+    return this.request("DeleteContentReviewTemplate", req, cb)
+  }
+
+  /**
+   * 剧集项目更新
+   */
+  async UpdateProject(
+    req: UpdateProjectRequest,
+    cb?: (error: string, rep: UpdateProjectResponse) => void
+  ): Promise<UpdateProjectResponse> {
+    return this.request("UpdateProject", req, cb)
   }
 
   /**
@@ -2015,6 +2046,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 剧集项目创建
+   */
+  async CreateProject(
+    req: CreateProjectRequest,
+    cb?: (error: string, rep: CreateProjectResponse) => void
+  ): Promise<CreateProjectResponse> {
+    return this.request("CreateProject", req, cb)
+  }
+
+  /**
    * 创建用户自定义数字水印模板。
    */
   async CreateBlindWatermarkTemplate(
@@ -2425,6 +2466,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 剧集项目查询
+   */
+  async QueryProject(
+    req: QueryProjectRequest,
+    cb?: (error: string, rep: QueryProjectResponse) => void
+  ): Promise<QueryProjectResponse> {
+    return this.request("QueryProject", req, cb)
+  }
+
+  /**
    * 该接口用于批量创建关键词样本，样本用于通过OCR、ASR技术，进行不适宜内容识别、内容识别等视频处理。
    */
   async CreateWordSamples(
@@ -2703,13 +2754,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于根据素材 ID，删除素材样本。
+   * 删除广告插入配置。
    */
-  async DeletePersonSample(
-    req: DeletePersonSampleRequest,
-    cb?: (error: string, rep: DeletePersonSampleResponse) => void
-  ): Promise<DeletePersonSampleResponse> {
-    return this.request("DeletePersonSample", req, cb)
+  async DeleteStreamPackageSSAIChannel(
+    req: DeleteStreamPackageSSAIChannelRequest,
+    cb?: (error: string, rep: DeleteStreamPackageSSAIChannelResponse) => void
+  ): Promise<DeleteStreamPackageSSAIChannelResponse> {
+    return this.request("DeleteStreamPackageSSAIChannel", req, cb)
   }
 
   /**
@@ -2792,13 +2843,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除用户自定义内容审核模板。
+   * 剧集项目删除接口
    */
-  async DeleteContentReviewTemplate(
-    req: DeleteContentReviewTemplateRequest,
-    cb?: (error: string, rep: DeleteContentReviewTemplateResponse) => void
-  ): Promise<DeleteContentReviewTemplateResponse> {
-    return this.request("DeleteContentReviewTemplate", req, cb)
+  async DeleteProject(
+    req: DeleteProjectRequest,
+    cb?: (error: string, rep: DeleteProjectResponse) => void
+  ): Promise<DeleteProjectResponse> {
+    return this.request("DeleteProject", req, cb)
   }
 
   /**

@@ -68,6 +68,16 @@ it("vclm.v20240523.CheckAnimateImageJob", async function () {
     }
 })
 
+it("vclm.v20240523.SubmitImageToVideoViduJob", async function () {
+    try {
+       const data = await client.SubmitImageToVideoViduJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vclm.v20240523.DescribeImageToVideoGeneralJob", async function () {
     try {
        const data = await client.DescribeImageToVideoGeneralJob({})

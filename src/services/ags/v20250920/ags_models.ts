@@ -102,6 +102,10 @@ export interface SandboxInstance {
    */
   Status: string
   /**
+   * <p>是否常驻实例</p>
+   */
+  Persistent?: boolean
+  /**
    * <p>超时时间（秒），null 表示无超时设置</p>
    */
   TimeoutSeconds?: number
@@ -273,6 +277,10 @@ export interface CreateSandboxToolRequest {
    * <p>沙箱工具日志推送相关配置</p>
    */
   LogConfiguration?: LogConfiguration
+  /**
+   * <p>常驻沙箱标识</p>
+   */
+  Persistent?: boolean
 }
 
 /**
@@ -537,6 +545,10 @@ export interface SandboxTool {
    * <p>沙箱工具描述信息，最大长度 200 字符</p>
    */
   Description?: string
+  /**
+   * <p>是否常驻沙箱</p>
+   */
+  Persistent?: boolean
   /**
    * <p>默认超时时间，支持格式：5m、300s、1h 等，不指定则使用系统默认值（5 分钟）。最大 24 小时</p>
    */

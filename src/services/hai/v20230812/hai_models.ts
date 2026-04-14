@@ -160,13 +160,17 @@ export interface ImageInfo {
  */
 export interface UpdateServiceConfigsRequest {
   /**
-   * 服务ID
+   * <p>服务ID</p>
    */
   ServiceId: string
   /**
-   * 期望副本数
+   * <p>期望副本数</p>
    */
   TargetReplicas?: number
+  /**
+   * <p>启动参数、环境变量等参数</p>
+   */
+  DeploymentConfigs?: Array<DeploymentConfig>
 }
 
 /**

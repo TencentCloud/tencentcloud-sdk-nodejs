@@ -1288,9 +1288,9 @@ it("tdmq.v20200217.DescribePulsarProInstances", async function () {
     }
 })
 
-it("tdmq.v20200217.DescribePublishers", async function () {
+it("tdmq.v20200217.CreateRocketMQMigrationTask", async function () {
     try {
-       const data = await client.DescribePublishers({})
+       const data = await client.CreateRocketMQMigrationTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1401,6 +1401,16 @@ it("tdmq.v20200217.SendMsg", async function () {
 it("tdmq.v20200217.DeleteRocketMQVipInstance", async function () {
     try {
        const data = await client.DeleteRocketMQVipInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdmq.v20200217.DescribePublishers", async function () {
+    try {
+       const data = await client.DescribePublishers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

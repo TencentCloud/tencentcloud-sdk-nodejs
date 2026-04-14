@@ -5279,6 +5279,20 @@ export interface ListPoliciesForTarget {
 }
 
 /**
+ * UpdateIPWhitelist请求参数结构体
+ */
+export interface UpdateIPWhitelistRequest {
+  /**
+   * 空间ID
+   */
+  ZoneId?: string
+  /**
+   * ip白名单（上限100个）
+   */
+  IpWhitelist?: Array<string>
+}
+
+/**
  * GetUserSyncProvisioning请求参数结构体
  */
 export interface GetUserSyncProvisioningRequest {
@@ -5679,6 +5693,20 @@ export interface UpdateCustomPolicyForRoleConfigurationRequest {
    * 自定义策略内容。长度：最大 4096 个字符。当RolePolicyType为Inline时，该参数必须配置。关于权限策略的语法和结构，请参见权限策略语法和结构。
    */
   NewCustomPolicyDocument?: string
+}
+
+/**
+ * UpdateIPWhitelist返回参数结构体
+ */
+export interface UpdateIPWhitelistResponse {
+  /**
+   * 成功返回
+   */
+  Success?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

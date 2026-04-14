@@ -2564,6 +2564,36 @@ export interface DeleteRabbitMQUserResponse {
 }
 
 /**
+ * CreateRocketMQMigrationTask请求参数结构体
+ */
+export interface CreateRocketMQMigrationTaskRequest {
+  /**
+   * <p>集群ID</p>
+   */
+  ClusterId: string
+  /**
+   * <p>任务类型：<br>0，集群迁移<br>1，导入到指定命名空间</p>
+   */
+  Type: number
+  /**
+   * <p>待导入的主题列表</p>
+   */
+  Topics?: Array<RocketMQTopicConfig>
+  /**
+   * <p>待导入的消费组列表</p>
+   */
+  Groups?: Array<RocketMQGroupConfig>
+  /**
+   * <p>待导入的角色列表</p>
+   */
+  Roles?: Array<RocketMQRoleConfig>
+  /**
+   * <p>指定导入的命名空间</p>
+   */
+  Namespace?: string
+}
+
+/**
  * SetRocketMQPublicAccessPoint返回参数结构体
  */
 export interface SetRocketMQPublicAccessPointResponse {
@@ -8038,6 +8068,16 @@ export interface DescribeRocketMQTopicRequest {
 }
 
 /**
+ * CreateRocketMQMigrationTask返回参数结构体
+ */
+export interface CreateRocketMQMigrationTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRocketMQSubscriptions请求参数结构体
  */
 export interface DescribeRocketMQSubscriptionsRequest {
@@ -9046,6 +9086,40 @@ export interface RabbitMQPrivateNode {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProcessNumber?: number
+}
+
+/**
+ * RocketMQ角色配置信息
+ */
+export interface RocketMQRoleConfig {
+  /**
+   * 角色名，对应SecretKey
+   */
+  RoleName?: string
+  /**
+   * accessKey
+   */
+  RoleToken?: string
+  /**
+   * 命名空间
+   */
+  EnvironmentId?: string
+  /**
+   * 角色权限
+   */
+  Permissions?: Array<string>
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 权限类型，默认按集群授权（Cluster：集群级别；TopicAndGroup：主题&消费组级别）
+   */
+  PermType?: string
+  /**
+   * Topic和Group维度权限配置
+   */
+  DetailedRolePerms?: Array<DetailedRolePerm>
 }
 
 /**

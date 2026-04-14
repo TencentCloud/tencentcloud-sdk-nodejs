@@ -2542,7 +2542,7 @@ export interface DescribeAggregatorResponse {
  */
 export interface AddAlarmPolicyResponse {
   /**
-   * 告警策略唯一id
+   * <p>告警策略唯一id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmPolicyId?: number
@@ -2907,35 +2907,39 @@ export interface ListDiscoveredResourcesRequest {
  */
 export interface AddAlarmPolicyRequest {
   /**
-   * 告警策略名
+   * <p>告警策略名</p>
    */
   Name: string
   /**
-   * 事件范围  1：当前账号  2：多账号
+   * <p>事件类型 1：资源不合规事件</p>
+   */
+  Type: number
+  /**
+   * <p>事件范围  1：当前账号  2：多账号</p>
    */
   EventScope: Array<number | bigint>
   /**
-   * 风险等级 1：高风险  2：中风险 3：低风险
+   * <p>风险等级 1：高风险  2：中风险 3：低风险</p>
    */
   RiskLevel: Array<number | bigint>
   /**
-   * 通知时间段
+   * <p>通知时间段</p>
    */
   NoticeTime: string
   /**
-   * 通知机制
+   * <p>通知机制</p>
    */
   NotificationMechanism: string
   /**
-   * 状态 1：启用 2：停用
+   * <p>状态 1：启用 2：停用</p>
    */
   Status: number
   /**
-   * 通知周期
+   * <p>通知周期</p>
    */
   NoticePeriod: Array<number | bigint>
   /**
-   * 策略描述
+   * <p>策略描述</p>
    */
   Description?: string
 }

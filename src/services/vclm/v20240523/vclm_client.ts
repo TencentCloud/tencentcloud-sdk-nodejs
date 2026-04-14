@@ -20,12 +20,14 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeImageToVideoGeneralJobResponse,
   SubmitVideoStylizationJobRequest,
+  SubmitImageToVideoViduJobRequest,
   LogoParam,
   DescribeVideoVoiceJobResponse,
   SubmitHumanActorJobRequest,
   SubmitImageAnimateJobResponse,
   FaceTemplateInfo,
   DescribeAigcVideoJobRequest,
+  SubmitImageToVideoViduJobResponse,
   SubmitImageAnimateJobRequest,
   DescribeVideoVoiceJobRequest,
   SubmitImageToVideoGeneralJobResponse,
@@ -134,6 +136,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CheckAnimateImageJobResponse) => void
   ): Promise<CheckAnimateImageJobResponse> {
     return this.request("CheckAnimateImageJob", req, cb)
+  }
+
+  /**
+   * 提交Vidu图生视频任务接口
+   */
+  async SubmitImageToVideoViduJob(
+    req: SubmitImageToVideoViduJobRequest,
+    cb?: (error: string, rep: SubmitImageToVideoViduJobResponse) => void
+  ): Promise<SubmitImageToVideoViduJobResponse> {
+    return this.request("SubmitImageToVideoViduJob", req, cb)
   }
 
   /**

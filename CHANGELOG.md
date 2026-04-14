@@ -1,3 +1,8 @@
+## [4.1.214](https://github.com/tencentcloud/tencentcloud-sdk-nodejs/compare/4.1.213...4.1.214) (2026-04-14)
+
+### Features
+
+* add cls sse example ([3eb5d11](https://github.com/tencentcloud/tencentcloud-sdk-nodejs/commit/3eb5d1132c271718ff7f3a876ae3f798e0b38c7b))
 ## [4.1.121](https://github.com/tencentcloud/tencentcloud-sdk-nodejs/compare/4.1.120...4.1.121) (2025-09-23)
 
 ### Features

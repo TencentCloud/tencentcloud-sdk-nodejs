@@ -540,6 +540,7 @@ import {
   DescribeClusterExtraArgsResponse,
   ClusterAsGroupAttribute,
   SwitchClusterEndpointResponse,
+  SecurityModeConfig,
   ForwardTKEEdgeApplicationRequestV3Request,
   DisableEventPersistenceRequest,
   RunMonitorServiceEnabled,
@@ -775,7 +776,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看第三方节点列表
+   * 查看注册节点列表
    */
   async DescribeExternalNode(
     req: DescribeExternalNodeRequest,
@@ -825,7 +826,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除第三方节点池
+   * 删除注册节点池
    */
   async DeleteExternalNodePool(
     req: DeleteExternalNodePoolRequest,
@@ -935,7 +936,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看开启第三方节点池配置信息
+   * 查看开启注册节点池配置信息
    */
   async DescribeExternalNodeSupportConfig(
     req: DescribeExternalNodeSupportConfigRequest,
@@ -965,7 +966,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开启第三方节点池支持
+   * 开启注册节点池支持
    */
   async EnableExternalNodeSupport(
     req: EnableExternalNodeSupportRequest,
@@ -1385,7 +1386,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除第三方节点
+   * 删除注册节点
    */
   async DeleteExternalNode(
     req: DeleteExternalNodeRequest,
@@ -1745,7 +1746,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建第三方节点池
+   * 创建注册节点池
    */
   async CreateExternalNodePool(
     req: CreateExternalNodePoolRequest,
@@ -2155,7 +2156,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取第三方节点添加脚本
+   * 获取注册节点初始化脚本
    */
   async DescribeExternalNodeScript(
     req: DescribeExternalNodeScriptRequest,
@@ -2405,7 +2406,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 驱逐第三方节点
+   * 驱逐注册节点
    */
   async DrainExternalNode(
     req: DrainExternalNodeRequest,
@@ -2705,7 +2706,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看第三方节点池列表
+   * 查看注册节点池列表
    */
   async DescribeExternalNodePools(
     req: DescribeExternalNodePoolsRequest,
@@ -3215,7 +3216,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改第三方节点池
+   * 修改注册节点池
    */
   async ModifyExternalNodePool(
     req: ModifyExternalNodePoolRequest,
