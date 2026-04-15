@@ -117,5 +117,21 @@ describe("HttpConnection", () => {
       expect(mockCalls.headers["X-TC-Token"]).toBeUndefined()
       expect(result).toBe(mockResolvedValue)
     })
+
+    it("The Authorization header should be SKIP when the skipSign is true", async() => {
+      mockFetch.mockResolvedValue(mockResolvedValue)
+
+      const params = {
+        ...defaultArgs,
+        skipSign: true,
+      }
+      delete params.token
+      const result = await HttpConnection.doRequestWithSign3(params)
+
+      const mockCalls = mockFetch.mock.calls[0][1]
+      expect(mockCalls.headers["Authorization"]).toBe("SKIP")
+      expect(result).toBe(mockResolvedValue)
+    })
+
   })
 })
