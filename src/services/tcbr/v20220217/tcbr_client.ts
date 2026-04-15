@@ -26,24 +26,28 @@ import {
   StorageInfo,
   DescribeEnvBaseInfoResponse,
   DeployRecord,
+  StartVersionInstanceRequest,
   CreateCloudRunServerRequest,
   CreateVpcInfo,
   DescribeServerManageTaskResponse,
   SearchClsLogResponse,
+  TaskStepInfo,
   VersionPodInstance,
   DescribeVersionDetailRequest,
-  TaskStepInfo,
+  StopVersionInstanceResponse,
   DescribeCloudRunEnvsResponse,
   ServerBaseInfo,
   DescribeCloudRunEnvsRequest,
   ReleaseGrayResponse,
   DescribeCloudRunProcessLogResponse,
   VersionFlowInfo,
+  StopVersionInstanceRequest,
   DeployParam,
   DiffConfigItem,
   SubmitServerRollbackResponse,
   VolumeConf,
   Tag,
+  StartVersionInstanceResponse,
   OnlineVersionInfo,
   SearchClsLogRequest,
   DescribeCloudRunPodListRequest,
@@ -143,6 +147,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 停止版本实例
+   */
+  async StopVersionInstance(
+    req: StopVersionInstanceRequest,
+    cb?: (error: string, rep: StopVersionInstanceResponse) => void
+  ): Promise<StopVersionInstanceResponse> {
+    return this.request("StopVersionInstance", req, cb)
+  }
+
+  /**
    * 查询云托管服务列表接口
    */
   async DescribeCloudRunServers(
@@ -150,6 +164,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudRunServersResponse) => void
   ): Promise<DescribeCloudRunServersResponse> {
     return this.request("DescribeCloudRunServers", req, cb)
+  }
+
+  /**
+   * 回滚版本
+   */
+  async SubmitServerRollback(
+    req: SubmitServerRollbackRequest,
+    cb?: (error: string, rep: SubmitServerRollbackResponse) => void
+  ): Promise<SubmitServerRollbackResponse> {
+    return this.request("SubmitServerRollback", req, cb)
   }
 
   /**
@@ -223,13 +247,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 回滚版本
+   * 启动版本实例
    */
-  async SubmitServerRollback(
-    req: SubmitServerRollbackRequest,
-    cb?: (error: string, rep: SubmitServerRollbackResponse) => void
-  ): Promise<SubmitServerRollbackResponse> {
-    return this.request("SubmitServerRollback", req, cb)
+  async StartVersionInstance(
+    req: StartVersionInstanceRequest,
+    cb?: (error: string, rep: StartVersionInstanceResponse) => void
+  ): Promise<StartVersionInstanceResponse> {
+    return this.request("StartVersionInstance", req, cb)
   }
 
   /**

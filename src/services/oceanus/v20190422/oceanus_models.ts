@@ -447,27 +447,27 @@ export interface ClusterVersion {
  */
 export interface DescribeTreeJobsResponse {
   /**
-   * 父节点ID
+   * <p>父节点ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentId?: string
   /**
-   * 当前文件夹ID
+   * <p>当前文件夹ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
-   * 当前文件夹名
+   * <p>当前文件夹名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 当前文件夹下的作业列表
+   * <p>当前文件夹下的作业列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobSet?: Array<TreeJobSets>
   /**
-   * 迭代子目录
+   * <p>迭代子目录</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Children?: Array<DescribeTreeJobsRsp>
@@ -857,6 +857,10 @@ export interface Setats {
    * <p>setats镜像版本</p>
    */
   ImageVersion?: string
+  /**
+   * <p>类型：0 公网，1 内网</p><p>枚举值：</p><ul><li>0： 公网</li><li>1： 内网</li></ul><p>默认值：0</p>
+   */
+  WebUIType?: number
 }
 
 /**
@@ -3233,272 +3237,281 @@ export interface DeleteResourceConfigsResponse {
  */
 export interface Cluster {
   /**
-   * 集群 ID
+   * <p>集群 ID</p>
    */
   ClusterId?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   Name?: string
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region?: string
   /**
-   * 用户 AppID
+   * <p>用户 AppID</p>
    */
   AppId?: number
   /**
-   * 主账号 UIN
+   * <p>主账号 UIN</p>
    */
   OwnerUin?: string
   /**
-   * 创建者 UIN
+   * <p>创建者 UIN</p>
    */
   CreatorUin?: string
   /**
-   * 集群状态, 1 未初始化,3 初始化中，2 运行中
+   * <p>集群状态, 1 未初始化,3 初始化中，2 运行中</p>
    */
   Status?: number
   /**
-   * 描述
+   * <p>描述</p>
    */
   Remark?: string
   /**
-   * 集群创建时间
+   * <p>集群创建时间</p>
    */
   CreateTime?: string
   /**
-   * 最后一次操作集群的时间
+   * <p>最后一次操作集群的时间</p>
    */
   UpdateTime?: string
   /**
-   * CU 数量
+   * <p>CU 数量</p>
    */
   CuNum?: number
   /**
-   * CU 内存规格
+   * <p>CU 内存规格</p>
    */
   CuMem?: number
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone?: string
   /**
-   * 状态描述
+   * <p>状态描述</p>
    */
   StatusDesc?: string
   /**
-   * 网络
+   * <p>网络</p>
    */
   CCNs?: Array<CCN>
   /**
-   * 网络
+   * <p>网络</p>
    */
   NetEnvironmentType?: number
   /**
-   * 空闲 CU
+   * <p>空闲 CU</p>
    */
   FreeCuNum?: number
   /**
-   * 集群绑定的标签
+   * <p>集群绑定的标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
-   * 集群隔离时间; 没隔离时间，则为 -
+   * <p>集群隔离时间; 没隔离时间，则为 -</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsolatedTime?: string
   /**
-   * 集群过期时间; 没过期概念，则为 -
+   * <p>集群过期时间; 没过期概念，则为 -</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
   /**
-   * 距离过期还有多少秒; 没过期概念，则为 -
+   * <p>距离过期还有多少秒; 没过期概念，则为 -</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SecondsUntilExpiry?: string
   /**
-   * 自动续费标记，0 表示默认状态 (用户未设置，即初始状态，用户开通了预付费不停服特权会进行自动续费)， 1 表示自动续费，2表示明确不自动续费(用户设置)
+   * <p>自动续费标记，0 表示默认状态 (用户未设置，即初始状态，用户开通了预付费不停服特权会进行自动续费)， 1 表示自动续费，2表示明确不自动续费(用户设置)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRenewFlag?: number
   /**
-   * 集群的默认 COS 存储桶
+   * <p>集群的默认 COS 存储桶</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DefaultCOSBucket?: string
   /**
-   * 集群的CLS 日志集 LogSet
+   * <p>集群的CLS 日志集 LogSet</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CLSLogSet?: string
   /**
-   * 集群的CLS 日志主题 TopicId
+   * <p>集群的CLS 日志主题 TopicId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CLSTopicId?: string
   /**
-   * 集群的CLS 日志集  名字
+   * <p>集群的CLS 日志集  名字</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CLSLogName?: string
   /**
-   * 集群的CLS 日志主题  名字
+   * <p>集群的CLS 日志主题  名字</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CLSTopicName?: string
   /**
-   * 集群的版本信息
+   * <p>集群的版本信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: ClusterVersion
   /**
-   * 细粒度资源下的空闲CU
+   * <p>细粒度资源下的空闲CU</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FreeCu?: number
   /**
-   * 集群的默认日志采集配置
+   * <p>集群的默认日志采集配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DefaultLogCollectConf?: string
   /**
-   * 取值：0-没有设置，1-已设置，2-不允许设置
+   * <p>取值：0-没有设置，1-已设置，2-不允许设置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomizedDNSEnabled?: number
   /**
-   * 空间信息
+   * <p>空间信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Correlations?: Array<WorkSpaceClusterItem>
   /**
-   * 运行CU
+   * <p>运行CU</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningCu?: number
   /**
-   * 0 后付费,1 预付费
+   * <p>0 后付费,1 预付费</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PayMode?: number
   /**
-   * 前端区分 集群是否需要2CU逻辑 因为历史集群 变配不需要, default 1  新集群都需要
+   * <p>前端区分 集群是否需要2CU逻辑 因为历史集群 变配不需要, default 1  新集群都需要</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsNeedManageNode?: number
   /**
-   * session集群信息
+   * <p>session集群信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterSessions?: Array<ClusterSession>
   /**
-   * V3版本 = 2
+   * <p>V3版本 = 2</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ArchGeneration?: number
   /**
-   * 0:TKE, 1:EKS
+   * <p>0:TKE, 1:EKS</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterType?: number
   /**
-   * 订单信息
+   * <p>订单信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Orders?: Array<Order>
   /**
-   * Gateway信息
+   * <p>Gateway信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SqlGateways?: Array<SqlGatewayItem>
   /**
-   * 0 公网访问 // 1 内网访问	
+   * <p>0 公网访问 // 1 内网访问</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WebUIType?: number
   /**
-   * 2 独享集群
+   * <p>2 独享集群</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: number
   /**
-   * 子eks集群
+   * <p>子eks集群</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubEks?: SubEks
   /**
-   * 上级集群
+   * <p>上级集群</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AgentSerialId?: string
   /**
-   * 资源类型
+   * <p>资源类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceType?: number
   /**
-   * 集群类型
+   * <p>集群类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingResourceMode?: string
   /**
-   * Cu比例
+   * <p>Cu比例</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MemRatio?: number
   /**
-   * 是否开启跨租户弹性网卡
+   * <p>是否开启跨租户弹性网卡</p>
    */
   CrossTenantEniMode?: number
   /**
-   * 总的CPU
+   * <p>总的CPU</p>
    */
   TotalCpu?: number
   /**
-   * 总的内存
+   * <p>总的内存</p>
    */
   TotalMem?: number
   /**
-   * 运行的CPU
+   * <p>运行的CPU</p>
    */
   RunningCpu?: number
   /**
-   * 运行的内存
+   * <p>运行的内存</p>
    */
   RunningMem?: number
   /**
-   * setats集群
+   * <p>setats集群</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Setats?: Setats
   /**
-   * []
+   * <p>[]</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Yarns?: Array<HadoopYarnItem>
   /**
-   * 0 单可用区 1多可用区
+   * <p>0 单可用区 1多可用区</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeploymentMode?: number
   /**
-   * 备可用区
+   * <p>备可用区</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SlaveZones?: Array<SlaveZone>
   /**
-   * 集群的日志cos存储
+   * <p>集群的日志cos存储</p>
    */
   LogCOSBucket?: string
   /**
-   * Cdc集群Id
+   * <p>Cdc集群Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CdcId?: string
+  /**
+   * <p>集群进度</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterProcessMsg?: string
+  /**
+   * <p>单作业最大可配置 CU 数</p>
+   */
+  MaxCuPerJob?: number
 }
 
 /**
@@ -4769,11 +4782,11 @@ export interface CopyJobItem {
  */
 export interface DescribeTreeJobsRequest {
   /**
-   * 筛选条件字段，使用了筛选字段后不支持分页，最多返回2000条记录
+   * <p>筛选条件字段，使用了筛选字段后不支持分页，最多返回2000条记录</p>
    */
   Filters?: Array<Filter>
   /**
-   * 工作空间 Serialid
+   * <p>工作空间 Serialid</p>
    */
   WorkSpaceId?: string
 }

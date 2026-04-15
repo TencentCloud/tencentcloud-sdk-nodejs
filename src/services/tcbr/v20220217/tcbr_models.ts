@@ -323,6 +323,24 @@ export interface DeployRecord {
 }
 
 /**
+ * StartVersionInstance请求参数结构体
+ */
+export interface StartVersionInstanceRequest {
+  /**
+   * 环境Id
+   */
+  EnvId: string
+  /**
+   * 服务名
+   */
+  ServerName: string
+  /**
+   * 版本名
+   */
+  VersionName: string
+}
+
+/**
  * CreateCloudRunServer请求参数结构体
  */
 export interface CreateCloudRunServerRequest {
@@ -403,6 +421,39 @@ export interface SearchClsLogResponse {
 }
 
 /**
+ * 任务步骤信息
+ */
+export interface TaskStepInfo {
+  /**
+   * 步骤名
+   */
+  Name?: string
+  /**
+   * 未启动："todo"
+运行中："running"
+失败："failed"
+成功结束："finished"
+   */
+  Status?: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 消耗时间：秒
+   */
+  CostTime?: number
+  /**
+   * 失败原因
+   */
+  FailReason?: string
+}
+
+/**
  * 版本Pod实例信息
  */
 export interface VersionPodInstance {
@@ -447,36 +498,13 @@ export interface DescribeVersionDetailRequest {
 }
 
 /**
- * 任务步骤信息
+ * StopVersionInstance返回参数结构体
  */
-export interface TaskStepInfo {
+export interface StopVersionInstanceResponse {
   /**
-   * 步骤名
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
-  /**
-   * 未启动："todo"
-运行中："running"
-失败："failed"
-成功结束："finished"
-   */
-  Status?: string
-  /**
-   * 开始时间
-   */
-  StartTime?: string
-  /**
-   * 结束时间
-   */
-  EndTime?: string
-  /**
-   * 消耗时间：秒
-   */
-  CostTime?: number
-  /**
-   * 失败原因
-   */
-  FailReason?: string
+  RequestId?: string
 }
 
 /**
@@ -605,6 +633,24 @@ export interface VersionFlowInfo {
    * 权重
    */
   Priority?: number
+}
+
+/**
+ * StopVersionInstance请求参数结构体
+ */
+export interface StopVersionInstanceRequest {
+  /**
+   * 环境Id
+   */
+  EnvId: string
+  /**
+   * 服务名
+   */
+  ServerName: string
+  /**
+   * 实例名
+   */
+  InstanceName: string
 }
 
 /**
@@ -774,6 +820,20 @@ export interface Tag {
    * 标签值
    */
   Value: string
+}
+
+/**
+ * StartVersionInstance返回参数结构体
+ */
+export interface StartVersionInstanceResponse {
+  /**
+   * pod名
+   */
+  InstanceName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

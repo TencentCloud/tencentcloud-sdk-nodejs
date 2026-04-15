@@ -34,6 +34,7 @@ import {
   CreateVpcPeeringConnectionRequest,
   ModifyGlobalRoutesRequest,
   ResetTrafficMirrorFilterRequest,
+  ReplaceRouteTableAssociationResponse,
   DescribeBandwidthPackageResourcesRequest,
   DescribeVpnConnectionsRequest,
   CreateAssistantCidrRequest,
@@ -244,6 +245,7 @@ import {
   ReplaceRoutePolicyEntriesResponse,
   CreateCdcLDCXListRequest,
   ModifyAddressInternetChargeTypeRequest,
+  ModifyNatGatewayAdvancedAttributeRequest,
   ModifyIp6AddressesBandwidthRequest,
   DisableVpnGatewaySslClientCertResponse,
   CreateLocalGatewayRequest,
@@ -628,7 +630,7 @@ import {
   Subnet,
   DeleteNatGatewayDestinationIpPortTranslationNatRuleResponse,
   DeleteVpnGatewayRequest,
-  ReplaceRouteTableAssociationResponse,
+  ModifyNatGatewayAdvancedAttributeResponse,
   AttachCcnInstancesRequest,
   ModifyBandwidthPackageBandwidthResponse,
   DeleteRoutePolicyAssociationsRequest,
@@ -4742,6 +4744,16 @@ LimitTypes取值范围：
     cb?: (error: string, rep: ResetRoutesResponse) => void
   ): Promise<ResetRoutesResponse> {
     return this.request("ResetRoutes", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyNatGatewayAdvancedAttribute）用于修改NAT网关的高级属性。
+   */
+  async ModifyNatGatewayAdvancedAttribute(
+    req: ModifyNatGatewayAdvancedAttributeRequest,
+    cb?: (error: string, rep: ModifyNatGatewayAdvancedAttributeResponse) => void
+  ): Promise<ModifyNatGatewayAdvancedAttributeResponse> {
+    return this.request("ModifyNatGatewayAdvancedAttribute", req, cb)
   }
 
   /**

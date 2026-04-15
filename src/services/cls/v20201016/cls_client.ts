@@ -1849,7 +1849,7 @@ export class Client extends AbstractClient {
   /**
      * 调用接口，发起一次对话请求。
 本接口支持智能生成检索分析语句等日志服务AI功能。
-⚠️注意：通过SSE流式调用此接口时，请务必设置请求域名（Endpoint）为 cls.ai.tencentcloudapi.com。
+⚠️注意：通过SSE流式调用此接口时，请务必设置请求域名（Endpoint）为 cls.ai.tencentcloudapi.com (VPC内网环境可配置 cls.ai.internal.tencentcloudapi.com）。
      */
   async ChatCompletions(
     req: ChatCompletionsRequest,

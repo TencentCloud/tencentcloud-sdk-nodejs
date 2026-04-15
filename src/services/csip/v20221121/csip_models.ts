@@ -6373,6 +6373,10 @@ export interface RiskDetailItem {
    * 风险验证状态
    */
   CheckStatus?: string
+  /**
+   *
+   */
+  AppID?: number
 }
 
 /**

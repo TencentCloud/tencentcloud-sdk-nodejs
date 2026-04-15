@@ -68,6 +68,16 @@ it("tdmysql.v20211122.DescribeDBSAvailableRecoveryTime", async function () {
     }
 })
 
+it("tdmysql.v20211122.ModifyDBSBackupPolicy", async function () {
+    try {
+       const data = await client.ModifyDBSBackupPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmysql.v20211122.ModifyDBSBackupSetComment", async function () {
     try {
        const data = await client.ModifyDBSBackupSetComment({})
@@ -88,9 +98,9 @@ it("tdmysql.v20211122.DeleteDBSBackupSets", async function () {
     }
 })
 
-it("tdmysql.v20211122.ModifyDBSBackupPolicy", async function () {
+it("tdmysql.v20211122.DescribeDBSArchiveLogs", async function () {
     try {
-       const data = await client.ModifyDBSBackupPolicy({})
+       const data = await client.DescribeDBSArchiveLogs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

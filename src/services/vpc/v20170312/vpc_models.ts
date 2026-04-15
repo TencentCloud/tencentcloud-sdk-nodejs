@@ -351,6 +351,16 @@ export interface ResetTrafficMirrorFilterRequest {
 }
 
 /**
+ * ReplaceRouteTableAssociation返回参数结构体
+ */
+export interface ReplaceRouteTableAssociationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeBandwidthPackageResources请求参数结构体
  */
 export interface DescribeBandwidthPackageResourcesRequest {
@@ -4585,6 +4595,28 @@ BANDWIDTH_POSTPAID_BY_HOUR：带宽按小时后付费
    * 包月带宽网络计费模式参数。弹性公网IP的调整目标计费模式是 BANDWIDTH_PREPAID_BY_MONTH（包月按带宽预付费）时，必传该参数。
    */
   AddressChargePrepaid?: AddressChargePrepaid
+}
+
+/**
+ * ModifyNatGatewayAdvancedAttribute请求参数结构体
+ */
+export interface ModifyNatGatewayAdvancedAttributeRequest {
+  /**
+   * NAT网关的ID，形如：`nat-df45454`。
+   */
+  NatGatewayId: string
+  /**
+   * UDP映射空闲时间，单位：秒。含义为UDP流空闲多少秒以后从NAT映射中释放。取值范围为：3-7200，默认为180。
+   */
+  UDPMappingTimeout?: number
+  /**
+   * TCP已建立的连接空闲超时时间，单位：秒。含义为TCP已建立的连接空闲多少秒以后从NAT映射中释放。取值范围为：40-10800，默认为10800。
+   */
+  TCPEstablishedConnectionTimeout?: number
+  /**
+   * TCP TIME_WAIT超时时间，单位：秒。含义为完全关闭的TCP连接在到期后保留在NAT映射中的秒数。取值范围为：10-600，默认为120。
+   */
+  TCPTimeWaitTimeout?: number
 }
 
 /**
@@ -12797,9 +12829,9 @@ export interface DeleteVpnGatewayRequest {
 }
 
 /**
- * ReplaceRouteTableAssociation返回参数结构体
+ * ModifyNatGatewayAdvancedAttribute返回参数结构体
  */
-export interface ReplaceRouteTableAssociationResponse {
+export interface ModifyNatGatewayAdvancedAttributeResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

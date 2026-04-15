@@ -54,6 +54,8 @@ import {
   StrategyConfig,
   RenewInstancesInfo,
   ModifyResourceRequest,
+  DescribeBootScriptResponse,
+  PodVolume,
   MultiDisk,
   DescribeHBaseTableRequestMetricRequest,
   NodeSpecDisk,
@@ -136,6 +138,7 @@ import {
   DiffDetail,
   Disk,
   TimeAutoScaleStrategy,
+  DescribeBootScriptRequest,
   EmrProductConfigOutter,
   HostPathVolumeSource,
   OperationLog,
@@ -156,6 +159,7 @@ import {
   DescribeClusterNodesResponse,
   DescribeYarnApplicationsRequest,
   DiskGroup,
+  ModifyBootScriptResponse,
   DeleteUserManagerUserListRequest,
   DescribeResourceScheduleResponse,
   EMREventListItem,
@@ -189,6 +193,7 @@ import {
   InquiryPriceCreateInstanceRequest,
   DescribeSLInstanceResponse,
   TagInfo,
+  DescribeBootScriptRsp,
   ModifySLInstanceResponse,
   ModifyGlobalConfigRequest,
   DescribeHBaseTableStoreSizeMetricResponse,
@@ -218,6 +223,7 @@ import {
   DescribeInstanceOplogResponse,
   ZoneDetailPriceResult,
   DescribeAutoScaleGroupGlobalConfRequest,
+  PreExecuteFileSetting,
   ModifyResourceScheduleConfigResponse,
   NodeDetailPriceResult,
   DescribeEMREventListRequest,
@@ -232,7 +238,7 @@ import {
   DescribeJobFlowRequest,
   CloudResource,
   StarRocksQueryInfo,
-  PodVolume,
+  ModifyBootScriptRequest,
   FlowParamsDesc,
   ModifyYarnDeployResponse,
   UserManagerUserBriefInfo,
@@ -551,6 +557,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 本接口（CreateSLInstance）用于创建Serverless实例、如HBase、Starrocks、TCBase等
+- 接口调用成功，会创建Serverless实例，创建实例请求成功会返回创建实例的InstaceId和请求的 RequestID。
+- 接口为异步接口，接口返回时操作并未立即完成，实例操作结果可以通过调用DescribeInstancesList查看当前实例的StatusDesc状态。
+     */
+  async CreateSLInstance(
+    req: CreateSLInstanceRequest,
+    cb?: (error: string, rep: CreateSLInstanceResponse) => void
+  ): Promise<CreateSLInstanceResponse> {
+    return this.request("CreateSLInstance", req, cb)
+  }
+
+  /**
    * 查询流程任务
    */
   async DescribeJobFlow(
@@ -568,6 +586,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeHiveQueriesResponse) => void
   ): Promise<DescribeHiveQueriesResponse> {
     return this.request("DescribeHiveQueries", req, cb)
+  }
+
+  /**
+   * 修改自动扩缩容规则
+   */
+  async ModifyAutoScaleStrategy(
+    req: ModifyAutoScaleStrategyRequest,
+    cb?: (error: string, rep: ModifyAutoScaleStrategyResponse) => void
+  ): Promise<ModifyAutoScaleStrategyResponse> {
+    return this.request("ModifyAutoScaleStrategy", req, cb)
   }
 
   /**
@@ -751,15 +779,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（CreateSLInstance）用于创建Serverless实例、如HBase、Starrocks、TCBase等
-- 接口调用成功，会创建Serverless实例，创建实例请求成功会返回创建实例的InstaceId和请求的 RequestID。
-- 接口为异步接口，接口返回时操作并未立即完成，实例操作结果可以通过调用DescribeInstancesList查看当前实例的StatusDesc状态。
-     */
-  async CreateSLInstance(
-    req: CreateSLInstanceRequest,
-    cb?: (error: string, rep: CreateSLInstanceResponse) => void
-  ): Promise<CreateSLInstanceResponse> {
-    return this.request("CreateSLInstance", req, cb)
+   * 获取引导脚本
+   */
+  async DescribeBootScript(
+    req: DescribeBootScriptRequest,
+    cb?: (error: string, rep: DescribeBootScriptResponse) => void
+  ): Promise<DescribeBootScriptResponse> {
+    return this.request("DescribeBootScript", req, cb)
   }
 
   /**
@@ -773,13 +799,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改自动扩缩容规则
+   * 修改引导脚本
    */
-  async ModifyAutoScaleStrategy(
-    req: ModifyAutoScaleStrategyRequest,
-    cb?: (error: string, rep: ModifyAutoScaleStrategyResponse) => void
-  ): Promise<ModifyAutoScaleStrategyResponse> {
-    return this.request("ModifyAutoScaleStrategy", req, cb)
+  async ModifyBootScript(
+    req: ModifyBootScriptRequest,
+    cb?: (error: string, rep: ModifyBootScriptResponse) => void
+  ): Promise<ModifyBootScriptResponse> {
+    return this.request("ModifyBootScript", req, cb)
   }
 
   /**
@@ -835,13 +861,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云数据盘扩容
+   * 查看yarn资源调度的调度历史。废弃，请使用流程中心查看历史记录。
    */
-  async ResizeDataDisks(
-    req: ResizeDataDisksRequest,
-    cb?: (error: string, rep: ResizeDataDisksResponse) => void
-  ): Promise<ResizeDataDisksResponse> {
-    return this.request("ResizeDataDisks", req, cb)
+  async DescribeYarnScheduleHistory(
+    req: DescribeYarnScheduleHistoryRequest,
+    cb?: (error: string, rep: DescribeYarnScheduleHistoryResponse) => void
+  ): Promise<DescribeYarnScheduleHistoryResponse> {
+    return this.request("DescribeYarnScheduleHistory", req, cb)
   }
 
   /**
@@ -905,13 +931,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看yarn资源调度的调度历史。废弃，请使用流程中心查看历史记录。
+   * 云数据盘扩容
    */
-  async DescribeYarnScheduleHistory(
-    req: DescribeYarnScheduleHistoryRequest,
-    cb?: (error: string, rep: DescribeYarnScheduleHistoryResponse) => void
-  ): Promise<DescribeYarnScheduleHistoryResponse> {
-    return this.request("DescribeYarnScheduleHistory", req, cb)
+  async ResizeDataDisks(
+    req: ResizeDataDisksRequest,
+    cb?: (error: string, rep: ResizeDataDisksResponse) => void
+  ): Promise<ResizeDataDisksResponse> {
+    return this.request("ResizeDataDisks", req, cb)
   }
 
   /**

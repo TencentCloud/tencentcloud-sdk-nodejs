@@ -1009,9 +1009,13 @@ export interface UpdateConfigRecorderResponse {
  */
 export interface ListAlarmPolicyRequest {
   /**
-   * 页码
+   * <p>页码</p>
    */
   Offset: number
+  /**
+   * <p>每页展示数量</p>
+   */
+  Limit: number
 }
 
 /**
@@ -1171,11 +1175,11 @@ export interface ListSystemCompliancePacksRequest {
  */
 export interface ListAlarmPolicyResponse {
   /**
-   * 返回记录的数量
+   * <p>返回记录的数量</p>
    */
   Total?: number
   /**
-   * 告警策略返回值
+   * <p>告警策略返回值</p>
    */
   AlarmPolicyList?: Array<AlarmPolicyRsp>
   /**

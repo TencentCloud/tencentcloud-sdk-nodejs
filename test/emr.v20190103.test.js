@@ -168,6 +168,16 @@ it("emr.v20190103.DescribeResourceScheduleDiffDetail", async function () {
     }
 })
 
+it("emr.v20190103.CreateSLInstance", async function () {
+    try {
+       const data = await client.CreateSLInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.DescribeJobFlow", async function () {
     try {
        const data = await client.DescribeJobFlow({})
@@ -181,6 +191,16 @@ it("emr.v20190103.DescribeJobFlow", async function () {
 it("emr.v20190103.DescribeHiveQueries", async function () {
     try {
        const data = await client.DescribeHiveQueries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.ModifyAutoScaleStrategy", async function () {
+    try {
+       const data = await client.ModifyAutoScaleStrategy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,9 +388,9 @@ it("emr.v20190103.SyncPodState", async function () {
     }
 })
 
-it("emr.v20190103.CreateSLInstance", async function () {
+it("emr.v20190103.DescribeBootScript", async function () {
     try {
-       const data = await client.CreateSLInstance({})
+       const data = await client.DescribeBootScript({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,9 +408,9 @@ it("emr.v20190103.DescribeSLInstanceList", async function () {
     }
 })
 
-it("emr.v20190103.ModifyAutoScaleStrategy", async function () {
+it("emr.v20190103.ModifyBootScript", async function () {
     try {
-       const data = await client.ModifyAutoScaleStrategy({})
+       const data = await client.ModifyBootScript({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,9 +468,9 @@ it("emr.v20190103.AddMetricScaleStrategy", async function () {
     }
 })
 
-it("emr.v20190103.ResizeDataDisks", async function () {
+it("emr.v20190103.DescribeYarnScheduleHistory", async function () {
     try {
-       const data = await client.ResizeDataDisks({})
+       const data = await client.DescribeYarnScheduleHistory({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -518,9 +538,9 @@ it("emr.v20190103.DescribeClusterNodes", async function () {
     }
 })
 
-it("emr.v20190103.DescribeYarnScheduleHistory", async function () {
+it("emr.v20190103.ResizeDataDisks", async function () {
     try {
-       const data = await client.DescribeYarnScheduleHistory({})
+       const data = await client.ResizeDataDisks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

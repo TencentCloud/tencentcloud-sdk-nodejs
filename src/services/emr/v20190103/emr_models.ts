@@ -1197,6 +1197,41 @@ export interface ModifyResourceRequest {
 }
 
 /**
+ * DescribeBootScript返回参数结构体
+ */
+export interface DescribeBootScriptResponse {
+  /**
+   * 引导脚本详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Detail: DescribeBootScriptRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * Pod的存储设备描述信息。
+ */
+export interface PodVolume {
+  /**
+   * 存储类型，可为"pvc"，"hostpath"。
+   */
+  VolumeType: string
+  /**
+   * 当VolumeType为"pvc"时，该字段生效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PVCVolume?: PersistentVolumeContext
+  /**
+   * 当VolumeType为"hostpath"时，该字段生效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostVolume?: HostVolumeContext
+}
+
+/**
  * 多云盘参数
  */
 export interface MultiDisk {
@@ -3614,6 +3649,20 @@ export interface TimeAutoScaleStrategy {
 }
 
 /**
+ * DescribeBootScript请求参数结构体
+ */
+export interface DescribeBootScriptRequest {
+  /**
+   * EMR实例序列号
+   */
+  InstanceId: string
+  /**
+   * 引导脚本类型，resourceAfter,clusterAfter,clusterBefore不填时表示全部时机
+   */
+  BootType?: string
+}
+
+/**
  * EMR产品配置
  */
 export interface EmrProductConfigOutter {
@@ -4226,6 +4275,16 @@ export interface DiskGroup {
    * 同类型磁盘数量。
    */
   Count: number
+}
+
+/**
+ * ModifyBootScript返回参数结构体
+ */
+export interface ModifyBootScriptResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5393,6 +5452,32 @@ export interface TagInfo {
 }
 
 /**
+ * 引导脚本回包
+ */
+export interface DescribeBootScriptRsp {
+  /**
+   * 资源初始化结束自定义脚本文件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceAfter: Array<PreExecuteFileSetting>
+  /**
+   * 集群启动前自定义脚本文件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterBefore: Array<PreExecuteFileSetting>
+  /**
+   * 集群启动后自定义脚本文件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterAfter: Array<PreExecuteFileSetting>
+  /**
+   * 服务下线前自定义脚本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceBefore?: Array<PreExecuteFileSetting>
+}
+
+/**
  * ModifySLInstance返回参数结构体
  */
 export interface ModifySLInstanceResponse {
@@ -6080,6 +6165,64 @@ export interface DescribeAutoScaleGroupGlobalConfRequest {
 }
 
 /**
+ * 预执行脚本配置
+ */
+export interface PreExecuteFileSetting {
+  /**
+   * 脚本在COS上路径
+   */
+  Path?: string
+  /**
+   * 执行脚本参数
+   */
+  Args?: string
+  /**
+   * COS的Bucket名称
+   */
+  Bucket?: string
+  /**
+   * COS的Region名称
+   */
+  Region?: string
+  /**
+   * COS的Domain数据
+   */
+  Domain?: string
+  /**
+   * 执行顺序
+   */
+  RunOrder?: number
+  /**
+   * resourceAfter 或 clusterAfter
+   */
+  WhenRun?: string
+  /**
+   * 脚本文件名
+   */
+  CosFileName?: string
+  /**
+   * 脚本的cos地址
+   */
+  CosFileURI?: string
+  /**
+   * cos的SecretId
+   */
+  CosSecretId?: string
+  /**
+   * Cos的SecretKey
+   */
+  CosSecretKey?: string
+  /**
+   * cos的appid
+   */
+  AppId?: string
+  /**
+   * 备注
+   */
+  Remark?: string
+}
+
+/**
  * ModifyResourceScheduleConfig返回参数结构体
  */
 export interface ModifyResourceScheduleConfigResponse {
@@ -6566,23 +6709,21 @@ export interface StarRocksQueryInfo {
 }
 
 /**
- * Pod的存储设备描述信息。
+ * ModifyBootScript请求参数结构体
  */
-export interface PodVolume {
+export interface ModifyBootScriptRequest {
   /**
-   * 存储类型，可为"pvc"，"hostpath"。
+   * EMR实例Id
    */
-  VolumeType: string
+  InstanceId: string
   /**
-   * 当VolumeType为"pvc"时，该字段生效。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 引导脚本类型,resourceAfter,clusterAfter,clusterBefore
    */
-  PVCVolume?: PersistentVolumeContext
+  BootType: string
   /**
-   * 当VolumeType为"hostpath"时，该字段生效。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 引导脚本的具体变更，如为空表示WhenRun时机无引导脚本
    */
-  HostVolume?: HostVolumeContext
+  PreExecutedFileSettings?: Array<PreExecuteFileSetting>
 }
 
 /**

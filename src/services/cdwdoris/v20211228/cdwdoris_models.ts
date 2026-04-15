@@ -128,6 +128,10 @@ export interface DescribeClusterConfigsResponse {
    */
   ExistingJarConfList?: Array<ClusterConfigsInfoFromEMR>
   /**
+   * ipdb的文件大小 byte
+   */
+  IPDBFileSizeLimit?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -727,6 +731,10 @@ export interface DescribeAreaRegionResponse {
    */
   AvailableWhiteListNames?: Array<string>
   /**
+   * 隔离天数
+   */
+  IsolationDays?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1187,7 +1195,7 @@ export interface ChargeProperties {
  */
 export interface DescribeWorkloadGroupRequest {
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   InstanceId: string
 }
@@ -2730,6 +2738,14 @@ Changing  变更中
    * ccr服务部署节点ip
    */
   SyncerIp?: string
+  /**
+   * 是否支持sql convertor
+   */
+  EnableSqlConv?: number
+  /**
+   * 集群时区，默认+08:00
+   */
+  TimeZone?: string
 }
 
 /**
@@ -2813,6 +2829,10 @@ export interface DescribeBackUpSchedulesRequest {
    * 0-未加密；1-已加密
    */
   EncryptionFilters?: Array<number | bigint>
+  /**
+   * 调度任务id过滤
+   */
+  ScheduleId?: number
 }
 
 /**
@@ -2875,6 +2895,13 @@ export interface SnapshotRemainPolicy {
    * 保留最新快照的数量
    */
   RemainLatestNum?: number
+  /**
+   * 天数单位
+0：天
+1：季度
+2：年
+   */
+  RemainDaysUnit?: number
 }
 
 /**
@@ -3328,17 +3355,21 @@ export interface DescribeTableListRequest {
  */
 export interface DescribeWorkloadGroupResponse {
   /**
-   * 资源组信息
+   * <p>资源组信息</p>
    */
   WorkloadGroups?: Array<WorkloadGroupConfig>
   /**
-   * 是否开启资源组：开启-open、关闭-close
+   * <p>是否开启资源组：开启-open、关闭-close</p>
    */
   Status?: string
   /**
-   * 错误信息
+   * <p>错误信息</p>
    */
   ErrorMsg?: string
+  /**
+   * <p>是否开启监控，0：未开启，1：开启</p>
+   */
+  MonitorStatus?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4059,6 +4090,10 @@ export interface BackUpJobDisplay {
    * 是否开通加密存储：0-未开通，1-已开通
    */
   EncryptionEnabled?: boolean
+  /**
+   * 任务调度id
+   */
+  ScheduleId?: number
 }
 
 /**

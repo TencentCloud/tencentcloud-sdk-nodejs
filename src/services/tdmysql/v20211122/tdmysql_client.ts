@@ -25,6 +25,7 @@ import {
   ModifyInstanceNameResponse,
   ModifyDBInstanceSecurityGroupsResponse,
   DescribeDBParametersRequest,
+  DescribeDBSArchiveLogsResponse,
   DescribeDatabaseObjectsResponse,
   SecurityGroupBound,
   CreateDBSBackupResponse,
@@ -38,12 +39,14 @@ import {
   ModifyDBSBackupPolicyResponse,
   DescribeDBSCloneInstancesResponse,
   DescribeDBSecurityGroupsResponse,
-  BackupPolicyModelInput,
+  DescribeDBSArchiveLogsRequest,
+  DBParamValue,
   DatabaseFunction,
   ModifyDBSBackupPolicyRequest,
   DescribeDBSCloneInstancesRequest,
   DescribeDatabaseObjectsRequest,
   DescribeDBSAvailableRecoveryTimeResponse,
+  BackupPolicyModelInput,
   ModifyAutoRenewFlagResponse,
   DestroyInstancesResponse,
   DescribeDBParametersResponse,
@@ -59,7 +62,7 @@ import {
   CancelIsolateDBInstancesRequest,
   ModifyDBSBackupSetCommentRequest,
   DatabaseProcedure,
-  DBParamValue,
+  ArchiveLogModel,
   ParamConstraint,
   ModifyDBParametersRequest,
   ModifyDBInstanceSecurityGroupsRequest,
@@ -127,6 +130,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改实例备份策略 ModifyDBSBackupPolicy
+   */
+  async ModifyDBSBackupPolicy(
+    req: ModifyDBSBackupPolicyRequest,
+    cb?: (error: string, rep: ModifyDBSBackupPolicyResponse) => void
+  ): Promise<ModifyDBSBackupPolicyResponse> {
+    return this.request("ModifyDBSBackupPolicy", req, cb)
+  }
+
+  /**
    * 修改实例备份备注 ModifyDBSBackupSetComment
    */
   async ModifyDBSBackupSetComment(
@@ -147,13 +160,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改实例备份策略 ModifyDBSBackupPolicy
+   * 查询实例归档日志列表 DescribeDBSArchiveLogs
    */
-  async ModifyDBSBackupPolicy(
-    req: ModifyDBSBackupPolicyRequest,
-    cb?: (error: string, rep: ModifyDBSBackupPolicyResponse) => void
-  ): Promise<ModifyDBSBackupPolicyResponse> {
-    return this.request("ModifyDBSBackupPolicy", req, cb)
+  async DescribeDBSArchiveLogs(
+    req: DescribeDBSArchiveLogsRequest,
+    cb?: (error: string, rep: DescribeDBSArchiveLogsResponse) => void
+  ): Promise<DescribeDBSArchiveLogsResponse> {
+    return this.request("DescribeDBSArchiveLogs", req, cb)
   }
 
   /**

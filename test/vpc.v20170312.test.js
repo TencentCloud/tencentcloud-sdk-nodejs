@@ -3358,6 +3358,16 @@ it("vpc.v20170312.ResetRoutes", async function () {
     }
 })
 
+it("vpc.v20170312.ModifyNatGatewayAdvancedAttribute", async function () {
+    try {
+       const data = await client.ModifyNatGatewayAdvancedAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vpc.v20170312.DeleteNetworkAclEntries", async function () {
     try {
        const data = await client.DeleteNetworkAclEntries({})

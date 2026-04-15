@@ -48,9 +48,69 @@ it("vclm.v20240523.SubmitPortraitSingJob", async function () {
     }
 })
 
+it("vclm.v20240523.DescribeVideoEditKlingJob", async function () {
+    try {
+       const data = await client.DescribeVideoEditKlingJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.DescribeTextToVideoJob", async function () {
+    try {
+       const data = await client.DescribeTextToVideoJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.SubmitTextToVideoViduJob", async function () {
+    try {
+       const data = await client.SubmitTextToVideoViduJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.SubmitMotionControlKlingJob", async function () {
+    try {
+       const data = await client.SubmitMotionControlKlingJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vclm.v20240523.SubmitVideoFaceFusionJob", async function () {
     try {
        const data = await client.SubmitVideoFaceFusionJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.DescribeReferenceToVideoViduJob", async function () {
+    try {
+       const data = await client.DescribeReferenceToVideoViduJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.SubmitImageToVideoViduJob", async function () {
+    try {
+       const data = await client.SubmitImageToVideoViduJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +128,9 @@ it("vclm.v20240523.CheckAnimateImageJob", async function () {
     }
 })
 
-it("vclm.v20240523.SubmitImageToVideoViduJob", async function () {
+it("vclm.v20240523.SubmitVideoExtendKlingJob", async function () {
     try {
-       const data = await client.SubmitImageToVideoViduJob({})
+       const data = await client.SubmitVideoExtendKlingJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,6 +188,26 @@ it("vclm.v20240523.DescribeAigcVideoJob", async function () {
     }
 })
 
+it("vclm.v20240523.DescribeVideoExtendKlingJob", async function () {
+    try {
+       const data = await client.DescribeVideoExtendKlingJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.SubmitTemplateToVideoJob", async function () {
+    try {
+       const data = await client.SubmitTemplateToVideoJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vclm.v20240523.SubmitVideoEditJob", async function () {
     try {
        const data = await client.SubmitVideoEditJob({})
@@ -141,6 +221,26 @@ it("vclm.v20240523.SubmitVideoEditJob", async function () {
 it("vclm.v20240523.DescribeVideoVoiceJob", async function () {
     try {
        const data = await client.DescribeVideoVoiceJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.SubmitImageToVideoJob", async function () {
+    try {
+       const data = await client.SubmitImageToVideoJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.DescribeHumanActorJob", async function () {
+    try {
+       const data = await client.DescribeHumanActorJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,6 +308,26 @@ it("vclm.v20240523.SubmitImageAnimateJob", async function () {
     }
 })
 
+it("vclm.v20240523.SubmitVideoEditKlingJob", async function () {
+    try {
+       const data = await client.SubmitVideoEditKlingJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.DescribeImageToVideoViduJob", async function () {
+    try {
+       const data = await client.DescribeImageToVideoViduJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vclm.v20240523.DescribeVideoStylizationJob", async function () {
     try {
        const data = await client.DescribeVideoStylizationJob({})
@@ -218,9 +338,39 @@ it("vclm.v20240523.DescribeVideoStylizationJob", async function () {
     }
 })
 
-it("vclm.v20240523.DescribeHumanActorJob", async function () {
+it("vclm.v20240523.DescribeTextToVideoViduJob", async function () {
     try {
-       const data = await client.DescribeHumanActorJob({})
+       const data = await client.DescribeTextToVideoViduJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.SubmitTextToVideoJob", async function () {
+    try {
+       const data = await client.SubmitTextToVideoJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.DescribeImageToVideoJob", async function () {
+    try {
+       const data = await client.DescribeImageToVideoJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vclm.v20240523.SubmitReferenceToVideoViduJob", async function () {
+    try {
+       const data = await client.SubmitReferenceToVideoViduJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +388,9 @@ it("vclm.v20240523.DescribeVideoFaceFusionJob", async function () {
     }
 })
 
-it("vclm.v20240523.SubmitTemplateToVideoJob", async function () {
+it("vclm.v20240523.DescribeMotionControlKlingJob", async function () {
     try {
-       const data = await client.SubmitTemplateToVideoJob({})
+       const data = await client.DescribeMotionControlKlingJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

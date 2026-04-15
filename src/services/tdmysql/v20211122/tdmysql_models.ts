@@ -105,6 +105,25 @@ export interface DescribeDBParametersRequest {
 }
 
 /**
+ * DescribeDBSArchiveLogs返回参数结构体
+ */
+export interface DescribeDBSArchiveLogsResponse {
+  /**
+   * <p>归档日志列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<ArchiveLogModel>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDatabaseObjects返回参数结构体
  */
 export interface DescribeDatabaseObjectsResponse {
@@ -369,49 +388,59 @@ export interface DescribeDBSecurityGroupsResponse {
 }
 
 /**
- * 修改备份策略对象
+ * DescribeDBSArchiveLogs请求参数结构体
  */
-export interface BackupPolicyModelInput {
-  /**
-   * <p>备份结束时间</p>
-   */
-  BackupEndTime?: string
-  /**
-   * <p>备份方式  physical 物理备份 snapshot 快照备份</p>
-   */
-  BackupMethod?: string
-  /**
-   * <p>备份开始时间</p>
-   */
-  BackupStartTime?: string
-  /**
-   * <p>是否开启全量备份</p>
-   */
-  EnableFull?: number
-  /**
-   * <p>是否开启日志备份</p>
-   */
-  EnableLog?: number
-  /**
-   * <p>全备保留时间,目前只能设置7天</p>
-   */
-  FullRetentionPeriod?: number
+export interface DescribeDBSArchiveLogsRequest {
   /**
    * <p>实例ID</p>
    */
-  InstanceId?: string
+  InstanceId: string
   /**
-   * <p>日志保留天数，目前只能设置保留7天</p>
+   * <p>日志记录ID</p>
    */
-  LogRetentionPeriod?: number
+  ArchiveLogId?: number
   /**
-   * <p>一周的哪几天进行备份</p>
+   * <p>结束时间</p>
    */
-  PeriodTime?: string
+  EndTime?: string
   /**
-   * <p>存储类型:COS,SNAPSHOT</p>枚举值：<ul><li> COS： COS存储</li><li> SNAPSHOT： 云盘快照</li></ul>
+   * <p>备份状态：pending,running,success,failed</p>
    */
-  StorageType?: string
+  FilterStatus?: string
+  /**
+   * <p>条数限制</p>
+   */
+  Limit?: number
+  /**
+   * <p>偏移量</p>
+   */
+  Offset?: number
+  /**
+   * <p>排序字段，枚举：StartTime,EndTime,ExpiredTime,FileSize,BackupDuration</p>
+   */
+  OrderBy?: string
+  /**
+   * <p>排序方式：ASC：顺序, DESC：倒序</p>
+   */
+  OrderType?: string
+  /**
+   * <p>开始时间</p>
+   */
+  StartTime?: string
+}
+
+/**
+ * 云数据库参数信息。
+ */
+export interface DBParamValue {
+  /**
+   * 参数名称
+   */
+  Param: string
+  /**
+   * 参数值
+   */
+  Value: string
 }
 
 /**
@@ -517,6 +546,52 @@ export interface DescribeDBSAvailableRecoveryTimeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 修改备份策略对象
+ */
+export interface BackupPolicyModelInput {
+  /**
+   * <p>备份结束时间</p>
+   */
+  BackupEndTime?: string
+  /**
+   * <p>备份方式  physical 物理备份 snapshot 快照备份</p>
+   */
+  BackupMethod?: string
+  /**
+   * <p>备份开始时间</p>
+   */
+  BackupStartTime?: string
+  /**
+   * <p>是否开启全量备份</p>
+   */
+  EnableFull?: number
+  /**
+   * <p>是否开启日志备份</p>
+   */
+  EnableLog?: number
+  /**
+   * <p>全备保留时间,目前只能设置7天</p>
+   */
+  FullRetentionPeriod?: number
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>日志保留天数，目前只能设置保留7天</p>
+   */
+  LogRetentionPeriod?: number
+  /**
+   * <p>一周的哪几天进行备份</p>
+   */
+  PeriodTime?: string
+  /**
+   * <p>存储类型:COS,SNAPSHOT</p>枚举值：<ul><li> COS： COS存储</li><li> SNAPSHOT： 云盘快照</li></ul>
+   */
+  StorageType?: string
 }
 
 /**
@@ -754,17 +829,59 @@ export interface DatabaseProcedure {
 }
 
 /**
- * 云数据库参数信息。
+ * 归档日志对象
  */
-export interface DBParamValue {
+export interface ArchiveLogModel {
   /**
-   * 参数名称
+   * 归档日志ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Param: string
+  ArchiveLogId?: number
   /**
-   * 参数值
+   * 备份耗时
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Value: string
+  BackupDuration?: number
+  /**
+   * 备份集状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BackupStatus?: string
+  /**
+   * 备份结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMessage?: string
+  /**
+   * 过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpiredTime?: string
+  /**
+   * 备份文件名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileName?: string
+  /**
+   * 备份集文件大小，单位Byte
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileSize?: number
+  /**
+   * 实例ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 备份开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StartTime?: string
 }
 
 /**

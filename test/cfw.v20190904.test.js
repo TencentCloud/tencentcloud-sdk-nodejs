@@ -188,9 +188,9 @@ it("cfw.v20190904.ModifyClusterVpcFwSwitch", async function () {
     }
 })
 
-it("cfw.v20190904.ModifyNatSequenceRules", async function () {
+it("cfw.v20190904.DescribeNDRAssetIdentificationList", async function () {
     try {
-       const data = await client.ModifyNatSequenceRules({})
+       const data = await client.DescribeNDRAssetIdentificationList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -791,6 +791,16 @@ it("cfw.v20190904.DescribeRuleOverview", async function () {
 it("cfw.v20190904.DescribeIPStatusList", async function () {
     try {
        const data = await client.DescribeIPStatusList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ModifyNatSequenceRules", async function () {
+    try {
+       const data = await client.ModifyNatSequenceRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

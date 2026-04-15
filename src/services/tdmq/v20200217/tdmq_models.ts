@@ -4180,19 +4180,19 @@ export interface DescribeMsgResponse {
  */
 export interface CreateProClusterResponse {
   /**
-   * 子订单号
+   * <p>子订单号</p>
    */
   DealName?: string
   /**
-   * 订单号
+   * <p>订单号</p>
    */
   BigDealId?: string
   /**
-   * 集群Id
+   * <p>集群Id</p>
    */
   ClusterId?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName?: string
   /**
@@ -4252,47 +4252,45 @@ export interface Tag {
  */
 export interface CreateProClusterRequest {
   /**
-   * 多可用区部署选择三个可用区，示例[200002,200003,200004]
-
-单可用区部署选择一个可用区，示例[200002]
+   * <p>多可用区部署选择三个可用区，示例[200002,200003,200004]<br>单可用区部署选择一个可用区，示例[200002]</p><p>当选择PULSAR.P2.MINI1 时只支持两个可用区，其他支持三个可用区</p>
    */
   ZoneIds: Array<number | bigint>
   /**
-   * 集群规格代号
-参考 [专业集群规格](https://cloud.tencent.com/document/product/1179/83705)
+   * <p>集群规格代号<br>参考 <a href="https://cloud.tencent.com/document/product/1179/83705">专业集群规格</a></p>
    */
   ProductName: string
   /**
-   * 1: true，开启自动按月续费
-
-0: false，关闭自动按月续费
+   * <p>1: true，开启自动按月续费</p><p>0: false，关闭自动按月续费</p>
    */
   AutoRenewFlag: number
   /**
-   * 购买时长，取值范围：1～50
+   * <p>购买时长，取值范围：1～50</p>
    */
   TimeSpan: number
   /**
-   * 集群名称，不支持中字以及除了短线和下划线外的特殊字符且不超过64个字符。
+   * <p>集群名称不能为空，支持数字、字母、中文以及符号 “-_=:.”，长度不超过64个字符</p>
    */
   ClusterName: string
   /**
-   * 是否自动选择代金券 1是 0否 默认为0
+   * <p>是否自动选择代金券 1是 0否 默认为0</p>
    */
   AutoVoucher: number
   /**
-   * 存储规格
-参考 [专业集群规格](https://cloud.tencent.com/document/product/1179/83705)
+   * <p>存储规格<br>参考 <a href="https://cloud.tencent.com/document/product/1179/83705">专业集群规格</a></p>
    */
   StorageSize?: number
   /**
-   * vpc网络标签
+   * <p>vpc网络标签</p>
    */
   Vpc?: VpcInfo
   /**
-   * 集群的标签列表(已废弃)
+   * <p>集群的标签列表(已废弃)</p>
    */
   Tags?: Array<Tag>
+  /**
+   * <p>集群版本信息</p>
+   */
+  InstanceVersion?: string
 }
 
 /**
@@ -6102,29 +6100,41 @@ export interface CreateRocketMQGroupRequest {
  */
 export interface Role {
   /**
-   * 角色名称。
+   * <p>角色名称。</p>
    */
   RoleName?: string
   /**
-   * 角色token值。
+   * <p>角色token值。</p>
    */
   Token?: string
   /**
-   * 备注说明。
+   * <p>备注说明。</p>
    */
   Remark?: string
   /**
-   * 创建时间。
+   * <p>创建时间。</p>
    */
   CreateTime?: string
   /**
-   * 更新时间。
+   * <p>更新时间。</p>
    */
   UpdateTime?: string
   /**
-   * 授权类型（Cluster：集群；TopicAndGroup：主题或消费组）
+   * <p>授权类型（Cluster：集群；TopicAndGroup：主题或消费组）</p>
    */
   PermType?: string
+  /**
+   * <p>角色类型</p><p>枚举值：</p><ul><li>Temporary： 轮转密钥</li><li>Permanent： 永久密钥</li></ul>
+   */
+  TokenType?: string
+  /**
+   * <p>SSM 唯一 ID</p>
+   */
+  SecretName?: string
+  /**
+   * <p>轮转周期</p><p>单位：天</p>
+   */
+  RotateFreq?: number
 }
 
 /**

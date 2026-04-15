@@ -114,6 +114,56 @@ success 成功
 }
 
 /**
+ * DescribeNDRAssetIdentificationList返回参数结构体
+ */
+export interface DescribeNDRAssetIdentificationListResponse {
+  /**
+   * 符合查询条件的总条数
+   */
+  Total?: number
+  /**
+   * 查询结果列表
+   */
+  Data?: Array<NDRAssetServiceInfo>
+  /**
+   * 服务类型统计结果
+   */
+  AssetCategoryStats?: Array<NDRAssetCategoryStats>
+  /**
+   * 地域可选项
+   */
+  RegionOptions?: Array<FieldOption>
+  /**
+   * IP版本可选项
+   */
+  IpVersionOptions?: Array<FieldOption>
+  /**
+   * IP类型可选项
+   */
+  IpTypeOptions?: Array<FieldOption>
+  /**
+   * 服务类型可选项
+   */
+  AssetCategoryOptions?: Array<FieldOption>
+  /**
+   * 识别来源可选项
+   */
+  IdentificationSourceOptions?: Array<FieldOption>
+  /**
+   * 协议可选项
+   */
+  ProtocolOptions?: Array<FieldOption>
+  /**
+   * 实例类型可选项
+   */
+  InstanceTypeOptions?: Array<FieldOption>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAclRule请求参数结构体
  */
 export interface ModifyAclRuleRequest {
@@ -2081,6 +2131,20 @@ export interface EnterpriseSecurityGroupRuleBetaInfo {
 }
 
 /**
+ * 字段可选项枚举值
+ */
+export interface FieldOption {
+  /**
+   * 字段展示值
+   */
+  Text?: string
+  /**
+   * 字段存储值
+   */
+  Value?: string
+}
+
+/**
  * DescribeIpsModeSwitch请求参数结构体
  */
 export type DescribeIpsModeSwitchRequest = null
@@ -2948,6 +3012,32 @@ export interface DeleteBlockIgnoreRuleListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeNDRAssetIdentificationList请求参数结构体
+ */
+export interface DescribeNDRAssetIdentificationListRequest {
+  /**
+   * 每页条数
+   */
+  Limit: number
+  /**
+   * 偏移量
+   */
+  Offset: number
+  /**
+   * 排序方式，asc正序 desc倒序
+   */
+  Order?: string
+  /**
+   * 排序字段
+   */
+  By?: string
+  /**
+   * 查询过滤条件，多个条件之间为AND的关系
+   */
+  Filters?: Array<OperatorFilter>
 }
 
 /**
@@ -4081,6 +4171,36 @@ export interface DeleteSecurityGroupRuleRequest {
    * 是否删除反向规则，0：否，1：是
    */
   IsDelReverse?: number
+}
+
+/**
+ * 查询过滤条件
+ */
+export interface OperatorFilter {
+  /**
+   * 过滤字段
+   */
+  Name: string
+  /**
+   * 匹配的值
+   */
+  Values: Array<string>
+  /**
+   * 操作类型：
+1：等于 field = value
+2：大于 field > value
+3：小于 field < value
+4：大于等于 field >= value
+5：小于等于 field <= value
+6：不等于 field <> value
+7：IN field IN (value1, value2...)
+8：NOT IN field NOT IN (value1, value2...)
+9：模糊匹配 field LIKE value
+13：非模糊匹配 field NOT LIKE value
+14：按位与 field & value = value
+15：between and field between value1 and value2
+   */
+  OperatorType: number
 }
 
 /**
@@ -5782,6 +5902,11 @@ export interface DescribeBlockIgnoreListRequest {
    */
   By: string
   /**
+   * blocklist 封禁列表
+whitelist 白名单列表
+   */
+  ShowType: string
+  /**
    * 搜索参数，json格式字符串，空则传"{}"，域名：domain，危险等级：level，放通原因：ignore_reason，安全事件来源：rule_source，地理位置：address，模糊搜索：common
    */
   SearchValue?: string
@@ -5789,11 +5914,6 @@ export interface DescribeBlockIgnoreListRequest {
    * 规则类型：1封禁，2放通
    */
   RuleType?: number
-  /**
-   * blocklist 封禁列表
-whitelist 白名单列表
-   */
-  ShowType?: string
 }
 
 /**
@@ -5914,6 +6034,20 @@ export interface BanAndAllowRule {
    * 封禁和放通对象
    */
   Ioc?: string
+}
+
+/**
+ * NDR资产服务统计结果
+ */
+export interface NDRAssetServiceStats {
+  /**
+   * 服务名称
+   */
+  Name?: string
+  /**
+   * 服务计数
+   */
+  Count?: number
 }
 
 /**
@@ -8054,6 +8188,20 @@ export interface CreateAcRulesRequest {
 }
 
 /**
+ * NDR资产识别服务类型统计结果
+ */
+export interface NDRAssetCategoryStats {
+  /**
+   * 服务类型
+   */
+  Name?: string
+  /**
+   * 服务统计结果
+   */
+  Services?: Array<NDRAssetServiceStats>
+}
+
+/**
  * DescribeNatFwDnatRule返回参数结构体
  */
 export interface DescribeNatFwDnatRuleResponse {
@@ -8115,6 +8263,95 @@ export interface CreateSecurityGroupRulesRequest {
    * 添加后是否启用规则，0：不启用，1：启用，默认1
    */
   Enable?: number
+}
+
+/**
+ * NDR资产识别信息
+ */
+export interface NDRAssetServiceInfo {
+  /**
+   * 资产ID
+   */
+  AssetId?: string
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 实例类型
+   */
+  InstanceType?: string
+  /**
+   * 地域
+   */
+  Region?: string
+  /**
+   * 私有网络ID
+   */
+  VpcId?: string
+  /**
+   * 私有网络名称
+   */
+  VpcName?: string
+  /**
+   * 服务IP
+   */
+  Ip?: string
+  /**
+   * 服务端口
+   */
+  Port?: number
+  /**
+   * IP版本 
+"0": IPv4
+"1": IPv6
+   */
+  IpVersion?: string
+  /**
+   * IP类型
+"0": 公网IP
+"1": EIP
+"-1": 内网IP
+   */
+  IpType?: string
+  /**
+   * 服务名称
+   */
+  AssetService?: string
+  /**
+   * 服务版本
+   */
+  AssetVersion?: string
+  /**
+   * 服务类型
+   */
+  AssetCategory?: string
+  /**
+   * 协议
+   */
+  Protocol?: string
+  /**
+   * 识别来源
+"0": 流量识别
+"1": 云资产实例
+   */
+  IdentificationSource?: string
+  /**
+   * 首次识别时间
+   */
+  FirstIdentificationTime?: string
+  /**
+   * 最近识别时间
+   */
+  LatestIdentificationTime?: string
+  /**
+   * 服务地址
+   */
+  ServerAddr?: string
 }
 
 /**

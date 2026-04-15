@@ -2612,109 +2612,103 @@ export interface DeleteTableRequest {
  */
 export interface EnvInfo {
   /**
-   * 账户下该环境唯一标识
+   * <p>账户下该环境唯一标识</p>
    */
   EnvId?: string
   /**
-   * 环境来源。包含以下取值：
-<li>miniapp：微信小程序</li>
-<li>qcloud ：腾讯云</li>
+   * <p>环境来源。包含以下取值：</p><li>miniapp：微信小程序</li><li>qcloud ：腾讯云</li>
    */
   Source?: string
   /**
-   * 环境别名，要以a-z开头，不能包含 a-zA-z0-9- 以外的字符
+   * <p>环境别名，要以a-z开头，不能包含 a-zA-z0-9- 以外的字符</p>
    */
   Alias?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 最后修改时间
+   * <p>最后修改时间</p>
    */
   UpdateTime?: string
   /**
-   * 环境状态。包含以下取值：
-<li>NORMAL：正常可用</li>
-<li>UNAVAILABLE：服务不可用，可能是尚未初始化或者初始化过程中</li>
+   * <p>环境状态。包含以下取值：</p><li>NORMAL：正常可用</li><li>UNAVAILABLE：服务不可用，可能是尚未初始化或者初始化过程中</li>
    */
   Status?: string
   /**
-   * 数据库列表
+   * <p>数据库列表</p>
    */
   Databases?: Array<DatabasesInfo>
   /**
-   * 存储列表
+   * <p>存储列表</p>
    */
   Storages?: Array<StorageInfo>
   /**
-   * 函数列表
+   * <p>函数列表</p>
    */
   Functions?: Array<FunctionInfo>
   /**
-   * tcb产品套餐ID，参考DescribePackages接口的返回值。
+   * <p>tcb产品套餐ID，参考DescribePackages接口的返回值。</p>
    */
   PackageId?: string
   /**
-   * 套餐中文名称，参考DescribePackages接口的返回值。
+   * <p>套餐中文名称，参考DescribePackages接口的返回值。</p>
    */
   PackageName?: string
   /**
-   * 云日志服务列表
+   * <p>云日志服务列表</p>
    */
   LogServices?: Array<LogServiceInfo>
   /**
-   * 静态资源信息
+   * <p>静态资源信息</p>
    */
   StaticStorages?: Array<StaticStorageInfo>
   /**
-   * 是否到期自动降为免费版
+   * <p>是否到期自动降为免费版</p>
    */
   IsAutoDegrade?: boolean
   /**
-   * 环境渠道
+   * <p>环境渠道</p>
    */
   EnvChannel?: string
   /**
-   * 支付方式。包含以下取值：
-<li> prepayment：预付费</li>
-<li> postpaid：后付费</li>
+   * <p>支付方式。包含以下取值：</p><li> prepayment：预付费</li><li> postpaid：后付费</li>
    */
   PayMode?: string
   /**
-   * 是否为默认环境
+   * <p>是否为默认环境</p>
    */
   IsDefault?: boolean
   /**
-   * 环境所属地域
+   * <p>环境所属地域</p>
    */
   Region?: string
   /**
-   * 环境标签列表
+   * <p>环境标签列表</p>
    */
   Tags?: Array<Tag>
   /**
-   * 自定义日志服务
+   * <p>自定义日志服务</p>
    */
   CustomLogServices?: Array<ClsInfo>
   /**
-   * 环境类型：baas, run, hoting, weda
+   * <p>环境类型：baas, run, hoting, weda</p>
    */
   EnvType?: string
   /**
-   * 是否是dau新套餐
+   * <p>是否是dau新套餐</p>
    */
   IsDauPackage?: boolean
   /**
-   * 套餐类型:空\baas\tcbr
+   * <p>套餐类型:空\baas\tcbr</p>
    */
   PackageType?: string
   /**
-   * 架构类型
+   * <p>架构类型</p>
    */
   ArchitectureType?: string
   /**
-   * 回收标志，默认为空
+   * <p>回收标志，默认为空</p>
    */
   Recycle?: string
 }
@@ -3435,25 +3429,33 @@ export interface ModifyDatabaseACLResponse {
  */
 export interface StaticStorageInfo {
   /**
-   * 静态CDN域名
+   * <p>静态CDN域名</p>
    */
   StaticDomain?: string
   /**
-   * 静态CDN默认文件夹，当前为根目录
+   * <p>静态CDN默认文件夹，当前为根目录</p>
    */
   DefaultDirName?: string
   /**
-   * 资源状态(process/online/offline/init)
+   * <p>资源状态(process/online/offline/init)</p>
    */
   Status?: string
   /**
-   * cos所属区域
+   * <p>cos所属区域</p>
    */
   Region?: string
   /**
-   * bucket信息
+   * <p>bucket信息</p>
    */
   Bucket?: string
+  /**
+   * <p>到期时间（秒级时间戳）</p>
+   */
+  AccessExpire?: number
+  /**
+   * <p>外部存储。</p>
+   */
+  ExternalStorage?: ExternalStorage
 }
 
 /**
@@ -4224,22 +4226,25 @@ export interface ApiKeyToken {
  */
 export interface StorageInfo {
   /**
-   * 资源所属地域。
-当前支持ap-shanghai
+   * <p>资源所属地域。<br>当前支持ap-shanghai</p>
    */
   Region?: string
   /**
-   * 桶名，存储资源的唯一标识
+   * <p>桶名，存储资源的唯一标识</p>
    */
   Bucket?: string
   /**
-   * cdn 域名
+   * <p>cdn 域名</p>
    */
   CdnDomain?: string
   /**
-   * 资源所属用户的腾讯云appId
+   * <p>资源所属用户的腾讯云appId</p>
    */
   AppId?: string
+  /**
+   * <p>外部存储介质相关信息。</p>
+   */
+  ExternalStorage?: ExternalStorage
 }
 
 /**

@@ -2511,6 +2511,32 @@ export interface NeonatalInfo {
 }
 
 /**
+ * 大小
+ */
+export interface Size {
+  /**
+   * 原文位置
+   */
+  Index?: Array<number | bigint>
+  /**
+   * 标准大小
+   */
+  NormSize?: NormSize
+  /**
+   * 原文
+   */
+  Src?: string
+  /**
+   * 值
+   */
+  Value?: string
+  /**
+   * 名称
+   */
+  Name?: string
+}
+
+/**
  * 眼科结构体
  */
 export interface EyeItem {
@@ -5765,29 +5791,21 @@ export interface SurgerySpinalExtremities {
 }
 
 /**
- * 大小
+ * 检验指标内容坐标
  */
-export interface Size {
+export interface ItemCoordinate {
   /**
-   * 原文位置
+   * <p>指标项名称坐标</p>
    */
-  Index?: Array<number | bigint>
+  Name?: Coordinate
   /**
-   * 标准大小
+   * <p>指标结果称坐标</p>
    */
-  NormSize?: NormSize
+  Result?: Coordinate
   /**
-   * 原文
+   * <p>指标项范围坐标</p>
    */
-  Src?: string
-  /**
-   * 值
-   */
-  Value?: string
-  /**
-   * 名称
-   */
-  Name?: string
+  Range?: Coordinate
 }
 
 /**
@@ -7139,65 +7157,70 @@ export interface GynaecologyAdnexal {
  */
 export interface IndicatorItem {
   /**
-   * 英文缩写
+   * <p>英文缩写</p>
    */
   Code?: string
   /**
-   * 标准缩写
+   * <p>标准缩写</p>
    */
   Scode?: string
   /**
-   * 项目名称
+   * <p>项目名称</p>
    */
   Name?: string
   /**
-   * 标准名
+   * <p>标准名</p>
    */
   Sname?: string
   /**
-   * 结果
+   * <p>结果</p>
    */
   Result?: string
   /**
-   * 单位
+   * <p>单位</p>
    */
   Unit?: string
   /**
-   * 参考范围
+   * <p>参考范围</p>
    */
   Range?: string
   /**
-   * 上下箭头
+   * <p>上下箭头</p>
    */
   Arrow?: string
   /**
-   * 是否正常
+   * <p>是否正常</p>
    */
   Normal?: boolean
   /**
-   * 项目原文
+   * <p>项目原文</p>
    */
   ItemString?: string
   /**
-   * 指标项ID
+   * <p>指标项ID</p>
    */
   Id?: number
   /**
-   * 指标项坐标位置
+   * <p>指标项坐标位置</p>
+   * @deprecated
    */
   Coords?: Coordinate
   /**
-   * 推测结果是否异常
+   * <p>推测结果是否异常</p>
    */
   InferNormal?: string
   /**
-   * 标本
+   * <p>标本</p>
    */
   Sample?: string
   /**
-   * 检测方法
+   * <p>检测方法</p>
    */
   Method?: string
+  /**
+   * <p>检验指标项坐标信息</p>
+   */
+  ItemCoords?: ItemCoordinate
 }
 
 /**

@@ -2952,57 +2952,57 @@ export interface AdvancedObjectsItem {
  */
 export interface Options {
   /**
-   * 同步初始化选项，Data(全量数据初始化)、Structure(结构初始化)、Full(全量数据且结构初始化，默认)、None(仅增量)；mongodb链路只支持全量数据初始化或仅增量。
+   * <p>同步初始化选项，Data(全量数据初始化)、Structure(结构初始化)、Full(全量数据且结构初始化，默认)、None(仅增量)；mongodb链路只支持全量数据初始化或仅增量。</p>
    */
   InitType?: string
   /**
-   * 同名表的处理，ReportErrorAfterCheck(前置校验并报错，默认)、ExecuteAfterIgnore(忽略并继续执行)
+   * <p>同名表的处理，ReportErrorAfterCheck(前置校验并报错，默认)、ExecuteAfterIgnore(忽略并继续执行)</p>
    */
   DealOfExistSameTable?: string
   /**
-   * 冲突处理选项，ReportError(报错，默认为该值)、Ignore(忽略)、Cover(覆盖)、ConditionCover(条件覆盖)
+   * <p>冲突处理选项，ReportError(报错，默认为该值)、Ignore(忽略)、Cover(覆盖)、ConditionCover(条件覆盖)</p>
    */
   ConflictHandleType?: string
   /**
-   * 是否添加附加列
+   * <p>是否添加附加列</p>
    */
   AddAdditionalColumn?: boolean
   /**
-   * 所要同步的DML和DDL的选项，Insert(插入操作)、Update(更新操作)、Delete(删除操作)、DDL(结构同步)， PartialDDL(自定义,和DdlOptions一起配合使用)。注意，这里至少需要包含DML中的一种。
+   * <p>所要同步的DML和DDL的选项，Insert(插入操作)、Update(更新操作)、Delete(删除操作)、DDL(结构同步)， PartialDDL(自定义,和DdlOptions一起配合使用)。注意，这里至少需要包含DML中的一种。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OpTypes?: Array<string>
   /**
-   * 冲突处理的详细选项，如条件覆盖中的条件行和条件操作
+   * <p>冲突处理的详细选项，如条件覆盖中的条件行和条件操作</p>
    */
   ConflictHandleOption?: ConflictHandleOption
   /**
-   * DDL同步选项，具体描述要同步哪些DDL
+   * <p>DDL同步选项，具体描述要同步哪些DDL</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DdlOptions?: Array<DdlOption>
   /**
-   * kafka同步选项
+   * <p>kafka同步选项</p>
    */
   KafkaOption?: KafkaOption
   /**
-   * 任务限速信息
+   * <p>任务限速信息</p>
    */
   RateLimitOption?: RateLimitOption
   /**
-   * 自动重试的时间窗口设置
+   * <p>自动重试的时间窗口设置</p>
    */
   AutoRetryTimeRangeMinutes?: number
   /**
-   * 同步到kafka链路指定位点。目前只支持时间格式：2023-12-20T19:24:23+08:00。如果没有指定位点，为空。
+   * <p>同步到kafka链路指定位点。目前只支持时间格式：2023-12-20T19:24:23+08:00。如果没有指定位点，为空。</p>
    */
   StartPosition?: string
   /**
-   * 同步到kafka链路是否过滤掉begin和commit消息。目前仅mysql2kafka链路支持
+   * <p>同步到kafka链路是否过滤掉begin和commit消息。目前仅mysql2kafka链路支持</p>
    */
   FilterBeginCommit?: boolean
   /**
-   * 同步到kafka链路是否过滤掉checkpoint消息。目前仅mysql2kafka链路支持
+   * <p>同步到kafka链路是否过滤掉checkpoint消息。目前仅mysql2kafka链路支持</p>
    */
   FilterCheckpoint?: boolean
 }
@@ -3047,72 +3047,71 @@ export interface CompareObjectItem {
  */
 export interface ConfigureSyncJobRequest {
   /**
-   * 同步实例id（即标识一个同步作业），形如sync-werwfs23，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。
-
+   * <p>同步实例id（即标识一个同步作业），形如sync-werwfs23，可通过<a href="https://cloud.tencent.com/document/product/571/82103">DescribeSyncJobs</a>接口获取。</p>
    */
   JobId: string
   /**
-   * 源端接入类型，cdb(云数据库)、cvm(云服务器自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云),注意具体可选值依赖当前链路
+   * <p>源端接入类型，cdb(云数据库)、cvm(云服务器自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云),注意具体可选值依赖当前链路</p>
    */
   SrcAccessType: string
   /**
-   * 目标端接入类型，cdb(云数据库)、cvm(云服务器自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)、ckafka(CKafka实例),注意具体可选值依赖当前链路
+   * <p>目标端接入类型，cdb(云数据库)、cvm(云服务器自建)、vpc(私有网络)、extranet(外网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、intranet(自研上云)、ckafka(CKafka实例),注意具体可选值依赖当前链路</p>
    */
   DstAccessType: string
   /**
-   * 同步库表对象信息
+   * <p>同步库表对象信息</p>
    */
   Objects: Objects
   /**
-   * 同步任务名称
+   * <p>同步任务名称</p>
    */
   JobName?: string
   /**
-   * 枚举值是 liteMode 和 fullMode ，分别对应精简模式或正常模式
+   * <p>配置任务模式，默认值为fullMode</p><p>枚举值：</p><ul><li>fullMode： 正常模式</li></ul>
    */
   JobMode?: string
   /**
-   * 运行模式，取值如：Immediate(表示立即运行，默认为此项值)、Timed(表示定时运行)
+   * <p>运行模式，取值如：Immediate(表示立即运行，默认为此项值)、Timed(表示定时运行)</p>
    */
   RunMode?: string
   /**
-   * 期待启动时间，当RunMode取值为Timed时，此值必填，形如："2006-01-02 15:04:05"
+   * <p>期待启动时间，当RunMode取值为Timed时，此值必填，形如：&quot;2006-01-02 15:04:05&quot;</p>
    */
   ExpectRunTime?: string
   /**
-   * 源端tdsql连接方式：proxy-通过tdsql proxy主机访问各个set节点，注意只有在自研上云的网络环境下才能通过这种方式连接，SrcInfos中只需要提供proxy主机信息。set-直连set节点，如选择直连set方式，需要正确填写proxy主机信息及所有set节点信息。源端是tdsqlmysql类型必填。
+   * <p>源端tdsql连接方式：proxy-通过tdsql proxy主机访问各个set节点，注意只有在自研上云的网络环境下才能通过这种方式连接，SrcInfos中只需要提供proxy主机信息。set-直连set节点，如选择直连set方式，需要正确填写proxy主机信息及所有set节点信息。源端是tdsqlmysql类型必填。</p>
    */
   SrcConnectType?: string
   /**
-   * 源端信息，单机版类型数据库配置使用，且SrcNodeType传single。例如mysql、percona、mariadb等。
+   * <p>源端信息，单机版类型数据库配置使用，且SrcNodeType传single。例如mysql、percona、mariadb等。</p>
    */
   SrcInfo?: Endpoint
   /**
-   * 源端信息，分布式类型数据库配置使用，且SrcNodeType传cluster。例如分布式数据库tdsqlmysql等，mongodb使用此参数透传。
+   * <p>源端信息，分布式类型数据库配置使用，且SrcNodeType传cluster。例如分布式数据库tdsqlmysql等，mongodb使用此参数透传。</p>
    */
   SrcInfos?: SyncDBEndpointInfos
   /**
-   * 枚举值：cluster、single。源库为单节点数据库使用single，多节点使用cluster
+   * <p>枚举值：cluster、single。源库为单节点数据库使用single，多节点使用cluster</p>
    */
   SrcNodeType?: string
   /**
-   * 目标端信息，单机版类型数据库配置使用，且SrcNodeType传single。例如mysql、percona、mariadb等。
+   * <p>目标端信息，单机版类型数据库配置使用，且SrcNodeType传single。例如mysql、percona、mariadb等。</p>
    */
   DstInfo?: Endpoint
   /**
-   * 目标端信息，分布式类型数据库配置使用，且SrcNodeType传cluster。例如分布式数据库tdsqlmysql等，mongodb使用此参数透传。
+   * <p>目标端信息，分布式类型数据库配置使用，且SrcNodeType传cluster。例如分布式数据库tdsqlmysql等，mongodb使用此参数透传。</p>
    */
   DstInfos?: SyncDBEndpointInfos
   /**
-   * 枚举值：cluster、single。目标库为单节点数据库使用single，多节点使用cluster
+   * <p>枚举值：cluster、single。目标库为单节点数据库使用single，多节点使用cluster</p>
    */
   DstNodeType?: string
   /**
-   * 同步任务选项；该字段下的RateLimitOption暂时无法生效、如果需要修改限速、可通过ModifySyncRateLimit接口完成限速
+   * <p>同步任务选项；该字段下的RateLimitOption暂时无法生效、如果需要修改限速、可通过ModifySyncRateLimit接口完成限速</p>
    */
   Options?: Options
   /**
-   * 自动重试的时间段、可设置5至720分钟、0表示不重试
+   * <p>自动重试的时间段、可设置5至720分钟、0表示不重试</p>
    */
   AutoRetryTimeRangeMinutes?: number
 }
@@ -4817,10 +4816,6 @@ export interface Objects {
    */
   AdvancedObjects?: Array<string>
   /**
-   * OnlineDDL类型，冗余字段不做配置用途
-   */
-  OnlineDDL?: OnlineDDL
-  /**
    * 库/表/视图级 DML/DDL 白名单
    */
   DatabasesOpFilter?: Array<DBOpFilter>
@@ -5508,16 +5503,6 @@ export interface RecoverMigrateJobRequest {
 
    */
   JobId: string
-}
-
-/**
- * OnlineDDL类型
- */
-export interface OnlineDDL {
-  /**
-   * 状态，ON-启用，OFF-不启用。
-   */
-  Status: string
 }
 
 /**

@@ -834,33 +834,37 @@ export interface DescribeRecordRetrieveTaskData {
  */
 export interface DescribeRecordBackupTemplateData {
   /**
-   * 模板ID
+   * <p>模板ID</p>
    */
   TemplateId?: string
   /**
-   * 模板名称
+   * <p>模板名称</p>
    */
   TemplateName?: string
   /**
-   * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+   * <p>上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）</p>
    */
   TimeSections?: Array<RecordTemplateTimeSections>
   /**
-   * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+   * <p>录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）</p>
    */
   DevTimeSections?: Array<RecordTemplateTimeSections>
   /**
-   * 上云倍速（支持1，2，4倍速）
+   * <p>上云倍速（支持1，2，4倍速）</p>
    */
   Scale?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateAt?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateAt?: string
+  /**
+   * <p>周期偏移量，默认1，表示拉取昨天的设备录像，0表示取去今天的设备录像，3表示拉取前天的设备录像</p>
+   */
+  DayOffset?: number
 }
 
 /**
@@ -1008,21 +1012,25 @@ export interface DescribeDeviceChannelResponse {
  */
 export interface AddRecordBackupTemplateRequest {
   /**
-   * 模板名称（仅支持中文、英文、数字、_、-，长度不超过32个字符，模板名称全局唯一，不能为空，不能重复）
+   * <p>模板名称（仅支持中文、英文、数字、_、-，长度不超过32个字符，模板名称全局唯一，不能为空，不能重复）</p>
    */
   TemplateName: string
   /**
-   * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+   * <p>上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）</p>
    */
   TimeSections: Array<RecordTemplateTimeSections>
   /**
-   * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+   * <p>录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）</p>
    */
   DevTimeSections: Array<RecordTemplateTimeSections>
   /**
-   * 上云倍速（支持1，2，4倍速）
+   * <p>上云倍速（支持1，2，4倍速）</p>
    */
   Scale: number
+  /**
+   * <p>周期偏移量，默认1，表示拉取昨天的设备录像，0表示取去今天的设备录像，3表示拉取前天的设备录像</p><p>取值范围：[0, 90]</p><p>默认值：1</p>
+   */
+  DayOffset?: number
 }
 
 /**
@@ -1237,33 +1245,37 @@ export interface DescribeGatewayRequest {
  */
 export interface AddRecordBackupTemplateData {
   /**
-   * 模板ID
+   * <p>模板ID</p>
    */
   TemplateId?: string
   /**
-   * 模板名称
+   * <p>模板名称</p>
    */
   TemplateName?: string
   /**
-   * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+   * <p>上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）</p>
    */
   TimeSections?: Array<RecordTemplateTimeSections>
   /**
-   * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+   * <p>录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）</p>
    */
   DevTimeSections?: Array<RecordTemplateTimeSections>
   /**
-   * 上云倍速（支持1，2，4倍速）
+   * <p>上云倍速（支持1，2，4倍速）</p>
    */
   Scale?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateAt?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateAt?: string
+  /**
+   * <p>周期偏移量，默认1，表示拉取昨天的设备录像，0表示取去今天的设备录像，3表示拉取前天的设备录像</p><p>默认值：1</p>
+   */
+  DayOffset?: number
 }
 
 /**
@@ -4258,33 +4270,37 @@ export interface ListRecordPlanDevicesData {
  */
 export interface ListRecordBackupTemplatesData {
   /**
-   * 模板ID
+   * <p>模板ID</p>
    */
   TemplateId?: string
   /**
-   * 模板名称
+   * <p>模板名称</p>
    */
   TemplateName?: string
   /**
-   * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+   * <p>上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）</p>
    */
   TimeSections?: Array<RecordTemplateTimeSections>
   /**
-   * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+   * <p>录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）</p>
    */
   DevTimeSections?: Array<RecordTemplateTimeSections>
   /**
-   * 上云倍速（支持1，2，4倍速）
+   * <p>上云倍速（支持1，2，4倍速）</p>
    */
   Scale?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateAt?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateAt?: string
+  /**
+   * <p>周期偏移量，默认1，表示拉去昨天的，0表示拉去今天的，3表示拉去前天的</p>
+   */
+  DayOffset?: number
 }
 
 /**
@@ -4852,7 +4868,7 @@ export interface UpdateRecordTemplateResponse {
  */
 export interface AddRecordBackupTemplateResponse {
   /**
-   * 返回数据
+   * <p>返回数据</p>
    */
   Data?: AddRecordBackupTemplateData
   /**
@@ -5576,33 +5592,37 @@ export type DescribeStreamAuthRequest = null
  */
 export interface UpdateRecordBackupTemplateData {
   /**
-   * 模板ID
+   * <p>模板ID</p>
    */
   TemplateId?: string
   /**
-   * 模板名称
+   * <p>模板名称</p>
    */
   TemplateName?: string
   /**
-   * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+   * <p>上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）</p>
    */
   TimeSections?: Array<RecordTemplateTimeSections>
   /**
-   * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+   * <p>录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）</p>
    */
   DevTimeSections?: Array<RecordTemplateTimeSections>
   /**
-   * 上云倍速（支持1，2，4倍速）
+   * <p>上云倍速（支持1，2，4倍速）</p>
    */
   Scale?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateAt?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateAt?: string
+  /**
+   * <p>周期偏移量，默认1，表示拉取昨天的设备录像，0表示取去今天的设备录像，3表示拉取前天的设备录像</p>
+   */
+  DayOffset?: number
 }
 
 /**

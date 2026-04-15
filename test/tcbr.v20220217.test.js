@@ -58,9 +58,29 @@ it("tcbr.v20220217.DescribeCloudRunPodList", async function () {
     }
 })
 
+it("tcbr.v20220217.StopVersionInstance", async function () {
+    try {
+       const data = await client.StopVersionInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcbr.v20220217.DescribeCloudRunServers", async function () {
     try {
        const data = await client.DescribeCloudRunServers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcbr.v20220217.SubmitServerRollback", async function () {
+    try {
+       const data = await client.SubmitServerRollback({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -138,9 +158,9 @@ it("tcbr.v20220217.CreateCloudRunEnv", async function () {
     }
 })
 
-it("tcbr.v20220217.SubmitServerRollback", async function () {
+it("tcbr.v20220217.StartVersionInstance", async function () {
     try {
-       const data = await client.SubmitServerRollback({})
+       const data = await client.StartVersionInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
