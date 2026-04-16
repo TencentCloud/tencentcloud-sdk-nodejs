@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   PauseSandboxInstanceResponse,
+  PauseSandboxInstanceRequest,
   CosStorageSource,
   StartSandboxInstanceRequest,
   SandboxInstance,
@@ -50,7 +51,7 @@ import {
   CustomConfiguration,
   ImageStorageSource,
   AcquireSandboxInstanceTokenRequest,
-  PauseSandboxInstanceRequest,
+  LogSources,
   DescribeAPIKeyListResponse,
   CreatePreCacheImageTaskResponse,
   DescribeSandboxInstanceListRequest,

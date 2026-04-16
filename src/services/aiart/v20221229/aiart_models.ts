@@ -821,22 +821,22 @@ export interface QueryTextToImageProJobResponse {
  */
 export interface LogoRect {
   /**
-   * 左上角X坐标
+   * <p>左上角X坐标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   X?: number
   /**
-   * 左上角Y坐标
+   * <p>左上角Y坐标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Y?: number
   /**
-   * 方框宽度
+   * <p>方框宽度<br>单位为 px</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Width?: number
   /**
-   * 方框高度
+   * <p>方框高度<br>单位为 px</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Height?: number

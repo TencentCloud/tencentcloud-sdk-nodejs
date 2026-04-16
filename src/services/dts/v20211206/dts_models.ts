@@ -918,6 +918,25 @@ export interface DifferenceData {
 }
 
 /**
+ * DescribeSyncCompareDiffItems返回参数结构体
+ */
+export interface DescribeSyncCompareDiffItemsResponse {
+  /**
+   * 查询结果的数量
+   */
+  TotalCount?: number
+  /**
+   * 查询结果详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<DiffChunkItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCheckSyncJob请求参数结构体
  */
 export interface CreateCheckSyncJobRequest {
@@ -1803,6 +1822,61 @@ export interface CompareColumnItem {
 }
 
 /**
+ * 数据块内不一致数据的详情信息
+ */
+export interface DiffChunkItem {
+  /**
+   * 数据库名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DBName?: string
+  /**
+   * schema名
+   */
+  SchemaName?: string
+  /**
+   * 数据表名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
+  /**
+   * 分块号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChunkId?: number
+  /**
+   * 数据标识符，比如主键信息等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Identifier?: string
+  /**
+   * 不一致类型，可能的取值为：data - 两边数据不一致；srcLack - 源缺失；dstLack - 目标缺失
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiffType?: string
+  /**
+   * 表结构信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchemaInfo?: Array<string>
+  /**
+   * 源端数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SrcItem?: Array<string>
+  /**
+   * 目标端数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DstItem?: Array<string>
+  /**
+   * 完成时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FinishedAt?: string
+}
+
+/**
  * DescribeSubscribeDetail返回参数结构体
  */
 export interface DescribeSubscribeDetailResponse {
@@ -2188,37 +2262,36 @@ export interface StopSyncJobResponse {
  */
 export interface MigrateOption {
   /**
-   * 迁移对象选项，需要告知迁移服务迁移哪些库表对象
+   * <p>迁移对象选项，需要告知迁移服务迁移哪些库表对象</p>
    */
   DatabaseTable: DatabaseTableObject
   /**
-   * 迁移类型，full(全量迁移)，structure(结构迁移)，fullAndIncrement(全量加增量迁移)， 默认为fullAndIncrement;注意redis,keewidb产品只支持fullAndIncrement类型。
+   * <p>迁移类型，full(全量迁移)，structure(结构迁移)，fullAndIncrement(全量加增量迁移)， 默认为fullAndIncrement;注意redis,keewidb产品只支持fullAndIncrement类型。</p>
    */
   MigrateType?: string
   /**
-   * 数据一致性校验选项， 默认为不开启一致性校验
+   * <p>数据一致性校验选项， 默认为不开启一致性校验</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Consistency?: ConsistencyOption
   /**
-   * 是否迁移账号，true(迁移账号)，false(不迁移账号)
+   * <p>是否迁移账号，true(迁移账号)，false(不迁移账号)</p>
    */
   IsMigrateAccount?: boolean
   /**
-   * 是否用源库Root账户覆盖目标库，值包括：false-不覆盖，true-覆盖，选择库表或者结构迁移时应该为false，注意只对旧版迁移有效
+   * <p>是否用源库Root账户覆盖目标库，值包括：false-不覆盖，true-覆盖，选择库表或者结构迁移时应该为false，注意只对旧版迁移有效</p>
    */
   IsOverrideRoot?: boolean
   /**
-   * 是否在迁移时设置目标库只读(仅对mysql有效)，true(设置只读)、false(不设置只读，默认此值)
+   * <p>是否在迁移时设置目标库只读(仅对mysql有效)，true(设置只读)、false(不设置只读，默认此值)</p>
    */
   IsDstReadOnly?: boolean
   /**
-   * 其他附加信息，对于特定库可设置额外参数，Redis可定义如下的参数: 
-["DstWriteMode":normal, 	目标库写入模式,可取值clearData(清空目标实例数据)、overwrite(以覆盖写的方式执行任务)、normal(要求目标端为空，否则校验不通过) ，不显示指定默认以覆盖写的方式执行任务	"IsDstReadOnly":true, 	是否在迁移时设置目标库只读,true(设置只读)、false(不设置只读) 	"ClientOutputBufferHardLimit":512, 	从机缓冲区的硬性容量限制(MB) 	"ClientOutputBufferSoftLimit":512, 	从机缓冲区的软性容量限制(MB) 	"ClientOutputBufferPersistTime":60, 从机缓冲区的软性限制持续时间(秒) 	"ReplBacklogSize":512, 	环形缓冲区容量限制(MB) 	"ReplTimeout":120，		复制超时时间(秒) 	"IsExpireKey":"true",过期key自动淘汰]
+   * <p>其他附加信息，对于特定库可设置额外参数，Redis可定义如下的参数:<br>[&quot;DstWriteMode&quot;:normal,     目标库写入模式,可取值clearData(清空目标实例数据)、overwrite(以覆盖写的方式执行任务)、normal(要求目标端为空，否则校验不通过) ，不显示指定默认以覆盖写的方式执行任务    &quot;IsDstReadOnly&quot;:true,     是否在迁移时设置目标库只读,true(设置只读)、false(不设置只读)     &quot;ClientOutputBufferHardLimit&quot;:512,     从机缓冲区的硬性容量限制(MB)     &quot;ClientOutputBufferSoftLimit&quot;:512,     从机缓冲区的软性容量限制(MB)     &quot;ClientOutputBufferPersistTime&quot;:60, 从机缓冲区的软性限制持续时间(秒)     &quot;ReplBacklogSize&quot;:512,     环形缓冲区容量限制(MB)     &quot;ReplTimeout&quot;:120，        复制超时时间(秒)     &quot;IsExpireKey&quot;:&quot;true&quot;,过期key自动淘汰]</p>
    */
   ExtraAttr?: Array<KeyValuePairOption>
   /**
-   * pgsql迁移分类：logical(逻辑迁移)、physical(物理迁移)
+   * <p>pgsql迁移分类：logical(逻辑迁移)、physical(物理迁移)</p>
    */
   MigrateWay?: string
 }
@@ -2248,21 +2321,22 @@ export interface SkippedDetail {
 }
 
 /**
- * 订阅报错信息
+ * DescribeCompareDiffItems返回参数结构体
  */
-export interface SubsErr {
+export interface DescribeCompareDiffItemsResponse {
   /**
-   * 报错信息
+   * 查询结果的数量
    */
-  Message?: string
+  TotalCount?: number
   /**
-   * 报错原因
+   * 查询结果详情
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Reason?: string
+  Items?: Array<DiffChunkItem>
   /**
-   * 建议的修复方案
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Solution?: string
+  RequestId?: string
 }
 
 /**
@@ -2329,11 +2403,11 @@ export interface ModifyMigrateNameResponse {
  */
 export interface DescribeMigrationJobsResponse {
   /**
-   * 迁移任务数量
+   * <p>迁移任务数量</p>
    */
   TotalCount?: number
   /**
-   * 迁移任务列表
+   * <p>迁移任务列表</p>
    */
   JobList?: Array<JobItem>
   /**
@@ -2530,67 +2604,67 @@ export interface ModifySyncCompareTaskResponse {
  */
 export interface DescribeMigrationJobsRequest {
   /**
-   * 数据迁移任务ID，如：dts-amm1jw5q
+   * <p>数据迁移任务ID，如：dts-amm1jw5q</p>
    */
   JobId?: string
   /**
-   * 数据迁移任务名称
+   * <p>数据迁移任务名称</p>
    */
   JobName?: string
   /**
-   * 数据迁移任务状态，可取值包括：created(创建完成)、checking(校验中)、checkPass(校验通过)、checkNotPass(校验不通过)、readyRun(准备运行)、running(任务运行中)、readyComplete(准备完成)、success(任务成功)、failed(任务失败)、stopping(中止中)、completing(完成中)
+   * <p>数据迁移任务状态，可取值包括：created(创建完成)、checking(校验中)、checkPass(校验通过)、checkNotPass(校验不通过)、readyRun(准备运行)、running(任务运行中)、readyComplete(准备完成)、success(任务成功)、failed(任务失败)、stopping(中止中)、completing(完成中)</p>
    */
   Status?: Array<string>
   /**
-   * 源实例ID，格式如：cdb-c1nl9rpv
+   * <p>源实例ID，格式如：cdb-c1nl9rpv</p>
    */
   SrcInstanceId?: string
   /**
-   * 源实例地域，如：ap-guangzhou
+   * <p>源实例地域，如：ap-guangzhou</p>
    */
   SrcRegion?: string
   /**
-   * 源实例数据库类型，如：sqlserver,mysql,mongodb,redis,tendis,keewidb,clickhouse,cynosdbmysql,percona,tdsqlpercona,mariadb,tdsqlmysql,postgresql
+   * <p>源实例数据库类型，如：sqlserver,mysql,mongodb,redis,tendis,keewidb,clickhouse,cynosdbmysql,percona,tdsqlpercona,mariadb,tdsqlmysql,postgresql</p>
    */
   SrcDatabaseType?: Array<string>
   /**
-   * 源实例接入类型，值包括：extranet(外网)、vpncloud(云vpn接入的实例)、dcg(专线接入的实例)、ccn(云联网接入的实例)、cdb(云上cdb实例)、cvm(cvm自建实例)
+   * <p>源实例接入类型，值包括：extranet(外网)、vpncloud(云vpn接入的实例)、dcg(专线接入的实例)、ccn(云联网接入的实例)、cdb(云上cdb实例)、cvm(cvm自建实例)</p>
    */
   SrcAccessType?: Array<string>
   /**
-   * 目标实例ID，格式如：cdb-c1nl9rpv
+   * <p>目标实例ID，格式如：cdb-c1nl9rpv</p>
    */
   DstInstanceId?: string
   /**
-   * 目标实例地域，如：ap-guangzhou
+   * <p>目标实例地域，如：ap-guangzhou</p>
    */
   DstRegion?: string
   /**
-   * 目标源实例数据库类型，如：sqlserver,mysql,mongodb,redis,tendis,keewidb,clickhouse,cynosdbmysql,percona,tdsqlpercona,mariadb,tdsqlmysql,postgresql
+   * <p>目标源实例数据库类型，如：sqlserver,mysql,mongodb,redis,tendis,keewidb,clickhouse,cynosdbmysql,percona,tdsqlpercona,mariadb,tdsqlmysql,postgresql</p>
    */
   DstDatabaseType?: Array<string>
   /**
-   * 目标实例接入类型，值包括：extranet(外网)、vpncloud(云vpn接入的实例)、dcg(专线接入的实例)、ccn(云联网接入的实例)、cdb(云上cdb实例)、cvm(cvm自建实例)
+   * <p>目标实例接入类型，值包括：extranet(外网)、vpncloud(云vpn接入的实例)、dcg(专线接入的实例)、ccn(云联网接入的实例)、cdb(云上cdb实例)、cvm(cvm自建实例)</p>
    */
   DstAccessType?: Array<string>
   /**
-   * 任务运行模式，值包括：immediate(立即运行)，timed(定时运行)
+   * <p>任务运行模式，值包括：immediate(立即运行)，timed(定时运行)</p>
    */
   RunMode?: string
   /**
-   * 排序方式，可能取值为asc、desc，默认按照创建时间倒序
+   * <p>排序方式，可能取值为asc、desc，默认按照创建时间倒序</p>
    */
   OrderSeq?: string
   /**
-   * 返回实例数量，默认20，有效区间[1,100]
+   * <p>返回实例数量，默认20，有效区间[1,100]</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为0
+   * <p>偏移量，默认为0</p>
    */
   Offset?: number
   /**
-   * 标签过滤
+   * <p>标签过滤</p>
    */
   TagFilters?: Array<TagFilter>
 }
@@ -3574,6 +3648,44 @@ export interface ModifiedSubscribeObject {
 }
 
 /**
+ * DescribeSyncCompareDiffItems请求参数结构体
+ */
+export interface DescribeSyncCompareDiffItemsRequest {
+  /**
+   * 迁移任务 Id
+   */
+  JobId: string
+  /**
+   * 校验任务 Id
+   */
+  CompareTaskId: string
+  /**
+   * 数据库名
+   */
+  DBName?: string
+  /**
+   * schema名
+   */
+  SchemaName?: string
+  /**
+   * 数据表名
+   */
+  TableName?: string
+  /**
+   * 数据分块号
+   */
+  ChunkId?: number
+  /**
+   * 分页条件，查询结果返回条数
+   */
+  Limit?: number
+  /**
+   * 分页条件，查询的起始位置
+   */
+  Offset?: number
+}
+
+/**
  * DescribeCompareTasks返回参数结构体
  */
 export interface DescribeCompareTasksResponse {
@@ -4358,6 +4470,44 @@ export interface ModifyMigrateJobSpecResponse {
 }
 
 /**
+ * DescribeCompareDiffItems请求参数结构体
+ */
+export interface DescribeCompareDiffItemsRequest {
+  /**
+   * 迁移任务 Id
+   */
+  JobId: string
+  /**
+   * 校验任务 Id
+   */
+  CompareTaskId: string
+  /**
+   * 数据库名
+   */
+  DBName?: string
+  /**
+   * schema名
+   */
+  SchemaName?: string
+  /**
+   * 数据表名
+   */
+  TableName?: string
+  /**
+   * 数据分块号
+   */
+  ChunkId?: number
+  /**
+   * 分页条件，查询结果返回条数
+   */
+  Limit?: number
+  /**
+   * 分页条件，查询的起始位置
+   */
+  Offset?: number
+}
+
+/**
  * CreateSyncJob返回参数结构体
  */
 export interface CreateSyncJobResponse {
@@ -4961,6 +5111,24 @@ export interface DBItem {
    * TriggerMode取值为partial时需要填写
    */
   Triggers?: Array<string>
+}
+
+/**
+ * 订阅报错信息
+ */
+export interface SubsErr {
+  /**
+   * 报错信息
+   */
+  Message?: string
+  /**
+   * 报错原因
+   */
+  Reason?: string
+  /**
+   * 建议的修复方案
+   */
+  Solution?: string
 }
 
 /**

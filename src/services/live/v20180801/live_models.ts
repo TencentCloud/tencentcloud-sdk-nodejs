@@ -78,6 +78,23 @@ export interface AvatarImageInfo {
 }
 
 /**
+ * DescribeOriginStreamInfo返回参数结构体
+ */
+export interface DescribeOriginStreamInfoResponse {
+  /**
+   * 缓存格式规则。 
+0：默认格式。
+1：云直播源站格式。
+当 OriginStreamPlayType 为 customization 时候生效。
+   */
+  CacheFormatRule?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLiveWatermarkRules返回参数结构体
  */
 export interface DescribeLiveWatermarkRulesResponse {
@@ -2570,6 +2587,16 @@ export interface ModifyLiveStreamMonitorResponse {
 }
 
 /**
+ * ForbidLiveDomain返回参数结构体
+ */
+export interface ForbidLiveDomainResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateRecordTask请求参数结构体
  */
 export interface CreateRecordTaskRequest {
@@ -3462,6 +3489,11 @@ export interface DescribeCasterDisplayInfoRequest {
 }
 
 /**
+ * ModifyOriginStreamInfo请求参数结构体
+ */
+export type ModifyOriginStreamInfoRequest = null
+
+/**
  * 推流鉴权key信息。
  */
 export interface PushAuthKeyInfo {
@@ -3834,6 +3866,24 @@ export interface DeleteScreenshotTaskRequest {
  * ModifyCasterLayoutInfo返回参数结构体
  */
 export interface ModifyCasterLayoutInfoResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTimeShiftStreamList返回参数结构体
+ */
+export interface DescribeTimeShiftStreamListResponse {
+  /**
+   * 时间段内所有的数据量。
+   */
+  TotalSize?: number
+  /**
+   * 流列表。
+   */
+  StreamList?: Array<TimeShiftStreamInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10927,6 +10977,16 @@ export interface DescribePullStreamConfigsRequest {
 }
 
 /**
+ * ModifyOriginStreamInfo返回参数结构体
+ */
+export interface ModifyOriginStreamInfoResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePlayErrorCodeSumInfoList返回参数结构体
  */
 export interface DescribePlayErrorCodeSumInfoListResponse {
@@ -11155,14 +11215,9 @@ export interface LiveCertDomainInfo {
 export type DescribeLiveTimeShiftRulesRequest = null
 
 /**
- * ForbidLiveDomain返回参数结构体
+ * DescribeOriginStreamInfo请求参数结构体
  */
-export interface ForbidLiveDomainResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeOriginStreamInfoRequest = null
 
 /**
  * DescribeLiveTimeShiftBillInfoList请求参数结构体
@@ -11922,21 +11977,13 @@ export interface DescribeLiveWatermarkResponse {
 }
 
 /**
- * DescribeTimeShiftStreamList返回参数结构体
+ * CloseSourceStream请求参数结构体
  */
-export interface DescribeTimeShiftStreamListResponse {
+export interface CloseSourceStreamRequest {
   /**
-   * 时间段内所有的数据量。
+   * 播放域名。
    */
-  TotalSize?: number
-  /**
-   * 流列表。
-   */
-  StreamList?: Array<TimeShiftStreamInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  DomainName: string
 }
 
 /**
@@ -13152,6 +13199,16 @@ export interface AddCasterMarkPicInfoRequest {
    * 图片水印详细参数。
    */
   MarkPicInfo: CasterMarkPicInfo
+}
+
+/**
+ * CloseSourceStream返回参数结构体
+ */
+export interface CloseSourceStreamResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

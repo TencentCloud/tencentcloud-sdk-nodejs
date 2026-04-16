@@ -277,6 +277,7 @@ import {
   CreateWordSamplesRequest,
   SmartEraseWatermarkConfig,
   CreateMediaEvaluationResponse,
+  FaceConfigureInfo,
   DescribeStreamLinkEventsResponse,
   DescribeSmartEraseTemplatesRequest,
   StartStreamPackageLinearAssemblyChannelRequest,
@@ -450,6 +451,7 @@ import {
   AigcImageInfo,
   DeleteContentReviewTemplateResponse,
   VODInputInfo,
+  DesignVoiceAsyncRequest,
   ImageWatermarkTemplate,
   DescribeStreamPackageSSAIUsageRequest,
   ModifyQualityControlTemplateResponse,
@@ -467,7 +469,7 @@ import {
   BatchSmartSubtitlesResult,
   QueryProjectResponse,
   CreateInputSRTSettings,
-  ModifySmartEraseTemplateRequest,
+  DescribeDesignTaskRequest,
   DescribeGroupAttachFlowsByIdRequest,
   DescribeWorkflowsResponse,
   AsrWordsConfigureInfoForUpdate,
@@ -517,7 +519,7 @@ import {
   LiveStreamTagRecognitionResult,
   ExecuteFunctionResponse,
   FlowRealtimeStatusRTP,
-  FaceConfigureInfo,
+  DesignVoiceAsyncResponse,
   DeleteStreamPackageLinearAssemblyChannelsRequest,
   AnimatedGraphicTaskInput,
   LiveAiParagraphInfo,
@@ -558,6 +560,7 @@ import {
   ImageWatermarkInputForUpdate,
   BatchSubTaskResult,
   AigcStoreCosParam,
+  DescribeDesignTaskResponse,
   CreateProjectRequest,
   FlowVideo,
   AiRecognitionTaskOcrWordsResultItem,
@@ -764,6 +767,7 @@ import {
   AiRecognitionTaskAsrWordsResultItem,
   DescribeStreamLinkRegionsRequest,
   ImageTransformConfig,
+  ModifySmartEraseTemplateRequest,
   ModifyStreamLinkInputResponse,
   VODOutputStorage,
   HeadTailParameter,
@@ -1800,6 +1804,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 音色设计，根据prompt生成音色ID
+   */
+  async DesignVoiceAsync(
+    req: DesignVoiceAsyncRequest,
+    cb?: (error: string, rep: DesignVoiceAsyncResponse) => void
+  ): Promise<DesignVoiceAsyncResponse> {
+    return this.request("DesignVoiceAsync", req, cb)
+  }
+
+  /**
    * 启动媒体包装频道。
    */
   async StartStreamPackageLinearAssemblyChannel(
@@ -2033,6 +2047,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateLiveRecordTemplateResponse) => void
   ): Promise<CreateLiveRecordTemplateResponse> {
     return this.request("CreateLiveRecordTemplate", req, cb)
+  }
+
+  /**
+   * 查询配音相关任务（异步）结果
+   */
+  async DescribeDesignTask(
+    req: DescribeDesignTaskRequest,
+    cb?: (error: string, rep: DescribeDesignTaskResponse) => void
+  ): Promise<DescribeDesignTaskResponse> {
+    return this.request("DescribeDesignTask", req, cb)
   }
 
   /**

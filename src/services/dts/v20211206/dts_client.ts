@@ -68,6 +68,7 @@ import {
   DescribeMigrateDBInstancesResponse,
   KeyValuePairOption,
   DifferenceData,
+  DescribeSyncCompareDiffItemsResponse,
   CreateCheckSyncJobRequest,
   StopSyncCompareRequest,
   DescribeModifyCheckSyncJobResultResponse,
@@ -112,6 +113,7 @@ import {
   ResumeSubscribeRequest,
   ModifySyncJobConfigResponse,
   CompareColumnItem,
+  DiffChunkItem,
   DescribeSubscribeDetailResponse,
   ContinueSyncJobResponse,
   TradeInfo,
@@ -129,7 +131,7 @@ import {
   MigrateOption,
   DescribeSubscribeDetailRequest,
   SkippedDetail,
-  SubsErr,
+  DescribeCompareDiffItemsResponse,
   CreateSubscribeResponse,
   CompareOptions,
   ModifyMigrateNameResponse,
@@ -182,6 +184,7 @@ import {
   JobItem,
   DestroyIsolatedSubscribeResponse,
   ModifiedSubscribeObject,
+  DescribeSyncCompareDiffItemsRequest,
   DescribeCompareTasksResponse,
   ResumeSubscribeResponse,
   DescribeSyncJobsRequest,
@@ -214,6 +217,7 @@ import {
   CheckStep,
   CompareTaskItem,
   ModifyMigrateJobSpecResponse,
+  DescribeCompareDiffItemsRequest,
   CreateSyncJobResponse,
   ModifySyncCompareTaskNameRequest,
   CreateCompareTaskRequest,
@@ -235,6 +239,7 @@ import {
   DescribeSyncCompareReportRequest,
   DeleteConsumerGroupResponse,
   DBItem,
+  SubsErr,
   DeleteCompareTaskRequest,
   MigrateDetailInfo,
   ResetSyncJobResponse,
@@ -477,13 +482,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 启动同步任务
+   * 本接口用于校验检查项不通过后，可进行跳过此校验项操作，后端将不再校验该项。任何校验步骤都是不应该跳过的，通过校验是能正确执行的前置条件。支持跳过的产品及链路的校验项可 [参考文档](https://cloud.tencent.com/document/product/571/61639)。
    */
-  async StartSyncJob(
-    req: StartSyncJobRequest,
-    cb?: (error: string, rep: StartSyncJobResponse) => void
-  ): Promise<StartSyncJobResponse> {
-    return this.request("StartSyncJob", req, cb)
+  async SkipCheckItem(
+    req: SkipCheckItemRequest,
+    cb?: (error: string, rep: SkipCheckItemResponse) => void
+  ): Promise<SkipCheckItemResponse> {
+    return this.request("SkipCheckItem", req, cb)
   }
 
   /**
@@ -699,13 +704,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于校验检查项不通过后，可进行跳过此校验项操作，后端将不再校验该项。任何校验步骤都是不应该跳过的，通过校验是能正确执行的前置条件。支持跳过的产品及链路的校验项可 [参考文档](https://cloud.tencent.com/document/product/571/61639)。
+   * 本接口用于查询一致性校验任务中，不一致数据块的详情信息
    */
-  async SkipCheckItem(
-    req: SkipCheckItemRequest,
-    cb?: (error: string, rep: SkipCheckItemResponse) => void
-  ): Promise<SkipCheckItemResponse> {
-    return this.request("SkipCheckItem", req, cb)
+  async DescribeCompareDiffItems(
+    req: DescribeCompareDiffItemsRequest,
+    cb?: (error: string, rep: DescribeCompareDiffItemsResponse) => void
+  ): Promise<DescribeCompareDiffItemsResponse> {
+    return this.request("DescribeCompareDiffItems", req, cb)
   }
 
   /**
@@ -798,6 +803,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateMigrateCheckJobResponse) => void
   ): Promise<CreateMigrateCheckJobResponse> {
     return this.request("CreateMigrateCheckJob", req, cb)
+  }
+
+  /**
+   * 本接口用于查询一致性校验任务中，不一致数据块的详情信息
+   */
+  async DescribeSyncCompareDiffItems(
+    req: DescribeSyncCompareDiffItemsRequest,
+    cb?: (error: string, rep: DescribeSyncCompareDiffItemsResponse) => void
+  ): Promise<DescribeSyncCompareDiffItemsResponse> {
+    return this.request("DescribeSyncCompareDiffItems", req, cb)
   }
 
   /**
@@ -983,6 +998,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeOffsetByTimeResponse) => void
   ): Promise<DescribeOffsetByTimeResponse> {
     return this.request("DescribeOffsetByTime", req, cb)
+  }
+
+  /**
+   * 启动同步任务
+   */
+  async StartSyncJob(
+    req: StartSyncJobRequest,
+    cb?: (error: string, rep: StartSyncJobResponse) => void
+  ): Promise<StartSyncJobResponse> {
+    return this.request("StartSyncJob", req, cb)
   }
 
   /**

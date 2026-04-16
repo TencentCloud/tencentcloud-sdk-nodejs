@@ -6432,6 +6432,42 @@ export interface CreateMediaEvaluationResponse {
 }
 
 /**
+ * 人脸识别任务控制参数
+ */
+export interface FaceConfigureInfo {
+  /**
+   * 人脸识别任务开关，可选值：
+<li>ON：开启智能人脸识别任务；</li>
+<li>OFF：关闭智能人脸识别任务。</li>
+   */
+  Switch: string
+  /**
+   * 人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果。默认 95 分。取值范围：0 - 100。
+   */
+  Score?: number
+  /**
+   * 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：
+<li>entertainment：娱乐明星；</li>
+<li>sport：体育明星；</li>
+<li>politician：敏感人物。</li>
+   */
+  DefaultLibraryLabelSet?: Array<string>
+  /**
+   * 用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。
+标签个数最多 100 个，每个标签长度最多 16 个字符。
+   */
+  UserDefineLibraryLabelSet?: Array<string>
+  /**
+   * 人物库选择，可选值：
+<li>Default：使用默认人物库；</li>
+<li>UserDefine：使用用户自定义人物库。</li>
+<li>All：同时使用默认人物库和用户自定义人物库。</li>
+默认值：All，使用系统默认人物库及用户自定义人物库。
+   */
+  FaceLibrary?: string
+}
+
+/**
  * DescribeStreamLinkEvents返回参数结构体
  */
 export interface DescribeStreamLinkEventsResponse {
@@ -10760,6 +10796,20 @@ export interface VODInputInfo {
 }
 
 /**
+ * DesignVoiceAsync请求参数结构体
+ */
+export interface DesignVoiceAsyncRequest {
+  /**
+   * <p>音色描述</p>
+   */
+  Prompt: string
+  /**
+   * <p>扩展参数，json字符串</p>
+   */
+  ExtParam?: string
+}
+
+/**
  * 图片水印模板
  */
 export interface ImageWatermarkTemplate {
@@ -11144,37 +11194,13 @@ export interface CreateInputSRTSettings {
 }
 
 /**
- * ModifySmartEraseTemplate请求参数结构体
+ * DescribeDesignTask请求参数结构体
  */
-export interface ModifySmartEraseTemplateRequest {
+export interface DescribeDesignTaskRequest {
   /**
-   * <p>智能擦除模板唯一标识</p>
+   * <p>任务id</p>
    */
-  Definition: number
-  /**
-   * <p>智能擦除模板名称长度限制：64 个字符。</p>
-   */
-  Name?: string
-  /**
-   * <p>智能擦除模板描述信息长度限制：256 个字符。</p>
-   */
-  Comment?: string
-  /**
-   * <p>擦除类型</p><ul><li>subtitle 去字幕</li><li>watermark 去水印</li><li>privacy 隐私保护</li></ul>
-   */
-  EraseType?: string
-  /**
-   * <p>字幕擦除配置，EraseType取subtitle或者EraseType不填，对应模板原EraseType为subtitle时生效。</p>
-   */
-  EraseSubtitleConfig?: SmartEraseSubtitleConfig
-  /**
-   * <p>水印擦除配置，EraseType取watermark或者EraseType不填，对应模板原EraseType为watermark时生效。</p>
-   */
-  EraseWatermarkConfig?: SmartEraseWatermarkConfig
-  /**
-   * <p>隐私保护配置，EraseType取privacy或者EraseType不填，对应模板原EraseType为privacy时生效。</p>
-   */
-  ErasePrivacyConfig?: SmartErasePrivacyConfig
+  TaskId: string
 }
 
 /**
@@ -12638,39 +12664,25 @@ export interface FlowRealtimeStatusRTP {
 }
 
 /**
- * 人脸识别任务控制参数
+ * DesignVoiceAsync返回参数结构体
  */
-export interface FaceConfigureInfo {
+export interface DesignVoiceAsyncResponse {
   /**
-   * 人脸识别任务开关，可选值：
-<li>ON：开启智能人脸识别任务；</li>
-<li>OFF：关闭智能人脸识别任务。</li>
+   * <p>错误码，成功时返回0</p>
    */
-  Switch: string
+  ErrorCode?: number
   /**
-   * 人脸识别过滤分数，当识别结果达到该分数以上，返回识别结果。默认 95 分。取值范围：0 - 100。
+   * <p>错误信息，成功时返回success</p>
    */
-  Score?: number
+  Msg?: string
   /**
-   * 默认人物过滤标签，指定需要返回的默认人物的标签。如果未填或者为空，则全部默认人物结果都返回。标签可选值：
-<li>entertainment：娱乐明星；</li>
-<li>sport：体育明星；</li>
-<li>politician：敏感人物。</li>
+   * <p>任务id，查询任务时使用</p>
    */
-  DefaultLibraryLabelSet?: Array<string>
+  TaskId?: string
   /**
-   * 用户自定义人物过滤标签，指定需要返回的用户自定义人物的标签。如果未填或者为空，则全部自定义人物结果都返回。
-标签个数最多 100 个，每个标签长度最多 16 个字符。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UserDefineLibraryLabelSet?: Array<string>
-  /**
-   * 人物库选择，可选值：
-<li>Default：使用默认人物库；</li>
-<li>UserDefine：使用用户自定义人物库。</li>
-<li>All：同时使用默认人物库和用户自定义人物库。</li>
-默认值：All，使用系统默认人物库及用户自定义人物库。
-   */
-  FaceLibrary?: string
+  RequestId?: string
 }
 
 /**
@@ -13695,6 +13707,38 @@ export interface AigcStoreCosParam {
 示例值：my_file
    */
   CosBucketPath?: string
+}
+
+/**
+ * DescribeDesignTask返回参数结构体
+ */
+export interface DescribeDesignTaskResponse {
+  /**
+   * <p>错误码，成功时返回0</p>
+   */
+  ErrorCode?: number
+  /**
+   * <p>错误信息，成功时返回success</p>
+   */
+  Msg?: string
+  /**
+   * <p>任务状态</p><p>枚举值：</p><ul><li>success： 成功</li><li>fail： 失败</li><li>processing： 处理中</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>音色id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VoiceId?: string
+  /**
+   * <p>扩展信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtInfo?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -18980,6 +19024,40 @@ export interface ImageTransformConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageResize?: ImageResizeConfig
+}
+
+/**
+ * ModifySmartEraseTemplate请求参数结构体
+ */
+export interface ModifySmartEraseTemplateRequest {
+  /**
+   * <p>智能擦除模板唯一标识</p>
+   */
+  Definition: number
+  /**
+   * <p>智能擦除模板名称长度限制：64 个字符。</p>
+   */
+  Name?: string
+  /**
+   * <p>智能擦除模板描述信息长度限制：256 个字符。</p>
+   */
+  Comment?: string
+  /**
+   * <p>擦除类型</p><ul><li>subtitle 去字幕</li><li>watermark 去水印</li><li>privacy 隐私保护</li></ul>
+   */
+  EraseType?: string
+  /**
+   * <p>字幕擦除配置，EraseType取subtitle或者EraseType不填，对应模板原EraseType为subtitle时生效。</p>
+   */
+  EraseSubtitleConfig?: SmartEraseSubtitleConfig
+  /**
+   * <p>水印擦除配置，EraseType取watermark或者EraseType不填，对应模板原EraseType为watermark时生效。</p>
+   */
+  EraseWatermarkConfig?: SmartEraseWatermarkConfig
+  /**
+   * <p>隐私保护配置，EraseType取privacy或者EraseType不填，对应模板原EraseType为privacy时生效。</p>
+   */
+  ErasePrivacyConfig?: SmartErasePrivacyConfig
 }
 
 /**

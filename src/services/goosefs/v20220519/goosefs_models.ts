@@ -993,11 +993,11 @@ export interface BuildClientNodeMountCommandResponse {
  */
 export interface CreateLoadTaskRequest {
   /**
-   * 集群 ID
+   * <p>集群 ID</p>
    */
   ClusterId: string
   /**
-   * 创建预热任务参数
+   * <p>创建预热任务参数</p>
    */
   LoadTaskCreationAttrs: LoadTaskCreationAttrs
 }
@@ -1422,7 +1422,7 @@ export interface DescribeFilesetsRequest {
  */
 export interface CreateLoadTaskResponse {
   /**
-   * 预热任务 ID
+   * <p>预热任务 ID</p>
    */
   TaskId?: string
   /**

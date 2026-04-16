@@ -758,6 +758,16 @@ it("mps.v20190612.ResetWorkflow", async function () {
     }
 })
 
+it("mps.v20190612.DesignVoiceAsync", async function () {
+    try {
+       const data = await client.DesignVoiceAsync({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.StartStreamPackageLinearAssemblyChannel", async function () {
     try {
        const data = await client.StartStreamPackageLinearAssemblyChannel({})
@@ -981,6 +991,16 @@ it("mps.v20190612.ModifyPersonSample", async function () {
 it("mps.v20190612.CreateLiveRecordTemplate", async function () {
     try {
        const data = await client.CreateLiveRecordTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeDesignTask", async function () {
+    try {
+       const data = await client.DescribeDesignTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -198,9 +198,9 @@ it("trtc.v20190722.StartStreamIngest", async function () {
     }
 })
 
-it("trtc.v20190722.UpdateStreamIngest", async function () {
+it("trtc.v20190722.RemoveUserByStrRoomId", async function () {
     try {
-       const data = await client.UpdateStreamIngest({})
+       const data = await client.RemoveUserByStrRoomId({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,9 +408,9 @@ it("trtc.v20190722.DescribeScaleInfo", async function () {
     }
 })
 
-it("trtc.v20190722.StopAIConversation", async function () {
+it("trtc.v20190722.AsyncTextToSpeech", async function () {
     try {
-       const data = await client.StopAIConversation({})
+       const data = await client.AsyncTextToSpeech({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,9 +508,9 @@ it("trtc.v20190722.DescribeRecordingUsage", async function () {
     }
 })
 
-it("trtc.v20190722.RemoveUserByStrRoomId", async function () {
+it("trtc.v20190722.DescribeAsyncTextToSpeech", async function () {
     try {
-       const data = await client.RemoveUserByStrRoomId({})
+       const data = await client.DescribeAsyncTextToSpeech({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -648,6 +648,16 @@ it("trtc.v20190722.DeleteCloudRecording", async function () {
     }
 })
 
+it("trtc.v20190722.StopAIConversation", async function () {
+    try {
+       const data = await client.StopAIConversation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.DescribePicture", async function () {
     try {
        const data = await client.DescribePicture({})
@@ -701,6 +711,16 @@ it("trtc.v20190722.ControlAIConversation", async function () {
 it("trtc.v20190722.StopAITranscription", async function () {
     try {
        const data = await client.StopAITranscription({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.UpdateStreamIngest", async function () {
+    try {
+       const data = await client.UpdateStreamIngest({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

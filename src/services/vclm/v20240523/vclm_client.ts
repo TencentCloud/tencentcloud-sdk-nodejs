@@ -28,6 +28,7 @@ import {
   SubmitVideoEditJobRequest,
   DescribeVideoExtendKlingJobRequest,
   SubmitVideoEditKlingJobRequest,
+  DescribeAigcElementResponse,
   Voice,
   SubmitImageAnimateJobResponse,
   SubmitVideoFaceFusionJobResponse,
@@ -36,7 +37,7 @@ import {
   SubmitMotionControlKlingJobRequest,
   SubmitVideoExtendKlingJobRequest,
   SubmitTemplateToVideoJobResponse,
-  SubmitTemplateToVideoJobRequest,
+  DeleteAigcElementResponse,
   LogoRect,
   DescribeVideoEditKlingJobRequest,
   SubmitVideoVoiceJobRequest,
@@ -52,18 +53,21 @@ import {
   DescribeImageToVideoGeneralJobRequest,
   SubmitAigcVideoJobResponse,
   SubmitVideoVoiceJobResponse,
+  DeleteAigcElementRequest,
   SubmitImageToVideoViduJobResponse,
   SubmitPortraitSingJobResponse,
+  CreateAigcElementResponse,
   DescribeImageToVideoJobResponse,
   DescribePortraitSingJobRequest,
   DescribeHunyuanToVideoJobRequest,
-  DescribeMotionControlKlingJobRequest,
+  SubmitTextToVideoViduJobResponse,
   CheckAnimateImageJobResponse,
   SubmitVideoEditJobResponse,
   DescribeVideoStylizationJobRequest,
   SubmitHumanActorJobResponse,
   VideoEditParam,
   ReferenceSubject,
+  ReferImageItem,
   ImageInfo,
   Image,
   DescribeMotionControlKlingJobResponse,
@@ -74,22 +78,26 @@ import {
   FaceTemplateInfo,
   DescribeAigcVideoJobRequest,
   SubmitImageAnimateJobRequest,
+  SubmitTextToVideoJobResponse,
   DescribeVideoFaceFusionJobRequest,
   DescribeImageToVideoViduJobRequest,
   SubmitVideoEditKlingJobResponse,
   CameraControlConfig,
   DescribeReferenceToVideoViduJobRequest,
+  ElementImageList,
+  ProviderDetail,
   DescribeImageAnimateJobResponse,
   DescribeAigcVideoJobResponse,
   SubmitVideoExtendKlingJobResponse,
   DescribeHumanActorJobResponse,
   SubmitMotionControlKlingJobResponse,
-  SubmitTextToVideoJobResponse,
+  CreateAigcElementRequest,
+  SubmitTemplateToVideoJobRequest,
   MultiPrompt,
   DescribeTextToVideoJobRequest,
   DescribeImageToVideoJobRequest,
   DescribeTemplateToVideoJobRequest,
-  SubmitTextToVideoViduJobResponse,
+  DescribeMotionControlKlingJobRequest,
   DescribeImageAnimateJobRequest,
   DescribePortraitSingJobResponse,
   DescribeHunyuanToVideoJobResponse,
@@ -101,6 +109,7 @@ import {
   DescribeVideoFaceFusionJobResponse,
   SubmitImageToVideoGeneralJobResponse,
   FaceMergeInfo,
+  DescribeAigcElementRequest,
   CheckAnimateImageJobRequest,
   DescribeVideoExtendKlingJobResponse,
   SubmitPortraitSingJobRequest,
@@ -114,6 +123,7 @@ import {
   DescribeVideoEditKlingJobResponse,
   FaceRect,
   SubmitImageToVideoJobResponse,
+  TagList,
 } from "./vclm_models"
 
 /**
@@ -290,13 +300,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询生视频任务
+   * 查询Kling动作控制任务
    */
-  async DescribeAigcVideoJob(
-    req: DescribeAigcVideoJobRequest,
-    cb?: (error: string, rep: DescribeAigcVideoJobResponse) => void
-  ): Promise<DescribeAigcVideoJobResponse> {
-    return this.request("DescribeAigcVideoJob", req, cb)
+  async DescribeMotionControlKlingJob(
+    req: DescribeMotionControlKlingJobRequest,
+    cb?: (error: string, rep: DescribeMotionControlKlingJobResponse) => void
+  ): Promise<DescribeMotionControlKlingJobResponse> {
+    return this.request("DescribeMotionControlKlingJob", req, cb)
   }
 
   /**
@@ -391,6 +401,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除主体库
+   */
+  async DeleteAigcElement(
+    req: DeleteAigcElementRequest,
+    cb?: (error: string, rep: DeleteAigcElementResponse) => void
+  ): Promise<DeleteAigcElementResponse> {
+    return this.request("DeleteAigcElement", req, cb)
+  }
+
+  /**
    * 查询混元生视频任务
    */
   async DescribeHunyuanToVideoJob(
@@ -421,13 +441,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交Kling多模态编辑任务
+   * 提交视频特效任务接口
    */
-  async SubmitVideoEditKlingJob(
-    req: SubmitVideoEditKlingJobRequest,
-    cb?: (error: string, rep: SubmitVideoEditKlingJobResponse) => void
-  ): Promise<SubmitVideoEditKlingJobResponse> {
-    return this.request("SubmitVideoEditKlingJob", req, cb)
+  async DescribeAigcElement(
+    req: DescribeAigcElementRequest,
+    cb?: (error: string, rep: DescribeAigcElementResponse) => void
+  ): Promise<DescribeAigcElementResponse> {
+    return this.request("DescribeAigcElement", req, cb)
   }
 
   /**
@@ -458,6 +478,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTextToVideoViduJobResponse) => void
   ): Promise<DescribeTextToVideoViduJobResponse> {
     return this.request("DescribeTextToVideoViduJob", req, cb)
+  }
+
+  /**
+   * 提交Kling多模态编辑任务
+   */
+  async SubmitVideoEditKlingJob(
+    req: SubmitVideoEditKlingJobRequest,
+    cb?: (error: string, rep: SubmitVideoEditKlingJobResponse) => void
+  ): Promise<SubmitVideoEditKlingJobResponse> {
+    return this.request("SubmitVideoEditKlingJob", req, cb)
   }
 
   /**
@@ -501,13 +531,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Kling动作控制任务
+   * 提交视频特效任务接口
    */
-  async DescribeMotionControlKlingJob(
-    req: DescribeMotionControlKlingJobRequest,
-    cb?: (error: string, rep: DescribeMotionControlKlingJobResponse) => void
-  ): Promise<DescribeMotionControlKlingJobResponse> {
-    return this.request("DescribeMotionControlKlingJob", req, cb)
+  async CreateAigcElement(
+    req: CreateAigcElementRequest,
+    cb?: (error: string, rep: CreateAigcElementResponse) => void
+  ): Promise<CreateAigcElementResponse> {
+    return this.request("CreateAigcElement", req, cb)
+  }
+
+  /**
+   * 查询生视频任务
+   */
+  async DescribeAigcVideoJob(
+    req: DescribeAigcVideoJobRequest,
+    cb?: (error: string, rep: DescribeAigcVideoJobResponse) => void
+  ): Promise<DescribeAigcVideoJobResponse> {
+    return this.request("DescribeAigcVideoJob", req, cb)
   }
 
   /**

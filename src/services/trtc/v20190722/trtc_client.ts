@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeAsyncTextToSpeechRequest,
   ModifyCloudSliceTaskResponse,
   DescribeCloudModerationResponse,
   AgentConfig,
@@ -37,8 +38,9 @@ import {
   SliceParams,
   DescribeUserEventRequest,
   DeleteCloudModerationRequest,
+  CreateCloudSliceTaskRequest,
   McuBackgroundCustomRender,
-  WaterMarkChar,
+  AsyncTextToSpeechRequest,
   DescribeTrtcRoomUsageResponse,
   StopPublishCdnStreamResponse,
   TranscriptionUserInfoParams,
@@ -73,6 +75,7 @@ import {
   WaterMarkParams,
   DescribeRecordStatisticResponse,
   DeleteVoicePrintRequest,
+  DescribeAsyncTextToSpeechResponse,
   TranslationParam,
   CloudStorage,
   VoicePrint,
@@ -81,7 +84,7 @@ import {
   CreateCloudRecordingResponse,
   StartMCUMixTranscodeByStrRoomIdRequest,
   DescribeWebRecordRequest,
-  DescribeTRTCRealTimeScaleDataResponse,
+  AmbientSound,
   DescribeRecordStatisticRequest,
   DescribeRoomInfoRequest,
   StorageParams,
@@ -90,6 +93,7 @@ import {
   CloudSliceStorage,
   DescribeTRTCMarketScaleMetricDataResponse,
   EmulateMobileParams,
+  PronunciationDict,
   DescribeCallDetailInfoResponse,
   DescribeTRTCRealTimeQualityDataResponse,
   McuCustomCrop,
@@ -177,6 +181,7 @@ import {
   StopAIConversationResponse,
   StartPublishCdnStreamRequest,
   DescribeAIConversationRequest,
+  WaterMarkChar,
   RowValues,
   TranscriptionParam,
   CloudAuditStorage,
@@ -208,13 +213,13 @@ import {
   ModifyCloudRecordingResponse,
   SingleSubscribeParams,
   CreateCloudTranscriptionRequest,
-  CreateCloudSliceTaskRequest,
+  AsyncTextToSpeechResponse,
   ModerationParams,
   DescribeCloudSliceTaskRequest,
   StopPublishCdnStreamRequest,
   MixUserInfo,
   DescribeTRTCMarketQualityDataRequest,
-  AmbientSound,
+  DescribeTRTCRealTimeScaleDataResponse,
   DeleteCloudTranscriptionRequest,
   UpdatePublishCdnStreamRequest,
   InvokeLLM,
@@ -264,6 +269,7 @@ import {
   CreatePictureResponse,
   StartAITranscriptionResponse,
   RemoveUserResponse,
+  AlignmentItem,
 } from "./trtc_models"
 
 /**
@@ -521,13 +527,13 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
-   * 更新输入在线媒体流任务的StreamUrl
+   * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
    */
-  async UpdateStreamIngest(
-    req: UpdateStreamIngestRequest,
-    cb?: (error: string, rep: UpdateStreamIngestResponse) => void
-  ): Promise<UpdateStreamIngestResponse> {
-    return this.request("UpdateStreamIngest", req, cb)
+  async RemoveUserByStrRoomId(
+    req: RemoveUserByStrRoomIdRequest,
+    cb?: (error: string, rep: RemoveUserByStrRoomIdResponse) => void
+  ): Promise<RemoveUserByStrRoomIdResponse> {
+    return this.request("RemoveUserByStrRoomId", req, cb)
   }
 
   /**
@@ -786,13 +792,13 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-   * 停止AI对话任务
+   * 异步语音合成
    */
-  async StopAIConversation(
-    req: StopAIConversationRequest,
-    cb?: (error: string, rep: StopAIConversationResponse) => void
-  ): Promise<StopAIConversationResponse> {
-    return this.request("StopAIConversation", req, cb)
+  async AsyncTextToSpeech(
+    req: AsyncTextToSpeechRequest,
+    cb?: (error: string, rep: AsyncTextToSpeechResponse) => void
+  ): Promise<AsyncTextToSpeechResponse> {
+    return this.request("AsyncTextToSpeech", req, cb)
   }
 
   /**
@@ -902,13 +908,13 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-   * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
+   * 查询异步语音合成状态
    */
-  async RemoveUserByStrRoomId(
-    req: RemoveUserByStrRoomIdRequest,
-    cb?: (error: string, rep: RemoveUserByStrRoomIdResponse) => void
-  ): Promise<RemoveUserByStrRoomIdResponse> {
-    return this.request("RemoveUserByStrRoomId", req, cb)
+  async DescribeAsyncTextToSpeech(
+    req: DescribeAsyncTextToSpeechRequest,
+    cb?: (error: string, rep: DescribeAsyncTextToSpeechResponse) => void
+  ): Promise<DescribeAsyncTextToSpeechResponse> {
+    return this.request("DescribeAsyncTextToSpeech", req, cb)
   }
 
   /**
@@ -1068,6 +1074,16 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
+   * 停止AI对话任务
+   */
+  async StopAIConversation(
+    req: StopAIConversationRequest,
+    cb?: (error: string, rep: StopAIConversationResponse) => void
+  ): Promise<StopAIConversationResponse> {
+    return this.request("StopAIConversation", req, cb)
+  }
+
+  /**
    * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁查找自定义背景图或水印信息，可通过此接口查找已上传的图片信息。无需频繁查找图片信息的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中查看。
    */
   async DescribePicture(
@@ -1133,6 +1149,16 @@ networkDelay ：网络延迟率。
     cb?: (error: string, rep: StopAITranscriptionResponse) => void
   ): Promise<StopAITranscriptionResponse> {
     return this.request("StopAITranscription", req, cb)
+  }
+
+  /**
+   * 更新输入在线媒体流任务的StreamUrl
+   */
+  async UpdateStreamIngest(
+    req: UpdateStreamIngestRequest,
+    cb?: (error: string, rep: UpdateStreamIngestResponse) => void
+  ): Promise<UpdateStreamIngestResponse> {
+    return this.request("UpdateStreamIngest", req, cb)
   }
 
   /**

@@ -358,6 +358,16 @@ it("live.v20180801.DescribeCasterOutputInfos", async function () {
     }
 })
 
+it("live.v20180801.DescribeOriginStreamInfo", async function () {
+    try {
+       const data = await client.DescribeOriginStreamInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.CreateScreenshotTask", async function () {
     try {
        const data = await client.CreateScreenshotTask({})
@@ -1558,6 +1568,16 @@ it("live.v20180801.DescribePushBandwidthAndFluxList", async function () {
     }
 })
 
+it("live.v20180801.CloseSourceStream", async function () {
+    try {
+       const data = await client.CloseSourceStream({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("live.v20180801.DeleteScreenshotTask", async function () {
     try {
        const data = await client.DeleteScreenshotTask({})
@@ -1691,6 +1711,16 @@ it("live.v20180801.CreateLivePullStreamTask", async function () {
 it("live.v20180801.DescribeLiveTranscodeTemplates", async function () {
     try {
        const data = await client.DescribeLiveTranscodeTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("live.v20180801.ModifyOriginStreamInfo", async function () {
+    try {
+       const data = await client.ModifyOriginStreamInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
