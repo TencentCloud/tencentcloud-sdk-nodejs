@@ -6322,59 +6322,59 @@ export interface DescribeClusterPodAssetsRequest {
  */
 export interface RiskDetailItem {
   /**
-   * 首次发现时间
+   * <p>首次发现时间</p>
    */
   CreateTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 风险状态
+   * <p>风险状态</p>
    */
   RiskStatus?: number
   /**
-   * 风险内容
+   * <p>风险内容</p>
    */
   RiskContent?: string
   /**
-   * 云厂商
+   * <p>云厂商</p>
    */
   Provider?: string
   /**
-   * 云厂商名称
+   * <p>云厂商名称</p>
    */
   ProviderName?: string
   /**
-   * 云账号
+   * <p>云账号</p>
    */
   CloudAccountId?: string
   /**
-   * 云账号名称
+   * <p>云账号名称</p>
    */
   CloudAccountName?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 风险ID
+   * <p>风险ID</p>
    */
   RiskId?: number
   /**
-   * 风险规则ID
+   * <p>风险规则ID</p>
    */
   RiskRuleId?: string
   /**
-   * 风险验证状态
+   * <p>风险验证状态</p>
    */
   CheckStatus?: string
   /**
-   *
+   * <p>用户AppID</p>
    */
   AppID?: number
 }

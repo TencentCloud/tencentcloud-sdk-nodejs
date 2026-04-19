@@ -14480,75 +14480,65 @@ export interface CreateOrModifyPostPayCoresResponse {
  */
 export interface ComplianceAffectedAsset {
   /**
-   * 为客户分配的唯一的资产项的ID。
+   * <p>为客户分配的唯一的资产项的ID。</p>
    */
   CustomerAssetId?: number
   /**
-   * 资产项的名称。
+   * <p>资产项的名称。</p>
    */
   AssetName?: string
   /**
-   * 资产项的类型
+   * <p>资产项的类型</p>
    */
   AssetType?: string
   /**
-   * 检测状态
-
-CHECK_INIT, 待检测
-
-CHECK_RUNNING, 检测中
-
-CHECK_FINISHED, 检测完成
-
-CHECK_FAILED, 检测失败
+   * <p>检测状态</p><p>CHECK_INIT, 待检测</p><p>CHECK_RUNNING, 检测中</p><p>CHECK_FINISHED, 检测完成</p><p>CHECK_FAILED, 检测失败</p>
    */
   CheckStatus?: string
   /**
-   * 节点名称。
+   * <p>节点名称。</p>
    */
   NodeName?: string
   /**
-   * 上次检测的时间，格式为”YYYY-MM-DD HH:m::SS“。
-
-如果没有检测过，此处为”0000-00-00 00:00:00“。
+   * <p>上次检测的时间，格式为”YYYY-MM-DD HH:m::SS“。</p><p>如果没有检测过，此处为”0000-00-00 00:00:00“。</p>
    */
   LastCheckTime?: string
   /**
-   * 检测结果。取值为：
-
-RESULT_FAILED: 未通过
-
-RESULT_PASSED: 通过
+   * <p>检测结果。取值为：</p><p>RESULT_FAILED: 未通过</p><p>RESULT_PASSED: 通过</p>
    */
   CheckResult?: string
   /**
-   * 主机IP
+   * <p>主机IP</p>
    */
   HostIP?: string
   /**
-   * 镜像的tag
+   * <p>镜像的tag</p>
    */
   ImageTag?: string
   /**
-   * 检查项验证信息
+   * <p>检查项验证信息</p>
    */
   VerifyInfo?: string
   /**
-   * 主机实例id
+   * <p>主机实例id</p>
    */
   InstanceId?: string
   /**
-   * 镜像仓库信息
+   * <p>镜像仓库信息</p>
    */
   ImageRegistryInfo?: ImageRegistryInfo
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   ClusterID?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName?: string
+  /**
+   * <p>资产唯一ID</p><p>默认值：-</p>
+   */
+  AssetUniqueID?: string
 }
 
 /**
@@ -20882,75 +20872,69 @@ export interface DescribeVulDefenceEventDetailResponse {
  */
 export interface ComplianceAssetInfo {
   /**
-   * 客户资产的ID。
+   * <p>客户资产的ID。</p>
    */
   CustomerAssetId?: number
   /**
-   * 资产类别。
+   * <p>资产类别。</p>
    */
   AssetType?: string
   /**
-   * 资产的名称。
+   * <p>资产的名称。</p>
    */
   AssetName?: string
   /**
-   * 当资产为镜像时，这个字段为镜像Tag。
+   * <p>当资产为镜像时，这个字段为镜像Tag。</p>
    */
   ImageTag?: string
   /**
-   * 资产所在的主机IP。
+   * <p>资产所在的主机IP。</p>
    */
   HostIP?: string
   /**
-   * 资产所属的节点的名称
+   * <p>资产所属的节点的名称</p>
    */
   NodeName?: string
   /**
-   * 检测状态
-
-CHECK_INIT, 待检测
-
-CHECK_RUNNING, 检测中
-
-CHECK_FINISHED, 检测完成
-
-CHECK_FAILED, 检测失败
+   * <p>检测状态</p><p>CHECK_INIT, 待检测</p><p>CHECK_RUNNING, 检测中</p><p>CHECK_FINISHED, 检测完成</p><p>CHECK_FAILED, 检测失败</p>
    */
   CheckStatus?: string
   /**
-   * 此类资产通过的检测项的数目。
+   * <p>此类资产通过的检测项的数目。</p>
    */
   PassedPolicyItemCount?: number
   /**
-   * 此类资产未通过的检测的数目。
+   * <p>此类资产未通过的检测的数目。</p>
    */
   FailedPolicyItemCount?: number
   /**
-   * 上次检测的时间。
+   * <p>上次检测的时间。</p>
    */
   LastCheckTime?: string
   /**
-   * 检测结果：
-RESULT_FAILED: 未通过。
-RESULT_PASSED: 通过。
+   * <p>检测结果：<br>RESULT_FAILED: 未通过。<br>RESULT_PASSED: 通过。</p>
    */
   CheckResult?: string
   /**
-   * 主机节点的实例id
+   * <p>主机节点的实例id</p>
    */
   InstanceId?: string
   /**
-   * 镜像仓库信息
+   * <p>镜像仓库信息</p>
    */
   ImageRegistryInfo?: ImageRegistryInfo
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   ClusterID?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName?: string
+  /**
+   * <p>资产唯一ID</p><p>默认值：-</p>
+   */
+  AssetUniqueID?: string
 }
 
 /**

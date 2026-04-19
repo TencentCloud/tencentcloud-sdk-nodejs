@@ -227,67 +227,7 @@ export interface CreateDataSourceRequest {
    */
   Name: string
   /**
-   * 数据源类型:枚举值
-
-- MYSQL
-- TENCENT_MYSQL
-- POSTGRE
-- ORACLE
-- SQLSERVER
-- FTP
-- HIVE
-- HUDI
-- HDFS
-- ICEBERG
-- KAFKA
-- DTS_KAFKA
-- HBASE
-- SPARK
-- TBASE
-- DB2
-- DM
-- GAUSSDB
-- GBASE
-- IMPALA
-- ES
-- TENCENT_ES
-- GREENPLUM
-- SAP_HANA
-- SFTP
-- OCEANBASE
-- CLICKHOUSE
-- KUDU
-- VERTICA
-- REDIS
-- COS
-- DLC
-- DORIS
-- CKAFKA
-- S3_DATAINSIGHT
-- TDSQL
-- TDSQL_MYSQL
-- MONGODB
-- TENCENT_MONGODB
-- REST_API
-- TiDB
-- StarRocks
-- Trino
-- Kyuubi
-- TCHOUSE_X
-- TCHOUSE_P
-- TCHOUSE_C
-- TCHOUSE_D
-- INFLUXDB
-- BIG_QUERY
-- SSH
-- BLOB
-- TDSQL_POSTGRE
-- GDB
-- TDENGINE
-- TDSQLC
-- FileSystem
-- TCLake
-
+   * 数据源类型:枚举值- MYSQL- TENCENT_MYSQL- POSTGRE- ORACLE- SQLSERVER- FTP- HIVE- HUDI- HDFS- ICEBERG- KAFKA- DTS_KAFKA- HBASE- SPARK- TBASE- DB2- DM- GAUSSDB- GBASE- IMPALA- ES- TENCENT_ES- GREENPLUM- SAP_HANA- SFTP- OCEANBASE- CLICKHOUSE- KUDU- VERTICA- REDIS- COS- DLC- DORIS- CKAFKA- S3_DATAINSIGHT- TDSQL- TDSQL_MYSQL- MONGODB- TENCENT_MONGODB- REST_API- TiDB- StarRocks- Trino- Kyuubi- TCHOUSE_X- TCHOUSE_P- TCHOUSE_C- TCHOUSE_D- INFLUXDB- BIG_QUERY- SSH- BLOB- TDSQL_POSTGRE- GDB- TDENGINE- TDSQLC- FileSystem- TCLake- TDSQL_BOUNDLESS
    */
   Type: string
   /**
@@ -3539,61 +3479,53 @@ export interface UpdateResourceGroupResponse {
  */
 export interface CreateTriggerTaskSchedulerConfiguration {
   /**
-   * 上游依赖的任务数组
+   * <p>上游依赖的任务数组</p>
    */
   UpstreamDependencyConfigList?: Array<DependencyTriggerTaskBrief>
   /**
-   * 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6
+   * <p>任务调度优先级 运行优先级 4高 5中 6低 , 默认:6</p>
    */
   RunPriorityType?: number
   /**
-   * 重试策略 重试等待时间,单位分钟: 默认: 5
+   * <p>重试策略 重试等待时间,单位分钟: 默认: 5</p>
    */
   RetryWaitMinute?: number
   /**
-   * 重试策略 最大尝试次数, 默认: 4
+   * <p>重试策略 最大尝试次数, 默认: 4</p>
    */
   MaxRetryNumber?: number
   /**
-   * 超时处理策略 运行耗时超时（单位：分钟）默认为 -1
+   * <p>超时处理策略 运行耗时超时（单位：分钟）默认为 -1</p>
    */
   ExecutionTTLMinute?: number
   /**
-   * 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1
+   * <p>超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1</p>
    */
   WaitExecutionTotalTTLMinute?: number
   /**
-   * 重跑&补录配置, 默认为 ALL; , ALL 运行成功或失败后皆可重跑或补录, FAILURE 运行成功后不可重跑或补录，运行失败后可重跑或补录, NONE 运行成功或失败后皆不可重跑或补录;
+   * <p>重跑&amp;补录配置, 默认为 ALL; , ALL 运行成功或失败后皆可重跑或补录, FAILURE 运行成功后不可重跑或补录，运行失败后可重跑或补录, NONE 运行成功或失败后皆不可重跑或补录;</p>
    */
   AllowRedoType?: string
   /**
-   * 输出参数数组
+   * <p>输出参数数组</p>
    */
   ParamTaskOutList?: Array<OutTaskParameter>
   /**
-   * 输入参数数组
+   * <p>输入参数数组</p>
    */
   ParamTaskInList?: Array<InTaskParameter>
   /**
-   * 产出登记
+   * <p>产出登记</p>
    */
   TaskOutputRegistryList?: Array<TaskDataRegistry>
   /**
-   * - 任务依赖运行条件，默认为ALL_SUCCESS，暂时只支持工作流调度项目下配置
-- ALL_SUCCESS： 全部成功：所有上游依赖任务都达到终态时，进行依赖判断，如果上游全部都成功，则依赖判断成功，否则如果上游有一个跳过运行，则标记为跳过运行，其余情况标记为上游失败
-- ALL_FAILED：全部失败：所有上游依赖任务都达到终态时，进行依赖判断，如果上游状态都是失败或者上游失败，则依赖判断成功，否则就标记为跳过运行
-- ALL_DONE：全部完成：所有上游依赖任务都达到终态时，进行依赖判断，直接是依赖判断成功
-- ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行
-- ALL_SKIPPED：上游全部都跳过: 所有上游依赖任务都达到终态时，进行依赖判断，所有的上游都是跳过状态才算依赖判断成功，否则当前节点就是跳过运行
-- ONE_FAILED：至少一个失败: 上游只要有一个失败了，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有失败，则跳过运行
-- ONE_SUCCESS：至少一个成功：上游只要有一个成功，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有成功，则跳过运行
-- ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游
-- NONE_FAILED：上游全部完成，没有失败: 所有上游依赖任务都达到终态时，进行依赖判断，如果上游都是成功或者跳过运行，则依赖判断成功，否则标记为上游失败
-- ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行
-- NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行
-- ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行
+   * <ul><li>任务依赖运行条件，默认为ALL_SUCCESS，暂时只支持工作流调度项目下配置</li><li>ALL_SUCCESS： 全部成功：所有上游依赖任务都达到终态时，进行依赖判断，如果上游全部都成功，则依赖判断成功，否则如果上游有一个跳过运行，则标记为跳过运行，其余情况标记为上游失败</li><li>ALL_FAILED：全部失败：所有上游依赖任务都达到终态时，进行依赖判断，如果上游状态都是失败或者上游失败，则依赖判断成功，否则就标记为跳过运行</li><li>ALL_DONE：全部完成：所有上游依赖任务都达到终态时，进行依赖判断，直接是依赖判断成功</li><li>ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行</li><li>ALL_SKIPPED：上游全部都跳过: 所有上游依赖任务都达到终态时，进行依赖判断，所有的上游都是跳过状态才算依赖判断成功，否则当前节点就是跳过运行</li><li>ONE_FAILED：至少一个失败: 上游只要有一个失败了，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有失败，则跳过运行</li><li>ONE_SUCCESS：至少一个成功：上游只要有一个成功，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有成功，则跳过运行</li><li>ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游</li><li>NONE_FAILED：上游全部完成，没有失败: 所有上游依赖任务都达到终态时，进行依赖判断，如果上游都是成功或者跳过运行，则依赖判断成功，否则标记为上游失败</li><li>ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行</li><li>NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行</li><li>ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行</li></ul>
    */
   DependencyTriggerPolicy?: string
+  /**
+   * <p>是否允许下游依赖 1允许 0不允许</p><p>取值范围：[0, 1]</p><p>默认值：1</p>
+   */
+  AllowDownstreamDependency?: number
 }
 
 /**
@@ -6515,72 +6447,65 @@ export interface CreateSQLScriptResponse {
  */
 export interface TriggerTaskSchedulerConfiguration {
   /**
-   * 上游依赖数组
+   * <p>上游依赖数组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpstreamDependencyConfigList?: Array<DependencyTriggerTaskBrief>
   /**
-   * 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6
+   * <p>任务调度优先级 运行优先级 4高 5中 6低 , 默认:6</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunPriorityType?: number
   /**
-   * 重试策略 重试等待时间,单位分钟: 默认: 5
+   * <p>重试策略 重试等待时间,单位分钟: 默认: 5</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RetryWaitMinute?: number
   /**
-   * 重试策略 最大尝试次数, 默认: 4
+   * <p>重试策略 最大尝试次数, 默认: 4</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxRetryNumber?: number
   /**
-   * 超时处理策略 运行耗时超时（单位：分钟）默认为 -1
+   * <p>超时处理策略 运行耗时超时（单位：分钟）默认为 -1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionTTLMinute?: number
   /**
-   * 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1
+   * <p>超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WaitExecutionTotalTTLMinute?: number
   /**
-   * 重跑&补录配置, 默认为 ALL; , ALL 运行成功或失败后皆可重跑或补录, FAILURE 运行成功后不可重跑或补录，运行失败后可重跑或补录, NONE 运行成功或失败后皆不可重跑或补录;
+   * <p>重跑&amp;补录配置, 默认为 ALL; , ALL 运行成功或失败后皆可重跑或补录, FAILURE 运行成功后不可重跑或补录，运行失败后可重跑或补录, NONE 运行成功或失败后皆不可重跑或补录;</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AllowRedoType?: string
   /**
-   * 输出参数数组
+   * <p>输出参数数组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamTaskOutList?: Array<OutTaskParameter>
   /**
-   * 输入参数数组
+   * <p>输入参数数组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamTaskInList?: Array<InTaskParameter>
   /**
-   * 产出登记
+   * <p>产出登记</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskOutputRegistryList?: Array<TaskDataRegistry>
   /**
-   * - 任务依赖运行条件，默认为ALL_SUCCESS，暂时只支持工作流调度项目下配置
-- ALL_SUCCESS： 全部成功：所有上游依赖任务都达到终态时，进行依赖判断，如果上游全部都成功，则依赖判断成功，否则如果上游有一个跳过运行，则标记为跳过运行，其余情况标记为上游失败
-- ALL_FAILED：全部失败：所有上游依赖任务都达到终态时，进行依赖判断，如果上游状态都是失败或者上游失败，则依赖判断成功，否则就标记为跳过运行
-- ALL_DONE：全部完成：所有上游依赖任务都达到终态时，进行依赖判断，直接是依赖判断成功
-- ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行
-- ALL_SKIPPED：上游全部都跳过: 所有上游依赖任务都达到终态时，进行依赖判断，所有的上游都是跳过状态才算依赖判断成功，否则当前节点就是跳过运行
-- ONE_FAILED：至少一个失败: 上游只要有一个失败了，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有失败，则跳过运行
-- ONE_SUCCESS：至少一个成功：上游只要有一个成功，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有成功，则跳过运行
-- ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游
-- NONE_FAILED：上游全部完成，没有失败: 所有上游依赖任务都达到终态时，进行依赖判断，如果上游都是成功或者跳过运行，则依赖判断成功，否则标记为上游失败
-- ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行
-- NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行
-- ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行
+   * <ul><li>任务依赖运行条件，默认为ALL_SUCCESS，暂时只支持工作流调度项目下配置</li><li>ALL_SUCCESS： 全部成功：所有上游依赖任务都达到终态时，进行依赖判断，如果上游全部都成功，则依赖判断成功，否则如果上游有一个跳过运行，则标记为跳过运行，其余情况标记为上游失败</li><li>ALL_FAILED：全部失败：所有上游依赖任务都达到终态时，进行依赖判断，如果上游状态都是失败或者上游失败，则依赖判断成功，否则就标记为跳过运行</li><li>ALL_DONE：全部完成：所有上游依赖任务都达到终态时，进行依赖判断，直接是依赖判断成功</li><li>ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行</li><li>ALL_SKIPPED：上游全部都跳过: 所有上游依赖任务都达到终态时，进行依赖判断，所有的上游都是跳过状态才算依赖判断成功，否则当前节点就是跳过运行</li><li>ONE_FAILED：至少一个失败: 上游只要有一个失败了，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有失败，则跳过运行</li><li>ONE_SUCCESS：至少一个成功：上游只要有一个成功，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有成功，则跳过运行</li><li>ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游</li><li>NONE_FAILED：上游全部完成，没有失败: 所有上游依赖任务都达到终态时，进行依赖判断，如果上游都是成功或者跳过运行，则依赖判断成功，否则标记为上游失败</li><li>ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行</li><li>NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行</li><li>ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependencyTriggerPolicy?: string
+  /**
+   * <p>是否允许下游依赖 1允许 0不允许</p><p>取值范围：[0, 1]</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AllowDownstreamDependency?: number
 }
 
 /**
@@ -6633,156 +6558,136 @@ export interface ListLineageResponse {
  */
 export interface CreateTaskSchedulerConfiguration {
   /**
-   * 周期类型：默认为 DAY_CYCLE
-
-支持的类型为 
-
-* ONEOFF_CYCLE: 一次性
-* YEAR_CYCLE: 年
-* MONTH_CYCLE: 月
-* WEEK_CYCLE: 周
-* DAY_CYCLE: 天
-* HOUR_CYCLE: 小时
-* MINUTE_CYCLE: 分钟
-* CRONTAB_CYCLE: crontab表达式类型
+   * <p>周期类型：默认为 DAY_CYCLE</p><p>支持的类型为 </p><ul><li>ONEOFF_CYCLE: 一次性</li><li>YEAR_CYCLE: 年</li><li>MONTH_CYCLE: 月</li><li>WEEK_CYCLE: 周</li><li>DAY_CYCLE: 天</li><li>HOUR_CYCLE: 小时</li><li>MINUTE_CYCLE: 分钟</li><li>CRONTAB_CYCLE: crontab表达式类型</li></ul>
    */
   CycleType?: string
   /**
-   * 时区，默认为 UTC+8
+   * <p>时区，默认为 UTC+8</p>
    */
   ScheduleTimeZone?: string
   /**
-   * Cron表达式，默认为 0 0 0 * * ? *
+   * <p>Cron表达式，默认为 0 0 0 * * ? *</p>
    */
   CrontabExpression?: string
   /**
-   * 生效日期，默认为当前日期的 00:00:00
+   * <p>生效日期，默认为当前日期的 00:00:00</p>
    */
   StartTime?: string
   /**
-   * 结束日期，默认为 2099-12-31 23:59:59
+   * <p>结束日期，默认为 2099-12-31 23:59:59</p>
    */
   EndTime?: string
   /**
-   * 执行时间 左闭区间，默认 00:00
+   * <p>执行时间 左闭区间，默认 00:00</p>
    */
   ExecutionStartTime?: string
   /**
-   * 执行时间 右闭区间，默认 23:59
+   * <p>执行时间 右闭区间，默认 23:59</p>
    */
   ExecutionEndTime?: string
   /**
-   * 日历调度 取值为 0 和 1， 1为打开，0为关闭，默认为0
+   * <p>日历调度 取值为 0 和 1， 1为打开，0为关闭，默认为0</p>
    */
   CalendarOpen?: string
   /**
-   * 日历调度 日历 ID
+   * <p>日历调度 日历 ID</p>
    */
   CalendarId?: string
   /**
-   * 自依赖, 默认值 serial, 取值为：parallel(并行), serial(串行), orderly(有序)
+   * <p>自依赖, 默认值 serial, 取值为：parallel(并行), serial(串行), orderly(有序)</p>
    */
   SelfDepend?: string
   /**
-   * 上游依赖数组
+   * <p>上游依赖数组</p>
    */
   UpstreamDependencyConfigList?: Array<DependencyTaskBrief>
   /**
-   * 事件数组
+   * <p>事件数组</p>
    */
   EventListenerList?: Array<EventListener>
   /**
-   * 重跑&补录配置, 默认为 ALL; , ALL 运行成功或失败后皆可重跑或补录, FAILURE 运行成功后不可重跑或补录，运行失败后可重跑或补录, NONE 运行成功或失败后皆不可重跑或补录;
+   * <p>重跑&amp;补录配置, 默认为 ALL; , ALL 运行成功或失败后皆可重跑或补录, FAILURE 运行成功后不可重跑或补录，运行失败后可重跑或补录, NONE 运行成功或失败后皆不可重跑或补录;</p>
    */
   AllowRedoType?: string
   /**
-   * 输出参数数组
+   * <p>输出参数数组</p>
    */
   ParamTaskOutList?: Array<OutTaskParameter>
   /**
-   * 输入参数数组
+   * <p>输入参数数组</p>
    */
   ParamTaskInList?: Array<InTaskParameter>
   /**
-   * 产出登记
+   * <p>产出登记</p>
    */
   TaskOutputRegistryList?: Array<TaskDataRegistry>
   /**
-   * **实例生成策略**
-   * T_PLUS_0: T+0生成,默认策略
-   * T_PLUS_1: T+1生成
+   * <p><strong>实例生成策略</strong></p><ul><li>T_PLUS_0: T+0生成,默认策略</li><li>T_PLUS_1: T+1生成</li></ul>
    */
   InitStrategy?: string
   /**
-   * 调度类型: 0 正常调度 1 空跑调度，默认为 0
+   * <p>调度类型: 0 正常调度 1 空跑调度，默认为 0</p>
    * @deprecated
    */
   ScheduleRunType?: string
   /**
-   * 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6
+   * <p>任务调度优先级 运行优先级 4高 5中 6低 , 默认:6</p>
    * @deprecated
    */
   RunPriority?: string
   /**
-   * 重试策略 重试等待时间,单位分钟: 默认: 5
+   * <p>重试策略 重试等待时间,单位分钟: 默认: 5</p>
    * @deprecated
    */
   RetryWait?: string
   /**
-   * 重试策略 最大尝试次数, 默认: 4
+   * <p>重试策略 最大尝试次数, 默认: 4</p>
    * @deprecated
    */
   MaxRetryAttempts?: string
   /**
-   * 超时处理策略 运行耗时超时（单位：分钟）默认为 -1
+   * <p>超时处理策略 运行耗时超时（单位：分钟）默认为 -1</p>
    * @deprecated
    */
   ExecutionTTL?: string
   /**
-   * 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1
+   * <p>超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1</p>
    * @deprecated
    */
   WaitExecutionTotalTTL?: string
   /**
-   * 调度类型: 0 正常调度 1 空跑调度，默认为 0
+   * <p>调度类型: 0 正常调度 1 空跑调度，默认为 0</p>
    */
   ScheduleType?: number
   /**
-   * 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6
+   * <p>任务调度优先级 运行优先级 4高 5中 6低 , 默认:6</p>
    */
   RunPriorityType?: number
   /**
-   * 重试策略 重试等待时间,单位分钟: 默认: 5
+   * <p>重试策略 重试等待时间,单位分钟: 默认: 5</p>
    */
   RetryWaitMinute?: number
   /**
-   * 重试策略 最大尝试次数, 默认: 4
+   * <p>重试策略 最大尝试次数, 默认: 4</p>
    */
   MaxRetryNumber?: number
   /**
-   * 超时处理策略 运行耗时超时（单位：分钟）默认为 -1
+   * <p>超时处理策略 运行耗时超时（单位：分钟）默认为 -1</p>
    */
   ExecutionTTLMinute?: number
   /**
-   * 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1
+   * <p>超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1</p>
    */
   WaitExecutionTotalTTLMinute?: number
   /**
-   * - 任务依赖运行条件，默认为ALL_SUCCESS，暂时只支持工作流调度项目下配置
-- ALL_SUCCESS： 全部成功：所有上游依赖任务都达到终态时，进行依赖判断，如果上游全部都成功，则依赖判断成功，否则如果上游有一个跳过运行，则标记为跳过运行，其余情况标记为上游失败
-- ALL_FAILED：全部失败：所有上游依赖任务都达到终态时，进行依赖判断，如果上游状态都是失败或者上游失败，则依赖判断成功，否则就标记为跳过运行
-- ALL_DONE：全部完成：所有上游依赖任务都达到终态时，进行依赖判断，直接是依赖判断成功
-- ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行
-- ALL_SKIPPED：上游全部都跳过: 所有上游依赖任务都达到终态时，进行依赖判断，所有的上游都是跳过状态才算依赖判断成功，否则当前节点就是跳过运行
-- ONE_FAILED：至少一个失败: 上游只要有一个失败了，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有失败，则跳过运行
-- ONE_SUCCESS：至少一个成功：上游只要有一个成功，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有成功，则跳过运行
-- ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游
-- NONE_FAILED：上游全部完成，没有失败: 所有上游依赖任务都达到终态时，进行依赖判断，如果上游都是成功或者跳过运行，则依赖判断成功，否则标记为上游失败
-- ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行
-- NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行
-- ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行
+   * <ul><li>任务依赖运行条件，默认为ALL_SUCCESS，暂时只支持工作流调度项目下配置</li><li>ALL_SUCCESS： 全部成功：所有上游依赖任务都达到终态时，进行依赖判断，如果上游全部都成功，则依赖判断成功，否则如果上游有一个跳过运行，则标记为跳过运行，其余情况标记为上游失败</li><li>ALL_FAILED：全部失败：所有上游依赖任务都达到终态时，进行依赖判断，如果上游状态都是失败或者上游失败，则依赖判断成功，否则就标记为跳过运行</li><li>ALL_DONE：全部完成：所有上游依赖任务都达到终态时，进行依赖判断，直接是依赖判断成功</li><li>ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行</li><li>ALL_SKIPPED：上游全部都跳过: 所有上游依赖任务都达到终态时，进行依赖判断，所有的上游都是跳过状态才算依赖判断成功，否则当前节点就是跳过运行</li><li>ONE_FAILED：至少一个失败: 上游只要有一个失败了，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有失败，则跳过运行</li><li>ONE_SUCCESS：至少一个成功：上游只要有一个成功，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有成功，则跳过运行</li><li>ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游</li><li>NONE_FAILED：上游全部完成，没有失败: 所有上游依赖任务都达到终态时，进行依赖判断，如果上游都是成功或者跳过运行，则依赖判断成功，否则标记为上游失败</li><li>ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行</li><li>NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行</li><li>ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行</li></ul>
    */
   DependencyTriggerPolicy?: string
+  /**
+   * <p>是否允许下游依赖 1允许 0不允许</p><p>取值范围：[0, 1]</p><p>默认值：1</p>
+   * @deprecated
+   */
+  AllowDownstreamDependency?: number
 }
 
 /**
@@ -7363,6 +7268,102 @@ export interface QualitySubscribeWebHook {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HookAddress?: string
+}
+
+/**
+ * 查询任务运行列表返回参数
+ */
+export interface ListTriggerTaskRunBrief {
+  /**
+   * 任务运行ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutionId?: string
+  /**
+   * 工作流ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowId?: string
+  /**
+   * 工作流运行ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowExecutionId?: string
+  /**
+   * 任务ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 触发类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TriggerType?: string
+  /**
+   * 等待时长，单位秒
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WaitTime?: string
+  /**
+   * 运行账号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecuteUserUin?: string
+  /**
+   * 计划调度时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScheduleTime?: string
+  /**
+   * 运行开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutionStartTime?: string
+  /**
+   * 运行结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutionEndTime?: string
+  /**
+   * 运行时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecutionTime?: string
+  /**
+   * 系统自动重试次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RetryTimes?: number
+  /**
+   * 错误码描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorCodeStr?: string
+  /**
+   * 任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName?: string
+  /**
+   * 工作流名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkflowName?: string
+  /**
+   * 用户手动重跑次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RerunTimes?: number
+  /**
+   * 任务运行状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskExecutionState?: string
+  /**
+   * 是否是最新一次运行
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsLatestExecution?: boolean
 }
 
 /**
@@ -9080,29 +9081,34 @@ export interface StopSQLScriptRunRequest {
 }
 
 /**
- * 任务实例执行列表
+ * 查询工作流结果
  */
-export interface TaskInstanceExecutions {
+export interface ListTriggerTaskRunResult {
   /**
-   * 结果总数
+   * 总记录数
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
-   * 总页数
+   * 页数
+注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalPageNumber?: number
   /**
-   * 记录列表
-   */
-  Items?: Array<InstanceExecution>
-  /**
    * 页码
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PageNumber?: number
   /**
-   * 分页大小
+   * 页大小
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PageSize?: number
+  /**
+   * 任务运行信息集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<ListTriggerTaskRunBrief>
 }
 
 /**
@@ -9483,6 +9489,32 @@ export interface GetTriggerWorkflowResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ListTriggerTaskRuns请求参数结构体
+ */
+export interface ListTriggerTaskRunsRequest {
+  /**
+   * 项目ID
+   */
+  ProjectId: string
+  /**
+   * 过滤参数，任务名称或ID查询: Keyword，工作流ID查询: WorkflowId，文件夹查询: FolderId，负责人查询: InChargeUin，工作流执行ID: WorkflowExecutionId，任务执行ID: ExecutionId，任务ID: TaskId，计划调度时间区间: ScheduleTimeGreaterEqual / ScheduleTimeLessEqual
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序字段，排序字段名称	如下开始时间：CreateTime，结束时间：EndTime，计划调度时间：ScheduleTime
+   */
+  OrderFields?: Array<OrderField>
+  /**
+   * 页码
+   */
+  PageNumber?: number
+  /**
+   * 页大小
+   */
+  PageSize?: number
 }
 
 /**
@@ -13954,12 +13986,14 @@ export interface RevokeDataSourceAuthorizationRequest {
    */
   DataSourceId: string
   /**
-   * 回收的项目id，与UserUin参数只能填一个
+   * 回收的项目id，与RevokeUser参数只能选填一个，或者都不传当RevokeProjectId与RevokeUser都不传时，表示回收当前数据源所有权限（数据源为项目共享时，不回收当前数据源创建项目下所有用户对该数据源的权限，当数据源为个人和项目管理员共享时，不回收当前数据源创建项目下数据源创建用户和管理员的权限）
    */
   RevokeProjectId?: string
   /**
    * 回收项目下用户列表，格式为：项目id_用户id
-与RevokeProjectId参数只能填一个
+与RevokeProjectId参数只能选填一个，或者都不传
+当RevokeProjectId与RevokeUser都不传时，表示回收当前数据源所有权限（
+数据源为项目共享时，不回收当前数据源创建项目下所有用户对该数据源的权限，当数据源为个人和项目管理员共享时，不回收当前数据源创建项目下数据源创建用户和管理员的权限）
 
 
    */
@@ -14720,6 +14754,20 @@ export interface DeleteTaskFolderResponse {
 }
 
 /**
+ * PauseOpsTasksAsync返回参数结构体
+ */
+export interface PauseOpsTasksAsyncResponse {
+  /**
+   * 异步操作结果
+   */
+  Data?: OpsAsyncResponse
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteWorkflowPermissions返回参数结构体
  */
 export interface DeleteWorkflowPermissionsResponse {
@@ -15008,13 +15056,13 @@ export interface CreateTriggerWorkflowResponse {
 }
 
 /**
- * PauseOpsTasksAsync返回参数结构体
+ * ListTriggerTaskRuns返回参数结构体
  */
-export interface PauseOpsTasksAsyncResponse {
+export interface ListTriggerTaskRunsResponse {
   /**
-   * 异步操作结果
+   * 任务运行查询结果
    */
-  Data?: OpsAsyncResponse
+  Data?: ListTriggerTaskRunResult
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16710,6 +16758,32 @@ export interface CreateQualityRuleVO {
 }
 
 /**
+ * 任务实例执行列表
+ */
+export interface TaskInstanceExecutions {
+  /**
+   * 结果总数
+   */
+  TotalCount?: number
+  /**
+   * 总页数
+   */
+  TotalPageNumber?: number
+  /**
+   * 记录列表
+   */
+  Items?: Array<InstanceExecution>
+  /**
+   * 页码
+   */
+  PageNumber?: number
+  /**
+   * 分页大小
+   */
+  PageSize?: number
+}
+
+/**
  * 更新任务对象入参
  */
 export interface UpdateTriggerTaskPart {
@@ -17188,200 +17262,182 @@ export interface WorkflowMaxPermission {
  */
 export interface TaskSchedulerConfiguration {
   /**
-   * 周期类型：支持的类型为
-
-ONEOFF_CYCLE: 一次性
-YEAR_CYCLE: 年
-MONTH_CYCLE: 月
-WEEK_CYCLE: 周
-DAY_CYCLE: 天
-HOUR_CYCLE: 小时
-MINUTE_CYCLE: 分钟
-CRONTAB_CYCLE: crontab表达式类型
+   * <p>周期类型：支持的类型为</p><p>ONEOFF_CYCLE: 一次性<br>YEAR_CYCLE: 年<br>MONTH_CYCLE: 月<br>WEEK_CYCLE: 周<br>DAY_CYCLE: 天<br>HOUR_CYCLE: 小时<br>MINUTE_CYCLE: 分钟<br>CRONTAB_CYCLE: crontab表达式类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleType?: string
   /**
-   * 时区
+   * <p>时区</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleTimeZone?: string
   /**
-   * 0 2 3 1,L,2 * ?	
+   * <p>0 2 3 1,L,2 * ?</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CrontabExpression?: string
   /**
-   * 生效日期
+   * <p>生效日期</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
-   * 结束日期
+   * <p>结束日期</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
-   * 执行时间 左闭区间
+   * <p>执行时间 左闭区间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionStartTime?: string
   /**
-   * 执行时间 右闭区间
+   * <p>执行时间 右闭区间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionEndTime?: string
   /**
-   * 日历调度 取值为 0 和 1， 1为打开，0为关闭，默认为0
+   * <p>日历调度 取值为 0 和 1， 1为打开，0为关闭，默认为0</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CalendarOpen?: string
   /**
-   * 日历调度 日历 ID
+   * <p>日历调度 日历 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CalendarId?: string
   /**
-   * 日历调度 日历名称, 需要从 DescribeScheduleCalendarPageList 中获取
+   * <p>日历调度 日历名称, 需要从 DescribeScheduleCalendarPageList 中获取</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CalendarName?: string
   /**
-   * 自依赖, 默认值 serial, 取值为：parallel(并行), serial(串行), orderly(有序)
+   * <p>自依赖, 默认值 serial, 取值为：parallel(并行), serial(串行), orderly(有序)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SelfDepend?: string
   /**
-   * 上游依赖数组
+   * <p>上游依赖数组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpstreamDependencyConfigList?: Array<DependencyTaskBrief>
   /**
-   * 下游依赖数组
+   * <p>下游依赖数组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DownstreamDependencyConfigList?: Array<DependencyTaskBrief>
   /**
-   * 事件数组
+   * <p>事件数组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventListenerList?: Array<EventListener>
   /**
-   * 重跑&补录配置, 默认为 ALL; , ALL 运行成功或失败后皆可重跑或补录, FAILURE 运行成功后不可重跑或补录，运行失败后可重跑或补录, NONE 运行成功或失败后皆不可重跑或补录;
+   * <p>重跑&amp;补录配置, 默认为 ALL; , ALL 运行成功或失败后皆可重跑或补录, FAILURE 运行成功后不可重跑或补录，运行失败后可重跑或补录, NONE 运行成功或失败后皆不可重跑或补录;</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AllowRedoType?: string
   /**
-   * 输出参数数组
+   * <p>输出参数数组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamTaskOutList?: Array<OutTaskParameter>
   /**
-   * 输入参数数组
+   * <p>输入参数数组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamTaskInList?: Array<InTaskParameter>
   /**
-   * 产出登记
+   * <p>产出登记</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskOutputRegistryList?: Array<TaskDataRegistry>
   /**
-   * **实例生成策略**
-* T_PLUS_0: T+0生成,默认策略
-* T_PLUS_1: T+1生成
+   * <p><strong>实例生成策略</strong></p><ul><li>T_PLUS_0: T+0生成,默认策略</li><li>T_PLUS_1: T+1生成</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InitStrategy?: string
   /**
-   * 调度类型: 0 正常调度 1 空跑调度，默认为 0
+   * <p>调度类型: 0 正常调度 1 空跑调度，默认为 0</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   ScheduleRunType?: number
   /**
-   * （废弃，建议使用 DownstreamDependencyConfigList）下游依赖数组
+   * <p>（废弃，建议使用 DownstreamDependencyConfigList）下游依赖数组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   DownStreamDependencyConfigList?: Array<DependencyTaskBrief>
   /**
-   * 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6
+   * <p>任务调度优先级 运行优先级 4高 5中 6低 , 默认:6</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   RunPriority?: number
   /**
-   * 重试策略 重试等待时间,单位分钟: 默认: 5
+   * <p>重试策略 重试等待时间,单位分钟: 默认: 5</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   RetryWait?: number
   /**
-   * 重试策略 最大尝试次数, 默认: 4
+   * <p>重试策略 最大尝试次数, 默认: 4</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   MaxRetryAttempts?: number
   /**
-   * 超时处理策略 运行耗时超时（单位：分钟）默认为 -1
+   * <p>超时处理策略 运行耗时超时（单位：分钟）默认为 -1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   ExecutionTTL?: number
   /**
-   * 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1
+   * <p>超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   WaitExecutionTotalTTL?: string
   /**
-   * 调度类型: 0 正常调度 1 空跑调度，默认为 0
+   * <p>调度类型: 0 正常调度 1 空跑调度，默认为 0</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleType?: number
   /**
-   * 任务调度优先级 运行优先级 4高 5中 6低 , 默认:6
+   * <p>任务调度优先级 运行优先级 4高 5中 6低 , 默认:6</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunPriorityType?: number
   /**
-   * 重试策略 重试等待时间,单位分钟: 默认: 5
+   * <p>重试策略 重试等待时间,单位分钟: 默认: 5</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RetryWaitMinute?: number
   /**
-   * 重试策略 最大尝试次数, 默认: 4
+   * <p>重试策略 最大尝试次数, 默认: 4</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxRetryNumber?: number
   /**
-   * 超时处理策略 运行耗时超时（单位：分钟）默认为 -1
+   * <p>超时处理策略 运行耗时超时（单位：分钟）默认为 -1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionTTLMinute?: number
   /**
-   * 超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1
+   * <p>超时处理策略 等待总时长耗时超时（单位：分钟）默认为 -1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WaitExecutionTotalTTLMinute?: number
   /**
-   * - 任务依赖运行条件，默认为ALL_SUCCESS，暂时只支持工作流调度项目下配置
-- ALL_SUCCESS： 全部成功：所有上游依赖任务都达到终态时，进行依赖判断，如果上游全部都成功，则依赖判断成功，否则如果上游有一个跳过运行，则标记为跳过运行，其余情况标记为上游失败
-- ALL_FAILED：全部失败：所有上游依赖任务都达到终态时，进行依赖判断，如果上游状态都是失败或者上游失败，则依赖判断成功，否则就标记为跳过运行
-- ALL_DONE：全部完成：所有上游依赖任务都达到终态时，进行依赖判断，直接是依赖判断成功
-- ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行
-- ALL_SKIPPED：上游全部都跳过: 所有上游依赖任务都达到终态时，进行依赖判断，所有的上游都是跳过状态才算依赖判断成功，否则当前节点就是跳过运行
-- ONE_FAILED：至少一个失败: 上游只要有一个失败了，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有失败，则跳过运行
-- ONE_SUCCESS：至少一个成功：上游只要有一个成功，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有成功，则跳过运行
-- ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游
-- NONE_FAILED：上游全部完成，没有失败: 所有上游依赖任务都达到终态时，进行依赖判断，如果上游都是成功或者跳过运行，则依赖判断成功，否则标记为上游失败
-- ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行
-- NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行
-- ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行
+   * <ul><li>任务依赖运行条件，默认为ALL_SUCCESS，暂时只支持工作流调度项目下配置</li><li>ALL_SUCCESS： 全部成功：所有上游依赖任务都达到终态时，进行依赖判断，如果上游全部都成功，则依赖判断成功，否则如果上游有一个跳过运行，则标记为跳过运行，其余情况标记为上游失败</li><li>ALL_FAILED：全部失败：所有上游依赖任务都达到终态时，进行依赖判断，如果上游状态都是失败或者上游失败，则依赖判断成功，否则就标记为跳过运行</li><li>ALL_DONE：全部完成：所有上游依赖任务都达到终态时，进行依赖判断，直接是依赖判断成功</li><li>ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行</li><li>ALL_SKIPPED：上游全部都跳过: 所有上游依赖任务都达到终态时，进行依赖判断，所有的上游都是跳过状态才算依赖判断成功，否则当前节点就是跳过运行</li><li>ONE_FAILED：至少一个失败: 上游只要有一个失败了，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有失败，则跳过运行</li><li>ONE_SUCCESS：至少一个成功：上游只要有一个成功，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有成功，则跳过运行</li><li>ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游</li><li>NONE_FAILED：上游全部完成，没有失败: 所有上游依赖任务都达到终态时，进行依赖判断，如果上游都是成功或者跳过运行，则依赖判断成功，否则标记为上游失败</li><li>ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行</li><li>NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行</li><li>ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependencyTriggerPolicy?: string
+  /**
+   * <p>是否允许下游依赖 1允许 0不允许</p><p>取值范围：[0, 1]</p><p>默认值：1</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AllowDownstreamDependency?: number
 }
 
 /**

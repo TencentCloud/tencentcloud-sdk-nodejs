@@ -5559,9 +5559,13 @@ export interface ExtractBlindWatermarkResponse {
  */
 export interface SSAIConf {
   /**
-   * <p>广告决策服务器URL(ADS)。</p>
+   * <p>广告决策服务器URL(ADS)。注意：填了AdsUrl会自动代替覆盖AdsUrls[0]</p>
    */
   AdsUrl?: string
+  /**
+   * <p>广告决策服务器URL数组(ADS)</p>
+   */
+  AdsUrls?: Array<string>
   /**
    * <p>参数配置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
@@ -5607,9 +5611,13 @@ export interface SSAIConf {
    */
   AdCDNPrefix?: string
   /**
-   * <p>预加载广告决策服务地址。</p>
+   * <p>预加载广告决策服务地址。注意：填了PreRollAdsUrl会自动代替覆盖PreRollAdsUrls[0]</p>
    */
   PreRollAdsUrl?: string
+  /**
+   * <p>预加载广告决策服务地址数组</p>
+   */
+  PreRollAdsUrls?: Array<string>
   /**
    * <p>预加载广告最大允许时长，0-3600。</p>
    */

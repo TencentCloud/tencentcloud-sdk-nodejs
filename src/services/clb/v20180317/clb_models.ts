@@ -4205,11 +4205,11 @@ export interface DisassociateTargetGroupsRequest {
  */
 export interface Filter {
   /**
-   * 过滤器的名称
+   * <p>过滤器的名称</p>
    */
   Name: string
   /**
-   * 过滤器的值数组
+   * <p>过滤器的值数组</p>
    */
   Values: Array<string>
 }

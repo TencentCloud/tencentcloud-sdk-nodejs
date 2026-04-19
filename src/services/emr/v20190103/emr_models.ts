@@ -4694,6 +4694,10 @@ export interface CreateInstanceRequest {
    * <p>分区置放群组分区</p>
    */
   PartitionNumber?: number
+  /**
+   * <p>服务ui地址</p><p>枚举值：</p><ul><li>0： 服务ui地址，只返回1条服务ui地址</li><li>1： 服务ui地址，如果服务含有多个ui地址将全部返回，例如impala的Impalad、StateStore、Catalogd</li></ul><p>默认值：0</p>
+   */
+  WebUiVersion?: number
 }
 
 /**
@@ -10220,6 +10224,10 @@ export interface CreateClusterRequest {
    * <p>分区置放群组分区</p>
    */
   PartitionNumber?: number
+  /**
+   * <p>服务ui地址</p><p>枚举值：</p><ul><li>0： 服务ui地址，只返回1条服务ui地址</li><li>1： 服务ui地址，如果服务含有多个ui地址将全部返回，例如impala的Impalad、StateStore、Catalogd</li></ul><p>默认值：0</p>
+   */
+  WebUiVersion?: number
 }
 
 /**

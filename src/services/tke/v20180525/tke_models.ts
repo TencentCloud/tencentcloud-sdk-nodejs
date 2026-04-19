@@ -4684,6 +4684,16 @@ export interface ModifyPrometheusAlertPolicyRequest {
 }
 
 /**
+ * ModifyLogConfig返回参数结构体
+ */
+export interface ModifyLogConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeOpenPolicyList请求参数结构体
  */
 export interface DescribeOpenPolicyListRequest {
@@ -11474,6 +11484,24 @@ export interface DescribeClusterAsGroupsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyLogConfig请求参数结构体
+ */
+export interface ModifyLogConfigRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 日志采集配置的json表达
+   */
+  LogConfig: string
+  /**
+   * 当前集群类型支持tke（标准集群）、eks（serverless集群）
+   */
+  ClusterType?: string
 }
 
 /**

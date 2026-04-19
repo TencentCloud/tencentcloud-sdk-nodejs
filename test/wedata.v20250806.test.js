@@ -768,6 +768,16 @@ it("wedata.v20250806.ListUpstreamTaskInstances", async function () {
     }
 })
 
+it("wedata.v20250806.ListTriggerTaskRuns", async function () {
+    try {
+       const data = await client.ListTriggerTaskRuns({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20250806.GetTask", async function () {
     try {
        const data = await client.GetTask({})

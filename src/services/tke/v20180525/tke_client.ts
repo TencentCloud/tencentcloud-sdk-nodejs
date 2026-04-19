@@ -238,6 +238,7 @@ import {
   OpenConstraintInfo,
   DescribeClusterInspectionResultsOverviewRequest,
   ModifyPrometheusAlertPolicyRequest,
+  ModifyLogConfigResponse,
   DescribeOpenPolicyListRequest,
   PrometheusTemplateSyncTarget,
   DescribePrometheusTemplatesRequest,
@@ -553,6 +554,7 @@ import {
   DescribeClusterExtraArgsRequest,
   ModifyGlobalMaintenanceWindowAndExclusionsResponse,
   DescribeClusterAsGroupsResponse,
+  ModifyLogConfigRequest,
   DeleteClusterMaintenanceWindowAndExclusionResponse,
   PrometheusAlertHistoryItem,
   DescribeLogSwitchesRequest,
@@ -893,6 +895,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterRollOutSequenceTagsResponse) => void
   ): Promise<DescribeClusterRollOutSequenceTagsResponse> {
     return this.request("DescribeClusterRollOutSequenceTags", req, cb)
+  }
+
+  /**
+   * 修改日志采集配置
+   */
+  async ModifyLogConfig(
+    req: ModifyLogConfigRequest,
+    cb?: (error: string, rep: ModifyLogConfigResponse) => void
+  ): Promise<ModifyLogConfigResponse> {
+    return this.request("ModifyLogConfig", req, cb)
   }
 
   /**

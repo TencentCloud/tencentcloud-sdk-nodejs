@@ -436,33 +436,37 @@ export interface DescribeBaseMetricsResponse {
  */
 export interface CreatePrometheusMultiTenantInstancePostPayModeRequest {
   /**
-   * 实例名
+   * <p>实例名</p>
    */
   InstanceName: string
   /**
-   * VPC ID(可通过 vpc:DescribeVpcs 接口获取，与实例同地域)
+   * <p>VPC ID(可通过 vpc:DescribeVpcs 接口获取，与实例同地域)</p>
    */
   VpcId: string
   /**
-   * 子网 ID(可通过 vpc:DescribeSubnets 接口获取)
+   * <p>子网 ID(可通过 vpc:DescribeSubnets 接口获取)</p>
    */
   SubnetId: string
   /**
-   * 数据存储时间（单位天），限制值为15, 30, 45, 90, 180, 365, 730之一
+   * <p>数据存储时间（单位天），限制值为15, 30, 45, 90, 180, 365, 730之一</p>
    */
   DataRetentionTime: number
   /**
-   * 可用区(与子网同可用区)
+   * <p>可用区(与子网同可用区)</p>
    */
   Zone: string
   /**
-   * 实例的标签
+   * <p>实例的标签</p>
    */
   TagSpecification?: Array<PrometheusTag>
   /**
-   * 需要关联的 Grafana 实例
+   * <p>需要关联的 Grafana 实例</p>
    */
   GrafanaInstanceId?: string
+  /**
+   * <p>标识prom实例特殊属性</p><p>归档存储时长(天):<br>key: LongTermStorageRetentionTime<br>value: 60-730</p>
+   */
+  InstanceAttributes?: Array<PrometheusRuleKV>
 }
 
 /**
@@ -755,7 +759,7 @@ export interface DescribeGrafanaIntegrationsResponse {
  */
 export interface CreatePrometheusMultiTenantInstancePostPayModeResponse {
   /**
-   * 实例 ID
+   * <p>实例 ID</p>
    */
   InstanceId?: string
   /**
@@ -6217,187 +6221,150 @@ export interface UserNotice {
  */
 export interface PrometheusInstancesItem {
   /**
-   * 实例ID。
+   * <p>实例ID。</p>
    */
   InstanceId?: string
   /**
-   * 实例名称。
+   * <p>实例名称。</p>
    */
   InstanceName?: string
   /**
-   * 实例计费模式。取值范围：
-<ul>
-<li>2：包年包月</li>
-<li>3：按量</li>
-</ul>
+   * <p>实例计费模式。取值范围：</p><ul><li>2：包年包月</li><li>3：按量</li></ul>
    */
   InstanceChargeType?: number
   /**
-   * 地域 ID
+   * <p>地域 ID</p>
    */
   RegionId?: number
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone?: string
   /**
-   * VPC ID
+   * <p>VPC ID</p>
    */
   VpcId?: string
   /**
-   * 子网 ID
+   * <p>子网 ID</p>
    */
   SubnetId?: string
   /**
-   * 存储周期
+   * <p>存储周期</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataRetentionTime?: number
   /**
-   * 实例业务状态。取值范围：
-<ul>
-<li>1：正在创建</li>
-<li>2：运行中</li>
-<li>3：异常</li>
-<li>4：重建中</li>
-<li>5：销毁中</li>
-<li>6：已停服</li>
-<li>8：欠费停服中</li>
-<li>9：欠费已停服</li>
-</ul>
+   * <p>实例业务状态。取值范围：</p><ul><li>1：正在创建</li><li>2：运行中</li><li>3：异常</li><li>4：重建中</li><li>5：销毁中</li><li>6：已停服</li><li>8：欠费停服中</li><li>9：欠费已停服</li></ul>
    */
   InstanceStatus?: number
   /**
-   * Grafana 面板 URL
+   * <p>Grafana 面板 URL</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GrafanaURL?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreatedAt?: string
   /**
-   * 是否开启 Grafana
-<li>0：不开启</li>
-<li>1：开启</li>
+   * <p>是否开启 Grafana</p><li>0：不开启</li><li>1：开启</li>
    */
   EnableGrafana?: number
   /**
-   * 实例IPV4地址
+   * <p>实例IPV4地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IPv4Address?: string
   /**
-   * 实例关联的标签列表。
+   * <p>实例关联的标签列表。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagSpecification?: Array<PrometheusTag>
   /**
-   * 购买的实例过期时间
+   * <p>购买的实例过期时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
   /**
-   * 计费状态
-<ul>
-<li>1：正常</li>
-<li>2：过期</li>
-<li>3：销毁</li>
-<li>4：分配中</li>
-<li>5：分配失败</li>
-</ul>
+   * <p>计费状态</p><ul><li>1：正常</li><li>2：过期</li><li>3：销毁</li><li>4：分配中</li><li>5：分配失败</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ChargeStatus?: number
   /**
-   * 规格名称
+   * <p>规格名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SpecName?: string
   /**
-   * 自动续费标记
-<ul>
-<li>0：不自动续费</li>
-<li>1：开启自动续费</li>
-<li>2：禁止自动续费</li>
-<li>-1：无效</li>
-</ul>
+   * <p>自动续费标记</p><ul><li>0：不自动续费</li><li>1：开启自动续费</li><li>2：禁止自动续费</li><li>-1：无效</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRenewFlag?: number
   /**
-   * 是否快过期
-<ul>
-<li>0：否</li>
-<li>1：快过期</li>
-</ul>
+   * <p>是否快过期</p><ul><li>0：否</li><li>1：快过期</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsNearExpire?: number
   /**
-   * 数据写入需要的 Token
+   * <p>数据写入需要的 Token</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AuthToken?: string
   /**
-   * Prometheus Remote Write 的地址
+   * <p>Prometheus Remote Write 的地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoteWrite?: string
   /**
-   * Prometheus HTTP Api 根地址
+   * <p>Prometheus HTTP Api 根地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiRootPath?: string
   /**
-   * Proxy 的地址
+   * <p>Proxy 的地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProxyAddress?: string
   /**
-   * Grafana 运行状态
-<ul>
-<li>1：正在创建</li>
-<li>2：运行中</li>
-<li>3：异常</li>
-<li>4：重启中</li>
-<li>5：销毁中</li>
-<li>6：已停机</li>
-<li>7：已删除</li>
-</ul>
+   * <p>Grafana 运行状态</p><ul><li>1：正在创建</li><li>2：运行中</li><li>3：异常</li><li>4：重启中</li><li>5：销毁中</li><li>6：已停机</li><li>7：已删除</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GrafanaStatus?: number
   /**
-   * Grafana IP 白名单列表，使用英文分号分隔
+   * <p>Grafana IP 白名单列表，使用英文分号分隔</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GrafanaIpWhiteList?: string
   /**
-   * 实例的授权信息
+   * <p>实例的授权信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Grant?: PrometheusInstanceGrantInfo
   /**
-   * 绑定的 Grafana 实例 ID
+   * <p>绑定的 Grafana 实例 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GrafanaInstanceId?: string
   /**
-   * 告警规则限制
+   * <p>告警规则限制</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlertRuleLimit?: number
   /**
-   * 预聚合规则限制
+   * <p>预聚合规则限制</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordingRuleLimit?: number
   /**
-   * 迁移状态，0-不在迁移中，1-迁移中、原实例，2-迁移中、目标实例
+   * <p>迁移状态，0-不在迁移中，1-迁移中、原实例，2-迁移中、目标实例</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MigrationType?: number
+  /**
+   * <p>标识prom实例特殊属性</p><p>归档存储时长(天):<br>key: LongTermStorageRetentionTime<br>value: 60-730</p><p>实例创建方式：<br>key: CreatedFrom<br>value: 0 - 来自prom控制台<br>1 - 来自tke集群详情页<br>2 - 来自新建集群页</p><p>免费试用到期时间:<br>key: FreeTrialExpireAt<br>value: RFC3339 格式时间字符串</p><p>关联的资源包ID:<br>key: ResourcePackageID<br>value: prompkg-xxxxx</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceAttributes?: Array<PrometheusRuleKV>
 }
 
 /**
@@ -9327,17 +9294,21 @@ export interface DescribeAlarmNoticeCallbacksResponse {
  */
 export interface ModifyPrometheusInstanceAttributesRequest {
   /**
-   * 实例 ID
+   * <p>实例 ID</p>
    */
   InstanceId: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 数据存储时间（单位天），限制值为15, 30, 45, 90, 180, 365, 730之一
+   * <p>数据存储时间（单位天），限制值为15, 30, 45, 90, 180, 365, 730之一</p>
    */
   DataRetentionTime?: number
+  /**
+   * <p>标识prom实例特殊属性</p><p>归档存储时长(天):<br>key: LongTermStorageRetentionTime<br>value: 60-730</p>
+   */
+  InstanceAttributes?: Array<PrometheusRuleKV>
 }
 
 /**

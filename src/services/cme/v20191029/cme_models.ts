@@ -3721,23 +3721,25 @@ export interface FlattenListMediaResponse {
  */
 export interface AccountInfo {
   /**
-   * 用户 Id。
+   * <p>用户 Id。</p>
    */
-  UserId: string
+  UserId?: string
   /**
-   * 用户手机号码。
+   * <p>用户手机号码。</p>
    */
-  Phone: string
+  Phone?: string
   /**
-   * 用户昵称。
+   * <p>用户昵称。</p>
    */
-  Nick: string
+  Nick?: string
   /**
-   * 账号状态，取值：
-<li>Normal：有效；</li>
-<li>Stopped：无效。</li>
+   * <p>账号状态，取值：</p><li>Normal：有效；</li><li>Stopped：无效。</li>
    */
-  Status: string
+  Status?: string
+  /**
+   * <p>账户的创建时间。</p><p>参数格式：使用 ISO 日期格式。</p>
+   */
+  CreateTime?: string
 }
 
 /**

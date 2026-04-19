@@ -2050,7 +2050,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询配音相关任务（异步）结果
+   * 查询音色设计任务（异步）结果
    */
   async DescribeDesignTask(
     req: DescribeDesignTaskRequest,

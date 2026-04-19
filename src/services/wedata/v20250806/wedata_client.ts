@@ -238,6 +238,7 @@ import {
   CreateResourceGroupResponse,
   TriggerWorkflowRunBrief,
   QualitySubscribeWebHook,
+  ListTriggerTaskRunBrief,
   GetTriggerTaskRequest,
   DeleteSQLScriptRequest,
   ListTasksResponse,
@@ -300,7 +301,7 @@ import {
   CodeStudioFileActionResult,
   CreateResourceFileResponse,
   StopSQLScriptRunRequest,
-  TaskInstanceExecutions,
+  ListTriggerTaskRunResult,
   ListAlarmRulesResult,
   EnableProjectRequest,
   ListTaskInstanceExecutionsResponse,
@@ -315,6 +316,7 @@ import {
   CreateCodePermissionsResponse,
   DisableProjectRequest,
   GetTriggerWorkflowResponse,
+  ListTriggerTaskRunsRequest,
   DependencyStrategyTask,
   Task,
   CreateTaskBaseAttribute,
@@ -507,6 +509,7 @@ import {
   CreateResourceFileRequest,
   WorkflowPermission,
   DeleteTaskFolderResponse,
+  PauseOpsTasksAsyncResponse,
   DeleteWorkflowPermissionsResponse,
   ListLineagePage,
   GetOpsAlarmRuleRequest,
@@ -521,7 +524,7 @@ import {
   ParentDependencyConfigPage,
   ListUpstreamOpsTasksResponse,
   CreateTriggerWorkflowResponse,
-  PauseOpsTasksAsyncResponse,
+  ListTriggerTaskRunsResponse,
   GetSQLFolderResponse,
   LineagePair,
   DeleteOpsAlarmRuleResponse,
@@ -585,6 +588,7 @@ import {
   UpdateSQLScriptRequest,
   ParamInfo,
   CreateQualityRuleVO,
+  TaskInstanceExecutions,
   UpdateTriggerTaskPart,
   DeleteTriggerTaskRequest,
   DeleteDataSourceResponse,
@@ -1413,6 +1417,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListUpstreamTaskInstancesResponse) => void
   ): Promise<ListUpstreamTaskInstancesResponse> {
     return this.request("ListUpstreamTaskInstances", req, cb)
+  }
+
+  /**
+   * 查询工作流运行
+   */
+  async ListTriggerTaskRuns(
+    req: ListTriggerTaskRunsRequest,
+    cb?: (error: string, rep: ListTriggerTaskRunsResponse) => void
+  ): Promise<ListTriggerTaskRunsResponse> {
+    return this.request("ListTriggerTaskRuns", req, cb)
   }
 
   /**
