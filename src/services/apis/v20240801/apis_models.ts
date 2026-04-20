@@ -20,81 +20,89 @@
  */
 export interface CreateModelServiceRequest {
   /**
-   * 实例
+   * <p>实例</p>
    */
   InstanceID: string
   /**
-   * 模型服务名称
+   * <p>模型服务名称</p>
    */
   Name: string
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description: string
   /**
-   * 访问路径
+   * <p>访问路径</p>
    */
   PubPath: string
   /**
-   * 模型ID列表
+   * <p>模型ID列表</p>
    */
   TargetModels: Array<TargetModelDTO>
   /**
-   * 路径匹配类型: prefix 前缀匹配(不送默认); absolute 绝对匹配; regex正则匹配;
+   * <p>路径匹配类型: prefix 前缀匹配(不送默认); absolute 绝对匹配; regex正则匹配;</p>
    */
   PathMatchType?: string
   /**
-   * 是否开启限流
+   * <p>是否开启限流</p>
    */
   InvokeLimitConfigStatus?: boolean
   /**
-   * 限流配置
+   * <p>限流配置</p>
    */
   InvokeLimitConfig?: InvokeLimitConfigDTO
   /**
-   * 是否开启token控制
+   * <p>是否开启token控制</p>
    */
   TokenLimitStatus?: boolean
   /**
-   * token控制
+   * <p>token控制</p>
    */
   TokenLimitConfig?: TokenLimitConfigDTO
   /**
-   * 是否开启内容安全
+   * <p>是否开启内容安全</p>
    */
   TmsStatus?: boolean
   /**
-   * 内容安全配置
+   * <p>内容安全配置</p>
    */
   TmsConfig?: TmsConfigDTO
   /**
-   * 是否开启IP白名单
+   * <p>是否开启IP白名单</p>
    */
   IpWhiteStatus?: boolean
   /**
-   * IP白名单
+   * <p>IP白名单</p>
    */
   IpWhiteList?: Array<string>
   /**
-   * IP黑名单
+   * <p>IP黑名单</p>
    */
   IpBlackList?: Array<string>
   /**
-   * 插件配置
+   * <p>插件配置</p>
    */
   PluginConfigs?: Array<PluginConfigDTO>
   /**
-   * 超时配置，秒
+   * <p>超时配置，秒</p>
    */
   Timeout?: number
   /**
-   * 是否开启提示词安全检测
+   * <p>是否开启提示词安全检测</p>
    */
   PromptModerateStatus?: boolean
   /**
-   * 提示词安全检测配置
+   * <p>提示词安全检测配置</p>
    */
   PromptModerateConfig?: PromptModerateConfigDTO
+  /**
+   * <p>是否开启敏感数据检测</p>
+   */
+  SensitiveDataCheckStatus?: boolean
+  /**
+   * <p>敏感数据检测配置</p>
+   */
+  SensitiveDataCheckConfig?: SensitiveDataCheckConfigDTO
 }
 
 /**
@@ -670,81 +678,89 @@ export interface DescribeMcpServersResponseVO {
  */
 export interface ModifyModelServiceRequest {
   /**
-   * 实例
+   * <p>实例</p>
    */
   InstanceID: string
   /**
-   * 模型服务ID
+   * <p>模型服务ID</p>
    */
   ID: string
   /**
-   * 模型服务名称
+   * <p>模型服务名称</p>
    */
   Name?: string
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
   /**
-   * 模板模型列表
+   * <p>模板模型列表</p>
    */
   TargetModels?: Array<TargetModelDTO>
   /**
-   * 是否开启限流
+   * <p>是否开启限流</p>
    */
   InvokeLimitConfigStatus?: boolean
   /**
-   * 限流配置
+   * <p>限流配置</p>
    */
   InvokeLimitConfig?: InvokeLimitConfigDTO
   /**
-   * 是否开启token控制
+   * <p>是否开启token控制</p>
    */
   TokenLimitStatus?: boolean
   /**
-   * token控制
+   * <p>token控制</p>
    */
   TokenLimitConfig?: TokenLimitConfigDTO
   /**
-   * 是否开启内容安全
+   * <p>是否开启内容安全</p>
    */
   TmsStatus?: boolean
   /**
-   * 内容安全配置
+   * <p>内容安全配置</p>
    */
   TmsConfig?: TmsConfigDTO
   /**
-   * 是否开启IP白名单
+   * <p>是否开启IP白名单</p>
    */
   IpWhiteStatus?: boolean
   /**
-   * IP白名单
+   * <p>IP白名单</p>
    */
   IpWhiteList?: Array<string>
   /**
-   * 是否开启IP黑名单
+   * <p>是否开启IP黑名单</p>
    */
   IpBlackStatus?: boolean
   /**
-   * IP黑名单
+   * <p>IP黑名单</p>
    */
   IpBlackList?: Array<string>
   /**
-   * 插件配置
+   * <p>插件配置</p>
    */
   PluginConfigs?: Array<PluginConfigDTO>
   /**
-   * 超时配置，秒
+   * <p>超时配置，秒</p>
    */
   Timeout?: number
   /**
-   * 是否开启提示词安全检测配置
+   * <p>是否开启提示词安全检测配置</p>
    */
   PromptModerateStatus?: boolean
   /**
-   * 提示词安全检测配置
+   * <p>提示词安全检测配置</p>
    */
   PromptModerateConfig?: PromptModerateConfigDTO
+  /**
+   * <p>是否开启敏感数据检测</p>
+   */
+  SensitiveDataCheckStatus?: boolean
+  /**
+   * <p>敏感数据检测配置</p>
+   */
+  SensitiveDataCheckConfig?: SensitiveDataCheckConfigDTO
 }
 
 /**
@@ -1016,6 +1032,27 @@ export interface AgentCredentialContentHeaderDTO {
    * 凭据header value
    */
   Value?: string
+}
+
+/**
+ * 敏感数据检测配置
+ */
+export interface SensitiveDataCheckConfigDTO {
+  /**
+   * <p>执行动作</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Action?: string
+  /**
+   * <p>响应拦截内容</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InterceptMessage?: string
+  /**
+   * <p>检测项</p><p>枚举值：</p><ul><li>birthday： 生日</li><li>email： 邮箱</li><li>identity_number： 身份证</li><li>phone_number： 电话号码</li><li>secret： 秘钥</li><li>password： 密码</li><li>private_key： 私钥</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckItems?: Array<string>
 }
 
 /**
@@ -1974,7 +2011,7 @@ export type DeleteAgentCredentialRequest = null
  */
 export interface ModifyModelServiceResponse {
   /**
-   * 结果集
+   * <p>结果集</p>
    */
   Data?: ResultIDVO
   /**
@@ -2065,7 +2102,7 @@ export interface DescribeAgentAppsResp {
  */
 export interface CreateModelServiceResponse {
   /**
-   * 结果集
+   * <p>结果集</p>
    */
   Data?: ResultIDVO
   /**
@@ -2475,128 +2512,138 @@ export interface DescribeAgentAppMcpServersResp {
  */
 export interface DescribeModelServiceResponseVO {
   /**
-   * 腾讯云AppID
+   * <p>腾讯云AppID</p>
    */
   AppID?: number
   /**
-   * 腾讯云Uin
+   * <p>腾讯云Uin</p>
    */
   Uin?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceID?: string
   /**
-   * 模型ID
+   * <p>模型ID</p>
    */
   ID?: string
   /**
-   * 模型名称
+   * <p>模型名称</p>
    */
   Name?: string
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
   /**
-   * 访问路径
+   * <p>访问路径</p>
    */
   PubPath?: string
   /**
-   * 路径匹配方式：absolute，prefix，regex
+   * <p>路径匹配方式：absolute，prefix，regex</p>
    */
   PathMatchType?: string
   /**
-   * 目标模型列表
+   * <p>目标模型列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetModels?: Array<TargetModelDTO>
   /**
-   * 模板模型的名称列表
+   * <p>模板模型的名称列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelNames?: Array<string>
   /**
-   * 是否开启限流
+   * <p>是否开启限流</p>
    */
   InvokeLimitConfigStatus?: boolean
   /**
-   * 限流配置
+   * <p>限流配置</p>
    */
   InvokeLimitConfig?: InvokeLimitConfigDTO
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 最后修改时间
+   * <p>最后修改时间</p>
    */
   LastUpdateTime?: string
   /**
-   * 是否开启token控制
+   * <p>是否开启token控制</p>
    */
   TokenLimitStatus?: boolean
   /**
-   * token控制
+   * <p>token控制</p>
    */
   TokenLimitConfig?: TokenLimitConfigDTO
   /**
-   * 是否开启tms配置
+   * <p>是否开启tms配置</p>
    */
   TmsStatus?: boolean
   /**
-   * tms配置
+   * <p>tms配置</p>
    */
   TmsConfig?: TmsConfigDTO
   /**
-   * 是否开启IP白名单
+   * <p>是否开启IP白名单</p>
    */
   IpWhiteStatus?: boolean
   /**
-   * IP白名单列表
+   * <p>IP白名单列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IpWhiteList?: Array<string>
   /**
-   * 是否开启IP黑名单
+   * <p>是否开启IP黑名单</p>
    */
   IpBlackStatus?: boolean
   /**
-   * IP黑名单列表
+   * <p>IP黑名单列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IpBlackList?: Array<string>
   /**
-   * 插件配置
+   * <p>插件配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PluginConfigs?: Array<PluginConfigDTO>
   /**
-   * 超时配置，单位秒
+   * <p>超时配置，单位秒</p>
    */
   Timeout?: number
   /**
-   * 状态：normal，disabled
+   * <p>状态：normal，disabled</p>
    */
   Status?: string
   /**
-   * 关联应用数
+   * <p>关联应用数</p>
    */
   RelateAgentAppNum?: number
   /**
-   * 请求路径
+   * <p>请求路径</p>
    */
   Url?: string
   /**
-   * 是否开启提示词安全检测
+   * <p>是否开启提示词安全检测</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PromptModerateStatus?: boolean
   /**
-   * 提示词安全检测配置
+   * <p>提示词安全检测配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PromptModerateConfig?: PromptModerateConfigDTO
+  /**
+   * <p>是否开启敏感数据检测</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SensitiveDataCheckStatus?: boolean
+  /**
+   * <p>敏感数据检测配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SensitiveDataCheckConfig?: SensitiveDataCheckConfigDTO
 }
 
 /**

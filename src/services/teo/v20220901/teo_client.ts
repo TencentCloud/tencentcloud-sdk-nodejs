@@ -53,6 +53,7 @@ import {
   ModifyFunctionRulePriorityRequest,
   ModifyAccelerationDomainResponse,
   DeleteSecurityAPIResourceRequest,
+  ShieldParameters,
   FunctionRegionSelection,
   ModifyMultiPathGatewayLineRequest,
   DescribeHostsSettingResponse,

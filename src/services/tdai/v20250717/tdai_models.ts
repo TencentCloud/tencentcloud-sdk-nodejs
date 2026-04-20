@@ -213,24 +213,44 @@ export interface CreateAgentInstanceRequest {
    * <p>资源的标签信息</p>
    */
   Tags?: Array<TagItem>
+  /**
+   * <p>无</p>
+   */
+  InstanceType?: string
+  /**
+   * <p>无</p>
+   */
+  TemplateId?: number
+  /**
+   * <p>无</p>
+   */
+  Skills?: Array<string>
+  /**
+   * <p>无</p>
+   */
+  SoulId?: number
+  /**
+   * <p>无</p>
+   */
+  Description?: string
 }
 
 /**
- * ModifyChatTitle请求参数结构体
+ * databaseClaw实例配置信息
  */
-export interface ModifyChatTitleRequest {
+export interface ClawConfigInfo {
   /**
-   * 智能体ID
+   * <p>无</p>
    */
-  InstanceId: string
+  TemplateId?: number
   /**
-   * 会话Id
+   * <p>无</p>
    */
-  ChatId?: string
+  DbTypes?: Array<string>
   /**
-   * 标题
+   * <p>无</p>
    */
-  Title?: string
+  Deploy?: ClawDeployInfo
 }
 
 /**
@@ -300,6 +320,24 @@ export interface Parameter {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ValueType: string
+}
+
+/**
+ * databaseClaw实例部署详情
+ */
+export interface ClawDeployInfo {
+  /**
+   * <p>无</p>
+   */
+  UserVpcId?: string
+  /**
+   * <p>无</p>
+   */
+  UserSubnetId?: string
+  /**
+   * <p>无</p>
+   */
+  UserVpcRegion?: string
 }
 
 /**
@@ -393,39 +431,53 @@ export interface DescribeAgentInstancesRequest {
    */
   Limit?: number
   /**
-   * 实例ID，为空时查询所有，如果填写则会根据InstanceId筛选
+   * <p>实例ID，为空时查询所有，如果填写则会根据InstanceId筛选</p>
    */
   InstanceId?: string
   /**
-   * 实例名，为空时查询所有，如果填写则会根据InstanceName筛选
+   * <p>实例名，为空时查询所有，如果填写则会根据InstanceName筛选</p>
    */
   InstanceName?: string
   /**
-   * 智能体ID，为空时查询所有，如果填写则会根据AgentId筛选
+   * <p>智能体ID，为空时查询所有，如果填写则会根据AgentId筛选</p>
    */
   AgentId?: string
   /**
-   * 智能体名称，为空时查询所有，如果填写则会根据AgentName筛选
+   * <p>智能体名称，为空时查询所有，如果填写则会根据AgentName筛选</p>
    */
   AgentName?: string
   /**
-   * 智能体类型，为空时查询所有，如果填写则会根据AgentName筛选
+   * <p>智能体类型，为空时查询所有，如果填写则会根据AgentName筛选</p>
    */
   AgentInternalName?: string
   /**
-   * 智能体实例状态，为空时查询所有，如果填写则会根据Status筛选
+   * <p>智能体实例状态，为空时查询所有，如果填写则会根据Status筛选</p>
    */
   Status?: string
   /**
-   * 标签过滤信息
+   * <p>标签过滤信息</p>
    */
   TagFilter?: Array<TagFilter>
+  /**
+   * <p>实例类型</p>
+   */
+  InstanceType?: string
 }
 
 /**
  * IsolateAgentInstance返回参数结构体
  */
 export interface IsolateAgentInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * TerminateAgentInstance返回参数结构体
+ */
+export interface TerminateAgentInstanceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -591,13 +643,35 @@ export interface DescribeChatDetailResponse {
 }
 
 /**
- * TerminateAgentInstance返回参数结构体
+ * ModifyChatTitle请求参数结构体
  */
-export interface TerminateAgentInstanceResponse {
+export interface ModifyChatTitleRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 智能体ID
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * 会话Id
+   */
+  ChatId?: string
+  /**
+   * 标题
+   */
+  Title?: string
+}
+
+/**
+ * 实例状态描述
+ */
+export interface StatusItem {
+  /**
+   * <p>无</p>
+   */
+  Status?: string
+  /**
+   * <p>无</p>
+   */
+  Count?: number
 }
 
 /**
@@ -685,9 +759,13 @@ export interface DescribeAgentInstancesResponse {
    */
   TotalCount?: number
   /**
-   * 智能体实例列表
+   * <p>智能体实例列表</p>
    */
   Items?: Array<AgentInstance>
+  /**
+   * <p>无</p>
+   */
+  StatusCounts?: Array<StatusItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -975,53 +1053,81 @@ export interface DescribeAgentDutyTaskDetailResponse {
  */
 export interface AgentInstance {
   /**
-   * 智能体实例ID
+   * <p>智能体实例ID</p>
    */
   InstanceId?: string
   /**
-   * 智能体实例名称
+   * <p>智能体实例名称</p>
    */
   InstanceName?: string
   /**
-   * 智能体ID
+   * <p>智能体ID</p>
    */
   AgentId?: string
   /**
-   * 智能体名称
+   * <p>智能体名称</p>
    */
   AgentName?: string
   /**
-   * 智能体类型
+   * <p>智能体类型</p>
    */
   AgentInternalName?: string
   /**
-   * 智能体服务模式
+   * <p>智能体服务模式</p>
    */
   AgentType?: string
   /**
-   * 智能体版本
+   * <p>智能体版本</p>
    */
   AgentVersion?: string
   /**
-   * 智能体实例状态
+   * <p>智能体实例状态</p>
    */
   Status?: string
   /**
-   * 智能体实例参数列表
+   * <p>智能体实例参数列表</p>
    */
   Parameters?: Array<Parameter>
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 修改时间
+   * <p>修改时间</p>
    */
   UpdateTime?: string
   /**
-   * 资源绑定Tag列表
+   * <p>资源绑定Tag列表</p>
    */
   Tags?: Array<TagItem>
+  /**
+   * <p>部署位置,intranet-共享版，userVpc-专享版</p>
+   */
+  DeployPlace?: string
+  /**
+   * <p>关联的告警策略ID。</p>
+   */
+  PolicyIds?: Array<string>
+  /**
+   * <p>无</p>
+   */
+  ClawConfig?: ClawConfigInfo
+  /**
+   * <p>无</p>
+   */
+  InstanceType?: string
+  /**
+   * <p>无</p>
+   */
+  AllowedActions?: Array<string>
+  /**
+   * <p>无</p>
+   */
+  LastActiveTime?: string
+  /**
+   * <p>无</p>
+   */
+  Description?: string
 }
 
 /**

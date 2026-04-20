@@ -701,6 +701,16 @@ export interface DeleteSecurityAPIResourceRequest {
 }
 
 /**
+ * 源站卸载配置参数。
+ */
+export interface ShieldParameters {
+  /**
+   * 源站卸载空间 ID。
+   */
+  ShieldSpaceId: string
+}
+
+/**
  * 地区策略配置。
  */
 export interface FunctionRegionSelection {
@@ -7927,8 +7937,8 @@ export interface ModifyOriginParameters {
 <li>当 OriginType = IPDomain 时，该参数请填写 IPV4、IPV6 地址或域名；</li>
 <li>当 OriginType = COS 时，该参数请填写 COS 桶的访问域名；</li>
 <li>当 OriginType = AWSS3，该参数请填写 S3 桶的访问域名；</li>
-<li>当 OriginType = OriginGroup 时，该参数请填写源站组 ID；</li>
-<li>当 OriginType = LoadBalance 时，该参数请填写负载均衡实例 ID，该功能当前仅白名单开放。</li>
+<li>当 OriginType = OriginGroup 时，该参数请填写源站组 ID；当为出参的时候，如果引用了其它站点的源站组，格式为{源站组 ID}@{ZoneID}。例如：og-testorigin@zone-38moq1z10wwwy；</li>
+<li>当 OriginType = LoadBalance 时，该参数请填写负载均衡实例 ID，该功能当前仅白名单开放；当为出参的时候，如果引用了其它站点的负载均衡，格式为{负载均衡 ID}@{ZoneID}。例如：lb-2rxpamcyqfzg@zone-38moq1z10wwwy。</li>
    */
   Origin?: string
   /**
@@ -17402,6 +17412,7 @@ export interface RuleEngineAction {
 <li>ClientIPCountry：回源时携带客户端 IP 所属地域信息；</li>
 <li>UpstreamFollowRedirect：回源跟随重定向参数配置；</li>
 <li>UpstreamRequest：回源请求参数；</li>
+<li>Shield：源站卸载配置；</li>
 <li>TLSConfig：SSL/TLS 安全；</li>
 <li>ModifyOrigin：修改源站；</li>
 <li>HTTPUpstreamTimeout：七层回源超时配置；</li>
@@ -17546,6 +17557,11 @@ export interface RuleEngineAction {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpstreamRequestParameters?: UpstreamRequestParameters
+  /**
+   * 源站卸载配置参数，当 Name 取值为 Shield 时，该参数必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShieldParameters?: ShieldParameters
   /**
    * SSL/TLS 安全配置参数，当 Name 取值为 TLSConfig 时，该参数必填。
 注意：此字段可能返回 null，表示取不到有效值。

@@ -3237,33 +3237,37 @@ export interface UserDefineAsrTextReviewTemplateInfoForUpdate {
  */
 export interface CreateStreamPackageLinearAssemblyProgramRequest {
   /**
-   * Program名称。
+   * <p>Program名称。</p>
    */
   Name: string
   /**
-   * 绑定的channel。
+   * <p>绑定的channel。</p>
    */
   AttachedChannel: string
   /**
-   * 编排的目标source的类型，分直播Live和点播VOD。Tier为Basic时只支持VOD，Tier为Standard时支持Live和VOD
+   * <p>编排的目标source的类型，分直播Live和点播VOD。Tier为Basic时只支持VOD，Tier为Standard时支持Live和VOD</p>
    */
   SourceType?: string
   /**
-   * 关联的source location。
+   * <p>关联的source location。</p>
    */
   SourceLocationId?: string
   /**
-   * 关联的直播or点播，source名称，location下全局唯一。
+   * <p>关联的直播or点播，source名称，location下全局唯一。</p>
    */
   SourceName?: string
   /**
-   * PlaybackConf。
+   * <p>PlaybackConf。</p>
    */
   PlaybackConf?: PlaybackInfoReq
   /**
-   * AdBreaks，只有source类型为Vod时有效。
+   * <p>AdBreaks，只有source类型为Vod时有效。</p>
    */
   AdBreaks?: Array<AdBreakInfo>
+  /**
+   * <p>VOD获取方式，支持PreCaching和DynamicUpdating，默认PreCaching，仅Linear频道支持</p>
+   */
+  VodAcquisitionMethod?: string
 }
 
 /**
@@ -4340,49 +4344,53 @@ export interface TagConfigureInfo {
  */
 export interface LinearAssemblyProgramInfo {
   /**
-   * program名称。
+   * <p>program名称。</p>
    */
   Name?: string
   /**
-   * 编排的目标source的类型，分直播和点播。
+   * <p>编排的目标source的类型，分直播和点播。</p>
    */
   SourceType?: string
   /**
-   * 关联的source location id。
+   * <p>关联的source location id。</p>
    */
   SourceLocationId?: string
   /**
-   * SourceId，唯一标识一个source。
+   * <p>SourceId，唯一标识一个source。</p>
    */
   SourceId?: string
   /**
-   * 关联的直播or点播，source名称，location下全局唯一。
+   * <p>关联的直播or点播，source名称，location下全局唯一。</p>
    */
   SourceName?: string
   /**
-   * 绑定的channel。
+   * <p>绑定的channel。</p>
    */
   AttachedChannel?: string
   /**
-   * 播放配置。
+   * <p>播放配置。</p>
    */
   PlaybackConf?: PlaybackInfo
   /**
-   * AdBreaks。
+   * <p>AdBreaks。</p>
    */
   AdBreaks?: Array<AdBreakInfo>
   /**
-   * Id。
+   * <p>Id。</p>
    */
   Id?: string
   /**
-   * Region。
+   * <p>Region。</p>
    */
   Region?: string
   /**
-   * SourceLocation名称。
+   * <p>SourceLocation名称。</p>
    */
   SourceLocationName?: string
+  /**
+   * <p>VOD获取方式，支持PreCaching和DynamicUpdating，默认PreCaching，仅Linear频道支持</p>
+   */
+  VodAcquisitionMethod?: string
 }
 
 /**
@@ -9922,33 +9930,37 @@ export interface SSAIUsageInfo {
  */
 export interface ModifyStreamPackageLinearAssemblyProgramRequest {
   /**
-   * Program Id。
+   * <p>Program Id。</p>
    */
   Id: string
   /**
-   * 修改后的名称。
+   * <p>修改后的名称。</p>
    */
   Name?: string
   /**
-   * 编排的目标source的类型，分直播和点播。Tier为Basic时只支持VOD，Tier为Standard时支持Live和VOD
+   * <p>编排的目标source的类型，分直播和点播。Tier为Basic时只支持VOD，Tier为Standard时支持Live和VOD</p>
    */
   SourceType?: string
   /**
-   * 关联的source location。
+   * <p>关联的source location。</p>
    */
   SourceLocationId?: string
   /**
-   * 关联的直播or点播，source名称，location下全局唯一。
+   * <p>关联的直播or点播，source名称，location下全局唯一。</p>
    */
   SourceName?: string
   /**
-   * PlaybackConf。
+   * <p>PlaybackConf。</p>
    */
   PlaybackConf?: PlaybackInfoReq
   /**
-   * AdBreaks。
+   * <p>AdBreaks。</p>
    */
   AdBreaks?: Array<AdBreakInfo>
+  /**
+   * <p>VOD获取方式，支持PreCaching和DynamicUpdating，默认PreCaching，仅Linear频道支持</p>
+   */
+  VodAcquisitionMethod?: string
 }
 
 /**
@@ -24574,7 +24586,7 @@ export interface TerrorismConfigureInfo {
  */
 export interface CreateStreamPackageLinearAssemblyProgramResponse {
   /**
-   * channel信息。
+   * <p>channel信息。</p>
    */
   Info?: LinearAssemblyProgramInfo
   /**

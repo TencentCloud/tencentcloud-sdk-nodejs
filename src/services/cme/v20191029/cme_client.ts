@@ -84,6 +84,7 @@ import {
   WeiboPublishInfo,
   MediaCastSourceInfo,
   CreateLinkResponse,
+  VideoEncodingPreset,
   ExportVideoByTemplateResponse,
   StreamInputInfo,
   ListMediaResponse,
@@ -100,6 +101,7 @@ import {
   VideoSegmentationProjectInput,
   DeleteMaterialRequest,
   ModifyProjectResponse,
+  ForbidAccountRequest,
   CreateProjectResponse,
   VideoEditProjectInput,
   DeleteProjectResponse,
@@ -124,7 +126,7 @@ import {
   ImageMaterial,
   DescribeClassRequest,
   DescribeSharedSpaceResponse,
-  DescribeAccountsResponse,
+  GenerateVideoSegmentationSchemeByAiResponse,
   MoveResourceResponse,
   MoveClassRequest,
   TextSlotInfo,
@@ -153,7 +155,8 @@ import {
   RecordReplayProjectInput,
   VideoStreamInfo,
   AddTeamMemberRequest,
-  GrantResourceAuthorizationRequest,
+  ForbidAccountResponse,
+  ExportVideoEditProjectResponse,
   TimeRange,
   ThirdPartyPublishInfo,
   ListMediaRequest,
@@ -171,6 +174,7 @@ import {
   DescribePlatformsRequest,
   OtherMaterial,
   EventContent,
+  DeleteAccountRequest,
   VideoMaterial,
   DescribeVideoEncodingPresetsResponse,
   DescribeResourceAuthorizationResponse,
@@ -203,14 +207,14 @@ import {
   DescribeVideoEncodingPresetsRequest,
   LoginStatusInfo,
   DescribeClassResponse,
-  GenerateVideoSegmentationSchemeByAiResponse,
+  DescribeAccountsResponse,
   PresetTagInfo,
   DescribeSharedSpaceRequest,
   KuaishouPublishInfo,
   CopyProjectResponse,
   DeleteClassResponse,
   HandleMediaCastProjectRequest,
-  ExportVideoEditProjectResponse,
+  GrantResourceAuthorizationRequest,
   MediaMetaData,
   ProjectSwitcherStatusChangedEvent,
   ExternalMediaInfo,
@@ -218,7 +222,7 @@ import {
   ExportVideoByEditorTrackDataResponse,
   MediaCastOutputMediaSetting,
   ClassCreatedEvent,
-  VideoEncodingPreset,
+  DeleteAccountResponse,
   ImportMaterialRequest,
   TextReplacementInfo,
   ImportMediaInfo,
@@ -364,6 +368,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ImportMaterialResponse) => void
   ): Promise<ImportMaterialResponse> {
     return this.request("ImportMaterial", req, cb)
+  }
+
+  /**
+   * 删除平台归属的账户。
+   */
+  async DeleteAccount(
+    req: DeleteAccountRequest,
+    cb?: (error: string, rep: DeleteAccountResponse) => void
+  ): Promise<DeleteAccountResponse> {
+    return this.request("DeleteAccount", req, cb)
   }
 
   /**
@@ -686,6 +700,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ImportMediaToProjectResponse) => void
   ): Promise<ImportMediaToProjectResponse> {
     return this.request("ImportMediaToProject", req, cb)
+  }
+
+  /**
+   * 禁用账号。
+   */
+  async ForbidAccount(
+    req: ForbidAccountRequest,
+    cb?: (error: string, rep: ForbidAccountResponse) => void
+  ): Promise<ForbidAccountResponse> {
+    return this.request("ForbidAccount", req, cb)
   }
 
   /**

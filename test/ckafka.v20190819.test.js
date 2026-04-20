@@ -468,6 +468,16 @@ it("ckafka.v20190819.DescribeRoute", async function () {
     }
 })
 
+it("ckafka.v20190819.ModifyAccessPolicy", async function () {
+    try {
+       const data = await client.ModifyAccessPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.ModifyDatahubTask", async function () {
     try {
        const data = await client.ModifyDatahubTask({})
@@ -801,6 +811,16 @@ it("ckafka.v20190819.DescribeInstances", async function () {
 it("ckafka.v20190819.CreateRoute", async function () {
     try {
        const data = await client.CreateRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.DescribeAccessPolicy", async function () {
+    try {
+       const data = await client.DescribeAccessPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

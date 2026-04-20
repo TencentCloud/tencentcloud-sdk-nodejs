@@ -27240,49 +27240,59 @@ export interface RunRerunScheduleInstancesRequest {
  */
 export interface SystemRole {
   /**
-   * 角色id
+   * <p>角色id</p>
    */
   RoleId?: string
   /**
-   * 角色名称
+   * <p>角色名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 角色昵称
+   * <p>角色昵称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NameCn?: string
   /**
-   * 描述
+   * <p>描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 角色权限
+   * <p>角色权限</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Privileges?: Array<RolePrivilege>
   /**
-   * 方法路径
+   * <p>方法路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MethodPaths?: Array<string>
   /**
-   * 角色类型, 分为System,Tenant,Project,Commercial
+   * <p>角色类型, 分为System,Tenant,Project,Commercial</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RoleType?: string
   /**
-   * 是否系统默认
+   * <p>是否系统默认</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SystemInit?: boolean
   /**
-   * 自定义参数
+   * <p>自定义参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Params?: string
+  /**
+   * <p>创建时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTimeStr?: string
+  /**
+   * <p>创建人</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Creator?: string
 }
 
 /**

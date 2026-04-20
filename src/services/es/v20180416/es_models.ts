@@ -965,40 +965,52 @@ export interface DescribeInstanceOperationsResponse {
  */
 export interface IndexOptionsField {
   /**
-   * 过期时间
+   * <p>过期时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireMaxAge?: string
   /**
-   * 过期大小
+   * <p>过期大小</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireMaxSize?: string
   /**
-   * 滚动周期
+   * <p>滚动周期</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RolloverMaxAge?: string
   /**
-   * 是否开启动态滚动
+   * <p>是否开启动态滚动</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RolloverDynamic?: string
   /**
-   * 是否开启动态分片
+   * <p>是否开启动态分片</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ShardNumDynamic?: string
   /**
-   * 时间分区字段
+   * <p>时间分区字段</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TimestampField?: string
   /**
-   * 写入模式
+   * <p>写入模式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WriteMode?: string
+  /**
+   * <p>是否开启完全卸载</p><p>枚举值：</p><ul><li>true： 开启完全卸载</li><li>false： 关闭完全卸载</li></ul>
+   */
+  FullOffloadedEnable?: string
+  /**
+   * <p>完全卸载生命周期</p>
+   */
+  FullOffloadedMaxAge?: string
+  /**
+   * <p>完全卸载后备索引取回后生命周期</p>
+   */
+  FullOffloadedRetrieveMaxAge?: string
 }
 
 /**
@@ -5115,33 +5127,45 @@ export interface DescribeUserCosSnapshotListResponse {
  */
 export interface UpdateIndexRequest {
   /**
-   * ES集群ID
+   * <p>ES集群ID</p>
    */
   InstanceId: string
   /**
-   * 更新的索引类型。auto：自治索引；normal：普通索引
+   * <p>更新的索引类型。auto：自治索引；normal：普通索引</p>
    */
   IndexType: string
   /**
-   * 更新的索引名
+   * <p>更新的索引名</p>
    */
   IndexName: string
   /**
-   * 更新的索引元数据JSON，如mappings、settings
+   * <p>更新的索引元数据JSON，如mappings、settings</p>
    */
   UpdateMetaJson?: string
   /**
-   * 集群访问用户名
+   * <p>集群访问用户名</p>
    */
   Username?: string
   /**
-   * 集群访问密码
+   * <p>集群访问密码</p>
    */
   Password?: string
   /**
-   * 是否滚动后备索引
+   * <p>是否滚动后备索引</p>
    */
   RolloverBackingIndex?: boolean
+  /**
+   * <p>是否为取回完全卸载索引</p>
+   */
+  MountIndex?: boolean
+  /**
+   * <p>索引Uuid</p>
+   */
+  IndexUuid?: string
+  /**
+   * <p>后备索引名</p>
+   */
+  BackingIndexName?: string
 }
 
 /**
@@ -5459,30 +5483,34 @@ export interface RestartInstanceResponse {
  */
 export interface BackingIndexMetaField {
   /**
-   * 后备索引名
+   * <p>后备索引名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexName?: string
   /**
-   * 后备索引状态
+   * <p>后备索引状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexStatus?: string
   /**
-   * 后备索引存储大小
+   * <p>后备索引存储大小</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexStorage?: number
   /**
-   * 后备索引当前生命周期
+   * <p>后备索引当前生命周期</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexPhrase?: string
   /**
-   * 后备索引创建时间
+   * <p>后备索引创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexCreateTime?: string
+  /**
+   * <p>索引Uuid</p>
+   */
+  IndexUuid?: string
 }
 
 /**

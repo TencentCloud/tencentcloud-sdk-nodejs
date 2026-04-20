@@ -638,6 +638,16 @@ it("mqtt.v20240516.ApplyRegistrationCode", async function () {
     }
 })
 
+it("mqtt.v20240516.DescribeSharedSubscriptionGroups", async function () {
+    try {
+       const data = await client.DescribeSharedSubscriptionGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.DescribeDeviceIdentities", async function () {
     try {
        const data = await client.DescribeDeviceIdentities({})

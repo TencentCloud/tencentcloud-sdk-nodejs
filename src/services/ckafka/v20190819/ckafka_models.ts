@@ -123,102 +123,106 @@ export interface FetchMessageByOffsetRequest {
  */
 export interface DescribeConnectResourceResp {
   /**
-   * 连接源的Id
+   * <p>连接源的Id</p>
    */
   ResourceId?: string
   /**
-   * 连接源名称
+   * <p>连接源名称</p>
    */
   ResourceName?: string
   /**
-   * 连接源描述
+   * <p>连接源描述</p>
    */
   Description?: string
   /**
-   * 连接源类型
+   * <p>连接源类型</p>
    */
   Type?: string
   /**
-   * 连接源的状态  枚举值: -1 (创建失败) 、0 (创建中) 、 1 (运行中)、 2 (删除中) 、 4 (删除失败) 、 5 (配置更改中) 、 6 (配置更改失败) 、 7 (异常)
+   * <p>连接源的状态  枚举值: -1 (创建失败) 、0 (创建中) 、 1 (运行中)、 2 (删除中) 、 4 (删除失败) 、 5 (配置更改中) 、 6 (配置更改失败) 、 7 (异常)</p>
    */
   Status?: number
   /**
-   * 连接源的创建时间
+   * <p>连接源的创建时间</p>
    */
   CreateTime?: string
   /**
-   * 连接源的异常信息
+   * <p>连接源的异常信息</p>
    */
   ErrorMessage?: string
   /**
-   * 连接源的当前所处步骤
+   * <p>连接源的当前所处步骤</p>
    */
   CurrentStep?: string
   /**
-   * 步骤列表
+   * <p>步骤列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StepList?: Array<string>
   /**
-   * MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时返回
+   * <p>MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MySQLConnectParam?: MySQLConnectParam
   /**
-   * PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时返回
+   * <p>PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PostgreSQLConnectParam?: PostgreSQLConnectParam
   /**
-   * Dts配置，Type为DTS时返回
+   * <p>Dts配置，Type为DTS时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DtsConnectParam?: DtsConnectParam
   /**
-   * MongoDB配置，Type为MONGODB时返回
+   * <p>MongoDB配置，Type为MONGODB时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MongoDBConnectParam?: MongoDBConnectParam
   /**
-   * Es配置，Type为ES时返回
+   * <p>Es配置，Type为ES时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EsConnectParam?: EsConnectParam
   /**
-   * ClickHouse配置，Type为CLICKHOUSE时返回
+   * <p>ClickHouse配置，Type为CLICKHOUSE时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClickHouseConnectParam?: ClickHouseConnectParam
   /**
-   * MariaDB配置，Type为MARIADB时返回
+   * <p>MariaDB配置，Type为MARIADB时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MariaDBConnectParam?: MariaDBConnectParam
   /**
-   * SQLServer配置，Type为SQLSERVER时返回
+   * <p>SQLServer配置，Type为SQLSERVER时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SQLServerConnectParam?: SQLServerConnectParam
   /**
-   * Ctsdb配置，Type为CTSDB时返回
+   * <p>Ctsdb配置，Type为CTSDB时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CtsdbConnectParam?: CtsdbConnectParam
   /**
-   * Doris 配置，Type 为 DORIS 时返回
+   * <p>Doris 配置，Type 为 DORIS 时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DorisConnectParam?: DorisConnectParam
   /**
-   * Kafka配置，Type 为 KAFKA 时返回
+   * <p>Kafka配置，Type 为 KAFKA 时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KafkaConnectParam?: KafkaConnectParam
   /**
-   * MQTT配置，Type 为 MQTT 时返回
+   * <p>MQTT配置，Type 为 MQTT 时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MqttConnectParam?: MqttConnectParam
+  /**
+   * <p>标签列表</p>
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -644,7 +648,7 @@ export interface DescribeAclRuleRequest {
  */
 export interface RestartDatahubTaskRequest {
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   TaskId: string
 }
@@ -1458,7 +1462,7 @@ export interface InquiryPublicNetworkParam {
  */
 export interface DeleteConnectResourceResponse {
   /**
-   * 连接源的Id
+   * <p>连接源的Id</p>
    */
   Result?: ConnectResourceResourceIdResp
   /**
@@ -1472,7 +1476,7 @@ export interface DeleteConnectResourceResponse {
  */
 export interface RestartDatahubTaskResponse {
   /**
-   * 任务id
+   * <p>任务id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: DatahubTaskIdRes
@@ -1854,57 +1858,69 @@ export interface KafkaConnectParam {
  */
 export interface DatahubTaskInfo {
   /**
-   * 任务Id
+   * <p>任务Id</p>
    */
   TaskId?: string
   /**
-   * 任务名称
+   * <p>任务名称</p>
    */
   TaskName?: string
   /**
-   * 任务类型，SOURCE数据接入，SINK数据流出
+   * <p>任务类型，SOURCE数据接入，SINK数据流出</p>
    */
   TaskType?: string
   /**
-   * 状态，-1创建失败，0创建中，1运行中，2删除中，3已删除，4删除失败，5暂停中，6已暂停，7暂停失败，8恢复中，9恢复失败
+   * <p>状态，-1创建失败，0创建中，1运行中，2删除中，3已删除，4删除失败，5暂停中，6已暂停，7暂停失败，8恢复中，9恢复失败</p>
    */
   Status?: number
   /**
-   * 数据源
+   * <p>数据源</p>
    */
   SourceResource?: DatahubResource
   /**
-   * 数据目标
+   * <p>数据目标</p>
    */
   TargetResource?: DatahubResource
   /**
-   * 任务创建时间
+   * <p>任务创建时间</p>
    */
   CreateTime?: string
   /**
-   * 异常信息
+   * <p>异常信息</p>
    */
   ErrorMessage?: string
   /**
-   * 创建进度百分比
+   * <p>创建进度百分比</p>
    */
   TaskProgress?: number
   /**
-   * 任务当前处于的步骤
+   * <p>任务当前处于的步骤</p>
    */
   TaskCurrentStep?: string
   /**
-   * Datahub转储Id
+   * <p>Datahub转储Id</p>
    */
   DatahubId?: string
   /**
-   * 步骤列表
+   * <p>步骤列表</p>
    */
   StepList?: Array<string>
   /**
-   * 任务描述信息
+   * <p>任务描述信息</p>
    */
   Description?: string
+  /**
+   * <p>任务并发数</p><p>默认值：1</p>
+   */
+  TaskMax?: number
+  /**
+   * <p>任务同步限流值,单位MB/s</p><p>默认值：20MB/s</p>
+   */
+  SyncThrottleLimit?: number
+  /**
+   * <p>任务是否自动扩容标识</p><p>枚举值：</p><ul><li>true： 自动扩容</li><li>false： 手动扩容</li></ul><p>默认值：true</p>
+   */
+  AutoExpandFlag?: boolean
 }
 
 /**
@@ -1976,17 +1992,17 @@ export interface DescModifyType {
 }
 
 /**
- * DeleteDatahubTask返回参数结构体
+ * 实例公网路由IP白名单返回结果对象
  */
-export interface DeleteDatahubTaskResponse {
+export interface ExternalAccessInfoWrapper {
   /**
-   * 操作结果
+   * <p>IP白名单放通规则数</p>
    */
-  Result?: DatahubTaskIdRes
+  TotalCount?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>IP白名单</p>
    */
-  RequestId?: string
+  IpWhitelist?: Array<IpWhitelistDTO>
 }
 
 /**
@@ -2242,97 +2258,101 @@ export interface TopicParam {
  */
 export interface KafkaParam {
   /**
-   * 是否为自建集群
+   * <p>是否为自建集群</p>
    */
   SelfBuilt: boolean
   /**
-   * ckafka集群实例Id
+   * <p>ckafka集群实例Id</p>
    */
   Resource: string
   /**
-   * 主题名，多个以“,”分隔
+   * <p>主题名，多个以“,”分隔</p>
    */
   Topic?: string
   /**
-   * Offset类型，最开始位置earliest，最新位置latest，时间点位置timestamp
+   * <p>Offset类型，最开始位置earliest，最新位置latest，时间点位置timestamp</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OffsetType?: string
   /**
-   * Offset类型为timestamp时必传，传时间戳，精确到秒
+   * <p>Offset类型为timestamp时必传，传时间戳，精确到秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: number
   /**
-   * 实例资源名称
+   * <p>实例资源名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceName?: string
   /**
-   * 可用区
+   * <p>可用区</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: number
   /**
-   * 主题Id
+   * <p>主题Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopicId?: string
   /**
-   * Topic的分区数
+   * <p>Topic的分区数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PartitionNum?: number
   /**
-   * 启用容错实例/开启死信队列
+   * <p>启用容错实例/开启死信队列</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableToleration?: boolean
   /**
-   * Qps 限制
+   * <p>Qps 限制</p>
    */
   QpsLimit?: number
   /**
-   * Table到Topic的路由，「分发到多个topic」开关打开时必传
+   * <p>Table到Topic的路由，「分发到多个topic」开关打开时必传</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TableMappings?: Array<TableMapping>
   /**
-   * 「分发到多个topic」开关，默认为false
+   * <p>「分发到多个topic」开关，默认为false</p>
    */
   UseTableMapping?: boolean
   /**
-   * 使用的Topic是否需要自动创建（目前只支持SOURCE流入任务，如果不使用分发到多个topic，需要在Topic字段填写需要自动创建的topic名）
+   * <p>使用的Topic是否需要自动创建（目前只支持SOURCE流入任务，如果不使用分发到多个topic，需要在Topic字段填写需要自动创建的topic名）</p>
    */
   UseAutoCreateTopic?: boolean
   /**
-   * 写入Topic时是否进行压缩，不开启填"none"，开启的话，填写"open"。
+   * <p>写入Topic时是否进行压缩，不开启填&quot;none&quot;，开启的话，填写&quot;open&quot;。</p>
    */
   CompressionType?: string
   /**
-   * 源topic消息1条扩增成msgMultiple条写入目标topic(该参数目前只有ckafka流入ckafka适用)
+   * <p>源topic消息1条扩增成msgMultiple条写入目标topic(该参数目前只有ckafka流入ckafka适用)</p>
    */
   MsgMultiple?: number
   /**
-   * 数据同步专用参数, 正常数据处理可为空, 实例级别同步: 仅同步元数据填写"META_SYNC_INSTANCE_TYPE", 同步元数据及全部topic内消息的填写"META_AND_DATA_SYNC_INSTANCE_TYPE"; topic级别同步: 选中的源和目标topic中的消息(需要目标实例也包含该topic)填写"DATA_SYNC_TYPE"
+   * <p>数据同步专用参数, 正常数据处理可为空, 实例级别同步: 仅同步元数据填写&quot;META_SYNC_INSTANCE_TYPE&quot;, 同步元数据及全部topic内消息的填写&quot;META_AND_DATA_SYNC_INSTANCE_TYPE&quot;; topic级别同步: 选中的源和目标topic中的消息(需要目标实例也包含该topic)填写&quot;DATA_SYNC_TYPE&quot;</p>
    */
   ConnectorSyncType?: string
   /**
-   * 数据同步专用参数, 当通过时,希望下游的消息写入分区与上游的一致,则填true,但下游分区小于上游时,会报错; 不需要一致则为false, 默认为false
+   * <p>数据同步专用参数, 当通过时,希望下游的消息写入分区与上游的一致,则填true,但下游分区小于上游时,会报错; 不需要一致则为false, 默认为false</p>
    */
   KeepPartition?: boolean
   /**
-   * 正则匹配Topic列表
+   * <p>正则匹配Topic列表</p>
    */
   TopicRegularExpression?: string
   /**
-   * Topic 前缀
+   * <p>Topic 前缀</p>
    */
   Prefix?: string
   /**
-   * Topic前缀分隔符
+   * <p>Topic前缀分隔符</p>
    */
   Separator?: string
+  /**
+   * <p>多选topic列表</p>
+   */
+  TopicList?: Array<string>
 }
 
 /**
@@ -2361,6 +2381,20 @@ export interface BatchCreateAclResponse {
    * 状态码：0-修改成功，否则修改失败
    */
   Result?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAccessPolicy返回参数结构体
+ */
+export interface ModifyAccessPolicyResponse {
+  /**
+   * <p>修改公网IP白名单结果</p>
+   */
+  Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2522,6 +2556,20 @@ export interface TaskStatusResponse {
    * 输出信息
    */
   Output?: string
+}
+
+/**
+ * DescribeGroup返回实体
+ */
+export interface DescribeGroup {
+  /**
+   * 消费分组名称
+   */
+  Group?: string
+  /**
+   * 该 group 使用的协议。
+   */
+  Protocol?: string
 }
 
 /**
@@ -2972,7 +3020,7 @@ export interface RouteDTO {
  */
 export interface DescribeDatahubTaskResponse {
   /**
-   * 返回结果
+   * <p>返回结果</p>
    */
   Result?: DescribeDatahubTaskRes
   /**
@@ -3008,7 +3056,7 @@ export interface FetchLatestDatahubMessageListRequest {
  */
 export interface PauseDatahubTaskResponse {
   /**
-   * 任务id
+   * <p>任务id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: DatahubTaskIdRes
@@ -3023,13 +3071,27 @@ export interface PauseDatahubTaskResponse {
  */
 export interface CreateConnectResourceResponse {
   /**
-   * 连接源的Id
+   * <p>连接源的Id</p>
    */
   Result?: ConnectResourceResourceIdResp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAccessPolicy请求参数结构体
+ */
+export interface DescribeAccessPolicyRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>路由ID</p>
+   */
+  RouteId: number
 }
 
 /**
@@ -3082,7 +3144,7 @@ export interface InquireCkafkaPriceResp {
  */
 export interface DescribeDatahubTasksResponse {
   /**
-   * 返回任务查询结果
+   * <p>返回任务查询结果</p>
    */
   Result?: DescribeDatahubTasksRes
   /**
@@ -3378,7 +3440,7 @@ export interface FetchMessageListByTimestampRequest {
  */
 export interface DeleteConnectResourceRequest {
   /**
-   * 连接源的Id
+   * <p>连接源的Id</p>
    */
   ResourceId: string
 }
@@ -3514,61 +3576,65 @@ export interface CreateAclRequest {
  */
 export interface CreateConnectResourceRequest {
   /**
-   * 连接源名称
+   * <p>连接源名称</p>
    */
   ResourceName: string
   /**
-   * 连接源类型
+   * <p>连接源类型</p>
    */
   Type: string
   /**
-   * 连接源描述
+   * <p>连接源描述</p>
    */
   Description?: string
   /**
-   * Dts配置，Type为DTS时必填
+   * <p>Dts配置，Type为DTS时必填</p>
    */
   DtsConnectParam?: DtsConnectParam
   /**
-   * MongoDB配置，Type为MONGODB时必填
+   * <p>MongoDB配置，Type为MONGODB时必填</p>
    */
   MongoDBConnectParam?: MongoDBConnectParam
   /**
-   * Es配置，Type为ES时必填
+   * <p>Es配置，Type为ES时必填</p>
    */
   EsConnectParam?: EsConnectParam
   /**
-   * ClickHouse配置，Type为CLICKHOUSE时必填
+   * <p>ClickHouse配置，Type为CLICKHOUSE时必填</p>
    */
   ClickHouseConnectParam?: ClickHouseConnectParam
   /**
-   * MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时必填
+   * <p>MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时必填</p>
    */
   MySQLConnectParam?: MySQLConnectParam
   /**
-   * PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时必填
+   * <p>PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时必填</p>
    */
   PostgreSQLConnectParam?: PostgreSQLConnectParam
   /**
-   * MariaDB配置，Type为MARIADB时必填
+   * <p>MariaDB配置，Type为MARIADB时必填</p>
    */
   MariaDBConnectParam?: MariaDBConnectParam
   /**
-   * SQLServer配置，Type为SQLSERVER时必填
+   * <p>SQLServer配置，Type为SQLSERVER时必填</p>
    */
   SQLServerConnectParam?: SQLServerConnectParam
   /**
-   * Doris 配置，Type为 DORIS 时必填
+   * <p>Doris 配置，Type为 DORIS 时必填</p>
    */
   DorisConnectParam?: DorisConnectParam
   /**
-   * Kafka配置，Type为 KAFKA 时必填
+   * <p>Kafka配置，Type为 KAFKA 时必填</p>
    */
   KafkaConnectParam?: KafkaConnectParam
   /**
-   * MQTT配置，Type为 MQTT 时必填
+   * <p>MQTT配置，Type为 MQTT 时必填</p>
    */
   MqttConnectParam?: MqttConnectParam
+  /**
+   * <p>标签列表</p>
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -3725,6 +3791,24 @@ export interface DtsConnectParam {
    * 是否更新到关联的Datahub任务
    */
   IsUpdate?: boolean
+}
+
+/**
+ * ModifyAccessPolicy请求参数结构体
+ */
+export interface ModifyAccessPolicyRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>路由ID</p>
+   */
+  RouteId: number
+  /**
+   * <p>公网IP白名单配置</p><p>不传默认删除全部配置</p>
+   */
+  IpWhitelist?: Array<IpWhitelistDTO>
 }
 
 /**
@@ -3895,6 +3979,28 @@ export interface CreateAclRuleResponse {
 }
 
 /**
+ * Table、Topic路由
+ */
+export interface TableMapping {
+  /**
+   * 库名
+   */
+  Database: string
+  /**
+   * 表名，多个表,（逗号）隔开
+   */
+  Table: string
+  /**
+   * Topic名称
+   */
+  Topic: string
+  /**
+   * Topic ID
+   */
+  TopicId: string
+}
+
+/**
  * FetchDatahubMessageByOffset返回参数结构体
  */
 export interface FetchDatahubMessageByOffsetResponse {
@@ -3913,7 +4019,7 @@ export interface FetchDatahubMessageByOffsetResponse {
  */
 export interface DeleteDatahubTaskRequest {
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   TaskId: string
 }
@@ -3961,7 +4067,7 @@ export interface FieldParam {
  */
 export interface ModifyConnectResourceResponse {
   /**
-   * 连接源的Id
+   * <p>连接源的Id</p>
    */
   Result?: ConnectResourceResourceIdResp
   /**
@@ -4199,7 +4305,7 @@ export interface CreateConsumerRequest {
  */
 export interface CreateDatahubTopicResponse {
   /**
-   * 返回创建结果
+   * <p>返回创建结果</p>
    */
   Result?: DatahubTopicResp
   /**
@@ -4767,75 +4873,87 @@ export interface RenewCkafkaInstanceResp {
  */
 export interface DescribeDatahubTaskRes {
   /**
-   * 任务ID
+   * <p>任务ID</p>
    */
   TaskId?: string
   /**
-   * 任务名称
+   * <p>任务名称</p>
    */
   TaskName?: string
   /**
-   * 任务类型，SOURCE数据接入，SINK数据流出
+   * <p>任务类型，SOURCE数据接入，SINK数据流出</p>
    */
   TaskType?: string
   /**
-   * 状态，-1创建失败，0创建中，1运行中，2删除中，3已删除，4删除失败，5暂停中，6已暂停，7暂停失败，8恢复中，9恢复失败
+   * <p>状态，-1创建失败，0创建中，1运行中，2删除中，3已删除，4删除失败，5暂停中，6已暂停，7暂停失败，8恢复中，9恢复失败</p>
    */
   Status?: number
   /**
-   * 数据源
+   * <p>数据源</p>
    */
   SourceResource?: DatahubResource
   /**
-   * 数据目标
+   * <p>数据目标</p>
    */
   TargetResource?: DatahubResource
   /**
-   * Connection列表
+   * <p>Connection列表</p>
    */
   Connections?: Array<Connection>
   /**
-   * 任务创建时间
+   * <p>任务创建时间</p>
    */
   CreateTime?: string
   /**
-   * 消息处理规则
+   * <p>消息处理规则</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TransformParam?: TransformParam
   /**
-   * 数据接入ID
+   * <p>数据接入ID</p>
    */
   DatahubId?: string
   /**
-   * 绑定的SchemaId
+   * <p>绑定的SchemaId</p>
    */
   SchemaId?: string
   /**
-   * 绑定的Schema名称
+   * <p>绑定的Schema名称</p>
    */
   SchemaName?: string
   /**
-   * 数据处理规则
+   * <p>数据处理规则</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TransformsParam?: TransformsParam
   /**
-   * 异常信息
+   * <p>异常信息</p>
    */
   ErrorMessage?: string
   /**
-   * 任务标签列表
+   * <p>任务标签列表</p>
    */
   Tags?: Array<Tag>
   /**
-   * 任务描述信息
+   * <p>任务描述信息</p>
    */
   Description?: string
   /**
-   * 1:正常 2:隔离中
+   * <p>1:正常 2:隔离中</p>
    */
   IsolateStatus?: number
+  /**
+   * <p>并发数</p><p>默认值：1</p>
+   */
+  TaskMax?: number
+  /**
+   * <p>并发流量预估参考上限，MB/s</p>
+   */
+  SyncThrottleLimit?: number
+  /**
+   * <p>自动扩容 true:自动扩容 false:手动扩容</p><p>默认值：true</p>
+   */
+  AutoExpandFlag?: boolean
 }
 
 /**
@@ -4881,19 +4999,19 @@ export interface DeleteInstancePostResponse {
  */
 export interface ModifyDatahubTopicRequest {
   /**
-   * 弹性topic名称
+   * <p>弹性topic名称</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/86863">DescribeDatahubTopics</a></p>
    */
   Name: string
   /**
-   * 消息保留时间，单位：ms，当前最小值为60000ms。
+   * <p>消息保留时间，单位：ms，当前最小值为60000ms。</p>
    */
   RetentionMs: number
   /**
-   * 主题备注，是一个不超过64个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线-。
+   * <p>主题备注</p><p>入参限制：不超过64个字符</p>
    */
   Note?: string
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<Tag>
 }
@@ -4917,7 +5035,7 @@ export interface DescribeDatahubTopicsResp {
  */
 export interface ModifyDatahubTaskResponse {
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   Result?: DatahubTaskIdRes
   /**
@@ -4965,7 +5083,7 @@ export interface InstanceVersion {
  */
 export interface DescribeConnectResourcesResponse {
   /**
-   * 连接源列表
+   * <p>连接源列表</p>
    */
   Result?: DescribeConnectResourcesResp
   /**
@@ -5150,7 +5268,7 @@ export interface ConsumerGroup {
  */
 export interface DescribeDatahubTaskRequest {
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   TaskId: string
 }
@@ -5622,67 +5740,67 @@ export interface DescribeTypeInstancesResponse {
  */
 export interface ModifyConnectResourceRequest {
   /**
-   * 连接源的Id
+   * <p>连接源的Id</p>
    */
   ResourceId: string
   /**
-   * 连接源名称，为空时不修改
+   * <p>连接源名称，为空时不修改</p>
    */
   ResourceName?: string
   /**
-   * 连接源描述，为空时不修改
+   * <p>连接源描述，为空时不修改</p>
    */
   Description?: string
   /**
-   * 连接源类型，修改数据源参数时，需要与原Type相同，否则编辑数据源无效
+   * <p>连接源类型，修改数据源参数时，需要与原Type相同，否则编辑数据源无效</p>
    */
   Type?: string
   /**
-   * Dts配置，Type为DTS时必填
+   * <p>Dts配置，Type为DTS时必填</p>
    */
   DtsConnectParam?: DtsModifyConnectParam
   /**
-   * MongoDB配置，Type为MONGODB时必填
+   * <p>MongoDB配置，Type为MONGODB时必填</p>
    */
   MongoDBConnectParam?: MongoDBModifyConnectParam
   /**
-   * Es配置，Type为ES时必填
+   * <p>Es配置，Type为ES时必填</p>
    */
   EsConnectParam?: EsModifyConnectParam
   /**
-   * ClickHouse配置，Type为CLICKHOUSE时必填
+   * <p>ClickHouse配置，Type为CLICKHOUSE时必填</p>
    */
   ClickHouseConnectParam?: ClickHouseModifyConnectParam
   /**
-   * MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时必填
+   * <p>MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时必填</p>
    */
   MySQLConnectParam?: MySQLModifyConnectParam
   /**
-   * PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时必填
+   * <p>PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时必填</p>
    */
   PostgreSQLConnectParam?: PostgreSQLModifyConnectParam
   /**
-   * MariaDB配置，Type为MARIADB时必填
+   * <p>MariaDB配置，Type为MARIADB时必填</p>
    */
   MariaDBConnectParam?: MariaDBModifyConnectParam
   /**
-   * SQLServer配置，Type为SQLSERVER时必填
+   * <p>SQLServer配置，Type为SQLSERVER时必填</p>
    */
   SQLServerConnectParam?: SQLServerModifyConnectParam
   /**
-   * Ctsdb配置，Type为CTSDB
+   * <p>Ctsdb配置，Type为CTSDB</p>
    */
   CtsdbConnectParam?: CtsdbModifyConnectParam
   /**
-   * Doris配置，Type为DORIS
+   * <p>Doris配置，Type为DORIS</p>
    */
   DorisConnectParam?: DorisModifyConnectParam
   /**
-   * Kafka配置，Type为 KAFKA 时必填
+   * <p>Kafka配置，Type为 KAFKA 时必填</p>
    */
   KafkaConnectParam?: KafkaConnectParam
   /**
-   * MQTT配置，Type为 MQTT 时必填
+   * <p>MQTT配置，Type为 MQTT 时必填</p>
    */
   MqttConnectParam?: MqttConnectParam
 }
@@ -5740,23 +5858,23 @@ export interface CreateTokenRequest {
  */
 export interface TdwParam {
   /**
-   * Tdw的bid
+   * <p>Tdw的bid</p>
    */
   Bid: string
   /**
-   * Tdw的tid
+   * <p>Tdw的tid</p>
    */
   Tid: string
   /**
-   * 默认true
+   * <p>默认true</p>
    */
   IsDomestic?: boolean
   /**
-   * TDW地址，默认tl-tdbank-tdmanager.tencent-distribute.com
+   * <p>TDW地址，默认tl-tdbank-tdmanager.tencent-distribute.com</p>
    */
   TdwHost?: string
   /**
-   * TDW端口，默认8099
+   * <p>TDW端口，默认8099</p>
    */
   TdwPort?: number
 }
@@ -5986,25 +6104,21 @@ export interface DescribeTopicSubscribeGroupRequest {
 }
 
 /**
- * Table、Topic路由
+ * DeleteGroupSubscribeTopic请求参数结构体
  */
-export interface TableMapping {
+export interface DeleteGroupSubscribeTopicRequest {
   /**
-   * 库名
+   * ckafka集群实例Id
    */
-  Database: string
+  InstanceId: string
   /**
-   * 表名，多个表,（逗号）隔开
+   * 消费分组名称
    */
-  Table: string
+  Group: string
   /**
-   * Topic名称
+   * 主题名
    */
   Topic: string
-  /**
-   * Topic ID
-   */
-  TopicId: string
 }
 
 /**
@@ -6164,35 +6278,35 @@ export interface DescribeUserResponse {
  */
 export interface CosParam {
   /**
-   * cos 存储桶名称
+   * <p>cos 存储桶名称</p>
    */
   BucketName: string
   /**
-   * 地域代码
+   * <p>地域代码</p>
    */
   Region: string
   /**
-   * 对象名称
+   * <p>对象名称</p>
    */
   ObjectKey?: string
   /**
-   * 汇聚消息量的大小（单位：MB)
+   * <p>汇聚消息量的大小（单位：MB)</p>
    */
   AggregateBatchSize?: number
   /**
-   * 汇聚的时间间隔（单位：小时）
+   * <p>汇聚的时间间隔（单位：小时）</p>
    */
   AggregateInterval?: number
   /**
-   * 消息汇聚后的文件格式（支持csv, json）
+   * <p>消息汇聚后的文件格式（支持csv, json）</p>
    */
   FormatOutputType?: string
   /**
-   * 转储的对象目录前缀
+   * <p>转储的对象目录前缀</p>
    */
   ObjectKeyPrefix?: string
   /**
-   * 根据strptime 时间格式化的分区格式
+   * <p>根据strptime 时间格式化的分区格式</p>
    */
   DirectoryTimeFormat?: string
 }
@@ -6278,21 +6392,25 @@ export interface DeleteInstancePreRequest {
 }
 
 /**
- * DeleteGroupSubscribeTopic请求参数结构体
+ * ClickHouse的Schema
  */
-export interface DeleteGroupSubscribeTopicRequest {
+export interface ClickHouseSchema {
   /**
-   * ckafka集群实例Id
+   * 表的列名
    */
-  InstanceId: string
+  ColumnName: string
   /**
-   * 消费分组名称
+   * 该列对应的jsonKey名
    */
-  Group: string
+  JsonKey: string
   /**
-   * 主题名
+   * 表列项的类型
    */
-  Topic: string
+  Type: string
+  /**
+   * 列项是否允许为空
+   */
+  AllowNull: boolean
 }
 
 /**
@@ -6360,7 +6478,7 @@ export interface TransformsParam {
  */
 export interface PauseDatahubTaskRequest {
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   TaskId: string
 }
@@ -6740,17 +6858,17 @@ export interface MySQLModifyConnectParam {
 }
 
 /**
- * DescribeGroup返回实体
+ * DescribeAccessPolicy返回参数结构体
  */
-export interface DescribeGroup {
+export interface DescribeAccessPolicyResponse {
   /**
-   * 消费分组名称
+   * <p>实例公网IP白名单配置列表</p>
    */
-  Group?: string
+  Result?: ExternalAccessInfoWrapper
   /**
-   * 该 group 使用的协议。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Protocol?: string
+  RequestId?: string
 }
 
 /**
@@ -6782,7 +6900,7 @@ export interface DescribeRouteResponse {
  */
 export interface ModifyDatahubTopicResponse {
   /**
-   * 返回结果集
+   * <p>返回结果集</p>
    */
   Result?: JgwOperateResponse
   /**
@@ -6850,6 +6968,20 @@ export interface PostgreSQLParam {
 }
 
 /**
+ * Ctsdb类型入参
+ */
+export interface CtsdbParam {
+  /**
+   * 连接管理实例资源
+   */
+  Resource?: string
+  /**
+   * Ctsdb的metric
+   */
+  CtsdbMetric?: string
+}
+
+/**
  * CreateTopicIpWhiteList请求参数结构体
  */
 export interface CreateTopicIpWhiteListRequest {
@@ -6906,7 +7038,7 @@ export interface MariaDBConnectParam {
  */
 export interface ResumeDatahubTaskResponse {
   /**
-   * 任务id
+   * <p>任务id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: DatahubTaskIdRes
@@ -7261,7 +7393,7 @@ export interface BatchCreateAclRequest {
  */
 export interface ResumeDatahubTaskRequest {
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   TaskId: string
 }
@@ -7271,23 +7403,23 @@ export interface ResumeDatahubTaskRequest {
  */
 export interface DescribeConnectResourcesRequest {
   /**
-   * 连接源类型
+   * <p>连接源类型</p>
    */
   Type?: string
   /**
-   * 连接源名称的关键字查询,支持模糊匹配
+   * <p>连接源名称的关键字查询,支持模糊匹配</p>
    */
   SearchWord?: string
   /**
-   * 分页偏移量，默认为0
+   * <p>分页偏移量，默认为0</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为1000 (超过1000,则限制为1000)
+   * <p>返回数量，默认为20，最大值为1000 (超过1000,则限制为1000)</p>
    */
   Limit?: number
   /**
-   * 连接源的关键字查询, 根据地域查询本地域内连接管理列表中的连接(仅支持包含region输入的连接源)
+   * <p>连接源的关键字查询, 根据地域查询本地域内连接管理列表中的连接(仅支持包含region输入的连接源)</p>
    */
   ResourceRegion?: string
 }
@@ -7833,31 +7965,31 @@ export interface CheckCdcClusterResponse {
  */
 export interface DescribeDatahubTasksRequest {
   /**
-   * 返回数量，默认为20，最大值为100 (超过100限制为100)
+   * <p>返回数量，默认为20，最大值为100 (超过100限制为100)</p>
    */
   Limit?: number
   /**
-   * 分页偏移量，默认为0
+   * <p>分页偏移量，默认为0</p>
    */
   Offset?: number
   /**
-   * 过滤条件，按照 TaskName 过滤，支持模糊查询
+   * <p>过滤条件，按照 TaskName 过滤，支持模糊查询</p>
    */
   SearchWord?: string
   /**
-   * 转储的目标类型
+   * <p>转储的目标类型</p>
    */
   TargetType?: string
   /**
-   * 任务类型，SOURCE数据接入，SINK数据流出
+   * <p>任务类型，SOURCE数据接入，SINK数据流出</p>
    */
   TaskType?: string
   /**
-   * 转储的源类型
+   * <p>转储的源类型</p>
    */
   SourceType?: string
   /**
-   * 转储的资源
+   * <p>转储的资源</p>
    */
   Resource?: string
 }
@@ -7968,23 +8100,23 @@ export interface BatchModifyGroupOffsetsResponse {
  */
 export interface CreateDatahubTopicRequest {
   /**
-   * 名称，是一个不超过 128 个字符的字符串，必须以“AppId-”为首字符，剩余部分可以包含字母、数字和横划线(-)
+   * <p>名称，是一个不超过 128 个字符的字符串，必须以“AppId-”为首字符，剩余部分可以包含字母、数字和横划线(-)，可通过接口DescribeAppInfo获取。</p>
    */
   Name: string
   /**
-   * Partition个数，大于0
+   * <p>Partition个数，最大值为500，大于0</p>
    */
   PartitionNum: number
   /**
-   * 消息保留时间，单位ms，当前最小值为60000ms
+   * <p>消息保留时间，单位ms，当前最小值为60000ms</p>
    */
   RetentionMs: number
   /**
-   * 主题备注，是一个不超过 64 个字符的字符串，必须以字母为首字符，剩余部分可以包含字母、数字和横划线(-)
+   * <p>主题备注，是一个不超过 64 个字符的字符串，可以包含字母、数字和横划线(-)。</p>
    */
   Note?: string
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<Tag>
 }
@@ -8102,33 +8234,11 @@ export interface DeleteGroupRequest {
 }
 
 /**
- * ClickHouse的Schema
- */
-export interface ClickHouseSchema {
-  /**
-   * 表的列名
-   */
-  ColumnName: string
-  /**
-   * 该列对应的jsonKey名
-   */
-  JsonKey: string
-  /**
-   * 表列项的类型
-   */
-  Type: string
-  /**
-   * 列项是否允许为空
-   */
-  AllowNull: boolean
-}
-
-/**
  * DescribeConnectResource请求参数结构体
  */
 export interface DescribeConnectResourceRequest {
   /**
-   * 连接源的Id
+   * <p>连接源的Id</p>
    */
   ResourceId: string
 }
@@ -8334,109 +8444,113 @@ export interface DealInstanceDTO {
  */
 export interface DescribeConnectResource {
   /**
-   * 连接源的Id
+   * <p>连接源的Id</p>
    */
   ResourceId?: string
   /**
-   * 连接源名称
+   * <p>连接源名称</p>
    */
   ResourceName?: string
   /**
-   * 连接源描述
+   * <p>连接源描述</p>
    */
   Description?: string
   /**
-   * 连接源类型
+   * <p>连接源类型</p>
    */
   Type?: string
   /**
-   * 连接源的状态
+   * <p>连接源的状态</p>
    */
   Status?: number
   /**
-   * 连接源的创建时间
+   * <p>连接源的创建时间</p>
    */
   CreateTime?: string
   /**
-   * 连接源的异常信息
+   * <p>连接源的异常信息</p>
    */
   ErrorMessage?: string
   /**
-   * 该连接源关联的Datahub任务数
+   * <p>该连接源关联的Datahub任务数</p>
    */
   DatahubTaskCount?: number
   /**
-   * 连接源的当前所处步骤
+   * <p>连接源的当前所处步骤</p>
    */
   CurrentStep?: string
   /**
-   * 创建进度百分比
+   * <p>创建进度百分比</p>
    */
   TaskProgress?: number
   /**
-   * 步骤列表
+   * <p>步骤列表</p>
    */
   StepList?: Array<string>
   /**
-   * Dts配置，Type为DTS时返回
+   * <p>Dts配置，Type为DTS时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DtsConnectParam?: DtsConnectParam
   /**
-   * MongoDB配置，Type为MONGODB时返回
+   * <p>MongoDB配置，Type为MONGODB时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MongoDBConnectParam?: MongoDBConnectParam
   /**
-   * Es配置，Type为ES时返回
+   * <p>Es配置，Type为ES时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EsConnectParam?: EsConnectParam
   /**
-   * ClickHouse配置，Type为CLICKHOUSE时返回
+   * <p>ClickHouse配置，Type为CLICKHOUSE时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClickHouseConnectParam?: ClickHouseConnectParam
   /**
-   * MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时返回
+   * <p>MySQL配置，Type为MYSQL或TDSQL_C_MYSQL时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MySQLConnectParam?: MySQLConnectParam
   /**
-   * PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时返回
+   * <p>PostgreSQL配置，Type为POSTGRESQL或TDSQL_C_POSTGRESQL时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PostgreSQLConnectParam?: PostgreSQLConnectParam
   /**
-   * MariaDB配置，Type为MARIADB时返回
+   * <p>MariaDB配置，Type为MARIADB时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MariaDBConnectParam?: MariaDBConnectParam
   /**
-   * SQLServer配置，Type为SQLSERVER时返回
+   * <p>SQLServer配置，Type为SQLSERVER时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SQLServerConnectParam?: SQLServerConnectParam
   /**
-   * Ctsdb配置，Type为CTSDB时返回
+   * <p>Ctsdb配置，Type为CTSDB时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CtsdbConnectParam?: CtsdbConnectParam
   /**
-   * Doris 配置，Type 为 DORIS 时返回
+   * <p>Doris 配置，Type 为 DORIS 时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DorisConnectParam?: DorisConnectParam
   /**
-   * Kafka配置，Type 为 KAFKA 时返回
+   * <p>Kafka配置，Type 为 KAFKA 时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KafkaConnectParam?: KafkaConnectParam
   /**
-   * MQTT配置，Type 为 MQTT 时返回
+   * <p>MQTT配置，Type 为 MQTT 时返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MqttConnectParam?: MqttConnectParam
+  /**
+   * <p>标签列表</p>
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -8705,7 +8819,7 @@ export interface ModifyRoutineMaintenanceTaskResponse {
  */
 export interface DescribeConnectResourceResponse {
   /**
-   * 连接源数据信息
+   * <p>连接源数据信息</p>
    */
   Result?: DescribeConnectResourceResp
   /**
@@ -8829,17 +8943,17 @@ export interface CreateRouteResponse {
 }
 
 /**
- * Ctsdb类型入参
+ * DeleteDatahubTask返回参数结构体
  */
-export interface CtsdbParam {
+export interface DeleteDatahubTaskResponse {
   /**
-   * 连接管理实例资源
+   * <p>操作结果</p>
    */
-  Resource?: string
+  Result?: DatahubTaskIdRes
   /**
-   * Ctsdb的metric
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CtsdbMetric?: string
+  RequestId?: string
 }
 
 /**
@@ -8891,48 +9005,48 @@ export interface DescribeTopicFlowRankingResponse {
  */
 export interface CreateDatahubTaskRequest {
   /**
-   * 任务名称,只能以字母起始,允许包含字母、数字、- 、.  、 下划线且长度不超过64 (、为分割符号规则不包含)
+   * <p>任务名称,只能以字母起始,允许包含字母、数字、- 、.  、 下划线且长度不超过64 (、为分割符号规则不包含)</p>
    */
   TaskName: string
   /**
-   * 任务类型，SOURCE数据接入，SINK数据流出
+   * <p>任务类型，SOURCE数据接入，SINK数据流出</p>
    */
   TaskType: string
   /**
-   * 数据源
+   * <p>数据源</p>
    */
   SourceResource?: DatahubResource
   /**
-   * 数据目标
+   * <p>数据目标</p>
    */
   TargetResource?: DatahubResource
   /**
-   * 数据处理规则
+   * <p>数据处理规则</p>
    */
   TransformParam?: TransformParam
   /**
-   * 实例连接参数【已废弃】
+   * <p>实例连接参数【已废弃】</p>
    * @deprecated
    */
   PrivateLinkParam?: PrivateLinkParam
   /**
-   * 选择所要绑定的SchemaId
+   * <p>选择所要绑定的SchemaId</p>
    */
   SchemaId?: string
   /**
-   * 数据处理规则
+   * <p>数据处理规则</p>
    */
   TransformsParam?: TransformsParam
   /**
-   * 任务Id
+   * <p>任务Id</p>
    */
   TaskId?: string
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<Tag>
   /**
-   * 任务描述信息
+   * <p>任务描述信息</p>
    */
   Description?: string
 }
@@ -9209,7 +9323,7 @@ export interface DeleteTopicIpWhiteListRequest {
  */
 export interface CreateDatahubTaskResponse {
   /**
-   * 返回结果
+   * <p>返回结果</p>
    */
   Result?: CreateDatahubTaskRes
   /**
@@ -9288,17 +9402,29 @@ export interface DescribeTopicSyncReplicaRequest {
  */
 export interface ModifyDatahubTaskRequest {
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   TaskId: string
   /**
-   * 任务名称
+   * <p>任务名称</p>
    */
   TaskName?: string
   /**
-   * 任务描述信息
+   * <p>任务描述信息</p>
    */
   Description?: string
+  /**
+   * <p>任务并发上限</p>
+   */
+  TasksMax?: number
+  /**
+   * <p>数据同步限流值上限</p>单位：MB/s
+   */
+  SyncThrottleLimit?: number
+  /**
+   * <p>开启自动扩容</p>枚举值：<ul><li> true： 自动扩容</li><li> false： 手动扩容</li></ul>
+   */
+  AutoExpandFlag?: boolean
 }
 
 /**

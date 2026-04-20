@@ -1476,48 +1476,47 @@ export interface TextFormula {
  */
 export interface HmtResidentPermitOCRResponse {
   /**
-   * 证件姓名
+   * <p>证件姓名</p>
    */
   Name?: string
   /**
-   * 性别
+   * <p>性别</p>
    */
   Sex?: string
   /**
-   * 出生日期
+   * <p>出生日期</p>
    */
   Birth?: string
   /**
-   * 地址
+   * <p>地址</p>
    */
   Address?: string
   /**
-   * 身份证号
+   * <p>身份证号</p>
    */
   IdCardNo?: string
   /**
-   * 0-正面
-1-反面
+   * <p>0-正面<br>1-反面</p>
    */
   CardType?: number
   /**
-   * 证件有效期限
+   * <p>证件有效期限</p>
    */
   ValidDate?: string
   /**
-   * 签发机关
+   * <p>签发机关</p>
    */
   Authority?: string
   /**
-   * 签发次数
+   * <p>签发次数</p>
    */
   VisaNum?: string
   /**
-   * 通行证号码
+   * <p>通行证号码</p>
    */
   PassNo?: string
   /**
-   * 头像和坐标信息
+   * <p>头像和坐标信息</p>
    */
   PortraitImageInfo?: PortraitImageInfo
   /**
@@ -2254,22 +2253,19 @@ export interface HKIDCardOCRResponse {
  */
 export interface MainlandPermitOCRRequest {
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * <p>图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。</p>
    */
   ImageBase64?: string
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * <p>图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。</p>
    */
   ImageUrl?: string
   /**
-   * 是否返回头像。默认不返回。
+   * <p>是否返回头像。默认不返回。</p>
    */
   RetProfile?: boolean
   /**
-   * 图片正反面
-FRONT：正面
-BACK：反面 （仅支持来往内地通行证反面识别，不支持港澳台通行证反面识别）
-默认为FRONT
+   * <p>图片正反面<br>FRONT：正面<br>BACK：反面 （仅支持来往内地通行证反面识别，不支持港澳台通行证反面识别）<br>默认为FRONT</p>
    */
   CardSide?: string
 }
@@ -9638,21 +9634,19 @@ export interface MedicalInvoice {
  */
 export interface HmtResidentPermitOCRRequest {
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * <p>图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。</p>
    */
   ImageBase64?: string
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * <p>图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。</p>
    */
   ImageUrl?: string
   /**
-   * FRONT：有照片的一面（人像面），
-BACK：无照片的一面（国徽面），
-该参数如果不填或填错，将为您自动判断正反面。
+   * <p>FRONT：有照片的一面（人像面），<br>BACK：无照片的一面（国徽面），<br>该参数如果不填或填错，将为您自动判断正反面。</p>
    */
   CardSide?: string
   /**
-   * 是否返回头像和位置坐标
+   * <p>是否返回头像和位置坐标</p>
    */
   CropPortrait?: boolean
 }
@@ -9983,55 +9977,55 @@ export interface GetOCRResultResponse {
  */
 export interface MainlandPermitOCRResponse {
   /**
-   * 中文姓名
+   * <p>中文姓名</p>
    */
   Name?: string
   /**
-   * 英文姓名
+   * <p>英文姓名</p>
    */
   EnglishName?: string
   /**
-   * 性别
+   * <p>性别</p>
    */
   Sex?: string
   /**
-   * 出生日期
+   * <p>出生日期</p>
    */
   Birthday?: string
   /**
-   * 签发机关
+   * <p>签发机关</p>
    */
   IssueAuthority?: string
   /**
-   * 有效期限
+   * <p>有效期限</p>
    */
   ValidDate?: string
   /**
-   * 证件号
+   * <p>证件号</p>
    */
   Number?: string
   /**
-   * 签发地点
+   * <p>签发地点</p>
    */
   IssueAddress?: string
   /**
-   * 签发次数
+   * <p>签发次数</p>
    */
   IssueNumber?: string
   /**
-   * 证件类别， 如：台湾居民来往大陆通行证、港澳居民来往内地通行证、往来港澳通行证。
+   * <p>证件类别， 如：台湾居民来往大陆通行证、港澳居民来往内地通行证、往来港澳通行证。</p>
    */
   Type?: string
   /**
-   * RetProfile为True时返回头像字段， Base64编码
+   * <p>RetProfile为True时返回头像字段， Base64编码</p>
    */
   Profile?: string
   /**
-   * 国籍
+   * <p>国籍</p>
    */
   Nationality?: string
   /**
-   * 背面字段信息
+   * <p>背面字段信息</p>
    */
   MainlandTravelPermitBackInfos?: MainlandTravelPermitBackInfos
   /**

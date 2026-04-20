@@ -148,6 +148,16 @@ it("cme.v20191029.ImportMaterial", async function () {
     }
 })
 
+it("cme.v20191029.DeleteAccount", async function () {
+    try {
+       const data = await client.DeleteAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cme.v20191029.ExportVideoByEditorTrackData", async function () {
     try {
        const data = await client.ExportVideoByEditorTrackData({})
@@ -421,6 +431,16 @@ it("cme.v20191029.RevokeResourceAuthorization", async function () {
 it("cme.v20191029.ImportMediaToProject", async function () {
     try {
        const data = await client.ImportMediaToProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cme.v20191029.ForbidAccount", async function () {
+    try {
+       const data = await client.ForbidAccount({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

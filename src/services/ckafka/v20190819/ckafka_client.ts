@@ -89,13 +89,14 @@ import {
   DescribeConsumerGroupResponse,
   CreateInstancePostData,
   DescModifyType,
-  DeleteDatahubTaskResponse,
+  ExternalAccessInfoWrapper,
   InstanceAttributesResponse,
   DescribeDatahubTopicsResponse,
   TopicParam,
   KafkaParam,
   Connection,
   BatchCreateAclResponse,
+  ModifyAccessPolicyResponse,
   IpWhitelistDTO,
   DeleteRouteRequest,
   MongoDBConnectParam,
@@ -105,6 +106,7 @@ import {
   PrivateLinkParam,
   CreateTopicResp,
   TaskStatusResponse,
+  DescribeGroup,
   SplitParam,
   DescribeTopicDetailRequest,
   DescribeGroupOffsetsResponse,
@@ -124,6 +126,7 @@ import {
   FetchLatestDatahubMessageListRequest,
   PauseDatahubTaskResponse,
   CreateConnectResourceResponse,
+  DescribeAccessPolicyRequest,
   InquiryDetailPrice,
   InquireCkafkaPriceResp,
   DescribeDatahubTasksResponse,
@@ -154,6 +157,7 @@ import {
   DescribeRegionRequest,
   DescribeGroupInfoResponse,
   DtsConnectParam,
+  ModifyAccessPolicyRequest,
   GroupOffsetResponse,
   AclResponse,
   MapParam,
@@ -161,6 +165,7 @@ import {
   ModifyInstanceAttributesRequest,
   ConsumerGroupSpeed,
   CreateAclRuleResponse,
+  TableMapping,
   FetchDatahubMessageByOffsetResponse,
   DeleteDatahubTaskRequest,
   FieldParam,
@@ -248,7 +253,7 @@ import {
   MariaDBParam,
   SubstrParam,
   DescribeTopicSubscribeGroupRequest,
-  TableMapping,
+  DeleteGroupSubscribeTopicRequest,
   DtsModifyConnectParam,
   InstanceConfigDO,
   DeleteAclRuleResponse,
@@ -260,7 +265,7 @@ import {
   CosParam,
   ZoneResponse,
   DeleteInstancePreRequest,
-  DeleteGroupSubscribeTopicRequest,
+  ClickHouseSchema,
   ConsumerGroupTopic,
   TransformsParam,
   PauseDatahubTaskRequest,
@@ -280,11 +285,12 @@ import {
   ValueParam,
   LowercaseParam,
   MySQLModifyConnectParam,
-  DescribeGroup,
+  DescribeAccessPolicyResponse,
   DatahubTaskIdRes,
   DescribeRouteResponse,
   ModifyDatahubTopicResponse,
   PostgreSQLParam,
+  CtsdbParam,
   CreateTopicIpWhiteListRequest,
   MariaDBConnectParam,
   ResumeDatahubTaskResponse,
@@ -328,7 +334,6 @@ import {
   OperateResponseData,
   ClusterInfo,
   DeleteGroupRequest,
-  ClickHouseSchema,
   DescribeConnectResourceRequest,
   DeleteRouteResponse,
   CreatePrometheusResponse,
@@ -365,7 +370,7 @@ import {
   InquireCkafkaPriceResponse,
   ListCvmAndIpInfoRsp,
   CreateRouteResponse,
-  CtsdbParam,
+  DeleteDatahubTaskResponse,
   EventBusParam,
   DescribeTopicFlowRankingResponse,
   CreateDatahubTaskRequest,
@@ -437,7 +442,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除Datahub连接源
+   * 删除连接器连接
    */
   async DeleteConnectResource(
     req: DeleteConnectResourceRequest,
@@ -497,7 +502,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Datahub任务信息
+   * 查询连接器任务详情
    */
   async DescribeDatahubTask(
     req: DescribeDatahubTaskRequest,
@@ -607,7 +612,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 恢复Dip任务
+   * 恢复连接器任务
    */
   async ResumeDatahubTask(
     req: ResumeDatahubTaskRequest,
@@ -687,7 +692,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Datahub任务列表
+   * 查询连接器任务列表
    */
   async DescribeDatahubTasks(
     req: DescribeDatahubTasksRequest,
@@ -747,7 +752,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建Datahub连接源
+   * 创建连接器连接
    */
   async CreateConnectResource(
     req: CreateConnectResourceRequest,
@@ -827,7 +832,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * Datahub任务异常时，重启Datahub任务
+   * 连接器任务异常时，重启连接器任务
    */
   async RestartDatahubTask(
     req: RestartDatahubTaskRequest,
@@ -847,7 +852,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改Datahub任务
+   * 修改实例公网IP白名单列表接口
+   */
+  async ModifyAccessPolicy(
+    req: ModifyAccessPolicyRequest,
+    cb?: (error: string, rep: ModifyAccessPolicyResponse) => void
+  ): Promise<ModifyAccessPolicyResponse> {
+    return this.request("ModifyAccessPolicy", req, cb)
+  }
+
+  /**
+   * 修改连接器任务
    */
   async ModifyDatahubTask(
     req: ModifyDatahubTaskRequest,
@@ -857,7 +872,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Datahub连接源
+   * 查询连接器连接详情
    */
   async DescribeConnectResource(
     req: DescribeConnectResourceRequest,
@@ -1017,7 +1032,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建DIP转储任务
+   * 创建连接器任务
    */
   async CreateDatahubTask(
     req: CreateDatahubTaskRequest,
@@ -1078,7 +1093,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Datahub连接源列表
+   * 查询连接器连接列表
    */
   async DescribeConnectResources(
     req: DescribeConnectResourcesRequest,
@@ -1098,7 +1113,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 暂停Dip任务
+   * 暂停连接器任务
    */
   async PauseDatahubTask(
     req: PauseDatahubTaskRequest,
@@ -1148,7 +1163,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除Dip任务
+   * 删除连接器任务
    */
   async DeleteDatahubTask(
     req: DeleteDatahubTaskRequest,
@@ -1188,6 +1203,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询实例公网IP白名单列表接口
+   */
+  async DescribeAccessPolicy(
+    req: DescribeAccessPolicyRequest,
+    cb?: (error: string, rep: DescribeAccessPolicyResponse) => void
+  ): Promise<DescribeAccessPolicyResponse> {
+    return this.request("DescribeAccessPolicy", req, cb)
+  }
+
+  /**
    * 获取主题列表详情（仅控制台调用）
    */
   async DescribeTopicDetail(
@@ -1208,7 +1233,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 编辑Datahub连接源
+   * 编辑连接器连接
    */
   async ModifyConnectResource(
     req: ModifyConnectResourceRequest,

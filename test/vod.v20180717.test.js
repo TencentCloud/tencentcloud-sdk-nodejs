@@ -778,6 +778,16 @@ it("vod.v20180717.ModifyVodDomainAccelerateConfig", async function () {
     }
 })
 
+it("vod.v20180717.ModifyTranscodeTemplate", async function () {
+    try {
+       const data = await client.ModifyTranscodeTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DeleteSuperPlayerConfig", async function () {
     try {
        const data = await client.DeleteSuperPlayerConfig({})
@@ -1228,9 +1238,9 @@ it("vod.v20180717.CreateComplexAdaptiveDynamicStreamingTask", async function () 
     }
 })
 
-it("vod.v20180717.ModifyTranscodeTemplate", async function () {
+it("vod.v20180717.CreateAigcVideoRedrawTask", async function () {
     try {
-       const data = await client.ModifyTranscodeTemplate({})
+       const data = await client.CreateAigcVideoRedrawTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

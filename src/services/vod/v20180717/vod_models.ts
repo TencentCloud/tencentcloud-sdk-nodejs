@@ -119,6 +119,40 @@ export interface AigcVideoOutputConfig {
 }
 
 /**
+ * CreateAigcVideoRedrawTask请求参数结构体
+ */
+export interface CreateAigcVideoRedrawTaskRequest {
+  /**
+   * <p><b>点播<a href="https://cloud.tencent.com/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
+   */
+  SubAppId: number
+  /**
+   * <p>AIGC 视频转绘任务的输入视频的文件信息。</p>
+   */
+  FileInfo?: AigcVideoRedrawTaskInputFileInfo
+  /**
+   * <p>AIGC 视频转绘任务的输出媒体文件配置。</p>
+   */
+  OutputConfig?: AigcVideoRedrawOutputConfig
+  /**
+   * <p>用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
+   */
+  SessionId?: string
+  /**
+   * <p>来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。</p>
+   */
+  SessionContext?: string
+  /**
+   * <p>任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。</p>
+   */
+  TasksPriority?: number
+  /**
+   * <p>保留字段，特殊用途时使用。</p>
+   */
+  ExtInfo?: string
+}
+
+/**
  * ModifyWatermarkTemplate请求参数结构体
  */
 export interface ModifyWatermarkTemplateRequest {
@@ -368,6 +402,20 @@ export interface AigcImageTaskOutput {
    * AIGC 生图任务的输出文件信息。
    */
   FileInfos?: Array<AigcImageTaskOutputFileInfo>
+}
+
+/**
+ * CreateAigcVideoRedrawTask返回参数结构体
+ */
+export interface CreateAigcVideoRedrawTaskResponse {
+  /**
+   * <p>任务 ID。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -12953,6 +13001,16 @@ export interface AiRecognitionTaskObjectResultItem {
 }
 
 /**
+ * DeleteImageProcessingTemplate返回参数结构体
+ */
+export interface DeleteImageProcessingTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 基于签名的 Key 防盗链信息
  */
 export interface UrlSignatureAuthPolicy {
@@ -16609,6 +16667,28 @@ export interface AdaptiveStreamTemplate {
    * <p>扩展参数。</p>
    */
   StdExtInfo?: string
+}
+
+/**
+ * AIGC 视频转绘任务的输出媒体文件配置。
+ */
+export interface AigcVideoRedrawOutputConfig {
+  /**
+   * <p>存储模式。取值有： <li>Permanent：永久存储，生成的视频文件将存储到云点播，可在事件通知中获取到 FileId；</li> <li>Temporary：临时存储，生成的视频文件不会存储到云点播，可在事件通知中获取到临时访问的 URL；</li>默认值：Temporary</p>
+   */
+  StorageMode?: string
+  /**
+   * <p>输出媒体文件名，最长 64 个字符。缺省由系统指定生成文件名。</p>
+   */
+  MediaName?: string
+  /**
+   * <p>分类ID，用于对媒体进行分类管理，可通过 <a href="/document/product/266/7812">创建分类</a> 接口，创建分类，获得分类 ID。<li>默认值：0，表示其他分类。</li></p>
+   */
+  ClassId?: number
+  /**
+   * <p>输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式说明</a>。</p><p>参数格式：2025-12-28T00:35:00Z</p>
+   */
+  ExpireTime?: string
 }
 
 /**
@@ -23868,13 +23948,21 @@ export interface AiRecognitionTaskFaceResultOutput {
 }
 
 /**
- * DeleteImageProcessingTemplate返回参数结构体
+ * AIGC 视频转绘任务输入文件信息。
  */
-export interface DeleteImageProcessingTemplateResponse {
+export interface AigcVideoRedrawTaskInputFileInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>输入的视频文件类型。取值有： <li>File：点播媒体文件；</li> <li>Url：可访问的 Url；</li></p>
    */
-  RequestId?: string
+  Type?: string
+  /**
+   * <p>媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 <a href="/document/product/266/7830">视频上传完成事件通知</a> 或 <a href="https://console.cloud.tencent.com/vod/media">云点播控制台</a> 获取该字段。当 Type 取值为 File 时，本参数有效。说明：1. 推荐使用小于10M的图片；2. 图片格式的取值为：jpeg，jpg, png。</p>
+   */
+  FileId?: string
+  /**
+   * <p>可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：1. 推荐使用小于10M的图片；2. 图片格式的取值为：jpeg，jpg, png。</p>
+   */
+  Url?: string
 }
 
 /**

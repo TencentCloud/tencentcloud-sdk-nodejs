@@ -244,6 +244,7 @@ import {
   DescribeEnterpriseContractReviewChecklistsResponse,
   AuthInfoDetail,
   ModifyApplicationCallbackInfoResponse,
+  RemindEmailInfo,
   RiskIdentificationRoleInfo,
   CreateUserVerifyUrlRequest,
   DescribeLMInformationExtractionTaskFieldFeedbackRequest,

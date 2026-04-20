@@ -40,6 +40,7 @@ import {
   ModifyUserResponse,
   DescribeCaCertificateResponse,
   DescribeDeviceCertificatesRequest,
+  DescribeSharedSubscriptionGroupsRequest,
   DeleteAuthenticatorRequest,
   DeleteMessageEnrichmentRuleRequest,
   PublicAccessRule,
@@ -98,6 +99,7 @@ import {
   DescribeAuthorizationPoliciesResponse,
   CreateTopicRequest,
   DeleteCaCertificateResponse,
+  SharedGroup,
   DeleteClientSubscriptionRequest,
   TagFilter,
   DescribeMessageDetailsResponse,
@@ -149,6 +151,7 @@ import {
   DescribeMessageEnrichmentRulesRequest,
   UpdateAuthorizationPolicyPriorityRequest,
   CreateMessageEnrichmentRuleRequest,
+  DescribeSharedSubscriptionGroupsResponse,
   CreateJWTAuthenticatorResponse,
   DeleteAuthorizationPolicyRequest,
   DescribeDeviceIdentityRequest,
@@ -822,6 +825,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ApplyRegistrationCodeResponse) => void
   ): Promise<ApplyRegistrationCodeResponse> {
     return this.request("ApplyRegistrationCode", req, cb)
+  }
+
+  /**
+   * 查询集群下共享订阅组列表
+   */
+  async DescribeSharedSubscriptionGroups(
+    req: DescribeSharedSubscriptionGroupsRequest,
+    cb?: (error: string, rep: DescribeSharedSubscriptionGroupsResponse) => void
+  ): Promise<DescribeSharedSubscriptionGroupsResponse> {
+    return this.request("DescribeSharedSubscriptionGroups", req, cb)
   }
 
   /**

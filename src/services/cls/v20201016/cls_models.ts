@@ -4216,7 +4216,7 @@ export interface DeleteLogsetRequest {
  */
 export interface OpenKafkaConsumerResponse {
   /**
-   * KafkaConsumer 消费时使用的Topic参数
+   * <p>KafkaConsumer 消费时使用的Topic参数</p>
    */
   TopicID?: string
   /**
@@ -5409,19 +5409,25 @@ export interface DeleteConsumerGroupRequest {
  */
 export interface OpenKafkaConsumerRequest {
   /**
-   * 日志主题Id。
-- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。
-- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。
+   * <p>日志主题Id。</p><ul><li>通过 <a href="https://cloud.tencent.com/document/product/614/56454">获取日志主题列表</a> 获取日志主题Id。</li><li>通过 <a href="https://cloud.tencent.com/document/product/614/56456">创建日志主题</a> 获取日志主题Id。</li></ul>
    */
   FromTopicId: string
   /**
-   * 压缩方式[0:NONE；2:SNAPPY；3:LZ4]，默认：0
+   * <p>压缩方式[0:NONE；2:SNAPPY；3:LZ4]，默认：0</p>
    */
   Compression?: number
   /**
-   * kafka协议消费数据格式
+   * <p>kafka协议消费数据格式</p>
    */
   ConsumerContent?: KafkaConsumerContent
+  /**
+   * <p>是否开启投递服务日志。1：关闭，2：开启。 默认值：2</p>
+   */
+  HasServicesLog?: number
+  /**
+   * <p>消费范围类型，0:最新；1:历史+最新；默认值:0</p>
+   */
+  ScopeType?: number
 }
 
 /**
@@ -6036,19 +6042,25 @@ export interface DeleteScheduledSqlRequest {
  */
 export interface ModifyKafkaConsumerRequest {
   /**
-   * 日志主题Id。
-- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。
-- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。
+   * <p>日志主题Id。</p><ul><li>通过 <a href="https://cloud.tencent.com/document/product/614/56454">获取日志主题列表</a> 获取日志主题Id。</li><li>通过 <a href="https://cloud.tencent.com/document/product/614/56456">创建日志主题</a> 获取日志主题Id。</li></ul>
    */
   FromTopicId: string
   /**
-   * 压缩方式。0：不压缩；2：使用Snappy压缩；3：使用LZ4压缩
+   * <p>压缩方式。0：不压缩；2：使用Snappy压缩；3：使用LZ4压缩</p>
    */
   Compression?: number
   /**
-   * kafka协议消费数据格式
+   * <p>kafka协议消费数据格式</p>
    */
   ConsumerContent?: KafkaConsumerContent
+  /**
+   * <p>是否开启投递服务日志。1：关闭，2：开启。</p>
+   */
+  HasServicesLog?: number
+  /**
+   * <p>消费范围类型，0:最新，1:历史+最新</p>
+   */
+  ScopeType?: number
 }
 
 /**
@@ -7052,9 +7064,7 @@ export interface DeleteNoticeContentRequest {
  */
 export interface DescribeKafkaConsumerRequest {
   /**
-   * 日志主题Id。
-- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。
-- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。
+   * <p>日志主题Id。</p><ul><li>通过 <a href="https://cloud.tencent.com/document/product/614/56454">获取日志主题列表</a> 获取日志主题Id。</li><li>通过 <a href="https://cloud.tencent.com/document/product/614/56456">创建日志主题</a> 获取日志主题Id。</li></ul>
    */
   FromTopicId: string
 }
@@ -7694,21 +7704,29 @@ export interface DeleteCloudProductLogCollectionRequest {
  */
 export interface DescribeKafkaConsumerResponse {
   /**
-   * Kafka协议消费是否打开
+   * <p>Kafka协议消费是否打开</p>
    */
   Status?: boolean
   /**
-   * KafkaConsumer 消费时使用的Topic参数
+   * <p>KafkaConsumer 消费时使用的Topic参数</p>
    */
   TopicID?: string
   /**
-   * 压缩方式[0:NONE；2:SNAPPY；3:LZ4]
+   * <p>压缩方式[0:NONE；2:SNAPPY；3:LZ4]</p>
    */
   Compression?: number
   /**
-   * kafka协议消费数据格式
+   * <p>kafka协议消费数据格式</p>
    */
   ConsumerContent?: KafkaConsumerContent
+  /**
+   * <p>是否开启投递服务日志。1：关闭，2：开启。</p>
+   */
+  HasServicesLog?: number
+  /**
+   * <p>消费范围类型，0:最新，1:历史+最新</p>
+   */
+  ScopeType?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

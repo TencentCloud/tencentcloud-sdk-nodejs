@@ -540,6 +540,16 @@ Status：设备证书状态     ACTIVE（激活）； INACTIVE（未激活）REV
 }
 
 /**
+ * DescribeSharedSubscriptionGroups请求参数结构体
+ */
+export interface DescribeSharedSubscriptionGroupsRequest {
+  /**
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   */
+  InstanceId: string
+}
+
+/**
  * DeleteAuthenticator请求参数结构体
  */
 export interface DeleteAuthenticatorRequest {
@@ -1787,6 +1797,42 @@ export interface DeleteCaCertificateResponse {
 }
 
 /**
+ * 共享订阅组
+ */
+export interface SharedGroup {
+  /**
+   * 腾讯云MQTT实例ID
+   */
+  InstanceId?: string
+  /**
+   * 共享订阅组名
+   */
+  SharedName?: string
+  /**
+   * 共享组消费负载均衡策略 1.RANDOM 2.HASH_PARTITION
+   */
+  LbStrategy?: number
+  /**
+   * HASH_PARTITION 策略下生效，表示Client掉线或新Client上线加入共享订阅组消费的延迟时间。
+范围：0～600秒
+   */
+  ExpiryInterval?: number
+  /**
+   * 备注，长度不超过128个字符。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+  /**
+   * 创建时间，毫秒级时间戳 。
+   */
+  CreateTime?: number
+  /**
+   * 上次更新时间，毫秒级时间戳 。
+   */
+  UpdateTime?: number
+}
+
+/**
  * DeleteClientSubscription请求参数结构体
  */
 export interface DeleteClientSubscriptionRequest {
@@ -2982,6 +3028,24 @@ eyJtZXNzYWdlRXhwaXJ5SW50ZXJ2YWwiOjM2MCwicmVzcG9uc2VUb3BpYyI6InJlcGxpZXMvZGV2aWNl
    * 备注，长度不超过128个字符。
    */
   Remark?: string
+}
+
+/**
+ * DescribeSharedSubscriptionGroups返回参数结构体
+ */
+export interface DescribeSharedSubscriptionGroupsResponse {
+  /**
+   * 集群下共享订阅组列表
+   */
+  Data?: Array<SharedGroup>
+  /**
+   * 	查询总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -535,55 +535,59 @@ export interface XMagicSimpleInfo {
  */
 export interface CreateTrialApplicationAndLicenseRequest {
   /**
-   * 应用名
+   * <p>应用名</p>
    */
   AppName: string
   /**
-   * 应用ID
+   * <p>应用ID</p>
    */
   BundleId?: string
   /**
-   * 包名
+   * <p>包名</p>
    */
   PackageName?: string
   /**
-   * 功能 id 数组
+   * <p>鸿蒙包包名</p>
+   */
+  BundleName?: string
+  /**
+   * <p>功能 id 数组</p>
    */
   FeatureIds?: Array<number | bigint>
   /**
-   * 是否要开通优图功能
+   * <p>是否要开通优图功能</p>
    */
   XMagic?: boolean
   /**
-   * 营业执照
+   * <p>营业执照</p>
    */
   CompanyPermit?: string
   /**
-   * 公司类型
+   * <p>公司类型</p>
    */
   CompanyType?: string
   /**
-   * 公司名称
+   * <p>公司名称</p>
    */
   CompanyName?: string
   /**
-   * 要开通的测试功能名称，基础套餐只能有一个
+   * <p>要开通的测试功能名称，基础套餐只能有一个</p>
    */
   PlanList?: Array<string>
   /**
-   * Mac 进程名
+   * <p>Mac 进程名</p>
    */
   MacBundleId?: string
   /**
-   * Windows 进程名
+   * <p>Windows 进程名</p>
    */
   WinProcessName?: string
   /**
-   * 要创建到哪个平台，web、mobile、pc，默认mobile
+   * <p>要创建到哪个平台，web、mobile、pc，默认mobile</p>
    */
   Platform?: string
   /**
-   * 授权域名列表
+   * <p>授权域名列表</p>
    */
   DomainList?: Array<string>
 }
@@ -593,51 +597,55 @@ export interface CreateTrialApplicationAndLicenseRequest {
  */
 export interface CreateApplicationAndBindLicenseRequest {
   /**
-   * 应用名
+   * <p>应用名</p>
    */
   AppName: string
   /**
-   * 应用ID
+   * <p>应用ID</p>
    */
   BundleId?: string
   /**
-   * 包名
+   * <p>包名</p>
    */
   PackageName?: string
   /**
-   * 资源包ID
+   * <p>鸿蒙包包名</p>
+   */
+  BundleName?: string
+  /**
+   * <p>资源包ID</p>
    */
   ResourceIds?: Array<string>
   /**
-   * 营业执照
+   * <p>营业执照</p>
    */
   CompanyPermit?: string
   /**
-   * 公司类型
+   * <p>公司类型</p>
    */
   CompanyType?: string
   /**
-   * 公司名称
+   * <p>公司名称</p>
    */
   CompanyName?: string
   /**
-   * 优图资源id列表
+   * <p>优图资源id列表</p>
    */
   XMagicResourceIds?: Array<string>
   /**
-   * Mac 进程名
+   * <p>Mac 进程名</p>
    */
   MacBundleId?: string
   /**
-   * Windows 进程名
+   * <p>Windows 进程名</p>
    */
   WinProcessName?: string
   /**
-   * 要开通的域名列表
+   * <p>要开通的域名列表</p>
    */
   DomainList?: Array<string>
   /**
-   * 要开通的端，web/mobile/pc
+   * <p>要开通的端，web/mobile/pc</p>
    */
   Platform?: string
 }

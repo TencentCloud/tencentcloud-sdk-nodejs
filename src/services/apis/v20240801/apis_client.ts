@@ -54,6 +54,7 @@ import {
   CreateModelRequest,
   DescribeModelRequest,
   AgentCredentialContentHeaderDTO,
+  SensitiveDataCheckConfigDTO,
   BindMcpSecurityRuleVO,
   McpSecurityRulesVO,
   DeleteAgentAppModelServicesResponse,

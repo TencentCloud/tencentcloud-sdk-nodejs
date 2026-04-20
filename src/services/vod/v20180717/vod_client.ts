@@ -21,6 +21,7 @@ import {
   Canvas,
   ModifySampleSnapshotTemplateResponse,
   AigcVideoOutputConfig,
+  CreateAigcVideoRedrawTaskRequest,
   ModifyWatermarkTemplateRequest,
   DomainCLSTargetInfo,
   SnapshotByTimeOffset2017,
@@ -31,6 +32,7 @@ import {
   ReviewAudioVideoTaskInput,
   DescribeAllClassRequest,
   AigcImageTaskOutput,
+  CreateAigcVideoRedrawTaskResponse,
   DescribeRoundPlaysRequest,
   ReviewInfo,
   WeChatMiniProgramPublishRequest,
@@ -523,6 +525,7 @@ import {
   MosaicInput,
   AIAnalysisTemplateItem,
   AiRecognitionTaskObjectResultItem,
+  DeleteImageProcessingTemplateResponse,
   UrlSignatureAuthPolicy,
   ModifyVodDomainConfigResponse,
   MediaSnapshotByTimeOffsetInfo,
@@ -667,6 +670,7 @@ import {
   UserDefineOcrTextReviewTemplateInfo,
   DescribeVodDomainsResponse,
   AdaptiveStreamTemplate,
+  AigcVideoRedrawOutputConfig,
   TranscodeTaskInput,
   DescribeClientUploadAccelerationUsageDataRequest,
   AigcFaceInfo,
@@ -937,7 +941,7 @@ import {
   RemoveWaterMarkTaskInput,
   FaceConfigureInfo,
   AiRecognitionTaskFaceResultOutput,
-  DeleteImageProcessingTemplateResponse,
+  AigcVideoRedrawTaskInputFileInfo,
   PornImgReviewTemplateInfoForUpdate,
   DescribeProcessImageAsyncTemplatesResponse,
   CreateWatermarkTemplateResponse,
@@ -1911,6 +1915,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改用户自定义转码模板信息。
+   */
+  async ModifyTranscodeTemplate(
+    req: ModifyTranscodeTemplateRequest,
+    cb?: (error: string, rep: ModifyTranscodeTemplateResponse) => void
+  ): Promise<ModifyTranscodeTemplateResponse> {
+    return this.request("ModifyTranscodeTemplate", req, cb)
+  }
+
+  /**
      * 该 API 已经<font color='red'>不再维护</font>，新版播放器签名不再使用播放器配置模板，详细请参考 [播放器签名](https://cloud.tencent.com/document/product/266/45554)。
 删除播放器配置。  
 *注：系统预置播放器配置不允许删除。*
@@ -2426,13 +2440,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改用户自定义转码模板信息。
+   * 该接口用于[生成 AIGC 视频](https://cloud.tencent.com/document/product/266/124474)。<b>接口处于内测阶段，如需使用请[联系我们](https://cloud.tencent.com/online-service?from=sales_sales&source=PRESALE)，接口调用会产生实际费用</b>，请参考点播 [AIGC 生视频计费文档](https://cloud.tencent.com/document/product/266/95125#96b3b59a-f9e1-49e9-966a-bedb70a4bf12)。该功能结算模式为[后付费](https://cloud.tencent.com/document/product/266/2838)，日结客户当天使用将在第二天出账，月结客户将在次月1日统一出上月使用费用。
    */
-  async ModifyTranscodeTemplate(
-    req: ModifyTranscodeTemplateRequest,
-    cb?: (error: string, rep: ModifyTranscodeTemplateResponse) => void
-  ): Promise<ModifyTranscodeTemplateResponse> {
-    return this.request("ModifyTranscodeTemplate", req, cb)
+  async CreateAigcVideoRedrawTask(
+    req: CreateAigcVideoRedrawTaskRequest,
+    cb?: (error: string, rep: CreateAigcVideoRedrawTaskResponse) => void
+  ): Promise<CreateAigcVideoRedrawTaskResponse> {
+    return this.request("CreateAigcVideoRedrawTask", req, cb)
   }
 
   /**

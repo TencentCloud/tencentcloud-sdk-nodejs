@@ -1713,6 +1713,48 @@ export interface CreateLinkResponse {
 }
 
 /**
+ * 视频编码配置
+ */
+export interface VideoEncodingPreset {
+  /**
+   * 配置 ID。
+   */
+  Id?: number
+  /**
+   * 配置名。
+   */
+  Name?: string
+  /**
+   * 封装格式，可选值：
+<li>mp4 ；</li>
+<li>mov 。</li>
+   */
+  Container?: string
+  /**
+   * 是否去除视频数据，可选值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+默认值：0。
+   */
+  RemoveVideo?: number
+  /**
+   * 是否去除音频数据，可选值：
+<li>0：保留；</li>
+<li>1：去除。</li>
+默认值：0。
+   */
+  RemoveAudio?: number
+  /**
+   * 视频编码配置中的视频设置。
+   */
+  VideoSetting?: VideoEncodingPresetVideoSetting
+  /**
+   * 视频编码配置中的音频设置。
+   */
+  AudioSetting?: VideoEncodingPresetAudioSetting
+}
+
+/**
  * ExportVideoByTemplate返回参数结构体
  */
 export interface ExportVideoByTemplateResponse {
@@ -1987,6 +2029,24 @@ export interface ModifyProjectResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ForbidAccount请求参数结构体
+ */
+export interface ForbidAccountRequest {
+  /**
+   * <p>平台 Id，指定访问的平台。关于平台概念，请参见文档 <a href="https://cloud.tencent.com/document/product/1156/43767">平台</a>。</p>
+   */
+  Platform: string
+  /**
+   * <p>用户标识 。</p>
+   */
+  UserId: string
+  /**
+   * <p>操作者。如不填，默认为 <code>cmeid_system</code>，表示平台管理员操作，可以操作任意账户。如果指定操作者，则操作者必须为账户所有者。</p>
+   */
+  Operator?: string
 }
 
 /**
@@ -2519,17 +2579,13 @@ export interface DescribeSharedSpaceResponse {
 }
 
 /**
- * DescribeAccounts返回参数结构体
+ * GenerateVideoSegmentationSchemeByAi返回参数结构体
  */
-export interface DescribeAccountsResponse {
+export interface GenerateVideoSegmentationSchemeByAiResponse {
   /**
-   * 符合搜索条件的记录总数。
+   * 视频智能拆条任务 Id 。
    */
-  TotalCount?: number
-  /**
-   * 账号信息列表。
-   */
-  AccountInfoSet?: Array<AccountInfo>
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3160,37 +3216,27 @@ export interface AddTeamMemberRequest {
 }
 
 /**
- * GrantResourceAuthorization请求参数结构体
+ * ForbidAccount返回参数结构体
  */
-export interface GrantResourceAuthorizationRequest {
+export interface ForbidAccountResponse {
   /**
-   * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Platform: string
+  RequestId?: string
+}
+
+/**
+ * ExportVideoEditProject返回参数结构体
+ */
+export interface ExportVideoEditProjectResponse {
   /**
-   * 资源归属者，个人或者团队。
+   * 任务 Id。
    */
-  Owner: Entity
+  TaskId?: string
   /**
-   * 被授权资源。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Resources: Array<Resource>
-  /**
-   * 被授权目标，个人或者团队。
-   */
-  Authorizees: Array<Entity>
-  /**
-   * 详细授权值。 取值有：
-<li>R：可读，可以浏览媒体，但不能使用该媒体文件（将其添加到 Project），或复制到自己的媒资库中</li>
-<li>X：可用，可以使用该素材（将其添加到 Project），但不能将其复制到自己的媒资库中，意味着被授权者无法将该资源进一步扩散给其他个人或团队。</li>
-<li>C：可复制，既可以使用该素材（将其添加到 Project），也可以将其复制到自己的媒资库中。</li>
-<li>W：可修改、删除媒资。</li>
-   */
-  Permissions: Array<string>
-  /**
-   * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以授权任意归属者的资源。如果指定操作者，则操作者必须对资源拥有写权限。
-   */
-  Operator?: string
+  RequestId?: string
 }
 
 /**
@@ -3621,6 +3667,24 @@ export interface EventContent {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectMediaCastStatusChangedEvent?: ProjectMediaCastStatusChangedEvent
+}
+
+/**
+ * DeleteAccount请求参数结构体
+ */
+export interface DeleteAccountRequest {
+  /**
+   * <p>平台 Id，指定访问的平台。关于平台概念，请参见文档 <a href="https://cloud.tencent.com/document/product/1156/43767">平台</a>。</p>
+   */
+  Platform: string
+  /**
+   * <p>用户标识 。</p>
+   */
+  UserId: string
+  /**
+   * <p>操作者。如不填，默认为 <code>cmeid_system</code>，表示平台管理员操作，可以操作任意账户。如果指定操作者，则操作者必须为账户所有者。</p>
+   */
+  Operator?: string
 }
 
 /**
@@ -4431,13 +4495,17 @@ export interface DescribeClassResponse {
 }
 
 /**
- * GenerateVideoSegmentationSchemeByAi返回参数结构体
+ * DescribeAccounts返回参数结构体
  */
-export interface GenerateVideoSegmentationSchemeByAiResponse {
+export interface DescribeAccountsResponse {
   /**
-   * 视频智能拆条任务 Id 。
+   * 符合搜索条件的记录总数。
    */
-  TaskId?: string
+  TotalCount?: number
+  /**
+   * 账号信息列表。
+   */
+  AccountInfoSet?: Array<AccountInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4562,17 +4630,37 @@ export interface HandleMediaCastProjectRequest {
 }
 
 /**
- * ExportVideoEditProject返回参数结构体
+ * GrantResourceAuthorization请求参数结构体
  */
-export interface ExportVideoEditProjectResponse {
+export interface GrantResourceAuthorizationRequest {
   /**
-   * 任务 Id。
+   * 平台 Id，指定访问的平台。关于平台概念，请参见文档 [平台](https://cloud.tencent.com/document/product/1156/43767)。
    */
-  TaskId?: string
+  Platform: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 资源归属者，个人或者团队。
    */
-  RequestId?: string
+  Owner: Entity
+  /**
+   * 被授权资源。
+   */
+  Resources: Array<Resource>
+  /**
+   * 被授权目标，个人或者团队。
+   */
+  Authorizees: Array<Entity>
+  /**
+   * 详细授权值。 取值有：
+<li>R：可读，可以浏览媒体，但不能使用该媒体文件（将其添加到 Project），或复制到自己的媒资库中</li>
+<li>X：可用，可以使用该素材（将其添加到 Project），但不能将其复制到自己的媒资库中，意味着被授权者无法将该资源进一步扩散给其他个人或团队。</li>
+<li>C：可复制，既可以使用该素材（将其添加到 Project），也可以将其复制到自己的媒资库中。</li>
+<li>W：可修改、删除媒资。</li>
+   */
+  Permissions: Array<string>
+  /**
+   * 操作者。如不填，默认为 `cmeid_system`，表示平台管理员操作，可以授权任意归属者的资源。如果指定操作者，则操作者必须对资源拥有写权限。
+   */
+  Operator?: string
 }
 
 /**
@@ -4724,45 +4812,13 @@ export interface ClassCreatedEvent {
 }
 
 /**
- * 视频编码配置
+ * DeleteAccount返回参数结构体
  */
-export interface VideoEncodingPreset {
+export interface DeleteAccountResponse {
   /**
-   * 配置 ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Id?: number
-  /**
-   * 配置名。
-   */
-  Name?: string
-  /**
-   * 封装格式，可选值：
-<li>mp4 ；</li>
-<li>mov 。</li>
-   */
-  Container?: string
-  /**
-   * 是否去除视频数据，可选值：
-<li>0：保留；</li>
-<li>1：去除。</li>
-默认值：0。
-   */
-  RemoveVideo?: number
-  /**
-   * 是否去除音频数据，可选值：
-<li>0：保留；</li>
-<li>1：去除。</li>
-默认值：0。
-   */
-  RemoveAudio?: number
-  /**
-   * 视频编码配置中的视频设置。
-   */
-  VideoSetting?: VideoEncodingPresetVideoSetting
-  /**
-   * 视频编码配置中的音频设置。
-   */
-  AudioSetting?: VideoEncodingPresetAudioSetting
+  RequestId?: string
 }
 
 /**
