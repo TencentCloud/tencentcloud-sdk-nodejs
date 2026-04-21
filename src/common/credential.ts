@@ -1,5 +1,6 @@
 import { ClientConfig, Credential, CredentialResult, DynamicCredential } from "./interface"
 import fs from "fs"
+import { promisify } from "util"
 import path from "path"
 import { homedir } from "os"
 import { parse } from "ini"
@@ -187,7 +188,7 @@ export class OIDCRoleArnCredential implements DynamicCredential {
     }
   }
 
-  private initFromTke() {
+  private async initFromTke() {
     const region = process.env.TKE_REGION
     if (!region) {
       throw new Error("env TKE_REGION not exist")
@@ -204,7 +205,7 @@ export class OIDCRoleArnCredential implements DynamicCredential {
     }
     let wbIdentityToken: string
     try {
-      wbIdentityToken = fs.readFileSync(tokenFile).toString()
+      wbIdentityToken = (await promisify(fs.readFile)(tokenFile)).toString()
     } catch (error) {
       throw new Error(`failed to read token file: ${(error as any).message}`)
     }
@@ -226,7 +227,7 @@ export class OIDCRoleArnCredential implements DynamicCredential {
   protected async getCredentialWithStsAssumeRoleWithWebIdentity(): Promise<CredentialResult> {
     try {
       if (this.isTke) {
-        this.initFromTke()
+        await this.initFromTke()
       }
 
       const { endpoint, version, action, region, clientConfig, assumeRoleWithWebIdentityParams } =
@@ -235,7 +236,9 @@ export class OIDCRoleArnCredential implements DynamicCredential {
         region: region,
         ...clientConfig,
       })
-      const result = await client.request(action, assumeRoleWithWebIdentityParams)
+      const result = await client.request(action, assumeRoleWithWebIdentityParams, {
+        skipSign: true
+      })
 
       return {
         TmpSecretId: result.Credentials.TmpSecretId,

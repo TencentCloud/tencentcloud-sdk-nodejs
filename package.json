@@ -36,7 +36,7 @@
     "form-data": "^3.0.4",
     "get-stream": "^6.0.0",
     "https-proxy-agent": "^5.0.0",
-    "ini": "^5.0.0",
+    "ini": "^2.0.0",
     "is-stream": "^2.0.0",
     "json-bigint": "^1.0.0",
     "node-fetch": "^2.2.0",

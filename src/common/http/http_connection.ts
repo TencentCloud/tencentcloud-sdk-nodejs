@@ -69,6 +69,7 @@ export class HttpConnection {
     agent,
     proxy,
     signal,
+    skipSign = false,
   }: {
     method: string
     url: string
@@ -88,6 +89,7 @@ export class HttpConnection {
     agent?: Agent
     proxy?: string
     signal?: AbortSignal
+    skipSign?: boolean
   }): Promise<Response> {
     // Convert readStream to Buffer to calculate the hash of the entire body
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -155,20 +157,24 @@ export class HttpConnection {
       config.headers = Object.assign({}, config.headers, form.getHeaders())
     }
 
-    const signature = Sign.sign3({
-      method,
-      url,
-      payload,
-      timestamp,
-      service,
-      secretId,
-      secretKey,
-      multipart,
-      boundary: form ? form.getBoundary() : undefined,
-      headers: config.headers,
-    })
-
-    config.headers["Authorization"] = signature
+    if (skipSign) {
+      config.headers["Authorization"] = "SKIP"
+    } else {
+      const signature = Sign.sign3({
+        method,
+        url,
+        payload,
+        timestamp,
+        service,
+        secretId,
+        secretKey,
+        multipart,
+        boundary: form ? form.getBoundary() : undefined,
+        headers: config.headers,
+      })
+  
+      config.headers["Authorization"] = signature
+    }
 
     return await fetch(url, config)
   }

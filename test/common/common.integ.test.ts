@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach, beforeAll, afterAll } from "vitest"
-import { AbstractClient } from "common/abstract_client"
+import { AbstractClient, RequestOptions } from "common/abstract_client"
 import { SSEResponseModel } from "common/sse_response_model"
 import TencentCloudSDKHttpException from "common/exception/tencent_cloud_sdk_exception"
 import fetch from "common/http/fetch"
@@ -65,7 +65,7 @@ describe("Common Module Integration Tests", () => {
         super(endpoint, version, clientConfig)
       }
 
-      async describeInstances(req: MockParams, cb?: (error: string, rep: MockResponse) => void) {
+      async describeInstances(req: MockParams, cb?: ((error: string, rep: MockResponse) => void) | RequestOptions) {
         return this.request(action, req, cb)
       }
 
@@ -123,6 +123,33 @@ describe("Common Module Integration Tests", () => {
       expect(mockCalls.body).toBeInstanceOf(FormData)
       expect(result).toEqual(mockResponse.Response)
     })
+
+    it("should handle skipSign option and set Authorization header to SKIP", async () => {
+      mockFetch.mockResolvedValue({
+        ...mockResolvedValue,
+        json: vi.fn().mockResolvedValue(mockResponse),
+      })
+
+      const client = new TestClient({
+        credential: mockCredential,
+      })
+
+      const result = await client.describeInstances(mockParams, { skipSign: true })
+
+      expect(mockFetch).toHaveBeenCalledWith(
+        expect.stringContaining(endpoint),
+        expect.objectContaining({
+          method: "POST",
+          headers: expect.objectContaining({
+            Host: expect.stringContaining(endpoint),
+            Authorization: "SKIP",
+          }),
+        })
+      )
+      
+      expect(result).toEqual(mockResponse.Response)
+    })
+
 
     it("should handle API error responses", async () => {
       const mockErrorResponse = {

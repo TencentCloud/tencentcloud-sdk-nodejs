@@ -373,7 +373,7 @@ describe('OIDCRoleArnCredential', () => {
         credential: clientConfig.credential
       })
     )
-    expect(mockClientInstance.request).toHaveBeenCalledWith('AssumeRoleWithWebIdentity', assumeRoleParams)
+    expect(mockClientInstance.request).toHaveBeenCalledWith('AssumeRoleWithWebIdentity', assumeRoleParams, { skipSign: true })
   })
 
   it('should initialize from TKE environment variables', async () => {
@@ -383,8 +383,11 @@ describe('OIDCRoleArnCredential', () => {
     process.env.TKE_WEB_IDENTITY_TOKEN_FILE = '/tmp/token'
     process.env.TKE_ROLE_ARN = 'arn:aws:iam::123456789012:role/tke-role'
 
-    // Mock file system
-    mockedFs.readFileSync.mockReturnValue('tke-web-identity-token')
+    // Mock file system 
+    mockedFs.readFile.mockImplementation((...args: any[]) => {
+      const cb = args[args.length - 1]
+      cb(null, Buffer.from('tke-web-identity-token'))
+    })
 
     const mockOidcResponse = {
       Credentials: {
@@ -405,8 +408,8 @@ describe('OIDCRoleArnCredential', () => {
     expect(credential.secretKey).toBe('tke-secret-key')
     expect(credential.token).toBe('tke-token')
     
-    // Verify file was read
-    expect(mockedFs.readFileSync).toHaveBeenCalledWith('/tmp/token')
+    // Verify file
+    expect(mockedFs.readFile).toHaveBeenCalledWith('/tmp/token', expect.any(Function))
     
     // Verify CommonClient was called with TKE parameters
     expect(mockClientInstance.request).toHaveBeenCalledWith(
@@ -415,7 +418,8 @@ describe('OIDCRoleArnCredential', () => {
         RoleArn: 'arn:aws:iam::123456789012:role/tke-role',
         WebIdentityToken: 'tke-web-identity-token',
         ProviderId: 'tke-provider'
-      })
+      }),
+      { skipSign: true }
     )
   })
 
@@ -553,8 +557,11 @@ describe('DefaultCredentialProvider', () => {
     process.env.TKE_WEB_IDENTITY_TOKEN_FILE = '/tmp/token'
     process.env.TKE_ROLE_ARN = 'arn:aws:iam::123456789012:role/tke-role'
 
-    // Mock file system for token file
-    mockedFs.readFileSync.mockReturnValue('tke-web-identity-token')
+    // Mock file system for token file - initFromTke uses promisify(fs.readFile)
+    mockedFs.readFile.mockImplementation((...args: any[]) => {
+      const cb = args[args.length - 1]
+      cb(null, Buffer.from('tke-web-identity-token'))
+    })
 
     // Create a mock client instance for this test
     const mockClientInstance: any = {

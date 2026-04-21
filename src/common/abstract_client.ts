@@ -32,6 +32,12 @@ export interface RequestOptions extends Partial<Pick<HttpProfile, "headers">> {
    * Abort request signal
    */
   signal?: AbortSignal
+
+  /**
+   * Set Authorization with SKIP
+   * @default false
+   */
+  skipSign?: boolean;
 }
 
 interface RequestData {
@@ -349,6 +355,7 @@ export class AbstractClient {
         agent: this.profile.httpProfile.agent,
         proxy: this.profile.httpProfile.proxy,
         signal: options.signal,
+        skipSign: options.skipSign,
       })
     } catch (e) {
       throw new TencentCloudSDKHttpException((e as any).message, "", traceId)

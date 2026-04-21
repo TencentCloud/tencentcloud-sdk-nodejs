@@ -7,5 +7,5 @@ async function getCredential() {
 
   // 凭证链
   const defaultCredentialProvider = new DefaultCredentialProvider()
-  credential = await defaultCredentialProvider()
+  credential = await defaultCredentialProvider.getCredential()
 }
