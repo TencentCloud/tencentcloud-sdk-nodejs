@@ -58,6 +58,16 @@ it("bi.v20220105.CreateDatasource", async function () {
     }
 })
 
+it("bi.v20220105.DescribeUserGroupTreeList", async function () {
+    try {
+       const data = await client.DescribeUserGroupTreeList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bi.v20220105.CreatePermissionRanks", async function () {
     try {
        const data = await client.CreatePermissionRanks({})
@@ -81,6 +91,16 @@ it("bi.v20220105.DescribeProjectInfo", async function () {
 it("bi.v20220105.CreateProject", async function () {
     try {
        const data = await client.CreateProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.DeleteUserGroupMember", async function () {
+    try {
+       const data = await client.DeleteUserGroupMember({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +138,19 @@ it("bi.v20220105.ModifyUserRole", async function () {
     }
 })
 
-it("bi.v20220105.ExportScreenPage", async function () {
+it("bi.v20220105.DescribeResourceUserGroupPageList", async function () {
     try {
-       const data = await client.ExportScreenPage({})
+       const data = await client.DescribeResourceUserGroupPageList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.DeleteUserGroup", async function () {
+    try {
+       const data = await client.DeleteUserGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -131,6 +161,16 @@ it("bi.v20220105.ExportScreenPage", async function () {
 it("bi.v20220105.CreateEmbedToken", async function () {
     try {
        const data = await client.CreateEmbedToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.DescribeUserGroupInfo", async function () {
+    try {
+       const data = await client.DescribeUserGroupInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,6 +208,16 @@ it("bi.v20220105.DeleteUserRole", async function () {
     }
 })
 
+it("bi.v20220105.ModifyUserGroup", async function () {
+    try {
+       const data = await client.ModifyUserGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bi.v20220105.ModifyProject", async function () {
     try {
        const data = await client.ModifyProject({})
@@ -188,6 +238,16 @@ it("bi.v20220105.DescribeUserRoleList", async function () {
     }
 })
 
+it("bi.v20220105.CreateUserGroup", async function () {
+    try {
+       const data = await client.CreateUserGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bi.v20220105.DescribePageWidgetList", async function () {
     try {
        const data = await client.DescribePageWidgetList({})
@@ -198,9 +258,49 @@ it("bi.v20220105.DescribePageWidgetList", async function () {
     }
 })
 
+it("bi.v20220105.ModifyUserRoleProject", async function () {
+    try {
+       const data = await client.ModifyUserRoleProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.ModifyUserDetailInfo", async function () {
+    try {
+       const data = await client.ModifyUserDetailInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.CreateUserGroupMember", async function () {
+    try {
+       const data = await client.CreateUserGroupMember({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bi.v20220105.DescribeUserRoleProjectList", async function () {
     try {
        const data = await client.DescribeUserRoleProjectList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.QueryUserGroupMember", async function () {
+    try {
+       const data = await client.QueryUserGroupMember({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -221,6 +321,16 @@ it("bi.v20220105.ModifyDatasourceCloud", async function () {
 it("bi.v20220105.ClearEmbedToken", async function () {
     try {
        const data = await client.ClearEmbedToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.DescribeUserGroupMemberList", async function () {
+    try {
+       const data = await client.DescribeUserGroupMemberList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,6 +388,26 @@ it("bi.v20220105.DescribeUserProjectList", async function () {
     }
 })
 
+it("bi.v20220105.ModifyResourceUserGroupResource", async function () {
+    try {
+       const data = await client.ModifyResourceUserGroupResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.ExportScreenPage", async function () {
+    try {
+       const data = await client.ExportScreenPage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bi.v20220105.DeleteProject", async function () {
     try {
        const data = await client.DeleteProject({})
@@ -288,9 +418,9 @@ it("bi.v20220105.DeleteProject", async function () {
     }
 })
 
-it("bi.v20220105.ModifyUserRoleProject", async function () {
+it("bi.v20220105.ModifyResourceUserGroup", async function () {
     try {
-       const data = await client.ModifyUserRoleProject({})
+       const data = await client.ModifyResourceUserGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

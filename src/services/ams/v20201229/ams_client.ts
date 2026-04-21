@@ -44,6 +44,7 @@ import {
   MoanResult,
   Position,
   CancelTaskResponse,
+  AIGCRecognitionResult,
   BucketInfo,
   AudioResultDetailTextResult,
   SpeakerResults,

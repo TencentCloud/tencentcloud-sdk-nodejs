@@ -1,3 +1,9 @@
+## [4.1.219](https://github.com/tencentcloud/tencentcloud-sdk-nodejs/compare/4.1.218...4.1.219) (2026-04-21)
+
+### Features
+
+* downgrade the dependencie ini version ([cbd1538](https://github.com/tencentcloud/tencentcloud-sdk-nodejs/commit/cbd1538733282b4ccb7ec3541f5267293cf44f28))
+* support skipSign option ([1ca2bee](https://github.com/tencentcloud/tencentcloud-sdk-nodejs/commit/1ca2beeae8e826d6f5d990b53eff56ffb06c7234))
 ## [4.1.214](https://github.com/tencentcloud/tencentcloud-sdk-nodejs/compare/4.1.213...4.1.214) (2026-04-14)
 
 ### Features

@@ -114,6 +114,20 @@ success 成功
 }
 
 /**
+ * NAT集群模式开关信息
+ */
+export interface NatClusterInfo {
+  /**
+   * <p>nat网关ID</p>
+   */
+  NatInsId?: string
+  /**
+   * <p>nat网关名称</p>
+   */
+  NatInsName?: string
+}
+
+/**
  * DescribeNDRAssetIdentificationList返回参数结构体
  */
 export interface DescribeNDRAssetIdentificationListResponse {
@@ -1013,84 +1027,87 @@ export interface LogItems {
  */
 export interface ClusterSwitchDetail {
   /**
-   * 实例对象可以是ccnid类型:ccn-ad21xuds形式;nat网关类型:nat-da12daxd形式;ip类型:1.1.1.1形式等
+   * <p>实例对象可以是ccnid类型:ccn-ad21xuds形式;nat网关类型:nat-da12daxd形式;ip类型:1.1.1.1形式等</p>
    */
   InsObj?: string
   /**
-   * 实例对象名称
+   * <p>实例对象名称</p>
    */
   ObjName?: string
   /**
-   * 防火墙类型，ew：vpc间防火墙；nat：nat防火墙；border：互联网边界防火墙
+   * <p>防火墙类型，ew：vpc间防火墙；nat：nat防火墙；border：互联网边界防火墙</p>
    */
   FwType?: string
   /**
-   * 资产类型，ccn：ccn实例类型；nat：nat网关类型
+   * <p>资产类型，ccn：ccn实例类型；nat：nat网关类型</p>
    */
   AssetType?: string
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region?: string
   /**
-   * 开关状态
-0 : 关闭
-1 : 开启
-2 : 开启中
-3 : 关闭中
-4 : 异常
+   * <p>开关状态<br>0 : 关闭<br>1 : 开启<br>2 : 开启中<br>3 : 关闭中<br>4 : 异常</p>
    */
   Status?: number
   /**
-   * 开关接入模式，1：自动接入；2，手动接入，0：未选择
+   * <p>开关接入模式，1：自动接入；2，手动接入，0：未选择</p>
    */
   SwitchMode?: number
   /**
-   * 实例对象是否处于非集群接入场景（主备模式）
+   * <p>实例对象是否处于非集群接入场景（主备模式）</p>
    */
   NonCluster?: number
   /**
-   * ip版本，0：ipv4；1：ipv6
+   * <p>ip版本，0：ipv4；1：ipv6</p>
    */
   IpVersion?: number
   /**
-   * 关联实例
+   * <p>关联实例</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AttachIns?: Array<AttachInsInfo>
   /**
-   * 引流私有网络端点信息
+   * <p>引流私有网络端点信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Endpoints?: Array<EndpointInfo>
   /**
-   * 入侵防护模式,0:观察;1:拦截;2:严格;3:关闭
+   * <p>入侵防护模式,0:观察;1:拦截;2:严格;3:关闭</p>
    */
   Idpsaction?: number
   /**
-   * //透明模式开关,0:未开启,1:已开启
+   * <p>//透明模式开关,0:未开启,1:已开启</p>
    */
   TransEnable?: number
   /**
-   * 开关状态 0关闭 1开启
+   * <p>开关状态 0关闭 1开启</p>
    */
   Enable?: number
   /**
-   * 路由模式：0：多路由表，1：策略路由
+   * <p>路由模式：0：多路由表，1：策略路由</p>
    */
   RoutingMode?: number
   /**
-   * 是否跨租户开关 1是 0不是
+   * <p>是否跨租户开关 1是 0不是</p>
    */
   IsPeer?: number
   /**
-   * 跨租户appid
+   * <p>跨租户appid</p>
    */
   PeerAppid?: string
   /**
-   * 跨租户操作状态 1不允许操作 0可以
+   * <p>跨租户操作状态 1不允许操作 0可以</p>
    */
   PeerStatus?: number
+  /**
+   * <p>Bypass状态</p>
+   */
+  Bypass?: number
+  /**
+   * <p>防火墙开关操作时的进度状态：</p><p>// 开启 — 自动模式（3步）<br>&quot;AUTO_OPEN_ORCHESTRATING&quot; // 步骤1: 预编排策略路由<br>&quot;AUTO_OPEN_CREATING_RESOURCES&quot; // 步骤2: 创建引流网络和资源<br>&quot;AUTO_OPEN_PUSHING_ROUTES&quot; // 步骤3: 创建策略路由</p><p>// 开启 — 手动模式（1步）<br>&quot;MANUAL_OPEN_CREATING_RESOURCES&quot; // 步骤1: 创建引流网络和资源</p><p>// 关闭 — 自动模式（2步）<br>&quot;AUTO_CLOSE_DELETING_ROUTES&quot; // 步骤1: 删除策略路由<br>&quot;AUTO_CLOSE_DELETING_RESOURCES&quot; // 步骤2: 删除引流网络和资源<br>// 关闭 — 手动模式（1步）<br>&quot;MANUAL_CLOSE_DELETING_RESOURCES&quot; // 步骤1: 删除引流网络和资源</p><p>// 修改 — 自动模式（3步）<br>&quot;AUTO_MODIFY_ORCHESTRATING&quot; // 步骤1: 预编排策略路由<br>&quot;AUTO_MODIFY_DELETING_ROUTES&quot; // 步骤2: 删除旧策略路由<br>&quot;AUTO_MODIFY_PUSHING_ROUTES&quot; // 步骤3: 创建新策略路由</p><p>// 修改 — 手动模式（1步，仅 VPC 防火墙存在手动模式修改）<br>&quot;MANUAL_MODIFY_UPDATING_RESOURCES&quot; // 步骤1: 更新引流网络和资源</p>
+   */
+  Progress?: string
 }
 
 /**
@@ -3312,6 +3329,24 @@ export interface DescribeAcListsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 开关开启错误码数据
+ */
+export interface SwitchFailInfo {
+  /**
+   * 自增唯一ID
+   */
+  Id?: number
+  /**
+   * 开关名称
+   */
+  Name?: string
+  /**
+   * 防火墙开关变动状态，小于0
+   */
+  Status?: number
 }
 
 /**
@@ -6339,9 +6374,13 @@ export interface RemoveNatAcRuleRequest {
  */
 export interface DescribeNatFwInstanceResponse {
   /**
-   * 实例数组
+   * <p>实例数组</p>
    */
   NatinsLst?: Array<NatFwInstance>
+  /**
+   * <p>nat ccn集群防火墙列表</p>
+   */
+  NatClusterLst?: Array<NatClusterInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8237,6 +8276,10 @@ export interface DescribeClusterVpcFwSwitchsResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Array<ClusterSwitchDetail>
+  /**
+   * 开关开启失败列表
+   */
+  FailData?: Array<SwitchFailInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -50,6 +50,7 @@ import {
   MasterNodeInfo,
   DiagnoseInstanceRequest,
   Namespaces,
+  RequestInstancesByGetResponse,
   LogstashBindedES,
   UpdateDiagnoseSettingsRequest,
   DeleteServerlessInstanceResponse,
@@ -91,7 +92,7 @@ import {
   CollectorTarget,
   DeleteServerlessSpaceUserResponse,
   DiData,
-  UpgradeLicenseResponse,
+  RequestInstancesByGetRequest,
   KeyValue,
   QueryIpTraceLogResponse,
   LogstashExtendedFile,
@@ -126,6 +127,7 @@ import {
   ModifyAutoBackUpStrategyResponse,
   DescribeIndexListResponse,
   DescribeUserCosSnapshotListRequest,
+  UpgradeLicenseResponse,
   DescribeLogstashInstanceOperationsRequest,
   DescribeInstancePluginInfo,
   CreateLogstashInstanceResponse,
@@ -159,6 +161,7 @@ import {
   InstanceInfo,
   CollectorConfigInfo,
   DeleteIndexResponse,
+  RequestInstancesRequest,
   DeleteServerlessSpaceUserRequest,
   RestartNodesResponse,
   DescribeInstancesRequest,
@@ -168,6 +171,7 @@ import {
   OutboundPublicAcl,
   DataStreamInfo,
   ServerlessIndexMetaField,
+  RequestInstancesResponse,
   GetRequestTargetNodeTypesRequest,
   ModifyEsVipSecurityGroupRequest,
   ProcessDetail,
@@ -529,13 +533,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新ES集群IP溯源状态
+   * 请求集群实例
    */
-  async UpdateIpTraceStatus(
-    req: UpdateIpTraceStatusRequest,
-    cb?: (error: string, rep: UpdateIpTraceStatusResponse) => void
-  ): Promise<UpdateIpTraceStatusResponse> {
-    return this.request("UpdateIpTraceStatus", req, cb)
+  async RequestInstances(
+    req?: RequestInstancesRequest,
+    cb?: (error: string, rep: RequestInstancesResponse) => void
+  ): Promise<RequestInstancesResponse> {
+    return this.request("RequestInstances", req, cb)
   }
 
   /**
@@ -747,6 +751,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryIpTraceLogResponse) => void
   ): Promise<QueryIpTraceLogResponse> {
     return this.request("QueryIpTraceLog", req, cb)
+  }
+
+  /**
+   * GET请求集群实例
+   */
+  async RequestInstancesByGet(
+    req?: RequestInstancesByGetRequest,
+    cb?: (error: string, rep: RequestInstancesByGetResponse) => void
+  ): Promise<RequestInstancesByGetResponse> {
+    return this.request("RequestInstancesByGet", req, cb)
   }
 
   /**
@@ -967,6 +981,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLogstashInstanceOperationsResponse) => void
   ): Promise<DescribeLogstashInstanceOperationsResponse> {
     return this.request("DescribeLogstashInstanceOperations", req, cb)
+  }
+
+  /**
+   * 更新ES集群IP溯源状态
+   */
+  async UpdateIpTraceStatus(
+    req: UpdateIpTraceStatusRequest,
+    cb?: (error: string, rep: UpdateIpTraceStatusResponse) => void
+  ): Promise<UpdateIpTraceStatusResponse> {
+    return this.request("UpdateIpTraceStatus", req, cb)
   }
 
   /**

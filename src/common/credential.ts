@@ -237,7 +237,7 @@ export class OIDCRoleArnCredential implements DynamicCredential {
         ...clientConfig,
       })
       const result = await client.request(action, assumeRoleWithWebIdentityParams, {
-        skipSign: true
+        skipSign: true,
       })
 
       return {

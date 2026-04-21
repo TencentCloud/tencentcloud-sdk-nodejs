@@ -879,6 +879,16 @@ export interface Namespaces {
 }
 
 /**
+ * RequestInstancesByGet返回参数结构体
+ */
+export interface RequestInstancesByGetResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Logstash绑定的ES集群信息
  */
 export interface LogstashBindedES {
@@ -1991,19 +2001,9 @@ export interface DiData {
 }
 
 /**
- * UpgradeLicense返回参数结构体
+ * RequestInstancesByGet请求参数结构体
  */
-export interface UpgradeLicenseResponse {
-  /**
-   * 订单号
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DealName?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type RequestInstancesByGetRequest = null
 
 /**
  * OperationDetail使用此结构的数组描述新旧配置
@@ -2654,29 +2654,33 @@ export interface CreateCollectorResponse {
  */
 export interface DeleteIndexRequest {
   /**
-   * ES集群ID
+   * <p>ES集群ID</p>
    */
   InstanceId: string
   /**
-   * 删除的索引类型。auto：自治索引；normal：普通索引
+   * <p>删除的索引类型。auto：自治索引；normal：普通索引</p>
    */
   IndexType: string
   /**
-   * 删除的索引名
+   * <p>删除的索引名</p>
    */
   IndexName: string
   /**
-   * 集群访问用户名
+   * <p>集群访问用户名</p>
    */
   Username?: string
   /**
-   * 集群访问密码
+   * <p>集群访问密码</p>
    */
   Password?: string
   /**
-   * 后备索引名
+   * <p>后备索引名</p>
    */
   BackingIndexName?: string
+  /**
+   * <p>索引生命阶段</p>
+   */
+  IndexPhrase?: string
 }
 
 /**
@@ -2739,6 +2743,21 @@ export interface DescribeUserCosSnapshotListRequest {
    * 云上集群迁移集群名
    */
   ClusterInstanceId?: string
+}
+
+/**
+ * UpgradeLicense返回参数结构体
+ */
+export interface UpgradeLicenseResponse {
+  /**
+   * 订单号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DealName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4340,6 +4359,11 @@ export interface DeleteIndexResponse {
 }
 
 /**
+ * RequestInstances请求参数结构体
+ */
+export type RequestInstancesRequest = null
+
+/**
  * DeleteServerlessSpaceUser请求参数结构体
  */
 export interface DeleteServerlessSpaceUserRequest {
@@ -4641,6 +4665,16 @@ export interface ServerlessIndexMetaField {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexTraffic?: number
+}
+
+/**
+ * RequestInstances返回参数结构体
+ */
+export interface RequestInstancesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

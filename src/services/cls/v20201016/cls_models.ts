@@ -10941,6 +10941,10 @@ export interface OpenClawServiceRequest {
    * <p>标签类型</p><p>枚举值：</p><ul><li>OpenClaw： OpenClaw类型</li><li>ClawPro： ClawPro类型</li></ul>
    */
   Tag: string
+  /**
+   * <p>是否创建 trace 主题，默认为 false</p><p>枚举值：</p><ul><li>true： 创建trace 主题</li><li>false： 不创建trace 主题</li></ul>
+   */
+  EnableTrace?: boolean
 }
 
 /**
@@ -12735,6 +12739,14 @@ export interface OpenClawServiceResponse {
    * <p>采集配置名称。会话日志</p>
    */
   SessionLogConfigName?: string
+  /**
+   * <p>trace 主题 ID</p>
+   */
+  TraceTopicId?: string
+  /**
+   * <p>trace 主题名称</p>
+   */
+  TraceTopicName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -20,32 +20,44 @@ import { ClientConfig } from "../../../common/interface"
 import {
   PageScreenVO,
   DeleteProjectRequest,
+  ModifyUserDetailInfoRequest,
+  DescribeUserGroupTreeListRequest,
   Role,
   ExportScreenPageResponse,
   ProjectConfigResult,
+  ModifyUserGroupResponse,
   DeleteUserRoleResponse,
   DescribeUserProjectListRequest,
   CorpUserListData,
+  UserGroupUpdateDTO,
   RowColumnConfig,
   DescribeProjectListResponse,
+  QueryUserGroupMemberRequest,
   PageScreenListVO,
+  DeleteUserGroupMemberResponse,
+  UserResourceDTO,
   ModifyDatasourceCloudResponse,
   CreateUserRoleResponse,
   ApplyEmbedTokenInfo,
+  ModifyResourceUserGroupResponse,
   Project,
-  PermissionComponent,
-  RowColumnStatus,
-  WidgetVO,
+  ExportScreenPageRequest,
+  DeleteUserGroupMemberRequest,
   CreateUserRoleProjectRequest,
+  WidgetVO,
+  RowColumnStatus,
   DescribePermissionStatusInfoRequest,
   CreateDatasourceResponse,
+  CreateUserGroupRequest,
   DeleteDatasourceResponse,
   CreateProjectRequest,
-  DescribePermissionStatusInfoResponse,
+  UserRoleListDataRoleInfo,
   ApplyEmbedIntervalRequest,
   DescribePermissionRoleInfoResponse,
   CreatePermissionRanksRequest,
+  ModifyResourceUserGroupResourceRequest,
   DescribeProjectInfoRequest,
+  DescribeResourceUserGroupPageListResponse,
   ModifyUserRoleRequest,
   CreateUserRoleRequest,
   CreateEmbedTokenRequest,
@@ -54,13 +66,20 @@ import {
   CreateProjectResponse,
   DescribeProjectInfoResponse,
   DeleteProjectResponse,
+  DescribeUserGroupInfoResponse,
   ApplyEmbedIntervalResponse,
+  ResourceItem,
+  CreateUserGroupMemberResponse,
   RankInfo,
+  DescribeUserGroupTreeListResponse,
   UserInfo,
   UserIdAndUserName,
   DescribeUserRoleListResponse,
   RowColumnTagValue,
-  UserRoleListDataRoleInfo,
+  DescribeResourceUserGroupPageListRequest,
+  ResourceListDTO,
+  DescribePermissionStatusInfoResponse,
+  UserGroupTreeNodeDTO,
   EmbedTokenInfo,
   DatasourceInfoData,
   DescribePageWidgetListRequest,
@@ -68,6 +87,8 @@ import {
   BaseStateAction,
   Data,
   DescribeUserRoleProjectListResponse,
+  QueryUserGroupMemberResponse,
+  ModifyUserGroupRequest,
   DeleteUserRoleRequest,
   UserRoleListData,
   CreateUserRoleProjectResponse,
@@ -77,36 +98,51 @@ import {
   DeleteUserRoleProjectResponse,
   DescribePermissionRoleInfoRequest,
   CreateDatasourceCloudRequest,
+  ModifyResourceUserGroupRequest,
   IdDTO,
   ModifyDatasourceCloudRequest,
+  DescribeDatasourceListRequest,
   DataId,
   ClearEmbedTokenRequest,
+  UserVO,
+  DescribeUserGroupMemberListResponse,
   DescribeUserProjectListResponse,
   CreateDatasourceRequest,
   DeleteDatasourceRequest,
   WidgetListVO,
   ModifyDatasourceResponse,
   DescribePageWidgetListResponse,
+  UserGroupPageTreeVO,
   CreateDatasourceCloudResponse,
   ProjectConfigList,
   PermissionGroup,
   UserGroupDTO,
+  CreateUserGroupResponse,
+  DescribeUserGroupInfoRequest,
+  CreateUserGroupMemberRequest,
   ModifyProjectResponse,
   ModifyUserRoleResponse,
+  ModifyUserDetailInfoResponse,
   DescribePermissionRanksInfoResponse,
   ModifyUserRoleProjectResponse,
   ModifyProjectRequest,
   ModifyUserRoleProjectRequest,
+  ModifyResourceUserGroupResourceResponse,
   DescribeProjectListRequest,
   UserRoleListDataUserRoleInfo,
+  DeleteUserGroupResponse,
+  UserGroupTreeVO,
   DatasourceInfo,
+  ResourceDTO,
   ProjectListData,
   CreateEmbedTokenResponse,
-  DescribeDatasourceListRequest,
+  DeleteUserGroupRequest,
+  ResourceTagValue,
   DescribePermissionRanksInfoRequest,
+  DescribeUserGroupMemberListRequest,
   DescribeDatasourceListResponse,
   ErrorInfo,
-  ExportScreenPageRequest,
+  PermissionComponent,
 } from "./bi_models"
 
 /**
@@ -159,6 +195,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用户组数查询接口
+   */
+  async DescribeUserGroupTreeList(
+    req: DescribeUserGroupTreeListRequest,
+    cb?: (error: string, rep: DescribeUserGroupTreeListResponse) => void
+  ): Promise<DescribeUserGroupTreeListResponse> {
+    return this.request("DescribeUserGroupTreeList", req, cb)
+  }
+
+  /**
    * 创建行列权限
    */
   async CreatePermissionRanks(
@@ -186,6 +232,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateProjectResponse) => void
   ): Promise<CreateProjectResponse> {
     return this.request("CreateProject", req, cb)
+  }
+
+  /**
+   * DeleteUserGroupMember
+   */
+  async DeleteUserGroupMember(
+    req: DeleteUserGroupMemberRequest,
+    cb?: (error: string, rep: DeleteUserGroupMemberResponse) => void
+  ): Promise<DeleteUserGroupMemberResponse> {
+    return this.request("DeleteUserGroupMember", req, cb)
   }
 
   /**
@@ -219,13 +275,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 页面截图导出
+   * 用户组资源权限查询接口
    */
-  async ExportScreenPage(
-    req: ExportScreenPageRequest,
-    cb?: (error: string, rep: ExportScreenPageResponse) => void
-  ): Promise<ExportScreenPageResponse> {
-    return this.request("ExportScreenPage", req, cb)
+  async DescribeResourceUserGroupPageList(
+    req: DescribeResourceUserGroupPageListRequest,
+    cb?: (error: string, rep: DescribeResourceUserGroupPageListResponse) => void
+  ): Promise<DescribeResourceUserGroupPageListResponse> {
+    return this.request("DescribeResourceUserGroupPageList", req, cb)
+  }
+
+  /**
+   * DeleteUserGroup
+   */
+  async DeleteUserGroup(
+    req: DeleteUserGroupRequest,
+    cb?: (error: string, rep: DeleteUserGroupResponse) => void
+  ): Promise<DeleteUserGroupResponse> {
+    return this.request("DeleteUserGroup", req, cb)
   }
 
   /**
@@ -236,6 +302,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateEmbedTokenResponse) => void
   ): Promise<CreateEmbedTokenResponse> {
     return this.request("CreateEmbedToken", req, cb)
+  }
+
+  /**
+   * DescribeUserGroupInfo
+   */
+  async DescribeUserGroupInfo(
+    req: DescribeUserGroupInfoRequest,
+    cb?: (error: string, rep: DescribeUserGroupInfoResponse) => void
+  ): Promise<DescribeUserGroupInfoResponse> {
+    return this.request("DescribeUserGroupInfo", req, cb)
   }
 
   /**
@@ -269,6 +345,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * ModifyUserGroup
+   */
+  async ModifyUserGroup(
+    req: ModifyUserGroupRequest,
+    cb?: (error: string, rep: ModifyUserGroupResponse) => void
+  ): Promise<ModifyUserGroupResponse> {
+    return this.request("ModifyUserGroup", req, cb)
+  }
+
+  /**
    * 修改项目信息
    */
   async ModifyProject(
@@ -289,6 +375,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * CreateUserGroup
+   */
+  async CreateUserGroup(
+    req: CreateUserGroupRequest,
+    cb?: (error: string, rep: CreateUserGroupResponse) => void
+  ): Promise<CreateUserGroupResponse> {
+    return this.request("CreateUserGroup", req, cb)
+  }
+
+  /**
    * 查询页面组件信息
    */
   async DescribePageWidgetList(
@@ -299,6 +395,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 项目-修改用户角色信息
+   */
+  async ModifyUserRoleProject(
+    req: ModifyUserRoleProjectRequest,
+    cb?: (error: string, rep: ModifyUserRoleProjectResponse) => void
+  ): Promise<ModifyUserRoleProjectResponse> {
+    return this.request("ModifyUserRoleProject", req, cb)
+  }
+
+  /**
+   * 修改用户角色信息
+   */
+  async ModifyUserDetailInfo(
+    req: ModifyUserDetailInfoRequest,
+    cb?: (error: string, rep: ModifyUserDetailInfoResponse) => void
+  ): Promise<ModifyUserDetailInfoResponse> {
+    return this.request("ModifyUserDetailInfo", req, cb)
+  }
+
+  /**
+   * CreateUserGroupMember
+   */
+  async CreateUserGroupMember(
+    req?: CreateUserGroupMemberRequest,
+    cb?: (error: string, rep: CreateUserGroupMemberResponse) => void
+  ): Promise<CreateUserGroupMemberResponse> {
+    return this.request("CreateUserGroupMember", req, cb)
+  }
+
+  /**
    * 项目内-用户角色列表
    */
   async DescribeUserRoleProjectList(
@@ -306,6 +432,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserRoleProjectListResponse) => void
   ): Promise<DescribeUserRoleProjectListResponse> {
     return this.request("DescribeUserRoleProjectList", req, cb)
+  }
+
+  /**
+   * QueryUserGroupMember
+   */
+  async QueryUserGroupMember(
+    req: QueryUserGroupMemberRequest,
+    cb?: (error: string, rep: QueryUserGroupMemberResponse) => void
+  ): Promise<QueryUserGroupMemberResponse> {
+    return this.request("QueryUserGroupMember", req, cb)
   }
 
   /**
@@ -326,6 +462,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ClearEmbedTokenResponse) => void
   ): Promise<ClearEmbedTokenResponse> {
     return this.request("ClearEmbedToken", req, cb)
+  }
+
+  /**
+   * DescribeUserGroupMemberList
+   */
+  async DescribeUserGroupMemberList(
+    req: DescribeUserGroupMemberListRequest,
+    cb?: (error: string, rep: DescribeUserGroupMemberListResponse) => void
+  ): Promise<DescribeUserGroupMemberListResponse> {
+    return this.request("DescribeUserGroupMemberList", req, cb)
   }
 
   /**
@@ -379,6 +525,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 按资源 - 更新用户组权限
+   */
+  async ModifyResourceUserGroupResource(
+    req: ModifyResourceUserGroupResourceRequest,
+    cb?: (error: string, rep: ModifyResourceUserGroupResourceResponse) => void
+  ): Promise<ModifyResourceUserGroupResourceResponse> {
+    return this.request("ModifyResourceUserGroupResource", req, cb)
+  }
+
+  /**
+   * 页面截图导出
+   */
+  async ExportScreenPage(
+    req: ExportScreenPageRequest,
+    cb?: (error: string, rep: ExportScreenPageResponse) => void
+  ): Promise<ExportScreenPageResponse> {
+    return this.request("ExportScreenPage", req, cb)
+  }
+
+  /**
    * 删除项目
    */
   async DeleteProject(
@@ -389,13 +555,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 项目-修改用户角色信息
+   * 更新用户组权限
    */
-  async ModifyUserRoleProject(
-    req: ModifyUserRoleProjectRequest,
-    cb?: (error: string, rep: ModifyUserRoleProjectResponse) => void
-  ): Promise<ModifyUserRoleProjectResponse> {
-    return this.request("ModifyUserRoleProject", req, cb)
+  async ModifyResourceUserGroup(
+    req: ModifyResourceUserGroupRequest,
+    cb?: (error: string, rep: ModifyResourceUserGroupResponse) => void
+  ): Promise<ModifyResourceUserGroupResponse> {
+    return this.request("ModifyResourceUserGroup", req, cb)
   }
 
   /**

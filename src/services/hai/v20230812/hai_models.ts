@@ -150,9 +150,17 @@ export interface DeleteServiceResponse {
  */
 export interface ImageInfo {
   /**
-   * tcr仓库地址
+   * <p>tcr仓库地址</p>
    */
   ImageRegistryUrl?: string
+  /**
+   * <p>仓库用户名</p>
+   */
+  ImageRegistryUsername?: string
+  /**
+   * <p>仓库密码</p>
+   */
+  ImageRegistryPassword?: string
 }
 
 /**

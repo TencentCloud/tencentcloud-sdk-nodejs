@@ -53,6 +53,114 @@ export interface DeleteProjectRequest {
 }
 
 /**
+ * ModifyUserDetailInfo请求参数结构体
+ */
+export interface ModifyUserDetailInfoRequest {
+  /**
+   * 用户ID
+   */
+  UserId?: string
+  /**
+   * 角色ID 列表
+   */
+  RoleIdList?: Array<number | bigint>
+  /**
+   * 邮箱
+   */
+  Email?: string
+  /**
+   * 用户名
+   */
+  UserName?: string
+  /**
+   * 手机号
+   */
+  PhoneNumber?: string
+  /**
+   * 手机区号
+   */
+  AreaCode?: string
+  /**
+   * 企业微信应用用户id
+   */
+  AppUserId?: string
+  /**
+   * 是否开启手机验证码登录（0 关闭，1 开启）
+   */
+  LoginSecurityStatus?: number
+  /**
+   * 是否开启密码过期提醒（0 关闭，1 开启
+   */
+  ResetPassWordTip?: number
+  /**
+   * 强制修改密码（0 关闭，1 开启）
+   */
+  ForceResetPassWord?: number
+  /**
+   * 密码过期提醒时间，30、60、90（默认）、180天
+   */
+  PasswordExpired?: number
+  /**
+   * 用户组id
+   */
+  UserGroupIdList?: Array<number | bigint>
+}
+
+/**
+ * DescribeUserGroupTreeList请求参数结构体
+ */
+export interface DescribeUserGroupTreeListRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId?: number
+  /**
+   * 是否分页
+   */
+  AllPage?: number
+  /**
+   * 页码
+   */
+  PageNo?: number
+  /**
+   * 每页条数
+   */
+  PageSize?: number
+  /**
+   * 标签过滤条件
+   */
+  TagValueList?: Array<ResourceTagValue>
+  /**
+   * 节点集合
+   */
+  Nodes?: Array<UserGroupTreeNodeDTO>
+  /**
+   * 用户组id集合
+   */
+  GroupIds?: Array<number | bigint>
+  /**
+   * 查询下一个code
+   */
+  QueryNextNode?: boolean
+  /**
+   * 父id集合
+   */
+  ParentIds?: Array<number | bigint>
+  /**
+   * 是否查询所有节点
+   */
+  QueryAllNode?: boolean
+  /**
+   * 过滤组id集合
+   */
+  FilterGroupIds?: Array<number | bigint>
+  /**
+   * 模糊搜索关键字
+   */
+  Keyword?: string
+}
+
+/**
  * 角色
  */
 export interface Role {
@@ -178,6 +286,21 @@ export interface ProjectConfigResult {
 }
 
 /**
+ * ModifyUserGroup返回参数结构体
+ */
+export interface ModifyUserGroupResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteUserRole返回参数结构体
  */
 export interface DeleteUserRoleResponse {
@@ -261,6 +384,40 @@ export interface CorpUserListData {
 }
 
 /**
+ * 用户组更新入参
+ */
+export interface UserGroupUpdateDTO {
+  /**
+   * 组管理员
+   */
+  AdminUserId?: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 用户组名称
+   */
+  GroupName?: string
+  /**
+   * 排序位置
+   */
+  Location?: number
+  /**
+   * 父节点id
+   */
+  ParentId?: number
+  /**
+   * 用户组id
+   */
+  Id?: number
+  /**
+   * 父节点名称
+   */
+  ParentName?: string
+}
+
+/**
  * 行列权限配置
  */
 export interface RowColumnConfig {
@@ -307,6 +464,44 @@ export interface DescribeProjectListResponse {
 }
 
 /**
+ * QueryUserGroupMember请求参数结构体
+ */
+export interface QueryUserGroupMemberRequest {
+  /**
+   * 用户组id集合
+   */
+  GroupIds?: Array<number | bigint>
+  /**
+   * 搜索关键字
+   */
+  Keyword?: string
+  /**
+   * 分页大小
+   */
+  PageSize?: number
+  /**
+   * 分页页码
+   */
+  PageNo?: number
+  /**
+   * 是否需要分页
+   */
+  AllPage?: boolean
+  /**
+   * 用户组节点信息
+   */
+  Nodes?: Array<UserGroupTreeNodeDTO>
+  /**
+   * 标签值
+   */
+  TagValueList?: Array<ResourceTagValue>
+  /**
+   * 需要过滤的用户组
+   */
+  FilterGroupIds?: Array<number | bigint>
+}
+
+/**
  * 页面截图列表
  */
 export interface PageScreenListVO {
@@ -331,6 +526,47 @@ export interface PageScreenListVO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TranStatus?: number
+}
+
+/**
+ * DeleteUserGroupMember返回参数结构体
+ */
+export interface DeleteUserGroupMemberResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 用户资源入参
+ */
+export interface UserResourceDTO {
+  /**
+   * 企业id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CorpId?: string
+  /**
+   * 用户id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserId?: string
+  /**
+   * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
+  /**
+   * 资源列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceList?: Array<ResourceItem>
 }
 
 /**
@@ -402,6 +638,36 @@ export interface ApplyEmbedTokenInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Result: boolean
+}
+
+/**
+ * ModifyResourceUserGroup返回参数结构体
+ */
+export interface ModifyResourceUserGroupResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 扩展
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * 消息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -550,43 +816,90 @@ export interface Project {
 }
 
 /**
- * 商业版本权限单元
+ * ExportScreenPage请求参数结构体
  */
-export interface PermissionComponent {
+export interface ExportScreenPageRequest {
   /**
-   * 权限值
-注意：此字段可能返回 null，表示取不到有效值。
+   * 项目id
    */
-  ModuleId?: string
+  ProjectId: string
   /**
-   * 可用性。
-取值范围：
+   * 页面id
+   */
+  PageId: string
+  /**
+   * 画布类型。栅格画布：GRID；自由画布：FREE
+   */
+  CanvasType?: string
+  /**
+   * 图片导出类型。base64；url（有效期：1天）
+   */
+  PicType?: string
+  /**
+   * 组件Ids。为空时，导出整个页面
+   */
+  WidgetIds?: Array<string>
+  /**
+   * 是否是异步请求
+   */
+  AsyncRequest?: boolean
+  /**
+   * 事务id
+   */
+  TranId?: string
+}
 
-- usable：可用
-- visible：可见
-- disabled：不可用
-- hidden：隐藏
+/**
+ * DeleteUserGroupMember请求参数结构体
+ */
+export interface DeleteUserGroupMemberRequest {
+  /**
+   * 用户组id
+   */
+  GroupId?: number
+  /**
+   * 用户id集合
+   */
+  UserIdList?: Array<string>
+}
 
-默认值：disabled
-示例值：disabled
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IncludeType?: string
+/**
+ * CreateUserRoleProject请求参数结构体
+ */
+export interface CreateUserRoleProjectRequest {
   /**
-   * 目标升级版本
-注意：此字段可能返回 null，表示取不到有效值。
+   * 项目ID
    */
-  UpgradeVersionType?: string
+  ProjectId?: number
   /**
-   * 补充信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 角色ID列表
    */
-  Tips?: string
+  RoleIdList?: Array<number | bigint>
   /**
-   * 补充信息的key值
+   * 用户列表（废弃）
+   * @deprecated
+   */
+  UserList?: Array<UserIdAndUserName>
+  /**
+   * 用户列表（新）
+   */
+  UserInfoList?: Array<UserInfo>
+}
+
+/**
+ * 组件信息
+ */
+export interface WidgetVO {
+  /**
+   * 组件Id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TipsKey?: string
+  WidgetId?: string
+  /**
+   * 组件name
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WidgetName?: string
 }
 
 /**
@@ -623,45 +936,6 @@ export interface RowColumnStatus {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RoleId: number
-}
-
-/**
- * 组件信息
- */
-export interface WidgetVO {
-  /**
-   * 组件Id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WidgetId?: string
-  /**
-   * 组件name
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WidgetName?: string
-}
-
-/**
- * CreateUserRoleProject请求参数结构体
- */
-export interface CreateUserRoleProjectRequest {
-  /**
-   * 项目ID
-   */
-  ProjectId?: number
-  /**
-   * 角色ID列表
-   */
-  RoleIdList?: Array<number | bigint>
-  /**
-   * 用户列表（废弃）
-   * @deprecated
-   */
-  UserList?: Array<UserIdAndUserName>
-  /**
-   * 用户列表（新）
-   */
-  UserInfoList?: Array<UserInfo>
 }
 
 /**
@@ -717,6 +991,24 @@ export interface CreateDatasourceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateUserGroup请求参数结构体
+ */
+export interface CreateUserGroupRequest {
+  /**
+   * 用户组名称
+   */
+  GroupName?: string
+  /**
+   * 位置
+   */
+  Location?: number
+  /**
+   * 父用户组id
+   */
+  ParentId?: number
 }
 
 /**
@@ -785,33 +1077,39 @@ export interface CreateProjectRequest {
 }
 
 /**
- * DescribePermissionStatusInfo返回参数结构体
+ * 用户角色列表角色信息
  */
-export interface DescribePermissionStatusInfoResponse {
+export interface UserRoleListDataRoleInfo {
   /**
-   * 自定义错误信息对象
+   * 角色名字
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorInfo?: ErrorInfo
+  RoleName?: string
   /**
-   * 消息
+   * 角色ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Msg?: string
+  RoleId?: number
   /**
-   * 112
+   * 项目ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Extra?: string
+  ProjectId?: number
   /**
-   * 1
+   * 项目名字
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: RowColumnStatus
+  ProjectName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 是否为全局角色（0 不是 1 是）
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  ScopeType?: number
+  /**
+   * 角色key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModuleCollection?: string
 }
 
 /**
@@ -948,6 +1246,32 @@ export interface CreatePermissionRanksRequest {
 }
 
 /**
+ * ModifyResourceUserGroupResource请求参数结构体
+ */
+export interface ModifyResourceUserGroupResourceRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId?: number
+  /**
+   * 用户id
+   */
+  UserGroupId?: number
+  /**
+   * 资源
+   */
+  Resource?: UserResourceDTO
+  /**
+   * 实体类
+   */
+  EntityIds?: Array<number | bigint>
+  /**
+   * 资源类型
+   */
+  ResourceType?: string
+}
+
+/**
  * DescribeProjectInfo请求参数结构体
  */
 export interface DescribeProjectInfoRequest {
@@ -962,6 +1286,36 @@ export interface DescribeProjectInfoRequest {
 2：我的看板
    */
   DefaultPanelType?: number
+}
+
+/**
+ * DescribeResourceUserGroupPageList返回参数结构体
+ */
+export interface DescribeResourceUserGroupPageListResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 扩展
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * 消息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: UserGroupPageTreeVO
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1361,6 +1715,21 @@ export interface DeleteProjectResponse {
 }
 
 /**
+ * DescribeUserGroupInfo返回参数结构体
+ */
+export interface DescribeUserGroupInfoResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ApplyEmbedInterval返回参数结构体
  */
 export interface ApplyEmbedIntervalResponse {
@@ -1384,6 +1753,47 @@ export interface ApplyEmbedIntervalResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 资源
+ */
+export interface ResourceItem {
+  /**
+   * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceName?: string
+  /**
+   * 资源值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceValue?: boolean
+  /**
+   * 是否可变更
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CanChange?: boolean
+  /**
+   * 提示信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tips?: string
+}
+
+/**
+ * CreateUserGroupMember返回参数结构体
+ */
+export interface CreateUserGroupMemberResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1429,6 +1839,36 @@ export interface RankInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RowColumnConfigList?: Array<RowColumnConfig>
+}
+
+/**
+ * DescribeUserGroupTreeList返回参数结构体
+ */
+export interface DescribeUserGroupTreeListResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 扩展
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * 消息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<UserGroupTreeVO>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1648,39 +2088,128 @@ export interface RowColumnTagValue {
 }
 
 /**
- * 用户角色列表角色信息
+ * DescribeResourceUserGroupPageList请求参数结构体
  */
-export interface UserRoleListDataRoleInfo {
+export interface DescribeResourceUserGroupPageListRequest {
   /**
-   * 角色名字
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RoleName?: string
-  /**
-   * 角色ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RoleId?: number
-  /**
-   * 项目ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 项目Id
    */
   ProjectId?: number
   /**
-   * 项目名字
-注意：此字段可能返回 null，表示取不到有效值。
+   * 页面Id
    */
-  ProjectName?: string
+  PageId?: number
   /**
-   * 是否为全局角色（0 不是 1 是）
-注意：此字段可能返回 null，表示取不到有效值。
+   * 资源类型
    */
-  ScopeType?: number
+  ResourceType?: string
   /**
-   * 角色key
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否分页
+   */
+  AllPage?: number
+  /**
+   * 模糊搜索关键字
+   */
+  Keyword?: string
+  /**
+   * 页码
+   */
+  PageNo?: number
+  /**
+   * 每页条数
+   */
+  PageSize?: number
+  /**
+   * 标签过滤条件
+   */
+  TagValueList?: Array<ResourceTagValue>
+  /**
+   * 角色
    */
   ModuleCollection?: string
+  /**
+   * 是否授权
+   */
+  ResourceValue?: string
+  /**
+   * 权限类型
+   */
+  ResourceName?: string
+  /**
+   * 父id
+   */
+  ParentId?: number
+  /**
+   * 资源id
+   */
+  EntityId?: number
+}
+
+/**
+ * 操作的资源权限
+ */
+export interface ResourceListDTO {
+  /**
+   * 资源id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EntityId?: number
+  /**
+   * 资源类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeType?: number
+  /**
+   * 资源权限
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceList?: Array<ResourceItem>
+}
+
+/**
+ * DescribePermissionStatusInfo返回参数结构体
+ */
+export interface DescribePermissionStatusInfoResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 消息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 112
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: RowColumnStatus
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 用户组数节点
+ */
+export interface UserGroupTreeNodeDTO {
+  /**
+   * 用户组id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupId?: number
+  /**
+   * 是否查询子节点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryChildNodes?: boolean
 }
 
 /**
@@ -1968,6 +2497,31 @@ export interface DescribeUserRoleProjectListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * QueryUserGroupMember返回参数结构体
+ */
+export interface QueryUserGroupMemberResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyUserGroup请求参数结构体
+ */
+export interface ModifyUserGroupRequest {
+  /**
+   * 用户组更新list
+   */
+  UpdateList?: Array<UserGroupUpdateDTO>
 }
 
 /**
@@ -2262,6 +2816,32 @@ MSSQL：微软SQL Server数据库
 }
 
 /**
+ * ModifyResourceUserGroup请求参数结构体
+ */
+export interface ModifyResourceUserGroupRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId?: number
+  /**
+   * 用户组id集合
+   */
+  UserGroupIds?: Array<number | bigint>
+  /**
+   * 操作的资源权限
+   */
+  Resource?: ResourceListDTO
+  /**
+   * 资源类型
+   */
+  ResourceType?: string
+  /**
+   * 是否查询所有孩子节点
+   */
+  QueryChildren?: boolean
+}
+
+/**
  * 仅包含id的对象
  */
 export interface IdDTO {
@@ -2401,6 +2981,40 @@ MSSQL：微软SQL Server数据库
 }
 
 /**
+ * DescribeDatasourceList请求参数结构体
+ */
+export interface DescribeDatasourceListRequest {
+  /**
+   * 无
+   */
+  ProjectId: number
+  /**
+   * 返回所有页面，默认false
+   */
+  AllPage?: boolean
+  /**
+   * 数据库名称检索
+   */
+  DbName?: string
+  /**
+   * 无
+   */
+  PageNo?: number
+  /**
+   * 无
+   */
+  PageSize?: number
+  /**
+   * 搜索关键词
+   */
+  Keyword?: string
+  /**
+   * 过滤无权限列表的参数（0 全量，1 使用权限，2 编辑权限）
+   */
+  PermissionType?: number
+}
+
+/**
  * 数据ID
  */
 export interface DataId {
@@ -2431,6 +3045,37 @@ export interface ClearEmbedTokenRequest {
    * page id
    */
   PageId?: string
+}
+
+/**
+ * 基础用户信息
+ */
+export interface UserVO {
+  /**
+   * u1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserId?: string
+  /**
+   * zhang
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
+}
+
+/**
+ * DescribeUserGroupMemberList返回参数结构体
+ */
+export interface DescribeUserGroupMemberListResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2672,6 +3317,27 @@ export interface DescribePageWidgetListResponse {
 }
 
 /**
+ * 用户组权限树
+ */
+export interface UserGroupPageTreeVO {
+  /**
+   * 列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<UserGroupTreeVO>
+  /**
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * 页数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalPages?: number
+}
+
+/**
  * CreateDatasourceCloud返回参数结构体
  */
 export interface CreateDatasourceCloudResponse {
@@ -2775,6 +3441,36 @@ export interface UserGroupDTO {
 }
 
 /**
+ * CreateUserGroup返回参数结构体
+ */
+export interface CreateUserGroupResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeUserGroupInfo请求参数结构体
+ */
+export interface DescribeUserGroupInfoRequest {
+  /**
+   * 用户组id
+   */
+  Id?: number
+}
+
+/**
+ * CreateUserGroupMember请求参数结构体
+ */
+export type CreateUserGroupMemberRequest = null
+
+/**
  * ModifyProject返回参数结构体
  */
 export interface ModifyProjectResponse {
@@ -2808,6 +3504,36 @@ export interface ModifyProjectResponse {
  * ModifyUserRole返回参数结构体
  */
 export interface ModifyUserRoleResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 扩展
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * 消息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyUserDetailInfo返回参数结构体
+ */
+export interface ModifyUserDetailInfoResponse {
   /**
    * 自定义错误信息对象
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2974,6 +3700,36 @@ export interface ModifyUserRoleProjectRequest {
 }
 
 /**
+ * ModifyResourceUserGroupResource返回参数结构体
+ */
+export interface ModifyResourceUserGroupResourceResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 扩展
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * 消息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeProjectList请求参数结构体
  */
 export interface DescribeProjectListRequest {
@@ -3123,6 +3879,87 @@ export interface UserRoleListDataUserRoleInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserGroupList?: Array<UserGroupDTO>
+}
+
+/**
+ * DeleteUserGroup返回参数结构体
+ */
+export interface DeleteUserGroupResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 用户组权限树
+ */
+export interface UserGroupTreeVO {
+  /**
+   * 当前实体ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 用户组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupName?: string
+  /**
+   * 父id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentId?: number
+  /**
+   * 父节点名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentName?: string
+  /**
+   * 1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsDefault?: number
+  /**
+   * 管理员账号id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdminUserId?: string
+  /**
+   * 用户集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserList?: Array<UserVO>
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 排序
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: number
+  /**
+   * 孩子节点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Children?: Array<UserGroupTreeVO>
+  /**
+   * 是否有孩子节点
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasChildren?: boolean
+  /**
+   * 资源集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceList?: Array<ResourceDTO>
 }
 
 /**
@@ -3327,6 +4164,32 @@ export interface DatasourceInfo {
 }
 
 /**
+ * 资源权限信息
+ */
+export interface ResourceDTO {
+  /**
+   * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceName?: string
+  /**
+   * 是否启用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceValue?: boolean
+  /**
+   * 能否变更
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CanChange?: boolean
+  /**
+   * 提示
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tips?: string
+}
+
+/**
  * 项目列表数据
  */
 export interface ProjectListData {
@@ -3378,37 +4241,31 @@ export interface CreateEmbedTokenResponse {
 }
 
 /**
- * DescribeDatasourceList请求参数结构体
+ * DeleteUserGroup请求参数结构体
  */
-export interface DescribeDatasourceListRequest {
+export interface DeleteUserGroupRequest {
   /**
-   * 无
+   * 用户组id
    */
-  ProjectId: number
+  Id?: number
+}
+
+/**
+ * 资源权限标签过滤参数
+ */
+export interface ResourceTagValue {
   /**
-   * 返回所有页面，默认false
+   * 标签id
    */
-  AllPage?: boolean
+  Id?: number
   /**
-   * 数据库名称检索
+   * 标签名称
    */
-  DbName?: string
+  Name?: string
   /**
-   * 无
+   * 标签值列表
    */
-  PageNo?: number
-  /**
-   * 无
-   */
-  PageSize?: number
-  /**
-   * 搜索关键词
-   */
-  Keyword?: string
-  /**
-   * 过滤无权限列表的参数（0 全量，1 使用权限，2 编辑权限）
-   */
-  PermissionType?: number
+  Values?: Array<string>
 }
 
 /**
@@ -3461,6 +4318,36 @@ export interface DescribePermissionRanksInfoRequest {
    * 项目id
    */
   ProjectId?: number
+}
+
+/**
+ * DescribeUserGroupMemberList请求参数结构体
+ */
+export interface DescribeUserGroupMemberListRequest {
+  /**
+   * 用户组id集合
+   */
+  GroupIds?: Array<number | bigint>
+  /**
+   * asc正序,desc倒序
+   */
+  CreatedOnOrder?: string
+  /**
+   * 搜索关键字
+   */
+  Keyword?: string
+  /**
+   * 分页大小
+   */
+  PageSize?: number
+  /**
+   * 分页页码
+   */
+  PageNo?: number
+  /**
+   * 是否需要分页
+   */
+  AllPage?: boolean
 }
 
 /**
@@ -3531,35 +4418,41 @@ INFO
 }
 
 /**
- * ExportScreenPage请求参数结构体
+ * 商业版本权限单元
  */
-export interface ExportScreenPageRequest {
+export interface PermissionComponent {
   /**
-   * 项目id
+   * 权限值
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId: string
+  ModuleId?: string
   /**
-   * 页面id
+   * 可用性。
+取值范围：
+
+- usable：可用
+- visible：可见
+- disabled：不可用
+- hidden：隐藏
+
+默认值：disabled
+示例值：disabled
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageId: string
+  IncludeType?: string
   /**
-   * 画布类型。栅格画布：GRID；自由画布：FREE
+   * 目标升级版本
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CanvasType?: string
+  UpgradeVersionType?: string
   /**
-   * 图片导出类型。base64；url（有效期：1天）
+   * 补充信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PicType?: string
+  Tips?: string
   /**
-   * 组件Ids。为空时，导出整个页面
+   * 补充信息的key值
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  WidgetIds?: Array<string>
-  /**
-   * 是否是异步请求
-   */
-  AsyncRequest?: boolean
-  /**
-   * 事务id
-   */
-  TranId?: string
+  TipsKey?: string
 }

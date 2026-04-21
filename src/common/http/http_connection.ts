@@ -172,7 +172,7 @@ export class HttpConnection {
         boundary: form ? form.getBoundary() : undefined,
         headers: config.headers,
       })
-  
+
       config.headers["Authorization"] = signature
     }
 

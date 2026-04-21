@@ -444,15 +444,11 @@ export interface ModifyApmAssociationRequest {
  */
 export interface DescribeGeneralOTSpanListResponse {
   /**
-   * 总数量
+   * <p>总数量</p>
    */
   TotalCount?: number
   /**
-   * Spans字段中包含了链路数据的全部内容，由于数据经过了压缩，需要对结果进行如下三步转换，以还原始的文本。
-1. 将Spans字段中的文本进行 Base64 解码，得到经过压缩后字节数组。
-2. 使用 gzip 对压缩后的字节数组进行解压，得到压缩前的字节数组。
-3. 使用 UTF-8 字符集，将压缩前的字节数组转换为文本。
-
+   * <p>Spans字段中包含了链路数据的全部内容，由于数据经过了压缩，需要对结果进行如下三步转换，以还原始的文本。</p><ol><li>将Spans字段中的文本进行 Base64 解码，得到经过压缩后字节数组。</li><li>使用 gzip 对压缩后的字节数组进行解压，得到压缩前的字节数组。</li><li>使用 UTF-8 字符集，将压缩前的字节数组转换为文本。</li></ol>
    */
   Spans?: string
   /**
@@ -1312,45 +1308,35 @@ export interface APMKVItem {
  */
 export interface DescribeGeneralSpanListRequest {
   /**
-   * 业务系统 ID
+   * <p>业务系统 ID</p>
    */
   InstanceId: string
   /**
-   * Span 查询开始时间戳（单位：秒）
+   * <p>Span 查询开始时间戳（单位：秒）</p>
    */
   StartTime: number
   /**
-   * Span 查询结束时间戳（单位：秒）
+   * <p>Span 查询结束时间戳（单位：秒）</p>
    */
   EndTime: number
   /**
-   * 通用过滤参数
+   * <p>通用过滤参数 支持的过滤key如service.name</p>
    */
   Filters?: Array<Filter>
   /**
-   * 排序
-现支持的 Key 有：
-
-- startTime(开始时间)
-- endTime(结束时间)
-- duration(响应时间)
-
-现支持的 Value 有：
-
-- desc(降序排序)
-- asc(升序排序)
+   * <p>排序<br>现支持的 Key 有：</p><ul><li>startTime(开始时间)</li><li>endTime(结束时间)</li><li>duration(响应时间)</li></ul><p>现支持的 Value 有：</p><ul><li>desc(降序排序)</li><li>asc(升序排序)</li></ul>
    */
   OrderBy?: OrderBy
   /**
-   * 业务自身服务名，控制台用户请填写taw
+   * <p>业务自身服务名，控制台用户请填写taw</p>
    */
   BusinessName?: string
   /**
-   * 单页项目个数，默认为1000，合法取值范围为1～1000
+   * <p>单页项目个数，默认为1000，合法取值范围为1～1000</p>
    */
   Limit?: number
   /**
-   * 分页
+   * <p>分页</p>
    */
   Offset?: number
 }
@@ -2036,15 +2022,15 @@ export interface DescribeApmSQLInjectionDetailRequest {
  */
 export interface Filter {
   /**
-   * 过滤方式（=, !=, in）
+   * <p>过滤方式（=, !=, in）</p>
    */
   Type: string
   /**
-   * 过滤维度名
+   * <p>过滤维度名</p><p>详情参考实际接口字段描述</p>
    */
   Key: string
   /**
-   * 过滤值，in过滤方式用逗号分割多个值
+   * <p>过滤值，in过滤方式用逗号分割多个值</p>
    */
   Value: string
 }
@@ -2054,45 +2040,35 @@ export interface Filter {
  */
 export interface DescribeGeneralOTSpanListRequest {
   /**
-   * 业务系统 ID
+   * <p>业务系统 ID</p>
    */
   InstanceId: string
   /**
-   * Span 查询开始时间戳（单位：秒）
+   * <p>Span 查询开始时间戳（单位：秒）</p>
    */
   StartTime: number
   /**
-   * Span 查询结束时间戳（单位：秒）
+   * <p>Span 查询结束时间戳（单位：秒）</p>
    */
   EndTime: number
   /**
-   * 通用过滤参数
+   * <p>通用过滤参数 支持的过滤key如service.name</p>
    */
   Filters?: Array<Filter>
   /**
-   * 排序
-现支持的 Key 有：
-
-- startTime(开始时间)
-- endTime(结束时间)
-- duration(响应时间)
-
-现支持的 Value 有：
-
-- desc(降序排序)
-- asc(升序排序)
+   * <p>排序<br>现支持的 Key 有：</p><ul><li>startTime(开始时间)</li><li>endTime(结束时间)</li><li>duration(响应时间)</li></ul><p>现支持的 Value 有：</p><ul><li>desc(降序排序)</li><li>asc(升序排序)</li></ul>
    */
   OrderBy?: OrderBy
   /**
-   * 业务自身服务名，控制台用户请填写taw
+   * <p>业务自身服务名，控制台用户请填写taw</p>
    */
   BusinessName?: string
   /**
-   * 单页项目个数，默认为10000，合法取值范围为0～10000
+   * <p>单页项目个数，默认为10000，合法取值范围为0～10000</p>
    */
   Limit?: number
   /**
-   * 分页
+   * <p>分页</p>
    */
   Offset?: number
 }
@@ -3154,11 +3130,11 @@ export interface ApmField {
  */
 export interface DescribeGeneralSpanListResponse {
   /**
-   * 总数量
+   * <p>总数量</p>
    */
   TotalCount?: number
   /**
-   * Span 分页列表
+   * <p>Span 分页列表</p>
    */
   Spans?: Array<Span>
   /**

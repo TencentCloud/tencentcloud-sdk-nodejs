@@ -1700,41 +1700,45 @@ export interface DescribeInternetAddressQuotaResponse {
  */
 export interface CreateCasInput {
   /**
-   * 敏捷上云名称
+   * <p>敏捷上云名称</p>
    */
   Name: string
   /**
-   * 需要接入敏捷上云的IDC的地址
+   * <p>需要接入敏捷上云的IDC的地址</p>
    */
   IdcAddress: string
   /**
-   * 需要接入敏捷上云的IDC的互联网服务提供商类型
+   * <p>需要接入敏捷上云的IDC的互联网服务提供商类型</p>
    */
   IdcType: string
   /**
-   * 敏捷上云的带宽，单位为MB
+   * <p>敏捷上云的带宽，单位为MB</p>
    */
   Bandwidth: number
   /**
-   * 联系电话
+   * <p>联系电话</p>
    */
   Telephone: string
   /**
-   * 备注信息
+   * <p>备注信息</p>
    */
   Remarks: string
   /**
-   * 接入地域
+   * <p>接入地域</p>
    */
   ArRegion?: string
   /**
-   * IDC侧类型，默认为OTHER。枚举值：CLOUD-云，ISP-运营商，OTHER-第三方
+   * <p>IDC侧类型，默认为OTHER。枚举值：CLOUD-云，ISP-运营商，OTHER-第三方</p>
    */
   IdcPointType?: string
   /**
-   * 运营商链路是否有保护
+   * <p>运营商链路是否有保护</p>
    */
   BIapLinkProtected?: boolean
+  /**
+   * <p>服务类型，SHARE-共享型，EXCLUSIVE-独占型</p>
+   */
+  ServiceType?: string
 }
 
 /**

@@ -37,7 +37,7 @@ export interface RequestOptions extends Partial<Pick<HttpProfile, "headers">> {
    * Set Authorization with SKIP
    * @default false
    */
-  skipSign?: boolean;
+  skipSign?: boolean
 }
 
 interface RequestData {

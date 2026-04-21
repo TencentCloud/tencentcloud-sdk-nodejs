@@ -278,9 +278,9 @@ it("es.v20180416.CheckMigrateIndexMetaData", async function () {
     }
 })
 
-it("es.v20180416.UpdateIpTraceStatus", async function () {
+it("es.v20180416.RequestInstances", async function () {
     try {
-       const data = await client.UpdateIpTraceStatus({})
+       const data = await client.RequestInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -491,6 +491,16 @@ it("es.v20180416.UpdateServerlessInstance", async function () {
 it("es.v20180416.QueryIpTraceLog", async function () {
     try {
        const data = await client.QueryIpTraceLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.RequestInstancesByGet", async function () {
+    try {
+       const data = await client.RequestInstancesByGet({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -711,6 +721,16 @@ it("es.v20180416.GetRequestTargetNodeTypes", async function () {
 it("es.v20180416.DescribeLogstashInstanceOperations", async function () {
     try {
        const data = await client.DescribeLogstashInstanceOperations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdateIpTraceStatus", async function () {
+    try {
+       const data = await client.UpdateIpTraceStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
