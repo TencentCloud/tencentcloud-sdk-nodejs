@@ -1843,6 +1843,10 @@ export interface InstanceConfigInfo {
    * <p>标记异常</p>
    */
   AbnormalParam?: string
+  /**
+   * <p>是否生效</p>
+   */
+  ConfigEffective?: string
 }
 
 /**

@@ -160,43 +160,43 @@ export interface StopProjectRequest {
  */
 export interface DescribeFOOMMallocReportListRequest {
   /**
-   * 产品Id
+   * <p>产品Id</p>
    */
   ProductId: string
   /**
-   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
+   * <p>接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息</p>
    */
   FormListString?: string
   /**
-   * 提供给前端使用，当填写本字段时，会覆盖 formlist 的值
+   * <p>提供给前端使用，当填写本字段时，会覆盖 formlist 的值</p>
    */
   ParamToken?: string
   /**
-   * 特征
+   * <p>特征</p>
    */
   Feature?: string
   /**
-   * 当前页码
+   * <p>当前页码</p>
    */
   PageNumber?: number
   /**
-   * 每页展示最大数量
+   * <p>每页展示最大数量</p>
    */
   PageSize?: number
   /**
-   * 排序字段
+   * <p>排序字段</p>
    */
   SortField?: string
   /**
-   * 排序类型
+   * <p>排序类型</p>
    */
   SortType?: string
   /**
-   * 拓展数据
+   * <p>拓展数据</p>
    */
   ExtraData?: string
   /**
-   * 请求头
+   * <p>请求头</p>
    */
   RequestHeader?: string
 }
@@ -265,15 +265,15 @@ export interface DescribeTawInstancesRequest {
  */
 export interface DescribeTokenResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Data?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
-   * 消息
+   * <p>消息</p>
    */
   Message?: string
   /**
@@ -411,23 +411,23 @@ export interface DescribeDataPvUrlInfoResponse {
  */
 export interface DescribeTokenRequest {
   /**
-   * 筛选条件
+   * <p>筛选条件</p>
    */
   FormListString?: string
   /**
-   * 仅对比模式下填写，筛选条件A
+   * <p>仅对比模式下填写，筛选条件A</p>
    */
   FormListAString?: string
   /**
-   * 仅对比模式下填写，筛选条件B
+   * <p>仅对比模式下填写，筛选条件B</p>
    */
   FormListBString?: string
   /**
-   * 请求头
+   * <p>请求头</p>
    */
   RequestHeader?: string
   /**
-   * 拓展字段
+   * <p>拓展字段</p>
    */
   ExtraData?: string
 }
@@ -673,31 +673,31 @@ export interface DescribeErrorResponse {
  */
 export interface DescribeFOOMProblemDetailRequest {
   /**
-   * 产品Id
+   * <p>产品Id</p>
    */
   ProductId: string
   /**
-   * 消息唯一标识
+   * <p>消息唯一标识</p>
    */
   ClientIdentify?: string
   /**
-   * 特征
+   * <p>特征</p>
    */
   Feature?: string
   /**
-   * 事件开始时间
+   * <p>事件开始时间</p>
    */
   StartEventTime?: number
   /**
-   * 事件结束时间
+   * <p>事件结束时间</p>
    */
   EndEventTime?: number
   /**
-   * 拓展数据
+   * <p>拓展数据</p>
    */
   ExtraData?: string
   /**
-   * 请求头
+   * <p>请求头</p>
    */
   RequestHeader?: string
 }
@@ -749,15 +749,15 @@ export interface DeleteWhitelistResponse {
  */
 export interface DescribeFOOMMallocReportListResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Data?: string
   /**
-   * 消息
+   * <p>消息</p>
    */
   Message?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
@@ -954,63 +954,63 @@ export interface DescribeDataReportCountRequest {
  */
 export interface DescribeIssuesListRequest {
   /**
-   * 产品Id
+   * <p>产品Id</p>
    */
   ProductId?: string
   /**
-   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
+   * <p>接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息</p>
    */
   FormList?: string
   /**
-   * 接口调试专用，对比模式下条件A，当 token 为空时，以这里的 value 作为筛选表单信息
+   * <p>接口调试专用，对比模式下条件A，当 token 为空时，以这里的 value 作为筛选表单信息</p>
    */
   FormListA?: string
   /**
-   * 接口调试专用，对比模式下条件B，当 token 为空时，以这里的 value 作为筛选表单信息
+   * <p>接口调试专用，对比模式下条件B，当 token 为空时，以这里的 value 作为筛选表单信息</p>
    */
   FormListB?: string
   /**
-   * 提供给前端使用，当填写本字段时，会覆盖 form_list 的值
+   * <p>提供给前端使用，当填写本字段时，会覆盖 form_list 的值</p>
    */
   ParamToken?: string
   /**
-   * 问题类型
+   * <p>问题类型</p>
    */
   IssueType?: number
   /**
-   * 排序字段
+   * <p>排序字段</p>
    */
   SortField?: string
   /**
-   * 排序方式
+   * <p>排序方式</p>
    */
   SortType?: string
   /**
-   * 每页数目
+   * <p>每页数目</p>
    */
   PageSize?: number
   /**
-   * 页码
+   * <p>页码</p>
    */
   PageNumber?: number
   /**
-   * 问题对比列表模式下，用于标识是按照sort_field字段的A值排序还是B值还是ratio值
+   * <p>问题对比列表模式下，用于标识是按照sort_field字段的A值排序还是B值还是ratio值</p>
    */
   SortABRatio?: string
   /**
-   * 模式：false:问题列表模式，true:对比列表模式
+   * <p>模式：false:问题列表模式，true:对比列表模式</p>
    */
   Compare?: boolean
   /**
-   * 对比状态 0:所有 1:新增 2：遗留 3:已解决
+   * <p>对比状态 0:所有 1:新增 2：遗留 3:已解决</p>
    */
   CompareStatus?: number
   /**
-   * 拓展字段
+   * <p>拓展字段</p>
    */
   ExtraData?: string
   /**
-   * 请求头
+   * <p>请求头</p>
    */
   RequestHeader?: string
 }
@@ -1020,71 +1020,71 @@ export interface DescribeIssuesListRequest {
  */
 export interface DescribeIssuesDistributionRequest {
   /**
-   * 产品Id
+   * <p>产品Id</p>
    */
   ProductId?: string
   /**
-   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
+   * <p>接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息</p>
    */
   FormListString?: string
   /**
-   * 分布维度是自定义维度时，填‘user_custom’
+   * <p>分布维度是自定义维度时，填‘user_custom’</p>
    */
   DimType?: string
   /**
-   * 维度，e.g. os_version, app_version, model等
+   * <p>维度，e.g. os_version, app_version, model等</p>
    */
   Dimension?: string
   /**
-   * 数字类型字段的区间范围
+   * <p>数字类型字段的区间范围</p>
    */
   Intervals?: Array<number | bigint>
   /**
-   * 提供给前端使用，当填写本字段时，会覆盖 form_list 的值
+   * <p>提供给前端使用，当填写本字段时，会覆盖 form_list 的值</p>
    */
   ParamToken?: string
   /**
-   * 问题Id
+   * <p>问题Id</p>
    */
   IssueId?: string
   /**
-   * 问题类型
+   * <p>问题类型</p>
    */
   IssueType?: number
   /**
-   * 限制返回的个数，默认返回所有值
+   * <p>限制返回的个数，默认返回所有值</p>
    */
   ParamLimit?: number
   /**
-   * 键
+   * <p>键</p>
    */
   MapKey?: string
   /**
-   * 名称
+   * <p>名称</p>
    */
   MapName?: string
   /**
-   * 指标类型
+   * <p>指标类型</p>
    */
   MetricType?: number
   /**
-   * 每页数目
+   * <p>每页数目</p>
    */
   PageSize?: number
   /**
-   * 页码
+   * <p>页码</p>
    */
   PageNumber?: number
   /**
-   * 用户自定义维度key
+   * <p>用户自定义维度key</p>
    */
   UserCustomKey?: string
   /**
-   * 拓展字段
+   * <p>拓展字段</p>
    */
   ExtraData?: string
   /**
-   * 请求头
+   * <p>请求头</p>
    */
   RequestHeader?: string
 }
@@ -1094,15 +1094,15 @@ export interface DescribeIssuesDistributionRequest {
  */
 export interface DescribeFOOMProblemDetailResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Data?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
-   * 消息
+   * <p>消息</p>
    */
   Message?: string
   /**
@@ -1376,47 +1376,47 @@ export interface DescribeDataCustomUrlRequest {
  */
 export interface DescribeExceptionReportListRequest {
   /**
-   * 产品Id
+   * <p>产品Id</p>
    */
   ProductId?: string
   /**
-   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
+   * <p>接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息</p>
    */
   FormListString?: string
   /**
-   * 提供给前端使用，当填写本字段时，会覆盖 form_list 的值
+   * <p>提供给前端使用，当填写本字段时，会覆盖 form_list 的值</p>
    */
   ParamToken?: string
   /**
-   * 问题类型
+   * <p>问题类型</p>
    */
   IssueType?: number
   /**
-   * 排序字段
+   * <p>排序字段</p>
    */
   SortField?: string
   /**
-   * 排序方式
+   * <p>排序方式</p>
    */
   SortType?: string
   /**
-   * 特征
+   * <p>特征</p>
    */
   Feature?: string
   /**
-   * 每页数目
+   * <p>每页数目</p>
    */
   PageSize?: number
   /**
-   * 页码
+   * <p>页码</p>
    */
   PageNumber?: number
   /**
-   * 拓展字段
+   * <p>拓展字段</p>
    */
   ExtraData?: string
   /**
-   * 请求头
+   * <p>请求头</p>
    */
   RequestHeader?: string
 }
@@ -1746,31 +1746,31 @@ export interface DescribeWhitelistsRequest {
  */
 export interface DescribeApplicationExitReportDetailRequest {
   /**
-   * 产品Id
+   * <p>产品Id</p>
    */
   ProductId: string
   /**
-   * 提供给前端使用，当填写本字段时，会覆盖 formlist 的值
+   * <p>提供给前端使用，当填写本字段时，会覆盖 formlist 的值</p>
    */
   ParamToken?: string
   /**
-   * 问题Id
+   * <p>问题Id</p>
    */
   ClientIdentify?: string
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartEventTime?: number
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndEventTime?: number
   /**
-   * 拓展数据
+   * <p>拓展数据</p>
    */
   ExtraData?: string
   /**
-   * 请求头
+   * <p>请求头</p>
    */
   RequestHeader?: string
 }
@@ -1864,15 +1864,15 @@ export interface DescribeDataPerformancePageV2Response {
  */
 export interface DescribeLagANRProblemFeatureAccountsResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Data?: string
   /**
-   * 消息
+   * <p>消息</p>
    */
   Message?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
@@ -1886,15 +1886,15 @@ export interface DescribeLagANRProblemFeatureAccountsResponse {
  */
 export interface DescribeFOOMMallocProblemDetailResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Data?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
-   * 消息
+   * <p>消息</p>
    */
   Message?: string
   /**
@@ -2062,15 +2062,15 @@ export interface DescribeDataEventUrlV2Request {
  */
 export interface DescribeTopIssuesResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Data?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
-   * 消息
+   * <p>消息</p>
    */
   Message?: string
   /**
@@ -2102,39 +2102,39 @@ export interface DescribeTawAreasResponse {
  */
 export interface DescribeApplicationExitReportListRequest {
   /**
-   * 产品Id
+   * <p>产品Id</p>
    */
   ProductId: string
   /**
-   * 提供给前端使用，当填写本字段时，会覆盖 formlist 的值
+   * <p>提供给前端使用，当填写本字段时，会覆盖 formlist 的值</p>
    */
   ParamToken?: string
   /**
-   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
+   * <p>接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息</p>
    */
   FormListString?: string
   /**
-   * 当前页码
+   * <p>当前页码</p>
    */
   PageNumber?: number
   /**
-   * 每页展示最大数量
+   * <p>每页展示最大数量</p>
    */
   PageSize?: number
   /**
-   * 排序字段
+   * <p>排序字段</p>
    */
   SortField?: string
   /**
-   * 排序类型
+   * <p>排序类型</p>
    */
   SortType?: string
   /**
-   * 拓展数据
+   * <p>拓展数据</p>
    */
   ExtraData?: string
   /**
-   * 请求头
+   * <p>请求头</p>
    */
   RequestHeader?: string
 }
@@ -2292,15 +2292,15 @@ export interface DescribeDataWebVitalsPageV2Request {
  */
 export interface DescribeLagANRProblemListResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Data?: string
   /**
-   * 消息
+   * <p>消息</p>
    */
   Message?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
@@ -2896,39 +2896,39 @@ export interface DescribeDataPvUrlStatisticsRequest {
  */
 export interface DescribeFOOMProblemListRequest {
   /**
-   * 产品Id
+   * <p>产品Id</p>
    */
   ProductId: string
   /**
-   * 提供给前端使用，当填写本字段时，会覆盖 formlist 的值
+   * <p>提供给前端使用，当填写本字段时，会覆盖 formlist 的值</p>
    */
   ParamToken?: string
   /**
-   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
+   * <p>接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息</p>
    */
   FormListString?: string
   /**
-   * 当前页码
+   * <p>当前页码</p>
    */
   PageNumber?: number
   /**
-   * 每页展示最大数量
+   * <p>每页展示最大数量</p>
    */
   PageSize?: number
   /**
-   * 排序字段
+   * <p>排序字段</p>
    */
   SortField?: string
   /**
-   * 排序类型
+   * <p>排序类型</p>
    */
   SortType?: string
   /**
-   * 拓展数据
+   * <p>拓展数据</p>
    */
   ExtraData?: string
   /**
-   * 请求头
+   * <p>请求头</p>
    */
   RequestHeader?: string
 }
@@ -3116,15 +3116,15 @@ export interface DescribeRumStatsLogListRequest {
  */
 export interface DescribeFOOMMallocProblemListResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Data?: string
   /**
-   * 消息
+   * <p>消息</p>
    */
   Message?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
@@ -3280,15 +3280,15 @@ export interface DescribeDataBridgeUrlV2Request {
  */
 export interface DescribeFOOMProblemListResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Data?: string
   /**
-   * 消息
+   * <p>消息</p>
    */
   Message?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
@@ -3908,39 +3908,39 @@ export interface DescribeDataLogUrlInfoResponse {
  */
 export interface DescribeFOOMMallocProblemListRequest {
   /**
-   * 产品Id
+   * <p>产品Id</p>
    */
   ProductId: string
   /**
-   * 提供给前端使用，当填写本字段时，会覆盖 formlist 的值
+   * <p>提供给前端使用，当填写本字段时，会覆盖 formlist 的值</p>
    */
   ParamToken?: string
   /**
-   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
+   * <p>接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息</p>
    */
   FormListString?: string
   /**
-   * 当前页码
+   * <p>当前页码</p>
    */
   PageNumber?: number
   /**
-   * 每页展示最大数量
+   * <p>每页展示最大数量</p>
    */
   PageSize?: number
   /**
-   * 排序字段
+   * <p>排序字段</p>
    */
   SortField?: string
   /**
-   * 排序类型
+   * <p>排序类型</p>
    */
   SortType?: string
   /**
-   * 拓展数据
+   * <p>拓展数据</p>
    */
   ExtraData?: string
   /**
-   * 请求头
+   * <p>请求头</p>
    */
   RequestHeader?: string
 }
@@ -3950,15 +3950,15 @@ export interface DescribeFOOMMallocProblemListRequest {
  */
 export interface DescribeExceptionDetailResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Data?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
-   * 消息
+   * <p>消息</p>
    */
   Message?: string
   /**
@@ -3972,15 +3972,15 @@ export interface DescribeExceptionDetailResponse {
  */
 export interface DescribeExceptionReportListResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Data?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
-   * 消息
+   * <p>消息</p>
    */
   Message?: string
   /**
@@ -4232,31 +4232,31 @@ export interface DescribeDataLogUrlStatisticsRequest {
  */
 export interface DescribeLagANRProblemAccountDetailRequest {
   /**
-   * 产品Id
+   * <p>产品Id</p>
    */
   ProductId: string
   /**
-   * 消息唯一标识
+   * <p>消息唯一标识</p>
    */
   ClientIdentify?: string
   /**
-   * 特征
+   * <p>特征</p>
    */
   Feature?: string
   /**
-   * 事件开始时间
+   * <p>事件开始时间</p>
    */
   StartEventTime?: number
   /**
-   * 事件结束时间
+   * <p>事件结束时间</p>
    */
   EndEventTime?: number
   /**
-   * 拓展数据
+   * <p>拓展数据</p>
    */
   ExtraData?: string
   /**
-   * 请求头
+   * <p>请求头</p>
    */
   RequestHeader?: string
 }
@@ -4389,15 +4389,15 @@ export interface DeleteInstanceRequest {
  */
 export interface DescribeIssuesListResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Data?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
-   * 消息
+   * <p>消息</p>
    */
   Message?: string
   /**
@@ -4676,15 +4676,15 @@ export interface DescribeDataFetchUrlInfoResponse {
  */
 export interface DescribeFOOMReportListResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Data?: string
   /**
-   * 消息
+   * <p>消息</p>
    */
   Message?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
@@ -4726,15 +4726,15 @@ export interface DescribeDataStaticUrlResponse {
  */
 export interface DescribeIssuesDistributionResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Data?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
-   * 消息
+   * <p>消息</p>
    */
   Message?: string
   /**
@@ -5232,39 +5232,39 @@ export interface DescribeRumGroupLogRequest {
  */
 export interface DescribeExceptionDetailRequest {
   /**
-   * 产品Id
+   * <p>产品Id</p>
    */
   ProductId: string
   /**
-   * 消息唯一标识
+   * <p>消息唯一标识</p>
    */
   ClientIdentify?: string
   /**
-   * 集群堆栈类型
+   * <p>集群堆栈类型</p>
    */
   ClusterStackType?: number
   /**
-   * 特征
+   * <p>特征</p>
    */
   Feature?: string
   /**
-   * 问题类型
+   * <p>问题类型</p>
    */
   IssueType?: number
   /**
-   * 事件开始时间
+   * <p>事件开始时间</p>
    */
   StartEventTime?: number
   /**
-   * 事件结束时间
+   * <p>事件结束时间</p>
    */
   EndEventTime?: number
   /**
-   * 拓展数据
+   * <p>拓展数据</p>
    */
   ExtraData?: string
   /**
-   * 请求头
+   * <p>请求头</p>
    */
   RequestHeader?: string
 }
@@ -5480,15 +5480,15 @@ export interface DescribeDataReportCountResponse {
  */
 export interface DescribeApplicationExitReportListResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Data?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
-   * 消息
+   * <p>消息</p>
    */
   Message?: string
   /**
@@ -5502,15 +5502,15 @@ export interface DescribeApplicationExitReportListResponse {
  */
 export interface DescribeLagANRProblemAccountDetailResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Data?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
-   * 消息
+   * <p>消息</p>
    */
   Message?: string
   /**
@@ -5936,15 +5936,15 @@ export interface DescribeTawInstancesResponse {
  */
 export interface DescribeApplicationExitReportDetailResponse {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Data?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
-   * 消息
+   * <p>消息</p>
    */
   Message?: string
   /**
@@ -6098,43 +6098,43 @@ export interface DescribeDataFetchProjectResponse {
  */
 export interface DescribeFOOMReportListRequest {
   /**
-   * 产品Id
+   * <p>产品Id</p>
    */
   ProductId: string
   /**
-   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
+   * <p>接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息</p>
    */
   FormListString?: string
   /**
-   * 提供给前端使用，当填写本字段时，会覆盖 formlist 的值
+   * <p>提供给前端使用，当填写本字段时，会覆盖 formlist 的值</p>
    */
   ParamToken?: string
   /**
-   * 特征
+   * <p>特征</p>
    */
   Feature?: string
   /**
-   * 当前页码
+   * <p>当前页码</p>
    */
   PageNumber?: number
   /**
-   * 每页展示最大数量
+   * <p>每页展示最大数量</p>
    */
   PageSize?: number
   /**
-   * 排序字段
+   * <p>排序字段</p>
    */
   SortField?: string
   /**
-   * 排序类型
+   * <p>排序类型</p>
    */
   SortType?: string
   /**
-   * 拓展数据
+   * <p>拓展数据</p>
    */
   ExtraData?: string
   /**
-   * 请求头
+   * <p>请求头</p>
    */
   RequestHeader?: string
 }
@@ -6144,43 +6144,43 @@ export interface DescribeFOOMReportListRequest {
  */
 export interface DescribeLagANRProblemFeatureAccountsRequest {
   /**
-   * 产品Id
+   * <p>产品Id</p>
    */
   ProductId: string
   /**
-   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
+   * <p>接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息</p>
    */
   FormListString?: string
   /**
-   * 提供给前端使用，当填写本字段时，会覆盖 formlist 的值
+   * <p>提供给前端使用，当填写本字段时，会覆盖 formlist 的值</p>
    */
   ParamToken?: string
   /**
-   * 问题特征
+   * <p>问题特征</p>
    */
   Feature?: string
   /**
-   * 排序字段
+   * <p>排序字段</p>
    */
   SortField?: string
   /**
-   * 排序类型
+   * <p>排序类型</p>
    */
   SortType?: string
   /**
-   * 当前页码
+   * <p>当前页码</p>
    */
   PageNumber?: number
   /**
-   * 每页展示最大数量
+   * <p>每页展示最大数量</p>
    */
   PageSize?: number
   /**
-   * 拓展数据
+   * <p>拓展数据</p>
    */
   ExtraData?: string
   /**
-   * 请求头
+   * <p>请求头</p>
    */
   RequestHeader?: string
 }
@@ -6354,39 +6354,39 @@ export interface DescribeDataLogUrlStatisticsV2Request {
  */
 export interface DescribeLagANRProblemListRequest {
   /**
-   * 产品Id
+   * <p>产品Id</p>
    */
   ProductId: string
   /**
-   * 提供给前端使用，当填写本字段时，会覆盖 formlist 的值
+   * <p>提供给前端使用，当填写本字段时，会覆盖 formlist 的值</p>
    */
   ParamToken?: string
   /**
-   * 接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息
+   * <p>接口调试专用，当 token 为空时，以这里的 value 作为筛选表单信息</p>
    */
   FormListString?: string
   /**
-   * 当前页码
+   * <p>当前页码</p>
    */
   PageNumber?: number
   /**
-   * 每页展示最大数量
+   * <p>每页展示最大数量</p>
    */
   PageSize?: number
   /**
-   * 排序字段
+   * <p>排序字段</p>
    */
   SortField?: string
   /**
-   * 排序类型
+   * <p>排序类型</p>
    */
   SortType?: string
   /**
-   * 拓展数据
+   * <p>拓展数据</p>
    */
   ExtraData?: string
   /**
-   * 请求头
+   * <p>请求头</p>
    */
   RequestHeader?: string
 }
@@ -6410,39 +6410,39 @@ export interface DescribeDataStaticResourceV2Response {
  */
 export interface DescribeTopIssuesRequest {
   /**
-   * 产品Id
+   * <p>产品Id</p>
    */
   ProductId: string
   /**
-   * 需要对比的查询条件，没有则不填
+   * <p>需要对比的查询条件，没有则不填</p>
    */
   Compare?: CompareCondition
   /**
-   * 查询条件
+   * <p>查询条件</p>
    */
   Condition?: CompareCondition
   /**
-   * 问题类型
+   * <p>问题类型</p>
    */
   IssueType?: number
   /**
-   * 排序字段
+   * <p>排序字段</p>
    */
   SortField?: string
   /**
-   * 排序方式
+   * <p>排序方式</p>
    */
   SortType?: string
   /**
-   * topN
+   * <p>topN</p>
    */
   TopNum?: number
   /**
-   * 拓展字段
+   * <p>拓展字段</p>
    */
   ExtraData?: string
   /**
-   * 请求头
+   * <p>请求头</p>
    */
   RequestHeader?: string
 }
@@ -6542,31 +6542,31 @@ export interface DescribeAppDimensionMetricsRequest {
  */
 export interface DescribeFOOMMallocProblemDetailRequest {
   /**
-   * 产品Id
+   * <p>产品Id</p>
    */
   ProductId: string
   /**
-   * 消息唯一标识
+   * <p>消息唯一标识</p>
    */
   ClientIdentify?: string
   /**
-   * 特征
+   * <p>特征</p>
    */
   Feature?: string
   /**
-   * 事件开始时间
+   * <p>事件开始时间</p>
    */
   StartEventTime?: number
   /**
-   * 事件结束时间
+   * <p>事件结束时间</p>
    */
   EndEventTime?: number
   /**
-   * 拓展数据
+   * <p>拓展数据</p>
    */
   ExtraData?: string
   /**
-   * 请求头
+   * <p>请求头</p>
    */
   RequestHeader?: string
 }

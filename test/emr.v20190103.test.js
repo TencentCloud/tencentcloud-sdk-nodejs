@@ -698,6 +698,16 @@ it("emr.v20190103.DescribeEmrApplicationStatics", async function () {
     }
 })
 
+it("emr.v20190103.InstallSoftware", async function () {
+    try {
+       const data = await client.InstallSoftware({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.DescribeSLInstance", async function () {
     try {
        const data = await client.DescribeSLInstance({})

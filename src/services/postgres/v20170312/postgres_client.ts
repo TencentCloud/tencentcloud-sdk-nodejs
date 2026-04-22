@@ -270,6 +270,7 @@ import {
   DescribeEncryptionKeysResponse,
   CreateReadOnlyGroupNetworkAccessResponse,
   DeleteAccountResponse,
+  LogFilter,
 } from "./postgres_models"
 
 /**

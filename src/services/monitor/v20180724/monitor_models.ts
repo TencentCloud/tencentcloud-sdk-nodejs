@@ -2919,41 +2919,45 @@ export interface DescribeExternalClusterUninstallCommandRequest {
  */
 export interface CreateAlarmNoticeRequest {
   /**
-   * 模块名，这里填“monitor”
+   * <p>模块名，这里填“monitor”</p>
    */
   Module: string
   /**
-   * 通知模板名称 60字符以内
+   * <p>通知模板名称 60字符以内</p>
    */
   Name: string
   /**
-   * 通知类型 ALARM=未恢复通知 OK=已恢复通知 ALL=都通知
+   * <p>通知类型 ALARM=未恢复通知 OK=已恢复通知 ALL=都通知</p>
    */
   NoticeType: string
   /**
-   * 通知语言 zh-CN=中文 en-US=英文
+   * <p>通知语言 zh-CN=中文 en-US=英文</p>
    */
   NoticeLanguage: string
   /**
-   * 用户通知 最多5个
+   * <p>用户通知 最多5个</p>
    */
   UserNotices?: Array<UserNotice>
   /**
-   * 回调通知 最多6个
+   * <p>回调通知 最多6个</p>
    */
   URLNotices?: Array<URLNotice>
   /**
-   * 推送CLS日志服务的操作 最多1个
+   * <p>推送CLS日志服务的操作 最多1个</p>
    */
   CLSNotices?: Array<CLSNotice>
   /**
-   * 模板绑定的标签
+   * <p>模板绑定的标签</p>
    */
   Tags?: Array<Tag>
   /**
-   * 是否免登录，0-否，1-是
+   * <p>是否免登录，0-否，1-是</p>
    */
   IsLoginFree?: number
+  /**
+   * <p>IANA 时区名</p>
+   */
+  TimeZoneName?: string
 }
 
 /**
@@ -4222,45 +4226,49 @@ export interface ModifyPrometheusAgentExternalLabelsResponse {
  */
 export interface ModifyAlarmNoticeRequest {
   /**
-   * 模块名，这里填“monitor”
+   * <p>模块名，这里填“monitor”</p>
    */
   Module: string
   /**
-   * 告警通知规则名称 60字符以内
+   * <p>告警通知规则名称 60字符以内</p>
    */
   Name: string
   /**
-   * 通知类型 ALARM=未恢复通知 OK=已恢复通知 ALL=都通知
+   * <p>通知类型 ALARM=未恢复通知 OK=已恢复通知 ALL=都通知</p>
    */
   NoticeType: string
   /**
-   * 通知语言 zh-CN=中文 en-US=英文
+   * <p>通知语言 zh-CN=中文 en-US=英文</p>
    */
   NoticeLanguage: string
   /**
-   * 告警通知模板 ID
+   * <p>告警通知模板 ID</p>
    */
   NoticeId: string
   /**
-   * 用户通知 最多5个
+   * <p>用户通知 最多5个</p>
    */
   UserNotices?: Array<UserNotice>
   /**
-   * 回调通知 最多6个
+   * <p>回调通知 最多6个</p>
    */
   URLNotices?: Array<URLNotice>
   /**
-   * 告警通知推送到CLS服务 最多1个
+   * <p>告警通知推送到CLS服务 最多1个</p>
    */
   CLSNotices?: Array<CLSNotice>
   /**
-   * 告警通知模板绑定的告警策略ID列表
+   * <p>告警通知模板绑定的告警策略ID列表</p>
    */
   PolicyIds?: Array<string>
   /**
-   * 是否免登录，0-否，1-是
+   * <p>是否免登录，0-否，1-是</p>
    */
   IsLoginFree?: number
+  /**
+   * <p>IANA 时区名</p>
+   */
+  TimeZoneName?: string
 }
 
 /**
@@ -6857,74 +6865,78 @@ export interface CreatePrometheusAlertGroupRequest {
  */
 export interface AlarmNotice {
   /**
-   * 告警通知模板 ID
+   * <p>告警通知模板 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
-   * 告警通知模板名称
+   * <p>告警通知模板名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 上次修改时间
+   * <p>上次修改时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedAt?: string
   /**
-   * 上次修改人
+   * <p>上次修改人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedBy?: string
   /**
-   * 告警通知类型 ALARM=未恢复通知 OK=已恢复通知 ALL=全部通知
+   * <p>告警通知类型 ALARM=未恢复通知 OK=已恢复通知 ALL=全部通知</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NoticeType?: string
   /**
-   * 用户通知列表
+   * <p>用户通知列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserNotices?: Array<UserNotice>
   /**
-   * 回调通知列表
+   * <p>回调通知列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   URLNotices?: Array<URLNotice>
   /**
-   * 是否是系统预设通知模板 0=否 1=是
+   * <p>是否是系统预设通知模板 0=否 1=是</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsPreset?: number
   /**
-   * 通知语言 zh-CN=中文 en-US=英文
+   * <p>通知语言 zh-CN=中文 en-US=英文</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NoticeLanguage?: string
   /**
-   * 告警通知模板绑定的告警策略ID列表
+   * <p>告警通知模板绑定的告警策略ID列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyIds?: Array<string>
   /**
-   * 后台 amp consumer id
+   * <p>后台 amp consumer id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AMPConsumerId?: string
   /**
-   * 推送cls渠道
+   * <p>推送cls渠道</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CLSNotices?: Array<CLSNotice>
   /**
-   * 通知模板绑定的标签
+   * <p>通知模板绑定的标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
-   * 是否免登录，0-否，1-是
+   * <p>是否免登录，0-否，1-是</p>
    */
   IsLoginFree?: number
+  /**
+   * <p>IANA 时区名</p>
+   */
+  TimeZoneName?: string
 }
 
 /**
@@ -10956,7 +10968,7 @@ export interface DescribeBasicAlarmListAlarms {
  */
 export interface CreateAlarmNoticeResponse {
   /**
-   * 告警通知模板ID
+   * <p>告警通知模板ID</p>
    */
   NoticeId?: string
   /**

@@ -425,6 +425,24 @@ export interface ComputeResourceAdvanceParams {
    * <p>base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看</p>
    */
   UserScript?: string
+  /**
+   * <p>节点组Id</p>
+   */
+  TkeClusterNodePool?: string
+}
+
+/**
+ * 服务的部署信息
+ */
+export interface ServiceDeployInfo {
+  /**
+   * 服务名称
+   */
+  ServiceName?: string
+  /**
+   * 角色的部署信息列表
+   */
+  ComponentDeployInfoList?: Array<ComponentDeployInfo>
 }
 
 /**
@@ -651,6 +669,64 @@ export interface JobResult {
    * YARN任务ID
    */
   ApplicationId?: string
+}
+
+/**
+ * InstallSoftware请求参数结构体
+ */
+export interface InstallSoftwareRequest {
+  /**
+   * <p>集群实例号</p>
+   */
+  InstanceId: string
+  /**
+   * <p>组件版本号，例如presto-0.161，可根据InstallSoftWareInfo查看当前集群可安装的组件</p>
+   */
+  SoftInfo: Array<string>
+  /**
+   * <p>如果需要购买CDB，如果是包年包月集群，是否为这个cdb自动续费，默认AUTO_RENEW,如不自动续费新增的CDB，则填入NOT_AUTO_RENEW</p>
+   */
+  CdbAutoRenew?: string
+  /**
+   * <p>hive共享元数据库类型。取值范围：</p><li>EMR_NEW_META：表示集群默认创建</li><li>EMR_EXIT_METE：表示集群使用指定EMR-MetaDB。</li><li>USER_CUSTOM_META：表示集群使用自定义MetaDB。</li>
+   */
+  MetaType?: string
+  /**
+   * <p>EMR-MetaDB实例</p>
+   */
+  UnifyMetaInstanceId?: string
+  /**
+   * <p>自定义MetaDB信息</p>
+   */
+  MetaDBInfo?: CustomMetaInfo
+  /**
+   * <p>共用组件信息</p>
+   */
+  ExternalService?: Array<ExternalService>
+  /**
+   * <p>标签信息</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>角色的Pod规格信息</p>
+   */
+  CloudResources?: Array<CloudResource>
+  /**
+   * <p>自定义部署信息</p>
+   */
+  ServiceDeployInfoList?: Array<ServiceDeployInfo>
+  /**
+   * <p>数据库版本</p>
+   */
+  DefaultMetaVersion?: string
+  /**
+   * <p>是否开通审计</p>
+   */
+  NeedCdbAudit?: number
+  /**
+   * <p>额外容器相关配置</p>
+   */
+  ContainerExtraConf?: ContainerExtraConf
 }
 
 /**
@@ -2196,6 +2272,20 @@ export interface UserInfoForUserManager {
 }
 
 /**
+ * 标签选择器
+ */
+export interface LabelSelector {
+  /**
+   * <p>标签精确匹配条件</p>
+   */
+  MatchLabels?: Array<StringMap>
+  /**
+   * <p>标签表达式匹配条件</p>
+   */
+  MatchExpressions?: Array<LabelSelectorRequirement>
+}
+
+/**
  * DeleteAutoScaleStrategy返回参数结构体
  */
 export interface DeleteAutoScaleStrategyResponse {
@@ -2600,6 +2690,40 @@ export interface Toleration {
    * 驱逐等待时间
    */
   TolerationSeconds?: number
+}
+
+/**
+ * DescribeEmrOverviewMetrics请求参数结构体
+ */
+export interface DescribeEmrOverviewMetricsRequest {
+  /**
+   * 结束时间
+   */
+  End: number
+  /**
+   * 指标名，NODE.CPU：节点平均CPU利用率和总核数；NODE.CPU.SLHBASE：Serverless实例平均CPU利用率和总核数；HDFS.NN.CAPACITY：存储使用率和总量
+   */
+  Metric: string
+  /**
+   * 集群id
+   */
+  InstanceId: string
+  /**
+   * 粒度 30s-max 1m-max 1h-max等
+   */
+  Downsample: string
+  /**
+   * 起始时间，画饼状图时不传
+   */
+  Start?: number
+  /**
+   * 聚合方法，扩展用，这里目前不用传
+   */
+  Aggregator?: string
+  /**
+   * 指标要查询的具体type 如："{"type":"CapacityTotal|CapacityRemaining"}"
+   */
+  Tags?: string
 }
 
 /**
@@ -3208,7 +3332,7 @@ export interface COSSettings {
  */
 export interface CreateCloudInstanceResponse {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
@@ -4117,6 +4241,30 @@ export interface DescribeInstanceRenewNodesResponse {
 }
 
 /**
+ * 通用字符串map
+ */
+export interface StringMap {
+  /**
+   * <p>键</p>
+   */
+  Key?: string
+  /**
+   * <p>值</p>
+   */
+  Value?: string
+}
+
+/**
+ * 容器额外配置
+ */
+export interface ContainerExtraConf {
+  /**
+   * <p>计算作业代理访问类型，如Spark作业和RayCluster UI；不填写默认使用Internal</p><p>枚举值：</p><ul><li>Internal： 使用内网LB代理访问</li><li>Public： 使用公网LB代理访问</li><li>None： 不创建LB代理访问</li></ul>
+   */
+  JobAccessProxyType?: string
+}
+
+/**
  * CreateSLInstance返回参数结构体
  */
 export interface CreateSLInstanceResponse {
@@ -4367,6 +4515,24 @@ export interface EMREventListItem {
    * 事件发生时间
    */
   CreateTime?: string
+}
+
+/**
+ * 标签选择器匹配表达式
+ */
+export interface LabelSelectorRequirement {
+  /**
+   * <p>键</p>
+   */
+  Key?: string
+  /**
+   * <p>匹配操作</p>
+   */
+  Operator?: string
+  /**
+   * <p>值</p>
+   */
+  Values?: Array<string>
 }
 
 /**
@@ -4796,6 +4962,25 @@ export interface ScriptBootstrapActionConfig {
    * 备注
    */
   Remark?: string
+}
+
+/**
+ * InstallSoftware返回参数结构体
+ */
+export interface InstallSoftwareResponse {
+  /**
+   * <p>校验错误信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMessages?: Array<string>
+  /**
+   * <p>流程id</p>
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5745,6 +5930,44 @@ export interface DescribeSparkApplicationsResponse {
 }
 
 /**
+ * 调度拓扑分布
+ */
+export interface TopologySpreadConstraint {
+  /**
+   * <p>最大偏差值</p>
+   */
+  MaxSkew?: number
+  /**
+   * <p>拓扑域键</p>
+   */
+  TopologyKey?: string
+  /**
+   * <p>不满足约束时的处理策略</p>
+   */
+  WhenUnsatisfiable?: string
+  /**
+   * <p>标签选择器</p>
+   */
+  LabelSelector?: LabelSelector
+  /**
+   * <p>最小拓扑域数量</p>
+   */
+  MinDomains?: number
+  /**
+   * <p>节点亲和性策略</p>
+   */
+  NodeAffinityPolicy?: string
+  /**
+   * <p>节点污点策略</p>
+   */
+  NodeTaintsPolicy?: string
+  /**
+   * <p>匹配标签键列表</p>
+   */
+  MatchLabelKeys?: Array<string>
+}
+
+/**
  * ScaleOutInstance返回参数结构体
  */
 export interface ScaleOutInstanceResponse {
@@ -6580,50 +6803,70 @@ export interface DescribeJobFlowRequest {
  */
 export interface CloudResource {
   /**
-   * 组件角色名
+   * <p>组件角色名</p>
    */
   ComponentName: string
   /**
-   * pod请求数量
+   * <p>pod请求数量</p>
    */
   PodNumber: number
   /**
-   * Cpu请求数量最大值
+   * <p>Cpu请求数量最大值</p>
    */
   LimitCpu: number
   /**
-   * 内存请求数量最大值
+   * <p>内存请求数量最大值</p>
    */
   LimitMemory: number
   /**
-   * 服务名称，如HIVE
+   * <p>服务名称，如HIVE</p>
    */
   Service?: string
   /**
-   * 数据卷目录设置
+   * <p>数据卷目录设置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeDir?: VolumeSetting
   /**
-   * 组件外部访问设置
+   * <p>组件外部访问设置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExternalAccess?: ExternalAccess
   /**
-   * 节点亲和性设置
+   * <p>节点亲和性设置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Affinity?: NodeAffinity
   /**
-   * 所选数据盘信息
+   * <p>所选数据盘信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Disks?: Array<Disk>
   /**
-   * 容忍
+   * <p>容忍</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tolerations?: Array<Toleration>
+  /**
+   * <p>pod亲和性</p>
+   */
+  PodAffinity?: PodAffinitySpec
+  /**
+   * <p>pod反亲和性</p>
+   */
+  PodAntiAffinity?: PodAffinitySpec
+  /**
+   * <p>拓扑分布约束</p>
+   */
+  TopologySpreadConstraints?: Array<TopologySpreadConstraint>
+  /**
+   * <p>pod标签</p>
+   */
+  PodLabels?: Array<StringMap>
+  /**
+   * <p>是否创建默认raycluster</p>
+   */
+  EnableDefaultRayCluster?: boolean
 }
 
 /**
@@ -6804,6 +7047,20 @@ export interface Placement {
    * 实例所属项目ID。该参数可以通过调用[DescribeProject](https://cloud.tencent.com/document/api/651/78725) 的返回值中的 projectId 字段来获取。不填为默认项目。
    */
   ProjectId?: number
+}
+
+/**
+ * 角色的部署信息
+ */
+export interface ComponentDeployInfo {
+  /**
+   * 角色名称
+   */
+  ComponentName?: string
+  /**
+   * 待安装的节点uuid列表
+   */
+  DeployHostUuidList?: Array<string>
 }
 
 /**
@@ -7713,55 +7970,39 @@ export interface ApplicationStatics {
  */
 export interface TerminateInstanceRequest {
   /**
-   * 实例ID。
+   * <p>实例ID。</p>
    */
   InstanceId: string
   /**
-   * 销毁节点ID。该参数为预留参数，用户无需配置。
+   * <p>销毁节点ID。该参数为预留参数，用户无需配置。</p>
    */
   ResourceIds?: Array<string>
   /**
-   * 类型为ComputeResource和EMR以及默认，默认为EMR,类型为EMR时,InstanceId生效,类型为ComputeResource时,使用ComputeResourceId标识
+   * <p>类型为ComputeResource和EMR以及默认，默认为EMR,类型为EMR时,InstanceId生效,类型为ComputeResource时,使用ComputeResourceId标识</p>
    */
   ResourceBaseType?: string
   /**
-   * 计算资源ID
+   * <p>计算资源ID</p>
    */
   ComputeResourceId?: string
+  /**
+   * <p>保留计算资源关联的TKE集群</p>
+   */
+  RetainTkeCluster?: boolean
 }
 
 /**
- * DescribeEmrOverviewMetrics请求参数结构体
+ * Pod亲和性
  */
-export interface DescribeEmrOverviewMetricsRequest {
+export interface PodAffinitySpec {
   /**
-   * 结束时间
+   * <p>调度硬关联规则</p>
    */
-  End: number
+  RequiredDuringSchedulingIgnoredDuringExecution?: Array<PodAffinityTerm>
   /**
-   * 指标名，NODE.CPU：节点平均CPU利用率和总核数；NODE.CPU.SLHBASE：Serverless实例平均CPU利用率和总核数；HDFS.NN.CAPACITY：存储使用率和总量
+   * <p>调度软关联规则</p>
    */
-  Metric: string
-  /**
-   * 集群id
-   */
-  InstanceId: string
-  /**
-   * 粒度 30s-max 1m-max 1h-max等
-   */
-  Downsample: string
-  /**
-   * 起始时间，画饼状图时不传
-   */
-  Start?: number
-  /**
-   * 聚合方法，扩展用，这里目前不用传
-   */
-  Aggregator?: string
-  /**
-   * 指标要查询的具体type 如："{"type":"CapacityTotal|CapacityRemaining"}"
-   */
-  Tags?: string
+  PreferredDuringSchedulingIgnoredDuringExecution?: Array<WeightedPodAffinityTerm>
 }
 
 /**
@@ -9256,6 +9497,28 @@ export interface AddMetricScaleStrategyRequest {
 }
 
 /**
+ * Pod亲和性项
+ */
+export interface PodAffinityTerm {
+  /**
+   * <p>标签选择器</p>
+   */
+  LabelSelector?: LabelSelector
+  /**
+   * <p>命名空间列表</p>
+   */
+  Namespaces?: Array<string>
+  /**
+   * <p>拓扑域键</p>
+   */
+  TopologyKey?: string
+  /**
+   * <p>命名空间选择器</p>
+   */
+  NamespaceSelector?: LabelSelector
+}
+
+/**
  * ModifyUsersOfGroupSTD返回参数结构体
  */
 export interface ModifyUsersOfGroupSTDResponse {
@@ -10235,93 +10498,85 @@ export interface CreateClusterRequest {
  */
 export interface CreateCloudInstanceRequest {
   /**
-   * 实例名称。
-<li>长度限制为6-36个字符。</li>
-<li>只允许包含中文、字母、数字、-、_。</li>
+   * <p>实例名称。</p><li>长度限制为6-36个字符。</li><li>只允许包含中文、字母、数字、-、_。</li>
    */
   InstanceName: string
   /**
-   * 容器集群类型，取值范围
-<li>EMR容器集群实例: EMR-TKE</li>
+   * <p>容器集群类型，取值范围</p><li>EMR容器集群实例: EMR-TKE</li>
    */
   ClusterClass: string
   /**
-   * 部署的组件列表，不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）对应不同可选组件列表，不同产品版本可选组件列表查询：[组件版本](https://cloud.tencent.com/document/product/589/20279) ；
-
+   * <p>部署的组件列表，不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）对应不同可选组件列表，不同产品版本可选组件列表查询：<a href="https://cloud.tencent.com/document/product/589/20279">组件版本</a> ；</p>
    */
   Software: Array<string>
   /**
-   * 容器平台类型，取值范围
-<li>EMR容器集群实例: tke</li>
+   * <p>容器平台类型，取值范围</p><li>EMR容器集群实例: tke</li>
    */
   PlatFormType: string
   /**
-   * cos存储桶
+   * <p>cos存储桶</p>
    */
   CosBucket: string
   /**
-   * 容器集群id
+   * <p>容器集群id</p>
    */
   EksClusterId?: string
   /**
-   * 产品Id，不同产品ID表示不同的EMR产品版本。取值范围：
-<li>60:表示EMR-TKE-V1.1.0</li>
-<li>55:表示EMR-TKE-V1.0.1</li>
-<li>52:表示EMR-TKE-V1.0.0</li>
+   * <p>产品Id，不同产品ID表示不同的EMR产品版本。取值范围：</p><li>60:表示EMR-TKE-V1.1.0</li><li>55:表示EMR-TKE-V1.0.1</li><li>52:表示EMR-TKE-V1.0.0</li>
    */
   ProductId?: number
   /**
-   * 客户端token，唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，小于等于64个字符，例如 a9a90aa6fae36063280
-示例值：a9a90aa6fae36063280
+   * <p>客户端token，唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，小于等于64个字符，例如 a9a90aa6fae36063280<br>示例值：a9a90aa6fae36063280</p>
    */
   ClientToken?: string
   /**
-   * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。
+   * <p>私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。</p>
    */
   VPCSettings?: VPCSettings
   /**
-   * 所有组件角色及其对应的Pod资源请求信息
+   * <p>所有组件角色及其对应的Pod资源请求信息</p>
    */
   CloudResources?: Array<CloudResource>
   /**
-   * 安全组Id，为空默认创建新的安全组
+   * <p>安全组Id，为空默认创建新的安全组</p>
    */
   SgId?: string
   /**
-   * 元数据库信息
-MetaDB信息，当MetaType选择EMR_NEW_META时，MetaDataJdbcUrl MetaDataUser MetaDataPass UnifyMetaInstanceId不用填
-当MetaType选择EMR_EXIT_META时，填写UnifyMetaInstanceId
-当MetaType选择USER_CUSTOM_META时，填写MetaDataJdbcUrl MetaDataUser MetaDataPass
+   * <p>元数据库信息<br>MetaDB信息，当MetaType选择EMR_NEW_META时，MetaDataJdbcUrl MetaDataUser MetaDataPass UnifyMetaInstanceId不用填<br>当MetaType选择EMR_EXIT_META时，填写UnifyMetaInstanceId<br>当MetaType选择USER_CUSTOM_META时，填写MetaDataJdbcUrl MetaDataUser MetaDataPass</p>
    */
   MetaDBInfo?: CustomMetaDBInfo
   /**
-   * 标签信息
+   * <p>标签信息</p>
    */
   Tags?: Array<Tag>
   /**
-   * 登录密码，LoginSettings中的Password字段
+   * <p>登录密码，LoginSettings中的Password字段</p>
    */
   LoginSettings?: LoginSettings
   /**
-   * 共享服务信息
+   * <p>共享服务信息</p>
    */
   ExternalService?: Array<ExternalService>
   /**
-   * 可用区id
+   * <p>可用区id</p>
    */
   ZoneId?: number
   /**
-   * 数据库版本
+   * <p>数据库版本</p>
    */
   DefaultMetaVersion?: string
   /**
-   * 是否开通审计
+   * <p>是否开通审计</p>
    */
   NeedCdbAudit?: number
   /**
-   * 安全组来源IP
+   * <p>安全组来源IP</p>
    */
   SgIP?: string
+  /**
+   * <p>额外容器相关配置</p>
+   */
+  ContainerExtraConf?: ContainerExtraConf
 }
 
 /**
@@ -11591,4 +11846,18 @@ export interface NodeAffinity {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PreferredDuringSchedulingIgnoredDuringExecution?: Array<PreferredSchedulingTerm>
+}
+
+/**
+ * 加权pod亲和性项
+ */
+export interface WeightedPodAffinityTerm {
+  /**
+   * <p>权重</p>
+   */
+  Weight?: number
+  /**
+   * <p>pod亲和性条件</p>
+   */
+  PodAffinityTerm?: PodAffinityTerm
 }

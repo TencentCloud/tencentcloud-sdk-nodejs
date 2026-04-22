@@ -1730,7 +1730,7 @@ export interface DescribeDLPFileDetectResultRequest {
    */
   DomainInstanceId?: string
   /**
-   * 查询ID，即提交送检任务接口（CreateDLPFileDetectionTask）返回的任务ID（DLPFileDetectionTaskID）
+   * <p>查询ID，即提交送检任务接口（CreateDLPFileDetectionTask）返回的任务ID（DLPFileDetectionTaskID）</p>
    */
   QueryID?: string
 }
@@ -2853,7 +2853,7 @@ export interface DescribeDeviceChildGroupsResponse {
  */
 export interface DescribeDLPFileDetectResultResponse {
   /**
-   * 文件鉴定任务结果数据。详情查看具体数据结构
+   * <p>文件鉴定任务结果数据。详情查看具体数据结构</p>
    */
   Data?: DescribeDLPFileDetectResultData
   /**

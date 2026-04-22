@@ -2237,29 +2237,54 @@ export interface RemoveDBInstanceFromReadOnlyGroupResponse {
  */
 export interface RawSlowQuery {
   /**
-   * 慢SQL 语句
+   * <p>慢SQL 语句</p>
    */
-  RawQuery: string
+  RawQuery?: string
   /**
-   * 慢SQL 查询的数据库
+   * <p>慢SQL 查询的数据库</p>
    */
-  DatabaseName: string
+  DatabaseName?: string
   /**
-   * 慢SQL执行 耗时
+   * <p>慢SQL执行 耗时</p>
    */
-  Duration: number
+  Duration?: number
   /**
-   * 执行慢SQL的客户端
+   * <p>执行慢SQL的客户端</p>
    */
-  ClientAddr: string
+  ClientAddr?: string
   /**
-   * 执行慢SQL的用户名
+   * <p>执行慢SQL的用户名</p>
    */
-  UserName: string
+  UserName?: string
   /**
-   * 慢SQL执行的开始时间
+   * <p>慢SQL执行的开始时间</p>
    */
-  SessionStartTime: string
+  SessionStartTime?: string
+  /**
+   * <p>执行慢SQL的进程ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessId?: number
+  /**
+   * <p>执行慢SQL的会话ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionId?: string
+  /**
+   * <p>执行慢SQL的事务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VirtualTransactionId?: string
+  /**
+   * <p>执行慢SQL的状态码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlStateCode?: string
+  /**
+   * <p>执行慢SQL的客户端名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApplicationName?: string
 }
 
 /**
@@ -2551,33 +2576,37 @@ export interface DescribeBackupSummariesResponse {
  */
 export interface DescribeDBErrlogsRequest {
   /**
-   * 实例ID。	可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   * <p>实例ID。    可通过<a href="https://cloud.tencent.com/document/api/409/16773">DescribeDBInstances</a>接口获取</p>
    */
   DBInstanceId: string
   /**
-   * 查询起始时间，形如2018-01-01 00:00:00。日志保留时间默认为7天，起始时间不能超出保留时间范围。
+   * <p>查询起始时间，形如2018-01-01 00:00:00。日志保留时间默认为7天，起始时间不能超出保留时间范围。</p>
    */
   StartTime: string
   /**
-   * 查询结束时间，形如2018-01-01 00:00:00。
+   * <p>查询结束时间，形如2018-01-01 00:00:00。</p>
    */
   EndTime: string
   /**
-   * 数据库名字。
+   * <p>数据库名字。</p>
    */
   DatabaseName?: string
   /**
-   * 搜索关键字。
+   * <p>搜索关键字。</p>
    */
   SearchKeys?: Array<string>
   /**
-   * 每页显示数量，取值范围为1-100。默认值为50。
+   * <p>每页显示数量，取值范围为1-100。默认值为50。</p>
    */
   Limit?: number
   /**
-   * 数据偏移量，从0开始。默认值为0。
+   * <p>数据偏移量，从0开始。默认值为0。</p>
    */
   Offset?: number
+  /**
+   * <p>日志过滤条件。格式为  [{Type: &quot;ApplicationName&quot;, Compare: &quot;INC&quot;, Value: [&quot;123&quot;]}]。</p>
+   */
+  LogFilters?: Array<LogFilter>
 }
 
 /**
@@ -3620,21 +3649,56 @@ export interface DescribeSlowQueryAnalysisRequest {
  */
 export interface ErrLogDetail {
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   UserName?: string
   /**
-   * 数据库名字
+   * <p>数据库名字</p>
    */
   Database?: string
   /**
-   * 错误发生时间
+   * <p>错误发生时间</p>
    */
   ErrTime?: string
   /**
-   * 错误消息
+   * <p>错误消息</p>
    */
   ErrMsg?: string
+  /**
+   * <p>进程ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessId?: number
+  /**
+   * <p>客户端地址</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientAddr?: string
+  /**
+   * <p>会话ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionId?: string
+  /**
+   * <p>会话开始时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionStartTime?: string
+  /**
+   * <p>虚拟事务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VirtualTransactionId?: string
+  /**
+   * <p>SQLSTATE错误码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlStateCode?: string
+  /**
+   * <p>客户端应用名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApplicationName?: string
 }
 
 /**
@@ -4807,11 +4871,11 @@ export interface DescribeParameterTemplateAttributesRequest {
  */
 export interface DescribeDBErrlogsResponse {
   /**
-   * 查询到的日志数量，最大值为10000条。
+   * <p>查询到的日志数量，最大值为10000条。</p>
    */
   TotalCount?: number
   /**
-   * 错误日志详细信息集合。
+   * <p>错误日志详细信息集合。</p>
    */
   Details?: Array<ErrLogDetail>
   /**
@@ -5857,4 +5921,22 @@ export interface DeleteAccountResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 日志过滤条件
+ */
+export interface LogFilter {
+  /**
+   * <p>过滤条件名称。</p><p>如：sql - SQL命令详情</p><p>host – 客户端 IP；<br>user – 数据库账户。</p>
+   */
+  Type: string
+  /**
+   * <p>过滤条件匹配类型。支持：<br>INC – 包含；     （多个值之间是||的关系）<br>EXC – 不包含； （多个值之间是&amp;&amp;的关系）<br>EQS – 等于；     （多个值之间是||的关系）<br>NEQ – 不等于；（多个值之间是&amp;&amp;的关系）<br>RG – 范围；</p>
+   */
+  Compare: string
+  /**
+   * <p>过滤条件匹配值。当Compare=RG时，例：[&quot;1-100&quot;,&quot;200-300&quot;]</p>
+   */
+  Value: Array<string>
 }

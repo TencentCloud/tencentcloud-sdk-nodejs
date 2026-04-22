@@ -32,6 +32,7 @@ import {
   DynamicPodSpec,
   ResetYarnConfigRequest,
   ComputeResourceAdvanceParams,
+  ServiceDeployInfo,
   DescribeServiceNodeInfosResponse,
   AttachDisksRequest,
   Tag,
@@ -42,6 +43,7 @@ import {
   TerminateTasksResponse,
   DescribeSparkQueriesResponse,
   JobResult,
+  InstallSoftwareRequest,
   DescribeInspectionTaskResultRequest,
   InquiryPriceCreateInstanceResponse,
   DescribeHDFSStorageInfoRequest,
@@ -90,6 +92,7 @@ import {
   AddNodeResourceConfigResponse,
   ModifyResourceScheduleConfigRequest,
   UserInfoForUserManager,
+  LabelSelector,
   DeleteAutoScaleStrategyResponse,
   RestartPolicy,
   ClusterExternalServiceInfo,
@@ -107,6 +110,7 @@ import {
   DescribeHBaseTableRequestMetricResponse,
   DescribeJobFlowResponse,
   Toleration,
+  DescribeEmrOverviewMetricsRequest,
   ClusterSetting,
   ModifyResourceResponse,
   PodSpecInfo,
@@ -154,6 +158,8 @@ import {
   RunJobFlowResponse,
   DescribeHiveQueriesResponse,
   DescribeInstanceRenewNodesResponse,
+  StringMap,
+  ContainerExtraConf,
   CreateSLInstanceResponse,
   SLInstance,
   DescribeClusterNodesResponse,
@@ -163,6 +169,7 @@ import {
   DeleteUserManagerUserListRequest,
   DescribeResourceScheduleResponse,
   EMREventListItem,
+  LabelSelectorRequirement,
   DescribeKyuubiQueryInfoRequest,
   DescribeNodeResourceConfigFastResponse,
   DescribeInsightListResponse,
@@ -176,6 +183,7 @@ import {
   DiffDetailItem,
   AutoScaleGroupAdvanceAttrs,
   ScriptBootstrapActionConfig,
+  InstallSoftwareResponse,
   NodeSelectorTerm,
   ModifyUsersOfGroupSTDRequest,
   ItemSeq,
@@ -209,6 +217,7 @@ import {
   TerminateInstanceResponse,
   DescribeResourceConfig,
   DescribeSparkApplicationsResponse,
+  TopologySpreadConstraint,
   ScaleOutInstanceResponse,
   ModifyUserManagerPwdResponse,
   ImpalaQuery,
@@ -243,6 +252,7 @@ import {
   ModifyYarnDeployResponse,
   UserManagerUserBriefInfo,
   Placement,
+  ComponentDeployInfo,
   DescribeUsersForUserManagerRequest,
   ConfigSetInfo,
   DescribeNodeSpecRequest,
@@ -280,7 +290,7 @@ import {
   StorageSummaryDistribution,
   ApplicationStatics,
   TerminateInstanceRequest,
-  DescribeEmrOverviewMetricsRequest,
+  PodAffinitySpec,
   ServiceProcessFunctionInfo,
   PreExecuteFileSettings,
   TerminateSLInstanceRequest,
@@ -320,6 +330,7 @@ import {
   ServiceNodeDetailInfo,
   SchedulerTaskDetail,
   AddMetricScaleStrategyRequest,
+  PodAffinityTerm,
   ModifyUsersOfGroupSTDResponse,
   ResetYarnConfigResponse,
   FlowParam,
@@ -393,6 +404,7 @@ import {
   Filters,
   InstanceChargePrepaid,
   NodeAffinity,
+  WeightedPodAffinityTerm,
 } from "./emr_models"
 
 /**
@@ -1088,6 +1100,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEmrApplicationStaticsResponse) => void
   ): Promise<DescribeEmrApplicationStaticsResponse> {
     return this.request("DescribeEmrApplicationStatics", req, cb)
+  }
+
+  /**
+   * 安装组件。对于依赖元数据库的组件，有可能会需要下单一个cdb。可根据InstallSoftWareInfo查看当前集群可安装的组件，以及哪些组件有可能需要cdb。
+   */
+  async InstallSoftware(
+    req: InstallSoftwareRequest,
+    cb?: (error: string, rep: InstallSoftwareResponse) => void
+  ): Promise<InstallSoftwareResponse> {
+    return this.request("InstallSoftware", req, cb)
   }
 
   /**

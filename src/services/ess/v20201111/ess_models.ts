@@ -855,25 +855,19 @@ export interface CreateWebThemeConfigResponse {
  */
 export interface DescribeFlowInfoRequest {
   /**
-   * 执行本接口操作的员工信息。 注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   * <p>执行本接口操作的员工信息。 注: <code>在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。</code></p>
    */
   Operator?: UserInfo
   /**
-   * 需要查询的流程ID列表，最多可传入100个ID。
-如果要查询合同组的信息，则不需要传入此参数，只需传入 FlowGroupId 参数即可。
-
-
-可登录腾讯电子签控制台，在 "合同"->"合同中心" 中查看某个合同的FlowId(在页面中展示为合同ID)。
-
-[点击查看FlowId在控制台中的位置](https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png)
+   * <p>需要查询的流程ID列表，最多可传入100个ID。<br>如果要查询合同组的信息，则不需要传入此参数，只需传入 FlowGroupId 参数即可。</p><p>可登录腾讯电子签控制台，在 &quot;合同&quot;-&gt;&quot;合同中心&quot; 中查看某个合同的FlowId(在页面中展示为合同ID)。</p><p><a href="https://qcloudimg.tencent-cloud.cn/raw/0a83015166cfe1cb043d14f9ec4bd75e.png">点击查看FlowId在控制台中的位置</a></p>
    */
   FlowIds?: Array<string>
   /**
-   * 代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   * <p>代理企业和员工的信息。 在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。</p>
    */
   Agent?: Agent
   /**
-   * 需要查询的流程组ID，如果传入此参数，则会忽略 FlowIds 参数。该合同组由<a href="https://qian.tencent.com/developers/companyApis/startFlows/CreateFlowGroupByFiles" target="_blank">通过多文件创建合同组签署流程</a>等接口创建。
+   * <p>需要查询的流程组ID，如果传入此参数，则会忽略 FlowIds 参数。该合同组由<a href="https://qian.tencent.com/developers/companyApis/startFlows/CreateFlowGroupByFiles" target="_blank">通过多文件创建合同组签署流程</a>等接口创建。</p>
    */
   FlowGroupId?: string
 }
@@ -5398,71 +5392,57 @@ export interface DynamicSignOption {
  */
 export interface FlowDetailInfo {
   /**
-   * 合同流程ID，为32位字符串。
+   * <p>合同流程ID，为32位字符串。</p>
    */
   FlowId?: string
   /**
-   * 合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
+   * <p>合同流程的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。</p>
    */
   FlowName?: string
   /**
-   * 合同流程的类别分类（如销售合同/入职合同等）。
-该字段将被废弃，不建议使用。	
+   * <p>合同流程的类别分类（如销售合同/入职合同等）。<br>该字段将被废弃，不建议使用。</p>
    */
   FlowType?: string
   /**
-   * 合同流程当前的签署状态, 会存在下列的状态值 
-<ul>
-<li> **0** : 未开启流程(合同中不存在填写环节)</li> 
-<li> **1** : 待签署</li>
- <li> **2** : 部分签署</li>
- <li> **3** : 已拒签</li>
- <li> **4** : 已签署</li> 
-<li> **5** : 已过期</li>
- <li> **6** : 已撤销</li> 
-<li> **7** : 未开启流程(合同中存在填写环节)</li>
- <li> **8** : 等待填写</li>
- <li> **9** : 部分填写</li>
- <li> **10** : 已拒填</li> 
-<li> **16** : 已失效（可能因为参与方修改姓名等原因）</li>
- <li> **21** : 已解除</li></ul>	
+   * <p>合同流程当前的签署状态, 会存在下列的状态值 </p><ul><li> **0** : 未开启流程(合同中不存在填写环节)</li> <li> **1** : 待签署</li> <li> **2** : 部分签署</li> <li> **3** : 已拒签</li> <li> **4** : 已签署</li> <li> **5** : 已过期</li> <li> **6** : 已撤销</li> <li> **7** : 未开启流程(合同中存在填写环节)</li> <li> **8** : 等待填写</li> <li> **9** : 部分填写</li> <li> **10** : 已拒填</li> <li> **16** : 已失效（可能因为参与方修改姓名等原因）</li> <li> **21** : 已解除</li></ul>
    */
   FlowStatus?: number
   /**
-   * 当合同流程状态为已拒签（即 FlowStatus=3）或已撤销（即 FlowStatus=6）时，此字段 FlowMessage 为拒签或撤销原因。
+   * <p>当合同流程状态为已拒签（即 FlowStatus=3）或已撤销（即 FlowStatus=6）时，此字段 FlowMessage 为拒签或撤销原因。</p>
    */
   FlowMessage?: string
   /**
-   * 合同流程描述信息。
+   * <p>合同流程描述信息。</p>
    */
   FlowDescription?: string
   /**
-   * 合同流程的创建时间戳，格式为Unix标准时间戳（秒）。
+   * <p>合同流程的创建时间戳，格式为Unix标准时间戳（秒）。</p>
    */
   CreatedOn?: number
   /**
-   * 合同流程的签署方数组
+   * <p>合同流程的签署方数组</p>
    */
   FlowApproverInfos?: Array<FlowApproverDetail>
   /**
-   * 合同流程的关注方信息数组
+   * <p>合同流程的关注方信息数组</p>
    */
   CcInfos?: Array<FlowApproverDetail>
   /**
-   * 合同流程发起方的员工编号, 即员工在腾讯电子签平台的唯一身份标识。
+   * <p>合同流程发起方的员工编号, 即员工在腾讯电子签平台的唯一身份标识。</p>
    */
   Creator?: string
   /**
-   * 用户合同的自定义分类。
-
-自定义合同类型的位置，在下图所示地方:
-![image](https://qcloudimg.tencent-cloud.cn/raw/00d72934c31bd49115a566e4e1a4530d.png)
+   * <p>用户合同的自定义分类。</p><p>自定义合同类型的位置，在下图所示地方:<br><img src="https://qcloudimg.tencent-cloud.cn/raw/00d72934c31bd49115a566e4e1a4530d.png" alt="image"></p>
    */
   UserFlowType?: UserFlowType
   /**
-   * 发起模板时,使用的模板Id
+   * <p>发起模板时,使用的模板Id</p>
    */
   TemplateId?: string
+  /**
+   * <p>合同备注列表</p>
+   */
+  FlowRemarks?: Array<string>
 }
 
 /**
@@ -8394,6 +8374,20 @@ export interface CreateIntegrationSubOrganizationActiveRecordResponse {
 }
 
 /**
+ * 合同备注
+ */
+export interface FlowRemarkItem {
+  /**
+   * <p>合同备注下标，对应最多5个备注位</p><p>取值范围：[0, 4]</p>
+   */
+  RemarkId?: number
+  /**
+   * <p>合同备注内容，不超过 50 个字符，DELETE 时无需传入</p>
+   */
+  RemarkValue?: string
+}
+
+/**
  * 补充签署人信息
 - RecipientId 必须指定
 -  通过企业微信自定义账号ID补充签署人时，ApproverSource 和 CustomUserId 必填，ApproverSource取值：WEWORKAPP
@@ -10543,18 +10537,21 @@ export interface DeleteExtendedServiceAuthInfosRequest {
  */
 export interface DescribeFlowInfoResponse {
   /**
-   * 合同流程的详细信息。
-如果查询的是合同组信息，则返回的是组内所有子合同流程的详细信息。
+   * <p>合同流程的详细信息。<br>如果查询的是合同组信息，则返回的是组内所有子合同流程的详细信息。</p>
    */
   FlowDetailInfos?: Array<FlowDetailInfo>
   /**
-   * 合同组ID，只有在查询合同组信息时才会返回。
+   * <p>合同组ID，只有在查询合同组信息时才会返回。</p>
    */
   FlowGroupId?: string
   /**
-   * 合同组名称，只有在查询合同组信息时才会返回。
+   * <p>合同组名称，只有在查询合同组信息时才会返回。</p>
    */
   FlowGroupName?: string
+  /**
+   * <p>合同组合同备注列表</p>
+   */
+  FlowGroupRemarks?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11462,6 +11459,16 @@ export interface CancelFailureFlow {
 }
 
 /**
+ * OperateFlowRemarks返回参数结构体
+ */
+export interface OperateFlowRemarksResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeIntegrationEmployees请求参数结构体
  */
 export interface DescribeIntegrationEmployeesRequest {
@@ -12027,6 +12034,40 @@ export interface CreateEmployeeQualificationSealQrCodeRequest {
    * 调用方自定义的个性化字段(可自定义此名称)，并以base64方式编码，支持的最大数据大小为 2000长度。在执业章授权完成后的回调场景，该字段的信息将原封不动地透传给贵方。回调的相关说明可参考开发者中心的<a href="https://qian.tencent.com/developers/company/callback_types_seals#%E4%BA%8C-%E5%91%98%E5%B7%A5%E6%89%A7%E4%B8%9A%E7%AB%A0%E5%9B%9E%E8%B0%83%E9%80%9A%E7%9F%A5">回调通知</a>模块。
    */
   UserData?: string
+}
+
+/**
+ * OperateFlowRemarks请求参数结构体
+ */
+export interface OperateFlowRemarksRequest {
+  /**
+   * <p>执行本接口操作的员工信息。<br>注: <code>在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。</code></p>
+   */
+  Operator: UserInfo
+  /**
+   * <p>操作类型，可取值如下:</p><ul><li>DELETE:  删除</li><li>ENABLE: 启用</li><li>DISABLE: 停用</li><li>COPY: 复制新建</li></ul>
+   */
+  OperateType: string
+  /**
+   * <p>对应的合同流程id</p><p>目标合同为合同组时此参数不填</p>
+   */
+  FlowId?: string
+  /**
+   * <p>代理企业和员工的信息。<br>在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。</p>
+   */
+  Agent?: Agent
+  /**
+   * <p>对应合同组id</p><p>目标合同为单份合同时此参数不填</p>
+   */
+  FlowGroupId?: string
+  /**
+   * <p>合同备注信息。</p><p>入参限制：当OperateType为UPDATE和DELETE时，通过该结构体进行对应备注操作，合同备注数量范围为 1 - 5个。</p>
+   */
+  FlowItem?: FlowRemarkItem
+  /**
+   * <p>合同备注列表。</p><p>入参限制：当OperateType为CREATE时，通过该参数进行全量的合同备注创建。</p>
+   */
+  FlowItems?: Array<string>
 }
 
 /**

@@ -28,6 +28,16 @@ it("waf.v20180125.DescribeAttackType", async function () {
     }
 })
 
+it("waf.v20180125.DeleteBatchCustomRule", async function () {
+    try {
+       const data = await client.DeleteBatchCustomRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribePeakPoints", async function () {
     try {
        const data = await client.DescribePeakPoints({})
@@ -51,6 +61,16 @@ it("waf.v20180125.DescribeDomainDetailsClb", async function () {
 it("waf.v20180125.DescribeExports", async function () {
     try {
        const data = await client.DescribeExports({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyBatchCustomRule", async function () {
+    try {
+       const data = await client.ModifyBatchCustomRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,6 +398,16 @@ it("waf.v20180125.DeleteCCRule", async function () {
     }
 })
 
+it("waf.v20180125.DeleteProtectGroupDomain", async function () {
+    try {
+       const data = await client.DeleteProtectGroupDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeAntiInfoLeakageRules", async function () {
     try {
        const data = await client.DescribeAntiInfoLeakageRules({})
@@ -391,6 +421,16 @@ it("waf.v20180125.DescribeAntiInfoLeakageRules", async function () {
 it("waf.v20180125.SearchAccessLog", async function () {
     try {
        const data = await client.SearchAccessLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyBatchCustomWhiteRule", async function () {
+    try {
+       const data = await client.ModifyBatchCustomWhiteRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -588,9 +628,9 @@ it("waf.v20180125.ModifyHostStatus", async function () {
     }
 })
 
-it("waf.v20180125.ModifySpartaProtectionMode", async function () {
+it("waf.v20180125.AddBatchCustomWhiteRule", async function () {
     try {
-       const data = await client.ModifySpartaProtectionMode({})
+       const data = await client.AddBatchCustomWhiteRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -608,9 +648,9 @@ it("waf.v20180125.ModifyBotSceneUCBRule", async function () {
     }
 })
 
-it("waf.v20180125.DescribeModuleStatus", async function () {
+it("waf.v20180125.DeleteBatchCustomWhiteRule", async function () {
     try {
-       const data = await client.DescribeModuleStatus({})
+       const data = await client.DeleteBatchCustomWhiteRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -808,9 +848,9 @@ it("waf.v20180125.DescribeCCRule", async function () {
     }
 })
 
-it("waf.v20180125.ModifyOwaspRuleTypeAction", async function () {
+it("waf.v20180125.DescribeBatchCustomRuleList", async function () {
     try {
-       const data = await client.ModifyOwaspRuleTypeAction({})
+       const data = await client.DescribeBatchCustomRuleList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -908,6 +948,16 @@ it("waf.v20180125.GetOrganizationRole", async function () {
     }
 })
 
+it("waf.v20180125.ModifyOwaspRuleTypeAction", async function () {
+    try {
+       const data = await client.ModifyOwaspRuleTypeAction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyOwaspWhiteRule", async function () {
     try {
        const data = await client.ModifyOwaspWhiteRule({})
@@ -941,6 +991,16 @@ it("waf.v20180125.DescribeHosts", async function () {
 it("waf.v20180125.AddSpartaProtection", async function () {
     try {
        const data = await client.AddSpartaProtection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyBatchCustomRuleStatus", async function () {
+    try {
+       const data = await client.ModifyBatchCustomRuleStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1038,9 +1098,29 @@ it("waf.v20180125.ModifyBotStatus", async function () {
     }
 })
 
+it("waf.v20180125.AddBatchCustomRule", async function () {
+    try {
+       const data = await client.AddBatchCustomRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyProtectionStatus", async function () {
     try {
        const data = await client.ModifyProtectionStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeProtectGroup", async function () {
+    try {
+       const data = await client.DescribeProtectGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1218,6 +1298,16 @@ it("waf.v20180125.CreateRateLimitV2", async function () {
     }
 })
 
+it("waf.v20180125.DescribeUserClbWafRegions", async function () {
+    try {
+       const data = await client.DescribeUserClbWafRegions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeObjects", async function () {
     try {
        const data = await client.DescribeObjects({})
@@ -1251,6 +1341,16 @@ it("waf.v20180125.ModifyCustomRuleStatus", async function () {
 it("waf.v20180125.DeleteAttackWhiteRule", async function () {
     try {
        const data = await client.DeleteAttackWhiteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.CreateProtectGroup", async function () {
+    try {
+       const data = await client.CreateProtectGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1428,6 +1528,16 @@ it("waf.v20180125.DescribeOwaspRules", async function () {
     }
 })
 
+it("waf.v20180125.ModifySpartaProtectionMode", async function () {
+    try {
+       const data = await client.ModifySpartaProtectionMode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DeleteSession", async function () {
     try {
        const data = await client.DeleteSession({})
@@ -1578,6 +1688,16 @@ it("waf.v20180125.DeleteAccessExport", async function () {
     }
 })
 
+it("waf.v20180125.DescribeBatchCustomWhiteRules", async function () {
+    try {
+       const data = await client.DescribeBatchCustomWhiteRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DeleteDomainWhiteRules", async function () {
     try {
        const data = await client.DeleteDomainWhiteRules({})
@@ -1591,6 +1711,16 @@ it("waf.v20180125.DeleteDomainWhiteRules", async function () {
 it("waf.v20180125.DescribeDomainVerifyResult", async function () {
     try {
        const data = await client.DescribeDomainVerifyResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyAttackWhiteRule", async function () {
+    try {
+       const data = await client.ModifyAttackWhiteRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1628,9 +1758,9 @@ it("waf.v20180125.DescribeInstances", async function () {
     }
 })
 
-it("waf.v20180125.ModifyAttackWhiteRule", async function () {
+it("waf.v20180125.DeleteProtectGroup", async function () {
     try {
-       const data = await client.ModifyAttackWhiteRule({})
+       const data = await client.DeleteProtectGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1798,6 +1928,16 @@ it("waf.v20180125.DescribePorts", async function () {
     }
 })
 
+it("waf.v20180125.ModifyProtectGroup", async function () {
+    try {
+       const data = await client.ModifyProtectGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.ModifyHostMode", async function () {
     try {
        const data = await client.ModifyHostMode({})
@@ -1818,9 +1958,9 @@ it("waf.v20180125.ModifyDomainPostAction", async function () {
     }
 })
 
-it("waf.v20180125.DescribeUserClbWafRegions", async function () {
+it("waf.v20180125.DescribeModuleStatus", async function () {
     try {
-       const data = await client.DescribeUserClbWafRegions({})
+       const data = await client.DescribeModuleStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2001,6 +2141,16 @@ it("waf.v20180125.AddDomainWhiteRule", async function () {
 it("waf.v20180125.ModifyDomainIpv6Status", async function () {
     try {
        const data = await client.ModifyDomainIpv6Status({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.ModifyBatchCustomWhiteRuleStatus", async function () {
+    try {
+       const data = await client.ModifyBatchCustomWhiteRuleStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
