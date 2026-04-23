@@ -699,6 +699,40 @@ export interface DescribeTemplateListStatus {
 }
 
 /**
+ * 发送短信状态
+ */
+export interface SendMultiStatus {
+  /**
+   * <p>发送流水号。</p>
+   */
+  SerialNo?: string
+  /**
+   * <p>手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+60198890000， 其中前面有一个+号 ，60为国家码，198890000为手机号。</p>
+   */
+  PhoneNumber?: string
+  /**
+   * <p>计费条数，计费规则请查询 <a href="https://cloud.tencent.com/document/product/382/36135">计费策略</a>。</p>
+   */
+  Fee?: number
+  /**
+   * <p>用户 session 内容。</p>
+   */
+  SessionContext?: string
+  /**
+   * <p>短信请求错误码，具体含义请参考 <a href="https://cloud.tencent.com/document/product/382/59177#.E7.9F.AD.E4.BF.A1-API-3.0-.E5.8F.91.E9.80.81.E9.94.99.E8.AF.AF.E7.A0.81">错误码</a>，发送成功返回 &quot;Ok&quot;。</p>
+   */
+  Code?: string
+  /**
+   * <p>短信请求错误码描述。</p>
+   */
+  Message?: string
+  /**
+   * <p>国家码或地区码，例如 US、MY 等，对于未识别出国家码或者地区码，默认返回 DEF，具体支持列表请参考 <a href="https://cloud.tencent.com/document/product/382/18051">国际/港澳台短信价格总览</a>。</p>
+   */
+  IsoCode?: string
+}
+
+/**
  * AddSmsTemplate返回参数结构体
  */
 export interface AddSmsTemplateResponse {
@@ -759,6 +793,20 @@ export interface DescribeSmsSignListResponse {
    * 获取签名信息响应
    */
   DescribeSignListStatusSet?: Array<DescribeSignListStatus>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SendMultiGlobalSms返回参数结构体
+ */
+export interface SendMultiGlobalSmsResponse {
+  /**
+   * <p>短信批量发送状态。</p>
+   */
+  SendMultiStatusSet?: Array<SendMultiStatus>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -922,37 +970,29 @@ export interface PullSmsReplyStatusByPhoneNumberResponse {
 }
 
 /**
- * 发送短信状态
+ * 批量发送中每个手机号的发送信息。
  */
-export interface SendStatus {
+export interface MultiSmsInfo {
   /**
-   * 发送流水号。
+   * <p>下发手机号码，采用 E.164 标准，格式为+[国家或地区码][手机号]，单次请求最多支持200个手机号且要求全为国际/港澳台手机号。 例如：+60198890000， 其中前面有一个+号 ，60为国家码，198890000为手机号。</p>
    */
-  SerialNo?: string
+  PhoneNumber: string
   /**
-   * 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。
+   * <p>模板 ID，必须填写已审核通过的模板 ID。模板 ID 可前往 <a href="https://console.cloud.tencent.com/smsv2/isms-template">国际/港澳台短信</a> 的正文模板管理查看，仅支持使用国际/港澳台短信模板。</p>
    */
-  PhoneNumber?: string
+  TemplateId: string
   /**
-   * 计费条数，计费规则请查询 [计费策略](https://cloud.tencent.com/document/product/382/36135)。
+   * <p>模板参数，若无模板参数，则设置为空。<blockquote class="rno-document-tips rno-document-tips-notice">    <div class="rno-document-tips-body">        <i class="rno-document-tip-icon"></i>        <div class="rno-document-tip-title">注意</div>        <div class="rno-document-tip-desc"><p>模板参数的个数需要与 TemplateId 对应模板的变量个数保持一致。</p></div>    </div></blockquote></p>
    */
-  Fee?: number
+  TemplateParamSet?: Array<string>
   /**
-   * 用户 session 内容。
+   * <p>国际/港澳台短信 Sender ID。可参考 <a href="https://cloud.tencent.com/document/product/382/102831">Sender ID 说明</a>。注：国际/港澳台短信已申请独立 SenderId 需要填写该字段，默认使用公共 SenderId，无需填写该字段。</p>
+   */
+  SenderId?: string
+  /**
+   * <p>用户的 session 内容，可以携带用户侧 ID 等上下文信息，server 会原样返回。注意长度需小于512字节。</p>
    */
   SessionContext?: string
-  /**
-   * 短信请求错误码，具体含义请参考 [错误码](https://cloud.tencent.com/document/product/382/59177#.E7.9F.AD.E4.BF.A1-API-3.0-.E5.8F.91.E9.80.81.E9.94.99.E8.AF.AF.E7.A0.81)，发送成功返回 "Ok"。
-   */
-  Code?: string
-  /**
-   * 短信请求错误码描述。
-   */
-  Message?: string
-  /**
-   * 国家码或地区码，例如 CN、US 等，对于未识别出国家码或者地区码，默认返回 DEF，具体支持列表请参考 [国际/港澳台短信价格总览](https://cloud.tencent.com/document/product/382/18051)。
-   */
-  IsoCode?: string
 }
 
 /**
@@ -991,6 +1031,20 @@ export interface DeleteSmsSignRequest {
    * 待删除的签名 ID。
    */
   SignId: number
+}
+
+/**
+ * SendMultiGlobalSms请求参数结构体
+ */
+export interface SendMultiGlobalSmsRequest {
+  /**
+   * <p>短信 SdkAppId，在 <a href="https://console.cloud.tencent.com/smsv2/app-manage">短信控制台</a>  添加应用后生成的实际 SdkAppId。</p>
+   */
+  SmsSdkAppId: string
+  /**
+   * <p>批量发送信息列表，单次请求最多支持200个号码且要求全为国际/港澳台号码。每个元素包含一个手机号码及其对应的模板、模板参数等信息。</p>
+   */
+  MultiSmsInfoSet: Array<MultiSmsInfo>
 }
 
 /**
@@ -1131,4 +1185,38 @@ export interface PullSmsReplyStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 发送短信状态
+ */
+export interface SendStatus {
+  /**
+   * 发送流水号。
+   */
+  SerialNo?: string
+  /**
+   * 手机号码，E.164标准，+[国家或地区码][手机号] ，示例如：+8618501234444， 其中前面有一个+号 ，86为国家码，18501234444为手机号。
+   */
+  PhoneNumber?: string
+  /**
+   * 计费条数，计费规则请查询 [计费策略](https://cloud.tencent.com/document/product/382/36135)。
+   */
+  Fee?: number
+  /**
+   * 用户 session 内容。
+   */
+  SessionContext?: string
+  /**
+   * 短信请求错误码，具体含义请参考 [错误码](https://cloud.tencent.com/document/product/382/59177#.E7.9F.AD.E4.BF.A1-API-3.0-.E5.8F.91.E9.80.81.E9.94.99.E8.AF.AF.E7.A0.81)，发送成功返回 "Ok"。
+   */
+  Code?: string
+  /**
+   * 短信请求错误码描述。
+   */
+  Message?: string
+  /**
+   * 国家码或地区码，例如 CN、US 等，对于未识别出国家码或者地区码，默认返回 DEF，具体支持列表请参考 [国际/港澳台短信价格总览](https://cloud.tencent.com/document/product/382/18051)。
+   */
+  IsoCode?: string
 }

@@ -2604,45 +2604,47 @@ BANDWIDTH_PACKAGE：带宽包用户
  */
 export interface JobView {
   /**
-   * 作业ID
+   * <p>作业ID</p>
    */
   JobId?: string
   /**
-   * 作业名称
+   * <p>作业名称</p>
    */
   JobName?: string
   /**
-   * 作业描述
+   * <p>作业描述</p>
    */
   JobDescription?: string
   /**
-   * 作业优先级
+   * <p>作业创建者</p>
+   */
+  Creator?: string
+  /**
+   * <p>作业优先级</p>
    */
   Priority?: number
   /**
-   * 作业状态，包括CREATED, QUEING, STARTNG, RUNING, TERMINATING, TERMINATED, SUCCESS, 
-FAILED
-
+   * <p>作业状态，包括CREATED, QUEING, STARTNG, RUNING, TERMINATING, TERMINATED, SUCCESS,<br>FAILED</p>
    */
   JobState?: string
   /**
-   * 作业所属集群ID
+   * <p>作业所属集群ID</p>
    */
   ClusterId?: string
   /**
-   * 作业所属队列名称
+   * <p>作业所属队列名称</p>
    */
   QueueName?: string
   /**
-   * 完成作业任务所需资源
+   * <p>完成作业任务所需资源</p>
    */
   OccupyResources?: string
   /**
-   * 作业任务创建时间
+   * <p>作业任务创建时间</p>
    */
   CreateTime?: string
   /**
-   * 作业任务结束时间
+   * <p>作业任务结束时间</p>
    */
   EndTime?: string
 }

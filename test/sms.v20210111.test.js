@@ -18,6 +18,16 @@ const client = new tencentcloud.sms.v20210111.Client({
 })
 describe("sms.v20210111.test.js", function () {
 
+it("sms.v20210111.SendMultiGlobalSms", async function () {
+    try {
+       const data = await client.SendMultiGlobalSms({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("sms.v20210111.ModifySmsSign", async function () {
     try {
        const data = await client.ModifySmsSign({})

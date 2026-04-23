@@ -26,12 +26,12 @@ import {
   ServiceEIP,
   DescribeExportResponse,
   NotebookSetItem,
-  ModifyNotebookTagsRequest,
+  DescribeBillingResourceGroupAttachedWorkspacesResponse,
   DescribeDataSourcesResponse,
   ModifyServiceGroupWeightsResponse,
   Usage,
   GatewayConfig,
-  Choice,
+  DescribeBillingResourceGroupsRequest,
   DeleteNotebookRequest,
   PushTrainingMetricsRequest,
   Filter,
@@ -53,7 +53,7 @@ import {
   ModifyNotebookTagsResponse,
   UpdateDataSourceRequest,
   DescribeBillingResourceGroupResponse,
-  SpecUnit,
+  ModifyNotebookTagsRequest,
   ServiceCallInfo,
   CosPathInfo,
   DescribeBillingResourceGroupsResponse,
@@ -91,6 +91,7 @@ import {
   SchemaInfo,
   StartCmdInfo,
   Event,
+  DescribeBillingResourceGroupAttachedWorkspacesRequest,
   DescribeModelServiceGroupsResponse,
   Spec,
   DescribeDataSourceRequest,
@@ -107,7 +108,6 @@ import {
   ResourceConfigInfo,
   PublicDataSourceFS,
   ExposePortConfig,
-  DescribeBillingResourceGroupsRequest,
   Option,
   DescribeMountLimitsRequest,
   DeleteExportResponse,
@@ -228,6 +228,7 @@ import {
   DescribeNotebookRequest,
   DescribePublicAlgoVersionListRequest,
   StorageExtraConf,
+  HealthProbe,
   LocalDisk,
   ResourceSpec,
   DescribeLogsResponse,
@@ -255,9 +256,10 @@ import {
   DescribeModelServiceGroupRequest,
   PushTrainingMetricsResponse,
   StopTrainingTaskResponse,
-  HealthProbe,
+  Choice,
   HDFSConfig,
   DescribeTrainingTaskPodsResponse,
+  SpecUnit,
   DeleteDataSourceResponse,
   ModelAccelerateTask,
   Pod,
@@ -585,13 +587,13 @@ https://cloud.tencent.com/document/product/1278/85305
   }
 
   /**
-   * 查询单个服务组
+   * 查询资源组关联的工作空间列表
    */
-  async DescribeModelServiceGroup(
-    req: DescribeModelServiceGroupRequest,
-    cb?: (error: string, rep: DescribeModelServiceGroupResponse) => void
-  ): Promise<DescribeModelServiceGroupResponse> {
-    return this.request("DescribeModelServiceGroup", req, cb)
+  async DescribeBillingResourceGroupAttachedWorkspaces(
+    req?: DescribeBillingResourceGroupAttachedWorkspacesRequest,
+    cb?: (error: string, rep: DescribeBillingResourceGroupAttachedWorkspacesResponse) => void
+  ): Promise<DescribeBillingResourceGroupAttachedWorkspacesResponse> {
+    return this.request("DescribeBillingResourceGroupAttachedWorkspaces", req, cb)
   }
 
   /**
@@ -872,6 +874,16 @@ https://cloud.tencent.com/document/product/1278/85305
     cb?: (error: string, rep: CreateDataSourceResponse) => void
   ): Promise<CreateDataSourceResponse> {
     return this.request("CreateDataSource", req, cb)
+  }
+
+  /**
+   * 查询单个服务组
+   */
+  async DescribeModelServiceGroup(
+    req: DescribeModelServiceGroupRequest,
+    cb?: (error: string, rep: DescribeModelServiceGroupResponse) => void
+  ): Promise<DescribeModelServiceGroupResponse> {
+    return this.request("DescribeModelServiceGroup", req, cb)
   }
 
   /**

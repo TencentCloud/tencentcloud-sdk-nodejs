@@ -19,7 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   AiAnalysisTaskHorizontalToVerticalInput,
-  ModifySnapshotByTimeOffsetTemplateResponse,
+  EnhanceConfig,
   ModifySampleSnapshotTemplateResponse,
   ContainerDiagnoseResultItem,
   UnattachSecurityGroupInOutInfo,
@@ -81,7 +81,7 @@ import {
   ManageTaskRequest,
   CreateSmartEraseTemplateRequest,
   FlowInOutResp,
-  EnhanceConfig,
+  DescribeTextToSpeechAsyncTaskRequest,
   MediaInputInfo,
   CreateWorkflowRequest,
   ModifyStreamLinkEventRequest,
@@ -253,7 +253,7 @@ import {
   ScheduleRecognitionTaskResult,
   ModifyStreamLinkEventResponse,
   VideoComprehensionResultItem,
-  SmartSubtitleTaskTransTextResultOutput,
+  ModifySnapshotByTimeOffsetTemplateResponse,
   ImageProcessTaskOutput,
   ComposeTargetInfo,
   TaskStatData,
@@ -494,6 +494,7 @@ import {
   DescribeStreamPackageSourcesRequest,
   ModifyAsrHotwordsResponse,
   CreateStreamPackageLinearAssemblyChannelResponse,
+  DescribeTextToSpeechAsyncTaskResponse,
   ModifyImageSpriteTemplateResponse,
   MediaContentReviewAsrTextSegmentItem,
   CreateInputRISTSettings,
@@ -558,6 +559,7 @@ import {
   BlindWatermarkInput,
   DescribeBlindWatermarkTemplatesResponse,
   ImageWatermarkInputForUpdate,
+  TextToSpeechAsyncResponse,
   BatchSubTaskResult,
   AigcStoreCosParam,
   DescribeDesignTaskResponse,
@@ -682,6 +684,7 @@ import {
   TrackSelector,
   ActivityResult,
   DescribeAsrHotwordsResponse,
+  TextToSpeechAsyncRequest,
   DescribeInputHLSPullSettings,
   CreateSubtitleEmbedTemplateResponse,
   CreateStreamPackageSourceLocationResponse,
@@ -777,6 +780,7 @@ import {
   PlaybackInfo,
   DeleteImageSpriteTemplateRequest,
   LiveScheduleLiveRecordTaskResult,
+  SmartSubtitleTaskTransTextResultOutput,
   AiSampleFailFaceInfo,
   UserDefineFaceReviewTemplateInfoForUpdate,
   DescribeInputRTMPSettings,
@@ -2541,6 +2545,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 异步语音合成接口，支持长文本转语音
+   */
+  async TextToSpeechAsync(
+    req: TextToSpeechAsyncRequest,
+    cb?: (error: string, rep: TextToSpeechAsyncResponse) => void
+  ): Promise<TextToSpeechAsyncResponse> {
+    return this.request("TextToSpeechAsync", req, cb)
+  }
+
+  /**
    * 创建图片处理模板
    */
   async CreateProcessImageTemplate(
@@ -2725,6 +2739,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyStreamPackageSourceResponse) => void
   ): Promise<ModifyStreamPackageSourceResponse> {
     return this.request("ModifyStreamPackageSource", req, cb)
+  }
+
+  /**
+   * 查询异步语音合成任务结果
+   */
+  async DescribeTextToSpeechAsyncTask(
+    req: DescribeTextToSpeechAsyncTaskRequest,
+    cb?: (error: string, rep: DescribeTextToSpeechAsyncTaskResponse) => void
+  ): Promise<DescribeTextToSpeechAsyncTaskResponse> {
+    return this.request("DescribeTextToSpeechAsyncTask", req, cb)
   }
 
   /**

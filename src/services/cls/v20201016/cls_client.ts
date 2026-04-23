@@ -26,6 +26,7 @@ import {
   DeleteConsoleResponse,
   DynamicIndex,
   CreateRebuildIndexTaskResponse,
+  CreateSearchViewRequest,
   CheckFunctionRequest,
   ModifyNetworkApplicationResponse,
   NetInfo,
@@ -183,13 +184,14 @@ import {
   QueryMetricResponse,
   DeleteLogsetRequest,
   OpenKafkaConsumerResponse,
-  AlarmTargetInfo,
+  DeleteSearchViewResponse,
   CreateSplunkDeliverResponse,
   FilePathInfo,
   ModifyScheduledSqlResponse,
   QueryRangeMetricRequest,
   MetaTagInfo,
   DescribeMachineGroupsRequest,
+  ModifySearchViewResponse,
   DescribeConfigsResponse,
   ExtractRuleInfo,
   TopicInfo,
@@ -229,10 +231,12 @@ import {
   SplunkDeliverInfo,
   NoticeContentInfo,
   ModifyMetricConfigResponse,
+  DeleteSearchViewRequest,
   DescribeConsumerResponse,
   DescribeNoticeContentsResponse,
   EsTimeInfo,
   DescribeClusterBaseMetricConfigsResponse,
+  ModifyKafkaRechargeRequest,
   CreateIndexResponse,
   ModifyDashboardSubscribeResponse,
   DescribeSplunkPreviewRequest,
@@ -273,6 +277,7 @@ import {
   NoticeReceiver,
   Ckafka,
   MultiCondition,
+  SearchViewInfo,
   ModifyLogsetResponse,
   CollectConfig,
   CreateDashboardResponse,
@@ -370,6 +375,7 @@ import {
   DescribeLogsetsResponse,
   DescribeKafkaConsumerPreviewResponse,
   NetworkApplicationInfo,
+  ModifySearchViewRequest,
   WebCallback,
   CreateAlarmNoticeResponse,
   ModifyTopicResponse,
@@ -412,7 +418,7 @@ import {
   DescribeMachineGroupConfigsResponse,
   DescribeConfigExtrasRequest,
   DescribeMachineGroupConfigsRequest,
-  ModifyKafkaRechargeRequest,
+  DescribeSearchViewsRequest,
   ModifyWebCallbackRequest,
   DeleteTopicResponse,
   CreateExportResponse,
@@ -431,6 +437,7 @@ import {
   Filter,
   RuleTagInfo,
   OpenClawServiceRequest,
+  AlarmTargetInfo,
   SearchCosRechargeInfoRequest,
   DescribeNoticeContentsRequest,
   DescribeDlcDeliversRequest,
@@ -443,7 +450,7 @@ import {
   DeleteMachineGroupInfoRequest,
   ModifyNoticeContentResponse,
   DeleteWebCallbackResponse,
-  ModifyKafkaRechargeResponse,
+  DescribeSearchViewsResponse,
   DescribeAlarmShieldsRequest,
   AdvancedConsumerConfiguration,
   DescribeTopicsResponse,
@@ -458,6 +465,7 @@ import {
   DescribeNetworkApplicationsResponse,
   DescribeTopicBaseMetricConfigsResponse,
   CloseKafkaConsumerResponse,
+  ViewSearchTopic,
   Relabeling,
   GetAlarmLogResponse,
   DescribeKafkaRechargesRequest,
@@ -474,6 +482,7 @@ import {
   CreateMetricConfigRequest,
   Message,
   ModifyConsumerResponse,
+  CreateSearchViewResponse,
   PartitionOffsetInfo,
   KafkaConsumerContent,
   DeleteConfigRequest,
@@ -509,6 +518,7 @@ import {
   MultiTopicSearchInformation,
   AlarmNotice,
   ModifyNoticeContentRequest,
+  ModifyKafkaRechargeResponse,
   MetricSpec,
   DescribeMachinesResponse,
   DeleteEsRechargeRequest,
@@ -811,6 +821,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 新建查询视图
+   */
+  async CreateSearchView(
+    req: CreateSearchViewRequest,
+    cb?: (error: string, rep: CreateSearchViewResponse) => void
+  ): Promise<CreateSearchViewResponse> {
+    return this.request("CreateSearchView", req, cb)
+  }
+
+  /**
    * 获取告警历史，例如今天未恢复的告警
    */
   async DescribeAlertRecordHistory(
@@ -961,13 +981,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询DataSight控制台实例列表
+   * 获取指标订阅配置
    */
-  async DescribeConsoles(
-    req: DescribeConsolesRequest,
-    cb?: (error: string, rep: DescribeConsolesResponse) => void
-  ): Promise<DescribeConsolesResponse> {
-    return this.request("DescribeConsoles", req, cb)
+  async DescribeClusterBaseMetricConfigs(
+    req: DescribeClusterBaseMetricConfigsRequest,
+    cb?: (error: string, rep: DescribeClusterBaseMetricConfigsResponse) => void
+  ): Promise<DescribeClusterBaseMetricConfigsResponse> {
+    return this.request("DescribeClusterBaseMetricConfigs", req, cb)
   }
 
   /**
@@ -1031,13 +1051,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于修改Kafka数据订阅任务
+   * 获取查询视图列表
    */
-  async ModifyKafkaRecharge(
-    req: ModifyKafkaRechargeRequest,
-    cb?: (error: string, rep: ModifyKafkaRechargeResponse) => void
-  ): Promise<ModifyKafkaRechargeResponse> {
-    return this.request("ModifyKafkaRecharge", req, cb)
+  async DescribeSearchViews(
+    req: DescribeSearchViewsRequest,
+    cb?: (error: string, rep: DescribeSearchViewsResponse) => void
+  ): Promise<DescribeSearchViewsResponse> {
+    return this.request("DescribeSearchViews", req, cb)
   }
 
   /**
@@ -1311,6 +1331,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除查询视图
+   */
+  async DeleteSearchView(
+    req: DeleteSearchViewRequest,
+    cb?: (error: string, rep: DeleteSearchViewResponse) => void
+  ): Promise<DeleteSearchViewResponse> {
+    return this.request("DeleteSearchView", req, cb)
+  }
+
+  /**
    * 打开Kafka协议消费功能
    */
   async OpenKafkaConsumer(
@@ -1411,13 +1441,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取指标订阅配置
+   * 查询DataSight控制台实例列表
    */
-  async DescribeClusterBaseMetricConfigs(
-    req: DescribeClusterBaseMetricConfigsRequest,
-    cb?: (error: string, rep: DescribeClusterBaseMetricConfigsResponse) => void
-  ): Promise<DescribeClusterBaseMetricConfigsResponse> {
-    return this.request("DescribeClusterBaseMetricConfigs", req, cb)
+  async DescribeConsoles(
+    req: DescribeConsolesRequest,
+    cb?: (error: string, rep: DescribeConsolesResponse) => void
+  ): Promise<DescribeConsolesResponse> {
+    return this.request("DescribeConsoles", req, cb)
   }
 
   /**
@@ -1598,6 +1628,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteConsoleResponse) => void
   ): Promise<DeleteConsoleResponse> {
     return this.request("DeleteConsole", req, cb)
+  }
+
+  /**
+   * 本接口用于修改Kafka数据订阅任务
+   */
+  async ModifyKafkaRecharge(
+    req: ModifyKafkaRechargeRequest,
+    cb?: (error: string, rep: ModifyKafkaRechargeResponse) => void
+  ): Promise<ModifyKafkaRechargeResponse> {
+    return this.request("ModifyKafkaRecharge", req, cb)
   }
 
   /**
@@ -2378,6 +2418,16 @@ cls.pb.cc cls.pb.h cls.proto
     cb?: (error: string, rep: DeleteAlarmResponse) => void
   ): Promise<DeleteAlarmResponse> {
     return this.request("DeleteAlarm", req, cb)
+  }
+
+  /**
+   * 修改查询视图
+   */
+  async ModifySearchView(
+    req: ModifySearchViewRequest,
+    cb?: (error: string, rep: ModifySearchViewResponse) => void
+  ): Promise<ModifySearchViewResponse> {
+    return this.request("ModifySearchView", req, cb)
   }
 
   /**

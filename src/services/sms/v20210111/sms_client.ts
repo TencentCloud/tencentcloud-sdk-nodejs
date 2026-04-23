@@ -48,19 +48,22 @@ import {
   DescribeSmsSignListRequest,
   DescribePhoneNumberInfoResponse,
   DescribeTemplateListStatus,
+  SendMultiStatus,
   AddSmsTemplateResponse,
   PullSmsSendStatus,
   DescribeSmsSignListResponse,
+  SendMultiGlobalSmsResponse,
   DescribeSmsTemplateListRequest,
   CallbackStatusStatistics,
   PhoneNumberInfo,
   SendStatusStatisticsRequest,
   DeleteSmsTemplateRequest,
   PullSmsReplyStatusByPhoneNumberResponse,
-  SendStatus,
+  MultiSmsInfo,
   DeleteSmsSignResponse,
   AddSmsSignResponse,
   DeleteSmsSignRequest,
+  SendMultiGlobalSmsRequest,
   PullSmsReplyStatusByPhoneNumberRequest,
   ModifySmsSignResponse,
   ReportConversionRequest,
@@ -70,6 +73,7 @@ import {
   SmsPackagesStatisticsResponse,
   DeleteSignStatus,
   PullSmsReplyStatusResponse,
+  SendStatus,
 } from "./sms_models"
 
 /**
@@ -79,6 +83,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("sms.tencentcloudapi.com", "2021-01-11", clientConfig)
+  }
+
+  /**
+   * 本接口 (SendMultiGlobalSms) 用于批量发送国际/港澳台短信，相比 SendSms 接口，支持在单次请求中向多个手机号发送不同内容的短信，并支持指定不同的SenderId。
+   */
+  async SendMultiGlobalSms(
+    req: SendMultiGlobalSmsRequest,
+    cb?: (error: string, rep: SendMultiGlobalSmsResponse) => void
+  ): Promise<SendMultiGlobalSmsResponse> {
+    return this.request("SendMultiGlobalSms", req, cb)
   }
 
   /**

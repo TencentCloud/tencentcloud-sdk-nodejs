@@ -69,7 +69,7 @@ import {
   CreateAccessControlsRuleExportJobResponse,
   ModifyAssetImageRegistryScanStopResponse,
   DescribeAssetImageRegistryRiskListExportRequest,
-  SetCheckModeResponse,
+  AddOrModifyVirusWhiteListRuleResponse,
   SecLogJoinObjectInfo,
   DescribeVulImageSummaryRequest,
   DescribeAssetImageScanStatusResponse,
@@ -82,6 +82,7 @@ import {
   RunTimeFilters,
   DescribeVirusDetailRequest,
   DeleteEscapeWhiteListRequest,
+  DescribeVirusMonitorConfigRequest,
   DescribeRaspRulesRequest,
   DescribeClusterDetailRequest,
   ModifyK8sApiAbnormalRuleInfoRequest,
@@ -98,6 +99,7 @@ import {
   DescribeAgentDaemonSetCmdResponse,
   DescribeAssetImageVirusListExportRequest,
   CreateAssetImageScanTaskResponse,
+  DescribeVirusScanConfigResponse,
   DescribeTaskResultSummaryRequest,
   DeleteAccessControlRulesRequest,
   DeleteRiskSyscallEventsResponse,
@@ -110,6 +112,7 @@ import {
   DeleteRaspRulesResponse,
   SecLogDeliveryKafkaSettingInfo,
   DescribeRiskSyscallWhiteListsResponse,
+  AddOrModifyMaliciousConnectionWhiteListRequest,
   CreateNetworkFirewallPolicyDiscoverResponse,
   ComplianceAssetDetailInfo,
   UnauthorizedCoresTendency,
@@ -133,7 +136,7 @@ import {
   DescribeAssetSyncLastTimeRequest,
   ImageComponent,
   ComplianceBenchmarkStandard,
-  DescribeEscapeRuleInfoResponse,
+  DeleteVirusWhiteListRuleRequest,
   VulTendencyInfo,
   DescribePurchaseStateInfoRequest,
   AddCompliancePolicyItemToWhitelistRequest,
@@ -205,6 +208,7 @@ import {
   ClsLogsetInfo,
   ModifyEscapeEventStatusResponse,
   CheckRepeatAssetImageRegistryResponse,
+  DescribeVirusWhiteListRulesResponse,
   VulDefenceEvent,
   DescribeAccessControlEventsExportRequest,
   ModifyAssetResponse,
@@ -244,6 +248,7 @@ import {
   ClusterCheckTaskItem,
   DescribeVirusAutoIsolateSampleListRequest,
   ModifySecLogJoinObjectsResponse,
+  DescribeVirusScanConfigRequest,
   DescribeAffectedClusterCountResponse,
   RenewImageAuthorizeStateRequest,
   DescribeVirusAutoIsolateSettingRequest,
@@ -304,6 +309,7 @@ import {
   DescribeSecLogAlertMsgResponse,
   DescribeInspectionReportRequest,
   DescribeAgentDaemonSetCmdRequest,
+  DescribeValueAddedSrvInfoResponse,
   DescribeImageDenyEventDetailResponse,
   DescribeSecLogAlertMsgRequest,
   AddNetworkFirewallPolicyYamlDetailResponse,
@@ -376,6 +382,7 @@ import {
   CreateAssetImageRegistryScanTaskOneKeyResponse,
   AbnormalProcessSystemChildRuleInfo,
   DescribeAssetImageVulListExportRequest,
+  SetCheckModeResponse,
   DescribeExportJobResultResponse,
   ReverseShellWhiteListBaseInfo,
   AccessControlRuleInfo,
@@ -406,6 +413,7 @@ import {
   AddEscapeWhiteListRequest,
   DescribeESAggregationsRequest,
   WhiteListRegexpExpressionInfo,
+  DescribeVirusMonitorConfigResponse,
   NetworkClusterPodInfo,
   DescribeAssetImageRiskListExportResponse,
   ModifySecLogCleanSettingInfoRequest,
@@ -533,7 +541,7 @@ import {
   DescribeAssetImageRegistryDetailRequest,
   CreateAssetImageRegistryScanTaskRequest,
   DescribeAssetClusterListRequest,
-  StopVulScanTaskResponse,
+  AddOrModifyVirusWhiteListRuleRequest,
   WarningRule,
   VulAffectedContainerInfo,
   DescribeLogStorageStatisticResponse,
@@ -543,6 +551,7 @@ import {
   DescribeImageComponentListRequest,
   AbnormalProcessChildRuleInfo,
   DescribeNetworkFirewallPolicyListResponse,
+  ImageRiskTendencyInfo,
   DescribeAgentInstallCommandRequest,
   ResetSecLogTopicConfigRequest,
   DescribeAssetImageVirusListExportResponse,
@@ -605,7 +614,7 @@ import {
   VulDefenceEventDetail,
   UpdateNetworkFirewallPolicyYamlDetailRequest,
   DescribeK8sApiAbnormalRuleInfoRequest,
-  DescribeVulRegistryImageListRequest,
+  DeleteVirusWhiteListRuleResponse,
   RunTimeEventBaseInfo,
   DescribeSystemVulListResponse,
   ModifyIgnoreVul,
@@ -616,7 +625,7 @@ import {
   DescribeSecLogJoinTypeListRequest,
   DescribeImageSimpleListRequest,
   CreateNetworkFirewallPolicyDiscoverRequest,
-  ImageRiskTendencyInfo,
+  DescribeVirusWhiteListRulesRequest,
   DescribeVulTopRankingResponse,
   DescribeAssetWebServiceListResponse,
   VulDetailInfo,
@@ -632,7 +641,7 @@ import {
   AddEditImageAutoAuthorizedRuleRequest,
   SwitchImageAutoAuthorizedRuleRequest,
   DescribeVirusSampleDownloadUrlResponse,
-  DescribeValueAddedSrvInfoResponse,
+  AddOrModifyMaliciousConnectionWhiteListResponse,
   RunTimeRiskInfo,
   CreateVirusScanTaskRequest,
   DescribeAbnormalProcessDetailRequest,
@@ -653,6 +662,7 @@ import {
   ModifyRiskDnsEventStatusRequest,
   ComplianceFilters,
   ImageVirusInfo,
+  StopVulScanTaskResponse,
   ModifyEscapeWhiteListResponse,
   DescribeUserPodListResponse,
   ImagesInfo,
@@ -685,6 +695,7 @@ import {
   InitializeUserComplianceEnvironmentRequest,
   DescribeSupportDefenceVulResponse,
   DescribeAssetImageRiskListRequest,
+  ScanRangeInfo,
   DescribeEscapeSafeStateRequest,
   DescribeVirusManualScanEstimateTimeoutRequest,
   CreateVulScanTaskResponse,
@@ -728,6 +739,7 @@ import {
   ImageDenyEvent,
   DescribeRiskDnsEventDetailResponse,
   AddAndPublishNetworkFirewallPolicyDetailRequest,
+  VirusWhiteListRuleInfo,
   DescribeEscapeEventInfoRequest,
   UpdateAndPublishNetworkFirewallPolicyYamlDetailResponse,
   DescribeExportJobManageListResponse,
@@ -791,6 +803,7 @@ import {
   DescribeSearchLogsResponse,
   DescribeImageDenyEventTendencyRequest,
   NetworkClusterNamespaceInfo,
+  DescribeEscapeRuleInfoResponse,
   DescribeReverseShellEventsExportResponse,
   DescribeAssetImageBindRuleInfoRequest,
   DescribeAssetImageListResponse,
@@ -841,6 +854,7 @@ import {
   ModifyVirusAutoIsolateSettingResponse,
   AssetSimpleImageInfo,
   DescribeCompliancePolicyItemAffectedSummaryRequest,
+  DescribeVulRegistryImageListRequest,
   DescribeVirusDetailResponse,
   DescribeImageAutoAuthorizedTaskListResponse,
   DescribeComplianceAssetListResponse,
@@ -1129,6 +1143,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAssetImageBindRuleInfoResponse) => void
   ): Promise<DescribeAssetImageBindRuleInfoResponse> {
     return this.request("DescribeAssetImageBindRuleInfo", req, cb)
+  }
+
+  /**
+   * 增加或修改恶意外连的白名单
+   */
+  async AddOrModifyMaliciousConnectionWhiteList(
+    req: AddOrModifyMaliciousConnectionWhiteListRequest,
+    cb?: (error: string, rep: AddOrModifyMaliciousConnectionWhiteListResponse) => void
+  ): Promise<AddOrModifyMaliciousConnectionWhiteListResponse> {
+    return this.request("AddOrModifyMaliciousConnectionWhiteList", req, cb)
   }
 
   /**
@@ -1578,6 +1602,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateVulContainerExportJobResponse) => void
   ): Promise<CreateVulContainerExportJobResponse> {
     return this.request("CreateVulContainerExportJob", req, cb)
+  }
+
+  /**
+   * 运行时查询文件查杀新设置
+   */
+  async DescribeVirusScanConfig(
+    req?: DescribeVirusScanConfigRequest,
+    cb?: (error: string, rep: DescribeVirusScanConfigResponse) => void
+  ): Promise<DescribeVirusScanConfigResponse> {
+    return this.request("DescribeVirusScanConfig", req, cb)
   }
 
   /**
@@ -2255,6 +2289,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 新增或修改木马白名单规则
+   */
+  async AddOrModifyVirusWhiteListRule(
+    req: AddOrModifyVirusWhiteListRuleRequest,
+    cb?: (error: string, rep: AddOrModifyVirusWhiteListRuleResponse) => void
+  ): Promise<AddOrModifyVirusWhiteListRuleResponse> {
+    return this.request("AddOrModifyVirusWhiteListRule", req, cb)
+  }
+
+  /**
    * 删除运行时反弹shell事件
    */
   async DeleteReverseShellEvents(
@@ -2342,6 +2386,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAbnormalProcessRulesResponse) => void
   ): Promise<DeleteAbnormalProcessRulesResponse> {
     return this.request("DeleteAbnormalProcessRules", req, cb)
+  }
+
+  /**
+   * 运行时查询文件查杀实时监控设置信息
+   */
+  async DescribeVirusMonitorConfig(
+    req?: DescribeVirusMonitorConfigRequest,
+    cb?: (error: string, rep: DescribeVirusMonitorConfigResponse) => void
+  ): Promise<DescribeVirusMonitorConfigResponse> {
+    return this.request("DescribeVirusMonitorConfig", req, cb)
   }
 
   /**
@@ -3767,6 +3821,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询木马白名单规则列表
+   */
+  async DescribeVirusWhiteListRules(
+    req: DescribeVirusWhiteListRulesRequest,
+    cb?: (error: string, rep: DescribeVirusWhiteListRulesResponse) => void
+  ): Promise<DescribeVirusWhiteListRulesResponse> {
+    return this.request("DescribeVirusWhiteListRules", req, cb)
+  }
+
+  /**
    * 安装检查组件，创建防护容器
    */
   async CreateCheckComponent(
@@ -4354,6 +4418,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSecLogDeliveryClsSettingResponse) => void
   ): Promise<DescribeSecLogDeliveryClsSettingResponse> {
     return this.request("DescribeSecLogDeliveryClsSetting", req, cb)
+  }
+
+  /**
+   * 删除木马白名单规则
+   */
+  async DeleteVirusWhiteListRule(
+    req: DeleteVirusWhiteListRuleRequest,
+    cb?: (error: string, rep: DeleteVirusWhiteListRuleResponse) => void
+  ): Promise<DeleteVirusWhiteListRuleResponse> {
+    return this.request("DeleteVirusWhiteListRule", req, cb)
   }
 
   /**

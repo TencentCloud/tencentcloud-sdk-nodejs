@@ -263,8 +263,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除发信域名，删除后，将不可再使用该域名进行发信
-   */
+     * **发信域名删除接口仅限于企业用户使用**
+删除发信域名，删除后，将不可再使用该域名进行发信
+     */
   async DeleteEmailIdentity(
     req: DeleteEmailIdentityRequest,
     cb?: (error: string, rep: DeleteEmailIdentityResponse) => void

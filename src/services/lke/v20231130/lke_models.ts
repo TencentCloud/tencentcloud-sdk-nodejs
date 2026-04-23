@@ -144,40 +144,44 @@ export interface AgentAdvancedConfig {
  */
 export interface WorkflowInfo {
   /**
-   * 工作流ID
+   * <p>工作流ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowId?: string
   /**
-   * 工作流名称
+   * <p>工作流名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowName?: string
   /**
-   * 工作流运行ID
+   * <p>工作流运行ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowRunId?: string
   /**
-   * 选项卡
+   * <p>选项卡</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OptionCards?: Array<string>
   /**
-   * 多气泡的输出结果
+   * <p>多气泡的输出结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Outputs?: Array<string>
   /**
-   * 工作流发布时间，unix时间戳
+   * <p>工作流发布时间，unix时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowReleaseTime?: string
   /**
-   * 工作流多气泡输出
+   * <p>工作流多气泡输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Contents?: Array<Content>
+  /**
+   * <p>标识选项卡为单选还是双选</p><p>枚举值：</p><ul><li>0： 单选</li><li>1： 多选</li></ul>
+   */
+  OptionMode?: number
 }
 
 /**
@@ -268,22 +272,26 @@ export interface UploadAttributeLabelResponse {
  */
 export interface CreateSharedKnowledgeRequest {
   /**
-   * 共享知识库名称，字符数量范围：[1, 50]
+   * <p>共享知识库名称，字符数量范围：[1, 50]</p>
    */
   KnowledgeName: string
   /**
-   * 共享知识库描述，字符数量上限2000
+   * <p>共享知识库描述，字符数量上限2000</p>
    */
   KnowledgeDescription?: string
   /**
-   * Embedding模型，字符数量上限128
+   * <p>Embedding模型，字符数量上限128</p>
    * @deprecated
    */
   EmbeddingModel?: string
   /**
-   * 共享知识库类型，0普通，1公众号
+   * <p>共享知识库类型，0普通，1公众号</p>
    */
   KnowledgeType?: number
+  /**
+   * <p>ES存储配置</p>
+   */
+  EsConfig?: ESConfig
 }
 
 /**
@@ -527,6 +535,36 @@ export interface ListRejectedQuestionPreviewResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ES存储配置
+ */
+export interface ESConfig {
+  /**
+   * <p>存储类型，0: 未知类型， 1:默认存储(平台提供)，2: 自定义存储(用户自建ES)</p>
+   */
+  StorageType?: number
+  /**
+   * <p>ES集群名称(自定义存储时必填)</p>
+   */
+  InstanceName?: string
+  /**
+   * <p>ES集群ID(自定义存储时必填)</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>ES用户名(自定义存储时必填)</p>
+   */
+  Username?: string
+  /**
+   * <p>ES密码(自定义存储时必填)</p>
+   */
+  Password?: string
+  /**
+   * <p>允许修改存储方式</p>
+   */
+  CanModify?: boolean
 }
 
 /**
@@ -785,7 +823,7 @@ export interface ListQACateResponse {
  */
 export interface CreateSharedKnowledgeResponse {
   /**
-   * 共享知识库业务ID
+   * <p>共享知识库业务ID</p>
    */
   KnowledgeBizId?: string
   /**
@@ -1899,32 +1937,32 @@ export interface Stat {
  */
 export interface StatisticInfo {
   /**
-   * 模型名称
+   * <p>模型名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelName?: string
   /**
-   * 首Token耗时
+   * <p>首Token耗时</p><p>单位：ms</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FirstTokenCost?: number
   /**
-   * 总耗时
+   * <p>总耗时</p><p>单位：ms</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCost?: number
   /**
-   * 输入Token数量
+   * <p>输入Token数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InputTokens?: number
   /**
-   * 输出Token数量
+   * <p>输出Token数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OutputTokens?: number
   /**
-   * 总Token数量
+   * <p>总Token数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalTokens?: number
@@ -2074,6 +2112,11 @@ export interface RejectedQuestion {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Operator?: string
+  /**
+   * 拒答生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableScope?: number
 }
 
 /**
@@ -2326,62 +2369,62 @@ export interface AgentOutputConfig {
  */
 export interface AgentReference {
   /**
-   * 来源文档ID
+   * <p>来源文档ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DocId?: string
   /**
-   * id
+   * <p>id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
-   * 名称
+   * <p>名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 类型
+   * <p>类型</p><p>枚举值：</p><ul><li>1： 问答</li><li>2： 文档片段</li><li>4： 联网检索到的内容</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: number
   /**
-   * 链接
+   * <p>链接</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Url?: string
   /**
-   * 文档业务ID
+   * <p>文档业务ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DocBizId?: string
   /**
-   * 文档名称
+   * <p>文档名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DocName?: string
   /**
-   * 问答业务ID
+   * <p>问答业务ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QaBizId?: string
   /**
-   * 搜索引擎索引
+   * <p>搜索引擎索引</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Index?: number
   /**
-   * 标题
+   * <p>标题</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Title?: string
   /**
-   * 知识库名称
+   * <p>知识库名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KnowledgeName?: string
   /**
-   * 知识库标识
+   * <p>知识库标识</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KnowledgeBizId?: string
@@ -3450,34 +3493,34 @@ export interface KnowledgeCapacityPieGraphDetail {
  */
 export interface ModelParameter {
   /**
-   * 超参名称
+   * <p>超参名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 类型
+   * <p>类型</p><p>枚举值：</p><ul><li>string： 字符类型</li><li>int： 整数类型</li><li>float： 浮点数类型</li><li>array： 数组类型</li></ul>
    */
   Type?: string
   /**
-   * 默认值
+   * <p>默认值</p>
    */
   DefaultValue?: string
   /**
-   * 枚举值
+   * <p>枚举值</p>
    */
   EnumValues?: Array<string>
   /**
-   * 默认值
+   * <p>默认值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Default?: number
   /**
-   * 最小值
+   * <p>最小值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Min?: number
   /**
-   * 最大值
+   * <p>最大值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Max?: number
@@ -3823,6 +3866,10 @@ export interface ListWorkflowRunsRequest {
    * 登录用户子账号(集成商模式必填)
    */
   LoginSubAccountUin?: string
+  /**
+   * 查询内容
+   */
+  Query?: string
 }
 
 /**
@@ -4377,7 +4424,7 @@ export interface WorkflowRunNodeInfo {
    */
   NodeId?: string
   /**
-   * <p>节点类型</p>
+   * <p>节点类型</p><p>枚举值：</p><ul><li>0： 未指定</li><li>1： 开始节点</li><li>2： 参数提取节点</li><li>3： 大模型节点</li><li>4： 知识问答节点</li><li>5： 知识检索节点</li><li>6： 标签提取节点</li><li>7： 代码执行节点</li><li>8： 工具节点</li><li>9： 逻辑判断节点</li><li>10： 消息节点</li><li>11： 选项卡节点</li><li>12： 循环节点</li><li>13： 意图识别节点</li><li>14： 工作流节点</li><li>15： 插件节点</li><li>16： 结束节点</li><li>17： 变量聚合节点</li><li>18： 批处理节点</li><li>19： 消息队列节点</li><li>20： 数据库节点</li><li>21： 变量赋值节点</li><li>22： 变量转换节点</li><li>23： Agent节点</li><li>24： 注释节点</li><li>25： 文件收集节点</li><li>26： 文本收集节点</li><li>27： Widget 节点</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeType?: number
@@ -4387,7 +4434,7 @@ export interface WorkflowRunNodeInfo {
    */
   NodeName?: string
   /**
-   * <p>状态</p>
+   * <p>状态</p><p>枚举值：</p><ul><li>0： 初始状态</li><li>1： 运行中</li><li>2： 运行成功</li><li>3： 运行失败</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
@@ -5015,53 +5062,71 @@ export interface GetVarListResponse {
  */
 export interface WorkFlowSummary {
   /**
-   * 工作流ID
+   * <p>工作流ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowId?: string
   /**
-   * 工作流名称
+   * <p>工作流名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowName?: string
   /**
-   * 工作流运行ID
+   * <p>工作流运行ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowRunId?: string
   /**
-   * 节点信息
+   * <p>节点信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunNodes?: Array<WorkflowRunNodeInfo>
   /**
-   * 选项卡
+   * <p>选项卡</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OptionCards?: Array<string>
   /**
-   * 多气泡的输出结果
+   * <p>多气泡的输出结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Outputs?: Array<string>
   /**
-   * 工作流发布时间，unix时间戳
+   * <p>工作流发布时间，unix时间戳</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowReleaseTime?: string
   /**
-   * 中间消息
+   * <p>中间消息</p>
    */
   PendingMessages?: Array<string>
   /**
-   * 选项卡索引
+   * <p>选项卡索引</p>
    */
   OptionCardIndex?: OptionCardIndex
   /**
-   * 工作流多气泡输出
+   * <p>工作流多气泡输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Contents?: Array<Content>
+  /**
+   * <p>标识选项卡为单选还是双选</p><p>枚举值：</p><ul><li>0： 单选</li><li>1： 多选</li></ul>
+   */
+  OptionMode?: number
+}
+
+/**
+ * UpdateSharedKnowledge返回参数结构体
+ */
+export interface UpdateSharedKnowledgeResponse {
+  /**
+   * 共享知识库业务ID
+   */
+  KnowledgeBizId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5174,17 +5239,22 @@ export interface AudioTranscript {
 }
 
 /**
- * UpdateSharedKnowledge返回参数结构体
+ * 筛选条件。
  */
-export interface UpdateSharedKnowledgeResponse {
+export interface FilterItem {
   /**
-   * 共享知识库业务ID
+   * 筛选内容。
+例如筛选审核状态可以使用"AuditStatus"
    */
-  KnowledgeBizId?: string
+  FilterKey?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 筛选条件。
+例如对于筛选内容"AuditStatus"，可使用筛选条件:
+"ContentFailed":"内容审核失败",
+"PictureFailed":"图片审核失败",
+"ContentAndPictureFailed":"图片和内容审核失败",
    */
-  RequestId?: string
+  FilterValue?: Array<string>
 }
 
 /**
@@ -5548,150 +5618,140 @@ export interface ModifyQARequest {
  */
 export interface MsgRecord {
   /**
-   * 内容
+   * <p>内容</p>
    */
   Content?: string
   /**
-   * 当前记录所对应的 Session ID
+   * <p>当前记录所对应的 Session ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionId?: string
   /**
-   * 记录ID
+   * <p>记录ID</p>
    */
   RecordId?: string
   /**
-   * 关联记录ID
+   * <p>关联记录ID</p>
    */
   RelatedRecordId?: string
   /**
-   * 是否来自自己
+   * <p>是否来自自己</p>
    */
   IsFromSelf?: boolean
   /**
-   * 发送者名称
+   * <p>发送者名称</p>
    */
   FromName?: string
   /**
-   * 发送者头像
+   * <p>发送者头像</p>
    */
   FromAvatar?: string
   /**
-   * 时间戳
+   * <p>时间戳</p>
    */
   Timestamp?: string
   /**
-   * 是否已读
+   * <p>是否已读</p>
    */
   HasRead?: boolean
   /**
-   * 评价
+   * <p>评价</p>
    */
   Score?: number
   /**
-   * 是否评分
+   * <p>是否评分</p>
    */
   CanRating?: boolean
   /**
-   * 是否展示反馈按钮
+   * <p>是否展示反馈按钮</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CanFeedback?: boolean
   /**
-   * 记录类型
+   * <p>记录类型</p>
    */
   Type?: number
   /**
-   * 引用来源
+   * <p>引用来源</p>
    */
   References?: Array<MsgRecordReference>
   /**
-   * 评价原因
+   * <p>评价原因</p>
    */
   Reasons?: Array<string>
   /**
-   * 是否大模型
+   * <p>是否大模型</p>
    */
   IsLlmGenerated?: boolean
   /**
-   * 图片链接，可公有读
+   * <p>图片链接，可公有读</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageUrls?: Array<string>
   /**
-   * 当次 token 统计信息
+   * <p>当次 token 统计信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TokenStat?: TokenStat
   /**
-   * 回复方式
-1:大模型直接回复;
-2:保守回复, 未知问题回复;
-3:拒答问题回复;
-4:敏感回复;
-5:问答对直接回复, 已采纳问答对优先回复;
-6:欢迎语回复;
-7:并发超限回复;
-8:全局干预知识;
-9:任务流程过程回复, 当历史记录中 task_flow.type = 0 时, 为大模型回复;
-10:任务流程答案回复;
-11:搜索引擎回复;
-12:知识润色后回复;
-13:图片理解回复;
-14:实时文档回复;
+   * <p>回复方式<br>1:大模型直接回复;<br>2:保守回复, 未知问题回复;<br>3:拒答问题回复;<br>4:敏感回复;<br>5:问答对直接回复, 已采纳问答对优先回复;<br>6:欢迎语回复;<br>7:并发超限回复;<br>8:全局干预知识;<br>9:任务流程过程回复, 当历史记录中 task_flow.type = 0 时, 为大模型回复;<br>10:任务流程答案回复;<br>11:搜索引擎回复;<br>12:知识润色后回复;<br>13:图片理解回复;<br>14:实时文档回复;</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReplyMethod?: number
   /**
-   * 选项卡, 用于多轮对话
+   * <p>选项卡, 用于多轮对话</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OptionCards?: Array<string>
   /**
-   * 任务信息
+   * <p>任务信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskFlow?: TaskFlowInfo
   /**
-   * 用户传入的文件信息
+   * <p>用户传入的文件信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileInfos?: Array<FileInfo>
   /**
-   * 参考来源引用位置信息
+   * <p>参考来源引用位置信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QuoteInfos?: Array<QuoteInfo>
   /**
-   * Agent的思考过程信息
+   * <p>Agent的思考过程信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AgentThought?: AgentThought
   /**
-   * 扩展信息
+   * <p>扩展信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtraInfo?: ExtraInfo
   /**
-   * 工作流信息
+   * <p>工作流信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkFlow?: WorkflowInfo
   /**
-   * Widget信息
+   * <p>Widget信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Widgets?: Array<Widget>
   /**
-   * Widget动作信息
+   * <p>Widget动作信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WidgetAction?: WidgetAction
   /**
-   * 音频信息
+   * <p>音频信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Audios?: Array<Audio>
+  /**
+   * <p>标识选项卡为单选还是双选</p><p>枚举值：</p><ul><li>0： 单选</li><li>1： 双选</li></ul>
+   */
+  OptionMode?: number
 }
 
 /**
@@ -5802,11 +5862,11 @@ export interface DescribeUnsatisfiedReplyContextRequest {
  */
 export interface ListRejectedQuestionResponse {
   /**
-   * 总数
+   * <p>总数</p>
    */
   Total?: string
   /**
-   * 拒答问题列表
+   * <p>拒答问题列表</p>
    */
   List?: Array<RejectedQuestion>
   /**
@@ -6140,43 +6200,43 @@ export interface RenameDocResponse {
  */
 export interface MsgRecordReference {
   /**
-   * id
+   * <p>id</p>
    */
   Id?: string
   /**
-   * 链接
+   * <p>链接</p>
    */
   Url?: string
   /**
-   * 类型
+   * <p>类型</p><p>枚举值：</p><ul><li>1： 问答</li><li>2： 文档片段</li><li>4： 联网检索到的内容</li></ul>
    */
   Type?: number
   /**
-   * 名称
+   * <p>名称</p>
    */
   Name?: string
   /**
-   * 来源文档ID
+   * <p>来源文档ID</p>
    */
   DocId?: string
   /**
-   * 知识库名称
+   * <p>知识库名称</p>
    */
   KnowledgeName?: string
   /**
-   * 知识库业务id
+   * <p>知识库业务id</p>
    */
   KnowledgeBizId?: string
   /**
-   * 文档业务id
+   * <p>文档业务id</p>
    */
   DocBizId?: string
   /**
-   * 问答业务id
+   * <p>问答业务id</p>
    */
   QaBizId?: string
   /**
-   * 文档索引id
+   * <p>文档索引id</p>
    */
   Index?: number
 }
@@ -6743,25 +6803,25 @@ export interface AgentToolRspParam {
  */
 export interface CreateRejectedQuestionRequest {
   /**
-   * 应用ID, 获取方式参看如何获取[BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)
+   * <p>应用ID, 获取方式参看如何获取<a href="https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa">BotBizId</a></p>
    */
   BotBizId: string
   /**
-   * 拒答问题
-
-
+   * <p>拒答问题</p>
    */
   Question: string
   /**
-   * 拒答问题来源， 1- 来源于不满意回复;  2 - 来源于手动添加
+   * <p>拒答问题来源， 1- 来源于不满意回复;  2 - 来源于手动添加</p>
    */
   BusinessSource: number
   /**
-   * 拒答问题来源的数据源唯一id
-
-
+   * <p>拒答问题来源的数据源唯一id</p>
    */
   BusinessId?: string
+  /**
+   * <p>拒答生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效 默认值：2。</p>
+   */
+  EnableScope?: number
 }
 
 /**
@@ -7012,53 +7072,51 @@ export interface ModifyDocCateRequest {
  */
 export interface ModelParams {
   /**
-   * 温度
-   */
-  Temperature?: number
-  /**
-   * Top_P
-   */
-  TopP?: number
-  /**
-   * 随机种子
-   */
-  Seed?: number
-  /**
-   * 存在惩罚
-   */
-  PresencePenalty?: number
-  /**
-   * 频率惩罚
-   */
-  FrequencyPenalty?: number
-  /**
-   * 重复惩罚
-   */
-  RepetitionPenalty?: number
-  /**
-   * 最大输出长度
-   */
-  MaxTokens?: number
-  /**
-   * 停止序列
-   */
-  StopSequences?: Array<string>
-  /**
-   * 输出格式
-   */
-  ReplyFormat?: string
-  /**
-   * 深度思考值
-disabled
-enabled
+   * <p>深度思考值<br>disabled<br>enabled</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeepThinking?: string
   /**
-   * 效果 disabled low medium high
+   * <p>频率惩罚</p>
+   */
+  FrequencyPenalty?: number
+  /**
+   * <p>最大输出长度</p>
+   */
+  MaxTokens?: number
+  /**
+   * <p>存在惩罚</p>
+   */
+  PresencePenalty?: number
+  /**
+   * <p>效果 disabled low medium high</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReasoningEffort?: string
+  /**
+   * <p>重复惩罚</p>
+   */
+  RepetitionPenalty?: number
+  /**
+   * <p>输出格式</p>
+   */
+  ReplyFormat?: string
+  /**
+   * <p>随机种子</p>
+   */
+  Seed?: number
+  /**
+   * <p>停止序列</p>
+   */
+  StopSequences?: Array<string>
+  /**
+   * <p>温度</p>
+   */
+  Temperature?: number
+  /**
+   * <p>Top_P</p>
+   */
+  TopP?: number
 }
 
 /**
@@ -7305,119 +7363,119 @@ export interface GetDocPreviewResponse {
  */
 export interface ModelInfo {
   /**
-   * 模型名称
+   * <p>模型名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelName?: string
   /**
-   * 模型描述
+   * <p>模型描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelDesc?: string
   /**
-   * 模型名称
+   * <p>模型名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AliasName?: string
   /**
-   * 资源状态 1：资源可用；2：资源已用尽
+   * <p>资源状态 1：资源可用；2：资源已用尽</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceStatus?: number
   /**
-   * 提示词内容字符限制
+   * <p>提示词内容字符限制</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PromptWordsLimit?: string
   /**
-   * 通过核心采样控制内容生成的多样性，较高的Top P值会导致生成更多样的内容
+   * <p>通过核心采样控制内容生成的多样性，较高的Top P值会导致生成更多样的内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopP?: ModelParameter
   /**
-   * 温度控制随机性
+   * <p>温度控制随机性</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Temperature?: ModelParameter
   /**
-   * 最多能生成的token数量
+   * <p>最多能生成的token数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxTokens?: ModelParameter
   /**
-   * 模型来源 Hunyuan：腾讯混元大模型,Industry：腾讯云行业大模型,Experience：新模型体验,Custom自定义模型
+   * <p>模型来源 Hunyuan：腾讯混元大模型,Industry：腾讯云行业大模型,Experience：新模型体验,Custom自定义模型</p>
    */
   Source?: string
   /**
-   * 模型图标
+   * <p>模型图标</p>
    */
   Icon?: string
   /**
-   * 是否免费
+   * <p>是否免费</p>
    */
   IsFree?: boolean
   /**
-   * 模型对话框可输入的上限
+   * <p>模型对话框可输入的上限</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InputLenLimit?: number
   /**
-   * 支持工作流的类型 0:模型不支持; 1: 模型支持工作流； 2： 模型支持效果不佳；
+   * <p>支持工作流的类型 0:模型不支持; 1: 模型支持工作流； 2： 模型支持效果不佳；</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportWorkflowStatus?: number
   /**
-   * 模型类别 generate：生成模型，thought：思考模型
+   * <p>模型类别 generate：生成模型，thought：思考模型</p>
    */
   ModelCategory?: string
   /**
-   * 是否默认模型
+   * <p>是否默认模型</p>
    */
   IsDefault?: boolean
   /**
-   * 角色提示词输入长度限制
+   * <p>角色提示词输入长度限制</p>
    */
   RoleLenLimit?: number
   /**
-   * 是否专属并发模型
+   * <p>是否专属并发模型</p>
    */
   IsExclusive?: boolean
   /**
-   * 模型支持智能通话效果
+   * <p>模型支持智能通话效果</p><p>枚举值：</p><ul><li>0： 模型不支持</li><li>1： 模型支持ai通话</li><li>2： 模型ai通话支持效果不佳</li></ul>
    */
   SupportAiCallStatus?: number
   /**
-   * 专属并发数
+   * <p>专属并发数</p>
    */
   Concurrency?: number
   /**
-   * 模型标签
+   * <p>模型标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelTags?: Array<string>
   /**
-   * 模型超参定义
+   * <p>模型超参定义</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelParams?: Array<ModelParameter>
   /**
-   * 提供商名称
+   * <p>提供商名称</p>
    */
   ProviderName?: string
   /**
-   * 提供商别名
+   * <p>提供商别名</p>
    */
   ProviderAliasName?: string
   /**
-   * 提供商类型 Self:提供商，Custom：自定义模型提供商，Third：第三方模型提供商
+   * <p>提供商类型 Self:提供商，Custom：自定义模型提供商，Third：第三方模型提供商</p>
    */
   ProviderType?: string
   /**
-   * 是否关闭模型超参
+   * <p>是否关闭模型超参</p>
    */
   IsCloseModelParams?: boolean
   /**
-   * 是否支持深度思考
+   * <p>是否支持深度思考</p>
    */
   IsDeepThinking?: boolean
 }
@@ -8500,22 +8558,25 @@ export interface QACate {
  */
 export interface ListRejectedQuestionRequest {
   /**
-   * 应用ID, 获取方法参看如何获取   [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)。
+   * <p>应用ID, 获取方法参看如何获取   <a href="https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa">BotBizId</a>。</p>
    */
   BotBizId: string
   /**
-   * 页码（必须大于0）
+   * <p>页码（必须大于0）</p><p>默认值：1</p>
    */
   PageNumber: number
   /**
-   * 每页数量（取值范围1-200）
+   * <p>每页数量（取值范围1-200）</p><p>默认值：15</p>
    */
   PageSize: number
   /**
-   * 查询内容
-
+   * <p>查询内容</p>
    */
   Query?: string
+  /**
+   * <p>过滤条件：<br>生效： EnableScope: 1,2,3,4</p>
+   */
+  Filters?: Array<FilterItem>
 }
 
 /**
@@ -8547,41 +8608,41 @@ export interface AgentKnowledgeAttrLabel {
  */
 export interface PluginToolReqParam {
   /**
-   * 参数名称
+   * AnyOf类型参数
    */
-  Name?: string
-  /**
-   * 参数描述
-   */
-  Desc?: string
-  /**
-   * 参数类型，0:string, 1:int, 2:float，3:bool 4:object 5:array_string, 6:array_int, 7:array_float, 8:array_bool, 9:array_object, 99:null, 100:upspecified
-   */
-  Type?: number
-  /**
-   * 参数是否必填
-   */
-  IsRequired?: boolean
+  AnyOf?: Array<PluginToolReqParam>
   /**
    * 参数默认值
    */
   DefaultValue?: string
   /**
-   * 子参数,ParamType 是OBJECT 或 ARRAY<>类型有用
+   * 参数描述
    */
-  SubParams?: Array<PluginToolReqParam>
+  Desc?: string
   /**
    * 插件参数配置是否隐藏不可见，true-隐藏不可见，false-可见
    */
   GlobalHidden?: boolean
   /**
+   * 参数是否必填
+   */
+  IsRequired?: boolean
+  /**
+   * 参数名称
+   */
+  Name?: string
+  /**
    * OneOf类型参数
    */
   OneOf?: Array<PluginToolReqParam>
   /**
-   * AnyOf类型参数
+   * 子参数,ParamType 是OBJECT 或 ARRAY<>类型有用
    */
-  AnyOf?: Array<PluginToolReqParam>
+  SubParams?: Array<PluginToolReqParam>
+  /**
+   * 参数类型，0:string, 1:int, 2:float，3:bool 4:object 5:array_string, 6:array_int, 7:array_float, 8:array_bool, 9:array_object, 99:null, 100:upspecified
+   */
+  Type?: number
 }
 
 /**
@@ -8643,21 +8704,21 @@ export interface CheckAttributeLabelExistRequest {
  */
 export interface AppModelDetailInfo {
   /**
-   * 模型名称
+   * <p>模型别名</p>
    */
-  ModelName?: string
+  AliasName?: string
   /**
-   * 模型参数
-   */
-  ModelParams?: ModelParams
-  /**
-   * 限制
+   * <p>限制</p>
    */
   HistoryLimit?: number
   /**
-   * 模型别名
+   * <p>模型名称</p>
    */
-  AliasName?: string
+  ModelName?: string
+  /**
+   * <p>模型参数</p>
+   */
+  ModelParams?: ModelParams
 }
 
 /**

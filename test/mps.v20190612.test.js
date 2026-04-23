@@ -1478,6 +1478,16 @@ it("mps.v20190612.DescribeStreamPackageActivateState", async function () {
     }
 })
 
+it("mps.v20190612.TextToSpeechAsync", async function () {
+    try {
+       const data = await client.TextToSpeechAsync({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.CreateProcessImageTemplate", async function () {
     try {
        const data = await client.CreateProcessImageTemplate({})
@@ -1641,6 +1651,16 @@ it("mps.v20190612.WithdrawsWatermark", async function () {
 it("mps.v20190612.ModifyStreamPackageSource", async function () {
     try {
        const data = await client.ModifyStreamPackageSource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeTextToSpeechAsyncTask", async function () {
+    try {
+       const data = await client.DescribeTextToSpeechAsyncTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

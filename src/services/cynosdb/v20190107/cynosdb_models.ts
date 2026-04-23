@@ -3883,7 +3883,7 @@ export interface DisassociateSecurityGroupsRequest {
    * 可用区。
 说明：请正确输入集群所在的主可用区，若输入非集群所在的主可用区可能显示调用成功，但实际执行会失败。
    */
-  Zone: string
+  Zone?: string
 }
 
 /**
@@ -4831,7 +4831,7 @@ export interface AssociateSecurityGroupsRequest {
   /**
    * 可用区
    */
-  Zone: string
+  Zone?: string
 }
 
 /**
@@ -7401,155 +7401,149 @@ export interface ModifyVaultResponse {
  */
 export interface CynosdbInstanceDetail {
   /**
-   * 用户Uin
+   * <p>用户Uin</p>
    */
   Uin?: string
   /**
-   * 用户AppId
+   * <p>用户AppId</p>
    */
   AppId?: number
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId?: number
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region?: string
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone?: string
   /**
-   * 实例状态
-creating：创建中
-running：运行中
-isolating：隔离中
-isolated：已隔离
-activating：恢复中
-offlining：下线中
-offlined：已下线
-
+   * <p>实例状态<br>creating：创建中<br>running：运行中<br>isolating：隔离中<br>isolated：已隔离<br>activating：恢复中<br>offlining：下线中<br>offlined：已下线</p>
    */
   Status?: string
   /**
-   * 实例状态中文描述
+   * <p>实例状态中文描述</p>
    */
   StatusDesc?: string
   /**
-   * serverless实例状态, 可能值：
-resume
-pause
+   * <p>serverless实例状态, 可能值：<br>resume<br>pause</p>
    */
   ServerlessStatus?: string
   /**
-   * 数据库类型
+   * <p>数据库类型</p>
    */
   DbType?: string
   /**
-   * 数据库版本
+   * <p>数据库版本</p>
    */
   DbVersion?: string
   /**
-   * Cpu，单位：核
+   * <p>Cpu，单位：核</p>
    */
   Cpu?: number
   /**
-   * 内存，单位：GB
+   * <p>内存，单位：GB</p>
    */
   Memory?: number
   /**
-   * 存储量，单位：GB
+   * <p>存储量，单位：GB</p>
    */
   Storage?: number
   /**
-   * 实例类型
+   * <p>实例类型</p>
    */
   InstanceType?: string
   /**
-   * 实例当前角色
+   * <p>实例当前角色</p>
    */
   InstanceRole?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 付费模式
+   * <p>付费模式</p>
    */
   PayMode?: number
   /**
-   * 实例过期时间
+   * <p>实例过期时间</p>
    */
   PeriodEndTime?: string
   /**
-   * 网络类型
+   * <p>网络类型</p>
    */
   NetType?: number
   /**
-   * VPC网络ID
+   * <p>VPC网络ID</p>
    */
   VpcId?: string
   /**
-   * 子网ID
+   * <p>子网ID</p>
    */
   SubnetId?: string
   /**
-   * 实例内网IP
+   * <p>实例内网IP</p>
    */
   Vip?: string
   /**
-   * 实例内网端口
+   * <p>实例内网端口</p>
    */
   Vport?: number
   /**
-   * 实例外网域名
+   * <p>实例外网域名</p>
    */
   WanDomain?: string
   /**
-   * 字符集
+   * <p>字符集</p>
    */
   Charset?: string
   /**
-   * Cynos内核版本
+   * <p>Cynos内核版本</p>
    */
   CynosVersion?: string
   /**
-   * 续费标志
+   * <p>续费标志</p>
    */
   RenewFlag?: number
   /**
-   * serverless实例cpu下限
+   * <p>serverless实例cpu下限</p>
    */
   MinCpu?: number
   /**
-   * serverless实例cpu上限
+   * <p>serverless实例cpu上限</p>
    */
   MaxCpu?: number
   /**
-   * Db类型:<li>NORMAL</li><li>SERVERLESS</li>
+   * <p>Db类型:<li>NORMAL</li><li>SERVERLESS</li></p>
    */
   DbMode?: string
+  /**
+   * <p>集群的读写实例所在可用区</p>
+   */
+  MasterZone?: string
 }
 
 /**
@@ -14068,28 +14062,27 @@ export interface ModifyVipVportResponse {
  */
 export interface ModifyDBInstanceSecurityGroupsRequest {
   /**
-   * 网络组id(cynosdbmysql-grp-前缀开头)或集群id（例如 cynosdbmysql-xxxxxxxx前缀）,当通过实例IP地址三元组（UniqVpcId、Vip、Vport）配置安全组时，该字段必须设置为集群ID（例如 cynosdbmysql-xxxxxxxx前缀）。
+   * <p>网络组id(cynosdbmysql-grp-前缀开头)或集群id（例如 cynosdbmysql-xxxxxxxx前缀）,当通过实例IP地址三元组（UniqVpcId、Vip、Vport）配置安全组时，该字段必须设置为集群ID（例如 cynosdbmysql-xxxxxxxx前缀）。</p>
    */
   InstanceId: string
   /**
-   * 要修改的安全组ID列表，一个或者多个安全组ID组成的数组。
-注意：该入参会全量替换存量已有集合，非增量更新。修改需传入预期的全量集合。
+   * <p>要修改的安全组ID列表，一个或者多个安全组ID组成的数组。<br>注意：该入参会全量替换存量已有集合，非增量更新。修改需传入预期的全量集合。</p>
    */
   SecurityGroupIds: Array<string>
   /**
-   * 可用区
+   * <p>可用区</p>
    */
-  Zone: string
+  Zone?: string
   /**
-   * 实例所属VPC网络ID,（UniqVpcId、Vip 和 Vport 三个参数需同时指定，用于唯一标识网络实例）
+   * <p>实例所属VPC网络ID,（UniqVpcId、Vip 和 Vport 三个参数需同时指定，用于唯一标识网络实例）</p>
    */
   UniqVpcId?: string
   /**
-   * 实例IP地址,实例IP地址三元组UniqVpcId、Vip 和 Vport) 三个参数需同时指定，用于唯一标识网络实实例
+   * <p>实例IP地址,实例IP地址三元组UniqVpcId、Vip 和 Vport) 三个参数需同时指定，用于唯一标识网络实实例</p>
    */
   Vip?: string
   /**
-   * 实例端口,实例IP地址三元组UniqVpcId、Vip 和 Vport) 三个参数需同时指定，用于唯一标识网络实实例
+   * <p>实例端口,实例IP地址三元组UniqVpcId、Vip 和 Vport) 三个参数需同时指定，用于唯一标识网络实实例</p>
    */
   Vport?: number
 }

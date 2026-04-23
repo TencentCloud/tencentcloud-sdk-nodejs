@@ -278,6 +278,16 @@ it("cls.v20201016.DescribeClusterMetricConfigs", async function () {
     }
 })
 
+it("cls.v20201016.CreateSearchView", async function () {
+    try {
+       const data = await client.CreateSearchView({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeAlertRecordHistory", async function () {
     try {
        const data = await client.DescribeAlertRecordHistory({})
@@ -428,9 +438,9 @@ it("cls.v20201016.DeleteSplunkDeliver", async function () {
     }
 })
 
-it("cls.v20201016.DescribeConsoles", async function () {
+it("cls.v20201016.DescribeClusterBaseMetricConfigs", async function () {
     try {
-       const data = await client.DescribeConsoles({})
+       const data = await client.DescribeClusterBaseMetricConfigs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -498,9 +508,9 @@ it("cls.v20201016.ModifyIndex", async function () {
     }
 })
 
-it("cls.v20201016.ModifyKafkaRecharge", async function () {
+it("cls.v20201016.DescribeSearchViews", async function () {
     try {
-       const data = await client.ModifyKafkaRecharge({})
+       const data = await client.DescribeSearchViews({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -778,6 +788,16 @@ it("cls.v20201016.ModifyAlarmNotice", async function () {
     }
 })
 
+it("cls.v20201016.DeleteSearchView", async function () {
+    try {
+       const data = await client.DeleteSearchView({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.OpenKafkaConsumer", async function () {
     try {
        const data = await client.OpenKafkaConsumer({})
@@ -878,9 +898,9 @@ it("cls.v20201016.ModifyConfigExtra", async function () {
     }
 })
 
-it("cls.v20201016.DescribeClusterBaseMetricConfigs", async function () {
+it("cls.v20201016.DescribeConsoles", async function () {
     try {
-       const data = await client.DescribeClusterBaseMetricConfigs({})
+       const data = await client.DescribeConsoles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1061,6 +1081,16 @@ it("cls.v20201016.DescribeIndex", async function () {
 it("cls.v20201016.DeleteConsole", async function () {
     try {
        const data = await client.DeleteConsole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyKafkaRecharge", async function () {
+    try {
+       const data = await client.ModifyKafkaRecharge({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1681,6 +1711,16 @@ it("cls.v20201016.CreateConsole", async function () {
 it("cls.v20201016.DeleteAlarm", async function () {
     try {
        const data = await client.DeleteAlarm({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifySearchView", async function () {
+    try {
+       const data = await client.ModifySearchView({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

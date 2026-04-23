@@ -220,6 +220,40 @@ export interface CreateRebuildIndexTaskResponse {
 }
 
 /**
+ * CreateSearchView请求参数结构体
+ */
+export interface CreateSearchViewRequest {
+  /**
+   * <p>日志集id</p><p>标记视图所属该日志集，用于查询日志集下的查询视图配置</p>
+   */
+  LogsetId: string
+  /**
+   * <p>日志集所属地域</p><p>参数格式：ap-guangzhou</p>
+   */
+  LogsetRegion: string
+  /**
+   * <p>视图名称</p><p>入参限制：最大支持255字符，不能包含&quot;|&quot;字符。</p>
+   */
+  ViewName: string
+  /**
+   * <p>视图类型</p><p>枚举值：</p><ul><li>log： 日志主题</li><li>metric： 指标主题</li></ul><p>Topics字段中配置的主题信息应该与ViewType类型匹配</p>
+   */
+  ViewType: string
+  /**
+   * <p>视图主题配置信息</p><p>Topics字段中配置的主题信息应该与ViewType类型匹配</p>
+   */
+  Topics: Array<ViewSearchTopic>
+  /**
+   * <p>配置描述信息</p>
+   */
+  Description?: string
+  /**
+   * <p>自定义视图id前缀</p><p>参数格式：<code>^[a-z0-9][a-z0-9_-]{1,61}[a-z0-9]$</code></p><p>配置成功之后ViewId格式: ${ViewIdPrefix}-view</p>
+   */
+  ViewIdPrefix?: string
+}
+
+/**
  * CheckFunction请求参数结构体
  */
 export interface CheckFunctionRequest {
@@ -4226,52 +4260,13 @@ export interface OpenKafkaConsumerResponse {
 }
 
 /**
- * 告警对象
+ * DeleteSearchView返回参数结构体
  */
-export interface AlarmTargetInfo {
+export interface DeleteSearchViewResponse {
   /**
-   * 日志集ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  LogsetId?: string
-  /**
-   * 日志集名称。
-   */
-  LogsetName?: string
-  /**
-   * 日志主题ID。
-   */
-  TopicId?: string
-  /**
-   * 日志主题名称。
-   */
-  TopicName?: string
-  /**
-   * 查询语句。
-   */
-  Query?: string
-  /**
-   * 告警对象序号。
-   */
-  Number?: number
-  /**
-   * 查询范围起始时间相对于告警执行时间的偏移，单位为分钟，取值为非正，最大值为0，最小值为-1440。
-   */
-  StartTimeOffset?: number
-  /**
-   * 查询范围终止时间相对于告警执行时间的偏移，单位为分钟，取值为非正，须大于StartTimeOffset，最大值为0，最小值为-1440。
-   */
-  EndTimeOffset?: number
-  /**
-   * 检索语法规则，默认值为0。
-0：Lucene语法，1：CQL语法。
-详细说明参见<a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules" target="_blank">检索条件语法规则</a>
-   */
-  SyntaxRule?: number
-  /**
-   * 主题类型。
-0: 日志主题，1: 指标主题
-   */
-  BizType?: number
+  RequestId?: string
 }
 
 /**
@@ -4396,6 +4391,16 @@ tag:tagKey
    * 分页单页的限制数目，默认值为20，最大值100
    */
   Limit?: number
+}
+
+/**
+ * ModifySearchView返回参数结构体
+ */
+export interface ModifySearchViewResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5553,6 +5558,16 @@ export interface ModifyMetricConfigResponse {
 }
 
 /**
+ * DeleteSearchView请求参数结构体
+ */
+export interface DeleteSearchViewRequest {
+  /**
+   * <p>视图ID</p>
+   */
+  ViewId: string
+}
+
+/**
  * DescribeConsumer返回参数结构体
  */
 export interface DescribeConsumerResponse {
@@ -5646,6 +5661,71 @@ export interface DescribeClusterBaseMetricConfigsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyKafkaRecharge请求参数结构体
+ */
+export interface ModifyKafkaRechargeRequest {
+  /**
+   * 导入配置Id。
+- 通过 [创建Kafka数据订阅任务](https://cloud.tencent.com/document/product/614/94448)获取Kafka导入配置Id。
+- 通过 [获取Kafka数据订阅任务列表](https://cloud.tencent.com/document/product/614/94446)获取Kafka导入配置Id。
+   */
+  Id: string
+  /**
+   * 导入CLS目标TopicId。
+- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
+- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456)获取日志主题Id。
+   */
+  TopicId: string
+  /**
+   * Kafka导入配置名称
+   */
+  Name?: string
+  /**
+   * 导入Kafka类型，0：腾讯云CKafka：1：用户自建Kafka。
+   */
+  KafkaType?: number
+  /**
+   * 腾讯云CKafka实例ID，KafkaType为0时必填。
+- 通过 [获取实例列表信息](https://cloud.tencent.com/document/product/597/40835) 获取实例id。
+   */
+  KafkaInstance?: string
+  /**
+   * 服务地址，KafkaType为1时必填。
+   */
+  ServerAddr?: string
+  /**
+   * ServerAddr是否为加密连接，KafkaType为1时必填。
+   */
+  IsEncryptionAddr?: boolean
+  /**
+   * 加密访问协议，KafkaType参数为1并且IsEncryptionAddr参数为true时必填。
+   */
+  Protocol?: KafkaProtocolInfo
+  /**
+   * 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开。
+
+- Kafka类型为腾讯云CKafka时：通过 [获取主题列表](https://cloud.tencent.com/document/product/597/40847) 获取TopicName。
+   */
+  UserKafkaTopics?: string
+  /**
+   * 用户Kafka消费组名称
+   */
+  ConsumerGroupName?: string
+  /**
+   * 日志导入规则
+   */
+  LogRechargeRule?: LogRechargeRuleInfo
+  /**
+   * 导入控制，1：暂停；2：启动。
+   */
+  StatusControl?: number
+  /**
+   * 用户kafka拓展信息
+   */
+  UserKafkaMeta?: UserKafkaMeta
 }
 
 /**
@@ -6786,6 +6866,48 @@ export interface MultiCondition {
 - 不填则默认为0。
    */
   AlarmLevel?: number
+}
+
+/**
+ * 检索视图信息
+ */
+export interface SearchViewInfo {
+  /**
+   * <p>视图ID</p>
+   */
+  ViewId?: string
+  /**
+   * <p>视图名称</p>
+   */
+  ViewName?: string
+  /**
+   * <p>视图类型</p><p>枚举值：</p><ul><li>log： 日志主题</li><li>metric： 指标主题</li></ul>
+   */
+  ViewType?: string
+  /**
+   * <p>日志集id</p><p>视图所属日志集</p>
+   */
+  LogsetId?: string
+  /**
+   * <p>日志集所属地域</p><p>参数格式：ap-guangzhou</p>
+   */
+  LogsetRegion?: string
+  /**
+   * <p>视图日志主题信息</p>
+   */
+  Topics?: Array<ViewSearchTopic>
+  /**
+   * <p>视图描述</p>
+   */
+  Description?: string
+  /**
+   * <p>创建时间</p><p>单位：秒级别时间戳</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p><p>单位：秒级别时间戳</p>
+   */
+  UpdateTime?: number
 }
 
 /**
@@ -9280,6 +9402,32 @@ export interface NetworkApplicationInfo {
 }
 
 /**
+ * ModifySearchView请求参数结构体
+ */
+export interface ModifySearchViewRequest {
+  /**
+   * <p>视图ID</p>
+   */
+  ViewId: string
+  /**
+   * <p>视图名称</p><p>参数格式：<code>^[a-z0-9][a-z0-9_-]{1,61}[a-z0-9]$</code></p>
+   */
+  ViewName?: string
+  /**
+   * <p>视图类型</p><p>枚举值：</p><ul><li>log： 日志主题</li><li>metric： 指标主题</li></ul>
+   */
+  ViewType?: string
+  /**
+   * <p>视图主题配置信息</p>
+   */
+  Topics?: Array<ViewSearchTopic>
+  /**
+   * <p>配置描述信息</p>
+   */
+  Description?: string
+}
+
+/**
  * 回调地址
  */
 export interface WebCallback {
@@ -10457,68 +10605,21 @@ export interface DescribeMachineGroupConfigsRequest {
 }
 
 /**
- * ModifyKafkaRecharge请求参数结构体
+ * DescribeSearchViews请求参数结构体
  */
-export interface ModifyKafkaRechargeRequest {
+export interface DescribeSearchViewsRequest {
   /**
-   * 导入配置Id。
-- 通过 [创建Kafka数据订阅任务](https://cloud.tencent.com/document/product/614/94448)获取Kafka导入配置Id。
-- 通过 [获取Kafka数据订阅任务列表](https://cloud.tencent.com/document/product/614/94446)获取Kafka导入配置Id。
+   * <ul><li>viewId 按照【视图ID】进行过滤。 类型：String 必选：否  </li><li>viewName 按照【视图名称】进行过滤。 类型：String 必选：否  </li><li>logsetId 按照【日志集ID】进行过滤。 类型：String 必选：否<br>每次请求的Filters的上限为10，Filter.Values的上限为10。</li></ul>
    */
-  Id: string
+  Filters?: Array<Filter>
   /**
-   * 导入CLS目标TopicId。
-- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
-- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456)获取日志主题Id。
+   * <p>分页的偏移量，默认值为0。</p>
    */
-  TopicId: string
+  Offset?: number
   /**
-   * Kafka导入配置名称
+   * <p>分页单页限制数目，默认值为20，最大值100。</p>
    */
-  Name?: string
-  /**
-   * 导入Kafka类型，0：腾讯云CKafka：1：用户自建Kafka。
-   */
-  KafkaType?: number
-  /**
-   * 腾讯云CKafka实例ID，KafkaType为0时必填。
-- 通过 [获取实例列表信息](https://cloud.tencent.com/document/product/597/40835) 获取实例id。
-   */
-  KafkaInstance?: string
-  /**
-   * 服务地址，KafkaType为1时必填。
-   */
-  ServerAddr?: string
-  /**
-   * ServerAddr是否为加密连接，KafkaType为1时必填。
-   */
-  IsEncryptionAddr?: boolean
-  /**
-   * 加密访问协议，KafkaType参数为1并且IsEncryptionAddr参数为true时必填。
-   */
-  Protocol?: KafkaProtocolInfo
-  /**
-   * 用户需要导入的Kafka相关topic列表，多个topic之间使用半角逗号隔开。
-
-- Kafka类型为腾讯云CKafka时：通过 [获取主题列表](https://cloud.tencent.com/document/product/597/40847) 获取TopicName。
-   */
-  UserKafkaTopics?: string
-  /**
-   * 用户Kafka消费组名称
-   */
-  ConsumerGroupName?: string
-  /**
-   * 日志导入规则
-   */
-  LogRechargeRule?: LogRechargeRuleInfo
-  /**
-   * 导入控制，1：暂停；2：启动。
-   */
-  StatusControl?: number
-  /**
-   * 用户kafka拓展信息
-   */
-  UserKafkaMeta?: UserKafkaMeta
+  Limit?: number
 }
 
 /**
@@ -10948,6 +11049,55 @@ export interface OpenClawServiceRequest {
 }
 
 /**
+ * 告警对象
+ */
+export interface AlarmTargetInfo {
+  /**
+   * 日志集ID。
+   */
+  LogsetId?: string
+  /**
+   * 日志集名称。
+   */
+  LogsetName?: string
+  /**
+   * 日志主题ID。
+   */
+  TopicId?: string
+  /**
+   * 日志主题名称。
+   */
+  TopicName?: string
+  /**
+   * 查询语句。
+   */
+  Query?: string
+  /**
+   * 告警对象序号。
+   */
+  Number?: number
+  /**
+   * 查询范围起始时间相对于告警执行时间的偏移，单位为分钟，取值为非正，最大值为0，最小值为-1440。
+   */
+  StartTimeOffset?: number
+  /**
+   * 查询范围终止时间相对于告警执行时间的偏移，单位为分钟，取值为非正，须大于StartTimeOffset，最大值为0，最小值为-1440。
+   */
+  EndTimeOffset?: number
+  /**
+   * 检索语法规则，默认值为0。
+0：Lucene语法，1：CQL语法。
+详细说明参见<a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules" target="_blank">检索条件语法规则</a>
+   */
+  SyntaxRule?: number
+  /**
+   * 主题类型。
+0: 日志主题，1: 指标主题
+   */
+  BizType?: number
+}
+
+/**
  * SearchCosRechargeInfo请求参数结构体
  */
 export interface SearchCosRechargeInfoRequest {
@@ -11285,9 +11435,17 @@ export interface DeleteWebCallbackResponse {
 }
 
 /**
- * ModifyKafkaRecharge返回参数结构体
+ * DescribeSearchViews返回参数结构体
  */
-export interface ModifyKafkaRechargeResponse {
+export interface DescribeSearchViewsResponse {
+  /**
+   * <p>Splunk投递任务信息列表</p>
+   */
+  Infos?: Array<SearchViewInfo>
+  /**
+   * <p>符合条件的任务总数。</p>
+   */
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11635,6 +11793,24 @@ export interface CloseKafkaConsumerResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 视图检索日志主题配置
+ */
+export interface ViewSearchTopic {
+  /**
+   * <p>日志集与日志主题所属地域</p><p>参数格式：ap-guangzhou</p>
+   */
+  Region: string
+  /**
+   * <p>日志集id</p>
+   */
+  LogsetId: string
+  /**
+   * <p>日志主题id</p>
+   */
+  TopicId: string
 }
 
 /**
@@ -12061,6 +12237,20 @@ export interface Message {
  * ModifyConsumer返回参数结构体
  */
 export interface ModifyConsumerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateSearchView返回参数结构体
+ */
+export interface CreateSearchViewResponse {
+  /**
+   * <p>视图ID</p>
+   */
+  ViewId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13326,6 +13516,16 @@ export interface ModifyNoticeContentRequest {
    * 通知内容模板详细信息。
    */
   NoticeContents?: Array<NoticeContent>
+}
+
+/**
+ * ModifyKafkaRecharge返回参数结构体
+ */
+export interface ModifyKafkaRechargeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

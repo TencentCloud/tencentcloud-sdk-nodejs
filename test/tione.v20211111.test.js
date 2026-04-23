@@ -308,9 +308,9 @@ it("tione.v20211111.DescribeMountInstances", async function () {
     }
 })
 
-it("tione.v20211111.DescribeModelServiceGroup", async function () {
+it("tione.v20211111.DescribeBillingResourceGroupAttachedWorkspaces", async function () {
     try {
-       const data = await client.DescribeModelServiceGroup({})
+       const data = await client.DescribeBillingResourceGroupAttachedWorkspaces({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -591,6 +591,16 @@ it("tione.v20211111.DescribeBillingResourceInstanceRunningJobs", async function 
 it("tione.v20211111.CreateDataSource", async function () {
     try {
        const data = await client.CreateDataSource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.DescribeModelServiceGroup", async function () {
+    try {
+       const data = await client.DescribeModelServiceGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

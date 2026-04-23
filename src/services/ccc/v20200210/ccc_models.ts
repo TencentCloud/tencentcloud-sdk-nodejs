@@ -368,62 +368,23 @@ export interface SetStaffStatusResponse {
 }
 
 /**
- * 服务端控制AI对话机器人播报指定文本
+ * http return key
  */
-export interface ServerPushText {
+export interface ReturnKey {
   /**
-   * 服务端推送播报文本
+   *
    */
-  Text?: string
-  /**
-   * 是否允许该文本打断机器人说话
-   */
-  Interrupt?: boolean
-  /**
-   * 播报完文本后，是否自动关闭对话任务
-   */
-  StopAfterPlay?: boolean
-  /**
-   * 服务端推送播报音频
-    格式说明：音频必须为单声道，采样率必须跟对应TTS的采样率保持一致，编码为Base64字符串。
-    输入规则：当提供Audio字段时，将不接受Text字段的输入。系统将直接播放Audio字段中的音频内容。
-   */
-  Audio?: string
-  /**
-   * 默认为0，仅在Interrupt为false时有效
-- 0表示当前有交互发生时，会丢弃Interrupt为false的消息
-- 1表示当前有交互发生时，不会丢弃Interrupt为false的消息，而是缓存下来，等待当前交互结束后，再去处理
-
-注意：DropMode为1时，允许缓存多个消息，如果后续出现了打断，缓存的消息会被清空
-   */
-  DropMode?: number
-  /**
-   * ServerPushText消息的优先级，0表示可被打断，1表示不会被打断。
-注意：在接收到Priority=1的消息后，后续其他任何消息都会被忽略（包括Priority=1的消息），直到Priority=1的消息处理结束。该字段可与Interrupt、DropMode字段配合使用。
-例子：
-- Priority=1、Interrupt=true，会打断现有交互，立刻播报，播报过程中不会被打断
-- Priority=1、Interrupt=false、DropMode=1，会等待当前交互结束，再进行播报，播报过程中不会被打断
-
-   */
-  Priority?: number
-  /**
-   * 是否将文本加入到llm历史上下文中
-   */
-  AddHistory?: boolean
+  Key?: string
 }
 
 /**
- * ResetExtensionPassword请求参数结构体
+ * Bearer 鉴权
  */
-export interface ResetExtensionPasswordRequest {
+export interface BearerAuth {
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   *
    */
-  SdkAppId: number
-  /**
-   * 分机号
-   */
-  ExtensionId: string
+  BearerToken?: string
 }
 
 /**
@@ -471,6 +432,20 @@ export interface DescribeProtectedTelCdrResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ResetExtensionPassword请求参数结构体
+ */
+export interface ResetExtensionPasswordRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * 分机号
+   */
+  ExtensionId: string
 }
 
 /**
@@ -1666,23 +1641,55 @@ export interface CreateAIAgentCallResponse {
 }
 
 /**
- * DescribeAILatency返回参数结构体
+ * AI 通话提取配置项
  */
-export interface DescribeAILatencyResponse {
+export interface AICallExtractConfigElement {
   /**
-   * 时延明细数据
- -1表示无对应数据
+   * 配置项类型，包括
+Text 文本
+Selector 选项
+Boolean 布尔值
+Number 数字
    */
-  AILatencyDetail?: Array<AILatencyDetail>
+  InfoType: string
   /**
-   * 时延统计数据
- -1表示无对应数据
+   * 配置项名称，不可重复
    */
-  AILatencyStatistics?: AILatencyStatistics
+  InfoName: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 配置项具体内容
    */
-  RequestId?: string
+  InfoContent?: string
+  /**
+   * 配置项提取内容示例
+   */
+  Examples?: Array<string>
+  /**
+   * InfoType 为 Selector，需要配置此字段
+   */
+  Choices?: Array<string>
+}
+
+/**
+ * 触发策略数组，每个策略里包含接口调用信息，挂断类型，通话标签，触发模式
+ */
+export interface TriggerStrategyItem {
+  /**
+   * <p>http 接口相关参数</p>
+   */
+  InterfaceConfig?: HttpCallbackConfig
+  /**
+   * <p>挂断类型</p>
+   */
+  HangupTypes?: Array<string>
+  /**
+   * <p>通话标签</p>
+   */
+  CallTags?: Array<RetryTagItem>
+  /**
+   * <p>触发模式</p><p>枚举值：</p><ul><li>ONCE_PER_NUMBER： 每个号码仅第一次命中条件时触发</li><li>ALWAYS_ON_MATCH： 每次命中条件均触发</li></ul>
+   */
+  TriggerMode?: string
 }
 
 /**
@@ -1734,55 +1741,92 @@ export interface PackageBuyInfo {
 }
 
 /**
- * AI 通话提取配置项
+ * DescribeTelCdr请求参数结构体
  */
-export interface AICallExtractConfigElement {
+export interface DescribeTelCdrRequest {
   /**
-   * 配置项类型，包括
-Text 文本
-Selector 选项
-Boolean 布尔值
-Number 数字
+   * 起始时间戳，Unix 秒级时间戳，最大支持近180天。
    */
-  InfoType: string
+  StartTimeStamp: number
   /**
-   * 配置项名称，不可重复
+   * 结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。
    */
-  InfoName: string
+  EndTimeStamp: number
   /**
-   * 配置项具体内容
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
-  InfoContent?: string
+  SdkAppId: number
   /**
-   * 配置项提取内容示例
+   * 分页尺寸（必填），上限 100
    */
-  Examples?: Array<string>
+  PageSize: number
   /**
-   * InfoType 为 Selector，需要配置此字段
+   * 分页页码（必填），从 0 开始
    */
-  Choices?: Array<string>
+  PageNumber: number
+  /**
+   * 实例 ID（废弃）
+   * @deprecated
+   */
+  InstanceId?: number
+  /**
+   * 返回数据条数，上限（废弃）
+   */
+  Limit?: number
+  /**
+   * 偏移（废弃）
+   */
+  Offset?: number
+  /**
+   * 按手机号筛选
+   */
+  Phones?: Array<string>
+  /**
+   * 按SessionId筛选
+   */
+  SessionIds?: Array<string>
 }
 
 /**
- * AI 通话结果具体信息
+ * UnbindStaffSkillGroupList请求参数结构体
  */
-export interface AICallExtractResultInfo {
+export interface UnbindStaffSkillGroupListRequest {
   /**
-   * <p>提取的类型是文本</p>
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
-  Text?: string
+  SdkAppId: number
   /**
-   * <p>提取的类型是选项</p>
+   * 客服邮箱
    */
-  Chosen?: Array<string>
+  StaffEmail: string
   /**
-   * <p>提取类型是布尔值</p>
+   * 解绑技能组列表
    */
-  Boolean?: boolean
+  SkillGroupList: Array<number | bigint>
+}
+
+/**
+ * basic 鉴权
+ */
+export interface BasicAuth {
   /**
-   * <p>提取类型是数字</p>
+   *
    */
-  Number?: number
+  BasicToken?: string
+}
+
+/**
+ * http header 参数
+ */
+export interface HeaderParams {
+  /**
+   *
+   */
+  Key?: string
+  /**
+   *
+   */
+  Value?: string
 }
 
 /**
@@ -2058,6 +2102,51 @@ export interface DescribeStaffInfoListResponse {
 }
 
 /**
+ * 服务端控制AI对话机器人播报指定文本
+ */
+export interface ServerPushText {
+  /**
+   * 服务端推送播报文本
+   */
+  Text?: string
+  /**
+   * 是否允许该文本打断机器人说话
+   */
+  Interrupt?: boolean
+  /**
+   * 播报完文本后，是否自动关闭对话任务
+   */
+  StopAfterPlay?: boolean
+  /**
+   * 服务端推送播报音频
+    格式说明：音频必须为单声道，采样率必须跟对应TTS的采样率保持一致，编码为Base64字符串。
+    输入规则：当提供Audio字段时，将不接受Text字段的输入。系统将直接播放Audio字段中的音频内容。
+   */
+  Audio?: string
+  /**
+   * 默认为0，仅在Interrupt为false时有效
+- 0表示当前有交互发生时，会丢弃Interrupt为false的消息
+- 1表示当前有交互发生时，不会丢弃Interrupt为false的消息，而是缓存下来，等待当前交互结束后，再去处理
+
+注意：DropMode为1时，允许缓存多个消息，如果后续出现了打断，缓存的消息会被清空
+   */
+  DropMode?: number
+  /**
+   * ServerPushText消息的优先级，0表示可被打断，1表示不会被打断。
+注意：在接收到Priority=1的消息后，后续其他任何消息都会被忽略（包括Priority=1的消息），直到Priority=1的消息处理结束。该字段可与Interrupt、DropMode字段配合使用。
+例子：
+- Priority=1、Interrupt=true，会打断现有交互，立刻播报，播报过程中不会被打断
+- Priority=1、Interrupt=false、DropMode=1，会等待当前交互结束，再进行播报，播报过程中不会被打断
+
+   */
+  Priority?: number
+  /**
+   * 是否将文本加入到llm历史上下文中
+   */
+  AddHistory?: boolean
+}
+
+/**
  * AI时延统计
  */
 export interface AILatencyStatisticsInfo {
@@ -2210,6 +2299,20 @@ export interface CreateUserSigRequest {
 }
 
 /**
+ * DescribeAgentCruiseDialingCampaign请求参数结构体
+ */
+export interface DescribeAgentCruiseDialingCampaignRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * 任务 ID
+   */
+  CampaignId: number
+}
+
+/**
  * CreateCCCSkillGroup请求参数结构体
  */
 export interface CreateCCCSkillGroupRequest {
@@ -2233,21 +2336,25 @@ export interface CreateCCCSkillGroupRequest {
 }
 
 /**
- * DescribePredictiveDialingSessions返回参数结构体
+ * AI 通话结果具体信息
  */
-export interface DescribePredictiveDialingSessionsResponse {
+export interface AICallExtractResultInfo {
   /**
-   * 数据总量
+   * <p>提取的类型是文本</p>
    */
-  TotalCount?: number
+  Text?: string
   /**
-   * 呼叫的 session id 列表，通过 https://cloud.tencent.com/document/product/679/47714 可以批量获取呼叫详细话单
+   * <p>提取的类型是选项</p>
    */
-  SessionList?: Array<string>
+  Chosen?: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>提取类型是布尔值</p>
    */
-  RequestId?: string
+  Boolean?: boolean
+  /**
+   * <p>提取类型是数字</p>
+   */
+  Number?: number
 }
 
 /**
@@ -2683,77 +2790,49 @@ finished 已完成
 }
 
 /**
- * UpdatePredictiveDialingCampaign请求参数结构体
+ * http 回调包体参数
  */
-export interface UpdatePredictiveDialingCampaignRequest {
+export interface HttpCallbackConfig {
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * <p>http 标准 url</p>
    */
-  SdkAppId: number
+  Url?: string
   /**
-   * 生成的任务 ID
+   * <p>http header 参数</p>
    */
-  CampaignId: number
+  HeaderParams?: Array<HeaderParams>
   /**
-   * 任务名称
+   * <p>http 请求包参数</p>
    */
-  Name: string
+  Params?: Array<HttpParams>
   /**
-   * 被叫列表，支持 E.164 或不带国家码形式的号码
+   * <p>对端输出值，由对端 url 返回的 json 包里包含该字段就行</p>
    */
-  Callees: Array<string>
+  Returns?: Array<ReturnKey>
   /**
-   * 主叫列表，使用管理端展示的号码格式
+   * <p>是否异步</p>
    */
-  Callers: Array<string>
+  Async?: boolean
   /**
-   * 被叫呼叫顺序 0 随机 1 顺序
+   * <p>是否鉴权</p><p>枚举值：</p><ul><li>0： 不开启鉴权</li><li>1： 启用鉴权</li></ul>
    */
-  CallOrder: number
+  AuthType?: number
   /**
-   * 使用的座席技能组 ID
+   * <p>basic token 鉴权</p>
    */
-  SkillGroupId: number
+  BasicAuth?: BasicAuth
   /**
-   * 相同应用内多个任务运行优先级，从高到底 1 - 5
+   * <p>bearer token 鉴权</p>
    */
-  Priority: number
+  BearerAuth?: BearerAuth
   /**
-   * 预期呼损率，百分比，5 - 50
+   * <p>自定义鉴权</p>
    */
-  ExpectedAbandonRate: number
+  CustomAuth?: HttpParams
   /**
-   * 呼叫重试间隔时间，单位秒，60 - 86400
+   * <p>oauth2 鉴权</p>
    */
-  RetryInterval: number
-  /**
-   * 任务启动时间，Unix 时间戳，到此时间后会自动启动任务
-   */
-  StartTime: number
-  /**
-   * 任务结束时间，Unix 时间戳，到此时间后会自动终止任务
-   */
-  EndTime: number
-  /**
-   * 指定的 IVR ID
-   */
-  IVRId?: number
-  /**
-   * 呼叫重试次数，0 - 2
-   */
-  RetryTimes?: number
-  /**
-   * 自定义变量
-   */
-  Variables?: Array<Variable>
-  /**
-   * 	UUI
-   */
-  UUI?: string
-  /**
-   * 被叫属性
-   */
-  CalleeAttributes?: Array<CalleeAttribute>
+  Oauth2Auth?: OauthConfig
 }
 
 /**
@@ -3071,50 +3150,21 @@ export interface DescribeStaffStatusHistoryResponse {
 }
 
 /**
- * DescribeTelCdr请求参数结构体
+ * 创建 staff 的信息 item
  */
-export interface DescribeTelCdrRequest {
+export interface SetStaffStatusItem {
   /**
-   * 起始时间戳，Unix 秒级时间戳，最大支持近180天。
+   * 座席账号
    */
-  StartTimeStamp: number
+  StaffUserId: string
   /**
-   * 结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。
+   * 状态，free 示闲 notReady 示忙 rest 小休
    */
-  EndTimeStamp: number
+  Status: string
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * 如果设置小休状态，这里是原因
    */
-  SdkAppId: number
-  /**
-   * 分页尺寸（必填），上限 100
-   */
-  PageSize: number
-  /**
-   * 分页页码（必填），从 0 开始
-   */
-  PageNumber: number
-  /**
-   * 实例 ID（废弃）
-   * @deprecated
-   */
-  InstanceId?: number
-  /**
-   * 返回数据条数，上限（废弃）
-   */
-  Limit?: number
-  /**
-   * 偏移（废弃）
-   */
-  Offset?: number
-  /**
-   * 按手机号筛选
-   */
-  Phones?: Array<string>
-  /**
-   * 按SessionId筛选
-   */
-  SessionIds?: Array<string>
+  Reason?: string
 }
 
 /**
@@ -3536,17 +3586,97 @@ export interface UnbindNumberCallOutSkillGroupResponse {
 }
 
 /**
- * DescribeAgentCruiseDialingCampaign请求参数结构体
+ * DescribeAILatency返回参数结构体
  */
-export interface DescribeAgentCruiseDialingCampaignRequest {
+export interface DescribeAILatencyResponse {
+  /**
+   * 时延明细数据
+ -1表示无对应数据
+   */
+  AILatencyDetail?: Array<AILatencyDetail>
+  /**
+   * 时延统计数据
+ -1表示无对应数据
+   */
+  AILatencyStatistics?: AILatencyStatistics
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdatePredictiveDialingCampaign请求参数结构体
+ */
+export interface UpdatePredictiveDialingCampaignRequest {
   /**
    * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
    */
   SdkAppId: number
   /**
-   * 任务 ID
+   * 生成的任务 ID
    */
   CampaignId: number
+  /**
+   * 任务名称
+   */
+  Name: string
+  /**
+   * 被叫列表，支持 E.164 或不带国家码形式的号码
+   */
+  Callees: Array<string>
+  /**
+   * 主叫列表，使用管理端展示的号码格式
+   */
+  Callers: Array<string>
+  /**
+   * 被叫呼叫顺序 0 随机 1 顺序
+   */
+  CallOrder: number
+  /**
+   * 使用的座席技能组 ID
+   */
+  SkillGroupId: number
+  /**
+   * 相同应用内多个任务运行优先级，从高到底 1 - 5
+   */
+  Priority: number
+  /**
+   * 预期呼损率，百分比，5 - 50
+   */
+  ExpectedAbandonRate: number
+  /**
+   * 呼叫重试间隔时间，单位秒，60 - 86400
+   */
+  RetryInterval: number
+  /**
+   * 任务启动时间，Unix 时间戳，到此时间后会自动启动任务
+   */
+  StartTime: number
+  /**
+   * 任务结束时间，Unix 时间戳，到此时间后会自动终止任务
+   */
+  EndTime: number
+  /**
+   * 指定的 IVR ID
+   */
+  IVRId?: number
+  /**
+   * 呼叫重试次数，0 - 2
+   */
+  RetryTimes?: number
+  /**
+   * 自定义变量
+   */
+  Variables?: Array<Variable>
+  /**
+   * 	UUI
+   */
+  UUI?: string
+  /**
+   * 被叫属性
+   */
+  CalleeAttributes?: Array<CalleeAttribute>
 }
 
 /**
@@ -3572,7 +3702,7 @@ export interface DescribePSTNActiveSessionListRequest {
  */
 export interface CreateAutoCalloutTaskResponse {
   /**
-   * 任务Id
+   * <p>任务Id</p>
    */
   TaskId?: number
   /**
@@ -3639,6 +3769,24 @@ export interface DescribeSessionDetailRequest {
    * <p>结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。</p>
    */
   EndTimestamp: number
+}
+
+/**
+ * DescribePredictiveDialingSessions返回参数结构体
+ */
+export interface DescribePredictiveDialingSessionsResponse {
+  /**
+   * 数据总量
+   */
+  TotalCount?: number
+  /**
+   * 呼叫的 session id 列表，通过 https://cloud.tencent.com/document/product/679/47714 可以批量获取呼叫详细话单
+   */
+  SessionList?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3976,73 +4124,103 @@ export interface ForwardingTarget {
  */
 export interface CreateAutoCalloutTaskRequest {
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * <p>应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc</p>
    */
   SdkAppId: number
   /**
-   * 任务起始时间戳，Unix 秒级时间戳
+   * <p>任务起始时间戳，Unix 秒级时间戳</p>
    */
   NotBefore: number
   /**
-   * 被叫号码列表
+   * <p>被叫号码列表</p>
    */
   Callees: Array<string>
   /**
-   * 主叫号码列表
+   * <p>主叫号码列表</p>
    */
   Callers: Array<string>
   /**
-   * 呼叫使用的 IVR Id，不填时需要填写 AIAgentId
+   * <p>呼叫使用的 IVR Id，不填时需要填写 AIAgentId</p>
    */
   IvrId?: number
   /**
-   * 任务名
+   * <p>任务名</p>
    */
   Name?: string
   /**
-   * 任务描述
+   * <p>任务描述</p>
    */
   Description?: string
   /**
-   * 任务停止时间戳，Unix 秒级时间戳
+   * <p>任务停止时间戳，Unix 秒级时间戳</p>
    */
   NotAfter?: number
   /**
-   * 最大尝试次数，1-3 次
+   * <p>最大尝试次数，1-3 次</p>
    */
   Tries?: number
   /**
-   * 自定义变量（仅高级版支持），CalleeAttributes 字段中使用相同变量会覆盖此处
+   * <p>自定义变量（仅高级版支持），CalleeAttributes 字段中使用相同变量会覆盖此处</p>
    */
   Variables?: Array<Variable>
   /**
-   * 用户自定义数据，CalleeAttributes 字段中使用 UUI 会覆盖此处
+   * <p>用户自定义数据，CalleeAttributes 字段中使用 UUI 会覆盖此处</p>
    */
   UUI?: string
   /**
-   * 被叫属性
+   * <p>被叫属性</p>
    */
   CalleeAttributes?: Array<CalleeAttribute>
   /**
-   * IANA 时区名称，参考 https://datatracker.ietf.org/doc/html/draft-ietf-netmod-iana-timezones
+   * <p>IANA 时区名称，参考 https://datatracker.ietf.org/doc/html/draft-ietf-netmod-iana-timezones</p>
    */
   TimeZone?: string
   /**
-   * 可用时间段
+   * <p>可用时间段</p>
    */
   AvailableTime?: Array<TimeRange>
   /**
-   * 智能体 ID，不填写时需要填写 IvrId
+   * <p>智能体 ID，不填写时需要填写 IvrId</p>
    */
   AIAgentId?: number
   /**
-   * 任务失败重试时间间隔，重试间隔 600秒～86400 秒
+   * <p>任务失败重试时间间隔，重试间隔 600秒～86400 秒</p>
    */
   RetryInterval?: number
   /**
-   * 最大振铃时长，达到时长阈值自动挂断。 仅自携号码支持当前参数
+   * <p>最大振铃时长，达到时长阈值自动挂断。 仅自携号码支持当前参数</p>
    */
   MaxRingTimeoutSecond?: number
+  /**
+   * <p>根据限定的挂断原因(可选挂断状态码:202,203,204,205,206,207,208,210,212,213,215,216,217,218,219,221,222,234)进行重试，只对使用AIAgentID的任务有效，挂断状态码说明</p><p><a href="https://cloud.tencent.com/document/product/679/123938">详见</a></p>
+   */
+  RetryHangupTypes?: Array<string>
+  /**
+   * <p>根据限定的话后标签进行重试，只对使用对话模型的AIAgentID任务有效，标签信息可在智能体配置中查询</p>
+   */
+  RetryTags?: Array<RetryTagItem>
+  /**
+   * <p>生效的工作时间配置。建议使用此字段代替AvailableTime 字段，当同时使用时，优先生效AvailableTime。</p>
+   */
+  AvailableWorkTimeConfig?: Array<AvailableTimeConfig>
+  /**
+   * <p>触发策略</p>
+   */
+  TriggerStrategy?: Array<TriggerStrategyItem>
+}
+
+/**
+ * 自动外呼限定重呼标签
+ */
+export interface RetryTagItem {
+  /**
+   * <p>标签名称</p>
+   */
+  TagName?: string
+  /**
+   * <p>标签值</p>
+   */
+  TagValue?: string
 }
 
 /**
@@ -4783,39 +4961,21 @@ export interface ModifyOwnNumberApplyResponse {
 }
 
 /**
- * UnbindStaffSkillGroupList请求参数结构体
+ * 工作时间配置
  */
-export interface UnbindStaffSkillGroupListRequest {
+export interface AvailableTimeConfig {
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * <p>日期类型，默认为每天</p><p>枚举值：</p><ul><li>EveryDay： 每天</li><li>BusinessDay： 法定工作日</li><li>Holiday： 法定休息日</li><li>Custom： 自定义</li></ul>
    */
-  SdkAppId: number
+  DayType?: string
   /**
-   * 客服邮箱
+   * <p>仅在 DayType 为 Custom 时生效，指定适用的星期几</p><p>枚举值：</p><ul><li>Monday： 星期一</li><li>Tuesday： 星期二</li><li>Wednesday： 星期三</li><li>Thursday： 星期四</li><li>Friday： 星期五</li><li>Saturday： 星期六</li><li>Sunday： 星期日</li></ul>
    */
-  StaffEmail: string
+  DaysOfWeek?: Array<string>
   /**
-   * 解绑技能组列表
+   * <p>该日期类型下的时间段列表</p>
    */
-  SkillGroupList: Array<number | bigint>
-}
-
-/**
- * 创建 staff 的信息 item
- */
-export interface SetStaffStatusItem {
-  /**
-   * 座席账号
-   */
-  StaffUserId: string
-  /**
-   * 状态，free 示闲 notReady 示忙 rest 小休
-   */
-  Status: string
-  /**
-   * 如果设置小休状态，这里是原因
-   */
-  Reason?: string
+  TimeRanges?: Array<TimeRange>
 }
 
 /**
@@ -5434,6 +5594,24 @@ export interface DescribeChatMessagesRequest {
 }
 
 /**
+ * Oauth2鉴权
+ */
+export interface OauthConfig {
+  /**
+   *
+   */
+  TokenURL?: string
+  /**
+   *
+   */
+  ClientId?: string
+  /**
+   *
+   */
+  ClientSecret?: string
+}
+
+/**
  * DescribeTelSession返回参数结构体
  */
 export interface DescribeTelSessionResponse {
@@ -5479,6 +5657,24 @@ export interface SetStaffStatusRspItem {
    * 之前状态如果是小休，这里是原因
    */
   PreviousReason?: string
+}
+
+/**
+ * http 请求包体
+ */
+export interface HttpParams {
+  /**
+   *
+   */
+  Key?: string
+  /**
+   *
+   */
+  Value?: string
+  /**
+   *
+   */
+  ValueType?: string
 }
 
 /**

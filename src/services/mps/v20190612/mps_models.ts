@@ -31,13 +31,19 @@ export interface AiAnalysisTaskHorizontalToVerticalInput {
 }
 
 /**
- * ModifySnapshotByTimeOffsetTemplate返回参数结构体
+ * 音视频增强配置
  */
-export interface ModifySnapshotByTimeOffsetTemplateResponse {
+export interface EnhanceConfig {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 视频增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  VideoEnhance?: VideoEnhanceConfig
+  /**
+   * 音频增强配置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AudioEnhance?: AudioEnhanceConfig
 }
 
 /**
@@ -1708,19 +1714,13 @@ Outpu：输出。
 }
 
 /**
- * 音视频增强配置
+ * DescribeTextToSpeechAsyncTask请求参数结构体
  */
-export interface EnhanceConfig {
+export interface DescribeTextToSpeechAsyncTaskRequest {
   /**
-   * 视频增强配置。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>任务ID</p>
    */
-  VideoEnhance?: VideoEnhanceConfig
-  /**
-   * 音频增强配置。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AudioEnhance?: AudioEnhanceConfig
+  TaskId: string
 }
 
 /**
@@ -4659,22 +4659,17 @@ export interface CreateStreamLinkFlowResponse {
  */
 export interface AigcImageExtraParam {
   /**
-   * 指定所生成视频的宽高比。
-
-不同模型支持的宽高比:
-1. GEM支持：1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9 和 21:9。
-
-注：具体模型的宽高比参数，可查看相应模型官网获取更完整描述。
+   * <p>指定所生成视频的宽高比。</p><p>不同模型支持的宽高比:</p><ol><li>GEM支持：1:1、3:2、2:3、3:4、4:3、4:5、5:4、9:16、16:9 和 21:9。</li></ol><p>注：具体模型的宽高比参数，可查看相应模型官网获取更完整描述。</p>
    */
   AspectRatio?: string
   /**
-   * 指定图片输出分辨率。
-
-支持该参数的模型：
-支持选择: 720P, 1080P, 2K, 4K。
-
+   * <p>指定图片输出分辨率。</p><p>支持该参数的模型：<br>支持选择: 720P, 1080P, 2K, 4K。</p>
    */
   Resolution?: string
+  /**
+   * <p>是否添加图标水印。默认不加。1-添加，0-不添加。</p><p>取值范围：[0, 1]</p><p>默认值：0</p>
+   */
+  LogoAdd?: number
 }
 
 /**
@@ -5634,6 +5629,22 @@ export interface SSAIConf {
    * <p>是否开启多次请求ADS,开启后将优先请求ADS，请求失败后再请求兜底广告</p>
    */
   MultiRequest?: boolean
+  /**
+   * <p>dash周期类型：SinglePeriod 或 MultiPeriod，默认 MultiPeriod</p>
+   */
+  DashOriginManifestType?: string
+  /**
+   * <p>Empty VAST时是否播放Slate，默认开启(true)</p>
+   */
+  SlateOnEmptyVast?: boolean
+  /**
+   * <p>SCTE marker duration，默认180，范围0-3600</p>
+   */
+  SCTEMarkerDuration?: number
+  /**
+   * <p>安全组Id</p>
+   */
+  SecurityGroupId?: string
 }
 
 /**
@@ -5859,30 +5870,13 @@ export interface VideoComprehensionResultItem {
 }
 
 /**
- * 翻译结果。
+ * ModifySnapshotByTimeOffsetTemplate返回参数结构体
  */
-export interface SmartSubtitleTaskTransTextResultOutput {
+export interface ModifySnapshotByTimeOffsetTemplateResponse {
   /**
-   * <p>翻译片段列表。</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SegmentSet?: Array<SmartSubtitleTaskTransTextSegmentItem>
-  /**
-   * <p>字幕文件地址。</p>
-   */
-  SubtitlePath?: string
-  /**
-   * <p>智能字幕结果存储信息。</p>
-   */
-  OutputStorage?: TaskOutputStorage
-  /**
-   * <p>字幕文件路径。</p>
-   */
-  Path?: string
-  /**
-   * <p>多语言翻译时返回翻译结果。</p>
-   */
-  SubtitleResults?: Array<SubtitleTransResultItem>
+  RequestId?: string
 }
 
 /**
@@ -7224,31 +7218,39 @@ export type DescribeMDPMPSUserInfoRequest = null
  */
 export interface SSAIChannelInfo {
   /**
-   * 频道ID，全局唯一标识。
+   * <p>频道ID，全局唯一标识。</p>
    */
   ID?: string
   /**
-   * 频道名称。
+   * <p>频道名称。</p>
    */
   Name?: string
   /**
-   * 广告源信息。
+   * <p>广告源信息。</p>
    */
   ContentSource?: string
   /**
-   * 播放地址。
+   * <p>播放地址。兼容旧版本参数，推荐使用HlsPlaybackPrefix或DashPlaybackPrefix</p>
    */
   PlaybackPrefix?: string
   /**
-   * 广告插入SSAI配置信息。
+   * <p>hls播放地址</p>
+   */
+  HlsPlaybackPrefix?: string
+  /**
+   * <p>dash播放地址</p>
+   */
+  DashPlaybackPrefix?: string
+  /**
+   * <p>广告插入SSAI配置信息。</p>
    */
   SSAIInfo?: SSAIConf
   /**
-   * 地域信息。
+   * <p>地域信息。</p>
    */
   Region?: string
   /**
-   * 用于clickthrough地址
+   * <p>用于clickthrough地址</p>
    */
   SessionInitPrefix?: string
 }
@@ -10297,11 +10299,11 @@ export interface AddBlindWatermarkConfig {
  */
 export interface CreateAigcVideoTaskRequest {
   /**
-   * <p>模型名称。<br>当前支持的模型列表:<br>Hunyuan,<br>Hailuo，<br>Kling，<br>Vidu，<br>OS，<br>GV。</p>
+   * <p>模型名称。<br>当前支持的模型列表:<br>Hunyuan,<br>Hailuo，<br>Kling，<br>Vidu，<br>OS，<br>GV，<br>PixVerse。</p>
    */
   ModelName?: string
   /**
-   * <p>指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。</p><ol><li>Hailuo， 可选[02、2.3]。</li><li>Kling，可选[2.0、2.1、2.5、O1、2.6、3.0、3.0-Omni]。</li><li>Vidu,可选[q2、q2-pro、q2-turbo、q3-pro、q3-turbo]。</li><li>GV, 可选[3.1]。</li><li>OS，可选[2.0]。</li></ol>
+   * <p>指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。</p><ol><li>Hailuo， 可选[02、2.3、2.3-fast]。</li><li>Kling，可选[1.6、2.0、2.1、2.5、O1、2.6、3.0、3.0-Omni]。</li><li>Vidu,可选[q2、q2-pro、q2-turbo、q3-pro、q3-turbo、q3、q3-mix]。</li><li>GV, 可选[3.1、3.1-fast]。</li><li>OS，可选[2.0]。</li><li>PixVerse，可选[v5.6、v6、c1]</li></ol>
    */
   ModelVersion?: string
   /**
@@ -12048,6 +12050,40 @@ export interface CreateStreamPackageLinearAssemblyChannelResponse {
 }
 
 /**
+ * DescribeTextToSpeechAsyncTask返回参数结构体
+ */
+export interface DescribeTextToSpeechAsyncTaskResponse {
+  /**
+   * <p>错误码，成功时返回0</p>
+   */
+  ErrorCode?: number
+  /**
+   * <p>错误信息，成功时返回success</p>
+   */
+  Msg?: string
+  /**
+   * <p>任务状态</p><p>枚举值：</p><ul><li>success： 成功</li><li>fail： 失败</li><li>processing： 处理中</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>合成音频url</p>
+   */
+  AudioUrl?: string
+  /**
+   * <p>使用的音色ID</p>
+   */
+  VoiceId?: string
+  /**
+   * <p>扩展信息</p>
+   */
+  ExtInfo?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyImageSpriteTemplate返回参数结构体
  */
 export interface ModifyImageSpriteTemplateResponse {
@@ -13686,6 +13722,28 @@ export interface ImageWatermarkInputForUpdate {
 <li>repeat：水印循环播放，直到视频结束。</li>
    */
   RepeatType?: string
+}
+
+/**
+ * TextToSpeechAsync返回参数结构体
+ */
+export interface TextToSpeechAsyncResponse {
+  /**
+   * <p>错误码，成功时返回0</p>
+   */
+  ErrorCode?: number
+  /**
+   * <p>错误信息，成功时返回success</p>
+   */
+  Msg?: string
+  /**
+   * <p>任务ID，使用该ID查询结果</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -17118,6 +17176,28 @@ export interface DescribeAsrHotwordsResponse {
 }
 
 /**
+ * TextToSpeechAsync请求参数结构体
+ */
+export interface TextToSpeechAsyncRequest {
+  /**
+   * <p>语音合成文本</p>
+   */
+  Text: string
+  /**
+   * <p>音色ID</p>
+   */
+  VoiceId: string
+  /**
+   * <p>文本语言，默认中文</p>
+   */
+  TextLang?: string
+  /**
+   * <p>扩展参数，json字符串</p><p>synExt Object 语音合成扩展参数<br>  duration Float 合成音频时长，单位秒，示例：5.2<br>  sampleRate Integer 合成音频采样率，默认16000，支持[8000,16000,22050,32000,44100]<br>  pitch Integer 音调，默认0原音色输出，取值[-12, 12]</p><p>transExt Object 翻译扩展参数<br>  transInfo Object<br>   transDst String 目标语言，如en<br>  transRequirement String 翻译要求</p>
+   */
+  ExtParam?: string
+}
+
+/**
  * 查询输入的HLS配置信息。
  */
 export interface DescribeInputHLSPullSettings {
@@ -19365,6 +19445,33 @@ export interface LiveScheduleLiveRecordTaskResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FinishTime?: string
+}
+
+/**
+ * 翻译结果。
+ */
+export interface SmartSubtitleTaskTransTextResultOutput {
+  /**
+   * <p>翻译片段列表。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SegmentSet?: Array<SmartSubtitleTaskTransTextSegmentItem>
+  /**
+   * <p>字幕文件地址。</p>
+   */
+  SubtitlePath?: string
+  /**
+   * <p>智能字幕结果存储信息。</p>
+   */
+  OutputStorage?: TaskOutputStorage
+  /**
+   * <p>字幕文件路径。</p>
+   */
+  Path?: string
+  /**
+   * <p>多语言翻译时返回翻译结果。</p>
+   */
+  SubtitleResults?: Array<SubtitleTransResultItem>
 }
 
 /**

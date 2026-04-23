@@ -238,6 +238,16 @@ it("tcss.v20201101.DescribeAssetImageBindRuleInfo", async function () {
     }
 })
 
+it("tcss.v20201101.AddOrModifyMaliciousConnectionWhiteList", async function () {
+    try {
+       const data = await client.AddOrModifyMaliciousConnectionWhiteList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcss.v20201101.DeleteIgnoreVul", async function () {
     try {
        const data = await client.DeleteIgnoreVul({})
@@ -671,6 +681,16 @@ it("tcss.v20201101.ModifyVirusAutoIsolateSetting", async function () {
 it("tcss.v20201101.CreateVulContainerExportJob", async function () {
     try {
        const data = await client.CreateVulContainerExportJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcss.v20201101.DescribeVirusScanConfig", async function () {
+    try {
+       const data = await client.DescribeVirusScanConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1338,6 +1358,16 @@ it("tcss.v20201101.DescribeSuperNodePodList", async function () {
     }
 })
 
+it("tcss.v20201101.AddOrModifyVirusWhiteListRule", async function () {
+    try {
+       const data = await client.AddOrModifyVirusWhiteListRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcss.v20201101.DeleteReverseShellEvents", async function () {
     try {
        const data = await client.DeleteReverseShellEvents({})
@@ -1421,6 +1451,16 @@ it("tcss.v20201101.DescribeAssetPortList", async function () {
 it("tcss.v20201101.DeleteAbnormalProcessRules", async function () {
     try {
        const data = await client.DeleteAbnormalProcessRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcss.v20201101.DescribeVirusMonitorConfig", async function () {
+    try {
+       const data = await client.DescribeVirusMonitorConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2828,6 +2868,16 @@ it("tcss.v20201101.DescribeNetworkFirewallPolicyYamlDetail", async function () {
     }
 })
 
+it("tcss.v20201101.DescribeVirusWhiteListRules", async function () {
+    try {
+       const data = await client.DescribeVirusWhiteListRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcss.v20201101.CreateCheckComponent", async function () {
     try {
        const data = await client.CreateCheckComponent({})
@@ -3401,6 +3451,16 @@ it("tcss.v20201101.DescribeSecLogKafkaUIN", async function () {
 it("tcss.v20201101.DescribeSecLogDeliveryClsSetting", async function () {
     try {
        const data = await client.DescribeSecLogDeliveryClsSetting({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcss.v20201101.DeleteVirusWhiteListRule", async function () {
+    try {
+       const data = await client.DeleteVirusWhiteListRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

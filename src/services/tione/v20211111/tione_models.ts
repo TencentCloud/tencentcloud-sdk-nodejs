@@ -520,17 +520,13 @@ export interface NotebookSetItem {
 }
 
 /**
- * ModifyNotebookTags请求参数结构体
+ * DescribeBillingResourceGroupAttachedWorkspaces返回参数结构体
  */
-export interface ModifyNotebookTagsRequest {
+export interface DescribeBillingResourceGroupAttachedWorkspacesResponse {
   /**
-   * Notebook Id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Id: string
-  /**
-   * Notebook修改标签集合
-   */
-  Tags?: Array<Tag>
+  RequestId?: string
 }
 
 /**
@@ -603,21 +599,35 @@ export interface GatewayConfig {
 }
 
 /**
- * 对话结果
+ * DescribeBillingResourceGroups请求参数结构体
  */
-export interface Choice {
+export interface DescribeBillingResourceGroupsRequest {
   /**
-   * 对话结果
+   * Filter.Name: 枚举值: ResourceGroupId (资源组id列表)                    ResourceGroupName (资源组名称列表)                    AvailableNodeCount（资源组中可用节点数量） Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为5，Filter.Values的上限为100
    */
-  Message?: Message
+  Filters?: Array<Filter>
   /**
-   * 结束理由: stop, length, content_filter, null
+   * 标签过滤
    */
-  FinishReason?: string
+  TagFilters?: Array<TagFilter>
   /**
-   * 序号
+   * 偏移量，默认为0；分页查询起始位置，如：Limit为100，第一页Offset为0，第二页OffSet为100....即每页左边为闭区间
    */
-  Index?: number
+  Offset?: number
+  /**
+   * 分页查询每页大小，默认20
+   */
+  Limit?: number
+  /**
+   * 支持模糊查找资源组id和资源组名
+   */
+  SearchWord?: string
+  /**
+   * 是否不展示节点列表; 
+true: 不展示，false 展示；
+默认为false
+   */
+  DontShowInstanceSet?: boolean
 }
 
 /**
@@ -1302,17 +1312,17 @@ export interface DescribeBillingResourceGroupResponse {
 }
 
 /**
- * 计费项询价单元
+ * ModifyNotebookTags请求参数结构体
  */
-export interface SpecUnit {
+export interface ModifyNotebookTagsRequest {
   /**
-   * 计费项名称
+   * Notebook Id
    */
-  SpecName: string
+  Id: string
   /**
-   * 计费项数量,建议不超过100万
+   * Notebook修改标签集合
    */
-  SpecCount: number
+  Tags?: Array<Tag>
 }
 
 /**
@@ -2348,6 +2358,11 @@ export interface Event {
 }
 
 /**
+ * DescribeBillingResourceGroupAttachedWorkspaces请求参数结构体
+ */
+export type DescribeBillingResourceGroupAttachedWorkspacesRequest = null
+
+/**
  * DescribeModelServiceGroups返回参数结构体
  */
 export interface DescribeModelServiceGroupsResponse {
@@ -2930,38 +2945,6 @@ export interface ExposePortConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClbHost?: string
-}
-
-/**
- * DescribeBillingResourceGroups请求参数结构体
- */
-export interface DescribeBillingResourceGroupsRequest {
-  /**
-   * Filter.Name: 枚举值: ResourceGroupId (资源组id列表)                    ResourceGroupName (资源组名称列表)                    AvailableNodeCount（资源组中可用节点数量） Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为5，Filter.Values的上限为100
-   */
-  Filters?: Array<Filter>
-  /**
-   * 标签过滤
-   */
-  TagFilters?: Array<TagFilter>
-  /**
-   * 偏移量，默认为0；分页查询起始位置，如：Limit为100，第一页Offset为0，第二页OffSet为100....即每页左边为闭区间
-   */
-  Offset?: number
-  /**
-   * 分页查询每页大小，默认20
-   */
-  Limit?: number
-  /**
-   * 支持模糊查找资源组id和资源组名
-   */
-  SearchWord?: string
-  /**
-   * 是否不展示节点列表; 
-true: 不展示，false 展示；
-默认为false
-   */
-  DontShowInstanceSet?: boolean
 }
 
 /**
@@ -6649,6 +6632,24 @@ export interface StorageExtraConf {
 }
 
 /**
+ * 健康探针
+ */
+export interface HealthProbe {
+  /**
+   * 存活探针
+   */
+  LivenessProbe?: Probe
+  /**
+   * 就绪探针
+   */
+  ReadinessProbe?: Probe
+  /**
+   * 启动探针
+   */
+  StartupProbe?: Probe
+}
+
+/**
  * 本地磁盘信息
  */
 export interface LocalDisk {
@@ -7406,21 +7407,21 @@ export interface StopTrainingTaskResponse {
 }
 
 /**
- * 健康探针
+ * 对话结果
  */
-export interface HealthProbe {
+export interface Choice {
   /**
-   * 存活探针
+   * 对话结果
    */
-  LivenessProbe?: Probe
+  Message?: Message
   /**
-   * 就绪探针
+   * 结束理由: stop, length, content_filter, null
    */
-  ReadinessProbe?: Probe
+  FinishReason?: string
   /**
-   * 启动探针
+   * 序号
    */
-  StartupProbe?: Probe
+  Index?: number
 }
 
 /**
@@ -7457,6 +7458,20 @@ export interface DescribeTrainingTaskPodsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 计费项询价单元
+ */
+export interface SpecUnit {
+  /**
+   * 计费项名称
+   */
+  SpecName: string
+  /**
+   * 计费项数量,建议不超过100万
+   */
+  SpecCount: number
 }
 
 /**
