@@ -2587,6 +2587,10 @@ export interface ModifyRejectedQuestionRequest {
 
    */
   RejectedBizId: string
+  /**
+   * 拒答生效域: 1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效
+   */
+  EnableScope?: number
 }
 
 /**
@@ -6717,49 +6721,49 @@ export interface ReleaseQA {
  */
 export interface UnsatisfiedReply {
   /**
-   * 不满意回复ID
+   * <p>不满意回复ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReplyBizId?: string
   /**
-   * 消息记录ID
+   * <p>消息记录ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordBizId?: string
   /**
-   * 用户问题
+   * <p>用户问题</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Question?: string
   /**
-   * 问题回复
+   * <p>问题回复</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Answer?: string
   /**
-   * 错误类型
+   * <p>错误类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Reasons?: Array<string>
   /**
-   * 处理状态，0：待处理，1：已拒答，2：已忽略，3：已纠错
+   * <p>处理状态，0：待处理，1：已拒答，2：已忽略，3：已纠错</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
-   * 创建时间，秒级时间戳
+   * <p>创建时间，秒级时间戳</p>
    */
   CreateTime?: string
   /**
-   * 更新时间,秒级时间戳
+   * <p>更新时间,秒级时间戳</p>
    */
   UpdateTime?: string
   /**
-   * 操作人
+   * <p>操作人</p>
    */
   Operator?: string
   /**
-   * 自定义反馈
+   * <p>自定义反馈</p>
    */
   FeedbackContent?: string
 }

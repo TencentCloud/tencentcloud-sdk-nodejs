@@ -1524,6 +1524,28 @@ export interface ImageFIlter {
 }
 
 /**
+ * 操作者信息
+ */
+export interface OperatorInfo {
+  /**
+   * <p>操作者子账号 UIN</p>
+   */
+  SubUin?: string
+  /**
+   * <p>操作者子账号名称</p>
+   */
+  SubUinName?: string
+  /**
+   * <p>是否为平台操作</p>
+   */
+  IsPlatformOperator?: boolean
+  /**
+   * <p>操作类型</p>
+   */
+  OperationType?: string
+}
+
+/**
  * 默认Nginx网关结构
  */
 export interface DefaultNginxGatewayCallInfo {
@@ -2087,6 +2109,10 @@ export interface TrainingTaskSetItem {
    * <p>环境变量</p>
    */
   Envs?: Array<EnvVar>
+  /**
+   * <p>操作者信息</p>
+   */
+  LatestOperatorInfo?: OperatorInfo
 }
 
 /**
@@ -2542,111 +2568,103 @@ export interface ResourceGroupInfo {
  */
 export interface CreateNotebookRequest {
   /**
-   * 名称。不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头
+   * <p>名称。不超过60个字符，仅支持中英文、数字、下划线&quot;_&quot;、短横&quot;-&quot;，只能以中英文、数字开头</p>
    */
   Name: string
   /**
-   * 计算资源付费模式 ，可选值为：
-PREPAID：预付费，即包年包月
-POSTPAID_BY_HOUR：按小时后付费
+   * <p>计算资源付费模式 ，可选值为：<br>PREPAID：预付费，即包年包月<br>POSTPAID_BY_HOUR：按小时后付费</p>
    */
   ChargeType: string
   /**
-   * 计算资源配置
+   * <p>计算资源配置</p>
    */
   ResourceConf: ResourceConf
   /**
-   * 是否上报日志
+   * <p>是否上报日志</p>
    */
   LogEnable: boolean
   /**
-   * 是否ROOT权限
+   * <p>是否ROOT权限</p>
    */
   RootAccess: boolean
   /**
-   * 是否自动停止
+   * <p>是否自动停止</p>
    */
   AutoStopping: boolean
   /**
-   * 是否访问公网
+   * <p>是否访问公网</p>
    */
   DirectInternetAccess: boolean
   /**
-   * 资源组ID(for预付费)
+   * <p>资源组ID(for预付费)</p>
    */
   ResourceGroupId?: string
   /**
-   * Vpc-Id
+   * <p>Vpc-Id</p>
    */
   VpcId?: string
   /**
-   * 子网Id
+   * <p>子网Id</p>
    */
   SubnetId?: string
   /**
-   * 存储的类型。取值包含： 
-FREE：预付费的免费存储
-CLOUD_PREMIUM：高性能云硬盘
-CLOUD_SSD：SSD云硬盘
-CFS：CFS存储
-CFS_TURBO：CFS Turbo存储
-GooseFSx：GooseFSx存储
+   * <p>存储的类型。取值包含：<br>FREE：预付费的免费存储<br>CLOUD_PREMIUM：高性能云硬盘<br>CLOUD_SSD：SSD云硬盘<br>CFS：CFS存储<br>CFS_TURBO：CFS Turbo存储<br>GooseFSx：GooseFSx存储</p>
    */
   VolumeSourceType?: string
   /**
-   * 云硬盘存储卷大小，单位GB
+   * <p>云硬盘存储卷大小，单位GB</p>
    */
   VolumeSizeInGB?: number
   /**
-   * CFS存储的配置
+   * <p>CFS存储的配置</p>
    */
   VolumeSourceCFS?: CFSConfig
   /**
-   * 日志配置
+   * <p>日志配置</p>
    */
   LogConfig?: LogConfig
   /**
-   * 生命周期脚本的ID
+   * <p>生命周期脚本的ID</p>
    */
   LifecycleScriptId?: string
   /**
-   * 默认GIT存储库的ID
+   * <p>默认GIT存储库的ID</p>
    */
   DefaultCodeRepoId?: string
   /**
-   * 其他GIT存储库的ID，最多3个
+   * <p>其他GIT存储库的ID，最多3个</p>
    */
   AdditionalCodeRepoIds?: Array<string>
   /**
-   * 自动停止时间，单位小时
+   * <p>自动停止时间，单位小时</p>
    */
   AutomaticStopTime?: number
   /**
-   * 标签配置
+   * <p>标签配置</p>
    */
   Tags?: Array<Tag>
   /**
-   * 数据存储挂载配置
+   * <p>数据存储挂载配置</p>
    */
   DataConfigs?: Array<DataConfig>
   /**
-   * 镜像信息
+   * <p>镜像信息</p>
    */
   ImageInfo?: ImageInfo
   /**
-   * 镜像类型，包括SYSTEM、TCR、CCR
+   * <p>镜像类型，包括SYSTEM、TCR、CCR</p>
    */
   ImageType?: string
   /**
-   * SSH配置信息
+   * <p>SSH配置信息</p>
    */
   SSHConfig?: SSHConfig
   /**
-   * GooseFS存储配置
+   * <p>GooseFS存储配置</p>
    */
   VolumeSourceGooseFS?: GooseFS
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
 }
@@ -2670,113 +2688,107 @@ export interface CreatePresignedNotebookUrlResponse {
  */
 export interface ModifyNotebookRequest {
   /**
-   * notebook id
+   * <p>notebook id</p>
    */
   Id: string
   /**
-   * 名称。不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头
+   * <p>名称。不超过60个字符，仅支持中英文、数字、下划线&quot;_&quot;、短横&quot;-&quot;，只能以中英文、数字开头</p>
    */
   Name: string
   /**
-   * （不允许修改）计算资源付费模式 ，可选值为：
-PREPAID：预付费，即包年包月
-POSTPAID_BY_HOUR：按小时后付费
+   * <p>（不允许修改）计算资源付费模式 ，可选值为：<br>PREPAID：预付费，即包年包月<br>POSTPAID_BY_HOUR：按小时后付费</p>
    */
   ChargeType: string
   /**
-   * 计算资源配置
+   * <p>计算资源配置</p>
    */
   ResourceConf: ResourceConf
   /**
-   * 是否自动停止
+   * <p>是否自动停止</p>
    */
   AutoStopping: boolean
   /**
-   * 是否访问公网
+   * <p>是否访问公网</p>
    */
   DirectInternetAccess: boolean
   /**
-   * 是否ROOT权限
+   * <p>是否ROOT权限</p>
    */
   RootAccess: boolean
   /**
-   * 是否上报日志
+   * <p>是否上报日志</p>
    */
   LogEnable: boolean
   /**
-   * 资源组ID(for预付费)
+   * <p>资源组ID(for预付费)</p>
    */
   ResourceGroupId?: string
   /**
-   * （不允许修改）Vpc-Id
+   * <p>（不允许修改）Vpc-Id</p>
    */
   VpcId?: string
   /**
-   * （不允许修改）子网Id
+   * <p>（不允许修改）子网Id</p>
    */
   SubnetId?: string
   /**
-   * 存储卷大小，单位GB
+   * <p>存储卷大小，单位GB</p>
    */
   VolumeSizeInGB?: number
   /**
-   * （不允许修改）存储的类型。取值包含： 
-    FREE:    预付费的免费存储
-    CLOUD_PREMIUM： 高性能云硬盘
-    CLOUD_SSD： SSD云硬盘
-    CFS:     CFS存储，包含NFS和turbo
+   * <p>（不允许修改）存储的类型。取值包含：<br>    FREE:    预付费的免费存储<br>    CLOUD_PREMIUM： 高性能云硬盘<br>    CLOUD_SSD： SSD云硬盘<br>    CFS:     CFS存储，包含NFS和turbo</p>
    */
   VolumeSourceType?: string
   /**
-   * （不允许修改）CFS存储的配置
+   * <p>（不允许修改）CFS存储的配置</p>
    */
   VolumeSourceCFS?: CFSConfig
   /**
-   * 日志配置
+   * <p>日志配置</p>
    */
   LogConfig?: LogConfig
   /**
-   * 生命周期脚本的ID
+   * <p>生命周期脚本的ID</p>
    */
   LifecycleScriptId?: string
   /**
-   * 默认GIT存储库的ID
+   * <p>默认GIT存储库的ID</p>
    */
   DefaultCodeRepoId?: string
   /**
-   * 其他GIT存储库的ID，最多3个
+   * <p>其他GIT存储库的ID，最多3个</p>
    */
   AdditionalCodeRepoIds?: Array<string>
   /**
-   * 自动停止时间，单位小时
+   * <p>自动停止时间，单位小时</p>
    */
   AutomaticStopTime?: number
   /**
-   * 标签配置
+   * <p>标签配置</p>
    */
   Tags?: Array<Tag>
   /**
-   * 数据配置，只支持WEDATA_HDFS
+   * <p>数据配置，只支持WEDATA_HDFS</p>
    */
   DataConfigs?: Array<DataConfig>
   /**
-   * 镜像信息
+   * <p>镜像信息</p>
    */
   ImageInfo?: ImageInfo
   /**
-   * 镜像类型，包括SYSTEM、TCR、CCR
+   * <p>镜像类型，包括SYSTEM、TCR、CCR</p>
    */
   ImageType?: string
   /**
-   * SSH配置
+   * <p>SSH配置</p>
    */
   SSHConfig?: SSHConfig
   /**
-   * 自定义环境变量
+   * <p>自定义环境变量</p>
    */
   Envs?: Array<EnvVar>
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
 }
@@ -4515,7 +4527,7 @@ export interface ModelSource {
  */
 export interface CreateNotebookResponse {
   /**
-   * notebook标志
+   * <p>notebook标志</p>
    */
   Id?: string
   /**
@@ -6366,198 +6378,202 @@ export interface ExecAction {
  */
 export interface TrainingTaskDetail {
   /**
-   * 训练任务ID
+   * <p>训练任务ID</p>
    */
   Id?: string
   /**
-   * 训练任务名称
+   * <p>训练任务名称</p>
    */
   Name?: string
   /**
-   * 主账号uin
+   * <p>主账号uin</p>
    */
   Uin?: string
   /**
-   * 子账号uin
+   * <p>子账号uin</p>
    */
   SubUin?: string
   /**
-   * 创建者名称
+   * <p>创建者名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubUinName?: string
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region?: string
   /**
-   * 训练框架名称，eg：SPARK、PYSARK、TENSORFLOW、PYTORCH
+   * <p>训练框架名称，eg：SPARK、PYSARK、TENSORFLOW、PYTORCH</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FrameworkName?: string
   /**
-   * 训练框架版本
+   * <p>训练框架版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FrameworkVersion?: string
   /**
-   * 框架运行环境
+   * <p>框架运行环境</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FrameworkEnvironment?: string
   /**
-   * 计费模式
+   * <p>计费模式</p>
    */
   ChargeType?: string
   /**
-   * 预付费专用资源组
+   * <p>预付费专用资源组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupId?: string
   /**
-   * 资源配置
+   * <p>资源配置</p>
    */
   ResourceConfigInfos?: Array<ResourceConfigInfo>
   /**
-   * 标签
+   * <p>标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
-   * 训练模式，eg：PS_WORKER、DDP、MPI、HOROVOD
+   * <p>训练模式，eg：PS_WORKER、DDP、MPI、HOROVOD</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TrainingMode?: string
   /**
-   * 代码包
+   * <p>代码包</p>
    */
   CodePackagePath?: CosPathInfo
   /**
-   * 启动命令信息
+   * <p>启动命令信息</p>
    */
   StartCmdInfo?: StartCmdInfo
   /**
-   * 数据来源，eg：DATASET、COS
+   * <p>数据来源，eg：DATASET、COS</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataSource?: string
   /**
-   * 数据配置
+   * <p>数据配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataConfigs?: Array<DataConfig>
   /**
-   * 调优参数
+   * <p>调优参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TuningParameters?: string
   /**
-   * 训练输出
+   * <p>训练输出</p>
    */
   Output?: CosPathInfo
   /**
-   * 是否上报日志
+   * <p>是否上报日志</p>
    */
   LogEnable?: boolean
   /**
-   * 日志配置
+   * <p>日志配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogConfig?: LogConfig
   /**
-   * VPC ID
+   * <p>VPC ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
-   * 子网ID
+   * <p>子网ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
-   * 自定义镜像信息
+   * <p>自定义镜像信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageInfo?: ImageInfo
   /**
-   * 运行时长
+   * <p>运行时长</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuntimeInSeconds?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 训练开始时间
+   * <p>训练开始时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
-   * 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中
+   * <p>计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中</p>
    */
   ChargeStatus?: string
   /**
-   * 最近一次实例ID
+   * <p>最近一次实例ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestInstanceId?: string
   /**
-   * TensorBoard ID
+   * <p>TensorBoard ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TensorBoardId?: string
   /**
-   * 备注
+   * <p>备注</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
-   * 失败原因
+   * <p>失败原因</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FailureReason?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 训练结束时间
+   * <p>训练结束时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
-   * 计费金额信息，eg：2.00元/小时 (按量计费)
+   * <p>计费金额信息，eg：2.00元/小时 (按量计费)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingInfo?: string
   /**
-   * 预付费专用资源组名称
+   * <p>预付费专用资源组名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupName?: string
   /**
-   * 任务信息
+   * <p>任务信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
-   * 任务状态，eg：STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成
+   * <p>任务状态，eg：STARTING启动中、RUNNING运行中、STOPPING停止中、STOPPED已停止、FAILED异常、SUCCEED已完成</p>
    */
   Status?: string
   /**
-   * 回调地址
+   * <p>回调地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CallbackUrl?: string
   /**
-   * 任务关联的代码仓库配置
+   * <p>任务关联的代码仓库配置</p>
    */
   CodeRepos?: Array<CodeRepoConfig>
   /**
-   * 暴露网络配置
+   * <p>暴露网络配置</p>
    */
   ExposeNetworkConfig?: ExposeNetworkConfig
+  /**
+   * <p>操作者信息</p>
+   */
+  OperatorInfo?: OperatorInfo
 }
 
 /**
@@ -7259,66 +7275,65 @@ export interface MaterialInfo {
  */
 export interface DataConfig {
   /**
-   * 映射路径
+   * <p>映射路径</p>
    */
   MappingPath?: string
   /**
-   * 存储用途
-可选值为 BUILTIN_CODE, BUILTIN_DATA, BUILTIN_MODEL, USER_DATA, USER_CODE, USER_MODEL, OUTPUT, OTHER
+   * <p>存储用途<br>可选值为 BUILTIN_CODE, BUILTIN_DATA, BUILTIN_MODEL, USER_DATA, USER_CODE, USER_MODEL, OUTPUT, OTHER</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataSourceUsage?: string
   /**
-   * DATASET、COS、CFS、CFSTurbo、GooseFSx、HDFS、WEDATA_HDFS
+   * <p>DATASET、COS、CFS、CFSTurbo、GooseFSx、HDFS、WEDATA_HDFS</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataSourceType?: string
   /**
-   * 来自数据集的数据
+   * <p>来自数据集的数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataSetSource?: DataSetConfig
   /**
-   * 来自cos的数据
+   * <p>来自cos的数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   COSSource?: CosPathInfo
   /**
-   * 来自CFS的数据
+   * <p>来自CFS的数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CFSSource?: CFSConfig
   /**
-   * 来自HDFS的数据
+   * <p>来自HDFS的数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HDFSSource?: HDFSConfig
   /**
-   * 配置GooseFS的数据
+   * <p>配置GooseFS的数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GooseFSSource?: GooseFS
   /**
-   * 配置TurboFS的数据
+   * <p>配置TurboFS的数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CFSTurboSource?: CFSTurbo
   /**
-   * 来自本地磁盘的信息
+   * <p>来自本地磁盘的信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalDiskSource?: LocalDisk
   /**
-   * CBS配置信息
+   * <p>CBS配置信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CBSSource?: CBSConfig
   /**
-   * 主机路径信息
+   * <p>主机路径信息</p>
    */
   HostPathSource?: HostPath
   /**
-   * 公有云数据源
+   * <p>公有云数据源</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicDataSource?: PublicDataSourceFS

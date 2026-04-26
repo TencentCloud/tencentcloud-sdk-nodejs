@@ -309,6 +309,20 @@ export interface DisableKeysResponse {
 }
 
 /**
+ * 地域的QPS扩展包
+ */
+export interface RegionQps {
+  /**
+   * <p>地域</p>
+   */
+  Region?: string
+  /**
+   * <p>qps的大小</p>
+   */
+  Qps?: number
+}
+
+/**
  * EnableDataKey返回参数结构体
  */
 export interface EnableDataKeyResponse {
@@ -1639,77 +1653,89 @@ export interface ImportDataKeyResponse {
  */
 export interface GetServiceStatusResponse {
   /**
-   * KMS服务是否开通， true 表示已开通
+   * <p>KMS服务是否开通， true 表示已开通</p>
    */
   ServiceEnabled?: boolean
   /**
-   * 服务不可用类型： 0-未购买，1-正常， 2-欠费停服， 3-资源释放
+   * <p>服务不可用类型： 0-未购买，1-正常， 2-欠费停服， 3-资源释放</p>
    */
   InvalidType?: number
   /**
-   * 0-普通版，1-旗舰版
+   * <p>0-普通版，1-旗舰版</p>
    */
   UserLevel?: number
   /**
-   * 旗舰版到期时间（Epoch Unix Timestamp）。
+   * <p>旗舰版到期时间（Epoch Unix Timestamp）。</p>
    */
   ProExpireTime?: number
   /**
-   * 旗舰版是否自动续费：0-不自动续费，1-自动续费
+   * <p>旗舰版是否自动续费：0-不自动续费，1-自动续费</p>
    */
   ProRenewFlag?: number
   /**
-   * 旗舰版购买记录的唯一性标识。如果未开通旗舰版，则返回值为空
+   * <p>旗舰版购买记录的唯一性标识。如果未开通旗舰版，则返回值为空</p>
    */
   ProResourceId?: string
   /**
-   * 是否开通 KMS 托管版
+   * <p>是否开通 KMS 托管版</p>
    */
   ExclusiveVSMEnabled?: boolean
   /**
-   * 是否开通 KMS 独享版
+   * <p>是否开通 KMS 独享版</p>
    */
   ExclusiveHSMEnabled?: boolean
   /**
-   * KMS 订阅信息。
+   * <p>KMS 订阅信息。</p>
    */
   SubscriptionInfo?: string
   /**
-   * 返回KMS用户密钥使用数量
+   * <p>返回KMS用户密钥使用数量</p>
    */
   CmkUserCount?: number
   /**
-   * 返回KMS用户密钥规格数量
+   * <p>返回KMS用户密钥规格数量</p>
    */
   CmkLimit?: number
   /**
-   * 返回独享集群组
+   * <p>返回独享集群组</p>
    */
   ExclusiveHSMList?: Array<ExclusiveHSM>
   /**
-   * 是否支持数据密钥托管。1:支持，0:不支持。
+   * <p>是否支持数据密钥托管。1:支持，0:不支持。</p>
    */
   IsAllowedDataKeyHosted?: boolean
   /**
-   * IsAllowedDataKeyHosted为1时有效，数据密钥的购买额度
+   * <p>IsAllowedDataKeyHosted为1时有效，数据密钥的购买额度</p>
    */
   DataKeyLimit?: number
   /**
-   * IsAllowedDataKeyHosted为1时有效，数据密钥免费额度。
+   * <p>IsAllowedDataKeyHosted为1时有效，数据密钥免费额度。</p>
    */
   FreeDataKeyLimit?: number
   /**
-   * IsAllowedDataKeyHosted为1时有效，已使用的数据密钥数量。
+   * <p>IsAllowedDataKeyHosted为1时有效，已使用的数据密钥数量。</p>
    */
   DataKeyUsedCount?: number
   /**
-   * 同步任务的目标地域信息
+   * <p>同步任务的目标地域信息</p>
    */
   SyncTaskList?: Array<DestinationSyncConfig>
   /**
-   * 是否支持同步任务。true:支持，false:不支持。
+   * <p>是否支持同步任务。true:支持，false:不支持。</p>
    */
   IsAllowedSync?: boolean
+  /**
+   * <p>地域下的QPS</p>
+   */
+  QpsLimit?: number
+  /**
+   * <p>总的QPS值</p>
+   */
+  QpsTotalLimit?: number
+  /**
+   * <p>地域下的QPS</p>
+   */
+  RegionsQps?: Array<RegionQps>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -82,7 +82,7 @@ export interface StartSandboxInstanceRequest {
    */
   CustomConfiguration?: CustomConfiguration
   /**
-   * <p>沙箱访问认证模式</p><p>枚举值：</p><ul><li>DEFAULT： 跟随系统策略</li><li>TOKEN： Token认证</li><li>NONE： 免认证 </li></ul><p>默认值：DEFAULT</p>
+   * <p>沙箱访问认证模式</p><p>枚举值：</p><ul><li>DEFAULT： 默认，即 TOKEN 认证</li><li>TOKEN： Token认证，即所有端口访问都需携带TOKEN</li><li>NONE： 免认证，即所有端口访问无需携带TOKEN</li><li>PUBLIC： 公开模式，即ENVD管理端口（49983）访问需携带TOKEN，其他端口无需携带TOKEN</li></ul><p>默认值：DEFAULT</p>
    */
   AuthMode?: string
   /**
@@ -151,6 +151,10 @@ export interface SandboxInstance {
    * <p>沙箱实例元数据</p>
    */
   Metadata?: Array<MetadataVar>
+  /**
+   * <p>沙箱访问认证模式</p><p>枚举值：</p><ul><li>DEFAULT： 默认，即 TOKEN 认证</li><li>TOKEN： Token认证，即所有端口访问都需携带TOKEN</li><li>NONE： 免认证，即所有端口访问无需携带TOKEN</li><li>PUBLIC： 公开模式，即ENVD管理端口（49983）访问需携带TOKEN，其他端口无需携带TOKEN</li></ul><p>默认值：DEFAULT</p>
+   */
+  AuthMode?: string
 }
 
 /**
@@ -720,7 +724,7 @@ export interface ImageStorageSource {
  */
 export interface AcquireSandboxInstanceTokenRequest {
   /**
-   * 沙箱实例ID，生成的访问Token将仅可用于访问此沙箱实例
+   * <p>沙箱实例ID，生成的访问Token将仅可用于访问此沙箱实例</p>
    */
   InstanceId: string
 }
@@ -920,13 +924,17 @@ export interface DeleteAPIKeyRequest {
  */
 export interface AcquireSandboxInstanceTokenResponse {
   /**
-   * 访问Token
+   * <p>访问Token</p>
    */
   Token?: string
   /**
-   * 过期时间
+   * <p>过期时间</p>
    */
   ExpiresAt?: string
+  /**
+   * <p>非管控面（envd）的访问Token</p>
+   */
+  TrafficToken?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

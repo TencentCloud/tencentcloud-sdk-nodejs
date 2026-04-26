@@ -1475,6 +1475,13 @@ FormField输入示例：
     "ComponentValue": "选择的内容"
 }
 ```
+多选需要用“、”分割选项
+```
+{
+    "ComponentId": "componentId1",
+    "ComponentValue": "选项1、选项2"
+}
+```
 
 当控件的 ComponentType='DATE'时，FormField.ComponentValue填入日期内容；
 
@@ -12045,7 +12052,7 @@ export interface OperateFlowRemarksRequest {
    */
   Operator: UserInfo
   /**
-   * <p>操作类型，可取值如下:</p><ul><li>DELETE:  删除</li><li>ENABLE: 启用</li><li>DISABLE: 停用</li><li>COPY: 复制新建</li></ul>
+   * <p>指定对合同备注的操作</p><p>枚举值：</p><ul><li>CREATE： 创建合同备注</li><li>UPDATE： 更新合同备注</li><li>DELETE： 删除合同备注</li></ul>
    */
   OperateType: string
   /**

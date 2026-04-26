@@ -6207,6 +6207,15 @@ FormField输入示例：
     "ComponentValue": "选择的内容"
 }
 ```
+多选用“、”分割
+```
+FormField输入示例：
+{
+    "ComponentId": "componentId1",
+    "ComponentValue": "选择的内容1、选择的内容2"
+}
+```
+
 
 当控件的 ComponentType='DATE'时，FormField.ComponentValue填入日期内容；
 

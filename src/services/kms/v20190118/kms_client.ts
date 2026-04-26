@@ -35,6 +35,7 @@ import {
   DescribeDataKeysRequest,
   ListAlgorithmsResponse,
   DisableKeysResponse,
+  RegionQps,
   EnableDataKeyResponse,
   DescribeWhiteBoxKeyResponse,
   UpdateKeyDescriptionResponse,

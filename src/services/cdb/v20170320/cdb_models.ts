@@ -4908,6 +4908,11 @@ export interface AuditLog {
    *  事务ID
    */
   TrxId?: number
+  /**
+   * 端口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClientPort?: number
 }
 
 /**

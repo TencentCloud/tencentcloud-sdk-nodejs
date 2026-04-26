@@ -64,6 +64,7 @@ import {
   DescribeTrainingModelVersionRequest,
   ResourceInstanceRunningJobInfo,
   ImageFIlter,
+  OperatorInfo,
   DefaultNginxGatewayCallInfo,
   CFSConfig,
   DescribeMountInstanceRequest,

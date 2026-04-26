@@ -3526,6 +3526,10 @@ export interface CreateTriggerTaskSchedulerConfiguration {
    * <p>是否允许下游依赖 1允许 0不允许</p><p>取值范围：[0, 1]</p><p>默认值：1</p>
    */
   AllowDownstreamDependency?: number
+  /**
+   * <p>调度类型: 0 正常调度 1 空跑调度</p><p>枚举值：</p><ul><li>0： 正常调度</li><li>1： 空跑调度</li></ul><p>默认值：0</p>
+   */
+  ScheduleType?: number
 }
 
 /**
@@ -6506,6 +6510,11 @@ export interface TriggerTaskSchedulerConfiguration {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AllowDownstreamDependency?: number
+  /**
+   * <p>调度类型: 0 正常调度 1 空跑调度</p><p>枚举值：</p><ul><li>0： 正常调度</li><li>1： 空跑调度</li></ul><p>默认值：0</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScheduleType?: number
 }
 
 /**
@@ -16845,25 +16854,30 @@ export interface DeleteDataSourceResponse {
  */
 export interface InTaskParameter {
   /**
-   * 参数名
+   * <p>参数名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamKey: string
   /**
-   * 参数描述：格式为 项目标识.任务名称.参数名；例：project_wedata_1.sh_250820_104107.pp_out
+   * <p>参数描述：格式为 项目标识.任务名称.参数名；例：project_wedata_1.sh_250820_104107.pp_out</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamDesc: string
   /**
-   * 父任务ID
+   * <p>父任务ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FromTaskId: string
   /**
-   * 父任务参数key
+   * <p>父任务参数key</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FromParamKey: string
+  /**
+   * <p>任务输入类型，默认使用TASK</p><p>枚举值：</p><ul><li>TASK： 来源为父任务</li><li>CONSTANT： 常量值，目前仅for-each节点支持</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
 }
 
 /**
