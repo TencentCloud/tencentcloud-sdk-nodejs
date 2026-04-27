@@ -697,6 +697,10 @@ export interface LLMDetectResult {
    * <p>攻击payload</p>
    */
   Payload?: string
+  /**
+   * <p>图片检测结果</p>
+   */
+  ImageResult?: Array<ImageResult>
 }
 
 /**
@@ -2275,6 +2279,24 @@ export interface PostAttackDownloadTaskRequest {
    * 下载的日志条数
    */
   Count?: number
+}
+
+/**
+ * 对话消息结构体
+ */
+export interface SSEClientMessage {
+  /**
+   * <p>对话角色，填user</p>
+   */
+  Role: string
+  /**
+   * <p>prompt内容</p>
+   */
+  Content: string
+  /**
+   * <p>检测类型，0是文本内容代答，目前只支持0，可以不传，默认值是0</p><p>枚举值：</p><ul><li>0： 文件内容代答</li></ul>
+   */
+  ContentType?: number
 }
 
 /**
@@ -4849,21 +4871,17 @@ export interface ModifyAreaBanAreasResponse {
 }
 
 /**
- * ModifyAntiFakeUrlStatus请求参数结构体
+ * GenerateLLMSecAnswer请求参数结构体
  */
-export interface ModifyAntiFakeUrlStatusRequest {
+export interface GenerateLLMSecAnswerRequest {
   /**
-   * 域名
+   * <p>消息结构体内容</p>
    */
-  Domain: string
+  Message: SSEClientMessage
   /**
-   * 状态
+   * <p>消息id，传入 要回答的MsgID ，用于匹配自定义回答模板，最终可得到优化的代答结果</p>
    */
-  Status: number
-  /**
-   * Id列表
-   */
-  Ids: Array<number | bigint>
+  MsgID: string
 }
 
 /**
@@ -7002,6 +7020,16 @@ export interface DeleteOwaspRuleStatusResponse {
 export interface ModifyProtectionStatusResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GenerateLLMSecAnswer返回参数结构体
+ */
+export interface GenerateLLMSecAnswerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
    */
   RequestId?: string
 }
@@ -13161,7 +13189,7 @@ export interface ModifyDomainWhiteRuleRequest {
  */
 export interface DescribeLLMContentSecCheckResponse {
   /**
-   * 检测结果
+   * <p>检测结果</p>
    */
   Data?: LLMDetectResult
   /**
@@ -13744,6 +13772,20 @@ export interface SecretInfo {
    * 上传的密钥文件文件名
    */
   FileName?: string
+}
+
+/**
+ * llm要检测的图片的检测结果
+ */
+export interface ImageResult {
+  /**
+   * <p>命中类别标识</p>
+   */
+  Category?: string
+  /**
+   * <p>类别的名称</p>
+   */
+  CategoryName?: string
 }
 
 /**
@@ -15245,6 +15287,24 @@ export interface BatchIpAccessControlData {
 }
 
 /**
+ * ModifyAntiFakeUrlStatus请求参数结构体
+ */
+export interface ModifyAntiFakeUrlStatusRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 状态
+   */
+  Status: number
+  /**
+   * Id列表
+   */
+  Ids: Array<number | bigint>
+}
+
+/**
  * DescribePeakValue请求参数结构体
  */
 export interface DescribePeakValueRequest {
@@ -16168,33 +16228,37 @@ export interface DescribeDomainWhiteRulesResponse {
  */
 export interface DescribeLLMContentSecCheckRequest {
   /**
-   *  服务id,使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则
+   * <p>服务id,使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则</p>
    */
   ServiceId: string
   /**
-   * 要审核的内容
-   */
-  Content: string
-  /**
-   * 流量类型，是入向流量还是出向流量，入向：1，出向：2；入向和出向必填
+   * <p>流量类型，是入向流量还是出向流量，入向：1，出向：2；入向和出向必填</p>
    */
   Type: number
   /**
-   * 实例id，必传
+   * <p>实例id，必传</p>
    */
   InstanceId: string
   /**
-   * 对话的id
+   * <p>要审核的内容</p>
+   */
+  Content?: string
+  /**
+   * <p>对话的id</p>
    */
   ChatId?: string
   /**
-   * 标识用户的id，限速使用，不填，则限速会不生效
+   * <p>标识用户的id，限速使用，不填，则限速会不生效</p>
    */
   UserId?: string
   /**
-   * token使用量，不填，会采用默认的token计算方法，计算的是模型的消耗，因为该值时在出向方向上添加，即Type=2
+   * <p>token使用量，不填，会采用默认的token计算方法，计算的是模型的消耗，因为该值时在出向方向上添加，即Type=2</p>
    */
   TokenUsage?: number
+  /**
+   * <p>图片base64编码后的数据,body大小最大支持10M</p>
+   */
+  ImageEncode?: string
 }
 
 /**

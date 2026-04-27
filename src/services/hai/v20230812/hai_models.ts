@@ -981,35 +981,35 @@ export interface COSStorage {
  */
 export interface ModelDetail {
   /**
-   * 模型名称
+   * <p>模型名称</p>
    */
   ModelName?: string
   /**
-   * 模型ID
+   * <p>模型ID</p>
    */
   ModelId?: string
   /**
-   * 应用描述
+   * <p>应用描述</p>
    */
   Description?: string
   /**
-   * 官方社区链接
+   * <p>官方社区链接</p>
    */
   CommunityUrl?: string
   /**
-   * 最佳实践链接
+   * <p>最佳实践链接</p>
    */
   GuideUrl?: string
   /**
-   * 模型状态
+   * <p>模型状态</p>
    */
   ModelState?: string
   /**
-   * 应用对应的标签，如机器学习
+   * <p>应用对应的标签，如机器学习</p>
    */
   Tags?: Array<string>
   /**
-   * 配置环境
+   * <p>配置环境</p>
    */
   ConfigEnvironment?: string
 }

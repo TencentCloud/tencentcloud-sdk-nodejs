@@ -58,6 +58,16 @@ it("bi.v20220105.CreateDatasource", async function () {
     }
 })
 
+it("bi.v20220105.DeleteUserGroupMember", async function () {
+    try {
+       const data = await client.DeleteUserGroupMember({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bi.v20220105.DescribeUserGroupTreeList", async function () {
     try {
        const data = await client.DescribeUserGroupTreeList({})
@@ -98,9 +108,19 @@ it("bi.v20220105.CreateProject", async function () {
     }
 })
 
-it("bi.v20220105.DeleteUserGroupMember", async function () {
+it("bi.v20220105.DescribeAuthApiKeyList", async function () {
     try {
-       const data = await client.DeleteUserGroupMember({})
+       const data = await client.DescribeAuthApiKeyList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.DeleteAuthApiKey", async function () {
+    try {
+       const data = await client.DeleteAuthApiKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +248,9 @@ it("bi.v20220105.ModifyProject", async function () {
     }
 })
 
-it("bi.v20220105.DescribeUserRoleList", async function () {
+it("bi.v20220105.DescribeAuthApiKeyInfo", async function () {
     try {
-       const data = await client.DescribeUserRoleList({})
+       const data = await client.DescribeAuthApiKeyInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +258,9 @@ it("bi.v20220105.DescribeUserRoleList", async function () {
     }
 })
 
-it("bi.v20220105.CreateUserGroup", async function () {
+it("bi.v20220105.DeleteProject", async function () {
     try {
-       const data = await client.CreateUserGroup({})
+       const data = await client.DeleteProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -251,6 +271,16 @@ it("bi.v20220105.CreateUserGroup", async function () {
 it("bi.v20220105.DescribePageWidgetList", async function () {
     try {
        const data = await client.DescribePageWidgetList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.ModifyDatasourceCloud", async function () {
+    try {
+       const data = await client.ModifyDatasourceCloud({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +338,9 @@ it("bi.v20220105.QueryUserGroupMember", async function () {
     }
 })
 
-it("bi.v20220105.ModifyDatasourceCloud", async function () {
+it("bi.v20220105.DescribeUserRoleList", async function () {
     try {
-       const data = await client.ModifyDatasourceCloud({})
+       const data = await client.DescribeUserRoleList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -341,6 +371,16 @@ it("bi.v20220105.DescribeUserGroupMemberList", async function () {
 it("bi.v20220105.CreateUserRoleProject", async function () {
     try {
        const data = await client.CreateUserRoleProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.ModifyAuthApiKey", async function () {
+    try {
+       const data = await client.ModifyAuthApiKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -408,9 +448,9 @@ it("bi.v20220105.ExportScreenPage", async function () {
     }
 })
 
-it("bi.v20220105.DeleteProject", async function () {
+it("bi.v20220105.CreateUserGroup", async function () {
     try {
-       const data = await client.DeleteProject({})
+       const data = await client.CreateUserGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -431,6 +471,16 @@ it("bi.v20220105.ModifyResourceUserGroup", async function () {
 it("bi.v20220105.DescribeProjectList", async function () {
     try {
        const data = await client.DescribeProjectList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.CreateAuthApiKey", async function () {
+    try {
+       const data = await client.CreateAuthApiKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

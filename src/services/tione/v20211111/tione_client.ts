@@ -591,7 +591,7 @@ https://cloud.tencent.com/document/product/1278/85305
    * 查询资源组关联的工作空间列表
    */
   async DescribeBillingResourceGroupAttachedWorkspaces(
-    req?: DescribeBillingResourceGroupAttachedWorkspacesRequest,
+    req: DescribeBillingResourceGroupAttachedWorkspacesRequest,
     cb?: (error: string, rep: DescribeBillingResourceGroupAttachedWorkspacesResponse) => void
   ): Promise<DescribeBillingResourceGroupAttachedWorkspacesResponse> {
     return this.request("DescribeBillingResourceGroupAttachedWorkspaces", req, cb)

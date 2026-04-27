@@ -1396,7 +1396,7 @@ export interface DescribeInstanceClustersResponse {
 }
 
 /**
- * 实例描述信息
+ * 实例的描述信息
  */
 export interface InstanceInfo {
   /**
@@ -1627,6 +1627,10 @@ export interface InstanceInfo {
    * <p>keyvalue视图</p>
    */
   EnableConfigKeyValue?: string
+  /**
+   * <p>实例是否开启HTTPS</p><p>枚举值：</p><ul><li>true： 已开启HTTPS</li><li>false： 未开启HTTPS</li></ul>
+   */
+  HttpsEnabled?: boolean
 }
 
 /**

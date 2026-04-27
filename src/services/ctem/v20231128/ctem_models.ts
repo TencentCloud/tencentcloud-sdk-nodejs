@@ -2437,37 +2437,45 @@ export interface DescribeSeedsRequest {
  */
 export interface CreateSubDomainRequest {
   /**
-   * 企业Id
+   * <p>企业Id</p>
    */
   CustomerId: number
   /**
-   * 子域名
+   * <p>子域名</p>
    */
   SubDomain: string
   /**
-   * Ip
+   * <p>Ip</p>
    */
   Ip?: string
   /**
-   * 国家
+   * <p>国家</p>
    */
   Country?: string
   /**
-   * 省
+   * <p>省</p>
    */
   Province?: string
   /**
-   * 城市
+   * <p>城市</p>
    */
   City?: string
   /**
-   * Isp
+   * <p>Isp</p>
    */
   Isp?: string
   /**
-   * 子公司
+   * <p>子公司</p>
    */
   EnterpriseUid?: string
+  /**
+   * <p>DNS解析类型。A、AAAA、CNAME等</p>
+   */
+  DnsType?: string
+  /**
+   * <p>DNS解析值。域名或者ip</p>
+   */
+  DnsValue?: string
 }
 
 /**
@@ -3077,65 +3085,73 @@ export interface DisplayNetDisk {
  */
 export interface DisplaySubDomain {
   /**
-   * 主键ID
+   * <p>主键ID</p>
    */
   Id?: number
   /**
-   * 子域名
+   * <p>子域名</p>
    */
   SubDomain?: string
   /**
-   * Ip
+   * <p>Ip</p>
    */
   Ip?: string
   /**
-   * 国家
+   * <p>国家</p>
    */
   Country?: string
   /**
-   * 省份
+   * <p>省份</p>
    */
   Province?: string
   /**
-   * 城市
+   * <p>城市</p>
    */
   City?: string
   /**
-   * 互联网服务提供商
+   * <p>互联网服务提供商</p>
    */
   Isp?: string
   /**
-   * 公共字段
+   * <p>公共字段</p>
    */
   DisplayToolCommon?: DisplayToolCommon
   /**
-   * 是否为云资产：0-非云资产 1-是云资产
+   * <p>是否为云资产：0-非云资产 1-是云资产</p>
    */
   IsCloudAsset?: number
   /**
-   * 云资产是否下线：-1-已下线 0-正常
+   * <p>云资产是否下线：-1-已下线 0-正常</p>
    */
   CloudAssetStatus?: number
   /**
-   * 可用率（百分比）
+   * <p>可用率（百分比）</p>
    */
   AvailabilityRate?: number
   /**
-   * 可用状态 1:异常 0:正常
+   * <p>可用状态 1:异常 0:正常</p>
    */
   AvailabilityState?: number
   /**
-   * 域名解析状态 1:异常 0:正常
+   * <p>域名解析状态 1:异常 0:正常</p>
    */
   AnalysisState?: number
   /**
-   * 平均时延：单位ms
+   * <p>平均时延：单位ms</p>
    */
   AverageDelay?: number
   /**
-   * 丢包率（百分比）
+   * <p>丢包率（百分比）</p>
    */
   LossRate?: number
+  /**
+   * <p>DNS解析类型</p><p>A、AAAA、MX、CNAME、NX</p>
+   */
+  DnsType?: string
+  /**
+   * <p>DNS解析值</p>
+   */
+  DnsValue?: string
 }
 
 /**
@@ -4384,7 +4400,7 @@ export interface DisplayApiSec {
  */
 export interface CreateSubDomainResponse {
   /**
-   * Id
+   * <p>Id</p>
    */
   Id?: number
   /**

@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   PageScreenVO,
+  DescribeUserRoleListRequest,
   DeleteProjectRequest,
   ModifyUserDetailInfoRequest,
   DescribeUserGroupTreeListRequest,
@@ -49,11 +50,12 @@ import {
   DescribePermissionStatusInfoRequest,
   CreateDatasourceResponse,
   CreateUserGroupRequest,
+  CreateAuthApiKeyResponse,
   DeleteDatasourceResponse,
   CreateProjectRequest,
   UserRoleListDataRoleInfo,
   ApplyEmbedIntervalRequest,
-  DescribePermissionRoleInfoResponse,
+  ApiKeyAuthApplyVOList,
   CreatePermissionRanksRequest,
   ModifyResourceUserGroupResourceRequest,
   DescribeProjectInfoRequest,
@@ -61,11 +63,13 @@ import {
   ModifyUserRoleRequest,
   CreateUserRoleRequest,
   CreateEmbedTokenRequest,
+  DescribeAuthApiKeyInfoResponse,
   ModifyDatasourceRequest,
   CreatePermissionRanksResponse,
   CreateProjectResponse,
   DescribeProjectInfoResponse,
   DeleteProjectResponse,
+  ModifyAuthApiKeyRequest,
   DescribeUserGroupInfoResponse,
   ApplyEmbedIntervalResponse,
   ResourceItem,
@@ -77,11 +81,15 @@ import {
   DescribeUserRoleListResponse,
   RowColumnTagValue,
   DescribeResourceUserGroupPageListRequest,
+  DeleteAuthApiKeyResponse,
   ResourceListDTO,
   DescribePermissionStatusInfoResponse,
   UserGroupTreeNodeDTO,
   EmbedTokenInfo,
+  ApiKeyAuthApplyVO,
+  DeleteAuthApiKeyRequest,
   DatasourceInfoData,
+  DescribePermissionRoleInfoResponse,
   DescribePageWidgetListRequest,
   DescribeUserRoleProjectListRequest,
   BaseStateAction,
@@ -93,8 +101,10 @@ import {
   UserRoleListData,
   CreateUserRoleProjectResponse,
   DeleteUserRoleProjectRequest,
-  DescribeUserRoleListRequest,
+  DescribeAuthApiKeyListRequest,
   ClearEmbedTokenResponse,
+  DescribeAuthApiKeyInfoRequest,
+  CreateAuthApiKeyRequest,
   DeleteUserRoleProjectResponse,
   DescribePermissionRoleInfoRequest,
   CreateDatasourceCloudRequest,
@@ -117,9 +127,11 @@ import {
   ProjectConfigList,
   PermissionGroup,
   UserGroupDTO,
+  DescribeAuthApiKeyListResponse,
   CreateUserGroupResponse,
   DescribeUserGroupInfoRequest,
   CreateUserGroupMemberRequest,
+  ModifyAuthApiKeyResponse,
   ModifyProjectResponse,
   ModifyUserRoleResponse,
   ModifyUserDetailInfoResponse,
@@ -195,6 +207,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * DeleteUserGroupMember
+   */
+  async DeleteUserGroupMember(
+    req: DeleteUserGroupMemberRequest,
+    cb?: (error: string, rep: DeleteUserGroupMemberResponse) => void
+  ): Promise<DeleteUserGroupMemberResponse> {
+    return this.request("DeleteUserGroupMember", req, cb)
+  }
+
+  /**
    * 用户组数查询接口
    */
   async DescribeUserGroupTreeList(
@@ -235,13 +257,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DeleteUserGroupMember
+   * ApiKey列表
    */
-  async DeleteUserGroupMember(
-    req: DeleteUserGroupMemberRequest,
-    cb?: (error: string, rep: DeleteUserGroupMemberResponse) => void
-  ): Promise<DeleteUserGroupMemberResponse> {
-    return this.request("DeleteUserGroupMember", req, cb)
+  async DescribeAuthApiKeyList(
+    req: DescribeAuthApiKeyListRequest,
+    cb?: (error: string, rep: DescribeAuthApiKeyListResponse) => void
+  ): Promise<DescribeAuthApiKeyListResponse> {
+    return this.request("DescribeAuthApiKeyList", req, cb)
+  }
+
+  /**
+   * 删除ApiKey
+   */
+  async DeleteAuthApiKey(
+    req: DeleteAuthApiKeyRequest,
+    cb?: (error: string, rep: DeleteAuthApiKeyResponse) => void
+  ): Promise<DeleteAuthApiKeyResponse> {
+    return this.request("DeleteAuthApiKey", req, cb)
   }
 
   /**
@@ -365,23 +397,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用户角色列表
+   * ApiKey信息
    */
-  async DescribeUserRoleList(
-    req: DescribeUserRoleListRequest,
-    cb?: (error: string, rep: DescribeUserRoleListResponse) => void
-  ): Promise<DescribeUserRoleListResponse> {
-    return this.request("DescribeUserRoleList", req, cb)
+  async DescribeAuthApiKeyInfo(
+    req: DescribeAuthApiKeyInfoRequest,
+    cb?: (error: string, rep: DescribeAuthApiKeyInfoResponse) => void
+  ): Promise<DescribeAuthApiKeyInfoResponse> {
+    return this.request("DescribeAuthApiKeyInfo", req, cb)
   }
 
   /**
-   * CreateUserGroup
+   * 删除项目
    */
-  async CreateUserGroup(
-    req: CreateUserGroupRequest,
-    cb?: (error: string, rep: CreateUserGroupResponse) => void
-  ): Promise<CreateUserGroupResponse> {
-    return this.request("CreateUserGroup", req, cb)
+  async DeleteProject(
+    req: DeleteProjectRequest,
+    cb?: (error: string, rep: DeleteProjectResponse) => void
+  ): Promise<DeleteProjectResponse> {
+    return this.request("DeleteProject", req, cb)
   }
 
   /**
@@ -392,6 +424,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribePageWidgetListResponse) => void
   ): Promise<DescribePageWidgetListResponse> {
     return this.request("DescribePageWidgetList", req, cb)
+  }
+
+  /**
+   * 更新云数据库
+   */
+  async ModifyDatasourceCloud(
+    req: ModifyDatasourceCloudRequest,
+    cb?: (error: string, rep: ModifyDatasourceCloudResponse) => void
+  ): Promise<ModifyDatasourceCloudResponse> {
+    return this.request("ModifyDatasourceCloud", req, cb)
   }
 
   /**
@@ -445,13 +487,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新云数据库
+   * 用户角色列表
    */
-  async ModifyDatasourceCloud(
-    req: ModifyDatasourceCloudRequest,
-    cb?: (error: string, rep: ModifyDatasourceCloudResponse) => void
-  ): Promise<ModifyDatasourceCloudResponse> {
-    return this.request("ModifyDatasourceCloud", req, cb)
+  async DescribeUserRoleList(
+    req: DescribeUserRoleListRequest,
+    cb?: (error: string, rep: DescribeUserRoleListResponse) => void
+  ): Promise<DescribeUserRoleListResponse> {
+    return this.request("DescribeUserRoleList", req, cb)
   }
 
   /**
@@ -482,6 +524,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserRoleProjectResponse) => void
   ): Promise<CreateUserRoleProjectResponse> {
     return this.request("CreateUserRoleProject", req, cb)
+  }
+
+  /**
+   * 更新ApiKey
+   */
+  async ModifyAuthApiKey(
+    req: ModifyAuthApiKeyRequest,
+    cb?: (error: string, rep: ModifyAuthApiKeyResponse) => void
+  ): Promise<ModifyAuthApiKeyResponse> {
+    return this.request("ModifyAuthApiKey", req, cb)
   }
 
   /**
@@ -545,13 +597,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除项目
+   * CreateUserGroup
    */
-  async DeleteProject(
-    req: DeleteProjectRequest,
-    cb?: (error: string, rep: DeleteProjectResponse) => void
-  ): Promise<DeleteProjectResponse> {
-    return this.request("DeleteProject", req, cb)
+  async CreateUserGroup(
+    req: CreateUserGroupRequest,
+    cb?: (error: string, rep: CreateUserGroupResponse) => void
+  ): Promise<CreateUserGroupResponse> {
+    return this.request("CreateUserGroup", req, cb)
   }
 
   /**
@@ -572,5 +624,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProjectListResponse) => void
   ): Promise<DescribeProjectListResponse> {
     return this.request("DescribeProjectList", req, cb)
+  }
+
+  /**
+   * 创建ApiKey
+   */
+  async CreateAuthApiKey(
+    req: CreateAuthApiKeyRequest,
+    cb?: (error: string, rep: CreateAuthApiKeyResponse) => void
+  ): Promise<CreateAuthApiKeyResponse> {
+    return this.request("CreateAuthApiKey", req, cb)
   }
 }

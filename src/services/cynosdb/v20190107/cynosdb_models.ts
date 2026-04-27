@@ -1274,69 +1274,73 @@ export interface OpenWanResponse {
  */
 export interface BackupFileInfo {
   /**
-   * 快照文件ID，已废弃，请使用BackupId
+   * <p>快照文件ID，已废弃，请使用BackupId</p>
    */
   SnapshotId?: number
   /**
-   * 备份文件名
+   * <p>备份文件名</p>
    */
   FileName?: string
   /**
-   * 备份文件大小
+   * <p>备份文件大小</p>
    */
   FileSize?: number
   /**
-   * 备份开始时间
+   * <p>备份开始时间</p>
    */
   StartTime?: string
   /**
-   * 备份完成时间
+   * <p>备份完成时间</p>
    */
   FinishTime?: string
   /**
-   * 备份类型：snapshot，快照备份；logic，逻辑备份
+   * <p>备份类型：snapshot，快照备份；logic，逻辑备份</p>
    */
   BackupType?: string
   /**
-   * 备份方式：auto，自动备份；manual，手动备份
+   * <p>备份方式：auto，自动备份；manual，手动备份</p>
    */
   BackupMethod?: string
   /**
-   * 备份文件状态：success：备份成功；fail：备份失败；creating：备份文件创建中；deleting：备份文件删除中
+   * <p>备份文件状态：success：备份成功；fail：备份失败；creating：备份文件创建中；deleting：备份文件删除中</p>
    */
   BackupStatus?: string
   /**
-   * 备份文件时间
+   * <p>备份文件时间</p>
    */
   SnapshotTime?: string
   /**
-   * 备份ID
+   * <p>备份ID</p>
    */
   BackupId?: number
   /**
-   * 快照类型，可选值：full，全量；increment，增量
+   * <p>快照类型，可选值：full，全量；increment，增量</p>
    */
   SnapShotType?: string
   /**
-   * 备份文件备注
+   * <p>备份文件备注</p>
    */
   BackupName?: string
   /**
-   * 投递状态
+   * <p>投递状态</p>
    */
   CopyStatus?: string
   /**
-   * 秘钥id
+   * <p>秘钥id</p>
    */
   EncryptKeyId?: string
   /**
-   * 秘钥地域
+   * <p>秘钥地域</p>
    */
   EncryptRegion?: string
   /**
-   * 保险箱信息
+   * <p>保险箱信息</p>
    */
   VaultInfos?: Array<VaultInfo>
+  /**
+   * <p>备份周期策略</p>
+   */
+  BackupPeriodStrategy?: string
 }
 
 /**
@@ -1412,6 +1416,20 @@ export interface DescribeLibraDBInstanceSpecsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 稀疏备份配置
+ */
+export interface SparseBackupConfig {
+  /**
+   * 稀疏备份开关：ON/OFF
+   */
+  SparseBackupSwitch?: string
+  /**
+   * 稀疏备份策略列表（1-3条）
+   */
+  SparseBackupConfigInfos?: Array<SparseBackupConfigInfo>
 }
 
 /**
@@ -2057,6 +2075,20 @@ export interface SlowQueriesItem {
 数据库内核版本大于3.1.12
    */
   TrxCommitDelay?: number
+}
+
+/**
+ * 月份日期信息
+ */
+export interface MonthDay {
+  /**
+   * 月份信息
+   */
+  Month: number
+  /**
+   * 日期信息
+   */
+  Day: number
 }
 
 /**
@@ -3922,6 +3954,22 @@ export interface AuditRuleFilters {
    * 单条审计规则。
    */
   RuleFilters: Array<RuleFilters>
+}
+
+/**
+ * 稀疏备份配置
+ */
+export interface SparseBackupConfigRsp {
+  /**
+   * 稀疏备份开关：ON/OFF
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SparseBackupSwitch?: string
+  /**
+   * 稀疏备份策略列表（1-3条）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SparseBackupConfigInfos?: Array<SparseBackupConfigInfo>
 }
 
 /**
@@ -5997,38 +6045,42 @@ export interface DescribeClustersResponse {
  */
 export interface DescribeBackupConfigResponse {
   /**
-   * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
+   * <p>表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200</p>
    */
   BackupTimeBeg?: number
   /**
-   * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
+   * <p>表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200</p>
    */
   BackupTimeEnd?: number
   /**
-   * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800
+   * <p>表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600<em>24</em>7=604800</p>
    */
   ReserveDuration?: number
   /**
-   * 备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份
+   * <p>备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份</p>
    */
   BackupFreq?: Array<string>
   /**
-   * 备份方式，logic-逻辑备份，snapshot-快照备份
+   * <p>备份方式，logic-逻辑备份，snapshot-快照备份</p>
    */
   BackupType?: string
   /**
-   * 跨地域逻辑备份配置修改时间
+   * <p>跨地域逻辑备份配置修改时间</p>
    */
   LogicCrossRegionsConfigUpdateTime?: string
   /**
-   * 自动逻辑备份配置
+   * <p>自动逻辑备份配置</p>
    */
   LogicBackupConfig?: LogicBackupConfigInfo
   /**
-   * 二级快照备份配置信息
+   * <p>二级快照备份配置信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotSecondaryBackupConfig?: BackupConfigInfo
+  /**
+   * <p>稀疏备份配置</p>
+   */
+  SparseBackupConfig?: SparseBackupConfigRsp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7086,6 +7138,10 @@ export interface DeliverSummary {
    * 投递者名称
    */
   DeliverConsumerName?: string
+  /**
+   * 投递异常错误
+   */
+  DeliverError?: string
 }
 
 /**
@@ -8169,41 +8225,45 @@ export interface OpenClusterTransparentEncryptResponse {
  */
 export interface ModifyBackupConfigRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
+   * <p>表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200</p>
    */
   BackupTimeBeg?: number
   /**
-   * 表示全备结束时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
+   * <p>表示全备结束时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200</p>
    */
   BackupTimeEnd?: number
   /**
-   * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600*24*7=604800，最大为158112000
+   * <p>表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600<em>24</em>7=604800，最大为158112000</p>
    */
   ReserveDuration?: number
   /**
-   * 该参数目前不支持修改，无需填写。备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份
+   * <p>该参数目前不支持修改，无需填写。备份频率，长度为7的数组，分别对应周一到周日的备份方式，full-全量备份，increment-增量备份</p>
    */
   BackupFreq?: Array<string>
   /**
-   * 该参数目前不支持修改，无需填写。
+   * <p>该参数目前不支持修改，无需填写。</p>
    */
   BackupType?: string
   /**
-   * 逻辑备份配置
+   * <p>逻辑备份配置</p>
    */
   LogicBackupConfig?: LogicBackupConfigInfo
   /**
-   * 是否删除自动逻辑备份
+   * <p>是否删除自动逻辑备份</p>
    */
   DeleteAutoLogicBackup?: boolean
   /**
-   * 二级快照备份参数
+   * <p>二级快照备份参数</p>
    */
   SnapshotSecondaryBackupConfig?: SnapshotBackupConfig
+  /**
+   * <p>稀疏备份配置</p>
+   */
+  SparseBackupConfig?: SparseBackupConfig
 }
 
 /**
@@ -8477,7 +8537,7 @@ export interface CloseProxyEndPointResponse {
  */
 export interface DescribeBackupConfigRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
 }
@@ -10269,6 +10329,24 @@ export interface CloseAuditServiceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 稀疏备份周期信息
+ */
+export interface SparsePeriodTime {
+  /**
+   * 按周：星期几列表，1-7，1=周一，7=周日（仅 weekly 周期使用，最多7个）
+   */
+  WeekDays?: Array<number | bigint>
+  /**
+   * 按月：日期列表，1-31（仅 monthly 周期使用，最多7个）
+   */
+  Days?: Array<number | bigint>
+  /**
+   * 按年：月日组合列表（仅 yearly 周期使用，最多7个）
+   */
+  MonthDays?: Array<MonthDay>
 }
 
 /**
@@ -14341,6 +14419,32 @@ export interface ModifyClusterPasswordComplexityRequest {
    * 数据字典
    */
   ValidatePasswordDictionary?: Array<string>
+}
+
+/**
+ * 稀疏备份策略配置信息
+ */
+export interface SparseBackupConfigInfo {
+  /**
+   * 操作类型:add,modify,remove
+   */
+  OpType: string
+  /**
+   * 配置 ID
+   */
+  ConfigId?: string
+  /**
+   * 周期策略类型：weekly/monthly/yearly
+   */
+  SparsePeriodConfig?: string
+  /**
+   * 周期时间配置
+   */
+  SparsePeriodTime?: SparsePeriodTime
+  /**
+   * 保留天数（7-7320天，最长20年）
+   */
+  SparseBackupSaveDays?: number
 }
 
 /**

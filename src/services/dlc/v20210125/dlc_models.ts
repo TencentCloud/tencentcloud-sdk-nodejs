@@ -5202,306 +5202,313 @@ export interface FavorInfo {
  */
 export interface TaskFullRespInfo {
   /**
-   * 任务所属Database的名称。
+   * <p>任务所属Database的名称。</p>
    */
   DatabaseName?: string
   /**
-   * 任务数据量。
+   * <p>任务数据量。</p>
    */
   DataAmount?: number
   /**
-   * 任务Id。
+   * <p>任务Id。</p>
    */
   Id?: string
   /**
-   * 计算耗时，单位： ms
+   * <p>计算耗时，单位： ms</p>
    */
   UsedTime?: number
   /**
-   * 任务输出路径。
+   * <p>任务输出路径。</p>
    */
   OutputPath?: string
   /**
-   * 任务创建时间。
+   * <p>任务创建时间。</p>
    */
   CreateTime?: string
   /**
-   * 任务状态：0 初始化， 1 执行中， 2 执行成功，3 数据写入中，4 排队中。-1 执行失败，-3 已取消。
+   * <p>任务状态：0 初始化， 1 执行中， 2 执行成功，3 数据写入中，4 排队中。-1 执行失败，-3 已取消。</p>
    */
   State?: number
   /**
-   * 任务SQL类型，DDL|DML等
+   * <p>任务SQL类型，DDL|DML等</p>
    */
   SQLType?: string
   /**
-   * 任务SQL语句
+   * <p>任务SQL语句</p>
    */
   SQL?: string
   /**
-   * 结果是否过期。
+   * <p>结果是否过期。</p>
    */
   ResultExpired?: boolean
   /**
-   * 数据影响统计信息。
+   * <p>数据影响统计信息。</p>
    */
   RowAffectInfo?: string
   /**
-   * 任务结果数据表。
+   * <p>任务结果数据表。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataSet?: string
   /**
-   * 失败信息, 例如：errorMessage。该字段已废弃。
+   * <p>失败信息, 例如：errorMessage。该字段已废弃。</p>
    */
   Error?: string
   /**
-   * 任务执行进度num/100(%)
+   * <p>任务执行进度num/100(%)</p>
    */
   Percentage?: number
   /**
-   * 任务执行输出信息。
+   * <p>任务执行输出信息。</p>
    */
   OutputMessage?: string
   /**
-   * 执行SQL的引擎类型
+   * <p>执行SQL的引擎类型</p>
    */
   TaskType?: string
   /**
-   * 任务进度明细
+   * <p>任务进度明细</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProgressDetail?: string
   /**
-   * 任务结束时间
+   * <p>任务结束时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
-   * 计算资源id
+   * <p>计算资源id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataEngineId?: string
   /**
-   * 执行sql的子uin
+   * <p>执行sql的子uin</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OperateUin?: string
   /**
-   * 计算资源名字
+   * <p>计算资源名字</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataEngineName?: string
   /**
-   * 导入类型是本地导入还是cos
+   * <p>导入类型是本地导入还是cos</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InputType?: string
   /**
-   * 导入配置
+   * <p>导入配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InputConf?: string
   /**
-   * 数据条数
+   * <p>数据条数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataNumber?: number
   /**
-   * 查询数据能不能下载
+   * <p>查询数据能不能下载</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CanDownload?: boolean
   /**
-   * 用户别名
+   * <p>用户别名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserAlias?: string
   /**
-   * spark应用作业名
+   * <p>spark应用作业名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SparkJobName?: string
   /**
-   * spark应用作业Id
+   * <p>spark应用作业Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SparkJobId?: string
   /**
-   * spark应用入口jar文件
+   * <p>spark应用入口jar文件</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SparkJobFile?: string
   /**
-   * spark ui url
+   * <p>spark ui url</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UiUrl?: string
   /**
-   * 任务耗时，单位： ms
+   * <p>任务耗时，单位： ms</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalTime?: number
   /**
-   * spark app job执行task的程序入口参数
+   * <p>spark app job执行task的程序入口参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CmdArgs?: string
   /**
-   * 集群镜像大版本名称
+   * <p>集群镜像大版本名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageVersion?: string
   /**
-   * driver规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
+   * <p>driver规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DriverSize?: string
   /**
-   * executor规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
+   * <p>executor规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorSize?: string
   /**
-   * 指定executor数量，最小值为1，最大值小于集群规格
+   * <p>指定executor数量，最小值为1，最大值小于集群规格</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorNums?: number
   /**
-   * 指定executor max数量（动态配置场景下），最小值为1，最大值小于集群规格（当ExecutorMaxNumbers小于ExecutorNums时，改值设定为ExecutorNums）
+   * <p>指定executor max数量（动态配置场景下），最小值为1，最大值小于集群规格（当ExecutorMaxNumbers小于ExecutorNums时，改值设定为ExecutorNums）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorMaxNumbers?: number
   /**
-   * 任务公共指标数据
+   * <p>任务公共指标数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CommonMetrics?: CommonMetrics
   /**
-   * spark任务指标数据
+   * <p>spark任务指标数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SparkMonitorMetrics?: SparkMonitorMetrics
   /**
-   * presto任务指标数据
+   * <p>presto任务指标数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PrestoMonitorMetrics?: PrestoMonitorMetrics
   /**
-   * 结果文件格式：默认为csv
+   * <p>结果文件格式：默认为csv</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultFormat?: string
   /**
-   * 引擎类型，SparkSQL：SparkSQL 引擎；SparkBatch：Spark作业引擎；PrestoSQL：Presto引擎
+   * <p>引擎类型，SparkSQL：SparkSQL 引擎；SparkBatch：Spark作业引擎；PrestoSQL：Presto引擎</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EngineTypeDetail?: string
   /**
-   * spark引擎资源组名称
+   * <p>spark引擎资源组名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupName?: string
   /**
-   * 任务来源信息,如thirdPartyApi,dataExploration, sparkAppTask等
+   * <p>任务来源信息,如thirdPartyApi,dataExploration, sparkAppTask等</p>
    */
   Source?: string
   /**
-   * 子渠道信息，一般由第三方调用定义
+   * <p>子渠道信息，一般由第三方调用定义</p>
    */
   SourceExtra?: string
   /**
-   * 创建人uin
+   * <p>创建人uin</p>
    */
   CreatorUin?: string
   /**
-   * 创建人名字
+   * <p>创建人名字</p>
    */
   CreatorAlias?: string
   /**
-   * 引擎参数
+   * <p>引擎参数</p>
    */
   CustomizedConf?: string
   /**
-   * 单位秒，累计 CPU* 秒 ( 累计 CPU * 时 = 累计 CPU* 秒/ 3600)，统计参与计算所用 Spark Executor 每个 core 的 CPU 执行时长总和
-示例值：4329
+   * <p>单位秒，累计 CPU* 秒 ( 累计 CPU * 时 = 累计 CPU* 秒/ 3600)，统计参与计算所用 Spark Executor 每个 core 的 CPU 执行时长总和<br>示例值：4329</p>
    */
   TaskTimeSum?: number
   /**
-   * 引擎执行时间
+   * <p>引擎执行时间</p>
    */
   StageStartTime?: number
   /**
-   * 数据扫描条数
+   * <p>数据扫描条数</p>
    */
   InputRecordsSum?: number
   /**
-   * 健康状态
+   * <p>健康状态</p>
    */
   AnalysisStatusType?: number
   /**
-   * 输出总行数
+   * <p>输出总行数</p>
    */
   OutputRecordsSum?: number
   /**
-   * 输出总大小
+   * <p>输出总大小</p>
    */
   OutputBytesSum?: number
   /**
-   * 输出文件个数
+   * <p>输出文件个数</p>
    */
   OutputFilesNum?: number
   /**
-   * 输出小文件个数
+   * <p>输出小文件个数</p>
    */
   OutputSmallFilesNum?: number
   /**
-   * 数据shuffle行数
+   * <p>数据shuffle行数</p>
    */
   ShuffleReadRecordsSum?: number
   /**
-   * 数据shuffle大小
+   * <p>数据shuffle大小</p>
    */
   ShuffleReadBytesSum?: number
   /**
-   * spark作业id
+   * <p>spark作业id</p>
    */
   SparkAppId?: string
   /**
-   * 任务大类，DLC2.0中任务区分为两大类，sql任务和作业任务
+   * <p>任务大类，DLC2.0中任务区分为两大类，sql任务和作业任务</p>
    */
   TaskCategory?: string
   /**
-   * 任务名称
+   * <p>任务名称</p>
    */
   TaskName?: string
   /**
-   * 引擎类型，用做任务详情页跳转引擎tab
+   * <p>引擎类型，用做任务详情页跳转引擎tab</p>
    */
   EngineType?: string
   /**
-   * 引擎是否支持洞察数据采集
+   * <p>引擎是否支持洞察数据采集</p>
    */
   EngineHasListenerConfig?: boolean
   /**
-   * spark引擎资源组id
+   * <p>spark引擎资源组id</p>
    */
   ResourceGroupId?: string
   /**
-   * 任务计算耗时
+   * <p>任务计算耗时</p>
    */
   JobTimeSum?: number
   /**
-   * 任务启动耗时
+   * <p>任务启动耗时</p>
    */
   LaunchTime?: string
   /**
-   * Gpu Driver 规格
+   * <p>Gpu Driver 规格</p>
    */
   GpuDriverSize?: number
   /**
-   * Gpu Executor 规格
+   * <p>Gpu Executor 规格</p>
    */
   GpuExecutorSize?: number
+  /**
+   * <p>ShuffleWrite数据量</p>
+   */
+  ShuffleWriteBytesSum?: number
+  /**
+   * <p>活跃core</p>
+   */
+  ActiveCore?: number
 }
 
 /**
@@ -5703,74 +5710,77 @@ export interface DetachUserPolicyResponse {
  */
 export interface AnalysisTaskResults {
   /**
-   * 任务Id
+   * <p>任务Id</p>
    */
   Id?: string
   /**
-   * 任务创建时间，毫秒时间戳
+   * <p>任务创建时间，毫秒时间戳</p>
    */
   InstanceStartTime?: number
   /**
-   * 任务结束时间，毫秒时间戳
+   * <p>任务结束时间，毫秒时间戳</p>
    */
   InstanceCompleteTime?: number
   /**
-   * 任务状态：0 初始化， 1 执行中， 2 执行成功，3 数据写入中，4 排队中。-1 执行失败，-3 已取消。
+   * <p>任务状态：0 初始化， 1 执行中， 2 执行成功，3 数据写入中，4 排队中。-1 执行失败，-3 已取消。</p>
    */
   State?: number
   /**
-   * 任务SQL语句
+   * <p>任务SQL语句</p>
    */
   SQL?: string
   /**
-   * 计算资源名字
+   * <p>计算资源名字</p>
    */
   DataEngineName?: string
   /**
-   * 单位毫秒，引擎内执行耗时, 反映真正用于计算所需的耗时，即从  Spark 任务第一个 Task  开始执行到任务结束之间的耗时。
-具体的：会统计任务的每个 Spark Stage 第一个 Task 到最后一个 Task 完成时长之和，不包含任务开始的排队耗时（即剔除从任务提交到 Spark Task 开始执行之间的调度等其他耗时），也不包含任务执行过程中多个 Spark Stage 之间因 executor 资源不足而等待执行 Task 所消耗的时间。
+   * <p>单位毫秒，引擎内执行耗时, 反映真正用于计算所需的耗时，即从  Spark 任务第一个 Task  开始执行到任务结束之间的耗时。<br>具体的：会统计任务的每个 Spark Stage 第一个 Task 到最后一个 Task 完成时长之和，不包含任务开始的排队耗时（即剔除从任务提交到 Spark Task 开始执行之间的调度等其他耗时），也不包含任务执行过程中多个 Spark Stage 之间因 executor 资源不足而等待执行 Task 所消耗的时间。</p>
    */
   JobTimeSum?: number
   /**
-   * 单位秒，累计 CPU* 秒 ( 累计 CPU * 时 = 累计 CPU* 秒/ 3600)，统计参与计算所用 Spark Executor 每个 core 的 CPU 执行时长总和
+   * <p>单位秒，累计 CPU* 秒 ( 累计 CPU * 时 = 累计 CPU* 秒/ 3600)，统计参与计算所用 Spark Executor 每个 core 的 CPU 执行时长总和</p>
    */
   TaskTimeSum?: number
   /**
-   * 数据扫描总行数
+   * <p>数据扫描总行数</p>
    */
   InputRecordsSum?: number
   /**
-   * 数据扫描总 bytes
+   * <p>数据扫描总 bytes</p>
    */
   InputBytesSum?: number
   /**
-   * 输出总行数
+   * <p>输出总行数</p>
    */
   OutputRecordsSum?: number
   /**
-   * 输出总 bytes
+   * <p>输出总 bytes</p>
    */
   OutputBytesSum?: number
   /**
-   * shuffle read 总 bytes
+   * <p>shuffle read 总 bytes</p>
    */
   ShuffleReadBytesSum?: number
   /**
-   * shuffle read 总行数
+   * <p>shuffle read 总行数</p>
    */
   ShuffleReadRecordsSum?: number
   /**
-   * 洞察结果类型分类，一个 json 数组，有如下几种类型：SPARK-StageScheduleDelay（资源抢占）, SPARK-ShuffleFailure（Shuffle异常）, SPARK-SlowTask（慢task）, SPARK-DataSkew（数据倾斜）, SPARK-InsufficientResource（磁盘或内存不足）
+   * <p>洞察结果类型分类，一个 json 数组，有如下几种类型：SPARK-StageScheduleDelay（资源抢占）, SPARK-ShuffleFailure（Shuffle异常）, SPARK-SlowTask（慢task）, SPARK-DataSkew（数据倾斜）, SPARK-InsufficientResource（磁盘或内存不足）</p>
    */
   AnalysisStatus?: string
   /**
-   * 任务输出文件总数
+   * <p>任务输出文件总数</p>
    */
   OutputFilesNum?: number
   /**
-   * 任务输出小文件总数
+   * <p>任务输出小文件总数</p>
    */
   OutputSmallFilesNum?: number
+  /**
+   * <p>shuffle write 总 Bytes 大小</p><p>单位：Bytes</p><p>默认值：无</p>
+   */
+  ShuffleWriteBytesSum?: number
 }
 
 /**

@@ -112,6 +112,7 @@ import {
   HybridPkg,
   IpAccessControlData,
   PostAttackDownloadTaskRequest,
+  SSEClientMessage,
   DeleteBatchCustomWhiteRuleRequest,
   ApiSecSceneRule,
   DescribeHostResponse,
@@ -204,7 +205,7 @@ import {
   BatchOperateUserSignatureRulesResponse,
   TopicInfo,
   ModifyAreaBanAreasResponse,
-  ModifyAntiFakeUrlStatusRequest,
+  GenerateLLMSecAnswerRequest,
   ApiAsset,
   DescribeOwaspRulesRequest,
   DescribeCCRuleListRequest,
@@ -288,6 +289,7 @@ import {
   DescribeUserSignatureRuleRequest,
   DeleteOwaspRuleStatusResponse,
   ModifyProtectionStatusResponse,
+  GenerateLLMSecAnswerResponse,
   CreateExportResponse,
   DescribeUserClbWafRegionsRequest,
   DescribePostCKafkaFlowsRequest,
@@ -536,6 +538,7 @@ import {
   GetAttackHistogramRequest,
   RuleList,
   SecretInfo,
+  ImageResult,
   DescribeAttackTypeRequest,
   ModifyCustomWhiteRuleRequest,
   DeleteCustomWhiteRuleRequest,
@@ -576,6 +579,7 @@ import {
   ModifyCustomWhiteRuleStatusResponse,
   AccessFieldValueRatioInfo,
   BatchIpAccessControlData,
+  ModifyAntiFakeUrlStatusRequest,
   DescribePeakValueRequest,
   BotQPS,
   DestroyPostCLSFlowRequest,
@@ -1113,6 +1117,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIpHitItemsResponse) => void
   ): Promise<DescribeIpHitItemsResponse> {
     return this.request("DescribeIpHitItems", req, cb)
+  }
+
+  /**
+   * api分析页面开关
+   */
+  async ModifyApiAnalyzeStatus(
+    req: ModifyApiAnalyzeStatusRequest,
+    cb?: (error: string, rep: ModifyApiAnalyzeStatusResponse) => void
+  ): Promise<ModifyApiAnalyzeStatusResponse> {
+    return this.request("ModifyApiAnalyzeStatus", req, cb)
   }
 
   /**
@@ -2260,13 +2274,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * api分析页面开关
+   * 大模型安全代答生成接口。当用户输入或模型输出命中内容安全风险检测规则时，调用本接口由大模型实时生成安全合规的替代回答。
    */
-  async ModifyApiAnalyzeStatus(
-    req: ModifyApiAnalyzeStatusRequest,
-    cb?: (error: string, rep: ModifyApiAnalyzeStatusResponse) => void
-  ): Promise<ModifyApiAnalyzeStatusResponse> {
-    return this.request("ModifyApiAnalyzeStatus", req, cb)
+  async GenerateLLMSecAnswer(
+    req: GenerateLLMSecAnswerRequest,
+    cb?: (error: string, rep: GenerateLLMSecAnswerResponse) => void
+  ): Promise<GenerateLLMSecAnswerResponse> {
+    return this.request("GenerateLLMSecAnswer", req, cb)
   }
 
   /**

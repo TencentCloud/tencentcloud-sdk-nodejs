@@ -4524,7 +4524,7 @@ export interface StopScreenshotTaskResponse {
  */
 export interface CreateLivePadTemplateResponse {
   /**
-   * 模板Id。
+   * <p>模板Id。</p>
    */
   TemplateId?: number
   /**
@@ -5853,39 +5853,33 @@ export interface BatchDomainOperateErrors {
  */
 export interface CreateLivePadTemplateRequest {
   /**
-   * 模板名称。
-长度上限：255字节。
-仅支持中文、英文、数字、_、-。
+   * <p>模板名称。<br>长度上限：255字节。<br>仅支持中文、英文、数字、_、-。</p>
    */
   TemplateName: string
   /**
-   * 垫片内容。
+   * <p>垫片内容。</p>
    */
   Url: string
   /**
-   * 描述信息。
-长度上限：1024字节。
-仅支持中文、英文、数字、_、-。
+   * <p>描述信息。<br>长度上限：1024字节。<br>仅支持中文、英文、数字、_、-。</p>
    */
   Description?: string
   /**
-   * 断流等待时间。
-取值范围：0-30000。
-单位：ms。
+   * <p>断流等待时间。<br>取值范围：0-30000。<br>单位：ms。</p>
    */
   WaitDuration?: number
   /**
-   * 最大垫片时长。
-取值范围：0 - 正无穷。
-单位：ms。
+   * <p>最大垫片时长。<br>取值范围：0 - 正无穷。<br>单位：ms。</p>
    */
   MaxDuration?: number
   /**
-   * 垫片内容类型：
-1：图片，2：视频。
-默认值：1。
+   * <p>垫片内容类型：<br>1：图片，2：视频。<br>默认值：1。</p>
    */
   Type?: number
+  /**
+   * <p>断流垫片触发条件</p><p>枚举值：</p><ul><li>0： 主动及异常断流</li><li>1： 异常断流</li></ul><p>默认值：0</p>
+   */
+  TriggerCondition?: number
 }
 
 /**
@@ -12714,41 +12708,37 @@ export interface CreateLiveTranscodeTemplateResponse {
  */
 export interface ModifyLivePadTemplateRequest {
   /**
-   * 模板id。
+   * <p>模板id。</p>
    */
   TemplateId: number
   /**
-   * 垫片内容。
+   * <p>垫片内容。</p>
    */
   Url: string
   /**
-   * 断流等待时间。
-取值范围：0-30000。
-单位：ms。
+   * <p>断流等待时间。<br>取值范围：0-30000。<br>单位：ms。</p>
    */
   WaitDuration: number
   /**
-   * 最大垫片时长。
-取值范围：0 - 正无穷。
-单位：ms。
+   * <p>最大垫片时长。<br>取值范围：0 - 正无穷。<br>单位：ms。</p>
    */
   MaxDuration: number
   /**
-   * 模板名称。
-长度上限：255字节。
-仅支持中文、英文、数字、_、-。
+   * <p>模板名称。<br>长度上限：255字节。<br>仅支持中文、英文、数字、_、-。</p>
    */
   TemplateName: string
   /**
-   * 描述信息。
-长度上限：1024字节。
-仅支持中文、英文、数字、_、-。
+   * <p>描述信息。<br>长度上限：1024字节。<br>仅支持中文、英文、数字、_、-。</p>
    */
   Description?: string
   /**
-   * 垫片内容类型： 1：图片，2：视频。 默认值：1。
+   * <p>垫片内容类型： 1：图片，2：视频。 默认值：1。</p>
    */
   Type?: number
+  /**
+   * <p>断流垫片触发条件</p><p>枚举值：</p><ul><li>0： 主动及异常断流</li><li>1： 异常断流</li></ul><p>默认值：0</p>
+   */
+  TriggerCondition?: number
 }
 
 /**

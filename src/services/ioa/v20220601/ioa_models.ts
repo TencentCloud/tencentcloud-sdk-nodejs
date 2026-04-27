@@ -698,207 +698,207 @@ export interface CreateDeviceTaskRequest {
  */
 export interface DeviceDetail {
   /**
-   * 设备ID
+   * <p>设备ID</p>
    */
   Id?: number
   /**
-   * 设备唯一标识码，在ioa中每个设备有唯一标识码
+   * <p>设备唯一标识码，在ioa中每个设备有唯一标识码</p>
    */
   Mid?: string
   /**
-   * 终端名（设备名）
+   * <p>终端名（设备名）</p>
    */
   Name?: string
   /**
-   * 设备所在分组ID
+   * <p>设备所在分组ID</p>
    */
   GroupId?: number
   /**
-   * OS平台，0：Windows 、1： Linux、 2：macOS 、4： Android、 5: iOS。默认是0
+   * <p>OS平台，0：Windows 、1： Linux、 2：macOS 、4： Android、 5: iOS。默认是0</p>
    */
   OsType?: number
   /**
-   * 设备IP地址（出口IP）
+   * <p>设备IP地址（出口IP）</p>
    */
   Ip?: string
   /**
-   * 在线状态，2：在线、0或者1:离线
+   * <p>在线状态，2：在线、0或者1:离线</p>
    */
   OnlineStatus?: number
   /**
-   * 客户端版本号-大整数
+   * <p>客户端版本号-大整数</p>
    */
   Version?: string
   /**
-   * 客户端版本号-点分字符串
+   * <p>客户端版本号-点分字符串</p>
    */
   StrVersion?: string
   /**
-   * 首次在线时间
+   * <p>首次在线时间</p>
    */
   Itime?: string
   /**
-   * 最后一次在线时间
+   * <p>最后一次在线时间</p>
    */
   ConnActiveTime?: string
   /**
-   * 设备是否加锁 ，1：锁定 0或者2：未锁定。
+   * <p>设备是否加锁 ，1：锁定 0或者2：未锁定。</p>
    */
   Locked?: number
   /**
-   * 设备本地IP列表, 包括IP
+   * <p>设备本地IP列表, 包括IP</p>
    */
   LocalIpList?: string
   /**
-   * 宿主机id（需要宿主机也安装iOA才能显示）
+   * <p>宿主机id（需要宿主机也安装iOA才能显示）</p>
    */
   HostId?: number
   /**
-   * 设备所属分组名
+   * <p>设备所属分组名</p>
    */
   GroupName?: string
   /**
-   * 设备所属分组路径
+   * <p>设备所属分组路径</p>
    */
   GroupNamePath?: string
   /**
-   * 未修复高危漏洞数(只支持32位)
+   * <p>未修复高危漏洞数(只支持32位)</p>
    */
   CriticalVulListCount?: number
   /**
-   * 操作系统名称
+   * <p>操作系统名称</p>
    */
   Os?: string
   /**
-   * 操作系统位数
+   * <p>操作系统位数</p>
    */
   OsBits?: number
   /**
-   * 操作系统版本
+   * <p>操作系统版本</p>
    */
   OsVersion?: string
   /**
-   * 操作系统语言
+   * <p>操作系统语言</p>
    */
   OsLanguage?: string
   /**
-   * 操作系统安装时间
+   * <p>操作系统安装时间</p>
    */
   OsInstallDate?: string
   /**
-   * 设备名，和Name相同
+   * <p>设备名，和Name相同</p>
    */
   ComputerName?: string
   /**
-   * 登录域名
+   * <p>登录域名</p>
    */
   DomainName?: string
   /**
-   * MAC地址
+   * <p>MAC地址</p>
    */
   MacAddr?: string
   /**
-   * 漏洞数
+   * <p>漏洞数</p>
    */
   VulCount?: number
   /**
-   * 病毒风险数
+   * <p>病毒风险数</p>
    */
   RiskCount?: number
   /**
-   * 病毒库版本
+   * <p>病毒库版本</p>
    */
   VirusVer?: string
   /**
-   * 漏洞库版本
+   * <p>漏洞库版本</p>
    */
   VulVersion?: string
   /**
-   * 系统修复引擎版本
+   * <p>系统修复引擎版本</p>
    */
   SysRepVersion?: string
   /**
-   * 高危补丁列表
+   * <p>高危补丁列表</p>
    */
   VulCriticalList?: Array<string>
   /**
-   * 标签
+   * <p>标签</p>
    */
   Tags?: string
   /**
-   * 终端用户名
+   * <p>终端用户名</p>
    */
   UserName?: string
   /**
-   * 防火墙状态，不等于0表示开启
+   * <p>防火墙状态，不等于0表示开启</p>
    */
   FirewallStatus?: number
   /**
-   * SN序列号
+   * <p>SN序列号</p>
    */
   SerialNum?: string
   /**
-   * 设备管控策略版本
+   * <p>设备管控策略版本</p>
    */
   DeviceStrategyVer?: string
   /**
-   * NGN策略版本
+   * <p>NGN策略版本</p>
    */
   NGNStrategyVer?: string
   /**
-   * 最近登录账户的账号(账号系统用户账号)
+   * <p>最近登录账户的账号(账号系统用户账号)</p>
    */
   IOAUserName?: string
   /**
-   * 设备管控新策略
+   * <p>设备管控新策略</p>
    */
   DeviceNewStrategyVer?: string
   /**
-   * NGN策略新版本
+   * <p>NGN策略新版本</p>
    */
   NGNNewStrategyVer?: string
   /**
-   * 宿主机名称（需要宿主机也安装iOA才能显示）
+   * <p>宿主机名称（需要宿主机也安装iOA才能显示）</p>
    */
   HostName?: string
   /**
-   * 主板序列号
+   * <p>主板序列号</p>
    */
   BaseBoardSn?: string
   /**
-   * 绑定账户名称
+   * <p>绑定账户名称</p>
    */
   AccountUsers?: string
   /**
-   * 身份策略版本
+   * <p>身份策略版本</p>
    */
   IdentityStrategyVer?: string
   /**
-   * 身份策略新版本
+   * <p>身份策略新版本</p>
    */
   IdentityNewStrategyVer?: string
   /**
-   * 最近登录账号部门
+   * <p>最近登录账号部门</p>
    */
   AccountGroupName?: string
   /**
-   * 最近登录账户的姓名(账号系统用户姓名)
+   * <p>最近登录账户的姓名(账号系统用户姓名)</p>
    */
   AccountName?: string
   /**
-   * 账号组id
+   * <p>账号组id</p>
    */
   AccountGroupId?: number
   /**
-   * 是否开启录屏权限，仅macOS， 0： 未开启 、1： 开启
+   * <p>是否开启录屏权限，仅macOS， 0： 未开启 、1： 开启</p>
    */
   ScreenRecordingPermission?: number
   /**
-   * 是否开启磁盘访问权限，仅macOS， 0： 未开启、 1： 开启
+   * <p>是否开启磁盘访问权限，仅macOS， 0： 未开启、 1： 开启</p>
    */
   DiskAccessPermission?: number
   /**
-   * 终端备注名
+   * <p>终端备注名</p>
    */
   RemarkName?: string
 }
@@ -930,6 +930,10 @@ export interface DescribeSoftCensusListByDeviceRequest {
  */
 export interface DescribeLocalAccountsRequest {
   /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
    * 查询条件：过滤或排序
 1、UserName，string类型，姓名
 是否必填：否
@@ -940,6 +944,10 @@ export interface DescribeLocalAccountsRequest {
 过滤支持：是，支持eq、like、ilike
 排序支持：否
 3、Phone，string类型，手机号
+是否必填：否
+过滤支持：是，支持eq、like、ilike
+排序支持：否
+4、Email，string类型，邮箱
 是否必填：否
 过滤支持：是，支持eq、like、ilike
 排序支持：否

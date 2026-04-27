@@ -24,12 +24,14 @@ import {
   DescribeAccountPrivilegesResponse,
   DescribeDatabasesRequest,
   DescribeDBXlogsRequest,
+  DescribeAuditLogsRequest,
   DescribeMaintainTimeWindowRequest,
   DescribeAccountsRequest,
   DeleteReadOnlyGroupResponse,
   OpenDBExtranetAccessRequest,
   CreateInstancesRequest,
   SpecItemInfo,
+  ModifyDBInstanceSSLConfigRequest,
   ParameterTemplate,
   CreateDBInstanceNetworkAccessResponse,
   DescribeAvailableRecoveryTimeResponse,
@@ -51,18 +53,19 @@ import {
   CreateAccountRequest,
   DescribeTasksResponse,
   DescribeMaintainTimeWindowResponse,
-  DescribeDefaultParametersRequest,
+  AuditLogFilter,
   DescribeDedicatedClustersResponse,
   RenewInstanceRequest,
   DescribeBackupOverviewRequest,
   DescribeRegionsResponse,
-  ModifyBaseBackupExpireTimeResponse,
+  DescribeAuditInstanceListResponse,
   ModifyBackupDownloadRestrictionRequest,
   DBInstanceNetInfo,
   BackupDownloadRestriction,
   ModifyDBInstanceDeploymentRequest,
   DeleteReadOnlyGroupNetworkAccessRequest,
-  DescribeBackupDownloadRestrictionRequest,
+  PolicyRule,
+  DescribeBackupPlansRequest,
   ZoneInfo,
   CreateDatabaseRequest,
   Tag,
@@ -83,12 +86,15 @@ import {
   DescribeDBInstanceParametersRequest,
   DescribeOrdersResponse,
   DescribeBackupDownloadURLResponse,
+  ModifyBaseBackupExpireTimeResponse,
   ModifyMaintainTimeWindowResponse,
   InquiryPriceCreateDBInstancesResponse,
+  DeleteAuditLogFileResponse,
   Version,
   CreateDBInstanceNetworkAccessRequest,
   ModifySwitchTimePeriodResponse,
   TaskSet,
+  AuditLogFile,
   InquiryPriceCreateDBInstancesRequest,
   DescribeDefaultParametersResponse,
   DescribeBackupPlansResponse,
@@ -105,6 +111,7 @@ import {
   ParamVersionRelation,
   DescribeLogBackupsRequest,
   ModifyDBInstanceParametersRequest,
+  CreateAuditLogFileResponse,
   ModifyPrivilege,
   NetworkAccess,
   DescribeDBInstanceAttributeRequest,
@@ -116,10 +123,11 @@ import {
   ParamSpecRelation,
   DatabaseObject,
   UpgradeDBInstanceKernelVersionRequest,
+  OpenAuditServiceRequest,
   SwitchDBInstancePrimaryResponse,
   ModifyReadOnlyDBInstanceWeightResponse,
   ModifyDBInstanceHAConfigRequest,
-  PgDeal,
+  DescribeAuditLogFilesResponse,
   DeleteReadOnlyGroupNetworkAccessResponse,
   DescribeBackupSummariesResponse,
   DescribeDBErrlogsRequest,
@@ -136,10 +144,13 @@ import {
   DescribeDBBackupsResponse,
   DescribeRegionsRequest,
   DescribeSlowQueryListResponse,
+  PgDeal,
   CreateReadOnlyGroupRequest,
   ModifyDBInstanceSSLConfigResponse,
   DescribeParamsEventResponse,
+  CloseAuditServiceResponse,
   ModifyDBInstanceSecurityGroupsRequest,
+  CloseAuditServiceRequest,
   DescribeDedicatedClustersRequest,
   CreateReadOnlyGroupNetworkAccessRequest,
   EventItem,
@@ -164,16 +175,19 @@ import {
   DescribeSlowQueryAnalysisRequest,
   ErrLogDetail,
   DestroyDBInstanceRequest,
+  InquiryPriceRenewDBInstanceRequest,
   DescribeBackupOverviewResponse,
   DescribeParameterTemplatesRequest,
   OpenAccountCAMRequest,
   DescribeClassesResponse,
+  LogFilter,
   DeleteDBInstanceNetworkAccessRequest,
   ModifyDBInstanceDeploymentResponse,
   UnlockAccountRequest,
   DBInstance,
   DeleteParameterTemplateResponse,
   ModifyReadOnlyDBInstanceWeightRequest,
+  DescribeAuditInstanceListRequest,
   ModifyAccountPrivilegesResponse,
   Database,
   DeleteReadOnlyGroupRequest,
@@ -182,15 +196,16 @@ import {
   RestartDBInstanceResponse,
   Filter,
   UpgradeDBInstanceMajorVersionResponse,
-  DescribeBaseBackupsResponse,
+  DescribeBackupDownloadURLRequest,
   ModifyParameterTemplateRequest,
   DescribeDBVersionsResponse,
-  ModifyDBInstanceSSLConfigRequest,
+  ModifyAuditServiceRequest,
   DatabasePrivilege,
   UnlockAccountResponse,
   ModifyDBInstanceSecurityGroupsResponse,
   DBNode,
   ModifyDBInstanceNameResponse,
+  UpgradeDBInstanceMajorVersionRequest,
   CloseDBExtranetAccessResponse,
   DescribeBackupDownloadRestrictionResponse,
   CreateReadOnlyDBInstanceRequest,
@@ -199,6 +214,7 @@ import {
   DescribeDatabasesResponse,
   DescribeProductConfigResponse,
   DescribeOrdersRequest,
+  OpenAuditServiceResponse,
   CloseDBExtranetAccessRequest,
   ModifyParameterTemplateResponse,
   DescribeEncryptionKeysRequest,
@@ -206,9 +222,10 @@ import {
   RebalanceReadOnlyGroupRequest,
   ModifyBackupPlanResponse,
   DeleteAccountRequest,
-  InquiryPriceRenewDBInstanceRequest,
+  AuditInstanceInfo,
   CreateReadOnlyGroupResponse,
   DeleteDBInstanceNetworkAccessResponse,
+  DeliverSummary,
   ModifyAccountPrivilegesRequest,
   ModifyDBInstanceParametersResponse,
   ModifyReadOnlyGroupConfigResponse,
@@ -221,9 +238,11 @@ import {
   ParamEntry,
   InquiryPriceUpgradeDBInstanceResponse,
   DisIsolateDBInstancesResponse,
+  ModifyDatabaseOwnerResponse,
   CreateParameterTemplateRequest,
   DescribeDBInstanceSSLConfigRequest,
-  ModifyDatabaseOwnerResponse,
+  CreateAuditLogFileRequest,
+  DeleteAuditLogFileRequest,
   ModifySwitchTimePeriodRequest,
   CreateAccountResponse,
   DescribeSlowQueryListRequest,
@@ -235,7 +254,7 @@ import {
   LockAccountRequest,
   DescribeDBInstancesResponse,
   DescribeDBInstanceSecurityGroupsRequest,
-  DescribeBackupPlansRequest,
+  DescribeBackupDownloadRestrictionRequest,
   ModifyBaseBackupExpireTimeRequest,
   ModifyDBInstanceHAConfigResponse,
   CreateDatabaseResponse,
@@ -244,6 +263,7 @@ import {
   DescribeSlowQueryAnalysisResponse,
   ModifyDBInstanceDeletionProtectionResponse,
   DedicatedCluster,
+  DescribeDefaultParametersRequest,
   DurationAnalysis,
   DescribeReadOnlyGroupsRequest,
   DescribeAccountPrivilegesRequest,
@@ -252,25 +272,27 @@ import {
   DescribeAccountsResponse,
   ModifyDBInstanceChargeTypeRequest,
   DescribeParameterTemplateAttributesResponse,
+  AuditLog,
   UpgradeDBInstanceKernelVersionResponse,
   DescribeDBVersionsRequest,
+  LogInstanceInfo,
   ModifyDBInstancesProjectRequest,
-  UpgradeDBInstanceMajorVersionRequest,
+  ModifyAuditServiceResponse,
   DestroyDBInstanceResponse,
   DescribeDBInstanceAttributeResponse,
   DeleteLogBackupRequest,
   DeleteBaseBackupResponse,
-  PolicyRule,
+  DescribeAuditLogFilesRequest,
   ModifyDBInstanceSpecResponse,
   RefreshAccountPasswordResponse,
-  DescribeBackupDownloadURLRequest,
+  DescribeBaseBackupsResponse,
   DescribeDBXlogsResponse,
   ModifyDBInstanceChargeTypeResponse,
   DescribeBaseBackupsRequest,
   DescribeEncryptionKeysResponse,
   CreateReadOnlyGroupNetworkAccessResponse,
   DeleteAccountResponse,
-  LogFilter,
+  DescribeAuditLogsResponse,
 } from "./postgres_models"
 
 /**
@@ -293,14 +315,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口（DescribeTasks）用于查询任务列表，展示异步任务的执行进度。
-注：本接口中展示的步骤为总结性步骤，可能伴随着版本迭代进行调整，不建议作为关键逻辑使用
-     */
-  async DescribeTasks(
-    req: DescribeTasksRequest,
-    cb?: (error: string, rep: DescribeTasksResponse) => void
-  ): Promise<DescribeTasksResponse> {
-    return this.request("DescribeTasks", req, cb)
+   * 本接口 (ModifyMaintainTimeWindow) 用于实例维护时间窗口的修改。
+   */
+  async ModifyMaintainTimeWindow(
+    req: ModifyMaintainTimeWindowRequest,
+    cb?: (error: string, rep: ModifyMaintainTimeWindowResponse) => void
+  ): Promise<ModifyMaintainTimeWindowResponse> {
+    return this.request("ModifyMaintainTimeWindow", req, cb)
   }
 
   /**
@@ -416,6 +437,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 关闭数据库实例的审计功能
+   */
+  async CloseAuditService(
+    req: CloseAuditServiceRequest,
+    cb?: (error: string, rep: CloseAuditServiceResponse) => void
+  ): Promise<CloseAuditServiceResponse> {
+    return this.request("CloseAuditService", req, cb)
+  }
+
+  /**
    * 本接口（DeleteParameterTemplate）主要用于删除某个参数模板。
    */
   async DeleteParameterTemplate(
@@ -433,6 +464,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBInstanceParametersResponse) => void
   ): Promise<DescribeDBInstanceParametersResponse> {
     return this.request("DescribeDBInstanceParameters", req, cb)
+  }
+
+  /**
+   * 创建审计日志文件
+   */
+  async CreateAuditLogFile(
+    req: CreateAuditLogFileRequest,
+    cb?: (error: string, rep: CreateAuditLogFileResponse) => void
+  ): Promise<CreateAuditLogFileResponse> {
+    return this.request("CreateAuditLogFile", req, cb)
   }
 
   /**
@@ -456,23 +497,24 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例安全组。
+   * 本接口（ModifyBackupDownloadRestriction）用于修改备份文件下载限制。
    */
-  async ModifyDBInstanceSecurityGroups(
-    req: ModifyDBInstanceSecurityGroupsRequest,
-    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
-  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
-    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
+  async ModifyBackupDownloadRestriction(
+    req: ModifyBackupDownloadRestrictionRequest,
+    cb?: (error: string, rep: ModifyBackupDownloadRestrictionResponse) => void
+  ): Promise<ModifyBackupDownloadRestrictionResponse> {
+    return this.request("ModifyBackupDownloadRestriction", req, cb)
   }
 
   /**
-   * 本接口 (ModifyMaintainTimeWindow) 用于实例维护时间窗口的修改。
-   */
-  async ModifyMaintainTimeWindow(
-    req: ModifyMaintainTimeWindowRequest,
-    cb?: (error: string, rep: ModifyMaintainTimeWindowResponse) => void
-  ): Promise<ModifyMaintainTimeWindowResponse> {
-    return this.request("ModifyMaintainTimeWindow", req, cb)
+     * 本接口（DescribeTasks）用于查询任务列表，展示异步任务的执行进度。
+注：本接口中展示的步骤为总结性步骤，可能伴随着版本迭代进行调整，不建议作为关键逻辑使用
+     */
+  async DescribeTasks(
+    req: DescribeTasksRequest,
+    cb?: (error: string, rep: DescribeTasksResponse) => void
+  ): Promise<DescribeTasksResponse> {
+    return this.request("DescribeTasks", req, cb)
   }
 
   /**
@@ -486,13 +528,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口（DescribeSlowQueryAnalysis）用于统计指定时间范围内的所有慢查询，根据SQL语句抽象参数后，进行聚合分析，并返回同类SQL列表。
+   * 本接口 (DescribeParameterTemplates) 用于查询参数模板列表。
    */
-  async DescribeSlowQueryAnalysis(
-    req: DescribeSlowQueryAnalysisRequest,
-    cb?: (error: string, rep: DescribeSlowQueryAnalysisResponse) => void
-  ): Promise<DescribeSlowQueryAnalysisResponse> {
-    return this.request("DescribeSlowQueryAnalysis", req, cb)
+  async DescribeParameterTemplates(
+    req: DescribeParameterTemplatesRequest,
+    cb?: (error: string, rep: DescribeParameterTemplatesResponse) => void
+  ): Promise<DescribeParameterTemplatesResponse> {
+    return this.request("DescribeParameterTemplates", req, cb)
   }
 
   /**
@@ -566,13 +608,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeParameterTemplates) 用于查询参数模板列表。
+   * 此接口（DescribeSlowQueryAnalysis）用于统计指定时间范围内的所有慢查询，根据SQL语句抽象参数后，进行聚合分析，并返回同类SQL列表。
    */
-  async DescribeParameterTemplates(
-    req: DescribeParameterTemplatesRequest,
-    cb?: (error: string, rep: DescribeParameterTemplatesResponse) => void
-  ): Promise<DescribeParameterTemplatesResponse> {
-    return this.request("DescribeParameterTemplates", req, cb)
+  async DescribeSlowQueryAnalysis(
+    req: DescribeSlowQueryAnalysisRequest,
+    cb?: (error: string, rep: DescribeSlowQueryAnalysisResponse) => void
+  ): Promise<DescribeSlowQueryAnalysisResponse> {
+    return this.request("DescribeSlowQueryAnalysis", req, cb)
   }
 
   /**
@@ -786,6 +828,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询审计日志文件
+   */
+  async DescribeAuditLogFiles(
+    req: DescribeAuditLogFilesRequest,
+    cb?: (error: string, rep: DescribeAuditLogFilesResponse) => void
+  ): Promise<DescribeAuditLogFilesResponse> {
+    return this.request("DescribeAuditLogFiles", req, cb)
+  }
+
+  /**
    * 本接口(DescribeBackupSummaries)用于查询实例备份的统计信息，返回以实例为维度的备份个数、占用容量等信息（容量单位为字节）。
    */
   async DescribeBackupSummaries(
@@ -856,13 +908,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(DeleteReadOnlyGroup)用于删除指定的只读组
+   * 本接口（ModifyDBInstancesProject）用于修改实例所属项目。
    */
-  async DeleteReadOnlyGroup(
-    req: DeleteReadOnlyGroupRequest,
-    cb?: (error: string, rep: DeleteReadOnlyGroupResponse) => void
-  ): Promise<DeleteReadOnlyGroupResponse> {
-    return this.request("DeleteReadOnlyGroup", req, cb)
+  async ModifyDBInstancesProject(
+    req: ModifyDBInstancesProjectRequest,
+    cb?: (error: string, rep: ModifyDBInstancesProjectResponse) => void
+  ): Promise<ModifyDBInstancesProjectResponse> {
+    return this.request("ModifyDBInstancesProject", req, cb)
   }
 
   /**
@@ -896,6 +948,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询审计实例列表
+   */
+  async DescribeAuditInstanceList(
+    req: DescribeAuditInstanceListRequest,
+    cb?: (error: string, rep: DescribeAuditInstanceListResponse) => void
+  ): Promise<DescribeAuditInstanceListResponse> {
+    return this.request("DescribeAuditInstanceList", req, cb)
+  }
+
+  /**
    * 可对实例进行网络的删除操作（实例内至少保留一个网络）。
    */
   async DeleteDBInstanceNetworkAccess(
@@ -906,13 +968,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyDBInstancesProject）用于修改实例所属项目。
+   * 本接口(DeleteReadOnlyGroup)用于删除指定的只读组
    */
-  async ModifyDBInstancesProject(
-    req: ModifyDBInstancesProjectRequest,
-    cb?: (error: string, rep: ModifyDBInstancesProjectResponse) => void
-  ): Promise<ModifyDBInstancesProjectResponse> {
-    return this.request("ModifyDBInstancesProject", req, cb)
+  async DeleteReadOnlyGroup(
+    req: DeleteReadOnlyGroupRequest,
+    cb?: (error: string, rep: DeleteReadOnlyGroupResponse) => void
+  ): Promise<DeleteReadOnlyGroupResponse> {
+    return this.request("DeleteReadOnlyGroup", req, cb)
+  }
+
+  /**
+   * 查询数据库审计日志
+   */
+  async DescribeAuditLogs(
+    req: DescribeAuditLogsRequest,
+    cb?: (error: string, rep: DescribeAuditLogsResponse) => void
+  ): Promise<DescribeAuditLogsResponse> {
+    return this.request("DescribeAuditLogs", req, cb)
   }
 
   /**
@@ -1161,6 +1233,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除审计日志文件
+   */
+  async DeleteAuditLogFile(
+    req: DeleteAuditLogFileRequest,
+    cb?: (error: string, rep: DeleteAuditLogFileResponse) => void
+  ): Promise<DeleteAuditLogFileResponse> {
+    return this.request("DeleteAuditLogFile", req, cb)
+  }
+
+  /**
    * 当升级完成后，对处于等待切换状态下的实例，强制实例立即切换。
    */
   async ModifySwitchTimePeriod(
@@ -1218,6 +1300,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDBInstanceSSLConfigResponse) => void
   ): Promise<ModifyDBInstanceSSLConfigResponse> {
     return this.request("ModifyDBInstanceSSLConfig", req, cb)
+  }
+
+  /**
+   * 修改数据库实例的审计功能
+   */
+  async ModifyAuditService(
+    req: ModifyAuditServiceRequest,
+    cb?: (error: string, rep: ModifyAuditServiceResponse) => void
+  ): Promise<ModifyAuditServiceResponse> {
+    return this.request("ModifyAuditService", req, cb)
   }
 
   /**
@@ -1281,13 +1373,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyBackupDownloadRestriction）用于修改备份文件下载限制。
+   * 本接口（ModifyDBInstanceSecurityGroups）用于修改实例安全组。
    */
-  async ModifyBackupDownloadRestriction(
-    req: ModifyBackupDownloadRestrictionRequest,
-    cb?: (error: string, rep: ModifyBackupDownloadRestrictionResponse) => void
-  ): Promise<ModifyBackupDownloadRestrictionResponse> {
-    return this.request("ModifyBackupDownloadRestriction", req, cb)
+  async ModifyDBInstanceSecurityGroups(
+    req: ModifyDBInstanceSecurityGroupsRequest,
+    cb?: (error: string, rep: ModifyDBInstanceSecurityGroupsResponse) => void
+  ): Promise<ModifyDBInstanceSecurityGroupsResponse> {
+    return this.request("ModifyDBInstanceSecurityGroups", req, cb)
   }
 
   /**
@@ -1308,6 +1400,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: LockAccountResponse) => void
   ): Promise<LockAccountResponse> {
     return this.request("LockAccount", req, cb)
+  }
+
+  /**
+   * 开启数据库实例的审计功能
+   */
+  async OpenAuditService(
+    req: OpenAuditServiceRequest,
+    cb?: (error: string, rep: OpenAuditServiceResponse) => void
+  ): Promise<OpenAuditServiceResponse> {
+    return this.request("OpenAuditService", req, cb)
   }
 
   /**

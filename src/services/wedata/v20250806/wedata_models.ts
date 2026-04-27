@@ -85,7 +85,7 @@ export interface ListWorkflowPermissionsResponse {
  */
 export interface ListProcessLineageResponse {
   /**
-   * 分页数据
+   * <p>分页数据</p>
    */
   Data?: ListProcessLineagePage
   /**
@@ -6027,27 +6027,27 @@ export interface ProjectUsersBrief {
  */
 export interface ListLineageRequest {
   /**
-   * 实体唯一ID
+   * <p>实体唯一ID</p>
    */
   ResourceUniqueId: string
   /**
-   * 实体类型 TABLE|METRIC|MODEL|SERVICE|COLUMN
+   * <p>实体类型 TABLE|METRIC|MODEL|SERVICE|COLUMN</p>
    */
   ResourceType: string
   /**
-   * 血缘方向 INPUT｜OUTPUT
+   * <p>血缘方向 INPUT｜OUTPUT</p>
    */
   Direction: string
   /**
-   * 页码
+   * <p>页码</p>
    */
   PageNumber: number
   /**
-   * 分页大小
+   * <p>分页大小</p>
    */
   PageSize: number
   /**
-   * 来源：WEDATA|THIRD 默认WEDATA
+   * <p>来源：WEDATA|THIRD 默认WEDATA</p>
    */
   Platform: string
 }
@@ -6553,7 +6553,7 @@ export interface TriggerDependencyConfigPage {
  */
 export interface ListLineageResponse {
   /**
-   * 分页数据
+   * <p>分页数据</p>
    */
   Data?: ListLineagePage
   /**
@@ -14466,23 +14466,23 @@ export interface GetDataBackfillPlanRequest {
  */
 export interface ListProcessLineageRequest {
   /**
-   * 任务唯一ID
+   * <p>任务唯一ID</p>
    */
   ProcessId: string
   /**
-   * 任务类型    //调度任务     SCHEDULE_TASK,     //集成任务     INTEGRATION_TASK,     //第三方上报     THIRD_REPORT,     //数据建模     TABLE_MODEL,     //模型创建指标     MODEL_METRIC,     //原子指标创建衍生指标     METRIC_METRIC,     //数据服务     DATA_SERVICE
+   * <p>任务类型    //调度任务     SCHEDULE_TASK,     //集成任务     INTEGRATION_TASK,     //第三方上报     THIRD_REPORT,     //数据建模     TABLE_MODEL,     //模型创建指标     MODEL_METRIC,     //原子指标创建衍生指标     METRIC_METRIC,     //数据服务     DATA_SERVICE</p>
    */
   ProcessType: string
   /**
-   * 页码
+   * <p>页码</p>
    */
   PageNumber: number
   /**
-   * 分页大小
+   * <p>分页大小</p>
    */
   PageSize: number
   /**
-   * 来源：WEDATA|THIRD 默认WEDATA
+   * <p>来源：WEDATA|THIRD 默认WEDATA</p>
    */
   Platform: string
 }

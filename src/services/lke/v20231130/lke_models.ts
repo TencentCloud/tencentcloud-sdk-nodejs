@@ -1636,68 +1636,65 @@ export interface AttrLabelDetail {
  */
 export interface QAQuery {
   /**
-   * 页码 从1开始
-
+   * <p>页码 从1开始</p>
    */
   PageNumber: number
   /**
-   * 页大小 默认15 最大100
-
+   * <p>页大小 默认15 最大100</p>
    */
   PageSize: number
   /**
-   * 应用ID
+   * <p>应用ID</p>
    */
   BotBizId: string
   /**
-   * 查询内容
-
+   * <p>查询内容</p>
    */
   Query?: string
   /**
-   * 分类ID
-
+   * <p>分类ID</p>
    */
   CateBizId?: string
   /**
-   * 校验状态的枚举值
-
+   * <p>校验状态的枚举值</p>
    */
   AcceptStatus?: Array<number | bigint>
   /**
-   * 发布状态的枚举值
-
+   * <p>发布状态的枚举值</p>
    */
   ReleaseStatus?: Array<number | bigint>
   /**
-   * 文档ID
-
+   * <p>文档ID</p>
    */
   DocBizId?: string
   /**
-   * QAID
-
+   * <p>QAID</p>
    */
   QaBizId?: string
   /**
-   * 来源
-
+   * <p>来源</p>
    */
   Source?: number
   /**
-   * 查询答案
-
+   * <p>查询答案</p>
    */
   QueryAnswer?: string
   /**
-   * 查询类型 filename 名称、 attribute 标签
+   * <p>查询类型 filename 名称、 attribute 标签</p>
    */
   QueryType?: string
   /**
-   * 问答生效域检索，不检索不传。枚举值如下：
-1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效。
+   * <p>问答生效域检索，不检索不传。枚举值如下：<br>1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效。</p>
    */
   EnableScope?: number
+  /**
+   * <p>创建时间范围</p>
+   */
+  CreateTime?: TimeRange
+  /**
+   * <p>更新时间范围</p>
+   */
+  UpdateTime?: TimeRange
 }
 
 /**
@@ -2726,21 +2723,19 @@ export interface AgentPluginHeader {
  */
 export interface DescribeStorageCredentialRequest {
   /**
-   * 应用ID，参数非必填不代表不需要填写，下面不同的参数组合会获取到不同的权限，具体请参考 https://cloud.tencent.com/document/product/1759/116238
+   * <p>应用ID，参数非必填不代表不需要填写，下面不同的参数组合会获取到不同的权限，具体请参考 https://cloud.tencent.com/document/product/1759/116238</p>
    */
   BotBizId?: string
   /**
-   * 文件类型,正常的文件名类型后缀，支持 docx、doc、pdf、txt、md、wps、pages、html、mhtml、epub、xml、json、log、xlsx、xls、csv、tsv、numbers、pptx、ppt、ppsx、ppsm、key、png、jpg、jpeg、gif、bmp、tiff、webp、heif、heic、jp2、eps、icns、im、pcx、ppm、xbm、xmind
-
+   * <p>文件类型,正常的文件名类型后缀，支持 docx、doc、pdf、txt、md、wps、pages、html、mhtml、epub、xml、json、log、xlsx、xls、csv、tsv、numbers、pptx、ppt、ppsx、ppsm、key、png、jpg、jpeg、gif、bmp、tiff、webp、heif、heic、jp2、eps、icns、im、pcx、ppm、xbm、xmind</p>
    */
   FileType?: string
   /**
-   * IsPublic用于上传文件或图片时选择场景，当上传对话端图片时IsPublic为true，上传文件（包括文档库文件/图片等和对话端文件）时IsPublic为false
-
+   * <p>IsPublic用于上传文件或图片时选择场景，当上传对话端图片时IsPublic为true，上传文件（包括文档库文件/图片等和对话端文件）时IsPublic为false</p>
    */
   IsPublic?: boolean
   /**
-   * 存储类型: offline:离线文件，realtime:实时文件；为空默认为offline
+   * <p>存储类型: offline:离线文件，realtime:实时文件；为空默认为offline</p>
    */
   TypeKey?: string
 }
@@ -2854,7 +2849,7 @@ export interface DocFilterFlag {
  */
 export interface CreateVarResponse {
   /**
-   * 变量ID
+   * <p>变量ID</p>
    */
   VarId?: string
   /**
@@ -2952,11 +2947,11 @@ export interface DescribeSearchStatsGraphRequest {
    */
   LoginSubAccountUin?: string
   /**
-   * uin列表
+   * 子账号标识列表，支持批量查询多个子账号。不填时查询主账号下所有子账号的汇总数据
    */
   UinAccount?: Array<string>
   /**
-   * 子业务类型
+   * 子业务类型，用于筛选不同业务场景的调用统计
    */
   SubBizType?: string
   /**
@@ -2965,10 +2960,12 @@ export interface DescribeSearchStatsGraphRequest {
   ModelName?: string
   /**
    * 开始时间戳, 单位为秒(废弃)
+   * @deprecated
    */
   StartTime?: string
   /**
    * 结束时间戳, 单位为秒(废弃)
+   * @deprecated
    */
   EndTime?: string
   /**
@@ -2976,15 +2973,15 @@ export interface DescribeSearchStatsGraphRequest {
    */
   AppBizIds?: Array<string>
   /**
-   * 空间id
+   * 空间ID，用于限定查询范围。不填时查询所有空间的数据
    */
   SpaceId?: string
   /**
-   * 开始时间戳, 单位为秒
+   * 开始时间。Unix 时间戳，单位是秒，默认为空。
    */
   StatStartTime?: number
   /**
-   * 结束时间戳, 单位为秒
+   * 结束时间。Unix 时间戳，单位是秒，默认为空。
    */
   StatEndTime?: number
 }
@@ -3402,69 +3399,69 @@ export interface WebSearchReference {
  */
 export interface ListQARequest {
   /**
-   * 应用ID
-若要操作共享知识库，传KnowledgeBizId
+   * <p>应用ID<br>若要操作共享知识库，传KnowledgeBizId</p>
    */
   BotBizId: string
   /**
-   * 页码（取值范围>0）
+   * <p>页码（取值范围&gt;0）</p>
    */
   PageNumber: number
   /**
-   * 每页大小(取值范围1-200)
+   * <p>每页大小(取值范围1-200)</p>
    */
   PageSize: number
   /**
-   * 查询问题
-
-输入特定标识 lke:system:untagged  将查询所有未关联标签的问答
+   * <p>查询问题</p><p>输入特定标识 lke:system:untagged  将查询所有未关联标签的问答</p>
    */
   Query?: string
   /**
-   * 校验状态(1未校验2采纳3不采纳)
-如果不填默认值为空数组，表示不筛选，返回所有状态
+   * <p>校验状态(1未校验2采纳3不采纳)<br>如果不填默认值为空数组，表示不筛选，返回所有状态</p>
    */
   AcceptStatus?: Array<number | bigint>
   /**
-   * 发布状态(2,4导入成功 7审核中 8审核失败 9人工申述中 11人工申述失败 12已过期 13超量失效 14超量失效恢复)
-如果不填默认值为空数组，表示不筛选返回所有状态
+   * <p>发布状态(2,4导入成功 7审核中 8审核失败 9人工申述中 11人工申述失败 12已过期 13超量失效 14超量失效恢复)<br>如果不填默认值为空数组，表示不筛选返回所有状态</p>
    */
   ReleaseStatus?: Array<number | bigint>
   /**
-   * 文档ID
+   * <p>文档ID</p>
    */
   DocBizId?: string
   /**
-   * 来源(1 文档生成 2 批量导入 3 手动添加)
-不填默认值为0，表示不过滤，返回所有状态
+   * <p>来源(1 文档生成 2 批量导入 3 手动添加)<br>不填默认值为0，表示不过滤，返回所有状态</p>
    */
   Source?: number
   /**
-   * 查询答案
+   * <p>查询答案</p>
    */
   QueryAnswer?: string
   /**
-   * 分类ID
+   * <p>分类ID</p>
    */
   CateBizId?: string
   /**
-   * QA业务ID列表
+   * <p>QA业务ID列表</p>
    */
   QaBizIds?: Array<string>
   /**
-   * 查询类型 filename 名称、 attribute 标签
-如果不填默认值为"filename"
+   * <p>查询类型 filename 名称、 attribute 标签<br>如果不填默认值为&quot;filename&quot;</p>
    */
   QueryType?: string
   /**
-   * 是否只展示当前分类的数据 0不是，1是
+   * <p>是否只展示当前分类的数据 0不是，1是</p>
    */
   ShowCurrCate?: number
   /**
-   * 问答生效域检索，不检索不传。枚举值如下：
-1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效。
+   * <p>问答生效域检索，不检索不传。枚举值如下：<br>1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效。</p>
    */
   EnableScope?: number
+  /**
+   * <p>问答创建时间范围</p>
+   */
+  CreateTime?: TimeRange
+  /**
+   * <p>问答更新时间范围</p>
+   */
+  UpdateTime?: TimeRange
 }
 
 /**
@@ -4093,51 +4090,51 @@ export interface ExportUnsatisfiedReplyResponse {
  */
 export interface DescribeStorageCredentialResponse {
   /**
-   * 密钥信息
+   * <p>密钥信息</p>
    */
   Credentials?: Credentials
   /**
-   * 失效时间
+   * <p>失效时间，为 Unix 时间戳</p><p>单位：秒</p>
    */
   ExpiredTime?: number
   /**
-   * 开始时间
+   * <p>开始时间，为 Unix 时间戳</p><p>单位：秒</p>
    */
   StartTime?: number
   /**
-   * 对象存储桶
+   * <p>对象存储桶</p>
    */
   Bucket?: string
   /**
-   * 对象存储可用区
+   * <p>对象存储可用区</p>
    */
   Region?: string
   /**
-   * 文件存储目录
+   * <p>文件存储目录</p>
    */
   FilePath?: string
   /**
-   * 存储类型
+   * <p>存储类型</p>
    */
   Type?: string
   /**
-   * 企业主账号
+   * <p>企业主账号</p>
    */
   CorpUin?: string
   /**
-   * 图片存储目录
+   * <p>图片存储目录</p>
    */
   ImagePath?: string
   /**
-   * 上传存储路径，到具体文件
+   * <p>上传存储路径，到具体文件</p>
    */
   UploadPath?: string
   /**
-   * 文件上传地址，使用put请求上传文件到该地址
+   * <p>文件上传地址，使用put请求上传文件到该地址</p>
    */
   UploadUrl?: string
   /**
-   * 文件的预签名地址，支持下载
+   * <p>文件的预签名地址，支持下载</p>
    */
   FileUrl?: string
   /**
@@ -5048,11 +5045,11 @@ export interface DeleteAppRequest {
  */
 export interface GetVarListResponse {
   /**
-   * 变量总数
+   * <p>变量总数</p>
    */
   Total?: number
   /**
-   * 变量信息列表
+   * <p>变量信息列表</p>
    */
   List?: Array<TaskFLowVar>
   /**
@@ -6000,11 +5997,11 @@ export interface SummaryOutput {
  */
 export interface ListDocResponse {
   /**
-   * 文档数量
+   * <p>文档数量</p>
    */
   Total?: string
   /**
-   * 文档列表
+   * <p>文档列表</p>
    */
   List?: Array<ListDocItem>
   /**
@@ -6929,27 +6926,27 @@ export interface DescribeCallStatsGraphRequest {
  */
 export interface ListQAResponse {
   /**
-   * 问答数量
+   * <p>问答数量</p>
    */
   Total?: string
   /**
-   * 待校验问答数量
+   * <p>待校验问答数量</p>
    */
   WaitVerifyTotal?: string
   /**
-   * 未采纳问答数量
+   * <p>未采纳问答数量</p>
    */
   NotAcceptedTotal?: string
   /**
-   * 已采纳问答数量
+   * <p>已采纳问答数量</p>
    */
   AcceptedTotal?: string
   /**
-   * 页码
+   * <p>页码</p>
    */
   PageNumber?: number
   /**
-   * 问答详情
+   * <p>问答详情</p>
    */
   List?: Array<ListQaItem>
   /**
@@ -7162,15 +7159,15 @@ export interface AgentInput {
  */
 export interface DeleteVarRequest {
   /**
-   * 应用ID
+   * <p>应用ID，获取方法参看如何获取   <a href="https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa">BotBizId</a>。</p>
    */
   AppBizId: string
   /**
-   * 变量ID
+   * <p>变量 ID，可通过 CreateVar；DescribeVar；DescribeVarList 接口返回结果中获取。DeleteVar</p>
    */
   VarId: string
   /**
-   * 参数类型
+   * <p>变量模块类型</p><p>枚举值：</p><ul><li>0： API参数</li><li>1： 环境参数</li><li>2： 应用参数</li><li>3： 系统参数</li></ul><p>默认值：0</p>
    */
   VarModuleType?: number
 }
@@ -8477,31 +8474,31 @@ export interface DescribeRobotBizIDByAppKeyRequest {
  */
 export interface CreateVarRequest {
   /**
-   * 应用ID
+   * <p>应用ID，获取方法参看如何获取   <a href="https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa">BotBizId</a>。</p>
    */
   AppBizId: string
   /**
-   * 变量名称，不允许重复，最大支持50个字符
+   * <p>变量名称，不允许重复，最大支持50个字符，英文字母开头，支持英文数字与下划线”_”。</p>
    */
   VarName: string
   /**
-   * 变量描述，最大支持120个字符
+   * <p>变量描述，最大支持120个字符</p>
    */
   VarDesc?: string
   /**
-   * 变量类型定义，支持类型如下：(STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO);传输过程是json字符串，标签中仅支持"STRING"类型使用
+   * <p>变量类型定义，支持类型如下：(STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO);传输过程是json字符串，标签中仅支持&quot;STRING&quot;类型使用</p>
    */
   VarType?: string
   /**
-   * 自定义变量默认值
+   * <p>自定义变量默认值，<code>VarDefaultValue</code>xa0默认为空</p>
    */
   VarDefaultValue?: string
   /**
-   * 自定义变量文件默认名称
+   * <p>自定义变量文件默认名称，<code>VarDefaultFileName</code>默认为空</p>
    */
   VarDefaultFileName?: string
   /**
-   * 参数类型
+   * <p>变量模块类型</p><p>枚举值：</p><ul><li>0： API参数</li><li>1： 环境参数</li><li>2： 应用参数</li><li>3： 系统参数</li></ul>
    */
   VarModuleType?: number
 }
@@ -8957,53 +8954,53 @@ export interface CreateQACateResponse {
  */
 export interface ListDocRequest {
   /**
-   * 应用ID, 获取方式参看 [BotBizId](https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa)。
-查询知识库下文档时，该参数填入知识库ID。
+   * <p>应用ID, 获取方式参看 <a href="https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa">BotBizId</a>。<br>查询知识库下文档时，该参数填入知识库ID。</p>
    */
   BotBizId: string
   /**
-   * 页码(必须大于0)
+   * <p>页码(必须大于0)</p>
    */
   PageNumber: number
   /**
-   * 每页数量(取值范围1-200)
+   * <p>每页数量(取值范围1-200)</p>
    */
   PageSize: number
   /**
-   * 查询内容
-
-输入特定标识 lke:system:untagged  将查询所有未关联标签的文档
+   * <p>查询内容</p><p>输入特定标识 lke:system:untagged  将查询所有未关联标签的文档</p>
    */
   Query?: string
   /**
-   * 文档状态： 1-未生成 2-生成中 3-生成成功 4-生成失败 5-删除中 6-删除成功  7-审核中  8-审核失败 9-审核成功  10,12-导入成功  13-学习中  14-学习失败  15-更新中  16-更新失败  17-解析中  18-解析失败  19-导入失败   20-已过期 21-超量失效 22-超量失效恢复
+   * <p>文档状态： 1-未生成 2-生成中 3-生成成功 4-生成失败 5-删除中 6-删除成功  7-审核中  8-审核失败 9-审核成功  10,12-导入成功  13-学习中  14-学习失败  15-更新中  16-更新失败  17-解析中  18-解析失败  19-导入失败   20-已过期 21-超量失效 22-超量失效恢复</p>
    */
   Status?: Array<number | bigint>
   /**
-   * 查询类型 filename 文档、 attribute 标签
+   * <p>查询类型 filename 文档、 attribute 标签</p>
    */
   QueryType?: string
   /**
-   * 分类ID, 可以通过调用ListDocCate接口,查看其返回结果获取
+   * <p>分类ID, 可以通过调用ListDocCate接口,查看其返回结果获取</p>
    */
   CateBizId?: string
   /**
-   * 文件类型分类筛选
+   * <p>文件类型分类筛选</p>
    */
   FileTypes?: Array<string>
   /**
-   * 文档列表筛选标识位
+   * <p>文档列表筛选标识位</p>
    */
   FilterFlag?: Array<DocFilterFlag>
   /**
-   * 是否只展示当前分类的数据 0不是，1是
+   * <p>是否只展示当前分类的数据 0不是，1是</p>
    */
   ShowCurrCate?: number
   /**
-   * 文档生效域；不检索默认为0。检索枚举值如下：
-1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效
+   * <p>文档生效域；不检索默认为0。检索枚举值如下：<br>1-不生效；2-仅开发域生效；3-仅发布域生效；4-开发域和发布域均生效</p>
    */
   EnableScope?: number
+  /**
+   * <p>文档更新时间范围</p>
+   */
+  UpdateTime?: TimeRange
 }
 
 /**
@@ -9581,35 +9578,35 @@ export interface DescribeKnowledgeUsagePieGraphResponse {
  */
 export interface GetVarListRequest {
   /**
-   * 应用ID
+   * <p>应用ID，获取方法参看如何获取   <a href="https://cloud.tencent.com/document/product/1759/109469#4eecb8c1-6ce4-45f5-8fa2-b269449d8efa">BotBizId</a>。</p>
    */
   AppBizId: string
   /**
-   * 变量ID数组
+   * <p>变量ID数组</p>
    */
   VarIds?: Array<string>
   /**
-   * 按变量名称关键词搜索
+   * <p>按变量名称关键词搜索</p>
    */
   Keyword?: string
   /**
-   * 起始偏移量（默认0）
+   * <p>起始偏移量（默认0），取值范围 &gt; 0</p>
    */
   Offset?: number
   /**
-   * 限定数量（默认15）
+   * <p>限定数量（默认15），取值范围 1-200</p>
    */
   Limit?: number
   /**
-   * 按变量类型过滤，默认查询所有类型(STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO)
+   * <p>按变量类型过滤，默认查询所有类型(STRING,INT,FLOAT,BOOL,OBJECT,ARRAY_STRING,ARRAY_INT,ARRAY_FLOAT,ARRAY_BOOL,ARRAY_OBJECT,FILE,DOCUMENT,IMAGE,AUDIO)</p>
    */
   VarType?: string
   /**
-   * 是否需要内部变量(默认false)
+   * <p>是否需要内部变量, 在结果中包含平台预置的“内置自定义变量” (默认false)。</p><ul><li>当&nbsp;<code>NeedInternalVar = true</code>&nbsp;且&nbsp;<code>VarModuleType</code>&nbsp;为&nbsp;<code>AllVar</code>&nbsp;或&nbsp;<code>ApiVar</code>&nbsp;时，返回列表会在用户变量之前拼入内置变量，并同样支持&nbsp;<code>Keyword</code>&nbsp;<code>VarType</code>&nbsp;<code>VarIds</code>&nbsp;过滤。</li><li>其他<code>VarModuleType</code>下，该开关不生效。</li></ul>
    */
   NeedInternalVar?: boolean
   /**
-   * 变量类型
+   * <p>变量模块类型</p><p>枚举值：</p><ul><li>0： API参数</li><li>1： 环境参数</li><li>2： 应用参数</li><li>3： 系统参数</li></ul><p>默认值：0</p>
    */
   VarModuleType?: number
 }
@@ -10247,6 +10244,20 @@ export interface AppInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Creator?: string
+}
+
+/**
+ * 时间范围
+ */
+export interface TimeRange {
+  /**
+   * <p>开始时间</p><p>参数格式：YYYY-MM-DDThh:mm:ssZ</p>
+   */
+  Start?: string
+  /**
+   * <p>结束时间</p><p>参数格式：YYYY-MM-DDThh:mm:ssZ</p>
+   */
+  End?: string
 }
 
 /**

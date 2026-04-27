@@ -62,7 +62,7 @@ import {
   PrometheusRuleSet,
   DescribeAllNamespacesResponse,
   CreateAlarmShieldRequest,
-  TerminatePrometheusInstancesRequest,
+  CheckAddressByPrometheusRequest,
   InstallPluginsResponse,
   ProductSimple,
   AlarmPolicyRule,
@@ -299,6 +299,7 @@ import {
   DeleteGrafanaIntegrationRequest,
   ModifyPrometheusAlertPolicyResponse,
   DescribePhoneAlarmFlowTotalCountResponse,
+  TerminatePrometheusInstancesRequest,
   CreateServiceDiscoveryRequest,
   PeriodsSt,
   ModifyAlarmReceiversResponse,
@@ -332,6 +333,7 @@ import {
   DescribeAlarmPolicyResponse,
   PrometheusNotificationItem,
   DescribeMonitorTypesResponse,
+  DimensionsDesc,
   UpgradeGrafanaInstanceRequest,
   DescribeAccidentEventListAlarms,
   CreatePrometheusGlobalNotificationResponse,
@@ -483,7 +485,7 @@ import {
   IntegrationConfiguration,
   DescribePrometheusAgentsResponse,
   ModifyPrometheusGlobalNotificationResponse,
-  DimensionsDesc,
+  CheckAddressByPrometheusResponse,
   CreateAlertRuleRequest,
   ModifyPrometheusRecordRuleYamlResponse,
   PrometheusMetricScrapeStatistics,
@@ -794,6 +796,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGrafanaConfigResponse) => void
   ): Promise<DescribeGrafanaConfigResponse> {
     return this.request("DescribeGrafanaConfig", req, cb)
+  }
+
+  /**
+   * 检查用户地址联通性
+   */
+  async CheckAddressByPrometheus(
+    req: CheckAddressByPrometheusRequest,
+    cb?: (error: string, rep: CheckAddressByPrometheusResponse) => void
+  ): Promise<CheckAddressByPrometheusResponse> {
+    return this.request("CheckAddressByPrometheus", req, cb)
   }
 
   /**

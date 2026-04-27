@@ -478,6 +478,16 @@ it("waf.v20180125.DescribeIpHitItems", async function () {
     }
 })
 
+it("waf.v20180125.ModifyApiAnalyzeStatus", async function () {
+    try {
+       const data = await client.ModifyApiAnalyzeStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.CreateExport", async function () {
     try {
        const data = await client.CreateExport({})
@@ -1618,9 +1628,9 @@ it("waf.v20180125.DescribeHost", async function () {
     }
 })
 
-it("waf.v20180125.ModifyApiAnalyzeStatus", async function () {
+it("waf.v20180125.GenerateLLMSecAnswer", async function () {
     try {
-       const data = await client.ModifyApiAnalyzeStatus({})
+       const data = await client.GenerateLLMSecAnswer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

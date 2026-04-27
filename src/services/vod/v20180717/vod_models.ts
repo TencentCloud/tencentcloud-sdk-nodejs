@@ -3880,7 +3880,7 @@ export interface MediaProcessTaskAnimatedGraphicResult {
  */
 export interface DescribeAigcUsageDataResponse {
   /**
-   * AIGC统计数据。
+   * <p>AIGC统计数据。</p>
    */
   AigcUsageDataSet?: Array<AigcUsageDataItem>
   /**
@@ -6717,11 +6717,11 @@ export interface AigcImageOutputConfig {
    */
   ExpireTime?: string
   /**
-   * <p>生成图片的分辨率。各模型可选值：</p><ul><li>GG 2.5：1K、2K、4K，默认1K；</li><li>GG 3.0：1K、2K、4K，默认1K；</li><li>GG 3.1：512、1K、2K、4K，默认1K；</li><li>Kling 2.1：1k、2k，默认1k；</li><li>Kling 3.0：1k、2k，默认1k；</li><li>Kling 3.0-Omni：1k、2k、4k，默认1k；</li><li>Kling O1：1k、2k、4k，默认1k；</li><li>SI 4.0：1K、2K、4K，默认1K；</li><li>SI 4.5：2K、4K，默认2K；</li><li>SI 5.0-lite：2K、3K，默认2K；</li><li>Vidu q2：1080p、2K、4K，默认1080p；</li><li>Hunyuan 3.0：暂不支持本字段，可通过<code>ExtInfo</code>字段设置分辨率；</li><li>Qwen 0925：暂不支持本字段，可通过<code>ExtInfo</code>字段设置分辨率；</li></ul>
+   * <p>生成图片的分辨率。各模型可选值：</p><ul><li>OG：1080P、2K、4K；</li><li>GG 2.5：1K、2K、4K，默认1K；</li><li>GG 3.0：1K、2K、4K，默认1K；</li><li>GG 3.1：512、1K、2K、4K，默认1K；</li><li>Kling 2.1：1k、2k，默认1k；</li><li>Kling 3.0：1k、2k，默认1k；</li><li>Kling 3.0-Omni：1k、2k、4k，默认1k；</li><li>Kling O1：1k、2k、4k，默认1k；</li><li>SI 4.0：1K、2K、4K，默认1K；</li><li>SI 4.5：2K、4K，默认2K；</li><li>SI 5.0-lite：2K、3K，默认2K；</li><li>Vidu q2：1080p、2K、4K，默认1080p；</li><li>Hunyuan 3.0：暂不支持本字段，可通过<code>ExtInfo</code>字段设置分辨率；</li><li>Qwen 0925：暂不支持本字段，可通过<code>ExtInfo</code>字段设置分辨率；</li></ul>
    */
   Resolution?: string
   /**
-   * <p>指定所生成图片的宽高比。</p><ul><li>GG 2.5：1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9；</li><li>GG 3.0：1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9；</li><li>GG 3.1：1:1, 1:4, 1:8, 2:3, 3:2, 3:4, 4:1, 4:3, 4:5, 5:4, 8:1, 9:16, 16:9, 21:9；</li><li>Kling 2.1：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；</li><li>Kling 3.0：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；</li><li>Kling 3.0-Omni：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto；</li><li>Kling O1：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto；</li><li>Vidu q2：16:9、9:16、1:1、3:4、4:3、21:9、2:3、3:2；</li><li>SI 4.0：<strong>不支持</strong>此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；</li><li>SI 4.5：<strong>不支持</strong>此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；</li><li>SI 5.0-lite：<strong>不支持</strong>此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；</li><li>Hunyuan 3.0：不支持；</li><li>Qwen 2.0：不支持；</li><li>Qwen 0925：不支持；</li></ul>
+   * <p>指定所生成图片的宽高比。</p><ul><li>OG：1:1, 3:2, 2:3, 3:4, 4:3, 16:9, 9:16, 21:9, 9:21；</li><li>GG 2.5：1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9；</li><li>GG 3.0：1:1, 2:3, 3:2, 3:4, 4:3, 4:5, 5:4, 9:16, 16:9, 21:9；</li><li>GG 3.1：1:1, 1:4, 1:8, 2:3, 3:2, 3:4, 4:1, 4:3, 4:5, 5:4, 8:1, 9:16, 16:9, 21:9；</li><li>Kling 2.1：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；</li><li>Kling 3.0：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；</li><li>Kling 3.0-Omni：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto；</li><li>Kling O1：16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9, auto；</li><li>Vidu q2：16:9、9:16、1:1、3:4、4:3、21:9、2:3、3:2；</li><li>SI 4.0：<strong>不支持</strong>此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；</li><li>SI 4.5：<strong>不支持</strong>此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；</li><li>SI 5.0-lite：<strong>不支持</strong>此参数，可通过prompt指定16:9, 9:16, 1:1, 4:3, 3:4, 3:2, 2:3, 21:9；</li><li>Hunyuan 3.0：不支持；</li><li>Qwen 2.0：不支持；</li><li>Qwen 0925：不支持；</li></ul>
    */
   AspectRatio?: string
   /**
@@ -6737,7 +6737,7 @@ export interface AigcImageOutputConfig {
    */
   OutputComplianceCheck?: string
   /**
-   * <p>生成图片张数。*<em>仅ModelName为Kling时有效，可选值 1-9 *</em>。</p>
+   * <p>生成图片张数。各模型可选值：</p><ul><li>Kling：可选值 1-9；</li><li>OG：可选值1-8；</li></ul><p><strong>其他模型不生效。</strong></p>
    */
   OutputImageCount?: number
 }
@@ -10634,7 +10634,7 @@ export interface CreateAigcVideoTaskRequest {
    */
   FileInfos?: Array<AigcVideoTaskInputFileInfo>
   /**
-   * <p>固定主体输入信息。</p>
+   * <p>主体输入信息。</p>
    */
   SubjectInfos?: Array<AigcVideoTaskInputSubjectInfo>
   /**
@@ -13008,6 +13008,44 @@ export interface DeleteImageProcessingTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AIGC 视频转绘任务的输出文件信息。
+ */
+export interface AigcVideoRedrawOutputFileInfo {
+  /**
+   * <p>存储模式。取值有： <li>Permanent：永久存储；</li> <li>Temporary：临时存储；</li>默认值：Temporary</p>
+   */
+  StorageMode?: string
+  /**
+   * <p>输出文件名，最长 64 个字符。缺省由系统指定生成文件名。当 StorageMode 为 Permanent 时有效。</p>
+   */
+  MediaName?: string
+  /**
+   * <p>分类ID，用于对媒体进行分类管理，可通过 <a href="/document/product/266/7812">创建分类</a> 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。</p>
+   */
+  ClassId?: number
+  /**
+   * <p>输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式说明</a>。</p>
+   */
+  ExpireTime?: string
+  /**
+   * <p>文件类型，例如 mp4、flv 等。</p>
+   */
+  FileType?: string
+  /**
+   * <p>媒体文件播放地址。</p>
+   */
+  FileUrl?: string
+  /**
+   * <p>媒体文件 ID。当 StorageMode 为 Permanent 时有效。</p>
+   */
+  FileId?: string
+  /**
+   * <p>输出视频的元信息。当 StorageMode 为 Permanent 时有效。</p>
+   */
+  MetaData?: MediaMetaData
 }
 
 /**
@@ -16385,6 +16423,20 @@ export interface DescribeMediaPlayStatDetailsRequest {
 }
 
 /**
+ * AIGC 视频转绘任务的输入。
+ */
+export interface AigcVideoRedrawTaskInput {
+  /**
+   * <p>AIGC 视频转绘任务输入文件信息。</p>
+   */
+  FileInfo?: AigcVideoRedrawTaskInputFileInfo
+  /**
+   * <p>AIGC 视频转绘输出配置。</p>
+   */
+  OutputConfig?: AigcVideoRedrawOutputConfig
+}
+
+/**
  * Asr 文字涉违禁信息
  */
 export interface AiReviewProhibitedAsrTaskOutput {
@@ -16491,7 +16543,7 @@ export interface CoverConfigureInfoForUpdate {
 }
 
 /**
- * AIGC 固定主体输入信息。
+ * AIGC 主体输入信息。
  */
 export interface AigcVideoTaskInputSubjectInfo {
   /**
@@ -19761,7 +19813,7 @@ export interface DescribeStorageDataRequest {
  */
 export interface DescribeTaskDetailResponse {
   /**
-   * <p>任务类型，取值：<li>Procedure：视频处理任务；</li><li>EditMedia：视频编辑任务；</li><li>SplitMedia：视频拆条任务；</li><li>ComposeMedia：制作媒体文件任务；</li><li>WechatPublish：微信发布任务；</li><li>WechatMiniProgramPublish：微信小程序视频发布任务；</li><li>PullUpload：拉取上传媒体文件任务；</li><li>FastClipMedia：快速剪辑任务；</li><li>RemoveWatermarkTask：智能去除水印任务；</li><li>DescribeFileAttributesTask：获取文件属性任务；</li><li>RebuildMedia：音画质重生任务（不推荐使用）；</li><li>ReviewAudioVideo：音视频审核任务；</li><li>ExtractTraceWatermark：提取溯源水印任务；</li><li>ExtractCopyRightWatermark：提取版权水印任务；</li><li>QualityInspect：音画质检测任务；</li><li>QualityEnhance：音画质重生任务；</li><li>ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；</li><li>ProcessMediaByMPS：MPS 视频处理任务；</li><li>AigcImageTask：AIGC 生图任务；</li><li>SceneAigcImageTask：场景化 AIGC 生图任务；</li><li>AigcVideoTask：AIGC 生视频任务；</li><li>ImportMediaKnowledge：导入媒体知识任务。</li><li>SceneAigcVideoTask：场景化 AIGC 生视频任务；</li><li> ExtractBlindWatermark：提取数字水印任务。</li><li> ExtractBlindWatermark：提取数字水印任务。</li><li> CreateAigcAdvancedCustomElementTask：创建自定义主体任务</li><li>CreateAigcCustomVoiceTask：创建自定义音色任务</li><li>CreateAigcSubjectTask：创建主体任务</li></p>
+   * <p>任务类型，取值：<li>Procedure：视频处理任务；</li><li>EditMedia：视频编辑任务；</li><li>SplitMedia：视频拆条任务；</li><li>ComposeMedia：制作媒体文件任务；</li><li>WechatPublish：微信发布任务；</li><li>WechatMiniProgramPublish：微信小程序视频发布任务；</li><li>PullUpload：拉取上传媒体文件任务；</li><li>FastClipMedia：快速剪辑任务；</li><li>RemoveWatermarkTask：智能去除水印任务；</li><li>DescribeFileAttributesTask：获取文件属性任务；</li><li>RebuildMedia：音画质重生任务（不推荐使用）；</li><li>ReviewAudioVideo：音视频审核任务；</li><li>ExtractTraceWatermark：提取溯源水印任务；</li><li>ExtractCopyRightWatermark：提取版权水印任务；</li><li>QualityInspect：音画质检测任务；</li><li>QualityEnhance：音画质重生任务；</li><li>ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；</li><li>ProcessMediaByMPS：MPS 视频处理任务；</li><li>AigcImageTask：AIGC 生图任务；</li><li>SceneAigcImageTask：场景化 AIGC 生图任务；</li><li>AigcVideoTask：AIGC 生视频任务；</li><li>ImportMediaKnowledge：导入媒体知识任务。</li><li>SceneAigcVideoTask：场景化 AIGC 生视频任务；</li><li> ExtractBlindWatermark：提取数字水印任务。</li><li> ExtractBlindWatermark：提取数字水印任务。</li><li> CreateAigcAdvancedCustomElementTask：创建自定义主体任务</li><li>CreateAigcCustomVoiceTask：创建自定义音色任务</li><li>CreateAigcSubjectTask：创建主体任务</li><li>AigcVideoRedrawTask：AIGC 视频转绘任务</li></p>
    */
   TaskType?: string
   /**
@@ -19934,6 +19986,10 @@ export interface DescribeTaskDetailResponse {
    * <p>创建主体信息，仅当 TaskType 为 CreateAigcSubject，该字段有值。</p>
    */
   CreateAigcSubjectTask?: CreateAigcSubjectTask
+  /**
+   * <p>AIGC 视频转绘信息，仅当 TaskType 为AigcVideoRedrawTask，该字段有值。</p>
+   */
+  AigcVideoRedrawTask?: AigcVideoRedrawTask
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20250,19 +20306,19 @@ export interface DescribeCLSLogsetsRequest {
  */
 export interface DescribeAigcUsageDataRequest {
   /**
-   * 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
+   * <p>起始日期。使用 <a href="https://cloud.tencent.com/document/product/266/11732#52">ISO 日期格式</a>。</p>
    */
   StartTime: string
   /**
-   * 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
+   * <p>结束日期，需大于等于起始日期。使用 <a href="https://cloud.tencent.com/document/product/266/11732#52">ISO 日期格式</a>。</p>
    */
   EndTime: string
   /**
-   * AIGC类型，取值有：<li> Video：视频。</li><li> Image：图片。</li><li> Text：文本。</li>
+   * <p>AIGC类型。</p><p>枚举值：</p><ul><li>Video： 视频</li><li>Image： 图片</li><li>Text： 文本</li><li>SceneAigcVideo： 场景化视频处理</li><li>SceneAigcImage： 场景化图片处理</li><li>SceneAigcTime： 场景化处理次数</li></ul>
    */
   AigcType: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
 }
@@ -21927,11 +21983,11 @@ export interface CreateAigcImageTaskRequest {
    */
   SubAppId: number
   /**
-   * <p>模型名称。取值：</p><li>GG</li><li>SI</li><li>Qwen</li><li>Hunyuan</li><li>Vidu</li><li>Kling</li>
+   * <p>模型名称。取值：</p><li>OG</li><li>GG</li><li>SI</li><li>Qwen</li><li>Hunyuan</li><li>Vidu</li><li>Kling</li>
    */
   ModelName: string
   /**
-   * <p>模型版本。取值：</p><li>当 ModelName 是 GG，可选值为 2.5、3.0、3.1；</li><li>当 ModelName 是 Jimeng，可选值为 4.0；</li><li>当 ModelName 是 SI，可选值为 4.0、4.5、5.0-lite；</li><li>当 ModelName 是 Qwen，可选值为 0925；</li><li>当 ModelName 是 Hunyuan，可选值为 3.0；</li><li>当 ModelName 是 Vidu，可选值为 q2；</li><li>当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni、O1；</li>
+   * <p>模型版本。取值：</p><li>当 ModelName 是 OG，可选值为 image2_low、image2_medium、image2_high；</li><li>当 ModelName 是 GG，可选值为 2.5、3.0、3.1；</li><li>当 ModelName 是 Jimeng，可选值为 4.0；</li><li>当 ModelName 是 SI，可选值为 4.0、4.5、5.0-lite；</li><li>当 ModelName 是 Qwen，可选值为 0925；</li><li>当 ModelName 是 Hunyuan，可选值为 3.0；</li><li>当 ModelName 是 Vidu，可选值为 q2；</li><li>当 ModelName 是 Kling，可选值为 2.1、3.0、3.0-Omni、O1；</li>
    */
   ModelVersion: string
   /**
@@ -22557,6 +22613,16 @@ export interface CreateAnimatedGraphicsTemplateRequest {
    * 模板描述信息，长度限制：256 个字符。
    */
   Comment?: string
+}
+
+/**
+ * AIGC 视频转绘任务的输出信息。
+ */
+export interface AigcVideoRedrawTaskOutput {
+  /**
+   * <p>AIGC 视频转绘任务的输出文件信息。</p>
+   */
+  FileInfo?: AigcVideoRedrawOutputFileInfo
 }
 
 /**
@@ -24597,6 +24663,52 @@ export interface DescribeImageProcessingTemplatesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AIGC 视频转绘任务信息
+ */
+export interface AigcVideoRedrawTask {
+  /**
+   * <p>任务 ID。</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务状态，取值：<li>PROCESSING：处理中；</li><li>FINISH：已完成。</li></p>
+   */
+  Status?: string
+  /**
+   * <p>错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。</p>
+   */
+  ErrCode?: number
+  /**
+   * <p>扩展错误码。</p>
+   */
+  ErrCodeExt?: string
+  /**
+   * <p>错误信息。</p>
+   */
+  Message?: string
+  /**
+   * <p>任务进度，取值范围 [0-100] 。</p>
+   */
+  Progress?: number
+  /**
+   * <p>AIGC 视频转绘任务的输入信息。</p>
+   */
+  Input?: AigcVideoRedrawTaskInput
+  /**
+   * <p>AIGC 视频转绘任务的输出信息。</p>
+   */
+  Output?: AigcVideoRedrawTaskOutput
+  /**
+   * <p>用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
+   */
+  SessionId?: string
+  /**
+   * <p>来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。</p>
+   */
+  SessionContext?: string
 }
 
 /**

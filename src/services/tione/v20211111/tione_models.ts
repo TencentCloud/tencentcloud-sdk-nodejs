@@ -364,159 +364,159 @@ export interface DescribeExportResponse {
  */
 export interface NotebookSetItem {
   /**
-   * notebook ID
+   * <p>notebook ID</p>
    */
   Id?: string
   /**
-   * notebook 名称
+   * <p>notebook 名称</p>
    */
   Name?: string
   /**
-   * 计费模式
+   * <p>计费模式</p>
    */
   ChargeType?: string
   /**
-   * 资源配置
+   * <p>资源配置</p>
    */
   ResourceConf?: ResourceConf
   /**
-   * 预付费资源组
+   * <p>预付费资源组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupId?: string
   /**
-   * 存储卷大小
+   * <p>存储卷大小</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeSizeInGB?: number
   /**
-   * 计费金额信息，eg：2.00元/小时 (for后付费)
+   * <p>计费金额信息，eg：2.00元/小时 (for后付费)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingInfos?: Array<string>
   /**
-   * 标签配置
+   * <p>标签配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 启动时间
+   * <p>启动时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 运行时间
+   * <p>运行时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuntimeInSeconds?: number
   /**
-   * 计费状态
+   * <p>计费状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ChargeStatus?: string
   /**
-   * 状态
+   * <p>状态</p>
    */
   Status?: string
   /**
-   * 错误原因
+   * <p>错误原因</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FailureReason?: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
-   * Pod名称
+   * <p>Pod名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PodName?: string
   /**
-   * 后付费资源规格名称
+   * <p>后付费资源规格名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceTypeAlias?: string
   /**
-   * 预付费资源组名称
+   * <p>预付费资源组名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupName?: string
   /**
-   * 是否自动终止
+   * <p>是否自动终止</p>
    */
   AutoStopping?: boolean
   /**
-   * 自动停止时间
+   * <p>自动停止时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutomaticStopTime?: number
   /**
-   * 存储的类型。取值包含： 
-    FREE:        预付费的免费存储
-    CLOUD_PREMIUM： 高性能云硬盘
-    CLOUD_SSD： SSD云硬盘
-    CFS:     CFS存储，包含NFS和turbo
+   * <p>存储的类型。取值包含：<br>    FREE:        预付费的免费存储<br>    CLOUD_PREMIUM： 高性能云硬盘<br>    CLOUD_SSD： SSD云硬盘<br>    CFS:     CFS存储，包含NFS和turbo</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeSourceType?: string
   /**
-   * CFS存储的配置
+   * <p>CFS存储的配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeSourceCFS?: CFSConfig
   /**
-   * notebook 信息
+   * <p>notebook 信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
-   * notebook用户类型
+   * <p>notebook用户类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserTypes?: Array<string>
   /**
-   * SSH配置
+   * <p>SSH配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SSHConfig?: SSHConfig
   /**
-   * GooseFS存储配置
+   * <p>GooseFS存储配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeSourceGooseFS?: GooseFS
   /**
-   * 子用户ID
+   * <p>子用户ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubUin?: string
   /**
-   * 子用户名称
+   * <p>子用户名称</p>
    */
   SubUinName?: string
   /**
-   * AppId
+   * <p>AppId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: string
   /**
-   * 容器服务暴露端口配置
+   * <p>容器服务暴露端口配置</p>
    */
   ExposePortConfig?: ExposePortConfig
   /**
-   * 描述
+   * <p>描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
+  /**
+   * <p>操作者信息</p>
+   */
+  LatestOperatorInfo?: OperatorInfo
 }
 
 /**
@@ -602,6 +602,10 @@ export interface GatewayConfig {
  * DescribeBillingResourceGroups请求参数结构体
  */
 export interface DescribeBillingResourceGroupsRequest {
+  /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
   /**
    * Filter.Name: 枚举值: ResourceGroupId (资源组id列表)                    ResourceGroupName (资源组名称列表)                    AvailableNodeCount（资源组中可用节点数量） Filter.Values: 长度为1且Filter.Fuzzy=true时，支持模糊查询; 不为1时，精确查询每次请求的Filters的上限为5，Filter.Values的上限为100
    */
@@ -1161,6 +1165,10 @@ export interface ModifyServiceGroupWeightsRequest {
  */
 export interface DescribeTrainingTasksRequest {
   /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+  /**
    * 过滤器，eg：[{ "Name": "Id", "Values": ["train-23091792777383936"] }]
 
 取值范围：
@@ -1420,6 +1428,10 @@ export interface DescribeTrainingTaskRequest {
    */
   Id: string
   /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+  /**
    * 训练任务实例ID
    */
   InstanceId?: string
@@ -1484,22 +1496,22 @@ export interface DescribeTrainingModelVersionRequest {
  */
 export interface ResourceInstanceRunningJobInfo {
   /**
-   * pod名称
+   * <p>pod名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PodName?: string
   /**
-   * 任务类型
+   * <p>任务类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskType?: string
   /**
-   * 任务id
+   * <p>任务id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
-   * 任务自定义名称
+   * <p>任务自定义名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskName?: string
@@ -2386,22 +2398,31 @@ export interface Event {
 /**
  * DescribeBillingResourceGroupAttachedWorkspaces请求参数结构体
  */
-export type DescribeBillingResourceGroupAttachedWorkspacesRequest = null
+export interface DescribeBillingResourceGroupAttachedWorkspacesRequest {
+  /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+}
 
 /**
  * DescribeModelServiceGroups返回参数结构体
  */
 export interface DescribeModelServiceGroupsResponse {
   /**
-   * 推理服务组数量。
+   * <p>推理服务组数量。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
-   * 服务组信息
+   * <p>服务组信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceGroups?: Array<ServiceGroup>
+  /**
+   * <p>当前uin和region下全量服务组数量</p>
+   */
+  GlobalTotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2458,6 +2479,10 @@ export interface Spec {
  * DescribeDataSource请求参数结构体
  */
 export interface DescribeDataSourceRequest {
+  /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
   /**
    * 数据源id
    */
@@ -3827,32 +3852,35 @@ export interface PodSSHInfo {
  */
 export interface DescribeModelServiceGroupsRequest {
   /**
-   * 偏移量，默认为0
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+  /**
+   * <p>偏移量，默认为0</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为100
+   * <p>返回数量，默认为20，最大值为100</p>
    */
   Limit?: number
   /**
-   * 输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列
+   * <p>输出列表的排列顺序。取值范围：ASC：升序排列 DESC：降序排列</p>
    */
   Order?: string
   /**
-   * 排序的依据字段， 取值范围 "CreateTime" "UpdateTime"
+   * <p>排序的依据字段， 取值范围 &quot;CreateTime&quot; &quot;UpdateTime&quot;</p>
    */
   OrderField?: string
   /**
-   * 分页参数，支持的分页过滤Name包括：
-["ClusterId", "ServiceId", "ServiceGroupName", "ServiceGroupId","Status","CreatedBy","ModelVersionId"]
+   * <p>分页参数，支持的分页过滤Name包括：<br>[&quot;ClusterId&quot;, &quot;ServiceId&quot;, &quot;ServiceGroupName&quot;, &quot;ServiceGroupId&quot;,&quot;Status&quot;,&quot;CreatedBy&quot;,&quot;ModelVersionId&quot;]</p>
    */
   Filters?: Array<Filter>
   /**
-   * 标签过滤参数
+   * <p>标签过滤参数</p>
    */
   TagFilters?: Array<TagFilter>
   /**
-   * 服务分类
+   * <p>服务分类</p>
    * @deprecated
    */
   ServiceCategory?: string
@@ -5213,6 +5241,10 @@ export interface ScheduledAction {
  */
 export interface DescribeNotebooksRequest {
   /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+  /**
    * 偏移量，默认为0
    */
   Offset?: number
@@ -5310,218 +5342,217 @@ export interface GooseFS {
  */
 export interface NotebookDetail {
   /**
-   * notebook  ID
+   * <p>notebook  ID</p>
    */
   Id?: string
   /**
-   * notebook 名称
+   * <p>notebook 名称</p>
    */
   Name?: string
   /**
-   * 生命周期脚本
+   * <p>生命周期脚本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LifecycleScriptId?: string
   /**
-   * Pod-Name
+   * <p>Pod-Name</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PodName?: string
   /**
-   * Update-Time
+   * <p>Update-Time</p>
    */
   UpdateTime?: string
   /**
-   * 是否访问公网
+   * <p>是否访问公网</p>
    */
   DirectInternetAccess?: boolean
   /**
-   * 预付费专用资源组
+   * <p>预付费专用资源组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupId?: string
   /**
-   * 标签配置
+   * <p>标签配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
-   * 是否自动停止
+   * <p>是否自动停止</p>
    */
   AutoStopping?: boolean
   /**
-   * 其他GIT存储库，最多3个，单个
-长度不超过512字符
+   * <p>其他GIT存储库，最多3个，单个<br>长度不超过512字符</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdditionalCodeRepoIds?: Array<string>
   /**
-   * 自动停止时间，单位小时
+   * <p>自动停止时间，单位小时</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutomaticStopTime?: number
   /**
-   * 资源配置
+   * <p>资源配置</p>
    */
   ResourceConf?: ResourceConf
   /**
-   * 默认GIT存储库，长度不超过512字符
+   * <p>默认GIT存储库，长度不超过512字符</p>
    */
   DefaultCodeRepoId?: string
   /**
-   * 训练输出
+   * <p>训练输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
-   * 是否上报日志
+   * <p>是否上报日志</p>
    */
   LogEnable?: boolean
   /**
-   * 日志配置
+   * <p>日志配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogConfig?: LogConfig
   /**
-   * VPC ID
+   * <p>VPC ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
-   * 子网ID
+   * <p>子网ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
-   * 任务状态
+   * <p>任务状态</p>
    */
   Status?: string
   /**
-   * 运行时长
+   * <p>运行时长</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuntimeInSeconds?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 训练开始时间
+   * <p>训练开始时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
-   * 计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中
+   * <p>计费状态，eg：BILLING计费中，ARREARS_STOP欠费停止，NOT_BILLING不在计费中</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ChargeStatus?: string
   /**
-   * 是否ROOT权限
+   * <p>是否ROOT权限</p>
    */
   RootAccess?: boolean
   /**
-   * 计贺金额信息，eg:2.00元/小时
+   * <p>计贺金额信息，eg:2.00元/小时</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingInfos?: Array<string>
   /**
-   * 存储卷大小 （单位时GB，最小10GB，必须是10G的倍数）
+   * <p>存储卷大小 （单位时GB，最小10GB，必须是10G的倍数）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeSizeInGB?: number
   /**
-   * 失败原因
+   * <p>失败原因</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FailureReason?: string
   /**
-   * 计算资源付费模式 (- PREPAID：预付费，即包年包月 - POSTPAID_BY_HOUR：按小时后付费)
+   * <p>计算资源付费模式 (- PREPAID：预付费，即包年包月 - POSTPAID_BY_HOUR：按小时后付费)</p>
    */
   ChargeType?: string
   /**
-   * 后付费资源规格说明
+   * <p>后付费资源规格说明</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceTypeAlias?: string
   /**
-   * 预付费资源组名称
+   * <p>预付费资源组名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupName?: string
   /**
-   * 存储的类型。取值包含： 
-    FREE:        预付费的免费存储
-    CLOUD_PREMIUM： 高性能云硬盘
-    CLOUD_SSD： SSD云硬盘
-    CFS:     CFS存储，包含NFS和turbo
+   * <p>存储的类型。取值包含：<br>    FREE:        预付费的免费存储<br>    CLOUD_PREMIUM： 高性能云硬盘<br>    CLOUD_SSD： SSD云硬盘<br>    CFS:     CFS存储，包含NFS和turbo</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeSourceType?: string
   /**
-   * CFS存储的配置
+   * <p>CFS存储的配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeSourceCFS?: CFSConfig
   /**
-   * 数据配置
+   * <p>数据配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataConfigs?: Array<DataConfig>
   /**
-   * notebook 信息
+   * <p>notebook 信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
-   * 数据源来源，eg：WeData_HDFS
+   * <p>数据源来源，eg：WeData_HDFS</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataSource?: string
   /**
-   * 镜像信息
+   * <p>镜像信息</p>
    */
   ImageInfo?: ImageInfo
   /**
-   * 镜像类型
+   * <p>镜像类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageType?: string
   /**
-   * SSH配置
+   * <p>SSH配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SSHConfig?: SSHConfig
   /**
-   * GooseFS存储配置
+   * <p>GooseFS存储配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeSourceGooseFS?: GooseFS
   /**
-   * 子用户ID
+   * <p>子用户ID</p>
    */
   SubUin?: string
   /**
-   * 调度节点ID
+   * <p>调度节点ID</p>
    */
   ResourceGroupInstanceId?: string
   /**
-   * 子用户名称
+   * <p>子用户名称</p>
    */
   SubUinName?: string
   /**
-   * 任务实例创建时间
+   * <p>任务实例创建时间</p>
    */
   JobCreateTime?: string
   /**
-   * Appid
+   * <p>Appid</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: string
   /**
-   * 描述
+   * <p>描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
+  /**
+   * <p>最后操作者信息</p>
+   */
+  LatestOperatorInfo?: OperatorInfo
 }
 
 /**
@@ -5536,6 +5567,10 @@ export interface DescribeBillingResourceInstanceRunningJobsRequest {
    * 资源组节点id
    */
   ResourceInstanceId: string
+  /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
 }
 
 /**
@@ -6604,6 +6639,10 @@ export interface DescribeNotebookRequest {
    * notebook id
    */
   Id: string
+  /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
 }
 
 /**
@@ -7044,6 +7083,10 @@ export interface DescribeBillingResourceGroupRequest {
    */
   ResourceGroupId: string
   /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+  /**
    * 过滤条件
 注意: 
 1. Filter.Name 只支持以下枚举值:
@@ -7191,6 +7234,10 @@ export interface DescribeTrainingTaskPodsRequest {
    * 训练任务ID
    */
   Id: string
+  /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
 }
 
 /**

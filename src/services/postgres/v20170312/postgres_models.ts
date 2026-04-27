@@ -141,6 +141,48 @@ export interface DescribeDBXlogsRequest {
 }
 
 /**
+ * DescribeAuditLogs请求参数结构体
+ */
+export interface DescribeAuditLogsRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>开始时间</p><p>参数格式：2026-03-25 00:00:00</p>
+   */
+  StartTime: string
+  /**
+   * <p>结束时间</p><p>参数格式：2026-03-25 01:00:00</p>
+   */
+  EndTime: string
+  /**
+   * <p>查询限制</p><p>取值范围：[1, 100]</p>
+   */
+  Limit: number
+  /**
+   * <p>产品名称</p><p>参数格式：postgres</p>
+   */
+  Product: string
+  /**
+   * <p>位移量</p><p>取值范围：[0, 10000]</p>
+   */
+  Offset?: number
+  /**
+   * <p>排序方法</p><p>入参限制：Timestamp,AffectRows,ExecTime</p>
+   */
+  Order?: string
+  /**
+   * <p>排序字段</p><p>入参限制：ASC,DESC</p>
+   */
+  OrderBy?: string
+  /**
+   * <p>过滤条件</p>
+   */
+  Filter?: AuditLogFilter
+}
+
+/**
  * DescribeMaintainTimeWindow请求参数结构体
  */
 export interface DescribeMaintainTimeWindowRequest {
@@ -401,6 +443,24 @@ export interface SpecItemInfo {
    * <p>是否支持TDE数据加密功能，0-不支持，1-支持</p>
    */
   IsSupportTDE?: number
+}
+
+/**
+ * ModifyDBInstanceSSLConfig请求参数结构体
+ */
+export interface ModifyDBInstanceSSLConfigRequest {
+  /**
+   * 实例 ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   */
+  DBInstanceId: string
+  /**
+   * 开启或关闭SSL。true - 开启 ；false - 关闭。
+   */
+  SSLEnabled: boolean
+  /**
+   * SSL证书保护的唯一连接地址，若为主实例，可设置为内外网IP地址；若为只读实例，可设置为实例IP或只读组IP。在开启SSL或修改SSL保护的连接地址时，该参数为必传项；在关闭SSL时，该参数将被忽略。
+   */
+  ConnectAddress?: string
 }
 
 /**
@@ -867,17 +927,37 @@ export interface DescribeMaintainTimeWindowResponse {
 }
 
 /**
- * DescribeDefaultParameters请求参数结构体
+ * 审计日志过滤条件
  */
-export interface DescribeDefaultParametersRequest {
+export interface AuditLogFilter {
   /**
-   * 数据库版本，大版本号，例如11，12，13。可从[DescribeDBVersions](https://cloud.tencent.com/document/api/409/89018)接口获取
+   * <p>影响函数</p>
    */
-  DBMajorVersion: string
+  AffectRows?: number
   /**
-   * 数据库引擎，例如：postgresql,mssql_compatible
+   * <p>数据库名字</p>
    */
-  DBEngine: string
+  DBName?: Array<string>
+  /**
+   * <p>执行时间</p>
+   */
+  ExecTime?: number
+  /**
+   * <p>主机Host</p>
+   */
+  Host?: Array<string>
+  /**
+   * <p>sql语句</p>
+   */
+  Sql?: string
+  /**
+   * <p>登录名</p>
+   */
+  User?: Array<string>
+  /**
+   * <p>审计类型</p>
+   */
+  SqlType?: Array<string>
 }
 
 /**
@@ -944,9 +1024,19 @@ export interface DescribeRegionsResponse {
 }
 
 /**
- * ModifyBaseBackupExpireTime返回参数结构体
+ * DescribeAuditInstanceList返回参数结构体
  */
-export interface ModifyBaseBackupExpireTimeResponse {
+export interface DescribeAuditInstanceListResponse {
+  /**
+   * <p>实例数量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * <p>实例日志信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<AuditInstanceInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1099,9 +1189,40 @@ export interface DeleteReadOnlyGroupNetworkAccessRequest {
 }
 
 /**
- * DescribeBackupDownloadRestriction请求参数结构体
+ * 安全组规则信息
  */
-export type DescribeBackupDownloadRestrictionRequest = null
+export interface PolicyRule {
+  /**
+   * 策略，ACCEPT 或者 DROP
+   */
+  Action?: string
+  /**
+   * 来源或目的 IP 或 IP 段，例如172.16.0.0/12
+   */
+  CidrIp?: string
+  /**
+   * 端口
+   */
+  PortRange?: string
+  /**
+   * 网络协议，支持 UDP、TCP 等
+   */
+  IpProtocol?: string
+  /**
+   * 规则描述
+   */
+  Description?: string
+}
+
+/**
+ * DescribeBackupPlans请求参数结构体
+ */
+export interface DescribeBackupPlansRequest {
+  /**
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   */
+  DBInstanceId: string
+}
 
 /**
  * 描述可用区的编码和状态信息
@@ -1568,6 +1689,16 @@ export interface DescribeBackupDownloadURLResponse {
 }
 
 /**
+ * ModifyBaseBackupExpireTime返回参数结构体
+ */
+export interface ModifyBaseBackupExpireTimeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyMaintainTimeWindow返回参数结构体
  */
 export interface ModifyMaintainTimeWindowResponse {
@@ -1593,6 +1724,16 @@ export interface InquiryPriceCreateDBInstancesResponse {
    * <p>币种。例如，CNY：人民币。</p>
    */
   Currency?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteAuditLogFile返回参数结构体
+ */
+export interface DeleteAuditLogFileResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1711,6 +1852,44 @@ export interface TaskSet {
    * 任务的详情信息
    */
   TaskDetail?: TaskDetail
+}
+
+/**
+ * 数据库审计日志文件
+ */
+export interface AuditLogFile {
+  /**
+   * <p>文件名</p>
+   */
+  FileName?: string
+  /**
+   * <p>任务状态</p><p>枚举值：</p><ul><li>success： 成功</li><li>running： 创建中</li><li>failed： 失败</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>文件大小</p><p>单位：MB</p>
+   */
+  FileSize?: number
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>下载链接</p>
+   */
+  DownloadUrl?: string
+  /**
+   * <p>错误信息</p>
+   */
+  ErrMsg?: string
+  /**
+   * <p>下载进度</p>
+   */
+  Progress?: number
+  /**
+   * <p>完成时间</p>
+   */
+  FinishTime?: string
 }
 
 /**
@@ -2139,6 +2318,16 @@ export interface ModifyDBInstanceParametersRequest {
 }
 
 /**
+ * CreateAuditLogFile返回参数结构体
+ */
+export interface CreateAuditLogFileResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 用于修改数据库对象的权限，其中包含了数据库对象描述的数据结构、需要修改的权限列表以及修改的类型等。
  */
 export interface ModifyPrivilege {
@@ -2439,6 +2628,32 @@ export interface UpgradeDBInstanceKernelVersionRequest {
 }
 
 /**
+ * OpenAuditService请求参数结构体
+ */
+export interface OpenAuditServiceRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>日志保存时长</p><p>枚举值：</p><ul><li>7： 7天</li><li>30： 30天</li><li>90： 90天</li><li>180： 180天</li><li>365： 365天</li><li>1095： 1095天</li><li>1825： 1825天</li></ul>
+   */
+  LogExpireDay: number
+  /**
+   * <p>高频存储时长</p><p>枚举值：</p><ul><li>7： 7天</li><li>30： 30天</li><li>90： 90天</li><li>180： 180天</li><li>365： 365天</li><li>1095： 1095天</li><li>1825： 1825天</li></ul>
+   */
+  HotLogExpireDay: number
+  /**
+   * <p>审计类型</p><p>枚举值：</p><ul><li>complex： 精细审计，审计日志更全面，包含对象类型、对象等，开启后对性能有一定影响</li><li>simple： 极速审计，审计日志覆盖绝大多数字段，开启审计后对性能影响较小</li></ul>
+   */
+  AuditType: string
+  /**
+   * <p>产品名称</p><p>入参限制：postgres</p>
+   */
+  Product: string
+}
+
+/**
  * SwitchDBInstancePrimary返回参数结构体
  */
 export interface SwitchDBInstancePrimaryResponse {
@@ -2506,33 +2721,21 @@ export interface ModifyDBInstanceHAConfigRequest {
 }
 
 /**
- * 订单详情
+ * DescribeAuditLogFiles返回参数结构体
  */
-export interface PgDeal {
+export interface DescribeAuditLogFilesResponse {
   /**
-   * 订单名
+   * <p>查询总数</p>
    */
-  DealName?: string
+  TotalCount?: number
   /**
-   * 所属用户
+   * <p>审计日志文件列表</p>
    */
-  OwnerUin?: string
+  Items?: Array<AuditLogFile>
   /**
-   * 订单涉及多少个实例
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Count?: number
-  /**
-   * 付费模式。1-预付费；0-后付费
-   */
-  PayMode?: number
-  /**
-   * 异步任务流程ID
-   */
-  FlowId?: number
-  /**
-   * 实例ID数组
-   */
-  DBInstanceIdSet?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -3025,6 +3228,36 @@ export interface DescribeSlowQueryListResponse {
 }
 
 /**
+ * 订单详情
+ */
+export interface PgDeal {
+  /**
+   * 订单名
+   */
+  DealName?: string
+  /**
+   * 所属用户
+   */
+  OwnerUin?: string
+  /**
+   * 订单涉及多少个实例
+   */
+  Count?: number
+  /**
+   * 付费模式。1-预付费；0-后付费
+   */
+  PayMode?: number
+  /**
+   * 异步任务流程ID
+   */
+  FlowId?: number
+  /**
+   * 实例ID数组
+   */
+  DBInstanceIdSet?: Array<string>
+}
+
+/**
  * CreateReadOnlyGroup请求参数结构体
  */
 export interface CreateReadOnlyGroupRequest {
@@ -3107,6 +3340,16 @@ export interface DescribeParamsEventResponse {
 }
 
 /**
+ * CloseAuditService返回参数结构体
+ */
+export interface CloseAuditServiceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyDBInstanceSecurityGroups请求参数结构体
  */
 export interface ModifyDBInstanceSecurityGroupsRequest {
@@ -3124,6 +3367,20 @@ export interface ModifyDBInstanceSecurityGroupsRequest {
    * 只读组ID，可通过[DescribeReadOnlyGroups](https://cloud.tencent.com/document/api/409/52599)接口获取。DBInstanceId和ReadOnlyGroupId至少传一个；如果要修改只读组关联的安全组，只传ReadOnlyGroupId
    */
   ReadOnlyGroupId?: string
+}
+
+/**
+ * CloseAuditService请求参数结构体
+ */
+export interface CloseAuditServiceRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>产品名称</p><p>入参限制：postgres</p>
+   */
+  Product: string
 }
 
 /**
@@ -3712,6 +3969,21 @@ export interface DestroyDBInstanceRequest {
 }
 
 /**
+ * InquiryPriceRenewDBInstance请求参数结构体
+ */
+export interface InquiryPriceRenewDBInstanceRequest {
+  /**
+   * 实例ID，可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)获取。
+（此接口仅支持预付费实例的查询）
+   */
+  DBInstanceId: string
+  /**
+   * 续费周期，按月计算
+   */
+  Period: number
+}
+
+/**
  * DescribeBackupOverview返回参数结构体
  */
 export interface DescribeBackupOverviewResponse {
@@ -3809,6 +4081,24 @@ export interface DescribeClassesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 日志过滤条件
+ */
+export interface LogFilter {
+  /**
+   * <p>过滤条件名称。</p><p>如：sql - SQL命令详情</p><p>host – 客户端 IP；<br>user – 数据库账户。</p>
+   */
+  Type: string
+  /**
+   * <p>过滤条件匹配类型。支持：<br>INC – 包含；     （多个值之间是||的关系）<br>EXC – 不包含； （多个值之间是&amp;&amp;的关系）<br>EQS – 等于；     （多个值之间是||的关系）<br>NEQ – 不等于；（多个值之间是&amp;&amp;的关系）<br>RG – 范围；</p>
+   */
+  Compare: string
+  /**
+   * <p>过滤条件匹配值。当Compare=RG时，例：[&quot;1-100&quot;,&quot;200-300&quot;]</p>
+   */
+  Value: Array<string>
 }
 
 /**
@@ -4066,6 +4356,32 @@ export interface ModifyReadOnlyDBInstanceWeightRequest {
 }
 
 /**
+ * DescribeAuditInstanceList请求参数结构体
+ */
+export interface DescribeAuditInstanceListRequest {
+  /**
+   * <p>产品名称：postgres</p>
+   */
+  Product: string
+  /**
+   * <p>是否开通</p><p>枚举值：</p><ul><li>0： 未开通</li><li>1： 已开通</li></ul>
+   */
+  AuditSwitch: number
+  /**
+   * <p>分页限制</p>
+   */
+  Limit: number
+  /**
+   * <p>页偏移量</p>
+   */
+  Offset?: number
+  /**
+   * <p>实例过滤参数</p><p>入参限制：支持过滤条件：InstanceId-实例ID,InstanceName-实例名称</p>
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * ModifyAccountPrivileges返回参数结构体
  */
 export interface ModifyAccountPrivilegesResponse {
@@ -4216,21 +4532,29 @@ export interface UpgradeDBInstanceMajorVersionResponse {
 }
 
 /**
- * DescribeBaseBackups返回参数结构体
+ * DescribeBackupDownloadURL请求参数结构体
  */
-export interface DescribeBaseBackupsResponse {
+export interface DescribeBackupDownloadURLRequest {
   /**
-   * 查询到的数据备份数量。
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
-  TotalCount?: number
+  DBInstanceId: string
   /**
-   * 数据备份详细信息列表。
+   * 备份类型，目前支持：LogBackup，BaseBackup。
    */
-  BaseBackupSet?: Array<BaseBackup>
+  BackupType: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 备份的唯一ID。
    */
-  RequestId?: string
+  BackupId: string
+  /**
+   * 链接的有效时间，取值为[0,36]，默认为12小时。
+   */
+  URLExpireTime?: number
+  /**
+   * 备份下载限制
+   */
+  BackupDownloadRestriction?: BackupDownloadRestriction
 }
 
 /**
@@ -4274,21 +4598,29 @@ export interface DescribeDBVersionsResponse {
 }
 
 /**
- * ModifyDBInstanceSSLConfig请求参数结构体
+ * ModifyAuditService请求参数结构体
  */
-export interface ModifyDBInstanceSSLConfigRequest {
+export interface ModifyAuditServiceRequest {
   /**
-   * 实例 ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   * <p>实例ID</p>
    */
-  DBInstanceId: string
+  InstanceId: string
   /**
-   * 开启或关闭SSL。true - 开启 ；false - 关闭。
+   * <p>日志保存时长（天）</p><p>枚举值：</p><ul><li>7： 7天</li><li>30： 30天</li><li>90： 90天</li><li>180： 180天</li><li>365： 365天</li><li>1095： 1095天</li><li>1825： 1825天</li></ul>
    */
-  SSLEnabled: boolean
+  LogExpireDay: number
   /**
-   * SSL证书保护的唯一连接地址，若为主实例，可设置为内外网IP地址；若为只读实例，可设置为实例IP或只读组IP。在开启SSL或修改SSL保护的连接地址时，该参数为必传项；在关闭SSL时，该参数将被忽略。
+   * <p>高频存储时长（天）</p><p>枚举值：</p><ul><li>7： 7天</li><li>30： 30天</li><li>90： 90天</li><li>180： 180天</li><li>365： 365天</li><li>1095： 1095天</li><li>1825： 1825天</li></ul>
    */
-  ConnectAddress?: string
+  HotLogExpireDay: number
+  /**
+   * <p>审计类型</p><p>枚举值：</p><ul><li>complex： 精细审计，审计日志更全面，包含对象类型、对象等，开启后对性能有一定影响</li><li>simple： 极速审计，审计日志覆盖绝大多数字段，开启审计后对性能影响较小</li></ul>
+   */
+  AuditType: string
+  /**
+   * <p>产品名称</p><p>入参限制：postgres</p>
+   */
+  Product: string
 }
 
 /**
@@ -4355,6 +4687,62 @@ export interface ModifyDBInstanceNameResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpgradeDBInstanceMajorVersion请求参数结构体
+ */
+export interface UpgradeDBInstanceMajorVersionRequest {
+  /**
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   */
+  DBInstanceId: string
+  /**
+   * 目标内核版本号，可以通过API [DescribeDBVersions](https://cloud.tencent.com/document/product/409/89018)获取可以升级的目标内核版本号。
+   */
+  TargetDBKernelVersion: string
+  /**
+   * 是否为校验模式，若UpgradeCheck为True，表示仅进行内核版本兼容性检查，不会进行实质性的升级操作，对原实例无影响。检查结果可以通过升级日志查看。
+   */
+  UpgradeCheck?: boolean
+  /**
+   * 升级前备份选项。True，表示升级前需要创建全量备份，False，表示升级前不需要创建全量备份。当实例已有备份集可以恢复到升级前的状态时，可选择False，否则需要指定为True。UpgradeCheck为True时，此参数无效。
+   */
+  BackupBeforeUpgrade?: boolean
+  /**
+   * 统计信息收集选项，对主例运行 ANALYZE 以在升级后更新系统统计信息。可选值包括，
+0：不需要收集统计信息；
+1：实例恢复写之前收集统计信息；
+3：实例恢复写之后收集统计信息。
+UpgradeCheck为True时，此参数无效。
+   */
+  StatisticsRefreshOption?: number
+  /**
+   * 插件升级选项，pg_upgrade不会升级任何插件，需要在升级完成后在创建过插件的库上执行"ALTER EXTENSION UPDATE"。发起升级实例大版本时可以指定在实例恢复写前/后是否需要升级任务自动升级插件版本。可选值包括：
+0：不需要自动升级插件；
+1：恢复写之前升级插件；
+2：恢复写之后升级插件。
+UpgradeCheck为True时，此参数无效。
+   */
+  ExtensionUpgradeOption?: number
+  /**
+   * 升级时间选项，升级过程中会有一段时间实例只读，并会有一次秒级闪断，发起升级时需要选择这段影响的时间窗。可选值包括：
+0：自动执行，不需要指定时间窗；
+1：指定本次升级任务的时间窗，通过参数UpgradeTimeBegin和UpgradeTimeEnd设置；
+2：在实例运维时间窗内执行。
+UpgradeCheck为True时，此参数无效。
+   */
+  UpgradeTimeOption?: number
+  /**
+   * 升级时间窗开始时间，时间格式：HH:MM:SS，例如：01:00:00。当UpgradeTimeOption为1时，该参数有效。
+UpgradeCheck为True时，此参数无效。
+   */
+  UpgradeTimeBegin?: string
+  /**
+   * 升级时间窗截止时间，时间格式：HH:MM:SS，例如：02:00:00。当UpgradeTimeOption为1时，该参数有效。
+UpgradeCheck为True时，此参数无效。
+   */
+  UpgradeTimeEnd?: string
 }
 
 /**
@@ -4583,6 +4971,16 @@ export interface DescribeOrdersRequest {
 }
 
 /**
+ * OpenAuditService返回参数结构体
+ */
+export interface OpenAuditServiceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CloseDBExtranetAccess请求参数结构体
  */
 export interface CloseDBExtranetAccessRequest {
@@ -4697,18 +5095,54 @@ export interface DeleteAccountRequest {
 }
 
 /**
- * InquiryPriceRenewDBInstance请求参数结构体
+ * 审计实例信息
  */
-export interface InquiryPriceRenewDBInstanceRequest {
+export interface AuditInstanceInfo {
   /**
-   * 实例ID，可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)获取。
-（此接口仅支持预付费实例的查询）
+   * <p>实例ID</p>
    */
-  DBInstanceId: string
+  InstanceId?: string
   /**
-   * 续费周期，按月计算
+   * <p>开启状态</p><p>枚举值：</p><ul><li>OFF： 关闭</li><li>ON： 打开</li></ul>
    */
-  Period: number
+  AuditStatus?: string
+  /**
+   * <p>日志存储有效期</p><p>单位：天</p>
+   */
+  LogExpireDay?: number
+  /**
+   * <p>热存储有效期</p><p>单位：天</p>
+   */
+  HotLogExpireDay?: number
+  /**
+   * <p>冷存储有效期</p><p>单位：天</p>
+   */
+  ColdLogExpireDay?: number
+  /**
+   * <p>热存储大小</p><p>单位：MB</p>
+   */
+  HotLogSize?: number
+  /**
+   * <p>冷存储大小</p><p>单位：MB</p>
+   */
+  ColdLogSize?: number
+  /**
+   * <p>开启时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>投递状态</p>
+   */
+  Deliver?: string
+  /**
+   * <p>投递信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeliverSummary?: Array<DeliverSummary>
+  /**
+   * <p>实例信息</p>
+   */
+  InstanceInfo?: LogInstanceInfo
 }
 
 /**
@@ -4749,6 +5183,32 @@ export interface DeleteDBInstanceNetworkAccessResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 日志投递信息
+ */
+export interface DeliverSummary {
+  /**
+   * <p>投递消费者，当前仅支持CLS</p>
+   */
+  DeliverConsumer?: string
+  /**
+   * <p>投递消费者名称，当前仅支持CLS</p>
+   */
+  DeliverConsumerName?: string
+  /**
+   * <p>投递类型当前仅支持mq</p>
+   */
+  DeliverType?: string
+  /**
+   * <p>投递子类型，当前仅支持CLS</p>
+   */
+  DeliverSubType?: string
+  /**
+   * <p>投递报错</p>
+   */
+  DeliverError?: string
 }
 
 /**
@@ -4983,6 +5443,16 @@ export interface DisIsolateDBInstancesResponse {
 }
 
 /**
+ * ModifyDatabaseOwner返回参数结构体
+ */
+export interface ModifyDatabaseOwnerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateParameterTemplate请求参数结构体
  */
 export interface CreateParameterTemplateRequest {
@@ -5015,13 +5485,47 @@ export interface DescribeDBInstanceSSLConfigRequest {
 }
 
 /**
- * ModifyDatabaseOwner返回参数结构体
+ * CreateAuditLogFile请求参数结构体
  */
-export interface ModifyDatabaseOwnerResponse {
+export interface CreateAuditLogFileRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>实例ID</p>
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * <p>开始时间</p><p>参数格式：2026-03-25 00:00:00</p>
+   */
+  StartTime: string
+  /**
+   * <p>结束时间</p><p>参数格式：2026-03-25 01:00:00</p>
+   */
+  EndTime: string
+  /**
+   * <p>产品名称</p><p>入参限制：postgres</p>
+   */
+  Product: string
+  /**
+   * <p>过滤条件</p>
+   */
+  Filter?: AuditLogFilter
+}
+
+/**
+ * DeleteAuditLogFile请求参数结构体
+ */
+export interface DeleteAuditLogFileRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>产品名称，固定值：postgres</p>
+   */
+  Product: string
+  /**
+   * <p>审计日志文件名称</p>
+   */
+  FileName: string
 }
 
 /**
@@ -5236,14 +5740,9 @@ export interface DescribeDBInstanceSecurityGroupsRequest {
 }
 
 /**
- * DescribeBackupPlans请求参数结构体
+ * DescribeBackupDownloadRestriction请求参数结构体
  */
-export interface DescribeBackupPlansRequest {
-  /**
-   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
-   */
-  DBInstanceId: string
-}
+export type DescribeBackupDownloadRestrictionRequest = null
 
 /**
  * ModifyBaseBackupExpireTime请求参数结构体
@@ -5395,6 +5894,20 @@ export interface DedicatedCluster {
    * 磁盘可用量，单位GB
    */
   DiskAvailable?: number
+}
+
+/**
+ * DescribeDefaultParameters请求参数结构体
+ */
+export interface DescribeDefaultParametersRequest {
+  /**
+   * 数据库版本，大版本号，例如11，12，13。可从[DescribeDBVersions](https://cloud.tencent.com/document/api/409/89018)接口获取
+   */
+  DBMajorVersion: string
+  /**
+   * 数据库引擎，例如：postgresql,mssql_compatible
+   */
+  DBEngine: string
 }
 
 /**
@@ -5589,6 +6102,82 @@ export interface DescribeParameterTemplateAttributesResponse {
 }
 
 /**
+ * 审计日志详情
+ */
+export interface AuditLog {
+  /**
+   * <p>日志时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timestamp?: string
+  /**
+   * <p>影响行数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AffectRows?: number
+  /**
+   * <p>数据库</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DBName?: string
+  /**
+   * <p>错误码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrCode?: string
+  /**
+   * <p>错误信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMessage?: string
+  /**
+   * <p>执行时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecTime?: number
+  /**
+   * <p>访问来源</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Host?: string
+  /**
+   * <p>实例Id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * <p>对象名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ObjectName?: string
+  /**
+   * <p>对象类型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ObjectType?: string
+  /**
+   * <p>sql</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Sql?: string
+  /**
+   * <p>sql类型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlType?: string
+  /**
+   * <p>线程ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ThreadId?: string
+  /**
+   * <p>用户</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+}
+
+/**
  * UpgradeDBInstanceKernelVersion返回参数结构体
  */
 export interface UpgradeDBInstanceKernelVersionResponse {
@@ -5613,6 +6202,55 @@ export interface DescribeDBVersionsRequest {
 }
 
 /**
+ * 日志实例信息
+ */
+export interface LogInstanceInfo {
+  /**
+   * <p>实例名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * <p>项目ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: number
+  /**
+   * <p>实例标签</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagList?: Array<Tag>
+  /**
+   * <p>引擎</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Engine?: string
+  /**
+   * <p>引擎版本</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineVersion?: string
+  /**
+   * <p>实例状态</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceStatus?: string
+  /**
+   * <p>是否支持审计。1代表支持，0代表不支持。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsSupportAudit?: number
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>日志类型</p><p>枚举值：</p><ul><li>complex： 精细审计</li><li>simple： 极速审计</li></ul>
+   */
+  AuditType?: string
+}
+
+/**
  * ModifyDBInstancesProject请求参数结构体
  */
 export interface ModifyDBInstancesProjectRequest {
@@ -5627,59 +6265,13 @@ export interface ModifyDBInstancesProjectRequest {
 }
 
 /**
- * UpgradeDBInstanceMajorVersion请求参数结构体
+ * ModifyAuditService返回参数结构体
  */
-export interface UpgradeDBInstanceMajorVersionRequest {
+export interface ModifyAuditServiceResponse {
   /**
-   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DBInstanceId: string
-  /**
-   * 目标内核版本号，可以通过API [DescribeDBVersions](https://cloud.tencent.com/document/product/409/89018)获取可以升级的目标内核版本号。
-   */
-  TargetDBKernelVersion: string
-  /**
-   * 是否为校验模式，若UpgradeCheck为True，表示仅进行内核版本兼容性检查，不会进行实质性的升级操作，对原实例无影响。检查结果可以通过升级日志查看。
-   */
-  UpgradeCheck?: boolean
-  /**
-   * 升级前备份选项。True，表示升级前需要创建全量备份，False，表示升级前不需要创建全量备份。当实例已有备份集可以恢复到升级前的状态时，可选择False，否则需要指定为True。UpgradeCheck为True时，此参数无效。
-   */
-  BackupBeforeUpgrade?: boolean
-  /**
-   * 统计信息收集选项，对主例运行 ANALYZE 以在升级后更新系统统计信息。可选值包括，
-0：不需要收集统计信息；
-1：实例恢复写之前收集统计信息；
-3：实例恢复写之后收集统计信息。
-UpgradeCheck为True时，此参数无效。
-   */
-  StatisticsRefreshOption?: number
-  /**
-   * 插件升级选项，pg_upgrade不会升级任何插件，需要在升级完成后在创建过插件的库上执行"ALTER EXTENSION UPDATE"。发起升级实例大版本时可以指定在实例恢复写前/后是否需要升级任务自动升级插件版本。可选值包括：
-0：不需要自动升级插件；
-1：恢复写之前升级插件；
-2：恢复写之后升级插件。
-UpgradeCheck为True时，此参数无效。
-   */
-  ExtensionUpgradeOption?: number
-  /**
-   * 升级时间选项，升级过程中会有一段时间实例只读，并会有一次秒级闪断，发起升级时需要选择这段影响的时间窗。可选值包括：
-0：自动执行，不需要指定时间窗；
-1：指定本次升级任务的时间窗，通过参数UpgradeTimeBegin和UpgradeTimeEnd设置；
-2：在实例运维时间窗内执行。
-UpgradeCheck为True时，此参数无效。
-   */
-  UpgradeTimeOption?: number
-  /**
-   * 升级时间窗开始时间，时间格式：HH:MM:SS，例如：01:00:00。当UpgradeTimeOption为1时，该参数有效。
-UpgradeCheck为True时，此参数无效。
-   */
-  UpgradeTimeBegin?: string
-  /**
-   * 升级时间窗截止时间，时间格式：HH:MM:SS，例如：02:00:00。当UpgradeTimeOption为1时，该参数有效。
-UpgradeCheck为True时，此参数无效。
-   */
-  UpgradeTimeEnd?: string
+  RequestId?: string
 }
 
 /**
@@ -5731,29 +6323,29 @@ export interface DeleteBaseBackupResponse {
 }
 
 /**
- * 安全组规则信息
+ * DescribeAuditLogFiles请求参数结构体
  */
-export interface PolicyRule {
+export interface DescribeAuditLogFilesRequest {
   /**
-   * 策略，ACCEPT 或者 DROP
+   * <p>实例ID</p>
    */
-  Action?: string
+  InstanceId: string
   /**
-   * 来源或目的 IP 或 IP 段，例如172.16.0.0/12
+   * <p>产品名称</p><p>入参限制：postgres</p>
    */
-  CidrIp?: string
+  Product: string
   /**
-   * 端口
+   * <p>日志文件名称</p>
    */
-  PortRange?: string
+  FileName?: string
   /**
-   * 网络协议，支持 UDP、TCP 等
+   * <p>查询限制</p><p>取值范围：[1, 300]</p>
    */
-  IpProtocol?: string
+  Limit?: number
   /**
-   * 规则描述
+   * <p>偏移量</p><p>取值范围：[0, 1000]</p>
    */
-  Description?: string
+  Offset?: number
 }
 
 /**
@@ -5785,29 +6377,21 @@ export interface RefreshAccountPasswordResponse {
 }
 
 /**
- * DescribeBackupDownloadURL请求参数结构体
+ * DescribeBaseBackups返回参数结构体
  */
-export interface DescribeBackupDownloadURLRequest {
+export interface DescribeBaseBackupsResponse {
   /**
-   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   * 查询到的数据备份数量。
    */
-  DBInstanceId: string
+  TotalCount?: number
   /**
-   * 备份类型，目前支持：LogBackup，BaseBackup。
+   * 数据备份详细信息列表。
    */
-  BackupType: string
+  BaseBackupSet?: Array<BaseBackup>
   /**
-   * 备份的唯一ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  BackupId: string
-  /**
-   * 链接的有效时间，取值为[0,36]，默认为12小时。
-   */
-  URLExpireTime?: number
-  /**
-   * 备份下载限制
-   */
-  BackupDownloadRestriction?: BackupDownloadRestriction
+  RequestId?: string
 }
 
 /**
@@ -5924,19 +6508,20 @@ export interface DeleteAccountResponse {
 }
 
 /**
- * 日志过滤条件
+ * DescribeAuditLogs返回参数结构体
  */
-export interface LogFilter {
+export interface DescribeAuditLogsResponse {
   /**
-   * <p>过滤条件名称。</p><p>如：sql - SQL命令详情</p><p>host – 客户端 IP；<br>user – 数据库账户。</p>
+   * <p>日志条数</p>
    */
-  Type: string
+  TotalCount?: number
   /**
-   * <p>过滤条件匹配类型。支持：<br>INC – 包含；     （多个值之间是||的关系）<br>EXC – 不包含； （多个值之间是&amp;&amp;的关系）<br>EQS – 等于；     （多个值之间是||的关系）<br>NEQ – 不等于；（多个值之间是&amp;&amp;的关系）<br>RG – 范围；</p>
+   * <p>日志详情</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Compare: string
+  Items?: Array<AuditLog>
   /**
-   * <p>过滤条件匹配值。当Compare=RG时，例：[&quot;1-100&quot;,&quot;200-300&quot;]</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Value: Array<string>
+  RequestId?: string
 }

@@ -32,6 +32,40 @@ export interface PageScreenVO {
 }
 
 /**
+ * DescribeUserRoleList请求参数结构体
+ */
+export interface DescribeUserRoleListRequest {
+  /**
+   * 页码
+   */
+  PageNo: number
+  /**
+   * 页数
+   */
+  PageSize: number
+  /**
+   * 全部页码
+   */
+  AllPage?: boolean
+  /**
+   * 0 企业用户 1 访客 不填表示所有用户
+   */
+  UserType?: string
+  /**
+   * 模糊搜索的关键字
+   */
+  Keyword?: string
+  /**
+   * 项目id
+   */
+  ProjectId?: string
+  /**
+   * 是否只获取绑定企微应用的
+   */
+  IsOnlyBindAppUser?: boolean
+}
+
+/**
  * DeleteProject请求参数结构体
  */
 export interface DeleteProjectRequest {
@@ -1012,6 +1046,36 @@ export interface CreateUserGroupRequest {
 }
 
 /**
+ * CreateAuthApiKey返回参数结构体
+ */
+export interface CreateAuthApiKeyResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * <p>&quot;&quot;</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * <p>&quot;success&quot;</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * <p>数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ApiKeyAuthApplyVO
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteDatasource返回参数结构体
  */
 export interface DeleteDatasourceResponse {
@@ -1146,33 +1210,24 @@ project，ChatBI嵌出时
 }
 
 /**
- * DescribePermissionRoleInfo返回参数结构体
+ * ApiKey列表
  */
-export interface DescribePermissionRoleInfoResponse {
+export interface ApiKeyAuthApplyVOList {
   /**
-   * 自定义错误信息对象
+   * <p>总数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorInfo?: ErrorInfo
+  Total?: number
   /**
-   * 数据
+   * <p>页数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: Array<Role>
+  TotalPages?: number
   /**
-   * 消息
+   * <p>列表数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Msg?: string
-  /**
-   * 112 
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Extra?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  List?: Array<ApiKeyAuthApplyVO>
 }
 
 /**
@@ -1491,6 +1546,36 @@ Operator 目前支持
 }
 
 /**
+ * DescribeAuthApiKeyInfo返回参数结构体
+ */
+export interface DescribeAuthApiKeyInfoResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * <p>&quot;&quot;</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * <p>&quot;success&quot;</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * <p>数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ApiKeyAuthApplyVO
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyDatasource请求参数结构体
  */
 export interface ModifyDatasourceRequest {
@@ -1712,6 +1797,20 @@ export interface DeleteProjectResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyAuthApiKey请求参数结构体
+ */
+export interface ModifyAuthApiKeyRequest {
+  /**
+   * <p>ApiKey</p>
+   */
+  ApiKey: string
+  /**
+   * <p>默认用户</p>
+   */
+  DefaultUser?: string
 }
 
 /**
@@ -2146,6 +2245,36 @@ export interface DescribeResourceUserGroupPageListRequest {
 }
 
 /**
+ * DeleteAuthApiKey返回参数结构体
+ */
+export interface DeleteAuthApiKeyResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * <p>&quot;&quot;</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * <p>&quot;success&quot;</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * <p>数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 操作的资源权限
  */
 export interface ResourceListDTO {
@@ -2321,6 +2450,62 @@ export interface EmbedTokenInfo {
 }
 
 /**
+ * 创建ApiKey接口出参
+ */
+export interface ApiKeyAuthApplyVO {
+  /**
+   * <p>id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * <p>企业id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CorpId?: string
+  /**
+   * <p>apiKey</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiKey?: string
+  /**
+   * <p>默认用户</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultUser?: string
+  /**
+   * <p>创建人</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedUser?: string
+  /**
+   * <p>创建时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedAt?: string
+  /**
+   * <p>更新人</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdatedUser?: string
+  /**
+   * <p>更新时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdatedAt?: string
+}
+
+/**
+ * DeleteAuthApiKey请求参数结构体
+ */
+export interface DeleteAuthApiKeyRequest {
+  /**
+   * <p>ApiKey</p>
+   */
+  ApiKey: string
+}
+
+/**
  * 数据源详情列表
  */
 export interface DatasourceInfoData {
@@ -2339,6 +2524,36 @@ export interface DatasourceInfoData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalPages?: number
+}
+
+/**
+ * DescribePermissionRoleInfo返回参数结构体
+ */
+export interface DescribePermissionRoleInfoResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<Role>
+  /**
+   * 消息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 112 
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2600,37 +2815,25 @@ export interface DeleteUserRoleProjectRequest {
 }
 
 /**
- * DescribeUserRoleList请求参数结构体
+ * DescribeAuthApiKeyList请求参数结构体
  */
-export interface DescribeUserRoleListRequest {
+export interface DescribeAuthApiKeyListRequest {
   /**
-   * 页码
-   */
-  PageNo: number
-  /**
-   * 页数
-   */
-  PageSize: number
-  /**
-   * 全部页码
+   * <p>全部</p><p>默认值：false</p>
    */
   AllPage?: boolean
   /**
-   * 0 企业用户 1 访客 不填表示所有用户
+   * <p>页码</p><p>默认值：0</p>
    */
-  UserType?: string
+  PageNo?: number
   /**
-   * 模糊搜索的关键字
+   * <p>分页大小</p><p>默认值：10</p>
+   */
+  PageSize?: number
+  /**
+   * <p>关键字过滤</p>
    */
   Keyword?: string
-  /**
-   * 项目id
-   */
-  ProjectId?: string
-  /**
-   * 是否只获取绑定企微应用的
-   */
-  IsOnlyBindAppUser?: boolean
 }
 
 /**
@@ -2661,6 +2864,26 @@ export interface ClearEmbedTokenResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAuthApiKeyInfo请求参数结构体
+ */
+export interface DescribeAuthApiKeyInfoRequest {
+  /**
+   * <p>ApiKey</p>
+   */
+  ApiKey: string
+}
+
+/**
+ * CreateAuthApiKey请求参数结构体
+ */
+export interface CreateAuthApiKeyRequest {
+  /**
+   * <p>默认用户</p>
+   */
+  DefaultUser?: string
 }
 
 /**
@@ -3441,6 +3664,36 @@ export interface UserGroupDTO {
 }
 
 /**
+ * DescribeAuthApiKeyList返回参数结构体
+ */
+export interface DescribeAuthApiKeyListResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * <p>{}</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * <p>信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * <p>数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ApiKeyAuthApplyVOList
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateUserGroup返回参数结构体
  */
 export interface CreateUserGroupResponse {
@@ -3469,6 +3722,36 @@ export interface DescribeUserGroupInfoRequest {
  * CreateUserGroupMember请求参数结构体
  */
 export type CreateUserGroupMemberRequest = null
+
+/**
+ * ModifyAuthApiKey返回参数结构体
+ */
+export interface ModifyAuthApiKeyResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * <p>&quot;&quot;</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * <p>&quot;success&quot;</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * <p>数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ApiKeyAuthApplyVO
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * ModifyProject返回参数结构体

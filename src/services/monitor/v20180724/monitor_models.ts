@@ -1293,13 +1293,21 @@ export interface CreateAlarmShieldRequest {
 }
 
 /**
- * TerminatePrometheusInstances请求参数结构体
+ * CheckAddressByPrometheus请求参数结构体
  */
-export interface TerminatePrometheusInstancesRequest {
+export interface CheckAddressByPrometheusRequest {
   /**
-   * 实例 ID 列表
+   * <p>实例id</p>
    */
-  InstanceIds: Array<string>
+  InstanceId: string
+  /**
+   * <p>探测地址</p>
+   */
+  Target: string
+  /**
+   * <p>探测方式。tcp或http，默认是tcp</p>
+   */
+  ProbeProtocol?: string
 }
 
 /**
@@ -6666,6 +6674,16 @@ export interface DescribePhoneAlarmFlowTotalCountResponse {
 }
 
 /**
+ * TerminatePrometheusInstances请求参数结构体
+ */
+export interface TerminatePrometheusInstancesRequest {
+  /**
+   * 实例 ID 列表
+   */
+  InstanceIds: Array<string>
+}
+
+/**
  * CreateServiceDiscovery请求参数结构体
  */
 export interface CreateServiceDiscoveryRequest {
@@ -7467,6 +7485,16 @@ export interface DescribeMonitorTypesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 维度信息
+ */
+export interface DimensionsDesc {
+  /**
+   * 维度名数组
+   */
+  Dimensions: Array<string>
 }
 
 /**
@@ -11495,13 +11523,25 @@ export interface ModifyPrometheusGlobalNotificationResponse {
 }
 
 /**
- * 维度信息
+ * CheckAddressByPrometheus返回参数结构体
  */
-export interface DimensionsDesc {
+export interface CheckAddressByPrometheusResponse {
   /**
-   * 维度名数组
+   * <p>实际探测的地址</p>
    */
-  Dimensions: Array<string>
+  Target?: string
+  /**
+   * <p>探测是否成功</p>
+   */
+  Success?: boolean
+  /**
+   * <p>探测失败时返回错误信息</p>
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

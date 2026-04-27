@@ -363,6 +363,7 @@ import {
   AICallConfig,
   Credentials,
   AppInfo,
+  TimeRange,
   DescribeSharedKnowledgeResponse,
   NL2SQLModelConfig,
   ListReleaseItem,
