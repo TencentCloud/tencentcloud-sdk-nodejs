@@ -268,16 +268,6 @@ it("ocr.v20181119.FlightInvoiceOCR", async function () {
     }
 })
 
-it("ocr.v20181119.CropEnhanceImageOCR", async function () {
-    try {
-       const data = await client.CropEnhanceImageOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ocr.v20181119.RecognizeGeneralInvoice", async function () {
     try {
        const data = await client.RecognizeGeneralInvoice({})
@@ -421,16 +411,6 @@ it("ocr.v20181119.EstateCertOCR", async function () {
 it("ocr.v20181119.BankCardOCR", async function () {
     try {
        const data = await client.BankCardOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ocr.v20181119.EraseHandwrittenImageOCR", async function () {
-    try {
-       const data = await client.EraseHandwrittenImageOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

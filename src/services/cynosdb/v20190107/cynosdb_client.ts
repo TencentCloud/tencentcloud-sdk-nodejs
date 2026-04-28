@@ -456,6 +456,7 @@ import {
   DescribeMaintainPeriodResponse,
   DescribeBackupListResponse,
   DescribeServerlessStrategyResponse,
+  UpgradeAnalysisInstanceVersionInfo,
   ModifyClusterParamRequest,
   ModifyClusterReadOnlyRequest,
   OfflineInstanceResponse,

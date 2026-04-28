@@ -804,7 +804,7 @@ export interface DeleteCompliancePolicyItemFromWhitelistRequest {
  */
 export interface DescribeAssetImageDetailRequest {
   /**
-   * 镜像id
+   * <p>镜像id</p>
    */
   ImageID: string
 }
@@ -9421,133 +9421,137 @@ export interface EscapeEventDescription {
  */
 export interface DescribeAssetImageDetailResponse {
   /**
-   * 镜像ID
+   * <p>镜像ID</p>
    */
   ImageID?: string
   /**
-   * 镜像名称
+   * <p>镜像名称</p>
    */
   ImageName?: string
   /**
-   * 镜像摘要
+   * <p>镜像摘要</p>
    */
   ImageDigest?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 镜像大小
+   * <p>镜像大小</p>
    */
   Size?: number
   /**
-   * 关联主机个数(包含普通节点数和超级节点数)
+   * <p>关联主机个数(包含普通节点数和超级节点数)</p>
    */
   HostCnt?: number
   /**
-   * 关联容器个数
+   * <p>关联容器个数</p>
    */
   ContainerCnt?: number
   /**
-   * 超级节点数
+   * <p>超级节点数</p>
    */
   SuperNodeCnt?: number
   /**
-   * 最近扫描时间
+   * <p>最近扫描时间</p>
    */
   ScanTime?: string
   /**
-   * 漏洞个数
+   * <p>漏洞个数</p>
    */
   VulCnt?: number
   /**
-   * 风险行为数
+   * <p>风险行为数</p>
    */
   RiskCnt?: number
   /**
-   * 敏感信息数
+   * <p>敏感信息数</p>
    */
   SensitiveInfoCnt?: number
   /**
-   * 是否信任镜像
+   * <p>是否信任镜像</p>
    */
   IsTrustImage?: boolean
   /**
-   * 镜像系统
+   * <p>镜像系统</p>
    */
   OsName?: string
   /**
-   * agent镜像扫描错误
+   * <p>agent镜像扫描错误</p>
    */
   AgentError?: string
   /**
-   * 后端镜像扫描错误
+   * <p>后端镜像扫描错误</p>
    */
   ScanError?: string
   /**
-   * 系统架构
+   * <p>系统架构</p>
    */
   Architecture?: string
   /**
-   * 作者
+   * <p>作者</p>
    */
   Author?: string
   /**
-   * 构建历史
+   * <p>构建历史</p>
    */
   BuildHistory?: string
   /**
-   * 木马扫描进度
+   * <p>木马扫描进度</p>
    */
   ScanVirusProgress?: number
   /**
-   * 漏洞扫进度
+   * <p>漏洞扫进度</p>
    */
   ScanVulProgress?: number
   /**
-   * 敏感信息扫描进度
+   * <p>敏感信息扫描进度</p>
    */
   ScanRiskProgress?: number
   /**
-   * 木马扫描错误
+   * <p>木马扫描错误</p>
    */
   ScanVirusError?: string
   /**
-   * 漏洞扫描错误
+   * <p>漏洞扫描错误</p>
    */
   ScanVulError?: string
   /**
-   * 敏感信息错误
+   * <p>敏感信息错误</p>
    */
   ScanRiskError?: string
   /**
-   * 镜像扫描状态
+   * <p>镜像扫描状态</p>
    */
   ScanStatus?: string
   /**
-   * 木马病毒数
+   * <p>木马病毒数</p>
    */
   VirusCnt?: number
   /**
-   * 镜像扫描状态
+   * <p>镜像扫描状态</p>
    */
   Status?: number
   /**
-   * 剩余扫描时间
+   * <p>剩余扫描时间</p>
    */
   RemainScanTime?: number
   /**
-   * 授权为：1，未授权为：0
+   * <p>授权为：1，未授权为：0</p>
    */
   IsAuthorized?: number
   /**
-   * 解决方案
+   * <p>解决方案</p>
    */
   Solution?: string
   /**
-   * 原因
+   * <p>原因</p>
    */
   Reason?: string
+  /**
+   * <p>仓库Digests</p>
+   */
+  RepoDigests?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

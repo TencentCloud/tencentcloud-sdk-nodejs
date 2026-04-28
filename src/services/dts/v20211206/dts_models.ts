@@ -852,11 +852,11 @@ export interface CompleteMigrateJobResponse {
  */
 export interface DescribeMigrateDBInstancesResponse {
   /**
-   * 符合筛选条件的数量
+   * <p>符合筛选条件的数量</p>
    */
   TotalCount?: number
   /**
-   * 实例列表
+   * <p>实例列表</p>
    */
   Instances?: Array<MigrateDBItem>
   /**
@@ -3289,43 +3289,43 @@ export interface MigrateDBItem {
  */
 export interface DescribeMigrateDBInstancesRequest {
   /**
-   * 数据库类型，如mysql,percona,mariadb,tdsqlmysql,mariadb,postgresql,cynosdbmysql,redis,tendis,keewidb,tdstore,mongodb,clickhouse,sqlserver等。
+   * <p>数据库类型，如mysql,percona,mariadb,tdsqlmysql,mariadb,postgresql,cynosdbmysql,redis,tendis,keewidb,tdstore,mongodb,clickhouse,sqlserver等。</p>
    */
   DatabaseType: string
   /**
-   * 实例作为迁移的源还是目标,src(表示源)，dst(表示目标)
+   * <p>实例作为迁移的源还是目标,src(表示源)，dst(表示目标)</p>
    */
   MigrateRole?: string
   /**
-   * 云数据库实例ID，可通过对应业务实例列表获取实例信息。
+   * <p>云数据库实例ID，可通过对应业务实例列表获取实例信息。</p>
    */
   InstanceId?: string
   /**
-   * 云数据库名称，可通过对应业务实例列表获取实例信息。
+   * <p>云数据库名称，可通过对应业务实例列表获取实例信息。</p>
    */
   InstanceName?: string
   /**
-   * 返回数量限制
+   * <p>返回数量限制</p>
    */
   Limit?: number
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset?: number
   /**
-   * 资源所属账号 为空值或self(表示本账号内资源)、other(表示其他账户资源)
+   * <p>资源所属账号 为空值或self(表示本账号内资源)、other(表示其他账户资源)</p>
    */
   AccountMode?: string
   /**
-   * 临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号迁移文档(https://cloud.tencent.com/document/product/571/54117)第4节中关于角色的定义。
+   * <p>临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号迁移文档(https://cloud.tencent.com/document/product/571/54117)第4节中关于角色的定义。</p>
    */
   TmpSecretId?: string
   /**
-   * 临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号迁移文档(https://cloud.tencent.com/document/product/571/54117)第4节中关于角色的定义。
+   * <p>临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号迁移文档(https://cloud.tencent.com/document/product/571/54117)第4节中关于角色的定义。</p>
    */
   TmpSecretKey?: string
   /**
-   * 临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号迁移文档(https://cloud.tencent.com/document/product/571/54117)第4节中关于角色的定义。
+   * <p>临时密钥Id，可通过申请扮演角色临时访问凭证获取临时密钥https://cloud.tencent.com/document/product/1312/48197，其中角色资源RoleArn的定义可参考DTS跨账号迁移文档(https://cloud.tencent.com/document/product/571/54117)第4节中关于角色的定义。</p>
    */
   TmpToken?: string
 }

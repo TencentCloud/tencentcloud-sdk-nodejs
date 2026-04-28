@@ -82,6 +82,7 @@ import {
   ImportInstancesActionTimerResponse,
   DescribeKeyPairsResponse,
   ResetInstancesPasswordRequest,
+  ModifyChcNetworkModeResponse,
   DescribeInternetChargeTypeConfigsResponse,
   InternetChargeTypeConfig,
   DescribeImagesResponse,
@@ -191,6 +192,7 @@ import {
   CreateLaunchTemplateResponse,
   CreateKeyPairRequest,
   InstanceStatus,
+  SharePermission,
   InquiryPriceRenewInstancesResponse,
   AllocateHostsResponse,
   DescribeImageSharePermissionRequest,
@@ -233,7 +235,7 @@ import {
   DescribeInstancesStatusRequest,
   InquiryPriceResizeInstanceDisksResponse,
   TerminateInstancesRequest,
-  SharePermission,
+  ModifyChcNetworkModeRequest,
   DeleteImagesResponse,
   ResetInstanceRequest,
   ImportImageResponse,
@@ -413,13 +415,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyLaunchTemplateDefaultVersion）用于修改实例启动模板默认版本。
+   * 本接口（DeleteLaunchTemplate）用于删除一个实例启动模板。
    */
-  async ModifyLaunchTemplateDefaultVersion(
-    req: ModifyLaunchTemplateDefaultVersionRequest,
-    cb?: (error: string, rep: ModifyLaunchTemplateDefaultVersionResponse) => void
-  ): Promise<ModifyLaunchTemplateDefaultVersionResponse> {
-    return this.request("ModifyLaunchTemplateDefaultVersion", req, cb)
+  async DeleteLaunchTemplate(
+    req: DeleteLaunchTemplateRequest,
+    cb?: (error: string, rep: DeleteLaunchTemplateResponse) => void
+  ): Promise<DeleteLaunchTemplateResponse> {
+    return this.request("DeleteLaunchTemplate", req, cb)
   }
 
   /**
@@ -659,6 +661,22 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * ModifyChcNetworkMode接口用于切换CHC物理服务器的网络模式，适用于客户使用自建pxe环境装机，调用此接口切换部署网络和业务网络。**调用此接口会影响到业务网络，请明确使用方法后再调用**。
+- 切换部署网络：传入参数NetworkMode=DEPLOY。只有当CHC服务器状态为“可生产”或“已生产”，并且配置了部署网络才可以切换，否则API直接报错。
+- 切换业务网络：传入参数NetworkMode=BUSINESS。只有当CHC服务器状态为“已生产”时才可以切换，否则API直接报错。
+
+切换网络模式是一个异步操作，可以通过DescribeChcHosts轮询查询设备的NetworkMode和操作状态来判断是否切换成功
+- 切换部署网络：chc物理服务器如下参数值为以下值是判断切换成功：NetworkMode=DEPLOY，LatestOperation=SwitchChcDeployNetwork, LatestOperationState=SUCCESS。
+- 切换业务网络：chc物理服务器如下参数值为以下值是判断切换成功：NetworkMode=BUSINESS，LatestOperation=SwitchChcBusinessNetwork, LatestOperationState=SUCCESS。
+     */
+  async ModifyChcNetworkMode(
+    req: ModifyChcNetworkModeRequest,
+    cb?: (error: string, rep: ModifyChcNetworkModeResponse) => void
+  ): Promise<ModifyChcNetworkModeResponse> {
+    return this.request("ModifyChcNetworkMode", req, cb)
+  }
+
+  /**
      * 本接口 (DisassociateInstancesKeyPairs) 用于解除实例的密钥绑定关系。
 
 * 仅支持对 Linux 操作系统实例进行解绑操作。
@@ -893,13 +911,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DeleteLaunchTemplate）用于删除一个实例启动模板。
+   * 本接口（ModifyLaunchTemplateDefaultVersion）用于修改实例启动模板默认版本。
    */
-  async DeleteLaunchTemplate(
-    req: DeleteLaunchTemplateRequest,
-    cb?: (error: string, rep: DeleteLaunchTemplateResponse) => void
-  ): Promise<DeleteLaunchTemplateResponse> {
-    return this.request("DeleteLaunchTemplate", req, cb)
+  async ModifyLaunchTemplateDefaultVersion(
+    req: ModifyLaunchTemplateDefaultVersionRequest,
+    cb?: (error: string, rep: ModifyLaunchTemplateDefaultVersionResponse) => void
+  ): Promise<ModifyLaunchTemplateDefaultVersionResponse> {
+    return this.request("ModifyLaunchTemplateDefaultVersion", req, cb)
   }
 
   /**

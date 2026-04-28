@@ -489,7 +489,7 @@ export interface RetentionRule {
  */
 export interface CreateInstanceResponse {
   /**
-   * 企业版实例Id
+   * <p>企业版实例Id</p>
    */
   RegistryId?: string
   /**
@@ -3274,37 +3274,41 @@ export interface RepositoryInfoResp {
  */
 export interface CreateInstanceRequest {
   /**
-   * 企业版实例名称
+   * <p>企业版实例名称</p>
    */
   RegistryName: string
   /**
-   * 企业版实例类型（basic 基础版；standard 标准版；premium 高级版）
+   * <p>企业版实例类型（basic 基础版；standard 标准版；premium 高级版）</p>
    */
   RegistryType: string
   /**
-   * 云标签描述
+   * <p>云标签描述</p>
    */
   TagSpecification?: TagSpecification
   /**
-   * 实例计费类型，0表示按量计费，1表示预付费，默认为按量计费
+   * <p>实例计费类型，0表示按量计费，1表示预付费，默认为按量计费</p>
    */
   RegistryChargeType?: number
   /**
-   * 预付费自动续费标识和购买时长
+   * <p>预付费自动续费标识和购买时长</p>
    */
   RegistryChargePrepaid?: RegistryChargePrepaid
   /**
-   * 是否同步TCR云标签至生成的COS Bucket
+   * <p>是否同步TCR云标签至生成的COS Bucket</p>
    */
   SyncTag?: boolean
   /**
-   * 是否开启Cos桶多AZ特性
+   * <p>是否开启Cos桶多AZ特性</p>
    */
   EnableCosMAZ?: boolean
   /**
-   * 是否开启实例删除保护
+   * <p>是否开启实例删除保护</p>
    */
   DeletionProtection?: boolean
+  /**
+   * <p>是否开启cos桶多版本控制</p>
+   */
+  EnableCosVersioning?: boolean
 }
 
 /**
@@ -3528,6 +3532,14 @@ export interface Registry {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AIFeature?: boolean
+  /**
+   * <p>cos桶是否开启多AZ特性</p>
+   */
+  EnableCosMAZ?: boolean
+  /**
+   * <p>cos桶是否开启版本控制</p>
+   */
+  EnableCosVersioning?: boolean
 }
 
 /**

@@ -1148,106 +1148,106 @@ export interface CreateServerlessSpaceV2Response {
  */
 export interface ServerlessSpace {
   /**
-   * Serverless索引空间ID
+   * <p>Serverless索引空间ID</p>
    */
   SpaceId?: string
   /**
-   * Serverless索引空间名
+   * <p>Serverless索引空间名</p>
    */
   SpaceName?: string
   /**
-   * Serverless索引空间状态，0正常，-1已删除
+   * <p>Serverless索引空间状态</p><p>枚举值：</p><ul><li>0： 创建中</li><li>1： 正常</li><li>2： 流程中</li><li>-3： 已删除</li><li>-4： 隔离中</li></ul>
    */
   Status?: number
   /**
-   * 创建日期
+   * <p>创建日期</p>
    */
   CreateTime?: string
   /**
-   * 空间内索引数量
+   * <p>空间内索引数量</p>
    */
   IndexCount?: number
   /**
-   * kibana公网uri
+   * <p>kibana公网uri</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KibanaUrl?: string
   /**
-   * kibana内网url
+   * <p>kibana内网url</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KibanaPrivateUrl?: string
   /**
-   * 空间内网访问地址
+   * <p>空间内网访问地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexAccessUrl?: string
   /**
-   * 空间白名单
+   * <p>空间白名单</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KibanaPublicAcl?: EsAcl
   /**
-   * 空间检索分析域名
+   * <p>空间检索分析域名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KibanaEmbedUrl?: string
   /**
-   * 数据联路
+   * <p>数据联路</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiDataList?: DiData
   /**
-   * 空间vpc信息
+   * <p>空间vpc信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcInfo?: Array<VpcInfo>
   /**
-   * 地域
+   * <p>地域</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
-   * 可用区
+   * <p>可用区</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
-   * kibana公网开关，0关闭，1开启
+   * <p>kibana公网开关，0关闭，1开启</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableKibanaPublicAccess?: number
   /**
-   * kibana内网开关，0关闭，1开启
+   * <p>kibana内网开关，0关闭，1开启</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableKibanaPrivateAccess?: number
   /**
-   * 空间所属appid
+   * <p>空间所属appid</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: number
   /**
-   * //默认en， 可选zh-CN
+   * <p>//默认en， 可选zh-CN</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KibanaLanguage?: string
   /**
-   * 0
+   * <p>0</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterType?: number
   /**
-   * 空间标签信息
+   * <p>空间标签信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagList?: Array<TagInfo>
   /**
-   * 是否开启mcp服务
+   * <p>是否开启mcp服务</p>
    */
   EnableMcpAccess?: number
   /**
-   * mcp的访问地址
+   * <p>mcp的访问地址</p>
    */
   McpAccess?: string
 }

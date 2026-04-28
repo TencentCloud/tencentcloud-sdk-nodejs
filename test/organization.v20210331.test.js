@@ -618,9 +618,9 @@ it("organization.v20210331.ListUserSyncProvisionings", async function () {
     }
 })
 
-it("organization.v20210331.UpdateUserStatus", async function () {
+it("organization.v20210331.UpdateOrganizationNode", async function () {
     try {
-       const data = await client.UpdateUserStatus({})
+       const data = await client.UpdateOrganizationNode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -671,6 +671,16 @@ it("organization.v20210331.DeleteOrganizationMembersPolicy", async function () {
 it("organization.v20210331.DeletePolicy", async function () {
     try {
        const data = await client.DeletePolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("organization.v20210331.UpdateUserStatus", async function () {
+    try {
+       const data = await client.UpdateUserStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -948,9 +958,9 @@ it("organization.v20210331.GetProvisioningTaskStatus", async function () {
     }
 })
 
-it("organization.v20210331.UpdateOrganizationNode", async function () {
+it("organization.v20210331.GetIPWhitelist", async function () {
     try {
-       const data = await client.UpdateOrganizationNode({})
+       const data = await client.GetIPWhitelist({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

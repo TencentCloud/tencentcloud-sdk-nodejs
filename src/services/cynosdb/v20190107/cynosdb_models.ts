@@ -3875,11 +3875,11 @@ export interface LibraDBClusterSrcInfo {
  */
 export interface DescribeLibraDBInstanceDetailRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 只读分析引擎实例 ID
+   * <p>只读分析引擎实例 ID</p>
    */
   InstanceId: string
 }
@@ -4470,168 +4470,173 @@ export interface DescribeResourcePackageListResponse {
  */
 export interface DescribeLibraDBInstanceDetailResponse {
   /**
-   * 主账号
+   * <p>主账号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin?: string
   /**
-   * 账号唯一ID
+   * <p>账号唯一ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: number
   /**
-   * 集群ID
+   * <p>集群ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterName?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
-   * 项目ID
+   * <p>项目ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: number
   /**
-   * 地域
+   * <p>地域</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
-   * 可用区
+   * <p>可用区</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
-   * 实例状态
+   * <p>实例状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
-   * 状态描述
+   * <p>状态描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusDesc?: string
   /**
-   * Libra分析引擎版本
+   * <p>Libra分析引擎版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LibraDBVersion?: string
   /**
-   * cpu核数
+   * <p>cpu核数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Cpu?: number
   /**
-   * 内存大小
+   * <p>内存大小</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Memory?: number
   /**
-   * 存储大小
+   * <p>存储大小</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Storage?: number
   /**
-   * 存储类型
+   * <p>存储类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageType?: string
   /**
-   * 实例类型
+   * <p>实例类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceType?: string
   /**
-   * 实例角色
+   * <p>实例角色</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceRole?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 售卖方式
+   * <p>售卖方式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PayMode?: number
   /**
-   * 售卖开始时间
+   * <p>售卖开始时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PeriodStartTime?: string
   /**
-   * 售卖结束时间
+   * <p>售卖结束时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PeriodEndTime?: string
   /**
-   * 续费标识
+   * <p>续费标识</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RenewFlag?: number
   /**
-   * 网络类型
+   * <p>网络类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NetType?: number
   /**
-   * 私有网络ID
+   * <p>私有网络ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
-   * 子网ID
+   * <p>子网ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
-   * 虚拟IP
+   * <p>虚拟IP</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Vip?: string
   /**
-   * 端口
+   * <p>端口</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Vport?: number
   /**
-   * 实例网络信息
+   * <p>实例网络信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceNetInfo?: InstanceNetInfo
   /**
-   * 实例标签信息
+   * <p>实例标签信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceTags?: Array<Tag>
   /**
-   * 实例节点信息
+   * <p>实例节点信息</p>
    */
   NodeInfo?: Array<LibraDBNodeInfo>
   /**
-   * 实例节点个数
+   * <p>实例节点个数</p>
    */
   NodeCount?: number
+  /**
+   * <p>分析实例升级版本之后信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AnalysisUpgradeVersionInfo?: UpgradeAnalysisInstanceVersionInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7617,121 +7622,126 @@ export interface DescribeBackupDownloadRestrictionRequest {
  */
 export interface LibraDBClusterDetail {
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   ClusterId?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName?: string
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region?: string
   /**
-   * 状态
+   * <p>状态</p>
    */
   Status?: string
   /**
-   * 状态描述
+   * <p>状态描述</p>
    */
   StatusDesc?: string
   /**
-   * 存储大小
+   * <p>存储大小</p>
    */
   Storage?: number
   /**
-   * VPC名称
+   * <p>VPC名称</p>
    */
   VpcName?: string
   /**
-   * vpc唯一id
+   * <p>vpc唯一id</p>
    */
   VpcId?: string
   /**
-   * 子网名称
+   * <p>子网名称</p>
    */
   SubnetName?: string
   /**
-   * 子网ID
+   * <p>子网ID</p>
    */
   SubnetId?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 数据库版本
+   * <p>数据库版本</p>
    */
   DbVersion?: string
   /**
-   * 使用容量
+   * <p>使用容量</p>
    */
   UsedStorage?: number
   /**
-   * vip地址
+   * <p>vip地址</p>
    */
   Vip?: string
   /**
-   * vport端口
+   * <p>vport端口</p>
    */
   Vport?: number
   /**
-   * 集群只读实例的vip地址和vport端口
+   * <p>集群只读实例的vip地址和vport端口</p>
    */
   RoAddr?: Array<RoAddr>
   /**
-   * cynos版本
+   * <p>cynos版本</p>
    */
   CynosVersion?: string
   /**
-   * 是否冻结
+   * <p>是否冻结</p>
    */
   IsFreeze?: string
   /**
-   * 任务列表
+   * <p>任务列表</p>
    */
   Tasks?: Array<ObjectTask>
   /**
-   * 主可用区
+   * <p>主可用区</p>
    */
   MasterZone?: string
   /**
-   * 实例集合
+   * <p>实例集合</p>
    */
   InstanceSet?: Array<InstanceSet>
   /**
-   * 付费模式
+   * <p>付费模式</p>
    */
   PayMode?: number
   /**
-   * 到期时间
+   * <p>到期时间</p>
    */
   PeriodEndTime?: string
   /**
-   * 项目id
+   * <p>项目id</p>
    */
   ProjectID?: number
   /**
-   * 自动续费标识
+   * <p>自动续费标识</p>
    */
   RenewFlag?: number
   /**
-   * 版本标签
+   * <p>版本标签</p>
    */
   CynosVersionTag?: string
   /**
-   * 不支持添加ro yes-不支持添加ro， no/null/"" 支持添加ro
+   * <p>不支持添加ro yes-不支持添加ro， no/null/&quot;&quot; 支持添加ro</p>
    */
   NoSupportAddRo?: string
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone?: string
   /**
-   * 物理可用区
+   * <p>物理可用区</p>
    */
   PhysicalZone?: string
+  /**
+   * <p>版本升级灰度信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AnalysisUpgradeVersionInfo?: UpgradeAnalysisInstanceVersionInfo
 }
 
 /**
@@ -11535,6 +11545,28 @@ no
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 分析实例版本升级，升级之后用于灰度的连接信息
+ */
+export interface UpgradeAnalysisInstanceVersionInfo {
+  /**
+   * <p>ip</p>
+   */
+  Vip?: string
+  /**
+   * <p>端口</p>
+   */
+  Vport?: number
+  /**
+   * <p>版本</p>
+   */
+  EngineVersion?: string
+  /**
+   * <p>到期时间</p>
+   */
+  ExpiredTime?: number
 }
 
 /**

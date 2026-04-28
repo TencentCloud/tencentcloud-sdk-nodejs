@@ -36,18 +36,19 @@ import {
   PushTrainingMetricsRequest,
   Filter,
   DescribeTrainingModelVersionsRequest,
-  CreateDatasetRequest,
+  CodeRepoConfig,
   CreateDatasetResponse,
   Service,
   DeviceImageInfo,
   CrossTenantENIInfo,
   HyperParameter,
+  ResourceGroupInWorkspace,
   DescribeDataSourcesRequest,
   CreateDataSourceRequest,
   ModifyServiceGroupWeightsRequest,
   DescribeTrainingTasksRequest,
   RollingUpdate,
-  CodeRepoConfig,
+  VolumeMount,
   DescribeMountInstanceResponse,
   DescribeMountInstancesRequest,
   ModifyNotebookTagsResponse,
@@ -60,6 +61,7 @@ import {
   DescribeTrainingTaskRequest,
   StartNotebookResponse,
   ModelInputInfo,
+  DescribeAnnotatedTaskListRequest,
   CFSTurbo,
   DescribeTrainingModelVersionRequest,
   ResourceInstanceRunningJobInfo,
@@ -83,7 +85,9 @@ import {
   ChatCompletionRequest,
   CreateMountLimitResponse,
   TrainingTaskSetItem,
+  ModifyNotebookRequest,
   DescribeModelServiceCallInfoRequest,
+  DescribeWorkspacesResponse,
   DataPoint,
   DescribeNotebookResponse,
   TJCallInfo,
@@ -100,10 +104,11 @@ import {
   DescribeBillingResourceInstanceRunningJobsResponse,
   InferGatewayCallInfo,
   CreateDataSourceResponse,
+  LabelValue,
   ResourceGroupInfo,
   CreateNotebookRequest,
   CreatePresignedNotebookUrlResponse,
-  ModifyNotebookRequest,
+  DescribeWorkspacesRequest,
   HorizontalPodAutoscaler,
   CreateTrainingModelResponse,
   ResourceConfigInfo,
@@ -116,6 +121,7 @@ import {
   AuthTokenBase,
   ModifyModelServiceAuthTokenRequest,
   SchedulingPolicy,
+  AnnotationTaskInfo,
   LogIdentity,
   MountInstanceInfo,
   DescribeDatasetsRequest,
@@ -161,6 +167,7 @@ import {
   ModifyNotebookResponse,
   DescribeModelServiceResponse,
   DescribeBuildInImagesResponse,
+  Workspace,
   DescribeDatasetsResponse,
   ImageUrl,
   ModelSource,
@@ -169,6 +176,7 @@ import {
   DescribeBillingSpecsPriceRequest,
   WeightEntry,
   Instance,
+  DescribeAnnotatedTaskListResponse,
   SpecPrice,
   CreateExportRequest,
   DescribeBillingSpecsResponse,
@@ -180,6 +188,7 @@ import {
   StatefulSetCondition,
   HTTPGetAction,
   SidecarSpec,
+  Pod,
   TCPSocketAction,
   ResourceInfo,
   GroupResource,
@@ -187,6 +196,7 @@ import {
   DataSetConfig,
   ScheduledAction,
   DescribeNotebooksRequest,
+  CamTag,
   DeleteNotebookResponse,
   DeleteTrainingTaskRequest,
   CreateModelServiceAuthTokenResponse,
@@ -199,8 +209,7 @@ import {
   DeleteModelServiceAuthTokenResponse,
   ModelInfo,
   UpdateDataSourceResponse,
-  DescribeDataSourceResponse,
-  VolumeMount,
+  CreateDatasetRequest,
   CreateModelServiceResponse,
   DeleteExportRequest,
   ServiceGroup,
@@ -263,7 +272,7 @@ import {
   SpecUnit,
   DeleteDataSourceResponse,
   ModelAccelerateTask,
-  Pod,
+  EnvVar,
   DescribeEventsRequest,
   DeleteTrainingModelRequest,
   DescribeModelServiceHotUpdatedRequest,
@@ -279,7 +288,7 @@ import {
   MultiModalContent,
   DescribeTrainingModelVersionResponse,
   WorkloadStatus,
-  EnvVar,
+  DescribeDataSourceResponse,
   StopTrainingTaskRequest,
   LogConfig,
   StartTrainingTaskResponse,
@@ -422,6 +431,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StartNotebookResponse) => void
   ): Promise<StartNotebookResponse> {
     return this.request("StartNotebook", req, cb)
+  }
+
+  /**
+   * 查询工作空间列表
+   */
+  async DescribeWorkspaces(
+    req: DescribeWorkspacesRequest,
+    cb?: (error: string, rep: DescribeWorkspacesResponse) => void
+  ): Promise<DescribeWorkspacesResponse> {
+    return this.request("DescribeWorkspaces", req, cb)
   }
 
   /**
@@ -575,6 +594,16 @@ https://cloud.tencent.com/document/product/1278/85305
     cb?: (error: string, rep: CreateNotebookResponse) => void
   ): Promise<CreateNotebookResponse> {
     return this.request("CreateNotebook", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeAnnotatedTaskList）用于查询用户标注任务详细信息列表；支持各种过滤条件；
+   */
+  async DescribeAnnotatedTaskList(
+    req: DescribeAnnotatedTaskListRequest,
+    cb?: (error: string, rep: DescribeAnnotatedTaskListResponse) => void
+  ): Promise<DescribeAnnotatedTaskListResponse> {
+    return this.request("DescribeAnnotatedTaskList", req, cb)
   }
 
   /**

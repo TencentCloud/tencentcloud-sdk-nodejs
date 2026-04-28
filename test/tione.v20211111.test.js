@@ -148,6 +148,16 @@ it("tione.v20211111.StartNotebook", async function () {
     }
 })
 
+it("tione.v20211111.DescribeWorkspaces", async function () {
+    try {
+       const data = await client.DescribeWorkspaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DeleteDataset", async function () {
     try {
        const data = await client.DeleteDataset({})
@@ -291,6 +301,16 @@ it("tione.v20211111.CreateDataset", async function () {
 it("tione.v20211111.CreateNotebook", async function () {
     try {
        const data = await client.CreateNotebook({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tione.v20211111.DescribeAnnotatedTaskList", async function () {
+    try {
+       const data = await client.DescribeAnnotatedTaskList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

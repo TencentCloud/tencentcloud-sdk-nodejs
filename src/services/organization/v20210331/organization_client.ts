@@ -46,6 +46,7 @@ import {
   GetExternalSAMLIdentityProviderResponse,
   ListOrganizationIdentityRequest,
   DeleteOrganizationMembersRequest,
+  GetIPWhitelistResponse,
   CreateOrganizationResponse,
   AddShareUnitResourcesResponse,
   IdentityPolicy,
@@ -179,7 +180,7 @@ import {
   ListPoliciesForTargetRequest,
   UserInfo,
   DeleteOrganizationMemberAuthIdentityResponse,
-  UpdateOrganizationMemberEmailBindRequest,
+  GetIPWhitelistRequest,
   TaskInfo,
   BindOrganizationPolicySubAccountResponse,
   DeleteOrganizationMemberAuthIdentityRequest,
@@ -316,6 +317,7 @@ import {
   CreateRoleConfigurationResponse,
   GroupMembers,
   ShareResource,
+  UpdateOrganizationMemberEmailBindRequest,
   DeleteRoleAssignmentRequest,
   ListTargetsForPolicyRequest,
   DeleteOrganizationIdentityRequest,
@@ -954,13 +956,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改用户状态
+   * 更新企业组织节点
    */
-  async UpdateUserStatus(
-    req: UpdateUserStatusRequest,
-    cb?: (error: string, rep: UpdateUserStatusResponse) => void
-  ): Promise<UpdateUserStatusResponse> {
-    return this.request("UpdateUserStatus", req, cb)
+  async UpdateOrganizationNode(
+    req: UpdateOrganizationNodeRequest,
+    cb?: (error: string, rep: UpdateOrganizationNodeResponse) => void
+  ): Promise<UpdateOrganizationNodeResponse> {
+    return this.request("UpdateOrganizationNode", req, cb)
   }
 
   /**
@@ -1011,6 +1013,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeletePolicyResponse) => void
   ): Promise<DeletePolicyResponse> {
     return this.request("DeletePolicy", req, cb)
+  }
+
+  /**
+   * 修改用户状态
+   */
+  async UpdateUserStatus(
+    req: UpdateUserStatusRequest,
+    cb?: (error: string, rep: UpdateUserStatusResponse) => void
+  ): Promise<UpdateUserStatusResponse> {
+    return this.request("UpdateUserStatus", req, cb)
   }
 
   /**
@@ -1284,13 +1296,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新企业组织节点
+   * 获取CIC的ip白名单
    */
-  async UpdateOrganizationNode(
-    req: UpdateOrganizationNodeRequest,
-    cb?: (error: string, rep: UpdateOrganizationNodeResponse) => void
-  ): Promise<UpdateOrganizationNodeResponse> {
-    return this.request("UpdateOrganizationNode", req, cb)
+  async GetIPWhitelist(
+    req: GetIPWhitelistRequest,
+    cb?: (error: string, rep: GetIPWhitelistResponse) => void
+  ): Promise<GetIPWhitelistResponse> {
+    return this.request("GetIPWhitelist", req, cb)
   }
 
   /**

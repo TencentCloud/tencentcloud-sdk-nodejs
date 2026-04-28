@@ -88,9 +88,9 @@ it("cvm.v20170312.RunInstances", async function () {
     }
 })
 
-it("cvm.v20170312.ModifyLaunchTemplateDefaultVersion", async function () {
+it("cvm.v20170312.DeleteLaunchTemplate", async function () {
     try {
-       const data = await client.ModifyLaunchTemplateDefaultVersion({})
+       const data = await client.DeleteLaunchTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,6 +308,16 @@ it("cvm.v20170312.AssociateInstancesKeyPairs", async function () {
     }
 })
 
+it("cvm.v20170312.ModifyChcNetworkMode", async function () {
+    try {
+       const data = await client.ModifyChcNetworkMode({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cvm.v20170312.DisassociateInstancesKeyPairs", async function () {
     try {
        const data = await client.DisassociateInstancesKeyPairs({})
@@ -508,9 +518,9 @@ it("cvm.v20170312.ImportInstancesActionTimer", async function () {
     }
 })
 
-it("cvm.v20170312.DeleteLaunchTemplate", async function () {
+it("cvm.v20170312.ModifyLaunchTemplateDefaultVersion", async function () {
     try {
-       const data = await client.DeleteLaunchTemplate({})
+       const data = await client.ModifyLaunchTemplateDefaultVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

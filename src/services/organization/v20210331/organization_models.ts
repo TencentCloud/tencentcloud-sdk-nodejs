@@ -644,6 +644,20 @@ export interface DeleteOrganizationMembersRequest {
 }
 
 /**
+ * GetIPWhitelist返回参数结构体
+ */
+export interface GetIPWhitelistResponse {
+  /**
+   * ip白名单
+   */
+  IpWhitelist?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateOrganization返回参数结构体
  */
 export interface CreateOrganizationResponse {
@@ -3312,29 +3326,13 @@ export interface DeleteOrganizationMemberAuthIdentityResponse {
 }
 
 /**
- * UpdateOrganizationMemberEmailBind请求参数结构体
+ * GetIPWhitelist请求参数结构体
  */
-export interface UpdateOrganizationMemberEmailBindRequest {
+export interface GetIPWhitelistRequest {
   /**
-   * 成员Uin。
+   * 空间ID
    */
-  MemberUin: number
-  /**
-   * 绑定ID。可以通过[DescribeOrganizationMemberEmailBind](https://cloud.tencent.com/document/product/850/93332)获取
-   */
-  BindId: number
-  /**
-   * 邮箱地址。
-   */
-  Email: string
-  /**
-   * 国际区号。
-   */
-  CountryCode: string
-  /**
-   * 手机号。
-   */
-  Phone: string
+  ZoneId?: string
 }
 
 /**
@@ -6069,6 +6067,32 @@ export interface ShareResource {
    * 产品资源ID。
    */
   ProductResourceId?: string
+}
+
+/**
+ * UpdateOrganizationMemberEmailBind请求参数结构体
+ */
+export interface UpdateOrganizationMemberEmailBindRequest {
+  /**
+   * 成员Uin。
+   */
+  MemberUin: number
+  /**
+   * 绑定ID。可以通过[DescribeOrganizationMemberEmailBind](https://cloud.tencent.com/document/product/850/93332)获取
+   */
+  BindId: number
+  /**
+   * 邮箱地址。
+   */
+  Email: string
+  /**
+   * 国际区号。
+   */
+  CountryCode: string
+  /**
+   * 手机号。
+   */
+  Phone: string
 }
 
 /**

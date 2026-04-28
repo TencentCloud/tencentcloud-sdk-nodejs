@@ -103,6 +103,26 @@ export interface CreateModelServiceRequest {
    * <p>敏感数据检测配置</p>
    */
   SensitiveDataCheckConfig?: SensitiveDataCheckConfigDTO
+  /**
+   * <p>负载方式</p><p>枚举值：</p><ul><li>random： 随机</li><li>consistentHash： 会话保持</li></ul>
+   */
+  TargetSelect?: string
+  /**
+   * <p>会话判断方式</p><p>枚举值：</p><ul><li>fromClientIP： 客户端IP</li><li>fromHeader： 通过header值</li><li>autoDetect： 自动探测</li></ul>
+   */
+  FindHostKeyMethod?: string
+  /**
+   * <p>会话判定方式为fromHeader时会话的header名称</p>
+   */
+  HostKeyHeaderName?: string
+  /**
+   * <p>是否启用Fallback模型</p>
+   */
+  FallbackStatus?: boolean
+  /**
+   * <p>Fallback模型配置</p>
+   */
+  FallbackModels?: Array<TargetModelDTO>
 }
 
 /**
@@ -761,6 +781,26 @@ export interface ModifyModelServiceRequest {
    * <p>敏感数据检测配置</p>
    */
   SensitiveDataCheckConfig?: SensitiveDataCheckConfigDTO
+  /**
+   * <p>负载方式</p><p>枚举值：</p><ul><li>random： 随机</li><li>consistentHash： 会话保持</li></ul>
+   */
+  TargetSelect?: string
+  /**
+   * <p>会话判断方式</p><p>枚举值：</p><ul><li>fromClientIP： 从客户端IP判断</li><li>fromHeader： 从请求header判断</li><li>autoDetect： 自动探测</li></ul>
+   */
+  FindHostKeyMethod?: string
+  /**
+   * <p>会话判断header名称</p>
+   */
+  HostKeyHeaderName?: string
+  /**
+   * <p>是否开启备份模型</p>
+   */
+  FallbackStatus?: boolean
+  /**
+   * <p>备份模型</p>
+   */
+  FallbackModels?: Array<TargetModelDTO>
 }
 
 /**
@@ -2644,6 +2684,31 @@ export interface DescribeModelServiceResponseVO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SensitiveDataCheckConfig?: SensitiveDataCheckConfigDTO
+  /**
+   * <p>负载方式</p><p>枚举值：</p><ul><li>random： 随机</li><li>consistentHash： 会话保持</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetSelect?: string
+  /**
+   * <p>会话判断方式</p><p>枚举值：</p><ul><li>fromClientIP： 从客户端IP判断</li><li>fromHeader： 从请求header判断</li><li>autoDetect： 自动探测</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FindHostKeyMethod?: string
+  /**
+   * <p>会话判断header名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostKeyHeaderName?: string
+  /**
+   * <p>是否开启备份模型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FallbackStatus?: boolean
+  /**
+   * <p>备份模型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FallbackModels?: Array<TargetModelDTO>
 }
 
 /**

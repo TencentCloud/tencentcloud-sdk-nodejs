@@ -1593,6 +1593,16 @@ export interface ResetInstancesPasswordRequest {
 }
 
 /**
+ * ModifyChcNetworkMode返回参数结构体
+ */
+export interface ModifyChcNetworkModeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeInternetChargeTypeConfigs返回参数结构体
  */
 export interface DescribeInternetChargeTypeConfigsResponse {
@@ -4461,6 +4471,21 @@ export interface InstanceStatus {
 }
 
 /**
+ * 镜像分享信息结构
+ */
+export interface SharePermission {
+  /**
+   * 镜像分享时间。
+按照 ISO8601 标准表示，并且使用 UTC 时间，格式为：YYYY-MM-DDThh:mm:ssZ。
+   */
+  CreatedTime?: string
+  /**
+   * 镜像分享的账户ID
+   */
+  AccountId?: string
+}
+
+/**
  * InquiryPriceRenewInstances返回参数结构体
  */
 export interface InquiryPriceRenewInstancesResponse {
@@ -5438,18 +5463,17 @@ export interface TerminateInstancesRequest {
 }
 
 /**
- * 镜像分享信息结构
+ * ModifyChcNetworkMode请求参数结构体
  */
-export interface SharePermission {
+export interface ModifyChcNetworkModeRequest {
   /**
-   * 镜像分享时间。
-按照 ISO8601 标准表示，并且使用 UTC 时间，格式为：YYYY-MM-DDThh:mm:ssZ。
+   * <p>CHC物理服务器id列表，如[&quot;chc-1a2b3c4d&quot;]</p>
    */
-  CreatedTime?: string
+  ChcIds: Array<string>
   /**
-   * 镜像分享的账户ID
+   * <p>所要切换的网络模式</p><p>枚举值：</p><ul><li>DEPLOY： 部署网络模式</li><li>BUSINESS： 业务网络模式</li></ul>
    */
-  AccountId?: string
+  NetworkMode: string
 }
 
 /**
