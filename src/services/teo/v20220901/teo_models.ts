@@ -5913,7 +5913,7 @@ export interface ApplicationProxyRule {
   /**
    * 源站信息：
 <li>当 OriginType 为 custom 时，表示一个或多个源站，如`["8.8.8.8","9.9.9.9"]` 或 `OriginValue=["test.com"]`；</li>
-<li>当 OriginType 为 loadbalancer 时，表示一个负载均衡，如`["lb-xdffsfasdfs"]`；</li>
+<li>当 OriginType 为 loadbalancer 时，表示一个负载均衡，如`["lb-3pbiw4d9iqz0"]`；</li>
 <li>当 OriginType 为 origins 时，要求有且仅有一个元素，表示源站组ID，如`["origin-537f5b41-162a-11ed-abaa-525400c5da15"]`。</li>
    */
   OriginValue: Array<string>
@@ -5945,7 +5945,7 @@ export interface ApplicationProxyRule {
    */
   SessionPersist?: boolean
   /**
-   * 会话保持的时间，只有当SessionPersist为true时，该值才会生效。
+   * 会话保持的时间，单位为秒，只有当SessionPersist为true时，该值才会生效。
    */
   SessionPersistTime?: number
   /**
@@ -11020,7 +11020,7 @@ export interface CreateApplicationProxyRuleRequest {
    */
   SessionPersist?: boolean
   /**
-   * 会话保持的时间，只有当SessionPersist为true时，该值才会生效。
+   * 会话保持的时间，单位为秒，只有当SessionPersist为true时，该值才会生效。
    */
   SessionPersistTime?: number
   /**
@@ -12003,7 +12003,7 @@ export interface ApplicationProxy {
    */
   AccelerateType?: number
   /**
-   * 会话保持时间。
+   * 会话保持时间，单位为秒。
    */
   SessionPersistTime?: number
   /**

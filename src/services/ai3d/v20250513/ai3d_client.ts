@@ -28,15 +28,19 @@ import {
   SubmitTextureTo3DJobRequest,
   ViewImage,
   DescribeReduceFaceJobRequest,
+  DescribeHunyuanTo3DMotionJobRequest,
   SubmitHunyuanTo3DRapidJobResponse,
   SubmitHunyuanTo3DUVJobRequest,
   File3D,
   SubmitProfileTo3DJobRequest,
+  SubmitHunyuanTo3DMotionJobRequest,
   DescribeTextureTo3DJobResponse,
   DescribeProfileTo3DJobRequest,
   InputFile3D,
   SubmitProfileTo3DJobResponse,
+  DescribeHunyuanTo3DMotionJobResponse,
   SubmitHunyuanTo3DRapidJobRequest,
+  SubmitHunyuanTo3DMotionJobResponse,
   SubmitHunyuanTo3DUVJobResponse,
   SubmitHunyuan3DPartJobResponse,
   SubmitHunyuanTo3DProJobRequest,
@@ -75,14 +79,24 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 混元生3D接口，采用 Polygon 1.5模型，输入3D 高模后，可生成布线规整，较低面数的3D 模型。
+   * 输入模型后，可根据模型纹理进行UV展开，输出对应UV贴图。
+   */
+  async SubmitHunyuanTo3DUVJob(
+    req: SubmitHunyuanTo3DUVJobRequest,
+    cb?: (error: string, rep: SubmitHunyuanTo3DUVJobResponse) => void
+  ): Promise<SubmitHunyuanTo3DUVJobResponse> {
+    return this.request("SubmitHunyuanTo3DUVJob", req, cb)
+  }
+
+  /**
+     * 混元生3D接口，基于混元大模型，根据输入的文本描述/图片智能生成3D。
 默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后，才能开始处理下一个任务。
      */
-  async SubmitReduceFaceJob(
-    req: SubmitReduceFaceJobRequest,
-    cb?: (error: string, rep: SubmitReduceFaceJobResponse) => void
-  ): Promise<SubmitReduceFaceJobResponse> {
-    return this.request("SubmitReduceFaceJob", req, cb)
+  async SubmitProfileTo3DJob(
+    req: SubmitProfileTo3DJobRequest,
+    cb?: (error: string, rep: SubmitProfileTo3DJobResponse) => void
+  ): Promise<SubmitProfileTo3DJobResponse> {
+    return this.request("SubmitProfileTo3DJob", req, cb)
   }
 
   /**
@@ -108,24 +122,24 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 混元生3D接口，基于混元大模型，根据输入的文本描述/图片智能生成3D。
+     * 输入文本后，可根据文本描述生成对应的 3D人物 动作数据，输出带动画数据的FBX文件。
 默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后，才能开始处理下一个任务。
      */
-  async SubmitProfileTo3DJob(
-    req: SubmitProfileTo3DJobRequest,
-    cb?: (error: string, rep: SubmitProfileTo3DJobResponse) => void
-  ): Promise<SubmitProfileTo3DJobResponse> {
-    return this.request("SubmitProfileTo3DJob", req, cb)
+  async SubmitHunyuanTo3DMotionJob(
+    req: SubmitHunyuanTo3DMotionJobRequest,
+    cb?: (error: string, rep: SubmitHunyuanTo3DMotionJobResponse) => void
+  ): Promise<SubmitHunyuanTo3DMotionJobResponse> {
+    return this.request("SubmitHunyuanTo3DMotionJob", req, cb)
   }
 
   /**
-   * 输入模型后，可根据模型纹理进行UV展开，输出对应UV贴图。
+   * 查询组件生成任务。
    */
-  async SubmitHunyuanTo3DUVJob(
-    req: SubmitHunyuanTo3DUVJobRequest,
-    cb?: (error: string, rep: SubmitHunyuanTo3DUVJobResponse) => void
-  ): Promise<SubmitHunyuanTo3DUVJobResponse> {
-    return this.request("SubmitHunyuanTo3DUVJob", req, cb)
+  async DescribeHunyuanTo3DMotionJob(
+    req: DescribeHunyuanTo3DMotionJobRequest,
+    cb?: (error: string, rep: DescribeHunyuanTo3DMotionJobResponse) => void
+  ): Promise<DescribeHunyuanTo3DMotionJobResponse> {
+    return this.request("DescribeHunyuanTo3DMotionJob", req, cb)
   }
 
   /**
@@ -190,6 +204,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProfileTo3DJobResponse) => void
   ): Promise<DescribeProfileTo3DJobResponse> {
     return this.request("DescribeProfileTo3DJob", req, cb)
+  }
+
+  /**
+     * 混元生3D接口，采用 Polygon 1.5模型，输入3D 高模后，可生成布线规整，较低面数的3D 模型。
+默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后，才能开始处理下一个任务。
+     */
+  async SubmitReduceFaceJob(
+    req: SubmitReduceFaceJobRequest,
+    cb?: (error: string, rep: SubmitReduceFaceJobResponse) => void
+  ): Promise<SubmitReduceFaceJobResponse> {
+    return this.request("SubmitReduceFaceJob", req, cb)
   }
 
   /**

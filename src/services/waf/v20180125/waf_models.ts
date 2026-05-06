@@ -701,6 +701,10 @@ export interface LLMDetectResult {
    * <p>图片检测结果</p>
    */
   ImageResult?: Array<ImageResult>
+  /**
+   * <p>要代答的消息id，此消息id用于作为GenerateLLMSecAnswer接口的入参</p>
+   */
+  MsgID?: string
 }
 
 /**

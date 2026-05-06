@@ -28,9 +28,19 @@ it("ai3d.v20250513.SubmitTextureTo3DJob", async function () {
     }
 })
 
-it("ai3d.v20250513.SubmitReduceFaceJob", async function () {
+it("ai3d.v20250513.SubmitHunyuanTo3DUVJob", async function () {
     try {
-       const data = await client.SubmitReduceFaceJob({})
+       const data = await client.SubmitHunyuanTo3DUVJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ai3d.v20250513.SubmitProfileTo3DJob", async function () {
+    try {
+       const data = await client.SubmitProfileTo3DJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +68,9 @@ it("ai3d.v20250513.SubmitHunyuanTo3DRapidJob", async function () {
     }
 })
 
-it("ai3d.v20250513.SubmitProfileTo3DJob", async function () {
+it("ai3d.v20250513.SubmitHunyuanTo3DMotionJob", async function () {
     try {
-       const data = await client.SubmitProfileTo3DJob({})
+       const data = await client.SubmitHunyuanTo3DMotionJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -68,9 +78,9 @@ it("ai3d.v20250513.SubmitProfileTo3DJob", async function () {
     }
 })
 
-it("ai3d.v20250513.SubmitHunyuanTo3DUVJob", async function () {
+it("ai3d.v20250513.DescribeHunyuanTo3DMotionJob", async function () {
     try {
-       const data = await client.SubmitHunyuanTo3DUVJob({})
+       const data = await client.DescribeHunyuanTo3DMotionJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -131,6 +141,16 @@ it("ai3d.v20250513.DescribeTextureTo3DJob", async function () {
 it("ai3d.v20250513.DescribeProfileTo3DJob", async function () {
     try {
        const data = await client.DescribeProfileTo3DJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ai3d.v20250513.SubmitReduceFaceJob", async function () {
+    try {
+       const data = await client.SubmitReduceFaceJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
