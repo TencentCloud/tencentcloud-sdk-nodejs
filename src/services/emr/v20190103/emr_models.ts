@@ -386,6 +386,26 @@ export interface DynamicPodSpec {
 }
 
 /**
+ * 自定义镜像信息
+ */
+export interface CustomImage {
+  /**
+   * 镜像来源。支持企业版镜像（tcr）、个人版镜像（ccrPersonal）、个人版共有镜像（ccrAllPersonal)
+   */
+  ImageSourceType?: string
+  /**
+   * 镜像信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageInfo?: ImageInfo
+  /**
+   * 镜像获取密钥
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImagePullSecret?: ImagePullSecret
+}
+
+/**
  * ResetYarnConfig请求参数结构体
  */
 export interface ResetYarnConfigRequest {
@@ -730,6 +750,32 @@ export interface InstallSoftwareRequest {
 }
 
 /**
+ * cfs 存储卷
+ */
+export interface CFSVolume {
+  /**
+   * 存储卷名称
+   */
+  VolumeName?: string
+  /**
+   * 文件系统 id
+   */
+  FileSystemId?: string
+  /**
+   * CFSId
+   */
+  FSId?: string
+  /**
+   * 挂载点 ip
+   */
+  Host?: string
+  /**
+   * cfs子目录
+   */
+  SubPath?: string
+}
+
+/**
  * DescribeInspectionTaskResult请求参数结构体
  */
 export interface DescribeInspectionTaskResultRequest {
@@ -811,114 +857,41 @@ export interface DescribeHDFSStorageInfoRequest {
 }
 
 /**
- * 自动扩缩容基于负载指标的规则
+ * 流程作业资源描述
  */
-export interface LoadAutoScaleStrategy {
+export interface JobFlowResourceSpec {
   /**
-   * 规则ID。
+   * 主节点数量。
    */
-  StrategyId?: number
+  MasterCount: number
   /**
-   * 规则名称。
+   * 主节点配置。
    */
-  StrategyName?: string
+  MasterResourceSpec: JobFlowResource
   /**
-   * 规则生效冷却时间。
+   * Core节点数量
    */
-  CalmDownTime?: number
+  CoreCount: number
   /**
-   * 扩缩容动作，1表示扩容，2表示缩容。
+   * Core节点配置。
    */
-  ScaleAction?: number
+  CoreResourceSpec: JobFlowResource
   /**
-   * 每次规则生效时的扩缩容数量。
+   * Task节点数量。
    */
-  ScaleNum?: number
+  TaskCount?: number
   /**
-   * 指标处理方法，1表示MAX，2表示MIN，3表示AVG。
+   * Common节点数量。
    */
-  ProcessMethod?: number
+  CommonCount?: number
   /**
-   * 规则优先级，添加时无效，默认为自增。
+   * Task节点配置。
    */
-  Priority?: number
+  TaskResourceSpec?: JobFlowResource
   /**
-   * 规则状态，1表示启动，3表示禁用。
+   * Common节点配置。
    */
-  StrategyStatus?: number
-  /**
-   * 规则扩容指定 yarn node label
-   */
-  YarnNodeLabel?: string
-  /**
-   * 规则生效的有效时间
-   */
-  PeriodValid?: string
-  /**
-   * 优雅缩容开关
-   */
-  GraceDownFlag?: boolean
-  /**
-   * 优雅缩容等待时间
-   */
-  GraceDownTime?: number
-  /**
-   * 是否开启任务保护
-   */
-  GraceDownProtectFlag?: boolean
-  /**
-   * 绑定标签列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<Tag>
-  /**
-   * 预设配置组
-   */
-  ConfigGroupAssigned?: string
-  /**
-   * 扩容资源计算方法，"DEFAULT","INSTANCE", "CPU", "MEMORYGB"。
-"DEFAULT"表示默认方式，与"INSTANCE"意义相同。
-"INSTANCE"表示按照节点计算，默认方式。
-"CPU"表示按照机器的核数计算。
-"MEMORYGB"表示按照机器内存数计算。
-   */
-  MeasureMethod?: string
-  /**
-   * 节点部署服务列表，例如["HDFS-3.1.2","YARN-3.1.2"]。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SoftDeployDesc?: Array<string>
-  /**
-   * 启动进程列表，例如["NodeManager"]。
-   */
-  ServiceNodeDesc?: string
-  /**
-   * 启动进程列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceNodeInfo?: Array<number | bigint>
-  /**
-   * 节点部署服务列表。部署服务仅填写HDFS、YARN。[组件名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SoftDeployInfo?: Array<number | bigint>
-  /**
-   * 多指标触发条件
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LoadMetricsConditions?: LoadMetricsConditions
-  /**
-   * 伸缩组Id
-   */
-  GroupId?: number
-  /**
-   * soft例如yarn
-   */
-  Soft?: string
-  /**
-   * 任务保护时间
-   */
-  GraceDownProtectTime?: number
+  CommonResourceSpec?: JobFlowResource
 }
 
 /**
@@ -1270,6 +1243,21 @@ export interface ModifyResourceRequest {
    * 节点ID列表
    */
   ResourceIdList?: Array<string>
+}
+
+/**
+ * 镜像获取密钥
+ */
+export interface ImagePullSecret {
+  /**
+   * 源密钥所在命名空间
+   */
+  SourceNamespace?: string
+  /**
+   * 密钥名称列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretNames?: Array<string>
 }
 
 /**
@@ -1646,17 +1634,21 @@ export interface DescribeCvmQuotaResponse {
 }
 
 /**
- * 搜索字段
+ * DAG信息
  */
-export interface SearchItem {
+export interface DAGInfo {
   /**
-   * 支持搜索的类型
+   * 查询ID
    */
-  SearchType: string
+  ID?: string
   /**
-   * 支持搜索的值
+   * DAG类型，目前只支持starrocks
    */
-  SearchValue: string
+  Type?: string
+  /**
+   * 返回的DAG的JSON字符串
+   */
+  Content?: string
 }
 
 /**
@@ -1848,6 +1840,20 @@ export interface DescribeSLInstanceListResponse {
    * 实例信息列表，如果进行了分页，只显示当前分页的示例信息列表。
    */
   InstancesList?: Array<SLInstanceInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDynamicInstance返回参数结构体
+ */
+export interface ModifyDynamicInstanceResponse {
+  /**
+   * <p>异步流程id</p>
+   */
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2358,6 +2364,20 @@ export interface SoftDependInfo {
 }
 
 /**
+ * 搜索字段
+ */
+export interface SearchItem {
+  /**
+   * 支持搜索的类型
+   */
+  SearchType: string
+  /**
+   * 支持搜索的值
+   */
+  SearchValue: string
+}
+
+/**
  * 强制修改标签
  */
 export interface ModifyResourceTags {
@@ -2568,6 +2588,20 @@ export interface ShortNodeInfo {
    * 节点数量
    */
   NodeSize?: number
+}
+
+/**
+ * NameValue 键值
+ */
+export interface NameValue {
+  /**
+   * name
+   */
+  Name: string
+  /**
+   * value
+   */
+  Value: string
 }
 
 /**
@@ -3115,6 +3149,32 @@ export interface ExternalAccess {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CLBServer?: CLBSetting
+}
+
+/**
+ * 挂载卷
+ */
+export interface VolumeMount {
+  /**
+   * 挂载卷名称
+   */
+  MountName?: string
+  /**
+   * 挂载路径
+   */
+  MountPath?: string
+  /**
+   * 挂载类型
+   */
+  SubPathMode?: string
+  /**
+   * 子路径
+   */
+  SubPath?: string
+  /**
+   * 挂载模式，仅支持ReadWrite和OnlyRead
+   */
+  MountMode?: string
 }
 
 /**
@@ -4213,6 +4273,32 @@ export interface DescribeHiveQueriesResponse {
 }
 
 /**
+ * CreateDynamicInstance请求参数结构体
+ */
+export interface CreateDynamicInstanceRequest {
+  /**
+   * <p>EMR集群id</p>
+   */
+  InstanceId: string
+  /**
+   * <p>支持DynamicInstance的服务名称</p>
+   */
+  ServiceName: string
+  /**
+   * <p>DynamicInstance类型</p><p>枚举值：</p><ul><li>RayCluster： RayCluster类型</li></ul>
+   */
+  DynamicInstanceType: string
+  /**
+   * <p>表单创建信息</p>
+   */
+  DynamicInstanceForm?: DynamicInstanceForm
+  /**
+   * <p>yaml创建信息</p>
+   */
+  DynamicInstanceYaml?: string
+}
+
+/**
  * DescribeInstanceRenewNodes返回参数结构体
  */
 export interface DescribeInstanceRenewNodesResponse {
@@ -4255,13 +4341,121 @@ export interface StringMap {
 }
 
 /**
- * 容器额外配置
+ * CreateCluster请求参数结构体
  */
-export interface ContainerExtraConf {
+export interface CreateClusterRequest {
   /**
-   * <p>计算作业代理访问类型，如Spark作业和RayCluster UI；不填写默认使用Internal</p><p>枚举值：</p><ul><li>Internal： 使用内网LB代理访问</li><li>Public： 使用公网LB代理访问</li><li>None： 不创建LB代理访问</li></ul>
+   * <p>EMR产品版本名称如EMR-V2.3.0 表示2.3.0版本的EMR， 当前支持产品版本名称查询：<a href="https://cloud.tencent.com/document/product/589/66338">产品版本名称</a></p>
    */
-  JobAccessProxyType?: string
+  ProductVersion: string
+  /**
+   * <p>是否开启节点高可用。取值范围：</p><li>true：表示开启节点高可用。</li><li>false：表示不开启节点高可用。</li>
+   */
+  EnableSupportHAFlag: boolean
+  /**
+   * <p>实例名称。</p><li>长度限制为6-36个字符。</li><li>只允许包含中文、字母、数字、-、_。</li>
+   */
+  InstanceName: string
+  /**
+   * <p>实例计费模式。取值范围：</p><li>PREPAID：预付费，即包年包月。</li><li>POSTPAID_BY_HOUR：按小时后付费。</li>
+   */
+  InstanceChargeType: string
+  /**
+   * <p>实例登录设置。通过该参数可以设置所购买节点的登录方式密码或者密钥。</p><li>设置密钥时，密码仅用于组件原生WebUI快捷入口登录。</li><li>未设置密钥时，密码用于登录所购节点以及组件原生WebUI快捷入口登录。</li>
+   */
+  LoginSettings: LoginSettings
+  /**
+   * <p>集群应用场景以及支持部署组件配置</p>
+   */
+  SceneSoftwareConfig: SceneSoftwareConfig
+  /**
+   * <p>即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。</p>
+   */
+  InstanceChargePrepaid?: InstanceChargePrepaid
+  /**
+   * <p>实例所属安全组的ID，形如sg-xxxxxxxx。该参数可以通过调用 <a href="https://cloud.tencent.com/document/api/215/15808">DescribeSecurityGroups</a> 的返回值中的SecurityGroupId字段来获取。</p>
+   */
+  SecurityGroupIds?: Array<string>
+  /**
+   * <p><a href="https://cloud.tencent.com/document/product/589/35656">引导操作</a>脚本设置。</p>
+   */
+  ScriptBootstrapActionConfig?: Array<ScriptBootstrapActionConfig>
+  /**
+   * <p>唯一随机标识，时效性为5分钟，需要调用者指定 防止客户端重复创建资源，例如 a9a90aa6-<strong><strong>-</strong></strong>-****-fae360632808</p>
+   */
+  ClientToken?: string
+  /**
+   * <p>是否开启集群Master节点公网。取值范围：</p><li>NEED_MASTER_WAN：表示开启集群Master节点公网。</li><li>NOT_NEED_MASTER_WAN：表示不开启。</li>默认开启集群Master节点公网。
+   */
+  NeedMasterWan?: string
+  /**
+   * <p>是否开启外网远程登录。（在SecurityGroupId不为空时，该参数无效）不填默认为不开启 取值范围：</p><li>true：表示开启</li><li>false：表示不开启</li>
+   */
+  EnableRemoteLoginFlag?: boolean
+  /**
+   * <p>是否开启Kerberos认证。默认不开启 取值范围：</p><li>true：表示开启</li><li>false：表示不开启</li>
+   */
+  EnableKerberosFlag?: boolean
+  /**
+   * <p><a href="https://cloud.tencent.com/document/product/589/35655?from_cn_redirect=1">自定义软件配置</a></p>
+   */
+  CustomConf?: string
+  /**
+   * <p>标签描述列表。通过指定该参数可以同时绑定标签到相应的实例。</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>分散置放群组ID列表，当前只支持指定一个。<br>该参数可以通过调用 <a href="https://cloud.tencent.com/document/product/213/17810">DescribeDisasterRecoverGroups</a>的返回值中的DisasterRecoverGroupId字段来获取。</p>
+   */
+  DisasterRecoverGroupIds?: Array<string>
+  /**
+   * <p>是否开启集群维度CBS加密。默认不加密 取值范围：</p><li>true：表示加密</li><li>false：表示不加密</li>
+   */
+  EnableCbsEncryptFlag?: boolean
+  /**
+   * <p>MetaDB信息，当MetaType选择EMR_NEW_META时，MetaDataJdbcUrl MetaDataUser MetaDataPass UnifyMetaInstanceId不用填<br>当MetaType选择EMR_EXIT_META时，填写UnifyMetaInstanceId<br>当MetaType选择USER_CUSTOM_META时，填写MetaDataJdbcUrl MetaDataUser MetaDataPass</p>
+   */
+  MetaDBInfo?: CustomMetaDBInfo
+  /**
+   * <p>共享组件信息</p>
+   */
+  DependService?: Array<DependService>
+  /**
+   * <p>节点资源的规格，有几个可用区，就填几个，按顺序第一个为主可用区，第二个为备可用区，第三个为仲裁可用区。如果没有开启跨AZ，则长度为1即可。</p>
+   */
+  ZoneResourceConfiguration?: Array<ZoneResourceConfiguration>
+  /**
+   * <p>cos桶路径，创建StarRocks存算分离集群时用到</p>
+   */
+  CosBucket?: string
+  /**
+   * <p>节点标识信息，目前只提供给tf平台使用</p>
+   */
+  NodeMarks?: Array<NodeMark>
+  /**
+   * <p>clb id</p>
+   */
+  LoadBalancerId?: string
+  /**
+   * <p>数据库版本：mysql8/tdsql8/mysql5</p>
+   */
+  DefaultMetaVersion?: string
+  /**
+   * <p>是否开通数据库审计</p>
+   */
+  NeedCdbAudit?: number
+  /**
+   * <p>安全指定来源ip</p>
+   */
+  SgIP?: string
+  /**
+   * <p>分区置放群组分区</p>
+   */
+  PartitionNumber?: number
+  /**
+   * <p>服务ui地址</p><p>枚举值：</p><ul><li>0： 服务ui地址，只返回1条服务ui地址</li><li>1： 服务ui地址，如果服务含有多个ui地址将全部返回，例如impala的Impalad、StateStore、Catalogd</li></ul><p>默认值：0</p>
+   */
+  WebUiVersion?: number
 }
 
 /**
@@ -4276,6 +4470,44 @@ export interface CreateSLInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 镜像信息
+ */
+export interface ImageInfo {
+  /**
+   * 镜像所属地域
+   */
+  Region?: string
+  /**
+   * tcr实例Id
+   */
+  RegistryId?: string
+  /**
+   * 域名
+   */
+  DomainName?: string
+  /**
+   * 命名空间
+   */
+  NamespaceName?: string
+  /**
+   * 镜像仓库名称
+   */
+  RepositoryName?: string
+  /**
+   * 镜像版本
+   */
+  ImageVersion?: string
+  /**
+   * 镜像拉取策略
+   */
+  ImagePullPolicy?: string
+  /**
+   * 镜像地址
+   */
+  Image?: string
 }
 
 /**
@@ -5627,6 +5859,28 @@ export interface DescribeSLInstanceResponse {
 }
 
 /**
+ * cbs 存储卷
+ */
+export interface CBSVolume {
+  /**
+   * 存储卷名称
+   */
+  VolumeName?: string
+  /**
+   *  cbs 盘类型
+   */
+  DiskType?: string
+  /**
+   * cbs 大小（GB）
+   */
+  DiskSize?: number
+  /**
+   * cbs 数量
+   */
+  DiskCount?: number
+}
+
+/**
  * 标签信息
  */
 export interface TagInfo {
@@ -5819,6 +6073,16 @@ export interface TableSchemaItem {
    * 展示的名字
    */
   Title?: string
+}
+
+/**
+ * DescribeDynamicInstanceList请求参数结构体
+ */
+export interface DescribeDynamicInstanceListRequest {
+  /**
+   * emr 集群 id
+   */
+  InstanceId: string
 }
 
 /**
@@ -6127,6 +6391,24 @@ export interface ImpalaQuery {
 }
 
 /**
+ * TerminateDynamicInstances请求参数结构体
+ */
+export interface TerminateDynamicInstancesRequest {
+  /**
+   * <p>EMR集群id</p>
+   */
+  InstanceId: string
+  /**
+   * <p>DynamicInstance类型</p><p>枚举值：</p><ul><li>RayCluster： RayCluster类型</li></ul>
+   */
+  DynamicInstanceType: string
+  /**
+   * <p>yaml创建信息</p>
+   */
+  DynamicInstanceIds: Array<number | bigint>
+}
+
+/**
  * CreateInstance返回参数结构体
  */
 export interface CreateInstanceResponse {
@@ -6268,6 +6550,20 @@ export interface PriceResult {
 }
 
 /**
+ * TerminateDynamicInstances返回参数结构体
+ */
+export interface TerminateDynamicInstancesResponse {
+  /**
+   * <p>异步流程id</p>
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 用户管理列表过滤器
  */
 export interface UserManagerFilter {
@@ -6304,41 +6600,114 @@ export interface MetaDbInfo {
 }
 
 /**
- * 流程作业资源描述
+ * 自动扩缩容基于负载指标的规则
  */
-export interface JobFlowResourceSpec {
+export interface LoadAutoScaleStrategy {
   /**
-   * 主节点数量。
+   * 规则ID。
    */
-  MasterCount: number
+  StrategyId?: number
   /**
-   * 主节点配置。
+   * 规则名称。
    */
-  MasterResourceSpec: JobFlowResource
+  StrategyName?: string
   /**
-   * Core节点数量
+   * 规则生效冷却时间。
    */
-  CoreCount: number
+  CalmDownTime?: number
   /**
-   * Core节点配置。
+   * 扩缩容动作，1表示扩容，2表示缩容。
    */
-  CoreResourceSpec: JobFlowResource
+  ScaleAction?: number
   /**
-   * Task节点数量。
+   * 每次规则生效时的扩缩容数量。
    */
-  TaskCount?: number
+  ScaleNum?: number
   /**
-   * Common节点数量。
+   * 指标处理方法，1表示MAX，2表示MIN，3表示AVG。
    */
-  CommonCount?: number
+  ProcessMethod?: number
   /**
-   * Task节点配置。
+   * 规则优先级，添加时无效，默认为自增。
    */
-  TaskResourceSpec?: JobFlowResource
+  Priority?: number
   /**
-   * Common节点配置。
+   * 规则状态，1表示启动，3表示禁用。
    */
-  CommonResourceSpec?: JobFlowResource
+  StrategyStatus?: number
+  /**
+   * 规则扩容指定 yarn node label
+   */
+  YarnNodeLabel?: string
+  /**
+   * 规则生效的有效时间
+   */
+  PeriodValid?: string
+  /**
+   * 优雅缩容开关
+   */
+  GraceDownFlag?: boolean
+  /**
+   * 优雅缩容等待时间
+   */
+  GraceDownTime?: number
+  /**
+   * 是否开启任务保护
+   */
+  GraceDownProtectFlag?: boolean
+  /**
+   * 绑定标签列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+  /**
+   * 预设配置组
+   */
+  ConfigGroupAssigned?: string
+  /**
+   * 扩容资源计算方法，"DEFAULT","INSTANCE", "CPU", "MEMORYGB"。
+"DEFAULT"表示默认方式，与"INSTANCE"意义相同。
+"INSTANCE"表示按照节点计算，默认方式。
+"CPU"表示按照机器的核数计算。
+"MEMORYGB"表示按照机器内存数计算。
+   */
+  MeasureMethod?: string
+  /**
+   * 节点部署服务列表，例如["HDFS-3.1.2","YARN-3.1.2"]。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SoftDeployDesc?: Array<string>
+  /**
+   * 启动进程列表，例如["NodeManager"]。
+   */
+  ServiceNodeDesc?: string
+  /**
+   * 启动进程列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceNodeInfo?: Array<number | bigint>
+  /**
+   * 节点部署服务列表。部署服务仅填写HDFS、YARN。[组件名对应的映射关系表](https://cloud.tencent.com/document/product/589/98760)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SoftDeployInfo?: Array<number | bigint>
+  /**
+   * 多指标触发条件
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadMetricsConditions?: LoadMetricsConditions
+  /**
+   * 伸缩组Id
+   */
+  GroupId?: number
+  /**
+   * soft例如yarn
+   */
+  Soft?: string
+  /**
+   * 任务保护时间
+   */
+  GraceDownProtectTime?: number
 }
 
 /**
@@ -6521,6 +6890,20 @@ export interface DescribeEMREventListRequest {
    * 事件列表的Limit
    */
   Limit?: number
+}
+
+/**
+ * DescribeDynamicInstanceList返回参数结构体
+ */
+export interface DescribeDynamicInstanceListResponse {
+  /**
+   * RayCluster 集群列表
+   */
+  DynamicInstanceList?: Array<RayCluster>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7291,6 +7674,96 @@ export interface DescribeYarnQueueRequest {
 2. fair
    */
   Scheduler: string
+}
+
+/**
+ * 创建DynamicInstance提交的表单数据中的group部分
+ */
+export interface DynamicInstanceGroup {
+  /**
+   * <p>资源组类型</p>
+   */
+  GroupType?: string
+  /**
+   * <p>资源组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>pod cpu核数</p>
+   */
+  PodCpu?: number
+  /**
+   * <p>pod mem大小（GB）</p>
+   */
+  PodMem?: number
+  /**
+   * <p>pod gpu类型</p>
+   */
+  PodGpuType?: string
+  /**
+   * <p>pod gpu块数</p>
+   */
+  PodGpu?: number
+  /**
+   * <p>pod个数</p>
+   */
+  PodNum?: number
+  /**
+   * <p>pod弹性最小个数</p>
+   */
+  MinPodNum?: number
+  /**
+   * <p>pod弹性最大个数，当MaxPodNum &gt; MinPodNum时，默认表示开启弹性扩缩容，将在范围内扩缩容</p>
+   */
+  MaxPodNum?: number
+  /**
+   * <p>是否支持存储配置</p>
+   */
+  SupportPV?: boolean
+  /**
+   * <p>cbs存储卷列表</p>
+   */
+  CBSVolumes?: Array<CBSVolume>
+  /**
+   * <p>cfs存储卷列表</p>
+   */
+  CFSVolumes?: Array<CFSVolume>
+  /**
+   * <p>cos存储卷列表</p>
+   */
+  COSVolumes?: Array<COSVolume>
+  /**
+   * <p>挂载卷列表</p>
+   */
+  VolumeMounts?: Array<VolumeMount>
+  /**
+   * <p>pod标签</p>
+   */
+  Labels?: Array<TkeLabel>
+  /**
+   * <p>Tolerations定义</p>
+   */
+  Tolerations?: Array<Toleration>
+  /**
+   * <p>环境变量</p>
+   */
+  Envs?: Array<NameValue>
+  /**
+   * <p>节点调度策略</p>
+   */
+  SchedulingPolicy?: string
+  /**
+   * <p>资源标签</p>
+   */
+  ResourceLabel?: string
+  /**
+   * <p>GPU资源厂商key</p>
+   */
+  PodGpuResourceKey?: string
+  /**
+   * <p>CFS Turbo 挂载列表</p>
+   */
+  CFSTurboVolumes?: Array<CFSTurboVolume>
 }
 
 /**
@@ -8232,6 +8705,40 @@ export interface ResizeDataDisksResponse {
 }
 
 /**
+ * RayCluster
+ */
+export interface RayCluster {
+  /**
+   * <p>RayCluster 集群名</p>
+   */
+  RayClusterName?: string
+  /**
+   * <p>RayCluster 集群 id</p>
+   */
+  RayClusterId?: number
+  /**
+   * <p>pod 数量</p>
+   */
+  PodCount?: number
+  /**
+   * <p>集群创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>redis 实例数量</p>
+   */
+  RedisCount?: number
+  /**
+   * <p>创建类型</p><p>枚举值：</p><ul><li>1： 表单创建</li><li>2： yaml创建</li></ul>
+   */
+  SubmitType?: number
+  /**
+   * <p>head访问地址,也是dashboard地址</p>
+   */
+  DashboardUrl?: string
+}
+
+/**
  * 代表一个kv结构
  */
 export interface Item {
@@ -8330,6 +8837,76 @@ type AclForYarnQueue struct {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeleteLables?: Array<string>
+}
+
+/**
+ * 创建DynamicInstance提交的表单数据
+ */
+export interface DynamicInstanceForm {
+  /**
+   * <p>DynamicInstance名，长度限制1-64字符，只能包含小写字母</p>
+   */
+  DynamicInstanceName?: string
+  /**
+   * <p>命名空间</p>
+   */
+  Namespace?: string
+  /**
+   * <p>是否支持高可用</p>
+   */
+  SupportHA?: boolean
+  /**
+   * <p>自定义镜像信息</p>
+   */
+  CustomImage?: CustomImage
+  /**
+   * <p>资源组配置</p>
+   */
+  DynamicInstanceGroups?: Array<DynamicInstanceGroup>
+  /**
+   * <p>是否支持存储配置</p>
+   */
+  SupportPV?: boolean
+  /**
+   * <p>cbs存储卷列表</p>
+   */
+  CBSVolumes?: Array<CBSVolume>
+  /**
+   * <p>cfs存储卷列表，只包含cfs，不包含cfs turbo</p>
+   */
+  CFSVolumes?: Array<CFSVolume>
+  /**
+   * <p>cos存储卷列表</p>
+   */
+  COSVolumes?: Array<COSVolume>
+  /**
+   * <p>挂载卷列表</p>
+   */
+  VolumeMounts?: Array<VolumeMount>
+  /**
+   * <p>pod标签</p>
+   */
+  Labels?: Array<TkeLabel>
+  /**
+   * <p>Tolerations定义</p>
+   */
+  Tolerations?: Array<Toleration>
+  /**
+   * <p>环境变量</p>
+   */
+  Envs?: Array<NameValue>
+  /**
+   * <p>依赖外部组件</p>
+   */
+  DependServices?: Array<DependService>
+  /**
+   * <p>是否开启token鉴权</p>
+   */
+  SupportToken?: boolean
+  /**
+   * <p>cfs trubo挂载列表，不包含标准版cfs</p>
+   */
+  CFSTurboVolumes?: Array<CFSTurboVolume>
 }
 
 /**
@@ -8449,6 +9026,36 @@ export interface ScaleOutClusterResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * cfs trubo 存储卷
+ */
+export interface CFSTurboVolume {
+  /**
+   * <p>存储卷名称</p>
+   */
+  VolumeName?: string
+  /**
+   * <p>文件系统 id</p>
+   */
+  FileSystemId?: string
+  /**
+   * <p>CFSId</p>
+   */
+  FSId?: string
+  /**
+   * <p>挂载点 ip</p>
+   */
+  Host?: string
+  /**
+   * <p>cfs子目录</p>
+   */
+  SubPath?: string
+  /**
+   * <p>lustre挂载根目录，默认为/cfs</p>
+   */
+  RootDir?: string
 }
 
 /**
@@ -8764,6 +9371,36 @@ export interface DescribeNodeSpec {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CmnTypes?: Array<NodeSpecType>
+}
+
+/**
+ * ModifyDynamicInstance请求参数结构体
+ */
+export interface ModifyDynamicInstanceRequest {
+  /**
+   * <p>EMR集群id</p>
+   */
+  InstanceId: string
+  /**
+   * <p>支持DynamicInstance的服务名称</p>
+   */
+  ServiceName: string
+  /**
+   * <p>DynamicInstance类型</p><p>枚举值：</p><ul><li>RayCluster： RayCluster类型</li></ul>
+   */
+  DynamicInstanceType: string
+  /**
+   * <p>DynamicInstance的id</p>
+   */
+  DynamicInstanceId: number
+  /**
+   * <p>更新表单配置（每个更新域都传递最新的内容，要完整）</p>
+   */
+  DynamicInstanceForm?: ModifyDynamicInstanceForm
+  /**
+   * <p>更新YAML配置</p>
+   */
+  DynamicInstanceYaml?: string
 }
 
 /**
@@ -9559,23 +10196,33 @@ FlowId： 通过FlowId查询
 }
 
 /**
- * DescribeAutoScaleStrategies返回参数结构体
+ * 用于创建集群价格清单-节点组成部分价格
  */
-export interface DescribeAutoScaleStrategiesResponse {
+export interface PartDetailPriceItem {
   /**
-   * 按负载伸缩规则
-注意：此字段可能返回 null，表示取不到有效值。
+   * 类型包括：节点->node、系统盘->rootDisk、云数据盘->dataDisk、metaDB
    */
-  LoadAutoScaleStrategies?: Array<LoadAutoScaleStrategy>
+  InstanceType?: string
   /**
-   * 按时间伸缩规则
-注意：此字段可能返回 null，表示取不到有效值。
+   * 单价（原价）
    */
-  TimeBasedAutoScaleStrategies?: Array<TimeAutoScaleStrategy>
+  Price?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 单价（折扣价）
    */
-  RequestId?: string
+  RealCost?: number
+  /**
+   * 总价（折扣价）
+   */
+  RealTotalCost?: number
+  /**
+   * 折扣
+   */
+  Policy?: number
+  /**
+   * 数量
+   */
+  GoodsNum?: number
 }
 
 /**
@@ -9772,6 +10419,32 @@ export interface DescribeResourceScheduleRequest {
 }
 
 /**
+ * cos 存储卷
+ */
+export interface COSVolume {
+  /**
+   * 存储卷名称
+   */
+  VolumeName?: string
+  /**
+   * 密钥名称
+   */
+  Secret?: string
+  /**
+   * cos桶所在地域
+   */
+  Region?: string
+  /**
+   * 存储桶名称
+   */
+  Bucket?: string
+  /**
+   * cos 子目录
+   */
+  SubPath?: string
+}
+
+/**
  * DeleteNodeResourceConfig返回参数结构体
  */
 export interface DeleteNodeResourceConfigResponse {
@@ -9789,24 +10462,6 @@ export interface ConvertPreToPostClusterResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DAG信息
- */
-export interface DAGInfo {
-  /**
-   * 查询ID
-   */
-  ID?: string
-  /**
-   * DAG类型，目前只支持starrocks
-   */
-  Type?: string
-  /**
-   * 返回的DAG的JSON字符串
-   */
-  Content?: string
 }
 
 /**
@@ -10376,121 +11031,13 @@ export interface ModifySLInstanceRequest {
 }
 
 /**
- * CreateCluster请求参数结构体
+ * 容器额外配置
  */
-export interface CreateClusterRequest {
+export interface ContainerExtraConf {
   /**
-   * <p>EMR产品版本名称如EMR-V2.3.0 表示2.3.0版本的EMR， 当前支持产品版本名称查询：<a href="https://cloud.tencent.com/document/product/589/66338">产品版本名称</a></p>
+   * <p>计算作业代理访问类型，如Spark作业和RayCluster UI；不填写默认使用Internal</p><p>枚举值：</p><ul><li>Internal： 使用内网LB代理访问</li><li>Public： 使用公网LB代理访问</li><li>None： 不创建LB代理访问</li></ul>
    */
-  ProductVersion: string
-  /**
-   * <p>是否开启节点高可用。取值范围：</p><li>true：表示开启节点高可用。</li><li>false：表示不开启节点高可用。</li>
-   */
-  EnableSupportHAFlag: boolean
-  /**
-   * <p>实例名称。</p><li>长度限制为6-36个字符。</li><li>只允许包含中文、字母、数字、-、_。</li>
-   */
-  InstanceName: string
-  /**
-   * <p>实例计费模式。取值范围：</p><li>PREPAID：预付费，即包年包月。</li><li>POSTPAID_BY_HOUR：按小时后付费。</li>
-   */
-  InstanceChargeType: string
-  /**
-   * <p>实例登录设置。通过该参数可以设置所购买节点的登录方式密码或者密钥。</p><li>设置密钥时，密码仅用于组件原生WebUI快捷入口登录。</li><li>未设置密钥时，密码用于登录所购节点以及组件原生WebUI快捷入口登录。</li>
-   */
-  LoginSettings: LoginSettings
-  /**
-   * <p>集群应用场景以及支持部署组件配置</p>
-   */
-  SceneSoftwareConfig: SceneSoftwareConfig
-  /**
-   * <p>即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。</p>
-   */
-  InstanceChargePrepaid?: InstanceChargePrepaid
-  /**
-   * <p>实例所属安全组的ID，形如sg-xxxxxxxx。该参数可以通过调用 <a href="https://cloud.tencent.com/document/api/215/15808">DescribeSecurityGroups</a> 的返回值中的SecurityGroupId字段来获取。</p>
-   */
-  SecurityGroupIds?: Array<string>
-  /**
-   * <p><a href="https://cloud.tencent.com/document/product/589/35656">引导操作</a>脚本设置。</p>
-   */
-  ScriptBootstrapActionConfig?: Array<ScriptBootstrapActionConfig>
-  /**
-   * <p>唯一随机标识，时效性为5分钟，需要调用者指定 防止客户端重复创建资源，例如 a9a90aa6-<strong><strong>-</strong></strong>-****-fae360632808</p>
-   */
-  ClientToken?: string
-  /**
-   * <p>是否开启集群Master节点公网。取值范围：</p><li>NEED_MASTER_WAN：表示开启集群Master节点公网。</li><li>NOT_NEED_MASTER_WAN：表示不开启。</li>默认开启集群Master节点公网。
-   */
-  NeedMasterWan?: string
-  /**
-   * <p>是否开启外网远程登录。（在SecurityGroupId不为空时，该参数无效）不填默认为不开启 取值范围：</p><li>true：表示开启</li><li>false：表示不开启</li>
-   */
-  EnableRemoteLoginFlag?: boolean
-  /**
-   * <p>是否开启Kerberos认证。默认不开启 取值范围：</p><li>true：表示开启</li><li>false：表示不开启</li>
-   */
-  EnableKerberosFlag?: boolean
-  /**
-   * <p><a href="https://cloud.tencent.com/document/product/589/35655?from_cn_redirect=1">自定义软件配置</a></p>
-   */
-  CustomConf?: string
-  /**
-   * <p>标签描述列表。通过指定该参数可以同时绑定标签到相应的实例。</p>
-   */
-  Tags?: Array<Tag>
-  /**
-   * <p>分散置放群组ID列表，当前只支持指定一个。<br>该参数可以通过调用 <a href="https://cloud.tencent.com/document/product/213/17810">DescribeDisasterRecoverGroups</a>的返回值中的DisasterRecoverGroupId字段来获取。</p>
-   */
-  DisasterRecoverGroupIds?: Array<string>
-  /**
-   * <p>是否开启集群维度CBS加密。默认不加密 取值范围：</p><li>true：表示加密</li><li>false：表示不加密</li>
-   */
-  EnableCbsEncryptFlag?: boolean
-  /**
-   * <p>MetaDB信息，当MetaType选择EMR_NEW_META时，MetaDataJdbcUrl MetaDataUser MetaDataPass UnifyMetaInstanceId不用填<br>当MetaType选择EMR_EXIT_META时，填写UnifyMetaInstanceId<br>当MetaType选择USER_CUSTOM_META时，填写MetaDataJdbcUrl MetaDataUser MetaDataPass</p>
-   */
-  MetaDBInfo?: CustomMetaDBInfo
-  /**
-   * <p>共享组件信息</p>
-   */
-  DependService?: Array<DependService>
-  /**
-   * <p>节点资源的规格，有几个可用区，就填几个，按顺序第一个为主可用区，第二个为备可用区，第三个为仲裁可用区。如果没有开启跨AZ，则长度为1即可。</p>
-   */
-  ZoneResourceConfiguration?: Array<ZoneResourceConfiguration>
-  /**
-   * <p>cos桶路径，创建StarRocks存算分离集群时用到</p>
-   */
-  CosBucket?: string
-  /**
-   * <p>节点标识信息，目前只提供给tf平台使用</p>
-   */
-  NodeMarks?: Array<NodeMark>
-  /**
-   * <p>clb id</p>
-   */
-  LoadBalancerId?: string
-  /**
-   * <p>数据库版本：mysql8/tdsql8/mysql5</p>
-   */
-  DefaultMetaVersion?: string
-  /**
-   * <p>是否开通数据库审计</p>
-   */
-  NeedCdbAudit?: number
-  /**
-   * <p>安全指定来源ip</p>
-   */
-  SgIP?: string
-  /**
-   * <p>分区置放群组分区</p>
-   */
-  PartitionNumber?: number
-  /**
-   * <p>服务ui地址</p><p>枚举值：</p><ul><li>0： 服务ui地址，只返回1条服务ui地址</li><li>1： 服务ui地址，如果服务含有多个ui地址将全部返回，例如impala的Impalad、StateStore、Catalogd</li></ul><p>默认值：0</p>
-   */
-  WebUiVersion?: number
+  JobAccessProxyType?: string
 }
 
 /**
@@ -10714,6 +11261,68 @@ export interface DescribeClusterNodesRequest {
    * 是否升序，1:升序，0:降序
    */
   Asc?: number
+}
+
+/**
+ * 更新DynamicInstance提交的表单数据
+ */
+export interface ModifyDynamicInstanceForm {
+  /**
+   * <p>更新作用域：<br>1：添加workerGroup（DynamicInstance级别）<br>2：更新存储配置（DynamicInstance级别）<br>3：更新标签配置（DynamicInstance级别）<br>4：更新高级配置（DynamicInstance级别）<br>5：更新PodCpu、PodMem（DynamicInstance-group级别）<br>6：更新PodNum、MinPodNum、MaxPodNum（DynamicInstance-group级别）<br>7：更新存储配置（DynamicInstance-group级别）<br>8：更新标签配置（DynamicInstance-group级别）</p>
+   */
+  ModifyScope: number
+  /**
+   * <p>添加的workerGroup信息</p>
+   */
+  AddDynamicInstanceGroup?: DynamicInstanceGroup
+  /**
+   * <p>是否支持存储配置</p>
+   */
+  SupportPV?: boolean
+  /**
+   * <p>cbs存储卷列表</p>
+   */
+  CBSVolumes?: Array<CBSVolume>
+  /**
+   * <p>cfs存储卷列表，不包含cfs turbo列表</p>
+   */
+  CFSVolumes?: Array<CFSVolume>
+  /**
+   * <p>cos存储卷列表</p>
+   */
+  COSVolumes?: Array<COSVolume>
+  /**
+   * <p>挂载卷列表</p>
+   */
+  VolumeMounts?: Array<VolumeMount>
+  /**
+   * <p>pod标签</p>
+   */
+  Labels?: Array<TkeLabel>
+  /**
+   * <p>Tolerations定义</p>
+   */
+  Tolerations?: Array<Toleration>
+  /**
+   * <p>环境变量</p>
+   */
+  Envs?: Array<NameValue>
+  /**
+   * <p>依赖外部组件</p>
+   */
+  DependServices?: Array<DependService>
+  /**
+   * <p>是否生成新token鉴权</p>
+   */
+  SupportNewToken?: boolean
+  /**
+   * <p>DynamicInstance-group级别的更新信息</p>
+   */
+  ModifyDynamicInstanceGroup?: DynamicInstanceGroup
+  /**
+   * <p>cfs turbo挂载列表，不包含标准版</p>
+   */
+  CFSTurboVolumes?: Array<CFSTurboVolume>
 }
 
 /**
@@ -11145,33 +11754,23 @@ export interface PodState {
 }
 
 /**
- * 用于创建集群价格清单-节点组成部分价格
+ * DescribeAutoScaleStrategies返回参数结构体
  */
-export interface PartDetailPriceItem {
+export interface DescribeAutoScaleStrategiesResponse {
   /**
-   * 类型包括：节点->node、系统盘->rootDisk、云数据盘->dataDisk、metaDB
+   * 按负载伸缩规则
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceType?: string
+  LoadAutoScaleStrategies?: Array<LoadAutoScaleStrategy>
   /**
-   * 单价（原价）
+   * 按时间伸缩规则
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Price?: number
+  TimeBasedAutoScaleStrategies?: Array<TimeAutoScaleStrategy>
   /**
-   * 单价（折扣价）
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RealCost?: number
-  /**
-   * 总价（折扣价）
-   */
-  RealTotalCost?: number
-  /**
-   * 折扣
-   */
-  Policy?: number
-  /**
-   * 数量
-   */
-  GoodsNum?: number
+  RequestId?: string
 }
 
 /**
@@ -11194,6 +11793,20 @@ export interface ExternalService {
    * 自定义参数集合
    */
   CustomServiceDefineList: Array<CustomServiceDefine>
+}
+
+/**
+ * CreateDynamicInstance返回参数结构体
+ */
+export interface CreateDynamicInstanceResponse {
+  /**
+   * <p>异步流程id</p>
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

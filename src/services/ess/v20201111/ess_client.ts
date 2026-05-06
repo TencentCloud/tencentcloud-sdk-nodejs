@@ -64,6 +64,7 @@ import {
   UnbindEmployeeUserIdWithClientOpenIdRequest,
   CreateBatchInformationExtractionTaskRequest,
   CreateFlowByFilesRequest,
+  DescribeContractReviewChecklistRequest,
   FormField,
   OperateSealsRequest,
   Staff,
@@ -135,6 +136,7 @@ import {
   CreateContractComparisonTaskResponse,
   DescribeFileUrlsRequest,
   CreateMiniAppPrepareFlowResponse,
+  ImportContractReviewChecklistResponse,
   CreateConvertTaskApiRequest,
   OperateTemplateRequest,
   CreateBatchQuickSignUrlResponse,
@@ -165,6 +167,7 @@ import {
   DeleteSealPoliciesResponse,
   DescribeOrganizationAuthStatusResponse,
   DescribeBatchOrganizationRegistrationTasksRequest,
+  ChecklistPoint,
   UserThreeFactor,
   SignQrCode,
   CreateSealPolicyResponse,
@@ -172,6 +175,7 @@ import {
   CreateFlowSignUrlResponse,
   RenewAutoSignLicenseResponse,
   UserInfo,
+  ChecklistCategory,
   HasAuthOrganization,
   CreateIntegrationRoleResponse,
   DescribeFlowComponentsRequest,
@@ -209,7 +213,7 @@ import {
   MiniAppCreateApproverInfo,
   ExtendScene,
   DescribeFileCounterSignResultResponse,
-  IntentionActionResult,
+  Component,
   CreateBatchSignUrlRequest,
   CreateBatchInformationExtractionTaskResponse,
   FlowGroupApprovers,
@@ -220,6 +224,7 @@ import {
   Admin,
   Caller,
   ExportContractComparisonTaskResponse,
+  DescribeContractReviewChecklistResponse,
   EmbedUrlOption,
   DescribeContractReviewMarkedRiskExportTaskRequest,
   DescribeContractComparisonTaskResponse,
@@ -348,7 +353,7 @@ import {
   CreateBatchQuickSignUrlRequest,
   DescribeExtendedServiceAuthInfosResponse,
   CreateResultPageConfig,
-  Component,
+  IntentionActionResult,
   FlowGroupUrlInfo,
   SubTaskFeedback,
   UpdateIntegrationEmployeesResponse,
@@ -401,6 +406,7 @@ import {
   CreateFlowApproversRequest,
   ExtendAuthInfo,
   CreatePreparedPersonalEsignRequest,
+  ImportContractReviewChecklistRequest,
   CreateMiniAppPrepareFlowRequest,
   CreateIntegrationDepartmentRequest,
   DescribeUserVerifyStatusRequest,
@@ -512,30 +518,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 此接口（DescribeFlowTemplates）用于查询本企业模板列表信息。
-
-
-**适用场景**
-该接口常用来配合<a href="https://qian.tencent.com/developers/companyApis/startFlows/CreateDocument" target="_blank">模板发起合同-创建电子文档</a>接口，作为创建电子文档的前置接口使用。
-通过此接口查询到模板信息后，再通过调用创建电子文档接口，指定模板ID，指定模板中需要的填写控件内容等，完成电子文档的创建。
-
-**一个模板通常会包含以下结构信息** 
-
-- 模板模板ID, 模板名字等基本信息
-- 发起方参与信息Promoter、签署参与方 Recipients，后者会在模板发起合同时用于指定参与方
-- 发起方和签署方的填写控件 Components
-- 签署方的签署控件 SignComponents
-
-![image](https://qcloudimg.tencent-cloud.cn/raw/ab81fa948a0a6fea14f48cac91d0e36a/channel_DescribeTemplates.png)
-
-模板中各元素的层级关系, 所有的填写控件和签署控件都归属某一个角色(通过控件的ComponentRecipientId来关联)
-![image](https://qcloudimg.tencent-cloud.cn/raw/45c638bd93f9c8024763add9ab47c27f.png)
-     */
-  async DescribeFlowTemplates(
-    req: DescribeFlowTemplatesRequest,
-    cb?: (error: string, rep: DescribeFlowTemplatesResponse) => void
-  ): Promise<DescribeFlowTemplatesResponse> {
-    return this.request("DescribeFlowTemplates", req, cb)
+   * 此接口（DescribeContractReviewChecklist）用于获取已有的合同风险审查清单详情。
+   */
+  async DescribeContractReviewChecklist(
+    req: DescribeContractReviewChecklistRequest,
+    cb?: (error: string, rep: DescribeContractReviewChecklistResponse) => void
+  ): Promise<DescribeContractReviewChecklistResponse> {
+    return this.request("DescribeContractReviewChecklist", req, cb)
   }
 
   /**
@@ -829,13 +818,40 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 对加签后的文件进行数字签名验证，判断数字签名是否有效。
+   * 此接口（ImportRiskIdentificationChecklist）用于创建或更新合同审查清单。
    */
-  async VerifyDigitFile(
-    req: VerifyDigitFileRequest,
-    cb?: (error: string, rep: VerifyDigitFileResponse) => void
-  ): Promise<VerifyDigitFileResponse> {
-    return this.request("VerifyDigitFile", req, cb)
+  async ImportContractReviewChecklist(
+    req: ImportContractReviewChecklistRequest,
+    cb?: (error: string, rep: ImportContractReviewChecklistResponse) => void
+  ): Promise<ImportContractReviewChecklistResponse> {
+    return this.request("ImportContractReviewChecklist", req, cb)
+  }
+
+  /**
+     * 此接口（DescribeFlowTemplates）用于查询本企业模板列表信息。
+
+
+**适用场景**
+该接口常用来配合<a href="https://qian.tencent.com/developers/companyApis/startFlows/CreateDocument" target="_blank">模板发起合同-创建电子文档</a>接口，作为创建电子文档的前置接口使用。
+通过此接口查询到模板信息后，再通过调用创建电子文档接口，指定模板ID，指定模板中需要的填写控件内容等，完成电子文档的创建。
+
+**一个模板通常会包含以下结构信息** 
+
+- 模板模板ID, 模板名字等基本信息
+- 发起方参与信息Promoter、签署参与方 Recipients，后者会在模板发起合同时用于指定参与方
+- 发起方和签署方的填写控件 Components
+- 签署方的签署控件 SignComponents
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/ab81fa948a0a6fea14f48cac91d0e36a/channel_DescribeTemplates.png)
+
+模板中各元素的层级关系, 所有的填写控件和签署控件都归属某一个角色(通过控件的ComponentRecipientId来关联)
+![image](https://qcloudimg.tencent-cloud.cn/raw/45c638bd93f9c8024763add9ab47c27f.png)
+     */
+  async DescribeFlowTemplates(
+    req: DescribeFlowTemplatesRequest,
+    cb?: (error: string, rep: DescribeFlowTemplatesResponse) => void
+  ): Promise<DescribeFlowTemplatesResponse> {
+    return this.request("DescribeFlowTemplates", req, cb)
   }
 
   /**
@@ -2121,6 +2137,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateInformationExtractionWebUrlResponse) => void
   ): Promise<CreateInformationExtractionWebUrlResponse> {
     return this.request("CreateInformationExtractionWebUrl", req, cb)
+  }
+
+  /**
+   * 对加签后的文件进行数字签名验证，判断数字签名是否有效。
+   */
+  async VerifyDigitFile(
+    req: VerifyDigitFileRequest,
+    cb?: (error: string, rep: VerifyDigitFileResponse) => void
+  ): Promise<VerifyDigitFileResponse> {
+    return this.request("VerifyDigitFile", req, cb)
   }
 
   /**

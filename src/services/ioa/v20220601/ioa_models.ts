@@ -48,6 +48,17 @@ export interface DescribeDeviceHardwareInfoListRspData {
 }
 
 /**
+ * 数据集
+ */
+export interface DescribeAccountResourcesData {
+  /**
+   * 资源对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<DescribeAccountResourcesItems>
+}
+
+/**
  * 操作的设备列表
  */
 export interface ModifyVirtualDeviceGroupsReqItem {
@@ -131,6 +142,16 @@ export interface DescribeDeviceHardwareInfoListResponse {
 }
 
 /**
+ * DescribeResourceGrantedAccounts请求参数结构体
+ */
+export interface DescribeResourceGrantedAccountsRequest {
+  /**
+   * 账户组Id(只支持32位)
+   */
+  ResourceId?: number
+}
+
+/**
  * 终端硬件信息列表Item数据
  */
 export interface DescribeDeviceHardwareInfoItem {
@@ -202,6 +223,16 @@ export interface DescribeDeviceHardwareInfoItem {
    * 终端备注名
    */
   RemarkName?: string
+}
+
+/**
+ * DescribeResourceGrantedAccountGroups请求参数结构体
+ */
+export interface DescribeResourceGrantedAccountGroupsRequest {
+  /**
+   * 资源或资源组Id;
+   */
+  ResourceId: number
 }
 
 /**
@@ -367,6 +398,16 @@ export interface DescribeAggrSoftDeviceListData {
 }
 
 /**
+ * GrantResourcesByVirtualGroups请求参数结构体
+ */
+export interface GrantResourcesByVirtualGroupsRequest {
+  /**
+   *
+   */
+  Operations: Array<GrantResourceOperationByVirtualGroups>
+}
+
+/**
  * 账号分组信息
  */
 export interface DescribeAccountGroupsData {
@@ -457,32 +498,18 @@ export interface DescribeAccountGroupsData {
 }
 
 /**
- * DescribeAccountGroups请求参数结构体
+ * DescribeDirectAccountGroupResources返回参数结构体
  */
-export interface DescribeAccountGroupsRequest {
+export interface DescribeDirectAccountGroupResourcesResponse {
   /**
-   * 搜索范围：0-仅当前分组的直接子组，1-当前分组的所有子组。默认为0。
+   * 查询的数据集合
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Deepin?: number
+  Data?: DescribeAccountResourcesData
   /**
-   * 查询条件
-
-过滤参数
-1、Name，string类型，按分组名过滤
-是否必填：否
-操作符: like
-
-排序条件
-1、Itime，string类型，按分组创建时间排序
-是否必填：否
-2、Utime，string类型，按分组更新时间排序
-是否必填：否
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Condition?: Condition
-  /**
-   * 父分组ID，获取该分组下的子组信息。默认查询全网根分组下子组信息。
-   */
-  ParentId?: number
+  RequestId?: string
 }
 
 /**
@@ -493,6 +520,21 @@ export interface DescribeDeviceVirtualGroupsResponse {
    * 查询终端自定义分组的Data数据
    */
   Data?: DescribeDeviceVirtualGroupsPageRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateBusinessResource返回参数结构体
+ */
+export interface CreateBusinessResourceResponse {
+  /**
+   * 创建业务资源响应的数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: CreateBusinessResourceData
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -926,6 +968,101 @@ export interface DescribeSoftCensusListByDeviceRequest {
 }
 
 /**
+ * GrantedAccountItem
+ */
+export interface GrantedAccountItem {
+  /**
+   * 账户Id
+   */
+  AccountId?: number
+  /**
+   * 用户UserId
+   */
+  UserId?: string
+  /**
+   * 用户名称
+   */
+  UserName?: string
+  /**
+   * 所属分组Id
+   */
+  GroupId?: number
+  /**
+   * 分组路劲GroupIdPathArray
+   */
+  GroupIdPathArray?: Array<number | bigint>
+  /**
+   * 所属分组NamePathArray
+   */
+  GroupNamePathArray?: Array<string>
+  /**
+   * 目录id
+   */
+  MenuId?: number
+  /**
+   * 过期时间
+   */
+  ExpireTime?: number
+  /**
+   * 关联id
+   */
+  RelationId?: number
+}
+
+/**
+ * DescribeResourceGrantedAccountsData
+ */
+export interface DescribeResourceGrantedAccountGroupsData {
+  /**
+   *
+   */
+  Items?: Array<GrantedAccountGroupItem>
+}
+
+/**
+ * DescribeResourceGrantedAccounts返回参数结构体
+ */
+export interface DescribeResourceGrantedAccountsResponse {
+  /**
+   * 查询的数据集合
+   */
+  Data?: DescribeResourceGrantedAccountsData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeResourceGrantedAccountGroups返回参数结构体
+ */
+export interface DescribeResourceGrantedAccountGroupsResponse {
+  /**
+   * 查询的数据集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DescribeResourceGrantedAccountGroupsData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeResourceGrantedVirtualGroups返回参数结构体
+ */
+export interface DescribeResourceGrantedVirtualGroupsResponse {
+  /**
+   * 查询的数据集合
+   */
+  Data?: DescribeResourceGrantedVirtualGroupsData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLocalAccounts请求参数结构体
  */
 export interface DescribeLocalAccountsRequest {
@@ -974,6 +1111,16 @@ export interface CreateDeviceTaskResponse {
 }
 
 /**
+ * GrantResourcesByAccountGroups请求参数结构体
+ */
+export interface GrantResourcesByAccountGroupsRequest {
+  /**
+   *
+   */
+  Operations: Array<GrantResourceOperationByAccountGroups>
+}
+
+/**
  * 获取账号列表响应的分页对象
  */
 export interface DescribeLocalAccountsPage {
@@ -999,6 +1146,16 @@ export interface DescribeSoftwareInformationPageData {
    * 分页公共对象
    */
   Page?: Paging
+}
+
+/**
+ * ModifyDeviceTrustStatus返回参数结构体
+ */
+export interface ModifyDeviceTrustStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1134,6 +1291,44 @@ export interface DescribeSoftCensusListByDeviceData {
 }
 
 /**
+ * CreateBusinessResource请求参数结构体
+ */
+export interface CreateBusinessResourceRequest {
+  /**
+   * 业务资源所在的模块id，没有资源模块先创建资源模块(只支持32位)
+   */
+  AreaId: number
+  /**
+   * 业务资源协议类型, 1:UDP, 2:TCP, 3:所有协议(只支持32位)
+   */
+  Protocol: number
+  /**
+   * 业务资源名称，同一个资源模块下面不可重复
+   */
+  ServiceName: string
+  /**
+   * 业务资源类型:ip,domain,ip_section，对应ip、域名、ip段
+   */
+  ServiceType: string
+  /**
+   * 业务资源端口 all,1-65535
+   */
+  ServicePort: string
+  /**
+   * 业务资源优先级 1-65535(只支持32位)
+   */
+  Levels: number
+  /**
+   * 业务资源地址(ip、域名、ip段)
+   */
+  ServiceAddress: string
+  /**
+   * 是否走代理,该参数不传，默认为0, 2：内外网直连，1：内网直连， 0：不启用代理配置(只支持32位)
+   */
+  DirectConn?: number
+}
+
+/**
  * DescribeDeviceInfo请求参数结构体
  */
 export interface DescribeDeviceInfoRequest {
@@ -1149,6 +1344,27 @@ export interface DescribeDeviceInfoRequest {
    * 查询类型  process_list network_list service_list
    */
   Type?: string
+}
+
+/**
+ * 创建业务资源响应的数据
+ */
+export interface CreateBusinessResourceData {
+  /**
+   * 创建成功的业务资源数据id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceId?: number
+}
+
+/**
+ * GrantResourcesByAccounts请求参数结构体
+ */
+export interface GrantResourcesByAccountsRequest {
+  /**
+   *
+   */
+  Operations: Array<GrantResourceOperationByAccounts>
 }
 
 /**
@@ -1372,33 +1588,216 @@ export interface CreatePrivilegeCodeRspData {
 }
 
 /**
- * 终端自定义分组列表数据
+ * 业务资源列表数据对象集合
  */
-export interface DeviceVirtualDeviceGroupsDetail {
+export interface DescribeBusinessResourceData {
   /**
-   * 终端自定义分组id
+   * <p>业务资源id(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id?: number
+  ServiceId?: number
   /**
-   * 自定义分组名称
+   * <p>业务资源名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceVirtualGroupName?: string
+  ServiceName?: string
   /**
-   * 设备数
+   * <p>资源类型:ip,domain,ip_section，对应ip，域名，ip段</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeviceCount?: number
+  ServiceType?: string
   /**
-   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios  ）
+   * <p>业务资源地址</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  OsType?: number
+  ServiceAddress?: string
   /**
-   * 创建时间
+   * <p>业务资源端口 all,1-65535</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Itime?: string
+  ServicePort?: string
   /**
-   * 更新时间
+   * <p>业务资源创建时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Utime?: string
+  CreateTime?: string
+  /**
+   * <p>业务资源最后修改时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * <p>说明字段</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+  /**
+   * <p>资源模块ID(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AreaId?: number
+  /**
+   * <p>零信任网关id(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SmartGateIds?: Array<number | bigint>
+  /**
+   * <p>业务资源协议类型,3：所有,2：UDP，1：TCP(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Protocol?: number
+  /**
+   * <p>业务资源等级(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Levels?: number
+  /**
+   * <p>零信任网关名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SmartGateNames?: string
+  /**
+   * <p>网关连通性(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DirectConn?: number
+  /**
+   * <p>网关连通性状态(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DetectState?: number
+  /**
+   * <p>网关连通性信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DetectInfo?: string
+  /**
+   * <p>网关连通性创建时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DetectTime?: string
+  /**
+   * <p>绑定的连接器组Id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConnectorGroupId?: string
+  /**
+   * <p>绑定的连接器组的名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConnectorGroupName?: string
+  /**
+   * <p>资源连通性可达最后的检测时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReachableTime?: string
+  /**
+   * <p>资源连通性可达状态,0：未检测，1：未连通，2：已连通</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReachableState?: number
+  /**
+   * <p>访问类型:0-NGN 1-web(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessType?: number
+  /**
+   * <p>web资源-后端协议</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BackendScheme?: string
+  /**
+   * <p>web资源-后端路径</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BackendPath?: string
+  /**
+   * <p>web资源-前端协议</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FrontScheme?: string
+  /**
+   * <p>web资源-前端host</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FrontHost?: string
+  /**
+   * <p>web资源-前端host(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FrontPort?: number
+  /**
+   * <p>web资源-前端路径 默认&quot;/&quot;</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FrontPath?: string
+  /**
+   * <p>web资源-是否禁用外网访问：0-可通过外网访问 1-不能通过外网访问(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisableFront?: number
+  /**
+   * <p>web资源-租户自定义域名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomDomain?: string
+  /**
+   * <p>web资源-自定义host</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomHost?: string
+  /**
+   * <p>web资源-Cname状态(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CnameStatus?: number
+  /**
+   * <p>web资源-关联证书ID(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CertificateId?: number
+  /**
+   * <p>web资源类型：0-应用 1-API(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebGwResourceType?: number
+  /**
+   * <p>web资源-如果选择API类型资源，则需要配置密钥(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  APISecretId?: number
+  /**
+   * <p>所属资源组名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AreaName?: string
+  /**
+   * <p>web资源-前端协议是HTTPS类型，需要配置证书</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SSLCertId?: string
+  /**
+   * <p>web资源-是否启用依赖地址：0-不启用 1-启用(只支持32位)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableDependentAddr?: number
+  /**
+   * <p>web资源-依赖地址的后端服务器地址</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DependentAddr?: string
+  /**
+   * <p>web免鉴权：1-鉴权 2-免鉴权</p>
+   */
+  WebGwNoAuth?: number
+  /**
+   * <p>通道类型</p><p>枚举值：</p><ul><li>vpc： vpc类型</li><li>native： 专线类型</li></ul><p>默认值：native</p>
+   */
+  ConnectorGroupType?: string
+  /**
+   * <p>域名后缀</p>
+   */
+  DomainSuffix?: string
 }
 
 /**
@@ -1444,6 +1843,20 @@ export interface ExportSoftwareInformationListResponse {
 }
 
 /**
+ * DescribeResourceGrantedVirtualGroups请求参数结构体
+ */
+export interface DescribeResourceGrantedVirtualGroupsRequest {
+  /**
+   * 资源ID
+   */
+  ResourceId?: number
+  /**
+   * 资源类型
+   */
+  ResourceType?: number
+}
+
+/**
  * FilterGroups 条件过滤组
  */
 export interface FilterGroup {
@@ -1451,6 +1864,48 @@ export interface FilterGroup {
    * Filters 条件过滤
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * DescribeBusinessResources请求参数结构体
+ */
+export interface DescribeBusinessResourcesRequest {
+  /**
+   * 资源模块Id
+   */
+  AreaId?: number
+  /**
+   * 搜索的业务资源名称
+   */
+  ServiceName?: string
+  /**
+   * 获取业务资源列表的开始时间，时间格式：2006-01-02
+   */
+  StartTime?: string
+  /**
+   * 搜索关键字
+   */
+  Keywords?: string
+  /**
+   * 获取业务资源列表的结束时间，时间格式：2006-01-02
+   */
+  EndTime?: string
+  /**
+   * 滤条件、分页参数。分页内容不传，默认获取第1页，10条数据
+排序条件
+<li>CreateTime - string - 是否必填：否 - 排序支持：是 - 按业务资源创建时间排序。</li>
+<li>Levels - int - 是否必填：否 - 排序支持：是 - 按业务资源优先级排序。</li>
+<li>ReachableState - int - 是否必填：否 - 排序支持：是 - 按业务资源连通性排序(私有化版本不支持)。</li>
+   */
+  Condition?: Condition
+  /**
+   * 资源类型
+   */
+  AccessType?: string
+  /**
+   * web资源前端地址
+   */
+  FrontAddr?: string
 }
 
 /**
@@ -1494,25 +1949,33 @@ export interface DescribeAggrSoftCategorySoftListData {
 }
 
 /**
- * 页码
+ * 授权操作
  */
-export interface Paging {
+export interface GrantResourceOperationByAccounts {
   /**
-   * 每页条数
+   * 操作类型: 1-增加授权 2-删除授权;
    */
-  PageSize?: number
+  OperationType: number
   /**
-   * 页码
+   * 资源或资源组Id
    */
-  PageNum?: number
+  ResourceId: number
   /**
-   * 总页数
+   * 资源类型 ,1:资源 2:资源组
    */
-  PageCount?: number
+  ResourceType: number
   /**
-   * 记录总数
+   * 过期时间,时间戳(秒)
    */
-  Total?: number
+  ExpireTime: number
+  /**
+   * 账号userid
+   */
+  AccountUserId: string
+  /**
+   * 账号目录ID
+   */
+  MenuId: number
 }
 
 /**
@@ -1598,6 +2061,38 @@ export interface DescribeDLPEdgeNodesRequest {
 }
 
 /**
+ * 页码
+ */
+export interface Paging {
+  /**
+   * 每页条数
+   */
+  PageSize?: number
+  /**
+   * 页码
+   */
+  PageNum?: number
+  /**
+   * 总页数
+   */
+  PageCount?: number
+  /**
+   * 记录总数
+   */
+  Total?: number
+}
+
+/**
+ * GrantResourcesByAccounts返回参数结构体
+ */
+export interface GrantResourcesByAccountsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 软件详情响应对象集合
  */
 export interface SoftwareInformationData {
@@ -1641,6 +2136,37 @@ export interface SoftwareInformationData {
    * 平台类型
    */
   OsType?: number
+}
+
+/**
+ * DescribeBusinessResources返回参数结构体
+ */
+export interface DescribeBusinessResourcesResponse {
+  /**
+   * 业务资源分页返回对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data: DescribeBusinessResourcePageRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 业务资源分页返回对象
+ */
+export interface DescribeBusinessResourcePageRsp {
+  /**
+   * 业务资源列表数据对象集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<DescribeBusinessResourceData>
+  /**
+   * 分页公共对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: Paging
 }
 
 /**
@@ -1693,6 +2219,91 @@ export interface DescribeVirtualDevicesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeResourceGrantedAccountsData
+ */
+export interface DescribeResourceGrantedAccountsData {
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   *
+   */
+  Items?: Array<GrantedAccountItem>
+}
+
+/**
+ * 资源对象
+ */
+export interface DescribeAccountResourcesItems {
+  /**
+   * 资源组id(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AreaId?: number
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 资源类型(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceType?: number
+  /**
+   * 资源id(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceId?: number
+  /**
+   * 一般同id字段相同(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FromSourceId?: number
+  /**
+   * 是否继承过来的资源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsInherited?: boolean
+  /**
+   * 资源过期时间(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: number
+  /**
+   * 账户组的namepath
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NamePath?: string
+  /**
+   * 访问类型:0-NGN 1-web(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessType?: number
+  /**
+   * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceName?: string
+  /**
+   * 继承开关状态(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsInheritedSwitch?: number
+  /**
+   * 关系id(只支持32位)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AreaName?: string
 }
 
 /**
@@ -1801,6 +2412,36 @@ export interface DescribeDeviceVirtualGroupsPageRsp {
    * 终端自定义分组列表数据
    */
   Items?: Array<DeviceVirtualDeviceGroupsDetail>
+}
+
+/**
+ * GrantedAccountItem
+ */
+export interface GrantedVirtualGroupItem {
+  /**
+   * 账户组Id
+   */
+  VirtualGroupId?: number
+  /**
+   * 分组名称
+   */
+  Name?: string
+  /**
+   * 描述信息
+   */
+  Description?: string
+  /**
+   * 目录id
+   */
+  AccountCount?: number
+  /**
+   * 过期时间
+   */
+  ExpireTime?: number
+  /**
+   * 关联id
+   */
+  RelationId?: number
 }
 
 /**
@@ -1969,6 +2610,16 @@ export interface DescribeSoftwareInformationResponse {
 }
 
 /**
+ * GrantResourcesByAccountGroups返回参数结构体
+ */
+export interface GrantResourcesByAccountGroupsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyVirtualDeviceGroups返回参数结构体
  */
 export interface ModifyVirtualDeviceGroupsResponse {
@@ -2054,6 +2705,36 @@ export interface DescribeAccountGroupsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 终端自定义分组列表数据
+ */
+export interface DeviceVirtualDeviceGroupsDetail {
+  /**
+   * 终端自定义分组id
+   */
+  Id?: number
+  /**
+   * 自定义分组名称
+   */
+  DeviceVirtualGroupName?: string
+  /**
+   * 设备数
+   */
+  DeviceCount?: number
+  /**
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios  ）
+   */
+  OsType?: number
+  /**
+   * 创建时间
+   */
+  Itime?: string
+  /**
+   * 更新时间
+   */
+  Utime?: string
 }
 
 /**
@@ -2193,6 +2874,42 @@ export interface Filter {
 }
 
 /**
+ * GrantResourcesByVirtualGroups返回参数结构体
+ */
+export interface GrantResourcesByVirtualGroupsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDeviceTrustStatus请求参数结构体
+ */
+export interface ModifyDeviceTrustStatusRequest {
+  /**
+   * <p>设备状态，1表示拉黑，0表示加白</p>
+   */
+  Status: number
+  /**
+   * <p>设备MID列表</p>
+   */
+  DeviceIDList?: Array<string>
+  /**
+   * <p>设备拉黑有效期，UnixTime, 单位是 ms,0表示永久有效，默认值是0</p>
+   */
+  BlackStatusDeadline?: number
+  /**
+   * <p>DescribeAccuserList返回的Id 列表</p>
+   */
+  IdList?: Array<number | bigint>
+  /**
+   * <p>默认值：0，根据id更新，1根据DeviceIDList</p>
+   */
+  UpdateFlags?: number
+}
+
+/**
  * DescribeAggrSoftDeviceList返回参数结构体
  */
 export interface DescribeAggrSoftDeviceListResponse {
@@ -2218,6 +2935,35 @@ export interface DescribeRootAccountGroupResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAccountGroups请求参数结构体
+ */
+export interface DescribeAccountGroupsRequest {
+  /**
+   * 搜索范围：0-仅当前分组的直接子组，1-当前分组的所有子组。默认为0。
+   */
+  Deepin?: number
+  /**
+   * 查询条件
+
+过滤参数
+1、Name，string类型，按分组名过滤
+是否必填：否
+操作符: like
+
+排序条件
+1、Itime，string类型，按分组创建时间排序
+是否必填：否
+2、Utime，string类型，按分组更新时间排序
+是否必填：否
+   */
+  Condition?: Condition
+  /**
+   * 父分组ID，获取该分组下的子组信息。默认查询全网根分组下子组信息。
+   */
+  ParentId?: number
 }
 
 /**
@@ -2473,29 +3219,27 @@ export interface Sort {
 }
 
 /**
- * DescribeVirtualDevices请求参数结构体
+ * 业务响应数据
  */
-export interface DescribeVirtualDevicesRequest {
+export interface DescribeDLPEdgeNodeGroupsRspData {
   /**
-   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   * 分组信息
    */
-  DomainInstanceId?: string
+  Items?: Array<DescribeDLPEdgeNodeGroupsRspItem>
   /**
-   * 过滤条件参数（字段含义请参考接口返回值）- Mid, 类型String，支持操作：【eq，like，ilike】，支持排序- Name, 类型String，支持操作：【eq，like，ilike】，支持排序- Itime, 类型String，支持操作：【eq，like，ilike】，支持排序- UserName, 类型String，支持操作：【eq，like，ilike】，支持排序- MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序- UserId, 类型String，支持操作：【eq，like，ilike】，支持排序- Ip, 类型String，支持操作：【eq，like，ilike】，支持排序- Tags，类型String，支持操作：【eq，like，ilike】，支持排序- LocalIpList，类型String，支持操作：【eq，like，ilike】，支持排序- SerialNum，类型String，支持操作：【eq，like，ilike】，支持排序- Version，类型String，支持操作：【eq，like，ilike】，支持排序- StrVersion，类型String，支持操作：【eq，like，ilike】，支持排序- RtpStatus，类型String，支持操作：【eq，like，ilike】，**不支持排序**- HostName，类型String，支持操作：【eq，like，ilike】，支持排序- IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序- GroupName，类型String，支持操作：【eq，like，ilike】，支持排序- CriticalVulListCount，**类型Int**，支持操作：【eq】，**不支持排序**- RiskCount，**类型Int**，支持操作：【eq】，**不支持排序**- VulVersion，类型String，支持操作：【eq，like，ilike】，**不支持排序**- Virusver，类型String，支持操作：【eq，like，ilike】，**不支持排序**- SysRepver，类型String，支持操作：【eq，like，ilike】，**不支持排序**- BaseBoardSn，类型String，支持操作：【eq，like，ilike】，支持排序- Os，类型String，支持操作：【eq，like，ilike】，支持排序- ConnActiveTime，类型String，支持操作：【eq，like，ilike】，**不支持排序**- FirewallStatus，**类型Int**，支持操作：【eq】，**不支持排序**- ProfileName，类型String，支持操作：【eq，like，ilike】，支持排序- DomainName，类型String，支持操作：【eq，like，ilike】，支持排序- SysRepVersion，类型String，支持操作：【eq，like，ilike】，支持排序- VirusVer，类型String，支持操作：【eq，like，ilike】，支持排序- Cpu，类型String，支持操作：【eq，like，ilike】，支持排序- Memory，类型String，支持操作：【eq，like，ilike】，支持排序- HardDiskSize，类型String，支持操作：【eq，like，ilike】，支持排序- HardwareChangeCount，**类型Int**，支持操作：【eq】，支持排序- AccountName，类型String，支持操作：【like.ilike】，支持排序- AccountGroupName，类型String，支持操作：【like.ilike】，支持排序- ScreenRecordingPermission，**类型Int**，支持操作：【eq】，支持排序- DiskAccessPermission，**类型Int**，支持操作：【eq】，支持排序分页参数- PageNum 从1开始，小于等于0时使用默认参数- PageSize 最大值5000，最好不超过100
+   * 分页信息
    */
-  Condition?: Condition
+  Page?: Paging
+}
+
+/**
+ * DescribeDirectAccountGroupResources请求参数结构体
+ */
+export interface DescribeDirectAccountGroupResourcesRequest {
   /**
-   * 终端自定义分组ID（0：获取租户全部自定义分组下的终端数据；其他值：获取具体ID分组下的终端数据）
+   * 账户组Id(只支持32位)
    */
-  DeviceVirtualGroupId?: number
-  /**
-   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)
-   */
-  OsType?: number
-  /**
-   * 选填，在线状态 （2表示在线，0或者1表示离线）
-   */
-  OnlineStatus?: number
+  AccountGroupId: number
 }
 
 /**
@@ -2547,6 +3291,16 @@ export interface ExportSoftwareDownloadUrlRspData {
    * 超过一定时间走异步任务
    */
   TaskId?: number
+}
+
+/**
+ * DescribeResourceGrantedAccountsData
+ */
+export interface DescribeResourceGrantedVirtualGroupsData {
+  /**
+   *
+   */
+  Items?: Array<GrantedVirtualGroupItem>
 }
 
 /**
@@ -2857,6 +3611,32 @@ export interface DescribeDeviceChildGroupsResponse {
 }
 
 /**
+ * 授权操作
+ */
+export interface GrantResourceOperationByVirtualGroups {
+  /**
+   * 操作类型: 1-增加授权 2-删除授权;
+   */
+  OperationType: number
+  /**
+   * 资源或资源组Id
+   */
+  ResourceId: number
+  /**
+   * 资源类型 ,1:资源 2:资源组
+   */
+  ResourceType: number
+  /**
+   * 过期时间,时间戳(秒)
+   */
+  ExpireTime: number
+  /**
+   * 分组id
+   */
+  VirtualAccountGroupId: number
+}
+
+/**
  * DescribeDLPFileDetectResult返回参数结构体
  */
 export interface DescribeDLPFileDetectResultResponse {
@@ -2871,17 +3651,29 @@ export interface DescribeDLPFileDetectResultResponse {
 }
 
 /**
- * 业务响应数据
+ * DescribeVirtualDevices请求参数结构体
  */
-export interface DescribeDLPEdgeNodeGroupsRspData {
+export interface DescribeVirtualDevicesRequest {
   /**
-   * 分组信息
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
    */
-  Items?: Array<DescribeDLPEdgeNodeGroupsRspItem>
+  DomainInstanceId?: string
   /**
-   * 分页信息
+   * 过滤条件参数（字段含义请参考接口返回值）- Mid, 类型String，支持操作：【eq，like，ilike】，支持排序- Name, 类型String，支持操作：【eq，like，ilike】，支持排序- Itime, 类型String，支持操作：【eq，like，ilike】，支持排序- UserName, 类型String，支持操作：【eq，like，ilike】，支持排序- MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序- UserId, 类型String，支持操作：【eq，like，ilike】，支持排序- Ip, 类型String，支持操作：【eq，like，ilike】，支持排序- Tags，类型String，支持操作：【eq，like，ilike】，支持排序- LocalIpList，类型String，支持操作：【eq，like，ilike】，支持排序- SerialNum，类型String，支持操作：【eq，like，ilike】，支持排序- Version，类型String，支持操作：【eq，like，ilike】，支持排序- StrVersion，类型String，支持操作：【eq，like，ilike】，支持排序- RtpStatus，类型String，支持操作：【eq，like，ilike】，**不支持排序**- HostName，类型String，支持操作：【eq，like，ilike】，支持排序- IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序- GroupName，类型String，支持操作：【eq，like，ilike】，支持排序- CriticalVulListCount，**类型Int**，支持操作：【eq】，**不支持排序**- RiskCount，**类型Int**，支持操作：【eq】，**不支持排序**- VulVersion，类型String，支持操作：【eq，like，ilike】，**不支持排序**- Virusver，类型String，支持操作：【eq，like，ilike】，**不支持排序**- SysRepver，类型String，支持操作：【eq，like，ilike】，**不支持排序**- BaseBoardSn，类型String，支持操作：【eq，like，ilike】，支持排序- Os，类型String，支持操作：【eq，like，ilike】，支持排序- ConnActiveTime，类型String，支持操作：【eq，like，ilike】，**不支持排序**- FirewallStatus，**类型Int**，支持操作：【eq】，**不支持排序**- ProfileName，类型String，支持操作：【eq，like，ilike】，支持排序- DomainName，类型String，支持操作：【eq，like，ilike】，支持排序- SysRepVersion，类型String，支持操作：【eq，like，ilike】，支持排序- VirusVer，类型String，支持操作：【eq，like，ilike】，支持排序- Cpu，类型String，支持操作：【eq，like，ilike】，支持排序- Memory，类型String，支持操作：【eq，like，ilike】，支持排序- HardDiskSize，类型String，支持操作：【eq，like，ilike】，支持排序- HardwareChangeCount，**类型Int**，支持操作：【eq】，支持排序- AccountName，类型String，支持操作：【like.ilike】，支持排序- AccountGroupName，类型String，支持操作：【like.ilike】，支持排序- ScreenRecordingPermission，**类型Int**，支持操作：【eq】，支持排序- DiskAccessPermission，**类型Int**，支持操作：【eq】，支持排序分页参数- PageNum 从1开始，小于等于0时使用默认参数- PageSize 最大值5000，最好不超过100
    */
-  Page?: Paging
+  Condition?: Condition
+  /**
+   * 终端自定义分组ID（0：获取租户全部自定义分组下的终端数据；其他值：获取具体ID分组下的终端数据）
+   */
+  DeviceVirtualGroupId?: number
+  /**
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)
+   */
+  OsType?: number
+  /**
+   * 选填，在线状态 （2表示在线，0或者1表示离线）
+   */
+  OnlineStatus?: number
 }
 
 /**
@@ -2992,4 +3784,64 @@ export interface DescribeAggrSoftDetailData {
    * 当前可升级的最新版本信息, 每一项均为json字符串
    */
   UpgradableVersions?: Array<string>
+}
+
+/**
+ * 授权操作
+ */
+export interface GrantResourceOperationByAccountGroups {
+  /**
+   * 操作类型: 1-增加授权 2-删除授权;
+   */
+  OperationType: number
+  /**
+   * 资源或资源组Id
+   */
+  ResourceId: number
+  /**
+   * 资源类型 ,1:资源 2:资源组
+   */
+  ResourceType: number
+  /**
+   * 过期时间,时间戳(秒)
+   */
+  ExpireTime: number
+  /**
+   * 分组id
+   */
+  AccountGroupId: number
+}
+
+/**
+ * GrantedAccountItem
+ */
+export interface GrantedAccountGroupItem {
+  /**
+   * 账户组Id
+   */
+  AccountGroupId?: number
+  /**
+   * 分组名称
+   */
+  Name?: string
+  /**
+   * 所属分组Id
+   */
+  IdPathArray?: Array<number | bigint>
+  /**
+   * 所属分组NamePathArray
+   */
+  NamePathArray?: Array<string>
+  /**
+   * 目录id
+   */
+  AccountCount?: number
+  /**
+   * 过期时间
+   */
+  ExpireTime?: number
+  /**
+   * 关联id
+   */
+  RelationId?: number
 }

@@ -28,6 +28,16 @@ it("ioa.v20220601.DescribeAggrSoftDeviceList", async function () {
     }
 })
 
+it("ioa.v20220601.GrantResourcesByAccounts", async function () {
+    try {
+       const data = await client.GrantResourcesByAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.ExportDeviceDownloadTask", async function () {
     try {
        const data = await client.ExportDeviceDownloadTask({})
@@ -51,6 +61,16 @@ it("ioa.v20220601.CreateDeviceTask", async function () {
 it("ioa.v20220601.DescribeSoftwareInformation", async function () {
     try {
        const data = await client.DescribeSoftwareInformation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.DescribeResourceGrantedAccountGroups", async function () {
+    try {
+       const data = await client.DescribeResourceGrantedAccountGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,6 +168,16 @@ it("ioa.v20220601.DescribeDLPFileDetectResult", async function () {
     }
 })
 
+it("ioa.v20220601.DescribeResourceGrantedAccounts", async function () {
+    try {
+       const data = await client.DescribeResourceGrantedAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.DescribeAggrSoftCategorySoftList", async function () {
     try {
        const data = await client.DescribeAggrSoftCategorySoftList({})
@@ -161,6 +191,36 @@ it("ioa.v20220601.DescribeAggrSoftCategorySoftList", async function () {
 it("ioa.v20220601.DescribeDLPEdgeNodes", async function () {
     try {
        const data = await client.DescribeDLPEdgeNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.DescribeDirectAccountGroupResources", async function () {
+    try {
+       const data = await client.DescribeDirectAccountGroupResources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.GrantResourcesByAccountGroups", async function () {
+    try {
+       const data = await client.GrantResourcesByAccountGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.CreateBusinessResource", async function () {
+    try {
+       const data = await client.CreateBusinessResource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,6 +288,16 @@ it("ioa.v20220601.DescribeDeviceDetailList", async function () {
     }
 })
 
+it("ioa.v20220601.ModifyDeviceTrustStatus", async function () {
+    try {
+       const data = await client.ModifyDeviceTrustStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.DescribeLocalAccounts", async function () {
     try {
        const data = await client.DescribeLocalAccounts({})
@@ -268,6 +338,16 @@ it("ioa.v20220601.DescribeDeviceVirtualGroups", async function () {
     }
 })
 
+it("ioa.v20220601.GrantResourcesByVirtualGroups", async function () {
+    try {
+       const data = await client.GrantResourcesByVirtualGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.DescribeSoftCensusListByDevice", async function () {
     try {
        const data = await client.DescribeSoftCensusListByDevice({})
@@ -281,6 +361,26 @@ it("ioa.v20220601.DescribeSoftCensusListByDevice", async function () {
 it("ioa.v20220601.ModifyVirtualDeviceGroups", async function () {
     try {
        const data = await client.ModifyVirtualDeviceGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.DescribeBusinessResources", async function () {
+    try {
+       const data = await client.DescribeBusinessResources({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.DescribeResourceGrantedVirtualGroups", async function () {
+    try {
+       const data = await client.DescribeResourceGrantedVirtualGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

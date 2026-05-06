@@ -30,6 +30,7 @@ import {
   DescribeTrinoQueryInfoResponse,
   SparkQuery,
   DynamicPodSpec,
+  CustomImage,
   ResetYarnConfigRequest,
   ComputeResourceAdvanceParams,
   ServiceDeployInfo,
@@ -44,10 +45,11 @@ import {
   DescribeSparkQueriesResponse,
   JobResult,
   InstallSoftwareRequest,
+  CFSVolume,
   DescribeInspectionTaskResultRequest,
   InquiryPriceCreateInstanceResponse,
   DescribeHDFSStorageInfoRequest,
-  LoadAutoScaleStrategy,
+  JobFlowResourceSpec,
   PrePaySetting,
   DescribeGlobalConfigResponse,
   PodParameter,
@@ -56,6 +58,7 @@ import {
   StrategyConfig,
   RenewInstancesInfo,
   ModifyResourceRequest,
+  ImagePullSecret,
   DescribeBootScriptResponse,
   PodVolume,
   MultiDisk,
@@ -67,13 +70,14 @@ import {
   ResultItem,
   CreateClusterResponse,
   DescribeCvmQuotaResponse,
-  SearchItem,
+  DAGInfo,
   AddMetricScaleStrategyResponse,
   DescribeNodeResourceConfigFastRequest,
   NodeResource,
   InsightResult,
   SyncPodStateRequest,
   DescribeSLInstanceListResponse,
+  ModifyDynamicInstanceResponse,
   DescribeServiceConfGroupInfosRequest,
   InquiryPriceUpdateInstanceRequest,
   AttachDisksResponse,
@@ -97,6 +101,7 @@ import {
   RestartPolicy,
   ClusterExternalServiceInfo,
   SoftDependInfo,
+  SearchItem,
   ModifyResourceTags,
   NodeSelector,
   CustomMetaDBInfo,
@@ -105,6 +110,7 @@ import {
   ModifyResourceSchedulerResponse,
   SceneSoftwareConfig,
   ShortNodeInfo,
+  NameValue,
   DescribeAutoScaleRecordsRequest,
   JobFlowResource,
   DescribeHBaseTableRequestMetricResponse,
@@ -125,6 +131,7 @@ import {
   PodNewSpec,
   EmrProductConfigDetail,
   ExternalAccess,
+  VolumeMount,
   ZoneSetting,
   TrinoQueryInfo,
   Dps,
@@ -157,10 +164,12 @@ import {
   DescribeDAGInfoResponse,
   RunJobFlowResponse,
   DescribeHiveQueriesResponse,
+  CreateDynamicInstanceRequest,
   DescribeInstanceRenewNodesResponse,
   StringMap,
-  ContainerExtraConf,
+  CreateClusterRequest,
   CreateSLInstanceResponse,
+  ImageInfo,
   SLInstance,
   DescribeClusterNodesResponse,
   DescribeYarnApplicationsRequest,
@@ -200,6 +209,7 @@ import {
   ConfigurationItem,
   InquiryPriceCreateInstanceRequest,
   DescribeSLInstanceResponse,
+  CBSVolume,
   TagInfo,
   DescribeBootScriptRsp,
   ModifySLInstanceResponse,
@@ -210,6 +220,7 @@ import {
   DescribeImpalaQueriesResponse,
   SetNodeResourceConfigDefaultResponse,
   TableSchemaItem,
+  DescribeDynamicInstanceListRequest,
   ModifyInstanceBasicResponse,
   Filter,
   DescribeTrinoQueryInfoRequest,
@@ -221,14 +232,16 @@ import {
   ScaleOutInstanceResponse,
   ModifyUserManagerPwdResponse,
   ImpalaQuery,
+  TerminateDynamicInstancesRequest,
   CreateInstanceResponse,
   DescribeServiceNodeInfosRequest,
   DescribeHBaseTableStoreSizeMetricRequest,
   DayRepeatStrategy,
   PriceResult,
+  TerminateDynamicInstancesResponse,
   UserManagerFilter,
   MetaDbInfo,
-  JobFlowResourceSpec,
+  LoadAutoScaleStrategy,
   DescribeInstanceOplogResponse,
   ZoneDetailPriceResult,
   DescribeAutoScaleGroupGlobalConfRequest,
@@ -236,6 +249,7 @@ import {
   ModifyResourceScheduleConfigResponse,
   NodeDetailPriceResult,
   DescribeEMREventListRequest,
+  DescribeDynamicInstanceListResponse,
   EmrListInstance,
   DescribeResourceScheduleDiffDetailResponse,
   DescribeYarnQueueResponse,
@@ -259,6 +273,7 @@ import {
   DescribeYarnScheduleHistoryRequest,
   StartStopServiceOrMonitorResponse,
   DescribeYarnQueueRequest,
+  DynamicInstanceGroup,
   ModifyAutoRenewFlagResponse,
   DescribeYarnScheduleHistoryResponse,
   DescribeInsightListRequest,
@@ -298,14 +313,17 @@ import {
   DescribeStarRocksQueryInfoRequest,
   Resource,
   ResizeDataDisksResponse,
+  RayCluster,
   Item,
   ModifySLInstanceBasicResponse,
   ConfigModifyInfoV2,
+  DynamicInstanceForm,
   Order,
   GroupInfos,
   VirtualPrivateCloud,
   ResizeDataDisksRequest,
   ScaleOutClusterResponse,
+  CFSTurboVolume,
   CreateSLInstanceRequest,
   AutoScaleResourceConf,
   DescribeGlobalConfigRequest,
@@ -316,6 +334,7 @@ import {
   DescribeSparkApplicationsRequest,
   SyncPodStateResponse,
   DescribeNodeSpec,
+  ModifyDynamicInstanceRequest,
   DiskSpec,
   SLInstanceInfo,
   ModifyUserManagerPwdRequest,
@@ -334,16 +353,16 @@ import {
   ModifyUsersOfGroupSTDResponse,
   ResetYarnConfigResponse,
   FlowParam,
-  DescribeAutoScaleStrategiesResponse,
+  PartDetailPriceItem,
   InquiryPriceRenewInstanceResponse,
   StartStopServiceOrMonitorRequest,
   OverviewMetricData,
   AutoScaleRecord,
   Configuration,
   DescribeResourceScheduleRequest,
+  COSVolume,
   DeleteNodeResourceConfigResponse,
   ConvertPreToPostClusterResponse,
-  DAGInfo,
   PodNewParameter,
   ModifyResourcesTagsResponse,
   ScaleOutServiceConfGroupsInfo,
@@ -361,12 +380,13 @@ import {
   LoginSettings,
   PriceResource,
   ModifySLInstanceRequest,
-  CreateClusterRequest,
+  ContainerExtraConf,
   CreateCloudInstanceRequest,
   ResourceDetail,
   BootstrapAction,
   ModifyYarnQueueV2Request,
   DescribeClusterNodesRequest,
+  ModifyDynamicInstanceForm,
   Execution,
   UpdateInstanceSettings,
   DescribeEmrOverviewMetricsResponse,
@@ -386,8 +406,9 @@ import {
   DeleteGroupsSTDRequest,
   CBSInstance,
   PodState,
-  PartDetailPriceItem,
+  DescribeAutoScaleStrategiesResponse,
   ExternalService,
+  CreateDynamicInstanceResponse,
   ModifyAutoScaleStrategyResponse,
   InquiryPriceScaleOutInstanceRequest,
   LoadMetricsConditions,
@@ -487,13 +508,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询服务进程信息
+   * 创建容器EMR-TKE集群DynamicInstance
    */
-  async DescribeServiceNodeInfos(
-    req: DescribeServiceNodeInfosRequest,
-    cb?: (error: string, rep: DescribeServiceNodeInfosResponse) => void
-  ): Promise<DescribeServiceNodeInfosResponse> {
-    return this.request("DescribeServiceNodeInfos", req, cb)
+  async CreateDynamicInstance(
+    req: CreateDynamicInstanceRequest,
+    cb?: (error: string, rep: CreateDynamicInstanceResponse) => void
+  ): Promise<CreateDynamicInstanceResponse> {
+    return this.request("CreateDynamicInstance", req, cb)
   }
 
   /**
@@ -598,6 +619,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeHiveQueriesResponse) => void
   ): Promise<DescribeHiveQueriesResponse> {
     return this.request("DescribeHiveQueries", req, cb)
+  }
+
+  /**
+   * 更新容器EMR-TKE集群DynamicInstance
+   */
+  async ModifyDynamicInstance(
+    req: ModifyDynamicInstanceRequest,
+    cb?: (error: string, rep: ModifyDynamicInstanceResponse) => void
+  ): Promise<ModifyDynamicInstanceResponse> {
+    return this.request("ModifyDynamicInstance", req, cb)
   }
 
   /**
@@ -883,6 +914,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询服务进程信息
+   */
+  async DescribeServiceNodeInfos(
+    req: DescribeServiceNodeInfosRequest,
+    cb?: (error: string, rep: DescribeServiceNodeInfosResponse) => void
+  ): Promise<DescribeServiceNodeInfosResponse> {
+    return this.request("DescribeServiceNodeInfos", req, cb)
+  }
+
+  /**
    * 查询监控概览页指标数据
    */
   async DescribeEmrOverviewMetrics(
@@ -1053,6 +1094,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 描述容器EMR-TKE集群DynamicInstance列表
+   */
+  async DescribeDynamicInstanceList(
+    req: DescribeDynamicInstanceListRequest,
+    cb?: (error: string, rep: DescribeDynamicInstanceListResponse) => void
+  ): Promise<DescribeDynamicInstanceListResponse> {
+    return this.request("DescribeDynamicInstanceList", req, cb)
+  }
+
+  /**
    * 销毁集群节点
    */
   async TerminateClusterNodes(
@@ -1170,6 +1221,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeServiceConfGroupInfosResponse) => void
   ): Promise<DescribeServiceConfGroupInfosResponse> {
     return this.request("DescribeServiceConfGroupInfos", req, cb)
+  }
+
+  /**
+   * 销毁容器EMR-TKE集群DynamicInstance
+   */
+  async TerminateDynamicInstances(
+    req: TerminateDynamicInstancesRequest,
+    cb?: (error: string, rep: TerminateDynamicInstancesResponse) => void
+  ): Promise<TerminateDynamicInstancesResponse> {
+    return this.request("TerminateDynamicInstances", req, cb)
   }
 
   /**

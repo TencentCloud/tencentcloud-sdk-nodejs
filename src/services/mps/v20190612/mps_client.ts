@@ -793,6 +793,7 @@ import {
   FlowSRTInfo,
   AiRecognitionTaskOcrFullTextResultInput,
   ImageResizeConfig,
+  VoiceProfile,
   SubtitleOutlineConfig,
   DescribeStreamPackageLinearAssemblyProgramsResponse,
   DeleteStreamLinkEventResponse,

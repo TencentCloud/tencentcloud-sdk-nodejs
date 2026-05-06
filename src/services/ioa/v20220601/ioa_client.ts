@@ -20,19 +20,24 @@ import { ClientConfig } from "../../../common/interface"
 import {
   CreatePrivilegeCodeRequest,
   DescribeDeviceHardwareInfoListRspData,
+  DescribeAccountResourcesData,
   ModifyVirtualDeviceGroupsReqItem,
   DescribeDeviceDetailListResponse,
   DescribeAggrSoftDeviceListRequest,
   ComplexRule,
   DescribeDeviceHardwareInfoListResponse,
+  DescribeResourceGrantedAccountsRequest,
   DescribeDeviceHardwareInfoItem,
+  DescribeResourceGrantedAccountGroupsRequest,
   RulePayloadItem,
   DescribeDeviceDetailListData,
   DescribeDevicesResponse,
   DescribeAggrSoftDeviceListData,
+  GrantResourcesByVirtualGroupsRequest,
   DescribeAccountGroupsData,
-  DescribeAccountGroupsRequest,
+  DescribeDirectAccountGroupResourcesResponse,
   DescribeDeviceVirtualGroupsResponse,
+  CreateBusinessResourceResponse,
   DescribeAggrSoftCategorySoftListRequest,
   DeviceNetworkInfo,
   CreateDeviceVirtualGroupRequest,
@@ -40,14 +45,24 @@ import {
   CreateDeviceTaskRequest,
   DeviceDetail,
   DescribeSoftCensusListByDeviceRequest,
+  GrantedAccountItem,
+  DescribeResourceGrantedAccountGroupsData,
+  DescribeResourceGrantedAccountsResponse,
+  DescribeResourceGrantedAccountGroupsResponse,
+  DescribeResourceGrantedVirtualGroupsResponse,
   DescribeLocalAccountsRequest,
   CreateDeviceTaskResponse,
+  GrantResourcesByAccountGroupsRequest,
   DescribeLocalAccountsPage,
   DescribeSoftwareInformationPageData,
+  ModifyDeviceTrustStatusResponse,
   CreateDLPFileDetectionTaskRequest,
   ExportDeviceDownloadTaskRequest,
   DescribeSoftCensusListByDeviceData,
+  CreateBusinessResourceRequest,
   DescribeDeviceInfoRequest,
+  CreateBusinessResourceData,
+  GrantResourcesByAccountsRequest,
   DescribeDLPFileDetectTaskResult,
   DescribeDLPFileDetectResultData,
   DescribeDeviceVirtualGroupsRequest,
@@ -55,49 +70,63 @@ import {
   AggrCategorySoftDetailRow,
   DescribeDeviceInfoResponse,
   CreatePrivilegeCodeRspData,
-  DeviceVirtualDeviceGroupsDetail,
+  DescribeBusinessResourceData,
   DescribeAccountGroupsPageResp,
   DescribeDLPEdgeNodesResponse,
   ExportSoftwareInformationListResponse,
+  DescribeResourceGrantedVirtualGroupsRequest,
   FilterGroup,
+  DescribeBusinessResourcesRequest,
   DescribeSoftwareInformationRequest,
   DescribeAggrSoftCategorySoftListData,
-  Paging,
+  GrantResourceOperationByAccounts,
   DescribeDLPEdgeNodesPageData,
   RulePayload,
   DescribeDLPFileDetectTaskResultResponse,
   CreateDLPFileDetectTaskResponse,
   CreateDLPFileDetectTaskData,
   DescribeDLPEdgeNodesRequest,
+  Paging,
+  GrantResourcesByAccountsResponse,
   SoftwareInformationData,
+  DescribeBusinessResourcesResponse,
+  DescribeBusinessResourcePageRsp,
   DescribeAggrSoftDetailRequest,
   CreateDeviceVirtualGroupRspData,
   DescribeDLPEdgeNodeGroupsRequest,
   DescribeVirtualDevicesResponse,
+  DescribeResourceGrantedAccountsData,
+  DescribeAccountResourcesItems,
   CreateDLPFileDetectTaskRequest,
   DescribeDLPFileDetectResultRequest,
   RuleItem,
   CreateDeviceVirtualGroupResponse,
   CreateDLPFileDetectionTaskData,
   DescribeDeviceVirtualGroupsPageRsp,
+  GrantedVirtualGroupItem,
   AggrSoftDeviceRow,
   SoftVersionAndNum,
   ExportDeviceDownloadTaskResponse,
   DescribeDeviceDetailListPageData,
   DescribeSoftwareInformationResponse,
+  GrantResourcesByAccountGroupsResponse,
   ModifyVirtualDeviceGroupsResponse,
   DescribeLocalAccountsResponse,
   DescribeVirtualDevicesPageRsp,
   Condition,
   DescribeAccountGroupsResponse,
+  DeviceVirtualDeviceGroupsDetail,
   DescribeDevicesPageRsp,
   DescribeSoftCensusListByDeviceResponse,
   DescribeDLPEdgeNodesRspItem,
   DescribeDLPEdgeNodeGroupsRspItem,
   DescribeDLPEdgeNodeGroupsResponse,
   Filter,
+  GrantResourcesByVirtualGroupsResponse,
+  ModifyDeviceTrustStatusRequest,
   DescribeAggrSoftDeviceListResponse,
   DescribeRootAccountGroupResponse,
+  DescribeAccountGroupsRequest,
   SimpleRule,
   DescribeDLPFileDetectTaskResultRequest,
   DescribeDeviceDetailListRequest,
@@ -108,9 +137,11 @@ import {
   ModifyVirtualDeviceGroupsRequest,
   GetAccountGroupData,
   Sort,
-  DescribeVirtualDevicesRequest,
+  DescribeDLPEdgeNodeGroupsRspData,
+  DescribeDirectAccountGroupResourcesRequest,
   DeviceProcessInfo,
   ExportSoftwareDownloadUrlRspData,
+  DescribeResourceGrantedVirtualGroupsData,
   RuleExpression,
   DescribeRootAccountGroupRequest,
   DescribeDeviceChildGroupsRspData,
@@ -122,11 +153,14 @@ import {
   DescribeAggrSoftDetailResponse,
   CreateDLPFileDetectionTaskResponse,
   DescribeDeviceChildGroupsResponse,
+  GrantResourceOperationByVirtualGroups,
   DescribeDLPFileDetectResultResponse,
-  DescribeDLPEdgeNodeGroupsRspData,
+  DescribeVirtualDevicesRequest,
   CreatePrivilegeCodeResponse,
   DescribeDeviceHardwareInfoListRequest,
   DescribeAggrSoftDetailData,
+  GrantResourceOperationByAccountGroups,
+  GrantedAccountGroupItem,
 } from "./ioa_models"
 
 /**
@@ -146,6 +180,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAggrSoftDeviceListResponse) => void
   ): Promise<DescribeAggrSoftDeviceListResponse> {
     return this.request("DescribeAggrSoftDeviceList", req, cb)
+  }
+
+  /**
+   * 添加资源授权到账号组
+   */
+  async GrantResourcesByAccounts(
+    req: GrantResourcesByAccountsRequest,
+    cb?: (error: string, rep: GrantResourcesByAccountsResponse) => void
+  ): Promise<GrantResourcesByAccountsResponse> {
+    return this.request("GrantResourcesByAccounts", req, cb)
   }
 
   /**
@@ -176,6 +220,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSoftwareInformationResponse) => void
   ): Promise<DescribeSoftwareInformationResponse> {
     return this.request("DescribeSoftwareInformation", req, cb)
+  }
+
+  /**
+   * 列表账户组直接关联的资源，私有化调用path为：capi/NGN/DescribeResourceGrantedAccounts
+   */
+  async DescribeResourceGrantedAccountGroups(
+    req: DescribeResourceGrantedAccountGroupsRequest,
+    cb?: (error: string, rep: DescribeResourceGrantedAccountGroupsResponse) => void
+  ): Promise<DescribeResourceGrantedAccountGroupsResponse> {
+    return this.request("DescribeResourceGrantedAccountGroups", req, cb)
   }
 
   /**
@@ -269,6 +323,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 列表账户组直接关联的资源，私有化调用path为：capi/NGN/DescribeResourceGrantedAccounts
+   */
+  async DescribeResourceGrantedAccounts(
+    req: DescribeResourceGrantedAccountsRequest,
+    cb?: (error: string, rep: DescribeResourceGrantedAccountsResponse) => void
+  ): Promise<DescribeResourceGrantedAccountsResponse> {
+    return this.request("DescribeResourceGrantedAccounts", req, cb)
+  }
+
+  /**
    * 聚合的分类软件列表
    */
   async DescribeAggrSoftCategorySoftList(
@@ -286,6 +350,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDLPEdgeNodesResponse) => void
   ): Promise<DescribeDLPEdgeNodesResponse> {
     return this.request("DescribeDLPEdgeNodes", req, cb)
+  }
+
+  /**
+   * 列表账户组直接关联的资源，私有化调用path为：capi/Assets/DescribeDirectAccountGroupResources
+   */
+  async DescribeDirectAccountGroupResources(
+    req: DescribeDirectAccountGroupResourcesRequest,
+    cb?: (error: string, rep: DescribeDirectAccountGroupResourcesResponse) => void
+  ): Promise<DescribeDirectAccountGroupResourcesResponse> {
+    return this.request("DescribeDirectAccountGroupResources", req, cb)
+  }
+
+  /**
+   * 添加资源授权到账号组
+   */
+  async GrantResourcesByAccountGroups(
+    req: GrantResourcesByAccountGroupsRequest,
+    cb?: (error: string, rep: GrantResourcesByAccountGroupsResponse) => void
+  ): Promise<GrantResourcesByAccountGroupsResponse> {
+    return this.request("GrantResourcesByAccountGroups", req, cb)
+  }
+
+  /**
+   * 创建业务资源，会对一些必填参数进行校验和参数合法性校验，创建业务资源时，先调用下校验相同业务资源接口，看资源是不是有冲突。创建时也会做校验，但没有返回对应的异常信息，私有化调用path为：capi/GatewayResource/CreateBusinessResource
+   */
+  async CreateBusinessResource(
+    req: CreateBusinessResourceRequest,
+    cb?: (error: string, rep: CreateBusinessResourceResponse) => void
+  ): Promise<CreateBusinessResourceResponse> {
+    return this.request("CreateBusinessResource", req, cb)
   }
 
   /**
@@ -349,6 +443,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 给接入设备加黑加白,私有化调用path为：capi/NGN/ModifyDeviceTrustStatus
+   */
+  async ModifyDeviceTrustStatus(
+    req: ModifyDeviceTrustStatusRequest,
+    cb?: (error: string, rep: ModifyDeviceTrustStatusResponse) => void
+  ): Promise<ModifyDeviceTrustStatusResponse> {
+    return this.request("ModifyDeviceTrustStatus", req, cb)
+  }
+
+  /**
    * 获取账号列表，支持分页，模糊搜索，私有化调用path为：/capi/Assets/Account/DescribeLocalAccounts
    */
   async DescribeLocalAccounts(
@@ -389,6 +493,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 添加资源授权到账号组
+   */
+  async GrantResourcesByVirtualGroups(
+    req: GrantResourcesByVirtualGroupsRequest,
+    cb?: (error: string, rep: GrantResourcesByVirtualGroupsResponse) => void
+  ): Promise<GrantResourcesByVirtualGroupsResponse> {
+    return this.request("GrantResourcesByVirtualGroups", req, cb)
+  }
+
+  /**
    * 查看终端树下的软件列表,私有化调用path为：capi/Software/DescribeSoftCensusListByDevice
    */
   async DescribeSoftCensusListByDevice(
@@ -406,5 +520,25 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyVirtualDeviceGroupsResponse) => void
   ): Promise<ModifyVirtualDeviceGroupsResponse> {
     return this.request("ModifyVirtualDeviceGroups", req, cb)
+  }
+
+  /**
+   * 获取业务资源列表,支持分页，如果分页信息不传递会有默认分页，支持排序，不传排序字段，按业务资源创建时间排序,私有化调用path为：capi/GatewayResource/DescribeBusinessResources
+   */
+  async DescribeBusinessResources(
+    req: DescribeBusinessResourcesRequest,
+    cb?: (error: string, rep: DescribeBusinessResourcesResponse) => void
+  ): Promise<DescribeBusinessResourcesResponse> {
+    return this.request("DescribeBusinessResources", req, cb)
+  }
+
+  /**
+   * 列表账户组直接关联的资源，私有化调用path为：capi/NGN/DescribeResourceGrantedVirtualGroups
+   */
+  async DescribeResourceGrantedVirtualGroups(
+    req: DescribeResourceGrantedVirtualGroupsRequest,
+    cb?: (error: string, rep: DescribeResourceGrantedVirtualGroupsResponse) => void
+  ): Promise<DescribeResourceGrantedVirtualGroupsResponse> {
+    return this.request("DescribeResourceGrantedVirtualGroups", req, cb)
   }
 }

@@ -128,6 +128,16 @@ it("ocr.v20181119.RecognizeValidIDCardOCR", async function () {
     }
 })
 
+it("ocr.v20181119.VerifyScenePhoto", async function () {
+    try {
+       const data = await client.VerifyScenePhoto({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.InvoiceGeneralOCR", async function () {
     try {
        const data = await client.InvoiceGeneralOCR({})
@@ -431,6 +441,16 @@ it("ocr.v20181119.GetOCRToken", async function () {
 it("ocr.v20181119.EduPaperOCR", async function () {
     try {
        const data = await client.EduPaperOCR({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ocr.v20181119.RecognizeAgent", async function () {
+    try {
+       const data = await client.RecognizeAgent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

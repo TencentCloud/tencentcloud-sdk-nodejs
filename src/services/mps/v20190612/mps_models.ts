@@ -10829,6 +10829,10 @@ export interface DesignVoiceAsyncRequest {
    */
   Prompt: string
   /**
+   * <p>音色属性</p>
+   */
+  VoiceProfile?: VoiceProfile
+  /**
    * <p>扩展参数，json字符串</p>
    */
   ExtParam?: string
@@ -11302,9 +11306,17 @@ export interface SyncDubbingRequest {
    */
   AudioLang?: string
   /**
+   * <p>音色属性</p>
+   */
+  VoiceProfile?: VoiceProfile
+  /**
    * <p>输出相关参数</p><p>可以指定输出形式等</p>
    */
   Output?: SyncDubbingOutputOption
+  /**
+   * <p>资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。</p>
+   */
+  ResourceId?: string
   /**
    * <p>扩展参数，json字符串</p><p>synExt    Object    语音合成扩展参数<br>    -duration    Float    合成音频时长，单位秒，示例：5.2<br>    -sampleRate    Integer    合成音频采样率，默认16000，支持[8000,16000,22050,32000,44100]<br>    -pitch    Integer    音调，默认0原音色输出，取值[-12, 12]<br>cloneExt    Object    音色克隆扩展参数<br>    -timeRanges    Float[][]    指定克隆音频时间范围，默认[[0, 20]]，示例[[5.2, 10], [45, 59.8]]</p>
    */
@@ -19707,6 +19719,36 @@ export interface ImageResizeConfig {
 }
 
 /**
+ * 音色属性
+ */
+export interface VoiceProfile {
+  /**
+   * <p>音色名</p>
+   */
+  Name?: string
+  /**
+   * <p>音色描述</p>
+   */
+  Description?: string
+  /**
+   * <p>性别</p><p>枚举值：</p><ul><li>male： 男性</li><li>female： 女性</li><li>unknown： 未知</li></ul>
+   */
+  Gender?: string
+  /**
+   * <p>年龄</p><p>枚举值：</p><ul><li>child： 儿童</li><li>teenager： 少年</li><li>youth： 青年</li><li>middle_aged： 中年</li><li>senior： 老年</li><li>unknown： 未知</li></ul>
+   */
+  Age?: string
+  /**
+   * <p>标签</p>
+   */
+  Labels?: Array<string>
+  /**
+   * <p>使用场景</p>
+   */
+  Scenes?: Array<string>
+}
+
+/**
  * 字幕压制模块文字描边配置
  */
 export interface SubtitleOutlineConfig {
@@ -20514,6 +20556,10 @@ export interface VoiceInfo {
    * <p>性别</p><p>枚举值：</p><ul><li>male： 男</li><li>famale： 女</li></ul>
    */
   Gender?: string
+  /**
+   * <p>年龄</p><p>枚举值：</p><ul><li>child： 儿童</li><li>teenager： 少年</li><li>youth： 青年</li><li>middle_aged： 中年</li><li>senior： 老年</li><li>unknown： 未知</li></ul>
+   */
+  Age?: string
   /**
    * <p>支持语种列表</p><p>如：en</p>
    */
@@ -23724,9 +23770,41 @@ export interface AddOnImageInput {
  */
 export interface DescribeVoicesRequest {
   /**
-   * <p>音色类别</p><p>枚举值：</p><ul><li>system： 系统音色</li></ul>
+   * <p>音色ID</p>
+   */
+  VoiceId?: string
+  /**
+   * <p>音色类别</p><p>枚举值：</p><ul><li>system： 系统音色</li><li>clone： 克隆音色</li><li>design： 设计音色</li><li>all： 所有音色（默认）</li></ul>
    */
   VoiceType?: string
+  /**
+   * <p>音色名</p>
+   */
+  VoiceName?: string
+  /**
+   * <p>音色描述</p>
+   */
+  Description?: string
+  /**
+   * <p>性别</p><p>枚举值：</p><ul><li>male： 男</li><li>female： 女</li><li>unknown： 未知</li></ul>
+   */
+  Gender?: string
+  /**
+   * <p>年龄</p><p>枚举值：</p><ul><li>child： 儿童</li><li>teenager： 少年</li><li>youth： 青年</li><li>middle_aged： 中年</li><li>senior： 老年</li><li>unknown： 未知</li></ul>
+   */
+  Age?: string
+  /**
+   * <p>语言</p>
+   */
+  Languages?: Array<string>
+  /**
+   * <p>标签</p>
+   */
+  Labels?: Array<string>
+  /**
+   * <p>场景</p>
+   */
+  Scenes?: Array<string>
   /**
    * <p>扩展参数，json字符串</p><p>其他筛选条件voiceName String 音色名，模糊匹配labels Array of String 标签，匹配包含这些标签的音色</p>
    */

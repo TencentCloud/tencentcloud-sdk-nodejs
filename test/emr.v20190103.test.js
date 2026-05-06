@@ -88,9 +88,9 @@ it("emr.v20190103.DescribeHBaseTableOverview", async function () {
     }
 })
 
-it("emr.v20190103.DescribeServiceNodeInfos", async function () {
+it("emr.v20190103.CreateDynamicInstance", async function () {
     try {
-       const data = await client.DescribeServiceNodeInfos({})
+       const data = await client.CreateDynamicInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -191,6 +191,16 @@ it("emr.v20190103.DescribeJobFlow", async function () {
 it("emr.v20190103.DescribeHiveQueries", async function () {
     try {
        const data = await client.DescribeHiveQueries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.ModifyDynamicInstance", async function () {
+    try {
+       const data = await client.ModifyDynamicInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,6 +488,16 @@ it("emr.v20190103.DescribeYarnScheduleHistory", async function () {
     }
 })
 
+it("emr.v20190103.DescribeServiceNodeInfos", async function () {
+    try {
+       const data = await client.DescribeServiceNodeInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.DescribeEmrOverviewMetrics", async function () {
     try {
        const data = await client.DescribeEmrOverviewMetrics({})
@@ -648,6 +668,16 @@ it("emr.v20190103.ModifySLInstanceBasic", async function () {
     }
 })
 
+it("emr.v20190103.DescribeDynamicInstanceList", async function () {
+    try {
+       const data = await client.DescribeDynamicInstanceList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.TerminateClusterNodes", async function () {
     try {
        const data = await client.TerminateClusterNodes({})
@@ -761,6 +791,16 @@ it("emr.v20190103.DescribeAutoScaleGroupGlobalConf", async function () {
 it("emr.v20190103.DescribeServiceConfGroupInfos", async function () {
     try {
        const data = await client.DescribeServiceConfGroupInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("emr.v20190103.TerminateDynamicInstances", async function () {
+    try {
+       const data = await client.TerminateDynamicInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -7490,39 +7490,45 @@ export interface SimpleHlsClipResponse {
  */
 export interface AigcVideoTaskOutputFileInfo {
   /**
-   * 存储模式。取值有： <li>Permanent：永久存储；</li> <li>Temporary：临时存储；</li>
-默认值：Temporary
+   * <p>存储模式。取值有： <li>Permanent：永久存储；</li> <li>Temporary：临时存储；</li><br>默认值：Temporary</p>
    */
   StorageMode?: string
   /**
-   * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。当 StorageMode 为 Permanent 时有效。
+   * <p>输出文件名，最长 64 个字符。缺省由系统指定生成文件名。当 StorageMode 为 Permanent 时有效。</p>
    */
   MediaName?: string
   /**
-   * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。
-
+   * <p>分类ID，用于对媒体进行分类管理，可通过 <a href="/document/product/266/7812">创建分类</a> 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。</p>
    */
   ClassId?: number
   /**
-   * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式说明</a>。</p>
    */
   ExpireTime?: string
   /**
-   * 文件类型，例如 mp4、flv 等。
+   * <p>文件类型，例如 mp4、flv 等。</p>
    */
   FileType?: string
   /**
-   * 媒体文件播放地址。
+   * <p>媒体文件播放地址。</p>
    */
   FileUrl?: string
   /**
-   * 媒体文件 ID。当 StorageMode 为 Permanent 时有效。
+   * <p>文件内容。当 UsageType 为 position_info 时有返回值。</p>
+   */
+  FileContent?: string
+  /**
+   * <p>媒体文件 ID。当 StorageMode 为 Permanent 时有效。</p>
    */
   FileId?: string
   /**
-   * 输出视频的元信息。当 StorageMode 为 Permanent 时有效。
+   * <p>输出视频的元信息。当 StorageMode 为 Permanent 时有效。</p>
    */
   MetaData?: MediaMetaData
+  /**
+   * <p>文件的用途类型。</p><p>枚举值：</p><ul><li>scene_url： 3D 场景文件，FileUrl 字段有返回值。</li><li>point_url： 点云文件，FileUrl 字段有返回值。</li><li>mesh_url： 原始网格模型文，FileUrl 字段有返回值。</li><li>mesh_simplified_url： 简化后的网格模型文件，FileUrl 字段有返回值。</li><li>position_info： 场景空间位置信息，FileContent 字段有返回值。</li><li>image_url： 生成的图片，FileUrl 字段有返回值。</li></ul>
+   */
+  UsageType?: string
 }
 
 /**
@@ -15490,53 +15496,51 @@ export interface AiReviewPornOcrTaskOutput {
  */
 export interface ApplyUploadRequest {
   /**
-   * 媒体类型，可选值请参考 [上传能力综述](/document/product/266/9760#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B)。
+   * <p>媒体类型，可选值请参考 <a href="/document/product/266/9760#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B">上传能力综述</a>。</p>
    */
   MediaType: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 媒体名称。
+   * <p>媒体名称。</p>
    */
   MediaName?: string
   /**
-   * 封面类型，可选值请参考 [上传能力综述](/document/product/266/9760#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B)。
+   * <p>封面类型，可选值请参考 <a href="/document/product/266/9760#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B">上传能力综述</a>。</p>
    */
   CoverType?: string
   /**
-   * 媒体后续任务处理操作，即完成媒体上传后，可自动发起任务流操作。参数值为任务流模板名，云点播支持 [创建任务流模板](/document/product/266/33819) 并为模板命名。
+   * <p>媒体后续任务处理操作，即完成媒体上传后，可自动发起任务流操作。参数值为任务流模板名，云点播支持 <a href="/document/product/266/33819">创建任务流模板</a> 并为模板命名。</p>
    */
   Procedure?: string
   /**
-   * 媒体文件过期时间，格式按照 ISO 8601 标准表示，详见 [ISO 日期格式说明](/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F)。
+   * <p>媒体文件过期时间，格式按照 ISO 8601 标准表示，详见 <a href="/document/product/266/11732#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F">ISO 日期格式说明</a>。</p>
    */
   ExpireTime?: string
   /**
-   * 指定上传园区，仅适用于对上传地域有特殊需求的用户。
+   * <p>指定上传园区，仅适用于对上传地域有特殊需求的用户。</p>
    */
   StorageRegion?: string
   /**
-   * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
-<li>默认值：0，表示其他分类。</li>
+   * <p>分类ID，用于对媒体进行分类管理，可通过 <a href="/document/product/266/7812">创建分类</a> 接口，创建分类，获得分类 ID。</p><li>默认值：0，表示其他分类。</li>
    */
   ClassId?: number
   /**
-   * 来源上下文，用于透传用户请求信息，[上传完成回调](/document/product/266/7830) 将返回该字段值，最长 250 个字符。
+   * <p>来源上下文，用于透传用户请求信息，<a href="/document/product/266/7830">上传完成回调</a> 将返回该字段值，最长 250 个字符。</p>
    */
   SourceContext?: string
   /**
-   * 会话上下文，用于透传用户请求信息，当指定 Procedure 参数后，[任务流状态变更回调](/document/product/266/9636) 将返回该字段值，最长 1000 个字符。
+   * <p>会话上下文，用于透传用户请求信息，当指定 Procedure 参数后，<a href="/document/product/266/9636">任务流状态变更回调</a> 将返回该字段值，最长 1000 个字符。</p>
    */
   SessionContext?: string
   /**
-   * 保留字段，特殊用途时使用。
+   * <p>保留字段，特殊用途时使用。</p>
    */
   ExtInfo?: string
   /**
-   * 媒体存储路径，以/开头。
-只有[FileID + Path 模式](https://cloud.tencent.com/document/product/266/126825)的子应用可以指定存储路径。
+   * <p>媒体存储路径，以/开头。<br>只有<a href="https://cloud.tencent.com/document/product/266/126825">FileID + Path 模式</a>的子应用可以指定存储路径。</p>
    */
   MediaStoragePath?: string
 }
@@ -19282,6 +19286,10 @@ export interface AigcImageTaskInput {
    * <p>模型随机种子。</p>
    */
   Seed?: number
+  /**
+   * <p>场景类型。取值如下：<li>当 ModelName 为 Hunyuan 时：   3d_panorama 表示全景图；</li><li>其他 ModelName 暂不支持。</li></p>
+   */
+  SceneType?: string
 }
 
 /**
@@ -21609,15 +21617,15 @@ export interface ModifyAIAnalysisTemplateRequest {
  */
 export interface CommitUploadResponse {
   /**
-   * 媒体文件的唯一标识。
+   * <p>媒体文件的唯一标识。</p>
    */
   FileId?: string
   /**
-   * 媒体播放地址。
+   * <p>媒体播放地址。</p>
    */
   MediaUrl?: string
   /**
-   * 媒体封面地址。
+   * <p>媒体封面地址。</p>
    */
   CoverUrl?: string
   /**
@@ -22016,6 +22024,10 @@ export interface CreateAigcImageTaskRequest {
    */
   InputRegion?: string
   /**
+   * <p>场景类型。取值如下：<li>当 ModelName 为 Hunyuan 时：   3d_panorama 表示全景图；</li><li>其他 ModelName 暂不支持。</li></p>
+   */
+  SceneType?: string
+  /**
    * <p>模型随机种子。</p>
    */
   Seed?: number
@@ -22105,27 +22117,27 @@ export interface MPSAiMediaItem {
  */
 export interface ApplyUploadResponse {
   /**
-   * 存储桶，用于上传接口 URL 的 bucket_name。
+   * <p>存储桶，用于上传接口 URL 的 bucket_name。</p>
    */
   StorageBucket?: string
   /**
-   * 存储园区，用于上传接口 Host 的 Region。
+   * <p>存储园区，用于上传接口 Host 的 Region。</p>
    */
   StorageRegion?: string
   /**
-   * 点播会话，用于确认上传接口的参数 VodSessionKey。
+   * <p>点播会话，用于确认上传接口的参数 VodSessionKey。</p>
    */
   VodSessionKey?: string
   /**
-   * 媒体存储路径，用于上传接口存储媒体的对象键（Key）。
+   * <p>媒体存储路径，用于上传接口存储媒体的对象键（Key）。</p>
    */
   MediaStoragePath?: string
   /**
-   * 封面存储路径，用于上传接口存储封面的对象键（Key）。
+   * <p>封面存储路径，用于上传接口存储封面的对象键（Key）。</p>
    */
   CoverStoragePath?: string
   /**
-   * 临时凭证，用于上传接口的权限验证。
+   * <p>临时凭证，用于上传接口的权限验证。</p>
    */
   TempCertificate?: TempCertificate
   /**
@@ -24246,11 +24258,11 @@ export interface FileDeleteResultItem {
  */
 export interface CommitUploadRequest {
   /**
-   * 点播会话，取申请上传接口的返回值 VodSessionKey。
+   * <p>点播会话，取申请上传接口的返回值 VodSessionKey。</p>
    */
   VodSessionKey: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
 }

@@ -2835,7 +2835,7 @@ export type DescribeFreeCloudStorageNumRequest = null
  */
 export interface InvokeVideosKeywordsAnalyzerResponse {
   /**
-   * 基于搜索结果的总结
+   * 根据视频内容生成的关键词
    */
   Keywords?: Array<string>
   /**
@@ -5241,6 +5241,14 @@ export interface InvokeAISearchServiceRequest {
    * 指定向量搜索最相似的 Top K；仅当SearchMode为2时支持自定义设置，默认为100
    */
   VectorSearchTopK?: number
+  /**
+   * 搜索结果的排序方式，可选值：
+
+- `CORRELATION`：按相关性（默认）
+- `TIME_ASC`：按时间升序
+- `TIME_DESC`：按时间降序
+   */
+  Order?: string
 }
 
 /**
@@ -9327,9 +9335,13 @@ export interface InvokeVideosKeywordsAnalyzerRequest {
    */
   EndTimeMs: number
   /**
-   * 返回的关键字最大数量，默认为5；最大不能超过10
+   * 返回的关键词的最大数量，默认为5；最大不能超过10
    */
   KeywordsMaxNum?: number
+  /**
+   * 返回的关键词的语言类型，支持的类型有：en-US、zh-CN
+   */
+  KeywordsLang?: string
 }
 
 /**

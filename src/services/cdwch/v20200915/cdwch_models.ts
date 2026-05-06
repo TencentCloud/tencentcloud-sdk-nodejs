@@ -557,27 +557,27 @@ export interface DescribeInstanceNodesRequest {
  */
 export interface ModifyUserNewPrivilegeRequest {
   /**
-   * 实例id
+   * <p>实例id</p>
    */
   InstanceId: string
   /**
-   * cluster名称
+   * <p>clickhouse逻辑集群名称，可通过连接集群执行 <code>SHOW CLUSTERS</code> 查询获得</p>
    */
   Cluster: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   UserName: string
   /**
-   * 是否所有数据库表
+   * <p>是否所有数据库表</p>
    */
   AllDatabase: boolean
   /**
-   * 全局权限
+   * <p>全局权限</p>
    */
   GlobalPrivileges?: Array<string>
   /**
-   * 数据库表权限
+   * <p>数据库表权限</p>
    */
   DatabasePrivilegeList?: Array<DatabasePrivilegeInfo>
 }
@@ -587,34 +587,23 @@ export interface ModifyUserNewPrivilegeRequest {
  */
 export interface DescribeCkSqlApisRequest {
   /**
-   * 实例id
+   * <p>实例id</p>
    */
   InstanceId: string
   /**
-   * api接口名称,GetClusters:获取集群cluster列表
-GetSystemUsers:获取系统用户列表
-CheckNodeCluster: 检查节点是否隶属一个cluster
-GetClusterDatabases: 获取一个cluster下的数据库列表
-GetClusterTables: 获取一个cluster下的数据库表列表
-GetPrivilegeUsers: 获取授权的用户列表
-GET_USER_CLUSTER_PRIVILEGES:获取用户cluster下的权限   
-GetUserClusterNewPrivileges:获取用户cluster下的权限 (新版）
-RevokeClusterUser:解绑cluster用户
-DeleteSystemUser:删除系统用户 —— 必须所有cluster先解绑
-GetUserOptionMessages:获取用户配置备注信息
-GET_USER_CONFIGS:获取用户配置列表  QUOTA、PROFILE、POLICY
+   * <p>api接口名称,GetClusters:获取集群cluster列表<br>GetSystemUsers:获取系统用户列表<br>CheckNodeCluster: 检查节点是否隶属一个cluster<br>GetClusterDatabases: 获取一个cluster下的数据库列表<br>GetClusterTables: 获取一个cluster下的数据库表列表<br>GetPrivilegeUsers: 获取授权的用户列表<br>GET_USER_CLUSTER_PRIVILEGES:获取用户cluster下的权限<br>GetUserClusterNewPrivileges:获取用户cluster下的权限 (新版）<br>RevokeClusterUser:解绑cluster用户<br>DeleteSystemUser:删除系统用户 —— 必须所有cluster先解绑<br>GetUserOptionMessages:获取用户配置备注信息<br>GET_USER_CONFIGS:获取用户配置列表  QUOTA、PROFILE、POLICY</p>
    */
   ApiType: string
   /**
-   * 集群名称，当ApiType取值为GET_SYSTEM_USERS，GET_PRIVILEGE_USERS，GET_CLUSTER_DATABASES，GET_CLUSTER_TABLES 时，此参数必填
+   * <p>clickhouse逻辑集群名称，可通过连接集群执行 <code>SHOW CLUSTERS</code> 查询获得。当 ApiType 取值为 GET_SYSTEM_USERS、GET_PRIVILEGE_USERS、GET_CLUSTER_DATABASES或GET_CLUSTER_TABLES 时，本参数必填。</p>
    */
   Cluster?: string
   /**
-   * 用户名称，api与user相关的必填
+   * <p>用户名称，api与user相关的必填</p>
    */
   UserName?: string
   /**
-   * 账户的类型
+   * <p>账户的类型</p>
    */
   UserType?: string
 }
@@ -1910,7 +1899,7 @@ export interface DescribeBackUpScheduleResponse {
  */
 export interface DescribeCkSqlApisResponse {
   /**
-   * 返回的查询数据，大部分情况是list，也可能是bool
+   * <p>返回的查询数据，大部分情况是list，也可能是bool</p>
    */
   ReturnData?: string
   /**

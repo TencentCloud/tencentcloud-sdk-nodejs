@@ -48,9 +48,9 @@ it("ess.v20201111.CreateContractComparisonTask", async function () {
     }
 })
 
-it("ess.v20201111.DescribeFlowTemplates", async function () {
+it("ess.v20201111.DescribeContractReviewChecklist", async function () {
     try {
-       const data = await client.DescribeFlowTemplates({})
+       const data = await client.DescribeContractReviewChecklist({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +198,19 @@ it("ess.v20201111.CreateFlowGroupByTemplates", async function () {
     }
 })
 
-it("ess.v20201111.VerifyDigitFile", async function () {
+it("ess.v20201111.ImportContractReviewChecklist", async function () {
     try {
-       const data = await client.VerifyDigitFile({})
+       const data = await client.ImportContractReviewChecklist({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DescribeFlowTemplates", async function () {
+    try {
+       const data = await client.DescribeFlowTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -961,6 +971,16 @@ it("ess.v20201111.CreateEmployeeQualificationSealQrCode", async function () {
 it("ess.v20201111.CreateInformationExtractionWebUrl", async function () {
     try {
        const data = await client.CreateInformationExtractionWebUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.VerifyDigitFile", async function () {
+    try {
+       const data = await client.VerifyDigitFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

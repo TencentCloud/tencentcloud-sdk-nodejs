@@ -6199,53 +6199,53 @@ export interface DDoSAttackEvent {
   /**
    * 事件ID。
    */
-  EventId: string
+  EventId?: string
   /**
    * 攻击类型(对应交互事件名称)。
    */
-  AttackType: string
+  AttackType?: string
   /**
    * 攻击状态。
    */
-  AttackStatus: number
+  AttackStatus?: number
   /**
-   * 攻击最大带宽。
+   * 攻击最大带宽，单位为 bps。
    */
-  AttackMaxBandWidth: number
+  AttackMaxBandWidth?: number
   /**
-   * 攻击包速率峰值。
+   * 攻击包速率峰值，单位为 pps。
    */
-  AttackPacketMaxRate: number
+  AttackPacketMaxRate?: number
   /**
    * 攻击开始时间，单位为s。
    */
-  AttackStartTime: number
+  AttackStartTime?: number
   /**
    * 攻击结束时间，单位为s。
    */
-  AttackEndTime: number
+  AttackEndTime?: number
   /**
    * DDoS策略组ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PolicyId: number
+  PolicyId?: number
   /**
    * 站点ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ZoneId: string
+  ZoneId?: string
   /**
    * 攻击事件所属地区，取值有：
 <li>overseas：全球（除中国大陆地区）数据；</li>
 <li>mainland：中国大陆地区数据。</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Area: string
+  Area?: string
   /**
    * 封禁解封信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DDoSBlockData: Array<DDoSBlockData>
+  DDoSBlockData?: Array<DDoSBlockData>
 }
 
 /**
@@ -16241,11 +16241,11 @@ export interface EdgeKVPutRequest {
    */
   Value: string
   /**
-   * 过期时间，绝对时间。表示从 1970 年 1 月 1 日（UTC/GMT 的午夜）开始所经过的秒数，不能小于当前时间。若 Expiration 和 ExpirationTTL 都填写，以 ExpirationTTL 为准。若 Expiration 和 ExpirationTTL 都不填写，则该键值对永不过期。
+   * 键值对的过期时间，绝对时间，单位为秒，表示从 1970 年 1 月 1 日 00:00:00（UTC）起经过的秒数（即 Unix 时间戳）。取值必须大于等于当前时间 + 60，即过期时间距当前至少 60 秒。当 Expiration 与 ExpirationTTL 同时填写时，以 ExpirationTTL 为准；当两者均不填写时，键值对永不过期。
    */
   Expiration?: number
   /**
-   * 过期时间，相对时间，单位为秒。表示数据将在指定秒数后过期，必须大于 0。若 Expiration 和 ExpirationTTL 都填写，以 ExpirationTTL 为准。若 Expiration 和 ExpirationTTL 都不填写，则该键值对永不过期。
+   * 键值对的存活时长，相对时间，单位为秒，表示数据将在写入后经过指定秒数过期。取值范围：大于等于 60。当 Expiration 与 ExpirationTTL 同时填写时，以 ExpirationTTL 为准；当两者均不填写时，键值对永不过期。
    */
   ExpirationTTL?: number
 }
@@ -16882,7 +16882,7 @@ export interface CreatePurgeTaskRequest {
    */
   EncodeUrl?: boolean
   /**
-   * 节点缓存清除类型取值为 purge_cache_tag 时附带的信息。
+   * 节点缓存清除类型取值为 purge_cache_tag 时，该参数必填，入参值为域名。
    */
   CacheTag?: CacheTag
 }
