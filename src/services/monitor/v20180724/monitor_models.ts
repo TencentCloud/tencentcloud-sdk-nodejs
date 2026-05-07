@@ -3474,31 +3474,31 @@ export interface NoticeContentTmplBindInfo {
  */
 export interface BindingPolicyObjectRequest {
   /**
-   * 必填。固定值"monitor"
+   * <p>必填。固定值&quot;monitor&quot;</p>
    */
   Module: string
   /**
-   * 策略组id，例如 4739573。逐渐弃用，建议使用 PolicyId 参数
+   * <p>策略组id，例如 4739573。逐渐弃用，建议使用 PolicyId 参数</p>
    */
   GroupId?: number
   /**
-   * 告警策略ID，例如“policy-gh892hg0”。PolicyId 参数与 GroupId 参数至少要填一个，否则会报参数错误，建议使用该参数。若两者同时存在则以该参数为准
+   * <p>告警策略ID，例如“policy-gh892hg0”。PolicyId 参数与 GroupId 参数至少要填一个，否则会报参数错误，建议使用该参数。若两者同时存在则以该参数为准</p>
    */
   PolicyId?: string
   /**
-   * 实例分组ID
+   * <p>实例分组ID</p>
    */
   InstanceGroupId?: number
   /**
-   * 需要绑定的对象维度信息，当为实例绑定渠道时，此处为必填信息
+   * <p>需要绑定的对象维度信息。当告警对象选择为实例绑定方式时，该参数为必填参数；当告警对象选择为标签绑定、实例分组方式时，该参数为选填参数。</p>
    */
   Dimensions?: Array<BindingPolicyObjectDimension>
   /**
-   * 事件配置的告警
+   * <p>事件配置的告警</p>
    */
   EbSubject?: string
   /**
-   * 是否配置了事件告警
+   * <p>是否配置了事件告警</p>
    */
   EbEventFlag?: number
 }

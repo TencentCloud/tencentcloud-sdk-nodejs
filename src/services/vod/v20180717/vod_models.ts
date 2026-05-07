@@ -3742,6 +3742,34 @@ export interface ModifyMediaStorageClassResponse {
 }
 
 /**
+ * DescribeProcedureTemplates请求参数结构体
+ */
+export interface DescribeProcedureTemplatesRequest {
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 任务流模板名字过滤条件，数组长度限制：100。
+   */
+  Names?: Array<string>
+  /**
+   * 任务流模板类型过滤条件，可选值：
+<li>Preset：系统预置任务流模板；</li>
+<li>Custom：用户自定义任务流模板。</li>
+   */
+  Type?: string
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数，默认值：10，最大值：100。
+   */
+  Limit?: number
+}
+
+/**
  * 音视频审核涉及令人反感的信息的任务输入参数类型
  */
 export interface AiReviewPornTaskInput {
@@ -4770,17 +4798,22 @@ export interface AiRecognitionTaskOcrWordsResultOutput {
 }
 
 /**
- * AI 样本管理，人脸信息。
+ * 智能按帧标签结果信息
  */
-export interface AiSampleFaceInfo {
+export interface AiAnalysisTaskFrameTagOutput {
   /**
-   * 人脸图片 ID。
+   * 视频按帧标签列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
    */
-  FaceId?: string
+  SegmentSet: Array<MediaAiAnalysisFrameTagSegmentItem>
   /**
-   * 人脸图片地址。
+   * 视频按帧标签列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
    */
-  Url?: string
+  SegmentSetFileUrl: string
+  /**
+   * 视频按帧标签列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  SegmentSetFileUrlExpireTime: string
 }
 
 /**
@@ -5108,31 +5141,41 @@ export interface ModifyQualityInspectTemplateResponse {
 }
 
 /**
- * DescribeProcedureTemplates请求参数结构体
+ * AIGC 生音效任务的输入。
  */
-export interface DescribeProcedureTemplatesRequest {
+export interface AigcAudioTaskInput {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p>模型名称。</p>
    */
-  SubAppId?: number
+  ModelName?: string
   /**
-   * 任务流模板名字过滤条件，数组长度限制：100。
+   * <p>模型版本。</p>
    */
-  Names?: Array<string>
+  ModelVersion?: string
   /**
-   * 任务流模板类型过滤条件，可选值：
-<li>Preset：系统预置任务流模板；</li>
-<li>Custom：用户自定义任务流模板。</li>
+   * <p>场景类型。取值如下：<li>当 ModelName 为 Kling 时，取值 motion_control 表示动作控制；</li><li>其他 ModelName 暂不支持。</li></p>
    */
-  Type?: string
+  SceneType?: string
   /**
-   * 分页偏移量，默认值：0。
+   * <p>生成视频的提示词。最大支持1000字符，当 FileInfos 为空时，此参数必填。</p>
    */
-  Offset?: number
+  Prompt?: string
   /**
-   * 返回记录条数，默认值：10，最大值：100。
+   * <p>要阻止模型生成视频的提示词。最大支持1000字符。</p>
    */
-  Limit?: number
+  NegativePrompt?: string
+  /**
+   * <p>是否自动优化提示词。开启时将自动优化传入的Prompt，以提升生成质量。取值有： <li>Enabled：开启；</li> <li>Disabled：关闭；</li></p>
+   */
+  EnhancePrompt?: boolean
+  /**
+   * <p>AIGC 生图输出结果文件输出。</p>
+   */
+  OutputConfig?: AigcAudioOutputConfig
+  /**
+   * <p>额外参数</p>
+   */
+  AdditionalParameters?: string
 }
 
 /**
@@ -8549,31 +8592,41 @@ export interface DescribeAIAnalysisTemplatesRequest {
 }
 
 /**
- * AIGC生图任务输入文件信息
+ * 创建 AIGC 音效任务信息。
  */
-export interface AigcImageTaskInputFileInfo {
+export interface AigcAudioTask {
   /**
-   * 输入的视频文件类型。取值有： <li>File：点播媒体文件；</li> <li>Url：可访问的 Url；</li>
+   * <p>任务ID。</p>
    */
-  Type?: string
+  TaskId?: string
   /**
-   * 图片文件的媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。当 Type 取值为 File 时，本参数有效。
-说明：
-1. 推荐使用小于7M的图片；
-2. 图片格式的取值为：jpeg，jpg, png, webp。
+   * <p>任务状态，取值：<li>PROCESSING：处理中；</li><li>FINISH：已完成。</li></p>
    */
-  FileId?: string
+  Status?: string
   /**
-   * 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。
-说明：
-1. 推荐使用小于7M的图片；
-2. 图片格式的取值为：jpeg，jpg, png, webp。
+   * <p>错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。</p>
    */
-  Url?: string
+  ErrCode?: number
   /**
-   * 输入图片的描述信息，用于帮助模型理解图片。仅GEM 2.5、GEM 3.0 有效。
+   * <p>扩展错误码。空字符串表示成功，其它值表示失败。</p>
    */
-  Text?: string
+  ErrCodeExt?: string
+  /**
+   * <p>错误信息。</p>
+   */
+  Message?: string
+  /**
+   * <p>任务进度，取值范围 [0-100] 。</p>
+   */
+  Progress?: number
+  /**
+   * <p>AIGC 音频任务的输入信息。</p>
+   */
+  Input?: AigcAudioTaskInput
+  /**
+   * <p>AIGC 音频任务的输出信息。</p>
+   */
+  Output?: AigcAudioTaskOutput
 }
 
 /**
@@ -8658,6 +8711,20 @@ export interface EmptyTrackItem {
    * 持续时间，单位为秒。
    */
   Duration: number
+}
+
+/**
+ * AIGC 音效任务的输出信息。
+ */
+export interface AigcAudioTaskOutput {
+  /**
+   * <p>输出音频信息</p>
+   */
+  AudioInfos?: Array<AigcAudioTaskOutputFileInfo>
+  /**
+   * <p>输出视频信息</p>
+   */
+  VideoInfos?: Array<AigcAudioTaskOutputFileInfo>
 }
 
 /**
@@ -9419,22 +9486,54 @@ export interface CreateSuperPlayerConfigResponse {
 }
 
 /**
- * 智能按帧标签结果信息
+ * 输出的媒体文件信息。
  */
-export interface AiAnalysisTaskFrameTagOutput {
+export interface ComposeMediaOutput {
   /**
-   * 视频按帧标签列表。
-<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
+   * 文件名称，最长 64 个字符。
    */
-  SegmentSet: Array<MediaAiAnalysisFrameTagSegmentItem>
+  FileName: string
   /**
-   * 视频按帧标签列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+   * 描述信息，最长 128 个字符。
    */
-  SegmentSetFileUrl: string
+  Description?: string
   /**
-   * 视频按帧标签列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
+<li>默认值：0，表示其他分类。</li>
    */
-  SegmentSetFileUrlExpireTime: string
+  ClassId?: number
+  /**
+   * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  ExpireTime?: string
+  /**
+   * 封装格式，可选值：mp4、mp3。其中，mp3 为纯音频文件。
+   */
+  Container?: string
+  /**
+   * 输出的视频信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VideoStream?: OutputVideoStream
+  /**
+   * 输出的音频信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AudioStream?: OutputAudioStream
+  /**
+   * 是否去除视频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+默认值：0。
+   */
+  RemoveVideo?: number
+  /**
+   * 是否去除音频数据，可选值：
+<li>0：保留</li>
+<li>1：去除</li>
+默认值：0。
+   */
+  RemoveAudio?: number
 }
 
 /**
@@ -10698,6 +10797,20 @@ export interface CreateAigcVideoTaskRequest {
 }
 
 /**
+ * AI 样本管理，人脸信息。
+ */
+export interface AiSampleFaceInfo {
+  /**
+   * 人脸图片 ID。
+   */
+  FaceId?: string
+  /**
+   * 人脸图片地址。
+   */
+  Url?: string
+}
+
+/**
  * 自适应码流任务多语言音频流输入参数。
  */
 export interface ComplexAdaptiveDynamicStreamingTaskAudioInput {
@@ -11038,21 +11151,13 @@ export interface ObjectConfigureInfoForUpdate {
 }
 
 /**
- * DeleteMedia请求参数结构体
+ * DeleteContentReviewTemplate返回参数结构体
  */
-export interface DeleteMediaRequest {
+export interface DeleteContentReviewTemplateResponse {
   /**
-   * 媒体文件的唯一标识。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  FileId: string
-  /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
-   */
-  SubAppId?: number
-  /**
-   * 指定本次需要删除的部分。默认值为 "[]", 表示删除媒体及其对应的全部视频处理文件。
-   */
-  DeleteParts?: Array<MediaDeleteItem>
+  RequestId?: string
 }
 
 /**
@@ -11225,6 +11330,36 @@ export interface AsrWordsConfigureInfo {
 标签个数最多 10 个，每个标签长度最多 16 个字符。
    */
   LabelSet?: Array<string>
+}
+
+/**
+ * AIGC 生音效任务的输出媒体文件配置。
+ */
+export interface AigcAudioOutputConfig {
+  /**
+   * <p>存储模式</p><p>枚举值：</p><ul><li>Temporary： 临时存储，生成的视频文件不会存储到云点播，可在事件通知中获取到临时访问的 URL，有效期 7 天</li><li>Permanent： 永久存储，生成的视频文件将存储到云点播，可在事件通知中获取到 FileId</li></ul><p>默认值：Temporary</p>
+   */
+  StorageMode?: string
+  /**
+   * <p>输出文件名，最长 64 个字符。缺省由系统指定生成文件名。</p>
+   */
+  MediaName?: string
+  /**
+   * <p>分类ID，用于对媒体进行分类管理，可通过 <a href="/document/product/266/7812">创建分类</a> 接口，创建分类，获得分类 ID。</p><li>默认值：0，表示其他分类。</li>
+   */
+  ClassId?: number
+  /**
+   * <p>输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式说明</a>。</p>
+   */
+  ExpireTime?: string
+  /**
+   * <p>生成音频的时长。默认不填。  </p><p>取值范围：[0, 60]</p>
+   */
+  Duration?: number
+  /**
+   * <p>输出音频格式，默认不填</p>
+   */
+  OutputAudioFormat?: string
 }
 
 /**
@@ -12423,13 +12558,45 @@ export interface DescribeDrmKeyProviderInfoRequest {
 }
 
 /**
- * ModifyDefaultStorageRegion返回参数结构体
+ * AIGC 生音效任务的输出文件信息。
  */
-export interface ModifyDefaultStorageRegionResponse {
+export interface AigcAudioTaskOutputFileInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>存储模式。取值有： <li>Permanent：永久存储；</li> <li>Temporary：临时存储；</li><br>默认值：Temporary</p>
    */
-  RequestId?: string
+  StorageMode?: string
+  /**
+   * <p>输出文件名，最长 64 个字符。缺省由系统指定生成文件名。当 StorageMode 为 Permanent 时有效。</p>
+   */
+  MediaName?: string
+  /**
+   * <p>分类ID，用于对媒体进行分类管理，可通过 <a href="/document/product/266/7812">创建分类</a> 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。</p>
+   */
+  ClassId?: number
+  /**
+   * <p>输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式说明</a>。</p>
+   */
+  ExpireTime?: string
+  /**
+   * <p>文件类型，例如 mp4、flv 等。</p>
+   */
+  FileType?: string
+  /**
+   * <p>媒体文件播放地址。</p>
+   */
+  FileUrl?: string
+  /**
+   * <p>媒体文件 ID。当 StorageMode 为 Permanent 时有效。</p>
+   */
+  FileId?: string
+  /**
+   * <p>输出视频的元信息。当 StorageMode 为 Permanent 时有效。</p>
+   */
+  MetaData?: MediaMetaData
+  /**
+   * <p>时长</p><p>单位：秒</p>
+   */
+  Duration?: number
 }
 
 /**
@@ -15570,13 +15737,21 @@ export interface AiAnalysisTaskHighlightInput {
 }
 
 /**
- * DeleteContentReviewTemplate返回参数结构体
+ * DeleteMedia请求参数结构体
  */
-export interface DeleteContentReviewTemplateResponse {
+export interface DeleteMediaRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 媒体文件的唯一标识。
    */
-  RequestId?: string
+  FileId: string
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 指定本次需要删除的部分。默认值为 "[]", 表示删除媒体及其对应的全部视频处理文件。
+   */
+  DeleteParts?: Array<MediaDeleteItem>
 }
 
 /**
@@ -16645,6 +16820,34 @@ export interface PoliticalImgReviewTemplateInfoForUpdate {
    * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * AIGC生图任务输入文件信息
+ */
+export interface AigcImageTaskInputFileInfo {
+  /**
+   * 输入的视频文件类型。取值有： <li>File：点播媒体文件；</li> <li>Url：可访问的 Url；</li>
+   */
+  Type?: string
+  /**
+   * 图片文件的媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。当 Type 取值为 File 时，本参数有效。
+说明：
+1. 推荐使用小于7M的图片；
+2. 图片格式的取值为：jpeg，jpg, png, webp。
+   */
+  FileId?: string
+  /**
+   * 可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。
+说明：
+1. 推荐使用小于7M的图片；
+2. 图片格式的取值为：jpeg，jpg, png, webp。
+   */
+  Url?: string
+  /**
+   * 输入图片的描述信息，用于帮助模型理解图片。仅GEM 2.5、GEM 3.0 有效。
+   */
+  Text?: string
 }
 
 /**
@@ -19822,7 +20025,7 @@ export interface DescribeStorageDataRequest {
  */
 export interface DescribeTaskDetailResponse {
   /**
-   * <p>任务类型，取值：<li>Procedure：视频处理任务；</li><li>EditMedia：视频编辑任务；</li><li>SplitMedia：视频拆条任务；</li><li>ComposeMedia：制作媒体文件任务；</li><li>WechatPublish：微信发布任务；</li><li>WechatMiniProgramPublish：微信小程序视频发布任务；</li><li>PullUpload：拉取上传媒体文件任务；</li><li>FastClipMedia：快速剪辑任务；</li><li>RemoveWatermarkTask：智能去除水印任务；</li><li>DescribeFileAttributesTask：获取文件属性任务；</li><li>RebuildMedia：音画质重生任务（不推荐使用）；</li><li>ReviewAudioVideo：音视频审核任务；</li><li>ExtractTraceWatermark：提取溯源水印任务；</li><li>ExtractCopyRightWatermark：提取版权水印任务；</li><li>QualityInspect：音画质检测任务；</li><li>QualityEnhance：音画质重生任务；</li><li>ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；</li><li>ProcessMediaByMPS：MPS 视频处理任务；</li><li>AigcImageTask：AIGC 生图任务；</li><li>SceneAigcImageTask：场景化 AIGC 生图任务；</li><li>AigcVideoTask：AIGC 生视频任务；</li><li>ImportMediaKnowledge：导入媒体知识任务。</li><li>SceneAigcVideoTask：场景化 AIGC 生视频任务；</li><li> ExtractBlindWatermark：提取数字水印任务。</li><li> ExtractBlindWatermark：提取数字水印任务。</li><li> CreateAigcAdvancedCustomElementTask：创建自定义主体任务</li><li>CreateAigcCustomVoiceTask：创建自定义音色任务</li><li>CreateAigcSubjectTask：创建主体任务</li><li>AigcVideoRedrawTask：AIGC 视频转绘任务</li></p>
+   * <p>任务类型，取值：<li>Procedure：视频处理任务；</li><li>EditMedia：视频编辑任务；</li><li>SplitMedia：视频拆条任务；</li><li>ComposeMedia：制作媒体文件任务；</li><li>WechatPublish：微信发布任务；</li><li>WechatMiniProgramPublish：微信小程序视频发布任务；</li><li>PullUpload：拉取上传媒体文件任务；</li><li>FastClipMedia：快速剪辑任务；</li><li>RemoveWatermarkTask：智能去除水印任务；</li><li>DescribeFileAttributesTask：获取文件属性任务；</li><li>RebuildMedia：音画质重生任务（不推荐使用）；</li><li>ReviewAudioVideo：音视频审核任务；</li><li>ExtractTraceWatermark：提取溯源水印任务；</li><li>ExtractCopyRightWatermark：提取版权水印任务；</li><li>QualityInspect：音画质检测任务；</li><li>QualityEnhance：音画质重生任务；</li><li>ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；</li><li>ProcessMediaByMPS：MPS 视频处理任务；</li><li>AigcImageTask：AIGC 生图任务；</li><li>SceneAigcImageTask：场景化 AIGC 生图任务；</li><li>AigcVideoTask：AIGC 生视频任务；</li><li>ImportMediaKnowledge：导入媒体知识任务。</li><li>SceneAigcVideoTask：场景化 AIGC 生视频任务；</li><li> ExtractBlindWatermark：提取数字水印任务。</li><li> ExtractBlindWatermark：提取数字水印任务。</li><li> CreateAigcAdvancedCustomElement：创建自定义主体任务</li><li>CreateAigcCustomVoice：创建自定义音色任务</li><li>CreateAigcSubject：创建主体任务</li><li>AigcVideoRedrawTask：AIGC 视频转绘任务</li><li>CreateAigcAudioClone：AIGC 音频复刻任务</li></p>
    */
   TaskType?: string
   /**
@@ -19999,6 +20202,10 @@ export interface DescribeTaskDetailResponse {
    * <p>AIGC 视频转绘信息，仅当 TaskType 为AigcVideoRedrawTask，该字段有值。</p>
    */
   AigcVideoRedrawTask?: AigcVideoRedrawTask
+  /**
+   * <p>AIGC音效信息，仅当TaskType为AigcAudioTask时，该字段有值。</p>
+   */
+  AigcAudioTask?: AigcAudioTask
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -20197,6 +20404,16 @@ export interface RebuildMediaResponse {
    * 音画质重生的任务 ID，可以通过该 ID 查询音画质重生任务的状态。
    */
   TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SetDrmKeyProviderInfo返回参数结构体
+ */
+export interface SetDrmKeyProviderInfoResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -25289,9 +25506,9 @@ export interface DeleteEnhanceMediaTemplateRequest {
 }
 
 /**
- * SetDrmKeyProviderInfo返回参数结构体
+ * ModifyDefaultStorageRegion返回参数结构体
  */
-export interface SetDrmKeyProviderInfoResponse {
+export interface ModifyDefaultStorageRegionResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -25719,57 +25936,6 @@ export interface DeleteQualityInspectTemplateRequest {
    * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
   SubAppId?: number
-}
-
-/**
- * 输出的媒体文件信息。
- */
-export interface ComposeMediaOutput {
-  /**
-   * 文件名称，最长 64 个字符。
-   */
-  FileName: string
-  /**
-   * 描述信息，最长 128 个字符。
-   */
-  Description?: string
-  /**
-   * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。
-<li>默认值：0，表示其他分类。</li>
-   */
-  ClassId?: number
-  /**
-   * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  ExpireTime?: string
-  /**
-   * 封装格式，可选值：mp4、mp3。其中，mp3 为纯音频文件。
-   */
-  Container?: string
-  /**
-   * 输出的视频信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VideoStream?: OutputVideoStream
-  /**
-   * 输出的音频信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AudioStream?: OutputAudioStream
-  /**
-   * 是否去除视频数据，可选值：
-<li>0：保留</li>
-<li>1：去除</li>
-默认值：0。
-   */
-  RemoveVideo?: number
-  /**
-   * 是否去除音频数据，可选值：
-<li>0：保留</li>
-<li>1：去除</li>
-默认值：0。
-   */
-  RemoveAudio?: number
 }
 
 /**

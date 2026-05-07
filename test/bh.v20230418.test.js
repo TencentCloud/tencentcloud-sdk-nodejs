@@ -888,6 +888,16 @@ it("bh.v20230418.SyncDevicesToIOA", async function () {
     }
 })
 
+it("bh.v20230418.BindDeviceAccountKubeconfig", async function () {
+    try {
+       const data = await client.BindDeviceAccountKubeconfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bh.v20230418.ModifyChangePwdTask", async function () {
     try {
        const data = await client.ModifyChangePwdTask({})

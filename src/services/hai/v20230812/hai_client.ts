@@ -165,7 +165,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口(UpdateServiceConfigs)用于更新服务配置
+   * 本接口(UpdateServiceConfigs)用于更新服务配置。
    */
   async UpdateServiceConfigs(
     req: UpdateServiceConfigsRequest,

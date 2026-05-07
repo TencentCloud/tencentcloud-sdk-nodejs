@@ -32,7 +32,7 @@ import {
   DescribeDeviceGroupsResponse,
   UserOrg,
   DeleteCmdTemplatesResponse,
-  DeleteDevicesResponse,
+  DeleteUserDirectoryRequest,
   ChangePwdTaskInfo,
   CreateChangePwdTaskResponse,
   DescribeLoginEventRequest,
@@ -70,7 +70,7 @@ import {
   DescribeResourcesRequest,
   BindDeviceResourceResponse,
   CreateUserDirectoryRequest,
-  SetLDAPSyncFlagResponse,
+  EnableExternalAccessRequest,
   DescribeSecuritySettingRequest,
   DeleteUserGroupMembersResponse,
   ModifyReconnectionSettingResponse,
@@ -89,7 +89,7 @@ import {
   IOAUserGroup,
   SearchCommandBySidRequest,
   SyncUserToIOAResponse,
-  DeleteUserDirectoryRequest,
+  BindDeviceAccountKubeconfigRequest,
   CreateDeviceGroupResponse,
   DescribeUserGroupMembersRequest,
   DescribeDeviceCountRequest,
@@ -99,6 +99,7 @@ import {
   DescribeAccessWhiteListRulesRequest,
   DescribeUserSyncStatusRequest,
   ModifyAccessWhiteListAutoStatusRequest,
+  SourceType,
   ModifyUserGroupResponse,
   CreateUserResponse,
   DescribeSourceTypesRequest,
@@ -187,7 +188,7 @@ import {
   CreateSyncUserTaskRequest,
   SearchSessionResponse,
   DescribeAccountGroupsResponse,
-  SourceType,
+  BindDeviceAccountKubeconfigResponse,
   CreateDeviceAccountResponse,
   ExternalDevice,
   SearchSessionRequest,
@@ -222,6 +223,7 @@ import {
   CreateDeviceAccountRequest,
   AddDeviceGroupMembersResponse,
   DeleteCmdTemplatesRequest,
+  SetLDAPSyncFlagResponse,
   EnvInternetAccessSetting,
   DescribeUserGroupsResponse,
   DescribeUserDirectoryRequest,
@@ -248,7 +250,7 @@ import {
   DescribeCmdTemplatesRequest,
   EnableIntranetAccessRequest,
   DescribeAclsRequest,
-  EnableExternalAccessRequest,
+  DeleteDevicesResponse,
   DeleteDeviceGroupsRequest,
   DescribeDeviceGroupMembersResponse,
   SearchAuditLogResponse,
@@ -1163,6 +1165,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SyncDevicesToIOAResponse) => void
   ): Promise<SyncDevicesToIOAResponse> {
     return this.request("SyncDevicesToIOA", req, cb)
+  }
+
+  /**
+   * 绑定容器账号凭据
+   */
+  async BindDeviceAccountKubeconfig(
+    req: BindDeviceAccountKubeconfigRequest,
+    cb?: (error: string, rep: BindDeviceAccountKubeconfigResponse) => void
+  ): Promise<BindDeviceAccountKubeconfigResponse> {
+    return this.request("BindDeviceAccountKubeconfig", req, cb)
   }
 
   /**

@@ -58,9 +58,9 @@ it("tcb.v20180608.DescribeUserList", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeVmSpec", async function () {
+it("tcb.v20180608.DescribeManagedAIModelList", async function () {
     try {
-       const data = await client.DescribeVmSpec({})
+       const data = await client.DescribeManagedAIModelList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +118,19 @@ it("tcb.v20180608.DescribeApiKeyList", async function () {
     }
 })
 
-it("tcb.v20180608.DeleteVmInstance", async function () {
+it("tcb.v20180608.CreateAIModel", async function () {
     try {
-       const data = await client.DeleteVmInstance({})
+       const data = await client.CreateAIModel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.CreateTable", async function () {
+    try {
+       const data = await client.CreateTable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -191,6 +201,16 @@ it("tcb.v20180608.DescribeHTTPServiceRoute", async function () {
 it("tcb.v20180608.ModifyClsTopic", async function () {
     try {
        const data = await client.ModifyClsTopic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeAIModels", async function () {
+    try {
+       const data = await client.DescribeAIModels({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,6 +308,16 @@ it("tcb.v20180608.DescribeMySQLClusterDetail", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeVmSpec", async function () {
+    try {
+       const data = await client.DescribeVmSpec({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeBaasPackageList", async function () {
     try {
        const data = await client.DescribeBaasPackageList({})
@@ -358,6 +388,16 @@ it("tcb.v20180608.DeleteUsers", async function () {
     }
 })
 
+it("tcb.v20180608.UpdateAIModel", async function () {
+    try {
+       const data = await client.UpdateAIModel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeStaticStore", async function () {
     try {
        const data = await client.DescribeStaticStore({})
@@ -408,9 +448,9 @@ it("tcb.v20180608.ExecutePGSql", async function () {
     }
 })
 
-it("tcb.v20180608.CheckTcbService", async function () {
+it("tcb.v20180608.DeleteAIModel", async function () {
     try {
-       const data = await client.CheckTcbService({})
+       const data = await client.DeleteAIModel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -491,6 +531,16 @@ it("tcb.v20180608.ModifyProvider", async function () {
 it("tcb.v20180608.DestroyEnv", async function () {
     try {
        const data = await client.DestroyEnv({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DeleteVmInstance", async function () {
+    try {
+       const data = await client.DeleteVmInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -628,9 +678,9 @@ it("tcb.v20180608.CreateHTTPServiceRoute", async function () {
     }
 })
 
-it("tcb.v20180608.CreateTable", async function () {
+it("tcb.v20180608.CheckTcbService", async function () {
     try {
-       const data = await client.CreateTable({})
+       const data = await client.CheckTcbService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

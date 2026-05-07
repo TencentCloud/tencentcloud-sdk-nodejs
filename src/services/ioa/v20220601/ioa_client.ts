@@ -59,6 +59,7 @@ import {
   CreateDLPFileDetectionTaskRequest,
   ExportDeviceDownloadTaskRequest,
   DescribeSoftCensusListByDeviceData,
+  ModifyBusinessResourceResponse,
   CreateBusinessResourceRequest,
   DescribeDeviceInfoRequest,
   CreateBusinessResourceData,
@@ -137,6 +138,7 @@ import {
   ModifyVirtualDeviceGroupsRequest,
   GetAccountGroupData,
   Sort,
+  ModifyBusinessResourceRequest,
   DescribeDLPEdgeNodeGroupsRspData,
   DescribeDirectAccountGroupResourcesRequest,
   DeviceProcessInfo,
@@ -460,6 +462,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLocalAccountsResponse) => void
   ): Promise<DescribeLocalAccountsResponse> {
     return this.request("DescribeLocalAccounts", req, cb)
+  }
+
+  /**
+   * 修改业务资源，会对一些必填参数进行校验和参数合法性校验，修改业务资源时，先调用下校验相同业务资源接口，看资源是不是有冲突。修改时也会做校验，但没有返回对应的异常信息,私有化调用path为：capi/GatewayResource/ModifyBusinessResource
+   */
+  async ModifyBusinessResource(
+    req: ModifyBusinessResourceRequest,
+    cb?: (error: string, rep: ModifyBusinessResourceResponse) => void
+  ): Promise<ModifyBusinessResourceResponse> {
+    return this.request("ModifyBusinessResource", req, cb)
   }
 
   /**

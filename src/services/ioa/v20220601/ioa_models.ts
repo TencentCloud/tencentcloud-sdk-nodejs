@@ -1291,6 +1291,16 @@ export interface DescribeSoftCensusListByDeviceData {
 }
 
 /**
+ * ModifyBusinessResource返回参数结构体
+ */
+export interface ModifyBusinessResourceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateBusinessResource请求参数结构体
  */
 export interface CreateBusinessResourceRequest {
@@ -3216,6 +3226,48 @@ export interface Sort {
    * 排序方式
    */
   Order?: string
+}
+
+/**
+ * ModifyBusinessResource请求参数结构体
+ */
+export interface ModifyBusinessResourceRequest {
+  /**
+   * 业务资源所在的模块id，没有资源模块先创建资源模块(只支持32位)
+   */
+  AreaId: number
+  /**
+   * 业务资源协议类型,3：所有,2：UDP，1：TCP(只支持32位)
+   */
+  Protocol: number
+  /**
+   * 业务资源名称，同一个资源模块下面不可重复
+   */
+  ServiceName: string
+  /**
+   * 业务资源优先级 1-65535(只支持32位)
+   */
+  Levels: number
+  /**
+   * 业务资源类型:ip,domain,ip_section，对应ip、域名、ip段
+   */
+  ServiceType: string
+  /**
+   * 业务资源端口 all,1-65535
+   */
+  ServicePort: string
+  /**
+   * 修改业务资源的id(只支持32位)
+   */
+  ServiceId: number
+  /**
+   * 业务资源地址(ip、域名、ip段)
+   */
+  ServiceAddress: string
+  /**
+   * 是否走代理,该参数不传，默认为0, 2：内外网直连，1：内网直连， 0：不启用代理配置(只支持32位)
+   */
+  DirectConn?: number
 }
 
 /**

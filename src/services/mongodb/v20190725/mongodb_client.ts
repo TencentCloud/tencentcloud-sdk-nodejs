@@ -63,6 +63,7 @@ import {
   DBInstanceInfo,
   ParamType,
   SetAccountUserPrivilegeResponse,
+  WanServiceNodeList,
   FlashbackDatabase,
   ModifyDBInstanceNetworkAddressRequest,
   CreateDBInstanceHourResponse,
@@ -124,6 +125,7 @@ import {
   DescribeSecurityGroupResponse,
   DescribeTransparentDataEncryptionStatusRequest,
   SecurityGroup,
+  EnableWanServiceRequest,
   ReplicaSetInfo,
   ResetDBInstancePasswordResponse,
   ClientConnection,
@@ -207,6 +209,7 @@ import {
   DescribeLogDownloadTasksResponse,
   SlowLogItem,
   RestartNodesRequest,
+  InstanceChargePrepaid,
   ModifyMongoDBParamType,
   ModifyAuditServiceResponse,
   SetInstanceMaintenanceRequest,
@@ -218,7 +221,7 @@ import {
   Filters,
   RestoreCollection,
   RestoreDBInstanceRequest,
-  InstanceChargePrepaid,
+  EnableWanServiceResponse,
   RenewDBInstancesRequest,
   UpgradeDBInstanceKernelVersionRequest,
   DescribeAuditLogsResponse,
@@ -856,6 +859,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTransparentDataEncryptionStatusResponse) => void
   ): Promise<DescribeTransparentDataEncryptionStatusResponse> {
     return this.request("DescribeTransparentDataEncryptionStatus", req, cb)
+  }
+
+  /**
+   * 本接口(OpenWanService)用于开启当前实例的外网访问地址。
+   */
+  async EnableWanService(
+    req: EnableWanServiceRequest,
+    cb?: (error: string, rep: EnableWanServiceResponse) => void
+  ): Promise<EnableWanServiceResponse> {
+    return this.request("EnableWanService", req, cb)
   }
 
   /**

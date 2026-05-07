@@ -326,11 +326,11 @@ export interface NetworkStatus {
  */
 export interface ComputeInfo {
   /**
-   * 资源类型及数量
+   * <p>资源类型及数量</p>
    */
   ComputeResources?: Array<ComputeResource>
   /**
-   * 副本数
+   * <p>副本数</p>
    */
   Replicas?: number
 }

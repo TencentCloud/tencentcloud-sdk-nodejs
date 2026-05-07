@@ -505,6 +505,7 @@ import {
   DescribeLiveTimeShiftRulesRequest,
   DescribeOriginStreamInfoRequest,
   DescribeLiveTimeShiftBillInfoListRequest,
+  RecordTask,
   ModifyCasterRequest,
   DescribeCasterEmergencyStatusRequest,
   PushQualityData,
@@ -585,7 +586,7 @@ import {
   GroupProIspDataInfo,
   VideoRedrawCosInfo,
   DeleteCasterOutputInfoRequest,
-  RecordTask,
+  OriginStreamCustomizationRule,
   DescribeTimeShiftRecordDetailResponse,
   DeleteLiveDomainResponse,
   AddCasterMarkPicInfoRequest,
@@ -977,10 +978,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取直播源站配置信息，支持直播原站格式。
+   * 获取直播源站配置信息，支持直播源站格式。
    */
   async DescribeOriginStreamInfo(
-    req?: DescribeOriginStreamInfoRequest,
+    req: DescribeOriginStreamInfoRequest,
     cb?: (error: string, rep: DescribeOriginStreamInfoResponse) => void
   ): Promise<DescribeOriginStreamInfoResponse> {
     return this.request("DescribeOriginStreamInfo", req, cb)
@@ -2395,10 +2396,10 @@ DomainName+AppName+StreamName+TemplateId唯一标识单个转码规则，如需�
   }
 
   /**
-   * 变更直播源站配置，支持直播原站格式。
+   * 变更直播源站配置，支持直播源站格式。
    */
   async ModifyOriginStreamInfo(
-    req?: ModifyOriginStreamInfoRequest,
+    req: ModifyOriginStreamInfoRequest,
     cb?: (error: string, rep: ModifyOriginStreamInfoResponse) => void
   ): Promise<ModifyOriginStreamInfoResponse> {
     return this.request("ModifyOriginStreamInfo", req, cb)

@@ -112,6 +112,36 @@ export interface GetProvidersRequest {
 }
 
 /**
+ * 托管 AI 模型计费信息
+ */
+export interface ManagedAIModelChargingInfo {
+  /**
+   * <p>计费类型</p><p>枚举值：</p><ul><li>Uniform： 固定计费</li><li>Tiered： 分段计费</li></ul>
+   */
+  Type?: string
+  /**
+   * <p>分组名称</p>
+   */
+  Name?: string
+  /**
+   * <p>输入 Token 价格</p>
+   */
+  InputPrice?: string
+  /**
+   * <p>输出 Token 价格</p>
+   */
+  OutputPrice?: string
+  /**
+   * <p>命中缓存价格</p>
+   */
+  CachePrice?: string
+  /**
+   * <p>计费单位</p>
+   */
+  InputOutputUnit?: string
+}
+
+/**
  * 订单信息
  */
 export interface OrderInfo {
@@ -727,6 +757,25 @@ export interface Indexkey {
 }
 
 /**
+ * 云开发内置 AI 模型信息
+ */
+export interface ManagedAIModelGroup {
+  /**
+   * <p>模型分组</p>
+   */
+  GroupName?: string
+  /**
+   * <p>模型列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Models?: Array<ManagedAIModel>
+  /**
+   * <p>备注</p>
+   */
+  Remark?: string
+}
+
+/**
  * 邮箱smtp配置
  */
 export interface EmailSmtpConfig {
@@ -1071,6 +1120,27 @@ export interface TkeClusterInfo {
 }
 
 /**
+ * 分页信息
+ */
+export interface Pager {
+  /**
+   * 分页偏移量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Offset?: number
+  /**
+   * 每页返回记录数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Limit?: number
+  /**
+   * 文档集合总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+}
+
+/**
  * ModifyLoginConfig请求参数结构体
  */
 export interface ModifyLoginConfigRequest {
@@ -1300,6 +1370,16 @@ export interface DescribeCloudBaseRunServerVersionResponse {
 }
 
 /**
+ * DeleteVmInstance返回参数结构体
+ */
+export interface DeleteVmInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeGatewayVersions返回参数结构体
  */
 export interface DescribeGatewayVersionsResponse {
@@ -1319,6 +1399,24 @@ export interface DescribeGatewayVersionsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeGatewayVersions请求参数结构体
+ */
+export interface DescribeGatewayVersionsRequest {
+  /**
+   * 环境id
+   */
+  EnvId: string
+  /**
+   * 网关id
+   */
+  GatewayId: string
+  /**
+   * 版本名
+   */
+  VersionName?: string
 }
 
 /**
@@ -1697,21 +1795,33 @@ export interface RunCommandsResponse {
 }
 
 /**
- * ExecutePGSql请求参数结构体
+ * DescribeTables请求参数结构体
  */
-export interface ExecutePGSqlRequest {
+export interface DescribeTablesRequest {
   /**
-   * <p>云开发环境ID</p>
+   * 分页条件
    */
-  EnvId: string
+  MgoLimit: number
   /**
-   * <p>要执行的SQL语句</p>
+   * 实例ID
    */
-  Sql: string
+  Tag?: string
   /**
-   * <p>指定 role 执行 SQL</p>
+   * 分页条件
    */
-  Role?: string
+  MgoOffset?: number
+  /**
+   * 环境id
+   */
+  EnvId?: string
+  /**
+   * MongoConnector
+   */
+  MongoConnector?: MongoConnector
+  /**
+   * 指定表名过滤，为空时返回所有表
+   */
+  TableNames?: Array<string>
 }
 
 /**
@@ -1770,21 +1880,13 @@ export interface DescribeApiKeyListResponse {
 }
 
 /**
- * RunSql返回参数结构体
+ * DeleteAIModel返回参数结构体
  */
-export interface RunSqlResponse {
+export interface DeleteAIModelResponse {
   /**
-   * 查询结果行，每个元素为 JSON 字符串
+   * <p>成功删除数量</p>
    */
-  Items?: Array<string>
-  /**
-   * 列元数据信息，每个元素为 JSON 字符串，字段包含 `name/databaseType/nullable/length/precision/scale`
-   */
-  Infos?: Array<string>
-  /**
-   * 受影响的行数（INSERT/UPDATE/DELETE 等语句）
-   */
-  RowsAffected?: number
+  Count?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2041,6 +2143,22 @@ export interface HTTPServiceExtension {
 }
 
 /**
+ * 多语言模板
+ */
+export interface LocalizedTemplate {
+  /**
+   * <p>中文</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZhCN?: string
+  /**
+   * <p>英文</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnUS?: string
+}
+
+/**
  * DescribeBillingInfo返回参数结构体
  */
 export interface DescribeBillingInfoResponse {
@@ -2096,6 +2214,40 @@ export interface ModifyClientResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateAIModel请求参数结构体
+ */
+export interface UpdateAIModelRequest {
+  /**
+   * <p>环境id</p>
+   */
+  EnvId: string
+  /**
+   * <p>分组名</p>
+   */
+  GroupName: string
+  /**
+   * <p>模型地址</p><p>枚举值：</p><ul><li>http://default.tcb： 默认模型地址，custom模型切换为builtin模型时使用</li></ul>
+   */
+  BaseUrl?: string
+  /**
+   * <p>模型名列表</p><p>Models 列表更新采用全量替换</p>
+   */
+  Models?: Array<AIModel>
+  /**
+   * <p>备注</p>
+   */
+  Remark?: string
+  /**
+   * <p>模型状态, 1: 开启, 2: 关闭</p>
+   */
+  Status?: number
+  /**
+   * <p>模型密钥</p>
+   */
+  Secret?: AIModelSecret
 }
 
 /**
@@ -2248,6 +2400,20 @@ export interface MgoKeySchema {
 }
 
 /**
+ * UpdateAIModel返回参数结构体
+ */
+export interface UpdateAIModelResponse {
+  /**
+   * <p>更新数量</p>
+   */
+  Count?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateTable返回参数结构体
  */
 export interface UpdateTableResponse {
@@ -2300,19 +2466,17 @@ export interface RunSqlRequest {
 }
 
 /**
- * 多语言模板
+ * CreateAIModel返回参数结构体
  */
-export interface LocalizedTemplate {
+export interface CreateAIModelResponse {
   /**
-   * <p>中文</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>创建数量</p>
    */
-  ZhCN?: string
+  Count?: number
   /**
-   * <p>英文</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EnUS?: string
+  RequestId?: string
 }
 
 /**
@@ -2428,6 +2592,28 @@ export interface DeleteVmInstanceRequest {
 }
 
 /**
+ * 托管型AI 模型信息
+ */
+export interface ManagedAIModel {
+  /**
+   * <p>模型名</p>
+   */
+  Model?: string
+  /**
+   * <p>是否开启MCP</p>
+   */
+  EnableMCP?: boolean
+  /**
+   * <p>模型规格</p>
+   */
+  ModelSpec?: ManagedAIModelSpec
+  /**
+   * <p>模型计费信息</p>
+   */
+  ModelChargingInfo?: Array<ManagedAIModelChargingInfo>
+}
+
+/**
  * DescribeUserList返回参数结构体
  */
 export interface DescribeUserListResponse {
@@ -2465,6 +2651,24 @@ export interface CreateTableRequest {
    * MongoDB连接器配置
    */
   MongoConnector?: MongoConnector
+}
+
+/**
+ * 托管 AI 模型参数规格
+ */
+export interface ManagedAIModelSpec {
+  /**
+   * <p>最大输入 Token</p>
+   */
+  MaxInputToken?: string
+  /**
+   * <p>最大输出 Token</p>
+   */
+  MaxOutputToken?: string
+  /**
+   * <p>上下文长度</p>
+   */
+  ContextLength?: string
 }
 
 /**
@@ -3020,6 +3224,56 @@ export interface DescribeSafeRuleRequest {
 }
 
 /**
+ * ModifyUser请求参数结构体
+ */
+export interface ModifyUserRequest {
+  /**
+   * 环境id
+   */
+  EnvId: string
+  /**
+   * 用户Id, 不做修改
+   */
+  Uid: string
+  /**
+   * 用户名，用户名规则：1. 长度1-64字符 2. 只能包含大小写英文字母、数字和符号 . _ - 3. 只能以字母或数字开头 4. 不能重复，不传该字段或传空字符不修改
+   */
+  Name?: string
+  /**
+   * 用户类型：internalUser-内部用户、externalUser-外部用户，不传该字段或传空字符串不修改。
+   */
+  Type?: string
+  /**
+   * 密码，传入Uid时密码可不传。密码规则：1. 长度8-32字符（推荐12位以上） 2. 不能以特殊字符开头 3. 至少包含以下四项中的三项：小写字母a-z、大写字母A-Z、数字0-9、特殊字符()!@#$%^&*\|?><_-，不传该字段或传空字符串不修改
+   */
+  Password?: string
+  /**
+   * 用户状态：ACTIVE（激活）、BLOCKED（冻结），默认冻结，不传该字段或传空字符串不修改
+   */
+  UserStatus?: string
+  /**
+   * 用户昵称，长度2-64字符，不传该字段不修改，传空字符修改为空
+   */
+  NickName?: string
+  /**
+   * 手机号，11位数字，不传该字段不修改，传空字符串修改为空
+   */
+  Phone?: string
+  /**
+   * 邮箱地址，不传该字段不修改，传空字符修改为空
+   */
+  Email?: string
+  /**
+   * 头像链接，可访问的公网URL，不传该字段不修改，传空字符串修改为空
+   */
+  AvatarUrl?: string
+  /**
+   * 用户描述，最多200字符，不传该字段不修改，传空字符修改为空
+   */
+  Description?: string
+}
+
+/**
  * DeleteUsers请求参数结构体
  */
 export interface DeleteUsersRequest {
@@ -3249,17 +3503,13 @@ export interface HTTPServiceQPSPerClient {
 }
 
 /**
- * DeleteUsers返回参数结构体
+ * DescribeAIModels请求参数结构体
  */
-export interface DeleteUsersResponse {
+export interface DescribeAIModelsRequest {
   /**
-   * 删除用户结果
+   * 环境id
    */
-  Data?: DeleteUsersResp
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  EnvId: string
 }
 
 /**
@@ -3822,6 +4072,40 @@ export interface TableInfo {
 }
 
 /**
+ * CreateAIModel请求参数结构体
+ */
+export interface CreateAIModelRequest {
+  /**
+   * <p>环境id</p>
+   */
+  EnvId: string
+  /**
+   * <p>分组名</p><p>入参限制：不允许以 cloudbase 为前缀</p>
+   */
+  GroupName: string
+  /**
+   * <p>模型服务地址</p>
+   */
+  BaseUrl?: string
+  /**
+   * <p>模型名列表</p>
+   */
+  Models?: Array<AIModel>
+  /**
+   * <p>分组备注</p>
+   */
+  Remark?: string
+  /**
+   * <p>模型状态,  1: 开启, 2: 关闭</p>
+   */
+  Status?: number
+  /**
+   * <p>模型密钥</p>
+   */
+  Secret?: AIModelSecret
+}
+
+/**
  * DescribeLoginConfig返回参数结构体
  */
 export interface DescribeLoginConfigResponse {
@@ -3862,21 +4146,17 @@ export interface DescribeLoginConfigResponse {
 }
 
 /**
- * DescribeGatewayVersions请求参数结构体
+ * DeleteAIModel请求参数结构体
  */
-export interface DescribeGatewayVersionsRequest {
+export interface DeleteAIModelRequest {
   /**
-   * 环境id
+   * <p>环境id</p>
    */
   EnvId: string
   /**
-   * 网关id
+   * <p>分组名列表</p>
    */
-  GatewayId: string
-  /**
-   * 版本名
-   */
-  VersionName?: string
+  GroupNames: Array<string>
 }
 
 /**
@@ -3890,33 +4170,21 @@ export interface CreateEnvResourceResponse {
 }
 
 /**
- * DescribeTables请求参数结构体
+ * AI 模型信息
  */
-export interface DescribeTablesRequest {
+export interface AIModel {
   /**
-   * 分页条件
+   * 模型名
    */
-  MgoLimit: number
+  Model?: string
   /**
-   * 实例ID
+   * 是否开启MCP
    */
-  Tag?: string
+  EnableMCP?: boolean
   /**
-   * 分页条件
+   * 标签
    */
-  MgoOffset?: number
-  /**
-   * 环境id
-   */
-  EnvId?: string
-  /**
-   * MongoConnector
-   */
-  MongoConnector?: MongoConnector
-  /**
-   * 指定表名过滤，为空时返回所有表
-   */
-  TableNames?: Array<string>
+  Tags?: Array<string>
 }
 
 /**
@@ -4274,17 +4542,55 @@ export interface ExternalStorage {
 }
 
 /**
- * CreateCustomLoginKey返回参数结构体
+ * 合法域名
  */
-export interface CreateCustomLoginKeyResponse {
+export interface AuthDomain {
   /**
-   * 自定义登录的 RSA 私钥（1024 位），PEM 编码格式（PKCS#1）。调用方需使用该私钥对包含用户身份信息的 JSON 数据进行 JWS 签名，生成 JWT Token 后传入自定义登录接口完成身份认证。出于安全考虑，系统仅存储公钥，私钥仅在创建时返回一次且无法恢复，请妥善保存。创建新密钥后，该环境下原有未设置过期时间的旧密钥将被自动标记为 2 小时后过期
+   * 域名ID
    */
-  PrivateKey?: string
+  Id?: string
   /**
-   * 密钥对的唯一标识符（UUID 格式），由系统自动生成。在自定义登录时，需将该 KeyID 拼接到 ProviderToken 参数中（格式：{KeyID}/{algorithm}/{signedJWT}），服务端通过 KeyID 查找对应的公钥以验证签名
+   * 域名
    */
-  KeyID?: string
+  Domain?: string
+  /**
+   * 域名类型。包含以下取值：
+<li>SYSTEM</li>
+<li>USER</li>
+   */
+  Type?: string
+  /**
+   * 状态。包含以下取值：
+<li>ENABLE</li>
+<li>DISABLE</li>
+   */
+  Status?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+}
+
+/**
+ * RunSql返回参数结构体
+ */
+export interface RunSqlResponse {
+  /**
+   * 查询结果行，每个元素为 JSON 字符串
+   */
+  Items?: Array<string>
+  /**
+   * 列元数据信息，每个元素为 JSON 字符串，字段包含 `name/databaseType/nullable/length/precision/scale`
+   */
+  Infos?: Array<string>
+  /**
+   * 受影响的行数（INSERT/UPDATE/DELETE 等语句）
+   */
+  RowsAffected?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4374,37 +4680,21 @@ export interface CreateHTTPServiceRouteResponse {
 }
 
 /**
- * 合法域名
+ * CreateCustomLoginKey返回参数结构体
  */
-export interface AuthDomain {
+export interface CreateCustomLoginKeyResponse {
   /**
-   * 域名ID
+   * 自定义登录的 RSA 私钥（1024 位），PEM 编码格式（PKCS#1）。调用方需使用该私钥对包含用户身份信息的 JSON 数据进行 JWS 签名，生成 JWT Token 后传入自定义登录接口完成身份认证。出于安全考虑，系统仅存储公钥，私钥仅在创建时返回一次且无法恢复，请妥善保存。创建新密钥后，该环境下原有未设置过期时间的旧密钥将被自动标记为 2 小时后过期
    */
-  Id?: string
+  PrivateKey?: string
   /**
-   * 域名
+   * 密钥对的唯一标识符（UUID 格式），由系统自动生成。在自定义登录时，需将该 KeyID 拼接到 ProviderToken 参数中（格式：{KeyID}/{algorithm}/{signedJWT}），服务端通过 KeyID 查找对应的公钥以验证签名
    */
-  Domain?: string
+  KeyID?: string
   /**
-   * 域名类型。包含以下取值：
-<li>SYSTEM</li>
-<li>USER</li>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Type?: string
-  /**
-   * 状态。包含以下取值：
-<li>ENABLE</li>
-<li>DISABLE</li>
-   */
-  Status?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 更新时间
-   */
-  UpdateTime?: string
+  RequestId?: string
 }
 
 /**
@@ -4472,6 +4762,20 @@ export interface ProviderResponseParametersMap {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Groups?: string
+}
+
+/**
+ * DeleteUsers返回参数结构体
+ */
+export interface DeleteUsersResponse {
+  /**
+   * 删除用户结果
+   */
+  Data?: DeleteUsersResp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4625,30 +4929,29 @@ export interface PermissionInfo {
 }
 
 /**
- * 分页信息
+ * DescribeManagedAIModelList返回参数结构体
  */
-export interface Pager {
+export interface DescribeManagedAIModelListResponse {
   /**
-   * 分页偏移量
+   * <p>托管模型列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset?: number
+  ManagedAIModelList?: Array<ManagedAIModelGroup>
   /**
-   * 每页返回记录数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit?: number
-  /**
-   * 文档集合总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Total?: number
+  RequestId?: string
 }
 
 /**
- * DeleteVmInstance返回参数结构体
+ * DescribeAIModels返回参数结构体
  */
-export interface DeleteVmInstanceResponse {
+export interface DescribeAIModelsResponse {
+  /**
+   * 模型列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AIModels?: Array<AIModelGroup>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4932,6 +5235,24 @@ export interface DescribeTableResponse {
 }
 
 /**
+ * ExecutePGSql请求参数结构体
+ */
+export interface ExecutePGSqlRequest {
+  /**
+   * <p>云开发环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>要执行的SQL语句</p>
+   */
+  Sql: string
+  /**
+   * <p>指定 role 执行 SQL</p>
+   */
+  Role?: string
+}
+
+/**
  * DescribeDatabaseACL返回参数结构体
  */
 export interface DescribeDatabaseACLResponse {
@@ -5030,53 +5351,35 @@ export interface ModifyEnvRequest {
 }
 
 /**
- * ModifyUser请求参数结构体
+ * DescribeManagedAIModelList请求参数结构体
  */
-export interface ModifyUserRequest {
+export interface DescribeManagedAIModelListRequest {
   /**
-   * 环境id
+   * <p>环境id</p>
    */
   EnvId: string
+}
+
+/**
+ * AI模型密钥信息
+ */
+export interface AIModelSecret {
   /**
-   * 用户Id, 不做修改
+   * 密钥来源
    */
-  Uid: string
+  SecretSource?: string
   /**
-   * 用户名，用户名规则：1. 长度1-64字符 2. 只能包含大小写英文字母、数字和符号 . _ - 3. 只能以字母或数字开头 4. 不能重复，不传该字段或传空字符不修改
+   * 密钥ID, 和SecretKey一一对应
    */
-  Name?: string
+  SecretId?: string
   /**
-   * 用户类型：internalUser-内部用户、externalUser-外部用户，不传该字段或传空字符串不修改。
+   * 密钥Key, 和SecretId一一对应
    */
-  Type?: string
+  SecretKey?: string
   /**
-   * 密码，传入Uid时密码可不传。密码规则：1. 长度8-32字符（推荐12位以上） 2. 不能以特殊字符开头 3. 至少包含以下四项中的三项：小写字母a-z、大写字母A-Z、数字0-9、特殊字符()!@#$%^&*\|?><_-，不传该字段或传空字符串不修改
+   * ApiKey,SecretKey和ApiKey二选一
    */
-  Password?: string
-  /**
-   * 用户状态：ACTIVE（激活）、BLOCKED（冻结），默认冻结，不传该字段或传空字符串不修改
-   */
-  UserStatus?: string
-  /**
-   * 用户昵称，长度2-64字符，不传该字段不修改，传空字符修改为空
-   */
-  NickName?: string
-  /**
-   * 手机号，11位数字，不传该字段不修改，传空字符串修改为空
-   */
-  Phone?: string
-  /**
-   * 邮箱地址，不传该字段不修改，传空字符修改为空
-   */
-  Email?: string
-  /**
-   * 头像链接，可访问的公网URL，不传该字段不修改，传空字符串修改为空
-   */
-  AvatarUrl?: string
-  /**
-   * 用户描述，最多200字符，不传该字段不修改，传空字符修改为空
-   */
-  Description?: string
+  ApiKey?: string
 }
 
 /**
@@ -5198,6 +5501,54 @@ export interface CreateUserResp {
    * 用户ID
    */
   Uid?: string
+}
+
+/**
+ * AI 模型信息
+ */
+export interface AIModelGroup {
+  /**
+   * <p>模型分组</p><p>枚举值：</p><ul><li>hunyuan-exp： 内置 hunyuan 分组，Models 中包含混元生文模型</li><li>hunyuan-image： 内置 hunyuan 分组，Models 中包含混元生图模型</li><li>deepseek： 内置 deepseek 分组，Models 中包含Deepseek生文模型</li><li>cloudbase： 内置 cloudbase 分组，Models 中包含云开发提供的模型，支持的所有模型可从 DescribeManagedAIModelList 获取</li><li>custom-xxxx： 自定义模型分组，Models 中包含用户自行配置的模型</li></ul>
+   */
+  GroupName?: string
+  /**
+   * <p>模型列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Models?: Array<AIModel>
+  /**
+   * <p>模型类型</p><p>枚举值：</p><ul><li>builtin： 内置模型分组类别</li><li>custom： 用户自定义模型分组类别</li></ul>
+   */
+  Type?: string
+  /**
+   * <p>原始模型类型</p><p>枚举值：</p><ul><li>builtin： 内置模型类型</li><li>custom： 用户自定义模型类型</li></ul>
+   */
+  OriginType?: string
+  /**
+   * <p>备注</p>
+   */
+  Remark?: string
+  /**
+   * <p>模型地址</p>
+   */
+  BaseUrl?: string
+  /**
+   * <p>模型状态, 1: 开启, 2: 关闭</p>
+   */
+  Status?: number
+  /**
+   * <p>模型密钥</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Secret?: AIModelSecret
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
 }
 
 /**

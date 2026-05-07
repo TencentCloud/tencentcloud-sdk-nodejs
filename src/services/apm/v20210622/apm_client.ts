@@ -112,9 +112,11 @@ import {
   ApmAssociation,
   Resource,
   Selectors,
+  ModifyApmServiceResponse,
   ModifyApmApplicationConfigRequest,
   ModifyGeneralApmApplicationConfigResponse,
   CVMMeta,
+  ModifyApmServiceRequest,
   SpanReference,
   SpanProcess,
   GeneralFilter,
@@ -158,6 +160,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGeneralSpanListResponse) => void
   ): Promise<DescribeGeneralSpanListResponse> {
     return this.request("DescribeGeneralSpanList", req, cb)
+  }
+
+  /**
+   * 修改apm应用信息
+   */
+  async ModifyApmService(
+    req: ModifyApmServiceRequest,
+    cb?: (error: string, rep: ModifyApmServiceResponse) => void
+  ): Promise<ModifyApmServiceResponse> {
+    return this.request("ModifyApmService", req, cb)
   }
 
   /**

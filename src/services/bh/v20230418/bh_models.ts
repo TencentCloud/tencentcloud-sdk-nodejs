@@ -280,13 +280,13 @@ export interface DeleteCmdTemplatesResponse {
 }
 
 /**
- * DeleteDevices返回参数结构体
+ * DeleteUserDirectory请求参数结构体
  */
-export interface DeleteDevicesResponse {
+export interface DeleteUserDirectoryRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 目录id集合
    */
-  RequestId?: string
+  IdSet: Array<number | bigint>
 }
 
 /**
@@ -1197,13 +1197,13 @@ export interface CreateUserDirectoryRequest {
 }
 
 /**
- * SetLDAPSyncFlag返回参数结构体
+ * EnableExternalAccess请求参数结构体
  */
-export interface SetLDAPSyncFlagResponse {
+export interface EnableExternalAccessRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 堡垒机id
    */
-  RequestId?: string
+  ResourceId: string
 }
 
 /**
@@ -1599,13 +1599,21 @@ export interface SyncUserToIOAResponse {
 }
 
 /**
- * DeleteUserDirectory请求参数结构体
+ * BindDeviceAccountKubeconfig请求参数结构体
  */
-export interface DeleteUserDirectoryRequest {
+export interface BindDeviceAccountKubeconfigRequest {
   /**
-   * 目录id集合
+   * 容器账号Id
    */
-  IdSet: Array<number | bigint>
+  Id: number
+  /**
+   * 容器账号凭据
+   */
+  Kubeconfig: string
+  /**
+   * 托管维度。1-集群
+   */
+  ManageDimension?: number
 }
 
 /**
@@ -1842,6 +1850,28 @@ export interface ModifyAccessWhiteListAutoStatusRequest {
    * true：放开自动添加IP；false：不放开自动添加IP
    */
   AllowAuto: boolean
+}
+
+/**
+ * ioa用户源信息
+ */
+export interface SourceType {
+  /**
+   * 账号组来源
+   */
+  Source?: number
+  /**
+   * 账号组来源类型
+   */
+  Type?: string
+  /**
+   * 账号组来源名称
+   */
+  Name?: string
+  /**
+   * 区分ioa原来和iam-mini
+   */
+  Target?: string
 }
 
 /**
@@ -4106,25 +4136,13 @@ export interface DescribeAccountGroupsResponse {
 }
 
 /**
- * ioa用户源信息
+ * BindDeviceAccountKubeconfig返回参数结构体
  */
-export interface SourceType {
+export interface BindDeviceAccountKubeconfigResponse {
   /**
-   * 账号组来源
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Source?: number
-  /**
-   * 账号组来源类型
-   */
-  Type?: string
-  /**
-   * 账号组来源名称
-   */
-  Name?: string
-  /**
-   * 区分ioa原来和iam-mini
-   */
-  Target?: string
+  RequestId?: string
 }
 
 /**
@@ -4976,6 +4994,16 @@ export interface DeleteCmdTemplatesRequest {
 }
 
 /**
+ * SetLDAPSyncFlag返回参数结构体
+ */
+export interface SetLDAPSyncFlagResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 大区环境网络配置
  */
 export interface EnvInternetAccessSetting {
@@ -5553,13 +5581,13 @@ export interface DescribeAclsRequest {
 }
 
 /**
- * EnableExternalAccess请求参数结构体
+ * DeleteDevices返回参数结构体
  */
-export interface EnableExternalAccessRequest {
+export interface DeleteDevicesResponse {
   /**
-   * 堡垒机id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ResourceId: string
+  RequestId?: string
 }
 
 /**

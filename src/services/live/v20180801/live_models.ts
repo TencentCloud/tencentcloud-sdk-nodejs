@@ -82,10 +82,165 @@ export interface AvatarImageInfo {
  */
 export interface DescribeOriginStreamInfoResponse {
   /**
-   * 缓存格式规则。 
-0：默认格式。
-1：云直播源站格式。
-当 OriginStreamPlayType 为 customization 时候生效。
+   * <p>配置状态信息：0 配置中，1 成功，2 关闭中，3 关闭成功。</p>
+   */
+  Status?: number
+  /**
+   * <p>播放类型。</p>
+   */
+  CdnStreamPlayType?: Array<string>
+  /**
+   * <p>原站配置类型：1 直播原站。<br>2 streamPackage。</p>
+   */
+  OriginStreamType?: number
+  /**
+   * <p>原站播放类型。</p>
+   */
+  OriginStreamPlayType?: string
+  /**
+   * <p>原站地址类型：1 ip，2 域名。</p>
+   */
+  OriginAddressType?: number
+  /**
+   * <p>原站地址信息，每项用分号分割域名（ip）、端口信息。<br>端口为空也要带上分号，表示取默认端口。</p>
+   */
+  OriginAddress?: Array<string>
+  /**
+   * <p>超时时间，单位 ms。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginTimeout?: number
+  /**
+   * <p>重试次数，单位 次。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginRetryTimes?: number
+  /**
+   * <p>时间戳修正，可取值：on、off。<br>当原站播放协议为 rtmp、flv 时，传递该字段才会生效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeJitter?: string
+  /**
+   * <p>分片数，单位 个。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HlsPlayFragmentCount?: number
+  /**
+   * <p>分片时长，单位 ms。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HlsPlayFragmentDuration?: number
+  /**
+   * <p>是否透传 http 头信息，可取值：on、off。<br>当原站播放协议为 hls 时，传递该字段才会生效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PassThroughHttpHeader?: string
+  /**
+   * <p>是否透传相应，可取值：on、off。<br>当原站播放协议为 hls 时，传递该字段才会生效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PassThroughResponse?: string
+  /**
+   * <p>是否透传参数，可取值：on、off。<br>当原站播放协议为 hls 时，传递该字段才会生效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PassThroughParam?: string
+  /**
+   * <p>原站 host。<br>当原站播放协议为 hls 时，传递该字段才会生效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginHost?: string
+  /**
+   * <p>索引缓存，单位 ms。<br>当原站播放协议为 hls 时，传递该字段才会生效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexerCache?: number
+  /**
+   * <p>分片缓存，单位 ms。<br>当原站播放协议为 hls 时，传递该字段才会生效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FragmentCache?: number
+  /**
+   * <p>域名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DomainName?: string
+  /**
+   * <p>https 回源，可取值：on、off。<br>当原站播放协议为flv、hls时，传递此字段才会生效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsingHttps?: string
+  /**
+   * <p>是否遵循原站，可取值：on、off。<br>当原站播放协议为hls时，此字段才会生效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CacheFollowOrigin?: string
+  /**
+   * <p>状态码缓存，数组元素格式：<br>cacheKey:interval<br>cacheKey 可取值：cache_400_sec、cache_403_sec、cache_404_sec、cache_405_sec、cache_500_sec、cache_503_sec、cache_504_sec。<br>interval 单位 ms。<br>当原站播放协议为hls时，此字段才会生效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CacheStatusCode?: Array<string>
+  /**
+   * <p>url改写， 格式为： url1&lt;|&gt;url2; 其中，&lt;|&gt; 为分隔符。<br>url1、url2 长度限制100，不可包含特殊字符。<br>当原站播放协议为hls时，此字段才会生效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UrlReplaceRules?: Array<string>
+  /**
+   * <p>是否 options 支持，可取值：on、off。<br>当原站播放协议为hls时，此字段才会生效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OptionsRequest?: string
+  /**
+   * <p>是否 follow 301/302，可取值：on、off。<br>当原站播放协议为hls时，此字段才会生效。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FollowRedirect?: string
+  /**
+   * <p>源站类型 OriginStreamType 为 2 时，该字段有效。 代表源站地址 OriginAddress 对应的地区 region。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StreamPackageRegion?: Array<string>
+  /**
+   * <p>客户名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomerName?: string
+  /**
+   * <p>当 OriginStreamPlayType 为 hls 时生效，设置索引缓存保留指定参数列表，最多支持 30 组，每个参数小于等于 20 字符。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexerKeepParam?: Array<string>
+  /**
+   * <p>当 OriginStreamPlayType 为 hls 时生效，设置分片缓存保留指定参数列表，最多支持 30 组，每个参数小于等于 20 字符。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FragmentKeepParam?: Array<string>
+  /**
+   * <p>当 OriginStreamType = 2 时有效，表示 mediapackage 具体类型：<br>media_package =&gt; 仅配置普通频道。<br>media_package_pure_ad =&gt; 仅配置广告。<br>media_package_mix_ad =&gt; 同时配置普通频道和广告。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MediaPackageType?: string
+  /**
+   * <p>当 OriginStreamType = 2 且 MediaPackageType = media_package 时有效，表示 mediapackage 频道类型，可组合如下值：normal（频道）、ssai（广告）、linear_assembly（线性组装）。</p>
+   */
+  MediaPackageChannelTypes?: Array<string>
+  /**
+   * <p>当 OriginStreamPlayType 为 hls 时生效，设置索引自定义 header，每一组参数、取值用空格分开。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IndexerHeader?: Array<string>
+  /**
+   * <p>当 OriginStreamPlayType 为 hls 时生效，设置分片自定义 header，每一组参数、取值用空格分开。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FragmentHeader?: Array<string>
+  /**
+   * <p>自定义规则列表。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomizationRules?: Array<OriginStreamCustomizationRule>
+  /**
+   * <p>缓存格式规则。<br>0：默认格式。<br>1：云直播源站格式。<br>当 OriginStreamPlayType 为 customization 时候生效。</p>
    */
   CacheFormatRule?: number
   /**
@@ -3491,7 +3646,136 @@ export interface DescribeCasterDisplayInfoRequest {
 /**
  * ModifyOriginStreamInfo请求参数结构体
  */
-export type ModifyOriginStreamInfoRequest = null
+export interface ModifyOriginStreamInfoRequest {
+  /**
+   * <p>域名。</p>
+   */
+  DomainName: string
+  /**
+   * <p>源站播放协议，可取值：rtmp、flv、hls、dash、hls|dash、customization。</p>
+   */
+  OriginStreamPlayType: string
+  /**
+   * <p>播放协议，可取值：rtmp、flv、hls、dash、hls|dash、customization。<br>自定义回源协议填写 customization。</p>
+   */
+  CdnStreamPlayType: Array<string>
+  /**
+   * <p>原站类型：<br>1 =&gt; 直播原站。<br>2 =&gt; mediaPackage。</p>
+   */
+  OriginStreamType: number
+  /**
+   * <p>原站地址信息，每项用冒号分割域名（ip）、端口信息。<br>端口为空也要带上分号，表示取默认端口。<br>自定义回源协议填写 customization。</p>
+   */
+  OriginAddress: Array<string>
+  /**
+   * <p>原站地址类型：<br>1 =&gt; IP 类型。<br>2 =&gt; 域名类型。</p>
+   */
+  OriginAddressType: number
+  /**
+   * <p>自定义名称</p>
+   */
+  CustomerName?: string
+  /**
+   * <p>原站 host。<br>当原站播放协议为 hls 时，传递该字段才会生效。</p>
+   */
+  OriginHost?: string
+  /**
+   * <p>超时时间，单位 ms，取值范围：1 ～ 60000，默认值：10000。</p>
+   */
+  OriginTimeout?: number
+  /**
+   * <p>重试次数，单位 次，取值范围：1 ～ 10，默认值：10。</p>
+   */
+  OriginRetryTimes?: number
+  /**
+   * <p>是否透传 http 头信息，可取值：on、off。<br>当原站播放协议为 hls 时，传递该字段才会生效。</p>
+   */
+  PassThroughHttpHeader?: string
+  /**
+   * <p>是否透传相应，可取值：on、off。<br>当原站播放协议为 hls 时，传递该字段才会生效。</p>
+   */
+  PassThroughResponse?: string
+  /**
+   * <p>是否透传参数，可取值：on、off。<br>当原站播放协议为 hls 时，传递该字段才会生效。</p>
+   */
+  PassThroughParam?: string
+  /**
+   * <p>索引缓存，单位 ms，取值范围：1 ～ 60000，默认值：10000。<br>当原站播放协议为 hls 时，传递该字段才会生效。</p>
+   */
+  IndexerCache?: number
+  /**
+   * <p>分片缓存，单位 ms，取值范围：1 ～ 60000，默认值：10000。<br>当原站播放协议为 hls 时，传递该字段才会生效。</p>
+   */
+  FragmentCache?: number
+  /**
+   * <p>分片数，单位 个，取值范围：1 ～ 10，默认值：3。</p>
+   */
+  HlsPlayFragmentCount?: number
+  /**
+   * <p>分片时长，单位 ms，取值范围：1 ～ 10000，默认值：3000。</p>
+   */
+  HlsPlayFragmentDuration?: number
+  /**
+   * <p>时间戳修正，可取值：on、off，默认值：off。<br>当原站播放协议为 rtmp、flv 时，传递该字段才会生效。</p>
+   */
+  TimeJitter?: string
+  /**
+   * <p>https 回源，可取值：on、off，默认值：off。<br>当原站播放协议为flv、hls时，传递此字段才会生效。</p>
+   */
+  UsingHttps?: string
+  /**
+   * <p>遵循原站，可取值：on、off，默认值：off。<br>当原站播放协议为hls时，传递此字段才会生效。</p>
+   */
+  CacheFollowOrigin?: string
+  /**
+   * <p>状态码缓存，数组元素格式：<br>cacheKey:interval<br>cacheKey 可取值：cache_400_sec、cache_403_sec、cache_404_sec、cache_405_sec、cache_500_sec、cache_503_sec、cache_504_sec。<br>interval 单位 ms。<br>当原站播放协议为hls时，传递此字段才会生效。</p>
+   */
+  CacheStatusCode?: Array<string>
+  /**
+   * <p>url改写， 格式为： url1&lt;|&gt;url2; 其中，&lt;|&gt; 为分隔符。<br>url1、url2 长度限制100，不可包含特殊字符。<br>当原站播放协议为hls时，传递此字段才会生效。</p>
+   */
+  UrlReplaceRules?: Array<string>
+  /**
+   * <p>options 支持，可取值：on、off，默认值：off。<br>当原站播放协议为hls时，传递此字段才会生效。</p>
+   */
+  OptionsRequest?: string
+  /**
+   * <p>follow 301/302，可取值：on、off，默认值：off。<br>当原站播放协议为hls时，传递此字段才会生效。</p>
+   */
+  FollowRedirect?: string
+  /**
+   * <p>当 OriginStreamPlayType 为 hls 时生效，设置索引缓存保留指定参数列表，最多支持 30 组，每个参数小于等于 20 字符。</p>
+   */
+  IndexerKeepParam?: Array<string>
+  /**
+   * <p>当 OriginStreamPlayType 为 hls 时生效，设置分片缓存保留指定参数列表，最多支持 30 组，每个参数小于等于 20 字符。</p>
+   */
+  FragmentKeepParam?: Array<string>
+  /**
+   * <p>当 OriginStreamType = 2 时有效，表示 mediapackage 具体类型：<br>media_package =&gt; 仅配置普通频道。<br>media_package_pure_ad =&gt; 仅配置广告。<br>media_package_mix_ad =&gt; 同时配置普通频道和广告。<br>注意：配置时候，优先使用 media_package。和 MediaPackageChannelTypes 字段配合使用。</p>
+   */
+  MediaPackageType?: string
+  /**
+   * <p>当 OriginStreamType = 2 且 MediaPackageType = media_package 时有效，表示 mediapackage 频道类型，可组合如下值：normal（频道）、ssai（广告）、linear_assembly（线性组装）。</p>
+   */
+  MediaPackageChannelTypes?: Array<string>
+  /**
+   * <p>当 OriginStreamPlayType 为 hls 时生效，设置索引自定义 header，最大支持 10 组，每一组参数、取值用空格分开，允许字符规则如下：<br>头部参数：由大小写字母、数字及-组成，长度支持1 ～100个字符，黑名单：Host、Connection、Content-Length、Range。<br>头部取值：不支持中文、不支持以$开头，长度支持1 ～ 100个字符，不允许有空格。</p>
+   */
+  IndexerHeader?: Array<string>
+  /**
+   * <p>当 OriginStreamPlayType 为 hls 时生效，设置分片自定义 header，最大支持 10 组，每一组参数、取值用空格分开，允许字符规则如下：<br>头部参数：由大小写字母、数字及-组成，长度支持1 ～100个字符，黑名单：Host、Connection、Content-Length、Range。<br>头部取值：不支持中文、不支持以$开头，长度支持1 ～ 100个字符，不允许有空格。</p>
+   */
+  FragmentHeader?: Array<string>
+  /**
+   * <p>自定义回源规则列表，当 OriginStreamPlayType 为 customization 时候生效。</p>
+   */
+  CustomizationRules?: Array<OriginStreamCustomizationRule>
+  /**
+   * <p>缓存格式规则。<br>0：默认格式。<br>1：云直播源站格式。<br>当 OriginStreamPlayType 为 customization 时候生效。</p>
+   */
+  CacheFormatRule?: number
+}
 
 /**
  * 推流鉴权key信息。
@@ -11211,7 +11495,12 @@ export type DescribeLiveTimeShiftRulesRequest = null
 /**
  * DescribeOriginStreamInfo请求参数结构体
  */
-export type DescribeOriginStreamInfoRequest = null
+export interface DescribeOriginStreamInfoRequest {
+  /**
+   * <p>域名。</p>
+   */
+  DomainName: string
+}
 
 /**
  * DescribeLiveTimeShiftBillInfoList请求参数结构体
@@ -11229,6 +11518,44 @@ export interface DescribeLiveTimeShiftBillInfoListRequest {
    * 推流域名列表，若不传递此参数，则表示查询总体数据。
    */
   PushDomains?: Array<string>
+}
+
+/**
+ * 录制任务
+ */
+export interface RecordTask {
+  /**
+   * 录制任务ID。
+   */
+  TaskId?: string
+  /**
+   * 推流域名。
+   */
+  DomainName?: string
+  /**
+   * 推流路径。
+   */
+  AppName?: string
+  /**
+   * 流名称。
+   */
+  StreamName?: string
+  /**
+   * 任务开始时间，Unix时间戳。
+   */
+  StartTime?: number
+  /**
+   * 任务结束时间，Unix时间戳。
+   */
+  EndTime?: number
+  /**
+   * 录制模板ID。
+   */
+  TemplateId?: number
+  /**
+   * 调用 StopRecordTask 停止任务时间，Unix时间戳。值为0表示未曾调用接口停止任务。
+   */
+  Stopped?: number
 }
 
 /**
@@ -13116,41 +13443,77 @@ export interface DeleteCasterOutputInfoRequest {
 }
 
 /**
- * 录制任务
+ * 播放域名回源自定义协议规则。
  */
-export interface RecordTask {
+export interface OriginStreamCustomizationRule {
   /**
-   * 录制任务ID。
+   * <p>匹配规则，可选项如下：<br>.m3u8、.mpd、.ts、.mp4、.m4s、.m4a、.m4i、.m4v、.m4f、.aac、.webm。</p>
    */
-  TaskId?: string
+  MatchRule: string
   /**
-   * 推流域名。
+   * <p>原站地址类型： 1 =&gt; IP 类型。 2 =&gt; 域名类型。</p>
    */
-  DomainName?: string
+  OriginAddressType: number
   /**
-   * 推流路径。
+   * <p>原站 host。</p>
    */
-  AppName?: string
+  OriginHost: string
   /**
-   * 流名称。
+   * <p>原站地址信息，每项用冒号分割域名（ip）、端口信息。 端口为空也要带上分号，表示取默认端口。</p>
    */
-  StreamName?: string
+  OriginAddress: Array<string>
   /**
-   * 任务开始时间，Unix时间戳。
+   * <p>是否透传 http 头信息，可取值：on、off。</p>
    */
-  StartTime?: number
+  PassThroughHttpHeader: string
   /**
-   * 任务结束时间，Unix时间戳。
+   * <p>是否透传相应，可取值：on、off。</p>
    */
-  EndTime?: number
+  PassThroughResponse: string
   /**
-   * 录制模板ID。
+   * <p>是否透传参数，可取值：on、off。</p>
    */
-  TemplateId?: number
+  PassThroughParam: string
   /**
-   * 调用 StopRecordTask 停止任务时间，Unix时间戳。值为0表示未曾调用接口停止任务。
+   * <p>url改写， 格式为： url1&lt;|&gt;url2; 其中，&lt;|&gt; 为分隔符。 url1、url2 长度限制100，不可包含特殊字符。</p>
    */
-  Stopped?: number
+  UrlReplaceRules: Array<string>
+  /**
+   * <p>options 支持，可取值：on、off，默认值：off。</p>
+   */
+  OptionsRequest: string
+  /**
+   * <p>回源超时时间，单位 ms，取值范围：1 ～ 60000，默认值：10000。</p>
+   */
+  OriginTimeout: number
+  /**
+   * <p>重试次数，单位 次，取值范围：1 ～ 10。</p>
+   */
+  OriginRetryTimes: number
+  /**
+   * <p>状态码缓存，数组元素格式： cacheKey:interval cacheKey 可取值：cache_400_sec、cache_403_sec、cache_404_sec、cache_405_sec、cache_500_sec、cache_503_sec、cache_504_sec。 interval 单位 s。</p>
+   */
+  CacheStatusCode: Array<string>
+  /**
+   * <p>缓存时间，单位 s，取值范围：0 ～ 31536000。</p>
+   */
+  Cache: number
+  /**
+   * <p>缓存键。</p>
+   */
+  KeepParam: Array<string>
+  /**
+   * <p>设置索引自定义 header，最大支持 10 组，每一组参数、取值用空格分开，允许字符规则如下： 头部参数：由大小写字母、数字及-组成，长度支持1 ～100个字符，黑名单：Host、Connection、Content-Length、Range。 头部取值：不支持中文、不支持以$开头，长度支持1 ～ 100个字符，不允许有空格。</p>
+   */
+  HttpHeader: Array<string>
+  /**
+   * <p>自定义回源缓存随源配置。<br>0：不开启。<br>1：开启。</p>
+   */
+  CustomizationCacheFollowOrigin?: number
+  /**
+   * <p>缓存 Http 头部键。</p>
+   */
+  KeepHttpHeader?: Array<string>
 }
 
 /**

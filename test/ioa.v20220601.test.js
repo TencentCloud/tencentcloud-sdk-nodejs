@@ -308,6 +308,16 @@ it("ioa.v20220601.DescribeLocalAccounts", async function () {
     }
 })
 
+it("ioa.v20220601.ModifyBusinessResource", async function () {
+    try {
+       const data = await client.ModifyBusinessResource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.DescribeDLPEdgeNodeGroups", async function () {
     try {
        const data = await client.DescribeDLPEdgeNodeGroups({})

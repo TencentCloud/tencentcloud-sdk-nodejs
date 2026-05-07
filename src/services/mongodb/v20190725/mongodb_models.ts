@@ -1027,6 +1027,20 @@ export interface SetAccountUserPrivilegeResponse {
 }
 
 /**
+ * mongodb外网服务节点信息。
+ */
+export interface WanServiceNodeList {
+  /**
+   * 实例节点的vip及端口信息。
+   */
+  VipVport?: string
+  /**
+   * CLB监听器监听端口，取值范围1~65535。
+   */
+  ListenerPort?: string
+}
+
+/**
  * 按 Key 闪回的数据库及集合信息
  */
 export interface FlashbackDatabase {
@@ -2667,6 +2681,24 @@ export interface SecurityGroup {
    * 安全组备注信息。
    */
   SecurityGroupRemark?: string
+}
+
+/**
+ * EnableWanService请求参数结构体
+ */
+export interface EnableWanServiceRequest {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+  /**
+   * 负载均衡ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 节点及监听端口信息。
+   */
+  NodeList: Array<WanServiceNodeList>
 }
 
 /**
@@ -4726,6 +4758,23 @@ export interface RestartNodesRequest {
 }
 
 /**
+ * 描述了实例的计费模式
+ */
+export interface InstanceChargePrepaid {
+  /**
+   * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。默认为1。
+   */
+  Period?: number
+  /**
+   * 自动续费标识。取值范围：
+- NOTIFY_AND_AUTO_RENEW：通知过期且自动续费。在账户余额充足的情况下，实例到期后将按月自动续费。
+- NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费。默认为NOTIFY_AND_MANUAL_RENEW。
+- DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费。
+   */
+  RenewFlag?: string
+}
+
+/**
  * 修改mongoDB实例，请求参数
  */
 export interface ModifyMongoDBParamType {
@@ -5119,20 +5168,17 @@ export interface RestoreDBInstanceRequest {
 }
 
 /**
- * 描述了实例的计费模式
+ * EnableWanService返回参数结构体
  */
-export interface InstanceChargePrepaid {
+export interface EnableWanServiceResponse {
   /**
-   * 购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。默认为1。
+   * 异步任务ID。
    */
-  Period?: number
+  FlowId?: number
   /**
-   * 自动续费标识。取值范围：
-- NOTIFY_AND_AUTO_RENEW：通知过期且自动续费。在账户余额充足的情况下，实例到期后将按月自动续费。
-- NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费。默认为NOTIFY_AND_MANUAL_RENEW。
-- DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RenewFlag?: string
+  RequestId?: string
 }
 
 /**

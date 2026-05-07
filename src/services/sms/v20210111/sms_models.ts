@@ -638,16 +638,21 @@ export interface DeleteTemplateStatus {
  */
 export interface DescribeSmsSignListRequest {
   /**
-   * 签名 ID 数组。
-注：默认数组最大长度100。
-   */
-  SignIdSet: Array<number | bigint>
-  /**
-   * 是否国际/港澳台短信：
-0：表示国内短信。
-1：表示国际/港澳台短信。
+   * <p>是否国际/港澳台短信：<br>0：表示国内短信。<br>1：表示国际/港澳台短信。</p>
    */
   International: number
+  /**
+   * <p>签名 ID 数组。<br>注：默认数组最大长度100。</p>
+   */
+  SignIdSet?: Array<number | bigint>
+  /**
+   * <p>最大上限，最多100。注：默认为10，SignIdSet 为空时启用。</p>
+   */
+  Limit?: number
+  /**
+   * <p>偏移量。注：默认为0，SignIdSet 为空时启用。</p>
+   */
+  Offset?: number
 }
 
 /**
@@ -790,7 +795,7 @@ export interface PullSmsSendStatus {
  */
 export interface DescribeSmsSignListResponse {
   /**
-   * 获取签名信息响应
+   * <p>获取签名信息响应</p>
    */
   DescribeSignListStatusSet?: Array<DescribeSignListStatus>
   /**
