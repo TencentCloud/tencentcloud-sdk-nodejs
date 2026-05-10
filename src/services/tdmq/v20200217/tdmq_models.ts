@@ -2263,6 +2263,47 @@ export interface DeleteRocketMQEnvironmentRolesResponse {
 }
 
 /**
+ * rocketmq router mns 目标信息
+ */
+export interface RouterMessageServiceTarget {
+  /**
+   * <p>access key</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessKey: string
+  /**
+   * <p>mns接入点，需要和router内网联通，一般是公网接入点</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Endpoint: string
+  /**
+   * <p>secret key</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretKey: string
+  /**
+   * <p>mns queue名字。可以在https://mns.console.aliyun.com/region/cn-shenzhen/queues 看到</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Queue?: string
+  /**
+   * <p>是否用base64编码发送mns消息。<br> ON：发送base64编码的消息体到mns</p><p>OFF：将原始消息体发送到mns</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SendWithBase64?: string
+  /**
+   * <p>发送mns的并发数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetProduceConcurrentThreadCount?: number
+  /**
+   * <p>topic名字。可以在https://mns.console.aliyun.com/region/cn-shenzhen/topics 看到</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Topic?: string
+}
+
+/**
  * DeleteCmqSubscribe请求参数结构体
  */
 export interface DeleteCmqSubscribeRequest {
@@ -2367,6 +2408,24 @@ export interface DescribeMsgRequest {
    * Pulsar 集群的ID
    */
   ClusterId?: string
+}
+
+/**
+ * CreateRocketMQRouterRule请求参数结构体
+ */
+export interface CreateRocketMQRouterRuleRequest {
+  /**
+   * <p>true: 立即启动任务<br>false: 创建任务后不立即启动，可以在控制台操作启动</p>
+   */
+  StartNow: boolean
+  /**
+   * <p>规则数据结构</p>
+   */
+  Rule: RocketMQRouterRuleInfo
+  /**
+   * <p>数据同步类型。<br>Topic：按照topic维度同步</p>
+   */
+  SyncType: string
 }
 
 /**
@@ -3907,6 +3966,52 @@ export interface DescribeCmqSubscriptionDetailRequest {
 }
 
 /**
+ * MQTT 目标集群信息
+ */
+export interface RouterTencentMQTTTarget {
+  /**
+   * <p>MQTT 集群ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId: string
+  /**
+   * <p>主题名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Topic: string
+  /**
+   * <p>地域</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceRegion: string
+  /**
+   * <p>用户名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName: string
+  /**
+   * <p>用户密码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * <p>消费者并发数，0 ～ 100</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetProduceConcurrentThreadCount?: number
+  /**
+   * <p>过滤时间，毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilterFromTimestampMs?: number
+  /**
+   * <p>MQTT集群接入点信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Endpoint?: string
+}
+
+/**
  * DescribeRocketMQCluster返回参数结构体
  */
 export interface DescribeRocketMQClusterResponse {
@@ -4917,6 +5022,52 @@ export interface DescribeMsgTraceRequest {
    * topic 名字
    */
   TopicName?: string
+}
+
+/**
+ * 待复制的 MQTT 源集群信息
+ */
+export interface RouterTencentMQTTSource {
+  /**
+   * <p>MQTT 集群ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId: string
+  /**
+   * <p>主题名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Topic: string
+  /**
+   * <p>地域</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceRegion: string
+  /**
+   * <p>用户名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName: string
+  /**
+   * <p>用户密码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * <p>消费者并发数，0 ～ 100</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceConsumeConcurrentThreadCount?: number
+  /**
+   * <p>过滤时间，毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilterFromTimestampMs?: number
+  /**
+   * <p>MQTT集群接入点信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Endpoint?: string
 }
 
 /**
@@ -6685,6 +6836,62 @@ export interface DescribeRocketMQTopicStatsRequest {
 }
 
 /**
+ * rocketmq router的rocketmq源信息
+ */
+export interface RouterRocketMQSource {
+  /**
+   * <p>access key</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessKey: string
+  /**
+   * <p>过滤表达式, 参考：https://github.com/apache/rocketmq/blob/develop/common/src/main/java/org/apache/rocketmq/common/filter/ExpressionType.java</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilterExpression: string
+  /**
+   * <p>过滤时间，毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilterFromTimestampMs: number
+  /**
+   * <p>过滤类型，参考：https://github.com/apache/rocketmq/blob/develop/common/src/main/java/org/apache/rocketmq/common/filter/ExpressionType.java</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilterType: string
+  /**
+   * <p>消费者组名。会使用该消费者来消费消息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Group: string
+  /**
+   * <p>namesrv地址列表，也可以是云厂商提供的接入点信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NameServerAddressList: string
+  /**
+   * <p>secret key</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretKey: string
+  /**
+   * <p>topic名字</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Topic: string
+  /**
+   * <p>4.X的命名空间，没有使用则留空，5.X也留空。<br> naemspace 需要包含MQ_INST那部分. 比如：MQ_INST_rocketmxxx57d53rnn5_tiger_namespace</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
+  /**
+   * <p>消费者并发数，0 ～ 100</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceConsumeConcurrentThreadCount?: number
+}
+
+/**
  * SendRocketMQMessage返回参数结构体
  */
 export interface SendRocketMQMessageResponse {
@@ -7111,6 +7318,67 @@ export interface CreateRocketMQGroupV2Request {
 }
 
 /**
+ * rocketmq router腾讯云源
+ */
+export interface RouterTencentRocketMQSource {
+  /**
+   * <p>过滤表达式, 参考：https://github.com/apache/rocketmq/blob/develop/common/src/main/java/org/apache/rocketmq/common/filter/ExpressionType.java</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilterExpression: string
+  /**
+   * <p>过滤时间，毫秒时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilterFromTimestampMs: number
+  /**
+   * <p>过滤类型</p><p>枚举值：</p><ul><li>SQL92： 按SQL92表达式过滤</li><li>TAG： 按TAG表达式过滤</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FilterType: string
+  /**
+   * <p>topic名字</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Topic: string
+  /**
+   * <p>rocketmq实例id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId: string
+  /**
+   * <p>4.X的命名空间，没有使用则留空，5.X也留空。 naemspace 需要包含MQ_INST那部分. 比如：MQ_INST_rocketmqka57d53rnn5_tiger_namespace</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
+  /**
+   * <p>消费者并发数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceConsumeConcurrentThreadCount?: number
+  /**
+   * <p>源地域</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceRegion?: string
+  /**
+   * <p>选择TDMQ RocketMQ时，选择一个角色来完成数据同步</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoleName?: string
+  /**
+   * <p>选择腾讯云版RockeMQ类型后，RoleName对应的AssessKey值</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessKey?: string
+  /**
+   * <p>选择腾讯云版RockeMQ类型后，RoleName对应的SecretKey值</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretKey?: string
+}
+
+/**
  * DescribeRabbitMQExchanges返回参数结构体
  */
 export interface DescribeRabbitMQExchangesResponse {
@@ -7461,6 +7729,42 @@ export interface DescribeRabbitMQBindingsRequest {
    * 根据目标Exchange精准搜索过滤，和QueueName过滤不可同时设置
    */
   DestinationExchange?: string
+}
+
+/**
+ * rocketmq router任务的目标信息
+ */
+export interface RouterRocketMQTarget {
+  /**
+   * <p>access key</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessKey: string
+  /**
+   * <p>namesrv地址列表，也可以是云厂商提供的接入点信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NameServerAddressList: string
+  /**
+   * <p>secret key</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretKey: string
+  /**
+   * <p>topic名字</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Topic: string
+  /**
+   * <p>4.X的命名空间，没有使用则留空，5.X也留空。 naemspace 需要包含MQ_INST那部分. 比如：MQ_INST_rocketmqka57d53rnn5_tiger_namespace</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
+  /**
+   * <p>生产者并发数，可以不用填，可以在规则创建后修改</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetProduceConcurrentThreadCount?: number
 }
 
 /**
@@ -8522,6 +8826,46 @@ management：普通控制台用户，monitoring：管理型控制台用户，其
 }
 
 /**
+ * rocketmq router mns 源信息
+ */
+export interface RouterMessageServiceSource {
+  /**
+   * <p>access key</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessKey: string
+  /**
+   * <p>mns接入点。<br>需要和router内网联通，一般是公网接入点</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Endpoint: string
+  /**
+   * <p>mns queue名字。<br>可以在https://mns.console.aliyun.com/region/cn-shenzhen/queues 看到</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Queue: string
+  /**
+   * <p>secret key</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretKey: string
+  /**
+   * <p>是否自动解码mns body。<br>ON：自动解码，复制后的消息内容为解码后的明文。<br>OFF：不用解码，保持Mns消息体原始状态</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableDecodeBody?: string
+  /**
+   * <p>mns消费并发数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceConsumeConcurrentThreadCount?: number
+  /**
+   * <p>过滤时间戳，毫秒级时间戳</p>
+   */
+  FilterFromTimestampMs?: number
+}
+
+/**
  * DescribeRocketMQConsumeStats请求参数结构体
  */
 export interface DescribeRocketMQConsumeStatsRequest {
@@ -9192,6 +9536,52 @@ export interface DescribeRocketMQConsumeStatsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * rocketmq router腾讯云目标
+ */
+export interface RouterTencentRocketMQTarget {
+  /**
+   * <p>topic名字</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Topic: string
+  /**
+   * <p>rocketmq实例id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId: string
+  /**
+   * <p>4.X的命名空间，没有使用则留空，5.X也留空。 naemspace 需要包含MQ_INST那部分. 比如：MQ_INST_rocket2mq3ka57d53rnn5_tiger_namespace</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Namespace?: string
+  /**
+   * <p>消费者并发数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetProduceConcurrentThreadCount?: number
+  /**
+   * <p>目标region</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetRegion?: string
+  /**
+   * <p>选择TDMQ RocketMQ时，选择一个角色来完成数据同步</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoleName?: string
+  /**
+   * <p>选择腾讯云版RockeMQ类型后，RoleName对应的AssessKey值</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AccessKey?: string
+  /**
+   * <p>选择腾讯云版RockeMQ类型后，RoleName对应的SecretKey值</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretKey?: string
 }
 
 /**
@@ -11068,6 +11458,60 @@ export interface UnbindCmqDeadLetterRequest {
 }
 
 /**
+ * rocketmq router规则基本信息
+ */
+export interface RocketMQRouterRuleInfo {
+  /**
+   * <p>源类型。<br>OPEN_SOURCE_ROCKETMQ：开源rocketmq<br>ALI_ROCKETMQ：阿里云rocketmq<br>TENCENT_ROCKETMQ：腾讯云rocketmq<br>TENCENT_MQTT：腾讯云MQTT<br>ALI_MNS：阿里云mns</p>
+   */
+  SourceType: string
+  /**
+   * <p>目标类型。<br>枚举和SourceType字段一样</p>
+   */
+  TargetType: string
+  /**
+   * <p>规则备注，创建后任务后可以修改</p>
+   */
+  RemarkName?: string
+  /**
+   * <p>阿里云rocketmq源信息</p>
+   */
+  AliRocketMQSource?: RouterRocketMQSource
+  /**
+   * <p>阿里云rocketmq目标信息</p>
+   */
+  AliRocketMQTarget?: RouterRocketMQTarget
+  /**
+   * <p>阿里云mns源信息</p>
+   */
+  AliMessageServiceSource?: RouterMessageServiceSource
+  /**
+   * <p>阿里云mns目标信息</p>
+   */
+  AliMessageServiceTarget?: RouterMessageServiceTarget
+  /**
+   * <p>腾讯云rocketmq源信息</p>
+   */
+  TenRocketMQSource?: RouterTencentRocketMQSource
+  /**
+   * <p>腾讯云rocketmq目标信息</p>
+   */
+  TenRocketMQTarget?: RouterTencentRocketMQTarget
+  /**
+   * <p>任务别名</p>
+   */
+  AliasName?: string
+  /**
+   * <p>腾讯云 MQTT 源集群信息</p>
+   */
+  TenMQTTSource?: RouterTencentMQTTSource
+  /**
+   * <p>腾讯云 MQTT 目标集群信息</p>
+   */
+  TenMQTTTarget?: RouterTencentMQTTTarget
+}
+
+/**
  * DescribeRoles请求参数结构体
  */
 export interface DescribeRolesRequest {
@@ -11154,6 +11598,16 @@ export interface DescribeAllTenantsRequest {
    * 升序排列ASC，降序排列DESC
    */
   SortOrder?: string
+}
+
+/**
+ * CreateRocketMQRouterRule返回参数结构体
+ */
+export interface CreateRocketMQRouterRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

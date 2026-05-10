@@ -1047,6 +1047,10 @@ export interface ResourceGroupInWorkspace {
  */
 export interface DescribeDataSourcesRequest {
   /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+  /**
    * 过滤条件
    */
   Filters?: Array<Filter>
@@ -1076,6 +1080,10 @@ export interface DescribeDataSourcesRequest {
  * CreateDataSource请求参数结构体
  */
 export interface CreateDataSourceRequest {
+  /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
   /**
    * 数据源名称
    */
@@ -1219,6 +1227,10 @@ export interface DescribeMountInstancesRequest {
    */
   Type: string
   /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+  /**
    * 偏移量
    */
   Offset?: number
@@ -1242,6 +1254,10 @@ export interface ModifyNotebookTagsResponse {
  * UpdateDataSource请求参数结构体
  */
 export interface UpdateDataSourceRequest {
+  /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
   /**
    * 数据源ID
    */
@@ -1596,6 +1612,10 @@ export interface DescribeMountInstanceRequest {
    */
   Type: string
   /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+  /**
    * 存储实例ID
    */
   StorageId?: string
@@ -1777,6 +1797,10 @@ export interface UpdateMountLimitRequest {
    * 限制开关是否开启，只有开启时才有限制，默认关闭
    */
   LimitMount: boolean
+  /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
 }
 
 /**
@@ -3063,6 +3087,10 @@ export interface Option {
  * DescribeMountLimits请求参数结构体
  */
 export interface DescribeMountLimitsRequest {
+  /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
   /**
    * 过滤条件
    */
@@ -5043,6 +5071,10 @@ export interface CreateMountLimitRequest {
    */
   StorageId: string
   /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+  /**
    * 限制开关是否开启，只有开启时才有限制，默认关闭
    */
   LimitMount?: boolean
@@ -6422,6 +6454,10 @@ export interface AuthTokenLimit {
  */
 export interface DeleteDataSourceRequest {
   /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+  /**
    * 数据源ID
    */
   Id?: string
@@ -6431,6 +6467,10 @@ export interface DeleteDataSourceRequest {
  * DeleteMountLimit请求参数结构体
  */
 export interface DeleteMountLimitRequest {
+  /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
   /**
    * 数据源类型英文名
    */

@@ -60,7 +60,7 @@ export class Client extends AbstractClient {
    * 查询实例详情
    */
   async DescribeClusterDetail(
-    req?: DescribeClusterDetailRequest,
+    req: DescribeClusterDetailRequest,
     cb?: (error: string, rep: DescribeClusterDetailResponse) => void
   ): Promise<DescribeClusterDetailResponse> {
     return this.request("DescribeClusterDetail", req, cb)

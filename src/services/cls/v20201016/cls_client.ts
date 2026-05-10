@@ -33,6 +33,7 @@ import {
   CreateLogsetRequest,
   CreateScheduledSqlResponse,
   CreateConsoleSharingRequest,
+  RecordingRuleYamlTaskInfo,
   SearchLogResponse,
   DeleteMetricSubscribeResponse,
   DescribePartitionsRequest,
@@ -45,6 +46,7 @@ import {
   DescribeClusterBaseMetricConfigsRequest,
   DescribeConfigExtrasResponse,
   DeleteMetricSubscribeRequest,
+  AdvancedConsumerConfiguration,
   ScheduledSqlResouceInfo,
   ConditionInfo,
   EsInfo,
@@ -57,8 +59,10 @@ import {
   ModifyMachineGroupResponse,
   RuleInfo,
   DescribeConsumerPreviewRequest,
+  CreateRecordingRuleTaskResponse,
   DeleteDashboardResponse,
   LogItems,
+  DescribeRecordingRuleYamlTaskResponse,
   RuleKeyValueInfo,
   DeleteExportResponse,
   DescribeDashboardSubscribesRequest,
@@ -73,7 +77,7 @@ import {
   DeleteAlarmShieldResponse,
   TopicExtendInfo,
   CreateIndexRequest,
-  CreateConsoleResponse,
+  EsImportInfo,
   CreateTopicRequest,
   ModifyDataTransformRequest,
   CreateDlcDeliverRequest,
@@ -136,6 +140,7 @@ import {
   DeleteAlarmNoticeRequest,
   DescribeScheduledSqlInfoResponse,
   DescribeConsumersRequest,
+  ModifyRecordingRuleYamlTaskResponse,
   CreateMachineGroupRequest,
   DescribeExportsResponse,
   DeliverConfig,
@@ -233,7 +238,7 @@ import {
   ModifyMetricConfigResponse,
   DeleteSearchViewRequest,
   DescribeConsumerResponse,
-  DescribeNoticeContentsResponse,
+  EstimateRebuildIndexTaskRequest,
   EsTimeInfo,
   DescribeClusterBaseMetricConfigsResponse,
   ModifyKafkaRechargeRequest,
@@ -254,6 +259,7 @@ import {
   DescribeSplunkDeliversRequest,
   DeleteScheduledSqlRequest,
   ModifyKafkaConsumerRequest,
+  ModifyRecordingRuleYamlTaskRequest,
   DescribeConsumerGroupsResponse,
   NoticeContent,
   CreateDataTransformResponse,
@@ -277,6 +283,7 @@ import {
   NoticeReceiver,
   Ckafka,
   MultiCondition,
+  Filter,
   SearchViewInfo,
   ModifyLogsetResponse,
   CollectConfig,
@@ -285,6 +292,7 @@ import {
   ModifyMetricSubscribeResponse,
   DescribeIndexResponse,
   DescribeConsumerPreviewResponse,
+  DeleteRecordingRuleTaskResponse,
   DeleteMachineGroupInfoResponse,
   CheckRechargeKafkaServerResponse,
   InstanceConfig,
@@ -292,7 +300,7 @@ import {
   CosRechargeInfo,
   DeleteNoticeContentRequest,
   DescribeKafkaConsumerRequest,
-  ModifyDataTransformResponse,
+  DeleteRecordingRuleTaskRequest,
   DescribeDataTransformInfoResponse,
   ModifyCosRechargeResponse,
   ExternalRole,
@@ -332,7 +340,7 @@ import {
   ModifyAlarmShieldResponse,
   CreateCosRechargeRequest,
   ChatCompletionsResponse,
-  EstimateRebuildIndexTaskRequest,
+  DescribeNoticeContentsResponse,
   CreateAlarmShieldResponse,
   DescribeConsumerRequest,
   DeleteConfigExtraResponse,
@@ -364,6 +372,7 @@ import {
   MetricSubscribeInfo,
   CreateNetworkApplicationResponse,
   DeleteIndexRequest,
+  DescribeRecordingRuleTaskRequest,
   DescribeAlertRecordHistoryRequest,
   ChatCompletionsRequest,
   DeleteNetworkApplicationRequest,
@@ -384,6 +393,7 @@ import {
   DescribeNetworkApplicationsRequest,
   DescribeKafkaRechargesResponse,
   ModifyDlcDeliverRequest,
+  CreateRecordingRuleTaskRequest,
   ConsoleSharingInfo,
   ToolCall,
   DeleteCloudProductLogCollectionResponse,
@@ -395,7 +405,7 @@ import {
   ModifyKafkaConsumerGroupOffsetRequest,
   DescribeConsolesRequest,
   AlarmShieldInfo,
-  EsImportInfo,
+  CreateConsoleResponse,
   ModifyConfigResponse,
   MetricConfig,
   ModifyConsoleRequest,
@@ -423,6 +433,7 @@ import {
   DeleteTopicResponse,
   CreateExportResponse,
   CancelRebuildIndexTaskResponse,
+  DescribeRecordingRuleYamlTaskRequest,
   UploadLogResponse,
   Console,
   CreateAlarmResponse,
@@ -431,10 +442,11 @@ import {
   DescribeMetricSubscribesRequest,
   DescribeLogContextRequest,
   DescribeMetricCorrectDimensionRequest,
+  CreateRecordingRuleYamlTaskRequest,
   DescribeCosRechargesResponse,
   CreateSplunkDeliverRequest,
   CreateMachineGroupResponse,
-  Filter,
+  DeleteRecordingRuleYamlTaskResponse,
   RuleTagInfo,
   OpenClawServiceRequest,
   AlarmTargetInfo,
@@ -452,7 +464,7 @@ import {
   DeleteWebCallbackResponse,
   DescribeSearchViewsResponse,
   DescribeAlarmShieldsRequest,
-  AdvancedConsumerConfiguration,
+  CreateRecordingRuleYamlTaskResponse,
   DescribeTopicsResponse,
   EventLog,
   ConsumerGroupInfo,
@@ -514,21 +526,26 @@ import {
   CreateKafkaRechargeRequest,
   DeleteKafkaRechargeRequest,
   DlcInfo,
+  ModifyDataTransformResponse,
   AlertHistoryRecord,
   MultiTopicSearchInformation,
   AlarmNotice,
   ModifyNoticeContentRequest,
   ModifyKafkaRechargeResponse,
+  RecordingRuleTaskInfo,
   MetricSpec,
   DescribeMachinesResponse,
   DeleteEsRechargeRequest,
   AuthRoleInfo,
   LogContextInfo,
   ModifyMetricSubscribeRequest,
+  DeleteRecordingRuleYamlTaskRequest,
   DeleteConfigFromMachineGroupRequest,
+  DescribeRecordingRuleTaskResponse,
   AddMachineGroupInfoResponse,
   UserKafkaMeta,
   MetricLabel,
+  ModifyRecordingRuleTaskRequest,
   DescribeMetricSubscribePreviewResponse,
   DescribeScheduledSqlInfoRequest,
   DeleteConsumerGroupResponse,
@@ -542,6 +559,7 @@ import {
   DescribeLogsetsRequest,
   MetadataItem,
   ParquetInfo,
+  ModifyRecordingRuleTaskResponse,
   DescribeConsolesResponse,
   ConsoleSharingParam,
   SendConsumerHeartbeatRequest,
@@ -731,13 +749,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于创建日志集，返回新创建的日志集的 ID。
+   * 本接口用于删除特殊采集规则配置，特殊采集配置应用于自建K8S环境的采集Agent
    */
-  async CreateLogset(
-    req: CreateLogsetRequest,
-    cb?: (error: string, rep: CreateLogsetResponse) => void
-  ): Promise<CreateLogsetResponse> {
-    return this.request("CreateLogset", req, cb)
+  async DeleteConfigExtra(
+    req: DeleteConfigExtraRequest,
+    cb?: (error: string, rep: DeleteConfigExtraResponse) => void
+  ): Promise<DeleteConfigExtraResponse> {
+    return this.request("DeleteConfigExtra", req, cb)
   }
 
   /**
@@ -1131,6 +1149,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建指标订阅配置
+   */
+  async DescribeMetricSubscribePreview(
+    req: DescribeMetricSubscribePreviewRequest,
+    cb?: (error: string, rep: DescribeMetricSubscribePreviewResponse) => void
+  ): Promise<DescribeMetricSubscribePreviewResponse> {
+    return this.request("DescribeMetricSubscribePreview", req, cb)
+  }
+
+  /**
    * es导入预览
    */
   async DescribeEsRechargePreview(
@@ -1511,6 +1539,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于删除预聚合分析任务
+   */
+  async DeleteRecordingRuleTask(
+    req: DeleteRecordingRuleTaskRequest,
+    cb?: (error: string, rep: DeleteRecordingRuleTaskResponse) => void
+  ): Promise<DeleteRecordingRuleTaskResponse> {
+    return this.request("DeleteRecordingRuleTask", req, cb)
+  }
+
+  /**
    * 创建机器组
    */
   async CreateMachineGroup(
@@ -1621,6 +1659,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 通过yaml文件创建指标预聚合任务
+   */
+  async CreateRecordingRuleYamlTask(
+    req: CreateRecordingRuleYamlTaskRequest,
+    cb?: (error: string, rep: CreateRecordingRuleYamlTaskResponse) => void
+  ): Promise<CreateRecordingRuleYamlTaskResponse> {
+    return this.request("CreateRecordingRuleYamlTask", req, cb)
+  }
+
+  /**
    * 本接口用于删除DataSight控制台
    */
   async DeleteConsole(
@@ -1714,6 +1762,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于修改日志或指标主题。
+   */
+  async ModifyTopic(
+    req: ModifyTopicRequest,
+    cb?: (error: string, rep: ModifyTopicResponse) => void
+  ): Promise<ModifyTopicResponse> {
+    return this.request("ModifyTopic", req, cb)
+  }
+
+  /**
    * 删除指标采集配置
    */
   async DeleteMetricConfig(
@@ -1794,13 +1852,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于删除特殊采集规则配置，特殊采集配置应用于自建K8S环境的采集Agent
+   * 本接口用于创建日志集，返回新创建的日志集的 ID。
    */
-  async DeleteConfigExtra(
-    req: DeleteConfigExtraRequest,
-    cb?: (error: string, rep: DeleteConfigExtraResponse) => void
-  ): Promise<DeleteConfigExtraResponse> {
-    return this.request("DeleteConfigExtra", req, cb)
+  async CreateLogset(
+    req: CreateLogsetRequest,
+    cb?: (error: string, rep: CreateLogsetResponse) => void
+  ): Promise<CreateLogsetResponse> {
+    return this.request("CreateLogset", req, cb)
   }
 
   /**
@@ -1824,6 +1882,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于获取yaml预聚合任务列表
+   */
+  async DescribeRecordingRuleYamlTask(
+    req: DescribeRecordingRuleYamlTaskRequest,
+    cb?: (error: string, rep: DescribeRecordingRuleYamlTaskResponse) => void
+  ): Promise<DescribeRecordingRuleYamlTaskResponse> {
+    return this.request("DescribeRecordingRuleYamlTask", req, cb)
+  }
+
+  /**
      * 本接口用于检索分析日志，使用该接口时请注意如下事项：
 1. 该接口除受默认接口请求频率限制外，针对单个日志主题，查询并发数不能超过15。
 2. API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Accept-Encoding:gzip）。
@@ -1833,6 +1901,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SearchLogResponse) => void
   ): Promise<SearchLogResponse> {
     return this.request("SearchLog", req, cb)
+  }
+
+  /**
+   * 本接口用于修改定时预聚合任务
+   */
+  async ModifyRecordingRuleTask(
+    req: ModifyRecordingRuleTaskRequest,
+    cb?: (error: string, rep: ModifyRecordingRuleTaskResponse) => void
+  ): Promise<ModifyRecordingRuleTaskResponse> {
+    return this.request("ModifyRecordingRuleTask", req, cb)
   }
 
   /**
@@ -1938,23 +2016,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建指标订阅配置
+   * 创建指标预聚合任务
    */
-  async DescribeMetricSubscribePreview(
-    req: DescribeMetricSubscribePreviewRequest,
-    cb?: (error: string, rep: DescribeMetricSubscribePreviewResponse) => void
-  ): Promise<DescribeMetricSubscribePreviewResponse> {
-    return this.request("DescribeMetricSubscribePreview", req, cb)
+  async CreateRecordingRuleTask(
+    req: CreateRecordingRuleTaskRequest,
+    cb?: (error: string, rep: CreateRecordingRuleTaskResponse) => void
+  ): Promise<CreateRecordingRuleTaskResponse> {
+    return this.request("CreateRecordingRuleTask", req, cb)
   }
 
   /**
-   * 本接口用于修改日志或指标主题。
+   * 本接口用于获取预聚合任务列表
    */
-  async ModifyTopic(
-    req: ModifyTopicRequest,
-    cb?: (error: string, rep: ModifyTopicResponse) => void
-  ): Promise<ModifyTopicResponse> {
-    return this.request("ModifyTopic", req, cb)
+  async DescribeRecordingRuleTask(
+    req: DescribeRecordingRuleTaskRequest,
+    cb?: (error: string, rep: DescribeRecordingRuleTaskResponse) => void
+  ): Promise<DescribeRecordingRuleTaskResponse> {
+    return this.request("DescribeRecordingRuleTask", req, cb)
   }
 
   /**
@@ -1999,6 +2077,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取消费组列表
+   */
+  async DescribeConsumerGroups(
+    req: DescribeConsumerGroupsRequest,
+    cb?: (error: string, rep: DescribeConsumerGroupsResponse) => void
+  ): Promise<DescribeConsumerGroupsResponse> {
+    return this.request("DescribeConsumerGroups", req, cb)
+  }
+
+  /**
    * 本接口用于获取kafka协议消费主题信息列表
    */
   async DescribeKafkaConsumerTopics(
@@ -2009,13 +2097,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取消费组列表
+   * 本接口用于删除yaml预聚合任务
    */
-  async DescribeConsumerGroups(
-    req: DescribeConsumerGroupsRequest,
-    cb?: (error: string, rep: DescribeConsumerGroupsResponse) => void
-  ): Promise<DescribeConsumerGroupsResponse> {
-    return this.request("DescribeConsumerGroups", req, cb)
+  async DeleteRecordingRuleYamlTask(
+    req: DeleteRecordingRuleYamlTaskRequest,
+    cb?: (error: string, rep: DeleteRecordingRuleYamlTaskResponse) => void
+  ): Promise<DeleteRecordingRuleYamlTaskResponse> {
+    return this.request("DeleteRecordingRuleYamlTask", req, cb)
   }
 
   /**
@@ -2066,6 +2154,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CheckRechargeKafkaServerResponse) => void
   ): Promise<CheckRechargeKafkaServerResponse> {
     return this.request("CheckRechargeKafkaServer", req, cb)
+  }
+
+  /**
+   * 通过yaml文件修改指标预聚合任务
+   */
+  async ModifyRecordingRuleYamlTask(
+    req: ModifyRecordingRuleYamlTaskRequest,
+    cb?: (error: string, rep: ModifyRecordingRuleYamlTaskResponse) => void
+  ): Promise<ModifyRecordingRuleYamlTaskResponse> {
+    return this.request("ModifyRecordingRuleYamlTask", req, cb)
   }
 
   /**

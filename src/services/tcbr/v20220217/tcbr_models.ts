@@ -783,29 +783,41 @@ export interface SubmitServerRollbackResponse {
  */
 export interface VolumeConf {
   /**
-   * 存储类型
+   * <p>存储类型</p>
    */
   Type?: string
   /**
-   * 对象存储桶名称
+   * <p>对象存储桶名称</p>
    */
   BucketName?: string
   /**
-   * 存储连接地址
+   * <p>存储连接地址</p>
    */
   Endpoint?: string
   /**
-   * 存储连接用户密码
+   * <p>存储连接用户密码</p>
    */
   KeyID?: string
   /**
-   * 存储挂载目的目录
+   * <p>存储挂载目的目录</p>
    */
   DstPath?: string
   /**
-   * 存储挂载源目录
+   * <p>存储挂载源目录</p>
    */
   SrcPath?: string
+  /**
+   * <p>cfs 实例ip</p>
+   */
+  MountIP?: string
+  /**
+   * <p>默认读写</p>
+   */
+  ReadOnly?: boolean
+  /**
+   * <p>CFS 实例 ID</p>
+   */
+  InstanceId?: string
 }
 
 /**

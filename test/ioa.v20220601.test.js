@@ -198,6 +198,16 @@ it("ioa.v20220601.DescribeDLPEdgeNodes", async function () {
     }
 })
 
+it("ioa.v20220601.BindBusinessResourceConnectorGroup", async function () {
+    try {
+       const data = await client.BindBusinessResourceConnectorGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.DescribeDirectAccountGroupResources", async function () {
     try {
        const data = await client.DescribeDirectAccountGroupResources({})

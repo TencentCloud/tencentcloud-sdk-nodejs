@@ -527,7 +527,7 @@ export interface CreateLibraryResponse {
    */
   LibraryId?: string
   /**
-   *
+   * <p>用于访问 SMH 的域名</p>
    */
   AccessDomain?: string
   /**

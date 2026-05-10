@@ -300,7 +300,12 @@ export interface DescribeDatabasesRequest {
 /**
  * DescribeClusterDetail请求参数结构体
  */
-export type DescribeClusterDetailRequest = null
+export interface DescribeClusterDetailRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  ClusterID?: string
+}
 
 /**
  * DescribeClusterDetail返回参数结构体

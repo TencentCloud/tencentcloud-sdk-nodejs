@@ -408,6 +408,16 @@ it("vod.v20180717.ListFiles", async function () {
     }
 })
 
+it("vod.v20180717.DeleteLLMComprehendTemplate", async function () {
+    try {
+       const data = await client.DeleteLLMComprehendTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeTasks", async function () {
     try {
        const data = await client.DescribeTasks({})
@@ -541,6 +551,16 @@ it("vod.v20180717.ModifyEventConfig", async function () {
 it("vod.v20180717.DeleteClass", async function () {
     try {
        const data = await client.DeleteClass({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.DescribeAigcAdvancedCustomElements", async function () {
+    try {
+       const data = await client.DescribeAigcAdvancedCustomElements({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1118,6 +1138,16 @@ it("vod.v20180717.ModifyQualityInspectTemplate", async function () {
     }
 })
 
+it("vod.v20180717.DescribeRoundPlays", async function () {
+    try {
+       const data = await client.DescribeRoundPlays({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.VerifyDomainRecord", async function () {
     try {
        const data = await client.VerifyDomainRecord({})
@@ -1148,9 +1178,9 @@ it("vod.v20180717.CreateAigcCustomElement", async function () {
     }
 })
 
-it("vod.v20180717.CreateSceneAigcVideoTask", async function () {
+it("vod.v20180717.CreateReviewTemplate", async function () {
     try {
-       const data = await client.CreateSceneAigcVideoTask({})
+       const data = await client.CreateReviewTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1158,9 +1188,9 @@ it("vod.v20180717.CreateSceneAigcVideoTask", async function () {
     }
 })
 
-it("vod.v20180717.DeleteLLMComprehendTemplate", async function () {
+it("vod.v20180717.CreateSceneAigcVideoTask", async function () {
     try {
-       const data = await client.DeleteLLMComprehendTemplate({})
+       const data = await client.CreateSceneAigcVideoTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1208,9 +1238,9 @@ it("vod.v20180717.ConfirmEvents", async function () {
     }
 })
 
-it("vod.v20180717.DescribeRoundPlays", async function () {
+it("vod.v20180717.DeleteAigcAdvancedCustomElement", async function () {
     try {
-       const data = await client.DescribeRoundPlays({})
+       const data = await client.DeleteAigcAdvancedCustomElement({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1678,9 +1708,9 @@ it("vod.v20180717.DescribeJustInTimeTranscodeTemplates", async function () {
     }
 })
 
-it("vod.v20180717.CreateReviewTemplate", async function () {
+it("vod.v20180717.CreateAigcAudioTask", async function () {
     try {
-       const data = await client.CreateReviewTemplate({})
+       const data = await client.CreateAigcAudioTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

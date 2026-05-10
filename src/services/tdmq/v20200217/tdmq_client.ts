@@ -88,10 +88,12 @@ import {
   DeleteTopicsRequest,
   DescribeNamespaceBundlesOptRequest,
   DeleteRocketMQEnvironmentRolesResponse,
+  RouterMessageServiceTarget,
   DeleteCmqSubscribeRequest,
   RocketMQClusterConfig,
   SendMsgResponse,
   DescribeMsgRequest,
+  CreateRocketMQRouterRuleRequest,
   DeleteRabbitMQPermissionResponse,
   DeleteRabbitMQBindingResponse,
   ModifyRabbitMQVipInstanceResponse,
@@ -146,6 +148,7 @@ import {
   ImportRocketMQConsumerGroupsResponse,
   DescribeRocketMQConsumerConnectionsResponse,
   DescribeCmqSubscriptionDetailRequest,
+  RouterTencentMQTTTarget,
   DescribeRocketMQClusterResponse,
   ModifyRocketMQRoleRequest,
   ServerLog,
@@ -186,6 +189,7 @@ import {
   ModifyRocketMQInstanceSpecResponse,
   GetTopicListResponse,
   DescribeMsgTraceRequest,
+  RouterTencentMQTTSource,
   DescribeCmqTopicsRequest,
   ConsumerLog,
   DescribeRocketMQTopUsagesResponse,
@@ -254,6 +258,7 @@ import {
   ModifyPublicNetworkSecurityPolicyRequest,
   ModifyRoleResponse,
   DescribeRocketMQTopicStatsRequest,
+  RouterRocketMQSource,
   SendRocketMQMessageResponse,
   PulsarProClusterSpecInfo,
   Subscription,
@@ -265,6 +270,7 @@ import {
   DescribeEnvironmentRolesResponse,
   DescribeRocketMQPublicAccessPointResponse,
   CreateRocketMQGroupV2Request,
+  RouterTencentRocketMQSource,
   DescribeRabbitMQExchangesResponse,
   DescribeRabbitMQQueueDetailResponse,
   DescribeRocketMQTopicMsgsResponse,
@@ -275,6 +281,7 @@ import {
   DeleteRolesResponse,
   RetryRocketMQDlqMessageResponse,
   DescribeRabbitMQBindingsRequest,
+  RouterRocketMQTarget,
   ModifyRocketMQTopicRequest,
   RocketMQClusterInfo,
   ModifyRocketMQInstanceResponse,
@@ -316,6 +323,7 @@ import {
   ConsumerLogs,
   DescribeMqMsgTraceResponse,
   CreateRabbitMQUserRequest,
+  RouterMessageServiceSource,
   DescribeRocketMQConsumeStatsRequest,
   SendCmqMsgResponse,
   TagFilter,
@@ -345,6 +353,7 @@ import {
   RetryRocketMQDlqMessageRequest,
   DescribeRocketMQTopicsByGroupRequest,
   DescribeRocketMQConsumeStatsResponse,
+  RouterTencentRocketMQTarget,
   DescribeRocketMQPublicAccessMonitorDataResponse,
   CreateRocketMQTopicV2Request,
   CmqQueue,
@@ -412,9 +421,11 @@ import {
   DescribeRocketMQGeneralSKUsResponse,
   DescribePulsarProInstanceDetailResponse,
   UnbindCmqDeadLetterRequest,
+  RocketMQRouterRuleInfo,
   DescribeRolesRequest,
   DeleteSubscriptionsRequest,
   DescribeAllTenantsRequest,
+  CreateRocketMQRouterRuleResponse,
   ResetRocketMQConsumerOffSetRequest,
   AMQPClusterDetail,
   CreateEnvironmentRoleRequest,
@@ -1991,6 +2002,16 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
     cb?: (error: string, rep: DescribeAllTenantsResponse) => void
   ): Promise<DescribeAllTenantsResponse> {
     return this.request("DescribeAllTenants", req, cb)
+  }
+
+  /**
+   * 创建RocketMQ Router规则
+   */
+  async CreateRocketMQRouterRule(
+    req: CreateRocketMQRouterRuleRequest,
+    cb?: (error: string, rep: CreateRocketMQRouterRuleResponse) => void
+  ): Promise<CreateRocketMQRouterRuleResponse> {
+    return this.request("CreateRocketMQRouterRule", req, cb)
   }
 
   /**

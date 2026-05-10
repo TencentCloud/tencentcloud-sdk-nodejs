@@ -1138,11 +1138,11 @@ export interface DeployInferServiceRequest {
  */
 export interface DeploymentConfig {
   /**
-   * 容器配置
+   * <p>容器配置</p>
    */
   Container?: ContainerInfo
   /**
-   * 容器数量
+   * <p>容器数量</p>
    */
   ContainerCount?: number
 }

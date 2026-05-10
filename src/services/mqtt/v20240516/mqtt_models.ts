@@ -298,6 +298,20 @@ export interface DescribeMessageListRequest {
 }
 
 /**
+ * DescribeSharedSubscriptions请求参数结构体
+ */
+export interface DescribeSharedSubscriptionsRequest {
+  /**
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * 共享订阅组名
+   */
+  SharedName: string
+}
+
+/**
  * DeleteDeviceIdentity请求参数结构体
  */
 export interface DeleteDeviceIdentityRequest {
@@ -1356,6 +1370,24 @@ export interface MQTTMessageItem {
 }
 
 /**
+ * DescribeSharedSubscriptionClient请求参数结构体
+ */
+export interface DescribeSharedSubscriptionClientRequest {
+  /**
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * 共享订阅组名
+   */
+  SharedName: string
+  /**
+   * 订阅表达式
+   */
+  TopicFilter: string
+}
+
+/**
  * UpdateMessageEnrichmentRulePriority返回参数结构体
  */
 export interface UpdateMessageEnrichmentRulePriorityResponse {
@@ -1797,39 +1829,21 @@ export interface DeleteCaCertificateResponse {
 }
 
 /**
- * 共享订阅组
+ * DescribeSharedSubscriptionClient返回参数结构体
  */
-export interface SharedGroup {
+export interface DescribeSharedSubscriptionClientResponse {
   /**
-   * 腾讯云MQTT实例ID
+   * 共享订阅组下Client信息
    */
-  InstanceId?: string
+  Data?: Array<SharedSubscriptionClient>
   /**
-   * 共享订阅组名
+   * 查询总数
    */
-  SharedName?: string
+  TotalCount?: number
   /**
-   * 共享组消费负载均衡策略 1.RANDOM 2.HASH_PARTITION
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  LbStrategy?: number
-  /**
-   * HASH_PARTITION 策略下生效，表示Client掉线或新Client上线加入共享订阅组消费的延迟时间。
-范围：0～600秒
-   */
-  ExpiryInterval?: number
-  /**
-   * 备注，长度不超过128个字符。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark?: string
-  /**
-   * 创建时间，毫秒级时间戳 。
-   */
-  CreateTime?: number
-  /**
-   * 上次更新时间，毫秒级时间戳 。
-   */
-  UpdateTime?: number
+  RequestId?: string
 }
 
 /**
@@ -2203,6 +2217,42 @@ export interface DescribeClientListRequest {
 }
 
 /**
+ * 共享订阅组
+ */
+export interface SharedGroup {
+  /**
+   * 腾讯云MQTT实例ID
+   */
+  InstanceId?: string
+  /**
+   * 共享订阅组名
+   */
+  SharedName?: string
+  /**
+   * 共享组消费负载均衡策略 1.RANDOM 2.HASH_PARTITION
+   */
+  LbStrategy?: number
+  /**
+   * HASH_PARTITION 策略下生效，表示Client掉线或新Client上线加入共享订阅组消费的延迟时间。
+范围：0～600秒
+   */
+  ExpiryInterval?: number
+  /**
+   * 备注，长度不超过128个字符。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+  /**
+   * 创建时间，毫秒级时间戳 。
+   */
+  CreateTime?: number
+  /**
+   * 上次更新时间，毫秒级时间戳 。
+   */
+  UpdateTime?: number
+}
+
+/**
  * DeleteInsPublicEndpoint返回参数结构体
  */
 export interface DeleteInsPublicEndpointResponse {
@@ -2480,6 +2530,28 @@ export interface CreateAuthorizationPolicyResponse {
    * 策略id
    */
   Id?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSharedSubscriptions返回参数结构体
+ */
+export interface DescribeSharedSubscriptionsResponse {
+  /**
+   * 集群id
+   */
+  InstanceId?: string
+  /**
+   * 共享组名
+   */
+  SharedName?: string
+  /**
+   * 共享组下的订阅表达式列表
+   */
+  TopicFilter?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2845,6 +2917,28 @@ export interface ModifyInsPublicEndpointRequest {
    * 公网访问规则
    */
   Rules: Array<PublicAccessRule>
+}
+
+/**
+ * 共享订阅组下客户端
+ */
+export interface SharedSubscriptionClient {
+  /**
+   * 客户端ID
+   */
+  ClientId?: string
+  /**
+   * 共享订阅组名
+   */
+  SharedName?: string
+  /**
+   * 共享组下的订阅表达式列表
+   */
+  TopicFilter?: string
+  /**
+   * 在线状态
+   */
+  Online?: boolean
 }
 
 /**

@@ -23,6 +23,7 @@ import {
   DescribeAccountResourcesData,
   ModifyVirtualDeviceGroupsReqItem,
   DescribeDeviceDetailListResponse,
+  ModifyBusinessResourceRequest,
   DescribeAggrSoftDeviceListRequest,
   ComplexRule,
   DescribeDeviceHardwareInfoListResponse,
@@ -31,6 +32,7 @@ import {
   DescribeResourceGrantedAccountGroupsRequest,
   RulePayloadItem,
   DescribeDeviceDetailListData,
+  RuleItem,
   DescribeDevicesResponse,
   DescribeAggrSoftDeviceListData,
   GrantResourcesByVirtualGroupsRequest,
@@ -57,7 +59,7 @@ import {
   DescribeSoftwareInformationPageData,
   ModifyDeviceTrustStatusResponse,
   CreateDLPFileDetectionTaskRequest,
-  ExportDeviceDownloadTaskRequest,
+  BindBusinessResourceConnectorGroupRequest,
   DescribeSoftCensusListByDeviceData,
   ModifyBusinessResourceResponse,
   CreateBusinessResourceRequest,
@@ -100,7 +102,7 @@ import {
   DescribeAccountResourcesItems,
   CreateDLPFileDetectTaskRequest,
   DescribeDLPFileDetectResultRequest,
-  RuleItem,
+  ExportDeviceDownloadTaskRequest,
   CreateDeviceVirtualGroupResponse,
   CreateDLPFileDetectionTaskData,
   DescribeDeviceVirtualGroupsPageRsp,
@@ -138,7 +140,7 @@ import {
   ModifyVirtualDeviceGroupsRequest,
   GetAccountGroupData,
   Sort,
-  ModifyBusinessResourceRequest,
+  BindBusinessResourceConnectorGroupResponse,
   DescribeDLPEdgeNodeGroupsRspData,
   DescribeDirectAccountGroupResourcesRequest,
   DeviceProcessInfo,
@@ -352,6 +354,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDLPEdgeNodesResponse) => void
   ): Promise<DescribeDLPEdgeNodesResponse> {
     return this.request("DescribeDLPEdgeNodes", req, cb)
+  }
+
+  /**
+   * saas版本，创建/修改业务资源后，调用绑定连接器接口,私有化调用path为：capi/GatewayResource/BindBusinessResourceConnectorGroup
+   */
+  async BindBusinessResourceConnectorGroup(
+    req: BindBusinessResourceConnectorGroupRequest,
+    cb?: (error: string, rep: BindBusinessResourceConnectorGroupResponse) => void
+  ): Promise<BindBusinessResourceConnectorGroupResponse> {
+    return this.request("BindBusinessResourceConnectorGroup", req, cb)
   }
 
   /**

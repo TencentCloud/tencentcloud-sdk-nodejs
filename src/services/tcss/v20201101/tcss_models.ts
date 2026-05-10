@@ -4446,11 +4446,11 @@ export interface DescribeAbnormalProcessRulesRequest {
  */
 export interface DescribeAssetImageRegistryListResponse {
   /**
-   * 镜像仓库列表
+   * <p>镜像仓库列表</p>
    */
   List?: Array<ImageRepoInfo>
   /**
-   * 总数量
+   * <p>总数量</p>
    */
   TotalCount?: number
   /**
@@ -8394,32 +8394,31 @@ export interface CreateComplianceTaskResponse {
  */
 export interface DescribeAssetImageRegistryListRequest {
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * <p>需要返回的数量，默认为10，最大值为100</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为0
+   * <p>偏移量，默认为0</p>
    */
   Offset?: number
   /**
-   * 过滤字段
-IsAuthorized是否授权，取值全部all，未授权0，已授权1
+   * <p>过滤字段<br>IsAuthorized是否授权，取值全部all，未授权0，已授权1</p>
    */
   Filters?: Array<AssetFilters>
   /**
-   * 排序字段
+   * <p>排序字段</p>
    */
   By?: string
   /**
-   * 排序方式，asc，desc
+   * <p>排序方式，asc，desc</p>
    */
   Order?: string
   /**
-   * 是否仅展示各repository最新的镜像, 默认为false
+   * <p>是否仅展示各repository最新的镜像, 默认为false</p>
    */
   OnlyShowLatest?: boolean
   /**
-   * 是否仅展示运行中容器镜像
+   * <p>是否仅展示运行中容器镜像</p>
    */
   IsRunning?: boolean
 }

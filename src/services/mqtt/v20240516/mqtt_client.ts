@@ -31,6 +31,7 @@ import {
   ApplyRegistrationCodeRequest,
   MessageEnrichmentRuleItem,
   DescribeMessageListRequest,
+  DescribeSharedSubscriptionsRequest,
   DeleteDeviceIdentityRequest,
   ModifyJWTAuthenticatorRequest,
   AuthorizationPolicyPriority,
@@ -72,6 +73,7 @@ import {
   CreateHttpAuthenticatorResponse,
   MQTTMessage,
   MQTTMessageItem,
+  DescribeSharedSubscriptionClientRequest,
   UpdateMessageEnrichmentRulePriorityResponse,
   ModifyJWKSAuthenticatorResponse,
   DeleteDeviceIdentityResponse,
@@ -99,7 +101,7 @@ import {
   DescribeAuthorizationPoliciesResponse,
   CreateTopicRequest,
   DeleteCaCertificateResponse,
-  SharedGroup,
+  DescribeSharedSubscriptionClientResponse,
   DeleteClientSubscriptionRequest,
   TagFilter,
   DescribeMessageDetailsResponse,
@@ -114,6 +116,7 @@ import {
   PublishMessageRequest,
   AuthorizationPolicyItem,
   DescribeClientListRequest,
+  SharedGroup,
   DeleteInsPublicEndpointResponse,
   MQTTEndpointItem,
   DeviceIdentityItem,
@@ -127,6 +130,7 @@ import {
   DescribeAuthenticatorRequest,
   RegisterCaCertificateRequest,
   CreateAuthorizationPolicyResponse,
+  DescribeSharedSubscriptionsResponse,
   CreateInsPublicEndpointRequest,
   RegisterDeviceCertificateRequest,
   Filter,
@@ -140,6 +144,7 @@ import {
   DescribeInsVPCEndpointsResponse,
   DescribeDeviceCertificateRequest,
   ModifyInsPublicEndpointRequest,
+  SharedSubscriptionClient,
   DeleteInsPublicEndpointRequest,
   DescribeInsPublicEndpointsRequest,
   CreateDeviceIdentityResponse,
@@ -627,6 +632,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询共享订阅组订阅列表
+   */
+  async DescribeSharedSubscriptions(
+    req: DescribeSharedSubscriptionsRequest,
+    cb?: (error: string, rep: DescribeSharedSubscriptionsResponse) => void
+  ): Promise<DescribeSharedSubscriptionsResponse> {
+    return this.request("DescribeSharedSubscriptions", req, cb)
+  }
+
+  /**
    * 为MQTT客户端增加一条订阅
    */
   async AddClientSubscription(
@@ -745,6 +760,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAuthenticatorResponse) => void
   ): Promise<DeleteAuthenticatorResponse> {
     return this.request("DeleteAuthenticator", req, cb)
+  }
+
+  /**
+   * 查询共享订阅组详情信息
+   */
+  async DescribeSharedSubscriptionClient(
+    req: DescribeSharedSubscriptionClientRequest,
+    cb?: (error: string, rep: DescribeSharedSubscriptionClientResponse) => void
+  ): Promise<DescribeSharedSubscriptionClientResponse> {
+    return this.request("DescribeSharedSubscriptionClient", req, cb)
   }
 
   /**

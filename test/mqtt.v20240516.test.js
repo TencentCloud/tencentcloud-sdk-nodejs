@@ -438,6 +438,16 @@ it("mqtt.v20240516.DeleteTopic", async function () {
     }
 })
 
+it("mqtt.v20240516.DescribeSharedSubscriptions", async function () {
+    try {
+       const data = await client.DescribeSharedSubscriptions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.AddClientSubscription", async function () {
     try {
        const data = await client.AddClientSubscription({})
@@ -551,6 +561,16 @@ it("mqtt.v20240516.ModifyHttpAuthenticator", async function () {
 it("mqtt.v20240516.DeleteAuthenticator", async function () {
     try {
        const data = await client.DeleteAuthenticator({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mqtt.v20240516.DescribeSharedSubscriptionClient", async function () {
+    try {
+       const data = await client.DescribeSharedSubscriptionClient({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

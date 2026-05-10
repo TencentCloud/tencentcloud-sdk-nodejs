@@ -44,6 +44,24 @@ export interface SqlAgentParameter {
 }
 
 /**
+ * 发货步骤描述
+ */
+export interface CreatingProgress {
+  /**
+   * <p>总步骤数</p>
+   */
+  TotalSteps?: number
+  /**
+   * <p>当前步骤</p>
+   */
+  CurrentStep?: number
+  /**
+   * <p>步骤详情</p>
+   */
+  Steps?: Array<CreatingStepInfo>
+}
+
+/**
  * 智能体值守任务信息
  */
 export interface AgentDutyTask {
@@ -351,74 +369,6 @@ export interface RecoverAgentInstanceResponse {
 }
 
 /**
- * 实例信息
- */
-export interface InstanceInfos {
-  /**
-   * 数据库地域
-   */
-  Region: string
-  /**
-   * 数据库实例id
-   */
-  InstanceId: string
-  /**
-   * 数据库名称
-   */
-  DatabaseName?: string
-  /**
-   * 表名称
-   */
-  TableName?: string
-}
-
-/**
- * DescribeAgents返回参数结构体
- */
-export interface DescribeAgentsResponse {
-  /**
-   * 查询结果总数量
-   */
-  TotalCount?: number
-  /**
-   * 智能体列表
-   */
-  Items?: Array<Agent>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateChatCompletion请求参数结构体
- */
-export interface CreateChatCompletionRequest {
-  /**
-   * 是否隐藏
-   */
-  IsHidden?: boolean
-  /**
-   * 是否隐藏会话
-   */
-  IsChatHidden?: boolean
-}
-
-/**
- * DescribeReportUrl返回参数结构体
- */
-export interface DescribeReportUrlResponse {
-  /**
-   * 下载地址
-   */
-  DownloadUrl?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeAgentInstances请求参数结构体
  */
 export interface DescribeAgentInstancesRequest {
@@ -462,6 +412,97 @@ export interface DescribeAgentInstancesRequest {
    * <p>实例类型</p>
    */
   InstanceType?: string
+}
+
+/**
+ * DescribeAgents返回参数结构体
+ */
+export interface DescribeAgentsResponse {
+  /**
+   * 查询结果总数量
+   */
+  TotalCount?: number
+  /**
+   * 智能体列表
+   */
+  Items?: Array<Agent>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 发货步骤详情
+ */
+export interface CreatingStepInfo {
+  /**
+   * <p>步骤名称</p>
+   */
+  StepName?: string
+  /**
+   * <p>步骤描述</p>
+   */
+  StepDesc?: string
+  /**
+   * <p>步骤状态</p>
+   */
+  Status?: string
+  /**
+   * <p>完成时间</p>
+   */
+  FinishTime?: string
+  /**
+   * <p>错误信息描述</p>
+   */
+  ErrMsg?: string
+}
+
+/**
+ * CreateChatCompletion请求参数结构体
+ */
+export interface CreateChatCompletionRequest {
+  /**
+   * 是否隐藏
+   */
+  IsHidden?: boolean
+  /**
+   * 是否隐藏会话
+   */
+  IsChatHidden?: boolean
+}
+
+/**
+ * DescribeReportUrl返回参数结构体
+ */
+export interface DescribeReportUrlResponse {
+  /**
+   * 下载地址
+   */
+  DownloadUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 会话详情
+ */
+export interface ChatDetail {
+  /**
+   * 角色
+   */
+  Role?: string
+  /**
+   * 用户消息
+   */
+  UserMessage?: string
+  /**
+   * 助手消息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssistantMessage?: Array<CreateChatCompletionRes>
 }
 
 /**
@@ -591,13 +632,25 @@ export interface DescribeAgentDutyTasksRequest {
 }
 
 /**
- * PauseAgentWork返回参数结构体
+ * 实例信息
  */
-export interface PauseAgentWorkResponse {
+export interface InstanceInfos {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 数据库地域
    */
-  RequestId?: string
+  Region: string
+  /**
+   * 数据库实例id
+   */
+  InstanceId: string
+  /**
+   * 数据库名称
+   */
+  DatabaseName?: string
+  /**
+   * 表名称
+   */
+  TableName?: string
 }
 
 /**
@@ -661,17 +714,13 @@ export interface ModifyChatTitleRequest {
 }
 
 /**
- * 实例状态描述
+ * PauseAgentWork返回参数结构体
  */
-export interface StatusItem {
+export interface PauseAgentWorkResponse {
   /**
-   * <p>无</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Status?: string
-  /**
-   * <p>无</p>
-   */
-  Count?: number
+  RequestId?: string
 }
 
 /**
@@ -1030,6 +1079,20 @@ export interface CreateChatCompletionResponse {
 }
 
 /**
+ * 实例状态描述
+ */
+export interface StatusItem {
+  /**
+   * <p>无</p>
+   */
+  Status?: string
+  /**
+   * <p>无</p>
+   */
+  Count?: number
+}
+
+/**
  * DescribeReportUrl请求参数结构体
  */
 export type DescribeReportUrlRequest = null
@@ -1128,25 +1191,10 @@ export interface AgentInstance {
    * <p>无</p>
    */
   Description?: string
-}
-
-/**
- * 会话详情
- */
-export interface ChatDetail {
   /**
-   * 角色
+   * <p>发货进度详情</p>
    */
-  Role?: string
-  /**
-   * 用户消息
-   */
-  UserMessage?: string
-  /**
-   * 助手消息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssistantMessage?: Array<CreateChatCompletionRes>
+  CreatingProgress?: CreatingProgress
 }
 
 /**

@@ -374,6 +374,70 @@ export interface CreateConsoleSharingRequest {
 }
 
 /**
+ * 预聚合Yaml任务详情
+ */
+export interface RecordingRuleYamlTaskInfo {
+  /**
+   * yaml配置文件id
+   */
+  YamlId?: string
+  /**
+   * 源日志主题id
+   */
+  TopicId?: string
+  /**
+   * 写入描述的日志主题id
+   */
+  DstTopicId?: string
+  /**
+   * 任务创建时间
+   */
+  CreateTime?: string
+  /**
+   * 任务更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 任务状态，1:运行 2:停止 3:异常-找不到源日志主题 4:异常-找不到目标主题
+
+5: 访问权限问题 6:内部故障 7:其他故障
+   */
+  Status?: number
+  /**
+   * 任务启用状态，1开启,  2关闭
+   */
+  EnableFlag?: number
+  /**
+   * 调度开始时间
+   */
+  ProcessStartTime?: number
+  /**
+   * 调度周期(分钟)
+   */
+  ProcessPeriod?: number
+  /**
+   * 执行延迟(秒)
+   */
+  ProcessDelay?: number
+  /**
+   * 是否开启投递服务日志。1：关闭，2：开启。
+   */
+  HasServicesLog?: number
+  /**
+   * yaml配置文件名称
+   */
+  YamlConfigName?: string
+  /**
+   * yaml配置文件内容
+   */
+  YamlContent?: string
+  /**
+   * yaml文件子任务数量
+   */
+  SubTaskCount?: number
+}
+
+/**
  * SearchLog返回参数结构体
  */
 export interface SearchLogResponse {
@@ -656,6 +720,23 @@ export interface DeleteMetricSubscribeRequest {
    * 指标采集任务配置的日志主题id。
    */
   TopicId: string
+}
+
+/**
+ * 投递Ckafka 高级配置
+ */
+export interface AdvancedConsumerConfiguration {
+  /**
+   * Ckafka分区hash状态。 默认 false
+
+- true：开启根据字段 Hash 值结果相等的信息投递到统一 ckafka 分区
+- false：关闭根据字段 Hash 值结果相等的信息投递到统一 ckafka 分区
+   */
+  PartitionHashStatus?: boolean
+  /**
+   * 需要计算 hash 的字段列表。最大支持5个字段。
+   */
+  PartitionFields?: Array<string>
 }
 
 /**
@@ -979,6 +1060,20 @@ export interface RuleInfo {
 export type DescribeConsumerPreviewRequest = null
 
 /**
+ * CreateRecordingRuleTask返回参数结构体
+ */
+export interface CreateRecordingRuleTaskResponse {
+  /**
+   * <p>任务id</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteDashboard返回参数结构体
  */
 export interface DeleteDashboardResponse {
@@ -996,6 +1091,24 @@ export interface LogItems {
    * 分析结果返回的KV数据对
    */
   Data: Array<LogItem>
+}
+
+/**
+ * DescribeRecordingRuleYamlTask返回参数结构体
+ */
+export interface DescribeRecordingRuleYamlTaskResponse {
+  /**
+   * <p>RecordingRule任务列表信息</p>
+   */
+  RecordingRuleYamlTaskInfos?: Array<RecordingRuleYamlTaskInfo>
+  /**
+   * <p>任务总条数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1464,17 +1577,36 @@ export interface CreateIndexRequest {
 }
 
 /**
- * CreateConsole返回参数结构体
+ * Es导入信息
  */
-export interface CreateConsoleResponse {
+export interface EsImportInfo {
   /**
-   * <p>DataSight控制台Id</p>
+   * 导入模式。
+1. 导入历史数据
+2. 导入实时数据
    */
-  ConsoleId?: string
+  Type: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 开始时间。 单位:秒级时间戳。
+
    */
-  RequestId?: string
+  StartTime?: number
+  /**
+   * 结束时间。 单位：秒级时间戳。
+   */
+  EndTime?: number
+  /**
+   * 最大延迟时间。单位：s
+
+导入模式为 2: 导入实时数据时必填
+   */
+  MaxDelay?: number
+  /**
+   * 检查间隔。单位：s
+
+导入模式为 2: 导入实时数据时必填
+   */
+  CheckInterval?: number
 }
 
 /**
@@ -1482,90 +1614,73 @@ export interface CreateConsoleResponse {
  */
 export interface CreateTopicRequest {
   /**
-   * 日志集ID
-- 通过[获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。
+   * <p>日志集ID</p><ul><li>通过<a href="https://cloud.tencent.com/document/product/614/58624">获取日志集列表</a>获取日志集Id。</li></ul>
    */
   LogsetId: string
   /**
-   * 主题名称
-名称限制
-- 不能为空字符串
-- 不能包含字符'|'
-- 不能使用以下名称["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"]
-
+   * <p>主题名称<br>名称限制</p><ul><li>不能为空字符串</li><li>不能包含字符&#39;|&#39;</li><li>不能使用以下名称[&quot;cls_service_log&quot;,&quot;loglistener_status&quot;,&quot;loglistener_alarm&quot;,&quot;loglistener_business&quot;,&quot;cls_service_metric&quot;]</li></ul>
    */
   TopicName: string
   /**
-   * 主题分区个数。默认创建1个，最大支持创建10个分区。
+   * <p>主题分区个数。默认创建1个，最大支持创建10个分区。</p>
    */
   PartitionCount?: number
   /**
-   * 标签描述列表，通过指定该参数可以同时绑定标签到相应的主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。
+   * <p>标签描述列表，通过指定该参数可以同时绑定标签到相应的主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。</p>
    */
   Tags?: Array<Tag>
   /**
-   * 是否开启自动分裂，默认值为true
+   * <p>是否开启自动分裂，默认值为true</p>
    */
   AutoSplit?: boolean
   /**
-   * 开启自动分裂后，每个主题能够允许的最大分区数，默认值为50
+   * <p>开启自动分裂后，每个主题能够允许的最大分区数，默认值为50</p>
    */
   MaxSplitPartitions?: number
   /**
-   * 日志主题的存储类型，可选值 hot（标准存储），cold（低频存储）；默认为hot。指标主题不支持该配置。
+   * <p>日志主题的存储类型，可选值 hot（标准存储），cold（低频存储）；默认为hot。指标主题不支持该配置。</p>
    */
   StorageType?: string
   /**
-   * 存储时间，单位天。
-- 日志主题：日志接入标准存储时，支持1至3600天，值为3640时代表永久保存。
-- 日志主题：日志接入低频存储时，支持7至3600天，值为3640时代表永久保存。
-- 指标主题：支持1至3600天，值为3640时代表永久保存。
+   * <p>存储时间，单位天。</p><ul><li>日志主题：日志接入标准存储时，支持1至3600天，值为3640时代表永久保存。</li><li>日志主题：日志接入低频存储时，支持7至3600天，值为3640时代表永久保存。</li><li>指标主题：支持1至3600天，值为3640时代表永久保存。</li></ul>
    */
   Period?: number
   /**
-   * 主题描述
+   * <p>主题描述</p>
    */
   Describes?: string
   /**
-   * 0：日志主题关闭日志沉降。
-非0：日志主题开启日志沉降后标准存储的天数，HotPeriod需要大于等于7，且小于Period。
-仅在StorageType为 hot 时生效，指标主题不支持该配置。
+   * <p>0：日志主题关闭日志沉降。<br>非0：日志主题开启日志沉降后标准存储的天数，HotPeriod需要大于等于7，且小于Period。<br>仅在StorageType为 hot 时生效，指标主题不支持该配置。</p>
    */
   HotPeriod?: number
   /**
-   * 加密相关参数。 支持加密地域并且开白用户可以传此参数，其他场景不能传递该参数。
-0或者不传： 不加密
-1：kms-cls 云产品密钥加密
-
-支持地域：ap-beijing,ap-guangzhou,ap-shanghai,ap-singapore,ap-bangkok,ap-jakarta,eu-frankfurt,ap-seoul,ap-tokyo
+   * <p>加密相关参数。 支持加密地域并且开白用户可以传此参数，其他场景不能传递该参数。<br>0或者不传： 不加密<br>1：kms-cls 云产品密钥加密</p><p>支持地域：ap-beijing,ap-guangzhou,ap-shanghai,ap-singapore,ap-bangkok,ap-jakarta,eu-frankfurt,ap-seoul,ap-tokyo</p>
    */
   Encryption?: number
   /**
-   * 主题类型
-- 0:日志主题，默认值
-- 1:指标主题
+   * <p>主题类型</p><ul><li>0:日志主题，默认值</li><li>1:指标主题</li></ul>
    */
   BizType?: number
   /**
-   * 主题自定义ID，格式为：用户自定义部分-用户APPID。未填写该参数时将自动生成ID。
-- 用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符
-- 尾部需要使用-拼接用户APPID，APPID可在https://console.cloud.tencent.com/developer页面查询。
-- 如果指定该字段，需保证全地域唯一
+   * <p>主题自定义ID，格式为：用户自定义部分-用户APPID。未填写该参数时将自动生成ID。</p><ul><li>用户自定义部分仅支持小写字母、数字和-，且不能以-开头和结尾，长度为3至40字符</li><li>尾部需要使用-拼接用户APPID，APPID可在https://console.cloud.tencent.com/developer页面查询。</li><li>如果指定该字段，需保证全地域唯一</li></ul>
    */
   TopicId?: string
   /**
-   * 免鉴权开关。 false：关闭； true：开启。默认为false。
-开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。指标主题不支持该配置。
+   * <p>免鉴权开关。 false：关闭； true：开启。默认为false。<br>开启后将支持指定操作匿名访问该日志主题。详情请参见<a href="https://cloud.tencent.com/document/product/614/41035">日志主题</a>。指标主题不支持该配置。</p>
    */
   IsWebTracking?: boolean
   /**
-   * 主题扩展信息
+   * <p>主题扩展信息</p>
    */
   Extends?: TopicExtendInfo
   /**
-   * 开启记录公网来源ip和服务端接收时间
+   * <p>开启记录公网来源ip和服务端接收时间</p>
    */
   IsSourceFrom?: boolean
+  /**
+   * <p>计费模式</p><p>枚举值：</p><ul><li>0： 按功能项计费</li><li>1： 原始日志量计费</li></ul><p>默认值：0</p><p>通过接口调用时默认值为0，通过控制台调用时默认值为1</p>
+   */
+  BillingMode?: number
 }
 
 /**
@@ -2148,7 +2263,7 @@ export interface ModifyConsumerGroupRequest {
  */
 export interface CreateTopicResponse {
   /**
-   * 主题ID
+   * <p>主题ID</p>
    */
   TopicId?: string
   /**
@@ -3125,6 +3240,16 @@ export interface DescribeConsumersRequest {
    * 分页单页的限制数目，默认值为20，最大值100
    */
   Limit?: number
+}
+
+/**
+ * ModifyRecordingRuleYamlTask返回参数结构体
+ */
+export interface ModifyRecordingRuleYamlTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4523,124 +4648,117 @@ export interface ExtractRuleInfo {
  */
 export interface TopicInfo {
   /**
-   * 日志集ID
+   * <p>日志集ID</p>
    */
   LogsetId?: string
   /**
-   * 主题ID
+   * <p>主题ID</p>
    */
   TopicId?: string
   /**
-   * 主题名称
+   * <p>主题名称</p>
    */
   TopicName?: string
   /**
-   * 主题分区个数
+   * <p>主题分区个数</p>
    */
   PartitionCount?: number
   /**
-   * 主题是否开启索引（主题类型需为日志主题）
+   * <p>主题是否开启索引（主题类型需为日志主题）</p>
    */
   Index?: boolean
   /**
-   * AssumerUin非空则表示创建该日志主题的服务方Uin
+   * <p>AssumerUin非空则表示创建该日志主题的服务方Uin</p>
    */
   AssumerUin?: number
   /**
-   * 云产品标识，主题由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE
+   * <p>云产品标识，主题由其它云产品创建时，该字段会显示云产品名称，例如CDN、TKE</p>
    */
   AssumerName?: string
   /**
-   * 创建时间。格式：yyyy-MM-dd HH:mm:ss
+   * <p>创建时间。格式：yyyy-MM-dd HH:mm:ss</p>
    */
   CreateTime?: string
   /**
-   * 主题是否开启采集，true：开启采集；false：关闭采集。
-创建日志主题时默认开启，可通过SDK调用ModifyTopic修改此字段。
-控制台目前不支持修改此参数。
+   * <p>主题是否开启采集，true：开启采集；false：关闭采集。<br>创建日志主题时默认开启，可通过SDK调用ModifyTopic修改此字段。<br>控制台目前不支持修改此参数。</p>
    */
   Status?: boolean
   /**
-   * 主题绑定的标签信息
+   * <p>主题绑定的标签信息</p>
    */
   Tags?: Array<Tag>
   /**
-   * RoleName非空则表示创建该日志主题的服务方使用的角色
+   * <p>RoleName非空则表示创建该日志主题的服务方使用的角色</p>
    */
   RoleName?: string
   /**
-   * 该主题是否开启自动分裂
+   * <p>该主题是否开启自动分裂</p>
    */
   AutoSplit?: boolean
   /**
-   * 若开启自动分裂的话，该主题能够允许的最大分区数
+   * <p>若开启自动分裂的话，该主题能够允许的最大分区数</p>
    */
   MaxSplitPartitions?: number
   /**
-   * 主题的存储类型
-
-- hot: 标准存储
-- cold: 低频存储
+   * <p>主题的存储类型</p><ul><li>hot: 标准存储</li><li>cold: 低频存储</li></ul>
    */
   StorageType?: string
   /**
-   * 生命周期，单位天，可取值范围1~3600。取值为3640时代表永久保存
+   * <p>生命周期，单位天，可取值范围1~3600。取值为3640时代表永久保存</p>
    */
   Period?: number
   /**
-   * 云产品二级标识，日志主题由其它云产品创建时，该字段会显示云产品名称及其日志类型的二级分类，例如TKE-Audit、TKE-Event。部分云产品仅有云产品标识(AssumerName)，无该字段。
+   * <p>云产品二级标识，日志主题由其它云产品创建时，该字段会显示云产品名称及其日志类型的二级分类，例如TKE-Audit、TKE-Event。部分云产品仅有云产品标识(AssumerName)，无该字段。</p>
    */
   SubAssumerName?: string
   /**
-   * 主题描述
+   * <p>主题描述</p>
    */
   Describes?: string
   /**
-   * 开启日志沉降，标准存储的生命周期， hotPeriod < Period。
-标准存储为 hotPeriod, 低频存储则为 Period-hotPeriod。（主题类型需为日志主题）
-HotPeriod=0为没有开启日志沉降。
+   * <p>开启日志沉降，标准存储的生命周期， hotPeriod &lt; Period。<br>标准存储为 hotPeriod, 低频存储则为 Period-hotPeriod。（主题类型需为日志主题）<br>HotPeriod=0为没有开启日志沉降。</p>
    */
   HotPeriod?: number
   /**
-   * kms-cls服务秘钥id
+   * <p>kms-cls服务秘钥id</p>
    */
   KeyId?: string
   /**
-   * 主题类型。
-- 0: 日志主题 
-- 1: 指标主题
+   * <p>主题类型。</p><ul><li>0: 日志主题 </li><li>1: 指标主题</li></ul>
    */
   BizType?: number
   /**
-   * 免鉴权开关。 false：关闭； true：开启。
-开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。
+   * <p>免鉴权开关。 false：关闭； true：开启。<br>开启后将支持指定操作匿名访问该日志主题。详情请参见<a href="https://cloud.tencent.com/document/product/614/41035">日志主题</a>。</p>
    */
   IsWebTracking?: boolean
   /**
-   * 日志主题扩展信息
+   * <p>日志主题扩展信息</p>
    */
   Extends?: TopicExtendInfo
   /**
-   * 异步迁移任务ID
+   * <p>异步迁移任务ID</p>
    */
   TopicAsyncTaskID?: string
   /**
-   * 异步迁移状态
-- 1：进行中
-- 2：已完成
-- 3：失败
-- 4：已取消
+   * <p>异步迁移状态</p><ul><li>1：进行中</li><li>2：已完成</li><li>3：失败</li><li>4：已取消</li></ul>
    */
   MigrationStatus?: number
   /**
-   * 异步迁移完成后，预计生效日期
-时间格式：yyyy-MM-dd HH:mm:ss
+   * <p>异步迁移完成后，预计生效日期<br>时间格式：yyyy-MM-dd HH:mm:ss</p>
    */
   EffectiveDate?: string
   /**
-   * IsSourceFrom 开启记录公网来源ip和服务端接收时间
+   * <p>IsSourceFrom 开启记录公网来源ip和服务端接收时间</p>
    */
   IsSourceFrom?: boolean
+  /**
+   * <p>当前计费模式</p><p>枚举值：</p><ul><li>0： 按功能项计费</li><li>1： 原始日志量计费</li></ul>
+   */
+  BillingMode?: number
+  /**
+   * <p>如果有异步任务，任务成功后的新计费模式</p><p>枚举值：</p><ul><li>0： 按功能项计费</li><li>1： 原始日志量计费</li></ul>
+   */
+  NewBillingMode?: number
 }
 
 /**
@@ -5599,21 +5717,21 @@ export interface DescribeConsumerResponse {
 }
 
 /**
- * DescribeNoticeContents返回参数结构体
+ * EstimateRebuildIndexTask请求参数结构体
  */
-export interface DescribeNoticeContentsResponse {
+export interface EstimateRebuildIndexTaskRequest {
   /**
-   * 通知内容模板列表。
+   * 日志主题ID
    */
-  NoticeContents?: Array<NoticeContentTemplate>
+  TopicId: string
   /**
-   * 符合条件的通知内容模板总数。
+   * 预估任务起始时间，毫秒
    */
-  TotalCount?: number
+  StartTime: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 预估任务结束时间，毫秒
    */
-  RequestId?: string
+  EndTime: number
 }
 
 /**
@@ -6141,6 +6259,52 @@ export interface ModifyKafkaConsumerRequest {
    * <p>消费范围类型，0:最新，1:历史+最新</p>
    */
   ScopeType?: number
+}
+
+/**
+ * ModifyRecordingRuleYamlTask请求参数结构体
+ */
+export interface ModifyRecordingRuleYamlTaskRequest {
+  /**
+   * <p>Yaml配置id</p>
+   */
+  YamlID: string
+  /**
+   * <p>源指标主题id</p>
+   */
+  TopicId: string
+  /**
+   * <p>目标指标主题id</p>
+   */
+  DstTopicId?: string
+  /**
+   * <p>任务状态； 1:开启；2:关闭</p>
+   */
+  EnableFlag?: number
+  /**
+   * <p>调度开始时间,Unix时间戳，单位ms</p>
+   */
+  ProcessStartTime?: number
+  /**
+   * <p>调度周期(分钟)，支持范围(0,1440]分钟。</p>
+   */
+  ProcessPeriod?: number
+  /**
+   * <p>执行延迟(秒)</p>
+   */
+  ProcessDelay?: number
+  /**
+   * <p>yaml配置名称</p>
+   */
+  YamlConfigName?: string
+  /**
+   * <p>yaml配置内容</p>
+   */
+  YamlContent?: string
+  /**
+   * <p>是否开启投递服务日志。1：关闭，2：开启。</p>
+   */
+  HasServicesLog?: number
 }
 
 /**
@@ -6869,6 +7033,20 @@ export interface MultiCondition {
 }
 
 /**
+ * 过滤器
+ */
+export interface Filter {
+  /**
+   * 需要过滤的字段。
+   */
+  Key: string
+  /**
+   * 需要过滤的值。
+   */
+  Values: Array<string>
+}
+
+/**
  * 查询视图信息
  */
 export interface SearchViewInfo {
@@ -7034,6 +7212,16 @@ export interface DescribeConsumerPreviewResponse {
 }
 
 /**
+ * DeleteRecordingRuleTask返回参数结构体
+ */
+export interface DeleteRecordingRuleTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteMachineGroupInfo返回参数结构体
  */
 export interface DeleteMachineGroupInfoResponse {
@@ -7192,13 +7380,17 @@ export interface DescribeKafkaConsumerRequest {
 }
 
 /**
- * ModifyDataTransform返回参数结构体
+ * DeleteRecordingRuleTask请求参数结构体
  */
-export interface ModifyDataTransformResponse {
+export interface DeleteRecordingRuleTaskRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>任务ID</p>
    */
-  RequestId?: string
+  TaskId: string
+  /**
+   * <p>源指标主题id</p>
+   */
+  TopicId: string
 }
 
 /**
@@ -8333,21 +8525,21 @@ export interface ChatCompletionsResponse {
 }
 
 /**
- * EstimateRebuildIndexTask请求参数结构体
+ * DescribeNoticeContents返回参数结构体
  */
-export interface EstimateRebuildIndexTaskRequest {
+export interface DescribeNoticeContentsResponse {
   /**
-   * 日志主题ID
+   * 通知内容模板列表。
    */
-  TopicId: string
+  NoticeContents?: Array<NoticeContentTemplate>
   /**
-   * 预估任务起始时间，毫秒
+   * 符合条件的通知内容模板总数。
    */
-  StartTime: number
+  TotalCount?: number
   /**
-   * 预估任务结束时间，毫秒
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EndTime: number
+  RequestId?: string
 }
 
 /**
@@ -9150,6 +9342,28 @@ export interface DeleteIndexRequest {
 }
 
 /**
+ * DescribeRecordingRuleTask请求参数结构体
+ */
+export interface DescribeRecordingRuleTaskRequest {
+  /**
+   * <p>源指标主题id</p>
+   */
+  TopicId: string
+  /**
+   * <p>分页的偏移量，默认值为0。</p>
+   */
+  Offset: number
+  /**
+   * <p>分页单页限制数目，默认值为20，最大值100。</p>
+   */
+  Limit: number
+  /**
+   * <li>yamlId【关联yaml配置ID】进行过滤，模糊匹配。类型：String。必选：否</li> <li>taskName按照【任务名称】进行过滤，模糊匹配。类型：String。必选：否</li> <li>taskId按照【任务ID】进行过滤，模糊匹配。类型：String。必选：否</li>
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * DescribeAlertRecordHistory请求参数结构体
  */
 export interface DescribeAlertRecordHistoryRequest {
@@ -9679,6 +9893,56 @@ export interface ModifyDlcDeliverRequest {
 }
 
 /**
+ * CreateRecordingRuleTask请求参数结构体
+ */
+export interface CreateRecordingRuleTaskRequest {
+  /**
+   * <p>源指标主题id</p><p>取值参考：</p><ul><li><a href="https://cloud.tencent.com/document/api/614/56454">DescribeTopics</a></li><li><a href="https://console.cloud.tencent.com/cls/metric">指标主题</a></li></ul>
+   */
+  TopicId: string
+  /**
+   * <p>目标指标主题id，可与 TopicId 相同</p>
+   */
+  DstTopicId: string
+  /**
+   * <p>预聚合任务名称</p><p>入参限制：仅支持字母、数字、及下划线，不允许下划线开头，小于256个字符</p>
+   */
+  Name: string
+  /**
+   * <p>任务状态； 1:开启；2:关闭</p>
+   */
+  EnableFlag: number
+  /**
+   * <p>任务执行开始时间 ,Unix时间戳</p><p>单位：ms</p>
+   */
+  ProcessStartTime: number
+  /**
+   * <p>调度周期(分钟)，支持范围(0,1440]分钟。</p>
+   */
+  ProcessPeriod: number
+  /**
+   * <p>执行延迟，建议设置为30秒，避免指标上报延迟导致预聚合任务计算结果不精确</p><p>单位：秒</p>
+   */
+  ProcessDelay: number
+  /**
+   * <p>执行语句(PromQL)</p>
+   */
+  RecordingRuleContent: string
+  /**
+   * <p>指标名称</p>
+   */
+  MetricName: string
+  /**
+   * <p>指标自定义维度</p>
+   */
+  CustomMetricLabels?: Array<MetricLabel>
+  /**
+   * <p>是否开启投递服务日志。1：关闭，2：开启。</p>
+   */
+  HasServicesLog?: number
+}
+
+/**
  * 控制台分享信息
  */
 export interface ConsoleSharingInfo {
@@ -10020,36 +10284,17 @@ export interface AlarmShieldInfo {
 }
 
 /**
- * Es导入信息
+ * CreateConsole返回参数结构体
  */
-export interface EsImportInfo {
+export interface CreateConsoleResponse {
   /**
-   * 导入模式。
-1. 导入历史数据
-2. 导入实时数据
+   * <p>DataSight控制台Id</p>
    */
-  Type: number
+  ConsoleId?: string
   /**
-   * 开始时间。 单位:秒级时间戳。
-
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  StartTime?: number
-  /**
-   * 结束时间。 单位：秒级时间戳。
-   */
-  EndTime?: number
-  /**
-   * 最大延迟时间。单位：s
-
-导入模式为 2: 导入实时数据时必填
-   */
-  MaxDelay?: number
-  /**
-   * 检查间隔。单位：s
-
-导入模式为 2: 导入实时数据时必填
-   */
-  CheckInterval?: number
+  RequestId?: string
 }
 
 /**
@@ -10693,6 +10938,28 @@ export interface CancelRebuildIndexTaskResponse {
 }
 
 /**
+ * DescribeRecordingRuleYamlTask请求参数结构体
+ */
+export interface DescribeRecordingRuleYamlTaskRequest {
+  /**
+   * <p>源指标主题id</p>
+   */
+  TopicId: string
+  /**
+   * <p>分页的偏移量，默认值为0。</p>
+   */
+  Offset: number
+  /**
+   * <p>分页单页限制数目，默认值为20，最大值100。</p>
+   */
+  Limit: number
+  /**
+   * <li>yamlConfigName【配置文件名称】进行过滤，模糊匹配。类型：String。必选：否</li> <li>yamlId按照【yamlID】进行过滤，模糊匹配。类型：String。必选：否</li>
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * UploadLog返回参数结构体
  */
 export interface UploadLogResponse {
@@ -10925,6 +11192,48 @@ export interface DescribeLogContextRequest {
 export type DescribeMetricCorrectDimensionRequest = null
 
 /**
+ * CreateRecordingRuleYamlTask请求参数结构体
+ */
+export interface CreateRecordingRuleYamlTaskRequest {
+  /**
+   * <p>源指标主题id</p><p>取值参考：</p><ul><li><a href="https://cloud.tencent.com/document/api/614/56454">DescribeTopics</a></li><li><a href="https://console.cloud.tencent.com/cls/metric">指标主题</a></li></ul>
+   */
+  TopicId: string
+  /**
+   * <p>目标指标主题id，可与 TopicId 相同</p>
+   */
+  DstTopicId: string
+  /**
+   * <p>任务状态； 1:开启；2:关闭</p>
+   */
+  EnableFlag: number
+  /**
+   * <p>任务执行开始时间 ,Unix时间戳</p><p>单位：ms</p>
+   */
+  ProcessStartTime: number
+  /**
+   * <p>调度周期(分钟)，支持范围(0,1440]分钟。</p><p>单位：分钟</p><p>也可在YAML中使用 interval: duration 为每个group单独设置执行间隔</p>
+   */
+  ProcessPeriod: number
+  /**
+   * <p>执行延迟，建议设置为30秒，避免指标上报延迟导致预聚合任务计算结果不精确</p><p>单位：秒</p>
+   */
+  ProcessDelay: number
+  /**
+   * <p>yaml配置名称</p>
+   */
+  YamlConfigName: string
+  /**
+   * <p>yaml配置内容</p><p>兼容 Prometheus Recording Rules 配置文件，API调用时请注意字符串中的换行与缩进。</p>
+   */
+  YamlContent: string
+  /**
+   * <p>是否开启投递服务日志。1：关闭，2：开启。</p>
+   */
+  HasServicesLog?: number
+}
+
+/**
  * DescribeCosRecharges返回参数结构体
  */
 export interface DescribeCosRechargesResponse {
@@ -11007,17 +11316,13 @@ export interface CreateMachineGroupResponse {
 }
 
 /**
- * 过滤器
+ * DeleteRecordingRuleYamlTask返回参数结构体
  */
-export interface Filter {
+export interface DeleteRecordingRuleYamlTaskResponse {
   /**
-   * 需要过滤的字段。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Key: string
-  /**
-   * 需要过滤的值。
-   */
-  Values: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -11477,20 +11782,17 @@ export interface DescribeAlarmShieldsRequest {
 }
 
 /**
- * 投递Ckafka 高级配置
+ * CreateRecordingRuleYamlTask返回参数结构体
  */
-export interface AdvancedConsumerConfiguration {
+export interface CreateRecordingRuleYamlTaskResponse {
   /**
-   * Ckafka分区hash状态。 默认 false
-
-- true：开启根据字段 Hash 值结果相等的信息投递到统一 ckafka 分区
-- false：关闭根据字段 Hash 值结果相等的信息投递到统一 ckafka 分区
+   * <p>Yaml配置id， 可以关联多子任务</p>
    */
-  PartitionHashStatus?: boolean
+  YamlId?: string
   /**
-   * 需要计算 hash 的字段列表。最大支持5个字段。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PartitionFields?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -13097,85 +13399,73 @@ export interface TopicPartitionInfo {
  */
 export interface ModifyTopicRequest {
   /**
-   *  主题ID- 通过[获取主题列表](https://cloud.tencent.com/document/product/614/56454)获取主题Id。
+   * <p>主题ID- 通过<a href="https://cloud.tencent.com/document/product/614/56454">获取主题列表</a>获取主题Id。</p>
    */
   TopicId: string
   /**
-   * 主题名称
-输入限制：
-- 不能为空字符串
-- 不能包含字符'|'
-- 不能使用以下名称["cls_service_log","loglistener_status","loglistener_alarm","loglistener_business","cls_service_metric"]
+   * <p>主题名称<br>输入限制：</p><ul><li>不能为空字符串</li><li>不能包含字符&#39;|&#39;</li><li>不能使用以下名称[&quot;cls_service_log&quot;,&quot;loglistener_status&quot;,&quot;loglistener_alarm&quot;,&quot;loglistener_business&quot;,&quot;cls_service_metric&quot;]</li></ul>
    */
   TopicName?: string
   /**
-   * 标签描述列表，通过指定该参数可以同时绑定标签到相应的主题。最大支持10个标签键值对，并且不能有重复的键值对。
+   * <p>标签描述列表，通过指定该参数可以同时绑定标签到相应的主题。最大支持10个标签键值对，并且不能有重复的键值对。</p>
    */
   Tags?: Array<Tag>
   /**
-   * 主题是否开启采集，true：开启采集；false：关闭采集。
-控制台目前不支持修改此参数。
+   * <p>主题是否开启采集，true：开启采集；false：关闭采集。<br>控制台目前不支持修改此参数。</p>
    */
   Status?: boolean
   /**
-   * 是否开启自动分裂
+   * <p>是否开启自动分裂</p>
    */
   AutoSplit?: boolean
   /**
-   * 若开启最大分裂，该主题能够允许的最大分区数；
-默认为50；必须为正数
+   * <p>若开启最大分裂，该主题能够允许的最大分区数；<br>默认为50；必须为正数</p>
    */
   MaxSplitPartitions?: number
   /**
-   * 生命周期，单位天，标准存储取值范围1\~3600，低频存储取值范围7\~3600。取值为3640时代表永久保存
+   * <p>生命周期，单位天，标准存储取值范围1~3600，低频存储取值范围7~3600。取值为3640时代表永久保存</p>
    */
   Period?: number
   /**
-   * 存储类型：cold 低频存储，hot 标准存储
+   * <p>存储类型：cold 低频存储，hot 标准存储</p>
    */
   StorageType?: string
   /**
-   * 主题描述
+   * <p>主题描述</p>
    */
   Describes?: string
   /**
-   * 0：日志主题关闭日志沉降。
-非0：日志主题开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。
-仅在StorageType为 hot 时生效，指标主题不支持该配置。
+   * <p>0：日志主题关闭日志沉降。<br>非0：日志主题开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。<br>仅在StorageType为 hot 时生效，指标主题不支持该配置。</p>
    */
   HotPeriod?: number
   /**
-   * 免鉴权开关。 false：关闭； true：开启。
-开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。
+   * <p>免鉴权开关。 false：关闭； true：开启。<br>开启后将支持指定操作匿名访问该日志主题。详情请参见<a href="https://cloud.tencent.com/document/product/614/41035">日志主题</a>。</p>
    */
   IsWebTracking?: boolean
   /**
-   * 主题扩展信息
+   * <p>主题扩展信息</p>
    */
   Extends?: TopicExtendInfo
   /**
-   * 主题分区数量。
-默认为1；
-取值范围及约束：
-- 当输入值<=0，系统自动调整为1。
-- 如果未传MaxSplitPartitions，需要PartitionCount<=50；
-- 如果传递了MaxSplitPartitions，需要PartitionCount<=MaxSplitPartitions；
+   * <p>主题分区数量。<br>默认为1；<br>取值范围及约束：</p><ul><li>当输入值&lt;=0，系统自动调整为1。</li><li>如果未传MaxSplitPartitions，需要PartitionCount&lt;=50；</li><li>如果传递了MaxSplitPartitions，需要PartitionCount&lt;=MaxSplitPartitions；</li></ul>
    */
   PartitionCount?: number
   /**
-   * 取消切换存储任务的id
-- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取取消切换存储任务的id【Topics中的TopicAsyncTaskID字段】。
+   * <p>取消切换存储任务的id</p><ul><li>通过<a href="https://cloud.tencent.com/document/product/614/56454">获取日志主题列表</a>获取取消切换存储任务的id【Topics中的TopicAsyncTaskID字段】。</li></ul>
    */
   CancelTopicAsyncTaskID?: string
   /**
-   * 加密相关参数。 支持加密地域并且开白用户可以传此参数，其他场景不能传递该参数。
-只支持传入1：kms-cls 云产品秘钥加密
+   * <p>加密相关参数。 支持加密地域并且开白用户可以传此参数，其他场景不能传递该参数。<br>只支持传入1：kms-cls 云产品秘钥加密</p>
    */
   Encryption?: number
   /**
-   * 开启记录公网来源ip和服务端接收时间
+   * <p>开启记录公网来源ip和服务端接收时间</p>
    */
   IsSourceFrom?: boolean
+  /**
+   * <p>计费模式</p><p>枚举值：</p><ul><li>0： 按功能项计费</li><li>1： 原始日志量计费</li></ul>
+   */
+  BillingMode?: number
 }
 
 /**
@@ -13310,6 +13600,16 @@ export interface DlcInfo {
    * dlc分区额外信息
    */
   PartitionExtra?: DlcPartitionExtra
+}
+
+/**
+ * ModifyDataTransform返回参数结构体
+ */
+export interface ModifyDataTransformResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13529,6 +13829,82 @@ export interface ModifyKafkaRechargeResponse {
 }
 
 /**
+ * 预聚合任务详情
+ */
+export interface RecordingRuleTaskInfo {
+  /**
+   * 预聚合任务id
+   */
+  TaskId?: string
+  /**
+   * 源日志主题id
+   */
+  TopicId?: string
+  /**
+   * 预聚合任务名称
+   */
+  Name?: string
+  /**
+   * 任务创建时间
+   */
+  CreateTime?: string
+  /**
+   * 任务更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 任务状态，1:运行 2:停止 3:异常-找不到源日志主题 4:异常-找不到目标主题
+
+5: 访问权限问题 6:内部故障 7:其他故障
+   */
+  Status?: number
+  /**
+   * 任务启用状态，1开启,  2关闭
+   */
+  EnableFlag?: number
+  /**
+   * 调度开始时间
+   */
+  ProcessStartTime?: number
+  /**
+   * 调度周期(分钟)
+   */
+  ProcessPeriod?: number
+  /**
+   * 执行延迟(秒)
+   */
+  ProcessDelay?: number
+  /**
+   * 是否开启投递服务日志。1：关闭，2：开启。
+   */
+  HasServicesLog?: number
+  /**
+   * 预聚合检索语句
+   */
+  RecordingRuleContent?: string
+  /**
+   * 指标名称
+   */
+  MetricName?: string
+  /**
+   * 自定义指标名称
+   */
+  CustomMetricLabels?: Array<MetricLabel>
+  /**
+   * yaml配置文件id
+   */
+  YamlId?: string
+  /**
+   * yaml配置文件名称
+   */
+  YamlConfigName?: string
+  /**
+   * 目标日志主题id
+   */
+  DstTopicId?: string
+}
+
+/**
  * 采集对象
  */
 export interface MetricSpec {
@@ -13697,6 +14073,20 @@ export interface ModifyMetricSubscribeRequest {
 }
 
 /**
+ * DeleteRecordingRuleYamlTask请求参数结构体
+ */
+export interface DeleteRecordingRuleYamlTaskRequest {
+  /**
+   * <p>任务ID</p>
+   */
+  YamlId: string
+  /**
+   * <p>源指标主题id</p>
+   */
+  TopicId: string
+}
+
+/**
  * DeleteConfigFromMachineGroup请求参数结构体
  */
 export interface DeleteConfigFromMachineGroupRequest {
@@ -13710,6 +14100,24 @@ export interface DeleteConfigFromMachineGroupRequest {
  - 通过[获取采集规则配置](https://cloud.tencent.com/document/product/614/58616)获取采集配置Id。
    */
   ConfigId: string
+}
+
+/**
+ * DescribeRecordingRuleTask返回参数结构体
+ */
+export interface DescribeRecordingRuleTaskResponse {
+  /**
+   * <p>RecordingRule任务列表信息</p>
+   */
+  RecordingRuleTaskInfos?: Array<RecordingRuleTaskInfo>
+  /**
+   * <p>任务总条数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13755,6 +14163,60 @@ export interface MetricLabel {
    * 指标内容
    */
   Value: string
+}
+
+/**
+ * ModifyRecordingRuleTask请求参数结构体
+ */
+export interface ModifyRecordingRuleTaskRequest {
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId: string
+  /**
+   * <p>源指标主题id</p>
+   */
+  TopicId: string
+  /**
+   * <p>目标指标主题id</p>
+   */
+  DstTopicId?: string
+  /**
+   * <p>任务名称</p>
+   */
+  Name?: string
+  /**
+   * <p>任务启动状态.   1开启,  2关闭</p>
+   */
+  EnableFlag?: number
+  /**
+   * <p>调度开始时间,Unix时间戳，单位ms</p>
+   */
+  ProcessStartTime?: number
+  /**
+   * <p>调度周期(分钟)，支持范围(0,1440]分钟。</p>
+   */
+  ProcessPeriod?: number
+  /**
+   * <p>执行延迟(秒)</p>
+   */
+  ProcessDelay?: number
+  /**
+   * <p>指标名称</p>
+   */
+  MetricName?: string
+  /**
+   * <p>执行语句(PromQL)</p>
+   */
+  RecordingRuleContent?: string
+  /**
+   * <p>自定义指标名称</p>
+   */
+  CustomMetricLabels?: Array<MetricLabel>
+  /**
+   * <p>是否开启投递服务日志。1：关闭，2：开启。</p>
+   */
+  HasServicesLog?: number
 }
 
 /**
@@ -14239,6 +14701,20 @@ export interface ParquetInfo {
    * ParquetKeyInfo数组
    */
   ParquetKeyInfo: Array<ParquetKeyInfo>
+}
+
+/**
+ * ModifyRecordingRuleTask返回参数结构体
+ */
+export interface ModifyRecordingRuleTaskResponse {
+  /**
+   * <p>预聚合任务id</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

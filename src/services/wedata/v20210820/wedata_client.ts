@@ -1307,8 +1307,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交工作流。本接口已废弃，请使用接口BatchCreateTaskVersionAsync。
-   */
+     * 接口已经废弃，调用会产生脏数据
+
+提交工作流。本接口已废弃，请使用接口BatchCreateTaskVersionAsync。
+     */
   async SubmitWorkflow(
     req: SubmitWorkflowRequest,
     cb?: (error: string, rep: SubmitWorkflowResponse) => void

@@ -859,149 +859,147 @@ export interface ModifyCdbProxyAddressVipAndVPortResponse {
  */
 export interface DescribeDBInstancesRequest {
   /**
-   * 项目 ID。
+   * <p>项目 ID。</p>
    */
   ProjectId?: number
   /**
-   * 实例类型，可取值：1 - 主实例，2 - 灾备实例，3 - 只读实例。
+   * <p>实例类型，可取值：1 - 主实例，2 - 灾备实例，3 - 只读实例。</p>
    */
   InstanceTypes?: Array<number | bigint>
   /**
-   * 实例的内网 IP 地址。
+   * <p>实例的内网 IP 地址。</p>
    */
   Vips?: Array<string>
   /**
-   * 实例状态，可取值：<br>0 - 创建中<br>1 - 运行中<br>4 - 正在进行隔离操作<br>5 - 已隔离（可在回收站恢复开机）
+   * <p>实例状态，可取值：<br>0 - 创建中<br>1 - 运行中<br>4 - 正在进行隔离操作<br>5 - 已隔离（可在回收站恢复开机）</p>
    */
   Status?: Array<number | bigint>
   /**
-   * 偏移量，默认值为 0。
+   * <p>偏移量，默认值为 0。</p>
    */
   Offset?: number
   /**
-   * 单次请求返回的数量，默认值为 20，最大值为 2000。
+   * <p>单次请求返回的数量，默认值为 20，最大值为 2000。</p>
    */
   Limit?: number
   /**
-   * 安全组 ID。当使用安全组 ID 为过滤条件时，需指定 WithSecurityGroup 参数为 1。
+   * <p>安全组 ID。当使用安全组 ID 为过滤条件时，需指定 WithSecurityGroup 参数为 1。</p>
    */
   SecurityGroupId?: string
   /**
-   * 付费类型，可取值：0 - 包年包月，1 - 小时计费。
+   * <p>付费类型，可取值：0 - 包年包月，1 - 小时计费。</p>
    */
   PayTypes?: Array<number | bigint>
   /**
-   * 实例名称。
+   * <p>实例名称。</p>
    */
   InstanceNames?: Array<string>
   /**
-   * 实例任务状态，可能取值：<br>0 - 没有任务<br>1 - 升级中<br>2 - 数据导入中<br>3 - 开放Slave中<br>4 - 外网访问开通中<br>5 - 批量操作执行中<br>6 - 回档中<br>7 - 外网访问关闭中<br>8 - 密码修改中<br>9 - 实例名修改中<br>10 - 重启中<br>12 - 自建迁移中<br>13 - 删除库表中<br>14 - 灾备实例创建同步中<br>15 - 升级待切换<br>16 - 升级切换中<br>17 - 升级切换完成<br>19 - 参数设置待执行<br>34 - 原地升级待执行
+   * <p>实例任务状态，可能取值：<br>0 - 没有任务<br>1 - 升级中<br>2 - 数据导入中<br>3 - 开放Slave中<br>4 - 外网访问开通中<br>5 - 批量操作执行中<br>6 - 回档中<br>7 - 外网访问关闭中<br>8 - 密码修改中<br>9 - 实例名修改中<br>10 - 重启中<br>12 - 自建迁移中<br>13 - 删除库表中<br>14 - 灾备实例创建同步中<br>15 - 升级待切换<br>16 - 升级切换中<br>17 - 升级切换完成<br>19 - 参数设置待执行<br>34 - 原地升级待执行</p>
    */
   TaskStatus?: Array<number | bigint>
   /**
-   * 实例数据库引擎版本，可能取值：5.1、5.5、5.6 和 5.7。
+   * <p>实例数据库引擎版本，可能取值：5.1、5.5、5.6 和 5.7。</p>
    */
   EngineVersions?: Array<string>
   /**
-   * 私有网络的 ID。
+   * <p>私有网络的 ID。</p>
    */
   VpcIds?: Array<number | bigint>
   /**
-   * 可用区的 ID。
+   * <p>可用区的 ID。</p>
    */
   ZoneIds?: Array<number | bigint>
   /**
-   * 子网 ID。
+   * <p>子网 ID。</p>
    */
   SubnetIds?: Array<number | bigint>
   /**
-   * 是否锁定标记，可选值：0 - 不锁定，1 - 锁定，默认为0。
+   * <p>是否锁定标记，可选值：0 - 不锁定，1 - 锁定，默认为0。</p>
    */
   CdbErrors?: Array<number | bigint>
   /**
-   * 返回结果集排序的字段，目前支持："instanceId"，"instanceName"，"createTime"，"deadlineTime"。
+   * <p>返回结果集排序的字段，目前支持：&quot;instanceId&quot;，&quot;instanceName&quot;，&quot;createTime&quot;，&quot;deadlineTime&quot;。</p>
    */
   OrderBy?: string
   /**
-   * 返回结果集排序方式。目前支持值："ASC" - 表示升序，"DESC" - 表示降序，默认为 "DESC"。
+   * <p>返回结果集排序方式。目前支持值：&quot;ASC&quot; - 表示升序，&quot;DESC&quot; - 表示降序，默认为 &quot;DESC&quot;。</p>
    */
   OrderDirection?: string
   /**
-   * 是否以安全组 ID 为过滤条件。
-说明：0表示否，1表示是。
+   * <p>是否以安全组 ID 为过滤条件。<br>说明：0表示否，1表示是。</p>
    */
   WithSecurityGroup?: number
   /**
-   * 是否包含独享集群详细信息，可取值：0 - 不包含，1 - 包含。
+   * <p>是否包含独享集群详细信息，可取值：0 - 不包含，1 - 包含。</p>
    */
   WithExCluster?: number
   /**
-   * 独享集群 ID。
+   * <p>独享集群 ID。</p>
    */
   ExClusterId?: string
   /**
-   * 实例 ID。
+   * <p>实例 ID。</p>
    */
   InstanceIds?: Array<string>
   /**
-   * 初始化标记，可取值：0 - 未初始化，1 - 初始化。
+   * <p>初始化标记，可取值：0 - 未初始化，1 - 初始化。</p>
    */
   InitFlag?: number
   /**
-   * 是否包含灾备关系对应的实例，可取值：0 - 不包含，1 - 包含。默认取值为1。如果拉取主实例，则灾备关系的数据在DrInfo字段中， 如果拉取灾备实例， 则灾备关系的数据在MasterInfo字段中。灾备关系中只包含部分基本的数据，详细的数据需要自行调接口拉取。
+   * <p>是否包含灾备关系对应的实例，可取值：0 - 不包含，1 - 包含。默认取值为1。如果拉取主实例，则灾备关系的数据在DrInfo字段中， 如果拉取灾备实例， 则灾备关系的数据在MasterInfo字段中。灾备关系中只包含部分基本的数据，详细的数据需要自行调接口拉取。</p>
    */
   WithDr?: number
   /**
-   * 是否包含只读实例，可取值：0 - 不包含，1 - 包含。默认取值为1。
+   * <p>是否包含只读实例，可取值：0 - 不包含，1 - 包含。默认取值为1。</p>
    */
   WithRo?: number
   /**
-   * 是否包含主实例，可取值：0 - 不包含，1 - 包含。默认取值为1。
+   * <p>是否包含主实例，可取值：0 - 不包含，1 - 包含。默认取值为1。</p>
    */
   WithMaster?: number
   /**
-   * 置放群组ID列表。
+   * <p>置放群组ID列表。</p>
    */
   DeployGroupIds?: Array<string>
   /**
-   * 是否以标签键为过滤条件。
+   * <p>是否以标签键为过滤条件。</p>
    */
   TagKeysForSearch?: Array<string>
   /**
-   * 金融围拢 ID 。
+   * <p>金融围拢 ID 。</p>
    */
   CageIds?: Array<string>
   /**
-   * 标签值
+   * <p>标签值</p>
    */
   TagValues?: Array<string>
   /**
-   * 私有网络字符型vpcId
+   * <p>私有网络字符型vpcId</p>
    */
   UniqueVpcIds?: Array<string>
   /**
-   * 私有网络字符型subnetId
+   * <p>私有网络字符型subnetId</p>
    */
   UniqSubnetIds?: Array<string>
   /**
-   * 标签键值
-请注意，创建中的实例无法查询到标签。
+   * <p>标签键值<br>请注意，创建中的实例无法查询到标签。</p>
    */
   Tags?: Array<Tag>
   /**
-   * 数据库代理 IP 。
+   * <p>数据库代理 IP 。</p>
    */
   ProxyVips?: Array<string>
   /**
-   * 数据库代理 ID 。
+   * <p>数据库代理 ID 。</p>
    */
   ProxyIds?: Array<string>
   /**
-   * 数据库引擎类型。可选值为：InnoDB、RocksDB。
+   * <p>数据库引擎类型。可选值为：InnoDB、RocksDB。</p>
    */
   EngineTypes?: Array<string>
   /**
-   * 是否获取云盘版实例节点信息，可填：true 或 false。默认为 false。
+   * <p>是否获取云盘版实例节点信息，可填：true 或 false。默认为 false。</p>
    */
   QueryClusterInfo?: boolean
 }
@@ -3429,11 +3427,11 @@ export interface DescribeCPUExpandStrategyInfoRequest {
  */
 export interface SlaveInfo {
   /**
-   * 第一备机信息
+   * <p>第一备机信息</p>
    */
   First?: SlaveInstanceInfo
   /**
-   * 第二备机信息
+   * <p>第二备机信息</p>
    */
   Second?: SlaveInstanceInfo
 }
@@ -4690,11 +4688,11 @@ export interface TagInfo {
  */
 export interface DescribeDBInstancesResponse {
   /**
-   * 符合查询条件的实例总数。
+   * <p>符合查询条件的实例总数。</p>
    */
   TotalCount?: number
   /**
-   * 实例详细信息列表。
+   * <p>实例详细信息列表。</p>
    */
   Items?: Array<InstanceInfo>
   /**
@@ -5662,75 +5660,75 @@ ECONOMICAL：表示经济型。
  */
 export interface MasterInfo {
   /**
-   * 地域信息
+   * <p>地域信息</p>
    */
   Region?: string
   /**
-   * 地域ID
+   * <p>地域ID</p>
    */
   RegionId?: number
   /**
-   * 可用区ID
+   * <p>可用区ID</p>
    */
   ZoneId?: number
   /**
-   * 可用区信息
+   * <p>可用区信息</p>
    */
   Zone?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 实例长ID
+   * <p>实例长ID</p>
    */
   ResourceId?: string
   /**
-   * 实例状态
+   * <p>实例状态</p>
    */
   Status?: number
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 实例类型
+   * <p>实例类型</p>
    */
   InstanceType?: number
   /**
-   * 任务状态
+   * <p>任务状态</p>
    */
   TaskStatus?: number
   /**
-   * 内存容量
+   * <p>内存容量</p>
    */
   Memory?: number
   /**
-   * 硬盘容量
+   * <p>硬盘容量</p>
    */
   Volume?: number
   /**
-   * 实例机型
+   * <p>实例机型</p>
    */
   DeviceType?: string
   /**
-   * 每秒查询数
+   * <p>每秒查询数</p>
    */
   Qps?: number
   /**
-   * 私有网络ID
+   * <p>私有网络ID</p>
    */
   VpcId?: number
   /**
-   * 子网ID
+   * <p>子网ID</p>
    */
   SubnetId?: number
   /**
-   * 独享集群ID
+   * <p>独享集群ID</p>
    */
   ExClusterId?: string
   /**
-   * 独享集群名称
+   * <p>独享集群名称</p>
    */
   ExClusterName?: string
 }
@@ -7087,217 +7085,218 @@ export interface DescribeUploadedFilesRequest {
  */
 export interface InstanceInfo {
   /**
-   * 外网状态，可能的返回值为：0-未开通外网；1-已开通外网；2-已关闭外网
+   * <p>外网状态，可能的返回值为：0-未开通外网；1-已开通外网；2-已关闭外网</p>
    */
   WanStatus?: number
   /**
-   * 可用区信息
+   * <p>可用区信息</p>
    */
   Zone?: string
   /**
-   * 初始化标志，可能的返回值为：0-未初始化；1-已初始化
+   * <p>初始化标志，可能的返回值为：0-未初始化；1-已初始化</p>
    */
   InitFlag?: number
   /**
-   * 只读vip信息。单独开通只读实例访问的只读实例才有该字段
+   * <p>只读vip信息。单独开通只读实例访问的只读实例才有该字段</p>
    */
   RoVipInfo?: RoVipInfo
   /**
-   * 内存容量，单位为 MB
+   * <p>内存容量，单位为 MB</p>
    */
   Memory?: number
   /**
-   * 实例状态，可能的返回值：0-创建中；1-运行中；4-正在进行隔离操作；5-已隔离
+   * <p>实例状态，可能的返回值：0-创建中；1-运行中；4-正在进行隔离操作；5-已隔离</p>
    */
   Status?: number
   /**
-   * 私有网络 ID，例如：51102
+   * <p>私有网络 ID，例如：51102</p>
    */
   VpcId?: number
   /**
-   * 备机信息
+   * <p>备机信息</p>
    */
   SlaveInfo?: SlaveInfo
   /**
-   * 实例 ID
+   * <p>实例 ID</p>
    */
   InstanceId?: string
   /**
-   * 硬盘容量，单位为 GB
+   * <p>硬盘容量，单位为 GB</p>
    */
   Volume?: number
   /**
-   * 自动续费标志，可能的返回值：0-未开通自动续费；1-已开通自动续费；2-已关闭自动续费
+   * <p>自动续费标志，可能的返回值：0-未开通自动续费；1-已开通自动续费；2-已关闭自动续费</p>
    */
   AutoRenew?: number
   /**
-   * 数据复制方式。0 - 异步复制；1 - 半同步复制；2 - 强同步复制
+   * <p>数据复制方式。0 - 异步复制；1 - 半同步复制；2 - 强同步复制</p>
    */
   ProtectMode?: number
   /**
-   * 只读组详细信息
+   * <p>只读组详细信息</p>
    */
   RoGroups?: Array<RoGroup>
   /**
-   * 子网 ID，例如：2333
+   * <p>子网 ID，例如：2333</p>
    */
   SubnetId?: number
   /**
-   * 实例类型，可能的返回值：1-主实例；2-灾备实例；3-只读实例
+   * <p>实例类型，可能的返回值：1-主实例；2-灾备实例；3-只读实例</p>
    */
   InstanceType?: number
   /**
-   * 项目 ID
+   * <p>项目 ID</p>
    */
   ProjectId?: number
   /**
-   * 地域信息
+   * <p>地域信息</p>
    */
   Region?: string
   /**
-   * 实例到期时间
+   * <p>实例到期时间</p>
    */
   DeadlineTime?: string
   /**
-   * 可用区部署方式。可能的值为：0 - 单可用区；1 - 多可用区
+   * <p>可用区部署方式。可能的值为：0 - 单可用区；1 - 多可用区</p>
    */
   DeployMode?: number
   /**
-   * 实例任务状态。0 - 没有任务 ,1 - 升级中,2 - 数据导入中,3 - 开放Slave中,4 - 外网访问开通中,5 - 批量操作执行中,6 - 回档中,7 - 外网访问关闭中,8 - 密码修改中,9 - 实例名修改中,10 - 重启中,12 - 自建迁移中,13 - 删除库表中,14 - 灾备实例创建同步中,15 - 升级待切换,16 - 升级切换中,17 - 升级切换完成
+   * <p>实例任务状态。0 - 没有任务 ,1 - 升级中,2 - 数据导入中,3 - 开放Slave中,4 - 外网访问开通中,5 - 批量操作执行中,6 - 回档中,7 - 外网访问关闭中,8 - 密码修改中,9 - 实例名修改中,10 - 重启中,12 - 自建迁移中,13 - 删除库表中,14 - 灾备实例创建同步中,15 - 升级待切换,16 - 升级切换中,17 - 升级切换完成</p>
    */
   TaskStatus?: number
   /**
-   * 主实例详细信息
+   * <p>主实例详细信息</p>
    */
   MasterInfo?: MasterInfo
   /**
-   * 实例类型
+   * <p>实例类型</p>
    */
   DeviceType?: string
   /**
-   * 内核版本
+   * <p>内核版本</p>
    */
   EngineVersion?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 灾备实例详细信息
+   * <p>灾备实例详细信息</p>
    */
   DrInfo?: Array<DrInfo>
   /**
-   * 外网域名
+   * <p>外网域名</p>
    */
   WanDomain?: string
   /**
-   * 外网端口号
+   * <p>外网端口号</p>
    */
   WanPort?: number
   /**
-   * 付费类型，可能的返回值：0-包年包月；1-按量计费
+   * <p>付费类型，可能的返回值：0-包年包月；1-按量计费</p>
    */
   PayType?: number
   /**
-   * 实例创建时间
+   * <p>实例创建时间</p>
    */
   CreateTime?: string
   /**
-   * 实例 IP
+   * <p>实例 IP</p>
    */
   Vip?: string
   /**
-   * 端口号
+   * <p>端口号</p>
    */
   Vport?: number
   /**
-   * 磁盘写入是否被锁定（实例数据写入量已经超过磁盘配额）。0 -未被锁定 1 -已被锁定
+   * <p>磁盘写入是否被锁定（实例数据写入量已经超过磁盘配额）。0 -未被锁定 1 -已被锁定</p>
    */
   CdbError?: number
   /**
-   * 私有网络描述符，例如：“vpc-5v8wn9mg”
+   * <p>私有网络描述符，例如：“vpc-5v8wn9mg”</p>
    */
   UniqVpcId?: string
   /**
-   * 子网描述符，例如：“subnet-1typ0s7d”
+   * <p>子网描述符，例如：“subnet-1typ0s7d”</p>
    */
   UniqSubnetId?: string
   /**
-   * 物理 ID
+   * <p>物理 ID</p>
    */
   PhysicalId?: string
   /**
-   * 核心数
+   * <p>核心数</p>
    */
   Cpu?: number
   /**
-   * 每秒查询数量
+   * <p>每秒查询数量</p>
    */
   Qps?: number
   /**
-   * 可用区中文名称
+   * <p>可用区中文名称</p>
    */
   ZoneName?: string
   /**
-   * 物理机型
+   * <p>物理机型</p>
    */
   DeviceClass?: string
   /**
-   * 置放群组 ID
+   * <p>置放群组 ID</p>
    */
   DeployGroupId?: string
   /**
-   * 可用区 ID
+   * <p>可用区 ID</p>
    */
   ZoneId?: number
   /**
-   * 节点数
+   * <p>节点数</p>
    */
   InstanceNodes?: number
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   TagList?: Array<TagInfoItem>
   /**
-   * 引擎类型
+   * <p>引擎类型</p>
    */
   EngineType?: string
   /**
-   * 最大延迟阈值
+   * <p>最大延迟阈值</p>
    */
   MaxDelayTime?: number
   /**
-   * 实例磁盘类型，仅云盘版和单节点（云盘）实例才会返回有效值。
-说明：
-1. 若返回："DiskType": "CLOUD_HSSD"，则表示该实例磁盘类型为增强型 SSD 云硬盘。
-2. 若返回："DiskType": "CLOUD_SSD"，则表示该实例磁盘类型为 SSD 云硬盘。
-3. 若返回："DiskType": ""，且参数 DeviceType 值为 UNIVERSAL 或 EXCLUSIVE，则表示该实例采用的是本地 SSD 盘。
+   * <p>实例磁盘类型，仅云盘版和单节点（云盘）实例才会返回有效值。<br>说明：</p><ol><li>若返回：&quot;DiskType&quot;: &quot;CLOUD_HSSD&quot;，则表示该实例磁盘类型为增强型 SSD 云硬盘。</li><li>若返回：&quot;DiskType&quot;: &quot;CLOUD_SSD&quot;，则表示该实例磁盘类型为 SSD 云硬盘。</li><li>若返回：&quot;DiskType&quot;: &quot;&quot;，且参数 DeviceType 值为 UNIVERSAL 或 EXCLUSIVE，则表示该实例采用的是本地 SSD 盘。</li></ol>
    */
   DiskType?: string
   /**
-   * 当前扩容的CPU核心数。
+   * <p>当前扩容的CPU核心数。</p>
    */
   ExpandCpu?: number
   /**
-   * 云盘版实例节点信息
+   * <p>云盘版实例节点信息</p>
    */
   ClusterInfo?: Array<ClusterInfo>
   /**
-   * 分析引擎节点列表
+   * <p>分析引擎节点列表</p>
    */
   AnalysisNodeInfos?: Array<AnalysisNodeInfo>
   /**
-   * 设备带宽，单位G。当DeviceClass不为空时此参数才有效。例：25-表示当前设备带宽为25G；10-表示当前设备带宽为10G。
+   * <p>设备带宽，单位G。当DeviceClass不为空时此参数才有效。例：25-表示当前设备带宽为25G；10-表示当前设备带宽为10G。</p>
    */
   DeviceBandwidth?: number
   /**
-   * 实例销毁保护状态，on表示开启保护，否则为关闭保护
+   * <p>实例销毁保护状态，on表示开启保护，否则为关闭保护</p>
    */
   DestroyProtect?: string
   /**
-   * TDSQL引擎参数
+   * <p>TDSQL引擎参数</p>
    */
   CpuModel?: string
+  /**
+   * <p>分析引擎实例版本升级信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AnalysisUpgradeVersionInfo?: UpgradeAnalysisInstanceVersionInfo
 }
 
 /**
@@ -7915,6 +7914,28 @@ export interface DescribeTimeWindowRequest {
    * 实例ID，格式如：cdb-c1nl9rpv或者cdbro-c1nl9rpv，与云数据库控制台页面中显示的实例ID相同。
    */
   InstanceId: string
+}
+
+/**
+ * 分析引擎实例版本升级信息
+ */
+export interface UpgradeAnalysisInstanceVersionInfo {
+  /**
+   * <p>版本升级灰度ip</p>
+   */
+  Vip?: string
+  /**
+   * <p>版本升级灰度port</p>
+   */
+  Vport?: number
+  /**
+   * <p>升级之后版本</p>
+   */
+  EngineVersion?: string
+  /**
+   * <p>实例升级灰度事件</p><p>单位：天</p>
+   */
+  ExpireTime?: number
 }
 
 /**

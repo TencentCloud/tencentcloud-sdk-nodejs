@@ -343,6 +343,7 @@ import {
   CreateBackupRequest,
   AccountInfo,
   DescribeTimeWindowRequest,
+  UpgradeAnalysisInstanceVersionInfo,
   AdjustCdbProxyAddressResponse,
   ModifyDBInstanceVipVportRequest,
   DescribeSSLStatusResponse,

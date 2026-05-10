@@ -6713,13 +6713,17 @@ export interface CreateRateLimitV2Response {
  */
 export interface PromptDetectResult {
   /**
-   * 检测结果
+   * <p>检测结果</p>
    */
   Result?: string
   /**
-   * 置信度
+   * <p>置信度</p>
    */
   Confidence?: number
+  /**
+   * <p>检出类别</p>
+   */
+  Category?: Array<string>
 }
 
 /**

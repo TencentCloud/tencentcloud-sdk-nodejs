@@ -188,9 +188,9 @@ it("cls.v20201016.DeleteDataTransform", async function () {
     }
 })
 
-it("cls.v20201016.CreateLogset", async function () {
+it("cls.v20201016.DeleteConfigExtra", async function () {
     try {
-       const data = await client.CreateLogset({})
+       const data = await client.DeleteConfigExtra({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -588,6 +588,16 @@ it("cls.v20201016.DeleteCloudProductLogCollection", async function () {
     }
 })
 
+it("cls.v20201016.DescribeMetricSubscribePreview", async function () {
+    try {
+       const data = await client.DescribeMetricSubscribePreview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeEsRechargePreview", async function () {
     try {
        const data = await client.DescribeEsRechargePreview({})
@@ -968,6 +978,16 @@ it("cls.v20201016.ModifyScheduledSql", async function () {
     }
 })
 
+it("cls.v20201016.DeleteRecordingRuleTask", async function () {
+    try {
+       const data = await client.DeleteRecordingRuleTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.CreateMachineGroup", async function () {
     try {
        const data = await client.CreateMachineGroup({})
@@ -1078,6 +1098,16 @@ it("cls.v20201016.DescribeIndex", async function () {
     }
 })
 
+it("cls.v20201016.CreateRecordingRuleYamlTask", async function () {
+    try {
+       const data = await client.CreateRecordingRuleYamlTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteConsole", async function () {
     try {
        const data = await client.DeleteConsole({})
@@ -1151,6 +1181,16 @@ it("cls.v20201016.DeleteDashboardSubscribe", async function () {
 it("cls.v20201016.CreateRebuildIndexTask", async function () {
     try {
        const data = await client.CreateRebuildIndexTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyTopic", async function () {
+    try {
+       const data = await client.ModifyTopic({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1238,9 +1278,9 @@ it("cls.v20201016.DescribePartitions", async function () {
     }
 })
 
-it("cls.v20201016.DeleteConfigExtra", async function () {
+it("cls.v20201016.CreateLogset", async function () {
     try {
-       const data = await client.DeleteConfigExtra({})
+       const data = await client.CreateLogset({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1268,9 +1308,29 @@ it("cls.v20201016.ModifyConsole", async function () {
     }
 })
 
+it("cls.v20201016.DescribeRecordingRuleYamlTask", async function () {
+    try {
+       const data = await client.DescribeRecordingRuleYamlTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.SearchLog", async function () {
     try {
        const data = await client.SearchLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyRecordingRuleTask", async function () {
+    try {
+       const data = await client.ModifyRecordingRuleTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1378,9 +1438,9 @@ it("cls.v20201016.CreateConsumer", async function () {
     }
 })
 
-it("cls.v20201016.DescribeMetricSubscribePreview", async function () {
+it("cls.v20201016.CreateRecordingRuleTask", async function () {
     try {
-       const data = await client.DescribeMetricSubscribePreview({})
+       const data = await client.CreateRecordingRuleTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1388,9 +1448,9 @@ it("cls.v20201016.DescribeMetricSubscribePreview", async function () {
     }
 })
 
-it("cls.v20201016.ModifyTopic", async function () {
+it("cls.v20201016.DescribeRecordingRuleTask", async function () {
     try {
-       const data = await client.ModifyTopic({})
+       const data = await client.DescribeRecordingRuleTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1438,6 +1498,16 @@ it("cls.v20201016.ModifyMachineGroup", async function () {
     }
 })
 
+it("cls.v20201016.DescribeConsumerGroups", async function () {
+    try {
+       const data = await client.DescribeConsumerGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeKafkaConsumerTopics", async function () {
     try {
        const data = await client.DescribeKafkaConsumerTopics({})
@@ -1448,9 +1518,9 @@ it("cls.v20201016.DescribeKafkaConsumerTopics", async function () {
     }
 })
 
-it("cls.v20201016.DescribeConsumerGroups", async function () {
+it("cls.v20201016.DeleteRecordingRuleYamlTask", async function () {
     try {
-       const data = await client.DescribeConsumerGroups({})
+       const data = await client.DeleteRecordingRuleYamlTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1501,6 +1571,16 @@ it("cls.v20201016.DescribeConfigExtras", async function () {
 it("cls.v20201016.CheckRechargeKafkaServer", async function () {
     try {
        const data = await client.CheckRechargeKafkaServer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyRecordingRuleYamlTask", async function () {
+    try {
+       const data = await client.ModifyRecordingRuleYamlTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

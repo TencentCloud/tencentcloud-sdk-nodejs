@@ -4456,6 +4456,10 @@ export interface CreateClusterRequest {
    * <p>服务ui地址</p><p>枚举值：</p><ul><li>0： 服务ui地址，只返回1条服务ui地址</li><li>1： 服务ui地址，如果服务含有多个ui地址将全部返回，例如impala的Impalad、StateStore、Catalogd</li></ul><p>默认值：0</p>
    */
   WebUiVersion?: number
+  /**
+   * <p>系统盘是否加密</p>
+   */
+  EnableCbsSysEncryptFlag?: boolean
 }
 
 /**
@@ -5096,6 +5100,10 @@ export interface CreateInstanceRequest {
    * <p>服务ui地址</p><p>枚举值：</p><ul><li>0： 服务ui地址，只返回1条服务ui地址</li><li>1： 服务ui地址，如果服务含有多个ui地址将全部返回，例如impala的Impalad、StateStore、Catalogd</li></ul><p>默认值：0</p>
    */
   WebUiVersion?: number
+  /**
+   * <p>是否开启集群维度cbs系统盘加密,0关闭1开启</p>
+   */
+  CbsSysEncrypt?: number
 }
 
 /**

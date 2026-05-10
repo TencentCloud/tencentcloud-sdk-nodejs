@@ -88,6 +88,48 @@ export interface DescribeDeviceDetailListResponse {
 }
 
 /**
+ * ModifyBusinessResource请求参数结构体
+ */
+export interface ModifyBusinessResourceRequest {
+  /**
+   * 业务资源所在的模块id，没有资源模块先创建资源模块(只支持32位)
+   */
+  AreaId: number
+  /**
+   * 业务资源协议类型,3：所有,2：UDP，1：TCP(只支持32位)
+   */
+  Protocol: number
+  /**
+   * 业务资源名称，同一个资源模块下面不可重复
+   */
+  ServiceName: string
+  /**
+   * 业务资源优先级 1-65535(只支持32位)
+   */
+  Levels: number
+  /**
+   * 业务资源类型:ip,domain,ip_section，对应ip、域名、ip段
+   */
+  ServiceType: string
+  /**
+   * 业务资源端口 all,1-65535
+   */
+  ServicePort: string
+  /**
+   * 修改业务资源的id(只支持32位)
+   */
+  ServiceId: number
+  /**
+   * 业务资源地址(ip、域名、ip段)
+   */
+  ServiceAddress: string
+  /**
+   * 是否走代理,该参数不传，默认为0, 2：内外网直连，1：内网直连， 0：不启用代理配置(只支持32位)
+   */
+  DirectConn?: number
+}
+
+/**
  * DescribeAggrSoftDeviceList请求参数结构体
  */
 export interface DescribeAggrSoftDeviceListRequest {
@@ -360,6 +402,28 @@ export interface DescribeDeviceDetailListData {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
+}
+
+/**
+ * 规则元数据
+ */
+export interface RuleItem {
+  /**
+   * 字段名称
+   */
+  Key?: string
+  /**
+   * 操作关系（等于、不等于、包含、不包含）
+   */
+  Operate?: string
+  /**
+   * 内容
+   */
+  Value?: string
+  /**
+   * 内容，v2多值版本使用
+   */
+  Values?: Array<string>
 }
 
 /**
@@ -1187,37 +1251,17 @@ export interface CreateDLPFileDetectionTaskRequest {
 }
 
 /**
- * ExportDeviceDownloadTask请求参数结构体
+ * BindBusinessResourceConnectorGroup请求参数结构体
  */
-export interface ExportDeviceDownloadTaskRequest {
+export interface BindBusinessResourceConnectorGroupRequest {
   /**
-   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)
+   * 要绑定连接器的业务资源id，创建时候响应会返回，修改调用端自己获取传递
    */
-  OsType?: number
+  ServiceId: number
   /**
-   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   * 业务资源要绑定的连接器id
    */
-  DomainInstanceId?: string
-  /**
-   * 分组id
-   */
-  GroupId?: number
-  /**
-   *  在线状态 2 在线 0，1 离线
-   */
-  OnlineStatus?: number
-  /**
-   * 导出顺序，接口返回的数据字段
-   */
-  ExportOrder?: string
-  /**
-   *  导出类型， 0：终端树；7:硬件信息列表导出；
-   */
-  ExportType?: number
-  /**
-   * 过滤条件。同DescribeDevices接口
-   */
-  Condition?: Condition
+  ConnectorGroupId: string
 }
 
 /**
@@ -2365,25 +2409,37 @@ export interface DescribeDLPFileDetectResultRequest {
 }
 
 /**
- * 规则元数据
+ * ExportDeviceDownloadTask请求参数结构体
  */
-export interface RuleItem {
+export interface ExportDeviceDownloadTaskRequest {
   /**
-   * 字段名称
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)
    */
-  Key?: string
+  OsType?: number
   /**
-   * 操作关系（等于、不等于、包含、不包含）
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
    */
-  Operate?: string
+  DomainInstanceId?: string
   /**
-   * 内容
+   * 分组id
    */
-  Value?: string
+  GroupId?: number
   /**
-   * 内容，v2多值版本使用
+   *  在线状态 2 在线 0，1 离线
    */
-  Values?: Array<string>
+  OnlineStatus?: number
+  /**
+   * 导出顺序，接口返回的数据字段
+   */
+  ExportOrder?: string
+  /**
+   *  导出类型， 0：终端树；7:硬件信息列表导出；
+   */
+  ExportType?: number
+  /**
+   * 过滤条件。同DescribeDevices接口
+   */
+  Condition?: Condition
 }
 
 /**
@@ -3229,45 +3285,13 @@ export interface Sort {
 }
 
 /**
- * ModifyBusinessResource请求参数结构体
+ * BindBusinessResourceConnectorGroup返回参数结构体
  */
-export interface ModifyBusinessResourceRequest {
+export interface BindBusinessResourceConnectorGroupResponse {
   /**
-   * 业务资源所在的模块id，没有资源模块先创建资源模块(只支持32位)
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AreaId: number
-  /**
-   * 业务资源协议类型,3：所有,2：UDP，1：TCP(只支持32位)
-   */
-  Protocol: number
-  /**
-   * 业务资源名称，同一个资源模块下面不可重复
-   */
-  ServiceName: string
-  /**
-   * 业务资源优先级 1-65535(只支持32位)
-   */
-  Levels: number
-  /**
-   * 业务资源类型:ip,domain,ip_section，对应ip、域名、ip段
-   */
-  ServiceType: string
-  /**
-   * 业务资源端口 all,1-65535
-   */
-  ServicePort: string
-  /**
-   * 修改业务资源的id(只支持32位)
-   */
-  ServiceId: number
-  /**
-   * 业务资源地址(ip、域名、ip段)
-   */
-  ServiceAddress: string
-  /**
-   * 是否走代理,该参数不传，默认为0, 2：内外网直连，1：内网直连， 0：不启用代理配置(只支持32位)
-   */
-  DirectConn?: number
+  RequestId?: string
 }
 
 /**
