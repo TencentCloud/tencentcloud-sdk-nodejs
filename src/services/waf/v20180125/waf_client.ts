@@ -69,6 +69,7 @@ import {
   BotToken,
   UpdateRateLimitV2Request,
   DeleteAttackWhiteRuleResponse,
+  LLMRisks,
   CreateProtectGroupResponse,
   DescribeWebshellStatusRequest,
   LogItems,
@@ -104,7 +105,7 @@ import {
   DescribeCustomRuleListRequest,
   DeleteIpAccessControlV2Response,
   PostAttackDownloadTaskResponse,
-  DescribeAttackWhiteRuleRequest,
+  ClawRiskItem,
   DescribeOwaspRulesResponse,
   StrategyForAntiInfoLeak,
   AddSpartaProtectionResponse,
@@ -207,6 +208,7 @@ import {
   ModifyAreaBanAreasResponse,
   GenerateLLMSecAnswerRequest,
   ApiAsset,
+  QueryBypassAllStatusRequest,
   DescribeOwaspRulesRequest,
   DescribeCCRuleListRequest,
   ResponseCode,
@@ -355,6 +357,7 @@ import {
   AddCustomRuleResponse,
   DescribeFlowTrendResponse,
   BatchCustomRuleListItem,
+  DescribeQClawContentSecCheckRequest,
   CreateIpAccessControlResponse,
   UpsertIpAccessControlRequest,
   BotSceneActionRule,
@@ -506,6 +509,7 @@ import {
   ModifyDomainPostActionResponse,
   RefreshAccessCheckResultRequest,
   IpHitItemsData,
+  ApiGuardContent,
   WebshellStatus,
   DescribeSpartaProtectionInfoResponse,
   DescribeRateLimitsV2Response,
@@ -530,7 +534,7 @@ import {
   SessionData,
   CCRuleItems,
   ModifyDomainIpv6StatusRequest,
-  QueryBypassAllStatusRequest,
+  DescribeAttackWhiteRuleRequest,
   DescribeAntiInfoLeakageRulesResponse,
   AddAreaBanAreasResponse,
   DescribeScanIpResponse,
@@ -643,6 +647,7 @@ import {
   CreateOwaspWhiteRuleResponse,
   DomainURI,
   DescribeAttackWhiteRuleResponse,
+  DescribeQClawContentSecCheckResponse,
   AccessRuleKeyValueInfo,
   DescribeObjectsRequest,
   FilterCls,
@@ -1938,6 +1943,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProtectionModesResponse) => void
   ): Promise<DescribeProtectionModesResponse> {
     return this.request("DescribeProtectionModes", req, cb)
+  }
+
+  /**
+   * 大模型请求内容和响应内容审核接口
+   */
+  async DescribeQClawContentSecCheck(
+    req: DescribeQClawContentSecCheckRequest,
+    cb?: (error: string, rep: DescribeQClawContentSecCheckResponse) => void
+  ): Promise<DescribeQClawContentSecCheckResponse> {
+    return this.request("DescribeQClawContentSecCheck", req, cb)
   }
 
   /**

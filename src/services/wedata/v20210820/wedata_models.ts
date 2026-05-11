@@ -8694,37 +8694,41 @@ export interface AsyncResourceVO {
  */
 export interface CommitIntegrationTaskRequest {
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   TaskId: string
   /**
-   * 项目id
+   * <p>项目id</p>
    */
   ProjectId: string
   /**
-   * 0.仅提交，1.立即启动，2.停止线上作业，丢弃作业状态数据，重新启动运行，3.暂停线上作业，保留作业状态数据，继续运行，4.保留作业状态数据，继续运行
+   * <p>0.仅提交，1.立即启动，2.停止线上作业，丢弃作业状态数据，重新启动运行，3.暂停线上作业，保留作业状态数据，继续运行，4.保留作业状态数据，继续运行</p>
    */
   CommitType?: number
   /**
-   * 实时任务 201   离线任务 202  默认实时任务
+   * <p>实时任务 201   离线任务 202  默认实时任务</p>
    */
   TaskType?: number
   /**
-   * 额外参数
+   * <p>额外参数</p>
    */
   ExtConfig?: Array<RecordField>
   /**
-   * 提交版本描述
+   * <p>提交版本描述</p>
    */
   VersionDesc?: string
   /**
-   * 提交版本号
+   * <p>提交版本号</p>
    */
   InstanceVersion?: number
   /**
-   * 前端操作类型描述
+   * <p>前端操作类型描述</p>
    */
   EventDesc?: string
+  /**
+   * <p>提交时任务状态</p><p>枚举值：</p><ul><li>3： 运行中</li></ul>
+   */
+  CurrentStatus?: number
 }
 
 /**
@@ -8790,11 +8794,11 @@ export interface RunForceSucScheduleInstancesResponse {
  */
 export interface CommitIntegrationTaskResponse {
   /**
-   * 操作成功与否标识
+   * <p>操作成功与否标识</p>
    */
   Data?: boolean
   /**
-   * 数据结构
+   * <p>数据结构</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataDto?: CommitTaskDataDto

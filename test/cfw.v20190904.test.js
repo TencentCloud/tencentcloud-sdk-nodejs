@@ -778,6 +778,16 @@ it("cfw.v20190904.ModifySequenceAclRules", async function () {
     }
 })
 
+it("cfw.v20190904.ModifyFwGroupSwitch", async function () {
+    try {
+       const data = await client.ModifyFwGroupSwitch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeRuleOverview", async function () {
     try {
        const data = await client.DescribeRuleOverview({})
@@ -828,9 +838,9 @@ it("cfw.v20190904.DescribeEnterpriseSecurityGroupRule", async function () {
     }
 })
 
-it("cfw.v20190904.ModifyFwGroupSwitch", async function () {
+it("cfw.v20190904.DescribeSerialRegion", async function () {
     try {
-       const data = await client.ModifyFwGroupSwitch({})
+       const data = await client.DescribeSerialRegion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

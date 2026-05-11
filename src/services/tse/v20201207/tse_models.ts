@@ -3086,53 +3086,57 @@ export interface ListCloudNativeAPIGatewayStrategyResult {
  */
 export interface GovernanceServiceInput {
   /**
-   * 服务名。
+   * <p>服务名。</p>
    */
   Name: string
   /**
-   * 服务所属命名空间。
+   * <p>服务所属命名空间。</p>
    */
   Namespace: string
   /**
-   * 服务描述信息。
+   * <p>服务描述信息。</p>
    */
   Comment?: string
   /**
-   * 服务元数据。
+   * <p>服务元数据。</p>
    */
   Metadatas?: Array<Metadata>
   /**
-   * 服务所属部门。
+   * <p>服务所属部门。</p>
    */
   Department?: string
   /**
-   * 服务所属业务。
+   * <p>服务所属业务。</p>
    */
   Business?: string
   /**
-   * 被添加进来可以操作此命名空间的用户ID列表
+   * <p>被添加进来可以操作此命名空间的用户ID列表</p>
    */
   UserIds?: Array<string>
   /**
-   * 被添加进来可以操作此命名空间的用户组ID列表
+   * <p>被添加进来可以操作此命名空间的用户组ID列表</p>
    */
   GroupIds?: Array<string>
   /**
-   * 从操作此命名空间的用户组ID列表被移除的ID列表
+   * <p>从操作此命名空间的用户组ID列表被移除的ID列表</p>
    */
   RemoveUserIds?: Array<string>
   /**
-   * 从可以操作此命名空间的用户组ID列表中被移除的ID列表
+   * <p>从可以操作此命名空间的用户组ID列表中被移除的ID列表</p>
    */
   RemoveGroupIds?: Array<string>
   /**
-   * 该服务对哪些命名空间可见
+   * <p>该服务对哪些命名空间可见</p>
    */
   ExportTo?: Array<string>
   /**
-   * 是否开启同步到全局注册中心
+   * <p>是否开启同步到全局注册中心</p>
    */
   SyncToGlobalRegistry?: boolean
+  /**
+   * <p>服务类型</p><p>枚举值：</p><ul><li>0： 微服务（默认）</li><li>1： MCP Server</li><li>2： AI Agent</li></ul><p>默认值：0</p>
+   */
+  Type?: number
 }
 
 /**
@@ -5560,89 +5564,93 @@ export interface DeleteGovernanceAliasesResponse {
  */
 export interface GovernanceService {
   /**
-   * 服务名称。
+   * <p>服务名称。</p>
    */
   Name?: string
   /**
-   * 命名空间名称。
+   * <p>命名空间名称。</p>
    */
   Namespace?: string
   /**
-   * 元数据信息数组。
+   * <p>元数据信息数组。</p>
    */
   Metadatas?: Array<Metadata>
   /**
-   * 描述信息。
+   * <p>描述信息。</p>
    */
   Comment?: string
   /**
-   * 创建时间。
+   * <p>创建时间。</p>
    */
   CreateTime?: string
   /**
-   * 修改时间。
+   * <p>修改时间。</p>
    */
   ModifyTime?: string
   /**
-   * 服务所属部门。
+   * <p>服务所属部门。</p>
    */
   Department?: string
   /**
-   * 服务所属业务。
+   * <p>服务所属业务。</p>
    */
   Business?: string
   /**
-   * 健康服务实例数
+   * <p>健康服务实例数</p>
    */
   HealthyInstanceCount?: number
   /**
-   * 服务实例总数
+   * <p>服务实例总数</p>
    */
   TotalInstanceCount?: number
   /**
-   * 服务ID
+   * <p>服务ID</p>
    */
   Id?: string
   /**
-   * 是否可以编辑
+   * <p>是否可以编辑</p>
    */
   Editable?: boolean
   /**
-   * 可以编辑该资源的用户ID
+   * <p>可以编辑该资源的用户ID</p>
    */
   UserIds?: Array<string>
   /**
-   * 可以编辑该资源的用户组ID
+   * <p>可以编辑该资源的用户组ID</p>
    */
   GroupIds?: Array<string>
   /**
-   * 移除可以编辑该资源的用户ID
+   * <p>移除可以编辑该资源的用户ID</p>
    */
   RemoveUserIds?: Array<string>
   /**
-   * 移除可以编辑该资源的用户组ID
+   * <p>移除可以编辑该资源的用户组ID</p>
    */
   RemoveGroupIds?: Array<string>
   /**
-   * 该服务对哪些命名空间可见
+   * <p>该服务对哪些命名空间可见</p>
    */
   ExportTo?: Array<string>
   /**
-   * 该服务信息摘要签名
+   * <p>该服务信息摘要签名</p>
    */
   Revision?: string
   /**
-   * 是否开启同步到全局注册中心
+   * <p>是否开启同步到全局注册中心</p>
    */
   SyncToGlobalRegistry?: boolean
   /**
-   * 隔离实例数
+   * <p>隔离实例数</p>
    */
   IsolateInstanceCount?: number
   /**
-   * 服务健康状态
+   * <p>服务健康状态</p>
    */
   ServiceStatus?: number
+  /**
+   * <p>服务类型</p><p>枚举值：</p><ul><li>0： 微服务（默认）</li><li>1： MCP Server</li><li>2： AI Agent</li></ul>
+   */
+  Type?: number
 }
 
 /**
@@ -8478,11 +8486,11 @@ export interface DeleteConfigFilesRequest {
  */
 export interface DescribeGovernanceServicesResponse {
   /**
-   * 服务数总量。
+   * <p>服务数总量。</p>
    */
   TotalCount?: number
   /**
-   * 服务信息详情。
+   * <p>服务信息详情。</p>
    */
   Content?: Array<GovernanceService>
   /**
@@ -9510,53 +9518,57 @@ export interface DescribeCloudNativeAPIGatewayPortsRequest {
  */
 export interface DescribeGovernanceServicesRequest {
   /**
-   * 按照服务名过滤，精确匹配。
+   * <p>按照服务名过滤，精确匹配。</p>
    */
   Name?: string
   /**
-   * 按照命名空间过滤，精确匹配。
+   * <p>按照命名空间过滤，精确匹配。</p>
    */
   Namespace?: string
   /**
-   * 使用元数据过滤，目前只支持一组元组数，若传了多条，只会使用第一条元数据过滤。
+   * <p>使用元数据过滤，目前只支持一组元组数，若传了多条，只会使用第一条元数据过滤。</p>
    */
   Metadatas?: Array<Metadata>
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为100。
+   * <p>返回数量，默认为20，最大值为100。</p>
    */
   Limit?: number
   /**
-   * tse 实例 id。
+   * <p>tse 实例 id。</p>
    */
   InstanceId?: string
   /**
-   * 服务所属部门。
+   * <p>服务所属部门。</p>
    */
   Department?: string
   /**
-   * 服务所属业务。
+   * <p>服务所属业务。</p>
    */
   Business?: string
   /**
-   * 服务中实例的ip，用来过滤服务。
+   * <p>服务中实例的ip，用来过滤服务。</p>
    */
   Host?: string
   /**
-   * 是否只查询存在健康实例的服务
+   * <p>是否只查询存在健康实例的服务</p>
    */
   OnlyExistHealthyInstance?: boolean
   /**
-   * 是否开启同步到全局注册中心
+   * <p>是否开启同步到全局注册中心</p>
    */
   SyncToGlobalRegistry?: string
   /**
-   * 过滤筛选条件
+   * <p>过滤筛选条件</p>
    */
   StatusFilter?: Array<Filter>
+  /**
+   * <p>服务类型</p><p>枚举值：</p><ul><li>0： 微服务（默认）</li><li>1： MCP Server</li><li>2： AI Agent</li></ul>
+   */
+  Type?: number
 }
 
 /**

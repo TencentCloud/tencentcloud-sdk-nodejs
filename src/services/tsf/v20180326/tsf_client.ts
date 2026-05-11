@@ -39,6 +39,7 @@ import {
   DeletePathRewritesRequest,
   DeleteLaneResponse,
   DescribeGroupReleaseRequest,
+  SearchFiltersProgram,
   DescribeConfigTemplateResponse,
   TsfPageContainerEvent,
   DescribeLicensesRequest,

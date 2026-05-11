@@ -2403,24 +2403,6 @@ export interface DeleteAddressTemplateRequest {
 }
 
 /**
- * DescribeAssociatedInstanceList返回参数结构体
- */
-export interface DescribeAssociatedInstanceListResponse {
-  /**
-   * 实例数量
-   */
-  Total?: number
-  /**
-   * 实例列表
-   */
-  Data?: Array<AssociatedInstanceInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 关联实例信息
  */
 export interface AttachInsInfo {
@@ -3055,6 +3037,41 @@ export interface DescribeNDRAssetIdentificationListRequest {
    * 查询过滤条件，多个条件之间为AND的关系
    */
   Filters?: Array<OperatorFilter>
+}
+
+/**
+ * DescribeSerialRegion返回参数结构体
+ */
+export interface DescribeSerialRegionResponse {
+  /**
+   * 串行地域带宽分配
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SerialRegionLst?: Array<SerialRegionInfo>
+  /**
+   * 剩余可分配通用带宽 单位M
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnUsedWidth?: number
+  /**
+   * 可配置实例个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnUsedQuota?: number
+  /**
+   * 旁路带宽数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BypassWidth?: number
+  /**
+   * 赠送的旁路带宽数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SendBypassWidth?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4878,13 +4895,21 @@ export interface DescribeUnHandleEventTabListRequest {
 }
 
 /**
- * UpdateClusterVpcFw请求参数结构体
+ * DescribeAssociatedInstanceList返回参数结构体
  */
-export interface UpdateClusterVpcFwRequest {
+export interface DescribeAssociatedInstanceListResponse {
   /**
-   * ccn防火墙开关配置信息
+   * 实例数量
    */
-  CcnSwitch: CcnSwitchInfo
+  Total?: number
+  /**
+   * 实例列表
+   */
+  Data?: Array<AssociatedInstanceInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6306,6 +6331,16 @@ export interface FwVpcCidr {
 }
 
 /**
+ * ModifyRunSyncAsset请求参数结构体
+ */
+export interface ModifyRunSyncAssetRequest {
+  /**
+   * 0: 互联网防火墙开关，1：vpc 防火墙开关
+   */
+  Type?: number
+}
+
+/**
  * CreateAcRules返回参数结构体
  */
 export interface CreateAcRulesResponse {
@@ -6624,6 +6659,16 @@ export interface CfwNatDnatRule {
    * NAT防火墙转发规则描述。
    */
   Description: string
+}
+
+/**
+ * UpdateClusterVpcFw请求参数结构体
+ */
+export interface UpdateClusterVpcFwRequest {
+  /**
+   * ccn防火墙开关配置信息
+   */
+  CcnSwitch: CcnSwitchInfo
 }
 
 /**
@@ -7517,6 +7562,40 @@ export interface DescribeUnHandleEventTabListResponse {
 }
 
 /**
+ * 防火墙串行地域带宽分配情况
+ */
+export interface SerialRegionInfo {
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region: string
+  /**
+   * 分配带宽值 单位Mbps
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Width?: number
+  /**
+   * 弹性开关
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElasticSwitch?: number
+  /**
+   * 弹性带宽上限，单位Mbps
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ElasticBandwidth?: number
+  /**
+   * 七天入向峰值带宽，单位bps
+   */
+  InFlowMax?: number
+  /**
+   * 七天出向峰值带宽，单位bps
+   */
+  OutFlowMax?: number
+}
+
+/**
  * DescribeNatFwInstancesInfo返回参数结构体
  */
 export interface DescribeNatFwInstancesInfoResponse {
@@ -7669,14 +7748,9 @@ success 成功
 }
 
 /**
- * ModifyRunSyncAsset请求参数结构体
+ * DescribeSerialRegion请求参数结构体
  */
-export interface ModifyRunSyncAssetRequest {
-  /**
-   * 0: 互联网防火墙开关，1：vpc 防火墙开关
-   */
-  Type?: number
-}
+export type DescribeSerialRegionRequest = null
 
 /**
  * 封禁放通IOC列表

@@ -1384,6 +1384,16 @@ export interface DeleteAttackWhiteRuleResponse {
 }
 
 /**
+ * LLMRisks
+ */
+export interface LLMRisks {
+  /**
+   * 分数
+   */
+  Risks?: Array<ClawRiskItem>
+}
+
+/**
  * CreateProtectGroup返回参数结构体
  */
 export interface CreateProtectGroupResponse {
@@ -2113,33 +2123,25 @@ export interface PostAttackDownloadTaskResponse {
 }
 
 /**
- * DescribeAttackWhiteRule请求参数结构体
+ * ClawRiskItem
  */
-export interface DescribeAttackWhiteRuleRequest {
+export interface ClawRiskItem {
   /**
-   * 需要查询的域名
+   * 风险类别
    */
-  Domain: string
+  RiskType?: string
   /**
-   * 分页
+   * 规则id
    */
-  Offset: number
+  RuleId?: string
   /**
-   * 每页容量
+   * 规则名称
    */
-  Limit: number
+  RuleName?: string
   /**
-   * 排序的字段，支持user_id, signature_id, modify_time
+   * 分数
    */
-  By?: string
-  /**
-   * 排序方式
-   */
-  Order?: string
-  /**
-   * 筛选条件，支持SignatureId, MatchContent
-   */
-  Filters?: Array<FiltersItemNew>
+  Score?: number
 }
 
 /**
@@ -4957,6 +4959,11 @@ export interface ApiAsset {
    */
   HostList?: Array<string>
 }
+
+/**
+ * QueryBypassAllStatus请求参数结构体
+ */
+export type QueryBypassAllStatusRequest = null
 
 /**
  * DescribeOwaspRules请求参数结构体
@@ -8610,6 +8617,36 @@ export interface BatchCustomRuleListItem {
    * 动作灰度的比例
    */
   ActionRatio?: number
+}
+
+/**
+ * DescribeQClawContentSecCheck请求参数结构体
+ */
+export interface DescribeQClawContentSecCheckRequest {
+  /**
+   * <p>服务id,使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则</p>
+   */
+  ServiceId: string
+  /**
+   * <p>要审核的内容</p>
+   */
+  Content?: ApiGuardContent
+  /**
+   * <p>标识用户的id，限速使用，不填，则限速会不生效</p>
+   */
+  UserId?: string
+  /**
+   * <p>会话id</p>
+   */
+  SessionId?: string
+  /**
+   * <p>toolcall工具名称</p>
+   */
+  ToolName?: string
+  /**
+   * <p>toolcall工具执行的参数</p>
+   */
+  ToolArgs?: string
 }
 
 /**
@@ -12826,6 +12863,16 @@ export interface IpHitItemsData {
 }
 
 /**
+ * guard content
+ */
+export interface ApiGuardContent {
+  /**
+   * <p>prompt</p>
+   */
+  Prompt: string
+}
+
+/**
  * 域名的webshell开启状态
  */
 export interface WebshellStatus {
@@ -13567,9 +13614,34 @@ export interface ModifyDomainIpv6StatusRequest {
 }
 
 /**
- * QueryBypassAllStatus请求参数结构体
+ * DescribeAttackWhiteRule请求参数结构体
  */
-export type QueryBypassAllStatusRequest = null
+export interface DescribeAttackWhiteRuleRequest {
+  /**
+   * 需要查询的域名
+   */
+  Domain: string
+  /**
+   * 分页
+   */
+  Offset: number
+  /**
+   * 每页容量
+   */
+  Limit: number
+  /**
+   * 排序的字段，支持user_id, signature_id, modify_time
+   */
+  By?: string
+  /**
+   * 排序方式
+   */
+  Order?: string
+  /**
+   * 筛选条件，支持SignatureId, MatchContent
+   */
+  Filters?: Array<FiltersItemNew>
+}
 
 /**
  * DescribeAntiInfoLeakageRules返回参数结构体
@@ -16805,6 +16877,20 @@ export interface DescribeAttackWhiteRuleResponse {
    * 规则白名单列表
    */
   List?: Array<UserWhiteRule>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeQClawContentSecCheck返回参数结构体
+ */
+export interface DescribeQClawContentSecCheckResponse {
+  /**
+   * <p>检测结果</p>
+   */
+  Data?: LLMRisks
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -68,7 +68,7 @@ import {
   DescribeOutputRTMPPullSettings,
   AwsS3FileUploadTrigger,
   AdBreakInfo,
-  UserDefineOcrTextReviewTemplateInfoForUpdate,
+  SubtitleArea,
   ScheduleAnalysisTaskResult,
   ModifyOutputInfo,
   MediaSnapshotByTimeOffsetItem,
@@ -505,7 +505,7 @@ import {
   AdvancedSuperResolutionConfig,
   CreateMediaEvaluationRequest,
   BlindWatermarkTemplate,
-  TerrorismConfigureInfoForUpdate,
+  DetectVideoSubtitleAreaRequest,
   DescribePersonSamplesRequest,
   EnableScheduleResponse,
   Project,
@@ -644,6 +644,7 @@ import {
   SmartSubtitleTaskAsrFullTextResultOutput,
   TerrorismOcrReviewTemplateInfo,
   ExtractBlindWatermarkTaskConfig,
+  DetectVideoSubtitleAreaResponse,
   EraseTimeArea,
   DescribeSSAIActivateStateRequest,
   ImageEncodeConfig,
@@ -929,6 +930,7 @@ import {
   DeleteSmartEraseTemplateResponse,
   AiReviewTaskPornAsrResult,
   ModifyStreamPackageLinearAssemblyChannelResponse,
+  UserDefineOcrTextReviewTemplateInfoForUpdate,
   ModifyBlindWatermarkTemplateRequest,
   DescribeStreamLinkFlowRequest,
   UrlInputInfo,
@@ -958,6 +960,7 @@ import {
   DeleteSnapshotByTimeOffsetTemplateRequest,
   DescribeAnimatedGraphicsTemplatesResponse,
   FlowAudio,
+  TerrorismConfigureInfoForUpdate,
   BeautyFilterItemConfig,
   ActivityResItem,
   LiveActivityResItem,
@@ -1486,6 +1489,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 快速探测视频文件的硬字幕区域
+   */
+  async DetectVideoSubtitleArea(
+    req: DetectVideoSubtitleAreaRequest,
+    cb?: (error: string, rep: DetectVideoSubtitleAreaResponse) => void
+  ): Promise<DetectVideoSubtitleAreaResponse> {
+    return this.request("DetectVideoSubtitleArea", req, cb)
+  }
+
+  /**
    * 创建媒体传输的传输流配置。
    */
   async CreateStreamLinkFlow(
@@ -1809,7 +1822,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 音色设计，根据prompt生成音色ID
+   * 音色设计，根据prompt生成音色ID。克隆/设计音色数量上限默认100
    */
   async DesignVoiceAsync(
     req: DesignVoiceAsyncRequest,
@@ -2632,7 +2645,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 同步接口，返回克隆音色Id或合成音频结果
+   * 同步接口，返回克隆音色ID或合成音频结果。克隆/设计音色数量上限默认100
    */
   async SyncDubbing(
     req: SyncDubbingRequest,

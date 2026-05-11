@@ -610,6 +610,20 @@ export interface DescribeGroupReleaseRequest {
 }
 
 /**
+ * 模糊查询数据集信息指定字段和值
+ */
+export interface SearchFiltersProgram {
+  /**
+   * <p>数据集ID</p>
+   */
+  ProgramId?: string
+  /**
+   * <p>数据集名称</p>
+   */
+  ProgramName?: string
+}
+
+/**
  * DescribeConfigTemplate返回参数结构体
  */
 export interface DescribeConfigTemplateResponse {
@@ -3306,17 +3320,21 @@ export interface TaskLastExecuteStatus {
  */
 export interface DescribeProgramsRequest {
   /**
-   * 模糊查询数据集ID，数据集名称，不传入时查询全量
+   * <p>模糊查询数据集ID，数据集名称，不传入时查询全量</p>
    */
   SearchWord?: string
   /**
-   * 每页数量，默认值20
+   * <p>每页数量，默认值20</p>
    */
   Limit?: number
   /**
-   * 起始偏移量，默认值0
+   * <p>起始偏移量，默认值0</p>
    */
   Offset?: number
+  /**
+   * <p>模糊查询，传递模糊查询字段和对应的值</p>
+   */
+  SearchFilters?: SearchFiltersProgram
 }
 
 /**
@@ -13525,7 +13543,7 @@ export interface TsfPageBusinessLogConfig {
  */
 export interface DescribeProgramsResponse {
   /**
-   * 数据集列表
+   * <p>数据集列表</p>
    */
   Result?: PagedProgram
   /**

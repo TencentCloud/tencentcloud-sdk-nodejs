@@ -62,6 +62,20 @@ export interface DescribeCloudModerationResponse {
 }
 
 /**
+ * StartStreamIngest返回参数结构体
+ */
+export interface StartStreamIngestResponse {
+  /**
+   * 输入在线媒体流的任务 ID。任务 ID 是对一次输入在线媒体流生命周期过程的唯一标识，结束任务时会失去意义。任务 ID 需要业务保存下来，作为下次针对这个任务操作的参数。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 机器人参数
  */
 export interface AgentConfig {
@@ -415,6 +429,28 @@ export interface McuVideoParams {
    * 背景图在输出时的显示模式：0为裁剪，1为缩放并显示黑底，2为变比例伸缩。后台默认为变比例伸缩。
    */
   BackgroundRenderMode?: number
+}
+
+/**
+ * 混流自定义裁剪参数
+ */
+export interface McuCustomCrop {
+  /**
+   * 自定义裁剪起始位置的X偏移，单位为像素值，大于等于0。
+   */
+  LocationX: number
+  /**
+   * 自定义裁剪起始位置的Y偏移，单位为像素值，大于等于0。
+   */
+  LocationY: number
+  /**
+   * 自定义裁剪画面的宽度，单位为像素值，大于0，且LocationX+Width不超过10000
+   */
+  Width: number
+  /**
+   * 自定义裁剪画面的高度，单位为像素值，大于0，且LocationY+Height不超过10000
+   */
+  Height: number
 }
 
 /**
@@ -813,17 +849,29 @@ export interface DescribeTrtcRoomUsageResponse {
 }
 
 /**
- * StopPublishCdnStream返回参数结构体
+ * RegisterVoicePrint请求参数结构体
  */
-export interface StopPublishCdnStreamResponse {
+export interface RegisterVoicePrintRequest {
   /**
-   * 转推任务唯一的String Id
+   * 整个wav音频文件的base64字符串,其中wav文件限定为16k采样率, 16bit位深, 单声道, 8到18秒音频时长,有效音频不小于6秒(不能有太多静音段),编码数据大小不超过2M
    */
-  TaskId?: string
+  Audio: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 毫秒时间戳
    */
-  RequestId?: string
+  ReqTimestamp: number
+  /**
+   * 音频格式,目前只支持0,代表wav
+   */
+  AudioFormat: number
+  /**
+   * 音频名称,长度不要超过32
+   */
+  AudioName: string
+  /**
+   * 和声纹绑定的MetaInfo，长度最大不超过512
+   */
+  AudioMetaInfo?: string
 }
 
 /**
@@ -1166,6 +1214,32 @@ export interface CreateCloudModerationResponse {
 }
 
 /**
+ * DescribeTRTCSegmentModerationUsage请求参数结构体
+ */
+export interface DescribeTRTCSegmentModerationUsageRequest {
+  /**
+   * 查询开始时间，格式为YYYY-MM-DD HH:mm:ss。
+   */
+  StartTime: string
+  /**
+   * 查询结束时间，格式为YYYY-MM-DD HH:mm:ss。单次查询统计区间最多不能超过31天。
+   */
+  EndTime: string
+  /**
+   * 媒体类型，枚举值：audio（音频）、picture（图片）
+   */
+  Type: string
+  /**
+   * 使用场景（业务类型），枚举值：0 = AI 内容理解（审核场景）、1 = 音视频切片（云端切片场景）
+   */
+  Business: number
+  /**
+   * 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回多个应用的合计值。
+   */
+  SdkAppId?: number
+}
+
+/**
  * DescribeTRTCMarketScaleData返回参数结构体
  */
 export interface DescribeTRTCMarketScaleDataResponse {
@@ -1388,21 +1462,6 @@ export interface DescribeUserInfoRequest {
 范围：[1，100]。
    */
   PageSize?: number
-}
-
-/**
- * DescribeTRTCMarketQualityData返回参数结构体
- */
-export interface DescribeTRTCMarketQualityDataResponse {
-  /**
-   * TRTC监控数据出参
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: TRTCDataResult
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -1935,25 +1994,35 @@ export interface DescribeTRTCRealTimeQualityDataResponse {
 }
 
 /**
- * 混流自定义裁剪参数
+ * 指定动态布局中悬浮布局和屏幕分享布局的大画面信息，只在悬浮布局和屏幕分享布局有效。
  */
-export interface McuCustomCrop {
+export interface MaxVideoUser {
   /**
-   * 自定义裁剪起始位置的X偏移，单位为像素值，大于等于0。
+   * 用户媒体流参数。
    */
-  LocationX: number
+  UserMediaStream: UserMediaStream
+}
+
+/**
+ * DescribeTRTCAIRecognitionUsage返回参数结构体
+ */
+export interface DescribeTRTCAIRecognitionUsageResponse {
   /**
-   * 自定义裁剪起始位置的Y偏移，单位为像素值，大于等于0。
+   * 用量类型列表
    */
-  LocationY: number
+  UsageKey?: Array<string>
   /**
-   * 自定义裁剪画面的宽度，单位为像素值，大于0，且LocationX+Width不超过10000
+   * 用量列表
    */
-  Width: number
+  UsageList?: Array<UsageList>
   /**
-   * 自定义裁剪画面的高度，单位为像素值，大于0，且LocationY+Height不超过10000
+   * 总用量列表
    */
-  Height: number
+  TotalUsage?: Array<number>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1973,6 +2042,28 @@ export interface DescribeMixTranscodingUsageRequest {
    * TRTC的SdkAppId，和房间所对应的SdkAppId相同。如果没有这个参数，返回用户下全部实时音视频应用的汇总。
    */
   SdkAppId?: number
+}
+
+/**
+ * DescribeTRTCRealTimeQualityData请求参数结构体
+ */
+export interface DescribeTRTCRealTimeQualityDataRequest {
+  /**
+   * 用户SdkAppId（如：1400xxxxxx）
+   */
+  SdkAppId: string
+  /**
+   * 开始时间，unix时间戳，单位：秒（查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时）
+   */
+  StartTime: number
+  /**
+   * 结束时间，unix时间戳，单位：秒
+   */
+  EndTime: number
+  /**
+   * 房间ID
+   */
+  RoomId?: string
 }
 
 /**
@@ -2021,25 +2112,18 @@ export interface CreateCloudTranscriptionResponse {
 }
 
 /**
- * DescribeTRTCRealTimeQualityData请求参数结构体
+ * DescribeTRTCMarketQualityData返回参数结构体
  */
-export interface DescribeTRTCRealTimeQualityDataRequest {
+export interface DescribeTRTCMarketQualityDataResponse {
   /**
-   * 用户SdkAppId（如：1400xxxxxx）
+   * TRTC监控数据出参
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SdkAppId: string
+  Data?: TRTCDataResult
   /**
-   * 开始时间，unix时间戳，单位：秒（查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时）
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  StartTime: number
-  /**
-   * 结束时间，unix时间戳，单位：秒
-   */
-  EndTime: number
-  /**
-   * 房间ID
-   */
-  RoomId?: string
+  RequestId?: string
 }
 
 /**
@@ -3551,6 +3635,20 @@ export interface DeleteVoicePrintResponse {
 }
 
 /**
+ * 用量列表
+ */
+export interface UsageList {
+  /**
+   * 时间
+   */
+  TimeKey?: string
+  /**
+   * 用量数值
+   */
+  UsageValue?: Array<number>
+}
+
+/**
  * StartWebRecord返回参数结构体
  */
 export interface StartWebRecordResponse {
@@ -3763,6 +3861,52 @@ export interface DeleteCloudRecordingResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 自定义模板中有效，指定用户视频在混合画面中的位置。
+ */
+export interface PresetLayoutConfig {
+  /**
+   * 指定显示在该画面上的用户ID。如果不指定用户ID，会按照用户加入房间的顺序自动匹配PresetLayoutConfig中的画面设置。
+   */
+  UserId?: string
+  /**
+   * 当该画面指定用户时，代表用户的流类型。0为摄像头，1为屏幕分享。小画面为web用户时此值填0。
+   */
+  StreamType?: number
+  /**
+   * 该画面在输出时的宽度，单位为像素值，不填默认为0。
+   */
+  ImageWidth?: number
+  /**
+   * 该画面在输出时的高度，单位为像素值，不填默认为0。
+   */
+  ImageHeight?: number
+  /**
+   * 该画面在输出时的X偏移，单位为像素值，LocationX与ImageWidth之和不能超过混流输出的总宽度，不填默认为0。
+   */
+  LocationX?: number
+  /**
+   * 该画面在输出时的Y偏移，单位为像素值，LocationY与ImageHeight之和不能超过混流输出的总高度，不填默认为0。
+   */
+  LocationY?: number
+  /**
+   * 该画面在输出时的层级，不填默认为0。
+   */
+  ZOrder?: number
+  /**
+   * 该画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底。不填默认为0。
+   */
+  RenderMode?: number
+  /**
+   * 该当前位置用户混入的流类型：0为混入音视频，1为只混入视频，2为只混入音频。默认为0，建议配合指定用户ID使用。
+   */
+  MixInputType?: number
+  /**
+   * 占位图ID。启用占位图功能时，在当前位置的用户没有上行视频时显示占位图。占位图大小不能超过2M，在实时音视频控制台上传并生成，https://cloud.tencent.com/document/product/647/50769
+   */
+  PlaceImageId?: number
 }
 
 /**
@@ -4267,17 +4411,29 @@ export interface DismissRoomByStrRoomIdRequest {
 }
 
 /**
- * DescribeCloudTranscription请求参数结构体
+ * DescribeTRTCAIRecognitionUsage请求参数结构体
  */
-export interface DescribeCloudTranscriptionRequest {
+export interface DescribeTRTCAIRecognitionUsageRequest {
   /**
-   * TRTC的SDKAppId，和转录的房间所对应的SDKAppId相同。
+   * 查询开始时间，格式为YYYY-MM-DD HH:mm:ss。
    */
-  SdkAppId: number
+  StartTime: string
   /**
-   * 转录任务的唯一Id，在启动转录成功后会返回。
+   * 查询结束时间，格式为YYYY-MM-DD HH:mm:ss。单次查询统计区间最多不能超过31天。
    */
-  TaskId: string
+  EndTime: string
+  /**
+   * 用量类型列表。
+- conversation AI 实时对话
+- asr 语音转文本
+- translation 实时翻译
+- tts 实时语音合成
+   */
+  AuType: Array<string>
+  /**
+   * 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回多个应用的合计值。
+   */
+  SdkAppId?: string
 }
 
 /**
@@ -4452,29 +4608,25 @@ export interface VideoParams {
 }
 
 /**
- * RegisterVoicePrint请求参数结构体
+ * DescribeTRTCSegmentModerationUsage返回参数结构体
  */
-export interface RegisterVoicePrintRequest {
+export interface DescribeTRTCSegmentModerationUsageResponse {
   /**
-   * 整个wav音频文件的base64字符串,其中wav文件限定为16k采样率, 16bit位深, 单声道, 8到18秒音频时长,有效音频不小于6秒(不能有太多静音段),编码数据大小不超过2M
+   * 用量指标名列表
    */
-  Audio: string
+  UsageKey?: Array<string>
   /**
-   * 毫秒时间戳
+   * 用量明细列表
    */
-  ReqTimestamp: number
+  UsageList?: Array<UsageList>
   /**
-   * 音频格式,目前只支持0,代表wav
+   * 汇总用量列表
    */
-  AudioFormat: number
+  TotalUsage?: Array<number | bigint>
   /**
-   * 音频名称,长度不要超过32
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AudioName: string
-  /**
-   * 和声纹绑定的MetaInfo，长度最大不超过512
-   */
-  AudioMetaInfo?: string
+  RequestId?: string
 }
 
 /**
@@ -4700,6 +4852,20 @@ export interface ControlAIConversationRequest {
  * DismissRoomByStrRoomId返回参数结构体
  */
 export interface DismissRoomByStrRoomIdResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StopPublishCdnStream返回参数结构体
+ */
+export interface StopPublishCdnStreamResponse {
+  /**
+   * 转推任务唯一的String Id
+   */
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5023,13 +5189,21 @@ export interface SliceStorageParams {
 }
 
 /**
- * 指定动态布局中悬浮布局和屏幕分享布局的大画面信息，只在悬浮布局和屏幕分享布局有效。
+ * DescribeTRTCDedicatedCloudAccUsage请求参数结构体
  */
-export interface MaxVideoUser {
+export interface DescribeTRTCDedicatedCloudAccUsageRequest {
   /**
-   * 用户媒体流参数。
+   * 查询开始时间，格式为YYYY-MM-DD HH:mm:ss。
    */
-  UserMediaStream: UserMediaStream
+  StartTime: string
+  /**
+   * 查询结束时间，格式为YYYY-MM-DD HH:mm:ss。单次查询统计区间最多不能超过31天。
+   */
+  EndTime: string
+  /**
+   * 应用ID，可不传。传应用ID时返回的是该应用的用量，不传时返回多个应用的合计值。
+   */
+  SdkAppId?: number
 }
 
 /**
@@ -5663,49 +5837,25 @@ export interface McuAudioParams {
 }
 
 /**
- * 自定义模板中有效，指定用户视频在混合画面中的位置。
+ * DescribeTRTCDedicatedCloudAccUsage返回参数结构体
  */
-export interface PresetLayoutConfig {
+export interface DescribeTRTCDedicatedCloudAccUsageResponse {
   /**
-   * 指定显示在该画面上的用户ID。如果不指定用户ID，会按照用户加入房间的顺序自动匹配PresetLayoutConfig中的画面设置。
+   * 用量指标名列表
    */
-  UserId?: string
+  UsageKey?: Array<string>
   /**
-   * 当该画面指定用户时，代表用户的流类型。0为摄像头，1为屏幕分享。小画面为web用户时此值填0。
+   * 用量明细列表
    */
-  StreamType?: number
+  UsageList?: Array<UsageList>
   /**
-   * 该画面在输出时的宽度，单位为像素值，不填默认为0。
+   * 汇总用量列表
    */
-  ImageWidth?: number
+  TotalUsage?: Array<number | bigint>
   /**
-   * 该画面在输出时的高度，单位为像素值，不填默认为0。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ImageHeight?: number
-  /**
-   * 该画面在输出时的X偏移，单位为像素值，LocationX与ImageWidth之和不能超过混流输出的总宽度，不填默认为0。
-   */
-  LocationX?: number
-  /**
-   * 该画面在输出时的Y偏移，单位为像素值，LocationY与ImageHeight之和不能超过混流输出的总高度，不填默认为0。
-   */
-  LocationY?: number
-  /**
-   * 该画面在输出时的层级，不填默认为0。
-   */
-  ZOrder?: number
-  /**
-   * 该画面在输出时的显示模式：0为裁剪，1为缩放，2为缩放并显示黑底。不填默认为0。
-   */
-  RenderMode?: number
-  /**
-   * 该当前位置用户混入的流类型：0为混入音视频，1为只混入视频，2为只混入音频。默认为0，建议配合指定用户ID使用。
-   */
-  MixInputType?: number
-  /**
-   * 占位图ID。启用占位图功能时，在当前位置的用户没有上行视频时显示占位图。占位图大小不能超过2M，在实时音视频控制台上传并生成，https://cloud.tencent.com/document/product/647/50769
-   */
-  PlaceImageId?: number
+  RequestId?: string
 }
 
 /**
@@ -5724,17 +5874,17 @@ export interface McuPublishCdnParam {
 }
 
 /**
- * StartStreamIngest返回参数结构体
+ * DescribeCloudTranscription请求参数结构体
  */
-export interface StartStreamIngestResponse {
+export interface DescribeCloudTranscriptionRequest {
   /**
-   * 输入在线媒体流的任务 ID。任务 ID 是对一次输入在线媒体流生命周期过程的唯一标识，结束任务时会失去意义。任务 ID 需要业务保存下来，作为下次针对这个任务操作的参数。
+   * TRTC的SDKAppId，和转录的房间所对应的SDKAppId相同。
    */
-  TaskId?: string
+  SdkAppId: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 转录任务的唯一Id，在启动转录成功后会返回。
    */
-  RequestId?: string
+  TaskId: string
 }
 
 /**

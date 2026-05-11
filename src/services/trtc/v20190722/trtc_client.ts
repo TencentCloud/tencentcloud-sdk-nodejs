@@ -21,6 +21,7 @@ import {
   DescribeAsyncTextToSpeechRequest,
   ModifyCloudSliceTaskResponse,
   DescribeCloudModerationResponse,
+  StartStreamIngestResponse,
   AgentConfig,
   CreatePictureRequest,
   SubscribeModerationUserIds,
@@ -29,6 +30,7 @@ import {
   McuRecordParams,
   MixLayout,
   McuVideoParams,
+  McuCustomCrop,
   DescribeTRTCRealTimeScaleDataRequest,
   StartAIConversationResponse,
   STTConfig,
@@ -42,7 +44,7 @@ import {
   McuBackgroundCustomRender,
   AsyncTextToSpeechRequest,
   DescribeTrtcRoomUsageResponse,
-  StopPublishCdnStreamResponse,
+  RegisterVoicePrintRequest,
   TranscriptionUserInfoParams,
   AbnormalEvent,
   DeleteCloudSliceTaskRequest,
@@ -59,6 +61,7 @@ import {
   PictureInfo,
   DescribeCallDetailInfoRequest,
   CreateCloudModerationResponse,
+  DescribeTRTCSegmentModerationUsageRequest,
   DescribeTRTCMarketScaleDataResponse,
   TranslationConfig,
   McuTencentVod,
@@ -68,7 +71,6 @@ import {
   DescribeWebRecordResponse,
   DescribeCloudTranscriptionResponse,
   DescribeUserInfoRequest,
-  DescribeTRTCMarketQualityDataResponse,
   DeleteCloudModerationResponse,
   DescribeRelayUsageRequest,
   DismissRoomResponse,
@@ -96,12 +98,14 @@ import {
   PronunciationDict,
   DescribeCallDetailInfoResponse,
   DescribeTRTCRealTimeQualityDataResponse,
-  McuCustomCrop,
+  MaxVideoUser,
+  DescribeTRTCAIRecognitionUsageResponse,
   DescribeMixTranscodingUsageRequest,
+  DescribeTRTCRealTimeQualityDataRequest,
   DescribeStreamIngestResponse,
   MixTranscodeParams,
   CreateCloudTranscriptionResponse,
-  DescribeTRTCRealTimeQualityDataRequest,
+  DescribeTRTCMarketQualityDataResponse,
   DescribeVoicePrintResponse,
   SmallVideoLayoutParams,
   VoicePrintInfo,
@@ -161,6 +165,7 @@ import {
   DescribeCloudRecordingRequest,
   TencentVod,
   DeleteVoicePrintResponse,
+  UsageList,
   StartWebRecordResponse,
   TRTCDataResult,
   DescribeCloudRecordingResponse,
@@ -170,6 +175,7 @@ import {
   OutputParams,
   DeleteBasicModerationRequest,
   DeleteCloudRecordingResponse,
+  PresetLayoutConfig,
   StartAITranscriptionRequest,
   StopMCUMixTranscodeByStrRoomIdRequest,
   RecognizeConfig,
@@ -186,7 +192,7 @@ import {
   TranscriptionParam,
   CloudAuditStorage,
   DismissRoomByStrRoomIdRequest,
-  DescribeCloudTranscriptionRequest,
+  DescribeTRTCAIRecognitionUsageRequest,
   CreateCloudSliceTaskResponse,
   StartMCUMixTranscodeResponse,
   DescribeTrtcMcuTranscodeTimeResponse,
@@ -197,7 +203,7 @@ import {
   Terminology,
   TRTCDataResp,
   VideoParams,
-  RegisterVoicePrintRequest,
+  DescribeTRTCSegmentModerationUsageResponse,
   DescribePictureResponse,
   DescribeTrtcRoomUsageRequest,
   TextToSpeechResponse,
@@ -209,6 +215,7 @@ import {
   DescribeScaleInfoRequest,
   ControlAIConversationRequest,
   DismissRoomByStrRoomIdResponse,
+  StopPublishCdnStreamResponse,
   DescribeUnusualEventResponse,
   ModifyCloudRecordingResponse,
   SingleSubscribeParams,
@@ -224,7 +231,7 @@ import {
   UpdatePublishCdnStreamRequest,
   InvokeLLM,
   SliceStorageParams,
-  MaxVideoUser,
+  DescribeTRTCDedicatedCloudAccUsageRequest,
   AuditStorageParams,
   VoiceCloneResponse,
   TurnDetection,
@@ -250,9 +257,9 @@ import {
   TTSConfig,
   EncodeParams,
   McuAudioParams,
-  PresetLayoutConfig,
+  DescribeTRTCDedicatedCloudAccUsageResponse,
   McuPublishCdnParam,
-  StartStreamIngestResponse,
+  DescribeCloudTranscriptionRequest,
   AudioParams,
   StopAITranscriptionResponse,
   SeriesInfo,
@@ -572,6 +579,19 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
+     * 切片截图与内容理解用量查询，支持查询音视频切片（云端切片场景）和 AI 内容理解（审核场景）两种业务类型
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+     */
+  async DescribeTRTCSegmentModerationUsage(
+    req: DescribeTRTCSegmentModerationUsageRequest,
+    cb?: (error: string, rep: DescribeTRTCSegmentModerationUsageResponse) => void
+  ): Promise<DescribeTRTCSegmentModerationUsageResponse> {
+    return this.request("DescribeTRTCSegmentModerationUsage", req, cb)
+  }
+
+  /**
    * 传入声纹ID以及对应音频信息，更新对应声纹信息
    */
   async UpdateVoicePrint(
@@ -883,6 +903,17 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
+     * 查询SdkAppId下任意20条异常体验事件，返回异常体验ID与可能产生异常体验的原因。可查询14天内数据，查询起止时间不超过1个小时。支持跨天查询。（同老接口DescribeAbnormalEvent）
+异常体验ID映射见：https://cloud.tencent.com/document/product/647/44916
+     */
+  async DescribeUnusualEvent(
+    req: DescribeUnusualEventRequest,
+    cb?: (error: string, rep: DescribeUnusualEventResponse) => void
+  ): Promise<DescribeUnusualEventResponse> {
+    return this.request("DescribeUnusualEvent", req, cb)
+  }
+
+  /**
    * 声音克隆
    */
   async VoiceClone(
@@ -967,13 +998,16 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-   * 查询先前注册的声纹信息
-   */
-  async DescribeVoicePrint(
-    req: DescribeVoicePrintRequest,
-    cb?: (error: string, rep: DescribeVoicePrintResponse) => void
-  ): Promise<DescribeVoicePrintResponse> {
-    return this.request("DescribeVoicePrint", req, cb)
+     * TRTC专属云网络加速用量查询
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+     */
+  async DescribeTRTCDedicatedCloudAccUsage(
+    req: DescribeTRTCDedicatedCloudAccUsageRequest,
+    cb?: (error: string, rep: DescribeTRTCDedicatedCloudAccUsageResponse) => void
+  ): Promise<DescribeTRTCDedicatedCloudAccUsageResponse> {
+    return this.request("DescribeTRTCDedicatedCloudAccUsage", req, cb)
   }
 
   /**
@@ -1162,14 +1196,26 @@ networkDelay ：网络延迟率。
   }
 
   /**
-     * 查询SdkAppId下任意20条异常体验事件，返回异常体验ID与可能产生异常体验的原因。可查询14天内数据，查询起止时间不超过1个小时。支持跨天查询。（同老接口DescribeAbnormalEvent）
-异常体验ID映射见：https://cloud.tencent.com/document/product/647/44916
+     * AI 智能识别与对话用量查询（AI对话/语音转文本/实时翻译/实时语音合成）
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
      */
-  async DescribeUnusualEvent(
-    req: DescribeUnusualEventRequest,
-    cb?: (error: string, rep: DescribeUnusualEventResponse) => void
-  ): Promise<DescribeUnusualEventResponse> {
-    return this.request("DescribeUnusualEvent", req, cb)
+  async DescribeTRTCAIRecognitionUsage(
+    req: DescribeTRTCAIRecognitionUsageRequest,
+    cb?: (error: string, rep: DescribeTRTCAIRecognitionUsageResponse) => void
+  ): Promise<DescribeTRTCAIRecognitionUsageResponse> {
+    return this.request("DescribeTRTCAIRecognitionUsage", req, cb)
+  }
+
+  /**
+   * 查询先前注册的声纹信息
+   */
+  async DescribeVoicePrint(
+    req: DescribeVoicePrintRequest,
+    cb?: (error: string, rep: DescribeVoicePrintResponse) => void
+  ): Promise<DescribeVoicePrintResponse> {
+    return this.request("DescribeVoicePrint", req, cb)
   }
 
   /**

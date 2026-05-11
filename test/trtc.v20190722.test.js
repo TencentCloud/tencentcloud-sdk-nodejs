@@ -238,6 +238,16 @@ it("trtc.v20190722.DescribeTRTCRealTimeScaleData", async function () {
     }
 })
 
+it("trtc.v20190722.DescribeTRTCSegmentModerationUsage", async function () {
+    try {
+       const data = await client.DescribeTRTCSegmentModerationUsage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.UpdateVoicePrint", async function () {
     try {
        const data = await client.UpdateVoicePrint({})
@@ -488,6 +498,16 @@ it("trtc.v20190722.StopStreamIngest", async function () {
     }
 })
 
+it("trtc.v20190722.DescribeUnusualEvent", async function () {
+    try {
+       const data = await client.DescribeUnusualEvent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.VoiceClone", async function () {
     try {
        const data = await client.VoiceClone({})
@@ -558,9 +578,9 @@ it("trtc.v20190722.DeleteCloudSliceTask", async function () {
     }
 })
 
-it("trtc.v20190722.DescribeVoicePrint", async function () {
+it("trtc.v20190722.DescribeTRTCDedicatedCloudAccUsage", async function () {
     try {
-       const data = await client.DescribeVoicePrint({})
+       const data = await client.DescribeTRTCDedicatedCloudAccUsage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,9 +748,19 @@ it("trtc.v20190722.UpdateStreamIngest", async function () {
     }
 })
 
-it("trtc.v20190722.DescribeUnusualEvent", async function () {
+it("trtc.v20190722.DescribeTRTCAIRecognitionUsage", async function () {
     try {
-       const data = await client.DescribeUnusualEvent({})
+       const data = await client.DescribeTRTCAIRecognitionUsage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.DescribeVoicePrint", async function () {
+    try {
+       const data = await client.DescribeVoicePrint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1442,6 +1442,36 @@ export interface DeleteLiveTimeShiftRuleResponse {
 }
 
 /**
+ * DescribeSceneVideoTask返回参数结构体
+ */
+export interface DescribeSceneVideoTaskResponse {
+  /**
+   * <p>一些特殊场景的返回信息。</p>
+   */
+  InfoList?: Array<SceneVideoOutputInfo>
+  /**
+   * <p>任务状态。</p><p>枚举值：</p><ul><li>DONE： 任务结束。</li><li>RUN： 任务运行中。</li><li>WAIT： 任务准备中。</li><li>FAIL： 任务失败。</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>输出视频的分辨率。示例：720x1280。</p>
+   */
+  Resolution?: string
+  /**
+   * <p>错误信息。</p>
+   */
+  Message?: string
+  /**
+   * <p>输出的视频Url。默认过期时间:12小时，请尽快拉取并转存。也可以使用私有Cos桶长期存储。</p>
+   */
+  VideoUrls?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 时移流。
  */
 export interface TimeShiftStreamInfo {
@@ -2060,17 +2090,17 @@ export interface DeleteCasterMarkWordInfoResponse {
 }
 
 /**
- * CreateLiveAvatarRoom请求参数结构体
+ * DescribeLiveTranscodeTemplates返回参数结构体
  */
-export interface CreateLiveAvatarRoomRequest {
+export interface DescribeLiveTranscodeTemplatesResponse {
   /**
-   * 直播间名称。
+   * 转码模板列表。
    */
-  Name: string
+  Templates?: Array<TemplateInfo>
   /**
-   * 操作者。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Operator?: string
+  RequestId?: string
 }
 
 /**
@@ -3272,6 +3302,64 @@ export interface DescribeStreamDayPlayInfoListResponse {
 }
 
 /**
+ * CreateSceneVideoTask请求参数结构体
+ */
+export interface CreateSceneVideoTaskRequest {
+  /**
+   * <p>模型名称。</p>
+   */
+  ModelName?: string
+  /**
+   * <p>模型版本号。</p>
+   */
+  ModelVersion?: string
+  /**
+   * <p>场景化类型。</p><p>枚举值：</p><ul><li>template_effect： 模板特效。</li></ul>
+   */
+  SceneType?: string
+  /**
+   * <p>输入的Prompt。避免出现违规词汇，审核会进行拦截。</p>
+   */
+  Prompt?: string
+  /**
+   * <p>指定输出的视频时长。</p><p>部分场景不支持指定时长。</p>
+   */
+  Duration?: number
+  /**
+   * <p>输入的首帧参考图片Url。需外网可访问。</p>
+   */
+  ImageUrl?: string
+  /**
+   * <p>输入的尾帧参考图片Url。</p>
+   */
+  LastImageUrl?: string
+  /**
+   * <p>多图参考生视频时，通过该参数指定多张参考图。</p>
+   */
+  ImageInfos?: Array<SceneVideoReferenceImageInfo>
+  /**
+   * <p>视频编辑时，指定参考视频信息。</p>
+   */
+  VideoInfos?: Array<SceneVideoReferenceVideoInfo>
+  /**
+   * <p>常规扩展参数。</p>
+   */
+  ExtraParameters?: SceneVideoExtraParam
+  /**
+   * <p>模型扩展参数，用于透传到模型侧。</p>
+   */
+  AdditionalParameters?: string
+  /**
+   * <p>输出结果存储到私有cos，需授权响应角色权限。</p>
+   */
+  StoreCosParam?: SceneStoreCosParam
+  /**
+   * <p>操作者名称。</p>
+   */
+  Operator?: string
+}
+
+/**
  * DeleteLivePadRule请求参数结构体
  */
 export interface DeleteLivePadRuleRequest {
@@ -3334,6 +3422,44 @@ export interface DescribeLiveStreamEventListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 用于场景化创作视频时用到的扩展参数信息。
+ */
+export interface SceneVideoExtraParam {
+  /**
+   * <p>指定输出分辨率。选项:720P, 1080P, 2K, 4K。</p>
+   */
+  Resolution?: string
+  /**
+   * <p>指定输出视频的宽高比，示例：16:9。</p>
+   */
+  AspectRatio?: string
+  /**
+   * <p>错峰模型，仅支持的模型可使用。</p>
+   */
+  OffPeak?: boolean
+  /**
+   * <p>自动添加水印，默认左上角添加 &quot;AI生成&quot; 标识。</p>
+   */
+  LogoAdd?: boolean
+  /**
+   * <p>使用音画同出。</p>
+   */
+  EnableAudio?: boolean
+  /**
+   * <p>生成背景音乐。</p>
+   */
+  EnableBgm?: boolean
+  /**
+   * <p>对输入的Prompt进行优化。</p>
+   */
+  EnablePromptEnhance?: boolean
+  /**
+   * <p>回调URL。</p>
+   */
+  CallbackUrl?: string
 }
 
 /**
@@ -3425,6 +3551,16 @@ export interface DescribeCasterTransitionTypesResponse {
  * StartLiveAvatarRoom返回参数结构体
  */
 export interface StartLiveAvatarRoomResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RestartLivePullStreamTask返回参数结构体
+ */
+export interface RestartLivePullStreamTaskResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4102,13 +4238,13 @@ export interface DescribeAIGCTaskStatusRequest {
 }
 
 /**
- * RestartLivePullStreamTask返回参数结构体
+ * DescribeSceneVideoTask请求参数结构体
  */
-export interface RestartLivePullStreamTaskResponse {
+export interface DescribeSceneVideoTaskRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>任务ID。</p>
    */
-  RequestId?: string
+  TaskId: string
 }
 
 /**
@@ -5498,6 +5634,24 @@ URL中禁止包含的字符：
 }
 
 /**
+ * 场景化视频结果文件上传COS时，需传入的信息。 需创建并授权LVB_QCSRole角色。
+ */
+export interface SceneStoreCosParam {
+  /**
+   * <p>Cos桶名称。</p>
+   */
+  CosBucketName?: string
+  /**
+   * <p>Cos桶地域。</p>
+   */
+  CosBucketRegion?: string
+  /**
+   * <p>存储路径。</p>
+   */
+  CosBucketPath?: string
+}
+
+/**
  * CreateLiveRecord请求参数结构体
  */
 export interface CreateLiveRecordRequest {
@@ -5982,6 +6136,16 @@ export interface UnBindLiveDomainCertResponse {
 }
 
 /**
+ * 用于场景化视频生成的参考视频素材。
+ */
+export interface SceneVideoReferenceVideoInfo {
+  /**
+   * <p>参考视频Url，需外网可访问。</p>
+   */
+  VideoUrl?: string
+}
+
+/**
  * CreateLiveAvatarScript返回参数结构体
  */
 export interface CreateLiveAvatarScriptResponse {
@@ -6108,6 +6272,20 @@ export interface CasterLayoutParam {
  * DeleteLiveCallbackTemplate返回参数结构体
  */
 export interface DeleteLiveCallbackTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateSceneVideoTask返回参数结构体
+ */
+export interface CreateSceneVideoTaskResponse {
+  /**
+   * <p>输出的任务ID。</p>
+   */
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8052,6 +8230,20 @@ export interface DeleteLiveTimeShiftRuleRequest {
 }
 
 /**
+ * 场景化视频输出信息。
+ */
+export interface SceneVideoOutputInfo {
+  /**
+   * <p>输出信息。</p>
+   */
+  Info?: string
+  /**
+   * <p>输出类型。</p>
+   */
+  Type?: string
+}
+
+/**
  * 通用混流输入参数。
  */
 export interface CommonMixInputParam {
@@ -8707,6 +8899,24 @@ export interface ModifyLivePushAuthKeyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 用于场景化生视频创作的参考图片信息。
+ */
+export interface SceneVideoReferenceImageInfo {
+  /**
+   * <p>输入的参考图Url，需外网可访问。</p>
+   */
+  ImageUrl?: string
+  /**
+   * <p>针对该参考图的Prompt描述，仅部分模型是支持。</p>
+   */
+  Text?: string
+  /**
+   * <p>参考类型。</p>
+   */
+  ReferenceType?: string
 }
 
 /**
@@ -9465,17 +9675,17 @@ export interface DescribeLiveTimeShiftRulesResponse {
 }
 
 /**
- * DescribeLiveTranscodeTemplates返回参数结构体
+ * CreateLiveAvatarRoom请求参数结构体
  */
-export interface DescribeLiveTranscodeTemplatesResponse {
+export interface CreateLiveAvatarRoomRequest {
   /**
-   * 转码模板列表。
+   * 直播间名称。
    */
-  Templates?: Array<TemplateInfo>
+  Name: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 操作者。
    */
-  RequestId?: string
+  Operator?: string
 }
 
 /**

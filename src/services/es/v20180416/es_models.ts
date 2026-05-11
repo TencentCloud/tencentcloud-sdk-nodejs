@@ -532,7 +532,7 @@ export interface DescribeInstanceLogsRequest {
  */
 export interface RestoreClusterSnapshotResponse {
   /**
-   * 集群实例id
+   * <p>集群实例id</p>
    */
   InstanceId?: string
   /**
@@ -1407,46 +1407,50 @@ export interface GetRequestTargetNodeTypesResponse {
  */
 export interface Operation {
   /**
-   * 操作唯一id
+   * <p>操作唯一id</p>
    */
   Id?: number
   /**
-   * 操作开始时间
+   * <p>操作开始时间</p>
    */
   StartTime?: string
   /**
-   * 操作类型
+   * <p>操作类型</p>
    */
   Type?: string
   /**
-   * 操作详情
+   * <p>操作详情</p>
    */
   Detail?: OperationDetail
   /**
-   * 操作结果
+   * <p>操作结果</p>
    */
   Result?: string
   /**
-   * 流程任务信息
+   * <p>流程任务信息</p>
    */
   Tasks?: Array<TaskDetail>
   /**
-   * 操作进度
+   * <p>操作进度</p>
    */
   Progress?: number
   /**
-   * 回滚标记， 0未回滚 ，1回滚中，2已回滚
+   * <p>回滚标记， 0未回滚 ，1回滚中，2已回滚</p>
    */
   RollbackTag?: number
   /**
-   * 操作者Uin
+   * <p>操作者Uin</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubAccountUin?: string
   /**
-   * 自动扩容标识：0-非自动，1-自动
+   * <p>自动扩容标识：0-非自动，1-自动</p>
    */
   AutoScaleTag?: number
+  /**
+   * <p>流程异常原因</p>
+   */
+  SuspendedReason?: string
 }
 
 /**
@@ -2401,45 +2405,45 @@ export interface StopLogstashPipelinesResponse {
  */
 export interface RestoreClusterSnapshotRequest {
   /**
-   * 集群实例Id，格式：es-xxxx
+   * <p>集群实例Id，格式：es-xxxx</p>
    */
   InstanceId: string
   /**
-   * 仓库名称
+   * <p>仓库名称</p>
    */
   RepositoryName: string
   /**
-   * 集群快照名称
+   * <p>集群快照名称</p>
    */
   SnapshotName: string
   /**
-   * 目标集群实例Id，格式：es-xxxx，如果是恢复到本地，则和InstanceId一致
+   * <p>目标集群实例Id，格式：es-xxxx，如果是恢复到本地，则和InstanceId一致</p>
    */
   TargetInstanceId: string
   /**
-   * elastic用户名对应的密码信息
+   * <p>elastic用户名对应的密码信息</p>
    */
   Password: string
   /**
-   * 要在所有恢复的索引中添加或更改的设置的逗号分隔列表。使用此参数可以在恢复快照时覆盖索引设置。
+   * <p>要在所有恢复的索引中添加或更改的设置的逗号分隔列表。使用此参数可以在恢复快照时覆盖索引设置。</p>
    */
   IndexSettings?: string
   /**
-   * 不应从快照还原的以逗号分隔的索引设置列表。
+   * <p>不应从快照还原的以逗号分隔的索引设置列表。</p>
    */
   IncludeGlobalState?: Array<string>
   /**
-   * 需要恢复的索引名称，非必填，为空则表示恢复所有
-
-支持传多个索引名称
+   * <p>需要恢复的索引名称，非必填，为空则表示恢复所有</p><p>支持传多个索引名称</p>
    */
   Indices?: string
   /**
-   * 如果为 false，则如果快照中包含的一个或多个索引没有所有主分片可用，则整个恢复操作将失败。默认为 false,
-
-如果为 true，则允许恢复具有不可用分片的索引的部分快照。只有成功包含在快照中的分片才会被恢复。所有丢失的碎片将被重新创建为空
+   * <p>如果为 false，则如果快照中包含的一个或多个索引没有所有主分片可用，则整个恢复操作将失败。默认为 false,</p><p>如果为 true，则允许恢复具有不可用分片的索引的部分快照。只有成功包含在快照中的分片才会被恢复。所有丢失的碎片将被重新创建为空</p>
    */
   Partial?: string
+  /**
+   * <p>快照恢复速率（单位mb）</p>
+   */
+  MaxRestorePerSec?: string
 }
 
 /**
@@ -3095,53 +3099,57 @@ export interface InquirePriceRenewInstanceResponse {
  */
 export interface CreateClusterSnapshotRequest {
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceId: string
   /**
-   * 快照名称
+   * <p>快照名称</p>
    */
   SnapshotName: string
   /**
-   * 索引名称
+   * <p>索引名称</p>
    */
   Indices?: string
   /**
-   * 0 腾讯云仓库; 1 客户仓库
+   * <p>0 腾讯云仓库; 1 客户仓库</p>
    */
   EsRepositoryType?: number
   /**
-   * 客户快照仓库名称
+   * <p>客户快照仓库名称</p>
    */
   UserEsRepository?: string
   /**
-   * 快照存储周期 单位天，范围[0, INF), 如果没有设置则默认7天
+   * <p>快照存储周期 单位天，范围[0, INF), 如果没有设置则默认7天</p>
    */
   StorageDuration?: number
   /**
-   * 备份锁定 0 不锁定; 1 锁定
+   * <p>备份锁定 0 不锁定; 1 锁定</p>
    */
   CosRetention?: number
   /**
-   * 锁定截止日期 2022-12-10T08:34:48.000Z
+   * <p>锁定截止日期 2022-12-10T08:34:48.000Z</p>
    */
   RetainUntilDate?: string
   /**
-   * 锁定宽限期,单位天
+   * <p>锁定宽限期,单位天</p>
    */
   RetentionGraceTime?: number
   /**
-   * 跨地域备份 0 不跨地域; 1 跨地域
+   * <p>跨地域备份 0 不跨地域; 1 跨地域</p>
    */
   RemoteCos?: number
   /**
-   * 跨地域备份地域名称 ap-guangzhou
+   * <p>跨地域备份地域名称 ap-guangzhou</p>
    */
   RemoteCosRegion?: string
   /**
-   * cos多AZ备份 0 单AZ; 1 多AZ
+   * <p>cos多AZ备份 0 单AZ; 1 多AZ</p>
    */
   MultiAz?: number
+  /**
+   * <p>快照创建速率（单位mb）</p>
+   */
+  MaxSnapshotPerSec?: string
 }
 
 /**
@@ -3472,77 +3480,89 @@ export interface NodeInfo {
  */
 export interface CosBackup {
   /**
-   * 是否开启cos自动备份
+   * <p>是否开启cos自动备份</p>
    */
   IsAutoBackup: boolean
   /**
-   * 自动备份执行时间（精确到小时）, e.g. "22:00"
+   * <p>自动备份执行时间（精确到小时）, e.g. &quot;22:00&quot;</p>
    */
   BackupTime: string
   /**
-   * 备份快照前缀
+   * <p>备份快照前缀</p>
    */
   SnapshotName?: string
   /**
-   * 0 腾讯云仓库; 1 客户仓库
+   * <p>0 腾讯云仓库; 1 客户仓库</p>
    */
   EsRepositoryType?: number
   /**
-   * 托管快照仓库名称
+   * <p>托管快照仓库名称</p>
    */
   PaasEsRepository?: string
   /**
-   * 客户快照仓库名称
+   * <p>客户快照仓库名称</p>
    */
   UserEsRepository?: string
   /**
-   * cos存储文件夹目录
+   * <p>cos存储文件夹目录</p>
    */
   CosBasePath?: string
   /**
-   * 快照存储周期 单位天
+   * <p>快照存储周期 单位天</p>
    */
   StorageDuration?: number
   /**
-   * 自动备份频率单位小时
+   * <p>自动备份频率单位小时</p>
    */
   AutoBackupInterval?: number
   /**
-   * 备份锁定 0 不锁定; 1 锁定
+   * <p>备份锁定 0 不锁定; 1 锁定</p>
    */
   CosRetention?: number
   /**
-   * 锁定截止日期 2022-12-10T08:34:48.000Z
+   * <p>锁定截止日期 2022-12-10T08:34:48.000Z</p>
    */
   RetainUntilDate?: string
   /**
-   * 锁定宽限期
+   * <p>锁定宽限期</p>
    */
   RetentionGraceTime?: number
   /**
-   * 跨地域备份 0 不跨地域; 1 跨地域
+   * <p>跨地域备份 0 不跨地域; 1 跨地域</p>
    */
   RemoteCos?: number
   /**
-   * 跨地域备份地域名称 ap-guangzhou
+   * <p>跨地域备份地域名称 ap-guangzhou</p>
    */
   RemoteCosRegion?: string
   /**
-   * 策略名称
+   * <p>策略名称</p>
    */
   StrategyName?: string
   /**
-   * 备份索引列表，如果不填表示备份所有索引
+   * <p>备份索引列表，如果不填表示备份所有索引</p>
    */
   Indices?: string
   /**
-   * cos多AZ备份 0 单AZ; 1 多AZ
+   * <p>cos多AZ备份 0 单AZ; 1 多AZ</p>
    */
   MultiAz?: number
   /**
-   * 策略创建时间
+   * <p>每节点写入仓库的最大速度 max_snapshot_bytes_per_sec, 默认40m</p>
+   */
+  MaxSnapshotPerSec?: string
+  /**
+   * <p>每节点读取仓库的最大速度 max_restore_bytes_per_sec, 710前默认40m, 710及以后默认无限制</p>
+   */
+  MaxRestorePerSec?: string
+  /**
+   * <p>策略创建时间</p>
    */
   CreateTime?: string
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId?: string
 }
 
 /**
@@ -3882,456 +3902,467 @@ export interface UpdateDictionariesResponse {
  */
 export interface InstanceInfo {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region?: string
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone?: string
   /**
-   * 用户ID
+   * <p>用户ID</p>
    */
   AppId?: number
   /**
-   * 用户UIN
+   * <p>用户UIN</p>
    */
   Uin?: string
   /**
-   * 实例所属VPC的UID
+   * <p>实例所属VPC的UID</p>
    */
   VpcUid?: string
   /**
-   * 实例所属子网的UID
+   * <p>实例所属子网的UID</p>
    */
   SubnetUid?: string
   /**
-   * 实例状态，0:处理中,1:正常,-1:停止,-2:销毁中,-3:已销毁, -4:隔离中,2:创建集群时初始化中
+   * <p>实例状态，0:处理中,1:正常,-1:停止,-2:销毁中,-3:已销毁, -4:隔离中,2:创建集群时初始化中</p>
    */
   Status?: number
   /**
-   * 自动续费标识。取值范围：
-RENEW_FLAG_AUTO：自动续费  
-RENEW_FLAG_MANUAL：不自动续费
-默认取值：
-RENEW_FLAG_DEFAULT：不自动续费
-若该参数指定为 RENEW_FLAG_AUTO，在账户余额充足的情况下，实例到期后将按月自动续费。
+   * <p>自动续费标识。取值范围：<br>RENEW_FLAG_AUTO：自动续费<br>RENEW_FLAG_MANUAL：不自动续费<br>默认取值：<br>RENEW_FLAG_DEFAULT：不自动续费<br>若该参数指定为 RENEW_FLAG_AUTO，在账户余额充足的情况下，实例到期后将按月自动续费。</p>
    */
   RenewFlag?: string
   /**
-   * 实例计费模式。取值范围：  PREPAID：表示预付费，即包年包月  POSTPAID_BY_HOUR：表示后付费，即按量计费  CDHPAID：CDH付费，即只对CDH计费，不对CDH上的实例计费。
+   * <p>实例计费模式。取值范围：  PREPAID：表示预付费，即包年包月  POSTPAID_BY_HOUR：表示后付费，即按量计费  CDHPAID：CDH付费，即只对CDH计费，不对CDH上的实例计费。</p>
    */
   ChargeType?: string
   /**
-   * 包年包月购买时长,单位:月
+   * <p>包年包月购买时长,单位:月</p>
    */
   ChargePeriod?: number
   /**
-   * 节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+   * <p>节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li></p>
    */
   NodeType?: string
   /**
-   * 节点个数
+   * <p>节点个数</p>
    */
   NodeNum?: number
   /**
-   * 节点CPU核数
+   * <p>节点CPU核数</p>
    */
   CpuNum?: number
   /**
-   * 节点内存大小，单位GB
+   * <p>节点内存大小，单位GB</p>
    */
   MemSize?: number
   /**
-   * 节点磁盘类型
+   * <p>节点磁盘类型</p>
    */
   DiskType?: string
   /**
-   * 节点磁盘大小，单位GB
+   * <p>节点磁盘大小，单位GB</p>
    */
   DiskSize?: number
   /**
-   * ES域名
+   * <p>ES域名</p>
    */
   EsDomain?: string
   /**
-   * ES VIP
+   * <p>ES VIP</p>
    */
   EsVip?: string
   /**
-   * ES端口
+   * <p>ES端口</p>
    */
   EsPort?: number
   /**
-   * Kibana访问url
+   * <p>Kibana访问url</p>
    */
   KibanaUrl?: string
   /**
-   * ES版本号
+   * <p>ES版本号</p>
    */
   EsVersion?: string
   /**
-   * ES配置项
+   * <p>ES配置项</p>
    */
   EsConfig?: string
   /**
-   * Kibana访问控制配置
+   * <p>Kibana访问控制配置</p>
    */
   EsAcl?: EsAcl
   /**
-   * 实例创建时间
+   * <p>实例创建时间</p>
    */
   CreateTime?: string
   /**
-   * 实例最后修改操作时间
+   * <p>实例最后修改操作时间</p>
    */
   UpdateTime?: string
   /**
-   * 实例到期时间
+   * <p>实例到期时间</p>
    */
   Deadline?: string
   /**
-   * 实例类型（实例类型标识，当前只有1,2两种）
+   * <p>实例类型（实例类型标识，当前只有1,2两种）</p>
    */
   InstanceType?: number
   /**
-   * Ik分词器配置
+   * <p>Ik分词器配置</p>
    */
   IkConfig?: EsDictionaryInfo
   /**
-   * 专用主节点配置
+   * <p>专用主节点配置</p>
    */
   MasterNodeInfo?: MasterNodeInfo
   /**
-   * cos自动备份配置
+   * <p>cos自动备份配置</p>
    */
   CosBackup?: CosBackup
   /**
-   * 是否允许cos自动备份
+   * <p>是否允许cos自动备份</p>
    */
   AllowCosBackup?: boolean
   /**
-   * 实例拥有的标签列表
+   * <p>实例拥有的标签列表</p>
    */
   TagList?: Array<TagInfo>
   /**
-   * License类型<li>oss：开源版</li><li>basic：基础版</li><li>platinum：白金版</li>默认值platinum
+   * <p>License类型<li>oss：开源版</li><li>basic：基础版</li><li>platinum：白金版</li>默认值platinum</p>
    */
   LicenseType?: string
   /**
-   * 是否为冷热集群<li>true: 冷热集群</li><li>false: 非冷热集群</li>
+   * <p>是否为冷热集群<li>true: 冷热集群</li><li>false: 非冷热集群</li></p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableHotWarmMode?: boolean
   /**
-   * 温节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+   * <p>温节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li></p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WarmNodeType?: string
   /**
-   * 温节点个数
+   * <p>温节点个数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WarmNodeNum?: number
   /**
-   * 温节点CPU核数
+   * <p>温节点CPU核数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WarmCpuNum?: number
   /**
-   * 温节点内存内存大小，单位GB
+   * <p>温节点内存内存大小，单位GB</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WarmMemSize?: number
   /**
-   * 温节点磁盘类型
+   * <p>温节点磁盘类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WarmDiskType?: string
   /**
-   * 温节点磁盘大小，单位GB
+   * <p>温节点磁盘大小，单位GB</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WarmDiskSize?: number
   /**
-   * 集群节点信息列表
+   * <p>集群节点信息列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeInfoList?: Array<NodeInfo>
   /**
-   * Es公网地址
+   * <p>Es公网地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EsPublicUrl?: string
   /**
-   * 多可用区网络信息
+   * <p>多可用区网络信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MultiZoneInfo?: Array<ZoneDetail>
   /**
-   * 部署模式<li>0：单可用区</li><li>1：多可用区，北京、上海、上海金融、广州、南京、香港、新加坡、法兰克福（白名单控制）</li>
+   * <p>部署模式<li>0：单可用区</li><li>1：多可用区，北京、上海、上海金融、广州、南京、香港、新加坡、法兰克福（白名单控制）</li></p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeployMode?: number
   /**
-   * ES公网访问状态<li>OPEN：开启</li><li>CLOSE：关闭</li>
+   * <p>ES公网访问状态<li>OPEN：开启</li><li>CLOSE：关闭</li></p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicAccess?: string
   /**
-   * ES公网访问控制配置
+   * <p>ES公网访问控制配置</p>
    */
   EsPublicAcl?: EsAcl
   /**
-   * Kibana内网地址
+   * <p>Kibana内网地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KibanaPrivateUrl?: string
   /**
-   * Kibana公网访问状态<li>OPEN：开启</li><li>CLOSE：关闭</li>
+   * <p>Kibana公网访问状态<li>OPEN：开启</li><li>CLOSE：关闭</li></p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KibanaPublicAccess?: string
   /**
-   * Kibana内网访问状态<li>OPEN：开启</li><li>CLOSE：关闭</li>
+   * <p>Kibana内网访问状态<li>OPEN：开启</li><li>CLOSE：关闭</li></p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KibanaPrivateAccess?: string
   /**
-   * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
+   * <p>6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li></p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityType?: number
   /**
-   * 场景化模板类型：0、不开启；1、通用场景；2、日志场景；3、搜索场景
+   * <p>场景化模板类型：0、不开启；1、通用场景；2、日志场景；3、搜索场景</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SceneType?: number
   /**
-   * Kibana配置项
+   * <p>Kibana配置项</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KibanaConfig?: string
   /**
-   * Kibana节点信息
+   * <p>Kibana节点信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KibanaNodeInfo?: KibanaNodeInfo
   /**
-   * 可视化节点配置
+   * <p>可视化节点配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WebNodeTypeInfo?: WebNodeTypeInfo
   /**
-   * JDK类型，oracle或kona
+   * <p>JDK类型，oracle或kona</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Jdk?: string
   /**
-   * 集群网络通讯协议
+   * <p>集群网络通讯协议</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Protocol?: string
   /**
-   * 安全组id
+   * <p>安全组id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityGroups?: Array<string>
   /**
-   * 冷节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+   * <p>冷节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li></p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ColdNodeType?: string
   /**
-   * 冷节点个数
+   * <p>冷节点个数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ColdNodeNum?: number
   /**
-   * 冷节点CPU核数
+   * <p>冷节点CPU核数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ColdCpuNum?: number
   /**
-   * 冷节点内存大小，单位GB
+   * <p>冷节点内存大小，单位GB</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ColdMemSize?: number
   /**
-   * 冷节点磁盘类型
+   * <p>冷节点磁盘类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ColdDiskType?: string
   /**
-   * 冷节点磁盘大小，单位GB
+   * <p>冷节点磁盘大小，单位GB</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ColdDiskSize?: number
   /**
-   * 冻节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+   * <p>冻节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li></p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FrozenNodeType?: string
   /**
-   * 冻节点个数
+   * <p>冻节点个数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FrozenNodeNum?: number
   /**
-   * 冻节点CPU核数
+   * <p>冻节点CPU核数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FrozenCpuNum?: number
   /**
-   * 冻节点内存大小，单位GB
+   * <p>冻节点内存大小，单位GB</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FrozenMemSize?: number
   /**
-   * 冻节点磁盘类型
+   * <p>冻节点磁盘类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FrozenDiskType?: string
   /**
-   * 冻节点磁盘大小，单位GB
+   * <p>冻节点磁盘大小，单位GB</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FrozenDiskSize?: number
   /**
-   * 集群健康状态 -1 未知；0 Green; 1 Yellow; 2 Red
+   * <p>集群健康状态 -1 未知；0 Green; 1 Yellow; 2 Red</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthStatus?: number
   /**
-   * https集群内网url
+   * <p>https集群内网url</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EsPrivateUrl?: string
   /**
-   * https集群内网域名
+   * <p>https集群内网域名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EsPrivateDomain?: string
   /**
-   * 集群的配置组信息
+   * <p>集群的配置组信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EsConfigSets?: Array<EsConfigSetInfo>
   /**
-   * 集群可维护时间段
+   * <p>集群可维护时间段</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OperationDuration?: OperationDuration
   /**
-   * web节点列表
+   * <p>web节点列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OptionalWebServiceInfos?: Array<OptionalWebServiceInfo>
   /**
-   * 自治索引开关
+   * <p>自治索引开关</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoIndexEnabled?: boolean
   /**
-   * 是否支持存储计算分离
+   * <p>是否支持存储计算分离</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableHybridStorage?: boolean
   /**
-   * 流程进度
+   * <p>流程进度</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProcessPercent?: number
   /**
-   * Kibana的alerting外网告警策略<li>OPEN：开启</li><li>CLOSE：关闭</li>
+   * <p>Kibana的alerting外网告警策略<li>OPEN：开启</li><li>CLOSE：关闭</li></p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KibanaAlteringPublicAccess?: string
   /**
-   * 本月是否有内核可以更新：false-无，true-有
+   * <p>本月是否有内核可以更新：false-无，true-有</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HasKernelUpgrade?: boolean
   /**
-   * cdcId，使用cdc子网时传递
+   * <p>cdcId，使用cdc子网时传递</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CdcId?: string
   /**
-   * kibana内网vip
+   * <p>kibana内网vip</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KibanaPrivateVip?: string
   /**
-   * 自定义kibana内网url
+   * <p>自定义kibana内网url</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomKibanaPrivateUrl?: string
   /**
-   * 节点出站访问详细信息
+   * <p>节点出站访问详细信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OutboundPublicAcls?: Array<OutboundPublicAcl>
   /**
-   * 网络连接方案
+   * <p>网络连接方案</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NetConnectScheme?: string
   /**
-   * 置放群组相关参数
+   * <p>置放群组相关参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DisasterRecoverGroupAffinity?: number
   /**
-   * 子产品ID枚举值： 开源版："sp_es_io2"， 基础版："sp_es_basic"，白金版："sp_es_platinum"，企业版："sp_es_enterprise"，CDC白金版："sp_es_cdc_platinum"，日志增强版："sp_es_enlogging"，tsearch："sp_tsearch_io2"，logstash："sp_es_logstash" ，可以为空，为空的时候后台取LicenseType映射该字段
+   * <p>子产品ID枚举值： 开源版：&quot;sp_es_io2&quot;， 基础版：&quot;sp_es_basic&quot;，白金版：&quot;sp_es_platinum&quot;，企业版：&quot;sp_es_enterprise&quot;，CDC白金版：&quot;sp_es_cdc_platinum&quot;，日志增强版：&quot;sp_es_enlogging&quot;，tsearch：&quot;sp_tsearch_io2&quot;，logstash：&quot;sp_es_logstash&quot; ，可以为空，为空的时候后台取LicenseType映射该字段</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubProductCode?: string
   /**
-   * 存算分离cos用量，单位M
+   * <p>存算分离cos用量，单位M</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CosBucketStorageSize?: number
   /**
-   * 读写分离模式：0-不开启，1-本地读写分离，2-远端读写分离
+   * <p>读写分离模式：0-不开启，1-本地读写分离，2-远端读写分离</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReadWriteMode?: number
   /**
-   * 是否有置放群组异步调度任务
+   * <p>是否有置放群组异步调度任务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableScheduleRecoverGroup?: boolean
   /**
-   * 异步调度任务的时间
+   * <p>异步调度任务的时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableScheduleOperationDuration?: EnableScheduleOperationDuration
   /**
-   * 开启集群保护：OPEN-开启，CLOSE-关闭
+   * <p>开启集群保护：OPEN-开启，CLOSE-关闭</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableDestroyProtection?: string
   /**
-   * kibana内网访问地址
+   * <p>kibana内网访问地址</p>
    */
   ShowKibanaIpPort?: string
   /**
-   * 是否为CDZLite可用区
+   * <p>是否为CDZLite可用区</p>
    */
   IsCdzLite?: boolean
   /**
-   * 集群内网tcp地址
+   * <p>集群内网tcp地址</p>
    */
   EsPrivateTcpUrl?: string
+  /**
+   * <p>是否在回收站内</p><p>默认值：false</p>
+   */
+  IsInRecycleBin?: boolean
+  /**
+   * <p>回收站内是否锁定</p><p>默认值：false</p>
+   */
+  RecycleLockEnabled?: boolean
+  /**
+   * <p>预计销毁的时间</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
+   */
+  MayDestroyPoint?: string
+  /**
+   * <p>延迟销毁的时间</p><p>单位：天</p>
+   */
+  DelayDestroyInterval?: number
 }
 
 /**
@@ -4706,28 +4737,29 @@ export interface ModifyEsVipSecurityGroupRequest {
  */
 export interface ProcessDetail {
   /**
-   * 已完成数量
+   * <p>已完成数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Completed?: number
   /**
-   * 剩余数量
+   * <p>剩余数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Remain?: number
   /**
-   * 总数量
+   * <p>总数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
-   * 任务类型：
-60：重启型任务
-70：分片迁移型任务
-80：节点变配任务
+   * <p>任务类型：<br>60：重启型任务<br>70：分片迁移型任务<br>80：节点变配任务</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskType?: number
+  /**
+   * <p>预估剩余时间</p><p>单位：秒</p>
+   */
+  EstimatedTimeRemaining?: number
 }
 
 /**
@@ -4859,9 +4891,17 @@ export interface GetIpTraceStatusResponse {
  */
 export interface DeleteInstanceRequest {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId: string
+  /**
+   * <p>回收站锁定设置，true时不可手动销毁，到预设时间后自动销毁</p><p>默认值：false</p>
+   */
+  LockEnabled?: boolean
+  /**
+   * <p>放入回收站的锁定时间</p><p>取值范围：[1, 7]</p><p>单位：天</p><p>默认值：1</p>
+   */
+  LockDuration?: number
 }
 
 /**
@@ -4959,163 +4999,165 @@ export interface DescribeIndexMetaRequest {
  */
 export interface Snapshots {
   /**
-   * 快照名称
+   * <p>快照名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotName?: string
   /**
-   * 快照Uuid
+   * <p>快照Uuid</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Uuid?: string
   /**
-   * 仓库名称
+   * <p>仓库名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Repository?: string
   /**
-   * 该快照所属集群的版本号
+   * <p>该快照所属集群的版本号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
   /**
-   * 备份的索引列表
+   * <p>备份的索引列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Indices?: Array<string>
   /**
-   * 备份的datastream列表
+   * <p>备份的datastream列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataStreams?: Array<string>
   /**
-   * 备份的状态
-
-FAILED            备份失败
-
-IN_PROGRESS 备份执行中
-
-PARTIAL          备份部分成功，部分失败，备份失败的索引和原因会在Failures字段中展示
-
-SUCCESS     备份成功
+   * <p>备份的状态</p><p>FAILED            备份失败</p><p>IN_PROGRESS 备份执行中</p><p>PARTIAL          备份部分成功，部分失败，备份失败的索引和原因会在Failures字段中展示</p><p>SUCCESS     备份成功</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   State?: string
   /**
-   * 快照备份的开始时间
+   * <p>快照备份的开始时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
-   * 快照备份的结束时间
+   * <p>快照备份的结束时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
-   * 快照备份的耗时时间
+   * <p>快照备份的耗时时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DurationInMillis?: number
   /**
-   * 备份的总分片数
+   * <p>备份的总分片数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalShards?: number
   /**
-   * 备份失败的分片数量
+   * <p>备份失败的分片数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedShards?: number
   /**
-   * 备份成功的分片数量
+   * <p>备份成功的分片数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SuccessfulShards?: number
   /**
-   * 备份失败的索引分片和失败原因
+   * <p>备份失败的索引分片和失败原因</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Failures?: Array<Failures>
   /**
-   * 是否用户备份
+   * <p>是否用户备份</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserBackUp?: string
   /**
-   * 0 腾讯云仓库; 1 客户仓库
+   * <p>0 腾讯云仓库; 1 客户仓库</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EsRepositoryType?: number
   /**
-   * 托管快照仓库名称
+   * <p>托管快照仓库名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PaasEsRepository?: string
   /**
-   * 客户快照仓库名称
+   * <p>客户快照仓库名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserEsRepository?: string
   /**
-   * 快照存储周期 单位天，范围[0, INF), 如果没有设置则默认7天
+   * <p>快照存储周期 单位天，范围[0, INF), 如果没有设置则默认7天</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageDuration?: number
   /**
-   * 自动备份频率, 如果是0,则等效24
+   * <p>自动备份频率, 如果是0,则等效24</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoBackupInterval?: number
   /**
-   * 备份锁定 0 不锁定; 1 锁定
+   * <p>备份锁定 0 不锁定; 1 锁定</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CosRetention?: number
   /**
-   * 锁定截止日期 2022-12-10T08:34:48.000Z
+   * <p>锁定截止日期 2022-12-10T08:34:48.000Z</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RetainUntilDate?: string
   /**
-   * 锁定宽限期,单位天
+   * <p>锁定宽限期,单位天</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RetentionGraceTime?: number
   /**
-   * 是否已经备份锁定 0 不锁定; 1 锁定
+   * <p>是否已经备份锁定 0 不锁定; 1 锁定</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsLocked?: number
   /**
-   * 跨地域备份 0 不跨地域; 1 跨地域
+   * <p>跨地域备份 0 不跨地域; 1 跨地域</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoteCos?: number
   /**
-   * 跨地域备份地域名称 ap-guangzhou
+   * <p>跨地域备份地域名称 ap-guangzhou</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoteCosRegion?: string
   /**
-   * 备份加密 0 不加密; 1 加密
+   * <p>备份加密 0 不加密; 1 加密</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CosEncryption?: number
   /**
-   * kms密钥
+   * <p>kms密钥</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KmsKey?: string
   /**
-   * 策略名称
+   * <p>策略名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StrategyName?: string
   /**
-   * cos多AZ备份 0 单AZ; 1 多AZ
+   * <p>cos多AZ备份 0 单AZ; 1 多AZ</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MultiAz?: number
+  /**
+   * <p>每节点写入仓库的最大速度 max_snapshot_bytes_per_sec, 默认40m</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxSnapshotPerSec?: string
+  /**
+   * <p>实例ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
 }
 
 /**
@@ -6835,7 +6877,7 @@ export interface CollectorOutputInstance {
  */
 export interface CreateClusterSnapshotResponse {
   /**
-   * 实例名称
+   * <p>实例名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string

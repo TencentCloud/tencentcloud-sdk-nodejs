@@ -772,23 +772,23 @@ export interface RollbackRoGroupInfo {
  */
 export interface CreateClustersResponse {
   /**
-   * 冻结流水ID
+   * <p>冻结流水ID</p>
    */
   TranId?: string
   /**
-   * 订单号
+   * <p>订单号</p>
    */
   DealNames?: Array<string>
   /**
-   * 资源ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取资源ID）
+   * <p>资源ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取资源ID）</p>
    */
   ResourceIds?: Array<string>
   /**
-   * 集群ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取集群ID）
+   * <p>集群ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取集群ID）</p>
    */
   ClusterIds?: Array<string>
   /**
-   * 大订单号
+   * <p>大订单号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BigDealIds?: Array<string>
@@ -1491,246 +1491,242 @@ export interface CloseSSLRequest {
  */
 export interface CynosdbInstance {
   /**
-   * 用户Uin
+   * <p>用户Uin</p>
    */
   Uin?: string
   /**
-   * 用户AppId
+   * <p>用户AppId</p>
    */
   AppId?: number
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId?: number
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region?: string
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone?: string
   /**
-   * 实例状态
+   * <p>实例状态</p>
    */
   Status?: string
   /**
-   * 实例状态中文描述
+   * <p>实例状态中文描述</p>
    */
   StatusDesc?: string
   /**
-   * 实例形态，是否为serverless实例
+   * <p>实例形态，是否为serverless实例</p>
    */
   DbMode?: string
   /**
-   * 数据库类型
+   * <p>数据库类型</p>
    */
   DbType?: string
   /**
-   * 数据库版本
+   * <p>数据库版本</p>
    */
   DbVersion?: string
   /**
-   * Cpu，单位：核
+   * <p>Cpu，单位：核</p>
    */
   Cpu?: number
   /**
-   * 内存，单位：GB
+   * <p>内存，单位：GB</p>
    */
   Memory?: number
   /**
-   * 存储量，单位：GB
+   * <p>存储量，单位：GB</p>
    */
   Storage?: number
   /**
-   * 实例类型
+   * <p>实例类型</p>
    */
   InstanceType?: string
   /**
-   * 实例当前角色
+   * <p>实例当前角色</p>
    */
   InstanceRole?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * VPC网络ID
+   * <p>VPC网络ID</p>
    */
   VpcId?: string
   /**
-   * 子网ID
+   * <p>子网ID</p>
    */
   SubnetId?: string
   /**
-   * 实例内网IP
+   * <p>实例内网IP</p>
    */
   Vip?: string
   /**
-   * 实例内网端口
+   * <p>实例内网端口</p>
    */
   Vport?: number
   /**
-   * 付费模式
+   * <p>付费模式</p>
    */
   PayMode?: number
   /**
-   * 实例过期时间
+   * <p>实例过期时间</p>
    */
   PeriodEndTime?: string
   /**
-   * 销毁期限
+   * <p>销毁期限</p>
    */
   DestroyDeadlineText?: string
   /**
-   * 隔离时间
+   * <p>隔离时间</p>
    */
   IsolateTime?: string
   /**
-   * 网络类型
+   * <p>网络类型</p>
    */
   NetType?: number
   /**
-   * 外网域名
+   * <p>外网域名</p>
    */
   WanDomain?: string
   /**
-   * 外网IP
+   * <p>外网IP</p>
    */
   WanIP?: string
   /**
-   * 外网端口
+   * <p>外网端口</p>
    */
   WanPort?: number
   /**
-   * 外网状态
+   * <p>外网状态</p>
    */
   WanStatus?: string
   /**
-   * 实例销毁时间
+   * <p>实例销毁时间</p>
    */
   DestroyTime?: string
   /**
-   * Cynos内核版本
+   * <p>Cynos内核版本</p>
    */
   CynosVersion?: string
   /**
-   * 正在处理的任务
+   * <p>正在处理的任务</p>
    */
   ProcessingTask?: string
   /**
-   * 续费标志
+   * <p>续费标志</p>
    */
   RenewFlag?: number
   /**
-   * serverless实例cpu下限
+   * <p>serverless实例cpu下限</p>
    */
   MinCpu?: number
   /**
-   * serverless实例cpu上限
+   * <p>serverless实例cpu上限</p>
    */
   MaxCpu?: number
   /**
-   * serverless实例状态, 可选值：
-resume
-pause
+   * <p>serverless实例状态, 可选值：<br>resume<br>pause</p>
    */
   ServerlessStatus?: string
   /**
-   * 预付费存储Id
+   * <p>预付费存储Id</p>
    */
   StorageId?: string
   /**
-   * 存储付费类型
+   * <p>存储付费类型</p>
    */
   StoragePayMode?: number
   /**
-   * 物理区
+   * <p>物理区</p>
    */
   PhysicalZone?: string
   /**
-   * 商业类型
+   * <p>商业类型</p>
    */
   BusinessType?: string
   /**
-   * 任务
+   * <p>任务</p>
    */
   Tasks?: Array<ObjectTask>
   /**
-   * 是否冻结
+   * <p>是否冻结</p>
    */
   IsFreeze?: string
   /**
-   * 资源标签
+   * <p>资源标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceTags?: Array<Tag>
   /**
-   * 主可用区
+   * <p>主可用区</p>
    */
   MasterZone?: string
   /**
-   * 备可用区
+   * <p>备可用区</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SlaveZones?: Array<string>
   /**
-   * 实例网络信息
+   * <p>实例网络信息</p>
    */
   InstanceNetInfo?: Array<InstanceNetInfo>
   /**
-   * 实例绑定资源包信息（此处只返回计算资源包，即packageType=CCU）
+   * <p>实例绑定资源包信息（此处只返回计算资源包，即packageType=CCU）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourcePackages?: Array<ResourcePackage>
   /**
-   * 实例索引形态,可选值【mixedRowColumn（行列混存），onlyRowIndex（仅行存）】
+   * <p>实例索引形态,可选值【mixedRowColumn（行列混存），onlyRowIndex（仅行存）】</p>
    */
   InstanceIndexMode?: string
   /**
-   * 当前实例支持的能力
+   * <p>当前实例支持的能力</p>
    */
   InstanceAbility?: InstanceAbility
   /**
-   * 实例机器类型
-1. common，通用型。
-2. exclusive，独享型。
+   * <p>实例机器类型</p><ol><li>common，通用型。</li><li>exclusive，独享型。</li></ol>
    */
   DeviceType?: string
   /**
-   * 实例存储类型
+   * <p>实例存储类型</p>
    */
   InstanceStorageType?: string
   /**
-   * 未知字段
+   * <p>未知字段</p>
    */
   CynosVersionTag?: string
   /**
-   * libradb 节点信息
+   * <p>libradb 节点信息</p>
    */
   NodeList?: Array<string>
   /**
-   * 全球数据库唯一标识
+   * <p>全球数据库唯一标识</p>
    */
   GdnId?: string
 }
@@ -2918,12 +2914,12 @@ export interface DescribeChangedParamsAfterUpgradeResponse {
  */
 export interface ModifyServerlessStrategyResponse {
   /**
-   * 异步流程id
+   * <p>异步流程id</p>
    * @deprecated
    */
   FlowId?: number
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   TaskId?: number
   /**
@@ -3204,211 +3200,187 @@ export interface CreateLibraDBClustersRequest {
  */
 export interface CreateClustersRequest {
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone: string
   /**
-   * 所属VPC网络ID
+   * <p>所属VPC网络ID</p>
    */
   VpcId: string
   /**
-   * 所属子网ID
+   * <p>所属子网ID</p>
    */
   SubnetId: string
   /**
-   * 数据库类型，取值范围: 
-<li> MYSQL </li>
+   * <p>数据库类型</p><p>枚举值：</p><ul><li>MYSQL： MYSQL</li></ul>
    */
   DbType: string
   /**
-   * 数据库版本，取值范围: 
-<li> MYSQL可选值：5.7，8.0 </li>
+   * <p>数据库版本</p><p>枚举值：</p><ul><li>5.7： MySQL5.7版本</li><li>8.0： MySQL8.0版本</li></ul>
    */
   DbVersion: string
   /**
-   * 所属项目ID
+   * <p>所属项目ID</p>
    */
   ProjectId?: number
   /**
-   * 当DbMode为NORMAL或不填时必选
-普通实例Cpu核数
+   * <p>当DbMode为NORMAL或不填时必选<br>普通实例Cpu核数</p>
    */
   Cpu?: number
   /**
-   * 当DbMode为NORMAL或不填时必选
-普通实例内存,单位GB
+   * <p>当DbMode为NORMAL或不填时必选<br>普通实例内存,单位GB</p>
    */
   Memory?: number
   /**
-   * 实例数量，数量范围为(0,16]，默认值为2（即一个rw实例+一个ro实例），传递的n表示1个rw实例+n-1个ro实例（规格相同），如需要更精确的集群组成搭配，请使用InstanceInitInfos
+   * <p>实例数量，数量范围为(0,16]，默认值为2（即一个rw实例+一个ro实例），传递的n表示1个rw实例+n-1个ro实例（规格相同），如需要更精确的集群组成搭配，请使用InstanceInitInfos</p>
    */
   InstanceCount?: number
   /**
-   * 该参数无实际意义，已废弃。
-存储大小，单位GB。
+   * <p>该参数无实际意义，已废弃。<br>存储大小，单位GB。</p>
    */
   Storage?: number
   /**
-   * 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'）
+   * <p>集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（&#39;-&#39;,&#39;_&#39;,&#39;.&#39;）</p>
    */
   ClusterName?: string
   /**
-   * 账号密码(8-64个字符，包含大小写英文字母、数字和符号~!@#$%^&*_-+=`|\(){}[]:;'<>,.?/中的任意三种)
+   * <p>账号密码(8-64个字符，包含大小写英文字母、数字和符号~!@#$%^&amp;*_-+=`|(){}[]:;&#39;&lt;&gt;,.?/中的任意三种)</p>
    */
   AdminPassword?: string
   /**
-   * 端口，默认3306，取值范围[0, 65535)
+   * <p>端口，默认3306，取值范围[0, 65535)</p>
    */
   Port?: number
   /**
-   * 计费模式，支持值为0和1，默认值为0。
-取值为0，表示按量计费。
-取值为1，表示包年包月。
+   * <p>计费模式</p><p>枚举值：</p><ul><li>0： 表示按量计费</li><li>1： 表示包年包月</li></ul><p>默认值：0</p>
    */
   PayMode?: number
   /**
-   * 购买集群数，可选值范围[1,50]，默认为1
+   * <p>购买集群数，可选值范围[1,50]，默认为1</p>
    */
   Count?: number
   /**
-   * 回档类型：
-noneRollback：不回档；
-snapRollback，快照回档；
-timeRollback，时间点回档
+   * <p>回档类型</p><p>枚举值：</p><ul><li>noneRollback： 不回档</li><li>snapRollback： 快照回档</li><li>timeRollback： 时间点回档</li></ul>
    */
   RollbackStrategy?: string
   /**
-   * 快照回档，表示snapshotId；时间点回档，表示queryId，为0，表示需要判断时间点是否有效
+   * <p>快照回档，表示snapshotId；时间点回档，表示queryId，为0，表示需要判断时间点是否有效</p>
    */
   RollbackId?: number
   /**
-   * 回档时，传入源集群ID，用于查找源poolId
+   * <p>回档时，传入源集群ID，用于查找源poolId</p>
    */
   OriginalClusterId?: string
   /**
-   * 时间点回档，指定时间；快照回档，快照时间
+   * <p>时间点回档，指定时间；快照回档，快照时间</p>
    */
   ExpectTime?: string
   /**
-   * 该参数无实际意义，已废弃。
-时间点回档，指定时间允许范围
+   * <p>该参数无实际意义，已废弃。<br>时间点回档，指定时间允许范围</p>
    */
   ExpectTimeThresh?: number
   /**
-   * 普通实例存储上限，单位GB
-当DbType为MYSQL，且存储计费模式为预付费时，该参数需不大于cpu与memory对应存储规格上限
+   * <p>普通实例存储上限，单位GB<br>当DbType为MYSQL，且存储计费模式为预付费时，该参数需不大于cpu与memory对应存储规格上限</p>
    */
   StorageLimit?: number
   /**
-   * 包年包月购买时长
+   * <p>包年包月购买时长</p>
    */
   TimeSpan?: number
   /**
-   * 包年包月购买时长单位，['s','d','m','y']
+   * <p>包年包月购买时长单位，[&#39;s&#39;,&#39;d&#39;,&#39;m&#39;,&#39;y&#39;]</p>
    */
   TimeUnit?: string
   /**
-   * 包年包月购买是否自动续费，默认为0。
-0标识默认续费方式，1表示自动续费，2表示不自动续费。
+   * <p>包年包月购买是否自动续费</p><p>枚举值：</p><ul><li>0： 默认续费方式</li><li>1： 自动续费</li><li>2： 不自动续费</li></ul><p>默认值：0</p>
    */
   AutoRenewFlag?: number
   /**
-   * 是否自动选择代金券 1是 0否 默认为0
+   * <p>是否自动选择代金券 1是 0否 默认为0</p><p>枚举值：</p><ul><li>1： 是</li><li>0： 否</li></ul><p>默认值：0</p>
    */
   AutoVoucher?: number
   /**
-   * 实例数量（该参数已不再使用，只做存量兼容处理）
+   * <p>实例数量（该参数已不再使用，只做存量兼容处理）</p>
    */
   HaCount?: number
   /**
-   * 订单来源
+   * <p>订单来源</p>
    */
   OrderSource?: string
   /**
-   * 集群创建需要绑定的tag数组信息
+   * <p>集群创建需要绑定的tag数组信息</p>
    */
   ResourceTags?: Array<Tag>
   /**
-   * Db类型
-当DbType为MYSQL时可选(默认NORMAL)：
-<li>NORMAL</li>
-<li>SERVERLESS</li>
+   * <p>Db类型</p><p>枚举值：</p><ul><li>NORMAL： 普通实例</li><li>SERVERLESS： serverless实例</li></ul><p>默认值：NORMAL</p><p>当DbType为MYSQL时可选(默认NORMAL)</p>
    */
   DbMode?: string
   /**
-   * 当DbMode为SERVERLESS时必填
-cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+   * <p>当DbMode为SERVERLESS时必填<br>cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回</p>
    */
   MinCpu?: number
   /**
-   * 当DbMode为SERVERLESS时必填：
-cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+   * <p>当DbMode为SERVERLESS时必填：<br>cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回</p>
    */
   MaxCpu?: number
   /**
-   * 当DbMode为SERVERLESS时，指定集群是否自动暂停，可选范围
-<li>yes</li>
-<li>no</li>
-默认值:yes
+   * <p>否自动暂停</p><p>枚举值：</p><ul><li>yes： 是</li><li>no： 否</li></ul><p>默认值：yes</p><p>DbMode为SERVERLESS生效</p>
    */
   AutoPause?: string
   /**
-   * 当DbMode为SERVERLESS时，指定集群自动暂停的延迟，单位秒，可选范围[600,691200]
-默认值:600
+   * <p>当DbMode为SERVERLESS时，指定集群自动暂停的延迟，单位秒，可选范围[600,691200]<br>默认值:600</p>
    */
   AutoPauseDelay?: number
   /**
-   * 集群存储计费模式，按量计费：0，包年包月：1。默认按量计费
-当DbType为MYSQL时，在集群计算计费模式为后付费（包括DbMode为SERVERLESS）时，存储计费模式仅可为按量计费
-回档与克隆均不支持包年包月存储
+   * <p>集群存储计费模式，按量计费：0，包年包月：1。默认按量计费<br>当DbType为MYSQL时，在集群计算计费模式为后付费（包括DbMode为SERVERLESS）时，存储计费模式仅可为按量计费<br>回档与克隆均不支持包年包月存储</p>
    */
   StoragePayMode?: number
   /**
-   * 安全组id数组
+   * <p>安全组id数组</p>
    */
   SecurityGroupIds?: Array<string>
   /**
-   * 告警策略Id数组
+   * <p>告警策略Id数组</p>
    */
   AlarmPolicyIds?: Array<string>
   /**
-   * 参数数组，暂时支持character_set_server （utf8｜latin1｜gbk｜utf8mb4） ，lower_case_table_names，1-大小写不敏感，0-大小写敏感
+   * <p>参数数组，暂时支持character_set_server （utf8｜latin1｜gbk｜utf8mb4） ，lower_case_table_names，1-大小写不敏感，0-大小写敏感</p>
    */
   ClusterParams?: Array<ParamItem>
   /**
-   * 交易模式，0-下单且支付，1-下单
+   * <p>交易模式</p><p>枚举值：</p><ul><li>0： 下单且支付</li><li>1： 下单</li></ul><p>默认值：0</p>
    */
   DealMode?: number
   /**
-   * 参数模板ID，可以通过查询参数模板信息DescribeParamTemplates获得参数模板ID
+   * <p>参数模板ID，可以通过查询参数模板信息DescribeParamTemplates获得参数模板ID</p>
    */
   ParamTemplateId?: number
   /**
-   * 多可用区地址
+   * <p>多可用区地址</p>
    */
   SlaveZone?: string
   /**
-   * 实例初始化配置信息，主要用于购买集群时选不同规格实例
+   * <p>实例初始化配置信息，主要用于购买集群时选不同规格实例</p>
    */
   InstanceInitInfos?: Array<InstanceInitInfo>
   /**
-   * 全球数据库唯一标识
+   * <p>全球数据库唯一标识</p>
    */
   GdnId?: string
   /**
-   * 数据库代理配置
+   * <p>数据库代理配置</p>
    */
   ProxyConfig?: ProxyConfig
   /**
-   * 是否自动归档
+   * <p>是否自动归档</p><p>枚举值：</p><ul><li>yes： 是</li><li>no： 否</li></ul><p>默认值：no</p><p>仅当前集群主实例为SERVERLESS时，该参数生效</p>
    */
   AutoArchive?: string
   /**
-   * 暂停后的归档处理时间
+   * <p>暂停后的归档处理时间</p><p>单位：时</p><p>默认值：12</p><p>仅当前集群主实例为SERVERLESS时，该参数生效</p>
    */
   AutoArchiveDelayHours?: number
   /**
-   * 内核小版本号
+   * <p>内核小版本号</p>
    */
   CynosVersion?: string
 }
@@ -5227,31 +5199,31 @@ export interface DescribeRedoLogsResponse {
  */
 export interface ServerlessSpec {
   /**
-   * cpu最小值
+   * <p>cpu最小值</p>
    */
   MinCpu?: number
   /**
-   * cpu最大值
+   * <p>cpu最大值</p>
    */
   MaxCpu?: number
   /**
-   * 最大存储空间
+   * <p>最大存储空间</p>
    */
   MaxStorageSize?: number
   /**
-   * 是否为默认规格
+   * <p>是否为默认规格</p>
    */
   IsDefault?: number
   /**
-   * 是否有库存
+   * <p>是否有库存</p>
    */
   HasStock?: boolean
   /**
-   * 库存数量
+   * <p>库存数量</p>
    */
   StockCount?: number
   /**
-   * 可用区库存信息
+   * <p>可用区库存信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneStockInfos?: Array<ServerlessZoneStockInfo>
@@ -6137,35 +6109,36 @@ export interface DescribeParamTemplatesResponse {
  */
 export interface ProxyConfig {
   /**
-   * 数据库代理组节点个数。该参数不再建议使用,建议使用ProxyZones
+   * <p>数据库代理组节点个数。该参数不再建议使用,建议使用ProxyZones</p>
+   * @deprecated
    */
   ProxyCount?: number
   /**
-   * cpu核数
+   * <p>cpu核数</p>
    */
   Cpu?: number
   /**
-   * 内存
+   * <p>内存</p>
    */
   Mem?: number
   /**
-   * 连接池类型:SessionConnectionPool(会话级别连接池 )
+   * <p>连接池类型:SessionConnectionPool(会话级别连接池 )</p>
    */
   ConnectionPoolType?: string
   /**
-   * 是否开启连接池,yes-开启，no-不开启
+   * <p>是否开启连接池,yes-开启，no-不开启</p>
    */
   OpenConnectionPool?: string
   /**
-   * 连接池阈值:单位（秒）
+   * <p>连接池阈值:单位（秒）</p>
    */
   ConnectionPoolTimeOut?: number
   /**
-   * 描述说明
+   * <p>描述说明</p>
    */
   Description?: string
   /**
-   * 数据库节点信息（该参数与ProxyCount需要任选一个输入）
+   * <p>数据库节点信息（该参数与ProxyCount需要任选一个输入）</p>
    */
   ProxyZones?: Array<ProxyZone>
 }
@@ -8154,41 +8127,39 @@ export interface BizTaskModifyParamsData {
  */
 export interface InstanceInitInfo {
   /**
-   * 实例cpu
+   * <p>实例cpu</p>
    */
   Cpu: number
   /**
-   * 实例内存
+   * <p>实例内存</p>
    */
   Memory: number
   /**
-   * 实例类型 rw/ro
+   * <p>实例类型 rw/ro</p>
    */
   InstanceType: string
   /**
-   * 实例个数,范围[1,15]
+   * <p>实例个数,范围[1,15]</p>
    */
   InstanceCount: number
   /**
-   * Serverless实例个数最小值，范围[1,15]
+   * <p>Serverless实例个数最小值，范围[1,15]</p>
    */
   MinRoCount?: number
   /**
-   * Serverless实例个数最大值，范围[1,15]
+   * <p>Serverless实例个数最大值，范围[1,15]</p>
    */
   MaxRoCount?: number
   /**
-   * Serverless实例最小规格
+   * <p>Serverless实例最小规格</p>
    */
   MinRoCpu?: number
   /**
-   * Serverless实例最大规格
+   * <p>Serverless实例最大规格</p>
    */
   MaxRoCpu?: number
   /**
-   * 实例机器类型
-1. common，通用型。
-2. exclusive，独享型。
+   * <p>实例机器类型</p><ol><li>common，通用型。</li><li>exclusive，独享型。</li></ol>
    */
   DeviceType?: string
 }
@@ -15296,61 +15267,59 @@ export interface IsolateInstanceRequest {
  */
 export interface ModifyServerlessStrategyRequest {
   /**
-   * serverless集群id
+   * <p>serverless集群id</p>
    */
   ClusterId: string
   /**
-   * 集群是否自动暂停，可选范围
-<li>yes</li>
-<li>no</li>
+   * <p>集群是否自动暂停，可选范围</p><li>yes</li><li>no</li>
    */
   AutoPause?: string
   /**
-   * 集群自动暂停的延迟，单位秒，可选范围[600,691200]，默认600
+   * <p>集群自动暂停的延迟，单位秒，可选范围[600,691200]，默认600</p>
    */
   AutoPauseDelay?: number
   /**
-   * 该参数暂时无效
+   * <p>该参数暂时无效</p>
    */
   AutoScaleUpDelay?: number
   /**
-   * 该参数暂时无效
+   * <p>该参数暂时无效</p>
    */
   AutoScaleDownDelay?: number
   /**
-   * cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+   * <p>cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回</p>
    */
   MinCpu?: number
   /**
-   * cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+   * <p>cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回</p>
    */
   MaxCpu?: number
   /**
-   * 只读实例cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+   * <p>只读实例cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回</p>
    */
   MinRoCpu?: number
   /**
-   * 只读cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+   * <p>只读cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回</p>
    */
   MaxRoCpu?: number
   /**
-   * 只读节点最小个数
+   * <p>只读节点最小个数</p>
    */
   MinRoCount?: number
   /**
-   * 只读节点最大个数
+   * <p>只读节点最大个数</p>
    */
   MaxRoCount?: number
   /**
-   * 是否开启归档，可选范围<li>yes</li><li>no</li>默认值:yes
+   * <p>是否开启归档，可选范围<li>yes</li><li>no</li>默认值:yes</p>
    */
   AutoArchive?: string
   /**
-   * 升级类型。 默认值：upgradeImmediate。 可选值： upgradeImmediate：立即完成修改 upgradeInMaintain：在维护时间窗口内完成修改
+   * <p>升级类型。 默认值：upgradeImmediate。 可选值： upgradeImmediate：立即完成修改 upgradeInMaintain：在维护时间窗口内完成修改</p>
    */
   UpgradeType?: string
   /**
-   * 新增的只读实例需要绑定的安全组列表。仅仅针对于在这次调整策略过程中新产生的只读实例绑定安全组，存量的实例不绑定。
+   * <p>新增的只读实例需要绑定的安全组列表。仅仅针对于在这次调整策略过程中新产生的只读实例绑定安全组，存量的实例不绑定。</p>
    */
   SecurityGroupIdsForNewRo?: Array<string>
 }

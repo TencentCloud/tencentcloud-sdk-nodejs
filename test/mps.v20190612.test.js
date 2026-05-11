@@ -438,6 +438,16 @@ it("mps.v20190612.CreateTranscodeTemplate", async function () {
     }
 })
 
+it("mps.v20190612.DetectVideoSubtitleArea", async function () {
+    try {
+       const data = await client.DetectVideoSubtitleArea({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.CreateStreamLinkFlow", async function () {
     try {
        const data = await client.CreateStreamLinkFlow({})
