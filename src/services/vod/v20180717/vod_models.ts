@@ -2065,37 +2065,35 @@ export interface ContentReviewTemplateItem {
  */
 export interface AigcImageTaskOutputFileInfo {
   /**
-   * 存储模式。取值有： <li>Permanent：永久存储；</li> <li>Temporary：临时存储；</li>
-
+   * <p>存储模式。取值有： <li>Permanent：永久存储；</li> <li>Temporary：临时存储；</li></p>
    */
   StorageMode?: string
   /**
-   * 输出文件名，最长 64 个字符。缺省由系统指定生成文件名。当 StorageMode 为 Permanent 时有效。
+   * <p>输出文件名，最长 64 个字符。缺省由系统指定生成文件名。当 StorageMode 为 Permanent 时有效。</p>
    */
   MediaName?: string
   /**
-   * 分类ID，用于对媒体进行分类管理，可通过 [创建分类](/document/product/266/7812) 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。
-
+   * <p>分类ID，用于对媒体进行分类管理，可通过 <a href="/document/product/266/7812">创建分类</a> 接口，创建分类，获得分类 ID。当 StorageMode 为 Permanent 时有效。</p>
    */
   ClassId?: number
   /**
-   * 输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 [ISO 日期格式说明](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>输出文件的过期时间，超过该时间文件将被删除，默认为永久不过期，格式按照 ISO 8601标准表示，详见 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式说明</a>。</p>
    */
   ExpireTime?: string
   /**
-   * 文件类型，例如 mp4、flv 等。
+   * <p>文件类型，例如 png、jpg 等。</p>
    */
   FileType?: string
   /**
-   * 媒体文件播放地址。
+   * <p>媒体文件播放地址。</p>
    */
   FileUrl?: string
   /**
-   * 媒体文件 ID。当 StorageMode 为 Permanent 时有效。
+   * <p>媒体文件 ID。当 StorageMode 为 Permanent 时有效。</p>
    */
   FileId?: string
   /**
-   * 输出视频的元信息。当 StorageMode 为 Permanent 时有效。
+   * <p>输出图片的元信息。当 StorageMode 为 Permanent 时有效。</p>
    */
   MetaData?: MediaMetaData
 }
@@ -2714,17 +2712,49 @@ export interface DiffusionEnhanceInfo {
 }
 
 /**
- * DeletePersonSample请求参数结构体
+ * 创建 AIGC 声音复刻任务信息。
  */
-export interface DeletePersonSampleRequest {
+export interface CreateAigcAudioCloneTask {
   /**
-   * 素材 ID。
+   * <p>任务ID。</p>
    */
-  PersonId: string
+  TaskId?: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p>任务状态，取值：<li>PROCESSING：处理中；</li><li>FINISH：已完成。</li></p>
    */
-  SubAppId?: number
+  Status?: string
+  /**
+   * <p>错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。</p>
+   */
+  ErrCode?: number
+  /**
+   * <p>扩展错误码。空字符串表示成功，其它值表示失败。</p>
+   */
+  ErrCodeExt?: string
+  /**
+   * <p>错误信息。</p>
+   */
+  Message?: string
+  /**
+   * <p>任务进度，取值范围 [0-100] 。</p>
+   */
+  Progress?: number
+  /**
+   * <p>AIGC 音频复刻任务的输入信息。</p>
+   */
+  Input?: CreateAigcAudioCloneInput
+  /**
+   * <p>AIGC 音频复刻任务的输出信息。</p>
+   */
+  Output?: CreateAigcAudioCloneOutput
+  /**
+   * <p>用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
+   */
+  SessionId?: string
+  /**
+   * <p>来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。</p>
+   */
+  SessionContext?: string
 }
 
 /**
@@ -6971,6 +7001,14 @@ export interface AigcImageOutputConfig {
    * <p>生成图片张数。各模型可选值：</p><ul><li>Kling：可选值 1-9；</li><li>OG：可选值1-8；</li></ul><p><strong>其他模型不生效。</strong></p>
    */
   OutputImageCount?: number
+  /**
+   * <p>指定模型输出图片文件格式，若不指定则跟随模型默认值。可选值：</p><ul><li>jpeg</li><li>png</li></ul>
+   */
+  OutputFormat?: string
+  /**
+   * <p>是否开启图标水印，默认为Disabled。取值有：</p><ul><li>Enabled：开启；</li><li>Disabled：关闭；</li></ul>
+   */
+  LogoAdd?: string
 }
 
 /**
@@ -8583,6 +8621,36 @@ export interface ModifyWatermarkTemplateRequest {
 }
 
 /**
+ * 创建 AIGC 声音复刻输入信息。
+ */
+export interface CreateAigcAudioCloneInput {
+  /**
+   * <p>原音频文件，模型将以此参数中传入的音频音色为示例对音色进行复刻。</p>
+   */
+  AudioFileInfo?: AigcAudioCloneInputFileInfo
+  /**
+   * <p>自定义的声音ID。</p>
+   */
+  VoiceId?: string
+  /**
+   * <p>复刻试听参数。</p>
+   */
+  Text?: string
+  /**
+   * <p>音色复刻示例音频。</p>
+   */
+  PromptAudioFileInfo?: AigcAudioCloneInputFileInfo
+  /**
+   * <p>示例音频对应的文本内容。</p>
+   */
+  PromptText?: string
+  /**
+   * <p>透传参数。</p>
+   */
+  Payload?: string
+}
+
+/**
  * 语音全文识别任务控制参数
  */
 export interface AsrFullTextConfigureInfoForUpdate {
@@ -8619,13 +8687,45 @@ export interface AsrFullTextConfigureInfoForUpdate {
 }
 
 /**
- * DeleteHeadTailTemplate返回参数结构体
+ * 视频片头片尾识别结果。
  */
-export interface DeleteHeadTailTemplateResponse {
+export interface AiRecognitionTaskHeadTailResult {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  RequestId?: string
+  Status?: string
+  /**
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 视频片头片尾识别任务输入信息。
+   */
+  Input?: AiRecognitionTaskHeadTailResultInput
+  /**
+   * 视频片头片尾识别任务输出信息。
+   */
+  Output?: AiRecognitionTaskHeadTailResultOutput
+  /**
+   * 视频片头片尾识别任务进度，取值范围 [0-100] 。
+   */
+  Progress?: number
+  /**
+   * 视频片头片尾识别任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  BeginProcessTime?: string
+  /**
+   * 视频片头片尾识别任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  FinishTime?: string
 }
 
 /**
@@ -8964,7 +9064,7 @@ export interface AigcVideoTaskInputFileInfo {
    */
   Url?: string
   /**
-   * <p>参考类型，GV模型适用。<br>注意：<br>当使用 GV 模型时，可作为参考方式，可选值：asset 表示素材、style 表示风格；<br>当使用 Kling 模型以及 Category 为 Video 时，可区分参考视频类型，feature 表示特征参考视频，base 表示待编辑视频。</p>
+   * <p>参考类型，GV、Kling、PixVerse模型适用。<br>注意：<br>当使用 GV 模型时，可作为参考方式，可选值：asset 表示素材、style 表示风格；<br>当使用 Kling 模型以及 Category 为 Video 时，可区分参考视频类型，feature 表示特征参考视频，base 表示待编辑视频；<br>当使用 PixVerse 模型时，可用于多图（主体）参考生模式，可选值：subject 表示主体、background 表示背景；</p>
    */
   ReferenceType?: string
   /**
@@ -8983,6 +9083,10 @@ export interface AigcVideoTaskInputFileInfo {
    * <p>用于区分输入图像用于<strong>首（尾）帧生视频</strong>、<strong>图生视频</strong>或<strong>参考生视频</strong>。可选值：</p><ul><li>FirstFrame：用于首（尾）帧生视频 或 图生视频；</li><li>Reference：用于参考生视频；</li></ul><p><strong>注意，默认是FirstFrame</strong></p>
    */
   Usage?: string
+  /**
+   * <p><strong>仅 PixVerse 模型的多图（主体）参考生模式生效</strong>，针对图片指定名字, 用来更精准效果。用法：当本字段值为“小猫”，在 Prompt 中使用 @小猫 精确描述场景。@Text 后必须有空格，如 @小猫 跑步。Prompt 中引用的名称必须与本字段完全一致。</p>
+   */
+  Text?: string
 }
 
 /**
@@ -10885,6 +10989,36 @@ export interface CustomVoiceInfo {
 }
 
 /**
+ * 创建 AIGC 声音复刻输出信息。
+ */
+export interface CreateAigcAudioCloneOutput {
+  /**
+   * <p>任务ID。</p>
+   */
+  TaskId?: string
+  /**
+   * <p>处理状态。</p>
+   */
+  State?: string
+  /**
+   * <p>用户自定义的 voice_id，如果任务失败则不返回。</p>
+   */
+  VoiceId?: string
+  /**
+   * <p>如果请求体中传入了试听文本 text，那么本参数将以链接形式返回试听音频，否则本参数为空值。</p>
+   */
+  DemoAudio?: string
+  /**
+   * <p>本次调用时传入的透传参数。</p>
+   */
+  Payload?: string
+  /**
+   * <p>任务创建时间。</p>
+   */
+  CreatedAt?: string
+}
+
+/**
  * ModifyEnhanceMediaTemplate返回参数结构体
  */
 export interface ModifyEnhanceMediaTemplateResponse {
@@ -12611,13 +12745,15 @@ export interface DeleteAigcApiTokenResponse {
 }
 
 /**
- * 自适应码流任务的输入参数。
+ * 视频画面黑边、白边、黑屏、白屏检测的控制参数。
  */
-export interface ComplexAdaptiveDynamicStreamingTaskInput {
+export interface BlackWhiteEdgeConfigureInfo {
   /**
-   * 自适应码流参数。
+   * 视频画面黑边、白边、黑屏、白屏检测开关，可选值：
+<li>ON：开启；</li>
+<li>OFF：关闭。</li>
    */
-  StreamPara: ComplexAdaptiveDynamicStreamingTaskStreamPara
+  Switch: string
 }
 
 /**
@@ -14422,6 +14558,27 @@ export interface AiReviewTerrorismOcrTaskOutput {
    * Ocr 文字有涉及令人不安全信息嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
    */
   SegmentSetFileUrlExpireTime?: string
+}
+
+/**
+ * AIGC 声音复刻输入文件信息
+ */
+export interface AigcAudioCloneInputFileInfo {
+  /**
+   * <p>输入的视频文件类型。取值有： <li>File：点播媒体文件；</li> <li>Url：可访问的 Url；</li></p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * <p>媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 <a href="/document/product/266/7830">视频上传完成事件通知</a> 或 <a href="https://console.cloud.tencent.com/vod/media">云点播控制台</a> 获取该字段。当 Type 取值为 File 时，本参数有效。说明：1. 推荐使用小于10M的图片；2. 图片格式的取值为：jpeg，jpg, png。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileId?: string
+  /**
+   * <p>可访问的文件 URL。当 Type 取值为 Url 时，本参数有效。说明：1. 推荐使用小于10M的图片；2. 图片格式的取值为：jpeg，jpg, png。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
 }
 
 /**
@@ -16470,6 +16627,20 @@ export interface ClipTask2017 {
    * 视频剪辑输出的文件信息。
    */
   FileInfo?: ClipFileInfo2017
+}
+
+/**
+ * DeletePersonSample请求参数结构体
+ */
+export interface DeletePersonSampleRequest {
+  /**
+   * 素材 ID。
+   */
+  PersonId: string
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
 }
 
 /**
@@ -20606,7 +20777,7 @@ export interface DescribeStorageDataRequest {
  */
 export interface DescribeTaskDetailResponse {
   /**
-   * <p>任务类型，取值：<li>Procedure：视频处理任务；</li><li>EditMedia：视频编辑任务；</li><li>SplitMedia：视频拆条任务；</li><li>ComposeMedia：制作媒体文件任务；</li><li>WechatPublish：微信发布任务；</li><li>WechatMiniProgramPublish：微信小程序视频发布任务；</li><li>PullUpload：拉取上传媒体文件任务；</li><li>FastClipMedia：快速剪辑任务；</li><li>RemoveWatermarkTask：智能去除水印任务；</li><li>DescribeFileAttributesTask：获取文件属性任务；</li><li>RebuildMedia：音画质重生任务（不推荐使用）；</li><li>ReviewAudioVideo：音视频审核任务；</li><li>ExtractTraceWatermark：提取溯源水印任务；</li><li>ExtractCopyRightWatermark：提取版权水印任务；</li><li>QualityInspect：音画质检测任务；</li><li>QualityEnhance：音画质重生任务；</li><li>ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；</li><li>ProcessMediaByMPS：MPS 视频处理任务；</li><li>AigcImageTask：AIGC 生图任务；</li><li>SceneAigcImageTask：场景化 AIGC 生图任务；</li><li>AigcVideoTask：AIGC 生视频任务；</li><li>ImportMediaKnowledge：导入媒体知识任务。</li><li>SceneAigcVideoTask：场景化 AIGC 生视频任务；</li><li> ExtractBlindWatermark：提取数字水印任务。</li><li> ExtractBlindWatermark：提取数字水印任务。</li><li> CreateAigcAdvancedCustomElement：创建自定义主体任务</li><li>CreateAigcCustomVoice：创建自定义音色任务</li><li>CreateAigcSubject：创建主体任务</li><li>AigcVideoRedrawTask：AIGC 视频转绘任务</li><li>CreateAigcAudioClone：AIGC 音频复刻任务</li></p>
+   * <p>任务类型，取值：<li>Procedure：视频处理任务；</li><li>EditMedia：视频编辑任务；</li><li>SplitMedia：视频拆条任务；</li><li>ComposeMedia：制作媒体文件任务；</li><li>WechatPublish：微信发布任务；</li><li>WechatMiniProgramPublish：微信小程序视频发布任务；</li><li>PullUpload：拉取上传媒体文件任务；</li><li>FastClipMedia：快速剪辑任务；</li><li>RemoveWatermarkTask：智能去除水印任务；</li><li>DescribeFileAttributesTask：获取文件属性任务；</li><li>RebuildMedia：音画质重生任务（不推荐使用）；</li><li>ReviewAudioVideo：音视频审核任务；</li><li>ExtractTraceWatermark：提取溯源水印任务；</li><li>ExtractCopyRightWatermark：提取版权水印任务；</li><li>QualityInspect：音画质检测任务；</li><li>QualityEnhance：音画质重生任务；</li><li>ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；</li><li>ProcessMediaByMPS：MPS 视频处理任务；</li><li>AigcImageTask：AIGC 生图任务；</li><li>SceneAigcImageTask：场景化 AIGC 生图任务；</li><li>AigcVideoTask：AIGC 生视频任务；</li><li>ImportMediaKnowledge：导入媒体知识任务。</li><li>SceneAigcVideoTask：场景化 AIGC 生视频任务；</li><li> ExtractBlindWatermark：提取数字水印任务。</li><li> ExtractBlindWatermark：提取数字水印任务。</li><li> CreateAigcAdvancedCustomElement：创建自定义主体任务</li><li>CreateAigcCustomVoice：创建自定义音色任务</li><li>CreateAigcSubject：创建主体任务</li><li>AigcVideoRedrawTask：AIGC 视频转绘任务</li><li>CreateAigcAudioClone：AIGC 声音复刻任务</li></p>
    */
   TaskType?: string
   /**
@@ -20787,6 +20958,10 @@ export interface DescribeTaskDetailResponse {
    * <p>AIGC音效信息，仅当TaskType为AigcAudioTask时，该字段有值。</p>
    */
   AigcAudioTask?: AigcAudioTask
+  /**
+   * <p>AIGC 声音复刻信息，仅当 TaskType 为CreateAigcAudioClone，该字段有值。</p>
+   */
+  CreateAigcAudioCloneTask?: CreateAigcAudioCloneTask
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -22182,6 +22357,16 @@ export interface EnhanceMediaByTemplateRequest {
    * 保留字段，特殊用途时使用。
    */
   ExtInfo?: string
+}
+
+/**
+ * DeleteHeadTailTemplate返回参数结构体
+ */
+export interface DeleteHeadTailTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -24900,18 +25085,6 @@ export interface EditMediaFileInfo {
 }
 
 /**
- * 视频画面黑边、白边、黑屏、白屏检测的控制参数。
- */
-export interface BlackWhiteEdgeConfigureInfo {
-  /**
-   * 视频画面黑边、白边、黑屏、白屏检测开关，可选值：
-<li>ON：开启；</li>
-<li>OFF：关闭。</li>
-   */
-  Switch: string
-}
-
-/**
  * 图片水印模板输入参数
  */
 export interface ImageWatermarkInputForUpdate {
@@ -26130,45 +26303,13 @@ export interface AigcVideoTaskInput {
 }
 
 /**
- * 视频片头片尾识别结果。
+ * 自适应码流任务的输入参数。
  */
-export interface AiRecognitionTaskHeadTailResult {
+export interface ComplexAdaptiveDynamicStreamingTaskInput {
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   * 自适应码流参数。
    */
-  Status?: string
-  /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [视频处理类错误码](https://cloud.tencent.com/document/product/266/50368#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
-   */
-  ErrCodeExt?: string
-  /**
-   * 错误码，0 表示成功，其他值表示失败（该字段已不推荐使用，建议使用新的错误码字段 ErrCodeExt）。
-   */
-  ErrCode?: number
-  /**
-   * 错误信息。
-   */
-  Message?: string
-  /**
-   * 视频片头片尾识别任务输入信息。
-   */
-  Input?: AiRecognitionTaskHeadTailResultInput
-  /**
-   * 视频片头片尾识别任务输出信息。
-   */
-  Output?: AiRecognitionTaskHeadTailResultOutput
-  /**
-   * 视频片头片尾识别任务进度，取值范围 [0-100] 。
-   */
-  Progress?: number
-  /**
-   * 视频片头片尾识别任务开始执行的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  BeginProcessTime?: string
-  /**
-   * 视频片头片尾识别任务执行完毕的时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  FinishTime?: string
+  StreamPara: ComplexAdaptiveDynamicStreamingTaskStreamPara
 }
 
 /**

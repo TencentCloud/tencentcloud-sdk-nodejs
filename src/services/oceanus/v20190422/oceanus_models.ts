@@ -606,22 +606,17 @@ export interface JobEventInfo {
 }
 
 /**
- * 资源参数描述
+ * DescribeWorkSpaceUsers返回参数结构体
  */
-export interface ResourceLocParam {
+export interface DescribeWorkSpaceUsersResponse {
   /**
-   * 资源bucket
+   * 空间用户列表
    */
-  Bucket: string
+  RoleAuths?: Array<RoleAuth>
   /**
-   * 资源路径
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Path: string
-  /**
-   * 资源所在地域，如果不填，则使用Resource的Region
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Region?: string
+  RequestId?: string
 }
 
 /**
@@ -1135,16 +1130,12 @@ export interface ModifyConnectorRequest {
  */
 export interface SetatsDisk {
   /**
-   * 磁盘类型
-CLOUD_BSSD
-CLOUD_SSD
-CLOUD_HSSD
-CLOUD_PREMIUM
+   * <p>磁盘类型<br>CLOUD_BSSD<br>CLOUD_SSD<br>CLOUD_HSSD<br>CLOUD_PREMIUM</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskType?: string
   /**
-   * 磁盘大小
+   * <p>磁盘大小</p><p>单位：GB</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskSize?: number
@@ -1227,17 +1218,17 @@ export interface ResourceRefJobInfo {
  */
 export interface LogicalType {
   /**
-   * 类型
+   * <p>类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
-   * 是否允许为空
+   * <p>是否允许为空</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NullAble?: boolean
   /**
-   * 长度
+   * <p>长度</p><p>单位：字符数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Length?: number
@@ -1803,15 +1794,15 @@ export interface CreateWorkSpaceRequest {
  */
 export interface DeleteResourceConfigsRequest {
   /**
-   * 资源ID
+   * <p>资源ID</p>
    */
   ResourceId: string
   /**
-   * 资源版本数组
+   * <p>资源版本数组</p>
    */
   ResourceConfigVersions: Array<number | bigint>
   /**
-   * 工作空间 SerialId
+   * <p>工作空间 SerialId</p>
    */
   WorkSpaceId?: string
 }
@@ -2299,23 +2290,23 @@ export interface WorkSpaceClusterItem {
  */
 export interface CheckSavepointRequest {
   /**
-   * 作业 id
+   * <p>作业 id</p>
    */
   JobId: string
   /**
-   * 快照资源 id
+   * <p>快照资源 id</p>
    */
   SerialId: string
   /**
-   * 快照类型 1: savepoint；2: checkpoint；3: cancelWithSavepoint
+   * <p>快照类型 1: savepoint；2: checkpoint；3: cancelWithSavepoint</p>
    */
   RecordType: number
   /**
-   * 快照路径，目前只支持 cos 路径
+   * <p>快照路径，目前只支持 cos 路径</p>
    */
   SavepointPath: string
   /**
-   * 工作空间 id
+   * <p>工作空间 id</p>
    */
   WorkSpaceId: string
 }
@@ -2625,6 +2616,29 @@ export interface Savepoint {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PathStatus?: number
+}
+
+/**
+ * RunSqlGatewayStatement返回参数结构体
+ */
+export interface RunSqlGatewayStatementResponse {
+  /**
+   * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMessage?: Array<string>
+  /**
+   * 会话id，若入参未传，则返回自动创建的会话id，若入参已经传递，则返回值与原传入值一致
+   */
+  SessionId?: string
+  /**
+   * 返回执行id，可以根据该执行id和会话id获取执行结果
+   */
+  OperationHandleId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4140,26 +4154,22 @@ export interface ModifyWorkSpaceResponse {
 }
 
 /**
- * RunSqlGatewayStatement返回参数结构体
+ * 资源参数描述
  */
-export interface RunSqlGatewayStatementResponse {
+export interface ResourceLocParam {
   /**
-   * 错误信息
+   * 资源bucket
+   */
+  Bucket: string
+  /**
+   * 资源路径
+   */
+  Path: string
+  /**
+   * 资源所在地域，如果不填，则使用Resource的Region
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrorMessage?: Array<string>
-  /**
-   * 会话id，若入参未传，则返回自动创建的会话id，若入参已经传递，则返回值与原传入值一致
-   */
-  SessionId?: string
-  /**
-   * 返回执行id，可以根据该执行id和会话id获取执行结果
-   */
-  OperationHandleId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Region?: string
 }
 
 /**
@@ -4259,6 +4269,20 @@ export interface DescribeFolderRequest {
 其他:作业文件夹
    */
   FolderType: number
+}
+
+/**
+ * DescribeWorkSpaceUsers请求参数结构体
+ */
+export interface DescribeWorkSpaceUsersRequest {
+  /**
+   * 工作空间 SerialId
+   */
+  WorkSpaceId: string
+  /**
+   * 子用户
+   */
+  AuthSubAccountUin?: string
 }
 
 /**
@@ -4619,11 +4643,11 @@ export interface FlinkJdkVersion {
  */
 export interface CheckSavepointResponse {
   /**
-   * 资源 id
+   * <p>资源 id</p>
    */
   SerialId?: string
   /**
-   * 1=可用，2=不可用
+   * <p>1=可用，2=不可用</p>
    */
   SavepointStatus?: number
   /**

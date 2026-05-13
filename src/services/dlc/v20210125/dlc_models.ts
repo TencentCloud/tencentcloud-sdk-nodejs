@@ -1105,76 +1105,17 @@ export interface ScheduleElasticityConf {
 }
 
 /**
- * CreateNotebookSession请求参数结构体
+ * 数据脱敏用户组信息
  */
-export interface CreateNotebookSessionRequest {
+export interface GroupInfo {
   /**
-   * Session名称
+   * 用户组ID
    */
-  Name: string
+  WorkGroupId?: number
   /**
-   * 类型，当前支持：spark、pyspark、sparkr、sql
+   * 策略类型
    */
-  Kind: string
-  /**
-   * DLC Spark作业引擎名称
-   */
-  DataEngineName: string
-  /**
-   * session文件地址，当前支持：cosn://和lakefs://两种路径
-   */
-  ProgramDependentFiles?: Array<string>
-  /**
-   * 依赖的jar程序地址，当前支持：cosn://和lakefs://两种路径
-   */
-  ProgramDependentJars?: Array<string>
-  /**
-   * 依赖的python程序地址，当前支持：cosn://和lakefs://两种路径
-   */
-  ProgramDependentPython?: Array<string>
-  /**
-   * 依赖的pyspark虚拟环境地址，当前支持：cosn://和lakefs://两种路径
-   */
-  ProgramArchives?: Array<string>
-  /**
-   * 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
-   */
-  DriverSize?: string
-  /**
-   * 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
-   */
-  ExecutorSize?: string
-  /**
-   * 指定的Executor数量，默认为1
-   */
-  ExecutorNumbers?: number
-  /**
-   * Session相关配置，当前支持：
-1. dlc.eni: 用户配置的eni网关信息，可以通过该字段设置；
-2. dlc.role.arn: 用户配置的roleArn鉴权策略配置信息，可以通过该字段设置；
-3. dlc.sql.set.config: 用户配置的集群配置信息，可以通过该字段设置；
-   */
-  Arguments?: Array<KVPair>
-  /**
-   * 代理用户，默认为root
-   */
-  ProxyUser?: string
-  /**
-   * 指定的Session超时时间，单位秒，默认3600秒
-   */
-  TimeoutInSecond?: number
-  /**
-   * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers
-   */
-  ExecutorMaxNumbers?: number
-  /**
-   * 指定spark版本名称，当前任务使用该spark镜像运行
-   */
-  SparkImage?: string
-  /**
-   * 是否继承集群的资源类配置：0：自定义（默认），1：继承集群；
-   */
-  IsInherit?: number
+  StrategyType?: string
 }
 
 /**
@@ -4133,17 +4074,76 @@ export interface DescribeDataEngineRequest {
 }
 
 /**
- * 数据脱敏用户组信息
+ * CreateNotebookSession请求参数结构体
  */
-export interface GroupInfo {
+export interface CreateNotebookSessionRequest {
   /**
-   * 用户组ID
+   * Session名称
    */
-  WorkGroupId?: number
+  Name: string
   /**
-   * 策略类型
+   * 类型，当前支持：spark、pyspark、sparkr、sql
    */
-  StrategyType?: string
+  Kind: string
+  /**
+   * DLC Spark作业引擎名称
+   */
+  DataEngineName: string
+  /**
+   * session文件地址，当前支持：cosn://和lakefs://两种路径
+   */
+  ProgramDependentFiles?: Array<string>
+  /**
+   * 依赖的jar程序地址，当前支持：cosn://和lakefs://两种路径
+   */
+  ProgramDependentJars?: Array<string>
+  /**
+   * 依赖的python程序地址，当前支持：cosn://和lakefs://两种路径
+   */
+  ProgramDependentPython?: Array<string>
+  /**
+   * 依赖的pyspark虚拟环境地址，当前支持：cosn://和lakefs://两种路径
+   */
+  ProgramArchives?: Array<string>
+  /**
+   * 指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
+   */
+  DriverSize?: string
+  /**
+   * 指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）
+   */
+  ExecutorSize?: string
+  /**
+   * 指定的Executor数量，默认为1
+   */
+  ExecutorNumbers?: number
+  /**
+   * Session相关配置，当前支持：
+1. dlc.eni: 用户配置的eni网关信息，可以通过该字段设置；
+2. dlc.role.arn: 用户配置的roleArn鉴权策略配置信息，可以通过该字段设置；
+3. dlc.sql.set.config: 用户配置的集群配置信息，可以通过该字段设置；
+   */
+  Arguments?: Array<KVPair>
+  /**
+   * 代理用户，默认为root
+   */
+  ProxyUser?: string
+  /**
+   * 指定的Session超时时间，单位秒，默认3600秒
+   */
+  TimeoutInSecond?: number
+  /**
+   * 指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于ExecutorNumbers
+   */
+  ExecutorMaxNumbers?: number
+  /**
+   * 指定spark版本名称，当前任务使用该spark镜像运行
+   */
+  SparkImage?: string
+  /**
+   * 是否继承集群的资源类配置：0：自定义（默认），1：继承集群；
+   */
+  IsInherit?: number
 }
 
 /**
@@ -4643,6 +4643,11 @@ export interface DatasourceConnectionLocation {
    */
   SubnetCidrBlock: string
 }
+
+/**
+ * DescribeTCLakeMetaInstance请求参数结构体
+ */
+export type DescribeTCLakeMetaInstanceRequest = null
 
 /**
  * AttachUserPolicy请求参数结构体
@@ -7039,6 +7044,11 @@ export interface UserIdSetOfWorkGroupId {
    */
   UserIds: Array<string>
 }
+
+/**
+ * InitializeTCLake请求参数结构体
+ */
+export type InitializeTCLakeRequest = null
 
 /**
  * AlterDMSPartition请求参数结构体
@@ -12036,6 +12046,20 @@ export interface DescribeStoreLocationResponse {
 }
 
 /**
+ * DescribeTCLakeMetaInstance返回参数结构体
+ */
+export interface DescribeTCLakeMetaInstanceResponse {
+  /**
+   * <p>开通状态</p><p>枚举值：</p><ul><li>Running： 开通成功</li></ul>
+   */
+  Status?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * QueryTaskCostDetail返回参数结构体
  */
 export interface QueryTaskCostDetailResponse {
@@ -12926,6 +12950,24 @@ task-operator- string （子uin过滤）
  * ModifyDataEngineDescription返回参数结构体
  */
 export interface ModifyDataEngineDescriptionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * InitializeTCLake返回参数结构体
+ */
+export interface InitializeTCLakeResponse {
+  /**
+   * <p>实例Id</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>是否成功</p>
+   */
+  IsSuccess?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

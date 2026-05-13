@@ -20,7 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeExtensionRequest,
   CreateCCCSkillGroupResponse,
-  ModifyStaffPasswordRequest,
+  AIRoundPath,
   StopAutoCalloutTaskRequest,
   CreateIVRSessionRequest,
   CompanyApplyInfo,
@@ -44,6 +44,7 @@ import {
   CreateAdminURLResponse,
   PausePredictiveDialingCampaignRequest,
   ForwardingConfig,
+  ModifyStaffPasswordRequest,
   DescribeAILatencyRequest,
   CreateCallOutSessionResponse,
   AIAgentInfo,
@@ -61,6 +62,7 @@ import {
   PlaySoundCallResponse,
   AICallExtractResultElement,
   DescribeTelCallInfoResponse,
+  UserReplyEvent,
   DescribeExtensionsResponse,
   StaffStatusMetrics,
   DeleteExtensionRequest,
@@ -74,6 +76,7 @@ import {
   DescribeTelCdrRequest,
   UnbindStaffSkillGroupListRequest,
   BasicAuth,
+  AICallInteractionRound,
   HeaderParams,
   IMCdrInfo,
   CreateAgentCruiseDialingCampaignRequest,
@@ -101,6 +104,7 @@ import {
   DeleteCCCSkillGroupRequest,
   PauseAutoCalloutTaskRequest,
   CreateCompanyApplyRequest,
+  InvokeLLM,
   BindNumberCallInInterfaceRequest,
   DescribeTelSessionRequest,
   DescribeIMCdrsRequest,
@@ -129,9 +133,12 @@ import {
   CreateAIAgentCallRequest,
   UpdateCCCSkillGroupRequest,
   RestoreMemberOnlineRequest,
+  AICallLatencyMetrics,
   TimeRange,
-  DescribeStaffStatusHistoryResponse,
+  DescribeAICallInteractionRecordsResponse,
+  AIRoundMessage,
   SetStaffStatusItem,
+  AISpeakEvent,
   ModifyStaffResponse,
   ModifyExtensionRequest,
   CreatePredictiveDialingCampaignResponse,
@@ -160,6 +167,7 @@ import {
   DescribeSessionDetailRequest,
   DescribePredictiveDialingSessionsResponse,
   ModifyExtensionResponse,
+  DescribeAICallInteractionRecordsRequest,
   DescribeCompanyListResponse,
   NumberInfo,
   DeleteStaffRequest,
@@ -219,7 +227,7 @@ import {
   HangUpCallRequest,
   ClientInfo,
   DescribeTelCdrResponse,
-  InvokeLLM,
+  DescribeStaffStatusHistoryResponse,
   DescribeStaffStatusMetricsRequest,
   DeleteStaffResponse,
   DescribeAIAgentInfoListRequest,
@@ -975,6 +983,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAdminURLResponse) => void
   ): Promise<CreateAdminURLResponse> {
     return this.request("CreateAdminURL", req, cb)
+  }
+
+  /**
+   * 获取AI 会话交互事件流
+   */
+  async DescribeAICallInteractionRecords(
+    req: DescribeAICallInteractionRecordsRequest,
+    cb?: (error: string, rep: DescribeAICallInteractionRecordsResponse) => void
+  ): Promise<DescribeAICallInteractionRecordsResponse> {
+    return this.request("DescribeAICallInteractionRecords", req, cb)
   }
 
   /**

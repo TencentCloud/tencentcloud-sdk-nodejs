@@ -1068,7 +1068,7 @@ export interface CreateSnapshotRequest {
  */
 export interface DescribeInstancesDiskNumRequest {
   /**
-   * 云服务器实例ID，通过[DescribeInstances](/document/product/213/15728)接口查询。
+   * <p>云服务器实例ID，通过<a href="/document/product/213/15728">DescribeInstances</a>接口查询。</p>
    */
   InstanceIds: Array<string>
 }
@@ -1414,7 +1414,7 @@ export interface CdcSize {
  */
 export interface DescribeInstancesDiskNumResponse {
   /**
-   * 各个云服务器已挂载和可挂载弹性云盘的数量。
+   * <p>各个云服务器已挂载和可挂载弹性云盘的数量。</p>
    */
   AttachDetail?: Array<AttachDetail>
   /**

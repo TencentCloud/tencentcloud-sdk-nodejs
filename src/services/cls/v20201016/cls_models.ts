@@ -11049,6 +11049,14 @@ export interface Console {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Menus?: Array<string>
+  /**
+   * <p>公网访问域名</p>
+   */
+  Domain?: string
+  /**
+   * <p>内网访问域名</p>
+   */
+  IntranetDomain?: string
 }
 
 /**

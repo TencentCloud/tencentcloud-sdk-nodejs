@@ -708,6 +708,16 @@ it("ccc.v20200210.CreateAdminURL", async function () {
     }
 })
 
+it("ccc.v20200210.DescribeAICallInteractionRecords", async function () {
+    try {
+       const data = await client.DescribeAICallInteractionRecords({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ccc.v20200210.DescribeProtectedTelCdr", async function () {
     try {
        const data = await client.DescribeProtectedTelCdr({})

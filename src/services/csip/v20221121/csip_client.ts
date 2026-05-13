@@ -18,285 +18,515 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeRiskCenterPortViewPortRiskListRequest,
-  DescribeDbAssetInfoResponse,
   DeleteRiskScanTaskRequest,
-  DescribeRiskCenterAssetViewWeakPasswordRiskListResponse,
-  BugInfoDetail,
   CsipRiskCenterStatistics,
-  DescribeVULRiskAdvanceCFGListResponse,
-  StandardItem,
-  HighBaseLineRiskItem,
-  AccessKeyAlarmInfo,
-  DescribeOtherCloudAssetsResponse,
-  DescribeAssetViewVulRiskListResponse,
-  DescribeRepositoryImageAssetsRequest,
-  DescribeOrganizationUserInfoRequest,
-  DescribeTaskLogURLResponse,
-  ModifyUebaRuleSwitchResponse,
-  DescribeAKAnalysisDetailResponse,
-  ReportItemKey,
+  ModifyDspmApproveStatusRequest,
+  DescribeDspmSupportedAssetTypeRequest,
+  DescribeDspmAssetAccessTopologyResponse,
+  RepositoryImageVO,
+  AuditLogInfo,
   CreateAccessKeySyncTaskRequest,
-  AddNewBindRoleUserRequest,
-  DescribeCheckViewRisksRequest,
-  VULBaseInfo,
-  DescribeCallRecordResponse,
-  AssetViewCFGRisk,
-  DescribeSubUserInfoRequest,
-  DescribeRiskCenterAssetViewCFGRiskListResponse,
-  AlertInfo,
+  DescribeRiskCenterAssetViewWeakPasswordRiskListResponse,
   KeyValue,
-  DescribeClusterPodAssetsResponse,
-  Vpc,
-  STSCredentialOutput,
-  PortRiskAdvanceCFGParamItem,
-  StatisticalFilter,
-  AssetBaseInfoResponse,
-  DescribeRepositoryImageAssetsResponse,
-  DataSearchBug,
   OrganizationUserInfo,
   AssetTag,
   DescribeCheckViewRisksResponse,
-  DescribeConfigCheckRulesRequest,
-  DescribeRiskCallRecordResponse,
-  DescribeScanReportListRequest,
-  ModifyRiskCenterRiskStatusRequest,
-  NewAlertKey,
-  IpAssetListVO,
-  UebaCustomRule,
-  DescribeClusterAssetsRequest,
-  DescribeSubnetAssetsRequest,
-  DescribeTopAttackInfoResponse,
-  DescribeAccessKeyAssetRequest,
-  DescribeVULRiskDetailResponse,
-  DescribeDomainAssetsRequest,
-  ModifyRiskCenterScanTaskResponse,
-  DescribeNICAssetsRequest,
-  UebaRule,
+  DspmSupportedAssetType,
+  DspmIdentifyInfoItem,
+  DescribeDspmRiskStrategyResponse,
+  DspmAccountCount,
+  ModifyDspmRiskStrategyRequest,
+  DeleteDspmPersonalIdentifyRequest,
+  DescribeDspmAccessTopologyIpsResponse,
+  CreateDspmAssetsExportJobResponse,
   DescribeRiskCenterWebsiteRiskListResponse,
-  TaskCenterWeakPwdRiskInputParam,
-  Tag,
-  AccessKeyAlarmCount,
-  RiskRuleItem,
-  DescribeRiskCenterCFGViewCFGRiskListRequest,
-  DescribeAssetProcessListRequest,
-  DescribeAssetProcessListResponse,
-  DescribeAbnormalCallRecordRequest,
-  UpdateAccessKeyAlarmStatusRequest,
+  DescribeDspmSyncAssetsStatusRequest,
+  DspmApplyOrder,
+  DescribeRiskRulesResponse,
+  DspmApproverOrder,
   DescribeCSIPRiskStatisticsResponse,
-  DescribeAccessKeyUserListRequest,
-  AssetRiskItem,
-  DeleteDomainAndIpRequest,
-  DescribeRiskDetailListRequest,
-  WebsiteRisk,
-  DescribeRiskRuleDetailRequest,
-  VulImpactComponentInfo,
-  DescribeRiskCenterPortViewPortRiskListResponse,
+  VULViewVULRiskData,
+  RetryDspmExportLogRequest,
+  DescribeScanTaskListRequest,
   CreateAccessKeyCheckTaskResponse,
-  SubnetAsset,
   DescribeOrganizationInfoRequest,
-  TaskIdListKey,
+  DspmArea,
+  DescribeDspmBackupLogListRequest,
   UserCallRecord,
-  RoleInfo,
-  DescribeUebaRuleResponse,
-  UebaEventContent,
-  GateWayAsset,
-  CreateAccessKeySyncTaskResponse,
-  DescribeSourceIPAssetResponse,
-  DescribeScanReportListResponse,
+  DescribeDspmRiskResponse,
+  ModifyDspmWhitelistStrategyResponse,
   DescribeKeySandboxCredentialRequest,
-  DescribeRiskCallRecordRequest,
-  TaskLogURL,
-  ReportTaskIdList,
-  CheckViewRiskItem,
-  AssetViewVULRiskData,
-  DescribeOrganizationUserInfoResponse,
-  RiskRuleInfo,
-  DescribeVULRiskDetailRequest,
-  NICAsset,
-  AccessKeyRisk,
+  DescribeDspmDictionaryListRequest,
+  DescribeDspmRiskTendencyRequest,
+  DspmApproverStep,
+  AddNewBindRoleUserRequest,
+  ModifyDspmAssetLogDeliverySwitchResponse,
   OrganizationInfo,
-  DescribeListenerListResponse,
-  TaskAdvanceCFG,
-  AssetProcessItem,
-  DBAssetVO,
-  AssetInfoDetail,
+  CreateRiskCenterScanTaskResponse,
+  DescribeDspmAssetsRequest,
+  StopRiskCenterTaskResponse,
+  DescribeVpcAssetsRequest,
+  TaskLogURL,
+  DescribeExposePathRequest,
+  ModifyDspmRestoreLogTaskResponse,
+  DescribeKeySandboxCredentialListResponse,
+  AttributeOptionSet,
+  DeleteDspmApplyOrderRequest,
+  SubUserInfo,
+  CloudCountDesc,
+  ModifyDspmApproveStatusResponse,
+  DescribeOtherCloudAssetsResponse,
+  SendDspmAssetLoginSmsCodeResponse,
+  DescribeRiskCenterAssetViewCFGRiskListResponse,
+  ModifyDspmAssetAccountResponse,
+  UpdateAlertStatusListRequest,
+  DspmIdentifyAssetStatistic,
+  DescribeUserDspmInfoListRequest,
+  DescribeDspmApproveHistoryResponse,
+  DescribePublicIpAssetsResponse,
+  DescribeConfigCheckRulesResponse,
+  ResetDspmAssetAccountPasswordRequest,
+  DescribeRiskRulesRequest,
+  UserDspmInfo,
+  DescribeDspmRiskStrategyRequest,
+  DescribeSourceIPAssetRequest,
+  DescribeDspmIdentifyInfoRequest,
+  DescribeDbAssetInfoRequest,
+  DescribeUserCallRecordResponse,
+  DescribeDspmIdentifyInfoListRequest,
+  VulRiskItem,
+  ModifyDspmBackupSettingRequest,
+  DescribeAccessKeyAlarmResponse,
+  DescribeGatewayAssetsResponse,
+  DescribeDspmApproveOrderListResponse,
+  DescribeRiskRuleDetailResponse,
+  DspmRiskTendency,
+  DeleteDomainAndIpResponse,
+  DescribeDspmRiskDetailRequest,
+  RelatedEvent,
+  VerifyDspmAssetLoginCodeResponse,
+  DescribeScanStatisticResponse,
+  DescribeAccessKeyAlarmRequest,
+  DescribeExposuresRequest,
+  DescribeDspmAssetTableListRequest,
+  DescribeHighBaseLineRiskListResponse,
+  DescribeExposeAssetCategoryResponse,
+  DescribeDspmAssetSupportedPrivilegesRequest,
+  IpAssetListVO,
+  CreateDspmAccessExportJobRequest,
+  DescribeDspmRiskStrategyGroupRequest,
+  DspmPersonApplyHistoryItem,
+  DspmScheduleConfig,
+  DeleteDspmRestoreLogListRequest,
+  CreateDspmAccessExportJobResponse,
+  CreateDspmAssetsExportJobRequest,
+  DescribeRiskCenterServerRiskListResponse,
+  CreateDspmPersonalIdentifyResponse,
+  DspmIpCount,
+  DescribeGatewayAssetsRequest,
+  AccessKeyAsset,
+  DescribeRiskCallRecordRequest,
+  DspmAssetFieldInfo,
+  ModifyRiskCenterRiskStatusResponse,
+  RetryDspmExportLogResponse,
+  DescribeExposuresResponse,
+  CreateDspmApproveHistoryExportJobRequest,
+  CreateDspmRiskExportJobResponse,
+  ModifyDspmAssetSecurityAnalysisSwitchRequest,
+  DescribeOrganizationUserInfoRequest,
+  ModifyDspmAssetLogDeliverySwitchRequest,
+  DspmPersonUser,
+  ModifyDspmAssetAccountPrivilegesRequest,
+  ModifyUebaRuleSwitchResponse,
+  DescribeDspmAssetDatabasesRequest,
+  UpdateAccessKeyRemarkResponse,
+  UebaCustomRule,
+  CreateDspmIdentifyInfoListExportJobRequest,
+  DeleteDspmAssetAccountRequest,
+  AlertInfo,
+  Vpc,
+  STSCredentialOutput,
+  PortRiskAdvanceCFGParamItem,
+  VULRiskAdvanceCFGList,
+  DescribeDspmExportTaskResponse,
+  DescribeRepositoryImageAssetsResponse,
+  CreateDspmApproveHistoryExportJobResponse,
+  DescribeDspmDictionaryListResponse,
+  HitRules,
+  DspmIdentifyCount,
+  DspmAccessRecord,
+  DescribeTopAttackInfoResponse,
+  ModifyDspmPersonalIdentifyRequest,
+  DescribeVULRiskAdvanceCFGListRequest,
+  DspmAssetTypeCount,
+  DescribeDspmApproveHistoryRequest,
+  VerifyDspmAssetLoginCodeRequest,
+  DescribeDspmBackupSettingResponse,
+  DescribeDspmPayInfoRequest,
+  TableField,
+  ModifyDspmAssetAccountPrivilegesResponse,
+  DescribeUebaRuleResponse,
+  GateWayAsset,
+  DescribeSourceIPAssetResponse,
+  DeleteDspmAssetAccountResponse,
+  DescribeDspmApplyOrderListResponse,
+  AssetViewVULRiskData,
+  DspmIp,
+  NICAsset,
+  ModifyDspmAssetDataScanTaskResponse,
   DescribeAccessKeyAssetResponse,
   DescribeAccessKeyRiskDetailResponse,
-  CreateRiskCenterScanTaskResponse,
   DescribeSubnetAssetsResponse,
-  UpdateAlertStatusListResponse,
   DescribeRiskCenterAssetViewPortRiskListRequest,
-  StandardTerm,
   DescribeOrganizationInfoResponse,
-  DescribeVpcAssetsRequest,
-  TaskAssetObject,
-  DbAssetInfo,
-  FilterDataObject,
-  DescribeExposePathRequest,
-  RiskCenterStatusKey,
-  ExposesItem,
+  ModifyDspmRestoreLogTaskRequest,
   DescribeAccessKeyRiskRequest,
-  DescribeRiskCenterAssetViewWeakPasswordRiskListRequest,
   PublicIpDomainListKey,
-  DescribeUserCallRecordRequest,
-  DescribeKeySandboxCredentialListResponse,
-  ProductSupport,
-  DescribeCVMAssetsResponse,
-  UpdateAccessKeyRemarkResponse,
-  AttributeOptionSet,
-  WhereFilter,
-  CVMAssetVO,
-  AccessKeyAlarm,
-  CloudCountDesc,
-  DescribePublicIpAssetsRequest,
-  AssetClusterPod,
-  DescribeKeySandboxCredentialResponse,
-  DescribeCVMAssetInfoRequest,
-  DescribeAIAgentAssetListRequest,
-  UpdateAccessKeyAlarmStatusResponse,
-  CFGViewCFGRisk,
-  ServiceSupport,
+  DescribeDspmLogListRequest,
+  RevertDspmAssetAccountRequest,
+  DspmAssetDatabaseInfo,
+  DspmColumnPrivilege,
+  CreateDspmAssetAccessTopologyExportJobResponse,
+  DescribeDspmAccessRecordResponse,
+  DescribeDspmIdentifyIdListResponse,
+  DeleteDspmBackupLogListResponse,
   CreateRiskCenterScanTaskRequest,
-  KeySandboxCredential,
-  DescribeAssetRiskListResponse,
-  DescribeRiskCenterVULViewVULRiskListResponse,
-  DescribeConfigCheckRulesResponse,
-  AccessCredentialOutput,
-  DescribeRiskCenterVULViewVULRiskListRequest,
-  VULRiskAdvanceCFGList,
-  UpdateAlertStatusListRequest,
-  DescribeTaskLogURLRequest,
-  TaskCenterVulRiskInputParam,
-  StopRiskCenterTaskRequest,
+  DspmAssetAccountIdentify,
+  DescribeScanReportListRequest,
+  DescribeAccessKeyAssetRequest,
+  ModifyDspmWhitelistStrategyRequest,
   DescribeScanTaskListResponse,
-  DescribeScanTaskListRequest,
-  ScanTaskInfo,
+  ModifyDspmAssetAccountRequest,
+  CreateDspmAssetAccessTopologyExportJobRequest,
+  DeleteDspmApplyOrderResponse,
   AssetInstanceTypeMap,
-  DescribeAccessKeyAlarmDetailRequest,
-  Tags,
-  ModifyRiskCenterRiskStatusResponse,
-  VULViewVULRisk,
-  PortViewPortRisk,
-  VULRiskInfo,
-  DescribeClusterPodAssetsRequest,
-  RiskDetailItem,
+  DspmAssetAccount,
+  DescribeDspmIdentifyIdListRequest,
   DescribeCVMAssetInfoResponse,
-  DescribePublicIpAssetsResponse,
-  DescribeVulViewVulRiskListRequest,
-  DescribeAssetRiskListRequest,
-  DescribeRiskRulesRequest,
-  DescribeTopAttackInfoRequest,
+  ModifyDspmBackupSettingResponse,
+  DspmRisk,
   DescribeAIAgentAssetListResponse,
-  VulTrend,
-  DescribeSourceIPAssetRequest,
-  DescribeVulRiskListRequest,
+  DescribeUserDspmInfoListResponse,
+  DspmSensitiveScanTaskConfig,
   AlertExtraInfo,
-  DescribeAccessKeyRiskResponse,
-  DescribeDbAssetInfoRequest,
-  RelatedEvent,
-  DescribeAssetViewVulRiskListRequest,
+  DspmAssetTableInfo,
+  SourceIPVpcInfo,
+  CreateDspmApplyOrderResponse,
   DescribeUebaRuleRequest,
-  DescribeVulViewVulRiskListResponse,
-  CreateAccessKeyCheckTaskRequest,
-  Filter,
-  AIAgentAsset,
+  DescribeDspmAssetAccessTopologyRequest,
   DescribeRiskCenterWebsiteRiskListRequest,
   DescribeCallRecordRequest,
-  VulRiskItem,
-  RepositoryImageVO,
-  ServerRiskSuggestion,
   AssetViewVULRisk,
-  DescribeAccessKeyAlarmResponse,
+  DescribeClusterPodAssetsResponse,
   DescribeCFWAssetStatisticsResponse,
-  DescribeGatewayAssetsResponse,
+  TaskIdListKey,
   AssetViewPortRisk,
-  SubUserInfo,
   DescribeRiskCenterAssetViewCFGRiskListRequest,
-  DescribeRiskRuleDetailResponse,
-  DescribeAccessKeyUserDetailRequest,
-  DescribeVpcAssetsResponse,
-  CallRecord,
-  DescribeHighBaseLineRiskListResponse,
-  DeleteDomainAndIpResponse,
-  ServerRisk,
-  DescribeKeySandboxCredentialListRequest,
-  DescribeExposeAssetCategoryResponse,
+  DescribeDspmRiskStrategyGroupResponse,
+  ReportTaskIdList,
   AddNewBindRoleUserResponse,
-  StopRiskCenterTaskResponse,
-  DomainAssetVO,
+  DspmRiskStrategyGroup,
+  DescribeDspmIdentifyInfoResponse,
+  DescribeDspmPayInfoResponse,
+  DescribeExposePathResponse,
+  DeleteDspmWhitelistStrategyResponse,
+  TaskLogInfo,
+  DescribeTaskLogURLResponse,
+  DspmFrequency,
+  DescribeDspmAssetIdsResponse,
+  UebaRule,
+  DspmTablePrivilege,
+  DescribeSearchBugInfoResponse,
+  ModifyDspmPersonalIdentifyResponse,
+  DescribeAccessKeyRiskDetailRequest,
+  ModifyOrganizationAccountStatusRequest,
+  DescribeExposeAssetCategoryRequest,
+  DescribeAbnormalCallRecordResponse,
+  DspmDbAsset,
+  DescribeRiskCenterAssetViewVULRiskListResponse,
+  DescribeDspmAccessTopologyAssetsResponse,
+  UpdateAccessKeyAlarmStatusRequest,
+  DspmDictionary,
+  InquireInfo,
+  RiskCallRecord,
+  DspmRiskStrategy,
+  AssetProcessItem,
+  ModifyUebaRuleSwitchRequest,
+  DspmAssetCount,
+  DescribeScanStatisticRequest,
+  Filter,
+  AssetCluster,
+  ExportTask,
+  AddDspmAssetManagerResponse,
+  DescribeRiskCenterCFGViewCFGRiskListRequest,
+  UpdateAccessKeyRemarkRequest,
+  AddDspmAssetManagerRequest,
+  DescribeDspmStatisticsRequest,
+  CreateDspmPersonalIdentifyRequest,
+  DescribeAssumeRoleRequest,
+  CreateDspmWhitelistStrategyResponse,
+  DescribeVULRiskAdvanceCFGListResponse,
+  StandardItem,
+  CheckViewRiskItem,
+  DescribeAssetViewVulRiskListResponse,
+  DescribeRepositoryImageAssetsRequest,
+  UpdateAccessKeyAlarmStatusResponse,
+  VulImpactComponentInfo,
+  CVMAssetVO,
+  VULBaseInfo,
+  DescribeCallRecordResponse,
+  AssetViewCFGRisk,
+  DspmUinUser,
+  DataSearchBug,
+  DspmAssetSecurityAnalyseStatus,
+  BackupLog,
+  DescribeClusterAssetsRequest,
+  ResetDspmAssetAccountPasswordResponse,
+  DescribeDspmAssetAccountPresetPrivilegesResponse,
+  TaskCenterWeakPwdRiskInputParam,
+  DescribeDspmAssetSupportedPrivilegesResponse,
+  DescribeDomainAssetsRequest,
+  DescribeNICAssetsRequest,
+  DescribeDspmAssetFieldListResponse,
+  DescribeDspmPersonApplyHistoryResponse,
+  DescribeAssetProcessListRequest,
+  DescribeAssetProcessListResponse,
+  ModifyDspmIdentifyInfoResponse,
+  DescribeAccessKeyUserListRequest,
+  DescribeDspmApproveOrderListRequest,
+  DeleteDomainAndIpRequest,
+  DescribeRiskRuleDetailRequest,
+  DescribeDspmAssetAccountPresetPrivilegesRequest,
+  DescribeDspmPersonalIdentifyListResponse,
+  Location,
+  UebaEventContent,
+  CreateAccessKeySyncTaskResponse,
+  DescribeDspmSyncUsersStatusResponse,
+  DescribeSearchBugInfoRequest,
+  DescribeDspmRiskDetailResponse,
+  DescribeOrganizationUserInfoResponse,
+  AccessKeyRisk,
+  DspmIdentifyRuleDetail,
+  DBAssetVO,
+  CreateDspmWhitelistStrategyRequest,
+  StandardTerm,
+  DescribeDspmAssetDatabaseListRequest,
+  UpdateAlertStatusListResponse,
+  FilterDataObject,
+  ServerRisk,
+  DescribeDspmAssetIdsRequest,
+  DescribeRiskCenterAssetViewWeakPasswordRiskListRequest,
+  VULViewVULRisk,
+  DescribeDspmAssetAccountIdentifyResponse,
+  DescribeDspmAssetLoginCredentialRequest,
+  DescribeDspmIdentifyInfoListResponse,
+  DescribeCVMAssetsResponse,
+  DescribePublicIpAssetsRequest,
+  DescribeDspmBackupSettingRequest,
+  DescribeCVMAssetInfoRequest,
+  WebsiteRisk,
+  DescribeDspmSyncAssetsStatusResponse,
+  DspmRiskCount,
+  ServiceSupport,
+  DescribeDspmAssetAccountRecycledPrivilegesResponse,
+  DescribeAssetRiskListResponse,
+  DeleteDspmRestoreLogListResponse,
+  AccessCredentialOutput,
+  DspmAssetInstance,
+  CreateDspmIdentifyInfoListExportJobResponse,
+  TaskCenterVulRiskInputParam,
+  ModifyDspmIpInfoRequest,
+  ScanTaskInfo,
+  DescribeDspmAssetTableListResponse,
+  Tags,
+  ModifyDspmRiskInfoRequest,
+  PortViewPortRisk,
+  DescribeDspmAccessTopologyAccountsResponse,
+  DescribeDspmPersonApplyHistoryRequest,
+  DescribeClusterPodAssetsRequest,
+  DescribeDspmAccessTopologyIpsRequest,
+  DescribeVpcAssetsResponse,
+  DescribeAssetRiskListRequest,
+  DescribeTopAttackInfoRequest,
+  VulTrend,
+  SkillState,
+  DescribeDspmAssetAccountsRequest,
+  DescribeAccessKeyRiskResponse,
+  DescribeDspmApplyHistoryResponse,
+  ModifyDspmIpInfoResponse,
+  CreateAccessKeyCheckTaskRequest,
+  SyncDspmUsersResponse,
+  DescribeDspmAssetAccountsResponse,
+  AssetBaseInfoResponse,
+  DescribeRiskCallRecordResponse,
+  DescribeRiskCenterPortViewPortRiskListRequest,
+  DescribeAccessKeyUserDetailRequest,
+  StopRiskCenterTaskRequest,
+  ModifyDspmAssetSecurityAnalysisSwitchResponse,
+  ExposesItem,
   AKInfo,
-  DescribeRiskRulesResponse,
-  VULViewVULRiskData,
-  ExposeAssetTypeItem,
+  WhereFilter,
   DescribeAlertListResponse,
+  DspmPersonIdentifyItem,
+  ScanTaskInfoList,
+  DescribeRiskCenterAssetViewVULRiskListRequest,
+  DeleteDspmExportTaskResponse,
+  SourceIPAsset,
+  DescribeUserCallRecordRequest,
+  DescribeDspmSyncUsersStatusRequest,
+  DomainAssetVO,
+  DescribeAccessKeyUserDetailResponse,
+  CredentialEffectScope,
+  RevertDspmAssetAccountResponse,
+  DescribeTaskLogListResponse,
+  DeleteDspmBackupLogListRequest,
+  DescribeDspmRiskTendencyResponse,
+  HighBaseLineRiskItem,
+  DescribeCVMAssetsRequest,
+  DescribeRiskCenterServerRiskListRequest,
+  DescribeAccessKeyAlarmDetailResponse,
+  DescribeOtherCloudAssetsRequest,
+  DescribeDspmAssetSecurityAnalyseStatusResponse,
+  DescribeDspmBackupLogListResponse,
+  ModifyDspmIdentifyInfoRequest,
+  DescribeDspmWhitelistStrategyRequest,
+  DescribeAIAgentAssetListRequest,
+  CreateDomainAndIpResponse,
+  DescribeSubUserInfoRequest,
+  DescribeDspmAssetDatabasesResponse,
+  SendDspmAssetLoginSmsCodeRequest,
+  DescribeHighBaseLineRiskListRequest,
+  DescribeTaskLogURLRequest,
+  DspmIdentifyIdItem,
+  DescribeDspmStatisticsResponse,
+  DescribeDbAssetInfoResponse,
+  CreateDspmRiskExportJobRequest,
+  BugInfoDetail,
+  CreateDomainAndIpRequest,
+  DspmAssetDataScanDetail,
+  AccessKeyAlarmInfo,
+  DescribeDspmAssetAccountRecycledPrivilegesRequest,
+  DownloadDspmExportLogResponse,
+  DescribeAKAnalysisDetailResponse,
+  DescribeCheckViewRisksRequest,
+  DescribeDspmAssetFieldListRequest,
+  DeleteDspmPersonalIdentifyResponse,
+  StatisticalFilter,
+  DescribeVULRiskDetailRequest,
+  DspmDbAssetId,
+  DescribeConfigCheckRulesRequest,
+  ModifyDspmAccessRecordRequest,
+  ModifyRiskCenterRiskStatusRequest,
+  NewAlertKey,
+  DescribeDspmAssetLoginCredentialResponse,
+  DescribeVULRiskDetailResponse,
+  ModifyRiskCenterScanTaskResponse,
+  AccessKeyAlarmCount,
+  RiskRuleItem,
+  DescribeAbnormalCallRecordRequest,
+  ModifyDspmAssetDataScanTaskRequest,
+  AssetRiskItem,
+  CreateDspmExportTaskResponse,
+  DspmAccessRecordId,
+  RoleInfo,
+  RegionConfig,
+  SyncDspmAssetsRequest,
+  DescribeScanReportListResponse,
+  DescribeDspmWhitelistStrategyResponse,
+  DescribeDspmAssetAccountIdentifyRequest,
+  DescribeDspmSupportedAssetTypeResponse,
+  RiskRuleInfo,
+  DescribeDspmApplyHistoryRequest,
+  DescribeListenerListResponse,
+  TaskAdvanceCFG,
+  SyncDspmAssetsResponse,
+  AssetInfoDetail,
+  SubnetAsset,
+  RiskCenterStatusKey,
+  TaskAssetObject,
+  DbAssetInfo,
+  Element,
+  SyncDspmUsersRequest,
+  DescribeAccessKeyAlarmDetailRequest,
+  Tag,
+  DspmIdentifyCategoryDetail,
+  AccessKeyAlarm,
+  AssetClusterPod,
+  DescribeDspmAccessRecordRequest,
+  DescribeKeySandboxCredentialResponse,
+  DescribeVULListRequest,
+  AssetViewWeakPassRisk,
+  CFGViewCFGRisk,
+  ModifyDspmRiskStrategyResponse,
+  ReportItemKey,
+  DescribeRiskCenterPortViewPortRiskListResponse,
+  SensitiveDetail,
+  DescribeRiskCenterVULViewVULRiskListResponse,
+  CreateDspmExportTaskRequest,
+  DescribeRiskCenterVULViewVULRiskListRequest,
+  DescribeDspmAccessTopologyAssetsRequest,
+  DescribeRiskDetailListRequest,
+  VULRiskInfo,
+  CreateDspmApplyOrderRequest,
+  RiskDetailItem,
+  DescribeDspmAssetDatabaseListResponse,
+  ModifyDspmAccessRecordResponse,
+  DescribeVulViewVulRiskListRequest,
+  DescribeVulRiskListRequest,
+  DescribeVULListResponse,
+  KeySandboxCredential,
+  DescribeAssetViewVulRiskListRequest,
+  DspmWhitelistStrategy,
+  DescribeCFWAssetStatisticsRequest,
+  DescribeDspmRiskRequest,
+  DeleteDspmExportTaskRequest,
+  AIAgentAsset,
+  DspmSecurityAnalyseStatusCount,
+  ServerRiskSuggestion,
+  DescribeSubnetAssetsRequest,
+  DspmDatabasePrivilege,
+  DescribeDspmExportTaskRequest,
+  DescribeDspmApplyOrderListRequest,
+  CallRecord,
+  DescribeKeySandboxCredentialListRequest,
+  DescribeDspmAssetsResponse,
+  DescribeDspmAccessTopologyAccountsRequest,
+  DescribeDspmPersonalIdentifyListRequest,
   ModifyOrganizationAccountStatusResponse,
   DescribeRiskDetailListResponse,
-  ScanTaskInfoList,
-  DescribeExposePathResponse,
   DescribeDbAssetsRequest,
-  TaskLogInfo,
-  DescribeAccessKeyAlarmRequest,
-  DescribeRiskCenterAssetViewVULRiskListRequest,
-  TaskCenterCFGRiskInputParam,
-  DescribeExposuresRequest,
-  SourceIPAsset,
   DescribeAlertListRequest,
-  CreateDomainAndIpRequest,
   DescribeRiskCenterCFGViewCFGRiskListResponse,
-  DescribeAccessKeyUserDetailResponse,
-  DescribeSearchBugInfoResponse,
-  DescribeAccessKeyRiskDetailRequest,
-  CredentialEffectScope,
-  ModifyOrganizationAccountStatusRequest,
+  TaskCenterCFGRiskInputParam,
+  DescribeDspmAssetSecurityAnalyseStatusRequest,
+  ModifyDspmRiskInfoResponse,
   DescribeClusterAssetsResponse,
-  DescribeVULListResponse,
+  DownloadDspmExportLogRequest,
   DescribeAKAnalysisDetailRequest,
-  DescribeAbnormalCallRecordResponse,
   DescribeSubUserInfoResponse,
   DescribeVulRiskListResponse,
   DescribeCSIPRiskStatisticsRequest,
-  DescribeScanStatisticResponse,
   TagCount,
   DescribeDomainAssetsResponse,
-  DescribeExposuresResponse,
+  DescribeDbAssetsResponse,
   DescribeNICAssetsResponse,
-  DescribeRiskCenterAssetViewVULRiskListResponse,
-  DescribeCVMAssetsRequest,
-  DescribeRiskCenterServerRiskListRequest,
-  DescribeUserCallRecordResponse,
-  DescribeTaskLogListRequest,
-  DescribeAccessKeyAlarmDetailResponse,
+  DspmDbAccountPrivilege,
   Filters,
-  Element,
-  DescribeOtherCloudAssetsRequest,
   ModifyRiskCenterScanTaskRequest,
   ClbListenerListInfo,
-  UpdateAccessKeyRemarkRequest,
-  SourceIPVpcInfo,
   AccessKeyUser,
-  DescribeRiskCenterServerRiskListResponse,
+  ProductSupport,
   DescribeListenerListRequest,
-  ModifyUebaRuleSwitchRequest,
-  DescribeVULListRequest,
   DeleteRiskScanTaskResponse,
-  DescribeScanStatisticRequest,
-  DescribeGatewayAssetsRequest,
-  DescribeCFWAssetStatisticsRequest,
+  DescribeVulViewVulRiskListResponse,
   DescribeAccessKeyUserListResponse,
-  SkillState,
-  DescribeExposeAssetCategoryRequest,
-  AssetViewWeakPassRisk,
-  AssetCluster,
-  CreateDomainAndIpResponse,
-  AccessKeyAsset,
-  DescribeTaskLogListResponse,
-  DescribeDbAssetsResponse,
-  RiskCallRecord,
+  ExposeAssetTypeItem,
+  DescribeDspmLogListResponse,
+  DeleteDspmWhitelistStrategyRequest,
+  DescribeTaskLogListRequest,
+  DspmAssetAccessTopologyItem,
   DescribeRiskCenterAssetViewPortRiskListResponse,
-  DescribeVULRiskAdvanceCFGListRequest,
-  DescribeHighBaseLineRiskListRequest,
-  DescribeSearchBugInfoRequest,
+  DescribeAssumeRoleResponse,
 } from "./csip_models"
 
 /**
@@ -309,6 +539,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Dspm资产安全分析状态
+   */
+  async DescribeDspmAssetSecurityAnalyseStatus(
+    req: DescribeDspmAssetSecurityAnalyseStatusRequest,
+    cb?: (error: string, rep: DescribeDspmAssetSecurityAnalyseStatusResponse) => void
+  ): Promise<DescribeDspmAssetSecurityAnalyseStatusResponse> {
+    return this.request("DescribeDspmAssetSecurityAnalyseStatus", req, cb)
+  }
+
+  /**
    * 删除域名和ip请求
    */
   async DeleteDomainAndIp(
@@ -316,6 +556,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDomainAndIpResponse) => void
   ): Promise<DeleteDomainAndIpResponse> {
     return this.request("DeleteDomainAndIp", req, cb)
+  }
+
+  /**
+   * 查询云边界分析-暴露路径下主机节点的漏洞列表
+   */
+  async DescribeVulRiskList(
+    req: DescribeVulRiskListRequest,
+    cb?: (error: string, rep: DescribeVulRiskListResponse) => void
+  ): Promise<DescribeVulRiskListResponse> {
+    return this.request("DescribeVulRiskList", req, cb)
   }
 
   /**
@@ -339,13 +589,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取网卡列表
+   * 查询Dspm身份信息列表
    */
-  async DescribeNICAssets(
-    req: DescribeNICAssetsRequest,
-    cb?: (error: string, rep: DescribeNICAssetsResponse) => void
-  ): Promise<DescribeNICAssetsResponse> {
-    return this.request("DescribeNICAssets", req, cb)
+  async DescribeDspmIdentifyInfoList(
+    req: DescribeDspmIdentifyInfoListRequest,
+    cb?: (error: string, rep: DescribeDspmIdentifyInfoListResponse) => void
+  ): Promise<DescribeDspmIdentifyInfoListResponse> {
+    return this.request("DescribeDspmIdentifyInfoList", req, cb)
   }
 
   /**
@@ -359,6 +609,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改Dspm资产账号权限
+   */
+  async ModifyDspmAssetAccountPrivileges(
+    req: ModifyDspmAssetAccountPrivilegesRequest,
+    cb?: (error: string, rep: ModifyDspmAssetAccountPrivilegesResponse) => void
+  ): Promise<ModifyDspmAssetAccountPrivilegesResponse> {
+    return this.request("ModifyDspmAssetAccountPrivileges", req, cb)
+  }
+
+  /**
    * 获取 AI agent 资产列表
    */
   async DescribeAIAgentAssetList(
@@ -366,6 +626,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAIAgentAssetListResponse) => void
   ): Promise<DescribeAIAgentAssetListResponse> {
     return this.request("DescribeAIAgentAssetList", req, cb)
+  }
+
+  /**
+   * 查询资产数据库信息
+   */
+  async DescribeDspmAssetDatabaseList(
+    req: DescribeDspmAssetDatabaseListRequest,
+    cb?: (error: string, rep: DescribeDspmAssetDatabaseListResponse) => void
+  ): Promise<DescribeDspmAssetDatabaseListResponse> {
+    return this.request("DescribeDspmAssetDatabaseList", req, cb)
   }
 
   /**
@@ -379,6 +649,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Dspm资产id列表
+   */
+  async DescribeDspmAssetIds(
+    req: DescribeDspmAssetIdsRequest,
+    cb?: (error: string, rep: DescribeDspmAssetIdsResponse) => void
+  ): Promise<DescribeDspmAssetIdsResponse> {
+    return this.request("DescribeDspmAssetIds", req, cb)
+  }
+
+  /**
    * 云资源配置风险规则列表示例
    */
   async DescribeConfigCheckRules(
@@ -389,6 +669,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Dspm审批历史
+   */
+  async DescribeDspmApproveHistory(
+    req: DescribeDspmApproveHistoryRequest,
+    cb?: (error: string, rep: DescribeDspmApproveHistoryResponse) => void
+  ): Promise<DescribeDspmApproveHistoryResponse> {
+    return this.request("DescribeDspmApproveHistory", req, cb)
+  }
+
+  /**
    * 获取vpc列表
    */
   async DescribeVpcAssets(
@@ -396,6 +686,46 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVpcAssetsResponse) => void
   ): Promise<DescribeVpcAssetsResponse> {
     return this.request("DescribeVpcAssets", req, cb)
+  }
+
+  /**
+   * 删除Dspm申请单
+   */
+  async DeleteDspmApplyOrder(
+    req: DeleteDspmApplyOrderRequest,
+    cb?: (error: string, rep: DeleteDspmApplyOrderResponse) => void
+  ): Promise<DeleteDspmApplyOrderResponse> {
+    return this.request("DeleteDspmApplyOrder", req, cb)
+  }
+
+  /**
+   * 查询Dspm风险详情
+   */
+  async DescribeDspmRiskDetail(
+    req: DescribeDspmRiskDetailRequest,
+    cb?: (error: string, rep: DescribeDspmRiskDetailResponse) => void
+  ): Promise<DescribeDspmRiskDetailResponse> {
+    return this.request("DescribeDspmRiskDetail", req, cb)
+  }
+
+  /**
+   * 查询日志备份配置
+   */
+  async DescribeDspmBackupSetting(
+    req: DescribeDspmBackupSettingRequest,
+    cb?: (error: string, rep: DescribeDspmBackupSettingResponse) => void
+  ): Promise<DescribeDspmBackupSettingResponse> {
+    return this.request("DescribeDspmBackupSetting", req, cb)
+  }
+
+  /**
+   * 查询集团账号详情
+   */
+  async DescribeOrganizationInfo(
+    req: DescribeOrganizationInfoRequest,
+    cb?: (error: string, rep: DescribeOrganizationInfoResponse) => void
+  ): Promise<DescribeOrganizationInfoResponse> {
+    return this.request("DescribeOrganizationInfo", req, cb)
   }
 
   /**
@@ -429,23 +759,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 停止扫风险中心扫描任务
+   * 查询Dspm风险策略
    */
-  async StopRiskCenterTask(
-    req: StopRiskCenterTaskRequest,
-    cb?: (error: string, rep: StopRiskCenterTaskResponse) => void
-  ): Promise<StopRiskCenterTaskResponse> {
-    return this.request("StopRiskCenterTask", req, cb)
+  async DescribeDspmRiskStrategy(
+    req: DescribeDspmRiskStrategyRequest,
+    cb?: (error: string, rep: DescribeDspmRiskStrategyResponse) => void
+  ): Promise<DescribeDspmRiskStrategyResponse> {
+    return this.request("DescribeDspmRiskStrategy", req, cb)
   }
 
   /**
-   * 高级配置风险规则列表示例
+   * 获取网卡列表
    */
-  async DescribeRiskRules(
-    req: DescribeRiskRulesRequest,
-    cb?: (error: string, rep: DescribeRiskRulesResponse) => void
-  ): Promise<DescribeRiskRulesResponse> {
-    return this.request("DescribeRiskRules", req, cb)
+  async DescribeNICAssets(
+    req: DescribeNICAssetsRequest,
+    cb?: (error: string, rep: DescribeNICAssetsResponse) => void
+  ): Promise<DescribeNICAssetsResponse> {
+    return this.request("DescribeNICAssets", req, cb)
+  }
+
+  /**
+   * 查询Dspm同步资产状态
+   */
+  async DescribeDspmSyncAssetsStatus(
+    req?: DescribeDspmSyncAssetsStatusRequest,
+    cb?: (error: string, rep: DescribeDspmSyncAssetsStatusResponse) => void
+  ): Promise<DescribeDspmSyncAssetsStatusResponse> {
+    return this.request("DescribeDspmSyncAssetsStatus", req, cb)
+  }
+
+  /**
+   * 发起AK资产同步任务
+   */
+  async CreateAccessKeySyncTask(
+    req: CreateAccessKeySyncTaskRequest,
+    cb?: (error: string, rep: CreateAccessKeySyncTaskResponse) => void
+  ): Promise<CreateAccessKeySyncTaskResponse> {
+    return this.request("CreateAccessKeySyncTask", req, cb)
   }
 
   /**
@@ -459,33 +809,53 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 资产视角下云资源配置风险列表
+   * 修改Dspm资产日志投递开关
    */
-  async DescribeAssetRiskList(
-    req: DescribeAssetRiskListRequest,
-    cb?: (error: string, rep: DescribeAssetRiskListResponse) => void
-  ): Promise<DescribeAssetRiskListResponse> {
-    return this.request("DescribeAssetRiskList", req, cb)
+  async ModifyDspmAssetLogDeliverySwitch(
+    req: ModifyDspmAssetLogDeliverySwitchRequest,
+    cb?: (error: string, rep: ModifyDspmAssetLogDeliverySwitchResponse) => void
+  ): Promise<ModifyDspmAssetLogDeliverySwitchResponse> {
+    return this.request("ModifyDspmAssetLogDeliverySwitch", req, cb)
   }
 
   /**
-   * 获取扫描报告列表
+   * 创建Dspm资产访问拓扑导出任务
    */
-  async DescribeScanReportList(
-    req: DescribeScanReportListRequest,
-    cb?: (error: string, rep: DescribeScanReportListResponse) => void
-  ): Promise<DescribeScanReportListResponse> {
-    return this.request("DescribeScanReportList", req, cb)
+  async CreateDspmAssetAccessTopologyExportJob(
+    req: CreateDspmAssetAccessTopologyExportJobRequest,
+    cb?: (error: string, rep: CreateDspmAssetAccessTopologyExportJobResponse) => void
+  ): Promise<CreateDspmAssetAccessTopologyExportJobResponse> {
+    return this.request("CreateDspmAssetAccessTopologyExportJob", req, cb)
   }
 
   /**
-   * 查询集团的子账号列表
+   * 获取端口视角的端口风险列表
    */
-  async DescribeSubUserInfo(
-    req: DescribeSubUserInfoRequest,
-    cb?: (error: string, rep: DescribeSubUserInfoResponse) => void
-  ): Promise<DescribeSubUserInfoResponse> {
-    return this.request("DescribeSubUserInfo", req, cb)
+  async DescribeRiskCenterPortViewPortRiskList(
+    req: DescribeRiskCenterPortViewPortRiskListRequest,
+    cb?: (error: string, rep: DescribeRiskCenterPortViewPortRiskListResponse) => void
+  ): Promise<DescribeRiskCenterPortViewPortRiskListResponse> {
+    return this.request("DescribeRiskCenterPortViewPortRiskList", req, cb)
+  }
+
+  /**
+   * 删除Dspm资产账号
+   */
+  async DeleteDspmAssetAccount(
+    req: DeleteDspmAssetAccountRequest,
+    cb?: (error: string, rep: DeleteDspmAssetAccountResponse) => void
+  ): Promise<DeleteDspmAssetAccountResponse> {
+    return this.request("DeleteDspmAssetAccount", req, cb)
+  }
+
+  /**
+   * 修改Dspm资产账号信息
+   */
+  async ModifyDspmAssetAccount(
+    req: ModifyDspmAssetAccountRequest,
+    cb?: (error: string, rep: ModifyDspmAssetAccountResponse) => void
+  ): Promise<ModifyDspmAssetAccountResponse> {
+    return this.request("ModifyDspmAssetAccount", req, cb)
   }
 
   /**
@@ -499,6 +869,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询导出任务
+   */
+  async DescribeDspmExportTask(
+    req: DescribeDspmExportTaskRequest,
+    cb?: (error: string, rep: DescribeDspmExportTaskResponse) => void
+  ): Promise<DescribeDspmExportTaskResponse> {
+    return this.request("DescribeDspmExportTask", req, cb)
+  }
+
+  /**
+   * 查询Dspm申请单列表
+   */
+  async DescribeDspmApplyOrderList(
+    req: DescribeDspmApplyOrderListRequest,
+    cb?: (error: string, rep: DescribeDspmApplyOrderListResponse) => void
+  ): Promise<DescribeDspmApplyOrderListResponse> {
+    return this.request("DescribeDspmApplyOrderList", req, cb)
+  }
+
+  /**
    * 访问密钥告警记录详情
    */
   async DescribeAccessKeyAlarmDetail(
@@ -506,6 +896,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccessKeyAlarmDetailResponse) => void
   ): Promise<DescribeAccessKeyAlarmDetailResponse> {
     return this.request("DescribeAccessKeyAlarmDetail", req, cb)
+  }
+
+  /**
+   * 查询Dspm支持的资产类型信息
+   */
+  async DescribeDspmSupportedAssetType(
+    req: DescribeDspmSupportedAssetTypeRequest,
+    cb?: (error: string, rep: DescribeDspmSupportedAssetTypeResponse) => void
+  ): Promise<DescribeDspmSupportedAssetTypeResponse> {
+    return this.request("DescribeDspmSupportedAssetType", req, cb)
   }
 
   /**
@@ -539,6 +939,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Dspm身份id列表
+   */
+  async DescribeDspmIdentifyIdList(
+    req: DescribeDspmIdentifyIdListRequest,
+    cb?: (error: string, rep: DescribeDspmIdentifyIdListResponse) => void
+  ): Promise<DescribeDspmIdentifyIdListResponse> {
+    return this.request("DescribeDspmIdentifyIdList", req, cb)
+  }
+
+  /**
    * 获取用户访问密钥资产列表
    */
   async DescribeAccessKeyAsset(
@@ -546,6 +956,66 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccessKeyAssetResponse) => void
   ): Promise<DescribeAccessKeyAssetResponse> {
     return this.request("DescribeAccessKeyAsset", req, cb)
+  }
+
+  /**
+   * 发送Dspm资产访问验证码
+   */
+  async SendDspmAssetLoginSmsCode(
+    req: SendDspmAssetLoginSmsCodeRequest,
+    cb?: (error: string, rep: SendDspmAssetLoginSmsCodeResponse) => void
+  ): Promise<SendDspmAssetLoginSmsCodeResponse> {
+    return this.request("SendDspmAssetLoginSmsCode", req, cb)
+  }
+
+  /**
+   * 查询Dspm资产账号回收后特权信息
+   */
+  async DescribeDspmAssetAccountRecycledPrivileges(
+    req: DescribeDspmAssetAccountRecycledPrivilegesRequest,
+    cb?: (error: string, rep: DescribeDspmAssetAccountRecycledPrivilegesResponse) => void
+  ): Promise<DescribeDspmAssetAccountRecycledPrivilegesResponse> {
+    return this.request("DescribeDspmAssetAccountRecycledPrivileges", req, cb)
+  }
+
+  /**
+   * 资产列表
+   */
+  async DescribeOtherCloudAssets(
+    req: DescribeOtherCloudAssetsRequest,
+    cb?: (error: string, rep: DescribeOtherCloudAssetsResponse) => void
+  ): Promise<DescribeOtherCloudAssetsResponse> {
+    return this.request("DescribeOtherCloudAssets", req, cb)
+  }
+
+  /**
+   * 云边界分析资产列表
+   */
+  async DescribeExposures(
+    req: DescribeExposuresRequest,
+    cb?: (error: string, rep: DescribeExposuresResponse) => void
+  ): Promise<DescribeExposuresResponse> {
+    return this.request("DescribeExposures", req, cb)
+  }
+
+  /**
+   * 创建Dspm资产列表导出任务
+   */
+  async CreateDspmAssetsExportJob(
+    req: CreateDspmAssetsExportJobRequest,
+    cb?: (error: string, rep: CreateDspmAssetsExportJobResponse) => void
+  ): Promise<CreateDspmAssetsExportJobResponse> {
+    return this.request("CreateDspmAssetsExportJob", req, cb)
+  }
+
+  /**
+   * 修改Dspm风险信息
+   */
+  async ModifyDspmRiskInfo(
+    req: ModifyDspmRiskInfoRequest,
+    cb?: (error: string, rep: ModifyDspmRiskInfoResponse) => void
+  ): Promise<ModifyDspmRiskInfoResponse> {
+    return this.request("ModifyDspmRiskInfo", req, cb)
   }
 
   /**
@@ -579,6 +1049,56 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除Dspm个人身份id
+   */
+  async DeleteDspmPersonalIdentify(
+    req: DeleteDspmPersonalIdentifyRequest,
+    cb?: (error: string, rep: DeleteDspmPersonalIdentifyResponse) => void
+  ): Promise<DeleteDspmPersonalIdentifyResponse> {
+    return this.request("DeleteDspmPersonalIdentify", req, cb)
+  }
+
+  /**
+   * 查询日志列表信息
+   */
+  async DescribeDspmLogList(
+    req: DescribeDspmLogListRequest,
+    cb?: (error: string, rep: DescribeDspmLogListResponse) => void
+  ): Promise<DescribeDspmLogListResponse> {
+    return this.request("DescribeDspmLogList", req, cb)
+  }
+
+  /**
+   * 同步dspm用户列表
+   */
+  async SyncDspmUsers(
+    req?: SyncDspmUsersRequest,
+    cb?: (error: string, rep: SyncDspmUsersResponse) => void
+  ): Promise<SyncDspmUsersResponse> {
+    return this.request("SyncDspmUsers", req, cb)
+  }
+
+  /**
+   * 修改Dspm资产日志投递开关
+   */
+  async ModifyDspmAssetSecurityAnalysisSwitch(
+    req: ModifyDspmAssetSecurityAnalysisSwitchRequest,
+    cb?: (error: string, rep: ModifyDspmAssetSecurityAnalysisSwitchResponse) => void
+  ): Promise<ModifyDspmAssetSecurityAnalysisSwitchResponse> {
+    return this.request("ModifyDspmAssetSecurityAnalysisSwitch", req, cb)
+  }
+
+  /**
+   * 查询dspm字典信息列表
+   */
+  async DescribeDspmDictionaryList(
+    req: DescribeDspmDictionaryListRequest,
+    cb?: (error: string, rep: DescribeDspmDictionaryListResponse) => void
+  ): Promise<DescribeDspmDictionaryListResponse> {
+    return this.request("DescribeDspmDictionaryList", req, cb)
+  }
+
+  /**
    * 查询凭证列表
    */
   async DescribeKeySandboxCredentialList(
@@ -586,6 +1106,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeKeySandboxCredentialListResponse) => void
   ): Promise<DescribeKeySandboxCredentialListResponse> {
     return this.request("DescribeKeySandboxCredentialList", req, cb)
+  }
+
+  /**
+   * 查询Dspm资产数据库列表
+   */
+  async DescribeDspmAssetDatabases(
+    req: DescribeDspmAssetDatabasesRequest,
+    cb?: (error: string, rep: DescribeDspmAssetDatabasesResponse) => void
+  ): Promise<DescribeDspmAssetDatabasesResponse> {
+    return this.request("DescribeDspmAssetDatabases", req, cb)
   }
 
   /**
@@ -599,23 +1129,73 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集团账号详情
+   * 创建Dspm申请单
    */
-  async DescribeOrganizationInfo(
-    req: DescribeOrganizationInfoRequest,
-    cb?: (error: string, rep: DescribeOrganizationInfoResponse) => void
-  ): Promise<DescribeOrganizationInfoResponse> {
-    return this.request("DescribeOrganizationInfo", req, cb)
+  async CreateDspmApplyOrder(
+    req: CreateDspmApplyOrderRequest,
+    cb?: (error: string, rep: CreateDspmApplyOrderResponse) => void
+  ): Promise<CreateDspmApplyOrderResponse> {
+    return this.request("CreateDspmApplyOrder", req, cb)
   }
 
   /**
-   * 获取账号调用记录列表
+   * 高级配置风险规则列表示例
    */
-  async DescribeUserCallRecord(
-    req: DescribeUserCallRecordRequest,
-    cb?: (error: string, rep: DescribeUserCallRecordResponse) => void
-  ): Promise<DescribeUserCallRecordResponse> {
-    return this.request("DescribeUserCallRecord", req, cb)
+  async DescribeRiskRules(
+    req: DescribeRiskRulesRequest,
+    cb?: (error: string, rep: DescribeRiskRulesResponse) => void
+  ): Promise<DescribeRiskRulesResponse> {
+    return this.request("DescribeRiskRules", req, cb)
+  }
+
+  /**
+   * 查询Dspm风险记录
+   */
+  async DescribeDspmRisk(
+    req: DescribeDspmRiskRequest,
+    cb?: (error: string, rep: DescribeDspmRiskResponse) => void
+  ): Promise<DescribeDspmRiskResponse> {
+    return this.request("DescribeDspmRisk", req, cb)
+  }
+
+  /**
+   * 获取账号dspm信息列表
+   */
+  async DescribeUserDspmInfoList(
+    req: DescribeUserDspmInfoListRequest,
+    cb?: (error: string, rep: DescribeUserDspmInfoListResponse) => void
+  ): Promise<DescribeUserDspmInfoListResponse> {
+    return this.request("DescribeUserDspmInfoList", req, cb)
+  }
+
+  /**
+   * RetryExportLog
+   */
+  async RetryDspmExportLog(
+    req: RetryDspmExportLogRequest,
+    cb?: (error: string, rep: RetryDspmExportLogResponse) => void
+  ): Promise<RetryDspmExportLogResponse> {
+    return this.request("RetryDspmExportLog", req, cb)
+  }
+
+  /**
+   * 修改Dspm风险策略
+   */
+  async ModifyDspmRiskStrategy(
+    req: ModifyDspmRiskStrategyRequest,
+    cb?: (error: string, rep: ModifyDspmRiskStrategyResponse) => void
+  ): Promise<ModifyDspmRiskStrategyResponse> {
+    return this.request("ModifyDspmRiskStrategy", req, cb)
+  }
+
+  /**
+   * 查询Dspm资产登录凭据
+   */
+  async DescribeDspmAssetLoginCredential(
+    req: DescribeDspmAssetLoginCredentialRequest,
+    cb?: (error: string, rep: DescribeDspmAssetLoginCredentialResponse) => void
+  ): Promise<DescribeDspmAssetLoginCredentialResponse> {
+    return this.request("DescribeDspmAssetLoginCredential", req, cb)
   }
 
   /**
@@ -629,6 +1209,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 同步dspm支持的资产
+   */
+  async SyncDspmAssets(
+    req: SyncDspmAssetsRequest,
+    cb?: (error: string, rep: SyncDspmAssetsResponse) => void
+  ): Promise<SyncDspmAssetsResponse> {
+    return this.request("SyncDspmAssets", req, cb)
+  }
+
+  /**
    * 风险详情列表示例
    */
   async DescribeRiskDetailList(
@@ -636,6 +1226,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRiskDetailListResponse) => void
   ): Promise<DescribeRiskDetailListResponse> {
     return this.request("DescribeRiskDetailList", req, cb)
+  }
+
+  /**
+   * 查询Dspm访问拓扑ip列表
+   */
+  async DescribeDspmAccessTopologyIps(
+    req: DescribeDspmAccessTopologyIpsRequest,
+    cb?: (error: string, rep: DescribeDspmAccessTopologyIpsResponse) => void
+  ): Promise<DescribeDspmAccessTopologyIpsResponse> {
+    return this.request("DescribeDspmAccessTopologyIps", req, cb)
+  }
+
+  /**
+   * 查询Dspm资产账号身份信息
+   */
+  async DescribeDspmAssetAccountIdentify(
+    req: DescribeDspmAssetAccountIdentifyRequest,
+    cb?: (error: string, rep: DescribeDspmAssetAccountIdentifyResponse) => void
+  ): Promise<DescribeDspmAssetAccountIdentifyResponse> {
+    return this.request("DescribeDspmAssetAccountIdentify", req, cb)
+  }
+
+  /**
+   * 创建Dspm身份列表导出任务
+   */
+  async CreateDspmIdentifyInfoListExportJob(
+    req: CreateDspmIdentifyInfoListExportJobRequest,
+    cb?: (error: string, rep: CreateDspmIdentifyInfoListExportJobResponse) => void
+  ): Promise<CreateDspmIdentifyInfoListExportJobResponse> {
+    return this.request("CreateDspmIdentifyInfoListExportJob", req, cb)
   }
 
   /**
@@ -649,13 +1269,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云边界分析资产列表
+   * 获取已购Dspm订单信息
    */
-  async DescribeExposures(
-    req: DescribeExposuresRequest,
-    cb?: (error: string, rep: DescribeExposuresResponse) => void
-  ): Promise<DescribeExposuresResponse> {
-    return this.request("DescribeExposures", req, cb)
+  async DescribeDspmPayInfo(
+    req: DescribeDspmPayInfoRequest,
+    cb?: (error: string, rep: DescribeDspmPayInfoResponse) => void
+  ): Promise<DescribeDspmPayInfoResponse> {
+    return this.request("DescribeDspmPayInfo", req, cb)
   }
 
   /**
@@ -666,6 +1286,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRiskCenterCFGViewCFGRiskListResponse) => void
   ): Promise<DescribeRiskCenterCFGViewCFGRiskListResponse> {
     return this.request("DescribeRiskCenterCFGViewCFGRiskList", req, cb)
+  }
+
+  /**
+   * 创建Dspm访问记录导出任务
+   */
+  async CreateDspmAccessExportJob(
+    req: CreateDspmAccessExportJobRequest,
+    cb?: (error: string, rep: CreateDspmAccessExportJobResponse) => void
+  ): Promise<CreateDspmAccessExportJobResponse> {
+    return this.request("CreateDspmAccessExportJob", req, cb)
   }
 
   /**
@@ -709,13 +1339,73 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 资产列表
+   * 获取任务扫描报告列表
    */
-  async DescribeOtherCloudAssets(
-    req: DescribeOtherCloudAssetsRequest,
-    cb?: (error: string, rep: DescribeOtherCloudAssetsResponse) => void
-  ): Promise<DescribeOtherCloudAssetsResponse> {
-    return this.request("DescribeOtherCloudAssets", req, cb)
+  async DescribeTaskLogList(
+    req: DescribeTaskLogListRequest,
+    cb?: (error: string, rep: DescribeTaskLogListResponse) => void
+  ): Promise<DescribeTaskLogListResponse> {
+    return this.request("DescribeTaskLogList", req, cb)
+  }
+
+  /**
+   * 验证Dspm资产登录验证码
+   */
+  async VerifyDspmAssetLoginCode(
+    req: VerifyDspmAssetLoginCodeRequest,
+    cb?: (error: string, rep: VerifyDspmAssetLoginCodeResponse) => void
+  ): Promise<VerifyDspmAssetLoginCodeResponse> {
+    return this.request("VerifyDspmAssetLoginCode", req, cb)
+  }
+
+  /**
+   * 查询Dspm访客申请记录
+   */
+  async DescribeDspmPersonApplyHistory(
+    req: DescribeDspmPersonApplyHistoryRequest,
+    cb?: (error: string, rep: DescribeDspmPersonApplyHistoryResponse) => void
+  ): Promise<DescribeDspmPersonApplyHistoryResponse> {
+    return this.request("DescribeDspmPersonApplyHistory", req, cb)
+  }
+
+  /**
+   * 修改Dspm审批单状态
+   */
+  async ModifyDspmApproveStatus(
+    req: ModifyDspmApproveStatusRequest,
+    cb?: (error: string, rep: ModifyDspmApproveStatusResponse) => void
+  ): Promise<ModifyDspmApproveStatusResponse> {
+    return this.request("ModifyDspmApproveStatus", req, cb)
+  }
+
+  /**
+   * 修改日志备份设置
+   */
+  async ModifyDspmBackupSetting(
+    req: ModifyDspmBackupSettingRequest,
+    cb?: (error: string, rep: ModifyDspmBackupSettingResponse) => void
+  ): Promise<ModifyDspmBackupSettingResponse> {
+    return this.request("ModifyDspmBackupSetting", req, cb)
+  }
+
+  /**
+   * 删除Dspm白名单策略
+   */
+  async DeleteDspmWhitelistStrategy(
+    req: DeleteDspmWhitelistStrategyRequest,
+    cb?: (error: string, rep: DeleteDspmWhitelistStrategyResponse) => void
+  ): Promise<DeleteDspmWhitelistStrategyResponse> {
+    return this.request("DeleteDspmWhitelistStrategy", req, cb)
+  }
+
+  /**
+   * 查询Dspm白名单策略
+   */
+  async DescribeDspmWhitelistStrategy(
+    req: DescribeDspmWhitelistStrategyRequest,
+    cb?: (error: string, rep: DescribeDspmWhitelistStrategyResponse) => void
+  ): Promise<DescribeDspmWhitelistStrategyResponse> {
+    return this.request("DescribeDspmWhitelistStrategy", req, cb)
   }
 
   /**
@@ -729,6 +1419,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Dspm申请历史
+   */
+  async DescribeDspmApplyHistory(
+    req: DescribeDspmApplyHistoryRequest,
+    cb?: (error: string, rep: DescribeDspmApplyHistoryResponse) => void
+  ): Promise<DescribeDspmApplyHistoryResponse> {
+    return this.request("DescribeDspmApplyHistory", req, cb)
+  }
+
+  /**
    * 集群pod列表
    */
   async DescribeClusterPodAssets(
@@ -736,6 +1436,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterPodAssetsResponse) => void
   ): Promise<DescribeClusterPodAssetsResponse> {
     return this.request("DescribeClusterPodAssets", req, cb)
+  }
+
+  /**
+   * 删除备份日志
+   */
+  async DeleteDspmBackupLogList(
+    req: DeleteDspmBackupLogListRequest,
+    cb?: (error: string, rep: DeleteDspmBackupLogListResponse) => void
+  ): Promise<DeleteDspmBackupLogListResponse> {
+    return this.request("DeleteDspmBackupLogList", req, cb)
+  }
+
+  /**
+   * 查询dspm资产字段信息
+   */
+  async DescribeDspmAssetFieldList(
+    req: DescribeDspmAssetFieldListRequest,
+    cb?: (error: string, rep: DescribeDspmAssetFieldListResponse) => void
+  ): Promise<DescribeDspmAssetFieldListResponse> {
+    return this.request("DescribeDspmAssetFieldList", req, cb)
   }
 
   /**
@@ -749,6 +1469,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改Dspm白名单策略
+   */
+  async ModifyDspmWhitelistStrategy(
+    req: ModifyDspmWhitelistStrategyRequest,
+    cb?: (error: string, rep: ModifyDspmWhitelistStrategyResponse) => void
+  ): Promise<ModifyDspmWhitelistStrategyResponse> {
+    return this.request("ModifyDspmWhitelistStrategy", req, cb)
+  }
+
+  /**
    * 获取调用记录列表
    */
   async DescribeCallRecord(
@@ -759,6 +1489,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除恢复日志
+   */
+  async DeleteDspmRestoreLogList(
+    req: DeleteDspmRestoreLogListRequest,
+    cb?: (error: string, rep: DeleteDspmRestoreLogListResponse) => void
+  ): Promise<DeleteDspmRestoreLogListResponse> {
+    return this.request("DeleteDspmRestoreLogList", req, cb)
+  }
+
+  /**
+   * 添加资产管理员
+   */
+  async AddDspmAssetManager(
+    req: AddDspmAssetManagerRequest,
+    cb?: (error: string, rep: AddDspmAssetManagerResponse) => void
+  ): Promise<AddDspmAssetManagerResponse> {
+    return this.request("AddDspmAssetManager", req, cb)
+  }
+
+  /**
    * 云防资产中心统计数据
    */
   async DescribeCFWAssetStatistics(
@@ -766,6 +1516,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCFWAssetStatisticsResponse) => void
   ): Promise<DescribeCFWAssetStatisticsResponse> {
     return this.request("DescribeCFWAssetStatistics", req, cb)
+  }
+
+  /**
+   * 停止扫风险中心扫描任务
+   */
+  async StopRiskCenterTask(
+    req: StopRiskCenterTaskRequest,
+    cb?: (error: string, rep: StopRiskCenterTaskResponse) => void
+  ): Promise<StopRiskCenterTaskResponse> {
+    return this.request("StopRiskCenterTask", req, cb)
+  }
+
+  /**
+   * 创建Dspm风险导出任务
+   */
+  async CreateDspmRiskExportJob(
+    req: CreateDspmRiskExportJobRequest,
+    cb?: (error: string, rep: CreateDspmRiskExportJobResponse) => void
+  ): Promise<CreateDspmRiskExportJobResponse> {
+    return this.request("CreateDspmRiskExportJob", req, cb)
+  }
+
+  /**
+   * 创建Dspm审批历史导出任务
+   */
+  async CreateDspmApproveHistoryExportJob(
+    req: CreateDspmApproveHistoryExportJobRequest,
+    cb?: (error: string, rep: CreateDspmApproveHistoryExportJobResponse) => void
+  ): Promise<CreateDspmApproveHistoryExportJobResponse> {
+    return this.request("CreateDspmApproveHistoryExportJob", req, cb)
   }
 
   /**
@@ -789,6 +1569,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建日志导出任务
+   */
+  async CreateDspmExportTask(
+    req: CreateDspmExportTaskRequest,
+    cb?: (error: string, rep: CreateDspmExportTaskResponse) => void
+  ): Promise<CreateDspmExportTaskResponse> {
+    return this.request("CreateDspmExportTask", req, cb)
+  }
+
+  /**
+   * 删除导出任务
+   */
+  async DeleteDspmExportTask(
+    req: DeleteDspmExportTaskRequest,
+    cb?: (error: string, rep: DeleteDspmExportTaskResponse) => void
+  ): Promise<DeleteDspmExportTaskResponse> {
+    return this.request("DeleteDspmExportTask", req, cb)
+  }
+
+  /**
    * 访问密钥告警记录列表
    */
   async DescribeAccessKeyAlarm(
@@ -799,13 +1599,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询云边界分析-暴露路径下主机节点的高危基线风险列表
+   * 修改DspmIp信息
    */
-  async DescribeHighBaseLineRiskList(
-    req: DescribeHighBaseLineRiskListRequest,
-    cb?: (error: string, rep: DescribeHighBaseLineRiskListResponse) => void
-  ): Promise<DescribeHighBaseLineRiskListResponse> {
-    return this.request("DescribeHighBaseLineRiskList", req, cb)
+  async ModifyDspmIpInfo(
+    req: ModifyDspmIpInfoRequest,
+    cb?: (error: string, rep: ModifyDspmIpInfoResponse) => void
+  ): Promise<ModifyDspmIpInfoResponse> {
+    return this.request("ModifyDspmIpInfo", req, cb)
+  }
+
+  /**
+   * 获取账号调用记录列表
+   */
+  async DescribeUserCallRecord(
+    req: DescribeUserCallRecordRequest,
+    cb?: (error: string, rep: DescribeUserCallRecordResponse) => void
+  ): Promise<DescribeUserCallRecordResponse> {
+    return this.request("DescribeUserCallRecord", req, cb)
+  }
+
+  /**
+   * 查询资产表信息
+   */
+  async DescribeDspmAssetTableList(
+    req: DescribeDspmAssetTableListRequest,
+    cb?: (error: string, rep: DescribeDspmAssetTableListResponse) => void
+  ): Promise<DescribeDspmAssetTableListResponse> {
+    return this.request("DescribeDspmAssetTableList", req, cb)
   }
 
   /**
@@ -819,13 +1639,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 标记风险或者告警为 已处置/已忽略
+   * 查询Dspm访问拓扑资产列表
    */
-  async UpdateAccessKeyAlarmStatus(
-    req: UpdateAccessKeyAlarmStatusRequest,
-    cb?: (error: string, rep: UpdateAccessKeyAlarmStatusResponse) => void
-  ): Promise<UpdateAccessKeyAlarmStatusResponse> {
-    return this.request("UpdateAccessKeyAlarmStatus", req, cb)
+  async DescribeDspmAccessTopologyAssets(
+    req: DescribeDspmAccessTopologyAssetsRequest,
+    cb?: (error: string, rep: DescribeDspmAccessTopologyAssetsResponse) => void
+  ): Promise<DescribeDspmAccessTopologyAssetsResponse> {
+    return this.request("DescribeDspmAccessTopologyAssets", req, cb)
+  }
+
+  /**
+   * ip公网列表
+   */
+  async DescribePublicIpAssets(
+    req: DescribePublicIpAssetsRequest,
+    cb?: (error: string, rep: DescribePublicIpAssetsResponse) => void
+  ): Promise<DescribePublicIpAssetsResponse> {
+    return this.request("DescribePublicIpAssets", req, cb)
   }
 
   /**
@@ -859,6 +1689,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Dspm资产账号列表
+   */
+  async DescribeDspmAssetAccounts(
+    req: DescribeDspmAssetAccountsRequest,
+    cb?: (error: string, rep: DescribeDspmAssetAccountsResponse) => void
+  ): Promise<DescribeDspmAssetAccountsResponse> {
+    return this.request("DescribeDspmAssetAccounts", req, cb)
+  }
+
+  /**
+   * 恢复Dspm资产账号
+   */
+  async RevertDspmAssetAccount(
+    req: RevertDspmAssetAccountRequest,
+    cb?: (error: string, rep: RevertDspmAssetAccountResponse) => void
+  ): Promise<RevertDspmAssetAccountResponse> {
+    return this.request("RevertDspmAssetAccount", req, cb)
+  }
+
+  /**
    * 查询漏洞风险高级配置
    */
   async DescribeVULRiskAdvanceCFGList(
@@ -866,6 +1716,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVULRiskAdvanceCFGListResponse) => void
   ): Promise<DescribeVULRiskAdvanceCFGListResponse> {
     return this.request("DescribeVULRiskAdvanceCFGList", req, cb)
+  }
+
+  /**
+   * 查询Dspm风险分组策略
+   */
+  async DescribeDspmRiskStrategyGroup(
+    req: DescribeDspmRiskStrategyGroupRequest,
+    cb?: (error: string, rep: DescribeDspmRiskStrategyGroupResponse) => void
+  ): Promise<DescribeDspmRiskStrategyGroupResponse> {
+    return this.request("DescribeDspmRiskStrategyGroup", req, cb)
+  }
+
+  /**
+   * 查询是否绑定角色
+   */
+  async DescribeAssumeRole(
+    req: DescribeAssumeRoleRequest,
+    cb?: (error: string, rep: DescribeAssumeRoleResponse) => void
+  ): Promise<DescribeAssumeRoleResponse> {
+    return this.request("DescribeAssumeRole", req, cb)
+  }
+
+  /**
+   * 查询Dspm风险趋势
+   */
+  async DescribeDspmRiskTendency(
+    req: DescribeDspmRiskTendencyRequest,
+    cb?: (error: string, rep: DescribeDspmRiskTendencyResponse) => void
+  ): Promise<DescribeDspmRiskTendencyResponse> {
+    return this.request("DescribeDspmRiskTendency", req, cb)
   }
 
   /**
@@ -879,6 +1759,46 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改Dspm资产数据扫描任务
+   */
+  async ModifyDspmAssetDataScanTask(
+    req: ModifyDspmAssetDataScanTaskRequest,
+    cb?: (error: string, rep: ModifyDspmAssetDataScanTaskResponse) => void
+  ): Promise<ModifyDspmAssetDataScanTaskResponse> {
+    return this.request("ModifyDspmAssetDataScanTask", req, cb)
+  }
+
+  /**
+   * 修改集团账号状态
+   */
+  async ModifyOrganizationAccountStatus(
+    req: ModifyOrganizationAccountStatusRequest,
+    cb?: (error: string, rep: ModifyOrganizationAccountStatusResponse) => void
+  ): Promise<ModifyOrganizationAccountStatusResponse> {
+    return this.request("ModifyOrganizationAccountStatus", req, cb)
+  }
+
+  /**
+   * 查询Dspm访问记录
+   */
+  async DescribeDspmAccessRecord(
+    req: DescribeDspmAccessRecordRequest,
+    cb?: (error: string, rep: DescribeDspmAccessRecordResponse) => void
+  ): Promise<DescribeDspmAccessRecordResponse> {
+    return this.request("DescribeDspmAccessRecord", req, cb)
+  }
+
+  /**
+   * 修改Dspm个人身份id
+   */
+  async ModifyDspmPersonalIdentify(
+    req: ModifyDspmPersonalIdentifyRequest,
+    cb?: (error: string, rep: ModifyDspmPersonalIdentifyResponse) => void
+  ): Promise<ModifyDspmPersonalIdentifyResponse> {
+    return this.request("ModifyDspmPersonalIdentify", req, cb)
+  }
+
+  /**
    * 查询用户行为分析策略列表
    */
   async DescribeUebaRule(
@@ -889,13 +1809,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 发起AK资产同步任务
+   * 查询Dspm资产账号预设特权信息
    */
-  async CreateAccessKeySyncTask(
-    req: CreateAccessKeySyncTaskRequest,
-    cb?: (error: string, rep: CreateAccessKeySyncTaskResponse) => void
-  ): Promise<CreateAccessKeySyncTaskResponse> {
-    return this.request("CreateAccessKeySyncTask", req, cb)
+  async DescribeDspmAssetAccountPresetPrivileges(
+    req: DescribeDspmAssetAccountPresetPrivilegesRequest,
+    cb?: (error: string, rep: DescribeDspmAssetAccountPresetPrivilegesResponse) => void
+  ): Promise<DescribeDspmAssetAccountPresetPrivilegesResponse> {
+    return this.request("DescribeDspmAssetAccountPresetPrivileges", req, cb)
   }
 
   /**
@@ -919,6 +1839,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Dspm同步用户状态
+   */
+  async DescribeDspmSyncUsersStatus(
+    req?: DescribeDspmSyncUsersStatusRequest,
+    cb?: (error: string, rep: DescribeDspmSyncUsersStatusResponse) => void
+  ): Promise<DescribeDspmSyncUsersStatusResponse> {
+    return this.request("DescribeDspmSyncUsersStatus", req, cb)
+  }
+
+  /**
    * 新安全中心风险中心-漏洞列表
    */
   async DescribeVULList(
@@ -926,6 +1856,46 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVULListResponse) => void
   ): Promise<DescribeVULListResponse> {
     return this.request("DescribeVULList", req, cb)
+  }
+
+  /**
+   * 重置Dspm资产账号密码
+   */
+  async ResetDspmAssetAccountPassword(
+    req: ResetDspmAssetAccountPasswordRequest,
+    cb?: (error: string, rep: ResetDspmAssetAccountPasswordResponse) => void
+  ): Promise<ResetDspmAssetAccountPasswordResponse> {
+    return this.request("ResetDspmAssetAccountPassword", req, cb)
+  }
+
+  /**
+   * 查询Dspm身份信息
+   */
+  async DescribeDspmIdentifyInfo(
+    req: DescribeDspmIdentifyInfoRequest,
+    cb?: (error: string, rep: DescribeDspmIdentifyInfoResponse) => void
+  ): Promise<DescribeDspmIdentifyInfoResponse> {
+    return this.request("DescribeDspmIdentifyInfo", req, cb)
+  }
+
+  /**
+   * 查询Dspm统计信息
+   */
+  async DescribeDspmStatistics(
+    req: DescribeDspmStatisticsRequest,
+    cb?: (error: string, rep: DescribeDspmStatisticsResponse) => void
+  ): Promise<DescribeDspmStatisticsResponse> {
+    return this.request("DescribeDspmStatistics", req, cb)
+  }
+
+  /**
+   * 下载导出日志
+   */
+  async DownloadDspmExportLog(
+    req: DownloadDspmExportLogRequest,
+    cb?: (error: string, rep: DownloadDspmExportLogResponse) => void
+  ): Promise<DownloadDspmExportLogResponse> {
+    return this.request("DownloadDspmExportLog", req, cb)
   }
 
   /**
@@ -949,43 +1919,63 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询云边界分析-暴露路径下主机节点的漏洞列表
+   * 查询Dspm审批单列表
    */
-  async DescribeVulRiskList(
-    req: DescribeVulRiskListRequest,
-    cb?: (error: string, rep: DescribeVulRiskListResponse) => void
-  ): Promise<DescribeVulRiskListResponse> {
-    return this.request("DescribeVulRiskList", req, cb)
+  async DescribeDspmApproveOrderList(
+    req: DescribeDspmApproveOrderListRequest,
+    cb?: (error: string, rep: DescribeDspmApproveOrderListResponse) => void
+  ): Promise<DescribeDspmApproveOrderListResponse> {
+    return this.request("DescribeDspmApproveOrderList", req, cb)
   }
 
   /**
-   * 获取任务扫描报告列表
+   * 删除风险中心扫描任务
    */
-  async DescribeTaskLogList(
-    req: DescribeTaskLogListRequest,
-    cb?: (error: string, rep: DescribeTaskLogListResponse) => void
-  ): Promise<DescribeTaskLogListResponse> {
-    return this.request("DescribeTaskLogList", req, cb)
+  async DeleteRiskScanTask(
+    req: DeleteRiskScanTaskRequest,
+    cb?: (error: string, rep: DeleteRiskScanTaskResponse) => void
+  ): Promise<DeleteRiskScanTaskResponse> {
+    return this.request("DeleteRiskScanTask", req, cb)
   }
 
   /**
-   * 获取资产视角的漏洞风险列表
+   * 获取资产视角的弱口令风险列表
    */
-  async DescribeRiskCenterAssetViewVULRiskList(
-    req: DescribeRiskCenterAssetViewVULRiskListRequest,
-    cb?: (error: string, rep: DescribeRiskCenterAssetViewVULRiskListResponse) => void
-  ): Promise<DescribeRiskCenterAssetViewVULRiskListResponse> {
-    return this.request("DescribeRiskCenterAssetViewVULRiskList", req, cb)
+  async DescribeRiskCenterAssetViewWeakPasswordRiskList(
+    req: DescribeRiskCenterAssetViewWeakPasswordRiskListRequest,
+    cb?: (error: string, rep: DescribeRiskCenterAssetViewWeakPasswordRiskListResponse) => void
+  ): Promise<DescribeRiskCenterAssetViewWeakPasswordRiskListResponse> {
+    return this.request("DescribeRiskCenterAssetViewWeakPasswordRiskList", req, cb)
   }
 
   /**
-   * 获取资产视角的配置风险列表
+   * 查询备份日志列表
    */
-  async DescribeRiskCenterAssetViewCFGRiskList(
-    req: DescribeRiskCenterAssetViewCFGRiskListRequest,
-    cb?: (error: string, rep: DescribeRiskCenterAssetViewCFGRiskListResponse) => void
-  ): Promise<DescribeRiskCenterAssetViewCFGRiskListResponse> {
-    return this.request("DescribeRiskCenterAssetViewCFGRiskList", req, cb)
+  async DescribeDspmBackupLogList(
+    req: DescribeDspmBackupLogListRequest,
+    cb?: (error: string, rep: DescribeDspmBackupLogListResponse) => void
+  ): Promise<DescribeDspmBackupLogListResponse> {
+    return this.request("DescribeDspmBackupLogList", req, cb)
+  }
+
+  /**
+   * 创建Dspm白名单策略
+   */
+  async CreateDspmWhitelistStrategy(
+    req: CreateDspmWhitelistStrategyRequest,
+    cb?: (error: string, rep: CreateDspmWhitelistStrategyResponse) => void
+  ): Promise<CreateDspmWhitelistStrategyResponse> {
+    return this.request("CreateDspmWhitelistStrategy", req, cb)
+  }
+
+  /**
+   * 恢复备份日志
+   */
+  async ModifyDspmRestoreLogTask(
+    req: ModifyDspmRestoreLogTaskRequest,
+    cb?: (error: string, rep: ModifyDspmRestoreLogTaskResponse) => void
+  ): Promise<ModifyDspmRestoreLogTaskResponse> {
+    return this.request("ModifyDspmRestoreLogTask", req, cb)
   }
 
   /**
@@ -1009,13 +1999,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除风险中心扫描任务
+   * 资产视角下云资源配置风险列表
    */
-  async DeleteRiskScanTask(
-    req: DeleteRiskScanTaskRequest,
-    cb?: (error: string, rep: DeleteRiskScanTaskResponse) => void
-  ): Promise<DeleteRiskScanTaskResponse> {
-    return this.request("DeleteRiskScanTask", req, cb)
+  async DescribeAssetRiskList(
+    req: DescribeAssetRiskListRequest,
+    cb?: (error: string, rep: DescribeAssetRiskListResponse) => void
+  ): Promise<DescribeAssetRiskListResponse> {
+    return this.request("DescribeAssetRiskList", req, cb)
   }
 
   /**
@@ -1049,23 +2039,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * ip公网列表
+   * 查询集团的子账号列表
    */
-  async DescribePublicIpAssets(
-    req: DescribePublicIpAssetsRequest,
-    cb?: (error: string, rep: DescribePublicIpAssetsResponse) => void
-  ): Promise<DescribePublicIpAssetsResponse> {
-    return this.request("DescribePublicIpAssets", req, cb)
-  }
-
-  /**
-   * 获取资产视角的弱口令风险列表
-   */
-  async DescribeRiskCenterAssetViewWeakPasswordRiskList(
-    req: DescribeRiskCenterAssetViewWeakPasswordRiskListRequest,
-    cb?: (error: string, rep: DescribeRiskCenterAssetViewWeakPasswordRiskListResponse) => void
-  ): Promise<DescribeRiskCenterAssetViewWeakPasswordRiskListResponse> {
-    return this.request("DescribeRiskCenterAssetViewWeakPasswordRiskList", req, cb)
+  async DescribeSubUserInfo(
+    req: DescribeSubUserInfoRequest,
+    cb?: (error: string, rep: DescribeSubUserInfoResponse) => void
+  ): Promise<DescribeSubUserInfoResponse> {
+    return this.request("DescribeSubUserInfo", req, cb)
   }
 
   /**
@@ -1079,6 +2059,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取资产视角的漏洞风险列表
+   */
+  async DescribeRiskCenterAssetViewVULRiskList(
+    req: DescribeRiskCenterAssetViewVULRiskListRequest,
+    cb?: (error: string, rep: DescribeRiskCenterAssetViewVULRiskListResponse) => void
+  ): Promise<DescribeRiskCenterAssetViewVULRiskListResponse> {
+    return this.request("DescribeRiskCenterAssetViewVULRiskList", req, cb)
+  }
+
+  /**
    * 创建域名、ip相关信息
    */
   async CreateDomainAndIp(
@@ -1086,6 +2076,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDomainAndIpResponse) => void
   ): Promise<CreateDomainAndIpResponse> {
     return this.request("CreateDomainAndIp", req, cb)
+  }
+
+  /**
+   * 修改Dspm访问管理信息
+   */
+  async ModifyDspmAccessRecord(
+    req: ModifyDspmAccessRecordRequest,
+    cb?: (error: string, rep: ModifyDspmAccessRecordResponse) => void
+  ): Promise<ModifyDspmAccessRecordResponse> {
+    return this.request("ModifyDspmAccessRecord", req, cb)
   }
 
   /**
@@ -1099,6 +2099,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询云边界分析-暴露路径下主机节点的高危基线风险列表
+   */
+  async DescribeHighBaseLineRiskList(
+    req: DescribeHighBaseLineRiskListRequest,
+    cb?: (error: string, rep: DescribeHighBaseLineRiskListResponse) => void
+  ): Promise<DescribeHighBaseLineRiskListResponse> {
+    return this.request("DescribeHighBaseLineRiskList", req, cb)
+  }
+
+  /**
    * 获取用户访问密钥资产列表（源IP视角）
    */
   async DescribeSourceIPAsset(
@@ -1109,23 +2119,83 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取端口视角的端口风险列表
+   * 获取资产视角的配置风险列表
    */
-  async DescribeRiskCenterPortViewPortRiskList(
-    req: DescribeRiskCenterPortViewPortRiskListRequest,
-    cb?: (error: string, rep: DescribeRiskCenterPortViewPortRiskListResponse) => void
-  ): Promise<DescribeRiskCenterPortViewPortRiskListResponse> {
-    return this.request("DescribeRiskCenterPortViewPortRiskList", req, cb)
+  async DescribeRiskCenterAssetViewCFGRiskList(
+    req: DescribeRiskCenterAssetViewCFGRiskListRequest,
+    cb?: (error: string, rep: DescribeRiskCenterAssetViewCFGRiskListResponse) => void
+  ): Promise<DescribeRiskCenterAssetViewCFGRiskListResponse> {
+    return this.request("DescribeRiskCenterAssetViewCFGRiskList", req, cb)
   }
 
   /**
-   * 修改集团账号状态
+   * 获取扫描报告列表
    */
-  async ModifyOrganizationAccountStatus(
-    req: ModifyOrganizationAccountStatusRequest,
-    cb?: (error: string, rep: ModifyOrganizationAccountStatusResponse) => void
-  ): Promise<ModifyOrganizationAccountStatusResponse> {
-    return this.request("ModifyOrganizationAccountStatus", req, cb)
+  async DescribeScanReportList(
+    req: DescribeScanReportListRequest,
+    cb?: (error: string, rep: DescribeScanReportListResponse) => void
+  ): Promise<DescribeScanReportListResponse> {
+    return this.request("DescribeScanReportList", req, cb)
+  }
+
+  /**
+   * 修改Dspm身份信息
+   */
+  async ModifyDspmIdentifyInfo(
+    req: ModifyDspmIdentifyInfoRequest,
+    cb?: (error: string, rep: ModifyDspmIdentifyInfoResponse) => void
+  ): Promise<ModifyDspmIdentifyInfoResponse> {
+    return this.request("ModifyDspmIdentifyInfo", req, cb)
+  }
+
+  /**
+   * 创建Dspm个人身份id
+   */
+  async CreateDspmPersonalIdentify(
+    req: CreateDspmPersonalIdentifyRequest,
+    cb?: (error: string, rep: CreateDspmPersonalIdentifyResponse) => void
+  ): Promise<CreateDspmPersonalIdentifyResponse> {
+    return this.request("CreateDspmPersonalIdentify", req, cb)
+  }
+
+  /**
+   * 查询Dspm个人身份信息列表
+   */
+  async DescribeDspmPersonalIdentifyList(
+    req: DescribeDspmPersonalIdentifyListRequest,
+    cb?: (error: string, rep: DescribeDspmPersonalIdentifyListResponse) => void
+  ): Promise<DescribeDspmPersonalIdentifyListResponse> {
+    return this.request("DescribeDspmPersonalIdentifyList", req, cb)
+  }
+
+  /**
+   * 查询Dspm资产列表
+   */
+  async DescribeDspmAssets(
+    req: DescribeDspmAssetsRequest,
+    cb?: (error: string, rep: DescribeDspmAssetsResponse) => void
+  ): Promise<DescribeDspmAssetsResponse> {
+    return this.request("DescribeDspmAssets", req, cb)
+  }
+
+  /**
+   * 查询Dspm访问拓扑账号列表
+   */
+  async DescribeDspmAccessTopologyAccounts(
+    req: DescribeDspmAccessTopologyAccountsRequest,
+    cb?: (error: string, rep: DescribeDspmAccessTopologyAccountsResponse) => void
+  ): Promise<DescribeDspmAccessTopologyAccountsResponse> {
+    return this.request("DescribeDspmAccessTopologyAccounts", req, cb)
+  }
+
+  /**
+   * 查询Dspm资产支持的权限
+   */
+  async DescribeDspmAssetSupportedPrivileges(
+    req: DescribeDspmAssetSupportedPrivilegesRequest,
+    cb?: (error: string, rep: DescribeDspmAssetSupportedPrivilegesResponse) => void
+  ): Promise<DescribeDspmAssetSupportedPrivilegesResponse> {
+    return this.request("DescribeDspmAssetSupportedPrivileges", req, cb)
   }
 
   /**
@@ -1159,6 +2229,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Dspm资产访问拓扑
+   */
+  async DescribeDspmAssetAccessTopology(
+    req: DescribeDspmAssetAccessTopologyRequest,
+    cb?: (error: string, rep: DescribeDspmAssetAccessTopologyResponse) => void
+  ): Promise<DescribeDspmAssetAccessTopologyResponse> {
+    return this.request("DescribeDspmAssetAccessTopology", req, cb)
+  }
+
+  /**
    * 获取风险调用记录列表
    */
   async DescribeRiskCallRecord(
@@ -1166,5 +2246,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRiskCallRecordResponse) => void
   ): Promise<DescribeRiskCallRecordResponse> {
     return this.request("DescribeRiskCallRecord", req, cb)
+  }
+
+  /**
+   * 标记风险或者告警为 已处置/已忽略
+   */
+  async UpdateAccessKeyAlarmStatus(
+    req: UpdateAccessKeyAlarmStatusRequest,
+    cb?: (error: string, rep: UpdateAccessKeyAlarmStatusResponse) => void
+  ): Promise<UpdateAccessKeyAlarmStatusResponse> {
+    return this.request("UpdateAccessKeyAlarmStatus", req, cb)
   }
 }

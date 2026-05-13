@@ -9174,30 +9174,27 @@ export interface ReceiverInfo {
  */
 export interface DescribeRecordingRulesRequest {
   /**
-   * Prometheus 实例 ID
+   * <p>Prometheus 实例 ID</p>
    */
   InstanceId: string
   /**
-   * 返回数量，默认为 20，最大值为 100
+   * <p>返回数量，默认为 20，最大值为 100</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为 0
+   * <p>偏移量，默认为 0</p>
    */
   Offset?: number
   /**
-   * 规则 ID
+   * <p>规则 ID</p>
    */
   RuleId?: string
   /**
-   * 规则状态码，取值如下：
-<li>1=RuleDeleted</li>
-<li>2=RuleEnabled</li>
-<li>3=RuleDisabled</li>
+   * <p>规则状态码，取值如下：</p><li>1=RuleDeleted</li><li>2=RuleEnabled</li><li>3=RuleDisabled</li>
    */
   RuleState?: number
   /**
-   * 规则名称
+   * <p>规则名称</p>
    */
   Name?: string
 }
@@ -9495,14 +9492,18 @@ export interface ModifyPrometheusTempResponse {
  */
 export interface DescribeRecordingRulesResponse {
   /**
-   * 规则组数量
+   * <p>规则组数量</p>
    */
   TotalCount?: number
   /**
-   * 规则组详情
+   * <p>规则组详情</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordingRuleSet?: Array<RecordingRuleSet>
+  /**
+   * <p>预聚合规则数</p>
+   */
+  TotalRuleCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

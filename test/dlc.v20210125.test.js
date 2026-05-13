@@ -478,6 +478,16 @@ it("dlc.v20210125.RevokeDLCCatalogAccess", async function () {
     }
 })
 
+it("dlc.v20210125.RestartDataEngine", async function () {
+    try {
+       const data = await client.RestartDataEngine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateUser", async function () {
     try {
        const data = await client.CreateUser({})
@@ -1208,9 +1218,9 @@ it("dlc.v20210125.DescribeTable", async function () {
     }
 })
 
-it("dlc.v20210125.GetOptimizerPolicy", async function () {
+it("dlc.v20210125.DescribeTCLakeMetaInstance", async function () {
     try {
-       const data = await client.GetOptimizerPolicy({})
+       const data = await client.DescribeTCLakeMetaInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1608,9 +1618,9 @@ it("dlc.v20210125.CreateScript", async function () {
     }
 })
 
-it("dlc.v20210125.RestartDataEngine", async function () {
+it("dlc.v20210125.InitializeTCLake", async function () {
     try {
-       const data = await client.RestartDataEngine({})
+       const data = await client.InitializeTCLake({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1671,6 +1681,16 @@ it("dlc.v20210125.DescribeViews", async function () {
 it("dlc.v20210125.DeleteThirdPartyAccessUser", async function () {
     try {
        const data = await client.DeleteThirdPartyAccessUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.GetOptimizerPolicy", async function () {
+    try {
+       const data = await client.GetOptimizerPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

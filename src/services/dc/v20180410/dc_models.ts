@@ -105,7 +105,7 @@ export interface Coordinate {
  */
 export interface CreateCloudAttachServiceResponse {
   /**
-   * 敏捷上云服务详情
+   * <p>敏捷上云服务详情</p>
    */
   CloudAttach?: CloudAttachInfo
   /**
@@ -906,9 +906,13 @@ export interface ApplyInternetAddressRequest {
  */
 export interface CreateCloudAttachServiceRequest {
   /**
-   * 创建敏捷上云入参
+   * <p>创建敏捷上云入参</p>
    */
   Data: CreateCasInput
+  /**
+   * <p>标签</p>
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -1563,6 +1567,14 @@ cross-region：跨地域
    * 运营商链路是否有保护
    */
   BIapLinkProtected?: boolean
+  /**
+   * 服务类型：SHARE-共享型，EXCLUSIVE-独占型
+   */
+  ServiceType?: string
+  /**
+   * VLAN范围
+   */
+  VlanRange?: string
 }
 
 /**

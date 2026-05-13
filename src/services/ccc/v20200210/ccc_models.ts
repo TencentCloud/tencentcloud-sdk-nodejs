@@ -44,21 +44,21 @@ export interface CreateCCCSkillGroupResponse {
 }
 
 /**
- * ModifyStaffPassword请求参数结构体
+ * 本轮对话在画布中经过的节点路径
  */
-export interface ModifyStaffPasswordRequest {
+export interface AIRoundPath {
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * <p>画布中的节点名称</p>
    */
-  SdkAppId: number
+  NodeName?: string
   /**
-   * 座席邮箱
+   * <p>画布中的节点类型</p><p>枚举值：</p><ul><li>DIALOGUE： 对话节点</li><li>API_CALL： 接口调用节点</li><li>TRANSFER： 转接节点</li><li>KEY_PRESS： 按键节点</li><li>END_CALL： 挂断节点</li></ul>
    */
-  Email: string
+  NodeType?: string
   /**
-   * 设置的密码
+   * <p>经过当前节点的时间戳</p><p>单位：ms</p>
    */
-  Password: string
+  Timestamp?: number
 }
 
 /**
@@ -936,6 +936,24 @@ export interface ForwardingConfig {
 }
 
 /**
+ * ModifyStaffPassword请求参数结构体
+ */
+export interface ModifyStaffPasswordRequest {
+  /**
+   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   */
+  SdkAppId: number
+  /**
+   * 座席邮箱
+   */
+  Email: string
+  /**
+   * 设置的密码
+   */
+  Password: string
+}
+
+/**
  * DescribeAILatency请求参数结构体
  */
 export interface DescribeAILatencyRequest {
@@ -1451,6 +1469,28 @@ export interface DescribeTelCallInfoResponse {
 }
 
 /**
+ * 用户发言事件
+ */
+export interface UserReplyEvent {
+  /**
+   * <p>ASR语音识别引擎将用户语音转换成的原始文本结果</p>
+   */
+  ASRTranscript?: string
+  /**
+   * <p>命中画布中该对话节点配置的回复分类</p>
+   */
+  MatchedIntent?: string
+  /**
+   * <p>用户回复分类的标签， json序列化后的信息</p>
+   */
+  ExtractedSlots?: string
+  /**
+   * <p>用户回复命中的分支类型</p><p>枚举值：</p><ul><li>Intent： 用户意图</li><li>Fallback： 兜底分支</li><li>NoResponse： 无响应跳转分支</li><li>SlotCollectionSuccess： 词槽收集完成跳转分支</li><li>SlotCollectionFail： 词槽收集失败跳转分支</li><li>GlobalIntent： 全局节点意图</li><li>LogicAnd： 逻辑判断节点 and</li><li>LogicOr： 逻辑判断节点 or</li><li>DTMF成功： DTMFSuccess</li><li>DTMF失败： DTMFFail</li><li>DTMF导航： DTMFNavigation</li><li>DTMF分机： DTMFExtension</li><li>DTMF收号： DTMFCollection</li><li>转接智能体节点失败： TransferAgentFail</li></ul>
+   */
+  BranchType?: string
+}
+
+/**
  * DescribeExtensions返回参数结构体
  */
 export interface DescribeExtensionsResponse {
@@ -1813,6 +1853,32 @@ export interface BasicAuth {
    *
    */
   BasicToken?: string
+}
+
+/**
+ * 表示一轮完整的对话交互
+ */
+export interface AICallInteractionRound {
+  /**
+   * <p>本轮对话的唯一标识 Id</p>
+   */
+  RoundId?: string
+  /**
+   * <p>轮次</p>
+   */
+  RoundIndex?: number
+  /**
+   * <p>用户回复分类的标签， json序列化后的表示</p>
+   */
+  Tags?: string
+  /**
+   * <p>本轮涉及到的消息内容</p>
+   */
+  Messages?: Array<AIRoundMessage>
+  /**
+   * <p>本轮对话在画布中经过的节点路径</p>
+   */
+  Paths?: Array<AIRoundPath>
 }
 
 /**
@@ -2394,6 +2460,20 @@ export interface CreateCompanyApplyRequest {
    * 企业资质信息
    */
   CompanyInfo: CompanyApplyInfo
+}
+
+/**
+ * 调用服务端主动发起请求到LLM
+ */
+export interface InvokeLLM {
+  /**
+   * 请求LLM的内容
+   */
+  Content?: string
+  /**
+   * 是否允许该文本打断机器人说话
+   */
+  Interrupt?: boolean
 }
 
 /**
@@ -3122,6 +3202,28 @@ export interface RestoreMemberOnlineRequest {
 }
 
 /**
+ * 智能体的响应延时
+ */
+export interface AICallLatencyMetrics {
+  /**
+   * <p>asr时延（毫秒）</p><p>-1 表示无 asr时延</p>
+   */
+  AsrLatency?: number
+  /**
+   * <p>llm首token时延(毫秒)</p>
+   */
+  LLMFirstTokenLatency?: number
+  /**
+   * <p>tts时延（毫秒）</p><p>-1 表示无 tts时延</p>
+   */
+  TTSLatency?: number
+  /**
+   * <p>总时延</p>
+   */
+  TotalLatency?: number
+}
+
+/**
  * 时间范围，24 小时制，格式为 09:00:00
  */
 export interface TimeRange {
@@ -3136,17 +3238,35 @@ export interface TimeRange {
 }
 
 /**
- * DescribeStaffStatusHistory返回参数结构体
+ * DescribeAICallInteractionRecords返回参数结构体
  */
-export interface DescribeStaffStatusHistoryResponse {
+export interface DescribeAICallInteractionRecordsResponse {
   /**
-   * 座席状态数据
+   * <p>返回的会话交互结果</p>
    */
-  Data?: Array<StaffStatus>
+  InteractionEventList?: Array<AICallInteractionRound>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 表示一轮对话中的用户和 AI 消息
+ */
+export interface AIRoundMessage {
+  /**
+   * <p>消息的毫秒级时间戳</p><p>单位：ms</p>
+   */
+  Timestamp?: number
+  /**
+   * <p>用户消息</p>
+   */
+  UserReply?: UserReplyEvent
+  /**
+   * <p>智能体响应消息</p>
+   */
+  AISpeak?: AISpeakEvent
 }
 
 /**
@@ -3165,6 +3285,29 @@ export interface SetStaffStatusItem {
    * 如果设置小休状态，这里是原因
    */
   Reason?: string
+}
+
+/**
+ * 智能体发言事件
+ */
+export interface AISpeakEvent {
+  /**
+   * <p>本次话术是否允许被用户VAD打断</p>
+   */
+  CanBeInterrupted?: boolean
+  /**
+   * <p>智能体播报的话术文本内容</p>
+   */
+  SpokenText?: string
+  /**
+   * <p>智能体发言类型</p><p>枚举值：</p><ul><li>Script： 智能体话术</li><li>KnowledgeBase： 知识库</li><li>LLMFallback： 大模型兜底</li><li>NoResponseTip： 无响应提示</li><li>智能追问： SmartFollowUp</li><li>FAQ： FAQ</li><li>转人工 - 排队等待音： TransferWaitingPrompt</li><li>无响应挂断前放音： PlayNoResponseEndPrompt</li><li>转人工 - 排队前放音： PlayQueuePrompt</li><li>转人工 - 接待前放音： PlayPromptBeforeReception</li><li>转人工 - 排队超时放音： PlayQueueTimeoutPrompt</li><li>转人工 - 转人工失败放音： PlayTransferFailPrompt</li><li>DTMF收号（按键用户输入）： Dtmf</li><li>按键节点 - 播放提示音： PlayDtmfPrompt</li><li>按键节点 - 输入错误提示音： PlayInvalidDtmfPrompt</li><li>按键节点 - 超时提示音： PlayDtmfTimeoutPrompt</li><li>其他类型： Other</li></ul>
+   */
+  SpokenType?: string
+  /**
+   * <p>本次响应生成的时延结果</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LatencyMetrics?: AICallLatencyMetrics
 }
 
 /**
@@ -3797,6 +3940,20 @@ export interface ModifyExtensionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAICallInteractionRecords请求参数结构体
+ */
+export interface DescribeAICallInteractionRecordsRequest {
+  /**
+   * <p>应用 ID，可以查看 https://console.cloud.tencent.com/ccc。</p>
+   */
+  SdkAppId: number
+  /**
+   * <p>查询的会话SessionID</p>
+   */
+  SessionId: string
 }
 
 /**
@@ -5210,17 +5367,17 @@ export interface DescribeTelCdrResponse {
 }
 
 /**
- * 调用服务端主动发起请求到LLM
+ * DescribeStaffStatusHistory返回参数结构体
  */
-export interface InvokeLLM {
+export interface DescribeStaffStatusHistoryResponse {
   /**
-   * 请求LLM的内容
+   * 座席状态数据
    */
-  Content?: string
+  Data?: Array<StaffStatus>
   /**
-   * 是否允许该文本打断机器人说话
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Interrupt?: boolean
+  RequestId?: string
 }
 
 /**

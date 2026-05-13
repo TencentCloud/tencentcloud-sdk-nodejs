@@ -38,7 +38,7 @@ import {
   LogContent,
   JobRuntimeInfo,
   JobEventInfo,
-  ResourceLocParam,
+  DescribeWorkSpaceUsersResponse,
   NodeConfig,
   WorkSpaceSetItem,
   DescribeJobConfigsRequest,
@@ -115,6 +115,7 @@ import {
   Property,
   JobGraphEdge,
   Savepoint,
+  RunSqlGatewayStatementResponse,
   SystemResourceItem,
   DescribeResourceRelatedJobsRequest,
   ResourceConfigItem,
@@ -145,10 +146,11 @@ import {
   ModifyFolderResponse,
   SlotSharingGroup,
   ModifyWorkSpaceResponse,
-  RunSqlGatewayStatementResponse,
+  ResourceLocParam,
   CreateJobRequest,
   JobInstanceForSubmissionLog,
   DescribeFolderRequest,
+  DescribeWorkSpaceUsersRequest,
   Warehouse,
   DeleteFoldersResponse,
   SubFolderInfo,
@@ -472,6 +474,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateFolderResponse) => void
   ): Promise<CreateFolderResponse> {
     return this.request("CreateFolder", req, cb)
+  }
+
+  /**
+   * 工作空间用户列表
+   */
+  async DescribeWorkSpaceUsers(
+    req: DescribeWorkSpaceUsersRequest,
+    cb?: (error: string, rep: DescribeWorkSpaceUsersResponse) => void
+  ): Promise<DescribeWorkSpaceUsersResponse> {
+    return this.request("DescribeWorkSpaceUsers", req, cb)
   }
 
   /**

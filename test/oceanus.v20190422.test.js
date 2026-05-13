@@ -308,6 +308,16 @@ it("oceanus.v20190422.CreateFolder", async function () {
     }
 })
 
+it("oceanus.v20190422.DescribeWorkSpaceUsers", async function () {
+    try {
+       const data = await client.DescribeWorkSpaceUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("oceanus.v20190422.CheckSavepoint", async function () {
     try {
        const data = await client.CheckSavepoint({})

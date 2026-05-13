@@ -238,6 +238,16 @@ it("cfs.v20190719.CreateLifecycleDataTask", async function () {
     }
 })
 
+it("cfs.v20190719.OverrideCfsRules", async function () {
+    try {
+       const data = await client.OverrideCfsRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfs.v20190719.SignUpCfsService", async function () {
     try {
        const data = await client.SignUpCfsService({})

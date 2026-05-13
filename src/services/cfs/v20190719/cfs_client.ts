@@ -45,6 +45,7 @@ import {
   SignUpCfsServiceRequest,
   SignUpCfsServiceResponse,
   AutoSnapshotPolicyInfo,
+  InputPermissionGroupRules,
   CreateLifecyclePolicyDownloadTaskResponse,
   DescribeCfsRulesRequest,
   UpdateCfsFileSystemNameRequest,
@@ -57,6 +58,7 @@ import {
   DeleteAutoSnapshotPolicyRequest,
   CreateLifecyclePolicyResponse,
   UpdateCfsRuleRequest,
+  OverrideCfsRulesRequest,
   StopLifecycleDataTaskResponse,
   DeleteUserQuotaRequest,
   DescribeAvailableZoneInfoResponse,
@@ -99,6 +101,7 @@ import {
   LifecycleDataTaskInfo,
   DescribeLifecyclePoliciesResponse,
   DescribeUserQuotaRequest,
+  OverrideCfsRulesResponse,
   FileSystemInfo,
   DescribeDataFlowRequest,
   DescribeBucketListResponse,
@@ -392,6 +395,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateLifecycleDataTaskResponse) => void
   ): Promise<CreateLifecycleDataTaskResponse> {
     return this.request("CreateLifecycleDataTask", req, cb)
+  }
+
+  /**
+   * 本接口（OverrideCfsRules）用于批量覆盖式创建权限组规则。
+   */
+  async OverrideCfsRules(
+    req: OverrideCfsRulesRequest,
+    cb?: (error: string, rep: OverrideCfsRulesResponse) => void
+  ): Promise<OverrideCfsRulesResponse> {
+    return this.request("OverrideCfsRules", req, cb)
   }
 
   /**

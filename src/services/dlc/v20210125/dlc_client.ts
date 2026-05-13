@@ -56,7 +56,7 @@ import {
   SmartOptimizerChangeTablePolicy,
   BatchSqlTask,
   ScheduleElasticityConf,
-  CreateNotebookSessionRequest,
+  GroupInfo,
   UnboundDatasourceHouseRequest,
   DeleteUserVpcConnectionResponse,
   SetOptimizerPolicyRequest,
@@ -186,7 +186,7 @@ import {
   CreateDataEngineResponse,
   AssociateDatasourceHouseResponse,
   DescribeDataEngineRequest,
-  GroupInfo,
+  CreateNotebookSessionRequest,
   KerberosInfo,
   AssociateDatasourceHouseRequest,
   CreateDataEngineRequest,
@@ -208,6 +208,7 @@ import {
   SortOrder,
   SuspendResumeDataEngineResponse,
   DatasourceConnectionLocation,
+  DescribeTCLakeMetaInstanceRequest,
   AttachUserPolicyRequest,
   CancelTaskRequest,
   TextFile,
@@ -293,6 +294,7 @@ import {
   SpecInfo,
   AssignMangedTablePropertiesRequest,
   UserIdSetOfWorkGroupId,
+  InitializeTCLakeRequest,
   AlterDMSPartitionRequest,
   ReportHeartbeatMetaDataResponse,
   QueryInternalTableWarehouseResponse,
@@ -481,6 +483,7 @@ import {
   TaskResponseInfo,
   OperateEngineResourceGroupFailMessage,
   DescribeStoreLocationResponse,
+  DescribeTCLakeMetaInstanceResponse,
   QueryTaskCostDetailResponse,
   CheckLockMetaDataResponse,
   NotebookSessionInfo,
@@ -523,6 +526,7 @@ import {
   ResourceConf,
   QueryTaskCostDetailRequest,
   ModifyDataEngineDescriptionResponse,
+  InitializeTCLakeResponse,
   UpdateDataEngineConfigRequest,
   DropDMSTableRequest,
   CreateInternalTableResponse,
@@ -1008,6 +1012,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RevokeDLCCatalogAccessResponse) => void
   ): Promise<RevokeDLCCatalogAccessResponse> {
     return this.request("RevokeDLCCatalogAccess", req, cb)
+  }
+
+  /**
+   * 重启引擎
+   */
+  async RestartDataEngine(
+    req: RestartDataEngineRequest,
+    cb?: (error: string, rep: RestartDataEngineResponse) => void
+  ): Promise<RestartDataEngineResponse> {
+    return this.request("RestartDataEngine", req, cb)
   }
 
   /**
@@ -1741,13 +1755,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * GetOptimizerPolicy
+   * 是否成功开通TCLake
    */
-  async GetOptimizerPolicy(
-    req: GetOptimizerPolicyRequest,
-    cb?: (error: string, rep: GetOptimizerPolicyResponse) => void
-  ): Promise<GetOptimizerPolicyResponse> {
-    return this.request("GetOptimizerPolicy", req, cb)
+  async DescribeTCLakeMetaInstance(
+    req?: DescribeTCLakeMetaInstanceRequest,
+    cb?: (error: string, rep: DescribeTCLakeMetaInstanceResponse) => void
+  ): Promise<DescribeTCLakeMetaInstanceResponse> {
+    return this.request("DescribeTCLakeMetaInstance", req, cb)
   }
 
   /**
@@ -2143,13 +2157,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重启引擎
+   * 开通TCLake
    */
-  async RestartDataEngine(
-    req: RestartDataEngineRequest,
-    cb?: (error: string, rep: RestartDataEngineResponse) => void
-  ): Promise<RestartDataEngineResponse> {
-    return this.request("RestartDataEngine", req, cb)
+  async InitializeTCLake(
+    req?: InitializeTCLakeRequest,
+    cb?: (error: string, rep: InitializeTCLakeResponse) => void
+  ): Promise<InitializeTCLakeResponse> {
+    return this.request("InitializeTCLake", req, cb)
   }
 
   /**
@@ -2210,6 +2224,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteThirdPartyAccessUserResponse) => void
   ): Promise<DeleteThirdPartyAccessUserResponse> {
     return this.request("DeleteThirdPartyAccessUser", req, cb)
+  }
+
+  /**
+   * GetOptimizerPolicy
+   */
+  async GetOptimizerPolicy(
+    req: GetOptimizerPolicyRequest,
+    cb?: (error: string, rep: GetOptimizerPolicyResponse) => void
+  ): Promise<GetOptimizerPolicyResponse> {
+    return this.request("GetOptimizerPolicy", req, cb)
   }
 
   /**
