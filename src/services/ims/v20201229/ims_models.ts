@@ -77,21 +77,25 @@ export interface RecognitionResult {
  */
 export interface OcrHitInfo {
   /**
-   * 标识模型命中还是关键词命中
+   * <p>标识模型命中还是关键词命中</p>
    */
   Type?: string
   /**
-   * 命中关键词
+   * <p>命中关键词</p>
    */
   Keyword?: string
   /**
-   * 自定义词库名称
+   * <p>自定义词库名称</p>
    */
   LibName?: string
   /**
-   * 位置信息
+   * <p>位置信息</p>
    */
   Positions?: Array<Positions>
+  /**
+   * <p>命中标签</p>
+   */
+  Label?: string
 }
 
 /**

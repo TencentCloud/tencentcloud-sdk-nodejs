@@ -145,6 +145,7 @@ import {
   DescribeSwitchErrorRequest,
   CommonFilter,
   AddVpcAcRuleRequest,
+  EdgeIpInfoSimple,
   ModifyResourceGroupRequest,
   UpdateClusterVpcFwResponse,
   DescribeCcnAssociatedInstancesRequest,
@@ -266,6 +267,7 @@ import {
   NDRAssetServiceStats,
   SearchLogInfos,
   ModifyStorageSettingRequest,
+  DescribeEdgeIpSimpleResponse,
   DescribeNatFwDnatRuleRequest,
   DescribeBlockStaticListRequest,
   FwGateway,
@@ -308,6 +310,7 @@ import {
   AccessInstanceInfo,
   DescribeTLogIpListRequest,
   VpcFwJoinInstanceType,
+  DescribeEdgeIpSimpleRequest,
   CreateNatFwInstanceResponse,
   ModeInfo,
   DescribeCcnVpcFwPolicyLimitRequest,
@@ -1365,6 +1368,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: CreateVpcFwGroupResponse) => void
   ): Promise<CreateVpcFwGroupResponse> {
     return this.request("CreateVpcFwGroup", req, cb)
+  }
+
+  /**
+   * 互联网边界防火墙开关列表(轻量)
+   */
+  async DescribeEdgeIpSimple(
+    req: DescribeEdgeIpSimpleRequest,
+    cb?: (error: string, rep: DescribeEdgeIpSimpleResponse) => void
+  ): Promise<DescribeEdgeIpSimpleResponse> {
+    return this.request("DescribeEdgeIpSimple", req, cb)
   }
 
   /**

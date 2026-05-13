@@ -479,49 +479,43 @@ export interface AliasValueConf {
  */
 export interface CreateTranscodeTemplateRequest {
   /**
-   * 封装格式，可选值：mp4、flv、hls、ts、webm、mkv、mxf、mov、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。
+   * <p>封装格式，可选值：mp4、flv、hls、ts、webm、mkv、mxf、mov、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。</p>
    */
   Container: string
   /**
-   * 转码模板名称，长度限制：64 个字符。
+   * <p>转码模板名称，长度限制：64 个字符。</p>
    */
   Name?: string
   /**
-   * 模板描述信息，长度限制：256 个字符。
+   * <p>模板描述信息，长度限制：256 个字符。</p>
    */
   Comment?: string
   /**
-   * 是否去除视频数据，可选值：
-<li>0：保留</li>
-<li>1：去除</li>
-默认值：0。
+   * <p>是否去除视频数据，可选值：</p><li>0：保留</li><li>1：去除</li>默认值：0。
    */
   RemoveVideo?: number
   /**
-   * 是否去除音频数据，可选值：
-<li>0：保留</li>
-<li>1：去除</li>
-默认值：0。
+   * <p>是否去除音频数据，可选值：</p><li>0：保留</li><li>1：去除</li>默认值：0。
    */
   RemoveAudio?: number
   /**
-   * 视频流配置参数，当 RemoveVideo 为 0，该字段必填。
+   * <p>视频流配置参数，当 RemoveVideo 为 0，该字段必填。</p>
    */
   VideoTemplate?: VideoTemplateInfo
   /**
-   * 音频流配置参数，当 RemoveAudio 为 0，该字段必填。
+   * <p>音频流配置参数，当 RemoveAudio 为 0，该字段必填。</p>
    */
   AudioTemplate?: AudioTemplateInfo
   /**
-   * 极速高清转码参数。
+   * <p>极速高清转码参数。</p>
    */
   TEHDConfig?: TEHDConfig
   /**
-   * 音视频增强配置。
+   * <p>音视频增强配置。</p>
    */
   EnhanceConfig?: EnhanceConfig
   /**
-   * 扩展参数，序列化的 json 字符串。
+   * <p>扩展参数，序列化的 json 字符串。</p>
    */
   StdExtInfo?: string
 }
@@ -3702,47 +3696,43 @@ export interface TerrorismImgReviewTemplateInfoForUpdate {
  */
 export interface ModifyTranscodeTemplateRequest {
   /**
-   * 转码模板唯一标识。
+   * <p>转码模板唯一标识。</p>
    */
   Definition: number
   /**
-   * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a。其中，mp3、flac、ogg、m4a 为纯音频文件。
+   * <p>封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。</p>
    */
   Container?: string
   /**
-   * 转码模板名称，长度限制：64 个字符。
+   * <p>转码模板名称，长度限制：64 个字符。</p>
    */
   Name?: string
   /**
-   * 模板描述信息，长度限制：256 个字符。
+   * <p>模板描述信息，长度限制：256 个字符。</p>
    */
   Comment?: string
   /**
-   * 是否去除视频数据，可选值：
-<li>0：保留</li>
-<li>1：去除</li>
+   * <p>是否去除视频数据，可选值：</p><li>0：保留</li><li>1：去除</li>
    */
   RemoveVideo?: number
   /**
-   * 是否去除音频数据，可选值：
-<li>0：保留</li>
-<li>1：去除</li>
+   * <p>是否去除音频数据，可选值：</p><li>0：保留</li><li>1：去除</li>
    */
   RemoveAudio?: number
   /**
-   * 视频流配置参数。
+   * <p>视频流配置参数。</p>
    */
   VideoTemplate?: VideoTemplateInfoForUpdate
   /**
-   * 音频流配置参数。
+   * <p>音频流配置参数。</p>
    */
   AudioTemplate?: AudioTemplateInfoForUpdate
   /**
-   * 极速高清转码参数。
+   * <p>极速高清转码参数。</p>
    */
   TEHDConfig?: TEHDConfigForUpdate
   /**
-   * 音视频增强参数。
+   * <p>音视频增强参数。</p>
    */
   EnhanceConfig?: EnhanceConfig
 }
@@ -20794,7 +20784,7 @@ export interface FaceConfigureInfoForUpdate {
  */
 export interface CreateTranscodeTemplateResponse {
   /**
-   * 转码模板唯一标识。
+   * <p>转码模板唯一标识。</p>
    */
   Definition?: number
   /**

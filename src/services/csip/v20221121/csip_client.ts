@@ -103,7 +103,9 @@ import {
   DspmRiskTendency,
   DeleteDomainAndIpResponse,
   DescribeDspmRiskDetailRequest,
+  SkillScanRuleHit,
   RelatedEvent,
+  SkillCapabilityTag,
   VerifyDspmAssetLoginCodeResponse,
   DescribeScanStatisticResponse,
   DescribeAccessKeyAlarmRequest,
@@ -162,10 +164,12 @@ import {
   DescribeDspmApproveHistoryRequest,
   VerifyDspmAssetLoginCodeRequest,
   DescribeDspmBackupSettingResponse,
+  CreateSkillScanResponse,
   DescribeDspmPayInfoRequest,
   TableField,
   ModifyDspmAssetAccountPrivilegesResponse,
   DescribeUebaRuleResponse,
+  DescribeSkillScanResultRequest,
   GateWayAsset,
   DescribeSourceIPAssetResponse,
   DeleteDspmAssetAccountResponse,
@@ -278,6 +282,8 @@ import {
   AssetViewCFGRisk,
   DspmUinUser,
   DataSearchBug,
+  DspmAssetInstance,
+  CommandPluginState,
   DspmAssetSecurityAnalyseStatus,
   BackupLog,
   DescribeClusterAssetsRequest,
@@ -312,6 +318,7 @@ import {
   StandardTerm,
   DescribeDspmAssetDatabaseListRequest,
   UpdateAlertStatusListResponse,
+  SkillScanEngineResult,
   FilterDataObject,
   ServerRisk,
   DescribeDspmAssetIdsRequest,
@@ -332,11 +339,12 @@ import {
   DescribeAssetRiskListResponse,
   DeleteDspmRestoreLogListResponse,
   AccessCredentialOutput,
-  DspmAssetInstance,
+  CreateDspmExportTaskResponse,
   CreateDspmIdentifyInfoListExportJobResponse,
   TaskCenterVulRiskInputParam,
   ModifyDspmIpInfoRequest,
   ScanTaskInfo,
+  TrafficPluginState,
   DescribeDspmAssetTableListResponse,
   Tags,
   ModifyDspmRiskInfoRequest,
@@ -413,6 +421,7 @@ import {
   DeleteDspmPersonalIdentifyResponse,
   StatisticalFilter,
   DescribeVULRiskDetailRequest,
+  DescribeSkillScanResultResponse,
   DspmDbAssetId,
   DescribeConfigCheckRulesRequest,
   ModifyDspmAccessRecordRequest,
@@ -421,12 +430,13 @@ import {
   DescribeDspmAssetLoginCredentialResponse,
   DescribeVULRiskDetailResponse,
   ModifyRiskCenterScanTaskResponse,
+  TrafficRuleState,
   AccessKeyAlarmCount,
   RiskRuleItem,
   DescribeAbnormalCallRecordRequest,
   ModifyDspmAssetDataScanTaskRequest,
   AssetRiskItem,
-  CreateDspmExportTaskResponse,
+  DescribeRiskDetailListRequest,
   DspmAccessRecordId,
   RoleInfo,
   RegionConfig,
@@ -454,6 +464,7 @@ import {
   AssetClusterPod,
   DescribeDspmAccessRecordRequest,
   DescribeKeySandboxCredentialResponse,
+  SkillScanItem,
   DescribeVULListRequest,
   AssetViewWeakPassRisk,
   CFGViewCFGRisk,
@@ -463,13 +474,14 @@ import {
   SensitiveDetail,
   DescribeRiskCenterVULViewVULRiskListResponse,
   CreateDspmExportTaskRequest,
+  SkillRuleCatalogItem,
   DescribeRiskCenterVULViewVULRiskListRequest,
   DescribeDspmAccessTopologyAssetsRequest,
-  DescribeRiskDetailListRequest,
   VULRiskInfo,
   CreateDspmApplyOrderRequest,
   RiskDetailItem,
   DescribeDspmAssetDatabaseListResponse,
+  CreateSkillScanRequest,
   ModifyDspmAccessRecordResponse,
   DescribeVulViewVulRiskListRequest,
   DescribeVulRiskListRequest,
@@ -1209,6 +1221,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 上传 Skill ZIP 文件，触发异步安全检测。上传成功后应使用返回的 ContentHash + EngineVersion 轮询 DescribeSkillScanResult 接口获取结果。上传接口具备幂等性，同一 Hash 的文件重复上传不会创建重复任务。检测结果保留90天，超期后需重新上传检测。
+   */
+  async CreateSkillScan(
+    req: CreateSkillScanRequest,
+    cb?: (error: string, rep: CreateSkillScanResponse) => void
+  ): Promise<CreateSkillScanResponse> {
+    return this.request("CreateSkillScan", req, cb)
+  }
+
+  /**
    * 同步dspm支持的资产
    */
   async SyncDspmAssets(
@@ -1609,13 +1631,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取账号调用记录列表
+   * 查询 Skill 安全检测结果。调用 CreateSkillScan 成功后使用返回的 ContentHash + EngineVersion 轮询本接口获取结果。上传成功后建议5分钟后首次轮询，如未检测完成之后每隔1分钟轮询一次。响应通过 Status 字段区分四种状态：检测完成（SUCCESS）、检测中（SCANNING）、无记录（NOT_FOUND）、检测失败（FAILED）。注意：检测结果保留90天，超期后将返回 NOT_FOUND。
    */
-  async DescribeUserCallRecord(
-    req: DescribeUserCallRecordRequest,
-    cb?: (error: string, rep: DescribeUserCallRecordResponse) => void
-  ): Promise<DescribeUserCallRecordResponse> {
-    return this.request("DescribeUserCallRecord", req, cb)
+  async DescribeSkillScanResult(
+    req: DescribeSkillScanResultRequest,
+    cb?: (error: string, rep: DescribeSkillScanResultResponse) => void
+  ): Promise<DescribeSkillScanResultResponse> {
+    return this.request("DescribeSkillScanResult", req, cb)
   }
 
   /**
@@ -1806,6 +1828,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUebaRuleResponse) => void
   ): Promise<DescribeUebaRuleResponse> {
     return this.request("DescribeUebaRule", req, cb)
+  }
+
+  /**
+   * 获取账号调用记录列表
+   */
+  async DescribeUserCallRecord(
+    req: DescribeUserCallRecordRequest,
+    cb?: (error: string, rep: DescribeUserCallRecordResponse) => void
+  ): Promise<DescribeUserCallRecordResponse> {
+    return this.request("DescribeUserCallRecord", req, cb)
   }
 
   /**

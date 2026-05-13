@@ -50,11 +50,12 @@ import {
   HardwareInfo,
   DeleteApplicationResponse,
   GetGroupDetailRequest,
-  GroupAddDeviceRequest,
   GroupDeleteDeviceResponse,
+  GroupAddDeviceRequest,
   GetStatisticDataResponse,
   UpdateApplicationInfoRequest,
   GetPublicKeyRequest,
+  GetHardwareInfoRequest,
   GetFlowStatisticByGroupResponse,
   GetNetMonitorResponse,
   GetFlowStatisticByNameResponse,
@@ -90,8 +91,9 @@ import {
   DownloadActiveDeviceCountResponse,
   GetHardwareListRequest,
   GetFlowStatisticByNameRequest,
-  GroupDeleteDeviceRequest,
   DeviceDetails,
+  GroupDeleteDeviceRequest,
+  GetHardwareInfoResponse,
   GetFlowStatisticByRegionResponse,
   ActiveDeviceList,
   GetMultiFlowStatisticRequest,
@@ -609,6 +611,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DownloadActiveDeviceCountResponse) => void
   ): Promise<DownloadActiveDeviceCountResponse> {
     return this.request("DownloadActiveDeviceCount", req, cb)
+  }
+
+  /**
+   * 获取硬件设备信息
+   */
+  async GetHardwareInfo(
+    req: GetHardwareInfoRequest,
+    cb?: (error: string, rep: GetHardwareInfoResponse) => void
+  ): Promise<GetHardwareInfoResponse> {
+    return this.request("GetHardwareInfo", req, cb)
   }
 
   /**

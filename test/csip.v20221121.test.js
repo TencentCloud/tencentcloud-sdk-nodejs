@@ -688,6 +688,16 @@ it("csip.v20221121.DescribeAlertList", async function () {
     }
 })
 
+it("csip.v20221121.CreateSkillScan", async function () {
+    try {
+       const data = await client.CreateSkillScan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.SyncDspmAssets", async function () {
     try {
        const data = await client.SyncDspmAssets({})
@@ -1088,9 +1098,9 @@ it("csip.v20221121.ModifyDspmIpInfo", async function () {
     }
 })
 
-it("csip.v20221121.DescribeUserCallRecord", async function () {
+it("csip.v20221121.DescribeSkillScanResult", async function () {
     try {
-       const data = await client.DescribeUserCallRecord({})
+       const data = await client.DescribeSkillScanResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1281,6 +1291,16 @@ it("csip.v20221121.ModifyDspmPersonalIdentify", async function () {
 it("csip.v20221121.DescribeUebaRule", async function () {
     try {
        const data = await client.DescribeUebaRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeUserCallRecord", async function () {
+    try {
+       const data = await client.DescribeUserCallRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

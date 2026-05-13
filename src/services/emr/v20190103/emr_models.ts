@@ -1700,35 +1700,43 @@ export interface DescribeNodeResourceConfigFastRequest {
  */
 export interface NodeResource {
   /**
-   * 配置Id
+   * <p>配置Id</p>
    */
   ResourceConfigId?: number
   /**
-   * Resource
+   * <p>Resource</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Resource?: Resource
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 是否默认配置,DEFAULT,BACKUP
+   * <p>是否默认配置,DEFAULT,BACKUP</p>
    */
   IsDefault?: string
   /**
-   * 该类型剩余
+   * <p>该类型剩余</p>
    */
   MaxResourceNum?: number
   /**
-   * 支持的包销时长
+   * <p>支持的包销时长</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PrepaidUnderwritePeriods?: Array<number | bigint>
+  /**
+   * <p>配额数量</p>
+   */
+  QuotaNum?: number
+  /**
+   * <p>配额单位</p>
+   */
+  QuotaUnit?: string
 }
 
 /**
@@ -9828,93 +9836,101 @@ export interface DescribeHBaseTableOverviewResponse {
  */
 export interface NodeSpecInstanceType {
   /**
-   * 规格
+   * <p>规格</p>
    */
   InstanceType: string
   /**
-   * 4
+   * <p>4</p>
    */
   Cpu: number
   /**
-   * 8，单位G
+   * <p>8，单位G</p>
    */
   Memory: number
   /**
-   * 排序，越小排的越前
+   * <p>排序，越小排的越前</p>
    */
   Order?: number
   /**
-   * 数量
+   * <p>数量</p>
    */
   Num?: number
   /**
-   * 售罄原因
+   * <p>售罄原因</p>
    */
   SellOutReason?: string
   /**
-   * 系统盘
+   * <p>系统盘</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SystemDisk?: Array<NodeSpecDisk>
   /**
-   * 数据盘
+   * <p>数据盘</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataDisk?: Array<NodeSpecDisk>
   /**
-   * 本地数据盘
+   * <p>本地数据盘</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalDataDisk?: Array<NodeSpecDisk>
   /**
-   * 售罄原因
+   * <p>售罄原因</p>
    */
   SoldOutReason?: string
   /**
-   * 机型类别
+   * <p>机型类别</p>
    */
   InstanceFamily?: string
   /**
-   * 节点名称
+   * <p>节点名称</p>
    */
   NodeName?: string
   /**
-   * 节点类型
+   * <p>节点类型</p>
    */
   NodeType?: string
   /**
-   * 类别
+   * <p>类别</p>
    */
   Type?: string
   /**
-   * 类别名称
+   * <p>类别名称</p>
    */
   TypeName?: string
   /**
-   * 类别分类
+   * <p>类别分类</p>
    */
   FamilyName?: string
   /**
-   * cpu类型
+   * <p>cpu类型</p>
    */
   CpuType?: string
   /**
-   * 售罄 RunOut、库存少 Less、充足 Enough
+   * <p>售罄 RunOut、库存少 Less、充足 Enough</p>
    */
   Remark?: string
   /**
-   * 原价
+   * <p>原价</p>
    */
   OriginPrice?: number
   /**
-   * 包销计费机型支持的购买时长
+   * <p>包销计费机型支持的购买时长</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PrepaidUnderwritePeriods?: Array<number | bigint>
   /**
-   * GPU信息
+   * <p>GPU信息</p>
    */
   GpuDesc?: string
+  /**
+   * <p>配额数量</p>
+   */
+  QuotaNum?: number
+  /**
+   * <p>配额单位</p>
+   */
+  QuotaUnit?: string
 }
 
 /**

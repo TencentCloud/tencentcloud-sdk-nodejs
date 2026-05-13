@@ -38,6 +38,16 @@ it("tcb.v20180608.DescribeGatewayVersions", async function () {
     }
 })
 
+it("tcb.v20180608.UpdateTable", async function () {
+    try {
+       const data = await client.UpdateTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.CreateCustomLoginKey", async function () {
     try {
        const data = await client.CreateCustomLoginKey({})
@@ -98,9 +108,9 @@ it("tcb.v20180608.CreateMySQL", async function () {
     }
 })
 
-it("tcb.v20180608.UpdateTable", async function () {
+it("tcb.v20180608.ReleaseEnv", async function () {
     try {
-       const data = await client.UpdateTable({})
+       const data = await client.ReleaseEnv({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -121,6 +131,16 @@ it("tcb.v20180608.DescribeApiKeyList", async function () {
 it("tcb.v20180608.CreateAIModel", async function () {
     try {
        const data = await client.CreateAIModel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.AssumeRoleForAllocatedEnv", async function () {
+    try {
+       const data = await client.AssumeRoleForAllocatedEnv({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -341,6 +361,16 @@ it("tcb.v20180608.ModifyClient", async function () {
 it("tcb.v20180608.ModifyHTTPServiceRoute", async function () {
     try {
        const data = await client.ModifyHTTPServiceRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.AllocateEnv", async function () {
+    try {
+       const data = await client.AllocateEnv({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

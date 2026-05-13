@@ -221,6 +221,16 @@ export interface CheckTcbServiceResponse {
 }
 
 /**
+ * ReleaseEnv返回参数结构体
+ */
+export interface ReleaseEnvResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 可以为每种语言配置一个字符串。比如：name，中文展示为：名字，英文展示为 name，韩文展示为：이름
  */
 export interface LocalizedMessage {
@@ -545,6 +555,21 @@ export interface DescribeEnvsRequest {
 }
 
 /**
+ * ModifyUser返回参数结构体
+ */
+export interface ModifyUserResponse {
+  /**
+   * 修改用户返回值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ModifyUserResp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 删除tcb用户返回值
  */
 export interface DeleteUsersResp {
@@ -696,14 +721,17 @@ export interface BanConfig {
 }
 
 /**
- * ModifyUser返回参数结构体
+ * AllocateEnv返回参数结构体
  */
-export interface ModifyUserResponse {
+export interface AllocateEnvResponse {
   /**
-   * 修改用户返回值
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>环境ID</p>
    */
-  Data?: ModifyUserResp
+  EnvId?: string
+  /**
+   * <p>回显    客户平台的应用标识，如果没有则不传</p>
+   */
+  ExternalAppId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1748,6 +1776,20 @@ export interface KVPair {
    * 值
    */
   Value: string
+}
+
+/**
+ * AllocateEnv请求参数结构体
+ */
+export interface AllocateEnvRequest {
+  /**
+   * <p>分配请求ID，会按这个值做幂等</p><p>入参限制：长度不超过64</p>
+   */
+  AllocateId: string
+  /**
+   * <p>客户平台的应用标识，如果没有则不传</p>
+   */
+  ExternalAppId?: string
 }
 
 /**
@@ -3503,13 +3545,35 @@ export interface HTTPServiceQPSPerClient {
 }
 
 /**
- * DescribeAIModels请求参数结构体
+ * AssumeRoleForAllocatedEnv返回参数结构体
  */
-export interface DescribeAIModelsRequest {
+export interface AssumeRoleForAllocatedEnvResponse {
   /**
-   * 环境id
+   * <p>SecretId</p>
    */
-  EnvId: string
+  SecretId?: string
+  /**
+   * <p>SecretKey</p>
+   */
+  SecretKey?: string
+  /**
+   * <p>Token值</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Token?: string
+  /**
+   * <p>过期时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpiredTime?: number
+  /**
+   * <p>是否从缓存中加载。标明该值是否实时从sts服务获取，还是从缓存中获取。调用方可不关心</p>
+   */
+  IsCache?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3779,6 +3843,20 @@ export interface DestroyMySQLResult {
 }
 
 /**
+ * ReleaseEnv请求参数结构体
+ */
+export interface ReleaseEnvRequest {
+  /**
+   * <p>环境ID</p>
+   */
+  EnvId?: string
+  /**
+   * <p>分配请求ID</p>
+   */
+  AllocateId?: string
+}
+
+/**
  * CreateMySQL请求参数结构体
  */
 export interface CreateMySQLRequest {
@@ -3966,17 +4044,53 @@ export interface HTTPServiceRouteQPSPolicy {
 }
 
 /**
- * DescribeDatabaseACL请求参数结构体
+ * CreateUser请求参数结构体
  */
-export interface DescribeDatabaseACLRequest {
+export interface CreateUserRequest {
   /**
-   * 环境ID
+   * 环境id
    */
   EnvId: string
   /**
-   * 集合名称
+   * 用户名，用户名规则：1. 长度1-64字符 2. 只能包含大小写英文字母、数字和符号 . _ - 3. 只能以字母或数字开头 4. 不能重复
    */
-  CollectionName: string
+  Name: string
+  /**
+   * 用户ID，最多64字符，如不传则系统自动生成
+   */
+  Uid?: string
+  /**
+   * 用户类型：internalUser-内部用户、externalUser-外部用户，默认internalUser（内部用户）
+   */
+  Type?: string
+  /**
+   * 密码，传入Uid时密码可不传。密码规则：1. 长度8-32字符（推荐12位以上） 2. 不能以特殊字符开头 3. 至少包含以下四项中的三项：小写字母a-z、大写字母A-Z、数字0-9、特殊字符()!@#$%^&*\|?><_-
+   */
+  Password?: string
+  /**
+   * 用户状态：ACTIVE（激活）、BLOCKED（冻结），默认激活
+   */
+  UserStatus?: string
+  /**
+   * 用户昵称，长度2-64字符
+   */
+  NickName?: string
+  /**
+   * 手机号，不能重复
+   */
+  Phone?: string
+  /**
+   * 邮箱地址，不能重复
+   */
+  Email?: string
+  /**
+   * 头像链接，可访问的公网URL
+   */
+  AvatarUrl?: string
+  /**
+   * 用户描述，最多200字符
+   */
+  Description?: string
 }
 
 /**
@@ -4069,6 +4183,16 @@ export interface TableInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexSize?: number
+}
+
+/**
+ * AssumeRoleForAllocatedEnv请求参数结构体
+ */
+export interface AssumeRoleForAllocatedEnvRequest {
+  /**
+   * <p>环境ID</p>
+   */
+  EnvId: string
 }
 
 /**
@@ -5127,6 +5251,16 @@ export interface DescribeVmSpecResponse {
 }
 
 /**
+ * DescribeAIModels请求参数结构体
+ */
+export interface DescribeAIModelsRequest {
+  /**
+   * 环境id
+   */
+  EnvId: string
+}
+
+/**
  * 多语言文字，在 Locale 中 展示的 Message
  */
 export interface MessageLocalized {
@@ -5167,56 +5301,6 @@ export interface WxGatewayCustomConfig {
 }
 
 /**
- * CreateUser请求参数结构体
- */
-export interface CreateUserRequest {
-  /**
-   * 环境id
-   */
-  EnvId: string
-  /**
-   * 用户名，用户名规则：1. 长度1-64字符 2. 只能包含大小写英文字母、数字和符号 . _ - 3. 只能以字母或数字开头 4. 不能重复
-   */
-  Name: string
-  /**
-   * 用户ID，最多64字符，如不传则系统自动生成
-   */
-  Uid?: string
-  /**
-   * 用户类型：internalUser-内部用户、externalUser-外部用户，默认internalUser（内部用户）
-   */
-  Type?: string
-  /**
-   * 密码，传入Uid时密码可不传。密码规则：1. 长度8-32字符（推荐12位以上） 2. 不能以特殊字符开头 3. 至少包含以下四项中的三项：小写字母a-z、大写字母A-Z、数字0-9、特殊字符()!@#$%^&*\|?><_-
-   */
-  Password?: string
-  /**
-   * 用户状态：ACTIVE（激活）、BLOCKED（冻结），默认激活
-   */
-  UserStatus?: string
-  /**
-   * 用户昵称，长度2-64字符
-   */
-  NickName?: string
-  /**
-   * 手机号，不能重复
-   */
-  Phone?: string
-  /**
-   * 邮箱地址，不能重复
-   */
-  Email?: string
-  /**
-   * 头像链接，可访问的公网URL
-   */
-  AvatarUrl?: string
-  /**
-   * 用户描述，最多200字符
-   */
-  Description?: string
-}
-
-/**
  * DescribeTable返回参数结构体
  */
 export interface DescribeTableResponse {
@@ -5232,6 +5316,20 @@ export interface DescribeTableResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDatabaseACL请求参数结构体
+ */
+export interface DescribeDatabaseACLRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 集合名称
+   */
+  CollectionName: string
 }
 
 /**

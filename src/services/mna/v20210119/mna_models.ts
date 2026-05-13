@@ -694,20 +694,6 @@ export interface GetGroupDetailRequest {
 }
 
 /**
- * GroupAddDevice请求参数结构体
- */
-export interface GroupAddDeviceRequest {
-  /**
-   * 分组ID
-   */
-  GroupId: string
-  /**
-   * 待添加的设备列表
-   */
-  DeviceList: Array<string>
-}
-
-/**
  * GroupDeleteDevice返回参数结构体
  */
 export interface GroupDeleteDeviceResponse {
@@ -719,6 +705,20 @@ export interface GroupDeleteDeviceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GroupAddDevice请求参数结构体
+ */
+export interface GroupAddDeviceRequest {
+  /**
+   * 分组ID
+   */
+  GroupId: string
+  /**
+   * 待添加的设备列表
+   */
+  DeviceList: Array<string>
 }
 
 /**
@@ -761,6 +761,20 @@ export interface UpdateApplicationInfoRequest {
  * GetPublicKey请求参数结构体
  */
 export type GetPublicKeyRequest = null
+
+/**
+ * GetHardwareInfo请求参数结构体
+ */
+export interface GetHardwareInfoRequest {
+  /**
+   * 厂商名称
+   */
+  Vendor: string
+  /**
+   * 设备SN序列号
+   */
+  SN: string
+}
 
 /**
  * GetFlowStatisticByGroup返回参数结构体
@@ -1549,20 +1563,6 @@ export interface GetFlowStatisticByNameRequest {
 }
 
 /**
- * GroupDeleteDevice请求参数结构体
- */
-export interface GroupDeleteDeviceRequest {
-  /**
-   * 分组ID
-   */
-  GroupId: string
-  /**
-   * 待删除的设备列表
-   */
-  DeviceList: Array<string>
-}
-
-/**
  * 设备详细信息
  */
 export interface DeviceDetails {
@@ -1586,6 +1586,49 @@ export interface DeviceDetails {
    * 业务上行速率
    */
   BusinessUpRate?: number
+}
+
+/**
+ * GroupDeleteDevice请求参数结构体
+ */
+export interface GroupDeleteDeviceRequest {
+  /**
+   * 分组ID
+   */
+  GroupId: string
+  /**
+   * 待删除的设备列表
+   */
+  DeviceList: Array<string>
+}
+
+/**
+ * GetHardwareInfo返回参数结构体
+ */
+export interface GetHardwareInfoResponse {
+  /**
+   * license授权有效期 
+0：月度授权 
+1：永久授权 
+-1：未知
+   */
+  LicensePayMode?: number
+  /**
+   * 付费方 0：客户付费 1：厂商付费
+   */
+  Payer?: number
+  /**
+   * 硬件序列号
+   */
+  SN?: string
+  /**
+   * 厂商名称
+   */
+  Vendor?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -998,6 +998,16 @@ it("cfw.v20190904.CreateVpcFwGroup", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeEdgeIpSimple", async function () {
+    try {
+       const data = await client.DescribeEdgeIpSimple({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifyAllPublicIPSwitchStatus", async function () {
     try {
        const data = await client.ModifyAllPublicIPSwitchStatus({})

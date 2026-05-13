@@ -10456,15 +10456,15 @@ export interface DescribeTaskLogResponse {
  */
 export interface DescribeTasksResponse {
   /**
-   * 任务对象列表。
+   * <p>任务对象列表。</p>
    */
   TaskList?: Array<TaskResponseInfo>
   /**
-   * 实例总数。
+   * <p>实例总数。</p>
    */
   TotalCount?: number
   /**
-   * 任务概览信息
+   * <p>任务概览信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TasksOverview?: TasksOverview
@@ -10856,44 +10856,39 @@ export interface AddOptimizerEnginesResponse {
  */
 export interface DescribeTasksRequest {
   /**
-   * 返回数量，默认为10，最大值为100。
+   * <p>返回数量，默认为10，最大值为100。</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
   /**
-   * 过滤条件，如下支持的过滤类型，传参Name应为以下其中一个,其中task-id支持最大50个过滤个数，其他过滤参数支持的总数不超过5个。
-task-id - String - （任务ID准确过滤）task-id取值形如：e386471f-139a-4e59-877f-50ece8135b99。
-task-state - String - （任务状态过滤）取值范围 0(初始化)， 1(运行中)， 2(成功)， -1(失败)。
-task-sql-keyword - String - （SQL语句关键字模糊过滤）取值形如：DROP TABLE。
-task-operator- string （子uin过滤）
-task-kind - string （任务类型过滤）
+   * <p>过滤条件，如下支持的过滤类型，传参Name应为以下其中一个,其中task-id支持最大50个过滤个数，其他过滤参数支持的总数不超过5个。<br>task-id - String - （任务ID准确过滤）task-id取值形如：e386471f-139a-4e59-877f-50ece8135b99。<br>task-state - String - （任务状态过滤）取值范围 0(初始化)， 1(运行中)， 2(成功)， -1(失败)。<br>task-sql-keyword - String - （SQL语句关键字模糊过滤）取值形如：DROP TABLE。<br>task-operator- string （子uin过滤）<br>task-kind - string （任务类型过滤）</p>
    */
   Filters?: Array<Filter>
   /**
-   * 排序字段，支持如下字段类型，create-time（创建时间，默认）、update-time（更新时间）
+   * <p>排序字段，支持如下字段类型，create-time（创建时间，默认）、update-time（更新时间）</p>
    */
   SortBy?: string
   /**
-   * 排序方式，desc表示正序，asc表示反序， 默认为asc。
+   * <p>排序方式，desc表示正序，asc表示反序， 默认为asc。</p>
    */
   Sorting?: string
   /**
-   * 起始时间点，格式为yyyy-mm-dd HH:MM:SS。默认为45天前的当前时刻
+   * <p>起始时间点，格式为yyyy-mm-dd HH:MM:SS。默认为45天前的当前时刻</p>
    */
   StartTime?: string
   /**
-   * 结束时间点，格式为yyyy-mm-dd HH:MM:SS时间跨度在(0,30天]，支持最近45天数据查询。默认为当前时刻
+   * <p>结束时间点，格式为yyyy-mm-dd HH:MM:SS时间跨度在(0,30天]，支持最近45天数据查询。默认为当前时刻</p>
    */
   EndTime?: string
   /**
-   * 数据引擎名称，用于筛选
+   * <p>数据引擎名称，用于筛选</p>
    */
   DataEngineName?: string
   /**
-   * spark引擎资源组名称
+   * <p>spark引擎资源组名称</p>
    */
   ResourceGroupName?: string
 }

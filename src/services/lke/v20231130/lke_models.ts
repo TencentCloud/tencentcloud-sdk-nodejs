@@ -6769,6 +6769,10 @@ export interface UnsatisfiedReply {
    * <p>自定义反馈</p>
    */
   FeedbackContent?: string
+  /**
+   * <p>用户</p>
+   */
+  Visitor?: string
 }
 
 /**

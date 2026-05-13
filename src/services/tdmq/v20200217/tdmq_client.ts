@@ -379,6 +379,7 @@ import {
   CmqTopic,
   RabbitMQExchangeListInfo,
   DescribeBindVpcsRequest,
+  RabbitMQVHostBaseQuota,
   TopicRecord,
   DescribeEnvironmentRolesRequest,
   GeneralSKU,

@@ -478,6 +478,16 @@ it("mna.v20210119.DownloadActiveDeviceCount", async function () {
     }
 })
 
+it("mna.v20210119.GetHardwareInfo", async function () {
+    try {
+       const data = await client.GetHardwareInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.GetGroupList", async function () {
     try {
        const data = await client.GetGroupList({})

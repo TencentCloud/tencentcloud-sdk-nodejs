@@ -2530,6 +2530,20 @@ export interface DescribeDspmRiskDetailRequest {
 }
 
 /**
+ * 命中规则项
+ */
+export interface SkillScanRuleHit {
+  /**
+   * 融合规则编号（9xxxx），可与 RuleCatalog 交叉引用
+   */
+  RuleID?: string
+  /**
+   * 当前命中规则的具体发现描述，包含文件位置、行为特征、风险点等信息
+   */
+  Description?: string
+}
+
+/**
  * 相关攻击事件结构
  */
 export interface RelatedEvent {
@@ -2545,6 +2559,20 @@ export interface RelatedEvent {
    * 与事件关联的告警数量
    */
   RelatedCount?: number
+}
+
+/**
+ * Skill 能力标签
+ */
+export interface SkillCapabilityTag {
+  /**
+   * 能力标签标识，适合程序判定、过滤或聚合使用
+   */
+  ID?: string
+  /**
+   * 能力标签展示名称
+   */
+  Name?: string
 }
 
 /**
@@ -4130,6 +4158,33 @@ export interface DescribeDspmBackupSettingResponse {
 }
 
 /**
+ * CreateSkillScan返回参数结构体
+ */
+export interface CreateSkillScanResponse {
+  /**
+   * 文件的 SHA256 Hash，用于轮询 DescribeSkillScanResult 接口
+参数格式：sha256:<64位hex>
+   */
+  ContentHash?: string
+  /**
+   * 本次请求实际绑定的引擎版本号。调用方应保存并在后续 DescribeSkillScanResult 时显式传入
+   */
+  EngineVersion?: number
+  /**
+   * 任务状态，固定为 SCANNING，表示任务已接收
+   */
+  Status?: string
+  /**
+   * 可读的操作结果描述
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDspmPayInfo请求参数结构体
  */
 export interface DescribeDspmPayInfoRequest {
@@ -4195,6 +4250,29 @@ export interface DescribeUebaRuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeSkillScanResult请求参数结构体
+ */
+export interface DescribeSkillScanResultRequest {
+  /**
+   * ZIP 文件的 SHA256 Hash
+参数格式：sha256:<64位hex>
+   */
+  ContentHash: string
+  /**
+   * 指定引擎版本号
+取值参考：由 CreateSkillScan 接口返回
+   */
+  EngineVersion: number
+  /**
+   * 报告签名地址有效期
+单位：小时
+默认值：8760（1年）
+补充说明：对返回的 ReportURL 生效
+   */
+  ReportURLExpireHours?: number
 }
 
 /**
@@ -8803,6 +8881,38 @@ export interface DataSearchBug {
 }
 
 /**
+ * Dspm资产实例
+ */
+export interface DspmAssetInstance {
+  /**
+   * 资产实例Id
+   */
+  AssetId: string
+  /**
+   * 资产类型
+   */
+  AssetType: string
+  /**
+   * 地域
+   */
+  Region: string
+  /**
+   * 资产所属账号app id
+   */
+  AppId?: number
+}
+
+/**
+ * AI Agent 命令沙箱插件状态
+ */
+export interface CommandPluginState {
+  /**
+   * <p>插件安装状态（上层聚合）<br>枚举值：<br>NONE：未安装<br>INSTALLING：安装中<br>INSTALLED：已安装<br>INSTALL_FAIL：安装失败</p>
+   */
+  InstallStatus?: string
+}
+
+/**
  * Dspm资产安全分析状态
  */
 export interface DspmAssetSecurityAnalyseStatus {
@@ -9783,6 +9893,23 @@ export interface UpdateAlertStatusListResponse {
 }
 
 /**
+ * 子引擎扫描结果
+ */
+export interface SkillScanEngineResult {
+  /**
+   * 子引擎类型
+枚举值：
+AI：AI 引擎
+STATIC：静态分析引擎
+   */
+  ScanType?: string
+  /**
+   * 该引擎命中的规则列表
+   */
+  RuleList?: Array<SkillScanRuleHit>
+}
+
+/**
  * 过滤数据对象
  */
 export interface FilterDataObject {
@@ -10444,25 +10571,13 @@ export interface AccessCredentialOutput {
 }
 
 /**
- * Dspm资产实例
+ * CreateDspmExportTask返回参数结构体
  */
-export interface DspmAssetInstance {
+export interface CreateDspmExportTaskResponse {
   /**
-   * 资产实例Id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AssetId: string
-  /**
-   * 资产类型
-   */
-  AssetType: string
-  /**
-   * 地域
-   */
-  Region: string
-  /**
-   * 资产所属账号app id
-   */
-  AppId?: number
+  RequestId?: string
 }
 
 /**
@@ -10563,6 +10678,42 @@ export interface ScanTaskInfo {
    * 用户名称
    */
   UserName?: string
+}
+
+/**
+ * AI Agent 流量沙箱插件状态
+ */
+export interface TrafficPluginState {
+  /**
+   * 插件安装状态（上层聚合）
+枚举值：
+NONE：未安装
+INSTALLING：安装中
+INSTALLED：已安装
+INSTALL_FAIL：安装失败
+   */
+  InstallStatus?: string
+  /**
+   * 插件安装细分状态。取值与 InstallStatus 对应：未安装（InstallStatus=UNINSTALL）时为空字符串；安装成功（InstallStatus=INSTALLED）时为 SUCCESS；安装失败（InstallStatus=INSTALL_FAIL）时为具体失败原因
+枚举值：
+NOT_SUPPORT：环境不支持
+CONTAINER_NOT_FOUND：容器不存在
+REQUIRE_RESTART：需要重启
+CA_FAILED：CA 失败
+EBPF_FAILED：eBPF 失败
+IPTABLE_FAILED：iptables 失败
+REDIRECT_FAILED：流量重定向失败
+   */
+  Status?: string
+  /**
+   * 状态文案（由 Status 根据请求语言派生的国际化描述）
+   */
+  Message?: string
+  /**
+   * 插件最近活跃时间
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   */
+  ActivityTime?: string
 }
 
 /**
@@ -12797,6 +12948,29 @@ export interface DescribeVULRiskDetailRequest {
 }
 
 /**
+ * DescribeSkillScanResult返回参数结构体
+ */
+export interface DescribeSkillScanResultResponse {
+  /**
+   * 检测状态
+枚举值：
+SUCCESS：检测完成，有结果
+SCANNING：检测进行中
+NOT_FOUND：无检测记录
+FAILED：检测失败
+   */
+  Status?: string
+  /**
+   * 检测结果详情。Status=SUCCESS 时大部分字段有值；Status=SCANNING 时仅包含 ContentHash 和 CreatedAt；Status=FAILED 时仅包含 ContentHash、FailedAt 和 Message；Status=NOT_FOUND 时仅包含 ContentHash
+   */
+  Data?: SkillScanItem
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 数据库资产Id信息
  */
 export interface DspmDbAssetId {
@@ -13021,6 +13195,20 @@ export interface ModifyRiskCenterScanTaskResponse {
 }
 
 /**
+ * 流量沙箱规则状态
+ */
+export interface TrafficRuleState {
+  /**
+   * <p>沙箱插件模块名</p>
+   */
+  Module?: string
+  /**
+   * <p>沙箱规则状态</p><p>枚举值：</p><ul><li>ON： 开启</li><li>OFF： 关闭</li></ul>
+   */
+  Status?: string
+}
+
+/**
  * 访问密钥告警数量
  */
 export interface AccessKeyAlarmCount {
@@ -13219,13 +13407,41 @@ export interface AssetRiskItem {
 }
 
 /**
- * CreateDspmExportTask返回参数结构体
+ * DescribeRiskDetailList请求参数结构体
  */
-export interface CreateDspmExportTaskResponse {
+export interface DescribeRiskDetailListRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 风险规则ID
    */
-  RequestId?: string
+  RiskRuleId: string
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 过滤内容
+   */
+  Filters?: Array<Filters>
+  /**
+   * 分页大小
+   */
+  Limit?: number
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 排序类型
+   */
+  Order?: string
+  /**
+   * 排序字段
+   */
+  By?: string
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
 }
 
 /**
@@ -14156,6 +14372,94 @@ sts：STS临时密钥
 }
 
 /**
+ * Skill 安全检测结果详情
+ */
+export interface SkillScanItem {
+  /**
+   * Skill 名称
+   */
+  SkillName?: string
+  /**
+   * Skill 描述，帮助理解 Skill 的主要用途
+   */
+  SkillDescription?: string
+  /**
+   * ZIP 文件的 SHA256 Hash
+参数格式：sha256:<64位hex>
+   */
+  ContentHash?: string
+  /**
+   * 原始上传 ZIP 文件解压后的实际文件数，也是计费的范围，扫描成功后1个文件计为1次额度
+   */
+  UploadFileCount?: number
+  /**
+   * 综合风险等级
+枚举值：
+malicious：恶意
+suspicious：可疑
+benign：可信
+   */
+  RiskLevel?: string
+  /**
+   * 风险主标签融合规则 ID（9xxxx），由服务端从命中的融合风险标签中生成；benign 且无规则命中时为空。展示名称可通过 RuleCatalog 获取
+   */
+  PrimaryRuleID?: string
+  /**
+   * 综合处置建议，用于指导调用方优先执行下线、隔离、修复、复检等动作。历史结果中可能为空。传 Language=en-US 时返回英文文案
+   */
+  Mitigation?: string
+  /**
+   * 风险综合描述，对本次检测发现的风险进行概括性说明。传 Language=en-US 时返回英文文案
+   */
+  RiskDescription?: string
+  /**
+   * 安全评分
+取值范围：[0, 100]
+补充说明：100 为最安全
+   */
+  SecurityScore?: number
+  /**
+   * 本次扫描使用的引擎版本号
+   */
+  EngineVersion?: number
+  /**
+   * Skill 能力标签列表，描述 Skill 具备的能力特征或适用场景。不等同于风险标签，也不参与风险等级判定。传 Language=en-US 时 Name 切换为英文，ID 保持不变
+   */
+  CapabilityTags?: Array<SkillCapabilityTag>
+  /**
+   * 融合规则目录全集，包含所有融合规则类别（9xxxx），调用方可据此展示分类标签，无需本地维护映射表。传 Language=en-US 时返回英文名称
+   */
+  RuleCatalog?: Array<SkillRuleCatalogItem>
+  /**
+   * 扫描结果详情，按子引擎分组。每个元素包含 ScanType（引擎类型）和 RuleList（命中规则列表）。规则中的 RuleID 使用融合编码（9xxxx），可与 RuleCatalog 交叉引用。传 Language=en-US 时 Description 返回英文文本
+   */
+  ScanItems?: Array<SkillScanEngineResult>
+  /**
+   * 综合安全审计报告地址（签名 URL）。有效期由请求参数 ReportURLExpireHours 控制
+   */
+  ReportURL?: string
+  /**
+   * 扫描完成时间。仅 Status=SUCCESS 时有值
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   */
+  ScannedAt?: string
+  /**
+   * 任务创建时间。仅 Status=SCANNING 时有值
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   */
+  CreatedAt?: string
+  /**
+   * 失败时间。仅 Status=FAILED 时有值
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   */
+  FailedAt?: string
+  /**
+   * 失败原因描述。仅 Status=FAILED 时有值
+   */
+  Message?: string
+}
+
+/**
  * DescribeVULList请求参数结构体
  */
 export interface DescribeVULListRequest {
@@ -14575,6 +14879,20 @@ export interface CreateDspmExportTaskRequest {
 }
 
 /**
+ * 融合规则目录项
+ */
+export interface SkillRuleCatalogItem {
+  /**
+   * 融合规则 ID（9xxxx）
+   */
+  RuleID?: string
+  /**
+   * 风险类别名称
+   */
+  RuleName?: string
+}
+
+/**
  * DescribeRiskCenterVULViewVULRiskList请求参数结构体
  */
 export interface DescribeRiskCenterVULViewVULRiskListRequest {
@@ -14604,44 +14922,6 @@ export interface DescribeDspmAccessTopologyAssetsRequest {
    * 过滤器。 支持的FilterName:  Ip/Account
    */
   Filter?: Filter
-}
-
-/**
- * DescribeRiskDetailList请求参数结构体
- */
-export interface DescribeRiskDetailListRequest {
-  /**
-   * 风险规则ID
-   */
-  RiskRuleId: string
-  /**
-   * 集团账号的成员id
-   */
-  MemberId?: Array<string>
-  /**
-   * 过滤内容
-   */
-  Filters?: Array<Filters>
-  /**
-   * 分页大小
-   */
-  Limit?: number
-  /**
-   * 偏移量
-   */
-  Offset?: number
-  /**
-   * 排序类型
-   */
-  Order?: string
-  /**
-   * 排序字段
-   */
-  By?: string
-  /**
-   * 实例ID
-   */
-  InstanceId?: string
 }
 
 /**
@@ -14786,6 +15066,22 @@ export interface DescribeDspmAssetDatabaseListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateSkillScan请求参数结构体
+ */
+export interface CreateSkillScanRequest {
+  /**
+   * ZIP 文件内容的 Base64 编码
+入参限制：文件大小上限 7MB（编码前），仅接受有效的 ZIP 格式
+   */
+  FileBase64: string
+  /**
+   * 文件名，用于服务端日志记录
+参数格式：形如 my-skill.zip
+   */
+  FileName?: string
 }
 
 /**
@@ -15100,6 +15396,18 @@ export interface AIAgentAsset {
    * <p>无</p>
    */
   SkillState?: SkillState
+  /**
+   * <p>流量沙箱插件状态</p>
+   */
+  TrafficPluginState?: TrafficPluginState
+  /**
+   * <p>流量沙箱规则状态</p>
+   */
+  TrafficRuleState?: Array<TrafficRuleState>
+  /**
+   * <p>命令沙箱插件状态</p>
+   */
+  CommandPluginState?: CommandPluginState
 }
 
 /**
@@ -15809,19 +16117,19 @@ export interface DspmDbAccountPrivilege {
 }
 
 /**
- * filter过滤条件
+ * 过滤条件。同一 Name 下多个 Values 为或关系；不同 Name 之间为且关系
  */
 export interface Filters {
   /**
-   * 实例ID
+   * 过滤条件名称
    */
   Name?: string
   /**
-   * 实例ID内容
+   * 过滤条件值列表
    */
   Values?: Array<string>
   /**
-   * 模糊匹配
+   * 是否精确匹配：1 精确匹配；默认模糊匹配
    */
   ExactMatch?: string
 }

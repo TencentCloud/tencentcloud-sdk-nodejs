@@ -9286,6 +9286,10 @@ export interface RabbitMQVirtualHostInfo {
    * 修改时间时间戳
    */
   ModifyTs?: number
+  /**
+   * 基础配额信息
+   */
+  Quota?: RabbitMQVHostBaseQuota
 }
 
 /**
@@ -10475,6 +10479,24 @@ export interface DescribeBindVpcsRequest {
    * Pulsar 集群的ID
    */
   ClusterId?: string
+}
+
+/**
+ * RabbitMQ 虚拟主机基础配额信息
+ */
+export interface RabbitMQVHostBaseQuota {
+  /**
+   * 单个 vhost 下允许的最大连接数
+   */
+  MaxConnectionPerVhost?: number
+  /**
+   * 单个 vhost 下允许的最大交换机数
+   */
+  MaxExchangePerVhost?: number
+  /**
+   * 单个 vhost 下允许的最大队列数
+   */
+  MaxQueuePerVhost?: number
 }
 
 /**

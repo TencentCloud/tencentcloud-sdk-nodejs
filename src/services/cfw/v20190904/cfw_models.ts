@@ -3257,6 +3257,49 @@ export interface AddVpcAcRuleRequest {
 }
 
 /**
+ * 边界防火墙公网IP开关列表
+ */
+export interface EdgeIpInfoSimple {
+  /**
+   * 公网IP
+   */
+  PublicIp?: string
+  /**
+   * 公网 IP 类型 1 公网,2 弹性,3 弹性ipv6,4 anycastIP, 6 HighQualityEIP
+   */
+  PublicIpType?: number
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 实例名
+   */
+  InstanceName?: string
+  /**
+   * 开关状态
+0 : 关闭
+1 : 开启
+2 : 开启中
+3 : 关闭中
+4 : 异常
+   */
+  Status?: number
+  /**
+   * 0 : 旁路 1 : 串行 2 : 正在模式切换
+   */
+  SwitchMode?: number
+  /**
+   * 地域
+   */
+  Region?: string
+  /**
+   * 资产类型
+   */
+  AssetType?: string
+}
+
+/**
  * ModifyResourceGroup请求参数结构体
  */
 export interface ModifyResourceGroupRequest {
@@ -6139,6 +6182,24 @@ export interface SearchLogInfos {
 export type ModifyStorageSettingRequest = null
 
 /**
+ * DescribeEdgeIpSimple返回参数结构体
+ */
+export interface DescribeEdgeIpSimpleResponse {
+  /**
+   * ip 开关列表
+   */
+  Data?: Array<EdgeIpInfoSimple>
+  /**
+   * ip 开关列表个数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeNatFwDnatRule请求参数结构体
  */
 export interface DescribeNatFwDnatRuleRequest {
@@ -7190,6 +7251,32 @@ export interface VpcFwJoinInstanceType {
    * 接入的对应网络实例类型的数量
    */
   Num: number
+}
+
+/**
+ * DescribeEdgeIpSimple请求参数结构体
+ */
+export interface DescribeEdgeIpSimpleRequest {
+  /**
+   * 过滤条件组合
+   */
+  Filters?: Array<CommonFilter>
+  /**
+   * 每页条数
+   */
+  Limit?: number
+  /**
+   * 偏移值
+   */
+  Offset?: number
+  /**
+   * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+   */
+  Order?: string
+  /**
+   * 排序所用到的字段
+   */
+  By?: string
 }
 
 /**

@@ -4679,6 +4679,7 @@ export interface Workspace {
   CreateTime?: string
   /**
    * <p>绑定的资源组信息</p>
+   * @deprecated
    */
   ResourceGroups?: Array<ResourceGroupInWorkspace>
   /**
