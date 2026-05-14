@@ -18,129 +18,9 @@ const client = new tencentcloud.rum.v20210622.Client({
 })
 describe("rum.v20210622.test.js", function () {
 
-it("rum.v20210622.DescribeTawAreas", async function () {
-    try {
-       const data = await client.DescribeTawAreas({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribePvList", async function () {
-    try {
-       const data = await client.DescribePvList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.CreateReleaseFile", async function () {
-    try {
-       const data = await client.CreateReleaseFile({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeToken", async function () {
-    try {
-       const data = await client.DescribeToken({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeDataBridgeUrlV2", async function () {
-    try {
-       const data = await client.DescribeDataBridgeUrlV2({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeRumLogList", async function () {
-    try {
-       const data = await client.DescribeRumLogList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeTawInstances", async function () {
-    try {
-       const data = await client.DescribeTawInstances({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeDataPerformancePage", async function () {
-    try {
-       const data = await client.DescribeDataPerformancePage({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeDataLogUrlStatistics", async function () {
-    try {
-       const data = await client.DescribeDataLogUrlStatistics({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("rum.v20210622.DescribeRumStatsLogList", async function () {
     try {
        const data = await client.DescribeRumStatsLogList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeFOOMProblemList", async function () {
-    try {
-       const data = await client.DescribeFOOMProblemList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeReleaseFiles", async function () {
-    try {
-       const data = await client.DescribeReleaseFiles({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeDataPerformancePageV2", async function () {
-    try {
-       const data = await client.DescribeDataPerformancePageV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,49 +38,9 @@ it("rum.v20210622.DescribeDataFetchUrl", async function () {
     }
 })
 
-it("rum.v20210622.DeleteInstance", async function () {
-    try {
-       const data = await client.DeleteInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("rum.v20210622.DescribeRumLogExport", async function () {
     try {
        const data = await client.DescribeRumLogExport({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeApplicationExitReportDetail", async function () {
-    try {
-       const data = await client.DescribeApplicationExitReportDetail({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeLagANRProblemFeatureAccounts", async function () {
-    try {
-       const data = await client.DescribeLagANRProblemFeatureAccounts({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DeleteStarProject", async function () {
-    try {
-       const data = await client.DeleteStarProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,16 +58,6 @@ it("rum.v20210622.ResumeInstance", async function () {
     }
 })
 
-it("rum.v20210622.DescribeError", async function () {
-    try {
-       const data = await client.DescribeError({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("rum.v20210622.DescribeExceptionReportList", async function () {
     try {
        const data = await client.DescribeExceptionReportList({})
@@ -238,9 +68,199 @@ it("rum.v20210622.DescribeExceptionReportList", async function () {
     }
 })
 
-it("rum.v20210622.StopProject", async function () {
+it("rum.v20210622.DescribeDataFetchUrlInfo", async function () {
     try {
-       const data = await client.StopProject({})
+       const data = await client.DescribeDataFetchUrlInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataCustomUrlV2", async function () {
+    try {
+       const data = await client.DescribeDataCustomUrlV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataStaticProjectV2", async function () {
+    try {
+       const data = await client.DescribeDataStaticProjectV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataCustomUrl", async function () {
+    try {
+       const data = await client.DescribeDataCustomUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeFOOMMallocProblemList", async function () {
+    try {
+       const data = await client.DescribeFOOMMallocProblemList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeRumLogExportV2", async function () {
+    try {
+       const data = await client.DescribeRumLogExportV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.CreateStarProject", async function () {
+    try {
+       const data = await client.CreateStarProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DeleteWhitelist", async function () {
+    try {
+       const data = await client.DeleteWhitelist({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.ModifyProjectLimit", async function () {
+    try {
+       const data = await client.ModifyProjectLimit({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataEventUrl", async function () {
+    try {
+       const data = await client.DescribeDataEventUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeScores", async function () {
+    try {
+       const data = await client.DescribeScores({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeRumGroupLogV2", async function () {
+    try {
+       const data = await client.DescribeRumGroupLogV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.ModifyInstance", async function () {
+    try {
+       const data = await client.ModifyInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeRumLogTotalV2", async function () {
+    try {
+       const data = await client.DescribeRumLogTotalV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeTawInstances", async function () {
+    try {
+       const data = await client.DescribeTawInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeTopIssues", async function () {
+    try {
+       const data = await client.DescribeTopIssues({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataPerformancePageV2", async function () {
+    try {
+       const data = await client.DescribeDataPerformancePageV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeRumStatsLogListV2", async function () {
+    try {
+       const data = await client.DescribeRumStatsLogListV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataStaticUrl", async function () {
+    try {
+       const data = await client.DescribeDataStaticUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeRumGroupLog", async function () {
+    try {
+       const data = await client.DescribeRumGroupLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,29 +288,9 @@ it("rum.v20210622.DescribeDataPvUrlStatisticsV2", async function () {
     }
 })
 
-it("rum.v20210622.DescribeAppSingleCaseList", async function () {
+it("rum.v20210622.DescribeRumLogExports", async function () {
     try {
-       const data = await client.DescribeAppSingleCaseList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeProjectLimits", async function () {
-    try {
-       const data = await client.DescribeProjectLimits({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeScores", async function () {
-    try {
-       const data = await client.DescribeScores({})
+       const data = await client.DescribeRumLogExports({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,119 +308,9 @@ it("rum.v20210622.DescribeDataPvUrlStatistics", async function () {
     }
 })
 
-it("rum.v20210622.DescribeDataWebVitalsPage", async function () {
-    try {
-       const data = await client.DescribeDataWebVitalsPage({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeDataStaticUrl", async function () {
-    try {
-       const data = await client.DescribeDataStaticUrl({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.ModifyProjectLimit", async function () {
-    try {
-       const data = await client.ModifyProjectLimit({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeDataCustomUrlV2", async function () {
-    try {
-       const data = await client.DescribeDataCustomUrlV2({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeDataSetUrlStatisticsV2", async function () {
-    try {
-       const data = await client.DescribeDataSetUrlStatisticsV2({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeAppSingleCaseDetailList", async function () {
-    try {
-       const data = await client.DescribeAppSingleCaseDetailList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeAppMetricsData", async function () {
-    try {
-       const data = await client.DescribeAppMetricsData({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeIssuesStatisticsTrend", async function () {
-    try {
-       const data = await client.DescribeIssuesStatisticsTrend({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeDataSetUrlStatistics", async function () {
-    try {
-       const data = await client.DescribeDataSetUrlStatistics({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("rum.v20210622.DescribeReleaseFileSign", async function () {
     try {
        const data = await client.DescribeReleaseFileSign({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.ModifyInstance", async function () {
-    try {
-       const data = await client.ModifyInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeFOOMMallocReportList", async function () {
-    try {
-       const data = await client.DescribeFOOMMallocReportList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,9 +338,9 @@ it("rum.v20210622.DescribeDataStaticResource", async function () {
     }
 })
 
-it("rum.v20210622.DescribeRumGroupLog", async function () {
+it("rum.v20210622.DescribeRumLogExportsV2", async function () {
     try {
-       const data = await client.DescribeRumGroupLog({})
+       const data = await client.DescribeRumLogExportsV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -458,9 +348,229 @@ it("rum.v20210622.DescribeRumGroupLog", async function () {
     }
 })
 
-it("rum.v20210622.DescribeDataStaticProjectV2", async function () {
+it("rum.v20210622.DescribeDataStaticUrlV2", async function () {
     try {
-       const data = await client.DescribeDataStaticProjectV2({})
+       const data = await client.DescribeDataStaticUrlV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.StopInstance", async function () {
+    try {
+       const data = await client.StopInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeWhitelists", async function () {
+    try {
+       const data = await client.DescribeWhitelists({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeApplicationExitReportList", async function () {
+    try {
+       const data = await client.DescribeApplicationExitReportList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataWebVitalsPageV2", async function () {
+    try {
+       const data = await client.DescribeDataWebVitalsPageV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DeleteProject", async function () {
+    try {
+       const data = await client.DeleteProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeUvList", async function () {
+    try {
+       const data = await client.DescribeUvList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DeleteReleaseFile", async function () {
+    try {
+       const data = await client.DeleteReleaseFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataStaticProject", async function () {
+    try {
+       const data = await client.DescribeDataStaticProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeTawAreas", async function () {
+    try {
+       const data = await client.DescribeTawAreas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.CreateReleaseFile", async function () {
+    try {
+       const data = await client.CreateReleaseFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeToken", async function () {
+    try {
+       const data = await client.DescribeToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataPerformancePage", async function () {
+    try {
+       const data = await client.DescribeDataPerformancePage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DeleteInstance", async function () {
+    try {
+       const data = await client.DeleteInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DeleteStarProject", async function () {
+    try {
+       const data = await client.DeleteStarProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.StopProject", async function () {
+    try {
+       const data = await client.StopProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeAppSingleCaseList", async function () {
+    try {
+       const data = await client.DescribeAppSingleCaseList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeLagANRProblemFeatureAccounts", async function () {
+    try {
+       const data = await client.DescribeLagANRProblemFeatureAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataSetUrlStatisticsV2", async function () {
+    try {
+       const data = await client.DescribeDataSetUrlStatisticsV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.ModifyProject", async function () {
+    try {
+       const data = await client.ModifyProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataStaticResourceV2", async function () {
+    try {
+       const data = await client.DescribeDataStaticResourceV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeIssuesStatisticsTrend", async function () {
+    try {
+       const data = await client.DescribeIssuesStatisticsTrend({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataSetUrlStatistics", async function () {
+    try {
+       const data = await client.DescribeDataSetUrlStatistics({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -481,46 +591,6 @@ it("rum.v20210622.DescribeAppDimensionMetrics", async function () {
 it("rum.v20210622.DescribeFOOMProblemDetail", async function () {
     try {
        const data = await client.DescribeFOOMProblemDetail({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeWhitelists", async function () {
-    try {
-       const data = await client.DescribeWhitelists({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeDataCustomUrl", async function () {
-    try {
-       const data = await client.DescribeDataCustomUrl({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeDataLogUrlInfo", async function () {
-    try {
-       const data = await client.DescribeDataLogUrlInfo({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeDataStaticUrlV2", async function () {
-    try {
-       const data = await client.DescribeDataStaticUrlV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -558,89 +628,9 @@ it("rum.v20210622.DescribeFOOMMallocProblemDetail", async function () {
     }
 })
 
-it("rum.v20210622.DescribeFOOMMallocProblemList", async function () {
+it("rum.v20210622.DescribeRumLogList", async function () {
     try {
-       const data = await client.DescribeFOOMMallocProblemList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeDataStaticResourceV2", async function () {
-    try {
-       const data = await client.DescribeDataStaticResourceV2({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeTopIssues", async function () {
-    try {
-       const data = await client.DescribeTopIssues({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.CreateStarProject", async function () {
-    try {
-       const data = await client.CreateStarProject({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DeleteWhitelist", async function () {
-    try {
-       const data = await client.DeleteWhitelist({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeDataFetchUrlInfo", async function () {
-    try {
-       const data = await client.DescribeDataFetchUrlInfo({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.StopInstance", async function () {
-    try {
-       const data = await client.StopInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.ResumeProject", async function () {
-    try {
-       const data = await client.ResumeProject({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.ModifyProject", async function () {
-    try {
-       const data = await client.ModifyProject({})
+       const data = await client.DescribeRumLogList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -658,9 +648,109 @@ it("rum.v20210622.DescribeDataLogUrlStatisticsV2", async function () {
     }
 })
 
-it("rum.v20210622.DescribeLagANRProblemAccountDetail", async function () {
+it("rum.v20210622.DescribeIssuesList", async function () {
     try {
-       const data = await client.DescribeLagANRProblemAccountDetail({})
+       const data = await client.DescribeIssuesList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeFOOMProblemList", async function () {
+    try {
+       const data = await client.DescribeFOOMProblemList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataReportCountV2", async function () {
+    try {
+       const data = await client.DescribeDataReportCountV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeLagANRProblemList", async function () {
+    try {
+       const data = await client.DescribeLagANRProblemList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataReportCount", async function () {
+    try {
+       const data = await client.DescribeDataReportCount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeExceptionDetail", async function () {
+    try {
+       const data = await client.DescribeExceptionDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataLogUrlInfo", async function () {
+    try {
+       const data = await client.DescribeDataLogUrlInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataLogUrlStatistics", async function () {
+    try {
+       const data = await client.DescribeDataLogUrlStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeDataFetchProject", async function () {
+    try {
+       const data = await client.DescribeDataFetchProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeApplicationExitReportDetail", async function () {
+    try {
+       const data = await client.DescribeApplicationExitReportDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeError", async function () {
+    try {
+       const data = await client.DescribeError({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,9 +768,9 @@ it("rum.v20210622.DescribeFOOMReportList", async function () {
     }
 })
 
-it("rum.v20210622.DescribeIssuesList", async function () {
+it("rum.v20210622.DescribePvList", async function () {
     try {
-       const data = await client.DescribeIssuesList({})
+       const data = await client.DescribePvList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -688,9 +778,49 @@ it("rum.v20210622.DescribeIssuesList", async function () {
     }
 })
 
-it("rum.v20210622.DescribeDataEventUrl", async function () {
+it("rum.v20210622.DescribeDataWebVitalsPage", async function () {
     try {
-       const data = await client.DescribeDataEventUrl({})
+       const data = await client.DescribeDataWebVitalsPage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeAppSingleCaseDetailList", async function () {
+    try {
+       const data = await client.DescribeAppSingleCaseDetailList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeAppMetricsData", async function () {
+    try {
+       const data = await client.DescribeAppMetricsData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeFOOMMallocReportList", async function () {
+    try {
+       const data = await client.DescribeFOOMMallocReportList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rum.v20210622.DescribeProjectLimits", async function () {
+    try {
+       const data = await client.DescribeProjectLimits({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -708,9 +838,9 @@ it("rum.v20210622.DescribeIssuesDistribution", async function () {
     }
 })
 
-it("rum.v20210622.DescribeApplicationExitReportList", async function () {
+it("rum.v20210622.DescribeDataBridgeUrlV2", async function () {
     try {
-       const data = await client.DescribeApplicationExitReportList({})
+       const data = await client.DescribeDataBridgeUrlV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -718,29 +848,9 @@ it("rum.v20210622.DescribeApplicationExitReportList", async function () {
     }
 })
 
-it("rum.v20210622.DescribeRumLogExports", async function () {
+it("rum.v20210622.ResumeProject", async function () {
     try {
-       const data = await client.DescribeRumLogExports({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeDataStaticProject", async function () {
-    try {
-       const data = await client.DescribeDataStaticProject({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeDataWebVitalsPageV2", async function () {
-    try {
-       const data = await client.DescribeDataWebVitalsPageV2({})
+       const data = await client.ResumeProject({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -768,9 +878,9 @@ it("rum.v20210622.DescribeScoresV2", async function () {
     }
 })
 
-it("rum.v20210622.DescribeDataReportCountV2", async function () {
+it("rum.v20210622.DescribeLagANRProblemAccountDetail", async function () {
     try {
-       const data = await client.DescribeDataReportCountV2({})
+       const data = await client.DescribeLagANRProblemAccountDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -778,9 +888,9 @@ it("rum.v20210622.DescribeDataReportCountV2", async function () {
     }
 })
 
-it("rum.v20210622.DeleteProject", async function () {
+it("rum.v20210622.DescribeRumLogDetailsV2", async function () {
     try {
-       const data = await client.DeleteProject({})
+       const data = await client.DescribeRumLogDetailsV2({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -788,59 +898,9 @@ it("rum.v20210622.DeleteProject", async function () {
     }
 })
 
-it("rum.v20210622.DescribeLagANRProblemList", async function () {
+it("rum.v20210622.DescribeReleaseFiles", async function () {
     try {
-       const data = await client.DescribeLagANRProblemList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeUvList", async function () {
-    try {
-       const data = await client.DescribeUvList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeDataFetchProject", async function () {
-    try {
-       const data = await client.DescribeDataFetchProject({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DeleteReleaseFile", async function () {
-    try {
-       const data = await client.DeleteReleaseFile({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeDataReportCount", async function () {
-    try {
-       const data = await client.DescribeDataReportCount({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("rum.v20210622.DescribeExceptionDetail", async function () {
-    try {
-       const data = await client.DescribeExceptionDetail({})
+       const data = await client.DescribeReleaseFiles({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

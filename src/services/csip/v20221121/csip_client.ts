@@ -27,6 +27,7 @@ import {
   AuditLogInfo,
   CreateAccessKeySyncTaskRequest,
   DescribeRiskCenterAssetViewWeakPasswordRiskListResponse,
+  RiskRuleInfo,
   KeyValue,
   OrganizationUserInfo,
   AssetTag,
@@ -82,6 +83,7 @@ import {
   UpdateAlertStatusListRequest,
   DspmIdentifyAssetStatistic,
   DescribeUserDspmInfoListRequest,
+  DescribeSkillScanPayInfoResponse,
   DescribeDspmApproveHistoryResponse,
   DescribePublicIpAssetsResponse,
   DescribeConfigCheckRulesResponse,
@@ -445,7 +447,7 @@ import {
   DescribeDspmWhitelistStrategyResponse,
   DescribeDspmAssetAccountIdentifyRequest,
   DescribeDspmSupportedAssetTypeResponse,
-  RiskRuleInfo,
+  DescribeSkillScanPayInfoRequest,
   DescribeDspmApplyHistoryRequest,
   DescribeListenerListResponse,
   TaskAdvanceCFG,
@@ -1378,6 +1380,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: VerifyDspmAssetLoginCodeResponse) => void
   ): Promise<VerifyDspmAssetLoginCodeResponse> {
     return this.request("VerifyDspmAssetLoginCode", req, cb)
+  }
+
+  /**
+   * 查询 Skill 安全检测计费信息，包括订单状态、总配额、已消耗配额、到期时间、支付模式等。无订单时返回零值（仅含 TimeNow 和 BetaEndTime）。试用订单通过 ModifyTrialStatus(Module=9) 领取，正式订单通过计费系统创建。
+   */
+  async DescribeSkillScanPayInfo(
+    req?: DescribeSkillScanPayInfoRequest,
+    cb?: (error: string, rep: DescribeSkillScanPayInfoResponse) => void
+  ): Promise<DescribeSkillScanPayInfoResponse> {
+    return this.request("DescribeSkillScanPayInfo", req, cb)
   }
 
   /**

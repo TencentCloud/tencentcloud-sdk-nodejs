@@ -598,9 +598,9 @@ it("vod.v20180717.DescribeMediaProcessUsageData", async function () {
     }
 })
 
-it("vod.v20180717.DescribeTranscodeTemplates", async function () {
+it("vod.v20180717.CreateAigcAudioClone", async function () {
     try {
-       const data = await client.DescribeTranscodeTemplates({})
+       const data = await client.CreateAigcAudioClone({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -648,9 +648,9 @@ it("vod.v20180717.DescribeSnapshotByTimeOffsetTemplates", async function () {
     }
 })
 
-it("vod.v20180717.DescribeAdaptiveDynamicStreamingTemplates", async function () {
+it("vod.v20180717.ComposeMedia", async function () {
     try {
-       const data = await client.DescribeAdaptiveDynamicStreamingTemplates({})
+       const data = await client.ComposeMedia({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -781,6 +781,16 @@ it("vod.v20180717.ModifySampleSnapshotTemplate", async function () {
 it("vod.v20180717.DescribeImageSpriteTemplates", async function () {
     try {
        const data = await client.DescribeImageSpriteTemplates({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.DescribeTranscodeTemplates", async function () {
+    try {
+       const data = await client.DescribeTranscodeTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1608,9 +1618,9 @@ it("vod.v20180717.ModifyRoundPlay", async function () {
     }
 })
 
-it("vod.v20180717.ComposeMedia", async function () {
+it("vod.v20180717.DescribeAdaptiveDynamicStreamingTemplates", async function () {
     try {
-       const data = await client.ComposeMedia({})
+       const data = await client.DescribeAdaptiveDynamicStreamingTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

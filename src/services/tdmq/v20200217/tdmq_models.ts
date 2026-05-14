@@ -2529,27 +2529,27 @@ HTTP;
  */
 export interface VpcEndpointInfo {
   /**
-   * vpc的id
+   * <p>vpc的id</p>
    */
   VpcId: string
   /**
-   * 子网id
+   * <p>子网id</p>
    */
   SubnetId: string
   /**
-   * vpc接入点信息
+   * <p>vpc接入点信息</p>
    */
   VpcEndpoint: string
   /**
-   * vpc接入点状态 OFF/ON/CREATING/DELETING
+   * <p>vpc接入点状态 OFF/ON/CREATING/DELETING</p>
    */
   VpcDataStreamEndpointStatus?: string
   /**
-   * TLS加密的数据流接入点
+   * <p>TLS加密的数据流接入点</p>
    */
   VpcTlsEndpoint?: string
   /**
-   * VPC 接入点操作失败的错误信息
+   * <p>VPC 接入点操作失败的错误信息</p>
    */
   VpcErrorMessage?: string
 }

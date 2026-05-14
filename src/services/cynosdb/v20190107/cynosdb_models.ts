@@ -10684,11 +10684,11 @@ export interface DescribeAuditInstanceListRequest {
  */
 export interface DescribeInstanceSlowQueriesResponse {
   /**
-   * 总条数
+   * <p>总条数</p>
    */
   TotalCount?: number
   /**
-   * 慢查询记录
+   * <p>慢查询记录</p>
    */
   SlowQueries?: Array<SlowQueriesItem>
   /**
@@ -12270,47 +12270,47 @@ export interface DescribeClusterDetailResponse {
  */
 export interface DescribeInstanceSlowQueriesRequest {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId: string
   /**
-   * 事务开始最早时间
+   * <p>事务开始最早时间</p>
    */
   StartTime?: string
   /**
-   * 事务开始最晚时间
+   * <p>事务开始最晚时间</p>
    */
   EndTime?: string
   /**
-   * 限制条数
+   * <p>限制条数</p><p>建议控制 limit 大小，当 limit 过大时，由于平台返回结果大小限制，可能会造成截断</p>
    */
   Limit?: number
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset?: number
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   Username?: string
   /**
-   * 客户端host
+   * <p>客户端host</p>
    */
   Host?: string
   /**
-   * 数据库名
+   * <p>数据库名</p>
    */
   Database?: string
   /**
-   * 排序字段，可选值：QueryTime,LockTime,RowsExamined,RowsSent
+   * <p>排序字段</p><p>枚举值：</p><ul><li>QueryTime： 按照 SQL 语句的总执行时长排序</li><li>LockTime： 按照 SQL 语句在等待锁（如表锁、行锁）上消耗的时间排序</li><li>RowsExamined： 按照 SQL 语句在执行过程中扫描的行数排序</li><li>RowsSent： 按照 SQL 语句最终返回给客户端的结果行数排序</li><li>Timestamp： 按照慢查询语句发生的时间戳排序</li></ul>
    */
   OrderBy?: string
   /**
-   * 排序类型，可选值：asc,desc
+   * <p>排序类型，可选值：asc,desc</p>
    */
   OrderByType?: string
   /**
-   * sql语句
+   * <p>sql语句</p>
    */
   SqlText?: string
 }

@@ -448,6 +448,48 @@ export interface DescribeRiskCenterAssetViewWeakPasswordRiskListResponse {
 }
 
 /**
+ * 风险规则
+ */
+export interface RiskRuleInfo {
+  /**
+   * 风险检查项ID
+   */
+  RuleID?: string
+  /**
+   * 云厂商名称
+   */
+  Provider?: string
+  /**
+   * 实例类型
+   */
+  InstanceType?: string
+  /**
+   * 风险名称
+   */
+  RiskTitle?: string
+  /**
+   * 检查类型
+   */
+  CheckType?: string
+  /**
+   * 风险等级
+   */
+  RiskLevel?: string
+  /**
+   * 风险危害
+   */
+  RiskInfluence?: string
+  /**
+   * 风险修复指引报告链接
+   */
+  RiskFixAdvance?: string
+  /**
+   * 边界管控
+   */
+  DispositionType?: string
+}
+
+/**
  * KeyValue对
  */
 export interface KeyValue {
@@ -1641,7 +1683,7 @@ export interface TaskLogURL {
  */
 export interface DescribeExposePathRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -1970,6 +2012,76 @@ export interface DescribeUserDspmInfoListRequest {
    * 过滤条件
    */
   Filter?: Filter
+}
+
+/**
+ * DescribeSkillScanPayInfo返回参数结构体
+ */
+export interface DescribeSkillScanPayInfoResponse {
+  /**
+   * <p>订单所属租户 AppID</p>
+   */
+  AppID?: number
+  /**
+   * <p>订单状态<br>枚举值：<br>0：未购买<br>1：正常<br>2：隔离<br>6：试用中<br>7：已过期<br>8：试用到期</p>
+   */
+  OrderStatus?: number
+  /**
+   * <p>总配额</p>
+   */
+  TotalQuota?: number
+  /**
+   * <p>已消耗配额</p>
+   */
+  UsedCount?: number
+  /**
+   * <p>支付模式<br>枚举值：<br>0：后付费<br>1：预付费</p>
+   */
+  PayMode?: number
+  /**
+   * <p>自动续费标志<br>枚举值：<br>0：未设置<br>1：自动续费<br>2：不自动续费</p>
+   */
+  AutoRenew?: number
+  /**
+   * <p>资源ID</p>
+   */
+  ResourceId?: string
+  /**
+   * <p>购买时长</p>
+   */
+  TimeSpan?: number
+  /**
+   * <p>时长单位</p>
+   */
+  TimeUnit?: string
+  /**
+   * <p>订单开始时间</p>
+   */
+  BeginTime?: string
+  /**
+   * <p>订单到期时间</p>
+   */
+  EndTime?: string
+  /**
+   * <p>公测结束时间，固定为 2026-06-30 23:59:59</p>
+   */
+  BetaEndTime?: string
+  /**
+   * <p>服务器当前时间</p>
+   */
+  TimeNow?: string
+  /**
+   * <p>租户 Uin</p>
+   */
+  Uin?: string
+  /**
+   * <p>租户昵称</p>
+   */
+  NickName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2674,7 +2786,7 @@ export interface DescribeAccessKeyAlarmRequest {
  */
 export interface DescribeExposuresRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -3227,41 +3339,49 @@ export interface DescribeRiskCallRecordRequest {
  */
 export interface DspmAssetFieldInfo {
   /**
-   * 资产实例id
+   * <p>资产实例id</p>
    */
   AssetId?: string
   /**
-   * 数据库名称
+   * <p>数据库名称</p>
    */
   DbName?: string
   /**
-   * schema名
+   * <p>schema名</p>
    */
   SchemaName?: string
   /**
-   * 表名
+   * <p>表名</p>
    */
   TableName?: string
   /**
-   * 字段名
+   * <p>字段名</p>
    */
   FieldName?: string
   /**
-   * 数据项id集合
+   * <p>数据项id集合</p>
    */
   RuleIds?: Array<number | bigint>
   /**
-   * 数据项名称集合
+   * <p>数据项名称集合</p>
    */
   RuleNames?: Array<string>
   /**
-   * 分类id集合
+   * <p>分类id集合</p>
    */
   CategoryIds?: Array<number | bigint>
   /**
-   * 分类名称集合
+   * <p>分类名称集合</p>
    */
   CategoryNames?: Array<string>
+  /**
+   * <p>分类详情</p>
+   */
+  CategoryDetails?: Array<DspmIdentifyCategoryDetail>
+  /**
+   * <p>字段注释</p>
+   */
+  FieldComment?: string
 }
 
 /**
@@ -6220,45 +6340,57 @@ export interface AlertExtraInfo {
  */
 export interface DspmAssetTableInfo {
   /**
-   * 资产实例id
+   * <p>资产实例id</p>
    */
   AssetId?: string
   /**
-   * 数据库名称
+   * <p>数据库名称</p>
    */
   DbName?: string
   /**
-   * schema名称
+   * <p>schema名称</p>
    */
   SchemaName?: string
   /**
-   * 表名
+   * <p>表名</p>
    */
   TableName?: string
   /**
-   * 字段数
+   * <p>字段数</p>
    */
   FieldCount?: number
   /**
-   * 敏感字段数
+   * <p>敏感字段数</p>
    */
   SensitiveFieldCount?: number
   /**
-   * 数据项id集合
+   * <p>数据项id集合</p>
    */
   RuleIds?: Array<number | bigint>
   /**
-   * 数据项名称集合
+   * <p>数据项名称集合</p>
    */
   RuleNames?: Array<string>
   /**
-   * 分类id集合
+   * <p>分类id集合</p>
    */
   CategoryIds?: Array<number | bigint>
   /**
-   * 分类名称集合
+   * <p>分类名称集合</p>
    */
   CategoryNames?: Array<string>
+  /**
+   * <p>分类详情</p>
+   */
+  CategoryDetails?: Array<DspmIdentifyCategoryDetail>
+  /**
+   * <p>数据表id</p>
+   */
+  TableId?: number
+  /**
+   * <p>表注释</p>
+   */
+  TableComment?: string
 }
 
 /**
@@ -7271,7 +7403,7 @@ export interface ModifyOrganizationAccountStatusRequest {
  */
 export interface DescribeExposeAssetCategoryRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
 }
@@ -8127,65 +8259,69 @@ export interface StandardItem {
  */
 export interface CheckViewRiskItem {
   /**
-   * 检查项规则ID
+   * <p>检查项规则ID</p>
    */
   RiskRuleId?: string
   /**
-   * 风险名称
+   * <p>风险名称</p>
    */
   RiskTitle?: string
   /**
-   * 检查类型
+   * <p>检查类型</p>
    */
   CheckType?: string
   /**
-   * 风险等级
+   * <p>风险等级</p>
    */
   Severity?: string
   /**
-   * 存在1个风险项
+   * <p>存在1个风险项</p>
    */
   RiskDesc?: string
   /**
-   * 首次发现时间
+   * <p>首次发现时间</p>
    */
   CreateTime?: string
   /**
-   * 风险更新时间
+   * <p>风险更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 云厂商
+   * <p>云厂商</p>
    */
   Provider?: string
   /**
-   * 风险状态
+   * <p>风险状态</p>
    */
   RiskStatus?: number
   /**
-   * 受影响资产数量
+   * <p>受影响资产数量</p>
    */
   AssetCount?: number
   /**
-   * 风险数量
+   * <p>风险数量</p>
    */
   RiskCount?: number
   /**
-   * 资产类型
+   * <p>资产类型</p>
    */
   AssetType?: string
   /**
-   * 事件类型
+   * <p>事件类型</p>
    */
   EventType?: string
   /**
-   * 处置分类
+   * <p>处置分类</p>
    */
   Classify?: string
   /**
-   * cspm规范条款
+   * <p>cspm规范条款</p>
    */
   StandardTerms?: Array<StandardTerm>
+  /**
+   * <p>资产类型图标</p>
+   */
+  AssetTypeIconURL?: string
 }
 
 /**
@@ -9177,7 +9313,7 @@ export interface DescribeDspmPersonApplyHistoryResponse {
  */
 export interface DescribeAssetProcessListRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -10931,7 +11067,7 @@ export interface DescribeVpcAssetsResponse {
  */
 export interface DescribeAssetRiskListRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -11357,149 +11493,157 @@ export interface ModifyDspmAssetSecurityAnalysisSwitchResponse {
  */
 export interface ExposesItem {
   /**
-   * 云厂商
+   * <p>云厂商</p>
    */
   Provider?: string
   /**
-   * 云账号名称
+   * <p>云账号名称</p>
    */
   CloudAccountName?: string
   /**
-   * 云账号
+   * <p>云账号</p>
    */
   CloudAccountId?: string
   /**
-   * 域名
+   * <p>域名</p>
    */
   Domain?: string
   /**
-   * IP
+   * <p>IP</p>
    */
   Ip?: string
   /**
-   * 端口或者端口范围
+   * <p>端口或者端口范围</p>
    */
   Port?: string
   /**
-   * 开放
+   * <p>开放</p>
    */
   Status?: string
   /**
-   * 风险类型
+   * <p>风险类型</p>
    */
   RiskType?: string
   /**
-   * acl类型
+   * <p>acl类型</p>
    */
   AclType?: string
   /**
-   * acl列表
+   * <p>acl列表</p>
    */
   AclList?: string
   /**
-   * 资产ID
+   * <p>资产ID</p>
    */
   AssetId?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 资产类型
+   * <p>资产类型</p>
    */
   AssetType?: string
   /**
-   * 端口服务数量
+   * <p>端口服务数量</p>
    */
   PortServiceCount?: number
   /**
-   * 高危端口数量
+   * <p>高危端口数量</p>
    */
   HighRiskPortServiceCount?: number
   /**
-   * web应用数量
+   * <p>web应用数量</p>
    */
   WebAppCount?: number
   /**
-   * 有风险web应用数量
+   * <p>有风险web应用数量</p>
    */
   RiskWebAppCount?: number
   /**
-   * 弱口令数量
+   * <p>弱口令数量</p>
    */
   WeakPasswordCount?: number
   /**
-   * 漏洞数量
+   * <p>漏洞数量</p>
    */
   VulCount?: number
   /**
-   * 首次发现时间
+   * <p>首次发现时间</p>
    */
   CreateTime?: string
   /**
-   * 最近更新时间
+   * <p>最近更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 实例类型名称
+   * <p>实例类型名称</p>
    */
   AssetTypeName?: string
   /**
-   * 开放状态
+   * <p>开放状态</p>
    */
   DisplayStatus?: string
   /**
-   * 端口状态
+   * <p>端口状态</p>
    */
   DisplayRiskType?: string
   /**
-   * 扫描任务状态
+   * <p>扫描任务状态</p>
    */
   ScanTaskStatus?: string
   /**
-   * uuid
+   * <p>uuid</p>
    */
   Uuid?: string
   /**
-   * 是否进行过安全体检
+   * <p>是否进行过安全体检</p>
    */
   HasScan?: string
   /**
-   * 租户ID
+   * <p>租户ID</p>
    */
   AppId?: number
   /**
-   * 租户ID字符串
+   * <p>租户ID字符串</p>
    */
   AppIdStr?: string
   /**
-   * 记录ID
+   * <p>记录ID</p>
    */
   ExposureID?: number
   /**
-   * 端口开放数量
+   * <p>端口开放数量</p>
    */
   PortDetectCount?: number
   /**
-   * 端口开放结果
+   * <p>端口开放结果</p>
    */
   PortDetectResult?: string
   /**
-   * 标签
+   * <p>标签</p>
    */
   Tag?: string
   /**
-   * 备注
+   * <p>备注</p>
    */
   Comment?: string
   /**
-   * 待治理风险数量
+   * <p>待治理风险数量</p>
    */
   ToGovernedRiskCount?: number
   /**
-   * 待治理风险内容
+   * <p>待治理风险内容</p>
    */
   ToGovernedRiskContent?: string
+  /**
+   * <p>资产类型图标</p>
+   */
+  AssetTypeIconURL?: string
+  /**
+   * <p>资产类型3D图标</p>
+   */
+  AssetTypeIconSolidURL?: string
 }
 
 /**
@@ -12463,7 +12607,7 @@ export interface SendDspmAssetLoginSmsCodeRequest {
  */
 export interface DescribeHighBaseLineRiskListRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -12851,7 +12995,7 @@ export interface DescribeAKAnalysisDetailResponse {
  */
 export interface DescribeCheckViewRisksRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -13009,7 +13153,7 @@ export interface DspmDbAssetId {
  */
 export interface DescribeConfigCheckRulesRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -13337,73 +13481,77 @@ export interface ModifyDspmAssetDataScanTaskRequest {
  */
 export interface AssetRiskItem {
   /**
-   * 租户ID
+   * <p>租户ID</p>
    */
   AppId?: number
   /**
-   * 云厂商
+   * <p>云厂商</p>
    */
   Provider?: string
   /**
-   * 云厂商名称
+   * <p>云厂商名称</p>
    */
   ProviderName?: string
   /**
-   * 云账号名称
+   * <p>云账号名称</p>
    */
   CloudAccountName?: string
   /**
-   * 云账号ID
+   * <p>云账号ID</p>
    */
   CloudAccountId?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 首次发现时间
+   * <p>首次发现时间</p>
    */
   CreateTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 风险状态
+   * <p>风险状态</p>
    */
   RiskStatus?: number
   /**
-   * 风险名称
+   * <p>风险名称</p>
    */
   RiskTitle?: string
   /**
-   * 检查类型
+   * <p>检查类型</p>
    */
   CheckType?: string
   /**
-   * 风险等级
+   * <p>风险等级</p>
    */
   Severity?: string
   /**
-   * 风险规则ID
+   * <p>风险规则ID</p>
    */
   RiskRuleId?: string
   /**
-   * 处置分类
+   * <p>处置分类</p>
    */
   Classify?: string
   /**
-   * 等保合规
+   * <p>等保合规</p>
    */
   StandardTerms?: Array<StandardTerm>
   /**
-   * 资产类型
+   * <p>资产类型</p>
    */
   AssetType?: string
+  /**
+   * <p>资产类型图标</p>
+   */
+  AssetTypeIconURL?: string
 }
 
 /**
@@ -13415,7 +13563,7 @@ export interface DescribeRiskDetailListRequest {
    */
   RiskRuleId: string
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -13700,46 +13848,9 @@ export interface DescribeDspmSupportedAssetTypeResponse {
 }
 
 /**
- * 风险规则
+ * DescribeSkillScanPayInfo请求参数结构体
  */
-export interface RiskRuleInfo {
-  /**
-   * 风险检查项ID
-   */
-  RuleID?: string
-  /**
-   * 云厂商名称
-   */
-  Provider?: string
-  /**
-   * 实例类型
-   */
-  InstanceType?: string
-  /**
-   * 风险名称
-   */
-  RiskTitle?: string
-  /**
-   * 检查类型
-   */
-  CheckType?: string
-  /**
-   * 风险等级
-   */
-  RiskLevel?: string
-  /**
-   * 风险危害
-   */
-  RiskInfluence?: string
-  /**
-   * 风险修复指引报告链接
-   */
-  RiskFixAdvance?: string
-  /**
-   * 边界管控
-   */
-  DispositionType?: string
-}
+export type DescribeSkillScanPayInfoRequest = null
 
 /**
  * DescribeDspmApplyHistory请求参数结构体
@@ -15117,7 +15228,7 @@ export interface DescribeVulViewVulRiskListRequest {
  */
 export interface DescribeVulRiskListRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -15961,7 +16072,7 @@ export interface DescribeVulRiskListResponse {
  */
 export interface DescribeCSIPRiskStatisticsRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**

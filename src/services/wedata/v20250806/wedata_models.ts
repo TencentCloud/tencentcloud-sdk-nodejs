@@ -4503,60 +4503,65 @@ export interface TaskInstance {
  */
 export interface TriggerWorkflowDetail {
   /**
-   * 工作流名称
+   * <p>工作流名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowName?: string
   /**
-   * 责任人ID
+   * <p>责任人ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnerUin?: string
   /**
-   * 创建人ID
+   * <p>创建人ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateUserUin?: string
   /**
-   * 工作流参数数组
+   * <p>工作流参数数组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowParams?: Array<ParamInfo>
   /**
-   * 统一调度参数
+   * <p>统一调度参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerWorkflowSchedulerConfigurations?: Array<WorkflowTriggerConfig>
   /**
-   * 工作流描述
+   * <p>工作流描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowDesc?: string
   /**
-   * 工作流所属路径
+   * <p>工作流所属路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Path?: string
   /**
-   * BundleId项
+   * <p>BundleId项</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BundleId?: string
   /**
-   * BundleInfo项
+   * <p>BundleInfo项</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BundleInfo?: string
   /**
-   * 通用参数
+   * <p>通用参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GeneralTaskParams?: Array<WorkflowGeneralTaskParam>
   /**
-   * Trigger 状态 启动ACTIVE，暂停PAUSED
+   * <p>Trigger 状态 启动ACTIVE，暂停PAUSED</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SchedulerStatus?: string
+  /**
+   * <p>工作流运行参数配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TriggerWorkflowRunConfiguration?: WorkflowRunConfig
 }
 
 /**
@@ -12229,6 +12234,10 @@ export interface UpdateTriggerWorkflowRequest {
    * 通用参数配置
    */
   GeneralTaskParams?: Array<WorkflowGeneralTaskParam>
+  /**
+   *
+   */
+  TriggerWorkflowRunConfiguration?: WorkflowRunConfig
 }
 
 /**
@@ -12339,6 +12348,22 @@ export interface CreateTaskRequest {
    * 任务调度配置
    */
   TaskSchedulerConfiguration: CreateTaskSchedulerConfiguration
+}
+
+/**
+ * 工作流运行配置
+ */
+export interface WorkflowRunConfig {
+  /**
+   * <p>工作流运行最大并发数，取值范围：[1, 1000]</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxConcurrentNum?: number
+  /**
+   * <p>1：开启  0：关闭<br>当工作流达到最大并发上限时，若开启，新工作流运行排队等待，直到其他运行释放并发，最大等待时长为48小时，超过则自动跳过不再执行；若关闭，新工作流直接跳过结束。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueuingMode?: number
 }
 
 /**
@@ -14181,45 +14206,49 @@ export interface DeleteSQLFolderRequest {
  */
 export interface CreateTriggerWorkflowRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 工作流名称
+   * <p>工作流名称</p>
    */
   WorkflowName: string
   /**
-   * 所属文件夹路径
+   * <p>所属文件夹路径</p>
    */
   ParentFolderPath: string
   /**
-   * 工作流描述
+   * <p>工作流描述</p>
    */
   WorkflowDesc?: string
   /**
-   * 工作流负责人ID
+   * <p>工作流负责人ID</p>
    */
   OwnerUin?: string
   /**
-   * 工作流参数
+   * <p>工作流参数</p>
    */
   WorkflowParams?: Array<ParamInfo>
   /**
-   * 统一调度信息
+   * <p>统一调度信息</p>
    */
   TriggerWorkflowSchedulerConfigurations?: Array<WorkflowTriggerConfig>
   /**
-   * BundleId项
+   * <p>BundleId项</p>
    */
   BundleId?: string
   /**
-   * Bundle信息
+   * <p>Bundle信息</p>
    */
   BundleInfo?: string
   /**
-   * 通用参数配置
+   * <p>通用参数配置</p>
    */
   GeneralTaskParams?: Array<WorkflowGeneralTaskParam>
+  /**
+   * <p>工作流调度运行配置</p>
+   */
+  TriggerWorkflowRunConfiguration?: WorkflowRunConfig
 }
 
 /**
@@ -15054,7 +15083,7 @@ export interface ListUpstreamOpsTasksResponse {
  */
 export interface CreateTriggerWorkflowResponse {
   /**
-   * 返回工作流ID
+   * <p>返回工作流ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: CreateTriggerWorkflowResult
@@ -18417,37 +18446,41 @@ export interface DeleteTaskFolderResult {
  */
 export interface UpdateTriggerWorkflowPartially {
   /**
-   * 工作流名称
+   * <p>工作流名称</p>
    */
   WorkflowName?: string
   /**
-   * 责任人ID
+   * <p>责任人ID</p>
    */
   OwnerUin?: string
   /**
-   * 工作流参数数组
+   * <p>工作流参数数组</p>
    */
   WorkflowParams?: Array<ParamInfo>
   /**
-   * 统一调度参数
+   * <p>统一调度参数</p>
    */
   TriggerWorkflowSchedulerConfigurations?: Array<WorkflowTriggerConfig>
   /**
-   * 工作流描述
+   * <p>工作流描述</p>
    */
   WorkflowDesc?: string
   /**
-   * BundleId项
+   * <p>BundleId项</p>
    */
   BundleId?: string
   /**
-   * BundleInfo项
+   * <p>BundleInfo项</p>
    */
   BundleInfo?: string
   /**
-   * 通用参数
+   * <p>通用参数</p>
    */
   GeneralTaskParams?: Array<WorkflowGeneralTaskParam>
+  /**
+   * <p>工作流运行参数配置</p>
+   */
+  TriggerWorkflowRunConfiguration?: WorkflowRunConfig
 }
 
 /**

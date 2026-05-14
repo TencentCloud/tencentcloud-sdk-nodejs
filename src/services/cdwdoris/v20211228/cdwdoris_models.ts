@@ -381,6 +381,81 @@ export interface WorkloadGroupConfig {
 }
 
 /**
+ * 备份、迁移任务信息
+ */
+export interface BackupScheduleInfo {
+  /**
+   * 迁移类型：
+1-远端集群迁移；2-COS迁移
+   */
+  BackupType?: number
+  /**
+   * 当前任务现存实例数
+   */
+  ExistCount?: number
+  /**
+   * cos信息
+   */
+  CosSourceInfo?: string
+  /**
+   * doris信息
+   */
+  DorisSourceInfo?: string
+  /**
+   * 恢复类型
+   */
+  RestoreType?: number
+  /**
+   * 快照保留策略
+   */
+  SnapshotRemainPolicy?: SnapshotRemainPolicy
+  /**
+   * 远程备份地域
+   */
+  DataRemoteRegion?: string
+  /**
+   * 是否在宽限期内
+   */
+  IsWithinGracePeriod?: boolean
+  /**
+   * 宽限期（天数）
+   */
+  GracePeriod?: number
+  /**
+   * 宽限开始时间
+   */
+  GraceStartTime?: string
+  /**
+   * 托管桶类型：standard-标准，多可用区-MAZ
+   */
+  BucketType?: string
+  /**
+   * 是否开启安全锁：0-未开启，1-已开启
+   */
+  EnableSecurityLock?: number
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 实例名
+   */
+  InstanceName?: string
+  /**
+   * 实例状态
+   */
+  InstanceStatus?: string
+  /**
+   * 实例状态描述
+   */
+  InstanceStatusDesc?: string
+  /**
+   * 桶加密状态信息
+   */
+  BucketEncryption?: BucketEncryptionInfo
+}
+
+/**
  * DescribeInstances返回参数结构体
  */
 export interface DescribeInstancesResponse {
@@ -2226,11 +2301,27 @@ export interface ModifyInstanceKeyValConfigsResponse {
  */
 export interface DescribeBackUpSchedulesResponse {
   /**
-   * 当前系统时间
+   * <p>备份是否开启</p>
+   */
+  BackUpOpened?: boolean
+  /**
+   * <p>备份桶</p>
+   */
+  CosBucketName?: string
+  /**
+   * <p>备份的状态</p>
+   */
+  BackUpStatus?: number
+  /**
+   * <p>备份、迁移任务信息</p>
+   */
+  BackupScheduleInfos?: Array<BackupScheduleInfo>
+  /**
+   * <p>当前系统时间</p>
    */
   CurrentTime?: string
   /**
-   * 桶加密状态信息
+   * <p>桶加密状态信息</p>
    */
   BucketEncryption?: BucketEncryptionInfo
   /**
@@ -2819,18 +2910,43 @@ export interface DescribeInstancesRequest {
  */
 export interface DescribeBackUpSchedulesRequest {
   /**
-   * 任务类型
-0-不限制，或使用TypeFilters过滤；
-1-备份恢复（包括周期备份和一次性备份）；
-2-数据迁移（包括跨集群迁移和cos迁移）
+   * <p>任务类型<br>0-不限制，或使用TypeFilters过滤；<br>1-备份恢复（包括周期备份和一次性备份）；<br>2-数据迁移（包括跨集群迁移和cos迁移）</p>
    */
   ApplicationType?: number
   /**
-   * 0-未加密；1-已加密
+   * <p>创建人过滤器</p>
+   */
+  UsersFilters?: Array<string>
+  /**
+   * <p>任务类型过滤器。<br>0-周期；<br>1-一次性；<br>2-数据迁移(即3和4的合集)；<br>3-远端集群迁移；<br>4-COS迁移</p>
+   */
+  TypeFilters?: Array<number | bigint>
+  /**
+   * <p>任务状态过滤器</p>
+   */
+  StatusFilters?: Array<number | bigint>
+  /**
+   * <p>排序：<br>DESC-降序<br>ASC-升序</p>
+   */
+  OrderType?: string
+  /**
+   * <p>任务名过滤器</p>
+   */
+  ScheduleNameFilters?: string
+  /**
+   * <p>分页大小</p>
+   */
+  PageSize?: number
+  /**
+   * <p>页号</p>
+   */
+  PageNum?: number
+  /**
+   * <p>0-未加密；1-已加密</p>
    */
   EncryptionFilters?: Array<number | bigint>
   /**
-   * 调度任务id过滤
+   * <p>调度任务id过滤</p>
    */
   ScheduleId?: number
 }
@@ -2983,19 +3099,19 @@ export interface DescribeInstanceResponse {
  */
 export interface DescribeBackUpJobResponse {
   /**
-   * 任务列表
+   * <p>任务列表</p>
    */
   BackUpJobs?: Array<BackUpJobDisplay>
   /**
-   * 错误信息
+   * <p>错误信息</p>
    */
   ErrorMsg?: string
   /**
-   * 总数
+   * <p>总数</p>
    */
   TotalCount?: number
   /**
-   * 当前时间
+   * <p>当前时间</p>
    */
   CurrentTime?: string
   /**
@@ -4381,38 +4497,51 @@ export interface DescribeInstanceRequest {
  */
 export interface DescribeBackUpJobRequest {
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   InstanceId: string
   /**
-   * 任务类型：
-0-不限制，或使用TypeFilters过滤；
-1-备份恢复（包括周期备份和一次性备份）；
-2-数据迁移（包括跨集群迁移和cos迁移）	
+   * <p>任务类型：<br>0-不限制，或使用TypeFilters过滤；<br>1-备份恢复（包括周期备份和一次性备份）；<br>2-数据迁移（包括跨集群迁移和cos迁移）</p>
    */
   ApplicationType?: number
   /**
-   * 分页大小
+   * <p>任务类型过滤器</p>
+   */
+  TypeFilters?: Array<number | bigint>
+  /**
+   * <p>实例状态过滤器</p>
+   */
+  StatusFilters?: Array<number | bigint>
+  /**
+   * <p>任务名称过滤器</p>
+   */
+  ScheduleNameFilters?: string
+  /**
+   * <p>按照快照生成时间排序，默认DESC：<br>ASC-升序<br>DESC-降序</p>
+   */
+  OrderType?: string
+  /**
+   * <p>分页大小</p>
    */
   PageSize?: number
   /**
-   * 页号
+   * <p>页号</p>
    */
   PageNum?: number
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   BeginTime?: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime?: string
   /**
-   * jobid的string类型
+   * <p>jobid的string类型</p>
    */
   JobIdFiltersStr?: string
   /**
-   * 0-未加密；1-已加密
+   * <p>0-未加密；1-已加密</p>
    */
   EncryptionFilters?: Array<number | bigint>
 }

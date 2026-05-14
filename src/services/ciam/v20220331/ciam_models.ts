@@ -20,65 +20,69 @@
  */
 export interface UpdateUserRequest {
   /**
-   * 用户ID
+   * <p>用户ID</p>
    */
   UserId: string
   /**
-   * 用户目录ID
+   * <p>用户目录ID</p>
    */
   UserStoreId: string
   /**
-   * 用户名称
+   * <p>用户名称</p>
    */
   UserName?: string
   /**
-   * 手机号码
+   * <p>手机号码</p>
    */
   PhoneNumber?: string
   /**
-   * 邮箱
+   * <p>邮箱</p>
    */
   Email?: string
   /**
-   * 昵称
+   * <p>昵称</p>
    */
   Nickname?: string
   /**
-   * 地址
+   * <p>地址</p>
    */
   Address?: string
   /**
-   * 用户组
+   * <p>用户组</p>
    */
   UserGroup?: Array<string>
   /**
-   * 生日
+   * <p>生日</p>
    */
   Birthdate?: number
   /**
-   * 自定义属性
+   * <p>自定义属性</p>
    */
   CustomizationAttributes?: Array<MemberMap>
   /**
-   * 索引字段1
+   * <p>索引字段1</p>
    */
   IndexedAttribute1?: string
   /**
-   * 索引字段2
+   * <p>索引字段2</p>
    */
   IndexedAttribute2?: string
   /**
-   * 索引字段3
+   * <p>索引字段3</p>
    */
   IndexedAttribute3?: string
   /**
-   * 索引字段4
+   * <p>索引字段4</p>
    */
   IndexedAttribute4?: string
   /**
-   * 索引字段5
+   * <p>索引字段5</p>
    */
   IndexedAttribute5?: string
+  /**
+   * <p>用户所属组织机构ID</p>
+   */
+  UserOrg?: Array<string>
 }
 
 /**
@@ -86,18 +90,15 @@ export interface UpdateUserRequest {
  */
 export interface DescribeUserByIdRequest {
   /**
-   * 用户目录ID
+   * <p>用户目录ID</p>
    */
   UserStoreId: string
   /**
-   * 用户ID
+   * <p>用户ID</p>
    */
   UserId: string
   /**
-   * 返回信息是否为原文
-
-<li> **false** </li>	默认，返回信息为脱敏信息
-<li> **true** </li>	返回用户信息原文
+   * <p>返回信息是否为原文</p><li> **false** </li>    默认，返回信息为脱敏信息<li> **true** </li>    返回用户信息原文
    */
   Original?: boolean
 }
@@ -107,22 +108,19 @@ export interface DescribeUserByIdRequest {
  */
 export interface ListUserRequest {
   /**
-   * 用户目录ID
+   * <p>用户目录ID</p>
    */
   UserStoreId: string
   /**
-   * 分页数据
+   * <p>分页数据</p>
    */
   Pageable: Pageable
   /**
-   * Key可选值为condition、userGroupId
-
-<li> **condition** </li>	Values = 查询条件，用户ID，用户名称，手机或邮箱
-<li> **userGroupId** </li>	Values = 用户组ID
+   * <p>Key可选值为condition、userGroup、userOrg、weComUserOrg<li> <strong>condition</strong> </li>    Values = 查询条件，用户ID，用户名称，手机或邮箱<li> <strong>userGroup</strong> </li>    Values = 用户组ID<li> <strong>userOrg</strong> </li>    Values = 用户所属机构ID<li> <strong>weComUserOrg</strong> </li>    Values = 用户所属企业微信机构ID</p>
    */
   Filters?: Array<Filter>
   /**
-   * 返回信息是否为原文
+   * <p>返回信息是否为原文</p>
    */
   Original?: boolean
 }
@@ -496,7 +494,7 @@ export interface ListUserByPropertyRequest {
  */
 export interface CreateUserResponse {
   /**
-   * 创建的用户信息
+   * <p>创建的用户信息</p>
    */
   User?: User
   /**
@@ -663,7 +661,7 @@ export interface CreateUserStoreRequest {
  */
 export interface DescribeUserByIdResponse {
   /**
-   * 用户信息
+   * <p>用户信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   User?: User
@@ -782,205 +780,220 @@ export interface DeleteUserGroupsRequest {
  */
 export interface User {
   /**
-   * 用户ID
+   * <p>用户ID</p>
    */
   UserId?: string
   /**
-   * 用户名
+   * <p>用户名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserName?: string
   /**
-   * 手机号
+   * <p>手机号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PhoneNumber?: string
   /**
-   * 邮箱
+   * <p>邮箱</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Email?: string
   /**
-   * 上次登录时间
+   * <p>上次登录时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastSignOn?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreatedDate?: number
   /**
-   * 状态
+   * <p>状态</p>
    */
   Status?: string
   /**
-   * 用户来源
+   * <p>用户来源</p>
    */
   UserDataSourceEnum?: string
   /**
-   * 昵称
+   * <p>昵称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Nickname?: string
   /**
-   * 地址
+   * <p>地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Address?: string
   /**
-   * 生日
+   * <p>生日</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Birthdate?: number
   /**
-   * 用户组ID
+   * <p>用户组ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserGroups?: Array<string>
   /**
-   * 上次修改时间
+   * <p>用户组名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserGroupNames?: Array<string>
+  /**
+   * <p>上次修改时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastModifiedDate?: number
   /**
-   * 自定义属性
+   * <p>自定义属性</p>
    */
   CustomAttributes?: Array<MemberMap>
   /**
-   * 身份证号
+   * <p>身份证号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResidentIdentityCard?: string
   /**
-   * QQ的OpenId
+   * <p>QQ的OpenId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QqOpenId?: string
   /**
-   * QQ的UnionId
+   * <p>QQ的UnionId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QqUnionId?: string
   /**
-   * 微信的WechatOpenId
+   * <p>微信的WechatOpenId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WechatOpenId?: string
   /**
-   * 微信的WechatUnionId
+   * <p>微信的WechatUnionId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WechatUnionId?: string
   /**
-   * 支付宝的AlipayUserId
+   * <p>支付宝的AlipayUserId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlipayUserId?: string
   /**
-   * 企业微信的WeComUserId
+   * <p>企业微信的WeComUserId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WeComUserId?: string
   /**
-   * 描述
+   * <p>描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 姓名
+   * <p>姓名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 坐标
+   * <p>坐标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Locale?: string
   /**
-   * 性别
+   * <p>性别</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Gender?: string
   /**
-   * 实名核验方式
+   * <p>实名核验方式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IdentityVerificationMethod?: string
   /**
-   * 是否已经实名核验
+   * <p>是否已经实名核验</p>
    */
   IdentityVerified?: boolean
   /**
-   * 工作
+   * <p>工作</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Job?: string
   /**
-   * 国家
+   * <p>国家</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Nationality?: string
   /**
-   * 是否主账号（进行过账号融合后，主账号为true，从账号为false）
+   * <p>是否主账号（进行过账号融合后，主账号为true，从账号为false）</p>
    */
   Primary?: boolean
   /**
-   * 时区
+   * <p>时区</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
-   * 是否已经首次登录
+   * <p>是否已经首次登录</p>
    */
   AlreadyFirstLogin?: boolean
   /**
-   * 租户id
+   * <p>租户id</p>
    */
   TenantId?: string
   /**
-   * 用户目录id
+   * <p>用户目录id</p>
    */
   UserStoreId?: string
   /**
-   * 版本
+   * <p>版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: number
   /**
-   * 锁定类型（分为管理员锁定，和登录策略锁定）
+   * <p>锁定类型（分为管理员锁定，和登录策略锁定）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LockType?: string
   /**
-   * 锁定时间点
+   * <p>锁定时间点</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LockTime?: number
   /**
-   * 索引字段1
+   * <p>索引字段1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexedAttribute1?: string
   /**
-   * 索引字段2
+   * <p>索引字段2</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexedAttribute2?: string
   /**
-   * 索引字段3
+   * <p>索引字段3</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexedAttribute3?: string
   /**
-   * 索引字段4
+   * <p>索引字段4</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexedAttribute4?: string
   /**
-   * 索引字段5
+   * <p>索引字段5</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexedAttribute5?: string
+  /**
+   * <p>用户所属组织机构ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserOrgs?: Array<string>
+  /**
+   * <p>用户所属企业微信组织机构</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WeComUserOrgs?: Array<number | bigint>
 }
 
 /**
@@ -1092,7 +1105,7 @@ export interface ListUserGroupsResponse {
  */
 export interface UpdateUserResponse {
   /**
-   * 更新之后的用户信息
+   * <p>更新之后的用户信息</p>
    */
   User?: User
   /**
@@ -1226,65 +1239,69 @@ export interface LinkAccountResponse {
  */
 export interface CreateUserRequest {
   /**
-   * 用户目录ID
+   * <p>用户目录ID</p>
    */
   UserStoreId: string
   /**
-   * 手机号码
+   * <p>手机号码</p>
    */
   PhoneNumber: string
   /**
-   * 邮箱
+   * <p>邮箱</p>
    */
   Email: string
   /**
-   * 密码
+   * <p>密码</p>
    */
   Password: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   UserName: string
   /**
-   * 昵称
+   * <p>昵称</p>
    */
   Nickname?: string
   /**
-   * 地址
+   * <p>地址</p>
    */
   Address?: string
   /**
-   * 用户组ID
+   * <p>用户组ID</p>
    */
   UserGroup?: Array<string>
   /**
-   * 生日
+   * <p>生日</p>
    */
   Birthdate?: number
   /**
-   * 自定义属性
+   * <p>自定义属性</p>
    */
   CustomizationAttributes?: Array<MemberMap>
   /**
-   * 索引字段1
+   * <p>索引字段1</p>
    */
   IndexedAttribute1?: string
   /**
-   * 索引字段2
+   * <p>索引字段2</p>
    */
   IndexedAttribute2?: string
   /**
-   * 索引字段3
+   * <p>索引字段3</p>
    */
   IndexedAttribute3?: string
   /**
-   * 索引字段4
+   * <p>索引字段4</p>
    */
   IndexedAttribute4?: string
   /**
-   * 索引字段5
+   * <p>索引字段5</p>
    */
   IndexedAttribute5?: string
+  /**
+   * <p>用户所属组织机构ID</p>
+   */
+  UserOrg?: Array<string>
 }
 
 /**
@@ -1525,16 +1542,16 @@ export interface DescribeUserResponse {
  */
 export interface ListUserResponse {
   /**
-   * 总条数
+   * <p>总条数</p>
    */
   Total?: number
   /**
-   * 分页对象
+   * <p>分页对象</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Pageable?: Pageable
   /**
-   * 用户列表
+   * <p>用户列表</p>
    */
   Content?: Array<User>
   /**

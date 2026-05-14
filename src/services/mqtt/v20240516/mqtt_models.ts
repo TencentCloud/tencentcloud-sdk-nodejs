@@ -850,12 +850,10 @@ export interface ModifyInstanceRequest {
    * 客户端证书注册方式：
 JITP：自动注册
 API：手动通过API注册
-   * @deprecated
    */
   DeviceCertificateProvisionType?: string
   /**
    * 自动注册证书是否自动激活
-   * @deprecated
    */
   AutomaticActivation?: boolean
   /**

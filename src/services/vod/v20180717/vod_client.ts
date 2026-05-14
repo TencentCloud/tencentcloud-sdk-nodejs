@@ -91,6 +91,7 @@ import {
   RefreshUrlCacheRequest,
   SceneAigcVideoTaskInputFileInfo,
   FaceConfigureInfoForUpdate,
+  DescribeAIAnalysisTemplatesRequest,
   ContentReviewTemplateItem,
   AigcImageTaskOutputFileInfo,
   DeleteAIRecognitionTemplateResponse,
@@ -357,7 +358,7 @@ import {
   CreateContentReviewTemplateResponse,
   ModifyBlindWatermarkTemplateResponse,
   ModifyAnimatedGraphicsTemplateRequest,
-  DescribeAIAnalysisTemplatesRequest,
+  CreateAigcAudioCloneRequest,
   AigcAudioTask,
   MediaSampleSnapshotItem,
   TagConfigureInfoForUpdate,
@@ -732,6 +733,7 @@ import {
   DeleteProcessImageAsyncTemplateRequest,
   HeadTailConfigureInfo,
   EventContent,
+  CreateAigcAudioCloneResponse,
   HighlightsConfigureInfoForUpdate,
   IPFilterPolicy,
   UserDefineConfigureInfoForUpdate,
@@ -1734,13 +1736,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据转码模板唯一标识，获取转码模板详情列表。返回结果包含符合条件的所有用户自定义模板及[系统预置转码模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF)。
+   * 该接口用于创建 AIGC 音色复刻。注意，调用本接口会产生费用，请参考[计费文档](https://cloud.tencent.com/document/product/266/95125#96b3b59a-f9e1-49e9-966a-bedb70a4bf12)。
    */
-  async DescribeTranscodeTemplates(
-    req: DescribeTranscodeTemplatesRequest,
-    cb?: (error: string, rep: DescribeTranscodeTemplatesResponse) => void
-  ): Promise<DescribeTranscodeTemplatesResponse> {
-    return this.request("DescribeTranscodeTemplates", req, cb)
+  async CreateAigcAudioClone(
+    req: CreateAigcAudioCloneRequest,
+    cb?: (error: string, rep: CreateAigcAudioCloneResponse) => void
+  ): Promise<CreateAigcAudioCloneResponse> {
+    return this.request("CreateAigcAudioClone", req, cb)
   }
 
   /**
@@ -1786,13 +1788,24 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询转自适应码流模板，支持根据条件，分页查询。
-   */
-  async DescribeAdaptiveDynamicStreamingTemplates(
-    req: DescribeAdaptiveDynamicStreamingTemplatesRequest,
-    cb?: (error: string, rep: DescribeAdaptiveDynamicStreamingTemplatesResponse) => void
-  ): Promise<DescribeAdaptiveDynamicStreamingTemplatesResponse> {
-    return this.request("DescribeAdaptiveDynamicStreamingTemplates", req, cb)
+     * 该接口用于合成媒体文件，可以达到以下效果：
+
+1. **画面旋转**：对视频、图片的画面旋转一定角度，或按照某个方向翻转。
+2. **声音控制**：升高降低视频、音频中声音的音量，或者对视频静音。
+3. **画面叠加**：将视频、图片中的画面依序叠加在一起，如实现“画中画”的效果。
+4. **声音混合**：将视频、音频中的声音混合在一起（混音）。
+5. **声音提取**：将视频中的音频提取出来（不保留画面）。
+6. **裁剪**：对视频、音频裁剪出指定时间段。
+7. **拼接**：对视频、音频、图片按时间顺序前后拼接。
+8. **转场**：将多段视频或图片拼接时，可以在段落之间添加转场效果。
+
+合成后的媒体封装格式可以是 MP4（视频）或 MP3（音频）。如使用事件通知，事件通知的类型为 [视频合成完成](https://cloud.tencent.com/document/product/266/43000)。
+     */
+  async ComposeMedia(
+    req: ComposeMediaRequest,
+    cb?: (error: string, rep: ComposeMediaResponse) => void
+  ): Promise<ComposeMediaResponse> {
+    return this.request("ComposeMedia", req, cb)
   }
 
   /**
@@ -1966,6 +1979,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeImageSpriteTemplatesResponse) => void
   ): Promise<DescribeImageSpriteTemplatesResponse> {
     return this.request("DescribeImageSpriteTemplates", req, cb)
+  }
+
+  /**
+   * 根据转码模板唯一标识，获取转码模板详情列表。返回结果包含符合条件的所有用户自定义模板及[系统预置转码模板](https://cloud.tencent.com/document/product/266/33476#.E9.A2.84.E7.BD.AE.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF)。
+   */
+  async DescribeTranscodeTemplates(
+    req: DescribeTranscodeTemplatesRequest,
+    cb?: (error: string, rep: DescribeTranscodeTemplatesResponse) => void
+  ): Promise<DescribeTranscodeTemplatesResponse> {
+    return this.request("DescribeTranscodeTemplates", req, cb)
   }
 
   /**
@@ -2887,24 +2910,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口用于合成媒体文件，可以达到以下效果：
-
-1. **画面旋转**：对视频、图片的画面旋转一定角度，或按照某个方向翻转。
-2. **声音控制**：升高降低视频、音频中声音的音量，或者对视频静音。
-3. **画面叠加**：将视频、图片中的画面依序叠加在一起，如实现“画中画”的效果。
-4. **声音混合**：将视频、音频中的声音混合在一起（混音）。
-5. **声音提取**：将视频中的音频提取出来（不保留画面）。
-6. **裁剪**：对视频、音频裁剪出指定时间段。
-7. **拼接**：对视频、音频、图片按时间顺序前后拼接。
-8. **转场**：将多段视频或图片拼接时，可以在段落之间添加转场效果。
-
-合成后的媒体封装格式可以是 MP4（视频）或 MP3（音频）。如使用事件通知，事件通知的类型为 [视频合成完成](https://cloud.tencent.com/document/product/266/43000)。
-     */
-  async ComposeMedia(
-    req: ComposeMediaRequest,
-    cb?: (error: string, rep: ComposeMediaResponse) => void
-  ): Promise<ComposeMediaResponse> {
-    return this.request("ComposeMedia", req, cb)
+   * 查询转自适应码流模板，支持根据条件，分页查询。
+   */
+  async DescribeAdaptiveDynamicStreamingTemplates(
+    req: DescribeAdaptiveDynamicStreamingTemplatesRequest,
+    cb?: (error: string, rep: DescribeAdaptiveDynamicStreamingTemplatesResponse) => void
+  ): Promise<DescribeAdaptiveDynamicStreamingTemplatesResponse> {
+    return this.request("DescribeAdaptiveDynamicStreamingTemplates", req, cb)
   }
 
   /**

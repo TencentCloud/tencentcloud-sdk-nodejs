@@ -848,6 +848,16 @@ it("csip.v20221121.VerifyDspmAssetLoginCode", async function () {
     }
 })
 
+it("csip.v20221121.DescribeSkillScanPayInfo", async function () {
+    try {
+       const data = await client.DescribeSkillScanPayInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeDspmPersonApplyHistory", async function () {
     try {
        const data = await client.DescribeDspmPersonApplyHistory({})

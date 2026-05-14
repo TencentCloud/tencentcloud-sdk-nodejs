@@ -136,6 +136,20 @@ export interface DescribeDataResponse {
 }
 
 /**
+ * DescribeScores返回参数结构体
+ */
+export interface DescribeScoresResponse {
+  /**
+   * 数组
+   */
+  ScoreSet?: Array<ScoreInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteProject请求参数结构体
  */
 export interface DeleteProjectRequest {
@@ -666,6 +680,32 @@ export interface DescribeErrorResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyProjectLimit请求参数结构体
+ */
+export interface ModifyProjectLimitRequest {
+  /**
+   * 项目ID
+   */
+  ProjectID: number
+  /**
+   * 取值为[log speed performance webvitals pv event custom miniProgramData]其中之一
+   */
+  ProjectInterface?: string
+  /**
+   * 上报比例   10代表10%
+   */
+  ReportRate?: number
+  /**
+   * 上报类型 1：比例  2：上报量
+   */
+  ReportType?: number
+  /**
+   * 主键ID
+   */
+  ID?: number
 }
 
 /**
@@ -1846,6 +1886,80 @@ export interface CompareCondition {
 }
 
 /**
+ * ModifyProject请求参数结构体
+ */
+export interface ModifyProjectRequest {
+  /**
+   * 项目 id
+   */
+  ID: number
+  /**
+   * 应用名称(可选，不为空且最长为 200字符)
+   */
+  Name?: string
+  /**
+   * 项目网页地址(可选，最长为 256)
+   */
+  URL?: string
+  /**
+   * 项目仓库地址(可选，最长为 256)
+   */
+  Repo?: string
+  /**
+   * 项目需要转移到的实例 id(可选)
+   */
+  InstanceID?: string
+  /**
+   * 项目采样率(可选)
+   */
+  Rate?: string
+  /**
+   * 是否开启聚类(可选)
+   */
+  EnableURLGroup?: number
+  /**
+   * 项目类型(可接受值为 "web", "mp", "android", "ios", "node", "hippy", "weex", "viola", "rn")
+   */
+  Type?: string
+  /**
+   * 应用描述(可选，最长为 1000字符)
+   */
+  Desc?: string
+  /**
+   * 启动kafka配置
+   */
+  EnableKafka?: number
+  /**
+   * kafka_host
+   */
+  KafkaHost?: string
+  /**
+   * topic
+   */
+  KafkaTopic?: string
+  /**
+   * kafka_version
+   */
+  KafkaVersion?: string
+  /**
+   * kafka_username
+   */
+  SaslUserName?: string
+  /**
+   * kafka_pwd
+   */
+  SaslPassword?: string
+  /**
+   * SaslMechanism
+   */
+  SaslMechanism?: string
+  /**
+   * sink_id，日知汇算子id
+   */
+  SinkId?: number
+}
+
+/**
  * DescribeDataPerformancePageV2返回参数结构体
  */
 export interface DescribeDataPerformancePageV2Response {
@@ -2140,29 +2254,41 @@ export interface DescribeApplicationExitReportListRequest {
 }
 
 /**
- * ModifyProjectLimit请求参数结构体
+ * DescribeRumLogTotalV2请求参数结构体
  */
-export interface ModifyProjectLimitRequest {
+export interface DescribeRumLogTotalV2Request {
   /**
-   * 项目ID
+   * 排序方式 desc asc
    */
-  ProjectID: number
+  OrderBy: string
   /**
-   * 取值为[log speed performance webvitals pv event custom miniProgramData]其中之一
+   * 开始时间（必填）格式为时间戳 毫秒
    */
-  ProjectInterface?: string
+  StartTime: number
   /**
-   * 上报比例   10代表10%
+   * 单次查询返回的原始日志条数，最大值为100（必填）
    */
-  ReportRate?: number
+  Limit: number
   /**
-   * 上报类型 1：比例  2：上报量
+   * 查询的相关参数
    */
-  ReportType?: number
+  Filter: string
   /**
-   * 主键ID
+   * 结束时间（必填）格式为时间戳 毫秒
    */
-  ID?: number
+  EndTime: number
+  /**
+   * 项目ID（必填）
+   */
+  ID: number
+  /**
+   * 上次查询的最后一个日志的时间戳
+   */
+  LastTime?: number
+  /**
+   * 上次查询的最后一个日志的rowId
+   */
+  LastRowId?: number
 }
 
 /**
@@ -2722,6 +2848,36 @@ export interface DescribeDataLogUrlStatisticsResponse {
 }
 
 /**
+ * DescribeRumLogExportV2请求参数结构体
+ */
+export interface DescribeRumLogExportV2Request {
+  /**
+   * Export name
+   */
+  Name: string
+  /**
+   * Start time
+   */
+  StartTime: number
+  /**
+   * Query statement
+   */
+  Filter: string
+  /**
+   * End time
+   */
+  EndTime: number
+  /**
+   * Project ID
+   */
+  ID: number
+  /**
+   * c字段
+   */
+  Fields?: Array<string>
+}
+
+/**
  * DescribeDataLogUrlStatisticsV2返回参数结构体
  */
 export interface DescribeDataLogUrlStatisticsV2Response {
@@ -2889,6 +3045,20 @@ export interface DescribeDataPvUrlStatisticsRequest {
 0: 走旧逻辑，已下线，勿使用
    */
   IsNewData?: number
+}
+
+/**
+ * DescribeRumStatsLogListV2返回参数结构体
+ */
+export interface DescribeRumStatsLogListV2Response {
+  /**
+   * Query result in JSON string format
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3644,6 +3814,20 @@ export interface DescribeDataWebVitalsPageV2Response {
 }
 
 /**
+ * DescribeRumLogExportV2返回参数结构体
+ */
+export interface DescribeRumLogExportV2Response {
+  /**
+   * Query result in JSON string format
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResumeInstance返回参数结构体
  */
 export interface ResumeInstanceResponse {
@@ -3851,6 +4035,24 @@ export interface DescribeDataSetUrlStatisticsV2Request {
    * 时间段
    */
   Granularity?: string
+}
+
+/**
+ * DescribeRumLogExportsV2请求参数结构体
+ */
+export interface DescribeRumLogExportsV2Request {
+  /**
+   * Page size
+   */
+  PageSize: number
+  /**
+   * Page number
+   */
+  PageNum: number
+  /**
+   * Project ID
+   */
+  ID: number
 }
 
 /**
@@ -4276,17 +4478,29 @@ export interface DescribeDataBridgeUrlV2Response {
 }
 
 /**
- * DescribeScores返回参数结构体
+ * DescribeRumStatsLogListV2请求参数结构体
  */
-export interface DescribeScoresResponse {
+export interface DescribeRumStatsLogListV2Request {
   /**
-   * 数组
+   * 开始时间（必填）
    */
-  ScoreSet?: Array<ScoreInfo>
+  StartTime: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 单次查询返回的原始日志条数，最大值为100（必填）
    */
-  RequestId?: string
+  Limit: number
+  /**
+   * 过滤条件
+   */
+  Filter: string
+  /**
+   * 结束时间（必填）
+   */
+  EndTime: number
+  /**
+   * 项目ID（必填）
+   */
+  ID: number
 }
 
 /**
@@ -4354,6 +4568,20 @@ export interface DeleteStarProjectResponse {
    * 返回消息,请求成功才会返回，出现异常默认为null
    */
   Msg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRumLogDetailsV2返回参数结构体
+ */
+export interface DescribeRumLogDetailsV2Response {
+  /**
+   * 日志明细
+   */
+  Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4458,6 +4686,20 @@ export interface DescribeReleaseFileSignResponse {
    * 过期时间戳
    */
   ExpiredTime?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRumLogTotalV2返回参数结构体
+ */
+export interface DescribeRumLogTotalV2Response {
+  /**
+   * 日志总量
+   */
+  Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5574,77 +5816,17 @@ export interface DescribeIssuesStatisticsTrendResponse {
 }
 
 /**
- * ModifyProject请求参数结构体
+ * DescribeRumLogExportsV2返回参数结构体
  */
-export interface ModifyProjectRequest {
+export interface DescribeRumLogExportsV2Response {
   /**
-   * 项目 id
+   * Query result in JSON string format
    */
-  ID: number
+  Result?: string
   /**
-   * 应用名称(可选，不为空且最长为 200字符)
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
-  /**
-   * 项目网页地址(可选，最长为 256)
-   */
-  URL?: string
-  /**
-   * 项目仓库地址(可选，最长为 256)
-   */
-  Repo?: string
-  /**
-   * 项目需要转移到的实例 id(可选)
-   */
-  InstanceID?: string
-  /**
-   * 项目采样率(可选)
-   */
-  Rate?: string
-  /**
-   * 是否开启聚类(可选)
-   */
-  EnableURLGroup?: number
-  /**
-   * 项目类型(可接受值为 "web", "mp", "android", "ios", "node", "hippy", "weex", "viola", "rn")
-   */
-  Type?: string
-  /**
-   * 应用描述(可选，最长为 1000字符)
-   */
-  Desc?: string
-  /**
-   * 启动kafka配置
-   */
-  EnableKafka?: number
-  /**
-   * kafka_host
-   */
-  KafkaHost?: string
-  /**
-   * topic
-   */
-  KafkaTopic?: string
-  /**
-   * kafka_version
-   */
-  KafkaVersion?: string
-  /**
-   * kafka_username
-   */
-  SaslUserName?: string
-  /**
-   * kafka_pwd
-   */
-  SaslPassword?: string
-  /**
-   * SaslMechanism
-   */
-  SaslMechanism?: string
-  /**
-   * sink_id，日知汇算子id
-   */
-  SinkId?: number
+  RequestId?: string
 }
 
 /**
@@ -5679,6 +5861,20 @@ export interface DescribeRumLogListRequest {
    * 项目ID（必填）
    */
   ID: number
+}
+
+/**
+ * DescribeRumGroupLogV2返回参数结构体
+ */
+export interface DescribeRumGroupLogV2Response {
+  /**
+   * Query result in JSON string format
+   */
+  Result?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6140,6 +6336,44 @@ export interface DescribeFOOMReportListRequest {
 }
 
 /**
+ * DescribeRumLogDetailsV2请求参数结构体
+ */
+export interface DescribeRumLogDetailsV2Request {
+  /**
+   * 排序方式 desc asc
+   */
+  OrderBy: string
+  /**
+   * 开始时间（必填）格式为时间戳 毫秒
+   */
+  StartTime: number
+  /**
+   * 单次查询返回的原始日志条数，最大值为100（必填）
+   */
+  Limit: number
+  /**
+   * 查询的相关参数
+   */
+  Filter: string
+  /**
+   * 结束时间（必填）格式为时间戳 毫秒
+   */
+  EndTime: number
+  /**
+   * 项目ID（必填）
+   */
+  ID: number
+  /**
+   * 上次查询的最后一个日志的时间戳
+   */
+  LastTime?: number
+  /**
+   * 上次查询的最后一个日志的rowId
+   */
+  LastRowId?: number
+}
+
+/**
  * DescribeLagANRProblemFeatureAccounts请求参数结构体
  */
 export interface DescribeLagANRProblemFeatureAccountsRequest {
@@ -6489,6 +6723,44 @@ export interface Filters {
    * 值
    */
   Values?: Array<string>
+}
+
+/**
+ * DescribeRumGroupLogV2请求参数结构体
+ */
+export interface DescribeRumGroupLogV2Request {
+  /**
+   * 排序方式 desc asc（必填）
+   */
+  OrderBy: string
+  /**
+   * 开始时间（必填）
+   */
+  StartTime: number
+  /**
+   * 单次查询返回的原始日志条数，最大值为100（必填）
+   */
+  Limit: number
+  /**
+   * 过滤条件
+   */
+  Filter: string
+  /**
+   * 结束时间（必填）
+   */
+  EndTime: number
+  /**
+   * 项目ID（必填）
+   */
+  ID: number
+  /**
+   * 聚合字段
+   */
+  Label: string
+  /**
+   * 页数，第几页
+   */
+  Last?: number
 }
 
 /**

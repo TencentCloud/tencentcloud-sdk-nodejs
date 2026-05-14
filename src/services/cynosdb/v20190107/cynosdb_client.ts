@@ -1585,7 +1585,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 此接口（DescribeInstanceSlowQueries）用于查询实例慢日志详情。
+   * 此接口（DescribeInstanceSlowQueries）用于查询实例慢日志详情。受到平台返回大小限制，当返回结果过大时，可能会对超过限制的内容进行截断。
    */
   async DescribeInstanceSlowQueries(
     req: DescribeInstanceSlowQueriesRequest,

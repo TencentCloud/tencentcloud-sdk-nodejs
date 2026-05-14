@@ -30,6 +30,8 @@ import {
   DescribeReduceFaceJobRequest,
   DescribeHunyuanTo3DMotionJobRequest,
   SubmitHunyuanTo3DRapidJobResponse,
+  SubmitAutoRiggingJobResponse,
+  DescribeAutoRiggingJobResponse,
   SubmitHunyuanTo3DUVJobRequest,
   File3D,
   SubmitProfileTo3DJobRequest,
@@ -40,6 +42,7 @@ import {
   SubmitProfileTo3DJobResponse,
   DescribeHunyuanTo3DMotionJobResponse,
   SubmitHunyuanTo3DRapidJobRequest,
+  SubmitAutoRiggingJobRequest,
   SubmitHunyuanTo3DMotionJobResponse,
   SubmitHunyuanTo3DUVJobResponse,
   SubmitHunyuan3DPartJobResponse,
@@ -55,6 +58,7 @@ import {
   Image,
   QueryHunyuanTo3DProJobResponse,
   QueryHunyuan3DPartJobRequest,
+  DescribeAutoRiggingJobRequest,
   QueryHunyuanTo3DRapidJobRequest,
 } from "./ai3d_models"
 
@@ -119,6 +123,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SubmitHunyuanTo3DRapidJobResponse) => void
   ): Promise<SubmitHunyuanTo3DRapidJobResponse> {
     return this.request("SubmitHunyuanTo3DRapidJob", req, cb)
+  }
+
+  /**
+     * 3D模型绑骨蒙皮接口，基于混元大模型，根据输入的人物或动物模型进行绑骨蒙皮，输出带骨骼信息的3D模型。
+默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后，才能开始处理下一个任务。
+     */
+  async DescribeAutoRiggingJob(
+    req: DescribeAutoRiggingJobRequest,
+    cb?: (error: string, rep: DescribeAutoRiggingJobResponse) => void
+  ): Promise<DescribeAutoRiggingJobResponse> {
+    return this.request("DescribeAutoRiggingJob", req, cb)
   }
 
   /**
@@ -236,6 +251,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryHunyuanTo3DProJobResponse) => void
   ): Promise<QueryHunyuanTo3DProJobResponse> {
     return this.request("QueryHunyuanTo3DProJob", req, cb)
+  }
+
+  /**
+     * 3D模型绑骨蒙皮接口，基于混元大模型，根据输入的人物或动物模型进行绑骨蒙皮，输出带骨骼信息的3D模型。
+默认提供1个并发，代表最多能同时处理1个已提交的任务，上一个任务处理完毕后，才能开始处理下一个任务。
+     */
+  async SubmitAutoRiggingJob(
+    req: SubmitAutoRiggingJobRequest,
+    cb?: (error: string, rep: SubmitAutoRiggingJobResponse) => void
+  ): Promise<SubmitAutoRiggingJobResponse> {
+    return this.request("SubmitAutoRiggingJob", req, cb)
   }
 
   /**

@@ -35,6 +35,7 @@ import {
   DescribeSlowQueryRecordsDownloadResponse,
   DeleteWorkloadGroupRequest,
   WorkloadGroupConfig,
+  BackupScheduleInfo,
   DescribeInstancesResponse,
   CosSourceInfo,
   ReduceInstanceResponse,

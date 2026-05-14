@@ -14902,292 +14902,297 @@ export interface TableInfo {
  */
 export interface IntegrationTaskInfo {
   /**
-   * 任务名称
+   * <p>任务名称</p>
    */
   TaskName?: string
   /**
-   * 任务描述
+   * <p>任务描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 同步类型1.解决方案(整库迁移),2.单表同步
+   * <p>同步类型1.解决方案(整库迁移),2.单表同步</p>
    */
   SyncType?: number
   /**
-   * 201.实时,202.离线
+   * <p>201.实时,202.离线</p>
    */
   TaskType?: number
   /**
-   * 任务所属工作流id
+   * <p>任务所属工作流id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowId?: string
   /**
-   * 任务id
+   * <p>任务id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
-   * 任务调度id(oceanus or us等作业id)，非填项
+   * <p>任务调度id(oceanus or us等作业id)，非填项</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleTaskId?: string
   /**
-   * inlong任务id
+   * <p>inlong任务id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskGroupId?: string
   /**
-   * 项目id
+   * <p>项目id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: string
   /**
-   * 创建人uin
+   * <p>创建人uin</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatorUin?: string
   /**
-   * 操作人uin
+   * <p>操作人uin</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OperatorUin?: string
   /**
-   * owner uin
+   * <p>owner uin</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnerUin?: string
   /**
-   * 应用id
+   * <p>应用id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: string
   /**
-   * 0:新建(任务开发态默认状态)|1:未开始|2:操作中|3:运行中|4:暂停|5:任务停止中|6:停止|7:执行失败|20:异常|21:未知|
+   * <p>0:新建(任务开发态默认状态)|1:未开始|2:操作中|3:运行中|4:暂停|5:任务停止中|6:停止|7:执行失败|20:异常|21:未知|</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
-   * 节点列表
+   * <p>节点列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Nodes?: Array<IntegrationNodeInfo>
   /**
-   * 执行资源id
+   * <p>执行资源id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorId?: string
   /**
-   * 任务配置信息
+   * <p>任务配置信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Config?: Array<RecordField>
   /**
-   * 任务扩展配置信息
+   * <p>任务扩展配置信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtConfig?: Array<RecordField>
   /**
-   * 任务执行context信息
+   * <p>任务执行context信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecuteContext?: Array<RecordField>
   /**
-   * 节点映射
+   * <p>节点映射</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Mappings?: Array<IntegrationNodeMapping>
   /**
-   * 任务配置模式，0:画布 1:表单 3:脚本
+   * <p>任务配置模式，0:画布 1:表单 3:脚本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskMode?: string
   /**
-   * 责任人
+   * <p>责任人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Incharge?: string
   /**
-   * 离线新增参数
+   * <p>离线新增参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OfflineTaskAddEntity?: OfflineTaskAddParam
   /**
-   * group name
+   * <p>group name</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorGroupName?: string
   /**
-   * inlong manager url
+   * <p>inlong manager url</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InLongManagerUrl?: string
   /**
-   * stream id
+   * <p>stream id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InLongStreamId?: string
   /**
-   * version
+   * <p>version</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InLongManagerVersion?: string
   /**
-   * inlong dataproxy url
+   * <p>inlong dataproxy url</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataProxyUrl?: Array<string>
   /**
-   * 任务版本是否已提交运维
+   * <p>任务版本是否已提交运维</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Submit?: boolean
   /**
-   * 数据源类型：MYSQL|POSTGRE|ORACLE|SQLSERVER|FTP|HIVE|HDFS|ICEBERG|KAFKA|HBASE|SPARK|VIRTUAL|TBASE|DB2|DM|GAUSSDB|GBASE|IMPALA|ES|S3_DATAINSIGHT|GREENPLUM|PHOENIX|SAP_HANA|SFTP|OCEANBASE|CLICKHOUSE|KUDU|VERTICA|REDIS|COS|DLC|DLCV1|DORIS|CKAFKA|DTS_KAFKA|S3|CDW|LOCAL|TDSQLC|TDSQL|TDSQL_MYSQL|MONGODB|INFORMIX|SYBASE|REST_API|SuperSQL|PRESTO|DR_SUM|TiDB|StarRocks|Trino|Kyuubi|GDB|TCHOUSE_X|TCHOUSE_P|TDSQL_POSTGRE
+   * <p>数据源类型：MYSQL|POSTGRE|ORACLE|SQLSERVER|FTP|HIVE|HDFS|ICEBERG|KAFKA|HBASE|SPARK|VIRTUAL|TBASE|DB2|DM|GAUSSDB|GBASE|IMPALA|ES|S3_DATAINSIGHT|GREENPLUM|PHOENIX|SAP_HANA|SFTP|OCEANBASE|CLICKHOUSE|KUDU|VERTICA|REDIS|COS|DLC|DLCV1|DORIS|CKAFKA|DTS_KAFKA|S3|CDW|LOCAL|TDSQLC|TDSQL|TDSQL_MYSQL|MONGODB|INFORMIX|SYBASE|REST_API|SuperSQL|PRESTO|DR_SUM|TiDB|StarRocks|Trino|Kyuubi|GDB|TCHOUSE_X|TCHOUSE_P|TDSQL_POSTGRE</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InputDatasourceType?: string
   /**
-   * 数据源类型：MYSQL|POSTGRE|ORACLE|SQLSERVER|FTP|HIVE|HDFS|ICEBERG|KAFKA|HBASE|SPARK|VIRTUAL|TBASE|DB2|DM|GAUSSDB|GBASE|IMPALA|ES|S3_DATAINSIGHT|GREENPLUM|PHOENIX|SAP_HANA|SFTP|OCEANBASE|CLICKHOUSE|KUDU|VERTICA|REDIS|COS|DLC|DLCV1|DORIS|CKAFKA|DTS_KAFKA|S3|CDW|LOCAL|TDSQLC|TDSQL|TDSQL_MYSQL|MONGODB|INFORMIX|SYBASE|REST_API|SuperSQL|PRESTO|DR_SUM|TiDB|StarRocks|Trino|Kyuubi|GDB|TCHOUSE_X|TCHOUSE_P|TDSQL_POSTGRE
+   * <p>数据源类型：MYSQL|POSTGRE|ORACLE|SQLSERVER|FTP|HIVE|HDFS|ICEBERG|KAFKA|HBASE|SPARK|VIRTUAL|TBASE|DB2|DM|GAUSSDB|GBASE|IMPALA|ES|S3_DATAINSIGHT|GREENPLUM|PHOENIX|SAP_HANA|SFTP|OCEANBASE|CLICKHOUSE|KUDU|VERTICA|REDIS|COS|DLC|DLCV1|DORIS|CKAFKA|DTS_KAFKA|S3|CDW|LOCAL|TDSQLC|TDSQL|TDSQL_MYSQL|MONGODB|INFORMIX|SYBASE|REST_API|SuperSQL|PRESTO|DR_SUM|TiDB|StarRocks|Trino|Kyuubi|GDB|TCHOUSE_X|TCHOUSE_P|TDSQL_POSTGRE</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OutputDatasourceType?: string
   /**
-   * 读取条数
+   * <p>读取条数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NumRecordsIn?: number
   /**
-   * 写入条数
+   * <p>写入条数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NumRecordsOut?: number
   /**
-   * 读取延迟
+   * <p>读取延迟</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReaderDelay?: number
   /**
-   * 重启次数
+   * <p>重启次数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NumRestarts?: number
   /**
-   * 任务创建时间
+   * <p>任务创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 任务更新时间
+   * <p>任务更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
-   * 任务最后一次运行时间
+   * <p>任务最后一次运行时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastRunTime?: string
   /**
-   * 任务停止时间
+   * <p>任务停止时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StopTime?: string
   /**
-   * 作业是否已提交
+   * <p>作业是否已提交</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HasVersion?: boolean
   /**
-   * 任务是否被锁定
+   * <p>任务是否被锁定</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Locked?: boolean
   /**
-   * 任务锁定人
+   * <p>任务锁定人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Locker?: string
   /**
-   * 耗费资源量
+   * <p>耗费资源量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningCu?: number
   /**
-   * 该任务关联的告警规则
+   * <p>该任务关联的告警规则</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskAlarmRegularList?: Array<string>
   /**
-   * 实时任务资源分层情况： 0：进行中,1：成功 ,2：失败
+   * <p>实时任务资源分层情况： 0：进行中,1：成功 ,2：失败</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SwitchResource?: number
   /**
-   * 实时任务读取阶段：0：全部全量,1：部分全量,2：全部增量
+   * <p>实时任务读取阶段：0：全部全量,1：部分全量,2：全部增量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReadPhase?: number
   /**
-   * 实时任务版本号
+   * <p>实时任务版本号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceVersion?: number
   /**
-   * 离线任务导入到编排空间的任务id
+   * <p>离线任务导入到编排空间的任务id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ArrangeSpaceTaskId?: string
   /**
-   * 离线任务状态区分1.未提交2.已提交3.已导出
+   * <p>离线任务状态区分1.未提交2.已提交3.已导出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OfflineTaskStatus?: number
   /**
-   * 导入到编排空间配置
+   * <p>导入到编排空间配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskImportInfo?: TaskImportInfo
   /**
-   * 业务延迟
+   * <p>业务延迟</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BusinessLatency?: number
   /**
-   * 当前同步位点
+   * <p>当前同步位点</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CurrentSyncPosition?: number
   /**
-   * 标签列表
+   * <p>标签列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagList?: Array<IntegrationTag>
   /**
-   * 错误信息
+   * <p>错误信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMessage?: string
   /**
-   * 任务子状态
+   * <p>任务子状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskSubType?: number
   /**
-   * 是否存在SavePoint, 0-存在, 1-不存在, null 为未知
+   * <p>是否存在SavePoint, 0-存在, 1-不存在, null 为未知</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NotExistsCheckPoint?: number
   /**
-   * savepiontPath
+   * <p>savepiontPath</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SavePointId?: string
   /**
-   * savepiontId
+   * <p>savepiontId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SavePointPath?: string
+  /**
+   * <p>最近一次操作信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastOperateInfo?: LastOperateInfo
 }
 
 /**
@@ -20735,25 +20740,32 @@ export interface TaskLinkDsDTO {
 }
 
 /**
- * ModifyDsFolder请求参数结构体
+ * 最近一次的操作信息
  */
-export interface ModifyDsFolderRequest {
+export interface LastOperateInfo {
   /**
-   * 项目Id
+   * <p>任务事件</p>
    */
-  ProjectId: string
+  TaskEvent?: string
   /**
-   * 文件夹名称
+   * <p>操作ID</p>
    */
-  FolderName: string
+  OperateId?: string
   /**
-   * 文件夹Id
+   * <p>错误信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  FolderId: string
+  ErrorMsg?: string
   /**
-   * 父文件夹ID
+   * <p>创建时间</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParentsFolderId?: string
+  CreatedTime?: string
+  /**
+   * <p>更新时间</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdatedTime?: string
 }
 
 /**
@@ -27119,6 +27131,28 @@ export interface DescribeResourceManagePathTreesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDsFolder请求参数结构体
+ */
+export interface ModifyDsFolderRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId: string
+  /**
+   * 文件夹名称
+   */
+  FolderName: string
+  /**
+   * 文件夹Id
+   */
+  FolderId: string
+  /**
+   * 父文件夹ID
+   */
+  ParentsFolderId?: string
 }
 
 /**

@@ -415,6 +415,7 @@ import {
   ListSQLFolderContentsRequest,
   DeleteWorkflowPermission,
   CreateTaskRequest,
+  WorkflowRunConfig,
   ListTriggerTasksResponse,
   GetOpsTriggerWorkflowRequest,
   GetDataSourceRequest,

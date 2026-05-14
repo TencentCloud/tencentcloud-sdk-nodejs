@@ -10759,6 +10759,10 @@ export interface DesignVoiceAsyncRequest {
    */
   VoiceProfile?: VoiceProfile
   /**
+   * <p>试听音频文本。长度不超过500</p>
+   */
+  Text?: string
+  /**
    * <p>扩展参数，json字符串</p>
    */
   ExtParam?: string
@@ -13750,6 +13754,10 @@ export interface DescribeDesignTaskResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VoiceId?: string
+  /**
+   * <p>试听音频Url</p>
+   */
+  AudioUrl?: string
   /**
    * <p>扩展信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
@@ -23741,7 +23749,11 @@ export interface SmartSubtitleTaskTransTextSegmentItem {
  */
 export interface AddOnImageInput {
   /**
-   * 图片路径。
+   * <p>图片类型。</p>
+   */
+  Type?: string
+  /**
+   * <p>图片路径。</p>
    */
   Image?: MediaInputInfo
 }
