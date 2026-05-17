@@ -2559,6 +2559,20 @@ export interface Strategy {
 export type RemoveBypassAllRuleRequest = null
 
 /**
+ * ModifyOwaspDomainUpdateStatus请求参数结构体
+ */
+export interface ModifyOwaspDomainUpdateStatusRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 新规则状态，0为关闭，1为开启，2为仅观察
+   */
+  UpdateStatus: number
+}
+
+/**
  * ModifyInstanceAttackLogPost返回参数结构体
  */
 export interface ModifyInstanceAttackLogPostResponse {
@@ -8453,6 +8467,16 @@ export interface DeleteSessionRequest {
    * 要删除的SessionID
    */
   SessionID?: number
+}
+
+/**
+ * ModifyOwaspDomainUpdateStatus返回参数结构体
+ */
+export interface ModifyOwaspDomainUpdateStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

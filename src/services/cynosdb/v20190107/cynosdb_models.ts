@@ -1559,7 +1559,7 @@ export interface CynosdbInstance {
    */
   Storage?: number
   /**
-   * <p>实例类型</p>
+   * <p>实例类型</p><p>枚举值：</p><ul><li>rw： 读写实例</li><li>ro： 只读实例</li></ul>
    */
   InstanceType?: string
   /**
@@ -10060,128 +10060,119 @@ export interface ModifyClusterSlaveZoneResponse {
  */
 export interface RollbackToNewClusterRequest {
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone: string
   /**
-   * 回档时，传入源集群ID，用于查找源poolId
+   * <p>回档时，传入源集群ID，用于查找源poolId</p>
    */
   OriginalClusterId: string
   /**
-   * 所属VPC网络ID
+   * <p>所属VPC网络ID</p>
    */
   UniqVpcId?: string
   /**
-   * 所属子网ID
+   * <p>所属子网ID</p>
    */
   UniqSubnetId?: string
   /**
-   * 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'）
+   * <p>集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（&#39;-&#39;,&#39;_&#39;,&#39;.&#39;）</p>
    */
   ClusterName?: string
   /**
-   * 快照回档，表示snapshotId；时间点回档，表示queryId，为0，表示需要判断时间点是否有效
+   * <p>快照回档，表示snapshotId；时间点回档，表示queryId，为0，表示需要判断时间点是否有效</p>
    */
   RollbackId?: number
   /**
-   * 时间点回档，指定时间；快照回档，快照时间
+   * <p>时间点回档，指定时间；快照回档，快照时间</p>
    */
   ExpectTime?: string
   /**
-   * 是否自动选择代金券 1是 0否 默认为0
+   * <p>是否自动选择代金券 1是 0否 默认为0</p>
    */
   AutoVoucher?: number
   /**
-   * 集群创建需要绑定的tag数组信息
+   * <p>集群创建需要绑定的tag数组信息</p>
    */
   ResourceTags?: Array<Tag>
   /**
-   * Db类型
-当DbType为MYSQL时可选(默认NORMAL)：
-<li>NORMAL</li>
-<li>SERVERLESS</li>
+   * <p>Db类型<br>当DbType为MYSQL时可选(默认NORMAL)：</p><li>NORMAL</li><li>SERVERLESS</li>
    */
   DbMode?: string
   /**
-   * 当DbMode为SEVERLESS时必填
-cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+   * <p>当DbMode为SEVERLESS时必填<br>cpu最小值，可选范围参考DescribeServerlessInstanceSpecs接口返回</p>
    */
   MinCpu?: number
   /**
-   * 当DbMode为SEVERLESS时必填：
-cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
+   * <p>当DbMode为SEVERLESS时必填：<br>cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回</p>
    */
   MaxCpu?: number
   /**
-   * 当DbMode为SEVERLESS时，指定集群是否自动暂停，可选范围
-<li>yes</li>
-<li>no</li>
-默认值:yes
+   * <p>当DbMode为SEVERLESS时，指定集群是否自动暂停，可选范围</p><li>yes</li><li>no</li>默认值:yes
    */
   AutoPause?: string
   /**
-   * 当DbMode为SEVERLESS时，指定集群自动暂停的延迟，单位秒，可选范围[600,691200]
-默认值:600
+   * <p>当DbMode为SEVERLESS时，指定集群自动暂停的延迟，单位秒，可选范围[600,691200]<br>默认值:600</p>
    */
   AutoPauseDelay?: number
   /**
-   * 安全组id数组
+   * <p>安全组id数组</p>
    */
   SecurityGroupIds?: Array<string>
   /**
-   * 告警策略Id数组
+   * <p>告警策略Id数组</p>
    */
   AlarmPolicyIds?: Array<string>
   /**
-   * 参数数组，暂时支持character_set_server （utf8｜latin1｜gbk｜utf8mb4） ，lower_case_table_names，1-大小写不敏感，0-大小写敏感
+   * <p>参数数组，暂时支持character_set_server （utf8｜latin1｜gbk｜utf8mb4） ，lower_case_table_names，1-大小写不敏感，0-大小写敏感</p>
    */
   ClusterParams?: Array<ParamItem>
   /**
-   * 参数模板ID，可以通过查询参数模板信息DescribeParamTemplates获得参数模板ID
+   * <p>参数模板ID，可以通过查询参数模板信息DescribeParamTemplates获得参数模板ID</p>
    */
   ParamTemplateId?: number
   /**
-   * 实例初始化配置信息，主要用于购买集群时选不同规格实例
+   * <p>实例初始化配置信息，主要用于购买集群时选不同规格实例</p>
    */
   InstanceInitInfos?: Array<InstanceInitInfo>
   /**
-   * 0-下单并支付 1-下单
+   * <p>0-下单并支付 1-下单</p>
    */
   DealMode?: number
   /**
-   * 计算节点付费模式：0-按量计费，1-预付费
+   * <p>计算节点付费模式：0-按量计费，1-预付费</p>
    */
   PayMode?: number
   /**
-   * 时间
+   * <p>时间</p>
    */
   TimeSpan?: number
   /**
-   * 单位
+   * <p>单位</p>
    */
   TimeUnit?: string
   /**
-   * 回档库信息
+   * <p>回档库信息</p>
    */
   RollbackDatabases?: Array<RollbackDatabase>
   /**
-   * 回档表信息
+   * <p>回档表信息</p>
    */
   RollbackTables?: Array<RollbackTable>
   /**
-   * 原ro实例信息
+   * <p>原ro实例信息</p>
    */
   OriginalROInstanceList?: Array<string>
   /**
-   * 项目id
+   * <p>项目id</p>
    */
   ProjectId?: number
   /**
-   * 是否开启归档，可选范围<li>yes</li><li>no</li>默认值:yes
+   * <p>是否开启归档，可选范围<li>yes</li><li>no</li>默认值:yes</p>
    */
   AutoArchive?: string
   /**
-   * 是否从保存备份中恢复
+   * <p>是否从保存备份中恢复</p>
    */
   FromSaveBackup?: boolean
 }
@@ -14662,23 +14653,23 @@ export interface DescribeInstancesWithinSameClusterResponse {
  */
 export interface RollbackToNewClusterResponse {
   /**
-   * 冻结流水ID
+   * <p>冻结流水ID</p>
    */
   TranId?: string
   /**
-   * 订单号
+   * <p>订单号</p>
    */
   DealNames?: Array<string>
   /**
-   * 资源ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取资源ID）
+   * <p>资源ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取资源ID）</p>
    */
   ResourceIds?: Array<string>
   /**
-   * 集群ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取集群ID）
+   * <p>集群ID列表（该字段已不再维护，请使用dealNames字段查询接口DescribeResourcesByDealName获取集群ID）</p>
    */
   ClusterIds?: Array<string>
   /**
-   * 大订单号
+   * <p>大订单号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BigDealIds?: Array<string>

@@ -126,6 +126,7 @@ import {
   DescribePostCKafkaFlowsResponse,
   Strategy,
   RemoveBypassAllRuleRequest,
+  ModifyOwaspDomainUpdateStatusRequest,
   ModifyInstanceAttackLogPostResponse,
   UpsertCCRuleResponse,
   DescribeHostRequest,
@@ -353,6 +354,7 @@ import {
   AccessLogItem,
   SwitchDomainRulesRequest,
   DeleteSessionRequest,
+  ModifyOwaspDomainUpdateStatusResponse,
   SearchAttackLogRequest,
   AddCustomRuleResponse,
   DescribeFlowTrendResponse,
@@ -802,6 +804,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyUserSignatureRuleResponse) => void
   ): Promise<ModifyUserSignatureRuleResponse> {
     return this.request("ModifyUserSignatureRule", req, cb)
+  }
+
+  /**
+   * 更新规则类型的防护等级
+   */
+  async ModifyOwaspRuleTypeLevel(
+    req: ModifyOwaspRuleTypeLevelRequest,
+    cb?: (error: string, rep: ModifyOwaspRuleTypeLevelResponse) => void
+  ): Promise<ModifyOwaspRuleTypeLevelResponse> {
+    return this.request("ModifyOwaspRuleTypeLevel", req, cb)
   }
 
   /**
@@ -1556,13 +1568,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新规则类型的防护等级
+   * 修改域名新规则状态
    */
-  async ModifyOwaspRuleTypeLevel(
-    req: ModifyOwaspRuleTypeLevelRequest,
-    cb?: (error: string, rep: ModifyOwaspRuleTypeLevelResponse) => void
-  ): Promise<ModifyOwaspRuleTypeLevelResponse> {
-    return this.request("ModifyOwaspRuleTypeLevel", req, cb)
+  async ModifyOwaspDomainUpdateStatus(
+    req: ModifyOwaspDomainUpdateStatusRequest,
+    cb?: (error: string, rep: ModifyOwaspDomainUpdateStatusResponse) => void
+  ): Promise<ModifyOwaspDomainUpdateStatusResponse> {
+    return this.request("ModifyOwaspDomainUpdateStatus", req, cb)
   }
 
   /**

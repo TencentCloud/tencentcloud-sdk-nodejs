@@ -158,6 +158,16 @@ it("waf.v20180125.ModifyUserSignatureRule", async function () {
     }
 })
 
+it("waf.v20180125.ModifyOwaspRuleTypeLevel", async function () {
+    try {
+       const data = await client.ModifyOwaspRuleTypeLevel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DescribeAreaBanAreas", async function () {
     try {
        const data = await client.DescribeAreaBanAreas({})
@@ -908,9 +918,9 @@ it("waf.v20180125.DescribeOwaspRuleTypes", async function () {
     }
 })
 
-it("waf.v20180125.ModifyOwaspRuleTypeLevel", async function () {
+it("waf.v20180125.ModifyOwaspDomainUpdateStatus", async function () {
     try {
-       const data = await client.ModifyOwaspRuleTypeLevel({})
+       const data = await client.ModifyOwaspDomainUpdateStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

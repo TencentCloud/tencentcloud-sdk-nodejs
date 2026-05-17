@@ -123,6 +123,10 @@ export interface CreateModelServiceRequest {
    * <p>Fallback模型配置</p>
    */
   FallbackModels?: Array<TargetModelDTO>
+  /**
+   * <p>模型协议</p>
+   */
+  ModelProtocol?: string
 }
 
 /**
@@ -801,6 +805,10 @@ export interface ModifyModelServiceRequest {
    * <p>备份模型</p>
    */
   FallbackModels?: Array<TargetModelDTO>
+  /**
+   * <p>模型类型</p>
+   */
+  ModelProtocol?: string
 }
 
 /**
@@ -808,7 +816,7 @@ export interface ModifyModelServiceRequest {
  */
 export interface ModifyModelResponse {
   /**
-   * 结果集
+   * <p>结果集</p>
    */
   Data?: ResultIDVO
   /**
@@ -1013,37 +1021,45 @@ export interface ResultIDVO {
  */
 export interface CreateModelRequest {
   /**
-   * 实例
+   * <p>实例</p>
    */
   InstanceID: string
   /**
-   * 模型名称
+   * <p>模型名称</p>
    */
   Name: string
   /**
-   * 协议类型：http/https
+   * <p>协议类型：http/https</p>
    */
   HttpProtocolType: string
   /**
-   * 目标路径
+   * <p>目标路径</p>
    */
   TargetPath: string
   /**
-   * 目标服务器
+   * <p>目标服务器</p>
    */
   TargetHosts: Array<TargetHostDTO>
   /**
-   * 凭据ID
+   * <p>凭据ID</p>
    */
   CredentialID?: string
   /**
-   * https时，是否检查证书合法
+   * <p>https时，是否检查证书合法</p>
    */
   CheckTargetCertsError?: boolean
   /**
-   * http协议版本：1.1/2.0
+   * <p>http协议版本：1.1/2.0</p>
    */
   HttpProtocolVersion?: string
+  /**
+   * <p>model ID</p>
+   */
+  ModelID?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
 }
 
 /**
@@ -1093,6 +1109,11 @@ export interface SensitiveDataCheckConfigDTO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckItems?: Array<string>
+  /**
+   * <p>检测上下文</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContextScope?: string
 }
 
 /**
@@ -1210,7 +1231,7 @@ export interface DeleteAgentAppModelServicesResponse {
  */
 export interface CreateModelResponse {
   /**
-   * 结果集
+   * <p>结果集</p>
    */
   Data?: ResultIDVO
   /**
@@ -1660,41 +1681,49 @@ export interface DeleteMcpServerRequest {
  */
 export interface ModifyModelRequest {
   /**
-   * 实例
+   * <p>实例</p>
    */
   InstanceID: string
   /**
-   * 模型ID
+   * <p>模型ID</p>
    */
   ID: string
   /**
-   * 模型名称
+   * <p>模型名称</p>
    */
   Name?: string
   /**
-   * 协议类型：http/https
+   * <p>协议类型：http/https</p>
    */
   HttpProtocolType?: string
   /**
-   * 目标路径
+   * <p>目标路径</p>
    */
   TargetPath?: string
   /**
-   * 目标服务器
+   * <p>目标服务器</p>
    */
   TargetHosts?: Array<TargetHostDTO>
   /**
-   * 凭据ID
+   * <p>凭据ID</p>
    */
   CredentialID?: string
   /**
-   * https时，是否检查证书合法
+   * <p>https时，是否检查证书合法</p>
    */
   CheckTargetCertsError?: boolean
   /**
-   * http协议版本：1.1/2.0
+   * <p>http协议版本：1.1/2.0</p>
    */
   HttpProtocolVersion?: string
+  /**
+   * <p>model ID</p>
+   */
+  ModelID?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
 }
 
 /**
@@ -1789,41 +1818,45 @@ export interface DescribeAgentAppMcpServersResponse {
  */
 export interface DescribeModelServicesRequest {
   /**
-   * 实例
+   * <p>实例</p>
    */
   InstanceID: string
   /**
-   * 分页参数
+   * <p>分页参数</p>
    */
   Offset?: number
   /**
-   * 分页限制
+   * <p>分页限制</p>
    */
   Limit?: number
   /**
-   * ID列表
+   * <p>ID列表</p>
    */
   IDs?: Array<string>
   /**
-   * 排除的ID列表
+   * <p>排除的ID列表</p>
    */
   NotIDs?: Array<string>
   /**
-   * 状态：normal，disabled
+   * <p>状态：normal，disabled</p>
    */
   Status?: string
   /**
-   * 关键词
+   * <p>关键词</p>
    */
   Keyword?: string
   /**
-   * 模型ID
+   * <p>模型ID</p>
    */
   ModelID?: string
   /**
-   * 排序
+   * <p>排序</p>
    */
   Sort?: DescribeModelServicesSort
+  /**
+   * <p>模型类型，OpenAI或Anthropic</p>
+   */
+  ModelProtocol?: string
 }
 
 /**
@@ -1845,35 +1878,40 @@ export interface DescribeMcpServerRequest {
  */
 export interface TmsConfigDTO {
   /**
-   * 检测范围,请求/响应
+   * <p>检测范围,请求/响应</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Scope?: Array<string>
   /**
-   * 检测形式
+   * <p>检测形式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Mode?: string
   /**
-   * 执行动作
+   * <p>执行动作</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Action?: string
   /**
-   * 合并请求检测event数，联动Mode字段sync
+   * <p>合并请求检测event数，联动Mode字段sync</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MergeCount?: number
   /**
-   * 风控策略
+   * <p>风控策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BizType?: string
   /**
-   * 响应拦截内容
+   * <p>响应拦截内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InterceptMessage?: string
+  /**
+   * <p>检测上下文</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContextScope?: string
 }
 
 /**
@@ -1980,65 +2018,73 @@ export interface ModifyAgentCredentialResponse {
  */
 export interface DescribeModelResponseVO {
   /**
-   * 腾讯云AppID
+   * <p>腾讯云AppID</p>
    */
   AppID?: number
   /**
-   * 腾讯云Uin
+   * <p>腾讯云Uin</p>
    */
   Uin?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceID?: string
   /**
-   * 模型ID
+   * <p>模型ID</p>
    */
   ID?: string
   /**
-   * 模型名称
+   * <p>模型名称</p>
    */
   Name?: string
   /**
-   * 凭据ID
+   * <p>凭据ID</p>
    */
   CredentialID?: string
   /**
-   * 凭据名称
+   * <p>凭据名称</p>
    */
   CredentialName?: string
   /**
-   * http协议类型
+   * <p>http协议类型</p>
    */
   HttpProtocolType?: string
   /**
-   * https时，是否校验目标证书
+   * <p>https时，是否校验目标证书</p>
    */
   CheckTargetCertsError?: boolean
   /**
-   * http协议版本：1.1/2.0
+   * <p>http协议版本：1.1/2.0</p>
    */
   HttpProtocolVersion?: string
   /**
-   * 目标路径
+   * <p>目标路径</p>
    */
   TargetPath?: string
   /**
-   * 目标器列表
+   * <p>目标器列表</p>
    */
   TargetHosts?: Array<TargetHostDTO>
   /**
-   * 被模型服务使用的个数
+   * <p>被模型服务使用的个数</p>
    */
   ModelServiceCount?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 最后修改时间
+   * <p>最后修改时间</p>
    */
   LastUpdateTime?: string
+  /**
+   * <p>model ID</p>
+   */
+  ModelID?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
 }
 
 /**
@@ -2180,15 +2226,20 @@ export interface DeleteAgentAppMcpServersResponse {
  */
 export interface PromptModerateConfigDTO {
   /**
-   * 执行动作
+   * <p>执行动作</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Action?: string
   /**
-   * 响应拦截内容
+   * <p>响应拦截内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InterceptMessage?: string
+  /**
+   * <p>检测上下文</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContextScope?: string
 }
 
 /**
@@ -2709,6 +2760,11 @@ export interface DescribeModelServiceResponseVO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FallbackModels?: Array<TargetModelDTO>
+  /**
+   * <p>模型类型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelProtocol?: string
 }
 
 /**
@@ -2876,7 +2932,7 @@ export interface DescribeModelsResponse {
  */
 export interface DescribeModelServicesResponse {
   /**
-   * 结果集
+   * <p>结果集</p>
    */
   Data?: DescribeModelServicesResponseVO
   /**

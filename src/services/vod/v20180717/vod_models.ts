@@ -3878,27 +3878,29 @@ export interface ModifyMediaStorageClassResponse {
  */
 export interface DescribeProcedureTemplatesRequest {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 任务流模板名字过滤条件，数组长度限制：100。
+   * <p>任务流模板名字过滤条件，数组长度限制：100。</p>
    */
   Names?: Array<string>
   /**
-   * 任务流模板类型过滤条件，可选值：
-<li>Preset：系统预置任务流模板；</li>
-<li>Custom：用户自定义任务流模板。</li>
+   * <p>任务流模板类型过滤条件，可选值：</p><li>Preset：系统预置任务流模板；</li><li>Custom：用户自定义任务流模板。</li>
    */
   Type?: string
   /**
-   * 分页偏移量，默认值：0。
+   * <p>分页偏移量，默认值：0。</p>
    */
   Offset?: number
   /**
-   * 返回记录条数，默认值：10，最大值：100。
+   * <p>返回记录条数，默认值：10，最大值：100。</p>
    */
   Limit?: number
+  /**
+   * <p>指定字段对返回结果进行生序或者降序Sort.Field 目前只支持 CreateTime 。Sort.Order 为 desc（降序）或者 asc（升序）</p><p>入参限制：当前仅支持排序字段为CreateTime</p>
+   */
+  SortBy?: Array<SortBy>
 }
 
 /**
@@ -24702,11 +24704,11 @@ export interface CreateSubAppIdRequest {
  */
 export interface DescribeProcedureTemplatesResponse {
   /**
-   * 符合过滤条件的记录总数。
+   * <p>符合过滤条件的记录总数。</p>
    */
   TotalCount?: number
   /**
-   * 任务流模板详情列表。
+   * <p>任务流模板详情列表。</p>
    */
   ProcedureTemplateSet?: Array<ProcedureTemplate>
   /**

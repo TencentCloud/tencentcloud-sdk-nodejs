@@ -2876,6 +2876,10 @@ export interface CreateSealResponse {
    */
   SealId?: string
   /**
+   * <p>电子印章预览链接地址，地址默认失效时间为24小时。</p>
+   */
+  ImageUrl?: string
+  /**
    * <p>人脸验证操作人链接，用法可以参考&quot;<a href="https://qian.tencent.com/developers/company/openwxminiprogram/">跳转电子签小程序配置</a>&quot;，默认为空。</p>
    */
   SealOperatorVerifyPath?: string
@@ -2884,11 +2888,11 @@ export interface CreateSealResponse {
    */
   SealOperatorVerifyQrcodeUrl?: string
   /**
-   * <p>创建印章预览逻辑，返回的是印章加盖在示例文件上的效果图片链接。</p>
+   * <p>创建印章预览逻辑，返回的是印章加盖在示例文件上的效果图片链接。链接有效期为90天。</p>
    */
   PreviewFileUrl?: string
   /**
-   * <p>创建印章预览逻辑，返回的是印章加盖在示例文件上的效果PDF文件链接。</p>
+   * <p>创建印章预览逻辑，返回的是印章加盖在示例文件上的效果PDF文件链接。链接有效期为90天。</p>
    */
   PreviewPdfUrl?: string
   /**

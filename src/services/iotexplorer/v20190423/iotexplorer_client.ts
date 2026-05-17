@@ -400,6 +400,7 @@ import {
   DevicesItem,
   TalkProductConfigV2Info,
   OtaModuleInfo,
+  DescribeLicenseOverviewRequest,
   CloudStorageAIServiceTaskFileInfo,
   DeleteTWeTalkProductConfigV2Response,
   VisionSummaryConfig,
@@ -432,7 +433,7 @@ import {
   ProductEntry,
   BindDeviceInfo,
   CloudStorageAIServiceTask,
-  PublishRRPCMessageRequest,
+  DescribeLicenseOverviewResponse,
   ListTopicPolicyRequest,
   GenerateSignedVideoURLResponse,
   InvokeVideosKeywordsAnalyzerRequest,
@@ -528,6 +529,7 @@ import {
   ModifyLoRaGatewayRequest,
   DescribeCloudStorageTimeRequest,
   EnableTopicRuleRequest,
+  PublishRRPCMessageRequest,
   DescribeFirmwareTaskRequest,
 } from "./iotexplorer_models"
 
@@ -1580,6 +1582,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyProductCloudStorageAIServiceResponse) => void
   ): Promise<ModifyProductCloudStorageAIServiceResponse> {
     return this.request("ModifyProductCloudStorageAIService", req, cb)
+  }
+
+  /**
+   * 查询实例概览详情。
+   */
+  async DescribeLicenseOverview(
+    req: DescribeLicenseOverviewRequest,
+    cb?: (error: string, rep: DescribeLicenseOverviewResponse) => void
+  ): Promise<DescribeLicenseOverviewResponse> {
+    return this.request("DescribeLicenseOverview", req, cb)
   }
 
   /**

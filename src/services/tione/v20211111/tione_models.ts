@@ -736,205 +736,191 @@ export interface CreateDatasetResponse {
  */
 export interface Service {
   /**
-   * 服务组id
+   * <p>服务组id</p>
    */
   ServiceGroupId?: string
   /**
-   * 服务id
+   * <p>服务id</p>
    */
   ServiceId?: string
   /**
-   * 服务组名
+   * <p>服务组名</p>
    */
   ServiceGroupName?: string
   /**
-   * 服务描述
+   * <p>服务描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceDescription?: string
   /**
-   * 服务的详细信息
+   * <p>服务的详细信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceInfo?: ServiceInfo
   /**
-   * 集群id
+   * <p>集群id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
-   * 地域
+   * <p>地域</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
-   * 命名空间
+   * <p>命名空间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
   /**
-   * 付费类型
+   * <p>付费类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ChargeType?: string
   /**
-   * 包年包月服务的资源组id，按量计费的服务为空
+   * <p>包年包月服务的资源组id，按量计费的服务为空</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupId?: string
   /**
-   * 包年包月服务对应的资源组名字
+   * <p>包年包月服务对应的资源组名字</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupName?: string
   /**
-   * 服务的标签
+   * <p>服务的标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
-   * 服务所在的 ingress 的 name
+   * <p>服务所在的 ingress 的 name</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IngressName?: string
   /**
-   * 创建者
+   * <p>创建者</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedBy?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
-   * 主账号
+   * <p>主账号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin?: string
   /**
-   * 子账号
+   * <p>子账号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubUin?: string
   /**
-   * app_id
+   * <p>app_id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: number
   /**
-   * 服务的业务状态
-CREATING 创建中
-CREATE_FAILED 创建失败
-CREATE_SUCCEED 创建成功
-ARREARS_STOP 因欠费停止
-WHITELIST_STOP 白名单额度不足
-RELEASE_FAILED 资源释放失败
-WHITELIST_RELEASE_FAILED 白名单资源释放失败
-TIMEOUT_EXCEPTION 创建超时异常
-BILLING 计费中
-WHITELIST_USING 白名单试用中
+   * <p>服务的业务状态<br>CREATING 创建中<br>CREATE_FAILED 创建失败<br>CREATE_SUCCEED 创建成功<br>ARREARS_STOP 因欠费停止<br>WHITELIST_STOP 白名单额度不足<br>RELEASE_FAILED 资源释放失败<br>WHITELIST_RELEASE_FAILED 白名单资源释放失败<br>TIMEOUT_EXCEPTION 创建超时异常<br>BILLING 计费中<br>WHITELIST_USING 白名单试用中</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BusinessStatus?: string
   /**
-   * 已废弃,以ServiceInfo中的对应为准
+   * <p>已废弃,以ServiceInfo中的对应为准</p>
    * @deprecated
    */
   ServiceLimit?: ServiceLimit
   /**
-   * 已废弃,以ServiceInfo中的对应为准
+   * <p>已废弃,以ServiceInfo中的对应为准</p>
    * @deprecated
    */
   ScheduledAction?: ScheduledAction
   /**
-   * 服务创建失败的原因，创建成功后该字段为默认值 CREATE_SUCCEED
+   * <p>服务创建失败的原因，创建成功后该字段为默认值 CREATE_SUCCEED</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateFailedReason?: string
   /**
-   * 服务状态
-CREATING 创建中
-CREATE_FAILED 创建失败
-TIMEOUT_EXCEPTION 创建超时异常
-Normal 正常运行中
-Stopped 已停止
-Stopping 停止中
-Abnormal 异常
-Pending 启动中
-Waiting 就绪中
+   * <p>服务状态<br>CREATING 创建中<br>CREATE_FAILED 创建失败<br>TIMEOUT_EXCEPTION 创建超时异常<br>Normal 正常运行中<br>Stopped 已停止<br>Stopping 停止中<br>Abnormal 异常<br>Pending 启动中<br>Waiting 就绪中</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
-   * 费用信息
+   * <p>费用信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingInfo?: string
   /**
-   * 模型权重
+   * <p>模型权重</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Weight?: number
   /**
-   * 服务的创建来源
-AUTO_ML: 来自自动学习的一键发布
-DEFAULT: 其他来源
+   * <p>服务的创建来源<br>AUTO_ML: 来自自动学习的一键发布<br>DEFAULT: 其他来源</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateSource?: string
   /**
-   * 版本号
+   * <p>版本号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
   /**
-   * 服务组下服务的最高版本号
+   * <p>服务组下服务的最高版本号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestVersion?: string
   /**
-   * 资源组类别 托管 NORMAL，纳管 SW
+   * <p>资源组类别 托管 NORMAL，纳管 SW</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupSWType?: string
   /**
-   * 服务的归档状态  Waiting 等待归档中，Archived 已归档
+   * <p>服务的归档状态  Waiting 等待归档中，Archived 已归档</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ArchiveStatus?: string
   /**
-   * 服务的部署类型 [STANDARD 标准部署，DIST 分布式多机部署] 默认STANDARD
+   * <p>服务的部署类型 [STANDARD 标准部署，DIST 分布式多机部署] 默认STANDARD</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeployType?: string
   /**
-   * 单副本下的实例数，仅在部署类型为DIST时生效，默认1
+   * <p>单副本下的实例数，仅在部署类型为DIST时生效，默认1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstancePerReplicas?: string
   /**
-   * 用于监控查询的Source
-枚举值，部分情况下与CreateSource不同，通过该字段兼容
+   * <p>用于监控查询的Source<br>枚举值，部分情况下与CreateSource不同，通过该字段兼容</p>
    */
   MonitorSource?: string
   /**
-   * 服务创建者的子账号名称
+   * <p>服务创建者的子账号名称</p>
    */
   SubUinName?: string
   /**
-   * 服务的调度策略
+   * <p>服务的调度策略</p>
    */
   SchedulingPolicy?: SchedulingPolicy
   /**
-   * 外部的资源组信息，表示借调了哪些资源组的资源
+   * <p>外部的资源组信息，表示借调了哪些资源组的资源</p>
    */
   ExternalResourceGroups?: Array<ResourceGroupInfo>
+  /**
+   * <p>变更服务的子账户</p>
+   */
+  Changer?: string
+  /**
+   * <p>变更服务的子账户名称</p>
+   */
+  ChangerName?: string
 }
 
 /**
@@ -2585,42 +2571,42 @@ export interface DescribeModelServiceGroupsResponse {
  */
 export interface Spec {
   /**
-   * 计费项标签
+   * <p>计费项标签</p>
    */
   SpecId?: string
   /**
-   * 计费项名称
+   * <p>计费项名称</p>
    */
   SpecName?: string
   /**
-   * 计费项显示名称
+   * <p>计费项显示名称</p>
    */
   SpecAlias?: string
   /**
-   * 是否售罄
+   * <p>是否售罄</p>
    */
   Available?: boolean
   /**
-   * 当前资源售罄时，可用的区域有哪些
+   * <p>当前资源售罄时，可用的区域有哪些</p>
    */
   AvailableRegion?: Array<string>
   /**
-   * 当前计费项支持的特性
+   * <p>当前计费项支持的特性</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SpecFeatures?: Array<string>
   /**
-   * 计费项类型
+   * <p>计费项类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SpecType?: string
   /**
-   * GPU类型
+   * <p>GPU类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GpuType?: string
   /**
-   * 计费项CategoryId
+   * <p>计费项CategoryId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CategoryId?: string
@@ -3519,15 +3505,19 @@ export interface DescribeInferTemplatesResponse {
  */
 export interface DescribeBillingSpecsRequest {
   /**
-   * 付费模式：POSTPAID_BY_HOUR按量计费、PREPAID包年包月
+   * <p>付费模式：POSTPAID_BY_HOUR按量计费、PREPAID包年包月</p>
    */
   ChargeType: string
   /**
-   * 枚举值：空、TRAIN、NOTEBOOK、INFERENCE或EMS
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+  /**
+   * <p>枚举值：空、TRAIN、NOTEBOOK、INFERENCE或EMS</p>
    */
   TaskType?: string
   /**
-   * 资源类型：["", "CALC", "CPU", "GPU", "GPU-SW"]
+   * <p>资源类型：[&quot;&quot;, &quot;CALC&quot;, &quot;CPU&quot;, &quot;GPU&quot;, &quot;GPU-SW&quot;]</p>
    */
   ResourceType?: string
 }
@@ -4866,83 +4856,67 @@ export interface WeightEntry {
  */
 export interface Instance {
   /**
-   * 资源组节点id
+   * <p>资源组节点id</p>
    */
   InstanceId?: string
   /**
-   * 节点已用资源
+   * <p>节点已用资源</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UsedResource?: ResourceInfo
   /**
-   * 节点总资源
+   * <p>节点总资源</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalResource?: ResourceInfo
   /**
-   * 节点状态 
-注意：此字段为枚举值
-说明: 
-DEPLOYING: 部署中
-RUNNING: 运行中 
-DEPLOY_FAILED: 部署失败
-RELEASING 释放中 
-RELEASED：已释放 
-EXCEPTION：异常
-DEBT_OR_EXPIRED: 欠费过期
+   * <p>节点状态<br>注意：此字段为枚举值<br>说明:<br>DEPLOYING: 部署中<br>RUNNING: 运行中<br>DEPLOY_FAILED: 部署失败<br>RELEASING 释放中<br>RELEASED：已释放<br>EXCEPTION：异常<br>DEBT_OR_EXPIRED: 欠费过期</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceStatus?: string
   /**
-   * 创建人
+   * <p>创建人</p>
    */
   SubUin?: string
   /**
-   * 创建时间: 
-注意：北京时间，比如: 2021-12-01 12:00:00
+   * <p>创建时间:<br>注意：北京时间，比如: 2021-12-01 12:00:00</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 到期时间
-注意：北京时间，比如：2021-12-11 12:00:00
+   * <p>到期时间<br>注意：北京时间，比如：2021-12-11 12:00:00</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: string
   /**
-   * 自动续费标识
-注意：此字段为枚举值
-说明：
-NOTIFY_AND_MANUAL_RENEW：手动续费(取消自动续费)且到期通知
-NOTIFY_AND_AUTO_RENEW：自动续费且到期通知
-DISABLE_NOTIFY_AND_MANUAL_RENEW：手动续费(取消自动续费)且到期不通知
+   * <p>自动续费标识<br>注意：此字段为枚举值<br>说明：<br>NOTIFY_AND_MANUAL_RENEW：手动续费(取消自动续费)且到期通知<br>NOTIFY_AND_AUTO_RENEW：自动续费且到期通知<br>DISABLE_NOTIFY_AND_MANUAL_RENEW：手动续费(取消自动续费)且到期不通知</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRenewFlag?: string
   /**
-   * 计费项ID
+   * <p>计费项ID</p>
    */
   SpecId?: string
   /**
-   * 计费项别名
+   * <p>计费项别名</p>
    */
   SpecAlias?: string
   /**
-   * 计费项特性列表
+   * <p>计费项特性列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SpecFeatures?: Array<string>
   /**
-   * 纳管cvmid
+   * <p>纳管cvmid</p>
    */
   CvmInstanceId?: string
   /**
-   * 部署失败错误码
+   * <p>部署失败错误码</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrCode?: string
   /**
-   * 部署失败错误信息
+   * <p>部署失败错误信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrMsg?: string
@@ -5040,7 +5014,7 @@ export interface CreateExportRequest {
  */
 export interface DescribeBillingSpecsResponse {
   /**
-   * 计费项列表
+   * <p>计费项列表</p>
    */
   Specs?: Array<Spec>
   /**
@@ -5356,81 +5330,81 @@ export interface SidecarSpec {
  */
 export interface Pod {
   /**
-   * pod名
+   * <p>pod名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * pod的唯一id
+   * <p>pod的唯一id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Uid?: string
   /**
-   * 服务付费模式
+   * <p>服务付费模式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ChargeType?: string
   /**
-   * pod的状态
+   * <p>pod的状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Phase?: string
   /**
-   * pod的IP
+   * <p>pod的IP</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IP?: string
   /**
-   * pod的创建时间
+   * <p>pod的创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 容器列表
+   * <p>容器列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   Containers?: Container
   /**
-   * 容器列表
+   * <p>容器列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ContainerInfos?: Array<Container>
   /**
-   * 容器调用信息
+   * <p>容器调用信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CrossTenantENIInfo?: CrossTenantENIInfo
   /**
-   * 实例的状态信息
+   * <p>实例的状态信息</p>
    */
   Status?: string
   /**
-   * 实例的开始调度时间
+   * <p>实例的开始调度时间</p>
    */
   StartScheduleTime?: string
   /**
-   * 实例状态的补充信息
+   * <p>实例状态的补充信息</p>
    */
   Message?: string
   /**
-   * 当前实例所在的节点 IP
+   * <p>当前实例所在的节点 IP</p>
    */
   NodeIP?: string
   /**
-   * 当前实例所在节点id
+   * <p>当前实例所在节点id</p>
    */
   NodeId?: string
   /**
-   * 当时实例所属资源组 id
+   * <p>当时实例所属资源组 id</p>
    */
   ResourceGroupId?: string
   /**
-   * 资源组名称
+   * <p>资源组名称</p>
    */
   ResourceGroupName?: string
   /**
-   * 实例的资源占用信息
+   * <p>实例的资源占用信息</p>
    */
   ResourceInfo?: ResourceInfo
 }
@@ -6329,6 +6303,14 @@ export interface ServiceGroup {
    * <p>网关路由相关配置</p>
    */
   GatewayConfig?: GatewayConfig
+  /**
+   * <p>变更服务的子账户</p>
+   */
+  Changer?: string
+  /**
+   * <p>变更服务的子账户名称</p>
+   */
+  ChangerName?: string
 }
 
 /**

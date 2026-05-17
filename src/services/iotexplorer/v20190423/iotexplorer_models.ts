@@ -8471,6 +8471,16 @@ export interface OtaModuleInfo {
 }
 
 /**
+ * DescribeLicenseOverview请求参数结构体
+ */
+export interface DescribeLicenseOverviewRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+}
+
+/**
  * 云存 AI 任务输出文件信息
  */
 export interface CloudStorageAIServiceTaskFileInfo {
@@ -9265,21 +9275,13 @@ export interface CloudStorageAIServiceTask {
 }
 
 /**
- * PublishRRPCMessage请求参数结构体
+ * DescribeLicenseOverview返回参数结构体
  */
-export interface PublishRRPCMessageRequest {
+export interface DescribeLicenseOverviewResponse {
   /**
-   * 产品ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ProductId: string
-  /**
-   * 设备名称
-   */
-  DeviceName: string
-  /**
-   * 消息内容，utf8编码
-   */
-  Payload: string
+  RequestId?: string
 }
 
 /**
@@ -11430,6 +11432,24 @@ export interface EnableTopicRuleRequest {
    * 规则名称
    */
   RuleName: string
+}
+
+/**
+ * PublishRRPCMessage请求参数结构体
+ */
+export interface PublishRRPCMessageRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 消息内容，utf8编码
+   */
+  Payload: string
 }
 
 /**
