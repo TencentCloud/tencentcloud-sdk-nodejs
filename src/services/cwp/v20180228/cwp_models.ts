@@ -8699,11 +8699,11 @@ export interface ProcessStatistics {
  */
 export interface DescribeLicenseBindListResponse {
   /**
-   * 总条数
+   * <p>总条数</p>
    */
   TotalCount?: number
   /**
-   * 绑定机器列表信息
+   * <p>绑定机器列表信息</p>
    */
   List?: Array<LicenseBindDetail>
   /**
@@ -29881,29 +29881,27 @@ export interface DescribeRecommendedProtectCpuResponse {
  */
 export interface DescribeLicenseBindListRequest {
   /**
-   * 授权ID
+   * <p>授权ID取DescribeLicenseList接口List对象下的LicenseId参数值</p>
    */
   LicenseId: number
   /**
-   * 授权类型
+   * <p>授权类型</p><p>枚举值：</p><ul><li>0： 专业版-按量计费</li><li>1： 专业版-包年包月(主机安全)</li><li>2： 旗舰版-包年包月(主机安全)</li><li>3： 轻量版-LH-包年包月</li><li>6： 专业版-包年包月（云安全中心）</li><li>7： 旗舰版-包年包月（云安全中心）</li></ul>
    */
   LicenseType: number
   /**
-   * 资源ID
+   * <p>资源ID,取DescribeLicenseList接口List对象下的ResourceId参数值</p>
    */
   ResourceId: string
   /**
-   * <li>InstanceID、IP、
-
-MachineName 模糊查询</li>
+   * <li>InstanceID、IP、<p>MachineName 模糊查询</li></p>
    */
   Filters?: Array<Filters>
   /**
-   * 限制条数,默认10.
+   * <p>限制条数,默认10.</p>
    */
   Limit?: number
   /**
-   * 偏移量,默认0.
+   * <p>偏移量,默认0.</p>
    */
   Offset?: number
 }

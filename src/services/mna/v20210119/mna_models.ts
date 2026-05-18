@@ -503,57 +503,61 @@ export interface DestIpInfo {
  */
 export interface DeviceBaseInfo {
   /**
-   * 设备唯一ID
+   * <p>设备唯一ID</p>
    */
   DeviceId?: string
   /**
-   * 设备名称
+   * <p>设备名称</p>
    */
   DeviceName?: string
   /**
-   * 设备创建的时间，单位：ms
+   * <p>设备创建的时间，单位：ms</p>
    */
   CreateTime?: string
   /**
-   * 设备最后在线时间，单位：ms
+   * <p>设备最后在线时间，单位：ms</p>
    */
   LastTime?: string
   /**
-   * 设备的备注
+   * <p>设备的备注</p>
    */
   Remark?: string
   /**
-   * 接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入）
+   * <p>接入环境。0：公有云网关；1：自有网关；2：公有云网关和自有网关。默认公有云网关。 具体含义： 公有云网关：即该设备只能接入公有云网关（就近接入） 自有网关：即该设备只能接入已经注册上线的自有网关（就近接入或固定ip接入） 公有云网关和自有网关：即该设备同时可以接入公有云网关和已经注册上线的自有网关（就近接入或固定ip接入）</p>
    */
   AccessScope?: number
   /**
-   * license授权有效期 0：月度授权 1：永久授权
+   * <p>license授权有效期 0：月度授权 1：永久授权</p>
    */
   LicensePayMode?: number
   /**
-   * 付费方 0：厂商付费 1：客户付费
+   * <p>付费方 0：厂商付费 1：客户付费</p>
    */
   Payer?: number
   /**
-   * 设备分组ID
+   * <p>设备分组ID</p>
    */
   GroupId?: string
   /**
-   * 设备分组名称
+   * <p>设备分组名称</p>
    */
   GroupName?: string
   /**
-   * 设备无流量包处理方式，0: 按量付费，1: 截断加速
+   * <p>设备无流量包处理方式，0: 按量付费，1: 截断加速</p>
    */
   FlowTrunc?: number
   /**
-   * 设备sn
+   * <p>设备sn</p>
    */
   Sn?: string
   /**
-   * 厂商
+   * <p>厂商</p>
    */
   Vendor?: string
+  /**
+   * <p>可接入地域列表。</p>
+   */
+  AllowedRegions?: Array<string>
 }
 
 /**
@@ -807,15 +811,11 @@ export interface GetFlowStatisticByGroupResponse {
  */
 export interface GetNetMonitorResponse {
   /**
-   * 监控数据
+   * <p>监控数据</p>
    */
   MonitorData?: Array<MonitorData>
   /**
-   * 接入区域。取值范围：['MC','AP','EU','AM']
-MC=中国大陆
-AP=亚太
-EU=欧洲
-AM=美洲
+   * <p>接入区域。取值范围：[&#39;MC&#39;,&#39;AP&#39;,&#39;EU&#39;,&#39;AM&#39;]<br>MC=中国大陆<br>AP=亚太<br>EU=欧洲<br>AM=美洲</p>
    */
   AccessRegion?: string
   /**
@@ -2141,23 +2141,23 @@ export interface UpdateHardwareRequest {
  */
 export interface GetNetMonitorRequest {
   /**
-   * 设备id
+   * <p>设备id</p>
    */
   DeviceId: string
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   BeginTime: number
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime: number
   /**
-   * 统计指标（上行速率："TxRate":bit/s，下行速率："RxRate":bit/s，丢包："Loss":%，时延："RTT":ms）
+   * <p>统计指标（上行速率：&quot;TxRate&quot;:bit/s，下行速率：&quot;RxRate&quot;:bit/s，丢包：&quot;Loss&quot;:%，时延：&quot;RTT&quot;:ms）</p>
    */
   Metrics: string
   /**
-   * 网关类型。0：公有云网关；1：自有网关。不传默认为0。
+   * <p>网关类型。0：公有云网关；1：自有网关。不传默认为0。</p>
    */
   GatewayType?: number
 }

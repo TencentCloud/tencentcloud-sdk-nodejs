@@ -432,7 +432,7 @@ export interface DescribeRecentSessionListRequest {
  */
 export interface DescribeDeviceSessionDetailsResponse {
   /**
-   * 按设备区分的会话详细数据
+   * <p>按设备区分的会话详细数据</p>
    */
   Details?: Array<SessionDeviceDetail>
   /**
@@ -1061,151 +1061,155 @@ export interface DescribeDeviceListRequest {
  */
 export interface SessionDeviceDetail {
   /**
-   * 设备类型：field或remote
+   * <p>设备类型：field或remote</p>
    */
   DeviceType?: string
   /**
-   * 起始点位时间，单位：秒
+   * <p>起始点位时间，单位：秒</p>
    */
   StartTime?: number
   /**
-   * 结束点位时间，单位：秒
+   * <p>结束点位时间，单位：秒</p>
    */
   EndTime?: number
   /**
-   * 会话ID
+   * <p>会话ID</p>
    */
   SessionId?: string
   /**
-   * 码率，单位：kbps
+   * <p>码率，单位：kbps</p>
    */
   Rate?: Array<number | bigint>
   /**
-   * 帧率
+   * <p>帧率</p>
    */
   Fps?: Array<number | bigint>
   /**
-   * 丢包率，单位：%
+   * <p>丢包率，单位：%</p>
    */
   Lost?: Array<number>
   /**
-   * 网络时延，单位：ms
+   * <p>网络时延，单位：ms</p>
    */
   NetworkLatency?: Array<number | bigint>
   /**
-   * 视频时延，单位：ms
+   * <p>视频时延，单位：ms</p>
    */
   VideoLatency?: Array<number | bigint>
   /**
-   * CPU使用率，单位：%
+   * <p>CPU使用率，单位：%</p>
    */
   CpuUsed?: Array<number>
   /**
-   * 内存使用率，单位：%
+   * <p>内存使用率，单位：%</p>
    */
   MemUsed?: Array<number>
   /**
-   * 时间偏移量，单位：秒
+   * <p>时间偏移量，单位：秒</p>
    */
   TimeOffset?: Array<number | bigint>
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId?: string
   /**
-   * 设备ID
+   * <p>设备ID</p>
    */
   DeviceId?: string
   /**
-   * sdk版本
+   * <p>sdk版本</p>
    */
   Ver?: string
   /**
-   * 模式(p2p/server)
+   * <p>模式(p2p/server)</p>
    */
   SdkMode?: string
   /**
-   * 解码耗时，单位：ms
+   * <p>解码耗时，单位：ms</p>
    */
   DecodeCost?: Array<number | bigint>
   /**
-   * 【已废弃，使用RenderCost】
+   * <p>【已废弃，使用RenderCost】</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   RenderConst?: Array<number | bigint>
   /**
-   * 卡顿k100
+   * <p>卡顿k100</p>
    */
   K100?: Array<number>
   /**
-   * 卡顿k150
+   * <p>卡顿k150</p>
    */
   K150?: Array<number>
   /**
-   * nack请求数
+   * <p>nack请求数</p>
    */
   NACK?: Array<number | bigint>
   /**
-   * 服务端调控码率,单位：kbps
+   * <p>服务端调控码率,单位：kbps</p>
    */
   BitRateEstimate?: Array<number | bigint>
   /**
-   * 宽度
+   * <p>宽度</p>
    */
   Width?: number
   /**
-   * 高度
+   * <p>高度</p>
    */
   Height?: number
   /**
-   * 编码耗时，单位：ms
+   * <p>编码耗时，单位：ms</p>
    */
   EncodeCost?: Array<number | bigint>
   /**
-   * 采集耗时，单位：ms
+   * <p>采集耗时，单位：ms</p>
    */
   CaptureCost?: Array<number | bigint>
   /**
-   * 渲染耗时，单位：ms
+   * <p>渲染耗时，单位：ms</p>
    */
   RenderCost?: Array<number | bigint>
   /**
-   * 配置宽度
+   * <p>配置宽度</p>
    */
   ConfigWidth?: number
   /**
-   * 配置高度
+   * <p>配置高度</p>
    */
   ConfigHeight?: number
   /**
-   * 平均帧间隔
+   * <p>平均帧间隔</p>
    */
   FrameDelta?: Array<number | bigint>
   /**
-   * 最大帧间隔
+   * <p>最大帧间隔</p>
    */
   MaxFrameDelta?: Array<number | bigint>
   /**
-   * 总码率评估,单位：kbps
+   * <p>总码率评估,单位：kbps</p>
    */
   TotalBitrateEstimate?: Array<number | bigint>
   /**
-   * 帧间隔大于100ms的卡顿时长
+   * <p>帧间隔大于100ms的卡顿时长</p>
    */
   Lag100Duration?: Array<number | bigint>
   /**
-   * 帧间隔大于150ms的卡顿时长
+   * <p>帧间隔大于150ms的卡顿时长</p>
    */
   Lag150Duration?: Array<number | bigint>
   /**
-   * 是否开启多网：0 单网，1 多网
+   * <p>是否开启多网：0 单网，1 多网</p>
    */
   MultiMode?: number
   /**
-   * 多网卡信息
+   * <p>多网卡信息</p>
    */
   MultiNet?: Array<MultiNet>
+  /**
+   * <p>现场设备和远端设备消息通道往返延迟</p><p>单位：毫秒ms</p>
+   */
+  ControlLatency?: Array<number | bigint>
 }
 
 /**
@@ -1467,9 +1471,17 @@ export interface BoundLicensesResponse {
  */
 export interface DescribeDeviceSessionDetailsRequest {
   /**
-   * 会话ID
+   * <p>会话ID</p>
    */
   SessionId: string
+  /**
+   * <p>查询指标开始时间</p><p>单位：秒</p>
+   */
+  StartTime?: number
+  /**
+   * <p>查询指标结束时间</p><p>单位：秒</p>
+   */
+  EndTime?: number
 }
 
 /**

@@ -1552,73 +1552,77 @@ export interface ObjectTypeJsonParse {
  */
 export interface TaskListItem {
   /**
-   * 任务ID
+   * <p>任务ID</p>
    */
   TaskId?: number
   /**
-   * 任务标题
+   * <p>任务标题</p>
    */
   TaskTitle?: string
   /**
-   * 任务描述
+   * <p>任务描述</p>
    */
   TaskDescription?: string
   /**
-   * 任务标签
+   * <p>任务标签</p>
    */
   TaskTag?: string
   /**
-   * 任务状态(1001 -- 未开始   1002 -- 进行中  1003 -- 暂停中   1004 -- 任务结束)
+   * <p>任务状态(1001 -- 未开始   1002 -- 进行中  1003 -- 暂停中   1004 -- 任务结束)</p>
    */
   TaskStatus?: number
   /**
-   * 任务创建时间
+   * <p>任务创建时间</p>
    */
   TaskCreateTime?: string
   /**
-   * 任务更新时间
+   * <p>任务更新时间</p>
    */
   TaskUpdateTime?: string
   /**
-   * 0--未开始，1--进行中，2--已完成
+   * <p>0--未开始，1--进行中，2--已完成</p>
    */
   TaskPreCheckStatus?: number
   /**
-   * 环境检查是否通过
+   * <p>环境检查是否通过</p>
    */
   TaskPreCheckSuccess?: boolean
   /**
-   * 演练是否符合预期 1-符合预期 2-不符合预期
+   * <p>演练是否符合预期 1-符合预期 2-不符合预期</p>
    */
   TaskExpect?: number
   /**
-   * 关联应用ID
+   * <p>关联应用ID</p>
    */
   ApplicationId?: string
   /**
-   * 关联应用名称
+   * <p>关联应用名称</p>
    */
   ApplicationName?: string
   /**
-   * 验证项ID
+   * <p>验证项ID</p>
    */
   VerifyId?: number
   /**
-   * 状态类型: 0 -- 无状态，1 -- 成功，2-- 失败，3--终止
+   * <p>状态类型: 0 -- 无状态，1 -- 成功，2-- 失败，3--终止</p>
    */
   TaskStatusType?: number
   /**
-   * 架构ID
+   * <p>架构ID</p>
    */
   ArchId?: string
   /**
-   * 架构名称
+   * <p>架构名称</p>
    */
   ArchName?: string
   /**
-   * 来源
+   * <p>来源</p>
    */
   TaskSource?: number
+  /**
+   * <p>云资源标签列表</p>
+   */
+  Tags?: Array<TagWithDescribe>
 }
 
 /**

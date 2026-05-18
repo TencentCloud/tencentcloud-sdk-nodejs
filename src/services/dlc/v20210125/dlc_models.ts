@@ -5514,6 +5514,10 @@ export interface TaskFullRespInfo {
    * <p>活跃core</p>
    */
   ActiveCore?: number
+  /**
+   * <p>排队时间</p><p>单位：毫秒</p>
+   */
+  QueueTime?: number
 }
 
 /**

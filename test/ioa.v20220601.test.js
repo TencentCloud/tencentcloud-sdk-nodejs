@@ -28,6 +28,16 @@ it("ioa.v20220601.DescribeAggrSoftDeviceList", async function () {
     }
 })
 
+it("ioa.v20220601.DescribeCompanyDirectoryConfig", async function () {
+    try {
+       const data = await client.DescribeCompanyDirectoryConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ioa.v20220601.GrantResourcesByAccounts", async function () {
     try {
        const data = await client.GrantResourcesByAccounts({})
@@ -81,6 +91,26 @@ it("ioa.v20220601.DescribeResourceGrantedAccountGroups", async function () {
 it("ioa.v20220601.CreateDLPFileDetectTask", async function () {
     try {
        const data = await client.CreateDLPFileDetectTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.ModifyCompanyDirectoryConfig", async function () {
+    try {
+       const data = await client.ModifyCompanyDirectoryConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ioa.v20220601.CreateCompanyDirectoryConfig", async function () {
+    try {
+       const data = await client.CreateCompanyDirectoryConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -1463,15 +1463,15 @@ re=正则匹配
  */
 export interface CreateGrafanaIntegrationRequest {
   /**
-   * Grafana 实例 ID，例如：grafana-abcdefgh
+   * <p>Grafana 实例 ID，例如：grafana-abcdefgh</p>
    */
   InstanceId: string
   /**
-   * 集成类型(接口DescribeGrafanaIntegrationOverviews返回的集成信息中的Code字段)
+   * <p>集成类型(接口DescribeGrafanaIntegrationOverviews返回的集成信息中的Code字段)</p>
    */
   Kind: string
   /**
-   * 集成配置
+   * <p>集成配置</p>
    */
   Content: string
 }
@@ -3373,21 +3373,6 @@ export interface DescribePrometheusScrapeStatisticsResponse {
 }
 
 /**
- * DescribeServiceDiscovery返回参数结构体
- */
-export interface DescribeServiceDiscoveryResponse {
-  /**
-   * 返回服务发现列表信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ServiceDiscoverySet?: Array<ServiceDiscoveryItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ExportPrometheusReadOnlyDynamicAPI请求参数结构体
  */
 export interface ExportPrometheusReadOnlyDynamicAPIRequest {
@@ -3501,20 +3486,6 @@ export interface BindingPolicyObjectRequest {
    * <p>是否配置了事件告警</p>
    */
   EbEventFlag?: number
-}
-
-/**
- * CreateServiceDiscovery返回参数结构体
- */
-export interface CreateServiceDiscoveryResponse {
-  /**
-   * 创建成功之后，返回对应服务发现信息
-   */
-  ServiceDiscovery?: ServiceDiscoveryItem
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -4845,7 +4816,7 @@ export interface PrometheusAlertAllowTimeRange {
  */
 export interface CreateGrafanaIntegrationResponse {
   /**
-   * 集成 ID
+   * <p>集成 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IntegrationId?: string
@@ -6684,33 +6655,13 @@ export interface TerminatePrometheusInstancesRequest {
 }
 
 /**
- * CreateServiceDiscovery请求参数结构体
+ * UnbindPrometheusManagedGrafana返回参数结构体
  */
-export interface CreateServiceDiscoveryRequest {
+export interface UnbindPrometheusManagedGrafanaResponse {
   /**
-   * Prometheus 实例 ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
-  /**
-   * <li>类型为TKE：对应集成的腾讯云容器服务集群 ID</li>
-   */
-  KubeClusterId: string
-  /**
-   * 用户 Kubernetes 集群类型：
-<li> 1 = 容器服务集群(TKE) </li>
-   */
-  KubeType: number
-  /**
-   * 服务发现类型，取值如下：
-<li> 1 = ServiceMonitor</li>
-<li> 2 = PodMonitor</li>
-<li> 3 = JobMonitor</li>
-   */
-  Type: number
-  /**
-   * 服务发现配置信息，YAML 格式，[具体YAML参数内容请参考](https://cloud.tencent.com/document/product/1416/55995#service-monitor)
-   */
-  Yaml: string
+  RequestId?: string
 }
 
 /**
@@ -7346,16 +7297,6 @@ export interface PrometheusAlertRule {
  * CleanGrafanaInstance返回参数结构体
  */
 export interface CleanGrafanaInstanceResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * UnbindPrometheusManagedGrafana返回参数结构体
- */
-export interface UnbindPrometheusManagedGrafanaResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10077,25 +10018,6 @@ export interface PrometheusInstanceTenantUsage {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Fee?: number
-}
-
-/**
- * DescribeServiceDiscovery请求参数结构体
- */
-export interface DescribeServiceDiscoveryRequest {
-  /**
-   * Prometheus 实例 ID
-   */
-  InstanceId: string
-  /**
-   * <li>类型是 TKE，为对应的腾讯云容器服务集群 ID</li>
-   */
-  KubeClusterId: string
-  /**
-   * 用户 Kubernetes 集群类型：
-<li> 1 = 容器服务集群(TKE) </li>
-   */
-  KubeType: number
 }
 
 /**

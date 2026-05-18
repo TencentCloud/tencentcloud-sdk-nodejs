@@ -153,13 +153,11 @@ import {
   InstallPluginsRequest,
   DescribeAlarmEventsResponse,
   DescribePrometheusScrapeStatisticsResponse,
-  DescribeServiceDiscoveryResponse,
   ExportPrometheusReadOnlyDynamicAPIRequest,
   PrometheusTag,
   DescribePolicyConditionListMetric,
   NoticeContentTmplBindInfo,
   BindingPolicyObjectRequest,
-  CreateServiceDiscoveryResponse,
   ModifyPrometheusAgentExternalLabelsRequest,
   UpdatePrometheusAlertGroupRequest,
   EnableSSOCamCheckResponse,
@@ -300,7 +298,7 @@ import {
   ModifyPrometheusAlertPolicyResponse,
   DescribePhoneAlarmFlowTotalCountResponse,
   TerminatePrometheusInstancesRequest,
-  CreateServiceDiscoveryRequest,
+  UnbindPrometheusManagedGrafanaResponse,
   PeriodsSt,
   ModifyAlarmReceiversResponse,
   GrafanaChannel,
@@ -328,7 +326,6 @@ import {
   PrometheusDynamicAPIResponseHTTP,
   PrometheusAlertRule,
   CleanGrafanaInstanceResponse,
-  UnbindPrometheusManagedGrafanaResponse,
   DescribeGrafanaChannelsResponse,
   DescribeAlarmPolicyResponse,
   PrometheusNotificationItem,
@@ -431,7 +428,6 @@ import {
   ConditionsTemp,
   Operator,
   PrometheusInstanceTenantUsage,
-  DescribeServiceDiscoveryRequest,
   TaskStepInfo,
   DescribePrometheusTempResponse,
   DescribeGrafanaConfigResponse,
@@ -2008,18 +2004,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 列出在腾讯云容器服务下创建的 Prometheus 服务发现。
-<p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
-<a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
-     */
-  async DescribeServiceDiscovery(
-    req: DescribeServiceDiscoveryRequest,
-    cb?: (error: string, rep: DescribeServiceDiscoveryResponse) => void
-  ): Promise<DescribeServiceDiscoveryResponse> {
-    return this.request("DescribeServiceDiscovery", req, cb)
-  }
-
-  /**
    * 列出 Grafana 已安装的集成
    */
   async DescribeGrafanaIntegrations(
@@ -2077,18 +2061,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAllNamespacesResponse) => void
   ): Promise<DescribeAllNamespacesResponse> {
     return this.request("DescribeAllNamespaces", req, cb)
-  }
-
-  /**
-     * 在腾讯云容器服务下创建 Prometheus 服务发现。
-<p>注意：前提条件，已经通过 Prometheus 控制台集成了对应的腾讯云容器服务，具体请参考
-<a href="https://cloud.tencent.com/document/product/248/48859" target="_blank">Agent 安装</a>。</p>
-     */
-  async CreateServiceDiscovery(
-    req: CreateServiceDiscoveryRequest,
-    cb?: (error: string, rep: CreateServiceDiscoveryResponse) => void
-  ): Promise<CreateServiceDiscoveryResponse> {
-    return this.request("CreateServiceDiscovery", req, cb)
   }
 
   /**

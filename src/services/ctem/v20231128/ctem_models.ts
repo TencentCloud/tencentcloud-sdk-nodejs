@@ -4414,57 +4414,61 @@ export interface CreateSubDomainResponse {
  */
 export interface DisplayToolCommon {
   /**
-   * 子公司ID
+   * <p>子公司ID</p>
    */
   EnterpriseUid?: string
   /**
-   * 子公司名称
+   * <p>子公司名称</p>
    */
   EnterpriseName?: string
   /**
-   * 主任务ID
+   * <p>主任务ID</p>
    */
   JobId?: number
   /**
-   * 单任务ID
+   * <p>单任务ID</p>
    */
   JobStageId?: number
   /**
-   * 是否忽略
+   * <p>是否忽略</p>
    */
   Ignored?: boolean
   /**
-   * 子任务ID
+   * <p>子任务ID</p>
    */
   JobRecordId?: number
   /**
-   * 企业ID
+   * <p>企业ID</p>
    */
   CustomerId?: number
   /**
-   * 企业名称
+   * <p>企业名称</p>
    */
   CustomerName?: string
   /**
-   * 详情
+   * <p>详情</p>
    */
   Detail?: string
   /**
-   * Md5值
+   * <p>Md5值</p>
    */
   Md5?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateAt?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateAt?: string
   /**
-   * 标签列表，json格式：{\"tag1\":[\"责任人xxx\"],\"tag2\":[\"测试站\"]}
+   * <p>标签列表，json格式：{"tag1":["责任人xxx"],"tag2":["测试站"]}</p>
    */
   Labels?: string
+  /**
+   * <p>演示模式是否明文展示</p><p>枚举值：</p><ul><li>0： 否</li><li>1： 是</li></ul>
+   */
+  IsPlainTextInDemo?: number
 }
 
 /**
@@ -4632,39 +4636,39 @@ export interface DisplayManage {
  */
 export interface DisplayDomain {
   /**
-   * 主键ID
+   * <p>主键ID</p>
    */
   Id?: number
   /**
-   * 主域名
+   * <p>主域名</p>
    */
   Domain?: string
   /**
-   * ICP
+   * <p>ICP</p>
    */
   ICP?: string
   /**
-   * 注册时间
+   * <p>注册时间</p>
    */
   RegisteredTime?: string
   /**
-   * 过期时间
+   * <p>过期时间</p>
    */
   ExpiredTime?: string
   /**
-   * 公司
+   * <p>公司</p>
    */
   Company?: string
   /**
-   * 公共字段
+   * <p>公共字段</p>
    */
   DisplayToolCommon?: DisplayToolCommon
   /**
-   * 是否为云资产
+   * <p>是否为云资产</p>
    */
   IsCloudAsset?: number
   /**
-   * 云资产状态，-1为下线
+   * <p>云资产状态，-1为下线</p>
    */
   CloudAssetStatus?: number
 }

@@ -28,9 +28,9 @@ it("dataagent.v20250513.UploadAndCommitFile", async function () {
     }
 })
 
-it("dataagent.v20250513.ModifyChunk", async function () {
+it("dataagent.v20250513.GetKnowledgeBaseList", async function () {
     try {
-       const data = await client.ModifyChunk({})
+       const data = await client.GetKnowledgeBaseList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -38,9 +38,39 @@ it("dataagent.v20250513.ModifyChunk", async function () {
     }
 })
 
-it("dataagent.v20250513.DeleteChunk", async function () {
+it("dataagent.v20250513.ModifyKnowledgeBase", async function () {
     try {
-       const data = await client.DeleteChunk({})
+       const data = await client.ModifyKnowledgeBase({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dataagent.v20250513.GetKnowledgeBaseFileList", async function () {
+    try {
+       const data = await client.GetKnowledgeBaseFileList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dataagent.v20250513.GetSessionDetails", async function () {
+    try {
+       const data = await client.GetSessionDetails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dataagent.v20250513.GetUserInstanceList", async function () {
+    try {
+       const data = await client.GetUserInstanceList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,9 +88,9 @@ it("dataagent.v20250513.GetUploadJobDetails", async function () {
     }
 })
 
-it("dataagent.v20250513.GetKnowledgeBaseList", async function () {
+it("dataagent.v20250513.QueryUserAuthority", async function () {
     try {
-       const data = await client.GetKnowledgeBaseList({})
+       const data = await client.QueryUserAuthority({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,6 +128,16 @@ it("dataagent.v20250513.CreateDataAgentSession", async function () {
     }
 })
 
+it("dataagent.v20250513.UpdateScene", async function () {
+    try {
+       const data = await client.UpdateScene({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dataagent.v20250513.QuerySceneList", async function () {
     try {
        const data = await client.QuerySceneList({})
@@ -108,9 +148,19 @@ it("dataagent.v20250513.QuerySceneList", async function () {
     }
 })
 
-it("dataagent.v20250513.ModifyKnowledgeBase", async function () {
+it("dataagent.v20250513.AddScene", async function () {
     try {
-       const data = await client.ModifyKnowledgeBase({})
+       const data = await client.AddScene({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dataagent.v20250513.QueryChunkList", async function () {
+    try {
+       const data = await client.QueryChunkList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -121,6 +171,36 @@ it("dataagent.v20250513.ModifyKnowledgeBase", async function () {
 it("dataagent.v20250513.ModifyUserAuthority", async function () {
     try {
        const data = await client.ModifyUserAuthority({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dataagent.v20250513.StopChatAI", async function () {
+    try {
+       const data = await client.StopChatAI({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dataagent.v20250513.ModifyChunk", async function () {
+    try {
+       const data = await client.ModifyChunk({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dataagent.v20250513.DeleteChunk", async function () {
+    try {
+       const data = await client.DeleteChunk({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,79 +228,9 @@ it("dataagent.v20250513.DeleteDataAgentSession", async function () {
     }
 })
 
-it("dataagent.v20250513.AddScene", async function () {
-    try {
-       const data = await client.AddScene({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dataagent.v20250513.QueryUserAuthority", async function () {
-    try {
-       const data = await client.QueryUserAuthority({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dataagent.v20250513.QueryChunkList", async function () {
-    try {
-       const data = await client.QueryChunkList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dataagent.v20250513.GetKnowledgeBaseFileList", async function () {
-    try {
-       const data = await client.GetKnowledgeBaseFileList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dataagent.v20250513.GetSessionDetails", async function () {
-    try {
-       const data = await client.GetSessionDetails({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dataagent.v20250513.UpdateScene", async function () {
-    try {
-       const data = await client.UpdateScene({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dataagent.v20250513.GetJobsByKnowledgeBaseId", async function () {
     try {
        const data = await client.GetJobsByKnowledgeBaseId({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("dataagent.v20250513.StopChatAI", async function () {
-    try {
-       const data = await client.StopChatAI({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

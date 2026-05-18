@@ -3057,95 +3057,105 @@ export interface TablePropertyScore {
  */
 export interface TestRunningSubRecord {
   /**
-   * 开发时间
+   * <p>开发时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
-   * 执行平台执行id
+   * <p>执行平台执行id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionJobId?: string
   /**
-   * 执行平台子执行jobid
+   * <p>执行平台子执行jobid</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionSubJobId?: string
   /**
-   * 开发侧提交的jobid
+   * <p>开发侧提交的jobid</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobId?: string
   /**
-   * 子记录id
+   * <p>子记录id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DetailId?: number
   /**
-   * 试运行记录id
+   * <p>试运行记录id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordId?: number
   /**
-   * 脚本内容
+   * <p>脚本内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScriptContent?: string
   /**
-   * 状态
+   * <p>状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
-   * 耗时
+   * <p>耗时</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeCost?: number
   /**
-   * 结果总行数
+   * <p>结果总行数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultTotalCount?: number
   /**
-   * 预览结果行数
+   * <p>预览结果行数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultPreviewCount?: number
   /**
-   * 结果文件路径
+   * <p>结果文件路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultFilePath?: string
   /**
-   * 预览结果文件路径
+   * <p>预览结果文件路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultPreviewFilePath?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
-   * 序号
+   * <p>序号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Sequence?: string
   /**
-   * 日志路径
+   * <p>日志路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogFilePath?: string
   /**
-   * 是否包含子结果
+   * <p>是否包含子结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HasSubResultSet?: boolean
+  /**
+   * <p>脚本内容是否被截断</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScriptContentTruncated?: boolean
+  /**
+   * <p>结果集表字符信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SchemaInfoFilePath?: string
 }
 
 /**
@@ -6380,52 +6390,52 @@ export interface MoveTasksToFolderResponse {
  */
 export interface ParameterTaskOutDsDto {
   /**
-   * 唯一标识
+   * <p>唯一标识</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id: number
   /**
-   * 任务id
+   * <p>任务id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId: string
   /**
-   * 参数名
+   * <p>参数名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamKey: string
   /**
-   * 参数描述
+   * <p>参数描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamDesc: string
   /**
-   * 参数定义
+   * <p>参数定义</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamDefine: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime: string
   /**
-   * 任务名
+   * <p>任务名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskName: string
   /**
-   * 项目id
+   * <p>项目id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId: string
   /**
-   * 项目名
+   * <p>项目名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectName: string
@@ -7028,7 +7038,7 @@ export interface DescribeThirdTaskRunLogResponse {
  */
 export interface CreateTaskVersionDsResponse {
   /**
-   * 版本
+   * <p>版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
@@ -19590,19 +19600,19 @@ export interface BatchCreateTaskVersionDTO {
  */
 export interface CreateTaskVersionDsRequest {
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   Task: BatchCreateTaskVersionDTO
   /**
-   * 是否需要校验父任务已经提交到调度
+   * <p>是否需要校验父任务已经提交到调度</p>
    */
   NeedCheckParentSubmitted: boolean
   /**
-   * 是否自动运行
+   * <p>是否自动运行</p>
    */
   AutoRun: boolean
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
@@ -19610,25 +19620,29 @@ export interface CreateTaskVersionDsRequest {
    */
   RequestFromSource?: string
   /**
-   * 告警方式:email-邮件;sms-短信;wecom-企业微信
+   * <p>告警方式:email-邮件;sms-短信;wecom-企业微信</p>
    */
   AlarmWays?: string
   /**
-   * 告警对象:1-项目管理员，2-任务责任人
+   * <p>告警对象:1-项目管理员，2-任务责任人</p>
    */
   AlarmRecipientTypes?: string
   /**
-   * 是否需要校验循环依赖，默认为 true，如果使用了 CheckTaskCycleLink 和 CheckTaskCycleConfiguration 两个接口校验成功可以传 false，后台服务器不再做校验
+   * <p>是否需要校验循环依赖，默认为 true，如果使用了 CheckTaskCycleLink 和 CheckTaskCycleConfiguration 两个接口校验成功可以传 false，后台服务器不再做校验</p>
    */
   EnableCheckTaskCycleLink?: boolean
   /**
-   * 是否需要补录中间实例
+   * <p>是否需要补录中间实例</p>
    */
   EnableMakeUp?: boolean
   /**
-   * 指定审批人列表
+   * <p>指定审批人列表</p>
    */
   AssignApprovalList?: Array<string>
+  /**
+   * <p>MAKEUP:补录缺失的实例;FORCE_SUCCESS:将缺失的实例置成功;SKIP:不处理，忽略缺失的实例</p>
+   */
+  MissingInstanceStrategy?: string
 }
 
 /**
@@ -23404,58 +23418,68 @@ export interface RuleGroupSchedulerInfo {
  */
 export interface DatasourceBaseInfo {
   /**
-   * 若数据源列表为绑定数据库，则为db名称
+   * <p>若数据源列表为绑定数据库，则为db名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseNames?: Array<string>
   /**
-   * 数据源描述信息
+   * <p>数据源描述信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 数据源ID
+   * <p>数据源ID</p>
    */
   ID?: number
   /**
-   * 数据源引擎的实例ID，如CDB实例ID
+   * <p>数据源引擎的实例ID，如CDB实例ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Instance?: string
   /**
-   * 数据源名称，在相同SpaceName下，数据源名称不能为空
+   * <p>数据源名称，在相同SpaceName下，数据源名称不能为空</p>
    */
   Name?: string
   /**
-   * 数据源引擎所属区域
+   * <p>数据源引擎所属区域</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
-   * 数据源类型:枚举值
+   * <p>数据源类型:枚举值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
-   * 数据源所属的集群id
+   * <p>数据源所属的集群id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
-   * 数据源版本信息
+   * <p>数据源版本信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
   /**
-   * 数据源附带参数信息Params json字符串
+   * <p>数据源附带参数信息Params json字符串</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamsString?: string
   /**
-   * 区分数据源类型自定义源还是系统源
+   * <p>区分数据源类型自定义源还是系统源</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Category?: string
+  /**
+   * <p>数据实例ip</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ip?: string
+  /**
+   * <p>数据实例port</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: string
 }
 
 /**
@@ -23535,85 +23559,90 @@ export interface DlcMergeManifestsInfo {
  */
 export interface TestRunningRecord {
   /**
-   * 开始时间
+   * <p>开始时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
-   * 试运行记录id
+   * <p>试运行记录id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordId?: number
   /**
-   * 开发侧提交的jobid
+   * <p>开发侧提交的jobid</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobId?: number
   /**
-   * 执行平台jobid
+   * <p>执行平台jobid</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionJobId?: string
   /**
-   * 试运行记录名称
+   * <p>试运行记录名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordName?: string
   /**
-   * 脚本内容
+   * <p>脚本内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScriptContent?: string
   /**
-   * 状态
+   * <p>状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
-   * 耗时
+   * <p>耗时</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeCost?: number
   /**
-   * 用户uin
+   * <p>用户uin</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserUin?: string
   /**
-   * 主账户uin
+   * <p>主账户uin</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnerUin?: string
   /**
-   * 子记录信息
+   * <p>子记录信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubRecordList?: Array<TestRunningSubRecord>
   /**
-   * 结果或日志地域
+   * <p>结果或日志地域</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
-   * 结果或日志桶名
+   * <p>结果或日志桶名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BucketName?: string
   /**
-   * 错误信息
+   * <p>错误信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMessage?: string
+  /**
+   * <p>脚本内容是否被截断</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScriptContentTruncated?: boolean
 }
 
 /**
@@ -26313,563 +26342,535 @@ export interface DescribeTasksForCodeTemplateRequest {
  */
 export interface TaskDsDTO {
   /**
-   * 任务ID
+   * <p>任务ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
-   * 虚拟任务标记
+   * <p>虚拟任务标记</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VirtualTaskId?: string
   /**
-   * 虚拟任务标记
+   * <p>虚拟任务标记</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VirtualFlag?: boolean
   /**
-   * 任务名
+   * <p>任务名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskName?: string
   /**
-   * 工作流id
+   * <p>工作流id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowId?: string
   /**
-   * 真实工作流id
+   * <p>真实工作流id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RealWorkflowId?: string
   /**
-   * 工作流名称
+   * <p>工作流名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowName?: string
   /**
-   * 文件夹id
+   * <p>文件夹id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FolderId?: string
   /**
-   * 文件夹名字
+   * <p>文件夹名字</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FolderName?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastUpdate?: string
   /**
-   * <p>任务状态，取值范围：</p>
-<ul>
-<li>N 新建</li>
-<li>Y 运行</li>
-<li>F 停止</li>
-<li>O 冻结</li>
-<li>T 停止中</li>
-<li>INVALID 已失效</li>
-</ul>
+   * <p>任务状态，取值范围：</p><ul><li>N 新建</li><li>Y 运行</li><li>F 停止</li><li>O 冻结</li><li>T 停止中</li><li>INVALID 已失效</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
-   * 责任人
+   * <p>责任人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InCharge?: string
   /**
-   * 责任人用户id
+   * <p>责任人用户id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InChargeId?: string
   /**
-   * 生效日期
+   * <p>生效日期</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
-   * 结束日期
+   * <p>结束日期</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
-   * 执行时间左闭区间
+   * <p>执行时间左闭区间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionStartTime?: string
   /**
-   * 执行时间右闭区间
+   * <p>执行时间右闭区间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionEndTime?: string
   /**
-   * 项目id
+   * <p>项目id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: string
   /**
-   * 项目标识
+   * <p>项目标识</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectIdent?: string
   /**
-   * 项目名称
+   * <p>项目名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectName?: string
   /**
-   * 周期类型
+   * <p>周期类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleType?: string
   /**
-   * 步长
+   * <p>步长</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleStep?: number
   /**
-   * 对于crontab类型调度配置其为用户输入 对于周期类型调度配置其为系统计算
+   * <p>对于crontab类型调度配置其为用户输入 对于周期类型调度配置其为系统计算</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CrontabExpression?: string
   /**
-   * 延时调度
+   * <p>延时调度</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DelayTime?: number
   /**
-   * 延时执行时间
+   * <p>延时执行时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartupTime?: number
   /**
-   * 重试等待时间,单位分钟
+   * <p>重试等待时间,单位分钟</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RetryWait?: number
   /**
-   * 是否可重试
+   * <p>是否可重试</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Retriable?: number
   /**
-   * 调度扩展信息
+   * <p>调度扩展信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskAction?: string
   /**
-   * 运行次数限制
+   * <p>运行次数限制</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TryLimit?: number
   /**
-   * 运行优先级
+   * <p>运行优先级</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunPriority?: number
   /**
-   * 任务类型
+   * <p>任务类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskType?: TaskTypeDsVO
   /**
-   * 指定的运行节点
+   * <p>指定的运行节点</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BrokerIp?: string
   /**
-   * 集群name
+   * <p>集群name</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
-   * 最小数据时间
+   * <p>最小数据时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MinDateTime?: string
   /**
-   * 最大数据时间
+   * <p>最大数据时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxDateTime?: string
   /**
-   * 运行耗时超时时间
+   * <p>运行耗时超时时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionTTL?: number
   /**
-   * 是否自身依赖 是1 否2 并行3
+   * <p>是否自身依赖 是1 否2 并行3</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SelfDepend?: string
   /**
-   * LeftCoordinate坐标
+   * <p>LeftCoordinate坐标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LeftCoordinate?: number
   /**
-   * TopCoordinate坐标
+   * <p>TopCoordinate坐标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopCoordinate?: number
   /**
-   * TaskExt信息
+   * <p>TaskExt信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskExt?: TaskExtDsVO
   /**
-   * taskExt 导入导出json使用 private Map  properties;
+   * <p>taskExt 导入导出json使用 private Map  properties;</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Properties?: string
   /**
-   * 任务备注
+   * <p>任务备注</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Notes?: string
   /**
-   * 实例生成策略 T+1 表示当前周期生成上一周期数据时间任务实例 默认T+1 T+0 表示当前周期生成当前周期数据时间任务实例 T-1
-     * 表示当前周期生成下一周期数据时间任务实例
-     *
-     * service不做默认策略处理, 下沉到数据初始化默认T+1, service涉及到多个更新task的路径
+   * <p>实例生成策略 T+1 表示当前周期生成上一周期数据时间任务实例 默认T+1 T+0 表示当前周期生成当前周期数据时间任务实例 T-1</p><pre><code> * 表示当前周期生成下一周期数据时间任务实例 * * service不做默认策略处理, 下沉到数据初始化默认T+1, service涉及到多个更新task的路径</code></pre>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceInitStrategy?: string
   /**
-   * 资源池队列名称
+   * <p>资源池队列名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   YarnQueue?: string
   /**
-   * 任务告警信息
+   * <p>任务告警信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Alarms?: Array<AlarmDsVO>
   /**
-   * alarmDTO 导入导出json使用
+   * <p>alarmDTO 导入导出json使用</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Alarm?: string
   /**
-   * 任务脚本是否发生变化
+   * <p>任务脚本是否发生变化</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScriptChange?: boolean
   /**
-   * 任务版本是否已提交
+   * <p>任务版本是否已提交</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Submit?: boolean
   /**
-   * 最新调度计划变更时间 仅生产态
+   * <p>最新调度计划变更时间 仅生产态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastSchedulerCommitTime?: string
   /**
-   * 仅生产态存储于生产态序列化任务信息, 减少base CPU重复密集计算
+   * <p>仅生产态存储于生产态序列化任务信息, 减少base CPU重复密集计算</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NormalizedJobStartTime?: string
   /**
-   * 启动暂停的任务时，选择不补录中间实例，通过此字段来标识从哪个时间开始生成实例
+   * <p>启动暂停的任务时，选择不补录中间实例，通过此字段来标识从哪个时间开始生成实例</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecoverFreezeStartTime?: string
   /**
-   * 源数据源
+   * <p>源数据源</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceServer?: string
   /**
-   * 目标数据源
+   * <p>目标数据源</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetServer?: string
   /**
-   * 父子节点树
+   * <p>父子节点树</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tasks?: Array<TaskDsDTO>
   /**
-   * 创建者
+   * <p>创建者</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Creater?: string
   /**
-   * 分支，依赖关系，and/or, 默认and
+   * <p>分支，依赖关系，and/or, 默认and</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependencyRel?: string
   /**
-   * 是否支持工作流依赖 yes / no 默认 no
+   * <p>是否支持工作流依赖 yes / no 默认 no</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependencyWorkflow?: string
   /**
-   * 支持事件监听器配置导入导出
+   * <p>支持事件监听器配置导入导出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventListenerConfig?: string
   /**
-   * 支持事件触发器配置导入导出
+   * <p>支持事件触发器配置导入导出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventPublisherConfig?: string
   /**
-   * 依赖配置
+   * <p>依赖配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependencyConfigList?: Array<DependencyConfigDsDTO>
   /**
-   * <p>任务状态，取值范围：</p>
-<ul>
-<li>N 新建</li>
-<li>Y 运行</li>
-<li>F 停止</li>
-<li>O 冻结</li>
-<li>T 停止中</li>
-<li>INVALID 已失效</li>
-</ul>
+   * <p>任务状态，取值范围：</p><ul><li>N 新建</li><li>Y 运行</li><li>F 停止</li><li>O 冻结</li><li>T 停止中</li><li>INVALID 已失效</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VirtualTaskStatus?: string
   /**
-   * 回收站还原提示语
+   * <p>回收站还原提示语</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecycleTips?: string
   /**
-   * 回收站所属用户
+   * <p>回收站所属用户</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecycleUser?: string
   /**
-   * 新增 或 修改
+   * <p>新增 或 修改</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NewOrUpdate?: string
   /**
-   * 任务上游依赖信息 用于发布管理导入导出
+   * <p>任务上游依赖信息 用于发布管理导入导出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Params?: Array<ParameterTaskDsDto>
   /**
-   * 任务上游依赖信息 用于发布管理导入导出
+   * <p>任务上游依赖信息 用于发布管理导入导出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskLinkInfo?: Array<TaskLinkDsDTO>
   /**
-   * 导入结果
+   * <p>导入结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImportResult?: boolean
   /**
-   * 导入失败原因
+   * <p>导入失败原因</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImportErrMsg?: string
   /**
-   * 任务内容 全部内容 配置内容 资源内容
+   * <p>任务内容 全部内容 配置内容 资源内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ContentType?: string
   /**
-   * 是否导入提交运行
+   * <p>是否导入提交运行</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskAutoSubmit?: boolean
   /**
-   * 上层产品 数据质量 / 数据开发 / ...
+   * <p>上层产品 数据质量 / 数据开发 / ...</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductName?: string
   /**
-   * 创建者帐号
+   * <p>创建者帐号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnId?: string
   /**
-   * 子账号
+   * <p>子账号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserId?: string
   /**
-   * 租户id
+   * <p>租户id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TenantId?: string
   /**
-   * 最后修改的人
+   * <p>最后修改的人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateUser?: string
   /**
-   * 最后修改时间
+   * <p>最后修改时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
-   * 最后修改的人的ID
+   * <p>最后修改的人的ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateUserId?: string
   /**
-   * 调度计划
+   * <p>调度计划</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SchedulerDesc?: string
   /**
-   * 资源组
-
+   * <p>资源组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroup?: string
   /**
-   * 版本提交说明
+   * <p>版本提交说明</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VersionDesc?: string
   /**
-   * 编排-删除添加的链接
+   * <p>编排-删除添加的链接</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LinkId?: string
   /**
-   * 脚本引用关系
+   * <p>脚本引用关系</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserFileId?: string
   /**
-   * 来源数据源ID
+   * <p>来源数据源ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceServiceId?: string
   /**
-   * 来源数据源类型
+   * <p>来源数据源类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceServiceType?: string
   /**
-   * 去向数据源ID
+   * <p>去向数据源ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetServiceId?: string
   /**
-   * 去向数据源类型
+   * <p>去向数据源类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetServiceType?: string
   /**
-   * 输入参数
+   * <p>输入参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamInList?: Array<ParameterTaskInDsDto>
   /**
-   * 输出参数
+   * <p>输出参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamOutList?: Array<ParameterTaskOutDsDto>
   /**
-   * 任务文件夹id
+   * <p>任务文件夹id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskFolderId?: string
   /**
-   * 最大尝试次数
+   * <p>最大尝试次数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxRetryAttempts?: number
   /**
-   * 资源组名称
+   * <p>资源组名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroupName?: string
   /**
-   * 数据源
+   * <p>数据源</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceServiceName?: string
   /**
-   * 任务产出登记
+   * <p>任务产出登记</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskRegisterOutputTable?: Array<TaskDataRegistryDTO>
   /**
-   * 循环依赖配置
+   * <p>循环依赖配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleDependencyConfigList?: Array<TaskCycleLinkDTO>
   /**
-   * 特殊警告信息
+   * <p>特殊警告信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Warning?: string
   /**
-   * 0 正常调度 1 空跑调度
+   * <p>0 正常调度 1 空跑调度</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleRunType?: number
   /**
-   * 0 并发度达到上限时，本次排队等待 1 并发度达到上限时，本次不执行，直接kill
+   * <p>0 并发度达到上限时，本次排队等待 1 并发度达到上限时，本次不执行，直接kill</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConcurrentStrategy?: number
   /**
-   * UTC+8;UDC-8
+   * <p>UTC+8;UDC-8</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleTimeZone?: string
   /**
-   * 引用的代码模版id
+   * <p>引用的代码模版id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TemplateId?: string
   /**
-   * 允许重跑类 ALL 无论实例成功或者失败，都允许重跑 FAILURE 只有失败的实例允许重跑，成功的实例不允许重跑 NONE 无论成功或者失败，都不允许重跑
+   * <p>允许重跑类 ALL 无论实例成功或者失败，都允许重跑 FAILURE 只有失败的实例允许重跑，成功的实例不允许重跑 NONE 无论成功或者失败，都不允许重跑</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AllowRedoType?: string
   /**
-   * BundleId
-CI/CD工程生成的bundle唯一标识
+   * <p>BundleId<br>CI/CD工程生成的bundle唯一标识</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BundleId?: string
   /**
-   * bundle信息
+   * <p>bundle信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BundleInfo?: string
   /**
-   * 是否允许下游依赖 0 不允许 1 允许
+   * <p>是否允许下游依赖 0 不允许 1 允许</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AllowDownstreamDependency?: number
   /**
-   * - 任务依赖运行条件，默认为ALL_SUCCESS，暂时只支持工作流调度项目下配置
-- ALL_SUCCESS： 全部成功：所有上游依赖任务都达到终态时，进行依赖判断，如果上游全部都成功，则依赖判断成功，否则如果上游有一个跳过运行，则标记为跳过运行，其余情况标记为上游失败
-- ALL_FAILED：全部失败：所有上游依赖任务都达到终态时，进行依赖判断，如果上游状态都是失败或者上游失败，则依赖判断成功，否则就标记为跳过运行
-- ALL_DONE：全部完成：所有上游依赖任务都达到终态时，进行依赖判断，直接是依赖判断成功
-- ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行
-- ALL_SKIPPED：上游全部都跳过: 所有上游依赖任务都达到终态时，进行依赖判断，所有的上游都是跳过状态才算依赖判断成功，否则当前节点就是跳过运行
-- ONE_FAILED：至少一个失败: 上游只要有一个失败了，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有失败，则跳过运行
-- ONE_SUCCESS：至少一个成功：上游只要有一个成功，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有成功，则跳过运行
-- ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游
-- NONE_FAILED：上游全部完成，没有失败: 所有上游依赖任务都达到终态时，进行依赖判断，如果上游都是成功或者跳过运行，则依赖判断成功，否则标记为上游失败
-- ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行
-- NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行
-- ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行
+   * <ul><li>任务依赖运行条件，默认为ALL_SUCCESS，暂时只支持工作流调度项目下配置</li><li>ALL_SUCCESS： 全部成功：所有上游依赖任务都达到终态时，进行依赖判断，如果上游全部都成功，则依赖判断成功，否则如果上游有一个跳过运行，则标记为跳过运行，其余情况标记为上游失败</li><li>ALL_FAILED：全部失败：所有上游依赖任务都达到终态时，进行依赖判断，如果上游状态都是失败或者上游失败，则依赖判断成功，否则就标记为跳过运行</li><li>ALL_DONE：全部完成：所有上游依赖任务都达到终态时，进行依赖判断，直接是依赖判断成功</li><li>ALL_DONE_AT_LEAST_ONE_SUCCESS：上游全部完成至少一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个成功，则依赖判断成功，否则就是跳过运行</li><li>ALL_SKIPPED：上游全部都跳过: 所有上游依赖任务都达到终态时，进行依赖判断，所有的上游都是跳过状态才算依赖判断成功，否则当前节点就是跳过运行</li><li>ONE_FAILED：至少一个失败: 上游只要有一个失败了，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有失败，则跳过运行</li><li>ONE_SUCCESS：至少一个成功：上游只要有一个成功，就进行依赖判断，且依赖判断成功，如果上游全部完成但是没有成功，则跳过运行</li><li>ONE_DONE：至少一个完成：上游只要有一个完成了，就进行依赖判断，且依赖判断成功，否则还是等待上游</li><li>NONE_FAILED：上游全部完成，没有失败: 所有上游依赖任务都达到终态时，进行依赖判断，如果上游都是成功或者跳过运行，则依赖判断成功，否则标记为上游失败</li><li>ALL_DONE_NONE_FAILED_AT_LEAST_ONE_SUCCESS：上游全部完成，没有失败，至少有一个成功: 所有上游依赖任务都达到终态时，进行依赖判断，上游没有一个失败且至少有一个成功的情况下，依赖判断成功，否则就是跳过运行</li><li>NONE_SKIPPED：上游全部完成，没有跳过运行: 所有上游依赖任务都达到终态时，进行依赖判断, 如果上游状态全部都是成功、失败、上游失败状态，则依赖判断成功，否则为跳过运行</li><li>ALL_DONE_AT_LEAST_ONE_FAILED：上游全部完成至少一个失败: 所有上游依赖任务都达到终态时，进行依赖判断，至少有一个失败，则依赖判断成功，否则就是跳过运行</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependencyTriggerPolicy?: string
+  /**
+   * <p>任务最后更新时间戳</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastUpdateTimestamp?: number
 }
 
 /**

@@ -23,6 +23,7 @@ import {
   DescribeAccountResourcesData,
   ModifyVirtualDeviceGroupsReqItem,
   DescribeDeviceDetailListResponse,
+  ModifyCompanyDirectoryConfigRequest,
   ModifyBusinessResourceRequest,
   DescribeAggrSoftDeviceListRequest,
   ComplexRule,
@@ -51,14 +52,17 @@ import {
   DescribeResourceGrantedAccountGroupsData,
   DescribeResourceGrantedAccountsResponse,
   DescribeResourceGrantedAccountGroupsResponse,
+  DirectoryConfigResultData,
   DescribeResourceGrantedVirtualGroupsResponse,
   DescribeLocalAccountsRequest,
   CreateDeviceTaskResponse,
+  CreateCompanyDirectoryConfigRequest,
   GrantResourcesByAccountGroupsRequest,
   DescribeLocalAccountsPage,
   DescribeSoftwareInformationPageData,
   ModifyDeviceTrustStatusResponse,
   CreateDLPFileDetectionTaskRequest,
+  GrantedVirtualGroupItem,
   BindBusinessResourceConnectorGroupRequest,
   DescribeSoftCensusListByDeviceData,
   ModifyBusinessResourceResponse,
@@ -106,7 +110,7 @@ import {
   CreateDeviceVirtualGroupResponse,
   CreateDLPFileDetectionTaskData,
   DescribeDeviceVirtualGroupsPageRsp,
-  GrantedVirtualGroupItem,
+  CreateCompanyDirectoryConfigResponse,
   AggrSoftDeviceRow,
   SoftVersionAndNum,
   ExportDeviceDownloadTaskResponse,
@@ -137,14 +141,17 @@ import {
   DescribeLocalAccountAccountGroupsData,
   ExportSoftwareInformationListRequest,
   DescribeDeviceInfoRspData,
+  DirectoryConfigData,
   ModifyVirtualDeviceGroupsRequest,
   GetAccountGroupData,
   Sort,
   BindBusinessResourceConnectorGroupResponse,
+  ModifyCompanyDirectoryConfigResponse,
   DescribeDLPEdgeNodeGroupsRspData,
   DescribeDirectAccountGroupResourcesRequest,
   DeviceProcessInfo,
   ExportSoftwareDownloadUrlRspData,
+  DescribeCompanyDirectoryConfigResponse,
   DescribeResourceGrantedVirtualGroupsData,
   RuleExpression,
   DescribeRootAccountGroupRequest,
@@ -157,9 +164,10 @@ import {
   DescribeAggrSoftDetailResponse,
   CreateDLPFileDetectionTaskResponse,
   DescribeDeviceChildGroupsResponse,
+  DescribeVirtualDevicesRequest,
   GrantResourceOperationByVirtualGroups,
   DescribeDLPFileDetectResultResponse,
-  DescribeVirtualDevicesRequest,
+  DescribeCompanyDirectoryConfigRequest,
   CreatePrivilegeCodeResponse,
   DescribeDeviceHardwareInfoListRequest,
   DescribeAggrSoftDetailData,
@@ -184,6 +192,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAggrSoftDeviceListResponse) => void
   ): Promise<DescribeAggrSoftDeviceListResponse> {
     return this.request("DescribeAggrSoftDeviceList", req, cb)
+  }
+
+  /**
+   * 获取企业目录配置
+   */
+  async DescribeCompanyDirectoryConfig(
+    req: DescribeCompanyDirectoryConfigRequest,
+    cb?: (error: string, rep: DescribeCompanyDirectoryConfigResponse) => void
+  ): Promise<DescribeCompanyDirectoryConfigResponse> {
+    return this.request("DescribeCompanyDirectoryConfig", req, cb)
   }
 
   /**
@@ -244,6 +262,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDLPFileDetectTaskResponse) => void
   ): Promise<CreateDLPFileDetectTaskResponse> {
     return this.request("CreateDLPFileDetectTask", req, cb)
+  }
+
+  /**
+   * 编辑企业目录配置
+   */
+  async ModifyCompanyDirectoryConfig(
+    req: ModifyCompanyDirectoryConfigRequest,
+    cb?: (error: string, rep: ModifyCompanyDirectoryConfigResponse) => void
+  ): Promise<ModifyCompanyDirectoryConfigResponse> {
+    return this.request("ModifyCompanyDirectoryConfig", req, cb)
+  }
+
+  /**
+   * 创建企业目录配置
+   */
+  async CreateCompanyDirectoryConfig(
+    req: CreateCompanyDirectoryConfigRequest,
+    cb?: (error: string, rep: CreateCompanyDirectoryConfigResponse) => void
+  ): Promise<CreateCompanyDirectoryConfigResponse> {
+    return this.request("CreateCompanyDirectoryConfig", req, cb)
   }
 
   /**

@@ -16363,6 +16363,14 @@ export interface DescribeLLMContentSecCheckRequest {
    * <p>图片base64编码后的数据,body大小最大支持10M</p>
    */
   ImageEncode?: string
+  /**
+   * <p>tool_call 场景工具名称</p>
+   */
+  ToolName?: string
+  /**
+   * <p>tool_call 场景工具参数</p>
+   */
+  ToolArgs?: string
 }
 
 /**

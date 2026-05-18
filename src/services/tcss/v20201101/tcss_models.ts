@@ -10153,7 +10153,7 @@ export interface ImageRepoInfo {
  */
 export interface CreateAssetImageRegistryScanTaskResponse {
   /**
-   * 返回的任务ID
+   * <p>返回的任务ID</p>
    */
   TaskID?: number
   /**
@@ -13763,33 +13763,37 @@ export interface DescribeAssetImageRegistryDetailRequest {
  */
 export interface CreateAssetImageRegistryScanTaskRequest {
   /**
-   * 是否扫描全部镜像
+   * <p>是否扫描全部镜像</p>
    */
   All?: boolean
   /**
-   * 扫描的镜像列表
+   * <p>扫描的镜像列表</p>
    */
   Images?: Array<ImageInfo>
   /**
-   * 扫描类型数组
+   * <p>扫描类型数组</p>
    */
   ScanType?: Array<string>
   /**
-   * 扫描的镜像列表
+   * <p>扫描的镜像列表</p>
    */
   Id?: Array<number | bigint>
   /**
-   * 过滤条件
+   * <p>过滤条件</p>
    */
   Filters?: Array<AssetFilters>
   /**
-   * 不需要扫描的镜像列表, 与Filters配合使用
+   * <p>不需要扫描的镜像列表, 与Filters配合使用</p>
    */
   ExcludeImageList?: Array<number | bigint>
   /**
-   * 是否仅扫描各repository最新版的镜像, 与Filters配合使用
+   * <p>是否仅扫描各repository最新版的镜像, 与Filters配合使用</p>
    */
   OnlyScanLatest?: boolean
+  /**
+   * <p>任务超时时长</p><p>单位：秒</p>
+   */
+  Timeout?: number
 }
 
 /**

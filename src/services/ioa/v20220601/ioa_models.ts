@@ -88,6 +88,52 @@ export interface DescribeDeviceDetailListResponse {
 }
 
 /**
+ * ModifyCompanyDirectoryConfig请求参数结构体
+ */
+export interface ModifyCompanyDirectoryConfigRequest {
+  /**
+   * <p>企业目录类型</p>
+   */
+  Type: string
+  /**
+   * <p>企业目录名</p>
+   */
+  Name: string
+  /**
+   * <p>使用 JSON 字符串表示的配置信息</p><p>调用此接口前，需要先调用DescribeCompanyDirectoryConfig获取完整的配置，然后对里面需要更新的配置进行修改，请求的时候必须传完整配置，否则可能导致配置缺失出现错误。如果是脱敏的信息，保持原样的脱敏格式提交，如果和脱敏格式不一致，会认为是新的配置值更新原有配置</p>
+   */
+  Config: string
+  /**
+   * <p>是否开启定时同步</p>
+   */
+  SyncEnable: boolean
+  /**
+   * <p>定时同步的策略，枚举值：支持每4小时（4hours）/每日定时（daily）/每周定时（weekly）</p>
+   */
+  SyncPolicy: string
+  /**
+   * <p>JSON 字符串，针对不同类型的同步策略，提取对应不同的值</p>
+   */
+  SyncPolicyParams: string
+  /**
+   * <p>是否同步创建认证源</p>
+   */
+  CreateAuthConfig: boolean
+  /**
+   * <p>是否在登录页展示</p>
+   */
+  DisplayOnLoginPage: boolean
+  /**
+   * <p>企业目录 ID</p>
+   */
+  Id?: number
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+}
+
+/**
  * ModifyBusinessResource请求参数结构体
  */
 export interface ModifyBusinessResourceRequest {
@@ -1113,6 +1159,48 @@ export interface DescribeResourceGrantedAccountGroupsResponse {
 }
 
 /**
+ * 创建/编辑企业目录配置之后返回结果数据
+ */
+export interface DirectoryConfigResultData {
+  /**
+   * <p>企业目录 ID</p>
+   */
+  Id?: number
+  /**
+   * <p>企业目录名称</p>
+   */
+  Name?: string
+  /**
+   * <p>身份源配置 ID</p>
+   */
+  IdentifySourceId?: string
+  /**
+   * <p>是否同步创建了认证配置</p>
+   */
+  CreateAuthConfig?: boolean
+  /**
+   * <p>认证源配置 ID</p>
+   */
+  AuthSourceId?: string
+  /**
+   * <p>认证配置 ID</p>
+   */
+  AuthConfigId?: number
+  /**
+   * <p>认证策略 ID</p>
+   */
+  AuthPolicyId?: number
+  /**
+   * <p>认证支持的平台, PC 或 Mobile</p>
+   */
+  AuthSupportPlatforms?: Array<string>
+  /**
+   * <p>认证方式，授权认证/扫码认证 等</p>
+   */
+  AuthMethods?: Array<string>
+}
+
+/**
  * DescribeResourceGrantedVirtualGroups返回参数结构体
  */
 export interface DescribeResourceGrantedVirtualGroupsResponse {
@@ -1172,6 +1260,52 @@ export interface CreateDeviceTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateCompanyDirectoryConfig请求参数结构体
+ */
+export interface CreateCompanyDirectoryConfigRequest {
+  /**
+   * <p>企业目录类型</p>
+   */
+  Type: string
+  /**
+   * <p>企业目录名</p>
+   */
+  Name: string
+  /**
+   * <p>配置是通过 SM2 加密再 Hex 之后的数据</p>
+   */
+  Config: string
+  /**
+   * <p>是否开启定时同步</p>
+   */
+  SyncEnable: boolean
+  /**
+   * <p>定时同步的策略，枚举值：支持每4小时（4hours）/每日定时（daily）/每周定时（weekly）</p>
+   */
+  SyncPolicy: string
+  /**
+   * <p>JSON 字符串，针对不同类型的同步策略，提取对应不同的值</p>
+   */
+  SyncPolicyParams: string
+  /**
+   * <p>是否同步创建认证源</p>
+   */
+  CreateAuthConfig: boolean
+  /**
+   * <p>是否在登录页展示</p>
+   */
+  DisplayOnLoginPage: boolean
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>使用场景：API 创建，快速上手，普通配置等</p>
+   */
+  Scene?: string
 }
 
 /**
@@ -1248,6 +1382,36 @@ export interface CreateDLPFileDetectionTaskRequest {
    * 回调地址，暂时未使用
    */
   CallBackUrl?: string
+}
+
+/**
+ * GrantedAccountItem
+ */
+export interface GrantedVirtualGroupItem {
+  /**
+   * 账户组Id
+   */
+  VirtualGroupId?: number
+  /**
+   * 分组名称
+   */
+  Name?: string
+  /**
+   * 描述信息
+   */
+  Description?: string
+  /**
+   * 目录id
+   */
+  AccountCount?: number
+  /**
+   * 过期时间
+   */
+  ExpireTime?: number
+  /**
+   * 关联id
+   */
+  RelationId?: number
 }
 
 /**
@@ -2481,33 +2645,17 @@ export interface DescribeDeviceVirtualGroupsPageRsp {
 }
 
 /**
- * GrantedAccountItem
+ * CreateCompanyDirectoryConfig返回参数结构体
  */
-export interface GrantedVirtualGroupItem {
+export interface CreateCompanyDirectoryConfigResponse {
   /**
-   * 账户组Id
+   * <p>创建企业目录配置的结果</p>
    */
-  VirtualGroupId?: number
+  Data?: DirectoryConfigResultData
   /**
-   * 分组名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
-  /**
-   * 描述信息
-   */
-  Description?: string
-  /**
-   * 目录id
-   */
-  AccountCount?: number
-  /**
-   * 过期时间
-   */
-  ExpireTime?: number
-  /**
-   * 关联id
-   */
-  RelationId?: number
+  RequestId?: string
 }
 
 /**
@@ -3171,6 +3319,56 @@ export interface DescribeDeviceInfoRspData {
 }
 
 /**
+ * 企业目录的配置数据
+ */
+export interface DirectoryConfigData {
+  /**
+   * <p>企业目录 ID</p>
+   */
+  Id?: number
+  /**
+   * <p>目录对应身份源类型</p><p>枚举值：</p><ul><li>WeCom： 企业微信</li><li>Lark： 飞书</li><li>DingTalk： 钉钉</li><li>MicrosoftEntraID： 微软 AAD</li></ul>
+   */
+  Type?: string
+  /**
+   * <p>企业目录名称</p>
+   */
+  Name?: string
+  /**
+   * <p>使用 JSON 字符串表示的配置信息</p>
+   */
+  Config?: string
+  /**
+   * <p>是否开启了定时同步</p>
+   */
+  SyncEnable?: boolean
+  /**
+   * <p>定时同步的策略</p><p>枚举值：</p><ul><li>4hours： 按创建时间开始的每 4 小时</li><li>daily： 每日</li><li>weekly： 每周</li></ul>
+   */
+  SyncPolicy?: string
+  /**
+   * <p>JSON 字符串，针对不同类型的同步策略，提取对应不同的值</p>
+   */
+  SyncPolicyParams?: string
+  /**
+   * <p>是否配置了同步创建认证配置</p>
+   */
+  CreateAuthConfig?: boolean
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>对应 Config 的配置 ID</p>
+   */
+  SourceId?: string
+  /**
+   * <p>是否在登录页展示</p>
+   */
+  DisplayOnLoginPage?: boolean
+}
+
+/**
  * ModifyVirtualDeviceGroups请求参数结构体
  */
 export interface ModifyVirtualDeviceGroupsRequest {
@@ -3295,6 +3493,20 @@ export interface BindBusinessResourceConnectorGroupResponse {
 }
 
 /**
+ * ModifyCompanyDirectoryConfig返回参数结构体
+ */
+export interface ModifyCompanyDirectoryConfigResponse {
+  /**
+   * <p>编辑企业目录配置的结果</p>
+   */
+  Data?: DirectoryConfigResultData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 业务响应数据
  */
 export interface DescribeDLPEdgeNodeGroupsRspData {
@@ -3367,6 +3579,20 @@ export interface ExportSoftwareDownloadUrlRspData {
    * 超过一定时间走异步任务
    */
   TaskId?: number
+}
+
+/**
+ * DescribeCompanyDirectoryConfig返回参数结构体
+ */
+export interface DescribeCompanyDirectoryConfigResponse {
+  /**
+   * <p>企业目录配置详情</p>
+   */
+  Data?: DirectoryConfigData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3687,6 +3913,32 @@ export interface DescribeDeviceChildGroupsResponse {
 }
 
 /**
+ * DescribeVirtualDevices请求参数结构体
+ */
+export interface DescribeVirtualDevicesRequest {
+  /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
+   * 过滤条件参数（字段含义请参考接口返回值）- Mid, 类型String，支持操作：【eq，like，ilike】，支持排序- Name, 类型String，支持操作：【eq，like，ilike】，支持排序- Itime, 类型String，支持操作：【eq，like，ilike】，支持排序- UserName, 类型String，支持操作：【eq，like，ilike】，支持排序- MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序- UserId, 类型String，支持操作：【eq，like，ilike】，支持排序- Ip, 类型String，支持操作：【eq，like，ilike】，支持排序- Tags，类型String，支持操作：【eq，like，ilike】，支持排序- LocalIpList，类型String，支持操作：【eq，like，ilike】，支持排序- SerialNum，类型String，支持操作：【eq，like，ilike】，支持排序- Version，类型String，支持操作：【eq，like，ilike】，支持排序- StrVersion，类型String，支持操作：【eq，like，ilike】，支持排序- RtpStatus，类型String，支持操作：【eq，like，ilike】，**不支持排序**- HostName，类型String，支持操作：【eq，like，ilike】，支持排序- IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序- GroupName，类型String，支持操作：【eq，like，ilike】，支持排序- CriticalVulListCount，**类型Int**，支持操作：【eq】，**不支持排序**- RiskCount，**类型Int**，支持操作：【eq】，**不支持排序**- VulVersion，类型String，支持操作：【eq，like，ilike】，**不支持排序**- Virusver，类型String，支持操作：【eq，like，ilike】，**不支持排序**- SysRepver，类型String，支持操作：【eq，like，ilike】，**不支持排序**- BaseBoardSn，类型String，支持操作：【eq，like，ilike】，支持排序- Os，类型String，支持操作：【eq，like，ilike】，支持排序- ConnActiveTime，类型String，支持操作：【eq，like，ilike】，**不支持排序**- FirewallStatus，**类型Int**，支持操作：【eq】，**不支持排序**- ProfileName，类型String，支持操作：【eq，like，ilike】，支持排序- DomainName，类型String，支持操作：【eq，like，ilike】，支持排序- SysRepVersion，类型String，支持操作：【eq，like，ilike】，支持排序- VirusVer，类型String，支持操作：【eq，like，ilike】，支持排序- Cpu，类型String，支持操作：【eq，like，ilike】，支持排序- Memory，类型String，支持操作：【eq，like，ilike】，支持排序- HardDiskSize，类型String，支持操作：【eq，like，ilike】，支持排序- HardwareChangeCount，**类型Int**，支持操作：【eq】，支持排序- AccountName，类型String，支持操作：【like.ilike】，支持排序- AccountGroupName，类型String，支持操作：【like.ilike】，支持排序- ScreenRecordingPermission，**类型Int**，支持操作：【eq】，支持排序- DiskAccessPermission，**类型Int**，支持操作：【eq】，支持排序分页参数- PageNum 从1开始，小于等于0时使用默认参数- PageSize 最大值5000，最好不超过100
+   */
+  Condition?: Condition
+  /**
+   * 终端自定义分组ID（0：获取租户全部自定义分组下的终端数据；其他值：获取具体ID分组下的终端数据）
+   */
+  DeviceVirtualGroupId?: number
+  /**
+   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)
+   */
+  OsType?: number
+  /**
+   * 选填，在线状态 （2表示在线，0或者1表示离线）
+   */
+  OnlineStatus?: number
+}
+
+/**
  * 授权操作
  */
 export interface GrantResourceOperationByVirtualGroups {
@@ -3727,29 +3979,13 @@ export interface DescribeDLPFileDetectResultResponse {
 }
 
 /**
- * DescribeVirtualDevices请求参数结构体
+ * DescribeCompanyDirectoryConfig请求参数结构体
  */
-export interface DescribeVirtualDevicesRequest {
+export interface DescribeCompanyDirectoryConfigRequest {
   /**
-   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   * <p>企业目录 ID</p>
    */
-  DomainInstanceId?: string
-  /**
-   * 过滤条件参数（字段含义请参考接口返回值）- Mid, 类型String，支持操作：【eq，like，ilike】，支持排序- Name, 类型String，支持操作：【eq，like，ilike】，支持排序- Itime, 类型String，支持操作：【eq，like，ilike】，支持排序- UserName, 类型String，支持操作：【eq，like，ilike】，支持排序- MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序- UserId, 类型String，支持操作：【eq，like，ilike】，支持排序- Ip, 类型String，支持操作：【eq，like，ilike】，支持排序- Tags，类型String，支持操作：【eq，like，ilike】，支持排序- LocalIpList，类型String，支持操作：【eq，like，ilike】，支持排序- SerialNum，类型String，支持操作：【eq，like，ilike】，支持排序- Version，类型String，支持操作：【eq，like，ilike】，支持排序- StrVersion，类型String，支持操作：【eq，like，ilike】，支持排序- RtpStatus，类型String，支持操作：【eq，like，ilike】，**不支持排序**- HostName，类型String，支持操作：【eq，like，ilike】，支持排序- IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序- GroupName，类型String，支持操作：【eq，like，ilike】，支持排序- CriticalVulListCount，**类型Int**，支持操作：【eq】，**不支持排序**- RiskCount，**类型Int**，支持操作：【eq】，**不支持排序**- VulVersion，类型String，支持操作：【eq，like，ilike】，**不支持排序**- Virusver，类型String，支持操作：【eq，like，ilike】，**不支持排序**- SysRepver，类型String，支持操作：【eq，like，ilike】，**不支持排序**- BaseBoardSn，类型String，支持操作：【eq，like，ilike】，支持排序- Os，类型String，支持操作：【eq，like，ilike】，支持排序- ConnActiveTime，类型String，支持操作：【eq，like，ilike】，**不支持排序**- FirewallStatus，**类型Int**，支持操作：【eq】，**不支持排序**- ProfileName，类型String，支持操作：【eq，like，ilike】，支持排序- DomainName，类型String，支持操作：【eq，like，ilike】，支持排序- SysRepVersion，类型String，支持操作：【eq，like，ilike】，支持排序- VirusVer，类型String，支持操作：【eq，like，ilike】，支持排序- Cpu，类型String，支持操作：【eq，like，ilike】，支持排序- Memory，类型String，支持操作：【eq，like，ilike】，支持排序- HardDiskSize，类型String，支持操作：【eq，like，ilike】，支持排序- HardwareChangeCount，**类型Int**，支持操作：【eq】，支持排序- AccountName，类型String，支持操作：【like.ilike】，支持排序- AccountGroupName，类型String，支持操作：【like.ilike】，支持排序- ScreenRecordingPermission，**类型Int**，支持操作：【eq】，支持排序- DiskAccessPermission，**类型Int**，支持操作：【eq】，支持排序分页参数- PageNum 从1开始，小于等于0时使用默认参数- PageSize 最大值5000，最好不超过100
-   */
-  Condition?: Condition
-  /**
-   * 终端自定义分组ID（0：获取租户全部自定义分组下的终端数据；其他值：获取具体ID分组下的终端数据）
-   */
-  DeviceVirtualGroupId?: number
-  /**
-   * 系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)
-   */
-  OsType?: number
-  /**
-   * 选填，在线状态 （2表示在线，0或者1表示离线）
-   */
-  OnlineStatus?: number
+  Id?: number
 }
 
 /**

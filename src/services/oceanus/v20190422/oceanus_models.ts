@@ -856,6 +856,14 @@ export interface Setats {
    * <p>类型：0 公网，1 内网</p><p>枚举值：</p><ul><li>0： 公网</li><li>1： 内网</li></ul><p>默认值：0</p>
    */
   WebUIType?: number
+  /**
+   * <p>setats集群的名字</p>
+   */
+  Name?: string
+  /**
+   * <p>setats集群注释</p>
+   */
+  Remark?: string
 }
 
 /**
@@ -2466,37 +2474,53 @@ export interface TriggerJobSavepointResponse {
  */
 export interface VariableItem {
   /**
-   * 变量id
+   * <p>变量id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SerialId?: string
   /**
-   * 变量名
+   * <p>变量名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 变量值
+   * <p>变量值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
   /**
-   * 变量值是否隐藏
+   * <p>变量值类型</p><p>枚举值：</p><ul><li>0： 自定义变量</li><li>1： 凭据值</li></ul>
+   */
+  ValueType?: number
+  /**
+   * <p>凭据所在地域</p>
+   */
+  SecretRegion?: string
+  /**
+   * <p>凭据名称</p>
+   */
+  SecretName?: string
+  /**
+   * <p>凭据版本</p>
+   */
+  SecretVersionId?: string
+  /**
+   * <p>变量值是否隐藏</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: number
   /**
-   * 变量描述
+   * <p>变量描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
-   * 变量创建时间
+   * <p>变量创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 变量创建人
+   * <p>变量创建人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatorUin?: string
@@ -2981,9 +3005,9 @@ export interface ExpertModeConfiguration {
  */
 export interface CreateVariableResponse {
   /**
-   * 变量Id
+   * <p>变量Id</p>
    */
-  VariableId: string
+  VariableId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3533,25 +3557,45 @@ export interface Cluster {
  */
 export interface CreateVariableRequest {
   /**
-   * 变量名
+   * <p>变量名</p>
    */
   Name: string
   /**
-   * 变量值
+   * <p>变量值</p>
    */
   Value: string
   /**
-   * 变量类型  1：显式   2：隐藏
+   * <p>变量类型  1：显式   2：隐藏</p>
    */
   Type: number
   /**
-   * 描述信息
+   * <p>描述信息</p>
    */
   Remark?: string
   /**
-   * 工作空间 SerialId
+   * <p>工作空间 SerialId</p>
    */
   WorkSpaceId?: string
+  /**
+   * <p>变量值类型</p><p>枚举值：</p><ul><li>0： 自定义变量</li><li>1： 凭据值</li></ul>
+   */
+  ValueType?: number
+  /**
+   * <p>凭据所在地域</p>
+   */
+  SecretRegion?: string
+  /**
+   * <p>凭据名称</p>
+   */
+  SecretName?: string
+  /**
+   * <p>凭据版本</p>
+   */
+  SecretVersionId?: string
+  /**
+   * <p>凭据值md5</p>
+   */
+  SecretValueMd5?: string
 }
 
 /**

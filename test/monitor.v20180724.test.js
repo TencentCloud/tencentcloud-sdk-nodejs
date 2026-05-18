@@ -1468,16 +1468,6 @@ it("monitor.v20180724.UpdateDNSConfig", async function () {
     }
 })
 
-it("monitor.v20180724.DescribeServiceDiscovery", async function () {
-    try {
-       const data = await client.DescribeServiceDiscovery({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("monitor.v20180724.DescribeGrafanaIntegrations", async function () {
     try {
        const data = await client.DescribeGrafanaIntegrations({})
@@ -1531,16 +1521,6 @@ it("monitor.v20180724.DescribePrometheusIntegrationMetrics", async function () {
 it("monitor.v20180724.DescribeAllNamespaces", async function () {
     try {
        const data = await client.DescribeAllNamespaces({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("monitor.v20180724.CreateServiceDiscovery", async function () {
-    try {
-       const data = await client.CreateServiceDiscovery({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

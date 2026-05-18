@@ -21,6 +21,7 @@ import {
   UploadAndCommitFileRequest,
   GetKnowledgeBaseListRequest,
   AddChunkRequest,
+  GetUserInstanceListRequest,
   QuerySceneListResponse,
   ModifyChunkRequest,
   ChatAIResponse,
@@ -28,6 +29,7 @@ import {
   GetSessionDetailsResponse,
   ModelUserAuthority,
   ExampleQA,
+  GetUserInstanceListResponse,
   QueryChunkListResponse,
   AddSceneRequest,
   GetJobsByKnowledgeBaseIdRequest,
@@ -97,23 +99,53 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 编辑修改分片
+   * 获取知识库列表
    */
-  async ModifyChunk(
-    req: ModifyChunkRequest,
-    cb?: (error: string, rep: ModifyChunkResponse) => void
-  ): Promise<ModifyChunkResponse> {
-    return this.request("ModifyChunk", req, cb)
+  async GetKnowledgeBaseList(
+    req: GetKnowledgeBaseListRequest,
+    cb?: (error: string, rep: GetKnowledgeBaseListResponse) => void
+  ): Promise<GetKnowledgeBaseListResponse> {
+    return this.request("GetKnowledgeBaseList", req, cb)
   }
 
   /**
-   * 文档切片删除
+   * 操作知识库
    */
-  async DeleteChunk(
-    req: DeleteChunkRequest,
-    cb?: (error: string, rep: DeleteChunkResponse) => void
-  ): Promise<DeleteChunkResponse> {
-    return this.request("DeleteChunk", req, cb)
+  async ModifyKnowledgeBase(
+    req: ModifyKnowledgeBaseRequest,
+    cb?: (error: string, rep: ModifyKnowledgeBaseResponse) => void
+  ): Promise<ModifyKnowledgeBaseResponse> {
+    return this.request("ModifyKnowledgeBase", req, cb)
+  }
+
+  /**
+   * 获取知识库文件信息列表
+   */
+  async GetKnowledgeBaseFileList(
+    req: GetKnowledgeBaseFileListRequest,
+    cb?: (error: string, rep: GetKnowledgeBaseFileListResponse) => void
+  ): Promise<GetKnowledgeBaseFileListResponse> {
+    return this.request("GetKnowledgeBaseFileList", req, cb)
+  }
+
+  /**
+   * 获取用户会话记录详情列表
+   */
+  async GetSessionDetails(
+    req: GetSessionDetailsRequest,
+    cb?: (error: string, rep: GetSessionDetailsResponse) => void
+  ): Promise<GetSessionDetailsResponse> {
+    return this.request("GetSessionDetails", req, cb)
+  }
+
+  /**
+   * 获取实例信息列表
+   */
+  async GetUserInstanceList(
+    req?: GetUserInstanceListRequest,
+    cb?: (error: string, rep: GetUserInstanceListResponse) => void
+  ): Promise<GetUserInstanceListResponse> {
+    return this.request("GetUserInstanceList", req, cb)
   }
 
   /**
@@ -127,13 +159,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取知识库列表
+   * 查询对象权限
    */
-  async GetKnowledgeBaseList(
-    req: GetKnowledgeBaseListRequest,
-    cb?: (error: string, rep: GetKnowledgeBaseListResponse) => void
-  ): Promise<GetKnowledgeBaseListResponse> {
-    return this.request("GetKnowledgeBaseList", req, cb)
+  async QueryUserAuthority(
+    req: QueryUserAuthorityRequest,
+    cb?: (error: string, rep: QueryUserAuthorityResponse) => void
+  ): Promise<QueryUserAuthorityResponse> {
+    return this.request("QueryUserAuthority", req, cb)
   }
 
   /**
@@ -167,6 +199,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新场景
+   */
+  async UpdateScene(
+    req: UpdateSceneRequest,
+    cb?: (error: string, rep: UpdateSceneResponse) => void
+  ): Promise<UpdateSceneResponse> {
+    return this.request("UpdateScene", req, cb)
+  }
+
+  /**
    * 查询场景列表
    */
   async QuerySceneList(
@@ -177,13 +219,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 操作知识库
+   * 新增场景
    */
-  async ModifyKnowledgeBase(
-    req: ModifyKnowledgeBaseRequest,
-    cb?: (error: string, rep: ModifyKnowledgeBaseResponse) => void
-  ): Promise<ModifyKnowledgeBaseResponse> {
-    return this.request("ModifyKnowledgeBase", req, cb)
+  async AddScene(
+    req: AddSceneRequest,
+    cb?: (error: string, rep: AddSceneResponse) => void
+  ): Promise<AddSceneResponse> {
+    return this.request("AddScene", req, cb)
+  }
+
+  /**
+   * 文档切片查询
+   */
+  async QueryChunkList(
+    req: QueryChunkListRequest,
+    cb?: (error: string, rep: QueryChunkListResponse) => void
+  ): Promise<QueryChunkListResponse> {
+    return this.request("QueryChunkList", req, cb)
   }
 
   /**
@@ -194,6 +246,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyUserAuthorityResponse) => void
   ): Promise<ModifyUserAuthorityResponse> {
     return this.request("ModifyUserAuthority", req, cb)
+  }
+
+  /**
+   * 中断DataAgent的回答输出
+   */
+  async StopChatAI(
+    req: StopChatAIRequest,
+    cb?: (error: string, rep: StopChatAIResponse) => void
+  ): Promise<StopChatAIResponse> {
+    return this.request("StopChatAI", req, cb)
+  }
+
+  /**
+   * 编辑修改分片
+   */
+  async ModifyChunk(
+    req: ModifyChunkRequest,
+    cb?: (error: string, rep: ModifyChunkResponse) => void
+  ): Promise<ModifyChunkResponse> {
+    return this.request("ModifyChunk", req, cb)
+  }
+
+  /**
+   * 文档切片删除
+   */
+  async DeleteChunk(
+    req: DeleteChunkRequest,
+    cb?: (error: string, rep: DeleteChunkResponse) => void
+  ): Promise<DeleteChunkResponse> {
+    return this.request("DeleteChunk", req, cb)
   }
 
   /**
@@ -217,66 +299,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 新增场景
-   */
-  async AddScene(
-    req: AddSceneRequest,
-    cb?: (error: string, rep: AddSceneResponse) => void
-  ): Promise<AddSceneResponse> {
-    return this.request("AddScene", req, cb)
-  }
-
-  /**
-   * 查询对象权限
-   */
-  async QueryUserAuthority(
-    req: QueryUserAuthorityRequest,
-    cb?: (error: string, rep: QueryUserAuthorityResponse) => void
-  ): Promise<QueryUserAuthorityResponse> {
-    return this.request("QueryUserAuthority", req, cb)
-  }
-
-  /**
-   * 文档切片查询
-   */
-  async QueryChunkList(
-    req: QueryChunkListRequest,
-    cb?: (error: string, rep: QueryChunkListResponse) => void
-  ): Promise<QueryChunkListResponse> {
-    return this.request("QueryChunkList", req, cb)
-  }
-
-  /**
-   * 获取知识库文件信息列表
-   */
-  async GetKnowledgeBaseFileList(
-    req: GetKnowledgeBaseFileListRequest,
-    cb?: (error: string, rep: GetKnowledgeBaseFileListResponse) => void
-  ): Promise<GetKnowledgeBaseFileListResponse> {
-    return this.request("GetKnowledgeBaseFileList", req, cb)
-  }
-
-  /**
-   * 获取用户会话记录详情列表
-   */
-  async GetSessionDetails(
-    req: GetSessionDetailsRequest,
-    cb?: (error: string, rep: GetSessionDetailsResponse) => void
-  ): Promise<GetSessionDetailsResponse> {
-    return this.request("GetSessionDetails", req, cb)
-  }
-
-  /**
-   * 更新场景
-   */
-  async UpdateScene(
-    req: UpdateSceneRequest,
-    cb?: (error: string, rep: UpdateSceneResponse) => void
-  ): Promise<UpdateSceneResponse> {
-    return this.request("UpdateScene", req, cb)
-  }
-
-  /**
    * 根据知识库id查询jobs 列表
    */
   async GetJobsByKnowledgeBaseId(
@@ -284,15 +306,5 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetJobsByKnowledgeBaseIdResponse) => void
   ): Promise<GetJobsByKnowledgeBaseIdResponse> {
     return this.request("GetJobsByKnowledgeBaseId", req, cb)
-  }
-
-  /**
-   * 中断DataAgent的回答输出
-   */
-  async StopChatAI(
-    req: StopChatAIRequest,
-    cb?: (error: string, rep: StopChatAIResponse) => void
-  ): Promise<StopChatAIResponse> {
-    return this.request("StopChatAI", req, cb)
   }
 }
