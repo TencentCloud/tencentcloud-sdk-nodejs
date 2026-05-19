@@ -132,6 +132,20 @@ export interface DescribeLogHistogramRequest {
 }
 
 /**
+ * DescribeSkillSecScanResult返回参数结构体
+ */
+export interface DescribeSkillSecScanResultResponse {
+  /**
+   * <p>检测结果</p>
+   */
+  Data?: SkillScanQueryData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateBatchIpAccessControl返回参数结构体
  */
 export interface CreateBatchIpAccessControlResponse {
@@ -4602,6 +4616,24 @@ export interface BotActionScopeRuleEntry {
 }
 
 /**
+ * UploadSkillSecScan请求参数结构体
+ */
+export interface UploadSkillSecScanRequest {
+  /**
+   * <p>服务ID</p>
+   */
+  ServiceId: string
+  /**
+   * <p>zip压缩包base64编码后的数据</p>
+   */
+  FileData: string
+  /**
+   * <p>skills文件压缩之后的文件名，.zip结尾</p>
+   */
+  FileName?: string
+}
+
+/**
  * AddAntiFakeUrl返回参数结构体
  */
 export interface AddAntiFakeUrlResponse {
@@ -7202,17 +7234,45 @@ export interface EnableLimitRuleItem {
 }
 
 /**
- * DescribeWafThreatenIntelligence返回参数结构体
+ * AddCustomWhiteRule请求参数结构体
  */
-export interface DescribeWafThreatenIntelligenceResponse {
+export interface AddCustomWhiteRuleRequest {
   /**
-   * WAF 威胁情报封禁信息
+   * 规则名称
    */
-  WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails
+  Name: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 优先级
    */
-  RequestId?: string
+  SortId: string
+  /**
+   * 策略详情
+   */
+  Strategies: Array<Strategy>
+  /**
+   * 需要添加策略的域名
+   */
+  Domain: string
+  /**
+   * 放行的模块，多个模块之间用逗号连接。支持的模块：acl（自定义规则）、owasp（规则引擎）、webshell（恶意文件检测）、geoip（地域封禁）、bwip（IP黑白名单）、cc、botrpc（BOT防护）、antileakage（信息防泄露）、api（API安全）、ai（AI引擎）、ip_auto_deny（IP封禁）、applet（小程序流量风控）
+   */
+  Bypass: string
+  /**
+   * 如果没有设置JobDateTime字段则用此字段，0表示永久生效，其它表示定时生效的截止时间（单位为秒）
+   */
+  ExpireTime?: string
+  /**
+   * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
+   */
+  JobType?: string
+  /**
+   * 定时任务配置
+   */
+  JobDateTime?: JobDateTime
+  /**
+   * 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系
+   */
+  LogicalOp?: string
 }
 
 /**
@@ -7779,6 +7839,20 @@ export interface CreateOwaspWhiteRuleRequest {
 }
 
 /**
+ * SkillScanRuleHit 命中的规则
+ */
+export interface SkillScanRuleHit {
+  /**
+   * <p>规则唯一ID</p>
+   */
+  RuleId?: string
+  /**
+   * <p>规则描述（命中原因说明）</p>
+   */
+  Description?: string
+}
+
+/**
  * CreateAccessExport请求参数结构体
  */
 export interface CreateAccessExportRequest {
@@ -8318,6 +8392,24 @@ export interface DestroyPostCLSFlowResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * skills 上检测接口返回信息
+ */
+export interface SkillScanUploadData {
+  /**
+   * <p>文件的 SHA256 Hash，用于轮询查询接口</p>
+   */
+  ContentHash?: string
+  /**
+   * <p>固定为 scanning，表示任务已接收</p>
+   */
+  Status?: string
+  /**
+   * <p>可读的操作结果描述</p>
+   */
+  Message?: string
 }
 
 /**
@@ -11718,6 +11810,20 @@ export interface ModifyDomainIpv6StatusResponse {
 }
 
 /**
+ * UploadSkillSecScan返回参数结构体
+ */
+export interface UploadSkillSecScanResponse {
+  /**
+   * <p>上传结果</p>
+   */
+  Data?: SkillScanUploadData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeHostLimit返回参数结构体
  */
 export interface DescribeHostLimitResponse {
@@ -12399,6 +12505,20 @@ export interface DeleteCustomRuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * skills检测能力标签
+ */
+export interface SkillScanCapabilityTag {
+  /**
+   * <p>标签唯一ID</p>
+   */
+  Id?: string
+  /**
+   * <p>标签名称（如 network_access、file_system 等）</p>
+   */
+  Name?: string
 }
 
 /**
@@ -13638,6 +13758,76 @@ export interface ModifyDomainIpv6StatusRequest {
 }
 
 /**
+ * skills检测结果列表
+ */
+export interface SkillScanQueryData {
+  /**
+   * <p>检测状态：success（检测完成，有结果）、scanning（检测进行中）、not_found（无记录）、failed（检测失败）</p><p>枚举值：</p><ul><li>success： 检测完成，有结果</li><li>scanning： 检测进行中</li><li>not_found： 无记录</li><li>failed： 检测失败</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>Skill 名称，用于页面展示、结果列表呈现和人工研判</p>
+   */
+  SkillName?: string
+  /**
+   * <p>Skill 描述，通常来自 Skill 元数据或说明信息，用于帮助调用方理解 Skill 的用途</p>
+   */
+  SkillDescription?: string
+  /**
+   * <p>ZIP 文件的 SHA256 哈希值，格式为 sha256:hex_digest</p>
+   */
+  ContentHash?: string
+  /**
+   * <p>风险等级：malicious（恶意）、suspicious（可疑）、benign（可信）</p>
+   */
+  RiskLevel?: string
+  /**
+   * <p>综合处置建议字段，位于 data 顶层，用于给出本次检测结果的总体修复、缓解或人工处置建议</p>
+   */
+  Mitigation?: string
+  /**
+   * <p>安全评分（0-100，100 为最安全）</p><p>取值范围：[0, 100]</p>
+   */
+  SecurityScore?: number
+  /**
+   * <p>本次扫描使用的引擎版本号</p>
+   */
+  EngineVersion?: number
+  /**
+   * <p>Skill 的能力标签列表，对外固定返回格式为 [{id,name}]。该字段用于描述 Skill 具备的能力特征或适用场景，便于调用方做检索、展示或分类；不等同于风险标签，也不表示风险高低或命中规则结果。当 lang=en 时，仅 name 会切换为英文，id 保持不变</p>
+   */
+  CapabilityTags?: Array<SkillScanCapabilityTag>
+  /**
+   * <p>融合规则目录全集，key 为融合 rule_id（9xxxx），value 为风险类别名称；包含所有融合规则类别，调用方可据此展示分类标签，无需本地维护映射表。传 lang=en 时返回英文名称。该对象是名称映射表，不表达主标签优先级</p>
+   */
+  RuleCatalog?: Array<SkillRuleCatalogItem>
+  /**
+   * <p>扫描结果详情，按子引擎分组，每个元素包含 scan_type（引擎类型）和 rule_list（命中的规则列表）；规则中的 rule_id 使用融合编码（9xxxx），可与 rule_catalog 交叉引用。传 lang=en 时，description 返回英文文本</p>
+   */
+  ScanItems?: Array<SkillScanItem>
+  /**
+   * <p>综合安全审计报告地址。调用方可通过 report_url_expire_hours 指定有效期，不传时默认返回 1 年有效期地址</p>
+   */
+  ReportUrl?: string
+  /**
+   * <p>扫描完成时间</p>
+   */
+  ScannedAt?: string
+  /**
+   * <p>任务创建时间</p>
+   */
+  CreatedAt?: string
+  /**
+   * <p>失败时间</p>
+   */
+  FailedAt?: string
+  /**
+   * <p>失败原因描述</p>
+   */
+  Message?: string
+}
+
+/**
  * DescribeAttackWhiteRule请求参数结构体
  */
 export interface DescribeAttackWhiteRuleRequest {
@@ -13747,6 +13937,24 @@ export interface DescribeScanIpResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeSkillSecScanResult请求参数结构体
+ */
+export interface DescribeSkillSecScanResultRequest {
+  /**
+   * <p>服务ID</p>
+   */
+  ServiceId: string
+  /**
+   * <p>ZIP 文件的 SHA256 哈希值，格式为 sha256:hex_digest，请严格遵循文档中的zip打包规范</p>
+   */
+  ContentHash: string
+  /**
+   * <p>返回语言。支持 zh / en，默认 zh</p>
+   */
+  Lang?: string
 }
 
 /**
@@ -14054,45 +14262,17 @@ export interface ImportIpAccessControlResponse {
 }
 
 /**
- * AddCustomWhiteRule请求参数结构体
+ * DescribeWafThreatenIntelligence返回参数结构体
  */
-export interface AddCustomWhiteRuleRequest {
+export interface DescribeWafThreatenIntelligenceResponse {
   /**
-   * 规则名称
+   * WAF 威胁情报封禁信息
    */
-  Name: string
+  WafThreatenIntelligenceDetails?: WafThreatenIntelligenceDetails
   /**
-   * 优先级
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SortId: string
-  /**
-   * 策略详情
-   */
-  Strategies: Array<Strategy>
-  /**
-   * 需要添加策略的域名
-   */
-  Domain: string
-  /**
-   * 放行的模块，多个模块之间用逗号连接。支持的模块：acl（自定义规则）、owasp（规则引擎）、webshell（恶意文件检测）、geoip（地域封禁）、bwip（IP黑白名单）、cc、botrpc（BOT防护）、antileakage（信息防泄露）、api（API安全）、ai（AI引擎）、ip_auto_deny（IP封禁）、applet（小程序流量风控）
-   */
-  Bypass: string
-  /**
-   * 如果没有设置JobDateTime字段则用此字段，0表示永久生效，其它表示定时生效的截止时间（单位为秒）
-   */
-  ExpireTime?: string
-  /**
-   * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
-   */
-  JobType?: string
-  /**
-   * 定时任务配置
-   */
-  JobDateTime?: JobDateTime
-  /**
-   * 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系
-   */
-  LogicalOp?: string
+  RequestId?: string
 }
 
 /**
@@ -15166,6 +15346,20 @@ export interface ModifyOwaspRuleTypeStatusRequest {
 }
 
 /**
+ * 扫描结果详情（按子引擎分组）
+ */
+export interface SkillScanItem {
+  /**
+   * <p>子引擎类型：AI（AI 分析）/ STATIC（静态分析）</p>
+   */
+  ScanType?: string
+  /**
+   * <p>该引擎命中的规则列表</p>
+   */
+  RuleList?: Array<SkillScanRuleHit>
+}
+
+/**
  * clb-waf QPS套餐 New
  */
 export interface QPSPackageNew {
@@ -15322,6 +15516,20 @@ export interface ModifyOwaspWhiteRuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * skills检测命中规则名录
+ */
+export interface SkillRuleCatalogItem {
+  /**
+   * <p>规则分类标识（如 static_analysis、ai_analysis）</p>
+   */
+  Key?: string
+  /**
+   * <p>规则分类中文名称</p>
+   */
+  Value?: string
 }
 
 /**

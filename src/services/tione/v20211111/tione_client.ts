@@ -223,6 +223,7 @@ import {
   HostPath,
   StopModelAccelerateTaskResponse,
   IngressPrivateLinkInfo,
+  DescribeTrainingTaskPodUrlResponse,
   PublicAlgoVersion,
   ServiceEIPInfo,
   DescribeTrainingTasksResponse,
@@ -240,6 +241,7 @@ import {
   StorageExtraConf,
   HealthProbe,
   LocalDisk,
+  DescribeTrainingTaskPodUrlRequest,
   ResourceSpec,
   DescribeLogsResponse,
   EncodedStartCmdInfo,
@@ -311,6 +313,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTrainingModelVersionResponse) => void
   ): Promise<DescribeTrainingModelVersionResponse> {
     return this.request("DescribeTrainingModelVersion", req, cb)
+  }
+
+  /**
+   * 修改一个 AuthToken
+   */
+  async ModifyModelServiceAuthToken(
+    req: ModifyModelServiceAuthTokenRequest,
+    cb?: (error: string, rep: ModifyModelServiceAuthTokenResponse) => void
+  ): Promise<ModifyModelServiceAuthTokenResponse> {
+    return this.request("ModifyModelServiceAuthToken", req, cb)
   }
 
   /**
@@ -717,13 +729,13 @@ https://cloud.tencent.com/document/product/1278/85305
   }
 
   /**
-   * 修改一个 AuthToken
+   * 获取单个训练任务实例的登录链接
    */
-  async ModifyModelServiceAuthToken(
-    req: ModifyModelServiceAuthTokenRequest,
-    cb?: (error: string, rep: ModifyModelServiceAuthTokenResponse) => void
-  ): Promise<ModifyModelServiceAuthTokenResponse> {
-    return this.request("ModifyModelServiceAuthToken", req, cb)
+  async DescribeTrainingTaskPodUrl(
+    req: DescribeTrainingTaskPodUrlRequest,
+    cb?: (error: string, rep: DescribeTrainingTaskPodUrlResponse) => void
+  ): Promise<DescribeTrainingTaskPodUrlResponse> {
+    return this.request("DescribeTrainingTaskPodUrl", req, cb)
   }
 
   /**

@@ -128,33 +128,33 @@ export interface DescribeDBSArchiveLogsResponse {
  */
 export interface DescribeDatabaseObjectsResponse {
   /**
-   * 透传入参。
+   * <p>透传入参。</p>
    */
-  InstanceId: string
+  InstanceId?: string
   /**
-   * 数据库名称。
+   * <p>数据库名称。</p>
    */
-  DbName: string
+  DbName?: string
   /**
-   * 表列表。
+   * <p>表列表。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tables: Array<DatabaseTable>
+  Tables?: Array<DatabaseTable>
   /**
-   * 视图列表。
+   * <p>视图列表。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Views: Array<DatabaseView>
+  Views?: Array<DatabaseView>
   /**
-   * 存储过程列表。
+   * <p>存储过程列表。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Procs: Array<DatabaseProcedure>
+  Procs?: Array<DatabaseProcedure>
   /**
-   * 函数列表。
+   * <p>函数列表。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Funcs: Array<DatabaseFunction>
+  Funcs?: Array<DatabaseFunction>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -514,13 +514,25 @@ export interface DescribeDBSCloneInstancesRequest {
  */
 export interface DescribeDatabaseObjectsRequest {
   /**
-   * 实例 ID，形如：tdsql3-42f40429.
+   * <p>实例 ID，形如：tdsql3-42f40429.</p>
    */
   InstanceId: string
   /**
-   * 数据库名称，通过 DescribeDatabases 接口获取。
+   * <p>数据库名称，通过 DescribeDatabases 接口获取。</p>
    */
   DbName: string
+  /**
+   * <p>分页索引</p>
+   */
+  Offset?: number
+  /**
+   * <p>每页数量</p>
+   */
+  Limit?: number
+  /**
+   * <p>数据表名称匹配表达式</p>
+   */
+  TableRegexp?: string
 }
 
 /**

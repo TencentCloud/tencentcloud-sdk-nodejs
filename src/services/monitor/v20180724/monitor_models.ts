@@ -3377,27 +3377,27 @@ export interface DescribePrometheusScrapeStatisticsResponse {
  */
 export interface ExportPrometheusReadOnlyDynamicAPIRequest {
   /**
-   * Prometheus 实例 ID
+   * <p>Prometheus 实例 ID</p>
    */
   InstanceId: string
   /**
-   * HTTP 方法名 GET/POST/PUT/DELETE 等
+   * <p>HTTP 方法名 GET/POST/PUT/DELETE 等</p>
    */
   Method: string
   /**
-   * HTTP 路径（包括 query string）
+   * <p>HTTP 路径（包括 query string）</p>
    */
   Path: string
   /**
-   * HTTP 请求体，任何数据
+   * <p>HTTP 请求体，任何数据</p>
    */
   RequestBody?: string
   /**
-   * HTTP 请求头
+   * <p>HTTP 请求头</p>
    */
   Headers?: Array<PrometheusStringKeyValuePair>
   /**
-   * 是否请求自监控数据。自监控仅支持 /api/v1/query 与 /api/v1/query_range 接口。
+   * <p>是否请求自监控数据。自监控仅支持 /api/v1/query 与 /api/v1/query_range 接口。</p>
    */
   SelfMonitor?: boolean
 }
@@ -4126,7 +4126,7 @@ export interface DescribeMonitorTypesRequest {
  */
 export interface ExportPrometheusReadOnlyDynamicAPIResponse {
   /**
-   * HTTP 响应数据
+   * <p>HTTP 响应数据</p>
    */
   HTTP?: PrometheusDynamicAPIResponseHTTP
   /**

@@ -661,18 +661,22 @@ export interface DescribeSlaveZonesResponse {
  */
 export interface DescribeProxiesResponse {
   /**
-   * 数据库代理组数
+   * <p>数据库代理组数</p>
    */
   TotalCount?: number
   /**
-   * 数据库代理组列表
+   * <p>数据库代理组列表</p>
    */
   ProxyGroupInfos?: Array<ProxyGroupInfo>
   /**
-   * 数据库代理节点
+   * <p>数据库代理节点</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProxyNodeInfos?: Array<ProxyNodeInfo>
+  /**
+   * <p>sql自动转发</p>
+   */
+  ColumnStoreProxyForward?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4754,32 +4758,27 @@ export interface SaveBackupClusterInfo {
  */
 export interface DescribeProxiesRequest {
   /**
-   * 集群 ID（该参数必传，例如 cynosdbmysql-2u2mh111）。
+   * <p>集群 ID（该参数必传，例如 cynosdbmysql-2u2mh111）。</p>
    */
   ClusterId?: string
   /**
-   * 返回数量，默认为 20，最大值为 100
+   * <p>返回数量，默认为 20，最大值为 100</p>
    */
   Limit?: number
   /**
-   * 记录偏移量，默认值为0
+   * <p>记录偏移量，默认值为0</p>
    */
   Offset?: number
   /**
-   * 排序字段，取值范围：
-<li> CREATETIME：创建时间</li>
-<li> PERIODENDTIME：过期时间</li>
+   * <p>排序字段，取值范围：</p><li> CREATETIME：创建时间</li><li> PERIODENDTIME：过期时间</li>
    */
   OrderBy?: string
   /**
-   * 排序类型，取值范围：
-<li> ASC：升序排序 </li>
-<li> DESC：降序排序 </li>
+   * <p>排序类型，取值范围：</p><li> ASC：升序排序 </li><li> DESC：降序排序 </li>
    */
   OrderByType?: string
   /**
-   * 搜索条件，若存在多个 Filter 时，Filter 间的关系为逻辑与（AND）关系。
-说明：此参数当前仅支持 Status 和 ProxyGroupId 两种过滤条件。
+   * <p>搜索条件，若存在多个 Filter 时，Filter 间的关系为逻辑与（AND）关系。<br>说明：此参数当前仅支持 Status 和 ProxyGroupId 两种过滤条件。</p>
    */
   Filters?: Array<QueryParamFilter>
 }

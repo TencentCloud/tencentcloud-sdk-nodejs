@@ -23,6 +23,7 @@ import {
   ModifyUserLevelResponse,
   PathItem,
   DescribeLogHistogramRequest,
+  DescribeSkillSecScanResultResponse,
   CreateBatchIpAccessControlResponse,
   ModifyWebshellStatusRequest,
   WafRuleLimit,
@@ -195,6 +196,7 @@ import {
   GetAttackDownloadRecordsRequest,
   DescribeDomainsResponse,
   BotActionScopeRuleEntry,
+  UploadSkillSecScanRequest,
   AddAntiFakeUrlResponse,
   SearchAttackLogResponse,
   ModifySpartaProtectionModeResponse,
@@ -300,7 +302,7 @@ import {
   DescribeBotSceneListResponse,
   AddAntiInfoLeakRulesResponse,
   EnableLimitRuleItem,
-  DescribeWafThreatenIntelligenceResponse,
+  AddCustomWhiteRuleRequest,
   AddDomainWhiteRuleRequest,
   DeleteAntiInfoLeakRuleResponse,
   IpHitItem,
@@ -321,6 +323,7 @@ import {
   DeleteSpartaProtectionResponse,
   ClbObject,
   CreateOwaspWhiteRuleRequest,
+  SkillScanRuleHit,
   CreateAccessExportRequest,
   ModifyBotSceneUCBRuleResponse,
   DescribeIpHitItemsResponse,
@@ -346,6 +349,7 @@ import {
   ModifyInstanceQpsLimitRequest,
   InOutputUCBRuleEntry,
   DestroyPostCLSFlowResponse,
+  SkillScanUploadData,
   ApiSecExtractRule,
   UpsertCCAutoStatusResponse,
   ModifyOwaspRuleStatusResponse,
@@ -462,6 +466,7 @@ import {
   DescribeAccessFastAnalysisResponse,
   DeleteAntiInfoLeakRuleRequest,
   ModifyDomainIpv6StatusResponse,
+  UploadSkillSecScanResponse,
   DescribeHostLimitResponse,
   DeleteAntiFakeUrlRequest,
   DescribeSpartaProtectionInfoRequest,
@@ -494,6 +499,7 @@ import {
   DescribeWafThreatenIntelligenceRequest,
   DescribeAccessExportsResponse,
   DeleteCustomRuleResponse,
+  SkillScanCapabilityTag,
   UpstreamRule,
   DescribeHistogramRequest,
   DeleteCCRuleResponse,
@@ -536,10 +542,12 @@ import {
   SessionData,
   CCRuleItems,
   ModifyDomainIpv6StatusRequest,
+  SkillScanQueryData,
   DescribeAttackWhiteRuleRequest,
   DescribeAntiInfoLeakageRulesResponse,
   AddAreaBanAreasResponse,
   DescribeScanIpResponse,
+  DescribeSkillSecScanResultRequest,
   OwaspRule,
   GetAttackHistogramRequest,
   RuleList,
@@ -553,7 +561,7 @@ import {
   AddAttackWhiteRuleResponse,
   DescribeApiAggregateTopNResponse,
   ImportIpAccessControlResponse,
-  AddCustomWhiteRuleRequest,
+  DescribeWafThreatenIntelligenceResponse,
   DescribeTopicsResponse,
   BatchCustomWhiteRule,
   PortItem,
@@ -572,6 +580,7 @@ import {
   ModifyHostStatusResponse,
   DescribeApiSecSensitiveRuleListResponse,
   ModifyOwaspRuleTypeStatusRequest,
+  SkillScanItem,
   QPSPackageNew,
   LogHistogramInfo,
   DeleteDomainWhiteRulesRequest,
@@ -580,6 +589,7 @@ import {
   TokenRuleEntryValue,
   LimitHeader,
   ModifyOwaspWhiteRuleResponse,
+  SkillRuleCatalogItem,
   ModifyBotIdRuleResponse,
   ModifyApiSecEventChangeResponse,
   ModifyCustomWhiteRuleStatusResponse,
@@ -934,6 +944,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeApiAggregateTopNResponse) => void
   ): Promise<DescribeApiAggregateTopNResponse> {
     return this.request("DescribeApiAggregateTopN", req, cb)
+  }
+
+  /**
+   * 上传Skill ZIP文件，触发异步安全检测
+   */
+  async UploadSkillSecScan(
+    req: UploadSkillSecScanRequest,
+    cb?: (error: string, rep: UploadSkillSecScanResponse) => void
+  ): Promise<UploadSkillSecScanResponse> {
+    return this.request("UploadSkillSecScan", req, cb)
   }
 
   /**
@@ -2198,6 +2218,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeWafAutoDenyRulesResponse) => void
   ): Promise<DescribeWafAutoDenyRulesResponse> {
     return this.request("DescribeWafAutoDenyRules", req, cb)
+  }
+
+  /**
+   * 根据文件Hash查询Skill安全检测结果
+   */
+  async DescribeSkillSecScanResult(
+    req: DescribeSkillSecScanResultRequest,
+    cb?: (error: string, rep: DescribeSkillSecScanResultResponse) => void
+  ): Promise<DescribeSkillSecScanResultResponse> {
+    return this.request("DescribeSkillSecScanResult", req, cb)
   }
 
   /**

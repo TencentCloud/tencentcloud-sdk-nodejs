@@ -16,7 +16,7 @@
  */
 
 /**
- * 资源列列表信息
+ * 资源列表信息
  */
 export interface ResourceListInfo {
   /**
@@ -1023,23 +1023,23 @@ export interface ListAlarmPolicyRequest {
  */
 export interface DescribeSystemCompliancePackResponse {
   /**
-   * 合规包ID
+   * <p>合规包ID</p>
    */
   CompliancePackId?: string
   /**
-   * 合规包名称
+   * <p>合规包名称</p>
    */
   CompliancePackName?: string
   /**
-   * 合规包描述
+   * <p>合规包描述</p>
    */
   Description?: string
   /**
-   * 风险等级
+   * <p>风险等级</p>
    */
   RiskLevel?: number
   /**
-   * 合规包规则列表
+   * <p>合规包规则列表</p>
    */
   ConfigRules?: Array<CompliancePackRuleForManage>
   /**
@@ -1686,74 +1686,74 @@ export interface AggregateEvaluationResult {
  */
 export interface SystemConfigRule {
   /**
-   * 规则标识
+   * <p>规则标识</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Identifier: string
+  Identifier?: string
   /**
-   * 规则名
+   * <p>规则名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RuleName: string
+  RuleName?: string
   /**
-   * 规则参数
+   * <p>规则参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InputParameter: Array<InputParameterForManage>
+  InputParameter?: Array<InputParameterForManage>
   /**
-   * 规则触发条件
+   * <p>规则触发条件</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SourceCondition: Array<SourceConditionForManage>
+  SourceCondition?: Array<SourceConditionForManage>
   /**
-   * 支持的资源类型
+   * <p>支持的资源类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceType: Array<string>
+  ResourceType?: Array<string>
   /**
-   * 标签
+   * <p>标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Label: Array<string>
+  Label?: Array<string>
   /**
-   * 风险等级，1，2，3
+   * <p>风险等级，1，2，3</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RiskLevel: number
+  RiskLevel?: number
   /**
-   * 对应的函数
+   * <p>对应的函数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceFunction: string
+  ServiceFunction?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime: string
+  CreateTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UpdateTime: string
+  UpdateTime?: string
   /**
-   * 触发类型
+   * <p>触发类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TriggerType: Array<string>
+  TriggerType?: Array<string>
   /**
-   * 描述
+   * <p>描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
-   * 使用次数
+   * <p>使用次数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ReferenceCount: number
+  ReferenceCount?: number
   /**
-   * 规则类型
+   * <p>规则类型</p>
    */
-  IdentifierType: string
+  IdentifierType?: string
 }
 
 /**
@@ -2010,7 +2010,7 @@ export interface CloseConfigRuleRequest {
  */
 export interface DescribeSystemCompliancePackRequest {
   /**
-   * 合规包ID
+   * <p>合规包ID</p>
    */
   CompliancePackId: string
 }
@@ -2632,42 +2632,42 @@ export interface EvaluationResult {
  */
 export interface ConfigCompliancePack {
   /**
-   * 合规包状态
+   * <p>合规包状态</p>
    */
   Status: string
   /**
-   * 合规包ID
+   * <p>合规包ID</p>
    */
   CompliancePackId: string
   /**
-   * 描述
+   * <p>描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description: string
   /**
-   * 合规包名称
+   * <p>合规包名称</p>
    */
   CompliancePackName: string
   /**
-   * 风险等级
+   * <p>风险等级</p>
    */
   RiskLevel: number
   /**
-   * 评估结果
+   * <p>评估结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ComplianceResult: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime: string
   /**
-   * 不合规规则名
+   * <p>不合规规则名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NoCompliantNames: Array<string>
   /**
-   * 合规包规则数
+   * <p>合规包规则数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleCount: number
@@ -2736,37 +2736,37 @@ export interface ListRemediationExecutionsRequest {
  */
 export interface CompliancePackRule {
   /**
-   * 规则名称
+   * <p>规则名称</p>
    */
   RuleName: string
   /**
-   * 风险等级
+   * <p>风险等级</p>
    */
   RiskLevel: number
   /**
-   * 入参
+   * <p>入参</p>
    */
   InputParameter: Array<InputParameter>
   /**
-   * 规则身份标识
+   * <p>规则身份标识</p>
    */
   Identifier?: string
   /**
-   * 描述
+   * <p>描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 预设规则身份标识
+   * <p>预设规则身份标识</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ManagedRuleIdentifier?: string
   /**
-   * 规则ID
+   * <p>规则ID</p>
    */
   ConfigRuleId?: string
   /**
-   * 合规包ID
+   * <p>合规包ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CompliancePackId?: string

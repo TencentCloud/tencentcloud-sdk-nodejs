@@ -288,6 +288,16 @@ it("waf.v20180125.DescribeApiAggregateTopN", async function () {
     }
 })
 
+it("waf.v20180125.UploadSkillSecScan", async function () {
+    try {
+       const data = await client.UploadSkillSecScan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("waf.v20180125.DeleteOwaspRuleStatus", async function () {
     try {
        const data = await client.DeleteOwaspRuleStatus({})
@@ -1541,6 +1551,16 @@ it("waf.v20180125.DescribeRateLimitsV2", async function () {
 it("waf.v20180125.DescribeWafAutoDenyRules", async function () {
     try {
        const data = await client.DescribeWafAutoDenyRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeSkillSecScanResult", async function () {
+    try {
+       const data = await client.DescribeSkillSecScanResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

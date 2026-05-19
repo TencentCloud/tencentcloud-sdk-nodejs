@@ -52,7 +52,7 @@ export interface DescribeListenersResponse {
  */
 export interface ModifyListenerResponse {
   /**
-   * 任务ID。
+   * <p>任务ID。</p>
    */
   TaskId?: string
   /**
@@ -548,19 +548,19 @@ export interface DeleteGlobalAcceleratorRequest {
  */
 export interface EndpointConfigurations {
   /**
-   * 域名类型。可选值'Domain', 'PublicIp'。
+   * <p>域名类型。可选值&#39;Domain&#39;, &#39;PublicIp&#39;。</p>
    */
   EndpointType: string
   /**
-   * 域名。
+   * <p>域名。</p>
    */
   EndpointService: string
   /**
-   * 权重。
+   * <p>权重。</p>
    */
   Weight: number
   /**
-   * 健康检查状态；HEALTH：健康；UNHEALTH：不健康。
+   * <p>健康检查状态；HEALTH：健康；UNHEALTH：不健康。</p>
    */
   HealthCheckStatus?: string
 }
@@ -708,59 +708,59 @@ export interface ModifyForwardingRuleRequest {
  */
 export interface ModifyListenerRequest {
   /**
-   * 全球加速实例ID。
+   * <p>全球加速实例ID。</p>
    */
   GlobalAcceleratorId: string
   /**
-   * 监听器ID。
+   * <p>监听器ID。</p>
    */
   ListenerId: string
   /**
-   * 名称，最大长度不能超过60个字节。
+   * <p>名称，最大长度不能超过60个字节。</p>
    */
   Name?: string
   /**
-   * 描述信息，最大长度不能超过100个字节。
+   * <p>描述信息，最大长度不能超过100个字节。</p>
    */
   Description?: string
   /**
-   * 连接空闲等待时间。
+   * <p>连接空闲等待时间。</p>
    */
   IdleTimeout?: number
   /**
-   * 是否开启会话保持。
+   * <p>是否开启会话保持。</p>
    */
   ClientAffinity?: string
   /**
-   * 会话保持时间。
+   * <p>会话保持时间。</p>
    */
   ClientAffinityTime?: number
   /**
-   * 请求超时时间。
+   * <p>请求超时时间。</p>
    */
   RequestTimeout?: number
   /**
-   * 是否打开七层获取源IP方式。
+   * <p>是否打开七层获取源IP方式。</p>
    */
   XForwardedForRealIp?: boolean
   /**
-   * 解析方式。UNIDIRECTIONAL：双向。MUTUAL：单向。
+   * <p>解析方式。UNIDIRECTIONAL：双向。MUTUAL：单向。</p>
    */
   CertificationType?: string
   /**
-   * 加密算法套件。
+   * <p>加密算法套件。</p>
    */
   CipherPolicyId?: string
   /**
-   * 服务器证书。
+   * <p>服务器证书。</p>
    */
   ServerCertificates?: Array<string>
   /**
-   * 客户端证书。
+   * <p>客户端证书。</p>
    */
   ClientCaCertificates?: Array<string>
   /**
-   * 四层获取源IP方式。
+   * <p>四层获取源IP方式。</p>
    */
   GetRealIpType?: string
 }

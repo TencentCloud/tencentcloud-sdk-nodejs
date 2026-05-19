@@ -28,6 +28,16 @@ it("tione.v20211111.DescribeTrainingModelVersion", async function () {
     }
 })
 
+it("tione.v20211111.ModifyModelServiceAuthToken", async function () {
+    try {
+       const data = await client.ModifyModelServiceAuthToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tione.v20211111.DescribeModelService", async function () {
     try {
        const data = await client.DescribeModelService({})
@@ -428,9 +438,9 @@ it("tione.v20211111.DescribeSubAccountLinuxUserInfos", async function () {
     }
 })
 
-it("tione.v20211111.ModifyModelServiceAuthToken", async function () {
+it("tione.v20211111.DescribeTrainingTaskPodUrl", async function () {
     try {
-       const data = await client.ModifyModelServiceAuthToken({})
+       const data = await client.DescribeTrainingTaskPodUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
