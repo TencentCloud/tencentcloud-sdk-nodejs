@@ -1214,7 +1214,7 @@ export interface DescribeClusterDetailRequest {
  */
 export interface CopyBackupToVaultResponse {
   /**
-   * 任务ID
+   * <p>任务ID</p>
    */
   TaskId?: number
   /**
@@ -3971,12 +3971,12 @@ export interface AuditRuleFilters {
  */
 export interface SparseBackupConfigRsp {
   /**
-   * 稀疏备份开关：ON/OFF
+   * <p>稀疏备份开关：ON/OFF</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SparseBackupSwitch?: string
   /**
-   * 稀疏备份策略列表（1-3条）
+   * <p>稀疏备份策略列表（1-3条）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SparseBackupConfigInfos?: Array<SparseBackupConfigInfo>
@@ -9834,6 +9834,24 @@ export interface OpenClusterReadOnlyInstanceGroupAccessResponse {
 }
 
 /**
+ * AI 优化器状态
+ */
+export interface AIOptimizerStatus {
+  /**
+   * <p>状态。closing-关闭中，closed-关闭，opening-开启中，training-训练中，trained-训练完成，train_failed-训练失败。</p>
+   */
+  Status?: string
+  /**
+   * <p>开启时间</p>
+   */
+  OpenTime?: string
+  /**
+   * <p>训练进度</p>
+   */
+  TrainingProgress?: number
+}
+
+/**
  * 查询参数过滤器
  */
 export interface QueryParamFilter {
@@ -10779,11 +10797,11 @@ offlined 已下线
  */
 export interface CopyBackupToVaultRequest {
   /**
-   * 目标保险箱ID，备份文件将复制到此保险箱
+   * <p>目标保险箱ID，备份文件将复制到此保险箱</p>
    */
   VaultId?: string
   /**
-   * 备份文件ID列表，支持批量复制多个备份文件
+   * <p>备份文件ID列表，支持批量复制多个备份文件</p>
    */
   BackupIds?: Array<number | bigint>
 }
@@ -12734,81 +12752,81 @@ export interface DownloadLibraDBClusterListRequest {
  */
 export interface ClusterInstanceDetail {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 引擎类型
+   * <p>引擎类型</p>
    */
   InstanceType?: string
   /**
-   * 实例状态
+   * <p>实例状态</p>
    */
   InstanceStatus?: string
   /**
-   * 实例状态描述
+   * <p>实例状态描述</p>
    */
   InstanceStatusDesc?: string
   /**
-   * cpu核数
+   * <p>cpu核数</p>
    */
   InstanceCpu?: number
   /**
-   * 内存
+   * <p>内存</p>
    */
   InstanceMemory?: number
   /**
-   * 硬盘
+   * <p>硬盘</p>
    */
   InstanceStorage?: number
   /**
-   * 实例角色
+   * <p>实例角色</p>
    */
   InstanceRole?: string
   /**
-   * 执行开始时间(距离0点的秒数)
+   * <p>执行开始时间(距离0点的秒数)</p>
    */
   MaintainStartTime?: number
   /**
-   * 持续的时间(单位：秒)
+   * <p>持续的时间(单位：秒)</p>
    */
   MaintainDuration?: number
   /**
-   * 可以执行的时间，枚举值：["Mon","Tue","Wed","Thu","Fri", "Sat", "Sun"]
+   * <p>可以执行的时间，枚举值：[&quot;Mon&quot;,&quot;Tue&quot;,&quot;Wed&quot;,&quot;Thu&quot;,&quot;Fri&quot;, &quot;Sat&quot;, &quot;Sun&quot;]</p>
    */
   MaintainWeekDays?: Array<string>
   /**
-   * serverless实例子状态
+   * <p>serverless实例子状态</p>
    */
   ServerlessStatus?: string
   /**
-   * 实例任务信息
+   * <p>实例任务信息</p>
    */
   InstanceTasks?: Array<ObjectTask>
   /**
-   * 实例机器类型
-1. common，通用型。
-2. exclusive，独享型。
+   * <p>实例机器类型</p><ol><li>common，通用型。</li><li>exclusive，独享型。</li></ol>
    */
   InstanceDeviceType?: string
   /**
-   * 实例存储类型
-说明：仅当要查询的资源为 LibraDB 时，此参数才会返回值。
+   * <p>实例存储类型<br>说明：仅当要查询的资源为 LibraDB 时，此参数才会返回值。</p>
    */
   InstanceStorageType?: string
   /**
-   * 数据库类型
+   * <p>数据库类型</p>
    */
   DbMode?: string
   /**
-   * 节点列表
-说明：仅当要查询的资源为 LibraDB 时，此参数才会返回值。
+   * <p>节点列表<br>说明：仅当要查询的资源为 LibraDB 时，此参数才会返回值。</p>
    */
   NodeList?: Array<string>
+  /**
+   * <p>AI优化器状态</p>
+   */
+  AIOptimizerStatus?: AIOptimizerStatus
 }
 
 /**
@@ -14555,23 +14573,23 @@ export interface ModifyClusterPasswordComplexityRequest {
  */
 export interface SparseBackupConfigInfo {
   /**
-   * 操作类型:add,modify,remove
+   * <p>操作类型:add,modify,remove</p>
    */
   OpType: string
   /**
-   * 配置 ID
+   * <p>配置 ID</p>
    */
   ConfigId?: string
   /**
-   * 周期策略类型：weekly/monthly/yearly
+   * <p>周期策略类型：weekly/monthly/yearly</p>
    */
   SparsePeriodConfig?: string
   /**
-   * 周期时间配置
+   * <p>周期时间配置</p>
    */
   SparsePeriodTime?: SparsePeriodTime
   /**
-   * 保留天数（7-7320天，最长20年）
+   * <p>保留天数（7-7320天，最长20年）</p>
    */
   SparseBackupSaveDays?: number
 }

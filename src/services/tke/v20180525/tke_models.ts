@@ -2923,35 +2923,36 @@ export interface DescribePrometheusRecordRulesRequest {
  */
 export interface VirtualNodePool {
   /**
-   * 节点池ID
+   * <p>节点池ID</p>
    */
   NodePoolId?: string
   /**
-   * 子网列表
+   * <p>子网列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetIds?: Array<string>
   /**
-   * 节点池名称
+   * <p>节点池名称</p>
    */
   Name?: string
   /**
-   * 节点池生命周期
-- creating：创建中
-- normal：正常
-- updating：更新中
+   * <p>节点池生命周期</p><ul><li>creating：创建中</li><li>normal：正常</li><li>updating：更新中</li></ul>
    */
   LifeState?: string
   /**
-   * 虚拟节点label
+   * <p>虚拟节点label</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Labels?: Array<Label>
   /**
-   * 虚拟节点taint
+   * <p>虚拟节点taint</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Taints?: Array<Taint>
+  /**
+   * <p>子网分配策略</p>
+   */
+  SubnetAllocationPolicy?: SubnetAllocationPolicy
 }
 
 /**
@@ -5856,6 +5857,20 @@ export interface CreateEdgeCVMInstancesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 子网资源分配
+ */
+export interface SubnetAllocation {
+  /**
+   * <p>子网 ID</p>
+   */
+  SubnetId: string
+  /**
+   * <p>分配比例（百分比），所有 Ratio 之和必须等于 100</p>
+   */
+  Ratio: number
 }
 
 /**
@@ -9010,6 +9025,11 @@ export interface Cluster {
    */
   IsHighAvailability?: boolean
   /**
+   * <p>集群分类：tke=标准TKE集群，agent=Agent集群</p><p>默认值：tke</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterCategory?: string
+  /**
    * <p>开启后会下发Gatekeeper和网络策略</p>
    */
   SecurityModeConfig?: SecurityModeConfig
@@ -12016,6 +12036,16 @@ export interface DeletePrometheusAlertPolicyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 子网资源分配策略，精确控制各子网之间的资源分配比例。
+ */
+export interface SubnetAllocationPolicy {
+  /**
+   * <p>子网分配列表</p>
+   */
+  Allocations: Array<SubnetAllocation>
 }
 
 /**

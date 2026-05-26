@@ -41,20 +41,23 @@ import {
   DescribeTWeSeeRecognitionTaskResponse,
   DescribeCloudStorageAIServiceTaskRequest,
   DescribeCloudStorageThumbnailListRequest,
-  CheckFirmwareUpdateResponse,
+  DescribeTWeSeeSubscriptionResponse,
   DescribeCloudStorageUsersResponse,
   CountDataInfo,
   DescribeCloudStoragePackageConsumeDetailsRequest,
   BatchUpdateFirmwareResponse,
   DescribeActivateLicenseServiceResponse,
+  RenewTWeSeeSubscriptionRequest,
   CreateCloudStorageAIServiceTaskRequest,
   DescribeCloudStorageOrderRequest,
   TalkConversationConfigInfo,
   GetTWeTalkProductConfigListRequest,
   DescribeSpaceFenceEventListResponse,
+  DescribeTWeSeeTaskResponse,
   DescribeCloudStorageEventsWithAITasksResponse,
   SearchTopicRuleResponse,
   ModifyCloudStorageAIServiceResponse,
+  InvokeTWeSeeComprehensionRequest,
   DescribeDeviceFirmWareRequest,
   BindCloudStorageUserRequest,
   CreateLoRaFrequencyRequest,
@@ -71,32 +74,43 @@ import {
   DescribeDeviceResponse,
   DescribeCloudStorageEventsRequest,
   GetStudioProductListResponse,
+  DestroyTWeSeeSubscriptionResponse,
   GetTWeCallActiveStatusRequest,
   GetAuthMiniProgramAppListRequest,
   DescribeFenceEventListRequest,
   DescribeAISearchTaskAsyncRequest,
+  DescribeTWeSeeSubscriptionRequest,
   ActivateTWeTalkResponse,
   ActivateTWeCallLicenseResponse,
   ActivateTWeTalkRequest,
+  ListTWeSeeTasksResponse,
   DescribeProductDynamicRegisterRequest,
   DeleteTopicPolicyRequest,
+  InquireTWeSeeSubscriptionCreatePriceRequest,
   ResetCloudStorageEventRequest,
   TopicItem,
   CreateTWeTalkAIBotResponse,
+  DeleteTWeSeeCallbackResponse,
+  DescribeTWeSeeTaskStatisticsResponse,
   GetFamilyDeviceUserListRequest,
   CreateTRTCSignaturesWithRoomIdRequest,
   DescribeSpaceFenceEventListRequest,
   FenceEventItem,
+  SeeComprehensionConfig,
+  CreateTWeSeeCallbackResponse,
   DescribeUnbindedDevicesRequest,
   RegisteredDeviceNetTypeInfo,
   InvokeAISearchServiceResponse,
   ModifyTWeSeeConfigRequest,
   DescribeGatewaySubDeviceListRequest,
+  ModifyTWeSeeSubscriptionRenewFlagRequest,
   GetDeviceListRequest,
   DescribeDeviceDataHistoryRequest,
   DescribeStudioProductRequest,
+  TalkAIBotInfo,
   DescribeCloudStorageThumbnailListResponse,
   DeletePositionFenceRequest,
+  ListTWeSeeCallbackRequest,
   GetProjectListRequest,
   ModifyPositionSpaceRequest,
   DescribeDeviceBindGatewayRequest,
@@ -112,8 +126,10 @@ import {
   ModifyProjectRequest,
   ModifySpacePropertyResponse,
   PauseTWeCallDeviceRequest,
+  ModifyTWeSeeCallbackResponse,
   DescribeDeviceDataHistoryResponse,
   CreateTWeSeeRecognitionTaskWithFileResponse,
+  SeeCallbackInfo,
   GetTWeTalkActiveRecordListRequest,
   DeviceUser,
   ProductModelDefinition,
@@ -124,6 +140,7 @@ import {
   InstanceDetail,
   InvokeTWeSeeRecognitionTaskWithFileResponse,
   GetBatchProductionsListResponse,
+  DescribeGatewayBindDevicesResponse,
   DescribeDeviceFirmwaresResponse,
   DescribeCloudStorageUsersRequest,
   TWeCallLicenseInfo,
@@ -145,9 +162,11 @@ import {
   GetDeviceListResponse,
   DescribeCloudStorageMultiThumbnailResponse,
   BindProductInfo,
-  TalkAIBotInfo,
+  CheckFirmwareUpdateResponse,
+  ListTWeSeeTasksRequest,
+  InquireTWeSeeSubscriptionRenewPriceResponse,
   DescribeFreeCloudStorageNumRequest,
-  InvokeVideosKeywordsAnalyzerResponse,
+  CloudStorageUserInfo,
   ModifyTWeTalkAIBotRequest,
   DescribeDevicePositionListRequest,
   DeleteOtaModuleRequest,
@@ -167,16 +186,20 @@ import {
   SearchStudioProductResponse,
   DescribeTWeTalkAIBotResponse,
   TalkProductInfo,
+  ModifyTWeSeeSubscriptionResponse,
   FenceBindDeviceItem,
+  CreateTWeSeeSubscriptionResponse,
   DescribeBatchProductionResponse,
   DescribeProductCloudStorageAIServiceResponse,
   DescribeLoRaFrequencyRequest,
   ModifyTWeTalkProductConfigResponse,
+  ModifyTWeSeeSubscriptionRequest,
   GetTWeTalkActiveRecordListResponse,
   DeleteCloudStorageEventRequest,
   SearchPositionSpaceRequest,
   DescribeCloudStorageAIServiceCallbackResponse,
   DescribeTWeTalkAIBotRequest,
+  VisionCustomDetectQuery,
   ModifyLoRaGatewayResponse,
   CallDeviceActionSyncResponse,
   CreateLoRaGatewayRequest,
@@ -186,35 +209,41 @@ import {
   DescribeFenceBindListResponse,
   TransferTWeCallDeviceRequest,
   PackageConsumeTask,
+  RenewTWeSeeSubscriptionResponse,
   CreateTWeSeeRecognitionTaskResponse,
   UnbindProductsRequest,
   GetTWeTalkProductConfigListV2Request,
   CreateCloudStorageAIServiceRequest,
+  DescribeTWeSeeCallbackResponse,
   DescribeStudioProductResponse,
   VisionRecognitionResult,
   CreateIotVideoCloudStorageResponse,
   DescribePackageConsumeTaskResponse,
   CheckFirmwareUpdateRequest,
   RemoveUserByRoomIdFromTRTCRequest,
-  CloudStorageUserInfo,
+  DescribeTWeSeePostPaidServiceResponse,
   ModifyPositionSpaceResponse,
   ModifyCloudStorageAIServiceCallbackResponse,
+  CreateTWeSeeCallbackRequest,
   PositionItem,
+  ListTWeSeeCallbackResponse,
   TalkIdleDetectionConfigInfo,
   CreateFenceBindResponse,
   DescribeBindedProductsResponse,
   LoRaGatewayLocation,
+  SeeTaskMetadata,
   ModifyTopicRuleResponse,
   DescribeBatchProductionRequest,
   DescribeCloudStorageAIServiceTaskResponse,
   PublishRRPCMessageResponse,
   CloudStorageEvent,
+  InquireTWeSeeSubscriptionCreatePriceResponse,
   CreateTWeTalkProductConfigV2Request,
   DescribeInstanceResponse,
   GetLoRaGatewayListRequest,
   DescribeProjectRequest,
   SeeEventIdFilterConfig,
-  DescribeSubscribedTopicPolicyRequest,
+  GetTWeTalkAIBotListResponse,
   UploadFirmwareResponse,
   ModifyTopicPolicyRequest,
   DeleteTopicRuleRequest,
@@ -244,7 +273,7 @@ import {
   PublishMessageResponse,
   DescribeCloudStorageEventsResponse,
   SearchKeyword,
-  DescribeTWeTalkProductConfigRequest,
+  DescribeModelDefinitionRequest,
   DisableTopicRuleRequest,
   DescribeTWeSeeConfigRequest,
   CreateTopicRuleResponse,
@@ -258,6 +287,7 @@ import {
   DescribeCloudStorageEventsWithAITasksRequest,
   GetTWeTalkActiveStatusResponse,
   DismissRoomByStrRoomIdFromTRTCRequest,
+  SeeComprehensionResult,
   CloudStorageTimeData,
   DescribeVideoLicenseRequest,
   DescribeCloudStorageAIServiceResponse,
@@ -276,14 +306,17 @@ import {
   CallDeviceActionSyncRequest,
   ProductDevicesPositionItem,
   ResetCloudStorageAIServiceResponse,
+  DeleteTWeSeeCallbackRequest,
   CreateTWeSeeRecognitionTaskRequest,
   UpdateOtaTaskStatusRequest,
   LoRaFrequencyEntry,
   ModifyFenceBindResponse,
   UnbindTWeTalkAIBotRequest,
-  DescribeGatewayBindDevicesResponse,
+  DescribeTWeSeeTaskStatisticsRequest,
   DeletePositionFenceResponse,
   TalkProductConfigInfo,
+  DestroyTWeSeeSubscriptionRequest,
+  GetTWeCallActiveStatusResponse,
   GetAuthMiniProgramAppListResponse,
   UpdateOtaModuleResponse,
   UpdateDeviceTWeCallAuthorizeStatusResponse,
@@ -296,16 +329,18 @@ import {
   CreateProjectRequest,
   TalkTTSConfigInfo,
   CreateCloudStorageAIServiceResponse,
-  VisionCustomDetectQuery,
+  ModifyTWeSeeCallbackRequest,
+  DescribeTWeSeeCallbackRequest,
   DeviceDataHistoryItem,
-  GetTWeTalkAIBotListResponse,
-  GetTWeCallActiveStatusResponse,
+  DescribeSubscribedTopicPolicyRequest,
+  BatchInvokeTWeSeeRecognitionTaskRequest,
   InvokeTWeSeeRecognitionTaskRequest,
   ModifyProductDynamicRegisterRequest,
   BatchProductionInfo,
   DeleteDeviceRequest,
   CreateDeviceSDPAnswerRequest,
   GetProjectListResponse,
+  TalkSTTConfigInfo,
   ListFirmwaresResponse,
   ReleaseStudioProductResponse,
   DescribeFirmwareResponse,
@@ -313,12 +348,13 @@ import {
   UnbindProductsResponse,
   DescribeTopicPolicyResponse,
   InvokeCloudStorageAIServiceTaskResponse,
+  DescribeTWeSeeTaskRequest,
   InvokeTWeSeeRecognitionTaskResponse,
   DescribeDeviceFirmWareResponse,
   RegisteredDeviceTypeInfo,
   ThumbnailURLInfoList,
   DescribeFenceEventListResponse,
-  TalkSTTConfigInfo,
+  DescribeTWeSeePostPaidServiceRequest,
   LicenseServiceNumInfo,
   TRTCParams,
   DescribeCsReportCountDataInfoResponse,
@@ -339,9 +375,12 @@ import {
   SearchPositionSpaceResponse,
   GenerateCloudStorageAIServiceTaskFileURLResponse,
   ActivateDeviceInfo,
+  CreateTWeSeePostPaidServiceResponse,
   ResetTWeCallDeviceRequest,
   CreateTopicPolicyResponse,
   CallDeviceActionAsyncResponse,
+  TerminateTWeSeeSubscriptionRequest,
+  ModifyTWeSeeSubscriptionRenewFlagResponse,
   GetPositionSpaceListResponse,
   CreatePositionFenceResponse,
   DescribeTopicRuleResponse,
@@ -350,6 +389,7 @@ import {
   InvokeTWeSeeRecognitionTaskWithFileRequest,
   TWeCallInfo,
   DescribeDeviceRequest,
+  SeeCompHighlightResult,
   CamTag,
   WXDeviceInfo,
   ListOtaModulesResponse,
@@ -368,8 +408,8 @@ import {
   BindTWeTalkAIBotRequest,
   UpdateOtaModuleRequest,
   ModifyLoRaFrequencyRequest,
+  InvokeVideosKeywordsAnalyzerResponse,
   DescribeTWeTalkProductConfigV2Request,
-  BatchInvokeTWeSeeRecognitionTaskRequest,
   VisionRecognitionTask,
   ModifyTWeTalkAIBotResponse,
   CreateLoRaFrequencyResponse,
@@ -381,8 +421,10 @@ import {
   BatchCreateTWeSeeRecognitionTaskResponse,
   DescribeGatewayBindDevicesRequest,
   DescribeGatewaySubProductsRequest,
+  InquireTWeSeeSubscriptionRenewPriceRequest,
   CreateExternalSourceAIServiceTaskResponse,
   BindProductsRequest,
+  TerminateTWeSeeSubscriptionResponse,
   TargetInfo,
   CreateTWeTalkProductConfigRequest,
   BindDevicesResponse,
@@ -413,6 +455,7 @@ import {
   CreateStudioProductResponse,
   TalkBasicConfigInfo,
   DeleteOtaModuleResponse,
+  SeeStatItem,
   ModifyStudioProductRequest,
   CreateBatchProductionRequest,
   ReleaseStudioProductRequest,
@@ -455,16 +498,18 @@ import {
   FirmwareInfo,
   ResumeWeCallDeviceRequest,
   GetCOSURLRequest,
+  CreateTWeSeeSubscriptionRequest,
   CreateFenceBindRequest,
   CreateTWeTalkAIBotRequest,
   AuthMiniProgramAppInfo,
   FamilySubDevice,
   TalkActivationStatusInfo,
-  DescribeModelDefinitionRequest,
+  DescribeTWeTalkProductConfigRequest,
   DescribeFirmwareTasksResponse,
   ModifyTWeTalkProductConfigRequest,
   GetDeviceLocationHistoryResponse,
   ModifyFenceBindRequest,
+  InvokeTWeSeeComprehensionResponse,
   GetLoRaGatewayListResponse,
   GetTWeTalkActiveStatusRequest,
   DeviceData,
@@ -505,6 +550,7 @@ import {
   CreateBatchProductionResponse,
   VisionObjectDetectConfig,
   BatchUpdateFirmwareRequest,
+  SeeCompHighlightConfig,
   GetTWeTalkAIBotListRequest,
   GetTopicRuleListRequest,
   ListOtaModulesRequest,
@@ -515,7 +561,9 @@ import {
   DescribeCloudStorageAIServiceCallbackRequest,
   DescribeCloudStorageRequest,
   DeleteLoRaFrequencyRequest,
+  CreateTWeSeePostPaidServiceRequest,
   CreatePositionFenceRequest,
+  SeeTaskInfo,
   DescribeCloudStorageThumbnailResponse,
   DescribeProductDynamicRegisterResponse,
   PublishFirmwareUpdateMessageRequest,
@@ -540,6 +588,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("iotexplorer.tencentcloudapi.com", "2019-04-23", clientConfig)
+  }
+
+  /**
+   * 查询 TWeSee 预付费新购价格
+   */
+  async InquireTWeSeeSubscriptionCreatePrice(
+    req: InquireTWeSeeSubscriptionCreatePriceRequest,
+    cb?: (error: string, rep: InquireTWeSeeSubscriptionCreatePriceResponse) => void
+  ): Promise<InquireTWeSeeSubscriptionCreatePriceResponse> {
+    return this.request("InquireTWeSeeSubscriptionCreatePrice", req, cb)
   }
 
   /**
@@ -583,6 +641,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 退订 TWeSee 预付费订阅
+   */
+  async TerminateTWeSeeSubscription(
+    req: TerminateTWeSeeSubscriptionRequest,
+    cb?: (error: string, rep: TerminateTWeSeeSubscriptionResponse) => void
+  ): Promise<TerminateTWeSeeSubscriptionResponse> {
+    return this.request("TerminateTWeSeeSubscription", req, cb)
+  }
+
+  /**
    * 获取视频语义异步搜索任务详情
    */
   async DescribeAISearchTaskAsync(
@@ -613,6 +681,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取某个时间段的视频内容关键字
+   */
+  async InvokeVideosKeywordsAnalyzer(
+    req: InvokeVideosKeywordsAnalyzerRequest,
+    cb?: (error: string, rep: InvokeVideosKeywordsAnalyzerResponse) => void
+  ): Promise<InvokeVideosKeywordsAnalyzerResponse> {
+    return this.request("InvokeVideosKeywordsAnalyzer", req, cb)
+  }
+
+  /**
+   * 续费 TWeSee 预付费订阅
+   */
+  async RenewTWeSeeSubscription(
+    req: RenewTWeSeeSubscriptionRequest,
+    cb?: (error: string, rep: RenewTWeSeeSubscriptionResponse) => void
+  ): Promise<RenewTWeSeeSubscriptionResponse> {
+    return this.request("RenewTWeSeeSubscription", req, cb)
+  }
+
+  /**
    * 本接口（DescribeTopicPolicy）用于查看Topic详细信息
    */
   async DescribeTopicPolicy(
@@ -630,6 +718,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCloudStorageAIServiceResponse) => void
   ): Promise<CreateCloudStorageAIServiceResponse> {
     return this.request("CreateCloudStorageAIService", req, cb)
+  }
+
+  /**
+   * 创建 TWeSee 回调目标
+   */
+  async CreateTWeSeeCallback(
+    req: CreateTWeSeeCallbackRequest,
+    cb?: (error: string, rep: CreateTWeSeeCallbackResponse) => void
+  ): Promise<CreateTWeSeeCallbackResponse> {
+    return this.request("CreateTWeSeeCallback", req, cb)
   }
 
   /**
@@ -983,6 +1081,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取 TWeSee 任务统计数据
+   */
+  async DescribeTWeSeeTaskStatistics(
+    req: DescribeTWeSeeTaskStatisticsRequest,
+    cb?: (error: string, rep: DescribeTWeSeeTaskStatisticsResponse) => void
+  ): Promise<DescribeTWeSeeTaskStatisticsResponse> {
+    return this.request("DescribeTWeSeeTaskStatistics", req, cb)
+  }
+
+  /**
    * 获取围栏绑定信息列表。
    */
   async DescribeFenceBindList(
@@ -1063,13 +1171,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询绑定到家庭的网关设备的子设备列表
+   * 开通 TWeSee 后付费服务
    */
-  async DescribeGatewaySubDeviceList(
-    req: DescribeGatewaySubDeviceListRequest,
-    cb?: (error: string, rep: DescribeGatewaySubDeviceListResponse) => void
-  ): Promise<DescribeGatewaySubDeviceListResponse> {
-    return this.request("DescribeGatewaySubDeviceList", req, cb)
+  async CreateTWeSeePostPaidService(
+    req: CreateTWeSeePostPaidServiceRequest,
+    cb?: (error: string, rep: CreateTWeSeePostPaidServiceResponse) => void
+  ): Promise<CreateTWeSeePostPaidServiceResponse> {
+    return this.request("CreateTWeSeePostPaidService", req, cb)
   }
 
   /**
@@ -1093,13 +1201,25 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询视频激活码统计概览
-   */
+     * DescribeLicenseOverView代替
+
+用于查询视频激活码统计概览
+     */
   async DescribeVideoLicense(
     req: DescribeVideoLicenseRequest,
     cb?: (error: string, rep: DescribeVideoLicenseResponse) => void
   ): Promise<DescribeVideoLicenseResponse> {
     return this.request("DescribeVideoLicense", req, cb)
+  }
+
+  /**
+   * 删除 TWeSee 回调目标
+   */
+  async DeleteTWeSeeCallback(
+    req: DeleteTWeSeeCallbackRequest,
+    cb?: (error: string, rep: DeleteTWeSeeCallbackResponse) => void
+  ): Promise<DeleteTWeSeeCallbackResponse> {
+    return this.request("DeleteTWeSeeCallback", req, cb)
   }
 
   /**
@@ -1143,13 +1263,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改规则
+   * 开通 TWeSee 预付费订阅
    */
-  async ModifyTopicRule(
-    req: ModifyTopicRuleRequest,
-    cb?: (error: string, rep: ModifyTopicRuleResponse) => void
-  ): Promise<ModifyTopicRuleResponse> {
-    return this.request("ModifyTopicRule", req, cb)
+  async CreateTWeSeeSubscription(
+    req: CreateTWeSeeSubscriptionRequest,
+    cb?: (error: string, rep: CreateTWeSeeSubscriptionResponse) => void
+  ): Promise<CreateTWeSeeSubscriptionResponse> {
+    return this.request("CreateTWeSeeSubscription", req, cb)
   }
 
   /**
@@ -1203,6 +1323,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改 TWeSee 回调目标
+   */
+  async ModifyTWeSeeCallback(
+    req: ModifyTWeSeeCallbackRequest,
+    cb?: (error: string, rep: ModifyTWeSeeCallbackResponse) => void
+  ): Promise<ModifyTWeSeeCallbackResponse> {
+    return this.request("ModifyTWeSeeCallback", req, cb)
+  }
+
+  /**
    * 本接口（ListFirmwares）用于获取固件列表
    */
   async ListFirmwares(
@@ -1250,6 +1380,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateTWeTalkProductConfigResponse) => void
   ): Promise<CreateTWeTalkProductConfigResponse> {
     return this.request("CreateTWeTalkProductConfig", req, cb)
+  }
+
+  /**
+   * 修改 TWeSee 预付费订阅
+   */
+  async ModifyTWeSeeSubscription(
+    req: ModifyTWeSeeSubscriptionRequest,
+    cb?: (error: string, rep: ModifyTWeSeeSubscriptionResponse) => void
+  ): Promise<ModifyTWeSeeSubscriptionResponse> {
+    return this.request("ModifyTWeSeeSubscription", req, cb)
   }
 
   /**
@@ -1413,13 +1553,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 拉取多个云存事件缩略图
+   * 为用户提供新建项目的能力，用于集中管理产品和应用。
    */
-  async DescribeCloudStorageMultiThumbnail(
-    req: DescribeCloudStorageMultiThumbnailRequest,
-    cb?: (error: string, rep: DescribeCloudStorageMultiThumbnailResponse) => void
-  ): Promise<DescribeCloudStorageMultiThumbnailResponse> {
-    return this.request("DescribeCloudStorageMultiThumbnail", req, cb)
+  async CreateProject(
+    req: CreateProjectRequest,
+    cb?: (error: string, rep: CreateProjectResponse) => void
+  ): Promise<CreateProjectResponse> {
+    return this.request("CreateProject", req, cb)
   }
 
   /**
@@ -1430,6 +1570,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CallDeviceActionAsyncResponse) => void
   ): Promise<CallDeviceActionAsyncResponse> {
     return this.request("CallDeviceActionAsync", req, cb)
+  }
+
+  /**
+   * 调用 TWeSee 视觉理解算法
+   */
+  async InvokeTWeSeeComprehension(
+    req: InvokeTWeSeeComprehensionRequest,
+    cb?: (error: string, rep: InvokeTWeSeeComprehensionResponse) => void
+  ): Promise<InvokeTWeSeeComprehensionResponse> {
+    return this.request("InvokeTWeSeeComprehension", req, cb)
   }
 
   /**
@@ -1460,6 +1610,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteProjectResponse) => void
   ): Promise<DeleteProjectResponse> {
     return this.request("DeleteProject", req, cb)
+  }
+
+  /**
+   * 查询 TWeSee 后付费服务
+   */
+  async DescribeTWeSeePostPaidService(
+    req: DescribeTWeSeePostPaidServiceRequest,
+    cb?: (error: string, rep: DescribeTWeSeePostPaidServiceResponse) => void
+  ): Promise<DescribeTWeSeePostPaidServiceResponse> {
+    return this.request("DescribeTWeSeePostPaidService", req, cb)
+  }
+
+  /**
+   * 查询 TWeSee 预付费订阅
+   */
+  async DescribeTWeSeeSubscription(
+    req: DescribeTWeSeeSubscriptionRequest,
+    cb?: (error: string, rep: DescribeTWeSeeSubscriptionResponse) => void
+  ): Promise<DescribeTWeSeeSubscriptionResponse> {
+    return this.request("DescribeTWeSeeSubscription", req, cb)
   }
 
   /**
@@ -1737,6 +1907,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改 TWeSee 预付费订阅续费标识
+   */
+  async ModifyTWeSeeSubscriptionRenewFlag(
+    req: ModifyTWeSeeSubscriptionRenewFlagRequest,
+    cb?: (error: string, rep: ModifyTWeSeeSubscriptionRenewFlagResponse) => void
+  ): Promise<ModifyTWeSeeSubscriptionRenewFlagResponse> {
+    return this.request("ModifyTWeSeeSubscriptionRenewFlag", req, cb)
+  }
+
+  /**
    * 批量禁用启用设备
    */
   async UpdateDevicesEnableState(
@@ -1817,6 +1997,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询 TWeSee 预付费续费价格
+   */
+  async InquireTWeSeeSubscriptionRenewPrice(
+    req: InquireTWeSeeSubscriptionRenewPriceRequest,
+    cb?: (error: string, rep: InquireTWeSeeSubscriptionRenewPriceResponse) => void
+  ): Promise<InquireTWeSeeSubscriptionRenewPriceResponse> {
+    return this.request("InquireTWeSeeSubscriptionRenewPrice", req, cb)
+  }
+
+  /**
    * 本接口（UpdateTopicPolicy）用于更新Topic信息
    */
   async ModifyTopicPolicy(
@@ -1844,6 +2034,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateFirmwareResponse) => void
   ): Promise<UpdateFirmwareResponse> {
     return this.request("UpdateFirmware", req, cb)
+  }
+
+  /**
+   * 查询 TWeSee 回调目标详情
+   */
+  async DescribeTWeSeeCallback(
+    req: DescribeTWeSeeCallbackRequest,
+    cb?: (error: string, rep: DescribeTWeSeeCallbackResponse) => void
+  ): Promise<DescribeTWeSeeCallbackResponse> {
+    return this.request("DescribeTWeSeeCallback", req, cb)
   }
 
   /**
@@ -1884,6 +2084,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGatewaySubProductsResponse) => void
   ): Promise<DescribeGatewaySubProductsResponse> {
     return this.request("DescribeGatewaySubProducts", req, cb)
+  }
+
+  /**
+   * 查询 TWeSee 任务详情
+   */
+  async DescribeTWeSeeTask(
+    req: DescribeTWeSeeTaskRequest,
+    cb?: (error: string, rep: DescribeTWeSeeTaskResponse) => void
+  ): Promise<DescribeTWeSeeTaskResponse> {
+    return this.request("DescribeTWeSeeTask", req, cb)
   }
 
   /**
@@ -1977,6 +2187,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 销毁 TWeSee 预付费订阅
+   */
+  async DestroyTWeSeeSubscription(
+    req: DestroyTWeSeeSubscriptionRequest,
+    cb?: (error: string, rep: DestroyTWeSeeSubscriptionResponse) => void
+  ): Promise<DestroyTWeSeeSubscriptionResponse> {
+    return this.request("DestroyTWeSeeSubscription", req, cb)
+  }
+
+  /**
    * 创建设备云存 AI 分析任务
    */
   async CreateCloudStorageAIServiceTask(
@@ -2067,13 +2287,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询 TWeSee 语义理解任务
+   * 查询绑定到家庭的网关设备的子设备列表
    */
-  async DescribeTWeSeeRecognitionTask(
-    req: DescribeTWeSeeRecognitionTaskRequest,
-    cb?: (error: string, rep: DescribeTWeSeeRecognitionTaskResponse) => void
-  ): Promise<DescribeTWeSeeRecognitionTaskResponse> {
-    return this.request("DescribeTWeSeeRecognitionTask", req, cb)
+  async DescribeGatewaySubDeviceList(
+    req: DescribeGatewaySubDeviceListRequest,
+    cb?: (error: string, rep: DescribeGatewaySubDeviceListResponse) => void
+  ): Promise<DescribeGatewaySubDeviceListResponse> {
+    return this.request("DescribeGatewaySubDeviceList", req, cb)
   }
 
   /**
@@ -2157,13 +2377,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 为用户提供新建项目的能力，用于集中管理产品和应用。
+   * 拉取多个云存事件缩略图
    */
-  async CreateProject(
-    req: CreateProjectRequest,
-    cb?: (error: string, rep: CreateProjectResponse) => void
-  ): Promise<CreateProjectResponse> {
-    return this.request("CreateProject", req, cb)
+  async DescribeCloudStorageMultiThumbnail(
+    req: DescribeCloudStorageMultiThumbnailRequest,
+    cb?: (error: string, rep: DescribeCloudStorageMultiThumbnailResponse) => void
+  ): Promise<DescribeCloudStorageMultiThumbnailResponse> {
+    return this.request("DescribeCloudStorageMultiThumbnail", req, cb)
   }
 
   /**
@@ -2347,6 +2567,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 短摘要列表查询
+   */
+  async ListTWeSeeTasks(
+    req: ListTWeSeeTasksRequest,
+    cb?: (error: string, rep: ListTWeSeeTasksResponse) => void
+  ): Promise<ListTWeSeeTasksResponse> {
+    return this.request("ListTWeSeeTasks", req, cb)
+  }
+
+  /**
    * 用于查询某个产品下的设备列表
    */
   async GetDeviceList(
@@ -2377,13 +2607,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取某个时间段的视频内容关键字
+   * 上传文件并同步执行 TWeSee 语义理解任务
    */
-  async InvokeVideosKeywordsAnalyzer(
-    req: InvokeVideosKeywordsAnalyzerRequest,
-    cb?: (error: string, rep: InvokeVideosKeywordsAnalyzerResponse) => void
-  ): Promise<InvokeVideosKeywordsAnalyzerResponse> {
-    return this.request("InvokeVideosKeywordsAnalyzer", req, cb)
+  async InvokeTWeSeeRecognitionTaskWithFile(
+    req: InvokeTWeSeeRecognitionTaskWithFileRequest,
+    cb?: (error: string, rep: InvokeTWeSeeRecognitionTaskWithFileResponse) => void
+  ): Promise<InvokeTWeSeeRecognitionTaskWithFileResponse> {
+    return this.request("InvokeTWeSeeRecognitionTaskWithFile", req, cb)
   }
 
   /**
@@ -2474,6 +2704,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudStorageAIServiceTasksResponse) => void
   ): Promise<DescribeCloudStorageAIServiceTasksResponse> {
     return this.request("DescribeCloudStorageAIServiceTasks", req, cb)
+  }
+
+  /**
+   * 查询 TWeSee 回调目标列表
+   */
+  async ListTWeSeeCallback(
+    req: ListTWeSeeCallbackRequest,
+    cb?: (error: string, rep: ListTWeSeeCallbackResponse) => void
+  ): Promise<ListTWeSeeCallbackResponse> {
+    return this.request("ListTWeSeeCallback", req, cb)
   }
 
   /**
@@ -2587,13 +2827,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 上传文件并同步执行 TWeSee 语义理解任务
+   * 查询 TWeSee 语义理解任务
    */
-  async InvokeTWeSeeRecognitionTaskWithFile(
-    req: InvokeTWeSeeRecognitionTaskWithFileRequest,
-    cb?: (error: string, rep: InvokeTWeSeeRecognitionTaskWithFileResponse) => void
-  ): Promise<InvokeTWeSeeRecognitionTaskWithFileResponse> {
-    return this.request("InvokeTWeSeeRecognitionTaskWithFile", req, cb)
+  async DescribeTWeSeeRecognitionTask(
+    req: DescribeTWeSeeRecognitionTaskRequest,
+    cb?: (error: string, rep: DescribeTWeSeeRecognitionTaskResponse) => void
+  ): Promise<DescribeTWeSeeRecognitionTaskResponse> {
+    return this.request("DescribeTWeSeeRecognitionTask", req, cb)
   }
 
   /**
@@ -2604,5 +2844,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudStoragePackageConsumeDetailsResponse) => void
   ): Promise<DescribeCloudStoragePackageConsumeDetailsResponse> {
     return this.request("DescribeCloudStoragePackageConsumeDetails", req, cb)
+  }
+
+  /**
+   * 修改规则
+   */
+  async ModifyTopicRule(
+    req: ModifyTopicRuleRequest,
+    cb?: (error: string, rep: ModifyTopicRuleResponse) => void
+  ): Promise<ModifyTopicRuleResponse> {
+    return this.request("ModifyTopicRule", req, cb)
   }
 }

@@ -28,26 +28,6 @@ it("tdai.v20250717.DescribeChatDetail", async function () {
     }
 })
 
-it("tdai.v20250717.RemoveChat", async function () {
-    try {
-       const data = await client.RemoveChat({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdai.v20250717.IsolateAgentInstance", async function () {
-    try {
-       const data = await client.IsolateAgentInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tdai.v20250717.ContinueAgentWork", async function () {
     try {
        const data = await client.ContinueAgentWork({})
@@ -78,9 +58,9 @@ it("tdai.v20250717.PauseAgentWork", async function () {
     }
 })
 
-it("tdai.v20250717.DescribeChats", async function () {
+it("tdai.v20250717.ModifyAgentInstanceParameters", async function () {
     try {
-       const data = await client.DescribeChats({})
+       const data = await client.ModifyAgentInstanceParameters({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,19 +68,9 @@ it("tdai.v20250717.DescribeChats", async function () {
     }
 })
 
-it("tdai.v20250717.DescribeAgentInstance", async function () {
+it("tdai.v20250717.DescribeMemoryPlusSpaces", async function () {
     try {
-       const data = await client.DescribeAgentInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdai.v20250717.CreateChatCompletion", async function () {
-    try {
-       const data = await client.CreateChatCompletion({})
+       const data = await client.DescribeMemoryPlusSpaces({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +88,9 @@ it("tdai.v20250717.ModifyChatTitle", async function () {
     }
 })
 
-it("tdai.v20250717.DescribeAgentDutyTaskDetail", async function () {
+it("tdai.v20250717.StartAgentTask", async function () {
     try {
-       const data = await client.DescribeAgentDutyTaskDetail({})
+       const data = await client.StartAgentTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +98,49 @@ it("tdai.v20250717.DescribeAgentDutyTaskDetail", async function () {
     }
 })
 
-it("tdai.v20250717.DescribeReportUrl", async function () {
+it("tdai.v20250717.RecoverMemoryPlusSpace", async function () {
     try {
-       const data = await client.DescribeReportUrl({})
+       const data = await client.RecoverMemoryPlusSpace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdai.v20250717.RemoveChat", async function () {
+    try {
+       const data = await client.RemoveChat({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdai.v20250717.IsolateAgentInstance", async function () {
+    try {
+       const data = await client.IsolateAgentInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdai.v20250717.DescribeChats", async function () {
+    try {
+       const data = await client.DescribeChats({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdai.v20250717.DestroyMemoryPlusSpace", async function () {
+    try {
+       const data = await client.DestroyMemoryPlusSpace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,6 +158,46 @@ it("tdai.v20250717.TerminateAgentInstance", async function () {
     }
 })
 
+it("tdai.v20250717.DescribeMemoryPlusRecord", async function () {
+    try {
+       const data = await client.DescribeMemoryPlusRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdai.v20250717.DescribeMemoryPlusSpace", async function () {
+    try {
+       const data = await client.DescribeMemoryPlusSpace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdai.v20250717.DescribeAgentDutyTaskDetail", async function () {
+    try {
+       const data = await client.DescribeAgentDutyTaskDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdai.v20250717.CreateMemoryPlusSpace", async function () {
+    try {
+       const data = await client.CreateMemoryPlusSpace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdai.v20250717.RecoverAgentInstance", async function () {
     try {
        const data = await client.RecoverAgentInstance({})
@@ -158,29 +208,9 @@ it("tdai.v20250717.RecoverAgentInstance", async function () {
     }
 })
 
-it("tdai.v20250717.ModifyAgentInstanceParameters", async function () {
+it("tdai.v20250717.CreateChatCompletion", async function () {
     try {
-       const data = await client.ModifyAgentInstanceParameters({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdai.v20250717.DescribeAgentInstances", async function () {
-    try {
-       const data = await client.DescribeAgentInstances({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tdai.v20250717.StartAgentTask", async function () {
-    try {
-       const data = await client.StartAgentTask({})
+       const data = await client.CreateChatCompletion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,9 +228,69 @@ it("tdai.v20250717.DescribeAgents", async function () {
     }
 })
 
+it("tdai.v20250717.DescribeReportUrl", async function () {
+    try {
+       const data = await client.DescribeReportUrl({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdai.v20250717.DescribeServiceAccessKey", async function () {
+    try {
+       const data = await client.DescribeServiceAccessKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdai.v20250717.DescribeAgentInstances", async function () {
+    try {
+       const data = await client.DescribeAgentInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdai.v20250717.DescribeAgentInstance", async function () {
+    try {
+       const data = await client.DescribeAgentInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdai.v20250717.ModifyMemoryPlusSpace", async function () {
+    try {
+       const data = await client.ModifyMemoryPlusSpace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdai.v20250717.CreateAgentInstance", async function () {
     try {
        const data = await client.CreateAgentInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tdai.v20250717.IsolateMemoryPlusSpace", async function () {
+    try {
+       const data = await client.IsolateMemoryPlusSpace({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

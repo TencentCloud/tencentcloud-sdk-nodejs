@@ -79,6 +79,24 @@ export interface DeleteUserRequest {
 }
 
 /**
+ * DescribeSharedSubscriptionGroupsWithSubscriptions返回参数结构体
+ */
+export interface DescribeSharedSubscriptionGroupsWithSubscriptionsResponse {
+  /**
+   * <p>集群下共享订阅组列表</p>
+   */
+  Data?: Array<SharedSubscriptionGroupWithSubscriptions>
+  /**
+   * <p>查询总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyJWTAuthenticator返回参数结构体
  */
 export interface ModifyJWTAuthenticatorResponse {
@@ -1262,6 +1280,16 @@ export interface ModifyInstanceResponse {
 }
 
 /**
+ * ModifyX509Config返回参数结构体
+ */
+export interface ModifyX509ConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddClientSubscription请求参数结构体
  */
 export interface AddClientSubscriptionRequest {
@@ -1639,6 +1667,28 @@ export interface DeleteUserResponse {
 }
 
 /**
+ * ModifyX509Config请求参数结构体
+ */
+export interface ModifyX509ConfigRequest {
+  /**
+   * <p>腾讯云MQTT实例ID，从 <a href="https://cloud.tencent.com/document/api/1778/111029">DescribeInstanceList</a>接口或控制台获得。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>证书验证模式</p><p>枚举值：</p><ul><li>TLS： 单向认证</li><li>mTLS： 双向认证</li><li>BYOC： 一机一证</li></ul>
+   */
+  X509Mode?: string
+  /**
+   * <p>证书注册方式</p><p>枚举值：</p><ul><li>JITP： 自动注册</li><li>API： 手工注册</li></ul>
+   */
+  DeviceCertificateProvisionType?: string
+  /**
+   * <p>证书自动后激活状态</p><p>枚举值：</p><ul><li>true： 自动激活</li><li>false： 不激活</li></ul>
+   */
+  AutomaticActivation?: boolean
+}
+
+/**
  * ActivateCaCertificate返回参数结构体
  */
 export interface ActivateCaCertificateResponse {
@@ -2002,29 +2052,13 @@ export interface DeactivateDeviceCertificateResponse {
 }
 
 /**
- * MQTT集群用户信息
+ * DescribeSharedSubscriptionGroupsWithSubscriptions请求参数结构体
  */
-export interface MQTTUserItem {
+export interface DescribeSharedSubscriptionGroupsWithSubscriptionsRequest {
   /**
-   * 用户名
+   * <p>腾讯云MQTT实例ID，从 <a href="https://cloud.tencent.com/document/api/1778/111029">DescribeInstanceList</a>接口或控制台获得。</p>
    */
-  Username?: string
-  /**
-   * 密码
-   */
-  Password?: string
-  /**
-   * 备注信息
-   */
-  Remark?: string
-  /**
-   * 创建时间，毫秒级时间戳 。
-   */
-  CreatedTime?: number
-  /**
-   * 修改时间，毫秒级时间戳 。
-   */
-  ModifiedTime?: number
+  InstanceId: string
 }
 
 /**
@@ -2872,6 +2906,28 @@ export interface UpdateMessageEnrichmentRulePriorityRequest {
 }
 
 /**
+ * 查询共享订阅组（带订阅）
+ */
+export interface SharedSubscriptionGroupWithSubscriptions {
+  /**
+   * <p>共享组名</p>
+   */
+  SharedName?: string
+  /**
+   * <p>创建时间</p><p>单位：毫秒级时间戳</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p><p>单位：毫秒级时间戳</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>订阅表达式</p>
+   */
+  TopicFilters?: Array<string>
+}
+
+/**
  * DescribeInsVPCEndpoints返回参数结构体
  */
 export interface DescribeInsVPCEndpointsResponse {
@@ -3179,34 +3235,29 @@ export interface DescribeDeviceIdentityRequest {
 }
 
 /**
- * ModifyDeviceIdentity请求参数结构体
+ * MQTT集群用户信息
  */
-export interface ModifyDeviceIdentityRequest {
+export interface MQTTUserItem {
   /**
-   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   * 用户名
    */
-  InstanceId: string
+  Username?: string
   /**
-   * 设备id
+   * 密码
    */
-  DeviceId: string
+  Password?: string
   /**
-   * 1:ENABLED-可用
-2:DISABLE-不可用
+   * 备注信息
    */
-  Status?: string
+  Remark?: string
   /**
-   * 主要签名key，需要Base64编码。
+   * 创建时间，毫秒级时间戳 。
    */
-  PrimaryKey?: string
+  CreatedTime?: number
   /**
-   * 次要签名key，需要Base64编码。
+   * 修改时间，毫秒级时间戳 。
    */
-  SecondaryKey?: string
-  /**
-   * 该设备id的传播属性设置
-   */
-  PropagatingProperties?: Array<PropagatingProperty>
+  ModifiedTime?: number
 }
 
 /**
@@ -3422,6 +3473,37 @@ export interface DeactivateCaCertificateRequest {
    * 证书序列号，可以从 [DescribeCaCertificates](https://cloud.tencent.com/document/api/1778/116206)接口、控制台、证书文件中获得。
    */
   CaSn: string
+}
+
+/**
+ * ModifyDeviceIdentity请求参数结构体
+ */
+export interface ModifyDeviceIdentityRequest {
+  /**
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * 设备id
+   */
+  DeviceId: string
+  /**
+   * 1:ENABLED-可用
+2:DISABLE-不可用
+   */
+  Status?: string
+  /**
+   * 主要签名key，需要Base64编码。
+   */
+  PrimaryKey?: string
+  /**
+   * 次要签名key，需要Base64编码。
+   */
+  SecondaryKey?: string
+  /**
+   * 该设备id的传播属性设置
+   */
+  PropagatingProperties?: Array<PropagatingProperty>
 }
 
 /**

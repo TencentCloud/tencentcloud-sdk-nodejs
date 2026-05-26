@@ -448,17 +448,66 @@ export interface DescribeCloudStorageThumbnailListRequest {
 }
 
 /**
- * CheckFirmwareUpdate返回参数结构体
+ * DescribeTWeSeeSubscription返回参数结构体
  */
-export interface CheckFirmwareUpdateResponse {
+export interface DescribeTWeSeeSubscriptionResponse {
   /**
-   * 设备当前固件版本。
+   * 资源 ID
    */
-  CurrentVersion?: string
+  ResourceId?: string
   /**
-   * 固件可升级版本。
+   * 套餐规格。可能取值：
+
+- `BASIC`：包年包月基础版（适用于视频理解）
    */
-  DstVersion?: string
+  ServiceTier?: string
+  /**
+   * 到期时间，秒级时间戳
+   */
+  ExpireTime?: number
+  /**
+   * 启用状态，`true` 为开启，`false` 为关闭
+   */
+  Enabled?: boolean
+  /**
+   * 订阅状态。可能取值：
+
+- `NORMAL`：正常
+- `ISOLATED`：隔离
+   */
+  Status?: string
+  /**
+   * 视觉理解配置（适用于视频理解、图片理解）
+   */
+  ComprehensionConfig?: SeeComprehensionConfig
+  /**
+   * 视频语义浓缩配置（适用于视频语义浓缩）
+   */
+  CompHighlightConfig?: SeeCompHighlightConfig
+  /**
+   * 云存事件 ID 过滤规则配置项
+   */
+  EventIdFilterConfig?: SeeEventIdFilterConfig
+  /**
+   * 当前周期基础能力总额度
+   */
+  QuotaBasic?: number
+  /**
+   * 当前周期基础能力已用额度
+   */
+  QuotaUsedBasic?: number
+  /**
+   * 当前周期高级能力总额度
+   */
+  QuotaAdvanced?: number
+  /**
+   * 当前周期高级能力已用额度
+   */
+  QuotaUsedAdvanced?: number
+  /**
+   * 额度刷新时间
+   */
+  QuotaRefreshTime?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -554,6 +603,38 @@ export interface DescribeActivateLicenseServiceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RenewTWeSeeSubscription请求参数结构体
+ */
+export interface RenewTWeSeeSubscriptionRequest {
+  /**
+   * 产品 ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 算法类型。可选值：
+
+- `VID_COMP`：视频理解
+   */
+  ServiceType: string
+  /**
+   * 续费时长，单位：月，支持 1-60
+   */
+  Period: number
+  /**
+   * 通道 ID
+   */
+  ChannelId?: number
+  /**
+   * 自定义订单 ID
+   */
+  CustomOrderId?: string
 }
 
 /**
@@ -691,6 +772,20 @@ export interface DescribeSpaceFenceEventListResponse {
 }
 
 /**
+ * DescribeTWeSeeTask返回参数结构体
+ */
+export interface DescribeTWeSeeTaskResponse {
+  /**
+   * 任务信息
+   */
+  TaskInfo?: SeeTaskInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloudStorageEventsWithAITasks返回参数结构体
  */
 export interface DescribeCloudStorageEventsWithAITasksResponse {
@@ -746,6 +841,39 @@ export interface ModifyCloudStorageAIServiceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * InvokeTWeSeeComprehension请求参数结构体
+ */
+export interface InvokeTWeSeeComprehensionRequest {
+  /**
+   * 输入视频 / 图片的 URL
+   */
+  InputURL: string
+  /**
+   * 算法类型。可选值：
+
+- `VID_COMP`：视频理解
+- `IMG_COMP`：图片理解
+   */
+  ServiceType: string
+  /**
+   * 任务元数据
+   */
+  Metadata?: SeeTaskMetadata
+  /**
+   * 视觉理解配置项
+   */
+  ComprehensionConfig?: SeeComprehensionConfig
+  /**
+   * 等待结果的超时时间（单位：秒）。填 0 表示无需等待结果。最大超时时长 25 秒，默认超时时长 20 秒。
+   */
+  WaitResultTimeout?: number
+  /**
+   * 回调目标 ID
+   */
+  CallbackId?: string
 }
 
 /**
@@ -1077,6 +1205,16 @@ export interface GetStudioProductListResponse {
 }
 
 /**
+ * DestroyTWeSeeSubscription返回参数结构体
+ */
+export interface DestroyTWeSeeSubscriptionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetTWeCallActiveStatus请求参数结构体
  */
 export interface GetTWeCallActiveStatusRequest {
@@ -1154,6 +1292,30 @@ export interface DescribeAISearchTaskAsyncRequest {
 }
 
 /**
+ * DescribeTWeSeeSubscription请求参数结构体
+ */
+export interface DescribeTWeSeeSubscriptionRequest {
+  /**
+   * 产品 ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 算法类型。可选值：
+
+- `VID_COMP`：视频理解
+   */
+  ServiceType: string
+  /**
+   * 通道 ID
+   */
+  ChannelId?: number
+}
+
+/**
  * ActivateTWeTalk返回参数结构体
  */
 export interface ActivateTWeTalkResponse {
@@ -1209,6 +1371,24 @@ export interface ActivateTWeTalkRequest {
 }
 
 /**
+ * ListTWeSeeTasks返回参数结构体
+ */
+export interface ListTWeSeeTasksResponse {
+  /**
+   * 任务列表
+   */
+  Tasks?: Array<SeeTaskInfo>
+  /**
+   * 任务数量
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeProductDynamicRegister请求参数结构体
  */
 export interface DescribeProductDynamicRegisterRequest {
@@ -1230,6 +1410,28 @@ export interface DeleteTopicPolicyRequest {
    * Topic名称
    */
   TopicName: string
+}
+
+/**
+ * InquireTWeSeeSubscriptionCreatePrice请求参数结构体
+ */
+export interface InquireTWeSeeSubscriptionCreatePriceRequest {
+  /**
+   * 算法类型。可选值：
+
+- `VID_COMP`：视频理解
+   */
+  ServiceType: string
+  /**
+   * 套餐规格。可选值：
+
+- `BASIC`：包年包月基础版（适用于视频理解）
+   */
+  ServiceTier: string
+  /**
+   * 订阅购买时长，单位：月，支持 1-60
+   */
+  Period: number
 }
 
 /**
@@ -1276,6 +1478,30 @@ export interface CreateTWeTalkAIBotResponse {
    * 智能体ID
    */
   BotId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteTWeSeeCallback返回参数结构体
+ */
+export interface DeleteTWeSeeCallbackResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTWeSeeTaskStatistics返回参数结构体
+ */
+export interface DescribeTWeSeeTaskStatisticsResponse {
+  /**
+   * 统计数据
+   */
+  StatData?: Array<SeeStatItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1360,6 +1586,79 @@ export interface FenceEventItem {
    * 围栏事件的设备位置信息
    */
   Data?: FenceAlarmPoint
+}
+
+/**
+ * TWeSee 视觉理解配置
+ */
+export interface SeeComprehensionConfig {
+  /**
+   * 拓展的目标及事件检测类别
+   */
+  DetectTypes?: Array<string>
+  /**
+   * 使该视频 / 图片录入搜索库，后续可进行搜索
+   */
+  EnableSearch?: boolean
+  /**
+   * 主输出语言，可选值包括：
+- `zh` 中文（默认值）
+- `en` 英语
+- `ja` 日语
+- `ko` 韩文
+- `pt-BR` 葡萄牙语（巴西）
+- `th` 泰语
+- `ms` 马来语
+   */
+  OutputLang?: string
+  /**
+   * 次选输出语言，可选值包括：
+- `zh` 中文
+- `en` 英语
+- `ja` 日语
+- `ko` 韩文
+- `pt-BR` 葡萄牙语（巴西）
+- `th` 泰语
+- `ms` 马来语
+
+   */
+  AlternativeOutputLang?: string
+  /**
+   * 多摄像头布局定义。可选值包括：
+
+- 单摄（默认值）：`Single`
+
+- 双摄（纵向排列）- 全部画面：`Vertical,Num=2,Index=0;1`
+- 双摄（纵向排列）- 画面1：`Vertical,Num=2,Index=0`
+- 双摄（纵向排列）- 画面2：`Vertical,Num=2,Index=1`
+
+- 三摄（纵向排列）- 全部画面：`Vertical,Num=3,Index=0;1;2`
+- 三摄（纵向排列）- 画面1：`Vertical,Num=3,Index=0`
+- 三摄（纵向排列）- 画面2：`Vertical,Num=3,Index=1`
+- 三摄（纵向排列）- 画面3：`Vertical,Num=3,Index=2`
+- 三摄（纵向排列）- 画面1+2：`Vertical,Num=3,Index=0;1`
+- 三摄（纵向排列）- 画面1+3：`Vertical,Num=3,Index=0;2`
+- 三摄（纵向排列）- 画面2+3：`Vertical,Num=3,Index=1;2`
+   */
+  MultiCameraLayout?: string
+  /**
+   * 最大处理的输入视频时长，单位：秒（仅对视频输入生效）
+   */
+  MaxDuration?: number
+}
+
+/**
+ * CreateTWeSeeCallback返回参数结构体
+ */
+export interface CreateTWeSeeCallbackResponse {
+  /**
+   * 回调目标 ID
+   */
+  CallbackId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1481,6 +1780,37 @@ export interface DescribeGatewaySubDeviceListRequest {
 }
 
 /**
+ * ModifyTWeSeeSubscriptionRenewFlag请求参数结构体
+ */
+export interface ModifyTWeSeeSubscriptionRenewFlagRequest {
+  /**
+   * 产品 ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 算法类型。可选值：
+
+- `VID_COMP`：视频理解
+   */
+  ServiceType: string
+  /**
+   * 续费标识。可选值：
+- `NOTIFY_AND_MANUAL_RENEW`：到期前通知并手动续费
+- `NOTIFY_AND_AUTO_RENEW`：到期前通知并自动续费
+- `DISABLE_NOTIFY_AND_MANUAL_RENEW`：不通知且手动续费
+   */
+  RenewFlag: string
+  /**
+   * 通道 ID
+   */
+  ChannelId?: number
+}
+
+/**
  * GetDeviceList请求参数结构体
  */
 export interface GetDeviceListRequest {
@@ -1563,6 +1893,89 @@ export interface DescribeStudioProductRequest {
 }
 
 /**
+ * Talk配置信息描述。
+ */
+export interface TalkAIBotInfo {
+  /**
+   * UIN
+   */
+  Uin?: number
+  /**
+   * APPID
+   */
+  AppId?: number
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 智能体ID
+   */
+  BotId?: string
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 语言
+   */
+  TargetLanguage?: string
+  /**
+   * 语音识别
+   */
+  STTConfig?: TalkSTTConfigInfo
+  /**
+   * 大模型
+   */
+  LLMConfig?: TalkLLMConfigInfo
+  /**
+   * 语音合成
+   */
+  TTSConfig?: TalkTTSConfigInfo
+  /**
+   * 智能体配置
+   */
+  AgentConfig?: TalkAgentConfigInfo
+  /**
+   * 产品信息列表
+   * @deprecated
+   */
+  ProductList?: TalkProductInfo
+  /**
+   * 创建时间
+   */
+  CreateTime?: number
+  /**
+   * 更新时间
+   */
+  UpdateTime?: number
+  /**
+   * 已关联产品信息列表
+   */
+  BoundProducts?: Array<TalkProductInfo>
+  /**
+   * 自定义工具列表，最多可创建10个
+   */
+  CustomTools?: string
+  /**
+   * WebHook工具配置(JSON字符串格式)
+   */
+  WebhookTools?: string
+  /**
+   * 智能体模板类型
+   */
+  BotType?: string
+  /**
+   * 知识库相关配置(JSON字符串格式)
+   */
+  RAGConfig?: string
+}
+
+/**
  * DescribeCloudStorageThumbnailList返回参数结构体
  */
 export interface DescribeCloudStorageThumbnailListResponse {
@@ -1588,6 +2001,20 @@ export interface DeletePositionFenceRequest {
    * 围栏Id
    */
   FenceId: number
+}
+
+/**
+ * ListTWeSeeCallback请求参数结构体
+ */
+export interface ListTWeSeeCallbackRequest {
+  /**
+   * 分页大小，范围 1-100
+   */
+  Limit: number
+  /**
+   * 分页偏移量，范围 0-10000
+   */
+  Offset?: number
 }
 
 /**
@@ -1904,6 +2331,16 @@ export interface PauseTWeCallDeviceRequest {
 }
 
 /**
+ * ModifyTWeSeeCallback返回参数结构体
+ */
+export interface ModifyTWeSeeCallbackResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDeviceDataHistory返回参数结构体
  */
 export interface DescribeDeviceDataHistoryResponse {
@@ -1941,6 +2378,36 @@ export interface CreateTWeSeeRecognitionTaskWithFileResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * TWeSee 回调目标信息
+ */
+export interface SeeCallbackInfo {
+  /**
+   * 回调目标 ID
+   */
+  CallbackId?: string
+  /**
+   * 回调签名 token
+   */
+  CallbackToken?: string
+  /**
+   * 回调 URL
+   */
+  CallbackUrl?: string
+  /**
+   * 创建时间（秒级时间戳）
+   */
+  CreateTime?: number
+  /**
+   * 回调类型
+   */
+  Type?: string
+  /**
+   * 更新时间（秒级时间戳）
+   */
+  UpdateTime?: number
 }
 
 /**
@@ -2234,6 +2701,28 @@ export interface GetBatchProductionsListResponse {
    * 返回数量。
    */
   TotalCnt: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeGatewayBindDevices返回参数结构体
+ */
+export interface DescribeGatewayBindDevicesResponse {
+  /**
+   * 子设备信息。
+   */
+  Devices?: Array<BindDeviceInfo>
+  /**
+   * 子设备总数。
+   */
+  Total?: number
+  /**
+   * 子设备所属的产品名。
+   */
+  ProductName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2743,86 +3232,90 @@ export interface BindProductInfo {
 }
 
 /**
- * Talk配置信息描述。
+ * CheckFirmwareUpdate返回参数结构体
  */
-export interface TalkAIBotInfo {
+export interface CheckFirmwareUpdateResponse {
   /**
-   * UIN
+   * 设备当前固件版本。
    */
-  Uin?: number
+  CurrentVersion?: string
   /**
-   * APPID
+   * 固件可升级版本。
    */
-  AppId?: number
+  DstVersion?: string
   /**
-   * 实例ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId?: string
+  RequestId?: string
+}
+
+/**
+ * ListTWeSeeTasks请求参数结构体
+ */
+export interface ListTWeSeeTasksRequest {
   /**
-   * 智能体ID
+   * 产品 ID
    */
-  BotId?: string
+  ProductId: string
   /**
-   * 名称
+   * 设备名称
    */
-  Name?: string
+  DeviceName: string
   /**
-   * 描述
+   * 算法类目。可能取值：
+- `COMPREHENSION`：视觉理解
    */
-  Description?: string
+  ServiceCategory: string
   /**
-   * 语言
+   * 分页拉取数量
    */
-  TargetLanguage?: string
+  Limit: number
   /**
-   * 语音识别
+   * 分页拉取偏移
    */
-  STTConfig?: TalkSTTConfigInfo
+  Offset?: number
   /**
-   * 大模型
+   * 通道 ID
    */
-  LLMConfig?: TalkLLMConfigInfo
+  ChannelId?: number
   /**
-   * 语音合成
+   * 查询任务时间范围的起始时间（毫秒级 UNIX 时间戳）。不传则不生效时间范围条件。
    */
-  TTSConfig?: TalkTTSConfigInfo
+  StartTimeMs?: number
   /**
-   * 智能体配置
+   * 查询任务时间范围的结束时间（毫秒级 UNIX 时间戳）。不传则不生效时间范围条件。
    */
-  AgentConfig?: TalkAgentConfigInfo
+  EndTimeMs?: number
   /**
-   * 产品信息列表
-   * @deprecated
+   * 要查询的任务的状态条件。不传则不按照状态过滤，可选值：
+
+- `1`：失败
+- `2`：空结果
+- `3`：有效结果
    */
-  ProductList?: TalkProductInfo
+  Status?: number
+}
+
+/**
+ * InquireTWeSeeSubscriptionRenewPrice返回参数结构体
+ */
+export interface InquireTWeSeeSubscriptionRenewPriceResponse {
   /**
-   * 创建时间
+   * 原价
    */
-  CreateTime?: number
+  OriginalPrice?: string
   /**
-   * 更新时间
+   * 折后价
    */
-  UpdateTime?: number
+  DiscountPrice?: string
   /**
-   * 已关联产品信息列表
+   * 币种
    */
-  BoundProducts?: Array<TalkProductInfo>
+  Currency?: string
   /**
-   * 自定义工具列表，最多可创建10个
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CustomTools?: string
-  /**
-   * WebHook工具配置(JSON字符串格式)
-   */
-  WebhookTools?: string
-  /**
-   * 智能体模板类型
-   */
-  BotType?: string
-  /**
-   * 知识库相关配置(JSON字符串格式)
-   */
-  RAGConfig?: string
+  RequestId?: string
 }
 
 /**
@@ -2831,17 +3324,13 @@ export interface TalkAIBotInfo {
 export type DescribeFreeCloudStorageNumRequest = null
 
 /**
- * InvokeVideosKeywordsAnalyzer返回参数结构体
+ * 云存用户信息
  */
-export interface InvokeVideosKeywordsAnalyzerResponse {
+export interface CloudStorageUserInfo {
   /**
-   * 根据视频内容生成的关键词
+   * 用户ID
    */
-  Keywords?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  UserId?: string
 }
 
 /**
@@ -3253,6 +3742,16 @@ export interface TalkProductInfo {
 }
 
 /**
+ * ModifyTWeSeeSubscription返回参数结构体
+ */
+export interface ModifyTWeSeeSubscriptionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 围栏绑定的设备信息
  */
 export interface FenceBindDeviceItem {
@@ -3272,6 +3771,40 @@ export interface FenceBindDeviceItem {
    * 告警处理方法
    */
   Method: string
+}
+
+/**
+ * CreateTWeSeeSubscription返回参数结构体
+ */
+export interface CreateTWeSeeSubscriptionResponse {
+  /**
+   * 订单 ID
+   */
+  OrderId?: string
+  /**
+   * 订单状态
+   */
+  Status?: string
+  /**
+   * 资源 ID
+   */
+  ResourceId?: string
+  /**
+   * 原价
+   */
+  OriginalPrice?: string
+  /**
+   * 折后价
+   */
+  DiscountPrice?: string
+  /**
+   * 币种
+   */
+  Currency?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3356,6 +3889,46 @@ export interface ModifyTWeTalkProductConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyTWeSeeSubscription请求参数结构体
+ */
+export interface ModifyTWeSeeSubscriptionRequest {
+  /**
+   * 产品 ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 算法类型。可选值：
+
+- `VID_COMP`：视频理解
+   */
+  ServiceType: string
+  /**
+   * 通道 ID
+   */
+  ChannelId?: number
+  /**
+   * 功能开关。`true` 为开启，`false` 为关闭；不传表示不修改
+   */
+  Enabled?: boolean
+  /**
+   * 视觉理解配置（适用于视频理解、图片理解），不传则不修改
+   */
+  ComprehensionConfig?: SeeComprehensionConfig
+  /**
+   * 视频语义浓缩配置（适用于视频语义浓缩），不传则不修改
+   */
+  CompHighlightConfig?: SeeCompHighlightConfig
+  /**
+   * 云存事件 ID 过滤规则配置，不传则不修改
+   */
+  EventIdFilterConfig?: SeeEventIdFilterConfig
 }
 
 /**
@@ -3462,6 +4035,20 @@ export interface DescribeTWeTalkAIBotRequest {
    * 智能体ID
    */
   BotId: string
+}
+
+/**
+ * TWeSee 语义理解自定义标签请求
+ */
+export interface VisionCustomDetectQuery {
+  /**
+   * 自定义标签的标识符
+   */
+  Key: string
+  /**
+   * 自定义标签的描述文本
+   */
+  Query: string
 }
 
 /**
@@ -3627,6 +4214,40 @@ export interface PackageConsumeTask {
 }
 
 /**
+ * RenewTWeSeeSubscription返回参数结构体
+ */
+export interface RenewTWeSeeSubscriptionResponse {
+  /**
+   * 订单 ID
+   */
+  OrderId?: string
+  /**
+   * 订单状态
+   */
+  Status?: string
+  /**
+   * 资源 ID
+   */
+  ResourceId?: string
+  /**
+   * 原价
+   */
+  OriginalPrice?: string
+  /**
+   * 折后价
+   */
+  DiscountPrice?: string
+  /**
+   * 币种
+   */
+  Currency?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateTWeSeeRecognitionTask返回参数结构体
  */
 export interface CreateTWeSeeRecognitionTaskResponse {
@@ -3721,6 +4342,20 @@ export interface CreateCloudStorageAIServiceRequest {
    * 订单 ID
    */
   OrderId?: string
+}
+
+/**
+ * DescribeTWeSeeCallback返回参数结构体
+ */
+export interface DescribeTWeSeeCallbackResponse {
+  /**
+   * 回调目标详情
+   */
+  CallbackInfo?: SeeCallbackInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3840,13 +4475,23 @@ export interface RemoveUserByRoomIdFromTRTCRequest {
 }
 
 /**
- * 云存用户信息
+ * DescribeTWeSeePostPaidService返回参数结构体
  */
-export interface CloudStorageUserInfo {
+export interface DescribeTWeSeePostPaidServiceResponse {
   /**
-   * 用户ID
+   * 后付费资源 ID
    */
-  UserId?: string
+  ResourceId?: string
+  /**
+   * 资源状态。可选值：
+- `NORMAL`：正常
+- `ISOLATED`：已隔离
+   */
+  Status?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3867,6 +4512,24 @@ export interface ModifyCloudStorageAIServiceCallbackResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateTWeSeeCallback请求参数结构体
+ */
+export interface CreateTWeSeeCallbackRequest {
+  /**
+   * 回调类型。可选值：\n- `http` HTTP 回调
+   */
+  Type: string
+  /**
+   * 回调 URL。要求 http 或 https 协议，仅支持 80 或 443 端口
+   */
+  CallbackUrl: string
+  /**
+   * 回调签名 Token。最大长度 128
+   */
+  CallbackToken?: string
 }
 
 /**
@@ -3893,6 +4556,24 @@ export interface PositionItem {
    * 位置点的精度预估，单位为米
    */
   Accuracy?: number
+}
+
+/**
+ * ListTWeSeeCallback返回参数结构体
+ */
+export interface ListTWeSeeCallbackResponse {
+  /**
+   * 回调目标列表
+   */
+  List?: Array<SeeCallbackInfo>
+  /**
+   * 已创建的回调目标总数
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3965,6 +4646,36 @@ export interface LoRaGatewayLocation {
    * 海拔
    */
   Altitude?: number
+}
+
+/**
+ * TWeSee 任务元数据
+ */
+export interface SeeTaskMetadata {
+  /**
+   * 产品 ID
+   */
+  ProductId?: string
+  /**
+   * 设备名称
+   */
+  DeviceName?: string
+  /**
+   * 通道 ID
+   */
+  ChannelId?: number
+  /**
+   * 事件起始时间（毫秒级时间戳）
+   */
+  StartTimeMs?: number
+  /**
+   * 事件结束时间（毫秒级时间戳）
+   */
+  EndTimeMs?: number
+  /**
+   * 自定义事件 ID
+   */
+  CustomId?: string
 }
 
 /**
@@ -4053,6 +4764,28 @@ export interface CloudStorageEvent {
    * 事件自定义数据
    */
   Data?: string
+}
+
+/**
+ * InquireTWeSeeSubscriptionCreatePrice返回参数结构体
+ */
+export interface InquireTWeSeeSubscriptionCreatePriceResponse {
+  /**
+   * 原价
+   */
+  OriginalPrice?: string
+  /**
+   * 折后价
+   */
+  DiscountPrice?: string
+  /**
+   * 币种
+   */
+  Currency?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4154,17 +4887,21 @@ export interface SeeEventIdFilterConfig {
 }
 
 /**
- * DescribeSubscribedTopicPolicy请求参数结构体
+ * GetTWeTalkAIBotList返回参数结构体
  */
-export interface DescribeSubscribedTopicPolicyRequest {
+export interface GetTWeTalkAIBotListResponse {
   /**
-   * 产品ID
+   * 无
    */
-  ProductId: string
+  Data?: Array<TalkAIBotInfo>
   /**
-   * 设备名称
+   * 1
    */
-  DeviceName: string
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4816,17 +5553,13 @@ export interface SearchKeyword {
 }
 
 /**
- * DescribeTWeTalkProductConfig请求参数结构体
+ * DescribeModelDefinition请求参数结构体
  */
-export interface DescribeTWeTalkProductConfigRequest {
+export interface DescribeModelDefinitionRequest {
   /**
    * 产品ID
    */
   ProductId: string
-  /**
-   * 支持的语言，zh-中文；en-英文；默认zh
-   */
-  TargetLanguage?: string
 }
 
 /**
@@ -5096,6 +5829,44 @@ export interface DismissRoomByStrRoomIdFromTRTCRequest {
    * 房间id
    */
   RoomId: string
+}
+
+/**
+ * TWeSee 视觉理解结果
+ */
+export interface SeeComprehensionResult {
+  /**
+   * 识别到的目标类型与事件标签。可能取值：
+
+- `person`：人
+- `vehicle`：车辆
+- `dog`：狗
+- `cat`：猫
+- `fire`：火焰
+- `smoke`：烟雾
+- `package`：快递包裹
+- `license_plate`：车牌
+   */
+  DetectedClassifications?: Array<string>
+  /**
+   * 摘要文本
+   */
+  Summary?: string
+  /**
+   * 摘要文本（次选语言）
+   */
+  AlternativeSummary?: string
+  /**
+   * 错误码，可能取值：
+
+- `DownloadFailed`：下载视频/图片文件失败
+- `ReadFailed`：读取视频/图片文件失败
+   */
+  ErrorCode?: string
+  /**
+   * 错误消息
+   */
+  ErrorMsg?: string
 }
 
 /**
@@ -5505,6 +6276,16 @@ export interface ResetCloudStorageAIServiceResponse {
 }
 
 /**
+ * DeleteTWeSeeCallback请求参数结构体
+ */
+export interface DeleteTWeSeeCallbackRequest {
+  /**
+   * 回调目标 ID，格式为 `callback-` + 8 位小写字母数字
+   */
+  CallbackId: string
+}
+
+/**
  * CreateTWeSeeRecognitionTask请求参数结构体
  */
 export interface CreateTWeSeeRecognitionTaskRequest {
@@ -5667,25 +6448,35 @@ export interface UnbindTWeTalkAIBotRequest {
 }
 
 /**
- * DescribeGatewayBindDevices返回参数结构体
+ * DescribeTWeSeeTaskStatistics请求参数结构体
  */
-export interface DescribeGatewayBindDevicesResponse {
+export interface DescribeTWeSeeTaskStatisticsRequest {
   /**
-   * 子设备信息。
+   * 算法类型。可选值：
+
+- `VID_COMP`：视频理解
+- `IMG_COMP`：图片理解
    */
-  Devices?: Array<BindDeviceInfo>
+  ServiceType?: string
   /**
-   * 子设备总数。
+   * 套餐规格。可选值：
+
+- `POSTPAID`：后付费（适用于视频理解、图片理解）
+- `BASIC`：包年包月基础版（适用于视频理解）
    */
-  Total?: number
+  ServiceTier?: string
   /**
-   * 子设备所属的产品名。
+   * 起始时间 UNIX 时间戳，单位：秒
    */
-  ProductName?: string
+  StartTime?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 结束时间 UNIX 时间戳，单位：秒
    */
-  RequestId?: string
+  EndTime?: number
+  /**
+   * 数据点间隔，单位：秒；-1 表示汇总，只返回 1 个数据点
+   */
+  Interval?: number
 }
 
 /**
@@ -5730,6 +6521,44 @@ export interface TalkProductConfigInfo {
    * 更新时间
    */
   UpdateTime?: number
+}
+
+/**
+ * DestroyTWeSeeSubscription请求参数结构体
+ */
+export interface DestroyTWeSeeSubscriptionRequest {
+  /**
+   * 产品 ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 算法类型。可选值：
+
+- `VID_COMP`：视频理解
+   */
+  ServiceType: string
+  /**
+   * 通道 ID
+   */
+  ChannelId?: number
+}
+
+/**
+ * GetTWeCallActiveStatus返回参数结构体
+ */
+export interface GetTWeCallActiveStatusResponse {
+  /**
+   * 激活状态
+   */
+  TWeCallActiveInfos?: Array<TWeCallActiveInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5985,17 +6814,35 @@ export interface CreateCloudStorageAIServiceResponse {
 }
 
 /**
- * TWeSee 语义理解自定义标签请求
+ * ModifyTWeSeeCallback请求参数结构体
  */
-export interface VisionCustomDetectQuery {
+export interface ModifyTWeSeeCallbackRequest {
   /**
-   * 自定义标签的标识符
+   * 回调目标 ID，格式为 `callback-` + 8 位小写字母数字
    */
-  Key: string
+  CallbackId: string
   /**
-   * 自定义标签的描述文本
+   * 回调 URL，需要可访问并通过 Echo 校验
    */
-  Query: string
+  CallbackUrl: string
+  /**
+   * 回调类型。当前仅支持：`http`
+   */
+  Type: string
+  /**
+   * 回调签名 token，最大长度 128
+   */
+  CallbackToken?: string
+}
+
+/**
+ * DescribeTWeSeeCallback请求参数结构体
+ */
+export interface DescribeTWeSeeCallbackRequest {
+  /**
+   * 回调目标 ID
+   */
+  CallbackId: string
 }
 
 /**
@@ -6013,35 +6860,27 @@ export interface DeviceDataHistoryItem {
 }
 
 /**
- * GetTWeTalkAIBotList返回参数结构体
+ * DescribeSubscribedTopicPolicy请求参数结构体
  */
-export interface GetTWeTalkAIBotListResponse {
+export interface DescribeSubscribedTopicPolicyRequest {
   /**
-   * 无
+   * 产品ID
    */
-  Data?: Array<TalkAIBotInfo>
+  ProductId: string
   /**
-   * 1
+   * 设备名称
    */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  DeviceName: string
 }
 
 /**
- * GetTWeCallActiveStatus返回参数结构体
+ * BatchInvokeTWeSeeRecognitionTask请求参数结构体
  */
-export interface GetTWeCallActiveStatusResponse {
+export interface BatchInvokeTWeSeeRecognitionTaskRequest {
   /**
-   * 激活状态
+   * 待执行的 TWeSee 语义理解任务列表
    */
-  TWeCallActiveInfos?: Array<TWeCallActiveInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Inputs: Array<CreateVisionRecognitionTaskInput>
 }
 
 /**
@@ -6213,6 +7052,55 @@ export interface GetProjectListResponse {
 }
 
 /**
+ * STT配置信息。
+ */
+export interface TalkSTTConfigInfo {
+  /**
+   * 支持的STT类型，tencent-腾讯；azure-亚马逊；deepgram-Deepgram;系统默认-tencent。
+   */
+  STTType?: string
+  /**
+   * 是否开启
+   */
+  Enabled?: boolean
+  /**
+   * 配置信息JSON字符串，根据STTType进行不同的值匹配。例如`STTType`是`tencent`，`Config`值是`{\"AppId\":123456,\"SecretId\":\"secretId*****\",\"SecretKey\":\"SecretKey****\",\"EngineType\":\"16k_zh\"}`
+
+## tencent
+```
+{
+  "AppId": 123456,
+  "SecretId": "secretId*****",
+  "SecretKey": "SecretKey****",
+  "EngineType": "16k_zh"
+}
+```
+
+## azure
+```
+{
+  "Region": "",
+  "EndpointId": "id",
+  "Language": "zh-CN",
+  "SubscriptionKey": "*****"
+}
+```
+
+## deepgram
+```
+{
+  "Model": "nova-2",
+  "Language": "zh",
+   "BaseUrl":"http://www.deepgram.com",
+  "ApiKey": "SecretKey****"
+}
+```
+
+   */
+  Config?: string
+}
+
+/**
  * ListFirmwares返回参数结构体
  */
 export interface ListFirmwaresResponse {
@@ -6363,6 +7251,16 @@ export interface InvokeCloudStorageAIServiceTaskResponse {
 }
 
 /**
+ * DescribeTWeSeeTask请求参数结构体
+ */
+export interface DescribeTWeSeeTaskRequest {
+  /**
+   * 任务 ID
+   */
+  TaskId: string
+}
+
+/**
  * InvokeTWeSeeRecognitionTask返回参数结构体
  */
 export interface InvokeTWeSeeRecognitionTaskResponse {
@@ -6453,52 +7351,16 @@ export interface DescribeFenceEventListResponse {
 }
 
 /**
- * STT配置信息。
+ * DescribeTWeSeePostPaidService请求参数结构体
  */
-export interface TalkSTTConfigInfo {
+export interface DescribeTWeSeePostPaidServiceRequest {
   /**
-   * 支持的STT类型，tencent-腾讯；azure-亚马逊；deepgram-Deepgram;系统默认-tencent。
+   * 算法类型。可选值：
+
+- `VID_COMP`：视频理解
+- `IMG_COMP`：图片理解
    */
-  STTType?: string
-  /**
-   * 是否开启
-   */
-  Enabled?: boolean
-  /**
-   * 配置信息JSON字符串，根据STTType进行不同的值匹配。例如`STTType`是`tencent`，`Config`值是`{\"AppId\":123456,\"SecretId\":\"secretId*****\",\"SecretKey\":\"SecretKey****\",\"EngineType\":\"16k_zh\"}`
-
-## tencent
-```
-{
-  "AppId": 123456,
-  "SecretId": "secretId*****",
-  "SecretKey": "SecretKey****",
-  "EngineType": "16k_zh"
-}
-```
-
-## azure
-```
-{
-  "Region": "",
-  "EndpointId": "id",
-  "Language": "zh-CN",
-  "SubscriptionKey": "*****"
-}
-```
-
-## deepgram
-```
-{
-  "Model": "nova-2",
-  "Language": "zh",
-   "BaseUrl":"http://www.deepgram.com",
-  "ApiKey": "SecretKey****"
-}
-```
-
-   */
-  Config?: string
+  ServiceType: string
 }
 
 /**
@@ -7043,6 +7905,28 @@ export interface ActivateDeviceInfo {
 }
 
 /**
+ * CreateTWeSeePostPaidService返回参数结构体
+ */
+export interface CreateTWeSeePostPaidServiceResponse {
+  /**
+   * 订单 ID
+   */
+  OrderId?: string
+  /**
+   * 资源 ID
+   */
+  ResourceId?: string
+  /**
+   * 订单状态
+   */
+  Status?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResetTWeCallDevice请求参数结构体
  */
 export interface ResetTWeCallDeviceRequest {
@@ -7074,6 +7958,40 @@ export interface CallDeviceActionAsyncResponse {
    * 异步调用状态
    */
   Status?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * TerminateTWeSeeSubscription请求参数结构体
+ */
+export interface TerminateTWeSeeSubscriptionRequest {
+  /**
+   * 产品 ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 算法类型。可选值：
+
+- `VID_COMP`：视频理解
+   */
+  ServiceType: string
+  /**
+   * 通道 ID
+   */
+  ChannelId?: number
+}
+
+/**
+ * ModifyTWeSeeSubscriptionRenewFlag返回参数结构体
+ */
+export interface ModifyTWeSeeSubscriptionRenewFlagResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7278,6 +8196,16 @@ export interface DescribeDeviceRequest {
    * 设备ID，该字段有值将代替 ProductId/DeviceName
    */
   DeviceId?: string
+}
+
+/**
+ * TWeSee 视频语义浓缩结果
+ */
+export interface SeeCompHighlightResult {
+  /**
+   * 摘要文本
+   */
+  Summary?: string
 }
 
 /**
@@ -7650,6 +8578,20 @@ export interface ModifyLoRaFrequencyRequest {
 }
 
 /**
+ * InvokeVideosKeywordsAnalyzer返回参数结构体
+ */
+export interface InvokeVideosKeywordsAnalyzerResponse {
+  /**
+   * 根据视频内容生成的关键词
+   */
+  Keywords?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTWeTalkProductConfigV2请求参数结构体
  */
 export interface DescribeTWeTalkProductConfigV2Request {
@@ -7669,16 +8611,6 @@ export interface DescribeTWeTalkProductConfigV2Request {
    * 是否脱敏
    */
   IncludeCredentials?: boolean
-}
-
-/**
- * BatchInvokeTWeSeeRecognitionTask请求参数结构体
- */
-export interface BatchInvokeTWeSeeRecognitionTaskRequest {
-  /**
-   * 待执行的 TWeSee 语义理解任务列表
-   */
-  Inputs: Array<CreateVisionRecognitionTaskInput>
 }
 
 /**
@@ -7944,6 +8876,34 @@ export interface DescribeGatewaySubProductsRequest {
 }
 
 /**
+ * InquireTWeSeeSubscriptionRenewPrice请求参数结构体
+ */
+export interface InquireTWeSeeSubscriptionRenewPriceRequest {
+  /**
+   * 产品 ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 算法类型。可选值：
+
+- `VID_COMP`：视频理解
+   */
+  ServiceType: string
+  /**
+   * 续费时长，单位：月，支持 1-60
+   */
+  Period: number
+  /**
+   * 通道 ID
+   */
+  ChannelId?: number
+}
+
+/**
  * CreateExternalSourceAIServiceTask返回参数结构体
  */
 export interface CreateExternalSourceAIServiceTaskResponse {
@@ -7969,6 +8929,32 @@ export interface BindProductsRequest {
    * 待绑定的子产品ID数组。
    */
   ProductIds: Array<string>
+}
+
+/**
+ * TerminateTWeSeeSubscription返回参数结构体
+ */
+export interface TerminateTWeSeeSubscriptionResponse {
+  /**
+   * 退订订单 ID
+   */
+  OrderId?: string
+  /**
+   * 退订订单状态
+   */
+  Status?: string
+  /**
+   * 退款金额（退款为负数）
+   */
+  Price?: string
+  /**
+   * 币种
+   */
+  Currency?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8775,6 +9761,28 @@ export interface DeleteOtaModuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * TWeSee 统计数据点
+ */
+export interface SeeStatItem {
+  /**
+   * 时间
+   */
+  Time?: string
+  /**
+   * 任务数量
+   */
+  Count?: number
+  /**
+   * 基础能力用量
+   */
+  CostBasic?: number
+  /**
+   * 高级能力用量
+   */
+  CostAdvanced?: number
 }
 
 /**
@@ -9750,6 +10758,51 @@ export interface GetCOSURLRequest {
 }
 
 /**
+ * CreateTWeSeeSubscription请求参数结构体
+ */
+export interface CreateTWeSeeSubscriptionRequest {
+  /**
+   * 产品 ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * 算法类型。可选值：
+
+- `VID_COMP`：视频理解
+   */
+  ServiceType: string
+  /**
+   * 套餐规格。可选值：
+
+- `BASIC`：包年包月基础版（适用于视频理解）
+   */
+  ServiceTier: string
+  /**
+   * 订阅购买时长，单位：月，支持 1-60
+   */
+  Period: number
+  /**
+   * 通道 ID
+   */
+  ChannelId?: number
+  /**
+   * 自定义订单 ID
+   */
+  CustomOrderId?: string
+  /**
+   * 续费标识。可选值：
+- `NOTIFY_AND_MANUAL_RENEW`：到期前通知并手动续费（默认）
+- `NOTIFY_AND_AUTO_RENEW`：到期前通知并自动续费
+- `DISABLE_NOTIFY_AND_MANUAL_RENEW`：不通知且手动续费
+   */
+  RenewFlag?: string
+}
+
+/**
  * CreateFenceBind请求参数结构体
  */
 export interface CreateFenceBindRequest {
@@ -9912,13 +10965,17 @@ export interface TalkActivationStatusInfo {
 }
 
 /**
- * DescribeModelDefinition请求参数结构体
+ * DescribeTWeTalkProductConfig请求参数结构体
  */
-export interface DescribeModelDefinitionRequest {
+export interface DescribeTWeTalkProductConfigRequest {
   /**
    * 产品ID
    */
   ProductId: string
+  /**
+   * 支持的语言，zh-中文；en-英文；默认zh
+   */
+  TargetLanguage?: string
 }
 
 /**
@@ -9997,6 +11054,41 @@ export interface ModifyFenceBindRequest {
    * 围栏绑定的产品列表
    */
   Items: Array<FenceBindProductItem>
+}
+
+/**
+ * InvokeTWeSeeComprehension返回参数结构体
+ */
+export interface InvokeTWeSeeComprehensionResponse {
+  /**
+   * 任务 ID
+   */
+  TaskId?: string
+  /**
+   * 任务状态。可能取值：
+
+- `1`：失败
+- `2`：空结果
+- `3`：有效结果
+- `4`：处理中
+   */
+  Status?: number
+  /**
+   * 视觉理解结果
+   */
+  ComprehensionResult?: SeeComprehensionResult
+  /**
+   * 完成该任务所消耗的基础能力额度
+   */
+  CostBasic?: number
+  /**
+   * 完成该任务所消耗的高级能力额度
+   */
+  CostAdvanced?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10989,6 +12081,32 @@ export interface BatchUpdateFirmwareRequest {
 }
 
 /**
+ * TWeSee 视频语义浓缩配置
+ */
+export interface SeeCompHighlightConfig {
+  /**
+   * 是否禁用视频浓缩
+   */
+  DisableHighlight?: boolean
+  /**
+   * 包含在浓缩结果中的目标类别。可选值：
+
+- `person`：人
+- `pet`：宠物
+- `vehicle`：车辆
+   */
+  DetectTypes?: Array<string>
+  /**
+   * 指定是否返回浓缩视频的摘要文本
+   */
+  EnableSummary?: boolean
+  /**
+   * 指定返回的关键帧图像数量
+   */
+  KeyFramesNum?: number
+}
+
+/**
  * GetTWeTalkAIBotList请求参数结构体
  */
 export interface GetTWeTalkAIBotListRequest {
@@ -11149,6 +12267,19 @@ export interface DeleteLoRaFrequencyRequest {
 }
 
 /**
+ * CreateTWeSeePostPaidService请求参数结构体
+ */
+export interface CreateTWeSeePostPaidServiceRequest {
+  /**
+   * 算法类型。可选值：
+
+- `VID_COMP`：视频理解
+- `IMG_COMP`：图片理解
+   */
+  ServiceType: string
+}
+
+/**
  * CreatePositionFence请求参数结构体
  */
 export interface CreatePositionFenceRequest {
@@ -11168,6 +12299,81 @@ export interface CreatePositionFenceRequest {
    * 围栏描述
    */
   FenceDesc?: string
+}
+
+/**
+ * TWeSee 任务详情
+ */
+export interface SeeTaskInfo {
+  /**
+   * 任务 ID
+   */
+  TaskId?: string
+  /**
+   * 任务状态。可能取值：
+
+- `1`：失败
+- `2`：空结果
+- `3`：有效结果
+- `4`：处理中
+   */
+  Status?: number
+  /**
+   * 任务元数据
+   */
+  Metadata?: SeeTaskMetadata
+  /**
+   * 算法类目。可能取值：
+
+- `COMPREHENSION`：视觉理解
+   */
+  ServiceCategory?: string
+  /**
+   * 算法类型。可能取值：
+
+- `VID_COMP`：视频理解
+- `IMG_COMP`：图片理解
+   */
+  ServiceType?: string
+  /**
+   * 套餐规格。可能取值：
+
+- `POSTPAID`：后付费（适用于视频理解、图片理解）
+- `BASIC`：包年包月基础版（适用于视频理解）
+   */
+  ServiceTier?: string
+  /**
+   * 视觉理解结果（适用于视频理解、图片理解）
+   */
+  ComprehensionResult?: SeeComprehensionResult
+  /**
+   * 视频语义浓缩结果（适用于视频语义浓缩）
+   */
+  CompHighlightResult?: SeeCompHighlightResult
+  /**
+   * 完成该任务所消耗的基础能力额度
+   */
+  CostBasic?: number
+  /**
+   * 完成该任务所消耗的高级能力额度
+   */
+  CostAdvanced?: number
+  /**
+   * 输出文件名列表
+   */
+  Files?: Array<string>
+  /**
+   * 输出文件详情列表
+   */
+  FilesInfo?: Array<CloudStorageAIServiceTaskFileInfo>
+  /**
+   * 创建时间
+   */
+  CreateTime?: number
+  /**
+   * 最后更新时间
+   */
+  UpdateTime?: number
 }
 
 /**

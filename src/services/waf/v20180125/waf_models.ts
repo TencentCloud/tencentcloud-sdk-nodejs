@@ -719,6 +719,10 @@ export interface LLMDetectResult {
    * <p>要代答的消息id，此消息id用于作为GenerateLLMSecAnswer接口的入参</p>
    */
   MsgID?: string
+  /**
+   * <p>toolcall的检测结果</p>
+   */
+  ToolCallResult?: ToolCallResult
 }
 
 /**
@@ -1176,33 +1180,42 @@ export interface KVInt {
  */
 export interface ProtectGroupInfo {
   /**
-   * 防护对象组ID
+   * <p>防护对象组ID</p>
    */
   ID?: number
   /**
-   * 防护对象组名称
+   * <p>防护对象组名称</p>
    */
   Name?: string
   /**
-   * 防护对象组备注
+   * <p>防护对象组备注</p>
    */
   Remark?: string
   /**
-   * 防护对象组中绑定的域名详情
+   * <p>防护对象组中绑定的域名详情</p>
    */
   Domains?: Array<ProtectGroupDomainInfo>
   /**
-   * 关联的批量规则数
+   * <p>关联的批量规则数</p>
    */
   RuleNum?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime?: string
+  /**
+   * <p>标签信息</p>
+   */
+  TagInfos?: Array<TagInfo>
+  /**
+   * <p>是否绑定了模板</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BoundTemplate?: boolean
 }
 
 /**
@@ -1412,7 +1425,7 @@ export interface LLMRisks {
  */
 export interface CreateProtectGroupResponse {
   /**
-   * 防护对象组的ID
+   * <p>防护对象组的ID</p>
    */
   GroupId?: number
   /**
@@ -3093,65 +3106,73 @@ export interface ApiSecKey {
  */
 export interface ModifyApiSecSensitiveRuleRequest {
   /**
-   * 域名
+   * <p>域名</p>
    */
   Domain: string
   /**
-   * 1表示开，0表示关，3表示删除
+   * <p>1表示开，0表示关，3表示删除</p>
    */
   Status: number
   /**
-   * 规则名称
+   * <p>规则名称</p>
    */
   RuleName?: string
   /**
-   * 客户自定义配置
-   */
-  CustomRule?: ApiSecCustomSensitiveRule
-  /**
-   * rulename列表，批量操作的时候填改值
+   * <p>rulename列表，批量操作的时候填改值</p>
    */
   RuleNameList?: Array<string>
   /**
-   * api提取规则内容
+   * <p>客户自定义配置</p>
    */
-  CustomApiExtractRule?: ApiSecExtractRule
+  CustomRule?: ApiSecCustomSensitiveRule
   /**
-   * 批量操作的时候的api提取规则
+   * <p>批量操作的时候的api提取规则</p>
    */
   ApiExtractRuleName?: Array<string>
   /**
-   * 自定义api鉴权规则
+   * <p>api提取规则内容</p>
    */
-  ApiSecPrivilegeRule?: ApiSecPrivilegeRule
+  CustomApiExtractRule?: ApiSecExtractRule
   /**
-   * 匹配操作时候的api鉴权规则
+   * <p>匹配操作时候的api鉴权规则</p>
    */
   ApiSecPrivilegeRuleName?: Array<string>
   /**
-   * 批量操作的时候的自定义场景列表
+   * <p>自定义api鉴权规则</p>
+   */
+  ApiSecPrivilegeRule?: ApiSecPrivilegeRule
+  /**
+   * <p>批量操作的时候的自定义场景列表</p>
    */
   ApiSecSceneRuleNameList?: Array<string>
   /**
-   * 单条自定义api场景规则
+   * <p>单条自定义api场景规则</p>
    */
   ApiSecSceneRule?: ApiSecSceneRule
   /**
-   * 批量操作的时候的自定义事件规则列表
+   * <p>批量操作的时候的自定义事件规则列表</p>
    */
   ApiSecCustomEventRuleNameList?: Array<string>
   /**
-   * 自定义事件规则
+   * <p>自定义事件规则</p>
    */
   ApiSecCustomEventRuleRule?: ApiSecCustomEventRule
   /**
-   * 无效api排除规则
+   * <p>批量操作的时候的无效api排除规则</p>
+   */
+  ApiExcludeRuleName?: Array<string>
+  /**
+   * <p>无效api排除规则</p>
    */
   CustomApiExcludeRule?: ApiSecExcludeRule
   /**
-   * 批量操作的时候的无效api排除规则
+   * <p>批量操作时的敏感数据加白规则名称列表</p>
    */
-  ApiExcludeRuleName?: Array<string>
+  ApiSecSensitiveWhiteRuleNameList?: Array<string>
+  /**
+   * <p>敏感数据加白规则</p>
+   */
+  ApiSecSensitiveWhiteRuleRule?: ApiSecSensitiveWhiteRule
 }
 
 /**
@@ -4257,17 +4278,21 @@ export interface CreateRateLimitV2Request {
  */
 export interface CreateProtectGroupRequest {
   /**
-   * 防护对象组名称
+   * <p>防护对象组名称</p>
    */
   Name: string
   /**
-   * 防护对象组的应用范围
+   * <p>防护对象组的应用范围</p>
    */
   Domains: Array<string>
   /**
-   * 防护对象组备注
+   * <p>防护对象组备注</p>
    */
   Remark?: string
+  /**
+   * <p>标签信息</p>
+   */
+  Tags?: Array<TagInfo>
 }
 
 /**
@@ -4326,244 +4351,173 @@ export interface BotDataFilter {
  */
 export interface DomainInfo {
   /**
-   * 域名
+   * <p>域名</p>
    */
   Domain: string
   /**
-   * 域名ID
+   * <p>域名ID</p>
    */
   DomainId: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId: string
   /**
-   * cname地址
+   * <p>cname地址</p>
    */
   Cname: string
   /**
-   * 域名所属实例类型。
-sparta-waf：SaaS型WAF实例
-clb-waf：负载均衡型WAF实例
-cdc-clb-waf：CDC环境下负载均衡型WAF实例
+   * <p>域名所属实例类型。<br>sparta-waf：SaaS型WAF实例<br>clb-waf：负载均衡型WAF实例<br>cdc-clb-waf：CDC环境下负载均衡型WAF实例</p>
    */
   Edition: string
   /**
-   * 地域。
-"多伦多": "ca"
-"广州": "gz"
-"成都": "cd"
-"福州": "fzec"
-"深圳": "szx"
-"印度": "in"
-"济南": "jnec"
-"重庆": "cq"
-"天津": "tsn"
-"欧洲东北": "ru"
-"南京": "nj"
-"美国硅谷": "usw"
-"泰国": "th"
-"广州Open": "gzopen"
-"深圳金融": "szjr"
-"法兰克福": "de"
-"日本": "jp"
-"弗吉尼亚": "use"
-"北京": "bj"
-"中国香港": "hk"
-"杭州": "hzec"
-"北京金融": "bjjr"
-"上海金融": "shjr"
-"台北": "tpe"
-"首尔": "kr"
-"上海": "sh"
-"新加坡": "sg"
-"清远": "qy"
+   * <p>地域。<br>&quot;多伦多&quot;: &quot;ca&quot;<br>&quot;广州&quot;: &quot;gz&quot;<br>&quot;成都&quot;: &quot;cd&quot;<br>&quot;福州&quot;: &quot;fzec&quot;<br>&quot;深圳&quot;: &quot;szx&quot;<br>&quot;印度&quot;: &quot;in&quot;<br>&quot;济南&quot;: &quot;jnec&quot;<br>&quot;重庆&quot;: &quot;cq&quot;<br>&quot;天津&quot;: &quot;tsn&quot;<br>&quot;欧洲东北&quot;: &quot;ru&quot;<br>&quot;南京&quot;: &quot;nj&quot;<br>&quot;美国硅谷&quot;: &quot;usw&quot;<br>&quot;泰国&quot;: &quot;th&quot;<br>&quot;广州Open&quot;: &quot;gzopen&quot;<br>&quot;深圳金融&quot;: &quot;szjr&quot;<br>&quot;法兰克福&quot;: &quot;de&quot;<br>&quot;日本&quot;: &quot;jp&quot;<br>&quot;弗吉尼亚&quot;: &quot;use&quot;<br>&quot;北京&quot;: &quot;bj&quot;<br>&quot;中国香港&quot;: &quot;hk&quot;<br>&quot;杭州&quot;: &quot;hzec&quot;<br>&quot;北京金融&quot;: &quot;bjjr&quot;<br>&quot;上海金融&quot;: &quot;shjr&quot;<br>&quot;台北&quot;: &quot;tpe&quot;<br>&quot;首尔&quot;: &quot;kr&quot;<br>&quot;上海&quot;: &quot;sh&quot;<br>&quot;新加坡&quot;: &quot;sg&quot;<br>&quot;清远&quot;: &quot;qy&quot;</p>
    */
   Region: string
   /**
-   * 实例名
+   * <p>实例名</p>
    */
   InstanceName: string
   /**
-   * 访问日志开关状态。
-0：关闭
-1：开启
+   * <p>访问日志开关状态。<br>0：关闭<br>1：开启</p>
    */
   ClsStatus: number
   /**
-   * 负载均衡型WAF使用模式。
-0：镜像模式 
-1：清洗模式
+   * <p>负载均衡型WAF使用模式。<br>0：镜像模式<br>1：清洗模式</p>
    */
   FlowMode: number
   /**
-   * waf开关状态。
-0：关闭 
-1：开启
+   * <p>waf开关状态。<br>0：关闭<br>1：开启</p>
    */
   Status: number
   /**
-   * 规则引擎防护模式。
-0：观察模式 
-1：拦截模式
+   * <p>规则引擎防护模式。<br>0：观察模式<br>1：拦截模式</p>
    */
   Mode: number
   /**
-   * 规则引擎和AI引擎防护模式联合状态。
-1:初始状态,规则引擎拦截&&AI引擎未操作开关状态
-10：规则引擎观察&&AI引擎关闭模式 
-11：规则引擎观察&&AI引擎观察模式 
-12：规则引擎观察&&AI引擎拦截模式 
-20：规则引擎拦截&&AI引擎关闭模式 
-21：规则引擎拦截&&AI引擎观察模式 
-22：规则引擎拦截&&AI引擎拦截模式
+   * <p>规则引擎和AI引擎防护模式联合状态。<br>1:初始状态,规则引擎拦截&amp;&amp;AI引擎未操作开关状态<br>10：规则引擎观察&amp;&amp;AI引擎关闭模式<br>11：规则引擎观察&amp;&amp;AI引擎观察模式<br>12：规则引擎观察&amp;&amp;AI引擎拦截模式<br>20：规则引擎拦截&amp;&amp;AI引擎关闭模式<br>21：规则引擎拦截&amp;&amp;AI引擎观察模式<br>22：规则引擎拦截&amp;&amp;AI引擎拦截模式</p>
    */
   Engine: number
   /**
-   * 沙箱集群回源出口IP列表
+   * <p>沙箱集群回源出口IP列表</p>
    */
   CCList: Array<string>
   /**
-   * 生产集群回源出口IP列表
+   * <p>生产集群回源出口IP列表</p>
    */
   RsList: Array<string>
   /**
-   * 服务端口配置
+   * <p>服务端口配置</p>
    */
   Ports: Array<PortInfo>
   /**
-   * 负载均衡器相关配置
+   * <p>负载均衡器相关配置</p>
    */
   LoadBalancerSet: Array<LoadBalancerPackageNew>
   /**
-   * 用户id
+   * <p>用户id</p>
    */
   AppId: number
   /**
-   * SAAS型WAF域名状态：
--2：配置下发失败
--1：配置下发中
-0：DNS解析中
-1：无DNS解析记录，请接入WAF
-10：DNS解析未知，域名启用了代理
-11：DNS解析异常，使用A记录接入WAF IP
-200：检测源站不可达
-220：源站不支持长连接
-311：证书过期
-312：证书即将过期
-310：证书异常
-316：备案异常
-5：WAF回源已变更
-负载均衡型WAF域名LB监听器状态：
-0：操作成功 
-4：正在绑定LB 
-6：正在解绑LB 
-7：解绑LB失败 
-8：绑定LB失败 
-10：内部错误
+   * <p>SAAS型WAF域名状态：<br>-2：配置下发失败<br>-1：配置下发中<br>0：DNS解析中<br>1：无DNS解析记录，请接入WAF<br>10：DNS解析未知，域名启用了代理<br>11：DNS解析异常，使用A记录接入WAF IP<br>200：检测源站不可达<br>220：源站不支持长连接<br>311：证书过期<br>312：证书即将过期<br>310：证书异常<br>316：备案异常<br>5：WAF回源已变更<br>负载均衡型WAF域名LB监听器状态：<br>0：操作成功<br>4：正在绑定LB<br>6：正在解绑LB<br>7：解绑LB失败<br>8：绑定LB失败<br>10：内部错误</p>
    */
   State: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * Ipv6开关状态。
-0：关闭 
-1：开启
+   * <p>编辑时间</p>
+   */
+  ModifyTime?: string
+  /**
+   * <p>Ipv6开关状态。<br>0：关闭<br>1：开启</p>
    */
   Ipv6Status?: number
   /**
-   * BOT开关状态。
-0：关闭 
-1：关闭
-2：开启
-3：开启
+   * <p>BOT开关状态。<br>0：关闭<br>1：关闭<br>2：开启<br>3：开启</p>
    */
   BotStatus?: number
   /**
-   * 实例版本信息。
-101：小微敏捷版 
-102：小微超轻版
-2：高级版
-3：企业版
-4：旗舰版
-6：独享版
+   * <p>实例版本信息。<br>101：小微敏捷版<br>102：小微超轻版<br>2：高级版<br>3：企业版<br>4：旗舰版<br>6：独享版</p>
    */
   Level?: number
   /**
-   * 投递CLS状态。
-0：关闭 
-1：开启
+   * <p>投递CLS状态。<br>0：关闭<br>1：开启</p>
    */
   PostCLSStatus?: number
   /**
-   * 投递CKafka状态。
-0：关闭 
-1：开启
+   * <p>投递CKafka状态。<br>0：关闭<br>1：开启</p>
    */
   PostCKafkaStatus?: number
   /**
-   * cdc实例域名接入的集群信息,非cdc实例忽略。
+   * <p>cdc实例域名接入的集群信息,非cdc实例忽略。</p>
    */
   CdcClusters?: string
   /**
-   * api安全开关状态。
-0：关闭 
-1：开启
+   * <p>api安全开关状态。<br>0：关闭<br>1：开启</p>
    */
   ApiStatus?: number
   /**
-   * 应用型负载均衡类型，默认clb。
-clb：七层负载均衡器类型
-apisix：apisix网关型
+   * <p>应用型负载均衡类型，默认clb。<br>clb：七层负载均衡器类型<br>apisix：apisix网关型</p>
    */
   AlbType?: string
   /**
-   * 安全组状态。
-0：不展示
-1：非腾讯云源站
-2：安全组绑定失败
-3：安全组发生变更
+   * <p>安全组状态。<br>0：不展示<br>1：非腾讯云源站<br>2：安全组绑定失败<br>3：安全组发生变更</p>
    */
   SgState?: number
   /**
-   * 安全组状态的详细解释
+   * <p>安全组状态的详细解释</p>
    */
   SgDetail?: string
   /**
-   * 域名云环境。hybrid：混合云域名
-public：公有云域名
+   * <p>域名云环境。hybrid：混合云域名<br>public：公有云域名</p>
    */
   CloudType?: string
   /**
-   * 域名备注信息
+   * <p>域名备注信息</p>
    */
   Note?: string
   /**
-   * SAASWAF源站IP列表
+   * <p>SAASWAF源站IP列表</p>
    */
   SrcList?: Array<string>
   /**
-   * SAASWAF源站域名列表
+   * <p>SAASWAF源站域名列表</p>
    */
   UpstreamDomainList?: Array<string>
   /**
-   * 安全组ID
+   * <p>安全组ID</p>
    */
   SgID?: string
   /**
-   * clbwaf接入状态，0代表“尚无流量接入”，1代表“流量接入”，2代表“CLB监听器已注销”，3代表“配置生效中”，4代表“配置下发失败中”
+   * <p>clbwaf接入状态，0代表“尚无流量接入”，1代表“流量接入”，2代表“CLB监听器已注销”，3代表“配置生效中”，4代表“配置下发失败中”</p>
    */
   AccessStatus?: number
   /**
-   * 域名标签
+   * <p>域名标签</p>
    */
   Labels?: Array<string>
   /**
-   * saaswaf独享ip状态，0是关闭，1是开启，2是开启中
+   * <p>saaswaf独享ip状态，0是关闭，1是开启，2是开启中</p>
    */
   PrivateVipStatus?: number
+  /**
+   * <p>代表是否是四层clbwaf域名</p>
+   */
+  IsREIP?: number
+  /**
+   * <p>四层关联的对象ID</p>
+   */
+  REIPObjectId?: string
+  /**
+   * <p>标签结构体</p>
+   */
+  TagInfos?: Array<TagInfo>
+  /**
+   * <p>大模型开关</p><p>枚举值：</p><ul><li>0： 大模型开关关闭状态</li><li>1： 大模型开关开启状态</li></ul>
+   */
+  LLMStatus?: number
 }
 
 /**
@@ -4576,11 +4530,11 @@ export type GetAttackDownloadRecordsRequest = null
  */
 export interface DescribeDomainsResponse {
   /**
-   * 总数
+   * <p>总数</p>
    */
   Total?: number
   /**
-   * domain列表
+   * <p>domain列表</p>
    */
   Domains?: Array<DomainInfo>
   /**
@@ -5275,7 +5229,7 @@ RuleId,Match_field,Name,Action,Status
  */
 export interface CreateHostResponse {
   /**
-   * 新增防护域名ID
+   * <p>新增防护域名ID</p>
    */
   DomainId?: string
   /**
@@ -5394,7 +5348,7 @@ export interface ModifyHostFlowModeRequest {
  */
 export interface GetOrganizationRoleResponse {
   /**
-   * Admin:集团账号创建，DelegatedAdmin:委派管理员，Member：成员，NoMember：非集团账号成员
+   * <p>Admin:集团账号创建，DelegatedAdmin:委派管理员，Member：成员，NoMember：非集团账号成员</p>
    */
   Role?: string
   /**
@@ -5444,13 +5398,17 @@ export interface LLMSensitiveValueLevel {
  */
 export interface CreateHostRequest {
   /**
-   * 防护域名配置信息。内网负载均衡器必须携带对应的NumericalVpcId。
+   * <p>防护域名配置信息。内网负载均衡器必须携带对应的NumericalVpcId。</p>
    */
   Host: HostRecord
   /**
-   * 实例id
+   * <p>实例id</p>
    */
   InstanceID?: string
+  /**
+   * <p>标签信息</p>
+   */
+  Tags?: Array<TagInfo>
 }
 
 /**
@@ -5496,33 +5454,37 @@ export interface CreateDealsRequest {
  */
 export interface DescribeApiSecSensitiveRuleListRequest {
   /**
-   * 域名
+   * <p>域名</p>
    */
   Domain: string
   /**
-   * 是否查询api提取规则策略，true表示查询
+   * <p>是否查询api提取规则策略，true表示查询</p>
    */
   IsQueryApiExtractRule?: boolean
   /**
-   * 是否查询api鉴权规则
+   * <p>是否查询api鉴权规则</p>
    */
   IsQueryApiPrivilegeRule?: boolean
   /**
-   * 是否查询api场景规则
+   * <p>是否查询api场景规则</p>
    */
   IsQueryApiSceneRule?: boolean
   /**
-   * 查询鉴权配置的时候，该rule只返回鉴权配置的规则
+   * <p>查询鉴权配置的时候，该rule只返回鉴权配置的规则</p>
    */
   RuleName?: string
   /**
-   * 是否查询api自定义事件规则
+   * <p>是否查询api自定义事件规则</p>
    */
   IsQueryApiCustomEventRule?: boolean
   /**
-   * 是否查询无效api排除策略
+   * <p>是否查询无效api排除策略</p>
    */
   IsQueryApiExcludeRule?: boolean
+  /**
+   * <p>是否查询敏感数据加白规则</p>
+   */
+  IsQueryApiSensitiveWhiteRule?: boolean
 }
 
 /**
@@ -6294,6 +6256,24 @@ export interface DeleteIpAccessControlResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * tool_call 场景检测结果
+ */
+export interface ToolCallResult {
+  /**
+   * <p>命中规则名称</p>
+   */
+  RuleName?: string
+  /**
+   * <p>规则动作</p>
+   */
+  Action?: string
+  /**
+   * <p>风险等级</p><p>枚举值：</p><ul><li>critical： 严重</li><li>high： 高危    </li><li>medium： 中危    </li><li>low： 低危</li></ul>
+   */
+  Severity?: string
 }
 
 /**
@@ -7446,6 +7426,24 @@ export interface DownloadAttackRecordInfo {
 }
 
 /**
+ * 敏感数据加白字段模型
+ */
+export interface ApiSecSensitiveWhiteField {
+  /**
+   * <p>字段名称</p>
+   */
+  FieldName?: string
+  /**
+   * <p>字段位置</p>
+   */
+  FieldType?: string
+  /**
+   * <p>敏感数据类型列表</p>
+   */
+  SensitiveTypes?: Array<string>
+}
+
+/**
  * DescribeRuleLimit返回参数结构体
  */
 export interface DescribeRuleLimitResponse {
@@ -7601,11 +7599,11 @@ export interface LLMMonPkg {
  */
 export interface ModifyHostRequest {
   /**
-   * 编辑的域名配置信息
+   * <p>编辑的域名配置信息</p>
    */
   Host: HostRecord
   /**
-   * 实例唯一ID
+   * <p>实例唯一ID</p>
    */
   InstanceID?: string
 }
@@ -7679,117 +7677,129 @@ export interface DeleteSpartaProtectionResponse {
  */
 export interface ClbObject {
   /**
-   * 对象ID
+   * <p>对象ID</p>
    */
   ObjectId?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 精准域名列表
+   * <p>精准域名列表</p>
    */
   PreciseDomains?: Array<string>
   /**
-   * WAF功能开关状态，0关闭1开启
+   * <p>WAF功能开关状态，0关闭1开启</p>
    */
   Status?: number
   /**
-   * WAF日志开关状态，0关闭1开启
+   * <p>WAF日志开关状态，0关闭1开启</p>
    */
   ClsStatus?: number
   /**
-   * CLB对象对应的虚拟域名
+   * <p>CLB对象对应的虚拟域名</p>
    */
   VirtualDomain?: string
   /**
-   * 对象名称
+   * <p>对象名称</p>
    */
   ObjectName?: string
   /**
-   * 公网地址
+   * <p>公网地址</p>
    */
   PublicIp?: Array<string>
   /**
-   * 内网地址
+   * <p>内网地址</p>
    */
   PrivateIp?: Array<string>
   /**
-   * VPC名称
+   * <p>VPC名称</p>
    */
   VpcName?: string
   /**
-   * VPC ID
+   * <p>VPC ID</p>
    */
   Vpc?: string
   /**
-   * waf实例等级，如果未绑定实例为0
+   * <p>waf实例等级，如果未绑定实例为0</p>
    */
   InstanceLevel?: number
   /**
-   * clb投递开关
+   * <p>clb投递开关</p>
    */
   PostCLSStatus?: number
   /**
-   * kafka投递开关
+   * <p>kafka投递开关</p>
    */
   PostCKafkaStatus?: number
   /**
-   * 对象类型：CLB:负载均衡器，TSE:云原生网关
+   * <p>对象类型：CLB:负载均衡器，TSE:云原生网关</p>
    */
   Type?: string
   /**
-   * 对象地域
+   * <p>对象地域</p>
    */
   Region?: string
   /**
-   * 代理状态: 0:不开启,1:以XFF的第一个IP地址作为客户端IP,2:以remote_addr作为客户端IP,3:从指定的头部字段获取客户端IP，字段通过IpHeaders字段给出
+   * <p>代理状态: 0:不开启,1:以XFF的第一个IP地址作为客户端IP,2:以remote_addr作为客户端IP,3:从指定的头部字段获取客户端IP，字段通过IpHeaders字段给出</p>
    */
   Proxy?: number
   /**
-   * 指定获取客户端IP的头部字段列表。IsCdn为3时有效
+   * <p>指定获取客户端IP的头部字段列表。IsCdn为3时有效</p>
    */
   IpHeaders?: Array<string>
   /**
-   * bot防护开关
+   * <p>bot防护开关</p>
    */
   BotStatus?: number
   /**
-   * api防护开关
+   * <p>api防护开关</p>
    */
   ApiStatus?: number
   /**
-   * 对象接入模式，0表示镜像模式，1表示清洗模式，2表示体检模式，默认为清洗模式
+   * <p>对象接入模式，0表示镜像模式，1表示清洗模式，2表示体检模式，默认为清洗模式</p>
    */
   ObjectFlowMode?: number
   /**
-   * 数值形式的私有网络 ID
+   * <p>数值形式的私有网络 ID</p>
    */
   NumericalVpcId?: number
   /**
-   * 修改时间
+   * <p>修改时间</p>
    */
   ModifyTime?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   AddTime?: string
   /**
-   * 跨账号时，表示成员账号的appid
+   * <p>跨账号时，表示成员账号的appid</p>
    */
   MemberAppId?: number
   /**
-   * 跨账号时，表示成员账号的uin
+   * <p>跨账号时，表示成员账号的uin</p>
    */
   MemberUin?: string
   /**
-   * 跨账号时，表示成员账号的昵称
+   * <p>跨账号时，表示成员账号的昵称</p>
    */
   MemberNickName?: string
+  /**
+   * <p>标签信息</p>
+   */
+  TagInfos?: Array<TagInfo>
+  /**
+   * <p>精准域名信息</p>
+   */
+  PreciseDomainDetails?: Array<DomainInfo>
+  /**
+   * <p>waf接入状态</p>
+   */
+  WafAccessStatus?: number
 }
 
 /**
@@ -7923,7 +7933,7 @@ export interface DescribeIpHitItemsResponse {
  */
 export interface ModifyHostResponse {
   /**
-   * 编辑的域名ID
+   * <p>编辑的域名ID</p>
    */
   DomainId?: string
   /**
@@ -9210,6 +9220,20 @@ export interface DescribeCustomRuleListResponse {
 }
 
 /**
+ * 标签结构体
+ */
+export interface TagInfo {
+  /**
+   * <p>标签键</p>
+   */
+  TagKey?: string
+  /**
+   * <p>标签值</p>
+   */
+  TagValue?: string
+}
+
+/**
  * Bot-Id规则统计信息
  */
 export interface BotIdStat {
@@ -9720,61 +9744,65 @@ export interface DeleteSpartaProtectionRequest {
 }
 
 /**
- * saas和clb信息
+ * saas和clb、四层域名信息
  */
 export interface UserDomainInfo {
   /**
-   * 用户id
+   * <p>用户id</p>
    */
   Appid?: number
   /**
-   * 域名
+   * <p>域名</p>
    */
   Domain?: string
   /**
-   * 域名id
+   * <p>域名id</p>
    */
   DomainId?: string
   /**
-   * 实例id
+   * <p>实例id</p>
    */
   InstanceId?: string
   /**
-   * 实例名
+   * <p>实例名</p>
    */
   InstanceName?: string
   /**
-   * waf类型
+   * <p>waf类型</p>
    */
   Edition?: string
   /**
-   * 版本
+   * <p>版本</p>
    */
   Level?: string
   /**
-   * 指定域名访问日志字段的开关
+   * <p>指定域名访问日志字段的开关</p>
    */
   WriteConfig?: string
   /**
-   * 指定域名是否写cls的开关 1:写 0:不写
+   * <p>指定域名是否写cls的开关 1:写 0:不写</p>
    */
   Cls?: number
   /**
-   * 标记是否是混合云接入。hybrid表示混合云接入域名
+   * <p>标记是否是混合云接入。hybrid表示混合云接入域名</p>
    */
   CloudType?: string
   /**
-   * 标记clbwaf类型
+   * <p>标记clbwaf类型</p>
    */
   AlbType?: string
   /**
-   * BOT开关状态
+   * <p>BOT开关状态</p>
    */
   BotStatus?: number
   /**
-   * API开关状态
+   * <p>API开关状态</p>
    */
   ApiStatus?: number
+  /**
+   * <p>是否是四层clbwaf域名</p>
+   */
+  IsREIP?: number
 }
 
 /**
@@ -10799,240 +10827,233 @@ export interface DescribeUserLevelRequest {
  */
 export interface InstanceInfo {
   /**
-   * 实例唯一ID
+   * <p>实例唯一ID</p>
    */
   InstanceId: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName: string
   /**
-   * 实例对应资源ID，计费使用
+   * <p>实例对应资源ID，计费使用</p>
    */
   ResourceIds: string
   /**
-   * 实例所属地域
+   * <p>实例所属地域</p>
    */
   Region: string
   /**
-   * 付费模式
+   * <p>付费模式</p>
    */
   PayMode: number
   /**
-   * 自动续费标识。
-0：关闭
-1：开启
+   * <p>自动续费标识。<br>0：关闭<br>1：开启</p>
    */
   RenewFlag: number
   /**
-   * 弹性计费开关。
-0：关闭
-1：开启
+   * <p>弹性计费开关。<br>0：关闭<br>1：开启</p>
    */
   Mode: number
   /**
-   * 实例套餐版本。
-101：小微版
-102：超轻版
-2：高级版
-3：企业版
-4：旗舰版
-6：独享版
+   * <p>实例套餐版本。<br>101：小微版<br>102：超轻版<br>2：高级版<br>3：企业版<br>4：旗舰版<br>6：独享版</p>
    */
   Level: number
   /**
-   * 实例过期时间
+   * <p>实例过期时间</p>
    */
   ValidTime: string
   /**
-   * 实例开始时间
+   * <p>实例开始时间</p>
    */
   BeginTime: string
   /**
-   * 已配置域名个数
+   * <p>已配置域名个数</p>
    */
   DomainCount: number
   /**
-   * 域名数量上限
+   * <p>域名数量上限</p>
    */
   SubDomainLimit: number
   /**
-   * 已配置主域名个数
+   * <p>已配置主域名个数</p>
    */
   MainDomainCount: number
   /**
-   * 主域名数量上限
+   * <p>主域名数量上限</p>
    */
   MainDomainLimit: number
   /**
-   * 实例30天内QPS峰值
+   * <p>实例30天内QPS峰值</p>
    */
   MaxQPS: number
   /**
-   * qps扩展包信息
+   * <p>qps扩展包信息</p>
    */
   QPS: QPSPackageNew
   /**
-   * 域名扩展包信息
+   * <p>域名扩展包信息</p>
    */
   DomainPkg: DomainPackageNew
   /**
-   * 用户appid
+   * <p>用户appid</p>
    */
   AppId: number
   /**
-   * clb或saas
+   * <p>clb或saas</p>
    */
   Edition: string
   /**
-   * 业务安全包
+   * <p>业务安全包</p>
    */
   FraudPkg?: FraudPkg
   /**
-   * Bot资源包
+   * <p>Bot资源包</p>
    */
   BotPkg?: BotPkg
   /**
-   * bot的qps详情
+   * <p>bot的qps详情</p>
    */
   BotQPS?: BotQPS
   /**
-   * qps弹性计费上限
+   * <p>qps弹性计费上限</p>
    */
   ElasticBilling?: number
   /**
-   * 攻击日志投递开关
+   * <p>攻击日志投递开关</p>
    */
   AttackLogPost?: number
   /**
-   * 带宽峰值，单位为B/s(字节每秒)
+   * <p>带宽峰值，单位为B/s(字节每秒)</p>
    */
   MaxBandwidth?: number
   /**
-   * api安全是否购买
+   * <p>api安全是否购买</p>
    */
   APISecurity?: number
   /**
-   * 购买的qps规格
+   * <p>购买的qps规格</p>
    */
   QpsStandard?: number
   /**
-   * 购买的带宽规格
+   * <p>购买的带宽规格</p>
    */
   BandwidthStandard?: number
   /**
-   * 实例状态
+   * <p>实例状态</p>
    */
   Status?: number
   /**
-   * 实例沙箱qps值
+   * <p>实例沙箱qps值</p>
    */
   SandboxQps?: number
   /**
-   * 是否api 安全试用
+   * <p>是否api 安全试用</p>
    */
   IsAPISecurityTrial?: number
   /**
-   * 重保包
+   * <p>重保包</p>
    */
   MajorEventsPkg?: MajorEventsPkg
   /**
-   * 混合云子节点包
+   * <p>混合云子节点包</p>
    */
   HybridPkg?: HybridPkg
   /**
-   * API安全资源包
+   * <p>API安全资源包</p>
    */
   ApiPkg?: ApiPkg
   /**
-   * 小程序安全加速包
+   * <p>小程序安全加速包</p>
    */
   MiniPkg?: MiniPkg
   /**
-   * 小程序qps规格
+   * <p>小程序qps规格</p>
    */
   MiniQpsStandard?: number
   /**
-   * 小程序qps峰值
+   * <p>小程序qps峰值</p>
    */
   MiniMaxQPS?: number
   /**
-   * 最近一次超量时间
+   * <p>最近一次超量时间</p>
    */
   LastQpsExceedTime?: string
   /**
-   * 小程序安全接入ID数量扩张包
+   * <p>小程序安全接入ID数量扩张包</p>
    */
   MiniExtendPkg?: MiniExtendPkg
   /**
-   * 计费项
+   * <p>计费项</p>
    */
   BillingItem?: string
   /**
-   * 实例延期释放标识
+   * <p>实例延期释放标识</p>
    */
   FreeDelayFlag?: number
   /**
-   * 最近3天最大qps
+   * <p>最近3天最大qps</p>
    */
   Last3MaxQPS?: number
   /**
-   * 最近3天最大带宽
+   * <p>最近3天最大带宽</p>
    */
   Last3MaxBandwidth?: number
   /**
-   * 重保增强包
+   * <p>重保增强包</p>
    */
   MajorEventsProPkg?: MajorEventsProPkg
   /**
-   * 1是基础2025版本；0不是
+   * <p>1是基础2025版本；0不是</p>
    */
   BasicFlag?: number
   /**
-   * 实例的网络配置
+   * <p>实例的网络配置</p>
    */
   NetworkConfig?: NetworkConfig
   /**
-   * RCE设备安全信息包
+   * <p>RCE设备安全信息包</p>
    */
   RCEPkg?: RCEPkg
   /**
-   * 超量策略。0：超量沙箱
-1：超量限流
+   * <p>超量策略。0：超量沙箱<br>1：超量限流</p>
    */
   ExceedPolicy?: number
   /**
-   * 大模型安全信息包
+   * <p>大模型安全信息包</p>
    */
   LLMPkg?: LLMPkg
   /**
-   * 弹性资源Id
+   * <p>弹性资源Id</p>
    */
   ElasticResourceId?: string
   /**
-   * 预付费大模型安全信息包
+   * <p>预付费大模型安全信息包</p>
    */
   LLMMonPkg?: LLMMonPkg
   /**
-   * 地域id
+   * <p>地域id</p>
    */
   RegionId?: number
   /**
-   * BOT安全护航信息
+   * <p>BOT安全护航信息</p>
    */
   BotSecurityPkg?: BotSecurityPkg
   /**
-   * BOT安全监测资源信息
+   * <p>BOT安全监测资源信息</p>
    */
   BotMonitorPkg?: BotMonitorPkg
   /**
-   * 独享ip资源信息
+   * <p>独享ip资源信息</p>
    */
   DedicatedIPPkg?: DedicatedIPPkg
   /**
-   * 已经配置独享ip的数量
+   * <p>已经配置独享ip的数量</p>
    */
   DedicatedIPCount?: number
+  /**
+   * <p>标签结构体</p>
+   */
+  TagInfos?: Array<TagInfo>
 }
 
 /**
@@ -12097,37 +12118,41 @@ export interface BatchOperateUserSignatureRulesRequest {
  */
 export interface ModifyObjectRequest {
   /**
-   * 修改对象标识
+   * <p>修改对象标识</p>
    */
   ObjectId: string
   /**
-   * 改动作类型:Status修改开关，InstanceId绑定实例, Proxy设置代理状态
+   * <p>改动作类型:Status修改开关，InstanceId绑定实例, Proxy设置代理状态</p>
    */
   OpType: string
   /**
-   * 新的Waf开关状态，如果和已有状态相同认为修改成功。状态可以为0或1
+   * <p>新的Waf开关状态，如果和已有状态相同认为修改成功。状态可以为0或1</p>
    */
   Status?: number
   /**
-   * 新的实例ID，如果和已绑定的实例相同认为修改成功
+   * <p>新的实例ID，如果和已绑定的实例相同认为修改成功</p>
    */
   InstanceId?: string
   /**
-   * 是否开启代理，0:不开启,1:以XFF的第一个IP地址作为客户端IP,2:以remote_addr作为客户端IP,3:从指定的头部字段获取客户端IP，字段通过IpHeaders字段给出(OpType为Status或Proxy时，该值有效)
+   * <p>是否开启代理，0:不开启,1:以XFF的第一个IP地址作为客户端IP,2:以remote_addr作为客户端IP,3:从指定的头部字段获取客户端IP，字段通过IpHeaders字段给出(OpType为Status或Proxy时，该值有效)</p>
    */
   Proxy?: number
   /**
-   * IsCdn=3时，需要填此参数，表示自定义header(OpType为Status或Proxy时，该值有效)
+   * <p>IsCdn=3时，需要填此参数，表示自定义header(OpType为Status或Proxy时，该值有效)</p>
    */
   IpHeaders?: Array<string>
   /**
-   * 对象所属集团成员appid
+   * <p>对象所属集团成员appid</p>
    */
   MemberAppId?: number
   /**
-   * 对象所属集团成员uin
+   * <p>对象所属集团成员uin</p>
    */
   MemberUin?: string
+  /**
+   * <p>标签信息</p>
+   */
+  Tags?: Array<TagInfo>
 }
 
 /**
@@ -12798,15 +12823,15 @@ export interface ModifyAreaBanRuleResponse {
  */
 export interface DescribeDomainsRequest {
   /**
-   * 分页偏移量，取Limit整数倍。最小值为0，最大值= Total/Limit向上取整
+   * <p>分页偏移量，取Limit整数倍。最小值为0，最大值= Total/Limit向上取整</p>
    */
   Offset: number
   /**
-   * 返回域名的数量
+   * <p>返回域名的数量</p>
    */
   Limit: number
   /**
-   * 过滤数组，过滤字段包括：Edition：实例版本，sparta-waf或clb-waf Domain：域名 DomainId：域名ID InstanceName：实例名称 InstanceId：实例ID FlowMode：流量接入模式，仅支持CLBWAF FlowCheckMode：流量体检模式，仅支持CLBWAF ClsStatus：日志开关 Status：WAF开关BotStatus：BOT开关 ApiStatus：API安全开关 Engine：引擎模式 UpstreamIP：源站IP，仅支持SAAS型WAF UpstreamDomain：源站域名，仅支持SAAS型WAF DomainState：域名状态，仅支持SAAS型WAF SgState：安全组状态，仅支持SAAS型WAF Label：分组标签，同时仅支持一种标签过滤
+   * <p>过滤数组，过滤字段包括：Edition：实例版本，sparta-waf或clb-waf AlbType：七层接入类型细分，clb或tsegw或apisix或scf Domain：域名 DomainId：域名ID InstanceName：实例名称 InstanceId：实例ID FlowMode：流量接入模式，仅支持CLBWAF FlowCheckMode：流量体检模式，仅支持CLBWAF ClsStatus：日志开关 Status：WAF开关BotStatus：BOT开关 ApiStatus：API安全开关 Engine：引擎模式 UpstreamIP：源站IP，仅支持SAAS型WAF UpstreamDomain：源站域名，仅支持SAAS型WAF DomainState：域名状态，仅支持SAAS型WAF SgState：安全组状态，仅支持SAAS型WAF Label：分组标签，同时仅支持一种标签过滤</p>
    */
   Filters?: Array<FiltersItemNew>
 }
@@ -13579,6 +13604,40 @@ export interface BotStatPointItem {
    * Key对应的页面展示内容
    */
   Label: string
+}
+
+/**
+ * 敏感数据加白规则模型
+ */
+export interface ApiSecSensitiveWhiteRule {
+  /**
+   * <p>白名单规则名称</p>
+   */
+  RuleName?: string
+  /**
+   * <p>加白对象配置</p>
+   */
+  ApiNameOp?: Array<ApiNameOp>
+  /**
+   * <p>加白模式</p><p>枚举值：</p><ul><li>1： 对整个API加白</li><li>2： 对指定字段加白</li></ul>
+   */
+  WhiteMode?: number
+  /**
+   * <p>加白字段配置列表</p>
+   */
+  WhiteFields?: Array<ApiSecSensitiveWhiteField>
+  /**
+   * <p>规则开关</p><p>枚举值：</p><ul><li>0： 关</li><li>1： 开</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>规则描述</p>
+   */
+  Description?: string
+  /**
+   * <p>修改时间</p><p>单位：s</p>
+   */
+  UpdateTime?: number
 }
 
 /**
@@ -14416,305 +14475,250 @@ export interface LimitHeaderName {
  */
 export interface DomainsPartInfo {
   /**
-   * 域名
+   * <p>域名</p>
    */
   Domain?: string
   /**
-   * 域名唯一ID
+   * <p>域名唯一ID</p>
    */
   DomainId?: string
   /**
-   * 域名所属实例唯一ID
+   * <p>域名所属实例唯一ID</p>
    */
   InstanceId?: string
   /**
-   * 域名所属实例类型
+   * <p>域名所属实例类型</p>
    */
   Edition?: string
   /**
-   * 域名所属实例名
+   * <p>域名所属实例名</p>
    */
   InstanceName?: string
   /**
-   * 证书
+   * <p>证书</p>
    */
   Cert?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 规则引擎和AI引擎防护模式联合状态。
-1:初始状态,规则引擎拦截&&AI引擎未操作开关状态
-10：规则引擎观察&&AI引擎关闭模式 
-11：规则引擎观察&&AI引擎观察模式 
-12：规则引擎观察&&AI引擎拦截模式 
-20：规则引擎拦截&&AI引擎关闭模式 
-21：规则引擎拦截&&AI引擎观察模式 
-22：规则引擎拦截&&AI引擎拦截模式
+   * <p>更新时间</p>
+   */
+  ModifyTime?: string
+  /**
+   * <p>规则引擎和AI引擎防护模式联合状态。<br>1:初始状态,规则引擎拦截&amp;&amp;AI引擎未操作开关状态<br>10：规则引擎观察&amp;&amp;AI引擎关闭模式<br>11：规则引擎观察&amp;&amp;AI引擎观察模式<br>12：规则引擎观察&amp;&amp;AI引擎拦截模式<br>20：规则引擎拦截&amp;&amp;AI引擎关闭模式<br>21：规则引擎拦截&amp;&amp;AI引擎观察模式<br>22：规则引擎拦截&amp;&amp;AI引擎拦截模式</p>
    */
   Engine?: number
   /**
-   * 是否开启HTTP强制跳转到HTTPS。
-0：不强制跳转
-1：开启强制跳转
+   * <p>是否开启HTTP强制跳转到HTTPS。<br>0：不强制跳转<br>1：开启强制跳转</p>
    */
   HttpsRewrite?: number
   /**
-   * HTTPS回源端口
+   * <p>HTTPS回源端口</p>
    */
   HttpsUpstreamPort?: string
   /**
-   * waf前是否部署有七层代理服务。
-0：没有部署代理服务
-1：有部署代理服务，waf将使用XFF获取客户端IP
-2：有部署代理服务，waf将使用remote_addr获取客户端IP
-3：有部署代理服务，waf将使用ip_headers中的自定义header获取客户端IP
+   * <p>waf前是否部署有七层代理服务。<br>0：没有部署代理服务<br>1：有部署代理服务，waf将使用XFF获取客户端IP<br>2：有部署代理服务，waf将使用remote_addr获取客户端IP<br>3：有部署代理服务，waf将使用ip_headers中的自定义header获取客户端IP</p>
    */
   IsCdn?: number
   /**
-   * 是否开启灰度。
+   * <p>是否开启灰度。</p>
    * @deprecated
    */
   IsGray?: number
   /**
-   * 是否开启HTTP2，需要开启HTTPS协议支持。
-0：关闭
-1：开启
+   * <p>是否开启HTTP2，需要开启HTTPS协议支持。<br>0：关闭<br>1：开启</p>
    */
   IsHttp2?: number
   /**
-   * 是否开启WebSocket支持。
-0：关闭
-1：开启
+   * <p>是否开启WebSocket支持。<br>0：关闭<br>1：开启</p>
    */
   IsWebsocket?: number
   /**
-   * 回源负载均衡策略。
-0：轮询
-1：IP hash
-2：加权轮询
+   * <p>回源负载均衡策略。<br>0：轮询<br>1：IP hash<br>2：加权轮询</p>
    */
   LoadBalance?: number
   /**
-   * 防护模式。
-0：观察模式
-1：拦截模式
+   * <p>防护模式。<br>0：观察模式<br>1：拦截模式</p>
    */
   Mode?: number
   /**
-   * 自有证书的私钥
+   * <p>自有证书的私钥</p>
    */
   PrivateKey?: string
   /**
-   * CertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id
+   * <p>CertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id</p>
    */
   SSLId?: string
   /**
-   * 域名回源时的回源域名。UpstreamType为1时，需要填充此字段
+   * <p>域名回源时的回源域名。UpstreamType为1时，需要填充此字段</p>
    */
   UpstreamDomain?: string
   /**
-   * 回源类型。
-0：通过IP回源
-1：通过域名回源
+   * <p>回源类型。<br>0：通过IP回源<br>1：通过域名回源</p>
    */
   UpstreamType?: number
   /**
-   * IP回源时的回源IP列表。UpstreamType为0时，需要填充此字段
+   * <p>IP回源时的回源IP列表。UpstreamType为0时，需要填充此字段</p>
    */
   SrcList?: Array<string>
   /**
-   * 域名端口配置
+   * <p>域名端口配置</p>
    */
   Ports?: Array<PortInfo>
   /**
-   * 证书类型。
-0：仅配置HTTP监听端口，没有证书
-1：证书来源为自有证书
-2：证书来源为托管证书
+   * <p>证书类型。<br>0：仅配置HTTP监听端口，没有证书<br>1：证书来源为自有证书<br>2：证书来源为托管证书</p>
    */
   CertType?: number
   /**
-   * 服务配置有HTTPS端口时，HTTPS的回源协议。
-http：使用http协议回源，和HttpsUpstreamPort配合使用
-https：使用https协议回源
+   * <p>服务配置有HTTPS端口时，HTTPS的回源协议。<br>http：使用http协议回源，和HttpsUpstreamPort配合使用<br>https：使用https协议回源</p>
    */
   UpstreamScheme?: string
   /**
-   * 日志包是否开启。
-0：关闭
-1：开启
+   * <p>日志包是否开启。<br>0：关闭<br>1：开启</p>
    */
   Cls?: number
   /**
-   * 接入Cname，SaaS型域名使用此Cname进行接入
+   * <p>接入Cname，SaaS型域名使用此Cname进行接入</p>
    */
   Cname?: string
   /**
-   * 是否开启长连接。
-0： 短连接
-1： 长连接
+   * <p>是否开启长连接。<br>0： 短连接<br>1： 长连接</p>
    */
   IsKeepAlive?: number
   /**
-   * 是否开启主动健康检测。
-0：不开启
-1：开启
+   * <p>是否开启主动健康检测。<br>0：不开启<br>1：开启</p>
    */
   ActiveCheck?: number
   /**
-   * TLS版本信息
+   * <p>TLS版本信息</p>
    */
   TLSVersion?: number
   /**
-   * 自定义的加密套件列表。CipherTemplate为3时需要填此字段，表示自定义的加密套件，值通过DescribeCiphersDetail接口获取。
+   * <p>自定义的加密套件列表。CipherTemplate为3时需要填此字段，表示自定义的加密套件，值通过DescribeCiphersDetail接口获取。</p>
    */
   Ciphers?: Array<number | bigint>
   /**
-   * 加密套件模板。
-0：不支持选择，使用默认模板  
-1：通用型模板 
-2：安全型模板
-3：自定义模板
+   * <p>加密套件模板。<br>0：不支持选择，使用默认模板<br>1：通用型模板<br>2：安全型模板<br>3：自定义模板</p>
    */
   CipherTemplate?: number
   /**
-   * WAF与源站的连接超时，默认10s。
+   * <p>WAF与源站的连接超时，默认10s。</p>
    */
   ProxyConnectTimeout?: number
   /**
-   * WAF与源站的读超时时间，默认300s。
+   * <p>WAF与源站的读超时时间，默认300s。</p>
    */
   ProxyReadTimeout?: number
   /**
-   * WAF与源站的写超时时间，默认300s。
+   * <p>WAF与源站的写超时时间，默认300s。</p>
    */
   ProxySendTimeout?: number
   /**
-   * WAF回源时的SNI类型。
-0：关闭SNI，不配置client_hello中的server_name
-1：开启SNI，client_hello中的server_name为防护域名
-2：开启SNI，SNI为域名回源时的源站域名
-3：开启SNI，SNI为自定义域名
+   * <p>WAF回源时的SNI类型。<br>0：关闭SNI，不配置client_hello中的server_name<br>1：开启SNI，client_hello中的server_name为防护域名<br>2：开启SNI，SNI为域名回源时的源站域名<br>3：开启SNI，SNI为自定义域名</p>
    */
   SniType?: number
   /**
-   * SniType为3时，需要填此参数，表示自定义的SNI；
+   * <p>SniType为3时，需要填此参数，表示自定义的SNI；</p>
    */
   SniHost?: string
   /**
-   * 回源IP权重
+   * <p>回源IP权重</p>
    */
   Weights?: Array<string>
   /**
-   * IsCdn=3时，表示自定义header
+   * <p>IsCdn=3时，表示自定义header</p>
    */
   IpHeaders?: Array<string>
   /**
-   * 是否开启XFF重置。
-0：关闭
-1：开启
+   * <p>是否开启XFF重置。<br>0：关闭<br>1：开启</p>
    */
   XFFReset?: number
   /**
-   * 域名备注信息
+   * <p>域名备注信息</p>
    */
   Note?: string
   /**
-   * 自定义回源Host。默认为空字符串，表示使用防护域名作为回源Host。
+   * <p>自定义回源Host。默认为空字符串，表示使用防护域名作为回源Host。</p>
    */
   UpstreamHost?: string
   /**
-   * 防护规则
+   * <p>防护规则</p>
    */
   Level?: string
   /**
-   * 是否开启缓存 0-关闭 1-开启
+   * <p>是否开启缓存 0-关闭 1-开启</p>
    */
   ProxyBuffer?: number
   /**
-   * 国密选项。0：不开启国密 1：在原有TLS选项的基础上追加支持国密 2：开启国密并仅支持国密客户端访问
+   * <p>国密选项。0：不开启国密 1：在原有TLS选项的基础上追加支持国密 2：开启国密并仅支持国密客户端访问</p>
    */
   GmType?: number
   /**
-   * 国密证书类型。0：无国密证书 1：证书来源为自有国密证书 2：证书来源为托管国密证书
+   * <p>国密证书类型。0：无国密证书 1：证书来源为自有国密证书 2：证书来源为托管国密证书</p>
    */
   GmCertType?: number
   /**
-   * GmCertType为1时，需要填充此参数，表示自有国密证书的证书链
+   * <p>GmCertType为1时，需要填充此参数，表示自有国密证书的证书链</p>
    */
   GmCert?: string
   /**
-   * GmCertType为1时，需要填充此参数，表示自有国密证书的私钥
+   * <p>GmCertType为1时，需要填充此参数，表示自有国密证书的私钥</p>
    */
   GmPrivateKey?: string
   /**
-   * GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书
+   * <p>GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书</p>
    */
   GmEncCert?: string
   /**
-   * GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书的私钥
+   * <p>GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书的私钥</p>
    */
   GmEncPrivateKey?: string
   /**
-   * GmCertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id
+   * <p>GmCertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id</p>
    */
   GmSSLId?: string
   /**
-   * 域名标签
+   * <p>域名标签</p>
    */
   Labels?: Array<string>
   /**
-   * 拨测状态。 0: 禁用拨测, 1: 启用拨测
+   * <p>拨测状态。 0: 禁用拨测, 1: 启用拨测</p>
    */
   ProbeStatus?: number
   /**
-   * 回源策略。
-0：负载均衡回源
-1：分流回源
+   * <p>回源策略。<br>0：负载均衡回源<br>1：分流回源</p>
    */
   UpstreamPolicy?: number
   /**
-   * 分流回源策略
+   * <p>分流回源策略</p>
    */
   UpstreamRules?: Array<UpstreamRule>
   /**
-   * 业务场景。0：默认值，表示常规业务场景 1：大模型业务场景
+   * <p>业务场景。0：默认值，表示常规业务场景 1：大模型业务场景</p>
    */
   UseCase?: number
   /**
-   * gzip开关。0：关闭 1：默认值，打开。
+   * <p>gzip开关。0：关闭 1：默认值，打开。</p>
    */
   Gzip?: number
   /**
-   * SAAS型WAF域名状态：
--2：配置下发失败
--1：配置下发中
-0：DNS解析中
-1：无DNS解析记录，请接入WAF
-10：DNS解析未知，域名启用了代理
-11：DNS解析异常，使用A记录接入WAF IP
-200：检测源站不可达
-220：源站不支持长连接
-311：证书过期
-312：证书即将过期
-310：证书异常
-316：备案异常
-5：WAF回源已变更
-负载均衡型WAF域名LB监听器状态：
-0：操作成功 
-4：正在绑定LB 
-6：正在解绑LB 
-7：解绑LB失败 
-8：绑定LB失败 
-10：内部错误
+   * <p>SAAS型WAF域名状态：<br>-2：配置下发失败<br>-1：配置下发中<br>0：DNS解析中<br>1：无DNS解析记录，请接入WAF<br>10：DNS解析未知，域名启用了代理<br>11：DNS解析异常，使用A记录接入WAF IP<br>200：检测源站不可达<br>220：源站不支持长连接<br>311：证书过期<br>312：证书即将过期<br>310：证书异常<br>316：备案异常<br>5：WAF回源已变更<br>负载均衡型WAF域名LB监听器状态：<br>0：操作成功<br>4：正在绑定LB<br>6：正在解绑LB<br>7：解绑LB失败<br>8：绑定LB失败<br>10：内部错误</p>
    */
   State?: number
   /**
-   * saaswaf独享ip状态，0是关闭状态，1是开启状态，2是开启中
+   * <p>saaswaf独享ip状态，0是关闭状态，1是开启状态，2是开启中</p>
    */
   PrivateVipStatus?: number
+  /**
+   * <p>标签结构体</p>
+   */
+  TagInfos?: Array<TagInfo>
+  /**
+   * <p>ipv6开启状态</p><p>枚举值：</p><ul><li>1： ipv6开关打开</li><li>0： ipv6开关关闭</li></ul>
+   */
+  Ipv6Status?: number
 }
 
 /**
@@ -14807,241 +14811,215 @@ export interface RuleType {
  */
 export interface AddSpartaProtectionRequest {
   /**
-   * 需要防护的域名
+   * <p>需要防护的域名</p>
    */
   Domain: string
   /**
-   * 证书类型。
-0：仅配置HTTP监听端口，没有证书
-1：证书来源为自有证书
-2：证书来源为托管证书
+   * <p>证书类型。<br>0：仅配置HTTP监听端口，没有证书<br>1：证书来源为自有证书<br>2：证书来源为托管证书</p>
    */
   CertType: number
   /**
-   * waf前是否部署有七层代理服务。
-0：没有部署代理服务
-1：有部署代理服务，waf将使用XFF获取客户端IP
-2：有部署代理服务，waf将使用remote_addr获取客户端IP
-3：有部署代理服务，waf将使用ip_headers中的自定义header获取客户端IP
+   * <p>waf前是否部署有七层代理服务。<br>0：没有部署代理服务<br>1：有部署代理服务，waf将使用XFF获取客户端IP<br>2：有部署代理服务，waf将使用remote_addr获取客户端IP<br>3：有部署代理服务，waf将使用ip_headers中的自定义header获取客户端IP</p>
    */
   IsCdn: number
   /**
-   * 回源类型。
-0：通过IP回源
-1：通过域名回源
+   * <p>回源类型。<br>0：通过IP回源<br>1：通过域名回源</p>
    */
   UpstreamType: number
   /**
-   * 是否开启WebSocket支持。
-0：关闭
-1：开启
+   * <p>是否开启WebSocket支持。<br>0：关闭<br>1：开启</p>
    */
   IsWebsocket: number
   /**
-   * 回源负载均衡策略。
-0：轮询
-1：IP hash
-2：加权轮询
+   * <p>回源负载均衡策略。<br>0：轮询<br>1：IP hash<br>2：加权轮询</p>
    */
   LoadBalance: string
   /**
-   * 服务端口列表配置。
-NginxServerId：新增域名时填'0'
-Port：监听端口号
-Protocol：端口协议
-UpstreamPort：与Port相同
-UpstreamProtocol：与Protocol相同
+   * <p>服务端口列表配置。<br>NginxServerId：新增域名时填&#39;0&#39;<br>Port：监听端口号<br>Protocol：端口协议<br>UpstreamPort：与Port相同<br>UpstreamProtocol：与Protocol相同</p>
    */
   Ports: Array<PortItem>
   /**
-   * 必填项，是否开启长连接。
-0： 短连接
-1： 长连接
+   * <p>必填项，是否开启长连接。<br>0： 短连接<br>1： 长连接</p>
    */
   IsKeepAlive: string
   /**
-   * 必填项，域名所属实例id
+   * <p>必填项，域名所属实例id</p>
    */
   InstanceID: string
   /**
-   * 是否开启HTTP强制跳转到HTTPS。0：不强制跳转1：开启强制跳转
+   * <p>是否开启HTTP强制跳转到HTTPS。0：不强制跳转1：开启强制跳转</p>
    */
   HttpsRewrite?: number
   /**
-   * 是否开启HTTP2，需要开启HTTPS协议支持。0：关闭1：开启
+   * <p>是否开启HTTP2，需要开启HTTPS协议支持。0：关闭1：开启</p>
    */
   IsHttp2?: number
   /**
-   * 是否开启主动健康检测。0：不开启1：开启
+   * <p>是否开启主动健康检测。0：不开启1：开启</p>
    */
   ActiveCheck?: number
   /**
-   * 加密套件模板。0：不支持选择，使用默认模板  1：通用型模板 2：安全型模板3：自定义模板
+   * <p>加密套件模板。0：不支持选择，使用默认模板  1：通用型模板 2：安全型模板3：自定义模板</p>
    */
   CipherTemplate?: number
   /**
-   * CertType为1时，需要填充此参数，表示自有证书的证书链
+   * <p>CertType为1时，需要填充此参数，表示自有证书的证书链</p>
    */
   Cert?: string
   /**
-   * CertType为1时，需要填充此参数，表示自有证书的私钥
+   * <p>CertType为1时，需要填充此参数，表示自有证书的私钥</p>
    */
   PrivateKey?: string
   /**
-   * CertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id
+   * <p>CertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id</p>
    */
   SSLId?: string
   /**
-   * Waf的资源ID。
+   * <p>Waf的资源ID。</p>
    * @deprecated
    */
   ResourceId?: string
   /**
-   * IsCdn为3时，需要填此参数，表示自定义header
+   * <p>IsCdn为3时，需要填此参数，表示自定义header</p>
    */
   IpHeaders?: Array<string>
   /**
-   * 服务配置有HTTPS端口时，HTTPS的回源协议。
-http：使用http协议回源，和HttpsUpstreamPort配合使用
-https：使用https协议回源
+   * <p>服务配置有HTTPS端口时，HTTPS的回源协议。<br>http：使用http协议回源，和HttpsUpstreamPort配合使用<br>https：使用https协议回源</p>
    */
   UpstreamScheme?: string
   /**
-   * HTTPS回源端口,仅UpstreamScheme为http时需要填当前字段
+   * <p>HTTPS回源端口,仅UpstreamScheme为http时需要填当前字段</p>
    * @deprecated
    */
   HttpsUpstreamPort?: string
   /**
-   * 是否开启灰度，0表示不开启灰度。
+   * <p>是否开启灰度，0表示不开启灰度。</p>
    * @deprecated
    */
   IsGray?: number
   /**
-   * 灰度的地区
+   * <p>灰度的地区</p>
    * @deprecated
    */
   GrayAreas?: Array<string>
   /**
-   * 域名回源时的回源域名。UpstreamType为1时，需要填充此字段
+   * <p>域名回源时的回源域名。UpstreamType为1时，需要填充此字段</p>
    */
   UpstreamDomain?: string
   /**
-   * IP回源时的回源IP列表。UpstreamType为0时，需要填充此字段
+   * <p>IP回源时的回源IP列表。UpstreamType为0时，需要填充此字段</p>
    */
   SrcList?: Array<string>
   /**
-   * WAF实例类型。
-sparta-waf：SAAS型WAF
-clb-waf：负载均衡型WAF
-cdn-waf：CDN上的Web防护能力
+   * <p>WAF实例类型。<br>sparta-waf：SAAS型WAF<br>clb-waf：负载均衡型WAF<br>cdn-waf：CDN上的Web防护能力</p>
    * @deprecated
    */
   Edition?: string
   /**
-   * 目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP
+   * <p>目前填0即可。anycast IP类型开关： 0 普通IP 1 Anycast IP</p>
    * @deprecated
    */
   Anycast?: number
   /**
-   * 回源IP列表各IP的权重，和SrcList一一对应。当且仅当UpstreamType为0，并且SrcList有多个IP，并且LoadBalance为2时需要填写，否则填 []
+   * <p>回源IP列表各IP的权重，和SrcList一一对应。当且仅当UpstreamType为0，并且SrcList有多个IP，并且LoadBalance为2时需要填写，否则填 []</p>
    */
   Weights?: Array<number | bigint>
   /**
-   * TLS版本信息
+   * <p>TLS版本信息</p>
    */
   TLSVersion?: number
   /**
-   * 自定义的加密套件列表。CipherTemplate为3时需要填此字段，表示自定义的加密套件，值通过DescribeCiphersDetail接口获取。
+   * <p>自定义的加密套件列表。CipherTemplate为3时需要填此字段，表示自定义的加密套件，值通过DescribeCiphersDetail接口获取。</p>
    */
   Ciphers?: Array<number | bigint>
   /**
-   * WAF与源站的连接超时，默认10s。
+   * <p>WAF与源站的连接超时，默认10s。</p>
    */
   ProxyConnectTimeout?: number
   /**
-   * WAF与源站的读超时时间，默认300s。
+   * <p>WAF与源站的读超时时间，默认300s。</p>
    */
   ProxyReadTimeout?: number
   /**
-   * WAF与源站的写超时时间，默认300s。
+   * <p>WAF与源站的写超时时间，默认300s。</p>
    */
   ProxySendTimeout?: number
   /**
-   * WAF回源时的SNI类型。
-0：关闭SNI，不配置client_hello中的server_name
-1：开启SNI，client_hello中的server_name为防护域名
-2：开启SNI，SNI为域名回源时的源站域名
-3：开启SNI，SNI为自定义域名
+   * <p>WAF回源时的SNI类型。<br>0：关闭SNI，不配置client_hello中的server_name<br>1：开启SNI，client_hello中的server_name为防护域名<br>2：开启SNI，SNI为域名回源时的源站域名<br>3：开启SNI，SNI为自定义域名</p>
    */
   SniType?: number
   /**
-   * SniType为3时，需要填此参数，表示自定义的SNI；
+   * <p>SniType为3时，需要填此参数，表示自定义的SNI；</p>
    */
   SniHost?: string
   /**
-   * 是否开启XFF重置。0：关闭 1：开启
+   * <p>是否开启XFF重置。0：关闭 1：开启</p>
    */
   XFFReset?: number
   /**
-   * 域名备注信息
+   * <p>域名备注信息</p>
    */
   Note?: string
   /**
-   * 自定义回源Host。默认为空字符串，表示使用防护域名作为回源Host。
+   * <p>自定义回源Host。默认为空字符串，表示使用防护域名作为回源Host。</p>
    */
   UpstreamHost?: string
   /**
-   * 是否开启缓存。 0：关闭 1：开启
+   * <p>是否开启缓存。 0：关闭 1：开启</p>
    */
   ProxyBuffer?: number
   /**
-   * 是否开启拨测。 0: 禁用拨测  1: 启用拨测。默认启用拨测
+   * <p>是否开启拨测。 0: 禁用拨测  1: 启用拨测。默认启用拨测</p>
    */
   ProbeStatus?: number
   /**
-   * 国密选项。0：不开启国密 1：在原有TLS选项的基础上追加支持国密 2：开启国密并仅支持国密客户端访问
+   * <p>国密选项。0：不开启国密 1：在原有TLS选项的基础上追加支持国密 2：开启国密并仅支持国密客户端访问</p>
    */
   GmType?: number
   /**
-   * 国密证书类型。0：无国密证书 1：证书来源为自有国密证书 2：证书来源为托管国密证书
+   * <p>国密证书类型。0：无国密证书 1：证书来源为自有国密证书 2：证书来源为托管国密证书</p>
    */
   GmCertType?: number
   /**
-   * GmCertType为1时，需要填充此参数，表示自有国密证书的证书链
+   * <p>GmCertType为1时，需要填充此参数，表示自有国密证书的证书链</p>
    */
   GmCert?: string
   /**
-   * GmCertType为1时，需要填充此参数，表示自有国密证书的私钥
+   * <p>GmCertType为1时，需要填充此参数，表示自有国密证书的私钥</p>
    */
   GmPrivateKey?: string
   /**
-   * GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书
+   * <p>GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书</p>
    */
   GmEncCert?: string
   /**
-   * GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书的私钥
+   * <p>GmCertType为1时，需要填充此参数，表示自有国密证书的加密证书的私钥</p>
    */
   GmEncPrivateKey?: string
   /**
-   * GmCertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id
+   * <p>GmCertType为2时，需要填充此参数，表示腾讯云SSL平台托管的证书id</p>
    */
   GmSSLId?: string
   /**
-   * 回源策略，支持负载均衡回源和分流回源两种方式。0：默认值，负载均衡回源；1：分流回源
+   * <p>回源策略，支持负载均衡回源和分流回源两种方式。0：默认值，负载均衡回源；1：分流回源</p>
    */
   UpstreamPolicy?: number
   /**
-   * 分流回源时生效，分流回源的规则。
+   * <p>分流回源时生效，分流回源的规则。</p>
    */
   UpstreamRules?: Array<UpstreamRule>
   /**
-   * 业务场景。0：默认值，表示常规业务场景 1：大模型业务场景
+   * <p>业务场景。0：默认值，表示常规业务场景 1：大模型业务场景</p>
    */
   UseCase?: number
   /**
-   * gzip开关。0：关闭 1：默认值，打开。
+   * <p>gzip开关。0：关闭 1：默认值，打开。</p>
    */
   Gzip?: number
+  /**
+   * <p>标签信息</p>
+   */
+  Tags?: Array<TagInfo>
 }
 
 /**
@@ -15278,49 +15256,53 @@ export interface ModifyHostStatusResponse {
  */
 export interface DescribeApiSecSensitiveRuleListResponse {
   /**
-   * api敏感规则列表
+   * <p>api敏感规则列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Array<ApiSecSensitiveRule>
   /**
-   * 规则数量
+   * <p>规则数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
-   * 自定义敏感检测规则总开关
+   * <p>自定义敏感检测规则总开关</p>
    */
   Status?: number
   /**
-   * 非内置规则的rulename列表
+   * <p>非内置规则的rulename列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleNameList?: Array<string>
   /**
-   * api提取规则列表
+   * <p>api提取规则列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiExtractRule?: Array<ApiSecExtractRule>
   /**
-   * api鉴权规则列表
+   * <p>api鉴权规则列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiSecPrivilegeRule?: Array<ApiSecPrivilegeRule>
   /**
-   * api场景规则列表
+   * <p>api场景规则列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiSecSceneRule?: Array<ApiSecSceneRule>
   /**
-   * 自定义事件规则
+   * <p>自定义事件规则</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiSecCustomEventRule?: Array<ApiSecCustomEventRule>
   /**
-   * 无效api排除规则列表
+   * <p>无效api排除规则列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiExcludeRule?: Array<ApiSecExcludeRule>
+  /**
+   * <p>敏感数据加白规则列表</p>
+   */
+  ApiSecSensitiveWhiteRule?: Array<ApiSecSensitiveWhiteRule>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16918,69 +16900,73 @@ export interface DescribeHostLimitRequest {
  */
 export interface ClbDomainsInfo {
   /**
-   * 域名
+   * <p>域名</p>
    */
   Domain?: string
   /**
-   * 域名唯一ID
+   * <p>域名唯一ID</p>
    */
   DomainId?: string
   /**
-   * 域名所属实例ID
+   * <p>域名所属实例ID</p>
    */
   InstanceId?: string
   /**
-   * 域名所属实例名
+   * <p>域名所属实例名</p>
    */
   InstanceName?: string
   /**
-   * 域名所属实例类型
+   * <p>域名所属实例类型</p>
    */
   Edition?: string
   /**
-   * waf前是否部署有七层代理服务。 0：没有部署代理服务 1：有部署代理服务，waf将使用XFF获取客户端IP 2：有部署代理服务，waf将使用remote_addr获取客户端IP 3：有部署代理服务，waf将使用ip_headers中的自定义header获取客户端IP
+   * <p>waf前是否部署有七层代理服务。 0：没有部署代理服务 1：有部署代理服务，waf将使用XFF获取客户端IP 2：有部署代理服务，waf将使用remote_addr获取客户端IP 3：有部署代理服务，waf将使用ip_headers中的自定义header获取客户端IP</p>
    */
   IsCdn?: number
   /**
-   * 负载均衡类型为clb时，对应的负载均衡器信息
+   * <p>负载均衡类型为clb时，对应的负载均衡器信息</p>
    */
   LoadBalancerSet?: Array<LoadBalancerPackageNew>
   /**
-   * 负载均衡型WAF的流量模式，1：清洗模式，0：镜像模式
+   * <p>负载均衡型WAF的流量模式，1：清洗模式，0：镜像模式</p>
    */
   FlowMode?: number
   /**
-   * 域名绑定负载均衡器状态
+   * <p>域名绑定负载均衡器状态</p>
    */
   State?: number
   /**
-   * 负载均衡类型，clb或者apisix
+   * <p>负载均衡类型，clb或者apisix</p>
    */
   AlbType?: string
   /**
-   * IsCdn=3时，表示自定义header
+   * <p>IsCdn=3时，表示自定义header</p>
    */
   IpHeaders?: Array<string>
   /**
-   * cdc-clb-waf类型WAF的CDC集群信息
+   * <p>cdc-clb-waf类型WAF的CDC集群信息</p>
    */
   CdcClusters?: string
   /**
-   * 云类型:public:公有云；private:私有云;hybrid:混合云
+   * <p>云类型:public:公有云；private:私有云;hybrid:混合云</p>
    */
   CloudType?: string
   /**
-   * 域名备注信息
+   * <p>域名备注信息</p>
    */
   Note?: string
   /**
-   * 域名标签
+   * <p>域名标签</p>
    */
   Labels?: Array<string>
   /**
-   * clbwaf接入状态，0代表“尚无流量接入”，1代表“流量接入”，2代表“CLB监听器已注销”，3代表“配置生效中”，4代表“配置下发失败中”
+   * <p>clbwaf接入状态，0代表“尚无流量接入”，1代表“流量接入”，2代表“CLB监听器已注销”，3代表“配置生效中”，4代表“配置下发失败中”</p>
    */
   AccessStatus?: number
+  /**
+   * <p>标签信息</p>
+   */
+  TagInfos?: Array<TagInfo>
 }
 
 /**

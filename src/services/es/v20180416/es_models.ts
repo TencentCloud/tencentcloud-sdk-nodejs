@@ -449,11 +449,11 @@ export interface DescribeLogstashInstanceLogsResponse {
  */
 export interface CreateInstanceResponse {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 订单号
+   * <p>订单号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DealName?: string
@@ -3418,58 +3418,65 @@ export interface DescribeIndexListRequest {
  */
 export interface NodeInfo {
   /**
-   * 节点数量
+   * <p>节点数量</p>
    */
   NodeNum: number
   /**
-   * 节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+   * <p>节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li></p>
    */
   NodeType: string
   /**
-   * 节点类型<li>hotData: 热数据节点</li>
-<li>warmData: 冷数据节点</li>
-<li>dedicatedMaster: 专用主节点</li>
-默认值为hotData
+   * <p>节点类型<li>hotData: 热数据节点</li></p><li>warmData: 冷数据节点</li><li>dedicatedMaster: 专用主节点</li>默认值为hotData
    */
   Type?: string
   /**
-   * 节点磁盘类型<li>CLOUD_SSD：SSD云硬盘</li><li>CLOUD_PREMIUM：高硬能云硬盘</li>默认值CLOUD_SSD
+   * <p>节点磁盘类型<li>CLOUD_SSD：SSD云硬盘</li><li>CLOUD_PREMIUM：高硬能云硬盘</li>默认值CLOUD_SSD</p>
    */
   DiskType?: string
   /**
-   * 节点磁盘容量（单位GB）
+   * <p>节点磁盘容量（单位GB）</p>
    */
   DiskSize?: number
   /**
-   * 节点本地盘信息
+   * <p>节点本地盘信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalDiskInfo?: LocalDiskInfo
   /**
-   * 节点磁盘块数
+   * <p>节点磁盘块数</p>
    */
   DiskCount?: number
   /**
-   * 节点磁盘是否加密 0: 不加密，1: 加密；默认不加密
+   * <p>节点磁盘是否加密 0: 不加密，1: 加密；默认不加密</p>
    */
   DiskEncrypt?: number
   /**
-   * cpu数目
+   * <p>自定义加密密钥id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KmsKeyId?: string
+  /**
+   * <p>自定义加密密钥name</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KmsKeyName?: string
+  /**
+   * <p>cpu数目</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CpuNum?: number
   /**
-   * 内存大小，单位GB
+   * <p>内存大小，单位GB</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MemSize?: number
   /**
-   * 硬盘额外性能
+   * <p>硬盘额外性能</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiskEnhance?: number
   /**
-   * 节点Gpu信息
+   * <p>节点Gpu信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GpuInfo?: GpuInfo
@@ -3614,181 +3621,177 @@ export interface OperationDurationUpdated {
  */
 export interface CreateInstanceRequest {
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone: string
   /**
-   * 实例版本（支持"5.6.4"、"6.4.3"、"6.8.2"、"7.5.1"、"7.10.1"）
+   * <p>实例版本（支持&quot;5.6.4&quot;、&quot;6.4.3&quot;、&quot;6.8.2&quot;、&quot;7.5.1&quot;、&quot;7.10.1&quot;）</p>
    */
   EsVersion: string
   /**
-   * 私有网络ID
+   * <p>私有网络ID</p>
    */
   VpcId: string
   /**
-   * 子网ID
+   * <p>子网ID</p>
    */
   SubnetId: string
   /**
-   * 访问密码（密码需8到16位，至少包括两项（[a-z,A-Z],[0-9]和[-!@#$%&^*+=_:;,.?]的特殊符号）
+   * <p>访问密码（密码需8到16位，至少包括两项（[a-z,A-Z],[0-9]和[-!@#$%&amp;^*+=_:;,.?]的特殊符号）</p>
    */
   Password: string
   /**
-   * 实例名称（1-50 个英文、汉字、数字、连接线-或下划线_）
+   * <p>实例名称（1-50 个英文、汉字、数字、连接线-或下划线_）</p>
    */
   InstanceName?: string
   /**
-   * 已废弃请使用NodeInfoList
-节点数量（2-50个）
+   * <p>已废弃请使用NodeInfoList<br>节点数量（2-50个）</p>
    */
   NodeNum?: number
   /**
-   * 计费类型<li>PREPAID：预付费，即包年包月</li><li>POSTPAID_BY_HOUR：按小时后付费</li>默认值POSTPAID_BY_HOUR
+   * <p>计费类型<li>PREPAID：预付费，即包年包月</li><li>POSTPAID_BY_HOUR：按小时后付费</li>默认值POSTPAID_BY_HOUR</p>
    */
   ChargeType?: string
   /**
-   * 包年包月购买时长（单位由参数TimeUnit决定）
+   * <p>包年包月购买时长（单位由参数TimeUnit决定）</p>
    */
   ChargePeriod?: number
   /**
-   * 自动续费标识<li>RENEW_FLAG_AUTO：自动续费</li><li>RENEW_FLAG_MANUAL：不自动续费，用户手动续费</li>ChargeType为PREPAID时需要设置，如不传递该参数，普通用户默认不自动续费，SVIP用户自动续费
+   * <p>自动续费标识<li>RENEW_FLAG_AUTO：自动续费</li><li>RENEW_FLAG_MANUAL：不自动续费，用户手动续费</li>ChargeType为PREPAID时需要设置，如不传递该参数，普通用户默认不自动续费，SVIP用户自动续费</p>
    */
   RenewFlag?: string
   /**
-   * 已废弃请使用NodeInfoList
-节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+   * <p>已废弃请使用NodeInfoList<br>节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li></p>
    */
   NodeType?: string
   /**
-   * 已废弃请使用NodeInfoList
-节点磁盘类型<li>CLOUD_SSD：SSD云硬盘</li><li>CLOUD_PREMIUM：高性能云硬盘</li><li> CLOUD_HSSD：增强型SSD云硬盘</li><li> CLOUD_BSSD：通用型SSD云硬盘</li>默认值CLOUD_SSD
+   * <p>已废弃请使用NodeInfoList<br>节点磁盘类型<li>CLOUD_SSD：SSD云硬盘</li><li>CLOUD_PREMIUM：高性能云硬盘</li><li> CLOUD_HSSD：增强型SSD云硬盘</li><li> CLOUD_BSSD：通用型SSD云硬盘</li>默认值CLOUD_SSD</p>
    */
   DiskType?: string
   /**
-   * 已废弃请使用NodeInfoList
-节点磁盘容量（单位GB）
+   * <p>已废弃请使用NodeInfoList<br>节点磁盘容量（单位GB）</p>
    */
   DiskSize?: number
   /**
-   * 计费时长单位（ChargeType为PREPAID时需要设置，默认值为“m”，表示月，当前只支持“m”）
+   * <p>计费时长单位（ChargeType为PREPAID时需要设置，默认值为“m”，表示月，当前只支持“m”）</p>
    */
   TimeUnit?: string
   /**
-   * 是否自动使用代金券<li>0：不自动使用</li><li>1：自动使用</li>默认值0
+   * <p>是否自动使用代金券<li>0：不自动使用</li><li>1：自动使用</li>默认值0</p>
    */
   AutoVoucher?: number
   /**
-   * 代金券ID列表（目前仅支持指定一张代金券）
+   * <p>代金券ID列表（目前仅支持指定一张代金券）</p>
    */
   VoucherIds?: Array<string>
   /**
-   * 已废弃请使用NodeInfoList
-是否创建专用主节点<li>true：开启专用主节点</li><li>false：不开启专用主节点</li>默认值false
+   * <p>已废弃请使用NodeInfoList<br>是否创建专用主节点<li>true：开启专用主节点</li><li>false：不开启专用主节点</li>默认值false</p>
    */
   EnableDedicatedMaster?: boolean
   /**
-   * 已废弃请使用NodeInfoList
-专用主节点个数（只支持3个和5个，EnableDedicatedMaster为true时该值必传）
+   * <p>已废弃请使用NodeInfoList<br>专用主节点个数（只支持3个和5个，EnableDedicatedMaster为true时该值必传）</p>
    */
   MasterNodeNum?: number
   /**
-   * 已废弃请使用NodeInfoList
-专用主节点类型（EnableDedicatedMaster为true时必传）<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+   * <p>已废弃请使用NodeInfoList<br>专用主节点类型（EnableDedicatedMaster为true时必传）<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li></p>
    */
   MasterNodeType?: string
   /**
-   * 已废弃请使用NodeInfoList
-专用主节点磁盘大小（单位GB，非必传，若传递则必须为50，暂不支持自定义）
+   * <p>已废弃请使用NodeInfoList<br>专用主节点磁盘大小（单位GB，非必传，若传递则必须为50，暂不支持自定义）</p>
    */
   MasterNodeDiskSize?: number
   /**
-   * 集群配置文件中的ClusterName（系统默认配置为实例ID，暂不支持自定义）
+   * <p>集群配置文件中的ClusterName（系统默认配置为实例ID，暂不支持自定义）</p>
    */
   ClusterNameInConf?: string
   /**
-   * 集群部署方式<li>0：单可用区部署</li><li>1：多可用区部署，北京、上海、上海金融、广州、南京、香港、新加坡、法兰克福（白名单控制）</li>默认为0
+   * <p>集群部署方式<li>0：单可用区部署</li><li>1：多可用区部署，北京、上海、上海金融、广州、南京、香港、新加坡、法兰克福（白名单控制）</li>默认为0</p>
    */
   DeployMode?: number
   /**
-   * 多可用区部署时可用区的详细信息(DeployMode为1时必传)
+   * <p>多可用区部署时可用区的详细信息(DeployMode为1时必传)</p>
    */
   MultiZoneInfo?: Array<ZoneDetail>
   /**
-   * License类型<li>oss：开源版</li><li>basic：基础版</li><li>platinum：白金版</li>默认值platinum
+   * <p>License类型<li>oss：开源版</li><li>basic：基础版</li><li>platinum：白金版</li>默认值platinum</p>
    */
   LicenseType?: string
   /**
-   * 节点信息列表， 用于描述集群各类节点的规格信息如节点类型，节点个数，节点规格，磁盘类型，磁盘大小等
+   * <p>节点信息列表， 用于描述集群各类节点的规格信息如节点类型，节点个数，节点规格，磁盘类型，磁盘大小等</p>
    */
   NodeInfoList?: Array<NodeInfo>
   /**
-   * 节点标签信息列表
+   * <p>节点标签信息列表</p>
    */
   TagList?: Array<TagInfo>
   /**
-   * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
+   * <p>6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li></p>
    */
   BasicSecurityType?: number
   /**
-   * 场景化模板类型 0：不启用 1：通用 2：日志 3：搜索
+   * <p>场景化模板类型 0：不启用 1：通用 2：日志 3：搜索</p>
    */
   SceneType?: number
   /**
-   * 可视化节点配置
+   * <p>可视化节点配置</p>
    */
   WebNodeTypeInfo?: WebNodeTypeInfo
   /**
-   * 创建https集群，默认是http
+   * <p>创建https集群，默认是http</p>
    */
   Protocol?: string
   /**
-   * 可维护时间段
+   * <p>可维护时间段</p>
    */
   OperationDuration?: OperationDuration
   /**
-   * 是否开启存算分离
+   * <p>是否开启存算分离</p>
    */
   EnableHybridStorage?: boolean
   /**
-   * 硬盘额外性能
+   * <p>硬盘额外性能</p>
    */
   DiskEnhance?: number
   /**
-   * 是否开启智能巡检
+   * <p>是否开启智能巡检</p>
    */
   EnableDiagnose?: boolean
   /**
-   * cdcId，使用cdc子网时传递
+   * <p>cdcId，使用cdc子网时传递</p>
    */
   CdcId?: string
   /**
-   * 置放群组亲和度，范围[0,10]，0表示不开启
+   * <p>置放群组亲和度，范围[0,10]，0表示不开启</p>
    */
   DisasterRecoverGroupAffinity?: number
   /**
-   * 子产品ID枚举值： 开源版："sp_es_io2"， 基础版："sp_es_basic"，白金版："sp_es_platinum"，企业版："sp_es_enterprise"，CDC白金版："sp_es_cdc_platinum"，日志增强版："sp_es_enlogging"，tsearch："sp_tsearch_io2"，logstash："sp_es_logstash" ，可以为空，为空的时候后台取LicenseType映射该字段
+   * <p>子产品ID枚举值： 开源版：&quot;sp_es_io2&quot;， 基础版：&quot;sp_es_basic&quot;，白金版：&quot;sp_es_platinum&quot;，企业版：&quot;sp_es_enterprise&quot;，CDC白金版：&quot;sp_es_cdc_platinum&quot;，日志增强版：&quot;sp_es_enlogging&quot;，tsearch：&quot;sp_tsearch_io2&quot;，logstash：&quot;sp_es_logstash&quot; ，可以为空，为空的时候后台取LicenseType映射该字段</p>
    */
   SubProductCode?: string
   /**
-   * 读写分离模式：0-不开启，1-本地读写分离，2-远端读写分离
+   * <p>读写分离模式：0-不开启，1-本地读写分离，2-远端读写分离</p>
    */
   ReadWriteMode?: number
   /**
-   * 置放群组是否开启异步任务
+   * <p>置放群组是否开启异步任务</p>
    */
   EnableScheduleRecoverGroup?: boolean
   /**
-   * 置放群组开启异步任务的可维护时间段
+   * <p>置放群组开启异步任务的可维护时间段</p>
    */
   EnableScheduleOperationDuration?: EnableScheduleOperationDuration
   /**
-   * 自动扩盘参数列表
+   * <p>自动扩盘参数列表</p>
    */
   AutoScaleDiskInfoList?: Array<AutoScaleDiskInfo>
   /**
-   * 是否开启kibana公网访问，不传默认开启
+   * <p>是否开启kibana公网访问，不传默认开启</p>
    */
   EnableKibanaPublicAccess?: string
+  /**
+   * <p>已有的云监控告警策略 ID</p>
+   */
+  AlarmPolicyIds?: Array<string>
 }
 
 /**

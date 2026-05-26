@@ -22,6 +22,7 @@ import {
   MQTTClientSubscription,
   ModifyDeviceIdentityResponse,
   DeleteUserRequest,
+  DescribeSharedSubscriptionGroupsWithSubscriptionsResponse,
   ModifyJWTAuthenticatorResponse,
   CaCertificateItem,
   MessageEnrichmentRulePriority,
@@ -69,6 +70,7 @@ import {
   ApplyRegistrationCodeResponse,
   ModifyMessageEnrichmentRuleRequest,
   ModifyInstanceResponse,
+  ModifyX509ConfigResponse,
   AddClientSubscriptionRequest,
   CreateHttpAuthenticatorResponse,
   MQTTMessage,
@@ -89,6 +91,7 @@ import {
   DescribeMessageByTopicRequest,
   DescribeUserListRequest,
   DeleteUserResponse,
+  ModifyX509ConfigRequest,
   ActivateCaCertificateResponse,
   DeleteDeviceCertificateResponse,
   DescribeMessageByTopicResponse,
@@ -108,7 +111,7 @@ import {
   DescribeUserListResponse,
   DeleteMessageEnrichmentRuleResponse,
   DeactivateDeviceCertificateResponse,
-  MQTTUserItem,
+  DescribeSharedSubscriptionGroupsWithSubscriptionsRequest,
   ActivateCaCertificateRequest,
   BodyItem,
   ActivateDeviceCertificateResponse,
@@ -141,6 +144,7 @@ import {
   DescribeInstanceResponse,
   ModifyInstanceCertBindingResponse,
   UpdateMessageEnrichmentRulePriorityRequest,
+  SharedSubscriptionGroupWithSubscriptions,
   DescribeInsVPCEndpointsResponse,
   DescribeDeviceCertificateRequest,
   ModifyInsPublicEndpointRequest,
@@ -160,7 +164,7 @@ import {
   CreateJWTAuthenticatorResponse,
   DeleteAuthorizationPolicyRequest,
   DescribeDeviceIdentityRequest,
-  ModifyDeviceIdentityRequest,
+  MQTTUserItem,
   DescribeAuthorizationPoliciesRequest,
   RevokedDeviceCertificateResponse,
   PropagatingProperty,
@@ -170,6 +174,7 @@ import {
   DescribeDeviceCertificateResponse,
   DescribeInstanceListRequest,
   DeactivateCaCertificateRequest,
+  ModifyDeviceIdentityRequest,
   CreateJWTAuthenticatorRequest,
   DescribeCaCertificatesRequest,
   DeviceCertificateItem,
@@ -311,6 +316,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改集群X509配置
+   */
+  async ModifyX509Config(
+    req: ModifyX509ConfigRequest,
+    cb?: (error: string, rep: ModifyX509ConfigResponse) => void
+  ): Promise<ModifyX509ConfigResponse> {
+    return this.request("ModifyX509Config", req, cb)
+  }
+
+  /**
    * 删除MQTT实例
    */
   async DeleteInstance(
@@ -331,16 +346,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改MQTT JWKS 认证器
-   */
-  async ModifyJWTAuthenticator(
-    req: ModifyJWTAuthenticatorRequest,
-    cb?: (error: string, rep: ModifyJWTAuthenticatorResponse) => void
-  ): Promise<ModifyJWTAuthenticatorResponse> {
-    return this.request("ModifyJWTAuthenticator", req, cb)
-  }
-
-  /**
    * 修改MQTT JWKS 认证器，全量配置修改，需要提交完整的修改后配置。
    */
   async ModifyJWKSAuthenticator(
@@ -348,6 +353,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyJWKSAuthenticatorResponse) => void
   ): Promise<ModifyJWKSAuthenticatorResponse> {
     return this.request("ModifyJWKSAuthenticator", req, cb)
+  }
+
+  /**
+     * 查询用户列表，Filter参数使用说明如下：
+
+1. Username，用户名称模糊搜索
+     */
+  async DescribeUserList(
+    req: DescribeUserListRequest,
+    cb?: (error: string, rep: DescribeUserListResponse) => void
+  ): Promise<DescribeUserListResponse> {
+    return this.request("DescribeUserList", req, cb)
   }
 
   /**
@@ -371,15 +388,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询用户列表，Filter参数使用说明如下：
-
-1. Username，用户名称模糊搜索
-     */
-  async DescribeUserList(
-    req: DescribeUserListRequest,
-    cb?: (error: string, rep: DescribeUserListResponse) => void
-  ): Promise<DescribeUserListResponse> {
-    return this.request("DescribeUserList", req, cb)
+   * 查询集群下共享订阅组列表
+   */
+  async DescribeSharedSubscriptionGroupsWithSubscriptions(
+    req: DescribeSharedSubscriptionGroupsWithSubscriptionsRequest,
+    cb?: (error: string, rep: DescribeSharedSubscriptionGroupsWithSubscriptionsResponse) => void
+  ): Promise<DescribeSharedSubscriptionGroupsWithSubscriptionsResponse> {
+    return this.request("DescribeSharedSubscriptionGroupsWithSubscriptions", req, cb)
   }
 
   /**
@@ -390,6 +405,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInsPublicEndpointResponse) => void
   ): Promise<ModifyInsPublicEndpointResponse> {
     return this.request("ModifyInsPublicEndpoint", req, cb)
+  }
+
+  /**
+   * 修改MQTT JWKS 认证器
+   */
+  async ModifyJWTAuthenticator(
+    req: ModifyJWTAuthenticatorRequest,
+    cb?: (error: string, rep: ModifyJWTAuthenticatorResponse) => void
+  ): Promise<ModifyJWTAuthenticatorResponse> {
+    return this.request("ModifyJWTAuthenticator", req, cb)
   }
 
   /**

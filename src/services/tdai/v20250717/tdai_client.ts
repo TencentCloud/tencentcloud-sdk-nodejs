@@ -19,9 +19,11 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   RemoveChatRequest,
-  SqlAgentParameter,
+  DestroyMemoryPlusSpaceResponse,
+  DescribeMemoryPlusSpacesRequest,
   CreatingProgress,
   AgentDutyTask,
+  DescribeMemoryPlusSpaceResponse,
   DescribeAgentDutyTaskDetailRequest,
   UploadDelta,
   DescribeChatDetailRequest,
@@ -29,35 +31,53 @@ import {
   DescribeChatsRequest,
   ModifyChatTitleResponse,
   CreateAgentInstanceRequest,
+  SqlAgentParameter,
   ClawConfigInfo,
   UploadChoice,
   DescribeAgentDutyTasksResponse,
   Parameter,
+  VDBFieldMap,
   ClawDeployInfo,
   RecoverAgentInstanceResponse,
+  DescribeMemoryPlusRecordResponse,
   DescribeAgentInstancesRequest,
+  DestroyMemoryPlusSpaceRequest,
   DescribeAgentsResponse,
   CreatingStepInfo,
   CreateChatCompletionRequest,
+  ModifyMemoryPlusSpaceResponse,
+  DescribeServiceAccessKeyRequest,
   DescribeReportUrlResponse,
   ChatDetail,
+  CreateMemoryPlusSpaceResponse,
+  DescribeMemoryPlusSpaceRequest,
   IsolateAgentInstanceResponse,
+  VDBDocument,
+  CreateMemoryPlusSpaceRequest,
   TerminateAgentInstanceResponse,
   PauseAgentWorkRequest,
   TagItem,
+  RecoverMemoryPlusSpaceResponse,
   ExtraInfo,
   CreateAgentInstanceResponse,
+  RecoverMemoryPlusSpaceRequest,
   DescribeAgentDutyTasksRequest,
   InstanceInfos,
   DescribeChatDetailResponse,
   ModifyChatTitleRequest,
-  PauseAgentWorkResponse,
+  DescribeMemoryPlusRecordRequest,
   ModifyAgentInstanceParametersResponse,
   IsolateAgentInstanceRequest,
+  MemoryPlusInfo,
   TagFilter,
   DescribeAgentInstanceRequest,
+  IsolateMemoryPlusSpaceResponse,
+  DescribeMemoryPlusSpacesResponse,
+  IsolateMemoryPlusSpaceRequest,
   ModifyAgentInstanceParametersRequest,
   ContinueAgentWorkResponse,
+  DescribeServiceAccessKeyResponse,
+  StartAgentTaskResponse,
   DescribeAgentInstancesResponse,
   StartAgentTaskRequest,
   CreateChatCompletionRes,
@@ -72,10 +92,12 @@ import {
   StatusItem,
   DescribeReportUrlRequest,
   DescribeAgentDutyTaskDetailResponse,
+  ModifyMemoryPlusSpaceRequest,
   AgentInstance,
   RemoveChatResponse,
+  PauseAgentWorkResponse,
   TerminateAgentInstanceRequest,
-  StartAgentTaskResponse,
+  ResourceTag,
 } from "./tdai_models"
 
 /**
@@ -95,26 +117,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeChatDetailResponse) => void
   ): Promise<DescribeChatDetailResponse> {
     return this.request("DescribeChatDetail", req, cb)
-  }
-
-  /**
-   * 本接口（RemoveChat）用于删除会话，通常在用户删除会话时使用。
-   */
-  async RemoveChat(
-    req: RemoveChatRequest,
-    cb?: (error: string, rep: RemoveChatResponse) => void
-  ): Promise<RemoveChatResponse> {
-    return this.request("RemoveChat", req, cb)
-  }
-
-  /**
-   * 本接口（IsolateAgentInstance）用于隔离智能体实例，通常在用户需要隔离智能体实例时使用。
-   */
-  async IsolateAgentInstance(
-    req: IsolateAgentInstanceRequest,
-    cb?: (error: string, rep: IsolateAgentInstanceResponse) => void
-  ): Promise<IsolateAgentInstanceResponse> {
-    return this.request("IsolateAgentInstance", req, cb)
   }
 
   /**
@@ -148,33 +150,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeChats）用于查询对话列表，通常在用户查询会话列表时使用。
+   * 本接口（ModifyAgentInstanceParameters）用于修改智能体实例的参数列表，通常在用户需要配置智能体实例时使用。
    */
-  async DescribeChats(
-    req: DescribeChatsRequest,
-    cb?: (error: string, rep: DescribeChatsResponse) => void
-  ): Promise<DescribeChatsResponse> {
-    return this.request("DescribeChats", req, cb)
+  async ModifyAgentInstanceParameters(
+    req: ModifyAgentInstanceParametersRequest,
+    cb?: (error: string, rep: ModifyAgentInstanceParametersResponse) => void
+  ): Promise<ModifyAgentInstanceParametersResponse> {
+    return this.request("ModifyAgentInstanceParameters", req, cb)
   }
 
   /**
-   * 本接口（DescribeAgentInstance）用于查询智能体实例详情，通常在用户查询所购买的所有智能体实例详情时使用。
+   * 本接口（DescribeMemoryPlusSpaces）用于查询 Memory正式版实例列表。
    */
-  async DescribeAgentInstance(
-    req: DescribeAgentInstanceRequest,
-    cb?: (error: string, rep: DescribeAgentInstanceResponse) => void
-  ): Promise<DescribeAgentInstanceResponse> {
-    return this.request("DescribeAgentInstance", req, cb)
-  }
-
-  /**
-   * 用于创建一次会话的SSE接口
-   */
-  async CreateChatCompletion(
-    req: CreateChatCompletionRequest,
-    cb?: (error: string, rep: CreateChatCompletionResponse) => void
-  ): Promise<CreateChatCompletionResponse> {
-    return this.request("CreateChatCompletion", req, cb)
+  async DescribeMemoryPlusSpaces(
+    req: DescribeMemoryPlusSpacesRequest,
+    cb?: (error: string, rep: DescribeMemoryPlusSpacesResponse) => void
+  ): Promise<DescribeMemoryPlusSpacesResponse> {
+    return this.request("DescribeMemoryPlusSpaces", req, cb)
   }
 
   /**
@@ -188,23 +180,63 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询智能体值守任务详情
+   * 该接口用于启动一个智能体的任务
    */
-  async DescribeAgentDutyTaskDetail(
-    req: DescribeAgentDutyTaskDetailRequest,
-    cb?: (error: string, rep: DescribeAgentDutyTaskDetailResponse) => void
-  ): Promise<DescribeAgentDutyTaskDetailResponse> {
-    return this.request("DescribeAgentDutyTaskDetail", req, cb)
+  async StartAgentTask(
+    req: StartAgentTaskRequest,
+    cb?: (error: string, rep: StartAgentTaskResponse) => void
+  ): Promise<StartAgentTaskResponse> {
+    return this.request("StartAgentTask", req, cb)
   }
 
   /**
-   * 智能体报告地址生成并下载
+   * 本接口（RecoverMemoryPlusSpace）用于从回收站恢复 Memory 实例。
    */
-  async DescribeReportUrl(
-    req?: DescribeReportUrlRequest,
-    cb?: (error: string, rep: DescribeReportUrlResponse) => void
-  ): Promise<DescribeReportUrlResponse> {
-    return this.request("DescribeReportUrl", req, cb)
+  async RecoverMemoryPlusSpace(
+    req: RecoverMemoryPlusSpaceRequest,
+    cb?: (error: string, rep: RecoverMemoryPlusSpaceResponse) => void
+  ): Promise<RecoverMemoryPlusSpaceResponse> {
+    return this.request("RecoverMemoryPlusSpace", req, cb)
+  }
+
+  /**
+   * 本接口（RemoveChat）用于删除会话，通常在用户删除会话时使用。
+   */
+  async RemoveChat(
+    req: RemoveChatRequest,
+    cb?: (error: string, rep: RemoveChatResponse) => void
+  ): Promise<RemoveChatResponse> {
+    return this.request("RemoveChat", req, cb)
+  }
+
+  /**
+   * 本接口（IsolateAgentInstance）用于隔离智能体实例，通常在用户需要隔离智能体实例时使用。
+   */
+  async IsolateAgentInstance(
+    req: IsolateAgentInstanceRequest,
+    cb?: (error: string, rep: IsolateAgentInstanceResponse) => void
+  ): Promise<IsolateAgentInstanceResponse> {
+    return this.request("IsolateAgentInstance", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeChats）用于查询对话列表，通常在用户查询会话列表时使用。
+   */
+  async DescribeChats(
+    req: DescribeChatsRequest,
+    cb?: (error: string, rep: DescribeChatsResponse) => void
+  ): Promise<DescribeChatsResponse> {
+    return this.request("DescribeChats", req, cb)
+  }
+
+  /**
+   * 本接口（DestroyMemoryPlusSpace）用于从回收站彻底销毁 Memory 实例。
+   */
+  async DestroyMemoryPlusSpace(
+    req: DestroyMemoryPlusSpaceRequest,
+    cb?: (error: string, rep: DestroyMemoryPlusSpaceResponse) => void
+  ): Promise<DestroyMemoryPlusSpaceResponse> {
+    return this.request("DestroyMemoryPlusSpace", req, cb)
   }
 
   /**
@@ -218,6 +250,46 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeMemoryPlusRecord）用于查询 Memory 实例的记忆数据。
+   */
+  async DescribeMemoryPlusRecord(
+    req: DescribeMemoryPlusRecordRequest,
+    cb?: (error: string, rep: DescribeMemoryPlusRecordResponse) => void
+  ): Promise<DescribeMemoryPlusRecordResponse> {
+    return this.request("DescribeMemoryPlusRecord", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeMemoryPlusSpace）用于查询 Memory 正式版实例详情。
+   */
+  async DescribeMemoryPlusSpace(
+    req: DescribeMemoryPlusSpaceRequest,
+    cb?: (error: string, rep: DescribeMemoryPlusSpaceResponse) => void
+  ): Promise<DescribeMemoryPlusSpaceResponse> {
+    return this.request("DescribeMemoryPlusSpace", req, cb)
+  }
+
+  /**
+   * 查询智能体值守任务详情
+   */
+  async DescribeAgentDutyTaskDetail(
+    req: DescribeAgentDutyTaskDetailRequest,
+    cb?: (error: string, rep: DescribeAgentDutyTaskDetailResponse) => void
+  ): Promise<DescribeAgentDutyTaskDetailResponse> {
+    return this.request("DescribeAgentDutyTaskDetail", req, cb)
+  }
+
+  /**
+   * 本接口（CreateMemoryPlusSpace）用于创建正式版 Memory 实例。
+   */
+  async CreateMemoryPlusSpace(
+    req: CreateMemoryPlusSpaceRequest,
+    cb?: (error: string, rep: CreateMemoryPlusSpaceResponse) => void
+  ): Promise<CreateMemoryPlusSpaceResponse> {
+    return this.request("CreateMemoryPlusSpace", req, cb)
+  }
+
+  /**
    * 本接口（RecoverAgentInstance）用于解隔离智能体实例，通常在用户需要解隔离智能体实例时使用。
    */
   async RecoverAgentInstance(
@@ -228,33 +300,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyAgentInstanceParameters）用于修改智能体实例的参数列表，通常在用户需要配置智能体实例时使用。
+   * 用于创建一次会话的SSE接口
    */
-  async ModifyAgentInstanceParameters(
-    req: ModifyAgentInstanceParametersRequest,
-    cb?: (error: string, rep: ModifyAgentInstanceParametersResponse) => void
-  ): Promise<ModifyAgentInstanceParametersResponse> {
-    return this.request("ModifyAgentInstanceParameters", req, cb)
-  }
-
-  /**
-   * 本接口（DescribeAgentInstances）用于查询智能体实例列表，通常在用户查询所购买的所有智能体列表。
-   */
-  async DescribeAgentInstances(
-    req: DescribeAgentInstancesRequest,
-    cb?: (error: string, rep: DescribeAgentInstancesResponse) => void
-  ): Promise<DescribeAgentInstancesResponse> {
-    return this.request("DescribeAgentInstances", req, cb)
-  }
-
-  /**
-   * 该接口用于启动一个智能体的任务
-   */
-  async StartAgentTask(
-    req: StartAgentTaskRequest,
-    cb?: (error: string, rep: StartAgentTaskResponse) => void
-  ): Promise<StartAgentTaskResponse> {
-    return this.request("StartAgentTask", req, cb)
+  async CreateChatCompletion(
+    req: CreateChatCompletionRequest,
+    cb?: (error: string, rep: CreateChatCompletionResponse) => void
+  ): Promise<CreateChatCompletionResponse> {
+    return this.request("CreateChatCompletion", req, cb)
   }
 
   /**
@@ -268,6 +320,56 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 智能体报告地址生成并下载
+   */
+  async DescribeReportUrl(
+    req?: DescribeReportUrlRequest,
+    cb?: (error: string, rep: DescribeReportUrlResponse) => void
+  ): Promise<DescribeReportUrlResponse> {
+    return this.request("DescribeReportUrl", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeServiceAccessKey）用于查询服务访问密钥。
+   */
+  async DescribeServiceAccessKey(
+    req: DescribeServiceAccessKeyRequest,
+    cb?: (error: string, rep: DescribeServiceAccessKeyResponse) => void
+  ): Promise<DescribeServiceAccessKeyResponse> {
+    return this.request("DescribeServiceAccessKey", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeAgentInstances）用于查询智能体实例列表，通常在用户查询所购买的所有智能体列表。
+   */
+  async DescribeAgentInstances(
+    req: DescribeAgentInstancesRequest,
+    cb?: (error: string, rep: DescribeAgentInstancesResponse) => void
+  ): Promise<DescribeAgentInstancesResponse> {
+    return this.request("DescribeAgentInstances", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeAgentInstance）用于查询智能体实例详情，通常在用户查询所购买的所有智能体实例详情时使用。
+   */
+  async DescribeAgentInstance(
+    req: DescribeAgentInstanceRequest,
+    cb?: (error: string, rep: DescribeAgentInstanceResponse) => void
+  ): Promise<DescribeAgentInstanceResponse> {
+    return this.request("DescribeAgentInstance", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyMemoryPlusSpace）用于修改正式版 Memory 实例，可修改实例名称与描述。
+   */
+  async ModifyMemoryPlusSpace(
+    req: ModifyMemoryPlusSpaceRequest,
+    cb?: (error: string, rep: ModifyMemoryPlusSpaceResponse) => void
+  ): Promise<ModifyMemoryPlusSpaceResponse> {
+    return this.request("ModifyMemoryPlusSpace", req, cb)
+  }
+
+  /**
    * 本接口（CreateAgentInstance）用于创建一个智能体实例，通常在用户购买一个智能体实例时使用。
    */
   async CreateAgentInstance(
@@ -275,5 +377,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAgentInstanceResponse) => void
   ): Promise<CreateAgentInstanceResponse> {
     return this.request("CreateAgentInstance", req, cb)
+  }
+
+  /**
+   * 本接口（IsolateMemoryPlusSpace）用于将正式版 Memory 实例放入回收站隔离。
+   */
+  async IsolateMemoryPlusSpace(
+    req: IsolateMemoryPlusSpaceRequest,
+    cb?: (error: string, rep: IsolateMemoryPlusSpaceResponse) => void
+  ): Promise<IsolateMemoryPlusSpaceResponse> {
+    return this.request("IsolateMemoryPlusSpace", req, cb)
   }
 }

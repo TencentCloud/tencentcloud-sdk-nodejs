@@ -30,17 +30,47 @@ export interface RemoveChatRequest {
 }
 
 /**
- * 风险SQL智能体参数
+ * DestroyMemoryPlusSpace返回参数结构体
  */
-export interface SqlAgentParameter {
+export interface DestroyMemoryPlusSpaceResponse {
   /**
-   * 数据库实例信息列表
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceInfos?: Array<InstanceInfos>
+  RequestId?: string
+}
+
+/**
+ * DescribeMemoryPlusSpaces请求参数结构体
+ */
+export interface DescribeMemoryPlusSpacesRequest {
   /**
-   * 代码仓库信息
+   * <p>查询列表的起始位置（偏移量）。用于分页查询，指明从符合条件的第几条数据开始返回。</p>
    */
-  CodeRepo?: CodeRepo
+  Offset?: number
+  /**
+   * <p>单次查询返回的记录数量上限（分页大小）。</p>
+   */
+  Limit?: number
+  /**
+   * <p>查询实例名称或者实例id</p>
+   */
+  SearchKeys?: Array<string>
+  /**
+   * <p>实例状态</p><p>枚举值：</p><ul><li>1： 运行中</li><li>2： 创建中</li><li>3： 删除中</li><li>4： 已删除</li><li>5： 隔离中</li><li>6： 已隔离（进入回收站）</li><li>7： 恢复中（从回收站恢复）</li></ul>
+   */
+  Status?: Array<number | bigint>
+  /**
+   * <p>资源标签</p>
+   */
+  ResourceTags?: Array<ResourceTag>
+  /**
+   * <p>排序字段</p>
+   */
+  Orderby?: string
+  /**
+   * <p>排序方向</p><p>枚举值：</p><ul><li>ASC： 升序</li><li>DESC： 降序</li></ul>
+   */
+  OrderDirection?: string
 }
 
 /**
@@ -93,6 +123,92 @@ export interface AgentDutyTask {
    * 业务的额外敏感信息
    */
   Extra?: Array<ExtraInfo>
+}
+
+/**
+ * DescribeMemoryPlusSpace返回参数结构体
+ */
+export interface DescribeMemoryPlusSpaceResponse {
+  /**
+   * <p>Memory 实例 ID。</p>
+   */
+  SpaceId?: string
+  /**
+   * <p>Memory 实例的自定义名称。</p>
+   */
+  Name?: string
+  /**
+   * <p>Memory 实例的简要描述，包括使用场景、用途或背景信息，便于日常运维识别。</p>
+   */
+  Description?: string
+  /**
+   * <p>腾讯云账号的 APPID。</p>
+   */
+  AppId?: number
+  /**
+   * <p>Memroy 实例所属地域。</p>
+   */
+  Region?: string
+  /**
+   * <p>Memory 实例的标签信息。</p>
+   */
+  ResourceTags?: Array<ResourceTag>
+  /**
+   * <p>Memory 实例当前运行状态。</p><ul><li>1：运行中。</li><li>2：创建中。</li><li>3：销毁中。</li><li>4：已销毁。</li><li>5：隔离中。</li><li>6：已隔离。</li><li>7：恢复中。</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>Memory 实例计费模式。</p><ul><li>-1：免费体验。</li><li>0：包年包月。</li><li>1：按量计费。</li></ul>
+   */
+  PayMode?: number
+  /**
+   * <p>Memory 版本信息：v1。</p>
+   */
+  Version?: string
+  /**
+   * <p>Memory 当前已写入的记忆条数。</p>
+   */
+  MemoryUsage?: number
+  /**
+   * <p>Memory 实例记忆条数配额上限。</p>
+   */
+  MemoryLimit?: number
+  /**
+   * <p>Memory 实例当前 Credit 的使用数量。</p>
+   */
+  CreditUsage?: number
+  /**
+   * <p>Memory 实例 Credit 的最大使用数量。</p>
+   */
+  CreditLimit?: number
+  /**
+   * <p>Memory 实例的内网访问地址。</p>
+   */
+  AccessUrl?: string
+  /**
+   * <p>Memory 实例的外网访问地址。</p>
+   */
+  WanAccessUrl?: string
+  /**
+   * <p>Memory 实例的创建时间。</p>
+   */
+  CreatedAt?: string
+  /**
+   * <p>Memory 实例的到期时间。</p>
+   */
+  ExpiredAt?: string
+  /**
+   * <p>Memory 实例的隔离时间。</p>
+   */
+  IsolatedAt?: string
+  /**
+   * <p>到期销毁时间</p>
+   */
+  DestroyAt?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -254,6 +370,20 @@ export interface CreateAgentInstanceRequest {
 }
 
 /**
+ * 风险SQL智能体参数
+ */
+export interface SqlAgentParameter {
+  /**
+   * 数据库实例信息列表
+   */
+  InstanceInfos?: Array<InstanceInfos>
+  /**
+   * 代码仓库信息
+   */
+  CodeRepo?: CodeRepo
+}
+
+/**
  * databaseClaw实例配置信息
  */
 export interface ClawConfigInfo {
@@ -341,6 +471,28 @@ export interface Parameter {
 }
 
 /**
+ * vdb数据库文档中键值结构
+ */
+export interface VDBFieldMap {
+  /**
+   * <p>vdb document字段名</p>
+   */
+  Name?: string
+  /**
+   * <p>vdb document字段值</p>
+   */
+  Value?: string
+  /**
+   * <p>vdb document字段类型</p>
+   */
+  Type?: string
+  /**
+   * <p>字段描述</p>
+   */
+  Description?: string
+}
+
+/**
  * databaseClaw实例部署详情
  */
 export interface ClawDeployInfo {
@@ -362,6 +514,24 @@ export interface ClawDeployInfo {
  * RecoverAgentInstance返回参数结构体
  */
 export interface RecoverAgentInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMemoryPlusRecord返回参数结构体
+ */
+export interface DescribeMemoryPlusRecordResponse {
+  /**
+   * <p>查询结果总数量。</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>查询的记忆数据。</p>
+   */
+  Documents?: Array<VDBDocument>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -412,6 +582,16 @@ export interface DescribeAgentInstancesRequest {
    * <p>实例类型</p>
    */
   InstanceType?: string
+}
+
+/**
+ * DestroyMemoryPlusSpace请求参数结构体
+ */
+export interface DestroyMemoryPlusSpaceRequest {
+  /**
+   * <p>指定需要销毁的 Memory 实例 ID 列表。</p>
+   */
+  SpaceIds: Array<string>
 }
 
 /**
@@ -485,6 +665,26 @@ export interface CreateChatCompletionRequest {
 }
 
 /**
+ * ModifyMemoryPlusSpace返回参数结构体
+ */
+export interface ModifyMemoryPlusSpaceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeServiceAccessKey请求参数结构体
+ */
+export interface DescribeServiceAccessKeyRequest {
+  /**
+   * <p>指定 Memroy 实例 ID。</p>
+   */
+  ServiceId: string
+}
+
+/**
  * DescribeReportUrl返回参数结构体
  */
 export interface DescribeReportUrlResponse {
@@ -518,6 +718,30 @@ export interface ChatDetail {
 }
 
 /**
+ * CreateMemoryPlusSpace返回参数结构体
+ */
+export interface CreateMemoryPlusSpaceResponse {
+  /**
+   * <p>实例 ID 列表。</p>
+   */
+  SpaceIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMemoryPlusSpace请求参数结构体
+ */
+export interface DescribeMemoryPlusSpaceRequest {
+  /**
+   * <p>指定查询的 Memory 实例 ID。</p>
+   */
+  SpaceId: string
+}
+
+/**
  * IsolateAgentInstance返回参数结构体
  */
 export interface IsolateAgentInstanceResponse {
@@ -525,6 +749,42 @@ export interface IsolateAgentInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * vdb数据库文档结构
+ */
+export interface VDBDocument {
+  /**
+   * <p>vdb document数据id</p>
+   */
+  Id?: string
+  /**
+   * <p>vdb document数据标量字段</p>
+   */
+  Fields?: Array<VDBFieldMap>
+}
+
+/**
+ * CreateMemoryPlusSpace请求参数结构体
+ */
+export interface CreateMemoryPlusSpaceRequest {
+  /**
+   * <p>Memory 实例的自定义名称，用于唯一标识和管理实例。支持 60 个字符内的中英文、数字、中划线（-）及下划线（_）。</p>
+   */
+  Name?: string
+  /**
+   * <p>emory 实例的简要描述，包括使用场景、用途或背景信息，便于日常运维识别。长度限制为 0-200 个字符。</p>
+   */
+  Description?: string
+  /**
+   * <p>以键值对（Key-Value）形式为 Memory 实例绑定的标签，用于项目管理、成本分摊、环境隔离等场景。</p>
+   */
+  ResourceTags?: Array<ResourceTag>
+  /**
+   * <p>单次批量创建 Memory 实例的数量。取值范围为 1-50。</p>
+   */
+  GoodsNum?: number
 }
 
 /**
@@ -566,6 +826,16 @@ export interface TagItem {
 }
 
 /**
+ * RecoverMemoryPlusSpace返回参数结构体
+ */
+export interface RecoverMemoryPlusSpaceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 智能体值守任务额外信息
  */
 export interface ExtraInfo {
@@ -603,6 +873,16 @@ export interface CreateAgentInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RecoverMemoryPlusSpace请求参数结构体
+ */
+export interface RecoverMemoryPlusSpaceRequest {
+  /**
+   * <p>指定需要恢复的 Memory 实例 ID 列表。</p>
+   */
+  SpaceIds: Array<string>
 }
 
 /**
@@ -726,13 +1006,45 @@ export interface ModifyChatTitleRequest {
 }
 
 /**
- * PauseAgentWork返回参数结构体
+ * DescribeMemoryPlusRecord请求参数结构体
  */
-export interface PauseAgentWorkResponse {
+export interface DescribeMemoryPlusRecordRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>查询的 Memory 实例 ID。</p>
    */
-  RequestId?: string
+  SpaceId: string
+  /**
+   * <p>查询列表的起始位置（偏移量）。用于分页查询，指明从符合条件的第几条数据开始返回。</p>
+   */
+  Offset?: number
+  /**
+   * <p>单次查询返回的记录数量上限（分页大小）。</p>
+   */
+  Limit?: number
+  /**
+   * <p>查询的记忆类型。</p><ul><li>conversation：L0 原始对话。</li><li>memory：L1 原子记忆。</li><li>scene：L2 场景记忆。</li><li>persona：L3 个性化画像。</li><li>memory/persona：L1 原子记忆-画像型。</li><li>memory/episodic：L1 原子记忆-事件型。</li><li>memory/instruction：L1 原子记忆-指令型。</li></ul>
+   */
+  RecordType?: string
+  /**
+   * <p>指定返回记录中的特定字段。</p>
+   */
+  Output?: Array<string>
+  /**
+   * <p>过滤条件，当前仅支持 <strong>RecordType</strong> 为 <strong>conversation</strong> 的 <strong>session_id</strong> 过滤。</p>
+   */
+  Filters?: Array<VDBFieldMap>
+  /**
+   * <p>查询结果列表的排序规则。</p><ul><li>ASC：升序。</li><li>DESC：降序。</li></ul>
+   */
+  OrderDirection?: string
+  /**
+   * <p>查询时间范围的起始时间点。</p>
+   */
+  StartTime?: string
+  /**
+   * <p>查询时间范围的结束时间点。</p>
+   */
+  EndTime?: string
 }
 
 /**
@@ -753,6 +1065,60 @@ export interface IsolateAgentInstanceRequest {
    * 实例ID，为空时查询所有，如果填写则会根据InstanceId筛选
    */
   InstanceId: string
+}
+
+/**
+ * Memory正式版实例列表元素信息
+ */
+export interface MemoryPlusInfo {
+  /**
+   * <p>实例id</p>
+   */
+  SpaceId?: string
+  /**
+   * <p>实例名称</p>
+   */
+  Name?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>实例状态</p>
+   */
+  Status?: number
+  /**
+   * <p>地域</p>
+   */
+  Region?: string
+  /**
+   * <p>记忆条数</p>
+   */
+  MemoryUsage?: number
+  /**
+   * <p>当月积分数</p>
+   */
+  CreditUsage?: number
+  /**
+   * <p>资源标签</p>
+   */
+  ResourceTags?: Array<ResourceTag>
+  /**
+   * <p>创建时间</p>
+   */
+  CreatedAt?: string
+  /**
+   * <p>隔离时间</p>
+   */
+  IsolatedAt?: string
+  /**
+   * <p>到期时间</p>
+   */
+  ExpiredAt?: string
+  /**
+   * <p>到期销毁时间</p>
+   */
+  DestroyAt?: string
 }
 
 /**
@@ -777,6 +1143,44 @@ export interface DescribeAgentInstanceRequest {
    * 实例ID，为空时查询所有，如果填写则会根据InstanceId筛选
    */
   InstanceId?: string
+}
+
+/**
+ * IsolateMemoryPlusSpace返回参数结构体
+ */
+export interface IsolateMemoryPlusSpaceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMemoryPlusSpaces返回参数结构体
+ */
+export interface DescribeMemoryPlusSpacesResponse {
+  /**
+   * <p>查询结果总数量。</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>实例列表信息</p>
+   */
+  Items?: Array<MemoryPlusInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * IsolateMemoryPlusSpace请求参数结构体
+ */
+export interface IsolateMemoryPlusSpaceRequest {
+  /**
+   * <p>指定需要放入回收站的 Memory 实例 ID 列表。</p>
+   */
+  SpaceIds: Array<string>
 }
 
 /**
@@ -805,6 +1209,34 @@ export interface ModifyAgentInstanceParametersRequest {
  * ContinueAgentWork返回参数结构体
  */
 export interface ContinueAgentWorkResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeServiceAccessKey返回参数结构体
+ */
+export interface DescribeServiceAccessKeyResponse {
+  /**
+   * <p>访问密钥。</p>
+   */
+  AuthKey?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StartAgentTask返回参数结构体
+ */
+export interface StartAgentTaskResponse {
+  /**
+   * 任务ID
+   */
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1124,6 +1556,24 @@ export interface DescribeAgentDutyTaskDetailResponse {
 }
 
 /**
+ * ModifyMemoryPlusSpace请求参数结构体
+ */
+export interface ModifyMemoryPlusSpaceRequest {
+  /**
+   * <p>指定需要修改的 Memory 实例 ID。</p>
+   */
+  SpaceId: string
+  /**
+   * <p>指定修改后的实例名称。支持 60 个字符内 的中英文、数字、中划线（-）及下划线（_）。</p>
+   */
+  Name?: string
+  /**
+   * <p>指定修改后的实例描述。最多支持 200 个字符。</p>
+   */
+  Description?: string
+}
+
+/**
  * 智能体实例
  */
 export interface AgentInstance {
@@ -1220,6 +1670,16 @@ export interface RemoveChatResponse {
 }
 
 /**
+ * PauseAgentWork返回参数结构体
+ */
+export interface PauseAgentWorkResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * TerminateAgentInstance请求参数结构体
  */
 export interface TerminateAgentInstanceRequest {
@@ -1230,15 +1690,15 @@ export interface TerminateAgentInstanceRequest {
 }
 
 /**
- * StartAgentTask返回参数结构体
+ * 资源tag
  */
-export interface StartAgentTaskResponse {
+export interface ResourceTag {
   /**
-   * 任务ID
+   * 标签键
    */
-  TaskId?: string
+  TagKey?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 标签值
    */
-  RequestId?: string
+  TagValue?: string
 }

@@ -393,6 +393,7 @@ import {
   RemoveClusterSlaveZoneResponse,
   RenewClustersRequest,
   OpenClusterReadOnlyInstanceGroupAccessResponse,
+  AIOptimizerStatus,
   QueryParamFilter,
   NewAccount,
   ModifyParamsData,

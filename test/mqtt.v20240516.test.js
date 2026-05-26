@@ -128,6 +128,16 @@ it("mqtt.v20240516.DeleteDeviceCertificate", async function () {
     }
 })
 
+it("mqtt.v20240516.ModifyX509Config", async function () {
+    try {
+       const data = await client.ModifyX509Config({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.DeleteInstance", async function () {
     try {
        const data = await client.DeleteInstance({})
@@ -148,9 +158,9 @@ it("mqtt.v20240516.DescribeMessageByTopic", async function () {
     }
 })
 
-it("mqtt.v20240516.ModifyJWTAuthenticator", async function () {
+it("mqtt.v20240516.ModifyJWKSAuthenticator", async function () {
     try {
-       const data = await client.ModifyJWTAuthenticator({})
+       const data = await client.ModifyJWKSAuthenticator({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +168,9 @@ it("mqtt.v20240516.ModifyJWTAuthenticator", async function () {
     }
 })
 
-it("mqtt.v20240516.ModifyJWKSAuthenticator", async function () {
+it("mqtt.v20240516.DescribeUserList", async function () {
     try {
-       const data = await client.ModifyJWKSAuthenticator({})
+       const data = await client.DescribeUserList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +198,9 @@ it("mqtt.v20240516.DescribeInsPublicEndpoints", async function () {
     }
 })
 
-it("mqtt.v20240516.DescribeUserList", async function () {
+it("mqtt.v20240516.DescribeSharedSubscriptionGroupsWithSubscriptions", async function () {
     try {
-       const data = await client.DescribeUserList({})
+       const data = await client.DescribeSharedSubscriptionGroupsWithSubscriptions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -201,6 +211,16 @@ it("mqtt.v20240516.DescribeUserList", async function () {
 it("mqtt.v20240516.ModifyInsPublicEndpoint", async function () {
     try {
        const data = await client.ModifyInsPublicEndpoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mqtt.v20240516.ModifyJWTAuthenticator", async function () {
+    try {
+       const data = await client.ModifyJWTAuthenticator({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
