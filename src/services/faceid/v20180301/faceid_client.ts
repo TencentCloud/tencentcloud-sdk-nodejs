@@ -47,6 +47,7 @@ import {
   CheckIdNameDateRequest,
   GetFaceIdTokenResponse,
   IntentionActionResultDetail,
+  GetWxNFCResultResponse,
   MinorsVerificationRequest,
   GetFaceIdResultResponse,
   DetectAIFakeFacesResponse,
@@ -58,6 +59,7 @@ import {
   IntentionActionConfig,
   CheckBankCardInformationRequest,
   BankCardVerificationRequest,
+  GetWxNFCResultRequest,
   DetectInfoBestFrame,
   GetWeChatBillDetailsResponse,
   CheckIdCardInformationResponse,
@@ -103,7 +105,9 @@ import {
   PhoneVerificationCTCCRequest,
   ImageRecognitionRequest,
   BankCard4EVerificationRequest,
+  GetNFCTokenResponse,
   GetActionSequenceResponse,
+  GetNFCTokenRequest,
   GetFaceIdRiskInfoRequest,
   GetLiveCodeResponse,
   GetDetectInfoRequest,
@@ -213,6 +217,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取到证件NFC数据，接口传入NFC SDK返回的Token（十分钟内有效），可返回对应NFC获取的证件信息。支持身份证类证件（二代身份证、港澳居住证、台湾居住证、外国人永居证）以及旅行类证件（港澳通行证、台湾通行证、台胞证、回乡证）的NFC识别及核验。
+   */
+  async GetWxNFCResult(
+    req: GetWxNFCResultRequest,
+    cb?: (error: string, rep: GetWxNFCResultResponse) => void
+  ): Promise<GetWxNFCResultResponse> {
+    return this.request("GetWxNFCResult", req, cb)
+  }
+
+  /**
    * 每次调用人脸核身SDK服务前，需先调用本接口获取SDKToken，用来串联核身流程，在验证完成后，用于获取验证结果信息，该token仅能核身一次。
    */
   async GetFaceIdToken(
@@ -260,6 +274,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: LivenessCompareResponse) => void
   ): Promise<LivenessCompareResponse> {
     return this.request("LivenessCompare", req, cb)
+  }
+
+  /**
+   * 本接口用于验证手机号的状态，您可以输入手机号进行查询。
+   */
+  async MobileStatus(
+    req: MobileStatusRequest,
+    cb?: (error: string, rep: MobileStatusResponse) => void
+  ): Promise<MobileStatusResponse> {
+    return this.request("MobileStatus", req, cb)
   }
 
   /**
@@ -323,13 +347,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口用于验证手机号的状态，您可以输入手机号进行查询。
+   * NFC核验服务，获取NFC识别请求对应的Token信息。
    */
-  async MobileStatus(
-    req: MobileStatusRequest,
-    cb?: (error: string, rep: MobileStatusResponse) => void
-  ): Promise<MobileStatusResponse> {
-    return this.request("MobileStatus", req, cb)
+  async GetNFCToken(
+    req?: GetNFCTokenRequest,
+    cb?: (error: string, rep: GetNFCTokenResponse) => void
+  ): Promise<GetNFCTokenResponse> {
+    return this.request("GetNFCToken", req, cb)
   }
 
   /**

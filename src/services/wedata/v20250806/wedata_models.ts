@@ -219,152 +219,39 @@ export interface CreateQualityRuleRequest {
  */
 export interface CreateDataSourceRequest {
   /**
-   * 数据源项目ID
+   * <p>数据源项目ID</p>
    */
   ProjectId: string
   /**
-   * 数据源名称
+   * <p>数据源名称</p>
    */
   Name: string
   /**
-   * 数据源类型:枚举值- MYSQL- TENCENT_MYSQL- POSTGRE- ORACLE- SQLSERVER- FTP- HIVE- HUDI- HDFS- ICEBERG- KAFKA- DTS_KAFKA- HBASE- SPARK- TBASE- DB2- DM- GAUSSDB- GBASE- IMPALA- ES- TENCENT_ES- GREENPLUM- SAP_HANA- SFTP- OCEANBASE- CLICKHOUSE- KUDU- VERTICA- REDIS- COS- DLC- DORIS- CKAFKA- S3_DATAINSIGHT- TDSQL- TDSQL_MYSQL- MONGODB- TENCENT_MONGODB- REST_API- TiDB- StarRocks- Trino- Kyuubi- TCHOUSE_X- TCHOUSE_P- TCHOUSE_C- TCHOUSE_D- INFLUXDB- BIG_QUERY- SSH- BLOB- TDSQL_POSTGRE- GDB- TDENGINE- TDSQLC- FileSystem- TCLake- TDSQL_BOUNDLESS
+   * <p>数据源类型:枚举值- MYSQL- TENCENT_MYSQL- POSTGRE- ORACLE- SQLSERVER- FTP- HIVE- HUDI- HDFS- ICEBERG- KAFKA- DTS_KAFKA- HBASE- SPARK- TBASE- DB2- DM- GAUSSDB- GBASE- IMPALA- ES- TENCENT_ES- GREENPLUM- SAP_HANA- SFTP- OCEANBASE- CLICKHOUSE- KUDU- VERTICA- REDIS- COS- DLC- DORIS- CKAFKA- S3_DATAINSIGHT- TDSQL- TDSQL_MYSQL- MONGODB- TENCENT_MONGODB- REST_API- TiDB- StarRocks- Trino- Kyuubi- TCHOUSE_X- TCHOUSE_P- TCHOUSE_C- TCHOUSE_D- INFLUXDB- BIG_QUERY- SSH- BLOB- TDSQL_POSTGRE- GDB- TDENGINE- TDSQLC- FileSystem- TCLake- TDSQL_BOUNDLESS</p>
    */
   Type: string
   /**
-   * 数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同
-
-> deployType: 
-CONNSTR_PUBLICDB(公网实例) 
-CONNSTR_CVMDB(自建实例)
-INSTANCE(云实例)
-
-```
-mysql: 自建实例
-{
-    "deployType": "CONNSTR_CVMDB",
-    "url": "jdbc:mysql://1.1.1.1:1111/example#test#123456",
-    "username": "root",
-    "password": "example#test#123456",
-    "region": "ap-shanghai",
-    "vpcId": "vpc-kprq42yo",
-    "type": "MYSQL"
-}
-mysql: 云实例
-{
-    "instanceid": "cdb-12uxdo5e",
-    "db": "db",
-    "region": "ap-shanghai",
-    "username": "msyql",
-    "password": "example#test#123456",
-    "deployType": "INSTANCE",
-    "type": "TENCENT_MYSQL"
-}
-sql_server: 
-{
-    "deployType": "CONNSTR_PUBLICDB",
-    "url": "jdbc:sqlserver://1.1.1.1:223;example#test#123456",
-    "username": "user_1",
-    "password": "example#test#123456",
-    "type": "SQLSERVER"
-}
-redis:
-    redisType:
-    -NO_ACCOUT(免账号)
-    -SELF_ACCOUNT(自定义账号)
-{
-    "deployType": "CONNSTR_PUBLICDB",
-    "username":""
-    "password": "example#test#123456",
-    "ip": "1.1.1.1",
-    "port": "6379",
-    "redisType": "NO_ACCOUT",
-    "type": "REDIS"
-}
-oracle: 
-{
-    "deployType": "CONNSTR_CVMDB",
-    "url": "jdbc:oracle:thin:@1.1.1.1:1521:example#test#123456",
-    "username": "oracle",
-    "password": "example#test#123456",
-    "region": "ap-shanghai",
-    "vpcId": "vpc-kprq42yo",
-    "type": "ORACLE"
-}
-mongodb:
-    advanceParams(自定义参数，会拼接至url后)
-{
-    "advanceParams": [
-        {
-            "key": "authSource",
-            "value": "auth"
-        }
-    ],
-    "db": "admin",
-    "deployType": "CONNSTR_PUBLICDB",
-    "username": "user",
-    "password": "example#test#123456",
-    "type": "MONGODB",
-    "host": "1.1.1.1:9200"
-}
-postgresql:
-{
-    "deployType": "CONNSTR_PUBLICDB",
-    "url": "jdbc:postgresql://1.1.1.1:1921/example#test#123456",
-    "username": "user",
-    "password": "example#test#123456",
-    "type": "POSTGRE"
-}
-kafka:
-    authType:
-        - sasl
-        - jaas
-        - sasl_plaintext
-        - sasl_ssl
-        - GSSAPI
-    ssl:
-        -PLAIN
-        -GSSAPI
-{
-    "deployType": "CONNSTR_PUBLICDB",
-    "host": "1.1.1.1:9092",
-    "ssl": "GSSAPI",
-    "authType": "sasl",
-    "type": "KAFKA",
-    "principal": "aaaa",
-    "serviceName": "kafka"
-}
-
-cos:
-{
-    "region": "ap-shanghai",
-    "deployType": "INSTANCE",
-    "secretId": "aaaaa",
-    "secretKey": "example#test#123456",
-    "bucket": "aaa",
-    "type": "COS"
-}
-
-```
+   * <p>数据源的配置信息，以JSON KV存储，根据每个数据源类型不同，而KV存储信息不同</p><blockquote><p>deployType:<br>CONNSTR_PUBLICDB(公网实例)<br>CONNSTR_CVMDB(自建实例)<br>INSTANCE(云实例)</p></blockquote><p><pre><code>mysql: 自建实例{    &quot;deployType&quot;: &quot;CONNSTR_CVMDB&quot;,    &quot;url&quot;: &quot;jdbc:mysql://1.1.1.1:1111/example#test#123456&quot;,    &quot;username&quot;: &quot;root&quot;,    &quot;password&quot;: &quot;example#test#123456&quot;,    &quot;region&quot;: &quot;ap-shanghai&quot;,    &quot;vpcId&quot;: &quot;vpc-kprq42yo&quot;,    &quot;type&quot;: &quot;MYSQL&quot;}mysql: 云实例{    &quot;instanceid&quot;: &quot;cdb-12uxdo5e&quot;,    &quot;db&quot;: &quot;db&quot;,    &quot;region&quot;: &quot;ap-shanghai&quot;,    &quot;username&quot;: &quot;msyql&quot;,    &quot;password&quot;: &quot;example#test#123456&quot;,    &quot;deployType&quot;: &quot;INSTANCE&quot;,    &quot;type&quot;: &quot;TENCENT_MYSQL&quot;}sql_server: {    &quot;deployType&quot;: &quot;CONNSTR_PUBLICDB&quot;,    &quot;url&quot;: &quot;jdbc:sqlserver://1.1.1.1:223;example#test#123456&quot;,    &quot;username&quot;: &quot;user_1&quot;,    &quot;password&quot;: &quot;example#test#123456&quot;,    &quot;type&quot;: &quot;SQLSERVER&quot;}redis:    redisType:    -NO_ACCOUT(免账号)    -SELF_ACCOUNT(自定义账号){    &quot;deployType&quot;: &quot;CONNSTR_PUBLICDB&quot;,    &quot;username&quot;:&quot;&quot;    &quot;password&quot;: &quot;example#test#123456&quot;,    &quot;ip&quot;: &quot;1.1.1.1&quot;,    &quot;port&quot;: &quot;6379&quot;,    &quot;redisType&quot;: &quot;NO_ACCOUT&quot;,    &quot;type&quot;: &quot;REDIS&quot;}oracle: {    &quot;deployType&quot;: &quot;CONNSTR_CVMDB&quot;,    &quot;url&quot;: &quot;jdbc:oracle:thin:@1.1.1.1:1521:example#test#123456&quot;,    &quot;username&quot;: &quot;oracle&quot;,    &quot;password&quot;: &quot;example#test#123456&quot;,    &quot;region&quot;: &quot;ap-shanghai&quot;,    &quot;vpcId&quot;: &quot;vpc-kprq42yo&quot;,    &quot;type&quot;: &quot;ORACLE&quot;}mongodb:    advanceParams(自定义参数，会拼接至url后){    &quot;advanceParams&quot;: [        {            &quot;key&quot;: &quot;authSource&quot;,            &quot;value&quot;: &quot;auth&quot;        }    ],    &quot;db&quot;: &quot;admin&quot;,    &quot;deployType&quot;: &quot;CONNSTR_PUBLICDB&quot;,    &quot;username&quot;: &quot;user&quot;,    &quot;password&quot;: &quot;example#test#123456&quot;,    &quot;type&quot;: &quot;MONGODB&quot;,    &quot;host&quot;: &quot;1.1.1.1:9200&quot;}postgresql:{    &quot;deployType&quot;: &quot;CONNSTR_PUBLICDB&quot;,    &quot;url&quot;: &quot;jdbc:postgresql://1.1.1.1:1921/example#test#123456&quot;,    &quot;username&quot;: &quot;user&quot;,    &quot;password&quot;: &quot;example#test#123456&quot;,    &quot;type&quot;: &quot;POSTGRE&quot;}kafka:    authType:        - sasl        - jaas        - sasl_plaintext        - sasl_ssl        - GSSAPI    ssl:        -PLAIN        -GSSAPI{    &quot;deployType&quot;: &quot;CONNSTR_PUBLICDB&quot;,    &quot;host&quot;: &quot;1.1.1.1:9092&quot;,    &quot;ssl&quot;: &quot;GSSAPI&quot;,    &quot;authType&quot;: &quot;sasl&quot;,    &quot;type&quot;: &quot;KAFKA&quot;,    &quot;principal&quot;: &quot;aaaa&quot;,    &quot;serviceName&quot;: &quot;kafka&quot;}cos:{    &quot;region&quot;: &quot;ap-shanghai&quot;,    &quot;deployType&quot;: &quot;INSTANCE&quot;,    &quot;secretId&quot;: &quot;aaaaa&quot;,    &quot;secretKey&quot;: &quot;example#test#123456&quot;,    &quot;bucket&quot;: &quot;aaa&quot;,    &quot;type&quot;: &quot;COS&quot;}</code></pre></p>
    */
   ProdConProperties: string
   /**
-   * 开发环境数据源配置信息，若项目为标准模式，则此字段必填
+   * <p>开发环境数据源配置信息，若项目为标准模式，则此字段必填</p>
    */
   DevConProperties?: string
   /**
-   * 生产环境数据源文件上传
+   * <p>生产环境数据源文件上传</p>
    */
   ProdFileUpload?: DataSourceFileUpload
   /**
-   * 开发环境数据源文件上传
+   * <p>开发环境数据源文件上传</p>
    */
   DevFileUpload?: DataSourceFileUpload
   /**
-   * 数据源展示名，为了可视化查看
+   * <p>数据源展示名，为了可视化查看</p>
    */
   DisplayName?: string
   /**
-   * 数据源描述信息
+   * <p>数据源描述信息</p>
    */
   Description?: string
 }
@@ -403,87 +290,31 @@ export interface DeleteWorkflowResponse {
  */
 export interface ListDataSourcesRequest {
   /**
-   * 项目id
+   * <p>项目id</p>
    */
   ProjectId: string
   /**
-   * 返回数量，默认10
+   * <p>返回数量，默认10</p>
    */
   PageSize?: number
   /**
-   * 页码，默认1
+   * <p>页码，默认1</p>
    */
   PageNumber?: number
   /**
-   * 数据源名称
+   * <p>数据源名称</p>
    */
   Name?: string
   /**
-   * 数据源展示名
+   * <p>数据源展示名</p>
    */
   DisplayName?: string
   /**
-   * 数据源类型:枚举值
-
-- MYSQL
-- TENCENT_MYSQL
-- POSTGRE
-- ORACLE
-- SQLSERVER
-- FTP
-- HIVE
-- HUDI
-- HDFS
-- ICEBERG
-- KAFKA
-- HBASE
-- SPARK
-- VIRTUAL
-- TBASE
-- DB2
-- DM
-- GAUSSDB
-- GBASE
-- IMPALA
-- ES
-- TENCENT_ES
-- GREENPLUM
-- PHOENIX
-- SAP_HANA
-- SFTP
-- OCEANBASE
-- CLICKHOUSE
-- KUDU
-- VERTICA
-- REDIS
-- COS
-- DLC
-- DORIS
-- CKAFKA
-- S3
-- TDSQL
-- TDSQL_MYSQL
-- MONGODB
-- TENCENT_MONGODB
-- REST_API
-- SuperSQL
-- PRESTO
-- TiDB
-- StarRocks
-- Trino
-- Kyuubi
-- TCHOUSE_X
-- TCHOUSE_P
-- TCHOUSE_C
-- TCHOUSE_D
-- INFLUXDB
-- BIG_QUERY
-- SSH
-- BLOB
+   * <p>数据源类型:枚举值</p><ul><li>MYSQL</li><li>TENCENT_MYSQL</li><li>POSTGRE</li><li>ORACLE</li><li>SQLSERVER</li><li>FTP</li><li>HIVE</li><li>HUDI</li><li>HDFS</li><li>ICEBERG</li><li>KAFKA</li><li>HBASE</li><li>SPARK</li><li>VIRTUAL</li><li>TBASE</li><li>DB2</li><li>DM</li><li>GAUSSDB</li><li>GBASE</li><li>IMPALA</li><li>ES</li><li>TENCENT_ES</li><li>GREENPLUM</li><li>PHOENIX</li><li>SAP_HANA</li><li>SFTP</li><li>OCEANBASE</li><li>CLICKHOUSE</li><li>KUDU</li><li>VERTICA</li><li>REDIS</li><li>COS</li><li>DLC</li><li>DORIS</li><li>CKAFKA</li><li>S3</li><li>TDSQL</li><li>TDSQL_MYSQL</li><li>MONGODB</li><li>TENCENT_MONGODB</li><li>REST_API</li><li>SuperSQL</li><li>PRESTO</li><li>TiDB</li><li>StarRocks</li><li>Trino</li><li>Kyuubi</li><li>TCHOUSE_X</li><li>TCHOUSE_P</li><li>TCHOUSE_C</li><li>TCHOUSE_D</li><li>INFLUXDB</li><li>BIG_QUERY</li><li>SSH</li><li>BLOB</li></ul>
    */
   Type?: Array<string>
   /**
-   * 创建人
+   * <p>创建人</p>
    */
   Creator?: string
 }
@@ -5702,7 +5533,7 @@ export interface CreateQualityRuleGroupResultVO {
  */
 export interface ListDataSourcesResponse {
   /**
-   * 数据源列表
+   * <p>数据源列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: DataSourceInfo
@@ -9453,7 +9284,7 @@ export interface KillTriggerWorkflowRunsResponse {
  */
 export interface CreateTaskResponse {
   /**
-   * 任务ID
+   * <p>任务ID</p>
    */
   Data?: CreateTaskResult
   /**
@@ -12339,19 +12170,19 @@ export interface DeleteWorkflowPermission {
  */
 export interface CreateTaskRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 任务基本属性
+   * <p>任务基本属性</p>
    */
   TaskBaseAttribute: CreateTaskBaseAttribute
   /**
-   * 任务配置
+   * <p>任务配置</p>
    */
   TaskConfiguration: CreateTaskConfiguration
   /**
-   * 任务调度配置
+   * <p>任务调度配置</p>
    */
   TaskSchedulerConfiguration: CreateTaskSchedulerConfiguration
 }
@@ -12410,11 +12241,11 @@ export interface GetOpsTriggerWorkflowRequest {
  */
 export interface GetDataSourceRequest {
   /**
-   * 项目id
+   * <p>项目id</p>
    */
   ProjectId: string
   /**
-   * 数据源id
+   * <p>数据源id</p>
    */
   Id: number
 }
@@ -15589,7 +15420,7 @@ export interface KVPair {
  */
 export interface CreateDataSourceResponse {
   /**
-   * 主键ID
+   * <p>主键ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: DataSourceResult
@@ -16973,7 +16804,7 @@ export interface AuthorizeResult {
  */
 export interface GetDataSourceResponse {
   /**
-   * 数据源列表
+   * <p>数据源列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: DataSource

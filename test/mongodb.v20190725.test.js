@@ -398,6 +398,16 @@ it("mongodb.v20190725.ModifyDBInstanceSpec", async function () {
     }
 })
 
+it("mongodb.v20190725.EnablePasswordRotation", async function () {
+    try {
+       const data = await client.EnablePasswordRotation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.CloseAuditService", async function () {
     try {
        const data = await client.CloseAuditService({})
@@ -598,6 +608,16 @@ it("mongodb.v20190725.DescribeInstanceSSL", async function () {
     }
 })
 
+it("mongodb.v20190725.DescribePasswordRotation", async function () {
+    try {
+       const data = await client.DescribePasswordRotation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.SetDBInstanceDeletionProtection", async function () {
     try {
        const data = await client.SetDBInstanceDeletionProtection({})
@@ -668,6 +688,16 @@ it("mongodb.v20190725.UpgradeDbInstanceVersion", async function () {
     }
 })
 
+it("mongodb.v20190725.DeleteDBBackups", async function () {
+    try {
+       const data = await client.DeleteDBBackups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeAccountUsers", async function () {
     try {
        const data = await client.DescribeAccountUsers({})
@@ -731,6 +761,16 @@ it("mongodb.v20190725.DescribeDBInstanceParamTplDetail", async function () {
 it("mongodb.v20190725.KillOps", async function () {
     try {
        const data = await client.KillOps({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mongodb.v20190725.ModifyBackupExpireTime", async function () {
+    try {
+       const data = await client.ModifyBackupExpireTime({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

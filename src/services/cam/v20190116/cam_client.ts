@@ -31,6 +31,7 @@ import {
   DetachGroupPolicyRequest,
   DescribeRoleListResponse,
   UpdatePolicyResponse,
+  UntagRoleRequest,
   DeleteUserResponse,
   TagRoleResponse,
   LoginActionFlagIntl,
@@ -48,6 +49,7 @@ import {
   DeleteUserPermissionsBoundaryResponse,
   ListUsersResponse,
   UpdateRoleDescriptionResponse,
+  GetPasswordRulesRequest,
   GetAccountSummaryRequest,
   DeletePolicyResponse,
   GetUserAppIdResponse,
@@ -60,6 +62,7 @@ import {
   DeleteMessageReceiverResponse,
   DeleteAccessKeyResponse,
   PutRolePermissionsBoundaryRequest,
+  UpdatePasswordRulesRequest,
   GetGroupRequest,
   StrategyInfo,
   DeleteRoleResponse,
@@ -68,6 +71,7 @@ import {
   DescribeSubAccountsRequest,
   DeleteUserPermissionsBoundaryRequest,
   ListSAMLProvidersRequest,
+  UpdatePasswordRulesResponse,
   UpdateRoleSessionDurationRequest,
   CreateAccessKeyResponse,
   DeletePolicyVersionResponse,
@@ -139,6 +143,7 @@ import {
   DisableUserSSOResponse,
   UpdateRoleConsoleLoginResponse,
   AttachRolePolicyRequest,
+  GetPasswordRulesResponse,
   ConsumeCustomMFATokenResponse,
   AttachUserPolicyRequest,
   ListAttachedGroupPoliciesResponse,
@@ -153,7 +158,7 @@ import {
   GetGroupResponse,
   ListReceiverResponse,
   UpdateOIDCConfigResponse,
-  UntagRoleRequest,
+  PassWordRule,
   AttachGroupPolicyRequest,
   DeleteSAMLProviderResponse,
   GetAccountSummaryResponse,
@@ -336,6 +341,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取CAM密码设置规则
+   */
+  async GetPasswordRules(
+    req?: GetPasswordRulesRequest,
+    cb?: (error: string, rep: GetPasswordRulesResponse) => void
+  ): Promise<GetPasswordRulesResponse> {
+    return this.request("GetPasswordRules", req, cb)
+  }
+
+  /**
    * 获取自定义多因子Token关联信息
    */
   async GetCustomMFATokenInfo(
@@ -503,6 +518,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListUsersForGroupResponse) => void
   ): Promise<ListUsersForGroupResponse> {
     return this.request("ListUsersForGroup", req, cb)
+  }
+
+  /**
+   * 更新CAM密码设置规则
+   */
+  async UpdatePasswordRules(
+    req: UpdatePasswordRulesRequest,
+    cb?: (error: string, rep: UpdatePasswordRulesResponse) => void
+  ): Promise<UpdatePasswordRulesResponse> {
+    return this.request("UpdatePasswordRules", req, cb)
   }
 
   /**

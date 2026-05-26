@@ -93,6 +93,7 @@ import {
   MetricObjectMeaning,
   AlarmEvent,
   ModifyPolicyGroupResponse,
+  ReplacePrometheusAlertmanagerConfigResponse,
   UninstallGrafanaPluginsResponse,
   ModifyPrometheusTempRequest,
   UpgradeGrafanaInstanceResponse,
@@ -156,9 +157,11 @@ import {
   ExportPrometheusReadOnlyDynamicAPIRequest,
   PrometheusTag,
   DescribePolicyConditionListMetric,
-  NoticeContentTmplBindInfo,
+  DescribePrometheusAlertmanagerConfigRequest,
+  PrometheusAlertmanagerConfigV2,
   BindingPolicyObjectRequest,
   ModifyPrometheusAgentExternalLabelsRequest,
+  DescribePrometheusAlertmanagerConfigResponse,
   UpdatePrometheusAlertGroupRequest,
   EnableSSOCamCheckResponse,
   DescribeAccidentEventListRequest,
@@ -190,7 +193,7 @@ import {
   ModifyAlarmNoticeRequest,
   DescribeGrafanaWhiteListResponse,
   DescribeAlertRulesResponse,
-  ResumeGrafanaInstanceRequest,
+  ReplacePrometheusAlertmanagerConfigRequest,
   IntegrationMetricGroup,
   UpdateExporterIntegrationResponse,
   DescribeBasicAlarmListResponse,
@@ -198,6 +201,7 @@ import {
   DescribeExporterIntegrationsRequest,
   DescribeAlarmSmsQuotaResponse,
   DescribePrometheusInstanceDetailResponse,
+  PrometheusAlertmanagerConfigInhibitRule,
   DescribeExternalClusterRegisterCommandRequest,
   Point,
   ModifyPolicyGroupEventCondition,
@@ -292,15 +296,18 @@ import {
   CreateAlarmShieldResponse,
   DescribePolicyConditionListRequest,
   DeletePolicyGroupResponse,
+  ResumeGrafanaInstanceRequest,
   DeleteGrafanaInstanceRequest,
   GrafanaIntegrationConfig,
   DeleteGrafanaIntegrationRequest,
   ModifyPrometheusAlertPolicyResponse,
+  NoticeContentTmplBindInfo,
   DescribePhoneAlarmFlowTotalCountResponse,
   TerminatePrometheusInstancesRequest,
   UnbindPrometheusManagedGrafanaResponse,
   PeriodsSt,
   ModifyAlarmReceiversResponse,
+  RoutePrometheusDynamicAPIResponse,
   GrafanaChannel,
   CreatePrometheusConfigRequest,
   DescribeSSOAccountResponse,
@@ -314,6 +321,7 @@ import {
   DescribePrometheusInstancesOverviewResponse,
   MetricSet,
   PrometheusInstanceGrantInfo,
+  RoutePrometheusDynamicAPIRequest,
   TemplateGroup,
   DescribeBindingPolicyObjectListInstance,
   UpdateGrafanaIntegrationResponse,
@@ -949,6 +957,32 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * Prometheus 内部动态 api 代理，支持以云api形式访问prometheus原生api
+支持以下api:
+ 
+>! 读接口建议使用ExportPrometheusReadOnlyDynamicAPI调用，支持更长的查询时延与响应大小。同时便于权限管理
+
+| path | method | 用途 |
+| - | - | - |
+| /api/v1/query | GET, POST | 点查询 |
+| /api/v1/query_range | GET, POST |  范围查询 |
+| /api/v1/series | GET, POST | series列表查询 |
+| /api/v1/labels | GET, POST | label名查询 |
+| /api/v1/label/{label_name}/values | GET | label值查询 |
+| /api/v1/rules | GET | 告警，预聚合规则查询 |
+| /api/v1/user_limits | GET | prometheus实例限制查询 |
+| /alertmanager/api/v2/alerts/groups | GET | 当前告警信息查询 | 
+| /alertmanager/api/v2/silences | GET, POST | 告警静默查询/创建/修改 |
+| /alertmanager/api/v2/silence/{id} | GET, DELETE | 告警静默详情查询/删除 |
+     */
+  async RoutePrometheusDynamicAPI(
+    req: RoutePrometheusDynamicAPIRequest,
+    cb?: (error: string, rep: RoutePrometheusDynamicAPIResponse) => void
+  ): Promise<RoutePrometheusDynamicAPIResponse> {
+    return this.request("RoutePrometheusDynamicAPI", req, cb)
+  }
+
+  /**
    * 获取条件模板列表
    */
   async DescribeConditionsTemplateList(
@@ -1540,6 +1574,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取 Prometheus Alertmanager 配置
+   */
+  async DescribePrometheusAlertmanagerConfig(
+    req: DescribePrometheusAlertmanagerConfigRequest,
+    cb?: (error: string, rep: DescribePrometheusAlertmanagerConfigResponse) => void
+  ): Promise<DescribePrometheusAlertmanagerConfigResponse> {
+    return this.request("DescribePrometheusAlertmanagerConfig", req, cb)
+  }
+
+  /**
    * 解除实例绑定的 Grafana 可视化实例
    */
   async UnbindPrometheusManagedGrafana(
@@ -1642,6 +1686,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreatePrometheusAlertGroupResponse) => void
   ): Promise<CreatePrometheusAlertGroupResponse> {
     return this.request("CreatePrometheusAlertGroup", req, cb)
+  }
+
+  /**
+   * 替换 Prometheus Alertmanager 配置
+   */
+  async ReplacePrometheusAlertmanagerConfig(
+    req: ReplacePrometheusAlertmanagerConfigRequest,
+    cb?: (error: string, rep: ReplacePrometheusAlertmanagerConfigResponse) => void
+  ): Promise<ReplacePrometheusAlertmanagerConfigResponse> {
+    return this.request("ReplacePrometheusAlertmanagerConfig", req, cb)
   }
 
   /**

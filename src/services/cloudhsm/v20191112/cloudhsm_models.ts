@@ -356,107 +356,109 @@ export interface Tag {
  */
 export interface ResourceInfo {
   /**
-   * 资源Id
+   * <p>资源Id</p>
    */
   ResourceId?: string
   /**
-   * 资源名称
+   * <p>资源名称</p>
    */
   ResourceName?: string
   /**
-   * 资源状态，1-正常，2-隔离，3-销毁
+   * <p>资源状态，1-正常，2-隔离，3-销毁</p>
    */
   Status?: number
   /**
-   * 资源IP
+   * <p>资源IP</p>
    */
   Vip?: string
   /**
-   * 资源所属Vpc
+   * <p>资源所属Vpc</p>
    */
   VpcId?: string
   /**
-   * 资源所属子网
+   * <p>资源所属子网</p>
    */
   SubnetId?: string
   /**
-   * 资源所属HSM规格
+   * <p>资源所属HSM规格</p>
    */
   Model?: string
   /**
-   * 云加密机类型id
+   * <p>云加密机类型id</p>
    */
   VsmType?: number
   /**
-   * 地域Id
+   * <p>地域Id</p>
    */
   RegionId?: number
   /**
-   * 区域Id
+   * <p>区域Id</p>
    */
   ZoneId?: number
   /**
-   * 过期时间（Epoch Unix Timestamp）
+   * <p>过期时间（Epoch Unix Timestamp）</p>
    */
   ExpireTime?: number
   /**
-   * 地域名
+   * <p>地域名</p>
    */
   RegionName?: string
   /**
-   * 区域名
+   * <p>区域名</p>
    */
   ZoneName?: string
   /**
-   * 实例的安全组列表
+   * <p>实例的安全组列表</p>
    */
   SgList?: Array<SgUnit>
   /**
-   * 子网名称
+   * <p>子网名称</p>
    */
   SubnetName?: string
   /**
-   * 当前实例是否已经过期
+   * <p>当前实例是否已经过期</p>
    */
   Expired?: boolean
   /**
-   * 为正数表示实例距离过期时间还剩余多少秒，为负数表示已经过期多少秒
+   * <p>为正数表示实例距离过期时间还剩余多少秒，为负数表示已经过期多少秒</p>
    */
   RemainSeconds?: number
   /**
-   * Vpc名称
+   * <p>Vpc名称</p>
    */
   VpcName?: string
   /**
-   * 创建者Uin账号
+   * <p>创建者Uin账号</p>
    */
   CreateUin?: string
   /**
-   * 自动续费状态标识， 0-手动续费，1-自动续费，2-到期不续
+   * <p>自动续费状态标识， 0-手动续费，1-自动续费，2-到期不续</p>
    */
   RenewFlag?: number
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<Tag>
   /**
-   * 厂商
+   * <p>厂商</p>
    */
   Manufacturer?: string
   /**
-   * 告警状态，0：停用，1：启用
+   * <p>告警状态，0：停用，1：启用</p>
    */
   AlarmStatus?: number
   /**
-   * 0不支持
-1关闭
-2开启
+   * <p>0不支持<br>1关闭<br>2开启</p>
    */
   PqcStatus?: number
   /**
-   * 0关闭，1开启
+   * <p>0关闭，1开启</p>
    */
   PqcFlag?: number
+  /**
+   * <p>环境</p><p>默认值：cloud</p><p>cloud或者cdc</p>
+   */
+  DeployEnv?: string
 }
 
 /**
@@ -570,101 +572,105 @@ export interface Vpc {
  */
 export interface DescribeVsmAttributesResponse {
   /**
-   * 资源Id
+   * <p>资源Id</p>
    */
   ResourceId?: string
   /**
-   * 资源名称
+   * <p>资源名称</p>
    */
   ResourceName?: string
   /**
-   * 资源状态，1表示资源为正常，2表示资源处于隔离状态
+   * <p>资源状态，1表示资源为正常，2表示资源处于隔离状态</p>
    */
   Status?: number
   /**
-   * 资源IP
+   * <p>资源IP</p>
    */
   Vip?: string
   /**
-   * 资源所属Vpc
+   * <p>资源所属Vpc</p>
    */
   VpcId?: string
   /**
-   * 资源所属子网
+   * <p>资源所属子网</p>
    */
   SubnetId?: string
   /**
-   * 资源所属HSM的规格
+   * <p>资源所属HSM的规格</p>
    */
   Model?: string
   /**
-   * 资源类型，17表示EVSM，33表示GVSM，49表示SVSM
+   * <p>资源类型，17表示EVSM，33表示GVSM，49表示SVSM</p>
    */
   VsmType?: number
   /**
-   * 地域Id，返回腾讯云地域代码，如广州为1，北京为8
+   * <p>地域Id，返回腾讯云地域代码，如广州为1，北京为8</p>
    */
   RegionId?: number
   /**
-   * 区域Id，返回腾讯云每个地域的可用区代码
+   * <p>区域Id，返回腾讯云每个地域的可用区代码</p>
    */
   ZoneId?: number
   /**
-   * 资源过期时间，以时间戳形式展示。
+   * <p>资源过期时间，以时间戳形式展示。</p>
    */
   ExpireTime?: number
   /**
-   * 安全组详情信息,如果未配置字段返回null
+   * <p>安全组详情信息,如果未配置字段返回null</p>
    */
   SgList?: Array<UsgRuleDetail>
   /**
-   * 子网名
+   * <p>子网名</p>
    */
   SubnetName?: string
   /**
-   * 地域名
+   * <p>地域名</p>
    */
   RegionName?: string
   /**
-   * 区域名
+   * <p>区域名</p>
    */
   ZoneName?: string
   /**
-   * 实例是否已经过期
+   * <p>实例是否已经过期</p>
    */
   Expired?: boolean
   /**
-   * 为正数表示实例距离过期时间剩余秒数，为负数表示实例已经过期多少秒
+   * <p>为正数表示实例距离过期时间剩余秒数，为负数表示实例已经过期多少秒</p>
    */
   RemainSeconds?: number
   /**
-   * 私有虚拟网络名称
+   * <p>私有虚拟网络名称</p>
    */
   VpcName?: string
   /**
-   * VPC的IPv4 CIDR
+   * <p>VPC的IPv4 CIDR</p>
    */
   VpcCidrBlock?: string
   /**
-   * 子网的CIDR
+   * <p>子网的CIDR</p>
    */
   SubnetCidrBlock?: string
   /**
-   * 资源所关联的标签Tag
+   * <p>资源所关联的标签Tag</p>
    */
   Tags?: Array<Tag>
   /**
-   * 资源续费标识，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)
+   * <p>资源续费标识，0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)</p>
    */
   RenewFlag?: number
   /**
-   * 厂商
+   * <p>厂商</p>
    */
   Manufacturer?: string
   /**
-   * 0-关闭，1-开启
+   * <p>0-关闭，1-开启</p>
    */
   PqcFlag?: number
+  /**
+   * <p>环境</p><p>默认值：cloud</p><p>cloud或者cdc</p>
+   */
+  DeployEnv?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -920,7 +926,7 @@ export interface ModifyVsmAttributesResponse {
  */
 export interface DescribeVsmAttributesRequest {
   /**
-   * 资源Id
+   * <p>资源Id</p>
    */
   ResourceId: string
 }

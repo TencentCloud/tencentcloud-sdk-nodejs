@@ -28,6 +28,16 @@ it("tcb.v20180608.DescribeCreateMySQLResult", async function () {
     }
 })
 
+it("tcb.v20180608.BindStorageSource", async function () {
+    try {
+       const data = await client.BindStorageSource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeGatewayVersions", async function () {
     try {
        const data = await client.DescribeGatewayVersions({})
@@ -458,6 +468,16 @@ it("tcb.v20180608.ModifyEnv", async function () {
     }
 })
 
+it("tcb.v20180608.ModifyStorageSource", async function () {
+    try {
+       const data = await client.ModifyStorageSource({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DeleteProvider", async function () {
     try {
        const data = await client.DeleteProvider({})
@@ -621,6 +641,16 @@ it("tcb.v20180608.DeleteTable", async function () {
 it("tcb.v20180608.DescribeBillingInfo", async function () {
     try {
        const data = await client.DescribeBillingInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.UnbindStorageSource", async function () {
+    try {
+       const data = await client.UnbindStorageSource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

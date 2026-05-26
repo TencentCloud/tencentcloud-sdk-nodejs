@@ -102,13 +102,17 @@ export interface ListTablesResponse {
 }
 
 /**
- * GetProviders请求参数结构体
+ * BindStorageSource请求参数结构体
  */
-export interface GetProvidersRequest {
+export interface BindStorageSourceRequest {
   /**
-   * 环境 ID，用于指定需要查询配置第三方身份源的云开发环境。
+   * 环境ID
    */
   EnvId: string
+  /**
+   * 存储源
+   */
+  StorageConfig: ExternalStorage
 }
 
 /**
@@ -242,6 +246,16 @@ export interface LocalizedMessage {
    * 针对每种语言展示的文字
    */
   Localized?: Array<MessageLocalized>
+}
+
+/**
+ * GetProviders请求参数结构体
+ */
+export interface GetProvidersRequest {
+  /**
+   * 环境 ID，用于指定需要查询配置第三方身份源的云开发环境。
+   */
+  EnvId: string
 }
 
 /**
@@ -486,6 +500,16 @@ export interface DescribeMySQLClusterDetailResponse {
 }
 
 /**
+ * ModifyStorageSource返回参数结构体
+ */
+export interface ModifyStorageSourceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * HTTP访问服务路径重写配置
  */
 export interface HTTPServicePathRewrite {
@@ -532,24 +556,23 @@ CVM = 云服务器
  */
 export interface DescribeEnvsRequest {
   /**
-   * 环境ID，如果传了这个参数则只返回该环境的相关信息
+   * <p>环境ID，如果传了这个参数则只返回该环境的相关信息</p>
    */
   EnvId?: string
   /**
-   * 指定Channels字段为可见渠道列表或不可见渠道列表
-如只想获取渠道A的环境 就填写IsVisible= true,Channels = ["A"], 过滤渠道A拉取其他渠道环境时填写IsVisible= false,Channels = ["A"]
+   * <p>指定Channels字段为可见渠道列表或不可见渠道列表<br>如只想获取渠道A的环境 就填写IsVisible= true,Channels = [&quot;A&quot;], 过滤渠道A拉取其他渠道环境时填写IsVisible= false,Channels = [&quot;A&quot;]</p>
    */
   IsVisible?: boolean
   /**
-   * 渠道列表，代表可见或不可见渠道由IsVisible参数指定
+   * <p>渠道列表，代表可见或不可见渠道由IsVisible参数指定</p>
    */
   Channels?: Array<string>
   /**
-   * 分页参数，单页限制个数
+   * <p>分页参数，单页限制个数</p>
    */
   Limit?: number
   /**
-   * 分页参数，偏移量
+   * <p>分页参数，偏移量</p>
    */
   Offset?: number
 }
@@ -1145,6 +1168,16 @@ export interface TkeClusterInfo {
    * 版本内网CLB所在子网Id
    */
   VersionClbSubnetId?: string
+}
+
+/**
+ * UnbindStorageSource返回参数结构体
+ */
+export interface UnbindStorageSourceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2576,6 +2609,16 @@ export interface EmailTemplateConfig {
 }
 
 /**
+ * UnbindStorageSource请求参数结构体
+ */
+export interface UnbindStorageSourceRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+}
+
+/**
  * CLS日志单条信息
  */
 export interface LogObject {
@@ -2957,6 +3000,14 @@ export interface EnvInfo {
    * <p>回收标志，默认为空</p>
    */
   Recycle?: string
+  /**
+   * <p>环境meta信息列表</p>
+   */
+  Meta?: Array<KVPair>
+  /**
+   * <p>pg信息</p>
+   */
+  PostgreSQL?: Array<PostgreSQLInfo>
 }
 
 /**
@@ -3125,11 +3176,11 @@ export interface EnvBillingInfoItem {
  */
 export interface DescribeEnvsResponse {
   /**
-   * 环境信息列表
+   * <p>环境信息列表</p>
    */
   EnvList?: Array<EnvInfo>
   /**
-   * 环境个数
+   * <p>环境个数</p>
    */
   Total?: number
   /**
@@ -4041,6 +4092,32 @@ export interface HTTPServiceRouteQPSPolicy {
    * 客户端限频配置
    */
   QPSPerClient?: HTTPServiceQPSPerClient
+}
+
+/**
+ * PostgreSQL资源信息结构体
+ */
+export interface PostgreSQLInfo {
+  /**
+   * <p>数据库名称</p>
+   */
+  Name?: string
+  /**
+   * <p>实例id</p>
+   */
+  InstanceName?: string
+  /**
+   * <p>实例状态</p>
+   */
+  Status?: number
+  /**
+   * <p>地域</p>
+   */
+  Region?: string
+  /**
+   * <p>数据库引擎版本</p>
+   */
+  Version?: string
 }
 
 /**
@@ -5305,6 +5382,20 @@ export interface DescribeTableResponse {
 }
 
 /**
+ * ModifyStorageSource请求参数结构体
+ */
+export interface ModifyStorageSourceRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 存储源
+   */
+  StorageConfig: ExternalStorage
+}
+
+/**
  * DescribeDatabaseACL请求参数结构体
  */
 export interface DescribeDatabaseACLRequest {
@@ -5408,6 +5499,16 @@ LightHouse = 轻量云服务器
 CVM = 云服务器
    */
   Type?: string
+}
+
+/**
+ * BindStorageSource返回参数结构体
+ */
+export interface BindStorageSourceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

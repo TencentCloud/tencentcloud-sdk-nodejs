@@ -3572,69 +3572,53 @@ export interface RestartLivePullStreamTaskResponse {
  */
 export interface CreateCasterRequest {
   /**
-   * 导播台名称
+   * <p>导播台名称</p>
    */
   CasterName?: string
   /**
-   * 导播台的描述
-最大允许长度256
+   * <p>导播台的描述<br>最大允许长度256</p>
    */
   Description?: string
   /**
-   * 导播台的过期时间戳。值为-1或unix时间戳。
-默认值为-1。
-当值为-1时，表示该导播台永不过期。
-当值为正常unix时间戳时，导播台将在该时间过期。
-导播台过期后，预监与主监画面将自动停止，转推自动停止。
-点播、直播url将停止转拉，推流url需自行停止推流。
+   * <p>导播台的过期时间戳。值为-1或unix时间戳。<br>默认值为-1。<br>当值为-1时，表示该导播台永不过期。<br>当值为正常unix时间戳时，导播台将在该时间过期。<br>导播台过期后，预监与主监画面将自动停止，转推自动停止。<br>点播、直播url将停止转拉，推流url需自行停止推流。</p>
    */
   ExpireTime?: number
   /**
-   * 导播台延时播放时间，单位为秒。
-默认为0，最大支持300秒
+   * <p>导播台延时播放时间，单位为秒。<br>默认为0，最大支持300秒</p>
    */
   DelayTime?: number
   /**
-   * 导播台转场类型。
-默认为空。
-允许使用通过DescribeCasterTransitionTypes接口中查询到的转场类型。
+   * <p>导播台转场类型。<br>默认为空。<br>允许使用通过DescribeCasterTransitionTypes接口中查询到的转场类型。</p>
    */
   TransitionType?: string
   /**
-   * 导播台主监输出的宽度，单位为像素。
-默认为1280，最大允许4096。
+   * <p>导播台主监输出的宽度，单位为像素。<br>默认为1280，最大允许4096。</p>
    */
   PgmWidth?: number
   /**
-   * 导播台主监输出的高度，单位为像素。
-默认为720，最大允许2160。
+   * <p>导播台主监输出的高度，单位为像素。<br>默认为720，最大允许2160。</p>
    */
   PgmHeight?: number
   /**
-   * 导播台主监输出的帧率。
-默认为0，表示随源输出。
-最大支持60。
+   * <p>导播台主监输出的帧率。<br>默认为0，表示随源输出。<br>最大支持60。</p>
    */
   PgmFps?: number
   /**
-   * 导播台主监输出的码率，单位为kbps。
-默认为0，表示随源的码率输出。
-最大允许10000kbps。
+   * <p>导播台主监输出的码率，单位为kbps。<br>默认为0，表示随源的码率输出。<br>最大允许10000kbps。</p>
    */
   PgmBitRate?: number
   /**
-   * 导播台的计费类型。
-0 通用型 
-1 播单型。
-注： 本参数暂无作用。
+   * <p>导播台的计费类型。<br>0 通用型<br>1 播单型。<br>注： 本参数暂无作用。</p>
    */
   FeeType?: number
   /**
-   * 导播台主监输出的音频码率，单位为kbps。
-可选项：[0, 128, 192, 256]
-默认值为0，表示随源的音频码率输出。
+   * <p>导播台主监输出的音频码率，单位为kbps。<br>可选项：[0, 128, 192, 256]<br>默认值为0，表示随源的音频码率输出。</p>
    */
   PgmAudioBitRate?: number
+  /**
+   * <p>导播台主监输出的编码方式</p><p>枚举值：</p><ul><li>h264： h264编码</li><li>h265： h265编码</li></ul><p>默认值：h264</p>
+   */
+  PgmVcodec?: string
 }
 
 /**
@@ -8573,7 +8557,7 @@ export interface DeleteCasterMarkPicInfoRequest {
  */
 export interface CreateCasterResponse {
   /**
-   * 导播台ID
+   * <p>导播台ID</p>
    */
   CasterId?: number
   /**
@@ -9394,85 +9378,77 @@ export type DescribeLiveCallbackRulesRequest = null
  */
 export interface CasterInfo {
   /**
-   * 导播台ID
+   * <p>导播台ID</p>
    */
   CasterId?: number
   /**
-   * 导播台名称
+   * <p>导播台名称</p>
    */
   CasterName?: string
   /**
-   * 导播台上一次启动pgm的时间，值为unix时间戳。
+   * <p>导播台上一次启动pgm的时间，值为unix时间戳。</p>
    */
   StartLiveTime?: number
   /**
-   * 导播台的描述
+   * <p>导播台的描述</p>
    */
   Description?: string
   /**
-   * 导播台创建时间，值为unix时间戳。
+   * <p>导播台创建时间，值为unix时间戳。</p>
    */
   CreateTime?: number
   /**
-   * 导播台状态 
-0：停止状态，无预监，无主监
-1：无预监，有主监
-2：有预监，无主监
-3：有预监，有主监
+   * <p>导播台状态<br>0：停止状态，无预监，无主监<br>1：无预监，有主监<br>2：有预监，无主监<br>3：有预监，有主监</p>
    */
   Status?: number
   /**
-   * 导播台的过期时间戳。值为-1或unix时间戳。 
-默认值为-1。 当值为-1时，表示该导播台永不过期。 
-当值为正常unix时间戳时，导播台将在该时间过期。 
-导播台过期后，预监与主监画面将自动停止，转推自动停止。 
-点播、直播url将停止转拉，推流url需自行停止推流。
+   * <p>导播台的过期时间戳。值为-1或unix时间戳。<br>默认值为-1。 当值为-1时，表示该导播台永不过期。<br>当值为正常unix时间戳时，导播台将在该时间过期。<br>导播台过期后，预监与主监画面将自动停止，转推自动停止。<br>点播、直播url将停止转拉，推流url需自行停止推流。</p>
    */
   ExpireTime?: number
   /**
-   * 导播台延时播放时间，单位为秒。
+   * <p>导播台延时播放时间，单位为秒。</p>
    */
   DelayTime?: number
   /**
-   * 导播台主监输出的宽度，单位为像素。
+   * <p>导播台主监输出的宽度，单位为像素。</p>
    */
   PgmWidth?: number
   /**
-   * 导播台主监输出的高度，单位为像素。
+   * <p>导播台主监输出的高度，单位为像素。</p>
    */
   PgmHeight?: number
   /**
-   * 导播台主监输出的帧率。
+   * <p>导播台主监输出的帧率。</p>
    */
   PgmFps?: number
   /**
-   * 导播台主监输出的码率，单位为kbps
+   * <p>导播台主监输出的码率，单位为kbps</p>
    */
   PgmBitRate?: number
   /**
-   * 导播台主监输出的音频码率，单位为kbps。
+   * <p>导播台主监输出的音频码率，单位为kbps。</p>
    */
   PgmAudioBitRate?: number
   /**
-   * 导播台的计费类型。 
-0 通用型 1 播单型。
-注： 本参数暂无作用。
+   * <p>导播台的计费类型。<br>0 通用型 1 播单型。<br>注： 本参数暂无作用。</p>
    */
   FeeType?: number
   /**
-   * 录制模板id。
+   * <p>录制模板id。</p>
    */
   RecordTemplateId?: number
   /**
-   * 录制状态。 
-0：未录制 
-1：录制中
+   * <p>录制状态。<br>0：未录制<br>1：录制中</p>
    */
   RecordStatus?: number
   /**
-   * 录制接口返回的taskid
+   * <p>录制接口返回的taskid</p>
    */
   RecordTaskId?: string
+  /**
+   * <p>导播台主监输出的编码方式</p><p>枚举值：</p><ul><li>h264： h264编码</li><li>h265： h265编码</li></ul><p>默认值：h264</p>
+   */
+  PgmVcodec?: string
 }
 
 /**
@@ -11832,6 +11808,10 @@ export interface ModifyCasterRequest {
    * <p>导播台主监输出的音频码率，单位为kbps。<br>可选项：[0, 128, 192, 256]<br>默认值为0，表示随源的音频码率输出。</p>
    */
   PgmAudioBitRate?: number
+  /**
+   * <p>导播台主监输出的编码方式</p><p>枚举值：</p><ul><li>h264： h264编码</li><li>h265： h265编码</li></ul><p>默认值：h264</p>
+   */
+  PgmVcodec?: string
 }
 
 /**

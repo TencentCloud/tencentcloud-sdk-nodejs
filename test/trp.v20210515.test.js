@@ -58,6 +58,16 @@ it("trp.v20210515.ModifyTraceCodeUnlink", async function () {
     }
 })
 
+it("trp.v20210515.ModifyTraceData", async function () {
+    try {
+       const data = await client.ModifyTraceData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.AuthorizedTransfer", async function () {
     try {
        const data = await client.AuthorizedTransfer({})
@@ -81,6 +91,16 @@ it("trp.v20210515.DescribeCustomRuleById", async function () {
 it("trp.v20210515.DescribeRawScanLogs", async function () {
     try {
        const data = await client.DescribeRawScanLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trp.v20210515.DescribeFlavorKingCycleBrandScanAnalysis", async function () {
+    try {
+       const data = await client.DescribeFlavorKingCycleBrandScanAnalysis({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -131,6 +151,16 @@ it("trp.v20210515.DescribePlanQRCodes", async function () {
 it("trp.v20210515.ModifyTraceDataRanks", async function () {
     try {
        const data = await client.ModifyTraceDataRanks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trp.v20210515.DescribeFlavorKingCycleBrandImportantCityScanAnalysis", async function () {
+    try {
+       const data = await client.DescribeFlavorKingCycleBrandImportantCityScanAnalysis({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +258,9 @@ it("trp.v20210515.DescribePlanQRCodeScanRecords", async function () {
     }
 })
 
-it("trp.v20210515.ModifyTraceData", async function () {
+it("trp.v20210515.DownloadGEO", async function () {
     try {
-       const data = await client.ModifyTraceData({})
+       const data = await client.DownloadGEO({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -251,6 +281,16 @@ it("trp.v20210515.DescribeCodeBatches", async function () {
 it("trp.v20210515.ReportScanDetail", async function () {
     try {
        const data = await client.ReportScanDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trp.v20210515.DescribeFlavorKingCycleBrandImportantProvinceScanAnalysis", async function () {
+    try {
+       const data = await client.DescribeFlavorKingCycleBrandImportantProvinceScanAnalysis({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,6 +398,16 @@ it("trp.v20210515.CreateCorporationOrder", async function () {
     }
 })
 
+it("trp.v20210515.DescribeFlavorKingCycleBrandImportantProvinceUserAnalysis", async function () {
+    try {
+       const data = await client.DescribeFlavorKingCycleBrandImportantProvinceUserAnalysis({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.DeleteMerchant", async function () {
     try {
        const data = await client.DeleteMerchant({})
@@ -428,9 +478,29 @@ it("trp.v20210515.ModifyMerchant", async function () {
     }
 })
 
+it("trp.v20210515.DescribeFlavorKingCycleBrandScanMetrics", async function () {
+    try {
+       const data = await client.DescribeFlavorKingCycleBrandScanMetrics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.CreateCodeBatch", async function () {
     try {
        const data = await client.CreateCodeBatch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trp.v20210515.DescribeMerchants", async function () {
+    try {
+       const data = await client.DescribeMerchants({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,6 +598,16 @@ it("trp.v20210515.DescribeScanLogs", async function () {
     }
 })
 
+it("trp.v20210515.DescribeFlavorKingCycleBrandProvinceScanAnalysis", async function () {
+    try {
+       const data = await client.DescribeFlavorKingCycleBrandProvinceScanAnalysis({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trp.v20210515.ModifyCodeBatch", async function () {
     try {
        const data = await client.ModifyCodeBatch({})
@@ -538,9 +618,9 @@ it("trp.v20210515.ModifyCodeBatch", async function () {
     }
 })
 
-it("trp.v20210515.DescribeMerchants", async function () {
+it("trp.v20210515.DescribeJobFileUrl", async function () {
     try {
-       const data = await client.DescribeMerchants({})
+       const data = await client.DescribeJobFileUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -558,9 +638,9 @@ it("trp.v20210515.CreateMerchant", async function () {
     }
 })
 
-it("trp.v20210515.DescribeJobFileUrl", async function () {
+it("trp.v20210515.DescribeFlavorKingCycleBrandProvinceCityScanAnalysis", async function () {
     try {
-       const data = await client.DescribeJobFileUrl({})
+       const data = await client.DescribeFlavorKingCycleBrandProvinceCityScanAnalysis({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

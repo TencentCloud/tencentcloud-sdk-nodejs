@@ -269,6 +269,24 @@ export interface UpdatePolicyResponse {
 }
 
 /**
+ * UntagRole请求参数结构体
+ */
+export interface UntagRoleRequest {
+  /**
+   * 标签键
+   */
+  TagKeys: Array<string>
+  /**
+   * 角色名，与角色ID至少输入一个
+   */
+  RoleName?: string
+  /**
+   * 角色ID，与角色名至少输入一个
+   */
+  RoleId?: string
+}
+
+/**
  * DeleteUser返回参数结构体
  */
 export interface DeleteUserResponse {
@@ -534,6 +552,11 @@ export interface UpdateRoleDescriptionResponse {
 }
 
 /**
+ * GetPasswordRules请求参数结构体
+ */
+export type GetPasswordRulesRequest = null
+
+/**
  * GetAccountSummary请求参数结构体
  */
 export type GetAccountSummaryRequest = null
@@ -700,6 +723,16 @@ export interface PutRolePermissionsBoundaryRequest {
 }
 
 /**
+ * UpdatePasswordRules请求参数结构体
+ */
+export interface UpdatePasswordRulesRequest {
+  /**
+   * 密码规则
+   */
+  Rules: PassWordRule
+}
+
+/**
  * GetGroup请求参数结构体
  */
 export interface GetGroupRequest {
@@ -854,6 +887,16 @@ export interface DeleteUserPermissionsBoundaryRequest {
  * ListSAMLProviders请求参数结构体
  */
 export type ListSAMLProvidersRequest = null
+
+/**
+ * UpdatePasswordRules返回参数结构体
+ */
+export interface UpdatePasswordRulesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * UpdateRoleSessionDuration请求参数结构体
@@ -2306,6 +2349,28 @@ export interface AttachRolePolicyRequest {
 }
 
 /**
+ * GetPasswordRules返回参数结构体
+ */
+export interface GetPasswordRulesResponse {
+  /**
+   * 密码规则
+   */
+  Rules?: PassWordRule
+  /**
+   * 修改时间
+   */
+  UpdateTime?: string
+  /**
+   * 修改人
+   */
+  Modifier?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ConsumeCustomMFAToken返回参数结构体
  */
 export interface ConsumeCustomMFATokenResponse {
@@ -2562,21 +2627,39 @@ export interface UpdateOIDCConfigResponse {
 }
 
 /**
- * UntagRole请求参数结构体
+ * 子账号密码规则
  */
-export interface UntagRoleRequest {
+export interface PassWordRule {
   /**
-   * 标签键
+   * 最小长度
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TagKeys: Array<string>
+  MinimumLength?: number
   /**
-   * 角色名，与角色ID至少输入一个
+   * 必须包含的字符
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RoleName?: string
+  MustContain?: string
   /**
-   * 角色ID，与角色名至少输入一个
+   * 强制修改周期
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RoleId?: string
+  ForcePasswordChange?: number
+  /**
+   * 重复使用次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReusePasswordLimit?: number
+  /**
+   * 密码重试次数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RetryPasswordLimit?: number
+  /**
+   * 密码过期失效 1：是，2：否（是：密码过期后，子用户无法登录，需要管理员重置密码。否：密码过期后，子用户可登录，登录后强制根据旧密码修改密码）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PasswordExpirationInvalidation?: number
 }
 
 /**

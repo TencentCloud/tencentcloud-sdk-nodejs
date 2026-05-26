@@ -979,11 +979,11 @@ export interface EventInfo {
    */
   DiagType?: string
   /**
-   * 开始时间。
+   * 开始时间。格式: "yyyy-MM-dd'T'HH:mm:ssXXX"
    */
   StartTime?: string
   /**
-   * 结束时间。
+   * 结束时间。格式: "yyyy-MM-dd'T'HH:mm:ssXXX"
    */
   EndTime?: string
   /**

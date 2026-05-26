@@ -944,6 +944,20 @@ export interface UpdateL3SwitchResponse {
 }
 
 /**
+ * DescribeAccessRegions返回参数结构体
+ */
+export interface DescribeAccessRegionsResponse {
+  /**
+   * <p>地域信息列表</p>
+   */
+  RegionList?: Array<RegionInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetL3ConnList返回参数结构体
  */
 export interface GetL3ConnListResponse {
@@ -1028,6 +1042,16 @@ export interface ModifyPackageRenewFlagResponse {
 }
 
 /**
+ * ModifyDeviceAccessRegions返回参数结构体
+ */
+export interface ModifyDeviceAccessRegionsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetDestIPByName返回参数结构体
  */
 export interface GetDestIPByNameResponse {
@@ -1045,6 +1069,11 @@ export interface GetDestIPByNameResponse {
    */
   RequestId?: string
 }
+
+/**
+ * DescribeAccessRegions请求参数结构体
+ */
+export type DescribeAccessRegionsRequest = null
 
 /**
  * 厂商硬件详细信息
@@ -1327,6 +1356,20 @@ export interface DeleteApplicationRequest {
    * 应用id列表
    */
   MpApplicationIdList: Array<DelApplicationList>
+}
+
+/**
+ * ModifyDeviceAccessRegions请求参数结构体
+ */
+export interface ModifyDeviceAccessRegionsRequest {
+  /**
+   * <p>设备ID</p>
+   */
+  DeviceIds: Array<string>
+  /**
+   * <p>接入地域</p>
+   */
+  AllowedRegions?: Array<string>
 }
 
 /**
@@ -2242,6 +2285,24 @@ export interface UpdateDeviceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 此数据结构用来展示可用地域信息。
+ */
+export interface RegionInfo {
+  /**
+   * <p>地域 ID。</p>
+   */
+  RegionId?: string
+  /**
+   * <p>地域名称。</p>
+   */
+  RegionName?: string
+  /**
+   * <p>地域英文缩写。</p>
+   */
+  RegionAbbr?: string
 }
 
 /**

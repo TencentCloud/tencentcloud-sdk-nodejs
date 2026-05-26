@@ -2529,13 +2529,17 @@ export interface ModifyWorkGroupResponse {
 }
 
 /**
- * GetOptimizerPolicy返回参数结构体
+ * DescribeDMSPartitions返回参数结构体
  */
-export interface GetOptimizerPolicyResponse {
+export interface DescribeDMSPartitionsResponse {
   /**
-   * 智能优化策略
+   * 分区信息
    */
-  SmartOptimizerPolicy?: SmartOptimizerPolicy
+  Partitions?: Array<DMSPartition>
+  /**
+   * 总数
+   */
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3401,6 +3405,97 @@ export interface DescribeTablePartitionsRequest {
 }
 
 /**
+ * 任务结果信息。
+ */
+export interface TaskResultInfo {
+  /**
+   * 任务唯一ID
+   */
+  TaskId?: string
+  /**
+   * 数据源名称，当前任务执行时候选中的默认数据源
+   */
+  DatasourceConnectionName?: string
+  /**
+   * 数据库名称，当前任务执行时候选中的默认数据库
+   */
+  DatabaseName?: string
+  /**
+   * 当前执行的SQL，一个任务包含一个SQL
+   */
+  SQL?: string
+  /**
+   * 执行任务的类型，现在分为DDL、DML、DQL
+   */
+  SQLType?: string
+  /**
+   * 任务当前的状态，0：初始化 1：任务运行中 2：任务执行成功  3：数据写入中 4：排队中 -1：任务执行失败 -3：用户手动终止 。只有任务执行成功的情况下，才会返回任务执行的结果
+   */
+  State?: number
+  /**
+   * 扫描的数据量，单位byte
+   */
+  DataAmount?: number
+  /**
+   * 计算耗时，单位： ms
+   */
+  UsedTime?: number
+  /**
+   * 任务结果输出的COS桶地址
+   */
+  OutputPath?: string
+  /**
+   * 任务创建时间，时间戳
+   */
+  CreateTime?: string
+  /**
+   * 任务执行信息，成功时返回success，失败时返回失败原因
+   */
+  OutputMessage?: string
+  /**
+   * 被影响的行数
+   */
+  RowAffectInfo?: string
+  /**
+   * 结果的schema信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResultSchema?: Array<Column>
+  /**
+   * 结果信息，反转义后，外层数组的每个元素为一行数据
+   */
+  ResultSet?: string
+  /**
+   * 分页信息，如果没有更多结果数据，nextToken为空
+   */
+  NextToken?: string
+  /**
+   * 任务执行进度num/100(%)
+   */
+  Percentage?: number
+  /**
+   * 任务进度明细
+   */
+  ProgressDetail?: string
+  /**
+   * 控制台展示格式。table：表格展示 text：文本展示
+   */
+  DisplayFormat?: string
+  /**
+   * 任务耗时，单位： ms
+   */
+  TotalTime?: number
+  /**
+   * 获取结果消耗的时间
+   */
+  QueryResultTime?: number
+  /**
+   * base64 编码结果集
+   */
+  ResultSetEncode?: string
+}
+
+/**
  * Spark监控数据
  */
 export interface SparkMonitorMetrics {
@@ -4032,6 +4127,36 @@ export interface DeleteUserResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateUserRole请求参数结构体
+ */
+export interface CreateUserRoleRequest {
+  /**
+   * 角色Arn信息
+   */
+  Arn: string
+  /**
+   * 角色描述信息
+   */
+  Desc: string
+  /**
+   * 角色名称
+   */
+  Name?: string
+  /**
+   * cos授权路径列表
+   */
+  CosPermissionList?: Array<CosPermission>
+  /**
+   * cam策略json
+   */
+  PermissionJson?: string
+  /**
+   * 是否设置为常驻：1非常驻（默认）、2常驻（仅能设置一个常驻）
+   */
+  IsDefault?: number
 }
 
 /**
@@ -4863,21 +4988,19 @@ export interface AlterDMSTableRequest {
 }
 
 /**
- * DescribeDMSPartitions返回参数结构体
+ * SmartPolicyRequest
  */
-export interface DescribeDMSPartitionsResponse {
+export interface SmartPolicy {
   /**
-   * 分区信息
+   * 基础信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Partitions?: Array<DMSPartition>
+  BaseInfo?: SmartPolicyBaseInfo
   /**
-   * 总数
+   * 策略描述
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Total?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Policy?: SmartOptimizerPolicy
 }
 
 /**
@@ -5531,22 +5654,6 @@ export interface DeleteDataEngineRequest {
 }
 
 /**
- * SmartPolicyRequest
- */
-export interface SmartPolicy {
-  /**
-   * 基础信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BaseInfo?: SmartPolicyBaseInfo
-  /**
-   * 策略描述
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Policy?: SmartOptimizerPolicy
-}
-
-/**
  * CreateSparkSessionBatchSQL返回参数结构体
  */
 export interface CreateSparkSessionBatchSQLResponse {
@@ -5708,6 +5815,20 @@ export interface CoreInfo {
  * DetachUserPolicy返回参数结构体
  */
 export interface DetachUserPolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetOptimizerPolicy返回参数结构体
+ */
+export interface GetOptimizerPolicyResponse {
+  /**
+   * 智能优化策略
+   */
+  SmartOptimizerPolicy?: SmartOptimizerPolicy
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6186,37 +6307,21 @@ export interface SetOptimizerPolicyResponse {
 }
 
 /**
- * CreateUser请求参数结构体
+ * CheckLockMetaData返回参数结构体
  */
-export interface CreateUserRequest {
+export interface CheckLockMetaDataResponse {
   /**
-   * 需要授权的子用户uin，可以通过腾讯云控制台右上角 → “账号信息” → “账号ID进行查看”。
+   * 锁ID
    */
-  UserId: string
+  LockId?: number
   /**
-   * 用户描述信息，方便区分不同用户
+   * 锁状态：ACQUIRED、WAITING、ABORT、NOT_ACQUIRED
    */
-  UserDescription?: string
+  LockState?: string
   /**
-   * 绑定到用户的权限集合
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PolicySet?: Array<Policy>
-  /**
-   * 用户类型。ADMIN：管理员 COMMON：一般用户。当用户类型为管理员的时候，不能设置权限集合和绑定的工作组集合，管理员默认拥有所有权限。该参数不填默认为COMMON
-   */
-  UserType?: string
-  /**
-   * 绑定到用户的工作组ID集合。
-   */
-  WorkGroupIds?: Array<number | bigint>
-  /**
-   * 用户别名，字符长度小50
-   */
-  UserAlias?: string
-  /**
-   * 账号类型，UserAccount：用户账号 RoleAccount：角色账号，默认为用户账号
-   */
-  AccountType?: string
+  RequestId?: string
 }
 
 /**
@@ -6731,6 +6836,47 @@ export interface SwitchDataEngineImageResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Elasticsearch数据源的详细信息
+ */
+export interface ElasticsearchInfo {
+  /**
+   * 数据源ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 数据源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+  /**
+   * 密码，需要base64编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * 数据源的VPC和子网信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: DatasourceConnectionLocation
+  /**
+   * 默认数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbName?: string
+  /**
+   * 访问Elasticsearch的ip、端口信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceInfo?: Array<IpPortPair>
 }
 
 /**
@@ -8759,44 +8905,37 @@ export interface NetworkConnection {
 }
 
 /**
- * Elasticsearch数据源的详细信息
+ * CreateUser请求参数结构体
  */
-export interface ElasticsearchInfo {
+export interface CreateUserRequest {
   /**
-   * 数据源ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 需要授权的子用户uin，可以通过腾讯云控制台右上角 → “账号信息” → “账号ID进行查看”。
    */
-  InstanceId?: string
+  UserId: string
   /**
-   * 数据源名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 用户描述信息，方便区分不同用户
    */
-  InstanceName?: string
+  UserDescription?: string
   /**
-   * 用户名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 绑定到用户的权限集合
    */
-  User?: string
+  PolicySet?: Array<Policy>
   /**
-   * 密码，需要base64编码
-注意：此字段可能返回 null，表示取不到有效值。
+   * 用户类型。ADMIN：管理员 COMMON：一般用户。当用户类型为管理员的时候，不能设置权限集合和绑定的工作组集合，管理员默认拥有所有权限。该参数不填默认为COMMON
    */
-  Password?: string
+  UserType?: string
   /**
-   * 数据源的VPC和子网信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 绑定到用户的工作组ID集合。
    */
-  Location?: DatasourceConnectionLocation
+  WorkGroupIds?: Array<number | bigint>
   /**
-   * 默认数据库名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 用户别名，字符长度小50
    */
-  DbName?: string
+  UserAlias?: string
   /**
-   * 访问Elasticsearch的ip、端口信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 账号类型，UserAccount：用户账号 RoleAccount：角色账号，默认为用户账号
    */
-  ServiceInfo?: Array<IpPortPair>
+  AccountType?: string
 }
 
 /**
@@ -9182,94 +9321,21 @@ export interface OtherDatasourceConnection {
 }
 
 /**
- * 任务结果信息。
+ * DetachUserPolicy请求参数结构体
  */
-export interface TaskResultInfo {
+export interface DetachUserPolicyRequest {
   /**
-   * 任务唯一ID
+   * 用户Id，和CAM侧Uin匹配
    */
-  TaskId?: string
+  UserId: string
   /**
-   * 数据源名称，当前任务执行时候选中的默认数据源
+   * 解绑的权限集合
    */
-  DatasourceConnectionName?: string
+  PolicySet?: Array<Policy>
   /**
-   * 数据库名称，当前任务执行时候选中的默认数据库
+   * 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户）
    */
-  DatabaseName?: string
-  /**
-   * 当前执行的SQL，一个任务包含一个SQL
-   */
-  SQL?: string
-  /**
-   * 执行任务的类型，现在分为DDL、DML、DQL
-   */
-  SQLType?: string
-  /**
-   * 任务当前的状态，0：初始化 1：任务运行中 2：任务执行成功  3：数据写入中 4：排队中 -1：任务执行失败 -3：用户手动终止 。只有任务执行成功的情况下，才会返回任务执行的结果
-   */
-  State?: number
-  /**
-   * 扫描的数据量，单位byte
-   */
-  DataAmount?: number
-  /**
-   * 计算耗时，单位： ms
-   */
-  UsedTime?: number
-  /**
-   * 任务结果输出的COS桶地址
-   */
-  OutputPath?: string
-  /**
-   * 任务创建时间，时间戳
-   */
-  CreateTime?: string
-  /**
-   * 任务执行信息，成功时返回success，失败时返回失败原因
-   */
-  OutputMessage?: string
-  /**
-   * 被影响的行数
-   */
-  RowAffectInfo?: string
-  /**
-   * 结果的schema信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResultSchema?: Array<Column>
-  /**
-   * 结果信息，反转义后，外层数组的每个元素为一行数据
-   */
-  ResultSet?: string
-  /**
-   * 分页信息，如果没有更多结果数据，nextToken为空
-   */
-  NextToken?: string
-  /**
-   * 任务执行进度num/100(%)
-   */
-  Percentage?: number
-  /**
-   * 任务进度明细
-   */
-  ProgressDetail?: string
-  /**
-   * 控制台展示格式。table：表格展示 text：文本展示
-   */
-  DisplayFormat?: string
-  /**
-   * 任务耗时，单位： ms
-   */
-  TotalTime?: number
-  /**
-   * 获取结果消耗的时间
-   */
-  QueryResultTime?: number
-  /**
-   * base64 编码结果集
-   */
-  ResultSetEncode?: string
+  AccountType?: string
 }
 
 /**
@@ -9321,44 +9387,21 @@ export interface GPUInfo {
 }
 
 /**
- * 数据源详细信息
+ * DescribeDataEngineImageVersions返回参数结构体
  */
-export interface DataSourceInfo {
+export interface DescribeDataEngineImageVersionsResponse {
   /**
-   * 数据源实例的唯一ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 集群大版本镜像信息列表
    */
-  InstanceId?: string
+  ImageParentVersions?: Array<DataEngineImageVersion>
   /**
-   * 数据源的名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 总数
    */
-  InstanceName?: string
+  Total?: number
   /**
-   * 数据源的JDBC访问链接
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  JdbcUrl?: string
-  /**
-   * 用于访问数据源的用户名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  User?: string
-  /**
-   * 数据源访问密码，需要base64编码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Password?: string
-  /**
-   * 数据源的VPC和子网信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Location?: DatasourceConnectionLocation
-  /**
-   * 默认数据库名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DbName?: string
+  RequestId?: string
 }
 
 /**
@@ -10412,21 +10455,13 @@ export interface DescribeStandardEngineResourceGroupsResponse {
 }
 
 /**
- * DetachUserPolicy请求参数结构体
+ * CreateUserRole返回参数结构体
  */
-export interface DetachUserPolicyRequest {
+export interface CreateUserRoleResponse {
   /**
-   * 用户Id，和CAM侧Uin匹配
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UserId: string
-  /**
-   * 解绑的权限集合
-   */
-  PolicySet?: Array<Policy>
-  /**
-   * 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户）
-   */
-  AccountType?: string
+  RequestId?: string
 }
 
 /**
@@ -11158,6 +11193,47 @@ export interface RenewDataEngineResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 数据源详细信息
+ */
+export interface DataSourceInfo {
+  /**
+   * 数据源实例的唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 数据源的名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * 数据源的JDBC访问链接
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JdbcUrl?: string
+  /**
+   * 用于访问数据源的用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+  /**
+   * 数据源访问密码，需要base64编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * 数据源的VPC和子网信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: DatasourceConnectionLocation
+  /**
+   * 默认数据库名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbName?: string
 }
 
 /**
@@ -12077,24 +12153,6 @@ export interface QueryTaskCostDetailResponse {
 }
 
 /**
- * CheckLockMetaData返回参数结构体
- */
-export interface CheckLockMetaDataResponse {
-  /**
-   * 锁ID
-   */
-  LockId?: number
-  /**
-   * 锁状态：ACQUIRED、WAITING、ABORT、NOT_ACQUIRED
-   */
-  LockState?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * Notebook Session详细信息。
  */
 export interface NotebookSessionInfo {
@@ -12212,24 +12270,6 @@ export interface NotebookSessionInfo {
    * spark app名称
    */
   SparkAppName?: string
-}
-
-/**
- * DescribeDataEngineImageVersions返回参数结构体
- */
-export interface DescribeDataEngineImageVersionsResponse {
-  /**
-   * 集群大版本镜像信息列表
-   */
-  ImageParentVersions?: Array<DataEngineImageVersion>
-  /**
-   * 总数
-   */
-  Total?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

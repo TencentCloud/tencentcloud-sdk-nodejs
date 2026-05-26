@@ -26,12 +26,14 @@ import {
   CreateBackupDBInstanceResponse,
   DescribeAuditLogsRequest,
   DBInstancePrice,
-  TerminateDBInstancesRequest,
+  DescribePasswordRotationResponse,
   KillOpsRequest,
+  EnablePasswordRotationRequest,
   DropDBInstanceParamTplResponse,
   DeleteLogDownloadTaskResponse,
   InquirePriceRenewDBInstancesRequest,
   DescribeAuditLogFilesResponse,
+  FlushInstanceRouterConfigRequest,
   DescribeSlowLogsRequest,
   FlushInstanceRouterConfigResponse,
   DescribeCurrentOpResponse,
@@ -43,6 +45,7 @@ import {
   DescribeInstanceSSLRequest,
   EnableTransparentDataEncryptionRequest,
   DescribeBackupRulesResponse,
+  ModifyBackupExpireTimeResponse,
   SlowLogPattern,
   Task,
   ModifySRVConnectionUrlResponse,
@@ -59,7 +62,7 @@ import {
   DescribeBackupRulesRequest,
   DescribeBackupDownloadTaskResponse,
   AddNodeList,
-  FlushInstanceRouterConfigRequest,
+  EnablePasswordRotationResponse,
   DBInstanceInfo,
   ParamType,
   SetAccountUserPrivilegeResponse,
@@ -75,6 +78,7 @@ import {
   SpecItem,
   LogFilter,
   DescribeDetailedSlowLogsRequest,
+  ModifyInstanceAzResponse,
   UpgradeDbInstanceVersionRequest,
   ModifyDBInstanceNetworkAddressResponse,
   DeleteAuditLogFileResponse,
@@ -111,7 +115,7 @@ import {
   DescribeBackupDownloadTaskRequest,
   ModifySRVConnectionUrlRequest,
   DescribeClientConnectionsResponse,
-  DisableSRVConnectionUrlRequest,
+  DeleteDBBackupsRequest,
   ModifyDBInstanceParamTplResponse,
   DescribeSRVConnectionDomainRequest,
   DescribeDBBackupsResponse,
@@ -135,9 +139,11 @@ import {
   DescribeAsyncRequestInfoRequest,
   FBKeyValue,
   CreateBackupDownloadTaskRequest,
+  TerminateDBInstancesRequest,
   ParamTpl,
   InquirePriceModifyDBInstanceSpecResponse,
   CreateDBInstanceHourRequest,
+  DeleteDBBackupsResponse,
   SecurityGroupBound,
   RestoreDBInstanceResponse,
   BackupTotalSize,
@@ -146,6 +152,7 @@ import {
   DescribeDBInstanceParamTplDetailResponse,
   DescribeAuditInstanceListRequest,
   DeliverSummary,
+  ModifyBackupExpireTimeRequest,
   DescribeInstanceSSLResponse,
   ModifyDBInstanceParamTplRequest,
   DescribeCurrentOpRequest,
@@ -164,7 +171,7 @@ import {
   FlashBackDBInstanceResponse,
   RenameInstanceResponse,
   DropDBInstanceParamTplRequest,
-  ModifyInstanceAzResponse,
+  DisableSRVConnectionUrlRequest,
   DescribeTransparentDataEncryptionStatusResponse,
   DescribeAuditConfigRequest,
   CreateBackupDBInstanceRequest,
@@ -175,6 +182,7 @@ import {
   NodeProperty,
   KillOpsResponse,
   IsolateDBInstanceRequest,
+  DescribePasswordRotationRequest,
   AuditLogFile,
   EnableTransparentDataEncryptionResponse,
   DescribeAuditLogFilesRequest,
@@ -622,6 +630,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 开启密码轮转
+   */
+  async EnablePasswordRotation(
+    req?: EnablePasswordRotationRequest,
+    cb?: (error: string, rep: EnablePasswordRotationResponse) => void
+  ): Promise<EnablePasswordRotationResponse> {
+    return this.request("EnablePasswordRotation", req, cb)
+  }
+
+  /**
    * 本接口（CloseAuditService）用于关闭审计服务
    */
   async CloseAuditService(
@@ -822,6 +840,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取密码轮转状态信息
+   */
+  async DescribePasswordRotation(
+    req?: DescribePasswordRotationRequest,
+    cb?: (error: string, rep: DescribePasswordRotationResponse) => void
+  ): Promise<DescribePasswordRotationResponse> {
+    return this.request("DescribePasswordRotation", req, cb)
+  }
+
+  /**
    * 本接口（SetDBInstanceDeletionProtection）用于设置实例销毁保护
    */
   async SetDBInstanceDeletionProtection(
@@ -893,6 +921,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除全量备份
+   */
+  async DeleteDBBackups(
+    req: DeleteDBBackupsRequest,
+    cb?: (error: string, rep: DeleteDBBackupsResponse) => void
+  ): Promise<DeleteDBBackupsResponse> {
+    return this.request("DeleteDBBackups", req, cb)
+  }
+
+  /**
    * 本接口（DescribeAccountUsers）用于获取当前实例的全部账号。
    */
   async DescribeAccountUsers(
@@ -961,6 +999,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: KillOpsResponse) => void
   ): Promise<KillOpsResponse> {
     return this.request("KillOps", req, cb)
+  }
+
+  /**
+   * 修改备份过期时间
+   */
+  async ModifyBackupExpireTime(
+    req: ModifyBackupExpireTimeRequest,
+    cb?: (error: string, rep: ModifyBackupExpireTimeResponse) => void
+  ): Promise<ModifyBackupExpireTimeResponse> {
+    return this.request("ModifyBackupExpireTime", req, cb)
   }
 
   /**

@@ -27180,21 +27180,25 @@ export interface DeleteMachineClearHistoryResponse {
  */
 export interface DescribeLicenseWhiteConfigResponse {
   /**
-   * 旗舰版 配置信息
+   * <p>旗舰版 配置信息</p>
    */
   FlagShip?: VersionWhiteConfig
   /**
-   * 专业版 配置信息
+   * <p>专业版 配置信息</p>
    */
   Professional?: VersionWhiteConfig
   /**
-   * 轻量版 配置信息
+   * <p>轻量版 配置信息</p>
    */
   PrattWhitney?: VersionWhiteConfig
   /**
-   * 重保授权包 配置信息
+   * <p>重保授权包 配置信息</p>
    */
   RASP?: VersionWhiteConfig
+  /**
+   * <p>日志分析配置信息</p>
+   */
+  LOG?: VersionWhiteConfig
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -28564,93 +28568,105 @@ export interface DescribeMachineRegionsResponse {
  */
 export interface DescribeLicenseGeneralResponse {
   /**
-   * 总授权数 (包含隔离,过期等不可用状态)
+   * <p>总授权数 (包含隔离,过期等不可用状态)</p>
    */
   LicenseCnt?: number
   /**
-   * 可用授权数
+   * <p>可用授权数</p>
    */
   AvailableLicenseCnt?: number
   /**
-   * 可用专业版授权数(包含后付费).
+   * <p>可用专业版授权数(包含后付费).</p>
    */
   AvailableProVersionLicenseCnt?: number
   /**
-   * 可用旗舰版授权数
+   * <p>可用旗舰版授权数</p>
    */
   AvailableFlagshipVersionLicenseCnt?: number
   /**
-   * 即将到期授权数 (15天内到期的)
+   * <p>即将到期授权数 (15天内到期的)</p>
    */
   NearExpiryLicenseCnt?: number
   /**
-   * 已到期授权数(不包含已删除的记录)
+   * <p>已到期授权数(不包含已删除的记录)</p>
    */
   ExpireLicenseCnt?: number
   /**
-   * 自动升级开关状态,默认 false,  true 开启, false 关闭
+   * <p>自动升级开关状态,默认 false,  true 开启, false 关闭</p>
    */
   AutoOpenStatus?: boolean
   /**
-   * PROVERSION_POSTPAY 专业版-后付费, PROVERSION_PREPAY 专业版-预付费, FLAGSHIP_PREPAY 旗舰版-预付费
+   * <p>PROVERSION_POSTPAY 专业版-后付费, PROVERSION_PREPAY 专业版-预付费, FLAGSHIP_PREPAY 旗舰版-预付费</p>
    */
   ProtectType?: string
   /**
-   * 历史是否开通过自动升级开关
+   * <p>历史是否开通过自动升级开关</p>
    */
   IsOpenStatusHistory?: boolean
   /**
-   * 已使用授权数
+   * <p>已使用授权数</p>
    */
   UsedLicenseCnt?: number
   /**
-   * 未到期授权数
+   * <p>未到期授权数</p>
    */
   NotExpiredLicenseCnt?: number
   /**
-   * 旗舰版总授权数(有效订单)
+   * <p>旗舰版总授权数(有效订单)</p>
    */
   FlagshipVersionLicenseCnt?: number
   /**
-   * 专业版总授权数(有效订单)
+   * <p>专业版总授权数(有效订单)</p>
    */
   ProVersionLicenseCnt?: number
   /**
-   * 轻量版总授权数(有效订单的授权数)
+   * <p>轻量版总授权数(有效订单的授权数)</p>
    */
   CwpVersionLicenseCnt?: number
   /**
-   * 可用惠普版授权数
+   * <p>可用惠普版授权数</p>
    */
   AvailableLHLicenseCnt?: number
   /**
-   * 自动加购开关, true 开启, false 关闭
+   * <p>自动加购开关, true 开启, false 关闭</p>
    */
   AutoRepurchaseSwitch?: boolean
   /**
-   * 自动加购订单是否自动续费 ,true 开启, false 关闭
+   * <p>自动加购订单是否自动续费 ,true 开启, false 关闭</p>
    */
   AutoRepurchaseRenewSwitch?: boolean
   /**
-   * 已销毁订单数
+   * <p>已销毁订单数</p>
    */
   DestroyOrderNum?: number
   /**
-   * 自动加购是否自动续费开关,true 开启,false 关闭
+   * <p>自动加购是否自动续费开关,true 开启,false 关闭</p>
    */
   RepurchaseRenewSwitch?: boolean
   /**
-   * 是否自动新增机器绑定rasp防护,false 关闭 true 开启
+   * <p>是否自动新增机器绑定rasp防护,false 关闭 true 开启</p>
    */
   AutoBindRaspSwitch?: boolean
   /**
-   * 是否自动新增机器开启rasp防护,false 关闭 true 开启
+   * <p>是否自动新增机器开启rasp防护,false 关闭 true 开启</p>
    */
   AutoOpenRaspSwitch?: boolean
   /**
-   * 是否自动缩容开关开启
+   * <p>是否自动缩容开关开启</p>
    */
   AutoDowngradeSwitch?: boolean
+  /**
+   * <p>可使用的AI防护版授权数</p>
+   */
+  AvailableAISecurityLicenseCnt?: number
+  /**
+   * <p>AI 防护版总授权数</p>
+   */
+  AISecurityVersionLicenseCnt?: number
+  /**
+   * <p>应用防护授权数+旗舰版授权数相加后的可使用授权数</p>
+   */
+  ApplicationAvailableLicenseCnt?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -28937,7 +28953,7 @@ export interface DeleteBashEventsRequest {
  */
 export interface DescribeLicenseWhiteConfigRequest {
   /**
-   * 规则名称,例如: cwp
+   * <p>规则名称,例如: cwp</p>
    */
   RuleName: string
 }

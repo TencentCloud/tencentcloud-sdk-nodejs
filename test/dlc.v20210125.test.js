@@ -1578,6 +1578,16 @@ it("dlc.v20210125.DescribeSparkAppTasks", async function () {
     }
 })
 
+it("dlc.v20210125.CreateUserRole", async function () {
+    try {
+       const data = await client.CreateUserRole({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.UnbindWorkGroupsFromUser", async function () {
     try {
        const data = await client.UnbindWorkGroupsFromUser({})

@@ -234,6 +234,38 @@ export interface Quota {
 }
 
 /**
+ * DescribeRawScanLogs请求参数结构体
+ */
+export interface DescribeRawScanLogsRequest {
+  /**
+   * 企业ID, 默认为当前企业
+如果有渠道权限，可以传 0 会查渠道下所有的企业
+   */
+  CorpId?: number
+  /**
+   * 分页数量，默认为 20，最大为 1000
+   */
+  PageSize?: number
+  /**
+   * 当前分页，默认为 1
+   */
+  PageNumber?: number
+  /**
+   * 从哪个日志后查询
+即: LogId > $AfterLogId
+   */
+  AfterLogId?: number
+  /**
+   * 开始时间 >= StartTime
+   */
+  StartTime?: string
+  /**
+   * 结束时间 < EndTime
+   */
+  EndTime?: string
+}
+
+/**
  * 安心计划二维码
  */
 export interface PlanQRCode {
@@ -248,99 +280,25 @@ export interface PlanQRCode {
 }
 
 /**
- * 扫码明细
+ * 品牌扫码数据
  */
-export interface ScanLog {
+export interface FlavorKingCycleBrandScanAnalysisResponse {
   /**
-   * 行ID
+   * <p>总数</p>
    */
-  LogId?: number
+  Count?: number
   /**
-   * 微信openid
+   * <p>占比</p>
    */
-  Openid?: string
+  CycleRatio?: number
   /**
-   * 微信昵称
+   * <p>环比</p>
    */
-  Nickname?: string
+  CycleOverCycle?: number
   /**
-   * 创建时间
+   * <p>占比详情</p>
    */
-  CreateTime?: string
-  /**
-   * 码
-   */
-  Code?: string
-  /**
-   * 企业ID
-   */
-  CorpId?: number
-  /**
-   * 商户ID
-   */
-  MerchantId?: string
-  /**
-   * 商品ID
-   */
-  ProductId?: string
-  /**
-   * ip地址
-   */
-  Ip?: string
-  /**
-   * 国家
-   */
-  Country?: string
-  /**
-   * 省份
-   */
-  Province?: string
-  /**
-   * 城市
-   */
-  City?: string
-  /**
-   * 县/区
-   */
-  District?: string
-  /**
-   * 微信 unionid
-   */
-  Unionid?: string
-  /**
-   * 首次扫码 0:否, 1:是
-   */
-  First?: number
-  /**
-   * 批次ID
-   */
-  BatchId?: string
-  /**
-   * 扫码类型 0:无效扫码 1: 小程序扫码 2: 商家扫码
-   */
-  Type?: number
-  /**
-   * 商户名称
-   */
-  MerchantName?: string
-  /**
-   * 产品名称
-   */
-  ProductName?: string
-  /**
-   * 产品Logo
-   */
-  ProductLogo?: string
-  /**
-   * 风险状态
-0: 未知, 1:通过, 2:失败/风险, 3:存疑
-   */
-  Status?: number
-  /**
-   * 是否开启验证
-0:否, 1:是
-   */
-  Verify?: number
+  CycleRatioItems?: Array<FlavorKingCycleBrandScanAnalysisDataItem>
 }
 
 /**
@@ -385,6 +343,48 @@ export interface CreateCorporationOrderResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 品牌扫码数据
+ */
+export interface FlavorKingCycleBrandImportantProvinceScanAnalysisCityItem {
+  /**
+   * <p>口味王分布</p>
+   */
+  Ratio?: number
+  /**
+   * <p>口味王市场份额</p>
+   */
+  MarketShare?: number
+  /**
+   * <p>其他品牌市场份额</p>
+   */
+  OtherMarketShare?: number
+  /**
+   * <p>上周期口味王分布</p>
+   */
+  LastCycleRatio?: number
+  /**
+   * <p>上周期口味王市场份额</p>
+   */
+  LastCycleMarketShare?: number
+  /**
+   * <p>上周期其他品牌市场份额</p>
+   */
+  LastCycleOtherMarketShare?: number
+  /**
+   * <p>口味王增长率</p>
+   */
+  GrowRatio?: number
+  /**
+   * <p>其他品牌增长率</p>
+   */
+  OtherGrowRatio?: number
+  /**
+   * <p>城市</p>
+   */
+  City?: string
 }
 
 /**
@@ -669,25 +669,17 @@ export interface ModifyTraceCodeRequest {
 }
 
 /**
- * DescribePlanQRCodes返回参数结构体
+ * DescribeFlavorKingCycleBrandScanMetrics请求参数结构体
  */
-export interface DescribePlanQRCodesResponse {
+export interface DescribeFlavorKingCycleBrandScanMetricsRequest {
   /**
-   * 返回码
+   * <p>CorpId</p>
    */
-  Ret?: number
+  CorpId: number
   /**
-   * 总数
+   * <p>溯源ID</p>
    */
-  Total?: number
-  /**
-   * 数据
-   */
-  Data?: Array<PlanQRCode>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  QueryDate: string
 }
 
 /**
@@ -841,6 +833,20 @@ export interface DescribeTraceDataListResponse {
 }
 
 /**
+ * DescribeFlavorKingCycleBrandProvinceCityScanAnalysis返回参数结构体
+ */
+export interface DescribeFlavorKingCycleBrandProvinceCityScanAnalysisResponse {
+  /**
+   * <p>数据</p>
+   */
+  Data?: Array<FlavorKingCycleBrandProvinceCityScanAnalysisProvinceItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ReportScanDetail返回参数结构体
  */
 export interface ReportScanDetailResponse {
@@ -934,21 +940,35 @@ export interface DescribeTraceCodesRequest {
 }
 
 /**
- * CreateTraceCodesAsync请求参数结构体
+ * DescribeFlavorKingCycleBrandScanAnalysis请求参数结构体
  */
-export interface CreateTraceCodesAsyncRequest {
+export interface DescribeFlavorKingCycleBrandScanAnalysisRequest {
   /**
-   * 企业ID
+   * <p>企业ID</p>
    */
-  CorpId?: number
+  CorpId: number
   /**
-   * 批次ID
+   * <p>日期类型</p>
    */
-  BatchId?: string
+  TypeDate: string
   /**
-   * 上传文件Key，仅支持 csv 或者 zip 类型
+   * <p>溯源ID</p>
    */
-  FileKey?: string
+  QueryDate: string
+}
+
+/**
+ * DescribeFlavorKingCycleBrandImportantProvinceUserAnalysis返回参数结构体
+ */
+export interface DescribeFlavorKingCycleBrandImportantProvinceUserAnalysisResponse {
+  /**
+   * <p>数据</p>
+   */
+  Data?: Array<FlavorKingCycleBrandImportantProvinceUserAnalysisProvinceItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -994,33 +1014,107 @@ export interface CreateCodeBatchResponse {
 }
 
 /**
- * DescribeCustomRules请求参数结构体
+ * DescribePlanQRCodes返回参数结构体
  */
-export interface DescribeCustomRulesRequest {
+export interface DescribePlanQRCodesResponse {
   /**
-   * 搜索关键字
+   * 返回码
    */
-  Keyword?: string
+  Ret?: number
   /**
-   * 条数
+   * 总数
    */
-  PageSize?: number
+  Total?: number
   /**
-   * 页数
+   * 数据
    */
-  PageNumber?: number
+  Data?: Array<PlanQRCode>
   /**
-   * 企业ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CorpId?: number
+  RequestId?: string
+}
+
+/**
+ * 品牌扫码数据
+ */
+export interface FlavorKingCycleBrandImportantCityScanAnalysisRegionItem {
   /**
-   * 码规则状态 0:未生效 1:已生效 -1:已失效
+   * <p>口味王分布</p>
    */
-  Status?: number
+  Ratio?: number
   /**
-   * 商户ID
+   * <p>口味王市场份额</p>
    */
-  MerchantId?: string
+  MarketShare?: number
+  /**
+   * <p>其他品牌市场份额</p>
+   */
+  OtherMarketShare?: number
+  /**
+   * <p>上周期口味王分布</p>
+   */
+  LastCycleRatio?: number
+  /**
+   * <p>上周期口味王市场份额</p>
+   */
+  LastCycleMarketShare?: number
+  /**
+   * <p>上周期其他品牌市场份额</p>
+   */
+  LastCycleOtherMarketShare?: number
+  /**
+   * <p>口味王增长率</p>
+   */
+  GrowRatio?: number
+  /**
+   * <p>其他品牌增长率</p>
+   */
+  OtherGrowRatio?: number
+  /**
+   * <p>区</p>
+   */
+  Region?: string
+}
+
+/**
+ * DescribePlanQRCodes请求参数结构体
+ */
+export interface DescribePlanQRCodesRequest {
+  /**
+   * 计划ID
+   */
+  PlanId: number
+  /**
+   * 开始时间
+   */
+  StartTime: string
+  /**
+   * 结束时间
+   */
+  EndTime: string
+  /**
+   * 页码
+   */
+  PageNo: number
+  /**
+   * 页大小
+   */
+  PageSize: number
+}
+
+/**
+ * DescribeFlavorKingCycleBrandProvinceScanAnalysis返回参数结构体
+ */
+export interface DescribeFlavorKingCycleBrandProvinceScanAnalysisResponse {
+  /**
+   * <p>数据</p>
+   */
+  Data?: FlavorKingCycleBrandProvinceScanAnalysisResponse
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1480,6 +1574,124 @@ export interface PackSpec {
 }
 
 /**
+ * 扫码明细
+ */
+export interface ScanLog {
+  /**
+   * 行ID
+   */
+  LogId?: number
+  /**
+   * 微信openid
+   */
+  Openid?: string
+  /**
+   * 微信昵称
+   */
+  Nickname?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 码
+   */
+  Code?: string
+  /**
+   * 企业ID
+   */
+  CorpId?: number
+  /**
+   * 商户ID
+   */
+  MerchantId?: string
+  /**
+   * 商品ID
+   */
+  ProductId?: string
+  /**
+   * ip地址
+   */
+  Ip?: string
+  /**
+   * 国家
+   */
+  Country?: string
+  /**
+   * 省份
+   */
+  Province?: string
+  /**
+   * 城市
+   */
+  City?: string
+  /**
+   * 县/区
+   */
+  District?: string
+  /**
+   * 微信 unionid
+   */
+  Unionid?: string
+  /**
+   * 首次扫码 0:否, 1:是
+   */
+  First?: number
+  /**
+   * 批次ID
+   */
+  BatchId?: string
+  /**
+   * 扫码类型 0:无效扫码 1: 小程序扫码 2: 商家扫码
+   */
+  Type?: number
+  /**
+   * 商户名称
+   */
+  MerchantName?: string
+  /**
+   * 产品名称
+   */
+  ProductName?: string
+  /**
+   * 产品Logo
+   */
+  ProductLogo?: string
+  /**
+   * 风险状态
+0: 未知, 1:通过, 2:失败/风险, 3:存疑
+   */
+  Status?: number
+  /**
+   * 是否开启验证
+0:否, 1:是
+   */
+  Verify?: number
+}
+
+/**
+ * DescribeFlavorKingCycleBrandImportantProvinceUserAnalysis请求参数结构体
+ */
+export interface DescribeFlavorKingCycleBrandImportantProvinceUserAnalysisRequest {
+  /**
+   * <p>企业ID</p>
+   */
+  CorpId: number
+  /**
+   * <p>日期类型</p>
+   */
+  TypeDate: string
+  /**
+   * <p>溯源ID</p>
+   */
+  QueryDate: string
+  /**
+   * <p>省份</p>
+   */
+  ProvinceList?: Array<string>
+}
+
+/**
  * ModifyCustomRule返回参数结构体
  */
 export interface ModifyCustomRuleResponse {
@@ -1508,6 +1720,24 @@ export interface ModifyMerchantResponse {
 }
 
 /**
+ * DescribeFlavorKingCycleBrandProvinceScanAnalysis请求参数结构体
+ */
+export interface DescribeFlavorKingCycleBrandProvinceScanAnalysisRequest {
+  /**
+   * <p>企业ID</p>
+   */
+  CorpId: number
+  /**
+   * <p>日期类型</p>
+   */
+  TypeDate: string
+  /**
+   * <p>溯源ID</p>
+   */
+  QueryDate: string
+}
+
+/**
  * DescribeCodesByPack返回参数结构体
  */
 export interface DescribeCodesByPackResponse {
@@ -1515,20 +1745,6 @@ export interface DescribeCodesByPackResponse {
    * 码列表
    */
   Codes?: Array<CodeItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateProduct返回参数结构体
- */
-export interface CreateProductResponse {
-  /**
-   * 商品ID
-   */
-  ProductId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1583,6 +1799,16 @@ export interface CreateTraceDataRequest {
    * 环节数据
    */
   PhaseData?: PhaseData
+}
+
+/**
+ * DownloadGEO返回参数结构体
+ */
+export interface DownloadGEOResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1686,6 +1912,24 @@ export interface ReportBatchCallbackStatusRequest {
 }
 
 /**
+ * 品牌扫码数据
+ */
+export interface FlavorKingCycleBrandProvinceCityScanAnalysisProvinceItem {
+  /**
+   * <p>口味王分布</p>
+   */
+  Ratio?: Array<number>
+  /**
+   * <p>下属城市明细</p>
+   */
+  Cities?: Array<FlavorKingCycleBrandProvinceCityScanAnalysisCityItem>
+  /**
+   * <p>省份</p>
+   */
+  Province?: string
+}
+
+/**
  * DescribeCodeBatches返回参数结构体
  */
 export interface DescribeCodeBatchesResponse {
@@ -1718,41 +1962,35 @@ export interface Chain {
 }
 
 /**
- * CreateProduct请求参数结构体
+ * CreateProduct返回参数结构体
  */
-export interface CreateProductRequest {
+export interface CreateProductResponse {
   /**
-   * 商品名称
+   * 商品ID
    */
-  Name: string
+  ProductId?: string
   /**
-   * 商户ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  MerchantId: string
-  /**
-   * 备注
-   */
-  Remark?: string
-  /**
-   * 商户名称
-   */
-  MerchantName?: string
-  /**
-   * 商品规格
-   */
-  Specification?: string
-  /**
-   * 商品图片
-   */
-  Logo?: Array<string>
+  RequestId?: string
+}
+
+/**
+ * CreateTraceCodesAsync请求参数结构体
+ */
+export interface CreateTraceCodesAsyncRequest {
   /**
    * 企业ID
    */
   CorpId?: number
   /**
-   * 预留字段
+   * 批次ID
    */
-  Ext?: Ext
+  BatchId?: string
+  /**
+   * 上传文件Key，仅支持 csv 或者 zip 类型
+   */
+  FileKey?: string
 }
 
 /**
@@ -1878,63 +2116,49 @@ export interface CreateCodeBatchRequest {
 }
 
 /**
- * 溯源数据项 Type 的枚举值
-
-text:文本类型, longtext:长文本类型, banner:单图片类型, image:多图片类型, video:视频类型, mp:小程序类型
-
-具体组合如下
-- Type: "text" 文本类型, 对应值 Value: "文本字符串"
-- Type: "longtext" 长文本类型, 对应值 Value: "长文本字符串, 支持换行\n"
-- Type: "banner" 单图片类型, 对应图片地址 Value: "https://sample.cdn.com/xxx.jpg"
-- Type: "image" 多图片类型, 对应图片地址 Values: ["https://sample.cdn.com/1.jpg", "https://sample.cdn.com/2.jpg"]
-- Type: "video" 视频类型, 对应视频地址 Value: "https://sample.cdn.com/xxx.mp4"
-- Type: "mp" 小程序类型, 对应配置 Values: ["WXAPPID", "WXAPP_PATH", "跳转说明"]
+ * 品牌扫码数据
  */
-export interface TraceItem {
+export interface FlavorKingCycleBrandImportantProvinceScanAnalysisProvinceItem {
   /**
-   * 字段名称
+   * <p>口味王分布</p>
    */
-  Name: string
+  Ratio?: number
   /**
-   * 字段值
+   * <p>口味王市场份额</p>
    */
-  Value: string
+  MarketShare?: number
   /**
-   * 字段类型
-text:文本类型, 
-longtext:长文本类型, banner:单图片类型, image:多图片类型,
-video:视频类型,
-mp:小程序类型
+   * <p>其他品牌市场份额</p>
    */
-  Type: string
+  OtherMarketShare?: number
   /**
-   * 多个值
+   * <p>上周期口味王分布</p>
    */
-  Values: Array<string>
+  LastCycleRatio?: number
   /**
-   * 只读
+   * <p>上周期口味王市场份额</p>
    */
-  ReadOnly?: boolean
+  LastCycleMarketShare?: number
   /**
-   * 扫码展示
+   * <p>上周期其他品牌市场份额</p>
    */
-  Hidden?: boolean
+  LastCycleOtherMarketShare?: number
   /**
-   * 类型标识
+   * <p>口味王增长率</p>
    */
-  Key?: string
+  GrowRatio?: number
   /**
-   * 扩展字段
+   * <p>其他品牌增长率</p>
    */
-  Ext?: string
+  OtherGrowRatio?: number
   /**
-   * 额外属性
+   * <p>下属城市明细</p>
    */
-  Attrs?: Array<TraceItem>
+  Cities?: Array<FlavorKingCycleBrandImportantProvinceScanAnalysisCityItem>
   /**
-   * 子页面，只读
+   * <p>省份</p>
    */
-  List?: Array<TraceData>
+  Province?: string
 }
 
 /**
@@ -1949,6 +2173,60 @@ export interface DescribeCustomRuleByIdRequest {
    * 企业ID
    */
   CorpId?: number
+}
+
+/**
+ * 扫码信息
+ */
+export interface ScanDetailItem {
+  /**
+   * <p>用户ID，也可以为手机号</p>
+   */
+  Uid: string
+  /**
+   * <p>时间</p><p>参数格式：YYYYMMDDHHMMSS</p>
+   */
+  Time: string
+  /**
+   * <p>省</p>
+   */
+  ProvinceName: string
+  /**
+   * <p>市</p>
+   */
+  CityName: string
+  /**
+   * <p>区</p>
+   */
+  RegionName: string
+  /**
+   * <p>品牌</p>
+   */
+  BrandName: string
+  /**
+   * <p>品规</p>
+   */
+  SpecName?: string
+  /**
+   * <p>IP，可选，需符合IP格式</p>
+   */
+  IP?: string
+  /**
+   * <p>码</p>
+   */
+  Code?: string
+  /**
+   * <p>Uid扩展字段</p>
+   */
+  ExtUid?: string
+  /**
+   * <p>维度</p><p>取值范围：[-90, 90]</p>
+   */
+  Latitude?: number
+  /**
+   * <p>精度</p><p>取值范围：[-180, 180]</p>
+   */
+  Longitude?: number
 }
 
 /**
@@ -2036,35 +2314,38 @@ export interface PhaseData {
 }
 
 /**
- * DescribeRawScanLogs请求参数结构体
+ * 品牌扫码数据
  */
-export interface DescribeRawScanLogsRequest {
+export interface FlavorKingCycleBrandScanAnalysisDataItem {
   /**
-   * 企业ID, 默认为当前企业
-如果有渠道权限，可以传 0 会查渠道下所有的企业
+   * <p>周期时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CorpId?: number
+  Duration?: string
   /**
-   * 分页数量，默认为 20，最大为 1000
+   * <p>品牌</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageSize?: number
+  BrandName?: string
   /**
-   * 当前分页，默认为 1
+   * <p>品牌占比</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageNumber?: number
+  Ratio?: number
+}
+
+/**
+ * DescribeFlavorKingCycleBrandImportantProvinceScanAnalysis返回参数结构体
+ */
+export interface DescribeFlavorKingCycleBrandImportantProvinceScanAnalysisResponse {
   /**
-   * 从哪个日志后查询
-即: LogId > $AfterLogId
+   * <p>数据</p>
    */
-  AfterLogId?: number
+  Data?: Array<FlavorKingCycleBrandImportantProvinceScanAnalysisProvinceItem>
   /**
-   * 开始时间 >= StartTime
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  StartTime?: string
-  /**
-   * 结束时间 < EndTime
-   */
-  EndTime?: string
+  RequestId?: string
 }
 
 /**
@@ -2246,6 +2527,52 @@ export interface OutputAuthorizedTransfer {
 }
 
 /**
+ * 品牌扫码数据
+ */
+export interface FlavorKingCycleBrandImportantCityScanAnalysisCityItem {
+  /**
+   * <p>口味王分布</p>
+   */
+  Ratio?: number
+  /**
+   * <p>口味王市场份额</p>
+   */
+  MarketShare?: number
+  /**
+   * <p>其他品牌市场份额</p>
+   */
+  OtherMarketShare?: number
+  /**
+   * <p>上周期口味王分布</p>
+   */
+  LastCycleRatio?: number
+  /**
+   * <p>上周期口味王牌市场份额</p>
+   */
+  LastCycleMarketShare?: number
+  /**
+   * <p>上周期其他品牌市场份额</p>
+   */
+  LastCycleOtherMarketShare?: number
+  /**
+   * <p>口味王增长率</p>
+   */
+  GrowRatio?: number
+  /**
+   * <p>其他品牌增长率</p>
+   */
+  OtherGrowRatio?: number
+  /**
+   * <p>下属城市明细</p>
+   */
+  Regions?: Array<FlavorKingCycleBrandImportantCityScanAnalysisRegionItem>
+  /**
+   * <p>城市</p>
+   */
+  City?: string
+}
+
+/**
  * DeleteTraceData返回参数结构体
  */
 export interface DeleteTraceDataResponse {
@@ -2292,6 +2619,28 @@ export interface CreateCodePackResponse {
 }
 
 /**
+ * DescribeFlavorKingCycleBrandImportantProvinceScanAnalysis请求参数结构体
+ */
+export interface DescribeFlavorKingCycleBrandImportantProvinceScanAnalysisRequest {
+  /**
+   * <p>企业ID</p>
+   */
+  CorpId: number
+  /**
+   * <p>日期类型</p>
+   */
+  TypeDate: string
+  /**
+   * <p>溯源ID</p>
+   */
+  QueryDate: string
+  /**
+   * <p>省份</p>
+   */
+  ProvinceList?: Array<string>
+}
+
+/**
  * DescribeMerchantById返回参数结构体
  */
 export interface DescribeMerchantByIdResponse {
@@ -2303,6 +2652,84 @@ export interface DescribeMerchantByIdResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 品牌扫码数据
+ */
+export interface FlavorKingCycleBrandProvinceCityScanAnalysisCityItem {
+  /**
+   * <p>口味王分布</p>
+   */
+  Ratio?: Array<number>
+  /**
+   * <p>分区域数据</p>
+   */
+  Regions?: Array<FlavorKingCycleBrandProvinceCityScanAnalysisRegionItem>
+  /**
+   * <p>城市</p>
+   */
+  City?: string
+}
+
+/**
+ * 溯源数据项 Type 的枚举值
+
+text:文本类型, longtext:长文本类型, banner:单图片类型, image:多图片类型, video:视频类型, mp:小程序类型
+
+具体组合如下
+- Type: "text" 文本类型, 对应值 Value: "文本字符串"
+- Type: "longtext" 长文本类型, 对应值 Value: "长文本字符串, 支持换行\n"
+- Type: "banner" 单图片类型, 对应图片地址 Value: "https://sample.cdn.com/xxx.jpg"
+- Type: "image" 多图片类型, 对应图片地址 Values: ["https://sample.cdn.com/1.jpg", "https://sample.cdn.com/2.jpg"]
+- Type: "video" 视频类型, 对应视频地址 Value: "https://sample.cdn.com/xxx.mp4"
+- Type: "mp" 小程序类型, 对应配置 Values: ["WXAPPID", "WXAPP_PATH", "跳转说明"]
+ */
+export interface TraceItem {
+  /**
+   * 字段名称
+   */
+  Name: string
+  /**
+   * 字段值
+   */
+  Value: string
+  /**
+   * 字段类型
+text:文本类型, 
+longtext:长文本类型, banner:单图片类型, image:多图片类型,
+video:视频类型,
+mp:小程序类型
+   */
+  Type: string
+  /**
+   * 多个值
+   */
+  Values: Array<string>
+  /**
+   * 只读
+   */
+  ReadOnly?: boolean
+  /**
+   * 扫码展示
+   */
+  Hidden?: boolean
+  /**
+   * 类型标识
+   */
+  Key?: string
+  /**
+   * 扩展字段
+   */
+  Ext?: string
+  /**
+   * 额外属性
+   */
+  Attrs?: Array<TraceItem>
+  /**
+   * 子页面，只读
+   */
+  List?: Array<TraceData>
 }
 
 /**
@@ -2338,6 +2765,11 @@ export interface CodeItem {
    */
   Code?: string
 }
+
+/**
+ * DownloadGEO请求参数结构体
+ */
+export type DownloadGEORequest = null
 
 /**
  * CreateTraceData返回参数结构体
@@ -2572,29 +3004,71 @@ export interface RawScanLog {
 }
 
 /**
- * DescribePlanQRCodes请求参数结构体
+ * DescribeCustomRules请求参数结构体
  */
-export interface DescribePlanQRCodesRequest {
+export interface DescribeCustomRulesRequest {
   /**
-   * 计划ID
+   * 搜索关键字
    */
-  PlanId: number
+  Keyword?: string
   /**
-   * 开始时间
+   * 条数
    */
-  StartTime: string
+  PageSize?: number
   /**
-   * 结束时间
+   * 页数
    */
-  EndTime: string
+  PageNumber?: number
   /**
-   * 页码
+   * 企业ID
    */
-  PageNo: number
+  CorpId?: number
   /**
-   * 页大小
+   * 码规则状态 0:未生效 1:已生效 -1:已失效
    */
-  PageSize: number
+  Status?: number
+  /**
+   * 商户ID
+   */
+  MerchantId?: string
+}
+
+/**
+ * CreateProduct请求参数结构体
+ */
+export interface CreateProductRequest {
+  /**
+   * 商品名称
+   */
+  Name: string
+  /**
+   * 商户ID
+   */
+  MerchantId: string
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 商户名称
+   */
+  MerchantName?: string
+  /**
+   * 商品规格
+   */
+  Specification?: string
+  /**
+   * 商品图片
+   */
+  Logo?: Array<string>
+  /**
+   * 企业ID
+   */
+  CorpId?: number
+  /**
+   * 预留字段
+   */
+  Ext?: Ext
 }
 
 /**
@@ -2605,6 +3079,20 @@ export interface CreateChainBatchResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 品牌扫码数据
+ */
+export interface FlavorKingCycleBrandScanMetricsItem {
+  /**
+   * <p>日期范围</p>
+   */
+  Duration?: string
+  /**
+   * <p>口味王分布</p>
+   */
+  Ratio?: number
 }
 
 /**
@@ -2897,6 +3385,24 @@ export interface DescribeCodeBatchesRequest {
    * 批次状态 0: 未激活 1: 已激活 -1: 已冻结
    */
   Status?: number
+}
+
+/**
+ * DescribeFlavorKingCycleBrandImportantCityScanAnalysis请求参数结构体
+ */
+export interface DescribeFlavorKingCycleBrandImportantCityScanAnalysisRequest {
+  /**
+   * <p>企业ID</p>
+   */
+  CorpId: number
+  /**
+   * <p>日期类型</p>
+   */
+  TypeDate: string
+  /**
+   * <p>溯源ID</p>
+   */
+  QueryDate: string
 }
 
 /**
@@ -3221,6 +3727,20 @@ export interface ChainValue {
 }
 
 /**
+ * DescribeFlavorKingCycleBrandProvinceCityScanAnalysis请求参数结构体
+ */
+export interface DescribeFlavorKingCycleBrandProvinceCityScanAnalysisRequest {
+  /**
+   * <p>CorpId</p>
+   */
+  CorpId: number
+  /**
+   * <p>溯源ID</p>
+   */
+  QueryDate: string
+}
+
+/**
  * DeleteMerchant返回参数结构体
  */
 export interface DeleteMerchantResponse {
@@ -3263,6 +3783,34 @@ export interface CreateTraceChainRequest {
 }
 
 /**
+ * DescribeFlavorKingCycleBrandScanMetrics返回参数结构体
+ */
+export interface DescribeFlavorKingCycleBrandScanMetricsResponse {
+  /**
+   * <p>数据</p>
+   */
+  Data?: Array<FlavorKingCycleBrandScanMetricsItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeFlavorKingCycleBrandScanAnalysis返回参数结构体
+ */
+export interface DescribeFlavorKingCycleBrandScanAnalysisResponse {
+  /**
+   * <p>响应</p>
+   */
+  Data?: FlavorKingCycleBrandScanAnalysisResponse
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeMerchantById请求参数结构体
  */
 export interface DescribeMerchantByIdRequest {
@@ -3277,45 +3825,17 @@ export interface DescribeMerchantByIdRequest {
 }
 
 /**
- * 扫码信息
+ * DescribeFlavorKingCycleBrandImportantCityScanAnalysis返回参数结构体
  */
-export interface ScanDetailItem {
+export interface DescribeFlavorKingCycleBrandImportantCityScanAnalysisResponse {
   /**
-   * <p>用户ID，也可以为手机号</p>
+   * <p>数据</p>
    */
-  Uid: string
+  Data?: Array<FlavorKingCycleBrandImportantCityScanAnalysisCityItem>
   /**
-   * <p>时间</p><p>参数格式：YYYYMMDDHHMMSS</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Time: string
-  /**
-   * <p>省</p>
-   */
-  ProvinceName: string
-  /**
-   * <p>市</p>
-   */
-  CityName: string
-  /**
-   * <p>区</p>
-   */
-  RegionName: string
-  /**
-   * <p>品牌</p>
-   */
-  BrandName: string
-  /**
-   * <p>品规</p>
-   */
-  SpecName?: string
-  /**
-   * <p>IP，可选，需符合IP格式</p>
-   */
-  IP?: string
-  /**
-   * <p>码</p>
-   */
-  Code?: string
+  RequestId?: string
 }
 
 /**
@@ -3344,6 +3864,32 @@ export interface DescribeProductByIdResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 品牌扫码数据
+ */
+export interface FlavorKingCycleBrandProvinceScanAnalysisResponse {
+  /**
+   * <p>口味王全国份额</p>
+   */
+  MarketShare?: number
+  /**
+   * <p>上周期口味王市场份额</p>
+   */
+  LastCycleMarketShare?: number
+  /**
+   * <p>口味王全国周环比</p>
+   */
+  Provinces?: Array<FlavorKingCycleBrandProvinceScanAnalysisDataItem>
+  /**
+   * <p>口味王环比</p>
+   */
+  GrowRatio?: number
+  /**
+   * <p>其他品牌环比</p>
+   */
+  OtherGrowRatio?: number
 }
 
 /**
@@ -3386,6 +3932,48 @@ export interface DescribeCodePacksRequest {
    * 码包状态
    */
   Status?: string
+}
+
+/**
+ * 品牌扫码数据
+ */
+export interface FlavorKingCycleBrandProvinceScanAnalysisDataItem {
+  /**
+   * <p>口味王市场份额</p>
+   */
+  MarketShare?: number
+  /**
+   * <p>其他品牌市场份额</p>
+   */
+  OtherMarketShare?: number
+  /**
+   * <p>上周期口味王市场份额</p>
+   */
+  LastCycleMarketShare?: number
+  /**
+   * <p>上周期其他品牌市场份额</p>
+   */
+  OtherLastCycleMarketShare?: number
+  /**
+   * <p>口味王分布</p>
+   */
+  Ratio?: number
+  /**
+   * <p>上周期口味王分布</p>
+   */
+  LastCycleRatio?: number
+  /**
+   * <p>省份</p>
+   */
+  Province?: string
+  /**
+   * <p>口味王环比</p>
+   */
+  GrowRatio?: number
+  /**
+   * <p>其他平台环比</p>
+   */
+  OtherGrowRatio?: number
 }
 
 /**
@@ -3432,6 +4020,36 @@ export interface DescribeTraceCodeByIdRequest {
    * 二维码
    */
   Code?: string
+}
+
+/**
+ * 品牌扫码数据
+ */
+export interface FlavorKingCycleBrandImportantProvinceUserAnalysisProvinceItem {
+  /**
+   * <p>口味王市场份额</p>
+   */
+  MarketShare?: number
+  /**
+   * <p>其他品牌市场份额</p>
+   */
+  OtherMarketShare?: number
+  /**
+   * <p>口味王增长率</p>
+   */
+  GrowRatio?: number
+  /**
+   * <p>其他品牌增长率</p>
+   */
+  OtherGrowRatio?: number
+  /**
+   * <p>下属城市明细</p>
+   */
+  Cities?: Array<FlavorKingCycleBrandImportantProvinceUserAnalysisCityItem>
+  /**
+   * <p>省份</p>
+   */
+  Province?: string
 }
 
 /**
@@ -3483,6 +4101,20 @@ export interface PlanQRCodeRecord {
 }
 
 /**
+ * 品牌扫码数据
+ */
+export interface FlavorKingCycleBrandProvinceCityScanAnalysisRegionItem {
+  /**
+   * <p>口味王分布</p>
+   */
+  Ratio?: Array<number>
+  /**
+   * <p>区域</p>
+   */
+  Region?: string
+}
+
+/**
  * ModifyTraceCode返回参数结构体
  */
 export interface ModifyTraceCodeResponse {
@@ -3490,6 +4122,32 @@ export interface ModifyTraceCodeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 品牌扫码数据
+ */
+export interface FlavorKingCycleBrandImportantProvinceUserAnalysisCityItem {
+  /**
+   * <p>口味王市场份额</p>
+   */
+  MarketShare?: number
+  /**
+   * <p>其他品牌市场份额</p>
+   */
+  OtherMarketShare?: number
+  /**
+   * <p>口味王增长率</p>
+   */
+  GrowRatio?: number
+  /**
+   * <p>其他品牌增长率</p>
+   */
+  OtherGrowRatio?: number
+  /**
+   * <p>城市</p>
+   */
+  City?: string
 }
 
 /**

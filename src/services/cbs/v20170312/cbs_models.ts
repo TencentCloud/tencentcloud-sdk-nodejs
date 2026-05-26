@@ -174,62 +174,62 @@ DescribeDiskAssociatedAutoSnapshotPolicy场景下该字段返回为空。
 }
 
 /**
- * 描述购买云盘时的费用明细。
+ * 描述购买云硬盘时的费用明细。
  */
 export interface DetailPrice {
   /**
-   * 描述计费项目名称。
-   */
-  PriceTitle?: string
-  /**
-   * 描述计费项目显示名称，用户控制台展示。
-   */
-  PriceName?: string
-  /**
-   * 预付费云盘预支费用的原价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OriginalPrice?: number
-  /**
-   * 预付费云盘预支费用的折扣价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DiscountPrice?: number
-  /**
-   * 后付费云盘原单价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UnitPrice?: number
-  /**
-   * 后付费云盘折扣单价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UnitPriceDiscount?: number
-  /**
-   * 后付费云盘的计价单元，取值范围：HOUR：表示后付费云盘的计价单元是按小时计算。
+   * 后付费云硬盘的计价单元，取值范围：HOUR：表示后付费云硬盘的计价单元是按小时计算。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ChargeUnit?: string
   /**
-   * 高精度预付费云盘预支费用的原价，单位：元。
+   * 预付费云硬盘预支费用的折扣价，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OriginalPriceHigh?: string
+  DiscountPrice?: number
   /**
-   * 高精度预付费云盘预支费用的折扣价，单位：元。
+   * 高精度预付费云硬盘预支费用的折扣价，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiscountPriceHigh?: string
   /**
-   * 高精度后付费云盘原单价，单位：元。
+   * 预付费云硬盘预支费用的原价，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UnitPriceHigh?: string
+  OriginalPrice?: number
   /**
-   * 高精度后付费云盘折扣单价，单位：元。
+   * 高精度预付费云硬盘预支费用的原价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginalPriceHigh?: string
+  /**
+   * 描述计费项目名称
+   */
+  PriceName?: string
+  /**
+   * 描述计费项目显示名称，用户控制台展示
+   */
+  PriceTitle?: string
+  /**
+   * 后付费云硬盘原单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnitPrice?: number
+  /**
+   * 后付费云硬盘折扣单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnitPriceDiscount?: number
+  /**
+   * 高精度后付费云硬盘折扣单价，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UnitPriceDiscountHigh?: string
+  /**
+   * 高精度后付费云硬盘原单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnitPriceHigh?: string
 }
 
 /**
@@ -1238,6 +1238,20 @@ export interface Placement {
    */
   CageId?: string
   /**
+   * 实例所属的独享集群ID。可通过 [DescribeDiskStoragePool](https://cloud.tencent.com/document/api/362/62143) 获取。作为入参时，表示对指定的CdcId独享集群的资源进行操作，可为空。 作为出参时，表示资源所属的独享集群的ID，可为空。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CdcId?: string
+  /**
+   * 独享集群名字。作为入参时，忽略。作为出参时，表示云硬盘所属的独享集群名，可为空。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CdcName?: string
+  /**
+   * 独享集群id。
+   */
+  DedicatedClusterId?: string
+  /**
    * 实例所属项目ID，可通过DescribeProject获取。不填默认为0，表示默认项目。
    */
   ProjectId?: number
@@ -1246,20 +1260,6 @@ export interface Placement {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectName?: string
-  /**
-   * 独享集群名字。作为入参时，忽略。作为出参时，表示云硬盘所属的独享集群名，可为空。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CdcName?: string
-  /**
-   * 实例所属的独享集群ID。可通过 [DescribeDiskStoragePool](https://cloud.tencent.com/document/api/362/62143) 获取。作为入参时，表示对指定的CdcId独享集群的资源进行操作，可为空。 作为出参时，表示资源所属的独享集群的ID，可为空。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CdcId?: string
-  /**
-   * 独享集群id。
-   */
-  DedicatedClusterId?: string
 }
 
 /**
@@ -2583,54 +2583,54 @@ export interface CreateSnapshotGroupResponse {
 }
 
 /**
- * 描述预付费或后付费云盘的价格。
+ * 描述预付费或后付费云硬盘的价格。
  */
 export interface Price {
   /**
-   * 后付费云盘折扣单价，单位：元。
+   * 后付费云硬盘的计价单元，取值范围：HOUR：表示后付费云硬盘的计价单元是按小时计算。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  UnitPriceDiscount?: number
+  ChargeUnit?: string
   /**
-   * 预付费云盘预支费用的折扣价，单位：元。
+   * 预付费云硬盘预支费用的折扣价，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiscountPrice?: number
   /**
-   * 后付费云盘原单价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UnitPrice?: number
-  /**
-   * 高精度后付费云盘原单价, 单位：元
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UnitPriceHigh?: string
-  /**
-   * 高精度预付费云盘预支费用的原价, 单位：元	。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OriginalPriceHigh?: string
-  /**
-   * 预付费云盘预支费用的原价，单位：元。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OriginalPrice?: number
-  /**
-   * 高精度预付费云盘预支费用的折扣价, 单位：元
+   * 高精度预付费云硬盘预支费用的折扣价，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiscountPriceHigh?: string
   /**
-   * 高精度后付费云盘折扣单价, 单位：元
+   * 预付费云硬盘预支费用的原价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginalPrice?: number
+  /**
+   * 高精度预付费云硬盘预支费用的原价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OriginalPriceHigh?: string
+  /**
+   * 后付费云硬盘原单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnitPrice?: number
+  /**
+   * 后付费云硬盘折扣单价，单位：元。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnitPriceDiscount?: number
+  /**
+   * 高精度后付费云硬盘折扣单价，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UnitPriceDiscountHigh?: string
   /**
-   * 后付费云盘的计价单元，取值范围：<br><li>HOUR：表示后付费云盘的计价单元是按小时计算。</li>
+   * 高精度后付费云硬盘原单价，单位：元。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ChargeUnit?: string
+  UnitPriceHigh?: string
 }
 
 /**

@@ -3979,28 +3979,6 @@ export interface CreateAclRuleResponse {
 }
 
 /**
- * Table、Topic路由
- */
-export interface TableMapping {
-  /**
-   * 库名
-   */
-  Database: string
-  /**
-   * 表名，多个表,（逗号）隔开
-   */
-  Table: string
-  /**
-   * Topic名称
-   */
-  Topic: string
-  /**
-   * Topic ID
-   */
-  TopicId: string
-}
-
-/**
  * FetchDatahubMessageByOffset返回参数结构体
  */
 export interface FetchDatahubMessageByOffsetResponse {
@@ -4171,20 +4149,6 @@ export interface CreateCdcClusterRequest {
    * 系统盘类型
    */
   SystemDiskType: string
-}
-
-/**
- * DeleteTopicIpWhiteList返回参数结构体
- */
-export interface DeleteTopicIpWhiteListResponse {
-  /**
-   * 删除主题IP白名单结果
-   */
-  Result?: JgwOperateResponse
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -6104,21 +6068,25 @@ export interface DescribeTopicSubscribeGroupRequest {
 }
 
 /**
- * DeleteGroupSubscribeTopic请求参数结构体
+ * Table、Topic路由
  */
-export interface DeleteGroupSubscribeTopicRequest {
+export interface TableMapping {
   /**
-   * ckafka集群实例Id
+   * 库名
    */
-  InstanceId: string
+  Database: string
   /**
-   * 消费分组名称
+   * 表名，多个表,（逗号）隔开
    */
-  Group: string
+  Table: string
   /**
-   * 主题名
+   * Topic名称
    */
   Topic: string
+  /**
+   * Topic ID
+   */
+  TopicId: string
 }
 
 /**
@@ -6392,25 +6360,21 @@ export interface DeleteInstancePreRequest {
 }
 
 /**
- * ClickHouse的Schema
+ * DeleteGroupSubscribeTopic请求参数结构体
  */
-export interface ClickHouseSchema {
+export interface DeleteGroupSubscribeTopicRequest {
   /**
-   * 表的列名
+   * ckafka集群实例Id
    */
-  ColumnName: string
+  InstanceId: string
   /**
-   * 该列对应的jsonKey名
+   * 消费分组名称
    */
-  JsonKey: string
+  Group: string
   /**
-   * 表列项的类型
+   * 主题名
    */
-  Type: string
-  /**
-   * 列项是否允许为空
-   */
-  AllowNull: boolean
+  Topic: string
 }
 
 /**
@@ -8234,6 +8198,28 @@ export interface DeleteGroupRequest {
 }
 
 /**
+ * ClickHouse的Schema
+ */
+export interface ClickHouseSchema {
+  /**
+   * 表的列名
+   */
+  ColumnName: string
+  /**
+   * 该列对应的jsonKey名
+   */
+  JsonKey: string
+  /**
+   * 表列项的类型
+   */
+  Type: string
+  /**
+   * 列项是否允许为空
+   */
+  AllowNull: boolean
+}
+
+/**
  * DescribeConnectResource请求参数结构体
  */
 export interface DescribeConnectResourceRequest {
@@ -9298,24 +9284,6 @@ export interface SecondaryAnalyseParam {
    * 分隔符
    */
   Regex: string
-}
-
-/**
- * DeleteTopicIpWhiteList请求参数结构体
- */
-export interface DeleteTopicIpWhiteListRequest {
-  /**
-   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
-   */
-  InstanceId: string
-  /**
-   * 主题名，可通过[DescribeTopic](https://cloud.tencent.com/document/product/597/40847)接口获取。
-   */
-  TopicName: string
-  /**
-   * ip白名单列表
-   */
-  IpWhiteList: Array<string>
 }
 
 /**

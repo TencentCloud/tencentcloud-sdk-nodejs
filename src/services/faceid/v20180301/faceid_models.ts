@@ -1022,6 +1022,110 @@ export interface IntentionActionResultDetail {
 }
 
 /**
+ * GetWxNFCResult返回参数结构体
+ */
+export interface GetWxNFCResultResponse {
+  /**
+   * <p>NFC计费结果码，NFC识读成功一次则计费一次（同一个NFC请求重复拉取结果不会重复计费）。计费结果码取值范围：<br>  0：识读成功，计费<br>-1：识读失败，不计费</p>
+   */
+  ResultCode?: string
+  /**
+   * <p>身份证号</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdNum?: string
+  /**
+   * <p>姓名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * <p>证件中的人像照片</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Picture?: string
+  /**
+   * <p>身份类证件正面照片（人像面）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdCardFrontImg?: string
+  /**
+   * <p>身份类证件背面照片（国徽面）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdCardBackImg?: string
+  /**
+   * <p>出生日期</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BirthDate?: string
+  /**
+   * <p>有效期起始时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BeginTime?: string
+  /**
+   * <p>有效期结束时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndTime?: string
+  /**
+   * <p>住址</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Address?: string
+  /**
+   * <p>民族</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Nation?: string
+  /**
+   * <p>性别</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Sex?: string
+  /**
+   * <p>证件类型</p><p>枚举值：</p><ul><li>01： 身份证</li><li>03： 中国护照</li><li>06： 港澳通行证</li><li>07： 台胞证</li><li>08： 外国护照</li><li>13： 外国人永久居留证</li><li>14： 港澳台居民居住证</li><li>15： 回乡证</li><li>16： 大陆居民来往台湾通行证</li><li>99： 其他证件</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdType?: string
+  /**
+   * <p>英文姓名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnName?: string
+  /**
+   * <p>签发机关</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SigningOrganization?: string
+  /**
+   * <p>港澳台居民居住证，通行证号码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OtherIdNum?: string
+  /**
+   * <p>旅行证件国籍</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Nationality?: string
+  /**
+   * <p>旅行证件机读区第二行 29~42 位</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PersonalNumber?: string
+  /**
+   * <p>证件的验真结果</p><ul><li>JSON格式如下： {&quot;result_issuer &quot;:&quot;签发者证书合法性验证结果 &quot;,&quot;result_paper&quot;:&quot;证件安全对象合法性验证结果 &quot;,&quot;result_data&quot; :&quot;防数据篡改验证结果 &quot;,&quot;result_chip&quot; :&quot;防证书件芯片被复制验证结果&quot;} 。 - 取值范围： 0:验证通过，1: 验证不通过，2: 未验证，3:部分通过，当4项核验结果都为0时，表示证件为真。</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckMRTD?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * MinorsVerification请求参数结构体
  */
 export interface MinorsVerificationRequest {
@@ -1434,6 +1538,16 @@ export interface BankCardVerificationRequest {
 - 对传入信息（姓名、身份证号、银行卡号）有加密需求的用户可使用此参数，详情请点击左侧链接。
    */
   Encryption?: Encryption
+}
+
+/**
+ * GetWxNFCResult请求参数结构体
+ */
+export interface GetWxNFCResultRequest {
+  /**
+   * <p>前端 NFC SDK返回的唯一标识ID</p>
+   */
+  NFCToken: string
 }
 
 /**
@@ -3088,6 +3202,20 @@ export interface BankCard4EVerificationRequest {
 }
 
 /**
+ * GetNFCToken返回参数结构体
+ */
+export interface GetNFCTokenResponse {
+  /**
+   * NFCToken
+   */
+  Token?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetActionSequence返回参数结构体
  */
 export interface GetActionSequenceResponse {
@@ -3101,6 +3229,11 @@ export interface GetActionSequenceResponse {
    */
   RequestId?: string
 }
+
+/**
+ * GetNFCToken请求参数结构体
+ */
+export type GetNFCTokenRequest = null
 
 /**
  * GetFaceIdRiskInfo请求参数结构体

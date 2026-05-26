@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateAccelerateAreasResponse,
+  DescribeTaskResultResponse,
   DescribeListenersResponse,
   ModifyListenerResponse,
   DescribeForwardingRuleRequest,
@@ -30,6 +31,7 @@ import {
   CreateListenerResponse,
   CreateGlobalAcceleratorRequest,
   DescribeCrossBorderSettlementRequest,
+  IpAddressInfoSet,
   DescribeGlobalAcceleratorsRequest,
   DescribeAccelerateAreasRequest,
   ModifyAccelerateAreasRequest,
@@ -51,7 +53,7 @@ import {
   DescribeEndpointGroupsRequest,
   CreateAccelerateAreasRequest,
   CreateListenerRequest,
-  IpAddressInfoSet,
+  DescribeTaskResultRequest,
   ModifyForwardingRuleResponse,
   DeleteForwardingRuleRequest,
   ListenerSet,
@@ -187,6 +189,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEndpointGroupsResponse) => void
   ): Promise<DescribeEndpointGroupsResponse> {
     return this.request("DescribeEndpointGroups", req, cb)
+  }
+
+  /**
+   * 查询异步任务结果
+   */
+  async DescribeTaskResult(
+    req: DescribeTaskResultRequest,
+    cb?: (error: string, rep: DescribeTaskResultResponse) => void
+  ): Promise<DescribeTaskResultResponse> {
+    return this.request("DescribeTaskResult", req, cb)
   }
 
   /**

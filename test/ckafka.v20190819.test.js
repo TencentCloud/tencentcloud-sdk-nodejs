@@ -608,16 +608,6 @@ it("ckafka.v20190819.CreateInstancePre", async function () {
     }
 })
 
-it("ckafka.v20190819.DeleteTopicIpWhiteList", async function () {
-    try {
-       const data = await client.DeleteTopicIpWhiteList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ckafka.v20190819.DescribeTaskStatus", async function () {
     try {
        const data = await client.DescribeTaskStatus({})

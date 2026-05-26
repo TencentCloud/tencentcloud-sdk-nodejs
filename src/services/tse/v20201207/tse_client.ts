@@ -19,11 +19,13 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeNacosReplicasRequest,
+  CreateConfigFileGroupRequest,
   DeleteWafDomainsRequest,
   DescribeCloudNativeAPIGatewayNodesRequest,
   GovernanceAlias,
   DescribeCloudNativeAPIGatewayUpstreamRequest,
   Metadata,
+  RemoveCloudNativeAPIGatewayConsumerGroupAuthResponse,
   DescribeUpstreamHealthCheckConfigRequest,
   KeyValue,
   CreateNativeGatewayServerGroupRequest,
@@ -34,7 +36,8 @@ import {
   DeleteGovernanceLaneGroup,
   DescribeCloudNativeAPIGatewayNodesResponse,
   CreateCloudNativeAPIGatewayResponse,
-  DescribeUpstreamHealthCheckConfigResponse,
+  ModifyCloudNativeAPIGatewayLLMModelServiceRequest,
+  CNAPIGwConsumerGroupList,
   NetworkAccessControl,
   DescribePublicNetworkResult,
   DescribeGovernanceLaneGroupsResponse,
@@ -45,8 +48,12 @@ import {
   PublicAddressConfig,
   SREInstance,
   DescribeCloudNativeAPIGatewayServicesRequest,
+  CreateCloudNativeAPIGatewayLLMModelAPIRequest,
   GovernanceServiceDestination,
+  DescribeCloudNativeAPIGatewayConsumerListRequest,
+  CreateCloudNativeAPIGatewayConsumerRequest,
   CreateCloudNativeAPIGatewayCanaryRuleResponse,
+  CloudNativeAPIGatewayLLMModelAPI,
   DeleteGovernanceNamespacesResponse,
   Label,
   DescribeCloudNativeAPIGatewayRoutesResponse,
@@ -56,6 +63,7 @@ import {
   DescribeCloudNativeAPIGatewayResult,
   PolarisCLSTopicInfo,
   DeleteCloudNativeAPIGatewayRouteResponse,
+  DeleteCloudNativeAPIGatewayLLMModelServiceResponse,
   DeleteCloudNativeAPIGatewayServiceRateLimitRequest,
   CloudAPIGatewayCanaryRuleList,
   ModifyUpstreamNodeStatusRequest,
@@ -69,9 +77,11 @@ import {
   KVMapping,
   CloudNativeAPIGatewayStrategyCronScalerConfigParam,
   EnvInfo,
+  ModifyCloudNativeAPIGatewayConsumerResponse,
   DeleteGovernanceInstancesRequest,
   ConfigFileTemplate,
   CloudNativeAPIGatewayStrategy,
+  CloudNativeAPIGatewayLLMModelFallbackRule,
   UpdateEngineInternetAccessResponse,
   DeleteCloudNativeAPIGatewayRouteRateLimitRequest,
   AutoScalerBehavior,
@@ -89,14 +99,17 @@ import {
   ConfigFilePersistent,
   DeleteCloudNativeAPIGatewayPublicNetworkRequest,
   ReleaseVersion,
+  DeleteEngineResponse,
   CreateConfigFileGroupResponse,
   CreateGovernanceAliasRequest,
   ModifyCloudNativeAPIGatewayServiceRequest,
   DescribeAutoScalerResourceStrategyBindingGroupsRequest,
   DescribeWafProtectionRequest,
   DescribeAutoScalerResourceStrategiesRequest,
+  LimitRule,
   RuleFilter,
   DeleteCloudNativeAPIGatewayCORSRequest,
+  DeleteCloudNativeAPIGatewayConsumerRequest,
   DescribeGovernanceInstancesRequest,
   DescribeGovernanceServiceContractsRequest,
   GovernanceInstanceUpdate,
@@ -110,6 +123,7 @@ import {
   CloudNativeAPIGatewayCanaryRuleCondition,
   DescribeGovernanceNamespacesRequest,
   DescribeSREInstancesResponse,
+  DescribeCloudNativeAPIGatewayConsumerGroupResponse,
   AutoScalerRules,
   GovernanceInterfaceDescription,
   CreateCloudNativeAPIGatewayServiceRateLimitRequest,
@@ -118,7 +132,9 @@ import {
   DescribeWafDomainsResponse,
   DescribeSREInstanceAccessAddressRequest,
   ModifyGovernanceLaneGroupsRequest,
+  DescribeUpstreamHealthCheckConfigResponse,
   ModifyGovernanceInstancesResponse,
+  DescribeCloudNativeAPIGatewayLLMModelServicesResponse,
   DeleteCloudNativeAPIGatewayPublicNetworkResponse,
   CreateOrUpdateConfigFileAndReleaseRequest,
   ApolloEnvParam,
@@ -128,8 +144,10 @@ import {
   DescribeConfigFileGroupsResponse,
   CloudNativeAPIGatewayStrategyCronScalerConfig,
   UpdateEngineInternetAccessRequest,
+  DescribeCloudNativeAPIGatewayConsumerGroupListResponse,
   DeleteNativeGatewayServerGroupResponse,
   ModifyCloudNativeAPIGatewayCertificateResponse,
+  AIGWFallbackServiceItem,
   DescribeCloudNativeAPIGatewayIPRestrictionRequest,
   DescribeSREInstanceAccessAddressResponse,
   CreateConfigFileRequest,
@@ -137,16 +155,22 @@ import {
   DescribeConfigFilesResponse,
   DescribeCloudNativeAPIGatewayServicesResponse,
   CreateNativeGatewayServiceSourceRequest,
+  AIGWKVMatch,
   CreateGovernanceLaneGroupsRequest,
   ListCloudNativeAPIGatewayStrategyResult,
+  CloudNativeAPIGatewayLLMModelServiceRouteWeightedStrategy,
+  AddCloudNativeAPIGatewayConsumerInGroupResponse,
   GovernanceServiceInput,
-  VpcInfo,
+  CloudNativeAPIGatewayLLMModelParamCheckInfo,
   ConfigFile,
   ModifyNativeGatewayServiceSourceRequest,
-  KongActiveHealthCheck,
+  CNAPIGwSecretKey,
+  ModifyCloudNativeAPIGatewayLLMModelAPIResponse,
   ModifyCloudNativeAPIGatewayCanaryRuleResponse,
   KongServicePreview,
   DescribeAutoScalerResourceStrategyBindingGroupsResponse,
+  CreateCloudNativeAPIGatewayLLMModelServiceResponse,
+  RemoveCloudNativeAPIGatewayConsumerInGroupRequest,
   InstanceTagInfo,
   UnbindAutoScalerResourceStrategyFromGroupsResponse,
   UpdateUpstreamTargetsResponse,
@@ -154,8 +178,10 @@ import {
   DescribeGovernanceServiceContractVersionsRequest,
   DescribeCloudNativeAPIGatewayCertificatesResponse,
   KongUpstreamPreview,
+  ModifyCloudNativeAPIGatewaySecretKeyStatusResponse,
   KongCertificate,
   SourceInfo,
+  ModifyCloudNativeAPIGatewaySecretKeyStatusRequest,
   DeleteGovernanceInstancesResponse,
   DescribeWafDomainsResult,
   BindAutoScalerResourceStrategyToGroupsResponse,
@@ -165,7 +191,9 @@ import {
   CreateCloudNativeAPIGatewayRouteRateLimitRequest,
   EnvAddressInfo,
   ModifyCloudNativeAPIGatewayRouteResponse,
+  DescribeCloudNativeAPIGatewayConsumerResponse,
   KongCertificatesPreview,
+  DefaultKongRoute,
   ConfigFileRelease,
   KongRoutePreview,
   DescribeInstanceRegionInfo,
@@ -173,26 +201,29 @@ import {
   CreateGovernanceInstancesRequest,
   BindAutoScalerResourceStrategyToGroupsRequest,
   DescribeConfigFilesByGroupResponse,
-  LimitRule,
+  CreateCloudNativeAPIGatewayServiceRateLimitResponse,
   ModifyAutoScalerResourceStrategyResponse,
   CreateCloudNativeAPIGatewayCertificateResponse,
   StorageOption,
   DescribeCloudNativeAPIGatewayRouteRateLimitRequest,
   UpdateUpstreamHealthCheckConfigRequest,
   DescribeConfigFileResponse,
+  NacosReplica,
   AccurateQpsThreshold,
+  CreateCloudNativeAPIGatewaySecretKeyRequest,
   ZookeeperRegionMyIdInfo,
   DeleteCloudNativeAPIGatewayCORSResponse,
   GatewayServices,
   UpdateCloudNativeAPIGatewaySpecResponse,
-  CloudNativeAPIGatewayConfig,
+  DescribeGatewayInstancePortResult,
   KongServiceLightPreview,
   DescribeNativeGatewayServerGroupsRequest,
-  DescribeGatewayInstancePortResult,
+  CloudNativeAPIGatewayConfig,
   DescribePublicNetworkRequest,
   DescribeGovernanceNamespacesResponse,
   DescribeConfigFilesByGroupRequest,
   DeleteGovernanceInstancesByHostResponse,
+  PolarisLimiterAddress,
   EngineAdmin,
   DescribeGovernanceAliasesResponse,
   ServiceWafStatus,
@@ -212,43 +243,57 @@ import {
   RollbackConfigFileReleasesRequest,
   DescribeCloudNativeAPIGatewayInfoByIpResponse,
   CloudNativeAPIGatewayCanaryRule,
+  CloudNativeAPIGatewayLLMModelService,
   DescribeCloudNativeAPIGatewayServicesLightRequest,
   PublishConfigFilesResponse,
   UpdateCloudNativeAPIGatewayCertificateInfoRequest,
   BoundK8SInfo,
   DescribeCloudNativeAPIGatewayCertificateDetailsRequest,
+  ConfigFileTag,
   GovernanceInstanceInput,
   CreateNativeGatewayServerGroupResponse,
+  AddCloudNativeAPIGatewayConsumerGroupAuthRequest,
   DeleteConfigFileReleasesResponse,
   ModifyGovernanceInstancesRequest,
   GovernanceNamespace,
+  ModifyCloudNativeAPIGatewayLLMModelServiceResponse,
   DeleteCloudNativeAPIGatewayCanaryRuleResponse,
   DeleteCloudNativeAPIGatewayIPRestrictionResponse,
   UpdateCloudNativeAPIGatewayCertificateInfoResponse,
   ModifyNetworkBasicInfoResponse,
   CreateOrModifyCloudNativeAPIGatewayCORSRequest,
   DescribeCloudNativeAPIGatewayResponse,
+  ModifyCloudNativeAPIGatewayConsumerGroupResponse,
   CreateCloudNativeAPIGatewayRequest,
   CloudNativeAPIGatewayStrategyBindingGroupInfo,
   DescribeGovernanceServiceContractVersionsResponse,
   RoutingDestinationRuleLabel,
+  DescribeCloudNativeAPIGatewaySecretKeyValueRequest,
   ModifyConfigFilesResponse,
+  DescribeCloudNativeAPIGatewaySecretKeyResponse,
   DescribeAllConfigFileTemplatesResponse,
   ConfigFileGroupTag,
   DescribeConfigFileReleaseVersionsRequest,
+  DescribeCloudNativeAPIGatewaySecretKeyListResponse,
   GovernanceServiceContractVersion,
+  CreateCloudNativeAPIGatewayConsumerGroupRequest,
   ModifyCloudNativeAPIGatewayRouteRateLimitRequest,
+  KongActiveHealthCheck,
   ExternalRedis,
   ModifyCloudNativeAPIGatewayCertificateRequest,
   DeleteGovernanceAliasesResponse,
   GovernanceService,
   DeleteAutoScalerResourceStrategyRequest,
-  NacosReplica,
+  DescribeCloudNativeAPIGatewayConsumerGroupRequest,
   CreateGovernanceInstancesResponse,
+  DeleteCloudNativeAPIGatewayLLMModelAPIRequest,
+  DescribeCloudNativeAPIGatewayLLMModelAPIsRequest,
   CreateGatewayServiceResult,
   DescribeInstanceInfoByIpResult,
   CreateGovernanceLaneGroupsResponse,
-  DeleteEngineResponse,
+  CNAPIGwCreateCommonResult,
+  CloudNativeAPIGatewayLLMModelServiceRoute,
+  CNAPIGwConsumerGroup,
   Location,
   DescribeKongCORSResult,
   CreateEngineRequest,
@@ -257,11 +302,12 @@ import {
   TSEGatewaySelector,
   DeleteGovernanceNamespacesRequest,
   DescribeCloudNativeAPIGatewayConfigResponse,
+  CreateCloudNativeAPIGatewayConsumerGroupResponse,
+  DescribeCloudNativeAPIGatewayLLMModelAPIResponse,
   CreateCloudNativeAPIGatewayRouteResponse,
   DeleteConfigFilesResponse,
   EngineRegionInfo,
   ConfigFileReleaseDeletion,
-  CreateCloudNativeAPIGatewayServiceRateLimitResponse,
   DescribeCloudNativeAPIGatewayServiceRateLimitResponse,
   ModifyGovernanceAliasResponse,
   ListCloudNativeAPIGatewayStrategyBindingGroupInfoResult,
@@ -271,18 +317,23 @@ import {
   CreateCloudNativeAPIGatewayRouteRateLimitResponse,
   DescribeCloudNativeAPIGatewaysResponse,
   CreateGovernanceNamespacesResponse,
+  DeleteCloudNativeAPIGatewayConsumerResponse,
   UpstreamHealthCheckConfig,
-  CreateConfigFileGroupRequest,
+  DescribeCloudNativeAPIGatewayLLMModelServicesRequest,
   ZookeeperReplica,
   DeleteAutoScalerResourceStrategyResponse,
   DescribeOneCloudNativeAPIGatewayServiceRequest,
+  DescribeCloudNativeAPIGatewayLLMModelAPIsResponse,
   DeleteGovernanceAliasesRequest,
   CertificateInfo,
+  DescribeCloudNativeAPIGatewayConsumerListResponse,
   CreateOrModifyCloudNativeAPIGatewayIPRestrictionRequest,
+  ListCloudNativeAPIGatewayLLMModelService,
   DescribeWafDomainsRequest,
   ModifyUpstreamNodeStatusResponse,
   OpenWafProtectionResponse,
   DescribeCloudNativeAPIGatewayRouteRateLimitResponse,
+  AddCloudNativeAPIGatewayConsumerGroupAuthResponse,
   DescribeCloudNativeAPIGatewayRequest,
   DeleteConfigFileGroupRequest,
   KongCertificatesList,
@@ -290,11 +341,15 @@ import {
   CreateCloudNativeAPIGatewayCanaryRuleRequest,
   OpenWafProtectionRequest,
   GovernanceInstance,
+  DeleteCloudNativeAPIGatewaySecretKeyResponse,
   DescribeCloudNativeAPIGatewayRoutesRequest,
   CreateEngineResponse,
   ConfigFileGroup,
   DescribeCloudNativeAPIGatewayNodesResult,
+  DescribeCloudNativeAPIGatewayLLMModelAPIRequest,
   DescribeNacosServerInterfacesRequest,
+  ModifyCloudNativeAPIGatewayConsumerGroupRequest,
+  RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest,
   KongUpstreamInfo,
   DescribeSREInstancesRequest,
   LaneTrafficEntry,
@@ -302,37 +357,46 @@ import {
   DescribeZookeeperReplicasResponse,
   ModifyConfigFileGroupRequest,
   DescribePublicAddressConfigResponse,
+  VpcInfo,
   PublishConfigFilesRequest,
   DescribeConfigFileReleaseHistoriesRequest,
   ModifyCloudNativeAPIGatewayRequest,
   GovernanceLaneGroup,
   DescribeNativeGatewayServerGroupsResponse,
   ModifyNativeGatewayServerGroupResponse,
-  ConfigFileTag,
+  DeleteCloudNativeAPIGatewayLLMModelServiceRequest,
+  DeleteCloudNativeAPIGatewayConsumerGroupResponse,
   DescribeNativeGatewayServiceSourcesResponse,
   ListCloudNativeAPIGatewayResult,
   CreateCloudNativeAPIGatewayServiceResponse,
   ModifyGovernanceLaneGroupsResponse,
+  CNAPIGwSecretKeyList,
   DeleteCloudNativeAPIGatewayRouteRateLimitResponse,
   CreateOrModifyCloudNativeAPIGatewayCORSResponse,
   DescribeConfigFileGroupsRequest,
   CreateGovernanceNamespacesRequest,
   ModifyCloudNativeAPIGatewayRouteRequest,
   DeleteCloudNativeAPIGatewayIPRestrictionRequest,
+  CNAPIGwConsumer,
   CreateGovernanceAliasResponse,
   CloudNativeAPIGatewayNodeConfig,
   DeleteConfigFileGroupResponse,
+  KongServiceRouteList,
   ConfigFilePublishInfo,
+  DeleteCloudNativeAPIGatewayConsumerGroupRequest,
+  DescribeCloudNativeAPIGatewayLLMModelServiceRequest,
   DescribeGovernanceAliasesRequest,
   ModifyCloudNativeAPIGatewayServiceResponse,
   NacosServerInterface,
   DescribeInstanceTagInfosRequest,
   GovernanceNamespaceInput,
   DeleteGovernanceServicesResponse,
+  DeleteCloudNativeAPIGatewaySecretKeyRequest,
   DeleteCloudNativeAPIGatewayCertificateResponse,
   DeleteCloudNativeAPIGatewayCanaryRuleRequest,
   GatewayInstanceSchemeAndPorts,
   CreatePublicNetworkResult,
+  CreateCloudNativeAPIGatewayLLMModelServiceRequest,
   DescribeNativeGatewayServiceSourcesRequest,
   CLBMultiRegion,
   CreateWafDomainsResponse,
@@ -341,11 +405,14 @@ import {
   DescribeCloudNativeAPIGatewayUpstreamResponse,
   CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse,
   KVPair,
+  CNAPIGwConsumerList,
   UpdateUpstreamTargetsRequest,
   DeleteCloudNativeAPIGatewayServiceResponse,
   DescribeConfigFileRequest,
   InstancePort,
+  ModifyCloudNativeAPIGatewayConsumerRequest,
   DeleteNativeGatewayServerGroupRequest,
+  DescribeCloudNativeAPIGatewayConsumerGroupListRequest,
   RollbackConfigFileReleasesResponse,
   ConfigFileReleaseHistory,
   DeleteNativeGatewayServerGroupResult,
@@ -355,14 +422,17 @@ import {
   CanaryPriorityRule,
   CloudNativeAPIGatewayVpcConfig,
   DescribeGovernanceInstancesResponse,
+  ListCloudNativeAPIGatewayLLMModelAPI,
   ModifyGovernanceNamespacesResponse,
   DescribeCloudNativeAPIGatewaysRequest,
+  DescribeCloudNativeAPIGatewaySecretKeyListRequest,
   DescribeCloudNativeAPIGatewayConfigResult,
   DeleteCloudNativeAPIGatewayServiceRequest,
   Argument,
   DescribeKongIpRestrictionResult,
   ServiceGatewaySelector,
   DescribePublicNetworkResponse,
+  RemoveCloudNativeAPIGatewayConsumerInGroupResponse,
   ZookeeperRegionInfo,
   DescribeInstanceTagInfosResponse,
   DeleteConfigFilesRequest,
@@ -376,8 +446,13 @@ import {
   DescribeCloudNativeAPIGatewayCanaryRulesResponse,
   DeleteCloudNativeAPIGatewayCertificateRequest,
   NativeGatewayServerGroup,
+  AIGWCrossServiceFallbackConfig,
   DescribeZookeeperServerInterfacesResponse,
+  AddCloudNativeAPIGatewayConsumerInGroupRequest,
   DescribeConfigFileReleaseVersionsResponse,
+  CreateCloudNativeAPIGatewayConsumerResponse,
+  CloudNativeAPIGatewayLLMModelServiceRouteModelNameStrategy,
+  DeleteCloudNativeAPIGatewayLLMModelAPIResponse,
   DeleteCloudNativeAPIGatewayRequest,
   DescribeCloudNativeAPIGatewayCertificateDetailsResponse,
   CreateGovernanceServicesResponse,
@@ -389,6 +464,8 @@ import {
   DescribeCloudNativeAPIGatewayServicesLightResponse,
   RestartSREInstanceResponse,
   DescribeZookeeperServerInterfacesRequest,
+  DescribeCloudNativeAPIGatewayLLMModelServiceResponse,
+  DescribeCloudNativeAPIGatewaySecretKeyRequest,
   DeleteGovernanceLaneGroupsRequest,
   DeleteGovernanceServicesRequest,
   ModifyGovernanceServicesResponse,
@@ -401,22 +478,25 @@ import {
   UpdateUpstreamHealthCheckConfigResponse,
   KongServiceDetail,
   ZookeeperServerInterface,
+  DescribeCloudNativeAPIGatewayConsumerRequest,
   DescribePublicAddressConfigResult,
   CreateCloudNativeAPIGatewayRouteRequest,
   NativeGatewayServerGroups,
   GovernanceLaneRule,
   DescribeGovernanceLaneGroupsRequest,
-  KongServiceRouteList,
+  DescribeCloudNativeAPIGatewaySecretKeyValueResponse,
   DeleteWafDomainsResponse,
   CreateCloudNativeAPIGatewayResult,
   ModifyCloudNativeAPIGatewayRouteRateLimitResponse,
   DescribeConfigFileReleaseHistoriesResponse,
   DescribeCloudNativeAPIGatewayCanaryRulesRequest,
-  PolarisLimiterAddress,
+  CreateCloudNativeAPIGatewayLLMModelAPIResponse,
   DescribeCloudNativeAPIGatewayPortsRequest,
   DescribeGovernanceServicesRequest,
+  ModifyCloudNativeAPIGatewayLLMModelAPIRequest,
   DescribeConfigFileReleaseResponse,
   DescribeWafProtectionResult,
+  CreateCloudNativeAPIGatewaySecretKeyResponse,
   DescribeAllConfigFileTemplatesRequest,
 } from "./tse_models"
 
@@ -427,6 +507,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tse.tencentcloudapi.com", "2020-12-07", clientConfig)
+  }
+
+  /**
+   * 删除指定的云原生网关消费者
+   */
+  async DeleteCloudNativeAPIGatewayConsumer(
+    req: DeleteCloudNativeAPIGatewayConsumerRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayConsumerResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayConsumerResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayConsumer", req, cb)
   }
 
   /**
@@ -497,6 +587,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeGovernanceAliasesResponse) => void
   ): Promise<DescribeGovernanceAliasesResponse> {
     return this.request("DescribeGovernanceAliases", req, cb)
+  }
+
+  /**
+   * 获取云原生网关服务健康检查配置
+   */
+  async DescribeUpstreamHealthCheckConfig(
+    req: DescribeUpstreamHealthCheckConfigRequest,
+    cb?: (error: string, rep: DescribeUpstreamHealthCheckConfigResponse) => void
+  ): Promise<DescribeUpstreamHealthCheckConfigResponse> {
+    return this.request("DescribeUpstreamHealthCheckConfig", req, cb)
+  }
+
+  /**
+   * 修改 LLM 模型 API 信息
+   */
+  async ModifyCloudNativeAPIGatewayLLMModelAPI(
+    req: ModifyCloudNativeAPIGatewayLLMModelAPIRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayLLMModelAPIResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayLLMModelAPIResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayLLMModelAPI", req, cb)
   }
 
   /**
@@ -590,23 +700,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除治理中心服务别名
+   * 删除云原生网关密钥
    */
-  async DeleteGovernanceAliases(
-    req: DeleteGovernanceAliasesRequest,
-    cb?: (error: string, rep: DeleteGovernanceAliasesResponse) => void
-  ): Promise<DeleteGovernanceAliasesResponse> {
-    return this.request("DeleteGovernanceAliases", req, cb)
+  async DeleteCloudNativeAPIGatewaySecretKey(
+    req: DeleteCloudNativeAPIGatewaySecretKeyRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewaySecretKeyResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewaySecretKeyResponse> {
+    return this.request("DeleteCloudNativeAPIGatewaySecretKey", req, cb)
   }
 
   /**
-   * 修改治理中心服务实例
+   * 查询单个 LLM 模型服务列表
    */
-  async ModifyGovernanceInstances(
-    req: ModifyGovernanceInstancesRequest,
-    cb?: (error: string, rep: ModifyGovernanceInstancesResponse) => void
-  ): Promise<ModifyGovernanceInstancesResponse> {
-    return this.request("ModifyGovernanceInstances", req, cb)
+  async DescribeCloudNativeAPIGatewayLLMModelService(
+    req: DescribeCloudNativeAPIGatewayLLMModelServiceRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayLLMModelServiceResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayLLMModelServiceResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayLLMModelService", req, cb)
   }
 
   /**
@@ -730,6 +840,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询云原生网关消费者列表
+   */
+  async DescribeCloudNativeAPIGatewayConsumerList(
+    req: DescribeCloudNativeAPIGatewayConsumerListRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayConsumerListResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayConsumerListResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayConsumerList", req, cb)
+  }
+
+  /**
    * 获取全量配置文件模板列表
    */
   async DescribeAllConfigFileTemplates(
@@ -770,6 +890,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询单个 LLM 模型 API 信息
+   */
+  async DescribeCloudNativeAPIGatewayLLMModelAPI(
+    req: DescribeCloudNativeAPIGatewayLLMModelAPIRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayLLMModelAPIResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayLLMModelAPIResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayLLMModelAPI", req, cb)
+  }
+
+  /**
    * 获取 WAF 防护域名
    */
   async DescribeWafDomains(
@@ -787,6 +917,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteConfigFilesResponse) => void
   ): Promise<DeleteConfigFilesResponse> {
     return this.request("DeleteConfigFiles", req, cb)
+  }
+
+  /**
+   * 查看云原生网关消费者组的信息
+   */
+  async DescribeCloudNativeAPIGatewayConsumerGroup(
+    req: DescribeCloudNativeAPIGatewayConsumerGroupRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayConsumerGroupResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayConsumerGroupResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayConsumerGroup", req, cb)
+  }
+
+  /**
+   * 创建 LLM 模型服务。同一网关下 Name 唯一。
+   */
+  async CreateCloudNativeAPIGatewayLLMModelService(
+    req: CreateCloudNativeAPIGatewayLLMModelServiceRequest,
+    cb?: (error: string, rep: CreateCloudNativeAPIGatewayLLMModelServiceResponse) => void
+  ): Promise<CreateCloudNativeAPIGatewayLLMModelServiceResponse> {
+    return this.request("CreateCloudNativeAPIGatewayLLMModelService", req, cb)
+  }
+
+  /**
+   * 查询 LLM 模型 API 列表
+   */
+  async DescribeCloudNativeAPIGatewayLLMModelAPIs(
+    req: DescribeCloudNativeAPIGatewayLLMModelAPIsRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayLLMModelAPIsResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayLLMModelAPIsResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayLLMModelAPIs", req, cb)
   }
 
   /**
@@ -850,6 +1010,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除 LLM 模型 API 信息
+   */
+  async DeleteCloudNativeAPIGatewayLLMModelAPI(
+    req: DeleteCloudNativeAPIGatewayLLMModelAPIRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayLLMModelAPIResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayLLMModelAPIResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayLLMModelAPI", req, cb)
+  }
+
+  /**
    * 关闭 WAF 防护
    */
   async CloseWafProtection(
@@ -867,6 +1037,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCloudNativeAPIGatewayResponse) => void
   ): Promise<CreateCloudNativeAPIGatewayResponse> {
     return this.request("CreateCloudNativeAPIGateway", req, cb)
+  }
+
+  /**
+   * 删除治理中心服务别名
+   */
+  async DeleteGovernanceAliases(
+    req: DeleteGovernanceAliasesRequest,
+    cb?: (error: string, rep: DeleteGovernanceAliasesResponse) => void
+  ): Promise<DeleteGovernanceAliasesResponse> {
+    return this.request("DeleteGovernanceAliases", req, cb)
   }
 
   /**
@@ -930,6 +1110,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询服务下契约版本列表
+   */
+  async DescribeGovernanceServiceContractVersions(
+    req: DescribeGovernanceServiceContractVersionsRequest,
+    cb?: (error: string, rep: DescribeGovernanceServiceContractVersionsResponse) => void
+  ): Promise<DescribeGovernanceServiceContractVersionsResponse> {
+    return this.request("DescribeGovernanceServiceContractVersions", req, cb)
+  }
+
+  /**
    * 更新网关上游实例列表，仅支持IPList服务类型
    */
   async UpdateUpstreamTargets(
@@ -950,6 +1140,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询 LLM 模型服务列表
+   */
+  async DescribeCloudNativeAPIGatewayLLMModelServices(
+    req: DescribeCloudNativeAPIGatewayLLMModelServicesRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayLLMModelServicesResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayLLMModelServicesResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayLLMModelServices", req, cb)
+  }
+
+  /**
    * 创建服务实例
    */
   async CreateGovernanceInstances(
@@ -957,6 +1157,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateGovernanceInstancesResponse) => void
   ): Promise<CreateGovernanceInstancesResponse> {
     return this.request("CreateGovernanceInstances", req, cb)
+  }
+
+  /**
+   * 修改云原生网关消费者组的信息
+   */
+  async ModifyCloudNativeAPIGatewayConsumerGroup(
+    req: ModifyCloudNativeAPIGatewayConsumerGroupRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayConsumerGroupResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayConsumerGroupResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayConsumerGroup", req, cb)
   }
 
   /**
@@ -1040,6 +1250,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据命名空间、组名、名称、标签查询配置文件列表
+   */
+  async DescribeConfigFiles(
+    req: DescribeConfigFilesRequest,
+    cb?: (error: string, rep: DescribeConfigFilesResponse) => void
+  ): Promise<DescribeConfigFilesResponse> {
+    return this.request("DescribeConfigFiles", req, cb)
+  }
+
+  /**
    * 修改网关实例Konga网络配置
    */
   async ModifyConsoleNetwork(
@@ -1060,13 +1280,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取云原生网关服务健康检查配置
+   * 创建云原生网关密钥
    */
-  async DescribeUpstreamHealthCheckConfig(
-    req: DescribeUpstreamHealthCheckConfigRequest,
-    cb?: (error: string, rep: DescribeUpstreamHealthCheckConfigResponse) => void
-  ): Promise<DescribeUpstreamHealthCheckConfigResponse> {
-    return this.request("DescribeUpstreamHealthCheckConfig", req, cb)
+  async CreateCloudNativeAPIGatewaySecretKey(
+    req: CreateCloudNativeAPIGatewaySecretKeyRequest,
+    cb?: (error: string, rep: CreateCloudNativeAPIGatewaySecretKeyResponse) => void
+  ): Promise<CreateCloudNativeAPIGatewaySecretKeyResponse> {
+    return this.request("CreateCloudNativeAPIGatewaySecretKey", req, cb)
   }
 
   /**
@@ -1100,6 +1320,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建AI网关模型 API
+   */
+  async CreateCloudNativeAPIGatewayLLMModelAPI(
+    req: CreateCloudNativeAPIGatewayLLMModelAPIRequest,
+    cb?: (error: string, rep: CreateCloudNativeAPIGatewayLLMModelAPIResponse) => void
+  ): Promise<CreateCloudNativeAPIGatewayLLMModelAPIResponse> {
+    return this.request("CreateCloudNativeAPIGatewayLLMModelAPI", req, cb)
+  }
+
+  /**
    * 查询云原生网关证书列表
    */
   async DescribeCloudNativeAPIGatewayCertificates(
@@ -1120,6 +1350,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改云原生API网关实例基础信息
+   */
+  async ModifyCloudNativeAPIGateway(
+    req: ModifyCloudNativeAPIGatewayRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayResponse> {
+    return this.request("ModifyCloudNativeAPIGateway", req, cb)
+  }
+
+  /**
    * 创建网关服务来源
    */
   async CreateNativeGatewayServiceSource(
@@ -1127,6 +1367,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateNativeGatewayServiceSourceResponse) => void
   ): Promise<CreateNativeGatewayServiceSourceResponse> {
     return this.request("CreateNativeGatewayServiceSource", req, cb)
+  }
+
+  /**
+   * 从指定的消费者组中移除消费者
+   */
+  async RemoveCloudNativeAPIGatewayConsumerInGroup(
+    req: RemoveCloudNativeAPIGatewayConsumerInGroupRequest,
+    cb?: (error: string, rep: RemoveCloudNativeAPIGatewayConsumerInGroupResponse) => void
+  ): Promise<RemoveCloudNativeAPIGatewayConsumerInGroupResponse> {
+    return this.request("RemoveCloudNativeAPIGatewayConsumerInGroup", req, cb)
   }
 
   /**
@@ -1180,16 +1430,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取云原生网关节点列表
-   */
-  async DescribeCloudNativeAPIGatewayNodes(
-    req: DescribeCloudNativeAPIGatewayNodesRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayNodesResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayNodesResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayNodes", req, cb)
-  }
-
-  /**
    * 创建泳道组
    */
   async ModifyGovernanceLaneGroups(
@@ -1197,6 +1437,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyGovernanceLaneGroupsResponse) => void
   ): Promise<ModifyGovernanceLaneGroupsResponse> {
     return this.request("ModifyGovernanceLaneGroups", req, cb)
+  }
+
+  /**
+   * 查询泳道组列表
+   */
+  async DescribeGovernanceLaneGroups(
+    req: DescribeGovernanceLaneGroupsRequest,
+    cb?: (error: string, rep: DescribeGovernanceLaneGroupsResponse) => void
+  ): Promise<DescribeGovernanceLaneGroupsResponse> {
+    return this.request("DescribeGovernanceLaneGroups", req, cb)
   }
 
   /**
@@ -1230,13 +1480,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建或更新配置文件并发布配置
+   * 云原生网关移除消费者组授权
    */
-  async CreateOrUpdateConfigFileAndRelease(
-    req: CreateOrUpdateConfigFileAndReleaseRequest,
-    cb?: (error: string, rep: CreateOrUpdateConfigFileAndReleaseResponse) => void
-  ): Promise<CreateOrUpdateConfigFileAndReleaseResponse> {
-    return this.request("CreateOrUpdateConfigFileAndRelease", req, cb)
+  async RemoveCloudNativeAPIGatewayConsumerGroupAuth(
+    req: RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest,
+    cb?: (error: string, rep: RemoveCloudNativeAPIGatewayConsumerGroupAuthResponse) => void
+  ): Promise<RemoveCloudNativeAPIGatewayConsumerGroupAuthResponse> {
+    return this.request("RemoveCloudNativeAPIGatewayConsumerGroupAuth", req, cb)
+  }
+
+  /**
+   * 创建云原生网关的消费者组
+   */
+  async CreateCloudNativeAPIGatewayConsumerGroup(
+    req: CreateCloudNativeAPIGatewayConsumerGroupRequest,
+    cb?: (error: string, rep: CreateCloudNativeAPIGatewayConsumerGroupResponse) => void
+  ): Promise<CreateCloudNativeAPIGatewayConsumerGroupResponse> {
+    return this.request("CreateCloudNativeAPIGatewayConsumerGroup", req, cb)
   }
 
   /**
@@ -1310,13 +1570,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询服务下契约版本列表
+   * 将消费者添加到指定的消费者组中
    */
-  async DescribeGovernanceServiceContractVersions(
-    req: DescribeGovernanceServiceContractVersionsRequest,
-    cb?: (error: string, rep: DescribeGovernanceServiceContractVersionsResponse) => void
-  ): Promise<DescribeGovernanceServiceContractVersionsResponse> {
-    return this.request("DescribeGovernanceServiceContractVersions", req, cb)
+  async AddCloudNativeAPIGatewayConsumerInGroup(
+    req: AddCloudNativeAPIGatewayConsumerInGroupRequest,
+    cb?: (error: string, rep: AddCloudNativeAPIGatewayConsumerInGroupResponse) => void
+  ): Promise<AddCloudNativeAPIGatewayConsumerInGroupResponse> {
+    return this.request("AddCloudNativeAPIGatewayConsumerInGroup", req, cb)
   }
 
   /**
@@ -1360,6 +1620,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询密钥值
+   */
+  async DescribeCloudNativeAPIGatewaySecretKeyValue(
+    req: DescribeCloudNativeAPIGatewaySecretKeyValueRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewaySecretKeyValueResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewaySecretKeyValueResponse> {
+    return this.request("DescribeCloudNativeAPIGatewaySecretKeyValue", req, cb)
+  }
+
+  /**
+   * 回滚配置发布
+   */
+  async RollbackConfigFileReleases(
+    req: RollbackConfigFileReleasesRequest,
+    cb?: (error: string, rep: RollbackConfigFileReleasesResponse) => void
+  ): Promise<RollbackConfigFileReleasesResponse> {
+    return this.request("RollbackConfigFileReleases", req, cb)
+  }
+
+  /**
    * 修改治理中心命名空间
    */
   async ModifyGovernanceNamespaces(
@@ -1367,6 +1647,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyGovernanceNamespacesResponse) => void
   ): Promise<ModifyGovernanceNamespacesResponse> {
     return this.request("ModifyGovernanceNamespaces", req, cb)
+  }
+
+  /**
+   * 删除 LLM 模型服务信息
+   */
+  async DeleteCloudNativeAPIGatewayLLMModelService(
+    req: DeleteCloudNativeAPIGatewayLLMModelServiceRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayLLMModelServiceResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayLLMModelServiceResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayLLMModelService", req, cb)
+  }
+
+  /**
+   * 查询密钥详情
+   */
+  async DescribeCloudNativeAPIGatewaySecretKey(
+    req: DescribeCloudNativeAPIGatewaySecretKeyRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewaySecretKeyResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewaySecretKeyResponse> {
+    return this.request("DescribeCloudNativeAPIGatewaySecretKey", req, cb)
   }
 
   /**
@@ -1390,6 +1690,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改密钥状态
+   */
+  async ModifyCloudNativeAPIGatewaySecretKeyStatus(
+    req: ModifyCloudNativeAPIGatewaySecretKeyStatusRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewaySecretKeyStatusResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewaySecretKeyStatusResponse> {
+    return this.request("ModifyCloudNativeAPIGatewaySecretKeyStatus", req, cb)
+  }
+
+  /**
+   * 获取配置文件发布历史列表
+   */
+  async DescribeConfigFileReleaseHistories(
+    req: DescribeConfigFileReleaseHistoriesRequest,
+    cb?: (error: string, rep: DescribeConfigFileReleaseHistoriesResponse) => void
+  ): Promise<DescribeConfigFileReleaseHistoriesResponse> {
+    return this.request("DescribeConfigFileReleaseHistories", req, cb)
+  }
+
+  /**
    * 创建配置文件
    */
   async CreateConfigFile(
@@ -1410,6 +1730,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建云原生网关的消费者，支持多种密钥生成方式
+   */
+  async CreateCloudNativeAPIGatewayConsumer(
+    req: CreateCloudNativeAPIGatewayConsumerRequest,
+    cb?: (error: string, rep: CreateCloudNativeAPIGatewayConsumerResponse) => void
+  ): Promise<CreateCloudNativeAPIGatewayConsumerResponse> {
+    return this.request("CreateCloudNativeAPIGatewayConsumer", req, cb)
+  }
+
+  /**
    * 获取云原生网关服务详情下的Upstream列表
    */
   async DescribeCloudNativeAPIGatewayUpstream(
@@ -1420,13 +1750,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询泳道组列表
+   * 创建或更新配置文件并发布配置
    */
-  async DescribeGovernanceLaneGroups(
-    req: DescribeGovernanceLaneGroupsRequest,
-    cb?: (error: string, rep: DescribeGovernanceLaneGroupsResponse) => void
-  ): Promise<DescribeGovernanceLaneGroupsResponse> {
-    return this.request("DescribeGovernanceLaneGroups", req, cb)
+  async CreateOrUpdateConfigFileAndRelease(
+    req: CreateOrUpdateConfigFileAndReleaseRequest,
+    cb?: (error: string, rep: CreateOrUpdateConfigFileAndReleaseResponse) => void
+  ): Promise<CreateOrUpdateConfigFileAndReleaseResponse> {
+    return this.request("CreateOrUpdateConfigFileAndRelease", req, cb)
   }
 
   /**
@@ -1460,13 +1790,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 回滚配置发布
+   * 获取消费者组列表
    */
-  async RollbackConfigFileReleases(
-    req: RollbackConfigFileReleasesRequest,
-    cb?: (error: string, rep: RollbackConfigFileReleasesResponse) => void
-  ): Promise<RollbackConfigFileReleasesResponse> {
-    return this.request("RollbackConfigFileReleases", req, cb)
+  async DescribeCloudNativeAPIGatewayConsumerGroupList(
+    req: DescribeCloudNativeAPIGatewayConsumerGroupListRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayConsumerGroupListResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayConsumerGroupListResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayConsumerGroupList", req, cb)
   }
 
   /**
@@ -1540,13 +1870,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询云原生网关路由列表
+   * 获取密钥列表
    */
-  async DescribeCloudNativeAPIGatewayRoutes(
-    req: DescribeCloudNativeAPIGatewayRoutesRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayRoutesResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayRoutesResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayRoutes", req, cb)
+  async DescribeCloudNativeAPIGatewaySecretKeyList(
+    req: DescribeCloudNativeAPIGatewaySecretKeyListRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewaySecretKeyListResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewaySecretKeyListResponse> {
+    return this.request("DescribeCloudNativeAPIGatewaySecretKeyList", req, cb)
   }
 
   /**
@@ -1590,6 +1920,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改云原生网关消费者的信息
+   */
+  async ModifyCloudNativeAPIGatewayConsumer(
+    req: ModifyCloudNativeAPIGatewayConsumerRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayConsumerResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayConsumerResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayConsumer", req, cb)
+  }
+
+  /**
    * 查询nacos服务接口列表
    */
   async DescribeNacosServerInterfaces(
@@ -1630,6 +1970,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改治理中心服务实例
+   */
+  async ModifyGovernanceInstances(
+    req: ModifyGovernanceInstancesRequest,
+    cb?: (error: string, rep: ModifyGovernanceInstancesResponse) => void
+  ): Promise<ModifyGovernanceInstancesResponse> {
+    return this.request("ModifyGovernanceInstances", req, cb)
+  }
+
+  /**
+   * 修改 LLM 模型服务。
+   */
+  async ModifyCloudNativeAPIGatewayLLMModelService(
+    req: ModifyCloudNativeAPIGatewayLLMModelServiceRequest,
+    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayLLMModelServiceResponse) => void
+  ): Promise<ModifyCloudNativeAPIGatewayLLMModelServiceResponse> {
+    return this.request("ModifyCloudNativeAPIGatewayLLMModelService", req, cb)
+  }
+
+  /**
    * 删除治理中心命名空间
    */
   async DeleteGovernanceNamespaces(
@@ -1650,23 +2010,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 根据命名空间、组名、名称、标签查询配置文件列表
+   * 获取云原生网关节点列表
    */
-  async DescribeConfigFiles(
-    req: DescribeConfigFilesRequest,
-    cb?: (error: string, rep: DescribeConfigFilesResponse) => void
-  ): Promise<DescribeConfigFilesResponse> {
-    return this.request("DescribeConfigFiles", req, cb)
+  async DescribeCloudNativeAPIGatewayNodes(
+    req: DescribeCloudNativeAPIGatewayNodesRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayNodesResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayNodesResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayNodes", req, cb)
   }
 
   /**
-   * 修改云原生API网关实例基础信息
+   * 查询云原生网关路由列表
    */
-  async ModifyCloudNativeAPIGateway(
-    req: ModifyCloudNativeAPIGatewayRequest,
-    cb?: (error: string, rep: ModifyCloudNativeAPIGatewayResponse) => void
-  ): Promise<ModifyCloudNativeAPIGatewayResponse> {
-    return this.request("ModifyCloudNativeAPIGateway", req, cb)
+  async DescribeCloudNativeAPIGatewayRoutes(
+    req: DescribeCloudNativeAPIGatewayRoutesRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayRoutesResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayRoutesResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayRoutes", req, cb)
   }
 
   /**
@@ -1690,13 +2050,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取配置文件发布历史列表
+   * 查询指定的云原生网关消费者
    */
-  async DescribeConfigFileReleaseHistories(
-    req: DescribeConfigFileReleaseHistoriesRequest,
-    cb?: (error: string, rep: DescribeConfigFileReleaseHistoriesResponse) => void
-  ): Promise<DescribeConfigFileReleaseHistoriesResponse> {
-    return this.request("DescribeConfigFileReleaseHistories", req, cb)
+  async DescribeCloudNativeAPIGatewayConsumer(
+    req: DescribeCloudNativeAPIGatewayConsumerRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayConsumerResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayConsumerResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayConsumer", req, cb)
+  }
+
+  /**
+   * 添加消费者组授权
+   */
+  async AddCloudNativeAPIGatewayConsumerGroupAuth(
+    req: AddCloudNativeAPIGatewayConsumerGroupAuthRequest,
+    cb?: (error: string, rep: AddCloudNativeAPIGatewayConsumerGroupAuthResponse) => void
+  ): Promise<AddCloudNativeAPIGatewayConsumerGroupAuthResponse> {
+    return this.request("AddCloudNativeAPIGatewayConsumerGroupAuth", req, cb)
   }
 
   /**
@@ -1717,6 +2087,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateUpstreamHealthCheckConfigResponse) => void
   ): Promise<UpdateUpstreamHealthCheckConfigResponse> {
     return this.request("UpdateUpstreamHealthCheckConfig", req, cb)
+  }
+
+  /**
+   * 删除云原生网关消费者组的信息
+   */
+  async DeleteCloudNativeAPIGatewayConsumerGroup(
+    req: DeleteCloudNativeAPIGatewayConsumerGroupRequest,
+    cb?: (error: string, rep: DeleteCloudNativeAPIGatewayConsumerGroupResponse) => void
+  ): Promise<DeleteCloudNativeAPIGatewayConsumerGroupResponse> {
+    return this.request("DeleteCloudNativeAPIGatewayConsumerGroup", req, cb)
   }
 
   /**

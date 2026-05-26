@@ -406,6 +406,104 @@ export interface CustomImage {
 }
 
 /**
+ * DescribeDynamicInstanceDetail返回参数结构体
+ */
+export interface DescribeDynamicInstanceDetailResponse {
+  /**
+   * <p>ray集群名</p>
+   */
+  RayClusterName?: string
+  /**
+   * <p>ray集群ID</p>
+   */
+  RayClusterId?: number
+  /**
+   * <p>创建类型</p><p>枚举值：</p><ul><li>1： 表单创建</li><li>2： yaml创建</li></ul>
+   */
+  SubmitType?: number
+  /**
+   * <p>命名空间</p>
+   */
+  Namespace?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>labels</p>
+   */
+  Labels?: Array<NameValue>
+  /**
+   * <p>Tolerations</p>
+   */
+  Tolerations?: Array<Toleration>
+  /**
+   * <p>环境变量</p>
+   */
+  Env?: Array<NameValue>
+  /**
+   * <p>是否依赖 Kerberos 外部组件</p>
+   */
+  SupportExternalKerberosService?: boolean
+  /**
+   * <p>依赖的Kerberos集群</p>
+   */
+  KerberosCluster?: string
+  /**
+   * <p>token</p>
+   */
+  Token?: string
+  /**
+   * <p>HeadGroup</p>
+   */
+  HeadGroupSpec?: DynamicInstanceGroupSpec
+  /**
+   * <p>WorkerGroup</p>
+   */
+  WorkerGroupSpecs?: Array<DynamicInstanceGroupSpec>
+  /**
+   * <p>是否开启存储配置</p>
+   */
+  StorageConfigEnabled?: boolean
+  /**
+   * <p>Redis 实例信息</p>
+   */
+  RedisInstance?: RedisInstance
+  /**
+   * <p>镜像信息</p>
+   */
+  CustomImage?: CustomImage
+  /**
+   * <p>dashboard链接</p>
+   */
+  DashboardUrl?: string
+  /**
+   * <p>pod 总数</p>
+   */
+  TotalPodCount?: number
+  /**
+   * <p>是否高可用</p>
+   */
+  HighAvailability?: boolean
+  /**
+   * <p>存储信息</p>
+   */
+  PersistentVolume?: PersistentVolume
+  /**
+   * <p>rayClusterYamlJson</p>
+   */
+  RayClusterYaml?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ResetYarnConfig请求参数结构体
  */
 export interface ResetYarnConfigRequest {
@@ -1936,6 +2034,20 @@ export interface InquiryPriceUpdateInstanceRequest {
 }
 
 /**
+ * DescribeDynamicInstanceDetail请求参数结构体
+ */
+export interface DescribeDynamicInstanceDetailRequest {
+  /**
+   * <p>EMR 集群 id</p>
+   */
+  InstanceId: string
+  /**
+   * <p>Ray集群Id</p>
+   */
+  RayClusterId: number
+}
+
+/**
  * AttachDisks返回参数结构体
  */
 export interface AttachDisksResponse {
@@ -3410,137 +3522,37 @@ export interface CreateCloudInstanceResponse {
 }
 
 /**
- * ScaleOutInstance请求参数结构体
+ * 卷目录
  */
-export interface ScaleOutInstanceRequest {
+export interface PersistentVolume {
   /**
-   * <p>扩容的时间单位。取值范围：</p><li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li><li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
+   * <p>cbs 存储卷</p>
    */
-  TimeUnit: string
+  CBSVolumes?: Array<CBSVolume>
   /**
-   * <p>扩容的时长。结合TimeUnit一起使用。</p><li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li><li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
+   * <p>cfs存储卷</p>
    */
-  TimeSpan: number
+  CFSVolumes?: Array<CFSVolume>
   /**
-   * <p>实例ID。</p>
+   * <p>cos 存储卷</p>
    */
-  InstanceId: string
+  COSVolumes?: Array<COSVolume>
   /**
-   * <p>实例计费模式。取值范围：</p><li>0：表示按量计费。</li><li>1：表示包年包月。</li>
+   * <p>存储卷名称（yaml 提交的没有存储卷的类型）</p>
    */
-  PayMode: number
+  StorageVolumeName?: Array<string>
   /**
-   * <p>唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-<strong><strong>-</strong></strong>-****-fae36063280</p>
+   * <p>存储卷列表</p>
    */
-  ClientToken?: string
+  VolumeMounts?: Array<VolumeMount>
   /**
-   * <p>引导操作脚本设置。</p>
+   * <p>存储卷详情</p>
    */
-  PreExecutedFileSettings?: Array<PreExecuteFileSettings>
+  StorageVolumeDetail?: Array<StorageVolumeDetail>
   /**
-   * <p>扩容的Task节点数量。</p>
+   * <p>cfs trubo存储卷</p>
    */
-  TaskCount?: number
-  /**
-   * <p>扩容的Core节点数量。</p>
-   */
-  CoreCount?: number
-  /**
-   * <p>扩容时不需要安装的进程。</p>
-   */
-  UnNecessaryNodeList?: Array<number | bigint>
-  /**
-   * <p>扩容的Router节点数量。</p>
-   */
-  RouterCount?: number
-  /**
-   * <p>部署的服务。</p><li>SoftDeployInfo和ServiceNodeInfo是同组参数，和UnNecessaryNodeList参数互斥。</li><li>建议使用SoftDeployInfo和ServiceNodeInfo组合。</li>
-   */
-  SoftDeployInfo?: Array<number | bigint>
-  /**
-   * <p>启动的进程。</p>
-   */
-  ServiceNodeInfo?: Array<number | bigint>
-  /**
-   * <p>分散置放群组ID列表，当前仅支持指定一个。</p>
-   */
-  DisasterRecoverGroupIds?: Array<string>
-  /**
-   * <p>扩容节点绑定标签列表。</p>
-   */
-  Tags?: Array<Tag>
-  /**
-   * <p>扩容所选资源类型，可选范围为&quot;HOST&quot;,&quot;POD&quot;,&quot;MNode&quot;，HOST为普通的CVM资源，POD为TKE集群或EKS集群提供的资源,MNode为全托管资源类型</p>
-   */
-  HardwareResourceType?: string
-  /**
-   * <p>使用Pod资源扩容时，指定的Pod规格以及来源等信息</p>
-   */
-  PodSpec?: PodSpec
-  /**
-   * <p>使用clickhouse集群扩容时，选择的机器分组名称</p>
-   */
-  ClickHouseClusterName?: string
-  /**
-   * <p>使用clickhouse集群扩容时，选择的机器分组类型。new为新增，old为选择旧分组</p>
-   */
-  ClickHouseClusterType?: string
-  /**
-   * <p>规则扩容指定 yarn node label</p>
-   */
-  YarnNodeLabel?: string
-  /**
-   * <p>POD自定义权限和自定义参数</p>
-   */
-  PodParameter?: PodParameter
-  /**
-   * <p>扩容的Master节点的数量。<br>使用clickhouse集群扩容时，该参数不生效。<br>使用kafka集群扩容时，该参数不生效。<br>当HardwareResourceType=POD时，该参数不生效。</p>
-   */
-  MasterCount?: number
-  /**
-   * <p>扩容后是否启动服务，true：启动，false：不启动</p>
-   */
-  StartServiceAfterScaleOut?: string
-  /**
-   * <p>可用区，默认是集群的主可用区</p>
-   */
-  ZoneId?: number
-  /**
-   * <p>子网，默认是集群创建时的子网</p>
-   */
-  SubnetId?: string
-  /**
-   * <p>预设配置组</p>
-   */
-  ScaleOutServiceConfAssign?: string
-  /**
-   * <p>0表示关闭自动续费，1表示开启自动续费</p>
-   */
-  AutoRenew?: number
-  /**
-   * <p>类型为ComputeResource和EMR以及默认，默认为EMR,类型为EMR时,InstanceId生效,类型为ComputeResource时,使用ComputeResourceId标识</p>
-   */
-  ResourceBaseType?: string
-  /**
-   * <p>计算资源id</p>
-   */
-  ComputeResourceId?: string
-  /**
-   * <p>计算资源高级设置</p>
-   */
-  ComputeResourceAdvanceParams?: ComputeResourceAdvanceParams
-  /**
-   * <p>节点标记信息，目前只提供tf平台使用</p>
-   */
-  NodeMarks?: NodeMark
-  /**
-   * <p>扩容指定计算组</p>
-   */
-  WarehouseName?: string
-  /**
-   * <p>分区置放群组分区</p>
-   */
-  PartitionNumber?: number
+  CFSTurboVolumes?: Array<CFSTurboVolume>
 }
 
 /**
@@ -8593,6 +8605,24 @@ export interface PreExecuteFileSettings {
 }
 
 /**
+ * 存储卷详情
+ */
+export interface StorageVolumeDetail {
+  /**
+   * 存储卷名称
+   */
+  VolumeName?: string
+  /**
+   * 存储卷类型
+   */
+  VolumeType?: string
+  /**
+   * 存储卷详情
+   */
+  Desc?: string
+}
+
+/**
  * TerminateSLInstance请求参数结构体
  */
 export interface TerminateSLInstanceRequest {
@@ -9214,6 +9244,140 @@ export interface DescribeGlobalConfigRequest {
 }
 
 /**
+ * ScaleOutInstance请求参数结构体
+ */
+export interface ScaleOutInstanceRequest {
+  /**
+   * <p>扩容的时间单位。取值范围：</p><li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li><li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
+   */
+  TimeUnit: string
+  /**
+   * <p>扩容的时长。结合TimeUnit一起使用。</p><li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li><li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
+   */
+  TimeSpan: number
+  /**
+   * <p>实例ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>实例计费模式。取值范围：</p><li>0：表示按量计费。</li><li>1：表示包年包月。</li>
+   */
+  PayMode: number
+  /**
+   * <p>唯一随机标识，时效5分钟，需要调用者指定 防止客户端重新创建资源，例如 a9a90aa6-<strong><strong>-</strong></strong>-****-fae36063280</p>
+   */
+  ClientToken?: string
+  /**
+   * <p>引导操作脚本设置。</p>
+   */
+  PreExecutedFileSettings?: Array<PreExecuteFileSettings>
+  /**
+   * <p>扩容的Task节点数量。</p>
+   */
+  TaskCount?: number
+  /**
+   * <p>扩容的Core节点数量。</p>
+   */
+  CoreCount?: number
+  /**
+   * <p>扩容时不需要安装的进程。</p>
+   */
+  UnNecessaryNodeList?: Array<number | bigint>
+  /**
+   * <p>扩容的Router节点数量。</p>
+   */
+  RouterCount?: number
+  /**
+   * <p>部署的服务。</p><li>SoftDeployInfo和ServiceNodeInfo是同组参数，和UnNecessaryNodeList参数互斥。</li><li>建议使用SoftDeployInfo和ServiceNodeInfo组合。</li>
+   */
+  SoftDeployInfo?: Array<number | bigint>
+  /**
+   * <p>启动的进程。</p>
+   */
+  ServiceNodeInfo?: Array<number | bigint>
+  /**
+   * <p>分散置放群组ID列表，当前仅支持指定一个。</p>
+   */
+  DisasterRecoverGroupIds?: Array<string>
+  /**
+   * <p>扩容节点绑定标签列表。</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>扩容所选资源类型，可选范围为&quot;HOST&quot;,&quot;POD&quot;,&quot;MNode&quot;，HOST为普通的CVM资源，POD为TKE集群或EKS集群提供的资源,MNode为全托管资源类型</p>
+   */
+  HardwareResourceType?: string
+  /**
+   * <p>使用Pod资源扩容时，指定的Pod规格以及来源等信息</p>
+   */
+  PodSpec?: PodSpec
+  /**
+   * <p>使用clickhouse集群扩容时，选择的机器分组名称</p>
+   */
+  ClickHouseClusterName?: string
+  /**
+   * <p>使用clickhouse集群扩容时，选择的机器分组类型。new为新增，old为选择旧分组</p>
+   */
+  ClickHouseClusterType?: string
+  /**
+   * <p>规则扩容指定 yarn node label</p>
+   */
+  YarnNodeLabel?: string
+  /**
+   * <p>POD自定义权限和自定义参数</p>
+   */
+  PodParameter?: PodParameter
+  /**
+   * <p>扩容的Master节点的数量。<br>使用clickhouse集群扩容时，该参数不生效。<br>使用kafka集群扩容时，该参数不生效。<br>当HardwareResourceType=POD时，该参数不生效。</p>
+   */
+  MasterCount?: number
+  /**
+   * <p>扩容后是否启动服务，true：启动，false：不启动</p>
+   */
+  StartServiceAfterScaleOut?: string
+  /**
+   * <p>可用区，默认是集群的主可用区</p>
+   */
+  ZoneId?: number
+  /**
+   * <p>子网，默认是集群创建时的子网</p>
+   */
+  SubnetId?: string
+  /**
+   * <p>预设配置组</p>
+   */
+  ScaleOutServiceConfAssign?: string
+  /**
+   * <p>0表示关闭自动续费，1表示开启自动续费</p>
+   */
+  AutoRenew?: number
+  /**
+   * <p>类型为ComputeResource和EMR以及默认，默认为EMR,类型为EMR时,InstanceId生效,类型为ComputeResource时,使用ComputeResourceId标识</p>
+   */
+  ResourceBaseType?: string
+  /**
+   * <p>计算资源id</p>
+   */
+  ComputeResourceId?: string
+  /**
+   * <p>计算资源高级设置</p>
+   */
+  ComputeResourceAdvanceParams?: ComputeResourceAdvanceParams
+  /**
+   * <p>节点标记信息，目前只提供tf平台使用</p>
+   */
+  NodeMarks?: NodeMark
+  /**
+   * <p>扩容指定计算组</p>
+   */
+  WarehouseName?: string
+  /**
+   * <p>分区置放群组分区</p>
+   */
+  PartitionNumber?: number
+}
+
+/**
  * 定时伸缩每月重复任务策略
  */
 export interface MonthRepeatStrategy {
@@ -9226,6 +9390,24 @@ export interface MonthRepeatStrategy {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DaysOfMonthRange: Array<number | bigint>
+}
+
+/**
+ * Redis 实例信息
+ */
+export interface RedisInstance {
+  /**
+   * redis实例id
+   */
+  Id?: string
+  /**
+   * 实例 ip
+   */
+  Host?: string
+  /**
+   * 实例端口
+   */
+  Port?: number
 }
 
 /**
@@ -11578,6 +11760,77 @@ export interface InquiryPriceRenewInstanceRequest {
    * 集群id，如果需要集群所有包年包月节点续费信息，可以填写该参数
    */
   InstanceId?: string
+}
+
+/**
+ * DynamicInstanceGroupSpec
+ */
+export interface DynamicInstanceGroupSpec {
+  /**
+   * group 名称
+   */
+  Name: string
+  /**
+   * pod 数量
+   */
+  PodCount: number
+  /**
+   * 最小节点数
+   */
+  MinNodes: number
+  /**
+   * 最大节点数
+   */
+  MaxNodes: number
+  /**
+   *  是否开启存储配置
+   */
+  StorageConfigEnabled: boolean
+  /**
+   * headGroup:head;
+workerGroup:worker
+   */
+  GroupType?: string
+  /**
+   * CPU 核数
+   */
+  Cpu?: number
+  /**
+   * 内存(GB)
+   */
+  MemSize?: number
+  /**
+   * GPU类型
+   */
+  GpuType?: string
+  /**
+   * GPU核数
+   */
+  Gpu?: number
+  /**
+   * 资源标签
+   */
+  ResourceLabels?: string
+  /**
+   * 环境变量
+   */
+  Env?: Array<NameValue>
+  /**
+   * 标签
+   */
+  Labels?: Array<NameValue>
+  /**
+   * 容忍度
+   */
+  Tolerations?: Array<Toleration>
+  /**
+   * 调度策略
+   */
+  Scheduler?: string
+  /**
+   * 卷目录
+   */
+  PersistentVolume?: PersistentVolume
 }
 
 /**

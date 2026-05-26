@@ -1678,7 +1678,7 @@ export interface CreateTopicRequest {
    */
   IsSourceFrom?: boolean
   /**
-   * <p>计费模式</p><p>枚举值：</p><ul><li>0： 按功能项计费</li><li>1： 原始日志量计费</li></ul><p>默认值：0</p><p>通过接口调用时默认值为0，通过控制台调用时默认值为1</p>
+   * <p>计费模式</p><p>枚举值：</p><ul><li>0： 按使用功能计费</li><li>1： 按原始日志量计费（目前仅面向少部分客户支持）</li></ul><p>默认值：0</p>
    */
   BillingMode?: number
 }
@@ -4735,11 +4735,11 @@ export interface TopicInfo {
    */
   IsSourceFrom?: boolean
   /**
-   * <p>当前计费模式</p><p>枚举值：</p><ul><li>0： 按功能项计费</li><li>1： 原始日志量计费</li></ul>
+   * <p>当前计费模式</p><p>枚举值：</p><ul><li>0： 按使用功能计费</li><li>1： 按原始日志量计费（目前仅面向少部分客户支持）</li></ul>
    */
   BillingMode?: number
   /**
-   * <p>如果有异步任务，任务成功后的新计费模式</p><p>枚举值：</p><ul><li>0： 按功能项计费</li><li>1： 原始日志量计费</li></ul>
+   * <p>如果有异步任务，任务成功后的新计费模式</p><p>枚举值：</p><ul><li>0： 按使用功能计费</li><li>1： 按原始日志量计费（目前仅面向少部分客户支持）</li></ul>
    */
   NewBillingMode?: number
 }
@@ -8823,7 +8823,7 @@ export interface ModifySplunkDeliverRequest {
    */
   TopicId: string
   /**
-   * <p>投递任务名称<br>name有以下限制：</p><ul><li>不能为空</li><li>长度不大于64</li><li>只能包含aA-zZ、下划线、-、0-9</li></ul>
+   * <p>投递任务名称name有以下限制：- 不能为空- 长度不大于256- 只能包含aA-zZ、下划线、-、0-9</p>
    */
   Name?: string
   /**
@@ -11241,7 +11241,7 @@ export interface CreateSplunkDeliverRequest {
    */
   TopicId: string
   /**
-   * <p>splunk投递任务名称；<br>name有如下限制：</p><ul><li>不能为空</li><li>长度不大于64</li><li>只能包含aA-zZ、下划线、-、0-9</li></ul>
+   * <p>splunk投递任务名称；name有如下限制：- 不能为空- 长度不大于256- 只能包含aA-zZ、下划线、-、0-9</p>
    */
   Name: string
   /**
@@ -13448,7 +13448,7 @@ export interface ModifyTopicRequest {
    */
   IsSourceFrom?: boolean
   /**
-   * <p>计费模式</p><p>枚举值：</p><ul><li>0： 按功能项计费</li><li>1： 原始日志量计费</li></ul>
+   * <p>计费模式</p><p>枚举值：</p><ul><li>0： 按使用功能计费</li><li>1： 按原始日志量计费（目前仅面向少部分客户支持）</li></ul><p>默认值：0</p>
    */
   BillingMode?: number
 }

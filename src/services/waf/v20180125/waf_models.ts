@@ -13786,7 +13786,7 @@ export interface SkillScanQueryData {
    */
   Mitigation?: string
   /**
-   * <p>安全评分（0-100，100 为最安全）</p><p>取值范围：[0, 100]</p>
+   * <p>安全评分（0-100，分数越高越安全）</p><p>取值范围：[0, 100]</p>
    */
   SecurityScore?: number
   /**

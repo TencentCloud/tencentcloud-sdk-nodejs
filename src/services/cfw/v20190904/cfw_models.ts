@@ -192,15 +192,15 @@ export interface ModifyAclRuleRequest {
  */
 export interface DescribeAclRuleResponse {
   /**
-   * 总条数
+   * <p>总条数</p>
    */
   Total?: number
   /**
-   * nat访问控制列表数据
+   * <p>nat访问控制列表数据</p>
    */
   Data?: Array<DescAcItem>
   /**
-   * 未过滤的总条数
+   * <p>未过滤的总条数</p>
    */
   AllTotal?: number
   /**
@@ -474,35 +474,35 @@ export interface StaticInfo {
  */
 export interface DescribeAclRuleRequest {
   /**
-   * 每页条数
+   * <p>每页条数</p>
    */
   Limit: number
   /**
-   * 偏移值
+   * <p>偏移值</p>
    */
   Offset: number
   /**
-   * 需要查询的索引，特定场景使用，可不填
+   * <p>需要查询的索引，特定场景使用，可不填</p>
    */
   Index?: string
   /**
-   * 过滤条件组合
+   * <p>过滤条件组合</p>
    */
   Filters?: Array<CommonFilter>
   /**
-   * 检索的起始时间，可不传
+   * <p>检索的起始时间，可不传</p>
    */
   StartTime?: string
   /**
-   * 检索的截止时间，可不传
+   * <p>检索的截止时间，可不传</p>
    */
   EndTime?: string
   /**
-   * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值，默认为asc
+   * <p>desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值，默认为asc</p>
    */
   Order?: string
   /**
-   * 排序所用到的字段，默认为sequence
+   * <p>排序所用到的字段，默认为sequence</p>
    */
   By?: string
 }
@@ -1655,11 +1655,11 @@ export interface ModifyClusterVpcFwSwitchRequest {
  */
 export interface DescribeVpcAcRuleResponse {
   /**
-   * 总条数
+   * <p>总条数</p>
    */
   Total?: number
   /**
-   * 内网间访问控制列表数据
+   * <p>内网间访问控制列表数据</p>
    */
   Data?: Array<VpcRuleItem>
   /**
@@ -2552,15 +2552,15 @@ export interface DescribeCcnInstanceRegionStatusRequest {
  */
 export interface DescribeNatAcRuleResponse {
   /**
-   * 总条数
+   * <p>总条数</p>
    */
   Total?: number
   /**
-   * nat访问控制列表数据
+   * <p>nat访问控制列表数据</p>
    */
   Data?: Array<DescAcItem>
   /**
-   * 未过滤的总条数
+   * <p>未过滤的总条数</p>
    */
   AllTotal?: number
   /**
@@ -4185,35 +4185,35 @@ export interface ExpandCfwVerticalResponse {
  */
 export interface DescribeNatAcRuleRequest {
   /**
-   * 每页条数
+   * <p>每页条数</p>
    */
   Limit: number
   /**
-   * 偏移值
+   * <p>偏移值</p>
    */
   Offset: number
   /**
-   * 需要查询的索引，特定场景使用，可不填
+   * <p>需要查询的索引，特定场景使用，可不填</p>
    */
   Index?: string
   /**
-   * 过滤条件组合，Direction 为0时表述查询出向规则，为1时表示查询入向规则
+   * <p>过滤条件组合，Direction 为0时表述查询出向规则，为1时表示查询入向规则</p>
    */
   Filters?: Array<CommonFilter>
   /**
-   * 检索的起始时间，可不传
+   * <p>检索的起始时间，可不传</p>
    */
   StartTime?: string
   /**
-   * 检索的截止时间，可不传
+   * <p>检索的截止时间，可不传</p>
    */
   EndTime?: string
   /**
-   * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值，默认为asc
+   * <p>desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值，默认为asc</p>
    */
   Order?: string
   /**
-   * 排序所用到的字段，默认为sequence
+   * <p>排序所用到的字段，默认为sequence</p>
    */
   By?: string
 }
@@ -6903,35 +6903,35 @@ export interface ModifyNatFwReSelectResponse {
  */
 export interface DescribeVpcAcRuleRequest {
   /**
-   * 每页条数
+   * <p>每页条数</p>
    */
   Limit: number
   /**
-   * 偏移值
+   * <p>偏移值</p>
    */
   Offset: number
   /**
-   * 需要查询的索引，特定场景使用，可不填
+   * <p>需要查询的索引，特定场景使用，可不填</p>
    */
   Index?: string
   /**
-   * 过滤条件组合
+   * <p>过滤条件组合</p>
    */
   Filters?: Array<CommonFilter>
   /**
-   * 检索的起始时间，可不传
+   * <p>检索的起始时间，可不传</p>
    */
   StartTime?: string
   /**
-   * 检索的截止时间，可不传
+   * <p>检索的截止时间，可不传</p>
    */
   EndTime?: string
   /**
-   * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+   * <p>desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值</p>
    */
   Order?: string
   /**
-   * 排序所用到的字段
+   * <p>排序所用到的字段</p>
    */
   By?: string
 }

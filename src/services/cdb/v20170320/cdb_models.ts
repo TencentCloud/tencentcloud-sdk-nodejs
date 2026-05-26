@@ -4227,16 +4227,16 @@ export interface DescribeDBInstanceConfigResponse {
    */
   DeployMode?: number
   /**
-   * <p>实例可用区信息，格式如 &quot;ap-shanghai-2&quot;。</p>
+   * <p>实例主可用区信息，格式如 &quot;ap-shanghai-2&quot;。</p>
    */
   Zone?: string
   /**
-   * <p>备库的配置信息。</p>
+   * <p>双节点、三节点、四节点实例第一备库的配置信息。</p><p>查询双节点时，此参数返回为双节点的备库信息；查询三节点、四节点时，此参数返回为实例的第一备库信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SlaveConfig?: SlaveConfig
   /**
-   * <p>强同步实例第二备库的配置信息。</p>
+   * <p>三节点、四节点实例第二备库的配置信息。</p><p>查询三节点、四节点时，此参数返回为第二备库的信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupConfig?: BackupConfig
@@ -4244,6 +4244,10 @@ export interface DescribeDBInstanceConfigResponse {
    * <p>是否切换备库。</p>
    */
   Switched?: boolean
+  /**
+   * <p>四节点实例第三备库的配置信息。</p><p>查询四节点时，此参数返回为第三备库的信息。</p>
+   */
+  FourthConfig?: BackupConfig
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5158,7 +5162,7 @@ export interface CreateDBInstanceRequest {
    */
   GoodsNum: number
   /**
-   * <p>可用区信息，请使用 <a href="https://cloud.tencent.com/document/api/236/17229">获取云数据库可售卖规格</a> 接口获取可创建的可用区。<br>说明：若您创建单节点、双节点、三节点实例，此参数为必填项，请指定可用区，若不指定可用区，则系统会自动选择一个可用区（可能不是您希望部署的可用区）；若您创建云盘版实例，此参数不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置。</p>
+   * <p>可用区信息，请使用 <a href="https://cloud.tencent.com/document/api/236/17229">获取云数据库可售卖规格</a> 接口获取可创建的可用区。</p><p>若您创建单节点、双节点、三节点、四节点实例，此参数为必填项，请指定可用区，若不指定可用区，则系统会自动选择一个可用区（可能不是您希望部署的可用区）；若您创建云盘版实例，此参数不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置。</p>
    */
   Zone?: string
   /**
@@ -5202,7 +5206,7 @@ export interface CreateDBInstanceRequest {
    */
   DeployMode?: number
   /**
-   * <p>备库 1 的可用区信息。<br>说明：双节点、三节点实例请指定此参数值，若不指定，则默认为 Zone 的值；云盘版实例此参数可不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置；单节点实例为单可用区，无需指定此参数。</p>
+   * <p>备库 1 的可用区信息。</p><p>双节点、三节点、四节点实例请指定此参数值，若不指定，则默认为 Zone 的值；云盘版实例此参数可不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置；单节点实例为单可用区，无需指定此参数。</p>
    */
   SlaveZone?: string
   /**
@@ -5210,7 +5214,7 @@ export interface CreateDBInstanceRequest {
    */
   ParamList?: Array<ParamInfo>
   /**
-   * <p>备库 2 的可用区信息，默认为空，购买三节点主实例时可指定该参数。</p>
+   * <p>备库 2 的可用区信息，默认为空。</p><p>购买三节点主实例、四节点主实例时可指定该参数。</p>
    */
   BackupZone?: string
   /**
@@ -5258,7 +5262,7 @@ export interface CreateDBInstanceRequest {
    */
   AlarmPolicyList?: Array<number | bigint>
   /**
-   * <p>实例节点数。对于 RO 和 基础版实例， 该值默认为1。 如果需要购买三节点实例， 请将该值设置为3 或指定 BackupZone 参数。当购买主实例，且未指定该参数和 BackupZone 参数时，该值默认是 2， 即购买两节点实例。</p>
+   * <p>实例节点数。</p><p>对于 RO 和基础版实例，该值默认为1。如果需要购买三节点实例，请将该值设置为3，或指定 BackupZone 参数；当购买主实例，且未指定该参数和 BackupZone 参数时，该值默认是2，即购买双节点实例；如果需要购买四节点实例，请将该值设置为4，或指定 FourthZone 参数。</p>
    */
   InstanceNodes?: number
   /**
@@ -5309,6 +5313,10 @@ export interface CreateDBInstanceRequest {
    * <p>开启或关闭实例销毁保护。on-开启，off-关闭</p>
    */
   DestroyProtect?: string
+  /**
+   * <p>备库 3 的可用区信息，默认为空，购买四节点主实例时可指定该参数。</p>
+   */
+  FourthZone?: string
 }
 
 /**
@@ -9353,7 +9361,7 @@ export interface CreateDBInstanceHourRequest {
    */
   ProjectId?: number
   /**
-   * <p>可用区信息，请使用 <a href="https://cloud.tencent.com/document/api/236/17229">获取云数据库可售卖规格</a> 接口获取可创建的可用区。<br>说明：若您创建单节点、双节点、三节点实例，此参数为必填项，请指定可用区，若不指定可用区，则系统会自动选择一个可用区（可能不是您希望部署的可用区）；若您创建云盘版实例，此参数不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置。</p>
+   * <p>可用区信息，请使用 <a href="https://cloud.tencent.com/document/api/236/17229">获取云数据库可售卖规格</a> 接口获取可创建的可用区。</p><p>若您创建单节点、双节点、三节点、四节点实例，此参数为必填项，请指定可用区，若不指定可用区，则系统会自动选择一个可用区（可能不是您希望部署的可用区）；若您创建云盘版实例，此参数不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置。</p>
    */
   Zone?: string
   /**
@@ -9389,11 +9397,11 @@ export interface CreateDBInstanceHourRequest {
    */
   DeployMode?: number
   /**
-   * <p>备库 1 的可用区信息。<br>说明：双节点、三节点实例请指定此参数值，若不指定，则默认为 Zone 的值；云盘版实例此参数可不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置；单节点实例为单可用区，无需指定此参数。</p>
+   * <p>备库 1 的可用区信息。</p><p>双节点、三节点、四节点实例请指定此参数值，若不指定，则默认为 Zone 的值；云盘版实例此参数可不填，请通过参数 ClusterTopology 进行读写节点和只读节点的可用区配置；单节点实例为单可用区，无需指定此参数。</p>
    */
   SlaveZone?: string
   /**
-   * <p>备库 2 的可用区信息，默认为空，购买三节点主实例时可指定该参数。</p>
+   * <p>备库 2 的可用区信息，默认为空。</p><p>购买三节点主实例、四节点主实例时可指定该参数。</p>
    */
   BackupZone?: string
   /**
@@ -9437,7 +9445,7 @@ export interface CreateDBInstanceHourRequest {
    */
   AlarmPolicyList?: Array<number | bigint>
   /**
-   * <p>实例节点数。对于 RO 和 基础版实例， 该值默认为1。 如果需要购买三节点实例， 请将该值设置为3 或指定 BackupZone 参数。当购买主实例，且未指定该参数和 BackupZone 参数时，该值默认是 2， 即购买两节点实例。</p>
+   * <p>实例节点数。</p><p>对于 RO 和 基础版实例，该值默认为1。如果需要购买三节点实例，请将该值设置为3，或指定 BackupZone 参数；当购买主实例，且未指定该参数和 BackupZone 参数时，该值默认是2，即购买双节点实例；如果需要购买四节点实例，请将该值设置为4，或指定 FourthZone 参数。</p>
    */
   InstanceNodes?: number
   /**
@@ -9492,6 +9500,10 @@ export interface CreateDBInstanceHourRequest {
    * <p>开启或关闭实例销毁保护。on-开启，off-关闭</p>
    */
   DestroyProtect?: string
+  /**
+   * <p>备库 3 的可用区信息，默认为空，购买四节点主实例时可指定该参数。</p>
+   */
+  FourthZone?: string
 }
 
 /**
@@ -9539,7 +9551,7 @@ export interface CreateCloneInstanceRequest {
    */
   SpecifiedRollbackTime?: string
   /**
-   * <p>如果需要克隆实例回档到指定备份集，则指定该值为备份文件的 Id。请使用 <a href="/document/api/236/15842">查询数据备份文件列表</a>。<br>说明：如果是克隆双节点、三节点实例，备份文件为物理备份，如果是克隆单节点、云盘版实例，备份文件为快照备份。</p>
+   * <p>如果需要克隆实例回档到指定备份集，则指定该值为备份文件的 Id。请使用 <a href="/document/api/236/15842">查询数据备份文件列表</a>。</p><p>如果是克隆双节点、三节点、四节点实例，备份文件为物理备份，如果是克隆单节点、云盘版实例，备份文件为快照备份。</p>
    */
   SpecifiedBackupId?: number
   /**
@@ -9595,7 +9607,7 @@ export interface CreateCloneInstanceRequest {
    */
   DeviceType?: string
   /**
-   * <p>新克隆实例节点数。如果需要克隆出三节点实例， 请将该值设置为3 或指定 BackupZone 参数。如果需要克隆出两节点实例，请将该值设置为2。默认克隆出两节点实例。</p>
+   * <p>新克隆实例节点数。</p><p>如果需要克隆出三节点实例，请将该值设置为3，或指定 BackupZone 参数；如果需要克隆出双节点实例，请将该值设置为2，默认克隆出双节点实例；如果需要克隆出四节点实例，请将该值设置为4，或指定 FourthZone 参数。</p>
    */
   InstanceNodes?: number
   /**
@@ -9643,6 +9655,10 @@ export interface CreateCloneInstanceRequest {
    * <p>新产生的克隆实例主库的可用区信息，默认同源实例 Zone 的值。</p>
    */
   Zone?: string
+  /**
+   * <p>备库 3 的可用区信息，默认为空，购买四节点主实例时可指定该参数。</p>
+   */
+  FourthZone?: string
 }
 
 /**

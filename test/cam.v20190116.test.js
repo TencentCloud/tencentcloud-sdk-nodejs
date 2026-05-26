@@ -108,6 +108,16 @@ it("cam.v20190116.UpdateUser", async function () {
     }
 })
 
+it("cam.v20190116.GetPasswordRules", async function () {
+    try {
+       const data = await client.GetPasswordRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.GetCustomMFATokenInfo", async function () {
     try {
        const data = await client.GetCustomMFATokenInfo({})
@@ -271,6 +281,16 @@ it("cam.v20190116.ListSAMLProviders", async function () {
 it("cam.v20190116.ListUsersForGroup", async function () {
     try {
        const data = await client.ListUsersForGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cam.v20190116.UpdatePasswordRules", async function () {
+    try {
+       const data = await client.UpdatePasswordRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

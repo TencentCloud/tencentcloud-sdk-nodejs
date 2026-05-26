@@ -78,6 +78,16 @@ it("mps.v20190612.ModifyLiveRecordTemplate", async function () {
     }
 })
 
+it("mps.v20190612.DeleteVoice", async function () {
+    try {
+       const data = await client.DeleteVoice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.EditMedia", async function () {
     try {
        const data = await client.EditMedia({})

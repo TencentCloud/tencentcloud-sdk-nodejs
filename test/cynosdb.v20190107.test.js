@@ -1438,6 +1438,16 @@ it("cynosdb.v20190107.OpenWan", async function () {
     }
 })
 
+it("cynosdb.v20190107.AddLibraDBInstances", async function () {
+    try {
+       const data = await client.AddLibraDBInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.ActivateLibraDBInstance", async function () {
     try {
        const data = await client.ActivateLibraDBInstance({})

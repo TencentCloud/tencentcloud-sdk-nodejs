@@ -288,31 +288,31 @@ export interface DescribeRedisTopHotKeysRequest {
  */
 export interface CreateDBDiagReportTaskRequest {
   /**
-   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+   * <p>实例 ID。可通过 <a href="https://cloud.tencent.com/document/api/1130/57798">DescribeDiagDBInstances</a> 接口获取。TDSQL MySQL数据库类型，实例ID应填写为“实例ID&amp;分片ID”的格式。</p>
    */
   InstanceId: string
   /**
-   * 开始时间，如“2020-11-08T14:00:00+08:00”。
+   * <p>开始时间，如“2020-11-08T14:00:00+08:00”。</p>
    */
   StartTime: string
   /**
-   * 结束时间，如“2020-11-09T14:00:00+08:00”。
+   * <p>结束时间，如“2020-11-09T14:00:00+08:00”。</p>
    */
   EndTime: string
   /**
-   * 是否发送邮件: 0 - 否，1 - 是。
+   * <p>是否发送邮件: 0 - 否，1 - 是。</p>
    */
   SendMailFlag: number
   /**
-   * 接收邮件的联系人ID数组。
+   * <p>接收邮件的联系人ID数组。</p>
    */
   ContactPerson?: Array<number | bigint>
   /**
-   * 接收邮件的联系组ID数组。
+   * <p>接收邮件的联系组ID数组。</p>
    */
   ContactGroup?: Array<number | bigint>
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，"mariadb" - 云数据库 MariaDB，"dcdb" - 云数据库 TDSQL MySQL，默认为"mysql"。
+   * <p>服务产品类型，支持值：&quot;mysql&quot; - 云数据库 MySQL；&quot;cynosdb&quot; - 云数据库 TDSQL-C for MySQL，&quot;redis&quot; - 云数据库 Redis，&quot;mongodb&quot; - 云数据库 MongoDB，&quot;mariadb&quot; - 云数据库 MariaDB，&quot;dcdb&quot; - 云数据库 TDSQL MySQL，默认为&quot;mysql&quot;。</p>
    */
   Product?: string
 }
@@ -1965,7 +1965,7 @@ export interface DescribeSecurityAuditLogDownloadUrlsRequest {
  */
 export interface CreateDBDiagReportTaskResponse {
   /**
-   * 异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。
+   * <p>异步任务的请求 ID，可使用此 ID 查询异步任务的执行结果。</p>
    */
   AsyncRequestId?: number
   /**
@@ -2356,32 +2356,31 @@ export interface DescribeHealthScoreTimeSeriesRequest {
  */
 export interface DescribeDBDiagEventsRequest {
   /**
-   * 开始时间，如“2021-05-27 00:00:00”，支持的最早查询时间为当前时间的前30天。
+   * <p>开始时间，如“2021-05-27 00:00:00”，支持的最早查询时间为当前时间的前30天。</p>
    */
   StartTime: string
   /**
-   * 结束时间，如“2021-05-27 01:00:00”，支持的最早查询时间为当前时间的前30天。
+   * <p>结束时间，如“2021-05-27 01:00:00”，支持的最早查询时间为当前时间的前30天。</p>
    */
   EndTime: string
   /**
-   * 风险等级列表，取值按影响程度从高至低分别为：1 - 致命、2 -严重、3 - 告警、4 - 提示、5 -健康。
+   * <p>风险等级列表，取值按影响程度从高至低分别为：1 - 致命、2 -严重、3 - 告警、4 - 提示、5 -健康。</p>
    */
   Severities?: Array<number | bigint>
   /**
-   * 实例ID列表。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
-查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&Shard实例ID，如：dcdbt-157xxxk&shard-qxxxx
+   * <p>实例ID列表。可通过 <a href="https://cloud.tencent.com/document/api/1130/57798">DescribeDiagDBInstances</a> 接口获取。<br>查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&amp;Shard实例ID，如：dcdbt-157xxxk&amp;shard-qxxxx</p>
    */
   InstanceIds?: Array<string>
   /**
-   * 服务产品类型，支持值包括："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，"mariadb"-数据库mariadb    默认为"mysql"。
+   * <p>服务产品类型，支持值包括：&quot;mysql&quot; - 云数据库 MySQL，&quot;redis&quot; - 云数据库 Redis，&quot;mariadb&quot;-数据库mariadb，&quot;cynosdb&quot;-数据库 TDSQL-C, &quot;dcdb&quot;-数据库TDSQL MySQL    默认为&quot;mysql&quot;。</p>
    */
   Product?: string
   /**
-   * 偏移量，默认0。
+   * <p>偏移量，默认0。</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认20，最大值为50。
+   * <p>返回数量，默认20，最大值为50。</p>
    */
   Limit?: number
 }
@@ -2845,15 +2844,15 @@ export interface EventInfo {
    */
   EventId?: number
   /**
-   * 诊断类型。
+   * 诊断类型。包含以下值：内存利用率，CPU利用率，磁盘空间利用率，复制，复制IO线程中断。
    */
   DiagType?: string
   /**
-   * 开始时间。
+   * 开始时间。格式: "yyyy-MM-dd'T'HH:mm:ssXXX"
    */
   StartTime?: string
   /**
-   * 结束时间。
+   * 结束时间。格式: "yyyy-MM-dd'T'HH:mm:ssXXX"
    */
   EndTime?: string
   /**
@@ -3249,19 +3248,24 @@ export interface HealthScoreInfo {
   /**
    * 异常详情。
    */
-  IssueTypes: Array<IssueTypeInfo>
+  IssueTypes?: Array<IssueTypeInfo>
   /**
    * 异常事件总数。
    */
-  EventsTotalCount: number
+  EventsTotalCount?: number
   /**
    * 健康得分。
    */
-  HealthScore: number
+  HealthScore?: number
   /**
    * 健康等级, 如："HEALTH", "SUB_HEALTH", "RISK", "HIGH_RISK"。
+其中：
+HEALTH - 健康
+SUB_HEALTH - 亚健康
+RISK - 危险
+HIGH_RISK - 高危
    */
-  HealthLevel: string
+  HealthLevel?: string
 }
 
 /**
@@ -3808,7 +3812,7 @@ export interface DescribeDBDiagEventRequest {
   /**
    * 事件 ID 。通过“获取实例诊断历史[DescribeDBDiagHistory](https://cloud.tencent.com/document/product/1130/39559) ”获取。
    */
-  EventId?: number
+  EventId: number
   /**
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"mariadb"-mariadb;"cynosdb"-TDSQL-C for MySQL ;"dcdb"-TDSQL MySQL ;"redis" - 云数据库 Redis，默认为"mysql"。
    */
@@ -4373,11 +4377,11 @@ export interface DescribeIndexRecommendAggregationSlowLogsResponse {
  */
 export interface DescribeDBDiagEventsResponse {
   /**
-   * 诊断事件的总数目。
+   * <p>诊断事件的总数目。</p>
    */
   TotalCount?: number
   /**
-   * 诊断事件的列表。
+   * <p>诊断事件的列表。</p>
    */
   Items?: Array<DiagHistoryEventItem>
   /**
@@ -4660,15 +4664,15 @@ export interface DescribeDBAutonomyEventsRequest {
  */
 export interface DescribeHealthScoreRequest {
   /**
-   * 需要获取健康得分的实例ID。
+   * <p>需要获取健康得分的实例ID。可通过 <a href="https://cloud.tencent.com/document/api/1130/57798">DescribeDiagDBInstances</a> 接口获取。如果是dcdb(TDSQL MySQL)，请使用 <code>{ClusterId}&amp;{InstanceId}</code> 拼接结果代替入参</p>
    */
   InstanceId: string
   /**
-   * 获取健康得分的时间，时间格式如：2019-09-10 12:13:14。
+   * <p>获取健康得分的时间，时间格式如：2019-09-10 12:13:14。</p>
    */
   Time: string
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。
+   * <p>服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 TDSQL-C for MySQL，&quot;redis&quot; - 云数据库 Redis，默认为&quot;mysql&quot;。</p>
    */
   Product: string
 }
@@ -5302,31 +5306,31 @@ export interface ModifyDiagDBInstanceConfResponse {
  */
 export interface DescribeUserSqlAdviceResponse {
   /**
-   * SQL优化建议，可解析为JSON数组，无需优化时输出为空。
+   * <p>SQL优化建议，可解析为JSON数组，无需优化时输出为空。</p>
    */
   Advices?: string
   /**
-   * SQL优化建议备注，可解析为String数组，无需优化时输出为空。
+   * <p>SQL优化建议备注，可解析为String数组，无需优化时输出为空。</p>
    */
   Comments?: string
   /**
-   * SQL语句。
+   * <p>SQL语句。</p>
    */
   SqlText?: string
   /**
-   * 库名。
+   * <p>库名。</p>
    */
   Schema?: string
   /**
-   * 相关表的DDL信息，可解析为JSON数组。
+   * <p>相关表的DDL信息，可解析为JSON数组。</p>
    */
   Tables?: string
   /**
-   * SQL执行计划，可解析为JSON，无需优化时输出为空。
+   * <p>SQL执行计划，可解析为JSON，无需优化时输出为空。</p>
    */
   SqlPlan?: string
   /**
-   * SQL优化后的成本节约详情，可解析为JSON，无需优化时输出为空。
+   * <p>SQL优化后的成本节约详情，可解析为JSON，无需优化时输出为空。</p>
    */
   Cost?: string
   /**
@@ -5498,19 +5502,19 @@ export interface DescribeTopSpaceTableTimeSeriesRequest {
  */
 export interface DescribeUserSqlAdviceRequest {
   /**
-   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+   * <p>实例 ID。可通过 <a href="https://cloud.tencent.com/document/api/1130/57798">DescribeDiagDBInstances</a> 接口获取。</p>
    */
   InstanceId: string
   /**
-   * SQL语句。
+   * <p>SQL语句。</p>
    */
   SqlText: string
   /**
-   * 库名。
+   * <p>库名。</p>
    */
   Schema?: string
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL；"dbbrain-mysql" - 自建 MySQL，默认为"mysql"。
+   * <p>服务产品类型，支持值&quot;dcdb&quot; - 云数据库TDSQL MySQL；&quot;mysql&quot; - 云数据库 MySQL；&quot;cynosdb&quot; - 云数据库 TDSQL-C for MySQL；&quot;dbbrain-mysql&quot; - 自建 MySQL，默认为&quot;mysql&quot;。</p>
    */
   Product?: string
 }
@@ -5748,7 +5752,7 @@ export interface IndexesToDrop {
  */
 export interface DescribeHealthScoreResponse {
   /**
-   * 健康得分以及异常扣分项。
+   * <p>健康得分以及异常扣分项。</p>
    */
   Data?: HealthScoreInfo
   /**

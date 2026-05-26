@@ -2764,6 +2764,16 @@ export interface AggrSoftDeviceRow {
 }
 
 /**
+ * DeleteDeviceVirtualGroup返回参数结构体
+ */
+export interface DeleteDeviceVirtualGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 软件版本与安装数量
  */
 export interface SoftVersionAndNum {
@@ -3031,6 +3041,24 @@ export interface DescribeDLPEdgeNodesRspItem {
    * 规则版本
    */
   RuleVersion?: string
+}
+
+/**
+ * DeleteDeviceVirtualGroup请求参数结构体
+ */
+export interface DeleteDeviceVirtualGroupRequest {
+  /**
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
+   * 必填，终端自定义分组id
+   */
+  DeviceVirtualGroupId?: number
+  /**
+   * 必填，系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)
+   */
+  OsType?: number
 }
 
 /**

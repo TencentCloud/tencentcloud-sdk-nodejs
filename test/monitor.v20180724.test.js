@@ -428,6 +428,16 @@ it("monitor.v20180724.UnBindingPolicyObject", async function () {
     }
 })
 
+it("monitor.v20180724.RoutePrometheusDynamicAPI", async function () {
+    try {
+       const data = await client.RoutePrometheusDynamicAPI({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeConditionsTemplateList", async function () {
     try {
        const data = await client.DescribeConditionsTemplateList({})
@@ -1008,6 +1018,16 @@ it("monitor.v20180724.ModifyPrometheusTemp", async function () {
     }
 })
 
+it("monitor.v20180724.DescribePrometheusAlertmanagerConfig", async function () {
+    try {
+       const data = await client.DescribePrometheusAlertmanagerConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.UnbindPrometheusManagedGrafana", async function () {
     try {
        const data = await client.UnbindPrometheusManagedGrafana({})
@@ -1101,6 +1121,16 @@ it("monitor.v20180724.DescribeDNSConfig", async function () {
 it("monitor.v20180724.CreatePrometheusAlertGroup", async function () {
     try {
        const data = await client.CreatePrometheusAlertGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.ReplacePrometheusAlertmanagerConfig", async function () {
+    try {
+       const data = await client.ReplacePrometheusAlertmanagerConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

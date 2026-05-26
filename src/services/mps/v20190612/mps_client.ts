@@ -115,6 +115,7 @@ import {
   DeleteContentReviewTemplateRequest,
   ActivateStreamPackageResponse,
   StartStreamLinkFlowResponse,
+  DescribeStreamLinkFlowStatisticsResponse,
   AiReviewPoliticalTaskInput,
   ModifyContentReviewTemplateResponse,
   ModifyScheduleRequest,
@@ -318,6 +319,7 @@ import {
   Speakers,
   DescribeBlindWatermarkTemplatesRequest,
   PureSubtitleTransResultOutput,
+  DeleteVoiceRequest,
   CreateStreamLinkOutputInfoResponse,
   S3InputInfo,
   DescribeStreamPackageLinearAssemblyProgramsRequest,
@@ -555,7 +557,7 @@ import {
   AiReviewTerrorismOcrTaskOutput,
   DescribeAsrHotwordsListResponse,
   AiAnalysisResult,
-  DescribeStreamLinkFlowStatisticsResponse,
+  DeleteVoiceResponse,
   BlindWatermarkInput,
   DescribeBlindWatermarkTemplatesResponse,
   ImageWatermarkInputForUpdate,
@@ -1097,6 +1099,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyLiveRecordTemplateResponse) => void
   ): Promise<ModifyLiveRecordTemplateResponse> {
     return this.request("ModifyLiveRecordTemplate", req, cb)
+  }
+
+  /**
+   * 删除音色（通过音色克隆或设计创建的）。
+   */
+  async DeleteVoice(
+    req: DeleteVoiceRequest,
+    cb?: (error: string, rep: DeleteVoiceResponse) => void
+  ): Promise<DeleteVoiceResponse> {
+    return this.request("DeleteVoice", req, cb)
   }
 
   /**

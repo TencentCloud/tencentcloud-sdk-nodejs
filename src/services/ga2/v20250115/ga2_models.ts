@@ -30,6 +30,20 @@ export interface CreateAccelerateAreasResponse {
 }
 
 /**
+ * DescribeTaskResult返回参数结构体
+ */
+export interface DescribeTaskResultResponse {
+  /**
+   * 任务状态。
+   */
+  Status?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeListeners返回参数结构体
  */
 export interface DescribeListenersResponse {
@@ -289,6 +303,20 @@ export interface DescribeCrossBorderSettlementRequest {
    * 账单年月时间。
    */
   SettlementMonth: number
+}
+
+/**
+ * 加速地域公网IP信息
+ */
+export interface IpAddressInfoSet {
+  /**
+   * IP地址。
+   */
+  IpAddress?: string
+  /**
+   * IP类型。
+   */
+  IspType?: string
 }
 
 /**
@@ -882,17 +910,13 @@ export interface CreateListenerRequest {
 }
 
 /**
- * 加速地域公网IP信息
+ * DescribeTaskResult请求参数结构体
  */
-export interface IpAddressInfoSet {
+export interface DescribeTaskResultRequest {
   /**
-   * IP地址。
+   * 异步任务ID。
    */
-  IpAddress?: string
-  /**
-   * IP类型。
-   */
-  IspType?: string
+  TaskId: string
 }
 
 /**

@@ -844,7 +844,7 @@ export interface UpdateDataModelRegistryInfoRequest {
  */
 export interface BatchTaskOperateNew {
   /**
-   * 操作Id
+   * <p>操作Id</p><p>可使用JobId字段通过ListBatchDetail接口 查询异步操作结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobId?: number
@@ -1801,27 +1801,32 @@ export interface DataSourceInfoPage {
    * 分页页码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageNumber: number
+  PageNumber?: number
   /**
    * 分页大小
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageSize: number
+  PageSize?: number
   /**
    * 数据源列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Rows: Array<DataSourceInfo>
+  Rows?: Array<DataSourceInfo>
   /**
    * 总数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount: number
+  TotalCount?: number
   /**
    * 总分页页码
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalPageNumber: number
+  TotalPageNumber?: number
+  /**
+   * 快照Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SnapshotId?: string
 }
 
 /**
@@ -3310,19 +3315,19 @@ export interface CreateCodeTemplateVersionResponse {
  */
 export interface DescribeDataSourceListRequest {
   /**
-   * 页码
+   * <p>页码</p>
    */
   PageNumber?: number
   /**
-   * 返回数量
+   * <p>返回数量</p>
    */
   PageSize?: number
   /**
-   * 排序配置
+   * <p>排序配置</p>
    */
   OrderFields?: Array<OrderField>
   /**
-   * 可选过滤条件，Filter可选配置(参考): "Name": { "type": "string", "description": "数据源名称" }, "Type": { "type": "string", "description": "类型" }, "ClusterId": { "type": "string", "description": "集群id" }, "CategoryId": { "type": "string", "description": "分类，项目或空间id" }
+   * <p>可选过滤条件，Filter可选配置(参考): &quot;Name&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;数据源名称&quot; }, &quot;Type&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;类型&quot; }, &quot;ClusterId&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;集群id&quot; }, &quot;CategoryId&quot;: { &quot;type&quot;: &quot;string&quot;, &quot;description&quot;: &quot;分类，项目或空间id&quot; }</p>
    */
   Filters?: Array<Filter>
 }
@@ -6108,7 +6113,7 @@ export interface ModifyRuleGroupSubscriptionRequest {
  */
 export interface DescribeDataSourceListResponse {
   /**
-   * 数据源列表
+   * <p>数据源列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: DataSourceInfoPage
@@ -6165,47 +6170,47 @@ export interface PermissionStatus {
  */
 export interface DescribeInstanceLogDetailRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   TaskId: string
   /**
-   * 数据时间
+   * <p>数据时间</p>
    */
   CurRunDate: string
   /**
-   * 日志级别，Info/Debug/Warn/Error/All
+   * <p>日志级别，Info/Debug/Warn/Error/All</p>
    */
   LogLevelType?: string
   /**
-   * 文件类型,Log/Code
+   * <p>文件类型,Log/Code</p>
    */
   ExecutionFileType?: string
   /**
-   * 统一执行平台执行id, 注意: ExecutionJobId 跟 "BrokerIp+OriginFileName" 必须有一个不为空
+   * <p>统一执行平台执行id, 注意: ExecutionJobId 跟 &quot;BrokerIp+OriginFileName&quot; 必须有一个不为空</p>
    */
   ExecutionJobId?: string
   /**
-   * 服务器Ip, 注意: "BrokerIp+OriginFileName"跟ExecutionJobId必须有一个不为空
+   * <p>服务器Ip, 注意: &quot;BrokerIp+OriginFileName&quot;跟ExecutionJobId必须有一个不为空</p>
    */
   BrokerIp?: string
   /**
-   * 文件Name, 注意: "BrokerIp+OriginFileName"跟ExecutionJobId必须有一个不为空
+   * <p>文件Name, 注意: &quot;BrokerIp+OriginFileName&quot;跟ExecutionJobId必须有一个不为空</p>
    */
   OriginFileName?: string
   /**
-   * 起始行
+   * <p>起始行</p>
    */
   StartCount?: number
   /**
-   * 每次查询行数
+   * <p>每次查询行数</p>
    */
   LineCount?: number
   /**
-   * 查询日志扩展信息,通过统一执行平台接口分页查询日志时需要带上,第一页时为null
+   * <p>查询日志扩展信息,通过统一执行平台接口分页查询日志时需要带上,第一页时为null</p>
    */
   ExtInfo?: string
   /**
@@ -6213,23 +6218,23 @@ export interface DescribeInstanceLogDetailRequest {
    */
   RequestFromSource?: string
   /**
-   * 生命周期为基础数据进行日志匹配
+   * <p>生命周期为基础数据进行日志匹配</p>
    */
   InstanceLifeDetailDtoList?: Array<InstanceLifeDetailDto>
   /**
-   * 当前生命周期
+   * <p>当前生命周期</p>
    */
   CurrentLifeRound?: number
   /**
-   * 生命周期总数
+   * <p>生命周期总数</p>
    */
   MaxLifeRound?: number
   /**
-   * 当前生命周期重试次数
+   * <p>当前生命周期重试次数</p>
    */
   Tries?: number
   /**
-   * 动态加载日志
+   * <p>动态加载日志</p>
    */
   Dynamic?: boolean
 }
@@ -6279,22 +6284,22 @@ export interface DeleteDsFolderResponse {
  */
 export interface GetCosTokenResponse {
   /**
-   * cos地域
+   * <p>cos地域</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
-   * Token信息
+   * <p>Token信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Token?: CosTokenResponse
   /**
-   * 桶名
+   * <p>桶名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Bucket?: string
   /**
-   * 终止点（针对私有云环境）
+   * <p>终止点（针对私有云环境）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndPoint?: string
@@ -7225,27 +7230,27 @@ false:  不通知下游任务责任人
  */
 export interface GetCosTokenRequest {
   /**
-   * 项目id
+   * <p>项目id</p>
    */
   ProjectId: string
   /**
-   * 请求域名
+   * <p>请求域名</p>
    */
   OriginDomain: string
   /**
-   * 是否需要跨域
+   * <p>是否需要跨域</p>
    */
   CrossFlag: boolean
   /**
-   * 桶名
+   * <p>桶名</p>
    */
   BucketName?: string
   /**
-   * 远程地址
+   * <p>远程地址</p>
    */
   RemotePath?: string
   /**
-   * 地域
+   * <p>地域</p>
    */
   RemoteRegion?: string
 }
@@ -11554,7 +11559,7 @@ export interface ModifyRuleResponse {
  */
 export interface DescribeInstanceLogFileResponse {
   /**
-   * 下载文件详情
+   * <p>下载文件详情</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: InstanceDownloadLogInfo
@@ -14682,32 +14687,32 @@ export interface BatchModifyOpsOwnersResponse {
  */
 export interface GetPaginationTaskScriptResponseInfo {
   /**
-   * 项目编号
+   * <p>项目编号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: string
   /**
-   * 任务编号
+   * <p>任务编号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId?: string
   /**
-   * 页内尺寸
+   * <p>页内尺寸</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PageSize?: number
   /**
-   * 页码
+   * <p>页码</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PageNum?: number
   /**
-   * 总页数
+   * <p>总页数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PageTotal?: number
   /**
-   * 分页内容
+   * <p>分页内容</p><p>分页拉取全部代码内容后，先拼接，再Base64解码获取完整脚本内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Base64ScriptContent?: string
@@ -23556,6 +23561,7 @@ export interface DlcMergeManifestsInfo {
 
 /**
  * 编排空间试运行记录
+查询执行日志 可调用DownloadLogByLine接口
  */
 export interface TestRunningRecord {
   /**
@@ -25334,15 +25340,15 @@ NRLORO:不在区间内(左开右开)
  */
 export interface DescribeInstanceLogFileRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 任务ID
+   * <p>任务ID</p>
    */
   TaskId: string
   /**
-   * 实例数据时间
+   * <p>实例数据时间</p>
    */
   CurRunDate?: string
   /**
@@ -25350,43 +25356,43 @@ export interface DescribeInstanceLogFileRequest {
    */
   RequestFromSource?: string
   /**
-   * 执行机IP
+   * <p>执行机IP</p>
    */
   BrokerIp?: string
   /**
-   * 日志文件名
+   * <p>日志文件名</p>
    */
   OriginFileName?: string
   /**
-   * 执行平台下发执行id
+   * <p>执行平台下发执行id</p>
    */
   ExecutionJobId?: string
   /**
-   * 日志级别，Info/Debug/Warn/Error/All
+   * <p>日志级别，Info/Debug/Warn/Error/All</p>
    */
   LogLevelType?: string
   /**
-   * 文件类型,Log/Code
+   * <p>文件类型,Log/Code</p>
    */
   ExecutionFileType?: string
   /**
-   * 生命周期为基础数据进行日志匹配。Dynamic=true动态获取日志链路中使用
+   * <p>生命周期为基础数据进行日志匹配。Dynamic=true动态获取日志链路中使用</p>
    */
   InstanceLifeDetailDtoList?: Array<InstanceLifeDetailDto>
   /**
-   * 当前生命周期数
+   * <p>当前生命周期数</p>
    */
   CurrentLifeRound?: number
   /**
-   * 最大生命周期数
+   * <p>最大生命周期数</p>
    */
   MaxLifeRound?: number
   /**
-   * 当前生命周期重试次数
+   * <p>当前生命周期重试次数</p>
    */
   Tries?: number
   /**
-   * 动态获取日志信息标识
+   * <p>动态获取日志信息标识</p>
    */
   Dynamic?: boolean
 }
@@ -27815,7 +27821,7 @@ export interface DescribeRealTimeTaskInstanceNodeInfoResponse {
  */
 export interface DescribeInstanceLogDetailResponse {
   /**
-   * 日志结果
+   * <p>日志结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: InstanceLogInfoOpsDto

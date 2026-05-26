@@ -2002,6 +2002,16 @@ export interface ModifyPolicyGroupResponse {
 }
 
 /**
+ * ReplacePrometheusAlertmanagerConfig返回参数结构体
+ */
+export interface ReplacePrometheusAlertmanagerConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UninstallGrafanaPlugins返回参数结构体
  */
 export interface UninstallGrafanaPluginsResponse {
@@ -3441,17 +3451,24 @@ export interface DescribePolicyConditionListMetric {
 }
 
 /**
- * 通知内容模板绑定信息
+ * DescribePrometheusAlertmanagerConfig请求参数结构体
  */
-export interface NoticeContentTmplBindInfo {
+export interface DescribePrometheusAlertmanagerConfigRequest {
   /**
-   * 通知内容模板ID
+   * <p>Prometheus 实例 ID</p>
    */
-  ContentTmplID?: string
+  InstanceId?: string
+}
+
+/**
+ * Prometheus Alertmanger 可修改配置
+ */
+export interface PrometheusAlertmanagerConfigV2 {
   /**
-   * 通知模板ID
+   * Prometheus Alertmanger 抑制规则组
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  NoticeID?: string
+  InhibitRules?: Array<PrometheusAlertmanagerConfigInhibitRule>
 }
 
 /**
@@ -3504,6 +3521,20 @@ export interface ModifyPrometheusAgentExternalLabelsRequest {
    * 新的external_labels
    */
   ExternalLabels: Array<Label>
+}
+
+/**
+ * DescribePrometheusAlertmanagerConfig返回参数结构体
+ */
+export interface DescribePrometheusAlertmanagerConfigResponse {
+  /**
+   * <p>Alertmanager 配置</p>
+   */
+  AlertmanagerConfig?: PrometheusAlertmanagerConfigV2
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4289,13 +4320,17 @@ export interface DescribeAlertRulesResponse {
 }
 
 /**
- * ResumeGrafanaInstance请求参数结构体
+ * ReplacePrometheusAlertmanagerConfig请求参数结构体
  */
-export interface ResumeGrafanaInstanceRequest {
+export interface ReplacePrometheusAlertmanagerConfigRequest {
   /**
-   * Grafana 实例 ID，例如：grafana-12345678
+   * <p>Prometheus 实例 ID</p>
    */
   InstanceId: string
+  /**
+   * <p>Alertmanager 配置</p>
+   */
+  AlertmanagerConfig?: PrometheusAlertmanagerConfigV2
 }
 
 /**
@@ -4512,6 +4547,27 @@ export interface DescribePrometheusInstanceDetailResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Prometheus Alertmanger 抑制规则
+ */
+export interface PrometheusAlertmanagerConfigInhibitRule {
+  /**
+   * Source 告警的标签匹配规则，比如 "a=b"、"a!=c" 等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceMatchers: Array<string>
+  /**
+   * Target 告警的标签匹配规则，比如 "a=b"、"a!=c" 等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetMatchers: Array<string>
+  /**
+   * Source 和 Target 告警都必须有的一组标签名，比如 alertname、cluster 等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Equal: Array<string>
 }
 
 /**
@@ -6570,6 +6626,16 @@ export interface DeletePolicyGroupResponse {
 }
 
 /**
+ * ResumeGrafanaInstance请求参数结构体
+ */
+export interface ResumeGrafanaInstanceRequest {
+  /**
+   * Grafana 实例 ID，例如：grafana-12345678
+   */
+  InstanceId: string
+}
+
+/**
  * DeleteGrafanaInstance请求参数结构体
  */
 export interface DeleteGrafanaInstanceRequest {
@@ -6631,6 +6697,20 @@ export interface ModifyPrometheusAlertPolicyResponse {
 }
 
 /**
+ * 通知内容模板绑定信息
+ */
+export interface NoticeContentTmplBindInfo {
+  /**
+   * 通知内容模板ID
+   */
+  ContentTmplID?: string
+  /**
+   * 通知模板ID
+   */
+  NoticeID?: string
+}
+
+/**
  * DescribePhoneAlarmFlowTotalCount返回参数结构体
  */
 export interface DescribePhoneAlarmFlowTotalCountResponse {
@@ -6682,6 +6762,20 @@ export interface PeriodsSt {
  * ModifyAlarmReceivers返回参数结构体
  */
 export interface ModifyAlarmReceiversResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RoutePrometheusDynamicAPI返回参数结构体
+ */
+export interface RoutePrometheusDynamicAPIResponse {
+  /**
+   * <p>HTTP 响应数据</p>
+   */
+  HTTP?: PrometheusDynamicAPIResponseHTTP
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7053,6 +7147,32 @@ export interface PrometheusInstanceGrantInfo {
    * 是否显示API等信息(1=有, 2=无)
    */
   HasApiOperation: number
+}
+
+/**
+ * RoutePrometheusDynamicAPI请求参数结构体
+ */
+export interface RoutePrometheusDynamicAPIRequest {
+  /**
+   * <p>Prometheus 实例 ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>HTTP 方法名 GET/POST/PUT/DELETE 等</p>
+   */
+  Method: string
+  /**
+   * <p>HTTP 路径（包括 query string）</p>
+   */
+  Path: string
+  /**
+   * <p>HTTP 请求体，任何数据</p>
+   */
+  RequestBody?: string
+  /**
+   * <p>HTTP 请求头</p>
+   */
+  Headers?: Array<PrometheusStringKeyValuePair>
 }
 
 /**

@@ -808,7 +808,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看超级节点列表
+   * 查看超级节点列表，仅支持TKE标准集群
    */
   async DescribeClusterVirtualNode(
     req: DescribeClusterVirtualNodeRequest,

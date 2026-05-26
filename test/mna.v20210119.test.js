@@ -28,6 +28,16 @@ it("mna.v20210119.SetNotifyUrl", async function () {
     }
 })
 
+it("mna.v20210119.ModifyDeviceAccessRegions", async function () {
+    try {
+       const data = await client.ModifyDeviceAccessRegions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mna.v20210119.UpdateHardware", async function () {
     try {
        const data = await client.UpdateHardware({})
@@ -181,6 +191,16 @@ it("mna.v20210119.GetDevice", async function () {
 it("mna.v20210119.GetDestIPByName", async function () {
     try {
        const data = await client.GetDestIPByName({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.DescribeAccessRegions", async function () {
+    try {
+       const data = await client.DescribeAccessRegions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

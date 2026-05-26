@@ -5657,25 +5657,29 @@ export interface CreateModelServiceAuthTokenResponse {
  */
 export interface GooseFS {
   /**
-   * goosefs实例id
+   * <p>goosefs实例id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
-   * GooseFS类型，包括GooseFS和GooseFSx
+   * <p>GooseFS类型，包括GooseFS和GooseFSx</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
-   * GooseFSx实例需要挂载的路径
+   * <p>GooseFSx实例需要挂载的路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Path?: string
   /**
-   * GooseFS命名空间
+   * <p>GooseFS命名空间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NameSpace?: string
+  /**
+   * <p>客户端的挂载参数，逗号分隔的参数名</p>
+   */
+  MountOptions?: string
 }
 
 /**
@@ -7629,11 +7633,11 @@ export interface ChatCompletionResponse {
  */
 export interface GooseFSx {
   /**
-   * goosefsx实例id
+   * <p>goosefsx实例id</p>
    */
   Id?: string
   /**
-   * GooseFSx实例需要挂载的路径
+   * <p>GooseFSx实例需要挂载的路径</p>
    */
   Path?: string
 }
@@ -7812,6 +7816,10 @@ export interface DataConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicDataSource?: PublicDataSourceFS
+  /**
+   * <p>是否是只读存储</p>
+   */
+  ReadOnly?: boolean
 }
 
 /**

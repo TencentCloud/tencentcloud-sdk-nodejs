@@ -165,7 +165,6 @@ import {
   ModifyInstanceAttributesRequest,
   ConsumerGroupSpeed,
   CreateAclRuleResponse,
-  TableMapping,
   FetchDatahubMessageByOffsetResponse,
   DeleteDatahubTaskRequest,
   FieldParam,
@@ -173,7 +172,6 @@ import {
   DescribeGroupRequest,
   InstanceScalingDownRequest,
   CreateCdcClusterRequest,
-  DeleteTopicIpWhiteListResponse,
   DescribeInstancesDetailRequest,
   JsonPathReplaceParam,
   PrometheusDTO,
@@ -253,7 +251,7 @@ import {
   MariaDBParam,
   SubstrParam,
   DescribeTopicSubscribeGroupRequest,
-  DeleteGroupSubscribeTopicRequest,
+  TableMapping,
   DtsModifyConnectParam,
   InstanceConfigDO,
   DeleteAclRuleResponse,
@@ -265,7 +263,7 @@ import {
   CosParam,
   ZoneResponse,
   DeleteInstancePreRequest,
-  ClickHouseSchema,
+  DeleteGroupSubscribeTopicRequest,
   ConsumerGroupTopic,
   TransformsParam,
   PauseDatahubTaskRequest,
@@ -334,6 +332,7 @@ import {
   OperateResponseData,
   ClusterInfo,
   DeleteGroupRequest,
+  ClickHouseSchema,
   DescribeConnectResourceRequest,
   DeleteRouteResponse,
   CreatePrometheusResponse,
@@ -382,7 +381,6 @@ import {
   Acl,
   TopicRetentionTimeConfigRsp,
   SecondaryAnalyseParam,
-  DeleteTopicIpWhiteListRequest,
   CreateDatahubTaskResponse,
   ClickHouseConnectParam,
   DescribeTopicSyncReplicaRequest,
@@ -989,16 +987,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateInstancePreResponse) => void
   ): Promise<CreateInstancePreResponse> {
     return this.request("CreateInstancePre", req, cb)
-  }
-
-  /**
-   * 删除主题IP白名单
-   */
-  async DeleteTopicIpWhiteList(
-    req: DeleteTopicIpWhiteListRequest,
-    cb?: (error: string, rep: DeleteTopicIpWhiteListResponse) => void
-  ): Promise<DeleteTopicIpWhiteListResponse> {
-    return this.request("DeleteTopicIpWhiteList", req, cb)
   }
 
   /**

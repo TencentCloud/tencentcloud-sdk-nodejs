@@ -569,34 +569,37 @@ export interface RocketMQGroup {
  */
 export interface ModifyRabbitMQUserRequest {
   /**
-   * 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
+   * <p>实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 <a href="https://console.cloud.tencent.com/trabbitmq/cluster?rid=1">TDMQ RabbitMQ 控制台</a>查询。</p>
    */
   InstanceId: string
   /**
-   * 用户名，形如rabbitmq。有效的 User 名称可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。当前不支持修改admin的密码。
+   * <p>用户名，形如rabbitmq。有效的 User 名称可通过登录 <a href="https://console.cloud.tencent.com/trabbitmq/cluster?rid=1">TDMQ RabbitMQ 控制台</a>查询，点击集群列表中的集群，进入集群详情，并在用户与权限页签中找到用户列表，从而找到用户名称。当前不支持修改admin的密码。</p>
    */
   User: string
   /**
-   * 密码，登录时使用。规范：不能为空，8-64个字符，至少要包含小写字母、大写字母、数字、特殊字符【()`~!@#$%^&*_=|{}[]:;',.?/】中的两项
+   * <p>密码，登录时使用。规范：不能为空，8-64个字符，至少要包含小写字母、大写字母、数字、特殊字符【()`~!@#$%^&amp;*_=|{}[]:;&#39;,.?/】中的两项</p>
    */
   Password: string
   /**
-   * 描述，不传则不修改
+   * <p>描述，不传则不修改</p>
    */
   Description?: string
   /**
-   * 用户标签，用于决定改用户访问 RabbitMQ Management 的权限范围
-management：普通控制台用户，monitoring：管理型控制台用户，其他值：非控制台用户
+   * <p>用户标签，用于决定改用户访问 RabbitMQ Management 的权限范围<br>management：普通控制台用户，monitoring：管理型控制台用户，其他值：非控制台用户</p>
    */
   Tags?: Array<string>
   /**
-   * 该用户的最大连接数，不传则不修改
+   * <p>该用户的最大连接数，不传则不修改</p>
    */
   MaxConnections?: number
   /**
-   * 该用户的最大channel数，不传则不修改
+   * <p>该用户的最大channel数，不传则不修改</p>
    */
   MaxChannels?: number
+  /**
+   * <p>是否开启cam验证</p>
+   */
+  EnableCamAuth?: boolean
 }
 
 /**
@@ -8800,34 +8803,37 @@ export interface DescribeMqMsgTraceResponse {
  */
 export interface CreateRabbitMQUserRequest {
   /**
-   * 实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
+   * <p>实例 ID，形如 amqp-xxxxxxxx。有效的 InstanceId 可通过登录 <a href="https://console.cloud.tencent.com/trabbitmq/cluster?rid=1">TDMQ RabbitMQ 控制台</a>查询。</p>
    */
   InstanceId: string
   /**
-   * 用户名，登录时使用
+   * <p>用户名，登录时使用</p>
    */
   User: string
   /**
-   * 密码，登录时使用。规范：不能为空，8-64个字符，至少要包含小写字母、大写字母、数字、特殊字符【()`~!@#$%^&*_=|{}[]:;',.?/】中的两项
+   * <p>密码，登录时使用。规范：不能为空，8-64个字符，至少要包含小写字母、大写字母、数字、特殊字符【()`~!@#$%^&amp;*_=|{}[]:;&#39;,.?/】中的两项</p>
    */
   Password: string
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
   /**
-   * 用户标签，用于决定改用户访问RabbitMQ Management的权限范围
-management：普通控制台用户，monitoring：管理型控制台用户，其他值：非控制台用户
+   * <p>用户标签，用于决定改用户访问RabbitMQ Management的权限范围<br>management：普通控制台用户，monitoring：管理型控制台用户，其他值：非控制台用户</p>
    */
   Tags?: Array<string>
   /**
-   * 该用户的最大连接数，不填写则不限制
+   * <p>该用户的最大连接数，不填写则不限制</p>
    */
   MaxConnections?: number
   /**
-   * 该用户的最大channel数，不填写则不限制
+   * <p>该用户的最大channel数，不填写则不限制</p>
    */
   MaxChannels?: number
+  /**
+   * <p>是否开启cam验证</p>
+   */
+  EnableCamAuth?: boolean
 }
 
 /**
@@ -9218,7 +9224,7 @@ export interface ExportRocketMQMessageDetailRequest {
  */
 export interface CreateRabbitMQUserResponse {
   /**
-   * 用户名，登录时使用
+   * <p>用户名，登录时使用</p>
    */
   User?: string
   /**

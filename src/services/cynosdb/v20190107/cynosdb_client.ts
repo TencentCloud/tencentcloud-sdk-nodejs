@@ -106,6 +106,7 @@ import {
   AssociateSecurityGroupsResponse,
   CreateProxyEndPointRequest,
   ModifyBackupDownloadUserRestrictionResponse,
+  AddLibraDBInstancesResponse,
   AuditRuleTemplateInfo,
   DescribeParamTemplateDetailRequest,
   OpenReadOnlyInstanceExclusiveAccessRequest,
@@ -464,6 +465,7 @@ import {
   CalculateBackupSaveSecExpiresResponse,
   ModifyClusterSlaveZoneRequest,
   DescribeInstanceErrorLogsResponse,
+  Objects,
   DescribeSupportProxyVersionResponse,
   DescribeLibraDBForwardConfigResponse,
   ZoneStockInfo4Libra,
@@ -511,6 +513,7 @@ import {
   DescribeAuditLogsResponse,
   PackagePriority,
   DescribeInstancesWithinSameClusterRequest,
+  AddLibraDBInstancesRequest,
   ModifyBinlogConfigResponse,
   ModifyAccountDescriptionResponse,
   SetRenewFlagRequest,
@@ -2072,6 +2075,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OpenWanResponse) => void
   ): Promise<OpenWanResponse> {
     return this.request("OpenWan", req, cb)
+  }
+
+  /**
+   * 本接口（AddLibraDBInstances）用于集群添加只读分析引擎
+   */
+  async AddLibraDBInstances(
+    req: AddLibraDBInstancesRequest,
+    cb?: (error: string, rep: AddLibraDBInstancesResponse) => void
+  ): Promise<AddLibraDBInstancesResponse> {
+    return this.request("AddLibraDBInstances", req, cb)
   }
 
   /**

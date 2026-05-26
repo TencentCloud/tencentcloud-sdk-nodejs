@@ -108,6 +108,16 @@ it("faceid.v20180301.GetDetectInfoEnhanced", async function () {
     }
 })
 
+it("faceid.v20180301.GetWxNFCResult", async function () {
+    try {
+       const data = await client.GetWxNFCResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("faceid.v20180301.GetFaceIdToken", async function () {
     try {
        const data = await client.GetFaceIdToken({})
@@ -151,6 +161,16 @@ it("faceid.v20180301.ImageRecognitionV2", async function () {
 it("faceid.v20180301.LivenessCompare", async function () {
     try {
        const data = await client.LivenessCompare({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("faceid.v20180301.MobileStatus", async function () {
+    try {
+       const data = await client.MobileStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -218,9 +238,9 @@ it("faceid.v20180301.PhoneVerification", async function () {
     }
 })
 
-it("faceid.v20180301.MobileStatus", async function () {
+it("faceid.v20180301.GetNFCToken", async function () {
     try {
-       const data = await client.MobileStatus({})
+       const data = await client.GetNFCToken({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

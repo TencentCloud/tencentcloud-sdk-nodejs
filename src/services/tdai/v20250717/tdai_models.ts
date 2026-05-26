@@ -463,11 +463,23 @@ export interface CreatingStepInfo {
  */
 export interface CreateChatCompletionRequest {
   /**
-   * 是否隐藏
+   * <p>输入内容</p>
+   */
+  InputContent: string
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>对话窗口ID，空值表示新的会话</p>
+   */
+  ChatId?: string
+  /**
+   * <p>是否隐藏</p>
    */
   IsHidden?: boolean
   /**
-   * 是否隐藏会话
+   * <p>是否隐藏会话</p>
    */
   IsChatHidden?: boolean
 }

@@ -2349,6 +2349,36 @@ export interface ModifyBackupDownloadUserRestrictionResponse {
 }
 
 /**
+ * AddLibraDBInstances返回参数结构体
+ */
+export interface AddLibraDBInstancesResponse {
+  /**
+   * 大订单号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BigDealIds?: Array<string>
+  /**
+   * 冻结流水，一次开通一个冻结流水。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TranId?: string
+  /**
+   * 后付费订单号。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DealNames?: Array<string>
+  /**
+   * 发货资源id列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 审计规则模板的详情
  */
 export interface AuditRuleTemplateInfo {
@@ -3236,7 +3266,7 @@ export interface CreateClustersRequest {
    */
   Memory?: number
   /**
-   * <p>实例数量，数量范围为(0,16]，默认值为2（即一个rw实例+一个ro实例），传递的n表示1个rw实例+n-1个ro实例（规格相同），如需要更精确的集群组成搭配，请使用InstanceInitInfos</p>
+   * <p>实例数量</p><p>取值范围：[1, 16]</p><p>默认值：2</p><ul><li>取值为2，表示一个 rw 实例 + 一个 ro 实例。</li><li>传递的 n 表示1个 rw 实例 + n-1个 ro 实例（规格相同）。</li><li>如需要更精确的集群组成搭配，请使用 InstanceInitInfos。</li><li>此参数设置的数值适用于预置资源集群，如需设置 Serverless 集群的实例规格及数量，请使用 InstanceInitInfos.N 中的 InstanceInitInfo 结构。</li></ul>
    */
   InstanceCount?: number
   /**
@@ -3383,6 +3413,10 @@ export interface CreateClustersRequest {
    * <p>暂停后的归档处理时间</p><p>单位：时</p><p>默认值：12</p><p>仅当前集群主实例为SERVERLESS时，该参数生效</p>
    */
   AutoArchiveDelayHours?: number
+  /**
+   * <p>集群级别，可空。例如 P0, P1。（可忽略该字段）</p>
+   */
+  ClusterLevel?: string
   /**
    * <p>内核小版本号</p>
    */
@@ -10915,198 +10949,187 @@ export interface DescribeBinlogListByVaultResponse {
  */
 export interface CynosdbCluster {
   /**
-   * 集群状态， 可选值如下:
-creating: 创建中
-running:运行中
-isolating:隔离中
-isolated:已隔离
-activating:解隔离中
-offlining:下线中
-offlined:已下线
-deleting:删除中
-deleted:已删除
+   * <p>集群状态， 可选值如下:<br>creating: 创建中<br>running:运行中<br>isolating:隔离中<br>isolated:已隔离<br>activating:解隔离中<br>offlining:下线中<br>offlined:已下线<br>deleting:删除中<br>deleted:已删除</p>
    */
   Status: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime: string
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName: string
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region: string
   /**
-   * 数据库版本
+   * <p>数据库版本</p>
    */
   DbVersion: string
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 实例数
+   * <p>实例数</p>
    */
   InstanceNum: number
   /**
-   * 用户uin
+   * <p>用户uin</p>
    */
   Uin: string
   /**
-   * 引擎类型
+   * <p>引擎类型</p>
    */
   DbType: string
   /**
-   * 用户appid
+   * <p>用户appid</p>
    */
   AppId: number
   /**
-   * 集群状态描述
+   * <p>集群状态描述</p>
    */
   StatusDesc: string
   /**
-   * 集群创建时间
+   * <p>集群创建时间</p>
    */
   CreateTime: string
   /**
-   * 付费模式。0-按量计费，1-包年包月
+   * <p>付费模式。0-按量计费，1-包年包月</p>
    */
   PayMode: number
   /**
-   * 截止时间
+   * <p>截止时间</p>
    */
   PeriodEndTime: string
   /**
-   * 集群读写vip
+   * <p>集群读写vip</p>
    */
   Vip: string
   /**
-   * 集群读写vport
+   * <p>集群读写vport</p>
    */
   Vport: number
   /**
-   * 项目id
+   * <p>项目id</p>
    */
   ProjectID: number
   /**
-   * 私有网络ID
+   * <p>私有网络ID</p>
    */
   VpcId?: string
   /**
-   * 子网ID
+   * <p>子网ID</p>
    */
   SubnetId?: string
   /**
-   * cynos内核版本
+   * <p>cynos内核版本</p>
    */
   CynosVersion?: string
   /**
-   * cynos版本标签
+   * <p>cynos版本标签</p>
    */
   CynosVersionTag?: string
   /**
-   * 存储容量
+   * <p>存储容量</p>
    */
   StorageLimit?: number
   /**
-   * 续费标志
+   * <p>续费标志</p>
    */
   RenewFlag?: number
   /**
-   * 正在处理的任务
+   * <p>正在处理的任务</p>
    */
   ProcessingTask?: string
   /**
-   * 集群的任务数组
+   * <p>集群的任务数组</p>
    */
   Tasks?: Array<ObjectTask>
   /**
-   * 集群绑定的tag数组
+   * <p>集群绑定的tag数组</p>
    */
   ResourceTags?: Array<Tag>
   /**
-   * Db类型(NORMAL, SERVERLESS)
+   * <p>Db类型(NORMAL, SERVERLESS)</p>
    */
   DbMode?: string
   /**
-   * 当Db类型为SERVERLESS时，serverless集群状态，可选值:
-resume
-pause
+   * <p>当Db类型为SERVERLESS时，serverless集群状态，可选值:<br>resume<br>pause</p>
    */
   ServerlessStatus?: string
   /**
-   * 集群预付费存储值大小
+   * <p>集群预付费存储值大小</p>
    */
   Storage?: number
   /**
-   * 集群存储为预付费时的存储ID，用于预付费存储变配
+   * <p>集群存储为预付费时的存储ID，用于预付费存储变配</p>
    */
   StorageId?: string
   /**
-   * 集群存储付费模式。0-按量计费，1-包年包月
+   * <p>集群存储付费模式。0-按量计费，1-包年包月</p>
    */
   StoragePayMode?: number
   /**
-   * 集群计算规格对应的最小存储值
+   * <p>集群计算规格对应的最小存储值</p>
    */
   MinStorageSize?: number
   /**
-   * 集群计算规格对应的最大存储值
+   * <p>集群计算规格对应的最大存储值</p>
    */
   MaxStorageSize?: number
   /**
-   * 集群网络信息
+   * <p>集群网络信息</p>
    */
   NetAddrs?: Array<NetAddr>
   /**
-   * 物理可用区
+   * <p>物理可用区</p>
    */
   PhysicalZone?: string
   /**
-   * 主可用区
+   * <p>主可用区</p>
    */
   MasterZone?: string
   /**
-   * 是否有从可用区
+   * <p>是否有从可用区</p>
    */
   HasSlaveZone?: string
   /**
-   * 从可用区
+   * <p>从可用区</p>
    */
   SlaveZones?: Array<string>
   /**
-   * 商业类型
+   * <p>商业类型</p>
    */
   BusinessType?: string
   /**
-   * 是否冻结
+   * <p>是否冻结</p>
    */
   IsFreeze?: string
   /**
-   * 订单来源
+   * <p>订单来源</p>
    */
   OrderSource?: string
   /**
-   * 能力
+   * <p>能力</p>
    */
   Ability?: Ability
   /**
-   * 实例绑定资源包信息（此处只返回存储资源包，即packageType=DISK）
+   * <p>实例绑定资源包信息（此处只返回存储资源包，即packageType=DISK）</p>
    */
   ResourcePackages?: Array<ResourcePackage>
   /**
-   * 全球数据库唯一标识
+   * <p>全球数据库唯一标识</p>
    */
   GdnId?: string
   /**
-   * 集群角色。主集群- primary，从集群 - standby，如果 GdnId为空，该字段无效。
+   * <p>集群角色。主集群- primary，从集群 - standby，如果 GdnId为空，该字段无效。</p>
    */
   GdnRole?: string
 }
@@ -11698,6 +11721,17 @@ export interface DescribeInstanceErrorLogsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 同步对象列表
+ */
+export interface Objects {
+  /**
+   * 包含数据库表信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatabaseTables?: MigrateObject
 }
 
 /**
@@ -12943,6 +12977,104 @@ export interface DescribeInstancesWithinSameClusterRequest {
 }
 
 /**
+ * AddLibraDBInstances请求参数结构体
+ */
+export interface AddLibraDBInstancesRequest {
+  /**
+   * 可用区
+   */
+  Zone: string
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * Cpu核数
+   */
+  Cpu: number
+  /**
+   * 内存，单位为GB
+   */
+  Mem: number
+  /**
+   * 磁盘大小
+   */
+  StorageSize: number
+  /**
+   * 付费模式
+   */
+  PayMode: number
+  /**
+   * 同步对象列表
+   */
+  Objects: Objects
+  /**
+   * 新增RO组时使用的Port，取值范围为[0,65535)
+   */
+  Port?: number
+  /**
+   * 新增只读实例数，取值范围为(0,15]
+   */
+  GoodsNum?: number
+  /**
+   * 实例名称，字符串长度范围为[0,64)，取值范围为大小写字母，0-9数字，'_','-','.'
+   */
+  InstanceName?: string
+  /**
+   * 副本数
+   */
+  ReplicasNum?: number
+  /**
+   * ReplicasNum>1或者ReplicasNum=1且Cpu>=32核的时候取值为'Exclusive'，其余场景取值'Common'
+   */
+  InstanceType?: string
+  /**
+   * 磁盘类型
+   */
+  StorageType?: string
+  /**
+   * 是否自动选择代金券 1是 0否 默认为0
+   */
+  AutoVoucher?: number
+  /**
+   * 订单来源，字符串长度范围为[0,64)
+   */
+  OrderSource?: string
+  /**
+   * 交易模式 0-下单并支付 1-下单
+   */
+  DealMode?: number
+  /**
+   * 所属VPC网络ID。
+   */
+  VpcId?: string
+  /**
+   * 所属子网ID，如果设置了VpcId，则SubnetId必填。
+   */
+  SubnetId?: string
+  /**
+   * 安全组ID，新建只读实例时可以指定安全组。
+   */
+  SecurityGroupIds?: Array<string>
+  /**
+   * 分析引擎版本
+   */
+  LibraDBVersion?: string
+  /**
+   * 购买时长,与TimeUnit组合才能生效
+   */
+  TimeSpan?: number
+  /**
+   * 购买时长单位, 与TimeSpan组合生效，可选:日:d,月:m
+   */
+  TimeUnit?: string
+  /**
+   * 源端实例id
+   */
+  SrcInstanceId?: string
+}
+
+/**
  * ModifyBinlogConfig返回参数结构体
  */
 export interface ModifyBinlogConfigResponse {
@@ -13872,55 +14004,59 @@ export interface LibraDBNodeInfo {
  */
 export interface ParamItemDetail {
   /**
-   * 当前值
+   * <p>当前值</p>
    */
   CurrentValue?: string
   /**
-   * 默认值
+   * <p>默认值</p>
    */
   Default?: string
   /**
-   * 参数的可选枚举值。如果为非枚举值，则为空
+   * <p>参数的可选枚举值。如果为非枚举值，则为空</p>
    */
   EnumValue?: Array<string>
   /**
-   * 1：全局参数，0：非全局参数
+   * <p>1：全局参数，0：非全局参数</p>
    */
   IsGlobal?: number
   /**
-   * 最大值
+   * <p>最大值</p>
    */
   Max?: string
   /**
-   * 最小值
+   * <p>最小值</p>
    */
   Min?: string
   /**
-   * 修改参数后，是否需要重启数据库以使参数生效。0-不需要重启，1-需要重启。
+   * <p>修改参数后，是否需要重启数据库以使参数生效。0-不需要重启，1-需要重启。</p>
    */
   NeedReboot?: number
   /**
-   * 参数名称
+   * <p>参数名称</p>
    */
   ParamName?: string
   /**
-   * 参数类型：integer，enum，float，string，func
+   * <p>参数类型：integer，enum，float，string，func</p>
    */
   ParamType?: string
   /**
-   * 参数描述
+   * <p>参数是否可修改</p>
+   */
+  ModifiableInfo?: ModifiableInfo
+  /**
+   * <p>参数描述</p>
    */
   Description?: string
   /**
-   * 类型是否为公式
+   * <p>类型是否为公式</p>
    */
   IsFunc?: boolean
   /**
-   * 参数配置公式
+   * <p>参数配置公式</p>
    */
   Func?: string
   /**
-   * 支持公式的参数的默认公式样式
+   * <p>支持公式的参数的默认公式样式</p>
    */
   FuncPattern?: string
 }

@@ -31,6 +31,7 @@ import {
   SparkQuery,
   DynamicPodSpec,
   CustomImage,
+  DescribeDynamicInstanceDetailResponse,
   ResetYarnConfigRequest,
   ComputeResourceAdvanceParams,
   ServiceDeployInfo,
@@ -80,6 +81,7 @@ import {
   ModifyDynamicInstanceResponse,
   DescribeServiceConfGroupInfosRequest,
   InquiryPriceUpdateInstanceRequest,
+  DescribeDynamicInstanceDetailRequest,
   AttachDisksResponse,
   WeekRepeatStrategy,
   CLBSetting,
@@ -140,7 +142,7 @@ import {
   DefaultSetting,
   COSSettings,
   CreateCloudInstanceResponse,
-  ScaleOutInstanceRequest,
+  PersistentVolume,
   KyuubiQueryInfo,
   ModifyAutoScaleStrategyRequest,
   DescribeGroupsSTDRequest,
@@ -308,6 +310,7 @@ import {
   PodAffinitySpec,
   ServiceProcessFunctionInfo,
   PreExecuteFileSettings,
+  StorageVolumeDetail,
   TerminateSLInstanceRequest,
   DescribeNodeSpecResponse,
   DescribeStarRocksQueryInfoRequest,
@@ -327,7 +330,9 @@ import {
   CreateSLInstanceRequest,
   AutoScaleResourceConf,
   DescribeGlobalConfigRequest,
+  ScaleOutInstanceRequest,
   MonthRepeatStrategy,
+  RedisInstance,
   PodSaleSpec,
   DescribeHBaseTableOverviewRequest,
   DescribeClusterFlowStatusDetailResponse,
@@ -400,6 +405,7 @@ import {
   DeleteUserManagerUserListResponse,
   FlowExtraDetail,
   InquiryPriceRenewInstanceRequest,
+  DynamicInstanceGroupSpec,
   NodeMark,
   MultiDiskMC,
   CustomMetaInfo,
@@ -759,6 +765,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStarRocksQueryInfoResponse) => void
   ): Promise<DescribeStarRocksQueryInfoResponse> {
     return this.request("DescribeStarRocksQueryInfo", req, cb)
+  }
+
+  /**
+   * 续费询价。
+   */
+  async InquiryPriceRenewInstance(
+    req: InquiryPriceRenewInstanceRequest,
+    cb?: (error: string, rep: InquiryPriceRenewInstanceResponse) => void
+  ): Promise<InquiryPriceRenewInstanceResponse> {
+    return this.request("InquiryPriceRenewInstance", req, cb)
   }
 
   /**
@@ -1265,13 +1281,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 续费询价。
+   * 描述容器EMR-TKE集群DynamicInstance详情
    */
-  async InquiryPriceRenewInstance(
-    req: InquiryPriceRenewInstanceRequest,
-    cb?: (error: string, rep: InquiryPriceRenewInstanceResponse) => void
-  ): Promise<InquiryPriceRenewInstanceResponse> {
-    return this.request("InquiryPriceRenewInstance", req, cb)
+  async DescribeDynamicInstanceDetail(
+    req: DescribeDynamicInstanceDetailRequest,
+    cb?: (error: string, rep: DescribeDynamicInstanceDetailResponse) => void
+  ): Promise<DescribeDynamicInstanceDetailResponse> {
+    return this.request("DescribeDynamicInstanceDetail", req, cb)
   }
 
   /**

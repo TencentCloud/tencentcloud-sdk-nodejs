@@ -286,13 +286,13 @@ export interface DBInstancePrice {
 }
 
 /**
- * TerminateDBInstances请求参数结构体
+ * DescribePasswordRotation返回参数结构体
  */
-export interface TerminateDBInstancesRequest {
+export interface DescribePasswordRotationResponse {
   /**
-   * 指定预隔离实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制预隔离实例 ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
+  RequestId?: string
 }
 
 /**
@@ -308,6 +308,11 @@ export interface KillOpsRequest {
    */
   Operations: Array<Operation>
 }
+
+/**
+ * EnablePasswordRotation请求参数结构体
+ */
+export type EnablePasswordRotationRequest = null
 
 /**
  * DropDBInstanceParamTpl返回参数结构体
@@ -364,6 +369,16 @@ export interface DescribeAuditLogFilesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * FlushInstanceRouterConfig请求参数结构体
+ */
+export interface FlushInstanceRouterConfigRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
 }
 
 /**
@@ -619,6 +634,20 @@ export interface DescribeBackupRulesResponse {
    * 告警额度
    */
   AlertThreshold?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyBackupExpireTime返回参数结构体
+ */
+export interface ModifyBackupExpireTimeResponse {
+  /**
+   * <p>失败的备份ID</p>
+   */
+  FailedBackups?: Array<number | bigint>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -975,13 +1004,13 @@ export interface AddNodeList {
 }
 
 /**
- * FlushInstanceRouterConfig请求参数结构体
+ * EnablePasswordRotation返回参数结构体
  */
-export interface FlushInstanceRouterConfigRequest {
+export interface EnablePasswordRotationResponse {
   /**
-   * 实例ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
+  RequestId?: string
 }
 
 /**
@@ -1419,6 +1448,20 @@ export interface DescribeDetailedSlowLogsRequest {
 - asc：顺序。
    */
   OrderByType?: string
+}
+
+/**
+ * ModifyInstanceAz返回参数结构体
+ */
+export interface ModifyInstanceAzResponse {
+  /**
+   * <p>可用区调整订单ID。</p>
+   */
+  DealId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2480,13 +2523,17 @@ export interface DescribeClientConnectionsResponse {
 }
 
 /**
- * DisableSRVConnectionUrl请求参数结构体
+ * DeleteDBBackups请求参数结构体
  */
-export interface DisableSRVConnectionUrlRequest {
+export interface DeleteDBBackupsRequest {
   /**
-   * 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+   * 实例id,cmgo-xxxx
    */
   InstanceId: string
+  /**
+   * 备份文件id列表
+   */
+  BackupIds: Array<number | bigint>
 }
 
 /**
@@ -2824,6 +2871,16 @@ export interface CreateBackupDownloadTaskRequest {
 }
 
 /**
+ * TerminateDBInstances请求参数结构体
+ */
+export interface TerminateDBInstancesRequest {
+  /**
+   * 指定预隔离实例 ID。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制预隔离实例 ID。
+   */
+  InstanceId: string
+}
+
+/**
  * 数据库参数模板
  */
 export interface ParamTpl {
@@ -2996,6 +3053,16 @@ export interface CreateDBInstanceHourRequest {
    * <p>实例CPU核大小，单位：C。具体售卖的CPU规格，请通过接口 <a href="https://cloud.tencent.com/document/product/240/38567">DescribeSpecInfo</a> 获取。<br>注意：通用 I 型实例必须设置 CPU 大小。</p>
    */
   CpuCore?: number
+}
+
+/**
+ * DeleteDBBackups返回参数结构体
+ */
+export interface DeleteDBBackupsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3189,6 +3256,24 @@ export interface DeliverSummary {
    * 投递子类型：cls，ckafka。
    */
   DeliverSubType?: string
+}
+
+/**
+ * ModifyBackupExpireTime请求参数结构体
+ */
+export interface ModifyBackupExpireTimeRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>过期时间</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
+   */
+  ExpireTime: string
+  /**
+   * <p>备份ID</p>
+   */
+  BackupIds: Array<number | bigint>
 }
 
 /**
@@ -3676,17 +3761,13 @@ export interface DropDBInstanceParamTplRequest {
 }
 
 /**
- * ModifyInstanceAz返回参数结构体
+ * DisableSRVConnectionUrl请求参数结构体
  */
-export interface ModifyInstanceAzResponse {
+export interface DisableSRVConnectionUrlRequest {
   /**
-   * <p>可用区调整订单ID。</p>
+   * 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
    */
-  DealId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -3899,6 +3980,11 @@ export interface IsolateDBInstanceRequest {
    */
   InstanceId: string
 }
+
+/**
+ * DescribePasswordRotation请求参数结构体
+ */
+export type DescribePasswordRotationRequest = null
 
 /**
  * 审计日志文件

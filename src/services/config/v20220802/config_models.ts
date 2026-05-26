@@ -2457,7 +2457,7 @@ export interface ListSystemRulesRequest {
 }
 
 /**
- * 资源列列表信息
+ * 资源列表信息
  */
 export interface AggregateResourceInfo {
   /**

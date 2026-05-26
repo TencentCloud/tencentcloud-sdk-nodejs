@@ -113,7 +113,7 @@ import {
   CreateStoreLocationRequest,
   DescribeLakeFsInfoResponse,
   ModifyWorkGroupResponse,
-  GetOptimizerPolicyResponse,
+  DescribeDMSPartitionsResponse,
   DescribeStandardEngineResourceGroupConfigInfoResponse,
   DescribeTableRequest,
   Policy,
@@ -151,6 +151,7 @@ import {
   UpdateStandardEngineResourceGroupBaseInfoRequest,
   SparkSessionBatchLogOperate,
   DescribeTablePartitionsRequest,
+  TaskResultInfo,
   SparkMonitorMetrics,
   CreateDMSDatabaseResponse,
   CreateStoreLocationResponse,
@@ -182,6 +183,7 @@ import {
   DescribeUserTypeResponse,
   DeleteThirdPartyAccessUserRequest,
   DeleteUserResponse,
+  CreateUserRoleRequest,
   DescribeForbiddenTableProRequest,
   CreateDataEngineResponse,
   AssociateDatasourceHouseResponse,
@@ -219,7 +221,7 @@ import {
   DescribeLakeFsTaskResultRequest,
   OtherCHDFSBinding,
   AlterDMSTableRequest,
-  DescribeDMSPartitionsResponse,
+  SmartPolicy,
   CreateScriptRequest,
   DescribeUserVpcConnectionRequest,
   DataFormat,
@@ -237,7 +239,6 @@ import {
   FavorInfo,
   TaskFullRespInfo,
   DeleteDataEngineRequest,
-  SmartPolicy,
   CreateSparkSessionBatchSQLResponse,
   DescribeDMSDatabaseRequest,
   DescribeLakeFsDirSummaryRequest,
@@ -250,6 +251,7 @@ import {
   DescribeTableResponse,
   CoreInfo,
   DetachUserPolicyResponse,
+  GetOptimizerPolicyResponse,
   AnalysisTaskResults,
   UnbindWorkGroupsFromUserResponse,
   AlterDMSDatabaseResponse,
@@ -258,7 +260,7 @@ import {
   DescribeSessionImageVersionResponse,
   LockMetaDataResponse,
   SetOptimizerPolicyResponse,
-  CreateUserRequest,
+  CheckLockMetaDataResponse,
   AlterDMSDatabaseRequest,
   DescribeOtherCHDFSBindingListResponse,
   UpdateRowFilterResponse,
@@ -285,6 +287,7 @@ import {
   RestartDataEngineResponse,
   DescribeNativeSparkSessionsResponse,
   SwitchDataEngineImageResponse,
+  ElasticsearchInfo,
   DescribeSparkAppTasksResponse,
   CreateCHDFSBindingProductRequest,
   DescribeUserRegisterTimeResponse,
@@ -359,7 +362,7 @@ import {
   UnbindWorkGroupsFromUserRequest,
   UpdateStandardEngineResourceGroupResourceInfoRequest,
   NetworkConnection,
-  ElasticsearchInfo,
+  CreateUserRequest,
   ModifyWorkGroupRequest,
   UpdateStandardEngineResourceGroupBaseInfoResponse,
   SmartPolicyBaseInfo,
@@ -377,10 +380,10 @@ import {
   Sort,
   StatementInformation,
   OtherDatasourceConnection,
-  TaskResultInfo,
+  DetachUserPolicyRequest,
   DeleteThirdPartyAccessUserResponse,
   GPUInfo,
-  DataSourceInfo,
+  DescribeDataEngineImageVersionsResponse,
   CreateTcIcebergTableResponse,
   DeleteSparkAppResponse,
   DescribeUserDataEngineConfigRequest,
@@ -427,7 +430,7 @@ import {
   DeleteSparkAppRequest,
   DescribeDLCCatalogAccessRequest,
   DescribeStandardEngineResourceGroupsResponse,
-  DetachUserPolicyRequest,
+  CreateUserRoleResponse,
   DescribeTaskLogResponse,
   DescribeTasksResponse,
   DropDMSPartitionsRequest,
@@ -457,6 +460,7 @@ import {
   RevokeDLCCatalogAccessResponse,
   DeleteCHDFSBindingProductRequest,
   RenewDataEngineResponse,
+  DataSourceInfo,
   DescribeNotebookSessionsResponse,
   DescribeEngineUsageInfoRequest,
   DataMaskStrategyInfo,
@@ -485,9 +489,7 @@ import {
   DescribeStoreLocationResponse,
   DescribeTCLakeMetaInstanceResponse,
   QueryTaskCostDetailResponse,
-  CheckLockMetaDataResponse,
   NotebookSessionInfo,
-  DescribeDataEngineImageVersionsResponse,
   Execution,
   CreateNotebookSessionStatementSupportBatchSQLResponse,
   BindWorkGroupsToUserRequest,
@@ -2114,6 +2116,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSparkAppTasksResponse) => void
   ): Promise<DescribeSparkAppTasksResponse> {
     return this.request("DescribeSparkAppTasks", req, cb)
+  }
+
+  /**
+   * 创建用户角色
+   */
+  async CreateUserRole(
+    req: CreateUserRoleRequest,
+    cb?: (error: string, rep: CreateUserRoleResponse) => void
+  ): Promise<CreateUserRoleResponse> {
+    return this.request("CreateUserRole", req, cb)
   }
 
   /**

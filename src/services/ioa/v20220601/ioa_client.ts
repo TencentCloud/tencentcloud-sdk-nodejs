@@ -112,6 +112,7 @@ import {
   DescribeDeviceVirtualGroupsPageRsp,
   CreateCompanyDirectoryConfigResponse,
   AggrSoftDeviceRow,
+  DeleteDeviceVirtualGroupResponse,
   SoftVersionAndNum,
   ExportDeviceDownloadTaskResponse,
   DescribeDeviceDetailListPageData,
@@ -126,6 +127,7 @@ import {
   DescribeDevicesPageRsp,
   DescribeSoftCensusListByDeviceResponse,
   DescribeDLPEdgeNodesRspItem,
+  DeleteDeviceVirtualGroupRequest,
   DescribeDLPEdgeNodeGroupsRspItem,
   DescribeDLPEdgeNodeGroupsResponse,
   Filter,
@@ -212,6 +214,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GrantResourcesByAccountsResponse) => void
   ): Promise<GrantResourcesByAccountsResponse> {
     return this.request("GrantResourcesByAccounts", req, cb)
+  }
+
+  /**
+   * 删除终端自定义分组，私有化调用path为：/capi/Assets/Device/DeleteDeviceVirtualGroup
+   */
+  async DeleteDeviceVirtualGroup(
+    req: DeleteDeviceVirtualGroupRequest,
+    cb?: (error: string, rep: DeleteDeviceVirtualGroupResponse) => void
+  ): Promise<DeleteDeviceVirtualGroupResponse> {
+    return this.request("DeleteDeviceVirtualGroup", req, cb)
   }
 
   /**

@@ -22,10 +22,12 @@ import {
   DescribeScanStatsRequest,
   DescribeScanLogsResponse,
   Quota,
+  DescribeRawScanLogsRequest,
   PlanQRCode,
-  ScanLog,
+  FlavorKingCycleBrandScanAnalysisResponse,
   DescribeProductsRequest,
   CreateCorporationOrderResponse,
+  FlavorKingCycleBrandImportantProvinceScanAnalysisCityItem,
   ModifyProductResponse,
   ModifyProductRequest,
   ModifyCustomRuleRequest,
@@ -34,7 +36,7 @@ import {
   DeleteCodeBatchRequest,
   DescribeMerchantsRequest,
   ModifyTraceCodeRequest,
-  DescribePlanQRCodesResponse,
+  DescribeFlavorKingCycleBrandScanMetricsRequest,
   CreateMerchantRequest,
   DescribeCodeBatchByIdRequest,
   DescribeTraceCodeByIdResponse,
@@ -42,14 +44,19 @@ import {
   DescribeProductsResponse,
   CreateTraceChainResponse,
   DescribeTraceDataListResponse,
+  DescribeFlavorKingCycleBrandProvinceCityScanAnalysisResponse,
   ReportScanDetailResponse,
   AttrItem,
   DescribeTraceCodesRequest,
-  CreateTraceCodesAsyncRequest,
+  DescribeFlavorKingCycleBrandScanAnalysisRequest,
+  DescribeFlavorKingCycleBrandImportantProvinceUserAnalysisResponse,
   ModifyTraceDataResponse,
   AuthorizedTransferResponse,
   CreateCodeBatchResponse,
-  DescribeCustomRulesRequest,
+  DescribePlanQRCodesResponse,
+  FlavorKingCycleBrandImportantCityScanAnalysisRegionItem,
+  DescribePlanQRCodesRequest,
+  DescribeFlavorKingCycleBrandProvinceScanAnalysisResponse,
   CorpQuota,
   ScanStat,
   CreateCustomRuleRequest,
@@ -66,28 +73,35 @@ import {
   TraceData,
   EffectFeedbackResponse,
   PackSpec,
+  ScanLog,
+  DescribeFlavorKingCycleBrandImportantProvinceUserAnalysisRequest,
   ModifyCustomRuleResponse,
   ModifyMerchantResponse,
+  DescribeFlavorKingCycleBrandProvinceScanAnalysisRequest,
   DescribeCodesByPackResponse,
-  CreateProductResponse,
   CreateTraceDataRequest,
+  DownloadGEOResponse,
   CreateCodePackRequest,
   DescribeCorpQuotasRequest,
   AuthorizedTransferRequest,
   ReportBatchCallbackStatusRequest,
+  FlavorKingCycleBrandProvinceCityScanAnalysisProvinceItem,
   DescribeCodeBatchesResponse,
   Chain,
-  CreateProductRequest,
+  CreateProductResponse,
+  CreateTraceCodesAsyncRequest,
   CreateCustomPackRequest,
   Ext,
   CreateCodeBatchRequest,
-  TraceItem,
+  FlavorKingCycleBrandImportantProvinceScanAnalysisProvinceItem,
   DescribeCustomRuleByIdRequest,
+  ScanDetailItem,
   DescribeAgentCorpsRequest,
   ReportBatchCallbackStatusResponse,
   ChainData,
   PhaseData,
-  DescribeRawScanLogsRequest,
+  FlavorKingCycleBrandScanAnalysisDataItem,
+  DescribeFlavorKingCycleBrandImportantProvinceScanAnalysisResponse,
   ReportScanDetailRequest,
   DeleteProductRequest,
   ModifyTraceDataRanksRequest,
@@ -99,13 +113,18 @@ import {
   DeleteProductResponse,
   CreateChainBatchRequest,
   OutputAuthorizedTransfer,
+  FlavorKingCycleBrandImportantCityScanAnalysisCityItem,
   DeleteTraceDataResponse,
   ModifyCustomRuleStatusRequest,
   CreateCodePackResponse,
+  DescribeFlavorKingCycleBrandImportantProvinceScanAnalysisRequest,
   DescribeMerchantByIdResponse,
+  FlavorKingCycleBrandProvinceCityScanAnalysisCityItem,
+  TraceItem,
   EffectFeedbackRequest,
   DescribeTraceDataByIdResponse,
   CodeItem,
+  DownloadGEORequest,
   CreateTraceDataResponse,
   DescribeCustomRuleByIdResponse,
   DescribeCodeBatchsResponse,
@@ -118,8 +137,10 @@ import {
   CreateTraceCodesAsyncResponse,
   DescribePlanQRCodeScanRecordsRequest,
   RawScanLog,
-  DescribePlanQRCodesRequest,
+  DescribeCustomRulesRequest,
+  CreateProductRequest,
   CreateChainBatchResponse,
+  FlavorKingCycleBrandScanMetricsItem,
   ModifyCodeBatchRequest,
   DescribeProductByIdRequest,
   DescribeTraceCodesResponse,
@@ -131,6 +152,7 @@ import {
   DescribeScanLogsRequest,
   ModifyTraceCodeUnlinkResponse,
   DescribeCodeBatchesRequest,
+  DescribeFlavorKingCycleBrandImportantCityScanAnalysisRequest,
   InputEncryptData,
   Merchant,
   Product,
@@ -142,20 +164,28 @@ import {
   DescribeRawScanLogsResponse,
   DescribeTraceDataListRequest,
   ChainValue,
+  DescribeFlavorKingCycleBrandProvinceCityScanAnalysisRequest,
   DeleteMerchantResponse,
   DeleteCodeBatchResponse,
   CreateTraceChainRequest,
+  DescribeFlavorKingCycleBrandScanMetricsResponse,
+  DescribeFlavorKingCycleBrandScanAnalysisResponse,
   DescribeMerchantByIdRequest,
-  ScanDetailItem,
+  DescribeFlavorKingCycleBrandImportantCityScanAnalysisResponse,
   DescribeTraceDataByIdRequest,
   DescribeProductByIdResponse,
+  FlavorKingCycleBrandProvinceScanAnalysisResponse,
   DescribeCodePacksRequest,
+  FlavorKingCycleBrandProvinceScanAnalysisDataItem,
   DescribeJobFileUrlResponse,
   DescribeCustomRulesResponse,
   DescribeTraceCodeByIdRequest,
+  FlavorKingCycleBrandImportantProvinceUserAnalysisProvinceItem,
   ModifyCodeBatchResponse,
   PlanQRCodeRecord,
+  FlavorKingCycleBrandProvinceCityScanAnalysisRegionItem,
   ModifyTraceCodeResponse,
+  FlavorKingCycleBrandImportantProvinceUserAnalysisCityItem,
   DescribeCodePackUrlResponse,
   DeleteMerchantRequest,
 } from "./trp_models"
@@ -211,6 +241,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改溯源信息
+   */
+  async ModifyTraceData(
+    req: ModifyTraceDataRequest,
+    cb?: (error: string, rep: ModifyTraceDataResponse) => void
+  ): Promise<ModifyTraceDataResponse> {
+    return this.request("ModifyTraceData", req, cb)
+  }
+
+  /**
    * 接收客户侧的用户已授权的号码。
    */
   async AuthorizedTransfer(
@@ -238,6 +278,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRawScanLogsResponse) => void
   ): Promise<DescribeRawScanLogsResponse> {
     return this.request("DescribeRawScanLogs", req, cb)
+  }
+
+  /**
+   * 统计扫码次数
+   */
+  async DescribeFlavorKingCycleBrandScanAnalysis(
+    req: DescribeFlavorKingCycleBrandScanAnalysisRequest,
+    cb?: (error: string, rep: DescribeFlavorKingCycleBrandScanAnalysisResponse) => void
+  ): Promise<DescribeFlavorKingCycleBrandScanAnalysisResponse> {
+    return this.request("DescribeFlavorKingCycleBrandScanAnalysis", req, cb)
   }
 
   /**
@@ -288,6 +338,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTraceDataRanksResponse) => void
   ): Promise<ModifyTraceDataRanksResponse> {
     return this.request("ModifyTraceDataRanks", req, cb)
+  }
+
+  /**
+   * 统计用户次数
+   */
+  async DescribeFlavorKingCycleBrandImportantCityScanAnalysis(
+    req: DescribeFlavorKingCycleBrandImportantCityScanAnalysisRequest,
+    cb?: (error: string, rep: DescribeFlavorKingCycleBrandImportantCityScanAnalysisResponse) => void
+  ): Promise<DescribeFlavorKingCycleBrandImportantCityScanAnalysisResponse> {
+    return this.request("DescribeFlavorKingCycleBrandImportantCityScanAnalysis", req, cb)
   }
 
   /**
@@ -381,13 +441,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改溯源信息
+   * 地理位置信息下载
    */
-  async ModifyTraceData(
-    req: ModifyTraceDataRequest,
-    cb?: (error: string, rep: ModifyTraceDataResponse) => void
-  ): Promise<ModifyTraceDataResponse> {
-    return this.request("ModifyTraceData", req, cb)
+  async DownloadGEO(
+    req?: DownloadGEORequest,
+    cb?: (error: string, rep: DownloadGEOResponse) => void
+  ): Promise<DownloadGEOResponse> {
+    return this.request("DownloadGEO", req, cb)
   }
 
   /**
@@ -408,6 +468,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ReportScanDetailResponse) => void
   ): Promise<ReportScanDetailResponse> {
     return this.request("ReportScanDetail", req, cb)
+  }
+
+  /**
+   * 统计用户次数
+   */
+  async DescribeFlavorKingCycleBrandImportantProvinceScanAnalysis(
+    req: DescribeFlavorKingCycleBrandImportantProvinceScanAnalysisRequest,
+    cb?: (
+      error: string,
+      rep: DescribeFlavorKingCycleBrandImportantProvinceScanAnalysisResponse
+    ) => void
+  ): Promise<DescribeFlavorKingCycleBrandImportantProvinceScanAnalysisResponse> {
+    return this.request("DescribeFlavorKingCycleBrandImportantProvinceScanAnalysis", req, cb)
   }
 
   /**
@@ -511,6 +584,19 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 统计用户次数
+   */
+  async DescribeFlavorKingCycleBrandImportantProvinceUserAnalysis(
+    req: DescribeFlavorKingCycleBrandImportantProvinceUserAnalysisRequest,
+    cb?: (
+      error: string,
+      rep: DescribeFlavorKingCycleBrandImportantProvinceUserAnalysisResponse
+    ) => void
+  ): Promise<DescribeFlavorKingCycleBrandImportantProvinceUserAnalysisResponse> {
+    return this.request("DescribeFlavorKingCycleBrandImportantProvinceUserAnalysis", req, cb)
+  }
+
+  /**
    * 删除商户
    */
   async DeleteMerchant(
@@ -584,6 +670,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 统计用户次数
+   */
+  async DescribeFlavorKingCycleBrandScanMetrics(
+    req: DescribeFlavorKingCycleBrandScanMetricsRequest,
+    cb?: (error: string, rep: DescribeFlavorKingCycleBrandScanMetricsResponse) => void
+  ): Promise<DescribeFlavorKingCycleBrandScanMetricsResponse> {
+    return this.request("DescribeFlavorKingCycleBrandScanMetrics", req, cb)
+  }
+
+  /**
    * 新增批次
    */
   async CreateCodeBatch(
@@ -591,6 +687,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCodeBatchResponse) => void
   ): Promise<CreateCodeBatchResponse> {
     return this.request("CreateCodeBatch", req, cb)
+  }
+
+  /**
+   * 查询商户列表
+   */
+  async DescribeMerchants(
+    req: DescribeMerchantsRequest,
+    cb?: (error: string, rep: DescribeMerchantsResponse) => void
+  ): Promise<DescribeMerchantsResponse> {
+    return this.request("DescribeMerchants", req, cb)
   }
 
   /**
@@ -684,6 +790,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 统计用户次数
+   */
+  async DescribeFlavorKingCycleBrandProvinceScanAnalysis(
+    req: DescribeFlavorKingCycleBrandProvinceScanAnalysisRequest,
+    cb?: (error: string, rep: DescribeFlavorKingCycleBrandProvinceScanAnalysisResponse) => void
+  ): Promise<DescribeFlavorKingCycleBrandProvinceScanAnalysisResponse> {
+    return this.request("DescribeFlavorKingCycleBrandProvinceScanAnalysis", req, cb)
+  }
+
+  /**
    * 修改批次
    */
   async ModifyCodeBatch(
@@ -694,13 +810,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询商户列表
+   * 获取异步任务的输出地址
    */
-  async DescribeMerchants(
-    req: DescribeMerchantsRequest,
-    cb?: (error: string, rep: DescribeMerchantsResponse) => void
-  ): Promise<DescribeMerchantsResponse> {
-    return this.request("DescribeMerchants", req, cb)
+  async DescribeJobFileUrl(
+    req: DescribeJobFileUrlRequest,
+    cb?: (error: string, rep: DescribeJobFileUrlResponse) => void
+  ): Promise<DescribeJobFileUrlResponse> {
+    return this.request("DescribeJobFileUrl", req, cb)
   }
 
   /**
@@ -714,12 +830,12 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取异步任务的输出地址
+   * 统计用户次数
    */
-  async DescribeJobFileUrl(
-    req: DescribeJobFileUrlRequest,
-    cb?: (error: string, rep: DescribeJobFileUrlResponse) => void
-  ): Promise<DescribeJobFileUrlResponse> {
-    return this.request("DescribeJobFileUrl", req, cb)
+  async DescribeFlavorKingCycleBrandProvinceCityScanAnalysis(
+    req: DescribeFlavorKingCycleBrandProvinceCityScanAnalysisRequest,
+    cb?: (error: string, rep: DescribeFlavorKingCycleBrandProvinceCityScanAnalysisResponse) => void
+  ): Promise<DescribeFlavorKingCycleBrandProvinceCityScanAnalysisResponse> {
+    return this.request("DescribeFlavorKingCycleBrandProvinceCityScanAnalysis", req, cb)
   }
 }

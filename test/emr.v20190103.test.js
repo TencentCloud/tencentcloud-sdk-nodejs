@@ -338,6 +338,16 @@ it("emr.v20190103.DescribeStarRocksQueryInfo", async function () {
     }
 })
 
+it("emr.v20190103.InquiryPriceRenewInstance", async function () {
+    try {
+       const data = await client.InquiryPriceRenewInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("emr.v20190103.DescribeNodeResourceConfigFast", async function () {
     try {
        const data = await client.DescribeNodeResourceConfigFast({})
@@ -838,9 +848,9 @@ it("emr.v20190103.DescribeUsersForUserManager", async function () {
     }
 })
 
-it("emr.v20190103.InquiryPriceRenewInstance", async function () {
+it("emr.v20190103.DescribeDynamicInstanceDetail", async function () {
     try {
-       const data = await client.InquiryPriceRenewInstance({})
+       const data = await client.DescribeDynamicInstanceDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

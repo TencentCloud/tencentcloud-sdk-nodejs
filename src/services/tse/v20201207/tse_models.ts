@@ -34,6 +34,20 @@ export interface DescribeNacosReplicasRequest {
 }
 
 /**
+ * CreateConfigFileGroup请求参数结构体
+ */
+export interface CreateConfigFileGroupRequest {
+  /**
+   * tse 实例 id
+   */
+  InstanceId: string
+  /**
+   * 配置文件组实体
+   */
+  ConfigFileGroup: ConfigFileGroup
+}
+
+/**
  * DeleteWafDomains请求参数结构体
  */
 export interface DeleteWafDomainsRequest {
@@ -141,6 +155,16 @@ export interface Metadata {
    * 元数据键值。不填则默认为空字符串。
    */
   Value?: string
+}
+
+/**
+ * RemoveCloudNativeAPIGatewayConsumerGroupAuth返回参数结构体
+ */
+export interface RemoveCloudNativeAPIGatewayConsumerGroupAuthResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -363,17 +387,91 @@ export interface CreateCloudNativeAPIGatewayResponse {
 }
 
 /**
- * DescribeUpstreamHealthCheckConfig返回参数结构体
+ * ModifyCloudNativeAPIGatewayLLMModelService请求参数结构体
  */
-export interface DescribeUpstreamHealthCheckConfigResponse {
+export interface ModifyCloudNativeAPIGatewayLLMModelServiceRequest {
   /**
-   * 健康检查配置
+   * <p>网关 id。</p>
    */
-  Result?: UpstreamHealthCheckConfig
+  GatewayId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>模型服务 ID，全局唯一标识。</p>
    */
-  RequestId?: string
+  ModelServiceId: string
+  /**
+   * <p>修改服务名称，长度2-50字符，支持中英文、数字、下划线。</p>
+   */
+  Name?: string
+  /**
+   * <p>修改默认模型，模型选择方式为 Specify 时必填。</p>
+   */
+  DefaultModel?: string
+  /**
+   * <p>修改模型选择方式，选项：Specify（指定模型）、PassThrough（透传请求模型）。</p>
+   */
+  ModelSelector?: string
+  /**
+   * <p>修改开启模型降级，模型选择方式为 Specify 时必填。</p>
+   */
+  EnableModelFallback?: boolean
+  /**
+   * <p>修改可以配置备用模型规则，EnableSpecifyModelFallback 为 true 时必填。</p>
+   */
+  ModelFallbackRule?: CloudNativeAPIGatewayLLMModelFallbackRule
+  /**
+   * <p>修改开启模型参数校验，是否校验客户端传递的 model 参数, 模型选择方式为 PassThrough 时必填</p>
+   */
+  EnableModelParamCheck?: boolean
+  /**
+   * <p>修改模型检验信息，EnableModelParamCheck 为 true 时必填。</p>
+   */
+  ModelParamCheckRule?: CloudNativeAPIGatewayLLMModelParamCheckInfo
+  /**
+   * <p>修改描述。</p>
+   */
+  Description?: string
+  /**
+   * <p>修改模型服务地址</p>
+   */
+  UpstreamURL?: string
+  /**
+   * <p>连接超时时间</p><p>取值范围：[1, 3600000]</p><p>单位：毫秒</p><p>默认值：10000</p>
+   */
+  ConnectTimeout?: number
+  /**
+   * <p>写入超时时间</p><p>取值范围：[1, 3600000]</p><p>单位：毫秒</p><p>默认值：60000</p>
+   */
+  WriteTimeout?: number
+  /**
+   * <p>读取超时时间</p><p>取值范围：[1, 3600000]</p><p>单位：毫秒</p><p>默认值：60000</p>
+   */
+  ReadTimeout?: number
+  /**
+   * <p>重试次数</p><p>取值范围：[0, 5]</p><p>单位：次</p><p>默认值：0</p>
+   */
+  Retries?: number
+  /**
+   * <p>路径拼接模式</p><p>枚举值：</p><ul><li>FixedPath： 固定路径</li><li>AutoConcat： 自动拼接</li></ul>
+   */
+  UpstreamUrlMode?: string
+  /**
+   * <p>SNI</p>
+   */
+  SNI?: string
+}
+
+/**
+ * 分组列表
+ */
+export interface CNAPIGwConsumerGroupList {
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 消费者分组信息
+   */
+  ConsumerGroups?: Array<CNAPIGwConsumerGroup>
 }
 
 /**
@@ -774,6 +872,60 @@ export interface DescribeCloudNativeAPIGatewayServicesRequest {
 }
 
 /**
+ * CreateCloudNativeAPIGatewayLLMModelAPI请求参数结构体
+ */
+export interface CreateCloudNativeAPIGatewayLLMModelAPIRequest {
+  /**
+   * <p>网关 id。</p>
+   */
+  GatewayId: string
+  /**
+   * <p>AI 网关 LLM 模型 API 的唯一标识名称，格式规则：最长60个字符，支持中英文大小写、数字及分隔符（“-”、“_”)，不能以数字和分隔符开头，不能以分隔符结尾。</p>
+   */
+  Name: string
+  /**
+   * <p>选择业务场景,  选项：Chat（聊天）。</p>
+   */
+  SceneType: string
+  /**
+   * <p>业务场景对应的请求协议，选项：OpenAI（目前只支持 OpenAI）。</p>
+   */
+  RequestProtocol: string
+  /**
+   * <p>初始化关联的模型服务列表。</p>
+   */
+  ListModelServiceId: Array<string>
+  /**
+   * <p>路由列表</p>
+   */
+  RouteList: Array<DefaultKongRoute>
+  /**
+   * <p>为API设置统一的前缀，格式：以/开头，支持字母、数字、短横线。</p>
+   */
+  BasePath?: string
+  /**
+   * <p>模型 API 的相关描述。</p>
+   */
+  Description?: string
+  /**
+   * <p>模型服务路由策略（是指如何路由到模型服务）</p>
+   */
+  ModelServiceRoute?: CloudNativeAPIGatewayLLMModelServiceRoute
+  /**
+   * <p>路由 Header 匹配规则</p>
+   */
+  MatchHeaders?: Array<AIGWKVMatch>
+  /**
+   * <p>跨服务 fallback 开关</p>
+   */
+  EnableCrossServiceFallback?: boolean
+  /**
+   * <p>跨服务 fallback 配置</p>
+   */
+  CrossServiceFallbackConfig?: AIGWCrossServiceFallbackConfig
+}
+
+/**
  * 服务实例组
  */
 export interface GovernanceServiceDestination {
@@ -795,6 +947,42 @@ export interface GovernanceServiceDestination {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayConsumerList请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayConsumerListRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * 页显示条数，最大20
+   */
+  Limit: number
+  /**
+   * 起始位置
+   */
+  Offset: number
+}
+
+/**
+ * CreateCloudNativeAPIGatewayConsumer请求参数结构体
+ */
+export interface CreateCloudNativeAPIGatewayConsumerRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * 消费者名称
+   */
+  Name: string
+  /**
+   * 消费者描述
+   */
+  Description?: string
+}
+
+/**
  * CreateCloudNativeAPIGatewayCanaryRule返回参数结构体
  */
 export interface CreateCloudNativeAPIGatewayCanaryRuleResponse {
@@ -802,6 +990,80 @@ export interface CreateCloudNativeAPIGatewayCanaryRuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * LLM 模型 API
+ */
+export interface CloudNativeAPIGatewayLLMModelAPI {
+  /**
+   * <p>模型 API ID。</p>
+   */
+  Id?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>修改时间</p>
+   */
+  ModifyTime?: string
+  /**
+   * <p>AI 网关 LLM 模型 API 的唯一标识名称，格式规则：2-50 字符，支持英文、数字、下划线。</p>
+   */
+  Name?: string
+  /**
+   * <p>选择业务场景,xa0 选项：Chat（聊天）。</p>
+   */
+  SceneType?: string
+  /**
+   * <p>业务场景对应的请求协议，选项：OpenAI（目前只支持 OpenAI）。</p>
+   */
+  RequestProtocol?: string
+  /**
+   * <p>路由列表</p>
+   */
+  RouteList?: Array<DefaultKongRoute>
+  /**
+   * <p>为API设置统一的前缀，格式：以/开头，支持字母、数字、短横线。</p>
+   */
+  BasePath?: string
+  /**
+   * <p>路径简化，<br>启用时：客户端请求路径 → 移除Base Path → 后端接收简洁路径<br>禁用时：客户端请求路径 → 完整传递给后端。</p>
+   */
+  StripPath?: boolean
+  /**
+   * <p>模型 API 的相关描述。</p>
+   */
+  Description?: string
+  /**
+   * <p>模型服务Id</p>
+   */
+  ModelServiceId?: string
+  /**
+   * <p>模型服务名称</p>
+   */
+  ModelServiceName?: string
+  /**
+   * <p>模型服务路由策略（是指如何路由到模型服务）</p>
+   */
+  ModelServiceRoute?: CloudNativeAPIGatewayLLMModelServiceRoute
+  /**
+   * <p>无</p>
+   */
+  MatchHeaders?: Array<AIGWKVMatch>
+  /**
+   * <p>是否开启跨服务fallback</p>
+   */
+  EnableCrossServiceFallback?: boolean
+  /**
+   * <p>跨服务fallback配置详情</p>
+   */
+  CrossServiceFallbackConfig?: AIGWCrossServiceFallbackConfig
+  /**
+   * <p>是否展示模型API</p>
+   */
+  DescribeCloudNativeAPIGatewayLLMModelAPI?: boolean
 }
 
 /**
@@ -1048,6 +1310,20 @@ export interface PolarisCLSTopicInfo {
  * DeleteCloudNativeAPIGatewayRoute返回参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayRouteResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteCloudNativeAPIGatewayLLMModelService返回参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayLLMModelServiceResponse {
+  /**
+   * 是否成功
+   */
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1433,6 +1709,16 @@ export interface EnvInfo {
 }
 
 /**
+ * ModifyCloudNativeAPIGatewayConsumer返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayConsumerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteGovernanceInstances请求参数结构体
  */
 export interface DeleteGovernanceInstancesRequest {
@@ -1530,6 +1816,16 @@ export interface CloudNativeAPIGatewayStrategy {
    * @deprecated
    */
   MaxReplicas?: number
+}
+
+/**
+ * LLM-单模型内降级规则
+ */
+export interface CloudNativeAPIGatewayLLMModelFallbackRule {
+  /**
+   * 备选模型，主模型不可用时将依次按顺序尝试。
+   */
+  FallbackModels?: Array<string>
 }
 
 /**
@@ -1863,6 +2159,16 @@ export interface ReleaseVersion {
 }
 
 /**
+ * DeleteEngine返回参数结构体
+ */
+export interface DeleteEngineResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateConfigFileGroup返回参数结构体
  */
 export interface CreateConfigFileGroupResponse {
@@ -2017,6 +2323,28 @@ export interface DescribeAutoScalerResourceStrategiesRequest {
 }
 
 /**
+ * 参数限流的规则
+ */
+export interface LimitRule {
+  /**
+   * 请求匹配条件
+   */
+  Filters?: Array<RuleFilter>
+  /**
+   * 参数限流依据组合
+   */
+  LimitBy?: Array<KeyValue>
+  /**
+   * 限流阈值
+   */
+  QpsThresholds?: Array<QpsThreshold>
+  /**
+   * 精确限流阈值
+   */
+  AccurateQpsThresholds?: Array<AccurateQpsThreshold>
+}
+
+/**
  * 限流规则的Filter
  */
 export interface RuleFilter {
@@ -2054,6 +2382,20 @@ export interface DeleteCloudNativeAPIGatewayCORSRequest {
    * 路由或服务的id
    */
   SourceId: string
+}
+
+/**
+ * DeleteCloudNativeAPIGatewayConsumer请求参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayConsumerRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * 消费者ID
+   */
+  ConsumerId: string
 }
 
 /**
@@ -2500,6 +2842,20 @@ export interface DescribeSREInstancesResponse {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayConsumerGroup返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayConsumerGroupResponse {
+  /**
+   * 删除结果
+   */
+  Result?: CNAPIGwConsumerGroup
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 指标伸缩的规则
  */
 export interface AutoScalerRules {
@@ -2664,6 +3020,20 @@ export interface ModifyGovernanceLaneGroupsRequest {
 }
 
 /**
+ * DescribeUpstreamHealthCheckConfig返回参数结构体
+ */
+export interface DescribeUpstreamHealthCheckConfigResponse {
+  /**
+   * 健康检查配置
+   */
+  Result?: UpstreamHealthCheckConfig
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyGovernanceInstances返回参数结构体
  */
 export interface ModifyGovernanceInstancesResponse {
@@ -2671,6 +3041,20 @@ export interface ModifyGovernanceInstancesResponse {
    * 修改是否成功。
    */
   Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayLLMModelServices返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayLLMModelServicesResponse {
+  /**
+   * <p>模型服务列表。</p>
+   */
+  Result?: ListCloudNativeAPIGatewayLLMModelService
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2864,6 +3248,20 @@ export interface UpdateEngineInternetAccessRequest {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayConsumerGroupList返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayConsumerGroupListResponse {
+  /**
+   * 修改结果
+   */
+  Result?: CNAPIGwConsumerGroupList
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteNativeGatewayServerGroup返回参数结构体
  */
 export interface DeleteNativeGatewayServerGroupResponse {
@@ -2885,6 +3283,20 @@ export interface ModifyCloudNativeAPIGatewayCertificateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 降级服务元素
+ */
+export interface AIGWFallbackServiceItem {
+  /**
+   * <p>模型服务 Id</p>
+   */
+  ModelServiceId: string
+  /**
+   * <p>模型服务名</p>
+   */
+  ModelServiceName?: string
 }
 
 /**
@@ -3054,6 +3466,24 @@ export interface CreateNativeGatewayServiceSourceRequest {
 }
 
 /**
+ * 路由匹配规则
+ */
+export interface AIGWKVMatch {
+  /**
+   * <p>键</p>
+   */
+  Key: string
+  /**
+   * <p>值</p>
+   */
+  Value: string
+  /**
+   * <p>操作类型</p>
+   */
+  Operator: string
+}
+
+/**
  * CreateGovernanceLaneGroups请求参数结构体
  */
 export interface CreateGovernanceLaneGroupsRequest {
@@ -3079,6 +3509,34 @@ export interface ListCloudNativeAPIGatewayStrategyResult {
    * 云原生API网关实例策略列表。
    */
   StrategyList: Array<CloudNativeAPIGatewayStrategy>
+}
+
+/**
+ * 权重路由配置
+ */
+export interface CloudNativeAPIGatewayLLMModelServiceRouteWeightedStrategy {
+  /**
+   * 模型服务id
+   */
+  ModelServiceId: string
+  /**
+   * 权重值
+   */
+  Weight: number
+}
+
+/**
+ * AddCloudNativeAPIGatewayConsumerInGroup返回参数结构体
+ */
+export interface AddCloudNativeAPIGatewayConsumerInGroupResponse {
+  /**
+   * 添加结果
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3140,25 +3598,17 @@ export interface GovernanceServiceInput {
 }
 
 /**
- * 私有网络信息
+ * LLM-模型参数检查信息
  */
-export interface VpcInfo {
+export interface CloudNativeAPIGatewayLLMModelParamCheckInfo {
   /**
-   * Vpc Id
+   * 允许的模型列表。
    */
-  VpcId: string
+  AllowModelList?: Array<string>
   /**
-   * 子网ID
+   * 模型参数校验失败时的处理策略，选项：Return404（返回404）、FallBackToDefaultModel（使用默认模型降级）。
    */
-  SubnetId: string
-  /**
-   * 内网访问地址
-   */
-  IntranetAddress?: string
-  /**
-   * 负载均衡均衡接入点子网ID
-   */
-  LbSubnetId?: string
+  ModelValidationFailureStrategy?: string
 }
 
 /**
@@ -3266,25 +3716,87 @@ export interface ModifyNativeGatewayServiceSourceRequest {
 }
 
 /**
- * Kong网关主动健康检查配置
+ * 密钥信息
  */
-export interface KongActiveHealthCheck {
+export interface CNAPIGwSecretKey {
   /**
-   * 主动健康检查健康探测间隔，单位：秒，0表示不开启
+   * 密钥id
    */
-  HealthyInterval?: number
+  SecretKeyId?: string
   /**
-   * 主动健康检查异常探测间隔，单位：秒，0表示不开启
+   * 密钥名字
    */
-  UnHealthyInterval?: number
+  Name?: string
   /**
-   * 在 GET HTTP 请求中使用的路径，以作为主动运行状况检查的探测器运行。默认： ”/”。
+   * 密钥类型：ApiKey/JWT
    */
-  HttpPath?: string
+  SecretType?: string
   /**
-   * GET HTTP 请求的超时时间，单位：秒。默认 60。
+   * 状态:
+- Enable: 启用
+- Disable: 禁用
    */
-  Timeout?: number
+  Status?: string
+  /**
+   * 生成方式:KMS/System/Custom
+   */
+  GenerateType?: string
+  /**
+   * 密钥值
+   */
+  SecretValue?: string
+  /**
+   * KMS凭证名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KmsKeyName?: string
+  /**
+   * KMS凭证版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KmsKeyVersion?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 是否可以绑定
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CanBind?: boolean
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 修改时间
+   */
+  ModifyTime?: string
+  /**
+   * 绑定数
+   */
+  BindCount?: number
+  /**
+   * 资源类型：
+- Consumer 消费者
+- LLM 模型服务
+   */
+  ResourceType?: string
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayLLMModelAPI返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayLLMModelAPIResponse {
+  /**
+   * <p>是否成功</p>
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3348,6 +3860,42 @@ export interface DescribeAutoScalerResourceStrategyBindingGroupsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateCloudNativeAPIGatewayLLMModelService返回参数结构体
+ */
+export interface CreateCloudNativeAPIGatewayLLMModelServiceResponse {
+  /**
+   * <p>是否成功</p>
+   */
+  Result?: boolean
+  /**
+   * <p>模型服务 ID，全局唯一标识。</p>
+   */
+  ModelServiceId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RemoveCloudNativeAPIGatewayConsumerInGroup请求参数结构体
+ */
+export interface RemoveCloudNativeAPIGatewayConsumerInGroupRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * 消费者组ID
+   */
+  ConsumerGroupId: string
+  /**
+   * 消费者ID列表
+   */
+  ConsumerIds: Array<string>
 }
 
 /**
@@ -3457,6 +4005,16 @@ export interface KongUpstreamPreview {
 }
 
 /**
+ * ModifyCloudNativeAPIGatewaySecretKeyStatus返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewaySecretKeyStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 云原生网关证书
  */
 export interface KongCertificate {
@@ -3482,6 +4040,24 @@ export interface SourceInfo {
    * 微服务引擎鉴权信息
    */
   Auth?: SourceInstanceAuth
+}
+
+/**
+ * ModifyCloudNativeAPIGatewaySecretKeyStatus请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewaySecretKeyStatusRequest {
+  /**
+   * 实例 ID
+   */
+  GatewayId: string
+  /**
+   * 密钥名字
+   */
+  Status: string
+  /**
+   * 密钥id
+   */
+  SecretKeyId: string
 }
 
 /**
@@ -3659,6 +4235,20 @@ export interface ModifyCloudNativeAPIGatewayRouteResponse {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayConsumer返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayConsumerResponse {
+  /**
+   * 删除结果
+   */
+  Result?: CNAPIGwConsumer
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 云原生网关证书预览信息
  */
 export interface KongCertificatesPreview {
@@ -3708,6 +4298,28 @@ export interface KongCertificatesPreview {
    * ssl平台证书Id
    */
   CertId?: string
+}
+
+/**
+ * 默认kong路由，目前只在 LLM 模型 API相 关接口使用
+ */
+export interface DefaultKongRoute {
+  /**
+   * <p>服务名字</p>
+   */
+  Name: string
+  /**
+   * <p>服务ID</p>
+   */
+  ID?: string
+  /**
+   * <p>HTTP Method</p>
+   */
+  Methods?: Array<string>
+  /**
+   * <p>Http Path</p>
+   */
+  Paths?: Array<string>
 }
 
 /**
@@ -4026,25 +4638,13 @@ export interface DescribeConfigFilesByGroupResponse {
 }
 
 /**
- * 参数限流的规则
+ * CreateCloudNativeAPIGatewayServiceRateLimit返回参数结构体
  */
-export interface LimitRule {
+export interface CreateCloudNativeAPIGatewayServiceRateLimitResponse {
   /**
-   * 请求匹配条件
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Filters?: Array<RuleFilter>
-  /**
-   * 参数限流依据组合
-   */
-  LimitBy?: Array<KeyValue>
-  /**
-   * 限流阈值
-   */
-  QpsThresholds?: Array<QpsThreshold>
-  /**
-   * 精确限流阈值
-   */
-  AccurateQpsThresholds?: Array<AccurateQpsThreshold>
+  RequestId?: string
 }
 
 /**
@@ -4141,6 +4741,40 @@ export interface DescribeConfigFileResponse {
 }
 
 /**
+ * Nacos副本信息
+ */
+export interface NacosReplica {
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 角色
+   */
+  Role?: string
+  /**
+   * 状态
+   */
+  Status?: string
+  /**
+   * 子网ID
+   */
+  SubnetId?: string
+  /**
+   * 可用区ID
+   */
+  Zone?: string
+  /**
+   * 可用区ID
+   */
+  ZoneId?: string
+  /**
+   * VPC ID
+   */
+  VpcId?: string
+}
+
+/**
  * 云原生网关限流插件参数限流的精确Qps阈值
  */
 export interface AccurateQpsThreshold {
@@ -4152,6 +4786,61 @@ export interface AccurateQpsThreshold {
    * 全局配置ID
    */
   GlobalConfigId: string
+}
+
+/**
+ * CreateCloudNativeAPIGatewaySecretKey请求参数结构体
+ */
+export interface CreateCloudNativeAPIGatewaySecretKeyRequest {
+  /**
+   * 实例 ID
+   */
+  GatewayId: string
+  /**
+   * 密钥类型： ApiKey
+   */
+  SecretType: string
+  /**
+   * 密钥名字
+   */
+  Name: string
+  /**
+   * 生成方式：  
+
+密钥类型 Consumer 时选项：  
+
+- KMS
+- System 系统  
+- Custom  自定义  
+
+密钥类型是 LLM 时选项 
+
+- KMS 
+- Custom  自定义 
+   */
+  GenerateType: string
+  /**
+   * 资源类型：
+- Consumer 消费者
+- LLM 模型服务
+   */
+  ResourceType: string
+  /**
+   * KMS 的凭证名字， GenerateType 时 kms 必填
+   */
+  KmsKeyName?: string
+  /**
+   * KMS 的凭证版本， GenerateType 时 kms 必填
+   */
+  KmsKeyVersion?: string
+  /**
+   * GenerateType 等于 Custom 是必填
+   */
+  SecretValue?: string
+  /**
+   * 描述
+   */
+  Description?: string
 }
 
 /**
@@ -4208,6 +4897,85 @@ export interface UpdateCloudNativeAPIGatewaySpecResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 获取云原生API网关实例协议端口列表响应结果
+ */
+export interface DescribeGatewayInstancePortResult {
+  /**
+   * 云原生API网关ID
+   */
+  GatewayId?: string
+  /**
+   * 网关实例协议端口列表
+   */
+  GatewayInstancePortList?: Array<GatewayInstanceSchemeAndPorts>
+}
+
+/**
+ * 云原生网关服务简洁预览信息
+ */
+export interface KongServiceLightPreview {
+  /**
+   * 服务ID
+   */
+  ID?: string
+  /**
+   * 服务名字
+   */
+  Name?: string
+  /**
+   * 后端配置
+   */
+  UpstreamInfo?: KongUpstreamInfo
+  /**
+   * 后端类型
+   */
+  UpstreamType?: string
+  /**
+   * 创建时间
+   */
+  CreatedTime?: string
+  /**
+   * 请求路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Path?: string
+  /**
+   * 后端协议
+   */
+  Protocol?: string
+  /**
+   * 重试次数
+   */
+  Retries?: number
+  /**
+   * 后端延时，单位ms
+   */
+  Timeout?: number
+}
+
+/**
+ * DescribeNativeGatewayServerGroups请求参数结构体
+ */
+export interface DescribeNativeGatewayServerGroupsRequest {
+  /**
+   * 云原生API网关实例ID。
+   */
+  GatewayId: string
+  /**
+   * 偏移量，默认为 0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为 20。
+   */
+  Limit?: number
+  /**
+   * 过滤参数，支持按照分组名称、分组ID（Name、GroupId）筛选
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -4310,85 +5078,6 @@ export interface CloudNativeAPIGatewayConfig {
 }
 
 /**
- * 云原生网关服务简洁预览信息
- */
-export interface KongServiceLightPreview {
-  /**
-   * 服务ID
-   */
-  ID?: string
-  /**
-   * 服务名字
-   */
-  Name?: string
-  /**
-   * 后端配置
-   */
-  UpstreamInfo?: KongUpstreamInfo
-  /**
-   * 后端类型
-   */
-  UpstreamType?: string
-  /**
-   * 创建时间
-   */
-  CreatedTime?: string
-  /**
-   * 请求路径
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Path?: string
-  /**
-   * 后端协议
-   */
-  Protocol?: string
-  /**
-   * 重试次数
-   */
-  Retries?: number
-  /**
-   * 后端延时，单位ms
-   */
-  Timeout?: number
-}
-
-/**
- * DescribeNativeGatewayServerGroups请求参数结构体
- */
-export interface DescribeNativeGatewayServerGroupsRequest {
-  /**
-   * 云原生API网关实例ID。
-   */
-  GatewayId: string
-  /**
-   * 偏移量，默认为 0。
-   */
-  Offset?: number
-  /**
-   * 返回数量，默认为 20。
-   */
-  Limit?: number
-  /**
-   * 过滤参数，支持按照分组名称、分组ID（Name、GroupId）筛选
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * 获取云原生API网关实例协议端口列表响应结果
- */
-export interface DescribeGatewayInstancePortResult {
-  /**
-   * 云原生API网关ID
-   */
-  GatewayId?: string
-  /**
-   * 网关实例协议端口列表
-   */
-  GatewayInstancePortList?: Array<GatewayInstanceSchemeAndPorts>
-}
-
-/**
  * DescribePublicNetwork请求参数结构体
  */
 export interface DescribePublicNetworkRequest {
@@ -4462,6 +5151,16 @@ export interface DeleteGovernanceInstancesByHostResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 查询Limiter的接入地址
+ */
+export interface PolarisLimiterAddress {
+  /**
+   * VPC接入IP列表
+   */
+  IntranetAddress?: string
 }
 
 /**
@@ -4869,6 +5568,96 @@ Standard｜Lane
 }
 
 /**
+ * LLM 模型服务
+ */
+export interface CloudNativeAPIGatewayLLMModelService {
+  /**
+   * <p>模型服务 ID。</p>
+   */
+  Id?: string
+  /**
+   * <p>模型服务名称。</p>
+   */
+  Name?: string
+  /**
+   * <p>创建时间。</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>修改时间。</p>
+   */
+  ModifyTime?: string
+  /**
+   * <p>服务类型，目前只支持xa0LLMService。</p>
+   */
+  ServiceType?: string
+  /**
+   * <p>选择模型提供商, 选项：OpenAI、Anthropic、Azure OpenAI、自定义HTTP。</p>
+   */
+  ModelProvider?: string
+  /**
+   * <p>API协议标准，根据供应商动态变化：OpenAI→OpenAI/v1，Anthropic→Anthropic/v1等</p>
+   */
+  ModelProtocol?: string
+  /**
+   * <p>自定义的模型请求 URL。</p>
+   */
+  UpstreamURL?: string
+  /**
+   * <p>模型选择方式，选项：Specify（指定模型）、PassThrough（透传请求模型）。</p>
+   */
+  ModelSelector?: string
+  /**
+   * <p>默认模型，模型选择方式为 Specify 时必填。</p>
+   */
+  DefaultModel?: string
+  /**
+   * <p>开启模型降级，模型选择方式为 Specify 时必填。</p>
+   */
+  EnableModelFallback?: boolean
+  /**
+   * <p>可以配置备用模型规则，EnableSpecifyModelFallbackxa0为 true 时必填。</p>
+   */
+  ModelFallbackRule?: CloudNativeAPIGatewayLLMModelFallbackRule
+  /**
+   * <p>开启模型参数校验，是否校验客户端传递的 model 参数,xa0模型选择方式为 PassThrough 时必填。</p>
+   */
+  EnableModelParamCheck?: boolean
+  /**
+   * <p>模型检验信息，EnableModelParamCheckxa0为 true 时必填。</p>
+   */
+  ModelParamCheckRule?: CloudNativeAPIGatewayLLMModelParamCheckInfo
+  /**
+   * <p>描述。</p>
+   */
+  Description?: string
+  /**
+   * <p>连接超时时间</p><p>取值范围：[1, 3600000]</p><p>单位：毫秒</p><p>默认值：10000</p>
+   */
+  ConnectTimeout?: number
+  /**
+   * <p>写入超时时间</p><p>取值范围：[1, 3600000]</p><p>单位：毫秒</p><p>默认值：60000</p>
+   */
+  WriteTimeout?: number
+  /**
+   * <p>读取超时时间</p><p>取值范围：[1, 3600000]</p><p>单位：毫秒</p>
+   */
+  ReadTimeout?: number
+  /**
+   * <p>重试次数</p><p>取值范围：[0, 5]</p><p>单位：次</p><p>默认值：0</p>
+   */
+  Retries?: number
+  /**
+   * <p>路径拼接模式</p><p>枚举值：</p><ul><li>FixedPath： 固定路径</li><li>AutoConcat： 自动拼接</li></ul>
+   */
+  UpstreamUrlMode?: string
+  /**
+   * <p>sni</p>
+   */
+  SNI?: string
+}
+
+/**
  * DescribeCloudNativeAPIGatewayServicesLight请求参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayServicesLightRequest {
@@ -4967,6 +5756,20 @@ export interface DescribeCloudNativeAPIGatewayCertificateDetailsRequest {
 }
 
 /**
+ * 配置文件标签
+ */
+export interface ConfigFileTag {
+  /**
+   * key-value 键
+   */
+  Key?: string
+  /**
+   * key-value 值
+   */
+  Value?: string
+}
+
+/**
  * 实例信息
  */
 export interface GovernanceInstanceInput {
@@ -5028,6 +5831,30 @@ export interface CreateNativeGatewayServerGroupResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AddCloudNativeAPIGatewayConsumerGroupAuth请求参数结构体
+ */
+export interface AddCloudNativeAPIGatewayConsumerGroupAuthRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * 资源类型:
+
+- ModelAPI: 模型API
+   */
+  ResourceType: string
+  /**
+   * 对应资源的id
+   */
+  ResourceId: string
+  /**
+   * 资源ID
+   */
+  ConsumerGroupIds: Array<string>
 }
 
 /**
@@ -5129,6 +5956,20 @@ export interface GovernanceNamespace {
 }
 
 /**
+ * ModifyCloudNativeAPIGatewayLLMModelService返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayLLMModelServiceResponse {
+  /**
+   * <p>是否成功</p>
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteCloudNativeAPIGatewayCanaryRule返回参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayCanaryRuleResponse {
@@ -5226,6 +6067,16 @@ export interface DescribeCloudNativeAPIGatewayResponse {
    * 获取云原生API网关基础信息响应结果。
    */
   Result?: DescribeCloudNativeAPIGatewayResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayConsumerGroup返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayConsumerGroupResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5372,6 +6223,20 @@ export interface RoutingDestinationRuleLabel {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewaySecretKeyValue请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewaySecretKeyValueRequest {
+  /**
+   * 实例 ID
+   */
+  GatewayId: string
+  /**
+   * 密钥id
+   */
+  SecretKeyId: string
+}
+
+/**
  * ModifyConfigFiles返回参数结构体
  */
 export interface ModifyConfigFilesResponse {
@@ -5379,6 +6244,20 @@ export interface ModifyConfigFilesResponse {
    * 修改是否成功
    */
   Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewaySecretKey返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewaySecretKeyResponse {
+  /**
+   * 允许的操作
+   */
+  Result?: CNAPIGwSecretKey
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5444,6 +6323,20 @@ export interface DescribeConfigFileReleaseVersionsRequest {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewaySecretKeyList返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewaySecretKeyListResponse {
+  /**
+   * 允许的操作
+   */
+  Result?: CNAPIGwSecretKeyList
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 服务契约版本信息
  */
 export interface GovernanceServiceContractVersion {
@@ -5459,6 +6352,30 @@ export interface GovernanceServiceContractVersion {
    * 唯一名称
    */
   Key?: string
+}
+
+/**
+ * CreateCloudNativeAPIGatewayConsumerGroup请求参数结构体
+ */
+export interface CreateCloudNativeAPIGatewayConsumerGroupRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * 消费者组名称
+   */
+  Name: string
+  /**
+   * 状态：
+- Enable 启用
+- Disable 禁用
+   */
+  Status: string
+  /**
+   * 消费者组描述
+   */
+  Description?: string
 }
 
 /**
@@ -5478,6 +6395,28 @@ export interface ModifyCloudNativeAPIGatewayRouteRateLimitRequest {
    * 限流配置
    */
   LimitDetail: CloudNativeAPIGatewayRateLimitDetail
+}
+
+/**
+ * Kong网关主动健康检查配置
+ */
+export interface KongActiveHealthCheck {
+  /**
+   * 主动健康检查健康探测间隔，单位：秒，0表示不开启
+   */
+  HealthyInterval?: number
+  /**
+   * 主动健康检查异常探测间隔，单位：秒，0表示不开启
+   */
+  UnHealthyInterval?: number
+  /**
+   * 在 GET HTTP 请求中使用的路径，以作为主动运行状况检查的探测器运行。默认： ”/”。
+   */
+  HttpPath?: string
+  /**
+   * GET HTTP 请求的超时时间，单位：秒。默认 60。
+   */
+  Timeout?: number
 }
 
 /**
@@ -5668,37 +6607,17 @@ export interface DeleteAutoScalerResourceStrategyRequest {
 }
 
 /**
- * Nacos副本信息
+ * DescribeCloudNativeAPIGatewayConsumerGroup请求参数结构体
  */
-export interface NacosReplica {
+export interface DescribeCloudNativeAPIGatewayConsumerGroupRequest {
   /**
-   * 名称
+   * 网关实例id
    */
-  Name?: string
+  GatewayId: string
   /**
-   * 角色
+   * 消费者组ID
    */
-  Role?: string
-  /**
-   * 状态
-   */
-  Status?: string
-  /**
-   * 子网ID
-   */
-  SubnetId?: string
-  /**
-   * 可用区ID
-   */
-  Zone?: string
-  /**
-   * 可用区ID
-   */
-  ZoneId?: string
-  /**
-   * VPC ID
-   */
-  VpcId?: string
+  ConsumerGroupId: string
 }
 
 /**
@@ -5713,6 +6632,54 @@ export interface CreateGovernanceInstancesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteCloudNativeAPIGatewayLLMModelAPI请求参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayLLMModelAPIRequest {
+  /**
+   * 网关 id。
+   */
+  GatewayId: string
+  /**
+   * 模型 API ID，全局唯一标识。
+   */
+  ModelAPIId: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayLLMModelAPIs请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayLLMModelAPIsRequest {
+  /**
+   * 网关 id。
+   */
+  GatewayId: string
+  /**
+   * 返回数量，默认为 10，最大值为 1000。
+   */
+  Limit?: number
+  /**
+   * 偏移量，默认为 0。
+   */
+  Offset?: number
+  /**
+   * 过滤条件，多个过滤条件之间是“与”的关系
+   */
+  Filters?: Array<Filter>
+  /**
+   * 搜索关键词，模糊匹配 name 和 description
+   */
+  Keyword?: string
+  /**
+   * 通过消费者组Id筛选，UseToBind 为 true 时ConsumerGroupId不为空
+   */
+  ConsumerGroupId?: string
+  /**
+   * 筛选可被绑定的数据， 比如模型API里面绑定模型服务筛选时，如果设置true, 返回结果只会有可以被绑定的数据。
+   */
+  UseToBind?: boolean
 }
 
 /**
@@ -5754,13 +6721,70 @@ export interface CreateGovernanceLaneGroupsResponse {
 }
 
 /**
- * DeleteEngine返回参数结构体
+ * 创建资源通用结果
  */
-export interface DeleteEngineResponse {
+export interface CNAPIGwCreateCommonResult {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 是否成功
    */
-  RequestId?: string
+  Success?: boolean
+  /**
+   * 对应的id 值
+   */
+  ID?: string
+}
+
+/**
+ * 模型服务路由配置
+ */
+export interface CloudNativeAPIGatewayLLMModelServiceRoute {
+  /**
+   * 生效的路由算法类型：权重路由，模型名称路由、参数路由等Weighted/ModelName/Query (预留多个，暂时只能填写一个)
+   */
+  SelectedTypes: Array<string>
+  /**
+   * 权重路由配置，最多10个
+   */
+  WeightedConfig?: Array<CloudNativeAPIGatewayLLMModelServiceRouteWeightedStrategy>
+  /**
+   * 模型名称路由配置，最多10个
+   */
+  ModelNameConfig?: Array<CloudNativeAPIGatewayLLMModelServiceRouteModelNameStrategy>
+}
+
+/**
+ * 消费者组结构
+ */
+export interface CNAPIGwConsumerGroup {
+  /**
+   * 分组id
+   */
+  ConsumerGroupId: string
+  /**
+   * 名字
+   */
+  Name: string
+  /**
+   * 状态Disable/Enable
+   */
+  Status: string
+  /**
+   * 描述
+   */
+  Description: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间 yyyy-MM-dd hh:mm:ss
+   */
+  ModifyTime?: string
+  /**
+   * 绑定的消费者数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BindCount?: number
 }
 
 /**
@@ -6091,6 +7115,34 @@ export interface DescribeCloudNativeAPIGatewayConfigResponse {
 }
 
 /**
+ * CreateCloudNativeAPIGatewayConsumerGroup返回参数结构体
+ */
+export interface CreateCloudNativeAPIGatewayConsumerGroupResponse {
+  /**
+   * 创建结果
+   */
+  Result?: CNAPIGwCreateCommonResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayLLMModelAPI返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayLLMModelAPIResponse {
+  /**
+   * 模型 API 信息。
+   */
+  Result?: CloudNativeAPIGatewayLLMModelAPI
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCloudNativeAPIGatewayRoute返回参数结构体
  */
 export interface CreateCloudNativeAPIGatewayRouteResponse {
@@ -6165,16 +7217,6 @@ export interface ConfigFileReleaseDeletion {
    * 配置发布ID
    */
   Id?: number
-}
-
-/**
- * CreateCloudNativeAPIGatewayServiceRateLimit返回参数结构体
- */
-export interface CreateCloudNativeAPIGatewayServiceRateLimitResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -6302,6 +7344,16 @@ export interface CreateGovernanceNamespacesResponse {
 }
 
 /**
+ * DeleteCloudNativeAPIGatewayConsumer返回参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayConsumerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 云原生网关健康检查配置
  */
 export interface UpstreamHealthCheckConfig {
@@ -6354,17 +7406,37 @@ export interface UpstreamHealthCheckConfig {
 }
 
 /**
- * CreateConfigFileGroup请求参数结构体
+ * DescribeCloudNativeAPIGatewayLLMModelServices请求参数结构体
  */
-export interface CreateConfigFileGroupRequest {
+export interface DescribeCloudNativeAPIGatewayLLMModelServicesRequest {
   /**
-   * tse 实例 id
+   * <p>网关 id。</p>
    */
-  InstanceId: string
+  GatewayId: string
   /**
-   * 配置文件组实体
+   * <p>返回数量，默认为 10，最大值为 1000。</p>
    */
-  ConfigFileGroup: ConfigFileGroup
+  Limit?: number
+  /**
+   * <p>偏移量，默认为 0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>过滤条件，多个过滤条件之间是“与”的关系，支持 Name</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>通过模型 API 筛选模型服务</p>
+   */
+  ModelAPIId?: string
+  /**
+   * <p>通过密匙查询绑定的模型服务</p>
+   */
+  SecretKeyId?: string
+  /**
+   * <p>搜索关键词，模糊匹配 name 和 description</p>
+   */
+  Keyword?: string
 }
 
 /**
@@ -6434,6 +7506,20 @@ export interface DescribeOneCloudNativeAPIGatewayServiceRequest {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayLLMModelAPIs返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayLLMModelAPIsResponse {
+  /**
+   * 模型 API 列表。
+   */
+  Result?: ListCloudNativeAPIGatewayLLMModelAPI
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteGovernanceAliases请求参数结构体
  */
 export interface DeleteGovernanceAliasesRequest {
@@ -6455,6 +7541,20 @@ export interface CertificateInfo {
    * 唯一id
    */
   Id?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayConsumerList返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayConsumerListResponse {
+  /**
+   * 消费者列表
+   */
+  Result?: CNAPIGwConsumerList
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6485,6 +7585,20 @@ export interface CreateOrModifyCloudNativeAPIGatewayIPRestrictionRequest {
    * cidr｜ip
    */
   AddressList: Array<string>
+}
+
+/**
+ * LLM 模型服务列表
+ */
+export interface ListCloudNativeAPIGatewayLLMModelService {
+  /**
+   * 模型服务数量。
+   */
+  TotalCount?: number
+  /**
+   * 模型服务列表。
+   */
+  DataList?: Array<CloudNativeAPIGatewayLLMModelService>
 }
 
 /**
@@ -6530,6 +7644,16 @@ export interface DescribeCloudNativeAPIGatewayRouteRateLimitResponse {
    * 获取云原生网关限流插件(路由)
    */
   Result?: CloudNativeAPIGatewayRateLimitDetail
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AddCloudNativeAPIGatewayConsumerGroupAuth返回参数结构体
+ */
+export interface AddCloudNativeAPIGatewayConsumerGroupAuthResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6722,6 +7846,16 @@ export interface GovernanceInstance {
 }
 
 /**
+ * DeleteCloudNativeAPIGatewaySecretKey返回参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewaySecretKeyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCloudNativeAPIGatewayRoutes请求参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayRoutesRequest {
@@ -6858,6 +7992,20 @@ export interface DescribeCloudNativeAPIGatewayNodesResult {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayLLMModelAPI请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayLLMModelAPIRequest {
+  /**
+   * 网关 id。
+   */
+  GatewayId: string
+  /**
+   * 模型 API ID，全局唯一标识。
+   */
+  ModelAPIId: string
+}
+
+/**
  * DescribeNacosServerInterfaces请求参数结构体
  */
 export interface DescribeNacosServerInterfacesRequest {
@@ -6873,6 +8021,58 @@ export interface DescribeNacosServerInterfacesRequest {
    * 返回的列表起始偏移量
    */
   Offset?: number
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayConsumerGroup请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayConsumerGroupRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * 消费者组ID
+   */
+  ConsumerGroupId: string
+  /**
+   * 新的消费者组名称
+   */
+  Name: string
+  /**
+   * 状态：
+- Enable 启用
+- Disable 禁用
+   */
+  Status: string
+  /**
+   * 新的消费者组描述
+   */
+  Description?: string
+}
+
+/**
+ * RemoveCloudNativeAPIGatewayConsumerGroupAuth请求参数结构体
+ */
+export interface RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * 资源类型:
+
+- ModelAPI: 模型API
+   */
+  ResourceType: string
+  /**
+   * 资源id
+   */
+  ResourceId: string
+  /**
+   * 资源ID
+   */
+  ConsumerGroupIds: Array<string>
 }
 
 /**
@@ -7085,6 +8285,28 @@ export interface DescribePublicAddressConfigResponse {
 }
 
 /**
+ * 私有网络信息
+ */
+export interface VpcInfo {
+  /**
+   * Vpc Id
+   */
+  VpcId: string
+  /**
+   * 子网ID
+   */
+  SubnetId: string
+  /**
+   * 内网访问地址
+   */
+  IntranetAddress?: string
+  /**
+   * 负载均衡均衡接入点子网ID
+   */
+  LbSubnetId?: string
+}
+
+/**
  * PublishConfigFiles请求参数结构体
  */
 export interface PublishConfigFilesRequest {
@@ -7251,17 +8473,27 @@ export interface ModifyNativeGatewayServerGroupResponse {
 }
 
 /**
- * 配置文件标签
+ * DeleteCloudNativeAPIGatewayLLMModelService请求参数结构体
  */
-export interface ConfigFileTag {
+export interface DeleteCloudNativeAPIGatewayLLMModelServiceRequest {
   /**
-   * key-value 键
+   * 网关 id。
    */
-  Key?: string
+  GatewayId: string
   /**
-   * key-value 值
+   * 模型服务 ID，全局唯一标识。
    */
-  Value?: string
+  ModelServiceId: string
+}
+
+/**
+ * DeleteCloudNativeAPIGatewayConsumerGroup返回参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayConsumerGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7322,6 +8554,20 @@ export interface ModifyGovernanceLaneGroupsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 密钥列表
+ */
+export interface CNAPIGwSecretKeyList {
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 密钥列表
+   */
+  SecretKeys?: Array<CNAPIGwSecretKey>
 }
 
 /**
@@ -7504,6 +8750,38 @@ export interface DeleteCloudNativeAPIGatewayIPRestrictionRequest {
 }
 
 /**
+ * 消费者结构
+ */
+export interface CNAPIGwConsumer {
+  /**
+   * 分组id
+   */
+  ConsumerId: string
+  /**
+   * 名字
+   */
+  Name: string
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+  /**
+   * 更新时间 yyyy-MM-dd hh:mm:ss
+   */
+  ModifyTime: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 消费者分组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConsumerGroups?: Array<CNAPIGwConsumerGroup>
+}
+
+/**
  * CreateGovernanceAlias返回参数结构体
  */
 export interface CreateGovernanceAliasResponse {
@@ -7543,6 +8821,20 @@ export interface DeleteConfigFileGroupResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * kong服务路由列表
+ */
+export interface KongServiceRouteList {
+  /**
+   * 无
+   */
+  RouteList?: Array<KongRoutePreview>
+  /**
+   * 总数
+   */
+  TotalCount?: number
 }
 
 /**
@@ -7589,6 +8881,34 @@ export interface ConfigFilePublishInfo {
    * 标签
    */
   Tags?: Array<ConfigFileTag>
+}
+
+/**
+ * DeleteCloudNativeAPIGatewayConsumerGroup请求参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayConsumerGroupRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * 消费者组ID
+   */
+  ConsumerGroupId: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayLLMModelService请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayLLMModelServiceRequest {
+  /**
+   * 网关 id。
+   */
+  GatewayId: string
+  /**
+   * 模型服务 ID，全局唯一标识。
+   */
+  ModelServiceId: string
 }
 
 /**
@@ -7715,6 +9035,20 @@ export interface DeleteGovernanceServicesResponse {
 }
 
 /**
+ * DeleteCloudNativeAPIGatewaySecretKey请求参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewaySecretKeyRequest {
+  /**
+   * 网关ID
+   */
+  GatewayId: string
+  /**
+   * 密钥id
+   */
+  SecretKeyId: string
+}
+
+/**
  * DeleteCloudNativeAPIGatewayCertificate返回参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayCertificateResponse {
@@ -7776,6 +9110,92 @@ export interface CreatePublicNetworkResult {
    * 客户端公网网络ID
    */
   NetworkId?: string
+}
+
+/**
+ * CreateCloudNativeAPIGatewayLLMModelService请求参数结构体
+ */
+export interface CreateCloudNativeAPIGatewayLLMModelServiceRequest {
+  /**
+   * <p>网关 id。</p>
+   */
+  GatewayId: string
+  /**
+   * <p>服务名称，最长60个字符，支持中英文大小写、数字及分隔符（“-”、“_”)，不能以数字和分隔符开头，不能以分隔符结尾。</p>
+   */
+  Name: string
+  /**
+   * <p>服务类型。目前仅支持 LLMService。</p><p>枚举值：</p><ul><li>LLMService： 大语言模型服务</li></ul>
+   */
+  ServiceType: string
+  /**
+   * <p>选择模型提供商, 选项：OpenAI、Anthropic、Azure OpenAI等。</p>
+   */
+  ModelProvider: string
+  /**
+   * <p>API协议标准，根据供应商动态变化：OpenAI→OpenAI/v1，Anthropic→Anthropic/v1等</p>
+   */
+  ModelProtocol: string
+  /**
+   * <p>模型选择方式，选项：Specify（指定模型）、PassThrough（透传请求模型）。</p>
+   */
+  ModelSelector: string
+  /**
+   * <p>LLM 厂商颁发的认证信息 token 。</p>
+   */
+  SecretKeyIds?: Array<string>
+  /**
+   * <p>默认模型，模型选择方式为 Specify 时必填。</p>
+   */
+  DefaultModel?: string
+  /**
+   * <p>开启模型降级，模型选择方式为 Specify 时必填。</p>
+   */
+  EnableModelFallback?: boolean
+  /**
+   * <p>可以配置备用模型规则，EnableSpecifyModelFallbackxa0为 true 时必填。</p>
+   */
+  ModelFallbackRule?: CloudNativeAPIGatewayLLMModelFallbackRule
+  /**
+   * <p>开启模型参数校验，是否校验客户端传递的 model 参数,xa0模型选择方式为 PassThrough 时必填</p>
+   */
+  EnableModelParamCheck?: boolean
+  /**
+   * <p>模型检验信息，EnableModelParamCheckxa0为 true 时必填。</p>
+   */
+  ModelParamCheckRule?: CloudNativeAPIGatewayLLMModelParamCheckInfo
+  /**
+   * <p>描述。</p>
+   */
+  Description?: string
+  /**
+   * <p>服务提供商自定义 url</p>
+   */
+  UpstreamURL?: string
+  /**
+   * <p>连接超时时间</p><p>取值范围：[1, 3600000]</p><p>单位：毫秒</p><p>默认值：10000</p>
+   */
+  ConnectTimeout?: number
+  /**
+   * <p>写入超时时间</p><p>取值范围：[1, 3600000]</p><p>单位：毫秒</p><p>默认值：60000</p>
+   */
+  WriteTimeout?: number
+  /**
+   * <p>读取超时时间</p><p>取值范围：[1, 3600000]</p><p>单位：毫秒</p><p>默认值：60000</p>
+   */
+  ReadTimeout?: number
+  /**
+   * <p>重试次数</p><p>取值范围：[0, 5]</p><p>单位：次</p><p>默认值：0</p>
+   */
+  Retries?: number
+  /**
+   * <p>路径拼接模式</p><p>枚举值：</p><ul><li>FixedPath： 固定地址</li><li>AutoConcat： 自动拼接</li></ul>
+   */
+  UpstreamUrlMode?: string
+  /**
+   * <p>sni</p>
+   */
+  SNI?: string
 }
 
 /**
@@ -7915,6 +9335,21 @@ export interface KVPair {
 }
 
 /**
+ * 消费者列表
+ */
+export interface CNAPIGwConsumerList {
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 消费者列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Consumers?: Array<CNAPIGwConsumer>
+}
+
+/**
  * UpdateUpstreamTargets请求参数结构体
  */
 export interface UpdateUpstreamTargetsRequest {
@@ -7991,6 +9426,28 @@ export interface InstancePort {
 }
 
 /**
+ * ModifyCloudNativeAPIGatewayConsumer请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayConsumerRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * 消费者ID
+   */
+  ConsumerId: string
+  /**
+   * 新的消费者名称
+   */
+  Name: string
+  /**
+   * 新的消费者描述
+   */
+  Description?: string
+}
+
+/**
  * DeleteNativeGatewayServerGroup请求参数结构体
  */
 export interface DeleteNativeGatewayServerGroupRequest {
@@ -8003,6 +9460,24 @@ export interface DeleteNativeGatewayServerGroupRequest {
    * 网关分组id
    */
   GroupId: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayConsumerGroupList请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayConsumerGroupListRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * 每页条数
+   */
+  Limit: number
+  /**
+   * 起始位置
+   */
+  Offset: number
 }
 
 /**
@@ -8253,6 +9728,20 @@ export interface DescribeGovernanceInstancesResponse {
 }
 
 /**
+ * LLM 模型 API 列表
+ */
+export interface ListCloudNativeAPIGatewayLLMModelAPI {
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * AI 网关模型 API 列表。
+   */
+  DataList?: Array<CloudNativeAPIGatewayLLMModelAPI>
+}
+
+/**
  * ModifyGovernanceNamespaces返回参数结构体
  */
 export interface ModifyGovernanceNamespacesResponse {
@@ -8282,6 +9771,24 @@ export interface DescribeCloudNativeAPIGatewaysRequest {
    * 请求过滤参数，支持按照实例名称、ID和标签键值（Name、GatewayId、Tag）筛选
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * DescribeCloudNativeAPIGatewaySecretKeyList请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewaySecretKeyListRequest {
+  /**
+   * 实例 ID
+   */
+  GatewayId: string
+  /**
+   * 每页数量，最大20个
+   */
+  Limit: number
+  /**
+   * 起始值
+   */
+  Offset: number
 }
 
 /**
@@ -8409,6 +9916,16 @@ export interface DescribePublicNetworkResponse {
    * 获取云原生API网关公网详情响应结果。
    */
   Result?: DescribePublicNetworkResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RemoveCloudNativeAPIGatewayConsumerInGroup返回参数结构体
+ */
+export interface RemoveCloudNativeAPIGatewayConsumerInGroupResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8721,6 +10238,20 @@ export interface NativeGatewayServerGroup {
 }
 
 /**
+ * 跨服务降级配置
+ */
+export interface AIGWCrossServiceFallbackConfig {
+  /**
+   * <p>触发条件</p><p>枚举值：</p><ul><li>ServiceUnavailable： 服务不可用</li><li>ConnectionTimeout： 连接超时</li><li>RateLimited： 限流</li></ul>
+   */
+  TriggerConditions: Array<string>
+  /**
+   * <p>fallback 服务链</p>
+   */
+  FallbackServiceChain: Array<AIGWFallbackServiceItem>
+}
+
+/**
  * DescribeZookeeperServerInterfaces返回参数结构体
  */
 export interface DescribeZookeeperServerInterfacesResponse {
@@ -8739,6 +10270,24 @@ export interface DescribeZookeeperServerInterfacesResponse {
 }
 
 /**
+ * AddCloudNativeAPIGatewayConsumerInGroup请求参数结构体
+ */
+export interface AddCloudNativeAPIGatewayConsumerInGroupRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * 消费者组ID
+   */
+  ConsumerGroupId: string
+  /**
+   * 消费者ID
+   */
+  ConsumerIds: Array<string>
+}
+
+/**
  * DescribeConfigFileReleaseVersions返回参数结构体
  */
 export interface DescribeConfigFileReleaseVersionsResponse {
@@ -8746,6 +10295,52 @@ export interface DescribeConfigFileReleaseVersionsResponse {
    * 版本信息
    */
   ReleaseVersions?: Array<ReleaseVersion>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateCloudNativeAPIGatewayConsumer返回参数结构体
+ */
+export interface CreateCloudNativeAPIGatewayConsumerResponse {
+  /**
+   * 创建结果
+   */
+  Result?: CNAPIGwCreateCommonResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 模型服务模型名称路由策略
+ */
+export interface CloudNativeAPIGatewayLLMModelServiceRouteModelNameStrategy {
+  /**
+   * 模型服务id
+   */
+  ModelServiceId: string
+  /**
+   * 匹配模型服务
+   */
+  MatchModelName: string
+  /**
+   * 重写模型
+   */
+  RewriteModelName?: string
+}
+
+/**
+ * DeleteCloudNativeAPIGatewayLLMModelAPI返回参数结构体
+ */
+export interface DeleteCloudNativeAPIGatewayLLMModelAPIResponse {
+  /**
+   * 是否成功
+   */
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8920,6 +10515,34 @@ export interface DescribeZookeeperServerInterfacesRequest {
    * 返回的列表起始偏移量
    */
   Offset?: number
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayLLMModelService返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayLLMModelServiceResponse {
+  /**
+   * 模型服务。
+   */
+  Result?: CloudNativeAPIGatewayLLMModelService
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewaySecretKey请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewaySecretKeyRequest {
+  /**
+   * 实例 ID
+   */
+  GatewayId: string
+  /**
+   * 密钥id
+   */
+  SecretKeyId: string
 }
 
 /**
@@ -9156,6 +10779,20 @@ export interface ZookeeperServerInterface {
    * 接口名
    */
   Interface?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayConsumer请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayConsumerRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * 消费者ID
+   */
+  ConsumerId: string
 }
 
 /**
@@ -9398,17 +11035,17 @@ export interface DescribeGovernanceLaneGroupsRequest {
 }
 
 /**
- * kong服务路由列表
+ * DescribeCloudNativeAPIGatewaySecretKeyValue返回参数结构体
  */
-export interface KongServiceRouteList {
+export interface DescribeCloudNativeAPIGatewaySecretKeyValueResponse {
   /**
-   * 无
+   * 密钥值
    */
-  RouteList?: Array<KongRoutePreview>
+  Result?: string
   /**
-   * 总数
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TotalCount?: number
+  RequestId?: string
 }
 
 /**
@@ -9494,13 +11131,21 @@ export interface DescribeCloudNativeAPIGatewayCanaryRulesRequest {
 }
 
 /**
- * 查询Limiter的接入地址
+ * CreateCloudNativeAPIGatewayLLMModelAPI返回参数结构体
  */
-export interface PolarisLimiterAddress {
+export interface CreateCloudNativeAPIGatewayLLMModelAPIResponse {
   /**
-   * VPC接入IP列表
+   * <p>是否成功。</p>
    */
-  IntranetAddress?: string
+  Result?: boolean
+  /**
+   * <p>模型 API ID，全局唯一标识。</p>
+   */
+  ModelAPIId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9572,6 +11217,52 @@ export interface DescribeGovernanceServicesRequest {
 }
 
 /**
+ * ModifyCloudNativeAPIGatewayLLMModelAPI请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayLLMModelAPIRequest {
+  /**
+   * <p>网关 id。</p>
+   */
+  GatewayId: string
+  /**
+   * <p>模型 API ID，全局唯一标识。</p>
+   */
+  ModelAPIId: string
+  /**
+   * <p>修改模型 API 名称</p>
+   */
+  Name?: string
+  /**
+   * <p>为API设置统一的前缀，格式：以/开头，支持字母、数字、短横线。</p>
+   */
+  BasePath?: string
+  /**
+   * <p>模型 API 的相关描述。</p>
+   */
+  Description?: string
+  /**
+   * <p>关联的模型服务列表（支持填多个模型服务）</p>
+   */
+  ListModelServiceId?: Array<string>
+  /**
+   * <p>模型服务路由策略（是指如何路由到模型服务）</p>
+   */
+  ModelServiceRoute?: CloudNativeAPIGatewayLLMModelServiceRoute
+  /**
+   * <p>headers 路由匹配</p>
+   */
+  MatchHeaders?: Array<AIGWKVMatch>
+  /**
+   * <p>跨服务 fallback</p>
+   */
+  EnableCrossServiceFallback?: boolean
+  /**
+   * <p>跨服务 fallback 配置</p>
+   */
+  CrossServiceFallbackConfig?: AIGWCrossServiceFallbackConfig
+}
+
+/**
  * DescribeConfigFileRelease返回参数结构体
  */
 export interface DescribeConfigFileReleaseResponse {
@@ -9605,6 +11296,20 @@ export interface DescribeWafProtectionResult {
    * 对象防护状态
    */
   ObjectStatus?: string
+}
+
+/**
+ * CreateCloudNativeAPIGatewaySecretKey返回参数结构体
+ */
+export interface CreateCloudNativeAPIGatewaySecretKeyResponse {
+  /**
+   * 允许的操作
+   */
+  Result?: CNAPIGwCreateCommonResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

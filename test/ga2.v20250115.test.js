@@ -118,6 +118,16 @@ it("ga2.v20250115.DescribeEndpointGroups", async function () {
     }
 })
 
+it("ga2.v20250115.DescribeTaskResult", async function () {
+    try {
+       const data = await client.DescribeTaskResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ga2.v20250115.DescribeListeners", async function () {
     try {
        const data = await client.DescribeListeners({})

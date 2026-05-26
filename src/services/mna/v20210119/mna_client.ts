@@ -67,11 +67,14 @@ import {
   DeleteGroupRequest,
   CreateEncryptedKeyResponse,
   UpdateL3SwitchResponse,
+  DescribeAccessRegionsResponse,
   GetL3ConnListResponse,
   GroupInfo,
   AddApplicationResponse,
   ModifyPackageRenewFlagResponse,
+  ModifyDeviceAccessRegionsResponse,
   GetDestIPByNameResponse,
+  DescribeAccessRegionsRequest,
   VendorHardware,
   GetDeviceRequest,
   ActivateHardwareResponse,
@@ -84,6 +87,7 @@ import {
   SetNotifyUrlRequest,
   GetDevicePayModeRequest,
   DeleteApplicationRequest,
+  ModifyDeviceAccessRegionsRequest,
   SlotNetInfo,
   DeviceNetInfo,
   NetDetails,
@@ -118,6 +122,7 @@ import {
   UpdateApplicationInfoResponse,
   OrderFlowPackageResponse,
   UpdateDeviceResponse,
+  RegionInfo,
   L3ConnInfo,
   ActivateHardwareRequest,
   GetMonitorDataByNameResponse,
@@ -161,6 +166,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetNotifyUrlResponse) => void
   ): Promise<SetNotifyUrlResponse> {
     return this.request("SetNotifyUrl", req, cb)
+  }
+
+  /**
+   * 修改设备接入地域。
+   */
+  async ModifyDeviceAccessRegions(
+    req: ModifyDeviceAccessRegionsRequest,
+    cb?: (error: string, rep: ModifyDeviceAccessRegionsResponse) => void
+  ): Promise<ModifyDeviceAccessRegionsResponse> {
+    return this.request("ModifyDeviceAccessRegions", req, cb)
   }
 
   /**
@@ -321,6 +336,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetDestIPByNameResponse) => void
   ): Promise<GetDestIPByNameResponse> {
     return this.request("GetDestIPByName", req, cb)
+  }
+
+  /**
+   * 查询可接入地域列表。
+   */
+  async DescribeAccessRegions(
+    req?: DescribeAccessRegionsRequest,
+    cb?: (error: string, rep: DescribeAccessRegionsResponse) => void
+  ): Promise<DescribeAccessRegionsResponse> {
+    return this.request("DescribeAccessRegions", req, cb)
   }
 
   /**
