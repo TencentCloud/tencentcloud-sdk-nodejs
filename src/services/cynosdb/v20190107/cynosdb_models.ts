@@ -1109,6 +1109,28 @@ export interface DescribeClustersRequest {
 }
 
 /**
+ * DescribeSQLExecutionPlan请求参数结构体
+ */
+export interface DescribeSQLExecutionPlanRequest {
+  /**
+   * <p>集群ID</p>
+   */
+  ClusterId: string
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>SQL模板ID</p>
+   */
+  TemplateID: string
+  /**
+   * <p>计划详情序列号</p>
+   */
+  PlanDetailId: number
+}
+
+/**
  * OpenReadOnlyInstanceExclusiveAccess返回参数结构体
  */
 export interface OpenReadOnlyInstanceExclusiveAccessResponse {
@@ -5732,6 +5754,36 @@ export interface DescribeInstanceParamsResponse {
 }
 
 /**
+ * IsolateInstance请求参数结构体
+ */
+export interface IsolateInstanceRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 实例ID数组，例如["cynosdbbmysql-ins-asd","cynosdbmysql-ins-zxc"]
+   */
+  InstanceIdList: Array<string>
+  /**
+   * 该参数已废弃
+   */
+  DbType?: string
+  /**
+   * 实例退还原因类型
+   */
+  IsolateReasonTypes?: Array<number | bigint>
+  /**
+   * 实例退还原因补充
+   */
+  IsolateReason?: string
+  /**
+   * 保留备份
+   */
+  SaveBackup?: boolean
+}
+
+/**
  * SwitchClusterVpc返回参数结构体
  */
 export interface SwitchClusterVpcResponse {
@@ -6217,6 +6269,64 @@ export interface Addr {
 }
 
 /**
+ * AddServerlessRoInstances请求参数结构体
+ */
+export interface AddServerlessRoInstancesRequest {
+  /**
+   * <p>集群Id</p>
+   */
+  ClusterId: string
+  /**
+   * <p>ro实例最小规格</p>
+   */
+  MinCpu?: number
+  /**
+   * <p>ro实例最大规格</p>
+   */
+  MaxCpu?: number
+  /**
+   * <p>ro实例名称</p>
+   */
+  InstanceName?: string
+  /**
+   * <p>所属VPC网络ID</p>
+   */
+  VpcId?: string
+  /**
+   * <p>所属子网ID，如果设置了VpcId，则SubnetId必填</p>
+   */
+  SubnetId?: string
+  /**
+   * <p>新增RO组时使用的Port，取值范围为[0,65535)</p>
+   */
+  Port?: number
+  /**
+   * <p>安全组ID，新建只读实例时可以指定安全组</p>
+   */
+  SecurityGroupIds?: Array<string>
+  /**
+   * <p>是否自动暂停</p><p>枚举值：</p><ul><li>yes： 是</li><li>no： 否</li></ul>
+   */
+  AutoPause?: string
+  /**
+   * <p>自动暂停时间</p><p>单位：秒</p>
+   */
+  AutoPauseDelay?: number
+  /**
+   * <p>实例参数</p>
+   */
+  InstanceParams?: Array<ModifyParamItem>
+  /**
+   * <p>参数模板</p>
+   */
+  ParamTemplateId?: number
+  /**
+   * <p>新增的只读实例数量</p>
+   */
+  RoCount?: number
+}
+
+/**
  * DescribeProjectSecurityGroups请求参数结构体
  */
 export interface DescribeProjectSecurityGroupsRequest {
@@ -6471,6 +6581,21 @@ export interface CreateProxyEndPointResponse {
    * 数据库代理组 ID。
    */
   ProxyGroupId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSQLExecutionPlan返回参数结构体
+ */
+export interface DescribeSQLExecutionPlanResponse {
+  /**
+   * <p>执行计划详情</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PlanDetail?: ExecutionPlanDetail
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9197,6 +9322,60 @@ export interface ExportInstanceErrorLogsRequest {
 }
 
 /**
+ * 执行计划列表
+ */
+export interface ExplainRow {
+  /**
+   * <p>查询的序列号</p>
+   */
+  Id?: number
+  /**
+   * <p>查询的类型，常见值：SIMPLE（简单查询，不含子查询或 UNION）、PRIMARY（最外层查询）、SUBQUERY（子查询中的第一个 SELECT）、DERIVED（派生表/FROM 子句中的子查询）、UNION（UNION 中第二个及之后的 SELECT）、UNION RESULT（UNION 的结果集）。</p>
+   */
+  SelectType?: string
+  /**
+   * <p>数据表名</p>
+   */
+  Table?: string
+  /**
+   * <p>查询匹配的分区</p>
+   */
+  Partitions?: string
+  /**
+   * <p>访问类型（非常重要，衡量查询效率的关键指标），从优到差排列：system &gt; const &gt; eq_ref &gt; ref &gt; fulltext &gt; ref_or_null &gt; index_merge &gt; unique_subquery &gt; index_subquery &gt; range &gt; index &gt; ALL。常见值说明： • system：表只有一行记录（系统表） • const：通过主键或唯一索引匹配一行，常见于 WHERE pk = 1 • eq_ref：连接时使用主键或唯一索引，每个索引值只匹配一行 • ref：使用非唯一索引查找，可能匹配多行 • range：索引范围扫描，如 BETWEEN、&gt;、&lt;、IN • index：全索引扫描（遍历整棵索引树） • ALL：全表扫描（最差，需优化）</p>
+   */
+  Type?: string
+  /**
+   * <p>查询中可能使用到的索引。为 NULL 表示没有可用索引。</p>
+   */
+  PossibleKeys?: string
+  /**
+   * <p>实际使用的索引。为 NULL 表示未使用任何索引。</p>
+   */
+  Key?: string
+  /**
+   * <p>实际使用的索引长度（字节数）。可用来判断联合索引中实际使用了哪几个列。值越短说明使用的索引列越少。</p>
+   */
+  KeyLen?: string
+  /**
+   * <p>显示哪些列或常量与 key 列中的索引进行比较。常见值：const（常量）、某个列名、func（函数结果）。</p>
+   */
+  Ref?: string
+  /**
+   * <p>预估要扫描的行数</p>
+   */
+  Rows?: number
+  /**
+   * <p>表示经过表条件过滤后，剩余行数占 rows 的百分比估算。100% 表示没有额外过滤，值越高越好。</p>
+   */
+  Filtered?: number
+  /**
+   * <p>附加信息（非常重要），常见值： • Using index：覆盖索引，无需回表（好） • Using where：在存储引擎返回行后再用 WHERE 过滤 • Using temporary：使用了临时表（常见于 GROUP BY/ORDER BY，需优化） • Using filesort：使用了文件排序而非索引排序（需优化） • Using index condition：使用了索引下推（ICP）</p>
+   */
+  Extra?: string
+}
+
+/**
  * DescribeLibraDBDataSource请求参数结构体
  */
 export interface DescribeLibraDBDataSourceRequest {
@@ -9225,25 +9404,57 @@ export interface ActivateInstanceRequest {
 }
 
 /**
- * ModifyAccountDescription请求参数结构体
+ * 执行计划详情
  */
-export interface ModifyAccountDescriptionRequest {
+export interface ExecutionPlanDetail {
   /**
-   * 数据库账号名
+   * <p>模板ID</p>
    */
-  AccountName: string
+  TemplateID?: string
   /**
-   * 数据库账号描述信息
+   * <p>数据库名</p>
    */
-  Description: string
+  Db?: string
   /**
-   * 集群ID
+   * <p>原始SQL样例</p>
    */
-  ClusterId: string
+  SQLSample?: string
   /**
-   * 主机，默认为"%"
+   * <p>改写后SQL样例</p>
    */
-  Host?: string
+  SQLSampleRewritten?: string
+  /**
+   * <p>优化前执行计划- 列表</p>
+   */
+  TablePlanBefore?: Array<ExplainRow>
+  /**
+   * <p>优化后执行计划 - 列表</p>
+   */
+  TablePlanAfter?: Array<ExplainRow>
+  /**
+   * <p>优化前树形执行计划</p>
+   */
+  TreePlanBefore?: string
+  /**
+   * <p>优化后树形执行计划</p>
+   */
+  TreePlanAfter?: string
+  /**
+   * <p>优化前查询时间</p>
+   */
+  QueryTimeBefore?: number
+  /**
+   * <p>优化后查询时间</p>
+   */
+  QueryTimeAfter?: number
+  /**
+   * <p>优化前扫描行数</p>
+   */
+  SQLScanRowsBefore?: number
+  /**
+   * <p>优化后扫描行数</p>
+   */
+  SQLScanRowsAfter?: number
 }
 
 /**
@@ -13858,6 +14069,28 @@ export interface DescribeBackupListRequest {
 }
 
 /**
+ * ModifyAccountDescription请求参数结构体
+ */
+export interface ModifyAccountDescriptionRequest {
+  /**
+   * 数据库账号名
+   */
+  AccountName: string
+  /**
+   * 数据库账号描述信息
+   */
+  Description: string
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 主机，默认为"%"
+   */
+  Host?: string
+}
+
+/**
  * 实例初始化配置信息
  */
 export interface IntegrateInstanceInfo {
@@ -15377,33 +15610,33 @@ export interface InstanceSpec {
 }
 
 /**
- * IsolateInstance请求参数结构体
+ * AddServerlessRoInstances返回参数结构体
  */
-export interface IsolateInstanceRequest {
+export interface AddServerlessRoInstancesResponse {
   /**
-   * 集群ID
+   * <p>冻结流水，一次开通一个冻结流水</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId: string
+  TranId?: string
   /**
-   * 实例ID数组，例如["cynosdbbmysql-ins-asd","cynosdbmysql-ins-zxc"]
+   * <p>后付费订单号</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceIdList: Array<string>
+  DealNames?: Array<string>
   /**
-   * 该参数已废弃
+   * <p>发货资源id列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DbType?: string
+  ResourceIds?: Array<string>
   /**
-   * 实例退还原因类型
+   * <p>大订单号</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsolateReasonTypes?: Array<number | bigint>
+  BigDealIds?: Array<string>
   /**
-   * 实例退还原因补充
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IsolateReason?: string
-  /**
-   * 保留备份
-   */
-  SaveBackup?: boolean
+  RequestId?: string
 }
 
 /**

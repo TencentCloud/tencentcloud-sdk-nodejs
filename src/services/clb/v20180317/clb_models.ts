@@ -6090,6 +6090,10 @@ export interface TargetGroupInfo {
    * <p>IP版本。</p>
    */
   IpVersion?: string
+  /**
+   * <p>是否开启SNAT</p>
+   */
+  SnatEnable?: boolean
 }
 
 /**

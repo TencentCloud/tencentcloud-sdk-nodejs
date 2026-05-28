@@ -2547,7 +2547,7 @@ export interface FlavorKingCycleBrandImportantCityScanAnalysisCityItem {
    */
   LastCycleRatio?: number
   /**
-   * <p>上周期口味王牌市场份额</p>
+   * <p>上周期口味王品牌市场份额</p>
    */
   LastCycleMarketShare?: number
   /**

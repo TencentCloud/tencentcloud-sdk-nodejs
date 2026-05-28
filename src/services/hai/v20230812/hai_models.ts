@@ -855,6 +855,18 @@ export interface ServiceDetail {
    * 服务超参数配置
    */
   HyperParam?: HyperParam
+  /**
+   *
+   */
+  SecurityType?: string
+  /**
+   *
+   */
+  RoleComputeSet?: Array<ComputeDetail>
+  /**
+   *
+   */
+  TargetReplicas?: number
 }
 
 /**
@@ -1626,6 +1638,10 @@ export interface TemplateDetail {
    * 当前部署模板所支持的增强功能
    */
   SupportFunc?: Array<string>
+  /**
+   *
+   */
+  RoleComputeSet?: Array<ComputeDetail>
 }
 
 /**

@@ -378,6 +378,16 @@ it("cynosdb.v20190107.CopyClusterPasswordComplexity", async function () {
     }
 })
 
+it("cynosdb.v20190107.AddServerlessRoInstances", async function () {
+    try {
+       const data = await client.AddServerlessRoInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DownloadLibraDBClusterList", async function () {
     try {
        const data = await client.DownloadLibraDBClusterList({})
@@ -1671,6 +1681,16 @@ it("cynosdb.v20190107.ReloadBalanceProxyNode", async function () {
 it("cynosdb.v20190107.CreateVault", async function () {
     try {
        const data = await client.CreateVault({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeSQLExecutionPlan", async function () {
+    try {
+       const data = await client.DescribeSQLExecutionPlan({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

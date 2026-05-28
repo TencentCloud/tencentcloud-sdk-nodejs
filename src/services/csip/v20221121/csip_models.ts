@@ -2662,6 +2662,10 @@ export interface DescribeGatewayAssetsResponse {
  */
 export interface CreateCosObjectScanTaskResponse {
   /**
+   * <p>任务id</p>
+   */
+  TaskId?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2943,81 +2947,93 @@ export interface DescribeCosAlarmListResponse {
  */
 export interface CosAssetInfo {
   /**
-   * appid
+   * <p>appid</p>
    */
   AppId?: number
   /**
-   * cos桶名
+   * <p>cos桶名</p>
    */
   BucketName?: string
   /**
-   * cos region名
+   * <p>cos region名</p>
    */
   BucketRegion?: string
   /**
-   * 地域码值
+   * <p>地域码值</p>
    */
   BucketRegionCode?: string
   /**
-   * cos桶备注
+   * <p>cos桶备注</p>
    */
   BucketMarker?: string
   /**
-   * cos桶主账号所属者
+   * <p>cos桶主账号所属者</p>
    */
   BucketOwnerUin?: string
   /**
-   * cos主账号所属者昵称
+   * <p>cos主账号所属者昵称</p>
    */
   BucketOwnerNickName?: string
   /**
-   * cos桶标签详情
+   * <p>cos桶标签详情</p>
    */
   BucketTagInfo?: string
   /**
-   * 安全建议
-1 暂无异常
-2 建议加固
-3 立即处理
+   * <p>安全建议<br>1 暂无异常<br>2 建议加固<br>3 立即处理</p>
    */
   BucketSecuritySuggestion?: number
   /**
-   * 告警列表
+   * <p>告警列表</p>
    */
   BucketAlarmList?: Array<CosRiskAlarmInfo>
   /**
-   * 风险列表
+   * <p>风险列表</p>
    */
   BucketRiskList?: Array<CosRiskAlarmInfo>
   /**
-   * 调用源ip数
+   * <p>调用源ip数</p>
    */
   BucketInvokeSourceIpCount?: number
   /**
-   * 访问策略
+   * <p>访问策略</p>
    */
   BucketAccessWay?: CosBucketAccessWay
   /**
-   * 创建时间Unix时间单位毫秒
+   * <p>创建时间Unix时间单位毫秒</p>
    */
   CreateTime?: number
   /**
-   * 最后访问时间Unix时间单位毫秒
+   * <p>最后访问时间Unix时间单位毫秒</p>
    */
   LastAccessTime?: number
   /**
-   * 存储桶id
+   * <p>存储桶id</p>
    */
   BucketId?: number
   /**
-   * 0 关闭
-1 开启
+   * <p>0 关闭<br>1 开启</p>
    */
   MonitorStatus?: number
   /**
-   * 数据识别扫描信息
+   * <p>数据识别扫描信息</p>
    */
   DataScanInfo?: CosAssetDataScanDetail
+  /**
+   * <p>存储桶Az类型</p><p>枚举值：</p><ul><li>MAZ： 多az</li><li>SAZ： 单az</li></ul>
+   */
+  BucketAzType?: string
+  /**
+   * <p>存储桶存储大小</p><p>默认值：0</p>
+   */
+  BucketStorageSize?: number
+  /**
+   * <p>存储桶对象个数</p><p>默认值：0</p>
+   */
+  BucketObjectCount?: number
+  /**
+   * <p>存储桶敏感识别采样率</p><p>取值范围：[0, 1]</p><p>默认值：0</p>
+   */
+  IdentifySampleRate?: number
 }
 
 /**
@@ -5154,45 +5170,61 @@ export interface DescribeSourceIPAssetResponse {
  */
 export interface CosBucketBillingInfo {
   /**
-   * appid
+   * <p>appid</p>
    */
   AppId?: number
   /**
-   * uin
+   * <p>uin</p>
    */
   OwnerUin?: string
   /**
-   * 昵称
+   * <p>昵称</p>
    */
   OwnerNickName?: string
   /**
-   * 存储桶数量
+   * <p>存储桶数量</p>
    */
   BucketCount?: number
   /**
-   * 0 未购买 1  已单独购买 2 已被共享
+   * <p>0 未购买 1  已单独购买 2 已被共享</p>
    */
   BuyStatus?: number
   /**
-   * 共享账号appid
+   * <p>共享账号appid</p>
    */
   ShareFromAppId?: number
   /**
-   * 共享账号uin
+   * <p>共享账号uin</p>
    */
   ShareFromUin?: string
   /**
-   * 共享账号昵称
+   * <p>共享账号昵称</p>
    */
   ShareFromNickName?: string
   /**
-   * 监控的存储桶数
+   * <p>监控的存储桶数</p>
    */
   MonitorBucketCount?: number
   /**
-   * 0 关闭 1 开启
+   * <p>0 关闭 1 开启</p>
    */
   IsAutoMonitor?: number
+  /**
+   * <p>是否启用白名单日志功能</p>
+   */
+  LogFeatureWhitelist?: boolean
+  /**
+   * <p>是否存在新的后付费订单</p>
+   */
+  IsHaveNewPostOrder?: boolean
+  /**
+   * <p>是否存在旧后付费订单</p>
+   */
+  IsHaveOldPostOrder?: boolean
+  /**
+   * <p>后付费产品列表</p>
+   */
+  PostProductList?: Array<number | bigint>
 }
 
 /**
@@ -6340,17 +6372,29 @@ export interface DescribeAccessKeyAssetRequest {
  */
 export interface CreateCosObjectScanTaskRequest {
   /**
-   * <p>1: 敏感数据识别 2:恶意文件扫描</p>
+   * <p>1: 敏感数据识别 2:恶意文件扫描 3:批量扫描敏感数据</p>
    */
   TaskType: number
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
    * <p>存储桶列表</p>
    */
   BucketSet?: Array<string>
+  /**
+   * <p>任务参数</p>
+   */
+  TaskArgs?: string
+  /**
+   * <p>是否全部扫描</p>
+   */
+  IsScanAll?: boolean
+  /**
+   * <p>扫描时需要剔除的存储桶</p>
+   */
+  DeleteBucketSet?: Array<string>
 }
 
 /**
@@ -9469,97 +9513,109 @@ export interface DescribeRiskTrendDataResponse {
  */
 export interface CosAuditPayInfo {
   /**
-   * APPID
+   * <p>APPID</p>
    */
   AppId?: number
   /**
-   * 订单状态 0未购买 1正常，2隔离，3销毁，6试用中，7到期
+   * <p>订单状态 0未购买 1正常，2隔离，3销毁，6试用中，7到期</p>
    */
   OrderStatus?: number
   /**
-   * 已购对象存储数量
+   * <p>已购对象存储数量</p>
    */
   BucketNum?: number
   /**
-   * 支付模式，0-后付费 1-预付费
+   * <p>支付模式，0-后付费 1-预付费</p>
    */
   PayMode?: number
   /**
-   * 是否单独购买，1-单独购买，2-被其它账号共享
+   * <p>是否单独购买，1-单独购买，2-被其它账号共享</p>
    */
   IsSelfBuy?: number
   /**
-   * 订单开始时间
+   * <p>订单开始时间</p>
    */
   BeginTime?: string
   /**
-   * 订单到期时间
+   * <p>订单到期时间</p>
    */
   EndTime?: string
   /**
-   * 0-用户未设置,1-用户设置自动续费,2-用户设置不自动续费
+   * <p>0-用户未设置,1-用户设置自动续费,2-用户设置不自动续费</p>
    */
   AutoRenew?: number
   /**
-   * 订单时长
+   * <p>订单时长</p>
    */
   TimeSpan?: number
   /**
-   * 时长单位
+   * <p>时长单位</p>
    */
   TimeUnit?: string
   /**
-   * 资源id
+   * <p>资源id</p>
    */
   ResourceId?: string
   /**
-   * 公测结束时间
+   * <p>公测结束时间</p>
    */
   BetaEndTime?: string
   /**
-   * 系统当前时间
+   * <p>系统当前时间</p>
    */
   TimeNow?: string
   /**
-   * 是否分享给其它账号，1-是，2-否
+   * <p>是否分享给其它账号，1-是，2-否</p>
    */
   IsShareToOther?: number
   /**
-   * uin
+   * <p>uin</p>
    */
   Uin?: string
   /**
-   * 昵称
+   * <p>昵称</p>
    */
   NickName?: string
   /**
-   * 共享的bucketIdSet
+   * <p>共享的bucketIdSet</p>
    */
   BindBucket?: Array<CosBucketId>
   /**
-   * 共享的appid
+   * <p>共享的appid</p>
    */
   SharedAppIdSet?: Array<number | bigint>
   /**
-   * 是否已经开启后付费
+   * <p>是否已经开启后付费</p>
    */
   PostPayStatus?: number
   /**
-   * 0：未做过试用期试用   1 ：做过试用期试用
+   * <p>0：未做过试用期试用   1 ：做过试用期试用</p>
    */
   IsTestUser?: number
   /**
-   * 剩余可用数
+   * <p>剩余可用数</p>
    */
   AvailableBucketNum?: number
   /**
-   * 已开启的监测存储桶数
+   * <p>已开启的监测存储桶数</p>
    */
   MonitorBucketNum?: number
   /**
-   * 总的存储桶数
+   * <p>总的存储桶数</p>
    */
   TotalBucketNum?: number
+  /**
+   * <p>后付费产品开关状态</p>
+   */
+  PostProductStatusList?: Array<number | bigint>
+  /**
+   * <p>后付费产品购买状态</p>
+   */
+  PostProductBuyStatusList?: Array<number | bigint>
+  /**
+   * <p>新后付费资源id</p>
+   */
+  NewPostPayResourceId?: string
 }
 
 /**
@@ -16957,127 +17013,127 @@ export interface DescribeRiskCenterVULViewVULRiskListResponse {
  */
 export interface CreateDspmExportTaskRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
-   * 风险等级(0-安全,1-低风险,2-中风险,3-高风险,-1-全部)
+   * <p>风险等级(0-安全,1-低风险,2-中风险,3-高风险,-1-全部)</p>
    */
   DangerLevel?: number
   /**
-   * 数据库名称
+   * <p>数据库名称</p>
    */
   DbName?: string
   /**
-   * 数据库端口
+   * <p>数据库端口</p>
    */
   DbPort?: number
   /**
-   * 数据库 IP
+   * <p>数据库 IP</p>
    */
   DbIp?: string
   /**
-   * 资产 ID
+   * <p>资产 ID</p>
    */
   AssetsId?: number
   /**
-   * 会话 ID
+   * <p>会话 ID</p>
    */
   SessionId?: string
   /**
-   * 客户端 IP
+   * <p>客户端 IP</p>
    */
   ClientSideIp?: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime?: number
   /**
-   * 命中规则
+   * <p>命中规则</p>
    */
   HitRule?: number
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime?: number
   /**
-   * 模糊查询
+   * <p>模糊查询</p>
    */
   FuzzySearch?: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   UserName?: string
   /**
-   * 客户端
+   * <p>客户端</p>
    */
   ClientName?: string
   /**
-   * 流量来源，取值 Agent/Proxy/空；传Agent会返回Agent的日志，传Proxy会返回Proxy日志，两都都传或不传则返回所有
+   * <p>流量来源，取值 Agent/Proxy/空；传Agent会返回Agent的日志，传Proxy会返回Proxy日志，两都传或不传则返回所有</p>
    */
   SourceTypes?: Array<string>
   /**
-   * 表名，长度限制64，多个表名查询的话可以用空格连接
+   * <p>表名，长度限制64，多个表名查询的话可以用空格连接</p>
    */
   TableName?: string
   /**
-   * 字段名，长度限制64，多个字段名查询的话可以用空格连接
+   * <p>字段名，长度限制64，多个字段名查询的话可以用空格连接</p>
    */
   FieldName?: string
   /**
-   * SQL 主要类型，DDL, DML, DCL, TCL
+   * <p>SQL 主要类型，DDL, DML, DCL, TCL</p>
    */
   SqlMainTypes?: Array<string>
   /**
-   * 操作类型
+   * <p>操作类型</p>
    */
   SqlType?: string
   /**
-   * 影响行数最小值
+   * <p>影响行数最小值</p>
    */
   RowNumMin?: number
   /**
-   * 影响行数最大值
+   * <p>影响行数最大值</p>
    */
   RowNumMax?: number
   /**
-   * 数据库类型
+   * <p>数据库类型</p>
    */
   DbTypes?: Array<string>
   /**
-   * 返回码
+   * <p>返回码</p>
    */
   RetNo?: number
   /**
-   * 客户端工具
+   * <p>客户端工具</p>
    */
   ClientDriverName?: string
   /**
-   * 客户端端口
+   * <p>客户端端口</p>
    */
   ClientPort?: number
   /**
-   * 审计日志 ID
+   * <p>审计日志 ID</p>
    */
   LogId?: string
   /**
-   * 风险等级数组(0-安全,1-低风险,2-中风险,3-高风险), 如果要全部，则需要将所有的值都传入。如果为空，则会参考：DangerLevel 入参
+   * <p>风险等级数组(0-安全,1-低风险,2-中风险,3-高风险), 如果要全部，则需要将所有的值都传入。如果为空，则会参考：DangerLevel 入参</p>
    */
   DangerLevels?: Array<number | bigint>
   /**
-   * 字段分类
+   * <p>字段分类</p>
    */
   SensitiveCategoryRule?: string
   /**
-   * 字段分级
+   * <p>字段分级</p>
    */
   SensitiveLevelRisk?: string
   /**
-   * 事务Id
+   * <p>事务Id</p>
    */
   TrxId?: number
   /**
-   * clientMac
+   * <p>clientMac</p>
    */
   ClientMac?: string
 }

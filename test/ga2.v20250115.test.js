@@ -18,9 +18,19 @@ const client = new tencentcloud.ga2.v20250115.Client({
 })
 describe("ga2.v20250115.test.js", function () {
 
-it("ga2.v20250115.DeleteEndpointGroups", async function () {
+it("ga2.v20250115.ModifyForwardingPolicy", async function () {
     try {
-       const data = await client.DeleteEndpointGroups({})
+       const data = await client.ModifyForwardingPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ga2.v20250115.CreateForwardingPolicy", async function () {
+    try {
+       const data = await client.CreateForwardingPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -61,6 +71,26 @@ it("ga2.v20250115.DeleteGlobalAccelerator", async function () {
 it("ga2.v20250115.DeleteListener", async function () {
     try {
        const data = await client.DeleteListener({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ga2.v20250115.DeleteForwardingPolicy", async function () {
+    try {
+       const data = await client.DeleteForwardingPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ga2.v20250115.DeleteForwardingRule", async function () {
+    try {
+       const data = await client.DeleteForwardingRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +218,9 @@ it("ga2.v20250115.ModifyEndpointGroup", async function () {
     }
 })
 
-it("ga2.v20250115.DeleteForwardingRule", async function () {
+it("ga2.v20250115.DeleteEndpointGroups", async function () {
     try {
-       const data = await client.DeleteForwardingRule({})
+       const data = await client.DeleteEndpointGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -241,6 +271,16 @@ it("ga2.v20250115.ModifyGlobalAccelerator", async function () {
 it("ga2.v20250115.DescribeForwardingRule", async function () {
     try {
        const data = await client.DescribeForwardingRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ga2.v20250115.DescribeForwardingPolicy", async function () {
+    try {
+       const data = await client.DescribeForwardingPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

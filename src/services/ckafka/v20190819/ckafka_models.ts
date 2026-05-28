@@ -2114,7 +2114,7 @@ export interface InstanceAttributesResponse {
    */
   Cvm?: number
   /**
-   * <p>实例类型  枚举列表:<br>profession  :专业版<br>standards2  :标准版<br>premium   :高级版<br>serverless  :serverless版</p>
+   * <p>实例类型</p><p>枚举值：</p><ul><li>profession： 专业版</li><li>premium： 高级版</li><li>serverless： serverless版</li><li>其他： 标准版（如:standards2/standard，该版本已停售）</li></ul>
    */
   InstanceType?: string
   /**

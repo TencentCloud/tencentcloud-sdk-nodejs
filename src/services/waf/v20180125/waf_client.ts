@@ -2012,7 +2012,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看防护对象列表
+   * 查看CLB/TSE防护对象列表
    */
   async DescribeObjects(
     req: DescribeObjectsRequest,

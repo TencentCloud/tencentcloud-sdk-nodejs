@@ -62,17 +62,21 @@ export interface DescribeListenersResponse {
 }
 
 /**
- * ModifyListener返回参数结构体
+ * CreateForwardingPolicy请求参数结构体
  */
-export interface ModifyListenerResponse {
+export interface CreateForwardingPolicyRequest {
   /**
-   * <p>任务ID。</p>
+   * 全球加速实例ID。
    */
-  TaskId?: string
+  GlobalAcceleratorId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 监听器ID。
    */
-  RequestId?: string
+  ListenerId: string
+  /**
+   * 域名。
+   */
+  Host: string
 }
 
 /**
@@ -146,6 +150,28 @@ export interface ModifyGlobalAcceleratorRequest {
 }
 
 /**
+ * ModifyForwardingPolicy请求参数结构体
+ */
+export interface ModifyForwardingPolicyRequest {
+  /**
+   * 全球加速实例ID。
+   */
+  GlobalAcceleratorId: string
+  /**
+   * 监听器ID。
+   */
+  ListenerId: string
+  /**
+   * 策略ID。
+   */
+  ForwardingPolicyId: string
+  /**
+   * 域名。
+   */
+  Host: string
+}
+
+/**
  * CreateForwardingRule请求参数结构体
  */
 export interface CreateForwardingRuleRequest {
@@ -185,6 +211,32 @@ export interface CreateForwardingRuleRequest {
    * 回源host。
    */
   OriginHost?: string
+}
+
+/**
+ * 七层转发策略信息
+ */
+export interface ForwardingPolicySet {
+  /**
+   * 全球加速实例ID。
+   */
+  GlobalAcceleratorId?: string
+  /**
+   * 监听器ID。
+   */
+  ListenerId?: string
+  /**
+   * 策略ID。
+   */
+  ForwardingPolicyId?: string
+  /**
+   * 域名。
+   */
+  Host?: string
+  /**
+   * 是否为默认域名。
+   */
+  DefaultHostFlag?: boolean
 }
 
 /**
@@ -247,6 +299,24 @@ export interface CreateListenerResponse {
    * <p>监听器ID。</p>
    */
   ListenerId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeForwardingPolicy返回参数结构体
+ */
+export interface DescribeForwardingPolicyResponse {
+  /**
+   * 符合条件的策略信息。
+   */
+  ForwardingPolicySet?: Array<ForwardingPolicySet>
+  /**
+   * 符合条件的实例个数。
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -317,6 +387,20 @@ export interface IpAddressInfoSet {
    * IP类型。
    */
   IspType?: string
+}
+
+/**
+ * ModifyForwardingPolicy返回参数结构体
+ */
+export interface ModifyForwardingPolicyResponse {
+  /**
+   * 异步任务ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -413,6 +497,20 @@ export interface DeleteAccelerateAreasRequest {
    * 加速地域ID。
    */
   AcceleratorAreaIds: Array<string>
+}
+
+/**
+ * ModifyListener返回参数结构体
+ */
+export interface ModifyListenerResponse {
+  /**
+   * <p>任务ID。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -794,17 +892,13 @@ export interface ModifyListenerRequest {
 }
 
 /**
- * 标签键值对
+ * DescribeTaskResult请求参数结构体
  */
-export interface Tag {
+export interface DescribeTaskResultRequest {
   /**
-   * 标签键
+   * 异步任务ID。
    */
-  Key: string
-  /**
-   * 标签值
-   */
-  Value: string
+  TaskId: string
 }
 
 /**
@@ -841,6 +935,24 @@ export interface CreateAccelerateAreasRequest {
    * 加速地域信息。
    */
   AcceleratorAreas: Array<AcceleratorAreas>
+}
+
+/**
+ * DeleteForwardingPolicy请求参数结构体
+ */
+export interface DeleteForwardingPolicyRequest {
+  /**
+   * 全球加速实例ID。
+   */
+  GlobalAcceleratorId: string
+  /**
+   * 监听器ID。
+   */
+  ListenerId: string
+  /**
+   * 策略ID。
+   */
+  ForwardingPolicyId: string
 }
 
 /**
@@ -910,13 +1022,17 @@ export interface CreateListenerRequest {
 }
 
 /**
- * DescribeTaskResult请求参数结构体
+ * DescribeAccelerateRegions返回参数结构体
  */
-export interface DescribeTaskResultRequest {
+export interface DescribeAccelerateRegionsResponse {
   /**
-   * 异步任务ID。
+   * 加速地域信息。
    */
-  TaskId: string
+  AcceleratorRegionSet?: Array<AcceleratorRegionSet>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1127,6 +1243,28 @@ export interface RuleAction {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleActionValue?: string
+}
+
+/**
+ * DescribeForwardingPolicy请求参数结构体
+ */
+export interface DescribeForwardingPolicyRequest {
+  /**
+   * 全球加速实例ID。
+   */
+  GlobalAcceleratorId: string
+  /**
+   * 监听器ID。
+   */
+  ListenerId: string
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
 }
 
 /**
@@ -1462,6 +1600,24 @@ export interface ModifyEndpointGroupRequest {
 }
 
 /**
+ * CreateForwardingPolicy返回参数结构体
+ */
+export interface CreateForwardingPolicyResponse {
+  /**
+   * 异步任务ID。
+   */
+  TaskId?: string
+  /**
+   * 七层转发策略ID。
+   */
+  ForwardingPolicyId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 加速地域信息
  */
 export interface AcceleratorAreas {
@@ -1551,13 +1707,13 @@ export interface DeleteGlobalAcceleratorResponse {
 }
 
 /**
- * DescribeAccelerateRegions返回参数结构体
+ * DeleteForwardingPolicy返回参数结构体
  */
-export interface DescribeAccelerateRegionsResponse {
+export interface DeleteForwardingPolicyResponse {
   /**
-   * 加速地域信息。
+   * 异步任务ID。
    */
-  AcceleratorRegionSet?: Array<AcceleratorRegionSet>
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1632,4 +1788,18 @@ export interface PortOverride {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndpointPort: number
+}
+
+/**
+ * 标签键值对
+ */
+export interface Tag {
+  /**
+   * 标签键
+   */
+  Key: string
+  /**
+   * 标签值
+   */
+  Value: string
 }

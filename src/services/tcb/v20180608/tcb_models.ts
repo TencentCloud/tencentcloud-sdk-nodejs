@@ -510,6 +510,52 @@ export interface ModifyStorageSourceResponse {
 }
 
 /**
+ * 自定义短信服务商模板配置
+ */
+export interface SMSProviderTemplateConfig {
+  /**
+   * <p>短信服务商类型</p><p>枚举值：</p><ul><li>TENCENT_CN： 腾讯云国内短信</li><li>TENCENT_INTL： 腾讯云国际短信</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Vendor: string
+  /**
+   * <p>短信服务商侧申请并审核通过的模板ID。</p><ul><li>腾讯云短信模板ID可前往 <a href="https://console.cloud.tencent.com/smsv2/csms-template">腾讯云国内短信</a> 或 <a href="https://console.cloud.tencent.com/smsv2/isms-template">国际/港澳台短信</a> 的正文模板管理查看，若向境外手机号发送短信，仅支持使用国际/港澳台短信模板。</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateId: string
+  /**
+   * <p>短信服务商侧为应用分配的ID，按照服务商文档和要求需要此参数的，填写该参数。</p><ul><li>腾讯云国内短信和国际短信此参数必填，可以在<a href="https://console.cloud.tencent.com/smsv2/app-manage">短信控制台</a>的应用列表中查看对应的应用id。</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SdkAppId?: string
+  /**
+   * <p>短信服务商侧申请并审核通过的签名，按照服务商的文档和要求填写。</p><ul><li>腾讯云短信服务商，签名信息可前往 <a href="https://console.cloud.tencent.com/smsv2/csms-sign">国内短信</a> 或 <a href="https://console.cloud.tencent.com/smsv2/isms-sign">国际/港澳台短信</a> 的签名管理查看。<br> 注意：<ol><li>发送国内短信该参数必填，且需填写签名内容而非签名ID。</li><li>发送国际/港澳台短信该参数非必填。</li></ol></li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SignName?: string
+  /**
+   * <p>调用短信服务商发送短信接口的调用秘钥对应的ID。</p><ul><li>调用api秘钥会保存在云开发平台控制台—扩展功能—授权管理中，如果对于短信调用的api秘钥有删除需求，可在此处进行删除，删除后，短信将无法正常发送。</li><li>腾讯云的调用api秘钥在腾讯云控制台获取，建议使用子账号的秘钥ID，并且按照最小权限配置。</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretId?: string
+  /**
+   * <p>调用短信服务商发送短信接口的调用api秘钥对应的秘钥Key。</p><ul><li>腾讯云的调用api秘钥在腾讯云控制台获取，建议使用子账号的秘钥ID, 并且按照最小权限配置。平台对于调用api秘钥key是加密存储的，不会明文存储。</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretKey?: string
+  /**
+   * <p>短信服务商侧自定义短信发送的senderID，按照服务商文档和要求传参。</p><ul><li>仅国际化场景使用。部分国家/运营商支持自定义 Sender ID替代默认主叫号码。国内站点忽略此字段。</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SenderId?: string
+  /**
+   * <p>当短信自定义模板含多个占位符时，平台只负责生成验证码值，其余占位符由调用方在此提供。</p><ul><li>无需提供验证码对应的占位的值，验证码由云开发平台侧生成。</li><li>如果是命名占位的服务商的短信模板，这里的参数按照需要对应的占位的key和value，会按照对应的key和value在发送短信时，填充到模板中。</li><li>如果是序号占位的服务商的短信模板，这里的参数不需要key, 只需要填写对应的value, 会按照填写的顺序依次填充到模板中。</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateExtendParam?: Array<SMSTemplateParams>
+}
+
+/**
  * HTTP访问服务路径重写配置
  */
 export interface HTTPServicePathRewrite {
@@ -1153,21 +1199,19 @@ export interface CreateHostingDomainRequest {
 }
 
 /**
- * tke集群信息
+ * 自定义短信模板中的自定义参数
  */
-export interface TkeClusterInfo {
+export interface SMSTemplateParams {
   /**
-   * 集群ID
+   * <p>短信模板的自定义参数的key。如果短信厂商的自定义参数按照命名占位的，才需要此参数；如果按照序号占位的， 不需要此参数。</p><p>腾讯云短信是按照序号占位的，不需要此参数。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ClusterId?: string
+  Key?: string
   /**
-   * 集群的vpcId
+   * <p>短信模板的自定义参数对应的value</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  VpcId?: string
-  /**
-   * 版本内网CLB所在子网Id
-   */
-  VersionClbSubnetId?: string
+  Value?: string
 }
 
 /**
@@ -3409,6 +3453,24 @@ export interface SearchClsLogResponse {
 }
 
 /**
+ * tke集群信息
+ */
+export interface TkeClusterInfo {
+  /**
+   * 集群ID
+   */
+  ClusterId?: string
+  /**
+   * 集群的vpcId
+   */
+  VpcId?: string
+  /**
+   * 版本内网CLB所在子网Id
+   */
+  VersionClbSubnetId?: string
+}
+
+/**
  * 身份源配置信息。描述云开发环境下用户登录身份源的完整配置，定义了用户通过何种方式进入系统并完成身份认证。支持多种类型：包括标准协议身份源（OAuth 2.0、OIDC、SAML 2.0）、内置身份源（邮箱登录、自定义登录）以及通过插件机制扩展的身份源（如 CAS）。每个身份源包含认证配置、启用状态、用户自动注册策略、信息透传模式等核心属性，是登录认证流程的核心数据结构。
  */
 export interface Provider {
@@ -3628,8 +3690,8 @@ export interface AssumeRoleForAllocatedEnvResponse {
 }
 
 /**
- * 登录短信验证码发送配置。用于管理登录时使用的短信验证码发送的通道相关设置，目前提供云开发默认短信包和客户自定义短信包，推荐使用云开发默认短信包。
-如果使用自定义APIs发送短信，方法命名规则
+ * 登录短信验证码发送配置。用于管理登录时使用的短信验证码发送的通道相关设置，目前提供云开发默认短信包和客户自定义短信包，自定义短信包可以通过自定义apis或者自定义短信模板的方式接入，推荐使用云开发默认短信包，方便快捷。
+- 如果使用自定义APIs发送短信，方法命名规则
 方法名称：发送验证码
 方法标识：SendVerificationCode
 入参
@@ -3638,31 +3700,34 @@ VerificationCode：字符串（验证码，如：“123456”）
 返回值
 ErrorCode：int（0 表示成功，非 0 表示失败）
 ErrorMessage：字符串（ErrorCode 非 0 时，返回错误信息）
+- 如果使用自定义短信模板发送短信时，需要按照对应的短信服务商的要求，申请并审核通过对应的短信模板后，在云开发平台配置自定义短信模板，云开发平台对于短信模板不会做其他操作和限制，只做短信发送的逻辑，其他的操作限制都由短信服务商自身提供。
  */
 export interface VerificationConfig {
   /**
-   * 短信验证码发送通道类型。取值范围：
-default：使用默认云开发短信包发送短信。
-apis：使用云开发自定义 APIs 作为短信发送通道，需配合 Name 和 Method 参数使用。
-不传则不修改当前配置。
+   * <p>短信验证码发送通道类型。</p><p>枚举值：</p><ul><li>default： 使用默认云开发短信包发送短信</li><li>apis： 使用云开发自定义 APIs 作为短信发送通道，需配合 Name 和 Method 参数使用。不传则不修改当前配置。</li><li>template： 自定义短信模板配置，需要配置TemplateProvider</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
-   * 自定义 APIs 数据源唯一标识，当 Type 为 apis 时必填。用于定位微搭 APIs 中对应的数据源。
+   * <p>自定义 APIs 数据源唯一标识，当 Type 为 apis 时必填。用于定位微搭 APIs 中对应的数据源。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 自定义 APIs 方法名，当 Type 为 apis 时必填。指定微搭 APIs 中用于发送验证码的方法。
+   * <p>自定义 APIs 方法名，当 Type 为 apis 时必填。指定微搭 APIs 中用于发送验证码的方法。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Method?: string
   /**
-   * 单个手机号每日短信发送上限。默认值为 30，传 -1 表示不限制，如果设置为不限制，需要注意恶意攻击，导致短信套餐用量计费问题。仅支持正整数或 -1。不传则不修改当前配置。
+   * <p>单个手机号每日短信发送上限。默认值为 30，传 -1 表示不限制，如果设置为不限制，需要注意恶意攻击，导致短信套餐用量计费问题。仅支持正整数或 -1。不传则不修改当前配置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SmsDayLimit?: number
+  /**
+   * <p>自定义短信服务商模板配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TemplateProvider?: SMSProviderTemplateConfig
 }
 
 /**

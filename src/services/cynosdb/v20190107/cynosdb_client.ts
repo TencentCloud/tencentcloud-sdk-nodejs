@@ -65,6 +65,7 @@ import {
   OpenWanRequest,
   ExportResourcePackageDeductDetailsResponse,
   DescribeClustersRequest,
+  DescribeSQLExecutionPlanRequest,
   OpenReadOnlyInstanceExclusiveAccessResponse,
   SearchClusterDatabasesResponse,
   CreateParamTemplateRequest,
@@ -231,6 +232,7 @@ import {
   UnbindClusterResourcePackagesRequest,
   ModifyBackupDownloadUserRestrictionRequest,
   DescribeInstanceParamsResponse,
+  IsolateInstanceRequest,
   SwitchClusterVpcResponse,
   DescribeRedoLogListByVaultResponse,
   Tag,
@@ -256,6 +258,7 @@ import {
   ProxyConfig,
   CheckItem,
   Addr,
+  AddServerlessRoInstancesRequest,
   DescribeProjectSecurityGroupsRequest,
   ServerlessZoneStockInfo,
   DbInfo,
@@ -266,6 +269,7 @@ import {
   CreateLibraDBClusterAccountsResponse,
   MigrateTableItem,
   CreateProxyEndPointResponse,
+  DescribeSQLExecutionPlanResponse,
   NetAddr,
   CopyClusterPasswordComplexityRequest,
   ReplayInstanceAuditLogRequest,
@@ -369,9 +373,10 @@ import {
   DescribeFlowResponse,
   CalculateBackupSaveSecExpiresRequest,
   ExportInstanceErrorLogsRequest,
+  ExplainRow,
   DescribeLibraDBDataSourceRequest,
   ActivateInstanceRequest,
-  ModifyAccountDescriptionRequest,
+  ExecutionPlanDetail,
   DescribeLibraDBClusterTableMappingResponse,
   DescribeInstanceCLSLogDeliveryRequest,
   CynosdbErrorLogItem,
@@ -552,6 +557,7 @@ import {
   OpenAuditServiceRequest,
   ModifyResourcePackageNameResponse,
   DescribeBackupListRequest,
+  ModifyAccountDescriptionRequest,
   IntegrateInstanceInfo,
   SwitchClusterLogBin,
   ModifyVaultRequest,
@@ -611,7 +617,7 @@ import {
   DescribeBackupListByVaultResponse,
   DescribeAuditRuleTemplatesRequest,
   InstanceSpec,
-  IsolateInstanceRequest,
+  AddServerlessRoInstancesResponse,
   ModifyServerlessStrategyRequest,
   DescribeBinlogConfigResponse,
   Module,
@@ -1016,6 +1022,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CopyClusterPasswordComplexityResponse) => void
   ): Promise<CopyClusterPasswordComplexityResponse> {
     return this.request("CopyClusterPasswordComplexity", req, cb)
+  }
+
+  /**
+   * 添加serverless集群只读实例
+   */
+  async AddServerlessRoInstances(
+    req: AddServerlessRoInstancesRequest,
+    cb?: (error: string, rep: AddServerlessRoInstancesResponse) => void
+  ): Promise<AddServerlessRoInstancesResponse> {
+    return this.request("AddServerlessRoInstances", req, cb)
   }
 
   /**
@@ -2316,6 +2332,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateVaultResponse) => void
   ): Promise<CreateVaultResponse> {
     return this.request("CreateVault", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeSQLExecutionPlan)用于查询执行计划详情
+   */
+  async DescribeSQLExecutionPlan(
+    req: DescribeSQLExecutionPlanRequest,
+    cb?: (error: string, rep: DescribeSQLExecutionPlanResponse) => void
+  ): Promise<DescribeSQLExecutionPlanResponse> {
+    return this.request("DescribeSQLExecutionPlan", req, cb)
   }
 
   /**

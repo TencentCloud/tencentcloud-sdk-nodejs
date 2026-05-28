@@ -21,23 +21,28 @@ import {
   CreateAccelerateAreasResponse,
   DescribeTaskResultResponse,
   DescribeListenersResponse,
-  ModifyListenerResponse,
+  CreateForwardingPolicyRequest,
   DescribeForwardingRuleRequest,
   DescribeEndpointGroupsResponse,
   ModifyGlobalAcceleratorRequest,
+  ModifyForwardingPolicyRequest,
   CreateForwardingRuleRequest,
+  ForwardingPolicySet,
   AcceleratorRegionSet,
   ModifyEndpointGroupResponse,
   CreateListenerResponse,
+  DescribeForwardingPolicyResponse,
   CreateGlobalAcceleratorRequest,
   DescribeCrossBorderSettlementRequest,
   IpAddressInfoSet,
+  ModifyForwardingPolicyResponse,
   DescribeGlobalAcceleratorsRequest,
   DescribeAccelerateAreasRequest,
   ModifyAccelerateAreasRequest,
   DescribeCrossBorderSettlementResponse,
   DescribeForwardingRuleResponse,
   DeleteAccelerateAreasRequest,
+  ModifyListenerResponse,
   EndpointGroupConfigurationSet,
   DeleteAccelerateAreasResponse,
   ModifyAccelerateAreasResponse,
@@ -49,11 +54,12 @@ import {
   ForwardingRuleSet,
   ModifyForwardingRuleRequest,
   ModifyListenerRequest,
-  Tag,
+  DescribeTaskResultRequest,
   DescribeEndpointGroupsRequest,
   CreateAccelerateAreasRequest,
+  DeleteForwardingPolicyRequest,
   CreateListenerRequest,
-  DescribeTaskResultRequest,
+  DescribeAccelerateRegionsResponse,
   ModifyForwardingRuleResponse,
   DeleteForwardingRuleRequest,
   ListenerSet,
@@ -62,6 +68,7 @@ import {
   ModifyGlobalAcceleratorResponse,
   DescribeListenersRequest,
   RuleAction,
+  DescribeForwardingPolicyRequest,
   RuleCondition,
   DescribeAccelerateRegionsRequest,
   DeleteForwardingRuleResponse,
@@ -71,15 +78,17 @@ import {
   GlobalAcceleratorSet,
   DeleteListenerResponse,
   ModifyEndpointGroupRequest,
+  CreateForwardingPolicyResponse,
   AcceleratorAreas,
   CreateEndpointGroupRequest,
   CreateEndpointGroupResponse,
   DeleteGlobalAcceleratorResponse,
-  DescribeAccelerateRegionsResponse,
+  DeleteForwardingPolicyResponse,
   CreateGlobalAcceleratorResponse,
   DescribeGlobalAcceleratorsResponse,
   CreateForwardingRuleResponse,
   PortOverride,
+  Tag,
 } from "./ga2_models"
 
 /**
@@ -92,13 +101,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除终端节点组。
+   * 修改七层转发策略
    */
-  async DeleteEndpointGroups(
-    req: DeleteEndpointGroupsRequest,
-    cb?: (error: string, rep: DeleteEndpointGroupsResponse) => void
-  ): Promise<DeleteEndpointGroupsResponse> {
-    return this.request("DeleteEndpointGroups", req, cb)
+  async ModifyForwardingPolicy(
+    req: ModifyForwardingPolicyRequest,
+    cb?: (error: string, rep: ModifyForwardingPolicyResponse) => void
+  ): Promise<ModifyForwardingPolicyResponse> {
+    return this.request("ModifyForwardingPolicy", req, cb)
+  }
+
+  /**
+   * 创建七层转发策略
+   */
+  async CreateForwardingPolicy(
+    req: CreateForwardingPolicyRequest,
+    cb?: (error: string, rep: CreateForwardingPolicyResponse) => void
+  ): Promise<CreateForwardingPolicyResponse> {
+    return this.request("CreateForwardingPolicy", req, cb)
   }
 
   /**
@@ -139,6 +158,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteListenerResponse) => void
   ): Promise<DeleteListenerResponse> {
     return this.request("DeleteListener", req, cb)
+  }
+
+  /**
+   * 删除七层转发策略
+   */
+  async DeleteForwardingPolicy(
+    req: DeleteForwardingPolicyRequest,
+    cb?: (error: string, rep: DeleteForwardingPolicyResponse) => void
+  ): Promise<DeleteForwardingPolicyResponse> {
+    return this.request("DeleteForwardingPolicy", req, cb)
+  }
+
+  /**
+   * 删除七层转发规则
+   */
+  async DeleteForwardingRule(
+    req: DeleteForwardingRuleRequest,
+    cb?: (error: string, rep: DeleteForwardingRuleResponse) => void
+  ): Promise<DeleteForwardingRuleResponse> {
+    return this.request("DeleteForwardingRule", req, cb)
   }
 
   /**
@@ -262,13 +301,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除七层转发规则
+   * 删除终端节点组。
    */
-  async DeleteForwardingRule(
-    req: DeleteForwardingRuleRequest,
-    cb?: (error: string, rep: DeleteForwardingRuleResponse) => void
-  ): Promise<DeleteForwardingRuleResponse> {
-    return this.request("DeleteForwardingRule", req, cb)
+  async DeleteEndpointGroups(
+    req: DeleteEndpointGroupsRequest,
+    cb?: (error: string, rep: DeleteEndpointGroupsResponse) => void
+  ): Promise<DeleteEndpointGroupsResponse> {
+    return this.request("DeleteEndpointGroups", req, cb)
   }
 
   /**
@@ -319,5 +358,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeForwardingRuleResponse) => void
   ): Promise<DescribeForwardingRuleResponse> {
     return this.request("DescribeForwardingRule", req, cb)
+  }
+
+  /**
+   * 查看七层转发策略
+   */
+  async DescribeForwardingPolicy(
+    req: DescribeForwardingPolicyRequest,
+    cb?: (error: string, rep: DescribeForwardingPolicyResponse) => void
+  ): Promise<DescribeForwardingPolicyResponse> {
+    return this.request("DescribeForwardingPolicy", req, cb)
   }
 }

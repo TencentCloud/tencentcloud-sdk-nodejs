@@ -1515,47 +1515,47 @@ export interface MergeTablesDataRequest {
  */
 export interface CreateClusterRequest {
   /**
-   * 集群数据描述语言类型，如：`PROTO`，`TDR`或`MIX`
+   * <p>集群数据描述语言类型，统一填<code>MIX</code></p><p>枚举值：</p><ul><li>MIX： 同时支持<code>PROTO</code>，<code>TDR</code>表</li></ul>
    */
   IdlType: string
   /**
-   * 集群名称，可使用中文或英文字符，最大长度32个字符
+   * <p>集群名称，可使用中文或英文字符，最大长度32个字符</p>
    */
   ClusterName: string
   /**
-   * 集群所绑定的私有网络实例ID，形如：vpc-f49l6u0z
+   * <p>集群所绑定的私有网络实例ID，形如：vpc-f49l6u0z</p>
    */
   VpcId: string
   /**
-   * 集群所绑定的子网实例ID，形如：subnet-pxir56ns
+   * <p>集群所绑定的子网实例ID，形如：subnet-pxir56ns</p>
    */
   SubnetId: string
   /**
-   * 集群访问密码，必须是a-zA-Z0-9的字符,且必须包含数字和大小写字母
+   * <p>集群访问密码，必须是a-zA-Z0-9的字符,且必须包含数字和大小写字母</p>
    */
   Password: string
   /**
-   * 集群标签列表
+   * <p>集群标签列表</p>
    */
   ResourceTags?: Array<TagInfoUnit>
   /**
-   * 集群是否开启IPv6功能
+   * <p>集群是否开启IPv6功能</p>
    */
   Ipv6Enable?: number
   /**
-   * 独占集群占用的svr机器
+   * <p>独占集群占用的svr机器</p>
    */
   ServerList?: Array<MachineInfo>
   /**
-   * 独占集群占用的proxy机器
+   * <p>独占集群占用的proxy机器</p>
    */
   ProxyList?: Array<MachineInfo>
   /**
-   * 集群类型1共享2独占
+   * <p>集群类型1共享2独占</p>
    */
   ClusterType?: number
   /**
-   * 密码认证类型，0 静态认证， 1 签名认证
+   * <p>密码认证类型，0 静态认证， 1 签名认证</p>
    */
   AuthType?: number
 }
@@ -1910,7 +1910,7 @@ export interface TagInfoUnit {
  */
 export interface CreateClusterResponse {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
