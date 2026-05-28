@@ -4968,7 +4968,7 @@ export interface AsyncTextToSpeechResponse {
  */
 export interface ModerationParams {
   /**
-   * 审核任务类型， 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核4:音频流式审核 5:音频流式+视频截帧审核  默认值1 （流式审核需要供应商支持才生效）
+   * 审核任务类型， 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核  默认值1
    */
   ModerationType?: number
   /**
@@ -4976,15 +4976,16 @@ export interface ModerationParams {
    */
   MaxIdleTime?: number
   /**
-   * 音频切片时长，默认15s 示例值：15
+   * 音频切片时长，默认15s 示例值：15, 范围15-60s
    */
   SliceAudio?: number
   /**
-   * 视频截帧间隔时长，默认5s
+   * 视频截帧间隔时长，默认5s, 范围1-60s
    */
   SliceVideo?: number
   /**
    * 供应商枚举，
+trtc : trtc内容理解（支持 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核）
 tianyu : 天御内容安全 （支持 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核）
 ace  : ACE内容安全 （支持 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核）
 shumei : 数美审核（支持 1:音频切片审核，2:视频截帧审核，3:音视切片审核+视频截帧审核）
@@ -4992,11 +4993,11 @@ yidun : 网易易盾审核 （支持 1:音频切片审核，2:视频截帧审核
    */
   ModerationSupplier?: string
   /**
-   * 第三方审核商送审需要配置信息
+   * 第三方审核商送审需要配置信息, ModerationSupplier为trtc时，这个参数可以不需要初始化
    */
   ModerationSupplierParam?: ModerationSupplierParam
   /**
-   * 是否保存文件  0不保存文件 1保存所有文件 2仅保存命中文件
+   * 是否保存文件:  0不保存文件 1保存所有文件 2仅保存命中文件
    */
   SaveModerationFile?: number
   /**

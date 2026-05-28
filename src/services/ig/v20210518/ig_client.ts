@@ -17,7 +17,33 @@
  */
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
-import { DescribeIgOrderListRequest, DescribeIgOrderListResponse } from "./ig_models"
+import {
+  GetLLMDiagnosisHealthResponse,
+  HighlightWordInfo,
+  GetLLMDiagnosisDrugChatRequest,
+  LLMDiagnosisHealthData,
+  StandardDrugCardInfo,
+  GetLLMDiagnosisDrugChatResponse,
+  GuessQuestion,
+  GetLLMReportInterpretationRequest,
+  ReferResourceInfo,
+  ReportFileInfoReq,
+  DescribeIgOrderListResponse,
+  GetLLMDiagnosisDrugResponse,
+  ReportFileInfoRsp,
+  QueryDrugInstructionsRequest,
+  GetLLMReportInterpretationResponse,
+  DrugInstructionInfo,
+  LLMReportInterpretationData,
+  GetLLMDiagnosisHealthRequest,
+  LLMDiagnosisDrugData,
+  StandardDrugInstructionInfo,
+  GetLLMDiagnosisDrugRequest,
+  HealthFollowUpQuestion,
+  DrugCardInfo,
+  DescribeIgOrderListRequest,
+  QueryDrugInstructionsResponse,
+} from "./ig_models"
 
 /**
  * ig client
@@ -29,6 +55,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询药品说明书
+   */
+  async QueryDrugInstructions(
+    req: QueryDrugInstructionsRequest,
+    cb?: (error: string, rep: QueryDrugInstructionsResponse) => void
+  ): Promise<QueryDrugInstructionsResponse> {
+    return this.request("QueryDrugInstructions", req, cb)
+  }
+
+  /**
+   * 大模型报告解读
+   */
+  async GetLLMReportInterpretation(
+    req: GetLLMReportInterpretationRequest,
+    cb?: (error: string, rep: GetLLMReportInterpretationResponse) => void
+  ): Promise<GetLLMReportInterpretationResponse> {
+    return this.request("GetLLMReportInterpretation", req, cb)
+  }
+
+  /**
+   * 大模型问药拍药盒
+   */
+  async GetLLMDiagnosisDrug(
+    req: GetLLMDiagnosisDrugRequest,
+    cb?: (error: string, rep: GetLLMDiagnosisDrugResponse) => void
+  ): Promise<GetLLMDiagnosisDrugResponse> {
+    return this.request("GetLLMDiagnosisDrug", req, cb)
+  }
+
+  /**
    * 查询智能导诊订单列表
    */
   async DescribeIgOrderList(
@@ -36,5 +92,25 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIgOrderListResponse) => void
   ): Promise<DescribeIgOrderListResponse> {
     return this.request("DescribeIgOrderList", req, cb)
+  }
+
+  /**
+   * 大模型问药问答
+   */
+  async GetLLMDiagnosisDrugChat(
+    req: GetLLMDiagnosisDrugChatRequest,
+    cb?: (error: string, rep: GetLLMDiagnosisDrugChatResponse) => void
+  ): Promise<GetLLMDiagnosisDrugChatResponse> {
+    return this.request("GetLLMDiagnosisDrugChat", req, cb)
+  }
+
+  /**
+   * 大模型健康自诊
+   */
+  async GetLLMDiagnosisHealth(
+    req: GetLLMDiagnosisHealthRequest,
+    cb?: (error: string, rep: GetLLMDiagnosisHealthResponse) => void
+  ): Promise<GetLLMDiagnosisHealthResponse> {
+    return this.request("GetLLMDiagnosisHealth", req, cb)
   }
 }

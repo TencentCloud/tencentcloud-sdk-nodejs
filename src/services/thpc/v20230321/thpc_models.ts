@@ -473,17 +473,21 @@ export interface Tag {
  */
 export interface GooseFSOption {
   /**
-   * 文件系统本地挂载路径。
+   * <p>文件系统本地挂载路径。</p>
    */
   LocalPath: string
   /**
-   * 文件系统远程挂载路径。
+   * <p>文件系统远程挂载路径。</p>
    */
   RemotePath: string
   /**
-   * 文件系统master的ip和端口。
+   * <p>文件系统master的ip和端口，此参数和FileSystemId互斥。</p>
    */
-  Masters: Array<string>
+  Masters?: Array<string>
+  /**
+   * <p>GooseFS的文件ID；此参数和Masters 互斥。</p>
+   */
+  FileSystemId?: string
 }
 
 /**
@@ -643,6 +647,28 @@ export interface DescribeWorkspacesRequest {
    * <ul>   <li>     <strong>zone</strong>     <p style="padding-left: 30px;">按照【<strong>可用区</strong>】进行过滤</p>     <p style="padding-left: 30px;">类型：String</p>     <p style="padding-left: 30px;">必选：否</p></li>     <li>     <strong>space-id</strong>     <p style="padding-left: 30px;">按照【<strong>工作空间实例ID</strong>】进行过滤</p>     <p style="padding-left: 30px;">类型：String</p>     <p style="padding-left: 30px;">必选：否</p></li>     <li>     <strong>cvm-instance-id</strong>     <p style="padding-left: 30px;">按照【<strong>CVM实例ID</strong>】进行过滤</p>     <p style="padding-left: 30px;">类型：String</p>     <p style="padding-left: 30px;">必选：否</p></li>     <li>     <strong>space-state</strong>     <p style="padding-left: 30px;">按照【<strong>工作空间状态</strong>】进行过滤</p>     <p style="padding-left: 30px;">类型：String</p>     <p style="padding-left: 30px;">必选：否</p></li>     <li>     <strong>space-name</strong>     <p style="padding-left: 30px;">按照【<strong>工作空间别名</strong>】进行过滤</p>     <p style="padding-left: 30px;">类型：String</p>     <p style="padding-left: 30px;">必选：否</p></li>     <li>     <strong>space-charge-type</strong>     <p style="padding-left: 30px;">按照【<strong>工作空间实例付费模式</strong>】进行过滤</p>     <p style="padding-left: 30px;">类型：String</p>     <p style="padding-left: 30px;">必选：否</p></li>     <li>     <strong>tag-key</strong>     <p style="padding-left: 30px;">按照【<strong>标签键</strong>】进行过滤</p>     <p style="padding-left: 30px;">类型：String</p>     <p style="padding-left: 30px;">必选：否</p></li>     <li>     <strong>tag-value</strong>     <p style="padding-left: 30px;">按照【<strong>标签值</strong>】进行过滤</p>     <p style="padding-left: 30px;">类型：String</p>     <p style="padding-left: 30px;">必选：否</p></li> </ul> <p style="padding-left: 30px;">每次请求的<code>Filters</code>的上限为10，<code>Filter.Values</code>的上限为5。</p>
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * ModifyNodeAttribute请求参数结构体
+ */
+export interface ModifyNodeAttributeRequest {
+  /**
+   * <p>节点ID，节点ID通过调用接口 <a href="https://cloud.tencent.com/document/api/1527/89569">DescribeNodes</a>获取。</p>
+   */
+  NodeId: string
+  /**
+   * <p>节点别名</p>
+   */
+  NodeName?: string
+  /**
+   * <p>资源的分配状态:  - IDLE: 资源空闲 - ISOLATE: 资源隔离</p>
+   */
+  NodeAllocateState?: string
+  /**
+   * <p>目标队列名</p>
+   */
+  QueueName?: string
 }
 
 /**
@@ -878,25 +904,21 @@ export interface CFSOption {
 }
 
 /**
- * ModifyNodeAttribute请求参数结构体
+ * COS挂载信息
  */
-export interface ModifyNodeAttributeRequest {
+export interface CosOption {
   /**
-   * <p>节点ID，节点ID通过调用接口 <a href="https://cloud.tencent.com/document/api/1527/89569">DescribeNodes</a>获取。</p>
+   * <p>文件系统本地挂载路径。</p>
    */
-  NodeId: string
+  LocalPath: string
   /**
-   * <p>节点别名</p>
+   * <p>COS桶地址，可以在COS桶详情页查看。</p>
    */
-  NodeName?: string
+  RemotePath: string
   /**
-   * <p>资源的分配状态:  - IDLE: 资源空闲 - ISOLATE: 资源隔离</p>
+   * <p>cosfs2挂载工具支持的参数。</p>
    */
-  NodeAllocateState?: string
-  /**
-   * <p>目标队列名</p>
-   */
-  QueueName?: string
+  MountParamsOption?: string
 }
 
 /**
@@ -1104,17 +1126,21 @@ export interface DescribeClusterStorageOptionRequest {
  */
 export interface StorageOption {
   /**
-   * 集群挂载CFS文件系统选项。
+   * <p>集群挂载CFS文件系统选项。</p>
    */
   CFSOptions?: Array<CFSOption>
   /**
-   * 集群挂载GooseFS文件系统选项。
+   * <p>集群挂载GooseFS文件系统选项。</p>
    */
   GooseFSOptions?: Array<GooseFSOption>
   /**
-   * 集群挂载GooseFSx文件系统选项。
+   * <p>集群挂载GooseFSx文件系统选项。</p>
    */
   GooseFSxOptions?: Array<GooseFSxOption>
+  /**
+   * <p>集群挂载COS文件系统选项。</p>
+   */
+  CosOptions?: Array<CosOption>
 }
 
 /**

@@ -190,7 +190,7 @@ export interface PutMessageRequest {
   /**
    * <p>事件ID</p>
    */
-  EventId: string
+  EventId?: string
   /**
    * <p>需要推送的事件数据内容，格式为json，字段定义需要与事件中的定义一致</p>
    */
@@ -199,4 +199,8 @@ export interface PutMessageRequest {
    * <p>数据推送来源，会在生成的单据中展示数据来源</p>
    */
   Source?: string
+  /**
+   * <p>插件ID</p>
+   */
+  PluginId?: string
 }

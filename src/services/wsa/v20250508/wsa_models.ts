@@ -20,34 +20,31 @@
  */
 export interface SearchProRequest {
   /**
-   * 搜索词
+   * <p>搜索词</p>
    */
   Query: string
   /**
-   * 返回结果类型，0-自然检索结果(默认)，1-多模态VR结果，2-混合结果（多模态VR结果+自然检索结果）
+   * <p>返回结果类型，0-自然检索结果(默认)，1-多模态VR结果，2-混合结果（多模态VR结果+自然检索结果）</p>
    */
   Mode?: number
   /**
-   * 指定域名站内搜索（用于过滤自然检索结果）
-注意： mode=1模式下，参数无效；mode=0模式下，对所有结果生效；mode=2模式下，对输出的自然结果生效
+   * <p>指定域名站内搜索（用于过滤自然检索结果）<br>注意： mode=1模式下，参数无效；mode=0模式下，对所有结果生效；mode=2模式下，对输出的自然结果生效</p>
    */
   Site?: string
   /**
-   * 起始时间（用于过滤自然检索结果），精确到秒时间戳格式
-注意： mode=1模式下，参数无效；mode=0模式下，对所有结果生效；mode=2模式下，对输出的自然结果生效
+   * <p>起始时间（用于过滤自然检索结果），精确到秒时间戳格式<br>注意： mode=1模式下，参数无效；mode=0模式下，对所有结果生效；mode=2模式下，对输出的自然结果生效</p>
    */
   FromTime?: number
   /**
-   * 结束时间（用于过滤自然检索结果），精确到秒时间戳格式
-注意：mode=1模式下，参数无效；mode=0模式下，对所有结果生效；mode=2模式下，对输出的自然结果生效
+   * <p>结束时间（用于过滤自然检索结果），精确到秒时间戳格式<br>注意：mode=1模式下，参数无效；mode=0模式下，对所有结果生效；mode=2模式下，对输出的自然结果生效</p>
    */
   ToTime?: number
   /**
-   * cnt=10/20/30/40/50，最多可支持返回50条搜索结果，**仅限尊享版使用**
+   * <p>cnt=10/20/30/40/50，最多可支持返回50条搜索结果，<strong>仅限尊享版使用</strong></p>
    */
   Cnt?: number
   /**
-   * Industry=gov/news/acad/finance，对应党政机关、权威媒体、学术（英文）、金融，**仅限尊享版使用**
+   * <p>Industry=gov/news/acad/finance，对应党政机关、权威媒体、学术（英文）、金融，<strong>仅限尊享版使用</strong></p>
    */
   Industry?: string
 }
@@ -57,28 +54,19 @@ export interface SearchProRequest {
  */
 export interface SearchProResponse {
   /**
-   * 原始查询语
+   * <p>原始查询语</p>
    */
   Query?: string
   /**
-   * 搜索结果页面详情，格式为json字符串。
-title：结果标题
-date：内容发布时间
-url：内容发布源url
-passage：标准摘要
-content：动态摘要 （尊享版字段）
-site：网站名称，部分不知名站点结果可能为空
-score：相关性得分，取值0～1，越靠近1表示越相关
-images：图片列表
-favicon：网站图标链接，部分不知名站点结果可能为空
+   * <p>搜索结果页面详情，格式为json字符串。<br>title：结果标题<br>date：内容发布时间<br>url：内容发布源url<br>passage：标准摘要<br>content：动态摘要 （尊享版字段）<br>site：网站名称，部分不知名站点结果可能为空<br>score：相关性得分，取值0～1，越靠近1表示越相关<br>images：图片列表<br>favicon：网站图标链接，部分不知名站点结果可能为空</p>
    */
   Pages?: Array<string>
   /**
-   * 用户版本：standard/premium/lite
+   * <p>用户版本：standard/premium/lite/flagship</p>
    */
   Version?: string
   /**
-   * 提示信息
+   * <p>提示信息</p>
    */
   Msg?: string
   /**

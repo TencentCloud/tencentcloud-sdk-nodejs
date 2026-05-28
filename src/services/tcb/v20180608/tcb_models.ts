@@ -82,19 +82,13 @@ export interface DescribeEnvLimitResponse {
 }
 
 /**
- * ListTables返回参数结构体
+ * DescribeResourcePermission返回参数结构体
  */
-export interface ListTablesResponse {
+export interface DescribeResourcePermissionResponse {
   /**
-   * 表信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 查询资源权限返回结果
    */
-  Tables?: Array<TableInfo>
-  /**
-   * 分页信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Pager?: Pager
+  Data?: DescribeResourcePermissionResult
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -225,13 +219,33 @@ export interface CheckTcbServiceResponse {
 }
 
 /**
- * ReleaseEnv返回参数结构体
+ * migration 执行计划
  */
-export interface ReleaseEnvResponse {
+export interface MigrationPlanItem {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>migration 版本号</p><p>参数格式：纯数字，14位时间格式</p>
    */
-  RequestId?: string
+  Version?: string
+  /**
+   * <p>migration 版本名</p><p>参数格式：仅允许小写字母和下划线</p>
+   */
+  Name?: string
+  /**
+   * <p>migration query sql checksum</p><p>服务端自动生成，同版本不同checksum会拒绝执行</p>
+   */
+  Checksum?: string
+  /**
+   * <p>状态</p><p>枚举值：</p><ul><li>applied： 已应用</li><li>pending： 待执行</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>标记请求来源</p>
+   */
+  Source?: string
+  /**
+   * <p>被归入该分组的原因，比如not_applied、checksum_matched</p>
+   */
+  Reason?: string
 }
 
 /**
@@ -639,6 +653,27 @@ export interface ModifyUserResponse {
 }
 
 /**
+ * 分页信息
+ */
+export interface Pager {
+  /**
+   * 分页偏移量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Offset?: number
+  /**
+   * 每页返回记录数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Limit?: number
+  /**
+   * 文档集合总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+}
+
+/**
  * 删除tcb用户返回值
  */
 export interface DeleteUsersResp {
@@ -790,6 +825,46 @@ export interface BanConfig {
 }
 
 /**
+ * RepairPGUserMigrationHistory返回参数结构体
+ */
+export interface RepairPGUserMigrationHistoryResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RepairPGUserMigrationHistory请求参数结构体
+ */
+export interface RepairPGUserMigrationHistoryRequest {
+  /**
+   * <p>云开发环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>migration版本</p><p>参数格式：14位时间格式</p><p>入参限制：纯数字</p>
+   */
+  MigrationVersion: string
+  /**
+   * <p>migration 版本名</p><p>入参限制：限制小写字母和下划线</p>
+   */
+  Name: string
+  /**
+   * <p>状态</p><p>枚举值：</p><ul><li>applied： 已应用</li><li>reverted： 表示删除 history 记录</li></ul>
+   */
+  Status: string
+  /**
+   * <p>修复原因</p>
+   */
+  Reason: string
+  /**
+   * <p>applied的时候填写，记录应用的sql语句</p>
+   */
+  Query?: string
+}
+
+/**
  * AllocateEnv返回参数结构体
  */
 export interface AllocateEnvResponse {
@@ -870,6 +945,16 @@ export interface ManagedAIModelGroup {
    * <p>备注</p>
    */
   Remark?: string
+}
+
+/**
+ * ReleaseEnv返回参数结构体
+ */
+export interface ReleaseEnvResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1225,24 +1310,53 @@ export interface UnbindStorageSourceResponse {
 }
 
 /**
- * 分页信息
+ * DescribePGUserMigration返回参数结构体
  */
-export interface Pager {
+export interface DescribePGUserMigrationResponse {
   /**
-   * 分页偏移量
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>版本号</p><p>参数格式：纯数字，14位时间格式</p>
    */
-  Offset?: number
+  Version?: string
   /**
-   * 每页返回记录数
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>版本名</p><p>参数格式：只允许小写字母和下划线</p>
    */
-  Limit?: number
+  Name?: string
   /**
-   * 文档集合总数
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>要执行的migration sql 语句</p>
    */
-  Total?: number
+  Query?: string
+  /**
+   * <p>回滚的sql 语句</p>
+   */
+  Rollback?: string
+  /**
+   * <p>migration query 语句的checksum值</p><p>由服务端自动生成，同版本 checksum 不一致会拒绝执行</p>
+   */
+  Checksum?: string
+  /**
+   * <p>用于标记调用来源</p>
+   */
+  Source?: string
+  /**
+   * <p>用于标记该条migration由谁创建，目前默认调用的用户uin</p>
+   */
+  CreatedBy?: string
+  /**
+   * <p>该migration创建时间</p>
+   */
+  CreatedAt?: string
+  /**
+   * <p>该migration应用时间</p>
+   */
+  AppliedAt?: string
+  /**
+   * <p>该migration执行耗时</p><p>单位：毫秒</p>
+   */
+  DurationMs?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2326,13 +2440,25 @@ export interface DestroyStaticStoreRequest {
 }
 
 /**
- * ModifyClient返回参数结构体
+ * 结构化 SQL migration 信息
  */
-export interface ModifyClientResponse {
+export interface MigrationInput {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>migration 版本号</p><p>参数格式：纯数字，14位时间格式</p>
    */
-  RequestId?: string
+  Version: string
+  /**
+   * <p>migration 版本名</p><p>入参限制：仅允许小写字母和下划线</p>
+   */
+  Name: string
+  /**
+   * <p>migration 应用 sql 语句</p>
+   */
+  Query: string
+  /**
+   * <p>migration 回滚 sql 语句</p>
+   */
+  Rollback?: string
 }
 
 /**
@@ -2460,44 +2586,27 @@ export interface DeleteHTTPServiceRouteResponse {
 }
 
 /**
- * TDSQL-C网络信息类型
+ * UpdateTable返回参数结构体
  */
-export interface MySQLNetDetail {
+export interface UpdateTableResponse {
   /**
-   * 内网地址
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PrivateNetAddress?: string
+  RequestId?: string
+}
+
+/**
+ * 查询资源权限返回结果
+ */
+export interface DescribeResourcePermissionResult {
   /**
-   * 外网地址
-注意：此字段可能返回 null，表示取不到有效值。
+   * 查询到的资源总数
    */
-  PubNetAddress?: string
+  TotalCount?: number
   /**
-   * 网络信息（VPCID/SubnetID）
-注意：此字段可能返回 null，表示取不到有效值。
+   * 资源权限列表
    */
-  Net?: string
-  /**
-   * 是否开通公网
-   */
-  PubNetAccessEnabled?: boolean
-  /**
-   * vpc id
-   */
-  VpcId?: string
-  /**
-   * vpc name
-   */
-  VpcName?: string
-  /**
-   * 子网ID
-   */
-  SubnetId?: string
-  /**
-   * 子网名
-   */
-  SubnetName?: string
+  PermissionList?: Array<ResourcePermission>
 }
 
 /**
@@ -2533,13 +2642,21 @@ export interface UpdateAIModelResponse {
 }
 
 /**
- * UpdateTable返回参数结构体
+ * ListPGUserMigrations请求参数结构体
  */
-export interface UpdateTableResponse {
+export interface ListPGUserMigrationsRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>云开发环境ID</p>
    */
-  RequestId?: string
+  EnvId: string
+  /**
+   * <p>查询条数</p><p>取值范围：[1, 500]</p><p>默认值：100</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移</p><p>默认值：0</p>
+   */
+  Offset?: number
 }
 
 /**
@@ -2610,6 +2727,28 @@ export interface DescribeCreateMySQLResultRequest {
    * OpenMysql 返回任务 Id
    */
   TaskId?: string
+}
+
+/**
+ * ListPGUserMigrations返回参数结构体
+ */
+export interface ListPGUserMigrationsResponse {
+  /**
+   * <p>总数量</p>
+   */
+  Total?: number
+  /**
+   * <p>已应用最新版本号</p><p>参数格式：纯数字，14位时间格式</p>
+   */
+  LatestVersion?: string
+  /**
+   * <p>已应用migration列表</p>
+   */
+  Migrations?: Array<MigrationSummary>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2815,6 +2954,32 @@ export interface CreateMySQLResponse {
 }
 
 /**
+ * ModifyResourcePermission请求参数结构体
+ */
+export interface ModifyResourcePermissionRequest {
+  /**
+   * 环境 ID
+   */
+  EnvId: string
+  /**
+   * 资源类型：`function`-云函数、`storage`-云存储、`table`-SQL型数据库表、`collection`-文档型数据库表。
+   */
+  ResourceType: string
+  /**
+   * 权限级别。可选值：- SQL型数据库表：`READONLY`-读取全部数据，修改本人数据；`PRIVATE`-读取和修改本人数据；`ADMINWRITE`-读取全部数据，不可修改数据；`ADMINONLY`-无权限 。- 文档型数据库表：`READONLY`-读取全部数据，修改本人数据；`PRIVATE`-读取和修改本人数据；`ADMINWRITE`-读取全部数据，不可修改数据；`ADMINONLY`-无权限；`CUSTOM`-自定义安全规则 。- 云函数：`CUSTOM`-自定义安全规则 。- 云存储（权限标签）：`READONLY`-所有用户可读，仅创建者和管理员可写；`PRIVATE`-仅创建者及管理员可读写；`ADMINWRITE`-所有用户可读，仅管理员可写；`ADMINONLY`-仅管理员可读写；`CUSTOM`-自定义安全规则。
+   */
+  Permission: string
+  /**
+   * 资源标识。云函数可不传、云存储传存储桶名、数据库表传表名。
+   */
+  Resource?: string
+  /**
+   * 自定义安全规则配置，当Permission为 `CUSTOM`时必传。JSON字符串格式的规则表达式。配置参考：[云函数安全规则](https://docs.cloudbase.net/cloud-function/security-rules)、[云存储安全规则](https://docs.cloudbase.net/storage/security-rules)、[文档型数据库安全规则](https://docs.cloudbase.net/database/security-rules)。
+   */
+  SecurityRule?: string
+}
+
+/**
  * DeleteAuthDomain返回参数结构体
  */
 export interface DeleteAuthDomainResponse {
@@ -2938,6 +3103,47 @@ export interface DeleteTableRequest {
    * MongoDB连接器配置
    */
   MongoConnector?: MongoConnector
+}
+
+/**
+ * TDSQL-C网络信息类型
+ */
+export interface MySQLNetDetail {
+  /**
+   * 内网地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrivateNetAddress?: string
+  /**
+   * 外网地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PubNetAddress?: string
+  /**
+   * 网络信息（VPCID/SubnetID）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Net?: string
+  /**
+   * 是否开通公网
+   */
+  PubNetAccessEnabled?: boolean
+  /**
+   * vpc id
+   */
+  VpcId?: string
+  /**
+   * vpc name
+   */
+  VpcName?: string
+  /**
+   * 子网ID
+   */
+  SubnetId?: string
+  /**
+   * 子网名
+   */
+  SubnetName?: string
 }
 
 /**
@@ -3122,6 +3328,16 @@ export interface HTTPServiceHeadersHandler {
    * 删除返回头列表
    */
   ResponseHeadersToRemove?: Array<string>
+}
+
+/**
+ * 修改资源基础权限结果
+ */
+export interface ModifyResourcePermissionResult {
+  /**
+   * 是否成功
+   */
+  Success?: boolean
 }
 
 /**
@@ -3326,6 +3542,20 @@ export interface DescribeCreateMySQLResult {
    * 是否已被冻结（只在 Status=success时有效）
    */
   FreezeStatus?: boolean
+}
+
+/**
+ * ModifyResourcePermission返回参数结构体
+ */
+export interface ModifyResourcePermissionResponse {
+  /**
+   * 修改结果
+   */
+  Data?: ModifyResourcePermissionResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3959,6 +4189,32 @@ export interface DestroyMySQLResult {
 }
 
 /**
+ * PreviewPGUserMigrations返回参数结构体
+ */
+export interface PreviewPGUserMigrationsResponse {
+  /**
+   * <p>将要执行的migration列表</p>
+   */
+  Pending?: Array<MigrationPlanItem>
+  /**
+   * <p>已经应用的migration列表</p>
+   */
+  Applied?: Array<MigrationPlanItem>
+  /**
+   * <p>版本相同但 checksum 不一致冲突的migration列表</p>
+   */
+  Conflicts?: Array<MigrationConflict>
+  /**
+   * <p>是否可直接执行；当前仅表示没有 checksum 冲突</p>
+   */
+  Executable?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ReleaseEnv请求参数结构体
  */
 export interface ReleaseEnvRequest {
@@ -3970,6 +4226,24 @@ export interface ReleaseEnvRequest {
    * <p>分配请求ID</p>
    */
   AllocateId?: string
+}
+
+/**
+ * PreviewPGUserMigrations请求参数结构体
+ */
+export interface PreviewPGUserMigrationsRequest {
+  /**
+   * <p>云开发环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>预览要执行的migration 列表</p>
+   */
+  Migrations: Array<MigrationInput>
+  /**
+   * <p>标记请求来源</p>
+   */
+  Source?: string
 }
 
 /**
@@ -4545,6 +4819,46 @@ export interface DescribeStaticStoreResponse {
 }
 
 /**
+ * DescribeResourcePermission请求参数结构体
+ */
+export interface DescribeResourcePermissionRequest {
+  /**
+   * 环境 ID
+   */
+  EnvId: string
+  /**
+   * 资源类型：`function`-云函数、`storage`-云存储、`table`-SQL型数据库表、`collection`-文档型数据库表 `<br>`示例值：`table`。
+   */
+  ResourceType: string
+  /**
+   * 资源标识列表。云函数不传或传空数组、云存储传存储桶名、数据库表传表名，不能超过100条。
+   */
+  Resources?: Array<string>
+}
+
+/**
+ * 资源权限
+ */
+export interface ResourcePermission {
+  /**
+   * 资源类型。
+   */
+  ResourceType?: string
+  /**
+   * 资源标识
+   */
+  Resource?: string
+  /**
+   * 权限级别。取值：READONLY、PRIVATE、ADMINWRITE、ADMINONLY、CUSTOM。
+   */
+  Permission?: string
+  /**
+   * 自定义安全规则配置，当 Permission 为 CUSTOM 时返回。
+   */
+  SecurityRule?: string
+}
+
+/**
  * ModifyHTTPServiceRoute返回参数结构体
  */
 export interface ModifyHTTPServiceRouteResponse {
@@ -4638,6 +4952,46 @@ export interface CreateStaticStoreResponse {
 }
 
 /**
+ * PushPGUserMigrations请求参数结构体
+ */
+export interface PushPGUserMigrationsRequest {
+  /**
+   * <p>云开发环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>结构化 SQL migration 列表；每项包含 Query SQL 内容</p>
+   */
+  Migrations: Array<MigrationInput>
+  /**
+   * <p>等待获取数据库锁的最长时间</p><p>单位：毫秒</p><p>默认值：5000</p>
+   */
+  LockTimeoutMs?: number
+  /**
+   * <p>单条 SQL 执行最长时间，超过后由 PostgreSQL 取消该语句</p><p>单位：毫秒</p><p>默认值：300000</p>
+   */
+  StatementTimeoutMs?: number
+  /**
+   * <p>标记请求来源</p>
+   */
+  Source?: string
+}
+
+/**
+ * DescribePGUserMigration请求参数结构体
+ */
+export interface DescribePGUserMigrationRequest {
+  /**
+   * <p>云开发环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>版本号</p><p>参数格式：14位时间格式</p><p>入参限制：纯数字</p>
+   */
+  MigrationVersion: string
+}
+
+/**
  * DescribeVmInstances返回参数结构体
  */
 export interface DescribeVmInstancesResponse {
@@ -4707,6 +5061,32 @@ export interface StorageInfo {
 }
 
 /**
+ * RollbackPGUserMigrations返回参数结构体
+ */
+export interface RollbackPGUserMigrationsResponse {
+  /**
+   * <p>任务ID</p><p>可通过DescribeTaskResult 接口查询进度</p>
+   */
+  TaskId?: string
+  /**
+   * <p>已成功回滚并删除 history 的 migration</p>
+   */
+  RolledBack?: Array<MigrationSummary>
+  /**
+   * <p>未提供 Rollback SQL、视为成功并删除 history 的 migration</p>
+   */
+  SkippedRollbackSql?: Array<MigrationSummary>
+  /**
+   * <p>执行 Rollback SQL 失败的 migration，可为空</p>
+   */
+  Failed?: MigrationSummary
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 修改用户返回值
  */
 export interface ModifyUserResp {
@@ -4720,6 +5100,46 @@ export interface ModifyUserResp {
  * ModifySafeRule返回参数结构体
  */
 export interface ModifySafeRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * migration 列表
+ */
+export interface MigrationSummary {
+  /**
+   * <p>migration 版本号</p><p>参数格式：纯数字，14位时间格式</p>
+   */
+  Version?: string
+  /**
+   * <p>migration 版本名</p><p>参数格式：仅允许小写字母和下划线</p>
+   */
+  Name?: string
+  /**
+   * <p>migration query sql 语句checksum</p><p>服务端自动生成，同版本不同checksum会拒绝执行</p>
+   */
+  Checksum?: string
+  /**
+   * <p>应用时间</p>
+   */
+  AppliedAt?: string
+  /**
+   * <p>请求来源</p>
+   */
+  Source?: string
+  /**
+   * <p>migration 创建时间</p>
+   */
+  CreatedBy?: string
+}
+
+/**
+ * ModifyClient返回参数结构体
+ */
+export interface ModifyClientResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4776,6 +5196,32 @@ export interface UpdateTableRequest {
    * MongoDB连接器配置
    */
   MongoConnector?: MongoConnector
+}
+
+/**
+ * RollbackPGUserMigrations请求参数结构体
+ */
+export interface RollbackPGUserMigrationsRequest {
+  /**
+   * <p>云开发环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>要回滚的条数</p><p>按照逆序回滚最近N条migration</p>
+   */
+  LastN: number
+  /**
+   * <p>等待获取数据库锁的最长时间</p><p>单位：毫秒</p><p>默认值：5000</p>
+   */
+  LockTimeoutMs?: number
+  /**
+   * <p>单条 SQL 执行最长时间，超过后由 PostgreSQL 取消该语句</p><p>单位：毫秒</p><p>默认值：300000</p>
+   */
+  StatementTimeoutMs?: number
+  /**
+   * <p>标记API调用来源</p>
+   */
+  Source?: string
 }
 
 /**
@@ -4908,6 +5354,40 @@ export interface DescribeClientRequest {
 }
 
 /**
+ * migration 执行计划冲突项
+ */
+export interface MigrationConflict {
+  /**
+   * <p>migration 版本号</p><p>参数格式：纯数字，14位时间格式</p>
+   */
+  Version?: string
+  /**
+   * <p>migration 版本名</p><p>参数格式：仅允许小写字母和下划线</p>
+   */
+  Name?: string
+  /**
+   * <p>数据库已应用migration的版本名</p><p>参数格式：仅允许小写字母和下划线</p>
+   */
+  RemoteName?: string
+  /**
+   * <p>本次sql计算出来的checksum</p>
+   */
+  LocalChecksum?: string
+  /**
+   * <p>已应用的migration，数据库存储的checksum</p>
+   */
+  RemoteChecksum?: string
+  /**
+   * <p>归入该分组的原因</p>
+   */
+  Reason?: string
+  /**
+   * <p>冲突信息</p>
+   */
+  Message?: string
+}
+
+/**
  * DescribeHostingDomainTask返回参数结构体
  */
 export interface DescribeHostingDomainTaskResponse {
@@ -4957,6 +5437,26 @@ export interface CreateCustomLoginKeyResponse {
    * 密钥对的唯一标识符（UUID 格式），由系统自动生成。在自定义登录时，需将该 KeyID 拼接到 ProviderToken 参数中（格式：{KeyID}/{algorithm}/{signedJWT}），服务端通过 KeyID 查找对应的公钥以验证签名
    */
   KeyID?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListTables返回参数结构体
+ */
+export interface ListTablesResponse {
+  /**
+   * 表信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tables?: Array<TableInfo>
+  /**
+   * 分页信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Pager?: Pager
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5564,6 +6064,20 @@ LightHouse = 轻量云服务器
 CVM = 云服务器
    */
   Type?: string
+}
+
+/**
+ * PushPGUserMigrations返回参数结构体
+ */
+export interface PushPGUserMigrationsResponse {
+  /**
+   * <p>任务ID</p><p>可通过DescribeTaskResult 接口查询进度</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

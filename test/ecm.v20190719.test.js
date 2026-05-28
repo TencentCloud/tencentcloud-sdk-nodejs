@@ -138,9 +138,9 @@ it("ecm.v20190719.RunInstances", async function () {
     }
 })
 
-it("ecm.v20190719.AssignPrivateIpAddresses", async function () {
+it("ecm.v20190719.ImportImage", async function () {
     try {
-       const data = await client.AssignPrivateIpAddresses({})
+       const data = await client.ImportImage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,9 +278,9 @@ it("ecm.v20190719.DisassociateSecurityGroups", async function () {
     }
 })
 
-it("ecm.v20190719.MigrateNetworkInterface", async function () {
+it("ecm.v20190719.DeleteSecurityGroup", async function () {
     try {
-       const data = await client.MigrateNetworkInterface({})
+       const data = await client.DeleteSecurityGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -371,16 +371,6 @@ it("ecm.v20190719.CreateVpc", async function () {
 it("ecm.v20190719.ModifyLoadBalancerAttributes", async function () {
     try {
        const data = await client.ModifyLoadBalancerAttributes({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ecm.v20190719.AttachDisks", async function () {
-    try {
-       const data = await client.AttachDisks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -568,16 +558,6 @@ it("ecm.v20190719.ResetInstances", async function () {
     }
 })
 
-it("ecm.v20190719.TerminateDisks", async function () {
-    try {
-       const data = await client.TerminateDisks({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ecm.v20190719.ModifyTargetPort", async function () {
     try {
        const data = await client.ModifyTargetPort({})
@@ -658,9 +638,9 @@ it("ecm.v20190719.DescribeRouteConflicts", async function () {
     }
 })
 
-it("ecm.v20190719.DetachDisks", async function () {
+it("ecm.v20190719.RemovePrivateIpAddresses", async function () {
     try {
-       const data = await client.DetachDisks({})
+       const data = await client.RemovePrivateIpAddresses({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -858,16 +838,6 @@ it("ecm.v20190719.DescribeNetworkInterfaces", async function () {
     }
 })
 
-it("ecm.v20190719.CreateDisks", async function () {
-    try {
-       const data = await client.CreateDisks({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ecm.v20190719.AssociateSecurityGroups", async function () {
     try {
        const data = await client.AssociateSecurityGroups({})
@@ -921,16 +891,6 @@ it("ecm.v20190719.CreateSecurityGroup", async function () {
 it("ecm.v20190719.ImportCustomImage", async function () {
     try {
        const data = await client.ImportCustomImage({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ecm.v20190719.DescribeSnapshots", async function () {
-    try {
-       const data = await client.DescribeSnapshots({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1058,9 +1018,9 @@ it("ecm.v20190719.DescribeHaVips", async function () {
     }
 })
 
-it("ecm.v20190719.ImportImage", async function () {
+it("ecm.v20190719.AssignPrivateIpAddresses", async function () {
     try {
-       const data = await client.ImportImage({})
+       const data = await client.AssignPrivateIpAddresses({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1218,19 +1178,9 @@ it("ecm.v20190719.CreateHaVip", async function () {
     }
 })
 
-it("ecm.v20190719.DescribeDisks", async function () {
+it("ecm.v20190719.MigrateNetworkInterface", async function () {
     try {
-       const data = await client.DescribeDisks({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ecm.v20190719.DeleteSecurityGroup", async function () {
-    try {
-       const data = await client.DeleteSecurityGroup({})
+       const data = await client.MigrateNetworkInterface({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1241,16 +1191,6 @@ it("ecm.v20190719.DeleteSecurityGroup", async function () {
 it("ecm.v20190719.CreateListener", async function () {
     try {
        const data = await client.CreateListener({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ecm.v20190719.DeleteSnapshots", async function () {
-    try {
-       const data = await client.DeleteSnapshots({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1371,16 +1311,6 @@ it("ecm.v20190719.DescribePeakBaseOverview", async function () {
 it("ecm.v20190719.ModifyAddressAttribute", async function () {
     try {
        const data = await client.ModifyAddressAttribute({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ecm.v20190719.RemovePrivateIpAddresses", async function () {
-    try {
-       const data = await client.RemovePrivateIpAddresses({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

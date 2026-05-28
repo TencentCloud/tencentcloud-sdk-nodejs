@@ -7983,7 +7983,7 @@ export interface ModifyOriginParameters {
    * 源站类型。取值有：
 <li>IPDomain：IPV4、IPV6 或域名类型源站；</li>
 <li>OriginGroup：源站组类型源站；</li>
-<li>LoadBalance：负载均衡，该功能内测中，如需使用，请提工单或联系智能客服；</li>
+<li>LoadBalance：负载均衡，该功能内测中，如需使用，请提工单；</li>
 <li>COS：腾讯云 COS 对象存储源站；</li>
 <li>AWSS3：支持 AWS S3 协议的所有对象存储源站。</li>
    */

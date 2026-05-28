@@ -2042,27 +2042,27 @@ export interface ScaleNodePoolResponse {
  */
 export interface ModifyClusterMachineRequest {
   /**
-   * 集群 ID
+   * <p>集群 ID</p>
    */
   ClusterId: string
   /**
-   * 节点名列表
+   * <p>节点名列表</p>
    */
   MachineNames: Array<string>
   /**
-   * machine的display name
+   * <p>machine的display name</p>
    */
   DisplayName?: string
   /**
-   * 系统盘的信息
+   * <p>系统盘的信息</p>
    */
   SystemDisk?: Disk
   /**
-   * 安全组列表
+   * <p>安全组列表</p>
    */
   SecurityGroupIDs?: Array<string>
   /**
-   * 节点预付费信息
+   * <p>节点预付费信息</p>
    */
   InstanceChargePrepaid?: InstanceChargePrepaid
 }

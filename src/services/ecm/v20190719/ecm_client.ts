@@ -34,9 +34,6 @@ import {
   DescribeModuleRequest,
   DeleteSecurityGroupResponse,
   RebootInstancesRequest,
-  CreateDisksRequest,
-  AttachDisksRequest,
-  DescribeSnapshotsRequest,
   RemovePrivateIpAddressesRequest,
   InstanceFamilyTypeConfig,
   DescribeImageRequest,
@@ -54,7 +51,6 @@ import {
   ResetInstancesMaxBandwidthRequest,
   LoadBalancerInternetAccessible,
   ResetRoutesRequest,
-  TerminateDisksRequest,
   SecurityGroupAssociationStatistics,
   ModifyDefaultSubnetResponse,
   DescribeRouteTablesResponse,
@@ -79,8 +75,6 @@ import {
   ModifyDefaultSubnetRequest,
   DescribeTaskResultRequest,
   ISPTypeItem,
-  Snapshot,
-  AttachDisksResponse,
   AssignIpv6CidrBlockRequest,
   DescribeLoadBalancersRequest,
   DeleteRoutesResponse,
@@ -117,15 +111,13 @@ import {
   ReplaceRouteTableAssociationRequest,
   ModifyTargetWeightResponse,
   DescribeCustomImageTaskResponse,
-  SecurityGroup,
+  ISPCounter,
   CreateModuleResponse,
   DescribePackingQuotaGroupRequest,
   SecurityGroupPolicy,
-  TerminateDisksResponse,
   LoadBalancerHealth,
   CreateListenerResponse,
   DeleteVpcRequest,
-  Disk,
   CreateSubnetResponse,
   DescribeSecurityGroupPoliciesResponse,
   ModifySecurityGroupPoliciesRequest,
@@ -231,11 +223,8 @@ import {
   PhysicalPosition,
   Listener,
   StartInstancesRequest,
-  DeleteSnapshotsRequest,
   AssignIpv6SubnetCidrBlockResponse,
-  Placement,
   Target,
-  DeleteSnapshotsResponse,
   DescribeAddressesResponse,
   ModifyIpv6AddressesAttributeRequest,
   DeleteModuleRequest,
@@ -257,7 +246,6 @@ import {
   DescribeBaseOverviewRequest,
   CreateHaVipResponse,
   ImportImageRequest,
-  DiskChargePrepaid,
   ISPIPv6CidrBlock,
   DisableRoutesRequest,
   StopInstancesResponse,
@@ -316,7 +304,6 @@ import {
   DeleteLoadBalancerListenersRequest,
   MigratePrivateIpAddressRequest,
   DeleteRouteTableRequest,
-  DetachDisksRequest,
   DescribeConfigRequest,
   NetworkInterfaceAttachment,
   BatchRegisterTargetsResponse,
@@ -328,7 +315,6 @@ import {
   ModifyIpv6AddressesBandwidthRequest,
   CreateNetworkInterfaceResponse,
   ModifyListenerRequest,
-  DescribeDisksResponse,
   ZoneInstanceCountISP,
   DescribeAddressQuotaRequest,
   DescribeInstanceTypeConfigResponse,
@@ -348,7 +334,7 @@ import {
   Subnet,
   AttachNetworkInterfaceRequest,
   ResetInstancesPasswordResponse,
-  ISPCounter,
+  SecurityGroup,
   ModifyModuleDisableWanIpRequest,
   DescribeInstanceVncUrlResponse,
   DisassociateAddressResponse,
@@ -359,19 +345,15 @@ import {
   DescribeLoadBalanceTaskStatusResponse,
   DiskInfo,
   Filter,
-  DescribeSnapshotsResponse,
   CreateHaVipRequest,
-  CreateDisksResponse,
   Ipv6SubnetCidrBlock,
   DescribeAddressQuotaResponse,
   ZoneInstanceInfo,
   DeleteLoadBalancerResponse,
   DeleteSecurityGroupRequest,
   CreateRouteTableResponse,
-  DescribeDisksRequest,
   ModifyPrivateIpAddressesAttributeRequest,
   AllocateIpv6AddressesBandwidthResponse,
-  DetachDisksResponse,
   CreateSecurityGroupRequest,
   DescribeSecurityGroupLimitsRequest,
   PrivateIPAddressInfo,
@@ -536,13 +518,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 弹性网卡申请内网 IP
+   * 从CVM产品导入镜像到ECM
    */
-  async AssignPrivateIpAddresses(
-    req: AssignPrivateIpAddressesRequest,
-    cb?: (error: string, rep: AssignPrivateIpAddressesResponse) => void
-  ): Promise<AssignPrivateIpAddressesResponse> {
-    return this.request("AssignPrivateIpAddresses", req, cb)
+  async ImportImage(
+    req: ImportImageRequest,
+    cb?: (error: string, rep: ImportImageResponse) => void
+  ): Promise<ImportImageResponse> {
+    return this.request("ImportImage", req, cb)
   }
 
   /**
@@ -678,13 +660,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 弹性网卡迁移
-   */
-  async MigrateNetworkInterface(
-    req: MigrateNetworkInterfaceRequest,
-    cb?: (error: string, rep: MigrateNetworkInterfaceResponse) => void
-  ): Promise<MigrateNetworkInterfaceResponse> {
-    return this.request("MigrateNetworkInterface", req, cb)
+     * 只有当前账号下的安全组允许被删除。
+安全组实例ID如果在其他安全组的规则中被引用，则无法直接删除。这种情况下，需要先进行规则修改，再删除安全组。
+删除的安全组无法再找回，请谨慎调用。
+     */
+  async DeleteSecurityGroup(
+    req: DeleteSecurityGroupRequest,
+    cb?: (error: string, rep: DeleteSecurityGroupResponse) => void
+  ): Promise<DeleteSecurityGroupResponse> {
+    return this.request("DeleteSecurityGroup", req, cb)
   }
 
   /**
@@ -777,21 +761,6 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: ModifyLoadBalancerAttributesResponse) => void
   ): Promise<ModifyLoadBalancerAttributesResponse> {
     return this.request("ModifyLoadBalancerAttributes", req, cb)
-  }
-
-  /**
-     * CBS在ECM早已下线
-
-本接口（AttachDisks）用于挂载云硬盘。
- 
-* 支持批量操作，将多块云盘挂载到同一云主机。如果多个云盘中存在不允许挂载的云盘，则操作不执行，返回特定的错误码。
-* 本接口为异步接口，当挂载云盘的请求成功返回时，表示后台已发起挂载云盘的操作，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHING”变为“ATTACHED”，则为挂载成功。
-     */
-  async AttachDisks(
-    req: AttachDisksRequest,
-    cb?: (error: string, rep: AttachDisksResponse) => void
-  ): Promise<AttachDisksResponse> {
-    return this.request("AttachDisks", req, cb)
   }
 
   /**
@@ -983,22 +952,6 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
-     * CBS在ECM早已下线
-
-本接口（TerminateDisks）用于退还云硬盘。
-
-* 不再使用的云盘，可通过本接口主动退还。
-* 本接口支持退还预付费云盘和按小时后付费云盘。按小时后付费云盘可直接退还，预付费云盘需符合退还规则。
-* 支持批量操作，每次请求批量云硬盘的上限为50。如果批量云盘存在不允许操作的，请求会以特定错误码返回。
-     */
-  async TerminateDisks(
-    req: TerminateDisksRequest,
-    cb?: (error: string, rep: TerminateDisksResponse) => void
-  ): Promise<TerminateDisksResponse> {
-    return this.request("TerminateDisks", req, cb)
-  }
-
-  /**
    * 修改监听器绑定的后端机器的端口。
    */
   async ModifyTargetPort(
@@ -1080,18 +1033,14 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
-     * CBS在ECM早已下线
-
-本接口（DetachDisks）用于卸载云硬盘。
-
-* 支持批量操作，卸载挂载在同一主机上的多块云盘。如果多块云盘中存在不允许卸载的云盘，则操作不执行，返回特定的错误码。
-* 本接口为异步接口，当请求成功返回时，云盘并未立即从主机卸载，可通过接口[DescribeDisks](/document/product/362/16315)来查询对应云盘的状态，如果云盘的状态由“ATTACHED”变为“UNATTACHED”，则为卸载成功。
+     * 弹性网卡退还内网 IP。
+退还弹性网卡上的辅助内网IP，接口自动解关联弹性公网 IP。不能退还弹性网卡的主内网IP。
      */
-  async DetachDisks(
-    req: DetachDisksRequest,
-    cb?: (error: string, rep: DetachDisksResponse) => void
-  ): Promise<DetachDisksResponse> {
-    return this.request("DetachDisks", req, cb)
+  async RemovePrivateIpAddresses(
+    req: RemovePrivateIpAddressesRequest,
+    cb?: (error: string, rep: RemovePrivateIpAddressesResponse) => void
+  ): Promise<RemovePrivateIpAddressesResponse> {
+    return this.request("RemovePrivateIpAddresses", req, cb)
   }
 
   /**
@@ -1285,22 +1234,6 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
-     * CBS在ECM早已下线
-
-本接口（CreateDisks）用于创建云硬盘。
-
-* 预付费云盘的购买会预先扣除本次云盘购买所需金额，在调用本接口前请确保账户余额充足。
-* 本接口支持传入数据盘快照来创建云盘，实现将快照数据复制到新购云盘上。
-* 本接口为异步接口，当创建请求下发成功后会返回一个新建的云盘ID列表，此时云盘的创建并未立即完成。可以通过调用[DescribeDisks](/document/product/362/16315)接口根据DiskId查询对应云盘，如果能查到云盘，且状态为'UNATTACHED'或'ATTACHED'，则表示创建成功。
-     */
-  async CreateDisks(
-    req: CreateDisksRequest,
-    cb?: (error: string, rep: CreateDisksResponse) => void
-  ): Promise<CreateDisksResponse> {
-    return this.request("CreateDisks", req, cb)
-  }
-
-  /**
    * 绑定安全组
    */
   async AssociateSecurityGroups(
@@ -1358,21 +1291,6 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: ImportCustomImageResponse) => void
   ): Promise<ImportCustomImageResponse> {
     return this.request("ImportCustomImage", req, cb)
-  }
-
-  /**
-     * CBS在ECM早已下线
-
-本接口（DescribeSnapshots）用于查询快照的详细信息。
-
-* 根据快照ID、创建快照的云硬盘ID、创建快照的云硬盘类型等对结果进行过滤，不同条件之间为与(AND)的关系，过滤信息详细请见过滤器`Filter`。
-*  如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的快照列表。
-     */
-  async DescribeSnapshots(
-    req: DescribeSnapshotsRequest,
-    cb?: (error: string, rep: DescribeSnapshotsResponse) => void
-  ): Promise<DescribeSnapshotsResponse> {
-    return this.request("DescribeSnapshots", req, cb)
   }
 
   /**
@@ -1498,13 +1416,13 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
-   * 从CVM产品导入镜像到ECM
+   * 弹性网卡申请内网 IP
    */
-  async ImportImage(
-    req: ImportImageRequest,
-    cb?: (error: string, rep: ImportImageResponse) => void
-  ): Promise<ImportImageResponse> {
-    return this.request("ImportImage", req, cb)
+  async AssignPrivateIpAddresses(
+    req: AssignPrivateIpAddressesRequest,
+    cb?: (error: string, rep: AssignPrivateIpAddressesResponse) => void
+  ): Promise<AssignPrivateIpAddressesResponse> {
+    return this.request("AssignPrivateIpAddresses", req, cb)
   }
 
   /**
@@ -1659,30 +1577,13 @@ EIP 如果被封堵，则不能进行解绑定操作。
   }
 
   /**
-     * CBS在ECM早已下线
-
-本接口（DescribeDisks）用于查询云硬盘列表。
-
-* 可以根据云硬盘ID、云硬盘类型或者云硬盘状态等信息来查询云硬盘的详细信息，不同条件之间为与(AND)的关系，过滤信息详细请见过滤器`Filter`。
-* 如果参数为空，返回当前用户一定数量（`Limit`所指定的数量，默认为20）的云硬盘列表。
-     */
-  async DescribeDisks(
-    req: DescribeDisksRequest,
-    cb?: (error: string, rep: DescribeDisksResponse) => void
-  ): Promise<DescribeDisksResponse> {
-    return this.request("DescribeDisks", req, cb)
-  }
-
-  /**
-     * 只有当前账号下的安全组允许被删除。
-安全组实例ID如果在其他安全组的规则中被引用，则无法直接删除。这种情况下，需要先进行规则修改，再删除安全组。
-删除的安全组无法再找回，请谨慎调用。
-     */
-  async DeleteSecurityGroup(
-    req: DeleteSecurityGroupRequest,
-    cb?: (error: string, rep: DeleteSecurityGroupResponse) => void
-  ): Promise<DeleteSecurityGroupResponse> {
-    return this.request("DeleteSecurityGroup", req, cb)
+   * 弹性网卡迁移
+   */
+  async MigrateNetworkInterface(
+    req: MigrateNetworkInterfaceRequest,
+    cb?: (error: string, rep: MigrateNetworkInterfaceResponse) => void
+  ): Promise<MigrateNetworkInterfaceResponse> {
+    return this.request("MigrateNetworkInterface", req, cb)
   }
 
   /**
@@ -1693,21 +1594,6 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: CreateListenerResponse) => void
   ): Promise<CreateListenerResponse> {
     return this.request("CreateListener", req, cb)
-  }
-
-  /**
-     * CBS在ECM早已下线
-
-本接口（DeleteSnapshots）用于删除快照。
-
-* 快照必须处于NORMAL状态，快照状态可以通过[DescribeSnapshots](/document/product/362/15647)接口查询，见输出参数中SnapshotState字段解释。
-* 支持批量操作。如果多个快照存在无法删除的快照，则操作不执行，以返回特定的错误码返回。
-     */
-  async DeleteSnapshots(
-    req: DeleteSnapshotsRequest,
-    cb?: (error: string, rep: DeleteSnapshotsResponse) => void
-  ): Promise<DeleteSnapshotsResponse> {
-    return this.request("DeleteSnapshots", req, cb)
   }
 
   /**
@@ -1830,17 +1716,6 @@ EIP 如果被封堵，则不能进行解绑定操作。
     cb?: (error: string, rep: ModifyAddressAttributeResponse) => void
   ): Promise<ModifyAddressAttributeResponse> {
     return this.request("ModifyAddressAttribute", req, cb)
-  }
-
-  /**
-     * 弹性网卡退还内网 IP。
-退还弹性网卡上的辅助内网IP，接口自动解关联弹性公网 IP。不能退还弹性网卡的主内网IP。
-     */
-  async RemovePrivateIpAddresses(
-    req: RemovePrivateIpAddressesRequest,
-    cb?: (error: string, rep: RemovePrivateIpAddressesResponse) => void
-  ): Promise<RemovePrivateIpAddressesResponse> {
-    return this.request("RemovePrivateIpAddresses", req, cb)
   }
 
   /**

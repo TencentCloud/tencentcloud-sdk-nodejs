@@ -310,6 +310,7 @@ import {
   DescribeExternalNodePoolsRequest,
   EdgeClusterInternalLB,
   ReservedInstanceScope,
+  AgentPluginConfig,
   DescribeAvailableClusterVersionRequest,
   UpgradeClusterReleaseResponse,
   ModifyClusterMaintenanceWindowAndExclusionsRequest,

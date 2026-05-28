@@ -2252,11 +2252,11 @@ export interface FaceMsgContent {
  */
 export interface SetAppCustomContentRequest {
   /**
-   * 自定义内容。
+   * <p>自定义内容。</p>
    */
   CustomContent: Array<AppCustomContent>
   /**
-   * 应用ID。
+   * <p>应用ID。</p>
    */
   SdkAppId: number
 }
@@ -2808,33 +2808,37 @@ export interface DescribeSdkAppIdUsersResponse {
  */
 export interface EventDataInfo {
   /**
-   * 事件发生的房间号。
+   * <p>事件发生的房间号。</p>
    */
   RoomId?: number
   /**
-   * 事件发生的用户。
+   * <p>事件发生的用户。</p>
    */
   UserId?: string
   /**
-   * 用户设备类型。0: Unknown; 1: Windows; 2: macOS; 3: Android; 4: iOS; 5: Web; 6: Mobile webpage; 7: Weixin Mini Program.
+   * <p>用户设备类型。0: Unknown; 1: Windows; 2: macOS; 3: Android; 4: iOS; 5: Web; 6: Mobile webpage; 7: Weixin Mini Program.</p>
    */
   Device?: number
   /**
-   * 录制时长。单位：秒
+   * <p>录制时长。单位：秒</p>
    */
   Duration?: number
   /**
-   * 录制文件大小
+   * <p>录制文件大小</p>
    */
   RecordSize?: number
   /**
-   * 录制url
+   * <p>录制url</p>
    */
   RecordUrl?: string
   /**
-   * MemberQuit事件，对应Reason（0:主动退出 1:被踢 2:永久被踢 4:失去心跳下线 5:房间结束，成员自动退出）
+   * <p>MemberQuit事件，对应Reason（0:主动退出 1:被踢 2:永久被踢 4:失去心跳下线 5:房间结束，成员自动退出）</p>
    */
   Reason?: number
+  /**
+   * <p>角色</p><p>枚举值：</p><ul><li>0： 学生</li><li>1： 老师</li><li>2： 助教</li><li>3： 巡课/督导</li></ul>
+   */
+  Role?: number
 }
 
 /**

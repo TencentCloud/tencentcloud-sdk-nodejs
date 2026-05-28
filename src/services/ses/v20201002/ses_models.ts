@@ -596,55 +596,55 @@ export interface DeleteEmailTemplateRequest {
  */
 export interface AbuseReport {
   /**
-   * 发送时间
+   * <p>发送时间</p>
    */
   DeliverTime?: string
   /**
-   * 发信地址
+   * <p>发信地址</p>
    */
   OriginalMailFrom?: string
   /**
-   * 收信地址
+   * <p>收信地址</p>
    */
   OriginalRcptTo?: string
   /**
-   * 发信域名
+   * <p>发信域名</p>
    */
   FromDomain?: string
   /**
-   * 投诉时间
+   * <p>投诉时间</p>
    */
   ComplainTime?: string
   /**
-   * 收信域名
+   * <p>收信域名</p>
    */
   Mta?: string
   /**
-   * 来源ip
+   * <p>来源ip</p>
    */
   SourceIp?: string
   /**
-   * 数据时间
+   * <p>数据时间</p>
    */
   InsertTime?: string
   /**
-   * 模板id
+   * <p>模板ID</p>
    */
   TemplateId?: string
   /**
-   * bulkId
+   * <p>bulkId</p>
    */
   BulkId?: string
   /**
-   * 邮件Message-Id
+   * <p>邮件Message-Id</p>
    */
   MessageId?: string
   /**
-   * 投诉时间
+   * <p>投诉时间</p>
    */
   AbuseTime?: string
   /**
-   * 邮件主题
+   * <p>邮件主题</p>
    */
   Subject?: string
 }

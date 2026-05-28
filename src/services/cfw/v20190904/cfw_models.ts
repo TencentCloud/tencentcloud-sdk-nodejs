@@ -8018,26 +8018,30 @@ export interface DescribeAcListsRequest {
  */
 export interface CcnAssociatedInstance {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 实例类型
+   * <p>实例类型</p>
    */
   InsType?: string
   /**
-   * 实例的网段列表
+   * <p>实例的网段列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CidrLst?: Array<string>
   /**
-   * 实例所属地域
+   * <p>实例所属地域</p>
    */
   InstanceRegion?: string
+  /**
+   * <p>是否跨账号</p>
+   */
+  IsCrossInstance?: number
 }
 
 /**
@@ -8210,19 +8214,15 @@ OnlyRoute: 透明模式
  */
 export interface RegionFwStatus {
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region?: string
   /**
-   * 引流网络部署状态
-1. "NotDeployed"  防火墙集群未部署
-2. "Deployed"        防火墙集群已部署，但未创建引流网络
-3. "Auto"                防火墙集群已部署，并自动选择网段创建了引流网络
-4. "Custom"            防火墙集群已部署，并根据用户自定义网段创建了引流网络
+   * <p>引流网络部署状态</p><ol><li>&quot;NotDeployed&quot;  防火墙集群未部署</li><li>&quot;Deployed&quot;        防火墙集群已部署，但未创建引流网络</li><li>&quot;DeployedCustomOnly&quot;  防火墙集群已部署，但内网段被全覆盖，无法自动选择引流网络，需自定义设置引流网段</li><li>&quot;Auto&quot;                防火墙集群已部署，并自动选择网段创建了引流网络</li><li>&quot;Custom&quot;            防火墙集群已部署，并根据用户自定义网段创建了引流网络</li></ol>
    */
   Status?: string
   /**
-   * 引流网络的cidr，如果没有部署引流网络则为空
+   * <p>引流网络的cidr，如果没有部署引流网络则为空</p>
    */
   Cidr?: string
 }

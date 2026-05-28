@@ -6161,6 +6161,47 @@ export interface ReservedInstanceScope {
 }
 
 /**
+ * AgentPlugin 安装配置，包含域名、Chart 版本和外部 PostgreSQL 连接信息
+ */
+export interface AgentPluginConfig {
+  /**
+   * Helm Chart 版本，一般无需指定
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChartVersion?: string
+  /**
+   * 外部 PostgreSQL 内网地址；配置后跳过内置 PostgreSQL
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Host?: string
+  /**
+   * 外部 PostgreSQL 密码，配置 Host 时必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * 外部 PostgreSQL 端口
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
+  /**
+   * SSL 模式，取值：disable / require / verify-full
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SSLMode?: string
+  /**
+   * Agent 实例访问域名，不填则不创建域名路由
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceDomain?: string
+  /**
+   * 外部 PostgreSQL 用户名，配置 Host 时必填
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Username?: string
+}
+
+/**
  * DescribeAvailableClusterVersion请求参数结构体
  */
 export interface DescribeAvailableClusterVersionRequest {
@@ -8702,43 +8743,49 @@ export interface ForwardTKEEdgeApplicationRequestV3Response {
  */
 export interface CreateClusterVirtualNodePoolRequest {
   /**
-   * 集群ID，通过DescribeClusters接口获取
+   * <p>集群ID，通过DescribeClusters接口获取</p>
    */
   ClusterId: string
   /**
-   * 节点池名称
+   * <p>节点池名称</p>
    */
   Name: string
   /**
-   * 安全组ID列表
+   * <p>安全组ID列表</p>
    */
   SecurityGroupIds: Array<string>
   /**
-   * 子网ID列表
+   * <p>子网ID列表</p>
    */
   SubnetIds?: Array<string>
   /**
-   * 虚拟节点label
+   * <p>虚拟节点label</p>
    */
   Labels?: Array<Label>
   /**
-   * 虚拟节点taint
+   * <p>虚拟节点taint</p>
    */
   Taints?: Array<Taint>
   /**
-   * 节点列表
+   * <p>节点列表</p>
    */
   VirtualNodes?: Array<VirtualNodeSpec>
   /**
-   * 删除保护开关，默认关闭
+   * <p>删除保护开关，默认关闭</p>
    */
   DeletionProtection?: boolean
   /**
-   * 节点池操作系统：
-- linux（默认）
-- windows
+   * <p>节点池操作系统：</p><ul><li>linux（默认）</li><li>windows</li></ul>
    */
   OS?: string
+  /**
+   * <p>子网资源分配策略，精确控制各子网之间的资源分配比例。</p>
+   */
+  SubnetAllocationPolicy?: SubnetAllocationPolicy
+  /**
+   * <p>AgentPlugin 安装配置。传入即表示需要安装（即使是空对象 {}）</p>
+   */
+  AgentPlugin?: AgentPluginConfig
 }
 
 /**
@@ -11949,7 +11996,7 @@ export interface SchedulerPolicyConfig {
  */
 export interface CreateClusterVirtualNodePoolResponse {
   /**
-   * 节点池ID
+   * <p>节点池ID</p>
    */
   NodePoolId?: string
   /**
