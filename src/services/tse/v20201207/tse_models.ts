@@ -144,6 +144,28 @@ export interface DescribeCloudNativeAPIGatewayUpstreamRequest {
 }
 
 /**
+ * AI 网关意图路由配置
+ */
+export interface AIGWIntentRoute {
+  /**
+   * <p>意图识别模型id</p>
+   */
+  IntentModelServiceId: string
+  /**
+   * <p>置信度</p>
+   */
+  ConfidenceThreshold: number
+  /**
+   * <p>默认服务id</p>
+   */
+  DefaultModelServiceId: string
+  /**
+   * <p>规则</p>
+   */
+  Rules?: Array<AIGWIntentRouteRule>
+}
+
+/**
  * 元数据信息
  */
 export interface Metadata {
@@ -458,6 +480,14 @@ export interface ModifyCloudNativeAPIGatewayLLMModelServiceRequest {
    * <p>SNI</p>
    */
   SNI?: string
+  /**
+   * <p>模型服务级别的配额上限（RPM/TPM）。需要网关版本 ≥ 3.9.4。</p>
+   */
+  QuotaLimit?: AIGWLLMQuotaLimit
+  /**
+   * <p>标签</p>
+   */
+  Tags?: Array<string>
 }
 
 /**
@@ -880,49 +910,57 @@ export interface CreateCloudNativeAPIGatewayLLMModelAPIRequest {
    */
   GatewayId: string
   /**
-   * <p>AI 网关 LLM 模型 API 的唯一标识名称，格式规则：最长60个字符，支持中英文大小写、数字及分隔符（“-”、“_”)，不能以数字和分隔符开头，不能以分隔符结尾。</p>
+   * <p>模型 API 名称，最长 60 字符。同一网关下唯一。</p>
    */
   Name: string
   /**
-   * <p>选择业务场景,  选项：Chat（聊天）。</p>
+   * <p>业务场景。</p><p>枚举值：</p><ul><li>Chat：聊天</li><li>Image：图像（需要网关版本 ≥ 3.9.3）</li></ul>
    */
   SceneType: string
   /**
-   * <p>业务场景对应的请求协议，选项：OpenAI（目前只支持 OpenAI）。</p>
+   * <p>请求协议（小写）。当前仅支持：</p><ul><li>openai</li></ul>
    */
   RequestProtocol: string
   /**
-   * <p>初始化关联的模型服务列表。</p>
+   * <p>关联的模型服务 ID 列表，长度 1-10。</p><p>注：字段名建议改为 ModelServiceIds，当前保留用于兼容。</p>
    */
   ListModelServiceId: Array<string>
   /**
-   * <p>路由列表</p>
+   * <p>路由列表，至少 1 条。每条包含 Methods/Paths/Hosts 等 Kong 路由属性。</p>
    */
   RouteList: Array<DefaultKongRoute>
   /**
-   * <p>为API设置统一的前缀，格式：以/开头，支持字母、数字、短横线。</p>
+   * <p>统一前缀路径（可选）。例如 /v1/openai。</p>
    */
   BasePath?: string
   /**
-   * <p>模型 API 的相关描述。</p>
+   * <p>模型 API 描述。最长 200 字符。</p>
    */
   Description?: string
   /**
-   * <p>模型服务路由策略（是指如何路由到模型服务）</p>
+   * <p>多模型服务路由策略。ListModelServiceId 多于 1 项时必填。</p>
    */
   ModelServiceRoute?: CloudNativeAPIGatewayLLMModelServiceRoute
   /**
-   * <p>路由 Header 匹配规则</p>
+   * <p>Header 路由匹配规则。当前仅支持 Operator=exact。</p>
    */
   MatchHeaders?: Array<AIGWKVMatch>
   /**
-   * <p>跨服务 fallback 开关</p>
+   * <p>是否启用跨服务 Fallback。开启后需提供 CrossServiceFallbackConfig。</p>
    */
   EnableCrossServiceFallback?: boolean
   /**
-   * <p>跨服务 fallback 配置</p>
+   * <p>跨服务 Fallback 配置。EnableCrossServiceFallback=true 时必填。</p>
    */
   CrossServiceFallbackConfig?: AIGWCrossServiceFallbackConfig
+  /**
+   * <p>标签过滤策略。需要网关版本 ≥ 3.9.4。</p>
+   */
+  TagFilter?: AIGWTagFilter
+  /**
+   * <p>日志输出配置（请求/响应 payload 落 LLM Log）。需要网关版本 ≥ 3.9.4。</p>
+   */
+  LogConfig?: AIGWLogConfig
 }
 
 /**
@@ -951,15 +989,15 @@ export interface GovernanceServiceDestination {
  */
 export interface DescribeCloudNativeAPIGatewayConsumerListRequest {
   /**
-   * 网关实例id
+   * <p>网关实例id</p>
    */
   GatewayId: string
   /**
-   * 页显示条数，最大20
+   * <p>每页条数，范围 [1, 100]，默认 20。</p>
    */
   Limit: number
   /**
-   * 起始位置
+   * <p>起始位置，从 0 开始。</p>
    */
   Offset: number
 }
@@ -973,11 +1011,11 @@ export interface CreateCloudNativeAPIGatewayConsumerRequest {
    */
   GatewayId: string
   /**
-   * 消费者名称
+   * <p>消费者名称，最长 60 字符。同一网关下唯一。</p>
    */
   Name: string
   /**
-   * 消费者描述
+   * <p>消费者描述。最长 200 字符。</p>
    */
   Description?: string
 }
@@ -1064,6 +1102,22 @@ export interface CloudNativeAPIGatewayLLMModelAPI {
    * <p>是否展示模型API</p>
    */
   DescribeCloudNativeAPIGatewayLLMModelAPI?: boolean
+  /**
+   * <p>标签</p>
+   */
+  TagFilter?: AIGWTagFilter
+  /**
+   * <p>日志显示相关开关</p>
+   */
+  LogConfig?: AIGWLogConfig
+  /**
+   * <p>日志脱敏规则</p>
+   */
+  LogDesensitizeConfig?: AIGWLogDesensitizeConfig
+  /**
+   * <p>转发脱敏规则</p>
+   */
+  ForwardDesensitizeConfig?: AIGWForwardDesensitizeConfig
 }
 
 /**
@@ -1317,11 +1371,33 @@ export interface DeleteCloudNativeAPIGatewayRouteResponse {
 }
 
 /**
+ * AI 网关 B 层日志脱敏配置（写入 LLM Log 前对 payload 掩码）
+ */
+export interface AIGWLogDesensitizeConfig {
+  /**
+   * <p>日志脱敏开关</p>
+   */
+  Enabled: boolean
+  /**
+   * <p>预定义规则类型</p><p>枚举值：</p><ul><li>Phone： 电话号码</li><li>IdCard： 身份证号</li><li>BankCard： 银行卡号</li><li>Email： 邮箱地址</li><li>IP： IP地址</li><li>Name： 姓名</li></ul>
+   */
+  PredefinedRuleTypes?: Array<string>
+  /**
+   * <p>自定义脱敏规则</p>
+   */
+  CustomRules?: Array<AIGWCustomDesensitizeRule>
+  /**
+   * <p>日志脱敏范围</p><p>枚举值：</p><ul><li>Request： 请求</li><li>Response： 响应</li></ul>
+   */
+  Scope?: Array<string>
+}
+
+/**
  * DeleteCloudNativeAPIGatewayLLMModelService返回参数结构体
  */
 export interface DeleteCloudNativeAPIGatewayLLMModelServiceResponse {
   /**
-   * 是否成功
+   * <p>是否成功。</p>
    */
   Result?: boolean
   /**
@@ -1342,6 +1418,20 @@ export interface DeleteCloudNativeAPIGatewayServiceRateLimitRequest {
    * 服务名称，或服务ID
    */
   Name: string
+}
+
+/**
+ * AI 网关意图路由规则
+ */
+export interface AIGWIntentRouteRule {
+  /**
+   * <p>意图编码</p><p>枚举值：</p><ul><li>Coder： 代码编写</li><li>Math： 数学计算</li><li>Translation： 翻译</li><li>Flash： 快速问答</li><li>Complex： 复杂推理</li></ul>
+   */
+  IntentCode?: string
+  /**
+   * <p>模型服务id</p>
+   */
+  ModelServiceId?: string
 }
 
 /**
@@ -2087,21 +2177,41 @@ export interface UnbindAutoScalerResourceStrategyFromGroupsRequest {
 }
 
 /**
- * 配置文件持久化
+ * 公网负载均衡配置
  */
-export interface ConfigFilePersistent {
+export interface InternetConfig {
   /**
-   * 文件编码
+   * 公网地址版本，可选："IPV4" | "IPV6" 。不填默认 IPV4 。
    */
-  Encoding?: string
+  InternetAddressVersion?: string
   /**
-   * 文件下发路径
+   * 公网付费类型，当前仅可选："BANDWIDTH"。不填默认为 "BANDWIDTH"
    */
-  Path?: string
+  InternetPayMode?: string
   /**
-   * 文件后置命令
+   * 公网带宽。
    */
-  PostCmd?: string
+  InternetMaxBandwidthOut?: number
+  /**
+   * 负载均衡描述
+   */
+  Description?: string
+  /**
+   * 负载均衡的规格类型，支持clb.c2.medium、clb.c3.small、clb.c3.medium、clb.c4.small、clb.c4.medium、clb.c4.large、clb.c4.xlarge，不传为共享型。
+   */
+  SlaType?: string
+  /**
+   * 负载均衡是否多可用区
+   */
+  MultiZoneFlag?: boolean
+  /**
+   * 主可用区
+   */
+  MasterZoneId?: string
+  /**
+   * 备可用区
+   */
+  SlaveZoneId?: string
 }
 
 /**
@@ -2553,41 +2663,21 @@ export interface GovernanceInstanceUpdate {
 }
 
 /**
- * 公网负载均衡配置
+ * 配置文件持久化
  */
-export interface InternetConfig {
+export interface ConfigFilePersistent {
   /**
-   * 公网地址版本，可选："IPV4" | "IPV6" 。不填默认 IPV4 。
+   * 文件编码
    */
-  InternetAddressVersion?: string
+  Encoding?: string
   /**
-   * 公网付费类型，当前仅可选："BANDWIDTH"。不填默认为 "BANDWIDTH"
+   * 文件下发路径
    */
-  InternetPayMode?: string
+  Path?: string
   /**
-   * 公网带宽。
+   * 文件后置命令
    */
-  InternetMaxBandwidthOut?: number
-  /**
-   * 负载均衡描述
-   */
-  Description?: string
-  /**
-   * 负载均衡的规格类型，支持clb.c2.medium、clb.c3.small、clb.c3.medium、clb.c4.small、clb.c4.medium、clb.c4.large、clb.c4.xlarge，不传为共享型。
-   */
-  SlaType?: string
-  /**
-   * 负载均衡是否多可用区
-   */
-  MultiZoneFlag?: boolean
-  /**
-   * 主可用区
-   */
-  MasterZoneId?: string
-  /**
-   * 备可用区
-   */
-  SlaveZoneId?: string
+  PostCmd?: string
 }
 
 /**
@@ -2846,7 +2936,7 @@ export interface DescribeSREInstancesResponse {
  */
 export interface DescribeCloudNativeAPIGatewayConsumerGroupResponse {
   /**
-   * 删除结果
+   * <p>消费者组详情。</p>
    */
   Result?: CNAPIGwConsumerGroup
   /**
@@ -2953,6 +3043,32 @@ export interface ModifyNativeGatewayServerGroupRequest {
    * 云原生API网关描述信息, 最多支持120个字符。
    */
   Description?: string
+}
+
+/**
+ * AI 网关 A 层转发脱敏配置（请求转发到 LLM 供应商前对 messages 替换为占位符）
+ */
+export interface AIGWForwardDesensitizeConfig {
+  /**
+   * <p>转发脱敏开关</p>
+   */
+  Enabled: boolean
+  /**
+   * <p>预定义规则类型</p><p>枚举值：</p><ul><li>Phone： 电话号码</li><li>IdCard： 身份证号</li><li>BankCard： 银行卡号</li><li>Email： 电子邮箱地址</li><li>IP： IP地址</li><li>Name： 姓名</li></ul>
+   */
+  PredefinedRuleTypes?: Array<string>
+  /**
+   * <p>自定义脱敏规则</p>
+   */
+  CustomRules?: Array<AIGWCustomDesensitizeRule>
+  /**
+   * <p>掩码</p>
+   */
+  PlaceholderFormat?: string
+  /**
+   * <p>脱敏异常处理</p><p>枚举值：</p><ul><li>Reject： 拒绝请求</li><li>Skip： 跳过</li></ul>
+   */
+  OnFailure?: string
 }
 
 /**
@@ -3252,7 +3368,7 @@ export interface UpdateEngineInternetAccessRequest {
  */
 export interface DescribeCloudNativeAPIGatewayConsumerGroupListResponse {
   /**
-   * 修改结果
+   * <p>分组列表</p>
    */
   Result?: CNAPIGwConsumerGroupList
   /**
@@ -3516,11 +3632,11 @@ export interface ListCloudNativeAPIGatewayStrategyResult {
  */
 export interface CloudNativeAPIGatewayLLMModelServiceRouteWeightedStrategy {
   /**
-   * 模型服务id
+   * <p>模型服务id</p>
    */
   ModelServiceId: string
   /**
-   * 权重值
+   * <p>权重值</p>
    */
   Weight: number
 }
@@ -3530,13 +3646,27 @@ export interface CloudNativeAPIGatewayLLMModelServiceRouteWeightedStrategy {
  */
 export interface AddCloudNativeAPIGatewayConsumerInGroupResponse {
   /**
-   * 添加结果
+   * <p>是否成功。</p>
    */
   Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AI网关标签过滤
+ */
+export interface AIGWTagFilter {
+  /**
+   * <p>匹配策略</p><p>枚举值：</p><ul><li>AND： 并</li><li>OR： 或</li></ul>
+   */
+  MatchStrategy?: string
+  /**
+   * <p>标签</p>
+   */
+  Tags?: Array<string>
 }
 
 /**
@@ -3720,67 +3850,63 @@ export interface ModifyNativeGatewayServiceSourceRequest {
  */
 export interface CNAPIGwSecretKey {
   /**
-   * 密钥id
+   * <p>密钥id</p>
    */
   SecretKeyId?: string
   /**
-   * 密钥名字
+   * <p>密钥名字</p>
    */
   Name?: string
   /**
-   * 密钥类型：ApiKey/JWT
+   * <p>密钥协议类型。</p>
    */
   SecretType?: string
   /**
-   * 状态:
-- Enable: 启用
-- Disable: 禁用
+   * <p>状态。</p><p>枚举值：</p><ul><li>Enable： 启用</li><li>Disable： 禁用</li></ul>
    */
   Status?: string
   /**
-   * 生成方式:KMS/System/Custom
+   * <p>密钥生成方式。</p><p>枚举值：</p><ul><li>System： 系统自动生成</li><li>Custom： 用户自定义</li><li>KMS： 使用 KMS 密钥</li></ul>
    */
   GenerateType?: string
   /**
-   * 密钥值
+   * <p>密钥明文</p>
    */
   SecretValue?: string
   /**
-   * KMS凭证名字
+   * <p>KMS凭证名字</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KmsKeyName?: string
   /**
-   * KMS凭证版本
+   * <p>KMS凭证版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KmsKeyVersion?: string
   /**
-   * 描述
+   * <p>描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 是否可以绑定
+   * <p>是否可以绑定</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CanBind?: boolean
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 修改时间
+   * <p>修改时间</p>
    */
   ModifyTime?: string
   /**
-   * 绑定数
+   * <p>绑定数</p>
    */
   BindCount?: number
   /**
-   * 资源类型：
-- Consumer 消费者
-- LLM 模型服务
+   * <p>密钥归属资源类型。</p><p>枚举值：</p><ul><li>Consumer： 消费者</li><li>ModelService： 模型服务</li></ul>
    */
   ResourceType?: string
 }
@@ -3790,7 +3916,7 @@ export interface CNAPIGwSecretKey {
  */
 export interface ModifyCloudNativeAPIGatewayLLMModelAPIResponse {
   /**
-   * <p>是否成功</p>
+   * <p>是否成功。</p>
    */
   Result?: boolean
   /**
@@ -3889,11 +4015,11 @@ export interface RemoveCloudNativeAPIGatewayConsumerInGroupRequest {
    */
   GatewayId: string
   /**
-   * 消费者组ID
+   * <p>消费者组 ID（以 cg- 开头）。</p>
    */
   ConsumerGroupId: string
   /**
-   * 消费者ID列表
+   * <p>消费者 ID 列表，长度 1-10。</p>
    */
   ConsumerIds: Array<string>
 }
@@ -4047,15 +4173,15 @@ export interface SourceInfo {
  */
 export interface ModifyCloudNativeAPIGatewaySecretKeyStatusRequest {
   /**
-   * 实例 ID
+   * <p>实例 ID</p>
    */
   GatewayId: string
   /**
-   * 密钥名字
+   * <p>密钥状态。</p><p>枚举值：</p><ul><li>Enable：启用</li><li>Disable：禁用</li></ul>
    */
   Status: string
   /**
-   * 密钥id
+   * <p>密钥 ID（以 secret- 开头）。</p>
    */
   SecretKeyId: string
 }
@@ -4191,37 +4317,17 @@ export interface CreateCloudNativeAPIGatewayRouteRateLimitRequest {
 }
 
 /**
- * 多环境网络信息
+ * DeleteGovernanceAliases返回参数结构体
  */
-export interface EnvAddressInfo {
+export interface DeleteGovernanceAliasesResponse {
   /**
-   * 环境名
+   * 创建是否成功。
    */
-  EnvName?: string
+  Result?: boolean
   /**
-   * 是否开启config公网
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EnableConfigInternet?: boolean
-  /**
-   * config公网ip
-   */
-  ConfigInternetServiceIp?: string
-  /**
-   * config内网访问地址
-   */
-  ConfigIntranetAddress?: string
-  /**
-   * 是否开启config内网clb
-   */
-  EnableConfigIntranet?: boolean
-  /**
-   * 客户端公网带宽
-   */
-  InternetBandWidth?: number
-  /**
-   * 客户端公网CLB多可用区信息
-   */
-  CLBMultiRegion?: CLBMultiRegion
+  RequestId?: string
 }
 
 /**
@@ -4239,7 +4345,7 @@ export interface ModifyCloudNativeAPIGatewayRouteResponse {
  */
 export interface DescribeCloudNativeAPIGatewayConsumerResponse {
   /**
-   * 删除结果
+   * <p>消费者详情</p>
    */
   Result?: CNAPIGwConsumer
   /**
@@ -4797,48 +4903,35 @@ export interface CreateCloudNativeAPIGatewaySecretKeyRequest {
    */
   GatewayId: string
   /**
-   * 密钥类型： ApiKey
+   * <p>密钥协议类型。</p><p>枚举值：</p><ul><li>ApiKey</li><li>Basic</li><li>Hmac</li><li>OAuth2</li><li>JWT</li></ul>
    */
   SecretType: string
   /**
-   * 密钥名字
+   * <p>密钥名称，2-60 字符。</p>
    */
   Name: string
   /**
-   * 生成方式：  
-
-密钥类型 Consumer 时选项：  
-
-- KMS
-- System 系统  
-- Custom  自定义  
-
-密钥类型是 LLM 时选项 
-
-- KMS 
-- Custom  自定义 
+   * <p>密钥生成方式。</p><p>枚举值：</p><ul><li>System：系统自动生成</li><li>Custom：用户自定义（需传 SecretValue）</li><li>KMS：使用 KMS 密钥（需传 KmsKeyName 与 KmsKeyVersion）</li></ul>
    */
   GenerateType: string
   /**
-   * 资源类型：
-- Consumer 消费者
-- LLM 模型服务
+   * <p>密钥归属资源类型。</p><p>枚举值：</p><ul><li>Consumer：消费者</li><li>ModelService：模型服务</li></ul>
    */
   ResourceType: string
   /**
-   * KMS 的凭证名字， GenerateType 时 kms 必填
+   * <p>KMS 密钥名称。GenerateType=KMS 时必填。</p>
    */
   KmsKeyName?: string
   /**
-   * KMS 的凭证版本， GenerateType 时 kms 必填
+   * <p>KMS 密钥版本。GenerateType=KMS 时必填。</p>
    */
   KmsKeyVersion?: string
   /**
-   * GenerateType 等于 Custom 是必填
+   * <p>密钥值，长度 8-256。GenerateType=Custom 时必填。</p>
    */
   SecretValue?: string
   /**
-   * 描述
+   * <p>密钥描述。最长 200 字符。</p>
    */
   Description?: string
 }
@@ -5655,6 +5748,18 @@ export interface CloudNativeAPIGatewayLLMModelService {
    * <p>sni</p>
    */
   SNI?: string
+  /**
+   * <p>配额限制</p>
+   */
+  QuotaLimit?: AIGWLLMQuotaLimit
+  /**
+   * <p>标签</p>
+   */
+  Tags?: string
+  /**
+   * <p>绑定的模型服务秘钥</p>
+   */
+  SecretKeyIds?: Array<string>
 }
 
 /**
@@ -5838,21 +5943,19 @@ export interface CreateNativeGatewayServerGroupResponse {
  */
 export interface AddCloudNativeAPIGatewayConsumerGroupAuthRequest {
   /**
-   * 网关实例id
+   * <p>网关实例id</p>
    */
   GatewayId: string
   /**
-   * 资源类型:
-
-- ModelAPI: 模型API
+   * <p>授权资源类型。</p><p>枚举值：</p><ul><li>ModelAPI：模型 API</li><li>MCPServer：MCP Server</li></ul>
    */
   ResourceType: string
   /**
-   * 对应资源的id
+   * <p>对应资源的 ID。</p><ul><li>ResourceType=ModelAPI 时是模型 API ID</li><li>ResourceType=MCPServer 时是 MCP Server ID</li></ul>
    */
   ResourceId: string
   /**
-   * 资源ID
+   * <p>消费者组 ID 列表（每个 ID 以 cg- 开头），长度 1-10。</p>
    */
   ConsumerGroupIds: Array<string>
 }
@@ -6237,6 +6340,16 @@ export interface DescribeCloudNativeAPIGatewaySecretKeyValueRequest {
 }
 
 /**
+ * AI 网关延迟优先路由模型服务
+ */
+export interface AIGWLatencyPriorityRouteRule {
+  /**
+   * <p>模型服务id</p>
+   */
+  ModelServiceId: string
+}
+
+/**
  * ModifyConfigFiles返回参数结构体
  */
 export interface ModifyConfigFilesResponse {
@@ -6255,7 +6368,7 @@ export interface ModifyConfigFilesResponse {
  */
 export interface DescribeCloudNativeAPIGatewaySecretKeyResponse {
   /**
-   * 允许的操作
+   * <p>密钥详情。</p>
    */
   Result?: CNAPIGwSecretKey
   /**
@@ -6327,7 +6440,7 @@ export interface DescribeConfigFileReleaseVersionsRequest {
  */
 export interface DescribeCloudNativeAPIGatewaySecretKeyListResponse {
   /**
-   * 允许的操作
+   * <p>密钥列表</p>
    */
   Result?: CNAPIGwSecretKeyList
   /**
@@ -6363,19 +6476,39 @@ export interface CreateCloudNativeAPIGatewayConsumerGroupRequest {
    */
   GatewayId: string
   /**
-   * 消费者组名称
+   * <p>消费者组名称，最长 60 字符。同一网关下唯一。</p>
    */
   Name: string
   /**
-   * 状态：
-- Enable 启用
-- Disable 禁用
+   * <p>启用状态。</p><p>枚举值：</p><ul><li>Enable：启用</li><li>Disable：禁用</li></ul>
    */
   Status: string
   /**
-   * 消费者组描述
+   * <p>消费者组描述。最长 200 字符。</p>
    */
   Description?: string
+}
+
+/**
+ * AI 网关日志输出配置
+ */
+export interface AIGWLogConfig {
+  /**
+   * <p>是否开启请求 payload 记录日志</p>
+   */
+  EnableRequestLogPayloads?: boolean
+  /**
+   * <p>是否开启响应 payload 记录日志</p>
+   */
+  EnableResponseLogPayloads?: boolean
+  /**
+   * <p>日志记录的请求body的最大字节数</p><p>取值范围：[512, 1048576]</p><p>EnableRequestLogPayloads 为true时必填</p>
+   */
+  RequestLogPayloadMaxSize?: number
+  /**
+   * <p>日志记录的响应body的最大字节数</p><p>取值范围：[512, 1048576]</p><p>EnableResponseLogPayloads 为true时必填</p>
+   */
+  ResponseLogPayloadMaxSize?: number
 }
 
 /**
@@ -6485,17 +6618,37 @@ export interface ModifyCloudNativeAPIGatewayCertificateRequest {
 }
 
 /**
- * DeleteGovernanceAliases返回参数结构体
+ * 多环境网络信息
  */
-export interface DeleteGovernanceAliasesResponse {
+export interface EnvAddressInfo {
   /**
-   * 创建是否成功。
+   * 环境名
    */
-  Result?: boolean
+  EnvName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 是否开启config公网
    */
-  RequestId?: string
+  EnableConfigInternet?: boolean
+  /**
+   * config公网ip
+   */
+  ConfigInternetServiceIp?: string
+  /**
+   * config内网访问地址
+   */
+  ConfigIntranetAddress?: string
+  /**
+   * 是否开启config内网clb
+   */
+  EnableConfigIntranet?: boolean
+  /**
+   * 客户端公网带宽
+   */
+  InternetBandWidth?: number
+  /**
+   * 客户端公网CLB多可用区信息
+   */
+  CLBMultiRegion?: CLBMultiRegion
 }
 
 /**
@@ -6611,11 +6764,11 @@ export interface DeleteAutoScalerResourceStrategyRequest {
  */
 export interface DescribeCloudNativeAPIGatewayConsumerGroupRequest {
   /**
-   * 网关实例id
+   * <p>网关实例id</p>
    */
   GatewayId: string
   /**
-   * 消费者组ID
+   * <p>消费者组ID</p>
    */
   ConsumerGroupId: string
 }
@@ -6657,27 +6810,27 @@ export interface DescribeCloudNativeAPIGatewayLLMModelAPIsRequest {
    */
   GatewayId: string
   /**
-   * 返回数量，默认为 10，最大值为 1000。
+   * <p>每页条数，范围 [1, 1000]，默认 10。</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为 0。
+   * <p>起始位置，从 0 开始。</p>
    */
   Offset?: number
   /**
-   * 过滤条件，多个过滤条件之间是“与”的关系
+   * <p>过滤条件。当前未启用具体字段。</p>
    */
   Filters?: Array<Filter>
   /**
-   * 搜索关键词，模糊匹配 name 和 description
+   * <p>模糊匹配模型 API 名称。</p>
    */
   Keyword?: string
   /**
-   * 通过消费者组Id筛选，UseToBind 为 true 时ConsumerGroupId不为空
+   * <p>消费者组 ID（以 cg- 开头），与 UseToBind 搭配使用。</p>
    */
   ConsumerGroupId?: string
   /**
-   * 筛选可被绑定的数据， 比如模型API里面绑定模型服务筛选时，如果设置true, 返回结果只会有可以被绑定的数据。
+   * <p>是否用于绑定场景。true 时仅返回可被绑定到指定消费者组的模型 API。</p>
    */
   UseToBind?: boolean
 }
@@ -6739,17 +6892,25 @@ export interface CNAPIGwCreateCommonResult {
  */
 export interface CloudNativeAPIGatewayLLMModelServiceRoute {
   /**
-   * 生效的路由算法类型：权重路由，模型名称路由、参数路由等Weighted/ModelName/Query (预留多个，暂时只能填写一个)
+   * <p>生效的路由算法类型：权重路由，模型名称路由、参数路由等Weighted/ModelName/Query (预留多个，暂时只能填写一个)</p>
    */
   SelectedTypes: Array<string>
   /**
-   * 权重路由配置，最多10个
+   * <p>权重路由配置，最多10个</p>
    */
   WeightedConfig?: Array<CloudNativeAPIGatewayLLMModelServiceRouteWeightedStrategy>
   /**
-   * 模型名称路由配置，最多10个
+   * <p>模型名称路由配置，最多10个</p>
    */
   ModelNameConfig?: Array<CloudNativeAPIGatewayLLMModelServiceRouteModelNameStrategy>
+  /**
+   * <p>意图识别</p>
+   */
+  IntentRouteConfig?: AIGWIntentRoute
+  /**
+   * <p>延迟路由</p>
+   */
+  LatencyPriorityConfig?: AIGWLatencyPriorityConfig
 }
 
 /**
@@ -6852,185 +7013,6 @@ export interface DescribeKongCORSResult {
 }
 
 /**
- * CreateEngine请求参数结构体
- */
-export interface CreateEngineRequest {
-  /**
-   * 引擎类型。参考值：
-- zookeeper
-- nacos
-- consul
-- apollo
-- eureka
-- polaris
-   */
-  EngineType: string
-  /**
-   * 引擎的开源版本。每种引擎支持的开源版本不同，请参考产品文档或者控制台购买页
-   */
-  EngineVersion: string
-  /**
-   * 引擎的产品版本。参考值：
-- STANDARD： 标准版
-- PROFESSIONAL: 专业版（Zookeeper）/企业版（PolarisMesh）
-
-引擎各版本及可选择的规格、节点数说明：
-apollo - STANDARD版本
-规格列表：1C2G、2C4G、4C8G、8C16G、16C32G
-节点数：1，2，3，4，5
-
-eureka - STANDARD版本
-规格列表：1C2G、2C4G、4C8G、8C16G、16C32G
-节点数：3，4，5
-
-polarismesh - STANDARD版本
-规格列表：NUM50、NUM100、NUM200、NUM500、NUM1000、NUM5000、NUM10000、NUM50000
-
-兼容原spec-xxxxxx形式的规格ID
-   */
-  EngineProductVersion: string
-  /**
-   * 引擎所在地域。参考值说明：
-中国区 参考值：
-- ap-guangzhou：广州
-- ap-beijing：北京
-- ap-chengdu：成都
-- ap-chongqing：重庆
-- ap-nanjing：南京
-- ap-shanghai：上海
-- ap-hongkong：香港
-- ap-taipei：台北
-亚太区 参考值：
-- ap-jakarta：雅加达
-- ap-singapore：新加坡
-北美区 参考值
-- na-siliconvalley：硅谷
-- na-ashburn: 弗吉尼亚
-金融专区 参考值
-- ap-beijing-fsi：北京金融
-- ap-shanghai-fsi：上海金融
-- ap-shenzhen-fsi：深圳金融
-   */
-  EngineRegion: string
-  /**
-   * 引擎名称。参考值：
-- eurek-test
-   */
-  EngineName: string
-  /**
-   * 付费类型。参考值：
-- 0：后付费
-- 1：预付费（接口暂不支持创建预付费实例）
-   */
-  TradeType: number
-  /**
-   * 引擎的节点规格 ID。参见EngineProductVersion字段说明
-北极星支持的引擎规格ID与节点数对应关系：
-基础版：
-spec-c160bas1 500
-spec-c160bas2 1000
-spec-c160bas3 2000
-spec-c160bas4 5000
-spec-c160bas5 10000
-spec-c160bas6 20000
-spec-c160bas7 50000
-企业版：
-spec-c160pro50 50
-spec-c160pro100 100
-spec-c160pro200 200
-spec-c160pro500 500
-spec-c160pro1k 1000
-spec-c160pro5k 5000
-spec-c160pro10k 10000
-spec-c160pro20k 20000
-spec-c160pro50k 50000
-开发版：
-spec-c160dev1 50
-   */
-  EngineResourceSpec?: string
-  /**
-   * 引擎的节点数量。参见EngineProductVersion字段说明
-   */
-  EngineNodeNum?: number
-  /**
-   * VPC ID。在 VPC 的子网内分配一个 IP 作为引擎的访问地址。参考值：
-- vpc-conz6aix
-   */
-  VpcId?: string
-  /**
-   * 子网 ID。在 VPC 的子网内分配一个 IP 作为引擎的访问地址。参考值：
-- subnet-ahde9me9
-   */
-  SubnetId?: string
-  /**
-   * Apollo 环境配置参数列表。参数说明：
-如果创建Apollo类型，此参数为必填的环境信息列表，最多可选4个环境。环境信息参数说明：
-- Name：环境名。参考值：prod, dev, fat, uat
-- EngineResourceSpec：环境内引擎的节点规格ID。参见EngineProductVersion参数说明
-- EngineNodeNum：环境内引擎的节点数量。参见EngineProductVersion参数说明，其中prod环境支持的节点数为2，3，4，5
-- StorageCapacity：配置存储空间大小，以GB为单位，步长为5.参考值：35
-- VpcId：VPC ID。参考值：vpc-conz6aix
-- SubnetId：子网 ID。参考值：subnet-ahde9me9
-   */
-  ApolloEnvParams?: Array<ApolloEnvParam>
-  /**
-   * 引擎的标签列表。用户自定义的key/value形式，无参考值
-   */
-  EngineTags?: Array<InstanceTagInfo>
-  /**
-   * 引擎的初始账号信息。可设置参数：
-- Name：控制台初始用户名
-- Password：控制台初始密码
-- Token：引擎接口的管理员 Token
-   */
-  EngineAdmin?: EngineAdmin
-  /**
-   * 预付费时长，以月为单位
-   */
-  PrepaidPeriod?: number
-  /**
-   * 自动续费标记，仅预付费使用。参考值：
-- 0：不自动续费
-- 1：自动续费
-   */
-  PrepaidRenewFlag?: number
-  /**
-   * 跨地域部署的引擎地域配置详情
-zk标准版没有跨地域部署，请不要填写
-zk专业版跨地域部署开启了固定Leader所在地域，需要满足以下条件
-- 固定Leader所在地域当前仅支持跨两个地域
-- leader地域的副本数必须是3/2 + 1，5/2+1，7/2+1，也就是 2，3，4
-   */
-  EngineRegionInfos?: Array<EngineRegionInfo>
-  /**
-   * zk标准版请填CLOUD_PREMIUM，zk标准版无法选择磁盘类型和磁盘容量，默认为CLOUD_PREMIUM
-zk专业版可以为：CLOUD_SSD,CLOUD_SSD_PLUS,CLOUD_PREMIUM
-   */
-  StorageType?: string
-  /**
-   * zk标准版请填50，zk标准版无法选择磁盘类型和磁盘容量，磁盘容量默认为50
-   */
-  StorageCapacity?: number
-  /**
-   * zk专业版至多有两个盘，且磁盘的容量在50-3200之间
-如果只有一个磁盘，storageCapacity与storageOption里面的capacity应该一致
-   */
-  StorageOption?: Array<StorageOption>
-  /**
-   * ZK引擎实例，可用区分布约束，STRICT:强约束，PERMISSIVE: 弱约束
-   */
-  AffinityConstraint?: string
-  /**
-   * 指定zone id列表
-   */
-  ZoneIds?: Array<number | bigint>
-  /**
-   * 地域特殊标签，用于区分相同地域，不通的业务属性
-   */
-  EngineRegionTag?: string
-}
-
-/**
  * ModifyCloudNativeAPIGatewayCanaryRule请求参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayCanaryRuleRequest {
@@ -7119,7 +7101,7 @@ export interface DescribeCloudNativeAPIGatewayConfigResponse {
  */
 export interface CreateCloudNativeAPIGatewayConsumerGroupResponse {
   /**
-   * 创建结果
+   * <p>创建结果。包含成功标识与新建资源 ID。</p>
    */
   Result?: CNAPIGwCreateCommonResult
   /**
@@ -7133,7 +7115,7 @@ export interface CreateCloudNativeAPIGatewayConsumerGroupResponse {
  */
 export interface DescribeCloudNativeAPIGatewayLLMModelAPIResponse {
   /**
-   * 模型 API 信息。
+   * <p>模型 API 信息。</p>
    */
   Result?: CloudNativeAPIGatewayLLMModelAPI
   /**
@@ -7520,6 +7502,20 @@ export interface DescribeCloudNativeAPIGatewayLLMModelAPIsResponse {
 }
 
 /**
+ * 云原生网关模型LLM配额限制信息
+ */
+export interface AIGWLLMQuotaLimit {
+  /**
+   * <p>该模型服务每分钟请求数上限，0 表示该维度不限</p>
+   */
+  RPMLimit?: number
+  /**
+   * <p>该模型服务每分钟 Token 数上限，0 表示该维度不限</p>
+   */
+  TPMLimit?: number
+}
+
+/**
  * DeleteGovernanceAliases请求参数结构体
  */
 export interface DeleteGovernanceAliasesRequest {
@@ -7548,7 +7544,7 @@ export interface CertificateInfo {
  */
 export interface DescribeCloudNativeAPIGatewayConsumerListResponse {
   /**
-   * 消费者列表
+   * <p>消费者列表</p>
    */
   Result?: CNAPIGwConsumerList
   /**
@@ -7634,6 +7630,20 @@ export interface OpenWafProtectionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 云原生网关模型API 配额降级触发条件信息
+ */
+export interface AIGWLLMQuotaFallbackTrigger {
+  /**
+   * <p>配额感知阈值百分比（RPM 与 TPM 共用）</p><p>取值范围：[0, 99]</p>
+   */
+  ThresholdPercent?: number
+  /**
+   * <p>检查维度策略</p><p>枚举值：</p><ul><li>AnyInsufficient：  RPM 或 TPM 任一不足即触发</li><li>AllInsufficient： RPM 和 TPM 同时不足才触发</li></ul>
+   */
+  CheckDimension?: string
 }
 
 /**
@@ -7996,11 +8006,11 @@ export interface DescribeCloudNativeAPIGatewayNodesResult {
  */
 export interface DescribeCloudNativeAPIGatewayLLMModelAPIRequest {
   /**
-   * 网关 id。
+   * <p>网关 id。</p>
    */
   GatewayId: string
   /**
-   * 模型 API ID，全局唯一标识。
+   * <p>模型 API ID，全局唯一标识。</p>
    */
   ModelAPIId: string
 }
@@ -8032,21 +8042,19 @@ export interface ModifyCloudNativeAPIGatewayConsumerGroupRequest {
    */
   GatewayId: string
   /**
-   * 消费者组ID
+   * <p>消费者组 ID（以 cg- 开头）。</p>
    */
   ConsumerGroupId: string
   /**
-   * 新的消费者组名称
+   * <p>消费者组名称，最长 60 字符。</p>
    */
   Name: string
   /**
-   * 状态：
-- Enable 启用
-- Disable 禁用
+   * <p>启用状态。</p><p>枚举值：</p><ul><li>Enable：启用</li><li>Disable：禁用</li></ul>
    */
   Status: string
   /**
-   * 新的消费者组描述
+   * <p>消费者组描述。最长 200 字符。</p>
    */
   Description?: string
 }
@@ -8056,23 +8064,39 @@ export interface ModifyCloudNativeAPIGatewayConsumerGroupRequest {
  */
 export interface RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest {
   /**
-   * 网关实例id
+   * <p>网关实例id</p>
    */
   GatewayId: string
   /**
-   * 资源类型:
-
-- ModelAPI: 模型API
+   * <p>授权资源类型。</p><p>枚举值：</p><ul><li>ModelAPI：模型 API</li><li>MCPServer：MCP Server</li></ul>
    */
   ResourceType: string
   /**
-   * 资源id
+   * <p>对应资源的 ID。</p><ul><li>ResourceType=ModelAPI 时是模型 API ID</li><li>ResourceType=MCPServer 时是 MCP Server ID</li></ul>
    */
   ResourceId: string
   /**
-   * 资源ID
+   * <p>消费者组 ID 列表（每个 ID 以 cg- 开头），长度 1-10。</p>
    */
   ConsumerGroupIds: Array<string>
+}
+
+/**
+ * 延迟优先路由配置
+ */
+export interface AIGWLatencyPriorityConfig {
+  /**
+   * <p>路由规则列表</p>
+   */
+  Rules: Array<AIGWLatencyPriorityRouteRule>
+  /**
+   * <p>延迟指标</p><p>枚举值：</p><ul><li>LLMLatency： LLM 延迟</li><li>NetworkLatency： 网络延迟</li></ul>
+   */
+  LatencyMetric: string
+  /**
+   * <p>路由策略</p><p>枚举值：</p><ul><li>FastMode： 快速模式</li><li>BalanceMode： 均衡模式</li></ul>
+   */
+  RouteMode?: string
 }
 
 /**
@@ -8754,28 +8778,28 @@ export interface DeleteCloudNativeAPIGatewayIPRestrictionRequest {
  */
 export interface CNAPIGwConsumer {
   /**
-   * 分组id
+   * <p>消费者 ID。</p>
    */
   ConsumerId: string
   /**
-   * 名字
+   * <p>名字</p>
    */
   Name: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime: string
   /**
-   * 更新时间 yyyy-MM-dd hh:mm:ss
+   * <p>更新时间 yyyy-MM-dd hh:mm:ss</p>
    */
   ModifyTime: string
   /**
-   * 描述
+   * <p>描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 消费者分组
+   * <p>消费者分组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConsumerGroups?: Array<CNAPIGwConsumerGroup>
@@ -8902,11 +8926,11 @@ export interface DeleteCloudNativeAPIGatewayConsumerGroupRequest {
  */
 export interface DescribeCloudNativeAPIGatewayLLMModelServiceRequest {
   /**
-   * 网关 id。
+   * <p>网关 id。</p>
    */
   GatewayId: string
   /**
-   * 模型服务 ID，全局唯一标识。
+   * <p>模型服务 ID，全局唯一标识。</p>
    */
   ModelServiceId: string
 }
@@ -9196,6 +9220,14 @@ export interface CreateCloudNativeAPIGatewayLLMModelServiceRequest {
    * <p>sni</p>
    */
   SNI?: string
+  /**
+   * <p>模型服务级别的配额上限（RPM/TPM）。需要网关版本 ≥ 3.9.4。</p>
+   */
+  QuotaLimit?: AIGWLLMQuotaLimit
+  /**
+   * <p>标签</p>
+   */
+  Tags?: Array<string>
 }
 
 /**
@@ -9434,15 +9466,15 @@ export interface ModifyCloudNativeAPIGatewayConsumerRequest {
    */
   GatewayId: string
   /**
-   * 消费者ID
+   * <p>消费者 ID。</p>
    */
   ConsumerId: string
   /**
-   * 新的消费者名称
+   * <p>消费者名称，最长 60 字符。</p>
    */
   Name: string
   /**
-   * 新的消费者描述
+   * <p>消费者描述。最长 200 字符。</p>
    */
   Description?: string
 }
@@ -9467,15 +9499,15 @@ export interface DeleteNativeGatewayServerGroupRequest {
  */
 export interface DescribeCloudNativeAPIGatewayConsumerGroupListRequest {
   /**
-   * 网关实例id
+   * <p>网关实例id</p>
    */
   GatewayId: string
   /**
-   * 每页条数
+   * <p>每页条数，范围 [1, 100]，默认 10。</p>
    */
   Limit: number
   /**
-   * 起始位置
+   * <p>起始位置，从 0 开始。</p>
    */
   Offset: number
 }
@@ -9778,17 +9810,21 @@ export interface DescribeCloudNativeAPIGatewaysRequest {
  */
 export interface DescribeCloudNativeAPIGatewaySecretKeyListRequest {
   /**
-   * 实例 ID
+   * <p>实例 ID</p>
    */
   GatewayId: string
   /**
-   * 每页数量，最大20个
+   * <p>每页条数，范围 [1, 100]，默认 10。</p>
    */
   Limit: number
   /**
-   * 起始值
+   * <p>起始位置，从 0 开始。</p>
    */
   Offset: number
+  /**
+   * <p>密钥归属资源类型。UseToBind=true 时必填。</p><p>枚举值：</p><ul><li>Consumer：消费者</li><li>ModelService：模型服务</li></ul>
+   */
+  ResourceType?: string
 }
 
 /**
@@ -9815,6 +9851,90 @@ export interface DescribeCloudNativeAPIGatewayConfigResult {
    * 分组ID
    */
   GroupId?: string
+}
+
+/**
+ * 泳道规则
+ */
+export interface GovernanceLaneRule {
+  /**
+   * 泳道规则ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ID?: string
+  /**
+   * 泳道名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 泳道所属泳道组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LaneGroup?: string
+  /**
+   * 泳道规则启用状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enable?: boolean
+  /**
+   * 流量标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrafficLabels?: Array<Argument>
+  /**
+   * 多个流量标签匹配方式
+AND：与
+OR：或
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TrafficMatchMode?: string
+  /**
+   * 泳道匹配方式
+STRICT：严格匹配
+PERMISSIVE：宽松匹配
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LaneMatchMode?: string
+  /**
+   * 泳道灰度规则
+   */
+  TrafficGray?: TrafficGray
+  /**
+   * 泳道规则描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 泳道标签内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LaneLabelValue?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 启用时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableTime?: string
+  /**
+   * 修改时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime?: string
+  /**
+   * 泳道规则优先级
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Priority?: number
+  /**
+   * 规则摘要
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Revision?: string
 }
 
 /**
@@ -10249,6 +10369,10 @@ export interface AIGWCrossServiceFallbackConfig {
    * <p>fallback 服务链</p>
    */
   FallbackServiceChain: Array<AIGWFallbackServiceItem>
+  /**
+   * <p>额度降级触发配置</p>
+   */
+  QuotaFallbackTrigger?: AIGWLLMQuotaFallbackTrigger
 }
 
 /**
@@ -10278,11 +10402,11 @@ export interface AddCloudNativeAPIGatewayConsumerInGroupRequest {
    */
   GatewayId: string
   /**
-   * 消费者组ID
+   * <p>消费者组 ID（以 cg- 开头）。</p>
    */
   ConsumerGroupId: string
   /**
-   * 消费者ID
+   * <p>消费者 ID 列表，长度 1-10。</p>
    */
   ConsumerIds: Array<string>
 }
@@ -10306,7 +10430,7 @@ export interface DescribeConfigFileReleaseVersionsResponse {
  */
 export interface CreateCloudNativeAPIGatewayConsumerResponse {
   /**
-   * 创建结果
+   * <p>创建结果。包含成功标识与新建资源 ID。</p>
    */
   Result?: CNAPIGwCreateCommonResult
   /**
@@ -10320,15 +10444,15 @@ export interface CreateCloudNativeAPIGatewayConsumerResponse {
  */
 export interface CloudNativeAPIGatewayLLMModelServiceRouteModelNameStrategy {
   /**
-   * 模型服务id
+   * <p>模型服务id</p>
    */
   ModelServiceId: string
   /**
-   * 匹配模型服务
+   * <p>匹配模型服务</p>
    */
   MatchModelName: string
   /**
-   * 重写模型
+   * <p>重写模型</p>
    */
   RewriteModelName?: string
 }
@@ -10338,7 +10462,7 @@ export interface CloudNativeAPIGatewayLLMModelServiceRouteModelNameStrategy {
  */
 export interface DeleteCloudNativeAPIGatewayLLMModelAPIResponse {
   /**
-   * 是否成功
+   * <p>是否成功。</p>
    */
   Result?: boolean
   /**
@@ -10522,7 +10646,7 @@ export interface DescribeZookeeperServerInterfacesRequest {
  */
 export interface DescribeCloudNativeAPIGatewayLLMModelServiceResponse {
   /**
-   * 模型服务。
+   * <p>模型服务。</p>
    */
   Result?: CloudNativeAPIGatewayLLMModelService
   /**
@@ -10536,11 +10660,11 @@ export interface DescribeCloudNativeAPIGatewayLLMModelServiceResponse {
  */
 export interface DescribeCloudNativeAPIGatewaySecretKeyRequest {
   /**
-   * 实例 ID
+   * <p>实例 ID</p>
    */
   GatewayId: string
   /**
-   * 密钥id
+   * <p>密钥id</p>
    */
   SecretKeyId: string
 }
@@ -10635,6 +10759,28 @@ export interface CreateAutoScalerResourceStrategyRequest {
    * 定时伸缩配置
    */
   CronConfig?: CloudNativeAPIGatewayStrategyCronScalerConfig
+}
+
+/**
+ * AI 网关自定义脱敏规则（A 层 / B 层共用结构体，MaskFormat 含义随所属层不同）
+ */
+export interface AIGWCustomDesensitizeRule {
+  /**
+   * <p>自定义脱敏规则名称</p>
+   */
+  Name: string
+  /**
+   * <p>自定义脱敏规则匹配正则</p>
+   */
+  Pattern: string
+  /**
+   * <p>自定义脱敏规则掩码</p>
+   */
+  MaskFormat: string
+  /**
+   * <p>自定义脱敏规则开关</p>
+   */
+  Enabled: boolean
 }
 
 /**
@@ -10786,11 +10932,11 @@ export interface ZookeeperServerInterface {
  */
 export interface DescribeCloudNativeAPIGatewayConsumerRequest {
   /**
-   * 网关实例id
+   * <p>网关实例id</p>
    */
   GatewayId: string
   /**
-   * 消费者ID
+   * <p>消费者ID</p>
    */
   ConsumerId: string
 }
@@ -10921,87 +11067,182 @@ export interface NativeGatewayServerGroups {
 }
 
 /**
- * 泳道规则
+ * CreateEngine请求参数结构体
  */
-export interface GovernanceLaneRule {
+export interface CreateEngineRequest {
   /**
-   * 泳道规则ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 引擎类型。参考值：
+- zookeeper
+- nacos
+- consul
+- apollo
+- eureka
+- polaris
    */
-  ID?: string
+  EngineType: string
   /**
-   * 泳道名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 引擎的开源版本。每种引擎支持的开源版本不同，请参考产品文档或者控制台购买页
    */
-  Name?: string
+  EngineVersion: string
   /**
-   * 泳道所属泳道组
-注意：此字段可能返回 null，表示取不到有效值。
+   * 引擎的产品版本。参考值：
+- STANDARD： 标准版
+- PROFESSIONAL: 专业版（Zookeeper）/企业版（PolarisMesh）
+
+引擎各版本及可选择的规格、节点数说明：
+apollo - STANDARD版本
+规格列表：1C2G、2C4G、4C8G、8C16G、16C32G
+节点数：1，2，3，4，5
+
+eureka - STANDARD版本
+规格列表：1C2G、2C4G、4C8G、8C16G、16C32G
+节点数：3，4，5
+
+polarismesh - STANDARD版本
+规格列表：NUM50、NUM100、NUM200、NUM500、NUM1000、NUM5000、NUM10000、NUM50000
+
+兼容原spec-xxxxxx形式的规格ID
    */
-  LaneGroup?: string
+  EngineProductVersion: string
   /**
-   * 泳道规则启用状态
-注意：此字段可能返回 null，表示取不到有效值。
+   * 引擎所在地域。参考值说明：
+中国区 参考值：
+- ap-guangzhou：广州
+- ap-beijing：北京
+- ap-chengdu：成都
+- ap-chongqing：重庆
+- ap-nanjing：南京
+- ap-shanghai：上海
+- ap-hongkong：香港
+- ap-taipei：台北
+亚太区 参考值：
+- ap-jakarta：雅加达
+- ap-singapore：新加坡
+北美区 参考值
+- na-siliconvalley：硅谷
+- na-ashburn: 弗吉尼亚
+金融专区 参考值
+- ap-beijing-fsi：北京金融
+- ap-shanghai-fsi：上海金融
+- ap-shenzhen-fsi：深圳金融
    */
-  Enable?: boolean
+  EngineRegion: string
   /**
-   * 流量标签
-注意：此字段可能返回 null，表示取不到有效值。
+   * 引擎名称。参考值：
+- eurek-test
    */
-  TrafficLabels?: Array<Argument>
+  EngineName: string
   /**
-   * 多个流量标签匹配方式
-AND：与
-OR：或
-注意：此字段可能返回 null，表示取不到有效值。
+   * 付费类型。参考值：
+- 0：后付费
+- 1：预付费（接口暂不支持创建预付费实例）
    */
-  TrafficMatchMode?: string
+  TradeType: number
   /**
-   * 泳道匹配方式
-STRICT：严格匹配
-PERMISSIVE：宽松匹配
-注意：此字段可能返回 null，表示取不到有效值。
+   * 引擎的节点规格 ID。参见EngineProductVersion字段说明
+北极星支持的引擎规格ID与节点数对应关系：
+基础版：
+spec-c160bas1 500
+spec-c160bas2 1000
+spec-c160bas3 2000
+spec-c160bas4 5000
+spec-c160bas5 10000
+spec-c160bas6 20000
+spec-c160bas7 50000
+企业版：
+spec-c160pro50 50
+spec-c160pro100 100
+spec-c160pro200 200
+spec-c160pro500 500
+spec-c160pro1k 1000
+spec-c160pro5k 5000
+spec-c160pro10k 10000
+spec-c160pro20k 20000
+spec-c160pro50k 50000
+开发版：
+spec-c160dev1 50
    */
-  LaneMatchMode?: string
+  EngineResourceSpec?: string
   /**
-   * 泳道灰度规则
+   * 引擎的节点数量。参见EngineProductVersion字段说明
    */
-  TrafficGray?: TrafficGray
+  EngineNodeNum?: number
   /**
-   * 泳道规则描述
-注意：此字段可能返回 null，表示取不到有效值。
+   * VPC ID。在 VPC 的子网内分配一个 IP 作为引擎的访问地址。参考值：
+- vpc-conz6aix
    */
-  Description?: string
+  VpcId?: string
   /**
-   * 泳道标签内容
-注意：此字段可能返回 null，表示取不到有效值。
+   * 子网 ID。在 VPC 的子网内分配一个 IP 作为引擎的访问地址。参考值：
+- subnet-ahde9me9
    */
-  LaneLabelValue?: string
+  SubnetId?: string
   /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * Apollo 环境配置参数列表。参数说明：
+如果创建Apollo类型，此参数为必填的环境信息列表，最多可选4个环境。环境信息参数说明：
+- Name：环境名。参考值：prod, dev, fat, uat
+- EngineResourceSpec：环境内引擎的节点规格ID。参见EngineProductVersion参数说明
+- EngineNodeNum：环境内引擎的节点数量。参见EngineProductVersion参数说明，其中prod环境支持的节点数为2，3，4，5
+- StorageCapacity：配置存储空间大小，以GB为单位，步长为5.参考值：35
+- VpcId：VPC ID。参考值：vpc-conz6aix
+- SubnetId：子网 ID。参考值：subnet-ahde9me9
    */
-  CreateTime?: string
+  ApolloEnvParams?: Array<ApolloEnvParam>
   /**
-   * 启用时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 引擎的标签列表。用户自定义的key/value形式，无参考值
    */
-  EnableTime?: string
+  EngineTags?: Array<InstanceTagInfo>
   /**
-   * 修改时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 引擎的初始账号信息。可设置参数：
+- Name：控制台初始用户名
+- Password：控制台初始密码
+- Token：引擎接口的管理员 Token
    */
-  ModifyTime?: string
+  EngineAdmin?: EngineAdmin
   /**
-   * 泳道规则优先级
-注意：此字段可能返回 null，表示取不到有效值。
+   * 预付费时长，以月为单位
    */
-  Priority?: number
+  PrepaidPeriod?: number
   /**
-   * 规则摘要
-注意：此字段可能返回 null，表示取不到有效值。
+   * 自动续费标记，仅预付费使用。参考值：
+- 0：不自动续费
+- 1：自动续费
    */
-  Revision?: string
+  PrepaidRenewFlag?: number
+  /**
+   * 跨地域部署的引擎地域配置详情
+zk标准版没有跨地域部署，请不要填写
+zk专业版跨地域部署开启了固定Leader所在地域，需要满足以下条件
+- 固定Leader所在地域当前仅支持跨两个地域
+- leader地域的副本数必须是3/2 + 1，5/2+1，7/2+1，也就是 2，3，4
+   */
+  EngineRegionInfos?: Array<EngineRegionInfo>
+  /**
+   * zk标准版请填CLOUD_PREMIUM，zk标准版无法选择磁盘类型和磁盘容量，默认为CLOUD_PREMIUM
+zk专业版可以为：CLOUD_SSD,CLOUD_SSD_PLUS,CLOUD_PREMIUM
+   */
+  StorageType?: string
+  /**
+   * zk标准版请填50，zk标准版无法选择磁盘类型和磁盘容量，磁盘容量默认为50
+   */
+  StorageCapacity?: number
+  /**
+   * zk专业版至多有两个盘，且磁盘的容量在50-3200之间
+如果只有一个磁盘，storageCapacity与storageOption里面的capacity应该一致
+   */
+  StorageOption?: Array<StorageOption>
+  /**
+   * ZK引擎实例，可用区分布约束，STRICT:强约束，PERMISSIVE: 弱约束
+   */
+  AffinityConstraint?: string
+  /**
+   * 指定zone id列表
+   */
+  ZoneIds?: Array<number | bigint>
+  /**
+   * 地域特殊标签，用于区分相同地域，不通的业务属性
+   */
+  EngineRegionTag?: string
 }
 
 /**
@@ -11229,37 +11470,45 @@ export interface ModifyCloudNativeAPIGatewayLLMModelAPIRequest {
    */
   ModelAPIId: string
   /**
-   * <p>修改模型 API 名称</p>
+   * <p>模型 API 名称，最长 60 字符。</p>
    */
   Name?: string
   /**
-   * <p>为API设置统一的前缀，格式：以/开头，支持字母、数字、短横线。</p>
+   * <p>统一前缀路径（可选）。例如 /v1/openai。</p>
    */
   BasePath?: string
   /**
-   * <p>模型 API 的相关描述。</p>
+   * <p>模型 API 描述。最长 200 字符。</p>
    */
   Description?: string
   /**
-   * <p>关联的模型服务列表（支持填多个模型服务）</p>
+   * <p>关联的模型服务 ID 列表，长度 1-10。</p>
    */
   ListModelServiceId?: Array<string>
   /**
-   * <p>模型服务路由策略（是指如何路由到模型服务）</p>
+   * <p>多模型服务路由策略。ListModelServiceId 多于 1 项时必填。</p>
    */
   ModelServiceRoute?: CloudNativeAPIGatewayLLMModelServiceRoute
   /**
-   * <p>headers 路由匹配</p>
+   * <p>Header 路由匹配规则。当前仅支持 Operator=exact。</p>
    */
   MatchHeaders?: Array<AIGWKVMatch>
   /**
-   * <p>跨服务 fallback</p>
+   * <p>是否启用跨服务 Fallback。</p>
    */
   EnableCrossServiceFallback?: boolean
   /**
-   * <p>跨服务 fallback 配置</p>
+   * <p>跨服务 Fallback 配置。EnableCrossServiceFallback=true 时必填。</p>
    */
   CrossServiceFallbackConfig?: AIGWCrossServiceFallbackConfig
+  /**
+   * <p>标签过滤策略。需要网关版本 ≥ 3.9.4。</p>
+   */
+  TagFilter?: AIGWTagFilter
+  /**
+   * <p>日志输出配置。需要网关版本 ≥ 3.9.4。</p>
+   */
+  LogConfig?: AIGWLogConfig
 }
 
 /**
@@ -11303,7 +11552,7 @@ export interface DescribeWafProtectionResult {
  */
 export interface CreateCloudNativeAPIGatewaySecretKeyResponse {
   /**
-   * 允许的操作
+   * <p>创建结果。包含成功标识与新建资源 ID。</p>
    */
   Result?: CNAPIGwCreateCommonResult
   /**

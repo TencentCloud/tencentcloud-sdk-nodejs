@@ -688,7 +688,7 @@ export interface DescribeApmPrometheusRuleRequest {
  */
 export interface CreateApmPrometheusRuleResponse {
   /**
-   * 指标匹配规则的ID
+   * <p>指标匹配规则的ID</p>
    */
   RuleId?: number
   /**
@@ -712,34 +712,38 @@ export interface TerminateApmInstanceResponse {
  */
 export interface ApmPrometheusRules {
   /**
-   * 指标匹配规则ID
+   * <p>指标匹配规则ID</p>
    */
   Id?: number
   /**
-   * 指标匹配规则名
+   * <p>指标匹配规则名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 规则生效的应用。生效于全部应用就传空字符串
+   * <p>规则生效的应用。生效于全部应用就传空字符串</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceName?: string
   /**
-   * 指标匹配规则状态：1(启用)、2（不启用）
+   * <p>指标匹配规则状态：1(启用)、2（不启用）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
-   * 指标匹配规则
+   * <p>指标匹配规则</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MetricNameRule?: string
   /**
-   * 匹配类型：0精准匹配，1前缀匹配，2后缀匹配
+   * <p>匹配类型：0精准匹配，1前缀匹配，2后缀匹配</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MetricMatchType?: number
+  /**
+   * <p>是否追加资源属性</p>
+   */
+  AppendResourceAttributes?: boolean
 }
 
 /**
@@ -1499,33 +1503,37 @@ Value 填写排序方式：
  */
 export interface ModifyApmPrometheusRuleRequest {
   /**
-   * 规则ID
+   * <p>规则ID</p>
    */
   Id: number
   /**
-   * 业务系统ID
+   * <p>业务系统ID</p>
    */
   InstanceId: string
   /**
-   * 所要修改的规则名
+   * <p>所要修改的规则名</p>
    */
   Name?: string
   /**
-   * 规则状态：1(启用)、2（不启用）、3（删除）
+   * <p>规则状态：1(启用)、2（不启用）、3（删除）</p>
    */
   Status?: number
   /**
-   * 规则生效的应用。生效于全部应用就传空（这个如果不修改也要传旧的规则）
+   * <p>规则生效的应用。生效于全部应用就传空（这个如果不修改也要传旧的规则）</p>
    */
   ServiceName?: string
   /**
-   * 匹配类型：0精准匹配，1前缀匹配，2后缀匹配（这个如果不修改也要传旧的规则）
+   * <p>匹配类型：0精准匹配，1前缀匹配，2后缀匹配（这个如果不修改也要传旧的规则）</p>
    */
   MetricMatchType?: number
   /**
-   * 客户定义的命中指标名规则。
+   * <p>客户定义的命中指标名规则。</p>
    */
   MetricNameRule?: string
+  /**
+   * <p>是否追加资源属性</p>
+   */
+  AppendResourceAttributes?: boolean
 }
 
 /**
@@ -2734,25 +2742,29 @@ export interface DescribeApmServiceMetricRequest {
  */
 export interface CreateApmPrometheusRuleRequest {
   /**
-   * 指标匹配规则名
+   * <p>指标匹配规则名</p>
    */
   Name: string
   /**
-   * 规则生效的应用。作用全部应用就传空字符串
+   * <p>规则生效的应用。作用全部应用就传空字符串</p>
    */
   ServiceName: string
   /**
-   * 指标匹配类型：0精准匹配，1前缀匹配，2后缀匹配
+   * <p>指标匹配类型：0精准匹配，1前缀匹配，2后缀匹配</p>
    */
   MetricMatchType: number
   /**
-   * 客户定义的命中指标名规则。
+   * <p>客户定义的命中指标名规则。</p>
    */
   MetricNameRule: string
   /**
-   * 业务系统ID
+   * <p>业务系统ID</p>
    */
   InstanceId: string
+  /**
+   * <p>是否追加资源属性</p>
+   */
+  AppendResourceAttributes?: boolean
 }
 
 /**

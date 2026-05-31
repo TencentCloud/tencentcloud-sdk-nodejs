@@ -12364,33 +12364,37 @@ export interface UpdateAddonRequest {
  */
 export interface ModifyClusterVirtualNodePoolRequest {
   /**
-   * 集群ID，通过DescribeClusters接口获取
+   * <p>集群ID，通过DescribeClusters接口获取</p>
    */
   ClusterId: string
   /**
-   * 节点池ID，通过DescribeNodePools接口获取
+   * <p>节点池ID，通过DescribeNodePools接口获取</p>
    */
   NodePoolId: string
   /**
-   * 节点池名称，必须修改至少一个参数
+   * <p>节点池名称，必须修改至少一个参数</p>
    */
   Name?: string
   /**
-   * 安全组ID列表，必须修改至少一个参数
+   * <p>安全组ID列表，必须修改至少一个参数</p>
    */
   SecurityGroupIds?: Array<string>
   /**
-   * 虚拟节点label，必须修改至少一个参数
+   * <p>虚拟节点label，必须修改至少一个参数</p>
    */
   Labels?: Array<Label>
   /**
-   * 虚拟节点taint，必须修改至少一个参数
+   * <p>虚拟节点taint，必须修改至少一个参数</p>
    */
   Taints?: Array<Taint>
   /**
-   * 删除保护开关，必须修改至少一个参数
+   * <p>删除保护开关，必须修改至少一个参数</p>
    */
   DeletionProtection?: boolean
+  /**
+   * <p>子网分配策略</p>
+   */
+  SubnetAllocationPolicy?: SubnetAllocationPolicy
 }
 
 /**

@@ -1688,6 +1688,16 @@ it("mps.v20190612.DescribeTextToSpeechAsyncTask", async function () {
     }
 })
 
+it("mps.v20190612.UpdateVoice", async function () {
+    try {
+       const data = await client.UpdateVoice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DescribeStreamLinkFlow", async function () {
     try {
        const data = await client.DescribeStreamLinkFlow({})

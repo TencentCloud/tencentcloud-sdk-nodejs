@@ -4418,6 +4418,24 @@ export interface DeleteAIRecognitionTemplateRequest {
 }
 
 /**
+ * UpdateVoice请求参数结构体
+ */
+export interface UpdateVoiceRequest {
+  /**
+   * <p>音色Id</p>
+   */
+  VoiceId: string
+  /**
+   * <p>更新音色字段</p>
+   */
+  VoiceFields: VoiceUpdateFields
+  /**
+   * <p>扩展参数，json字符串</p>
+   */
+  ExtParam?: string
+}
+
+/**
  * 查询输入的SRT配置信息。
  */
 export interface DescribeInputSRTSettings {
@@ -17481,6 +17499,44 @@ export interface TEHDConfigForUpdate {
 }
 
 /**
+ * 音色更新字段
+ */
+export interface VoiceUpdateFields {
+  /**
+   * <p>音色名</p>
+   */
+  Name?: string
+  /**
+   * <p>音色描述</p>
+   */
+  Description?: string
+  /**
+   * <p>性别</p><p>枚举值：</p><ul><li>male： 男</li><li>female： 女</li><li>unknown： 未知</li></ul>
+   */
+  Gender?: string
+  /**
+   * <p>年龄</p><p>枚举值：</p><ul><li>child： 儿童</li><li>teenager： 少年</li><li>youth： 青年</li><li>middle_aged： 中年</li><li>senior： 老年</li><li>unknown： 未知</li></ul>
+   */
+  Age?: string
+  /**
+   * <p>语言</p>
+   */
+  Languages?: Array<string>
+  /**
+   * <p>标签</p>
+   */
+  Labels?: Array<string>
+  /**
+   * <p>场景</p>
+   */
+  Scenes?: Array<string>
+  /**
+   * <p>试听音频</p>
+   */
+  AudioUrl?: string
+}
+
+/**
  * DescribeStreamPackageSource返回参数结构体
  */
 export interface DescribeStreamPackageSourceResponse {
@@ -18312,6 +18368,28 @@ SVG 水印不支持截图打水印。
  * EnableWorkflow返回参数结构体
  */
 export interface EnableWorkflowResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateVoice返回参数结构体
+ */
+export interface UpdateVoiceResponse {
+  /**
+   * <p>错误码，正确时返回0</p>
+   */
+  ErrorCode?: number
+  /**
+   * <p>错误信息，正确时返回success</p>
+   */
+  Msg?: string
+  /**
+   * <p>更新后的音色信息</p>
+   */
+  Voice?: VoiceInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

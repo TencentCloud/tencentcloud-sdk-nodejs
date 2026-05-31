@@ -24,6 +24,7 @@ import {
   DescribeCloudNativeAPIGatewayNodesRequest,
   GovernanceAlias,
   DescribeCloudNativeAPIGatewayUpstreamRequest,
+  AIGWIntentRoute,
   Metadata,
   RemoveCloudNativeAPIGatewayConsumerGroupAuthResponse,
   DescribeUpstreamHealthCheckConfigRequest,
@@ -63,8 +64,10 @@ import {
   DescribeCloudNativeAPIGatewayResult,
   PolarisCLSTopicInfo,
   DeleteCloudNativeAPIGatewayRouteResponse,
+  AIGWLogDesensitizeConfig,
   DeleteCloudNativeAPIGatewayLLMModelServiceResponse,
   DeleteCloudNativeAPIGatewayServiceRateLimitRequest,
+  AIGWIntentRouteRule,
   CloudAPIGatewayCanaryRuleList,
   ModifyUpstreamNodeStatusRequest,
   CloudNativeAPIGatewayRateLimitDetail,
@@ -96,7 +99,7 @@ import {
   ModifyNetworkAccessStrategyResponse,
   ModifyAutoScalerResourceStrategyRequest,
   UnbindAutoScalerResourceStrategyFromGroupsRequest,
-  ConfigFilePersistent,
+  InternetConfig,
   DeleteCloudNativeAPIGatewayPublicNetworkRequest,
   ReleaseVersion,
   DeleteEngineResponse,
@@ -113,7 +116,7 @@ import {
   DescribeGovernanceInstancesRequest,
   DescribeGovernanceServiceContractsRequest,
   GovernanceInstanceUpdate,
-  InternetConfig,
+  ConfigFilePersistent,
   KongUpstreamList,
   DescribeConfigFilesRequest,
   DeleteCloudNativeAPIGatewayRouteRequest,
@@ -128,6 +131,7 @@ import {
   GovernanceInterfaceDescription,
   CreateCloudNativeAPIGatewayServiceRateLimitRequest,
   ModifyNativeGatewayServerGroupRequest,
+  AIGWForwardDesensitizeConfig,
   ModifyConsoleNetworkResponse,
   DescribeWafDomainsResponse,
   DescribeSREInstanceAccessAddressRequest,
@@ -160,6 +164,7 @@ import {
   ListCloudNativeAPIGatewayStrategyResult,
   CloudNativeAPIGatewayLLMModelServiceRouteWeightedStrategy,
   AddCloudNativeAPIGatewayConsumerInGroupResponse,
+  AIGWTagFilter,
   GovernanceServiceInput,
   CloudNativeAPIGatewayLLMModelParamCheckInfo,
   ConfigFile,
@@ -189,7 +194,7 @@ import {
   ModifyGovernanceAliasRequest,
   ModifyNetworkAccessStrategyRequest,
   CreateCloudNativeAPIGatewayRouteRateLimitRequest,
-  EnvAddressInfo,
+  DeleteGovernanceAliasesResponse,
   ModifyCloudNativeAPIGatewayRouteResponse,
   DescribeCloudNativeAPIGatewayConsumerResponse,
   KongCertificatesPreview,
@@ -269,6 +274,7 @@ import {
   DescribeGovernanceServiceContractVersionsResponse,
   RoutingDestinationRuleLabel,
   DescribeCloudNativeAPIGatewaySecretKeyValueRequest,
+  AIGWLatencyPriorityRouteRule,
   ModifyConfigFilesResponse,
   DescribeCloudNativeAPIGatewaySecretKeyResponse,
   DescribeAllConfigFileTemplatesResponse,
@@ -277,11 +283,12 @@ import {
   DescribeCloudNativeAPIGatewaySecretKeyListResponse,
   GovernanceServiceContractVersion,
   CreateCloudNativeAPIGatewayConsumerGroupRequest,
+  AIGWLogConfig,
   ModifyCloudNativeAPIGatewayRouteRateLimitRequest,
   KongActiveHealthCheck,
   ExternalRedis,
   ModifyCloudNativeAPIGatewayCertificateRequest,
-  DeleteGovernanceAliasesResponse,
+  EnvAddressInfo,
   GovernanceService,
   DeleteAutoScalerResourceStrategyRequest,
   DescribeCloudNativeAPIGatewayConsumerGroupRequest,
@@ -296,7 +303,6 @@ import {
   CNAPIGwConsumerGroup,
   Location,
   DescribeKongCORSResult,
-  CreateEngineRequest,
   ModifyCloudNativeAPIGatewayCanaryRuleRequest,
   DescribeCloudNativeAPIGatewayPortsResponse,
   TSEGatewaySelector,
@@ -324,6 +330,7 @@ import {
   DeleteAutoScalerResourceStrategyResponse,
   DescribeOneCloudNativeAPIGatewayServiceRequest,
   DescribeCloudNativeAPIGatewayLLMModelAPIsResponse,
+  AIGWLLMQuotaLimit,
   DeleteGovernanceAliasesRequest,
   CertificateInfo,
   DescribeCloudNativeAPIGatewayConsumerListResponse,
@@ -332,6 +339,7 @@ import {
   DescribeWafDomainsRequest,
   ModifyUpstreamNodeStatusResponse,
   OpenWafProtectionResponse,
+  AIGWLLMQuotaFallbackTrigger,
   DescribeCloudNativeAPIGatewayRouteRateLimitResponse,
   AddCloudNativeAPIGatewayConsumerGroupAuthResponse,
   DescribeCloudNativeAPIGatewayRequest,
@@ -350,6 +358,7 @@ import {
   DescribeNacosServerInterfacesRequest,
   ModifyCloudNativeAPIGatewayConsumerGroupRequest,
   RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest,
+  AIGWLatencyPriorityConfig,
   KongUpstreamInfo,
   DescribeSREInstancesRequest,
   LaneTrafficEntry,
@@ -427,6 +436,7 @@ import {
   DescribeCloudNativeAPIGatewaysRequest,
   DescribeCloudNativeAPIGatewaySecretKeyListRequest,
   DescribeCloudNativeAPIGatewayConfigResult,
+  GovernanceLaneRule,
   DeleteCloudNativeAPIGatewayServiceRequest,
   Argument,
   DescribeKongIpRestrictionResult,
@@ -471,6 +481,7 @@ import {
   ModifyGovernanceServicesResponse,
   DeleteConfigFileReleasesRequest,
   CreateAutoScalerResourceStrategyRequest,
+  AIGWCustomDesensitizeRule,
   KongServices,
   ModifyNativeGatewayServiceSourceResponse,
   CreateCloudNativeAPIGatewayServerGroupResult,
@@ -482,7 +493,7 @@ import {
   DescribePublicAddressConfigResult,
   CreateCloudNativeAPIGatewayRouteRequest,
   NativeGatewayServerGroups,
-  GovernanceLaneRule,
+  CreateEngineRequest,
   DescribeGovernanceLaneGroupsRequest,
   DescribeCloudNativeAPIGatewaySecretKeyValueResponse,
   DeleteWafDomainsResponse,
@@ -510,7 +521,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除指定的云原生网关消费者
+   * 删除消费者（被绑定到消费者组/密钥时需先解绑）。
    */
   async DeleteCloudNativeAPIGatewayConsumer(
     req: DeleteCloudNativeAPIGatewayConsumerRequest,
@@ -600,7 +611,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改 LLM 模型 API 信息
+   * 修改 LLM 模型 API。
    */
   async ModifyCloudNativeAPIGatewayLLMModelAPI(
     req: ModifyCloudNativeAPIGatewayLLMModelAPIRequest,
@@ -700,7 +711,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除云原生网关密钥
+   * 删除消费者密钥（被绑定时需先解绑）。
    */
   async DeleteCloudNativeAPIGatewaySecretKey(
     req: DeleteCloudNativeAPIGatewaySecretKeyRequest,
@@ -710,7 +721,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询单个 LLM 模型服务列表
+   * 查询单个 LLM 模型服务详情。
    */
   async DescribeCloudNativeAPIGatewayLLMModelService(
     req: DescribeCloudNativeAPIGatewayLLMModelServiceRequest,
@@ -840,7 +851,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询云原生网关消费者列表
+   * 查询消费者列表。
    */
   async DescribeCloudNativeAPIGatewayConsumerList(
     req: DescribeCloudNativeAPIGatewayConsumerListRequest,
@@ -890,7 +901,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询单个 LLM 模型 API 信息
+   * 查询单个 LLM 模型 API 详情。
    */
   async DescribeCloudNativeAPIGatewayLLMModelAPI(
     req: DescribeCloudNativeAPIGatewayLLMModelAPIRequest,
@@ -920,7 +931,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看云原生网关消费者组的信息
+   * 查询消费者组详情。
    */
   async DescribeCloudNativeAPIGatewayConsumerGroup(
     req: DescribeCloudNativeAPIGatewayConsumerGroupRequest,
@@ -940,7 +951,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询 LLM 模型 API 列表
+   * 查询 LLM 模型 API 列表。
    */
   async DescribeCloudNativeAPIGatewayLLMModelAPIs(
     req: DescribeCloudNativeAPIGatewayLLMModelAPIsRequest,
@@ -1010,7 +1021,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除 LLM 模型 API 信息
+   * 删除 LLM 模型 API。
    */
   async DeleteCloudNativeAPIGatewayLLMModelAPI(
     req: DeleteCloudNativeAPIGatewayLLMModelAPIRequest,
@@ -1140,7 +1151,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询 LLM 模型服务列表
+   * 查询 LLM 模型服务列表。
    */
   async DescribeCloudNativeAPIGatewayLLMModelServices(
     req: DescribeCloudNativeAPIGatewayLLMModelServicesRequest,
@@ -1160,7 +1171,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改云原生网关消费者组的信息
+   * 修改消费者组。
    */
   async ModifyCloudNativeAPIGatewayConsumerGroup(
     req: ModifyCloudNativeAPIGatewayConsumerGroupRequest,
@@ -1280,7 +1291,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建云原生网关密钥
+   * 创建消费者密钥。
    */
   async CreateCloudNativeAPIGatewaySecretKey(
     req: CreateCloudNativeAPIGatewaySecretKeyRequest,
@@ -1320,7 +1331,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建AI网关模型 API
+   * 创建 LLM 模型 API。
    */
   async CreateCloudNativeAPIGatewayLLMModelAPI(
     req: CreateCloudNativeAPIGatewayLLMModelAPIRequest,
@@ -1370,7 +1381,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 从指定的消费者组中移除消费者
+   * 将消费者从消费者组移除。
    */
   async RemoveCloudNativeAPIGatewayConsumerInGroup(
     req: RemoveCloudNativeAPIGatewayConsumerInGroupRequest,
@@ -1480,7 +1491,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 云原生网关移除消费者组授权
+   * 从资源（模型 API / MCP Server）移除消费者组授权。
    */
   async RemoveCloudNativeAPIGatewayConsumerGroupAuth(
     req: RemoveCloudNativeAPIGatewayConsumerGroupAuthRequest,
@@ -1490,7 +1501,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建云原生网关的消费者组
+   * 创建消费者组。
    */
   async CreateCloudNativeAPIGatewayConsumerGroup(
     req: CreateCloudNativeAPIGatewayConsumerGroupRequest,
@@ -1570,7 +1581,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 将消费者添加到指定的消费者组中
+   * 将消费者添加到消费者组。
    */
   async AddCloudNativeAPIGatewayConsumerInGroup(
     req: AddCloudNativeAPIGatewayConsumerInGroupRequest,
@@ -1620,7 +1631,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询密钥值
+   * 查询密钥明文值（KMS 类型密钥不可获取）。
    */
   async DescribeCloudNativeAPIGatewaySecretKeyValue(
     req: DescribeCloudNativeAPIGatewaySecretKeyValueRequest,
@@ -1650,7 +1661,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除 LLM 模型服务信息
+   * 删除 LLM 模型服务（被模型 API 绑定时需先解绑）。
    */
   async DeleteCloudNativeAPIGatewayLLMModelService(
     req: DeleteCloudNativeAPIGatewayLLMModelServiceRequest,
@@ -1660,7 +1671,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询密钥详情
+   * 查询密钥详情（SecretValue 字段会被掩码）。
    */
   async DescribeCloudNativeAPIGatewaySecretKey(
     req: DescribeCloudNativeAPIGatewaySecretKeyRequest,
@@ -1690,7 +1701,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改密钥状态
+   * 修改密钥启用状态。
    */
   async ModifyCloudNativeAPIGatewaySecretKeyStatus(
     req: ModifyCloudNativeAPIGatewaySecretKeyStatusRequest,
@@ -1730,7 +1741,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建云原生网关的消费者，支持多种密钥生成方式
+   * 创建消费者。
    */
   async CreateCloudNativeAPIGatewayConsumer(
     req: CreateCloudNativeAPIGatewayConsumerRequest,
@@ -1790,7 +1801,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取消费者组列表
+   * 查询消费者组列表。
    */
   async DescribeCloudNativeAPIGatewayConsumerGroupList(
     req: DescribeCloudNativeAPIGatewayConsumerGroupListRequest,
@@ -1870,7 +1881,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取密钥列表
+   * 查询密钥列表。
    */
   async DescribeCloudNativeAPIGatewaySecretKeyList(
     req: DescribeCloudNativeAPIGatewaySecretKeyListRequest,
@@ -1920,7 +1931,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改云原生网关消费者的信息
+   * 修改消费者。
    */
   async ModifyCloudNativeAPIGatewayConsumer(
     req: ModifyCloudNativeAPIGatewayConsumerRequest,
@@ -2050,7 +2061,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询指定的云原生网关消费者
+   * 查询消费者详情。
    */
   async DescribeCloudNativeAPIGatewayConsumer(
     req: DescribeCloudNativeAPIGatewayConsumerRequest,
@@ -2060,7 +2071,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加消费者组授权
+   * 为资源（模型 API / MCP Server）添加消费者组授权。
    */
   async AddCloudNativeAPIGatewayConsumerGroupAuth(
     req: AddCloudNativeAPIGatewayConsumerGroupAuthRequest,
@@ -2090,7 +2101,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除云原生网关消费者组的信息
+   * 删除消费者组（被授权资源占用时返回 CheckItems）。
    */
   async DeleteCloudNativeAPIGatewayConsumerGroup(
     req: DeleteCloudNativeAPIGatewayConsumerGroupRequest,

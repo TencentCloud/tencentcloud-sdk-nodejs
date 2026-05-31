@@ -3262,8 +3262,9 @@ export interface ListTWeSeeTasksRequest {
    */
   DeviceName: string
   /**
-   * 算法类目。可能取值：
+   * 算法类目。可选值：
 - `COMPREHENSION`：视觉理解
+- `HIGHLIGHT`：视频浓缩
    */
   ServiceCategory: string
   /**
@@ -3274,6 +3275,18 @@ export interface ListTWeSeeTasksRequest {
    * 分页拉取偏移
    */
   Offset?: number
+  /**
+   * 算法类型。
+
+当 ServiceCategory 为 `COMPREHENSION` 时，可选值包括：
+- `VID_COMP`：视频理解
+- `IMG_COMP`：图片理解
+- `CONT_PERSON_MOTIONLESS`：静姿检测
+
+当 ServiceCategory 为 `HIGHLIGHT` 时，可选值包括：
+- `COMP_HIGHLIGHT`：视频浓缩
+   */
+  ServiceTypes?: Array<string>
   /**
    * 通道 ID
    */
@@ -3294,6 +3307,10 @@ export interface ListTWeSeeTasksRequest {
 - `3`：有效结果
    */
   Status?: number
+  /**
+   * 下载 URL 的过期时间（秒级 UNIX 时间戳）。若传入该参数，则响应中将包含所有文件的下载 URL
+   */
+  FileURLExpireTime?: number
 }
 
 /**
@@ -9631,6 +9648,10 @@ export interface VisionSummaryConfig {
    * 自定义检测标签
    */
   CustomDetectQueries?: Array<VisionCustomDetectQuery>
+  /**
+   * 标签持续检测配置
+   */
+  DetectContinuous?: Array<SeeDetectContinuousConfig>
 }
 
 /**
@@ -9875,6 +9896,16 @@ export interface DescribeCloudStoragePackageConsumeStatsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * TWeSee 标签持续检测结果
+ */
+export interface SeeDetectContinuousResult {
+  /**
+   * 检测标签是否在当前区间内持续
+   */
+  IsContinuousInRange?: boolean
 }
 
 /**
@@ -12173,6 +12204,29 @@ export interface ListOtaModulesRequest {
 }
 
 /**
+ * TWeSee 标签持续检测配置
+ */
+export interface SeeDetectContinuousConfig {
+  /**
+   * 检测标签。可选值：
+- `person_motionless`：人物静止
+   */
+  DetectType: string
+  /**
+   * 启用检测的按日周期起始时间分钟数。取值范围：0 ~ 1440
+   */
+  DailyStartTime: number
+  /**
+   * 启用检测的按日周期结束时间分钟数。取值范围：0 ~ 1440
+   */
+  DailyEndTime: number
+  /**
+   * 检测间隔分钟数。取值范围：5 ~ 60。
+   */
+  Interval: number
+}
+
+/**
  * CreateDeviceSDPAnswer返回参数结构体
  */
 export interface CreateDeviceSDPAnswerResponse {
@@ -12326,6 +12380,7 @@ export interface SeeTaskInfo {
    * 算法类目。可能取值：
 
 - `COMPREHENSION`：视觉理解
+- `HIGHLIGHT`：视频浓缩
    */
   ServiceCategory?: string
   /**
@@ -12333,6 +12388,7 @@ export interface SeeTaskInfo {
 
 - `VID_COMP`：视频理解
 - `IMG_COMP`：图片理解
+- `COMP_HIGHLIGHT`：视频浓缩
    */
   ServiceType?: string
   /**
@@ -12350,6 +12406,10 @@ export interface SeeTaskInfo {
    * 视频语义浓缩结果（适用于视频语义浓缩）
    */
   CompHighlightResult?: SeeCompHighlightResult
+  /**
+   * 标签持续检测结果
+   */
+  DetectContinuousResult?: SeeDetectContinuousResult
   /**
    * 完成该任务所消耗的基础能力额度
    */

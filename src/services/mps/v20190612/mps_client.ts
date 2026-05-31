@@ -195,6 +195,7 @@ import {
   AiParagraphInfo,
   AudioSeparateConfig,
   DeleteAIRecognitionTemplateRequest,
+  UpdateVoiceRequest,
   DescribeInputSRTSettings,
   AiAnalysisTaskCoverResult,
   AudioBeautifyConfig,
@@ -705,6 +706,7 @@ import {
   FlowRealtimeStatusSRT,
   SpecificationDataItem,
   TEHDConfigForUpdate,
+  VoiceUpdateFields,
   DescribeStreamPackageSourceResponse,
   WithdrawsWatermarkRequest,
   DeleteStreamLinkOutputRequest,
@@ -740,6 +742,7 @@ import {
   ImageEnhanceConfig,
   WatermarkInput,
   EnableWorkflowResponse,
+  UpdateVoiceResponse,
   Activity,
   AiSampleWordInfo,
   AdaptiveDynamicStreamingInfoItem,
@@ -2775,6 +2778,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTextToSpeechAsyncTaskResponse) => void
   ): Promise<DescribeTextToSpeechAsyncTaskResponse> {
     return this.request("DescribeTextToSpeechAsyncTask", req, cb)
+  }
+
+  /**
+   * 更新音色信息
+   */
+  async UpdateVoice(
+    req: UpdateVoiceRequest,
+    cb?: (error: string, rep: UpdateVoiceResponse) => void
+  ): Promise<UpdateVoiceResponse> {
+    return this.request("UpdateVoice", req, cb)
   }
 
   /**

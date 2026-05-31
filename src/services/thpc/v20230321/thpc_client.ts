@@ -110,6 +110,7 @@ import {
   SpaceInternetAccessible,
   DescribeJobsRequest,
   GooseFSxOptionOverview,
+  CosOptionOverview,
   SetAutoScalingConfigurationRequest,
   SubmitJobResponse,
   DescribeNodesRequest,

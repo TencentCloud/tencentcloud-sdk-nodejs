@@ -71,6 +71,10 @@ export interface ProcessMediaRequest {
    * <p>FileID为空时有效，拉取Url生成新媒资产生新FileID，媒体处理产物将作为新媒资的附属产物。</p><p>注意：新媒资会产生存储费用</p>
    */
   Url?: string
+  /**
+   * <p>媒体处理转码结果输出为独立媒资, 开启该选项会使产物输出为独立媒资，生成全新FileID，目前仅支持TranscodeTask转码任务输出为独立媒资。</p><p>枚举值：</p><ul><li>ON： 开启</li><li>OFF： 关闭</li></ul><p>默认值：OFF</p><p>注意：新媒资会产生存储费用，转码任务中片头片尾、溯源水印等暂不支持开启该选项。</p>
+   */
+  OutputAsIndependentMedia?: string
 }
 
 /**

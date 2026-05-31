@@ -477,7 +477,7 @@ export interface GooseFSOption {
    */
   LocalPath: string
   /**
-   * <p>文件系统远程挂载路径。</p>
+   * <p>文件系统远程挂载路径; 远端路径为GooseFS控制台看到的命名空间的url;命名空间文档参考https://cloud.tencent.com/document/product/1424/117877</p>
    */
   RemotePath: string
   /**
@@ -495,17 +495,21 @@ export interface GooseFSOption {
  */
 export interface StorageOptionOverview {
   /**
-   * CFS存储选项概览信息列表。
+   * <p>CFS存储选项概览信息列表。</p>
    */
-  CFSOptions: Array<CFSOptionOverview>
+  CFSOptions?: Array<CFSOptionOverview>
   /**
-   * GooseFS存储选项概览信息列表。
+   * <p>GooseFS存储选项概览信息列表。</p>
    */
-  GooseFSOptions: Array<GooseFSOptionOverview>
+  GooseFSOptions?: Array<GooseFSOptionOverview>
   /**
-   * GooseFSx存储选项概览信息列表。
+   * <p>GooseFSx存储选项概览信息列表。</p>
    */
   GooseFSxOptions?: Array<GooseFSxOptionOverview>
+  /**
+   * <p>COS存储选项概览信息列表。</p>
+   */
+  CosOptions?: Array<CosOptionOverview>
 }
 
 /**
@@ -2039,6 +2043,24 @@ export interface GooseFSxOptionOverview {
    * 文件系统的本地挂载路径。GooseFSx目前只支持挂载在/goosefsx/{文件系统ID}_proxy/目录下。
    */
   LocalPath?: string
+}
+
+/**
+ * COS存储选项概览信息。
+ */
+export interface CosOptionOverview {
+  /**
+   * <p>文件系统本地挂载路径。</p>
+   */
+  LocalPath?: string
+  /**
+   * <p>COS桶地址。</p>
+   */
+  RemotePath?: string
+  /**
+   * <p>COS挂载参数</p>
+   */
+  MountOption?: string
 }
 
 /**

@@ -20,99 +20,99 @@
  */
 export interface CreateNativeNodePoolParam {
   /**
-   * 节点池伸缩配置
+   * <p>节点池伸缩配置</p>
    */
   Scaling: MachineSetScaling
   /**
-   * 子网列表
+   * <p>子网列表</p>
    */
   SubnetIds: Array<string>
   /**
-   * 节点计费类型。PREPAID：包年包月；POSTPAID_BY_HOUR：按量计费（默认）；
+   * <p>节点计费类型。PREPAID：包年包月；POSTPAID_BY_HOUR：按量计费（默认）；</p>
    */
   InstanceChargeType: string
   /**
-   * 系统盘配置
+   * <p>系统盘配置</p>
    */
   SystemDisk: Disk
   /**
-   * 机型列表
+   * <p>机型列表</p>
    */
   InstanceTypes: Array<string>
   /**
-   * 安全组列表
+   * <p>安全组列表</p>
    */
   SecurityGroupIds?: Array<string>
   /**
-   * 自动升级配置
+   * <p>自动升级配置</p>
    */
   UpgradeSettings?: MachineUpgradeSettings
   /**
-   * 是否开启自愈能力
+   * <p>是否开启自愈能力</p>
    */
   AutoRepair?: boolean
   /**
-   * 包年包月机型计费配置
+   * <p>包年包月机型计费配置</p>
    */
   InstanceChargePrepaid?: InstanceChargePrepaid
   /**
-   * 节点池 Management 参数设置
+   * <p>节点池 Management 参数设置</p>
    */
   Management?: ManagementConfig
   /**
-   * 故障自愈规则名称
+   * <p>故障自愈规则名称</p>
    */
   HealthCheckPolicyName?: string
   /**
-   * 原生节点池hostName模式串
+   * <p>原生节点池hostName模式串</p>
    */
   HostNamePattern?: string
   /**
-   * kubelet 自定义参数
+   * <p>kubelet 自定义参数</p>
    */
   KubeletArgs?: Array<string>
   /**
-   * 预定义脚本
+   * <p>预定义脚本</p>
    */
   Lifecycle?: LifecycleConfig
   /**
-   * 运行时根目录
+   * <p>运行时根目录</p>
    */
   RuntimeRootDir?: string
   /**
-   * 是否开启弹性伸缩
+   * <p>是否开启弹性伸缩</p>
    */
   EnableAutoscaling?: boolean
   /**
-   * 期望节点数
+   * <p>期望节点数</p>
    */
   Replicas?: number
   /**
-   * 公网带宽设置
+   * <p>公网带宽设置</p>
    */
   InternetAccessible?: InternetAccessible
   /**
-   * 原生节点池数据盘列表
+   * <p>原生节点池数据盘列表</p>
    */
   DataDisks?: Array<DataDisk>
   /**
-   * qgpu开关
+   * <p>qgpu开关</p>
    */
   QGPUEnable?: boolean
   /**
-   * 节点池ssh公钥id数组
+   * <p>节点池ssh公钥id数组</p>
    */
   KeyIds?: Array<string>
   /**
-   * 节点池类型
+   * <p>节点池类型</p>
    */
   MachineType?: string
   /**
-   * 原生节点池安装节点自动化助手开关
+   * <p>原生节点池安装节点自动化助手开关</p>
    */
   AutomationService?: boolean
   /**
-   * 原生节点池密码
+   * <p>原生节点池密码</p>
    */
   Password?: string
 }
@@ -663,141 +663,135 @@ export interface Instance {
  */
 export interface NativeNodeInfo {
   /**
-   * 节点名称
+   * <p>节点名称</p>
    */
   MachineName?: string
   /**
-   * Machine 状态
+   * <p>Machine 状态</p>
    */
   MachineState?: string
   /**
-   * Machine 所在可用区
+   * <p>Machine 所在可用区</p>
    */
   Zone?: string
   /**
-   * 节点计费类型。PREPAID：包年包月；POSTPAID_BY_HOUR：按量计费（默认）；
+   * <p>节点计费类型。PREPAID：包年包月；POSTPAID_BY_HOUR：按量计费（默认）；</p>
    */
   InstanceChargeType?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreatedAt?: string
   /**
-   * Machine 登录状态
+   * <p>Machine 登录状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LoginStatus?: string
   /**
-   * 是否开启缩容保护
+   * <p>是否开启缩容保护</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsProtectedFromScaleIn?: boolean
   /**
-   * Machine 名字
+   * <p>Machine 名字</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DisplayName?: string
   /**
-   * CPU核数，单位：核
+   * <p>CPU核数，单位：核</p>
    */
   CPU?: number
   /**
-   * GPU核数，单位：核
+   * <p>GPU核数，单位：核</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GPU?: number
   /**
-   * 自动续费标识
+   * <p>自动续费标识</p>
    */
   RenewFlag?: string
   /**
-   * 节点计费模式
+   * <p>节点计费模式</p>
    */
   PayMode?: string
   /**
-   * 节点内存容量，单位：`GB`
+   * <p>节点内存容量，单位：<code>GB</code></p>
    */
   Memory?: number
   /**
-   * 节点系统盘配置信息
+   * <p>节点系统盘配置信息</p>
    */
   SystemDisk?: Disk
   /**
-   * 公网带宽相关信息设置
+   * <p>公网带宽相关信息设置</p>
    */
   InternetAccessible?: InternetAccessible
   /**
-   * 机型所属机型族
+   * <p>机型所属机型族</p>
    */
   InstanceFamily?: string
   /**
-   * 节点内网 IP
+   * <p>节点内网 IP</p>
    */
   LanIp?: string
   /**
-   * 机型
+   * <p>机型</p>
    */
   InstanceType?: string
   /**
-   * 包年包月节点计费过期时间
+   * <p>包年包月节点计费过期时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpiredTime?: string
   /**
-   * 节点外网 IP
+   * <p>节点外网 IP</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WanIp?: string
   /**
-   * 节点密钥 ID 列表
+   * <p>节点密钥 ID 列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KeyIds?: Array<string>
   /**
-   * 节点GPU相关配置
+   * <p>节点GPU相关配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GPUParams?: GPUParams
   /**
-   * 数据盘列表
+   * <p>数据盘列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataDisks?: Array<DataDisk>
   /**
-   * 安全组列表
+   * <p>安全组列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityGroupIDs?: Array<string>
   /**
-   * VPC 唯一 ID
+   * <p>VPC 唯一 ID</p>
    */
   VpcId?: string
   /**
-   * 子网唯一 ID
+   * <p>子网唯一 ID</p>
    */
   SubnetId?: string
   /**
-   * OS的名称
+   * <p>OS的名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OsImage?: string
   /**
-   * **原生节点的 Machine 类型**
-
-- Native 表示 CXM 类型的原生节点
-- NativeCVM 表示 CVM 类型的原生节点
+   * <p><strong>原生节点的 Machine 类型</strong></p><ul><li>Native 表示 CXM 类型的原生节点</li><li>NativeCVM 表示 CVM 类型的原生节点</li></ul>
    */
   MachineType?: string
   /**
-   * **原生节点对应的实例 ID**
-
-- ins-q47ofw6 表示这个实例是一个 CVM 的实例
-- eks-f8mvyaep 表示这个实例是一个 CXM 的实例
+   * <p><strong>原生节点对应的实例 ID</strong></p><ul><li>ins-q47ofw6 表示这个实例是一个 CVM 的实例</li><li>eks-f8mvyaep 表示这个实例是一个 CXM 的实例</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
-   * 原生节点云标签
+   * <p>原生节点云标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
@@ -1155,98 +1149,98 @@ export interface HealthCheckPolicyRule {
  */
 export interface NativeNodePoolInfo {
   /**
-   * 伸缩配置
+   * <p>伸缩配置</p>
    */
   Scaling?: MachineSetScaling
   /**
-   * 子网列表
+   * <p>子网列表</p>
    */
   SubnetIds?: Array<string>
   /**
-   * 安全组列表
+   * <p>安全组列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityGroupIds?: Array<string>
   /**
-   * 自动升级配置
+   * <p>自动升级配置</p>
    */
   UpgradeSettings?: MachineUpgradeSettings
   /**
-   * 是否开启自愈能力
+   * <p>是否开启自愈能力</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRepair?: boolean
   /**
-   * 节点计费类型
+   * <p>节点计费类型</p>
    */
   InstanceChargeType?: string
   /**
-   * 包年包月机型计费配置
+   * <p>包年包月机型计费配置</p>
    */
   InstanceChargePrepaid?: InstanceChargePrepaid
   /**
-   * 系统盘配置
+   * <p>系统盘配置</p>
    */
   SystemDisk?: Disk
   /**
-   * 密钥 ID 列表
+   * <p>密钥 ID 列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KeyIds?: Array<string>
   /**
-   * Machine 系统配置
+   * <p>Machine 系统配置</p>
    */
   Management?: ManagementConfig
   /**
-   * 故障自愈规则名称
+   * <p>故障自愈规则名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthCheckPolicyName?: string
   /**
-   * 原生节点池hostName模式串
+   * <p>原生节点池hostName模式串</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HostNamePattern?: string
   /**
-   * kubelet 自定义参数
+   * <p>kubelet 自定义参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   KubeletArgs?: Array<string>
   /**
-   * 预定义脚本
+   * <p>预定义脚本</p>
    */
   Lifecycle?: LifecycleConfig
   /**
-   * 运行时根目录
+   * <p>运行时根目录</p>
    */
   RuntimeRootDir?: string
   /**
-   * 是否开启弹性伸缩
+   * <p>是否开启弹性伸缩</p>
    */
   EnableAutoscaling?: boolean
   /**
-   * 机型列表
+   * <p>机型列表</p>
    */
   InstanceTypes?: Array<string>
   /**
-   * 期望节点数
+   * <p>期望节点数</p>
    */
   Replicas?: number
   /**
-   * 就绪 Machine 个数
+   * <p>就绪 Machine 个数</p>
    */
   ReadyReplicas?: number
   /**
-   * 公网带宽设置
+   * <p>公网带宽设置</p>
    */
   InternetAccessible?: InternetAccessible
   /**
-   * 原生节点池数据盘
+   * <p>原生节点池数据盘</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataDisks?: Array<DataDisk>
   /**
-   * 原生节点机型 Native, NativeCVM
+   * <p>原生节点机型 Native, NativeCVM</p>
    */
   MachineType?: string
 }
@@ -2297,108 +2291,103 @@ export interface NodeCountSummary {
  */
 export interface UpdateNativeNodePoolParam {
   /**
-   * 伸缩配置
+   * <p>伸缩配置</p>
    */
   Scaling?: MachineSetScaling
   /**
-   * 子网列表
+   * <p>子网列表</p>
    */
   SubnetIds?: Array<string>
   /**
-   * 安全组列表
+   * <p>安全组列表</p>
    */
   SecurityGroupIds?: Array<string>
   /**
-   * 自动升级配置
+   * <p>自动升级配置</p>
    */
   UpgradeSettings?: MachineUpgradeSettings
   /**
-   * 是否开启自愈能力
+   * <p>是否开启自愈能力</p>
    */
   AutoRepair?: boolean
   /**
-   * 节点计费类型变更
-当前仅支持按量计费转包年包月：
-- PREPAID
-
+   * <p>计费类型</p><p>枚举值：</p><ul><li>POSTPAID_BY_HOUR： 目标计费类型为按量计费</li><li>PREPAID： 目标计费类型为包年包月计费</li></ul>
    */
   InstanceChargeType?: string
   /**
-   * 包年包月机型计费配置
+   * <p>包年包月机型计费配置</p>
    */
   InstanceChargePrepaid?: InstanceChargePrepaid
   /**
-   * 系统盘配置
+   * <p>系统盘配置</p>
    */
   SystemDisk?: Disk
   /**
-   * Machine 系统配置
+   * <p>Machine 系统配置</p>
    */
   Management?: ManagementConfig
   /**
-   * 故障自愈规则名称
+   * <p>故障自愈规则名称</p>
    */
   HealthCheckPolicyName?: string
   /**
-   * 原生节点池hostName模式串
+   * <p>原生节点池hostName模式串</p>
    */
   HostNamePattern?: string
   /**
-   * kubelet 自定义参数
+   * <p>kubelet 自定义参数</p>
    */
   KubeletArgs?: Array<string>
   /**
-   * 预定义脚本
+   * <p>预定义脚本</p>
    */
   Lifecycle?: LifecycleConfig
   /**
-   * 运行时根目录
+   * <p>运行时根目录</p>
    */
   RuntimeRootDir?: string
   /**
-   * 是否开启弹性伸缩
+   * <p>是否开启弹性伸缩</p>
    */
   EnableAutoscaling?: boolean
   /**
-   * 机型列表
+   * <p>机型列表</p>
    */
   InstanceTypes?: Array<string>
   /**
-   * 期望节点数
+   * <p>期望节点数</p>
    */
   Replicas?: number
   /**
-   * 是否更新存量节点MetaData(包括： metadata、annotation、label)
+   * <p>是否更新存量节点MetaData(包括： metadata、annotation、label)</p>
    */
   UpdateExistedNode?: boolean
   /**
-   * 数据盘列表
+   * <p>数据盘列表</p>
    */
   DataDisks?: Array<DataDisk>
   /**
-   * 节点management参数存量更新开关，有enable（打开）、disable（关闭）两个状态可选
-
-management包括：nameserver、host、kubelet、kernel参数
+   * <p>节点management参数存量更新开关，有enable（打开）、disable（关闭）两个状态可选</p><p>management包括：nameserver、host、kubelet、kernel参数</p>
    */
   UpdateMachineManagement?: string
   /**
-   * ssh公钥id数组
+   * <p>ssh公钥id数组</p>
    */
   KeyIds?: Array<string>
   /**
-   * 节点移出策略，有Random（随机）、Newest（优先移出最新实例）、Oldest（优先移出最旧实例）三种可选，默认是Newest
+   * <p>节点移出策略，有Random（随机）、Newest（优先移出最新实例）、Oldest（优先移出最旧实例）三种可选，默认是Newest</p>
    */
   DeletePolicy?: string
   /**
-   * 节点池 GPU 配置
+   * <p>节点池 GPU 配置</p>
    */
   GPUConfigs?: Array<GPUConfig>
   /**
-   * 原生节点池安装自动化助手开关状态
+   * <p>原生节点池安装自动化助手开关状态</p>
    */
   AutomationService?: boolean
   /**
-   * 原生节点池密码
+   * <p>原生节点池密码</p>
    */
   Password?: string
 }
