@@ -24205,66 +24205,65 @@ export interface RebuildVideoInfo {
  */
 export interface MediaTranscodeItem {
   /**
-   * 转码后的视频文件地址。
+   * <p>转码后的视频文件地址。</p>
    */
   Url?: string
   /**
-   * 转码规格 ID，参见[转码参数模板](https://cloud.tencent.com/document/product/266/33476)。
-<font color=red>注意：取值 0 表示原始文件。</font> 
+   * <p>转码规格 ID，参见<a href="https://cloud.tencent.com/document/product/266/33476">转码参数模板</a>。<br><font color="red">注意：取值 0 表示原始文件。</font></p>
    */
   Definition?: number
   /**
-   * 视频流码率平均值与音频流码率平均值之和， 单位：bps。
+   * <p>视频流码率平均值与音频流码率平均值之和， 单位：bps。</p>
    */
   Bitrate?: number
   /**
-   * 视频流高度的最大值，单位：px。
+   * <p>视频流高度的最大值，单位：px。</p>
    */
   Height?: number
   /**
-   * 视频流宽度的最大值，单位：px。
+   * <p>视频流宽度的最大值，单位：px。</p>
    */
   Width?: number
   /**
-   * 媒体文件总大小，单位：字节。
-<li>当媒体文件为 HLS 时，大小是 m3u8 和 ts 文件大小的总和。</li>
+   * <p>媒体文件总大小，单位：字节。</p><li>当媒体文件为 HLS 时，大小是 m3u8 和 ts 文件大小的总和。</li>
    */
   Size?: number
   /**
-   * 视频时长，单位：秒。
+   * <p>视频时长，单位：秒。</p>
    */
   Duration?: number
   /**
-   * 视频的 md5 值。
+   * <p>视频的 md5 值。</p>
    */
   Md5?: string
   /**
-   * 容器类型，例如 m4a，mp4 等。
+   * <p>容器类型，例如 m4a，mp4 等。</p>
    */
   Container?: string
   /**
-   * 视频流信息。
+   * <p>视频流信息。</p>
    */
   VideoStreamSet?: Array<MediaVideoStreamItem>
   /**
-   * 音频流信息。
+   * <p>音频流信息。</p>
    */
   AudioStreamSet?: Array<MediaAudioStreamItem>
   /**
-   * 数字水印类型。可选值：
-<li>Trace 表示经过溯源水印处理；</li>
-<li>CopyRight 表示经过版权水印处理；</li>
-<li>None 表示没有经过数字水印处理。</li>
+   * <p>数字水印类型。可选值：</p><li>Trace 表示经过溯源水印处理；</li><li>CopyRight 表示经过版权水印处理；</li><li>None 表示没有经过数字水印处理。</li>
    */
   DigitalWatermarkType?: string
   /**
-   * 版权信息。
+   * <p>版权信息。</p>
    */
   CopyRightWatermarkText?: string
   /**
-   * 数字水印模板id。
+   * <p>数字水印模板id。</p>
    */
   BlindWatermarkDefinition?: number
+  /**
+   * <p>转码生成的新FileId，请求开启独立媒资输出时有效。</p>
+   */
+  FileId?: string
 }
 
 /**

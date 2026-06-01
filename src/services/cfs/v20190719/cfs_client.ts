@@ -40,9 +40,12 @@ import {
   DescribeMigrationTasksResponse,
   DescribeAutoSnapshotPoliciesRequest,
   DescribeAvailableZoneInfoRequest,
+  ModifyDataRetrievalRequest,
   DescribeMountTargetsRequest,
+  CreateDataRetrievalResponse,
   CreateDataFlowResponse,
   SignUpCfsServiceRequest,
+  DeleteDataRetrievalRequest,
   SignUpCfsServiceResponse,
   AutoSnapshotPolicyInfo,
   InputPermissionGroupRules,
@@ -53,32 +56,35 @@ import {
   DescribeLifecycleDataTaskResponse,
   UpdateCfsPGroupResponse,
   UpdateFileSystemBandwidthLimitResponse,
-  SnapshotOperateLog,
+  DataRetrievalInfo,
   DescribeLifecyclePoliciesRequest,
   DeleteAutoSnapshotPolicyRequest,
   CreateLifecyclePolicyResponse,
   UpdateCfsRuleRequest,
-  OverrideCfsRulesRequest,
+  DescribeDataRetrievalTaskRequest,
   StopLifecycleDataTaskResponse,
   DeleteUserQuotaRequest,
   DescribeAvailableZoneInfoResponse,
   DeleteCfsSnapshotResponse,
   DescribeCfsFileSystemClientsResponse,
   DoDirectoryOperationResponse,
-  ModifyLifecyclePolicyResponse,
+  ModifyDataRetrievalResponse,
   CreateCfsSnapshotRequest,
   DescribeBucketListRequest,
   DeleteCfsRuleRequest,
   ApplyPathLifecyclePolicyResponse,
+  DataRetrievalTaskInfo,
   UpdateCfsRuleResponse,
   DeleteMigrationTaskResponse,
   DescribeLifecycleDataTaskRequest,
   DescribeSnapshotOperationLogsResponse,
+  DescribeDataRetrievalResponse,
   DeleteCfsFileSystemRequest,
   UpdateFileSystemBandwidthLimitRequest,
   DeleteLifecyclePolicyResponse,
   CreateCfsPGroupResponse,
   DescribeCfsServiceStatusRequest,
+  DescribeDataRetrievalRequest,
   CheckResult,
   DeleteUserQuotaResponse,
   DeleteMigrationTaskRequest,
@@ -89,6 +95,7 @@ import {
   DataFlowInfo,
   AvailableType,
   LifecyclePolicy,
+  RunDataRetrievalTaskResponse,
   CreateCfsSnapshotResponse,
   LifecycleRule,
   UserQuota,
@@ -111,23 +118,28 @@ import {
   AutoScaleUpRule,
   DeleteCfsSnapshotRequest,
   DescribeCfsFileSystemClientsRequest,
+  OverrideCfsRulesRequest,
+  CreateDataRetrievalRequest,
   DescribeCfsSnapshotsResponse,
   DescribeCfsFileSystemsRequest,
   AvailableRegion,
   CreateCfsFileSystemRequest,
   AvailableZone,
+  RunDataRetrievalTaskRequest,
   DescribeMigrationTasksRequest,
   PGroupRuleInfo,
   Filter,
   UnbindAutoSnapshotPolicyRequest,
-  UnbindAutoSnapshotPolicyResponse,
+  DescribeDataRetrievalTaskResponse,
   DescribeCfsServiceStatusResponse,
   ExstraPerformanceInfo,
   BindAutoSnapshotPolicyResponse,
   DescribeCfsSnapshotsRequest,
   UpdateCfsFileSystemSizeLimitResponse,
+  SnapshotOperateLog,
   UpdateAutoSnapshotPolicyRequest,
   UpdateCfsFileSystemSizeLimitRequest,
+  DeleteDataRetrievalResponse,
   DescribeCfsRulesResponse,
   UpdateCfsFileSystemPGroupResponse,
   UpdateAutoSnapshotPolicyResponse,
@@ -141,7 +153,7 @@ import {
   UpdateCfsSnapshotAttributeResponse,
   UpdateCfsPGroupRequest,
   DeleteDataFlowRequest,
-  PathInfo,
+  ModifyLifecyclePolicyResponse,
   SetUserQuotaResponse,
   TagInfo,
   DescribeCfsPGroupsRequest,
@@ -160,6 +172,8 @@ import {
   DescribeAutoSnapshotPoliciesResponse,
   ModifyDataFlowRequest,
   DescribeCfsSnapshotOverviewRequest,
+  UnbindAutoSnapshotPolicyResponse,
+  PathInfo,
   CreateAutoSnapshotPolicyRequest,
   CreateDataFlowRequest,
   DescribeDataFlowResponse,
@@ -173,6 +187,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("cfs.tencentcloudapi.com", "2019-07-19", clientConfig)
+  }
+
+  /**
+   * 文件系统目录操作接口。当前仅 Turbo 系列文件系统支持调用此接口进行目录操作，通用系列文件系统（含增强型）不支持调用。
+   */
+  async DoDirectoryOperation(
+    req: DoDirectoryOperationRequest,
+    cb?: (error: string, rep: DoDirectoryOperationResponse) => void
+  ): Promise<DoDirectoryOperationResponse> {
+    return this.request("DoDirectoryOperation", req, cb)
   }
 
   /**
@@ -268,13 +292,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CreateCfsPGroup）用于创建权限组
-   */
-  async CreateCfsPGroup(
-    req: CreateCfsPGroupRequest,
-    cb?: (error: string, rep: CreateCfsPGroupResponse) => void
-  ): Promise<CreateCfsPGroupResponse> {
-    return this.request("CreateCfsPGroup", req, cb)
+     * 删除数据检索。
+
+删除指定的数据检索配置，不允许在存在关联任务时删除。调用接口后，若通过 DescribeDataRetrieval 接口查询不到对应的数据检索，则表示删除成功。
+     */
+  async DeleteDataRetrieval(
+    req: DeleteDataRetrievalRequest,
+    cb?: (error: string, rep: DeleteDataRetrievalResponse) => void
+  ): Promise<DeleteDataRetrievalResponse> {
+    return this.request("DeleteDataRetrieval", req, cb)
   }
 
   /**
@@ -318,6 +344,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询文件系统快照定期策略列表信息
+   */
+  async DescribeAutoSnapshotPolicies(
+    req: DescribeAutoSnapshotPoliciesRequest,
+    cb?: (error: string, rep: DescribeAutoSnapshotPoliciesResponse) => void
+  ): Promise<DescribeAutoSnapshotPoliciesResponse> {
+    return this.request("DescribeAutoSnapshotPolicies", req, cb)
+  }
+
+  /**
    * 解除文件系统绑定的快照策略
    */
   async UnbindAutoSnapshotPolicy(
@@ -358,6 +394,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 查询数据检索。
+
+查询数据检索列表，支持按文件系统 ID、数据检索 ID、名称等条件筛选。
+     */
+  async DescribeDataRetrieval(
+    req: DescribeDataRetrievalRequest,
+    cb?: (error: string, rep: DescribeDataRetrievalResponse) => void
+  ): Promise<DescribeDataRetrievalResponse> {
+    return this.request("DescribeDataRetrieval", req, cb)
+  }
+
+  /**
    * 用于终止迁移任务，可以终止等待中、运行中状态的任务。
    */
   async StopMigrationTask(
@@ -368,13 +416,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于获取数据源桶列表。
+   * 创建数据检索
    */
-  async DescribeBucketList(
-    req: DescribeBucketListRequest,
-    cb?: (error: string, rep: DescribeBucketListResponse) => void
-  ): Promise<DescribeBucketListResponse> {
-    return this.request("DescribeBucketList", req, cb)
+  async CreateDataRetrieval(
+    req: CreateDataRetrievalRequest,
+    cb?: (error: string, rep: CreateDataRetrievalResponse) => void
+  ): Promise<CreateDataRetrievalResponse> {
+    return this.request("CreateDataRetrieval", req, cb)
   }
 
   /**
@@ -415,16 +463,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SignUpCfsServiceResponse) => void
   ): Promise<SignUpCfsServiceResponse> {
     return this.request("SignUpCfsService", req, cb)
-  }
-
-  /**
-   * 创建定期快照策略
-   */
-  async CreateAutoSnapshotPolicy(
-    req: CreateAutoSnapshotPolicyRequest,
-    cb?: (error: string, rep: CreateAutoSnapshotPolicyResponse) => void
-  ): Promise<CreateAutoSnapshotPolicyResponse> {
-    return this.request("CreateAutoSnapshotPolicy", req, cb)
   }
 
   /**
@@ -478,6 +516,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于获取数据源桶列表。
+   */
+  async DescribeBucketList(
+    req: DescribeBucketListRequest,
+    cb?: (error: string, rep: DescribeBucketListResponse) => void
+  ): Promise<DescribeBucketListResponse> {
+    return this.request("DescribeBucketList", req, cb)
+  }
+
+  /**
    * 本接口（DescribeCfsPGroups）用于查询权限组列表。
    */
   async DescribeCfsPGroups(
@@ -485,6 +533,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCfsPGroupsResponse) => void
   ): Promise<DescribeCfsPGroupsResponse> {
     return this.request("DescribeCfsPGroups", req, cb)
+  }
+
+  /**
+   * 修改数据检索
+   */
+  async ModifyDataRetrieval(
+    req: ModifyDataRetrievalRequest,
+    cb?: (error: string, rep: ModifyDataRetrievalResponse) => void
+  ): Promise<ModifyDataRetrievalResponse> {
+    return this.request("ModifyDataRetrieval", req, cb)
   }
 
   /**
@@ -528,13 +586,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用来设置文件系统扩容策略，该接口只支持turbo文件系统
+   * 指定条件删除文件系统配额（仅部分Turbo实例能使用，若需要调用请提交工单与我们联系）
    */
-  async ModifyFileSystemAutoScaleUpRule(
-    req: ModifyFileSystemAutoScaleUpRuleRequest,
-    cb?: (error: string, rep: ModifyFileSystemAutoScaleUpRuleResponse) => void
-  ): Promise<ModifyFileSystemAutoScaleUpRuleResponse> {
-    return this.request("ModifyFileSystemAutoScaleUpRule", req, cb)
+  async DeleteUserQuota(
+    req: DeleteUserQuotaRequest,
+    cb?: (error: string, rep: DeleteUserQuotaResponse) => void
+  ): Promise<DeleteUserQuotaResponse> {
+    return this.request("DeleteUserQuota", req, cb)
   }
 
   /**
@@ -565,6 +623,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCfsFileSystemsResponse) => void
   ): Promise<DescribeCfsFileSystemsResponse> {
     return this.request("DescribeCfsFileSystems", req, cb)
+  }
+
+  /**
+   * 用来设置文件系统扩容策略，该接口只支持turbo文件系统
+   */
+  async ModifyFileSystemAutoScaleUpRule(
+    req: ModifyFileSystemAutoScaleUpRuleRequest,
+    cb?: (error: string, rep: ModifyFileSystemAutoScaleUpRuleResponse) => void
+  ): Promise<ModifyFileSystemAutoScaleUpRuleResponse> {
+    return this.request("ModifyFileSystemAutoScaleUpRule", req, cb)
   }
 
   /**
@@ -628,23 +696,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 指定条件删除文件系统配额（仅部分Turbo实例能使用，若需要调用请提交工单与我们联系）
+   * 创建定期快照策略
    */
-  async DeleteUserQuota(
-    req: DeleteUserQuotaRequest,
-    cb?: (error: string, rep: DeleteUserQuotaResponse) => void
-  ): Promise<DeleteUserQuotaResponse> {
-    return this.request("DeleteUserQuota", req, cb)
+  async CreateAutoSnapshotPolicy(
+    req: CreateAutoSnapshotPolicyRequest,
+    cb?: (error: string, rep: CreateAutoSnapshotPolicyResponse) => void
+  ): Promise<CreateAutoSnapshotPolicyResponse> {
+    return this.request("CreateAutoSnapshotPolicy", req, cb)
   }
 
   /**
-   * 查询文件系统快照定期策略列表信息
+   * 本接口（CreateCfsPGroup）用于创建权限组
    */
-  async DescribeAutoSnapshotPolicies(
-    req: DescribeAutoSnapshotPoliciesRequest,
-    cb?: (error: string, rep: DescribeAutoSnapshotPoliciesResponse) => void
-  ): Promise<DescribeAutoSnapshotPoliciesResponse> {
-    return this.request("DescribeAutoSnapshotPolicies", req, cb)
+  async CreateCfsPGroup(
+    req: CreateCfsPGroupRequest,
+    cb?: (error: string, rep: CreateCfsPGroupResponse) => void
+  ): Promise<CreateCfsPGroupResponse> {
+    return this.request("CreateCfsPGroup", req, cb)
   }
 
   /**
@@ -688,13 +756,25 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 文件系统目录操作接口。当前仅 Turbo 系列文件系统支持调用此接口进行目录操作，通用系列文件系统（含增强型）不支持调用。
+     * 执行数据检索任务。
+
+手动触发指定数据检索的执行，创建一个新的数据检索任务。单个文件系统同时执行的任务数不超过 20 个。
+     */
+  async RunDataRetrievalTask(
+    req?: RunDataRetrievalTaskRequest,
+    cb?: (error: string, rep: RunDataRetrievalTaskResponse) => void
+  ): Promise<RunDataRetrievalTaskResponse> {
+    return this.request("RunDataRetrievalTask", req, cb)
+  }
+
+  /**
+   * 查询数据检索任务
    */
-  async DoDirectoryOperation(
-    req: DoDirectoryOperationRequest,
-    cb?: (error: string, rep: DoDirectoryOperationResponse) => void
-  ): Promise<DoDirectoryOperationResponse> {
-    return this.request("DoDirectoryOperation", req, cb)
+  async DescribeDataRetrievalTask(
+    req: DescribeDataRetrievalTaskRequest,
+    cb?: (error: string, rep: DescribeDataRetrievalTaskResponse) => void
+  ): Promise<DescribeDataRetrievalTaskResponse> {
+    return this.request("DescribeDataRetrievalTask", req, cb)
   }
 
   /**

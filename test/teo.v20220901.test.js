@@ -228,9 +228,9 @@ it("teo.v20220901.ModifyL7AccRule", async function () {
     }
 })
 
-it("teo.v20220901.CreateSecurityJSInjectionRule", async function () {
+it("teo.v20220901.DescribeAccelerationDomains", async function () {
     try {
-       const data = await client.CreateSecurityJSInjectionRule({})
+       const data = await client.DescribeAccelerationDomains({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -668,6 +668,16 @@ it("teo.v20220901.ModifyL4ProxyRules", async function () {
     }
 })
 
+it("teo.v20220901.ModifyL7AccRulePriority", async function () {
+    try {
+       const data = await client.ModifyL7AccRulePriority({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.DescribeIdentifications", async function () {
     try {
        const data = await client.DescribeIdentifications({})
@@ -718,9 +728,9 @@ it("teo.v20220901.VerifyOwnership", async function () {
     }
 })
 
-it("teo.v20220901.ModifyFunctionRule", async function () {
+it("teo.v20220901.CreateFunctionReplica", async function () {
     try {
-       const data = await client.ModifyFunctionRule({})
+       const data = await client.CreateFunctionReplica({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -768,9 +778,9 @@ it("teo.v20220901.DescribeSecurityIPGroupContent", async function () {
     }
 })
 
-it("teo.v20220901.ModifyL7AccRulePriority", async function () {
+it("teo.v20220901.ModifyFunctionRule", async function () {
     try {
-       const data = await client.ModifyL7AccRulePriority({})
+       const data = await client.ModifyFunctionRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -781,6 +791,16 @@ it("teo.v20220901.ModifyL7AccRulePriority", async function () {
 it("teo.v20220901.ModifyZoneSetting", async function () {
     try {
        const data = await client.ModifyZoneSetting({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.ModifyFunctionReplica", async function () {
+    try {
+       const data = await client.ModifyFunctionReplica({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1268,9 +1288,9 @@ it("teo.v20220901.DeleteContentIdentifier", async function () {
     }
 })
 
-it("teo.v20220901.DescribeRulesSetting", async function () {
+it("teo.v20220901.DescribeFunctionReplicas", async function () {
     try {
-       const data = await client.DescribeRulesSetting({})
+       const data = await client.DescribeFunctionReplicas({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1288,9 +1308,9 @@ it("teo.v20220901.ModifyAccelerationDomainStatuses", async function () {
     }
 })
 
-it("teo.v20220901.ModifySecurityAPIService", async function () {
+it("teo.v20220901.DescribeRulesSetting", async function () {
     try {
-       const data = await client.ModifySecurityAPIService({})
+       const data = await client.DescribeRulesSetting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1318,9 +1338,9 @@ it("teo.v20220901.DeleteRealtimeLogDeliveryTask", async function () {
     }
 })
 
-it("teo.v20220901.DescribeAccelerationDomains", async function () {
+it("teo.v20220901.CreateSecurityJSInjectionRule", async function () {
     try {
-       const data = await client.DescribeAccelerationDomains({})
+       const data = await client.CreateSecurityJSInjectionRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1411,6 +1431,16 @@ it("teo.v20220901.DeleteCustomErrorPage", async function () {
 it("teo.v20220901.HandleFunctionRuntimeEnvironment", async function () {
     try {
        const data = await client.HandleFunctionRuntimeEnvironment({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.ModifySecurityAPIService", async function () {
+    try {
+       const data = await client.ModifySecurityAPIService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2061,6 +2091,16 @@ it("teo.v20220901.DescribeFunctionComponentBindings", async function () {
 it("teo.v20220901.DescribeL4Proxy", async function () {
     try {
        const data = await client.DescribeL4Proxy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DeleteFunctionReplica", async function () {
+    try {
+       const data = await client.DeleteFunctionReplica({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

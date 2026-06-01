@@ -38,130 +38,134 @@ export interface DescribeCloudRunServersResponse {
  */
 export interface ServerBaseConfig {
   /**
-   * 环境 Id
+   * <p>环境 Id</p>
    */
   EnvId: string
   /**
-   * 服务名
+   * <p>服务名</p>
    */
   ServerName: string
   /**
-   * 是否开启公网访问
+   * <p>是否开启公网访问</p>
    */
   OpenAccessTypes: Array<string>
   /**
-   * Cpu 规格
+   * <p>Cpu 规格</p>
    */
   Cpu: number
   /**
-   * Mem 规格
+   * <p>Mem 规格</p>
    */
   Mem: number
   /**
-   * 最小副本数
+   * <p>最小副本数</p>
    */
   MinNum: number
   /**
-   * 最大副本数
+   * <p>最大副本数</p>
    */
   MaxNum: number
   /**
-   * 扩缩容配置
+   * <p>扩缩容配置</p>
    */
   PolicyDetails: Array<HpaPolicy>
   /**
-   * 日志采集路径
+   * <p>日志采集路径</p>
    */
   CustomLogs: string
   /**
-   * 环境变量
+   * <p>环境变量</p>
    */
   EnvParams: string
   /**
-   * 延迟检测时间
+   * <p>延迟检测时间</p>
    */
   InitialDelaySeconds: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime: string
   /**
-   * 服务端口
+   * <p>服务端口</p>
    */
   Port: number
   /**
-   * 是否有Dockerfile
+   * <p>是否有Dockerfile</p>
    */
   HasDockerfile: boolean
   /**
-   * Dockerfile 文件名
+   * <p>Dockerfile 文件名</p>
    */
   Dockerfile: string
   /**
-   * 构建目录
+   * <p>构建目录</p>
    */
   BuildDir: string
   /**
-   * 日志类型: none | default | custom
+   * <p>日志类型: none | default | custom</p>
    */
   LogType?: string
   /**
-   * cls setId
+   * <p>cls setId</p>
    */
   LogSetId?: string
   /**
-   * cls 主题id
+   * <p>cls 主题id</p>
    */
   LogTopicId?: string
   /**
-   * 解析类型：json ｜ line
+   * <p>解析类型：json ｜ line</p>
    */
   LogParseType?: string
   /**
-   * 服务标签, function: 函数托管
+   * <p>服务标签, function: 函数托管</p>
    */
   Tag?: string
   /**
-   * 内网访问开关 close | open
+   * <p>内网访问开关 close | open</p>
    */
   InternalAccess?: string
   /**
-   * 内网域名
+   * <p>内网域名</p>
    */
   InternalDomain?: string
   /**
-   * 运行模式
+   * <p>运行模式</p>
    */
   OperationMode?: string
   /**
-   * 定时扩缩容配置
+   * <p>定时扩缩容配置</p>
    */
   TimerScale?: Array<TimerScale>
   /**
-   * Dockerfile EntryPoint 参数
+   * <p>Dockerfile EntryPoint 参数</p>
    */
   EntryPoint?: Array<string>
   /**
-   * Dockerfile Cmd 参数
+   * <p>Dockerfile Cmd 参数</p>
    */
   Cmd?: Array<string>
   /**
-   * 会话亲和性开关
+   * <p>会话亲和性开关</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SessionAffinity?: string
   /**
-   * Vpc 配置参数
+   * <p>Vpc 配置参数</p>
    */
   VpcConf?: VpcConf
   /**
-   * 存储配置信息
+   * <p>存储配置信息</p>
    */
   VolumesConf?: Array<VolumeConf>
   /**
-   * 关联镜像密钥
+   * <p>关联镜像密钥</p>
    */
   LinkImageRegistry?: string
+  /**
+   * <p>公网访问配置</p>
+   */
+  PublicNetConf?: PublicNetConf
 }
 
 /**
@@ -696,72 +700,49 @@ export interface DeployParam {
  */
 export interface DiffConfigItem {
   /**
-   * 配置项 Key
-MinNum 最小副本数
-MaxNum 最大副本数
-PolicyDetails 扩缩容策略
-AccessTypes 访问类型
-TimerScale 定时扩缩容
-InternalAccess 内网访问
-OperationMode 运行模式 noScale | condScale | alwaysScale | custom ｜ manualScale
-SessionAffinity 会话亲和性 open | close
-CpuSpecs cpu 规格
-MemSpecs mem规格
-EnvParam 环境变量
-LogPath 日志采集路径
-Port 端口
-Dockerfile dockerfile 文件名
-BuildDir 目标目录
-Tag 服务标签
-LogType 日志类型 none | default | custom 
-LogSetId 日志集Id
-LogTopicId 日志主题ID
-LogParseType 日志解析类型 json ｜ line
-EntryPoint entrypoint 命令
-Cmd cmd命令
-VpcConf 网络信息
+   * <p>配置项 Key<br>MinNum 最小副本数<br>MaxNum 最大副本数<br>PolicyDetails 扩缩容策略<br>AccessTypes 访问类型<br>TimerScale 定时扩缩容<br>InternalAccess 内网访问<br>OperationMode 运行模式 noScale | condScale | alwaysScale | custom ｜ manualScale<br>SessionAffinity 会话亲和性 open | close<br>CpuSpecs cpu 规格<br>MemSpecs mem规格<br>EnvParam 环境变量<br>LogPath 日志采集路径<br>Port 端口<br>Dockerfile dockerfile 文件名<br>BuildDir 目标目录<br>Tag 服务标签<br>LogType 日志类型 none | default | custom<br>LogSetId 日志集Id<br>LogTopicId 日志主题ID<br>LogParseType 日志解析类型 json ｜ line<br>EntryPoint entrypoint 命令<br>Cmd cmd命令<br>VpcConf 网络信息</p>
    */
   Key: string
   /**
-   * 字符串类型配置项值
-InternalAccess、OperationMode、SessionAffinity、EnvParam、LogPath、Dockerfile、BuildDir、Tag、LogType、LogSetId、LogTopicId、LogParseType
+   * <p>字符串类型配置项值<br>InternalAccess、OperationMode、SessionAffinity、EnvParam、LogPath、Dockerfile、BuildDir、Tag、LogType、LogSetId、LogTopicId、LogParseType</p>
    */
   Value?: string
   /**
-   * int 类型配置项值
-MinNum、MaxNum、Port
+   * <p>int 类型配置项值<br>MinNum、MaxNum、Port</p>
    */
   IntValue?: number
   /**
-   * bool 类型配置项值
+   * <p>bool 类型配置项值</p>
    */
   BoolValue?: boolean
   /**
-   * 浮点型配置项值
-CpuSpecs、MemSpecs
+   * <p>浮点型配置项值<br>CpuSpecs、MemSpecs</p>
    */
   FloatValue?: number
   /**
-   * 字符串数组配置项值
-AccessTypes，EntryPoint，Cmd
+   * <p>字符串数组配置项值<br>AccessTypes，EntryPoint，Cmd</p>
    */
   ArrayValue?: Array<string>
   /**
-   * 扩缩容策略配置项值
+   * <p>扩缩容策略配置项值</p>
    */
   PolicyDetails?: Array<HpaPolicy>
   /**
-   * 定时扩缩容配置项值
+   * <p>定时扩缩容配置项值</p>
    */
   TimerScale?: Array<TimerScale>
   /**
-   * 配置内网访问时网络信息
+   * <p>配置内网访问时网络信息</p>
    */
   VpcConf?: VpcConf
   /**
-   * 存储配置信息
+   * <p>存储配置信息</p>
    */
   VolumesConf?: Array<VolumeConf>
+  /**
+   * <p>公网访问配置</p>
+   */
+  PublicNetConf?: PublicNetConf
 }
 
 /**
@@ -1054,6 +1035,24 @@ export interface UpdateCloudRunServerRequest {
 }
 
 /**
+ * 删除版本时需要的简化信息
+ */
+export interface SimpleVersion {
+  /**
+   * 要删除版本的环境 Id
+   */
+  EnvId: string
+  /**
+   * 要删除版本的服务名
+   */
+  ServerName: string
+  /**
+   * 要删除版本的版本名
+   */
+  VersionName: string
+}
+
+/**
  * 云日志服务相关信息
  */
 export interface LogServiceInfo {
@@ -1323,21 +1322,13 @@ export interface LogObject {
 }
 
 /**
- * 删除版本时需要的简化信息
+ * 公网访问配置
  */
-export interface SimpleVersion {
+export interface PublicNetConf {
   /**
-   * 要删除版本的环境 Id
+   * <p>是否开启公网访问</p><p>枚举值：</p><ul><li>ENABLE： 开启公网访问</li><li>DISABLE： 关闭公网访问</li></ul>
    */
-  EnvId: string
-  /**
-   * 要删除版本的服务名
-   */
-  ServerName: string
-  /**
-   * 要删除版本的版本名
-   */
-  VersionName: string
+  PublicNetStatus?: string
 }
 
 /**

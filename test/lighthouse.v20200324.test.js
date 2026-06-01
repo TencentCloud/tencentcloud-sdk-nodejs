@@ -138,6 +138,16 @@ it("lighthouse.v20200324.InquirePriceCreateDisks", async function () {
     }
 })
 
+it("lighthouse.v20200324.DescribeBlueprintsShareAcrossAccountInfos", async function () {
+    try {
+       const data = await client.DescribeBlueprintsShareAcrossAccountInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.TerminateInstances", async function () {
     try {
        const data = await client.TerminateInstances({})

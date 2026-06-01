@@ -1699,6 +1699,28 @@ export interface ModifyFirewallRulesRequest {
 }
 
 /**
+ * 实例违规详情。
+ */
+export interface InstanceViolationDetail {
+  /**
+   *  来源：RESTRICT：封禁、FREEZW：冻结
+   */
+  Source?: string
+  /**
+   * 是否允许自助解封：1是，2否
+   */
+  State?: string
+  /**
+   * 违规类型
+   */
+  Reason?: string
+  /**
+   * 违规内容（URL、关联域名）
+   */
+  Content?: string
+}
+
+/**
  * CreateBlueprint请求参数结构体
  */
 export interface CreateBlueprintRequest {
@@ -2862,6 +2884,16 @@ export interface ModifyFirewallTemplateResponse {
 }
 
 /**
+ * ResetInstancesPassword返回参数结构体
+ */
+export interface ResetInstancesPasswordResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeInstancesReturnable请求参数结构体
  */
 export interface DescribeInstancesReturnableRequest {
@@ -3026,9 +3058,17 @@ export interface ApplyDiskBackupRequest {
 }
 
 /**
- * ResetInstancesPassword返回参数结构体
+ * DescribeBlueprintsShareAcrossAccountInfos返回参数结构体
  */
-export interface ResetInstancesPasswordResponse {
+export interface DescribeBlueprintsShareAcrossAccountInfosResponse {
+  /**
+   * 符合条件的镜像共享信息数量。
+   */
+  TotalCount?: number
+  /**
+   * 镜像共享信息列表。
+   */
+  BlueprintShareAcrossAccountInfoSet?: Array<BlueprintShareAcrossAccountInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3271,25 +3311,29 @@ export interface CreateKeyPairResponse {
 }
 
 /**
- * 实例违规详情。
+ * DescribeBlueprintsShareAcrossAccountInfos请求参数结构体
  */
-export interface InstanceViolationDetail {
+export interface DescribeBlueprintsShareAcrossAccountInfosRequest {
   /**
-   *  来源：RESTRICT：封禁、FREEZW：冻结
+   * 镜像 ID 列表。可以通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回的BlueprintId获取。
    */
-  Source?: string
+  BlueprintIds: Array<string>
   /**
-   * 是否允许自助解封：1是，2否
+   * 偏移量，默认为 0。
    */
-  State?: string
+  Offset?: number
   /**
-   * 违规类型
+   * 返回数量，默认为 20，最大值为 100。
    */
-  Reason?: string
+  Limit?: number
   /**
-   * 违规内容（URL、关联域名）
+   * 过滤器列表。
+<li>account-id</li>按照【[账号 ID](https://console.cloud.tencent.com/developer)】进行过滤。
+类型：String
+必选：否
+每次请求的 Filters 的上限为 10，Filter.Values 的上限为 5。
    */
-  Content?: string
+  Filters?: Array<Filter>
 }
 
 /**
@@ -4978,6 +5022,24 @@ export interface ModifyFirewallTemplateRequest {
 }
 
 /**
+ * 镜像跨账号共享信息。
+ */
+export interface BlueprintShareAcrossAccountInfo {
+  /**
+   * 镜像ID。
+   */
+  BlueprintId?: string
+  /**
+   * 镜像共享的账户ID。
+   */
+  AccountId?: string
+  /**
+   * 镜像共享时间。按照 ISO8601 标准表示，并且使用 UTC 时间。 格式为： YYYY-MM-DDThh:mm:ssZ。
+   */
+  CreatedTime?: string
+}
+
+/**
  * 续费云硬盘包年包月相关参数设置。
  */
 export interface RenewDiskChargePrepaid {
@@ -5234,13 +5296,13 @@ export interface ModifyDockerContainerResponse {
 }
 
 /**
- * DescribeDiskBackupsDeniedActions返回参数结构体
+ * DescribeDisksDeniedActions返回参数结构体
  */
-export interface DescribeDiskBackupsDeniedActionsResponse {
+export interface DescribeDisksDeniedActionsResponse {
   /**
-   * 云硬盘备份点操作限制列表详细信息。
+   * 云硬盘操作限制列表详细信息。
    */
-  DiskBackupDeniedActionSet?: Array<DiskBackupDeniedActions>
+  DiskDeniedActionSet?: Array<DiskDeniedActions>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5814,13 +5876,13 @@ export interface RenameDockerContainerRequest {
 }
 
 /**
- * DescribeDisksDeniedActions返回参数结构体
+ * DescribeDiskBackupsDeniedActions返回参数结构体
  */
-export interface DescribeDisksDeniedActionsResponse {
+export interface DescribeDiskBackupsDeniedActionsResponse {
   /**
-   * 云硬盘操作限制列表详细信息。
+   * 云硬盘备份点操作限制列表详细信息。
    */
-  DiskDeniedActionSet?: Array<DiskDeniedActions>
+  DiskBackupDeniedActionSet?: Array<DiskBackupDeniedActions>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

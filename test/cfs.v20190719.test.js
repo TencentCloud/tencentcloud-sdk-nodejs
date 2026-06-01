@@ -18,6 +18,16 @@ const client = new tencentcloud.cfs.v20190719.Client({
 })
 describe("cfs.v20190719.test.js", function () {
 
+it("cfs.v20190719.DoDirectoryOperation", async function () {
+    try {
+       const data = await client.DoDirectoryOperation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfs.v20190719.DescribeCfsRules", async function () {
     try {
        const data = await client.DescribeCfsRules({})
@@ -108,9 +118,9 @@ it("cfs.v20190719.SetUserQuota", async function () {
     }
 })
 
-it("cfs.v20190719.CreateCfsPGroup", async function () {
+it("cfs.v20190719.DeleteDataRetrieval", async function () {
     try {
-       const data = await client.CreateCfsPGroup({})
+       const data = await client.DeleteDataRetrieval({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,6 +168,16 @@ it("cfs.v20190719.DeleteLifecyclePolicy", async function () {
     }
 })
 
+it("cfs.v20190719.DescribeAutoSnapshotPolicies", async function () {
+    try {
+       const data = await client.DescribeAutoSnapshotPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfs.v20190719.UnbindAutoSnapshotPolicy", async function () {
     try {
        const data = await client.UnbindAutoSnapshotPolicy({})
@@ -198,6 +218,16 @@ it("cfs.v20190719.DescribeCfsServiceStatus", async function () {
     }
 })
 
+it("cfs.v20190719.DescribeDataRetrieval", async function () {
+    try {
+       const data = await client.DescribeDataRetrieval({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfs.v20190719.StopMigrationTask", async function () {
     try {
        const data = await client.StopMigrationTask({})
@@ -208,9 +238,9 @@ it("cfs.v20190719.StopMigrationTask", async function () {
     }
 })
 
-it("cfs.v20190719.DescribeBucketList", async function () {
+it("cfs.v20190719.CreateDataRetrieval", async function () {
     try {
-       const data = await client.DescribeBucketList({})
+       const data = await client.CreateDataRetrieval({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -251,16 +281,6 @@ it("cfs.v20190719.OverrideCfsRules", async function () {
 it("cfs.v20190719.SignUpCfsService", async function () {
     try {
        const data = await client.SignUpCfsService({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("cfs.v20190719.CreateAutoSnapshotPolicy", async function () {
-    try {
-       const data = await client.CreateAutoSnapshotPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,9 +338,29 @@ it("cfs.v20190719.CreateCfsFileSystem", async function () {
     }
 })
 
+it("cfs.v20190719.DescribeBucketList", async function () {
+    try {
+       const data = await client.DescribeBucketList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfs.v20190719.DescribeCfsPGroups", async function () {
     try {
        const data = await client.DescribeCfsPGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.ModifyDataRetrieval", async function () {
+    try {
+       const data = await client.ModifyDataRetrieval({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,9 +408,9 @@ it("cfs.v20190719.ApplyPathLifecyclePolicy", async function () {
     }
 })
 
-it("cfs.v20190719.ModifyFileSystemAutoScaleUpRule", async function () {
+it("cfs.v20190719.DeleteUserQuota", async function () {
     try {
-       const data = await client.ModifyFileSystemAutoScaleUpRule({})
+       const data = await client.DeleteUserQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -401,6 +441,16 @@ it("cfs.v20190719.UpdateCfsRule", async function () {
 it("cfs.v20190719.DescribeCfsFileSystems", async function () {
     try {
        const data = await client.DescribeCfsFileSystems({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.ModifyFileSystemAutoScaleUpRule", async function () {
+    try {
+       const data = await client.ModifyFileSystemAutoScaleUpRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,9 +518,9 @@ it("cfs.v20190719.CreateMigrationTask", async function () {
     }
 })
 
-it("cfs.v20190719.DeleteUserQuota", async function () {
+it("cfs.v20190719.CreateAutoSnapshotPolicy", async function () {
     try {
-       const data = await client.DeleteUserQuota({})
+       const data = await client.CreateAutoSnapshotPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -478,9 +528,9 @@ it("cfs.v20190719.DeleteUserQuota", async function () {
     }
 })
 
-it("cfs.v20190719.DescribeAutoSnapshotPolicies", async function () {
+it("cfs.v20190719.CreateCfsPGroup", async function () {
     try {
-       const data = await client.DescribeAutoSnapshotPolicies({})
+       const data = await client.CreateCfsPGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -528,9 +578,19 @@ it("cfs.v20190719.UpdateAutoSnapshotPolicy", async function () {
     }
 })
 
-it("cfs.v20190719.DoDirectoryOperation", async function () {
+it("cfs.v20190719.RunDataRetrievalTask", async function () {
     try {
-       const data = await client.DoDirectoryOperation({})
+       const data = await client.RunDataRetrievalTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfs.v20190719.DescribeDataRetrievalTask", async function () {
+    try {
+       const data = await client.DescribeDataRetrievalTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

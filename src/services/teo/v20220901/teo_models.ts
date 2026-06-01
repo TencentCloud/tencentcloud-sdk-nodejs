@@ -2630,35 +2630,13 @@ export interface RealtimeLogDeliveryTask {
 }
 
 /**
- * bot 用户画像规则
+ * DeleteFunctionReplica返回参数结构体
  */
-export interface BotPortraitRule {
+export interface DeleteFunctionReplicaResponse {
   /**
-   * 本功能的开关，取值有：
-<li>on：开启；</li>
-<li>off：关闭。</li>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Switch: string
-  /**
-   * 本规则的ID。仅出参使用。
-   */
-  RuleID?: number
-  /**
-   * JS挑战的规则ID。默认所有规则不配置JS挑战。
-   */
-  AlgManagedIds?: Array<number | bigint>
-  /**
-   * 数字验证码的规则ID。默认所有规则不配置数字验证码。
-   */
-  CapManagedIds?: Array<number | bigint>
-  /**
-   * 观察的规则ID。默认所有规则不配置观察。
-   */
-  MonManagedIds?: Array<number | bigint>
-  /**
-   * 拦截的规则ID。默认所有规则不配置拦截。
-   */
-  DropManagedIds?: Array<number | bigint>
+  RequestId?: string
 }
 
 /**
@@ -4649,6 +4627,24 @@ export interface EdgeKVDeleteResponse {
 }
 
 /**
+ * DescribeFunctionReplicas返回参数结构体
+ */
+export interface DescribeFunctionReplicasResponse {
+  /**
+   * 边缘函数副本总数。
+   */
+  TotalCount?: number
+  /**
+   * 边缘函数副本列表。
+   */
+  FunctionReplicas?: Array<FunctionReplica>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateSecurityAPIService返回参数结构体
  */
 export interface CreateSecurityAPIServiceResponse {
@@ -5144,6 +5140,32 @@ export interface ModifySecurityPolicyRequest {
    * 指定策略模板 ID。当 Entity 参数值为 Template 时，使用本参数指定策略模板的 ID。
    */
   TemplateId?: string
+}
+
+/**
+ * CreateFunctionReplica请求参数结构体
+ */
+export interface CreateFunctionReplicaRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 函数 ID。
+   */
+  FunctionId: string
+  /**
+   * 边缘函数副本名称。限制可输入 1-50 个字符，允许的字符为a-z、0-9、-，且-不能单独注册或连续使用，不能放在开头或结尾。同一 FunctionId 下副本名称需唯一。
+   */
+  ReplicaName: string
+  /**
+   * 边缘函数副本内容，当前仅支持 JavaScript 代码，最大支持 5MB。
+   */
+  Content: string
+  /**
+   * 边缘函数副本描述。最大支持 50 个字符。
+   */
+  Remark?: string
 }
 
 /**
@@ -6922,6 +6944,24 @@ export interface ModifyApplicationProxyRuleResponse {
 }
 
 /**
+ * DeleteFunctionReplica请求参数结构体
+ */
+export interface DeleteFunctionReplicaRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 函数 ID。
+   */
+  FunctionId: string
+  /**
+   * 需要删除的函数的副本名称。支持以列表的形式传入。
+   */
+  ReplicaNames: Array<string>
+}
+
+/**
  * DDoS配置
  */
 export interface DDoS {
@@ -7631,6 +7671,16 @@ export interface RateLimitUserRule {
 }
 
 /**
+ * ModifyFunctionReplica返回参数结构体
+ */
+export interface ModifyFunctionReplicaResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 配置组版本发布记录详情。
  */
 export interface DeployRecord {
@@ -7761,6 +7811,36 @@ export interface CreateJustInTimeTranscodeTemplateRequest {
    * 音频流配置参数，当 AudioStreamSwitch 为 on，该字段必填。
    */
   AudioTemplate?: AudioTemplateInfo
+}
+
+/**
+ * 边缘函数副本。
+ */
+export interface FunctionReplica {
+  /**
+   * 函数 ID。
+   */
+  FunctionId?: string
+  /**
+   * 边缘函数副本名称。
+   */
+  ReplicaName?: string
+  /**
+   * 边缘函数副本内容。格式为 JavaScript 代码。
+   */
+  Content?: string
+  /**
+   * 边缘函数副本描述。
+   */
+  Remark?: string
+  /**
+   * 边缘函数副本创建时间。
+   */
+  CreatedOn?: string
+  /**
+   * 边缘函数副本更新时间。
+   */
+  ModifiedOn?: string
 }
 
 /**
@@ -9048,6 +9128,16 @@ export interface ClientAttester {
  * ModifyL4ProxyRulesStatus返回参数结构体
  */
 export interface ModifyL4ProxyRulesStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateFunctionReplica返回参数结构体
+ */
+export interface CreateFunctionReplicaResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13183,6 +13273,40 @@ export interface ModifySecurityIPGroupRequest {
 }
 
 /**
+ * DescribeFunctionReplicas请求参数结构体
+ */
+export interface DescribeFunctionReplicasRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 函数 ID。
+   */
+  FunctionId: string
+  /**
+   * 分页查询偏移量。默认值：0。
+   */
+  Offset?: number
+  /**
+   * 分页查询限制数目。默认值：20，最大值：200。
+   */
+  Limit?: number
+  /**
+   * 排序依据，取值有：  <li>created-on：创建时间。</li>  默认根据 created-on 属性排序。
+   */
+  SortBy?: string
+  /**
+   * 列表排序方式，取值有：  <li>asc：升序排列；</li>  <li>desc：降序排列。</li>  默认值为 asc。
+   */
+  SortOrder?: string
+  /**
+   * 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回函数 ID 下全部函数副本。详细的过滤条件如下：  <li> replica-name：按照函数副本名称进行过滤，支持模糊查询。</li>
+   */
+  Filters?: Array<AdvancedFilter>
+}
+
+/**
  * [Vary 特性](https://cloud.tencent.com/document/product/1552/89301) 配置参数。
  */
 export interface VaryParameters {
@@ -15411,6 +15535,32 @@ export interface IPSSLSetting {
 }
 
 /**
+ * ModifyFunctionReplica请求参数结构体
+ */
+export interface ModifyFunctionReplicaRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 函数 ID。
+   */
+  FunctionId: string
+  /**
+   * 需要修改的边缘函数副本名称。
+   */
+  ReplicaName: string
+  /**
+   * 边缘函数副本内容，当前仅支持 JavaScript 代码，最大支持 5MB。
+   */
+  Content?: string
+  /**
+   * 边缘函数副本描述。最大支持 50 个字符。
+   */
+  Remark?: string
+}
+
+/**
  * DescribeMultiPathGateways请求参数结构体
  */
 export interface DescribeMultiPathGatewaysRequest {
@@ -15432,6 +15582,38 @@ export interface DescribeMultiPathGatewaysRequest {
 <li> keyword：按照网关名的关键字进行过滤。</li>
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * bot 用户画像规则
+ */
+export interface BotPortraitRule {
+  /**
+   * 本功能的开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch: string
+  /**
+   * 本规则的ID。仅出参使用。
+   */
+  RuleID?: number
+  /**
+   * JS挑战的规则ID。默认所有规则不配置JS挑战。
+   */
+  AlgManagedIds?: Array<number | bigint>
+  /**
+   * 数字验证码的规则ID。默认所有规则不配置数字验证码。
+   */
+  CapManagedIds?: Array<number | bigint>
+  /**
+   * 观察的规则ID。默认所有规则不配置观察。
+   */
+  MonManagedIds?: Array<number | bigint>
+  /**
+   * 拦截的规则ID。默认所有规则不配置拦截。
+   */
+  DropManagedIds?: Array<number | bigint>
 }
 
 /**

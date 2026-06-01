@@ -724,57 +724,61 @@ export interface DisplayWechatOfficialAccount {
  */
 export interface DisplayConfig {
   /**
-   * 主键Id
+   * <p>主键Id</p>
    */
   Id?: number
   /**
-   * 地址
+   * <p>地址</p>
    */
   Url?: string
   /**
-   * 站点标题
+   * <p>站点标题</p>
    */
   Title?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
-   * 响应长度
+   * <p>响应长度</p>
    */
   ContentLength?: number
   /**
-   * 公共字段
+   * <p>公共字段</p>
    */
   DisplayToolCommon?: DisplayToolCommon
   /**
-   * Ip数据
+   * <p>Ip数据</p>
    */
   Ip?: string
   /**
-   * AI评分
+   * <p>AI评分</p>
    */
   AIRating?: number
   /**
-   * AI分析
+   * <p>AI分析</p>
    */
   AIAnalysis?: string
   /**
-   * 风险等级: 1-低危, 2-中危, 3-高危, 4-危级, 5-误报
+   * <p>风险等级: 1-低危, 2-中危, 3-高危, 4-危级, 5-误报</p>
    */
   RiskLevel?: number
   /**
-   * 建议
+   * <p>建议</p>
    */
   Suggestion?: string
   /**
-   * 是否为云资产
+   * <p>是否为云资产</p>
    */
   IsCloudAsset?: number
   /**
-   * 云资产状态，-1为下线
+   * <p>云资产状态，-1为下线</p>
    */
   CloudAssetStatus?: number
+  /**
+   * <p>聚合视角下该组真实子项总数；非聚合视角为 0</p>
+   */
+  AggregationCount?: number
 }
 
 /**
@@ -800,7 +804,7 @@ export interface DescribeNetDisksResponse {
  */
 export interface CreateJobRecordResponse {
   /**
-   * 任务Id
+   * <p>任务Id</p>
    */
   Id?: number
   /**
@@ -1182,7 +1186,7 @@ export interface IdndValue {
  */
 export interface ModifyCustomerResponse {
   /**
-   * 企业ID
+   * <p>企业ID</p>
    */
   Id?: number
   /**
@@ -1196,25 +1200,41 @@ export interface ModifyCustomerResponse {
  */
 export interface CreateJobRecordRequest {
   /**
-   * 企业ID
+   * <p>企业ID</p>
    */
   CustomerId: number
   /**
-   * 任务类型：即时任务
+   * <p>任务类型：即时任务</p>
    */
   TaskType: string
   /**
-   * 资产收集、漏洞信息、弱口令、目录爆破、暗网泄露、Github泄露、文库网盘泄露、敏感信息泄露，其中资产收集必包含，多个用英文逗号隔离，例如：资产收集,漏洞信息
+   * <p>资产收集、漏洞信息、弱口令、目录爆破、暗网泄露、Github泄露、文库网盘泄露、敏感信息泄露，其中资产收集必包含，多个用英文逗号隔离，例如：资产收集,漏洞信息</p>
    */
   ScanType?: string
   /**
-   * qps设置
+   * <p>qps设置</p>
    */
   Qps?: number
   /**
-   * 是否包含完整扫描
+   * <p>是否包含完整扫描</p>
    */
   IsIncludeFullScan?: boolean
+  /**
+   * <p>端口扫描 QPS，默认 100，下限 10，保守值 200，上限 5000</p><p>默认值：100</p>
+   */
+  PortScanQps?: number
+  /**
+   * <p>单 IP 任务并发数，默认 1，下限 1，保守值 3，上限 10</p><p>默认值：1</p>
+   */
+  SingleIPTaskLimit?: number
+  /**
+   * <p>任一速率超过保守值时必须为 true，否则参数错误</p>
+   */
+  HighRiskAck?: boolean
+  /**
+   * <p>知情同意勾选清单，用于审计回放</p>
+   */
+  ScanRateAckChecklist?: Array<string>
 }
 
 /**
@@ -1718,33 +1738,37 @@ export interface StopJobRecordRequest {
  */
 export interface DisplaySensitiveInfo {
   /**
-   * 主键Id
+   * <p>主键Id</p>
    */
   Id?: number
   /**
-   * 类型
+   * <p>类型</p>
    */
   Type?: string
   /**
-   * 来源
+   * <p>来源</p>
    */
   Source?: string
   /**
-   * 值
+   * <p>值</p>
    */
   Value?: string
   /**
-   * 公共字段
+   * <p>公共字段</p>
    */
   DisplayToolCommon?: DisplayToolCommon
   /**
-   * 是否为云资产：0-非云资产 1-是云资产
+   * <p>是否为云资产：0-非云资产 1-是云资产</p>
    */
   IsCloudAsset?: number
   /**
-   * 云资产是否下线：-1-已下线 0-正常
+   * <p>云资产是否下线：-1-已下线 0-正常</p>
    */
   CloudAssetStatus?: number
+  /**
+   * <p>聚合视角下该组真实子项总数；非聚合视角为 0</p>
+   */
+  AggregationCount?: number
 }
 
 /**
@@ -2038,86 +2062,90 @@ export interface CreateAppRequest {
  */
 export interface DisplayHttp {
   /**
-   * 主键ID
+   * <p>主键ID</p>
    */
   Id?: number
   /**
-   * 公共字段
+   * <p>公共字段</p>
    */
   DisplayToolCommon?: DisplayToolCommon
   /**
-   * Url
+   * <p>Url</p>
    */
   Url?: string
   /**
-   * 标题
+   * <p>标题</p>
    */
   Title?: string
   /**
-   * 报文长度
+   * <p>报文长度</p>
    */
   ContentLength?: number
   /**
-   * 报文内容
+   * <p>报文内容</p>
    */
   Content?: string
   /**
-   * 截图缩略图URL
+   * <p>截图缩略图URL</p>
    */
   ScreenshotThumbUrl?: string
   /**
-   * 截图URL
+   * <p>截图URL</p>
    */
   ScreenshotUrl?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
-   * Api地址
+   * <p>Api地址</p>
    */
   Api?: string
   /**
-   * 解析的IP
+   * <p>解析的IP</p>
    */
   Ip?: string
   /**
-   * 证书信息
+   * <p>证书信息</p>
    */
   Ssl?: string
   /**
-   * ssl证书过期时间
+   * <p>ssl证书过期时间</p>
    */
   SslExpiredTime?: string
   /**
-   * 资产是否发生变动
+   * <p>资产是否发生变动</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsChange?: boolean
   /**
-   * 是否为云资产：0-非云资产 1-是云资产
+   * <p>是否为云资产：0-非云资产 1-是云资产</p>
    */
   IsCloudAsset?: number
   /**
-   * 云资产是否下线：-1-已下线 0-正常
+   * <p>云资产是否下线：-1-已下线 0-正常</p>
    */
   CloudAssetStatus?: number
   /**
-   * 可用率（百分比）
+   * <p>可用率（百分比）</p>
    */
   AvailabilityRate?: number
   /**
-   * 可用状态 1:异常 0:正常
+   * <p>可用状态 1:异常 0:正常</p>
    */
   AvailabilityState?: number
   /**
-   * 平均响应时间：单位ms
+   * <p>平均响应时间：单位ms</p>
    */
   ResponseTime?: number
   /**
-   * 域名解析状态 1:异常 0:正常
+   * <p>域名解析状态 1:异常 0:正常</p>
    */
   AnalysisState?: number
+  /**
+   * <p>聚合视角下该组真实子项总数；非聚合视角为 0</p>
+   */
+  AggregationCount?: number
 }
 
 /**
@@ -2871,73 +2899,89 @@ export interface DeleteDomainsRequest {
  */
 export interface ModifyCustomerRequest {
   /**
-   * 企业名称
+   * <p>企业名称</p>
    */
   Name: string
   /**
-   * 百分比取值范围为30-100
+   * <p>百分比取值范围为30-100</p>
    */
   Percent: number
   /**
-   * 资产收集、漏洞信息、弱口令、目录爆破、暗网泄露、Github泄露、文库网盘泄露、敏感信息泄露，其中资产收集必包含，多个用英文逗号隔离，例如：资产收集,漏洞信息
+   * <p>资产收集、漏洞信息、弱口令、目录爆破、暗网泄露、Github泄露、文库网盘泄露、敏感信息泄露，其中资产收集必包含，多个用英文逗号隔离，例如：资产收集,漏洞信息</p>
    */
   ScanType: string
   /**
-   * 企业ID
+   * <p>企业ID</p>
    */
   Id: number
   /**
-   * 周期测绘时间
+   * <p>周期测绘时间</p>
    */
   ScanCron?: string
   /**
-   * 是否立即启动
+   * <p>是否立即启动</p>
    */
   IsScanNow?: boolean
   /**
-   * 是否启用周期测绘
+   * <p>是否启用周期测绘</p>
    */
   EnableCron?: boolean
   /**
-   * 是否扫描子公司
+   * <p>是否扫描子公司</p>
    */
   EnableScanSubEnterprise?: boolean
   /**
-   * 是否授权
+   * <p>是否授权</p>
    */
   EnableAuth?: boolean
   /**
-   * 授权开始时间
+   * <p>授权开始时间</p>
    */
   AuthStartAt?: string
   /**
-   * 授权结束时间
+   * <p>授权结束时间</p>
    */
   AuthEndAt?: string
   /**
-   * 授权文件id
+   * <p>授权文件id</p>
    */
   AuthFile?: string
   /**
-   * 测绘时间配置项，采用json字符串格式
+   * <p>测绘时间配置项，采用json字符串格式</p>
    */
   ScanTime?: string
   /**
-   * 企业图标
+   * <p>企业图标</p>
    */
   Icon?: string
   /**
-   * 并发
+   * <p>并发</p>
    */
   Qps?: number
   /**
-   * 子公司拓展层次
+   * <p>子公司拓展层次</p>
    */
   SubCompanyLevel?: number
   /**
-   * 是否包含完整的扫描
+   * <p>是否包含完整的扫描</p>
    */
   IsIncludeFullScan?: boolean
+  /**
+   * <p>端口扫描 QPS，默认 100，下限 10，保守值 200，上限 5000</p><p>默认值：100</p>
+   */
+  PortScanQps?: number
+  /**
+   * <p>单 IP 任务并发数，默认 1，下限 1，保守值 3，上限 10</p><p>默认值：1</p>
+   */
+  SingleIPTaskLimit?: number
+  /**
+   * <p>任一速率超过保守值时必须为 true，否则参数错误</p>
+   */
+  HighRiskAck?: boolean
+  /**
+   * <p>知情同意勾选清单，用于审计回放</p>
+   */
+  ScanRateAckChecklist?: Array<string>
 }
 
 /**
@@ -3152,6 +3196,10 @@ export interface DisplaySubDomain {
    * <p>DNS解析值</p>
    */
   DnsValue?: string
+  /**
+   * <p>聚合视角下该组真实子项总数；非聚合视角为 0</p>
+   */
+  AggregationCount?: number
 }
 
 /**
@@ -3794,61 +3842,65 @@ export interface DescribeWeakPasswordsRequest {
  */
 export interface DisplayPort {
   /**
-   * 主键ID
+   * <p>主键ID</p>
    */
   Id?: number
   /**
-   * 公共字段
+   * <p>公共字段</p>
    */
   DisplayToolCommon?: DisplayToolCommon
   /**
-   * IP或域名地址
+   * <p>IP或域名地址</p>
    */
   Asset?: string
   /**
-   * 解析的IP
+   * <p>解析的IP</p>
    */
   Ip?: string
   /**
-   * 端口
+   * <p>端口</p>
    */
   Port?: number
   /**
-   * 是否高危
+   * <p>是否高危</p>
    */
   IsHighRisk?: boolean
   /**
-   * 组件名称
+   * <p>组件名称</p>
    */
   App?: string
   /**
-   * 服务名称
+   * <p>服务名称</p>
    */
   Service?: string
   /**
-   * 端口响应详情
+   * <p>端口响应详情</p>
    */
   Banner?: string
   /**
-   * 上次检测时间
+   * <p>上次检测时间</p>
    */
   LastCheckTime?: string
   /**
-   * 状态，close:连接超时，端口可能已关闭，open:端口开放, checking:复测中, ignore:已忽略
+   * <p>状态，close:连接超时，端口可能已关闭，open:端口开放, checking:复测中, ignore:已忽略</p>
    */
   Status?: string
   /**
-   * 是否为云资产：0-非云资产 1-是云资产
+   * <p>是否为云资产：0-非云资产 1-是云资产</p>
    */
   IsCloudAsset?: number
   /**
-   * 云资产是否下线：-1-已下线 0-正常
+   * <p>云资产是否下线：-1-已下线 0-正常</p>
    */
   CloudAssetStatus?: number
   /**
-   * 域名解析状态 1:异常 0:正常
+   * <p>域名解析状态 1:异常 0:正常</p>
    */
   AnalysisState?: number
+  /**
+   * <p>聚合视角下该组真实子项总数；非聚合视角为 0</p>
+   */
+  AggregationCount?: number
 }
 
 /**
@@ -4062,73 +4114,89 @@ export interface Equity {
  */
 export interface CreateCustomerRequest {
   /**
-   * 企业名称
+   * <p>企业名称</p>
    */
   Name: string
   /**
-   * 资产收集、漏洞信息、弱口令、目录爆破、暗网泄露、Github泄露、文库网盘泄露、敏感信息泄露，其中资产收集必包含，多个用英文逗号隔离，例如：资产收集,漏洞信息
+   * <p>资产收集、漏洞信息、弱口令、目录爆破、暗网泄露、Github泄露、文库网盘泄露、敏感信息泄露，其中资产收集必包含，多个用英文逗号隔离，例如：资产收集,漏洞信息</p>
    */
   ScanType: string
   /**
-   * 百分比取值范围为30-100
+   * <p>百分比取值范围为30-100</p>
    */
   Percent?: number
   /**
-   * 周期测绘时间
+   * <p>周期测绘时间</p>
    */
   ScanCron?: string
   /**
-   * 是否立即启动
+   * <p>是否立即启动</p>
    */
   IsScanNow?: boolean
   /**
-   * 是否启用周期测绘
+   * <p>是否启用周期测绘</p>
    */
   EnableCron?: boolean
   /**
-   * 是否扫描子公司
+   * <p>是否扫描子公司</p>
    */
   EnableScanSubEnterprise?: boolean
   /**
-   * 是否授权
+   * <p>是否授权</p>
    */
   EnableAuth?: boolean
   /**
-   * 授权开始时间
+   * <p>授权开始时间</p>
    */
   AuthStartAt?: string
   /**
-   * 授权结束时间
+   * <p>授权结束时间</p>
    */
   AuthEndAt?: string
   /**
-   * 授权文件id
+   * <p>授权文件id</p>
    */
   AuthFile?: string
   /**
-   * 测绘时间配置项，采用json字符串格式
+   * <p>测绘时间配置项，采用json字符串格式</p>
    */
   ScanTime?: string
   /**
-   * 企业相关的关键字
+   * <p>企业相关的关键字</p>
    */
   Keywords?: string
   /**
-   * 图标
+   * <p>图标</p>
    */
   Icon?: string
   /**
-   * 并发设置
+   * <p>并发设置</p>
    */
   Qps?: number
   /**
-   * 限制子公司层级，-1表示不限制
+   * <p>限制子公司层级，-1表示不限制</p>
    */
   SubCompanyLevel?: number
   /**
-   * 是否以企业名称为起点做完整扫描(包含手动上传),如只想扫描特定的某几个域名，则传false。
+   * <p>是否以企业名称为起点做完整扫描(包含手动上传),如只想扫描特定的某几个域名，则传false。</p>
    */
   IsIncludeFullScan?: boolean
+  /**
+   * <p>端口扫描 QPS，默认 100，下限 10，保守值 200，上限 5000</p><p>默认值：100</p>
+   */
+  PortScanQps?: number
+  /**
+   * <p>单 IP 任务并发数，默认 1，下限 1，保守值 3，上限 10</p><p>默认值：1</p>
+   */
+  SingleIPTaskLimit?: number
+  /**
+   * <p>任一速率超过保守值时必须为 true，否则参数错误</p>
+   */
+  HighRiskAck?: boolean
+  /**
+   * <p>知情同意勾选清单，用于审计回放</p>
+   */
+  ScanRateAckChecklist?: Array<string>
 }
 
 /**
@@ -4350,49 +4418,53 @@ export interface DisplayGithub {
  */
 export interface DisplayApiSec {
   /**
-   * 主键ID
+   * <p>主键ID</p>
    */
   Id?: number
   /**
-   * 公共字段
+   * <p>公共字段</p>
    */
   DisplayToolCommon?: DisplayToolCommon
   /**
-   * Url
+   * <p>Url</p>
    */
   Url?: string
   /**
-   * Host地址
+   * <p>Host地址</p>
    */
   Host?: string
   /**
-   * Path路径
+   * <p>Path路径</p>
    */
   Path?: string
   /**
-   * 方法：POST、GET、DELETE等
+   * <p>方法：POST、GET、DELETE等</p>
    */
   Method?: string
   /**
-   * 修复状态：unrepaired:未修复，repaired:已修复, ignore:已忽略,checking:复测中
+   * <p>修复状态：unrepaired:未修复，repaired:已修复, ignore:已忽略,checking:复测中</p>
    */
   Status?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
-   * 请求体
+   * <p>请求体</p>
    */
   Request?: string
   /**
-   * 响应体
+   * <p>响应体</p>
    */
   Response?: string
   /**
-   * 是否风险API
+   * <p>是否风险API</p>
    */
   IsRiskAPI?: boolean
+  /**
+   * <p>聚合视角下该组真实子项总数；非聚合视角为 0</p>
+   */
+  AggregationCount?: number
 }
 
 /**
@@ -4486,98 +4558,106 @@ export interface DeleteAppsResponse {
  */
 export interface Customer {
   /**
-   * 企业ID
+   * <p>企业ID</p>
    */
   Id?: number
   /**
-   * 企业名称
+   * <p>企业名称</p>
    */
   Name?: string
   /**
-   * 股权占比
+   * <p>股权占比</p>
    */
   Percent?: number
   /**
-   * 资产收集、漏洞信息、弱口令、目录爆破、暗网泄露、Github泄露、文库网盘泄露、敏感信息泄露，其中资产收集必包含，多个用英文逗号隔离，例如：资产收集,漏洞信息
+   * <p>资产收集、漏洞信息、弱口令、目录爆破、暗网泄露、Github泄露、文库网盘泄露、敏感信息泄露，其中资产收集必包含，多个用英文逗号隔离，例如：资产收集,漏洞信息</p>
    */
   ScanType?: string
   /**
-   * 创建账号
+   * <p>创建账号</p>
    */
   Creator?: string
   /**
-   * 腾讯云客户AppId
+   * <p>腾讯云客户AppId</p>
    */
   AppId?: number
   /**
-   * 腾讯云客户Uin
+   * <p>腾讯云客户Uin</p>
    */
   Uin?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateAt?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateAt?: string
   /**
-   * 周期测绘时间
+   * <p>周期测绘时间</p>
    */
   ScanCron?: string
   /**
-   * 是否启用周期测绘
+   * <p>是否启用周期测绘</p>
    */
   EnableCron?: boolean
   /**
-   * 是否扫描子公司
+   * <p>是否扫描子公司</p>
    */
   EnableScanSubEnterprise?: boolean
   /**
-   * 是否授权
+   * <p>是否授权</p>
    */
   EnableAuth?: boolean
   /**
-   * 授权开始时间
+   * <p>授权开始时间</p>
    */
   AuthStartAt?: string
   /**
-   * 授权结束时间
+   * <p>授权结束时间</p>
    */
   AuthEndAt?: string
   /**
-   * 授权文件id
+   * <p>授权文件id</p>
    */
   AuthFile?: string
   /**
-   * 测绘时间配置项
+   * <p>测绘时间配置项</p>
    */
   ScanTime?: string
   /**
-   * 图标
+   * <p>图标</p>
    */
   Icon?: string
   /**
-   * 关键字
+   * <p>关键字</p>
    */
   Keywords?: string
   /**
-   * Qps设置，10-500，默认100
+   * <p>Qps设置，10-500，默认100</p>
    */
   Qps?: number
   /**
-   * 子公司拓展层次
+   * <p>子公司拓展层次</p>
    */
   SubCompanyLevel?: number
   /**
-   * 是否包含完整扫描
+   * <p>是否包含完整扫描</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsIncludeFullScan?: boolean
   /**
-   * 是否识别集团成员
+   * <p>是否识别集团成员</p>
    */
   EnableGroupMemberDiscovered?: boolean
+  /**
+   * <p>单 IP 任务并发数，默认 1，下限 1，保守值 3，上限 10</p>
+   */
+  SingleIPTaskLimit?: number
+  /**
+   * <p>端口扫描 QPS，默认 100，下限 10，保守值 200，上限 5000</p>
+   */
+  PortScanQps?: number
 }
 
 /**
@@ -4585,50 +4665,53 @@ export interface Customer {
  */
 export interface DisplayManage {
   /**
-   * 主键ID
+   * <p>主键ID</p>
    */
   Id?: number
   /**
-   * 公共字段
+   * <p>公共字段</p>
    */
   DisplayToolCommon?: DisplayToolCommon
   /**
-   * Url
+   * <p>Url</p>
    */
   Url?: string
   /**
-   * 标题
+   * <p>标题</p>
    */
   Title?: string
   /**
-   * Icon
+   * <p>Icon</p>
    */
   Icon?: string
   /**
-   * 缩略图
+   * <p>缩略图</p>
    */
   Screenshot?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
-   * 后台Host
+   * <p>后台Host</p>
    */
   Host?: string
   /**
-   * 状态：not_converged:未收敛, converged:已收敛, ignore:已忽略
-
+   * <p>状态：not_converged:未收敛, converged:已收敛, ignore:已忽略</p>
    */
   Status?: string
   /**
-   * 是否为云资产：0-非云资产 1-是云资产
+   * <p>是否为云资产：0-非云资产 1-是云资产</p>
    */
   IsCloudAsset?: number
   /**
-   * 云资产是否下线：-1-已下线 0-正常
+   * <p>云资产是否下线：-1-已下线 0-正常</p>
    */
   CloudAssetStatus?: number
+  /**
+   * <p>聚合视角下该组真实子项总数；非聚合视角为 0</p>
+   */
+  AggregationCount?: number
 }
 
 /**
@@ -4916,77 +4999,81 @@ export interface DescribeFakeWechatOfficialsRequest {
  */
 export interface DisplaySuspiciousAsset {
   /**
-   * 主键ID
+   * <p>主键ID</p>
    */
   Id?: number
   /**
-   * 公共字段
+   * <p>公共字段</p>
    */
   DisplayToolCommon?: DisplayToolCommon
   /**
-   * Url
+   * <p>Url</p>
    */
   Url?: string
   /**
-   * 标题
+   * <p>标题</p>
    */
   Title?: string
   /**
-   * 报文长度
+   * <p>报文长度</p>
    */
   ContentLength?: number
   /**
-   * 报文内容
+   * <p>报文内容</p>
    */
   Content?: string
   /**
-   * 截图缩略图URL
+   * <p>截图缩略图URL</p>
    */
   ScreenshotThumbUrl?: string
   /**
-   * 截图URL
+   * <p>截图URL</p>
    */
   ScreenshotUrl?: string
   /**
-   * 状态码
+   * <p>状态码</p>
    */
   Code?: number
   /**
-   * Api
+   * <p>Api</p>
    */
   Api?: string
   /**
-   * 解析的IP
+   * <p>解析的IP</p>
    */
   Ip?: string
   /**
-   * 证书信息
+   * <p>证书信息</p>
    */
   Ssl?: string
   /**
-   * ssl证书过期时间
+   * <p>ssl证书过期时间</p>
    */
   SslExpiredTime?: string
   /**
-   * 来源类型
+   * <p>来源类型</p>
    */
   SourceType?: string
   /**
-   * 来源值
+   * <p>来源值</p>
    */
   SourceValue?: string
   /**
-   * 是否信任
+   * <p>是否信任</p>
    */
   Trusted?: boolean
   /**
-   * 所属者
+   * <p>所属者</p>
    */
   Owner?: string
   /**
-   * 根域名
+   * <p>根域名</p>
    */
   RootDomain?: string
+  /**
+   * <p>聚合视角下该组真实子项总数；非聚合视角为 0</p>
+   */
+  AggregationCount?: number
 }
 
 /**

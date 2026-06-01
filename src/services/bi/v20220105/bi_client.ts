@@ -49,6 +49,7 @@ import {
   RowColumnStatus,
   DescribePermissionStatusInfoRequest,
   CreateDatasourceResponse,
+  DescribeUserGroupMemberPageListContainer,
   CreateUserGroupRequest,
   CreateAuthApiKeyResponse,
   DeleteDatasourceResponse,
@@ -80,6 +81,7 @@ import {
   UserIdAndUserName,
   DescribeUserRoleListResponse,
   RowColumnTagValue,
+  UserGroupUserInfoVO,
   DescribeResourceUserGroupPageListRequest,
   DeleteAuthApiKeyResponse,
   ResourceListDTO,
@@ -116,12 +118,14 @@ import {
   ClearEmbedTokenRequest,
   UserVO,
   DescribeUserGroupMemberListResponse,
+  UserGroupMemberVO,
   DescribeUserProjectListResponse,
   CreateDatasourceRequest,
   DeleteDatasourceRequest,
   WidgetListVO,
   ModifyDatasourceResponse,
   DescribePageWidgetListResponse,
+  UserGroupVO,
   UserGroupPageTreeVO,
   CreateDatasourceCloudResponse,
   ProjectConfigList,
@@ -460,7 +464,7 @@ export class Client extends AbstractClient {
    * CreateUserGroupMember
    */
   async CreateUserGroupMember(
-    req?: CreateUserGroupMemberRequest,
+    req: CreateUserGroupMemberRequest,
     cb?: (error: string, rep: CreateUserGroupMemberResponse) => void
   ): Promise<CreateUserGroupMemberResponse> {
     return this.request("CreateUserGroupMember", req, cb)

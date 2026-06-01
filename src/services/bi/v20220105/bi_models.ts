@@ -329,6 +329,21 @@ export interface ModifyUserGroupResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
+   * <p>额外信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * <p>结果信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * <p>数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<UserGroupVO>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -502,35 +517,35 @@ export interface DescribeProjectListResponse {
  */
 export interface QueryUserGroupMemberRequest {
   /**
-   * 用户组id集合
+   * <p>用户组id集合</p>
    */
   GroupIds?: Array<number | bigint>
   /**
-   * 搜索关键字
+   * <p>搜索关键字</p>
    */
   Keyword?: string
   /**
-   * 分页大小
+   * <p>分页大小</p>
    */
   PageSize?: number
   /**
-   * 分页页码
+   * <p>分页页码</p>
    */
   PageNo?: number
   /**
-   * 是否需要分页
+   * <p>是否需要分页</p>
    */
   AllPage?: boolean
   /**
-   * 用户组节点信息
+   * <p>用户组节点信息</p>
    */
   Nodes?: Array<UserGroupTreeNodeDTO>
   /**
-   * 标签值
+   * <p>标签值</p>
    */
   TagValueList?: Array<ResourceTagValue>
   /**
-   * 需要过滤的用户组
+   * <p>需要过滤的用户组</p>
    */
   FilterGroupIds?: Array<number | bigint>
 }
@@ -571,6 +586,21 @@ export interface DeleteUserGroupMemberResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorInfo?: ErrorInfo
+  /**
+   * <p>额外信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * <p>结果信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * <p>数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -888,11 +918,11 @@ export interface ExportScreenPageRequest {
  */
 export interface DeleteUserGroupMemberRequest {
   /**
-   * 用户组id
+   * <p>用户组id</p>
    */
   GroupId?: number
   /**
-   * 用户id集合
+   * <p>用户id集合</p>
    */
   UserIdList?: Array<string>
 }
@@ -1028,19 +1058,48 @@ export interface CreateDatasourceResponse {
 }
 
 /**
+ * 查询页面列表
+ */
+export interface DescribeUserGroupMemberPageListContainer {
+  /**
+   * 列表数据集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List?: Array<UserGroupMemberVO>
+  /**
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * 总页数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalPages?: number
+}
+
+/**
  * CreateUserGroup请求参数结构体
  */
 export interface CreateUserGroupRequest {
   /**
-   * 用户组名称
+   * <p>组管理员</p>
+   */
+  AdminUserId?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>用户组名称</p>
    */
   GroupName?: string
   /**
-   * 位置
+   * <p>位置</p>
    */
   Location?: number
   /**
-   * 父用户组id
+   * <p>父用户组id</p>
    */
   ParentId?: number
 }
@@ -1894,6 +1953,21 @@ export interface CreateUserGroupMemberResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
+   * <p>额外信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * <p>结果信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * <p>数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2184,6 +2258,22 @@ export interface RowColumnTagValue {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Values?: Array<string>
+}
+
+/**
+ * 用户组返回参数
+ */
+export interface UserGroupUserInfoVO {
+  /**
+   * 用户id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserId?: string
+  /**
+   * 用户名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
 }
 
 /**
@@ -2724,6 +2814,21 @@ export interface QueryUserGroupMemberResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
+   * <p>额外信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * <p>结果信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * <p>数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DescribeUserGroupMemberPageListContainer
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2734,7 +2839,7 @@ export interface QueryUserGroupMemberResponse {
  */
 export interface ModifyUserGroupRequest {
   /**
-   * 用户组更新list
+   * <p>用户组更新list</p>
    */
   UpdateList?: Array<UserGroupUpdateDTO>
 }
@@ -3296,9 +3401,50 @@ export interface DescribeUserGroupMemberListResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
+   * <p>额外信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * <p>结果信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * <p>数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DescribeUserGroupMemberPageListContainer
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 用户组成员VO出参
+ */
+export interface UserGroupMemberVO {
+  /**
+   * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
+  /**
+   * 用户id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserId?: string
+  /**
+   * 创建人
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedBy?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedOn?: string
 }
 
 /**
@@ -3540,6 +3686,57 @@ export interface DescribePageWidgetListResponse {
 }
 
 /**
+ * 用户组返回参数
+ */
+export interface UserGroupVO {
+  /**
+   * 用户组id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 用户组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupName?: string
+  /**
+   * 所属用户组id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentId?: number
+  /**
+   * 所属用户组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentName?: string
+  /**
+   * 是否默认用户组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsDefault?: number
+  /**
+   * 用户组管理员
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AdminUserId?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 排序位置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: number
+  /**
+   * 用户信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserList?: Array<UserGroupUserInfoVO>
+}
+
+/**
  * 用户组权限树
  */
 export interface UserGroupPageTreeVO {
@@ -3703,6 +3900,21 @@ export interface CreateUserGroupResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
+   * <p>额外信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * <p>结果信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * <p>数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: UserGroupVO
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3721,7 +3933,16 @@ export interface DescribeUserGroupInfoRequest {
 /**
  * CreateUserGroupMember请求参数结构体
  */
-export type CreateUserGroupMemberRequest = null
+export interface CreateUserGroupMemberRequest {
+  /**
+   * <p>用户组id</p>
+   */
+  GroupId?: number
+  /**
+   * <p>用户id集合</p>
+   */
+  UserIdList?: Array<string>
+}
 
 /**
  * ModifyAuthApiKey返回参数结构体
@@ -4174,6 +4395,21 @@ export interface DeleteUserGroupResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
+   * <p>额外信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * <p>结果信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * <p>数据</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4528,7 +4764,7 @@ export interface CreateEmbedTokenResponse {
  */
 export interface DeleteUserGroupRequest {
   /**
-   * 用户组id
+   * <p>用户组id</p>
    */
   Id?: number
 }
@@ -4608,27 +4844,27 @@ export interface DescribePermissionRanksInfoRequest {
  */
 export interface DescribeUserGroupMemberListRequest {
   /**
-   * 用户组id集合
+   * <p>用户组id集合</p>
    */
   GroupIds?: Array<number | bigint>
   /**
-   * asc正序,desc倒序
+   * <p>asc正序,desc倒序</p>
    */
   CreatedOnOrder?: string
   /**
-   * 搜索关键字
+   * <p>搜索关键字</p>
    */
   Keyword?: string
   /**
-   * 分页大小
+   * <p>分页大小</p>
    */
   PageSize?: number
   /**
-   * 分页页码
+   * <p>分页页码</p>
    */
   PageNo?: number
   /**
-   * 是否需要分页
+   * <p>是否需要分页</p>
    */
   AllPage?: boolean
 }

@@ -166,25 +166,29 @@ export interface McpSecurityRule {
  */
 export interface ModifyAgentAppRequest {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceID: string
   /**
-   * 应用ID
+   * <p>应用ID</p>
    */
   ID: string
   /**
-   * 名称
+   * <p>名称</p>
    */
   Name?: string
   /**
-   * OAuth2资源服务器ID
+   * <p>OAuth2资源服务器ID</p>
    */
   OAuth2ResourceServerID?: string
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
+  /**
+   * <p>凭据ID</p>
+   */
+  ConnectorIDs?: Array<string>
 }
 
 /**
@@ -272,7 +276,7 @@ export interface ToolConfigDTO {
  */
 export interface CreateAgentAppResponse {
   /**
-   * app id
+   * <p>app id</p>
    */
   Data?: CreateAgentAppResp
   /**
@@ -1349,7 +1353,7 @@ export interface DescribeAgentAppsResponse {
  */
 export interface ModifyAgentAppResponse {
   /**
-   * app id
+   * <p>app id</p>
    */
   Data?: ResultIDVO
   /**
@@ -1469,67 +1473,75 @@ export interface DeleteAgentAppMcpServersRequest {
  */
 export interface DescribeAgentAppResp {
   /**
-   * 租户appID
+   * <p>租户appID</p>
    */
   AppID?: number
   /**
-   * 租户ID
+   * <p>租户ID</p>
    */
   Uin?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceID?: string
   /**
-   * 应用ID
+   * <p>应用ID</p>
    */
   ID?: string
   /**
-   * 名称
+   * <p>名称</p>
    */
   Name?: string
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
   /**
-   * 状态
+   * <p>状态</p>
    */
   Status?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 修改时间
+   * <p>修改时间</p>
    */
   UpdateTime?: string
   /**
-   * 认证类型
+   * <p>认证类型</p>
    */
   AuthType?: string
   /**
-   * apiKeys列表，脱敏
+   * <p>apiKeys列表，脱敏</p>
    */
   ApiKeys?: Array<string>
   /**
-   * secretKey列表，脱敏
+   * <p>secretKey列表，脱敏</p>
    */
   SecretKeys?: Array<AgentAppSecretKeyVO>
   /**
-   * OAuth2 Resource Server ID
+   * <p>OAuth2 Resource Server ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OAuth2ResourceServerID?: string
   /**
-   * 绑定mcpServer数量
+   * <p>绑定mcpServer数量</p>
    */
   McpServersNum?: number
   /**
-   * 绑定的模型服务数量
+   * <p>绑定的模型服务数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelServicesNum?: number
+  /**
+   * <p>API认证列表</p>
+   */
+  ConnectorIDs?: Array<string>
+  /**
+   * <p>关联API数量</p>
+   */
+  ServicesNum?: number
 }
 
 /**
@@ -1731,56 +1743,62 @@ export interface ModifyModelRequest {
  */
 export interface DescribeAgentCredentialResp {
   /**
-   * 租户应用ID
+   * <p>租户应用ID</p>
    */
   AppID?: number
   /**
-   * 租户ID
+   * <p>租户ID</p>
    */
   Uin?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceID?: string
   /**
-   * 凭据ID
+   * <p>凭据ID</p>
    */
   ID?: string
   /**
-   * 凭据名称
+   * <p>凭据名称</p>
    */
   Name?: string
   /**
-   * 状态
+   * <p>状态</p>
    */
   Status?: string
   /**
-   * 关联应用数
+   * <p>关联应用数</p>
+   * @deprecated
    */
   RelateAgentAppNum?: number
   /**
-   * 关联mcp数
+   * <p>关联mcp数</p>
    */
   RelateMcpServerNum?: number
   /**
-   * 关联模型数
+   * <p>关联模型数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RelateModelNum?: number
   /**
-   * 凭据内容
+   * <p>关联服务数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RelateServiceNum?: number
+  /**
+   * <p>凭据内容</p>
    */
   Content?: AgentCredentialContentDTO
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 修改时间
+   * <p>修改时间</p>
    */
   LastUpdateTime?: string
   /**
-   * 类型
+   * <p>类型</p>
    */
   Type?: string
 }
@@ -2148,25 +2166,29 @@ export type ModifyAgentCredentialRequest = null
  */
 export interface CreateAgentAppRequest {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceID: string
   /**
-   * 名称
+   * <p>名称</p>
    */
   Name: string
   /**
-   * 认证类型
+   * <p>认证类型</p>
    */
   AuthType: string
   /**
-   * OAuth2资源服务器ID
+   * <p>OAuth2资源服务器ID</p>
    */
   OAuth2ResourceServerID?: string
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
+  /**
+   * <p>API认证列表</p>
+   */
+  ConnectorIDs?: Array<string>
 }
 
 /**

@@ -102,6 +102,7 @@ import {
   ApplyInstanceSnapshotResponse,
   DetachDisksRequest,
   ModifyFirewallRulesRequest,
+  InstanceViolationDetail,
   CreateBlueprintRequest,
   CreateMcpServerResponse,
   RerunDockerContainerRequest,
@@ -167,6 +168,7 @@ import {
   InquirePriceCreateBlueprintResponse,
   InquirePriceCreateBlueprintRequest,
   ModifyFirewallTemplateResponse,
+  ResetInstancesPasswordResponse,
   DescribeInstancesReturnableRequest,
   DiskReturnable,
   DescribeBlueprintsResponse,
@@ -175,7 +177,7 @@ import {
   SyncBlueprintResponse,
   SupportIpv6Detail,
   ApplyDiskBackupRequest,
-  ResetInstancesPasswordResponse,
+  DescribeBlueprintsShareAcrossAccountInfosResponse,
   StartInstancesResponse,
   LoginSettings,
   DescribeDockerContainerConfigurationResponse,
@@ -184,7 +186,7 @@ import {
   StartInstancesRequest,
   IsolateInstancesResponse,
   CreateKeyPairResponse,
-  InstanceViolationDetail,
+  DescribeBlueprintsShareAcrossAccountInfosRequest,
   DescribeInstanceVncUrlResponse,
   DescribeDockerActivitiesResponse,
   DescribeFirewallTemplateRuleQuotaRequest,
@@ -257,6 +259,7 @@ import {
   DisassociateInstancesKeyPairsResponse,
   TerminateInstancesRequest,
   ModifyFirewallTemplateRequest,
+  BlueprintShareAcrossAccountInfo,
   RenewDiskChargePrepaid,
   RestartMcpServersRequest,
   ApplyFirewallTemplateResponse,
@@ -271,7 +274,7 @@ import {
   InstancePriceDetail,
   DescribeDockerContainersResponse,
   ModifyDockerContainerResponse,
-  DescribeDiskBackupsDeniedActionsResponse,
+  DescribeDisksDeniedActionsResponse,
   TrafficPackage,
   FirewallTemplateApplyRecord,
   DescribeDockerContainerDetailResponse,
@@ -304,7 +307,7 @@ import {
   DescribeFirewallRulesTemplateResponse,
   RenewInstancesResponse,
   RenameDockerContainerRequest,
-  DescribeDisksDeniedActionsResponse,
+  DescribeDiskBackupsDeniedActionsResponse,
   SystemDisk,
   ResetInstanceResponse,
   IsolateDisksResponse,
@@ -477,6 +480,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: InquirePriceCreateDisksResponse) => void
   ): Promise<InquirePriceCreateDisksResponse> {
     return this.request("InquirePriceCreateDisks", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeBlueprintsShareAcrossAccountInfos）用于查询一个或多个镜像的跨账号共享信息。
+   */
+  async DescribeBlueprintsShareAcrossAccountInfos(
+    req: DescribeBlueprintsShareAcrossAccountInfosRequest,
+    cb?: (error: string, rep: DescribeBlueprintsShareAcrossAccountInfosResponse) => void
+  ): Promise<DescribeBlueprintsShareAcrossAccountInfosResponse> {
+    return this.request("DescribeBlueprintsShareAcrossAccountInfos", req, cb)
   }
 
   /**

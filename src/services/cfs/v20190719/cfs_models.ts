@@ -543,6 +543,40 @@ export interface DescribeAutoSnapshotPoliciesRequest {
 export type DescribeAvailableZoneInfoRequest = null
 
 /**
+ * ModifyDataRetrieval请求参数结构体
+ */
+export interface ModifyDataRetrievalRequest {
+  /**
+   * <p>数据检索ID示例值：dataretrieval-123456</p>
+   */
+  DataRetrievalId: string
+  /**
+   * <p>数据检索名称示例值：DataDive</p>
+   */
+  DataRetrievalName?: string
+  /**
+   * <p>聚合检索条件 示例值：from entries|where size &gt;4096</p>
+   */
+  CompoundCondition?: string
+  /**
+   * <p>列表检索条件</p>
+   */
+  QueryCondition?: string
+  /**
+   * <p>数据检索按月重复，每月1-31号，选择一天，每月将在这一天自动创建快照；例如1 代表1号；与DayOfWeek二选一</p>
+   */
+  DayOfMonth?: string
+  /**
+   * <p>数据检索重复日期，星期一到星期日。 1代表星期一、7代表星期天，与DayOfMonth，二选一</p>
+   */
+  DayOfWeek?: string
+  /**
+   * <p>重复时间点,0-23，小时</p>
+   */
+  Hour?: string
+}
+
+/**
  * DescribeMountTargets请求参数结构体
  */
 export interface DescribeMountTargetsRequest {
@@ -550,6 +584,20 @@ export interface DescribeMountTargetsRequest {
    * 文件系统 ID，[查询文件系统列表](https://cloud.tencent.com/document/api/582/38170)可以获得id
    */
   FileSystemId: string
+}
+
+/**
+ * CreateDataRetrieval返回参数结构体
+ */
+export interface CreateDataRetrievalResponse {
+  /**
+   * <p>数据检索ID示例值：dataretrieval-123456</p>
+   */
+  DataRetrievalId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -570,6 +618,16 @@ export interface CreateDataFlowResponse {
  * SignUpCfsService请求参数结构体
  */
 export type SignUpCfsServiceRequest = null
+
+/**
+ * DeleteDataRetrieval请求参数结构体
+ */
+export interface DeleteDataRetrievalRequest {
+  /**
+   * <p>数据检索 ID。可通过 DescribeDataRetrieval 接口获取。</p>
+   */
+  DataRetrievalId: string
+}
 
 /**
  * SignUpCfsService返回参数结构体
@@ -782,37 +840,49 @@ export interface UpdateFileSystemBandwidthLimitResponse {
 }
 
 /**
- * 快照操作日志
+ * 数据检索信息
  */
-export interface SnapshotOperateLog {
+export interface DataRetrievalInfo {
   /**
-   * 操作类型
-CreateCfsSnapshot：创建快照
-DeleteCfsSnapshot：删除快照
-CreateCfsFileSystem：创建文件系统
-UpdateCfsSnapshotAttribute：更新快照
+   * <p>数据检索策略名称</p>
    */
-  Action?: string
+  DataRetrievalName?: string
   /**
-   * 操作时间
+   * <p>迁移任务id<br>示例值：migrate-001</p>
    */
-  ActionTime?: string
+  DataRetrievalId?: string
   /**
-   * 操作名称
-CreateCfsSnapshot
-DeleteCfsSnapshot
-CreateCfsFileSystem
-UpdateCfsSnapshotAttribute
+   * <p>文件系统实例 ID，通过查询文件系统 DescribeCfsFileSystems </p><p>获取示例值：cfs-xxxxxx</p>
    */
-  ActionName?: string
+  FileSystemId?: string
   /**
-   * 操作者uin
+   * <p>聚合检索条件</p>
    */
-  Operator?: string
+  CompoundCondition?: string
   /**
-   * 1-任务进行中；2-任务成功；3-任务失败
+   * <p>创建时间<br>示例值：2023-01-09 15:03:57</p>
    */
-  Result?: number
+  CreateTime?: string
+  /**
+   * <p>数据检索重复日期，星期一到星期日。 1代表星期一、7代表星期天，与DayOfMonth，二选一</p>
+   */
+  DayOfWeek?: string
+  /**
+   * <p>数据检索按月重复，每月1-31号，选择一天，每月将在这一天自动创建快照；例如1 代表1号；与DayOfWeek二选一</p>
+   */
+  DayOfMonth?: string
+  /**
+   * <p>重复时间点,0-23，小时</p>
+   */
+  Hour?: string
+  /**
+   * <p>列表检索条件</p>
+   */
+  QueryCondition?: string
+  /**
+   * <p>修改时间</p><p>参数格式：2023-01-10 15:03:57</p>
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -901,17 +971,33 @@ no_root_squash：与 no_all_squash 效果一致，所有访问用户（含 root 
 }
 
 /**
- * OverrideCfsRules请求参数结构体
+ * DescribeDataRetrievalTask请求参数结构体
  */
-export interface OverrideCfsRulesRequest {
+export interface DescribeDataRetrievalTaskRequest {
   /**
-   * 权限组 ID
+   * <p>开始时间。须早于 EndTime ，仅支持查询最近3个月内的任务数据</p><p>参数格式：2024-11-19 10:15:37</p>
    */
-  PermissionGroupId: string
+  StartTime: string
   /**
-   * 权限组规则列表
+   * <p>结束时间。须晚于 StartTime ，仅支持查询最近3个月内的任务数据。</p><p>参数格式：2024-10-  19 10:15:37</p>
    */
-  RuleList: Array<InputPermissionGroupRules>
+  EndTime: string
+  /**
+   * <p>数据检索ID示例值：dataretrieval-123456</p>
+   */
+  DataRetrievalId: string
+  /**
+   * <p>分页的偏移量，默认值为0。 示例值：0</p>
+   */
+  Offset?: number
+  /**
+   * <p>分页单页限制数目，默认值为20，最大值100。 示例值：20</p>
+   */
+  Limit?: number
+  /**
+   * <p>DataRetrievalTaskID按照【数据检索任务id】进行过滤。类型：String</p>
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1007,13 +1093,9 @@ export interface DoDirectoryOperationResponse {
 }
 
 /**
- * ModifyLifecyclePolicy返回参数结构体
+ * ModifyDataRetrieval返回参数结构体
  */
-export interface ModifyLifecyclePolicyResponse {
-  /**
-   * 生命周期管理策略ID
-   */
-  LifecyclePolicyID?: string
+export interface ModifyDataRetrievalResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1083,6 +1165,60 @@ export interface ApplyPathLifecyclePolicyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 数据检索任务信息
+ */
+export interface DataRetrievalTaskInfo {
+  /**
+   * <p>数据检索任务ID<br>示例值：dataretrievaltask-123456</p>
+   */
+  DataRetrievalTaskID?: string
+  /**
+   * <p>迁移任务id<br>示例值：migrate-001</p>
+   */
+  DataRetrievalId?: string
+  /**
+   * <p>文件系统实例 ID，通过查询文件系统 DescribeCfsFileSystems 获取示例值：cfs-xxxxxx</p>
+   */
+  FileSystemId?: string
+  /**
+   * <p>聚合检索条件<br>示例值：from entries|where size &gt;4096</p>
+   */
+  CompoundCondition?: string
+  /**
+   * <p>列表检索条件</p>
+   */
+  QueryCondition?: string
+  /**
+   * <p>创建时间<br>示例值：2023-01-09 15:03:57</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>任务状态<br>已完成：completed<br>排队中：waiting<br>进行中：running<br>失败：failed</p>
+   */
+  State?: string
+  /**
+   * <p>文件数量<br>示例：1000</p>
+   */
+  FileNum?: number
+  /**
+   * <p>目录数量<br>示例：1000</p>
+   */
+  DirNum?: number
+  /**
+   * <p>总文件大小，单位KiB<br>示例：1024</p>
+   */
+  Size?: number
+  /**
+   * <p>文件清单下载地址<br>示例值：https://xx-12345.cos.ap-shanghai.myqcloud.com/list.csv</p>
+   */
+  FileList?: string
+  /**
+   * <p>检索错误提示。默认：Null，当Status为failed时，将提示信息展示给用户。</p>
+   */
+  ErrorInfo?: string
 }
 
 /**
@@ -1182,6 +1318,24 @@ export interface DescribeSnapshotOperationLogsResponse {
 }
 
 /**
+ * DescribeDataRetrieval返回参数结构体
+ */
+export interface DescribeDataRetrievalResponse {
+  /**
+   * <p>数据检索总数。</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>数据检索策略的详细信息</p>
+   */
+  DataRetrievals?: Array<DataRetrievalInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteCfsFileSystem请求参数结构体
  */
 export interface DeleteCfsFileSystemRequest {
@@ -1249,6 +1403,24 @@ export interface CreateCfsPGroupResponse {
  * DescribeCfsServiceStatus请求参数结构体
  */
 export type DescribeCfsServiceStatusRequest = null
+
+/**
+ * DescribeDataRetrieval请求参数结构体
+ */
+export interface DescribeDataRetrievalRequest {
+  /**
+   * <p>分页偏移量，默认值为 0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>分页单页限制数目，默认值为 20，最大值为 100。</p>
+   */
+  Limit?: number
+  /**
+   * <p>过滤条件列表。支持的过滤字段：FileSystemId（文件系统 ID）、DataRetrievalId（数据检索 ID）、Name（数据检索名称，支持模糊搜索）。最多支持 10 个。</p>
+   */
+  Filters?: Array<Filter>
+}
 
 /**
  * 有规则冲突时返回的已有冲突规则信息列表
@@ -1502,6 +1674,20 @@ export interface LifecyclePolicy {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Paths: Array<PathInfo>
+}
+
+/**
+ * RunDataRetrievalTask返回参数结构体
+ */
+export interface RunDataRetrievalTaskResponse {
+  /**
+   * <p>数据检索任务 ID。</p>
+   */
+  DataRetrievalTaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2211,6 +2397,54 @@ export interface DescribeCfsFileSystemClientsRequest {
 }
 
 /**
+ * OverrideCfsRules请求参数结构体
+ */
+export interface OverrideCfsRulesRequest {
+  /**
+   * 权限组 ID
+   */
+  PermissionGroupId: string
+  /**
+   * 权限组规则列表
+   */
+  RuleList: Array<InputPermissionGroupRules>
+}
+
+/**
+ * CreateDataRetrieval请求参数结构体
+ */
+export interface CreateDataRetrievalRequest {
+  /**
+   * <p>文件系统实例 ID，通过查询文件系统 DescribeCfsFileSystems 获取 示例值：cfs-xxxxxx</p>
+   */
+  FileSystemId: string
+  /**
+   * <p>数据检索名称 示例值：DataDive</p>
+   */
+  DataRetrievalName: string
+  /**
+   * <p>聚合检索条件 示例值：from entries|where size &gt;4096</p>
+   */
+  CompoundCondition?: string
+  /**
+   * <p>列表检索条件</p>
+   */
+  QueryCondition?: string
+  /**
+   * <p>数据检索按月重复，每月1-31号，选择一天，每月将在这一天自动创建快照；例如1 代表1号；与DayOfWeek二选一 示例值：1</p>
+   */
+  DayOfMonth?: string
+  /**
+   * <p>数据检索重复日期，星期一到星期日。 1代表星期一、7代表星期天，与DayOfMonth，二选一 示例值：2,3</p>
+   */
+  DayOfWeek?: string
+  /**
+   * <p>重复时间点,0-23，小时 示例值：1,3,5</p>
+   */
+  Hour?: string
+}
+
+/**
  * DescribeCfsSnapshots返回参数结构体
  */
 export interface DescribeCfsSnapshotsResponse {
@@ -2401,6 +2635,11 @@ export interface AvailableZone {
 }
 
 /**
+ * RunDataRetrievalTask请求参数结构体
+ */
+export type RunDataRetrievalTaskRequest = null
+
+/**
  * DescribeMigrationTasks请求参数结构体
  */
 export interface DescribeMigrationTasksRequest {
@@ -2477,13 +2716,17 @@ export interface UnbindAutoSnapshotPolicyRequest {
 }
 
 /**
- * UnbindAutoSnapshotPolicy返回参数结构体
+ * DescribeDataRetrievalTask返回参数结构体
  */
-export interface UnbindAutoSnapshotPolicyResponse {
+export interface DescribeDataRetrievalTaskResponse {
   /**
-   * 快照策略ID
+   * <p>数据检索任务总量 示例值：0</p>
    */
-  AutoSnapshotPolicyId?: string
+  TotalCount?: number
+  /**
+   * <p>检索任务详情</p>
+   */
+  DataRetrievalTasks?: Array<DataRetrievalTaskInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2584,6 +2827,40 @@ export interface UpdateCfsFileSystemSizeLimitResponse {
 }
 
 /**
+ * 快照操作日志
+ */
+export interface SnapshotOperateLog {
+  /**
+   * 操作类型
+CreateCfsSnapshot：创建快照
+DeleteCfsSnapshot：删除快照
+CreateCfsFileSystem：创建文件系统
+UpdateCfsSnapshotAttribute：更新快照
+   */
+  Action?: string
+  /**
+   * 操作时间
+   */
+  ActionTime?: string
+  /**
+   * 操作名称
+CreateCfsSnapshot
+DeleteCfsSnapshot
+CreateCfsFileSystem
+UpdateCfsSnapshotAttribute
+   */
+  ActionName?: string
+  /**
+   * 操作者uin
+   */
+  Operator?: string
+  /**
+   * 1-任务进行中；2-任务成功；3-任务失败
+   */
+  Result?: number
+}
+
+/**
  * UpdateAutoSnapshotPolicy请求参数结构体
  */
 export interface UpdateAutoSnapshotPolicyRequest {
@@ -2633,6 +2910,16 @@ export interface UpdateCfsFileSystemSizeLimitRequest {
    * 文件系统 ID，此功能需要开白使用，请[提交工单](https://console.cloud.tencent.com/workorder/category?from=ticket-tab)进行申请。当前仅支持通用标准型文件系统设置存储容量上限。该参数通过[查询文件系统](https://cloud.tencent.com/document/product/582/38170)获取。
    */
   FileSystemId: string
+}
+
+/**
+ * DeleteDataRetrieval返回参数结构体
+ */
+export interface DeleteDataRetrievalResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2904,21 +3191,17 @@ export interface DeleteDataFlowRequest {
 }
 
 /**
- * 生命周期管理策略关联目录的绝对路径
+ * ModifyLifecyclePolicy返回参数结构体
  */
-export interface PathInfo {
+export interface ModifyLifecyclePolicyResponse {
   /**
-   * 文件系统ID
+   * 生命周期管理策略ID
    */
-  FileSystemId: string
+  LifecyclePolicyID?: string
   /**
-   * 目录绝对路径
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Path: string
-  /**
-   * 数据流动Id
-   */
-  DataFlowId?: string
+  RequestId?: string
 }
 
 /**
@@ -3234,6 +3517,38 @@ export interface ModifyDataFlowRequest {
  * DescribeCfsSnapshotOverview请求参数结构体
  */
 export type DescribeCfsSnapshotOverviewRequest = null
+
+/**
+ * UnbindAutoSnapshotPolicy返回参数结构体
+ */
+export interface UnbindAutoSnapshotPolicyResponse {
+  /**
+   * 快照策略ID
+   */
+  AutoSnapshotPolicyId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 生命周期管理策略关联目录的绝对路径
+ */
+export interface PathInfo {
+  /**
+   * 文件系统ID
+   */
+  FileSystemId: string
+  /**
+   * 目录绝对路径
+   */
+  Path: string
+  /**
+   * 数据流动Id
+   */
+  DataFlowId?: string
+}
 
 /**
  * CreateAutoSnapshotPolicy请求参数结构体
