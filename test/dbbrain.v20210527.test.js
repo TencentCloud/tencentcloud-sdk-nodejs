@@ -18,16 +18,6 @@ const client = new tencentcloud.dbbrain.v20210527.Client({
 })
 describe("dbbrain.v20210527.test.js", function () {
 
-it("dbbrain.v20210527.DescribeNoPrimaryKeyTables", async function () {
-    try {
-       const data = await client.DescribeNoPrimaryKeyTables({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("dbbrain.v20210527.DescribeMySqlProcessList", async function () {
     try {
        const data = await client.DescribeMySqlProcessList({})
@@ -218,9 +208,9 @@ it("dbbrain.v20210527.CreateKillTask", async function () {
     }
 })
 
-it("dbbrain.v20210527.UpdateMonitorSwitch", async function () {
+it("dbbrain.v20210527.DescribeMetricTopProxies", async function () {
     try {
-       const data = await client.UpdateMonitorSwitch({})
+       const data = await client.DescribeMetricTopProxies({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +218,9 @@ it("dbbrain.v20210527.UpdateMonitorSwitch", async function () {
     }
 })
 
-it("dbbrain.v20210527.DescribeMetricTopProxies", async function () {
+it("dbbrain.v20210527.DescribeNoPrimaryKeyTables", async function () {
     try {
-       const data = await client.DescribeMetricTopProxies({})
+       const data = await client.DescribeNoPrimaryKeyTables({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -291,6 +281,16 @@ it("dbbrain.v20210527.DescribeIndexRecommendInfo", async function () {
 it("dbbrain.v20210527.CreateRedisBigKeyAnalysisTask", async function () {
     try {
        const data = await client.CreateRedisBigKeyAnalysisTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.DescribeDatabaseAutonomyStatus", async function () {
+    try {
+       const data = await client.DescribeDatabaseAutonomyStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -531,6 +531,16 @@ it("dbbrain.v20210527.DescribeAuditInstanceList", async function () {
 it("dbbrain.v20210527.DescribeSlowLogTimeSeriesStats", async function () {
     try {
        const data = await client.DescribeSlowLogTimeSeriesStats({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.UpdateMonitorSwitch", async function () {
+    try {
+       const data = await client.UpdateMonitorSwitch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -861,6 +871,16 @@ it("dbbrain.v20210527.CreateUserAutonomyProfile", async function () {
 it("dbbrain.v20210527.DescribeRedisProcessList", async function () {
     try {
        const data = await client.DescribeRedisProcessList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.UpdateDatabaseAutonomyStatus", async function () {
+    try {
+       const data = await client.UpdateDatabaseAutonomyStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

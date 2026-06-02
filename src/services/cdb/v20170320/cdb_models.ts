@@ -3659,47 +3659,49 @@ export interface ModifyCdbProxyAddressDescResponse {
  */
 export interface ModifyDBInstanceLogToCLSRequest {
   /**
-   * 实例 ID，可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。
+   * <p>实例 ID，可通过 <a href="https://cloud.tencent.com/document/product/236/15872">DescribeDBInstances</a> 接口获取。</p>
    */
   InstanceId: string
   /**
-   * 日志类型。error：错误日志，slowlog：慢日志。
+   * <p>日志类型。error：错误日志，slowlog：慢日志。</p>
    */
   LogType: string
   /**
-   * 投递状态。ON：开启，OFF：关闭。
+   * <p>投递状态。ON：开启，OFF：关闭。</p>
    */
   Status: string
   /**
-   * 是否需要创建日志集。默认为 false。
+   * <p>是否需要创建日志集。默认为 false。</p>
    */
   CreateLogset?: boolean
   /**
-   * 需要创建日志集时为日志集名称；选择已有日志集时，为日志集 ID。默认为空。
-说明：当参数 Status 的值为 ON 时，Logset 和 LogTopic 参数必须填一个。
+   * <p>需要创建日志集时为日志集名称；选择已有日志集时，为日志集 ID。默认为空。<br>说明：当参数 Status 的值为 ON 时，Logset 和 LogTopic 参数必须填一个。</p>
    */
   Logset?: string
   /**
-   * 是否需要创建日志主题。默认为 false。
+   * <p>是否需要创建日志主题。默认为 false。</p>
    */
   CreateLogTopic?: boolean
   /**
-   * 需要创建日志主题时为日志主题名称；选择已有日志主题时，为日志主题 ID。默认为空。
-说明：当参数 Status 的值为 ON 时，Logset 和 LogTopic 参数必须填一个。
+   * <p>需要创建日志主题时为日志主题名称；选择已有日志主题时，为日志主题 ID。默认为空。<br>说明：当参数 Status 的值为 ON 时，Logset 和 LogTopic 参数必须填一个。</p>
    */
   LogTopic?: string
   /**
-   * 日志主题有效期，不填写时，默认30天，最大值3600。
+   * <p>日志主题有效期，不填写时，默认30天，最大值3600。</p>
    */
   Period?: number
   /**
-   * 创建日志主题时，是否创建索引，默认为 false。
+   * <p>创建日志主题时，是否创建索引，默认为 false。</p>
    */
   CreateIndex?: boolean
   /**
-   * CLS 所在地域，不填择默认为 Region 的参数值。
+   * <p>CLS 所在地域，不填择默认为 Region 的参数值。</p>
    */
   ClsRegion?: string
+  /**
+   * <p>创建日志集和日志主题的时候可选，最多不能超过10个标签</p>
+   */
+  ResourceTags?: Array<TagInfoItem>
 }
 
 /**

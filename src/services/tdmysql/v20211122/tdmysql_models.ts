@@ -1840,10 +1840,6 @@ export interface DescribeDBSAvailableRecoveryTimeRequest {
    * <p>实例ID</p>
    */
   InstanceId: string
-  /**
-   * <p>备份集ID,值来自 DescribeDBSBackupSets 接口返回</p>
-   */
-  BackupSetId?: number
 }
 
 /**

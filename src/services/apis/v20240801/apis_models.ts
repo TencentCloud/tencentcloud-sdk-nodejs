@@ -130,6 +130,20 @@ export interface CreateModelServiceRequest {
 }
 
 /**
+ * FieldValue结构体
+ */
+export interface FieldValueDTO {
+  /**
+   * <p>属性</p>
+   */
+  Field?: string
+  /**
+   * <p>值</p>
+   */
+  Value?: string
+}
+
+/**
  * secretKey的出参
  */
 export interface AgentAppSecretKeyVO {
@@ -249,6 +263,60 @@ export interface InvokeLimitConfigDTO {
 }
 
 /**
+ * WizardConfig 向导模式配置
+ */
+export interface WizardConfig {
+  /**
+   * <p>表名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbTable?: string
+  /**
+   * <p>是否分页</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbEnablePaging?: boolean
+  /**
+   * <p>请求参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbReqParams?: Array<ServiceDatabaseReqParam>
+  /**
+   * <p>响应参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbRespParams?: Array<ServiceDatabaseRespParam>
+  /**
+   * <p>排序参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbOrdParams?: Array<ServiceDatabaseOrderParam>
+  /**
+   * <p>是否开启出参映射</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbEnableMappingResp?: boolean
+}
+
+/**
+ * DeleteAgentAppServices请求参数结构体
+ */
+export interface DeleteAgentAppServicesRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceID: string
+  /**
+   * <p>应用ID</p>
+   */
+  ID: string
+  /**
+   * <p>服务IDs</p>
+   */
+  ServiceIDs: Array<string>
+}
+
+/**
  * 工具级别配置
  */
 export interface ToolConfigDTO {
@@ -326,6 +394,54 @@ export interface DescribeModelsResponseVO {
    * 列表
    */
   Items?: Array<DescribeModelResponseVO>
+}
+
+/**
+ * SourceTypeConfigDTO
+ */
+export interface SourceTypeConfigDTO {
+  /**
+   * json xml urlencoded amf0 amf3 hessian1 hessian2
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReqSourceType?: string
+  /**
+   * json xml urlencoded amf0 amf3 hessian1 hessian2
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReqTargetType?: string
+  /**
+   * json xml urlencoded amf0 amf3 hessian1 hessian2
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResSourceType?: string
+  /**
+   * json xml urlencoded amf0 amf3 hessian1 hessian2
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResTargetType?: string
+}
+
+/**
+ * CreateAgentAppServices请求参数结构体
+ */
+export interface CreateAgentAppServicesRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceID: string
+  /**
+   * <p>应用ID</p>
+   */
+  ID: string
+  /**
+   * <p>服务详情</p>
+   */
+  Services: Array<AgentAppServiceDTO>
 }
 
 /**
@@ -640,6 +756,20 @@ export interface McpToolAnnotation {
 }
 
 /**
+ * DeleteService请求参数结构体
+ */
+export interface DeleteServiceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceID?: string
+  /**
+   * 业务ID
+   */
+  ID?: string
+}
+
+/**
  * 开始结束时间结构体
  */
 export interface StartEndTime {
@@ -816,11 +946,66 @@ export interface ModifyModelServiceRequest {
 }
 
 /**
+ * DescribeService返回参数结构体
+ */
+export interface DescribeServiceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyModel返回参数结构体
  */
 export interface ModifyModelResponse {
   /**
    * <p>结果集</p>
+   */
+  Data?: ResultIDVO
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 向导模式请求参数
+ */
+export interface ServiceDatabaseReqParam {
+  /**
+   * <p>表字段名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FieldName?: string
+  /**
+   * <p>操作符</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Operator?: string
+  /**
+   * <p>参数名/常量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Val?: string
+  /**
+   * <p>参数类型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValType?: string
+  /**
+   * <p>内部字段</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InternalField?: boolean
+}
+
+/**
+ * CreateAgentAppServices返回参数结构体
+ */
+export interface CreateAgentAppServicesResponse {
+  /**
+   * <p>app id</p>
    */
   Data?: ResultIDVO
   /**
@@ -876,14 +1061,13 @@ export interface DeleteMcpServerResponse {
 }
 
 /**
- * 结果ID数组
+ * ModifyService返回参数结构体
  */
-export interface ResultIDsVO {
+export interface ModifyServiceResponse {
   /**
-   * 结果ID数组
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IDs?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -925,6 +1109,27 @@ export interface CreateMcpServerResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 匹配条件请求参数
+ */
+export interface SimpleCondition {
+  /**
+   * <p>字段名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * <p>匹配方式: eq 等于;ne 不等于;regex 正则;</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Condition?: string
+  /**
+   * <p>字段值 或正则表达式</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
 }
 
 /**
@@ -1021,49 +1226,19 @@ export interface ResultIDVO {
 }
 
 /**
- * CreateModel请求参数结构体
+ * 限流窗口配置
  */
-export interface CreateModelRequest {
+export interface LimitWindowsDTO {
   /**
-   * <p>实例</p>
+   * 时间窗口，分钟
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceID: string
+  Interval?: number
   /**
-   * <p>模型名称</p>
+   * 累计上限，k
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
-  /**
-   * <p>协议类型：http/https</p>
-   */
-  HttpProtocolType: string
-  /**
-   * <p>目标路径</p>
-   */
-  TargetPath: string
-  /**
-   * <p>目标服务器</p>
-   */
-  TargetHosts: Array<TargetHostDTO>
-  /**
-   * <p>凭据ID</p>
-   */
-  CredentialID?: string
-  /**
-   * <p>https时，是否检查证书合法</p>
-   */
-  CheckTargetCertsError?: boolean
-  /**
-   * <p>http协议版本：1.1/2.0</p>
-   */
-  HttpProtocolVersion?: string
-  /**
-   * <p>model ID</p>
-   */
-  ModelID?: string
-  /**
-   * <p>描述</p>
-   */
-  Description?: string
+  Limit?: number
 }
 
 /**
@@ -1231,6 +1406,16 @@ export interface DeleteAgentAppModelServicesResponse {
 }
 
 /**
+ * CreateService返回参数结构体
+ */
+export interface CreateServiceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateModel返回参数结构体
  */
 export interface CreateModelResponse {
@@ -1349,6 +1534,11 @@ export interface DescribeAgentAppsResponse {
 }
 
 /**
+ * CreateService请求参数结构体
+ */
+export type CreateServiceRequest = null
+
+/**
  * ModifyAgentApp返回参数结构体
  */
 export interface ModifyAgentAppResponse {
@@ -1360,6 +1550,20 @@ export interface ModifyAgentAppResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeService请求参数结构体
+ */
+export interface DescribeServiceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceID?: string
+  /**
+   * 业务ID
+   */
+  ID?: string
 }
 
 /**
@@ -1392,6 +1596,42 @@ export interface AgentCredentialContentDTO {
    * 如果认证类型为reqKey时，该项必填
    */
   Headers?: Array<AgentCredentialContentHeaderDTO>
+}
+
+/**
+ * 后端服务组DTO
+ */
+export interface TargetServerGroupDTO {
+  /**
+   * <p>后端服务组ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ID?: string
+  /**
+   * <p>名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * <p>目标服务器列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetHosts?: Array<TargetHostDTO>
+  /**
+   * <p>目标Host类型 0 默认 1 vpc</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetHostType?: number
+  /**
+   * <p>关联的服务数量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceCount?: number
+  /**
+   * <p>创建时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
 }
 
 /**
@@ -1661,6 +1901,11 @@ export interface DeleteModelServiceRequest {
 }
 
 /**
+ * DescribeServices请求参数结构体
+ */
+export type DescribeServicesRequest = null
+
+/**
  * DeleteAgentApp请求参数结构体
  */
 export interface DeleteAgentAppRequest {
@@ -1675,6 +1920,148 @@ export interface DeleteAgentAppRequest {
 }
 
 /**
+ * ModifyService请求参数结构体
+ */
+export interface ModifyServiceRequest {
+  /**
+   * <p>实例</p>
+   */
+  InstanceID?: string
+  /**
+   * <p>名称</p>
+   */
+  Name?: string
+  /**
+   * <p>里约应用ID</p>
+   * @deprecated
+   */
+  PaasID?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>标签</p>
+   */
+  LabelIDs?: Array<string>
+  /**
+   * <p>目录</p>
+   */
+  CategoryIDs?: Array<string>
+  /**
+   * <p>鉴权方式</p>
+   * @deprecated
+   */
+  AuthType?: string
+  /**
+   * <p>签名</p>
+   * @deprecated
+   */
+  SignType?: string
+  /**
+   * <p>登录方式</p>
+   * @deprecated
+   */
+  LoginTypes?: Array<string>
+  /**
+   * <p>负载方式</p>
+   */
+  TargetSelect?: string
+  /**
+   * <p>公开路径</p>
+   */
+  PubPath?: string
+  /**
+   * <p>请求方法</p>
+   */
+  RequestMethod?: string
+  /**
+   * <p>是否https</p>
+   */
+  HttpProtocolType?: string
+  /**
+   * <p>证书检查</p>
+   */
+  CheckTargetCertsError?: boolean
+  /**
+   * <p>http协议类型</p>
+   */
+  HttpProtocolVersion?: string
+  /**
+   * <p>版本号</p>
+   */
+  Versions?: Array<VersionDTO>
+  /**
+   * <p>目标路径</p>
+   */
+  TargetPath?: string
+  /**
+   * <p>入参</p>
+   */
+  RequestParamsValidatorStatus?: boolean
+  /**
+   * <p>入参</p>
+   */
+  RequestParamsValidatorJsonInfoT?: string
+  /**
+   * <p>出参</p>
+   */
+  ResponseParamsValidatorStatus?: boolean
+  /**
+   * <p>出参</p>
+   */
+  ResponseParamsValidatorJsonInfoT?: string
+  /**
+   * <p>流量控制</p>
+   */
+  InvokeLimitConfigStatus?: boolean
+  /**
+   * <p>流量控制</p>
+   */
+  InvokeLimitConfig?: InvokeLimitConfigDTO
+  /**
+   * <p>健康检查</p>
+   */
+  HealthCheckStatus?: boolean
+  /**
+   * <p>健康检查</p>
+   */
+  HealthCheckConfig?: HealthCheckConfigDTO
+  /**
+   * <p>格式转换</p>
+   */
+  SourceTypeStatus?: boolean
+  /**
+   * <p>格式转换</p>
+   */
+  SourceTypeConfig?: SourceTypeConfigDTO
+  /**
+   * <p>IP白名单</p>
+   */
+  IpWhiteStatus?: boolean
+  /**
+   * <p>IP白名单</p>
+   */
+  IpWhiteList?: Array<string>
+  /**
+   * <p>IP黑名单</p>
+   */
+  IpBlackStatus?: boolean
+  /**
+   * <p>IP黑名单</p>
+   */
+  IpBlackList?: Array<string>
+  /**
+   * <p>插件</p>
+   */
+  PluginConfigs?: Array<PluginConfigDTO>
+  /**
+   * <p>服务ID</p>
+   */
+  ID?: string
+}
+
+/**
  * DeleteMcpServer请求参数结构体
  */
 export interface DeleteMcpServerRequest {
@@ -1686,6 +2073,16 @@ export interface DeleteMcpServerRequest {
    * mcp server ID
    */
   ID: string
+}
+
+/**
+ * DeleteService返回参数结构体
+ */
+export interface DeleteServiceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1736,6 +2133,27 @@ export interface ModifyModelRequest {
    * <p>描述</p>
    */
   Description?: string
+}
+
+/**
+ * HealthCheckConfigDTO
+ */
+export interface HealthCheckConfigDTO {
+  /**
+   * 健康检查路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HealthCheckPath?: string
+  /**
+   * 状态码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ValidHealthCheckStatusCode?: Array<number | bigint>
+  /**
+   * 请求的超时时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HealthCheckTimeout?: number
 }
 
 /**
@@ -1878,17 +2296,17 @@ export interface DescribeModelServicesRequest {
 }
 
 /**
- * DescribeMcpServer请求参数结构体
+ * ModifyAgentAppModelServices返回参数结构体
  */
-export interface DescribeMcpServerRequest {
+export interface ModifyAgentAppModelServicesResponse {
   /**
-   * 实例ID
+   * app id
    */
-  InstanceID: string
+  Data?: ResultIDVO
   /**
-   * mcp server ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ID: string
+  RequestId?: string
 }
 
 /**
@@ -1990,35 +2408,393 @@ export interface McpTool {
 }
 
 /**
- * ModifyAgentAppModelServices返回参数结构体
+ * DescribeMcpServer请求参数结构体
  */
-export interface ModifyAgentAppModelServicesResponse {
-  /**
-   * app id
-   */
-  Data?: ResultIDVO
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteAgentAppModelServices请求参数结构体
- */
-export interface DeleteAgentAppModelServicesRequest {
+export interface DescribeMcpServerRequest {
   /**
    * 实例ID
    */
   InstanceID: string
   /**
-   * 应用ID
+   * mcp server ID
    */
   ID: string
+}
+
+/**
+ * ip黑白名单配置
+ */
+export interface IpConfig {
   /**
-   * 关联的model service id
+   * ip数组
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModelServiceIDs: Array<string>
+  Ips?: Array<string>
+  /**
+   * 生效类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EffectType?: string
+  /**
+   * 生效时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EffectTimes?: Array<StartEndTime>
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: string
+}
+
+/**
+ * ServiceVO
+ */
+export interface ServiceVO {
+  /**
+   * <p>实例</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceID?: string
+  /**
+   * <p>名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * <p>里约应用ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  PaasID?: string
+  /**
+   * <p>描述</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * <p>标签</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LabelIDs?: Array<string>
+  /**
+   * <p>目录</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CategoryIDs?: Array<string>
+  /**
+   * <p>鉴权方式</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  AuthType?: string
+  /**
+   * <p>签名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  SignType?: string
+  /**
+   * <p>登录方式</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  LoginTypes?: Array<string>
+  /**
+   * <p>负载方式</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetSelect?: string
+  /**
+   * <p>公开路径</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PubPath?: string
+  /**
+   * <p>请求方法</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestMethod?: string
+  /**
+   * <p>目标服务器</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetHosts?: Array<TargetHostDTO>
+  /**
+   * <p>是否https</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpProtocolType?: string
+  /**
+   * <p>证书检查</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckTargetCertsError?: boolean
+  /**
+   * <p>http协议类型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpProtocolVersion?: string
+  /**
+   * <p>版本号</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Versions?: Array<VersionDTO>
+  /**
+   * <p>目标路径</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetPath?: string
+  /**
+   * <p>入参</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestParamsValidatorStatus?: boolean
+  /**
+   * <p>入参</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestParamsValidatorJsonInfoT?: string
+  /**
+   * <p>出参</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResponseParamsValidatorStatus?: boolean
+  /**
+   * <p>出参</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResponseParamsValidatorJsonInfoT?: string
+  /**
+   * <p>流量控制</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InvokeLimitConfigStatus?: boolean
+  /**
+   * <p>流量控制</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InvokeLimitConfig?: InvokeLimitConfigDTO
+  /**
+   * <p>健康检查</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HealthCheckStatus?: boolean
+  /**
+   * <p>健康检查</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HealthCheckConfig?: HealthCheckConfigDTO
+  /**
+   * <p>格式转换</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceTypeStatus?: boolean
+  /**
+   * <p>格式转换</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceTypeConfig?: SourceTypeConfigDTO
+  /**
+   * <p>是否开启Token限流</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  TokenLimitStatus?: boolean
+  /**
+   * <p>Token限流配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  TokenLimitConfig?: TokenLimitConfigDTO
+  /**
+   * <p>是否开启内容安全</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  TmsStatus?: boolean
+  /**
+   * <p>内容安全配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  TmsConfig?: TmsConfigDTO
+  /**
+   * <p>IP白名单</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpWhiteStatus?: boolean
+  /**
+   * <p>IP白名单</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpWhiteList?: Array<string>
+  /**
+   * <p>IP黑名单</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpBlackStatus?: boolean
+  /**
+   * <p>IP黑名单</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IpBlackList?: Array<string>
+  /**
+   * <p>插件</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PluginConfigs?: Array<PluginConfigDTO>
+  /**
+   * <p>服务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ID?: string
+  /**
+   * <p>状态</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * <p>预览地址</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+  /**
+   * <p>app</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  App?: IDNameVO
+  /**
+   * <p>目录</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Catalogs?: Array<IDNameVO>
+  /**
+   * <p>标签</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Labels?: Array<IDNameVO>
+  /**
+   * <p>认证方式</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Logins?: Array<IDNameVO>
+  /**
+   * <p>授权数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthAppNum?: number
+  /**
+   * <p>创建时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * <p>最后修改时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastUpdateTime?: string
+  /**
+   * <p>应用ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppID?: number
+  /**
+   * <p>用户ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+  /**
+   * <p>域名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domain?: string
+  /**
+   * <p>是否开启报文记录</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OpenMessageLogStatus?: boolean
+  /**
+   * <p>订阅页面的当前用户是否订阅了该API</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  CurrPaasIDSubscriptionID?: string
+  /**
+   * <p>目标服务类型 Restful Database Mock</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetServiceType?: string
+  /**
+   * <p>SQL模板</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlTemplate?: SqlTemplate
+  /**
+   * <p>目标Host类型 0 默认 1 vpc</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetHostType?: number
+  /**
+   * <p>后端服务类型 0 自定义 原始数据:ip/域名或vpc 1 后端服务 服务组</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetServiceHostType?: number
+  /**
+   * <p>后端服务组ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetServerGroupID?: string
+  /**
+   * <p>后端服务组</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetServerGroup?: TargetServerGroupDTO
+  /**
+   * <p>自定义host</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomHttpHost?: string
+  /**
+   * <p>Http 请求host类型 useRequestHost 保持源请求host targetHost 修正为源站host  customHost 自定义host</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpHostType?: string
+  /**
+   * <p>mock响应状态码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MockStatusCode?: number
+  /**
+   * <p>mock响应body</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MockBody?: string
+  /**
+   * <p>mock响应头</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MockHeaders?: Array<FieldValueDTO>
+  /**
+   * <p>路径匹配类型: prefix 前缀匹配(不送默认); absolute 绝对匹配; regex正则匹配;</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PathMatchType?: string
+  /**
+   * <p>自定义匹配条件</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomMatch?: CustomMatch
+  /**
+   * <p>请求的超时时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timeout?: number
+  /**
+   * <p>绑定的mcp server数量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  McpServerNum?: number
 }
 
 /**
@@ -2192,6 +2968,17 @@ export interface CreateAgentAppRequest {
 }
 
 /**
+ * 结果ID数组
+ */
+export interface ResultIDsVO {
+  /**
+   * 结果ID数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IDs?: Array<string>
+}
+
+/**
  * 查询App列表响应
  */
 export interface DescribeAgentAppsResp {
@@ -2265,6 +3052,20 @@ export interface PromptModerateConfigDTO {
 }
 
 /**
+ * DescribeAgentAppServices返回参数结构体
+ */
+export interface DescribeAgentAppServicesResponse {
+  /**
+   * <p>app id</p>
+   */
+  Data?: DescribeAgentAppServicesVO
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * TargetHostDTO
  */
 export interface TargetHostDTO {
@@ -2324,19 +3125,123 @@ export interface DescribeModelsRequest {
 export type DescribeAgentCredentialRequest = null
 
 /**
- * 限流窗口配置
+ * CreateModel请求参数结构体
  */
-export interface LimitWindowsDTO {
+export interface CreateModelRequest {
   /**
-   * 时间窗口，分钟
+   * <p>实例</p>
+   */
+  InstanceID: string
+  /**
+   * <p>模型名称</p>
+   */
+  Name: string
+  /**
+   * <p>协议类型：http/https</p>
+   */
+  HttpProtocolType: string
+  /**
+   * <p>目标路径</p>
+   */
+  TargetPath: string
+  /**
+   * <p>目标服务器</p>
+   */
+  TargetHosts: Array<TargetHostDTO>
+  /**
+   * <p>凭据ID</p>
+   */
+  CredentialID?: string
+  /**
+   * <p>https时，是否检查证书合法</p>
+   */
+  CheckTargetCertsError?: boolean
+  /**
+   * <p>http协议版本：1.1/2.0</p>
+   */
+  HttpProtocolVersion?: string
+  /**
+   * <p>model ID</p>
+   */
+  ModelID?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+}
+
+/**
+ * VersionDTO
+ */
+export interface VersionDTO {
+  /**
+   * Version版本
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Interval?: number
+  Version?: string
   /**
-   * 累计上限，k
+   * 目标路径
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Limit?: number
+  TargetPath?: string
+}
+
+/**
+ * 匹配条件
+ */
+export interface CompoundCondition {
+  /**
+   * <p>是否启用</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enable?: boolean
+  /**
+   * <p>匹配信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rules?: Array<SimpleCondition>
+}
+
+/**
+ * ServiceDatabaseOrderParam
+ */
+export interface ServiceDatabaseOrderParam {
+  /**
+   * <p>字段名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FieldName?: string
+  /**
+   * <p>排序 asc desc</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Order?: string
+}
+
+/**
+ * Agent应用关联的服务配置
+ */
+export interface AgentAppServiceDTO {
+  /**
+   * <p>ID</p>
+   */
+  ID?: string
+  /**
+   * <p>是否限流</p>
+   */
+  InvokeLimitConfigStatus?: boolean
+  /**
+   * <p>限流配置</p>
+   */
+  InvokeLimitConfig?: InvokeLimitConfigDTO
+  /**
+   * <p>是否要认证</p>
+   */
+  NeedAuth?: boolean
+  /**
+   * <p>凭据ID</p>
+   */
+  AgentCredentialID?: string
 }
 
 /**
@@ -2345,29 +3250,35 @@ export interface LimitWindowsDTO {
 export type CreateAgentCredentialRequest = null
 
 /**
- * ip黑白名单配置
+ * DeleteAgentAppModelServices请求参数结构体
  */
-export interface IpConfig {
+export interface DeleteAgentAppModelServicesRequest {
   /**
-   * ip数组
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例ID
    */
-  Ips?: Array<string>
+  InstanceID: string
   /**
-   * 生效类型
-注意：此字段可能返回 null，表示取不到有效值。
+   * 应用ID
    */
-  EffectType?: string
+  ID: string
   /**
-   * 生效时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 关联的model service id
    */
-  EffectTimes?: Array<StartEndTime>
+  ModelServiceIDs: Array<string>
+}
+
+/**
+ * DeleteAgentAppServices返回参数结构体
+ */
+export interface DeleteAgentAppServicesResponse {
   /**
-   * 备注
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>app id</p>
    */
-  Comment?: string
+  Data?: ResultIDVO
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2378,6 +3289,16 @@ export interface CreateAgentAppMcpServersResponse {
    * app id
    */
   Data?: ResultIDVO
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeServices返回参数结构体
+ */
+export interface DescribeServicesResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2543,6 +3464,20 @@ export interface DescribeAgentAppMcpServersRequest {
 }
 
 /**
+ * 应用服务查询
+ */
+export interface DescribeAgentAppServicesVO {
+  /**
+   * <p>总数</p>
+   */
+  Total?: number
+  /**
+   * <p>数据列表</p>
+   */
+  Items?: Array<AgentAppServiceVO>
+}
+
+/**
  * 关联的mcp服务配置
  */
 export interface AgentAppMcpServerDTO {
@@ -2612,6 +3547,32 @@ export interface TokenLimitConfigDTO {
 }
 
 /**
+ * SqlTemplate SQL模板
+ */
+export interface SqlTemplate {
+  /**
+   * <p>配置方式  script  脚本 wizard 向导</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbConfigMode?: string
+  /**
+   * <p>数据源ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DataSourceID?: string
+  /**
+   * <p>Sql代码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Sql?: string
+  /**
+   * <p>向导模式配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WizardConfig?: WizardConfig
+}
+
+/**
  * 查询App mcpServer绑定列表响应
  */
 export interface DescribeAgentAppMcpServersResp {
@@ -2623,6 +3584,52 @@ export interface DescribeAgentAppMcpServersResp {
    * 具体条目
    */
   Items?: Array<AgentAppMcpServerVO>
+}
+
+/**
+ * 应用API详情
+ */
+export interface AgentAppServiceVO {
+  /**
+   * <p>ID</p>
+   */
+  ID?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AgentAppID?: string
+  /**
+   * <p>服务ID</p>
+   */
+  ServiceID?: string
+  /**
+   * <p>是否限流</p>
+   */
+  InvokeLimitConfigStatus?: boolean
+  /**
+   * <p>限流配置</p>
+   */
+  InvokeLimitConfig?: InvokeLimitConfigDTO
+  /**
+   * <p>服务详情</p>
+   */
+  ServiceVO?: ServiceVO
+  /**
+   * <p>关联时间</p>
+   */
+  RelateTime?: string
+  /**
+   * <p>是否需要认证</p>
+   */
+  NeedAuth?: boolean
+  /**
+   * <p>凭据ID</p>
+   */
+  AgentCredentialID?: string
+  /**
+   * <p>凭据详情</p>
+   */
+  AgentCredentialVO?: DescribeAgentCredentialResp
 }
 
 /**
@@ -2795,6 +3802,22 @@ export interface DescribeModelServiceResponseVO {
 }
 
 /**
+ * 响应参数
+ */
+export interface ServiceDatabaseRespParam {
+  /**
+   * <p>源字段名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FieldName?: string
+  /**
+   * <p>目标字段名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+}
+
+/**
  * DescribeModelsSort
  */
 export interface DescribeModelsSort {
@@ -2955,6 +3978,48 @@ export interface DescribeModelsResponse {
 }
 
 /**
+ * DescribeAgentAppServices请求参数结构体
+ */
+export interface DescribeAgentAppServicesRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceID: string
+  /**
+   * <p>数据量</p>
+   */
+  Limit: number
+  /**
+   * <p>IDs</p>
+   */
+  IDs?: Array<string>
+  /**
+   * <p>应用IDs</p>
+   */
+  AgentAppIDs?: Array<string>
+  /**
+   * <p>服务IDs</p>
+   */
+  ServiceIDs?: Array<string>
+  /**
+   * <p>关键字</p>
+   */
+  Keyword?: string
+  /**
+   * <p>偏移量</p>
+   */
+  Offset?: number
+  /**
+   * <p>是否有凭据</p>
+   */
+  AgentCredentialExist?: boolean
+  /**
+   * <p>凭据ID</p>
+   */
+  AgentCredentialIDs?: Array<string>
+}
+
+/**
  * DescribeModelServices返回参数结构体
  */
 export interface DescribeModelServicesResponse {
@@ -2992,4 +4057,20 @@ export interface McpInputOutSchema {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
+}
+
+/**
+ * 自定义匹配条件
+ */
+export interface CustomMatch {
+  /**
+   * <p>请求头  匹配条件</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeadersMatch?: CompoundCondition
+  /**
+   * <p>请求参数 匹配条件</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryMatch?: CompoundCondition
 }

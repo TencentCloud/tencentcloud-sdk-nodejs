@@ -1603,11 +1603,11 @@ export interface DeleteExtensionRequest {
  */
 export interface DescribePredictiveDialingCampaignRequest {
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * <p>应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc</p>
    */
   SdkAppId: number
   /**
-   * 任务 ID
+   * <p>任务 ID</p>
    */
   CampaignId: number
 }
@@ -1617,49 +1617,65 @@ export interface DescribePredictiveDialingCampaignRequest {
  */
 export interface DescribePredictiveDialingCampaignResponse {
   /**
-   * 任务 ID
+   * <p>任务 ID</p>
    */
   CampaignId?: number
   /**
-   * 任务名称
+   * <p>任务名称</p>
    */
   Name?: string
   /**
-   * 被叫呼叫顺序 0 随机 1 顺序
+   * <p>被叫呼叫顺序 0 随机 1 顺序</p>
    */
   CallOrder?: number
   /**
-   * 使用的座席技能组 ID
+   * <p>使用的座席技能组 ID</p>
    */
   SkillGroupId?: number
   /**
-   * 指定的 IVR ID
+   * <p>指定的 IVR ID</p>
    */
   IVRId?: number
   /**
-   * 相同应用内多个任务运行优先级，从高到底 1 - 5
+   * <p>相同应用内多个任务运行优先级，从高到底 1 - 5</p>
    */
   Priority?: number
   /**
-   * 预期呼损率，百分比，5 - 50
+   * <p>预期呼损率，百分比，5 - 50</p>
    */
   ExpectedAbandonRate?: number
   /**
-   * 呼叫重试次数，0 - 2
+   * <p>呼叫重试次数，0 - 2</p>
    */
   RetryTimes?: number
   /**
-   * 呼叫重试间隔时间，单位秒，60 - 86400
+   * <p>呼叫重试间隔时间，单位秒，60 - 86400</p>
    */
   RetryInterval?: number
   /**
-   * 任务启动时间，Unix 时间戳，到此时间后会自动启动任务
+   * <p>任务启动时间，Unix 时间戳，到此时间后会自动启动任务</p>
    */
   StartTime?: number
   /**
-   * 任务结束时间，Unix 时间戳，到此时间后会自动终止任务
+   * <p>任务结束时间，Unix 时间戳，到此时间后会自动终止任务</p>
    */
   EndTime?: number
+  /**
+   * <p>自定义变量</p>
+   */
+  Variables?: Array<Variable>
+  /**
+   * <p>UUI</p>
+   */
+  UUI?: string
+  /**
+   * <p>任务状态</p><p>枚举值：</p><ul><li>0： 待开始 </li><li>1： 进行中</li><li>2： 已暂停</li><li>3： 已终止</li><li>4： 已完成</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>任务状态原因 0 正常 1 手动结束 2 超时结束</p>
+   */
+  StatusReason?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2046,25 +2062,29 @@ export interface CreateStaffResponse {
  */
 export interface DescribePredictiveDialingCampaignsRequest {
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * <p>应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc</p>
    */
   SdkAppId: number
   /**
-   * 分页尺寸，最大为 100
+   * <p>分页尺寸，最大为 100</p>
    */
   PageSize: number
   /**
-   * 分页页码，从 0 开始
+   * <p>分页页码，从 0 开始</p>
    */
   PageNumber: number
   /**
-   * 查询任务列表名称关键字
+   * <p>查询任务列表名称关键字</p>
    */
   Name?: string
   /**
-   * 查询任务列表技能组 ID
+   * <p>查询任务列表技能组 ID</p>
    */
   SkillGroupId?: number
+  /**
+   * <p>任务 ID</p>
+   */
+  CampaignId?: number
 }
 
 /**
@@ -4123,11 +4143,11 @@ export interface DescribeIMCdrListResponse {
  */
 export interface DescribePredictiveDialingCampaignsResponse {
   /**
-   * 数据总量
+   * <p>数据总量</p>
    */
   TotalCount?: number
   /**
-   * 数据
+   * <p>数据</p>
    */
   CampaignList?: Array<DescribePredictiveDialingCampaignsElement>
   /**

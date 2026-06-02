@@ -19,53 +19,67 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateModelServiceRequest,
+  FieldValueDTO,
   AgentAppSecretKeyVO,
   McpSecurityRule,
   ModifyAgentAppRequest,
   InvokeLimitConfigDTO,
+  WizardConfig,
+  DeleteAgentAppServicesRequest,
   ToolConfigDTO,
   CreateAgentAppResponse,
   DescribeAgentAppModelServicesRequest,
   DeleteAgentCredentialResponse,
   DescribeMcpServerResponse,
   DescribeModelsResponseVO,
+  SourceTypeConfigDTO,
+  CreateAgentAppServicesRequest,
   BindMcpSecurityRuleDTO,
   AgentAppMcpServerVO,
   DeleteModelServiceResponse,
   DescribeMcpServerResponseVO,
   McpToolAnnotation,
+  DeleteServiceRequest,
   StartEndTime,
   DeleteModelResponse,
   IDNameVO,
   DescribeMcpServersResponseVO,
   ModifyModelServiceRequest,
+  DescribeServiceResponse,
   ModifyModelResponse,
+  ServiceDatabaseReqParam,
+  CreateAgentAppServicesResponse,
   CreateAgentAppModelServicesRequest,
   DescribeModelServicesResponseVO,
   DeleteMcpServerResponse,
-  ResultIDsVO,
+  ModifyServiceResponse,
   DescribeAgentCredentialsRequest,
   CreateAgentAppResp,
   CreateMcpServerResponse,
+  SimpleCondition,
   DescribeAgentAppsRequest,
   ToolConfigVO,
   DescribeAgentAppResponse,
   ResultIDVO,
-  CreateModelRequest,
+  LimitWindowsDTO,
   DescribeModelRequest,
   AgentCredentialContentHeaderDTO,
   SensitiveDataCheckConfigDTO,
   BindMcpSecurityRuleVO,
   McpSecurityRulesVO,
   DeleteAgentAppModelServicesResponse,
+  CreateServiceResponse,
   CreateModelResponse,
   DescribeModelServicesSort,
   DescribeAgentAppsSortDTO,
   DescribeMcpServersRequest,
   DescribeAgentAppsResponse,
+  CreateServiceRequest,
   ModifyAgentAppResponse,
+  DescribeServiceRequest,
   DescribeModelServiceResponse,
   AgentCredentialContentDTO,
+  TargetServerGroupDTO,
   DescribeAgentCredentialResponse,
   McpUrlObj,
   ModifyAgentAppModelServicesRequest,
@@ -74,19 +88,24 @@ import {
   DescribeAgentAppResp,
   CreateMcpServerRequest,
   DeleteModelServiceRequest,
+  DescribeServicesRequest,
   DeleteAgentAppRequest,
+  ModifyServiceRequest,
   DeleteMcpServerRequest,
+  DeleteServiceResponse,
   ModifyModelRequest,
+  HealthCheckConfigDTO,
   DescribeAgentCredentialResp,
   CreateAgentAppModelServicesResponse,
   DescribeAgentAppMcpServersResponse,
   DescribeModelServicesRequest,
-  DescribeMcpServerRequest,
+  ModifyAgentAppModelServicesResponse,
   TmsConfigDTO,
   AgentAppModelServiceDTO,
   McpTool,
-  ModifyAgentAppModelServicesResponse,
-  DeleteAgentAppModelServicesRequest,
+  DescribeMcpServerRequest,
+  IpConfig,
+  ServiceVO,
   ModifyAgentCredentialResponse,
   DescribeModelResponseVO,
   DeleteAgentCredentialRequest,
@@ -95,26 +114,38 @@ import {
   DescribeMcpServersResponse,
   ModifyAgentCredentialRequest,
   CreateAgentAppRequest,
+  ResultIDsVO,
   DescribeAgentAppsResp,
   CreateModelServiceResponse,
   DescribeAgentCredentialsResponse,
   DeleteAgentAppMcpServersResponse,
   PromptModerateConfigDTO,
+  DescribeAgentAppServicesResponse,
   TargetHostDTO,
   DescribeModelsRequest,
   DescribeAgentCredentialRequest,
-  LimitWindowsDTO,
+  CreateModelRequest,
+  VersionDTO,
+  CompoundCondition,
+  ServiceDatabaseOrderParam,
+  AgentAppServiceDTO,
   CreateAgentCredentialRequest,
-  IpConfig,
+  DeleteAgentAppModelServicesRequest,
+  DeleteAgentAppServicesResponse,
   CreateAgentAppMcpServersResponse,
+  DescribeServicesResponse,
   ModifyMcpServerRequest,
   DescribeModelResponse,
   DescribeAgentAppMcpServersRequest,
+  DescribeAgentAppServicesVO,
   AgentAppMcpServerDTO,
   TargetModelDTO,
   TokenLimitConfigDTO,
+  SqlTemplate,
   DescribeAgentAppMcpServersResp,
+  AgentAppServiceVO,
   DescribeModelServiceResponseVO,
+  ServiceDatabaseRespParam,
   DescribeModelsSort,
   PluginConfigDTO,
   PluginFormValueDTO,
@@ -125,8 +156,10 @@ import {
   ModifyMcpServerResponse,
   DeleteModelRequest,
   DescribeModelsResponse,
+  DescribeAgentAppServicesRequest,
   DescribeModelServicesResponse,
   McpInputOutSchema,
+  CustomMatch,
 } from "./apis_models"
 
 /**
@@ -136,6 +169,26 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("apis.tencentcloudapi.com", "2024-08-01", clientConfig)
+  }
+
+  /**
+   * 创建服务
+   */
+  async CreateService(
+    req?: CreateServiceRequest,
+    cb?: (error: string, rep: CreateServiceResponse) => void
+  ): Promise<CreateServiceResponse> {
+    return this.request("CreateService", req, cb)
+  }
+
+  /**
+   * 删除模型
+   */
+  async DeleteModel(
+    req: DeleteModelRequest,
+    cb?: (error: string, rep: DeleteModelResponse) => void
+  ): Promise<DeleteModelResponse> {
+    return this.request("DeleteModel", req, cb)
   }
 
   /**
@@ -179,6 +232,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 应用关联API
+   */
+  async CreateAgentAppServices(
+    req: CreateAgentAppServicesRequest,
+    cb?: (error: string, rep: CreateAgentAppServicesResponse) => void
+  ): Promise<CreateAgentAppServicesResponse> {
+    return this.request("CreateAgentAppServices", req, cb)
+  }
+
+  /**
    * 查询模型服务详情
    */
   async DescribeModelService(
@@ -196,6 +259,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAgentCredentialsResponse) => void
   ): Promise<DescribeAgentCredentialsResponse> {
     return this.request("DescribeAgentCredentials", req, cb)
+  }
+
+  /**
+   * 删除服务
+   */
+  async DeleteService(
+    req: DeleteServiceRequest,
+    cb?: (error: string, rep: DeleteServiceResponse) => void
+  ): Promise<DeleteServiceResponse> {
+    return this.request("DeleteService", req, cb)
   }
 
   /**
@@ -249,13 +322,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改Credential
+   * 查询服务列表
    */
-  async ModifyAgentCredential(
-    req?: ModifyAgentCredentialRequest,
-    cb?: (error: string, rep: ModifyAgentCredentialResponse) => void
-  ): Promise<ModifyAgentCredentialResponse> {
-    return this.request("ModifyAgentCredential", req, cb)
+  async DescribeServices(
+    req?: DescribeServicesRequest,
+    cb?: (error: string, rep: DescribeServicesResponse) => void
+  ): Promise<DescribeServicesResponse> {
+    return this.request("DescribeServices", req, cb)
   }
 
   /**
@@ -266,6 +339,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteMcpServerResponse) => void
   ): Promise<DeleteMcpServerResponse> {
     return this.request("DeleteMcpServer", req, cb)
+  }
+
+  /**
+   * 查询服务详情
+   */
+  async DescribeService(
+    req: DescribeServiceRequest,
+    cb?: (error: string, rep: DescribeServiceResponse) => void
+  ): Promise<DescribeServiceResponse> {
+    return this.request("DescribeService", req, cb)
   }
 
   /**
@@ -439,6 +522,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改Credential
+   */
+  async ModifyAgentCredential(
+    req?: ModifyAgentCredentialRequest,
+    cb?: (error: string, rep: ModifyAgentCredentialResponse) => void
+  ): Promise<ModifyAgentCredentialResponse> {
+    return this.request("ModifyAgentCredential", req, cb)
+  }
+
+  /**
    * 创建mcp server
    */
   async CreateMcpServer(
@@ -449,12 +542,32 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除模型
+   * 应用API关联解除
    */
-  async DeleteModel(
-    req: DeleteModelRequest,
-    cb?: (error: string, rep: DeleteModelResponse) => void
-  ): Promise<DeleteModelResponse> {
-    return this.request("DeleteModel", req, cb)
+  async DeleteAgentAppServices(
+    req: DeleteAgentAppServicesRequest,
+    cb?: (error: string, rep: DeleteAgentAppServicesResponse) => void
+  ): Promise<DeleteAgentAppServicesResponse> {
+    return this.request("DeleteAgentAppServices", req, cb)
+  }
+
+  /**
+   * 修改服务
+   */
+  async ModifyService(
+    req: ModifyServiceRequest,
+    cb?: (error: string, rep: ModifyServiceResponse) => void
+  ): Promise<ModifyServiceResponse> {
+    return this.request("ModifyService", req, cb)
+  }
+
+  /**
+   * 创建app
+   */
+  async DescribeAgentAppServices(
+    req: DescribeAgentAppServicesRequest,
+    cb?: (error: string, rep: DescribeAgentAppServicesResponse) => void
+  ): Promise<DescribeAgentAppServicesResponse> {
+    return this.request("DescribeAgentAppServices", req, cb)
   }
 }

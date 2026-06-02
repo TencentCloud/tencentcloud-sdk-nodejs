@@ -1120,11 +1120,11 @@ export interface GrantedAccountItem {
 }
 
 /**
- * DescribeResourceGrantedAccountsData
+ * 账号分组授权信息
  */
 export interface DescribeResourceGrantedAccountGroupsData {
   /**
-   *
+   * <p>授权信息</p>
    */
   Items?: Array<GrantedAccountGroupItem>
 }
@@ -2444,11 +2444,11 @@ export interface DescribeVirtualDevicesResponse {
  */
 export interface DescribeResourceGrantedAccountsData {
   /**
-   * 总数
+   * <p>总数</p>
    */
   TotalCount?: number
   /**
-   *
+   * <p>授权信息</p>
    */
   Items?: Array<GrantedAccountItem>
 }
@@ -3628,7 +3628,7 @@ export interface DescribeCompanyDirectoryConfigResponse {
  */
 export interface DescribeResourceGrantedVirtualGroupsData {
   /**
-   *
+   * <p>授权信息</p>
    */
   Items?: Array<GrantedVirtualGroupItem>
 }

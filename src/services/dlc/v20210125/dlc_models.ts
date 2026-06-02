@@ -10965,11 +10965,11 @@ export interface DeleteWorkGroupRequest {
  */
 export interface KVPair {
   /**
-   * 配置的key值
+   * <p>配置的key值</p>
    */
   Key: string
   /**
-   * 配置的value值
+   * <p>配置的value值</p>
    */
   Value: string
 }

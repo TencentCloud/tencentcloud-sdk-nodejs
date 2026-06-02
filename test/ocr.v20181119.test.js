@@ -78,16 +78,6 @@ it("ocr.v20181119.BusinessCardOCR", async function () {
     }
 })
 
-it("ocr.v20181119.RecognizeOnlineTaxiItineraryOCR", async function () {
-    try {
-       const data = await client.RecognizeOnlineTaxiItineraryOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ocr.v20181119.IDCardOCR", async function () {
     try {
        const data = await client.IDCardOCR({})
@@ -291,16 +281,6 @@ it("ocr.v20181119.QuestionOCR", async function () {
 it("ocr.v20181119.ExtractDocBasic", async function () {
     try {
        const data = await client.ExtractDocBasic({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ocr.v20181119.TaxiInvoiceOCR", async function () {
-    try {
-       const data = await client.TaxiInvoiceOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

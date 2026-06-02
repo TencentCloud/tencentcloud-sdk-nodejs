@@ -18,6 +18,26 @@ const client = new tencentcloud.apis.v20240801.Client({
 })
 describe("apis.v20240801.test.js", function () {
 
+it("apis.v20240801.CreateService", async function () {
+    try {
+       const data = await client.CreateService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apis.v20240801.DeleteModel", async function () {
+    try {
+       const data = await client.DeleteModel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apis.v20240801.DescribeAgentCredential", async function () {
     try {
        const data = await client.DescribeAgentCredential({})
@@ -58,6 +78,16 @@ it("apis.v20240801.DeleteAgentAppMcpServers", async function () {
     }
 })
 
+it("apis.v20240801.CreateAgentAppServices", async function () {
+    try {
+       const data = await client.CreateAgentAppServices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apis.v20240801.DescribeModelService", async function () {
     try {
        const data = await client.DescribeModelService({})
@@ -71,6 +101,16 @@ it("apis.v20240801.DescribeModelService", async function () {
 it("apis.v20240801.DescribeAgentCredentials", async function () {
     try {
        const data = await client.DescribeAgentCredentials({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apis.v20240801.DeleteService", async function () {
+    try {
+       const data = await client.DeleteService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +168,9 @@ it("apis.v20240801.DescribeMcpServer", async function () {
     }
 })
 
-it("apis.v20240801.ModifyAgentCredential", async function () {
+it("apis.v20240801.DescribeServices", async function () {
     try {
-       const data = await client.ModifyAgentCredential({})
+       const data = await client.DescribeServices({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,6 +181,16 @@ it("apis.v20240801.ModifyAgentCredential", async function () {
 it("apis.v20240801.DeleteMcpServer", async function () {
     try {
        const data = await client.DeleteMcpServer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apis.v20240801.DescribeService", async function () {
+    try {
+       const data = await client.DescribeService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,6 +368,16 @@ it("apis.v20240801.ModifyAgentAppModelServices", async function () {
     }
 })
 
+it("apis.v20240801.ModifyAgentCredential", async function () {
+    try {
+       const data = await client.ModifyAgentCredential({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("apis.v20240801.CreateMcpServer", async function () {
     try {
        const data = await client.CreateMcpServer({})
@@ -328,9 +388,29 @@ it("apis.v20240801.CreateMcpServer", async function () {
     }
 })
 
-it("apis.v20240801.DeleteModel", async function () {
+it("apis.v20240801.DeleteAgentAppServices", async function () {
     try {
-       const data = await client.DeleteModel({})
+       const data = await client.DeleteAgentAppServices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apis.v20240801.ModifyService", async function () {
+    try {
+       const data = await client.ModifyService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("apis.v20240801.DescribeAgentAppServices", async function () {
+    try {
+       const data = await client.DescribeAgentAppServices({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

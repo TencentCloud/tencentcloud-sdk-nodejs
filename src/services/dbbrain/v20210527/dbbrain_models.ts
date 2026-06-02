@@ -544,6 +544,28 @@ export interface CreateRedisBigKeyAnalysisTaskResponse {
 }
 
 /**
+ * UpdateDatabaseAutonomyStatus请求参数结构体
+ */
+export interface UpdateDatabaseAutonomyStatusRequest {
+  /**
+   * <p>实例 ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>服务产品类型。取值：mongodb（云数据库 MongoDB）。</p>
+   */
+  Product: string
+  /**
+   * <p>自治功能类型。取值：AutoIndexAdvice（索引推荐）。</p>
+   */
+  Type: string
+  /**
+   * <p>开关状态。取值：0（关闭）、1（开启）。</p>
+   */
+  Status: number
+}
+
+/**
  * CreateSecurityAuditLogExportTask请求参数结构体
  */
 export interface CreateSecurityAuditLogExportTaskRequest {
@@ -1627,13 +1649,21 @@ export interface DescribeMongoDBProcessListRequest {
 }
 
 /**
- * ModifySqlFilters返回参数结构体
+ * DescribeDatabaseAutonomyStatus请求参数结构体
  */
-export interface ModifySqlFiltersResponse {
+export interface DescribeDatabaseAutonomyStatusRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>实例 ID。</p>
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * <p>服务产品类型。取值：mongodb（云数据库 MongoDB）。</p>
+   */
+  Product: string
+  /**
+   * <p>自治功能类型。取值：AutoIndexAdvice（索引推荐）。</p>
+   */
+  Type: string
 }
 
 /**
@@ -2320,6 +2350,20 @@ export interface OpenAuditServiceRequest {
 }
 
 /**
+ * DescribeDatabaseAutonomyStatus返回参数结构体
+ */
+export interface DescribeDatabaseAutonomyStatusResponse {
+  /**
+   * <p>自治功能开关状态。取值：0（关闭）、1（开启）。</p>
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteSqlFilters返回参数结构体
  */
 export interface DeleteSqlFiltersResponse {
@@ -2565,6 +2609,16 @@ export interface DescribeRedisCmdPerfTimeSeriesResponse {
    * redis命令延迟趋势
    */
   CmdPerfList?: Array<CmdPerfInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifySqlFilters返回参数结构体
+ */
+export interface ModifySqlFiltersResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3117,6 +3171,20 @@ export interface CloseAuditServiceResponse {
    * 0-关闭审计成功，非0关闭审计失败。
    */
   TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateDatabaseAutonomyStatus返回参数结构体
+ */
+export interface UpdateDatabaseAutonomyStatusResponse {
+  /**
+   * <p>操作结果状态。取值：1（操作成功）。</p>
+   */
+  Status?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -115,17 +115,45 @@ export interface FieldsInfo {
 }
 
 /**
- * RecognizeOnlineTaxiItineraryOCR返回参数结构体
+ * 表格识别结果
  */
-export interface RecognizeOnlineTaxiItineraryOCRResponse {
+export interface TextTable {
   /**
-   * 网约车行程单识别结果，具体内容请点击左侧链接。
+   * 单元格左上角的列索引
    */
-  OnlineTaxiItineraryInfos?: Array<OnlineTaxiItineraryInfo>
+  ColTl?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 单元格左上角的行索引
    */
-  RequestId?: string
+  RowTl?: number
+  /**
+   * 单元格右下角的列索引
+   */
+  ColBr?: number
+  /**
+   * 单元格右下角的行索引
+   */
+  RowBr?: number
+  /**
+   * 单元格文字
+   */
+  Text?: string
+  /**
+   * 单元格类型，包含body（表格主体）、header（表头）、footer（表尾）三种
+   */
+  Type?: string
+  /**
+   * 置信度 0 ~100
+   */
+  Confidence?: number
+  /**
+   * 文本行坐标，以四个顶点坐标表示
+   */
+  Polygon?: Array<Coord>
+  /**
+   * 此字段为扩展字段
+   */
+  AdvancedInfo?: string
 }
 
 /**
@@ -3276,59 +3304,38 @@ export interface QrcodeOCRRequest {
 }
 
 /**
- * TaxiInvoiceOCR返回参数结构体
+ * VatInvoiceVerifyNew返回参数结构体
  */
-export interface TaxiInvoiceOCRResponse {
+export interface VatInvoiceVerifyNewResponse {
   /**
-   * 发票号码
+   * 增值税发票、购车发票、全电发票的基础要素字段信息。
    */
-  InvoiceNum?: string
+  Invoice?: VatInvoice
   /**
-   * 发票代码
+   * 机动车销售统一发票详细字段信息。
    */
-  InvoiceCode?: string
+  VehicleInvoiceInfo?: VehicleInvoiceInfo
   /**
-   * 日期
+   * 二手车销售统一发票详细字段信息。
    */
-  Date?: string
+  UsedVehicleInvoiceInfo?: UsedVehicleInvoiceInfo
   /**
-   * 金额
+   * 通行费发票详细字段信息。
    */
-  Fare?: string
+  PassInvoiceInfoList?: Array<PassInvoiceInfo>
   /**
-   * 上车时间
+   * 全电发票（铁路电子客票）详细字段信息。
+
    */
-  GetOnTime?: string
+  ElectronicTrainTicket?: ElectronicTrainTicket
   /**
-   * 下车时间
+   * 全电发票（航空运输电子客票行程单）详细字段信息。
    */
-  GetOffTime?: string
+  ElectronicAirTransport?: ElectronicAirTransport
   /**
-   * 里程
+   * 财政发票详细字段信息
    */
-  Distance?: string
-  /**
-   * 发票所在地
-   */
-  Location?: string
-  /**
-   * 车牌号
-   */
-  PlateNumber?: string
-  /**
-   * 发票消费类型
-   */
-  InvoiceType?: string
-  /**
-   * 省
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Province?: string
-  /**
-   * 市
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  City?: string
+  FinancialBill?: FinancialBill
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4669,28 +4676,6 @@ export interface ExtractDocMultiResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * TaxiInvoiceOCR请求参数结构体
- */
-export interface TaxiInvoiceOCRRequest {
-  /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-   */
-  ImageBase64?: string
-  /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-   */
-  ImageUrl?: string
-  /**
-   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
-   */
-  IsPdf?: boolean
-  /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
-   */
-  PdfPageNumber?: number
 }
 
 /**
@@ -6669,25 +6654,6 @@ export interface VatElectronicInfo {
 }
 
 /**
- * SmartStructuralOCR返回参数结构体
- */
-export interface SmartStructuralOCRResponse {
-  /**
-   * 图片旋转角度(角度制)，文本的水平方向
-为 0；顺时针为正，逆时针为负
-   */
-  Angle?: number
-  /**
-   * 识别信息
-   */
-  StructuralItems?: Array<StructuralItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 识别出来的单字信息包括单字（包括单字Character和单字置信度confidence）
  */
 export interface DetectedWords {
@@ -7308,48 +7274,6 @@ export interface AdvertiseTextDetection {
   /**
    * 此字段为扩展字段。
 GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。
-   */
-  AdvancedInfo?: string
-}
-
-/**
- * 表格识别结果
- */
-export interface TextTable {
-  /**
-   * 单元格左上角的列索引
-   */
-  ColTl?: number
-  /**
-   * 单元格左上角的行索引
-   */
-  RowTl?: number
-  /**
-   * 单元格右下角的列索引
-   */
-  ColBr?: number
-  /**
-   * 单元格右下角的行索引
-   */
-  RowBr?: number
-  /**
-   * 单元格文字
-   */
-  Text?: string
-  /**
-   * 单元格类型，包含body（表格主体）、header（表头）、footer（表尾）三种
-   */
-  Type?: string
-  /**
-   * 置信度 0 ~100
-   */
-  Confidence?: number
-  /**
-   * 文本行坐标，以四个顶点坐标表示
-   */
-  Polygon?: Array<Coord>
-  /**
-   * 此字段为扩展字段
    */
   AdvancedInfo?: string
 }
@@ -10943,25 +10867,22 @@ export interface RecognizeAgentRequest {
 }
 
 /**
- * RecognizeOnlineTaxiItineraryOCR请求参数结构体
+ * SmartStructuralOCR返回参数结构体
  */
-export interface RecognizeOnlineTaxiItineraryOCRRequest {
+export interface SmartStructuralOCRResponse {
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 图片旋转角度(角度制)，文本的水平方向
+为 0；顺时针为正，逆时针为负
    */
-  ImageBase64?: string
+  Angle?: number
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 识别信息
    */
-  ImageUrl?: string
+  StructuralItems?: Array<StructuralItem>
   /**
-   * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IsPdf?: boolean
-  /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
-   */
-  PdfPageNumber?: number
+  RequestId?: string
 }
 
 /**
@@ -11129,45 +11050,6 @@ export interface RideHailingTransportLicenseOCRRequest {
    * 图片的 Url 地址。要求图片经Base64编码后不超过 10M，分辨率建议500\*800以上，支持PNG、JPG、JPEG、BMP格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
    */
   ImageUrl?: string
-}
-
-/**
- * VatInvoiceVerifyNew返回参数结构体
- */
-export interface VatInvoiceVerifyNewResponse {
-  /**
-   * 增值税发票、购车发票、全电发票的基础要素字段信息。
-   */
-  Invoice?: VatInvoice
-  /**
-   * 机动车销售统一发票详细字段信息。
-   */
-  VehicleInvoiceInfo?: VehicleInvoiceInfo
-  /**
-   * 二手车销售统一发票详细字段信息。
-   */
-  UsedVehicleInvoiceInfo?: UsedVehicleInvoiceInfo
-  /**
-   * 通行费发票详细字段信息。
-   */
-  PassInvoiceInfoList?: Array<PassInvoiceInfo>
-  /**
-   * 全电发票（铁路电子客票）详细字段信息。
-
-   */
-  ElectronicTrainTicket?: ElectronicTrainTicket
-  /**
-   * 全电发票（航空运输电子客票行程单）详细字段信息。
-   */
-  ElectronicAirTransport?: ElectronicAirTransport
-  /**
-   * 财政发票详细字段信息
-   */
-  FinancialBill?: FinancialBill
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

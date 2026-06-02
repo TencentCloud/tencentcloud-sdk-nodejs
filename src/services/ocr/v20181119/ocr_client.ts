@@ -22,7 +22,7 @@ import {
   StoreInfo,
   NonTaxItem,
   FieldsInfo,
-  RecognizeOnlineTaxiItineraryOCRResponse,
+  TextTable,
   InvoiceItem,
   HKIDCardOCRRequest,
   BankSlipOCRRequest,
@@ -118,7 +118,7 @@ import {
   ElectronicTrainTicketFull,
   BusInvoice,
   QrcodeOCRRequest,
-  TaxiInvoiceOCRResponse,
+  VatInvoiceVerifyNewResponse,
   RecognizeGeneralInvoiceRequest,
   GeneralBasicOCRResponse,
   MainlandTravelPermitBackInfos,
@@ -150,7 +150,6 @@ import {
   VatInvoiceInfo,
   OnlineTaxiItineraryInfo,
   ExtractDocMultiResponse,
-  TaxiInvoiceOCRRequest,
   MachinePrintedInvoice,
   FinancialBillItem,
   SingleInvoiceInfo,
@@ -193,7 +192,6 @@ import {
   EnterpriseLicenseOCRRequest,
   VatInvoiceItemInfo,
   VatElectronicInfo,
-  SmartStructuralOCRResponse,
   DetectedWords,
   IDCardInfo,
   MedicalInvoiceItem,
@@ -210,7 +208,6 @@ import {
   DetailInformationOfAirTicketTupleList,
   TextVehicleFront,
   AdvertiseTextDetection,
-  TextTable,
   SubmitQuestionMarkAgentJobRequest,
   SceneWarnInfo,
   ElectronicTrainTicket,
@@ -313,7 +310,7 @@ import {
   AdvertiseOCRResponse,
   ElectronicTollSummary,
   RecognizeAgentRequest,
-  RecognizeOnlineTaxiItineraryOCRRequest,
+  SmartStructuralOCRResponse,
   IDCardOCRRequest,
   MixedInvoiceDetectRequest,
   VatRollItem,
@@ -321,7 +318,6 @@ import {
   BusinessCertificateInfo,
   WaybillOCRRequest,
   RideHailingTransportLicenseOCRRequest,
-  VatInvoiceVerifyNewResponse,
   MLIDCardOCRResponse,
   RecognizeTableOCRRequest,
   EstateCertOCRRequest,
@@ -418,18 +414,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BusinessCardOCRResponse) => void
   ): Promise<BusinessCardOCRResponse> {
     return this.request("BusinessCardOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持网约车行程单关键字段的识别，包括行程起止日期、上车时间、起点、终点、里程、金额等字段。
-
-默认接口请求频率限制：20次/秒。
-     */
-  async RecognizeOnlineTaxiItineraryOCR(
-    req: RecognizeOnlineTaxiItineraryOCRRequest,
-    cb?: (error: string, rep: RecognizeOnlineTaxiItineraryOCRResponse) => void
-  ): Promise<RecognizeOnlineTaxiItineraryOCRResponse> {
-    return this.request("RecognizeOnlineTaxiItineraryOCR", req, cb)
   }
 
   /**
@@ -840,18 +824,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExtractDocBasicResponse) => void
   ): Promise<ExtractDocBasicResponse> {
     return this.request("ExtractDocBasic", req, cb)
-  }
-
-  /**
-     * 本接口支持出租车发票关键字段的识别，包括发票号码、发票代码、金额、日期、上下车时间、里程、车牌号、发票类型及所属地区等字段。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async TaxiInvoiceOCR(
-    req: TaxiInvoiceOCRRequest,
-    cb?: (error: string, rep: TaxiInvoiceOCRResponse) => void
-  ): Promise<TaxiInvoiceOCRResponse> {
-    return this.request("TaxiInvoiceOCR", req, cb)
   }
 
   /**

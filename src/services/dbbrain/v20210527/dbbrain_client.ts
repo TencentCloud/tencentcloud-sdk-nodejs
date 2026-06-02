@@ -39,6 +39,7 @@ import {
   DescribeRedisCmdPerfTimeSeriesRequest,
   ScoreItem,
   CreateRedisBigKeyAnalysisTaskResponse,
+  UpdateDatabaseAutonomyStatusRequest,
   CreateSecurityAuditLogExportTaskRequest,
   DescribeTopSpaceTableTimeSeriesResponse,
   DescribeDBDiagEventResponse,
@@ -78,7 +79,7 @@ import {
   DescribeTopSpaceTablesResponse,
   TaskInfo,
   DescribeMongoDBProcessListRequest,
-  ModifySqlFiltersResponse,
+  DescribeDatabaseAutonomyStatusRequest,
   KillMySqlThreadsResponse,
   CreateSchedulerMailProfileRequest,
   ContactItem,
@@ -109,6 +110,7 @@ import {
   AuditInstance,
   IndexesToBuild,
   OpenAuditServiceRequest,
+  DescribeDatabaseAutonomyStatusResponse,
   DeleteSqlFiltersResponse,
   DescribeHealthScoreTimeSeriesRequest,
   DescribeDBDiagEventsRequest,
@@ -123,6 +125,7 @@ import {
   DescribeHealthScoreTimeSeriesResponse,
   SlowLogHost,
   DescribeRedisCmdPerfTimeSeriesResponse,
+  ModifySqlFiltersResponse,
   CreateMailProfileRequest,
   InstanceBasicInfo,
   MonitorFloatMetricSeriesData,
@@ -144,6 +147,7 @@ import {
   CreateDBDiagReportUrlRequest,
   AutonomyActionVo,
   CloseAuditServiceResponse,
+  UpdateDatabaseAutonomyStatusResponse,
   DeleteRedisBigKeyAnalysisTasksResponse,
   CloseAuditServiceRequest,
   InstanceConfs,
@@ -275,16 +279,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("dbbrain.tencentcloudapi.com", "2021-05-27", clientConfig)
-  }
-
-  /**
-   * 查询实例无主键表。
-   */
-  async DescribeNoPrimaryKeyTables(
-    req: DescribeNoPrimaryKeyTablesRequest,
-    cb?: (error: string, rep: DescribeNoPrimaryKeyTablesResponse) => void
-  ): Promise<DescribeNoPrimaryKeyTablesResponse> {
-    return this.request("DescribeNoPrimaryKeyTables", req, cb)
   }
 
   /**
@@ -478,16 +472,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新Agent实例状态（停止或重连实例）
-   */
-  async UpdateMonitorSwitch(
-    req: UpdateMonitorSwitchRequest,
-    cb?: (error: string, rep: UpdateMonitorSwitchResponse) => void
-  ): Promise<UpdateMonitorSwitchResponse> {
-    return this.request("UpdateMonitorSwitch", req, cb)
-  }
-
-  /**
    * 获取指定时间段内Redis Proxy 指标
    */
   async DescribeMetricTopProxies(
@@ -495,6 +479,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMetricTopProxiesResponse) => void
   ): Promise<DescribeMetricTopProxiesResponse> {
     return this.request("DescribeMetricTopProxies", req, cb)
+  }
+
+  /**
+   * 查询实例无主键表。
+   */
+  async DescribeNoPrimaryKeyTables(
+    req: DescribeNoPrimaryKeyTablesRequest,
+    cb?: (error: string, rep: DescribeNoPrimaryKeyTablesResponse) => void
+  ): Promise<DescribeNoPrimaryKeyTablesResponse> {
+    return this.request("DescribeNoPrimaryKeyTables", req, cb)
   }
 
   /**
@@ -555,6 +549,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateRedisBigKeyAnalysisTaskResponse) => void
   ): Promise<CreateRedisBigKeyAnalysisTaskResponse> {
     return this.request("CreateRedisBigKeyAnalysisTask", req, cb)
+  }
+
+  /**
+   * 查询数据库自治功能的开关状态。当前支持 MongoDB 的索引推荐（AutoIndexAdvice）功能状态查询。
+   */
+  async DescribeDatabaseAutonomyStatus(
+    req: DescribeDatabaseAutonomyStatusRequest,
+    cb?: (error: string, rep: DescribeDatabaseAutonomyStatusResponse) => void
+  ): Promise<DescribeDatabaseAutonomyStatusResponse> {
+    return this.request("DescribeDatabaseAutonomyStatus", req, cb)
   }
 
   /**
@@ -795,6 +799,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSlowLogTimeSeriesStatsResponse) => void
   ): Promise<DescribeSlowLogTimeSeriesStatsResponse> {
     return this.request("DescribeSlowLogTimeSeriesStats", req, cb)
+  }
+
+  /**
+   * 更新Agent实例状态（停止或重连实例）
+   */
+  async UpdateMonitorSwitch(
+    req: UpdateMonitorSwitchRequest,
+    cb?: (error: string, rep: UpdateMonitorSwitchResponse) => void
+  ): Promise<UpdateMonitorSwitchResponse> {
+    return this.request("UpdateMonitorSwitch", req, cb)
   }
 
   /**
@@ -1125,6 +1139,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRedisProcessListResponse) => void
   ): Promise<DescribeRedisProcessListResponse> {
     return this.request("DescribeRedisProcessList", req, cb)
+  }
+
+  /**
+   * 设置数据库自治功能的开关状态。当前支持 MongoDB 的索引推荐（AutoIndexAdvice）功能的开启或关闭。
+   */
+  async UpdateDatabaseAutonomyStatus(
+    req: UpdateDatabaseAutonomyStatusRequest,
+    cb?: (error: string, rep: UpdateDatabaseAutonomyStatusResponse) => void
+  ): Promise<UpdateDatabaseAutonomyStatusResponse> {
+    return this.request("UpdateDatabaseAutonomyStatus", req, cb)
   }
 
   /**

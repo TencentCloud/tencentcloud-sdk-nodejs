@@ -2487,45 +2487,13 @@ export interface OpenReadOnlyInstanceExclusiveAccessRequest {
 }
 
 /**
- * ExportResourcePackageDeductDetails请求参数结构体
+ * AI 优化器任务数据
  */
-export interface ExportResourcePackageDeductDetailsRequest {
+export interface AIOptimizerTaskData {
   /**
-   * 需要导出的资源包ID
+   * <p>模板ID</p>
    */
-  PackageId: string
-  /**
-   * 使用资源包容量的cynos集群ID
-   */
-  ClusterIds?: Array<string>
-  /**
-   * 排序字段，目前支持：createTime（资源包被抵扣时间），successDeductSpec（资源包抵扣量）
-   */
-  OrderBy?: string
-  /**
-   * 排序类型，支持ASC、DESC、asc、desc
-   */
-  OrderByType?: string
-  /**
-   * 开始时间
-   */
-  StartTime?: string
-  /**
-   * 结束时间
-   */
-  EndTime?: string
-  /**
-   * 单次最大导出数据行数，目前最大支持2000行
-   */
-  Limit?: string
-  /**
-   * 偏移量页数
-   */
-  Offset?: string
-  /**
-   * 导出数据格式，目前仅支持csv格式，留作扩展
-   */
-  FileType?: string
+  TemplateID?: string
 }
 
 /**
@@ -4288,17 +4256,17 @@ export interface DescribeBinlogsRequest {
 }
 
 /**
- * InquirePriceModify返回参数结构体
+ * DescribeSSLStatus返回参数结构体
  */
-export interface InquirePriceModifyResponse {
+export interface DescribeSSLStatusResponse {
   /**
-   * 实例价格
+   * yes-开启，no-关闭
    */
-  InstancePrice?: TradePrice
+  IsOpenSSL?: string
   /**
-   * 存储价格
+   * 证书下载地址
    */
-  StoragePrice?: TradePrice
+  DownloadUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8013,6 +7981,24 @@ refund-已退费。
 }
 
 /**
+ * InquirePriceModify返回参数结构体
+ */
+export interface InquirePriceModifyResponse {
+  /**
+   * 实例价格
+   */
+  InstancePrice?: TradePrice
+  /**
+   * 存储价格
+   */
+  StoragePrice?: TradePrice
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAccounts请求参数结构体
  */
 export interface DeleteAccountsRequest {
@@ -9826,172 +9812,175 @@ export interface InquirePriceModifyRequest {
  */
 export interface BizTaskInfo {
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   ID?: number
   /**
-   * 用户appid
+   * <p>用户appid</p>
    */
   AppId?: number
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   ClusterId?: string
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region?: string
   /**
-   * 任务创建时间
+   * <p>任务创建时间</p>
    */
   CreateTime?: string
   /**
-   * 延迟执行时间
+   * <p>延迟执行时间</p>
    */
   DelayTime?: string
   /**
-   * 任务失败信息
+   * <p>任务失败信息</p>
    */
   ErrMsg?: string
   /**
-   * 异步任务流id
+   * <p>异步任务流id</p>
    */
   FlowId?: number
   /**
-   * 任务输入信息
+   * <p>任务输入信息</p>
    */
   Input?: string
   /**
-   * 实例组id
+   * <p>实例组id</p>
    * @deprecated
    */
   InstanceGrpId?: string
   /**
-   * 实例组id
+   * <p>实例组id</p>
    */
   InstanceGroupId?: string
   /**
-   * 实例id
+   * <p>实例id</p>
    */
   InstanceId?: string
   /**
-   * 任务操作对象id
+   * <p>任务操作对象id</p>
    */
   ObjectId?: string
   /**
-   * 任务操作对象类型
+   * <p>任务操作对象类型</p>
    */
   ObjectType?: string
   /**
-   * 操作者uin
+   * <p>操作者uin</p>
    */
   Operator?: string
   /**
-   * 任务输出信息
+   * <p>任务输出信息</p>
    */
   Output?: string
   /**
-   * 任务状态
+   * <p>任务状态</p>
    */
   Status?: string
   /**
-   * 任务类型
+   * <p>任务类型</p>
    */
   TaskType?: string
   /**
-   * 触发本任务的父任务ID
+   * <p>触发本任务的父任务ID</p>
    */
   TriggerTaskId?: number
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 任务开始时间
+   * <p>任务开始时间</p>
    */
   StartTime?: string
   /**
-   * 任务结束时间
+   * <p>任务结束时间</p>
    */
   EndTime?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 任务进度
+   * <p>任务进度</p>
    */
   Process?: number
   /**
-   * 修改参数任务信息
+   * <p>修改参数任务信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   ModifyParamsData?: Array<ModifyParamsData>
   /**
-   * 创建集群任务信息
+   * <p>创建集群任务信息</p>
    */
   CreateClustersData?: CreateClustersData
   /**
-   * 集群回档任务信息
+   * <p>集群回档任务信息</p>
    */
   RollbackData?: RollbackData
   /**
-   * 实例变配任务信息
+   * <p>实例变配任务信息</p>
    */
   ModifyInstanceData?: ModifyInstanceData
   /**
-   * 手动备份任务信息
+   * <p>手动备份任务信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ManualBackupData?: ManualBackupData
   /**
-   * 修改内核版本任务信息
+   * <p>修改内核版本任务信息</p>
    */
   ModifyDbVersionData?: ModifyDbVersionData
   /**
-   * 集群可用区信息
+   * <p>集群可用区信息</p>
    */
   ClusterSlaveData?: ClusterSlaveData
   /**
-   * 转换集群日志
+   * <p>转换集群日志</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SwitchClusterLogBin?: SwitchClusterLogBin
   /**
-   * 修改实例参数数据
+   * <p>修改实例参数数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModifyInstanceParamsData?: BizTaskModifyParamsData
   /**
-   * 维护时间
+   * <p>维护时间</p>
    */
   TaskMaintainInfo?: TaskMaintainInfo
   /**
-   * 实例日志投递信息
-
+   * <p>实例日志投递信息</p>
    */
   InstanceCLSDeliveryInfos?: Array<InstanceCLSDeliveryInfo>
   /**
-   * 任务进度信息
+   * <p>任务进度信息</p>
    */
   TaskProgressInfo?: TaskProgressInfo
   /**
-   * 全球数据库网络任务
+   * <p>全球数据库网络任务</p>
    */
   GdnTaskInfo?: GdnTaskInfo
   /**
-   * 保险箱id
+   * <p>保险箱id</p>
    */
   VaultId?: string
   /**
-   * 保险箱名称
+   * <p>保险箱名称</p>
    */
   VaultName?: string
+  /**
+   * <p>AI优化器任务信息</p>
+   */
+  AIOptimizerTaskData?: AIOptimizerTaskData
 }
 
 /**
@@ -11441,24 +11430,6 @@ export interface ClusterTaskId {
  * DeleteLibraDBClusterAccounts返回参数结构体
  */
 export interface DeleteLibraDBClusterAccountsResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeSSLStatus返回参数结构体
- */
-export interface DescribeSSLStatusResponse {
-  /**
-   * yes-开启，no-关闭
-   */
-  IsOpenSSL?: string
-  /**
-   * 证书下载地址
-   */
-  DownloadUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13651,6 +13622,28 @@ export interface ModifyAccountParamsRequest {
    * 数据库表权限数组,当前仅支持参数：max_user_connections，max_user_connections不能大于10240
    */
   AccountParams: Array<AccountParam>
+}
+
+/**
+ * ResetAccountPassword请求参数结构体
+ */
+export interface ResetAccountPasswordRequest {
+  /**
+   * 数据库账号名
+   */
+  AccountName: string
+  /**
+   * 数据库账号新密码
+   */
+  AccountPassword: string
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 主机，不填默认为"%"
+   */
+  Host?: string
 }
 
 /**
@@ -16027,25 +16020,45 @@ export interface ActivateLibraDBInstanceRequest {
 }
 
 /**
- * ResetAccountPassword请求参数结构体
+ * ExportResourcePackageDeductDetails请求参数结构体
  */
-export interface ResetAccountPasswordRequest {
+export interface ExportResourcePackageDeductDetailsRequest {
   /**
-   * 数据库账号名
+   * 需要导出的资源包ID
    */
-  AccountName: string
+  PackageId: string
   /**
-   * 数据库账号新密码
+   * 使用资源包容量的cynos集群ID
    */
-  AccountPassword: string
+  ClusterIds?: Array<string>
   /**
-   * 集群ID
+   * 排序字段，目前支持：createTime（资源包被抵扣时间），successDeductSpec（资源包抵扣量）
    */
-  ClusterId: string
+  OrderBy?: string
   /**
-   * 主机，不填默认为"%"
+   * 排序类型，支持ASC、DESC、asc、desc
    */
-  Host?: string
+  OrderByType?: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 单次最大导出数据行数，目前最大支持2000行
+   */
+  Limit?: string
+  /**
+   * 偏移量页数
+   */
+  Offset?: string
+  /**
+   * 导出数据格式，目前仅支持csv格式，留作扩展
+   */
+  FileType?: string
 }
 
 /**

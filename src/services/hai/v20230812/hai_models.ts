@@ -205,11 +205,11 @@ export type InquirePriceUpdateServiceConfigsRequest = null
  */
 export interface DescribeServicesResponse {
   /**
-   * 总数
+   * <p>总数</p>
    */
   TotalCount?: number
   /**
-   * 服务列表
+   * <p>服务列表</p>
    */
   ServiceInfoSet?: Array<ServiceDetail>
   /**
@@ -692,15 +692,15 @@ export interface DescribeDeployTemplatesRequest {
  */
 export interface DescribeServicesRequest {
   /**
-   * 服务列表
+   * <p>服务列表</p>
    */
   ServiceIds?: Array<string>
   /**
-   * 分页大小
+   * <p>分页大小</p>
    */
   Limit?: number
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset?: number
 }
@@ -1250,6 +1250,10 @@ export interface CreateInferServiceByTemplateRequest {
    * <p>网络设置</p>
    */
   NetworkSetting?: NetworkSetting
+  /**
+   * <p>推理服务安全类型</p><p>枚举值：</p><ul><li>STANDARD： 标准推理服务</li><li>CONFIDENTIAL： 可信推理服务</li></ul>
+   */
+  SecurityType?: string
 }
 
 /**
