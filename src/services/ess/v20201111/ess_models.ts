@@ -573,6 +573,44 @@ export interface CreateBatchSignUrlResponse {
 }
 
 /**
+ * 归档合同的参与人信息
+ */
+export interface ArchiveFlowApproverInfo {
+  /**
+   * <p>个人签署人姓名，如果传入，必须是证件上的真实中文名；中文名最长 25 个字符；</p>
+   */
+  ApproverName?: string
+  /**
+   * <p>参与者类型，用于区分个人或企业，可选类型如下:<br><strong>0</strong>：企业<br><strong>1</strong>：个人</p>
+   */
+  ApproverType?: number
+  /**
+   * <p>企业签署方名称。长度不超过 200 个字符。<br>如果名称中包含英文括号()，请使用中文括号（）代替。<br>如果签署方是企业签署方(approverType = 0 )， 则企业名称必填。</p>
+   */
+  OrganizationName?: string
+  /**
+   * <p>签署人手机号，必须是合法手机号。</p>
+   */
+  ApproverMobile?: string
+  /**
+   * <p>签署人邮箱， 必须是合法邮箱格式。</p>
+   */
+  ApproverEmail?: string
+  /**
+   * <p>签署方经办人的证件类型，支持以下类型，样式可以参考<a href="https://qian.tencent.com/developers/partner/id_card_support/" target="_blank">常见个人证件类型介绍</a></p><ul><li>ID_CARD 中国大陆居民身份证  (默认值)</li><li>HONGKONG_AND_MACAO 港澳居民来往内地通行证</li><li>HONGKONG_MACAO_AND_TAIWAN 港澳台居民居住证(格式同居民身份证)</li><li>OTHER_CARD_TYPE 其他证件</li></ul>
+   */
+  ApproverIdCardType?: string
+  /**
+   * <p>签署方经办人的证件号码，应符合以下规则</p><ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li><li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li><li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
+   */
+  ApproverIdCardNumber?: string
+  /**
+   * <p>当前参与者的签署时间，Unix 秒级时间戳。</p>
+   */
+  ApproveTime?: number
+}
+
+/**
  * DescribeUserAutoSignStatus返回参数结构体
  */
 export interface DescribeUserAutoSignStatusResponse {
@@ -4147,6 +4185,20 @@ export interface FlowCreateApprover {
 }
 
 /**
+ * CreateArchiveFlowTask请求参数结构体
+ */
+export interface CreateArchiveFlowTaskRequest {
+  /**
+   * <p>执行本接口操作的员工信息。注: <code>在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。</code></p>
+   */
+  Operator: UserInfo
+  /**
+   * <p>归档合同列表，一次最多支持50个合同</p>
+   */
+  ArchiveFlows: Array<CreateArchiveFlow>
+}
+
+/**
  * DeleteSingleSignOnEmployees返回参数结构体
  */
 export interface DeleteSingleSignOnEmployeesResponse {
@@ -7012,6 +7064,20 @@ export interface DescribeContractComparisonTaskResponse {
 }
 
 /**
+ * DescribeArchiveFlowTask请求参数结构体
+ */
+export interface DescribeArchiveFlowTaskRequest {
+  /**
+   * <p>执行本接口操作的员工信息。注: <code>在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。</code></p>
+   */
+  Operator: UserInfo
+  /**
+   * <p>任务id，<a href="">创建归档任务</a>时返回</p>
+   */
+  TaskId: string
+}
+
+/**
  * CreateModifyAdminAuthorizationUrl返回参数结构体
  */
 export interface CreateModifyAdminAuthorizationUrlResponse {
@@ -9856,6 +9922,20 @@ export interface Identity {
 }
 
 /**
+ * CreateArchiveFlowTask返回参数结构体
+ */
+export interface CreateArchiveFlowTaskResponse {
+  /**
+   * <p>归档任务ID，后续使用 <a href="">查询归档任务状态</a>接口获取归档任务执行结果</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 此结构体 (UploadFile) 用于描述多文件上传的文件信息。
  */
 export interface UploadFile {
@@ -11097,6 +11177,56 @@ export interface CreateBatchQuickSignUrlRequest {
 }
 
 /**
+ * 创建归档合同信息
+ */
+export interface CreateArchiveFlow {
+  /**
+   * <p>合同文件的资源id，使用<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles" target="_blank">UploadFiles</a> 上传文件返回resourceId，目前一个合同只能支持一个资源ID。</p>
+   */
+  ResourceIds: Array<string>
+  /**
+   * <p>合同名称，不传时系统会使用合同资源文件名作为合同名称；最终合同名称不能为空；长度不能超过200，只能由中文、字母、数字和下划线组成。</p>
+   */
+  FlowName?: string
+  /**
+   * <p>合同类型，自定义文本字符串，长度不能超过200。</p>
+   */
+  FlowType?: string
+  /**
+   * <p>调用方业务系统中的合同业务编号，可以用于外部系统和归档合同做关联，长度不超过 128 字节</p>
+   */
+  BusinessId?: string
+  /**
+   * <p>合同发起方/创建人名称，用于归档合同展示和检索，长度不超过 32 字符</p>
+   */
+  CreatorName?: string
+  /**
+   * <p>签署人信息列表，用于记录合同由哪些个人或企业签署，最多 50 个参与者。</p>
+   */
+  ApproverInfo?: Array<ArchiveFlowApproverInfo>
+  /**
+   * <p>关注人信息列表，用于记录合同关注对象，最多 50 个关注者。</p>
+   */
+  CcInfo?: Array<ArchiveFlowApproverInfo>
+  /**
+   * <p>调用方自定义透传数据，可用于保存业务扩展信息，长度不超过 20480 字节。</p>
+   */
+  UserData?: string
+  /**
+   * <p>合同描述/备注信息，长度不超过 1000 个字符</p>
+   */
+  FlowDescription?: string
+  /**
+   * <p>合同签署完成时间，Unix 秒级时间戳</p>
+   */
+  ApproveTime?: number
+  /**
+   * <p>合同发起时间/合同原始创建时间，Unix 秒级时间戳</p>
+   */
+  CustomCreatedOn?: number
+}
+
+/**
  * DescribeExtendedServiceAuthInfos返回参数结构体
  */
 export interface DescribeExtendedServiceAuthInfosResponse {
@@ -11128,6 +11258,32 @@ export interface CreateResultPageConfig {
    * 结果页描述，不超过200字
    */
   Description?: string
+}
+
+/**
+ * 归档合同结果
+ */
+export interface ArchiveFlowResult {
+  /**
+   * <p>归档合同id</p>
+   */
+  FlowId?: string
+  /**
+   * <p>合同处理结果</p><p>枚举值：</p><ul><li>0： 成功</li><li>1： 失败</li></ul>
+   */
+  ArchiveFlowStatus?: number
+  /**
+   * <p>业务自定义id</p>
+   */
+  BusinessId?: string
+  /**
+   * <p>资源ID列表</p>
+   */
+  ResourceIdList?: Array<string>
+  /**
+   * <p>错误信息</p>
+   */
+  ErrorMessage?: string
 }
 
 /**
@@ -12521,48 +12677,35 @@ export interface CreateFlowApproversRequest {
 }
 
 /**
- * 扩展服务开通和授权的详细信息
+ * ExportContractComparisonTask请求参数结构体
  */
-export interface ExtendAuthInfo {
+export interface ExportContractComparisonTaskRequest {
   /**
-   * 扩展服务的类型，可能是以下值：
-<ul><li>OPEN_SERVER_SIGN：企业自动签署</li>
-<li>BATCH_SIGN：批量签署</li>
-<li>OVERSEA_SIGN：企业与港澳台居民签署合同</li>
-<li>AGE_LIMIT_EXPANSION：拓宽签署方年龄限制</li>
-<li>MOBILE_CHECK_APPROVER：个人签署方仅校验手机号</li>
-<li>HIDE_OPERATOR_DISPLAY：隐藏合同经办人姓名</li>
-<li>ORGANIZATION_OCR_FALLBACK：正楷临摹签名失败后更换其他签名类型</li>
-<li>ORGANIZATION_FLOW_NOTIFY_TYPE：短信通知签署方</li>
-<li>HIDE_ONE_KEY_SIGN：个人签署方手动签字</li>
-<li>PAGING_SEAL：骑缝章</li>
-<li>ORGANIZATION_FLOW_PASSWD_NOTIFY：签署密码开通引导</li></ul>
+   * 执行合同审查任务的员工信息。
+注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
    */
-  Type?: string
+  Operator: UserInfo
   /**
-   * 扩展服务的名称
+   * 合同对比任务ID，该参数通过调用接口CreateContractComparisonTask获取。
    */
-  Name?: string
+  TaskId: string
   /**
-   * 扩展服务的开通状态：
+   * 导出对比结果文件类型。
+类型如下：
 <ul>
-<li>ENABLE : 已开通</li>
-<li>DISABLE : 未开通</li>
+<li> **0**：【PDF】以新合同文件为基础，导出带有可视化对比点标注的PDF文件。</li>
+<li> **1**：【EXCEL】导出结构化的对比点明细表格，以列表形式罗列每一个差异点，包含改动位置、类型、标签及修改前后的完整内容。</li>
 </ul>
    */
-  Status?: string
+  ExportType?: number
   /**
-   * 操作扩展服务的操作人UserId，员工在腾讯电子签平台的唯一身份标识，为32位字符串。
+   * 是否忽略，适用于PDF。
+<ul>
+<li> **true**：导出文件标注去掉忽略项。</li>
+<li> **false**：导出文件包含所有对比点。</li>
+</ul>
    */
-  OperatorUserId?: string
-  /**
-   * 扩展服务的操作时间，格式为Unix标准时间戳（秒）。
-   */
-  OperateOn?: number
-  /**
-   * 该扩展服务若可以授权，此参数对应授权人员的列表
-   */
-  HasAuthUserList?: Array<HasAuthUser>
+  Ignore?: boolean
 }
 
 /**
@@ -13666,6 +13809,24 @@ export interface OrgBillSummary {
 }
 
 /**
+ * DescribeArchiveFlowTask返回参数结构体
+ */
+export interface DescribeArchiveFlowTaskResponse {
+  /**
+   * <p>任务状态</p><p>枚举值：</p><ul><li>0： 待处理</li><li>1： 处理中</li><li>2： 任务完成</li><li>3： 任务完成(存在失败)</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>每条合同的处理结果，与创建任务的archive_flows列表顺序一致</p>
+   */
+  ArchiveFlowResults?: Array<ArchiveFlowResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 子企业套餐使用情况
  */
 export interface SubOrgBillSummary {
@@ -14076,35 +14237,48 @@ export interface DescribeBatchOrganizationRegistrationUrlsResponse {
 }
 
 /**
- * ExportContractComparisonTask请求参数结构体
+ * 扩展服务开通和授权的详细信息
  */
-export interface ExportContractComparisonTaskRequest {
+export interface ExtendAuthInfo {
   /**
-   * 执行合同审查任务的员工信息。
-注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   * 扩展服务的类型，可能是以下值：
+<ul><li>OPEN_SERVER_SIGN：企业自动签署</li>
+<li>BATCH_SIGN：批量签署</li>
+<li>OVERSEA_SIGN：企业与港澳台居民签署合同</li>
+<li>AGE_LIMIT_EXPANSION：拓宽签署方年龄限制</li>
+<li>MOBILE_CHECK_APPROVER：个人签署方仅校验手机号</li>
+<li>HIDE_OPERATOR_DISPLAY：隐藏合同经办人姓名</li>
+<li>ORGANIZATION_OCR_FALLBACK：正楷临摹签名失败后更换其他签名类型</li>
+<li>ORGANIZATION_FLOW_NOTIFY_TYPE：短信通知签署方</li>
+<li>HIDE_ONE_KEY_SIGN：个人签署方手动签字</li>
+<li>PAGING_SEAL：骑缝章</li>
+<li>ORGANIZATION_FLOW_PASSWD_NOTIFY：签署密码开通引导</li></ul>
    */
-  Operator: UserInfo
+  Type?: string
   /**
-   * 合同对比任务ID，该参数通过调用接口CreateContractComparisonTask获取。
+   * 扩展服务的名称
    */
-  TaskId: string
+  Name?: string
   /**
-   * 导出对比结果文件类型。
-类型如下：
+   * 扩展服务的开通状态：
 <ul>
-<li> **0**：【PDF】以新合同文件为基础，导出带有可视化对比点标注的PDF文件。</li>
-<li> **1**：【EXCEL】导出结构化的对比点明细表格，以列表形式罗列每一个差异点，包含改动位置、类型、标签及修改前后的完整内容。</li>
+<li>ENABLE : 已开通</li>
+<li>DISABLE : 未开通</li>
 </ul>
    */
-  ExportType?: number
+  Status?: string
   /**
-   * 是否忽略，适用于PDF。
-<ul>
-<li> **true**：导出文件标注去掉忽略项。</li>
-<li> **false**：导出文件包含所有对比点。</li>
-</ul>
+   * 操作扩展服务的操作人UserId，员工在腾讯电子签平台的唯一身份标识，为32位字符串。
    */
-  Ignore?: boolean
+  OperatorUserId?: string
+  /**
+   * 扩展服务的操作时间，格式为Unix标准时间戳（秒）。
+   */
+  OperateOn?: number
+  /**
+   * 该扩展服务若可以授权，此参数对应授权人员的列表
+   */
+  HasAuthUserList?: Array<HasAuthUser>
 }
 
 /**

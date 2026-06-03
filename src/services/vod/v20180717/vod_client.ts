@@ -938,6 +938,7 @@ import {
   AigcVideoRedrawTaskOutput,
   DescribeFileAttributesTaskOutput,
   RemoveWatermarkRequest,
+  SPEKEDrm,
   ExecuteFunctionRequest,
   RebuildMediaTask,
   ConfirmEventsResponse,
@@ -1035,6 +1036,7 @@ import {
   DescribeStorageDetailsRequest,
   EnhanceMediaQualityResponse,
   SubtitleFormatsOperation,
+  ThirdPartyDrmInfo,
   MediaTrack,
   FastEditMediaFileInfo,
   StorageStatData,
@@ -2784,7 +2786,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于创建 AIGC 自定义音色。
+   * 该接口用于创建 AIGC 自定义音色。注意，调用本接口会产生创建自定义音色费用，请参考[计费文档](https://cloud.tencent.com/document/product/266/95125#5e5217e8-29fc-467e-ac2d-853648f988b7)。
    */
   async CreateAigcCustomVoice(
     req: CreateAigcCustomVoiceRequest,

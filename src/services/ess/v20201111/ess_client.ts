@@ -40,6 +40,7 @@ import {
   FlowApproverUrlInfo,
   NeedReviewApproverInfo,
   CreateBatchSignUrlResponse,
+  ArchiveFlowApproverInfo,
   DescribeUserAutoSignStatusResponse,
   DescribeContractReviewChecklistWebUrlResponse,
   Tag,
@@ -141,6 +142,7 @@ import {
   OperateTemplateRequest,
   CreateBatchQuickSignUrlResponse,
   FlowCreateApprover,
+  CreateArchiveFlowTaskRequest,
   DeleteSingleSignOnEmployeesResponse,
   Permission,
   CreateUserMobileChangeUrlResponse,
@@ -228,6 +230,7 @@ import {
   EmbedUrlOption,
   DescribeContractReviewMarkedRiskExportTaskRequest,
   DescribeContractComparisonTaskResponse,
+  DescribeArchiveFlowTaskRequest,
   CreateModifyAdminAuthorizationUrlResponse,
   CreateOrganizationInfoChangeUrlResponse,
   CreateFlowResponse,
@@ -317,6 +320,7 @@ import {
   SuccessUpdateStaffData,
   SuccessCreateStaffData,
   Identity,
+  CreateArchiveFlowTaskResponse,
   UploadFile,
   CreateFlowSignReviewResponse,
   RenewAutoSignLicenseRequest,
@@ -351,8 +355,10 @@ import {
   DescribeUserAutoSignStatusRequest,
   CreateFlowBlockchainEvidenceUrlRequest,
   CreateBatchQuickSignUrlRequest,
+  CreateArchiveFlow,
   DescribeExtendedServiceAuthInfosResponse,
   CreateResultPageConfig,
+  ArchiveFlowResult,
   IntentionActionResult,
   FlowGroupUrlInfo,
   SubTaskFeedback,
@@ -404,7 +410,7 @@ import {
   CreateUserAutoSignSealUrlRequest,
   ModifyFlowDeadlineRequest,
   CreateFlowApproversRequest,
-  ExtendAuthInfo,
+  ExportContractComparisonTaskRequest,
   CreatePreparedPersonalEsignRequest,
   ImportContractReviewChecklistRequest,
   CreateMiniAppPrepareFlowRequest,
@@ -434,6 +440,7 @@ import {
   DescribeUserVerifyStatusResponse,
   ExportContractReviewMarkedRiskRequest,
   OrgBillSummary,
+  DescribeArchiveFlowTaskResponse,
   SubOrgBillSummary,
   DescribeBillUsageRequest,
   ModifyApplicationCallbackInfoRequest,
@@ -452,7 +459,7 @@ import {
   DeleteStaffsResult,
   FlowGroupApproverInfo,
   DescribeBatchOrganizationRegistrationUrlsResponse,
-  ExportContractComparisonTaskRequest,
+  ExtendAuthInfo,
   CreateInformationExtractionWebUrlRequest,
   CreateRiskIdentificationTaskFeedbackRequest,
   ReleasedApprover,
@@ -2140,6 +2147,27 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 创建合同归档任务
+
+合同归档接口用于将外部系统生成的合同、线下签署完成的合同或历史存量合同归档至腾讯电子签系统，实现合同统一管理。
+
+调用方提交合同文件资源、合同基础信息、签署方信息等数据后，系统将异步创建归档任务进行处理。归档成功后，系统会生成唯一的归档合同 ID（ArchivedFlowId），用于后续合同查询和管理。
+
+合同归档流程：
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/1c99715285540088b97a0435895736a1.png)
+1. 使用<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles" target="_blank">UploadFiles</a> 上传文件返回resourceId
+2. 根据resourceId调用CreateArchiveFlowTask创建合同归档任务返回任务id
+3. 通过任务ID查询合同归档任务状态
+     */
+  async CreateArchiveFlowTask(
+    req: CreateArchiveFlowTaskRequest,
+    cb?: (error: string, rep: CreateArchiveFlowTaskResponse) => void
+  ): Promise<CreateArchiveFlowTaskResponse> {
+    return this.request("CreateArchiveFlowTask", req, cb)
+  }
+
+  /**
    * 对加签后的文件进行数字签名验证，判断数字签名是否有效。
    */
   async VerifyDigitFile(
@@ -2700,6 +2728,16 @@ httpProfile.setEndpoint("file.test.ess.tencent.cn");
     cb?: (error: string, rep: CreateFlowApproversResponse) => void
   ): Promise<CreateFlowApproversResponse> {
     return this.request("CreateFlowApprovers", req, cb)
+  }
+
+  /**
+   * 查询归档任务的执行结果， 用于获取合同归档任务的当前处理状态及执行结果。
+   */
+  async DescribeArchiveFlowTask(
+    req: DescribeArchiveFlowTaskRequest,
+    cb?: (error: string, rep: DescribeArchiveFlowTaskResponse) => void
+  ): Promise<DescribeArchiveFlowTaskResponse> {
+    return this.request("DescribeArchiveFlowTask", req, cb)
   }
 
   /**

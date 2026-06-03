@@ -978,6 +978,16 @@ it("ess.v20201111.CreateInformationExtractionWebUrl", async function () {
     }
 })
 
+it("ess.v20201111.CreateArchiveFlowTask", async function () {
+    try {
+       const data = await client.CreateArchiveFlowTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.VerifyDigitFile", async function () {
     try {
        const data = await client.VerifyDigitFile({})
@@ -1251,6 +1261,16 @@ it("ess.v20201111.DeleteIntegrationDepartment", async function () {
 it("ess.v20201111.CreateFlowApprovers", async function () {
     try {
        const data = await client.CreateFlowApprovers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DescribeArchiveFlowTask", async function () {
+    try {
+       const data = await client.DescribeArchiveFlowTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

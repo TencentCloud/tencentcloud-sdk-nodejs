@@ -24,7 +24,7 @@ import {
   ModifyUserDetailInfoRequest,
   DescribeUserGroupTreeListRequest,
   Role,
-  ExportScreenPageResponse,
+  ApplyEmbedIntervalRequest,
   ProjectConfigResult,
   ModifyUserGroupResponse,
   DeleteUserRoleResponse,
@@ -35,6 +35,7 @@ import {
   DescribeProjectListResponse,
   QueryUserGroupMemberRequest,
   PageScreenListVO,
+  DescribeSourceFieldListResponse,
   DeleteUserGroupMemberResponse,
   UserResourceDTO,
   ModifyDatasourceCloudResponse,
@@ -44,19 +45,22 @@ import {
   Project,
   ExportScreenPageRequest,
   DeleteUserGroupMemberRequest,
+  JoinSourceTable,
   CreateUserRoleProjectRequest,
   WidgetVO,
   RowColumnStatus,
   DescribePermissionStatusInfoRequest,
   CreateDatasourceResponse,
   DescribeUserGroupMemberPageListContainer,
+  TableColumnListData,
   CreateUserGroupRequest,
   CreateAuthApiKeyResponse,
   DeleteDatasourceResponse,
   CreateProjectRequest,
   UserRoleListDataRoleInfo,
-  ApplyEmbedIntervalRequest,
+  ExportScreenPageResponse,
   ApiKeyAuthApplyVOList,
+  CreateDataTableRequest,
   CreatePermissionRanksRequest,
   ModifyResourceUserGroupResourceRequest,
   DescribeProjectInfoRequest,
@@ -67,6 +71,7 @@ import {
   DescribeAuthApiKeyInfoResponse,
   ModifyDatasourceRequest,
   CreatePermissionRanksResponse,
+  CreateDataTableResponse,
   CreateProjectResponse,
   DescribeProjectInfoResponse,
   DeleteProjectResponse,
@@ -79,6 +84,7 @@ import {
   DescribeUserGroupTreeListResponse,
   UserInfo,
   UserIdAndUserName,
+  EmptyValue,
   DescribeUserRoleListResponse,
   RowColumnTagValue,
   UserGroupUserInfoVO,
@@ -88,8 +94,12 @@ import {
   DescribePermissionStatusInfoResponse,
   UserGroupTreeNodeDTO,
   EmbedTokenInfo,
+  JoinRelationField,
+  FieldRemarkDTO,
+  JoinRelation,
   ApiKeyAuthApplyVO,
   DeleteAuthApiKeyRequest,
+  TableColumn,
   DatasourceInfoData,
   DescribePermissionRoleInfoResponse,
   DescribePageWidgetListRequest,
@@ -105,7 +115,10 @@ import {
   DeleteUserRoleProjectRequest,
   DescribeAuthApiKeyListRequest,
   ClearEmbedTokenResponse,
+  ParamCreateDTO,
   DescribeAuthApiKeyInfoRequest,
+  DescribeSourceFieldListRequest,
+  EmptyValueConfig,
   CreateAuthApiKeyRequest,
   DeleteUserRoleProjectResponse,
   DescribePermissionRoleInfoRequest,
@@ -130,6 +143,7 @@ import {
   CreateDatasourceCloudResponse,
   ProjectConfigList,
   PermissionGroup,
+  ApiDatasourceConfig,
   UserGroupDTO,
   DescribeAuthApiKeyListResponse,
   CreateUserGroupResponse,
@@ -141,6 +155,7 @@ import {
   ModifyUserDetailInfoResponse,
   DescribePermissionRanksInfoResponse,
   ModifyUserRoleProjectResponse,
+  TableField,
   ModifyProjectRequest,
   ModifyUserRoleProjectRequest,
   ModifyResourceUserGroupResourceResponse,
@@ -153,6 +168,7 @@ import {
   ProjectListData,
   CreateEmbedTokenResponse,
   DeleteUserGroupRequest,
+  FrequencyConfig,
   ResourceTagValue,
   DescribePermissionRanksInfoRequest,
   DescribeUserGroupMemberListRequest,
@@ -511,6 +527,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 添加数据表
+   */
+  async CreateDataTable(
+    req: CreateDataTableRequest,
+    cb?: (error: string, rep: CreateDataTableResponse) => void
+  ): Promise<CreateDataTableResponse> {
+    return this.request("CreateDataTable", req, cb)
+  }
+
+  /**
    * DescribeUserGroupMemberList
    */
   async DescribeUserGroupMemberList(
@@ -528,6 +554,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserRoleProjectResponse) => void
   ): Promise<CreateUserRoleProjectResponse> {
     return this.request("CreateUserRoleProject", req, cb)
+  }
+
+  /**
+   * 原始数据表字段接口信息
+   */
+  async DescribeSourceFieldList(
+    req: DescribeSourceFieldListRequest,
+    cb?: (error: string, rep: DescribeSourceFieldListResponse) => void
+  ): Promise<DescribeSourceFieldListResponse> {
+    return this.request("DescribeSourceFieldList", req, cb)
   }
 
   /**

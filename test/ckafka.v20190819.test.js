@@ -38,6 +38,16 @@ it("ckafka.v20190819.DescribeCvmInfo", async function () {
     }
 })
 
+it("ckafka.v20190819.CreateMetaSyncDatahubTask", async function () {
+    try {
+       const data = await client.CreateMetaSyncDatahubTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.ModifyInstancePre", async function () {
     try {
        const data = await client.ModifyInstancePre({})
@@ -191,6 +201,26 @@ it("ckafka.v20190819.DeleteInstancePre", async function () {
 it("ckafka.v20190819.DescribeInstancesDetail", async function () {
     try {
        const data = await client.DescribeInstancesDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.CreateMetaDataAndOffsetSyncDatahubTask", async function () {
+    try {
+       const data = await client.CreateMetaDataAndOffsetSyncDatahubTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.CreateMetaAndDataSyncDatahubTask", async function () {
+    try {
+       const data = await client.CreateMetaAndDataSyncDatahubTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

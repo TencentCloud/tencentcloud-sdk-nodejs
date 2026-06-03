@@ -2268,94 +2268,75 @@ export interface AssociateSecurityGroupsResponse {
  */
 export interface CreateProxyEndPointRequest {
   /**
-   * 集群 ID。
+   * <p>集群 ID。</p>
    */
   ClusterId: string
   /**
-   * 私有网络 ID，默认与集群私有网络 ID 保持一致。
+   * <p>私有网络 ID。</p>
    */
   UniqueVpcId: string
   /**
-   * 私有网络子网 ID，默认与集群子网 ID 保持一致。
+   * <p>私有网络子网 ID。</p>
    */
   UniqueSubnetId: string
   /**
-   * 连接池类型：SessionConnectionPool（会话级别连接池）。
+   * <p>连接池类型：SessionConnectionPool（会话级别连接池）。</p>
    */
   ConnectionPoolType?: string
   /**
-   * 是否开启连接池。
-yes：表示开启。
-no：表示不开启。
+   * <p>是否开启连接池。<br>yes：表示开启。<br>no：表示不开启。</p>
    */
   OpenConnectionPool?: string
   /**
-   * 连接池阈值：单位（秒），可选范围：0 - 300秒。
+   * <p>连接池阈值：单位（秒），可选范围：0 - 300秒。</p>
    */
   ConnectionPoolTimeOut?: number
   /**
-   * 绑定的安全组 ID 数组。
+   * <p>绑定的安全组 ID 数组。</p>
    */
   SecurityGroupIds?: Array<string>
   /**
-   * 描述说明。
+   * <p>描述说明。</p>
    */
   Description?: string
   /**
-   * 想要绑定的 vip 信息，需与 UniqueVpcId 对应。
+   * <p>想要绑定的 vip 信息，需与 UniqueVpcId 对应。</p>
    */
   Vip?: string
   /**
-   * 权重模式：
-system：系统分配。
-custom：自定义。
+   * <p>权重模式：<br>system：系统分配。<br>custom：自定义。</p>
    */
   WeightMode?: string
   /**
-   * 是否自动添加只读实例。
-yes：表示自动添加只读实例。
-no：表示不自动添加只读实例。
+   * <p>是否自动添加只读实例。<br>yes：表示自动添加只读实例。<br>no：表示不自动添加只读实例。</p>
    */
   AutoAddRo?: string
   /**
-   * 是否开启故障转移。
-yes：表示开启，开启后，当数据库代理出现故障时，连接地址将会路由到主实例。
-no：表示不开启。
-说明：
-仅当 RwType 参数值为 READWRITE 时，才支持设置此项。
+   * <p>是否开启故障转移。<br>yes：表示开启，开启后，当数据库代理出现故障时，连接地址将会路由到主实例。<br>no：表示不开启。<br>说明：<br>仅当 RwType 参数值为 READWRITE 时，才支持设置此项。</p>
    */
   FailOver?: string
   /**
-   * 一致性类型：
-eventual：最终一致性。
-global：全局一致性。
-session：会话一致性。
-说明：
-仅当 RwType 参数值为 READWRITE 时，才支持设置此项。
+   * <p>一致性类型：<br>eventual：最终一致性。<br>global：全局一致性。<br>session：会话一致性。<br>说明：<br>仅当 RwType 参数值为 READWRITE 时，才支持设置此项。</p>
    */
   ConsistencyType?: string
   /**
-   * 读写属性：
-READWRITE：表示读写分离。当此参数值为 READWRITE 时，才支持设置 FailOver、ConsistencyType 参数。
-READONLY：表示只读。
+   * <p>读写属性：<br>READWRITE：表示读写分离。当此参数值为 READWRITE 时，才支持设置 FailOver、ConsistencyType 参数。<br>READONLY：表示只读。</p>
    */
   RwType?: string
   /**
-   * 一致性超时时间。取值范围：0 ~ 1000000（微秒）。设置为0时，表示若只读实例出现延迟导致一致性策略不满足时，请求将一直等待。
+   * <p>一致性超时时间。取值范围：0 ~ 1000000（微秒）。设置为0时，表示若只读实例出现延迟导致一致性策略不满足时，请求将一直等待。</p>
    */
   ConsistencyTimeOut?: number
   /**
-   * 是否开启事务拆分。开启后，在一个事务中拆分读和写到不同的实例上去执行。
+   * <p>是否开启事务拆分。开启后，在一个事务中拆分读和写到不同的实例上去执行。</p>
    */
   TransSplit?: boolean
   /**
-   * 接入模式：
-nearby：就近访问。
-balance：均衡分配。
+   * <p>接入模式：<br>nearby：就近访问。<br>balance：均衡分配。</p>
    */
   AccessMode?: string
   /**
-   * 实例权重。
+   * <p>实例权重。</p>
    */
   InstanceWeights?: Array<ProxyInstanceWeight>
 }
@@ -2957,51 +2938,51 @@ export interface ModifyServerlessStrategyResponse {
  */
 export interface ProxyGroupRwInfo {
   /**
-   * 一致性类型 eventual-最终一致性,global-全局一致性,session-会话一致性
+   * <p>一致性类型 eventual-最终一致性,global-全局一致性,session-会话一致性</p>
    */
   ConsistencyType?: string
   /**
-   * 一致性超时时间
+   * <p>一致性超时时间</p>
    */
   ConsistencyTimeOut?: number
   /**
-   * 权重模式 system-系统分配，custom-自定义
+   * <p>权重模式 system-系统分配，custom-自定义</p>
    */
   WeightMode?: string
   /**
-   * 是否开启故障转移
+   * <p>是否开启故障转移</p>
    */
   FailOver?: string
   /**
-   * 是否自动添加只读实例，yes-是，no-不自动添加
+   * <p>是否自动添加只读实例，yes-是，no-不自动添加</p>
    */
   AutoAddRo?: string
   /**
-   * 实例权重数组
+   * <p>实例权重数组</p>
    */
   InstanceWeights?: Array<ProxyInstanceWeight>
   /**
-   * 是否开通读写节点，yse-是，no-否
+   * <p>是否开通读写节点，yse-是，no-否</p>
    */
   OpenRw?: string
   /**
-   * 读写属性，可选值：READWRITE,READONLY
+   * <p>读写属性，可选值：READWRITE,READONLY</p>
    */
   RwType?: string
   /**
-   * 事务拆分
+   * <p>事务拆分</p>
    */
   TransSplit?: boolean
   /**
-   * 连接模式，可选值：balance，nearby
+   * <p>连接模式，可选值：balance，nearby</p>
    */
   AccessMode?: string
   /**
-   * 是否将libra节点当作普通RO节点
+   * <p>是否将libra节点当作普通RO节点</p>
    */
   ApNodeAsRoNode?: boolean
   /**
-   * libra节点故障，是否转发给其他节点
+   * <p>libra节点故障，是否转发给其他节点</p>
    */
   ApQueryToOtherNode?: boolean
 }
@@ -4369,80 +4350,71 @@ export interface SlaveZoneStockInfo {
  */
 export interface ModifyProxyRwSplitRequest {
   /**
-   * 集群ID，例如cynosdbmysql-asd123
+   * <p>集群ID，例如cynosdbmysql-asd123</p>
    */
   ClusterId: string
   /**
-   * 数据库代理组ID，例如cynosdbmysql-proxy-qwe123
+   * <p>数据库代理组ID，例如cynosdbmysql-proxy-qwe123</p>
    */
   ProxyGroupId: string
   /**
-   * 一致性类型；“eventual"-最终一致性, "session"-会话一致性, "global"-全局一致性
+   * <p>一致性类型；“eventual&quot;-最终一致性, &quot;session&quot;-会话一致性, &quot;global&quot;-全局一致性</p>
    */
   ConsistencyType?: string
   /**
-   * 一致性超时时间。
-取值范围：0~1000000（微秒）,设置0则表示若只读实例出现延迟, 导致一致性策略不满足, 请求将一直等待。
+   * <p>一致性超时时间。<br>取值范围：0~1000000（微秒）,设置0则表示若只读实例出现延迟, 导致一致性策略不满足, 请求将一直等待。</p>
    */
   ConsistencyTimeOut?: string
   /**
-   * 读写权重分配模式；系统自动分配："system"， 自定义："custom"
+   * <p>读写权重分配模式；系统自动分配：&quot;system&quot;， 自定义：&quot;custom&quot;</p>
    */
   WeightMode?: string
   /**
-   * 实例只读权重。
-
+   * <p>实例只读权重。</p>
    */
   InstanceWeights?: Array<ProxyInstanceWeight>
   /**
-   * 是否开启故障转移，代理出现故障后，连接地址将路由到主实例，取值："yes" , "no"
+   * <p>是否开启故障转移，代理出现故障后，连接地址将路由到主实例，取值：&quot;yes&quot; , &quot;no&quot;</p>
    */
   FailOver?: string
   /**
-   * 是否自动添加只读实例，取值："yes" , "no"
+   * <p>是否自动添加只读实例，取值：&quot;yes&quot; , &quot;no&quot;</p>
    */
   AutoAddRo?: string
   /**
-   * 是否打开读写分离。
-该参数已废弃，请通过RwType设置读写属性。
+   * <p>是否打开读写分离。<br>该参数已废弃，请通过RwType设置读写属性。</p>
    */
   OpenRw?: string
   /**
-   * 读写类型：
-READWRITE,READONLY
+   * <p>读写类型：<br>READWRITE,READONLY</p>
    */
   RwType?: string
   /**
-   * 事务拆分。
-在一个事务中拆分读和写到不同的实例上去执行。
+   * <p>事务拆分。<br>在一个事务中拆分读和写到不同的实例上去执行。</p>
    */
   TransSplit?: boolean
   /**
-   * 连接模式：
-nearby,balance
+   * <p>连接模式：<br>nearby,balance</p>
    */
   AccessMode?: string
   /**
-   * 是否打开连接池：
-yes,no
+   * <p>是否打开连接池：<br>yes,no</p>
    */
   OpenConnectionPool?: string
   /**
-   * 连接池类型：
-SessionConnectionPool
+   * <p>连接池类型：<br>SessionConnectionPool</p>
    */
   ConnectionPoolType?: string
   /**
-   * 连接池时间。
-可选范围:0~300（秒）
+   * <p>连接池时间。<br>可选范围:0~300（秒）</p>
    */
   ConnectionPoolTimeOut?: number
   /**
-   * 是否将libra节点当作普通RO节点
+   * <p>是否将libra节点当作普通RO节点</p>
    */
   ApNodeAsRoNode?: boolean
   /**
-   * libra节点故障，是否转发给其他节点
+   * <p>libra节点故障，是否转发给其他节点</p>
    */
   ApQueryToOtherNode?: boolean
 }
@@ -6538,15 +6510,15 @@ export interface MigrateTableItem {
  */
 export interface CreateProxyEndPointResponse {
   /**
-   * 异步流程 ID。
+   * <p>异步流程 ID。</p>
    */
   FlowId?: number
   /**
-   * 异步任务 ID。
+   * <p>异步任务 ID。</p>
    */
   TaskId?: number
   /**
-   * 数据库代理组 ID。
+   * <p>数据库代理组 ID。</p>
    */
   ProxyGroupId?: string
   /**
@@ -8925,11 +8897,11 @@ export interface CloseWanResponse {
  */
 export interface ModifyProxyRwSplitResponse {
   /**
-   * 异步FlowId
+   * <p>异步FlowId</p>
    */
   FlowId?: number
   /**
-   * 异步任务ID
+   * <p>异步任务ID</p>
    */
   TaskId?: number
   /**

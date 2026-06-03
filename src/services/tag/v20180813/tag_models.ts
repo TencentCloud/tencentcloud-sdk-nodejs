@@ -130,27 +130,19 @@ export interface AddProjectResponse {
  */
 export interface GetResourcesRequest {
   /**
-   * 资源六段式列表。腾讯云使用资源六段式描述一个资源。
-例如：ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}。
-如果传入了此参数会返回所有匹配的资源列表，指定的MaxResults会失效。
-N取值范围：0~9
+   * <p>资源六段式列表。腾讯云使用资源六段式描述一个资源。<br>例如：ResourceList.1 = qcs::${ServiceType}:${Region}:${Account}:${ResourcePreifx}/${ResourceId}。<br>如果传入了此参数会返回所有匹配的资源列表，指定的MaxResults会失效。<br>N取值范围：0~9</p>
    */
   ResourceList?: Array<string>
   /**
-   * 标签键和标签值。
-指定多个标签，会查询同时绑定了该多个标签的资源。
-N取值范围：0~5。
-每个TagFilters中的TagValue最多支持10个
+   * <p>标签过滤数组，最多支持6组标签。会查询同时绑定了这多组标签的资源。<br>每组标签中的TagValue最多支持10个。</p>
    */
   TagFilters?: Array<TagFilter>
   /**
-   * 从上一页的响应中获取的下一页的Token值。
-如果是第一次请求，设置为空。
+   * <p>从上一页的响应中获取的下一页的Token值。<br>如果是第一次请求，设置为空。</p>
    */
   PaginationToken?: string
   /**
-   * 每一页返回的数据最大条数，最大200。
-缺省值：50。
+   * <p>每一页返回的数据最大条数，最大200。<br>缺省值：50。</p>
    */
   MaxResults?: number
 }
@@ -184,31 +176,31 @@ export interface DeleteResourceTagResponse {
  */
 export interface DescribeResourceTagsByTagKeysRequest {
   /**
-   * 业务类型，示例 cvm 。指资源所属业务类型，也是资源六段式中的第三段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中业务类型为ckafka
+   * <p>业务类型，示例 cvm 。指资源所属业务类型，也是资源六段式中的第三段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中业务类型为ckafka</p>
    */
   ServiceType: string
   /**
-   * 该业务类型对应的资源前缀，示例 cvm对应instance、image、volume等。也是资源六段式中的第六段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中资源前缀为ckafkaId。cos存储桶为非必填，其他云资源为必填
+   * <p>该业务类型对应的资源前缀，示例 cvm对应instance、image、volume等。也是资源六段式中的第六段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中资源前缀为ckafkaId</p>
    */
   ResourcePrefix: string
   /**
-   * 资源所在地域，示例：ap-guangzhou 不区分地域的资源不需要传入该字段，区分地域的资源必填
+   * <p>资源所在地域，示例：ap-guangzhou 不区分地域的资源不需要传入该字段，区分地域的资源必填</p>
    */
   ResourceRegion: string
   /**
-   * 资源唯一标识ID的列表，列表容量不超过20
+   * <p>资源唯一标识ID的列表，列表容量不超过20</p>
    */
   ResourceIds: Array<string>
   /**
-   * 资源标签键列表，列表容量不超过20
+   * <p>资源标签键列表，列表容量不超过20</p>
    */
   TagKeys: Array<string>
   /**
-   * 每页大小，默认为 400
+   * <p>每页大小，默认为 400</p>
    */
   Limit?: number
   /**
-   * 数据偏移量，默认为 0, 必须为Limit参数的整数倍
+   * <p>数据偏移量，默认为 0, 必须为Limit参数的整数倍</p>
    */
   Offset?: number
 }
@@ -252,7 +244,7 @@ export interface DescribeTagsRequest {
    */
   TagKeys?: Array<string>
   /**
-   * <p>是否展现项目标签。1:展示  0:不展示</p>
+   * <p>是否展现项目标签。1:展示 0:不展示。本功能仅供历史客户使用，需提交工单加白主账号后，入参方可有效。</p>
    */
   ShowProject?: number
 }
@@ -336,35 +328,35 @@ export interface UpdateProjectRequest {
  */
 export interface DescribeResourcesByTagsUnionRequest {
   /**
-   * 标签过滤数组，数量最多六个
+   * <p>标签过滤数组，最多支持6组标签。</p>
    */
   TagFilters: Array<TagFilter>
   /**
-   * 创建标签者uin
+   * <p>创建标签者uin</p>
    */
   CreateUin?: number
   /**
-   * 数据偏移量，默认为 0, 必须为Limit参数的整数倍
+   * <p>数据偏移量，默认为 0, 必须为Limit参数的整数倍</p>
    */
   Offset?: number
   /**
-   * 每页大小，默认为 15
+   * <p>每页大小，默认为 15</p>
    */
   Limit?: number
   /**
-   * 该业务类型对应的资源前缀，示例 cvm对应instance、image、volume等。也是资源六段式中的第六段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中资源前缀为ckafkaId。cos存储桶为非必填，其他云资源为必填
+   * <p>该业务类型对应的资源前缀，示例 cvm对应instance、image、volume等。也是资源六段式中的第六段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中资源前缀为ckafkaId。cos存储桶为非必填，其他云资源为必填</p>
    */
   ResourcePrefix?: string
   /**
-   * 资源唯一标记
+   * <p>资源唯一标记</p>
    */
   ResourceId?: string
   /**
-   * 资源所在地域，示例：ap-guangzhou 不区分地域的资源不需要传入该字段，区分地域的资源必填
+   * <p>资源所在地域，示例：ap-guangzhou 不区分地域的资源不需要传入该字段，区分地域的资源必填</p>
    */
   ResourceRegion?: string
   /**
-   * 业务类型，示例 cvm 。指资源所属业务类型，也是资源六段式中的第三段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中业务类型为ckafka
+   * <p>业务类型，示例 cvm 。指资源所属业务类型，也是资源六段式中的第三段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中业务类型为ckafka</p>
    */
   ServiceType?: string
 }
@@ -431,23 +423,23 @@ N取值范围：0~9
  */
 export interface DescribeTagKeysRequest {
   /**
-   * 创建者用户 Uin，不传或为空只将 Uin 作为条件查询
+   * <p>创建者用户 Uin，不传或为空只将 Uin 作为条件查询</p>
    */
   CreateUin?: number
   /**
-   * 数据偏移量，默认为 0, 必须为Limit参数的整数倍
+   * <p>数据偏移量，默认为 0, 必须为Limit参数的整数倍</p>
    */
   Offset?: number
   /**
-   * 每页大小，默认为 15，最大1000
+   * <p>每页大小，默认为 15，最大1000</p>
    */
   Limit?: number
   /**
-   * 是否展现项目。1:展示  0:不展示
+   * <p>是否展现项目标签。1:展示 0:不展示。本功能仅供历史客户使用，需提交工单加白主账号后，入参方可有效。</p>
    */
   ShowProject?: number
   /**
-   * 标签类型。取值： Custom：自定义标签。 System：系统标签。 All：全部标签。 默认值：All。
+   * <p>标签类型。取值： Custom：自定义标签。 System：系统标签。 All：全部标签。 默认值：All。</p>
    */
   Category?: string
 }
@@ -492,19 +484,19 @@ N取值范围：0~9
  */
 export interface DescribeTagsSeqResponse {
   /**
-   * 结果总数
+   * <p>结果总数</p>
    */
   TotalCount?: number
   /**
-   * 数据位移偏量
+   * <p>数据位移偏量</p>
    */
   Offset?: number
   /**
-   * 每页大小
+   * <p>每页大小</p>
    */
   Limit?: number
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<TagWithDelete>
   /**
@@ -596,19 +588,19 @@ export interface DescribeResourceTagsByResourceIdsRequest {
  */
 export interface DescribeResourcesByTagsUnionResponse {
   /**
-   * 结果总数
+   * <p>结果总数</p>
    */
   TotalCount?: number
   /**
-   * 数据位移偏量
+   * <p>数据位移偏量</p>
    */
   Offset?: number
   /**
-   * 每页大小
+   * <p>每页大小</p>
    */
   Limit?: number
   /**
-   * 资源标签
+   * <p>资源标签</p>
    */
   Rows?: Array<ResourceTag>
   /**
@@ -754,19 +746,19 @@ export interface AddResourceTagResponse {
  */
 export interface DescribeResourcesByTagsResponse {
   /**
-   * 结果总数
+   * <p>结果总数</p>
    */
   TotalCount?: number
   /**
-   * 数据位移偏量
+   * <p>数据位移偏量</p>
    */
   Offset?: number
   /**
-   * 每页大小
+   * <p>每页大小</p>
    */
   Limit?: number
   /**
-   * 资源标签
+   * <p>资源标签</p>
    */
   Rows?: Array<ResourceTag>
   /**
@@ -838,19 +830,19 @@ export interface CreateTagRequest {
  */
 export interface DescribeResourceTagsByTagKeysResponse {
   /**
-   * 结果总数
+   * <p>结果总数</p>
    */
   TotalCount?: number
   /**
-   * 数据位移偏量
+   * <p>数据位移偏量</p>
    */
   Offset?: number
   /**
-   * 每页大小
+   * <p>每页大小</p>
    */
   Limit?: number
   /**
-   * 资源标签
+   * <p>资源标签</p>
    */
   Rows?: Array<ResourceIdTag>
   /**
@@ -864,31 +856,31 @@ export interface DescribeResourceTagsByTagKeysResponse {
  */
 export interface DescribeTagsSeqRequest {
   /**
-   * 标签键,与标签值同时存在或同时不存在，不存在时表示查询该用户所有标签
+   * <p>标签键,与标签值同时存在或同时不存在，不存在时表示查询该用户所有标签</p>
    */
   TagKey?: string
   /**
-   * 标签值,与标签键同时存在或同时不存在，不存在时表示查询该用户所有标签
+   * <p>标签值,与标签键同时存在或同时不存在，不存在时表示查询该用户所有标签</p>
    */
   TagValue?: string
   /**
-   * 数据偏移量，默认为 0, 必须为Limit参数的整数倍
+   * <p>数据偏移量，默认为 0, 必须为Limit参数的整数倍</p>
    */
   Offset?: number
   /**
-   * 每页大小，默认为 15
+   * <p>每页大小，默认为 15</p>
    */
   Limit?: number
   /**
-   * 创建者用户 Uin，不传或为空只将 Uin 作为条件查询
+   * <p>创建者用户 Uin，不传或为空只将 Uin 作为条件查询</p>
    */
   CreateUin?: number
   /**
-   * 标签键数组,与标签值同时存在或同时不存在，不存在时表示查询该用户所有标签,当与TagKey同时传递时只取本值
+   * <p>标签键数组,与标签值同时存在或同时不存在，不存在时表示查询该用户所有标签,当与TagKey同时传递时只取本值</p>
    */
   TagKeys?: Array<string>
   /**
-   * 是否展现项目标签。1:展示  0:不展示
+   * <p>是否展现项目标签。1:展示 0:不展示。本功能仅供历史客户使用，需提交工单加白主账号后，入参方可有效。</p>
    */
   ShowProject?: number
 }
@@ -1098,11 +1090,11 @@ export interface DetachResourcesTagResponse {
  */
 export interface GetResourcesResponse {
   /**
-   * 获取的下一页的Token值
+   * <p>获取的下一页的Token值</p>
    */
   PaginationToken?: string
   /**
-   * 资源及关联的标签(键和值)列表
+   * <p>资源及关联的标签(键和值)列表</p>
    */
   ResourceTagMappingList?: Array<ResourceTagMapping>
   /**
@@ -1152,19 +1144,19 @@ export interface DeleteTagResponse {
  */
 export interface DescribeTagKeysResponse {
   /**
-   * 结果总数
+   * <p>结果总数</p>
    */
   TotalCount?: number
   /**
-   * 数据位移偏量
+   * <p>数据位移偏量</p>
    */
   Offset?: number
   /**
-   * 每页大小
+   * <p>每页大小</p>
    */
   Limit?: number
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<string>
   /**
@@ -1273,15 +1265,15 @@ export interface CreateTagsResponse {
  */
 export interface GetTagsRequest {
   /**
-   * <p>从上一页的响应中获取的下一页的Token值。如果是第一次请求，设置为空。</p>
+   * <p>从上一页的响应中获取的下一页的Token值。<br>如果是第一次请求，设置为空。</p>
    */
   PaginationToken?: string
   /**
-   * <p>每一页返回的数据最大条数，最大1000。缺省值：50。</p>
+   * <p>每一页返回的数据最大条数，最大1000。<br>缺省值：50。</p>
    */
   MaxResults?: number
   /**
-   * <p>标签键。返回所有标签键列表对应的标签。最大长度：20</p>
+   * <p>标签键。<br>返回所有标签键列表对应的标签。<br>最大长度：20</p>
    */
   TagKeys?: Array<string>
   /**
@@ -1295,35 +1287,35 @@ export interface GetTagsRequest {
  */
 export interface DescribeResourcesByTagsRequest {
   /**
-   * 标签过滤数组，数量最多6个
+   * <p>标签过滤数组，最多支持6组标签。</p>
    */
   TagFilters: Array<TagFilter>
   /**
-   * 创建标签者uin
+   * <p>创建标签者uin</p>
    */
   CreateUin?: number
   /**
-   * 数据偏移量，默认为 0, 必须为Limit参数的整数倍
+   * <p>数据偏移量，默认为 0, 必须为Limit参数的整数倍</p>
    */
   Offset?: number
   /**
-   * 每页大小，默认为 15
+   * <p>每页大小，默认为 15</p>
    */
   Limit?: number
   /**
-   * 该业务类型对应的资源前缀，示例 cvm对应instance、image、volume等。也是资源六段式中的第六段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中资源前缀为ckafkaId。cos存储桶为非必填，其他云资源为必填
+   * <p>该业务类型对应的资源前缀，示例 cvm对应instance、image、volume等。也是资源六段式中的第六段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中资源前缀为ckafkaId。cos存储桶为非必填，其他云资源为必填</p>
    */
   ResourcePrefix?: string
   /**
-   * 资源唯一标记
+   * <p>资源唯一标记</p>
    */
   ResourceId?: string
   /**
-   * 资源所在地域，示例：ap-guangzhou 不区分地域的资源不需要传入该字段，区分地域的资源必填
+   * <p>资源所在地域，示例：ap-guangzhou 不区分地域的资源不需要传入该字段，区分地域的资源必填</p>
    */
   ResourceRegion?: string
   /**
-   * 业务类型，示例 cvm 。指资源所属业务类型，也是资源六段式中的第三段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中业务类型为ckafka
+   * <p>业务类型，示例 cvm 。指资源所属业务类型，也是资源六段式中的第三段，例如qcs::ckafka:ap-shanghai:uin/123456789:ckafkaId/ckafka-o85jq584中业务类型为ckafka</p>
    */
   ServiceType?: string
 }

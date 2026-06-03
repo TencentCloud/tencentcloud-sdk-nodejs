@@ -53,6 +53,7 @@ import {
   DeleteTokenPlanApiKeyResponse,
   DescribeTokenPlanApiKeyUsageDetailRequest,
   ApiKeyDetail,
+  UsageDetailItem,
   BatchCreateFailedItem,
   CreateTokenPlanTeamOrderAndBuyResponse,
   RequestFilter,
@@ -167,7 +168,7 @@ export class Client extends AbstractClient {
 从 CLS 日志服务查询套餐下的调用明细，按 pkg_id 过滤，支持游标分页。
      */
   async DescribeTokenPlanApiKeyUsageDetail(
-    req?: DescribeTokenPlanApiKeyUsageDetailRequest,
+    req: DescribeTokenPlanApiKeyUsageDetailRequest,
     cb?: (error: string, rep: DescribeTokenPlanApiKeyUsageDetailResponse) => void
   ): Promise<DescribeTokenPlanApiKeyUsageDetailResponse> {
     return this.request("DescribeTokenPlanApiKeyUsageDetail", req, cb)

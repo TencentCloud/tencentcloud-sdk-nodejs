@@ -3514,39 +3514,39 @@ export interface ListTargetsForPolicyNode {
  */
 export interface ListGroupsRequest {
   /**
-   * 空间 ID。
+   * <p>空间 ID。</p>
    */
   ZoneId: string
   /**
-   * 查询返回结果下一页的令牌。首次调用 API 不需要NextToken。  当您首次调用 API 时，如果返回数据总条数超过MaxResults限制，数据会被截断，只返回MaxResults条数据，同时，返回参数IsTruncated为true，返回一个NextToken。您可以使用上一次返回的NextToken继续调用 API，其他请求参数保持不变，查询被截断的数据。您可以按此方法多次查询，直到IsTruncated为false，表示全部数据查询完毕。
+   * <p>查询返回结果下一页的令牌。首次调用 API 不需要NextToken。  当您首次调用 API 时，如果返回数据总条数超过MaxResults限制，数据会被截断，只返回MaxResults条数据，同时，返回参数IsTruncated为true，返回一个NextToken。您可以使用上一次返回的NextToken继续调用 API，其他请求参数保持不变，查询被截断的数据。您可以按此方法多次查询，直到IsTruncated为false，表示全部数据查询完毕。</p>
    */
   NextToken?: string
   /**
-   * 每页的最大数据条数。  取值范围：1~100。  默认值：10。
+   * <p>每页的最大数据条数。  取值范围：1~100。  默认值：10。</p>
    */
   MaxResults?: number
   /**
-   * 过滤条件。  格式：<Attribute> <Operator> <Value>，不区分大小写。目前，<Attribute>只支持GroupName，<Operator>只支持eq（Equals）和sw（Start With）。  示例：Filter = "GroupName sw test"，表示查询名称以 test 开头的全部用户组。Filter = "GroupName eq testgroup"，表示查询名称为 testgroup 的用户组。
+   * <p>过滤条件，用户组名称</p>
    */
   Filter?: string
   /**
-   * 用户组的类型  Manual：手动创建，Synchronized：外部导入。
+   * <p>用户组的类型  Manual：手动创建，Synchronized：外部导入。</p>
    */
   GroupType?: string
   /**
-   * 筛选的用户，该用户关联的用户组会返回IsSelected=1
+   * <p>筛选的用户，该用户关联的用户组会返回IsSelected=1</p>
    */
   FilterUsers?: Array<string>
   /**
-   * 排序的字段，目前只支持CreateTime，默认是CreateTime字段
+   * <p>排序的字段，目前只支持CreateTime，默认是CreateTime字段</p>
    */
   SortField?: string
   /**
-   * 排序类型：Desc 倒序 Asc  正序，需要您和SortField一起设置
+   * <p>排序类型：Desc 倒序 Asc  正序，需要您和SortField一起设置</p>
    */
   SortType?: string
   /**
-   * 翻页offset. 不要与NextToken同时使用，优先使用NextToken
+   * <p>翻页offset. 不要与NextToken同时使用，优先使用NextToken</p>
    */
   Offset?: number
 }
@@ -3760,23 +3760,23 @@ export interface AddShareUnitMembersResponse {
  */
 export interface ListGroupsResponse {
   /**
-   * 查询返回结果下一页的令牌。  说明 只有IsTruncated为true时，才显示该参数。
+   * <p>查询返回结果下一页的令牌。  说明 只有IsTruncated为true时，才显示该参数。</p>
    */
   NextToken?: string
   /**
-   * 用户组列表。
+   * <p>用户组列表。</p>
    */
   Groups?: Array<GroupInfo>
   /**
-   * 每页的最大数据条数。
+   * <p>每页的最大数据条数。</p>
    */
   MaxResults?: number
   /**
-   * 符合请求参数条件的数据总条数。
+   * <p>符合请求参数条件的数据总条数。</p>
    */
   TotalCounts?: number
   /**
-   * 返回结果是否被截断。取值：  true：已截断。 false：未截断。
+   * <p>返回结果是否被截断。取值：  true：已截断。 false：未截断。</p>
    */
   IsTruncated?: boolean
   /**

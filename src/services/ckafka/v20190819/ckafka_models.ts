@@ -773,6 +773,52 @@ export interface ModifyAclRuleResponse {
 }
 
 /**
+ * CreateMetaDataAndOffsetSyncDatahubTask请求参数结构体
+ */
+export interface CreateMetaDataAndOffsetSyncDatahubTaskRequest {
+  /**
+   * <p>任务名称</p><p>参数格式：task-test</p><p>64字符内</p>
+   */
+  TaskName: string
+  /**
+   * <p>同步源连接</p><p>参数格式：resource-test</p>
+   */
+  SourceResourceId: string
+  /**
+   * <p>同步目标链接</p><p>参数格式：resource-test</p>
+   */
+  TargetResourceId: string
+  /**
+   * <p>连接器任务描述</p><p>128字符内</p>
+   */
+  Description?: string
+  /**
+   * <p>Offset类型，最开始位置earliest，最新位置latest</p><p>枚举值：</p><ul><li>earliest： 最开始位置</li><li>latest： 最新位置</li></ul>
+   */
+  OffsetType?: string
+  /**
+   * <p>正则匹配Topic列表</p><p>与TopicList参数二选一</p>
+   */
+  TopicRegularExpression?: string
+  /**
+   * <p>多选topic列表</p><p>与TopicRegularExpression参数二选一</p>
+   */
+  TopicList?: Array<string>
+  /**
+   * <p>Topic 前缀</p>
+   */
+  Prefix?: string
+  /**
+   * <p>Topic前缀分隔符</p><p>仅支持 &quot;.&quot; / &quot;-&quot; / &quot;_&quot;</p>
+   */
+  Separator?: string
+  /**
+   * <p>标签列表</p>
+   */
+  Tags?: Array<Tag>
+}
+
+/**
  * record 与数据库表的映射关系
  */
 export interface RecordMapping {
@@ -1487,6 +1533,52 @@ export interface RestartDatahubTaskResponse {
 }
 
 /**
+ * CreateMetaAndDataSyncDatahubTask请求参数结构体
+ */
+export interface CreateMetaAndDataSyncDatahubTaskRequest {
+  /**
+   * <p>任务名称</p><p>64字符内</p>
+   */
+  TaskName: string
+  /**
+   * <p>同步源连接</p><p>参数格式：resource-test</p>
+   */
+  SourceResourceId: string
+  /**
+   * <p>同步目标连接</p><p>参数格式：resource-test</p>
+   */
+  TargetResourceId: string
+  /**
+   * <p>标签列表</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>Offset类型，最开始位置earliest，最新位置latest，时间点位置timestamp</p><p>枚举值：</p><ul><li>earliest： 最开始位置</li><li>latest： 最新位置</li><li>timestamp： 时间点位置</li></ul>
+   */
+  OffsetType?: string
+  /**
+   * <p>正则匹配Topic列表</p><p>与TopicList参数二选一</p>
+   */
+  TopicRegularExpression?: string
+  /**
+   * <p>多选topic列表</p><p>与TopicRegularExpression参数二选一</p>
+   */
+  TopicList?: Array<string>
+  /**
+   * <p>Topic 前缀</p>
+   */
+  Prefix?: string
+  /**
+   * <p>Topic前缀分隔符</p><p>仅支持 &quot;.&quot; / &quot;-&quot; / &quot;_&quot;</p>
+   */
+  Separator?: string
+  /**
+   * <p>连接器任务描述</p><p>128字符内</p>
+   */
+  Description?: string
+}
+
+/**
  * 批量发送消息内容
  */
 export interface BatchContent {
@@ -1928,7 +2020,7 @@ export interface DatahubTaskInfo {
  */
 export interface UpgradeBrokerVersionResponse {
   /**
-   * 升配结果
+   * <p>升配结果</p>
    */
   Result?: JgwOperateResponse
   /**
@@ -2208,7 +2300,7 @@ export interface InstanceAttributesResponse {
  */
 export interface DescribeDatahubTopicsResponse {
   /**
-   * 主题列表
+   * <p>主题列表</p>
    */
   Result?: DescribeDatahubTopicsResp
   /**
@@ -3034,19 +3126,19 @@ export interface DescribeDatahubTaskResponse {
  */
 export interface FetchLatestDatahubMessageListRequest {
   /**
-   * 弹性topic名称
+   * <p>弹性topic名称</p><p>取值参考：<a href="https://cloud.tencent.com/document/api/597/86863">DescribeDatahubTopics</a></p>
    */
   Name: string
   /**
-   * 分区id
+   * <p>分区id</p>
    */
   Partition: number
   /**
-   * 位点信息
+   * <p>位点信息</p>
    */
   Offset?: number
   /**
-   * 最大查询条数，最小1，最大100
+   * <p>最大查询条数</p><p>取值范围：[1, 100]</p>
    */
   MessageCount?: number
 }
@@ -3078,6 +3170,28 @@ export interface CreateConnectResourceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 订阅信息实体
+ */
+export interface SubscribedInfo {
+  /**
+   * 订阅的主题名
+   */
+  TopicName?: string
+  /**
+   * 订阅的分区
+   */
+  Partition?: Array<number | bigint>
+  /**
+   * 分区offset信息
+   */
+  PartitionOffset?: Array<PartitionOffset>
+  /**
+   * 订阅的主题ID
+   */
+  TopicId?: string
 }
 
 /**
@@ -3261,6 +3375,20 @@ export interface DescribeACLResponse {
    * 返回的ACL结果集对象
    */
   Result?: AclResponse
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateMetaDataAndOffsetSyncDatahubTask返回参数结构体
+ */
+export interface CreateMetaDataAndOffsetSyncDatahubTaskResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Result?: CreateDatahubTaskRes
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3686,6 +3814,32 @@ export interface DescribeConnectInfoResultDTO {
 }
 
 /**
+ * CreateMetaSyncDatahubTask请求参数结构体
+ */
+export interface CreateMetaSyncDatahubTaskRequest {
+  /**
+   * <p>连接器任务名称</p><p>64字符内</p>
+   */
+  TaskName: string
+  /**
+   * <p>同步源连接</p><p>参数格式：resource-test</p>
+   */
+  SourceResourceId: string
+  /**
+   * <p>同步目标连接</p><p>参数格式：resource-test</p>
+   */
+  TargetResourceId: string
+  /**
+   * <p>连接器任务描述</p><p>128字符内</p>
+   */
+  Description?: string
+  /**
+   * <p>标签列表</p>
+   */
+  Tags?: Array<Tag>
+}
+
+/**
  * topic副本及详细信息
  */
 export interface TopicInSyncReplicaInfo {
@@ -3976,6 +4130,28 @@ export interface CreateAclRuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Table、Topic路由
+ */
+export interface TableMapping {
+  /**
+   * 库名
+   */
+  Database: string
+  /**
+   * 表名，多个表,（逗号）隔开
+   */
+  Table: string
+  /**
+   * Topic名称
+   */
+  Topic: string
+  /**
+   * Topic ID
+   */
+  TopicId: string
 }
 
 /**
@@ -4981,6 +5157,20 @@ export interface ModifyDatahubTopicRequest {
 }
 
 /**
+ * CreateMetaAndDataSyncDatahubTask返回参数结构体
+ */
+export interface CreateMetaAndDataSyncDatahubTaskResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Result?: CreateDatahubTaskRes
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Datahub主题列表
  */
 export interface DescribeDatahubTopicsResp {
@@ -5242,7 +5432,7 @@ export interface DescribeDatahubTaskRequest {
  */
 export interface FetchLatestDatahubMessageListResponse {
   /**
-   * 返回结果。
+   * <p>返回结果。</p>
    */
   Result?: Array<ConsumerRecord>
   /**
@@ -5426,23 +5616,23 @@ export interface TopicResult {
  */
 export interface UpgradeBrokerVersionRequest {
   /**
-   * ckafka集群实例Id
+   * <p>ckafka集群实例Id</p>
    */
   InstanceId: string
   /**
-   * 1.平滑升配.2.垂直升配
+   * <p>版本升级类型</p><p>枚举值：</p><ul><li>1： 小版本迁移升级(推荐)</li></ul>
    */
   Type: number
   /**
-   * 版本号
+   * <p>版本号</p>
    */
   SourceVersion: string
   /**
-   * 版本号
+   * <p>版本号</p>
    */
   TargetVersion: string
   /**
-   * 延迟时间
+   * <p>延迟时间</p>
    */
   DelayTimeStamp?: string
 }
@@ -5924,7 +6114,7 @@ export interface DescribeModifyTypeRequest {
  */
 export interface CreateUserResponse {
   /**
-   * 返回结果
+   * <p>返回结果</p>
    */
   Result?: JgwOperateResponse
   /**
@@ -6032,6 +6222,20 @@ export interface MariaDBParam {
 }
 
 /**
+ * CreateMetaSyncDatahubTask返回参数结构体
+ */
+export interface CreateMetaSyncDatahubTaskResponse {
+  /**
+   * <p>返回结果</p>
+   */
+  Result?: CreateDatahubTaskRes
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 数据处理——Value处理参数——截取参数
  */
 export interface SubstrParam {
@@ -6068,25 +6272,21 @@ export interface DescribeTopicSubscribeGroupRequest {
 }
 
 /**
- * Table、Topic路由
+ * DeleteGroupSubscribeTopic请求参数结构体
  */
-export interface TableMapping {
+export interface DeleteGroupSubscribeTopicRequest {
   /**
-   * 库名
+   * ckafka集群实例Id
    */
-  Database: string
+  InstanceId: string
   /**
-   * 表名，多个表,（逗号）隔开
+   * 消费分组名称
    */
-  Table: string
+  Group: string
   /**
-   * Topic名称
+   * 主题名
    */
   Topic: string
-  /**
-   * Topic ID
-   */
-  TopicId: string
 }
 
 /**
@@ -6202,27 +6402,27 @@ export interface DescribeConnectResourcesResp {
  */
 export interface DescribeDatahubTopicsRequest {
   /**
-   * 搜索词
+   * <p>搜索词</p><p>对Name或TopicName或TopicId字段进行模糊匹配</p>
    */
   SearchWord?: string
   /**
-   * 本次查询的偏移位置，默认为0
+   * <p>本次查询的偏移位置，默认为0</p>
    */
   Offset?: number
   /**
-   * 本次返回结果的最大个数，默认为50，最大值为50
+   * <p>本次返回结果的最大个数</p><p>取值范围：[1, 100]</p><p>默认值：20</p>
    */
   Limit?: number
   /**
-   * 是否从连接查询topic列表
+   * <p>是否从连接查询topic列表</p><p>默认值：false</p>
    */
   QueryFromConnectResource?: boolean
   /**
-   * 连接的ID
+   * <p>连接的ID</p>
    */
   ConnectResourceId?: string
   /**
-   * topic资源表达式
+   * <p>topic资源表达式</p>
    */
   TopicRegularExpression?: string
 }
@@ -6360,21 +6560,25 @@ export interface DeleteInstancePreRequest {
 }
 
 /**
- * DeleteGroupSubscribeTopic请求参数结构体
+ * ClickHouse的Schema
  */
-export interface DeleteGroupSubscribeTopicRequest {
+export interface ClickHouseSchema {
   /**
-   * ckafka集群实例Id
+   * 表的列名
    */
-  InstanceId: string
+  ColumnName: string
   /**
-   * 消费分组名称
+   * 该列对应的jsonKey名
    */
-  Group: string
+  JsonKey: string
   /**
-   * 主题名
+   * 表列项的类型
    */
-  Topic: string
+  Type: string
+  /**
+   * 列项是否允许为空
+   */
+  AllowNull: boolean
 }
 
 /**
@@ -6515,17 +6719,17 @@ export interface ModifyInstancePreResponse {
  */
 export interface CreateUserRequest {
   /**
-   * ckafka集群实例Id，可通过[DescribeInstances](https://cloud.tencent.com/document/product/597/40835)接口获取
+   * <p>ckafka集群实例Id，可通过<a href="https://cloud.tencent.com/document/product/597/40835">DescribeInstances</a>接口获取</p>
    */
   InstanceId: string
   /**
-   * 用户名称
+   * <p>用户名称</p>
    */
   Name: string
   /**
-   * 用户密码
+   * <p>用户密码</p>
    */
-  Password: string
+  Password?: string
 }
 
 /**
@@ -6778,48 +6982,6 @@ export interface ValueParam {
  * 小写字符解析
  */
 export type LowercaseParam = null
-
-/**
- * MySQL修改连接源参数
- */
-export interface MySQLModifyConnectParam {
-  /**
-   * MySQL连接源的实例资源【不支持修改】
-   */
-  Resource: string
-  /**
-   * MySQL的连接port【不支持修改】
-   */
-  Port?: number
-  /**
-   * MySQL连接源的实例vip【不支持修改】
-   */
-  ServiceVip?: string
-  /**
-   * MySQL连接源的vpcId【不支持修改】
-   */
-  UniqVpcId?: string
-  /**
-   * MySQL连接源的用户名
-   */
-  UserName?: string
-  /**
-   * MySQL连接源的密码
-   */
-  Password?: string
-  /**
-   * 是否更新到关联的Datahub任务
-   */
-  IsUpdate?: boolean
-  /**
-   * 当type为TDSQL_C_MYSQL时
-   */
-  ClusterId?: string
-  /**
-   * 是否是自建的集群
-   */
-  SelfBuilt?: boolean
-}
 
 /**
  * DescribeAccessPolicy返回参数结构体
@@ -7273,25 +7435,45 @@ export interface PostgreSQLConnectParam {
 }
 
 /**
- * 订阅信息实体
+ * MySQL修改连接源参数
  */
-export interface SubscribedInfo {
+export interface MySQLModifyConnectParam {
   /**
-   * 订阅的主题名
+   * MySQL连接源的实例资源【不支持修改】
    */
-  TopicName?: string
+  Resource: string
   /**
-   * 订阅的分区
+   * MySQL的连接port【不支持修改】
    */
-  Partition?: Array<number | bigint>
+  Port?: number
   /**
-   * 分区offset信息
+   * MySQL连接源的实例vip【不支持修改】
    */
-  PartitionOffset?: Array<PartitionOffset>
+  ServiceVip?: string
   /**
-   * 订阅的主题ID
+   * MySQL连接源的vpcId【不支持修改】
    */
-  TopicId?: string
+  UniqVpcId?: string
+  /**
+   * MySQL连接源的用户名
+   */
+  UserName?: string
+  /**
+   * MySQL连接源的密码
+   */
+  Password?: string
+  /**
+   * 是否更新到关联的Datahub任务
+   */
+  IsUpdate?: boolean
+  /**
+   * 当type为TDSQL_C_MYSQL时
+   */
+  ClusterId?: string
+  /**
+   * 是否是自建的集群
+   */
+  SelfBuilt?: boolean
 }
 
 /**
@@ -8198,28 +8380,6 @@ export interface DeleteGroupRequest {
 }
 
 /**
- * ClickHouse的Schema
- */
-export interface ClickHouseSchema {
-  /**
-   * 表的列名
-   */
-  ColumnName: string
-  /**
-   * 该列对应的jsonKey名
-   */
-  JsonKey: string
-  /**
-   * 表列项的类型
-   */
-  Type: string
-  /**
-   * 列项是否允许为空
-   */
-  AllowNull: boolean
-}
-
-/**
  * DescribeConnectResource请求参数结构体
  */
 export interface DescribeConnectResourceRequest {
@@ -8741,19 +8901,19 @@ export interface DescribeTopicProduceConnectionResponse {
  */
 export interface User {
   /**
-   * 用户id
+   * <p>用户id</p>
    */
   UserId?: number
   /**
-   * 用户名称
+   * <p>用户名称</p>
    */
   Name?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 最后更新时间
+   * <p>最后更新时间</p>
    */
   UpdateTime?: string
 }

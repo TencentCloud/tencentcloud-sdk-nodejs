@@ -1423,17 +1423,21 @@ false - 关闭
  */
 export interface SessionItem {
   /**
-   * 访问来源。
+   * <p>访问来源。</p>
    */
-  Ip: string
+  Ip?: string
   /**
-   * 当前访问来源活跃连接数
+   * <p>当前访问来源活跃连接数</p>
    */
-  ActiveConn: string
+  ActiveConn?: string
   /**
-   * 当前访问来源总连接数
+   * <p>当前访问来源总连接数</p>
    */
-  AllConn: number
+  AllConn?: number
+  /**
+   * <p>是否为内网ip</p>
+   */
+  IsInternalIp?: boolean
 }
 
 /**

@@ -692,20 +692,21 @@ export interface ValidateNamespaceExistPersonalRequest {
  */
 export interface ModifyInstanceRequest {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   RegistryId: string
   /**
-   * 实例的规格,
-基础版：basic
-标准版：standard
-高级版：premium
+   * <p>实例的规格,<br>基础版：basic<br>标准版：standard<br>高级版：premium</p>
    */
   RegistryType?: string
   /**
-   * 实例删除保护，false为关闭
+   * <p>实例删除保护，false为关闭</p>
    */
   DeletionProtection?: boolean
+  /**
+   * <p>实例是否开启多版本控制，false为关闭</p>
+   */
+  EnableCosVersioning?: boolean
 }
 
 /**

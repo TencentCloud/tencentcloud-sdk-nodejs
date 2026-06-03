@@ -260,33 +260,36 @@ export interface Role {
 }
 
 /**
- * ExportScreenPage返回参数结构体
+ * ApplyEmbedInterval请求参数结构体
  */
-export interface ExportScreenPageResponse {
+export interface ApplyEmbedIntervalRequest {
   /**
-   * 自定义错误信息对象
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分享项目id
    */
-  ErrorInfo?: ErrorInfo
+  ProjectId?: number
   /**
-   * 扩展参数
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分享页面id，嵌出看板时此为空值0，ChatBI嵌出时不传
+
    */
-  Extra?: string
+  PageId?: number
   /**
-   * 返回数据结果
-注意：此字段可能返回 null，表示取不到有效值。
+   * 需要申请延期的Token
    */
-  Data?: PageScreenListVO
+  BIToken?: string
   /**
-   * 返回消息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 备用字段
    */
-  Msg?: string
+  ExtraParam?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * embed：页面/看板嵌出
+chatBIEmbed：ChatBI嵌出
    */
-  RequestId?: string
+  Intention?: string
+  /**
+   * panel, 看板；page，页面
+project，ChatBI嵌出时
+   */
+  Scope?: string
 }
 
 /**
@@ -575,6 +578,35 @@ export interface PageScreenListVO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TranStatus?: number
+}
+
+/**
+ * DescribeSourceFieldList返回参数结构体
+ */
+export interface DescribeSourceFieldListResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * 信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 表中字段的列表
+   */
+  Data?: TableColumnListData
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -928,6 +960,52 @@ export interface DeleteUserGroupMemberRequest {
 }
 
 /**
+ * 多表关联原始表信息
+ */
+export interface JoinSourceTable {
+  /**
+   * 1:数据源原表,2:本地表,3:Excel表,4:API表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableNodeType?: number
+  /**
+   * 原始表节点Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableNodeId?: string
+  /**
+   * 父节点id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParentId?: string
+  /**
+   * 非必填, 数据源原表没有ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableId?: string
+  /**
+   * 必填,数据源原表用原始表名, 其他类型用BI的逻辑表名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
+  /**
+   * 原始表需要展示的字段列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Fields?: Array<TableField>
+  /**
+   * 数据源id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DatasourceId?: number
+  /**
+   * 非必填,前端展示的数据源别名,excel建表需要
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableAlias?: string
+}
+
+/**
  * CreateUserRoleProject请求参数结构体
  */
 export interface CreateUserRoleProjectRequest {
@@ -1076,6 +1154,27 @@ export interface DescribeUserGroupMemberPageListContainer {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalPages?: number
+}
+
+/**
+ * 表的全部列名数据列表
+ */
+export interface TableColumnListData {
+  /**
+   * 表中的列的列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  List: Array<TableColumn>
+  /**
+   * 异步事务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TranId?: string
+  /**
+   * 异步事务状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TranStatus?: number
 }
 
 /**
@@ -1236,36 +1335,33 @@ export interface UserRoleListDataRoleInfo {
 }
 
 /**
- * ApplyEmbedInterval请求参数结构体
+ * ExportScreenPage返回参数结构体
  */
-export interface ApplyEmbedIntervalRequest {
+export interface ExportScreenPageResponse {
   /**
-   * 分享项目id
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId?: number
+  ErrorInfo?: ErrorInfo
   /**
-   * 分享页面id，嵌出看板时此为空值0，ChatBI嵌出时不传
-
+   * 扩展参数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PageId?: number
+  Extra?: string
   /**
-   * 需要申请延期的Token
+   * 返回数据结果
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  BIToken?: string
+  Data?: PageScreenListVO
   /**
-   * 备用字段
+   * 返回消息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExtraParam?: string
+  Msg?: string
   /**
-   * embed：页面/看板嵌出
-chatBIEmbed：ChatBI嵌出
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Intention?: string
-  /**
-   * panel, 看板；page，页面
-project，ChatBI嵌出时
-   */
-  Scope?: string
+  RequestId?: string
 }
 
 /**
@@ -1287,6 +1383,100 @@ export interface ApiKeyAuthApplyVOList {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<ApiKeyAuthApplyVO>
+}
+
+/**
+ * CreateDataTable请求参数结构体
+ */
+export interface CreateDataTableRequest {
+  /**
+   * 后端提供字典：数据表类型，1、数据库建表，2、SQL建表，3、Excel上传，4、API接入，5、腾讯文档，6、云数据库，7、手工输入，8、关联查询
+   */
+  Type: number
+  /**
+   * 数据表名称
+   */
+  Name: string
+  /**
+   * 无
+   */
+  ProjectId: number
+  /**
+   * 所属文件夹
+   */
+  FoldId?: number
+  /**
+   * 数据源Id
+   */
+  DatasourceId?: string
+  /**
+   * 物理表名
+   */
+  TableName?: string
+  /**
+   * sql语句
+   */
+  Sql?: string
+  /**
+   * excel地址
+   */
+  ExcelUrl?: string
+  /**
+   * 字段配置
+   */
+  Fields?: Array<TableField>
+  /**
+   * 多表关联使用: 1:数据源原表,2:本地表,3:Excel表,4:API表
+   */
+  TableNodeType?: number
+  /**
+   * 多表关联的原始表信息
+   */
+  Tables?: Array<JoinSourceTable>
+  /**
+   * 多表关联的关联信息
+   */
+  Joins?: Array<JoinRelation>
+  /**
+   * 补充信息，如api数据源信息，腾讯文档接入信息等
+   */
+  ExtInfo?: string
+  /**
+   * 是否是异步
+   */
+  AsyncRequest?: boolean
+  /**
+   * 依赖的异步事务id
+   */
+  ParentTranId?: string
+  /**
+   * API数据源配置
+   */
+  ApiDatasourceConfig?: ApiDatasourceConfig
+  /**
+   * 1
+   */
+  ParamList?: Array<ParamCreateDTO>
+  /**
+   * dlc高级参数
+   */
+  DlcExtInfo?: string
+  /**
+   * 是否查询数据库
+   */
+  QueryDbData?: string
+  /**
+   * 数据表备注
+   */
+  TableComment?: string
+  /**
+   * 是否查询字段备注
+   */
+  QueryFieldRemark?: number
+  /**
+   * 字段备注列表
+   */
+  FieldRemarkList?: Array<FieldRemarkDTO>
 }
 
 /**
@@ -1773,6 +1963,36 @@ export interface CreatePermissionRanksResponse {
 }
 
 /**
+ * CreateDataTable返回参数结构体
+ */
+export interface CreateDataTableResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 成功返回数据表的id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: IdDTO
+  /**
+   * 额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * 错误提示
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateProject返回参数结构体
  */
 export interface CreateProjectResponse {
@@ -2210,6 +2430,22 @@ export interface UserIdAndUserName {
 }
 
 /**
+ * 空值展示样式配置值结构
+ */
+export interface EmptyValue {
+  /**
+   * 空值展示样式类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * 空值展示样式类型对应具体的展示字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Custom?: string
+}
+
+/**
  * DescribeUserRoleList返回参数结构体
  */
 export interface DescribeUserRoleListResponse {
@@ -2540,6 +2776,74 @@ export interface EmbedTokenInfo {
 }
 
 /**
+ * 多表关联原始表之间使用的关联字段信息
+ */
+export interface JoinRelationField {
+  /**
+   * 字段关联关系id,前端使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FieldJoinId?: string
+  /**
+   * 原表字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceField?: TableField
+  /**
+   * 目标表字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetField?: TableField
+}
+
+/**
+ * 字段备注信息
+ */
+export interface FieldRemarkDTO {
+  /**
+   * 字段名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FieldName?: string
+  /**
+   * 字段备注列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: Array<string>
+}
+
+/**
+ * 多表关联原始表之间的关联信息
+ */
+export interface JoinRelation {
+  /**
+   * 表关联关系id,前端使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JoinId?: string
+  /**
+   * 原表节点id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SourceTableNodeId?: string
+  /**
+   * 目标表节点id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetTableNodeId?: string
+  /**
+   * 多表关联的关联类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JoinType?: string
+  /**
+   * 多表关联的字段列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Fields?: Array<JoinRelationField>
+}
+
+/**
  * 创建ApiKey接口出参
  */
 export interface ApiKeyAuthApplyVO {
@@ -2593,6 +2897,127 @@ export interface DeleteAuthApiKeyRequest {
    * <p>ApiKey</p>
    */
   ApiKey: string
+}
+
+/**
+ * 表的列数据抽象
+ */
+export interface TableColumn {
+  /**
+   * 列名字
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbName?: string
+  /**
+   * 列的别名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AliasName?: string
+  /**
+   * 列的类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbType?: string
+  /**
+   * 段类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FieldType?: string
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mark?: string
+  /**
+   * excel名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExcelName?: string
+  /**
+   * 关联的字典表Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DictId?: number
+  /**
+   * 关联的字典表表名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DictName?: string
+  /**
+   * 多表关联新增字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableNodeId?: string
+  /**
+   * 字段所属的表名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
+  /**
+   * 用户设置的带格式的目标复杂格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FieldComplexType?: string
+  /**
+   * 格式规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FormatRule?: string
+  /**
+   * 数据字段是否过滤空值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsFilter?: boolean
+  /**
+   * 计算字段类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CalcType?: string
+  /**
+   * 计算字段的公式内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CalcFormula?: string
+  /**
+   * 计算字段的中文公式内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CalcDesc?: string
+  /**
+   * Api数据源json路径名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JsonPathName?: string
+  /**
+   * 地理类型标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Granularity?: string
+  /**
+   * 自定义地图Id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GeoJsonId?: number
+  /**
+   * 空值展示样式配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EmptyValueConfig?: EmptyValueConfig
+  /**
+   * 原列名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbFieldName?: string
+  /**
+   * 是否是复制字段操作
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsCopyOperation?: boolean
+  /**
+   * 是否从普通字段复制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsCopyFromNormal?: boolean
 }
 
 /**
@@ -2972,6 +3397,42 @@ export interface ClearEmbedTokenResponse {
 }
 
 /**
+ * 1
+ */
+export interface ParamCreateDTO {
+  /**
+   * 参数名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamName?: string
+  /**
+   * 默认值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultValue?: string
+  /**
+   * 参数类型，string/datetime/number
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamType?: string
+  /**
+   * 格式化类型，yyyy-MM-dd HH:mm:ss.SSS（只有时间必填）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FormatRule?: string
+  /**
+   * 复杂类型，格式化的另一种表达，例如YYYY-MM
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ComplexType?: string
+  /**
+   * 作用域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Scope?: string
+}
+
+/**
  * DescribeAuthApiKeyInfo请求参数结构体
  */
 export interface DescribeAuthApiKeyInfoRequest {
@@ -2979,6 +3440,72 @@ export interface DescribeAuthApiKeyInfoRequest {
    * <p>ApiKey</p>
    */
   ApiKey: string
+}
+
+/**
+ * DescribeSourceFieldList请求参数结构体
+ */
+export interface DescribeSourceFieldListRequest {
+  /**
+   * 数据源Id
+   */
+  DataSourceId?: number
+  /**
+   * 表名
+   */
+  TableName?: string
+  /**
+   * sql内容
+   */
+  Sql?: string
+  /**
+   * 项目id
+   */
+  ProjectId?: number
+  /**
+   * 是否是异步
+   */
+  AsyncRequest?: boolean
+  /**
+   * 异步事务id
+   */
+  TranId?: string
+  /**
+   * 11
+   */
+  ParamList?: Array<ParamCreateDTO>
+  /**
+   * DLC扩展参数
+   */
+  DlcExtInfo?: string
+  /**
+   * 是否查询数据库
+   */
+  QueryDbData?: string
+  /**
+   * 数据表 Id
+   */
+  TableId?: string
+  /**
+   * 后端提供字典：数据表类型，1、数据库建表，2、SQL建表，3、Excel上传，4、API接入，5、腾讯文档，6、云数据库，7、手工输入，8、关联查询
+   */
+  TableType?: number
+}
+
+/**
+ * 空值展示样式配置结构
+ */
+export interface EmptyValueConfig {
+  /**
+   * 数值类字段空值样式配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Number?: EmptyValue
+  /**
+   * 字符串字段空置样式配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  String?: EmptyValue
 }
 
 /**
@@ -3820,6 +4347,102 @@ export interface PermissionGroup {
 }
 
 /**
+ * API数据源连接配置
+ */
+export interface ApiDatasourceConfig {
+  /**
+   * API数据源解析结果
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FieldsJsonData?: string
+  /**
+   * 连接类型1:直连 2:抽取
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConnectionType?: number
+  /**
+   * 抽取频率配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FrequencyConfig?: FrequencyConfig
+  /**
+   * 请求URL
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+  /**
+   * 1:GET 2:POST
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestMethod?: number
+  /**
+   * 请求头
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestHeader?: string
+  /**
+   * 请求参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestParams?: string
+  /**
+   * 请求体
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RequestBody?: string
+  /**
+   * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
+  /**
+   * 密码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * 1: 无鉴权 2:BASIC_AUTH
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthorizationType?: number
+  /**
+   * 表id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableId?: number
+  /**
+   * 路径DbName映射
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JsonPathDbNameMap?: string
+  /**
+   * 鉴权API
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthApi?: string
+  /**
+   * 应用Key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppKey?: string
+  /**
+   * 应用密钥
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppSecret?: string
+  /**
+   * 数据密钥Key
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretKey?: string
+  /**
+   * 数据密钥初始化向量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretIv?: string
+}
+
+/**
  * 用户组
  */
 export interface UserGroupDTO {
@@ -4122,6 +4745,123 @@ export interface ModifyUserRoleProjectResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 表字段描述
+ */
+export interface TableField {
+  /**
+   * db里的字段column名
+   */
+  DbName: string
+  /**
+   * bi展示名
+   */
+  AliasName: string
+  /**
+   * db里的字段类型
+   */
+  DbType: string
+  /**
+   * BI归类后的抽象字段类型,比如字符串,数字,时间
+   */
+  FieldType: string
+  /**
+   * 字段组合计算公式后生成的复杂明细类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FieldComplexType?: string
+  /**
+   * 字段描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Mark?: string
+  /**
+   * 字段计算公式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FormatRule?: string
+  /**
+   * 数据字段是否过滤空值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsFilter?: boolean
+  /**
+   * 计算字段类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CalcType?: string
+  /**
+   * 计算字段的公式内容
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CalcFormula?: string
+  /**
+   * 计算字段的中文公式内容, 前端展示使用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CalcDesc?: string
+  /**
+   * 关联字典表id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DictId?: number
+  /**
+   * 关联字典表名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DictName?: string
+  /**
+   * 非必填, 多表关联新增字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableNodeId?: string
+  /**
+   * excel
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExcelName?: string
+  /**
+   * 非必填,多表关联新增字段,字段所属的表名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
+  /**
+   * api数据源路径名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JsonPathName?: string
+  /**
+   * 地理字段标识
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Granularity?: string
+  /**
+   * 地图id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GeoJsonId?: number
+  /**
+   * 空值展示样式配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EmptyValueConfig?: EmptyValueConfig
+  /**
+   * 原列名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbFieldName?: string
+  /**
+   * 是否是复制字段操作
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsCopyOperation?: boolean
+  /**
+   * 是否从普通字段复制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsCopyFromNormal?: boolean
 }
 
 /**
@@ -4767,6 +5507,47 @@ export interface DeleteUserGroupRequest {
    * <p>用户组id</p>
    */
   Id?: number
+}
+
+/**
+ * 定时任务执行频率配置
+ */
+export interface FrequencyConfig {
+  /**
+   * 周期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Frequency?: string
+  /**
+   * 日期
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Dates?: Array<number | bigint>
+  /**
+   * 时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Time?: string
+  /**
+   * 间隔时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IntervalTime?: number
+  /**
+   * 1:SECOND,2:MINUTE,3:HOUR,4:DAY
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IntervalTimeUnit?: number
+  /**
+   * 小时列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Hours?: Array<number | bigint>
+  /**
+   * 分钟列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Minute?: Array<number | bigint>
 }
 
 /**

@@ -45,6 +45,7 @@ import {
   BrokerTopicFlowData,
   Tag,
   ModifyAclRuleResponse,
+  CreateMetaDataAndOffsetSyncDatahubTaskRequest,
   RecordMapping,
   SecurityGroupRoute,
   MongoDBModifyConnectParam,
@@ -69,6 +70,7 @@ import {
   InquiryPublicNetworkParam,
   DeleteConnectResourceResponse,
   RestartDatahubTaskResponse,
+  CreateMetaAndDataSyncDatahubTaskRequest,
   BatchContent,
   ScfParam,
   DescribeTopicRequest,
@@ -126,6 +128,7 @@ import {
   FetchLatestDatahubMessageListRequest,
   PauseDatahubTaskResponse,
   CreateConnectResourceResponse,
+  SubscribedInfo,
   DescribeAccessPolicyRequest,
   InquiryDetailPrice,
   InquireCkafkaPriceResp,
@@ -135,6 +138,7 @@ import {
   DescribeSecurityGroupRoutesResponse,
   AclRule,
   DescribeACLResponse,
+  CreateMetaDataAndOffsetSyncDatahubTaskResponse,
   TopicMessageHeapRanking,
   InquireCkafkaPriceRequest,
   DescribeCkafkaZoneRequest,
@@ -153,6 +157,7 @@ import {
   CreateDatahubTaskRes,
   ModifyInstanceAttributesResponse,
   DescribeConnectInfoResultDTO,
+  CreateMetaSyncDatahubTaskRequest,
   TopicInSyncReplicaInfo,
   DescribeRegionRequest,
   DescribeGroupInfoResponse,
@@ -165,6 +170,7 @@ import {
   ModifyInstanceAttributesRequest,
   ConsumerGroupSpeed,
   CreateAclRuleResponse,
+  TableMapping,
   FetchDatahubMessageByOffsetResponse,
   DeleteDatahubTaskRequest,
   FieldParam,
@@ -203,6 +209,7 @@ import {
   FetchMessageListByTimestampResponse,
   DeleteInstancePostResponse,
   ModifyDatahubTopicRequest,
+  CreateMetaAndDataSyncDatahubTaskResponse,
   DescribeDatahubTopicsResp,
   ModifyDatahubTaskResponse,
   InstanceVersion,
@@ -249,9 +256,10 @@ import {
   DeleteInstancePostRequest,
   DescribeTopicProduceConnectionRequest,
   MariaDBParam,
+  CreateMetaSyncDatahubTaskResponse,
   SubstrParam,
   DescribeTopicSubscribeGroupRequest,
-  TableMapping,
+  DeleteGroupSubscribeTopicRequest,
   DtsModifyConnectParam,
   InstanceConfigDO,
   DeleteAclRuleResponse,
@@ -263,7 +271,7 @@ import {
   CosParam,
   ZoneResponse,
   DeleteInstancePreRequest,
-  DeleteGroupSubscribeTopicRequest,
+  ClickHouseSchema,
   ConsumerGroupTopic,
   TransformsParam,
   PauseDatahubTaskRequest,
@@ -282,7 +290,6 @@ import {
   CreatePostPaidInstanceResponse,
   ValueParam,
   LowercaseParam,
-  MySQLModifyConnectParam,
   DescribeAccessPolicyResponse,
   DatahubTaskIdRes,
   DescribeRouteResponse,
@@ -298,7 +305,7 @@ import {
   ConnectResourceResourceIdResp,
   InquiryDiskParam,
   PostgreSQLConnectParam,
-  SubscribedInfo,
+  MySQLModifyConnectParam,
   SQLServerParam,
   ReplaceParam,
   BatchCreateAclRequest,
@@ -332,7 +339,6 @@ import {
   OperateResponseData,
   ClusterInfo,
   DeleteGroupRequest,
-  ClickHouseSchema,
   DescribeConnectResourceRequest,
   DeleteRouteResponse,
   CreatePrometheusResponse,
@@ -417,6 +423,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCvmInfoResponse) => void
   ): Promise<DescribeCvmInfoResponse> {
     return this.request("DescribeCvmInfo", req, cb)
+  }
+
+  /**
+   * 连接器实例同步任务-元数据同步
+   */
+  async CreateMetaSyncDatahubTask(
+    req: CreateMetaSyncDatahubTaskRequest,
+    cb?: (error: string, rep: CreateMetaSyncDatahubTaskResponse) => void
+  ): Promise<CreateMetaSyncDatahubTaskResponse> {
+    return this.request("CreateMetaSyncDatahubTask", req, cb)
   }
 
   /**
@@ -577,6 +593,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstancesDetailResponse) => void
   ): Promise<DescribeInstancesDetailResponse> {
     return this.request("DescribeInstancesDetail", req, cb)
+  }
+
+  /**
+   * 连接器实例同步任务-同步元数据、消息数据、消费微点
+   */
+  async CreateMetaDataAndOffsetSyncDatahubTask(
+    req: CreateMetaDataAndOffsetSyncDatahubTaskRequest,
+    cb?: (error: string, rep: CreateMetaDataAndOffsetSyncDatahubTaskResponse) => void
+  ): Promise<CreateMetaDataAndOffsetSyncDatahubTaskResponse> {
+    return this.request("CreateMetaDataAndOffsetSyncDatahubTask", req, cb)
+  }
+
+  /**
+   * 连接器实例同步任务-元数据、消息同步
+   */
+  async CreateMetaAndDataSyncDatahubTask(
+    req: CreateMetaAndDataSyncDatahubTaskRequest,
+    cb?: (error: string, rep: CreateMetaAndDataSyncDatahubTaskResponse) => void
+  ): Promise<CreateMetaAndDataSyncDatahubTaskResponse> {
+    return this.request("CreateMetaAndDataSyncDatahubTask", req, cb)
   }
 
   /**

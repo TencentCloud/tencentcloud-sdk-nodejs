@@ -523,7 +523,7 @@ export interface CreateInstancesRequest {
    */
   AlarmPolicyList?: Array<string>
   /**
-   * <p>是否加密密码</p>
+   * <p>是否启用密码加密传输。</p><ul><li>true：加密。</li><li>false：不加密（默认值）。</li></ul>
    */
   EncryptPassword?: boolean
 }
@@ -2411,44 +2411,35 @@ export interface DescribeProductInfoResponse {
  */
 export interface ModifyInstanceAccountRequest {
   /**
-   * 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。
+   * <p>实例 ID，请登录<a href="https://console.cloud.tencent.com/redis/instance/list">Redis控制台</a>在实例列表复制实例 ID。</p>
    */
   InstanceId: string
   /**
-   * 指定需修改的账号。
-- root：指在创建 Redis 数据库实例时自动生成的账号。用户无法修改其读写权限，仅可修改其请求路由策略。
-- 自定义的账号：用户在实例创建成功后手动创建的账号。用户可以随时修改其读写权限与请求路由策略。
+   * <p>指定需修改的账号。</p><ul><li>root：指在创建 Redis 数据库实例时自动生成的账号。用户无法修改其读写权限，仅可修改其请求路由策略。</li><li>自定义的账号：用户在实例创建成功后手动创建的账号。用户可以随时修改其读写权限与请求路由策略。</li></ul>
    */
   AccountName: string
   /**
-   * 指定所修改账号访问的密码。
+   * <p>指定所修改账号访问的密码。</p>
    */
   AccountPassword?: string
   /**
-   * 账号描述信息
+   * <p>账号描述信息</p>
    */
   Remark?: string
   /**
-   * 指定所修改账号读写请求路由的策略。
-- master：表示读写请求路由至主节点。
-- replication：表示读写请求路由至从节点。
+   * <p>指定所修改账号读写请求路由的策略。</p><ul><li>master：表示读写请求路由至主节点。</li><li>replication：表示读写请求路由至从节点。</li></ul>
    */
   ReadonlyPolicy?: Array<string>
   /**
-   * 指定所修改账号的读写权限。
-- r：只读。
-- w：只写。
-- rw：读写。
+   * <p>指定所修改账号的读写权限。</p><ul><li>r：只读。</li><li>w：只写。</li><li>rw：读写。</li></ul>
    */
   Privilege?: string
   /**
-   * 指定是否将默认账号（root）设置为免密账号。自定义账号不支持免密访问。
-- true：默认账号（root）设置为免密账号。
-- false：默认账号（root）不设置为免密账号。
+   * <p>指定是否将默认账号（root）设置为免密账号。自定义账号不支持免密访问。</p><ul><li>true：默认账号（root）设置为免密账号。</li><li>false：默认账号（root）不设置为免密账号。</li></ul>
    */
   NoAuth?: boolean
   /**
-   * 指定所修改的账号是否加密密码
+   * <p>是否启用密码加密传输。</p><ul><li>true：加密。</li><li>false：不加密（默认值）。</li></ul>
    */
   EncryptPassword?: boolean
 }
@@ -2748,7 +2739,7 @@ export interface ResetPasswordRequest {
  */
 export interface ModifyInstanceAccountResponse {
   /**
-   * 任务ID。
+   * <p>任务ID。</p>
    */
   TaskId?: number
   /**
@@ -4208,41 +4199,31 @@ export interface LogResult {
  */
 export interface CreateInstanceAccountRequest {
   /**
-   * 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
+   * <p>实例 ID，请登录<a href="https://console.cloud.tencent.com/redis">Redis控制台</a>在实例列表复制实例 ID。</p>
    */
   InstanceId: string
   /**
-   * 自定义的访问数据库的账号名称。
-- 仅由字母、数字、下划线、中划线组成。
-- 长度不能大于32位。
+   * <p>自定义的访问数据库的账号名称。</p><ul><li>仅由字母、数字、下划线、中划线组成。</li><li>长度不能大于32位。</li></ul>
    */
   AccountName: string
   /**
-   * 设置自定义账号的密码。密码复杂度要求如下：
-- 字符个数为[8,64]。
-- 至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的两种。
-- 不能以"/"开头。
-
+   * <p>设置自定义账号的密码。密码复杂度要求如下：</p><ul><li>字符个数为[8,64]。</li><li>至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/ 中的两种。</li><li>不能以&quot;/&quot;开头。</li></ul>
    */
   AccountPassword: string
   /**
-   * 指定账号的读请求路由分发至主节点或副本节点。未开启副本只读，不支持选择副本节点。
-- master：主节点
-- replication：副本节点
+   * <p>指定账号的读请求路由分发至主节点或副本节点。未开启副本只读，不支持选择副本节点。</p><ul><li>master：主节点</li><li>replication：副本节点</li></ul>
    */
   ReadonlyPolicy: Array<string>
   /**
-   * 账户读写权限，支持选择只读与读写权限。
-- r：只读。
-- rw: 读写。
+   * <p>账户读写权限，支持选择只读与读写权限。</p><ul><li>r：只读。</li><li>rw: 读写。</li></ul>
    */
   Privilege: string
   /**
-   * 账号备注描述信息，长度为[0,64] 字节，支持中文。
+   * <p>账号备注描述信息，长度为[0,64] 字节，支持中文。</p>
    */
   Remark?: string
   /**
-   * 是否加密密码
+   * <p>是否启用密码加密传输。</p><ul><li>true：加密。</li><li>false：不加密（默认值）。</li></ul>
    */
   EncryptPassword?: boolean
 }
@@ -6246,267 +6227,248 @@ export interface ModifyInstanceBackupModeRequest {
  */
 export interface InstanceSet {
   /**
-   * 实例名称。
+   * <p>实例名称。</p>
    */
   InstanceName?: string
   /**
-   * 实例 ID。
+   * <p>实例 ID。</p>
    */
   InstanceId?: string
   /**
-   * 用户AppId。AppId是与账号ID有唯一对应关系的应用 ID，部分腾讯云产品会使用此 AppId。
-
+   * <p>用户AppId。AppId是与账号ID有唯一对应关系的应用 ID，部分腾讯云产品会使用此 AppId。</p>
    */
   Appid?: number
   /**
-   * 项目 ID。
+   * <p>项目 ID。</p>
    */
   ProjectId?: number
   /**
-   * 地域 ID。<ul><li>1：广州。</li><li>4：上海。</li><li>5：中国香港。</li><li>7：上海金融。</li> <li>8：北京。</li> <li>9：新加坡。</li> <li>11：深圳金融。</li> <li>15：美西（硅谷）。</li><li>16：成都。</li><li>17：法兰克福。</li><li>18：首尔。</li><li>19：重庆。</li><li>22：美东（弗吉尼亚）。</li><li>23：曼谷。</li><li>25：东京。</li></ul>
+   * <p>地域 ID。<ul><li>1：广州。</li><li>4：上海。</li><li>5：中国香港。</li><li>7：上海金融。</li> <li>8：北京。</li> <li>9：新加坡。</li> <li>11：深圳金融。</li> <li>15：美西（硅谷）。</li><li>16：成都。</li><li>17：法兰克福。</li><li>18：首尔。</li><li>19：重庆。</li><li>22：美东（弗吉尼亚）。</li><li>23：曼谷。</li><li>25：东京。</li></ul></p>
    */
   RegionId?: number
   /**
-   * 区域 ID。
+   * <p>区域 ID。</p>
    */
   ZoneId?: number
   /**
-   * vpc网络 ID，例如75101。
+   * <p>vpc网络 ID，例如75101。</p>
    */
   VpcId?: number
   /**
-   * vpc网络下子网ID，如：46315。
+   * <p>vpc网络下子网ID，如：46315。</p>
    */
   SubnetId?: number
   /**
-   * 实例当前状态。<ul><li>0：待初始化。</li><li>1：实例在流程中。</li><li>2：实例运行中。</li><li>-2：实例已隔离。</li><li>-3：实例待删除。</li></ul>
+   * <p>实例当前状态。<ul><li>0：待初始化。</li><li>1：实例在流程中。</li><li>2：实例运行中。</li><li>-2：实例已隔离。</li><li>-3：实例待删除。</li></ul></p>
    */
   Status?: number
   /**
-   * 实例 VIP。
+   * <p>实例 VIP。</p>
    */
   WanIp?: string
   /**
-   * 实例端口号。
+   * <p>实例端口号。</p>
    */
   Port?: number
   /**
-   * 实例创建时间。格式如：2020-01-15 10:20:00。
+   * <p>实例创建时间。格式如：2020-01-15 10:20:00。</p>
    */
   Createtime?: string
   /**
-   * 实例内存容量大小。单位：MB，1MB=1024KB。
+   * <p>实例内存容量大小。单位：MB，1MB=1024KB。</p>
    */
   Size?: number
   /**
-   * 该字段已废弃。请使用腾讯云可观测平台API 接口 [GetMonitorData](https://cloud.tencent.com/document/product/248/31014) 获取实例已使用的内存容量。
+   * <p>该字段已废弃。请使用腾讯云可观测平台API 接口 <a href="https://cloud.tencent.com/document/product/248/31014">GetMonitorData</a> 获取实例已使用的内存容量。</p>
    * @deprecated
    */
   SizeUsed?: number
   /**
-   * 实例类型。
-- 2：Redis 2.8 内存版（标准架构）。
-- 3：CKV 3.2 内存版（标准架构）。
-- 4：CKV 3.2 内存版（集群架构）。
-- 5：Redis 2.8 内存版（单机）。
-- 6：Redis 4.0 内存版（标准架构）。
-- 7：Redis 4.0 内存版（集群架构）。
-- 8：Redis 5.0 内存版（标准架构）。
-- 9：Redis 5.0 内存版（集群架构）。
-- 15：Redis 6.2 内存版（标准架构）。
-- 16：Redis 6.2 内存版（集群架构）。
-- 17：Redis 7.0 内存版（标准架构）。
-- 18：Redis 7.0 内存版（集群架构）。
-- 200:Memcached 1.6 内存版（集群架构）。
+   * <p>实例类型。</p><p>枚举值：</p><ul><li>2： Redis 2.8 内存版（标准架构）。</li><li>3： CKV 3.2 内存版（标准架构）。</li><li>4： CKV 3.2 内存版（集群架构）。</li><li>5： Redis 2.8 内存版（单机）。</li><li>6： Redis 4.0 内存版（标准架构）。</li><li>7： Redis 4.0 内存版（集群架构）。</li><li>8： Redis 5.0 内存版（标准架构）。</li><li>9： Redis 5.0 内存版（集群架构）。</li><li>15： Redis 6.2 内存版（标准架构）。</li><li>16： Redis 6.2 内存版（集群架构）。</li><li>17： Redis 7.0 内存版（标准架构）。</li><li>18： Redis 7.0 内存版（集群架构）。</li><li>19： Valkey 8.0 内存版（标准架构）。</li><li>20： Valkey 8.0 内存版（集群架构）。</li><li>200： Memcached 1.6 内存版（集群架构）。</li></ul>
    */
   Type?: number
   /**
-   * 实例是否设置自动续费标识。<ul><li>1：设置自动续费。</li><li>0：未设置自动续费。</li></ul>
+   * <p>实例是否设置自动续费标识。<ul><li>1：设置自动续费。</li><li>0：未设置自动续费。</li></ul></p>
    */
   AutoRenewFlag?: number
   /**
-   * 包年包月计费实例到期的时间。
+   * <p>包年包月计费实例到期的时间。</p>
    */
   DeadlineTime?: string
   /**
-   * 引擎：社区版Redis、腾讯云CKV。
+   * <p>引擎：社区版Redis、腾讯云CKV。</p>
    */
   Engine?: string
   /**
-   * 产品类型。<ul><li>standalone：标准版。</li><li>cluster ：集群版。</li></ul>
+   * <p>产品类型。<ul><li>standalone：标准版。</li><li>cluster ：集群版。</li></ul></p>
    */
   ProductType?: string
   /**
-   * vpc网络id，例如vpc-fk33jsf43kgv。
+   * <p>vpc网络id，例如vpc-fk33jsf43kgv。</p>
    */
   UniqVpcId?: string
   /**
-   * vpc网络下子网id，例如：subnet-fd3j6l35mm0。
+   * <p>vpc网络下子网id，例如：subnet-fd3j6l35mm0。</p>
    */
   UniqSubnetId?: string
   /**
-   * 计费模式。<ul><li>0：按量计费。</li><li>1：包年包月。</li></ul>
+   * <p>计费模式。<ul><li>0：按量计费。</li><li>1：包年包月。</li></ul></p>
    */
   BillingMode?: number
   /**
-   * 实例运行状态描述：如”实例运行中“。
+   * <p>实例运行状态描述：如”实例运行中“。</p>
    */
   InstanceTitle?: string
   /**
-   * 已隔离实例默认下线时间。按量计费实例隔离后默认两小时后下线，包年包月默认7天后下线。格式如：2020-02-15 10:20:00。
+   * <p>已隔离实例默认下线时间。按量计费实例隔离后默认两小时后下线，包年包月默认7天后下线。格式如：2020-02-15 10:20:00。</p>
    */
   OfflineTime?: string
   /**
-   * 流程中的实例返回的子状态。
-- 0：磁盘读写状态。
-- 1：磁盘超限只读状态。
+   * <p>流程中的实例返回的子状态。</p><ul><li>0：磁盘读写状态。</li><li>1：磁盘超限只读状态。</li></ul>
    */
   SubStatus?: number
   /**
-   * 反亲和性标签。
+   * <p>反亲和性标签。</p>
    */
   Tags?: Array<string>
   /**
-   * 实例节点信息。
+   * <p>实例节点信息。</p>
    */
   InstanceNode?: Array<InstanceNode>
   /**
-   * 分片大小。
+   * <p>分片大小。</p>
    */
   RedisShardSize?: number
   /**
-   * 分片数量。
+   * <p>分片数量。</p>
    */
   RedisShardNum?: number
   /**
-   * 副本数量。
+   * <p>副本数量。</p>
    */
   RedisReplicasNum?: number
   /**
-   * 计费 ID。
+   * <p>计费 ID。</p>
    */
   PriceId?: number
   /**
-   * 实例隔离开始的时间。
+   * <p>实例隔离开始的时间。</p>
    */
   CloseTime?: string
   /**
-   * 从节点读取权重。
-- 0：表示关闭副本只读。
-- 100：表示开启副本只读。
+   * <p>从节点读取权重。</p><ul><li>0：表示关闭副本只读。</li><li>100：表示开启副本只读。</li></ul>
    */
   SlaveReadWeight?: number
   /**
-   * 实例关联的标签信息。
+   * <p>实例关联的标签信息。</p>
    */
   InstanceTags?: Array<InstanceTagInfo>
   /**
-   * 项目名称。
+   * <p>项目名称。</p>
    */
   ProjectName?: string
   /**
-   * 是否为免密实例。<ul><li>true：免密实例。</li><li>false：非免密实例。</li></ul>
+   * <p>是否为免密实例。<ul><li>true：免密实例。</li><li>false：非免密实例。</li></ul></p>
    */
   NoAuth?: boolean
   /**
-   * 客户端连接数。
+   * <p>客户端连接数。</p>
    */
   ClientLimit?: number
   /**
-   * DTS状态（内部参数，用户可忽略）。
+   * <p>DTS状态（内部参数，用户可忽略）。</p>
    */
   DtsStatus?: number
   /**
-   * 分片带宽上限，单位MB。
+   * <p>分片带宽上限，单位MB。</p>
    */
   NetLimit?: number
   /**
-   * 免密实例标识（内部参数，用户可忽略）。
+   * <p>免密实例标识（内部参数，用户可忽略）。</p>
    */
   PasswordFree?: number
   /**
-   * 该参数存在命名不规范问题，建议用参数IPv6取代。内部参数，用户可忽略。
+   * <p>该参数存在命名不规范问题，建议用参数IPv6取代。内部参数，用户可忽略。</p>
    */
   Vip6?: string
   /**
-   * 内部参数，用户可忽略。
+   * <p>内部参数，用户可忽略。</p>
    */
   IPv6?: string
   /**
-   * 实例只读标识（内部参数，用户可忽略）。
+   * <p>实例只读标识（内部参数，用户可忽略）。</p>
    */
   ReadOnly?: number
   /**
-   * 内部参数，用户可忽略。
+   * <p>内部参数，用户可忽略。</p>
    */
   RemainBandwidthDuration?: string
   /**
-   * Redis实例请忽略该参数。
+   * <p>Redis实例请忽略该参数。</p>
    */
   DiskSize?: number
   /**
-   * 监控版本。<ul><li>1m：1分钟粒度监控。目前该监控粒度已下线，具体信息，请参见[云数据库 Redis 1分钟粒度下线公告](https://cloud.tencent.com/document/product/239/80653)。</li><li>5s：5秒粒度监控。</li></ul>
+   * <p>监控版本。<ul><li>1m：1分钟粒度监控。目前该监控粒度已下线，具体信息，请参见<a href="https://cloud.tencent.com/document/product/239/80653">云数据库 Redis 1分钟粒度下线公告</a>。</li><li>5s：5秒粒度监控。</li></ul></p>
    */
   MonitorVersion?: string
   /**
-   * 客户端最大连接数可设置的最小值。
+   * <p>客户端最大连接数可设置的最小值。</p>
    */
   ClientLimitMin?: number
   /**
-   * 客户端最大连接数可设置的最大值。
+   * <p>客户端最大连接数可设置的最大值。</p>
    */
   ClientLimitMax?: number
   /**
-   * 实例的节点详细信息。
-只有多可用区实例会返回。
+   * <p>实例的节点详细信息。<br>只有多可用区实例会返回。</p>
    */
   NodeSet?: Array<RedisNodeInfo>
   /**
-   * 实例所在的地域信息，比如ap-guangzhou。
+   * <p>实例所在的地域信息，比如ap-guangzhou。</p>
    */
   Region?: string
   /**
-   * 外网地址。
+   * <p>外网地址。</p>
    */
   WanAddress?: string
   /**
-   * 北极星服务地址，内部使用。
+   * <p>北极星服务地址，内部使用。</p>
    */
   PolarisServer?: string
   /**
-   * CDC Redis集群ID。
+   * <p>CDC Redis集群ID。</p>
    */
   RedisClusterId?: string
   /**
-   * CDC 集群ID。
+   * <p>CDC 集群ID。</p>
    */
   DedicatedClusterId?: string
   /**
-   * 产品版本。<ul><li>local：本地盘。</li><li>cloud：云盘版。</li><li>cdc：CDC 集群版本。</li></ul>
+   * <p>产品版本。<ul><li>local：本地盘。</li><li>cloud：云盘版。</li><li>cdc：CDC 集群版本。</li></ul></p>
    */
   ProductVersion?: string
   /**
-   * 实例当前Proxy版本。
+   * <p>实例当前Proxy版本。</p>
    */
   CurrentProxyVersion?: string
   /**
-   * 实例当前Cache小版本。如果实例加入全球复制组，显示全球复制的内核版本。
+   * <p>实例当前Cache小版本。如果实例加入全球复制组，显示全球复制的内核版本。</p>
    */
   CurrentRedisVersion?: string
   /**
-   * 实例可升级Proxy版本。
+   * <p>实例可升级Proxy版本。</p>
    */
   UpgradeProxyVersion?: string
   /**
-   * 实例可升级Cache小版本。
+   * <p>实例可升级Cache小版本。</p>
    */
   UpgradeRedisVersion?: string
   /**
-   * 备份模式：- SecondLevelBackup   秒级备份- NormalLevelBackup    普通备份
+   * <p>备份模式。</p><ul><li>SecondLevelBackup：秒级备份。</li><li>NormalLevelBackup：普通备份。</li></ul>
    */
   BackupMode?: string
   /**
-   * 删除保护开关，0关闭，1开启
+   * <p>实例销毁保护开关。</p><ul><li>0：关闭。</li><li>1：开启。</li></ul>
    */
   DeleteProtectionSwitch?: number
 }
@@ -6869,7 +6831,7 @@ export interface InstanceEnumParam {
  */
 export interface CreateInstanceAccountResponse {
   /**
-   * 任务ID。
+   * <p>任务ID。</p>
    */
   TaskId?: number
   /**

@@ -666,21 +666,25 @@ export interface AssetTag {
  */
 export interface DescribeCheckViewRisksResponse {
   /**
-   * 检查视角下风险数量
+   * <p>检查视角下风险数量</p>
    */
   TotalCount?: number
   /**
-   * 检查视角下风险列表
+   * <p>检查视角下风险列表</p>
    */
   CheckViewRiskList?: Array<CheckViewRiskItem>
   /**
-   * 检查视角下cspm规范标签列表
+   * <p>检查视角下cspm规范标签列表</p>
    */
   StandardNameList?: Array<StandardItem>
   /**
-   * 资产类型集合
+   * <p>资产类型集合</p>
    */
   AssetTypeList?: Array<AttributeOptionSet>
+  /**
+   * <p>云厂商类型集合</p>
+   */
+  ProviderList?: Array<AttributeOptionSet>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4782,25 +4786,29 @@ export interface RepositoryImageVO {
  */
 export interface DescribeRiskRuleDetailResponse {
   /**
-   * 风险规则ID
+   * <p>风险规则ID</p>
    */
   RiskRuleId?: string
   /**
-   * 云厂商
+   * <p>云厂商</p>
    */
   Provider?: string
   /**
-   * 风险名称
+   * <p>风险名称</p>
    */
   RiskName?: string
   /**
-   * 风险危害
+   * <p>风险危害</p>
    */
   RiskInfluence?: string
   /**
-   * 修复指引
+   * <p>修复指引</p>
    */
   RiskFixAdvice?: string
+  /**
+   * <p>资产类型</p>
+   */
+  AssetType?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10886,7 +10894,7 @@ export interface CosAccessInfo {
  */
 export interface DescribeRiskRuleDetailRequest {
   /**
-   * 风险规则ID
+   * <p>风险规则ID</p>
    */
   RiskRuleId: string
 }
@@ -14904,23 +14912,23 @@ export interface DescribeCheckViewRisksRequest {
    */
   MemberId?: Array<string>
   /**
-   * 过滤内容
+   * <p>过滤内容</p>
    */
   Filters?: Array<Filters>
   /**
-   * 分页大小
+   * <p>分页大小</p>
    */
   Limit?: number
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset?: number
   /**
-   * 排序类型
+   * <p>排序类型</p>
    */
   Order?: string
   /**
-   * 排序字段
+   * <p>排序字段</p>
    */
   By?: string
 }
@@ -15587,6 +15595,10 @@ export interface AssetRiskItem {
    * <p>资产类型图标</p>
    */
   AssetTypeIconURL?: string
+  /**
+   * <p>资产类型</p>
+   */
+  AssetTypeName?: string
 }
 
 /**
@@ -17379,6 +17391,10 @@ export interface RiskDetailItem {
    * <p>用户AppID</p>
    */
   AppID?: number
+  /**
+   * <p>资产类型</p>
+   */
+  AssetType?: string
 }
 
 /**

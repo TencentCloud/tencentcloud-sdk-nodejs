@@ -3650,6 +3650,36 @@ export interface CreateAdaptiveDynamicStreamingTemplateRequest {
 }
 
 /**
+ * LLM 大模型单个检测项的聚合结果
+ */
+export interface LLMDetectionResultItem {
+  /**
+   * <p>检测分类。</p><p>枚举值：</p><ul><li>AIGCQualityCharacteristics： AIGC 质量特征</li></ul>
+   */
+  Category?: string
+  /**
+   * <p>检测分组。</p><p>枚举值：</p><ul><li>AIGCAuthenticity： AIGC 真实性，包括人体合理性、物理合理性、跨帧一致性等</li><li>AIGCTechQuality： AIGC 技术质量，包括画幅、黑边、强行竖屏等</li></ul>
+   */
+  Group?: string
+  /**
+   * <p>检测类型名称。</p><p>枚举值：</p><ul><li>BodyPoseCheck： 人体姿态合理性，属于 AIGCAuthenticity</li><li>BodyDetailCheck： 人体细节合理性，包括手指数、五官对称等，属于 AIGCAuthenticity</li><li>PhysicRulesCheck： 物理规律合理性，包括透视、光影、重力等，属于 AIGCAuthenticity</li><li>ObjectConsistencyCheck： 跨帧物体一致性，属于 AIGCAuthenticity</li><li>FormatCheck： 画幅、黑边、强行竖屏等格式问题，属于 AIGCTechQuality</li></ul>
+   */
+  Type?: string
+  /**
+   * <p>整体质量得分，范围 [0, 100]，越高越好。</p>
+   */
+  Score?: number
+  /**
+   * <p>判断置信度，范围 [0, 100]，越高表示越确定。</p>
+   */
+  Confidence?: number
+  /**
+   * <p>检测发现的问题列表，无问题时为空。</p>
+   */
+  IssueSet?: Array<LLMDetectionIssue>
+}
+
+/**
  * CreateProcessImageTemplate返回参数结构体
  */
 export interface CreateProcessImageTemplateResponse {
@@ -6849,6 +6879,40 @@ export interface ModifyStreamPackageSSAIChannelResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * LLM 大模型检测发现的单条问题
+ */
+export interface LLMDetectionIssue {
+  /**
+   * <p>问题分类标签。</p>
+   */
+  Tag?: string
+  /**
+   * <p>问题描述。</p>
+   */
+  Description?: string
+  /**
+   * <p>该问题的质量得分，范围 [0, 100]。</p>
+   */
+  Score?: number
+  /**
+   * <p>该问题的判断置信度，范围 [0, 100]。</p>
+   */
+  Confidence?: number
+  /**
+   * <p>问题起始时间（毫秒）。</p>
+   */
+  StartTimeMs?: number
+  /**
+   * <p>问题结束时间（毫秒）</p>
+   */
+  EndTimeMs?: number
+  /**
+   * <p>附加数据（JSON 格式），如严重程度等补充信息。</p>
+   */
+  ExtraData?: string
 }
 
 /**
@@ -21628,6 +21692,10 @@ export interface QualityControlData {
    * <p>格式诊断检出异常项。</p>
    */
   ContainerDiagnoseResultSet?: Array<ContainerDiagnoseResultItem>
+  /**
+   * <p>LLM大模型AIGC质量检测结果。</p>
+   */
+  LLMDetectionReport?: LLMDetectionReport
 }
 
 /**
@@ -22402,6 +22470,20 @@ export interface DescribeSmartSubtitleTemplatesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * LLM 大模型检测结果报告
+ */
+export interface LLMDetectionReport {
+  /**
+   * <p>检测结果数量。</p>
+   */
+  ResultCount?: number
+  /**
+   * <p>各检测项结果列表。</p>
+   */
+  ResultSet?: Array<LLMDetectionResultItem>
 }
 
 /**

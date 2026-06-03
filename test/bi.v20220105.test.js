@@ -358,6 +358,16 @@ it("bi.v20220105.ClearEmbedToken", async function () {
     }
 })
 
+it("bi.v20220105.CreateDataTable", async function () {
+    try {
+       const data = await client.CreateDataTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bi.v20220105.DescribeUserGroupMemberList", async function () {
     try {
        const data = await client.DescribeUserGroupMemberList({})
@@ -371,6 +381,16 @@ it("bi.v20220105.DescribeUserGroupMemberList", async function () {
 it("bi.v20220105.CreateUserRoleProject", async function () {
     try {
        const data = await client.CreateUserRoleProject({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.DescribeSourceFieldList", async function () {
+    try {
+       const data = await client.DescribeSourceFieldList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
