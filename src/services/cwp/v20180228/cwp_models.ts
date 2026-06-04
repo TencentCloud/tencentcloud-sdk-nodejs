@@ -23073,148 +23073,149 @@ export interface ModifyLoginWhiteInfoResponse {
  */
 export interface Machine {
   /**
-   * 主机名称。
+   * <p>主机名称。</p>
    */
   MachineName?: string
   /**
-   * 主机系统。
+   * <p>主机系统。</p>
    */
   MachineOs?: string
   /**
-   * 主机状态。 <li>OFFLINE: 离线 </li> <li>ONLINE: 在线</li> <li>SHUTDOWN: 已关机</li> <li>UNINSTALLED: 未防护</li>
+   * <p>主机状态。 <li>OFFLINE: 离线 </li> <li>ONLINE: 在线</li> <li>SHUTDOWN: 已关机</li> <li>UNINSTALLED: 未防护</li></p>
    */
   MachineStatus?: string
   /**
-   * ONLINE 防护中; OFFLINE 已离线;UNINStALLED 未安装
+   * <p>ONLINE 防护中; OFFLINE 已离线;UNINStALLED 未安装</p>
    */
   AgentStatus?: string
   /**
-   * RUNNING 运行中; STOPED 已关机; EXPIRED 待回收
+   * <p>RUNNING 运行中; STOPED 已关机; EXPIRED 待回收</p>
    */
   InstanceStatus?: string
   /**
-   * 主机安全Uuid，若客户端长时间不在线将返回空字符。
+   * <p>主机安全Uuid，若客户端长时间不在线将返回空字符。</p>
    */
   Uuid?: string
   /**
-   * CVM或BM机器唯一Uuid。
+   * <p>CVM或BM机器唯一Uuid。</p>
    */
   Quuid?: string
   /**
-   * 漏洞数。
+   * <p>漏洞数。</p>
    */
   VulNum?: number
   /**
-   * 主机IP。
+   * <p>主机IP。</p>
    */
   MachineIp?: string
   /**
-   * 是否是专业版。
-<li>true： 是</li>
-<li>false：否</li>
+   * <p>是否是专业版。</p><li>true： 是</li><li>false：否</li>
    */
   IsProVersion?: boolean
   /**
-   * 主机外网IP。
+   * <p>主机外网IP。</p>
    */
   MachineWanIp?: string
   /**
-   * 主机状态。
-<li>POSTPAY: 表示后付费，即按量计费  </li>
-<li>PREPAY: 表示预付费，即包年包月</li>
+   * <p>主机状态。</p><li>POSTPAY: 表示后付费，即按量计费  </li><li>PREPAY: 表示预付费，即包年包月</li>
    */
   PayMode?: string
   /**
-   * 木马数。
+   * <p>木马数。</p>
    */
   MalwareNum?: number
   /**
-   * 标签信息
+   * <p>标签信息</p>
    */
   Tag?: Array<MachineTag>
   /**
-   * 基线风险数。
+   * <p>基线风险数。</p>
    */
   BaselineNum?: number
   /**
-   * 网络风险数。
+   * <p>网络风险数。</p>
    */
   CyberAttackNum?: number
   /**
-   * 风险状态。
-<li>SAFE：安全</li>
-<li>RISK：风险</li>
-<li>UNKNOWN：未知</li>
+   * <p>风险状态。</p><li>SAFE：安全</li><li>RISK：风险</li><li>UNKNOWN：未知</li>
    */
   SecurityStatus?: string
   /**
-   * 入侵事件数
+   * <p>入侵事件数</p>
    */
   InvasionNum?: number
   /**
-   * 地域信息
+   * <p>地域信息</p>
    */
   RegionInfo?: RegionInfo
   /**
-   * 实例状态 TERMINATED_PRO_VERSION 已销毁
+   * <p>实例状态 TERMINATED_PRO_VERSION 已销毁</p>
    */
   InstanceState?: string
   /**
-   * 防篡改 授权状态 1 授权 0 未授权
+   * <p>防篡改 授权状态 1 授权 0 未授权</p>
    */
   LicenseStatus?: number
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId?: number
   /**
-   * 是否有资产扫描接口，0无，1有
+   * <p>是否有资产扫描接口，0无，1有</p>
    */
   HasAssetScan?: number
   /**
-   * 机器所属专区类型 CVM 云服务器, BM 黑石, ECM 边缘计算, LH 轻量应用服务器 ,Other 混合云专区
+   * <p>机器所属专区类型 CVM 云服务器, BM 黑石, ECM 边缘计算, LH 轻量应用服务器 ,Other 混合云专区</p>
    */
   MachineType?: string
   /**
-   * 内核版本
+   * <p>内核版本</p>
    */
   KernelVersion?: string
   /**
-   * 防护版本：BASIC_VERSION 基础版， PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 轻量版
+   * <p>防护版本：BASIC_VERSION 基础版， PRO_VERSION 专业版，Flagship 旗舰版，GENERAL_DISCOUNT 轻量版</p>
    */
   ProtectType?: string
   /**
-   * 云标签信息
+   * <p>云标签信息</p>
    */
   CloudTags?: Array<Tags>
   /**
-   * 是否15天内新增的主机 0：非15天内新增的主机，1：15天内增加的主机
+   * <p>是否15天内新增的主机 0：非15天内新增的主机，1：15天内增加的主机</p>
    */
   IsAddedOnTheFifteen?: number
   /**
-   * 主机ip列表
+   * <p>主机ip列表</p>
    */
   IpList?: string
   /**
-   * 所属网络
+   * <p>所属网络</p>
    */
   VpcId?: string
   /**
-   * 附加信息
+   * <p>附加信息</p>
    */
   MachineExtraInfo?: MachineExtraInfo
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 备注信息
+   * <p>备注信息</p>
    */
   Remark?: string
   /**
-   * 主机安全agent版本
+   * <p>主机安全agent版本</p>
    */
   AgentVersion?: string
+  /**
+   * <p>机器对应APPID</p>
+   */
+  AppId?: number
+  /**
+   * <p>安全中心付费版本</p>
+   */
+  CSIPProtectType?: string
 }
 
 /**

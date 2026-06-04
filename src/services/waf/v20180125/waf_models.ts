@@ -9562,25 +9562,29 @@ export interface SwitchDomainRulesResponse {
  */
 export interface QpsData {
   /**
-   * 弹性qps默认值
+   * <p>弹性qps默认值</p>
    */
   ElasticBillingDefault?: number
   /**
-   * 弹性qps最小值
+   * <p>弹性qps最小值</p>
    */
   ElasticBillingMin?: number
   /**
-   * 弹性qps最大值
+   * <p>弹性qps最大值</p>
    */
   ElasticBillingMax?: number
   /**
-   * 业务扩展包最大qps
+   * <p>业务扩展包最大qps</p>
    */
   QPSExtendMax?: number
   /**
-   * 境外业务扩展包最大qps
+   * <p>境外业务扩展包最大qps</p>
    */
   QPSExtendIntlMax?: number
+  /**
+   * <p>预付费/后付费QPS扩容比</p>
+   */
+  ElasticPrepaidRatio?: number
 }
 
 /**

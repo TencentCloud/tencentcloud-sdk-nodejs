@@ -1358,11 +1358,11 @@ export interface CreateRedisBigKeyAnalysisTaskRequest {
  */
 export interface DescribeMySqlProcessListResponse {
   /**
-   * 实时线程列表。
+   * <p>实时线程列表。</p>
    */
   ProcessList?: Array<MySqlProcess>
   /**
-   * sql会话统计信息。如果请求参数中包含StatDimensions，该参数则可能返回，否则不返回。
+   * <p>sql会话统计信息。如果请求参数中包含StatDimensions，该参数则可能返回，否则不返回。</p>
    */
   Statistics?: Array<StatisticInfo>
   /**
@@ -6139,53 +6139,51 @@ export interface Table {
  */
 export interface DescribeMySqlProcessListRequest {
   /**
-   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+   * <p>实例 ID。可通过 <a href="https://cloud.tencent.com/document/api/1130/57798">DescribeDiagDBInstances</a> 接口获取。<strong>其中 dcdb(即TDSQL MySQL) 的查询入参InstanceId特殊，需要使用 ClusterId + &amp; + InstanceId 来组合代替， 如：<code>tdsqlshard-s1230&amp;shard-abcd</code></strong></p>
    */
   InstanceId: string
   /**
-   * 线程的ID，用于筛选线程列表。
+   * <p>线程的ID，用于筛选线程列表。</p>
    */
   ID?: number
   /**
-   * 线程的操作账号名，用于筛选线程列表。
+   * <p>线程的操作账号名，用于筛选线程列表。</p>
    */
   User?: string
   /**
-   * 线程的操作主机地址，用于筛选线程列表。
+   * <p>线程的操作主机地址，用于筛选线程列表。</p>
    */
   Host?: string
   /**
-   * 线程的操作数据库，用于筛选线程列表。
+   * <p>线程的操作数据库，用于筛选线程列表。</p>
    */
   DB?: string
   /**
-   * 线程的操作状态。包含以下枚举值：Sending data​-线程正在处理查询结果， ​Sorting result​-线程正在对查询结果进行排序​，Creating tmp table​-线程正在创建临时表，Altering table​-线程正在执行表结构变更，Updating-线程执行更新中。
+   * <p>线程的操作状态。包含以下枚举值：Sending data​-线程正在处理查询结果， ​Sorting result​-线程正在对查询结果进行排序​，Creating tmp table​-线程正在创建临时表，Altering table​-线程正在执行表结构变更，Updating-线程执行更新中。</p>
    */
   State?: string
   /**
-   * 线程的执行类型。包含以下枚举值：Sleep-线程处于空闲状态，Query-线程正在执行一个查询，Connect-从服务器连接到主服务器，Execute-线程正在执行预处理语句。
+   * <p>线程的执行类型。包含以下枚举值：Sleep-线程处于空闲状态，Query-线程正在执行一个查询，Connect-从服务器连接到主服务器，Execute-线程正在执行预处理语句。</p>
    */
   Command?: string
   /**
-   * 线程的操作时长最小值，单位秒，用于筛选操作时长大于该值的线程列表。
+   * <p>线程的操作时长最小值，单位秒，用于筛选操作时长大于该值的线程列表。</p>
    */
   Time?: number
   /**
-   * 线程的操作语句，用于筛选线程列表。
+   * <p>线程的操作语句，用于筛选线程列表。</p>
    */
   Info?: string
   /**
-   * 返回数量，默认20。
+   * <p>返回数量，默认20。</p>
    */
   Limit?: number
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"mariadb"-mariadb;"cynosdb"-TDSQL-C for MySQL ;"dcdb"-TDSQL MySQL 默认为"mysql"。
-
-
+   * <p>服务产品类型，支持值：&quot;mysql&quot; - 云数据库 MySQL；&quot;mariadb&quot;-mariadb;&quot;cynosdb&quot;-TDSQL-C for MySQL ;&quot;dcdb&quot;-TDSQL MySQL 默认为&quot;mysql&quot;。</p>
    */
   Product?: string
   /**
-   * 会话统计的维度信息,可以多个维度。
+   * <p>会话统计的维度信息,可以多个维度。</p>
    */
   StatDimensions?: Array<StatDimension>
 }

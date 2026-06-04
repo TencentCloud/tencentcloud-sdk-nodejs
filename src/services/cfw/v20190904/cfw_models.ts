@@ -548,17 +548,17 @@ export interface ExpandCfwVerticalRequest {
 }
 
 /**
- * AssetZone
+ * SyncFwOperate请求参数结构体
  */
-export interface AssetZone {
+export interface SyncFwOperateRequest {
   /**
-   * 地域
+   * 同步操作类型：Route，同步防火墙路由
    */
-  Zone?: string
+  SyncType: string
   /**
-   * 地域英文
+   * 防火墙类型；nat,nat防火墙;ew,vpc间防火墙
    */
-  ZoneEng?: string
+  FwType?: string
 }
 
 /**
@@ -1003,9 +1003,41 @@ export interface DescNatDnatRule {
 }
 
 /**
+ * OpenClusterNatFwSwitch请求参数结构体
+ */
+export interface OpenClusterNatFwSwitchRequest {
+  /**
+   * NAT CCN防火墙开关配置
+   */
+  NatCcnSwitch: NatCcnSwitchConfig
+}
+
+/**
  * SetNatFwEip返回参数结构体
  */
 export interface SetNatFwEipResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeClusterNatCcnFwSwitchList返回参数结构体
+ */
+export interface DescribeClusterNatCcnFwSwitchListResponse {
+  /**
+   * <p>符合条件的总记录数</p>
+   */
+  Total?: number
+  /**
+   * <p>NAT防火墙开关详情列表</p>
+   */
+  Data?: Array<NatFwSwitchDetailS>
+  /**
+   * <p>地域列表</p>
+   */
+  RegionList?: Array<FilterDataObject>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2311,6 +2343,41 @@ export interface DescribeClusterVpcFwSwitchsRequest {
 }
 
 /**
+ * DescribeSerialRegion返回参数结构体
+ */
+export interface DescribeSerialRegionResponse {
+  /**
+   * 串行地域带宽分配
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SerialRegionLst?: Array<SerialRegionInfo>
+  /**
+   * 剩余可分配通用带宽 单位M
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnUsedWidth?: number
+  /**
+   * 可配置实例个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnUsedQuota?: number
+  /**
+   * 旁路带宽数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BypassWidth?: number
+  /**
+   * 赠送的旁路带宽数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SendBypassWidth?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAddressTemplate返回参数结构体
  */
 export interface DeleteAddressTemplateResponse {
@@ -2618,6 +2685,22 @@ export interface DescribeVpcFwGroupSwitchRequest {
 }
 
 /**
+ * 查询下拉选择选项数据
+ */
+export interface FilterDataObject {
+  /**
+   * 显示名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: string
+  /**
+   * 实际值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+}
+
+/**
  * ModifyAcRule返回参数结构体
  */
 export interface ModifyAcRuleResponse {
@@ -2749,6 +2832,28 @@ export interface BlockIgnoreRule {
    * 1 border 2 nat 4 vpc 8 border-serial
    */
   FwType?: number
+}
+
+/**
+ * NAT集群防火墙地域部署状态查询
+ */
+export interface NatClusterRegionStatusQuery {
+  /**
+   * <p>云联网ID</p>
+   */
+  CcnId: string
+  /**
+   * <p>NAT网关ID</p>
+   */
+  NatInsId: string
+  /**
+   * <p>资产类型，取值：nat_ccn-CCN+NAT场景，nat-独立NAT场景</p>
+   */
+  AssetType: string
+  /**
+   * <p>引流路由方法，0-多路由表模式，1-策略路由模式</p>
+   */
+  RoutingMode?: number
 }
 
 /**
@@ -3040,38 +3145,17 @@ export interface DescribeNDRAssetIdentificationListRequest {
 }
 
 /**
- * DescribeSerialRegion返回参数结构体
+ * DescribeNatCcnFwSwitch请求参数结构体
  */
-export interface DescribeSerialRegionResponse {
+export interface DescribeNatCcnFwSwitchRequest {
   /**
-   * 串行地域带宽分配
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>NAT防火墙实例ID</p>
    */
-  SerialRegionLst?: Array<SerialRegionInfo>
+  NatInsId: string
   /**
-   * 剩余可分配通用带宽 单位M
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>云联网实例ID</p>
    */
-  UnUsedWidth?: number
-  /**
-   * 可配置实例个数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UnUsedQuota?: number
-  /**
-   * 旁路带宽数据
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BypassWidth?: number
-  /**
-   * 赠送的旁路带宽数据
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SendBypassWidth?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  CcnId: string
 }
 
 /**
@@ -3392,21 +3476,13 @@ export interface DescribeAcListsResponse {
 }
 
 /**
- * 开关开启错误码数据
+ * ModifyClusterFwBypass返回参数结构体
  */
-export interface SwitchFailInfo {
+export interface ModifyClusterFwBypassResponse {
   /**
-   * 自增唯一ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Id?: number
-  /**
-   * 开关名称
-   */
-  Name?: string
-  /**
-   * 防火墙开关变动状态，小于0
-   */
-  Status?: number
+  RequestId?: string
 }
 
 /**
@@ -3582,6 +3658,16 @@ export interface DescribeResourceGroupNewResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeNatFwClusterRegionStatus请求参数结构体
+ */
+export interface DescribeNatFwClusterRegionStatusRequest {
+  /**
+   * <p>NAT集群防火墙地域状态查询列表</p>
+   */
+  NatClusterRegionStatusQueryList: Array<NatClusterRegionStatusQuery>
 }
 
 /**
@@ -3949,57 +4035,17 @@ export interface ModifyAllRuleStatusResponse {
 }
 
 /**
- * 地址模板列表数据
+ * RemoveAclRule返回参数结构体
  */
-export interface TemplateListInfo {
+export interface RemoveAclRuleResponse {
   /**
-   * 模板ID
+   * 删除成功后返回被删除策略的uuid列表
    */
-  Uuid?: string
+  RuleUuid?: Array<number | bigint>
   /**
-   * 模板名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
-  /**
-   * 描述
-   */
-  Detail?: string
-  /**
-   * IP模板
-   */
-  IpString?: string
-  /**
-   * 插入时间
-   */
-  InsertTime?: string
-  /**
-   * 修改时间
-   */
-  UpdateTime?: string
-  /**
-   * 模板类型
-   */
-  Type?: number
-  /**
-   * 关联规则条数
-   */
-  RulesNum?: number
-  /**
-   * 模板Id
-   */
-  TemplateId?: string
-  /**
-   * 协议端口模板，协议类型，4:4层协议，7:7层协议
-   */
-  ProtocolType?: string
-  /**
-   * 模板包含地址数量
-   */
-  IPNum?: number
-  /**
-   * IP版本,0,IPv4;1,IPv6
-   */
-  IpVersion?: number
+  RequestId?: string
 }
 
 /**
@@ -4640,6 +4686,16 @@ export interface ModifyAssetSyncResponse {
 }
 
 /**
+ * ModifyClusterNatFwSwitch返回参数结构体
+ */
+export interface ModifyClusterNatFwSwitchResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeRuleOverview返回参数结构体
  */
 export interface DescribeRuleOverviewResponse {
@@ -4805,6 +4861,24 @@ export interface ModifyNatAcRuleRequest {
    * 需要编辑的规则数组,基于Uuid唯一id来修改该规则
    */
   Rules: Array<CreateNatRuleItem>
+}
+
+/**
+ * 开关开启错误码数据
+ */
+export interface SwitchFailInfo {
+  /**
+   * 自增唯一ID
+   */
+  Id?: number
+  /**
+   * 开关名称
+   */
+  Name?: string
+  /**
+   * 防火墙开关变动状态，小于0
+   */
+  Status?: number
 }
 
 /**
@@ -5265,6 +5339,28 @@ export interface SgDnsParseCount {
 }
 
 /**
+ * DescribeClusterNatCcnFwSwitchList请求参数结构体
+ */
+export interface DescribeClusterNatCcnFwSwitchListRequest {
+  /**
+   * <p>NAT防火墙类型筛选，取值：nat-VPC内防护类型，nat_ccn-CCN集群模式类型，不传则同时查询两种类型</p>
+   */
+  NatType?: string
+  /**
+   * <p>每页条数，默认100</p>
+   */
+  Limit?: number
+  /**
+   * <p>偏移量，默认0</p>
+   */
+  Offset?: number
+  /**
+   * <p>过滤条件列表，支持按Common（通用搜索）、InsObj（实例ID）、ObjName（实例名称）等字段过滤</p>
+   */
+  Filters?: Array<CommonFilter>
+}
+
+/**
  * DescribeVpcFwCcnPolicyWhiteList返回参数结构体
  */
 export interface DescribeVpcFwCcnPolicyWhiteListResponse {
@@ -5296,6 +5392,36 @@ export interface DeleteRemoteAccessDomainResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * NAT CCN防火墙开关配置
+ */
+export interface NatCcnSwitchConfig {
+  /**
+   * <p>NAT防火墙实例ID</p>
+   */
+  NatInsId: string
+  /**
+   * <p>云联网实例ID</p>
+   */
+  CcnId: string
+  /**
+   * <p>开关接入模式，1:自动接入，2:手动接入</p>
+   */
+  SwitchMode: number
+  /**
+   * <p>引流路由方法，0:多路由表，1:策略路由。自动接入模式仅支持策略路由(1)；手动接入模式支持多路由表(0)和策略路由(1)</p>
+   */
+  RoutingMode: number
+  /**
+   * <p>接入的实例列表</p>
+   */
+  AccessInstanceList?: Array<AccessInstanceInfo>
+  /**
+   * <p>引流VPC的CIDR网段</p>
+   */
+  LeadVpcCidr?: string
 }
 
 /**
@@ -5720,6 +5846,36 @@ export interface CreateChooseVpcsResponse {
 }
 
 /**
+ * DescribeNatCcnFwSwitch返回参数结构体
+ */
+export interface DescribeNatCcnFwSwitchResponse {
+  /**
+   * <p>开关接入模式，1-自动接入，2-手动接入</p><p>枚举值：</p><ul><li>1： 自动接入</li><li>2： 手动接入</li></ul>
+   */
+  SwitchMode?: number
+  /**
+   * <p>引流路由方法，0-多路由表，1-策略路由</p><p>枚举值：</p><ul><li>0： 多路由表</li><li>1： 策略路由</li></ul>
+   */
+  RoutingMode?: number
+  /**
+   * <p>Bypass状态，0-关闭，1-开启</p><p>枚举值：</p><ul><li>0： 关闭</li><li>1： 开启</li></ul>
+   */
+  Bypass?: number
+  /**
+   * <p>云联网实例ID</p>
+   */
+  CcnId?: string
+  /**
+   * <p>接入的实例列表</p>
+   */
+  AccessInstanceList?: Array<AccessInstanceInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyRunSyncAsset返回参数结构体
  */
 export interface ModifyRunSyncAssetResponse {
@@ -6100,17 +6256,57 @@ export interface CreateDatabaseWhiteListRulesRequest {
 }
 
 /**
- * RemoveAclRule返回参数结构体
+ * 地址模板列表数据
  */
-export interface RemoveAclRuleResponse {
+export interface TemplateListInfo {
   /**
-   * 删除成功后返回被删除策略的uuid列表
+   * 模板ID
    */
-  RuleUuid?: Array<number | bigint>
+  Uuid?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 模板名称
    */
-  RequestId?: string
+  Name?: string
+  /**
+   * 描述
+   */
+  Detail?: string
+  /**
+   * IP模板
+   */
+  IpString?: string
+  /**
+   * 插入时间
+   */
+  InsertTime?: string
+  /**
+   * 修改时间
+   */
+  UpdateTime?: string
+  /**
+   * 模板类型
+   */
+  Type?: number
+  /**
+   * 关联规则条数
+   */
+  RulesNum?: number
+  /**
+   * 模板Id
+   */
+  TemplateId?: string
+  /**
+   * 协议端口模板，协议类型，4:4层协议，7:7层协议
+   */
+  ProtocolType?: string
+  /**
+   * 模板包含地址数量
+   */
+  IPNum?: number
+  /**
+   * IP版本,0,IPv4;1,IPv6
+   */
+  IpVersion?: number
 }
 
 /**
@@ -6293,6 +6489,116 @@ export interface DnsVpcSwitch {
    * 0：设置为关闭 1:设置为打开
    */
   Status: number
+}
+
+/**
+ * ModifyClusterFwBypass请求参数结构体
+ */
+export interface ModifyClusterFwBypassRequest {
+  /**
+   * 防火墙类型，"VPC_FW"-VPC防火墙，"NAT_FW"-NAT防火墙
+   */
+  FwType: string
+  /**
+   * 云联网实例ID
+   */
+  CcnId: string
+  /**
+   * Bypass开关，true-开启Bypass（禁用正常下一跳，流量绕过防火墙），false-关闭Bypass（启用正常下一跳，流量经过防火墙）
+   */
+  Enable: boolean
+  /**
+   * NAT防火墙实例ID，FwType为nat时必填
+   */
+  NatInsId?: string
+}
+
+/**
+ * NAT防火墙开关详情
+ */
+export interface NatFwSwitchDetailS {
+  /**
+   * <p>NAT实例ID</p>
+   */
+  InsObj?: string
+  /**
+   * <p>实例名称</p>
+   */
+  ObjName?: string
+  /**
+   * <p>防火墙类型</p>
+   */
+  FwType?: string
+  /**
+   * <p>资产类型，nat-VPC内防护，nat_ccn-CCN集群模式</p>
+   */
+  AssetType?: string
+  /**
+   * <p>地域</p>
+   */
+  Region?: string
+  /**
+   * <p>开关接入模式，1-自动接入，2-手动接入</p>
+   */
+  SwitchMode?: number
+  /**
+   * <p>引流路由方法，0-多路由表，1-策略路由</p>
+   */
+  RoutingMode?: number
+  /**
+   * <p>开关状态，0-未开启，1-已开启，2-开启中，3-关闭中</p>
+   */
+  Status?: number
+  /**
+   * <p>ip版本，0：ipv4；1：ipv6</p>
+   */
+  IpVersion?: number
+  /**
+   * <p>是否非集群模式，0-集群模式，1-非集群模式</p>
+   */
+  NonCluster?: number
+  /**
+   * <p>入侵防御动作</p>
+   */
+  IpsAction?: number
+  /**
+   * <p>流量监控开关</p>
+   */
+  TransEnable?: number
+  /**
+   * <p>Bypass状态，0-关闭，1-开启</p>
+   */
+  Bypass?: number
+  /**
+   * <p>关联ID，nat_ccn资产类型时为云联网实例ID, nat资产类型时为空</p>
+   */
+  AttachId?: string
+  /**
+   * <p>关联ID的实例名称，nat_ccn资产类型时为云联网名称</p>
+   */
+  AttachName?: string
+  /**
+   * <p>NAT防火墙所在VPC ID</p>
+   */
+  NatVpcId?: string
+  /**
+   * <p>NAT防火墙所在VPC的VPC名称</p>
+   */
+  NatVpcName?: string
+  /**
+   * <p>CCN关联实例列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AttachIns?: Array<AttachInsInfo>
+  /**
+   * <p>终端节点列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Endpoints?: Array<EndpointInfo>
+  /**
+   * <p>防火墙开关操作时的进度状态：</p><p>// 开启 — 自动模式（3步）<br>&quot;AUTO_OPEN_ORCHESTRATING&quot;      // 步骤1: 预编排策略路由<br>&quot;AUTO_OPEN_CREATING_RESOURCES&quot; // 步骤2: 创建引流网络和资源<br>&quot;AUTO_OPEN_PUSHING_ROUTES&quot;     // 步骤3: 创建策略路由</p><p>// 开启 — 手动模式（1步）<br>&quot;MANUAL_OPEN_CREATING_RESOURCES&quot; // 步骤1: 创建引流网络和资源</p><p>// 关闭 — 自动模式（2步）<br>&quot;AUTO_CLOSE_DELETING_ROUTES&quot;    // 步骤1: 删除策略路由<br>&quot;AUTO_CLOSE_DELETING_RESOURCES&quot; // 步骤2: 删除引流网络和资源<br>// 关闭 — 手动模式（1步）<br>&quot;MANUAL_CLOSE_DELETING_RESOURCES&quot; // 步骤1: 删除引流网络和资源</p><p>// 修改 — 自动模式（3步）<br>&quot;AUTO_MODIFY_ORCHESTRATING&quot;   // 步骤1: 预编排策略路由<br>&quot;AUTO_MODIFY_DELETING_ROUTES&quot; // 步骤2: 删除旧策略路由<br>&quot;AUTO_MODIFY_PUSHING_ROUTES&quot;  // 步骤3: 创建新策略路由</p><p>// 修改 — 手动模式（1步，仅 VPC 防火墙存在手动模式修改）<br>&quot;MANUAL_MODIFY_UPDATING_RESOURCES&quot; // 步骤1: 更新引流网络和资源</p>
+   */
+  Progress?: string
 }
 
 /**
@@ -6598,6 +6904,30 @@ export interface CreateRuleItem {
 }
 
 /**
+ * CloseClusterNatFwSwitch请求参数结构体
+ */
+export interface CloseClusterNatFwSwitchRequest {
+  /**
+   * NAT防火墙实例ID
+   */
+  NatInsId: string
+  /**
+   * 云联网实例ID
+   */
+  CcnId: string
+}
+
+/**
+ * ModifyClusterNatFwSwitch请求参数结构体
+ */
+export interface ModifyClusterNatFwSwitchRequest {
+  /**
+   * NAT CCN防火墙开关配置
+   */
+  NatCcnSwitch: NatCcnSwitchConfig
+}
+
+/**
  * ModifyNatInstance返回参数结构体
  */
 export interface ModifyNatInstanceResponse {
@@ -6650,6 +6980,16 @@ export interface DescribeIpsModeSwitchResponse {
    * success 成功 其他失败
    */
   ReturnMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CloseClusterNatFwSwitch返回参数结构体
+ */
+export interface CloseClusterNatFwSwitchResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6951,6 +7291,38 @@ export interface AddAclRuleResponse {
 }
 
 /**
+ * CreateAlertCenterIsolate请求参数结构体
+ */
+export interface CreateAlertCenterIsolateRequest {
+  /**
+   * 处置对象,资产列表
+   */
+  HandleAssetList: Array<string>
+  /**
+   * 处置时间
+1  1天
+7   7天
+-2 永久
+   */
+  HandleTime: number
+  /**
+   * 当前日志方向： 0 出向 1 入向
+   */
+  AlertDirection: number
+  /**
+   * 隔离类型 
+1 互联网入站
+2 互联网出站
+4 内网访问
+   */
+  IsolateType: Array<number | bigint>
+  /**
+   * 运维模式 1 IP白名单 2 身份认证  0 非运维模式
+   */
+  OmMode?: number
+}
+
+/**
  * 创建NAT ACL规则参数结构
  */
 export interface CreateNatRuleItem {
@@ -7174,17 +7546,17 @@ export interface EdgeIpInfo {
 }
 
 /**
- * SyncFwOperate请求参数结构体
+ * AssetZone
  */
-export interface SyncFwOperateRequest {
+export interface AssetZone {
   /**
-   * 同步操作类型：Route，同步防火墙路由
+   * 地域
    */
-  SyncType: string
+  Zone?: string
   /**
-   * 防火墙类型；nat,nat防火墙;ew,vpc间防火墙
+   * 地域英文
    */
-  FwType?: string
+  ZoneEng?: string
 }
 
 /**
@@ -7251,6 +7623,16 @@ export interface VpcFwJoinInstanceType {
    * 接入的对应网络实例类型的数量
    */
   Num: number
+}
+
+/**
+ * OpenClusterNatFwSwitch返回参数结构体
+ */
+export interface OpenClusterNatFwSwitchResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8892,35 +9274,33 @@ export interface SearchLogRequest {
 }
 
 /**
- * CreateAlertCenterIsolate请求参数结构体
+ * NAT防火墙引流集群地域状态
  */
-export interface CreateAlertCenterIsolateRequest {
+export interface NatFwClusterRegionStatus {
   /**
-   * 处置对象,资产列表
+   * <p>NAT网关ID</p>
    */
-  HandleAssetList: Array<string>
+  NatInsId?: string
   /**
-   * 处置时间
-1  1天
-7   7天
--2 永久
+   * <p>云联网ID</p>
    */
-  HandleTime: number
+  CcnId?: string
   /**
-   * 当前日志方向： 0 出向 1 入向
+   * <p>地域，如 ap-guangzhou</p>
    */
-  AlertDirection: number
+  Region?: string
   /**
-   * 隔离类型 
-1 互联网入站
-2 互联网出站
-4 内网访问
+   * <p>地域集群状态，取值：<br>NotDeployed-未部署集群，<br>Deployed-已部署集群但未创建引流网络，<br>DeployedCustomOnly-已部署集群但内网段被覆盖，无法自动选择引流网段，需自定义设置引流网段<br>Auto-已创建引流网络(自动分配CIDR)，<br>Custom-已创建引流网络(自定义CIDR)</p>
    */
-  IsolateType: Array<number | bigint>
+  Status?: string
   /**
-   * 运维模式 1 IP白名单 2 身份认证  0 非运维模式
+   * <p>引流网络 CIDR，仅当 Status 为 Auto 或 Custom 时有值</p>
    */
-  OmMode?: number
+  Cidr?: string
+  /**
+   * <p>引流路由方法，0-多路由表模式，1-策略路由模式</p>
+   */
+  RoutingMode?: number
 }
 
 /**
@@ -8939,6 +9319,25 @@ export interface ModifySecurityGroupItemRuleStatusRequest {
    * 更改的企业安全组规则的执行顺序
    */
   RuleSequence: number
+}
+
+/**
+ * DescribeNatFwClusterRegionStatus返回参数结构体
+ */
+export interface DescribeNatFwClusterRegionStatusResponse {
+  /**
+   * <p>返回地域数量</p>
+   */
+  Total?: number
+  /**
+   * <p>地域防火墙集群状态列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionFwStatus?: Array<NatFwClusterRegionStatus>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -1,6 +1,7 @@
 export { aai } from "./aai"
 export { aca } from "./aca"
 export { acp } from "./acp"
+export { adp } from "./adp"
 export { advisor } from "./advisor"
 export { af } from "./af"
 export { afc } from "./afc"

@@ -268,16 +268,6 @@ it("cfw.v20190904.DeleteNatFwDnatRule", async function () {
     }
 })
 
-it("cfw.v20190904.DeleteNatFwInstance", async function () {
-    try {
-       const data = await client.DeleteNatFwInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cfw.v20190904.CreateBlockIgnoreRuleList", async function () {
     try {
        const data = await client.CreateBlockIgnoreRuleList({})
@@ -598,6 +588,16 @@ it("cfw.v20190904.DescribeCcnVpcFwPolicyLimit", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeNatCcnFwSwitch", async function () {
+    try {
+       const data = await client.DescribeNatCcnFwSwitch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifyEnterpriseSecurityGroupRule", async function () {
     try {
        const data = await client.ModifyEnterpriseSecurityGroupRule({})
@@ -671,6 +671,16 @@ it("cfw.v20190904.DescribeSwitchLists", async function () {
 it("cfw.v20190904.DescribeCcnVpcFwSwitch", async function () {
     try {
        const data = await client.DescribeCcnVpcFwSwitch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ModifyClusterNatFwSwitch", async function () {
+    try {
+       const data = await client.ModifyClusterNatFwSwitch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -761,6 +771,16 @@ it("cfw.v20190904.ModifySequenceRules", async function () {
 it("cfw.v20190904.RemoveAclRule", async function () {
     try {
        const data = await client.RemoveAclRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ModifyClusterFwBypass", async function () {
+    try {
+       const data = await client.ModifyClusterFwBypass({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -908,9 +928,29 @@ it("cfw.v20190904.CreateAlertCenterRule", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeClusterNatCcnFwSwitchList", async function () {
+    try {
+       const data = await client.DescribeClusterNatCcnFwSwitchList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifyAclRule", async function () {
     try {
        const data = await client.ModifyAclRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeNatFwClusterRegionStatus", async function () {
+    try {
+       const data = await client.DescribeNatFwClusterRegionStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -958,9 +998,9 @@ it("cfw.v20190904.RemoveNatAcRule", async function () {
     }
 })
 
-it("cfw.v20190904.DescribeAcLists", async function () {
+it("cfw.v20190904.DeleteNatFwInstance", async function () {
     try {
-       const data = await client.DescribeAcLists({})
+       const data = await client.DeleteNatFwInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -991,6 +1031,16 @@ it("cfw.v20190904.ExpandCfwVertical", async function () {
 it("cfw.v20190904.CreateVpcFwGroup", async function () {
     try {
        const data = await client.CreateVpcFwGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.OpenClusterNatFwSwitch", async function () {
+    try {
+       const data = await client.OpenClusterNatFwSwitch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1071,6 +1121,16 @@ it("cfw.v20190904.DescribeFwSyncStatus", async function () {
 it("cfw.v20190904.DescribeNatFwInstance", async function () {
     try {
        const data = await client.DescribeNatFwInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.CloseClusterNatFwSwitch", async function () {
+    try {
+       const data = await client.CloseClusterNatFwSwitch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1301,6 +1361,16 @@ it("cfw.v20190904.DescribeBlockStaticList", async function () {
 it("cfw.v20190904.DescribeFwEdgeIps", async function () {
     try {
        const data = await client.DescribeFwEdgeIps({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeAcLists", async function () {
+    try {
+       const data = await client.DescribeAcLists({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

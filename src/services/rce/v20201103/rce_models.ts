@@ -769,7 +769,7 @@ export interface DescribeNameListDataListRequest {
 }
 
 /**
- * 全栈式风控引擎入参
+ * 风险识别RCE入参
  */
 export interface InputCryptoManageMarketingRisk {
   /**

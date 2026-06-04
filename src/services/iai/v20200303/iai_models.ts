@@ -916,7 +916,7 @@ export interface GroupInfo {
    */
   CreationTimestamp?: number
   /**
-   * <p>Group的创建时间和日期 CreationTimestamp。- CreationTimestamp 的值是自 Unix 纪元时间到Group创建时间的毫秒数。 - Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。- 有关更多信息，请参阅 Unix 时间。</p>
+   * <p>Group的更新时间和日期 UpdateTimestamp。<br>UpdateTimestamp 的值是自 Unix 纪元时间到Group更新时间的毫秒数。<br>Unix 纪元时间是 1970 年 1 月 1 日星期四，协调世界时 (UTC) 00:00:00。<br>有关更多信息，请参阅 Unix 时间。</p>
    */
   UpdateTimestamp?: number
 }
