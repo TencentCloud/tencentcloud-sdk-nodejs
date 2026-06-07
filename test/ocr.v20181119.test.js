@@ -478,16 +478,6 @@ it("ocr.v20181119.RideHailingDriverLicenseOCR", async function () {
     }
 })
 
-it("ocr.v20181119.HmtResidentPermitOCR", async function () {
-    try {
-       const data = await client.HmtResidentPermitOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ocr.v20181119.DescribeMarkEssayAgentJob", async function () {
     try {
        const data = await client.DescribeMarkEssayAgentJob({})

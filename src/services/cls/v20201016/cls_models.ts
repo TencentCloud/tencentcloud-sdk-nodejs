@@ -1084,6 +1084,11 @@ export interface DeleteDashboardResponse {
 }
 
 /**
+ * OpenClsService请求参数结构体
+ */
+export type OpenClsServiceRequest = null
+
+/**
  * LogItem的数组
  */
 export interface LogItems {
@@ -1199,6 +1204,16 @@ export interface CreateNoticeContentResponse {
    * 通知内容配置ID
    */
   NoticeContentId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * OpenClsService返回参数结构体
+ */
+export interface OpenClsServiceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7607,6 +7622,20 @@ export interface DeleteHostMetricConfigResponse {
 }
 
 /**
+ * GetClsService返回参数结构体
+ */
+export interface GetClsServiceResponse {
+  /**
+   * 账户服务开通状态，0:服务已开通，1:服务未开通
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 返回的回复, 支持多个
  */
 export interface Choice {
@@ -11520,6 +11549,11 @@ export interface DescribeNetworkApplicationDetailResponse {
    */
   RequestId?: string
 }
+
+/**
+ * GetClsService请求参数结构体
+ */
+export type GetClsServiceRequest = null
 
 /**
  * DescribeShipperTasks请求参数结构体

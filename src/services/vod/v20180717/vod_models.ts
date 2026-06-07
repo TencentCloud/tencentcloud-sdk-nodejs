@@ -9550,6 +9550,10 @@ export interface ArtifactRepairInfo {
  */
 export interface CreateAigcAudioTaskRequest {
   /**
+   * <p>点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</p>
+   */
+  SubAppId?: number
+  /**
    * <p>模型名称。</p>
    */
   ModelName?: string
@@ -9558,7 +9562,7 @@ export interface CreateAigcAudioTaskRequest {
    */
   ModelVersion?: string
   /**
-   * <p>指定场景，目前支持sfx（音效）。</p>
+   * <p>指定场景，目前支持sfx（音效）、music（音乐）。</p>
    */
   SceneType?: string
   /**
@@ -21406,6 +21410,10 @@ export interface DescribeAigcUsageDataRequest {
    * <p>API Key</p>
    */
   APIKey?: string
+  /**
+   * <p>API Key</p>
+   */
+  APIKeys?: Array<string>
 }
 
 /**

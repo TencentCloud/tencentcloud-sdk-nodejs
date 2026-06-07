@@ -34,7 +34,7 @@ import {
   RenewTokenPlanTeamOrderResponse,
   UsageRankItem,
   TokenPlanApiKeyInfo,
-  ModifyTokenPlanApiKeyResponse,
+  DescribeModelListRequest,
   DescribeApiKeyListRequest,
   UsageSeries,
   UpgradeTokenPlanTeamOrderRequest,
@@ -43,6 +43,7 @@ import {
   DescribeTokenPlanApiKeyRequest,
   DescribeApiKeyRequest,
   TokenSummaryBillingItem,
+  DescribeModelListResponse,
   DescribeTokenPlanApiKeyUsageDetailResponse,
   RequestSort,
   TokenPlanListItem,
@@ -52,6 +53,7 @@ import {
   RenewTokenPlanTeamOrderRequest,
   DeleteTokenPlanApiKeyResponse,
   DescribeTokenPlanApiKeyUsageDetailRequest,
+  ModifyTokenPlanApiKeyResponse,
   ApiKeyDetail,
   UsageDetailItem,
   BatchCreateFailedItem,
@@ -184,6 +186,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTokenPlanListResponse) => void
   ): Promise<DescribeTokenPlanListResponse> {
     return this.request("DescribeTokenPlanList", req, cb)
+  }
+
+  /**
+     * 查询模型列表。
+
+支持按模型 ID、模型名称、模型能力等条件筛选，支持分页和排序。
+     */
+  async DescribeModelList(
+    req?: DescribeModelListRequest,
+    cb?: (error: string, rep: DescribeModelListResponse) => void
+  ): Promise<DescribeModelListResponse> {
+    return this.request("DescribeModelList", req, cb)
   }
 
   /**

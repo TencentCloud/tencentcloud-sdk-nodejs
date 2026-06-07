@@ -442,11 +442,11 @@ export interface StorageSource {
  */
 export interface ResourceConfiguration {
   /**
-   * cpu 资源量
+   * <p>cpu 资源量</p>
    */
   CPU?: string
   /**
-   * 内存资源量
+   * <p>内存资源量</p>
    */
   Memory?: string
 }

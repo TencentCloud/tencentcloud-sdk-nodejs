@@ -22,7 +22,6 @@ import {
   StoreInfo,
   NonTaxItem,
   FieldsInfo,
-  TextTable,
   InvoiceItem,
   HKIDCardOCRRequest,
   BankSlipOCRRequest,
@@ -59,7 +58,7 @@ import {
   QuestionSplitOCRRequest,
   FlightInvoiceOCRRequest,
   TextFormula,
-  HmtResidentPermitOCRResponse,
+  MLIDCardOCRRequest,
   VatInvoiceItem,
   VehicleRegCertInfo,
   IDCardOCRResponse,
@@ -136,7 +135,6 @@ import {
   ElectronicTollSummaryList,
   ElectronicAirTransport,
   ClassifyDetectOCRRequest,
-  MLIDCardOCRRequest,
   LicensePlateOCRResponse,
   ExtractDocBasicRequest,
   ReflectDetailInfo,
@@ -274,7 +272,7 @@ import {
   SealOCRRequest,
   VerifyOfdVatInvoiceOCRResponse,
   MedicalInvoice,
-  HmtResidentPermitOCRRequest,
+  TextTable,
   RecognizeTableAccurateOCRResponse,
   ResidenceBookletOCRRequest,
   GetOCRResultRequest,
@@ -1059,18 +1057,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RideHailingDriverLicenseOCRResponse) => void
   ): Promise<RideHailingDriverLicenseOCRResponse> {
     return this.request("RideHailingDriverLicenseOCR", req, cb)
-  }
-
-  /**
-     * 港澳台居住证OCR支持港澳台居住证正反面全字段内容检测识别功能，包括姓名、性别、出生日期、地址、身份证号、签发机关、有效期限、签发次数、通行证号码关键字段识别。可以应用于港澳台居住证信息识别场景，例如银行开户、用户注册等。
-
-默认接口请求频率限制：20次/秒。
-     */
-  async HmtResidentPermitOCR(
-    req: HmtResidentPermitOCRRequest,
-    cb?: (error: string, rep: HmtResidentPermitOCRResponse) => void
-  ): Promise<HmtResidentPermitOCRResponse> {
-    return this.request("HmtResidentPermitOCR", req, cb)
   }
 
   /**

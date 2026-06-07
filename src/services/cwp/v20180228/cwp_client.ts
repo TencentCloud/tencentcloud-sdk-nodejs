@@ -1912,7 +1912,7 @@ export class Client extends AbstractClient {
    * 查询网络攻击设置
    */
   async DescribeNetAttackSetting(
-    req?: DescribeNetAttackSettingRequest,
+    req: DescribeNetAttackSettingRequest,
     cb?: (error: string, rep: DescribeNetAttackSettingResponse) => void
   ): Promise<DescribeNetAttackSettingResponse> {
     return this.request("DescribeNetAttackSetting", req, cb)
@@ -3775,7 +3775,7 @@ export class Client extends AbstractClient {
    * 查询定时扫描配置
    */
   async DescribeMalwareTimingScanSetting(
-    req?: DescribeMalwareTimingScanSettingRequest,
+    req: DescribeMalwareTimingScanSettingRequest,
     cb?: (error: string, rep: DescribeMalwareTimingScanSettingResponse) => void
   ): Promise<DescribeMalwareTimingScanSettingResponse> {
     return this.request("DescribeMalwareTimingScanSetting", req, cb)
@@ -3825,7 +3825,7 @@ export class Client extends AbstractClient {
    * 查询反弹shell系统策略配置
    */
   async DescribeReverseShellSystemPolicyConfig(
-    req?: DescribeReverseShellSystemPolicyConfigRequest,
+    req: DescribeReverseShellSystemPolicyConfigRequest,
     cb?: (error: string, rep: DescribeReverseShellSystemPolicyConfigResponse) => void
   ): Promise<DescribeReverseShellSystemPolicyConfigResponse> {
     return this.request("DescribeReverseShellSystemPolicyConfig", req, cb)

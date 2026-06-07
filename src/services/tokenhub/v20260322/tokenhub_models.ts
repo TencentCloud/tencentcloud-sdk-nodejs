@@ -447,14 +447,9 @@ export interface TokenPlanApiKeyInfo {
 }
 
 /**
- * ModifyTokenPlanApiKey返回参数结构体
+ * DescribeModelList请求参数结构体
  */
-export interface ModifyTokenPlanApiKeyResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeModelListRequest = null
 
 /**
  * DescribeApiKeyList请求参数结构体
@@ -590,6 +585,16 @@ export interface TokenSummaryBillingItem {
    * 该计费项在周期内的原始用量汇总，单位：tokens。
    */
   TotalQty?: number
+}
+
+/**
+ * DescribeModelList返回参数结构体
+ */
+export interface DescribeModelListResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -851,6 +856,16 @@ export interface DescribeTokenPlanApiKeyUsageDetailRequest {
    * 按模型 ID (Model ID) 精确过滤。需要按模型名称过滤时传入该字段。
    */
   ModelName?: string
+}
+
+/**
+ * ModifyTokenPlanApiKey返回参数结构体
+ */
+export interface ModifyTokenPlanApiKeyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

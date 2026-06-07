@@ -61,6 +61,7 @@ import {
   DescribeConsumerPreviewRequest,
   CreateRecordingRuleTaskResponse,
   DeleteDashboardResponse,
+  OpenClsServiceRequest,
   LogItems,
   DescribeRecordingRuleYamlTaskResponse,
   RuleKeyValueInfo,
@@ -68,6 +69,7 @@ import {
   DescribeDashboardSubscribesRequest,
   PartitionInfo,
   CreateNoticeContentResponse,
+  OpenClsServiceResponse,
   ModifyAlarmRequest,
   ConfigExtraInfo,
   RetryShipperTaskResponse,
@@ -311,6 +313,7 @@ import {
   ModifyDashboardRequest,
   SendConsumerHeartbeatResponse,
   DeleteHostMetricConfigResponse,
+  GetClsServiceResponse,
   Choice,
   DeleteMetricConfigRequest,
   CreateEsRechargeRequest,
@@ -454,6 +457,7 @@ import {
   DescribeNoticeContentsRequest,
   DescribeDlcDeliversRequest,
   DescribeNetworkApplicationDetailResponse,
+  GetClsServiceRequest,
   DescribeShipperTasksRequest,
   CreateCloudProductLogCollectionRequest,
   DescribeIndexRequest,
@@ -668,6 +672,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 查询日志服务是否开通
+API 中 Region 填写任意一个地域均可，建议使用广州(ap-guangzhou)
+     */
+  async GetClsService(
+    req?: GetClsServiceRequest,
+    cb?: (error: string, rep: GetClsServiceResponse) => void
+  ): Promise<GetClsServiceResponse> {
+    return this.request("GetClsService", req, cb)
+  }
+
+  /**
      * 查询指定时刻指标的最新值。
 如果该时刻向前推5分钟内均无指标数据，则无相应的查询结果。
      */
@@ -766,6 +781,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNetworkApplicationsResponse) => void
   ): Promise<DescribeNetworkApplicationsResponse> {
     return this.request("DescribeNetworkApplications", req, cb)
+  }
+
+  /**
+     * 开通日志服务
+API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议使用广州(ap-guangzhou)
+     */
+  async OpenClsService(
+    req?: OpenClsServiceRequest,
+    cb?: (error: string, rep: OpenClsServiceResponse) => void
+  ): Promise<OpenClsServiceResponse> {
+    return this.request("OpenClsService", req, cb)
   }
 
   /**

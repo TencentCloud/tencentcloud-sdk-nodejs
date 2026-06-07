@@ -1430,11 +1430,11 @@ export interface AssetMachineBaseInfo {
  */
 export interface DescribeReverseShellSystemPolicyConfigResponse {
   /**
-   * 内网告警展示
+   * <p>内网告警展示</p>
    */
   InnerNetAlarmShow?: boolean
   /**
-   * 内网ip展示
+   * <p>内网ip展示</p>
    */
   InnerIPShow?: boolean
   /**
@@ -1916,27 +1916,23 @@ export interface DescribeRansomDefenseStrategyListRequest {
  */
 export interface DescribeMachineClearHistoryRequest {
   /**
-   * 筛选条件
-多个条件筛选时 Keywords,TimeBetween,取交集
-<li> Keywords 实例名称/内网/公网IP</li>
-<li> TimeBetween 时间区间</li>
+   * <p>筛选条件<br>多个条件筛选时 Keywords,TimeBetween,取交集</p><li> Keywords 实例名称/内网/公网IP</li><li> TimeBetween 时间区间</li>
    */
   Filters?: Array<Filters>
   /**
-   * 限制条数,默认10 ,最大100
+   * <p>限制条数,默认10 ,最大100</p>
    */
   Limit?: number
   /**
-   * 偏移量,默认0
+   * <p>偏移量,默认0</p>
    */
   Offset?: number
   /**
-   * 正序, ASC , 倒序 DESC , 默认ASC
+   * <p>正序, ASC , 倒序 DESC , 默认ASC</p>
    */
   Order?: string
   /**
-   * AgentLastOfflineTime 客户端最后离线时间
-AutoClearTime 清理时间
+   * <p>AgentLastOfflineTime 客户端最后离线时间<br>AutoClearTime 清理时间</p>
    */
   By?: string
 }
@@ -2329,11 +2325,11 @@ export interface DescribeMachineGeneralResponse {
  */
 export interface DescribeMachineClearHistoryResponse {
   /**
-   * 总条数
+   * <p>总条数</p>
    */
   TotalCount?: number
   /**
-   * 列表数据
+   * <p>列表数据</p>
    */
   List?: Array<MachineClearHistory>
   /**
@@ -2848,82 +2844,85 @@ export interface DescribeOverviewStatisticsResponse {
  */
 export interface ModifyMalwareTimingScanSettingsRequest {
   /**
-   * 检测模式 0 全盘检测  1快速检测
+   * <p>检测模式 0 全盘检测  1快速检测</p>
    */
   CheckPattern: number
   /**
-   * 检测周期 开始时间，如：02:00:00
+   * <p>检测周期 开始时间，如：02:00:00</p>
    */
   StartTime: string
   /**
-   * 检测周期 超时结束时间，如：04:00:00
+   * <p>检测周期 超时结束时间，如：04:00:00</p>
    */
   EndTime: string
   /**
-   * 是否全部服务器 1 全部 2 自选
+   * <p>是否全部服务器 1 全部 2 自选</p>
    */
   IsGlobal: number
   /**
-   * 定时检测开关 0 关闭 1开启
+   * <p>定时检测开关 0 关闭 1开启</p>
    */
   EnableScan: number
   /**
-   * 监控模式 0 标准 1深度
+   * <p>监控模式 0 标准 1深度</p>
    */
   MonitoringPattern: number
   /**
-   * 扫描周期 默认每天 1
+   * <p>扫描周期 默认每天 1</p>
    */
   Cycle: number
   /**
-   * 实时监控 0 关闭 1开启
+   * <p>实时监控 0 关闭 1开启</p>
    */
   RealTimeMonitoring: number
   /**
-   * 自选服务器时必须 主机quuid的string数组
+   * <p>自选服务器时必须 主机quuid的string数组</p>
    */
   QuuidList?: Array<string>
   /**
-   * 是否自动隔离 1隔离 0 不隔离
+   * <p>是否自动隔离 1隔离 0 不隔离</p>
    */
   AutoIsolation?: number
   /**
-   * 是否杀掉进程 1杀掉 0不杀掉
+   * <p>是否杀掉进程 1杀掉 0不杀掉</p>
    */
   KillProcess?: number
   /**
-   * 1 清理, 0 不清理
-<li>本操作会修复被篡改的系统命令，计划任务等系统文件，操作中请确保yum/apt 可用</li>
+   * <p>1 清理, 0 不清理</p><li>本操作会修复被篡改的系统命令，计划任务等系统文件，操作中请确保yum/apt 可用</li>
    */
   DoClean?: number
   /**
-   * 1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示）
+   * <p>1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示）</p>
    */
   EngineType?: number
   /**
-   * 启发引擎开关 0 关闭 1开启
+   * <p>启发引擎开关 0 关闭 1开启</p>
    */
   EnableInspiredEngine?: number
   /**
-   * 是否开启恶意进程查杀[0:未开启,1:开启]
+   * <p>是否开启恶意进程查杀[0:未开启,1:开启]</p>
    */
   EnableMemShellScan?: number
   /**
-   * 防护模式 0 标准 1重保
+   * <p>防护模式 0 标准 1重保</p>
    */
   ProtectMode?: number
   /**
-   * 查杀范围 0 脚本类之外的恶意文件，1全部恶意文件
+   * <p>查杀范围 0 脚本类之外的恶意文件，1全部恶意文件</p>
    */
   ProtectFileScope?: number
   /**
-   * 自选的隔离主机集合
+   * <p>自选的隔离主机集合</p>
    */
   QuaraUuids?: Array<string>
   /**
-   * 用户选择的隔离范围，0：默认全隔离 1：用户自选
+   * <p>用户选择的隔离范围，0：默认全隔离 1：用户自选</p>
    */
   QuaraScope?: number
+  /**
+   * <p>产品类型 0-主机安全(默认) 1-安全中心</p>
+   */
+  ProductType?: number
 }
 
 /**
@@ -3081,27 +3080,27 @@ export interface DescribeBaselineDetectListResponse {
  */
 export interface DescribeNetAttackSettingResponse {
   /**
-   * 0 关闭网络攻击检测，1开启网络攻击检测
+   * <p>0 关闭网络攻击检测，1开启网络攻击检测</p>
    */
   NetAttackEnable?: number
   /**
-   * 0 新增告警事件默认待处理，1新增告警事件默认已处理，3新增告警事件默认忽略
+   * <p>0 新增告警事件默认待处理，1新增告警事件默认已处理，3新增告警事件默认忽略</p>
    */
   NetAttackAlarmStatus?: number
   /**
-   * 1 全部旗舰版主机，0 InstanceIds列表主机
+   * <p>1 全部旗舰版主机，0 InstanceIds列表主机</p>
    */
   Scope?: number
   /**
-   * 自选主机
+   * <p>自选主机</p>
    */
   InstanceIds?: Array<string>
   /**
-   * 自选排除主机
+   * <p>自选排除主机</p>
    */
   ExcludeInstanceIds?: Array<string>
   /**
-   * 新增资产自动包含 0 不包含 1包含
+   * <p>新增资产自动包含 0 不包含 1包含</p>
    */
   AutoInclude?: number
   /**
@@ -3504,7 +3503,7 @@ export interface ExportWebPageEventListResponse {
  */
 export interface ModifyMachineAutoClearConfigRequest {
   /**
-   * 清理规则时间, 0 表示关闭, 单位为天, 最大为 30天
+   * <p>清理规则时间, 0 表示关闭, 单位为天, 最大为 30天</p>
    */
   ClearRule: number
 }
@@ -4615,7 +4614,12 @@ export interface DescribeMachinesSimpleResponse {
 /**
  * DescribeNetAttackSetting请求参数结构体
  */
-export type DescribeNetAttackSettingRequest = null
+export interface DescribeNetAttackSettingRequest {
+  /**
+   * <p>产品类型 0-主机安全 1-安全中心</p>
+   */
+  ProductType?: number
+}
 
 /**
  * 登录审计列表实体
@@ -7616,11 +7620,11 @@ export interface DescribeVulLabelsResponse {
  */
 export interface DescribeLoginTypeHostResponse {
   /**
-   * 总数
+   * <p>总数</p>
    */
   Total?: number
   /**
-   * 主机列表
+   * <p>主机列表</p>
    */
   List?: Array<ClientSettingHost>
   /**
@@ -8625,27 +8629,27 @@ export interface ExportFileTamperEventsResponse {
  */
 export interface DescribeBanStatusResponse {
   /**
-   * (已废弃) 阻断开关状态: 0 -- 关闭  1 -- 高级阻断 2 -- 基础阻断(只阻断情报库黑ip)
+   * <p>(已废弃) 阻断开关状态: 0 -- 关闭  1 -- 高级阻断 2 -- 基础阻断(只阻断情报库黑ip)</p>
    */
   Status?: number
   /**
-   * 是否弹窗提示信息 false: 关闭，true: 开启
+   * <p>是否弹窗提示信息 false: 关闭，true: 开启</p>
    */
   ShowTips?: boolean
   /**
-   * 是否开启智能过白模式
+   * <p>是否开启智能过白模式</p>
    */
   OpenSmartMode?: boolean
   /**
-   * 是否开启情报IP阻断
+   * <p>是否开启情报IP阻断</p>
    */
   BanBlackIp?: boolean
   /**
-   * 是否开启漏洞IP阻断
+   * <p>是否开启漏洞IP阻断</p>
    */
   BanVulIp?: boolean
   /**
-   * 是否开启规则阻断
+   * <p>是否开启规则阻断</p>
    */
   BanByRule?: boolean
   /**
@@ -9444,19 +9448,19 @@ export interface DescribeLoginTypeHostRequest {
    */
   Filters?: Array<Filter>
   /**
-   * 限制条数,默认10,最大100
+   * <p>限制条数,默认10,最大100</p>
    */
   Limit?: number
   /**
-   * 偏移量,默认0
+   * <p>偏移量,默认0</p>
    */
   Offset?: number
   /**
-   * 排序方式: [ASC:升序|DESC:降序]
+   * <p>排序方式: [ASC:升序|DESC:降序]</p>
    */
   Order?: string
   /**
-   * 可选排序列: [Id]
+   * <p>可选排序列: [Id]</p>
    */
   By?: string
 }
@@ -10620,7 +10624,7 @@ export interface DescribeBashEventsRequest {
  */
 export interface DeleteMachineClearHistoryRequest {
   /**
-   * 需要删除的记录id值,最大长度100个
+   * <p>需要删除的记录id值,最大长度100个</p>
    */
   Ids: Array<number | bigint>
 }
@@ -12362,7 +12366,7 @@ export interface CreateVulFixTaskQuuids {
  */
 export interface DescribeMachineOsListResponse {
   /**
-   * 操作系统列表
+   * <p>操作系统列表</p>
    */
   List?: Array<OsName>
   /**
@@ -14500,46 +14504,33 @@ export interface DescribeAgentInstallationTokenResponse {
  */
 export interface DescribeMachinesRequest {
   /**
-   * 机器所属专区类型 
-CVM 云服务器
-BM 黑石
-ECM 边缘计算
-LH 轻量应用服务器
-Other 混合云专区
+   * <p>机器所属专区类型<br>CVM 云服务器<br>BM 黑石<br>ECM 边缘计算<br>LH 轻量应用服务器<br>Other 混合云专区</p>
    */
   MachineType: string
   /**
-   * 机器所属地域。如：ap-guangzhou，ap-shanghai，非腾讯云主机使用：ap-others
+   * <p>机器所属地域。如：ap-guangzhou，ap-shanghai，非腾讯云主机使用：ap-others</p>
    */
   MachineRegion: string
   /**
-   * 返回数量，默认为10，最大值为100。
+   * <p>返回数量，默认为10，最大值为100。</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
   /**
-   * 过滤条件。
-<li>Ips - String - 是否必填：否 - 通过ip查询 </li>
-<li>Names - String - 是否必填：否 - 通过实例名查询 </li>
-<li>InstanceIds - String - 是否必填：否 - 通过实例id查询 </li>
-<li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship : 旗舰版 | ProtectedMachines: 专业版+旗舰版）</li>
-<li>Risk - String 是否必填: 否 - 风险主机( yes ) </li>
-<li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )
-每个过滤条件只支持一个值，暂不支持多个值“或”关系查询</li>
-<li>Quuid - String - 是否必填: 否 - 云服务器uuid  最大100条.</li>
-<li>AddedOnTheFifteen- String 是否必填: 否 - 是否只查询15天内新增的主机( 1：是) </li>
-<li> TagId- String 是否必填: 否 - 查询指定标签关联的主机列表 </li>
-<li> AgentStatus- String 是否必填: 否 - ALL 全部; ONLINE 防护中; OFFLINE 已离线;UNINSTALLED 未安装</li>
-<li> MachineStatus- String 是否必填: 否 - ALL 全部; RUNNING 运行中; STOPPED 已关机; EXPIRED 待回收</li>
+   * <p>过滤条件。</p><li>Ips - String - 是否必填：否 - 通过ip查询 </li><li>Names - String - 是否必填：否 - 通过实例名查询 </li><li>InstanceIds - String - 是否必填：否 - 通过实例id查询 </li><li>Version - String  是否必填：否 - 当前防护版本（ PRO_VERSION：专业版 | BASIC_VERSION：基础版 | Flagship : 旗舰版 | ProtectedMachines: 专业版+旗舰版）</li><li>Risk - String 是否必填: 否 - 风险主机( yes ) </li><li>Os -String 是否必填: 否 - 操作系统( DescribeMachineOsList 接口 值 )每个过滤条件只支持一个值，暂不支持多个值“或”关系查询</li><li>Quuid - String - 是否必填: 否 - 云服务器uuid  最大100条.</li><li>AddedOnTheFifteen- String 是否必填: 否 - 是否只查询15天内新增的主机( 1：是) </li><li> TagId- String 是否必填: 否 - 查询指定标签关联的主机列表 </li><li> AgentStatus- String 是否必填: 否 - ALL 全部; ONLINE 防护中; OFFLINE 已离线;UNINSTALLED 未安装</li><li> MachineStatus- String 是否必填: 否 - ALL 全部; RUNNING 运行中; STOPPED 已关机; EXPIRED 待回收</li>
    */
   Filters?: Array<Filter>
   /**
-   * 机器所属业务ID列表
+   * <p>机器所属业务ID列表</p>
    */
   ProjectIds?: Array<number | bigint>
+  /**
+   * <p>机器对应的APPID</p>
+   */
+  MachineAppId?: number
 }
 
 /**
@@ -16972,29 +16963,33 @@ export interface CheckLogKafkaConnectionStateRequest {
  */
 export interface ModifyNetAttackSettingRequest {
   /**
-   * 0 关闭网络攻击检测，1开启网络攻击检测
+   * <p>0 关闭网络攻击检测，1开启网络攻击检测</p>
    */
   NetAttackEnable: number
   /**
-   * 0 新增告警事件默认待处理，1新增告警事件默认已处理，3新增告警事件默认忽略
+   * <p>0 新增告警事件默认待处理，1新增告警事件默认已处理，3新增告警事件默认忽略</p>
    */
   NetAttackAlarmStatus: number
   /**
-   * 1 全部旗舰版主机，0 Quuids列表主机
+   * <p>1 全部旗舰版主机，0 Quuids列表主机</p>
    */
   Scope?: number
   /**
-   * 自选主机
+   * <p>自选主机</p>
    */
   InstanceIds?: Array<string>
   /**
-   * 自选排除的主机
+   * <p>自选排除的主机</p>
    */
   ExcludeInstanceIds?: Array<string>
   /**
-   * 新增资产自动包含 0 不包含 1包含
+   * <p>新增资产自动包含 0 不包含 1包含</p>
    */
   AutoInclude?: number
+  /**
+   * <p>产品类型 0-主机安全 1-安全中心</p>
+   */
+  ProductType?: number
 }
 
 /**
@@ -18156,7 +18151,12 @@ export interface OsName {
 /**
  * DescribeMalwareTimingScanSetting请求参数结构体
  */
-export type DescribeMalwareTimingScanSettingRequest = null
+export interface DescribeMalwareTimingScanSettingRequest {
+  /**
+   * <p>产品类型 0-主机安全(默认) 1-安全中心</p>
+   */
+  ProductType?: number
+}
 
 /**
  * 全文索引的相关配置
@@ -22933,87 +22933,87 @@ export interface AssetLoadSummary {
  */
 export interface DescribeMalwareTimingScanSettingResponse {
   /**
-   * 检测模式 0 全盘检测  1快速检测
+   * <p>检测模式 0 全盘检测  1快速检测</p>
    */
   CheckPattern?: number
   /**
-   * 检测周期 开始时间
+   * <p>检测周期 开始时间</p>
    */
   StartTime?: string
   /**
-   * 检测周期 超时结束时间
+   * <p>检测周期 超时结束时间</p>
    */
   EndTime?: string
   /**
-   * 是否全部服务器 1 全部 2 自选
+   * <p>是否全部服务器 1 全部 2 自选</p>
    */
   IsGlobal?: number
   /**
-   * 自选服务器时必须 主机quuid的string数组
+   * <p>自选服务器时必须 主机quuid的string数组</p>
    */
   QuuidList?: Array<string>
   /**
-   * 监控模式 0 标准 1深度
+   * <p>监控模式 0 标准 1深度</p>
    */
   MonitoringPattern?: number
   /**
-   * 周期 1每天
+   * <p>周期 1每天</p>
    */
   Cycle?: number
   /**
-   * 定时检测开关 0 关闭1 开启
+   * <p>定时检测开关 0 关闭1 开启</p>
    */
   EnableScan?: number
   /**
-   * 唯一ID
+   * <p>唯一ID</p>
    */
   Id?: number
   /**
-   * 实时监控0 关闭 1开启
+   * <p>实时监控0 关闭 1开启</p>
    */
   RealTimeMonitoring?: number
   /**
-   * 是否自动隔离：1-是，0-否
+   * <p>是否自动隔离：1-是，0-否</p>
    */
   AutoIsolation?: number
   /**
-   * 一键扫描超时时长，如：1800秒（s）
+   * <p>一键扫描超时时长，如：1800秒（s）</p>
    */
   ClickTimeout?: number
   /**
-   * 是否杀掉进程 1杀掉 0不杀掉 只有开启自动隔离才生效
+   * <p>是否杀掉进程 1杀掉 0不杀掉 只有开启自动隔离才生效</p>
    */
   KillProcess?: number
   /**
-   * 1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示）
+   * <p>1标准模式（只报严重、高危）、2增强模式（报严重、高危、中危）、3严格模式（报严重、高、中、低、提示）</p>
    */
   EngineType?: number
   /**
-   * 启发引擎 0 关闭 1开启
+   * <p>启发引擎 0 关闭 1开启</p>
    */
   EnableInspiredEngine?: number
   /**
-   * 是否开启恶意进程查杀[0:未开启,1:开启]
+   * <p>是否开启恶意进程查杀[0:未开启,1:开启]</p>
    */
   EnableMemShellScan?: number
   /**
-   * 防护模式 0 标准 1 重保
+   * <p>防护模式 0 标准 1 重保</p>
    */
   ProtectMode?: number
   /**
-   * 查杀范围 0 脚本类之外的恶意文件，1全部恶意文件
+   * <p>查杀范围 0 脚本类之外的恶意文件，1全部恶意文件</p>
    */
   ProtectFileScope?: number
   /**
-   * 执行清理开关 0未开启 1开启
+   * <p>执行清理开关 0未开启 1开启</p>
    */
   DoClean?: number
   /**
-   * 自选的隔离主机集合
+   * <p>自选的隔离主机集合</p>
    */
   QuaraUuids?: Array<string>
   /**
-   * 用户选择的隔离范围，0：默认全隔离 1：用户自选
+   * <p>用户选择的隔离范围，0：默认全隔离 1：用户自选</p>
    */
   QuaraScope?: number
   /**
@@ -24013,35 +24013,35 @@ export interface DescribeProtectDirListResponse {
  */
 export interface DescribeLoginTypeGlobalConfResponse {
   /**
-   * 是否开启防卸载 <li>0 否</li> <li>1 是</li> <li>9 未设置,和0一样是未开启</li>
+   * <p>是否开启防卸载 <li>0 否</li> <li>1 是</li> <li>9 未设置,和0一样是未开启</li></p>
    */
   Enable?: number
   /**
-   * 开启范围 <li>0 自选主机</li> <li>1 全部主机</li>
+   * <p>开启范围 <li>0 自选主机</li> <li>1 全部主机</li></p>
    */
   Scope?: number
   /**
-   * 正选主机配置数
+   * <p>正选主机配置数</p>
    */
   IncludeHostCount?: number
   /**
-   * 反选主机配置数
+   * <p>反选主机配置数</p>
    */
   ExcludeHostCount?: number
   /**
-   * 正选quuid配置列表
+   * <p>正选quuid配置列表</p>
    */
   IncludeQuuid?: Array<string>
   /**
-   * 反选quuid配置列表
+   * <p>反选quuid配置列表</p>
    */
   ExcludeQuuid?: Array<string>
   /**
-   * 已开启机器数
+   * <p>已开启机器数</p>
    */
   EnableCount?: number
   /**
-   * 未启机器数
+   * <p>未启机器数</p>
    */
   DisableCount?: number
   /**
@@ -24397,11 +24397,11 @@ export interface BaselineBasicInfo {
  */
 export interface DescribeBanModeResponse {
   /**
-   * 阻断模式，STANDARD_MODE：标准阻断，DEEP_MODE：深度阻断
+   * <p>阻断模式，STANDARD_MODE：标准阻断，DEEP_MODE：深度阻断</p>
    */
   Mode?: string
   /**
-   * 标准阻断模式的配置
+   * <p>标准阻断模式的配置</p>
    */
   StandardModeConfig?: StandardModeConfig
   /**
@@ -24760,15 +24760,15 @@ export interface ExportBaselineWeakPasswordListRequest {
  */
 export interface Filter {
   /**
-   * 过滤键的名称。
+   * <p>过滤键的名称。</p>
    */
   Name: string
   /**
-   * 一个或者多个过滤值。
+   * <p>一个或者多个过滤值。</p>
    */
   Values: Array<string>
   /**
-   * 模糊搜索
+   * <p>模糊搜索</p>
    */
   ExactMatch?: boolean
 }
@@ -26803,7 +26803,7 @@ export interface ExportBaselineListResponse {
  */
 export interface DescribeBruteAttackRulesResponse {
   /**
-   * 爆破阻断规则列表
+   * <p>爆破阻断规则列表</p>
    */
   Rules?: Array<BruteAttackRuleList>
   /**
@@ -27803,7 +27803,7 @@ export interface ExportRiskDnsPolicyListResponse {
  */
 export interface ModifyBruteAttackRulesRequest {
   /**
-   * 暴力破解判断规则
+   * <p>暴力破解判断规则</p>
    */
   Rules: Array<BruteAttackRule>
 }
@@ -28279,11 +28279,11 @@ export interface DeleteLicenseRecordAllResponse {
  */
 export interface ModifyBanModeRequest {
   /**
-   * 阻断模式，STANDARD_MODE：标准阻断，DEEP_MODE：深度阻断
+   * <p>阻断模式，STANDARD_MODE：标准阻断，DEEP_MODE：深度阻断</p>
    */
   Mode: string
   /**
-   * 阻断时间，用于标准阻断模式
+   * <p>阻断时间，用于标准阻断模式</p>
    */
   Ttl?: number
 }
@@ -30690,11 +30690,11 @@ export interface DescribeRaspEventDetailCWPResponse {
  */
 export interface DescribeMachinesResponse {
   /**
-   * 主机列表
+   * <p>主机列表</p>
    */
   Machines?: Array<Machine>
   /**
-   * 主机数量
+   * <p>主机数量</p>
    */
   TotalCount?: number
   /**
@@ -31675,7 +31675,12 @@ export interface DescribeBaselineItemDetectListResponse {
 /**
  * DescribeReverseShellSystemPolicyConfig请求参数结构体
  */
-export type DescribeReverseShellSystemPolicyConfigRequest = null
+export interface DescribeReverseShellSystemPolicyConfigRequest {
+  /**
+   * <p>产品类型 0-主机安全(默认) 1-安全中心</p>
+   */
+  ProductType?: number
+}
 
 /**
  * ModifyReverseShellRulesAggregation请求参数结构体

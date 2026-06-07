@@ -108,6 +108,16 @@ it("cls.v20201016.CreateIndex", async function () {
     }
 })
 
+it("cls.v20201016.GetClsService", async function () {
+    try {
+       const data = await client.GetClsService({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.QueryMetric", async function () {
     try {
        const data = await client.QueryMetric({})
@@ -201,6 +211,16 @@ it("cls.v20201016.DeleteConfigExtra", async function () {
 it("cls.v20201016.DescribeNetworkApplications", async function () {
     try {
        const data = await client.DescribeNetworkApplications({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.OpenClsService", async function () {
+    try {
+       const data = await client.OpenClsService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

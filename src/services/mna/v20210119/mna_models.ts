@@ -341,19 +341,19 @@ export interface GetFlowPackagesResponse {
  */
 export interface ReportOrderRequest {
   /**
-   * 订单编号唯一标识符
+   * <p>订单编号唯一标识符</p>
    */
   OrderId: string
   /**
-   * 项目id
+   * <p>项目id</p>
    */
   ProjectId?: string
   /**
-   * 用量类型
+   * <p>用量类型</p>
    */
   PackageType?: string
   /**
-   * 上报月份，默认当前月
+   * <p>上报月份，默认当前月</p>
    */
   ReportMonth?: string
 }
@@ -855,7 +855,7 @@ export interface GetFlowStatisticByNameResponse {
  */
 export interface ReportOrderResponse {
   /**
-   * 订单信息
+   * <p>订单信息</p>
    */
   OrderInfo?: OrderInfo
   /**

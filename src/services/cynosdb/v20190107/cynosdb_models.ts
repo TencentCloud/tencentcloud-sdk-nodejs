@@ -8772,7 +8772,11 @@ export interface DescribeAuditLogFilesResponse {
  */
 export interface SwitchClusterZoneResponse {
   /**
-   * 异步FlowId
+   * <p>任务id</p>
+   */
+  TaskId?: number
+  /**
+   * <p>异步FlowId</p>
    */
   FlowId?: number
   /**
@@ -9610,19 +9614,19 @@ export interface ExportInstanceSlowQueriesResponse {
  */
 export interface SwitchClusterZoneRequest {
   /**
-   * 集群Id
+   * <p>集群Id</p>
    */
   ClusterId: string
   /**
-   * 当前可用区
+   * <p>当前可用区</p>
    */
   OldZone: string
   /**
-   * 要切换到的可用区
+   * <p>要切换到的可用区</p>
    */
   NewZone: string
   /**
-   * 维护期间执行-yes,立即执行-no
+   * <p>维护期间执行-yes,立即执行-no</p>
    */
   IsInMaintainPeriod?: string
 }

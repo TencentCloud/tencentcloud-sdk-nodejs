@@ -7327,63 +7327,63 @@ export interface CreateAlertCenterIsolateRequest {
  */
 export interface CreateNatRuleItem {
   /**
-   * 访问源示例： net：IP/CIDR(192.168.0.2)
+   * <p>访问源示例： net：IP/CIDR(192.168.0.2)</p>
    */
   SourceContent: string
   /**
-   * 访问源类型：入向规则时类型可以为 ip,net,template,location；出向规则时可以为 ip,net,template,instance,group,tag
+   * <p>访问源类型：入向规则时类型可以为 ip,net,template,location；出向规则时可以为 ip,net,template,instance,group,tag</p>
    */
   SourceType: string
   /**
-   * 访问目的示例： net：IP/CIDR(192.168.0.2) domain：域名规则，例如*.qq.com
+   * <p>访问目的示例： net：IP/CIDR(192.168.0.2) domain：域名规则，例如*.qq.com</p>
    */
   TargetContent: string
   /**
-   * 访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为  ip,net,domain,template,location
+   * <p>访问目的类型：入向规则时类型可以为ip,net,template,instance,group,tag；出向规则时可以为  ip,net,domain,template,location</p>
    */
   TargetType: string
   /**
-   * 协议，可选的值： TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS
+   * <p>协议，可选的值： TCP UDP ICMP ANY HTTP HTTPS HTTP/HTTPS SMTP SMTPS SMTP/SMTPS FTP DNS</p>
    */
   Protocol: string
   /**
-   * 访问控制策略中设置的流量通过云防火墙的方式。取值： accept：放行 drop：拒绝 log：观察
+   * <p>访问控制策略中设置的流量通过云防火墙的方式。取值： accept：放行 drop：拒绝 log：观察</p>
    */
   RuleAction: string
   /**
-   * 访问控制策略的端口。取值： -1/-1：全部端口 80：80端口
+   * <p>访问控制策略的端口。取值： -1/-1：全部端口 80：80端口</p>
    */
   Port: string
   /**
-   * 规则方向：1，入站；0，出站
+   * <p>规则方向：1，入站；0，出站</p>
    */
   Direction: number
   /**
-   * 规则序号
+   * <p>规则序号</p>
    */
   OrderIndex: number
   /**
-   * 规则状态，true表示启用，false表示禁用
+   * <p>规则状态，true表示启用，false表示禁用</p>
    */
   Enable?: string
   /**
-   * 规则对应的唯一id，创建规则时无需填写
+   * <p>规则对应的唯一id，创建规则AddNatAcRule时无需填写；修改规则ModifyNatAcRule时必须填写</p><p>创建规则AddNatAcRule时无需填写；修改规则ModifyNatAcRule时必须填写</p>
    */
   Uuid?: number
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
   /**
-   * 端口协议组ID
+   * <p>端口协议组ID</p>
    */
   ParamTemplateId?: string
   /**
-   * 内部id
+   * <p>内部id</p>
    */
   InternalUuid?: number
   /**
-   * 规则生效的范围：ALL，全局生效；ap-guangzhou，生效的地域；cfwnat-xxx，生效基于实例维度
+   * <p>规则生效的范围：ALL，全局生效；ap-guangzhou，生效的地域；cfwnat-xxx，生效基于实例维度</p>
    */
   Scope?: string
 }
@@ -8557,36 +8557,35 @@ export interface ModifyFwGroupSwitchResponse {
  */
 export interface CfwInsStatus {
   /**
-   * 防火墙实例id
+   * <p>防火墙实例id</p>
    */
   CfwInsId?: string
   /**
-   * 防火墙类型，nat：nat防火墙；ew：vpc间防火墙
+   * <p>防火墙类型，nat：nat防火墙；ew：vpc间防火墙</p>
    */
   FwType?: string
   /**
-   * 实例所属地域
+   * <p>实例所属地域</p>
    */
   Region?: string
   /**
-   * 实例运行状态，Running：正常运行；BypassAutoFix：bypass修复；Updating：升级中；Expand：扩容中；BypassManual：手动触发bypass中；BypassAuto：自动触发bypass中
+   * <p>实例运行状态，Running：正常运行；BypassAutoFix：bypass修复；Updating：升级中；Expand：扩容中；BypassManual：手动触发bypass中；BypassAuto：自动触发bypass中；BypassTcDrop：丢包触发bypass中</p><p>枚举值：</p><ul><li>Running： 正常运行</li><li>BypassAutoFix： 自动bypass已修复</li><li>Updating： 实例升级中</li><li>Expand： 实例扩容中</li><li>BypassManual： 手动触发bypass中</li><li>BypassAuto： 自动触发bypass中</li><li>BypassTcDrop： 丢包触发bypass中</li></ul>
    */
   Status?: string
   /**
-   * 事件时间
+   * <p>事件时间</p>
    */
   EventTime?: string
   /**
-   * 恢复时间
+   * <p>恢复时间</p>
    */
   RecoverTime?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   CfwInsName?: string
   /**
-   * Normal: 正常模式
-OnlyRoute: 透明模式
+   * <p>Normal: 正常模式<br>OnlyRoute: 透明模式</p>
    */
   TrafficMode?: string
 }

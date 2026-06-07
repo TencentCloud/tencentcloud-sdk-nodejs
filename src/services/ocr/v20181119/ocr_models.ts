@@ -115,48 +115,6 @@ export interface FieldsInfo {
 }
 
 /**
- * 表格识别结果
- */
-export interface TextTable {
-  /**
-   * 单元格左上角的列索引
-   */
-  ColTl?: number
-  /**
-   * 单元格左上角的行索引
-   */
-  RowTl?: number
-  /**
-   * 单元格右下角的列索引
-   */
-  ColBr?: number
-  /**
-   * 单元格右下角的行索引
-   */
-  RowBr?: number
-  /**
-   * 单元格文字
-   */
-  Text?: string
-  /**
-   * 单元格类型，包含body（表格主体）、header（表头）、footer（表尾）三种
-   */
-  Type?: string
-  /**
-   * 置信度 0 ~100
-   */
-  Confidence?: number
-  /**
-   * 文本行坐标，以四个顶点坐标表示
-   */
-  Polygon?: Array<Coord>
-  /**
-   * 此字段为扩展字段
-   */
-  AdvancedInfo?: string
-}
-
-/**
  * 混贴票据单张发票识别信息
  */
 export interface InvoiceItem {
@@ -1405,57 +1363,29 @@ export interface TextFormula {
 }
 
 /**
- * HmtResidentPermitOCR返回参数结构体
+ * MLIDCardOCR请求参数结构体
  */
-export interface HmtResidentPermitOCRResponse {
+export interface MLIDCardOCRRequest {
   /**
-   * <p>证件姓名</p>
+   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。
    */
-  Name?: string
+  ImageBase64?: string
   /**
-   * <p>性别</p>
+   * 卡证背面图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  Sex?: string
+  BackImageBase64?: string
   /**
-   * <p>出生日期</p>
+   * 图片的 Url 地址。( 中国地区之外不支持这个字段 )支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  Birth?: string
+  ImageUrl?: string
   /**
-   * <p>地址</p>
+   * 卡证背面图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  Address?: string
+  BackImageUrl?: string
   /**
-   * <p>身份证号</p>
+   * 是否返回图片，默认false
    */
-  IdCardNo?: string
-  /**
-   * <p>0-正面<br>1-反面</p>
-   */
-  CardType?: number
-  /**
-   * <p>证件有效期限</p>
-   */
-  ValidDate?: string
-  /**
-   * <p>签发机关</p>
-   */
-  Authority?: string
-  /**
-   * <p>签发次数</p>
-   */
-  VisaNum?: string
-  /**
-   * <p>通行证号码</p>
-   */
-  PassNo?: string
-  /**
-   * <p>头像和坐标信息</p>
-   */
-  PortraitImageInfo?: PortraitImageInfo
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  RetImage?: boolean
 }
 
 /**
@@ -3904,32 +3834,6 @@ ForeignPermanentResidentFront: 外国人永居证正面识别
 ForeignPermanentResidentBack: 外国人永居证背面识别
    */
   DiscernType?: Array<string>
-}
-
-/**
- * MLIDCardOCR请求参数结构体
- */
-export interface MLIDCardOCRRequest {
-  /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。
-   */
-  ImageBase64?: string
-  /**
-   * 卡证背面图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-   */
-  BackImageBase64?: string
-  /**
-   * 图片的 Url 地址。( 中国地区之外不支持这个字段 )支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-   */
-  ImageUrl?: string
-  /**
-   * 卡证背面图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-   */
-  BackImageUrl?: string
-  /**
-   * 是否返回图片，默认false
-   */
-  RetImage?: boolean
 }
 
 /**
@@ -9466,25 +9370,45 @@ export interface MedicalInvoice {
 }
 
 /**
- * HmtResidentPermitOCR请求参数结构体
+ * 表格识别结果
  */
-export interface HmtResidentPermitOCRRequest {
+export interface TextTable {
   /**
-   * <p>图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。</p>
+   * 单元格左上角的列索引
    */
-  ImageBase64?: string
+  ColTl?: number
   /**
-   * <p>图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。</p>
+   * 单元格左上角的行索引
    */
-  ImageUrl?: string
+  RowTl?: number
   /**
-   * <p>FRONT：有照片的一面（人像面），<br>BACK：无照片的一面（国徽面），<br>该参数如果不填或填错，将为您自动判断正反面。</p>
+   * 单元格右下角的列索引
    */
-  CardSide?: string
+  ColBr?: number
   /**
-   * <p>是否返回头像和位置坐标</p>
+   * 单元格右下角的行索引
    */
-  CropPortrait?: boolean
+  RowBr?: number
+  /**
+   * 单元格文字
+   */
+  Text?: string
+  /**
+   * 单元格类型，包含body（表格主体）、header（表头）、footer（表尾）三种
+   */
+  Type?: string
+  /**
+   * 置信度 0 ~100
+   */
+  Confidence?: number
+  /**
+   * 文本行坐标，以四个顶点坐标表示
+   */
+  Polygon?: Array<Coord>
+  /**
+   * 此字段为扩展字段
+   */
+  AdvancedInfo?: string
 }
 
 /**

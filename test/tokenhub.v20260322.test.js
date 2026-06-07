@@ -108,6 +108,16 @@ it("tokenhub.v20260322.DescribeTokenPlanList", async function () {
     }
 })
 
+it("tokenhub.v20260322.DescribeModelList", async function () {
+    try {
+       const data = await client.DescribeModelList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tokenhub.v20260322.DescribeApiKey", async function () {
     try {
        const data = await client.DescribeApiKey({})

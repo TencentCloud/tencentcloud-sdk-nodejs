@@ -2902,7 +2902,7 @@ export interface ManagedAIModel {
  */
 export interface DescribeUserListResponse {
   /**
-   * 结果返回
+   * <p>结果返回</p>
    */
   Data?: DescribeUserListResp
   /**
@@ -4741,33 +4741,37 @@ export interface AIModel {
  */
 export interface DescribeUserListRequest {
   /**
-   * 环境id
+   * <p>环境id</p>
    */
   EnvId: string
   /**
-   * 页码，从1开始，默认1
+   * <p>页码，从1开始，默认1</p>
    */
   PageNo?: number
   /**
-   * 每页数量，默认20，最大100
+   * <p>每页数量，默认20，最大100</p>
    */
   PageSize?: number
   /**
-   * 用户名，模糊查询
+   * <p>用户名，模糊查询</p>
    */
   Name?: string
   /**
-   * 用户昵称，模糊查询
+   * <p>用户昵称，模糊查询</p>
    */
   NickName?: string
   /**
-   * 手机号，模糊查询
+   * <p>手机号，模糊查询</p>
    */
   Phone?: string
   /**
-   * 邮箱，模糊查询
+   * <p>邮箱，模糊查询</p>
    */
   Email?: string
+  /**
+   * <p>用户id列表，根据id过滤用户</p>
+   */
+  UidList?: Array<string>
 }
 
 /**
