@@ -667,7 +667,7 @@ export interface VoiceCloneRequest {
    */
   VoiceName: string
   /**
-   * <p>声音克隆的参考音频，必须为16k单声道的wav的base64字符串， 长度在6秒～180秒之间</p>
+   * <p>声音克隆的参考音频，base64字符串，支持wav、mp3、m4a格式，长度在6秒～180秒之间</p>
    */
   PromptAudio: string
   /**
@@ -680,11 +680,11 @@ export interface VoiceCloneRequest {
    */
   PromptText?: string
   /**
-   * <p>TTS的模型：flow_02_turbo，flow_01_ex</p><p>枚举值：</p><ul><li>flow_02_turbo： flow_02_turbo</li><li>flow_01_ex： flow_01_ex</li></ul>
+   * <p>TTS的模型，支持flow_02_turbo，flow_01_ex，默认为flow_02_turbo</p><p>枚举值：</p><ul><li>flow_02_turbo： 高性价比模型，兼顾效果和成本</li><li>flow_01_ex： 高天花板模型，能力全面，在音色克隆上表现更优</li></ul>
    */
   Model?: string
   /**
-   * <p>语言参数，默认为空， 参考： (ISO 639-1)</p>
+   * <p>语言参数，默认为空，表示自动识别</p><p>枚举值：</p><ul><li>zh： 中文</li><li>en： 英文</li><li>ja： 日语</li><li>ko： 韩语</li><li>yue： 粤语</li><li>ms： 马来语</li><li>ar： 阿拉伯语</li><li>id： 印尼语</li><li>th： 泰语</li><li>vi： 越南语</li></ul>
    */
   Language?: string
 }
@@ -869,7 +869,7 @@ export interface AsyncTextToSpeechRequest {
    */
   AlignmentMode?: number
   /**
-   * <p>需要合成的语言（ISO 639-1），默认自动识别，支持的语言如下：  zh（中文） en（英文） yue（粤语） ja（日语） ko（韩语） ar（阿拉伯语） id（印尼语） th（泰语）</p>
+   * <p>需要合成的语言，默认为空，表示自动识别</p><p>枚举值：</p><ul><li>zh： 中文</li><li>en： 英文</li><li>ja： 日语</li><li>ko： 韩语</li><li>yue： 粤语</li><li>ms： 马来语</li><li>ar： 阿拉伯语</li><li>id： 印尼语</li><li>th： 泰语</li><li>vi： 越南语</li></ul>
    */
   LanguageCode?: string
 }
@@ -2631,29 +2631,15 @@ export interface DescribeAIConversationResponse {
  */
 export interface AudioFormat {
   /**
-   * 生成的音频格式
-
-- TextToSpeechSSE 流式接口
-
- 支持 pcm, 默认: pcm
-
-- TextToSpeech 非流式接口
-
- 支持 pcm,wav,mp3,  默认: pcm
-
-- AsyncTextToSpeech
-支持pcm,mp3, 默认：mp3
+   * <p>生成的音频格式</p><ul><li><p>TextToSpeechSSE 流式接口</p><p>支持 pcm,mp3,  默认: pcm</p></li><li><p>TextToSpeech 非流式接口</p><p>支持 pcm,wav,mp3,  默认: pcm</p></li><li><p>AsyncTextToSpeech<br>支持pcm,mp3, 默认: mp3</p></li></ul>
    */
   Format?: string
   /**
-   * 生成的音频采样率，默认24000
-可选
-- 16000
-- 24000 
+   * <p>生成的音频采样率，默认24000<br>可选</p><ul><li>16000</li><li>24000</li></ul>
    */
   SampleRate?: number
   /**
-   *  MP3 比特率 (kbps)，仅对 MP3 格式生效, 可以选： `64`, `128`, `192`, `256` ,  默认： `128`
+   * <p>MP3 比特率 (kbps)，仅对 MP3 格式生效, 可以选： <code>64</code>, <code>128</code>, <code>192</code>, <code>256</code> ,  默认： <code>128</code></p>
    */
   Bitrate?: number
 }
@@ -5375,7 +5361,7 @@ export interface UpdateStreamIngestRequest {
  */
 export interface TextToSpeechSSERequest {
   /**
-   * <p>需要转语音的文字内容，长度范围：[1, 255]</p>
+   * <p>需要转语音的文字内容，最大支持20000字符</p>
    */
   Text: string
   /**
@@ -5396,11 +5382,11 @@ export interface TextToSpeechSSERequest {
    */
   APIKey?: string
   /**
-   * <p>TTS的模型，当前固定为：flow_02_turbo</p><p>枚举值：</p><ul><li>flow_02_turbo： flow_02_turbo</li></ul>
+   * <p>TTS的模型，支持flow_02_turbo，flow_01_ex，默认为flow_02_turbo</p><p>枚举值：</p><ul><li>flow_02_turbo： 高性价比模型，兼顾效果和成本</li><li>flow_01_ex： 高天花板模型，能力全面，在音色克隆上表现更优</li></ul>
    */
   Model?: string
   /**
-   * <p>需要合成的语言（ISO 639-1），默认自动识别，支持如下语言：</p><ul><li>zh（中文）</li><li>en（英文）</li><li>yue（粤语）</li><li>ja（日语）</li><li>ko（韩语）</li><li>ar（阿拉伯语）</li><li>id（印尼语）</li><li>th（泰语）</li></ul>
+   * <p>需要合成的语言，默认为空，表示自动识别</p><p>枚举值：</p><ul><li>zh： 中文</li><li>en： 英文</li><li>ja： 日语</li><li>ko： 韩语</li><li>yue： 粤语</li><li>ms： 马来语</li><li>ar： 阿拉伯语</li><li>id： 印尼语</li><li>th： 泰语</li><li>vi： 越南语</li></ul>
    */
   Language?: string
   /**
@@ -5742,7 +5728,7 @@ export interface DeleteBasicModerationResponse {
  */
 export interface TextToSpeechRequest {
   /**
-   * <p>需要转语音的文字内容，长度范围：[1, 255]</p>
+   * <p>需要转语音的文字内容，最大支持2000字符</p>
    */
   Text: string
   /**
@@ -5763,11 +5749,11 @@ export interface TextToSpeechRequest {
    */
   APIKey?: string
   /**
-   * <p>TTS的模型，当前固定为：flow_02_turbo</p><p>枚举值：</p><ul><li>flow_02_turbo： flow_02_turbo</li></ul>
+   * <p>TTS的模型，支持flow_02_turbo，flow_01_ex，默认为flow_02_turbo</p><p>枚举值：</p><ul><li>flow_02_turbo： 高性价比模型，兼顾效果和成本</li><li>flow_01_ex： 高天花板模型，能力全面，在音色克隆上表现更优</li></ul>
    */
   Model?: string
   /**
-   * <p>需要合成的语言（ISO 639-1），默认自动识别，支持的语言如下：</p><ul><li>zh（中文）</li><li>en（英文）</li><li>yue（粤语）</li><li>ja（日语）</li><li>ko（韩语）</li><li>ar（阿拉伯语）</li><li>id（印尼语）</li><li>th（泰语）</li></ul>
+   * <p>需要合成的语言，默认为空，表示自动识别</p><p>枚举值：</p><ul><li>zh： 中文</li><li>en： 英文</li><li>ja： 日语</li><li>ko： 韩语</li><li>yue： 粤语</li><li>ms： 马来语</li><li>ar： 阿拉伯语</li><li>id： 印尼语</li><li>th： 泰语</li><li>vi： 越南语</li></ul>
    */
   Language?: string
   /**

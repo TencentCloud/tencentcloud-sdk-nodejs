@@ -28,7 +28,20 @@ export interface AttachRemoteDisksResponse {
 /**
  * ModifyRemoteDiskAttributes请求参数结构体
  */
-export type ModifyRemoteDiskAttributesRequest = null
+export interface ModifyRemoteDiskAttributesRequest {
+  /**
+   * <p>一个或多个待操作的单副本SSD硬盘ID。如果传入多个单副本SSD硬盘ID，只支持所有硬盘修改为同一属性。</p>
+   */
+  RemoteDiskIds: Array<string>
+  /**
+   * <p>新的单副本SSD硬盘名称</p>
+   */
+  DiskName?: string
+  /**
+   * <p>新的单副本SSD硬盘项目ID。</p>
+   */
+  ProjectId?: number
+}
 
 /**
  * ModifyDiskExtraPerformance请求参数结构体
@@ -274,7 +287,16 @@ export interface ModifySnapshotsSharePermissionRequest {
 /**
  * AttachRemoteDisks请求参数结构体
  */
-export type AttachRemoteDisksRequest = null
+export interface AttachRemoteDisksRequest {
+  /**
+   * <p>指定待挂载单副本SSD硬盘的CVM实例。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>一个或多个待挂载的单副本SSD硬盘ID。</p>
+   */
+  RemoteDiskIds: Array<string>
+}
 
 /**
  * CopySnapshotCrossRegions返回参数结构体
@@ -401,12 +423,26 @@ export interface DescribeAutoSnapshotPoliciesRequest {
 /**
  * InquirePriceRenewRemoteDisks请求参数结构体
  */
-export type InquirePriceRenewRemoteDisksRequest = null
+export interface InquirePriceRenewRemoteDisksRequest {
+  /**
+   * <p>预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月云盘的购买时长。如果在该参数中指定CurInstanceDeadline，则会按对齐到子机到期时间来续费。如果是批量续费询价，该参数与Disks参数一一对应，元素数量需保持一致。</p>
+   */
+  DiskChargePrepaidSet: Array<RemoteDiskChargePrepaid>
+  /**
+   * <p>一个或多个单副本SSD硬盘ID。</p>
+   */
+  RemoteDiskIds: Array<string>
+}
 
 /**
  * TerminateRemoteDisks请求参数结构体
  */
-export type TerminateRemoteDisksRequest = null
+export interface TerminateRemoteDisksRequest {
+  /**
+   * <p>一个或多个单副本SSD硬盘ID。</p>
+   */
+  RemoteDiskIds: Array<string>
+}
 
 /**
  * DescribeRemoteDisks请求参数结构体
@@ -547,7 +583,12 @@ export interface RenewDiskRequest {
 /**
  * DescribeRemoteDisksDeniedActions请求参数结构体
  */
-export type DescribeRemoteDisksDeniedActionsRequest = null
+export interface DescribeRemoteDisksDeniedActionsRequest {
+  /**
+   * <p>单副本SSD硬盘ID列表。每次批量请求单副本SSD硬盘的上限为 100。</p>
+   */
+  RemoteDiskIds: Array<string>
+}
 
 /**
  * InquirePriceModifyDiskExtraPerformance返回参数结构体
@@ -1536,7 +1577,24 @@ export interface DescribeInstancesDiskNumResponse {
 /**
  * InquirePriceCreateRemoteDisks请求参数结构体
  */
-export type InquirePriceCreateRemoteDisksRequest = null
+export interface InquirePriceCreateRemoteDisksRequest {
+  /**
+   * <p>单副本SSD硬盘计费类型。</p><p>枚举值：</p><ul><li>PREPAID： 预付费，即包年包月</li><li>POSTPAID_BY_HOUR： 按小时后付费</li></ul>
+   */
+  DiskChargeType: string
+  /**
+   * <p>单副本SSD硬盘大小，单位为GiB。</p><p>取值范围：[2000, 7000]</p>
+   */
+  DiskSize: number
+  /**
+   * <p>预付费模式，即包年包月相关参数设置。通过该参数指定包年包月云盘的购买时长、是否设置自动续费等属性。 创建预付费云盘该参数必传，创建按小时后付费云盘无需传该参数。</p>
+   */
+  DiskChargePrepaid?: RemoteDiskChargePrepaid
+  /**
+   * <p>购买单副本SSD硬盘的数量。不填则默认为1。</p>
+   */
+  DiskCount?: number
+}
 
 /**
  * ResizeDisk请求参数结构体
@@ -1605,7 +1663,36 @@ export interface InitializeDisksRequest {
 /**
  * CreateRemoteDisks请求参数结构体
  */
-export type CreateRemoteDisksRequest = null
+export interface CreateRemoteDisksRequest {
+  /**
+   * <p>单副本SSD硬盘计费类型。 </p><p>枚举值：</p><ul><li>PREPAID： 预付费，即包年包月</li><li>POSTPAID_BY_HOUR： 按小时后付费</li></ul>
+   */
+  DiskChargeType: string
+  /**
+   * <p>单副本SSD硬盘大小，单位为GiB。</p><p>取值范围：[2000, 7000]</p>
+   */
+  DiskSize: number
+  /**
+   * <p>待挂载单副本SSD硬盘的CVM实例ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>实例所在的位置。通过该参数可以指定实例所属可用区，所属项目。若不指定项目，将在默认项目下进行创建。</p>
+   */
+  Placement: Placement
+  /**
+   * <p>预付费模式，即包年包月相关参数设置。通过该参数指定包年包月单副本SSD硬盘的购买时长、是否设置自动续费等属性。 创建预付费单副本SSD硬盘该参数必传，创建按小时后付费单副本SSD硬盘无需传该参数。</p>
+   */
+  DiskChargePrepaid?: RemoteDiskChargePrepaid
+  /**
+   * <p>创建单副本SSD硬盘数量，不传则默认为1。</p>
+   */
+  DiskCount?: number
+  /**
+   * <p>单副本SSD的显示名称。</p>
+   */
+  DiskName?: string
+}
 
 /**
  * 云盘配置。
@@ -1808,6 +1895,30 @@ export interface DeleteSnapshotGroupResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 描述了单副本SSD硬盘的预付费计费模式。
+ */
+export interface RemoteDiskChargePrepaid {
+  /**
+   * 购买单副本SSD硬盘的时长，默认单位为月，取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。
+   */
+  Period: number
+  /**
+   * 需要将单副本SSD硬盘的到期时间与挂载的子机对齐时，可传入该参数。该参数表示子机当前的到期时间，此时Period如果传入，则表示子机需要续费的时长，单副本SSD硬盘会自动按对齐到子机续费后的到期时间续费。
+   */
+  CurInstanceDeadline?: string
+  /**
+   * 自动续费标识。取值范围：
+<ul>
+  <li>NOTIFY_AND_AUTO_RENEW：通知过期且自动续费</li>
+  <li>NOTIFY_AND_MANUAL_RENEW：通知过期不自动续费</li>
+  <li>DISABLE_NOTIFY_AND_MANUAL_RENEW：不通知过期不自动续费</li>
+</ul>
+默认取值：NOTIFY_AND_MANUAL_RENEW。
+   */
+  RenewFlag?: string
 }
 
 /**
@@ -2356,7 +2467,16 @@ export interface ModifyDiskExtraPerformanceResponse {
 /**
  * RenewRemoteDisk请求参数结构体
  */
-export type RenewRemoteDiskRequest = null
+export interface RenewRemoteDiskRequest {
+  /**
+   * <p>预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月单副本SSD硬盘的续费时长。 在云硬盘与挂载的实例一起续费的场景下，可以指定参数CurInstanceDeadline，此时单副本SSD硬盘会按对齐到实例续费后的到期时间来续费。</p>
+   */
+  DiskChargePrepaid: RemoteDiskChargePrepaid
+  /**
+   * <p>单副本SSD硬盘ID。</p>
+   */
+  RemoteDiskId: string
+}
 
 /**
  * InquirePriceModifyDiskExtraPerformance请求参数结构体
@@ -2828,7 +2948,20 @@ export interface Price {
 /**
  * DetachRemoteDisks请求参数结构体
  */
-export type DetachRemoteDisksRequest = null
+export interface DetachRemoteDisksRequest {
+  /**
+   * <p>指定从特定CVM实例上卸载单副本SSD硬盘。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>一个或多个将要卸载的单副本SSD硬盘ID。</p>
+   */
+  RemoteDiskIds: Array<string>
+  /**
+   * <p>强制解挂，内部使用。</p>
+   */
+  ForceDetach?: boolean
+}
 
 /**
  * ApplySnapshot请求参数结构体

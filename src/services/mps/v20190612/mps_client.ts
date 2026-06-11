@@ -26,6 +26,7 @@ import {
   ModifyWatermarkTemplateRequest,
   CreateStreamPackageSSAIChannelRequest,
   DescribeInputRTPSettings,
+  DescribeAigcAudioTaskRequest,
   AiRecognitionTaskAsrFullTextSegmentItem,
   DeleteStreamLinkFlowRequest,
   FrameRateConfig,
@@ -82,7 +83,7 @@ import {
   CreateSmartEraseTemplateRequest,
   FlowInOutResp,
   DescribeTextToSpeechAsyncTaskRequest,
-  MediaInputInfo,
+  AigcAudioOutputVideoInfo,
   CreateWorkflowRequest,
   ModifyStreamLinkEventRequest,
   OcrWordsConfigureInfo,
@@ -95,10 +96,12 @@ import {
   EnableWorkflowRequest,
   AiReviewTaskPoliticalOcrResult,
   ModifyAIAnalysisTemplateRequest,
+  SmartSubtitlesResult,
   AiSampleWord,
   OverrideTranscodeParameter,
   PoliticalOcrReviewTemplateInfo,
   CreateImageSpriteTemplateRequest,
+  AigcAudioReferenceAudioInfo,
   SmartErasePrivacyConfig,
   MediaSnapshotByTimePicInfoItem,
   DescribeAigcImageTaskRequest,
@@ -134,6 +137,7 @@ import {
   UpdateSmartEraseWatermarkConfig,
   CreateProjectResponse,
   ModifyProcessImageTemplateRequest,
+  TaskOutputStorage,
   DeletePersonSampleRequest,
   DeleteProjectResponse,
   AiRecognitionTaskAsrWordsSegmentItem,
@@ -182,7 +186,7 @@ import {
   ScheduleTask,
   DescribeInputRISTSettings,
   CreateStreamLinkEventRequest,
-  DeleteProcessImageTemplateRequest,
+  CreatePersonSampleRequest,
   ImageTaskInput,
   DescribeOutputHLSPullServerUrl,
   DescribeStreamLinkFlowSRTStatisticsRequest,
@@ -196,6 +200,7 @@ import {
   AiParagraphInfo,
   AudioSeparateConfig,
   DeleteAIRecognitionTemplateRequest,
+  AigcAudioOutputAudioInfo,
   UpdateVoiceRequest,
   DescribeInputSRTSettings,
   AiAnalysisTaskCoverResult,
@@ -227,6 +232,7 @@ import {
   CreateStreamLinkFlowRequest,
   CreateOutputSRTSettingsDestinations,
   CreateBlindWatermarkTemplateRequest,
+  CreateAigcAudioTaskResponse,
   RecognizeMediaForZhiXueRequest,
   MediaProcessTaskAdaptiveDynamicStreamingResult,
   OcrWordsConfigureInfoForUpdate,
@@ -262,7 +268,7 @@ import {
   TaskStatData,
   EvaluationTaskInput,
   DescribeInputRTMPPullSettings,
-  MediaProcessTaskInput,
+  DescribeAigcAudioTaskResponse,
   DisableScheduleRequest,
   AiAnalysisTaskHorizontalToVerticalResult,
   ConfigAliasesInfo,
@@ -373,7 +379,7 @@ import {
   DescribeStreamPackageSourceLocationsRequest,
   CreateOutputInfo,
   DescribeStreamPackageSourceLocationResponse,
-  TaskOutputStorage,
+  CreateAigcAudioTaskRequest,
   MediaProcessTaskResult,
   DeleteStreamPackageLinearAssemblyChannelRequest,
   UserDefineConfigureInfo,
@@ -473,6 +479,7 @@ import {
   FlowStatistics,
   BatchSmartSubtitlesResult,
   QueryProjectResponse,
+  MediaProcessTaskInput,
   CreateInputSRTSettings,
   DescribeDesignTaskRequest,
   DescribeGroupAttachFlowsByIdRequest,
@@ -542,6 +549,7 @@ import {
   RawImageWatermarkInput,
   DeleteAIAnalysisTemplateResponse,
   CreateQualityControlTemplateRequest,
+  AigcAudioExtraParam,
   AiSampleTagOperation,
   RawSmartEraseParameter,
   SRTSourceAddressResp,
@@ -640,6 +648,7 @@ import {
   CreateOutputInfoRTPSettings,
   AiReviewTaskPoliticalAsrResult,
   DescribeInputRTSPPullSettings,
+  AiTryOnConfig,
   SubtitleTemplate,
   StopStreamPackageLinearAssemblyChannelResponse,
   DescribeFlow,
@@ -816,10 +825,10 @@ import {
   SelectingSubtitleAreasConfig,
   BeautyEffectItemConfig,
   AiRecognitionTaskTransTextResultOutput,
-  SmartSubtitlesResult,
+  ModifySnapshotByTimeOffsetTemplateRequest,
   WorkflowInfo,
   SyncDubbingResponse,
-  ModifySnapshotByTimeOffsetTemplateRequest,
+  MediaInputInfo,
   AsrHotWordsConfigure,
   ImageAreaBoxInfo,
   LiveStreamAiReviewResultItem,
@@ -918,6 +927,7 @@ import {
   DescribePersonSamplesResponse,
   SourcePackageConf,
   DescribeStreamLinkFlowsRequest,
+  AigcAudioReferenceVideoInfo,
   ModifyScheduleResponse,
   PornConfigureInfo,
   AiRecognitionTaskObjectSeqmentItem,
@@ -988,7 +998,7 @@ import {
   TerrorismConfigureInfo,
   CreateStreamPackageLinearAssemblyProgramResponse,
   PoliticalAsrReviewTemplateInfo,
-  CreatePersonSampleRequest,
+  DeleteProcessImageTemplateRequest,
   SmartSubtitlesTaskInput,
   CreateAnimatedGraphicsTemplateResponse,
   TranslateConfigureInfoForUpdate,
@@ -2416,13 +2426,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询转动图模板列表，支持根据条件，分页查询。
-   */
-  async DescribeAnimatedGraphicsTemplates(
-    req: DescribeAnimatedGraphicsTemplatesRequest,
-    cb?: (error: string, rep: DescribeAnimatedGraphicsTemplatesResponse) => void
-  ): Promise<DescribeAnimatedGraphicsTemplatesResponse> {
-    return this.request("DescribeAnimatedGraphicsTemplates", req, cb)
+     * 对URL链接或COS中的视频发起入库任务。
+可选在任务完成后向回调方发送任务完成状态信息。
+     */
+  async CreateVideoDatabaseEntryTask(
+    req: CreateVideoDatabaseEntryTaskRequest,
+    cb?: (error: string, rep: CreateVideoDatabaseEntryTaskResponse) => void
+  ): Promise<CreateVideoDatabaseEntryTaskResponse> {
+    return this.request("CreateVideoDatabaseEntryTask", req, cb)
   }
 
   /**
@@ -2693,6 +2704,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 调用该接口，用于创建AI生音频任务。
+   */
+  async CreateAigcAudioTask(
+    req: CreateAigcAudioTaskRequest,
+    cb?: (error: string, rep: CreateAigcAudioTaskResponse) => void
+  ): Promise<CreateAigcAudioTaskResponse> {
+    return this.request("CreateAigcAudioTask", req, cb)
+  }
+
+  /**
    * 修改媒体传输的事件配置信息。
    */
   async ModifyStreamLinkEvent(
@@ -2761,6 +2782,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: WithdrawsWatermarkResponse) => void
   ): Promise<WithdrawsWatermarkResponse> {
     return this.request("WithdrawsWatermark", req, cb)
+  }
+
+  /**
+   * 调用该接口，用于查询AIGC生视频任务的进度以及获取生成结果。
+   */
+  async DescribeAigcAudioTask(
+    req: DescribeAigcAudioTaskRequest,
+    cb?: (error: string, rep: DescribeAigcAudioTaskResponse) => void
+  ): Promise<DescribeAigcAudioTaskResponse> {
+    return this.request("DescribeAigcAudioTask", req, cb)
   }
 
   /**
@@ -2884,14 +2915,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 对URL链接或COS中的视频发起入库任务。
-可选在任务完成后向回调方发送任务完成状态信息。
-     */
-  async CreateVideoDatabaseEntryTask(
-    req: CreateVideoDatabaseEntryTaskRequest,
-    cb?: (error: string, rep: CreateVideoDatabaseEntryTaskResponse) => void
-  ): Promise<CreateVideoDatabaseEntryTaskResponse> {
-    return this.request("CreateVideoDatabaseEntryTask", req, cb)
+   * 查询转动图模板列表，支持根据条件，分页查询。
+   */
+  async DescribeAnimatedGraphicsTemplates(
+    req: DescribeAnimatedGraphicsTemplatesRequest,
+    cb?: (error: string, rep: DescribeAnimatedGraphicsTemplatesResponse) => void
+  ): Promise<DescribeAnimatedGraphicsTemplatesResponse> {
+    return this.request("DescribeAnimatedGraphicsTemplates", req, cb)
   }
 
   /**

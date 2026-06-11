@@ -307,24 +307,29 @@ Value 填写：
  */
 export interface DescribeTopologyNewResponse {
   /**
-   * 节点集合
+   * <p>节点集合</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Nodes?: Array<TopologyNode>
   /**
-   * 边集合
+   * <p>边集合</p>
    */
   Edges?: Array<TopologyEdgeNew>
   /**
-   * 拓扑图是否有修改
+   * <p>拓扑图是否有修改</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopologyModifyFlag?: number
   /**
-   * 节点数量
+   * <p>节点数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Selectors?: SelectorView
+  /**
+   * <p>节点状态</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OverviewStats?: OverviewStats
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -671,6 +676,10 @@ export interface TopologyEdgeNew {
    * 边上目标节点类型 应用/MQ/DB
    */
   TargetComp?: string
+  /**
+   * 组件间调用次数
+   */
+  ReqCnt?: number
 }
 
 /**
@@ -857,6 +866,14 @@ export interface TopologyNode {
    * 应用 ID
    */
   ServiceId?: string
+  /**
+   * 调用次数
+   */
+  ReqCnt?: number
+  /**
+   * 消息队列消费者视角的调用次数
+   */
+  ConsumerReqCnt?: number
 }
 
 /**
@@ -1376,71 +1393,65 @@ export interface DescribeApmAgentRequest {
  */
 export interface DescribeMetricRecordsRequest {
   /**
-   * 业务系统 ID
+   * <p>业务系统 ID</p>
    */
   InstanceId: string
   /**
-   * 指标列表
+   * <p>指标列表</p>
    */
   Metrics: Array<QueryMetricItem>
   /**
-   * 开始时间（单位为秒）
+   * <p>开始时间（单位为秒）</p>
    */
   StartTime: number
   /**
-   * 结束时间（单位为秒）
+   * <p>结束时间（单位为秒）</p>
    */
   EndTime: number
   /**
-   * 聚合维度
+   * <p>聚合维度</p>
    */
   GroupBy: Array<string>
   /**
-   * 过滤条件
+   * <p>过滤条件</p>
    */
   Filters?: Array<Filter>
   /**
-   * Or 过滤条件
+   * <p>Or 过滤条件</p>
    */
   OrFilters?: Array<Filter>
   /**
-   * 排序
-现支持的 Key 有：
-
-- startTime(开始时间)
-- endTime(结束时间)
-- duration(响应时间)
-
-现支持的 Value 有：
-
-- desc(降序排序)
-- asc(升序排序)
+   * <p>排序<br>现支持的 Key 有：</p><ul><li>startTime(开始时间)</li><li>endTime(结束时间)</li><li>duration(响应时间)</li></ul><p>现支持的 Value 有：</p><ul><li>desc(降序排序)</li><li>asc(升序排序)</li></ul>
    */
   OrderBy?: OrderBy
   /**
-   * 业务名称，控制台用户请填写taw。
+   * <p>业务名称，控制台用户请填写taw。</p>
    */
   BusinessName?: string
   /**
-   * 特殊处理查询结果
+   * <p>特殊处理查询结果</p>
    */
   Type?: string
   /**
-   * 每页大小，默认为1000，合法取值范围为0~1000
+   * <p>每页大小，默认为1000，合法取值范围为0~1000</p>
    */
   Limit?: number
   /**
-   * 分页起始点
+   * <p>分页起始点</p>
    */
   Offset?: number
   /**
-   * 页码
+   * <p>页码</p>
    */
   PageIndex?: number
   /**
-   * 页长
+   * <p>页长</p>
    */
   PageSize?: number
+  /**
+   * <p>应用Id</p>
+   */
+  ServiceID?: string
 }
 
 /**
@@ -1578,6 +1589,28 @@ export interface DescribeGeneralMetricDataResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 拓扑图应用节点状态
+ */
+export interface TopologyNodeStats {
+  /**
+   * 节点总数
+   */
+  Total?: number
+  /**
+   * 健康节点数量
+   */
+  Healthy?: number
+  /**
+   * 警告节点数量
+   */
+  Warning?: number
+  /**
+   * 异常节点数量
+   */
+  Error?: number
 }
 
 /**
@@ -1862,9 +1895,21 @@ export interface ServiceDetail {
  */
 export interface DescribeApmInstancesResponse {
   /**
-   * APM 业务系统列表
+   * <p>APM 业务系统列表</p>
    */
   Instances?: Array<ApmInstanceDetail>
+  /**
+   * <p>总数</p><p>单位：个</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>页码，从1开始 </p><p>单位：页</p>
+   */
+  PageIndex?: number
+  /**
+   * <p>每页数量，默认20，最大100</p><p>单位：个</p>
+   */
+  PageSize?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1956,11 +2001,11 @@ export interface ModifyApmPrometheusRuleResponse {
  */
 export interface DescribeMetricRecordsResponse {
   /**
-   * 指标结果集
+   * <p>指标结果集</p>
    */
   Records?: Array<ApmMetricRecord>
   /**
-   * 查询指标结果集条数
+   * <p>查询指标结果集条数</p>
    */
   TotalCount?: number
   /**
@@ -2179,73 +2224,77 @@ export interface DescribeGeneralApmApplicationConfigRequest {
  */
 export interface DescribeTopologyNewRequest {
   /**
-   * 业务系统 ID
+   * <p>业务系统 ID</p>
    */
   InstanceId: string
   /**
-   * 查询开始时间
+   * <p>查询开始时间</p>
    */
   StartTime: number
   /**
-   * 查询结束时间
+   * <p>查询结束时间</p>
    */
   EndTime: number
   /**
-   * 应用名
+   * <p>应用名</p>
    */
   ServiceName?: string
   /**
-   * 上游层级
+   * <p>上游层级</p>
    */
   UpLevel?: number
   /**
-   * 应用实例信息
+   * <p>应用实例信息</p>
    */
   ServiceInstance?: string
   /**
-   * 下游层级
+   * <p>下游层级</p>
    */
   DownLevel?: number
   /**
-   * 视角
+   * <p>视角</p>
    */
   View?: string
   /**
-   * 过滤器
+   * <p>过滤器</p>
    */
   Filters?: Array<Filter>
   /**
-   * 表示Topic（MQ拓扑图用）
+   * <p>表示Topic（MQ拓扑图用）</p>
    */
   Topic?: string
   /**
-   * 视图筛选列表
+   * <p>视图筛选列表</p>
    */
   Selectors?: Selectors
   /**
-   * 视图ID
+   * <p>视图ID</p>
    */
   Id?: string
   /**
-   * TraceID
+   * <p>TraceID</p>
    */
   TraceID?: string
   /**
-   * 查询top5慢响应节点
+   * <p>查询top5慢响应节点</p>
    */
   IsSlowTopFive?: boolean
   /**
-   * 是否获取资源层信息
+   * <p>是否获取资源层信息</p>
    */
   GetResource?: boolean
   /**
-   * 根据应用标签过滤
+   * <p>根据应用标签过滤</p>
    */
   Tags?: Array<ApmTag>
   /**
-   * 不显示的节点类型
+   * <p>不显示的节点类型</p>
    */
   Hidden?: Selectors
+  /**
+   * <p>是否开启云资源关联</p>
+   */
+  EnableResourceLink?: boolean
 }
 
 /**
@@ -2253,29 +2302,49 @@ export interface DescribeTopologyNewRequest {
  */
 export interface DescribeApmInstancesRequest {
   /**
-   * Tag 列表
+   * <p>Tag 列表</p>
    */
   Tags?: Array<ApmTag>
   /**
-   * 按业务系统名过滤，支持模糊检索
+   * <p>按业务系统名过滤，支持模糊检索</p>
    */
   InstanceName?: string
   /**
-   * 按业务系统 ID 过滤，支持模糊检索
+   * <p>按业务系统 ID 过滤，支持模糊检索</p>
    */
   InstanceId?: string
   /**
-   * 按业务系统 ID 过滤
+   * <p>按业务系统 ID 过滤</p>
    */
   InstanceIds?: Array<string>
   /**
-   * 是否查询官方 Demo 业务系统（0=非 Demo 业务系统，1=Demo 业务系统，默认为0）
+   * <p>是否查询官方 Demo 业务系统（0=非 Demo 业务系统，1=Demo 业务系统，默认为0）</p>
    */
   DemoInstanceFlag?: number
   /**
-   * 是否查询全地域业务系统（0=不查询全地域，1=查询全地域，默认为0）
+   * <p>是否查询全地域业务系统（0=不查询全地域，1=查询全地域，默认为0）</p>
    */
   AllRegionsFlag?: number
+  /**
+   * <p>页码，从1开始</p><p>单位：页</p>
+   */
+  PageIndex?: number
+  /**
+   * <p>每页数量，默认20，最大100</p><p>单位：个</p>
+   */
+  PageSize?: number
+  /**
+   * <p>搜索参数（OR 匹配 Name / InstanceKey）</p>
+   */
+  Keyword?: string
+  /**
+   * <p>排序类型：ASC | DESC</p>
+   */
+  OrderDirection?: string
+  /**
+   * <p>排序字段：ServiceCount / TotalCount</p>
+   */
+  OrderBy?: string
 }
 
 /**
@@ -2375,237 +2444,231 @@ export interface TerminateApmInstanceRequest {
  */
 export interface ApmInstanceDetail {
   /**
-   * 业务系统 ID
+   * <p>业务系统 ID</p>
    */
   InstanceId?: string
   /**
-   * 业务系统名
+   * <p>业务系统名</p>
    */
   Name?: string
   /**
-   * 业务系统描述信息
+   * <p>业务系统描述信息</p>
    */
   Description?: string
   /**
-   * 业务系统状态。{
-1: 初始化中; 2: 运行中; 4: 限流}
+   * <p>业务系统状态。{<br>1: 初始化中; 2: 运行中; 4: 限流}</p>
    */
   Status?: number
   /**
-   * 业务系统所属地域
+   * <p>业务系统所属地域</p>
    */
   Region?: string
   /**
-   * 业务系统 Tag 列表
+   * <p>业务系统 Tag 列表</p>
    */
   Tags?: Array<ApmTag>
   /**
-   * AppID 信息
+   * <p>AppID 信息</p>
    */
   AppId?: number
   /**
-   * 创建人 Uin
+   * <p>创建人 Uin</p>
    */
   CreateUin?: string
   /**
-   * 存储使用量(单位：MB)
+   * <p>存储使用量(单位：MB)</p>
    */
   AmountOfUsedStorage?: number
   /**
-   * 该业务系统服务端应用数量
+   * <p>该业务系统服务端应用数量</p>
    */
   ServiceCount?: number
   /**
-   * 日均上报 Span 数
+   * <p>日均上报 Span 数</p>
    */
   CountOfReportSpanPerDay?: number
   /**
-   * Trace 数据保存时长（单位：天）
+   * <p>Trace 数据保存时长（单位：天）</p>
    */
   TraceDuration?: number
   /**
-   * 业务系统上报额度
+   * <p>业务系统上报额度</p>
    */
   SpanDailyCounters?: number
   /**
-   * 业务系统是否已开通计费（0=未开通，1=已开通）
+   * <p>业务系统是否已开通计费（0=未开通，1=已开通）</p>
    */
   BillingInstance?: number
   /**
-   * 错误警示线（单位：%）
+   * <p>错误警示线（单位：%）</p>
    */
   ErrRateThreshold?: number
   /**
-   * 采样率（单位：%）
+   * <p>采样率（单位：%）</p>
    */
   SampleRate?: number
   /**
-   * 是否开启错误采样（0=关, 1=开）
+   * <p>是否开启错误采样（0=关, 1=开）</p>
    */
   ErrorSample?: number
   /**
-   * 采样慢调用保存阈值（单位：ms）
+   * <p>采样慢调用保存阈值（单位：ms）</p>
    */
   SlowRequestSavedThreshold?: number
   /**
-   * CLS 日志所在地域
+   * <p>CLS 日志所在地域</p>
    */
   LogRegion?: string
   /**
-   * 日志源
+   * <p>日志源</p>
    */
   LogSource?: string
   /**
-   * 日志功能开关（0=关， 1=开）
+   * <p>日志功能开关（0=关， 1=开）</p>
    */
   IsRelatedLog?: number
   /**
-   * 日志主题 ID
+   * <p>日志主题 ID</p>
    */
   LogTopicID?: string
   /**
-   * 该业务系统客户端应用数量
+   * <p>该业务系统客户端应用数量</p>
    */
   ClientCount?: number
   /**
-   * 该业务系统最近2天活跃应用数量
+   * <p>该业务系统最近2天活跃应用数量</p>
    */
   TotalCount?: number
   /**
-   * CLS 日志集
+   * <p>CLS 日志集</p>
    */
   LogSet?: string
   /**
-   * Metric 数据保存时长（单位：天）
+   * <p>Metric 数据保存时长（单位：天）</p>
    */
   MetricDuration?: number
   /**
-   * 用户自定义展示标签列表
+   * <p>用户自定义展示标签列表</p>
    */
   CustomShowTags?: Array<string>
   /**
-   * 业务系统计费模式（1为预付费，0为按量付费）
+   * <p>业务系统计费模式（1为预付费，0为按量付费）</p>
    */
   PayMode?: number
   /**
-   * 业务系统计费模式是否生效
+   * <p>业务系统计费模式是否生效</p>
    */
   PayModeEffective?: boolean
   /**
-   * 响应时间警示线（单位：ms）
+   * <p>响应时间警示线（单位：ms）</p>
    */
   ResponseDurationWarningThreshold?: number
   /**
-   * 是否免费（0=否，1=限额免费，2=完全免费），默认0
+   * <p>是否免费（0=否，1=限额免费，2=完全免费），默认0</p>
    */
   Free?: number
   /**
-   * 是否 TSF 默认业务系统（0=否，1=是）
+   * <p>是否 TSF 默认业务系统（0=否，1=是）</p>
    */
   DefaultTSF?: number
   /**
-   * 是否关联 Dashboard（0=关, 1=开）
+   * <p>是否关联 Dashboard（0=关, 1=开）</p>
    */
   IsRelatedDashboard?: number
   /**
-   * 关联的 Dashboard ID
+   * <p>关联的 Dashboard ID</p>
    */
   DashboardTopicID?: string
   /**
-   * 是否开启组件漏洞检测（0=关， 1=开）
+   * <p>是否开启组件漏洞检测（0=关， 1=开）</p>
    */
   IsInstrumentationVulnerabilityScan?: number
   /**
-   * 是否开启 SQL 注入分析（0=关， 1=开）
+   * <p>是否开启 SQL 注入分析（0=关， 1=开）</p>
    */
   IsSqlInjectionAnalysis?: number
   /**
-   * 限流原因。{
-1: 正式版限额;
-2: 试用版限额;
-4: 试用版到期;
-8: 账号欠费
-}
+   * <p>限流原因。{<br>1: 正式版限额;<br>2: 试用版限额;<br>4: 试用版到期;<br>8: 账号欠费<br>}</p>
    */
   StopReason?: number
   /**
-   * 是否开远程命令执行检测（0=关， 1=开）
+   * <p>是否开远程命令执行检测（0=关， 1=开）</p>
    */
   IsRemoteCommandExecutionAnalysis?: number
   /**
-   * 是否开内存马执行检测（0=关， 1=开）
+   * <p>是否开内存马执行检测（0=关， 1=开）</p>
    */
   IsMemoryHijackingAnalysis?: number
   /**
-   * CLS索引类型(0=全文索引，1=键值索引)
+   * <p>CLS索引类型(0=全文索引，1=键值索引)</p>
    */
   LogIndexType?: number
   /**
-   * traceId的索引key: 当CLS索引类型为键值索引时生效
+   * <p>traceId的索引key: 当CLS索引类型为键值索引时生效</p>
    */
   LogTraceIdKey?: string
   /**
-   * 是否开启删除任意文件检测（0-关闭，1-开启）
+   * <p>是否开启删除任意文件检测（0-关闭，1-开启）</p>
    */
   IsDeleteAnyFileAnalysis?: number
   /**
-   * 是否开启读取任意文件检测（0-关闭，1-开启）
+   * <p>是否开启读取任意文件检测（0-关闭，1-开启）</p>
    */
   IsReadAnyFileAnalysis?: number
   /**
-   * 是否开启上传任意文件检测（0-关闭，1-开启）
+   * <p>是否开启上传任意文件检测（0-关闭，1-开启）</p>
    */
   IsUploadAnyFileAnalysis?: number
   /**
-   * 是否开启包含任意文件检测（0-关闭，1-开启）
+   * <p>是否开启包含任意文件检测（0-关闭，1-开启）</p>
    */
   IsIncludeAnyFileAnalysis?: number
   /**
-   * 是否开启目录遍历检测（0-关闭，1-开启）
+   * <p>是否开启目录遍历检测（0-关闭，1-开启）</p>
    */
   IsDirectoryTraversalAnalysis?: number
   /**
-   * 是否开启模板引擎注入检测（0-关闭，1-开启）
+   * <p>是否开启模板引擎注入检测（0-关闭，1-开启）</p>
    */
   IsTemplateEngineInjectionAnalysis?: number
   /**
-   * 是否开启脚本引擎注入检测（0-关闭，1-开启）
+   * <p>是否开启脚本引擎注入检测（0-关闭，1-开启）</p>
    */
   IsScriptEngineInjectionAnalysis?: number
   /**
-   * 是否开启表达式注入检测（0-关闭，1-开启）
+   * <p>是否开启表达式注入检测（0-关闭，1-开启）</p>
    */
   IsExpressionInjectionAnalysis?: number
   /**
-   * 是否开启JNDI注入检测（0-关闭，1-开启）
+   * <p>是否开启JNDI注入检测（0-关闭，1-开启）</p>
    */
   IsJNDIInjectionAnalysis?: number
   /**
-   * 是否开启JNI注入检测（0-关闭，1-开启）
+   * <p>是否开启JNI注入检测（0-关闭，1-开启）</p>
    */
   IsJNIInjectionAnalysis?: number
   /**
-   * 是否开启Webshell后门检测（0-关闭，1-开启）
+   * <p>是否开启Webshell后门检测（0-关闭，1-开启）</p>
    */
   IsWebshellBackdoorAnalysis?: number
   /**
-   * 是否开启反序列化检测（0-关闭，1-开启）
+   * <p>是否开启反序列化检测（0-关闭，1-开启）</p>
    */
   IsDeserializationAnalysis?: number
   /**
-   * 业务系统鉴权 token
+   * <p>业务系统鉴权 token</p>
    */
   Token?: string
   /**
-   * URL长分段收敛阈值
+   * <p>URL长分段收敛阈值</p>
    */
   UrlLongSegmentThreshold?: number
   /**
-   * URL数字分段收敛阈值
+   * <p>URL数字分段收敛阈值</p>
    */
   UrlNumberSegmentThreshold?: number
   /**
-   * spanId的索引key: 当CLS索引类型为键值索引时生效
+   * <p>spanId的索引key: 当CLS索引类型为键值索引时生效</p>
    */
   LogSpanIdKey?: string
 }
@@ -3095,6 +3158,40 @@ export interface OrderBy {
    * asc 顺序排序 / desc 倒序排序
    */
   Value: string
+}
+
+/**
+ * 拓扑图节点状态
+ */
+export interface OverviewStats {
+  /**
+   * 应用节点状态
+   */
+  ServiceStats?: TopologyNodeStats
+  /**
+   * 数据库节点状态
+   */
+  DatabaseStats?: TopologyNodeStats
+  /**
+   * 消息队列节点状态
+   */
+  MQStats?: TopologyNodeStats
+  /**
+   * 节点总数
+   */
+  TotalNodes?: number
+  /**
+   * 健康节点总数
+   */
+  HealthyNodes?: number
+  /**
+   * 警告节点总数
+   */
+  WarningNodes?: number
+  /**
+   * 错误节点总数
+   */
+  ErrorNodes?: number
 }
 
 /**

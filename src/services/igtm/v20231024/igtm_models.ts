@@ -363,7 +363,7 @@ export interface DescribeAddressPoolListRequest {
  */
 export interface ModifyStrategyResponse {
   /**
-   * 是否成功
+   * <p>是否成功</p>
    */
   Msg?: string
   /**
@@ -662,20 +662,20 @@ export interface DescribeQuotasRequest {
  */
 export interface MainAddressPool {
   /**
-   * 集合中的地址池id与权重，数组
+   * <p>集合中的地址池id与权重，数组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AddressPools: Array<MainPoolWeight>
   /**
-   * 地址池集合id
+   * <p>地址池集合id</p>
    */
   MainAddressPoolId?: number
   /**
-   * 切换阀值，不能大于主力集合内地址总数
+   * <p>切换阈值，不能大于主力集合内地址总数</p>
    */
   MinSurviveNum?: number
   /**
-   * 切换策略:ALL解析所有地址；WEIGHT：负载均衡。当为ALL时，解析地址的权重值为1；当为WEIGHT时；权重为地址池权重*地址权重
+   * <p>切换策略:ALL解析所有地址；WEIGHT：负载均衡。当为ALL时，解析地址的权重值为1；当为WEIGHT时；权重为地址池权重*地址权重</p>
    */
   TrafficStrategy?: string
 }
@@ -926,41 +926,45 @@ UNKNOWN: 未知
  */
 export interface ModifyStrategyRequest {
   /**
-   * 实例id
+   * <p>实例id</p>
    */
   InstanceId: string
   /**
-   * 策略id
+   * <p>策略id</p>
    */
   StrategyId: number
   /**
-   * 解析线路，需要全量传参
+   * <p>解析线路，需要全量传参</p>
    */
   Source: Array<Source>
   /**
-   * 主力地址池集合，需要全量传参
+   * <p>主力地址池集合，需要全量传参</p>
    */
   MainAddressPoolSet: Array<MainAddressPool>
   /**
-   * 兜底地址池集合，需要全量传参
+   * <p>兜底地址池集合，需要全量传参</p>
    */
   FallbackAddressPoolSet: Array<MainAddressPool>
   /**
-   * 策略名称，不允许重复
+   * <p>策略名称，不允许重复</p>
    */
   StrategyName?: string
   /**
-   * 策略开启状态：ENABLED开启；DISABLED关闭
+   * <p>策略开启状态：ENABLED开启；DISABLED关闭</p>
    */
   IsEnabled?: string
   /**
-   * 是否开启策略强制保留默认线路 disabled, enabled，默认不开启且只有一个策略能开启
+   * <p>是否开启策略强制保留默认线路 disabled, enabled，默认不开启且只有一个策略能开启</p>
    */
   KeepDomainRecords?: string
   /**
-   * 调度模式：AUTO默认；STOP仅暂停不切换
+   * <p>调度模式：AUTO默认；STOP仅暂停不切换</p>
    */
   SwitchPoolType?: string
+  /**
+   * <p>是否保留资源</p><p>枚举值：</p><ul><li>false： 全量操作，会有删除逻辑</li><li>true： 不会删除原有资源</li></ul>
+   */
+  KeepResource?: boolean
 }
 
 /**
@@ -1821,25 +1825,29 @@ export interface DeleteStrategyResponse {
  */
 export interface ModifyAddressPoolRequest {
   /**
-   * 地址池id
+   * <p>地址池id</p>
    */
   PoolId: number
   /**
-   * 地址池名称，不允许重复
+   * <p>地址池名称，不允许重复</p>
    */
   PoolName?: string
   /**
-   * 流量策略: WEIGHT负载均衡，ALL解析全部
+   * <p>流量策略: WEIGHT负载均衡，ALL解析全部</p>
    */
   TrafficStrategy?: string
   /**
-   * 监控器id，当监控器已关联策略时，此字段必传
+   * <p>监控器id，当监控器已关联策略时，此字段必传</p>
    */
   MonitorId?: number
   /**
-   * 地址列表，全量更新逻辑，对于存量不需要修改的地址信息也需要带上(其中参数里的AddressId需传入正确的值)，否则会被删除。
+   * <p>地址列表，全量更新逻辑，对于存量不需要修改的地址信息也需要带上(其中参数里的AddressId需传入正确的值)，否则会被删除。</p>
    */
   AddressSet?: Array<Address>
+  /**
+   * <p>是否保留资源</p><p>枚举值：</p><ul><li>false： 全量操作，会有删除逻辑</li><li>true： 不会删除原有资源</li></ul>
+   */
+  KeepResource?: boolean
 }
 
 /**
@@ -1935,7 +1943,7 @@ export interface StrategyDetail {
  */
 export interface ModifyAddressPoolResponse {
   /**
-   * 是否修改成功
+   * <p>是否修改成功</p>
    */
   Msg?: string
   /**

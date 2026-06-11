@@ -128,6 +128,16 @@ it("cynosdb.v20190107.ModifyLibraDBForwardConfig", async function () {
     }
 })
 
+it("cynosdb.v20190107.ModifyClusterPeriodScalePolicy", async function () {
+    try {
+       const data = await client.ModifyClusterPeriodScalePolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeBinlogListByVault", async function () {
     try {
        const data = await client.DescribeBinlogListByVault({})
@@ -208,6 +218,16 @@ it("cynosdb.v20190107.DescribeVaults", async function () {
     }
 })
 
+it("cynosdb.v20190107.OpenAIOptimizer", async function () {
+    try {
+       const data = await client.OpenAIOptimizer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeSupportProxyVersion", async function () {
     try {
        const data = await client.DescribeSupportProxyVersion({})
@@ -238,9 +258,9 @@ it("cynosdb.v20190107.DescribeLibraDBClusters", async function () {
     }
 })
 
-it("cynosdb.v20190107.ModifyClusterBinlogRedoLogAutoCopyVault", async function () {
+it("cynosdb.v20190107.DownloadLibraDBClusterList", async function () {
     try {
-       const data = await client.ModifyClusterBinlogRedoLogAutoCopyVault({})
+       const data = await client.DownloadLibraDBClusterList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -388,9 +408,9 @@ it("cynosdb.v20190107.AddServerlessRoInstances", async function () {
     }
 })
 
-it("cynosdb.v20190107.DownloadLibraDBClusterList", async function () {
+it("cynosdb.v20190107.DescribeClusterServerlessScalePlans", async function () {
     try {
-       const data = await client.DownloadLibraDBClusterList({})
+       const data = await client.DescribeClusterServerlessScalePlans({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -451,6 +471,16 @@ it("cynosdb.v20190107.RenewClusters", async function () {
 it("cynosdb.v20190107.SearchClusterDatabases", async function () {
     try {
        const data = await client.SearchClusterDatabases({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ReloadBalanceProxyNode", async function () {
+    try {
+       const data = await client.ReloadBalanceProxyNode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -598,6 +628,16 @@ it("cynosdb.v20190107.SearchClusterTables", async function () {
     }
 })
 
+it("cynosdb.v20190107.CreateClusterPeriodScalePolicy", async function () {
+    try {
+       const data = await client.CreateClusterPeriodScalePolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.DescribeClusterInstanceGrps", async function () {
     try {
        const data = await client.DescribeClusterInstanceGrps({})
@@ -668,9 +708,9 @@ it("cynosdb.v20190107.RenewLibraDBClusters", async function () {
     }
 })
 
-it("cynosdb.v20190107.DescribeLibraDBClusterAutoMapRule", async function () {
+it("cynosdb.v20190107.DeleteClusterPeriodScalePolicy", async function () {
     try {
-       const data = await client.DescribeLibraDBClusterAutoMapRule({})
+       const data = await client.DeleteClusterPeriodScalePolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -701,6 +741,16 @@ it("cynosdb.v20190107.DeleteAuditRuleTemplates", async function () {
 it("cynosdb.v20190107.ModifyProxyDesc", async function () {
     try {
        const data = await client.ModifyProxyDesc({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ModifyClusterBinlogRedoLogAutoCopyVault", async function () {
+    try {
+       const data = await client.ModifyClusterBinlogRedoLogAutoCopyVault({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1091,6 +1141,16 @@ it("cynosdb.v20190107.SwitchClusterZone", async function () {
 it("cynosdb.v20190107.DeleteLibraDBClusterAccounts", async function () {
     try {
        const data = await client.DeleteLibraDBClusterAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeClusterPeriodScalePolicy", async function () {
+    try {
+       const data = await client.DescribeClusterPeriodScalePolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1668,9 +1728,9 @@ it("cynosdb.v20190107.StartCLSDelivery", async function () {
     }
 })
 
-it("cynosdb.v20190107.ReloadBalanceProxyNode", async function () {
+it("cynosdb.v20190107.CancelClusterServerlessScalePlan", async function () {
     try {
-       const data = await client.ReloadBalanceProxyNode({})
+       const data = await client.CancelClusterServerlessScalePlan({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2101,6 +2161,16 @@ it("cynosdb.v20190107.SwitchClusterVpc", async function () {
 it("cynosdb.v20190107.DescribeLibraDBInstanceDetail", async function () {
     try {
        const data = await client.DescribeLibraDBInstanceDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.DescribeLibraDBClusterAutoMapRule", async function () {
+    try {
+       const data = await client.DescribeLibraDBClusterAutoMapRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

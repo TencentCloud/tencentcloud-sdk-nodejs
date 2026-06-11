@@ -155,41 +155,45 @@ export interface DescribeCostExplorerSummaryResponse {
  */
 export interface ConsumptionBusinessSummaryDataItem {
   /**
-   * 产品名称代码
+   * <p>产品名称代码</p>
    */
   BusinessCode?: string
   /**
-   * 产品名称
+   * <p>产品名称</p>
    */
   BusinessCodeName?: string
   /**
-   * 折后总价
+   * <p>折后总价</p>
    */
   RealTotalCost?: string
   /**
-   * 费用趋势
+   * <p>费用趋势</p>
    */
   Trend?: ConsumptionSummaryTrend
   /**
-   * 现金
+   * <p>现金</p>
    */
   CashPayAmount?: string
   /**
-   * 赠送金
+   * <p>赠送金</p>
    */
   IncentivePayAmount?: string
   /**
-   * 代金券
+   * <p>代金券</p>
    */
   VoucherPayAmount?: string
   /**
-   * 分成金
+   * <p>分成金</p>
    */
   TransferPayAmount?: string
   /**
-   * 地域名称（仅在地域汇总总展示）
+   * <p>地域名称（仅在地域汇总中展示）</p>
    */
   RegionName?: string
+  /**
+   * <p>待分摊金额</p><p>剩余待分摊的折后总金额</p>
+   */
+  LeftRealTotalCost?: string
 }
 
 /**
@@ -1088,41 +1092,45 @@ export interface CreateAllocationRuleRequest {
  */
 export interface ConsumptionRegionSummaryDataItem {
   /**
-   * 地域ID
+   * <p>地域ID</p>
    */
   RegionId?: string
   /**
-   * 地域名称
+   * <p>地域名称</p>
    */
   RegionName?: string
   /**
-   * 折后总价
+   * <p>折后总价</p>
    */
   RealTotalCost?: string
   /**
-   * 趋势
+   * <p>趋势</p>
    */
   Trend?: ConsumptionSummaryTrend
   /**
-   * 产品消费详情
+   * <p>产品消费详情</p>
    */
   Business?: Array<ConsumptionBusinessSummaryDataItem>
   /**
-   * 现金
+   * <p>现金</p>
    */
   CashPayAmount?: string
   /**
-   * 代金券
+   * <p>代金券</p>
    */
   VoucherPayAmount?: string
   /**
-   * 赠送金
+   * <p>赠送金</p>
    */
   IncentivePayAmount?: string
   /**
-   * 分成金
+   * <p>分成金</p>
    */
   TransferPayAmount?: string
+  /**
+   * <p>待分摊金额</p><p>剩余待分摊的折后总金额</p>
+   */
+  LeftRealTotalCost?: string
 }
 
 /**
@@ -5302,41 +5310,45 @@ export interface RegionSummaryOverviewItem {
  */
 export interface ConsumptionProjectSummaryDataItem {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId?: string
   /**
-   * 项目名称
+   * <p>项目名称</p>
    */
   ProjectName?: string
   /**
-   * 折后总价
+   * <p>折后总价</p>
    */
   RealTotalCost?: string
   /**
-   * 趋势
+   * <p>趋势</p>
    */
   Trend?: ConsumptionSummaryTrend
   /**
-   * 产品消耗详情
+   * <p>产品消耗详情</p>
    */
   Business?: Array<ConsumptionBusinessSummaryDataItem>
   /**
-   * 现金
+   * <p>现金</p>
    */
   CashPayAmount?: string
   /**
-   * 赠送金
+   * <p>赠送金</p>
    */
   IncentivePayAmount?: string
   /**
-   * 代金券
+   * <p>代金券</p>
    */
   VoucherPayAmount?: string
   /**
-   * 分成金
+   * <p>分成金</p>
    */
   TransferPayAmount?: string
+  /**
+   * <p>待分摊金额</p><p>剩余待分摊的折后总金额</p>
+   */
+  LeftRealTotalCost?: string
 }
 
 /**
@@ -7409,165 +7421,169 @@ export interface DescribeBillDownloadUrlResponse {
  */
 export interface ConsumptionResourceSummaryDataItem {
   /**
-   * 资源ID
+   * <p>资源ID</p>
    */
   ResourceId?: string
   /**
-   * 资源名称
+   * <p>资源名称</p>
    */
   ResourceName?: string
   /**
-   * 折后总价
+   * <p>折后总价</p>
    */
   RealTotalCost?: string
   /**
-   * 现金花费
+   * <p>现金花费</p>
    */
   CashPayAmount?: string
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId?: string
   /**
-   * 项目名称
+   * <p>项目名称</p>
    */
   ProjectName?: string
   /**
-   * 地域ID
+   * <p>地域ID</p>
    */
   RegionId?: string
   /**
-   * 地域名称
+   * <p>地域名称</p>
    */
   RegionName?: string
   /**
-   * 付费模式
+   * <p>付费模式</p>
    */
   PayMode?: string
   /**
-   * 付费模式名称
+   * <p>付费模式名称</p>
    */
   PayModeName?: string
   /**
-   * 产品名称代码
+   * <p>产品名称代码</p>
    */
   BusinessCode?: string
   /**
-   * 产品名称
+   * <p>产品名称</p>
    */
   BusinessCodeName?: string
   /**
-   * 消耗类型
+   * <p>消耗类型</p>
    */
   ConsumptionTypeName?: string
   /**
-   * 折前价
+   * <p>折前价</p>
    */
   RealCost?: string
   /**
-   * 费用起始时间
+   * <p>费用起始时间</p>
    */
   FeeBeginTime?: string
   /**
-   * 费用结束时间
+   * <p>费用结束时间</p>
    */
   FeeEndTime?: string
   /**
-   * 天数
+   * <p>天数</p>
    */
   DayDiff?: string
   /**
-   * 每日消耗
+   * <p>每日消耗</p>
    */
   DailyTotalCost?: string
   /**
-   * 订单号
+   * <p>订单号</p>
    */
   OrderId?: string
   /**
-   * 代金券
+   * <p>代金券</p>
    */
   VoucherPayAmount?: string
   /**
-   * 赠送金
+   * <p>赠送金</p>
    */
   IncentivePayAmount?: string
   /**
-   * 分成金
+   * <p>分成金</p>
    */
   TransferPayAmount?: string
   /**
-   * 支付者UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识
+   * <p>支付者UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识</p>
    */
   PayerUin?: string
   /**
-   * 使用者UIN：实际使用资源的账号 ID
+   * <p>使用者UIN：实际使用资源的账号 ID</p>
    */
   OwnerUin?: string
   /**
-   * 操作者UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的 ID 或者角色 ID ）
+   * <p>操作者UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的 ID 或者角色 ID ）</p>
    */
   OperateUin?: string
   /**
-   * 子产品编码
+   * <p>子产品编码</p>
    */
   ProductCode?: string
   /**
-   * 子产品名称：用户采购的具体产品细分类型，例如：云服务器 CVM-标准型 S1
+   * <p>子产品名称：用户采购的具体产品细分类型，例如：云服务器 CVM-标准型 S1</p>
    */
   ProductCodeName?: string
   /**
-   * 地域类型
+   * <p>地域类型</p>
    */
   RegionType?: string
   /**
-   * 地域类型名称
+   * <p>地域类型名称</p>
    */
   RegionTypeName?: string
   /**
-   * 扩展字段1
+   * <p>扩展字段1</p>
    */
   Extend1?: string
   /**
-   * 扩展字段2
+   * <p>扩展字段2</p>
    */
   Extend2?: string
   /**
-   * 扩展字段3
+   * <p>扩展字段3</p>
    */
   Extend3?: string
   /**
-   * 扩展字段4
+   * <p>扩展字段4</p>
    */
   Extend4?: string
   /**
-   * 扩展字段5
+   * <p>扩展字段5</p>
    */
   Extend5?: string
   /**
-   * 实例类型
+   * <p>实例类型</p>
    */
   InstanceType?: string
   /**
-   * 实例类型名称
+   * <p>实例类型名称</p>
    */
   InstanceTypeName?: string
   /**
-   * 扣费时间：结算扣费时间
+   * <p>扣费时间：结算扣费时间</p>
    */
   PayTime?: string
   /**
-   * 可用区：资源所属可用区，如广州三区
+   * <p>可用区：资源所属可用区，如广州三区</p>
    */
   ZoneName?: string
   /**
-   * 配置描述
+   * <p>配置描述</p>
    */
   ComponentConfig?: string
   /**
-   * 标签信息
+   * <p>标签信息</p>
    */
   Tags?: string
+  /**
+   * <p>待分摊金额</p><p>剩余待分摊的折后总金额</p>
+   */
+  LeftRealTotalCost?: string
 }
 
 /**

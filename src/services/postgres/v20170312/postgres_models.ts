@@ -530,9 +530,13 @@ export interface DescribeAvailableRecoveryTimeResponse {
  */
 export interface CreateBaseBackupRequest {
   /**
-   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   * <p>实例ID。可通过<a href="https://cloud.tencent.com/document/api/409/16773">DescribeDBInstances</a>接口获取</p>
    */
   DBInstanceId: string
+  /**
+   * <p>备份方式</p><p>枚举值：</p><ul><li>physical： 物理备份</li><li>logical： 逻辑备份</li><li>snapshot： 快照备份</li></ul>
+   */
+  BackupMethod?: string
 }
 
 /**
@@ -1389,7 +1393,7 @@ export interface ModifyDBInstancesProjectResponse {
  */
 export interface CreateBaseBackupResponse {
   /**
-   * 数据备份集ID
+   * <p>数据备份集ID</p>
    */
   BaseBackupId?: string
   /**
@@ -5354,37 +5358,41 @@ export interface DescribeDBErrlogsResponse {
  */
 export interface ModifyBackupPlanRequest {
   /**
-   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   * <p>实例ID。可通过<a href="https://cloud.tencent.com/document/api/409/16773">DescribeDBInstances</a>接口获取</p>
    */
   DBInstanceId: string
   /**
-   * 实例最早开始备份时间
+   * <p>实例最早开始备份时间</p>
    */
   MinBackupStartTime?: string
   /**
-   * 实例最晚开始备份时间
+   * <p>实例最晚开始备份时间</p>
    */
   MaxBackupStartTime?: string
   /**
-   * 实例备份保留时长，取值范围为7-1830，单位是天
+   * <p>实例备份保留时长，取值范围为7-1830，单位是天</p>
    */
   BaseBackupRetentionPeriod?: number
   /**
-   * 实例备份周期，若是星期维度，格式为小写星期英文单词，且至少设置两天备份；若是按月维度，格式为数字字符，如["1","2"]。
+   * <p>实例备份周期，若是星期维度，格式为小写星期英文单词，且至少设置两天备份；若是按月维度，格式为数字字符，如[&quot;1&quot;,&quot;2&quot;]。</p>
    */
   BackupPeriod?: Array<string>
   /**
-   * 实例日志备份保留时长，取值范围为7-1830，单位是天
+   * <p>实例日志备份保留时长，取值范围为7-1830，单位是天</p>
    */
   LogBackupRetentionPeriod?: number
   /**
-   * 备份计划ID，用于指明要修改哪个备份计划，不传则是修改默认备份计划。
+   * <p>备份计划ID，用于指明要修改哪个备份计划，不传则是修改默认备份计划。</p>
    */
   PlanId?: string
   /**
-   * 要修改的备份计划名称。
+   * <p>要修改的备份计划名称。</p>
    */
   PlanName?: string
+  /**
+   * <p>备份方式</p><p>枚举值：</p><ul><li>physical： 物理备份</li><li>logical： 逻辑备份</li><li>snapshot： 快照备份</li></ul>
+   */
+  BackupMethod?: string
 }
 
 /**

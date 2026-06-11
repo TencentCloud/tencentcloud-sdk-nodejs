@@ -37,6 +37,7 @@ import {
   DescribeMaintainPeriodRequest,
   AccountParam,
   ModifyBackupDownloadRestrictionResponse,
+  UpgradeClusterVersionResponse,
   WillDeleteItem,
   TransferClusterZoneResponse,
   DescribeClusterDatabaseTablesRequest,
@@ -71,11 +72,14 @@ import {
   CreateParamTemplateRequest,
   DescribeBackupDownloadUserRestrictionRequest,
   BackupRegionAndIds,
+  SearchClusterTablesResponse,
   DescribeClusterDetailRequest,
   CopyBackupToVaultResponse,
   ModifyResourcePackageNameRequest,
   UpgradeProxy,
-  OpenWanResponse,
+  DescribeClusterPeriodScalePolicyResponse,
+  OpenAIOptimizerRequest,
+  ModifyBackupNameResponse,
   BackupFileInfo,
   UpgradeProxyRequest,
   DescribeBinlogDownloadUrlResponse,
@@ -119,11 +123,12 @@ import {
   DescribeClusterReadOnlyResponse,
   DescribeInstanceSpecsRequest,
   ModifyMaintainPeriodConfigResponse,
+  ModifyClusterPeriodScalePolicyResponse,
   DescribeProxyNodesResponse,
   CreateIntegrateClusterRequest,
   ProxyNodeInfo,
   DescribeZonesResponse,
-  SearchClusterTablesResponse,
+  GrantAccountPrivilegesRequest,
   ModifyParamTemplateRequest,
   OpenAuditServiceResponse,
   SnapshotBackupConfig,
@@ -152,6 +157,7 @@ import {
   ModifyClusterDatabaseRequest,
   MigrateObject,
   DescribeResourcePackageDetailRequest,
+  ClusterPeriodScalePolicy,
   InstanceCLSDeliveryInfo,
   InquirePriceMultiSpecResponse,
   DescribeRedoLogsRequest,
@@ -176,6 +182,7 @@ import {
   DescribeBinlogsRequest,
   DescribeSSLStatusResponse,
   InstanceAuditLogFilter,
+  CancelClusterServerlessScalePlanRequest,
   ModifyLibraDBClusterReplicationObjectResponse,
   UpgradeProxyVersionRequest,
   SlaveZoneStockInfo,
@@ -196,6 +203,7 @@ import {
   CloseProxyEndPointRequest,
   LibraDBInstanceInitInfo,
   DescribeBinlogsResponse,
+  OpenAIOptimizerResponse,
   AuditInstanceInfo,
   AddClusterSlaveZoneResponse,
   DescribeProxySpecsResponse,
@@ -244,6 +252,7 @@ import {
   RestartLibraDBInstanceRequest,
   DeleteAccountsResponse,
   RenewLibraDBClustersRequest,
+  DescribeClusterServerlessScalePlansResponse,
   CreateResourcePackageResponse,
   ModifyBinlogConfigRequest,
   ModifyLibraDBClusterNameResponse,
@@ -295,6 +304,7 @@ import {
   SwitchProxyVpcResponse,
   ModifyLibraDBForwardConfigResponse,
   SlaveZoneAttrItem,
+  OpenWanResponse,
   DeliverSummary,
   DescribeChangedParamsAfterUpgradeRequest,
   CLSInfo,
@@ -350,7 +360,7 @@ import {
   DescribeVaultBackupClusterInfoRequest,
   DescribeRollbackTimeRangeResponse,
   DescribeBinlogListByVaultItem,
-  ModifyBackupNameResponse,
+  DescribeClusterServerlessScalePlansRequest,
   DescribeAuditLogFilesResponse,
   SwitchClusterZoneResponse,
   ProxyConnectionPoolInfo,
@@ -430,7 +440,7 @@ import {
   DescribeBackupListByVaultItem,
   DescribeResourcePackageSaleSpecResponse,
   OpenClusterReadOnlyInstanceGroupAccessRequest,
-  UpgradeClusterVersionResponse,
+  ModifyClusterPeriodScalePolicyRequest,
   QuerySimpleFilter,
   DescribeResourcesByDealNameRequest,
   DescribeLibraDBClusterAccountPrivilegesResponse,
@@ -482,11 +492,12 @@ import {
   PackageDetail,
   BackupLimitVpcItem,
   DescribeLibraDBClusterAccountsResponse,
-  BinlogConfigInfo,
+  CreateClusterPeriodScalePolicyResponse,
   DescribeAccountPrivilegesRequest,
   DescribeInstanceSpecsByOperationTypeRequest,
   ModifyAccountParamsResponse,
   DescribeInstanceSpecsResponse,
+  ClusterServerlessScalePlan,
   OpenSSLResponse,
   ModifyAuditServiceResponse,
   DescribeClusterDetailResponse,
@@ -502,13 +513,16 @@ import {
   DescribeLibraDBClusterDetailRequest,
   ExchangeRoGroupInfo,
   IsolateLibraDBInstanceResponse,
+  DeleteClusterPeriodScalePolicyRequest,
   RefundResourcePackageRequest,
   DescribeBinlogDownloadUrlRequest,
   ModifyInstanceNameRequest,
   RollbackInstanceInfo,
+  DescribeClusterPeriodScalePolicyRequest,
   ModifyLibraDBClusterAccountPrivilegeRequest,
   DescribeDBSecurityGroupsResponse,
   DeleteParamTemplateResponse,
+  CreateClusterPeriodScalePolicyRequest,
   DownloadLibraDBClusterListRequest,
   ClusterInstanceDetail,
   CreateBackupVaultItem,
@@ -566,7 +580,7 @@ import {
   DescribeLibraDBClustersRequest,
   LibraDBNodeInfo,
   ParamItemDetail,
-  GrantAccountPrivilegesRequest,
+  BinlogConfigInfo,
   IsolateClusterResponse,
   RenewClustersResponse,
   ModifyLibraDBForwardConfigRequest,
@@ -597,6 +611,7 @@ import {
   CreateBackupResponse,
   DescribeLibraDBVersionResponse,
   DescribeInstancesWithinSameClusterResponse,
+  CancelClusterServerlessScalePlanResponse,
   RollbackToNewClusterResponse,
   LibraDBClusterSet,
   DeleteClusterSaveBackupRequest,
@@ -641,6 +656,7 @@ import {
   ReplayInstanceAuditLogResponse,
   DescribeBinlogSaveDaysResponse,
   ModifyLibraDBClusterProjectRequest,
+  DeleteClusterPeriodScalePolicyResponse,
   DeleteBackupRequest,
   ErrorLogItemExport,
   DeleteVaultTask,
@@ -776,6 +792,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新集群的周期弹性策略
+   */
+  async ModifyClusterPeriodScalePolicy(
+    req: ModifyClusterPeriodScalePolicyRequest,
+    cb?: (error: string, rep: ModifyClusterPeriodScalePolicyResponse) => void
+  ): Promise<ModifyClusterPeriodScalePolicyResponse> {
+    return this.request("ModifyClusterPeriodScalePolicy", req, cb)
+  }
+
+  /**
    * 查询保险箱内binlog备份
    */
   async DescribeBinlogListByVault(
@@ -856,6 +882,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(OpenAIOptimizer)用于开启实例的AI优化器开关。
+   */
+  async OpenAIOptimizer(
+    req: OpenAIOptimizerRequest,
+    cb?: (error: string, rep: OpenAIOptimizerResponse) => void
+  ): Promise<OpenAIOptimizerResponse> {
+    return this.request("OpenAIOptimizer", req, cb)
+  }
+
+  /**
    * 本接口（DescribeSupportProxyVersion）用于查询支持的数据库代理版本。
    */
   async DescribeSupportProxyVersion(
@@ -886,13 +922,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改集群Binlog和RedoLog自动拷贝到保险箱的配置
+   * 下载分析集群列表
    */
-  async ModifyClusterBinlogRedoLogAutoCopyVault(
-    req: ModifyClusterBinlogRedoLogAutoCopyVaultRequest,
-    cb?: (error: string, rep: ModifyClusterBinlogRedoLogAutoCopyVaultResponse) => void
-  ): Promise<ModifyClusterBinlogRedoLogAutoCopyVaultResponse> {
-    return this.request("ModifyClusterBinlogRedoLogAutoCopyVault", req, cb)
+  async DownloadLibraDBClusterList(
+    req: DownloadLibraDBClusterListRequest,
+    cb?: (error: string, rep: DownloadLibraDBClusterListResponse) => void
+  ): Promise<DownloadLibraDBClusterListResponse> {
+    return this.request("DownloadLibraDBClusterList", req, cb)
   }
 
   /**
@@ -1036,13 +1072,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 下载分析集群列表
+   * 查询Serverless弹性扩容计划
    */
-  async DownloadLibraDBClusterList(
-    req: DownloadLibraDBClusterListRequest,
-    cb?: (error: string, rep: DownloadLibraDBClusterListResponse) => void
-  ): Promise<DownloadLibraDBClusterListResponse> {
-    return this.request("DownloadLibraDBClusterList", req, cb)
+  async DescribeClusterServerlessScalePlans(
+    req: DescribeClusterServerlessScalePlansRequest,
+    cb?: (error: string, rep: DescribeClusterServerlessScalePlansResponse) => void
+  ): Promise<DescribeClusterServerlessScalePlansResponse> {
+    return this.request("DescribeClusterServerlessScalePlans", req, cb)
   }
 
   /**
@@ -1103,6 +1139,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SearchClusterDatabasesResponse) => void
   ): Promise<SearchClusterDatabasesResponse> {
     return this.request("SearchClusterDatabases", req, cb)
+  }
+
+  /**
+   * 本接口（ReloadBalanceProxyNode）用于负载均衡数据库代理。
+   */
+  async ReloadBalanceProxyNode(
+    req: ReloadBalanceProxyNodeRequest,
+    cb?: (error: string, rep: ReloadBalanceProxyNodeResponse) => void
+  ): Promise<ReloadBalanceProxyNodeResponse> {
+    return this.request("ReloadBalanceProxyNode", req, cb)
   }
 
   /**
@@ -1246,6 +1292,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建集群的周期弹性策略
+   */
+  async CreateClusterPeriodScalePolicy(
+    req: CreateClusterPeriodScalePolicyRequest,
+    cb?: (error: string, rep: CreateClusterPeriodScalePolicyResponse) => void
+  ): Promise<CreateClusterPeriodScalePolicyResponse> {
+    return this.request("CreateClusterPeriodScalePolicy", req, cb)
+  }
+
+  /**
    * 本接口（DescribeClusterInstanceGrps）用于查询实例组信息。 该接口已废弃，推荐使用DescribeClusterInstanceGroups
    */
   async DescribeClusterInstanceGrps(
@@ -1316,13 +1372,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeLibraDBClusterAutoMapRule）用于查看分析集群高级映射规则
+   * 删除周期弹性策略
    */
-  async DescribeLibraDBClusterAutoMapRule(
-    req: DescribeLibraDBClusterAutoMapRuleRequest,
-    cb?: (error: string, rep: DescribeLibraDBClusterAutoMapRuleResponse) => void
-  ): Promise<DescribeLibraDBClusterAutoMapRuleResponse> {
-    return this.request("DescribeLibraDBClusterAutoMapRule", req, cb)
+  async DeleteClusterPeriodScalePolicy(
+    req: DeleteClusterPeriodScalePolicyRequest,
+    cb?: (error: string, rep: DeleteClusterPeriodScalePolicyResponse) => void
+  ): Promise<DeleteClusterPeriodScalePolicyResponse> {
+    return this.request("DeleteClusterPeriodScalePolicy", req, cb)
   }
 
   /**
@@ -1353,6 +1409,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyProxyDescResponse) => void
   ): Promise<ModifyProxyDescResponse> {
     return this.request("ModifyProxyDesc", req, cb)
+  }
+
+  /**
+   * 修改集群Binlog和RedoLog自动拷贝到保险箱的配置
+   */
+  async ModifyClusterBinlogRedoLogAutoCopyVault(
+    req: ModifyClusterBinlogRedoLogAutoCopyVaultRequest,
+    cb?: (error: string, rep: ModifyClusterBinlogRedoLogAutoCopyVaultResponse) => void
+  ): Promise<ModifyClusterBinlogRedoLogAutoCopyVaultResponse> {
+    return this.request("ModifyClusterBinlogRedoLogAutoCopyVault", req, cb)
   }
 
   /**
@@ -1743,6 +1809,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteLibraDBClusterAccountsResponse) => void
   ): Promise<DeleteLibraDBClusterAccountsResponse> {
     return this.request("DeleteLibraDBClusterAccounts", req, cb)
+  }
+
+  /**
+   * 查询集群内所有的周期弹性策略
+   */
+  async DescribeClusterPeriodScalePolicy(
+    req: DescribeClusterPeriodScalePolicyRequest,
+    cb?: (error: string, rep: DescribeClusterPeriodScalePolicyResponse) => void
+  ): Promise<DescribeClusterPeriodScalePolicyResponse> {
+    return this.request("DescribeClusterPeriodScalePolicy", req, cb)
   }
 
   /**
@@ -2316,13 +2392,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ReloadBalanceProxyNode）用于负载均衡数据库代理。
+   * 取消Serverless集群的弹性计划
    */
-  async ReloadBalanceProxyNode(
-    req: ReloadBalanceProxyNodeRequest,
-    cb?: (error: string, rep: ReloadBalanceProxyNodeResponse) => void
-  ): Promise<ReloadBalanceProxyNodeResponse> {
-    return this.request("ReloadBalanceProxyNode", req, cb)
+  async CancelClusterServerlessScalePlan(
+    req: CancelClusterServerlessScalePlanRequest,
+    cb?: (error: string, rep: CancelClusterServerlessScalePlanResponse) => void
+  ): Promise<CancelClusterServerlessScalePlanResponse> {
+    return this.request("CancelClusterServerlessScalePlan", req, cb)
   }
 
   /**
@@ -2753,6 +2829,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLibraDBInstanceDetailResponse) => void
   ): Promise<DescribeLibraDBInstanceDetailResponse> {
     return this.request("DescribeLibraDBInstanceDetail", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeLibraDBClusterAutoMapRule）用于查看分析集群高级映射规则
+   */
+  async DescribeLibraDBClusterAutoMapRule(
+    req: DescribeLibraDBClusterAutoMapRuleRequest,
+    cb?: (error: string, rep: DescribeLibraDBClusterAutoMapRuleResponse) => void
+  ): Promise<DescribeLibraDBClusterAutoMapRuleResponse> {
+    return this.request("DescribeLibraDBClusterAutoMapRule", req, cb)
   }
 
   /**

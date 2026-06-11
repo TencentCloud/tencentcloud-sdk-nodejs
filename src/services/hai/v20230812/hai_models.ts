@@ -452,7 +452,7 @@ export interface Price {
  */
 export interface DeployInferServiceResponse {
   /**
-   * 服务ID
+   * <p>服务ID</p>
    */
   ServiceId?: string
   /**
@@ -1124,25 +1124,29 @@ export interface DeleteServiceRequest {
  */
 export interface DeployInferServiceRequest {
   /**
-   * 服务元数据信息，如服务名
+   * <p>服务元数据信息，如服务名</p>
    */
   ServiceMetaData?: ServiceMetaData
   /**
-   * 资源相关信息
+   * <p>资源相关信息</p>
    */
   ComputeInfo?: ComputeInfo
   /**
-   * 服务部署信息
+   * <p>服务部署信息</p>
    */
   DeploymentConfigs?: Array<DeploymentConfig>
   /**
-   * 服务超参数配置
+   * <p>服务超参数配置</p>
    */
   HyperParam?: HyperParam
   /**
-   * 网络设置
+   * <p>网络设置</p>
    */
   NetworkSetting?: NetworkSetting
+  /**
+   * <p>安全类型</p><p>枚举值：</p><ul><li>STANDARD： 标准推理</li><li>CONFIDENTIAL： 可信推理</li></ul>
+   */
+  SecurityType?: string
 }
 
 /**

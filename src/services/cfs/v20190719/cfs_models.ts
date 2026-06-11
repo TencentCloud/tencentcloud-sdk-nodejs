@@ -126,29 +126,33 @@ export interface SnapshotStatistics {
  */
 export interface CreateLifecycleDataTaskRequest {
   /**
-   * 文件系统唯一 ID
+   * <p>文件系统唯一 ID</p>
    */
   FileSystemId: string
   /**
-   * 生命周期任务类型；archive：沉降；restore：预热；release：数据释放；metaload：元数据加载
+   * <p>生命周期任务类型；archive：沉降；restore：预热；release：数据释放；metaload：元数据加载</p>
    */
   Type: string
   /**
-   * 需要沉降的路径或文件，仅支持传入1个路径，不允许为空。
-   */
-  TaskPath: string
-  /**
-   * 任务名称
+   * <p>任务名称</p>
    */
   TaskName: string
   /**
-   * 数据流动 ID ，该接口可以通过 DescribeDataFlow 查询
+   * <p>需要沉降的路径或文件，仅支持传入1个路径，不允许为空。</p>
+   */
+  TaskPath?: string
+  /**
+   * <p>数据流动 ID ，该接口可以通过 DescribeDataFlow 查询</p>
    */
   DataFlowId?: string
   /**
-   * 	 当CFSTurbo内的文件和外置存储存在同名情况时，是否覆盖。  ture：覆盖  false：不覆盖（同时也不会释放热存数据）  为空时，默认为false
+   * <p>当CFSTurbo内的文件和外置存储存在同名情况时，是否覆盖。  ture：覆盖  false：不覆盖（同时也不会释放热存数据）  为空时，默认为false</p>
    */
   IsOverwrite?: boolean
+  /**
+   * <p>【新增】数据清单文件路径，清单文件内每行一条待处理文件的完整路径。与 TaskPath 二选一。路径必须以 /cfs 开头，且必须为 CFS 文件系统内已存在的文件。示例值：/cfs/lists/archive_list.txt</p>
+   */
+  ListPath?: string
 }
 
 /**
@@ -402,7 +406,7 @@ export interface DescribeCfsFileSystemsResponse {
  */
 export interface CreateLifecycleDataTaskResponse {
   /**
-   * 任务 ID
+   * <p>任务 ID</p>
    */
   TaskId?: string
   /**
@@ -1925,95 +1929,85 @@ export interface CreateAccessCertRequest {
  */
 export interface LifecycleDataTaskInfo {
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   TaskId?: string
   /**
-   * 任务状态.
-init：未执行
-running：执行中，finished：已完成
-,failed：失败
-,stopping：停止中,stopped：已停止
+   * <p>任务状态.<br>init：未执行<br>running：执行中，finished：已完成<br>,failed：失败<br>,stopping：停止中,stopped：已停止</p>
    */
   TaskStatus?: string
   /**
-   * 任务创建时间
+   * <p>任务创建时间</p>
    */
   CreationTime?: string
   /**
-   * 任务结束时间
+   * <p>任务结束时间</p>
    */
   FinishTime?: string
   /**
-   * 文件总数
+   * <p>文件总数</p>
    */
   FileTotalCount?: number
   /**
-   * 处理成功文件数量
+   * <p>处理成功文件数量</p>
    */
   FileSuccessedCount?: number
   /**
-   * 当前已经失败的文件数
+   * <p>当前已经失败的文件数</p>
    */
   FileFailedCount?: number
   /**
-   * 文件容量，单位Byte
-
-
+   * <p>文件容量，单位Byte</p>
    */
   FileTotalSize?: number
   /**
-   * 已处理完成的文件容量，单位Byte
-
-
+   * <p>已处理完成的文件容量，单位Byte</p>
    */
   FileSuccessedSize?: number
   /**
-   * 已处理失败文件容量，单位Byte
-
+   * <p>已处理失败文件容量，单位Byte</p>
    */
   FileFailedSize?: number
   /**
-   * 总文件列表
+   * <p>总文件列表</p>
    */
   FileTotalList?: string
   /**
-   * 成功的文件列表
+   * <p>成功的文件列表</p>
    */
   FileSuccessedList?: string
   /**
-   * 失败文件的列表
+   * <p>失败文件的列表</p>
    */
   FileFailedList?: string
   /**
-   * FileSystemId
+   * <p>FileSystemId</p>
    */
   FileSystemId?: string
   /**
-   * 任务名称
+   * <p>任务名称</p>
    */
   TaskName?: string
   /**
-   * 任务路径
+   * <p>任务路径</p>
    */
   TaskPath?: string
   /**
-   * 任务类型,archive:表示沉降任务，restore：表示拉取任务
+   * <p>任务类型,archive:表示沉降任务，restore：表示拉取任务</p>
    */
   Type?: string
   /**
-   * 数据流动Id
+   * <p>数据流动Id</p>
    */
   DataFlowId?: string
   /**
-   * 当CFSTurbo内的文件和外置存储存在同名情况时，是否覆盖。
-
-ture：覆盖
-
-false：不覆盖（同时也不会释放热存数据）
-为空时，默认为false
+   * <p>当CFSTurbo内的文件和外置存储存在同名情况时，是否覆盖。</p><p>ture：覆盖</p><p>false：不覆盖（同时也不会释放热存数据）<br>为空时，默认为false</p>
    */
   IsOverwrite?: boolean
+  /**
+   * <p>【新增】数据清单文件路径，清单文件内每行一条待处理文件的完整路径。与 TaskPath 二选一。路径必须以 /cfs 开头，且必须为 CFS 文件系统内已存在的文件。示例值：/cfs/lists/archive_list.txt</p>
+   */
+  ListPath?: string
 }
 
 /**

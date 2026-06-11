@@ -678,6 +678,7 @@ import {
   AiReviewTaskPoliticalAsrResult,
   CreateProcessImageAsyncTemplateResponse,
   TrtcRecordInfo,
+  AiTryOnConfig,
   DescribeReviewDetailsRequest,
   ModifySubAppIdInfoResponse,
   AiReviewProhibitedAsrTaskInput,

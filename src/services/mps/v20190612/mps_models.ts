@@ -254,6 +254,16 @@ export interface DescribeInputRTPSettings {
 }
 
 /**
+ * DescribeAigcAudioTask请求参数结构体
+ */
+export interface DescribeAigcAudioTaskRequest {
+  /**
+   * <p>创建AIGC生视频任务时，返回的任务ID。</p>
+   */
+  TaskId: string
+}
+
+/**
  * 语音全文识别片段。
  */
 export interface AiRecognitionTaskAsrFullTextSegmentItem {
@@ -1707,36 +1717,17 @@ export interface DescribeTextToSpeechAsyncTaskRequest {
 }
 
 /**
- * 媒体处理的输入对象信息。
+ * Aigc生音频任务，输出的视频信息。
  */
-export interface MediaInputInfo {
+export interface AigcAudioOutputVideoInfo {
   /**
-   * 输入来源对象的类型，支持：
-<li> COS：COS源</li>
-<li> URL：URL源</li>
-<li> AWS-S3：AWS 源，目前只支持转码任务 </li>
-<li> VOD：点播专业版 </li>
+   * <p>视频URL。</p>
    */
-  Type: string
+  Url?: string
   /**
-   * 当 Type 为 COS 时有效，则该项为必填，表示媒体处理 COS 对象信息。
+   * <p>视频时长。</p>
    */
-  CosInputInfo?: CosInputInfo
-  /**
-   * 当 Type 为 URL 时有效，则该项为必填，表示媒体处理 URL 对象信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UrlInputInfo?: UrlInputInfo
-  /**
-   * 当 Type 为 AWS-S3 时有效，则该项为必填，表示媒体处理 AWS S3 对象信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  S3InputInfo?: S3InputInfo
-  /**
-   * 当 Type 为 VOD 时有效，则该项为必填，表示媒体处理 点播专业版 对象信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VODInputInfo?: VODInputInfo
+  Duration?: number
 }
 
 /**
@@ -2096,6 +2087,44 @@ export interface ModifyAIAnalysisTemplateRequest {
 }
 
 /**
+ * 智能字幕结果。
+ */
+export interface SmartSubtitlesResult {
+  /**
+   * 任务的类型，取值范围：
+- AsrFullTextRecognition：语音全文识别
+- TransTextRecognition：语音翻译
+- PureSubtitleTrans:   纯字幕翻译
+- OcrFullTextRecognition：文字提取字幕
+   */
+  Type?: string
+  /**
+   * 语音全文识别结果，当 Type 为
+ AsrFullTextRecognition 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsrFullTextTask?: SmartSubtitleTaskAsrFullTextResult
+  /**
+   * 翻译结果，当 Type 为
+
+TransTextRecognition 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TransTextTask?: SmartSubtitleTaskTransTextResult
+  /**
+   * 当翻译类型为：PureSubtitleTrans 是返回纯字幕文件翻译结果。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PureSubtitleTransTask?: PureSubtitleTransResult
+  /**
+   * 文字提取字幕结果，当 Type 为
+ OcrFullTextRecognition 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OcrFullTextTask?: SmartSubtitleTaskFullTextResult
+}
+
+/**
  * AI 样本管理，关键词输出信息。
  */
 export interface AiSampleWord {
@@ -2260,6 +2289,16 @@ export interface CreateImageSpriteTemplateRequest {
    * 图片格式，取值为 jpg、png、webp。默认为 jpg。
    */
   Format?: string
+}
+
+/**
+ * 参考音频信息。
+ */
+export interface AigcAudioReferenceAudioInfo {
+  /**
+   * <p>参考音频URL信息。需外网可访问。</p>
+   */
+  AudioUrl?: string
 }
 
 /**
@@ -3008,6 +3047,34 @@ export interface ModifyProcessImageTemplateRequest {
    * 图片处理模板参数。
    */
   ProcessImageTemplate?: ImageTaskInput
+}
+
+/**
+ * 媒体处理输出对象信息。
+ */
+export interface TaskOutputStorage {
+  /**
+   * 媒体处理输出对象存储位置的类型，支持：
+<li>COS：COS存储</li>
+<li>AWS-S3：AWS 存储，只适用于AWS任务，且要求同区域</li>
+<li> VOD：点播专业版 </li>
+   */
+  Type: string
+  /**
+   * 当 Type 为 COS 时有效，则该项为必填，表示媒体处理 COS 输出位置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CosOutputStorage?: CosOutputStorage
+  /**
+   * 当 Type 为 AWS-S3 时有效，则该项为必填，表示媒体处理 AWS S3 输出位置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  S3OutputStorage?: S3OutputStorage
+  /**
+   * 当 Type 为 VOD 时有效，则该项为必填，表示媒体处理 点播专业版 输出位置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VODOutputStorage?: VODOutputStorage
 }
 
 /**
@@ -4154,13 +4221,35 @@ export interface CreateStreamLinkEventRequest {
 }
 
 /**
- * DeleteProcessImageTemplate请求参数结构体
+ * CreatePersonSample请求参数结构体
  */
-export interface DeleteProcessImageTemplateRequest {
+export interface CreatePersonSampleRequest {
   /**
-   * 图片处理模板唯一标识。
+   * 素材名称，长度限制：20 个字符。
    */
-  Definition?: number
+  Name: string
+  /**
+   * 素材应用场景，可选值：
+1. Recognition：用于内容识别，等价于 Recognition.Face。
+2. Review：用于不适宜内容识别，等价于 Review.Face。
+3. All：包含以上全部，等价于 1+2。
+   */
+  Usages: Array<string>
+  /**
+   * 素材描述，长度限制：1024 个字符。
+   */
+  Description?: string
+  /**
+   * 素材图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串，仅支持 jpeg、png 图片格式。数组长度限制：5 张图片。
+注意：图片必须是单人像五官较清晰的照片，像素不低于 200*200。
+   */
+  FaceContents?: Array<string>
+  /**
+   * 素材标签
+<li>数组长度限制：20 个标签；</li>
+<li>单个标签长度限制：128 个字符。</li>
+   */
+  Tags?: Array<string>
 }
 
 /**
@@ -4168,33 +4257,37 @@ export interface DeleteProcessImageTemplateRequest {
  */
 export interface ImageTaskInput {
   /**
-   * 图片编码配置。
+   * <p>图片编码配置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EncodeConfig?: ImageEncodeConfig
   /**
-   * 图片增强配置。
+   * <p>图片增强配置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnhanceConfig?: ImageEnhanceConfig
   /**
-   * 图片擦除配置。
+   * <p>图片擦除配置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EraseConfig?: ImageEraseConfig
   /**
-   * 盲水印配置。
+   * <p>盲水印配置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BlindWatermarkConfig?: BlindWatermarkConfig
   /**
-   * 美颜配置。
+   * <p>美颜配置。</p>
    */
   BeautyConfig?: BeautyConfig
   /**
-   * 图片基础转换能力。
+   * <p>图片基础转换能力。</p>
    */
   TransformConfig?: ImageTransformConfig
+  /**
+   * <p>Ai 换装配置。</p>
+   */
+  AiTryOnConfig?: AiTryOnConfig
 }
 
 /**
@@ -4445,6 +4538,20 @@ export interface DeleteAIRecognitionTemplateRequest {
    * 视频内容识别模板唯一标识。
    */
   Definition: number
+}
+
+/**
+ * Aigc生音频任务，输出的音频信息。
+ */
+export interface AigcAudioOutputAudioInfo {
+  /**
+   * <p>音频URl。</p>
+   */
+  Url?: string
+  /**
+   * <p>音频时长。</p>
+   */
+  Duration?: number
 }
 
 /**
@@ -5142,6 +5249,20 @@ stronger:画质清晰，抗性较强
 strongest:画质一般，抗性最强
    */
   Strength?: string
+}
+
+/**
+ * CreateAigcAudioTask返回参数结构体
+ */
+export interface CreateAigcAudioTaskResponse {
+  /**
+   * <p>任务创建成功后，返回的任务ID。<br>调用查询接口，轮询获取任务进度及生成结果。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6099,33 +6220,29 @@ export interface DescribeInputRTMPPullSettings {
 }
 
 /**
- * 媒体处理任务类型
+ * DescribeAigcAudioTask返回参数结构体
  */
-export interface MediaProcessTaskInput {
+export interface DescribeAigcAudioTaskResponse {
   /**
-   * 视频转码任务列表。
+   * <p>任务当前状态。 WAIT：等待中， RUN：执行中， FAIL：任务失败， DONE：任务成功。</p>
    */
-  TranscodeTaskSet?: Array<TranscodeTaskInput>
+  Status?: string
   /**
-   * 视频转动图任务列表。
+   * <p>当任务状态为 FAIL时，返回失败信息。</p>
    */
-  AnimatedGraphicTaskSet?: Array<AnimatedGraphicTaskInput>
+  Message?: string
   /**
-   * 对视频按时间点截图任务列表。
+   * <p>输出的音频信息。</p>
    */
-  SnapshotByTimeOffsetTaskSet?: Array<SnapshotByTimeOffsetTaskInput>
+  AudioInfos?: Array<AigcAudioOutputAudioInfo>
   /**
-   * 对视频采样截图任务列表。
+   * <p>输出的视频信息，仅视频配音等场景会输出。</p>
    */
-  SampleSnapshotTaskSet?: Array<SampleSnapshotTaskInput>
+  VideoInfos?: Array<AigcAudioOutputVideoInfo>
   /**
-   * 对视频截雪碧图任务列表。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ImageSpriteTaskSet?: Array<ImageSpriteTaskInput>
-  /**
-   * 转自适应码流任务列表。
-   */
-  AdaptiveDynamicStreamingTaskSet?: Array<AdaptiveDynamicStreamingTaskInput>
+  RequestId?: string
 }
 
 /**
@@ -8723,31 +8840,53 @@ export interface DescribeStreamPackageSourceLocationResponse {
 }
 
 /**
- * 媒体处理输出对象信息。
+ * CreateAigcAudioTask请求参数结构体
  */
-export interface TaskOutputStorage {
+export interface CreateAigcAudioTaskRequest {
   /**
-   * 媒体处理输出对象存储位置的类型，支持：
-<li>COS：COS存储</li>
-<li>AWS-S3：AWS 存储，只适用于AWS任务，且要求同区域</li>
-<li> VOD：点播专业版 </li>
+   * <p>模型名称。生音乐当前支持的模型: GL、MinimaxMusic。</p>
    */
-  Type: string
+  ModelName?: string
   /**
-   * 当 Type 为 COS 时有效，则该项为必填，表示媒体处理 COS 输出位置。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>指定模型特定版本号。默认使用系统当前所支持的模型稳定版本。<br>模型GL支持的版本号：2.0、3.0-clip、3.0-pro。<br>模型MinimaxMusic支持的版本号：2.0、2.5、2.6。</p>
    */
-  CosOutputStorage?: CosOutputStorage
+  ModelVersion?: string
   /**
-   * 当 Type 为 AWS-S3 时有效，则该项为必填，表示媒体处理 AWS S3 输出位置。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>指定场景生音频。音乐: music。</p>
    */
-  S3OutputStorage?: S3OutputStorage
+  SceneType?: string
   /**
-   * 当 Type 为 VOD 时有效，则该项为必填，表示媒体处理 点播专业版 输出位置。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>生成视频的描述。(注：最大支持2000字符)。当未传入图片时，此参数必填。</p>
    */
-  VODOutputStorage?: VODOutputStorage
+  Prompt?: string
+  /**
+   * <p>参考视频信息。仅部分模型支持。</p>
+   */
+  VideoInfos?: Array<AigcAudioReferenceVideoInfo>
+  /**
+   * <p>传入参考音频信息。</p><p>比如传入音频生成音乐时需要传入。</p>
+   */
+  AudioInfos?: Array<AigcAudioReferenceAudioInfo>
+  /**
+   * <p>输出音频格式，默认不填。mp3、wav。</p>
+   */
+  OutputAudioFormat?: string
+  /**
+   * <p>文件结果指定存储Cos桶信息。 注意：需开通Cos，创建并授权MPS_QcsRole角色。</p>
+   */
+  StoreCosParam?: AigcStoreCosParam
+  /**
+   * <p>用于传入要求的额外参数。</p>
+   */
+  ExtraParameters?: AigcAudioExtraParam
+  /**
+   * <p>用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。<br>示例MinimaxMusic模型传入歌词时：<br>{"lyric":{"小马在快乐奔跑，花儿在开放"}}</p>
+   */
+  AdditionalParameters?: string
+  /**
+   * <p>接口操作者名称。</p>
+   */
+  Operator?: string
 }
 
 /**
@@ -10346,7 +10485,7 @@ export interface CreateAigcVideoTaskRequest {
    */
   ModelVersion?: string
   /**
-   * <p>指定场景生视频。<br>注意：仅部分模型支持指定场景。</p><ol><li>Kling支持：动作控制，motion_control；数字人，avatar_i2v；对口型，lip_sync。</li><li>Mingmou支持：横转竖，land2port。</li><li>Vidu支持：特效模板，template_effect。</li></ol>
+   * <p>指定场景生成视频。<br>注意：仅部分模型支持指定场景。</p><ol><li>Kling支持：动作控制，motion_control；数字人，avatar_i2v；对口型，lip_sync。</li><li>Mingmou支持：横转竖，land2port。</li><li>Vidu支持：特效模板，template_effect。</li><li>Hunyuan支持: 3d世界模型, 3d_scene；涉及的返回文件非视频。</li></ol>
    */
   SceneType?: string
   /**
@@ -11214,6 +11353,36 @@ export interface QueryProjectResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 媒体处理任务类型
+ */
+export interface MediaProcessTaskInput {
+  /**
+   * 视频转码任务列表。
+   */
+  TranscodeTaskSet?: Array<TranscodeTaskInput>
+  /**
+   * 视频转动图任务列表。
+   */
+  AnimatedGraphicTaskSet?: Array<AnimatedGraphicTaskInput>
+  /**
+   * 对视频按时间点截图任务列表。
+   */
+  SnapshotByTimeOffsetTaskSet?: Array<SnapshotByTimeOffsetTaskInput>
+  /**
+   * 对视频采样截图任务列表。
+   */
+  SampleSnapshotTaskSet?: Array<SampleSnapshotTaskInput>
+  /**
+   * 对视频截雪碧图任务列表。
+   */
+  ImageSpriteTaskSet?: Array<ImageSpriteTaskInput>
+  /**
+   * 转自适应码流任务列表。
+   */
+  AdaptiveDynamicStreamingTaskSet?: Array<AdaptiveDynamicStreamingTaskInput>
 }
 
 /**
@@ -13217,6 +13386,16 @@ export interface CreateQualityControlTemplateRequest {
    * 媒体质检抽检策略。
    */
   Strategy?: QualityControlStrategy
+}
+
+/**
+ * Aigc生音频扩展参数。
+ */
+export interface AigcAudioExtraParam {
+  /**
+   * <p>资源id，根据具体需要填写。</p>
+   */
+  ResourceId?: string
 }
 
 /**
@@ -15729,6 +15908,24 @@ export interface DescribeInputRTSPPullSettings {
    * RTSP源站地址信息。
    */
   SourceAddresses: Array<DescribeRTSPPullSourceAddress>
+}
+
+/**
+ * 虚拟试穿任务配置。
+ */
+export interface AiTryOnConfig {
+  /**
+   * <p>换装模型，取值：</p><ul><li>WAND-tryon-1.0-lite</li><li>WAND-tryon-1.0-flash</li><li>WAND-tryon-1.0-pro</li></ul>
+   */
+  Model: string
+  /**
+   * <p>换装指令。</p><p>为空时使用内置指令。</p>
+   */
+  Prompt?: string
+  /**
+   * <p>输出图片分辨率，取值：</p><ul><li>1K</li><li>2K</li><li>4K</li></ul><p>默认值：1K</p>
+   */
+  Resolution?: string
 }
 
 /**
@@ -20273,41 +20470,59 @@ export interface AiRecognitionTaskTransTextResultOutput {
 }
 
 /**
- * 智能字幕结果。
+ * ModifySnapshotByTimeOffsetTemplate请求参数结构体
  */
-export interface SmartSubtitlesResult {
+export interface ModifySnapshotByTimeOffsetTemplateRequest {
   /**
-   * 任务的类型，取值范围：
-- AsrFullTextRecognition：语音全文识别
-- TransTextRecognition：语音翻译
-- PureSubtitleTrans:   纯字幕翻译
-- OcrFullTextRecognition：文字提取字幕
+   * 指定时间点截图模板唯一标识。
    */
-  Type?: string
+  Definition: number
   /**
-   * 语音全文识别结果，当 Type 为
- AsrFullTextRecognition 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 指定时间点截图模板名称，长度限制：64 个字符。
    */
-  AsrFullTextTask?: SmartSubtitleTaskAsrFullTextResult
+  Name?: string
   /**
-   * 翻译结果，当 Type 为
-
-TransTextRecognition 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
    */
-  TransTextTask?: SmartSubtitleTaskTransTextResult
+  Width?: number
   /**
-   * 当翻译类型为：PureSubtitleTrans 是返回纯字幕文件翻译结果。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
    */
-  PureSubtitleTransTask?: PureSubtitleTransResult
+  Height?: number
   /**
-   * 文字提取字幕结果，当 Type 为
- OcrFullTextRecognition 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
    */
-  OcrFullTextTask?: SmartSubtitleTaskFullTextResult
+  ResolutionAdaptive?: string
+  /**
+   * 图片格式，取值可以为 jpg、png、webp。
+   */
+  Format?: string
+  /**
+   * 模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+<li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
+<li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
+默认值：black 。
+   */
+  FillType?: string
 }
 
 /**
@@ -20417,59 +20632,36 @@ export interface SyncDubbingResponse {
 }
 
 /**
- * ModifySnapshotByTimeOffsetTemplate请求参数结构体
+ * 媒体处理的输入对象信息。
  */
-export interface ModifySnapshotByTimeOffsetTemplateRequest {
+export interface MediaInputInfo {
   /**
-   * 指定时间点截图模板唯一标识。
+   * 输入来源对象的类型，支持：
+<li> COS：COS源</li>
+<li> URL：URL源</li>
+<li> AWS-S3：AWS 源，目前只支持转码任务 </li>
+<li> VOD：点播专业版 </li>
    */
-  Definition: number
+  Type: string
   /**
-   * 指定时间点截图模板名称，长度限制：64 个字符。
+   * 当 Type 为 COS 时有效，则该项为必填，表示媒体处理 COS 对象信息。
    */
-  Name?: string
+  CosInputInfo?: CosInputInfo
   /**
-   * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
+   * 当 Type 为 URL 时有效，则该项为必填，表示媒体处理 URL 对象信息。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Width?: number
+  UrlInputInfo?: UrlInputInfo
   /**
-   * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
+   * 当 Type 为 AWS-S3 时有效，则该项为必填，表示媒体处理 AWS S3 对象信息。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Height?: number
+  S3InputInfo?: S3InputInfo
   /**
-   * 分辨率自适应，可选值：
-<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
-<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
-默认值：open。
+   * 当 Type 为 VOD 时有效，则该项为必填，表示媒体处理 点播专业版 对象信息。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResolutionAdaptive?: string
-  /**
-   * 图片格式，取值可以为 jpg、png、webp。
-   */
-  Format?: string
-  /**
-   * 模板描述信息，长度限制：256 个字符。
-   */
-  Comment?: string
-  /**
-   * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
-<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
-<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
-<li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
-<li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
-默认值：black 。
-   */
-  FillType?: string
+  VODInputInfo?: VODInputInfo
 }
 
 /**
@@ -23257,6 +23449,16 @@ export interface DescribeStreamLinkFlowsRequest {
 }
 
 /**
+ * 用于AIGC视频生成的参考视频素材。
+ */
+export interface AigcAudioReferenceVideoInfo {
+  /**
+   * <p>参考视频url。需要外网可访问。</p>
+   */
+  VideoUrl?: string
+}
+
+/**
  * ModifySchedule返回参数结构体
  */
 export interface ModifyScheduleResponse {
@@ -24953,35 +25155,13 @@ export interface PoliticalAsrReviewTemplateInfo {
 }
 
 /**
- * CreatePersonSample请求参数结构体
+ * DeleteProcessImageTemplate请求参数结构体
  */
-export interface CreatePersonSampleRequest {
+export interface DeleteProcessImageTemplateRequest {
   /**
-   * 素材名称，长度限制：20 个字符。
+   * 图片处理模板唯一标识。
    */
-  Name: string
-  /**
-   * 素材应用场景，可选值：
-1. Recognition：用于内容识别，等价于 Recognition.Face。
-2. Review：用于不适宜内容识别，等价于 Review.Face。
-3. All：包含以上全部，等价于 1+2。
-   */
-  Usages: Array<string>
-  /**
-   * 素材描述，长度限制：1024 个字符。
-   */
-  Description?: string
-  /**
-   * 素材图片 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串，仅支持 jpeg、png 图片格式。数组长度限制：5 张图片。
-注意：图片必须是单人像五官较清晰的照片，像素不低于 200*200。
-   */
-  FaceContents?: Array<string>
-  /**
-   * 素材标签
-<li>数组长度限制：20 个标签；</li>
-<li>单个标签长度限制：128 个字符。</li>
-   */
-  Tags?: Array<string>
+  Definition?: number
 }
 
 /**

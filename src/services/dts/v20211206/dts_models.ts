@@ -3353,15 +3353,15 @@ export interface CheckStepInfo {
  */
 export interface ProcessStepTip {
   /**
-   * 提示信息
+   * <p>提示信息</p>
    */
   Message?: string
   /**
-   * 解决方案
+   * <p>解决方案</p>
    */
   Solution?: string
   /**
-   * 文档提示
+   * <p>文档提示</p>
    */
   HelpDoc?: string
 }
@@ -3781,44 +3781,44 @@ export interface DescribeSyncJobsRequest {
  */
 export interface SyncDetailInfo {
   /**
-   * 总步骤数
+   * <p>总步骤数</p>
    */
   StepAll?: number
   /**
-   * 当前步骤
+   * <p>当前步骤</p>
    */
   StepNow?: number
   /**
-   * 总体进度
+   * <p>总体进度</p>
    */
   Progress?: number
   /**
-   * 当前步骤进度，范围为[0-100]，若为-1表示当前步骤不支持查看进度
+   * <p>当前步骤进度，范围为[0-100]，若为-1表示当前步骤不支持查看进度</p>
    */
   CurrentStepProgress?: number
   /**
-   * 同步两端数据量差距
+   * <p>同步两端数据量差距</p>
    */
   MasterSlaveDistance?: number
   /**
-   * 同步两端时间差距
+   * <p>同步两端时间差距</p>
    */
   SecondsBehindMaster?: number
   /**
-   * 总体描述信息
+   * <p>总体描述信息</p>
    */
   Message?: string
   /**
-   * 详细步骤信息
+   * <p>详细步骤信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StepInfos?: Array<StepInfo>
   /**
-   * 不能发起内置校验的原因
+   * <p>不能发起内置校验的原因</p>
    */
   CauseOfCompareDisable?: string
   /**
-   * 任务的错误和解决方案信息
+   * <p>任务的错误和解决方案信息</p>
    */
   ErrInfo?: ErrInfo
 }
@@ -3946,37 +3946,41 @@ export interface CompareViewItem {
  */
 export interface StepInfo {
   /**
-   * 步骤编号
+   * <p>步骤编号</p>
    */
   StepNo?: number
   /**
-   * 步骤名
+   * <p>步骤名</p>
    */
   StepName?: string
   /**
-   * 步骤标号
+   * <p>步骤标号</p>
    */
   StepId?: string
   /**
-   * 当前步骤状态,可能返回有 notStarted(未开始)、running(校验中)、failed(校验任务失败)、finished(完成)、skipped(跳过)、paused(暂停)
+   * <p>当前步骤状态,可能返回有 notStarted(未开始)、running(校验中)、failed(校验任务失败)、finished(完成)、skipped(跳过)、paused(暂停)</p>
    */
   Status?: string
   /**
-   * 步骤开始时间，可能为空
+   * <p>步骤开始时间，可能为空</p>
    */
   StartTime?: string
   /**
-   * 错误信息
+   * <p>完成时间</p>
+   */
+  FinishTime?: string
+  /**
+   * <p>错误信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Errors?: Array<StepTip>
   /**
-   * 警告信息
+   * <p>警告信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Warnings?: Array<StepTip>
   /**
-   * 当前步骤进度，范围为[0-100]，若为-1表示当前步骤不支持查看进度
+   * <p>当前步骤进度，范围为[0-100]，若为-1表示当前步骤不支持查看进度</p>
    */
   Progress?: number
 }
@@ -5150,23 +5154,23 @@ export interface DeleteCompareTaskRequest {
  */
 export interface MigrateDetailInfo {
   /**
-   * 总步骤数
+   * <p>总步骤数</p>
    */
   StepAll?: number
   /**
-   * 当前步骤
+   * <p>当前步骤</p>
    */
   StepNow?: number
   /**
-   * 主从差距，MB；只在任务正常，迁移或者同步的最后一步（追Binlog的阶段才有校），如果是非法值，返回-1
+   * <p>主从差距，MB；只在任务正常，迁移或者同步的最后一步（追Binlog的阶段才有校），如果是非法值，返回-1</p>
    */
   MasterSlaveDistance?: number
   /**
-   * 主从差距，秒；只在任务正常，迁移或者同步的最后一步（追Binlog的阶段才有校），如果是非法值，返回-1
+   * <p>主从差距，秒；只在任务正常，迁移或者同步的最后一步（追Binlog的阶段才有校），如果是非法值，返回-1</p>
    */
   SecondsBehindMaster?: number
   /**
-   * 步骤信息
+   * <p>步骤信息</p>
    */
   StepInfo?: Array<StepDetailInfo>
 }
@@ -5441,39 +5445,43 @@ export interface TagFilter {
  */
 export interface StepDetailInfo {
   /**
-   * 步骤序列
+   * <p>步骤序列</p>
    */
   StepNo?: number
   /**
-   * 步骤展现名称
+   * <p>步骤展现名称</p>
    */
   StepName?: string
   /**
-   * 步骤英文标识
+   * <p>步骤英文标识</p>
    */
   StepId?: string
   /**
-   * 步骤状态:success(成功)、failed(失败)、running(执行中)、notStarted(未执行)、默认为notStarted
+   * <p>步骤状态:success(成功)、failed(失败)、running(执行中)、notStarted(未执行)、默认为notStarted</p>
    */
   Status?: string
   /**
-   * 当前步骤开始的时间，格式为"yyyy-mm-dd hh:mm:ss"，该字段不存在或者为空是无意义 注意：此字段可能返回 null，表示取不到有效值。
+   * <p>当前步骤开始的时间，格式为&quot;yyyy-mm-dd hh:mm:ss&quot;，该字段不存在或者为空是无意义 注意：此字段可能返回 null，表示取不到有效值。</p>
    */
   StartTime?: string
   /**
-   * 步骤错误信息
+   * <p>完成时间</p>
+   */
+  FinishTime?: string
+  /**
+   * <p>步骤错误信息</p>
    */
   StepMessage?: string
   /**
-   * 执行进度
+   * <p>执行进度</p>
    */
   Percent?: number
   /**
-   * 错误信息
+   * <p>错误信息</p>
    */
   Errors?: Array<ProcessStepTip>
   /**
-   * 告警提示
+   * <p>告警提示</p>
    */
   Warnings?: Array<ProcessStepTip>
 }

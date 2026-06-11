@@ -1348,9 +1348,9 @@ it("mps.v20190612.DeleteAIRecognitionTemplate", async function () {
     }
 })
 
-it("mps.v20190612.DescribeAnimatedGraphicsTemplates", async function () {
+it("mps.v20190612.CreateVideoDatabaseEntryTask", async function () {
     try {
-       const data = await client.DescribeAnimatedGraphicsTemplates({})
+       const data = await client.CreateVideoDatabaseEntryTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1598,6 +1598,16 @@ it("mps.v20190612.CreateWatermarkTemplate", async function () {
     }
 })
 
+it("mps.v20190612.CreateAigcAudioTask", async function () {
+    try {
+       const data = await client.CreateAigcAudioTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.ModifyStreamLinkEvent", async function () {
     try {
        const data = await client.ModifyStreamLinkEvent({})
@@ -1661,6 +1671,16 @@ it("mps.v20190612.ActivateSSAI", async function () {
 it("mps.v20190612.WithdrawsWatermark", async function () {
     try {
        const data = await client.WithdrawsWatermark({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DescribeAigcAudioTask", async function () {
+    try {
+       const data = await client.DescribeAigcAudioTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1788,9 +1808,9 @@ it("mps.v20190612.EnableSchedule", async function () {
     }
 })
 
-it("mps.v20190612.CreateVideoDatabaseEntryTask", async function () {
+it("mps.v20190612.DescribeAnimatedGraphicsTemplates", async function () {
     try {
-       const data = await client.CreateVideoDatabaseEntryTask({})
+       const data = await client.DescribeAnimatedGraphicsTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

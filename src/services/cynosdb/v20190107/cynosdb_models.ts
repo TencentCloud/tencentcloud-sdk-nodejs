@@ -449,6 +449,20 @@ export interface ModifyBackupDownloadRestrictionResponse {
 }
 
 /**
+ * UpgradeClusterVersion返回参数结构体
+ */
+export interface UpgradeClusterVersionResponse {
+  /**
+   * 异步任务id
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 将被删除的备份文件列表
  */
 export interface WillDeleteItem {
@@ -1222,6 +1236,20 @@ export interface BackupRegionAndIds {
 }
 
 /**
+ * SearchClusterTables返回参数结构体
+ */
+export interface SearchClusterTablesResponse {
+  /**
+   * 数据表列表
+   */
+  Tables?: Array<DatabaseTables>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClusterDetail请求参数结构体
  */
 export interface DescribeClusterDetailRequest {
@@ -1282,13 +1310,37 @@ export interface UpgradeProxy {
 }
 
 /**
- * OpenWan返回参数结构体
+ * DescribeClusterPeriodScalePolicy返回参数结构体
  */
-export interface OpenWanResponse {
+export interface DescribeClusterPeriodScalePolicyResponse {
   /**
-   * 任务流ID
+   * 集群周期弹性策略列表
    */
-  FlowId?: number
+  PolicyList?: Array<ClusterPeriodScalePolicy>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * OpenAIOptimizer请求参数结构体
+ */
+export interface OpenAIOptimizerRequest {
+  /**
+   * <p>集群ID</p>
+   */
+  ClusterId: string
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+}
+
+/**
+ * ModifyBackupName返回参数结构体
+ */
+export interface ModifyBackupNameResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2575,24 +2627,37 @@ export interface DescribeClusterReadOnlyResponse {
  */
 export interface DescribeInstanceSpecsRequest {
   /**
-   * 数据库类型，取值范围: 
-<li> MYSQL </li>
+   * <p>数据库类型，取值范围: </p><li> MYSQL </li>
    */
   DbType: string
   /**
-   * 是否需要返回可用区信息
+   * <p>是否需要返回可用区信息</p>
    */
   IncludeZoneStocks?: boolean
   /**
-   * 实例机器类型
+   * <p>实例机器类型</p>
    */
   DeviceType?: string
+  /**
+   * <p>集群级别，可空。例如 P0, P1</p>
+   */
+  ClusterLevel?: string
 }
 
 /**
  * ModifyMaintainPeriodConfig返回参数结构体
  */
 export interface ModifyMaintainPeriodConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyClusterPeriodScalePolicy返回参数结构体
+ */
+export interface ModifyClusterPeriodScalePolicyResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2817,17 +2882,25 @@ export interface DescribeZonesResponse {
 }
 
 /**
- * SearchClusterTables返回参数结构体
+ * GrantAccountPrivileges请求参数结构体
  */
-export interface SearchClusterTablesResponse {
+export interface GrantAccountPrivilegesRequest {
   /**
-   * 数据表列表
+   * 集群id
    */
-  Tables?: Array<DatabaseTables>
+  ClusterId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 账号信息
    */
-  RequestId?: string
+  Account: InputAccount
+  /**
+   * 数据库表权限码数组
+   */
+  DbTablePrivileges: Array<string>
+  /**
+   * 数据库表信息
+   */
+  DbTables: Array<DbTable>
 }
 
 /**
@@ -3702,6 +3775,64 @@ export interface DescribeResourcePackageDetailRequest {
 }
 
 /**
+ * 集群周期弹性策略
+ */
+export interface ClusterPeriodScalePolicy {
+  /**
+   * <p>策略ID</p>
+   */
+  PolicyId?: string
+  /**
+   * <p>实例类型。rw-读写类型，ro-只读类型。</p>
+   */
+  InstanceType?: string
+  /**
+   * <p>弹性下限, 后续废弃, 请使用MinCcu</p>
+   */
+  MinCpu?: number
+  /**
+   * <p>弹性上限,后续废弃，请使用MaxCcu</p>
+   */
+  MaxCpu?: number
+  /**
+   * <p>弹性开始时间</p>
+   */
+  ScaleStartTime?: string
+  /**
+   * <p>弹性结束时间</p>
+   */
+  ScaleEndTime?: string
+  /**
+   * <p>策略有效起始日期时间</p>
+   */
+  PolicyStartTime?: string
+  /**
+   * <p>策略有效截止日期时间</p>
+   */
+  PolicyEndTime?: string
+  /**
+   * <p>周期类型。day-天， week-星期，month-月</p>
+   */
+  PeriodType?: string
+  /**
+   * <p>在周期内的时间配置。对于week，表示星期几；对于month，表示几号。对于day，此参数不生效。</p>
+   */
+  PeriodConfig?: Array<number | bigint>
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>策略状态。normal-正常，expired-过期, deleted-删除</p>
+   */
+  Status?: string
+}
+
+/**
  * 实例日志投递信息
  */
 export interface InstanceCLSDeliveryInfo {
@@ -4293,6 +4424,20 @@ RA - 范围。
    * 过滤的值。反向查询时，多个值之前是且的关系，正向查询多个值是或的关系。
    */
   Value: Array<string>
+}
+
+/**
+ * CancelClusterServerlessScalePlan请求参数结构体
+ */
+export interface CancelClusterServerlessScalePlanRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 计划ID
+   */
+  PlanId: number
 }
 
 /**
@@ -4973,6 +5118,20 @@ export interface DescribeBinlogsResponse {
    * Binlog列表
    */
   Binlogs?: Array<BinlogItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * OpenAIOptimizer返回参数结构体
+ */
+export interface OpenAIOptimizerResponse {
+  /**
+   * <p>任务流id</p>
+   */
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5908,6 +6067,24 @@ export interface RenewLibraDBClustersRequest {
    * 订单模式
    */
   DealMode?: number
+}
+
+/**
+ * DescribeClusterServerlessScalePlans返回参数结构体
+ */
+export interface DescribeClusterServerlessScalePlansResponse {
+  /**
+   * 计划总数
+   */
+  TotalCount?: number
+  /**
+   * 策略列表
+   */
+  ServerlessScalePlans?: Array<ClusterServerlessScalePlan>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7204,6 +7381,20 @@ export interface SlaveZoneAttrItem {
    * 半同步超时时间，单位ms
    */
   SemiSyncTimeout?: number
+}
+
+/**
+ * OpenWan返回参数结构体
+ */
+export interface OpenWanResponse {
+  /**
+   * 任务流ID
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8752,13 +8943,41 @@ export interface DescribeBinlogListByVaultItem {
 }
 
 /**
- * ModifyBackupName返回参数结构体
+ * DescribeClusterServerlessScalePlans请求参数结构体
  */
-export interface ModifyBackupNameResponse {
+export interface DescribeClusterServerlessScalePlansRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 集群ID
    */
-  RequestId?: string
+  ClusterId: string
+  /**
+   * 实例列表
+   */
+  InstanceIds?: Array<string>
+  /**
+   * 策略类型. PolicyTypePeriodScale - 周期弹性
+   */
+  PolicyType?: string
+  /**
+   * 计划ID
+   */
+  PlanId?: number
+  /**
+   * 分页数量限制，默认10
+   */
+  Limit?: number
+  /**
+   * 查询偏移，默认0
+   */
+  Offset?: number
+  /**
+   * 按计划预期执行时间为条件查询的开始时间点，包含当前时间
+   */
+  ExpectedStartTime?: string
+  /**
+   * 按计划预期执行时间为条件查询的结束时间点，包含当前时间
+   */
+  ExpectedEndTime?: string
 }
 
 /**
@@ -10821,17 +11040,49 @@ export interface OpenClusterReadOnlyInstanceGroupAccessRequest {
 }
 
 /**
- * UpgradeClusterVersion返回参数结构体
+ * ModifyClusterPeriodScalePolicy请求参数结构体
  */
-export interface UpgradeClusterVersionResponse {
+export interface ModifyClusterPeriodScalePolicyRequest {
   /**
-   * 异步任务id
+   * <p>集群ID</p>
    */
-  FlowId?: number
+  ClusterId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>策略ID</p>
    */
-  RequestId?: string
+  PolicyId: string
+  /**
+   * <p>当天开始弹性时间。格式是小时:分钟</p>
+   */
+  ScaleStartTime?: string
+  /**
+   * <p>当天结束弹性时间。格式是小时:分钟</p>
+   */
+  ScaleEndTime?: string
+  /**
+   * <p>策略生效的起始日期时间</p>
+   */
+  PolicyStartTime?: string
+  /**
+   * <p>策略生效的截止日期时间</p>
+   */
+  PolicyEndTime?: string
+  /**
+   * <p>周期类型。day-天，week-周，month-月。</p>
+   */
+  PeriodType?: string
+  /**
+   * <p>周期内的时间列表。针对PeriodType=week， 表示星期几，比如[1,3]表示星期一、星期三。同理，对于PeriodType=month，[1,3,10]表示每月的1、3、10号。PeriodType=day则该字段无效。</p>
+   */
+  PeriodConfig?: Array<number | bigint>
+  /**
+   * <p>弹性规格下限</p>
+   */
+  MinCpu?: number
+  /**
+   * <p>弹性规格上限</p>
+   */
+  MaxCpu?: number
 }
 
 /**
@@ -11994,247 +12245,235 @@ export interface DeleteClusterDatabaseResponse {
  */
 export interface CynosdbClusterDetail {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName?: string
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region?: string
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone?: string
   /**
-   * 物理可用区
+   * <p>物理可用区</p>
    */
   PhysicalZone?: string
   /**
-   * 状态，支持的值如下：
-- creating：创建中
-- running：运行中
-- isolating：隔离中
-- isolated：已隔离
-- activating：从回收站重新恢复
-- offlining：下线中
-- offlined：已下线
-- deleting：删除中
-- deleted：已删除
+   * <p>状态，支持的值如下：</p><ul><li>creating：创建中</li><li>running：运行中</li><li>isolating：隔离中</li><li>isolated：已隔离</li><li>activating：从回收站重新恢复</li><li>offlining：下线中</li><li>offlined：已下线</li><li>deleting：删除中</li><li>deleted：已删除</li></ul>
    */
   Status?: string
   /**
-   * 状态描述
+   * <p>状态描述</p>
    */
   StatusDesc?: string
   /**
-   * 当Db类型为SERVERLESS时，serverless集群状态，可选值:
-resume
-resuming
-pause
-pausing
+   * <p>当Db类型为SERVERLESS时，serverless集群状态，可选值:<br>resume<br>resuming<br>pause<br>pausing</p>
    */
   ServerlessStatus?: string
   /**
-   * 存储Id
+   * <p>存储Id</p>
    */
   StorageId?: string
   /**
-   * 存储大小，单位为G
+   * <p>存储大小，单位为G</p>
    */
   Storage?: number
   /**
-   * 最大存储规格，单位为G
+   * <p>最大存储规格，单位为G</p>
    */
   MaxStorageSize?: number
   /**
-   * 最小存储规格，单位为G
+   * <p>最小存储规格，单位为G</p>
    */
   MinStorageSize?: number
   /**
-   * 存储付费类型，1为包年包月，0为按量计费
+   * <p>存储付费类型，1为包年包月，0为按量计费</p>
    */
   StoragePayMode?: number
   /**
-   * VPC名称
+   * <p>VPC名称</p>
    */
   VpcName?: string
   /**
-   * vpc唯一id
+   * <p>vpc唯一id</p>
    */
   VpcId?: string
   /**
-   * 子网名称
+   * <p>子网名称</p>
    */
   SubnetName?: string
   /**
-   * 子网ID
+   * <p>子网ID</p>
    */
   SubnetId?: string
   /**
-   * 字符集
+   * <p>字符集</p>
    */
   Charset?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 数据库类型
+   * <p>数据库类型</p>
    */
   DbType?: string
   /**
-   * Db类型：<li>NORMAL</li><li>SERVERLESS</li>
+   * <p>Db类型：<li>NORMAL</li><li>SERVERLESS</li></p>
    */
   DbMode?: string
   /**
-   * 数据库版本
+   * <p>数据库版本</p>
    */
   DbVersion?: string
   /**
-   * 存储空间上限
+   * <p>存储空间上限</p>
    */
   StorageLimit?: number
   /**
-   * 使用容量
+   * <p>使用容量</p>
    */
   UsedStorage?: number
   /**
-   * vip地址
+   * <p>vip地址</p>
    */
   Vip?: string
   /**
-   * vport端口
+   * <p>vport端口</p>
    */
   Vport?: number
   /**
-   * 集群只读实例的vip地址和vport端口
+   * <p>集群只读实例的vip地址和vport端口</p>
    */
   RoAddr?: Array<Addr>
   /**
-   * 集群支持的功能
+   * <p>集群支持的功能</p>
    */
   Ability?: Ability
   /**
-   * cynos版本
+   * <p>cynos版本</p>
    */
   CynosVersion?: string
   /**
-   * 商业类型
+   * <p>商业类型</p>
    */
   BusinessType?: string
   /**
-   * 是否有从可用区
+   * <p>是否有从可用区</p>
    */
   HasSlaveZone?: string
   /**
-   * 是否冻结
+   * <p>是否冻结</p>
    */
   IsFreeze?: string
   /**
-   * 任务列表
+   * <p>任务列表</p>
    */
   Tasks?: Array<ObjectTask>
   /**
-   * 主可用区
+   * <p>主可用区</p>
    */
   MasterZone?: string
   /**
-   * 从可用区列表
+   * <p>从可用区列表</p>
    */
   SlaveZones?: Array<string>
   /**
-   * 实例信息
+   * <p>实例信息</p>
    */
   InstanceSet?: Array<ClusterInstanceDetail>
   /**
-   * 付费模式
+   * <p>付费模式</p>
    */
   PayMode?: number
   /**
-   * 到期时间
+   * <p>到期时间</p>
    */
   PeriodEndTime?: string
   /**
-   * 项目id
+   * <p>项目id</p>
    */
   ProjectID?: number
   /**
-   * 实例绑定的tag数组信息
+   * <p>实例绑定的tag数组信息</p>
    */
   ResourceTags?: Array<Tag>
   /**
-   * Proxy状态
+   * <p>Proxy状态</p>
    */
   ProxyStatus?: string
   /**
-   * binlog开关，可选值：ON, OFF
+   * <p>binlog开关，可选值：ON, OFF</p>
    */
   LogBin?: string
   /**
-   * 是否跳过交易
+   * <p>是否跳过交易</p>
    */
   IsSkipTrade?: string
   /**
-   * pitr类型，可选值：normal, redo_pitr
+   * <p>pitr类型，可选值：normal, redo_pitr</p>
    */
   PitrType?: string
   /**
-   * 是否打开密码复杂度
+   * <p>是否打开密码复杂度</p>
    */
   IsOpenPasswordComplexity?: string
   /**
-   * 网络类型
+   * <p>网络类型</p>
    */
   NetworkStatus?: string
   /**
-   * 集群绑定的资源包信息
+   * <p>集群绑定的资源包信息</p>
    */
   ResourcePackages?: Array<ResourcePackage>
   /**
-   * 自动续费标识，1为自动续费，0为到期不续
+   * <p>自动续费标识，1为自动续费，0为到期不续</p>
    */
   RenewFlag?: number
   /**
-   * 节点网络类型
+   * <p>节点网络类型</p>
    */
   NetworkType?: string
   /**
-   * 备可用区属性
+   * <p>备可用区属性</p>
    */
   SlaveZoneAttr?: Array<SlaveZoneAttrItem>
   /**
-   * 版本标签
+   * <p>版本标签</p>
    */
   CynosVersionTag?: string
   /**
-   * 全球数据库网络唯一标识
+   * <p>全球数据库网络唯一标识</p>
    */
   GdnId?: string
   /**
-   * 集群在全球数据网络中的角色。
-主集群- primary
-从集群 - standby
-如为空，该字段无效
+   * <p>集群在全球数据网络中的角色。<br>主集群- primary<br>从集群 - standby<br>如为空，该字段无效</p>
    */
   GdnRole?: string
   /**
-   * 二级存储使用量，单位：G
+   * <p>二级存储使用量，单位：G</p>
    */
   UsedArchiveStorage?: number
   /**
-   * 归档状态，枚举值<li>normal:正常</li><li>archiving:归档中</li><li>resuming:恢复中</li><li>archived :已归档</li>
+   * <p>归档状态，枚举值<li>normal:正常</li><li>archiving:归档中</li><li>resuming:恢复中</li><li>archived :已归档</li></p>
    */
   ArchiveStatus?: string
   /**
-   * 归档进度，百分比。
+   * <p>归档进度，百分比。</p>
    */
   ArchiveProgress?: number
   /**
-   * 是否开启透明加密
+   * <p>集群级别。例如 P0, P1</p>
+   */
+  ClusterLevel?: string
+  /**
+   * <p>是否开启透明加密</p>
    */
   IsOpenTDE?: boolean
 }
@@ -12335,26 +12574,17 @@ export interface DescribeLibraDBClusterAccountsResponse {
 }
 
 /**
- * binlog配置信息
+ * CreateClusterPeriodScalePolicy返回参数结构体
  */
-export interface BinlogConfigInfo {
+export interface CreateClusterPeriodScalePolicyResponse {
   /**
-   * binlog保留时间
+   * <p>策略ID</p>
    */
-  BinlogSaveDays: number
+  PolicyId?: string
   /**
-   * binlog异地地域备份是否开启
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  BinlogCrossRegionsEnable: string
-  /**
-   * binlog异地地域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BinlogCrossRegions?: Array<string>
-  /**
-   * 保险箱信息
-   */
-  AutoCopyVaults?: Array<CreateBackupVaultItem>
+  RequestId?: string
 }
 
 /**
@@ -12426,13 +12656,89 @@ export interface ModifyAccountParamsResponse {
  */
 export interface DescribeInstanceSpecsResponse {
   /**
-   * 规格信息
+   * <p>规格信息</p>
    */
   InstanceSpecSet?: Array<InstanceSpec>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 集群Serveless弹性计划
+ */
+export interface ClusterServerlessScalePlan {
+  /**
+   * <p>计划ID</p>
+   */
+  PlanId?: number
+  /**
+   * <p>集群ID</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>实例对象。具体是实例id或者类型。比如ro-即集群下的所有只读实例。</p>
+   */
+  ObjectInstance?: string
+  /**
+   * <p>策略ID</p>
+   */
+  PolicyId?: string
+  /**
+   * <p>策略类型</p>
+   */
+  PolicyType?: string
+  /**
+   * <p>原规格下限</p>
+   */
+  SourceMinCpu?: number
+  /**
+   * <p>原规格上限</p>
+   */
+  SourceMaxCpu?: number
+  /**
+   * <p>原规格下限</p>
+   */
+  TargetMinCpu?: number
+  /**
+   * <p>原规格上限</p>
+   */
+  TargetMaxCpu?: number
+  /**
+   * <p>计划状态</p>
+   */
+  Status?: string
+  /**
+   * <p>弹性任务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScaleTaskId?: number
+  /**
+   * <p>失败原因</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailReason?: string
+  /**
+   * <p>计划预期开始执行时间</p>
+   */
+  ExpectedStartTime?: string
+  /**
+   * <p>计划预期结束时间</p>
+   */
+  ExpectedEndTime?: string
+  /**
+   * <p>恢复自动弹性任务</p>
+   */
+  ResetTaskId?: number
+  /**
+   * <p>恢复自动弹性任务执行方式</p>
+   */
+  ResetType?: string
+  /**
+   * <p>恢复自动弹性任务执行时间</p>
+   */
+  ResetTime?: string
 }
 
 /**
@@ -12746,6 +13052,20 @@ export interface IsolateLibraDBInstanceResponse {
 }
 
 /**
+ * DeleteClusterPeriodScalePolicy请求参数结构体
+ */
+export interface DeleteClusterPeriodScalePolicyRequest {
+  /**
+   * 集群ID
+   */
+  ClusterId: string
+  /**
+   * 策略ID
+   */
+  PolicyId: string
+}
+
+/**
  * RefundResourcePackage请求参数结构体
  */
 export interface RefundResourcePackageRequest {
@@ -12842,6 +13162,16 @@ export interface RollbackInstanceInfo {
 }
 
 /**
+ * DescribeClusterPeriodScalePolicy请求参数结构体
+ */
+export interface DescribeClusterPeriodScalePolicyRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+}
+
+/**
  * ModifyLibraDBClusterAccountPrivilege请求参数结构体
  */
 export interface ModifyLibraDBClusterAccountPrivilegeRequest {
@@ -12889,6 +13219,52 @@ export interface DeleteParamTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateClusterPeriodScalePolicy请求参数结构体
+ */
+export interface CreateClusterPeriodScalePolicyRequest {
+  /**
+   * <p>集群ID</p>
+   */
+  ClusterId: string
+  /**
+   * <p>实例类型。rw读写，ro-只读</p>
+   */
+  InstanceType: string
+  /**
+   * <p>当天开始弹性时间。格式是小时:分钟</p>
+   */
+  ScaleStartTime: string
+  /**
+   * <p>当天结束弹性时间。格式是小时:分钟</p>
+   */
+  ScaleEndTime: string
+  /**
+   * <p>策略生效的起始日期时间</p>
+   */
+  PolicyStartTime: string
+  /**
+   * <p>策略生效的截止日期时间</p>
+   */
+  PolicyEndTime: string
+  /**
+   * <p>周期类型。day-天，week-周，month-月。</p>
+   */
+  PeriodType: string
+  /**
+   * <p>弹性规格下限</p>
+   */
+  MinCpu?: number
+  /**
+   * <p>弹性规格上限</p>
+   */
+  MaxCpu?: number
+  /**
+   * <p>周期内的时间列表。针对PeriodType=week， 表示星期几，比如[1,3]表示星期一、星期三。同理，对于PeriodType=month，[1,3,10]表示每月的1、3、10号。PeriodType=day则该字段无效。</p>
+   */
+  PeriodConfig?: Array<number | bigint>
 }
 
 /**
@@ -14298,25 +14674,26 @@ export interface ParamItemDetail {
 }
 
 /**
- * GrantAccountPrivileges请求参数结构体
+ * binlog配置信息
  */
-export interface GrantAccountPrivilegesRequest {
+export interface BinlogConfigInfo {
   /**
-   * 集群id
+   * binlog保留时间
    */
-  ClusterId: string
+  BinlogSaveDays: number
   /**
-   * 账号信息
+   * binlog异地地域备份是否开启
    */
-  Account: InputAccount
+  BinlogCrossRegionsEnable: string
   /**
-   * 数据库表权限码数组
+   * binlog异地地域
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  DbTablePrivileges: Array<string>
+  BinlogCrossRegions?: Array<string>
   /**
-   * 数据库表信息
+   * 保险箱信息
    */
-  DbTables: Array<DbTable>
+  AutoCopyVaults?: Array<CreateBackupVaultItem>
 }
 
 /**
@@ -15013,6 +15390,20 @@ export interface DescribeInstancesWithinSameClusterResponse {
    * 实例ID列表
    */
   InstanceIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CancelClusterServerlessScalePlan返回参数结构体
+ */
+export interface CancelClusterServerlessScalePlanResponse {
+  /**
+   * 任务id
+   */
+  TaskId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16149,6 +16540,16 @@ export interface ModifyLibraDBClusterProjectRequest {
    * 项目 ID
    */
   ProjectId?: number
+}
+
+/**
+ * DeleteClusterPeriodScalePolicy返回参数结构体
+ */
+export interface DeleteClusterPeriodScalePolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

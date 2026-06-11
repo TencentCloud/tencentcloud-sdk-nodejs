@@ -113,6 +113,7 @@ import {
   DeleteAutoSnapshotPoliciesRequest,
   DiskChargePrepaid,
   DeleteSnapshotGroupResponse,
+  RemoteDiskChargePrepaid,
   ApplySnapshotGroupResponse,
   DescribeSnapshotOverviewRequest,
   Filter,
@@ -273,7 +274,7 @@ export class Client extends AbstractClient {
    * 该接口用于续费弹性单副本SSD硬盘。用户发起续费下单后，由计费系统完成扣费和到期时间更新。
    */
   async RenewRemoteDisk(
-    req?: RenewRemoteDiskRequest,
+    req: RenewRemoteDiskRequest,
     cb?: (error: string, rep: RenewRemoteDiskResponse) => void
   ): Promise<RenewRemoteDiskResponse> {
     return this.request("RenewRemoteDisk", req, cb)
@@ -283,7 +284,7 @@ export class Client extends AbstractClient {
    * 本接口用于销毁一个或多个弹性单副本SSD硬盘。仅支持弹性盘类型，且要求硬盘处于 INITED 或 UNINIT 状态。
    */
   async TerminateRemoteDisks(
-    req?: TerminateRemoteDisksRequest,
+    req: TerminateRemoteDisksRequest,
     cb?: (error: string, rep: TerminateRemoteDisksResponse) => void
   ): Promise<TerminateRemoteDisksResponse> {
     return this.request("TerminateRemoteDisks", req, cb)
@@ -303,7 +304,7 @@ export class Client extends AbstractClient {
    * 本接口用于创建弹性单副本SSD硬盘并自动挂载到指定实例。弹性盘在创建时就需要绑定目标实例，计费回调后由CBS自身完成装箱+挂载的全流程。
    */
   async CreateRemoteDisks(
-    req?: CreateRemoteDisksRequest,
+    req: CreateRemoteDisksRequest,
     cb?: (error: string, rep: CreateRemoteDisksResponse) => void
   ): Promise<CreateRemoteDisksResponse> {
     return this.request("CreateRemoteDisks", req, cb)
@@ -390,7 +391,7 @@ export class Client extends AbstractClient {
    * 该接口用于查询创建弹性单副本SSD硬盘的价格。支持预付费和后付费两种计费类型的询价。
    */
   async InquirePriceCreateRemoteDisks(
-    req?: InquirePriceCreateRemoteDisksRequest,
+    req: InquirePriceCreateRemoteDisksRequest,
     cb?: (error: string, rep: InquirePriceCreateRemoteDisksResponse) => void
   ): Promise<InquirePriceCreateRemoteDisksResponse> {
     return this.request("InquirePriceCreateRemoteDisks", req, cb)
@@ -561,7 +562,7 @@ export class Client extends AbstractClient {
    * 本接口用于查询一个或多个单副本SSD硬盘的操作限制列表。
    */
   async DescribeRemoteDisksDeniedActions(
-    req?: DescribeRemoteDisksDeniedActionsRequest,
+    req: DescribeRemoteDisksDeniedActionsRequest,
     cb?: (error: string, rep: DescribeRemoteDisksDeniedActionsResponse) => void
   ): Promise<DescribeRemoteDisksDeniedActionsResponse> {
     return this.request("DescribeRemoteDisksDeniedActions", req, cb)
@@ -584,7 +585,7 @@ export class Client extends AbstractClient {
    * 本接口用于修改单副本SSD硬盘的属性，包括硬盘名称和项目ID。
    */
   async ModifyRemoteDiskAttributes(
-    req?: ModifyRemoteDiskAttributesRequest,
+    req: ModifyRemoteDiskAttributesRequest,
     cb?: (error: string, rep: ModifyRemoteDiskAttributesResponse) => void
   ): Promise<ModifyRemoteDiskAttributesResponse> {
     return this.request("ModifyRemoteDiskAttributes", req, cb)
@@ -594,7 +595,7 @@ export class Client extends AbstractClient {
    * 该接口用于查询续费弹性单副本SSD硬盘的价格。
    */
   async InquirePriceRenewRemoteDisks(
-    req?: InquirePriceRenewRemoteDisksRequest,
+    req: InquirePriceRenewRemoteDisksRequest,
     cb?: (error: string, rep: InquirePriceRenewRemoteDisksResponse) => void
   ): Promise<InquirePriceRenewRemoteDisksResponse> {
     return this.request("InquirePriceRenewRemoteDisks", req, cb)
@@ -614,7 +615,7 @@ export class Client extends AbstractClient {
    * 本接口用于从云服务器实例上卸载一个或多个弹性单副本SSD硬盘。仅支持弹性盘类型。
    */
   async DetachRemoteDisks(
-    req?: DetachRemoteDisksRequest,
+    req: DetachRemoteDisksRequest,
     cb?: (error: string, rep: DetachRemoteDisksResponse) => void
   ): Promise<DetachRemoteDisksResponse> {
     return this.request("DetachRemoteDisks", req, cb)
@@ -830,7 +831,7 @@ export class Client extends AbstractClient {
    * 本接口用于挂载一个或多个弹性单副本SSD硬盘到指定的云服务器实例上。仅支持弹性盘类型。
    */
   async AttachRemoteDisks(
-    req?: AttachRemoteDisksRequest,
+    req: AttachRemoteDisksRequest,
     cb?: (error: string, rep: AttachRemoteDisksResponse) => void
   ): Promise<AttachRemoteDisksResponse> {
     return this.request("AttachRemoteDisks", req, cb)
