@@ -2339,6 +2339,10 @@ export interface CreateProxyEndPointRequest {
    * <p>实例权重。</p>
    */
   InstanceWeights?: Array<ProxyInstanceWeight>
+  /**
+   * <p>负载均衡模式</p><p>枚举值：</p><ul><li>static： 静态负载</li><li>dynamic： 动态负载</li></ul>
+   */
+  LoadBalanceMode?: string
 }
 
 /**
@@ -2985,6 +2989,10 @@ export interface ProxyGroupRwInfo {
    * <p>libra节点故障，是否转发给其他节点</p>
    */
   ApQueryToOtherNode?: boolean
+  /**
+   * <p>自动负载</p><p>枚举值：</p><ul><li>static： 静态负载</li><li>dynamic： 动态负载</li></ul>
+   */
+  LoadBalanceMode?: string
 }
 
 /**
@@ -4178,7 +4186,7 @@ export interface CreateCLSDeliveryResponse {
  */
 export interface DescribeServerlessInstanceSpecsResponse {
   /**
-   * Serverless实例可选规格
+   * <p>Serverless实例可选规格</p>
    */
   Specs?: Array<ServerlessSpec>
   /**
@@ -4417,6 +4425,10 @@ export interface ModifyProxyRwSplitRequest {
    * <p>libra节点故障，是否转发给其他节点</p>
    */
   ApQueryToOtherNode?: boolean
+  /**
+   * <p>负载均衡模式</p><p>枚举值：</p><ul><li>static： 静态负载</li><li>dynamic： 动态负载</li></ul>
+   */
+  LoadBalanceMode?: string
 }
 
 /**
@@ -13289,9 +13301,13 @@ export interface SetRenewFlagRequest {
  */
 export interface DescribeServerlessInstanceSpecsRequest {
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone?: string
+  /**
+   * <p>集群级别</p>
+   */
+  ClusterLevel?: string
 }
 
 /**

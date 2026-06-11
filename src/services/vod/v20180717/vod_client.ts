@@ -54,7 +54,7 @@ import {
   AiReviewProhibitedOcrTaskOutput,
   DescribeAigcFaceInfoRequest,
   NoiseConfigureInfo,
-  MediaMiniProgramReviewElem,
+  DescribeAigcFaceInfoAsyncResponse,
   ManageTaskResponse,
   CreateImageProcessingTemplateRequest,
   ModifyDefaultStorageRegionRequest,
@@ -187,8 +187,10 @@ import {
   SharpEnhanceInfo,
   ModifySuperPlayerConfigResponse,
   DescribeWordSamplesResponse,
+  DescribeAigcFaceInfoAsyncRequest,
   RefreshUrlCacheResponse,
   ConcatTask2017,
+  DescribeAigcFaceInfoAsyncTask,
   DeleteAIRecognitionTemplateRequest,
   FileUploadTask,
   DescribeCDNStatDetailsResponse,
@@ -198,6 +200,7 @@ import {
   DescribeEventConfigRequest,
   MediaContentReviewOcrTextSegmentItem,
   ModifyLLMComprehendTemplateResponse,
+  DescribeAigcFaceInfoAsyncInput,
   AiAnalysisTaskClassificationOutput,
   FileDeleteTask,
   ResourceTag,
@@ -223,9 +226,10 @@ import {
   FileReviewInfo,
   WatermarkTemplate,
   CoverBySnapshotTaskOutput,
+  WatermarkConfigureInfoForUpdate,
   ModifyQualityInspectTemplateResponse,
   AigcAudioTaskInput,
-  ProcessImageAsyncRequest,
+  MediaMiniProgramReviewElem,
   ModifyAdaptiveDynamicStreamingTemplateRequest,
   ForbidMediaDistributionRequest,
   DescribeAIRecognitionTemplatesResponse,
@@ -267,7 +271,7 @@ import {
   EnhanceMediaQualityRequest,
   ExtractBlindWatermarkTask,
   ProductInstanceRecource,
-  PersistenceCompleteTask,
+  DescribeImageProcessingTemplatesRequest,
   AiRecognitionTaskFaceSegmentItem,
   ProcessMediaResponse,
   CreateWordSamplesResponse,
@@ -288,7 +292,7 @@ import {
   AiReviewTaskTerrorismOcrResult,
   DescribeProcessImageAsyncTemplatesRequest,
   AigcImageOutputConfig,
-  WatermarkConfigureInfoForUpdate,
+  ProcessImageAsyncRequest,
   AiRecognitionTaskOcrWordsResult,
   PornAsrReviewTemplateInfo,
   AiRecognitionTaskSegmentResult,
@@ -574,7 +578,7 @@ import {
   DeleteTranscodeTemplateRequest,
   AiReviewTerrorismTaskOutput,
   AudioSeparateInfo,
-  DescribeImageProcessingTemplatesRequest,
+  DescribeAigcFaceInfoAsyncOutput,
   QualityInspectTaskInput,
   ProhibitedConfigureInfo,
   DrmStreamingsInfo,
@@ -1054,6 +1058,7 @@ import {
   SubtitleInfoInput,
   DeleteJustInTimeTranscodeTemplateResponse,
   MPSUpdateSmartEraseWatermarkConfig,
+  PersistenceCompleteTask,
   DescribeJustInTimeTranscodeTemplatesRequest,
   SearchMediaBySemanticsRequest,
   CreateHeadTailTemplateRequest,
@@ -3070,6 +3075,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeQualityInspectTemplatesResponse) => void
   ): Promise<DescribeQualityInspectTemplatesResponse> {
     return this.request("DescribeQualityInspectTemplates", req, cb)
+  }
+
+  /**
+   * 该接口用于异步获取 AIGC 人脸信息。注意，调用本接口会产生人脸识别费用，请参考[计费文档](https://cloud.tencent.com/document/product/266/95125#96b3b59a-f9e1-49e9-966a-bedb70a4bf12)。
+   */
+  async DescribeAigcFaceInfoAsync(
+    req: DescribeAigcFaceInfoAsyncRequest,
+    cb?: (error: string, rep: DescribeAigcFaceInfoAsyncResponse) => void
+  ): Promise<DescribeAigcFaceInfoAsyncResponse> {
+    return this.request("DescribeAigcFaceInfoAsync", req, cb)
   }
 
   /**

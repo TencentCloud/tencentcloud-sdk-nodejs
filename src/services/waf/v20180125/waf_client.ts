@@ -21,7 +21,7 @@ import {
   ApiSecCustomEventRule,
   DeleteOwaspWhiteRuleRequest,
   ModifyUserLevelResponse,
-  PathItem,
+  ApiSecEventChange,
   DescribeLogHistogramRequest,
   DescribeSkillSecScanResultResponse,
   CreateBatchIpAccessControlResponse,
@@ -35,6 +35,7 @@ import {
   GlobalSceneInfo,
   Object,
   DescribePeakValueResponse,
+  PathItem,
   ProductInfo,
   DescribeAntiLeakageItem,
   LoadBalancerPackageNew,
@@ -87,6 +88,7 @@ import {
   DeleteBatchCustomRuleRequest,
   DescribeBotUCBRuleRsp,
   ModifyObjectsRequest,
+  MiniPkg,
   BatchDomainResult,
   ModifyAreaBanStatusRequest,
   SpartaProtectionPort,
@@ -195,6 +197,7 @@ import {
   DomainInfo,
   GetAttackDownloadRecordsRequest,
   DescribeDomainsResponse,
+  DescribeQClawContentSecCheckRequest,
   BotActionScopeRuleEntry,
   UploadSkillSecScanRequest,
   AddAntiFakeUrlResponse,
@@ -252,6 +255,7 @@ import {
   DealData,
   ModifyBatchCustomRuleStatusResponse,
   DeleteBatchCustomWhiteRuleResponse,
+  DescribeApiSecEventListRequest,
   DescribeDomainDetailsSaasRequest,
   ApiDataFilter,
   DeleteBatchCustomRuleResponse,
@@ -320,6 +324,7 @@ import {
   LLMMonPkg,
   ModifyHostRequest,
   ApiSecExcludeRule,
+  ModifyProtectGroupRequest,
   DestroyPostCKafkaFlowRequest,
   DescribeHistogramResponse,
   DeleteSpartaProtectionResponse,
@@ -337,7 +342,7 @@ import {
   CreateIpAccessControlRequest,
   DescribeFlowTrendRequest,
   DescribeWafAutoDenyStatusRequest,
-  MiniPkg,
+  ApiSecAttackSource,
   BotSceneMatchCondition,
   DescribeAreaBanAreasRequest,
   AddDomainWhiteRuleResponse,
@@ -365,7 +370,7 @@ import {
   AddCustomRuleResponse,
   DescribeFlowTrendResponse,
   BatchCustomRuleListItem,
-  DescribeQClawContentSecCheckRequest,
+  DescribeApiSecEventDetailResponse,
   CreateIpAccessControlResponse,
   UpsertIpAccessControlRequest,
   BotSceneActionRule,
@@ -508,6 +513,7 @@ import {
   DeleteCCRuleResponse,
   DescribeAreaBanAreasRsp,
   UpsertCCRuleRequest,
+  DescribeApiSecEventListResponse,
   TokenRuleEntry,
   ModifyAreaBanRuleResponse,
   DescribeDomainsRequest,
@@ -515,7 +521,7 @@ import {
   BotPkg,
   UpsertCCAutoStatusRequest,
   DescribeProtectionModesResponse,
-  ModifyProtectGroupRequest,
+  DescribeApiSecEventDetailRequest,
   DescribeWafAutoDenyRulesResponse,
   ModifyDomainPostActionResponse,
   RefreshAccessCheckResultRequest,
@@ -589,6 +595,7 @@ import {
   LogHistogramInfo,
   DeleteDomainWhiteRulesRequest,
   DescribeDomainVerifyResultRequest,
+  ApiEvent,
   CreateDealsGoods,
   TokenRuleEntryValue,
   LimitHeader,
@@ -741,13 +748,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询用户所有域名的详细信息
+   * 添加信息防泄漏规则
    */
-  async DescribeDomains(
-    req: DescribeDomainsRequest,
-    cb?: (error: string, rep: DescribeDomainsResponse) => void
-  ): Promise<DescribeDomainsResponse> {
-    return this.request("DescribeDomains", req, cb)
+  async AddAntiInfoLeakRules(
+    req: AddAntiInfoLeakRulesRequest,
+    cb?: (error: string, rep: AddAntiInfoLeakRulesResponse) => void
+  ): Promise<AddAntiInfoLeakRulesResponse> {
+    return this.request("AddAntiInfoLeakRules", req, cb)
   }
 
   /**
@@ -1301,13 +1308,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 添加信息防泄漏规则
+   * API安全事件详情查询接口
    */
-  async AddAntiInfoLeakRules(
-    req: AddAntiInfoLeakRulesRequest,
-    cb?: (error: string, rep: AddAntiInfoLeakRulesResponse) => void
-  ): Promise<AddAntiInfoLeakRulesResponse> {
-    return this.request("AddAntiInfoLeakRules", req, cb)
+  async DescribeApiSecEventDetail(
+    req: DescribeApiSecEventDetailRequest,
+    cb?: (error: string, rep: DescribeApiSecEventDetailResponse) => void
+  ): Promise<DescribeApiSecEventDetailResponse> {
+    return this.request("DescribeApiSecEventDetail", req, cb)
+  }
+
+  /**
+   * 查询用户所有域名的详细信息
+   */
+  async DescribeDomains(
+    req: DescribeDomainsRequest,
+    cb?: (error: string, rep: DescribeDomainsResponse) => void
+  ): Promise<DescribeDomainsResponse> {
+    return this.request("DescribeDomains", req, cb)
   }
 
   /**
@@ -1662,13 +1679,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取用户规则白名单列表
+   * api安全事件列表
    */
-  async DescribeAttackWhiteRule(
-    req: DescribeAttackWhiteRuleRequest,
-    cb?: (error: string, rep: DescribeAttackWhiteRuleResponse) => void
-  ): Promise<DescribeAttackWhiteRuleResponse> {
-    return this.request("DescribeAttackWhiteRule", req, cb)
+  async DescribeApiSecEventList(
+    req: DescribeApiSecEventListRequest,
+    cb?: (error: string, rep: DescribeApiSecEventListResponse) => void
+  ): Promise<DescribeApiSecEventListResponse> {
+    return this.request("DescribeApiSecEventList", req, cb)
   }
 
   /**
@@ -2122,6 +2139,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SearchLogResponse) => void
   ): Promise<SearchLogResponse> {
     return this.request("SearchLog", req, cb)
+  }
+
+  /**
+   * 更新Tiga引擎下大类规则的防护模式
+   */
+  async UpdateProtectionModes(
+    req: UpdateProtectionModesRequest,
+    cb?: (error: string, rep: UpdateProtectionModesResponse) => void
+  ): Promise<UpdateProtectionModesResponse> {
+    return this.request("UpdateProtectionModes", req, cb)
   }
 
   /**
@@ -2877,13 +2904,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新Tiga引擎下大类规则的防护模式
+   * 获取用户规则白名单列表
    */
-  async UpdateProtectionModes(
-    req: UpdateProtectionModesRequest,
-    cb?: (error: string, rep: UpdateProtectionModesResponse) => void
-  ): Promise<UpdateProtectionModesResponse> {
-    return this.request("UpdateProtectionModes", req, cb)
+  async DescribeAttackWhiteRule(
+    req: DescribeAttackWhiteRuleRequest,
+    cb?: (error: string, rep: DescribeAttackWhiteRuleResponse) => void
+  ): Promise<DescribeAttackWhiteRuleResponse> {
+    return this.request("DescribeAttackWhiteRule", req, cb)
   }
 
   /**

@@ -131,7 +131,7 @@ export interface AigcVideoOutputConfig {
    */
   ExpireTime?: string
   /**
-   * <p>生成视频的时长，单位：秒。</p><li>当 ModelName 是 Kling，可选值为 5、10，默认为 5；</li><li>当 ModelName 是 Hailuo，可选值为 6、10，默认为 6；</li><li>当 ModelName 是 Vidu，可指定1-10；</li><li>当 ModelName 是 GV，可选值为 8，默认为 8；</li><li>当 ModelName 是 OS，可选值为 4、8、12，默认为 8；</li><li>当 ModelName 是 PixVerse，可指定1-15，默认为5；</li>
+   * <p>生成视频的时长，单位：秒。</p><li>当 ModelName 是 Kling，可选值为3-15，默认为 5；</li><li>当 ModelName 是 Hailuo，可选值为 6、10，默认为 6；</li><li>当 ModelName 是 Vidu，可指定1-10；</li><li>当 ModelName 是 GV，可选值为 8，默认为 8；</li><li>当 ModelName 是 OS，可选值为 4、8、12，默认为 8；</li><li>当 ModelName 是 PixVerse，可指定1-15，默认为5；</li>
    */
   Duration?: number
   /**
@@ -1041,31 +1041,17 @@ export interface NoiseConfigureInfo {
 }
 
 /**
- * 小程序音视频审核概要元信息
+ * DescribeAigcFaceInfoAsync返回参数结构体
  */
-export interface MediaMiniProgramReviewElem {
+export interface DescribeAigcFaceInfoAsyncResponse {
   /**
-   * 音视频审核类型。 
-<li>Porn：画面涉及令人反感的信息，</li>
-<li>Porn.Ocr：文字涉及令人反感的信息，</li>
-<li>Porn.Asr：声音涉及令人反感的信息，</li>
-<li>Terrorism：画面涉及令人不安全的信息，</li>
-<li>Political：画面涉及令人不适宜的信息，</li>
-<li>Political.Ocr：文字涉及令人不适宜的信息，</li>
-<li>Political.Asr：声音涉及令人不适宜的信息。</li>
+   * <p>任务 ID。</p>
    */
-  Type?: string
+  TaskId?: string
   /**
-   * 音视频审核意见。
-<li>pass：确认正常，</li>
-<li>block：确认违规，</li>
-<li>review：疑似违规。</li>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Suggestion?: string
-  /**
-   * 音视频审核结果置信度。取值 0~100。
-   */
-  Confidence?: number
+  RequestId?: string
 }
 
 /**
@@ -4488,6 +4474,32 @@ export interface DescribeWordSamplesResponse {
 }
 
 /**
+ * DescribeAigcFaceInfoAsync请求参数结构体
+ */
+export interface DescribeAigcFaceInfoAsyncRequest {
+  /**
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
+   */
+  SubAppId: number
+  /**
+   * <p>需要获取人脸信息的输入视频信息，最多包含一个文件。</p>
+   */
+  FileInfos?: Array<AigcFaceInputFileInfo>
+  /**
+   * <p>用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
+   */
+  SessionId?: string
+  /**
+   * <p>来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。</p>
+   */
+  SessionContext?: string
+  /**
+   * <p>任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。</p>
+   */
+  TasksPriority?: number
+}
+
+/**
  * RefreshUrlCache返回参数结构体
  */
 export interface RefreshUrlCacheResponse {
@@ -4509,6 +4521,52 @@ export interface ConcatTask2017 {
    * 视频拼接源文件信息。
    */
   FileInfoSet?: Array<ConcatFileInfo2017>
+}
+
+/**
+ * 异步获取 AIGC 人脸信息任务。
+ */
+export interface DescribeAigcFaceInfoAsyncTask {
+  /**
+   * <p>任务 ID。</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务状态，取值：<li>PROCESSING：处理中；</li><li>FINISH：已完成。</li></p>
+   */
+  Status?: string
+  /**
+   * <p>错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。</p>
+   */
+  ErrCode?: number
+  /**
+   * <p>扩展错误码。</p><p>参数格式：扩展错误码。</p><p>枚举值：</p><ul><li>RequestLimitExceeded： 调用超出并发限制。</li><li>InvalidParameterValue： 参数错误。</li><li>InternalError： 内部错误。</li><li>FailedOperation： 操作失败。</li></ul>
+   */
+  ErrCodeExt?: string
+  /**
+   * <p>错误信息。</p>
+   */
+  Message?: string
+  /**
+   * <p>任务进度，取值范围 [0-100] 。</p>
+   */
+  Progress?: number
+  /**
+   * <p>异步获取 AIGC 人脸信息任务的输入信息。</p>
+   */
+  Input?: DescribeAigcFaceInfoAsyncInput
+  /**
+   * <p>异步获取 AIGC 人脸信息任务的输出信息。</p>
+   */
+  Output?: DescribeAigcFaceInfoAsyncOutput
+  /**
+   * <p>用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
+   */
+  SessionId?: string
+  /**
+   * <p>来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。</p>
+   */
+  SessionContext?: string
 }
 
 /**
@@ -4730,6 +4788,16 @@ export interface ModifyLLMComprehendTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 异步获取 AIGC 人脸信息输入。
+ */
+export interface DescribeAigcFaceInfoAsyncInput {
+  /**
+   * <p>需要获取人脸信息的输入视频信息。</p>
+   */
+  FileInfos?: Array<AigcFaceInputFileInfo>
 }
 
 /**
@@ -5287,6 +5355,40 @@ export interface CoverBySnapshotTaskOutput {
 }
 
 /**
+ * 即时转码水印模板更新配置。
+ */
+export interface WatermarkConfigureInfoForUpdate {
+  /**
+   * 是否启用水印。可取值：
+<li>ON：表示启用水印；</li>
+<li>OFF：表示关闭水印。</li>
+   */
+  Switch?: string
+  /**
+   * 水印图片 Base64 编码后的字符串。支持 jpeg、png 图片格式。
+   */
+  ImageContent?: string
+  /**
+   * 水印的宽度。
+<li>字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
+   */
+  Width?: string
+  /**
+   * 水印的高度。
+<li>字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
+   */
+  Height?: string
+  /**
+   * 水印原点距离视频图像坐标原点的水平位置。字符串以 % 结尾，表示水印 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%；
+   */
+  XPos?: string
+  /**
+   * 水印原点距离视频图像坐标原点的垂直位置。当字符串以 % 结尾，表示水印 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%。
+   */
+  YPos?: string
+}
+
+/**
  * ModifyQualityInspectTemplate返回参数结构体
  */
 export interface ModifyQualityInspectTemplateResponse {
@@ -5335,49 +5437,31 @@ export interface AigcAudioTaskInput {
 }
 
 /**
- * ProcessImageAsync请求参数结构体
+ * 小程序音视频审核概要元信息
  */
-export interface ProcessImageAsyncRequest {
+export interface MediaMiniProgramReviewElem {
   /**
-   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
+   * 音视频审核类型。 
+<li>Porn：画面涉及令人反感的信息，</li>
+<li>Porn.Ocr：文字涉及令人反感的信息，</li>
+<li>Porn.Asr：声音涉及令人反感的信息，</li>
+<li>Terrorism：画面涉及令人不安全的信息，</li>
+<li>Political：画面涉及令人不适宜的信息，</li>
+<li>Political.Ocr：文字涉及令人不适宜的信息，</li>
+<li>Political.Asr：声音涉及令人不适宜的信息。</li>
    */
-  SubAppId: number
+  Type?: string
   /**
-   * <p>需要进行图片处理的FileId。不能与Url同时输入。</p>
+   * 音视频审核意见。
+<li>pass：确认正常，</li>
+<li>block：确认违规，</li>
+<li>review：疑似违规。</li>
    */
-  FileId?: string
+  Suggestion?: string
   /**
-   * <p>需要进行图片处理的Url。不能与FileId同时输入。</p>
+   * 音视频审核结果置信度。取值 0~100。
    */
-  Url?: string
-  /**
-   * <p>需要进行图片处理的Base64，要求图片文件小于4MB。使用 Base64 时，请不要添加任何前缀如 <code>data:image/png;base64,</code>，只需提供 Base64 编码字符串本身。</p>
-   */
-  Base64?: string
-  /**
-   * <p>图片处理参数。</p>
-   */
-  ImageTaskInput?: ProcessImageAsyncTaskInput
-  /**
-   * <p>图片处理任务的输出媒体文件配置。</p>
-   */
-  OutputConfig?: ProcessImageAsyncOutputConfig
-  /**
-   * <p>用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
-   */
-  SessionId?: string
-  /**
-   * <p>来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。</p>
-   */
-  SessionContext?: string
-  /**
-   * <p>任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。</p>
-   */
-  TasksPriority?: number
-  /**
-   * <p>保留字段，特殊用途时使用。</p>
-   */
-  ExtInfo?: string
+  Confidence?: number
 }
 
 /**
@@ -6545,20 +6629,31 @@ export interface ProductInstanceRecource {
 }
 
 /**
- * 剪辑固化任务信息。
+ * DescribeImageProcessingTemplates请求参数结构体
  */
-export interface PersistenceCompleteTask {
+export interface DescribeImageProcessingTemplatesRequest {
   /**
-   * 固化生成的媒体 ID。
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
    */
-  FileId?: string
+  SubAppId?: number
   /**
-   * 剪辑固化的来源，有以下三种。
-<li>SimpleHlsClip：来自简单 HLS 剪辑；</li>
-<li>FastEditMedia：来自快速媒体编辑；</li>
-<li>LiveRealTimeClip:来自直播即时剪辑。</li>
+   * 图片处理模板标识列表。长度限制：100。
    */
-  PersistenceSource?: string
+  Definitions?: Array<number | bigint>
+  /**
+   * 模板类型过滤条件，可选值：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
+   */
+  Type?: string
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数，默认值：10，最大值：100。
+   */
+  Limit?: number
 }
 
 /**
@@ -7044,37 +7139,49 @@ export interface AigcImageOutputConfig {
 }
 
 /**
- * 即时转码水印模板更新配置。
+ * ProcessImageAsync请求参数结构体
  */
-export interface WatermarkConfigureInfoForUpdate {
+export interface ProcessImageAsyncRequest {
   /**
-   * 是否启用水印。可取值：
-<li>ON：表示启用水印；</li>
-<li>OFF：表示关闭水印。</li>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
-  Switch?: string
+  SubAppId: number
   /**
-   * 水印图片 Base64 编码后的字符串。支持 jpeg、png 图片格式。
+   * <p>需要进行图片处理的FileId。不能与Url同时输入。</p>
    */
-  ImageContent?: string
+  FileId?: string
   /**
-   * 水印的宽度。
-<li>字符串以 % 结尾，表示水印 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
+   * <p>需要进行图片处理的Url。不能与FileId同时输入。</p>
    */
-  Width?: string
+  Url?: string
   /**
-   * 水印的高度。
-<li>字符串以 % 结尾，表示水印 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
+   * <p>需要进行图片处理的Base64，要求图片文件小于4MB。使用 Base64 时，请不要添加任何前缀如 <code>data:image/png;base64,</code>，只需提供 Base64 编码字符串本身。</p>
    */
-  Height?: string
+  Base64?: string
   /**
-   * 水印原点距离视频图像坐标原点的水平位置。字符串以 % 结尾，表示水印 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%；
+   * <p>图片处理参数。</p>
    */
-  XPos?: string
+  ImageTaskInput?: ProcessImageAsyncTaskInput
   /**
-   * 水印原点距离视频图像坐标原点的垂直位置。当字符串以 % 结尾，表示水印 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%。
+   * <p>图片处理任务的输出媒体文件配置。</p>
    */
-  YPos?: string
+  OutputConfig?: ProcessImageAsyncOutputConfig
+  /**
+   * <p>用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
+   */
+  SessionId?: string
+  /**
+   * <p>来源上下文，用于透传用户请求信息，音画质重生完成回调将返回该字段值，最长 1000 个字符。</p>
+   */
+  SessionContext?: string
+  /**
+   * <p>任务的优先级，数值越大优先级越高，取值范围是 -10 到 10，不填代表 0。</p>
+   */
+  TasksPriority?: number
+  /**
+   * <p>保留字段，特殊用途时使用。</p>
+   */
+  ExtInfo?: string
 }
 
 /**
@@ -14503,31 +14610,13 @@ export interface AudioSeparateInfo {
 }
 
 /**
- * DescribeImageProcessingTemplates请求参数结构体
+ * 异步获取 AIGC 人脸信息输出
  */
-export interface DescribeImageProcessingTemplatesRequest {
+export interface DescribeAigcFaceInfoAsyncOutput {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p>人脸信息。</p>
    */
-  SubAppId?: number
-  /**
-   * 图片处理模板标识列表。长度限制：100。
-   */
-  Definitions?: Array<number | bigint>
-  /**
-   * 模板类型过滤条件，可选值：
-<li>Preset：系统预置模板；</li>
-<li>Custom：用户自定义模板。</li>
-   */
-  Type?: string
-  /**
-   * 分页偏移量，默认值：0。
-   */
-  Offset?: number
-  /**
-   * 返回记录条数，默认值：10，最大值：100。
-   */
-  Limit?: number
+  FaceInfoSet?: Array<AigcFaceInfo>
 }
 
 /**
@@ -18446,200 +18535,184 @@ export interface HeadTailConfigureInfo {
  */
 export interface EventContent {
   /**
-   * 事件句柄，调用方必须调用 ConfirmEvents 来确认消息已经收到，确认有效时间 30 秒。失效后，事件可重新被获取。
+   * <p>事件句柄，调用方必须调用 ConfirmEvents 来确认消息已经收到，确认有效时间 30 秒。失效后，事件可重新被获取。</p>
    */
   EventHandle?: string
   /**
-   * <b>支持事件类型：</b>
-<li>NewFileUpload：视频上传完成；</li>
-<li>ProcedureStateChanged：任务流状态变更；</li>
-<li>FileDeleted：视频删除完成；</li>
-<li>RestoreMediaComplete：视频取回完成；</li>
-<li>PullComplete：视频转拉完成；</li>
-<li>EditMediaComplete：视频编辑完成；</li>
-<li>SplitMediaComplete：视频拆分完成；</li>
-<li>ComposeMediaComplete：制作媒体文件完成；</li>
-<li>WechatMiniProgramPublishComplete：微信小程序发布完成。</li>
-<li>RemoveWatermark：智能去除水印完成。</li>
-<li>RebuildMediaComplete：音画质重生完成事件（不推荐使用）。</li>
-<li>ReviewAudioVideoComplete：音视频审核完成；</li>
-<li>ExtractTraceWatermarkComplete：提取溯源水印完成；</li>
-<li>ExtractCopyRightWatermarkComplete：提取版权水印完成；</li>
-<li>DescribeFileAttributesComplete：获取文件属性完成；</li>
-<li>QualityInspectComplete：音画质检测完成；</li>
-<li>QualityEnhanceComplete：音画质重生任务完成；</li>
-<li>PersistenceComplete：剪辑固化完成；</li>
-<li>ComplexAdaptiveDynamicStreamingComplete：复杂自适应码流任务完成。</li>
-<li>ProcessMediaByMPSComplete：MPS视频处理完成。</li>
-<li>AigcImageTaskComplete：AIGC 生图任务完成。</li>
-<li>AigcVideoTaskComplete：AIGC 生视频任务完成。</li>
-<b>兼容 2017 版的事件类型：</b>
-<li>TranscodeComplete：视频转码完成；</li>
-<li>ConcatComplete：视频拼接完成；</li>
-<li>ClipComplete：视频剪辑完成；</li>
-<li>CreateImageSpriteComplete：视频截取雪碧图完成；</li>
-<li>CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。</li>
+   * <p><b>支持事件类型：</b></p><li>NewFileUpload：视频上传完成；</li><li>ProcedureStateChanged：任务流状态变更；</li><li>FileDeleted：视频删除完成；</li><li>RestoreMediaComplete：视频取回完成；</li><li>PullComplete：视频转拉完成；</li><li>EditMediaComplete：视频编辑完成；</li><li>SplitMediaComplete：视频拆分完成；</li><li>ComposeMediaComplete：制作媒体文件完成；</li><li>WechatMiniProgramPublishComplete：微信小程序发布完成。</li><li>RemoveWatermark：智能去除水印完成。</li><li>RebuildMediaComplete：音画质重生完成事件（不推荐使用）。</li><li>ReviewAudioVideoComplete：音视频审核完成；</li><li>ExtractTraceWatermarkComplete：提取溯源水印完成；</li><li>ExtractCopyRightWatermarkComplete：提取版权水印完成；</li><li>DescribeFileAttributesComplete：获取文件属性完成；</li><li>QualityInspectComplete：音画质检测完成；</li><li>QualityEnhanceComplete：音画质重生任务完成；</li><li>PersistenceComplete：剪辑固化完成；</li><li>ComplexAdaptiveDynamicStreamingComplete：复杂自适应码流任务完成。</li><li>ProcessMediaByMPSComplete：MPS视频处理完成。</li><li>AigcImageTaskComplete：AIGC 生图任务完成。</li><li>AigcVideoTaskComplete：AIGC 生视频任务完成。</li><li>DescribeAigcFaceInfoAsyncComplete：异步获取 AIGC 人脸信息任务完成。</li><b>兼容 2017 版的事件类型：</b><li>TranscodeComplete：视频转码完成；</li><li>ConcatComplete：视频拼接完成；</li><li>ClipComplete：视频剪辑完成；</li><li>CreateImageSpriteComplete：视频截取雪碧图完成；</li><li>CreateSnapshotByTimeOffsetComplete：视频按时间点截图完成。</li>
    */
   EventType?: string
   /**
-   * 视频上传完成事件，当事件类型为 NewFileUpload 时有效。
+   * <p>视频上传完成事件，当事件类型为 NewFileUpload 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileUploadEvent?: FileUploadTask
   /**
-   * 任务流状态变更事件，当事件类型为 ProcedureStateChanged 时有效。
+   * <p>任务流状态变更事件，当事件类型为 ProcedureStateChanged 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProcedureStateChangeEvent?: ProcedureTask
   /**
-   * 文件删除事件，当事件类型为 FileDeleted 时有效。
+   * <p>文件删除事件，当事件类型为 FileDeleted 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileDeleteEvent?: FileDeleteTask
   /**
-   * 视频转拉完成事件，当事件类型为 PullComplete 时有效。
+   * <p>视频转拉完成事件，当事件类型为 PullComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PullCompleteEvent?: PullUploadTask
   /**
-   * 视频编辑完成事件，当事件类型为 EditMediaComplete 时有效。
+   * <p>视频编辑完成事件，当事件类型为 EditMediaComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EditMediaCompleteEvent?: EditMediaTask
   /**
-   * 视频拆分完成事件，当事件类型为 SplitMediaComplete 时有效。
+   * <p>视频拆分完成事件，当事件类型为 SplitMediaComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SplitMediaCompleteEvent?: SplitMediaTask
   /**
-   * 制作媒体文件任务完成事件，当事件类型为 ComposeMediaComplete 时有效。
+   * <p>制作媒体文件任务完成事件，当事件类型为 ComposeMediaComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ComposeMediaCompleteEvent?: ComposeMediaTask
   /**
-   * 视频剪辑完成事件，当事件类型为 ClipComplete 时有效。
+   * <p>视频剪辑完成事件，当事件类型为 ClipComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClipCompleteEvent?: ClipTask2017
   /**
-   * 视频转码完成事件，当事件类型为 TranscodeComplete 时有效。
+   * <p>视频转码完成事件，当事件类型为 TranscodeComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TranscodeCompleteEvent?: TranscodeTask2017
   /**
-   * 视频截取雪碧图完成事件，当事件类型为 CreateImageSpriteComplete 时有效。
+   * <p>视频截取雪碧图完成事件，当事件类型为 CreateImageSpriteComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateImageSpriteCompleteEvent?: CreateImageSpriteTask2017
   /**
-   * 视频拼接完成事件，当事件类型为 ConcatComplete 时有效。
+   * <p>视频拼接完成事件，当事件类型为 ConcatComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConcatCompleteEvent?: ConcatTask2017
   /**
-   * 视频按时间点截图完成事件，当事件类型为 CreateSnapshotByTimeOffsetComplete 时有效。
+   * <p>视频按时间点截图完成事件，当事件类型为 CreateSnapshotByTimeOffsetComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SnapshotByTimeOffsetCompleteEvent?: SnapshotByTimeOffsetTask2017
   /**
-   * 微信发布完成事件，当事件类型为 WechatPublishComplete 时有效。
+   * <p>微信发布完成事件，当事件类型为 WechatPublishComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WechatPublishCompleteEvent?: WechatPublishTask
   /**
-   * 微信小程序发布任务完成事件，当事件类型为 WechatMiniProgramPublishComplete 时有效。
+   * <p>微信小程序发布任务完成事件，当事件类型为 WechatMiniProgramPublishComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WechatMiniProgramPublishCompleteEvent?: WechatMiniProgramPublishTask
   /**
-   * 智能去除水印完成事件，当事件类型为 RemoveWatermark 有效。
+   * <p>智能去除水印完成事件，当事件类型为 RemoveWatermark 有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoveWatermarkCompleteEvent?: RemoveWatermarkTask
   /**
-   * 视频取回完成事件，当事件类型为 RestoreMediaComplete 时有效。
+   * <p>视频取回完成事件，当事件类型为 RestoreMediaComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RestoreMediaCompleteEvent?: RestoreMediaTask
   /**
-   * 音画质重生完成事件，当事件类型为 RebuildMediaComplete 时有效。
+   * <p>音画质重生完成事件，当事件类型为 RebuildMediaComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RebuildMediaCompleteEvent?: RebuildMediaTask
   /**
-   * 溯源水印提取完成事件，当事件类型为 ExtractTraceWatermarkComplete 时有效。
+   * <p>溯源水印提取完成事件，当事件类型为 ExtractTraceWatermarkComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtractTraceWatermarkCompleteEvent?: ExtractTraceWatermarkTask
   /**
-   * 版权水印提取完成事件，当事件类型为 ExtractCopyRightWatermarkComplete 时有效。
+   * <p>版权水印提取完成事件，当事件类型为 ExtractCopyRightWatermarkComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtractCopyRightWatermarkCompleteEvent?: ExtractCopyRightWatermarkTask
   /**
-   * 音视频审核完成事件，当事件类型为 ReviewAudioVideoComplete 时有效。
+   * <p>音视频审核完成事件，当事件类型为 ReviewAudioVideoComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReviewAudioVideoCompleteEvent?: ReviewAudioVideoTask
   /**
-   * 该字段已无效。
+   * <p>该字段已无效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReduceMediaBitrateCompleteEvent?: ReduceMediaBitrateTask
   /**
-   * 获取文件属性完成事件，当事件类型为 DescribeFileAttributesComplete 时有效。
+   * <p>获取文件属性完成事件，当事件类型为 DescribeFileAttributesComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DescribeFileAttributesCompleteEvent?: DescribeFileAttributesTask
   /**
-   * 音画质检测完成事件，当事件类型为 QualityInspectComplete 时有效。
+   * <p>音画质检测完成事件，当事件类型为 QualityInspectComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityInspectCompleteEvent?: QualityInspectTask
   /**
-   * 音画质重生完成事件，当事件类型为 QualityEnhanceComplete 时有效。
+   * <p>音画质重生完成事件，当事件类型为 QualityEnhanceComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityEnhanceCompleteEvent?: QualityEnhanceTask
   /**
-   * 媒体转推状态变化事件，当事件类型为 MediaCastStatusChanged 时有效。
+   * <p>媒体转推状态变化事件，当事件类型为 MediaCastStatusChanged 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MediaCastStatusChangedEvent?: MediaCastEvent
   /**
-   * 剪辑固化完成事件，当事件类型为 PersistenceComplete 时有效。
+   * <p>剪辑固化完成事件，当事件类型为 PersistenceComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PersistenceCompleteEvent?: PersistenceCompleteTask
   /**
-   * 自适应码流任务信息，仅当 EventType 为ComplexAdaptiveDynamicStreamingComplete 时有效。
+   * <p>自适应码流任务信息，仅当 EventType 为ComplexAdaptiveDynamicStreamingComplete 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ComplexAdaptiveDynamicStreamingCompleteEvent?: ComplexAdaptiveDynamicStreamingTask
   /**
-   * MPS 视频处理任务信息，仅当 EventType 为 ProcessMediaByMPSComplete 时有效。
+   * <p>MPS 视频处理任务信息，仅当 EventType 为 ProcessMediaByMPSComplete 时有效。</p>
    */
   ProcessMediaByMPSCompleteEvent?: ProcessMediaByMPS
   /**
-   * AIGC 生图任务信息，仅当 EventType 为 AigcImageTaskComplete 时有效。
+   * <p>AIGC 生图任务信息，仅当 EventType 为 AigcImageTaskComplete 时有效。</p>
    */
   AigcImageCompleteEvent?: AigcImageTask
   /**
-   * AIGC 生视频任务信息，仅当 EventType 为 AigcVideoTaskComplete 时有效。
+   * <p>AIGC 生视频任务信息，仅当 EventType 为 AigcVideoTaskComplete 时有效。</p>
    */
   AigcVideoCompleteEvent?: AigcVideoTask
   /**
-   * 提取数字水印信息，仅当 EventType 为 ExtractBlindWatermarkComplete 时有效。
+   * <p>提取数字水印信息，仅当 EventType 为 ExtractBlindWatermarkComplete 时有效。</p>
    */
   ExtractBlindWatermarkComplete?: ExtractBlindWatermarkTask
   /**
-   * AIGC 场景化生图任务信息，仅当 EventType 为 SceneAigcImageCompleteEvent 时有效。
+   * <p>AIGC 场景化生图任务信息，仅当 EventType 为 SceneAigcImageCompleteEvent 时有效。</p>
    */
   SceneAigcImageCompleteEvent?: SceneAigcImageTask
   /**
-   * 图片异步处理任务信息，仅当 EventType 为 ProcessImageAsyncCompleteEvent 时有效。
+   * <p>图片异步处理任务信息，仅当 EventType 为 ProcessImageAsyncCompleteEvent 时有效。</p>
    */
   ProcessImageAsyncCompleteEvent?: ProcessImageAsyncTask
+  /**
+   * <p>AIGC 自定义主体信息，仅当 EventType 为 CreateAigcAdvancedCustomElementCompleteEvent，该字段有值。</p>
+   */
+  CreateAigcAdvancedCustomElementCompleteEvent?: CreateAigcAdvancedCustomElementTask
+  /**
+   * <p>AIGC 自定义音色信息，仅当 EventType 为 CreateAigcCustomVoiceCompleteEvent，该字段有值。</p>
+   */
+  CreateAigcCustomVoiceCompleteEvent?: CreateAigcCustomVoiceTask
+  /**
+   * <p>异步获取 AIGC 人脸信息，仅当 EventType 为 DescribeAigcFaceInfoAsyncComplete，该字段有值。</p>
+   */
+  DescribeAigcFaceInfoAsyncCompleteEvent?: DescribeAigcFaceInfoAsyncTask
 }
 
 /**
@@ -20881,7 +20954,7 @@ export interface DescribeStorageDataRequest {
  */
 export interface DescribeTaskDetailResponse {
   /**
-   * <p>任务类型，取值：<li>Procedure：视频处理任务；</li><li>EditMedia：视频编辑任务；</li><li>SplitMedia：视频拆条任务；</li><li>ComposeMedia：制作媒体文件任务；</li><li>WechatPublish：微信发布任务；</li><li>WechatMiniProgramPublish：微信小程序视频发布任务；</li><li>PullUpload：拉取上传媒体文件任务；</li><li>FastClipMedia：快速剪辑任务；</li><li>RemoveWatermarkTask：智能去除水印任务；</li><li>DescribeFileAttributesTask：获取文件属性任务；</li><li>RebuildMedia：音画质重生任务（不推荐使用）；</li><li>ReviewAudioVideo：音视频审核任务；</li><li>ExtractTraceWatermark：提取溯源水印任务；</li><li>ExtractCopyRightWatermark：提取版权水印任务；</li><li>QualityInspect：音画质检测任务；</li><li>QualityEnhance：音画质重生任务；</li><li>ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；</li><li>ProcessMediaByMPS：MPS 视频处理任务；</li><li>AigcImageTask：AIGC 生图任务；</li><li>SceneAigcImageTask：场景化 AIGC 生图任务；</li><li>AigcVideoTask：AIGC 生视频任务；</li><li>ImportMediaKnowledge：导入媒体知识任务。</li><li>SceneAigcVideoTask：场景化 AIGC 生视频任务；</li><li> ExtractBlindWatermark：提取数字水印任务。</li><li> ExtractBlindWatermark：提取数字水印任务。</li><li> CreateAigcAdvancedCustomElement：创建自定义主体任务</li><li>CreateAigcCustomVoice：创建自定义音色任务</li><li>CreateAigcSubject：创建主体任务</li><li>AigcVideoRedrawTask：AIGC 视频转绘任务</li><li>CreateAigcAudioClone：AIGC 声音复刻任务</li></p>
+   * <p>任务类型，取值：<li>Procedure：视频处理任务；</li><li>EditMedia：视频编辑任务；</li><li>SplitMedia：视频拆条任务；</li><li>ComposeMedia：制作媒体文件任务；</li><li>WechatPublish：微信发布任务；</li><li>WechatMiniProgramPublish：微信小程序视频发布任务；</li><li>PullUpload：拉取上传媒体文件任务；</li><li>FastClipMedia：快速剪辑任务；</li><li>RemoveWatermarkTask：智能去除水印任务；</li><li>DescribeFileAttributesTask：获取文件属性任务；</li><li>RebuildMedia：音画质重生任务（不推荐使用）；</li><li>ReviewAudioVideo：音视频审核任务；</li><li>ExtractTraceWatermark：提取溯源水印任务；</li><li>ExtractCopyRightWatermark：提取版权水印任务；</li><li>QualityInspect：音画质检测任务；</li><li>QualityEnhance：音画质重生任务；</li><li>ComplexAdaptiveDynamicStreaming：复杂自适应码流任务；</li><li>ProcessMediaByMPS：MPS 视频处理任务；</li><li>AigcImageTask：AIGC 生图任务；</li><li>SceneAigcImageTask：场景化 AIGC 生图任务；</li><li>AigcVideoTask：AIGC 生视频任务；</li><li>ImportMediaKnowledge：导入媒体知识任务。</li><li>SceneAigcVideoTask：场景化 AIGC 生视频任务；</li><li> ExtractBlindWatermark：提取数字水印任务。</li><li> ExtractBlindWatermark：提取数字水印任务。</li><li> CreateAigcAdvancedCustomElement：创建自定义主体任务</li><li>CreateAigcCustomVoice：创建自定义音色任务</li><li>CreateAigcSubject：创建主体任务</li><li>AigcVideoRedrawTask：AIGC 视频转绘任务</li><li>CreateAigcAudioClone：AIGC 声音复刻任务</li><li>DescribeAigcFaceInfoAsync：异步获取 AIGC 人脸信息任务</li></p>
    */
   TaskType?: string
   /**
@@ -21055,17 +21128,21 @@ export interface DescribeTaskDetailResponse {
    */
   CreateAigcSubjectTask?: CreateAigcSubjectTask
   /**
-   * <p>AIGC 视频转绘信息，仅当 TaskType 为AigcVideoRedrawTask，该字段有值。</p>
+   * <p>AIGC 视频转绘信息，仅当 TaskType 为 AigcVideoRedrawTask，该字段有值。</p>
    */
   AigcVideoRedrawTask?: AigcVideoRedrawTask
   /**
-   * <p>AIGC音效信息，仅当TaskType为AigcAudioTask时，该字段有值。</p>
+   * <p>AIGC音效信息，仅当 TaskType 为 AigcAudioTask，该字段有值。</p>
    */
   AigcAudioTask?: AigcAudioTask
   /**
-   * <p>AIGC 声音复刻信息，仅当 TaskType 为CreateAigcAudioClone，该字段有值。</p>
+   * <p>AIGC 声音复刻信息，仅当 TaskType 为 CreateAigcAudioClone，该字段有值。</p>
    */
   CreateAigcAudioCloneTask?: CreateAigcAudioCloneTask
+  /**
+   * <p>异步获取 AIGC 人脸信息，仅当 TaskType 为 DescribeAigcFaceInfoAsync，该字段有值。</p>
+   */
+  DescribeAigcFaceInfoAsyncTask?: DescribeAigcFaceInfoAsyncTask
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -27152,6 +27229,23 @@ export interface MPSUpdateSmartEraseWatermarkConfig {
    * <p>指定擦除自定义区域。 对选定区域，在选定时间段内不进行检测识别直接进行擦除。 注意：清除区域请传入[]，不传时将保持模板区域信息不变。</p>
    */
   CustomAreas?: Array<MPSEraseTimeArea>
+}
+
+/**
+ * 剪辑固化任务信息。
+ */
+export interface PersistenceCompleteTask {
+  /**
+   * 固化生成的媒体 ID。
+   */
+  FileId?: string
+  /**
+   * 剪辑固化的来源，有以下三种。
+<li>SimpleHlsClip：来自简单 HLS 剪辑；</li>
+<li>FastEditMedia：来自快速媒体编辑；</li>
+<li>LiveRealTimeClip:来自直播即时剪辑。</li>
+   */
+  PersistenceSource?: string
 }
 
 /**

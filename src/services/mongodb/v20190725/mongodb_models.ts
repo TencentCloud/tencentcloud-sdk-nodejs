@@ -448,17 +448,17 @@ export interface DescribeCurrentOpResponse {
 }
 
 /**
- * SetDBInstanceDeletionProtection请求参数结构体
+ * PromoteDBInstanceToActive请求参数结构体
  */
-export interface SetDBInstanceDeletionProtectionRequest {
+export interface PromoteDBInstanceToActiveRequest {
   /**
-   * 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   * 灾备实例id
    */
-  InstanceIds: Array<string>
+  InstanceId: string
   /**
-   * 实例销毁保护选项，取值范围：0-关闭销毁保护，1-开启销毁保护
+   * 主实例id
    */
-  EnableDeletionProtection: number
+  MasterId: string
 }
 
 /**
@@ -2731,6 +2731,20 @@ export interface SecurityGroup {
 }
 
 /**
+ * SetDBInstanceDeletionProtection请求参数结构体
+ */
+export interface SetDBInstanceDeletionProtectionRequest {
+  /**
+   * 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   */
+  InstanceIds: Array<string>
+  /**
+   * 实例销毁保护选项，取值范围：0-关闭销毁保护，1-开启销毁保护
+   */
+  EnableDeletionProtection: number
+}
+
+/**
  * EnableWanService请求参数结构体
  */
 export interface EnableWanServiceRequest {
@@ -4889,20 +4903,21 @@ export interface ModifyAuditServiceResponse {
  */
 export interface SetInstanceMaintenanceRequest {
   /**
-   * 指定实例ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
-
+   * <p>指定实例ID。例如：cmgo-p8vn****。请登录 <a href="https://console.cloud.tencent.com/mongodb">MongoDB 控制台</a>在实例列表复制实例 ID。</p>
    */
   InstanceId: string
   /**
-   * 维护时间窗开始时间。取值范围为"00:00-23:00"的任意整点或半点，如00:00或00:30。
+   * <p>维护时间窗开始时间。取值范围为&quot;00:00-23:00&quot;的任意整点或半点，如00:00或00:30。</p>
    */
   MaintenanceStart: string
   /**
-   * 维护时间窗结束时间。
-- 取值范围为"00:00-23:00"的任意整点或半点，维护时间持续时长最小为30分钟，最大为3小时。
-- 结束时间务必是基于开始时间向后的时间。
+   * <p>维护时间窗结束时间。</p><ul><li>取值范围为&quot;00:00-23:00&quot;的任意整点或半点，维护时间持续时长最小为30分钟，最大为3小时。</li><li>结束时间务必是基于开始时间向后的时间。</li></ul>
    */
   MaintenanceEnd: string
+  /**
+   * <p>指定每周内维护时间窗口的具体日期。  格式：请输入 1-7 之间的数字代表周一到周日（例如：1 代表周一），多个日期请用英文逗号 , 分隔。 示例：输入 1,3,5 表示维护窗口周期在每周的周一、周三、周五。 默认值：不设置，则默认为全周期 (1,2,3,4,5,6,7)。</p>
+   */
+  MaintenanceDays?: string
 }
 
 /**
@@ -5205,6 +5220,20 @@ export interface DescribeSlowLogPatternsRequest {
 }
 
 /**
+ * UpgradeDBInstanceKernelVersion请求参数结构体
+ */
+export interface UpgradeDBInstanceKernelVersionRequest {
+  /**
+   * 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   */
+  InstanceId: string
+  /**
+   * 是否维护时间内升级。0-否，1-是
+   */
+  InMaintenance?: number
+}
+
+/**
  * 过滤条件
  */
 export interface Filters {
@@ -5284,17 +5313,17 @@ export interface RenewDBInstancesRequest {
 }
 
 /**
- * UpgradeDBInstanceKernelVersion请求参数结构体
+ * PromoteDBInstanceToActive返回参数结构体
  */
-export interface UpgradeDBInstanceKernelVersionRequest {
+export interface PromoteDBInstanceToActiveResponse {
   /**
-   * 实例ID列表，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   * 任务id
    */
-  InstanceId: string
+  FlowId?: number
   /**
-   * 是否维护时间内升级。0-否，1-是
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InMaintenance?: number
+  RequestId?: string
 }
 
 /**

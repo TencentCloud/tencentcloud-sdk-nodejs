@@ -41,6 +41,7 @@ import {
   DspmSupportedAssetType,
   DspmIdentifyInfoItem,
   DescribeDspmRiskStrategyResponse,
+  DeleteIaCFileResponse,
   DspmAccountCount,
   ModifyDspmRiskStrategyRequest,
   DeleteDspmPersonalIdentifyRequest,
@@ -56,7 +57,7 @@ import {
   DescribeCSIPRiskStatisticsResponse,
   DescribeCosActionListResponse,
   VULViewVULRiskData,
-  RetryDspmExportLogRequest,
+  DescribeIaCTokenListResponse,
   DescribeScanTaskListRequest,
   CreateAccessKeyCheckTaskResponse,
   DescribeOrganizationInfoRequest,
@@ -75,6 +76,7 @@ import {
   DescribeCosIpInvokeRecordFileRequest,
   DescribeBucketInvokeIpListRequest,
   OrganizationInfo,
+  TagCount,
   DescribeVulRiskListResponse,
   CreateRiskCenterScanTaskResponse,
   DescribeDspmAssetsRequest,
@@ -97,6 +99,7 @@ import {
   ModifyDspmRestoreLogTaskRequest,
   UpdateAlertStatusListRequest,
   DspmIdentifyAssetStatistic,
+  DescribeIaCFileListRequest,
   DescribeCosActionListRequest,
   DescribeUserDspmInfoListRequest,
   DescribeCosAlarmListRequest,
@@ -114,6 +117,7 @@ import {
   DescribeDbAssetInfoRequest,
   DescribeUserCallRecordResponse,
   DescribeCosIpInvokeLogRequest,
+  DescribeExposeAssetCategoryResponse,
   DescribeDspmIdentifyInfoListRequest,
   VulRiskItem,
   DeleteCosAkAssetResponse,
@@ -125,7 +129,7 @@ import {
   DescribeDspmApproveOrderListRequest,
   DspmRiskTendency,
   DeleteDomainAndIpResponse,
-  DescribeDspmRiskDetailRequest,
+  CreateDomainAndIpRequest,
   CosDictionary,
   DescribeRiskRulesResponse,
   SkillCapabilityTag,
@@ -138,7 +142,7 @@ import {
   DescribeCosRiskEvidenceRequest,
   DescribeDspmAssetTableListRequest,
   DescribeHighBaseLineRiskListResponse,
-  DescribeExposeAssetCategoryResponse,
+  DescribeDspmRiskDetailRequest,
   CosOverview,
   DescribeCosIdentifyFileListRequest,
   DescribeDspmAssetSupportedPrivilegesRequest,
@@ -147,6 +151,7 @@ import {
   IpAssetListVO,
   CreateDspmAccessExportJobRequest,
   DescribeDspmRiskStrategyGroupRequest,
+  IaCFileRisk,
   DspmPersonApplyHistoryItem,
   DescribeCosAccessPermissionRequest,
   DspmScheduleConfig,
@@ -168,6 +173,7 @@ import {
   DescribeIpInvokeRecordResponse,
   DescribeCosRoleAccessPermissionsResponse,
   ModifyCosMarkInfoResponse,
+  SkillScanRuleHit,
   DescribeOrganizationUserInfoRequest,
   ModifyDspmAssetLogDeliverySwitchRequest,
   DspmPersonUser,
@@ -178,17 +184,18 @@ import {
   CreateCosRiskScanTaskResponse,
   DescribeCosRoleAccessPermissionResponse,
   CreateDspmIdentifyInfoListExportJobRequest,
-  DescribeRiskCenterPortViewPortRiskListResponse,
+  CreateIaCFileExportJobRequest,
   AlertInfo,
   Vpc,
   STSCredentialOutput,
   PortRiskAdvanceCFGParamItem,
-  VULRiskAdvanceCFGList,
+  CreateIaCAccessTokenRequest,
   DescribeDspmExportTaskResponse,
   DescribeRepositoryImageAssetsResponse,
   CreateDspmApproveHistoryExportJobResponse,
   CosPermissionInfo,
   DescribeDspmDictionaryListResponse,
+  DescribeIaCFileListResponse,
   DescribeDspmAssetSupportedPrivilegesResponse,
   CreateDspmWhitelistStrategyResponse,
   HitRules,
@@ -196,6 +203,7 @@ import {
   DspmAccessRecord,
   DescribeTopAttackInfoResponse,
   ModifyDspmPersonalIdentifyRequest,
+  CreateIaCAccessTokenResponse,
   DescribeVULRiskAdvanceCFGListRequest,
   DspmAssetTypeCount,
   DescribeCosAssetSyncTaskResponse,
@@ -208,14 +216,15 @@ import {
   DescribeCosAkAssetResponse,
   DescribeDspmPayInfoRequest,
   TableField,
+  DescribeIaCFileReportRequest,
   ModifyDspmAssetAccountPrivilegesResponse,
   ModifyDspmWhitelistStrategyRequest,
-  DescribeUebaRuleResponse,
+  CICDToken,
   DescribeSkillScanResultRequest,
   GateWayAsset,
   DescribeSourceIPAssetResponse,
   CosBucketBillingInfo,
-  DeleteDspmAssetAccountResponse,
+  CreateIaCFileExportJobResponse,
   DescribeDspmApplyOrderListResponse,
   DescribeDspmAccessTopologyAssetsRequest,
   AssetViewVULRiskData,
@@ -248,6 +257,7 @@ import {
   DspmAssetAccountIdentify,
   DescribeScanReportListRequest,
   DescribeCosAlarmTrendDataRequest,
+  RetryDspmExportLogRequest,
   DescribeAccessKeyAssetRequest,
   CreateCosObjectScanTaskRequest,
   DescribeScanTaskListResponse,
@@ -337,6 +347,7 @@ import {
   DescribeVULRiskAdvanceCFGListResponse,
   StandardItem,
   DescribeCosRoleAccessPermissionRequest,
+  ModifyDspmRiskStrategyResponse,
   DescribeCosAuditAppIdListResponse,
   DescribeAssetViewVulRiskListResponse,
   DescribeRepositoryImageAssetsRequest,
@@ -349,15 +360,17 @@ import {
   DescribeCallRecordResponse,
   AssetViewCFGRisk,
   CheckViewRiskItem,
-  SkillScanRuleHit,
+  KeyValueInt,
   DspmUinUser,
   CosAkSet,
   DataSearchBug,
   DspmAssetInstance,
   CommandPluginState,
+  DescribeIaCFileOverviewResponse,
   DspmAssetSecurityAnalyseStatus,
   DspmAssetDataScanDetail,
   BackupLog,
+  CreateIaCFileReScanTaskResponse,
   DescribeClusterAssetsRequest,
   ResetDspmAssetAccountPasswordResponse,
   DescribeDspmAssetAccountPresetPrivilegesResponse,
@@ -365,6 +378,7 @@ import {
   DeleteCosAkAssetRequest,
   DescribeDomainAssetsRequest,
   DescribeNICAssetsRequest,
+  DescribeIaCFileReportResponse,
   DescribeDspmAssetFieldListResponse,
   DescribeDspmPersonApplyHistoryResponse,
   DescribeAssetProcessListRequest,
@@ -378,10 +392,12 @@ import {
   DescribeRiskRuleDetailRequest,
   DescribeDspmAssetAccountPresetPrivilegesRequest,
   DescribeDspmPersonalIdentifyListResponse,
+  DeleteIaCAccessTokenResponse,
   Location,
   CosRoleAccessInfo,
   UebaEventContent,
   CreateAccessKeySyncTaskResponse,
+  ModifyIaCTokenPeriodResponse,
   DescribeDspmSyncUsersStatusResponse,
   DescribeSearchBugInfoRequest,
   DescribeDspmRiskDetailResponse,
@@ -395,6 +411,7 @@ import {
   DeleteCosPolicyResponse,
   DescribeDspmAssetDatabaseListRequest,
   UpdateAlertStatusListResponse,
+  DescribeIaCTokenListRequest,
   SkillScanEngineResult,
   CosAkAssetInfo,
   CosBucketAccessWay,
@@ -423,6 +440,7 @@ import {
   CosBucketId,
   AccessCredentialOutput,
   CreateDspmExportTaskResponse,
+  VULRiskAdvanceCFGList,
   CreateDspmIdentifyInfoListExportJobResponse,
   TaskCenterVulRiskInputParam,
   ModifyDspmIpInfoRequest,
@@ -467,6 +485,7 @@ import {
   ScanTaskInfoList,
   DescribeCosAuditDictionaryListRequest,
   DescribeRiskCenterAssetViewVULRiskListRequest,
+  DeleteIaCFileRequest,
   DeleteDspmExportTaskResponse,
   SourceIPAsset,
   DescribeUserCallRecordRequest,
@@ -503,7 +522,6 @@ import {
   DescribeCosAkInvokeIpListRequest,
   CreateDspmRiskExportJobRequest,
   BugInfoDetail,
-  CreateDomainAndIpRequest,
   CosInvokeIpVpcInfo,
   AccessKeyAlarmInfo,
   DescribeDspmAssetAccountRecycledPrivilegesRequest,
@@ -558,6 +576,7 @@ import {
   RiskCenterStatusKey,
   TaskAssetObject,
   DbAssetInfo,
+  IaCFile,
   DescribeCosAccessPermissionsRequest,
   CreateCosRiskScanTaskRequest,
   CosIdentifyRuleDetail,
@@ -576,7 +595,7 @@ import {
   AssetViewWeakPassRisk,
   ModifyPolicyStatusResponse,
   CFGViewCFGRisk,
-  ModifyDspmRiskStrategyResponse,
+  CreateIaCFileReScanTaskRequest,
   CosBucketInfo,
   ReportItemKey,
   DeleteDspmAssetAccountRequest,
@@ -600,6 +619,7 @@ import {
   DescribeCosBucketListRequest,
   DescribeVulRiskListRequest,
   DescribeVULListResponse,
+  ModifyIaCTokenPeriodRequest,
   RelatedEvent,
   DescribeAssetViewVulRiskListRequest,
   DspmWhitelistStrategy,
@@ -615,6 +635,7 @@ import {
   DescribeDspmApplyOrderListRequest,
   DescribeCosBucketRiskRequest,
   CallRecord,
+  DescribeRiskCenterPortViewPortRiskListResponse,
   DescribeDspmRiskStrategyRequest,
   DescribeKeySandboxCredentialListRequest,
   DescribeDspmAssetsResponse,
@@ -636,7 +657,7 @@ import {
   DescribeSubUserInfoResponse,
   DescribeDspmStatisticsResponse,
   DescribeCSIPRiskStatisticsRequest,
-  TagCount,
+  DescribeUebaRuleResponse,
   DescribeDomainAssetsResponse,
   DescribeTaskLogListRequest,
   DescribeNICAssetsResponse,
@@ -649,6 +670,8 @@ import {
   AccessKeyUser,
   ProductSupport,
   DescribeListenerListRequest,
+  DescribeIaCFileOverviewRequest,
+  DeleteIaCAccessTokenRequest,
   DeleteRiskScanTaskResponse,
   CreateCosPolicyResponse,
   DescribeCFWAssetStatisticsRequest,
@@ -661,6 +684,7 @@ import {
   DescribeDbAssetsResponse,
   DspmAssetAccessTopologyItem,
   DescribeRiskCenterAssetViewPortRiskListResponse,
+  DeleteDspmAssetAccountResponse,
   DescribeRiskBucketListResponse,
   DescribeAssumeRoleResponse,
 } from "./csip_models"
@@ -685,13 +709,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 对象存储异常检测调用记录信息
+   * 删除IaC检测文件
    */
-  async DescribeIpInvokeRecord(
-    req: DescribeIpInvokeRecordRequest,
-    cb?: (error: string, rep: DescribeIpInvokeRecordResponse) => void
-  ): Promise<DescribeIpInvokeRecordResponse> {
-    return this.request("DescribeIpInvokeRecord", req, cb)
+  async DeleteIaCFile(
+    req: DeleteIaCFileRequest,
+    cb?: (error: string, rep: DeleteIaCFileResponse) => void
+  ): Promise<DeleteIaCFileResponse> {
+    return this.request("DeleteIaCFile", req, cb)
   }
 
   /**
@@ -915,13 +939,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取资产视角的漏洞风险列表
+   * 创建IaC检测接入Token
    */
-  async DescribeAssetViewVulRiskList(
-    req: DescribeAssetViewVulRiskListRequest,
-    cb?: (error: string, rep: DescribeAssetViewVulRiskListResponse) => void
-  ): Promise<DescribeAssetViewVulRiskListResponse> {
-    return this.request("DescribeAssetViewVulRiskList", req, cb)
+  async CreateIaCAccessToken(
+    req: CreateIaCAccessTokenRequest,
+    cb?: (error: string, rep: CreateIaCAccessTokenResponse) => void
+  ): Promise<CreateIaCAccessTokenResponse> {
+    return this.request("CreateIaCAccessToken", req, cb)
   }
 
   /**
@@ -1015,6 +1039,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取IaC检测文件列表
+   */
+  async DescribeIaCFileList(
+    req: DescribeIaCFileListRequest,
+    cb?: (error: string, rep: DescribeIaCFileListResponse) => void
+  ): Promise<DescribeIaCFileListResponse> {
+    return this.request("DescribeIaCFileList", req, cb)
+  }
+
+  /**
    * 查询cos文件数据识别结果列表
    */
   async DescribeCosIdentifyFileList(
@@ -1035,13 +1069,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看cos桶访问权限信息
+   * 创建IaC检测文件重新扫描任务
    */
-  async DescribeCosRoleAccessPermission(
-    req: DescribeCosRoleAccessPermissionRequest,
-    cb?: (error: string, rep: DescribeCosRoleAccessPermissionResponse) => void
-  ): Promise<DescribeCosRoleAccessPermissionResponse> {
-    return this.request("DescribeCosRoleAccessPermission", req, cb)
+  async CreateIaCFileReScanTask(
+    req: CreateIaCFileReScanTaskRequest,
+    cb?: (error: string, rep: CreateIaCFileReScanTaskResponse) => void
+  ): Promise<CreateIaCFileReScanTaskResponse> {
+    return this.request("CreateIaCFileReScanTask", req, cb)
+  }
+
+  /**
+   * 创建Dspm资产访问拓扑导出任务
+   */
+  async CreateDspmAssetAccessTopologyExportJob(
+    req: CreateDspmAssetAccessTopologyExportJobRequest,
+    cb?: (error: string, rep: CreateDspmAssetAccessTopologyExportJobResponse) => void
+  ): Promise<CreateDspmAssetAccessTopologyExportJobResponse> {
+    return this.request("CreateDspmAssetAccessTopologyExportJob", req, cb)
   }
 
   /**
@@ -1055,13 +1099,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除Dspm资产账号
+   * 对象存储异常检测调用记录信息
    */
-  async DeleteDspmAssetAccount(
-    req: DeleteDspmAssetAccountRequest,
-    cb?: (error: string, rep: DeleteDspmAssetAccountResponse) => void
-  ): Promise<DeleteDspmAssetAccountResponse> {
-    return this.request("DeleteDspmAssetAccount", req, cb)
+  async DescribeIpInvokeRecord(
+    req: DescribeIpInvokeRecordRequest,
+    cb?: (error: string, rep: DescribeIpInvokeRecordResponse) => void
+  ): Promise<DescribeIpInvokeRecordResponse> {
+    return this.request("DescribeIpInvokeRecord", req, cb)
+  }
+
+  /**
+   * 创建IaC检测文件导出任务
+   */
+  async CreateIaCFileExportJob(
+    req: CreateIaCFileExportJobRequest,
+    cb?: (error: string, rep: CreateIaCFileExportJobResponse) => void
+  ): Promise<CreateIaCFileExportJobResponse> {
+    return this.request("CreateIaCFileExportJob", req, cb)
   }
 
   /**
@@ -1585,6 +1639,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取扫描报告列表
+   */
+  async DescribeScanReportList(
+    req: DescribeScanReportListRequest,
+    cb?: (error: string, rep: DescribeScanReportListResponse) => void
+  ): Promise<DescribeScanReportListResponse> {
+    return this.request("DescribeScanReportList", req, cb)
+  }
+
+  /**
    * 同步dspm支持的资产
    */
   async SyncDspmAssets(
@@ -1885,13 +1949,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Dspm申请历史
+   * 删除IaC检测接入Token
    */
-  async DescribeDspmApplyHistory(
-    req: DescribeDspmApplyHistoryRequest,
-    cb?: (error: string, rep: DescribeDspmApplyHistoryResponse) => void
-  ): Promise<DescribeDspmApplyHistoryResponse> {
-    return this.request("DescribeDspmApplyHistory", req, cb)
+  async DeleteIaCAccessToken(
+    req: DeleteIaCAccessTokenRequest,
+    cb?: (error: string, rep: DeleteIaCAccessTokenResponse) => void
+  ): Promise<DeleteIaCAccessTokenResponse> {
+    return this.request("DeleteIaCAccessToken", req, cb)
   }
 
   /**
@@ -1922,6 +1986,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDspmAssetFieldListResponse) => void
   ): Promise<DescribeDspmAssetFieldListResponse> {
     return this.request("DescribeDspmAssetFieldList", req, cb)
+  }
+
+  /**
+   * 修改cos审计监测账号
+   */
+  async ModifyCosAuditMonitorAccount(
+    req: ModifyCosAuditMonitorAccountRequest,
+    cb?: (error: string, rep: ModifyCosAuditMonitorAccountResponse) => void
+  ): Promise<ModifyCosAuditMonitorAccountResponse> {
+    return this.request("ModifyCosAuditMonitorAccount", req, cb)
   }
 
   /**
@@ -2135,6 +2209,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取IaC检测接入Token列表
+   */
+  async DescribeIaCTokenList(
+    req: DescribeIaCTokenListRequest,
+    cb?: (error: string, rep: DescribeIaCTokenListResponse) => void
+  ): Promise<DescribeIaCTokenListResponse> {
+    return this.request("DescribeIaCTokenList", req, cb)
+  }
+
+  /**
    * 查询云边界分析-暴露路径下主机节点的进程列表
    */
   async DescribeAssetProcessList(
@@ -2205,6 +2289,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取IaC检测文件报告
+   */
+  async DescribeIaCFileReport(
+    req: DescribeIaCFileReportRequest,
+    cb?: (error: string, rep: DescribeIaCFileReportResponse) => void
+  ): Promise<DescribeIaCFileReportResponse> {
+    return this.request("DescribeIaCFileReport", req, cb)
+  }
+
+  /**
    * 获取存储桶信息
    */
   async DescribeCosBucketList(
@@ -2265,13 +2359,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改cos审计监测账号
+   * 获取资产视角的漏洞风险列表
    */
-  async ModifyCosAuditMonitorAccount(
-    req: ModifyCosAuditMonitorAccountRequest,
-    cb?: (error: string, rep: ModifyCosAuditMonitorAccountResponse) => void
-  ): Promise<ModifyCosAuditMonitorAccountResponse> {
-    return this.request("ModifyCosAuditMonitorAccount", req, cb)
+  async DescribeAssetViewVulRiskList(
+    req: DescribeAssetViewVulRiskListRequest,
+    cb?: (error: string, rep: DescribeAssetViewVulRiskListResponse) => void
+  ): Promise<DescribeAssetViewVulRiskListResponse> {
+    return this.request("DescribeAssetViewVulRiskList", req, cb)
   }
 
   /**
@@ -2525,13 +2619,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建Dspm资产访问拓扑导出任务
+   * 查看cos桶访问权限信息
    */
-  async CreateDspmAssetAccessTopologyExportJob(
-    req: CreateDspmAssetAccessTopologyExportJobRequest,
-    cb?: (error: string, rep: CreateDspmAssetAccessTopologyExportJobResponse) => void
-  ): Promise<CreateDspmAssetAccessTopologyExportJobResponse> {
-    return this.request("CreateDspmAssetAccessTopologyExportJob", req, cb)
+  async DescribeCosRoleAccessPermission(
+    req: DescribeCosRoleAccessPermissionRequest,
+    cb?: (error: string, rep: DescribeCosRoleAccessPermissionResponse) => void
+  ): Promise<DescribeCosRoleAccessPermissionResponse> {
+    return this.request("DescribeCosRoleAccessPermission", req, cb)
   }
 
   /**
@@ -2582,6 +2676,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCosRiskEvidenceResponse) => void
   ): Promise<DescribeCosRiskEvidenceResponse> {
     return this.request("DescribeCosRiskEvidence", req, cb)
+  }
+
+  /**
+   * 查询Dspm申请历史
+   */
+  async DescribeDspmApplyHistory(
+    req: DescribeDspmApplyHistoryRequest,
+    cb?: (error: string, rep: DescribeDspmApplyHistoryResponse) => void
+  ): Promise<DescribeDspmApplyHistoryResponse> {
+    return this.request("DescribeDspmApplyHistory", req, cb)
   }
 
   /**
@@ -2705,6 +2809,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改IaC检测接入Token存储周期
+   */
+  async ModifyIaCTokenPeriod(
+    req: ModifyIaCTokenPeriodRequest,
+    cb?: (error: string, rep: ModifyIaCTokenPeriodResponse) => void
+  ): Promise<ModifyIaCTokenPeriodResponse> {
+    return this.request("ModifyIaCTokenPeriod", req, cb)
+  }
+
+  /**
    * 获取资产视角的配置风险列表
    */
   async DescribeRiskCenterAssetViewCFGRiskList(
@@ -2715,13 +2829,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取扫描报告列表
+   * 删除Dspm资产账号
    */
-  async DescribeScanReportList(
-    req: DescribeScanReportListRequest,
-    cb?: (error: string, rep: DescribeScanReportListResponse) => void
-  ): Promise<DescribeScanReportListResponse> {
-    return this.request("DescribeScanReportList", req, cb)
+  async DeleteDspmAssetAccount(
+    req: DeleteDspmAssetAccountRequest,
+    cb?: (error: string, rep: DeleteDspmAssetAccountResponse) => void
+  ): Promise<DeleteDspmAssetAccountResponse> {
+    return this.request("DeleteDspmAssetAccount", req, cb)
   }
 
   /**
@@ -2792,6 +2906,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCosBucketBillingInfoResponse) => void
   ): Promise<DescribeCosBucketBillingInfoResponse> {
     return this.request("DescribeCosBucketBillingInfo", req, cb)
+  }
+
+  /**
+   * 获取IaC检测文件概览
+   */
+  async DescribeIaCFileOverview(
+    req: DescribeIaCFileOverviewRequest,
+    cb?: (error: string, rep: DescribeIaCFileOverviewResponse) => void
+  ): Promise<DescribeIaCFileOverviewResponse> {
+    return this.request("DescribeIaCFileOverview", req, cb)
   }
 
   /**

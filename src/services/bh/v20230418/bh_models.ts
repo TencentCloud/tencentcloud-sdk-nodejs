@@ -1918,81 +1918,117 @@ export interface DeleteOperationTasksRequest {
  */
 export interface AppAsset {
   /**
-   * 应用资产id
+   * <p>应用资产id</p>
    */
   Id?: number
   /**
-   * 实例id
+   * <p>实例id</p>
    */
   InstanceId?: string
   /**
-   * 资产名称
+   * <p>资产名称</p>
    */
   Name?: string
   /**
-   * 应用服务器id
+   * <p>应用服务器id</p>
    */
   DeviceId?: number
   /**
-   * 应用服务器账号id
+   * <p>应用服务器账号id</p>
    */
   DeviceAccountId?: number
   /**
-   * 应用资产类型。1-web应用
+   * <p>应用资产类型。1-web应用</p>
    */
   Kind?: number
   /**
-   * 客户端工具路径
+   * <p>客户端工具路径</p>
    */
   ClientAppPath?: string
   /**
-   * 客户端工具类型
+   * <p>客户端工具类型</p>
    */
   ClientAppKind?: string
   /**
-   * 应用资产url
+   * <p>应用资产url</p>
    */
   Url?: string
   /**
-   * 托管状态。0-未托管，1-已托管
+   * <p>托管状态</p><p>枚举值：</p><ul><li>0： 未托管</li><li>1： 已托管</li></ul>
    */
   BindStatus?: number
   /**
-   * 应用服务器实例id
+   * <p>应用服务器实例id</p>
    */
   DeviceInstanceId?: string
   /**
-   * 应用服务器名称
+   * <p>应用服务器名称</p>
    */
   DeviceName?: string
   /**
-   * 应用服务器账号名称
+   * <p>应用服务器账号名称</p>
    */
   DeviceAccountName?: string
   /**
-   * 堡垒机实例id
+   * <p>堡垒机实例id</p>
    */
   ResourceId?: string
   /**
-   * 堡垒机实例信息
+   * <p>堡垒机实例信息</p>
    */
   Resource?: Resource
   /**
-   * 网络域id
+   * <p>网络域id</p>
    */
   DomainId?: string
   /**
-   * 网络域名称
+   * <p>网络域名称</p>
    */
   DomainName?: string
   /**
-   * 资产组信息
+   * <p>资产组信息</p>
    */
   GroupSet?: Array<Group>
   /**
-   * 资产所属部门
+   * <p>资产所属部门</p>
    */
   Department?: Department
+  /**
+   * <p>账号数量</p>
+   */
+  AccountCount?: number
+  /**
+   * <p>代填类型</p><p>枚举值：</p><ul><li>0： 不支持代填</li><li>1： 元素定位代填</li></ul>
+   */
+  AgentInputType?: number
+  /**
+   * <p>是否自动提交</p><p>枚举值：</p><ul><li>0： 不自动提交</li><li>1： 自动提交</li></ul>
+   */
+  AgentInputSubmit?: number
+  /**
+   * <p>用户名输入框选择器类型</p><p>枚举值：</p><ul><li>id： html标签id属性</li><li>name： html标签name属性</li><li>selector： css选择器</li><li>xpath： xpath</li></ul>
+   */
+  UserNameType?: string
+  /**
+   * <p>用户名输入框选择器属性</p>
+   */
+  UserNameValue?: string
+  /**
+   * <p>密码输入框选择器类型</p><p>枚举值：</p><ul><li>id： html标签id属性</li><li>name： html标签name属性</li><li>selector： css选择器</li><li>xpath： xpath</li></ul>
+   */
+  PasswordType?: string
+  /**
+   * <p>密码输入框选择器属性</p>
+   */
+  PasswordValue?: string
+  /**
+   * <p>提交按钮选择器类型，为空表示不支持自动提交</p><p>枚举值：</p><ul><li>id： html标签id属性</li><li>name： html标签name属性</li><li>selector： css选择器</li><li>xpath： xpath</li></ul>
+   */
+  SubmitType?: string
+  /**
+   * <p>提交按钮选择器属性值</p>
+   */
+  SubmitValue?: string
 }
 
 /**

@@ -92,7 +92,7 @@ import {
   DescribeGatherResourceRequest,
   DescribeCostSummaryByProjectResponse,
   AnalyseProjectDetail,
-  ProjectSummaryOverviewItem,
+  DescribeOrgMemberAccountBalanceData,
   DescribeBillSummaryByTagResponse,
   ModifyAllocationRuleResponse,
   SummaryDetail,
@@ -135,6 +135,7 @@ import {
   BillDetail,
   DescribeBillDetailResponse,
   Deal,
+  ProjectSummaryOverviewItem,
   DescribeDealsByCondResponse,
   BillZoneId,
   BillRegion,
@@ -145,6 +146,7 @@ import {
   DescribeRenewInstancesRequest,
   PayDealsRequest,
   SummaryTotal,
+  DescribeOrgMemberAccountBalanceRequest,
   BusinessSummaryTotal,
   DescribeAllocationBillConditionsResponse,
   CostComponentSet,
@@ -178,6 +180,7 @@ import {
   CreateInstanceRequest,
   AllocationStat,
   ModifyBudgetRequest,
+  DescribeOrgMemberAccountBalanceResponse,
   BillProject,
   ActionSummaryOverviewItem,
   DescribeBillDetailForOrganizationRequest,
@@ -818,6 +821,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSavingPlanResourceInfoResponse) => void
   ): Promise<DescribeSavingPlanResourceInfoResponse> {
     return this.request("DescribeSavingPlanResourceInfo", req, cb)
+  }
+
+  /**
+   * 批量查询成员可用余额信息
+   */
+  async DescribeOrgMemberAccountBalance(
+    req: DescribeOrgMemberAccountBalanceRequest,
+    cb?: (error: string, rep: DescribeOrgMemberAccountBalanceResponse) => void
+  ): Promise<DescribeOrgMemberAccountBalanceResponse> {
+    return this.request("DescribeOrgMemberAccountBalance", req, cb)
   }
 
   /**

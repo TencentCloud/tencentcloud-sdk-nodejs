@@ -538,6 +538,16 @@ it("mongodb.v20190725.IsolateDBInstance", async function () {
     }
 })
 
+it("mongodb.v20190725.PromoteDBInstanceToActive", async function () {
+    try {
+       const data = await client.PromoteDBInstanceToActive({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mongodb.v20190725.DescribeInstanceParams", async function () {
     try {
        const data = await client.DescribeInstanceParams({})

@@ -308,9 +308,29 @@ it("monitor.v20180724.ModifyAlarmPolicyInfo", async function () {
     }
 })
 
+it("monitor.v20180724.EnableGrafanaInternet", async function () {
+    try {
+       const data = await client.EnableGrafanaInternet({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.ModifyAlarmPolicyStatus", async function () {
     try {
        const data = await client.ModifyAlarmPolicyStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.UpdateOnCallForm", async function () {
+    try {
+       const data = await client.UpdateOnCallForm({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,9 +458,9 @@ it("monitor.v20180724.RoutePrometheusDynamicAPI", async function () {
     }
 })
 
-it("monitor.v20180724.DescribeConditionsTemplateList", async function () {
+it("monitor.v20180724.DescribeExporterIntegrations", async function () {
     try {
-       const data = await client.DescribeConditionsTemplateList({})
+       const data = await client.DescribeExporterIntegrations({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -868,6 +888,16 @@ it("monitor.v20180724.CreateSSOAccount", async function () {
     }
 })
 
+it("monitor.v20180724.CreateOnCallForm", async function () {
+    try {
+       const data = await client.CreateOnCallForm({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.ModifyAlarmPolicyNotice", async function () {
     try {
        const data = await client.ModifyAlarmPolicyNotice({})
@@ -878,9 +908,9 @@ it("monitor.v20180724.ModifyAlarmPolicyNotice", async function () {
     }
 })
 
-it("monitor.v20180724.EnableGrafanaInternet", async function () {
+it("monitor.v20180724.DescribePrometheusTargetsTMP", async function () {
     try {
-       const data = await client.EnableGrafanaInternet({})
+       const data = await client.DescribePrometheusTargetsTMP({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1058,9 +1088,9 @@ it("monitor.v20180724.RunPrometheusInstance", async function () {
     }
 })
 
-it("monitor.v20180724.DescribeExporterIntegrations", async function () {
+it("monitor.v20180724.DescribeConditionsTemplateList", async function () {
     try {
-       const data = await client.DescribeExporterIntegrations({})
+       const data = await client.DescribeConditionsTemplateList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1268,6 +1298,16 @@ it("monitor.v20180724.DescribePrometheusTempSync", async function () {
     }
 })
 
+it("monitor.v20180724.DescribeOnCallForm", async function () {
+    try {
+       const data = await client.DescribeOnCallForm({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeAlarmMetrics", async function () {
     try {
        const data = await client.DescribeAlarmMetrics({})
@@ -1291,6 +1331,16 @@ it("monitor.v20180724.ModifyAlarmPolicyTasks", async function () {
 it("monitor.v20180724.DeleteExporterIntegration", async function () {
     try {
        const data = await client.DeleteExporterIntegration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("monitor.v20180724.DeleteOnCallForms", async function () {
+    try {
+       const data = await client.DeleteOnCallForms({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1368,9 +1418,9 @@ it("monitor.v20180724.DescribeAlarmPolicies", async function () {
     }
 })
 
-it("monitor.v20180724.DescribePrometheusTargetsTMP", async function () {
+it("monitor.v20180724.DescribeOnCallForms", async function () {
     try {
-       const data = await client.DescribePrometheusTargetsTMP({})
+       const data = await client.DescribeOnCallForms({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

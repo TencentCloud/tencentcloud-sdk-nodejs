@@ -210,6 +210,10 @@ export interface DescribeLogsRequest {
    */
   Service: string
   /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+  /**
    * <p>日志查询开始时间（RFC3339格式的时间字符串），默认值为当前时间的前一个小时</p>
    */
   StartTime?: string
@@ -721,7 +725,7 @@ export interface CodeRepoConfig {
  */
 export interface CreateDatasetResponse {
   /**
-   * 数据集ID
+   * <p>数据集ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasetId?: string
@@ -6084,81 +6088,63 @@ export interface UpdateDataSourceResponse {
  */
 export interface CreateDatasetRequest {
   /**
-   * 数据集名称，不超过60个字符，仅支持中英文、数字、下划线"_"、短横"-"，只能以中英文、数字开头
+   * <p>数据集名称，不超过60个字符，仅支持中英文、数字、下划线&quot;_&quot;、短横&quot;-&quot;，只能以中英文、数字开头</p>
    */
   DatasetName: string
   /**
-   * 数据集类型:
-TYPE_DATASET_TEXT，文本
-TYPE_DATASET_IMAGE，图片
-TYPE_DATASET_TABLE，表格
-TYPE_DATASET_OTHER，其他
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+  /**
+   * <p>数据集类型</p><p>枚举值：</p><ul><li>TYPE_DATASET_IMAGE： 图片</li><li>TYPE_DATASET_LLM： 大模型</li><li>TYPE_DATASET_TABLE： 表格</li><li>TYPE_DATASET_OTHER： 其他</li></ul>
    */
   DatasetType?: string
   /**
-   * 数据源cos路径
+   * <p>数据源cos路径</p>
    */
   StorageDataPath?: CosPathInfo
   /**
-   * 数据集标签cos存储路径
+   * <p>数据集标签cos存储路径</p>
    */
   StorageLabelPath?: CosPathInfo
   /**
-   * 数据集标签
+   * <p>数据集标签</p>
    */
   DatasetTags?: Array<Tag>
   /**
-   * 数据集标注状态:
-STATUS_NON_ANNOTATED，未标注
-STATUS_ANNOTATED，已标注
+   * <p>数据集标注状态</p><p>枚举值：</p><ul><li>STATUS_NON_ANNOTATED： 未标注</li><li>STATUS_ANNOTATED： 已标注</li></ul>
    */
   AnnotationStatus?: string
   /**
-   * 标注类型:
-ANNOTATION_TYPE_CLASSIFICATION，图片分类
-ANNOTATION_TYPE_DETECTION，目标检测
-ANNOTATION_TYPE_SEGMENTATION，图片分割
-ANNOTATION_TYPE_TRACKING，目标跟踪
-ANNOTATION_TYPE_OCR，OCR
-ANNOTATION_TYPE_TEXT_CLASSIFICATION，文本分类
+   * <p>标注类型</p><p>枚举值：</p><ul><li>ANNOTATION_TYPE_CLASSIFICATION： 图片分类</li><li>ANNOTATION_TYPE_DETECTION： 目标检测</li><li>ANNOTATION_TYPE_SEGMENTATION： 图片分割</li><li>ANNOTATION_TYPE_TRACKING： 目标跟踪</li><li>ANNOTATION_TYPE_OCR： OCR</li></ul>
    */
   AnnotationType?: string
   /**
-   * 标注格式:
-ANNOTATION_FORMAT_TI，TI平台格式
-ANNOTATION_FORMAT_PASCAL，Pascal Voc
-ANNOTATION_FORMAT_COCO，COCO
-ANNOTATION_FORMAT_FILE，文件目录结构
-ANNOTATION_FORMAT_TEXT_TI，文本类型TI平台格式
-ANNOTATION_FORMAT_TXT，文本类型TXT格式
-ANNOTATION_FORMAT_CSV，文本类型CSV格式
-ANNOTATION_FORMAT_JSON，文本类型JSON格式
+   * <p>标注格式</p><p>枚举值：</p><ul><li>ANNOTATION_FORMAT_TI： TI-ONE平台格式</li><li>ANNOTATION_FORMAT_PASCAL： Pascal Voc格式</li><li>ANNOTATION_FORMAT_COCO： COCO格式</li><li>ANNOTATION_FORMAT_FILE： 文件目录结构</li></ul>
    */
   AnnotationFormat?: string
   /**
-   * 表头信息
+   * <p>表头信息</p>
    */
   SchemaInfos?: Array<SchemaInfo>
   /**
-   * 数据是否存在表头
+   * <p>数据是否存在表头</p>
    */
   IsSchemaExisted?: boolean
   /**
-   * 导入文件粒度
-TYPE_TEXT_LINE，按行
-TYPE_TEXT_FILE，按文件
+   * <p>导入文件粒度</p><p>枚举值：</p><ul><li>TYPE_TEXT_LINE： 按行</li><li>TYPE_TEXT_FILE： 按文件</li></ul>
    */
   ContentType?: string
   /**
-   * 数据集建模一级类别。LLM,CV,STRUCTURE,OTHER
+   * <p>数据集建模一级类别</p><p>枚举值：</p><ul><li>LLM： 大模型建模</li><li>CV： 传统CV建模</li><li>STRUCTURE： 大数据建模</li><li>OTHER： 其它</li></ul>
    */
   DatasetScene?: string
   /**
-   * 数据集标签。
+   * <p>数据集标签。</p>
    */
   SceneTags?: Array<string>
   /**
-   * 数据集CFS配置。仅支持LLM场景
+   * <p>数据集CFS配置。仅支持LLM场景</p>
    */
   CFSConfig?: CFSConfig
 }

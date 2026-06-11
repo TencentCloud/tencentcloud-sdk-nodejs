@@ -25,8 +25,9 @@ import {
   DescribeUserQuotaPersonalRequest,
   WebhookTarget,
   DeleteSignaturePolicyRequest,
+  ModelList,
   DescribeReplicationInstanceCreateTasksResponse,
-  WebhookTriggerLog,
+  DupImageTagResp,
   AccessVpc,
   DescribeInternalEndpointsRequest,
   ModifyTagRetentionRuleRequest,
@@ -35,7 +36,7 @@ import {
   DeleteReplicationRuleResponse,
   DescribeNamespacesResponse,
   DescribeInstanceCustomizedDomainResponse,
-  TerminateGCJobResponse,
+  DescribeSkillDetailResponse,
   TriggerInvokePara,
   GCParameters,
   TriggerLogResp,
@@ -45,19 +46,21 @@ import {
   CreateInstanceResponse,
   DescribeRepositoryOwnerPersonalResponse,
   DeleteInstanceTokenRequest,
-  TagInfoResp,
+  TaskDetail,
   ModifyRepositoryRequest,
   RegistryCondition,
+  ListAIModelsRequest,
   DescribeInternalEndpointDnsStatusRequest,
-  DeleteReplicationRuleRequest,
+  CreateApplicationTriggerPersonalRequest,
   AutoDelStrategyInfo,
   DeleteInternalEndpointDnsRequest,
-  ValidateNamespaceExistPersonalRequest,
+  DeleteSkillResponse,
   ModifyInstanceRequest,
   RenewInstanceResponse,
   ManageInternalEndpointRequest,
   CreateImmutableTagRulesRequest,
   DescribeRepositoriesResponse,
+  VersionList,
   VpcAndDomainInfo,
   DeleteInstanceTokenResponse,
   DescribeInstancesResponse,
@@ -70,7 +73,8 @@ import {
   ModifyImmutableTagRulesResponse,
   Region,
   ModifyServiceAccountRequest,
-  CreateImageAccelerationServiceResponse,
+  DescribeSkillDetailRequest,
+  ModelDetail,
   CreateMultipleSecurityPolicyResponse,
   TriggerResp,
   CreateTagRetentionRuleResponse,
@@ -84,15 +88,19 @@ import {
   DescribeWebhookTriggerLogResponse,
   CreateGCJobRequest,
   ManageReplicationRequest,
+  WebhookTriggerLog,
+  ListAIModelVersionsResponse,
+  DescribeInstanceStatusResponse,
   DeleteWebhookTriggerResponse,
   DeleteImageLifecycleGlobalPersonalResponse,
-  ModifySecurityPolicyRequest,
+  DescribeImageManifestsResponse,
   DescribeReplicationInstanceSyncStatusResponse,
+  DescribeSkillDownloadInfoResponse,
   DeleteInstanceCustomizedDomainRequest,
   RetentionRuleItem,
   ModifyRepositoryResponse,
   Schedule,
-  DupImageTagResp,
+  DeleteAIModelRequest,
   CreateImmutableTagRulesResponse,
   DeleteApplicationTriggerPersonalResponse,
   DescribeRepositoryFilterPersonalRequest,
@@ -106,16 +114,19 @@ import {
   SearchUserRepositoryResp,
   CreateTagRetentionRuleRequest,
   DuplicateImagePersonalResponse,
-  DescribeImageLifecyclePersonalResponse,
-  DescribeInstanceStatusResponse,
+  DeleteSkillRequest,
+  DeleteReplicationInstanceRequest,
   CreateImageAccelerationServiceRequest,
   DescribeWebhookTriggerResponse,
+  DeleteAIModelResponse,
   ModifyInstanceTokenRequest,
   CreateNamespaceResponse,
   ModifyImmutableTagRulesRequest,
   DescribeReplicationPoliciesRequest,
+  TerminateGCJobResponse,
   VpcPrivateDomainStatus,
   Permission,
+  ModifySecurityPolicyRequest,
   ModifyInstanceStorageRequest,
   DescribeSecurityPoliciesResponse,
   CreateSignatureResponse,
@@ -130,9 +141,9 @@ import {
   DeleteImageLifecycleGlobalPersonalRequest,
   DescribeInstanceStatusRequest,
   ModifyWebhookTriggerRequest,
-  DeleteReplicationInstanceRequest,
+  CreateImageAccelerationServiceResponse,
   DeleteNamespaceResponse,
-  DeleteNamespacePersonalResponse,
+  TagInfoResp,
   Favors,
   CreateSignatureRequest,
   DescribeRepositoryPersonalResponse,
@@ -141,6 +152,7 @@ import {
   CreateUserPersonalRequest,
   DeleteServiceAccountResponse,
   ModifyNamespaceResponse,
+  DescribeAIModelVersionDetailResponse,
   DownloadHelmChartResponse,
   ModifyUserPasswordPersonalResponse,
   TcrNamespaceInfo,
@@ -164,9 +176,11 @@ import {
   DescribeNamespacePersonalRequest,
   DeleteRepositoryPersonalResponse,
   CreateInstanceTokenResponse,
-  CreateApplicationTriggerPersonalRequest,
+  DeleteReplicationRuleRequest,
   DescribeApplicationTriggerLogPersonalResp,
   DeleteImagePersonalRequest,
+  DeleteModelItem,
+  SkillList,
   DescribeApplicationTriggerPersonalResponse,
   RetentionTask,
   DescribeImageAccelerateServiceResponse,
@@ -183,6 +197,7 @@ import {
   DeleteServiceAccountRequest,
   DescribeImageManifestsRequest,
   RegistryChargePrepaid,
+  DescribeSkillDownloadInfoRequest,
   ModifyNamespaceRequest,
   DeleteImageRequest,
   ModifyRepositoryAccessPersonalRequest,
@@ -194,7 +209,7 @@ import {
   DescribeImageLifecycleGlobalPersonalRequest,
   DescribeImageLifecyclePersonalRequest,
   DeleteSecurityPolicyRequest,
-  RepositoryInfoResp,
+  ListSkillsRequest,
   CreateInstanceRequest,
   DescribeReplicationPoliciesResponse,
   DescribeInstanceTokenRequest,
@@ -209,7 +224,9 @@ import {
   DeleteImageAccelerateServiceRequest,
   CheckInstanceResponse,
   NamespaceIsExistsResp,
+  RepositoryInfoResp,
   DescribeInstancesRequest,
+  ListAIModelVersionsRequest,
   CreateInternalEndpointDnsRequest,
   TriggerInvokeCondition,
   DescribeImmutableTagRulesRequest,
@@ -221,7 +238,6 @@ import {
   RepoInfo,
   ManageImageLifecycleGlobalPersonalRequest,
   DescribeUserQuotaPersonalResponse,
-  TaskDetail,
   DescribeImagePersonalRequest,
   CreateServiceAccountRequest,
   PolicyFilter,
@@ -229,9 +245,9 @@ import {
   ModifySecurityPolicyResponse,
   ModifyApplicationTriggerPersonalResponse,
   DeleteInstanceRequest,
-  DescribeImageManifestsResponse,
+  DescribeImageLifecyclePersonalResponse,
   DescribeNamespacePersonalResponse,
-  DeleteReplicationInstanceResponse,
+  DeleteNamespacePersonalResponse,
   DescribeWebhookTriggerRequest,
   ImmutableTagRule,
   Header,
@@ -239,8 +255,11 @@ import {
   CreateSecurityPolicyRequest,
   ManageReplicationResponse,
   CreateWebhookTriggerRequest,
+  DescribeAIModelVersionDetailRequest,
   DeleteImageAccelerateServiceResponse,
   CVEWhitelistItem,
+  ListSkillVersionsRequest,
+  ListSkillVersionsResponse,
   ModifyRepositoryInfoPersonalRequest,
   DescribeApplicationTriggerLogPersonalRequest,
   DescribeGCJobsResponse,
@@ -255,6 +274,7 @@ import {
   CheckInstanceNameResponse,
   DeleteTagRetentionRuleResponse,
   DescribeRepositoryOwnerPersonalRequest,
+  DeleteReplicationInstanceResponse,
   DescribeExternalEndpointStatusResponse,
   DescribeTagRetentionRulesResponse,
   DescribeRegionsRequest,
@@ -298,21 +318,27 @@ import {
   CreateWebhookTriggerResponse,
   ModifyServiceAccountResponse,
   CreateSignaturePolicyRequest,
+  ListSkillsResponse,
   DeleteTagRetentionRuleRequest,
   ReplicationFilter,
   TcrRepositoryInfo,
   TcrInstanceToken,
+  SkillType,
   RespLimit,
   ModifyUserPasswordPersonalRequest,
   DeleteRepositoryRequest,
   CreateInternalEndpointDnsResponse,
   DuplicateImageRequest,
   CreateTagRetentionExecutionRequest,
+  SkillVersionList,
+  ListAIModelsResponse,
   ReplicationLog,
   DescribeInstanceAllNamespacesResponse,
+  ValidateNamespaceExistPersonalRequest,
   ModifyServiceAccountPasswordResponse,
   CreateApplicationTriggerPersonalResponse,
   Limit,
+  Skill,
   BatchDeleteImagePersonalResponse,
   DeleteInternalEndpointDnsResponse,
   DeleteRepositoryPersonalRequest,
@@ -325,6 +351,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tcr.tencentcloudapi.com", "2019-09-24", clientConfig)
+  }
+
+  /**
+   * 查询单个 Skill 的完整详情
+   */
+  async DescribeSkillDetail(
+    req: DescribeSkillDetailRequest,
+    cb?: (error: string, rep: DescribeSkillDetailResponse) => void
+  ): Promise<DescribeSkillDetailResponse> {
+    return this.request("DescribeSkillDetail", req, cb)
   }
 
   /**
@@ -390,6 +426,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询版本保留执行任务
+   */
+  async DescribeTagRetentionExecutionTask(
+    req: DescribeTagRetentionExecutionTaskRequest,
+    cb?: (error: string, rep: DescribeTagRetentionExecutionTaskResponse) => void
+  ): Promise<DescribeTagRetentionExecutionTaskResponse> {
+    return this.request("DescribeTagRetentionExecutionTask", req, cb)
+  }
+
+  /**
    * 查询镜像仓库列表或指定镜像仓库信息
    */
   async DescribeRepositories(
@@ -397,6 +443,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRepositoriesResponse) => void
   ): Promise<DescribeRepositoriesResponse> {
     return this.request("DescribeRepositories", req, cb)
+  }
+
+  /**
+   * 查询指定实例下的 AI Skill 列表。
+   */
+  async ListSkills(
+    req: ListSkillsRequest,
+    cb?: (error: string, rep: ListSkillsResponse) => void
+  ): Promise<ListSkillsResponse> {
+    return this.request("ListSkills", req, cb)
   }
 
   /**
@@ -460,6 +516,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询指定实例下的 AI 模型列表。可按 namespace 和仓库名过滤。每条记录代表一个模型仓库，返回最新版本信息。
+   */
+  async ListAIModels(
+    req: ListAIModelsRequest,
+    cb?: (error: string, rep: ListAIModelsResponse) => void
+  ): Promise<ListAIModelsResponse> {
+    return this.request("ListAIModels", req, cb)
+  }
+
+  /**
    * 删除实例同步规则
    */
   async DeleteReplicationRule(
@@ -517,6 +583,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteWebhookTriggerResponse) => void
   ): Promise<DeleteWebhookTriggerResponse> {
     return this.request("DeleteWebhookTrigger", req, cb)
+  }
+
+  /**
+   * 查询指定 Skill 的版本历史列表
+   */
+  async ListSkillVersions(
+    req: ListSkillVersionsRequest,
+    cb?: (error: string, rep: ListSkillVersionsResponse) => void
+  ): Promise<ListSkillVersionsResponse> {
+    return this.request("ListSkillVersions", req, cb)
   }
 
   /**
@@ -880,13 +956,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询版本保留执行任务
+   * 删除指定 Skill
    */
-  async DescribeTagRetentionExecutionTask(
-    req: DescribeTagRetentionExecutionTaskRequest,
-    cb?: (error: string, rep: DescribeTagRetentionExecutionTaskResponse) => void
-  ): Promise<DescribeTagRetentionExecutionTaskResponse> {
-    return this.request("DescribeTagRetentionExecutionTask", req, cb)
+  async DeleteSkill(
+    req: DeleteSkillRequest,
+    cb?: (error: string, rep: DeleteSkillResponse) => void
+  ): Promise<DeleteSkillResponse> {
+    return this.request("DeleteSkill", req, cb)
   }
 
   /**
@@ -957,6 +1033,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeImmutableTagRulesResponse) => void
   ): Promise<DescribeImmutableTagRulesResponse> {
     return this.request("DescribeImmutableTagRules", req, cb)
+  }
+
+  /**
+   * 返回 Skill 下载链接
+   */
+  async DescribeSkillDownloadInfo(
+    req: DescribeSkillDownloadInfoRequest,
+    cb?: (error: string, rep: DescribeSkillDownloadInfoResponse) => void
+  ): Promise<DescribeSkillDownloadInfoResponse> {
+    return this.request("DescribeSkillDownloadInfo", req, cb)
   }
 
   /**
@@ -1150,6 +1236,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除指定模型版本（通过 tag 或 digest 引用）。调用 Harbor v2 API 删除 artifact。
+   */
+  async DeleteAIModel(
+    req: DeleteAIModelRequest,
+    cb?: (error: string, rep: DeleteAIModelResponse) => void
+  ): Promise<DeleteAIModelResponse> {
+    return this.request("DeleteAIModel", req, cb)
+  }
+
+  /**
    * 用于判断个人版仓库是否存在
    */
   async ValidateRepositoryExistPersonal(
@@ -1177,6 +1273,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeNamespacesResponse) => void
   ): Promise<DescribeNamespacesResponse> {
     return this.request("DescribeNamespaces", req, cb)
+  }
+
+  /**
+   * 查询模型详情
+   */
+  async DescribeAIModelVersionDetail(
+    req: DescribeAIModelVersionDetailRequest,
+    cb?: (error: string, rep: DescribeAIModelVersionDetailResponse) => void
+  ): Promise<DescribeAIModelVersionDetailResponse> {
+    return this.request("DescribeAIModelVersionDetail", req, cb)
   }
 
   /**
@@ -1387,6 +1493,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DuplicateImageResponse) => void
   ): Promise<DuplicateImageResponse> {
     return this.request("DuplicateImage", req, cb)
+  }
+
+  /**
+   * 查询指定模型仓库的所有版本列表。调用 Harbor v2 API 获取 artifact 列表，从 extra_attrs 提取模型元数据（框架、任务类型、精度等），从 tags 判断是否为推荐版本。
+   */
+  async ListAIModelVersions(
+    req: ListAIModelVersionsRequest,
+    cb?: (error: string, rep: ListAIModelVersionsResponse) => void
+  ): Promise<ListAIModelVersionsResponse> {
+    return this.request("ListAIModelVersions", req, cb)
   }
 
   /**

@@ -80,24 +80,6 @@ export interface ListDevicesRequest {
 }
 
 /**
- * 打电话识别结果详情
- */
-export interface PhoneCallAIResultInfo {
-  /**
-   * 时间字符串
-   */
-  Time?: string
-  /**
-   * 截图 URL
-   */
-  Url?: string
-  /**
-   * 打电话信息
-   */
-  PhoneCallInfo?: Array<BaseAIResultInfo>
-}
-
-/**
  * DeleteRecordBackupPlan返回参数结构体
  */
 export interface DeleteRecordBackupPlanResponse {
@@ -108,49 +90,13 @@ export interface DeleteRecordBackupPlanResponse {
 }
 
 /**
- * 查询设备通道信息返回结果
+ * 批量查询设备接口返回数据
  */
-export interface DescribeDeviceChannelData {
+export interface DescribeDeviceListData {
   /**
-   * 设备 ID
+   * 设备详情列表
    */
-  DeviceId?: string
-  /**
-   * 通道 ID
-   */
-  ChannelId?: string
-  /**
-   * 通道编码
-   */
-  ChannelCode?: string
-  /**
-   * 通道名称
-   */
-  Name?: string
-  /**
-   * 流状态（0:未传输,1:传输中）
-   */
-  Status?: number
-  /**
-   * 是否可控 Ptz（0:不可控,1:可控）
-   */
-  PTZType?: number
-  /**
-   * 通道厂商
-   */
-  Manufacturer?: string
-  /**
-   * 通道支持分辨率（分辨率列表由‘/’隔开，国标协议样例（6/3），自定义样例（12800960/640480））
-   */
-  Resolution?: string
-  /**
-   * 通道在离线状态（0:离线,1:在线）
-   */
-  State?: number
-  /**
-   * 所在地域
-   */
-  Region?: string
+  List?: Array<DescribeDeviceData>
 }
 
 /**
@@ -359,20 +305,6 @@ export interface DeleteOrganizationRequest {
    * 组织ID（从查询组织接口DescribeOrganization中获取）
    */
   OrganizationId: string
-}
-
-/**
- * AI分析的时间段配置
- */
-export interface OperTimeSlot {
-  /**
-   * 开始时间。格式为"hh:mm:ss"，且 Start 必须小于 End
-   */
-  Start: string
-  /**
-   * 结束时间。格式为"hh:mm:ss"，且 Start 必须小于 End
-   */
-  End: string
 }
 
 /**
@@ -628,25 +560,6 @@ export interface DescribeDeviceData {
 }
 
 /**
- * ListAITasks返回参数结构体
- */
-export interface ListAITasksResponse {
-  /**
-   * AI 任务数量
-   */
-  TotalCount?: number
-  /**
-   * AI任务列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: ListAITaskData
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * BatchDeleteVideoDownloadTask请求参数结构体
  */
 export interface BatchDeleteVideoDownloadTaskRequest {
@@ -657,21 +570,17 @@ export interface BatchDeleteVideoDownloadTaskRequest {
 }
 
 /**
- * AI分析配置
+ * ListGateways返回参数结构体
  */
-export interface AIConfig {
+export interface ListGatewaysResponse {
   /**
-   * AI 分析类型。可选值为 Facemask(口罩识别)、Chefhat(厨师帽识别)、Smoking(抽烟检测)、Chefcloth(厨师服识别)、PhoneCall(接打电话识别)、Pet(宠物识别)、Body(人体识别)和Car(车辆车牌识别)等
+   * 返回数据
    */
-  DetectType: string
+  Data?: ListGatewaysData
   /**
-   * 截图频率。可选值1～20秒
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TimeInterval: number
-  /**
-   * 模板生效的时间段。最多包含5组时间段
-   */
-  OperTimeSlot: Array<OperTimeSlot>
+  RequestId?: string
 }
 
 /**
@@ -868,6 +777,16 @@ export interface DescribeRecordBackupTemplateData {
 }
 
 /**
+ * UpgradeGateway请求参数结构体
+ */
+export interface UpgradeGatewayRequest {
+  /**
+   * 网关索引ID（从获取网关列表ListGateways接口中获取）
+   */
+  GatewayId: string
+}
+
+/**
  * ControlDeviceStream返回参数结构体
  */
 export interface ControlDeviceStreamResponse {
@@ -892,20 +811,6 @@ export interface DeleteRecordRetrieveTaskResponse {
 }
 
 /**
- * DescribeUserDevice返回参数结构体
- */
-export interface DescribeUserDeviceResponse {
-  /**
-   * 返回结果
-   */
-  Data?: DescribeDeviceData
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DeleteRecordPlan返回参数结构体
  */
 export interface DeleteRecordPlanResponse {
@@ -923,16 +828,6 @@ export interface DescribeOrganizationResponse {
    * 返回数据
    */
   Data?: Array<DescribeOrganizationData>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * UpgradeGateway返回参数结构体
- */
-export interface UpgradeGatewayResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1044,31 +939,17 @@ export interface DescribeVideoBitRateRequest {
 }
 
 /**
- * DeleteAITask请求参数结构体
+ * 设置通道禁止播流，有通道Id和使能enable字段
  */
-export interface DeleteAITaskRequest {
+export interface SetForbidplayChannelParam {
   /**
-   * AI任务ID
+   * 通道Id
    */
-  TaskId: string
-}
-
-/**
- * 厨师帽识别结果详情
- */
-export interface ChefHatAIResultInfo {
+  ChannelId: string
   /**
-   * 时间字符串
+   * 是否禁止通道播流
    */
-  Time?: string
-  /**
-   * 截图 URL
-   */
-  Url?: string
-  /**
-   * 厨师帽信息
-   */
-  ChefHatInfo?: Array<BaseAIResultInfo>
+  Enable: boolean
 }
 
 /**
@@ -1116,16 +997,6 @@ export interface ControlDeviceSnapshotResponse {
 }
 
 /**
- * DescribeAITask请求参数结构体
- */
-export interface DescribeAITaskRequest {
-  /**
-   * AI任务ID
-   */
-  TaskId: string
-}
-
-/**
  * RefreshDeviceChannel返回参数结构体
  */
 export interface RefreshDeviceChannelResponse {
@@ -1143,24 +1014,6 @@ export interface DeleteOrganizationResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 宠物识别结果详情
- */
-export interface PetAIResultInfo {
-  /**
-   * 时间字符串
-   */
-  Time?: string
-  /**
-   * 截图 URL
-   */
-  Url?: string
-  /**
-   * 宠物信息
-   */
-  PetInfo?: Array<BaseAIResultInfo>
 }
 
 /**
@@ -1426,57 +1279,27 @@ export interface ListVideoDownloadTaskResponse {
 }
 
 /**
- * 口罩识别结果详情
+ * UpgradeGateway返回参数结构体
  */
-export interface FaceMaskAIResultInfo {
+export interface UpgradeGatewayResponse {
   /**
-   * 时间字符串
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Time?: string
-  /**
-   * 截图 URL
-   */
-  Url?: string
-  /**
-   * 口罩信息
-   */
-  FaceMaskInfo?: Array<BaseAIResultInfo>
+  RequestId?: string
 }
 
 /**
- * 抽烟识别结果详情
+ * 本地录像下载任务列表
  */
-export interface SmokingAIResultInfo {
+export interface ListVideoDownloadTaskData {
   /**
-   * 时间字符串
+   * 任务列表
    */
-  Time?: string
+  List?: Array<VideoDownloadTask>
   /**
-   * 截图 URL
+   * 任务总数
    */
-  Url?: string
-  /**
-   * 抽烟信息
-   */
-  SmokingInfo?: Array<BaseAIResultInfo>
-}
-
-/**
- * 通用AI识别结果信息
- */
-export interface BaseAIResultInfo {
-  /**
-   * 名称。返回值有人体识别结果名称(person)、宠物识别结果名称(cat和dog) 、车辆车牌识别结果名称(vehicle)
-   */
-  Name?: string
-  /**
-   * 置信度
-   */
-  Score?: number
-  /**
-   * 截图中坐标信息
-   */
-  Location?: Location
+  TotalCount?: number
 }
 
 /**
@@ -1502,52 +1325,6 @@ export interface DeleteRecordPlanRequest {
    * 上云计划ID
    */
   PlanId: string
-}
-
-/**
- * AI分析结果详情
- */
-export interface AITaskResultInfo {
-  /**
-   * 人体识别结果列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Body?: Array<BodyAIResultInfo>
-  /**
-   * 宠物识别结果列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Pet?: Array<PetAIResultInfo>
-  /**
-   * 车辆车牌识别结果列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Car?: Array<CarAIResultInfo>
-  /**
-   * 厨师帽结果列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ChefHat?: Array<ChefHatAIResultInfo>
-  /**
-   * 厨师服结果列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ChefCloth?: Array<ChefClothAIResultInfo>
-  /**
-   * 口罩识别结果列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FaceMask?: Array<FaceMaskAIResultInfo>
-  /**
-   * 抽烟检测结果列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Smoking?: Array<SmokingAIResultInfo>
-  /**
-   * 接打电话识别结果列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PhoneCall?: Array<PhoneCallAIResultInfo>
 }
 
 /**
@@ -1608,55 +1385,17 @@ export interface AddRecordTemplateResponse {
 export type ListRecordPlansRequest = null
 
 /**
- * DescribeAITaskResult请求参数结构体
+ * DescribeUserDevice返回参数结构体
  */
-export interface DescribeAITaskResultRequest {
+export interface DescribeUserDeviceResponse {
   /**
-   * AI 任务 ID
+   * 返回结果
    */
-  TaskId: string
+  Data?: DescribeDeviceData
   /**
-   * 通道ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ChannelId: string
-  /**
-   * 桶内文件的路径。
-   */
-  Object?: string
-  /**
-   * AI 任务识别类型。可选值为 Facemask(口罩识别)、Chefhat(厨师帽识别)、Smoking(抽烟检测)、Chefcloth(厨师服识别)、PhoneCall(接打电话识别)、Pet(宠物识别)、Body(人体识别)和 Car(车辆车牌识别)
-   */
-  DetectType?: string
-  /**
-   * 开始时间时间。秒级时间戳。开始时间和结束时间跨度小于等于30天
-   */
-  BeginTime?: string
-  /**
-   * 结束时间时间。秒级时间戳。开始时间和结束时间跨度小于等于30天
-   */
-  EndTime?: string
-  /**
-   * 页码。默认为1
-   */
-  PageNumber?: number
-  /**
-   * 每页 AI 识别结果数量。可选值1～100，默认为10（按时间倒序显示识别结果）
-   */
-  PageSize?: number
-}
-
-/**
- * 截图配置
- */
-export interface SnapshotConfig {
-  /**
-   * 截图频率。可选值1～20秒
-   */
-  TimeInterval: number
-  /**
-   * 模板生效的时间段。最多包含5组时间段
-   */
-  OperTimeSlot: Array<OperTimeSlot>
+  RequestId?: string
 }
 
 /**
@@ -1671,28 +1410,6 @@ export interface ListSubTasksResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ListAITasks请求参数结构体
- */
-export interface ListAITasksRequest {
-  /**
-   * 是否包含通道列表。"true"代表包含通道列表，"false"代表不包含通道列表，默认为 false
-   */
-  IsContainChannelList?: boolean
-  /**
-   * 是否包含AI配置。"true"代表包含任务配置，"false"代表不包含任务配置，默认为 false。
-   */
-  IsContainTemplate?: boolean
-  /**
-   * 页码。默认为1
-   */
-  PageNumber?: number
-  /**
-   * 每页数量。可选值1～200，默认为20
-   */
-  PageSize?: number
 }
 
 /**
@@ -1737,46 +1454,6 @@ export interface UpdateRecordPlanRequest {
    * 修改计划的内容
    */
   Mod: UpdateRecordPlanData
-}
-
-/**
- * AI识别结果在画面中坐标
- */
-export interface Location {
-  /**
-   * 左上角 X 坐标轴
-   */
-  X?: number
-  /**
-   * 左上角 Y 坐标轴
-   */
-  Y?: number
-  /**
-   * 方框宽
-   */
-  Width?: number
-  /**
-   * 方框高
-   */
-  Height?: number
-}
-
-/**
- * AI模板信息
- */
-export interface AITemplates {
-  /**
-   * AI 类别。可选值 AI(AI 分析)和 Snapshot(截图)，Templates 列表中只能出现一种类型。
-   */
-  Tag: string
-  /**
-   * AI 分析配置。和"SnapshotConfig"二选一。
-   */
-  AIConfig?: AIConfig
-  /**
-   * 截图配置。和"AIConfig"二选一。
-   */
-  SnapshotConfig?: SnapshotConfig
 }
 
 /**
@@ -2787,44 +2464,6 @@ export interface ListRecordPlanChannelsResponse {
 }
 
 /**
- * 车辆车牌识别结果信息
- */
-export interface CarAIResultInfo {
-  /**
-   * 车系
-   */
-  Serial?: string
-  /**
-   * 车辆品牌
-   */
-  Brand?: string
-  /**
-   * 车辆类型
-   */
-  Type?: string
-  /**
-   * 车辆颜色
-   */
-  Color?: string
-  /**
-   * 置信度，0 - 100
-   */
-  Confidence?: number
-  /**
-   * 年份，识别不出年份时返回0
-   */
-  Year?: number
-  /**
-   * 车牌信息
-   */
-  PlateContent?: PlateContent
-  /**
-   * 截图中坐标信息
-   */
-  Location?: Location
-}
-
-/**
  * UpdateRecordTemplate请求参数结构体
  */
 export interface UpdateRecordTemplateRequest {
@@ -2904,18 +2543,14 @@ export interface DescribeRecordTemplateResponse {
 }
 
 /**
- * DescribeAITaskResult返回参数结构体
+ * DescribeRecordSlice返回参数结构体
  */
-export interface DescribeAITaskResultResponse {
+export interface DescribeRecordSliceResponse {
   /**
-   * AI识别结果
+   * 云录像切片信息列表
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: AITaskResultData
-  /**
-   * AI识别结果数量
-   */
-  TotalCount?: number
+  Data?: Array<RecordSliceInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2948,40 +2583,6 @@ export interface DescribeDevicePresetResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * UpdateAITask请求参数结构体
- */
-export interface UpdateAITaskRequest {
-  /**
-   * AI 任务 ID
-   */
-  TaskId: string
-  /**
-   * AI 任务名称。仅支持中文、英文、数字、_、-，长度不超过32个字符
-   */
-  Name?: string
-  /**
-   * AI 任务描述。仅支持中文、英文、数字、_、-，长度不超过128个字符
-   */
-  Desc?: string
-  /**
-   * 通道 ID 列表。不能添加存在于其他 AI 任务的通道，限制1000个通道。
-   */
-  ChannelList?: Array<string>
-  /**
-   * AI 结果回调地址
-   */
-  CallbackUrl?: string
-  /**
-   * 是否立即开启 AI 任务。"true"代表立即开启 AI 任务，"false"代表暂不开启 AI 任务，默认为 false。
-   */
-  IsStartTheTask?: boolean
-  /**
-   * AI 配置列表
-   */
-  Templates?: Array<AITemplates>
 }
 
 /**
@@ -3419,17 +3020,17 @@ export interface CreateVideoDownloadTaskResponse {
 }
 
 /**
- * ListGateways返回参数结构体
+ * UpdateOrganization请求参数结构体
  */
-export interface ListGatewaysResponse {
+export interface UpdateOrganizationRequest {
   /**
-   * 返回数据
+   * 组织ID（从查询组织接口DescribeOrganization中获取）
    */
-  Data?: ListGatewaysData
+  OrganizationId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 组织名称，支持中文、英文、数字、空格、中英文括号、_、-, 长度不超过64位，且组织名称不能重复
    */
-  RequestId?: string
+  Name: string
 }
 
 /**
@@ -3499,27 +3100,6 @@ export interface DescribeGBDeviceAddrRequest {
 }
 
 /**
- * 获取AI任务列表的数据
- */
-export interface ListAITaskData {
-  /**
-   * AI任务列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  List?: Array<AITaskInfo>
-}
-
-/**
- * 批量查询设备接口返回数据
- */
-export interface DescribeDeviceListData {
-  /**
-   * 设备详情列表
-   */
-  List?: Array<DescribeDeviceData>
-}
-
-/**
  * ControlDeviceSnapshot请求参数结构体
  */
 export interface ControlDeviceSnapshotRequest {
@@ -3578,36 +3158,6 @@ export interface AddRecordTemplateRequest {
  * DescribeGatewayProtocol请求参数结构体
  */
 export type DescribeGatewayProtocolRequest = null
-
-/**
- * AddAITask请求参数结构体
- */
-export interface AddAITaskRequest {
-  /**
-   * AI 任务名称。仅支持中文、英文、数字、_、-，长度不超过32个字符
-   */
-  Name: string
-  /**
-   * 通道 ID 列表。不能添加存在于其他 AI 任务的通道，限制1000个通道。
-   */
-  ChannelList: Array<string>
-  /**
-   * AI 配置列表
-   */
-  Templates: Array<AITemplates>
-  /**
-   * AI 任务描述。仅支持中文、英文、数字、_、-，长度不超过128个字符
-   */
-  Desc?: string
-  /**
-   * AI 结果回调地址
-   */
-  CallbackUrl?: string
-  /**
-   * 是否立即开启 AI 任务。"true"代表立即开启 AI 任务，"false"代表暂不开启 AI 任务，默认为 false。
-   */
-  IsStartTheTask?: boolean
-}
 
 /**
  * 查询网关所支持的接入协议
@@ -3792,16 +3342,6 @@ export interface DescribeRecordSliceRequest {
 }
 
 /**
- * DescribeRecordBackupTemplate请求参数结构体
- */
-export interface DescribeRecordBackupTemplateRequest {
-  /**
-   * 模板ID（从查询录像上云模板列表接口ListRecordBackupTemplates中获取）
-   */
-  TemplateId: string
-}
-
-/**
  * DescribeUserDevice请求参数结构体
  */
 export interface DescribeUserDeviceRequest {
@@ -3824,24 +3364,6 @@ export interface RefreshDeviceChannelRequest {
    * 设备 ID（从获取设备列表ListDevices接口中获取）
    */
   DeviceId: string
-}
-
-/**
- * 人体识别结果详情
- */
-export interface BodyAIResultInfo {
-  /**
-   * 时间字符串
-   */
-  Time?: string
-  /**
-   * 截图 URL
-   */
-  Url?: string
-  /**
-   * 人体信息
-   */
-  BodyInfo?: Array<BaseAIResultInfo>
 }
 
 /**
@@ -3999,49 +3521,49 @@ export interface QueryForbidPlayChannelListRequest {
 }
 
 /**
- * 本地录像下载任务列表
+ * 查询设备通道信息返回结果
  */
-export interface ListVideoDownloadTaskData {
+export interface DescribeDeviceChannelData {
   /**
-   * 任务列表
+   * 设备 ID
    */
-  List?: Array<VideoDownloadTask>
+  DeviceId?: string
   /**
-   * 任务总数
+   * 通道 ID
    */
-  TotalCount?: number
-}
-
-/**
- * AI车牌信息
- */
-export interface PlateContent {
+  ChannelId?: string
   /**
-   * 车牌号信息
+   * 通道编码
    */
-  Plate?: string
+  ChannelCode?: string
   /**
-   * 车牌的颜色
+   * 通道名称
    */
-  Color?: string
+  Name?: string
   /**
-   * 车牌的种类，例如普通蓝牌
+   * 流状态（0:未传输,1:传输中）
    */
-  Type?: string
+  Status?: number
   /**
-   * 截图中坐标信息
+   * 是否可控 Ptz（0:不可控,1:可控）
    */
-  Location?: Location
-}
-
-/**
- * UpgradeGateway请求参数结构体
- */
-export interface UpgradeGatewayRequest {
+  PTZType?: number
   /**
-   * 网关索引ID（从获取网关列表ListGateways接口中获取）
+   * 通道厂商
    */
-  GatewayId: string
+  Manufacturer?: string
+  /**
+   * 通道支持分辨率（分辨率列表由‘/’隔开，国标协议样例（6/3），自定义样例（12800960/640480））
+   */
+  Resolution?: string
+  /**
+   * 通道在离线状态（0:离线,1:在线）
+   */
+  State?: number
+  /**
+   * 所在地域
+   */
+  Region?: string
 }
 
 /**
@@ -4319,18 +3841,13 @@ export interface ListRecordTemplatesResponse {
 }
 
 /**
- * DescribeAITask返回参数结构体
+ * DescribeRecordBackupTemplate请求参数结构体
  */
-export interface DescribeAITaskResponse {
+export interface DescribeRecordBackupTemplateRequest {
   /**
-   * AI任务详情
-注意：此字段可能返回 null，表示取不到有效值。
+   * 模板ID（从查询录像上云模板列表接口ListRecordBackupTemplates中获取）
    */
-  Data?: AITaskInfo
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  TemplateId: string
 }
 
 /**
@@ -4405,25 +3922,6 @@ export interface AddRecordRetrieveTaskData {
 }
 
 /**
- * AI识别结果
- */
-export interface AITaskResultData {
-  /**
-   * AI 任务 ID
-   */
-  TaskId?: string
-  /**
-   * 在 BeginTime 和 EndTime 时间之内，有识别结果的 AI 调用次数（分页依据此数值）
-   */
-  AIResultCount?: number
-  /**
-   * AI 任务执行结果详情
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AIResults?: AITaskResultInfo
-}
-
-/**
  * DeleteRecordRetrieveTask请求参数结构体
  */
 export interface DeleteRecordRetrieveTaskRequest {
@@ -4473,21 +3971,6 @@ export interface DescribeRecordBackupPlanData {
    * 修改时间
    */
   UpdateAt?: string
-}
-
-/**
- * DescribeRecordSlice返回参数结构体
- */
-export interface DescribeRecordSliceResponse {
-  /**
-   * 云录像切片信息列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Data?: Array<RecordSliceInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -4674,18 +4157,9 @@ export interface UpdateGatewayData {
 export type ListRecordBackupTemplatesRequest = null
 
 /**
- * AddAITask返回参数结构体
+ * ListRecordPlanChannels请求参数结构体
  */
-export interface AddAITaskResponse {
-  /**
-   * AI任务信息
-   */
-  Data?: AITaskInfo
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type ListRecordPlanChannelsRequest = null
 
 /**
  * 查询设备可接入集群信息
@@ -4733,16 +4207,6 @@ export interface RecordPlanChannelInfo {
    * 通道所属设备的接入协议类型
    */
   AccessProtocol?: number
-}
-
-/**
- * UpdateAITaskStatus返回参数结构体
- */
-export interface UpdateAITaskStatusResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -4827,16 +4291,6 @@ export interface ListGatewayDevicesRequest {
    * 分页大小
    */
   PageSize?: number
-}
-
-/**
- * DeleteAITask返回参数结构体
- */
-export interface DeleteAITaskResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -5020,11 +4474,6 @@ export interface DescribeTaskRequest {
 }
 
 /**
- * ListRecordPlanChannels请求参数结构体
- */
-export type ListRecordPlanChannelsRequest = null
-
-/**
  * ListOrganizationChannels返回参数结构体
  */
 export interface ListOrganizationChannelsResponse {
@@ -5036,76 +4485,6 @@ export interface ListOrganizationChannelsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * UpdateOrganization请求参数结构体
- */
-export interface UpdateOrganizationRequest {
-  /**
-   * 组织ID（从查询组织接口DescribeOrganization中获取）
-   */
-  OrganizationId: string
-  /**
-   * 组织名称，支持中文、英文、数字、空格、中英文括号、_、-, 长度不超过64位，且组织名称不能重复
-   */
-  Name: string
-}
-
-/**
- * UpdateAITaskStatus请求参数结构体
- */
-export interface UpdateAITaskStatusRequest {
-  /**
-   * AI 任务 ID
-   */
-  TaskId: string
-  /**
-   * AI 任务状态。"on"代表开启了 AI 分析任务，"off"代表停止AI分析任务
-   */
-  Status: string
-}
-
-/**
- * AI任务信息
- */
-export interface AITaskInfo {
-  /**
-   * AI 任务 ID
-   */
-  TaskId?: string
-  /**
-   * AI 任务名称
-   */
-  Name?: string
-  /**
-   * AI 任务描述
-   */
-  Desc?: string
-  /**
-   * AI 任务状态。"on"代表开启了 AI 分析任务，"off"代表停止 AI 分析任务
-   */
-  Status?: string
-  /**
-   * 通道 ID 列表
-   */
-  ChannelList?: Array<string>
-  /**
-   * AI 结果回调地址
-   */
-  CallbackUrl?: string
-  /**
-   * AI 配置列表
-   */
-  Templates?: Array<AITemplates>
-  /**
-   * 创建时间
-   */
-  CreatedTime?: string
-  /**
-   * 更新时间
-   */
-  UpdatedTime?: string
 }
 
 /**
@@ -5124,20 +4503,6 @@ export interface UpdateGatewayRequest {
    * 网关描述，仅支持中文、英文、数字、_、-，长度不超过128个字符
    */
   Description?: string
-}
-
-/**
- * UpdateAITask返回参数结构体
- */
-export interface UpdateAITaskResponse {
-  /**
-   * AI任务信息
-   */
-  Data?: AITaskInfo
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -5391,20 +4756,6 @@ export interface DeleteUserDeviceResponse {
 }
 
 /**
- * 设备地址返回结果
- */
-export interface RemoteAddrInfo {
-  /**
-   * 设备Id
-   */
-  DeviceId?: string
-  /**
-   * IP地址
-   */
-  Addr?: string
-}
-
-/**
  * UpdateRecordBackupPlan返回参数结构体
  */
 export interface UpdateRecordBackupPlanResponse {
@@ -5451,21 +4802,17 @@ export interface AddOrganizationRequest {
 }
 
 /**
- * 厨师服识别结果详情
+ * 设备地址返回结果
  */
-export interface ChefClothAIResultInfo {
+export interface RemoteAddrInfo {
   /**
-   * 时间字符串
+   * 设备Id
    */
-  Time?: string
+  DeviceId?: string
   /**
-   * 截图 URL
+   * IP地址
    */
-  Url?: string
-  /**
-   * 厨师服信息
-   */
-  ChefClothInfoInfo?: Array<BaseAIResultInfo>
+  Addr?: string
 }
 
 /**
@@ -5744,18 +5091,4 @@ export interface AddDeviceData {
    * 用户ID
    */
   AppId?: number
-}
-
-/**
- * 设置通道禁止播流，有通道Id和使能enable字段
- */
-export interface SetForbidplayChannelParam {
-  /**
-   * 通道Id
-   */
-  ChannelId: string
-  /**
-   * 是否禁止通道播流
-   */
-  Enable: boolean
 }

@@ -1391,7 +1391,7 @@ export interface EdgeKVGetRequest {
    */
   Namespace: string
   /**
-   * 键名列表。数组长度上限为 20。每个键名不能为空，长度为 1-512 个字符，允许的字符为字母、数字、中划线和下划线。查询单个键时传入包含一个元素的数组。
+   * 键名列表。数组长度上限为 20。每个键名不能为空，长度为 1-512 个字符，支持合法 UTF-8 字符。查询单个键时传入包含一个元素的数组。
    */
   Keys: Array<string>
 }
@@ -12657,7 +12657,7 @@ export interface EdgeKVDeleteRequest {
    */
   Namespace: string
   /**
-   * 键名列表。数组长度上限为 20。每个键名不能为空，长度为 1-512 个字符，允许的字符为字母、数字、中划线和下划线。删除单个键时传入包含一个元素的数组。
+   * 键名列表。数组长度上限为 20。每个键名不能为空，长度为 1-512 个字符，支持合法 UTF-8 字符。删除单个键时传入包含一个元素的数组。
    */
   Keys: Array<string>
 }
@@ -14835,7 +14835,7 @@ export interface NetworkErrorLogging {
  */
 export interface KeyValuePair {
   /**
-   * 键名。每个键名不能为空，长度为 1-512 个字符，允许的字符为字母、数字、中划线和下划线。
+   * 键名。每个键名不能为空，长度为 1-512 个字符，支持合法 UTF-8 字符。
    */
   Key?: string
   /**
@@ -16489,7 +16489,7 @@ export interface EdgeKVPutRequest {
    */
   Namespace: string
   /**
-   * 键名，长度为 1-512 个字符，允许的字符为字母、数字、中划线和下划线。
+   * 键名，长度为 1-512 个字符，支持合法 UTF-8 字符。
    */
   Key: string
   /**

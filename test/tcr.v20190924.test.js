@@ -18,6 +18,16 @@ const client = new tencentcloud.tcr.v20190924.Client({
 })
 describe("tcr.v20190924.test.js", function () {
 
+it("tcr.v20190924.DescribeSkillDetail", async function () {
+    try {
+       const data = await client.DescribeSkillDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeImageLifecycleGlobalPersonal", async function () {
     try {
        const data = await client.DescribeImageLifecycleGlobalPersonal({})
@@ -78,9 +88,29 @@ it("tcr.v20190924.CreateNamespace", async function () {
     }
 })
 
+it("tcr.v20190924.DescribeTagRetentionExecutionTask", async function () {
+    try {
+       const data = await client.DescribeTagRetentionExecutionTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DescribeRepositories", async function () {
     try {
        const data = await client.DescribeRepositories({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.ListSkills", async function () {
+    try {
+       const data = await client.ListSkills({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,6 +178,16 @@ it("tcr.v20190924.DeleteImmutableTagRules", async function () {
     }
 })
 
+it("tcr.v20190924.ListAIModels", async function () {
+    try {
+       const data = await client.ListAIModels({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.DeleteReplicationRule", async function () {
     try {
        const data = await client.DeleteReplicationRule({})
@@ -201,6 +241,16 @@ it("tcr.v20190924.BatchDeleteRepositoryPersonal", async function () {
 it("tcr.v20190924.DeleteWebhookTrigger", async function () {
     try {
        const data = await client.DeleteWebhookTrigger({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.ListSkillVersions", async function () {
+    try {
+       const data = await client.ListSkillVersions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -568,9 +618,9 @@ it("tcr.v20190924.ModifySecurityPolicy", async function () {
     }
 })
 
-it("tcr.v20190924.DescribeTagRetentionExecutionTask", async function () {
+it("tcr.v20190924.DeleteSkill", async function () {
     try {
-       const data = await client.DescribeTagRetentionExecutionTask({})
+       const data = await client.DeleteSkill({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -641,6 +691,16 @@ it("tcr.v20190924.ModifyNamespace", async function () {
 it("tcr.v20190924.DescribeImmutableTagRules", async function () {
     try {
        const data = await client.DescribeImmutableTagRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.DescribeSkillDownloadInfo", async function () {
+    try {
+       const data = await client.DescribeSkillDownloadInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -838,6 +898,16 @@ it("tcr.v20190924.CreateApplicationTriggerPersonal", async function () {
     }
 })
 
+it("tcr.v20190924.DeleteAIModel", async function () {
+    try {
+       const data = await client.DeleteAIModel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcr.v20190924.ValidateRepositoryExistPersonal", async function () {
     try {
        const data = await client.ValidateRepositoryExistPersonal({})
@@ -861,6 +931,16 @@ it("tcr.v20190924.ModifyApplicationTriggerPersonal", async function () {
 it("tcr.v20190924.DescribeNamespaces", async function () {
     try {
        const data = await client.DescribeNamespaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.DescribeAIModelVersionDetail", async function () {
+    try {
+       const data = await client.DescribeAIModelVersionDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1071,6 +1151,16 @@ it("tcr.v20190924.ManageInternalEndpoint", async function () {
 it("tcr.v20190924.DuplicateImage", async function () {
     try {
        const data = await client.DuplicateImage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcr.v20190924.ListAIModelVersions", async function () {
+    try {
+       const data = await client.ListAIModelVersions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

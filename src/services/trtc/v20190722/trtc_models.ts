@@ -157,6 +157,20 @@ export interface AgentConfig {
 }
 
 /**
+ * 伴生转录术语表项
+ */
+export interface TerminologyItem {
+  /**
+   * <p>翻译目标语言。</p>
+   */
+  TargetLang: string
+  /**
+   * <p>翻译目标语言对应的翻译术语配置。</p>
+   */
+  Terminology: Array<TermPair>
+}
+
+/**
  * CreatePicture请求参数结构体
  */
 export interface CreatePictureRequest {
@@ -568,6 +582,32 @@ export interface STTConfig {
 }
 
 /**
+ * TTS的声音参数配置
+ */
+export interface Voice {
+  /**
+   * <p>音色 ID，可从音色列表获取，或使用声音克隆生成的自定义音色 ID</p>
+   */
+  VoiceId: string
+  /**
+   * <p>语速调节，0.5 为半速慢放，2.0 为两倍速快放，1.0 为正常语速，区间：[0.5, 2.0]，默认1.0</p>
+   */
+  Speed?: number
+  /**
+   * <p>音量调节，0 为静音，10 为最大音量，建议保持默认值 1.0，区间：[0, 10]，默认1.0</p>
+   */
+  Volume?: number
+  /**
+   * <p>音高调节，负值声音更低沉，正值声音更尖锐，0 为原始音高，区间 [-12, 12],  默认0</p>
+   */
+  Pitch?: number
+  /**
+   * <p>情绪控制，目前仅flow_01_ex模型支持</p><p>枚举值：</p><ul><li>happy： 高兴</li><li>sad： 悲伤</li><li>angry： 愤怒</li><li>fearful： 害怕</li><li>disgusted： 厌恶</li><li>surprised： 惊讶</li><li>calm： 中性</li><li>fluent： 生动</li><li>whisper： 低语</li></ul>
+   */
+  Emotion?: string
+}
+
+/**
  * DescribeTRTCMarketScaleData请求参数结构体
  */
 export interface DescribeTRTCMarketScaleDataRequest {
@@ -619,32 +659,32 @@ export interface McuLayoutVolume {
  */
 export interface VoiceCloneRequest {
   /**
-   * TRTC的SdkAppId
+   * <p>TRTC的SdkAppId</p>
    */
   SdkAppId: number
   /**
-   * 声音克隆的名称, 只允许使用数字、字母、下划线，不能超过36位
+   * <p>声音克隆的名称, 只允许使用数字、字母、下划线，不能超过36位</p>
    */
   VoiceName: string
   /**
-   * 声音克隆的参考音频，必须为16k单声道的wav的base64字符串， 长度在6秒～180秒之间
+   * <p>声音克隆的参考音频，必须为16k单声道的wav的base64字符串， 长度在6秒～180秒之间</p>
    */
   PromptAudio: string
   /**
-   * TTS的API密钥
+   * <p>TTS的API密钥</p>
    * @deprecated
    */
   APIKey?: string
   /**
-   * 声音克隆的参考文本，为参考音频对应的文字。
+   * <p>声音克隆的参考文本，为参考音频对应的文字。</p>
    */
   PromptText?: string
   /**
-   * TTS的模型：flow_01_turbo，flow_01_ex
+   * <p>TTS的模型：flow_02_turbo，flow_01_ex</p><p>枚举值：</p><ul><li>flow_02_turbo： flow_02_turbo</li><li>flow_01_ex： flow_01_ex</li></ul>
    */
   Model?: string
   /**
-   * 语言参数，默认为空， 参考： (ISO 639-1)
+   * <p>语言参数，默认为空， 参考： (ISO 639-1)</p>
    */
   Language?: string
 }
@@ -801,35 +841,35 @@ export interface McuBackgroundCustomRender {
  */
 export interface AsyncTextToSpeechRequest {
   /**
-   * 需要转语音的文字内容，最大允许50000字符，注意 1汉字=2字符
+   * <p>需要转语音的文字内容，最大允许50000字符，注意 1汉字=2字符</p>
    */
   Text: string
   /**
-   * 文本转语音的声音配置
+   * <p>文本转语音的声音配置</p>
    */
   Voice: Voice
   /**
-   * TRTC的SdkAppId
+   * <p>TRTC的SdkAppId</p>
    */
   SdkAppId: number
   /**
-   * 文本转语音的输出音频的格式
+   * <p>文本转语音的输出音频的格式</p>
    */
   AudioFormat?: AudioFormat
   /**
-   * TTS的模型，当前固定为：flow_01_turbo
+   * <p>TTS的模型，当前固定为：flow_02_turbo</p><p>枚举值：</p><ul><li>flow_02_turbo： flow_02_turbo</li></ul>
    */
   Model?: string
   /**
-   * 多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。
+   * <p>多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。</p>
    */
   PronunciationDict?: Array<PronunciationDict>
   /**
-   * 默认为0，0表示不生成字幕，1表示生成字幕
+   * <p>默认为0，0表示不生成字幕，1表示生成字幕</p>
    */
   AlignmentMode?: number
   /**
-   * 需要合成的语言（ISO 639-1），默认自动识别，支持的语言如下：  zh（中文） en（英文） yue（粤语） ja（日语） ko（韩语） ar（阿拉伯语） id（印尼语） th（泰语）
+   * <p>需要合成的语言（ISO 639-1），默认自动识别，支持的语言如下：  zh（中文） en（英文） yue（粤语） ja（日语） ko（韩语） ar（阿拉伯语） id（印尼语） th（泰语）</p>
    */
   LanguageCode?: string
 }
@@ -1596,9 +1636,13 @@ export interface DescribeAsyncTextToSpeechResponse {
  */
 export interface TranslationParam {
   /**
-   * 翻译的目标语言，示例值["en", "ja"]。目标语种列表[中文 "zh"，英语 "en"，越南语 "vi"，日语 "ja"，韩语 "ko"，印度尼西亚语 "id"，泰语 "th"，葡萄牙语 "pt"，阿拉伯语 "ar"，西班牙语 "es"，法语 "fr"，马来语 "ms"，德语 "de"，意大利语 "it"，俄语 "ru"]。
+   * <p>翻译的目标语言，示例值[&quot;en&quot;, &quot;ja&quot;]。目标语种列表[中文 &quot;zh&quot;，英语 &quot;en&quot;，越南语 &quot;vi&quot;，日语 &quot;ja&quot;，韩语 &quot;ko&quot;，印度尼西亚语 &quot;id&quot;，泰语 &quot;th&quot;，葡萄牙语 &quot;pt&quot;，阿拉伯语 &quot;ar&quot;，西班牙语 &quot;es&quot;，法语 &quot;fr&quot;，马来语 &quot;ms&quot;，德语 &quot;de&quot;，意大利语 &quot;it&quot;，俄语 &quot;ru&quot;]。</p>
    */
   TargetLang?: Array<string>
+  /**
+   * <p>翻译术语表配置。</p>
+   */
+  Terminologies?: Array<TerminologyItem>
 }
 
 /**
@@ -2102,7 +2146,7 @@ export interface MixTranscodeParams {
  */
 export interface CreateCloudTranscriptionResponse {
   /**
-   * 用于唯一标识转录任务，由腾讯云服务端生成，后续查询和停止请求都需要携带TaskID参数。
+   * <p>用于唯一标识转录任务，由腾讯云服务端生成，后续查询和停止请求都需要携带TaskID参数。</p>
    */
   TaskId?: string
   /**
@@ -3526,6 +3570,28 @@ export interface RemoveUserRequest {
 }
 
 /**
+ * 伴生转录TTS的语音参数配置
+ */
+export interface TTSVoice {
+  /**
+   * <p>音色 ID。</p>
+   */
+  VoiceId: string
+  /**
+   * <p>语速调节，0.5 为半速慢放，2.0 为两倍速快放，1.0 为正常语速，区间：[0.5, 2.0]，默认1.0。</p>
+   */
+  Speed?: number
+  /**
+   * <p>音量调节，0 为静音，10 为最大音量，建议保持默认值 1.0，区间：[0, 10]，默认1.0。</p>
+   */
+  Volume?: number
+  /**
+   * <p>音高调节，负值声音更低沉，正值声音更尖锐，0 为原始音高，区间 [-12, 12]，默认0。</p>
+   */
+  Pitch?: number
+}
+
+/**
  * DismissRoom请求参数结构体
  */
 export interface DismissRoomRequest {
@@ -4515,25 +4581,29 @@ export interface DescribePictureRequest {
 }
 
 /**
- * TTS的声音参数配置
+ * 伴生转录TTS参数
  */
-export interface Voice {
+export interface TTSParam {
   /**
-   *  音色 ID，可从音色列表获取，或使用声音克隆生成的自定义音色 ID
+   * <p>tts模型</p>
    */
-  VoiceId: string
+  Model: string
   /**
-   * 语速调节，0.5 为半速慢放，2.0 为两倍速快放，1.0 为正常语速，区间：[0.5, 2.0]，默认1.0
+   * <p>tts语言，必须在TranslationParam 的TargetLang列表中。</p>
    */
-  Speed?: number
+  Language: string
   /**
-   *  音量调节，0 为静音，10 为最大音量，建议保持默认值 1.0，区间：[0, 10]，默认1.0
+   * <p>需要TTS播报的主播用户，该主播用户必须在订阅白名单里并且不在订阅黑名单里。</p>
    */
-  Volume?: number
+  TargetUser: TranscriptionUserInfoParams
   /**
-   *  音高调节，负值声音更低沉，正值声音更尖锐，0 为原始音高，区间 [-12, 12],  默认0
+   * <p>TTS 音频回推到房间的机器人用户。</p>
    */
-  Pitch?: number
+  TTSRobotUser: TranscriptionUserInfoParams
+  /**
+   * <p>TTS的声音配置参数。</p>
+   */
+  Voice: TTSVoice
 }
 
 /**
@@ -4674,15 +4744,15 @@ export interface DescribeTrtcRoomUsageRequest {
  */
 export interface TextToSpeechResponse {
   /**
-   * Base64编码的音频数据
+   * <p>Base64编码的音频数据</p>
    */
   Audio?: string
   /**
-   * 字幕对齐数据
+   * <p>字幕对齐数据</p>
    */
   Alignments?: Array<AlignmentItem>
   /**
-   * 音频时长
+   * <p>音频时长</p>
    */
   TotalDurationMs?: number
   /**
@@ -4924,29 +4994,33 @@ export interface SingleSubscribeParams {
  */
 export interface CreateCloudTranscriptionRequest {
   /**
-   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和转录的房间所对应的SdkAppId相同。
+   * <p>TRTC的<a href="https://cloud.tencent.com/document/product/647/46351#sdkappid">SdkAppId</a>，和转录的房间所对应的SdkAppId相同。</p>
    */
   SdkAppId: number
   /**
-   * TRTC的[RoomId](https://cloud.tencent.com/document/product/647/46351#roomid)，转录的TRTC房间所对应的RoomId。注：房间号类型默认为整型，若房间号类型为字符串，请通过RoomIdType指定。
+   * <p>TRTC的<a href="https://cloud.tencent.com/document/product/647/46351#roomid">RoomId</a>，转录的TRTC房间所对应的RoomId。注：房间号类型默认为整型，若房间号类型为字符串，请通过RoomIdType指定。</p>
    */
   RoomId: string
   /**
-   * 房间信息RoomType，必须和转录的房间所对应的RoomId类型相同，0为整型房间号，1为字符串房间号。
+   * <p>房间信息RoomType，必须和转录的房间所对应的RoomId类型相同，0为整型房间号，1为字符串房间号。</p>
    */
   RoomIdType: number
   /**
-   * 转录服务加入TRTC房间的参数。
+   * <p>转录服务加入TRTC房间的参数。</p>
    */
   TranscriptionParam: TranscriptionParam
   /**
-   * 转录服务ASR使用的参数。
+   * <p>转录服务ASR使用的参数。</p>
    */
   AsrParam: AsrParam
   /**
-   * 转录服务翻译使用的参数。
+   * <p>转录服务翻译使用的参数。</p>
    */
   TranslationParam?: TranslationParam
+  /**
+   * <p>转录服务TTS使用的参数。</p>
+   */
+  TTSParam?: Array<TTSParam>
 }
 
 /**
@@ -4954,7 +5028,7 @@ export interface CreateCloudTranscriptionRequest {
  */
 export interface AsyncTextToSpeechResponse {
   /**
-   * 任务ID
+   * <p>任务ID</p>
    */
   TaskId?: string
   /**
@@ -5226,7 +5300,7 @@ export interface AuditStorageParams {
  */
 export interface VoiceCloneResponse {
   /**
-   * 克隆出的音色ID，可以用此id进行语音合成
+   * <p>克隆出的音色ID，可以用此id进行语音合成</p>
    */
   VoiceId?: string
   /**
@@ -5301,51 +5375,46 @@ export interface UpdateStreamIngestRequest {
  */
 export interface TextToSpeechSSERequest {
   /**
-   * 需要转语音的文字内容，长度范围：[1, 255]
+   * <p>需要转语音的文字内容，长度范围：[1, 255]</p>
    */
   Text: string
   /**
-   * 文本转语音的声音配置
+   * <p>文本转语音的声音配置</p>
    */
   Voice: Voice
   /**
-   * TRTC的SdkAppId
+   * <p>TRTC的SdkAppId</p>
    */
   SdkAppId: number
   /**
-   * 文本转语音的输出音频的格式
+   * <p>文本转语音的输出音频的格式</p>
    */
   AudioFormat?: AudioFormat
   /**
-   * TTS的API密钥
+   * <p>TTS的API密钥</p>
    * @deprecated
    */
   APIKey?: string
   /**
-   * TTS的模型，当前固定为：flow_01_turbo
+   * <p>TTS的模型，当前固定为：flow_02_turbo</p><p>枚举值：</p><ul><li>flow_02_turbo： flow_02_turbo</li></ul>
    */
   Model?: string
   /**
-   *  需要合成的语言（ISO 639-1），默认自动识别，支持如下语言：
-- zh（中文）
-- en（英文）
-- yue（粤语）
-- ja（日语）
-- ko（韩语）
-- ar（阿拉伯语）
-- id（印尼语）
-- th（泰语）
-
+   * <p>需要合成的语言（ISO 639-1），默认自动识别，支持如下语言：</p><ul><li>zh（中文）</li><li>en（英文）</li><li>yue（粤语）</li><li>ja（日语）</li><li>ko（韩语）</li><li>ar（阿拉伯语）</li><li>id（印尼语）</li><li>th（泰语）</li></ul>
    */
   Language?: string
   /**
-   * 多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。
+   * <p>多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。</p>
    */
   PronunciationDict?: Array<PronunciationDict>
   /**
-   * 默认为0，0表示不生成字幕，1表示生成字幕
+   * <p>默认为0，0表示不生成字幕，1表示生成字幕</p>
    */
   AlignmentMode?: number
+  /**
+   * <p>json字符串，用于拓展用法</p>
+   */
+  ExtraParams?: string
 }
 
 /**
@@ -5356,6 +5425,20 @@ export interface StopWebRecordResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 伴生转录术语表词组对
+ */
+export interface TermPair {
+  /**
+   * <p>源术语。</p>
+   */
+  Source: string
+  /**
+   * <p>目标术语翻译结果。</p>
+   */
+  Target: string
 }
 
 /**
@@ -5659,50 +5742,46 @@ export interface DeleteBasicModerationResponse {
  */
 export interface TextToSpeechRequest {
   /**
-   * 需要转语音的文字内容，长度范围：[1, 255]
+   * <p>需要转语音的文字内容，长度范围：[1, 255]</p>
    */
   Text: string
   /**
-   * 文本转语音的声音配置
+   * <p>文本转语音的声音配置</p>
    */
   Voice: Voice
   /**
-   * TRTC的SdkAppId
+   * <p>TRTC的SdkAppId</p>
    */
   SdkAppId: number
   /**
-   * 文本转语音的输出音频的格式
+   * <p>文本转语音的输出音频的格式</p>
    */
   AudioFormat?: AudioFormat
   /**
-   * TTS的API密钥
+   * <p>TTS的API密钥</p>
    * @deprecated
    */
   APIKey?: string
   /**
-   * TTS的模型，当前固定为：flow_01_turbo
+   * <p>TTS的模型，当前固定为：flow_02_turbo</p><p>枚举值：</p><ul><li>flow_02_turbo： flow_02_turbo</li></ul>
    */
   Model?: string
   /**
-   *  需要合成的语言（ISO 639-1），默认自动识别，支持的语言如下：
-- zh（中文）
-- en（英文）
-- yue（粤语）
-- ja（日语）
-- ko（韩语）
-- ar（阿拉伯语）
-- id（印尼语）
-- th（泰语）
+   * <p>需要合成的语言（ISO 639-1），默认自动识别，支持的语言如下：</p><ul><li>zh（中文）</li><li>en（英文）</li><li>yue（粤语）</li><li>ja（日语）</li><li>ko（韩语）</li><li>ar（阿拉伯语）</li><li>id（印尼语）</li><li>th（泰语）</li></ul>
    */
   Language?: string
   /**
-   * 多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。
+   * <p>多音字/生僻字发音纠正词典条目。指定特定词语在本次请求中使用的发音。</p>
    */
   PronunciationDict?: Array<PronunciationDict>
   /**
-   * 默认为0，0表示不生成字幕，1表示生成字幕
+   * <p>默认为0，0表示不生成字幕，1表示生成字幕</p>
    */
   AlignmentMode?: number
+  /**
+   * <p>json字符串，用于拓展用法</p>
+   */
+  ExtraParams?: string
 }
 
 /**

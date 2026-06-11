@@ -37,7 +37,7 @@ import {
   DescribeSlowLogsRequest,
   FlushInstanceRouterConfigResponse,
   DescribeCurrentOpResponse,
-  SetDBInstanceDeletionProtectionRequest,
+  PromoteDBInstanceToActiveRequest,
   InstanceMultiParam,
   DescribeSRVConnectionDomainResponse,
   ModifyInstanceParamsResponse,
@@ -129,6 +129,7 @@ import {
   DescribeSecurityGroupResponse,
   DescribeTransparentDataEncryptionStatusRequest,
   SecurityGroup,
+  SetDBInstanceDeletionProtectionRequest,
   EnableWanServiceRequest,
   ReplicaSetInfo,
   ResetDBInstancePasswordResponse,
@@ -226,12 +227,13 @@ import {
   DescribeDBInstanceParamTplDetailRequest,
   InstanceDetail,
   DescribeSlowLogPatternsRequest,
+  UpgradeDBInstanceKernelVersionRequest,
   Filters,
   RestoreCollection,
   RestoreDBInstanceRequest,
   EnableWanServiceResponse,
   RenewDBInstancesRequest,
-  UpgradeDBInstanceKernelVersionRequest,
+  PromoteDBInstanceToActiveResponse,
   DescribeAuditLogsResponse,
 } from "./mongodb_models"
 
@@ -767,6 +769,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: IsolateDBInstanceResponse) => void
   ): Promise<IsolateDBInstanceResponse> {
     return this.request("IsolateDBInstance", req, cb)
+  }
+
+  /**
+   * 本接口（PromoteDBInstanceToActive）用于灾备实例转正
+   */
+  async PromoteDBInstanceToActive(
+    req: PromoteDBInstanceToActiveRequest,
+    cb?: (error: string, rep: PromoteDBInstanceToActiveResponse) => void
+  ): Promise<PromoteDBInstanceToActiveResponse> {
+    return this.request("PromoteDBInstanceToActive", req, cb)
   }
 
   /**

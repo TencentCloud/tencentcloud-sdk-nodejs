@@ -216,36 +216,6 @@ export interface DescribeDevicePackagesRequest {
 }
 
 /**
- * ControlDeviceData请求参数结构体
- */
-export interface ControlDeviceDataRequest {
-  /**
-   * 产品ID
-   */
-  ProductId: string
-  /**
-   * 设备名称
-   */
-  DeviceName: string
-  /**
-   * 属性数据, JSON格式字符串, 注意字段需要在物模型属性里定义
-   */
-  Data: string
-  /**
-   * 请求类型 , 不填该参数或者 desired 表示下发属性给设备,  reported 表示模拟设备上报属性
-   */
-  Method?: string
-  /**
-   * 设备ID，该字段有值将代替 ProductId/DeviceName , 通常情况不需要填写
-   */
-  DeviceId?: string
-  /**
-   * 上报数据UNIX时间戳(毫秒), 仅对Method:reported有效
-   */
-  DataTimestamp?: number
-}
-
-/**
  * 设备激活结果数据
  */
 export interface DeviceActiveResult {
@@ -5739,6 +5709,24 @@ export interface GetTWeTalkProductConfigListResponse {
 }
 
 /**
+ * CreateDevicePublishSDPAnswer请求参数结构体
+ */
+export interface CreateDevicePublishSDPAnswerRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+  /**
+   * SDP提议
+   */
+  SDPOffer: string
+}
+
+/**
  * DescribeSubscribedTopicPolicy返回参数结构体
  */
 export interface DescribeSubscribedTopicPolicyResponse {
@@ -7048,24 +7036,40 @@ export interface CreateDeviceSDPAnswerRequest {
    * SDP提议
    */
   SDPOffer: string
+  /**
+   * 客户自定义拉流标识
+   */
+  RequesterTag?: string
 }
 
 /**
- * GetProjectList返回参数结构体
+ * ControlDeviceData请求参数结构体
  */
-export interface GetProjectListResponse {
+export interface ControlDeviceDataRequest {
   /**
-   * 项目列表
+   * 产品ID
    */
-  Projects?: Array<ProjectEntryEx>
+  ProductId: string
   /**
-   * 列表项个数
+   * 设备名称
    */
-  Total?: number
+  DeviceName: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 属性数据, JSON格式字符串, 注意字段需要在物模型属性里定义
    */
-  RequestId?: string
+  Data: string
+  /**
+   * 请求类型 , 不填该参数或者 desired 表示下发属性给设备,  reported 表示模拟设备上报属性
+   */
+  Method?: string
+  /**
+   * 设备ID，该字段有值将代替 ProductId/DeviceName , 通常情况不需要填写
+   */
+  DeviceId?: string
+  /**
+   * 上报数据UNIX时间戳(毫秒), 仅对Method:reported有效
+   */
+  DataTimestamp?: number
 }
 
 /**
@@ -7523,6 +7527,24 @@ export interface DescribeTWeSeeConfigResponse {
    * 云存事件 ID 过滤规则配置项
    */
   EventIdFilterConfig?: SeeEventIdFilterConfig
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetProjectList返回参数结构体
+ */
+export interface GetProjectListResponse {
+  /**
+   * 项目列表
+   */
+  Projects?: Array<ProjectEntryEx>
+  /**
+   * 列表项个数
+   */
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8343,6 +8365,20 @@ export interface DescribeDevicePackagesResponse {
 }
 
 /**
+ * DeleteDeviceSDP请求参数结构体
+ */
+export interface DeleteDeviceSDPRequest {
+  /**
+   * 产品ID
+   */
+  ProductId: string
+  /**
+   * 设备名称
+   */
+  DeviceName: string
+}
+
+/**
  * 云存 AI 任务输出视频文件元数据
  */
 export interface CloudStorageAIServiceTaskVideoMetaInfo {
@@ -8784,6 +8820,20 @@ export interface SearchStudioProductRequest {
    * 每次请求的Filters的上限为10，Filter.Values的上限为1。
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * CreateDevicePublishSDPAnswer返回参数结构体
+ */
+export interface CreateDevicePublishSDPAnswerResponse {
+  /**
+   * SDP应答
+   */
+  SDPAnswer?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11322,6 +11372,16 @@ export interface IotApplication {
    * 互联互通产品ID列表
    */
   InterconnectionProducts?: string
+}
+
+/**
+ * DeleteDeviceSDP返回参数结构体
+ */
+export interface DeleteDeviceSDPResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

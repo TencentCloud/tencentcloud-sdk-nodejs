@@ -29,7 +29,6 @@ import {
   GetGatewaySubDeviceListResponse,
   DeleteStudioProductResponse,
   DescribeDevicePackagesRequest,
-  ControlDeviceDataRequest,
   DeviceActiveResult,
   DeleteLoRaFrequencyResponse,
   ModifyApplicationResponse,
@@ -282,6 +281,7 @@ import {
   DescribeUnbindedDevicesResponse,
   InvokeCloudStorageAIServiceTaskRequest,
   GetTWeTalkProductConfigListResponse,
+  CreateDevicePublishSDPAnswerRequest,
   DescribeSubscribedTopicPolicyResponse,
   ResetCloudStorageRequest,
   DescribeCloudStorageEventsWithAITasksRequest,
@@ -339,7 +339,7 @@ import {
   BatchProductionInfo,
   DeleteDeviceRequest,
   CreateDeviceSDPAnswerRequest,
-  GetProjectListResponse,
+  ControlDeviceDataRequest,
   TalkSTTConfigInfo,
   ListFirmwaresResponse,
   ReleaseStudioProductResponse,
@@ -361,6 +361,7 @@ import {
   DescribeFirmwareTaskDevicesResponse,
   ModifyCloudStorageAIServiceRequest,
   DescribeTWeSeeConfigResponse,
+  GetProjectListResponse,
   GetStudioProductListRequest,
   DescribeFirmwareTaskResponse,
   DisableTopicRuleResponse,
@@ -396,6 +397,7 @@ import {
   CloudStorageEventWithAITasks,
   CreateDeviceChannelRequest,
   DescribeDevicePackagesResponse,
+  DeleteDeviceSDPRequest,
   CloudStorageAIServiceTaskVideoMetaInfo,
   DescribeGatewaySubDeviceListResponse,
   CreateOtaModuleRequest,
@@ -416,6 +418,7 @@ import {
   EnableTopicRuleResponse,
   GetGatewaySubDeviceListRequest,
   SearchStudioProductRequest,
+  CreateDevicePublishSDPAnswerResponse,
   GenSingleDeviceSignatureOfPublicRequest,
   CreateVisionRecognitionTaskOutput,
   BatchCreateTWeSeeRecognitionTaskResponse,
@@ -521,6 +524,7 @@ import {
   FirmwareTaskInfo,
   DescribeAISearchTaskAsyncResponse,
   IotApplication,
+  DeleteDeviceSDPResponse,
   PublishBroadcastMessageResponse,
   DescribeFenceBindListRequest,
   PositionSpaceInfo,
@@ -783,13 +787,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询设备绑定的网关设备
+   * 本接口（CheckFirmwareUpdate）用于查询设备可升级固件版本
    */
-  async DescribeDeviceBindGateway(
-    req: DescribeDeviceBindGatewayRequest,
-    cb?: (error: string, rep: DescribeDeviceBindGatewayResponse) => void
-  ): Promise<DescribeDeviceBindGatewayResponse> {
-    return this.request("DescribeDeviceBindGateway", req, cb)
+  async CheckFirmwareUpdate(
+    req: CheckFirmwareUpdateRequest,
+    cb?: (error: string, rep: CheckFirmwareUpdateResponse) => void
+  ): Promise<CheckFirmwareUpdateResponse> {
+    return this.request("CheckFirmwareUpdate", req, cb)
   }
 
   /**
@@ -1232,6 +1236,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchUpdateFirmwareResponse) => void
   ): Promise<BatchUpdateFirmwareResponse> {
     return this.request("BatchUpdateFirmware", req, cb)
+  }
+
+  /**
+   * 创建设备推流SDP应答，此接口调用前需要先调用CreateDeviceSDPAnswer接口以保证设备处于拉流状态，接口返回是另外一路webrtc推流SDP信息，可以用来进行标准的WHIP推流
+   */
+  async CreateDevicePublishSDPAnswer(
+    req: CreateDevicePublishSDPAnswerRequest,
+    cb?: (error: string, rep: CreateDevicePublishSDPAnswerResponse) => void
+  ): Promise<CreateDevicePublishSDPAnswerResponse> {
+    return this.request("CreateDevicePublishSDPAnswer", req, cb)
   }
 
   /**
@@ -1959,7 +1973,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建设备SDP应答
+   * 创建设备SDP应答，调用此接口后，后台会对传入参数的设备进行拉流，并返回webrtc answer SDP返回，可以进行WHEP协议拉流。
    */
   async CreateDeviceSDPAnswer(
     req: CreateDeviceSDPAnswerRequest,
@@ -2299,6 +2313,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 拉取设备统计汇总数据
+   */
+  async GetDeviceSumStatistics(
+    req: GetDeviceSumStatisticsRequest,
+    cb?: (error: string, rep: GetDeviceSumStatisticsResponse) => void
+  ): Promise<GetDeviceSumStatisticsResponse> {
+    return this.request("GetDeviceSumStatistics", req, cb)
+  }
+
+  /**
    * 获取量产详情信息。
    */
   async DescribeBatchProduction(
@@ -2369,13 +2393,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（CheckFirmwareUpdate）用于查询设备可升级固件版本
+   * 查询设备绑定的网关设备
    */
-  async CheckFirmwareUpdate(
-    req: CheckFirmwareUpdateRequest,
-    cb?: (error: string, rep: CheckFirmwareUpdateResponse) => void
-  ): Promise<CheckFirmwareUpdateResponse> {
-    return this.request("CheckFirmwareUpdate", req, cb)
+  async DescribeDeviceBindGateway(
+    req: DescribeDeviceBindGatewayRequest,
+    cb?: (error: string, rep: DescribeDeviceBindGatewayResponse) => void
+  ): Promise<DescribeDeviceBindGatewayResponse> {
+    return this.request("DescribeDeviceBindGateway", req, cb)
   }
 
   /**
@@ -2479,13 +2503,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 拉取设备统计汇总数据
+   * 删除设备SDP应答，此接口调用是手动结束设备后台推拉流信息，快速响应挂断需求。
    */
-  async GetDeviceSumStatistics(
-    req: GetDeviceSumStatisticsRequest,
-    cb?: (error: string, rep: GetDeviceSumStatisticsResponse) => void
-  ): Promise<GetDeviceSumStatisticsResponse> {
-    return this.request("GetDeviceSumStatistics", req, cb)
+  async DeleteDeviceSDP(
+    req: DeleteDeviceSDPRequest,
+    cb?: (error: string, rep: DeleteDeviceSDPResponse) => void
+  ): Promise<DeleteDeviceSDPResponse> {
+    return this.request("DeleteDeviceSDP", req, cb)
   }
 
   /**

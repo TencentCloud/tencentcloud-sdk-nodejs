@@ -3887,11 +3887,11 @@ export interface DescribeStaticStoreRequest {
  */
 export interface HTTPServiceQPSPerClient {
   /**
-   * 客户端维度限频标识。限制当前资源被单个客户端调用的频率，客户端标识支持 用户ID（UserID） 或 客户端 IP（ClientIP）。UserID 包括 云开发用户 ID 或 微信 openid，如果请求无 UserID 信息，则不会限制。
+   * <p>客户端维度限频标识。限制当前资源被单个客户端调用的频率，客户端标识支持 用户ID（UserID） 或 客户端 IP（ClientIP）。UserID 包括 云开发用户 ID 或 微信 openid，如果请求无 UserID 信息，则不会限制。</p><p>枚举值：</p><ul><li>UserID： 云开发用户 ID 或 微信 openid</li><li>ClientIP： 客户端ip</li></ul>
    */
   LimitBy?: string
   /**
-   * 限制QPS值，每秒请求次数
+   * <p>限制QPS值，每秒请求次数</p>
    */
   LimitValue?: number
 }
@@ -5656,15 +5656,15 @@ export interface HTTPServiceDomainParam {
    */
   Domain: string
   /**
-   * <p>绑定类型。默认DIRECT。DIRECT: 直连到HTTP访问服务， CDN: 接入云开发CDN，CUSTOM: 自定义接入类型（其他CDN或者WAF）</p>
+   * <p>绑定类型</p><p>枚举值：</p><ul><li>DIRECT： 直连到HTTP访问服务</li><li>CDN： 接入云开发CDN</li><li>CUSTOM： 自定义接入类型（CDN、EO、WAF等接入）</li></ul><p>默认值：DIRECT</p>
    */
   AccessType?: string
   /**
-   * <p>证书ID。当前账户下SSL平台的证书ID</p>
+   * <p>证书ID。当前账户下SSL平台的证书ID，无证书无法使用https访问</p>
    */
   CertId?: string
   /**
-   * <p>协议类型。默认HTTP_AND_HTTPS。HTTP_AND_HTTPS: 同时开启http和https，HTTP_TO_HTTPS: http重定向成https，HTTPS_TO_HTTP: https重定向成http。如果未配置证书无法访问https或者进行重定向</p>
+   * <p>协议类型</p><p>枚举值：</p><ul><li>HTTP： 仅开启http</li><li>HTTPS： 仅开启https</li><li>HTTP_AND_HTTPS： 同时开启http和https，默认</li><li>HTTP_TO_HTTPS： http重定向成https，需配置证书</li><li>HTTPS_TO_HTTP： https重定向成http，需配置证书</li></ul><p>默认值：HTTP_AND_HTTPS</p>
    */
   Protocol?: string
   /**
@@ -6164,43 +6164,43 @@ export interface AIModelSecret {
  */
 export interface HTTPServiceRouteParam {
   /**
-   * 路径
+   * <p>路径</p>
    */
   Path: string
   /**
-   * 上游服务类型。创建时必填，修改时可选填。SCF: 云函数，CBR: 云托管，STATIC_STORE: 静态托管，WEB_SCF: WEB云函数，LH: Lighthouse
+   * <p>上游服务类型。创建时必填，修改时可选填</p><p>枚举值：</p><ul><li>SCF： 云函数</li><li>CBR： 云托管</li><li>STATIC_STORE： 静态托管</li><li>WEB_SCF： web云函数</li><li>LH： Lighthouse</li></ul>
    */
   UpstreamResourceType?: string
   /**
-   * 上游服务名。创建时必填，修改时可选填
+   * <p>上游服务名。创建时必填，修改时可选填</p>
    */
   UpstreamResourceName?: string
   /**
-   * 路径重写
+   * <p>路径重写</p>
    */
   PathRewrite?: HTTPServicePathRewrite
   /**
-   * 是否开启安全域名。默认开启
+   * <p>是否开启安全域名。默认开启</p>
    */
   EnableSafeDomain?: boolean
   /**
-   * 是否开启身份认证。默认关闭
+   * <p>是否开启身份认证。默认关闭</p>
    */
   EnableAuth?: boolean
   /**
-   * 是否开启路径透传。默认关闭
+   * <p>是否开启路径透传。默认关闭</p>
    */
   EnablePathTransmission?: boolean
   /**
-   * QPS限频策略
+   * <p>QPS限频策略</p>
    */
   QPSPolicy?: HTTPServiceRouteQPSPolicy
   /**
-   * 是否开启路由
+   * <p>是否开启路由</p>
    */
   Enable?: boolean
   /**
-   * 扩展字段，内部包含headers处理等
+   * <p>扩展字段，内部包含headers处理等</p>
    */
   Extension?: HTTPServiceExtension
 }

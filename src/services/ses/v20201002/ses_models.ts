@@ -1616,35 +1616,35 @@ export interface ListSendTasksResponse {
  */
 export interface Volume {
   /**
-   * 日期
+   * <p>日期</p>
    */
   SendDate?: string
   /**
-   * 邮件请求数量
+   * <p>邮件请求数量</p>
    */
   RequestCount?: number
   /**
-   * 腾讯云通过数量
+   * <p>腾讯云通过数量</p>
    */
   AcceptedCount?: number
   /**
-   * 送达数量
+   * <p>送达数量</p>
    */
   DeliveredCount?: number
   /**
-   * 打开邮件的用户数量，根据收件人去重
+   * <p>打开邮件总次数</p>
    */
   OpenedCount?: number
   /**
-   * 点击了邮件中的链接数量用户数量
+   * <p>点击了邮件中的链接数量用户数量</p>
    */
   ClickedCount?: number
   /**
-   * 退信数量
+   * <p>退信数量</p>
    */
   BounceCount?: number
   /**
-   * 取消订阅的用户数量
+   * <p>取消订阅的用户数量</p>
    */
   UnsubscribeCount?: number
 }

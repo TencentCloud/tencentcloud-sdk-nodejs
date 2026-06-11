@@ -78,9 +78,9 @@ it("waf.v20180125.ModifyBatchCustomRule", async function () {
     }
 })
 
-it("waf.v20180125.DescribeDomains", async function () {
+it("waf.v20180125.AddAntiInfoLeakRules", async function () {
     try {
-       const data = await client.DescribeDomains({})
+       const data = await client.AddAntiInfoLeakRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -638,9 +638,19 @@ it("waf.v20180125.ModifyBotIdRule", async function () {
     }
 })
 
-it("waf.v20180125.AddAntiInfoLeakRules", async function () {
+it("waf.v20180125.DescribeApiSecEventDetail", async function () {
     try {
-       const data = await client.AddAntiInfoLeakRules({})
+       const data = await client.DescribeApiSecEventDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.DescribeDomains", async function () {
+    try {
+       const data = await client.DescribeDomains({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -998,9 +1008,9 @@ it("waf.v20180125.ModifyOwaspWhiteRule", async function () {
     }
 })
 
-it("waf.v20180125.DescribeAttackWhiteRule", async function () {
+it("waf.v20180125.DescribeApiSecEventList", async function () {
     try {
-       const data = await client.DescribeAttackWhiteRule({})
+       const data = await client.DescribeApiSecEventList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1451,6 +1461,16 @@ it("waf.v20180125.DescribeDomainCountInfo", async function () {
 it("waf.v20180125.SearchLog", async function () {
     try {
        const data = await client.SearchLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("waf.v20180125.UpdateProtectionModes", async function () {
+    try {
+       const data = await client.UpdateProtectionModes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2208,9 +2228,9 @@ it("waf.v20180125.ModifyBatchCustomWhiteRuleStatus", async function () {
     }
 })
 
-it("waf.v20180125.UpdateProtectionModes", async function () {
+it("waf.v20180125.DescribeAttackWhiteRule", async function () {
     try {
-       const data = await client.UpdateProtectionModes({})
+       const data = await client.DescribeAttackWhiteRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

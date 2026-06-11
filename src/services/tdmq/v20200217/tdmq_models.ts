@@ -3084,73 +3084,79 @@ export interface DescribePublisherSummaryRequest {
  */
 export interface PulsarProClusterInfo {
   /**
-   * 集群Id。
+   * <p>集群Id。</p>
    */
   ClusterId?: string
   /**
-   * 集群名称。
+   * <p>集群名称。</p>
    */
   ClusterName?: string
   /**
-   * 说明信息。
+   * <p>说明信息。</p>
    */
   Remark?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 集群状态，0:创建中，1:正常，2:隔离
+   * <p>集群状态，0:创建中，1:正常，2:隔离</p>
    */
   Status?: number
   /**
-   * 集群版本
+   * <p>集群版本</p>
    */
   Version?: string
   /**
-   * 节点分布情况
+   * <p>节点分布情况</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NodeDistribution?: Array<InstanceNodeDistribution>
   /**
-   * 最大储存容量，单位：MB
+   * <p>最大储存容量，单位：MB</p>
    */
   MaxStorage?: number
   /**
-   * 是否可以修改路由
+   * <p>是否可以修改路由</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CanEditRoute?: boolean
   /**
-   * 代表是专业版和小规格专业版的不同计费规格PULSAR.P1固定存储PULSAR.P2弹性存储
+   * <p>代表是专业版和小规格专业版的不同计费规格PULSAR.P1固定存储PULSAR.P2弹性存储</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BillingLabelVersion?: string
   /**
-   * 实例到期时间戳，毫秒级精度。
+   * <p>实例到期时间戳，毫秒级精度。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime?: number
   /**
-   * 是否开启自动创建主题
-true就是开启了，false是关闭
+   * <p>是否开启自动创建主题<br>true就是开启了，false是关闭</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoCreateTopicStatus?: boolean
   /**
-   * 自动创建主题的默认分区数，如果没开启就是0
+   * <p>自动创建主题的默认分区数，如果没开启就是0</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DefaultPartitionNumber?: number
   /**
-   * 用户自定义的租户别名，如果没有，会复用专业集群 ID
-
+   * <p>用户自定义的租户别名，如果没有，会复用专业集群 ID</p>
    */
   Tenant?: string
   /**
-   * 删除保护开关标识
+   * <p>删除保护开关标识</p>
    */
   DeleteProtection?: number
+  /**
+   * <p>是否开启弹性tps</p><p>枚举值：</p><ul><li>0： 关闭</li><li>1： 开启</li></ul>
+   */
+  ElasticTpsEnabled?: number
+  /**
+   * <p>是否开启数据加密</p><p>枚举值：</p><ul><li>0： 关闭数据加密</li><li>1： 开启数据加密</li></ul>
+   */
+  EncryptionStatus?: number
 }
 
 /**
@@ -6923,56 +6929,59 @@ export interface SendRocketMQMessageResponse {
  */
 export interface PulsarProClusterSpecInfo {
   /**
-   * 集群规格名称
+   * <p>集群规格名称</p>
    */
   SpecName?: string
   /**
-   * 峰值tps
+   * <p>峰值tps</p>
    */
   MaxTps?: number
   /**
-   * 峰值带宽。单位：mbps
+   * <p>峰值带宽。单位：mbps</p>
    */
   MaxBandWidth?: number
   /**
-   * 最大命名空间个数
+   * <p>最大命名空间个数</p>
    */
   MaxNamespaces?: number
   /**
-   * 可以创建的最大主题数
+   * <p>可以创建的最大主题数</p>
    */
   MaxTopics?: number
   /**
-   * 规格外弹性TPS
+   * <p>规格外弹性TPS</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScalableTps?: number
   /**
-   * 32或者128
-当前集群topic的最大分区数
+   * <p>32或者128<br>当前集群topic的最大分区数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxPartitions?: number
   /**
-   * 最大延迟消息数量。0代表没有限制
+   * <p>最大延迟消息数量。0代表没有限制</p>
    */
   MaxDelayedMessages?: number
   /**
-   * 可以创建的最大主题分区数
+   * <p>可以创建的最大主题分区数</p>
    */
   MaxTopicsPartitioned?: number
   /**
-   * 单broker最大链接数
+   * <p>单broker最大链接数</p>
    */
   BrokerMaxConnections?: number
   /**
-   * 单IP最大链接数
+   * <p>单IP最大链接数</p>
    */
   BrokerMaxConnectionsPerIp?: number
   /**
-   * 弹性存储集群最大存储规格；固定存储该值为0
+   * <p>弹性存储集群最大存储规格；固定存储该值为0</p>
    */
   MaximumElasticStorage?: number
+  /**
+   * <p>当前集群可使用的全量TPS，包括弹性TPS</p>
+   */
+  TotalTps?: number
 }
 
 /**

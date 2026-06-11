@@ -1468,35 +1468,35 @@ export interface ContinueMigrateJobResponse {
  */
 export interface CreateMigrationServiceRequest {
   /**
-   * 源实例数据库类型，如mysql,redis,percona,mongodb,postgresql,sqlserver,mariadb,cynosdbmysql(表示TDSQL-C MySQL数据库)
+   * <p>源实例数据库类型，如mysql,redis,percona,mongodb,postgresql,sqlserver,mariadb,cynosdbmysql(表示TDSQL-C MySQL数据库)tdsqlmysql,keewidb,tdstore</p><p>枚举值：</p><ul><li>mysql： MySQL数据库</li></ul>
    */
   SrcDatabaseType: string
   /**
-   * 目标实例数据库类型，如mysql,redis,percona,mongodb,postgresql,sqlserver,mariadb,cynosdbmysql(表示TDSQL-C MySQL数据库)
+   * <p>目标实例数据库类型，如mysql,redis,percona,mongodb,postgresql,sqlserver,mariadb,cynosdbmysql(表示TDSQL-C MySQL数据库)tdsqlmysql,keewidb,tdstore,tendis</p><p>枚举值：</p><ul><li>mysql： MySQL数据库</li></ul>
    */
   DstDatabaseType: string
   /**
-   * 源实例地域，如：ap-guangzhou
+   * <p>源实例地域，如：ap-guangzhou</p>
    */
   SrcRegion: string
   /**
-   * 目标实例地域，如：ap-guangzhou。注意，目标地域必须和API请求地域保持一致。
+   * <p>目标实例地域，如：ap-guangzhou。注意，目标地域必须和API请求地域保持一致。</p>
    */
   DstRegion: string
   /**
-   * 实例规格，包括：small、medium、large、xlarge、2xlarge。当前未计费链路仅支持medium字段值。不同规格类型参考[计费概述](https://cloud.tencent.com/document/product/571/18736)
+   * <p>实例规格，包括：small、medium、large、xlarge、2xlarge。当前未计费链路仅支持medium字段值。不同规格类型参考<a href="https://cloud.tencent.com/document/product/571/18736">计费概述</a></p>
    */
   InstanceClass: string
   /**
-   * 购买数量，范围为[1,15]，默认为1
+   * <p>购买数量，范围为[1,15]，默认为1</p>
    */
   Count?: number
   /**
-   * 迁移服务名称，最大长度128
+   * <p>迁移服务名称，最大长度128</p>
    */
   JobName?: string
   /**
-   * 标签信息
+   * <p>标签信息</p>
    */
   Tags?: Array<TagItem>
 }
@@ -2733,7 +2733,7 @@ export interface ModifySubscribeObjectsResponse {
  */
 export interface CreateMigrationServiceResponse {
   /**
-   * 下单成功随机生成的迁移任务id列表，形如：dts-c1f6rs21
+   * <p>下单成功随机生成的迁移任务id列表，形如：dts-c1f6rs21</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobIds?: Array<string>

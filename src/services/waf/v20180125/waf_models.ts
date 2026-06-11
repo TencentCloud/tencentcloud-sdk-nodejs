@@ -86,17 +86,25 @@ export interface ModifyUserLevelResponse {
 }
 
 /**
- * 指定限流path和对应的method
+ * 事件变更内容
  */
-export interface PathItem {
+export interface ApiSecEventChange {
   /**
-   * 请求路径
+   * 变更人
    */
-  Path?: string
+  UserName: string
   /**
-   * 请求方法
+   * 变更的状态
    */
-  Method?: string
+  Mode: string
+  /**
+   * 时间戳
+   */
+  Timestamp: number
+  /**
+   * 备注
+   */
+  Remark?: string
 }
 
 /**
@@ -401,6 +409,20 @@ export interface DescribePeakValueResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 指定限流path和对应的method
+ */
+export interface PathItem {
+  /**
+   * 请求路径
+   */
+  Path?: string
+  /**
+   * 请求方法
+   */
+  Method?: string
 }
 
 /**
@@ -1694,6 +1716,48 @@ export interface ModifyObjectsRequest {
    * 对象列表，仅跨账号接入使用
    */
   Objects?: Array<Object>
+}
+
+/**
+ * 小程序安全资源信息
+ */
+export interface MiniPkg {
+  /**
+   * 资源id
+   */
+  ResourceIds?: string
+  /**
+   * 状态
+   */
+  Status?: number
+  /**
+   * 地域
+   */
+  Region?: number
+  /**
+   * 开始时间
+   */
+  BeginTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 购买数量
+   */
+  Count?: number
+  /**
+   * 续费标志
+   */
+  RenewFlag?: number
+  /**
+   * 计费项
+   */
+  BillingItem?: string
+  /**
+   * 小程序网关类型 1新网关；0老网关
+   */
+  GatewayType?: number
 }
 
 /**
@@ -4544,6 +4608,36 @@ export interface DescribeDomainsResponse {
 }
 
 /**
+ * DescribeQClawContentSecCheck请求参数结构体
+ */
+export interface DescribeQClawContentSecCheckRequest {
+  /**
+   * <p>服务id,使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则</p>
+   */
+  ServiceId: string
+  /**
+   * <p>要审核的内容</p>
+   */
+  Content?: ApiGuardContent
+  /**
+   * <p>标识用户的id，限速使用，不填，则限速会不生效</p>
+   */
+  UserId?: string
+  /**
+   * <p>会话id</p>
+   */
+  SessionId?: string
+  /**
+   * <p>toolcall工具名称</p>
+   */
+  ToolName?: string
+  /**
+   * <p>toolcall工具执行的参数</p>
+   */
+  ToolArgs?: string
+}
+
+/**
  * 动作策略的匹配规则实体
  */
 export interface BotActionScopeRuleEntry {
@@ -5774,6 +5868,44 @@ export interface DeleteBatchCustomWhiteRuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeApiSecEventList请求参数结构体
+ */
+export interface DescribeApiSecEventListRequest {
+  /**
+   * 域名
+   */
+  Domain: string
+  /**
+   * 是否查询数量，默认不查询，为true则进行查询
+   */
+  NeedTotalCount?: boolean
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<ApiDataFilter>
+  /**
+   * 查询当前的页
+   */
+  PageIndex?: number
+  /**
+   * 每一页显示多少条数据
+   */
+  PageSize?: number
+  /**
+   * 排序，第一个元素为排序的key，第二个元素为排序规则，其中1 为升序排列，而-1 是用于降序排列
+   */
+  Sort?: Array<string>
+  /**
+   * 查询开始时间
+   */
+  StartTs?: number
+  /**
+   * 查询结束时间
+   */
+  EndTs?: number
 }
 
 /**
@@ -7639,6 +7771,28 @@ export interface ApiSecExcludeRule {
 }
 
 /**
+ * ModifyProtectGroup请求参数结构体
+ */
+export interface ModifyProtectGroupRequest {
+  /**
+   * 防护对象组名称
+   */
+  Name: string
+  /**
+   * 防护对象组ID
+   */
+  GroupId: number
+  /**
+   * 防护对象组备注
+   */
+  Remark?: string
+  /**
+   * 防护对象组的应用范围
+   */
+  Domains?: Array<string>
+}
+
+/**
  * DestroyPostCKafkaFlow请求参数结构体
  */
 export interface DestroyPostCKafkaFlowRequest {
@@ -8097,45 +8251,53 @@ export interface DescribeFlowTrendRequest {
 export type DescribeWafAutoDenyStatusRequest = null
 
 /**
- * 小程序安全资源信息
+ * api安全攻击源详情
  */
-export interface MiniPkg {
+export interface ApiSecAttackSource {
   /**
-   * 资源id
+   * 攻击来源ip
    */
-  ResourceIds?: string
+  SrcIp?: string
   /**
-   * 状态
+   * 威胁等级
    */
-  Status?: number
+  EventLevel?: string
   /**
-   * 地域
+   * BOT标签
    */
-  Region?: number
+  BotLabel?: string
+  /**
+   * 变更时间
+   */
+  Timestamp?: number
+  /**
+   * 地理位置
+   */
+  City?: string
   /**
    * 开始时间
    */
-  BeginTime?: string
+  StartTime?: number
   /**
-   * 结束时间
+   * 关联事件数量
    */
-  EndTime?: string
+  EventCount?: number
   /**
-   * 购买数量
+   * 攻击数量
    */
-  Count?: number
+  AttackCount?: number
   /**
-   * 续费标志
+   * 缺失参数名，当事件类型是缺失参数名，缺失参数名和密码时，返回此字段
    */
-  RenewFlag?: number
+  MissUserName?: string
   /**
-   * 计费项
+   * 当是水平越权和垂直越权时，返回此字段
    */
-  BillingItem?: string
+  AttackDetail?: Array<string>
   /**
-   * 小程序网关类型 1新网关；0老网关
+   * 缺失密码参数，当事件类型是缺失参数名，缺失参数名和密码时，返回此字段
    */
-  GatewayType?: number
+  MissPassword?: string
 }
 
 /**
@@ -8750,33 +8912,29 @@ export interface BatchCustomRuleListItem {
 }
 
 /**
- * DescribeQClawContentSecCheck请求参数结构体
+ * DescribeApiSecEventDetail返回参数结构体
  */
-export interface DescribeQClawContentSecCheckRequest {
+export interface DescribeApiSecEventDetailResponse {
   /**
-   * <p>服务id,使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则</p>
+   * <p>事件描述信息</p>
    */
-  ServiceId: string
+  Description?: string
   /**
-   * <p>要审核的内容</p>
+   * <p>事件基本信息</p>
    */
-  Content?: ApiGuardContent
+  EventInfo?: ApiEvent
   /**
-   * <p>标识用户的id，限速使用，不填，则限速会不生效</p>
+   * <p>攻击源详情</p>
    */
-  UserId?: string
+  AttackSource?: Array<ApiSecAttackSource>
   /**
-   * <p>会话id</p>
+   * <p>变更历史</p>
    */
-  SessionId?: string
+  ChangeHistory?: Array<ApiSecEventChange>
   /**
-   * <p>toolcall工具名称</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ToolName?: string
-  /**
-   * <p>toolcall工具执行的参数</p>
-   */
-  ToolArgs?: string
+  RequestId?: string
 }
 
 /**
@@ -12795,6 +12953,26 @@ export interface UpsertCCRuleRequest {
 }
 
 /**
+ * DescribeApiSecEventList返回参数结构体
+ */
+export interface DescribeApiSecEventListResponse {
+  /**
+   * 事件列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<ApiEvent>
+  /**
+   * 事件总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Token有效性校验规则
  */
 export interface TokenRuleEntry {
@@ -12949,25 +13127,17 @@ export interface DescribeProtectionModesResponse {
 }
 
 /**
- * ModifyProtectGroup请求参数结构体
+ * DescribeApiSecEventDetail请求参数结构体
  */
-export interface ModifyProtectGroupRequest {
+export interface DescribeApiSecEventDetailRequest {
   /**
-   * 防护对象组名称
+   * <p>域名</p>
    */
-  Name: string
+  Domain?: string
   /**
-   * 防护对象组ID
+   * <p>API安全事件ID</p>
    */
-  GroupId: number
-  /**
-   * 防护对象组备注
-   */
-  Remark?: string
-  /**
-   * 防护对象组的应用范围
-   */
-  Domains?: Array<string>
+  EventId?: string
 }
 
 /**
@@ -15419,6 +15589,52 @@ export interface DescribeDomainVerifyResultRequest {
    * 实例id
    */
   InstanceID: string
+}
+
+/**
+ * APi事件列表
+ */
+export interface ApiEvent {
+  /**
+   * 事件id
+   */
+  EventId?: string
+  /**
+   * 事件类型
+   */
+  EventType?: string
+  /**
+   * 事件等级，100,200,300对应低中高
+   */
+  Level?: string
+  /**
+   * 域名
+   */
+  Domain?: string
+  /**
+   * 处置状态，1:新发现，2，确认中，3，已确认，4，已下线，5，已忽略
+   */
+  Mode?: string
+  /**
+   * 发现时间
+   */
+  StartTime?: number
+  /**
+   * 更新时间
+   */
+  UpdateTime?: number
+  /**
+   * 关联的api
+   */
+  ApiName?: string
+  /**
+   * 请求方式
+   */
+  Method?: string
+  /**
+   * 事件来源，custom标识自定义
+   */
+  Source?: string
 }
 
 /**

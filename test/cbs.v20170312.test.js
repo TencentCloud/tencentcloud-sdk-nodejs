@@ -98,9 +98,59 @@ it("cbs.v20170312.DescribeAutoSnapshotPolicies", async function () {
     }
 })
 
+it("cbs.v20170312.RenewRemoteDisk", async function () {
+    try {
+       const data = await client.RenewRemoteDisk({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cbs.v20170312.TerminateRemoteDisks", async function () {
+    try {
+       const data = await client.TerminateRemoteDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cbs.v20170312.SwitchParameterRenewRemoteDisks", async function () {
+    try {
+       const data = await client.SwitchParameterRenewRemoteDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cbs.v20170312.CreateRemoteDisks", async function () {
+    try {
+       const data = await client.CreateRemoteDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cbs.v20170312.AttachDisks", async function () {
     try {
        const data = await client.AttachDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cbs.v20170312.DescribeRemoteDisks", async function () {
+    try {
+       const data = await client.DescribeRemoteDisks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,6 +178,16 @@ it("cbs.v20170312.CreateSnapshotGroup", async function () {
     }
 })
 
+it("cbs.v20170312.SwitchParameterCreateRemoteDisks", async function () {
+    try {
+       const data = await client.SwitchParameterCreateRemoteDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cbs.v20170312.DeleteSnapshotGroup", async function () {
     try {
        const data = await client.DeleteSnapshotGroup({})
@@ -141,6 +201,16 @@ it("cbs.v20170312.DeleteSnapshotGroup", async function () {
 it("cbs.v20170312.DeleteDiskBackups", async function () {
     try {
        const data = await client.DeleteDiskBackups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cbs.v20170312.InquirePriceCreateRemoteDisks", async function () {
+    try {
+       const data = await client.InquirePriceCreateRemoteDisks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,6 +348,16 @@ it("cbs.v20170312.DeleteSnapshots", async function () {
     }
 })
 
+it("cbs.v20170312.DescribeRemoteDisksDeniedActions", async function () {
+    try {
+       const data = await client.DescribeRemoteDisksDeniedActions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cbs.v20170312.ModifySnapshotAttribute", async function () {
     try {
        const data = await client.ModifySnapshotAttribute({})
@@ -288,9 +368,39 @@ it("cbs.v20170312.ModifySnapshotAttribute", async function () {
     }
 })
 
+it("cbs.v20170312.ModifyRemoteDiskAttributes", async function () {
+    try {
+       const data = await client.ModifyRemoteDiskAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cbs.v20170312.InquirePriceRenewRemoteDisks", async function () {
+    try {
+       const data = await client.InquirePriceRenewRemoteDisks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cbs.v20170312.DescribeDiskAssociatedAutoSnapshotPolicy", async function () {
     try {
        const data = await client.DescribeDiskAssociatedAutoSnapshotPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cbs.v20170312.DetachRemoteDisks", async function () {
+    try {
+       const data = await client.DetachRemoteDisks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -311,6 +421,16 @@ it("cbs.v20170312.BindAutoSnapshotPolicy", async function () {
 it("cbs.v20170312.DescribeSnapshots", async function () {
     try {
        const data = await client.DescribeSnapshots({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cbs.v20170312.DescribeRemoteDiskConfigQuota", async function () {
+    try {
+       const data = await client.DescribeRemoteDiskConfigQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -451,6 +571,16 @@ it("cbs.v20170312.DetachDisks", async function () {
 it("cbs.v20170312.GetSnapOverview", async function () {
     try {
        const data = await client.GetSnapOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cbs.v20170312.AttachRemoteDisks", async function () {
+    try {
+       const data = await client.AttachRemoteDisks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -804,6 +804,16 @@ export interface DescribeDspmRiskStrategyResponse {
 }
 
 /**
+ * DeleteIaCFile返回参数结构体
+ */
+export interface DeleteIaCFileResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Dspm 账号统计数
  */
 export interface DspmAccountCount {
@@ -1265,17 +1275,21 @@ export interface VULViewVULRiskData {
 }
 
 /**
- * RetryDspmExportLog请求参数结构体
+ * DescribeIaCTokenList返回参数结构体
  */
-export interface RetryDspmExportLogRequest {
+export interface DescribeIaCTokenListResponse {
   /**
-   * 集团账号的成员id
+   * <p>列表</p>
    */
-  MemberId?: Array<string>
+  List?: Array<CICDToken>
   /**
-   * 任务ID
+   * <p>总数</p>
    */
-  TaskId?: number
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1674,6 +1688,20 @@ export interface OrganizationInfo {
 }
 
 /**
+ * 产品日志条数
+ */
+export interface TagCount {
+  /**
+   * 产品名
+   */
+  Name?: string
+  /**
+   * 日志条数
+   */
+  Count?: number
+}
+
+/**
  * DescribeVulRiskList返回参数结构体
  */
 export interface DescribeVulRiskListResponse {
@@ -1860,77 +1888,81 @@ export interface DeleteDspmApplyOrderRequest {
  */
 export interface SubUserInfo {
   /**
-   * 主键ID，无业务意义仅作为唯一键
+   * <p>主键ID，无业务意义仅作为唯一键</p>
    */
   ID?: number
   /**
-   * 子账号Appid
+   * <p>子账号Appid</p>
    */
   AppID?: string
   /**
-   * 子账号UIn
+   * <p>子账号UIn</p>
    */
   Uin?: string
   /**
-   * 子账号名称
+   * <p>子账号名称</p>
    */
   NickName?: string
   /**
-   * 主账号Appid
+   * <p>主账号Appid</p>
    */
   OwnerAppID?: string
   /**
-   * 主账号Uin
+   * <p>主账号Uin</p>
    */
   OwnerUin?: string
   /**
-   * 主账号名称
+   * <p>主账号名称</p>
    */
   OwnerNickName?: string
   /**
-   * 所属主账号memberId信息
+   * <p>所属主账号memberId信息</p>
    */
   OwnerMemberID?: string
   /**
-   * 账户类型，0为腾讯云账户，1为AWS账户
+   * <p>账户类型，0为腾讯云账户，1为AWS账户</p>
    */
   CloudType?: number
   /**
-   * 可访问服务数量
+   * <p>可访问服务数量</p>
    */
   ServiceCount?: number
   /**
-   * 可访问接口数量
+   * <p>可访问接口数量</p>
    */
   InterfaceCount?: number
   /**
-   * 可访问资源数量
+   * <p>可访问资源数量</p>
    */
   AssetCount?: number
   /**
-   * 访问/行为日志数量
+   * <p>访问/行为日志数量</p>
    */
   LogCount?: number
   /**
-   * 权限配置风险
+   * <p>权限配置风险</p>
    */
   ConfigRiskCount?: number
   /**
-   * 危险行为告警
+   * <p>危险行为告警</p>
    */
   ActionRiskCount?: number
   /**
-   * 是否接入操作审计日志
+   * <p>是否接入操作审计日志</p>
    */
   IsAccessCloudAudit?: boolean
   /**
-   * 是否配置风险的安全体检
+   * <p>是否配置风险的安全体检</p>
    */
   IsAccessCheck?: boolean
   /**
-   * 是否配置用户行为管理策略
+   * <p>是否配置用户行为管理策略</p>
    */
   IsAccessUeba?: boolean
+  /**
+   * <p>创建时间（Unix时间戳）</p>
+   */
+  CreateTime?: number
 }
 
 /**
@@ -2113,6 +2145,20 @@ export interface DspmIdentifyAssetStatistic {
    * 关联资产普通成员数。
    */
   MemberCount?: number
+}
+
+/**
+ * DescribeIaCFileList请求参数结构体
+ */
+export interface DescribeIaCFileListRequest {
+  /**
+   * <p>过滤条件</p>
+   */
+  Filter?: Filter
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -2502,6 +2548,20 @@ export interface DescribeCosIpInvokeLogRequest {
 }
 
 /**
+ * DescribeExposeAssetCategory返回参数结构体
+ */
+export interface DescribeExposeAssetCategoryResponse {
+  /**
+   * 云边界分析资产分类列表
+   */
+  ExposeAssetTypeList?: Array<ExposeAssetTypeItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDspmIdentifyInfoList请求参数结构体
  */
 export interface DescribeDspmIdentifyInfoListRequest {
@@ -2767,21 +2827,21 @@ export interface DeleteDomainAndIpResponse {
 }
 
 /**
- * DescribeDspmRiskDetail请求参数结构体
+ * CreateDomainAndIp请求参数结构体
  */
-export interface DescribeDspmRiskDetailRequest {
+export interface CreateDomainAndIpRequest {
+  /**
+   * 公网IP/域名
+   */
+  Content: Array<string>
   /**
    * 集团账号的成员id
    */
   MemberId?: Array<string>
   /**
-   * 过滤器
+   * 资产标签
    */
-  Filter?: Filter
-  /**
-   * 风险id
-   */
-  RiskId?: string
+  Tags?: Array<AssetTag>
 }
 
 /**
@@ -3133,17 +3193,21 @@ export interface DescribeHighBaseLineRiskListResponse {
 }
 
 /**
- * DescribeExposeAssetCategory返回参数结构体
+ * DescribeDspmRiskDetail请求参数结构体
  */
-export interface DescribeExposeAssetCategoryResponse {
+export interface DescribeDspmRiskDetailRequest {
   /**
-   * 云边界分析资产分类列表
+   * 集团账号的成员id
    */
-  ExposeAssetTypeList?: Array<ExposeAssetTypeItem>
+  MemberId?: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 过滤器
    */
-  RequestId?: string
+  Filter?: Filter
+  /**
+   * 风险id
+   */
+  RiskId?: string
 }
 
 /**
@@ -3428,6 +3492,32 @@ export interface DescribeDspmRiskStrategyGroupRequest {
    * 过滤器
    */
   Filter?: Filter
+}
+
+/**
+ * IaC检测文件风险
+ */
+export interface IaCFileRisk {
+  /**
+   * <p>风险等级(0:低危,1:中危,2:高危,3:严重)</p>
+   */
+  Level?: number
+  /**
+   * <p>风险所在行数</p>
+   */
+  Line?: number
+  /**
+   * <p>规则名称</p>
+   */
+  RuleName?: string
+  /**
+   * <p>问题描述</p>
+   */
+  Description?: string
+  /**
+   * <p>修复建议</p>
+   */
+  Suggestion?: string
 }
 
 /**
@@ -3884,6 +3974,20 @@ export interface ModifyCosMarkInfoResponse {
 }
 
 /**
+ * 命中规则项
+ */
+export interface SkillScanRuleHit {
+  /**
+   * 融合规则编号（9xxxx），可与 RuleCatalog 交叉引用
+   */
+  RuleID?: string
+  /**
+   * 当前命中规则的具体发现描述，包含文件位置、行为特征、风险点等信息
+   */
+  Description?: string
+}
+
+/**
  * DescribeOrganizationUserInfo请求参数结构体
  */
 export interface DescribeOrganizationUserInfoRequest {
@@ -4052,33 +4156,17 @@ export interface CreateDspmIdentifyInfoListExportJobRequest {
 }
 
 /**
- * DescribeRiskCenterPortViewPortRiskList返回参数结构体
+ * CreateIaCFileExportJob请求参数结构体
  */
-export interface DescribeRiskCenterPortViewPortRiskListResponse {
+export interface CreateIaCFileExportJobRequest {
   /**
-   * 总条数
+   * <p>过滤条件</p>
    */
-  TotalCount?: number
+  Filter?: Filter
   /**
-   * 端口视角的端口风险列表
+   * 集团账号的成员id
    */
-  Data?: Array<PortViewPortRisk>
-  /**
-   * 危险等级列表
-   */
-  LevelLists?: Array<FilterDataObject>
-  /**
-   * 处置建议列表
-   */
-  SuggestionLists?: Array<FilterDataObject>
-  /**
-   * 来源列表
-   */
-  FromLists?: Array<FilterDataObject>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  MemberId?: Array<string>
 }
 
 /**
@@ -4322,89 +4410,17 @@ export interface PortRiskAdvanceCFGParamItem {
 }
 
 /**
- * 漏洞风险高级配置列表
+ * CreateIaCAccessToken请求参数结构体
  */
-export interface VULRiskAdvanceCFGList {
+export interface CreateIaCAccessTokenRequest {
   /**
-   * 风险ID
+   * <p>CI/CD名称</p>
    */
-  RiskId?: string
+  Name: string
   /**
-   * 漏洞名称
+   * <p>扫描结果存储时长(30/60/90/120/150/180天)</p>
    */
-  VULName?: string
-  /**
-   * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
-   */
-  RiskLevel?: string
-  /**
-   * 识别来源
-   */
-  CheckFrom?: string
-  /**
-   * 是否启用，1-启用，0-禁用
-   */
-  Enable?: number
-  /**
-   * 风险类型
-   */
-  VULType?: string
-  /**
-   * 影响版本
-   */
-  ImpactVersion?: string
-  /**
-   * CVE
-   */
-  CVE?: string
-  /**
-   * 漏洞标签
-   */
-  VULTag?: Array<string>
-  /**
-   * 修复方式
-   */
-  FixMethod?: Array<string>
-  /**
-   * 披露时间
-   */
-  ReleaseTime?: string
-  /**
-   * 应急漏洞类型，1-应急漏洞，0-非应急漏洞
-   */
-  EMGCVulType?: number
-  /**
-   * 漏洞描述
-   */
-  VULDescribe?: string
-  /**
-   * 影响组件
-   */
-  ImpactComponent?: string
-  /**
-   * 漏洞Payload
-   */
-  Payload?: string
-  /**
-   * 技术参考
-   */
-  References?: string
-  /**
-   * cvss评分
-   */
-  CVSS?: string
-  /**
-   * 攻击热度
-   */
-  AttackHeat?: string
-  /**
-   * 安全产品支持情况
-   */
-  ServiceSupport?: Array<ServiceSupport>
-  /**
-   * 最新检测时间
-   */
-  RecentScanTime?: string
+  Period: number
 }
 
 /**
@@ -4495,6 +4511,24 @@ export interface DescribeDspmDictionaryListResponse {
    * 结果集
    */
   DataSet?: Array<DspmDictionary>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeIaCFileList返回参数结构体
+ */
+export interface DescribeIaCFileListResponse {
+  /**
+   * <p>列表</p>
+   */
+  List?: Array<IaCFile>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4629,6 +4663,20 @@ export interface ModifyDspmPersonalIdentifyRequest {
    * 备注
    */
   Remark?: string
+}
+
+/**
+ * CreateIaCAccessToken返回参数结构体
+ */
+export interface CreateIaCAccessTokenResponse {
+  /**
+   * <p>接入Token</p>
+   */
+  Token?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4949,6 +4997,20 @@ export interface TableField {
 }
 
 /**
+ * DescribeIaCFileReport请求参数结构体
+ */
+export interface DescribeIaCFileReportRequest {
+  /**
+   * <p>资产ID</p>
+   */
+  AssetId: number
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+}
+
+/**
  * ModifyDspmAssetAccountPrivileges返回参数结构体
  */
 export interface ModifyDspmAssetAccountPrivilegesResponse {
@@ -4985,25 +5047,41 @@ export interface ModifyDspmWhitelistStrategyRequest {
 }
 
 /**
- * DescribeUebaRule返回参数结构体
+ * CI/CD接入Token
  */
-export interface DescribeUebaRuleResponse {
+export interface CICDToken {
   /**
-   * 总数
+   * <p>ID</p>
    */
-  TotalCount?: number
+  Id?: number
   /**
-   * 策略列表
+   * <p>appid</p>
    */
-  Data?: Array<UebaRule>
+  AppId?: number
   /**
-   * 自定义策略对应的告警类别枚举
+   * <p>CI/CD名称</p>
    */
-  AlterType?: Array<FilterDataObject>
+  Name?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>用于接入的Token</p>
    */
-  RequestId?: string
+  Token?: string
+  /**
+   * <p>扫描结果存储时长</p>
+   */
+  Period?: number
+  /**
+   * <p>已扫描文件</p>
+   */
+  FileCnt?: number
+  /**
+   * <p>最近扫描状态</p>
+   */
+  LastScanStatus?: string
+  /**
+   * <p>最近扫描时间</p>
+   */
+  LastScanTime?: string
 }
 
 /**
@@ -5236,9 +5314,13 @@ export interface CosBucketBillingInfo {
 }
 
 /**
- * DeleteDspmAssetAccount返回参数结构体
+ * CreateIaCFileExportJob返回参数结构体
  */
-export interface DeleteDspmAssetAccountResponse {
+export interface CreateIaCFileExportJobResponse {
+  /**
+   * <p>任务ID</p>
+   */
+  JobID?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6359,6 +6441,20 @@ export interface DescribeCosAlarmTrendDataRequest {
    * 需要查看多久的时间
    */
   LastDays?: number
+}
+
+/**
+ * RetryDspmExportLog请求参数结构体
+ */
+export interface RetryDspmExportLogRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 任务ID
+   */
+  TaskId?: number
 }
 
 /**
@@ -9433,6 +9529,16 @@ export interface DescribeCosRoleAccessPermissionRequest {
 }
 
 /**
+ * ModifyDspmRiskStrategy返回参数结构体
+ */
+export interface ModifyDspmRiskStrategyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCosAuditAppIdList返回参数结构体
  */
 export interface DescribeCosAuditAppIdListResponse {
@@ -10269,17 +10375,17 @@ export interface CheckViewRiskItem {
 }
 
 /**
- * 命中规则项
+ * 键值对（整数）
  */
-export interface SkillScanRuleHit {
+export interface KeyValueInt {
   /**
-   * 融合规则编号（9xxxx），可与 RuleCatalog 交叉引用
+   * <p>键</p>
    */
-  RuleID?: string
+  Key?: number
   /**
-   * 当前命中规则的具体发现描述，包含文件位置、行为特征、风险点等信息
+   * <p>值</p>
    */
-  Description?: string
+  Value?: number
 }
 
 /**
@@ -10390,6 +10496,24 @@ export interface CommandPluginState {
    * <p>插件安装状态（上层聚合）<br>枚举值：<br>NONE：未安装<br>INSTALLING：安装中<br>INSTALLED：已安装<br>INSTALL_FAIL：安装失败</p>
    */
   InstallStatus?: string
+}
+
+/**
+ * DescribeIaCFileOverview返回参数结构体
+ */
+export interface DescribeIaCFileOverviewResponse {
+  /**
+   * <p>文件数量</p>
+   */
+  TotalFile?: number
+  /**
+   * <p>风险文件数量(1:Dockerfile,2:Terraform,3:KubernetesYaml)</p>
+   */
+  RiskFile?: Array<KeyValueInt>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10553,6 +10677,16 @@ export interface BackupLog {
 }
 
 /**
+ * CreateIaCFileReScanTask返回参数结构体
+ */
+export interface CreateIaCFileReScanTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClusterAssets请求参数结构体
  */
 export interface DescribeClusterAssetsRequest {
@@ -10644,6 +10778,32 @@ export interface DescribeNICAssetsRequest {
    * 过滤参数
    */
   Filter?: Filter
+}
+
+/**
+ * DescribeIaCFileReport返回参数结构体
+ */
+export interface DescribeIaCFileReportResponse {
+  /**
+   * <p>检测文件</p>
+   */
+  File?: string
+  /**
+   * <p>检测状态(0:待扫描,1:检测中,2:已完成,3:检测异常)</p>
+   */
+  Status?: number
+  /**
+   * <p>检测时间</p>
+   */
+  ScanTime?: string
+  /**
+   * <p>风险列表</p>
+   */
+  Risks?: Array<IaCFileRisk>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10940,6 +11100,16 @@ export interface DescribeDspmPersonalIdentifyListResponse {
 }
 
 /**
+ * DeleteIaCAccessToken返回参数结构体
+ */
+export interface DeleteIaCAccessTokenResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 位置信息
  */
 export interface Location {
@@ -11024,6 +11194,16 @@ export interface CreateAccessKeySyncTaskResponse {
    * 错误信息
    */
   Msg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyIaCTokenPeriod返回参数结构体
+ */
+export interface ModifyIaCTokenPeriodResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11537,6 +11717,20 @@ export interface UpdateAlertStatusListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeIaCTokenList请求参数结构体
+ */
+export interface DescribeIaCTokenListRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>过滤条件</p>
+   */
+  Filter?: Filter
 }
 
 /**
@@ -12463,6 +12657,92 @@ export interface CreateDspmExportTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 漏洞风险高级配置列表
+ */
+export interface VULRiskAdvanceCFGList {
+  /**
+   * 风险ID
+   */
+  RiskId?: string
+  /**
+   * 漏洞名称
+   */
+  VULName?: string
+  /**
+   * 风险等级，low-低危，high-高危，middle-中危，info-提示，extreme-严重。
+   */
+  RiskLevel?: string
+  /**
+   * 识别来源
+   */
+  CheckFrom?: string
+  /**
+   * 是否启用，1-启用，0-禁用
+   */
+  Enable?: number
+  /**
+   * 风险类型
+   */
+  VULType?: string
+  /**
+   * 影响版本
+   */
+  ImpactVersion?: string
+  /**
+   * CVE
+   */
+  CVE?: string
+  /**
+   * 漏洞标签
+   */
+  VULTag?: Array<string>
+  /**
+   * 修复方式
+   */
+  FixMethod?: Array<string>
+  /**
+   * 披露时间
+   */
+  ReleaseTime?: string
+  /**
+   * 应急漏洞类型，1-应急漏洞，0-非应急漏洞
+   */
+  EMGCVulType?: number
+  /**
+   * 漏洞描述
+   */
+  VULDescribe?: string
+  /**
+   * 影响组件
+   */
+  ImpactComponent?: string
+  /**
+   * 漏洞Payload
+   */
+  Payload?: string
+  /**
+   * 技术参考
+   */
+  References?: string
+  /**
+   * cvss评分
+   */
+  CVSS?: string
+  /**
+   * 攻击热度
+   */
+  AttackHeat?: string
+  /**
+   * 安全产品支持情况
+   */
+  ServiceSupport?: Array<ServiceSupport>
+  /**
+   * 最新检测时间
+   */
+  RecentScanTime?: string
 }
 
 /**
@@ -13787,6 +14067,16 @@ export interface DescribeRiskCenterAssetViewVULRiskListRequest {
 }
 
 /**
+ * DeleteIaCFile请求参数结构体
+ */
+export interface DeleteIaCFileRequest {
+  /**
+   * <p>删除ID列表</p>
+   */
+  Id: Array<number | bigint>
+}
+
+/**
  * DeleteDspmExportTask返回参数结构体
  */
 export interface DeleteDspmExportTaskResponse {
@@ -14761,24 +15051,6 @@ export interface BugInfoDetail {
    * 漏洞子类别
    */
   SubCategory?: string
-}
-
-/**
- * CreateDomainAndIp请求参数结构体
- */
-export interface CreateDomainAndIpRequest {
-  /**
-   * 公网IP/域名
-   */
-  Content: Array<string>
-  /**
-   * 集团账号的成员id
-   */
-  MemberId?: Array<string>
-  /**
-   * 资产标签
-   */
-  Tags?: Array<AssetTag>
 }
 
 /**
@@ -16212,6 +16484,60 @@ export interface DbAssetInfo {
 }
 
 /**
+ * IaC检测文件
+ */
+export interface IaCFile {
+  /**
+   * <p>ID</p>
+   */
+  Id?: number
+  /**
+   * <p>appid</p>
+   */
+  AppId?: number
+  /**
+   * <p>文件ID</p>
+   */
+  FileId?: string
+  /**
+   * <p>文件名称</p>
+   */
+  FileName?: string
+  /**
+   * <p>CI/CD名称</p>
+   */
+  CICDName?: string
+  /**
+   * <p>文件路径</p>
+   */
+  FilePath?: string
+  /**
+   * <p>文件类型(1:Dockerfile,2:Terraform,3:KubernetesYaml)</p>
+   */
+  FileType?: number
+  /**
+   * <p>风险总计数量</p>
+   */
+  RiskTotalCnt?: number
+  /**
+   * <p>风险等级数量(0:低危,1:中危,2:高危,3:严重)</p>
+   */
+  RiskLevelCnt?: Array<KeyValueInt>
+  /**
+   * <p>扫描时间</p>
+   */
+  ScanTime?: string
+  /**
+   * <p>检测状态(0:待扫描,1:检测中,2:已完成,3:检测异常)</p>
+   */
+  Status?: number
+  /**
+   * <p>扫描失败类型(0:无失败, 1:检测超时, 2:文件格式解析失败, 3:检测失败)</p>
+   */
+  FailType?: number
+}
+
+/**
  * DescribeCosAccessPermissions请求参数结构体
  */
 export interface DescribeCosAccessPermissionsRequest {
@@ -16353,119 +16679,113 @@ export interface DspmIdentifyCategoryDetail {
  */
 export interface AccessKeyAlarm {
   /**
-   * 告警名称
+   * <p>告警名称</p>
    */
   Name?: string
   /**
-   * 告警等级
-0-无效 1-提示 2-低危 3-中危 4-高危 5-严重
+   * <p>告警等级<br>0-无效 1-提示 2-低危 3-中危 4-高危 5-严重</p>
    */
   Level?: number
   /**
-   * 告警记录ID
+   * <p>告警记录ID</p>
    */
   ID?: number
   /**
-   * 告警规则ID
+   * <p>告警规则ID</p>
    */
   AlarmRuleID?: number
   /**
-   * 告警类型
-0 异常调用
-1 泄漏监测
+   * <p>告警类型<br>0 异常调用<br>1 泄漏监测</p>
    */
   AlarmType?: number
   /**
-   * 访问密钥
+   * <p>访问密钥</p>
    */
   AccessKey?: string
   /**
-   * 访问密钥ID
+   * <p>访问密钥ID</p>
    */
   AccessKeyID?: number
   /**
-   * 访问密钥备注
+   * <p>访问密钥备注</p>
    */
   AccessKeyRemark?: string
   /**
-   * 最后告警时间
+   * <p>最后告警时间</p>
    */
   LastAlarmTime?: string
   /**
-   * 告警状态
-0-未处理 1-已处理 2-已忽略
+   * <p>告警状态<br>0-未处理 1-已处理 2-已忽略</p>
    */
   Status?: number
   /**
-   * 聚合日期
+   * <p>聚合日期</p>
    */
   Date?: string
   /**
-   * 告警标签
+   * <p>告警标签</p>
    */
   Tag?: Array<string>
   /**
-   * 所属主账号Uin
+   * <p>所属主账号Uin</p>
    */
   Uin?: string
   /**
-   * 所属主账号昵称
+   * <p>所属主账号昵称</p>
    */
   Nickname?: string
   /**
-   * 所属子账号Uin
+   * <p>所属子账号Uin</p>
    */
   SubUin?: string
   /**
-   * 所属子账号昵称
+   * <p>所属子账号昵称</p>
    */
   SubNickname?: string
   /**
-   * 账号类型
-0 主账号AK 1 子账号AK 2 临时密钥
+   * <p>账号类型<br>0 主账号AK 1 子账号AK 2 临时密钥</p>
    */
   Type?: number
   /**
-   * 所属appid
+   * <p>所属appid</p>
    */
   AppID?: number
   /**
-   * 泄漏证据
+   * <p>泄漏证据</p>
    */
   LeakEvidence?: Array<string>
   /**
-   * 是否支持编辑信任账号
+   * <p>是否支持编辑信任账号</p>
    */
   IsSupportEditWhiteAccount?: boolean
   /**
-   * 告警证据
+   * <p>告警证据</p>
    */
   Evidence?: string
   /**
-   * 告警规则标识
+   * <p>告警规则标识</p>
    */
   RuleKey?: string
   /**
-   * 云厂商类型 0:腾讯云 1:亚马逊云 2:微软云 3:谷歌云 4:阿里云 5:华为云
+   * <p>云厂商类型 0:腾讯云 1:亚马逊云 2:微软云 3:谷歌云 4:阿里云 5:华为云</p>
    */
   CloudType?: number
   /**
-   * 告警AI分析状态
--1 分析失败
-0 未分析
-1 分析中
-2 分析成功，真实告警
-3 分析成功，可疑告警
+   * <p>告警AI分析状态<br>-1 分析失败<br>0 未分析<br>1 分析中<br>2 分析成功，真实告警<br>3 分析成功，可疑告警</p>
    */
   AIStatus?: number
   /**
-   * 首次告警时间戳（秒级）
+   * <p>首次告警时间戳（秒级）</p>
    */
   FirstAlarmTimestamp?: number
   /**
-   * 最后告警时间戳（秒级）
+   * <p>最后告警时间戳（秒级）</p>
    */
   LastAlarmTimestamp?: number
+  /**
+   * <p>ai分析失败描述，未失败为空字符串</p>
+   */
+  AIFailedReason?: string
 }
 
 /**
@@ -16902,13 +17222,17 @@ export interface CFGViewCFGRisk {
 }
 
 /**
- * ModifyDspmRiskStrategy返回参数结构体
+ * CreateIaCFileReScanTask请求参数结构体
  */
-export interface ModifyDspmRiskStrategyResponse {
+export interface CreateIaCFileReScanTaskRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>文件ID</p>
    */
-  RequestId?: string
+  Id: number
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -17610,6 +17934,20 @@ export interface DescribeVULListResponse {
 }
 
 /**
+ * ModifyIaCTokenPeriod请求参数结构体
+ */
+export interface ModifyIaCTokenPeriodRequest {
+  /**
+   * <p>ID</p>
+   */
+  Id: number
+  /**
+   * <p>扫描结果存储周期</p>
+   */
+  Period: number
+}
+
+/**
  * 相关攻击事件结构
  */
 export interface RelatedEvent {
@@ -18068,6 +18406,36 @@ export interface CallRecord {
 }
 
 /**
+ * DescribeRiskCenterPortViewPortRiskList返回参数结构体
+ */
+export interface DescribeRiskCenterPortViewPortRiskListResponse {
+  /**
+   * 总条数
+   */
+  TotalCount?: number
+  /**
+   * 端口视角的端口风险列表
+   */
+  Data?: Array<PortViewPortRisk>
+  /**
+   * 危险等级列表
+   */
+  LevelLists?: Array<FilterDataObject>
+  /**
+   * 处置建议列表
+   */
+  SuggestionLists?: Array<FilterDataObject>
+  /**
+   * 来源列表
+   */
+  FromLists?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDspmRiskStrategy请求参数结构体
  */
 export interface DescribeDspmRiskStrategyRequest {
@@ -18468,17 +18836,25 @@ export interface DescribeCSIPRiskStatisticsRequest {
 }
 
 /**
- * 产品日志条数
+ * DescribeUebaRule返回参数结构体
  */
-export interface TagCount {
+export interface DescribeUebaRuleResponse {
   /**
-   * 产品名
+   * 总数
    */
-  Name?: string
+  TotalCount?: number
   /**
-   * 日志条数
+   * 策略列表
    */
-  Count?: number
+  Data?: Array<UebaRule>
+  /**
+   * 自定义策略对应的告警类别枚举
+   */
+  AlterType?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -18896,6 +19272,34 @@ export interface DescribeListenerListRequest {
 }
 
 /**
+ * DescribeIaCFileOverview请求参数结构体
+ */
+export interface DescribeIaCFileOverviewRequest {
+  /**
+   * <p>开始时间</p>
+   */
+  StartTime?: string
+  /**
+   * <p>结束时间</p>
+   */
+  EndTime?: string
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+}
+
+/**
+ * DeleteIaCAccessToken请求参数结构体
+ */
+export interface DeleteIaCAccessTokenRequest {
+  /**
+   * <p>删除ID列表</p>
+   */
+  Id: Array<number | bigint>
+}
+
+/**
  * DeleteRiskScanTask返回参数结构体
  */
 export interface DeleteRiskScanTaskResponse {
@@ -19254,6 +19658,16 @@ export interface DescribeRiskCenterAssetViewPortRiskListResponse {
    * 来源列表
    */
   FromLists?: Array<FilterDataObject>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteDspmAssetAccount返回参数结构体
+ */
+export interface DeleteDspmAssetAccountResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

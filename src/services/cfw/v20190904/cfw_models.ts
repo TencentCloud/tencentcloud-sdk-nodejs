@@ -228,31 +228,31 @@ export interface DescribeNatFwInstanceWithRegionResponse {
  */
 export interface DescribeFwGroupInstanceInfoRequest {
   /**
-   * 每页条数
+   * <p>每页条数</p>
    */
   Limit: number
   /**
-   * 偏移值
+   * <p>偏移值</p>
    */
   Offset: number
   /**
-   * 过滤条件组合
+   * <p>过滤条件组合</p>
    */
   Filters?: Array<CommonFilter>
   /**
-   * 检索的起始时间，可不传
+   * <p>检索的起始时间，可不传</p>
    */
   StartTime?: string
   /**
-   * 检索的截止时间，可不传
+   * <p>检索的截止时间，可不传</p>
    */
   EndTime?: string
   /**
-   * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+   * <p>desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值</p>
    */
   Order?: string
   /**
-   * 排序所用到的字段
+   * <p>排序所用到的字段</p>
    */
   By?: string
 }
@@ -522,29 +522,33 @@ export interface ModifyClusterVpcFwSwitchResponse {
  */
 export interface ExpandCfwVerticalRequest {
   /**
-   * nat：nat防火墙，ew：东西向防火墙
+   * <p>nat：nat防火墙，ew：东西向防火墙</p>
    */
   FwType: string
   /**
-   * 带宽值
+   * <p>带宽值</p>
    */
   Width: number
   /**
-   * 防火墙实例id
+   * <p>防火墙实例id</p>
    */
   CfwInstance?: string
   /**
-   * 弹性开关 1打开 0 关闭
+   * <p>弹性开关 1打开 0 关闭</p>
    */
   ElasticSwitch?: number
   /**
-   * 弹性带宽上限，单位Mbps
+   * <p>弹性带宽上限，单位Mbps</p>
    */
   ElasticBandwidth?: number
   /**
-   * 按量计费标签
+   * <p>按量计费标签</p>
    */
   Tags?: Array<TagInfo>
+  /**
+   * <p>按流量弹性开关</p><p>取值范围：[0, 1]</p><p>默认值：0</p>
+   */
+  ElasticTrafficSwitch?: number
 }
 
 /**
@@ -1919,6 +1923,10 @@ export interface DeleteBlockIgnoreRuleNewRequest {
    */
   DeleteAll: number
   /**
+   * blocklist 封禁列表 whitelist 白名单列表
+   */
+  ShowType: string
+  /**
    * 规则列表
    */
   Rules?: Array<BanAndAllowRuleDel>
@@ -1927,10 +1935,6 @@ export interface DeleteBlockIgnoreRuleNewRequest {
 主要用于全部删除时区分列表类型
    */
   RuleType?: number
-  /**
-   * blocklist 封禁列表 whitelist 白名单列表
-   */
-  ShowType?: string
 }
 
 /**
@@ -4730,127 +4734,129 @@ export interface DescribeRuleOverviewResponse {
  */
 export interface VpcFwInstanceInfo {
   /**
-   * VPC防火墙实例名称
+   * <p>VPC防火墙实例名称</p>
    */
   FwInsName: string
   /**
-   * VPC防火墙实例ID
+   * <p>VPC防火墙实例ID</p>
    */
   FwInsId: string
   /**
-   * VPC防火墙实例模式 0: 旧VPC模式防火墙 1: CCN模式防火墙
+   * <p>VPC防火墙实例模式 0: 旧VPC模式防火墙 1: CCN模式防火墙</p>
    */
   FwMode: number
   /**
-   * VPC防火墙接入网络实例个数
+   * <p>VPC防火墙接入网络实例个数</p>
    */
   JoinInsNum: number
   /**
-   * VPC防火墙开关个数
+   * <p>VPC防火墙开关个数</p>
    */
   FwSwitchNum: number
   /**
-   * VPC防火墙状态 0:正常 ， 1：创建中 2: 变更中
+   * <p>VPC防火墙状态 0:正常 ， 1：创建中 2: 变更中</p>
    */
   Status: number
   /**
-   * VPC防火墙创建时间
+   * <p>VPC防火墙创建时间</p>
    */
   Time: string
   /**
-   * VPC 相关云联网ID列表
+   * <p>VPC 相关云联网ID列表</p>
    */
   CcnId?: Array<string>
   /**
-   * VPC 相关云联网名称列表
+   * <p>VPC 相关云联网名称列表</p>
    */
   CcnName?: Array<string>
   /**
-   * VPC 相关对等连接ID列表
+   * <p>VPC 相关对等连接ID列表</p>
    */
   PeerConnectionId?: Array<string>
   /**
-   * VPC 相关对等连接名称列表
+   * <p>VPC 相关对等连接名称列表</p>
    */
   PeerConnectionName?: Array<string>
   /**
-   * VPC防火墙CVM的列表
+   * <p>VPC防火墙CVM的列表</p>
    */
   FwCvmLst?: Array<VpcFwCvmInsInfo>
   /**
-   * VPC防火墙接入网络实例类型列表
+   * <p>VPC防火墙接入网络实例类型列表</p>
    */
   JoinInsLst?: Array<VpcFwJoinInstanceType>
   /**
-   * 防火墙网关信息
+   * <p>防火墙网关信息</p>
    */
   FwGateway?: Array<FwGateway>
   /**
-   * 防火墙(组)ID
+   * <p>防火墙(组)ID</p>
    */
   FwGroupId?: string
   /**
-   * 已使用规则数
+   * <p>已使用规则数</p>
    */
   RuleUsed?: number
   /**
-   * 最大规则数
+   * <p>最大规则数</p>
    */
   RuleMax?: number
   /**
-   * 防火墙实例带宽
+   * <p>防火墙实例带宽</p>
    */
   Width?: number
   /**
-   * 用户VPC墙总带宽
+   * <p>用户VPC墙总带宽</p>
    */
   UserVpcWidth?: number
   /**
-   * 接入的vpc列表
+   * <p>接入的vpc列表</p>
    */
   JoinInsIdLst?: Array<string>
   /**
-   * 内网间峰值带宽 (单位 bps )
+   * <p>内网间峰值带宽 (单位 bps )</p>
    */
   FlowMax?: number
   /**
-   * 实例引擎版本
+   * <p>实例引擎版本</p>
    */
   EngineVersion?: string
   /**
-   * 引擎是否可升级：0，不可升级；1，可升级
+   * <p>引擎是否可升级：0，不可升级；1，可升级</p>
    */
   UpdateEnable?: number
   /**
-   * 引擎运行模式，Normal:正常, OnlyRoute:透明模式
+   * <p>引擎运行模式，Normal:正常, OnlyRoute:透明模式</p>
    */
   TrafficMode?: string
   /**
-   * 引擎预约升级时间
+   * <p>引擎预约升级时间</p>
    */
   ReserveTime?: string
   /**
-   * 预约引擎升级版本
+   * <p>预约引擎升级版本</p>
    */
   ReserveVersion?: string
   /**
-   * 引擎预约升级版本状态
+   * <p>引擎预约升级版本状态</p>
    */
   ReserveVersionState?: string
   /**
-   * 弹性开关 1打开 0关闭
+   * <p>弹性开关 1打开 0关闭</p>
    */
   ElasticSwitch?: number
   /**
-   * 弹性带宽，单位Mbps
+   * <p>弹性带宽，单位Mbps</p>
    */
   ElasticBandwidth?: number
   /**
-   * 是否首次开通按量付费
-1 是
-0 不是
+   * <p>是否首次开通按量付费<br>1 是<br>0 不是</p>
    */
   IsFirstAfterPay?: number
+  /**
+   * <p>按流量弹性开关</p><p>取值范围：[0, 1]</p><p>默认值：0</p>
+   */
+  ElasticTrafficSwitch?: number
 }
 
 /**
@@ -5648,11 +5654,11 @@ export type DescribeLogStorageStatisticRequest = null
  */
 export interface DescribeFwGroupInstanceInfoResponse {
   /**
-   * 防火墙(组)详细信息
+   * <p>防火墙(组)详细信息</p>
    */
   VpcFwGroupLst?: Array<VpcFwGroupInfo>
   /**
-   * 防火墙(组)个数
+   * <p>防火墙(组)个数</p>
    */
   Total?: number
   /**
@@ -8035,33 +8041,37 @@ export interface DescribeUnHandleEventTabListResponse {
  */
 export interface SerialRegionInfo {
   /**
-   * 地域
+   * <p>地域</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region: string
   /**
-   * 分配带宽值 单位Mbps
+   * <p>分配带宽值 单位Mbps</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Width?: number
   /**
-   * 弹性开关
+   * <p>弹性开关</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ElasticSwitch?: number
   /**
-   * 弹性带宽上限，单位Mbps
+   * <p>弹性带宽上限，单位Mbps</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ElasticBandwidth?: number
   /**
-   * 七天入向峰值带宽，单位bps
+   * <p>七天入向峰值带宽，单位bps</p>
    */
   InFlowMax?: number
   /**
-   * 七天出向峰值带宽，单位bps
+   * <p>七天出向峰值带宽，单位bps</p>
    */
   OutFlowMax?: number
+  /**
+   * <p>边界按流量弹性开关</p><p>取值范围：[0, 1]</p><p>默认值：0</p>
+   */
+  ElasticTrafficSwitch?: number
 }
 
 /**
@@ -8613,125 +8623,125 @@ export interface RegionFwStatus {
  */
 export interface NatInstanceInfo {
   /**
-   * nat实例id
+   * <p>nat实例id</p>
    */
   NatinsId?: string
   /**
-   * nat实例名称
+   * <p>nat实例名称</p>
    */
   NatinsName?: string
   /**
-   * 实例所在地域
+   * <p>实例所在地域</p>
    */
   Region?: string
   /**
-   * 0: 新增模式，1:接入模式
+   * <p>0: 新增模式，1:接入模式</p>
    */
   FwMode?: number
   /**
-   * 实例带宽大小 Mbps
+   * <p>实例带宽大小 Mbps</p>
    */
   BandWidth?: number
   /**
-   * 入向带宽峰值 bps
+   * <p>入向带宽峰值 bps</p>
    */
   InFlowMax?: number
   /**
-   * 出向带宽峰值 bps
+   * <p>出向带宽峰值 bps</p>
    */
   OutFlowMax?: number
   /**
-   * 地域中文信息
+   * <p>地域中文信息</p>
    */
   RegionZh?: string
   /**
-   * 公网ip数组
+   * <p>公网ip数组</p>
    */
   EipAddress?: Array<string>
   /**
-   * 内外使用ip数组
+   * <p>内外使用ip数组</p>
    */
   VpcIp?: Array<string>
   /**
-   * 实例关联子网数组
+   * <p>实例关联子网数组</p>
    */
   Subnets?: Array<string>
   /**
-   * 0 :正常 1：正在初始化
+   * <p>0 :正常 1：正在初始化</p>
    */
   Status?: number
   /**
-   * 地域区域信息
+   * <p>地域区域信息</p>
    */
   RegionDetail?: string
   /**
-   * 实例所在可用区
+   * <p>实例所在可用区</p>
    */
   ZoneZh?: string
   /**
-   * 实例所在可用区
+   * <p>实例所在可用区</p>
    */
   ZoneZhBak?: string
   /**
-   * 已使用规则数
+   * <p>已使用规则数</p>
    */
   RuleUsed?: number
   /**
-   * 实例的规则限制最大规格数
+   * <p>实例的规则限制最大规格数</p>
    */
   RuleMax?: number
   /**
-   * 实例引擎版本
+   * <p>实例引擎版本</p>
    */
   EngineVersion?: string
   /**
-   * 引擎是否可升级：0，不可升级；1，可升级
+   * <p>引擎是否可升级：0，不可升级；1，可升级</p>
    */
   UpdateEnable?: number
   /**
-   * 是的需要升级引擎 支持 nat拨测 1需要 0不需要
+   * <p>是的需要升级引擎 支持 nat拨测 1需要 0不需要</p>
    */
   NeedProbeEngineUpdate?: number
   /**
-   * 引擎运行模式，Normal:正常, OnlyRoute:透明模式
+   * <p>引擎运行模式，Normal:正常, OnlyRoute:透明模式</p>
    */
   TrafficMode?: string
   /**
-   * 实例主所在可用区
+   * <p>实例主所在可用区</p>
    */
   Zone?: string
   /**
-   * 实例备所在可用区
+   * <p>实例备所在可用区</p>
    */
   ZoneBak?: string
   /**
-   * 引擎预约升级时间
+   * <p>引擎预约升级时间</p>
    */
   ReserveTime?: string
   /**
-   * 引擎预约升级版本
+   * <p>引擎预约升级版本</p>
    */
   ReserveVersion?: string
   /**
-   * 引擎预约升级版本状态 stable:稳定版；previewed:预览版
+   * <p>引擎预约升级版本状态 stable:稳定版；previewed:预览版</p>
    */
   ReserveVersionState?: string
   /**
-   * 弹性开关
-1 打开
-0 关闭
+   * <p>弹性开关<br>1 打开<br>0 关闭</p>
    */
   ElasticSwitch?: number
   /**
-   * 弹性带宽，单位Mbps
+   * <p>弹性带宽，单位Mbps</p>
    */
   ElasticBandwidth?: number
   /**
-   * 是否首次开通按量付费
-1 是
-0 不是
+   * <p>是否首次开通按量付费<br>1 是<br>0 不是</p>
    */
   IsFirstAfterPay?: number
+  /**
+   * <p>按流量弹性开关</p><p>默认值：0</p>
+   */
+  ElasticTrafficSwitch?: number
 }
 
 /**

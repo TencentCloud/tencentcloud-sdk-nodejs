@@ -870,97 +870,101 @@ export interface DescribeScoresRequest {
  */
 export interface ScoreInfoV2 {
   /**
-   * 项目id
+   * <p>项目id</p>
    */
   ProjectID?: number
   /**
-   * 项目总分
+   * <p>项目总分</p>
    */
   Score?: number
   /**
-   * API性能评分
+   * <p>API性能评分</p>
    */
   ApiPerformanceScore?: number
   /**
-   * API可用性评分
+   * <p>API可用性评分</p>
    */
   ApiAvailableScore?: number
   /**
-   * API调用总数
+   * <p>API调用总数</p>
    */
   ApiNum?: number
   /**
-   * API失败次数
+   * <p>API失败次数</p>
    */
   ApiFail?: number
   /**
-   * API平均持续时间
+   * <p>API平均持续时间</p>
    */
   ApiDuration?: number
   /**
-   * 页面性能评分
+   * <p>页面性能评分</p>
    */
   PagePerformanceScore?: number
   /**
-   * 页面浏览量
+   * <p>页面浏览量</p>
    */
   PagePv?: number
   /**
-   * 独立访客数
+   * <p>独立访客数</p>
    */
   PageUv?: number
   /**
-   * 页面错误数
+   * <p>页面错误数</p>
    */
   PageError?: number
   /**
-   * 首屏时间
+   * <p>首屏时间</p>
    */
   PageDuration?: number
   /**
-   * 平均 LCP
+   * <p>平均 LCP</p>
    */
   PageLCP?: number
   /**
-   * 平均 FID
+   * <p>平均 FID</p>
    */
   PageFID?: number
   /**
-   * 平均 CLS
+   * <p>平均 CLS</p>
    */
   PageCLS?: number
   /**
-   * 平均 FCP
+   * <p>平均 FCP</p>
    */
   PageFCP?: number
   /**
-   * 平均 INP
+   * <p>平均 INP</p>
    */
   PageINP?: number
   /**
-   * JavaScript错误评分
+   * <p>JavaScript错误评分</p>
    */
   JsErrorScore?: number
   /**
-   * 静态资源可用性评分
+   * <p>静态资源可用性评分</p>
    */
   StaticAvailableScore?: number
   /**
-   * 静态资源性能评分
+   * <p>静态资源性能评分</p>
    */
   StaticPerformanceScore?: number
   /**
-   * 静态资源请求总数
+   * <p>静态资源请求总数</p>
    */
   StaticNum?: number
   /**
-   * 静态资源加载失败数
+   * <p>静态资源加载失败数</p>
    */
   StaticFail?: number
   /**
-   * 静态资源加载时间
+   * <p>静态资源加载时间</p>
    */
   StaticDuration?: number
+  /**
+   * <p>忽略的配置项</p>
+   */
+  Exclusion?: string
 }
 
 /**

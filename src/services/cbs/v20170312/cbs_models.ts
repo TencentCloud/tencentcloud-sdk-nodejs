@@ -16,6 +16,21 @@
  */
 
 /**
+ * AttachRemoteDisks返回参数结构体
+ */
+export interface AttachRemoteDisksResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyRemoteDiskAttributes请求参数结构体
+ */
+export type ModifyRemoteDiskAttributesRequest = null
+
+/**
  * ModifyDiskExtraPerformance请求参数结构体
  */
 export interface ModifyDiskExtraPerformanceRequest {
@@ -27,6 +42,16 @@ export interface ModifyDiskExtraPerformanceRequest {
    * 需要购买额外性能值的云硬盘ID，可通过[DescribeDisks](/document/product/362/16315)接口查询。仅大小超过460GiB的增强型SSD（CLOUD_HSSD）和极速型SSD（CLOUD_TSSD）云硬盘才支持购买额外性能。
    */
   DiskId: string
+}
+
+/**
+ * SwitchParameterCreateRemoteDisks返回参数结构体
+ */
+export interface SwitchParameterCreateRemoteDisksResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -70,21 +95,17 @@ export interface DescribeDiskBackupsRequest {
 }
 
 /**
- * CreateSnapshotGroup请求参数结构体
+ * InquirePriceModifyDiskBackupQuota请求参数结构体
  */
-export interface CreateSnapshotGroupRequest {
+export interface InquirePriceModifyDiskBackupQuotaRequest {
   /**
-   * 需要创建快照组的云硬盘ID列表，必须选择挂载在同一实例上的盘列表。
+   * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
    */
-  DiskIds: Array<string>
+  DiskId: string
   /**
-   * 快照组名称，快照组关联的快照也会继承快照组的名称。例如：快照组名称为testSnapshotGroup，快照组关联两个快照，则两个快照的名称分别为testSnapshotGroup_0，testSnapshotGroup_1。
+   * 修改后的云硬盘备份点配额，即云盘可以拥有的备份点数量，单位为个。
    */
-  SnapshotGroupName?: string
-  /**
-   * 快照组需要绑定的标签列表。
-   */
-  Tags?: Array<Tag>
+  DiskBackupQuota: number
 }
 
 /**
@@ -251,6 +272,11 @@ export interface ModifySnapshotsSharePermissionRequest {
 }
 
 /**
+ * AttachRemoteDisks请求参数结构体
+ */
+export type AttachRemoteDisksRequest = null
+
+/**
  * CopySnapshotCrossRegions返回参数结构体
  */
 export interface CopySnapshotCrossRegionsResponse {
@@ -373,9 +399,39 @@ export interface DescribeAutoSnapshotPoliciesRequest {
 }
 
 /**
+ * InquirePriceRenewRemoteDisks请求参数结构体
+ */
+export type InquirePriceRenewRemoteDisksRequest = null
+
+/**
+ * TerminateRemoteDisks请求参数结构体
+ */
+export type TerminateRemoteDisksRequest = null
+
+/**
+ * DescribeRemoteDisks请求参数结构体
+ */
+export interface DescribeRemoteDisksRequest {
+  /**
+   * <p>过滤条件。此参数不支持与 RemoteDiskIds 同时指定。</p>
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * ModifySnapshotsSharePermission返回参数结构体
  */
 export interface ModifySnapshotsSharePermissionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRemoteDisks返回参数结构体
+ */
+export interface DescribeRemoteDisksResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -390,6 +446,16 @@ export interface DeleteDiskBackupsRequest {
    * 待删除的云硬盘备份点ID，可以通过[DescribeDiskBackups](/document/product/362/80278)接口查询。
    */
   DiskBackupIds: Array<string>
+}
+
+/**
+ * DescribeRemoteDiskConfigQuota返回参数结构体
+ */
+export interface DescribeRemoteDiskConfigQuotaResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -477,6 +543,11 @@ export interface RenewDiskRequest {
    */
   DiskId: string
 }
+
+/**
+ * DescribeRemoteDisksDeniedActions请求参数结构体
+ */
+export type DescribeRemoteDisksDeniedActionsRequest = null
 
 /**
  * InquirePriceModifyDiskExtraPerformance返回参数结构体
@@ -709,6 +780,16 @@ export interface DescribeDiskConfigQuotaResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SwitchParameterCreateRemoteDisks请求参数结构体
+ */
+export interface SwitchParameterCreateRemoteDisksRequest {
+  /**
+   * <p>实例所在的位置。通过该参数可以指定实例所属可用区、所属项目等属性。</p>
+   */
+  Placement: Placement
 }
 
 /**
@@ -1130,17 +1211,21 @@ export interface DescribeSnapshotSharePermissionRequest {
 }
 
 /**
- * InquirePriceModifyDiskBackupQuota请求参数结构体
+ * CreateSnapshotGroup请求参数结构体
  */
-export interface InquirePriceModifyDiskBackupQuotaRequest {
+export interface CreateSnapshotGroupRequest {
   /**
-   * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。
+   * 需要创建快照组的云硬盘ID列表，必须选择挂载在同一实例上的盘列表。
    */
-  DiskId: string
+  DiskIds: Array<string>
   /**
-   * 修改后的云硬盘备份点配额，即云盘可以拥有的备份点数量，单位为个。
+   * 快照组名称，快照组关联的快照也会继承快照组的名称。例如：快照组名称为testSnapshotGroup，快照组关联两个快照，则两个快照的名称分别为testSnapshotGroup_0，testSnapshotGroup_1。
    */
-  DiskBackupQuota: number
+  SnapshotGroupName?: string
+  /**
+   * 快照组需要绑定的标签列表。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -1176,6 +1261,11 @@ export interface ModifyDisksRenewFlagResponse {
    */
   RequestId?: string
 }
+
+/**
+ * SwitchParameterRenewRemoteDisks请求参数结构体
+ */
+export type SwitchParameterRenewRemoteDisksRequest = null
 
 /**
  * CopyAutoSnapshotPolicyCrossAccount返回参数结构体
@@ -1353,9 +1443,29 @@ CANCEL：关闭
 }
 
 /**
+ * DescribeRemoteDisksDeniedActions返回参数结构体
+ */
+export interface DescribeRemoteDisksDeniedActionsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetSnapOverview请求参数结构体
  */
 export type GetSnapOverviewRequest = null
+
+/**
+ * DetachRemoteDisks返回参数结构体
+ */
+export interface DetachRemoteDisksResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * 镜像。
@@ -1424,15 +1534,20 @@ export interface DescribeInstancesDiskNumResponse {
 }
 
 /**
+ * InquirePriceCreateRemoteDisks请求参数结构体
+ */
+export type InquirePriceCreateRemoteDisksRequest = null
+
+/**
  * ResizeDisk请求参数结构体
  */
 export interface ResizeDiskRequest {
   /**
-   * 云硬盘扩容后的大小，单位为GB，必须大于当前云硬盘大小。云盘大小取值范围参见云硬盘[产品分类](/document/product/362/2353)的说明。
+   * <p>云硬盘扩容后的大小，单位为GB，必须大于当前云硬盘大小。云盘大小取值范围参见云硬盘<a href="/document/product/362/2353">产品分类</a>的说明。</p>
    */
   DiskSize: number
   /**
-   * 云硬盘ID， 通过[DescribeDisks](/document/product/362/16315)接口查询。该字段仅供单块云硬盘扩容时传入。
+   * <p>云硬盘ID， 通过<a href="/document/product/362/16315">DescribeDisks</a>接口查询。该字段仅供单块云硬盘扩容时传入。</p>
    */
   DiskId?: string
 }
@@ -1488,62 +1603,9 @@ export interface InitializeDisksRequest {
 }
 
 /**
- * CreateAutoSnapshotPolicy返回参数结构体
+ * CreateRemoteDisks请求参数结构体
  */
-export interface CreateAutoSnapshotPolicyResponse {
-  /**
-   * 新创建的定期快照策略ID。
-   */
-  AutoSnapshotPolicyId?: string
-  /**
-   * 首次开始备份的时间。
-   */
-  NextTriggerTime?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifySnapshotAttribute请求参数结构体
- */
-export interface ModifySnapshotAttributeRequest {
-  /**
-   * 快照ID, 可通过[DescribeSnapshots](https://cloud.tencent.com/document/api/362/15647)查询。
-   */
-  SnapshotId: string
-  /**
-   * 快照的保留方式，FALSE表示非永久保留，TRUE表示永久保留。
-   */
-  IsPermanent?: boolean
-  /**
-   * 新的快照名称。最长为60个字符。
-   */
-  SnapshotName?: string
-  /**
-   * 快照的到期时间；设置好快照将会被同时设置为非永久保留方式；超过到期时间后快照将会被自动删除。注：该参数仅在参数IsPermanent为False时生效。
-   */
-  Deadline?: string
-}
-
-/**
- * UnbindAutoSnapshotPolicy请求参数结构体
- */
-export interface UnbindAutoSnapshotPolicyRequest {
-  /**
-   * 要解绑的定期快照策略ID。
-   */
-  AutoSnapshotPolicyId: string
-  /**
-   * 要解绑定期快照策略的云盘ID列表。此参数与 InstanceIds 参数至少需要传入一个。
-   */
-  DiskIds?: Array<string>
-  /**
-   * 要解绑定期快照策略的实例ID列表。此参数与 DiskIds 参数至少需要传入一个。
-   */
-  InstanceIds?: Array<string>
-}
+export type CreateRemoteDisksRequest = null
 
 /**
  * 云盘配置。
@@ -1606,6 +1668,74 @@ CLOUD_TSSD：表示极速型SSD云硬盘。
    * 描述预付费或后付费云盘的价格。
    */
   Price?: Price
+}
+
+/**
+ * CreateAutoSnapshotPolicy返回参数结构体
+ */
+export interface CreateAutoSnapshotPolicyResponse {
+  /**
+   * 新创建的定期快照策略ID。
+   */
+  AutoSnapshotPolicyId?: string
+  /**
+   * 首次开始备份的时间。
+   */
+  NextTriggerTime?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifySnapshotAttribute请求参数结构体
+ */
+export interface ModifySnapshotAttributeRequest {
+  /**
+   * 快照ID, 可通过[DescribeSnapshots](https://cloud.tencent.com/document/api/362/15647)查询。
+   */
+  SnapshotId: string
+  /**
+   * 快照的保留方式，FALSE表示非永久保留，TRUE表示永久保留。
+   */
+  IsPermanent?: boolean
+  /**
+   * 新的快照名称。最长为60个字符。
+   */
+  SnapshotName?: string
+  /**
+   * 快照的到期时间；设置好快照将会被同时设置为非永久保留方式；超过到期时间后快照将会被自动删除。注：该参数仅在参数IsPermanent为False时生效。
+   */
+  Deadline?: string
+}
+
+/**
+ * UnbindAutoSnapshotPolicy请求参数结构体
+ */
+export interface UnbindAutoSnapshotPolicyRequest {
+  /**
+   * 要解绑的定期快照策略ID。
+   */
+  AutoSnapshotPolicyId: string
+  /**
+   * 要解绑定期快照策略的云盘ID列表。此参数与 InstanceIds 参数至少需要传入一个。
+   */
+  DiskIds?: Array<string>
+  /**
+   * 要解绑定期快照策略的实例ID列表。此参数与 DiskIds 参数至少需要传入一个。
+   */
+  InstanceIds?: Array<string>
+}
+
+/**
+ * DescribeRemoteDiskConfigQuota请求参数结构体
+ */
+export interface DescribeRemoteDiskConfigQuotaRequest {
+  /**
+   * <p>过滤条件。支持的过滤条件如下：</p><ul><li>instance-family：按照机型族过滤。</li><li>instance-type：按照机型规格过滤。</li><li>zone：按照可用区过滤。</li><li>instance-charge-type：按照付费方式过滤。取值范围：PREPAID、POSTPAID_BY_HOUR、SPOTPAID、UNDERWRITE。</li></ul>
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1770,110 +1900,97 @@ export interface DescribeSnapshotsResponse {
  */
 export interface Snapshot {
   /**
-   * 快照所在的位置。
+   * <p>快照所在的位置。</p>
    */
   Placement?: Placement
   /**
-   * 是否为跨地域复制的快照。取值范围：
-<ul>
-    <li>true：表示为跨地域复制的快照。</li>
-    <li>false：本地域的快照。</li>
-</ul>
+   * <p>是否为跨地域复制的快照。取值范围：</p><ul>    <li>true：表示为跨地域复制的快照。</li>    <li>false：本地域的快照。</li></ul>
    */
   CopyFromRemote?: boolean
   /**
-   * 快照的状态。取值范围：
-<ul>
-    <li>NORMAL：正常</li>
-    <li>CREATING：创建中</li>
-    <li>ROLLBACKING：回滚中</li>
-    <li>COPYING_FROM_REMOTE：跨地域复制中</li>
-    <li>CHECKING_COPIED：复制校验中</li>
-    <li>TORECYCLE：待回收</li>
-</ul>
+   * <p>快照的状态。取值范围：</p><ul>    <li>NORMAL：正常</li>    <li>CREATING：创建中</li>    <li>ROLLBACKING：回滚中</li>    <li>COPYING_FROM_REMOTE：跨地域复制中</li>    <li>CHECKING_COPIED：复制校验中</li>    <li>TORECYCLE：待回收</li></ul>
    */
   SnapshotState?: string
   /**
-   * 是否为永久快照。取值范围：
-<ul>
-    <li>true：永久快照</li>
-    <li>false：非永久快照</li>
-</ul>
+   * <p>是否为永久快照。取值范围：</p><ul>    <li>true：永久快照</li>    <li>false：非永久快照</li></ul>
    */
   IsPermanent?: boolean
   /**
-   * 快照名称，用户自定义的快照别名。调用[ModifySnapshotAttribute](/document/product/362/15650)可修改此字段。
+   * <p>快照名称，用户自定义的快照别名。调用<a href="/document/product/362/15650">ModifySnapshotAttribute</a>可修改此字段。</p>
    */
   SnapshotName?: string
   /**
-   * 快照到期时间。如果快照为永久保留，此字段为空。
+   * <p>快照到期时间。如果快照为永久保留，此字段为空。</p>
    */
   DeadlineTime?: string
   /**
-   * 快照创建进度百分比，快照创建成功后此字段恒为100。
+   * <p>快照创建进度百分比，快照创建成功后此字段恒为100。</p>
    */
   Percent?: number
   /**
-   * 快照关联的镜像列表。
+   * <p>快照关联的镜像列表。</p>
    */
   Images?: Array<Image>
   /**
-   * 快照当前被共享数。
+   * <p>快照当前被共享数。</p>
    */
   ShareReference?: number
   /**
-   * 快照类型，目前该项取值可以为`PRIVATE_SNAPSHOT`（私有快照）或者`SHARED_SNAPSHOT`（共享快照）
+   * <p>快照类型，目前该项取值可以为<code>PRIVATE_SNAPSHOT</code>（私有快照）或者<code>SHARED_SNAPSHOT</code>（共享快照）</p>
    */
   SnapshotType?: string
   /**
-   * 创建此快照的云硬盘大小，单位GiB。
+   * <p>创建此快照的云硬盘大小，单位GiB。</p>
    */
   DiskSize?: number
   /**
-   * 创建此快照的云硬盘ID。
+   * <p>创建此快照的云硬盘ID。</p>
    */
   DiskId?: string
   /**
-   * 快照正在跨地域复制的目的地域，若没有则返回`[]`。
+   * <p>快照正在跨地域复制的目的地域，若没有则返回<code>[]</code>。</p>
    */
   CopyingToRegions?: Array<string>
   /**
-   * 是否为加密盘创建的快照。取值范围：
-<ul>
-    <li>true：该快照为加密盘创建的</li>
-    <li>false：非加密盘创建的快照</li>
-</ul>
+   * <p>是否为加密盘创建的快照。取值范围：</p><ul>    <li>true：该快照为加密盘创建的</li>    <li>false：非加密盘创建的快照</li></ul>
    */
   Encrypt?: boolean
   /**
-   * 快照的创建时间。
+   * <p>快照的创建时间。</p>
    */
   CreateTime?: string
   /**
-   * 快照关联的镜像个数。
+   * <p>快照关联的镜像个数。</p>
    */
   ImageCount?: number
   /**
-   * 创建此快照的云硬盘类型。取值范围：
-<ul>
-    <li>SYSTEM_DISK：系统盘</li>
-    <li>DATA_DISK：数据盘</li>
-</ul>
-
+   * <p>创建此快照的云硬盘类型。取值范围：</p><ul>    <li>SYSTEM_DISK：系统盘</li>    <li>DATA_DISK：数据盘</li></ul>
    */
   DiskUsage?: string
   /**
-   * 快照ID。
+   * <p>快照ID。</p>
    */
   SnapshotId?: string
   /**
-   * 快照开始共享的时间。
+   * <p>快照开始共享的时间。</p>
    */
   TimeStartShare?: string
   /**
-   * 快照绑定的标签列表。
+   * <p>快照绑定的标签列表。</p>
    */
   Tags?: Array<Tag>
+  /**
+   * <p>快照是否锁定。取值范围：</p><ul>    <li>true：已锁定</li>    <li>false：未锁定</li></ul>
+   */
+  IsLocked?: boolean
+  /**
+   * <p>快照记录的最新修改时间</p>
+   */
+  LatestModifyTime?: string
+  /**
+   * <p>自动快照策略ID，仅当该快照由自动快照策略方式创建时才会返回。</p>
+   */
+  AutoSnapshotPolicyId?: string
 }
 
 /**
@@ -1913,6 +2030,16 @@ export interface CreateDiskBackupRequest {
    * 云硬盘备份点名称。长度不能超过100个字符。
    */
   DiskBackupName?: string
+}
+
+/**
+ * InquirePriceCreateRemoteDisks返回参数结构体
+ */
+export interface InquirePriceCreateRemoteDisksResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2005,6 +2132,16 @@ export interface SnapshotGroup {
  * BindAutoSnapshotPolicy返回参数结构体
  */
 export interface BindAutoSnapshotPolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SwitchParameterRenewRemoteDisks返回参数结构体
+ */
+export interface SwitchParameterRenewRemoteDisksResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2105,6 +2242,26 @@ export interface DetachDisksResponse {
 }
 
 /**
+ * ModifyRemoteDiskAttributes返回参数结构体
+ */
+export interface ModifyRemoteDiskAttributesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateRemoteDisks返回参数结构体
+ */
+export interface CreateRemoteDisksResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * InquiryPriceRenewDisks返回参数结构体
  */
 export interface InquiryPriceRenewDisksResponse {
@@ -2177,6 +2334,16 @@ export interface Policy {
 }
 
 /**
+ * InquirePriceRenewRemoteDisks返回参数结构体
+ */
+export interface InquirePriceRenewRemoteDisksResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyDiskExtraPerformance返回参数结构体
  */
 export interface ModifyDiskExtraPerformanceResponse {
@@ -2185,6 +2352,11 @@ export interface ModifyDiskExtraPerformanceResponse {
    */
   RequestId?: string
 }
+
+/**
+ * RenewRemoteDisk请求参数结构体
+ */
+export type RenewRemoteDiskRequest = null
 
 /**
  * InquirePriceModifyDiskExtraPerformance请求参数结构体
@@ -2432,6 +2604,26 @@ export interface RenewDiskResponse {
 }
 
 /**
+ * TerminateRemoteDisks返回参数结构体
+ */
+export interface TerminateRemoteDisksResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RenewRemoteDisk返回参数结构体
+ */
+export interface RenewRemoteDiskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAutoSnapshotPolicies返回参数结构体
  */
 export interface DescribeAutoSnapshotPoliciesResponse {
@@ -2632,6 +2824,11 @@ export interface Price {
    */
   UnitPriceHigh?: string
 }
+
+/**
+ * DetachRemoteDisks请求参数结构体
+ */
+export type DetachRemoteDisksRequest = null
 
 /**
  * ApplySnapshot请求参数结构体

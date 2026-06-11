@@ -548,6 +548,16 @@ it("billing.v20180709.DescribeSavingPlanResourceInfo", async function () {
     }
 })
 
+it("billing.v20180709.DescribeOrgMemberAccountBalance", async function () {
+    try {
+       const data = await client.DescribeOrgMemberAccountBalance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("billing.v20180709.DescribeBudget", async function () {
     try {
        const data = await client.DescribeBudget({})

@@ -105,23 +105,27 @@ export interface QuerySceneListResponse {
  */
 export interface ModifyChunkRequest {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId: string
   /**
-   * 文件ID
+   * <p>文件ID</p>
    */
   FileId: string
   /**
-   * 切片ID
+   * <p>切片ID</p>
    */
   ChunkId?: string
   /**
-   * 编辑后的文本
+   * <p>编辑后的文本</p>
    */
   Content?: string
   /**
-   * 知识库id
+   * <p>分段概要</p>
+   */
+  Summary?: string
+  /**
+   * <p>知识库id</p>
    */
   KnowledgeBaseId?: string
 }
@@ -263,11 +267,19 @@ export interface GetUserInstanceListResponse {
  */
 export interface QueryChunkListResponse {
   /**
-   * 总数
+   * <p>总数</p>
    */
   Total?: number
   /**
-   * 分片信息
+   * <p>文档的自动分段数</p>
+   */
+  AutoTotal?: number
+  /**
+   * <p>文档的手动新建分段数</p>
+   */
+  ManualTotal?: number
+  /**
+   * <p>分片信息</p>
    */
   Chunks?: Array<Chunk>
   /**
@@ -367,15 +379,15 @@ Failed
  */
 export interface QueryChunkListRequest {
   /**
-   * 表示第一页
+   * <p>表示第一页</p>
    */
   Page?: number
   /**
-   * 默认一页展示 10 条
+   * <p>默认一页展示 10 条</p>
    */
   PageSize?: number
   /**
-   * 知识库id
+   * <p>知识库id</p>
    */
   KnowledgeBaseId?: string
 }
@@ -831,43 +843,43 @@ export interface Record {
  */
 export interface ChatAIRequest {
   /**
-   * 会话ID
+   * <p>会话ID</p>
    */
   SessionId?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 问题内容
+   * <p>问题内容</p>
    */
   Question?: string
   /**
-   * 上下文
+   * <p>上下文</p>
    */
   Context?: string
   /**
-   * 模型
+   * <p>模型</p>
    */
   Model?: string
   /**
-   * 是否深度思考
+   * <p>是否深度思考</p>
    */
   DeepThinking?: boolean
   /**
-   * 数据源id
+   * <p>数据源id</p>
    */
   DataSourceIds?: Array<string>
   /**
-   * agent类型
+   * <p>agent类型</p>
    */
   AgentType?: string
   /**
-   * 需要重新生成答案的记录ID
+   * <p>需要重新生成答案的记录ID</p>
    */
   OldRecordId?: string
   /**
-   * 知识库id列表
+   * <p>知识库id列表</p>
    */
   KnowledgeBaseIds?: Array<string>
 }
@@ -932,6 +944,10 @@ export interface FileInfo {
    * <p>创建时间</p>
    */
   CreateTime?: string
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
   /**
    * <p>分片策略</p>
    */
@@ -1061,21 +1077,25 @@ export interface StepInfo {
  */
 export interface Chunk {
   /**
-   * 切片ID
+   * <p>切片ID</p>
    */
   Id?: string
   /**
-   * 切片内容
+   * <p>切片内容</p>
    */
   Content?: string
   /**
-   * 切片的字数
+   * <p>切片的字数</p>
    */
   Size?: number
   /**
-   * 切片概要
+   * <p>切片概要</p>
    */
   Summary?: string
+  /**
+   * <p>分段类型</p><p>枚举值：</p><ul><li>0： 自动分段</li><li>1： 新建分段</li></ul>
+   */
+  ChunkSource?: number
 }
 
 /**
@@ -1179,6 +1199,10 @@ export interface KnowledgeTaskConfig {
    * <p>0：不开启图片理解，1：开启图片理解。默认1</p><p>取值范围：[1, 10000]</p><p>默认值：1</p>
    */
   EnableImageUnderstanding?: number
+  /**
+   * <p>是否开启表格结构化提取</p><p>枚举值：</p><ul><li>0： 不开启表格提取</li><li>1： 开启表格提取</li></ul><p>默认值：1</p>
+   */
+  EnableExtractDb?: number
 }
 
 /**

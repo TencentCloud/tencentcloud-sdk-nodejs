@@ -116,27 +116,17 @@ export interface DescribePrometheusRegionsResponse {
 }
 
 /**
- * DescribePolicyGroupList返回参数结构体
+ * DescribeOnCallForm请求参数结构体
  */
-export interface DescribePolicyGroupListResponse {
+export interface DescribeOnCallFormRequest {
   /**
-   * 策略组列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 固定值，为"monitor"
    */
-  GroupList?: Array<DescribePolicyGroupListGroup>
+  Module: string
   /**
-   * 策略组总数
+   * 值班id
    */
-  Total?: number
-  /**
-   * 备注信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Warning?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  OnCallFormID: string
 }
 
 /**
@@ -792,6 +782,30 @@ export interface SyncPrometheusTempResponse {
  * UpdateGrafanaWhiteList返回参数结构体
  */
 export interface UpdateGrafanaWhiteListResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribePolicyGroupList返回参数结构体
+ */
+export interface DescribePolicyGroupListResponse {
+  /**
+   * 策略组列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupList?: Array<DescribePolicyGroupListGroup>
+  /**
+   * 策略组总数
+   */
+  Total?: number
+  /**
+   * 备注信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Warning?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1477,6 +1491,20 @@ export interface CreateGrafanaIntegrationRequest {
 }
 
 /**
+ * DescribePrometheusGlobalConfig请求参数结构体
+ */
+export interface DescribePrometheusGlobalConfigRequest {
+  /**
+   * 实例级别抓取配置
+   */
+  InstanceId: string
+  /**
+   * 是否禁用统计
+   */
+  DisableStatistics?: boolean
+}
+
+/**
  * 实例对象的维度组合
  */
 export interface Dimension {
@@ -1780,6 +1808,21 @@ export interface Instance {
    * 实例的维度组合
    */
   Dimensions: Array<Dimension>
+}
+
+/**
+ * DescribePrometheusAgentInstances返回参数结构体
+ */
+export interface DescribePrometheusAgentInstancesResponse {
+  /**
+   * 关联该集群的实例列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Instances?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2227,6 +2270,56 @@ export interface DescribeExporterIntegrationsResponse {
 }
 
 /**
+ * CreateOnCallForm请求参数结构体
+ */
+export interface CreateOnCallFormRequest {
+  /**
+   * 固定值，为"monitor"
+   */
+  Module: string
+  /**
+   * 值班表名称
+   */
+  OnCallFormName: string
+  /**
+   * 值班人员id组
+   */
+  StaffInfos: Array<StaffInfo>
+  /**
+   * 轮转类型
+   */
+  RotationType: string
+  /**
+   * 换班时间
+   */
+  ShiftTime: string
+  /**
+   * 有效期开始时间，单位s
+   */
+  EffectiveStartTime: number
+  /**
+   * 有效期结束时间，单位s
+   */
+  EffectiveEndTime: number
+  /**
+   * 时区(-12 - 12)
+   */
+  TimeZone: number
+  /**
+   * 值班表描述
+   */
+  OnCallFormDesc?: string
+  /**
+   * 轮班信息
+   */
+  CoverStaffInfos?: Array<CoverStaffInfo>
+  /**
+   * 模板绑定的标签
+   */
+  Tags?: Array<Tag>
+}
+
+/**
  * UpdateAlertRule返回参数结构体
  */
 export interface UpdateAlertRuleResponse {
@@ -2332,13 +2425,13 @@ export interface GrafanaAccountRole {
 }
 
 /**
- * DeleteRecordingRules返回参数结构体
+ * DestroyPrometheusInstance请求参数结构体
  */
-export interface DeleteRecordingRulesResponse {
+export interface DestroyPrometheusInstanceRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例 ID，该实例必须先被 terminate
    */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -2484,14 +2577,13 @@ export interface DescribeGrafanaInstancesRequest {
 }
 
 /**
- * DescribePrometheusAgentInstances返回参数结构体
+ * DescribePrometheusTargetsTMP返回参数结构体
  */
-export interface DescribePrometheusAgentInstancesResponse {
+export interface DescribePrometheusTargetsTMPResponse {
   /**
-   * 关联该集群的实例列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 所有Job的targets信息
    */
-  Instances?: Array<string>
+  Jobs?: Array<PrometheusJobTargets>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2905,6 +2997,62 @@ export interface CleanGrafanaInstanceRequest {
 }
 
 /**
+ * 排班信息
+ */
+export interface OnCallForm {
+  /**
+   * 排班id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OnCallFormID?: string
+  /**
+   * 排班名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OnCallFormName?: string
+  /**
+   * 排班描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OnCallFormDesc?: string
+  /**
+   * 轮值类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RotationType?: string
+  /**
+   * 换班时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShiftTime?: string
+  /**
+   * 有效期开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EffectiveStartTime?: number
+  /**
+   * 有效期结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EffectiveEndTime?: number
+  /**
+   * 时区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeZone?: number
+  /**
+   * 当前值班人员
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CurrOnCallStaffs?: Array<string>
+  /**
+   * 模板绑定的标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+}
+
+/**
  * DescribeSSOAccount请求参数结构体
  */
 export interface DescribeSSOAccountRequest {
@@ -2997,15 +3145,15 @@ export interface InstanceGroups {
  */
 export interface PrometheusAgentInfo {
   /**
-   * 集群类型。可填入tke、eks、tkeedge、tdcc、external，分别代表标准集群、弹性集群、边缘集群、注册集群、外部集群
+   * <p>集群类型。可填入tke、eks、tkeedge、tdcc、external，分别代表标准集群、弹性集群、边缘集群、注册集群、外部集群</p>
    */
   ClusterType: string
   /**
-   * 集成容器服务中关联的集群ID
+   * <p>集成容器服务中关联的集群ID</p>
    */
   ClusterId: string
   /**
-   * 该参数未使用，不需要填写
+   * <p>该参数未使用，不需要填写</p>
    */
   Describe?: string
 }
@@ -3113,6 +3261,20 @@ export interface DescribeRemoteURLsRequest {
    * url数组
    */
   RemoteURLs?: Array<string>
+}
+
+/**
+ * DescribeOnCallForm返回参数结构体
+ */
+export interface DescribeOnCallFormResponse {
+  /**
+   * 值班详情
+   */
+  OnCallForm?: OneOnCallForm
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3821,6 +3983,20 @@ export interface ModifyPrometheusAlertPolicyRequest {
  * ModifyPrometheusInstanceAttributes返回参数结构体
  */
 export interface ModifyPrometheusInstanceAttributesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateOnCallForm返回参数结构体
+ */
+export interface UpdateOnCallFormResponse {
+  /**
+   * 值班表id
+   */
+  OnCallFormID?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4691,13 +4867,17 @@ export interface Metric {
 }
 
 /**
- * DescribePrometheusTargetsTMP返回参数结构体
+ * DeleteOnCallForms返回参数结构体
  */
-export interface DescribePrometheusTargetsTMPResponse {
+export interface DeleteOnCallFormsResponse {
   /**
-   * 所有Job的targets信息
+   * 失败删除的排班id
    */
-  Jobs?: Array<PrometheusJobTargets>
+  FailedOnCallFormIDs?: Array<string>
+  /**
+   * 成功删除的排班id
+   */
+  SuccessOnCallFormIDs?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5068,6 +5248,67 @@ export interface UpdateRecordingRuleResponse {
 }
 
 /**
+ * 排班详情
+ */
+export interface OneOnCallForm {
+  /**
+   * 值班id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OnCallFormID?: string
+  /**
+   * 值班名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OnCallFormName?: string
+  /**
+   * 值班描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OnCallFormDesc?: string
+  /**
+   * 值班人员
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StaffInfos?: Array<StaffInfo>
+  /**
+   * 轮班类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RotationType?: string
+  /**
+   * 换班时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShiftTime?: string
+  /**
+   * 值班有效期开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EffectiveStartTime?: number
+  /**
+   * 值班有效期结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EffectiveEndTime?: number
+  /**
+   * 时区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeZone?: number
+  /**
+   * 替班信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CoverStaffInfos?: Array<CoverStaffInfo>
+  /**
+   * 模板绑定的标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
+}
+
+/**
  * CreatePrometheusAgent返回参数结构体
  */
 export interface CreatePrometheusAgentResponse {
@@ -5339,6 +5580,17 @@ export interface CreatePrometheusConfigResponse {
 }
 
 /**
+ * 值班人员id组
+ */
+export interface StaffInfo {
+  /**
+   * 值班人员id组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StaffIDs?: Array<string>
+}
+
+/**
  * UpdateDNSConfig请求参数结构体
  */
 export interface UpdateDNSConfigRequest {
@@ -5374,16 +5626,6 @@ export interface DescribeDNSConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DestroyPrometheusInstance请求参数结构体
- */
-export interface DestroyPrometheusInstanceRequest {
-  /**
-   * 实例 ID，该实例必须先被 terminate
-   */
-  InstanceId: string
 }
 
 /**
@@ -8575,6 +8817,20 @@ export interface DescribeGrafanaIntegrationsRequest {
 }
 
 /**
+ * CreateOnCallForm返回参数结构体
+ */
+export interface CreateOnCallFormResponse {
+  /**
+   * 值班表id
+   */
+  OnCallFormID?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 告警历史数据
  */
 export interface AlarmHistory {
@@ -8826,6 +9082,24 @@ export interface CreatePolicyGroupRequest {
    * 指标告警规则的且或关系，0表示或规则(满足任意规则就告警)，1表示且规则(满足所有规则才告警)
    */
   IsUnionRule?: number
+}
+
+/**
+ * DescribeOnCallForms返回参数结构体
+ */
+export interface DescribeOnCallFormsResponse {
+  /**
+   * 排班信息
+   */
+  OnCallForms?: Array<OnCallForm>
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9261,6 +9535,20 @@ export interface DescribeRecordingRulesRequest {
 }
 
 /**
+ * DeleteOnCallForms请求参数结构体
+ */
+export interface DeleteOnCallFormsRequest {
+  /**
+   * 固定值，为"monitor"
+   */
+  Module: string
+  /**
+   * 要删除的值班表id
+   */
+  OnCallFormIDs: Array<string>
+}
+
+/**
  * UpgradeGrafanaDashboard请求参数结构体
  */
 export interface UpgradeGrafanaDashboardRequest {
@@ -9565,6 +9853,16 @@ export interface DescribeRecordingRulesResponse {
    * <p>预聚合规则数</p>
    */
   TotalRuleCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteRecordingRules返回参数结构体
+ */
+export interface DeleteRecordingRulesResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10482,17 +10780,37 @@ export interface DeletePrometheusTempSyncRequest {
 export type DescribePluginOverviewsRequest = null
 
 /**
- * DescribePrometheusGlobalConfig请求参数结构体
+ * DescribeOnCallForms请求参数结构体
  */
-export interface DescribePrometheusGlobalConfigRequest {
+export interface DescribeOnCallFormsRequest {
   /**
-   * 实例级别抓取配置
+   * 固定值，为"monitor"
    */
-  InstanceId: string
+  Module: string
   /**
-   * 是否禁用统计
+   * 分页查询起始位
    */
-  DisableStatistics?: boolean
+  Offset: number
+  /**
+   * 分页查询页数
+   */
+  Limit: number
+  /**
+   * 支持userId进行检索
+   */
+  OnCallFormStaffIDs?: Array<string>
+  /**
+   * 值班类型
+   */
+  RotationType?: string
+  /**
+   * 排序方式
+   */
+  Order?: string
+  /**
+   * 支持id、name进行检索
+   */
+  OnCallFormName?: string
 }
 
 /**
@@ -10915,6 +11233,56 @@ export interface UpdateServiceDiscoveryResponse {
 }
 
 /**
+ * UpdateOnCallForm请求参数结构体
+ */
+export interface UpdateOnCallFormRequest {
+  /**
+   * 固定值，为"monitor"
+   */
+  Module: string
+  /**
+   * 值班表id
+   */
+  OnCallFormID: string
+  /**
+   * 值班表名称
+   */
+  OnCallFormName: string
+  /**
+   * 值班人员id组
+   */
+  StaffInfos: Array<StaffInfo>
+  /**
+   * 轮转类型
+   */
+  RotationType: string
+  /**
+   * 换班时间
+   */
+  ShiftTime: string
+  /**
+   * 有效期开始时间，单位s
+   */
+  EffectiveStartTime: number
+  /**
+   * 有效期结束时间，单位s
+   */
+  EffectiveEndTime: number
+  /**
+   * 时区(-12 - 12)
+   */
+  TimeZone: number
+  /**
+   * 值班表描述
+   */
+  OnCallFormDesc?: string
+  /**
+   * 轮班信息
+   */
+  CoverStaffInfos?: Array<CoverStaffInfo>
+}
+
+/**
  * UpdatePrometheusAlertGroupState返回参数结构体
  */
 export interface UpdatePrometheusAlertGroupStateResponse {
@@ -10922,6 +11290,27 @@ export interface UpdatePrometheusAlertGroupStateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 轮班人员组信息
+ */
+export interface CoverStaffInfo {
+  /**
+   * 轮班人员id组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CoverStaffIDs?: Array<string>
+  /**
+   * 轮班开始时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CoverStartTime?: number
+  /**
+   * 轮班结束时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CoverEndTime?: number
 }
 
 /**

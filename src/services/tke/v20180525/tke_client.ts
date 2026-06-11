@@ -1011,8 +1011,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询边缘容器集群可用的自定义参数
-   */
+     * edge-dashboard 接口，当前edge产品已完成下线周知，同时edge-dashboard功能已经全部转移至edge-gw，申请将edge-dashboard所有接口先下线
+
+查询边缘容器集群可用的自定义参数
+     */
   async DescribeEdgeAvailableExtraArgs(
     req: DescribeEdgeAvailableExtraArgsRequest,
     cb?: (error: string, rep: DescribeEdgeAvailableExtraArgsResponse) => void
@@ -1181,8 +1183,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取边缘计算外部访问的kubeconfig
-   */
+     * edge-dashboard 接口，当前edge产品已完成下线周知，同时edge-dashboard功能已经全部转移至edge-gw，申请将edge-dashboard所有接口先下线
+
+获取边缘计算外部访问的kubeconfig
+     */
   async DescribeTKEEdgeExternalKubeconfig(
     req: DescribeTKEEdgeExternalKubeconfigRequest,
     cb?: (error: string, rep: DescribeTKEEdgeExternalKubeconfigResponse) => void
@@ -1191,8 +1195,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 边缘计算支持版本和k8s版本
-   */
+     * edge-dashboard 接口，当前edge产品已完成下线周知，同时edge-dashboard功能已经全部转移至edge-gw，申请将edge-dashboard所有接口先下线
+
+边缘计算支持版本和k8s版本
+     */
   async DescribeAvailableTKEEdgeVersion(
     req: DescribeAvailableTKEEdgeVersionRequest,
     cb?: (error: string, rep: DescribeAvailableTKEEdgeVersionResponse) => void
@@ -1461,8 +1467,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取边缘脚本链接，此接口用于添加第三方节点，通过下载脚本从而将节点添加到边缘集群。
-   */
+     * edge-dashboard 接口，当前edge产品已完成下线周知，同时edge-dashboard功能已经全部转移至edge-gw，申请将edge-dashboard所有接口先下线
+
+获取边缘脚本链接，此接口用于添加第三方节点，通过下载脚本从而将节点添加到边缘集群。
+     */
   async DescribeTKEEdgeScript(
     req: DescribeTKEEdgeScriptRequest,
     cb?: (error: string, rep: DescribeTKEEdgeScriptResponse) => void

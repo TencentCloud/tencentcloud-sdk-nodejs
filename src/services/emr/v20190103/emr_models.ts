@@ -547,6 +547,10 @@ export interface ComputeResourceAdvanceParams {
    * <p>节点组Id</p>
    */
   TkeClusterNodePool?: string
+  /**
+   * <p>加入节点池的模式</p><p>枚举值：</p><ul><li>Inherit： 从节点池继承配置</li><li>OnlyJoin： 仅加入节点池，不继承配置</li></ul><p>默认值：Inherit</p>
+   */
+  NodePoolJoinMode?: string
 }
 
 /**

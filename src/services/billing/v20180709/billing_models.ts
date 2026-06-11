@@ -2796,49 +2796,45 @@ export interface AnalyseProjectDetail {
 }
 
 /**
- * 按项目汇总消费详情
+ * DescribeOrgMemberAccountBalanceData
  */
-export interface ProjectSummaryOverviewItem {
+export interface DescribeOrgMemberAccountBalanceData {
   /**
-   * 项目ID
+   * <p>成员账号Uin</p>
    */
-  ProjectId: string
+  MemberUin?: string
   /**
-   * 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目
+   * <p>成员名称</p>
    */
-  ProjectName: string
+  MemberName?: string
   /**
-   * 费用所占百分比，两位小数
+   * <p>是否为信用账户</p>
    */
-  RealTotalCostRatio: string
+  IsCreditAccount?: boolean
   /**
-   * 优惠后总价
+   * <p>当前真实可用余额</p><p>单位：分</p>
    */
-  RealTotalCost: string
+  RealBalance?: number
   /**
-   * 现金账户支出：通过现金账户支付的金额
+   * <p>现金账户余额</p><p>单位：分</p>
    */
-  CashPayAmount: string
+  CashAccountBalance?: number
   /**
-   * 赠送账户支出：使用赠送金支付的金额
+   * <p>信用额度</p><p>单位：分</p><p>信用额度 = 基础信用额度 + 临时信用额度</p>
    */
-  IncentivePayAmount: string
+  CreditAmount?: number
   /**
-   * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
+   * <p>临时信用额度</p><p>单位：分</p>
    */
-  VoucherPayAmount: string
+  TempCredit?: number
   /**
-   * 分成金账户支出：通过分成金账户支付的金额
+   * <p>基础信用额度</p><p>单位：分</p>
    */
-  TransferPayAmount: string
+  BasicCreditAmount?: number
   /**
-   * 账单月份，格式2019-08
+   * <p>欠费金额</p><p>单位：分</p>
    */
-  BillMonth: string
-  /**
-   * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
-   */
-  TotalCost: string
+  OweAmount?: number
 }
 
 /**
@@ -4443,6 +4439,52 @@ postMoveIn 按量计费迁入资源
 }
 
 /**
+ * 按项目汇总消费详情
+ */
+export interface ProjectSummaryOverviewItem {
+  /**
+   * 项目ID
+   */
+  ProjectId: string
+  /**
+   * 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目
+   */
+  ProjectName: string
+  /**
+   * 费用所占百分比，两位小数
+   */
+  RealTotalCostRatio: string
+  /**
+   * 优惠后总价
+   */
+  RealTotalCost: string
+  /**
+   * 现金账户支出：通过现金账户支付的金额
+   */
+  CashPayAmount: string
+  /**
+   * 赠送账户支出：使用赠送金支付的金额
+   */
+  IncentivePayAmount: string
+  /**
+   * 优惠券支出：使用各类优惠券（如代金券、现金券等）支付的金额
+   */
+  VoucherPayAmount: string
+  /**
+   * 分成金账户支出：通过分成金账户支付的金额
+   */
+  TransferPayAmount: string
+  /**
+   * 账单月份，格式2019-08
+   */
+  BillMonth: string
+  /**
+   * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
+   */
+  TotalCost: string
+}
+
+/**
  * DescribeDealsByCond返回参数结构体
  */
 export interface DescribeDealsByCondResponse {
@@ -4638,6 +4680,24 @@ export interface SummaryTotal {
    * 原价，单位为元。TotalCost字段自账单3.0（即2021-05）之后开始生效，账单3.0之前返回"-"。合同价的情况下，TotalCost字段与官网价格存在差异，也返回“-”。
    */
   TotalCost?: string
+}
+
+/**
+ * DescribeOrgMemberAccountBalance请求参数结构体
+ */
+export interface DescribeOrgMemberAccountBalanceRequest {
+  /**
+   * <p>页码</p><p>默认值：1</p><p>取值范围≥1</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>单页大小</p><p>取值范围：[1, 10]</p><p>默认值：10</p>
+   */
+  PageSize?: number
+  /**
+   * <p>成员uin列表</p><p>入参限制：元素必须为纯数字字符串，并且元素个数不能大于10</p><p>为空时返回当前组织内所有成员的账户余额信息，不为空时返回指定成员的账户余额信息</p>
+   */
+  MemberUins?: Array<string>
 }
 
 /**
@@ -5999,6 +6059,32 @@ export interface ModifyBudgetRequest {
    * 波动提醒
    */
   WaveThresholdJson?: Array<WaveThresholdForm>
+}
+
+/**
+ * DescribeOrgMemberAccountBalance返回参数结构体
+ */
+export interface DescribeOrgMemberAccountBalanceResponse {
+  /**
+   * <p>成员账户余额列表</p>
+   */
+  Data?: Array<DescribeOrgMemberAccountBalanceData>
+  /**
+   * <p>总记录数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>当前页实际返回数量</p>
+   */
+  PageSize?: number
+  /**
+   * <p>当前页码</p>
+   */
+  PageNumber?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

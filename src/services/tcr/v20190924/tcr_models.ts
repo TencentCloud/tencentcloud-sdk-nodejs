@@ -97,6 +97,40 @@ export interface DeleteSignaturePolicyRequest {
 }
 
 /**
+ * 模型详细参数
+ */
+export interface ModelList {
+  /**
+   *
+   */
+  ModelName?: string
+  /**
+   *
+   */
+  NamespaceName?: string
+  /**
+   *
+   */
+  LatestVersion?: string
+  /**
+   *
+   */
+  Kind?: string
+  /**
+   *
+   */
+  ImageSize?: string
+  /**
+   *
+   */
+  UpdateTime?: string
+  /**
+   *
+   */
+  Digest?: string
+}
+
+/**
  * DescribeReplicationInstanceCreateTasks返回参数结构体
  */
 export interface DescribeReplicationInstanceCreateTasksResponse {
@@ -115,41 +149,13 @@ export interface DescribeReplicationInstanceCreateTasksResponse {
 }
 
 /**
- * 触发器日志
+ * 复制镜像tag返回值
  */
-export interface WebhookTriggerLog {
+export interface DupImageTagResp {
   /**
-   * 日志 Id
+   * 镜像Digest值
    */
-  Id: number
-  /**
-   * 触发器 Id
-   */
-  TriggerId: number
-  /**
-   * 事件类型
-   */
-  EventType: string
-  /**
-   * 通知类型
-   */
-  NotifyType: string
-  /**
-   * 详情
-   */
-  Detail: string
-  /**
-   * 创建时间
-   */
-  CreationTime: string
-  /**
-   * 更新时间
-   */
-  UpdateTime: string
-  /**
-   * 状态
-   */
-  Status: string
+  Digest?: string
 }
 
 /**
@@ -335,17 +341,13 @@ export interface DescribeInstanceCustomizedDomainResponse {
 }
 
 /**
- * TerminateGCJob返回参数结构体
+ * DescribeSkillDetail返回参数结构体
  */
-export interface TerminateGCJobResponse {
+export interface DescribeSkillDetailResponse {
   /**
-   * <p>操作结果</p>枚举值：<ul><li> success： 操作成功</li><li> error： 操作失败</li></ul>
+   * <p>技能详情</p>
    */
-  Status?: string
-  /**
-   * <p>操作结果详细信息</p>
-   */
-  Message?: string
+  Skill?: Skill
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -527,25 +529,33 @@ export interface DeleteInstanceTokenRequest {
 }
 
 /**
- * Tag列表的返回值
+ * 任务详情
  */
-export interface TagInfoResp {
+export interface TaskDetail {
   /**
-   * Tag的总数
+   * 任务
    */
-  TagCount: number
+  TaskName?: string
   /**
-   * TagInfo列表
+   * 任务UUID
    */
-  TagInfo: Array<TagInfo>
+  TaskUUID?: string
   /**
-   * Server
+   * 任务状态
    */
-  Server: string
+  TaskStatus?: string
   /**
-   * 仓库名称
+   * 任务的状态信息
    */
-  RepoName: string
+  TaskMessage?: string
+  /**
+   * 任务开始时间
+   */
+  CreatedTime?: string
+  /**
+   * 任务结束时间
+   */
+  FinishedTime?: string
 }
 
 /**
@@ -593,6 +603,36 @@ export interface RegistryCondition {
 }
 
 /**
+ * ListAIModels请求参数结构体
+ */
+export interface ListAIModelsRequest {
+  /**
+   * <p>TCR实例ID</p>
+   */
+  RegistryId: string
+  /**
+   * <p>命名空间</p>
+   */
+  Namespace?: string
+  /**
+   * <p>模型名称</p>
+   */
+  ModelName?: string
+  /**
+   * <p>偏移量</p>
+   */
+  Offset?: number
+  /**
+   * <p>最大限制</p>
+   */
+  Limit?: number
+  /**
+   * <p>模糊搜索</p>
+   */
+  SearchKey?: string
+}
+
+/**
  * DescribeInternalEndpointDnsStatus请求参数结构体
  */
 export interface DescribeInternalEndpointDnsStatusRequest {
@@ -603,21 +643,49 @@ export interface DescribeInternalEndpointDnsStatusRequest {
 }
 
 /**
- * DeleteReplicationRule请求参数结构体
+ * CreateApplicationTriggerPersonal请求参数结构体
  */
-export interface DeleteReplicationRuleRequest {
+export interface CreateApplicationTriggerPersonalRequest {
   /**
-   * 源实例ID
+   * 触发器关联的镜像仓库，library/test格式
    */
-  SourceRegistryId: string
+  RepoName: string
   /**
-   * 同步规则名称
+   * 触发器名称
    */
-  RuleName: string
+  TriggerName: string
   /**
-   * 规则描述
+   * 触发方式，"all"全部触发，"taglist"指定tag触发，"regex"正则触发
    */
-  Description?: string
+  InvokeMethod: string
+  /**
+   * 应用所在TKE集群ID
+   */
+  ClusterId: string
+  /**
+   * 应用所在TKE集群命名空间
+   */
+  Namespace: string
+  /**
+   * 应用所在TKE集群工作负载类型,支持Deployment、StatefulSet、DaemonSet、CronJob、Job。
+   */
+  WorkloadType: string
+  /**
+   * 应用所在TKE集群工作负载名称
+   */
+  WorkloadName: string
+  /**
+   * 应用所在TKE集群工作负载下容器名称
+   */
+  ContainerName: string
+  /**
+   * 应用所在TKE集群地域
+   */
+  ClusterRegion: number
+  /**
+   * 触发方式对应的表达式
+   */
+  InvokeExpr?: string
 }
 
 /**
@@ -678,13 +746,13 @@ false:  使用带有vpc的域名
 }
 
 /**
- * ValidateNamespaceExistPersonal请求参数结构体
+ * DeleteSkill返回参数结构体
  */
-export interface ValidateNamespaceExistPersonalRequest {
+export interface DeleteSkillResponse {
   /**
-   * 命名空间名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Namespace: string
+  RequestId?: string
 }
 
 /**
@@ -787,6 +855,28 @@ export interface DescribeRepositoriesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 模型版本详情
+ */
+export interface VersionList {
+  /**
+   *
+   */
+  Version?: string
+  /**
+   *
+   */
+  Size?: number
+  /**
+   *
+   */
+  IsRecommended?: boolean
+  /**
+   *
+   */
+  PushTime?: string
 }
 
 /**
@@ -1007,17 +1097,75 @@ export interface ModifyServiceAccountRequest {
 }
 
 /**
- * CreateImageAccelerationService返回参数结构体
+ * DescribeSkillDetail请求参数结构体
  */
-export interface CreateImageAccelerationServiceResponse {
+export interface DescribeSkillDetailRequest {
   /**
-   * 实例Id
+   * <p>TCR实例ID</p>
    */
-  RegistryId?: string
+  RegistryId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>技能名称</p>
    */
-  RequestId?: string
+  SkillName: string
+  /**
+   * <p>技能版本</p>
+   */
+  SkillVersion: string
+}
+
+/**
+ * 模型详情
+ */
+export interface ModelDetail {
+  /**
+   *
+   */
+  ModelName?: string
+  /**
+   *
+   */
+  NamespaceName?: string
+  /**
+   *
+   */
+  Version?: string
+  /**
+   *
+   */
+  Digest?: string
+  /**
+   *
+   */
+  Size?: number
+  /**
+   *
+   */
+  Framework?: string
+  /**
+   *
+   */
+  Precision?: string
+  /**
+   *
+   */
+  FileFormat?: string
+  /**
+   *
+   */
+  ParamSize?: string
+  /**
+   *
+   */
+  Family?: string
+  /**
+   *
+   */
+  IsRecommended?: boolean
+  /**
+   *
+   */
+  PushTime?: string
 }
 
 /**
@@ -1251,6 +1399,77 @@ export interface ManageReplicationRequest {
 }
 
 /**
+ * 触发器日志
+ */
+export interface WebhookTriggerLog {
+  /**
+   * 日志 Id
+   */
+  Id: number
+  /**
+   * 触发器 Id
+   */
+  TriggerId: number
+  /**
+   * 事件类型
+   */
+  EventType: string
+  /**
+   * 通知类型
+   */
+  NotifyType: string
+  /**
+   * 详情
+   */
+  Detail: string
+  /**
+   * 创建时间
+   */
+  CreationTime: string
+  /**
+   * 更新时间
+   */
+  UpdateTime: string
+  /**
+   * 状态
+   */
+  Status: string
+}
+
+/**
+ * ListAIModelVersions返回参数结构体
+ */
+export interface ListAIModelVersionsResponse {
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>版本列表</p>
+   */
+  VersionList?: Array<VersionList>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInstanceStatus返回参数结构体
+ */
+export interface DescribeInstanceStatusResponse {
+  /**
+   * 实例的状态列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegistryStatusSet?: Array<RegistryStatus>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteWebhookTrigger返回参数结构体
  */
 export interface DeleteWebhookTriggerResponse {
@@ -1271,25 +1490,29 @@ export interface DeleteImageLifecycleGlobalPersonalResponse {
 }
 
 /**
- * ModifySecurityPolicy请求参数结构体
+ * DescribeImageManifests返回参数结构体
  */
-export interface ModifySecurityPolicyRequest {
+export interface DescribeImageManifestsResponse {
   /**
-   * 实例的Id
+   * 镜像的Manifest信息
    */
-  RegistryId: string
+  Manifest?: string
   /**
-   * PolicyId
+   * 镜像的配置信息
    */
-  PolicyIndex: number
+  Config?: string
   /**
-   * 192.168.0.0/24 白名单Ip
+   * 镜像的Labels信息
    */
-  CidrBlock: string
+  Labels?: Array<KeyValueString>
   /**
-   * 备注
+   * 镜像大小，单位：byte
    */
-  Description: string
+  Size?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1309,6 +1532,20 @@ export interface DescribeReplicationInstanceSyncStatusResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReplicationLog: ReplicationLog
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSkillDownloadInfo返回参数结构体
+ */
+export interface DescribeSkillDownloadInfoResponse {
+  /**
+   * <p>下载链接</p>
+   */
+  PreSignedDownloadURL?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1372,13 +1609,17 @@ export interface Schedule {
 }
 
 /**
- * 复制镜像tag返回值
+ * DeleteAIModel请求参数结构体
  */
-export interface DupImageTagResp {
+export interface DeleteAIModelRequest {
   /**
-   * 镜像Digest值
+   * <p>TCR实例ID</p>
    */
-  Digest?: string
+  RegistryId: string
+  /**
+   * <p>模型删除</p>
+   */
+  Items: Array<DeleteModelItem>
 }
 
 /**
@@ -1585,32 +1826,35 @@ export interface DuplicateImagePersonalResponse {
 }
 
 /**
- * DescribeImageLifecyclePersonal返回参数结构体
+ * DeleteSkill请求参数结构体
  */
-export interface DescribeImageLifecyclePersonalResponse {
+export interface DeleteSkillRequest {
   /**
-   * 自动删除策略信息
+   * <p>TCR实例ID</p>
    */
-  Data?: AutoDelStrategyInfoResp
+  RegistryId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>删除技能列表</p>
    */
-  RequestId?: string
+  Items?: Array<SkillType>
 }
 
 /**
- * DescribeInstanceStatus返回参数结构体
+ * DeleteReplicationInstance请求参数结构体
  */
-export interface DescribeInstanceStatusResponse {
+export interface DeleteReplicationInstanceRequest {
   /**
-   * 实例的状态列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例id
    */
-  RegistryStatusSet?: Array<RegistryStatus>
+  RegistryId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 复制实例ID
    */
-  RequestId?: string
+  ReplicationRegistryId: string
+  /**
+   * 复制实例地域Id
+   */
+  ReplicationRegionId: number
 }
 
 /**
@@ -1659,6 +1903,16 @@ export interface DescribeWebhookTriggerResponse {
    * 触发器列表
    */
   Triggers?: Array<WebhookTrigger>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteAIModel返回参数结构体
+ */
+export interface DeleteAIModelResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1742,6 +1996,24 @@ export interface DescribeReplicationPoliciesRequest {
 }
 
 /**
+ * TerminateGCJob返回参数结构体
+ */
+export interface TerminateGCJobResponse {
+  /**
+   * <p>操作结果</p>枚举值：<ul><li> success： 操作成功</li><li> error： 操作失败</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>操作结果详细信息</p>
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * vpc私有域名解析状态
  */
 export interface VpcPrivateDomainStatus {
@@ -1771,6 +2043,28 @@ export interface Permission {
    * 动作，目前仅支持：tcr:PushRepository、tcr:PullRepository、tcr:CreateRepository、tcr:CreateHelmChart、tcr:DescribeHelmCharts
    */
   Actions: Array<string>
+}
+
+/**
+ * ModifySecurityPolicy请求参数结构体
+ */
+export interface ModifySecurityPolicyRequest {
+  /**
+   * 实例的Id
+   */
+  RegistryId: string
+  /**
+   * PolicyId
+   */
+  PolicyIndex: number
+  /**
+   * 192.168.0.0/24 白名单Ip
+   */
+  CidrBlock: string
+  /**
+   * 备注
+   */
+  Description: string
 }
 
 /**
@@ -2010,21 +2304,17 @@ export interface ModifyWebhookTriggerRequest {
 }
 
 /**
- * DeleteReplicationInstance请求参数结构体
+ * CreateImageAccelerationService返回参数结构体
  */
-export interface DeleteReplicationInstanceRequest {
+export interface CreateImageAccelerationServiceResponse {
   /**
-   * 实例id
+   * 实例Id
    */
-  RegistryId: string
+  RegistryId?: string
   /**
-   * 复制实例ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ReplicationRegistryId: string
-  /**
-   * 复制实例地域Id
-   */
-  ReplicationRegionId: number
+  RequestId?: string
 }
 
 /**
@@ -2038,13 +2328,25 @@ export interface DeleteNamespaceResponse {
 }
 
 /**
- * DeleteNamespacePersonal返回参数结构体
+ * Tag列表的返回值
  */
-export interface DeleteNamespacePersonalResponse {
+export interface TagInfoResp {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * Tag的总数
    */
-  RequestId?: string
+  TagCount: number
+  /**
+   * TagInfo列表
+   */
+  TagInfo: Array<TagInfo>
+  /**
+   * Server
+   */
+  Server: string
+  /**
+   * 仓库名称
+   */
+  RepoName: string
 }
 
 /**
@@ -2197,6 +2499,20 @@ export interface DeleteServiceAccountResponse {
  * ModifyNamespace返回参数结构体
  */
 export interface ModifyNamespaceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAIModelVersionDetail返回参数结构体
+ */
+export interface DescribeAIModelVersionDetailResponse {
+  /**
+   * <p>模型详情</p>
+   */
+  Model?: ModelDetail
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2666,49 +2982,21 @@ export interface CreateInstanceTokenResponse {
 }
 
 /**
- * CreateApplicationTriggerPersonal请求参数结构体
+ * DeleteReplicationRule请求参数结构体
  */
-export interface CreateApplicationTriggerPersonalRequest {
+export interface DeleteReplicationRuleRequest {
   /**
-   * 触发器关联的镜像仓库，library/test格式
+   * 源实例ID
    */
-  RepoName: string
+  SourceRegistryId: string
   /**
-   * 触发器名称
+   * 同步规则名称
    */
-  TriggerName: string
+  RuleName: string
   /**
-   * 触发方式，"all"全部触发，"taglist"指定tag触发，"regex"正则触发
+   * 规则描述
    */
-  InvokeMethod: string
-  /**
-   * 应用所在TKE集群ID
-   */
-  ClusterId: string
-  /**
-   * 应用所在TKE集群命名空间
-   */
-  Namespace: string
-  /**
-   * 应用所在TKE集群工作负载类型,支持Deployment、StatefulSet、DaemonSet、CronJob、Job。
-   */
-  WorkloadType: string
-  /**
-   * 应用所在TKE集群工作负载名称
-   */
-  WorkloadName: string
-  /**
-   * 应用所在TKE集群工作负载下容器名称
-   */
-  ContainerName: string
-  /**
-   * 应用所在TKE集群地域
-   */
-  ClusterRegion: number
-  /**
-   * 触发方式对应的表达式
-   */
-  InvokeExpr?: string
+  Description?: string
 }
 
 /**
@@ -2737,6 +3025,58 @@ export interface DeleteImagePersonalRequest {
    * Tag名
    */
   Tag: string
+}
+
+/**
+ * 删除模型结构体
+ */
+export interface DeleteModelItem {
+  /**
+   *
+   */
+  NamespaceName: string
+  /**
+   *
+   */
+  RepositoryName: string
+  /**
+   *
+   */
+  Reference?: string
+}
+
+/**
+ * 查询指定实例下的 AI Skill 列表。
+ */
+export interface SkillList {
+  /**
+   *
+   */
+  SkillName?: string
+  /**
+   *
+   */
+  Description?: string
+  /**
+   *
+   */
+  SkillType?: string
+  /**
+   *
+   */
+  Tags?: Array<string>
+  /**
+   *
+   */
+  LatestVersion?: string
+  /**
+   *
+   */
+  Status?: string
+  /**
+   *
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -3024,6 +3364,24 @@ export interface RegistryChargePrepaid {
 }
 
 /**
+ * DescribeSkillDownloadInfo请求参数结构体
+ */
+export interface DescribeSkillDownloadInfoRequest {
+  /**
+   * <p>TCR实例ID</p>
+   */
+  RegistryId: string
+  /**
+   * <p>技能名称</p>
+   */
+  SkillName: string
+  /**
+   * <p>技能版本</p>
+   */
+  SkillVersion: string
+}
+
+/**
  * ModifyNamespace请求参数结构体
  */
 export interface ModifyNamespaceRequest {
@@ -3225,49 +3583,37 @@ export interface DeleteSecurityPolicyRequest {
 }
 
 /**
- * 查询共享版仓库信息返回
+ * ListSkills请求参数结构体
  */
-export interface RepositoryInfoResp {
+export interface ListSkillsRequest {
   /**
-   * 镜像仓库名字
+   * <p>TCR实例ID</p>
    */
-  RepoName?: string
+  RegistryId: string
   /**
-   * 镜像仓库类型
+   * <p>模糊查询</p>
    */
-  RepoType?: string
+  SearchKey?: string
   /**
-   * 镜像仓库服务地址
+   * <p>技能名称</p>
    */
-  Server?: string
+  SkillName?: string
   /**
-   * 创建时间
+   * <p>技能类型</p><p>枚举值：</p><ul><li>MCP Server： MCP Server 类型</li></ul>
    */
-  CreationTime?: string
+  SkillType?: string
   /**
-   * 镜像仓库描述
+   * <p>状态</p><p>枚举值：</p><ul><li>active： 活跃</li></ul>
    */
-  Description?: string
+  Status?: string
   /**
-   * 是否为公有镜像
+   * <p>偏移量</p>
    */
-  Public?: number
+  Offset?: number
   /**
-   * 下载次数
+   * <p>限制</p>
    */
-  PullCount?: number
-  /**
-   * 收藏次数
-   */
-  FavorCount?: number
-  /**
-   * 是否为用户收藏
-   */
-  IsUserFavor?: boolean
-  /**
-   * 是否为腾讯云官方镜像
-   */
-  IsQcloudOfficial?: boolean
+  Limit?: number
 }
 
 /**
@@ -3622,6 +3968,52 @@ export interface NamespaceIsExistsResp {
 }
 
 /**
+ * 查询共享版仓库信息返回
+ */
+export interface RepositoryInfoResp {
+  /**
+   * 镜像仓库名字
+   */
+  RepoName?: string
+  /**
+   * 镜像仓库类型
+   */
+  RepoType?: string
+  /**
+   * 镜像仓库服务地址
+   */
+  Server?: string
+  /**
+   * 创建时间
+   */
+  CreationTime?: string
+  /**
+   * 镜像仓库描述
+   */
+  Description?: string
+  /**
+   * 是否为公有镜像
+   */
+  Public?: number
+  /**
+   * 下载次数
+   */
+  PullCount?: number
+  /**
+   * 收藏次数
+   */
+  FavorCount?: number
+  /**
+   * 是否为用户收藏
+   */
+  IsUserFavor?: boolean
+  /**
+   * 是否为腾讯云官方镜像
+   */
+  IsQcloudOfficial?: boolean
+}
+
+/**
  * DescribeInstances请求参数结构体
  */
 export interface DescribeInstancesRequest {
@@ -3646,6 +4038,32 @@ export interface DescribeInstancesRequest {
    * 获取所有地域的实例，默认为False
    */
   AllRegion?: boolean
+}
+
+/**
+ * ListAIModelVersions请求参数结构体
+ */
+export interface ListAIModelVersionsRequest {
+  /**
+   * <p>TCR实例ID</p>
+   */
+  RegistryId: string
+  /**
+   * <p>命名空间</p>
+   */
+  NamespaceName: string
+  /**
+   * <p>仓库名称</p>
+   */
+  RepositoryName: string
+  /**
+   * <p>偏移量</p>
+   */
+  Offset?: number
+  /**
+   * <p>限制</p>
+   */
+  Limit?: number
 }
 
 /**
@@ -3865,36 +4283,6 @@ export interface DescribeUserQuotaPersonalResponse {
 }
 
 /**
- * 任务详情
- */
-export interface TaskDetail {
-  /**
-   * 任务
-   */
-  TaskName?: string
-  /**
-   * 任务UUID
-   */
-  TaskUUID?: string
-  /**
-   * 任务状态
-   */
-  TaskStatus?: string
-  /**
-   * 任务的状态信息
-   */
-  TaskMessage?: string
-  /**
-   * 任务开始时间
-   */
-  CreatedTime?: string
-  /**
-   * 任务结束时间
-   */
-  FinishedTime?: string
-}
-
-/**
  * DescribeImagePersonal请求参数结构体
  */
 export interface DescribeImagePersonalRequest {
@@ -4023,25 +4411,13 @@ export interface DeleteInstanceRequest {
 }
 
 /**
- * DescribeImageManifests返回参数结构体
+ * DescribeImageLifecyclePersonal返回参数结构体
  */
-export interface DescribeImageManifestsResponse {
+export interface DescribeImageLifecyclePersonalResponse {
   /**
-   * 镜像的Manifest信息
+   * 自动删除策略信息
    */
-  Manifest?: string
-  /**
-   * 镜像的配置信息
-   */
-  Config?: string
-  /**
-   * 镜像的Labels信息
-   */
-  Labels?: Array<KeyValueString>
-  /**
-   * 镜像大小，单位：byte
-   */
-  Size?: number
+  Data?: AutoDelStrategyInfoResp
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4063,9 +4439,9 @@ export interface DescribeNamespacePersonalResponse {
 }
 
 /**
- * DeleteReplicationInstance返回参数结构体
+ * DeleteNamespacePersonal返回参数结构体
  */
-export interface DeleteReplicationInstanceResponse {
+export interface DeleteNamespacePersonalResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4208,6 +4584,28 @@ export interface CreateWebhookTriggerRequest {
 }
 
 /**
+ * DescribeAIModelVersionDetail请求参数结构体
+ */
+export interface DescribeAIModelVersionDetailRequest {
+  /**
+   * <p>TCR实例ID</p>
+   */
+  RegistryId: string
+  /**
+   * <p>命名空间</p>
+   */
+  NamespaceName: string
+  /**
+   * <p>仓库名</p>
+   */
+  RepositoryName: string
+  /**
+   * <p>版本</p>
+   */
+  Reference: string
+}
+
+/**
  * DeleteImageAccelerateService返回参数结构体
  */
 export interface DeleteImageAccelerateServiceResponse {
@@ -4225,6 +4623,46 @@ export interface CVEWhitelistItem {
    * 漏洞白名单 ID
    */
   CVEID?: string
+}
+
+/**
+ * ListSkillVersions请求参数结构体
+ */
+export interface ListSkillVersionsRequest {
+  /**
+   * <p>TCR实例ID</p>
+   */
+  RegistryId: string
+  /**
+   * <p>技能名称</p>
+   */
+  SkillName: string
+  /**
+   * <p>偏移量</p>
+   */
+  Offset?: number
+  /**
+   * <p>最大限制</p>
+   */
+  Limit?: number
+}
+
+/**
+ * ListSkillVersions返回参数结构体
+ */
+export interface ListSkillVersionsResponse {
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>Skill版本列表</p>
+   */
+  VersionList?: Array<SkillVersionList>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4445,6 +4883,16 @@ export interface DescribeRepositoryOwnerPersonalRequest {
    * 仓库名称
    */
   RepoName?: string
+}
+
+/**
+ * DeleteReplicationInstance返回参数结构体
+ */
+export interface DeleteReplicationInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5229,6 +5677,24 @@ export interface CreateSignaturePolicyRequest {
 }
 
 /**
+ * ListSkills返回参数结构体
+ */
+export interface ListSkillsResponse {
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>技能类型</p>
+   */
+  SkillList?: Array<SkillList>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteTagRetentionRule请求参数结构体
  */
 export interface DeleteTagRetentionRuleRequest {
@@ -5318,6 +5784,20 @@ export interface TcrInstanceToken {
    * 令牌过期时间戳
    */
   ExpiredAt: number
+}
+
+/**
+ * skill 数据结构
+ */
+export interface SkillType {
+  /**
+   *
+   */
+  SkillName: string
+  /**
+   *
+   */
+  SkillVersion?: string
 }
 
 /**
@@ -5429,6 +5909,42 @@ export interface CreateTagRetentionExecutionRequest {
 }
 
 /**
+ * skill VersionList
+ */
+export interface SkillVersionList {
+  /**
+   *
+   */
+  Version?: string
+  /**
+   *
+   */
+  Size?: number
+  /**
+   *
+   */
+  PushTime?: string
+}
+
+/**
+ * ListAIModels返回参数结构体
+ */
+export interface ListAIModelsResponse {
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>模型列表</p>
+   */
+  ModelList?: Array<ModelList>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 同步日志
  */
 export interface ReplicationLog {
@@ -5466,6 +5982,16 @@ export interface DescribeInstanceAllNamespacesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ValidateNamespaceExistPersonal请求参数结构体
+ */
+export interface ValidateNamespaceExistPersonalRequest {
+  /**
+   * 命名空间名称
+   */
+  Namespace: string
 }
 
 /**
@@ -5508,6 +6034,44 @@ export interface Limit {
    * 配置的值
    */
   Value: number
+}
+
+/**
+ * 查询单个 Skill 的完整详情
+ */
+export interface Skill {
+  /**
+   *
+   */
+  SkillName?: string
+  /**
+   *
+   */
+  SkillVersion?: string
+  /**
+   *
+   */
+  Description?: string
+  /**
+   *
+   */
+  Tags?: Array<string>
+  /**
+   *
+   */
+  SkillType?: string
+  /**
+   *
+   */
+  Runtime?: string
+  /**
+   *
+   */
+  Status?: string
+  /**
+   *
+   */
+  UpdateTime?: string
 }
 
 /**

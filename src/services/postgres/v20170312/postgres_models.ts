@@ -2174,7 +2174,12 @@ export interface OpenAccountCAMResponse {
 /**
  * DescribeZones请求参数结构体
  */
-export type DescribeZonesRequest = null
+export interface DescribeZonesRequest {
+  /**
+   * <p>实例存储类型，根据磁盘类型返回支持的可用区</p><p>枚举值：</p><ul><li>PHYSICAL_LOCAL_SSD： 物理机本地ssd硬盘</li><li>CLOUD_PREMIUM： 高性能云硬盘</li><li>CLOUD_SSD： ssd云硬盘</li><li>CLOUD_HSSD： 增强型ssd云硬盘</li></ul><p>默认值：PHYSICAL_LOCAL_SSD</p>
+   */
+  StorageType?: string
+}
 
 /**
  * 描述某个地域下某个可用区的可售卖规格详细信息。
@@ -3990,39 +3995,39 @@ export interface DescribeBackupOverviewResponse {
   /**
    * 总免费空间大小，单位byte。
    */
-  TotalFreeSize: number
+  TotalFreeSize?: number
   /**
    * 已使用免费空间大小，单位byte。
    */
-  UsedFreeSize: number
+  UsedFreeSize?: number
   /**
    * 已使用收费空间大小，单位byte。
    */
-  UsedBillingSize: number
+  UsedBillingSize?: number
   /**
    * 日志备份数量。
    */
-  LogBackupCount: number
+  LogBackupCount?: number
   /**
    * 日志备份大小，单位byte。
    */
-  LogBackupSize: number
+  LogBackupSize?: number
   /**
    * 手动创建的基础备份数量。
    */
-  ManualBaseBackupCount: number
+  ManualBaseBackupCount?: number
   /**
    * 手动创建的基础备份大小，单位byte。
    */
-  ManualBaseBackupSize: number
+  ManualBaseBackupSize?: number
   /**
    * 自动创建的基础备份数量。
    */
-  AutoBaseBackupCount: number
+  AutoBaseBackupCount?: number
   /**
    * 自动创建的基础备份大小，单位byte。
    */
-  AutoBaseBackupSize: number
+  AutoBaseBackupSize?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4911,11 +4916,11 @@ export interface DescribeCloneDBInstanceSpecResponse {
  */
 export interface DescribeZonesResponse {
   /**
-   * 返回的结果数量。
+   * <p>返回的结果数量。</p>
    */
   TotalCount?: number
   /**
-   * 可用区信息集合。
+   * <p>可用区信息集合。</p>
    */
   ZoneSet?: Array<ZoneInfo>
   /**

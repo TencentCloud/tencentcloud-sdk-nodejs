@@ -176,41 +176,49 @@ export interface ModifyForwardingPolicyRequest {
  */
 export interface CreateForwardingRuleRequest {
   /**
-   * 全球加速实例ID。
+   * <p>全球加速实例ID。</p>
    */
   GlobalAcceleratorId: string
   /**
-   * 监听器ID。
+   * <p>监听器ID。</p>
    */
   ListenerId: string
   /**
-   * 策略ID。
+   * <p>策略ID。</p>
    */
   ForwardingPolicyId: string
   /**
-   * 七层转发规则条件信息。
+   * <p>七层转发规则条件信息。</p>
    */
   RuleConditions: Array<RuleCondition>
   /**
-   * 七层转发规则行为信息。
+   * <p>七层转发规则行为信息。</p>
    */
   RuleActions: Array<RuleAction>
   /**
-   * 回源Header信息。
+   * <p>回源Header信息。</p>
    */
   OriginHeaders?: Array<OriginHeader>
   /**
-   * 是否开启回源sni。
+   * <p>是否开启回源sni。</p>
    */
   EnableOriginSni?: boolean
   /**
-   * 回源sni。
+   * <p>回源sni。</p>
    */
   OriginSni?: string
   /**
-   * 回源host。
+   * <p>回源host。</p>
    */
   OriginHost?: string
+  /**
+   * <p>源站响应头</p>
+   */
+  ResponseHeaders?: Array<ResponseHeaders>
+  /**
+   * <p>删除源站响应头</p>
+   */
+  HideResponseHeaders?: Array<HideResponseHeaders>
 }
 
 /**
@@ -629,6 +637,10 @@ export interface EndpointGroupConfigurationSet {
    * <p>HPPTS加密算法套件</p>
    */
   CipherPolicyId?: string
+  /**
+   * <p>仅HTTPS回源协议支持选择[&#39;HTTP/1.1&#39;, &#39;HTTP/2&#39;]</p><p>枚举值：</p><ul><li>HTTP/1.1： 版本HTTP/1.1</li><li>HTTP/2： 版本HTTP/2</li></ul>
+   */
+  HttpVersion?: string
 }
 
 /**
@@ -788,45 +800,53 @@ export interface ForwardingRuleSet {
  */
 export interface ModifyForwardingRuleRequest {
   /**
-   * 全球加速实例ID。
+   * <p>全球加速实例ID。</p>
    */
   GlobalAcceleratorId: string
   /**
-   * 监听器ID。
+   * <p>监听器ID。</p>
    */
   ListenerId: string
   /**
-   * 策略ID。
+   * <p>策略ID。</p>
    */
   ForwardingPolicyId: string
   /**
-   * 七层转发规则ID。
+   * <p>七层转发规则ID。</p>
    */
   ForwardingRuleId: string
   /**
-   * 七层转发规则条件信息。
+   * <p>七层转发规则条件信息。</p>
    */
   RuleConditions?: Array<RuleCondition>
   /**
-   * 七层转发规则行为信息。
+   * <p>七层转发规则行为信息。</p>
    */
   RuleActions?: Array<RuleAction>
   /**
-   * 回源Header信息。
+   * <p>回源Header信息。</p>
    */
   OriginHeaders?: Array<OriginHeader>
   /**
-   * 是否开启回源sni。
+   * <p>是否开启回源sni。</p>
    */
   EnableOriginSni?: boolean
   /**
-   * 回源sni。
+   * <p>回源sni。</p>
    */
   OriginSni?: string
   /**
-   * 回源host。
+   * <p>回源host。</p>
    */
   OriginHost?: string
+  /**
+   * <p>源站响应头</p>
+   */
+  ResponseHeaders?: Array<ResponseHeaders>
+  /**
+   * <p>删除源站响应头</p>
+   */
+  HideResponseHeaders?: Array<HideResponseHeaders>
 }
 
 /**
@@ -1019,6 +1039,10 @@ export interface CreateListenerRequest {
    * <p>客户端证书。</p>
    */
   ClientCaCertificates?: Array<string>
+  /**
+   * <p>HTTPS监听器支持选择版本</p><p>枚举值：</p><ul><li>HTTP/1.1： HTTP/1.1</li><li>HTTP/2： HTTP/2</li></ul>
+   */
+  HttpVersion?: string
 }
 
 /**
@@ -1040,7 +1064,7 @@ export interface DescribeAccelerateRegionsResponse {
  */
 export interface ModifyForwardingRuleResponse {
   /**
-   * 异步任务ID。
+   * <p>异步任务ID。</p>
    */
   TaskId?: string
   /**
@@ -1208,6 +1232,20 @@ export interface ModifyGlobalAcceleratorResponse {
 }
 
 /**
+ * 隐藏Header
+ */
+export interface HideResponseHeaders {
+  /**
+   * <p>key</p>
+   */
+  Key: string
+  /**
+   * <p>value</p>
+   */
+  Value: string
+}
+
+/**
  * DescribeListeners请求参数结构体
  */
 export interface DescribeListenersRequest {
@@ -1287,6 +1325,20 @@ export interface RuleCondition {
  * DescribeAccelerateRegions请求参数结构体
  */
 export type DescribeAccelerateRegionsRequest = null
+
+/**
+ * 响应Header
+ */
+export interface ResponseHeaders {
+  /**
+   * <p>key</p>
+   */
+  Key: string
+  /**
+   * <p>value</p>
+   */
+  Value: string
+}
 
 /**
  * DeleteForwardingRule返回参数结构体
@@ -1426,6 +1478,10 @@ export interface EndpointGroupConfiguration {
    * <p>HPPTS加密算法套件</p>
    */
   CipherPolicyId?: string
+  /**
+   * <p>HTTPS回源协议支持选择[&#39;HTTP/1.1&#39;, &#39;HTTP/2&#39;]</p><p>枚举值：</p><ul><li>HTTP/1.1： 版本HTTP/1.1</li><li>HTTP/2： 版本HTTP/2</li></ul>
+   */
+  HttpVersion?: string
 }
 
 /**
@@ -1597,6 +1653,10 @@ export interface ModifyEndpointGroupRequest {
    * <p>HPPTS加密算法套件</p>
    */
   CipherPolicyId?: string
+  /**
+   * <p>仅HTTPS回源协议支持选择[&#39;HTTP/1.1&#39;, &#39;HTTP/2&#39;]</p><p>枚举值：</p><ul><li>HTTP/1.1： 版本HTTP/1.1</li><li>HTTP/2： 版本HTTP/2</li></ul>
+   */
+  HttpVersion?: string
 }
 
 /**
@@ -1761,11 +1821,11 @@ export interface DescribeGlobalAcceleratorsResponse {
  */
 export interface CreateForwardingRuleResponse {
   /**
-   * 异步任务ID。
+   * <p>异步任务ID。</p>
    */
   TaskId?: string
   /**
-   * 七层转发规则ID。
+   * <p>七层转发规则ID。</p>
    */
   ForwardingRuleId?: string
   /**

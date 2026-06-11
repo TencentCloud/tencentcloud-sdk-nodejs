@@ -197,7 +197,7 @@ export interface CreateLoadBalancerRequest {
    */
   VpcId?: string
   /**
-   * <p>在私有网络内购买内网负载均衡实例的情况下，必须指定子网 ID，内网负载均衡实例的 VIP 将从这个子网中产生。创建内网负载均衡实例时，此参数必填，创建公网IPv4负载均衡实例时，不支持指定该参数。</p>
+   * <p>在私有网络内购买内网负载均衡实例的情况下，必须指定子网 ID，内网负载均衡实例的 VIP 将从这个子网中产生。<br>创建内网负载均衡实例，或者创建 IPv6FullChain 版本的负载均衡实例，此参数必填。<br>创建公网IPv4负载均衡实例时，不支持指定该参数。</p>
    */
   SubnetId?: string
   /**
@@ -221,7 +221,7 @@ export interface CreateLoadBalancerRequest {
    */
   ZoneId?: string
   /**
-   * <p>网络计费模式，最大出带宽。仅对内网属性的性能容量型实例和公网属性的所有实例生效。API接口购买包年包月实例还在灰度中，如您需要体验该功能，请通过 <a href="https://console.cloud.tencent.com/workorder/category">工单申请</a></p>
+   * <p>网络计费模式，其中的最大出带宽，仅对内网属性的性能容量型实例和公网属性的所有实例生效。</p>
    */
   InternetAccessible?: InternetAccessible
   /**
@@ -289,11 +289,11 @@ export interface CreateLoadBalancerRequest {
    */
   Egress?: string
   /**
-   * <p>负载均衡实例的预付费相关属性，API接口购买包年包月实例还在灰度中，如您需要体验该功能，请通过 <a href="https://console.cloud.tencent.com/workorder/category">工单申请</a></p>
+   * <p>负载均衡实例的预付费相关属性</p>
    */
   LBChargePrepaid?: LBChargePrepaid
   /**
-   * <p>负载均衡实例计费类型，取值：POSTPAID_BY_HOUR，PREPAID，默认是POSTPAID_BY_HOUR。API接口购买包年包月实例还在灰度中，如您需要体验该功能，请通过 <a href="https://console.cloud.tencent.com/workorder/category">工单申请</a></p>
+   * <p>负载均衡实例计费类型，取值：POSTPAID_BY_HOUR，PREPAID，默认是POSTPAID_BY_HOUR。</p><p>枚举值：</p><ul><li>POSTPAID_BY_HOUR： 按量计费</li><li>PREPAID： 包年包月</li></ul>
    */
   LBChargeType?: string
   /**
@@ -304,6 +304,10 @@ export interface CreateLoadBalancerRequest {
    * <p>是否开启七层高级路由</p>
    */
   AdvancedRoute?: boolean
+  /**
+   * <p>可用区亲和信息</p>
+   */
+  AvailableZoneAffinityInfo?: AvailableZoneAffinityInfo
 }
 
 /**
@@ -4128,7 +4132,7 @@ export interface CreateListenerRequest {
    */
   FullEndPorts?: Array<number | bigint>
   /**
-   * <p>内网http监听器开启h2c开关，True（开启）、False（关闭）。<br>默认为关闭。</p>
+   * <p>内网 HTTP 监听器开启 h2c 开关。<br>True（开启）、False（关闭）。默认为关闭。<br>开启后，监听器仅支持创建后端转发类型为 GRPC 或 GRPCS 的七层规则；创建规则时需在 Rules.N.ForwardType 中显式传入 GRPC 或 GRPCS。</p>
    */
   H2cSwitch?: boolean
   /**

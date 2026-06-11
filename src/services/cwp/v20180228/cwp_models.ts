@@ -298,19 +298,19 @@ export interface DescribeBashPoliciesRequest {
  */
 export interface DescribeLoginWhiteHostListRequest {
   /**
-   * 白名单ID
+   * <p>白名单ID</p>
    */
   Id: number
   /**
-   * 需要返回的数量，最大值为1000
+   * <p>需要返回的数量，最大值为1000</p>
    */
   Limit: number
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset: number
   /**
-   * 过滤条件 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li>
+   * <p>过滤条件 <li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li></p>
    */
   Filters?: Array<AssetFilters>
 }
@@ -703,11 +703,11 @@ export interface DeleteBashEventsResponse {
  */
 export interface DescribeLoginWhiteCombinedListResponse {
   /**
-   * 总数量
+   * <p>总数量</p>
    */
   TotalCount?: number
   /**
-   * 合并后的白名单列表
+   * <p>合并后的白名单列表</p>
    */
   LoginWhiteCombinedInfos?: Array<LoginWhiteCombinedInfo>
   /**
@@ -2230,88 +2230,88 @@ export interface DescribeDefenceEventDetailRequest {
  */
 export interface DescribeMachineGeneralResponse {
   /**
-   * 资产总数
+   * <p>资产总数</p>
    */
   MachineCnt?: number
   /**
-   * 腾讯云服务商机器数
+   * <p>腾讯云服务商机器数</p>
    * @deprecated
    */
   TencentCloudMachineCnt?: number
   /**
-   * 阿里云服务商机器数
+   * <p>阿里云服务商机器数</p>
    * @deprecated
    */
   AliCloudMachineCnt?: number
   /**
-   * 百度云服务商机器数
+   * <p>百度云服务商机器数</p>
    * @deprecated
    */
   BaiduCloudMachineCnt?: number
   /**
-   * IDC机器数
+   * <p>IDC机器数</p>
    * @deprecated
    */
   IDCMachineCnt?: number
   /**
-   * 其他云服务商机器数
+   * <p>其他云服务商机器数</p>
    * @deprecated
    */
   OtherCloudMachineCnt?: number
   /**
-   * 已防护机器数
+   * <p>已防护机器数</p>
    */
   ProtectMachineCnt?: number
   /**
-   * 已防护基础版机器数
+   * <p>已防护基础版机器数</p>
    */
   BaseMachineCnt?: number
   /**
-   * 已防护专业版机器数
+   * <p>已防护专业版机器数</p>
    */
   SpecialtyMachineCnt?: number
   /**
-   * 已防护旗舰版机器数
+   * <p>已防护旗舰版机器数</p>
    */
   FlagshipMachineCnt?: number
   /**
-   * 存在风险的机器数
+   * <p>存在风险的机器数</p>
    */
   RiskMachineCnt?: number
   /**
-   * 比较昨日风险机器数
+   * <p>比较昨日风险机器数</p>
    */
   CompareYesterdayRiskMachineCnt?: number
   /**
-   * 比较昨日未防护机器数
+   * <p>比较昨日未防护机器数</p>
    */
   CompareYesterdayNotProtectMachineCnt?: number
   /**
-   * 比较昨日即将到期的机器数
+   * <p>比较昨日即将到期的机器数</p>
    */
   CompareYesterdayDeadlineMachineCnt?: number
   /**
-   * 即将到期的机器数
+   * <p>即将到期的机器数</p>
    */
   DeadlineMachineCnt?: number
   /**
-   * 未防护机器数
+   * <p>未防护机器数</p>
    */
   NotProtectMachineCnt?: number
   /**
-   * 已防护轻量机器数（Lighthouse机器）
+   * <p>已防护轻量机器数（Lighthouse机器）</p>
    */
   LHGeneralDiscountCnt?: number
   /**
-   * 比较昨日新增的主机数
+   * <p>比较昨日新增的主机数</p>
    */
   CompareYesterdayMachineCnt?: number
   /**
-   * 自动清理时间,最大720小时,最小0, 默认0 ,0=关闭
+   * <p>自动清理时间,最大720小时,最小0, 默认0 ,0=关闭</p>
    */
   MachineDestroyAfterOfflineHours?: number
   /**
-   * 云服务器类型数组
+   * <p>云服务器类型数组</p>
    */
   CloudFrom?: Array<CloudFromCnt>
   /**
@@ -2546,7 +2546,7 @@ export interface BroadcastInfo {
  */
 export interface DeleteLoginWhiteListRequest {
   /**
-   * 白名单ID (最大 100 条)
+   * <p>白名单ID (最大 100 条)</p>
    */
   Ids: Array<number | bigint>
 }
@@ -5302,39 +5302,39 @@ export interface ZoneInfo {
  */
 export interface ModifyLoginWhiteRecordRequest {
   /**
-   * 白名单用户（多个用户逗号隔开）
+   * <p>白名单用户（多个用户逗号隔开）</p>
    */
   UserName: string
   /**
-   * 更新后记录的白名单维度信息
+   * <p>更新后记录的白名单维度信息</p>
    */
   SrcIp: string
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime: string
   /**
-   * 备注
+   * <p>备注</p>
    */
   Remark: string
   /**
-   * 是否对所有服务器生效，0-否，1-是
+   * <p>是否对所有服务器生效，0-否，1-是</p>
    */
   IsGlobal: number
   /**
-   * 白名单ID
+   * <p>白名单ID</p>
    */
   Id: number
   /**
-   * 服务器列表
+   * <p>服务器列表</p>
    */
   Hosts?: Array<HostInfo>
   /**
-   * 地域列表
+   * <p>地域列表</p>
    */
   Places?: Array<Place>
 }
@@ -6806,7 +6806,7 @@ export interface DescribeAssetMachineDetailRequest {
  */
 export interface ExportTasksRequest {
   /**
-   * 任务ID
+   * <p>任务ID</p>
    */
   TaskId: string
 }
@@ -17227,11 +17227,11 @@ export interface DescribeVulStoreListResponse {
  */
 export interface DescribeLoginWhiteHostListResponse {
   /**
-   * 总数
+   * <p>总数</p>
    */
   TotalCount?: number
   /**
-   * 服务器列表
+   * <p>服务器列表</p>
    */
   Hosts?: Array<HostDesc>
   /**
@@ -20851,7 +20851,7 @@ export interface DescribeMemShellRulesResponse {
  */
 export interface AddLoginWhiteListsResponse {
   /**
-   * 重复添加的提示列表
+   * <p>重复添加的提示列表</p>
    */
   DuplicateHosts?: Array<DuplicateHosts>
   /**
@@ -22236,15 +22236,15 @@ export interface ExportWindowsPatchListResponse {
  */
 export interface DescribeLoginWhiteCombinedListRequest {
   /**
-   * 需要返回的数量，默认为10，最大值为100
+   * <p>需要返回的数量，默认为10，最大值为100</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
   /**
-   * 过滤条件。<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li><li>UserName - String - 是否必填：否 - 用户名筛选</li><li>SrcIP - String - 是否必填：否 - 来源IP筛选</li><li>Location - String - 是否必填：否 - 登录地筛选</li><li>ModifyBeginTime - String - 是否必填：否 - 按照修改时间段筛选，开始时间</li><li>ModifyEndTime - String - 是否必填：否 - 按照修改时间段筛选，结束时间</li>
+   * <p>过滤条件。<li>IpOrAlias - String - 是否必填：否 - 主机ip或别名筛选</li><li>UserName - String - 是否必填：否 - 用户名筛选</li><li>SrcIP - String - 是否必填：否 - 来源IP筛选</li><li>Location - String - 是否必填：否 - 登录地筛选</li><li>ModifyBeginTime - String - 是否必填：否 - 按照修改时间段筛选，开始时间</li><li>ModifyEndTime - String - 是否必填：否 - 按照修改时间段筛选，结束时间</li></p>
    */
   Filters?: Array<Filter>
 }
@@ -22300,18 +22300,15 @@ export interface Strategy {
  */
 export interface AddLoginWhiteListsRequest {
   /**
-   * 异地登录白名单实体
+   * <p>异地登录白名单实体</p>
    */
   HostLoginWhiteObj: HostLoginWhiteObj
   /**
-   * 事件同步处理方式：
-  "" -- 不操作
-  "All" -- 将符合此配置的所有事件记录加白
-  "Id" -- 将EventId对应的事件记录加白
+   * <p>事件同步处理方式：<br>  &quot;&quot; -- 不操作<br>  &quot;All&quot; -- 将符合此配置的所有事件记录加白<br>  &quot;Id&quot; -- 将EventId对应的事件记录加白</p>
    */
   ProcessType?: string
   /**
-   * 异地登录事件ID，当ProcessType为Id时此项必填
+   * <p>异地登录事件ID，当ProcessType为Id时此项必填</p>
    */
   EventId?: number
 }
@@ -24246,13 +24243,17 @@ export interface DeleteBruteAttacksResponse {
  */
 export interface ExportTasksResponse {
   /**
-   * PENDING：正在生成下载链接，FINISHED：下载链接已生成，ERROR：网络异常等异常情况
+   * <p>PENDING：正在生成下载链接，FINISHED：下载链接已生成，ERROR：网络异常等异常情况</p>
    */
   Status?: string
   /**
-   * 下载链接
+   * <p>下载链接</p>
    */
   DownloadUrl?: string
+  /**
+   * <p>文件名称</p>
+   */
+  FileName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

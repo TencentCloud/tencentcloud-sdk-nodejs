@@ -3566,187 +3566,189 @@ InstanceId 和 SnapshotIds 为二选一必填参数。
  */
 export interface Instance {
   /**
-   * 实例所在的位置。
+   * <p>实例所在的位置。</p>
    */
   Placement?: Placement
   /**
-   * 实例`ID`。
+   * <p>实例<code>ID</code>。</p>
    */
   InstanceId?: string
   /**
-   * 实例机型。
+   * <p>实例机型。</p>
    */
   InstanceType?: string
   /**
-   * 实例的CPU核数，单位：核。
+   * <p>实例的CPU核数，单位：核。</p>
    */
   CPU?: number
   /**
-   * 实例内存容量，单位：`GiB`。
+   * <p>实例内存容量，单位：<code>GiB</code>。</p>
    */
   Memory?: number
   /**
-   * 实例业务状态。取值范围：<br><li>NORMAL：表示正常状态的实例</li><li>EXPIRED：表示过期的实例</li><li>PROTECTIVELY_ISOLATED：表示被安全隔离的实例。</li>
+   * <p>实例业务状态。取值范围：<br><li>NORMAL：表示正常状态的实例</li><li>EXPIRED：表示过期的实例</li><li>PROTECTIVELY_ISOLATED：表示被安全隔离的实例。</li></p>
    */
   RestrictState?: string
   /**
-   * 实例名称。
+   * <p>实例名称。</p>
    */
   InstanceName?: string
   /**
-   * 实例[计费类型](https://cloud.tencent.com/document/product/213/2180)。取值范围：<br><li>PREPAID：预付费，即包年包月</li><br><li>POSTPAID_BY_HOUR：按小时后付费</li><br><li>CDHPAID：独享子机（基于专用宿主机创建，宿主机部分的资源不收费）</li><br><li>SPOTPAID：竞价付费</li><br><li>CDCPAID：专用集群付费</li>
+   * <p>实例<a href="https://cloud.tencent.com/document/product/213/2180">计费类型</a>。取值范围：<br><li>PREPAID：预付费，即包年包月</li><br><li>POSTPAID_BY_HOUR：按小时后付费</li><br><li>CDHPAID：独享子机（基于专用宿主机创建，宿主机部分的资源不收费）</li><br><li>SPOTPAID：竞价付费</li><br><li>CDCPAID：专用集群付费</li></p>
    */
   InstanceChargeType?: string
   /**
-   * 实例系统盘信息。
+   * <p>实例系统盘信息。</p>
    */
   SystemDisk?: SystemDisk
   /**
-   * 实例数据盘信息。
+   * <p>实例数据盘信息。</p>
    */
   DataDisks?: Array<DataDisk>
   /**
-   * 实例主网卡的内网`IP`列表。
+   * <p>实例主网卡的内网<code>IP</code>列表。</p>
    */
   PrivateIpAddresses?: Array<string>
   /**
-   * 实例主网卡的公网`IP`列表。
+   * <p>实例主网卡的公网<code>IP</code>列表。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicIpAddresses?: Array<string>
   /**
-   * 实例带宽信息。
+   * <p>实例带宽信息。</p>
    */
   InternetAccessible?: InternetAccessible
   /**
-   * 实例所属虚拟私有网络信息。
+   * <p>实例所属虚拟私有网络信息。</p>
    */
   VirtualPrivateCloud?: VirtualPrivateCloud
   /**
-   * 生产实例所使用的镜像`ID`。
+   * <p>生产实例所使用的镜像<code>ID</code>。</p>
    */
   ImageId?: string
   /**
-   * 自动续费标识。取值范围：<br><li>`NOTIFY_AND_MANUAL_RENEW`：表示通知即将过期，但不自动续费</li><li>`NOTIFY_AND_AUTO_RENEW`：表示通知即将过期，而且自动续费</li><li>`DISABLE_NOTIFY_AND_MANUAL_RENEW`：表示不通知即将过期，也不自动续费。
-</li><li>注意：后付费模式本项为null</li>
+   * <p>自动续费标识。取值范围：<br><li><code>NOTIFY_AND_MANUAL_RENEW</code>：表示通知即将过期，但不自动续费</li><li><code>NOTIFY_AND_AUTO_RENEW</code>：表示通知即将过期，而且自动续费</li><li><code>DISABLE_NOTIFY_AND_MANUAL_RENEW</code>：表示不通知即将过期，也不自动续费。</p></li><li>注意：后付费模式本项为null</li>
    */
   RenewFlag?: string
   /**
-   * 创建时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。
+   * <p>创建时间。按照<code>ISO8601</code>标准表示，并且使用<code>UTC</code>时间。格式为：<code>YYYY-MM-DDThh:mm:ssZ</code>。</p>
    */
   CreatedTime?: string
   /**
-   * 到期时间。按照`ISO8601`标准表示，并且使用`UTC`时间。格式为：`YYYY-MM-DDThh:mm:ssZ`。注意：后付费模式本项为null
+   * <p>到期时间。按照<code>ISO8601</code>标准表示，并且使用<code>UTC</code>时间。格式为：<code>YYYY-MM-DDThh:mm:ssZ</code>。注意：后付费模式本项为null</p>
    */
   ExpiredTime?: string
   /**
-   * 操作系统名称。
+   * <p>操作系统名称。</p>
    */
   OsName?: string
   /**
-   * 实例所属安全组。该参数可以通过调用 [DescribeSecurityGroups](https://cloud.tencent.com/document/api/215/15808) 的返回值中的sgId字段来获取。
+   * <p>实例所属安全组。该参数可以通过调用 <a href="https://cloud.tencent.com/document/api/215/15808">DescribeSecurityGroups</a> 的返回值中的sgId字段来获取。</p>
    */
   SecurityGroupIds?: Array<string>
   /**
-   * 实例登录设置。目前只返回实例所关联的密钥。
+   * <p>实例登录设置。目前只返回实例所关联的密钥。</p>
    */
   LoginSettings?: LoginSettings
   /**
-   * 实例状态。状态类型详见[实例状态表](https://cloud.tencent.com/document/api/213/15753#InstanceStatus)
+   * <p>实例状态。状态类型详见<a href="https://cloud.tencent.com/document/api/213/15753#InstanceStatus">实例状态表</a></p>
    */
   InstanceState?: string
   /**
-   * 实例关联的标签列表。
+   * <p>实例关联的标签列表。</p>
    */
   Tags?: Array<Tag>
   /**
-   * 实例的关机计费模式。
-取值范围：<br><li>KEEP_CHARGING：关机继续收费</li><li>STOP_CHARGING：关机停止收费</li><li>NOT_APPLICABLE：实例处于非关机状态或者不适用关机停止计费的条件</li>
+   * <p>实例的关机计费模式。<br>取值范围：<br><li>KEEP_CHARGING：关机继续收费</li><li>STOP_CHARGING：关机停止收费</li><li>NOT_APPLICABLE：实例处于非关机状态或者不适用关机停止计费的条件</li></p>
    */
   StopChargingMode?: string
   /**
-   * 实例全局唯一ID
+   * <p>实例全局唯一ID</p>
    */
   Uuid?: string
   /**
-   * 实例的最新操作。例：StopInstances、ResetInstance。
+   * <p>实例的最新操作。例：StopInstances、ResetInstance。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestOperation?: string
   /**
-   * 实例的最新操作状态。取值范围：<br><li>SUCCESS：表示操作成功</li><li>OPERATING：表示操作执行中</li><li>FAILED：表示操作失败</li>
+   * <p>实例的最新操作状态。取值范围：<br><li>SUCCESS：表示操作成功</li><li>OPERATING：表示操作执行中</li><li>FAILED：表示操作失败</li></p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestOperationState?: string
   /**
-   * 实例最新操作的唯一请求 ID。
+   * <p>实例最新操作的唯一请求 ID。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestOperationRequestId?: string
   /**
-   * 分散置放群组ID。
+   * <p>分散置放群组ID。</p>
    */
   DisasterRecoverGroupId?: string
   /**
-   * 实例的IPv6地址。
+   * <p>实例的IPv6地址。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IPv6Addresses?: Array<string>
   /**
-   * CAM角色名。
+   * <p>CAM角色名。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CamRoleName?: string
   /**
-   * 高性能计算集群`ID`。
+   * <p>高性能计算集群<code>ID</code>。</p>
    */
   HpcClusterId?: string
   /**
-   * 高性能计算集群`IP`列表。
+   * <p>高性能计算集群<code>IP</code>列表。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RdmaIpAddresses?: Array<string>
   /**
-   * 实例所在的专用集群`ID`。
+   * <p>实例所在的专用集群<code>ID</code>。</p>
    */
   DedicatedClusterId?: string
   /**
-   * 实例隔离类型。取值范围：<br><li>ARREAR：表示欠费隔离<br></li><li>EXPIRE：表示到期隔离<br></li><li>MANMADE：表示主动退还隔离<br></li><li>NOTISOLATED：表示未隔离<br></li>
+   * <p>实例隔离类型。取值范围：<br><li>ARREAR：表示欠费隔离<br></li><li>EXPIRE：表示到期隔离<br></li><li>MANMADE：表示主动退还隔离<br></li><li>NOTISOLATED：表示未隔离<br></li></p>
    */
   IsolatedSource?: string
   /**
-   * GPU信息。如果是gpu类型子机，该值会返回GPU信息，如果是其他类型子机则不返回。
+   * <p>GPU信息。如果是gpu类型子机，该值会返回GPU信息，如果是其他类型子机则不返回。</p>
    */
   GPUInfo?: GPUInfo
   /**
-   * 实例的操作系统许可类型，默认为TencentCloud
+   * <p>实例的操作系统许可类型，默认为TencentCloud</p>
    */
   LicenseType?: string
   /**
-   * 实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：<br><li>true：表示开启实例保护，不允许通过api接口删除实例</li><li>false：表示关闭实例保护，允许通过api接口删除实例</li><br>默认取值：false。
+   * <p>实例销毁保护标志，表示是否允许通过api接口删除实例。取值范围：<br><li>true：表示开启实例保护，不允许通过api接口删除实例</li><li>false：表示关闭实例保护，允许通过api接口删除实例</li><br>默认取值：false。</p>
    */
   DisableApiTermination?: boolean
   /**
-   * 默认登录用户。
+   * <p>默认登录用户。</p>
    */
   DefaultLoginUser?: string
   /**
-   * 默认登录端口。
+   * <p>默认登录端口。</p>
    */
   DefaultLoginPort?: number
   /**
-   * 实例的最新操作错误信息。
+   * <p>实例的最新操作错误信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestOperationErrorMsg?: string
   /**
-   * 自定义metadata，本参数对应创建 CVM时指定的Metadata 信息。**注：内测中**。
+   * <p>自定义metadata，本参数对应创建 CVM时指定的Metadata 信息。<strong>注：内测中</strong>。</p>
    */
   Metadata?: Metadata
   /**
-   * 实例绑定的公网IPv6地址。
+   * <p>实例绑定的公网IPv6地址。</p>
    */
   PublicIPv6Addresses?: Array<string>
+  /**
+   * <p>描述了实例CPU拓扑结构的相关信息。</p>
+   */
+  CpuTopology?: CpuTopology
 }
 
 /**

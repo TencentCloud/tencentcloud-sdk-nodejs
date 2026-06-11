@@ -12970,6 +12970,10 @@ export interface Extenders {
    * <p>节点缓存能力</p>
    */
   NodeCacheCapable?: boolean
+  /**
+   * <p>extender 是否可忽略</p>
+   */
+  Ignorable?: boolean
 }
 
 /**

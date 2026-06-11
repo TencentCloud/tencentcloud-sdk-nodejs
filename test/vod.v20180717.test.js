@@ -1778,6 +1778,16 @@ it("vod.v20180717.DescribeQualityInspectTemplates", async function () {
     }
 })
 
+it("vod.v20180717.DescribeAigcFaceInfoAsync", async function () {
+    try {
+       const data = await client.DescribeAigcFaceInfoAsync({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.CreateJustInTimeTranscodeTemplate", async function () {
     try {
        const data = await client.CreateJustInTimeTranscodeTemplate({})

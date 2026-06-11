@@ -208,9 +208,9 @@ it("iotexplorer.v20190423.CreateTWeSeeRecognitionTask", async function () {
     }
 })
 
-it("iotexplorer.v20190423.DescribeDeviceBindGateway", async function () {
+it("iotexplorer.v20190423.CheckFirmwareUpdate", async function () {
     try {
-       const data = await client.DescribeDeviceBindGateway({})
+       const data = await client.CheckFirmwareUpdate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -651,6 +651,16 @@ it("iotexplorer.v20190423.DeleteTWeSeeCallback", async function () {
 it("iotexplorer.v20190423.BatchUpdateFirmware", async function () {
     try {
        const data = await client.BatchUpdateFirmware({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.CreateDevicePublishSDPAnswer", async function () {
+    try {
+       const data = await client.CreateDevicePublishSDPAnswer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1718,6 +1728,16 @@ it("iotexplorer.v20190423.DescribeGatewaySubDeviceList", async function () {
     }
 })
 
+it("iotexplorer.v20190423.GetDeviceSumStatistics", async function () {
+    try {
+       const data = await client.GetDeviceSumStatistics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeBatchProduction", async function () {
     try {
        const data = await client.DescribeBatchProduction({})
@@ -1788,9 +1808,9 @@ it("iotexplorer.v20190423.CreateDeviceChannel", async function () {
     }
 })
 
-it("iotexplorer.v20190423.CheckFirmwareUpdate", async function () {
+it("iotexplorer.v20190423.DescribeDeviceBindGateway", async function () {
     try {
-       const data = await client.CheckFirmwareUpdate({})
+       const data = await client.DescribeDeviceBindGateway({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1898,9 +1918,9 @@ it("iotexplorer.v20190423.DeleteDevice", async function () {
     }
 })
 
-it("iotexplorer.v20190423.GetDeviceSumStatistics", async function () {
+it("iotexplorer.v20190423.DeleteDeviceSDP", async function () {
     try {
-       const data = await client.GetDeviceSumStatistics({})
+       const data = await client.DeleteDeviceSDP({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

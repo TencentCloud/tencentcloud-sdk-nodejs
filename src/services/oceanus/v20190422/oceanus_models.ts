@@ -857,11 +857,11 @@ export interface Setats {
    */
   WebUIType?: number
   /**
-   * <p>setats集群的名字</p>
+   * <p>Setats集群名字</p>
    */
   Name?: string
   /**
-   * <p>setats集群注释</p>
+   * <p>Setats集群描述</p>
    */
   Remark?: string
 }
@@ -1280,6 +1280,63 @@ export interface DescribeResourceConfigsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 变量信息列表
+ */
+export interface VariableItem {
+  /**
+   * <p>变量id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SerialId?: string
+  /**
+   * <p>变量名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * <p>变量值</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+  /**
+   * <p>变量值类型</p><p>枚举值：</p><ul><li>0： 自定义变量</li><li>1： 凭据值</li></ul>
+   */
+  ValueType?: number
+  /**
+   * <p>凭据所在地域</p>
+   */
+  SecretRegion?: string
+  /**
+   * <p>凭据名称</p>
+   */
+  SecretName?: string
+  /**
+   * <p>凭据版本</p>
+   */
+  SecretVersionId?: string
+  /**
+   * <p>变量值是否隐藏</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: number
+  /**
+   * <p>变量描述</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Remark?: string
+  /**
+   * <p>变量创建时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * <p>变量创建人</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatorUin?: string
 }
 
 /**
@@ -2470,60 +2527,63 @@ export interface TriggerJobSavepointResponse {
 }
 
 /**
- * 变量信息列表
+ * HiveMetastoreInfo
  */
-export interface VariableItem {
+export interface HiveMetastoreInfo {
   /**
-   * <p>变量id</p>
+   * <p>hms serialId</p>
+   */
+  HiveMetastoreSerialId?: string
+  /**
+   * <p>集群SerialId</p>
+   */
+  ClusterGroupSerialId?: string
+  /**
+   * <p>状态枚举</p><p>枚举值：</p><ul><li>3： 运行中</li><li>1： 初始化中</li><li>2： 部署中</li><li>-2： 已删除</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>使用核数</p><p>单位：cu</p>
+   */
+  Cpu?: number
+  /**
+   * <p>使用内存资源</p><p>单位：GB</p>
+   */
+  MemGB?: number
+  /**
+   * <p>副本数</p>
+   */
+  Replica?: number
+  /**
+   * <p>hms 访问uri</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SerialId?: string
+  HiveUri?: string
   /**
-   * <p>变量名</p>
+   * <p>命名空间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
+  HiveNamespace?: string
   /**
-   * <p>变量值</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value?: string
-  /**
-   * <p>变量值类型</p><p>枚举值：</p><ul><li>0： 自定义变量</li><li>1： 凭据值</li></ul>
-   */
-  ValueType?: number
-  /**
-   * <p>凭据所在地域</p>
-   */
-  SecretRegion?: string
-  /**
-   * <p>凭据名称</p>
-   */
-  SecretName?: string
-  /**
-   * <p>凭据版本</p>
-   */
-  SecretVersionId?: string
-  /**
-   * <p>变量值是否隐藏</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Type?: number
-  /**
-   * <p>变量描述</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Remark?: string
-  /**
-   * <p>变量创建时间</p>
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * <p>变量创建人</p>
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatorUin?: string
+  UpdateTime?: string
+  /**
+   * <p>Warehouse地址</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HiveMetastoreWarehouseDir?: string
+  /**
+   * <p>高级参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Config?: Array<Property>
 }
 
 /**
@@ -3311,7 +3371,7 @@ export interface Cluster {
    */
   CreateTime?: string
   /**
-   * <p>最后一次操作集群的时间</p>
+   * <p>最后一次操作集群的时间</p><p>默认值：-</p>
    */
   UpdateTime?: string
   /**
@@ -3348,7 +3408,7 @@ export interface Cluster {
    */
   Tags?: Array<Tag>
   /**
-   * <p>集群隔离时间; 没隔离时间，则为 -</p>
+   * <p>集群隔离时间; 没隔离时间，则为 -</p><p>默认值：-</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsolatedTime?: string
@@ -3550,6 +3610,20 @@ export interface Cluster {
    * <p>单作业最大可配置 CU 数</p>
    */
   MaxCuPerJob?: number
+  /**
+   * <p>元数据服务信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HiveMetastore?: HiveMetastoreInfo
+  /**
+   * <p>安全组</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecurityGroupIds?: Array<string>
+  /**
+   * <p>弹性网卡方案，0：POD弹性网卡，1：Node弹性网卡。</p><p>枚举值：</p><ul><li>0： POD弹性网卡</li><li>1： Node弹性网卡</li></ul>
+   */
+  NetEniType?: number
 }
 
 /**

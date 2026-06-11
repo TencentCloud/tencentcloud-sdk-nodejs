@@ -241,11 +241,11 @@ export interface DetachGroupPolicyRequest {
  */
 export interface DescribeRoleListResponse {
   /**
-   * 角色详情列表。
+   * <p>角色详情列表。</p>
    */
   List?: Array<RoleInfo>
   /**
-   * 角色总数
+   * <p>角色总数</p>
    */
   TotalNum?: number
   /**
@@ -666,15 +666,15 @@ export interface GetCustomMFATokenInfoRequest {
  */
 export interface DescribeRoleListRequest {
   /**
-   * 页码，从1开始
+   * <p>页码，从1开始</p>
    */
   Page: number
   /**
-   * 每页行数，不能大于200
+   * <p>每页行数，不能大于200</p>
    */
   Rp: number
   /**
-   * 标签筛选
+   * <p>标签筛选</p>
    */
   Tags?: Array<RoleTags>
 }

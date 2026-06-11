@@ -139,6 +139,22 @@ export interface CreateDBInstancesRequest {
    * <p>svls实例的ccu变配配置</p>
    */
   AutoScaleConfig?: AutoScalingConfig
+  /**
+   * <p>绑定安全组列表</p>
+   */
+  SecurityGroupIds?: Array<string>
+  /**
+   * <p>root用户名,当前版本默认为dbaadmin，传值也会重置为dbaadmin</p>
+   */
+  UserName?: string
+  /**
+   * <p>dbaadmin密码</p>
+   */
+  Password?: string
+  /**
+   * <p>是否开启透明加密，0：不开启，1：开启</p>
+   */
+  EncryptionEnable?: number
 }
 
 /**
@@ -1032,6 +1048,10 @@ export interface CreateCloneInstanceRequest {
    * <p>实例模式，normal：标准型；enhanced:加强型</p>
    */
   InstanceMode?: string
+  /**
+   * <p>安全组id列表</p>
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -1039,17 +1059,21 @@ export interface CreateCloneInstanceRequest {
  */
 export interface DescribeDBInstancesRequest {
   /**
-   * 过滤参数
+   * <p>过滤参数</p>
    */
   Filters?: Array<InstanceFilter>
   /**
-   * 最大返回个数，默认为20，上限为100
+   * <p>最大返回个数，默认为20，上限为100</p>
    */
   Limit?: number
   /**
-   * 偏移量，取Limit整数倍
+   * <p>偏移量，取Limit整数倍</p>
    */
   Offset?: number
+  /**
+   * <p>指定查询引擎类型</p><p>枚举值：</p><ul><li>libra： 列存引擎</li></ul>
+   */
+  EngineType?: string
 }
 
 /**
@@ -1417,6 +1441,14 @@ export interface DescribeDBInstanceDetailResponse {
    * <p>维护窗口配置</p>
    */
   MaintenanceWindow?: MaintenanceWindowInfo
+  /**
+   * <p>是否开启透明加密，0：未开启；1：已开启</p>
+   */
+  EncryptionEnable?: number
+  /**
+   * <p>真实使用的kms地域，用于后续调用kms服务</p>
+   */
+  EncryptionKmsRegion?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2454,6 +2486,10 @@ export interface InstanceInfo {
    * <p>分析引擎关系信息</p>
    */
   AnalysisRelationInfos?: Array<AnalysisRelationInfo>
+  /**
+   * <p>分析引擎实例信息</p>
+   */
+  AnalysisInstanceInfo?: AnalysisInstanceInfo
 }
 
 /**
@@ -3010,11 +3046,11 @@ export interface BackupPolicyModelInput {
  */
 export interface DescribeDBInstancesResponse {
   /**
-   * 返回实例列表信息
+   * <p>返回实例列表信息</p>
    */
   Instances?: Array<InstanceInfo>
   /**
-   * 满足条件总数量
+   * <p>满足条件总数量</p>
    */
   TotalCount?: number
   /**

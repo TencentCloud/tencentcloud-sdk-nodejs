@@ -18,13 +18,17 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  AttachRemoteDisksResponse,
+  ModifyRemoteDiskAttributesRequest,
   ModifyDiskExtraPerformanceRequest,
+  SwitchParameterCreateRemoteDisksResponse,
   ModifyDiskAttributesResponse,
   DescribeDiskBackupsRequest,
-  CreateSnapshotGroupRequest,
+  InquirePriceModifyDiskBackupQuotaRequest,
   AutoSnapshotPolicy,
   DetailPrice,
   ModifySnapshotsSharePermissionRequest,
+  AttachRemoteDisksRequest,
   CopySnapshotCrossRegionsResponse,
   DescribeSnapshotGroupsRequest,
   ModifyDiskBackupQuotaRequest,
@@ -32,13 +36,19 @@ import {
   BindAutoSnapshotPolicyRequest,
   CreateSnapshotResponse,
   DescribeAutoSnapshotPoliciesRequest,
+  InquirePriceRenewRemoteDisksRequest,
+  TerminateRemoteDisksRequest,
+  DescribeRemoteDisksRequest,
   ModifySnapshotsSharePermissionResponse,
+  DescribeRemoteDisksResponse,
   DeleteDiskBackupsRequest,
+  DescribeRemoteDiskConfigQuotaResponse,
   InitializeDisksResponse,
   DescribeDiskStoragePoolRequest,
   DescribeDiskBackupsResponse,
   SnapshotCopyResult,
   RenewDiskRequest,
+  DescribeRemoteDisksDeniedActionsRequest,
   InquirePriceModifyDiskExtraPerformanceResponse,
   AdvancedRetentionPolicy,
   CreateDisksRequest,
@@ -47,6 +57,7 @@ import {
   DescribeSnapshotsRequest,
   ModifyAutoSnapshotPolicyAttributeRequest,
   DescribeDiskConfigQuotaResponse,
+  SwitchParameterCreateRemoteDisksRequest,
   ApplyDiskBackupResponse,
   InquiryPriceResizeDiskResponse,
   Tag,
@@ -64,10 +75,11 @@ import {
   ModifyDiskBackupQuotaResponse,
   InquiryPriceRenewDisksRequest,
   DescribeSnapshotSharePermissionRequest,
-  InquirePriceModifyDiskBackupQuotaRequest,
+  CreateSnapshotGroupRequest,
   DeleteDiskBackupsResponse,
   DeleteSnapshotsRequest,
   ModifyDisksRenewFlagResponse,
+  SwitchParameterRenewRemoteDisksRequest,
   CopyAutoSnapshotPolicyCrossAccountResponse,
   DeleteAutoSnapshotPoliciesResponse,
   DescribeDisksResponse,
@@ -77,20 +89,25 @@ import {
   ModifySnapshotAttributeResponse,
   CopyAutoSnapshotPolicyCrossAccountRequest,
   ModifyDiskAttributesRequest,
+  DescribeRemoteDisksDeniedActionsResponse,
   GetSnapOverviewRequest,
+  DetachRemoteDisksResponse,
   Image,
   ModifyAutoSnapshotPolicyAttributeResponse,
   TerminateDisksRequest,
   CdcSize,
   DescribeInstancesDiskNumResponse,
+  InquirePriceCreateRemoteDisksRequest,
   ResizeDiskRequest,
   ApplyDiskBackupRequest,
   ModifyDisksChargeTypeRequest,
   InitializeDisksRequest,
+  CreateRemoteDisksRequest,
+  DiskConfig,
   CreateAutoSnapshotPolicyResponse,
   ModifySnapshotAttributeRequest,
   UnbindAutoSnapshotPolicyRequest,
-  DiskConfig,
+  DescribeRemoteDiskConfigQuotaRequest,
   CreateDiskBackupResponse,
   InquirePriceModifyDiskBackupQuotaResponse,
   DeleteAutoSnapshotPoliciesRequest,
@@ -105,17 +122,23 @@ import {
   CreateDisksResponse,
   AttachDisksResponse,
   CreateDiskBackupRequest,
+  InquirePriceCreateRemoteDisksResponse,
   DeleteSnapshotGroupRequest,
   SnapshotGroup,
   BindAutoSnapshotPolicyResponse,
+  SwitchParameterRenewRemoteDisksResponse,
   DiskBackup,
   DescribeDisksRequest,
   DetachDisksResponse,
+  ModifyRemoteDiskAttributesResponse,
+  CreateRemoteDisksResponse,
   InquiryPriceRenewDisksResponse,
   SharePermission,
   DescribeDiskStoragePoolResponse,
   Policy,
+  InquirePriceRenewRemoteDisksResponse,
   ModifyDiskExtraPerformanceResponse,
+  RenewRemoteDiskRequest,
   InquirePriceModifyDiskExtraPerformanceRequest,
   InquiryPriceResizeDiskRequest,
   DescribeDiskConfigQuotaRequest,
@@ -126,6 +149,8 @@ import {
   CopySnapshotCrossRegionsRequest,
   PrepayPrice,
   RenewDiskResponse,
+  TerminateRemoteDisksResponse,
+  RenewRemoteDiskResponse,
   DescribeAutoSnapshotPoliciesResponse,
   Cdc,
   ApplyDisk,
@@ -134,6 +159,7 @@ import {
   CreateAutoSnapshotPolicyRequest,
   CreateSnapshotGroupResponse,
   Price,
+  DetachRemoteDisksRequest,
   ApplySnapshotRequest,
 } from "./cbs_models"
 
@@ -244,6 +270,46 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用于续费弹性单副本SSD硬盘。用户发起续费下单后，由计费系统完成扣费和到期时间更新。
+   */
+  async RenewRemoteDisk(
+    req?: RenewRemoteDiskRequest,
+    cb?: (error: string, rep: RenewRemoteDiskResponse) => void
+  ): Promise<RenewRemoteDiskResponse> {
+    return this.request("RenewRemoteDisk", req, cb)
+  }
+
+  /**
+   * 本接口用于销毁一个或多个弹性单副本SSD硬盘。仅支持弹性盘类型，且要求硬盘处于 INITED 或 UNINIT 状态。
+   */
+  async TerminateRemoteDisks(
+    req?: TerminateRemoteDisksRequest,
+    cb?: (error: string, rep: TerminateRemoteDisksResponse) => void
+  ): Promise<TerminateRemoteDisksResponse> {
+    return this.request("TerminateRemoteDisks", req, cb)
+  }
+
+  /**
+   * 该接口用于获取续费弹性单副本SSD硬盘的订单参数，生成的订单参数由前端透传到计费系统用于续费。
+   */
+  async SwitchParameterRenewRemoteDisks(
+    req?: SwitchParameterRenewRemoteDisksRequest,
+    cb?: (error: string, rep: SwitchParameterRenewRemoteDisksResponse) => void
+  ): Promise<SwitchParameterRenewRemoteDisksResponse> {
+    return this.request("SwitchParameterRenewRemoteDisks", req, cb)
+  }
+
+  /**
+   * 本接口用于创建弹性单副本SSD硬盘并自动挂载到指定实例。弹性盘在创建时就需要绑定目标实例，计费回调后由CBS自身完成装箱+挂载的全流程。
+   */
+  async CreateRemoteDisks(
+    req?: CreateRemoteDisksRequest,
+    cb?: (error: string, rep: CreateRemoteDisksResponse) => void
+  ): Promise<CreateRemoteDisksResponse> {
+    return this.request("CreateRemoteDisks", req, cb)
+  }
+
+  /**
      * 本接口（AttachDisks）用于挂载云硬盘。
  
 * 支持批量操作，将多块云盘挂载到同一云主机。如果多个云盘中存在不允许挂载的云盘，则操作不执行，返回特定的错误码。
@@ -254,6 +320,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AttachDisksResponse) => void
   ): Promise<AttachDisksResponse> {
     return this.request("AttachDisks", req, cb)
+  }
+
+  /**
+   * 本接口用于查询已购买的单副本SSD硬盘列表。可根据单副本SSD硬盘ID、类型、状态等条件过滤查询结果。
+   */
+  async DescribeRemoteDisks(
+    req: DescribeRemoteDisksRequest,
+    cb?: (error: string, rep: DescribeRemoteDisksResponse) => void
+  ): Promise<DescribeRemoteDisksResponse> {
+    return this.request("DescribeRemoteDisks", req, cb)
   }
 
   /**
@@ -279,6 +355,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口用于获取创建弹性单副本SSD硬盘的订单参数，生成的订单参数由前端透传到计费系统用于发货。创建时必须指定云服务器实例。
+   */
+  async SwitchParameterCreateRemoteDisks(
+    req: SwitchParameterCreateRemoteDisksRequest,
+    cb?: (error: string, rep: SwitchParameterCreateRemoteDisksResponse) => void
+  ): Promise<SwitchParameterCreateRemoteDisksResponse> {
+    return this.request("SwitchParameterCreateRemoteDisks", req, cb)
+  }
+
+  /**
    * 本接口（DeleteSnapshotGroup）用于删除快照组，一次调用仅支持删除一个快照组。
    * 默认会删除快照组内的所有快照；
    * 如果快照组内的快照有关联镜像，则删除失败，所有快照均不会删除；如果需要同时删除快照绑定的镜像，可传入参数DeleteBindImages等于true。
@@ -298,6 +384,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDiskBackupsResponse) => void
   ): Promise<DeleteDiskBackupsResponse> {
     return this.request("DeleteDiskBackups", req, cb)
+  }
+
+  /**
+   * 该接口用于查询创建弹性单副本SSD硬盘的价格。支持预付费和后付费两种计费类型的询价。
+   */
+  async InquirePriceCreateRemoteDisks(
+    req?: InquirePriceCreateRemoteDisksRequest,
+    cb?: (error: string, rep: InquirePriceCreateRemoteDisksResponse) => void
+  ): Promise<InquirePriceCreateRemoteDisksResponse> {
+    return this.request("InquirePriceCreateRemoteDisks", req, cb)
   }
 
   /**
@@ -462,6 +558,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于查询一个或多个单副本SSD硬盘的操作限制列表。
+   */
+  async DescribeRemoteDisksDeniedActions(
+    req?: DescribeRemoteDisksDeniedActionsRequest,
+    cb?: (error: string, rep: DescribeRemoteDisksDeniedActionsResponse) => void
+  ): Promise<DescribeRemoteDisksDeniedActionsResponse> {
+    return this.request("DescribeRemoteDisksDeniedActions", req, cb)
+  }
+
+  /**
      * 本接口（ModifySnapshotAttribute）用于修改指定快照的属性。
 
 * 本接口支持修改快照名称及到期时间，以及将非永久快照修改为永久快照。
@@ -475,6 +581,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用于修改单副本SSD硬盘的属性，包括硬盘名称和项目ID。
+   */
+  async ModifyRemoteDiskAttributes(
+    req?: ModifyRemoteDiskAttributesRequest,
+    cb?: (error: string, rep: ModifyRemoteDiskAttributesResponse) => void
+  ): Promise<ModifyRemoteDiskAttributesResponse> {
+    return this.request("ModifyRemoteDiskAttributes", req, cb)
+  }
+
+  /**
+   * 该接口用于查询续费弹性单副本SSD硬盘的价格。
+   */
+  async InquirePriceRenewRemoteDisks(
+    req?: InquirePriceRenewRemoteDisksRequest,
+    cb?: (error: string, rep: InquirePriceRenewRemoteDisksResponse) => void
+  ): Promise<InquirePriceRenewRemoteDisksResponse> {
+    return this.request("InquirePriceRenewRemoteDisks", req, cb)
+  }
+
+  /**
    * 本接口（DescribeDiskAssociatedAutoSnapshotPolicy）用于查询云盘绑定的定期快照策略。
    */
   async DescribeDiskAssociatedAutoSnapshotPolicy(
@@ -482,6 +608,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDiskAssociatedAutoSnapshotPolicyResponse) => void
   ): Promise<DescribeDiskAssociatedAutoSnapshotPolicyResponse> {
     return this.request("DescribeDiskAssociatedAutoSnapshotPolicy", req, cb)
+  }
+
+  /**
+   * 本接口用于从云服务器实例上卸载一个或多个弹性单副本SSD硬盘。仅支持弹性盘类型。
+   */
+  async DetachRemoteDisks(
+    req?: DetachRemoteDisksRequest,
+    cb?: (error: string, rep: DetachRemoteDisksResponse) => void
+  ): Promise<DetachRemoteDisksResponse> {
+    return this.request("DetachRemoteDisks", req, cb)
   }
 
   /**
@@ -508,6 +644,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSnapshotsResponse) => void
   ): Promise<DescribeSnapshotsResponse> {
     return this.request("DescribeSnapshots", req, cb)
+  }
+
+  /**
+   * 本接口用于查询单副本SSD硬盘机型搭配配额。可根据机型族、机型规格、可用区、付费方式等条件过滤查询结果。
+   */
+  async DescribeRemoteDiskConfigQuota(
+    req: DescribeRemoteDiskConfigQuotaRequest,
+    cb?: (error: string, rep: DescribeRemoteDiskConfigQuotaResponse) => void
+  ): Promise<DescribeRemoteDiskConfigQuotaResponse> {
+    return this.request("DescribeRemoteDiskConfigQuota", req, cb)
   }
 
   /**
@@ -678,6 +824,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetSnapOverviewResponse) => void
   ): Promise<GetSnapOverviewResponse> {
     return this.request("GetSnapOverview", req, cb)
+  }
+
+  /**
+   * 本接口用于挂载一个或多个弹性单副本SSD硬盘到指定的云服务器实例上。仅支持弹性盘类型。
+   */
+  async AttachRemoteDisks(
+    req?: AttachRemoteDisksRequest,
+    cb?: (error: string, rep: AttachRemoteDisksResponse) => void
+  ): Promise<AttachRemoteDisksResponse> {
+    return this.request("AttachRemoteDisks", req, cb)
   }
 
   /**
