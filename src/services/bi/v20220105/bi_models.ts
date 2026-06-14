@@ -70,18 +70,15 @@ export interface DescribeUserRoleListRequest {
  */
 export interface DeleteProjectRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   Id: number
   /**
-   * 随机数
+   * <p>随机数</p>
    */
   Seed?: string
   /**
-   * 默认看板
-取值范围：
-1：项目看板 
-2：我的看板
+   * <p>默认看板</p><p>枚举值：</p><ul><li>1： 项目看板</li><li>2： 我的看板</li></ul>
    */
   DefaultPanelType?: number
 }
@@ -297,26 +294,17 @@ project，ChatBI嵌出时
  */
 export interface ProjectConfigResult {
   /**
-   * 配置名称
+   * <p>配置名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModuleId?: string
   /**
-   * 配置方式。
-取值范围：
-
-- usable：可用
-- visible：可见
-- disabled：不可用
-- hidden：隐藏
-
-默认值：disabled
-示例值：disabled
+   * <p>配置方式</p><p>枚举值：</p><ul><li>usable： 可用</li><li>visible： 可见</li><li>disabled： 不可用</li><li>hidden： 隐藏</li></ul><p>默认值：disabled</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IncludeType?: string
   /**
-   * 额外参数
+   * <p>额外参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Params?: string
@@ -387,31 +375,31 @@ export interface DeleteUserRoleResponse {
  */
 export interface DescribeUserProjectListRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId?: number
   /**
-   * 无
+   * <p>无</p>
    */
   AllPage?: boolean
   /**
-   * 无
+   * <p>无</p>
    */
   PageNo?: number
   /**
-   * 无
+   * <p>无</p>
    */
   PageSize?: number
   /**
-   * 是否过滤掉企业管理员
+   * <p>是否过滤掉企业管理员</p>
    */
   IsFilterPerAuthUser?: boolean
   /**
-   * 是否过滤掉当前用户
+   * <p>是否过滤掉当前用户</p>
    */
   IsFilterCurrentUser?: boolean
   /**
-   * 关键字
+   * <p>关键字</p>
    */
   Keyword?: string
 }
@@ -675,17 +663,17 @@ export interface ModifyDatasourceCloudResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
-   * 无
+   * <p>无</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
   /**
-   * 额外信息
+   * <p>额外信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Extra?: string
   /**
-   * 提示
+   * <p>提示</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
@@ -1010,20 +998,20 @@ export interface JoinSourceTable {
  */
 export interface CreateUserRoleProjectRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId?: number
   /**
-   * 角色ID列表
+   * <p>角色ID列表</p>
    */
   RoleIdList?: Array<number | bigint>
   /**
-   * 用户列表（废弃）
+   * <p>用户列表（废弃）</p>
    * @deprecated
    */
   UserList?: Array<UserIdAndUserName>
   /**
-   * 用户列表（新）
+   * <p>用户列表（新）</p>
    */
   UserInfoList?: Array<UserInfo>
 }
@@ -1085,22 +1073,15 @@ export interface RowColumnStatus {
  */
 export interface DescribePermissionStatusInfoRequest {
   /**
-   * 页数
+   * <p>页数</p>
    */
   TableId?: number
   /**
-   * 类型。
-取值范围：
-
-- ROW：行权限
-- COLUMN：列权限
-
-默认值：ROW
-示例值：ROW
+   * <p>类型</p><p>枚举值：</p><ul><li>ROW： 行权限</li><li>COLUMN： 列权限</li></ul><p>默认值：ROW</p>
    */
   Type?: string
   /**
-   * 1
+   * <p>1</p>
    */
   ProjectId?: string
 }
@@ -1115,17 +1096,17 @@ export interface CreateDatasourceResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
-   * 数据源id
+   * <p>数据源id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: IdDTO
   /**
-   * 额外信息
+   * <p>额外信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Extra?: string
   /**
-   * 提示
+   * <p>提示</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
@@ -1266,34 +1247,31 @@ export interface DeleteDatasourceResponse {
  */
 export interface CreateProjectRequest {
   /**
-   * 项目名称
+   * <p>项目名称</p>
    */
   Name: string
   /**
-   * logo底色
+   * <p>logo底色</p>
    */
   ColorCode: string
   /**
-   * 项目Logo
+   * <p>项目Logo</p>
    */
   Logo?: string
   /**
-   * 备注
+   * <p>备注</p>
    */
   Mark?: string
   /**
-   * 是否允许用户申请
+   * <p>是否允许用户申请</p>
    */
   IsApply?: boolean
   /**
-   * 默认看板
-取值范围：
-1：项目看板 
-2：我的看板
+   * <p>默认看板</p><p>枚举值：</p><ul><li>1： 项目看板</li><li>2： 我的看板</li></ul>
    */
   DefaultPanelType?: number
   /**
-   * 管理平台
+   * <p>管理平台</p>
    */
   ManagePlatform?: string
 }
@@ -1484,67 +1462,39 @@ export interface CreateDataTableRequest {
  */
 export interface CreatePermissionRanksRequest {
   /**
-   * 页数
+   * <p>页数</p>
    */
   TableId?: number
   /**
-   * 模式。
-取值范围：
-- ALL：全部
-- Specify：指定
-- TAG：标签
-
-默认值：ALL
-示例值：ALL
+   * <p>模式</p><p>枚举值：</p><ul><li>ALL： 全部</li><li>Specify： 指定</li><li>TAG： 标签</li></ul><p>默认值：ALL</p>
    */
   Mode?: string
   /**
-   * 角色类型。
-取值范围：
-
-- ROLES：按角色
-- Others：其它
-
-默认值：Others
-示例值：Others
+   * <p>角色类型</p><p>枚举值：</p><ul><li>ROLES： 按角色</li><li>Others： 其它</li></ul><p>默认值：Others</p>
    */
   RoleType?: string
   /**
-   * 所有页码
+   * <p>所有页码</p>
    */
   RoleId?: number
   /**
-   * 规则信息
+   * <p>规则信息</p>
    */
   RulerInfo?: string
   /**
-   * 类型。
-取值范围：
-
-- ROW：行权限
-- COLUMN：列权限
-
-默认值：ROW
-示例值：ROW
+   * <p>类型</p><p>枚举值：</p><ul><li>ROW： 行权限</li><li>COLUMN： 列权限</li></ul><p>默认值：ROW</p>
    */
   Type?: string
   /**
-   * 开启状态。
-取值范围：
-
-- Open：开启
-- Close：关闭
-
-默认值：Close
-示例值：Close
+   * <p>开启状态</p><p>枚举值：</p><ul><li>Open： 开启</li><li>Close： 关闭</li></ul><p>默认值：Close</p>
    */
   OpenStatus?: string
   /**
-   * 项目id
+   * <p>项目id</p>
    */
   ProjectId?: number
   /**
-   * 行列权限配置
+   * <p>行列权限配置</p>
    */
   RowColumnConfigList?: Array<RowColumnConfig>
 }
@@ -1580,14 +1530,11 @@ export interface ModifyResourceUserGroupResourceRequest {
  */
 export interface DescribeProjectInfoRequest {
   /**
-   * 项目Id
+   * <p>项目Id</p>
    */
   Id: number
   /**
-   * 默认看板
-取值范围：
-1：项目看板 
-2：我的看板
+   * <p>默认看板</p><p>枚举值：</p><ul><li>1： 项目看板</li><li>2： 我的看板</li></ul>
    */
   DefaultPanelType?: number
 }
@@ -1829,105 +1776,99 @@ export interface DescribeAuthApiKeyInfoResponse {
  */
 export interface ModifyDatasourceRequest {
   /**
-   * HOST
+   * <p>HOST</p>
    */
   DbHost: string
   /**
-   * 端口
+   * <p>端口</p>
    */
   DbPort: number
   /**
-   * 后端提供字典：域类型，1、腾讯云，2、本地
+   * <p>后端提供字典：域类型，1、腾讯云，2、本地</p>
    */
   ServiceType: string
   /**
-   * 驱动
-取值范围：
-MYSQL：MySQL数据库
-PRESTO：PRESTO数据库
-POSTGRE：PostgreSQL数据库
-DLC：DLC数据库
-MSSQL：微软SQL Server数据库
+   * <p>驱动</p><p>枚举值：</p><ul><li>MYSQL： MySQL数据库</li><li>PRESTO： PRESTO数据库</li><li>POSTGRE： PostgreSQL数据库</li><li>DLC： DLC数据库</li><li>MSSQL： 微软SQL Server数据库</li></ul>
    */
   DbType: string
   /**
-   * 数据库编码
+   * <p>数据库编码</p>
    */
   Charset: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   DbUser: string
   /**
-   * 密码
+   * <p>密码</p>
    */
   DbPwd: string
   /**
-   * 数据库名称
+   * <p>数据库名称</p>
    */
   DbName: string
   /**
-   * 数据库别名
+   * <p>数据库别名</p>
    */
   SourceName: string
   /**
-   * 数据源id
+   * <p>数据源id</p>
    */
   Id: number
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: number
   /**
-   * catalog值
+   * <p>catalog值</p>
    */
   Catalog?: string
   /**
-   * 第三方数据源标识
+   * <p>第三方数据源标识</p>
    */
   DataOrigin?: string
   /**
-   * 第三方项目id
+   * <p>第三方项目id</p>
    */
   DataOriginProjectId?: string
   /**
-   * 第三方数据源id
+   * <p>第三方数据源id</p>
    */
   DataOriginDatasourceId?: string
   /**
-   * 扩展参数
+   * <p>扩展参数</p>
    */
   ExtraParam?: string
   /**
-   * 腾讯云私有网络统一标识
+   * <p>腾讯云私有网络统一标识</p>
    */
   UniqVpcId?: string
   /**
-   * 私有网络ip
+   * <p>私有网络ip</p>
    */
   Vip?: string
   /**
-   * 私有网络端口
+   * <p>私有网络端口</p>
    */
   Vport?: string
   /**
-   * 腾讯云私有网络标识
+   * <p>腾讯云私有网络标识</p>
    */
   VpcId?: string
   /**
-   * 开启vpc
+   * <p>开启vpc</p>
    */
   UseVPC?: boolean
   /**
-   * 地域
+   * <p>地域</p>
    */
   RegionId?: string
   /**
-   * 数据库schema
+   * <p>数据库schema</p>
    */
   Schema?: string
   /**
-   * 数据库版本
+   * <p>数据库版本</p>
    */
   DbVersion?: string
 }
@@ -1942,17 +1883,17 @@ export interface CreatePermissionRanksResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
-   * 消息
+   * <p>消息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
   /**
-   * 112
+   * <p>112</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Extra?: string
   /**
-   * 1
+   * <p>1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
@@ -2002,15 +1943,15 @@ export interface CreateProjectResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
-   * 额外数据
+   * <p>额外数据</p>
    */
   Extra?: string
   /**
-   * 数据
+   * <p>数据</p>
    */
   Data?: Data
   /**
-   * 返回信息
+   * <p>返回信息</p>
    */
   Msg?: string
   /**
@@ -2029,17 +1970,17 @@ export interface DescribeProjectInfoResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
-   * ""
+   * <p>&quot;&quot;</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Extra?: string
   /**
-   * ""
+   * <p>&quot;&quot;</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
   /**
-   * 项目详情
+   * <p>项目详情</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Project
@@ -2059,16 +2000,16 @@ export interface DeleteProjectResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
-   * ”“
+   * <p>”“</p>
    */
   Extra?: string
   /**
-   * ""
+   * <p>&quot;&quot;</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
   /**
-   * ""
+   * <p>&quot;&quot;</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
@@ -2308,122 +2249,115 @@ export interface UserInfo {
  */
 export interface UserIdAndUserName {
   /**
-   * 用户ID
+   * <p>用户ID</p>
    */
   UserId?: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   UserName?: string
   /**
-   * 企业ID
+   * <p>企业ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CorpId?: string
   /**
-   * 电子邮箱
+   * <p>电子邮箱</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Email?: string
   /**
-   * 最后一次登录时间
+   * <p>最后一次登录时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastLogin?: string
   /**
-   * 用户状态。
-取值范围：
-
-- 1：启用
-- 0：停用
-
-默认值：1
-示例值：1
+   * <p>用户状态</p><p>枚举值：</p><ul><li>1： 启用</li><li>0： 停用</li></ul><p>默认值：1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
-   * 首次登录是否修改密码
+   * <p>首次登录是否修改密码</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FirstModify?: number
   /**
-   * 手机号码
+   * <p>手机号码</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PhoneNumber?: string
   /**
-   * 手机区号
+   * <p>手机区号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AreaCode?: string
   /**
-   * 创建人
+   * <p>创建人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedUser?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedAt?: string
   /**
-   * 修改人
+   * <p>修改人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedUser?: string
   /**
-   * 更改时间
+   * <p>更改时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedAt?: string
   /**
-   * 系统全局角色
+   * <p>系统全局角色</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GlobalUserName?: string
   /**
-   * 系统全局角色编码
+   * <p>系统全局角色编码</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GlobalUserCode?: string
   /**
-   * 手机号
+   * <p>手机号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Mobile?: string
   /**
-   * 1
+   * <p>1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: string
   /**
-   * 1
+   * <p>1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppUserId?: string
   /**
-   * 1
+   * <p>1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppUserAliasName?: string
   /**
-   * 1
+   * <p>1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppUserName?: string
   /**
-   * 1
+   * <p>1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InValidateAppRange?: boolean
   /**
-   * -1 免激活  0 未激活  1 已激活 空代表待绑定
+   * <p>-1 免激活  0 未激活  1 已激活 空代表待绑定</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EmailActivationStatus?: number
   /**
-   * 1
+   * <p>1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
@@ -2631,17 +2565,17 @@ export interface DescribePermissionStatusInfoResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
-   * 消息
+   * <p>消息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
   /**
-   * 112
+   * <p>112</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Extra?: string
   /**
-   * 1
+   * <p>1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: RowColumnStatus
@@ -3310,17 +3244,17 @@ export interface CreateUserRoleProjectResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
-   * 扩展
+   * <p>扩展</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Extra?: string
   /**
-   * 数据
+   * <p>数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: DataId
   /**
-   * 消息
+   * <p>消息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
@@ -3575,97 +3509,91 @@ export interface DescribePermissionRoleInfoRequest {
  */
 export interface CreateDatasourceCloudRequest {
   /**
-   * 后端提供字典：域类型，1、腾讯云，2、本地
+   * <p>后端提供字典：域类型，1、腾讯云，2、本地</p>
    */
   ServiceType: string
   /**
-   * 驱动
-取值范围：
-MYSQL：MySQL数据库
-PRESTO：PRESTO数据库
-POSTGRE：PostgreSQL数据库
-DLC：DLC数据库
-MSSQL：微软SQL Server数据库
+   * <p>驱动</p><p>枚举值：</p><ul><li>MYSQL： MySQL数据库</li><li>PRESTO： PRESTO数据库</li><li>POSTGRE： PostgreSQL数据库</li><li>DLC： DLC数据库</li><li>MSSQL： 微软SQL Server数据库</li></ul>
    */
   DbType: string
   /**
-   * 数据库编码
+   * <p>数据库编码</p>
    */
   Charset: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   DbUser: string
   /**
-   * 密码
+   * <p>密码</p>
    */
   DbPwd: string
   /**
-   * 数据库名称
+   * <p>数据库名称</p>
    */
   DbName: string
   /**
-   * 数据库别名
+   * <p>数据库别名</p>
    */
   SourceName: string
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 公有云内网ip
+   * <p>公有云内网ip</p>
    */
   Vip?: string
   /**
-   * 公有云内网端口
+   * <p>公有云内网端口</p>
    */
   Vport?: string
   /**
-   * vpc标识
+   * <p>vpc标识</p>
    */
   VpcId?: string
   /**
-   * 统一vpc标识
+   * <p>统一vpc标识</p>
    */
   UniqVpcId?: string
   /**
-   * 区域标识（gz,bj)
+   * <p>区域标识（gz,bj)</p>
    */
   RegionId?: string
   /**
-   * 扩展参数
+   * <p>扩展参数</p>
    */
   ExtraParam?: string
   /**
-   * 实例Id
+   * <p>实例Id</p>
    */
   InstanceId?: string
   /**
-   * 数据源产品名
+   * <p>数据源产品名</p>
    */
   ProdDbName?: string
   /**
-   * 第三方数据源标识
+   * <p>第三方数据源标识</p>
    */
   DataOrigin?: string
   /**
-   * 第三方项目id
+   * <p>第三方项目id</p>
    */
   DataOriginProjectId?: string
   /**
-   * 第三方数据源id
+   * <p>第三方数据源id</p>
    */
   DataOriginDatasourceId?: string
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   ClusterId?: string
   /**
-   * 数据库schema
+   * <p>数据库schema</p>
    */
   Schema?: string
   /**
-   * 数据库版本
+   * <p>数据库版本</p>
    */
   DbVersion?: string
 }
@@ -3701,31 +3629,27 @@ export interface ModifyResourceUserGroupRequest {
  */
 export interface IdDTO {
   /**
-   * 请求id
+   * <p>请求id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id: number
   /**
-   * key
+   * <p>key</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessKey?: string
   /**
-   * id
+   * <p>id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: number
   /**
-   * 事务id
+   * <p>事务id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TranId?: string
   /**
-   * 事务状态
-取值范围：
-1: 处理中
-2: 处理成功
-3: 处理失败
+   * <p>事务状态</p><p>枚举值：</p><ul><li>1： 处理中</li><li>2： 处理成功</li><li>3： 处理失败</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TranStatus?: number
@@ -3736,101 +3660,95 @@ export interface IdDTO {
  */
 export interface ModifyDatasourceCloudRequest {
   /**
-   * 后端提供字典：域类型，1、腾讯云，2、本地
+   * <p>后端提供字典：域类型，1、腾讯云，2、本地</p>
    */
   ServiceType: string
   /**
-   * 驱动
-取值范围：
-MYSQL：MySQL数据库
-PRESTO：PRESTO数据库
-POSTGRE：PostgreSQL数据库
-DLC：DLC数据库
-MSSQL：微软SQL Server数据库
+   * <p>驱动</p><p>枚举值：</p><ul><li>MYSQL： MySQL数据库</li><li>PRESTO： PRESTO数据库</li><li>POSTGRE： PostgreSQL数据库</li><li>DLC： DLC数据库</li><li>MSSQL： 微软SQL Server数据库</li></ul>
    */
   DbType: string
   /**
-   * 数据库编码
+   * <p>数据库编码</p>
    */
   Charset: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   DbUser: string
   /**
-   * 密码
+   * <p>密码</p>
    */
   DbPwd: string
   /**
-   * 数据库名称
+   * <p>数据库名称</p>
    */
   DbName: string
   /**
-   * 数据库别名
+   * <p>数据库别名</p>
    */
   SourceName: string
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 住键
+   * <p>住键</p>
    */
   Id: number
   /**
-   * 公有云内网ip
+   * <p>公有云内网ip</p>
    */
   Vip?: string
   /**
-   * 公有云内网端口
+   * <p>公有云内网端口</p>
    */
   Vport?: string
   /**
-   * vpc标识
+   * <p>vpc标识</p>
    */
   VpcId?: string
   /**
-   * 统一vpc标识
+   * <p>统一vpc标识</p>
    */
   UniqVpcId?: string
   /**
-   * 区域标识（gz,bj)
+   * <p>区域标识（gz,bj)</p>
    */
   RegionId?: string
   /**
-   * 扩展参数
+   * <p>扩展参数</p>
    */
   ExtraParam?: string
   /**
-   * 实例id
+   * <p>实例id</p>
    */
   InstanceId?: string
   /**
-   * 数据源产品名
+   * <p>数据源产品名</p>
    */
   ProdDbName?: string
   /**
-   * 第三方数据源标识
+   * <p>第三方数据源标识</p>
    */
   DataOrigin?: string
   /**
-   * 第三方项目id
+   * <p>第三方项目id</p>
    */
   DataOriginProjectId?: string
   /**
-   * 第三方数据源id
+   * <p>第三方数据源id</p>
    */
   DataOriginDatasourceId?: string
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   ClusterId?: string
   /**
-   * 数据库schema
+   * <p>数据库schema</p>
    */
   Schema?: string
   /**
-   * 数据库版本
+   * <p>数据库版本</p>
    */
   DbVersion?: string
 }
@@ -3984,17 +3902,17 @@ export interface DescribeUserProjectListResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
-   * 数据
+   * <p>数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: CorpUserListData
   /**
-   * 扩展
+   * <p>扩展</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Extra?: string
   /**
-   * 消息
+   * <p>消息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
@@ -4009,105 +3927,99 @@ export interface DescribeUserProjectListResponse {
  */
 export interface CreateDatasourceRequest {
   /**
-   * HOST
+   * <p>HOST</p>
    */
   DbHost: string
   /**
-   * 端口
+   * <p>端口</p>
    */
   DbPort: number
   /**
-   * 后端提供字典：域类型，1、腾讯云，2、本地
+   * <p>后端提供字典：域类型，1、腾讯云，2、本地</p>
    */
   ServiceType: string
   /**
-   * 驱动
-取值范围：
-MYSQL：MySQL数据库
-PRESTO：PRESTO数据库
-POSTGRE：PostgreSQL数据库
-DLC：DLC数据库
-MSSQL：微软SQL Server数据库
+   * <p>驱动</p><p>枚举值：</p><ul><li>MYSQL： MySQL数据库</li><li>PRESTO： PRESTO数据库</li><li>POSTGRE： PostgreSQL数据库</li><li>DLC： DLC数据库</li><li>MSSQL： 微软SQL Server数据库</li></ul>
    */
   DbType: string
   /**
-   * 数据库编码
+   * <p>数据库编码</p>
    */
   Charset: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   DbUser: string
   /**
-   * 密码
+   * <p>密码</p>
    */
   DbPwd: string
   /**
-   * 数据库名称
+   * <p>数据库名称</p>
    */
   DbName: string
   /**
-   * 数据库别名
+   * <p>数据库别名</p>
    */
   SourceName: string
   /**
-   * 项目id
+   * <p>项目id</p>
    */
   ProjectId: number
   /**
-   * catalog值
+   * <p>catalog值</p>
    */
   Catalog?: string
   /**
-   * 第三方数据源标识
+   * <p>第三方数据源标识</p>
    */
   DataOrigin?: string
   /**
-   * 第三方项目id
+   * <p>第三方项目id</p>
    */
   DataOriginProjectId?: string
   /**
-   * 第三方数据源id
+   * <p>第三方数据源id</p>
    */
   DataOriginDatasourceId?: string
   /**
-   * 扩展参数
+   * <p>扩展参数</p>
    */
   ExtraParam?: string
   /**
-   * 腾讯云私有网络统一标识
+   * <p>腾讯云私有网络统一标识</p>
    */
   UniqVpcId?: string
   /**
-   * 私有网络ip
+   * <p>私有网络ip</p>
    */
   Vip?: string
   /**
-   * 私有网络端口
+   * <p>私有网络端口</p>
    */
   Vport?: string
   /**
-   * 腾讯云私有网络标识
+   * <p>腾讯云私有网络标识</p>
    */
   VpcId?: string
   /**
-   * 操作权限限制
+   * <p>操作权限限制</p>
    */
   OperationAuthLimit?: Array<string>
   /**
-   * 开启vpc
+   * <p>开启vpc</p>
    */
   UseVPC?: boolean
   /**
-   * 地域
+   * <p>地域</p>
    */
   RegionId?: string
   /**
-   * 数据库schema
+   * <p>数据库schema</p>
    */
   Schema?: string
   /**
-   * 数据库版本
+   * <p>数据库版本</p>
    */
   DbVersion?: string
 }
@@ -4162,17 +4074,17 @@ export interface ModifyDatasourceResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
-   * 无
+   * <p>无</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
   /**
-   * 额外信息
+   * <p>额外信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Extra?: string
   /**
-   * 提示
+   * <p>提示</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
@@ -4294,17 +4206,17 @@ export interface CreateDatasourceCloudResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
-   * 成功无
+   * <p>成功无</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: IdDTO
   /**
-   * 额外信息
+   * <p>额外信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Extra?: string
   /**
-   * 提示
+   * <p>提示</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
@@ -4607,17 +4519,17 @@ export interface ModifyProjectResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
-   * 额外信息
+   * <p>额外信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Extra?: string
   /**
-   * 返回数据
+   * <p>返回数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: string
   /**
-   * 结果
+   * <p>结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
@@ -4697,17 +4609,17 @@ export interface DescribePermissionRanksInfoResponse {
    */
   ErrorInfo?: ErrorInfo
   /**
-   * 消息
+   * <p>消息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
   /**
-   * 112
+   * <p>112</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Extra?: string
   /**
-   * 无
+   * <p>无</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: RankInfo
@@ -4869,46 +4781,43 @@ export interface TableField {
  */
 export interface ModifyProjectRequest {
   /**
-   * 项目Id
+   * <p>项目Id</p>
    */
   Id: number
   /**
-   * 名字
+   * <p>名字</p>
    */
   Name?: string
   /**
-   * 颜色值
+   * <p>颜色值</p>
    */
   ColorCode?: string
   /**
-   * 图标
+   * <p>图标</p>
    */
   Logo?: string
   /**
-   * 备注
+   * <p>备注</p>
    */
   Mark?: string
   /**
-   * 可申请
+   * <p>可申请</p>
    */
   IsApply?: boolean
   /**
-   * 种子
+   * <p>种子</p>
    */
   Seed?: string
   /**
-   * 默认看板
-取值范围：
-1：项目看板 
-2：我的看板
+   * <p>默认看板</p><p>枚举值：</p><ul><li>1： 项目看板</li><li>2： 我的看板</li></ul>
    */
   DefaultPanelType?: number
   /**
-   * 2
+   * <p>2</p>
    */
   PanelScope?: string
   /**
-   * 项目管理平台
+   * <p>项目管理平台</p>
    */
   ManagePlatform?: string
 }
@@ -5573,49 +5482,27 @@ export interface ResourceTagValue {
  */
 export interface DescribePermissionRanksInfoRequest {
   /**
-   * 页数
+   * <p>页数</p>
    */
   TableId?: number
   /**
-   * 模式。
-取值范围：
-
-- ALL：全部
-- Specify：指定
-- TAG：标签
-
-默认值：ALL
-示例值：ALL
+   * <p>模式</p><p>枚举值：</p><ul><li>ALL： 全部</li><li>Specify： 指定</li><li>TAG： 标签</li></ul><p>默认值：ALL</p>
    */
   Mode?: string
   /**
-   * 角色类型。
-取值范围：
-
-- ROLES：按角色
-- Others：其它
-
-默认值：Others
-示例值：Others
+   * <p>角色类型</p><p>枚举值：</p><ul><li>ROLES： 按角色</li><li>Others： 其它</li></ul><p>默认值：Others</p>
    */
   RoleType?: string
   /**
-   * 所有页码
+   * <p>所有页码</p>
    */
   RoleId?: number
   /**
-   * 类型。
-取值范围：
-
-- ROW：行权限
-- COLUMN：列权限
-
-默认值：ROW
-示例值：ROW
+   * <p>类型</p><p>枚举值：</p><ul><li>ROW： 行权限</li><li>COLUMN： 列权限</li></ul><p>默认值：ROW</p>
    */
   Type?: string
   /**
-   * 项目id
+   * <p>项目id</p>
    */
   ProjectId?: number
 }
@@ -5722,36 +5609,27 @@ INFO
  */
 export interface PermissionComponent {
   /**
-   * 权限值
+   * <p>权限值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModuleId?: string
   /**
-   * 可用性。
-取值范围：
-
-- usable：可用
-- visible：可见
-- disabled：不可用
-- hidden：隐藏
-
-默认值：disabled
-示例值：disabled
+   * <p>可用性</p><p>枚举值：</p><ul><li>usable： 可用</li><li>visible： 可见</li><li>disabled： 不可用</li><li>hidden： 隐藏</li></ul><p>默认值：disabled</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IncludeType?: string
   /**
-   * 目标升级版本
+   * <p>目标升级版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpgradeVersionType?: string
   /**
-   * 补充信息
+   * <p>补充信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tips?: string
   /**
-   * 补充信息的key值
+   * <p>补充信息的key值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TipsKey?: string

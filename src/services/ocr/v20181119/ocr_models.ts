@@ -1845,6 +1845,28 @@ DOUBLE 支持自动识别驾驶证正副页单面，和正副双面同框识别
 }
 
 /**
+ * VerifyBizLicenseEnterprise3返回参数结构体
+ */
+export interface VerifyBizLicenseEnterprise3Response {
+  /**
+   * <p>0 成功，计费<br>1 系统异常，不计费<br>2 查询无结果，不计费</p>
+   */
+  StatusCode?: number
+  /**
+   * <p>验证结果<br>1：三要素完全匹配<br>0：三要素不完全匹配<br>仅StatusCode为0时返回</p>
+   */
+  VerifyResult?: number
+  /**
+   * <p>企业状态</p><p>枚举值：</p><ul><li>1： 开业（在营）/ 在营</li><li>2： 迁出 / 非在营</li><li>3： 注销</li><li>4： 吊销</li><li>5： 撤销</li><li>6： 停业</li><li>7： 撤销登记</li><li>0： 其他</li><li>/： 无法查询</li></ul><p>企业状态  当VerifyType参数为ENT_2META时，可返回：  0-7,  /   当VerifyType参数为ENT_3META时，可返回  1，2</p>
+   */
+  OperatingStatus?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * OtherInvoiceItem
  */
 export interface OtherInvoiceItem {
@@ -2840,17 +2862,41 @@ export interface ExtractDocMultiProResponse {
 }
 
 /**
- * RecognizeTravelCardOCR请求参数结构体
+ * 单元格数据
  */
-export interface RecognizeTravelCardOCRRequest {
+export interface TableCellInfo {
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 单元格左上角的列索引
    */
-  ImageBase64?: string
+  ColTl: number
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 单元格左上角的行索引
    */
-  ImageUrl?: string
+  RowTl: number
+  /**
+   * 单元格右下角的列索引
+   */
+  ColBr: number
+  /**
+   * 单元格右下角的行索引
+   */
+  RowBr: number
+  /**
+   * 单元格内识别出的字符串文本，若文本存在多行，以换行符"\n"隔开
+   */
+  Text: string
+  /**
+   * 单元格类型
+   */
+  Type: string
+  /**
+   * 单元格置信度
+   */
+  Confidence: number
+  /**
+   * 单元格在图像中的四点坐标
+   */
+  Polygon: Array<Coord>
 }
 
 /**
@@ -5265,53 +5311,105 @@ export interface RecognizeEncryptedIDCardOCRRequest {
 }
 
 /**
- * RecognizeHealthCodeOCR返回参数结构体
+ * 二手车销售统一发票信息
  */
-export interface RecognizeHealthCodeOCRResponse {
+export interface UsedVehicleInvoiceInfo {
   /**
-   * 持码人姓名，如：王*（允许返回空值）
+   * 所属税局
    */
-  Name?: string
+  TaxBureau: string
   /**
-   * 持码人身份证号，如：11**************01（允许返回空值）
+   * 买方单位/个人
    */
-  IDNumber?: string
+  Buyer: string
   /**
-   * 健康码更新时间（允许返回空值）
+   * 买方单位代码/身份证号码
    */
-  Time?: string
+  BuyerNo: string
   /**
-   * 健康码颜色：绿色、黄色、红色（允许返回空值）
+   * 买方单位/个人地址
    */
-  Color?: string
+  BuyerAddress: string
   /**
-   * 核酸检测间隔时长（允许返回空值）
+   * 买方单位电话
    */
-  TestingInterval?: string
+  BuyerTel: string
   /**
-   * 核酸检测结果：阴性、阳性、暂无核酸检测记录（允许返回空值）
+   * 卖方单位/个人
    */
-  TestingResult?: string
+  Seller: string
   /**
-   * 核酸检测时间（允许返回空值）
+   * 卖方单位代码/身份证号码
    */
-  TestingTime?: string
+  SellerNo: string
   /**
-   * 疫苗接种信息，返回接种针数或接种情况（允许返回空值）
+   * 卖方单位/个人地址
    */
-  Vaccination?: string
+  SellerAddress: string
   /**
-   * 场所名称（允许返回空值）
+   * 卖方单位电话
    */
-  SpotName?: string
+  SellerTel: string
   /**
-   * 疫苗接种时间
+   * 车牌照号
    */
-  VaccinationTime?: string
+  VehicleLicenseNo: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 登记证号
    */
-  RequestId?: string
+  RegisterNo: string
+  /**
+   * 车架号/车辆识别代码
+   */
+  VehicleIdentifyNo: string
+  /**
+   * 转入地车辆管理所名称
+   */
+  ManagementOffice: string
+  /**
+   * 车价合计
+   */
+  VehicleTotalPrice: string
+  /**
+   * 经营、拍卖单位
+   */
+  Auctioneer: string
+  /**
+   * 经营、拍卖单位地址
+   */
+  AuctioneerAddress: string
+  /**
+   * 经营、拍卖单位纳税人识别号
+   */
+  AuctioneerTaxpayerNum: string
+  /**
+   * 经营、拍卖单位开户银行、账号
+   */
+  AuctioneerBankAccount: string
+  /**
+   * 经营、拍卖单位电话
+   */
+  AuctioneerTel: string
+  /**
+   * 二手车市场
+   */
+  Market: string
+  /**
+   * 二手车市场纳税人识别号
+   */
+  MarketTaxpayerNum: string
+  /**
+   * 二手车市场地址
+   */
+  MarketAddress: string
+  /**
+   * 二手车市场开户银行账号
+   */
+  MarketBankAccount: string
+  /**
+   * 二手车市场电话
+   */
+  MarketTel: string
 }
 
 /**
@@ -5929,108 +6027,6 @@ ara：阿拉伯语
    * 是否返回单字信息，默认关
    */
   IsWords?: boolean
-}
-
-/**
- * 二手车销售统一发票信息
- */
-export interface UsedVehicleInvoiceInfo {
-  /**
-   * 所属税局
-   */
-  TaxBureau: string
-  /**
-   * 买方单位/个人
-   */
-  Buyer: string
-  /**
-   * 买方单位代码/身份证号码
-   */
-  BuyerNo: string
-  /**
-   * 买方单位/个人地址
-   */
-  BuyerAddress: string
-  /**
-   * 买方单位电话
-   */
-  BuyerTel: string
-  /**
-   * 卖方单位/个人
-   */
-  Seller: string
-  /**
-   * 卖方单位代码/身份证号码
-   */
-  SellerNo: string
-  /**
-   * 卖方单位/个人地址
-   */
-  SellerAddress: string
-  /**
-   * 卖方单位电话
-   */
-  SellerTel: string
-  /**
-   * 车牌照号
-   */
-  VehicleLicenseNo: string
-  /**
-   * 登记证号
-   */
-  RegisterNo: string
-  /**
-   * 车架号/车辆识别代码
-   */
-  VehicleIdentifyNo: string
-  /**
-   * 转入地车辆管理所名称
-   */
-  ManagementOffice: string
-  /**
-   * 车价合计
-   */
-  VehicleTotalPrice: string
-  /**
-   * 经营、拍卖单位
-   */
-  Auctioneer: string
-  /**
-   * 经营、拍卖单位地址
-   */
-  AuctioneerAddress: string
-  /**
-   * 经营、拍卖单位纳税人识别号
-   */
-  AuctioneerTaxpayerNum: string
-  /**
-   * 经营、拍卖单位开户银行、账号
-   */
-  AuctioneerBankAccount: string
-  /**
-   * 经营、拍卖单位电话
-   */
-  AuctioneerTel: string
-  /**
-   * 二手车市场
-   */
-  Market: string
-  /**
-   * 二手车市场纳税人识别号
-   */
-  MarketTaxpayerNum: string
-  /**
-   * 二手车市场地址
-   */
-  MarketAddress: string
-  /**
-   * 二手车市场开户银行账号
-   */
-  MarketBankAccount: string
-  /**
-   * 二手车市场电话
-   */
-  MarketTel: string
 }
 
 /**
@@ -6976,41 +6972,25 @@ export interface SchemaList {
 }
 
 /**
- * 单元格数据
+ * 增值税普通发票（卷票）条目
  */
-export interface TableCellInfo {
+export interface VatRollItem {
   /**
-   * 单元格左上角的列索引
+   * 项目名称
    */
-  ColTl: number
+  Name?: string
   /**
-   * 单元格左上角的行索引
+   * 数量
    */
-  RowTl: number
+  Quantity?: string
   /**
-   * 单元格右下角的列索引
+   * 单价
    */
-  ColBr: number
+  Price?: string
   /**
-   * 单元格右下角的行索引
+   * 金额
    */
-  RowBr: number
-  /**
-   * 单元格内识别出的字符串文本，若文本存在多行，以换行符"\n"隔开
-   */
-  Text: string
-  /**
-   * 单元格类型
-   */
-  Type: string
-  /**
-   * 单元格置信度
-   */
-  Confidence: number
-  /**
-   * 单元格在图像中的四点坐标
-   */
-  Polygon: Array<Coord>
+  Total?: string
 }
 
 /**
@@ -7180,50 +7160,6 @@ export interface AdvertiseTextDetection {
 GeneralBasicOcr接口返回段落信息Parag，包含ParagNo。
    */
   AdvancedInfo?: string
-}
-
-/**
- * SubmitQuestionMarkAgentJob请求参数结构体
- */
-export interface SubmitQuestionMarkAgentJobRequest {
-  /**
-   * <p>图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。  示例值：/9j/4AAQSkZJRg.....s97n//2Q==</p>
-   */
-  ImageBase64?: string
-  /**
-   * <p>图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。  示例值：https://ocr-demo-1254418846.cos.ap-guangzhou.myqcloud.com/general/GeneralAccurateOCR/GeneralAccurateOCR1.jpg</p>
-   */
-  ImageUrl?: string
-  /**
-   * <p>需要识别的PDF页面的对应页码，仅支持PDF单页识别，默认值为1。</p>
-   */
-  PdfPageNumber?: number
-  /**
-   * <p>表示整张试卷批改需要先切题，默认为false</p>
-   * @deprecated
-   */
-  BoolSingleQuestion?: boolean
-  /**
-   * <p>默认false 表示关闭深度思考  true 表示打开深度思考，更深层次推理分析，速度更慢</p>
-   * @deprecated
-   */
-  EnableDeepThink?: boolean
-  /**
-   * <p>题目信息输出配置，当key对应为true表示开启配置开关。</p><p>当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；<br>当key为TrueAnswer  value为true 表示输出每道题的正确答案 ；<br>当key为StepCorrection  value为true表示启用步骤级批改；</p><p> 设置方式参考  {&quot;KnowledgePoints&quot;:true,&quot;TrueAnswer&quot;:true}</p><p>参数格式：{&quot;KnowledgePoints&quot;:true,&quot;TrueAnswer&quot;:true}</p>
-   */
-  QuestionConfigMap?: string
-  /**
-   * <p>仅有单题有效，如果切题有多题则不生效，单题批改的时候作为参考答案输入到批改模型中</p>
-   */
-  ReferenceAnswer?: string
-  /**
-   * <p>图片/PDF的 Base64 列表值，最多三张。每张图片要求参考ImageBase64  1. 如果ImageBase64List或者ImageUrlList 都没值则取ImageBase64 或者ImageUrl  2.如果ImageBase64List或者ImageUrlList 有一个值，则不取ImageBase64 或者ImageUrl值，优先去list  3.如果ImageBase64List或者ImageUrlList 都有值，则取ImageUrlList</p>
-   */
-  ImageBase64List?: Array<string>
-  /**
-   * <p>图片/PDF的 Url 地址Base64 列表值，最多三张。每张图片要求参考ImageUrl。  图片生效规则同ImageBase64List</p>
-   */
-  ImageUrlList?: Array<string>
 }
 
 /**
@@ -7959,36 +7895,6 @@ export interface Polygon {
    * 左下顶点坐标
    */
   LeftBottom?: Coord
-}
-
-/**
- * RecognizeTravelCardOCR返回参数结构体
- */
-export interface RecognizeTravelCardOCRResponse {
-  /**
-   * 行程卡更新时间，格式为：XXXX.XX.XX XX:XX:XX
-   */
-  Time?: string
-  /**
-   * 行程卡颜色：绿色、黄色、红色
-   */
-  Color?: string
-  /**
-   * 7天内到达或途经的城市（自2022年7月8日起，通信行程卡查询结果的覆盖时间范围由“14天”调整为“7天”）
-   */
-  ReachedCity?: Array<string>
-  /**
-   * 7天内到达或途径存在中高风险地区的城市（自2022年6月29日起，通信行程卡取消“星号”标记，改字段将返回空值）
-   */
-  RiskArea?: Array<string>
-  /**
-   * 电话号码
-   */
-  Telephone?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -10285,6 +10191,28 @@ export interface ImageCoordinates {
 }
 
 /**
+ * VerifyBizLicenseEnterprise3请求参数结构体
+ */
+export interface VerifyBizLicenseEnterprise3Request {
+  /**
+   * <p>统一社会信用代码</p>
+   */
+  CreditCode: string
+  /**
+   * <p>企业名称</p>
+   */
+  EntName: string
+  /**
+   * <p>法人代表</p>
+   */
+  LrName?: string
+  /**
+   * <p>核验类型 </p><p>枚举值：</p><ul><li>ENT_2META： 企业名称 、统一社会信用代码</li><li>ENT_3META： 企业名称 、统一社会信用代码 、法人代表名称</li></ul>
+   */
+  VerifyType?: string
+}
+
+/**
  * RecognizeEncryptedIDCardOCR返回参数结构体
  */
 export interface RecognizeEncryptedIDCardOCRResponse {
@@ -10883,25 +10811,29 @@ export interface MixedInvoiceDetectRequest {
 }
 
 /**
- * 增值税普通发票（卷票）条目
+ * WaybillOCR请求参数结构体
  */
-export interface VatRollItem {
+export interface WaybillOCRRequest {
   /**
-   * 项目名称
+   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  Name?: string
+  ImageBase64?: string
   /**
-   * 数量
+   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  Quantity?: string
+  ImageUrl?: string
   /**
-   * 单价
+   * 预检测开关，当待识别运单占整个输入图像的比例较小时，建议打开预检测开关。默认值为false。
    */
-  Price?: string
+  EnablePreDetect?: boolean
   /**
-   * 金额
+   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
    */
-  Total?: string
+  IsPdf?: boolean
+  /**
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
+   */
+  PdfPageNumber?: number
 }
 
 /**
@@ -10942,32 +10874,6 @@ export interface BusinessCertificateInfo {
    * 坐标
    */
   Rect?: Rect
-}
-
-/**
- * WaybillOCR请求参数结构体
- */
-export interface WaybillOCRRequest {
-  /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-   */
-  ImageBase64?: string
-  /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
-   */
-  ImageUrl?: string
-  /**
-   * 预检测开关，当待识别运单占整个输入图像的比例较小时，建议打开预检测开关。默认值为false。
-   */
-  EnablePreDetect?: boolean
-  /**
-   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
-   */
-  IsPdf?: boolean
-  /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
-   */
-  PdfPageNumber?: number
 }
 
 /**
@@ -11436,22 +11342,47 @@ export interface BankCardOCRResponse {
 }
 
 /**
- * RecognizeHealthCodeOCR请求参数结构体
+ * SubmitQuestionMarkAgentJob请求参数结构体
  */
-export interface RecognizeHealthCodeOCRRequest {
+export interface SubmitQuestionMarkAgentJobRequest {
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * <p>图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。  示例值：/9j/4AAQSkZJRg.....s97n//2Q==</p>
    */
   ImageBase64?: string
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * <p>图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。  示例值：https://ocr-demo-1254418846.cos.ap-guangzhou.myqcloud.com/general/GeneralAccurateOCR/GeneralAccurateOCR1.jpg</p>
    */
   ImageUrl?: string
   /**
-   * 需要识别的健康码类型列表，为空或不填表示默认为自动识别。
-0:自动识别
+   * <p>需要识别的PDF页面的对应页码，仅支持PDF单页识别，默认值为1。</p>
    */
-  Type?: number
+  PdfPageNumber?: number
+  /**
+   * <p>表示整张试卷批改需要先切题，默认为false</p>
+   * @deprecated
+   */
+  BoolSingleQuestion?: boolean
+  /**
+   * <p>默认false 表示关闭深度思考  true 表示打开深度思考，更深层次推理分析，速度更慢</p>
+   * @deprecated
+   */
+  EnableDeepThink?: boolean
+  /**
+   * <p>题目信息输出配置，当key对应为true表示开启配置开关。</p><p>当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；<br>当key为TrueAnswer  value为true 表示输出每道题的正确答案 ；<br>当key为StepCorrection  value为true表示启用步骤级批改；</p><p> 设置方式参考  {&quot;KnowledgePoints&quot;:true,&quot;TrueAnswer&quot;:true}</p><p>参数格式：{&quot;KnowledgePoints&quot;:true,&quot;TrueAnswer&quot;:true}</p>
+   */
+  QuestionConfigMap?: string
+  /**
+   * <p>仅有单题有效，如果切题有多题则不生效，单题批改的时候作为参考答案输入到批改模型中</p>
+   */
+  ReferenceAnswer?: string
+  /**
+   * <p>图片/PDF的 Base64 列表值，最多三张。每张图片要求参考ImageBase64  1. 如果ImageBase64List或者ImageUrlList 都没值则取ImageBase64 或者ImageUrl  2.如果ImageBase64List或者ImageUrlList 有一个值，则不取ImageBase64 或者ImageUrl值，优先去list  3.如果ImageBase64List或者ImageUrlList 都有值，则取ImageUrlList</p>
+   */
+  ImageBase64List?: Array<string>
+  /**
+   * <p>图片/PDF的 Url 地址Base64 列表值，最多三张。每张图片要求参考ImageUrl。  图片生效规则同ImageBase64List</p>
+   */
+  ImageUrlList?: Array<string>
 }
 
 /**

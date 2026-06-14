@@ -16,6 +16,60 @@
  */
 
 /**
+ * DescribeTokenPlanList返回参数结构体
+ */
+export interface DescribeTokenPlanListResponse {
+  /**
+   * 套餐列表。
+   */
+  TokenPlanSet?: Array<TokenPlanListItem>
+  /**
+   * 套餐总数量。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 绑定资源项
+ */
+export interface BindingItem {
+  /**
+   * 资源 ID（模型 ID 或服务 ID）。
+   */
+  ResourceId: string
+  /**
+   * 资源类型。取值：endpoint（服务）、model（模型）。
+   */
+  ResourceType: string
+  /**
+   * 资源状态
+   */
+  Status?: string
+}
+
+/**
+ * DescribeTokenPlanApiKeySecret返回参数结构体
+ */
+export interface DescribeTokenPlanApiKeySecretResponse {
+  /**
+   * APIKey ID。
+   */
+  ApiKeyId?: string
+  /**
+   * APIKey 密钥值（明文）。请妥善保管。
+   */
+  ApiKey?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Token Plan API Key 列表项
  */
 export interface TokenPlanApiKeyListItem {
@@ -90,60 +144,6 @@ export interface TokenPlanApiKeyListItem {
 }
 
 /**
- * 绑定资源项
- */
-export interface BindingItem {
-  /**
-   * 资源 ID（模型 ID 或服务 ID）。
-   */
-  ResourceId: string
-  /**
-   * 资源类型。取值：endpoint（服务）、model（模型）。
-   */
-  ResourceType: string
-  /**
-   * 资源状态
-   */
-  Status?: string
-}
-
-/**
- * DescribeTokenPlanApiKeySecret返回参数结构体
- */
-export interface DescribeTokenPlanApiKeySecretResponse {
-  /**
-   * APIKey ID。
-   */
-  ApiKeyId?: string
-  /**
-   * APIKey 密钥值（明文）。请妥善保管。
-   */
-  ApiKey?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 时间周期内的统计聚合值（按 metric key 索引）。本期返回 tokens 族（statistics=sum）的累计 Token 用量；具体包含哪些 key、顺序如何，参见响应顶层 `MetricKeys` 字段。接口预留 MetricType 字段以支持后续指标族扩展，本期仅支持 tokens。
- */
-export interface UsageStats {
-  /**
-   * 时间周期内的累计总 token 数。
-   */
-  TotalToken?: number
-  /**
-   * 时间周期内的累计输入 token 数。
-   */
-  InputTotalToken?: number
-  /**
-   * 时间周期内的累计输出 token 数。
-   */
-  OutputTotalToken?: number
-}
-
-/**
  * 批量创建成功项
  */
 export interface CreateApiKeysResultItem {
@@ -151,6 +151,20 @@ export interface CreateApiKeysResultItem {
    * APIKey ID。
    */
   ApiKeyId?: string
+}
+
+/**
+ * 新建术语条目项
+ */
+export interface GlossaryEntryInput {
+  /**
+   * 源语言术语。最大 1000 字符。
+   */
+  SourceTerm: string
+  /**
+   * 目标语言术语。最大 1000 字符。
+   */
+  TargetTerm: string
 }
 
 /**
@@ -190,45 +204,13 @@ export interface DescribeTokenPlanApiKeyListResponse {
 }
 
 /**
- * DescribeUsageRankList请求参数结构体
+ * 删除术语条目项
  */
-export interface DescribeUsageRankListRequest {
+export interface DeleteGlossaryEntryInput {
   /**
-   * 统计维度。取值：apikey（按 APIKey 统计）、endpoint（按接入点统计）、model（按模型统计）。
+   * 术语条目 ID。可通过 DescribeGlossaryEntries 接口获取。
    */
-  Dimension: string
-  /**
-   * 起始时间（闭区间），RFC3339 格式。
-   */
-  StartTime: string
-  /**
-   * 结束时间（开区间），RFC3339 格式。与 StartTime 的跨度最大 90 天。
-   */
-  EndTime: string
-  /**
-   * 指标族切换字段。本期支持 tokens（累计 Token 用量，statistics=sum）；传其他值将返回 InvalidParameter。空字符串或不传时默认 tokens。接口预留 MetricType 字段以支持后续指标族扩展。
-   */
-  MetricType?: string
-  /**
-   * 维度过滤值。空字符串表示查询全部对象，非空时仅查询指定单个对象（如指定 APIKey ID）。最大 256 字符。
-   */
-  Target?: string
-  /**
-   * 统计粒度（秒）。取值：60、300、3600、86400。必须不小于跨度对应下限：跨度 ≤ 1 天 → 60；1 ~ 5 天 → 300；5 ~ 10 天 → 3600；> 10 天 → 86400。仅 ShowAll=false 时使用。
-   */
-  Period?: number
-  /**
-   * 翻页起点，从 0 起，默认 0。ShowAll=true 时忽略。页大小固定为 10。
-   */
-  Offset?: number
-  /**
-   * 是否返回全量结果。
-- false（默认）：按 Offset 分页返回 TopList（每页 10 条），每个对象包含
-  Series 时序点用于绘制曲线。
-- true：忽略 Offset，返回全量对象列表，不返回 Series（CSV 导出场景）。
-
-   */
-  ShowAll?: boolean
+  EntryId: string
 }
 
 /**
@@ -239,6 +221,38 @@ export interface DescribeTokenPlanRequest {
    * 套餐 ID。可通过 DescribeTokenPlanList 接口获取。
    */
   TeamId: string
+}
+
+/**
+ * 术语条目详情
+ */
+export interface GlossaryEntryItem {
+  /**
+   * 术语条目 ID。
+   */
+  EntryId?: string
+  /**
+   * 源语言术语。
+   */
+  SourceTerm?: string
+  /**
+   * 目标语言术语。
+   */
+  TargetTerm?: string
+  /**
+   * 更新时间。Unix 时间戳（毫秒）。
+   */
+  UpdatedAt?: number
+}
+
+/**
+ * DeleteGlossary返回参数结构体
+ */
+export interface DeleteGlossaryResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -313,6 +327,16 @@ export interface SubPackageBalance {
    * API Key 额度包状态。取值：0（正常）、1（耗尽）。
    */
   Status?: number
+}
+
+/**
+ * DeleteGlossaryEntries返回参数结构体
+ */
+export interface DeleteGlossaryEntriesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -500,31 +524,103 @@ export interface UsageSeries {
 }
 
 /**
- * UpgradeTokenPlanTeamOrder请求参数结构体
+ * CreateGlossary请求参数结构体
  */
-export interface UpgradeTokenPlanTeamOrderRequest {
+export interface CreateGlossaryRequest {
   /**
-   * 套餐 ID。可通过 DescribeTokenPlanList 接口获取。
+   * 术语库名称。最大 50 字符。
    */
-  TeamId: string
+  Name: string
   /**
-   * 升配后的新规格额度。套餐类型为 enterprise 时表示积分额度，套餐类型为 enterprise-auto 时表示 Token 数。必须大于当前额度。
+   * 源语言代码。最大 16 字符。例如：zh（中文）、en（英文）。
    */
-  NewCreditOrToken: number
+  Source: string
+  /**
+   * 目标语言代码。最大 16 字符。例如：zh（中文）、en（英文）。
+   */
+  Target: string
+  /**
+   * 术语库描述。最大 255 字符。
+   */
+  Description?: string
 }
 
 /**
- * DescribeTokenPlanList返回参数结构体
+ * DescribeGlossaryEntries返回参数结构体
  */
-export interface DescribeTokenPlanListResponse {
+export interface DescribeGlossaryEntriesResponse {
   /**
-   * 套餐列表。
+   * 术语条目列表。
    */
-  TokenPlanSet?: Array<TokenPlanListItem>
+  Entries?: Array<GlossaryEntryItem>
   /**
-   * 套餐总数量。
+   * 符合条件的术语条目总数。
    */
-  TotalCount?: number
+  Total?: number
+  /**
+   * 当前页码。
+   */
+  Page?: number
+  /**
+   * 每页大小。
+   */
+  PageSize?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteGlossary请求参数结构体
+ */
+export interface DeleteGlossaryRequest {
+  /**
+   * 术语库 ID。可通过 DescribeGlossaries 接口获取。
+   */
+  GlossaryId: string
+}
+
+/**
+ * DescribeGlossaryEntries请求参数结构体
+ */
+export interface DescribeGlossaryEntriesRequest {
+  /**
+   * 术语库 ID。可通过 DescribeGlossaries 接口获取。
+   */
+  GlossaryId: string
+  /**
+   * 页码。默认为 1。
+   */
+  Page?: number
+  /**
+   * 每页大小。默认为 20，最大值为 200。
+   */
+  PageSize?: number
+}
+
+/**
+ * DeleteGlossaryEntries请求参数结构体
+ */
+export interface DeleteGlossaryEntriesRequest {
+  /**
+   * 术语库 ID。可通过 DescribeGlossaries 接口获取。
+   */
+  GlossaryId: string
+  /**
+   * 待删除的术语条目列表。单次最多 200 个。
+   */
+  Entries: Array<DeleteGlossaryEntryInput>
+}
+
+/**
+ * CreateGlossaryEntries返回参数结构体
+ */
+export interface CreateGlossaryEntriesResponse {
+  /**
+   * 创建成功的术语条目列表。
+   */
+  Entries?: Array<GlossaryEntryItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -575,6 +671,65 @@ export interface DescribeApiKeyRequest {
    * API 密钥明文，与 ApiKeyId 至少需传入其一。
    */
   ApiKey?: string
+}
+
+/**
+ * 修改术语条目项
+ */
+export interface ModifyGlossaryEntryInput {
+  /**
+   * 术语条目 ID。可通过 DescribeGlossaryEntries 接口获取。
+   */
+  EntryId: string
+  /**
+   * 源语言术语。最大 1000 字符。不传则保持不变。
+   */
+  SourceTerm?: string
+  /**
+   * 目标语言术语。最大 1000 字符。不传则保持不变。
+   */
+  TargetTerm?: string
+}
+
+/**
+ * ModifyTokenPlanApiKey请求参数结构体
+ */
+export interface ModifyTokenPlanApiKeyRequest {
+  /**
+   * API Key ID。
+   */
+  ApiKeyId: string
+  /**
+   * 可用模型列表。不传则不修改。
+
+- 如果套餐类型为企业版专业套餐：
+1）传入“all“ ：使用套餐支持的所有模型
+2）传入 Model ID：指定具体模型。“all“和具体的 Model ID 不能同时传入。
+
+- 如果套餐类型为企业版轻享套餐，不允许传该参数。
+   */
+  AllowedModels?: Array<string>
+  /**
+   * 独占额度，不传则不修改。单位说明：
+
+- 套餐类型为专业套餐，单位取值为积分；
+- 套餐类型为轻享套餐，单位取值为 token。
+   */
+  ExclusiveQuota?: number
+  /**
+   * 总额度上限。-1 表示不限，必须为 -1 或 >= API Key 当前的 ExclusiveQuota（独占额度），不传则不修改。单位说明如下：
+- 套餐类型为专业套餐，单位取值为积分；
+- 套餐类型为轻享套餐，单位取值为 token。
+   */
+  TotalQuota?: number
+  /**
+   * 是否启用该 API Key。取值：enable（启用）、disable（停用），不传则不修改。
+   */
+  UseStatus?: string
+  /**
+   * TPM（Tokens Per Minute）限制。不传则不修改。必须 >= 0 且 <= 套餐 TPM。
+   */
+  TPM?: number
 }
 
 /**
@@ -704,29 +859,25 @@ export interface TokenPlanListItem {
 }
 
 /**
- * DescribeTokenPlanApiKeyList请求参数结构体
+ * CreateGlossary返回参数结构体
  */
-export interface DescribeTokenPlanApiKeyListRequest {
+export interface CreateGlossaryResponse {
   /**
-   * 套餐 ID。可通过DescribeTokenPlanList接口获取。
+   * 术语库 ID。
    */
-  TeamId: string
+  GlossaryId?: string
   /**
-   * 分页查询偏移量，默认为 0。
+   * 术语库名称。
    */
-  Offset?: number
+  Name?: string
   /**
-   * 分页查询返回数量，默认为 20，最大值为 100。
+   * 创建时间。Unix 时间戳（毫秒）。
    */
-  Limit?: number
+  CreatedAt?: number
   /**
-   * 分页查询过滤条件列表。支持的过滤字段：ApiKeyId （API Key ID）、Name （API Key 名称）、Status （API Key是否可用）、StopReason （API Key停用原因）、UseStatus （API Key用户侧开关）。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Filters?: Array<RequestFilter>
-  /**
-   * 分页查询排序条件列表。支持的排序字段：CreatedAt（创建时间）、UpdatedAt（更新时间）。默认按 CreatedAt 降序。
-   */
-  Sorts?: Array<RequestSort>
+  RequestId?: string
 }
 
 /**
@@ -756,44 +907,17 @@ export interface CreateTokenPlanTeamOrderAndBuyRequest {
 }
 
 /**
- * ModifyTokenPlanApiKey请求参数结构体
+ * ModifyGlossaryEntries请求参数结构体
  */
-export interface ModifyTokenPlanApiKeyRequest {
+export interface ModifyGlossaryEntriesRequest {
   /**
-   * API Key ID。
+   * 术语库 ID。可通过 DescribeGlossaries 接口获取。
    */
-  ApiKeyId: string
+  GlossaryId: string
   /**
-   * 可用模型列表。不传则不修改。
-
-- 如果套餐类型为企业版专业套餐：
-1）传入“all“ ：使用套餐支持的所有模型
-2）传入 Model ID：指定具体模型。“all“和具体的 Model ID 不能同时传入。
-
-- 如果套餐类型为企业版轻享套餐，不允许传该参数。
+   * 术语条目列表。单次最多 200 个。
    */
-  AllowedModels?: Array<string>
-  /**
-   * 独占额度，不传则不修改。单位说明：
-
-- 套餐类型为专业套餐，单位取值为积分；
-- 套餐类型为轻享套餐，单位取值为 token。
-   */
-  ExclusiveQuota?: number
-  /**
-   * 总额度上限。-1 表示不限，必须为 -1 或 >= API Key 当前的 ExclusiveQuota（独占额度），不传则不修改。单位说明如下：
-- 套餐类型为专业套餐，单位取值为积分；
-- 套餐类型为轻享套餐，单位取值为 token。
-   */
-  TotalQuota?: number
-  /**
-   * 是否启用该 API Key。取值：enable（启用）、disable（停用），不传则不修改。
-   */
-  UseStatus?: string
-  /**
-   * TPM（Tokens Per Minute）限制。不传则不修改。必须 >= 0 且 <= 套餐 TPM。
-   */
-  TPM?: number
+  Entries: Array<ModifyGlossaryEntryInput>
 }
 
 /**
@@ -808,6 +932,28 @@ export interface RenewTokenPlanTeamOrderRequest {
    * 续费时长。单位：月。必须大于 0。
    */
   TimeSpan: number
+}
+
+/**
+ * DescribeGlossaries请求参数结构体
+ */
+export interface DescribeGlossariesRequest {
+  /**
+   * 返回数量。默认为 20，最大值为 100。
+   */
+  Limit?: number
+  /**
+   * 偏移量。默认为 0。
+   */
+  Offset?: number
+  /**
+   * 过滤条件列表。支持的过滤字段：GlossaryId（术语库 ID）、Name（名称）、Source（源语言代码）、Target（目标语言代码）。
+   */
+  Filters?: Array<RequestFilter>
+  /**
+   * 排序条件列表。支持的排序字段：CreatedTime（创建时间）、UpdatedTime（更新时间）。
+   */
+  Sorts?: Array<RequestSort>
 }
 
 /**
@@ -863,6 +1009,62 @@ export interface DescribeTokenPlanApiKeyUsageDetailRequest {
 }
 
 /**
+ * UpgradeTokenPlanTeamOrder请求参数结构体
+ */
+export interface UpgradeTokenPlanTeamOrderRequest {
+  /**
+   * 套餐 ID。可通过 DescribeTokenPlanList 接口获取。
+   */
+  TeamId: string
+  /**
+   * 升配后的新规格额度。套餐类型为 enterprise 时表示积分额度，套餐类型为 enterprise-auto 时表示 Token 数。必须大于当前额度。
+   */
+  NewCreditOrToken: number
+}
+
+/**
+ * DescribeUsageRankList请求参数结构体
+ */
+export interface DescribeUsageRankListRequest {
+  /**
+   * 统计维度。取值：apikey（按 APIKey 统计）、endpoint（按接入点统计）、model（按模型统计）。
+   */
+  Dimension: string
+  /**
+   * 起始时间（闭区间），RFC3339 格式。
+   */
+  StartTime: string
+  /**
+   * 结束时间（开区间），RFC3339 格式。与 StartTime 的跨度最大 90 天。
+   */
+  EndTime: string
+  /**
+   * 指标族切换字段。本期支持 tokens（累计 Token 用量，statistics=sum）；传其他值将返回 InvalidParameter。空字符串或不传时默认 tokens。接口预留 MetricType 字段以支持后续指标族扩展。
+   */
+  MetricType?: string
+  /**
+   * 维度过滤值。空字符串表示查询全部对象，非空时仅查询指定单个对象（如指定 APIKey ID）。最大 256 字符。
+   */
+  Target?: string
+  /**
+   * 统计粒度（秒）。取值：60、300、3600、86400。必须不小于跨度对应下限：跨度 ≤ 1 天 → 60；1 ~ 5 天 → 300；5 ~ 10 天 → 3600；> 10 天 → 86400。仅 ShowAll=false 时使用。
+   */
+  Period?: number
+  /**
+   * 翻页起点，从 0 起，默认 0。ShowAll=true 时忽略。页大小固定为 10。
+   */
+  Offset?: number
+  /**
+   * 是否返回全量结果。
+- false（默认）：按 Offset 分页返回 TopList（每页 10 条），每个对象包含
+  Series 时序点用于绘制曲线。
+- true：忽略 Offset，返回全量对象列表，不返回 Series（CSV 导出场景）。
+
+   */
+  ShowAll?: boolean
+}
+
+/**
  * ModifyTokenPlanApiKey返回参数结构体
  */
 export interface ModifyTokenPlanApiKeyResponse {
@@ -870,6 +1072,20 @@ export interface ModifyTokenPlanApiKeyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateGlossaryEntries请求参数结构体
+ */
+export interface CreateGlossaryEntriesRequest {
+  /**
+   * 术语库 ID。可通过 DescribeGlossaries 接口获取。
+   */
+  GlossaryId: string
+  /**
+   * 术语条目列表。单次最多 100 个。
+   */
+  Entries: Array<GlossaryEntryInput>
 }
 
 /**
@@ -943,73 +1159,29 @@ export interface ApiKeyDetail {
 }
 
 /**
- * Token Plan 企业版套餐调用明细项（字段与 CLS 日志对齐）
+ * DescribeGlossaries返回参数结构体
  */
-export interface UsageDetailItem {
+export interface DescribeGlossariesResponse {
   /**
-   * 主账号 UIN。
+   * 术语库列表。
    */
-  Uin?: string
+  Items?: Array<GlossaryItem>
   /**
-   * 模型名称。
+   * 符合条件的术语库总数。
    */
-  ModelName?: string
+  TotalCount?: number
   /**
-   * APIKey ID。
+   * 当前页码。
    */
-  ApiKeyId?: string
+  Current?: number
   /**
-   * APIKey 名称。
+   * 每页大小。
    */
-  ApiKeyName?: string
+  PageSize?: number
   /**
-   * 请求 ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-  /**
-   * 请求时间（RFC3339 格式）。
-   */
-  RequestTime?: string
-  /**
-   * 输入 token 数。
-   */
-  InputToken?: number
-  /**
-   * 缓存 token 数。
-   */
-  CacheToken?: number
-  /**
-   * 输出 token 数。
-   */
-  OutputToken?: number
-  /**
-   * 总 token 数。
-   */
-  TotalToken?: number
-  /**
-   * 未命中缓存输入消耗额度。单位说明如下：
-- 套餐类型为专业套餐（enterprise），单位取值为积分；
-- 套餐类型轻享套餐（enterprise-auto），单位取值为 token。
-   */
-  InputQuota?: string
-  /**
-   * 缓存消耗额度。单位说明如下：
-- 套餐类型为专业套餐（enterprise），单位取值为积分；
-- 套餐类型轻享套餐（enterprise-auto），单位取值为 token。
-   */
-  CacheQuota?: string
-  /**
-   * 输出消耗额度。单位说明如下：
-- 套餐类型为专业套餐（enterprise），单位取值为积分；
-- 套餐类型轻享套餐（enterprise-auto），单位取值为 token。
-   */
-  OutputQuota?: string
-  /**
-   * 总消耗额度。单位说明如下：
-- 套餐类型为专业套餐（enterprise），单位取值为积分；
-- 套餐类型轻享套餐（enterprise-auto），单位取值为 token。
-   */
-  TotalQuota?: string
 }
 
 /**
@@ -1028,6 +1200,98 @@ export interface BatchCreateFailedItem {
    * 失败原因。
    */
   Reason?: string
+}
+
+/**
+ * 术语库详情
+ */
+export interface GlossaryItem {
+  /**
+   * 术语库 ID。
+   */
+  GlossaryId?: string
+  /**
+   * 术语库名称。
+   */
+  Name?: string
+  /**
+   * 术语库描述。
+   */
+  Description?: string
+  /**
+   * 源语言代码。
+   */
+  Source?: string
+  /**
+   * 目标语言代码。
+   */
+  Target?: string
+  /**
+   * 创建时间。
+   */
+  CreatedTime?: string
+  /**
+   * 更新时间。
+   */
+  UpdatedTime?: string
+}
+
+/**
+ * 主额度包信息
+ */
+export interface TokenPlanPackageInfo {
+  /**
+   * 总额度。根据套餐类型区分单位：credits（企业版专业套餐），tokens（企业版auto套餐）
+   */
+  TotalQuota?: string
+  /**
+   * 总已使用额度。根据套餐类型区分单位：credits（企业版专业套餐），tokens（企业版auto套餐）
+   */
+  TotalUsed?: string
+  /**
+   * 总周期数。
+   */
+  TotalCycles?: number
+  /**
+   * 周期单位。取值：month（月）
+   */
+  CycleUnit?: string
+  /**
+   * 套餐包生效时间。
+   */
+  StartTime?: string
+  /**
+   * 套餐包到期时间。
+   */
+  ExpireTime?: string
+  /**
+   * 独占池已分配额度。根据套餐类型区分单位：credits（企业版专业套餐），tokens（企业版auto套餐）
+   */
+  ExclusiveAllocated?: string
+  /**
+   * 独占池已用额度。根据套餐类型区分单位：credits（企业版专业套餐），tokens（企业版auto套餐）
+   */
+  ExclusiveUsed?: string
+  /**
+   * 共享池总额度。根据套餐类型区分单位：credits（企业版专业套餐），tokens（企业版auto套餐）
+   */
+  SharedPool?: string
+  /**
+   * 共享已用额度。根据套餐类型区分单位：credits（企业版专业套餐），tokens（企业版auto套餐）
+   */
+  SharedUsed?: string
+  /**
+   * 当期额度。根据套餐类型区分单位：credits（企业版专业套餐），tokens（企业版auto套餐）
+   */
+  CycleQuota?: string
+  /**
+   * 当前周期。
+   */
+  CurrentCycle?: number
+  /**
+   * 剩余周期。
+   */
+  RemainCycles?: number
 }
 
 /**
@@ -1121,61 +1385,17 @@ export interface UpgradeTokenPlanTeamOrderResponse {
 }
 
 /**
- * 主额度包信息
+ * ModifyGlossaryEntries返回参数结构体
  */
-export interface TokenPlanPackageInfo {
+export interface ModifyGlossaryEntriesResponse {
   /**
-   * 总额度。根据套餐类型区分单位：credits（企业版专业套餐），tokens（企业版auto套餐）
+   * 修改后的术语条目列表。
    */
-  TotalQuota?: string
+  Entries?: Array<GlossaryEntryItem>
   /**
-   * 总已使用额度。根据套餐类型区分单位：credits（企业版专业套餐），tokens（企业版auto套餐）
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TotalUsed?: string
-  /**
-   * 总周期数。
-   */
-  TotalCycles?: number
-  /**
-   * 周期单位。取值：month（月）
-   */
-  CycleUnit?: string
-  /**
-   * 套餐包生效时间。
-   */
-  StartTime?: string
-  /**
-   * 套餐包到期时间。
-   */
-  ExpireTime?: string
-  /**
-   * 独占池已分配额度。根据套餐类型区分单位：credits（企业版专业套餐），tokens（企业版auto套餐）
-   */
-  ExclusiveAllocated?: string
-  /**
-   * 独占池已用额度。根据套餐类型区分单位：credits（企业版专业套餐），tokens（企业版auto套餐）
-   */
-  ExclusiveUsed?: string
-  /**
-   * 共享池总额度。根据套餐类型区分单位：credits（企业版专业套餐），tokens（企业版auto套餐）
-   */
-  SharedPool?: string
-  /**
-   * 共享已用额度。根据套餐类型区分单位：credits（企业版专业套餐），tokens（企业版auto套餐）
-   */
-  SharedUsed?: string
-  /**
-   * 当期额度。根据套餐类型区分单位：credits（企业版专业套餐），tokens（企业版auto套餐）
-   */
-  CycleQuota?: string
-  /**
-   * 当前周期。
-   */
-  CurrentCycle?: number
-  /**
-   * 剩余周期。
-   */
-  RemainCycles?: number
+  RequestId?: string
 }
 
 /**
@@ -1288,6 +1508,24 @@ export interface CreateTokenPlanApiKeysRequest {
    * TPM（Tokens Per Minute）限制。不传使用套餐级别 TPM。必须 >= 0 且 <= 套餐 TPM。
    */
   TPM?: number
+}
+
+/**
+ * 时间周期内的统计聚合值（按 metric key 索引）。本期返回 tokens 族（statistics=sum）的累计 Token 用量；具体包含哪些 key、顺序如何，参见响应顶层 `MetricKeys` 字段。接口预留 MetricType 字段以支持后续指标族扩展，本期仅支持 tokens。
+ */
+export interface UsageStats {
+  /**
+   * 时间周期内的累计总 token 数。
+   */
+  TotalToken?: number
+  /**
+   * 时间周期内的累计输入 token 数。
+   */
+  InputTotalToken?: number
+  /**
+   * 时间周期内的累计输出 token 数。
+   */
+  OutputTotalToken?: number
 }
 
 /**
@@ -1438,6 +1676,102 @@ export interface DescribeApiKeyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeTokenPlanApiKeyList请求参数结构体
+ */
+export interface DescribeTokenPlanApiKeyListRequest {
+  /**
+   * 套餐 ID。可通过DescribeTokenPlanList接口获取。
+   */
+  TeamId: string
+  /**
+   * 分页查询偏移量，默认为 0。
+   */
+  Offset?: number
+  /**
+   * 分页查询返回数量，默认为 20，最大值为 100。
+   */
+  Limit?: number
+  /**
+   * 分页查询过滤条件列表。支持的过滤字段：ApiKeyId （API Key ID）、Name （API Key 名称）、Status （API Key是否可用）、StopReason （API Key停用原因）、UseStatus （API Key用户侧开关）。
+   */
+  Filters?: Array<RequestFilter>
+  /**
+   * 分页查询排序条件列表。支持的排序字段：CreatedAt（创建时间）、UpdatedAt（更新时间）。默认按 CreatedAt 降序。
+   */
+  Sorts?: Array<RequestSort>
+}
+
+/**
+ * Token Plan 企业版套餐调用明细项（字段与 CLS 日志对齐）
+ */
+export interface UsageDetailItem {
+  /**
+   * 主账号 UIN。
+   */
+  Uin?: string
+  /**
+   * 模型名称。
+   */
+  ModelName?: string
+  /**
+   * APIKey ID。
+   */
+  ApiKeyId?: string
+  /**
+   * APIKey 名称。
+   */
+  ApiKeyName?: string
+  /**
+   * 请求 ID。
+   */
+  RequestId?: string
+  /**
+   * 请求时间（RFC3339 格式）。
+   */
+  RequestTime?: string
+  /**
+   * 输入 token 数。
+   */
+  InputToken?: number
+  /**
+   * 缓存 token 数。
+   */
+  CacheToken?: number
+  /**
+   * 输出 token 数。
+   */
+  OutputToken?: number
+  /**
+   * 总 token 数。
+   */
+  TotalToken?: number
+  /**
+   * 未命中缓存输入消耗额度。单位说明如下：
+- 套餐类型为专业套餐（enterprise），单位取值为积分；
+- 套餐类型轻享套餐（enterprise-auto），单位取值为 token。
+   */
+  InputQuota?: string
+  /**
+   * 缓存消耗额度。单位说明如下：
+- 套餐类型为专业套餐（enterprise），单位取值为积分；
+- 套餐类型轻享套餐（enterprise-auto），单位取值为 token。
+   */
+  CacheQuota?: string
+  /**
+   * 输出消耗额度。单位说明如下：
+- 套餐类型为专业套餐（enterprise），单位取值为积分；
+- 套餐类型轻享套餐（enterprise-auto），单位取值为 token。
+   */
+  OutputQuota?: string
+  /**
+   * 总消耗额度。单位说明如下：
+- 套餐类型为专业套餐（enterprise），单位取值为积分；
+- 套餐类型轻享套餐（enterprise-auto），单位取值为 token。
+   */
+  TotalQuota?: string
 }
 
 /**

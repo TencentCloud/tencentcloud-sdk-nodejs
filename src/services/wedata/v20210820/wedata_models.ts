@@ -1052,37 +1052,41 @@ export interface CreateDsFolderResponse {
  */
 export interface DescribeManualTriggerRecordPageRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 触发运行名称
+   * <p>触发运行名称</p>
    */
   TriggerName?: string
   /**
-   * 工作流过滤关键字，工作流名称 or 工作流ID
+   * <p>工作流过滤关键字，工作流名称 or 工作流ID</p>
    */
   WorkflowKeyword?: string
   /**
-   * 触发运行提交人过滤，多个提交人用英文逗号分割
+   * <p>触发运行提交人过滤，多个提交人用英文逗号分割</p>
    */
   Creator?: string
   /**
-   * 触发提交创建时间过滤，起始时间
+   * <p>触发提交创建时间过滤，起始时间</p>
    */
   TriggerStartTime?: string
   /**
-   * 触发提交创建时间过滤，结束时间
+   * <p>触发提交创建时间过滤，结束时间</p>
    */
   TriggerEndTime?: string
   /**
-   * 页码，整型
+   * <p>页码，整型</p>
    */
   PageNumber?: number
   /**
-   * 每页数目，整型
+   * <p>每页数目，整型</p>
    */
   PageSize?: number
+  /**
+   * <p>触发ID</p>
+   */
+  TriggerId?: string
 }
 
 /**
@@ -24090,7 +24094,7 @@ export interface DescribeManualTriggerRecordPageResponse {
    */
   RequestFromSource?: string
   /**
-   * 详情结果
+   * <p>详情结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: ManualTriggerRecordOpsDtoPage

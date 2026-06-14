@@ -72,6 +72,7 @@ import {
   TextVatInvoice,
   VehicleInvoiceInfo,
   DriverLicenseOCRRequest,
+  VerifyBizLicenseEnterprise3Response,
   OtherInvoiceItem,
   TextDetection,
   RecognizeTableOCRResponse,
@@ -105,7 +106,7 @@ import {
   MixedInvoiceItem,
   SmartStructuralOCRRequest,
   ExtractDocMultiProResponse,
-  RecognizeTravelCardOCRRequest,
+  TableCellInfo,
   GeneralHandwritingOCRRequest,
   BizLicenseOCRRequest,
   MixedInvoiceDetectResponse,
@@ -160,7 +161,7 @@ import {
   BusinessCardInfo,
   MotorVehicleSaleInvoice,
   RecognizeEncryptedIDCardOCRRequest,
-  RecognizeHealthCodeOCRResponse,
+  UsedVehicleInvoiceInfo,
   PassportRecognizeInfos,
   SubmitExtractDocAgentJobResponse,
   ImageEnhancementResponse,
@@ -177,7 +178,6 @@ import {
   SubmitMarkEssayAgentJobRequest,
   LicensePlateOCRRequest,
   GeneralBasicOCRRequest,
-  UsedVehicleInvoiceInfo,
   TextVehicleBack,
   SubmitMarkEssayAgentJobResponse,
   GeneralEfficientOCRRequest,
@@ -201,12 +201,11 @@ import {
   VatInvoiceVerifyNewRequest,
   CarInvoiceInfo,
   SchemaList,
-  TableCellInfo,
+  VatRollItem,
   FlightInvoiceInfo,
   DetailInformationOfAirTicketTupleList,
   TextVehicleFront,
   AdvertiseTextDetection,
-  SubmitQuestionMarkAgentJobRequest,
   SceneWarnInfo,
   ElectronicTrainTicket,
   ArithmeticOCRRequest,
@@ -228,7 +227,6 @@ import {
   BankSlipOCRResponse,
   OnlineTaxiItinerary,
   Polygon,
-  RecognizeTravelCardOCRResponse,
   PassInvoiceInfo,
   QuestionObj,
   TableInfo,
@@ -289,6 +287,7 @@ import {
   UsedCarPurchaseInvoice,
   EnglishOCRResponse,
   ImageCoordinates,
+  VerifyBizLicenseEnterprise3Request,
   RecognizeEncryptedIDCardOCRResponse,
   Positions,
   RideHailingTransportLicenseOCRResponse,
@@ -311,10 +310,9 @@ import {
   SmartStructuralOCRResponse,
   IDCardOCRRequest,
   MixedInvoiceDetectRequest,
-  VatRollItem,
+  WaybillOCRRequest,
   RecognizeStoreNameResponse,
   BusinessCertificateInfo,
-  WaybillOCRRequest,
   RideHailingTransportLicenseOCRRequest,
   MLIDCardOCRResponse,
   RecognizeTableOCRRequest,
@@ -326,7 +324,7 @@ import {
   VatInvoiceOCRResponse,
   InvoiceSealInfo,
   BankCardOCRResponse,
-  RecognizeHealthCodeOCRRequest,
+  SubmitQuestionMarkAgentJobRequest,
   BusinessCardOCRRequest,
   RecognizeValidIDCardOCRResponse,
   DescribeMarkEssayAgentJobRequest,
@@ -576,6 +574,19 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 提供比对校验企业名称、统一社会信用代码、法人姓名、注册登记证件号码一致性的服务，助力快速核验企业资质。
+注意：
+存在个别特殊情况下核验结果不准确，请选用前知悉；
+按周更新企业信息变更情况，如遇到未及时更新的情况，可联系在线客服转产品团队进行人工处理。
+     */
+  async VerifyBizLicenseEnterprise4(
+    req: VerifyBizLicenseEnterprise4Request,
+    cb?: (error: string, rep: VerifyBizLicenseEnterprise4Response) => void
+  ): Promise<VerifyBizLicenseEnterprise4Response> {
+    return this.request("VerifyBizLicenseEnterprise4", req, cb)
+  }
+
+  /**
      * 本接口支持集装箱箱门信息识别，识别字段包括集装箱箱号、类型、总重量、有效承重、容量、自身重量，具备集装箱箱号、类型不完整或者不清晰的告警功能。
 默认接口请求频率限制：5次/秒。
      */
@@ -730,20 +741,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeQuestionMarkAgentJobResponse) => void
   ): Promise<DescribeQuestionMarkAgentJobResponse> {
     return this.request("DescribeQuestionMarkAgentJob", req, cb)
-  }
-
-  /**
-     * 产品规划
-
-本接口支持通信大数据行程卡识别，包括行程卡颜色、更新时间、途经地、存在中高风险地区的城市、电话号码，五个字段的识别结果输出。
-
-默认接口请求频率限制：20次/秒。
-     */
-  async RecognizeTravelCardOCR(
-    req: RecognizeTravelCardOCRRequest,
-    cb?: (error: string, rep: RecognizeTravelCardOCRResponse) => void
-  ): Promise<RecognizeTravelCardOCRResponse> {
-    return this.request("RecognizeTravelCardOCR", req, cb)
   }
 
   /**
@@ -1500,16 +1497,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 提供比对校验企业名称、统一社会信用代码、法人姓名、注册登记证件号码一致性的服务，助力快速核验企业资质。
-注意：
-存在个别特殊情况下核验结果不准确，请选用前知悉；
-按周更新企业信息变更情况，如遇到未及时更新的情况，可联系在线客服转产品团队进行人工处理。
+     * 提供比对核验企业名称、统一社会信用代码、法人姓名一致性的服务，助力快速核验企业资质。
+注意：核验准确率在99%以上，存在个别特殊情况下核验结果不准确，请选用前知悉。
      */
-  async VerifyBizLicenseEnterprise4(
-    req: VerifyBizLicenseEnterprise4Request,
-    cb?: (error: string, rep: VerifyBizLicenseEnterprise4Response) => void
-  ): Promise<VerifyBizLicenseEnterprise4Response> {
-    return this.request("VerifyBizLicenseEnterprise4", req, cb)
+  async VerifyBizLicenseEnterprise3(
+    req: VerifyBizLicenseEnterprise3Request,
+    cb?: (error: string, rep: VerifyBizLicenseEnterprise3Response) => void
+  ): Promise<VerifyBizLicenseEnterprise3Response> {
+    return this.request("VerifyBizLicenseEnterprise3", req, cb)
   }
 
   /**
@@ -1522,20 +1517,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: MixedInvoiceOCRResponse) => void
   ): Promise<MixedInvoiceOCRResponse> {
     return this.request("MixedInvoiceOCR", req, cb)
-  }
-
-  /**
-     * 产品规划
-
-本接口支持北京、上海、广东、江苏、吉林、黑龙江、天津、辽宁、浙江、河南、四川、贵州、山东、安徽、福建、江西、湖北、湖南等省份健康码的识别，包括持码人姓名、持码人身份证号、健康码更新时间、健康码颜色、核酸检测结果、核酸检测间隔时长、核酸检测时间，疫苗接种信息，八个字段的识别结果输出。不同省市健康码显示的字段信息有所不同，上述字段的识别结果可能为空，以图片上具体展示的信息为准。
-
-默认接口请求频率限制：10次/秒。
-     */
-  async RecognizeHealthCodeOCR(
-    req: RecognizeHealthCodeOCRRequest,
-    cb?: (error: string, rep: RecognizeHealthCodeOCRResponse) => void
-  ): Promise<RecognizeHealthCodeOCRResponse> {
-    return this.request("RecognizeHealthCodeOCR", req, cb)
   }
 
   /**

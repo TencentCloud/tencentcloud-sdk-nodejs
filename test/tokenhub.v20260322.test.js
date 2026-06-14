@@ -18,6 +18,26 @@ const client = new tencentcloud.tokenhub.v20260322.Client({
 })
 describe("tokenhub.v20260322.test.js", function () {
 
+it("tokenhub.v20260322.RenewTokenPlanTeamOrder", async function () {
+    try {
+       const data = await client.RenewTokenPlanTeamOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tokenhub.v20260322.CreateTokenPlanTeamOrderAndBuy", async function () {
+    try {
+       const data = await client.CreateTokenPlanTeamOrderAndBuy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tokenhub.v20260322.DescribeApiKeyList", async function () {
     try {
        const data = await client.DescribeApiKeyList({})
@@ -28,9 +48,19 @@ it("tokenhub.v20260322.DescribeApiKeyList", async function () {
     }
 })
 
-it("tokenhub.v20260322.ModifyTokenPlanApiKeySecret", async function () {
+it("tokenhub.v20260322.DescribeModelList", async function () {
     try {
-       const data = await client.ModifyTokenPlanApiKeySecret({})
+       const data = await client.DescribeModelList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tokenhub.v20260322.DescribeTokenPlanApiKey", async function () {
+    try {
+       const data = await client.DescribeTokenPlanApiKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -58,29 +88,9 @@ it("tokenhub.v20260322.DescribeTokenPlanApiKeyList", async function () {
     }
 })
 
-it("tokenhub.v20260322.DescribeTokenPlan", async function () {
+it("tokenhub.v20260322.CreateGlossaryEntries", async function () {
     try {
-       const data = await client.DescribeTokenPlan({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tokenhub.v20260322.RenewTokenPlanTeamOrder", async function () {
-    try {
-       const data = await client.RenewTokenPlanTeamOrder({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tokenhub.v20260322.CreateTokenPlanTeamOrderAndBuy", async function () {
-    try {
-       const data = await client.CreateTokenPlanTeamOrderAndBuy({})
+       const data = await client.CreateGlossaryEntries({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +108,9 @@ it("tokenhub.v20260322.DescribeTokenPlanApiKeyUsageDetail", async function () {
     }
 })
 
-it("tokenhub.v20260322.DescribeTokenPlanList", async function () {
+it("tokenhub.v20260322.DescribeGlossaries", async function () {
     try {
-       const data = await client.DescribeTokenPlanList({})
+       const data = await client.DescribeGlossaries({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,39 +118,9 @@ it("tokenhub.v20260322.DescribeTokenPlanList", async function () {
     }
 })
 
-it("tokenhub.v20260322.DescribeModelList", async function () {
+it("tokenhub.v20260322.DescribeGlossaryEntries", async function () {
     try {
-       const data = await client.DescribeModelList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tokenhub.v20260322.DescribeApiKey", async function () {
-    try {
-       const data = await client.DescribeApiKey({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tokenhub.v20260322.UpgradeTokenPlanTeamOrder", async function () {
-    try {
-       const data = await client.UpgradeTokenPlanTeamOrder({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tokenhub.v20260322.DeleteTokenPlanApiKey", async function () {
-    try {
-       const data = await client.DeleteTokenPlanApiKey({})
+       const data = await client.DescribeGlossaryEntries({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +138,9 @@ it("tokenhub.v20260322.DescribeUsageRankList", async function () {
     }
 })
 
-it("tokenhub.v20260322.ModifyTokenPlanApiKey", async function () {
+it("tokenhub.v20260322.DeleteGlossaryEntries", async function () {
     try {
-       const data = await client.ModifyTokenPlanApiKey({})
+       const data = await client.DeleteGlossaryEntries({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -168,9 +148,99 @@ it("tokenhub.v20260322.ModifyTokenPlanApiKey", async function () {
     }
 })
 
-it("tokenhub.v20260322.DescribeTokenPlanApiKey", async function () {
+it("tokenhub.v20260322.UpgradeTokenPlanTeamOrder", async function () {
     try {
-       const data = await client.DescribeTokenPlanApiKey({})
+       const data = await client.UpgradeTokenPlanTeamOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tokenhub.v20260322.CreateGlossary", async function () {
+    try {
+       const data = await client.CreateGlossary({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tokenhub.v20260322.DeleteGlossary", async function () {
+    try {
+       const data = await client.DeleteGlossary({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tokenhub.v20260322.ModifyTokenPlanApiKeySecret", async function () {
+    try {
+       const data = await client.ModifyTokenPlanApiKeySecret({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tokenhub.v20260322.DescribeTokenPlan", async function () {
+    try {
+       const data = await client.DescribeTokenPlan({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tokenhub.v20260322.ModifyGlossaryEntries", async function () {
+    try {
+       const data = await client.ModifyGlossaryEntries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tokenhub.v20260322.DescribeTokenPlanList", async function () {
+    try {
+       const data = await client.DescribeTokenPlanList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tokenhub.v20260322.DescribeApiKey", async function () {
+    try {
+       const data = await client.DescribeApiKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tokenhub.v20260322.DeleteTokenPlanApiKey", async function () {
+    try {
+       const data = await client.DeleteTokenPlanApiKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tokenhub.v20260322.ModifyTokenPlanApiKey", async function () {
+    try {
+       const data = await client.ModifyTokenPlanApiKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -671,17 +671,21 @@ export interface QuerySceneListRequest {
 }
 
 /**
- * StopChatAI返回参数结构体
+ * QueryKnowledgeTask请求参数结构体
  */
-export interface StopChatAIResponse {
+export interface QueryKnowledgeTaskRequest {
   /**
-   * 会话
+   * <p>实例id</p>
    */
-  SessionId?: string
+  InstanceId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>知识库id</p>
    */
-  RequestId?: string
+  KnowledgeBaseId?: string
+  /**
+   * <p>文件id列表</p>
+   */
+  FileIds?: Array<string>
 }
 
 /**
@@ -706,6 +710,20 @@ export interface UploadAndCommitFileResponse {
    * 上传任务
    */
   JobId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * QueryKnowledgeTask返回参数结构体
+ */
+export interface QueryKnowledgeTaskResponse {
+  /**
+   * <p>文档任务详情对象</p>
+   */
+  FileList?: Array<FileTaskStatus>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1001,6 +1019,16 @@ export interface GetKnowledgeBaseFileListRequest {
 }
 
 /**
+ * AppendKnowledgeTask返回参数结构体
+ */
+export interface AppendKnowledgeTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetUploadJobDetails请求参数结构体
  */
 export interface GetUploadJobDetailsRequest {
@@ -1012,6 +1040,42 @@ export interface GetUploadJobDetailsRequest {
    * 任务id
    */
   JobId?: string
+}
+
+/**
+ * 文件任务状态
+ */
+export interface FileTaskStatus {
+  /**
+   * <p>文件id</p>
+   */
+  FileId?: string
+  /**
+   * <p>状态</p><p>枚举值：</p><ul><li>0： 处理中</li><li>1： 可用</li><li>-1： 错误</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>是否已拉取过状态</p><p>枚举值：</p><ul><li>0： 未被拉取过状态</li><li>1： 已被拉取过状态</li></ul>
+   */
+  IsTerminated?: number
+  /**
+   * <p>错误信息，状态-1时不为空</p>
+   */
+  ErrorMsg?: string
+}
+
+/**
+ * StopChatAI返回参数结构体
+ */
+export interface StopChatAIResponse {
+  /**
+   * 会话
+   */
+  SessionId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1156,6 +1220,28 @@ export interface Scene {
    * <p>知识</p>
    */
   Knowledge?: string
+}
+
+/**
+ * AppendKnowledgeTask请求参数结构体
+ */
+export interface AppendKnowledgeTaskRequest {
+  /**
+   * <p>实例id</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>知识库id</p>
+   */
+  KnowledgeBaseId?: string
+  /**
+   * <p>文件id</p>
+   */
+  FileId?: string
+  /**
+   * <p>追加的文档列表</p>
+   */
+  Documents?: Array<AppendDocument>
 }
 
 /**
@@ -1335,4 +1421,26 @@ export interface GetKnowledgeBaseListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 追加文件
+ */
+export interface AppendDocument {
+  /**
+   * <p>文件名称</p>
+   */
+  FileName: string
+  /**
+   * <p>文件id</p>
+   */
+  FileId: string
+  /**
+   * <p>文件url</p>
+   */
+  FileUrl: string
+  /**
+   * <p>文件大小</p>
+   */
+  FileSize: number
 }

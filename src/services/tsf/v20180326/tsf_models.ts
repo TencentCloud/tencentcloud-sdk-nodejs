@@ -151,24 +151,6 @@ export interface ApiDetailResponse {
 }
 
 /**
- * UpdateApiRateLimitRule请求参数结构体
- */
-export interface UpdateApiRateLimitRuleRequest {
-  /**
-   * 限流规则ID
-   */
-  RuleId: string
-  /**
-   * 开启/禁用，enabled/disabled
-   */
-  UsableStatus: string
-  /**
-   * qps值，开启限流规则时，必填
-   */
-  MaxQps?: number
-}
-
-/**
  * DeleteCluster返回参数结构体
  */
 export interface DeleteClusterResponse {
@@ -752,13 +734,17 @@ export interface SimpleApplication {
 }
 
 /**
- * ContinueRunFailedTaskBatch请求参数结构体
+ * DescribeSimpleNamespaces返回参数结构体
  */
-export interface ContinueRunFailedTaskBatchRequest {
+export interface DescribeSimpleNamespacesResponse {
   /**
-   * 任务批次ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面点击任务ID进入执行记录页，第一列即为任务批次ID，在[任务执行记录](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=task)页能查看所有任务批次ID。
+   * 命名空间分页列表
    */
-  BatchId: string
+  Result?: TsfPageNamespace
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1122,25 +1108,6 @@ export interface EnableLaneRuleRequest {
 }
 
 /**
- * 任务规则
- */
-export interface TaskRule {
-  /**
-   * 触发规则类型，枚举值。一共3个值，Cron：定时触发，Repeat：周期触发，WorkFlow：工作流触发
-   */
-  RuleType: string
-  /**
-   * Cron类型规则，cron表达式。
-   */
-  Expression?: string
-  /**
-   * 时间间隔， 单位毫秒
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RepeatInterval?: number
-}
-
-/**
  * UnbindApiGroup请求参数结构体
  */
 export interface UnbindApiGroupRequest {
@@ -1148,92 +1115,6 @@ export interface UnbindApiGroupRequest {
    * 分组网关id列表
    */
   GroupGatewayList: Array<GatewayGroupIds>
-}
-
-/**
- * 任务定义
- */
-export interface TaskRecord {
-  /**
-   * 任务名称
-   */
-  TaskName?: string
-  /**
-   * 任务类型
-   */
-  TaskType?: string
-  /**
-   * 任务执行方式，unicast：随机单节点执行，broadcast：广播执行，shard：分片执行
-   */
-  ExecuteType?: string
-  /**
-   * 任务内容，长度限制65535字节
-   */
-  TaskContent?: string
-  /**
-   * 分组ID
-   */
-  GroupId?: string
-  /**
-   * 超时时间，单位：毫秒。
-   */
-  TimeOut?: number
-  /**
-   * 重试次数
-   */
-  RetryCount?: number
-  /**
-   * 重试间隔，单位：毫秒。
-   */
-  RetryInterval?: number
-  /**
-   * 触发规则
-   */
-  TaskRule?: TaskRule
-  /**
-   * 任务启用状态。一共2种状态可选，ENABLED：启用，DISABLED：停用
-   */
-  TaskState?: string
-  /**
-   * 任务ID
-   */
-  TaskId?: string
-  /**
-   * 判断任务成功的操作符
-   */
-  SuccessOperator?: string
-  /**
-   * 判断任务成功的阈值
-   */
-  SuccessRatio?: number
-  /**
-   * 分片数量
-   */
-  ShardCount?: number
-  /**
-   * 高级设置
-   */
-  AdvanceSettings?: AdvanceSettings
-  /**
-   * 分片参数
-   */
-  ShardArguments?: Array<ShardArgument>
-  /**
-   * 所属工作流ID
-   */
-  BelongFlowIds?: Array<string>
-  /**
-   * 任务历史ID
-   */
-  TaskLogId?: string
-  /**
-   * 触发类型，一共3种类型，WorkFlow：工作流触发，Cron：定时触发，FixRate：周期触发
-   */
-  TriggerType?: string
-  /**
-   * 任务参数，长度限制10000个字符
-   */
-  TaskArgument?: string
 }
 
 /**
@@ -1248,30 +1129,6 @@ export interface CreateNamespaceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * RedoTaskBatch请求参数结构体
- */
-export interface RedoTaskBatchRequest {
-  /**
-   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。
-   */
-  TaskId: string
-  /**
-   * 任务批次ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面点击任务ID进入任务详情，进入执行记录列表页，第一列即为任务批次ID。
-   */
-  BatchId: string
-}
-
-/**
- * DescribeTaskLastStatus请求参数结构体
- */
-export interface DescribeTaskLastStatusRequest {
-  /**
-   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页第一列和任务基本信息页查看任务ID。
-   */
-  TaskId: string
 }
 
 /**
@@ -1367,20 +1224,6 @@ export interface DisableLaneRuleResponse {
 }
 
 /**
- * 翻页查询的任务记录返回
- */
-export interface TaskRecordPage {
-  /**
-   * 总数量
-   */
-  TotalCount?: number
-  /**
-   * 任务记录列表
-   */
-  Content?: Array<TaskRecord>
-}
-
-/**
  * AssociateBusinessLogConfig请求参数结构体
  */
 export interface AssociateBusinessLogConfigRequest {
@@ -1419,16 +1262,6 @@ export interface DescribeDeliveryConfigRequest {
 可通过调用[DescribeBusinessLogConfigs](https://cloud.tencent.com/document/product/649/75777)查询已创建的日志配置项列表或登录[控制台](https://console.cloud.tencent.com/tsf/observable/log?rid=1)进行查看
    */
   ConfigId: string
-}
-
-/**
- * DeleteServerlessGroup请求参数结构体
- */
-export interface DeleteServerlessGroupRequest {
-  /**
-   * groupId，分组唯一标识
-   */
-  GroupId: string
 }
 
 /**
@@ -2752,20 +2585,6 @@ export interface CosUploadInfo {
 }
 
 /**
- * DescribeLanes返回参数结构体
- */
-export interface DescribeLanesResponse {
-  /**
-   * 泳道配置列表。
-   */
-  Result?: LaneInfos
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * StartGroup请求参数结构体
  */
 export interface StartGroupRequest {
@@ -2969,16 +2788,6 @@ export interface DescribeResourceTaskStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * RedoTask请求参数结构体
- */
-export interface RedoTaskRequest {
-  /**
-   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。
-   */
-  TaskId: string
 }
 
 /**
@@ -3295,24 +3104,6 @@ export interface DescribeOverviewInvocationRequest {
    * 查询结束时间，格式为yyyy-MM-dd HH:mm:ss，默认为当前时间
    */
   EndTime?: string
-}
-
-/**
- * 任务最近一次执行状态
- */
-export interface TaskLastExecuteStatus {
-  /**
-   * 批次ID
-   */
-  BatchId?: string
-  /**
-   * 运行状态，RUNNING/SUCCESS/FAIL/HALF/TERMINATED
-   */
-  State?: string
-  /**
-   * 批次历史ID
-   */
-  BatchLogId?: string
 }
 
 /**
@@ -3707,80 +3498,6 @@ false：启动失败
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ModifyTask请求参数结构体
- */
-export interface ModifyTaskRequest {
-  /**
-   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。
-   */
-  TaskId: string
-  /**
-   * 任务名称，长度限制为64字符。在任务管理列表页面第一列或是任务基本信息页查看任务名称。
-   */
-  TaskName?: string
-  /**
-   * 任务类型。当前只支持一种任务类型。枚举值，java：Java类任务
-   */
-  TaskType?: string
-  /**
-   * 任务内容，长度限制为 65536 字节
-   */
-  TaskContent?: string
-  /**
-   * 任务执行方式，枚举值。unicast：随机单节点执行，broadcast：广播执行，shard：分片执行
-   */
-  ExecuteType?: string
-  /**
-   * 触发规则
-   */
-  TaskRule?: TaskRule
-  /**
-   * 超时时间，取值大于0，单位：毫秒（ms）
-   */
-  TimeOut?: number
-  /**
-   * 部署组ID。在[应用管理](https://console.cloud.tencent.com/tsf/app?rid=1)，点击应用ID进入应用部署页查看部署组ID。
-   */
-  GroupId?: string
-  /**
-   * 分片数量，取值范围2~1000
-   */
-  ShardCount?: number
-  /**
-   * 分片参数
-   */
-  ShardArguments?: Array<ShardArgument>
-  /**
-   * 高级设置
-   */
-  AdvanceSettings?: AdvanceSettings
-  /**
-   * 判断任务成功的操作符 GT/GTE
-   */
-  SuccessOperator?: string
-  /**
-   * 判断任务成功率的阈值，取值范围：1-100，单位：百分比（%）
-   */
-  SuccessRatio?: number
-  /**
-   * 重试次数，取值范围 0 - 10，单位：次
-   */
-  RetryCount?: number
-  /**
-   * 重试间隔，取值范围 0-600，单位：秒（s）
-   */
-  RetryInterval?: number
-  /**
-   * 任务参数，长度限制10000个字符
-   */
-  TaskArgument?: string
-  /**
-   * 数据集列表。
-   */
-  ProgramIdList?: Array<string>
 }
 
 /**
@@ -4341,28 +4058,6 @@ export interface ContainGroupResult {
 }
 
 /**
- * UpdateUnitRule请求参数结构体
- */
-export interface UpdateUnitRuleRequest {
-  /**
-   * 规则ID
-   */
-  Id: string
-  /**
-   * 规则名称
-   */
-  Name: string
-  /**
-   * 规则描述
-   */
-  Description?: string
-  /**
-   * 规则项列表
-   */
-  UnitRuleItemList?: Array<UnitRuleItem>
-}
-
-/**
  * ReleasePublicConfig返回参数结构体
  */
 export interface ReleasePublicConfigResponse {
@@ -4554,16 +4249,6 @@ export interface DescribeMsApiListResponse {
 }
 
 /**
- * EnableTask请求参数结构体
- */
-export interface EnableTaskRequest {
-  /**
-   * 任务ID。[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。
-   */
-  TaskId: string
-}
-
-/**
  * 业务日志
  */
 export interface BusinessLogV2 {
@@ -4591,20 +4276,6 @@ export interface BusinessLogV2 {
    * 部署组ID
    */
   GroupId?: string
-}
-
-/**
- * DisableTask返回参数结构体
- */
-export interface DisableTaskResponse {
-  /**
-   * true：操作成功，false：操作失败
-   */
-  Result?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -4915,20 +4586,6 @@ export interface DeleteClusterRequest {
 }
 
 /**
- * StopTaskBatch返回参数结构体
- */
-export interface StopTaskBatchResponse {
-  /**
-   * 返回 true 或 false。true：操作成功，false：操作失败
-   */
-  Result?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 服务统计结果
  */
 export interface ServiceStatisticsResult {
@@ -5083,16 +4740,6 @@ export interface DescribeContainerGroupDetailResponse {
 }
 
 /**
- * DisableTask请求参数结构体
- */
-export interface DisableTaskRequest {
-  /**
-   * 任务ID。[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。
-   */
-  TaskId: string
-}
-
-/**
  * CreatePathRewritesWithDetailResp返回参数结构体
  */
 export interface CreatePathRewritesWithDetailRespResponse {
@@ -5192,20 +4839,6 @@ export interface PkgBind {
    * 部署组id
    */
   GroupId?: string
-}
-
-/**
- * DeleteTask返回参数结构体
- */
-export interface DeleteTaskResponse {
-  /**
-   * true：删除成功，false：删除失败
-   */
-  Result?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -5566,17 +5199,25 @@ false：失败
 }
 
 /**
- * DeleteServerlessGroup返回参数结构体
+ * ModifyGroup请求参数结构体
  */
-export interface DeleteServerlessGroupResponse {
+export interface ModifyGroupRequest {
   /**
-   * 结果true：成功；false：失败。
+   * 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。
    */
-  Result?: boolean
+  GroupId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 部署组名称
    */
-  RequestId?: string
+  GroupName?: string
+  /**
+   * 部署组描述
+   */
+  GroupDesc?: string
+  /**
+   * 部署组备注
+   */
+  Alias?: string
 }
 
 /**
@@ -5687,16 +5328,6 @@ export interface DisableUnitRouteResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ExecuteTask请求参数结构体
- */
-export interface ExecuteTaskRequest {
-  /**
-   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。
-   */
-  TaskId: string
 }
 
 /**
@@ -5831,27 +5462,21 @@ export interface DescribePathRewriteResponse {
 }
 
 /**
- * DescribeFlowLastBatchState请求参数结构体
+ * 指标监控数据曲线
  */
-export interface DescribeFlowLastBatchStateRequest {
+export interface MetricDataCurve {
   /**
-   * 工作流 ID。前往[工作流管理](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=workflowManage)，在工作流列表第一列和工作流详情页查看工作流ID。
+   * 指标名称
    */
-  FlowId: string
-}
-
-/**
- * DescribeSimpleNamespaces返回参数结构体
- */
-export interface DescribeSimpleNamespacesResponse {
+  MetricName?: string
   /**
-   * 命名空间分页列表
+   * 指标计算方式
    */
-  Result?: TsfPageNamespace
+  MetricFunction?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 指标数据点集合
    */
-  RequestId?: string
+  MetricDataPoints?: Array<MetricDataPoint>
 }
 
 /**
@@ -5888,20 +5513,6 @@ export interface GroupInfo {
    * 绑定时间，格式yyyy-MM-dd HH:mm:ss
    */
   AssociateTime?: string
-}
-
-/**
- * TerminateTaskFlowBatch返回参数结构体
- */
-export interface TerminateTaskFlowBatchResponse {
-  /**
-   * 是否停止成功，true：停止成功，false：停止失败
-   */
-  Result?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -6483,20 +6094,6 @@ export interface DescribeSimpleNamespacesRequest {
 }
 
 /**
- * ExecuteTaskFlow返回参数结构体
- */
-export interface ExecuteTaskFlowResponse {
-  /**
-   * 操作成功返回工作流批次ID，操作失败返回空字符串。
-   */
-  Result?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeClusters返回参数结构体
  */
 export interface DescribeClustersResponse {
@@ -6610,20 +6207,6 @@ export interface DescribeUnitNamespacesResponse {
    * 单元化命名空间对象列表
    */
   Result?: TsfPageUnitNamespace
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ContinueRunFailedTaskBatch返回参数结构体
- */
-export interface ContinueRunFailedTaskBatchResponse {
-  /**
-   * true：操作成功、false：操作失败
-   */
-  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7079,20 +6662,6 @@ export interface ImageRepositoryResult {
    * 列表信息
    */
   Content?: Array<ImageRepository>
-}
-
-/**
- * ModifyTask返回参数结构体
- */
-export interface ModifyTaskResponse {
-  /**
-   * 更新是否成功。true：操作成功、false：操作失败
-   */
-  Result?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -7867,20 +7436,6 @@ export interface CreateLaneRuleResponse {
 }
 
 /**
- * CreateTask返回参数结构体
- */
-export interface CreateTaskResponse {
-  /**
-   * 任务ID
-   */
-  Result?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeContainerGroups返回参数结构体
  */
 export interface DescribeContainerGroupsResponse {
@@ -8258,32 +7813,6 @@ export interface ContainerAdditionalResourceRequirementMap {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   N: ContainerAdditionalResourceRequirement
-}
-
-/**
- * CreateTaskFlow请求参数结构体
- */
-export interface CreateTaskFlowRequest {
-  /**
-   * 工作流名称
-   */
-  FlowName: string
-  /**
-   * 触发方式
-   */
-  TriggerRule: TaskRule
-  /**
-   * 工作流任务节点列表
-   */
-  FlowEdges: Array<TaskFlowEdge>
-  /**
-   * 工作流执行超时时间，单位：毫秒
-   */
-  TimeOut: number
-  /**
-   * 数据集列表
-   */
-  ProgramIdList?: Array<string>
 }
 
 /**
@@ -8774,13 +8303,25 @@ export interface ImageTag {
 }
 
 /**
- * ExecuteTaskFlow请求参数结构体
+ * UpdateUnitRule请求参数结构体
  */
-export interface ExecuteTaskFlowRequest {
+export interface UpdateUnitRuleRequest {
   /**
-   * 工作流 ID。[工作流管理](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=workflowManage)列表页查看工作流ID。
+   * 规则ID
    */
-  FlowId?: string
+  Id: string
+  /**
+   * 规则名称
+   */
+  Name: string
+  /**
+   * 规则描述
+   */
+  Description?: string
+  /**
+   * 规则项列表
+   */
+  UnitRuleItemList?: Array<UnitRuleItem>
 }
 
 /**
@@ -8795,16 +8336,6 @@ export interface DescribeBusinessLogConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * TerminateTaskFlowBatch请求参数结构体
- */
-export interface TerminateTaskFlowBatchRequest {
-  /**
-   * 工作流批次 ID，在[工作流执行记录](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=taskflow)列表页第一列获取。
-   */
-  FlowBatchId: string
 }
 
 /**
@@ -8833,20 +8364,6 @@ export interface CreateUnitNamespacesRequest {
    * 单元化命名空间对象列表
    */
   UnitNamespaceList?: Array<UnitNamespace>
-}
-
-/**
- * DescribeTaskRecords返回参数结构体
- */
-export interface DescribeTaskRecordsResponse {
-  /**
-   * 任务记录列表
-   */
-  Result?: TaskRecordPage
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -9217,21 +8734,6 @@ export interface DescribePublicConfigReleaseLogsRequest {
 }
 
 /**
- * 分片参数
- */
-export interface ShardArgument {
-  /**
-   * 分片参数 KEY，整形, 范围 [1,1000]
-   */
-  ShardKey?: number
-  /**
-   * 分片参数 VALUE
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ShardValue?: string
-}
-
-/**
  * 指标维度多值匹配。可选值 NamespaceId：命名空间ID，GroupId：部署组ID，InstanceId：实例ID，ApplicationId：应用ID，OperationMethod：执行方法，OperationName：执行名称，ServiceName：服务名，UpstreamNamespaceId：上游命名空间ID
  */
 export interface MetricDimensionValue {
@@ -9495,20 +8997,6 @@ export interface CreateUnitRuleWithDetailRespResponse {
 }
 
 /**
- * EnableTaskFlow返回参数结构体
- */
-export interface EnableTaskFlowResponse {
-  /**
-   * true成功，false: 失败
-   */
-  Result?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * API 明细
  */
 export interface ApiDetailInfo {
@@ -9683,20 +9171,6 @@ export interface TsfPageConfigRelease {
 }
 
 /**
- * DisableTaskFlow返回参数结构体
- */
-export interface DisableTaskFlowResponse {
-  /**
-   * true成功，false: 失败
-   */
-  Result?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeGatewayMonitorOverview请求参数结构体
  */
 export interface DescribeGatewayMonitorOverviewRequest {
@@ -9721,17 +9195,6 @@ export interface DescribeImageTagsResponse {
 }
 
 /**
- * 虚拟机实例相关的参数配置
- */
-export interface VmInstanceResourceConfig {
-  /**
-   * 实例导入方式，可多个，公有云为 ["R", "M"]，独立版的取值仅有 "M" 脚本模式
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ImportMode?: Array<string>
-}
-
-/**
  * BindPlugin返回参数结构体
  */
 export interface BindPluginResponse {
@@ -9743,16 +9206,6 @@ export interface BindPluginResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * RedoTaskFlowBatch请求参数结构体
- */
-export interface RedoTaskFlowBatchRequest {
-  /**
-   * 工作流批次 ID。在[工作流管理](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=workflowManage)页面，点击第一列的工作流ID进入工作流执行记录列表页面，第一列的内容即为工作流批次ID。
-   */
-  FlowBatchId: string
 }
 
 /**
@@ -9837,24 +9290,6 @@ export interface MetricDataSingleValue {
    * 日环比
    */
   DailyPercent?: number
-}
-
-/**
- * StopTaskExecute请求参数结构体
- */
-export interface StopTaskExecuteRequest {
-  /**
-   * 任务执行ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面点击任务ID进入任务详情，进入执行记录页，点击批次ID进入执行详情列表页，第一列即为任务执行ID。
-   */
-  ExecuteId: string
-  /**
-   * 任务批次ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面点击任务ID进入任务详情，进入执行记录列表页，第一列即为任务批次ID。
-   */
-  BatchId?: string
-  /**
-   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页面可以查看任务ID。
-   */
-  TaskId?: string
 }
 
 /**
@@ -10000,76 +9435,6 @@ export interface ReleaseConfigWithDetailRespRequest {
    * 发布描述，最多支持200个字符。
    */
   ReleaseDesc?: string
-}
-
-/**
- * CreateTask请求参数结构体
- */
-export interface CreateTaskRequest {
-  /**
-   * 任务名称，任务长度64字符
-   */
-  TaskName: string
-  /**
-   * 任务内容，长度限制65536个字节
-   */
-  TaskContent: string
-  /**
-   * 任务执行方式，unicast：随机单节点执行，broadcast：广播执行，shard：分片执行
-   */
-  ExecuteType: string
-  /**
-   * 任务类型。当前只支持一种任务类型。枚举值，java：Java类任务
-   */
-  TaskType: string
-  /**
-   * 任务超时时间，取值大于0，单位：毫秒（ms）
-   */
-  TimeOut: number
-  /**
-   * 部署组ID。在[应用管理](https://console.cloud.tencent.com/tsf/app?rid=1)，点击应用ID进入应用部署页查看部署组ID。
-   */
-  GroupId: string
-  /**
-   * 触发规则
-   */
-  TaskRule?: TaskRule
-  /**
-   * 重试次数，0 <= RetryCount<= 10
-   */
-  RetryCount?: number
-  /**
-   * 重试间隔， 0 <= RetryInterval <= 600000， 时间单位 ms
-   */
-  RetryInterval?: number
-  /**
-   * 分片数量，仅当任务执行方式为分片执行时需要设置该值，取值范围2~1000
-   */
-  ShardCount?: number
-  /**
-   * 分片参数
-   */
-  ShardArguments?: Array<ShardArgument>
-  /**
-   * 判断任务成功的操作符
-   */
-  SuccessOperator?: string
-  /**
-   * 判断任务成功率的阈值，如100
-   */
-  SuccessRatio?: string
-  /**
-   * 高级设置
-   */
-  AdvanceSettings?: AdvanceSettings
-  /**
-   * 任务参数，长度限制10000个字符
-   */
-  TaskArgument?: string
-  /**
-   * 数据集列表
-   */
-  ProgramIdList?: Array<string>
 }
 
 /**
@@ -10280,44 +9645,6 @@ export interface CreateApiRateLimitRuleWithDetailRespResponse {
 }
 
 /**
- * DescribeTaskRecords请求参数结构体
- */
-export interface DescribeTaskRecordsRequest {
-  /**
-   * 翻页偏移量。默认值为0
-   */
-  Offset?: number
-  /**
-   * 翻页查询单页数量。默认值为 20，最大值为 1000
-   */
-  Limit?: number
-  /**
-   * 模糊查询关键字，支持任务ID和任务名称。
-   */
-  SearchWord?: string
-  /**
-   * 任务启用状态。一共2种状态可选，ENABLED：启用，DISABLED：停用
-   */
-  TaskState?: string
-  /**
-   * 部署组ID。前往[应用管理](https://console.cloud.tencent.com/tsf/app?rid=1)点击应用ID进入应用部署列表页面获取部署组ID。
-   */
-  GroupId?: string
-  /**
-   * 任务类型。当前只支持一种任务类型。枚举值，java：Java类任务
-   */
-  TaskType?: string
-  /**
-   * 任务执行方式，unicast：随机单节点执行，broadcast：广播执行，shard：分片执行
-   */
-  ExecuteType?: string
-  /**
-   * 任务ID列表。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页第一列查看任务ID。
-   */
-  Ids?: Array<string>
-}
-
-/**
  * 自定义容忍调度规则列表
  */
 export interface CustomTolerateSchedule {
@@ -10449,16 +9776,6 @@ export interface DescribeUnitNamespacesRequest {
    * 翻页查询每页记录数
    */
   Limit?: number
-}
-
-/**
- * DeleteTask请求参数结构体
- */
-export interface DeleteTaskRequest {
-  /**
-   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页第一列和任务基本信息页查看任务ID。
-   */
-  TaskId: string
 }
 
 /**
@@ -11166,24 +10483,6 @@ export interface ApplicationAttribute {
 }
 
 /**
- * 工作流最近批次的状态
- */
-export interface TaskFlowLastBatchState {
-  /**
-   * 批次ID
-   */
-  FlowBatchId?: string
-  /**
-   * 批次历史ID
-   */
-  FlowBatchLogId?: string
-  /**
-   * 状态,WAITING/SUCCESS/FAILED/RUNNING/TERMINATING
-   */
-  State?: string
-}
-
-/**
  * DeletePkgs返回参数结构体
  */
 export interface DeletePkgsResponse {
@@ -11379,13 +10678,13 @@ export interface DescribeInvocationMetricScatterPlotRequest {
 }
 
 /**
- * CreateTaskFlow返回参数结构体
+ * DescribeLanes返回参数结构体
  */
-export interface CreateTaskFlowResponse {
+export interface DescribeLanesResponse {
   /**
-   * 工作流 ID
+   * 泳道配置列表。
    */
-  Result?: string
+  Result?: LaneInfos
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11541,20 +10840,6 @@ export interface VmGroupOther {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthCheckSettings?: HealthCheckSettings
-}
-
-/**
- * DescribeTaskLastStatus返回参数结构体
- */
-export interface DescribeTaskLastStatusResponse {
-  /**
-   * 任务上一次执行状态
-   */
-  Result?: TaskLastExecuteStatus
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -11714,20 +10999,6 @@ export interface DescribeApplicationsRequest {
    * 查询多种微服务类型的应用
    */
   MicroserviceTypeList?: Array<string>
-}
-
-/**
- * DescribeTaskDetail请求参数结构体
- */
-export interface DescribeTaskDetailRequest {
-  /**
-   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页第一列和任务基本信息页查看任务ID。
-   */
-  TaskId: string
-  /**
-   * 任务历史ID。查询任务列表 [DescribeTaskRecords](https://cloud.tencent.com/document/api/649/56136) 返回值字段 TaskLogId
-   */
-  TaskLogId?: string
 }
 
 /**
@@ -12297,17 +11568,14 @@ export interface DescribeClusterInstancesResponse {
 }
 
 /**
- * DescribeTaskDetail返回参数结构体
+ * 虚拟机实例相关的参数配置
  */
-export interface DescribeTaskDetailResponse {
+export interface VmInstanceResourceConfig {
   /**
-   * 任务详情
+   * 实例导入方式，可多个，公有云为 ["R", "M"]，独立版的取值仅有 "M" 脚本模式
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result?: TaskRecord
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ImportMode?: Array<string>
 }
 
 /**
@@ -12558,16 +11826,6 @@ export interface GroupPod {
 }
 
 /**
- * EnableTaskFlow请求参数结构体
- */
-export interface EnableTaskFlowRequest {
-  /**
-   * 工作流 ID。[工作流管理](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=workflowManage)列表页查看工作流ID。
-   */
-  FlowId: string
-}
-
-/**
  * 实例相关的参数配置
  */
 export interface InstanceResourceConfig {
@@ -12812,17 +12070,21 @@ export interface DescribeApiGroupResponse {
 }
 
 /**
- * RedoTaskExecute返回参数结构体
+ * UpdateApiRateLimitRule请求参数结构体
  */
-export interface RedoTaskExecuteResponse {
+export interface UpdateApiRateLimitRuleRequest {
   /**
-   * 成功返回执行批次流水ID。失败返回空字符串。
+   * 限流规则ID
    */
-  Result?: string
+  RuleId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 开启/禁用，enabled/disabled
    */
-  RequestId?: string
+  UsableStatus: string
+  /**
+   * qps值，开启限流规则时，必填
+   */
+  MaxQps?: number
 }
 
 /**
@@ -12908,24 +12170,6 @@ export interface ServiceConfig {
    * 健康检查配置
    */
   HealthCheck?: HealthCheckConfig
-}
-
-/**
- * RedoTaskExecute请求参数结构体
- */
-export interface RedoTaskExecuteRequest {
-  /**
-   * 任务批次ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面第一列点击任务ID进入任务详情，进入执行记录列表页，第一列内容即为任务批次ID。
-   */
-  BatchId: string
-  /**
-   * 任务执行ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面第一列点击任务ID进入任务详情，进入执行记录页，点击批次ID进入执行详情列表页，第一列即为任务执行ID。
-   */
-  ExecuteId: string
-  /**
-   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页查看任务ID。
-   */
-  TaskId: string
 }
 
 /**
@@ -13030,20 +12274,6 @@ export interface DescribeConfigRequest {
 }
 
 /**
- * OperateApplicationTcrBinding返回参数结构体
- */
-export interface OperateApplicationTcrBindingResponse {
-  /**
-   * 是否成功
-   */
-  Result?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DisableUnitRoute请求参数结构体
  */
 export interface DisableUnitRouteRequest {
@@ -13077,24 +12307,6 @@ export interface DescribeUnitRulesRequest {
    * 翻页查询每页记录数
    */
   Limit?: number
-}
-
-/**
- * 指标监控数据曲线
- */
-export interface MetricDataCurve {
-  /**
-   * 指标名称
-   */
-  MetricName?: string
-  /**
-   * 指标计算方式
-   */
-  MetricFunction?: string
-  /**
-   * 指标数据点集合
-   */
-  MetricDataPoints?: Array<MetricDataPoint>
 }
 
 /**
@@ -13351,20 +12563,6 @@ export interface BindApiGroupRequest {
 }
 
 /**
- * StopTaskBatch请求参数结构体
- */
-export interface StopTaskBatchRequest {
-  /**
-   * 任务批次ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)页面点击任务ID进入任务详情，进入执行记录列表页，第一列即为任务批次ID。
-   */
-  BatchId: string
-  /**
-   * 任务ID。在[任务管理](https://console.cloud.tencent.com/tsf/tct?rid=1)列表页面可以查看任务ID。
-   */
-  TaskId?: string
-}
-
-/**
  * DescribeUploadInfo请求参数结构体
  */
 export interface DescribeUploadInfoRequest {
@@ -13591,13 +12789,17 @@ export interface ProgramItem {
 }
 
 /**
- * DisableTaskFlow请求参数结构体
+ * OperateApplicationTcrBinding返回参数结构体
  */
-export interface DisableTaskFlowRequest {
+export interface OperateApplicationTcrBindingResponse {
   /**
-   * 工作流 ID。[工作流管理](https://console.cloud.tencent.com/tsf/tct?rid=1&tab=workflowManage)列表页查看工作流ID。
+   * 是否成功
    */
-  FlowId: string
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13646,20 +12848,6 @@ export interface DescribePodInstancesRequest {
    * 实例所属任务ID，登录控制台进行查看。
    */
   TaskId?: string
-}
-
-/**
- * RedoTask返回参数结构体
- */
-export interface RedoTaskResponse {
-  /**
-   * 操作成功任务批次ID。操作失败返回空字符串。
-   */
-  Result?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -14010,20 +13198,6 @@ export interface CreateConfigTemplateResponse {
 - false：创建失败
    */
   Result?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ExecuteTask返回参数结构体
- */
-export interface ExecuteTaskResponse {
-  /**
-   * 操作成功返回任务批次ID，操作失败返回空字符串。
-   */
-  Result?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14417,30 +13591,6 @@ export interface DeleteContainerGroupRequest {
    * 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。
    */
   GroupId: string
-}
-
-/**
- * 高级选项设置
- */
-export interface AdvanceSettings {
-  /**
-   * 子任务单机并发数限制，默认值为2
-   */
-  SubTaskConcurrency?: number
-}
-
-/**
- * EnableTask返回参数结构体
- */
-export interface EnableTaskResponse {
-  /**
-   * true：操作成功，false：操作失败
-   */
-  Result?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -15120,34 +14270,6 @@ export interface AddInstanceResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FailedReasons?: Array<string>
-}
-
-/**
- * DescribeFlowLastBatchState返回参数结构体
- */
-export interface DescribeFlowLastBatchStateResponse {
-  /**
-   * 工作流批次最新状态
-   */
-  Result?: TaskFlowLastBatchState
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * StopTaskExecute返回参数结构体
- */
-export interface StopTaskExecuteResponse {
-  /**
-   * 返回 true 或 false。true：操作成功，false：操作失败
-   */
-  Result?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -16128,20 +15250,6 @@ export interface SearchStdoutLogRequest {
 }
 
 /**
- * RedoTaskBatch返回参数结构体
- */
-export interface RedoTaskBatchResponse {
-  /**
-   * 批次流水ID
-   */
-  Result?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeResourceConfig
  */
 export interface DescribeResourceConfigResultV2 {
@@ -16175,28 +15283,6 @@ export interface DescribeResourceConfigResultV2 {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Package: PackageConfig
-}
-
-/**
- * ModifyGroup请求参数结构体
- */
-export interface ModifyGroupRequest {
-  /**
-   * 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。
-   */
-  GroupId: string
-  /**
-   * 部署组名称
-   */
-  GroupName?: string
-  /**
-   * 部署组描述
-   */
-  GroupDesc?: string
-  /**
-   * 部署组备注
-   */
-  Alias?: string
 }
 
 /**
@@ -16573,74 +15659,6 @@ export interface ReleasePublicConfigRequest {
    * 发布描述，最多支持200个字符。
    */
   ReleaseDesc?: string
-}
-
-/**
- * 工作流图中的边
- */
-export interface TaskFlowEdge {
-  /**
-   * 节点 ID，节点类型为任务时为任务ID，节点类型为逻辑节点"且"时为 AND，为逻辑节点"或"时为 OR，节点类型为头节点时为字符串"head"
-   */
-  NodeId?: string
-  /**
-   * 子节点 ID，节点类型为任务时为任务ID，节点类型为逻辑节点"且"时为 AND，为逻辑节点"或"时为 OR
-   */
-  ChildNodeId?: string
-  /**
-   * 是否核心任务,Y/N
-   */
-  CoreNode?: string
-  /**
-   * 边类型，上下游任务依赖触发关系。一共2个值，Y：成功触发，N：失败触发
-   */
-  EdgeType?: string
-  /**
-   * 任务节点类型，一共有4种类型，AND：逻辑节点且，OR：逻辑节点或，TASK：任务节点，START：头节点
-   */
-  NodeType?: string
-  /**
-   * X轴坐标位置
-   */
-  PositionX?: string
-  /**
-   * Y轴坐标位置
-   */
-  PositionY?: string
-  /**
-   * 图 ID，新建工作流时自动生成，不需要填写，查看工作流图时后端返回
-   */
-  GraphId?: string
-  /**
-   * 工作流 ID，新建工作流时自动生成，不需要填写，查看工作流图时后端返回
-   */
-  FlowId?: string
-  /**
-   * 节点名称
-   */
-  NodeName?: string
-  /**
-   * 任务ID，新建工作流时不需要填写，查看工作流图时后端返回
-   */
-  TaskId?: string
-  /**
-   * 任务历史ID，新建工作流时不需要填写，查看工作流图时后端返回
-   */
-  TaskLogId?: string
-}
-
-/**
- * RedoTaskFlowBatch返回参数结构体
- */
-export interface RedoTaskFlowBatchResponse {
-  /**
-   * 工作流批次历史 ID。操作失败时不返回该字段，返回错误码。
-   */
-  Result?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**

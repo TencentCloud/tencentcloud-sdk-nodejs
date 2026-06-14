@@ -228,6 +228,26 @@ it("dataagent.v20250513.DeleteDataAgentSession", async function () {
     }
 })
 
+it("dataagent.v20250513.AppendKnowledgeTask", async function () {
+    try {
+       const data = await client.AppendKnowledgeTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dataagent.v20250513.QueryKnowledgeTask", async function () {
+    try {
+       const data = await client.QueryKnowledgeTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dataagent.v20250513.GetJobsByKnowledgeBaseId", async function () {
     try {
        const data = await client.GetJobsByKnowledgeBaseId({})

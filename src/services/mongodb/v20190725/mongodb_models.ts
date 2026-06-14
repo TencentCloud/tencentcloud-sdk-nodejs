@@ -26,6 +26,16 @@ export interface DescribeSpecInfoRequest {
 }
 
 /**
+ * DescribeAuditConfig请求参数结构体
+ */
+export interface DescribeAuditConfigRequest {
+  /**
+   * 实例 ID，格式如：cmgo-xftsghuy，与云数据库控制台页面中显示的实例 ID 相同。
+   */
+  InstanceId: string
+}
+
+/**
  * CreateDBInstance请求参数结构体
  */
 export interface CreateDBInstanceRequest {
@@ -216,7 +226,7 @@ export interface DescribeDBInstanceParamTplRequest {
  */
 export interface CreateBackupDBInstanceResponse {
   /**
-   * 查询备份流程的状态。
+   * <p>查询备份流程的状态。</p>
    */
   AsyncRequestId?: string
   /**
@@ -353,18 +363,17 @@ export interface InquirePriceRenewDBInstancesRequest {
 }
 
 /**
- * DescribeAuditLogFiles返回参数结构体
+ * DescribeDBInstanceNamespace返回参数结构体
  */
-export interface DescribeAuditLogFilesResponse {
+export interface DescribeDBInstanceNamespaceResponse {
   /**
-   * 符合条件的审计日志文件个数。
+   * 查询实例的数据库列表。若未使用 DbName 指定具体查询的数据库，则仅返回查询实例所有的数据库列表，而不返回 Collections 集合信息。
    */
-  TotalCount?: number
+  Databases?: Array<string>
   /**
-   * 审计日志文件详情。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 查询的集合信息。指定 DbName 时，则仅返回该数据库下的集合列表。
    */
-  Items?: Array<AuditLogFile>
+  Collections?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -877,6 +886,16 @@ export interface IsolateDBInstanceResponse {
 }
 
 /**
+ * DescribeInstanceParams请求参数结构体
+ */
+export interface DescribeInstanceParamsRequest {
+  /**
+   * 指定待查询参数列表的实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+   */
+  InstanceId: string
+}
+
+/**
  * CreateDBInstanceParamTpl请求参数结构体
  */
 export interface CreateDBInstanceParamTplRequest {
@@ -1081,6 +1100,16 @@ export interface FlashbackDatabase {
    * 按 Key 闪回的数据库集合。
    */
   Collections: Array<FlashbackCollection>
+}
+
+/**
+ * ModifyDBInstanceLogToCLS返回参数结构体
+ */
+export interface ModifyDBInstanceLogToCLSResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2422,17 +2451,18 @@ export interface DescribeAccountUsersResponse {
 }
 
 /**
- * DescribeDBInstanceNamespace返回参数结构体
+ * DescribeAuditLogFiles返回参数结构体
  */
-export interface DescribeDBInstanceNamespaceResponse {
+export interface DescribeAuditLogFilesResponse {
   /**
-   * 查询实例的数据库列表。若未使用 DbName 指定具体查询的数据库，则仅返回查询实例所有的数据库列表，而不返回 Collections 集合信息。
+   * 符合条件的审计日志文件个数。
    */
-  Databases?: Array<string>
+  TotalCount?: number
   /**
-   * 查询的集合信息。指定 DbName 时，则仅返回该数据库下的集合列表。
+   * 审计日志文件详情。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Collections?: Array<string>
+  Items?: Array<AuditLogFile>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2488,6 +2518,44 @@ export interface DescribeBackupDownloadTaskRequest {
 - 4：等待重试。
    */
   Status?: Array<number | bigint>
+}
+
+/**
+ * ModifyDBInstanceLogToCLS请求参数结构体
+ */
+export interface ModifyDBInstanceLogToCLSRequest {
+  /**
+   * <p>指定实例ID。例如：cmgo-p8vn****。请登录 MongoDB 控制台在实例列表复制实例 ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>日志类型。MongoDB-ErrorLog：错误日志，MongoDB-SlowLog：慢日志，MongoDB-OperationLog：操作日志</p>
+   */
+  LogType: string
+  /**
+   * <p>投递状态。ON：开启，OFF：关闭。</p>
+   */
+  Status: string
+  /**
+   * <p>是否需要创建日志集。默认为 false。</p>
+   */
+  CreateLogset?: boolean
+  /**
+   * <p>需要创建日志集时为日志集名称；选择已有日志集时，为日志集 ID。默认为空。 说明：1. 当参数 Status 的值为 ON 时，Logset 和 LogTopic 参数必须填一个。2.  当参数 CreateLogset 的值为 true 时，Logset 填日志集命名，例如 my_test，否则需要填日志集 id，例如 6adsaw-****。</p>
+   */
+  Logset?: string
+  /**
+   * <p>是否需要创建日志主题。默认为 false。</p>
+   */
+  CreateLogTopic?: boolean
+  /**
+   * <p>需要创建日志主题时为日志主题名称；选择已有日志主题时，为日志主题 ID。默认为空。 说明：1. 当参数 Status 的值为 ON 时，Logset 和 LogTopic 参数必须填一个。2. 2.  当参数 CreateLogTopic 的值为 true 时，LogTopic 填日志主题命名，例如 my_test，否则需要填日志主题id，例如 6adsaw-****。</p>
+   */
+  LogTopic?: string
+  /**
+   * <p>CLS 所在地域，不填则默认为 Region 的参数值。</p>
+   */
+  CLSRegion?: string
 }
 
 /**
@@ -2615,13 +2683,13 @@ export interface UserInfo {
 }
 
 /**
- * DescribeInstanceParams请求参数结构体
+ * CloseAuditService返回参数结构体
  */
-export interface DescribeInstanceParamsRequest {
+export interface CloseAuditServiceResponse {
   /**
-   * 指定待查询参数列表的实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
+  RequestId?: string
 }
 
 /**
@@ -2784,6 +2852,32 @@ export interface ResetDBInstancePasswordResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateSlowLogPatternDownloadTask请求参数结构体
+ */
+export interface CreateSlowLogPatternDownloadTaskRequest {
+  /**
+   * <p>实例 ID。请登录 <a href="https://console.cloud.tencent.com/mongodb">MongoDB 控制台</a>在实例列表复制实例 ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>采集慢日志开始时间</p>
+   */
+  StartTime: string
+  /**
+   * <p>采集慢日志结束时间</p>
+   */
+  EndTime: string
+  /**
+   * <p>慢日志采集阈值</p>
+   */
+  ThresholdMs?: number
+  /**
+   * <p>慢日志类型</p>
+   */
+  Commands?: Array<string>
 }
 
 /**
@@ -3170,13 +3264,74 @@ export interface DescribeDBInstanceNodePropertyResponse {
 }
 
 /**
- * CloseAuditService返回参数结构体
+ * 实例信息详情
  */
-export interface CloseAuditServiceResponse {
+export interface InstanceInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 审计日志保存时长。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  AuditLogExpireDay?: number
+  /**
+   * 审计状态。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuditStatus?: string
+  /**
+   * 实例 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 实例名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * 实例角色。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceRole?: string
+  /**
+   * 实例类型。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceType?: string
+  /**
+   * 数据库版本。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MongodbVersion?: string
+  /**
+   * 项目 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: number
+  /**
+   * 地域。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * 实例状态。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * 是否支持审计。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SupportAudit?: boolean
+  /**
+   * 可用区。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
+  /**
+   * 标签信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TagList?: Array<TagInfo>
 }
 
 /**
@@ -3316,6 +3471,28 @@ export interface DescribeInstanceSSLResponse {
 }
 
 /**
+ * 日志投递CLS配置
+ */
+export interface LogToCLSConfig {
+  /**
+   * <p>CLS服务所在地域</p>
+   */
+  CLSRegion?: string
+  /**
+   * <p>投递状态打开或者关闭</p>
+   */
+  Status?: string
+  /**
+   * <p>CLS日志集ID</p>
+   */
+  LogSetId?: string
+  /**
+   * <p>日志主题ID</p>
+   */
+  LogTopicId?: string
+}
+
+/**
  * ModifyDBInstanceParamTpl请求参数结构体
  */
 export interface ModifyDBInstanceParamTplRequest {
@@ -3335,6 +3512,20 @@ export interface ModifyDBInstanceParamTplRequest {
    * 待修改参数名及参数值，为空时，各参数保持原有值，支持单条或批量修改。
    */
   Params?: Array<ParamType>
+}
+
+/**
+ * CreateSlowLogPatternDownloadTask返回参数结构体
+ */
+export interface CreateSlowLogPatternDownloadTaskResponse {
+  /**
+   * <p>下载任务状态</p>
+   */
+  Status?: Array<number | bigint>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3576,77 +3767,6 @@ export interface ShardInfo {
 }
 
 /**
- * 实例信息详情
- */
-export interface InstanceInfo {
-  /**
-   * 审计日志保存时长。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AuditLogExpireDay?: number
-  /**
-   * 审计状态。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AuditStatus?: string
-  /**
-   * 实例 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceId?: string
-  /**
-   * 实例名。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceName?: string
-  /**
-   * 实例角色。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceRole?: string
-  /**
-   * 实例类型。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceType?: string
-  /**
-   * 数据库版本。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MongodbVersion?: string
-  /**
-   * 项目 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProjectId?: number
-  /**
-   * 地域。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Region?: string
-  /**
-   * 实例状态。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: string
-  /**
-   * 是否支持审计。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SupportAudit?: boolean
-  /**
-   * 可用区。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Zone?: string
-  /**
-   * 标签信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TagList?: Array<TagInfo>
-}
-
-/**
  * SetBackupRules返回参数结构体
  */
 export interface SetBackupRulesResponse {
@@ -3686,6 +3806,16 @@ export interface EnableSRVConnectionUrlRequest {
    * 实例 ID，例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
    */
   InstanceId: string
+}
+
+/**
+ * IncreaseDBInstanceConnectionLimit返回参数结构体
+ */
+export interface IncreaseDBInstanceConnectionLimitResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3806,13 +3936,17 @@ export interface DescribeTransparentDataEncryptionStatusResponse {
 }
 
 /**
- * DescribeAuditConfig请求参数结构体
+ * DescribeDBInstanceLogToCLS请求参数结构体
  */
-export interface DescribeAuditConfigRequest {
+export interface DescribeDBInstanceLogToCLSRequest {
   /**
-   * 实例 ID，格式如：cmgo-xftsghuy，与云数据库控制台页面中显示的实例 ID 相同。
+   * <p>指定实例ID。例如：cmgo-p8vn****。请登录 MongoDB 控制台在实例列表复制实例 ID。</p>
    */
   InstanceId: string
+  /**
+   * <p>CLS服务所在地域</p>
+   */
+  CLSRegion?: string
 }
 
 /**
@@ -3820,23 +3954,21 @@ export interface DescribeAuditConfigRequest {
  */
 export interface CreateBackupDBInstanceRequest {
   /**
-   * 实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
+   * <p>实例 ID。例如：cmgo-p8vn****。请登录 <a href="https://console.cloud.tencent.com/mongodb">MongoDB 控制台</a>在实例列表复制实例 ID。</p>
    */
   InstanceId: string
   /**
-   * 设置备份方式。
-- 0：逻辑备份。
-- 1：物理备份。
-- 3：快照备份。
-**说明**:
-1. 通用版实例支持逻辑备份与物理备份。云盘版实例支持物理备份与快照备份，暂不支持逻辑备份。
-2. 实例开通存储加密，则备份方式不能为物理备份。
+   * <p>设置备份方式。</p><ul><li>0：逻辑备份。</li><li>1：物理备份。</li><li>3：快照备份。<br><strong>说明</strong>:</li><li>通用版实例支持逻辑备份与物理备份。云盘版实例支持物理备份与快照备份，暂不支持逻辑备份。</li><li>实例开通存储加密，则备份方式不能为物理备份。</li></ul>
    */
   BackupMethod: number
   /**
-   * 备份备注信息。
+   * <p>备份备注信息。</p>
    */
   BackupRemark?: string
+  /**
+   * <p>保存天数，-2-永久保留（不定期保留），-1-跟随长期保留时长，0-按配置天数，1~7300-自定义天数（最长20年）</p><p>单位：天</p>
+   */
+  BackupRetentionDays?: number
 }
 
 /**
@@ -3996,6 +4128,28 @@ export interface IsolateDBInstanceRequest {
 }
 
 /**
+ * DescribeDBInstanceLogToCLS返回参数结构体
+ */
+export interface DescribeDBInstanceLogToCLSResponse {
+  /**
+   * <p>实例错误日志投递配置</p>
+   */
+  ErrorLog?: LogToCLSConfig
+  /**
+   * <p>实例慢日志投递配置</p>
+   */
+  SlowLog?: LogToCLSConfig
+  /**
+   * <p>实例操作日志投递配置</p>
+   */
+  OperationLog?: LogToCLSConfig
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePasswordRotation请求参数结构体
  */
 export type DescribePasswordRotationRequest = null
@@ -4053,6 +4207,11 @@ export interface EnableTransparentDataEncryptionResponse {
    */
   RequestId?: string
 }
+
+/**
+ * IncreaseDBInstanceConnectionLimit请求参数结构体
+ */
+export type IncreaseDBInstanceConnectionLimitRequest = null
 
 /**
  * DescribeAuditLogFiles请求参数结构体

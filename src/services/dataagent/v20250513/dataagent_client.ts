@@ -48,9 +48,10 @@ import {
   ModifyUserAuthorityRequest,
   GetJobsByKnowledgeBaseIdResponse,
   QuerySceneListRequest,
-  StopChatAIResponse,
+  QueryKnowledgeTaskRequest,
   GetUploadJobDetailsResponse,
   UploadAndCommitFileResponse,
+  QueryKnowledgeTaskResponse,
   ModifyChunkResponse,
   DeleteDataAgentSessionResponse,
   AddSceneResponse,
@@ -61,13 +62,17 @@ import {
   QueryUserAuthorityRequest,
   FileInfo,
   GetKnowledgeBaseFileListRequest,
+  AppendKnowledgeTaskResponse,
   GetUploadJobDetailsRequest,
+  FileTaskStatus,
+  StopChatAIResponse,
   ModifyUserAuthorityResponse,
   AddChunkResponse,
   StepInfo,
   Chunk,
   UpdateSceneResponse,
   Scene,
+  AppendKnowledgeTaskRequest,
   KnowledgeTaskConfig,
   UpdateSceneRequest,
   CreateDataAgentSessionRequest,
@@ -77,6 +82,7 @@ import {
   DeleteDataAgentSessionRequest,
   ColumnInfo,
   GetKnowledgeBaseListResponse,
+  AppendDocument,
 } from "./dataagent_models"
 
 /**
@@ -296,6 +302,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteDataAgentSessionResponse) => void
   ): Promise<DeleteDataAgentSessionResponse> {
     return this.request("DeleteDataAgentSession", req, cb)
+  }
+
+  /**
+   * 追加文件
+   */
+  async AppendKnowledgeTask(
+    req: AppendKnowledgeTaskRequest,
+    cb?: (error: string, rep: AppendKnowledgeTaskResponse) => void
+  ): Promise<AppendKnowledgeTaskResponse> {
+    return this.request("AppendKnowledgeTask", req, cb)
+  }
+
+  /**
+   * 查询文件任务状态
+   */
+  async QueryKnowledgeTask(
+    req: QueryKnowledgeTaskRequest,
+    cb?: (error: string, rep: QueryKnowledgeTaskResponse) => void
+  ): Promise<QueryKnowledgeTaskResponse> {
+    return this.request("QueryKnowledgeTask", req, cb)
   }
 
   /**

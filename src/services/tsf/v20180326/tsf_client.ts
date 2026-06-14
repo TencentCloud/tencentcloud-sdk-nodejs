@@ -23,7 +23,6 @@ import {
   ModifyPathRewriteRequest,
   DescribeUnitRulesV2Response,
   ApiDetailResponse,
-  UpdateApiRateLimitRuleRequest,
   DeleteClusterResponse,
   CosCredentials,
   DeletePathRewritesResponse,
@@ -46,7 +45,7 @@ import {
   DescribeDeliveryConfigResponse,
   ForceSchedule,
   SimpleApplication,
-  ContinueRunFailedTaskBatchRequest,
+  DescribeSimpleNamespacesResponse,
   DescribeSimpleApplicationsResponse,
   DeleteRepositoryResponse,
   DeleteApplicationResponse,
@@ -67,23 +66,17 @@ import {
   DescribeGroupBindedGatewaysResponse,
   DescribeJvmMonitorRequest,
   EnableLaneRuleRequest,
-  TaskRule,
   UnbindApiGroupRequest,
-  TaskRecord,
   CreateNamespaceResponse,
-  RedoTaskBatchRequest,
-  DescribeTaskLastStatusRequest,
   ModifyUploadInfoResponse,
   EnableLaneRuleResponse,
   TsfPageConfig,
   CreateProgramRequest,
   CreateApiRateLimitRuleRequest,
   DisableLaneRuleResponse,
-  TaskRecordPage,
   AssociateBusinessLogConfigRequest,
   DescribeJvmMonitorResponse,
   DescribeDeliveryConfigRequest,
-  DeleteServerlessGroupRequest,
   ChangeApiUsableStatusRequest,
   DescribeMicroservicesResponse,
   DescribeApiRateLimitRulesRequest,
@@ -130,7 +123,6 @@ import {
   StopGroupRequest,
   DescribeLicensesResponse,
   CosUploadInfo,
-  DescribeLanesResponse,
   StartGroupRequest,
   CreateNamespaceRequest,
   DescribeDownloadInfoRequest,
@@ -140,7 +132,6 @@ import {
   DescribeRepositoryRequest,
   CreatePublicConfigWithDetailRespRequest,
   DescribeResourceTaskStatusResponse,
-  RedoTaskRequest,
   DeleteApiGroupResponse,
   ImageTagsResult,
   RepositoryInfo,
@@ -157,7 +148,6 @@ import {
   ModifyGroupLaneRequest,
   DescribeContainerGroupDeployInfoResponse,
   DescribeOverviewInvocationRequest,
-  TaskLastExecuteStatus,
   DescribeProgramsRequest,
   DescribePublicConfigRequest,
   ImageRepository,
@@ -177,7 +167,6 @@ import {
   RollbackConfigResponse,
   RevocationConfigRequest,
   StartContainerGroupResponse,
-  ModifyTaskRequest,
   DeleteUnitNamespacesResponse,
   DescribeMicroservicesByGroupIdsRequest,
   DescribeStatisticsResponse,
@@ -199,7 +188,6 @@ import {
   CreateConfigWithDetailRespResponse,
   DescribeGroupBusinessLogConfigsResponse,
   ContainGroupResult,
-  UpdateUnitRuleRequest,
   ReleasePublicConfigResponse,
   ReleaseApiGroupResponse,
   InstanceAdvancedSettings,
@@ -210,9 +198,7 @@ import {
   DescribeUploadInfoResponse,
   LifeCycleHook,
   DescribeMsApiListResponse,
-  EnableTaskRequest,
   BusinessLogV2,
-  DisableTaskResponse,
   DescribeMicroserviceRequest,
   TsfPageCluster,
   InstanceEnrichedInfoPage,
@@ -225,11 +211,9 @@ import {
   CreateGroupRequest,
   ContainerAdditionalResourceRequirement,
   DeleteClusterRequest,
-  StopTaskBatchResponse,
   ServiceStatisticsResult,
   CreateContainGroupResponse,
   DescribeContainerGroupDetailResponse,
-  DisableTaskRequest,
   CreatePathRewritesWithDetailRespResponse,
   Ports,
   UpdateRepositoryRequest,
@@ -237,7 +221,6 @@ import {
   SimpleKafkaDeliveryConfig,
   RevocationConfigResponse,
   PkgBind,
-  DeleteTaskResponse,
   TsfPageMsInstance,
   DeleteMicroserviceRequest,
   CreatePublicConfigWithDetailRespResponse,
@@ -251,23 +234,20 @@ import {
   ModifyClusterRequest,
   Resource,
   DeleteContainerGroupResponse,
-  DeleteServerlessGroupResponse,
+  ModifyGroupRequest,
   DeleteImageTagsResponse,
   DeliveryKafkaInfo,
   GroupUnitApiDailyUseStatistics,
   DescribeFileConfigReleasesResponse,
   DisableUnitRouteResponse,
-  ExecuteTaskRequest,
   DescribeGroupBusinessLogConfigsRequest,
   DescribeApplicationResponse,
   LaneInfo,
   DescribeConfigReleaseLogsResponse,
   DeletePublicConfigResponse,
   DescribePathRewriteResponse,
-  DescribeFlowLastBatchStateRequest,
-  DescribeSimpleNamespacesResponse,
+  MetricDataCurve,
   GroupInfo,
-  TerminateTaskFlowBatchResponse,
   DisassociateKafkaConfigResponse,
   ValueFrom,
   ShrinkInstancesResponse,
@@ -285,13 +265,11 @@ import {
   DescribeOverviewInvocationResponse,
   ShrinkInstancesRequest,
   DescribeSimpleNamespacesRequest,
-  ExecuteTaskFlowResponse,
   DescribeClustersResponse,
   SearchBusinessLogRequest,
   ExpandGroupResponse,
   DescribePublicConfigsResponse,
   DescribeUnitNamespacesResponse,
-  ContinueRunFailedTaskBatchResponse,
   DescribeSimpleClustersRequest,
   Program,
   KafkaDeliveryConfig,
@@ -309,7 +287,6 @@ import {
   JvmMonitorData,
   DescribeGroupsWithPluginRequest,
   ImageRepositoryResult,
-  ModifyTaskResponse,
   RevokeFileConfigResponse,
   SearchBusinessLogResponse,
   DeleteUnitNamespacesRequest,
@@ -339,7 +316,6 @@ import {
   TsfPageStdoutLogV2,
   RepositoryList,
   CreateLaneRuleResponse,
-  CreateTaskResponse,
   DescribeContainerGroupsResponse,
   CreateUnitNamespacesResponse,
   UpdateApiGroupResponse,
@@ -352,7 +328,6 @@ import {
   DeployGroupRequest,
   LaneInfos,
   ContainerAdditionalResourceRequirementMap,
-  CreateTaskFlowRequest,
   CreateFileConfigWithDetailRespResponse,
   CreateConfigTemplateWithDetailRespRequest,
   TsfPageGatewayPlugin,
@@ -379,12 +354,10 @@ import {
   DescribeBusinessLogConfigRequest,
   TsfPageGatewayDeployGroup,
   ImageTag,
-  ExecuteTaskFlowRequest,
+  UpdateUnitRuleRequest,
   DescribeBusinessLogConfigResponse,
-  TerminateTaskFlowBatchRequest,
   CreateUnitRuleResponse,
   CreateUnitNamespacesRequest,
-  DescribeTaskRecordsResponse,
   ModifyGroupLaneResponse,
   DescribeApiUseDetailResponse,
   ServiceSetting,
@@ -402,7 +375,6 @@ import {
   DeleteFileConfigRequest,
   DescribePublicConfigSummaryResponse,
   DescribePublicConfigReleaseLogsRequest,
-  ShardArgument,
   MetricDimensionValue,
   MetricDataPoint,
   DescribeApplicationAttributeResponse,
@@ -414,28 +386,22 @@ import {
   CreateAllGatewayApiAsyncRequest,
   PathRewrite,
   CreateUnitRuleWithDetailRespResponse,
-  EnableTaskFlowResponse,
   ApiDetailInfo,
   DeleteUnitRuleResponse,
   TsfPageConfigRelease,
-  DisableTaskFlowResponse,
   DescribeGatewayMonitorOverviewRequest,
   DescribeImageTagsResponse,
-  VmInstanceResourceConfig,
   BindPluginResponse,
-  RedoTaskFlowBatchRequest,
   TsfPageUnitNamespace,
   CreateMicroserviceWithDetailRespRequest,
   BusinessLogConfigSchema,
   MetricDataSingleValue,
-  StopTaskExecuteRequest,
   DeleteApiRateLimitRuleRequest,
   DescribePkgsRequest,
   SchedulingStrategy,
   DescribeResourceConfigSts,
   DescribeApplicationAttributeRequest,
   ReleaseConfigWithDetailRespRequest,
-  CreateTaskRequest,
   GatewayVo,
   OperationInfo,
   DescribePublicConfigResponse,
@@ -445,14 +411,12 @@ import {
   DescribeConfigResponse,
   SimpleGroup,
   CreateApiRateLimitRuleWithDetailRespResponse,
-  DescribeTaskRecordsRequest,
   CustomTolerateSchedule,
   GroupResourceConfig,
   ModifyContainerGroupResponse,
   ExclusiveInstance,
   DeleteApplicationRequest,
   DescribeUnitNamespacesRequest,
-  DeleteTaskRequest,
   HealthCheckSettings,
   VmGroupSimple,
   ApiResponseDescr,
@@ -479,24 +443,21 @@ import {
   DescribeApiGroupsRequest,
   DeleteUnitRuleRequest,
   ApplicationAttribute,
-  TaskFlowLastBatchState,
   DeletePkgsResponse,
   DescribeGroupsResponse,
   DescribeBusinessLogConfigsResponse,
   ContainerInstanceResourceConfig,
   ApplicationForPage,
   DescribeInvocationMetricScatterPlotRequest,
-  CreateTaskFlowResponse,
+  DescribeLanesResponse,
   DescribeMicroservicesRequest,
   AddClusterInstancesResponse,
   DescribeInvocationMetricDataCurveRequest,
   VmGroupOther,
-  DescribeTaskLastStatusResponse,
   DescribePublicConfigsRequest,
   GatewayGroupApiVo,
   BusinessLogConfigAssociatedGroup,
   DescribeApplicationsRequest,
-  DescribeTaskDetailRequest,
   MultiValue,
   DescribePublicConfigReleasesRequest,
   TsfPageFileConfigRelease,
@@ -526,7 +487,7 @@ import {
   ReleaseApiGroupRequest,
   DescribeFileConfigReleasesRequest,
   DescribeClusterInstancesResponse,
-  DescribeTaskDetailResponse,
+  VmInstanceResourceConfig,
   EmptyDirOption,
   ExpandGroupRequest,
   RevocationPublicConfigRequest,
@@ -538,7 +499,6 @@ import {
   PkgInfo,
   ContainerGroupResourceConfig,
   GroupPod,
-  EnableTaskFlowRequest,
   InstanceResourceConfig,
   DescribeReleasedConfigRequest,
   ApiInfo,
@@ -552,25 +512,21 @@ import {
   DescribeEnabledUnitRuleRequest,
   CreateConfigTemplateRequest,
   DescribeApiGroupResponse,
-  RedoTaskExecuteResponse,
+  UpdateApiRateLimitRuleRequest,
   CreateLaneRequest,
   CreateApiGroupResponse,
   DescribeResourceConfigLicense,
   ServiceConfig,
-  RedoTaskExecuteRequest,
   DescribeApplicationsResponse,
   DescribeStatisticsRequest,
   DescribeConfigRequest,
-  OperateApplicationTcrBindingResponse,
   DisableUnitRouteRequest,
   DescribeUnitRulesRequest,
-  MetricDataCurve,
   UpdateConfigTemplateRequest,
   DescribeGatewayAllGroupApisRequest,
   DeleteGroupRequest,
   ContainerGroupDetail,
   BindApiGroupRequest,
-  StopTaskBatchRequest,
   DescribeUploadInfoRequest,
   ConfigTemplate,
   DescribeUnitApiUseDetailResponse,
@@ -580,10 +536,9 @@ import {
   TsfPageBusinessLogConfig,
   DescribeProgramsResponse,
   ProgramItem,
-  DisableTaskFlowRequest,
+  OperateApplicationTcrBindingResponse,
   DescribeLogCapacityResponse,
   DescribePodInstancesRequest,
-  RedoTaskResponse,
   DeliveryConfigBindGroup,
   CustomPodSchedule,
   DescribeConfigsRequest,
@@ -597,7 +552,6 @@ import {
   DeleteConfigRequest,
   DescribeFileConfigsRequest,
   CreateConfigTemplateResponse,
-  ExecuteTaskResponse,
   ShrinkGroupResponse,
   CreateApiRateLimitRuleResponse,
   Config,
@@ -611,8 +565,6 @@ import {
   TsfPageMicroservice,
   ConfigRelease,
   DeleteContainerGroupRequest,
-  AdvanceSettings,
-  EnableTaskResponse,
   ReleaseConfigRequest,
   MsApiArray,
   BusinessLogConfig,
@@ -631,8 +583,6 @@ import {
   ModifyProgramResponse,
   DescribeLogCapacityRequest,
   AddInstanceResult,
-  DescribeFlowLastBatchStateResponse,
-  StopTaskExecuteResponse,
   TsfPageUnitRuleV2,
   UpdateApiRateLimitRulesResponse,
   DeleteRepositoryRequest,
@@ -666,9 +616,7 @@ import {
   DeleteNamespaceRequest,
   ContainerInfo,
   SearchStdoutLogRequest,
-  RedoTaskBatchResponse,
   DescribeResourceConfigResultV2,
-  ModifyGroupRequest,
   DescribeMicroserviceResponse,
   DescribeImageRepositoryResponse,
   TaskId,
@@ -685,8 +633,6 @@ import {
   ContainerGroupServiceGovernanceConfig,
   TsfPageApiGroupInfo,
   ReleasePublicConfigRequest,
-  TaskFlowEdge,
-  RedoTaskFlowBatchResponse,
   LaneGroup,
   CreateGroupResponse,
 } from "./tsf_models"
@@ -698,18 +644,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tsf.tencentcloudapi.com", "2018-03-26", clientConfig)
-  }
-
-  /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-创建任务
-     */
-  async CreateTask(
-    req: CreateTaskRequest,
-    cb?: (error: string, rep: CreateTaskResponse) => void
-  ): Promise<CreateTaskResponse> {
-    return this.request("CreateTask", req, cb)
   }
 
   /**
@@ -730,16 +664,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClusterResponse) => void
   ): Promise<CreateClusterResponse> {
     return this.request("CreateCluster", req, cb)
-  }
-
-  /**
-   * 获取微服务列表
-   */
-  async DescribeMicroservices(
-    req: DescribeMicroservicesRequest,
-    cb?: (error: string, rep: DescribeMicroservicesResponse) => void
-  ): Promise<DescribeMicroservicesResponse> {
-    return this.request("DescribeMicroservices", req, cb)
   }
 
   /**
@@ -833,18 +757,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-重新执行工作流批次
-     */
-  async RedoTaskFlowBatch(
-    req: RedoTaskFlowBatchRequest,
-    cb?: (error: string, rep: RedoTaskFlowBatchResponse) => void
-  ): Promise<RedoTaskFlowBatchResponse> {
-    return this.request("RedoTaskFlowBatch", req, cb)
-  }
-
-  /**
    * 查询公共配置汇总列表
    */
   async DescribePublicConfigSummary(
@@ -935,27 +847,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-停止正在某个节点上执行的任务
-     */
-  async StopTaskExecute(
-    req: StopTaskExecuteRequest,
-    cb?: (error: string, rep: StopTaskExecuteResponse) => void
-  ): Promise<StopTaskExecuteResponse> {
-    return this.request("StopTaskExecute", req, cb)
-  }
-
-  /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-查询任务详情
-     */
-  async DescribeTaskDetail(
-    req: DescribeTaskDetailRequest,
-    cb?: (error: string, rep: DescribeTaskDetailResponse) => void
-  ): Promise<DescribeTaskDetailResponse> {
-    return this.request("DescribeTaskDetail", req, cb)
+   * 取消关联投递信息和部署组
+   */
+  async DisassociateKafkaConfig(
+    req: DisassociateKafkaConfigRequest,
+    cb?: (error: string, rep: DisassociateKafkaConfigResponse) => void
+  ): Promise<DisassociateKafkaConfigResponse> {
+    return this.request("DisassociateKafkaConfig", req, cb)
   }
 
   /**
@@ -1332,30 +1230,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-翻页查询任务列表
-     */
-  async DescribeTaskRecords(
-    req: DescribeTaskRecordsRequest,
-    cb?: (error: string, rep: DescribeTaskRecordsResponse) => void
-  ): Promise<DescribeTaskRecordsResponse> {
-    return this.request("DescribeTaskRecords", req, cb)
-  }
-
-  /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-手动执行一次任务
-     */
-  async ExecuteTask(
-    req: ExecuteTaskRequest,
-    cb?: (error: string, rep: ExecuteTaskResponse) => void
-  ): Promise<ExecuteTaskResponse> {
-    return this.request("ExecuteTask", req, cb)
-  }
-
-  /**
    * 批量导入API至api分组(也支持新建API到分组)
    */
   async CreateGatewayApi(
@@ -1463,18 +1337,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInvocationMetricDataPointResponse) => void
   ): Promise<DescribeInvocationMetricDataPointResponse> {
     return this.request("DescribeInvocationMetricDataPoint", req, cb)
-  }
-
-  /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-修改任务
-     */
-  async ModifyTask(
-    req: ModifyTaskRequest,
-    cb?: (error: string, rep: ModifyTaskResponse) => void
-  ): Promise<ModifyTaskResponse> {
-    return this.request("ModifyTask", req, cb)
   }
 
   /**
@@ -1618,18 +1480,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-停止一个工作流批次
-     */
-  async TerminateTaskFlowBatch(
-    req: TerminateTaskFlowBatchRequest,
-    cb?: (error: string, rep: TerminateTaskFlowBatchResponse) => void
-  ): Promise<TerminateTaskFlowBatchResponse> {
-    return this.request("TerminateTaskFlowBatch", req, cb)
-  }
-
-  /**
    * 批量更新API限流规则
    */
   async UpdateApiRateLimitRules(
@@ -1667,18 +1517,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRepositoriesResponse) => void
   ): Promise<DescribeRepositoriesResponse> {
     return this.request("DescribeRepositories", req, cb)
-  }
-
-  /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-停用工作流
-     */
-  async DisableTaskFlow(
-    req: DisableTaskFlowRequest,
-    cb?: (error: string, rep: DisableTaskFlowResponse) => void
-  ): Promise<DisableTaskFlowResponse> {
-    return this.request("DisableTaskFlow", req, cb)
   }
 
   /**
@@ -1893,18 +1731,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-重新执行任务
-     */
-  async RedoTask(
-    req: RedoTaskRequest,
-    cb?: (error: string, rep: RedoTaskResponse) => void
-  ): Promise<RedoTaskResponse> {
-    return this.request("RedoTask", req, cb)
-  }
-
-  /**
    * 获取部署组其他字段-用于前端并发调用
    */
   async DescribeContainerGroupAttribute(
@@ -1995,18 +1821,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-查询任务最近一次执行状态
-     */
-  async DescribeTaskLastStatus(
-    req: DescribeTaskLastStatusRequest,
-    cb?: (error: string, rep: DescribeTaskLastStatusResponse) => void
-  ): Promise<DescribeTaskLastStatusResponse> {
-    return this.request("DescribeTaskLastStatus", req, cb)
-  }
-
-  /**
    * 查询业务日志配置项信息
    */
   async DescribeBusinessLogConfig(
@@ -2038,18 +1852,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-停止执行中的任务批次， 非运行中的任务不可调用。
-     */
-  async StopTaskBatch(
-    req: StopTaskBatchRequest,
-    cb?: (error: string, rep: StopTaskBatchResponse) => void
-  ): Promise<StopTaskBatchResponse> {
-    return this.request("StopTaskBatch", req, cb)
-  }
-
-  /**
    * 查询公共配置项列表
    */
   async DescribePublicConfigs(
@@ -2067,16 +1869,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeConfigTemplateResponse) => void
   ): Promise<DescribeConfigTemplateResponse> {
     return this.request("DescribeConfigTemplate", req, cb)
-  }
-
-  /**
-   * 取消关联投递信息和部署组
-   */
-  async DisassociateKafkaConfig(
-    req: DisassociateKafkaConfigRequest,
-    cb?: (error: string, rep: DisassociateKafkaConfigResponse) => void
-  ): Promise<DisassociateKafkaConfigResponse> {
-    return this.request("DisassociateKafkaConfig", req, cb)
   }
 
   /**
@@ -2127,18 +1919,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExpandGroupResponse) => void
   ): Promise<ExpandGroupResponse> {
     return this.request("ExpandGroup", req, cb)
-  }
-
-  /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-删除任务
-     */
-  async DeleteTask(
-    req: DeleteTaskRequest,
-    cb?: (error: string, rep: DeleteTaskResponse) => void
-  ): Promise<DeleteTaskResponse> {
-    return this.request("DeleteTask", req, cb)
   }
 
   /**
@@ -2265,18 +2045,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-启用任务
-     */
-  async EnableTask(
-    req: EnableTaskRequest,
-    cb?: (error: string, rep: EnableTaskResponse) => void
-  ): Promise<EnableTaskResponse> {
-    return this.request("EnableTask", req, cb)
-  }
-
-  /**
    * 通过部署组ID获取微服务
    */
   async DescribeMicroservicesByGroupIds(
@@ -2304,18 +2072,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyMicroserviceResponse) => void
   ): Promise<ModifyMicroserviceResponse> {
     return this.request("ModifyMicroservice", req, cb)
-  }
-
-  /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-启用工作流
-     */
-  async EnableTaskFlow(
-    req: EnableTaskFlowRequest,
-    cb?: (error: string, rep: EnableTaskFlowResponse) => void
-  ): Promise<EnableTaskFlowResponse> {
-    return this.request("EnableTaskFlow", req, cb)
   }
 
   /**
@@ -2366,18 +2122,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyPathRewriteResponse) => void
   ): Promise<ModifyPathRewriteResponse> {
     return this.request("ModifyPathRewrite", req, cb)
-  }
-
-  /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-重新执行任务批次
-     */
-  async RedoTaskBatch(
-    req: RedoTaskBatchRequest,
-    cb?: (error: string, rep: RedoTaskBatchResponse) => void
-  ): Promise<RedoTaskBatchResponse> {
-    return this.request("RedoTaskBatch", req, cb)
   }
 
   /**
@@ -2441,18 +2185,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-执行一次工作流
-     */
-  async ExecuteTaskFlow(
-    req: ExecuteTaskFlowRequest,
-    cb?: (error: string, rep: ExecuteTaskFlowResponse) => void
-  ): Promise<ExecuteTaskFlowResponse> {
-    return this.request("ExecuteTaskFlow", req, cb)
-  }
-
-  /**
    * 查询微服务详情
    */
   async DescribeMicroservice(
@@ -2463,30 +2195,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * serverless 能力已下线。下线对应接口。
-
-删除Serverless部署组
-     */
-  async DeleteServerlessGroup(
-    req: DeleteServerlessGroupRequest,
-    cb?: (error: string, rep: DeleteServerlessGroupResponse) => void
-  ): Promise<DeleteServerlessGroupResponse> {
-    return this.request("DeleteServerlessGroup", req, cb)
-  }
-
-  /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-重新执行在某个节点上执行任务。
-     */
-  async RedoTaskExecute(
-    req: RedoTaskExecuteRequest,
-    cb?: (error: string, rep: RedoTaskExecuteResponse) => void
-  ): Promise<RedoTaskExecuteResponse> {
-    return this.request("RedoTaskExecute", req, cb)
-  }
-
-  /**
    * 查询java实例jvm监控数据,返回数据可选
    */
   async DescribeJvmMonitor(
@@ -2494,18 +2202,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeJvmMonitorResponse) => void
   ): Promise<DescribeJvmMonitorResponse> {
     return this.request("DescribeJvmMonitor", req, cb)
-  }
-
-  /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-查询工作流最新一个批次的状态信息
-     */
-  async DescribeFlowLastBatchState(
-    req: DescribeFlowLastBatchStateRequest,
-    cb?: (error: string, rep: DescribeFlowLastBatchStateResponse) => void
-  ): Promise<DescribeFlowLastBatchStateResponse> {
-    return this.request("DescribeFlowLastBatchState", req, cb)
   }
 
   /**
@@ -2526,18 +2222,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRepositoryResponse) => void
   ): Promise<DeleteRepositoryResponse> {
     return this.request("DeleteRepository", req, cb)
-  }
-
-  /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-停用任务
-     */
-  async DisableTask(
-    req: DisableTaskRequest,
-    cb?: (error: string, rep: DisableTaskResponse) => void
-  ): Promise<DisableTaskResponse> {
-    return this.request("DisableTask", req, cb)
   }
 
   /**
@@ -2598,18 +2282,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteGatewayApiResponse) => void
   ): Promise<DeleteGatewayApiResponse> {
     return this.request("DeleteGatewayApi", req, cb)
-  }
-
-  /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-创建工作流
-     */
-  async CreateTaskFlow(
-    req: CreateTaskFlowRequest,
-    cb?: (error: string, rep: CreateTaskFlowResponse) => void
-  ): Promise<CreateTaskFlowResponse> {
-    return this.request("CreateTaskFlow", req, cb)
   }
 
   /**
@@ -2743,15 +2415,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 分布式任务调度 TCT 已到达 EOMS 节点，进行产品下线处理。退市公告https://cloud.tencent.com/announce/detail/2053
-
-对执行失败的任务批次执行续跑
-     */
-  async ContinueRunFailedTaskBatch(
-    req: ContinueRunFailedTaskBatchRequest,
-    cb?: (error: string, rep: ContinueRunFailedTaskBatchResponse) => void
-  ): Promise<ContinueRunFailedTaskBatchResponse> {
-    return this.request("ContinueRunFailedTaskBatch", req, cb)
+   * 获取微服务列表
+   */
+  async DescribeMicroservices(
+    req: DescribeMicroservicesRequest,
+    cb?: (error: string, rep: DescribeMicroservicesResponse) => void
+  ): Promise<DescribeMicroservicesResponse> {
+    return this.request("DescribeMicroservices", req, cb)
   }
 
   /**

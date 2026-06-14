@@ -128,6 +128,16 @@ it("ocr.v20181119.GeneralAccurateOCR", async function () {
     }
 })
 
+it("ocr.v20181119.VerifyBizLicenseEnterprise4", async function () {
+    try {
+       const data = await client.VerifyBizLicenseEnterprise4({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.RecognizeContainerOCR", async function () {
     try {
        const data = await client.RecognizeContainerOCR({})
@@ -211,16 +221,6 @@ it("ocr.v20181119.SubmitMarkEssayAgentJob", async function () {
 it("ocr.v20181119.DescribeQuestionMarkAgentJob", async function () {
     try {
        const data = await client.DescribeQuestionMarkAgentJob({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ocr.v20181119.RecognizeTravelCardOCR", async function () {
-    try {
-       const data = await client.RecognizeTravelCardOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -748,9 +748,9 @@ it("ocr.v20181119.VerifyOfdVatInvoiceOCR", async function () {
     }
 })
 
-it("ocr.v20181119.VerifyBizLicenseEnterprise4", async function () {
+it("ocr.v20181119.VerifyBizLicenseEnterprise3", async function () {
     try {
-       const data = await client.VerifyBizLicenseEnterprise4({})
+       const data = await client.VerifyBizLicenseEnterprise3({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -761,16 +761,6 @@ it("ocr.v20181119.VerifyBizLicenseEnterprise4", async function () {
 it("ocr.v20181119.MixedInvoiceOCR", async function () {
     try {
        const data = await client.MixedInvoiceOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ocr.v20181119.RecognizeHealthCodeOCR", async function () {
-    try {
-       const data = await client.RecognizeHealthCodeOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
