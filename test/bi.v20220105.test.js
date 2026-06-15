@@ -368,6 +368,16 @@ it("bi.v20220105.CreateDataTable", async function () {
     }
 })
 
+it("bi.v20220105.ModifyResourceUser", async function () {
+    try {
+       const data = await client.ModifyResourceUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bi.v20220105.DescribeUserGroupMemberList", async function () {
     try {
        const data = await client.DescribeUserGroupMemberList({})

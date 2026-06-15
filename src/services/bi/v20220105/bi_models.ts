@@ -405,6 +405,32 @@ export interface DescribeUserProjectListRequest {
 }
 
 /**
+ * ModifyResourceUser请求参数结构体
+ */
+export interface ModifyResourceUserRequest {
+  /**
+   * 项目Id
+   */
+  ProjectId?: number
+  /**
+   * 用户id
+   */
+  UserId?: string
+  /**
+   * 资源
+   */
+  Resource?: UserResourceDTO
+  /**
+   * 实体类
+   */
+  EntityIds?: Array<number | bigint>
+  /**
+   * 资源类型
+   */
+  ResourceType?: string
+}
+
+/**
  * 企业用户列表
  */
 export interface CorpUserListData {
@@ -1361,6 +1387,36 @@ export interface ApiKeyAuthApplyVOList {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   List?: Array<ApiKeyAuthApplyVO>
+}
+
+/**
+ * ModifyResourceUser返回参数结构体
+ */
+export interface ModifyResourceUserResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 扩展
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * 消息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -1765,15 +1765,15 @@ export interface DeleteAuditLogFileResponse {
  */
 export interface DescribeDBSpaceStatusRequest {
   /**
-   * 实例 ID 。
+   * <p>实例 ID。可通过 <a href="https://cloud.tencent.com/document/api/1130/57798">DescribeDiagDBInstances</a> 接口获取。(备注，dcdb的InstanceId 要求使用 <code>ClusterId&amp;InstanceId</code>代替)</p>
    */
   InstanceId: string
   /**
-   * 时间段天数，截止日期为当日，默认为7天。
+   * <p>时间段天数，截止日期为当日，默认为7天。</p>
    */
   RangeDays?: number
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，"mongodb" - 云数据库 MongoDB，默认为"mysql"。
+   * <p>服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 CynosDB  for MySQL，&quot;mongodb&quot; - 云数据库 MongoDB，&quot;dcdb&quot; -（TDSQL MySQL 版）、&quot;mariadb&quot; -（TDSQL MariaDB 版）默认为&quot;mysql&quot;。</p>
    */
   Product?: string
 }
@@ -5416,19 +5416,19 @@ export interface DescribeUserSqlAdviceResponse {
  */
 export interface DescribeDBSpaceStatusResponse {
   /**
-   * 磁盘增长量(MB)。
+   * <p>磁盘增长量(MB)。</p>
    */
   Growth?: number
   /**
-   * 磁盘剩余(MB)。
+   * <p>磁盘剩余(MB)。</p>
    */
   Remain?: number
   /**
-   * 磁盘总量(MB)。
+   * <p>磁盘总量(MB)。</p>
    */
   Total?: number
   /**
-   * 预计可用天数。
+   * <p>预计可用天数。</p>
    */
   AvailableDays?: number
   /**

@@ -215,6 +215,7 @@ import {
   CreateContainGroupResponse,
   DescribeContainerGroupDetailResponse,
   CreatePathRewritesWithDetailRespResponse,
+  ApiParam,
   Ports,
   UpdateRepositoryRequest,
   DescribeGroupGatewaysResponse,

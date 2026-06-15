@@ -29,6 +29,7 @@ import {
   ModifyUserGroupResponse,
   DeleteUserRoleResponse,
   DescribeUserProjectListRequest,
+  ModifyResourceUserRequest,
   CorpUserListData,
   UserGroupUpdateDTO,
   RowColumnConfig,
@@ -60,6 +61,7 @@ import {
   UserRoleListDataRoleInfo,
   ExportScreenPageResponse,
   ApiKeyAuthApplyVOList,
+  ModifyResourceUserResponse,
   CreateDataTableRequest,
   CreatePermissionRanksRequest,
   ModifyResourceUserGroupResourceRequest,
@@ -534,6 +536,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDataTableResponse) => void
   ): Promise<CreateDataTableResponse> {
     return this.request("CreateDataTable", req, cb)
+  }
+
+  /**
+   * 按用户资源修改
+   */
+  async ModifyResourceUser(
+    req: ModifyResourceUserRequest,
+    cb?: (error: string, rep: ModifyResourceUserResponse) => void
+  ): Promise<ModifyResourceUserResponse> {
+    return this.request("ModifyResourceUser", req, cb)
   }
 
   /**

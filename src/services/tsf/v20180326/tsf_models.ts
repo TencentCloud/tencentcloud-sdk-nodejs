@@ -1347,17 +1347,33 @@ false：删除失败。
  */
 export interface CreateMicroserviceRequest {
   /**
-   * 命名空间ID。该参数可以通过调用 [DescribeSimpleNamespaces](https://cloud.tencent.com/document/api/649/36096) 的返回值中的 NamespaceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?tab=namespace)查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。
+   * <p>命名空间ID。该参数可以通过调用 <a href="https://cloud.tencent.com/document/api/649/36096">DescribeSimpleNamespaces</a> 的返回值中的 NamespaceId 字段来获取或通过登录<a href="https://console.cloud.tencent.com/tsf/resource?tab=namespace">控制台</a>查看；也可以调用<a href="https://cloud.tencent.com/document/product/649/36098">CreateNamespace</a>创建新的命名空间。</p>
    */
   NamespaceId: string
   /**
-   * 微服务名称。该参数可以通过调用 [DescribeMicroservices](https://cloud.tencent.com/document/product/649/36084) 的返回值中的 MicroserviceName 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=service)查看；也可以调用[CreateMicroserviceWithDetailResp](https://cloud.tencent.com/document/product/649/85860)创建新的微服务。
+   * <p>微服务名称。该参数可以通过调用 <a href="https://cloud.tencent.com/document/product/649/36084">DescribeMicroservices</a> 的返回值中的 MicroserviceName 字段来获取或通过登录<a href="https://console.cloud.tencent.com/tse/tsf-consul?tab=service">控制台</a>查看；也可以调用<a href="https://cloud.tencent.com/document/product/649/85860">CreateMicroserviceWithDetailResp</a>创建新的微服务。</p>
    */
   MicroserviceName: string
   /**
-   * 微服务备注信息，最多支持200个字符。
+   * <p>微服务备注信息，最多支持200个字符。</p>
    */
   MicroserviceDesc?: string
+  /**
+   * <p>服务类型，默认SDK</p><p>枚举值：</p><ul><li>SDK： sdk服务</li><li>MESH_EXTERNAL： mesh外部服务</li></ul>
+   */
+  ServiceType?: string
+  /**
+   * <p>域名+端口，或者是纯域名方式，其他的不允许配置，不支持 IP</p>
+   */
+  ServiceUrl?: string
+  /**
+   * <p>协议类型</p>
+   */
+  Protocol?: string
+  /**
+   * <p>服务发现方式</p><p>枚举值：</p><ul><li>DNS： DNS方式</li></ul>
+   */
+  ServiceDiscovery?: string
 }
 
 /**
@@ -1581,9 +1597,7 @@ export interface DescribeGatewayAllGroupApisResponse {
  */
 export interface DeployContainerApplicationResponse {
   /**
-   * 部署容器应用是否成功。
-true：成功。
-false：失败。
+   * <p>部署容器应用是否成功。<br>true：成功。<br>false：失败。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Result?: DeployContainerApplicationResp
@@ -1904,197 +1918,201 @@ export interface AddInstancesResponse {
  */
 export interface VmGroup {
   /**
-   * 部署组ID
+   * <p>部署组ID</p>
    */
   GroupId?: string
   /**
-   * 部署组名称
+   * <p>部署组名称</p>
    */
   GroupName?: string
   /**
-   * 部署组状态
+   * <p>部署组状态</p>
    */
   GroupStatus?: string
   /**
-   * 程序包ID
+   * <p>程序包ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageId?: string
   /**
-   * 程序包名称
+   * <p>程序包名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageName?: string
   /**
-   * 程序包版本号
+   * <p>程序包版本号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageVersion?: string
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName?: string
   /**
-   * 命名空间ID
+   * <p>命名空间ID</p>
    */
   NamespaceId?: string
   /**
-   * 命名空间名称
+   * <p>命名空间名称</p>
    */
   NamespaceName?: string
   /**
-   * 应用ID
+   * <p>应用ID</p>
    */
   ApplicationId?: string
   /**
-   * 应用名称
+   * <p>应用名称</p>
    */
   ApplicationName?: string
   /**
-   * 部署组机器数目
+   * <p>部署组机器数目</p>
    */
   InstanceCount?: number
   /**
-   * 部署组运行中机器数目
+   * <p>部署组运行中机器数目</p>
    */
   RunInstanceCount?: number
   /**
-   * 部署组启动参数信息
+   * <p>部署组启动参数信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartupParameters?: string
   /**
-   * 部署组创建时间
+   * <p>部署组创建时间</p>
    */
   CreateTime?: string
   /**
-   * 部署组更新时间
+   * <p>部署组更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 部署组停止机器数目
+   * <p>部署组停止机器数目</p>
    */
   OffInstanceCount?: number
   /**
-   * 部署组描述信息
+   * <p>部署组描述信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupDesc?: string
   /**
-   * 微服务类型
+   * <p>微服务类型</p>
    */
   MicroserviceType?: string
   /**
-   * 应用类型
+   * <p>应用类型</p>
    */
   ApplicationType?: string
   /**
-   * 部署组资源类型
+   * <p>部署组资源类型</p>
    */
   GroupResourceType?: string
   /**
-   * 部署组更新时间戳
+   * <p>部署组更新时间戳</p>
    */
   UpdatedTime?: number
   /**
-   * 部署应用描述信息
+   * <p>部署应用描述信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeployDesc?: string
   /**
-   * 滚动发布的更新方式
+   * <p>滚动发布的更新方式</p>
    */
   UpdateType?: number
   /**
-   * 发布是否启用beta批次
+   * <p>发布是否启用beta批次</p>
    */
   DeployBetaEnable?: boolean
   /**
-   * 滚动发布的批次比例列表
+   * <p>滚动发布的批次比例列表</p>
    */
   DeployBatch?: Array<number>
   /**
-   * 滚动发布的批次执行方式
+   * <p>滚动发布的批次执行方式</p>
    */
   DeployExeMode?: string
   /**
-   * 滚动发布的每个批次的等待时间
+   * <p>滚动发布的每个批次的等待时间</p>
    */
   DeployWaitTime?: number
   /**
-   * 是否开启了健康检查
+   * <p>是否开启了健康检查</p>
    */
   EnableHealthCheck?: boolean
   /**
-   * 健康检查配置
+   * <p>健康检查配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HealthCheckSettings?: HealthCheckSettings
   /**
-   * 程序包类型
+   * <p>程序包类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PackageType?: string
   /**
-   * 启动脚本 base64编码
+   * <p>启动脚本 base64编码</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartScript?: string
   /**
-   * 停止脚本 base64编码
+   * <p>停止脚本 base64编码</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StopScript?: string
   /**
-   * 部署组备注
+   * <p>部署组备注</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Alias?: string
   /**
-   * javaagent信息
+   * <p>javaagent信息</p>
    */
   AgentProfileList?: Array<AgentProfile>
   /**
-   * 预热属性配置
+   * <p>预热属性配置</p>
    */
   WarmupSetting?: WarmupSetting
   /**
-   * Envoy网关配置
+   * <p>Envoy网关配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayConfig?: GatewayConfig
   /**
-   * 批次是否开启健康检查
+   * <p>批次是否开启健康检查</p>
    */
   EnableBatchHealthCheck?: boolean
   /**
-   * 是否开启cgroup控制内存cpu
+   * <p>是否开启cgroup控制内存cpu</p>
    */
   FilebeatCgroupEnable?: boolean
   /**
-   * filebeat使用cpu上限
+   * <p>filebeat使用cpu上限</p>
    */
   FilebeatMaxCpu?: number
   /**
-   * filebeat使用内存上限
+   * <p>filebeat使用内存上限</p>
    */
   FilebeatMaxMem?: number
   /**
-   * 仓库ID
+   * <p>仓库ID</p>
    */
   RepositoryId?: string
   /**
-   * 仓库名称
+   * <p>仓库名称</p>
    */
   RepositoryName?: string
   /**
-   * 仓库类型
+   * <p>仓库类型</p>
    */
   RepositoryType?: string
+  /**
+   * <p>是否自动重启</p>
+   */
+  LivenessAutoRestart?: boolean
 }
 
 /**
@@ -2355,17 +2373,21 @@ export interface Instance {
  */
 export interface UpdateHealthCheckSettingsRequest {
   /**
-   * 部署组ID，可通过调用[DescribeContainerGroups](https://cloud.tencent.com/document/api/649/36068)查询已创建的部署组列表或登录控制台进行查看；也可以调用[CreateContainGroup](https://cloud.tencent.com/document/api/649/36075)创建新的部署组。
+   * <p>部署组ID，可通过调用<a href="https://cloud.tencent.com/document/api/649/36068">DescribeContainerGroups</a>查询已创建的部署组列表或登录控制台进行查看；也可以调用<a href="https://cloud.tencent.com/document/api/649/36075">CreateContainGroup</a>创建新的部署组。</p>
    */
   GroupId: string
   /**
-   * 是否开启健康检查
+   * <p>是否开启健康检查</p>
    */
   EnableHealthCheck?: boolean
   /**
-   * 健康检查配置
+   * <p>健康检查配置</p>
    */
   HealthCheckSettings?: HealthCheckSettings
+  /**
+   * <p>是否自动重启</p>
+   */
+  LivenessAutoRestart?: boolean
 }
 
 /**
@@ -2444,9 +2466,7 @@ export type DescribeResourceConfigRequest = null
  */
 export interface CreateMicroserviceResponse {
   /**
-   * 新增结果。
-true：操作成功。
-false：操作失败。
+   * <p>新增结果。<br>true：操作成功。<br>false：操作失败。</p>
    */
   Result?: boolean
   /**
@@ -4161,21 +4181,25 @@ export interface DescribeGroupInstancesRequest {
  */
 export interface DescribeMsApiListRequest {
   /**
-   * 微服务ID。该参数可以通过调用 [DescribeMicroservices](https://cloud.tencent.com/document/product/649/36084) 的返回值中的 MicroserviceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tse/tsf-consul?tab=service)查看；也可以调用[CreateMicroserviceWithDetailResp](https://cloud.tencent.com/document/product/649/85860)创建新的微服务。
+   * <p>微服务ID。该参数可以通过调用 <a href="https://cloud.tencent.com/document/product/649/36084">DescribeMicroservices</a> 的返回值中的 MicroserviceId 字段来获取或通过登录<a href="https://console.cloud.tencent.com/tse/tsf-consul?tab=service">控制台</a>查看；也可以调用<a href="https://cloud.tencent.com/document/product/649/85860">CreateMicroserviceWithDetailResp</a>创建新的微服务。</p>
    */
   MicroserviceId: string
   /**
-   * 搜索关键字。
+   * <p>搜索关键字。</p>
    */
   SearchWord?: string
   /**
-   * 返回数量，默认为20，最大值为50。
+   * <p>返回数量，默认为20，最大值为50。</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
+  /**
+   * <p>批量查询API参数</p>
+   */
+  BatchApiParamList?: Array<ApiParam>
 }
 
 /**
@@ -4239,7 +4263,7 @@ export interface LifeCycleHook {
  */
 export interface DescribeMsApiListResponse {
   /**
-   * 微服务API列表。
+   * <p>微服务API列表。</p>
    */
   Result?: TsfApiListResponse
   /**
@@ -4751,6 +4775,20 @@ export interface CreatePathRewritesWithDetailRespResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * API 参数
+ */
+export interface ApiParam {
+  /**
+   * <p>接口Method</p>
+   */
+  Method: string
+  /**
+   * <p>接口Path</p>
+   */
+  Path: string
 }
 
 /**
@@ -6471,29 +6509,37 @@ export interface AssociateBusinessLogConfigResponse {
  */
 export interface DescribeGatewayApisRequest {
   /**
-   * 分组ID
+   * <p>分组ID</p>
    */
   GroupId: string
   /**
-   * 翻页偏移量
+   * <p>翻页偏移量</p>
    */
   Offset: number
   /**
-   * 每页的记录数
+   * <p>每页的记录数</p>
    */
   Limit: number
   /**
-   * 搜索关键字，支持 API path
+   * <p>搜索关键字，支持 API path</p>
    */
   SearchWord?: string
   /**
-   * 部署组ID
+   * <p>部署组ID</p>
    */
   GatewayDeployGroupId?: string
   /**
-   * 发布状态, drafted(未发布)/released(已发布)/releasing(发布中)/failed(发布失败)
+   * <p>发布状态, drafted(未发布)/released(已发布)/releasing(发布中)/failed(发布失败)</p>
    */
   ReleaseStatus?: string
+  /**
+   * <p>返回扩展出参字段名</p>
+   */
+  ExtendFieldList?: Array<string>
+  /**
+   * <p>服务接口状态</p><p>枚举值：</p><ul><li>ONLINE： 在线状态</li><li>OFFLINE： 离线状态</li><li>UNKNOWN： 未知</li><li>DELETED： 查询MS API不存在</li></ul>
+   */
+  ApiOnlineStatus?: string
 }
 
 /**
@@ -7440,7 +7486,7 @@ export interface CreateLaneRuleResponse {
  */
 export interface DescribeContainerGroupsResponse {
   /**
-   * 查询的权限数据对象
+   * <p>查询的权限数据对象</p>
    */
   Result?: ContainGroupResult
   /**
@@ -7538,48 +7584,52 @@ export interface AddInstancesRequest {
  */
 export interface GatewayPlugin {
   /**
-   * 网关插件id
+   * <p>网关插件id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
-   * 插件名称
+   * <p>插件名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 插件类型
+   * <p>插件类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
-   * 插件描述
+   * <p>插件描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedTime?: string
   /**
-   * 发布状态
+   * <p>发布状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
-   * 是否禁用删除
+   * <p>是否禁用删除</p>
    */
   DeleteDisabled?: boolean
   /**
-   * 禁用原因
+   * <p>禁用原因</p>
    */
   DeleteDisabledReason?: string
+  /**
+   * <p>是否不可绑定</p><p>枚举值：</p><ul><li>true： 禁止绑定</li><li>false： 允许绑定</li></ul>
+   */
+  BindDisabled?: boolean
 }
 
 /**
@@ -8531,7 +8581,7 @@ export interface ModifyUploadInfoRequest {
  */
 export interface DescribeGatewayApisResponse {
   /**
-   * 翻页结构
+   * <p>翻页结构</p>
    */
   Result?: TsfPageApiDetailInfo
   /**
@@ -9138,6 +9188,11 @@ export interface ApiDetailInfo {
    * <p>禁用短路径访问开关原因</p>
    */
   PathMappingUnsupportedMsg?: string
+  /**
+   * <p>API在线状态</p><p>枚举值：</p><ul><li>ONLINE： 在线</li><li>OFFLINE： 离线</li><li>UNKNOWN： 未知</li><li>DELETED： 查询服务治理API不存在</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiOnlineStatus?: string
 }
 
 /**
@@ -9227,17 +9282,33 @@ export interface TsfPageUnitNamespace {
  */
 export interface CreateMicroserviceWithDetailRespRequest {
   /**
-   * 命名空间ID。该参数可以通过调用 [DescribeSimpleNamespaces](https://cloud.tencent.com/document/api/649/36096) 的返回值中的 NamespaceId 字段来获取或通过登录[控制台](https://console.cloud.tencent.com/tsf/resource?tab=namespace)查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。
+   * <p>命名空间ID。该参数可以通过调用 <a href="https://cloud.tencent.com/document/api/649/36096">DescribeSimpleNamespaces</a> 的返回值中的 NamespaceId 字段来获取或通过登录<a href="https://console.cloud.tencent.com/tsf/resource?tab=namespace">控制台</a>查看；也可以调用<a href="https://cloud.tencent.com/document/product/649/36098">CreateNamespace</a>创建新的命名空间。</p>
    */
   NamespaceId: string
   /**
-   * 微服务名称，最多支持128个字符。
+   * <p>微服务名称，最多支持128个字符。</p>
    */
   MicroserviceName: string
   /**
-   * 微服务描述信息，最多支持200个字符。
+   * <p>微服务描述信息，最多支持200个字符。</p>
    */
   MicroserviceDesc?: string
+  /**
+   * <p>服务类型，默认SDK</p><p>枚举值：</p><ul><li>SDK： sdk服务</li><li>MESH_EXTERNAL： mesh外部服务</li></ul>
+   */
+  ServiceType?: string
+  /**
+   * <p>域名+端口，或者是纯域名方式，其他的不允许配置，不支持 IP</p>
+   */
+  ServiceUrl?: string
+  /**
+   * <p>协议类型</p>
+   */
+  Protocol?: string
+  /**
+   * <p>服务发现方式</p><p>枚举值：</p><ul><li>DNS： DNS方式</li></ul>
+   */
+  ServiceDiscovery?: string
 }
 
 /**
@@ -9702,44 +9773,48 @@ false：失败。
  */
 export interface ExclusiveInstance {
   /**
-   * 配置中心类型[注册中心Registration、配置中心Configuration]
+   * <p>配置中心类型[注册中心Registration、配置中心Configuration]</p>
    */
   CenterType?: string
   /**
-   * 实例id，通过[北极星控制台](https://console.cloud.tencent.com/tse/governance)获取
+   * <p>实例id，通过<a href="https://console.cloud.tencent.com/tse/governance">北极星控制台</a>获取</p>
    */
   InstanceId?: string
   /**
-   * 实例类型，例如北极星Polaris
+   * <p>实例类型，例如北极星Polaris</p>
    */
   InstanceType?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 实例地域id，通过[北极星控制台](https://console.cloud.tencent.com/tse/governance)获取
+   * <p>实例地域id，通过<a href="https://console.cloud.tencent.com/tse/governance">北极星控制台</a>获取</p>
    */
   RegionId?: string
   /**
-   * 实例命名空间ID，通过[北极星控制台](https://console.cloud.tencent.com/tse/governance)获取
+   * <p>实例命名空间ID，通过<a href="https://console.cloud.tencent.com/tse/governance">北极星控制台</a>获取</p>
    */
   InstanceNamespaceId?: string
   /**
-   * 部署组Id
+   * <p>部署组Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
   /**
-   * 更新时间
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: number
+  /**
+   * <p>文档ID</p>
+   */
+  ApplicationId?: string
 }
 
 /**
@@ -12689,37 +12764,41 @@ export interface DescribeUsableUnitNamespacesRequest {
  */
 export interface DescribeContainerGroupsRequest {
   /**
-   * 分组所属【应用ID】，可通过调用[DescribeApplications](https://cloud.tencent.com/document/product/649/36090)查询已创建的应用列表或登录[控制台](https://console.cloud.tencent.com/tsf/app?rid=1)进行查看；也可以调用[CreateApplication](https://cloud.tencent.com/document/product/649/36094)创建新的应用。
+   * <p>分组所属【应用ID】，可通过调用<a href="https://cloud.tencent.com/document/product/649/36090">DescribeApplications</a>查询已创建的应用列表或登录<a href="https://console.cloud.tencent.com/tsf/app?rid=1">控制台</a>进行查看；也可以调用<a href="https://cloud.tencent.com/document/product/649/36094">CreateApplication</a>创建新的应用。</p>
    */
   ApplicationId: string
   /**
-   * 搜索字段，模糊搜索groupName字段
+   * <p>搜索字段，模糊搜索groupName字段</p>
    */
   SearchWord?: string
   /**
-   * 排序字段，默认为 createTime字段，支持id， name， createTime
+   * <p>排序字段，默认为 createTime字段，支持id， name， createTime</p>
    */
   OrderBy?: string
   /**
-   * 排序方式，默认为1：倒序排序，0：正序，1：倒序
+   * <p>排序方式，默认为1：倒序排序，0：正序，1：倒序</p>
    */
   OrderType?: number
   /**
-   * 偏移量，取值从0开始
+   * <p>偏移量，取值从0开始</p>
    */
   Offset?: number
   /**
-   * 分页个数，默认为20， 取值应为1~50
+   * <p>分页个数，默认为20， 取值应为1~50</p>
    */
   Limit?: number
   /**
-   * 分组所属【集群ID】，可通过调用[DescribeClusters](https://cloud.tencent.com/document/product/649/85857)查询已创建的集群列表或登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=docker)进行查看；也可以调用[CreateCluster](https://cloud.tencent.com/document/product/649/36049)创建新的集群。
+   * <p>分组所属【集群ID】，可通过调用<a href="https://cloud.tencent.com/document/product/649/85857">DescribeClusters</a>查询已创建的集群列表或登录<a href="https://console.cloud.tencent.com/tsf/resource?rid=1&amp;tab=docker">控制台</a>进行查看；也可以调用<a href="https://cloud.tencent.com/document/product/649/36049">CreateCluster</a>创建新的集群。</p>
    */
   ClusterId?: string
   /**
-   * 分组所属【命名空间 ID】，可通过调用[DescribeSimpleNamespaces](https://cloud.tencent.com/document/product/649/36096)查询已创建的命名空间列表或登录[控制台](https://console.cloud.tencent.com/tsf/resource?rid=1&tab=namespace)进行查看；也可以调用[CreateNamespace](https://cloud.tencent.com/document/product/649/36098)创建新的命名空间。
+   * <p>分组所属【命名空间 ID】，可通过调用<a href="https://cloud.tencent.com/document/product/649/36096">DescribeSimpleNamespaces</a>查询已创建的命名空间列表或登录<a href="https://console.cloud.tencent.com/tsf/resource?rid=1&amp;tab=namespace">控制台</a>进行查看；也可以调用<a href="https://cloud.tencent.com/document/product/649/36098">CreateNamespace</a>创建新的命名空间。</p>
    */
   NamespaceId?: string
+  /**
+   * <p>部署组ID列表</p>
+   */
+  GroupIdList?: Array<string>
 }
 
 /**
@@ -13351,7 +13430,7 @@ export interface DescribeApiUseDetailRequest {
  */
 export interface CreateMicroserviceWithDetailRespResponse {
   /**
-   * 微服务ID。
+   * <p>微服务ID。</p>
    */
   Result?: string
   /**
@@ -13365,25 +13444,29 @@ export interface CreateMicroserviceWithDetailRespResponse {
  */
 export interface TsfPageBusinessLogV2 {
   /**
-   * 总条数
+   * <p>总条数</p>
    */
   TotalCount?: number
   /**
-   * 业务日志列表
+   * <p>业务日志列表</p>
    */
   Content?: Array<BusinessLogV2>
   /**
-   * 游标ID
+   * <p>游标ID</p>
    */
   ScrollId?: string
   /**
-   * 查询状态，SUCCESS：查询成功完成，ERROR_RANGE_EXCEED：查询范围过大异常，ERROR_COMPLEX_CONDITION：查询条件复杂异常，ERROR_OTHER_CAUSE：其他异常
+   * <p>查询状态，SUCCESS：查询成功完成，ERROR_RANGE_EXCEED：查询范围过大异常，ERROR_COMPLEX_CONDITION：查询条件复杂异常，ERROR_OTHER_CAUSE：其他异常</p>
    */
   Status?: string
   /**
-   * 查询es时，使用searchAfter返回的游标
+   * <p>查询es时，使用searchAfter返回的游标</p>
    */
   SearchAfter?: Array<string>
+  /**
+   * <p>是否压缩</p>
+   */
+  Compressed?: boolean
 }
 
 /**
@@ -13616,23 +13699,31 @@ export interface ReleaseConfigRequest {
  */
 export interface MsApiArray {
   /**
-   * API 请求路径
+   * <p>API 请求路径</p>
    */
   Path?: string
   /**
-   * 请求方法
+   * <p>请求方法</p>
    */
   Method?: string
   /**
-   * 方法描述
+   * <p>方法描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * API状态 0:离线 1:在线
+   * <p>API状态 0:离线 1:在线</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
+  /**
+   * <p>API ID</p>
+   */
+  ApiId?: string
+  /**
+   * <p>API来源</p><p>枚举值：</p><ul><li>FROM_CONSUL： 服务注册</li><li>FROM_MANUAL： 手动录入</li></ul>
+   */
+  SrcTypeName?: string
 }
 
 /**
@@ -13763,9 +13854,7 @@ export interface StopContainerGroupRequest {
  */
 export interface UpdateHealthCheckSettingsResponse {
   /**
-   * 更新健康检查配置操作是否成功。
-true：操作成功。
-false：操作失败。
+   * <p>更新健康检查配置操作是否成功。<br>true：操作成功。<br>false：操作失败。</p>
    */
   Result?: boolean
   /**
@@ -13854,253 +13943,257 @@ export interface ApiRateLimitRule {
  */
 export interface DeployContainerApplicationRequest {
   /**
-   * 应用ID
+   * <p>应用ID</p>
    */
   ApplicationId: string
   /**
-   * 可观测配置
+   * <p>可观测配置</p>
    */
   ObservabilityConfig?: ContainerGroupObservabilityConfig
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId?: string
   /**
-   * 部署组ID，分组唯一标识
+   * <p>部署组ID，分组唯一标识</p>
    */
   GroupId?: string
   /**
-   * 业务容器的环境变量参数
+   * <p>业务容器的环境变量参数</p>
    */
   Envs?: Array<Env>
   /**
-   * 业务容器的挂载信息
+   * <p>业务容器的挂载信息</p>
    */
   VolumeMountInfoList?: Array<VolumeMountInfo>
   /**
-   * 业务主容器生命周期钩子列表
+   * <p>业务主容器生命周期钩子列表</p>
    */
   LifeCycleHookList?: Array<LifeCycleHook>
   /**
-   * 附属容器列表
+   * <p>附属容器列表</p>
    */
   AdditionalContainerList?: Array<ContainerInfo>
   /**
-   * 容器卷信息
+   * <p>容器卷信息</p>
    */
   VolumeInfoList?: Array<VolumeInfo>
   /**
-   * Service访问配置列表
+   * <p>Service访问配置列表</p>
    */
   ServiceSettingList?: Array<ServiceSetting>
   /**
-   * 备注
+   * <p>备注</p>
    */
   Alias?: string
   /**
-   * 部署组名称
+   * <p>部署组名称</p>
    */
   GroupName?: string
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<Tag>
   /**
-   * 容器类型
+   * <p>容器类型</p>
    */
   ContainerKind?: string
   /**
-   * 业务容器的 镜像Server ccr.ccs.tencentyun.com
+   * <p>业务容器的 镜像Server ccr.ccs.tencentyun.com</p>
    */
   Server?: string
   /**
-   * 业务容器的镜像名
+   * <p>业务容器的镜像名</p>
    */
   RepoName?: string
   /**
-   * 仓库类型
+   * <p>仓库类型</p>
    */
   RepoType?: string
   /**
-   * TCR仓库信息
+   * <p>TCR仓库信息</p>
    */
   TcrRepoInfo?: TcrRepoInfo
   /**
-   * 容器访问凭证名称
+   * <p>容器访问凭证名称</p>
    */
   SecretName?: string
   /**
-   * 业务容器的镜像版本号
+   * <p>业务容器的镜像版本号</p>
    */
   TagName?: string
   /**
-   * 健康检查
+   * <p>健康检查</p>
    */
   HealthCheckSettings?: HealthCheckSettings
   /**
-   * 业务容器的 cpu  request
+   * <p>业务容器的 cpu  request</p>
    */
   CpuRequest?: string
   /**
-   * 业务容器的 cpu limit
+   * <p>业务容器的 cpu limit</p>
    */
   CpuLimit?: string
   /**
-   * 业务容器的 mem request
+   * <p>业务容器的 mem request</p>
    */
   MemRequest?: string
   /**
-   * 业务容器的 mem limit
+   * <p>业务容器的 mem limit</p>
    */
   MemLimit?: string
   /**
-   * 业务容器的 jvm 参数
+   * <p>业务容器的 jvm 参数</p>
    */
   JvmOpts?: string
   /**
-   * 是否为初始化容器 业务主容器不能为初始化容
+   * <p>是否为初始化容器 业务主容器不能为初始化容</p>
    */
   InitContainerEnable?: boolean
   /**
-   * 业务主容器是否为特权容器
+   * <p>业务主容器是否为特权容器</p>
    */
   PrivilegeContainerEnable?: boolean
   /**
-   * 业务主容器运行命令(转base64)
+   * <p>业务主容器运行命令(转base64)</p>
    */
   RunCommand?: string
   /**
-   * 业务主容器运行参数(转base64)
+   * <p>业务主容器运行参数(转base64)</p>
    */
   RunArg?: string
   /**
-   * 实例数量
+   * <p>实例数量</p>
    */
   InstanceNum?: number
   /**
-   * 调度策略
+   * <p>调度策略</p>
    */
   SchedulingStrategy?: SchedulingStrategy
   /**
-   * 重启策略
+   * <p>重启策略</p>
    */
   RestartPolicy?: string
   /**
-   * 服务治理配置
+   * <p>服务治理配置</p>
    */
   ServiceSpecEncode?: string
   /**
-   * istio容器的 mem Request
+   * <p>istio容器的 mem Request</p>
    */
   IstioMemRequest?: string
   /**
-   *  istio容器的 cpu Request
+   * <p>istio容器的 cpu Request</p>
    */
   IstioCpuRequest?: string
   /**
-   * istio容器的 mem Limit
+   * <p>istio容器的 mem Limit</p>
    */
   IstioMemLimit?: string
   /**
-   * istio容器的 cpu Limit
+   * <p>istio容器的 cpu Limit</p>
    */
   IstioCpuLimit?: string
   /**
-   * 服务治理配置
+   * <p>服务治理配置</p>
    */
   ServiceGovernanceConfig?: ContainerGroupServiceGovernanceConfig
   /**
-   * agent容器的 mem Request
+   * <p>agent容器的 mem Request</p>
    */
   AgentMemRequest?: string
   /**
-   * agent容器的 cpu Request
+   * <p>agent容器的 cpu Request</p>
    */
   AgentCpuRequest?: string
   /**
-   * agent容器的 mem Limit
+   * <p>agent容器的 mem Limit</p>
    */
   AgentMemLimit?: string
   /**
-   * agent容器的 cpu Limit
+   * <p>agent容器的 cpu Limit</p>
    */
   AgentCpuLimit?: string
   /**
-   * 发布策略(0表示快速更新，1表示滚动更新。默认值为0)
+   * <p>发布策略(0表示快速更新，1表示滚动更新。默认值为0)</p>
    */
   UpdateType?: number
   /**
-   * 更新间隔,单位秒
+   * <p>更新间隔,单位秒</p>
    */
   UpdateIvl?: number
   /**
-   * 对应更新策略和策略配置参数
+   * <p>对应更新策略和策略配置参数</p>
    */
   MaxSurge?: string
   /**
-   * 对应更新策略和策略配置参数
+   * <p>对应更新策略和策略配置参数</p>
    */
   MaxUnavailable?: string
   /**
-   * 预热参数配置
+   * <p>预热参数配置</p>
    */
   WarmupSetting?: WarmupSetting
   /**
-   * 配置模版ID
+   * <p>配置模版ID</p>
    */
   ConfigTemplateId?: string
   /**
-   * 配置模版Version
+   * <p>配置模版Version</p>
    */
   ConfigTemplateVersion?: number
   /**
-   * 是否清除数据卷信息
+   * <p>是否清除数据卷信息</p>
    */
   VolumeClean?: boolean
   /**
-   * 命名空间Id
+   * <p>命名空间Id</p>
    */
   NamespaceId?: string
   /**
-   * 是否部署agent容器
+   * <p>是否部署agent容器</p>
    */
   DeployAgent?: boolean
   /**
-   * javaagent信息: SERVICE_AGENT/OT_AGENT
+   * <p>javaagent信息: SERVICE_AGENT/OT_AGENT</p>
    */
   AgentProfileList?: Array<AgentProfile>
   /**
-   * 是否清除Service信息
+   * <p>是否清除Service信息</p>
    */
   ServiceClean?: boolean
   /**
-   * 是否清除Env信息
+   * <p>是否清除Env信息</p>
    */
   EnvClean?: boolean
   /**
-   * 本次部署的描述信息
+   * <p>本次部署的描述信息</p>
    */
   DeployDesc?: string
   /**
-   * k8s命名空间名称
+   * <p>k8s命名空间名称</p>
    */
   K8sNamespaceName?: string
   /**
-   * 是否启用静态IP
+   * <p>是否启用静态IP</p>
    */
   StaticIpEnabled?: boolean
   /**
-   * 启动策略[OrderedReady/Parallel]
+   * <p>启动策略[OrderedReady/Parallel]</p>
    */
   PodManagementPolicyType?: string
   /**
-   * 滚动更新分区序号
+   * <p>滚动更新分区序号</p>
    */
   Partition?: number
   /**
-   * 是否是增量部署，增量部署只运行增量覆盖一级参数，不支持对一级参数中的子参数进行增量更新，例如更新VolumeMountInfoList时必须传入VolumeMountInfoList更新后的全量参数
+   * <p>是否是增量部署，增量部署只运行增量覆盖一级参数，不支持对一级参数中的子参数进行增量更新，例如更新VolumeMountInfoList时必须传入VolumeMountInfoList更新后的全量参数</p>
    */
   IncrementalDeployment?: boolean
+  /**
+   * <p>是否不立即启动</p>
+   */
+  DoNotStart?: boolean
 }
 
 /**
