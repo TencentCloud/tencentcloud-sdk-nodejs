@@ -43,7 +43,7 @@ import {
   CreateVmInstanceRequest,
   DescribeEnvsRequest,
   ModifyUserResponse,
-  Pager,
+  ModifyProviderResponse,
   DeleteUsersResp,
   DescribeEnvLimitRequest,
   DescribeCloudBaseBuildServiceResponse,
@@ -53,7 +53,7 @@ import {
   RepairPGUserMigrationHistoryResponse,
   RepairPGUserMigrationHistoryRequest,
   AllocateEnvResponse,
-  LogResObject,
+  DescribeCloudAppListRequest,
   ModifyEnvResponse,
   Indexkey,
   ManagedAIModelGroup,
@@ -105,6 +105,7 @@ import {
   DescribeApiKeyListResponse,
   DeleteAIModelResponse,
   ExecutePGSqlResponse,
+  DescribeCreditsUsageRequest,
   ProviderRequestParametersMap,
   CreateUserResponse,
   DescribeEnvAccountCircleRequest,
@@ -121,17 +122,19 @@ import {
   MigrationInput,
   UpdateAIModelRequest,
   VMLoginConfiguration,
+  CloudAppServiceItem,
   RenewEnvRequest,
   DescribeClientResponse,
   DeleteHTTPServiceRouteResponse,
   UpdateTableResponse,
+  MigrationConflict,
   DescribeResourcePermissionResult,
   MgoKeySchema,
   UpdateAIModelResponse,
   ListPGUserMigrationsRequest,
   ModifyEnvPlanResponse,
   CreateCustomLoginKeyRequest,
-  RunSqlRequest,
+  DescribeCreditsUsageDetailResponse,
   CreateAIModelResponse,
   DescribeCreateMySQLResultRequest,
   ListPGUserMigrationsResponse,
@@ -147,7 +150,7 @@ import {
   CreateTableRequest,
   ManagedAIModelSpec,
   CreateMySQLResponse,
-  ModifyResourcePermissionRequest,
+  DescribeCloudAppListResponse,
   DeleteAuthDomainResponse,
   DeleteApiKeyRequest,
   ModifyProviderRequest,
@@ -180,6 +183,7 @@ import {
   DescribeSafeRuleResponse,
   CustomLogConfig,
   DescribeApiKeyListRequest,
+  Pager,
   MgoIndexKeys,
   DescribeStaticStoreRequest,
   HTTPServiceQPSPerClient,
@@ -209,6 +213,7 @@ import {
   CreateUserRequest,
   CreateApiKeyResponse,
   VMSpecLightHouse,
+  ModifyResourcePermissionRequest,
   DescribeMySQLTaskStatusResponse,
   TableInfo,
   AssumeRoleForAllocatedEnvRequest,
@@ -217,9 +222,12 @@ import {
   DeleteAIModelRequest,
   CreateEnvResourceResponse,
   AIModel,
+  LogResObject,
+  ExecutePGSqlRequest,
   DescribeUserListRequest,
   DescribeCurveDataRequest,
   DescribeStaticStoreResponse,
+  ValueDetail,
   DescribeResourcePermissionRequest,
   ResourcePermission,
   ModifyHTTPServiceRouteResponse,
@@ -239,12 +247,12 @@ import {
   DescribeTableRequest,
   UpdateTableRequest,
   RollbackPGUserMigrationsRequest,
-  ExternalStorage,
+  DescribeCreditsUsageDetailRequest,
   AuthDomain,
   RunSqlResponse,
   LogServiceInfo,
   DescribeClientRequest,
-  MigrationConflict,
+  ExternalStorage,
   DescribeHostingDomainTaskResponse,
   DeleteAuthDomainRequest,
   CreateHTTPServiceRouteResponse,
@@ -270,19 +278,21 @@ import {
   DescribeAuthDomainsRequest,
   DescribeVmSpecResponse,
   DescribeAIModelsRequest,
+  RunSqlRequest,
   MessageLocalized,
   WxGatewayCustomConfig,
   DescribeTableResponse,
+  MetricUsage,
   ModifyStorageSourceRequest,
   DescribeDatabaseACLRequest,
-  ExecutePGSqlRequest,
+  DescribeCreditsUsageResponse,
   DescribeDatabaseACLResponse,
   VMPrice,
   DeleteProviderRequest,
   DescribeVmSpecRequest,
   PushPGUserMigrationsResponse,
   BindStorageSourceResponse,
-  ModifyProviderResponse,
+  EnvPkgCreditsUsage,
   ModifyEnvRequest,
   DescribeManagedAIModelListRequest,
   AIModelSecret,
@@ -464,6 +474,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: CheckTcbServiceResponse) => void
   ): Promise<CheckTcbServiceResponse> {
     return this.request("CheckTcbService", req, cb)
+  }
+
+  /**
+   * 查询资源点模式下的资源点用量及原始用量明细
+   */
+  async DescribeCreditsUsageDetail(
+    req: DescribeCreditsUsageDetailRequest,
+    cb?: (error: string, rep: DescribeCreditsUsageDetailResponse) => void
+  ): Promise<DescribeCreditsUsageDetailResponse> {
+    return this.request("DescribeCreditsUsageDetail", req, cb)
   }
 
   /**
@@ -666,6 +686,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DescribeHTTPServiceRouteResponse) => void
   ): Promise<DescribeHTTPServiceRouteResponse> {
     return this.request("DescribeHTTPServiceRoute", req, cb)
+  }
+
+  /**
+   * 查询资源点模式下的资源点用量
+   */
+  async DescribeCreditsUsage(
+    req: DescribeCreditsUsageRequest,
+    cb?: (error: string, rep: DescribeCreditsUsageResponse) => void
+  ): Promise<DescribeCreditsUsageResponse> {
+    return this.request("DescribeCreditsUsage", req, cb)
   }
 
   /**
@@ -884,6 +914,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: CreateHostingDomainResponse) => void
   ): Promise<CreateHostingDomainResponse> {
     return this.request("CreateHostingDomain", req, cb)
+  }
+
+  /**
+   * 查询云应用服务列表信息
+   */
+  async DescribeCloudAppList(
+    req: DescribeCloudAppListRequest,
+    cb?: (error: string, rep: DescribeCloudAppListResponse) => void
+  ): Promise<DescribeCloudAppListResponse> {
+    return this.request("DescribeCloudAppList", req, cb)
   }
 
   /**

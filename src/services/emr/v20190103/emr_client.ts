@@ -67,6 +67,7 @@ import {
   NodeSpecDisk,
   RunJobFlowRequest,
   ScaleOutClusterRequest,
+  ServiceDeploy,
   DescribeHiveQueriesRequest,
   ResultItem,
   CreateClusterResponse,

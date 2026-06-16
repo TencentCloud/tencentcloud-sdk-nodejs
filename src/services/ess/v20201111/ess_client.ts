@@ -78,7 +78,7 @@ import {
   TemplateUserFlowType,
   ModifyIntegrationRoleRequest,
   SuccessDeleteStaffData,
-  GroupOrganization,
+  DescribeUserVerifyStatusRequest,
   FillError,
   CreateStaffResult,
   Recipient,
@@ -98,6 +98,7 @@ import {
   OutputReference,
   CreateSealResponse,
   MiniAppCreateFlowOption,
+  CreateFlowGroupRemindsRequest,
   VerifyDigitalDataSignRequest,
   IntegrationDepartment,
   DescribeIntegrationRolesResponse,
@@ -140,6 +141,7 @@ import {
   ImportContractReviewChecklistResponse,
   CreateConvertTaskApiRequest,
   OperateTemplateRequest,
+  RemindFlowGroupDetail,
   CreateBatchQuickSignUrlResponse,
   FlowCreateApprover,
   CreateArchiveFlowTaskRequest,
@@ -216,6 +218,7 @@ import {
   ExtendScene,
   DescribeFileCounterSignResultResponse,
   Component,
+  CreateFlowGroupRemindsResponse,
   CreateBatchSignUrlRequest,
   CreateBatchInformationExtractionTaskResponse,
   FlowGroupApprovers,
@@ -325,6 +328,7 @@ import {
   CreateFlowSignReviewResponse,
   RenewAutoSignLicenseRequest,
   FilledComponent,
+  RemindFlowGroupRecord,
   CreateWebThemeConfigRequest,
   CreateEmployeeQualificationSealQrCodeResponse,
   CreateUserVerifyUrlResponse,
@@ -415,7 +419,7 @@ import {
   ImportContractReviewChecklistRequest,
   CreateMiniAppPrepareFlowRequest,
   CreateIntegrationDepartmentRequest,
-  DescribeUserVerifyStatusRequest,
+  GroupOrganization,
   AuthorizedUser,
   Intention,
   CreateFlowBlockchainEvidenceUrlResponse,
@@ -532,6 +536,24 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeContractReviewChecklistResponse) => void
   ): Promise<DescribeContractReviewChecklistResponse> {
     return this.request("DescribeContractReviewChecklist", req, cb)
+  }
+
+  /**
+     * 创建一个用于更新他方自动签授权的链接（可选择他方授权或我方授权）。通过这个链接，合作方企业可以直接进入小程序，进行自动签授权的更新（更新印章）操作。
+
+如果授权企业尚未开通企业自动签功能，该链接还将引导他们首先开通本企业的自动签服务
+
+注: 
+1. <font color='red'>所在企业的超管、法人才有权限调用此接口</font>(Operator.UserId 需要传递超管或者法人的UserId)
+2. 只能更新授权的印章，被授权的企业无法更新
+3. 授权企业和被授权企业必须都是已认证企业
+4. <font color='red'>需要授权企业或被授权企业的超管或者法人打开链接</font>走开通逻辑。
+     */
+  async ModifyPartnerAutoSignAuthUrl(
+    req: ModifyPartnerAutoSignAuthUrlRequest,
+    cb?: (error: string, rep: ModifyPartnerAutoSignAuthUrlResponse) => void
+  ): Promise<ModifyPartnerAutoSignAuthUrlResponse> {
+    return this.request("ModifyPartnerAutoSignAuthUrl", req, cb)
   }
 
   /**
@@ -2254,21 +2276,39 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 创建一个用于更新他方自动签授权的链接（可选择他方授权或我方授权）。通过这个链接，合作方企业可以直接进入小程序，进行自动签授权的更新（更新印章）操作。
+     * 指定需要批量催办的合同组签署流程ID，按合同组维度进行催办
+##### 需要符合以下条件的合同才可被催办：
+<ol>
+<li>发起合同时，**设置了经办人通知方式**</li>
+<li>子合同中当前状态为 **待签署、待填写** 的签署人是催办的对象</li>
+<li>**每个合同的每个签署方最多3次*</li>
+</ol>
 
-如果授权企业尚未开通企业自动签功能，该链接还将引导他们首先开通本企业的自动签服务
+**注意**
+- 催办结果会以签署方维度列出（不同公司下的同个员工会被视为两个不同的签署方，同一人分别作为个人签署方与企业签署方也会被视为两个不同的签署方）
+- 合同组只支持短信方式催办
 
-注: 
-1. <font color='red'>所在企业的超管、法人才有权限调用此接口</font>(Operator.UserId 需要传递超管或者法人的UserId)
-2. 只能更新授权的印章，被授权的企业无法更新
-3. 授权企业和被授权企业必须都是已认证企业
-4. <font color='red'>需要授权企业或被授权企业的超管或者法人打开链接</font>走开通逻辑。
+##### 催办的效果：
+
+###### 效果
+
+
+
+
+
+<li>对方会收到如下的短信通知</li>
+
+![image](https://qcloudimg.tencent-cloud.cn/raw/3caf94b7f540fa5736270d38528d3a7b.png)
+
+
+
+注：`合同催办是白名单功能，请联系客户经理申请开白后使用`
      */
-  async ModifyPartnerAutoSignAuthUrl(
-    req: ModifyPartnerAutoSignAuthUrlRequest,
-    cb?: (error: string, rep: ModifyPartnerAutoSignAuthUrlResponse) => void
-  ): Promise<ModifyPartnerAutoSignAuthUrlResponse> {
-    return this.request("ModifyPartnerAutoSignAuthUrl", req, cb)
+  async CreateFlowGroupReminds(
+    req: CreateFlowGroupRemindsRequest,
+    cb?: (error: string, rep: CreateFlowGroupRemindsResponse) => void
+  ): Promise<CreateFlowGroupRemindsResponse> {
+    return this.request("CreateFlowGroupReminds", req, cb)
   }
 
   /**

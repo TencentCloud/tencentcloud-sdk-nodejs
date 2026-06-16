@@ -148,6 +148,16 @@ it("tcb.v20180608.CheckTcbService", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeCreditsUsageDetail", async function () {
+    try {
+       const data = await client.DescribeCreditsUsageDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.AddProvider", async function () {
     try {
        const data = await client.AddProvider({})
@@ -321,6 +331,16 @@ it("tcb.v20180608.DeleteAuthDomain", async function () {
 it("tcb.v20180608.DescribeHTTPServiceRoute", async function () {
     try {
        const data = await client.DescribeHTTPServiceRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeCreditsUsage", async function () {
+    try {
+       const data = await client.DescribeCreditsUsage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -511,6 +531,16 @@ it("tcb.v20180608.DescribeManagedAIModelList", async function () {
 it("tcb.v20180608.CreateHostingDomain", async function () {
     try {
        const data = await client.CreateHostingDomain({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeCloudAppList", async function () {
+    try {
+       const data = await client.DescribeCloudAppList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

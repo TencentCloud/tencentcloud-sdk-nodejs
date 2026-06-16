@@ -653,24 +653,13 @@ export interface ModifyUserResponse {
 }
 
 /**
- * 分页信息
+ * ModifyProvider返回参数结构体
  */
-export interface Pager {
+export interface ModifyProviderResponse {
   /**
-   * 分页偏移量
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: number
-  /**
-   * 每页返回记录数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Limit?: number
-  /**
-   * 文档集合总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Total?: number
+  RequestId?: string
 }
 
 /**
@@ -883,25 +872,29 @@ export interface AllocateEnvResponse {
 }
 
 /**
- * CLS日志结果
+ * DescribeCloudAppList请求参数结构体
  */
-export interface LogResObject {
+export interface DescribeCloudAppListRequest {
   /**
-   * 获取更多检索结果的游标
+   * <p>环境ID</p>
    */
-  Context?: string
+  EnvId: string
   /**
-   * 搜索结果是否已经全部返回
+   * <p>部署类型</p>
    */
-  ListOver?: boolean
+  DeployType: string
   /**
-   * 日志内容信息
+   * <p>搜索关键字</p>
    */
-  Results?: Array<LogObject>
+  SearchKey?: string
   /**
-   * 日志聚合结果
+   * <p>页大小</p>
    */
-  AnalysisRecords?: Array<string>
+  PageSize?: number
+  /**
+   * <p>页号</p>
+   */
+  PageNo?: number
 }
 
 /**
@@ -2155,6 +2148,24 @@ export interface ExecutePGSqlResponse {
 }
 
 /**
+ * DescribeCreditsUsage请求参数结构体
+ */
+export interface DescribeCreditsUsageRequest {
+  /**
+   * <p>开始日期</p>
+   */
+  StartDate: string
+  /**
+   * <p>结束日期</p>
+   */
+  EndDate: string
+  /**
+   * <p>环境id</p>
+   */
+  EnvId: string
+}
+
+/**
  * 三方认证入参映射。如果您的对接方不标准，则可以使用这个参数。默认情况下，该参数可以为空。比如：github,google,apple 接入，这些参数为空，但是国内的腾讯，新浪等则需要配置该参数。原因主要是：腾讯等公司在实现oauth时，未能完全遵循oauth标准。
  */
 export interface ProviderRequestParametersMap {
@@ -2522,6 +2533,48 @@ export interface VMLoginConfiguration {
 }
 
 /**
+ * 部署服务信息
+ */
+export interface CloudAppServiceItem {
+  /**
+   * 服务名
+   */
+  ServiceName?: string
+  /**
+   * 框架名
+   */
+  Framework?: string
+  /**
+   * 域名
+   */
+  Domain?: string
+  /**
+   * 应用路径
+   */
+  AppPath?: string
+  /**
+   * 服务创建时间
+   */
+  CreateTime?: string
+  /**
+   * 最新版本名
+   */
+  LatestVersionName?: string
+  /**
+   * 最新版本状态
+   */
+  LatestStatus?: string
+  /**
+   * 最新版本构建时间
+   */
+  LatestBuildTime?: string
+  /**
+   * 部署类型
+   */
+  DeployType?: string
+}
+
+/**
  * RenewEnv请求参数结构体
  */
 export interface RenewEnvRequest {
@@ -2597,6 +2650,40 @@ export interface UpdateTableResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * migration 执行计划冲突项
+ */
+export interface MigrationConflict {
+  /**
+   * <p>migration 版本号</p><p>参数格式：纯数字，14位时间格式</p>
+   */
+  Version?: string
+  /**
+   * <p>migration 版本名</p><p>参数格式：仅允许小写字母和下划线</p>
+   */
+  Name?: string
+  /**
+   * <p>数据库已应用migration的版本名</p><p>参数格式：仅允许小写字母和下划线</p>
+   */
+  RemoteName?: string
+  /**
+   * <p>本次sql计算出来的checksum</p>
+   */
+  LocalChecksum?: string
+  /**
+   * <p>已应用的migration，数据库存储的checksum</p>
+   */
+  RemoteChecksum?: string
+  /**
+   * <p>归入该分组的原因</p>
+   */
+  Reason?: string
+  /**
+   * <p>冲突信息</p>
+   */
+  Message?: string
 }
 
 /**
@@ -2684,25 +2771,17 @@ export interface CreateCustomLoginKeyRequest {
 }
 
 /**
- * RunSql请求参数结构体
+ * DescribeCreditsUsageDetail返回参数结构体
  */
-export interface RunSqlRequest {
+export interface DescribeCreditsUsageDetailResponse {
   /**
-   * 要执行的SQL语句
+   * <p>用量数据</p>
    */
-  Sql: string
+  Usages?: Array<EnvPkgCreditsUsage>
   /**
-   * 云开发环境ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EnvId: string
-  /**
-   * 数据库连接器实例信息
-   */
-  DbInstance?: DbInstance
-  /**
-   * 是否只读；当 `true` 时仅允许以 `SELECT/WITH/SHOW/DESCRIBE/DESC/EXPLAIN` 开头的 SQL
-   */
-  ReadOnly?: boolean
+  RequestId?: string
 }
 
 /**
@@ -2970,29 +3049,21 @@ export interface CreateMySQLResponse {
 }
 
 /**
- * ModifyResourcePermission请求参数结构体
+ * DescribeCloudAppList返回参数结构体
  */
-export interface ModifyResourcePermissionRequest {
+export interface DescribeCloudAppListResponse {
   /**
-   * 环境 ID
+   * <p>服务列表</p>
    */
-  EnvId: string
+  ServiceList?: Array<CloudAppServiceItem>
   /**
-   * 资源类型：`function`-云函数、`storage`-云存储、`table`-SQL型数据库表、`collection`-文档型数据库表。
+   * <p>总数</p>
    */
-  ResourceType: string
+  Total?: number
   /**
-   * 权限级别。可选值：- SQL型数据库表：`READONLY`-读取全部数据，修改本人数据；`PRIVATE`-读取和修改本人数据；`ADMINWRITE`-读取全部数据，不可修改数据；`ADMINONLY`-无权限 。- 文档型数据库表：`READONLY`-读取全部数据，修改本人数据；`PRIVATE`-读取和修改本人数据；`ADMINWRITE`-读取全部数据，不可修改数据；`ADMINONLY`-无权限；`CUSTOM`-自定义安全规则 。- 云函数：`CUSTOM`-自定义安全规则 。- 云存储（权限标签）：`READONLY`-所有用户可读，仅创建者和管理员可写；`PRIVATE`-仅创建者及管理员可读写；`ADMINWRITE`-所有用户可读，仅管理员可写；`ADMINONLY`-仅管理员可读写；`CUSTOM`-自定义安全规则。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Permission: string
-  /**
-   * 资源标识。云函数可不传、云存储传存储桶名、数据库表传表名。
-   */
-  Resource?: string
-  /**
-   * 自定义安全规则配置，当Permission为 `CUSTOM`时必传。JSON字符串格式的规则表达式。配置参考：[云函数安全规则](https://docs.cloudbase.net/cloud-function/security-rules)、[云存储安全规则](https://docs.cloudbase.net/storage/security-rules)、[文档型数据库安全规则](https://docs.cloudbase.net/database/security-rules)。
-   */
-  SecurityRule?: string
+  RequestId?: string
 }
 
 /**
@@ -3859,6 +3930,27 @@ export interface DescribeApiKeyListRequest {
 }
 
 /**
+ * 分页信息
+ */
+export interface Pager {
+  /**
+   * 分页偏移量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Offset?: number
+  /**
+   * 每页返回记录数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Limit?: number
+  /**
+   * 文档集合总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+}
+
+/**
  * 本类型用于UpdateTable接口中描述待创建索引信息
  */
 export interface MgoIndexKeys {
@@ -4566,6 +4658,32 @@ export interface VMSpecLightHouse {
 }
 
 /**
+ * ModifyResourcePermission请求参数结构体
+ */
+export interface ModifyResourcePermissionRequest {
+  /**
+   * 环境 ID
+   */
+  EnvId: string
+  /**
+   * 资源类型：`function`-云函数、`storage`-云存储、`table`-SQL型数据库表、`collection`-文档型数据库表。
+   */
+  ResourceType: string
+  /**
+   * 权限级别。可选值：- SQL型数据库表：`READONLY`-读取全部数据，修改本人数据；`PRIVATE`-读取和修改本人数据；`ADMINWRITE`-读取全部数据，不可修改数据；`ADMINONLY`-无权限 。- 文档型数据库表：`READONLY`-读取全部数据，修改本人数据；`PRIVATE`-读取和修改本人数据；`ADMINWRITE`-读取全部数据，不可修改数据；`ADMINONLY`-无权限；`CUSTOM`-自定义安全规则 。- 云函数：`CUSTOM`-自定义安全规则 。- 云存储（权限标签）：`READONLY`-所有用户可读，仅创建者和管理员可写；`PRIVATE`-仅创建者及管理员可读写；`ADMINWRITE`-所有用户可读，仅管理员可写；`ADMINONLY`-仅管理员可读写；`CUSTOM`-自定义安全规则。
+   */
+  Permission: string
+  /**
+   * 资源标识。云函数可不传、云存储传存储桶名、数据库表传表名。
+   */
+  Resource?: string
+  /**
+   * 自定义安全规则配置，当Permission为 `CUSTOM`时必传。JSON字符串格式的规则表达式。配置参考：[云函数安全规则](https://docs.cloudbase.net/cloud-function/security-rules)、[云存储安全规则](https://docs.cloudbase.net/storage/security-rules)、[文档型数据库安全规则](https://docs.cloudbase.net/database/security-rules)。
+   */
+  SecurityRule?: string
+}
+
+/**
  * DescribeMySQLTaskStatus返回参数结构体
  */
 export interface DescribeMySQLTaskStatusResponse {
@@ -4737,6 +4855,46 @@ export interface AIModel {
 }
 
 /**
+ * CLS日志结果
+ */
+export interface LogResObject {
+  /**
+   * 获取更多检索结果的游标
+   */
+  Context?: string
+  /**
+   * 搜索结果是否已经全部返回
+   */
+  ListOver?: boolean
+  /**
+   * 日志内容信息
+   */
+  Results?: Array<LogObject>
+  /**
+   * 日志聚合结果
+   */
+  AnalysisRecords?: Array<string>
+}
+
+/**
+ * ExecutePGSql请求参数结构体
+ */
+export interface ExecutePGSqlRequest {
+  /**
+   * <p>云开发环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>要执行的SQL语句</p>
+   */
+  Sql: string
+  /**
+   * <p>指定 role 执行 SQL</p>
+   */
+  Role?: string
+}
+
+/**
  * DescribeUserList请求参数结构体
  */
 export interface DescribeUserListRequest {
@@ -4829,6 +4987,36 @@ export interface DescribeStaticStoreResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 资源用量明细结构
+ */
+export interface ValueDetail {
+  /**
+   * <p>时间</p>
+   */
+  CalcTime?: string
+  /**
+   * <p>原始资源用量</p>
+   */
+  RawValue?: number
+  /**
+   * <p>资源点用量</p>
+   */
+  CreditsValue?: number
+  /**
+   * <p>资源点套餐内用量</p>
+   */
+  DeductValue?: number
+  /**
+   * <p>资源点资源包用量</p>
+   */
+  PackageDeductValue?: number
+  /**
+   * <p>资源点按量用量</p>
+   */
+  ReportValue?: number
 }
 
 /**
@@ -5238,32 +5426,29 @@ export interface RollbackPGUserMigrationsRequest {
 }
 
 /**
- * 外部存储。
-标识该存储介质，并非由云开发CloudBase创建，而是绑定的其他存储介质。
-目前仅支持 [腾讯云-对象存储](https://cloud.tencent.com/document/product/436)。
+ * DescribeCreditsUsageDetail请求参数结构体
  */
-export interface ExternalStorage {
+export interface DescribeCreditsUsageDetailRequest {
   /**
-   * 桶名。
-当 Provider=cos 时，表示腾讯云对象存储桶。
+   * <p>模块列表</p><p>枚举值：</p><ul><li>FLEXDB： 文档数据库</li><li>TDSQL： MYSQL数据库</li><li>SCF： 云函数</li><li>AI： 大模型</li><li>EKS： 云托管</li><li>COS： 云存储</li><li>HOSTING： 静态托管</li><li>Auth： 用户权限</li><li>APIInvocation： API调用</li><li>HTTPInvocation： HTTP调用</li><li>VM： 主机</li><li>Workflow： 工作流</li><li>Other： 其他</li><li>PostgreSQL： PostgreSQL</li><li>Token： Token</li></ul>
    */
-  BucketName: string
+  Modules: Array<string>
   /**
-   * Bucket所属地域。
-当 Provider=cos 时，表示腾讯云对象存储桶的所属地域。
+   * <p>开始日期</p>
    */
-  Region: string
+  StartDate: string
   /**
-   * 基础路径。
-绑定之后，用户访问云存储内的文件，后台会自动以BasePath作为前缀，拼接到所访问的文件中。
-例如：
-  BasePath=my-cloudbase-path ， 当用户访问云存储内的 /tencentcloud.png 时，实际访问的完整路径是：/my-cloudbase-path/tencentcloud.png
+   * <p>结束日期</p>
    */
-  BasePath: string
+  EndDate: string
   /**
-   * 是否启用外部存储
+   * <p>是否需要每日用量明细</p>
    */
-  Enabled?: boolean
+  NeedUsageDetails: boolean
+  /**
+   * <p>环境id</p>
+   */
+  EnvId: string
 }
 
 /**
@@ -5367,37 +5552,32 @@ export interface DescribeClientRequest {
 }
 
 /**
- * migration 执行计划冲突项
+ * 外部存储。
+标识该存储介质，并非由云开发CloudBase创建，而是绑定的其他存储介质。
+目前仅支持 [腾讯云-对象存储](https://cloud.tencent.com/document/product/436)。
  */
-export interface MigrationConflict {
+export interface ExternalStorage {
   /**
-   * <p>migration 版本号</p><p>参数格式：纯数字，14位时间格式</p>
+   * 桶名。
+当 Provider=cos 时，表示腾讯云对象存储桶。
    */
-  Version?: string
+  BucketName: string
   /**
-   * <p>migration 版本名</p><p>参数格式：仅允许小写字母和下划线</p>
+   * Bucket所属地域。
+当 Provider=cos 时，表示腾讯云对象存储桶的所属地域。
    */
-  Name?: string
+  Region: string
   /**
-   * <p>数据库已应用migration的版本名</p><p>参数格式：仅允许小写字母和下划线</p>
+   * 基础路径。
+绑定之后，用户访问云存储内的文件，后台会自动以BasePath作为前缀，拼接到所访问的文件中。
+例如：
+  BasePath=my-cloudbase-path ， 当用户访问云存储内的 /tencentcloud.png 时，实际访问的完整路径是：/my-cloudbase-path/tencentcloud.png
    */
-  RemoteName?: string
+  BasePath: string
   /**
-   * <p>本次sql计算出来的checksum</p>
+   * 是否启用外部存储
    */
-  LocalChecksum?: string
-  /**
-   * <p>已应用的migration，数据库存储的checksum</p>
-   */
-  RemoteChecksum?: string
-  /**
-   * <p>归入该分组的原因</p>
-   */
-  Reason?: string
-  /**
-   * <p>冲突信息</p>
-   */
-  Message?: string
+  Enabled?: boolean
 }
 
 /**
@@ -5902,6 +6082,28 @@ export interface DescribeAIModelsRequest {
 }
 
 /**
+ * RunSql请求参数结构体
+ */
+export interface RunSqlRequest {
+  /**
+   * 要执行的SQL语句
+   */
+  Sql: string
+  /**
+   * 云开发环境ID
+   */
+  EnvId: string
+  /**
+   * 数据库连接器实例信息
+   */
+  DbInstance?: DbInstance
+  /**
+   * 是否只读；当 `true` 时仅允许以 `SELECT/WITH/SHOW/DESCRIBE/DESC/EXPLAIN` 开头的 SQL
+   */
+  ReadOnly?: boolean
+}
+
+/**
  * 多语言文字，在 Locale 中 展示的 Message
  */
 export interface MessageLocalized {
@@ -5960,6 +6162,52 @@ export interface DescribeTableResponse {
 }
 
 /**
+ * 指标用量明细
+ */
+export interface MetricUsage {
+  /**
+   * <p>指标名称</p>
+   */
+  MetricName?: string
+  /**
+   * <p>资源类型</p>
+   */
+  ResourceType?: string
+  /**
+   * <p>原始资源用量</p>
+   */
+  Value?: number
+  /**
+   * <p>资源点用量</p>
+   */
+  CreditsValue?: number
+  /**
+   * <p>计费周期类型，取值为hourly/daily</p>
+   */
+  BillingCycleType?: string
+  /**
+   * <p>原始资源用量单位</p>
+   */
+  Unit?: string
+  /**
+   * <p>原始资源用量明细</p>
+   */
+  ValueDetailList?: Array<ValueDetail>
+  /**
+   * <p>资源点套餐内用量</p>
+   */
+  DeductValue?: number
+  /**
+   * <p>资源点资源包用量</p>
+   */
+  PackageDeductValue?: number
+  /**
+   * <p>资源点按量用量</p>
+   */
+  ReportValue?: number
+}
+
+/**
  * ModifyStorageSource请求参数结构体
  */
 export interface ModifyStorageSourceRequest {
@@ -5988,21 +6236,29 @@ export interface DescribeDatabaseACLRequest {
 }
 
 /**
- * ExecutePGSql请求参数结构体
+ * DescribeCreditsUsage返回参数结构体
  */
-export interface ExecutePGSqlRequest {
+export interface DescribeCreditsUsageResponse {
   /**
-   * <p>云开发环境ID</p>
+   * <p>资源点套餐内用量</p>
    */
-  EnvId: string
+  DeductValue?: number
   /**
-   * <p>要执行的SQL语句</p>
+   * <p>资源点资源包用量</p>
    */
-  Sql: string
+  PackageDeductValue?: number
   /**
-   * <p>指定 role 执行 SQL</p>
+   * <p>资源点按量用量</p>
    */
-  Role?: string
+  ReportValue?: number
+  /**
+   * <p>历史周期资源点用量</p>
+   */
+  HistoryDeducted?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6104,13 +6360,37 @@ export interface BindStorageSourceResponse {
 }
 
 /**
- * ModifyProvider返回参数结构体
+ * 模块内资源点用量及原始用量数据结构
  */
-export interface ModifyProviderResponse {
+export interface EnvPkgCreditsUsage {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>环境id</p>
    */
-  RequestId?: string
+  EnvId?: string
+  /**
+   * <p>模块</p>
+   */
+  Module?: string
+  /**
+   * <p>module总资源点用量</p>
+   */
+  CreditsValue?: number
+  /**
+   * <p>指标用量明细</p>
+   */
+  MetricUsageDetail?: Array<MetricUsage>
+  /**
+   * <p>资源点套餐内用量</p>
+   */
+  DeductValue?: number
+  /**
+   * <p>资源点资源包用量</p>
+   */
+  PackageDeductValue?: number
+  /**
+   * <p>资源点按量用量</p>
+   */
+  ReportValue?: number
 }
 
 /**

@@ -2329,66 +2329,31 @@ export interface SuccessDeleteStaffData {
 }
 
 /**
- * 成员企业信息
+ * DescribeUserVerifyStatus请求参数结构体
  */
-export interface GroupOrganization {
+export interface DescribeUserVerifyStatusRequest {
   /**
-   * 成员企业名
+   * 用户信息
    */
-  Name?: string
+  Operator: UserInfo
   /**
-   * 成员企业别名
+   * 姓名
    */
-  Alias?: string
+  Name: string
   /**
-   * 成员企业id，为 32 位字符串，可在电子签PC 控制台，企业设置->企业电子签账号 获取
+   * 证件号码，应符合以下规则
+<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
+<li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li>
+<li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
    */
-  OrganizationId?: string
+  IdCardNumber: string
   /**
-   * 记录更新时间， unix时间戳，单位秒
+   * 证件类型，支持以下类型
+<ul><li>ID_CARD : 中国大陆居民身份证 (默认值)</li>
+<li>HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证</li>
+<li>HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li></ul>
    */
-  UpdateTime?: number
-  /**
-   * 成员企业加入集团的当前状态
-<ul><li> **1**：待授权</li>
-<li> **2**：已授权待激活</li>
-<li> **3**：拒绝授权</li>
-<li> **4**：已解除</li>
-<li> **5**：已加入</li>
-</ul>
-
-   */
-  Status?: number
-  /**
-   * 是否为集团主企业
-   */
-  IsMainOrganization?: boolean
-  /**
-   * 企业社会信用代码
-   */
-  IdCardNumber?: string
-  /**
-   * 企业超管信息
-   */
-  AdminInfo?: Admin
-  /**
-   * 企业许可证Id，此字段暂时不需要关注
-   */
-  License?: string
-  /**
-   * 企业许可证过期时间，unix时间戳，单位秒
-   */
-  LicenseExpireTime?: number
-  /**
-   * 成员企业加入集团时间，unix时间戳，单位秒
-   */
-  JoinTime?: number
-  /**
-   * 是否使用自建审批流引擎（即不是企微审批流引擎）
-<ul><li> **true**：是</li>
-<li> **false**：否</li></ul>
-   */
-  FlowEngineEnable?: boolean
+  IdCardType: string
 }
 
 /**
@@ -2932,6 +2897,24 @@ export interface MiniAppCreateFlowOption {
 
    */
   ForbidEditFlow?: boolean
+}
+
+/**
+ * CreateFlowGroupReminds请求参数结构体
+ */
+export interface CreateFlowGroupRemindsRequest {
+  /**
+   * <p>执行本接口操作的员工信息。<br>注: <code>在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。</code></p>
+   */
+  Operator: UserInfo
+  /**
+   * <p>合同(流程)组的合同组Id</p>
+   */
+  FlowGroupId: string
+  /**
+   * <p>代理企业和员工的信息。<br>在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。</p>
+   */
+  Agent?: Agent
 }
 
 /**
@@ -4014,6 +3997,28 @@ export interface OperateTemplateRequest {
 模板复制时指定有效，若为空，则复制后模板名称为 **原模板名称_副本**。
    */
   TemplateName?: string
+}
+
+/**
+ * 催办合同组下签署人维度详细信息。
+ */
+export interface RemindFlowGroupDetail {
+  /**
+   * <p>该签署人在合同中的签署顺序</p>
+   */
+  ApproverOrder?: number
+  /**
+   * <p>签署人对应的签署id</p>
+   */
+  SignId?: string
+  /**
+   * <p>催办状态</p><p>枚举值：</p><ul><li>0： 成功</li><li>2： 无需催办</li><li>5： 超过次数限制</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>描述当前催办结果的原因</p>
+   */
+  Reason?: string
 }
 
 /**
@@ -6528,6 +6533,20 @@ ChildrenComponent结构体定义:
 <li> <b>1</b> :用户自定义</li></ul>
    */
   ChannelComponentSource?: number
+}
+
+/**
+ * CreateFlowGroupReminds返回参数结构体
+ */
+export interface CreateFlowGroupRemindsResponse {
+  /**
+   * <p>合同组催办接口返回的详细信息。</p>
+   */
+  RemindFlowGroupRecords?: Array<RemindFlowGroupRecord>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9949,6 +9968,33 @@ export interface FilledComponent {
 }
 
 /**
+ * 合同组催办接口返回的详细信息。
+ */
+export interface RemindFlowGroupRecord {
+  /**
+   * <p>对应签署人出现的合同列表</p>
+   */
+  FlowIds?: Array<string>
+  /**
+   * <p>对应签署人出现的合同名</p>
+   */
+  FlowNames?: Array<string>
+  /**
+   * <p>签署人姓名</p>
+   */
+  ApproverName?: string
+  /**
+   * <p>签署人手机号</p>
+   */
+  Mobile?: string
+  /**
+   * <p>催办合同组下签署人维度详细信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RemindMessageList?: Array<RemindFlowGroupDetail>
+}
+
+/**
  * CreateWebThemeConfig请求参数结构体
  */
 export interface CreateWebThemeConfigRequest {
@@ -12893,31 +12939,66 @@ export interface CreateIntegrationDepartmentRequest {
 }
 
 /**
- * DescribeUserVerifyStatus请求参数结构体
+ * 成员企业信息
  */
-export interface DescribeUserVerifyStatusRequest {
+export interface GroupOrganization {
   /**
-   * 用户信息
+   * 成员企业名
    */
-  Operator: UserInfo
+  Name?: string
   /**
-   * 姓名
+   * 成员企业别名
    */
-  Name: string
+  Alias?: string
   /**
-   * 证件号码，应符合以下规则
-<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
-<li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。</li>
-<li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
+   * 成员企业id，为 32 位字符串，可在电子签PC 控制台，企业设置->企业电子签账号 获取
    */
-  IdCardNumber: string
+  OrganizationId?: string
   /**
-   * 证件类型，支持以下类型
-<ul><li>ID_CARD : 中国大陆居民身份证 (默认值)</li>
-<li>HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证</li>
-<li>HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同中国大陆居民身份证)</li></ul>
+   * 记录更新时间， unix时间戳，单位秒
    */
-  IdCardType: string
+  UpdateTime?: number
+  /**
+   * 成员企业加入集团的当前状态
+<ul><li> **1**：待授权</li>
+<li> **2**：已授权待激活</li>
+<li> **3**：拒绝授权</li>
+<li> **4**：已解除</li>
+<li> **5**：已加入</li>
+</ul>
+
+   */
+  Status?: number
+  /**
+   * 是否为集团主企业
+   */
+  IsMainOrganization?: boolean
+  /**
+   * 企业社会信用代码
+   */
+  IdCardNumber?: string
+  /**
+   * 企业超管信息
+   */
+  AdminInfo?: Admin
+  /**
+   * 企业许可证Id，此字段暂时不需要关注
+   */
+  License?: string
+  /**
+   * 企业许可证过期时间，unix时间戳，单位秒
+   */
+  LicenseExpireTime?: number
+  /**
+   * 成员企业加入集团时间，unix时间戳，单位秒
+   */
+  JoinTime?: number
+  /**
+   * 是否使用自建审批流引擎（即不是企微审批流引擎）
+<ul><li> **true**：是</li>
+<li> **false**：否</li></ul>
+   */
+  FlowEngineEnable?: boolean
 }
 
 /**

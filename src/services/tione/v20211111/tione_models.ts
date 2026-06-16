@@ -20,6 +20,10 @@
  */
 export interface CreateModelServiceRequest {
   /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+  /**
    * <p>新增版本时需要填写</p>
    */
   ServiceGroupId?: string

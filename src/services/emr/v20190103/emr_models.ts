@@ -1641,6 +1641,20 @@ export interface ScaleOutClusterRequest {
 }
 
 /**
+ * 节点部署配置信息，给tf侧同学使用
+ */
+export interface ServiceDeploy {
+  /**
+   * <p>组件名称</p>
+   */
+  SoftwareName?: string
+  /**
+   * <p>组件下角色名称</p>
+   */
+  Roles?: Array<string>
+}
+
+/**
  * DescribeHiveQueries请求参数结构体
  */
 export interface DescribeHiveQueriesRequest {
@@ -10124,29 +10138,33 @@ export interface NodeSpecInstanceType {
  */
 export interface NodeResourceSpec {
   /**
-   * 规格类型，如S2.MEDIUM8
+   * <p>规格类型，如S2.MEDIUM8</p>
    */
   InstanceType: string
   /**
-   * 系统盘，系统盘个数不超过1块
+   * <p>系统盘，系统盘个数不超过1块</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SystemDisk: Array<DiskSpecInfo>
   /**
-   * 需要绑定的标签列表
+   * <p>需要绑定的标签列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
-   * 云数据盘，云数据盘总个数不超过15块
+   * <p>云数据盘，云数据盘总个数不超过15块</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataDisk?: Array<DiskSpecInfo>
   /**
-   * 本地数据盘
+   * <p>本地数据盘</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LocalDataDisk?: Array<DiskSpecInfo>
+  /**
+   * <p>节点配置信息，目前仅提供给terraform平台校验参数使用</p>
+   */
+  SoftwareConfig?: Array<ServiceDeploy>
 }
 
 /**
