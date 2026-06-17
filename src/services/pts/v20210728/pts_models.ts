@@ -1482,11 +1482,11 @@ export interface UpdateFileScenarioRelationRequest {
  */
 export interface ScenarioWithJobs {
   /**
-   * scecario结果
+   * <p>Scenario结果</p>
    */
   Scenario?: Scenario
   /**
-   * job结果
+   * <p>job结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Jobs?: Array<Job>

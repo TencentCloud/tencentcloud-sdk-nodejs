@@ -182,11 +182,11 @@ export interface DescribePolicyGroupInfoCallback {
  */
 export interface ModifyGrafanaInstanceRequest {
   /**
-   * Grafana 实例 ID，例如：grafana-abcdefgh
+   * <p>Grafana 实例 ID，例如：grafana-abcdefgh</p>
    */
   InstanceId: string
   /**
-   * Grafana 实例名称，例如：test
+   * <p>Grafana 实例名称，例如：test</p>
    */
   InstanceName: string
 }
@@ -735,7 +735,7 @@ export interface ModifyConditionsTemplateRequestCondition {
  */
 export interface DescribeGrafanaIntegrationsResponse {
   /**
-   * 集成数组
+   * <p>集成数组</p>
    */
   IntegrationSet: Array<GrafanaIntegrationConfig>
   /**
@@ -2167,7 +2167,7 @@ export interface DeletePrometheusTempSyncResponse {
  */
 export interface DescribeDNSConfigRequest {
   /**
-   * Grafana 实例 ID，例如：grafana-abcdefgh
+   * <p>Grafana 实例 ID，例如：grafana-abcdefgh</p>
    */
   InstanceId: string
 }
@@ -2503,27 +2503,27 @@ export interface PolicyGroupReceiverInfo {
  */
 export interface CreateGrafanaNotificationChannelRequest {
   /**
-   * Grafana 实例 ID，例如：grafana-abcdefgh
+   * <p>Grafana 实例 ID，例如：grafana-abcdefgh</p>
    */
   InstanceId: string
   /**
-   * 告警通道名称，例如：test
+   * <p>告警通道名称，例如：my-channel</p>
    */
   ChannelName: string
   /**
-   * 接受告警通道 ID 数组，值为告警管理/基础配置/通知模板中的模板 ID
+   * <p>接受告警通道 ID 数组，值为告警管理/基础配置/通知模板中的模板 ID</p>
    */
   Receivers: Array<string>
   /**
-   * 默认为1，建议使用 OrganizationIds
+   * <p>默认为1，建议使用 OrganizationIds</p>
    */
   OrgId?: number
   /**
-   * 额外组织 ID 数组，已废弃，请使用 OrganizationIds
+   * <p>额外组织 ID 数组，已废弃，请使用 OrganizationIds</p>
    */
   ExtraOrgIds?: Array<string>
   /**
-   * 生效的所有组织 ID 数组，默认为 ["1"]
+   * <p>生效的所有组织 ID 数组，默认为 [&quot;1&quot;]</p>
    */
   OrganizationIds?: Array<string>
 }
@@ -2946,7 +2946,7 @@ export interface CreateRecordingRuleResponse {
  */
 export interface CreateGrafanaNotificationChannelResponse {
   /**
-   * 通道 ID
+   * <p>通道 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ChannelId?: string
@@ -2961,27 +2961,27 @@ export interface CreateGrafanaNotificationChannelResponse {
  */
 export interface DescribeGrafanaNotificationChannelsRequest {
   /**
-   * Grafana 实例 ID，例如：grafana-12345678
+   * <p>Grafana 实例 ID，例如：grafana-12345678</p>
    */
   InstanceId: string
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset: number
   /**
-   * 查询数量
+   * <p>查询数量</p>
    */
   Limit: number
   /**
-   * 告警通道名称，例如：test
+   * <p>告警通道名称，例如：test</p>
    */
   ChannelName?: string
   /**
-   * 告警通道 ID，例如：nchannel-abcd1234
+   * <p>告警通道 ID，例如：nchannel-abcd1234</p>
    */
   ChannelIDs?: Array<string>
   /**
-   * 告警通道状态
+   * <p>告警通道状态</p>
    */
   ChannelState?: number
 }
@@ -3057,11 +3057,11 @@ export interface OnCallForm {
  */
 export interface DescribeSSOAccountRequest {
   /**
-   * Grafana 实例 ID，例如：grafana-abcdefgh
+   * <p>Grafana 实例 ID，例如：grafana-abcdefgh</p>
    */
   InstanceId: string
   /**
-   * 填写对应的账号 ID，将会按账号 ID 进行过滤，例如：10000
+   * <p>填写对应的账号 ID，将会按账号 ID 进行过滤，例如：10000</p>
    */
   UserId?: string
 }
@@ -3224,27 +3224,27 @@ export interface AlarmPolicyCondition {
  */
 export interface DescribeGrafanaChannelsRequest {
   /**
-   * Grafana 实例 ID，例如：grafana-12345678
+   * <p>Grafana 实例 ID，例如：grafana-12345678</p>
    */
   InstanceId: string
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset: number
   /**
-   * 查询数量
+   * <p>查询数量</p>
    */
   Limit: number
   /**
-   * 告警通道名称，例如：test
+   * <p>告警通道名称，例如：test</p>
    */
   ChannelName?: string
   /**
-   * 告警通道 ID，例如：nchannel-abcd1234
+   * <p>告警通道 ID，例如：nchannel-abcd1234</p>
    */
   ChannelIds?: Array<string>
   /**
-   * 告警通道状态(不用填写，目前只有可用和删除状态，默认只能查询可用的告警通道)
+   * <p>告警通道状态(不用填写，目前只有可用和删除状态，默认只能查询可用的告警通道)</p>
    */
   ChannelState?: number
 }
@@ -4467,7 +4467,7 @@ export interface ModifyAlarmNoticeRequest {
  */
 export interface DescribeGrafanaWhiteListResponse {
   /**
-   * 数组
+   * <p>数组</p>
    */
   WhiteList?: Array<string>
   /**
@@ -5367,7 +5367,7 @@ export interface DescribeAlarmMetricsResponse {
  */
 export interface DescribeGrafanaWhiteListRequest {
   /**
-   * Grafana 实例 ID，例如：grafana-abcdefgh
+   * <p>Grafana 实例 ID，例如：grafana-abcdefgh</p>
    */
   InstanceId: string
 }
@@ -5490,7 +5490,7 @@ export interface DeleteAlarmNoticesRequest {
  */
 export interface DescribeGrafanaNotificationChannelsResponse {
   /**
-   * 告警通道数组
+   * <p>告警通道数组</p>
    */
   NotificationChannelSet?: Array<GrafanaNotificationChannel>
   /**
@@ -5619,7 +5619,7 @@ export interface DeletePrometheusClusterAgentResponse {
  */
 export interface DescribeDNSConfigResponse {
   /**
-   * DNS 服务器数组
+   * <p>DNS 服务器数组</p>
    */
   NameServers?: Array<string>
   /**
@@ -6206,11 +6206,11 @@ export interface CreatePolicyGroupEventCondition {
  */
 export interface GrafanaPlugin {
   /**
-   * Grafana 插件 ID
+   * <p>Grafana 插件 ID</p>
    */
   PluginId: string
   /**
-   * Grafana 插件版本
+   * <p>Grafana 插件版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Version: string
@@ -7029,27 +7029,27 @@ export interface RoutePrometheusDynamicAPIResponse {
  */
 export interface GrafanaChannel {
   /**
-   * 渠道 ID
+   * <p>渠道 ID</p>
    */
   ChannelId: string
   /**
-   * 渠道名
+   * <p>渠道名</p>
    */
   ChannelName: string
   /**
-   * 告警通道模板 ID 数组
+   * <p>告警通道模板 ID 数组</p>
    */
   Receivers: Array<string>
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreatedAt: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdatedAt: string
   /**
-   * 告警渠道的所有生效组织
+   * <p>告警渠道的所有生效组织</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OrganizationIds: Array<string>
@@ -7090,10 +7090,10 @@ export interface CreatePrometheusConfigRequest {
  */
 export interface DescribeSSOAccountResponse {
   /**
-   * 授权账号列表
+   * <p>授权账号列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AccountSet: Array<GrafanaAccountInfo>
+  AccountSet?: Array<GrafanaAccountInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7123,11 +7123,11 @@ export interface CreateAlarmPolicyResponse {
  */
 export interface DeleteGrafanaNotificationChannelRequest {
   /**
-   * 通道 ID 数组。例如：nchannel-abcd1234，通过 DescribeGrafanaChannels 获取
+   * <p>通道 ID 数组。例如：nchannel-abcd1234，通过 DescribeGrafanaChannels 获取</p>
    */
   ChannelIDs: Array<string>
   /**
-   * Grafana 实例 ID，例如：grafana-abcdefgh
+   * <p>Grafana 实例 ID，例如：grafana-abcdefgh</p>
    */
   InstanceId: string
 }
@@ -7543,19 +7543,19 @@ export interface DescribeAlarmMetricsRequest {
  */
 export interface CreateSSOAccountRequest {
   /**
-   * Grafana 实例 ID，例如：grafana-abcdefgh
+   * <p>Grafana 实例 ID，例如：grafana-abcdefgh</p>
    */
   InstanceId: string
   /**
-   * 用户账号 ID ，例如：10000000
+   * <p>用户账号 ID ，例如：10000000</p>
    */
   UserId: string
   /**
-   * 权限(只取数组中的第一个，其中 Organization 暂未使用，可不填)
+   * <p>权限(只取数组中的第一个，其中 Organization 暂未使用，可不填)</p>
    */
   Role: Array<GrafanaAccountRole>
   /**
-   * 备注
+   * <p>备注</p>
    */
   Notes?: string
 }
@@ -7670,7 +7670,7 @@ export interface CleanGrafanaInstanceResponse {
  */
 export interface DescribeGrafanaChannelsResponse {
   /**
-   * 告警通道数组
+   * <p>告警通道数组</p>
    */
   NotificationChannelSet?: Array<GrafanaChannel>
   /**
@@ -8789,11 +8789,11 @@ export interface PrometheusClusterScrapeStatistics {
  */
 export interface UpdateGrafanaConfigRequest {
   /**
-   * 实例 ID
+   * <p>实例 ID</p>
    */
   InstanceId: string
   /**
-   * JSON 编码后的字符串，如 "{"server":{"root_url":"http://custom.domain"}}"
+   * <p>JSON 编码后的字符串，如 &quot;{&quot;server&quot;:{&quot;root_url&quot;:&quot;http://custom.domain&quot;}}&quot;</p>
    */
   Config: string
 }
@@ -8803,15 +8803,15 @@ export interface UpdateGrafanaConfigRequest {
  */
 export interface DescribeGrafanaIntegrationsRequest {
   /**
-   * 实例 ID
+   * <p>实例 ID</p>
    */
   InstanceId: string
   /**
-   * 集成 ID
+   * <p>集成 ID</p>
    */
   IntegrationId?: string
   /**
-   * 类型
+   * <p>类型</p>
    */
   Kind?: string
 }
@@ -11650,7 +11650,7 @@ export interface UpdatePrometheusAlertGroupResponse {
  */
 export interface CreateSSOAccountResponse {
   /**
-   * 已添加的用户 UIN
+   * <p>已添加的用户 UIN</p>
    */
   UserId?: string
   /**

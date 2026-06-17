@@ -1199,7 +1199,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 列出 Grafana 所有告警通道
+   * 列出 Grafana 所有告警通道。
    */
   async DescribeGrafanaChannels(
     req: DescribeGrafanaChannelsRequest,
@@ -1528,7 +1528,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 列出当前grafana实例的所有授权账号
+   * 列出当前grafana实例的所有授权账号.
    */
   async DescribeSSOAccount(
     req: DescribeSSOAccountRequest,
@@ -1710,7 +1710,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 列出 Grafana DNS 配置
+   * 列出 Grafana DNS 配置。
    */
   async DescribeDNSConfig(
     req: DescribeDNSConfigRequest,

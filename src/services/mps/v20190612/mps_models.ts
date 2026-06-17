@@ -17578,6 +17578,20 @@ export interface OutputRISTSourceAddressResp {
 }
 
 /**
+ * DetectVideoWatermark请求参数结构体
+ */
+export interface DetectVideoWatermarkRequest {
+  /**
+   * <p>输入信息，当前仅支持 URL、COS</p>
+   */
+  InputInfo: MediaInputInfo
+  /**
+   * <p>扩展参数，默认不填</p>
+   */
+  UserExtPara?: string
+}
+
+/**
  * ModifySmartSubtitleTemplate返回参数结构体
  */
 export interface ModifySmartSubtitleTemplateResponse {
@@ -24098,6 +24112,28 @@ export interface ComposeAudioStream {
 如果不设置，服务将根据音频参数自动采用合适的码率。
    */
   Bitrate?: number
+}
+
+/**
+ * DetectVideoWatermark返回参数结构体
+ */
+export interface DetectVideoWatermarkResponse {
+  /**
+   * <p>是否存在水印的置信度</p><p>取值范围：[0, 100]</p>
+   */
+  Confidence?: number
+  /**
+   * <p>视频中是否存在水印</p>
+   */
+  HasWatermark?: boolean
+  /**
+   * <p>关于水印的一些描述性说明</p>
+   */
+  Description?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

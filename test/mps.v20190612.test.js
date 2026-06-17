@@ -588,6 +588,16 @@ it("mps.v20190612.DeleteStreamLinkOutput", async function () {
     }
 })
 
+it("mps.v20190612.DetectVideoWatermark", async function () {
+    try {
+       const data = await client.DetectVideoWatermark({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.CreateContentReviewTemplate", async function () {
     try {
        const data = await client.CreateContentReviewTemplate({})

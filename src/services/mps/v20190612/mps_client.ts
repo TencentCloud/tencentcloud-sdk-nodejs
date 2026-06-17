@@ -709,6 +709,7 @@ import {
   CreateSmartEraseTemplateResponse,
   MediaProcessTaskSampleSnapshotResult,
   OutputRISTSourceAddressResp,
+  DetectVideoWatermarkRequest,
   ModifySmartSubtitleTemplateResponse,
   UserDefineConfigureInfoForUpdate,
   S3OutputStorage,
@@ -953,6 +954,7 @@ import {
   DescribeStreamLinkFlowRequest,
   UrlInputInfo,
   ComposeAudioStream,
+  DetectVideoWatermarkResponse,
   SmartSubtitleTaskTransTextSegmentItem,
   AddOnImageInput,
   DescribeVoicesRequest,
@@ -1655,6 +1657,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteStreamLinkOutputResponse) => void
   ): Promise<DeleteStreamLinkOutputResponse> {
     return this.request("DeleteStreamLinkOutput", req, cb)
+  }
+
+  /**
+   * 快速探测视频文件是否包含水印
+   */
+  async DetectVideoWatermark(
+    req: DetectVideoWatermarkRequest,
+    cb?: (error: string, rep: DetectVideoWatermarkResponse) => void
+  ): Promise<DetectVideoWatermarkResponse> {
+    return this.request("DetectVideoWatermark", req, cb)
   }
 
   /**

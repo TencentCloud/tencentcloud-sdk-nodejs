@@ -1156,6 +1156,14 @@ export interface ApiKeyDetail {
    * 当Platform为maas时该字段为空
    */
   Creator?: string
+  /**
+   * Token 限额信息多维度列表。未配置限额时不返回该字段。
+   */
+  QuotaSet?: Array<QuotaInfo>
+  /**
+   * Token 限额状态。空字符串表示未配置任何限额包；active 表示已配置且当前可用；inactive 表示已配置但额度耗尽
+   */
+  QuotaStatus?: string
 }
 
 /**
@@ -1673,6 +1681,14 @@ export interface DescribeApiKeyResponse {
    */
   Creator?: string
   /**
+   * Token 限额多维度信息。未配置限额时不返回该字段。
+   */
+  QuotaSet?: Array<QuotaInfo>
+  /**
+   * Token 限额状态。空字符串表示未配置任何限额包；active 表示已配置且当前可用；inactive 表示已配置但额度耗尽
+   */
+  QuotaStatus?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -1782,4 +1798,38 @@ export interface DescribeTokenPlanApiKeySecretRequest {
    * API Key ID。可通过DescribeTokenPlanApiKeyList接口获取。
    */
   ApiKeyId: string
+}
+
+/**
+ * Token 限额信息
+ */
+export interface QuotaInfo {
+  /**
+   * 限额包 ID。
+   */
+  PkgId?: string
+  /**
+   * 限额包状态。取值：1（正常）、3（已耗尽）、4（已销毁）。
+   */
+  Status?: number
+  /**
+   * 限额周期。取值：d（按日）、m（按月）、lifetime（总额度，不重置）。
+   */
+  CycleUnit?: string
+  /**
+   * 维度当期限额总量（Token 数）。使用字符串避免大数精度丢失。
+   */
+  CycleCredits?: string
+  /**
+   * 维度当期已使用量（Token 数）。使用字符串避免大数精度丢失。
+   */
+  CycleUsed?: string
+  /**
+   * 限额生效起始时间。
+   */
+  StartTime?: string
+  /**
+   * 限额过期时间。
+   */
+  ExpireTime?: string
 }

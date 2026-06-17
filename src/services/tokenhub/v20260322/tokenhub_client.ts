@@ -88,6 +88,7 @@ import {
   DescribeTokenPlanApiKeyListRequest,
   UsageDetailItem,
   DescribeTokenPlanApiKeySecretRequest,
+  QuotaInfo,
 } from "./tokenhub_models"
 
 /**

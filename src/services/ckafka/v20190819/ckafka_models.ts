@@ -1384,7 +1384,7 @@ export interface CreateTopicRequest {
    */
   MinInsyncReplicas?: number
   /**
-   * <p>是否允许未同步的副本选为leader，0:不允许，1:允许，默认不允许</p>
+   * <p>是否允许未同步的副本选为leader，0:不允许，1:允许，默认取实例维度的值</p>
    */
   UncleanLeaderElectionEnable?: number
   /**
