@@ -710,6 +710,72 @@ export interface ModifyDatasourceCloudResponse {
 }
 
 /**
+ * 1
+ */
+export interface ParamCreateDTO {
+  /**
+   * 参数名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamName?: string
+  /**
+   * 默认值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultValue?: string
+  /**
+   * 参数类型，string/datetime/number
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParamType?: string
+  /**
+   * 格式化类型，yyyy-MM-dd HH:mm:ss.SSS（只有时间必填）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FormatRule?: string
+  /**
+   * 复杂类型，格式化的另一种表达，例如YYYY-MM
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ComplexType?: string
+  /**
+   * 作用域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Scope?: string
+}
+
+/**
+ * EditCorpTag返回参数结构体
+ */
+export interface EditCorpTagResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 扩展
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * 消息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: EditTagVO
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateUserRole返回参数结构体
  */
 export interface CreateUserRoleResponse {
@@ -1017,6 +1083,31 @@ export interface JoinSourceTable {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TableAlias?: string
+}
+
+/**
+ * ModifyUserTag请求参数结构体
+ */
+export interface ModifyUserTagRequest {
+  /**
+   * 用户ID
+   */
+  UserId?: string
+  /**
+   * 标签信息
+   */
+  TagList?: Array<UserTagInfo>
+}
+
+/**
+ * 创建标签表出参
+ */
+export interface CreateTagTableVO {
+  /**
+   * 标签表id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
 }
 
 /**
@@ -1336,6 +1427,36 @@ export interface UserRoleListDataRoleInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModuleCollection?: string
+}
+
+/**
+ * ModifyTagTable返回参数结构体
+ */
+export interface ModifyTagTableResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: ModifyTagTableVO
+  /**
+   * 扩展
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * 信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1798,6 +1919,16 @@ Operator 目前支持
 }
 
 /**
+ * CreateCorpTag请求参数结构体
+ */
+export interface CreateCorpTagRequest {
+  /**
+   * 标签名
+   */
+  Name?: string
+}
+
+/**
  * DescribeAuthApiKeyInfo返回参数结构体
  */
 export interface DescribeAuthApiKeyInfoResponse {
@@ -2102,6 +2233,32 @@ export interface DescribeUserGroupInfoResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 资源权限信息
+ */
+export interface ResourceDTO {
+  /**
+   * 资源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceName?: string
+  /**
+   * 是否启用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceValue?: boolean
+  /**
+   * 能否变更
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CanChange?: boolean
+  /**
+   * 提示
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tips?: string
 }
 
 /**
@@ -2459,6 +2616,36 @@ export interface DescribeUserRoleListResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateCorpTag返回参数结构体
+ */
+export interface CreateCorpTagResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 扩展
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * 消息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: DataId
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3032,6 +3219,42 @@ export interface DatasourceInfoData {
 }
 
 /**
+ * 用户标签信息
+ */
+export interface UserTagInfo {
+  /**
+   * 标签ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
+  /**
+   * 标签名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 标签值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+  /**
+   * 是否被托管
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsExternalManage?: boolean
+  /**
+   * 标签托管平台
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ManagePlatform?: string
+  /**
+   * 导入类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImportType?: string
+}
+
+/**
  * DescribePermissionRoleInfo返回参数结构体
  */
 export interface DescribePermissionRoleInfoResponse {
@@ -3387,39 +3610,51 @@ export interface ClearEmbedTokenResponse {
 }
 
 /**
- * 1
+ * CreateTagTable请求参数结构体
  */
-export interface ParamCreateDTO {
+export interface CreateTagTableRequest {
   /**
-   * 参数名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 标签表名
    */
-  ParamName?: string
+  Name?: string
   /**
-   * 默认值
-注意：此字段可能返回 null，表示取不到有效值。
+   * 标签表关联的项目id
    */
-  DefaultValue?: string
+  AutoImportProjectId?: number
   /**
-   * 参数类型，string/datetime/number
-注意：此字段可能返回 null，表示取不到有效值。
+   * 标签表关联的数据表id
    */
-  ParamType?: string
+  AutoImportTableId?: number
   /**
-   * 格式化类型，yyyy-MM-dd HH:mm:ss.SSS（只有时间必填）
-注意：此字段可能返回 null，表示取不到有效值。
+   * uin对应字段
    */
-  FormatRule?: string
+  AutoImportUinField?: string
+}
+
+/**
+ * ModifyTagTable请求参数结构体
+ */
+export interface ModifyTagTableRequest {
   /**
-   * 复杂类型，格式化的另一种表达，例如YYYY-MM
-注意：此字段可能返回 null，表示取不到有效值。
+   * 标签表名
    */
-  ComplexType?: string
+  Name?: string
   /**
-   * 作用域
-注意：此字段可能返回 null，表示取不到有效值。
+   * 标签表关联的项目id
    */
-  Scope?: string
+  AutoImportProjectId?: number
+  /**
+   * 标签表关联的数据表id
+   */
+  AutoImportTableId?: number
+  /**
+   * uin对应字段
+   */
+  AutoImportUinField?: string
+  /**
+   * 标签表id
+   */
+  Id?: number
 }
 
 /**
@@ -3652,6 +3887,17 @@ export interface CreateDatasourceCloudRequest {
    * <p>数据库版本</p>
    */
   DbVersion?: string
+}
+
+/**
+ * 创建标签表出参
+ */
+export interface ModifyTagTableVO {
+  /**
+   * 标签表id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: number
 }
 
 /**
@@ -4121,6 +4367,36 @@ export interface WidgetListVO {
 }
 
 /**
+ * ModifyUserTag返回参数结构体
+ */
+export interface ModifyUserTagResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 消息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 额外信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * 数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyDatasource返回参数结构体
  */
 export interface ModifyDatasourceResponse {
@@ -4273,6 +4549,36 @@ export interface CreateDatasourceCloudResponse {
   Extra?: string
   /**
    * <p>提示</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Msg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateTagTable返回参数结构体
+ */
+export interface CreateTagTableResponse {
+  /**
+   * 自定义错误信息对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: ErrorInfo
+  /**
+   * 数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: CreateTagTableVO
+  /**
+   * 扩展
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
+  /**
+   * 信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Msg?: string
@@ -5388,29 +5694,24 @@ export interface DatasourceInfo {
 }
 
 /**
- * 资源权限信息
+ * 同步标签数据出参
  */
-export interface ResourceDTO {
+export interface EditTagVO {
   /**
-   * 资源名称
+   * 事务id
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceName?: string
+  TranId?: string
   /**
-   * 是否启用
+   * 事务状态
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceValue?: boolean
+  TranStatus?: number
   /**
-   * 能否变更
+   * 标签信息
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CanChange?: boolean
-  /**
-   * 提示
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tips?: string
+  Id?: number
 }
 
 /**
@@ -5658,6 +5959,44 @@ INFO
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReservedField?: string
+}
+
+/**
+ * EditCorpTag请求参数结构体
+ */
+export interface EditCorpTagRequest {
+  /**
+   * 标签ID
+   */
+  Id?: number
+  /**
+   * 标签名称
+   */
+  Name?: string
+  /**
+   * 导入标签的模式(manual/auto)
+   */
+  ImportType?: string
+  /**
+   * 自动导入标签表的id
+   */
+  AutoImportTagTableId?: number
+  /**
+   * 自动导入标签的关联字段
+   */
+  AutoImportField?: string
+  /**
+   * 是否异步请求
+   */
+  AsyncRequest?: boolean
+  /**
+   * 自动导入标签表的表名
+   */
+  AutoImportTagTableName?: string
+  /**
+   * 事务id
+   */
+  TranId?: string
 }
 
 /**

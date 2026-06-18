@@ -164,48 +164,6 @@ export interface ListSubTasksRequest {
 }
 
 /**
- * 查询网关监控信息返回结果
- */
-export interface DescribeGatewayMonitor {
-  /**
-   * 设备接入总数
-   */
-  DeviceTotal?: number
-  /**
-   * 设备在线数
-   */
-  DeviceOnline?: number
-  /**
-   * 设备离线数
-   */
-  DeviceOffline?: number
-  /**
-   * 视频通道总数
-   */
-  ChannelTotal?: number
-  /**
-   * 视频通道在线数
-   */
-  ChannelOnline?: number
-  /**
-   * 视频通道离线数
-   */
-  ChannelOffline?: number
-  /**
-   * 网关上行流量,单位kbps
-   */
-  UpFlow?: number
-  /**
-   * 流在传输中的通道数
-   */
-  ChannelPull?: number
-  /**
-   * 流未传输中的通道数
-   */
-  ChannelUnPull?: number
-}
-
-/**
  * AddRecordBackupPlan返回参数结构体
  */
 export interface AddRecordBackupPlanResponse {
@@ -273,28 +231,6 @@ export interface ControlRecordTimelineRequest {
    * 结束时间
    */
   End: number
-}
-
-/**
- * 修改录像上云模板数据结构
- */
-export interface UpdateRecordBackupTemplateModify {
-  /**
-   * 模板名称（不修改名称时，不需要带该字段）
-   */
-  TemplateName?: string
-  /**
-   * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
-   */
-  TimeSections?: Array<RecordTemplateTimeSections>
-  /**
-   * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
-   */
-  DevTimeSections?: Array<RecordTemplateTimeSections>
-  /**
-   * 上云倍速（支持1，2，4倍速）
-   */
-  Scale?: number
 }
 
 /**
@@ -570,20 +506,6 @@ export interface BatchDeleteVideoDownloadTaskRequest {
 }
 
 /**
- * ListGateways返回参数结构体
- */
-export interface ListGatewaysResponse {
-  /**
-   * 返回数据
-   */
-  Data?: ListGatewaysData
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * UpdateDeviceOrganization请求参数结构体
  */
 export interface UpdateDeviceOrganizationRequest {
@@ -777,16 +699,6 @@ export interface DescribeRecordBackupTemplateData {
 }
 
 /**
- * UpgradeGateway请求参数结构体
- */
-export interface UpgradeGatewayRequest {
-  /**
-   * 网关索引ID（从获取网关列表ListGateways接口中获取）
-   */
-  GatewayId: string
-}
-
-/**
  * ControlDeviceStream返回参数结构体
  */
 export interface ControlDeviceStreamResponse {
@@ -963,20 +875,6 @@ export interface DescribeUserDeviceListRequest {
 }
 
 /**
- * UpdateGateway返回参数结构体
- */
-export interface UpdateGatewayResponse {
-  /**
-   * 返回数据
-   */
-  Data?: UpdateGatewayData
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeRecordRetrieveTask请求参数结构体
  */
 export interface DescribeRecordRetrieveTaskRequest {
@@ -1037,13 +935,13 @@ export interface DeleteRecordTemplateRequest {
 }
 
 /**
- * DescribeGateway返回参数结构体
+ * DescribeRecordPlan返回参数结构体
  */
-export interface DescribeGatewayResponse {
+export interface DescribeRecordPlanResponse {
   /**
-   * 返回数据
+   * 返回结果
    */
-  Data?: DescribeGatewayData
+  Data?: RecordPlanBaseInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1074,23 +972,89 @@ export interface ListRecordBackupPlanDevicesData {
 }
 
 /**
- * DeleteTask返回参数结构体
+ * 查询复杂任务详情返回结果
  */
-export interface DeleteTaskResponse {
+export interface TaskData {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 任务ID
    */
-  RequestId?: string
-}
-
-/**
- * DescribeGateway请求参数结构体
- */
-export interface DescribeGatewayRequest {
+  TaskId?: string
   /**
-   * 网关索引ID（从获取网关列表接口ListGateways中获取）
+   * 任务状态1:NEW,2:RUNNING,3:COMPLETED ,4:FAILED
    */
-  GatewayId: string
+  Status?: number
+  /**
+   * 失败原因
+   */
+  FailReason?: string
+  /**
+   * 进度（0-1）
+   */
+  Progress?: number
+  /**
+   * 任务操作类型，批量任务类型以Batch开头
+   */
+  Action?: string
+  /**
+   * 操作类型中文描述
+   */
+  ActionZhDesc?: string
+  /**
+   * 任务类型 1.简单 2.复杂 3.子任务
+   */
+  TaskType?: number
+  /**
+   * 任务资源id（复杂任务该字段无效）
+   */
+  ResourceId?: string
+  /**
+   * 总任务数（仅复杂任务有效）
+   */
+  Total?: number
+  /**
+   * 成功任务数（仅复杂任务有效）
+   */
+  SuccessCount?: number
+  /**
+   * 失败任务数（仅复杂任务有效）
+   */
+  FailCount?: number
+  /**
+   * 运行任务数（仅复杂任务有效）
+   */
+  RunningCount?: number
+  /**
+   * 启动任务时间
+   */
+  StartedAt?: string
+  /**
+   * 创建任务时间
+   */
+  CreatedAt?: string
+  /**
+   * 更新任务时间
+   */
+  UpdatedAt?: string
+  /**
+   * 任务运行时间，单位ms
+   */
+  Runtime?: number
+  /**
+   * 设备ID
+   */
+  DeviceId?: string
+  /**
+   * 设备名称
+   */
+  DeviceName?: string
+  /**
+   * 通道ID
+   */
+  ChannelId?: string
+  /**
+   *  通道名称
+   */
+  ChannelName?: string
 }
 
 /**
@@ -1156,57 +1120,6 @@ export interface AddRecordPlanResponse {
 }
 
 /**
- * 查询网关信息返回结果
- */
-export interface DescribeGatewayData {
-  /**
-   * 网关索引ID，用于网关查询，更新，删除操作
-   */
-  GatewayId?: string
-  /**
-   * 网关编码，由网关设备生成的唯一编码
-   */
-  GwId?: string
-  /**
-   * 网关名称，仅支持中文、英文、数字、_、-，长度不超过32个字符
-   */
-  Name?: string
-  /**
-   * 网关描述，仅支持中文、英文、数字、_、-，长度不超过128个字符
-   */
-  Description?: string
-  /**
-   * 服务节点id
-   */
-  ClusterId?: string
-  /**
-   * 服务节点名称
-   */
-  ClusterName?: string
-  /**
-   * 网关状态，0：离线，1:在线
-   */
-  Status?: number
-  /**
-   * 网关版本
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Version?: Array<GatewayVersion>
-  /**
-   * 网关下挂设备数量
-   */
-  DeviceNum?: number
-  /**
-   * 激活时间
-   */
-  CreatedAt?: string
-  /**
-   * 所属地域
-   */
-  Region?: string
-}
-
-/**
  * ListOrganizationChannelNumbers请求参数结构体
  */
 export interface ListOrganizationChannelNumbersRequest {
@@ -1214,54 +1127,6 @@ export interface ListOrganizationChannelNumbersRequest {
    * 组织ID，json数组格式，最多一次支持10个组织
    */
   OrganizationId: Array<string>
-}
-
-/**
- * 网关详情版本信息
- */
-export interface GatewayVersion {
-  /**
-   * 服务名称
-   */
-  Name?: string
-  /**
-   * 服务版本
-   */
-  Version?: string
-}
-
-/**
- * 修改录像上云计划数据结构
- */
-export interface UpdateRecordBackupPlanModify {
-  /**
-   * 录像上云计划名称（仅支持中文、英文、数字、_、-，长度不超过32个字符，计划名称全局唯一，不能为空，不能重复，不修改名称时，不需要该字段）
-   */
-  PlanName?: string
-  /**
-   * 录制模板ID（从查询录像上云模板列表接口ListRecordBackupTemplates中获取，不修改模板ID时，不需要该字段）
-   */
-  TemplateId?: string
-  /**
-   * 录像上云计划描述（仅支持中文、英文、数字、_、-，长度不超过128个字符， 不修改描述时，不需要该字段）
-   */
-  Describe?: string
-  /**
-   * 生命周期（录像文件生命周期设置，管理文件冷、热存储的时间，不修改生命周期时，不需要该字段）
-   */
-  LifeCycle?: LifeCycleData
-  /**
-   * 要新增的设备通道（Json数组，没有新增时，不需要该字段，一次添加通道总数不超过5000个，包括组织目录下的通道数量）
-   */
-  Add?: Array<ChannelInfo>
-  /**
-   * 要删除的设备通道（Json数组，内容为要删除的设备通道id，没有删除设备通道时，不需要该字段）
-   */
-  Del?: Array<string>
-  /**
-   * 添加组织目录下所有设备通道（Json数组，可以为空，并且通道总数量不超过5000个（包括Add字段通道数量））
-   */
-  OrganizationId?: Array<string>
 }
 
 /**
@@ -1276,30 +1141,6 @@ export interface ListVideoDownloadTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * UpgradeGateway返回参数结构体
- */
-export interface UpgradeGatewayResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 本地录像下载任务列表
- */
-export interface ListVideoDownloadTaskData {
-  /**
-   * 任务列表
-   */
-  List?: Array<VideoDownloadTask>
-  /**
-   * 任务总数
-   */
-  TotalCount?: number
 }
 
 /**
@@ -1460,92 +1301,6 @@ export interface UpdateRecordPlanRequest {
  * DescribeOrganization请求参数结构体
  */
 export type DescribeOrganizationRequest = null
-
-/**
- * 查询复杂任务详情返回结果
- */
-export interface TaskData {
-  /**
-   * 任务ID
-   */
-  TaskId?: string
-  /**
-   * 任务状态1:NEW,2:RUNNING,3:COMPLETED ,4:FAILED
-   */
-  Status?: number
-  /**
-   * 失败原因
-   */
-  FailReason?: string
-  /**
-   * 进度（0-1）
-   */
-  Progress?: number
-  /**
-   * 任务操作类型，批量任务类型以Batch开头
-   */
-  Action?: string
-  /**
-   * 操作类型中文描述
-   */
-  ActionZhDesc?: string
-  /**
-   * 任务类型 1.简单 2.复杂 3.子任务
-   */
-  TaskType?: number
-  /**
-   * 任务资源id（复杂任务该字段无效）
-   */
-  ResourceId?: string
-  /**
-   * 总任务数（仅复杂任务有效）
-   */
-  Total?: number
-  /**
-   * 成功任务数（仅复杂任务有效）
-   */
-  SuccessCount?: number
-  /**
-   * 失败任务数（仅复杂任务有效）
-   */
-  FailCount?: number
-  /**
-   * 运行任务数（仅复杂任务有效）
-   */
-  RunningCount?: number
-  /**
-   * 启动任务时间
-   */
-  StartedAt?: string
-  /**
-   * 创建任务时间
-   */
-  CreatedAt?: string
-  /**
-   * 更新任务时间
-   */
-  UpdatedAt?: string
-  /**
-   * 任务运行时间，单位ms
-   */
-  Runtime?: number
-  /**
-   * 设备ID
-   */
-  DeviceId?: string
-  /**
-   * 设备名称
-   */
-  DeviceName?: string
-  /**
-   * 通道ID
-   */
-  ChannelId?: string
-  /**
-   *  通道名称
-   */
-  ChannelName?: string
-}
 
 /**
  * ControlRecord返回参数结构体
@@ -1780,20 +1535,6 @@ export interface DescribeUserDeviceListResponse {
 }
 
 /**
- * DescribeRecordPlan返回参数结构体
- */
-export interface DescribeRecordPlanResponse {
-  /**
-   * 返回结果
-   */
-  Data?: RecordPlanBaseInfo
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 时间片段结构体
  */
 export interface Timeline {
@@ -1808,17 +1549,37 @@ export interface Timeline {
 }
 
 /**
- * 查询网关列表返回结果
+ * 修改录像上云计划数据结构
  */
-export interface ListGatewaysData {
+export interface UpdateRecordBackupPlanModify {
   /**
-   * 网关列表
+   * 录像上云计划名称（仅支持中文、英文、数字、_、-，长度不超过32个字符，计划名称全局唯一，不能为空，不能重复，不修改名称时，不需要该字段）
    */
-  List?: Array<GatewaysData>
+  PlanName?: string
   /**
-   * 网关数量
+   * 录制模板ID（从查询录像上云模板列表接口ListRecordBackupTemplates中获取，不修改模板ID时，不需要该字段）
    */
-  TotalCount?: number
+  TemplateId?: string
+  /**
+   * 录像上云计划描述（仅支持中文、英文、数字、_、-，长度不超过128个字符， 不修改描述时，不需要该字段）
+   */
+  Describe?: string
+  /**
+   * 生命周期（录像文件生命周期设置，管理文件冷、热存储的时间，不修改生命周期时，不需要该字段）
+   */
+  LifeCycle?: LifeCycleData
+  /**
+   * 要新增的设备通道（Json数组，没有新增时，不需要该字段，一次添加通道总数不超过5000个，包括组织目录下的通道数量）
+   */
+  Add?: Array<ChannelInfo>
+  /**
+   * 要删除的设备通道（Json数组，内容为要删除的设备通道id，没有删除设备通道时，不需要该字段）
+   */
+  Del?: Array<string>
+  /**
+   * 添加组织目录下所有设备通道（Json数组，可以为空，并且通道总数量不超过5000个（包括Add字段通道数量））
+   */
+  OrganizationId?: Array<string>
 }
 
 /**
@@ -2240,23 +2001,13 @@ export interface AddStreamAuthData {
 }
 
 /**
- * DescribeGatewayMonitor请求参数结构体
+ * RefreshDeviceChannel请求参数结构体
  */
-export interface DescribeGatewayMonitorRequest {
+export interface RefreshDeviceChannelRequest {
   /**
-   * 网关索引ID（从获取网关列表接口ListGateways中获取）
+   * 设备 ID（从获取设备列表ListDevices接口中获取）
    */
-  GatewayId: string
-}
-
-/**
- * DeleteGateway请求参数结构体
- */
-export interface DeleteGatewayRequest {
-  /**
-   * 网关索引ID（从获取网关列表接口ListGateways中获取）
-   */
-  GatewayId: string
+  DeviceId: string
 }
 
 /**
@@ -2373,20 +2124,6 @@ export interface ListOrganizationChannelNumbersResponse {
    * 返回结果
    */
   Data?: ListOrganizationChannelNumbersData
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ListGatewayDevices返回参数结构体
- */
-export interface ListGatewayDevicesResponse {
-  /**
-   * 返回数据
-   */
-  Data?: ListGatewayDevicesData
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2618,16 +2355,6 @@ export interface RecordTimeLine {
 }
 
 /**
- * 查询网关服务版本信息返回数据
- */
-export interface DescribeGatewayVersionData {
-  /**
-   * 网关服务列表
-   */
-  Services?: Array<DescribeGatewayVersion>
-}
-
-/**
  * ControlRecord请求参数结构体
  */
 export interface ControlRecordRequest {
@@ -2801,48 +2528,6 @@ export interface DeleteTaskRequest {
 }
 
 /**
- * 网关设备数据
- */
-export interface GatewayDevice {
-  /**
-   * 设备ID
-   */
-  DeviceId?: string
-  /**
-   * 网关接入协议类型
-   */
-  ProtocolType?: number
-  /**
-   * 网关接入协议名称
-   */
-  ProtocolTypeName?: string
-  /**
-   * 设备名称
-   */
-  Name?: string
-  /**
-   * 设备类型
-   */
-  Type?: number
-  /**
-   * 设备内网IP
-   */
-  Ip?: string
-  /**
-   * 设备端口
-   */
-  Port?: number
-  /**
-   * 设备下通道数
-   */
-  ChannelNum?: number
-  /**
-   * 设备状态
-   */
-  Status?: number
-}
-
-/**
  * ControlDevicePTZ请求参数结构体
  */
 export interface ControlDevicePTZRequest {
@@ -2913,52 +2598,6 @@ export interface UpdateUserDeviceResponse {
 }
 
 /**
- * 查询网关列表返回结果
- */
-export interface GatewaysData {
-  /**
-   * 网关索引ID
-   */
-  GatewayId?: string
-  /**
-   * 网关编码
-   */
-  GwId?: string
-  /**
-   * 网关名称，仅支持中文、英文、数字、_、-，长度不超过32个字符
-   */
-  Name?: string
-  /**
-   * 网关描述，仅支持中文、英文、数字、_、-，长度不超过128个字符
-   */
-  Description?: string
-  /**
-   * 网关所属服务节点ID
-   */
-  ClusterId?: string
-  /**
-   * 网关所属服务节点名称
-   */
-  ClusterName?: string
-  /**
-   * 网关所属地域
-   */
-  Region?: string
-  /**
-   * 网关状态，0：离线，1:在线
-   */
-  Status?: number
-  /**
-   * 网关激活时间
-   */
-  CreatedAt?: string
-  /**
-   * 所属网关设备数量
-   */
-  DeviceNum?: number
-}
-
-/**
  * 录像下载任务数据结构
  */
 export interface VideoDownloadTaskData {
@@ -2969,17 +2608,37 @@ export interface VideoDownloadTaskData {
 }
 
 /**
- * 查询网关设备列表返回数据
+ * ListTasks请求参数结构体
  */
-export interface ListGatewayDevicesData {
+export interface ListTasksRequest {
   /**
-   * 网关下设备列表
+   * 页码，默认为1
    */
-  List?: Array<GatewayDevice>
+  PageNumber?: number
   /**
-   * 网关下设备总数
+   * 每页数量，默认为20
    */
-  TotalCount?: number
+  PageSize?: number
+  /**
+   * 默认不根据该字段进行筛选，否则根据设备操作类型进行筛选，目前值有：BatchDeleteUserDevice，BatchDisableDevice，BatchEnableDevice，
+BatchUpgradeDevice，
+BatchResetDevice,
+BatchRebootDevice,
+BatchRefreshDeviceChannel
+   */
+  Operation?: string
+  /**
+   * 默认不根据该字段进行筛选，否则根据任务状态进行筛选。状态码：1-未执行，2-执行中，3-完成，4-取消
+   */
+  Status?: number
+  /**
+   * 开始时间
+   */
+  BeginTime?: number
+  /**
+   * 结束时间
+   */
+  EndTime?: number
 }
 
 /**
@@ -3076,20 +2735,6 @@ export interface AddRecordBackupPlanData {
 }
 
 /**
- * DescribeGatewayProtocol返回参数结构体
- */
-export interface DescribeGatewayProtocolResponse {
-  /**
-   * 返回数据
-   */
-  Data?: Array<DescribeGatewayProtocolData>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeGBDeviceAddr请求参数结构体
  */
 export interface DescribeGBDeviceAddrRequest {
@@ -3155,30 +2800,43 @@ export interface AddRecordTemplateRequest {
 }
 
 /**
- * DescribeGatewayProtocol请求参数结构体
+ * DescribeRecordFile请求参数结构体
  */
-export type DescribeGatewayProtocolRequest = null
+export interface DescribeRecordFileRequest {
+  /**
+   * 通道所属设备ID
+   */
+  DeviceId: string
+  /**
+   * 通道ID
+   */
+  ChannelId: string
+  /**
+   * 检索开始时间，UTC秒数，例如：1662114146，开始和结束时间段最长为一天，且不能跨天
+   */
+  StartTime: number
+  /**
+   * 检索结束时间，UTC秒数，例如：1662114246，开始和结束时间段最长为一天，且不能跨天
+   */
+  EndTime: number
+  /**
+   * 是否携带每个时间段的播放url
+   */
+  WithUrl?: boolean
+}
 
 /**
- * 查询网关所支持的接入协议
+ * 录像切片信息
  */
-export interface DescribeGatewayProtocolData {
+export interface RecordSliceInfo {
   /**
-   * 接入协议的字典码
+   * 计划ID
    */
-  TypeCode?: string
+  PlanId?: string
   /**
-   * 接入协议类型值
+   * 录像切片开始和结束时间列表
    */
-  Value?: number
-  /**
-   * 接入协议的类型描述
-   */
-  Label?: string
-  /**
-   * 协议值文本
-   */
-  ValueText?: string
+  List?: Array<RecordTimeLine>
 }
 
 /**
@@ -3240,88 +2898,51 @@ export interface DescribeVideoDownloadUrlRequest {
 }
 
 /**
- * DescribeGatewayVersion返回参数结构体
+ * 实时上云计划基础信息
  */
-export interface DescribeGatewayVersionResponse {
+export interface RecordPlanBaseInfo {
   /**
-   * 返回数据
+   * 上云计划ID
    */
-  Data?: DescribeGatewayVersionData
+  PlanId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 上云计划名称
    */
-  RequestId?: string
-}
-
-/**
- * ListGateways请求参数结构体
- */
-export interface ListGatewaysRequest {
+  PlanName?: string
   /**
-   * 页码，默认为1
+   * 上云模板ID
    */
-  PageNumber?: number
+  TemplateId?: string
   /**
-   * 每页数量，默认为20
+   * 上云计划描述
    */
-  PageSize?: number
+  Describe?: string
   /**
-   * 网关名称
+   * 码流类型，default:设备默认码流类型，main:主码流，sub:子码流，其他根据设备能力集自定义
    */
-  Name?: string
+  StreamType?: string
   /**
-   * 服务节点ID
+   * 云文件生命周期
    */
-  ClusterId?: string
+  LifeCycle?: LifeCycleData
   /**
-   * 网关状态（0：离线，1 ：在线）
-   */
-  Status?: number
-}
-
-/**
- * ListTasks请求参数结构体
- */
-export interface ListTasksRequest {
-  /**
-   * 页码，默认为1
-   */
-  PageNumber?: number
-  /**
-   * 每页数量，默认为20
-   */
-  PageSize?: number
-  /**
-   * 默认不根据该字段进行筛选，否则根据设备操作类型进行筛选，目前值有：BatchDeleteUserDevice，BatchDisableDevice，BatchEnableDevice，
-BatchUpgradeDevice，
-BatchResetDevice,
-BatchRebootDevice,
-BatchRefreshDeviceChannel
-   */
-  Operation?: string
-  /**
-   * 默认不根据该字段进行筛选，否则根据任务状态进行筛选。状态码：1-未执行，2-执行中，3-完成，4-取消
+   * 录像计划状态，1:正常使用中，0:删除中，无法使用
    */
   Status?: number
   /**
-   * 开始时间
+   * 通道总数
    */
-  BeginTime?: number
+  ChannelCount?: number
   /**
-   * 结束时间
+   * 录像补录模式（0:不启用，1:启用）
    */
-  EndTime?: number
+  RepairMode?: number
 }
 
 /**
- * DescribeGatewayVersion请求参数结构体
+ * ListRecordBackupTemplates请求参数结构体
  */
-export interface DescribeGatewayVersionRequest {
-  /**
-   * 网关索引ID（从获取网关列表接口ListGateways中获取）
-   */
-  GatewayId: string
-}
+export type ListRecordBackupTemplatesRequest = null
 
 /**
  * DescribeRecordSlice请求参数结构体
@@ -3355,42 +2976,6 @@ export interface DescribeUserDeviceRequest {
  * DescribeDeviceRegion请求参数结构体
  */
 export type DescribeDeviceRegionRequest = null
-
-/**
- * RefreshDeviceChannel请求参数结构体
- */
-export interface RefreshDeviceChannelRequest {
-  /**
-   * 设备 ID（从获取设备列表ListDevices接口中获取）
-   */
-  DeviceId: string
-}
-
-/**
- * DescribeRecordFile请求参数结构体
- */
-export interface DescribeRecordFileRequest {
-  /**
-   * 通道所属设备ID
-   */
-  DeviceId: string
-  /**
-   * 通道ID
-   */
-  ChannelId: string
-  /**
-   * 检索开始时间，UTC秒数，例如：1662114146，开始和结束时间段最长为一天，且不能跨天
-   */
-  StartTime: number
-  /**
-   * 检索结束时间，UTC秒数，例如：1662114246，开始和结束时间段最长为一天，且不能跨天
-   */
-  EndTime: number
-  /**
-   * 是否携带每个时间段的播放url
-   */
-  WithUrl?: boolean
-}
 
 /**
  * AddStreamAuth请求参数结构体
@@ -3489,17 +3074,25 @@ export interface PlayRecordRequest {
 }
 
 /**
- * 录像切片信息
+ * 修改录像上云模板数据结构
  */
-export interface RecordSliceInfo {
+export interface UpdateRecordBackupTemplateModify {
   /**
-   * 计划ID
+   * 模板名称（不修改名称时，不需要带该字段）
    */
-  PlanId?: string
+  TemplateName?: string
   /**
-   * 录像切片开始和结束时间列表
+   * 上云时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
    */
-  List?: Array<RecordTimeLine>
+  TimeSections?: Array<RecordTemplateTimeSections>
+  /**
+   * 录像时间段（按周进行设置，支持一天设置多个时间段，每个时间段不小于10分钟）
+   */
+  DevTimeSections?: Array<RecordTemplateTimeSections>
+  /**
+   * 上云倍速（支持1，2，4倍速）
+   */
+  Scale?: number
 }
 
 /**
@@ -3656,48 +3249,6 @@ export interface ListRecordRetrieveTasksResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 实时上云计划基础信息
- */
-export interface RecordPlanBaseInfo {
-  /**
-   * 上云计划ID
-   */
-  PlanId?: string
-  /**
-   * 上云计划名称
-   */
-  PlanName?: string
-  /**
-   * 上云模板ID
-   */
-  TemplateId?: string
-  /**
-   * 上云计划描述
-   */
-  Describe?: string
-  /**
-   * 码流类型，default:设备默认码流类型，main:主码流，sub:子码流，其他根据设备能力集自定义
-   */
-  StreamType?: string
-  /**
-   * 云文件生命周期
-   */
-  LifeCycle?: LifeCycleData
-  /**
-   * 录像计划状态，1:正常使用中，0:删除中，无法使用
-   */
-  Status?: number
-  /**
-   * 通道总数
-   */
-  ChannelCount?: number
-  /**
-   * 录像补录模式（0:不启用，1:启用）
-   */
-  RepairMode?: number
 }
 
 /**
@@ -4024,75 +3575,17 @@ export interface DescribeTaskResponse {
 }
 
 /**
- * 查询网关服务版本信息返回数据
+ * 本地录像下载任务列表
  */
-export interface DescribeGatewayVersion {
+export interface ListVideoDownloadTaskData {
   /**
-   * 服务名
+   * 任务列表
    */
-  Name?: string
+  List?: Array<VideoDownloadTask>
   /**
-   * 服务版本
+   * 任务总数
    */
-  Version?: string
-  /**
-   * 服务最新版本
-   */
-  LatestVersion?: string
-  /**
-   * 是否需要更新
-   */
-  IsUpdate?: boolean
-  /**
-   * 升级信息
-   */
-  UpgradeInfo?: Array<string>
-}
-
-/**
- * 录像取回任务详情基础信息
- */
-export interface RecordRetrieveTaskDetailsInfo {
-  /**
-   * 任务ID
-   */
-  TaskId?: string
-  /**
-   * 任务名称
-   */
-  TaskName?: string
-  /**
-   * 取回录像的开始时间
-   */
-  StartTime?: number
-  /**
-   * 取回录像的结束时间
-   */
-  EndTime?: number
-  /**
-   * 取回模式，1:极速模式，其他暂不支持
-   */
-  Mode?: number
-  /**
-   * 副本有效期
-   */
-  Expiration?: number
-  /**
-   * 任务状态， 0:已取回，1:取回中，2:待取回
-   */
-  Status?: number
-  /**
-   * 取回容量，单位MB
-   */
-  Capacity?: number
-  /**
-   * 任务描述
-   */
-  Describe?: string
-  /**
-   * 任务通道数量
-   */
-  ChannelCount?: number
+  TotalCount?: number
 }
 
 /**
@@ -4104,57 +3597,6 @@ export interface DeleteRecordBackupPlanRequest {
    */
   PlanId: string
 }
-
-/**
- * 修改网关信息返回结果
- */
-export interface UpdateGatewayData {
-  /**
-   * 网关索引ID
-   */
-  GatewayId?: string
-  /**
-   * 网关编码
-   */
-  GwId?: string
-  /**
-   * 网关名称，仅支持中文、英文、数字、_、-，长度不超过32个字符
-   */
-  Name?: string
-  /**
-   * 网关描述，仅支持中文、英文、数字、_、-，长度不超过128个字符
-   */
-  Description?: string
-  /**
-   * 服务节点ID
-   */
-  ClusterId?: string
-  /**
-   * 服务节点名称
-   */
-  ClusterName?: string
-  /**
-   * 网关状态，0：离线，1:在线
-   */
-  Status?: number
-  /**
-   * 激活时间
-   */
-  CreatedAt?: number
-  /**
-   * 网关密钥
-   */
-  Secret?: string
-  /**
-   * 网关版本信息
-   */
-  Version?: string
-}
-
-/**
- * ListRecordBackupTemplates请求参数结构体
- */
-export type ListRecordBackupTemplatesRequest = null
 
 /**
  * ListRecordPlanChannels请求参数结构体
@@ -4276,21 +3718,49 @@ export interface DeleteRecordBackupTemplateRequest {
 }
 
 /**
- * ListGatewayDevices请求参数结构体
+ * 录像取回任务详情基础信息
  */
-export interface ListGatewayDevicesRequest {
+export interface RecordRetrieveTaskDetailsInfo {
   /**
-   * 网关索引ID（从获取网关列表接口ListGateways中获取）
+   * 任务ID
    */
-  GatewayId: string
+  TaskId?: string
   /**
-   * 分页页数
+   * 任务名称
    */
-  PageNumber?: number
+  TaskName?: string
   /**
-   * 分页大小
+   * 取回录像的开始时间
    */
-  PageSize?: number
+  StartTime?: number
+  /**
+   * 取回录像的结束时间
+   */
+  EndTime?: number
+  /**
+   * 取回模式，1:极速模式，其他暂不支持
+   */
+  Mode?: number
+  /**
+   * 副本有效期
+   */
+  Expiration?: number
+  /**
+   * 任务状态， 0:已取回，1:取回中，2:待取回
+   */
+  Status?: number
+  /**
+   * 取回容量，单位MB
+   */
+  Capacity?: number
+  /**
+   * 任务描述
+   */
+  Describe?: string
+  /**
+   * 任务通道数量
+   */
+  ChannelCount?: number
 }
 
 /**
@@ -4346,20 +3816,6 @@ export interface PlayRecordResponse {
 }
 
 /**
- * DescribeGatewayMonitor返回参数结构体
- */
-export interface DescribeGatewayMonitorResponse {
-  /**
-   * 返回数据
-   */
-  Data?: DescribeGatewayMonitor
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeRecordBackupTemplate返回参数结构体
  */
 export interface DescribeRecordBackupTemplateResponse {
@@ -4398,9 +3854,9 @@ export interface PlayRecordData {
 }
 
 /**
- * DeleteGateway返回参数结构体
+ * DeleteTask返回参数结构体
  */
-export interface DeleteGatewayResponse {
+export interface DeleteTaskResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4485,24 +3941,6 @@ export interface ListOrganizationChannelsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * UpdateGateway请求参数结构体
- */
-export interface UpdateGatewayRequest {
-  /**
-   * 网关索引ID（从获取网关列表ListGateways接口中获取）
-   */
-  GatewayId: string
-  /**
-   * 仅支持中文、英文、数网关名称，字、_、-，长度不超过32个字符
-   */
-  Name?: string
-  /**
-   * 网关描述，仅支持中文、英文、数字、_、-，长度不超过128个字符
-   */
-  Description?: string
 }
 
 /**

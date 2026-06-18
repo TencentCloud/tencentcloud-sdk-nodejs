@@ -19,23 +19,31 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateDBInstancesRequest,
+  ModifyDBInstanceVPortRequest,
   ExpandInstanceResponse,
   DescribeSaleZonesInfo,
   BackupMethodStatisticsOutPut,
   DescribeDatabasesRequest,
   DescribeDBParametersRequest,
+  ModifyInstanceNetworkResponse,
+  ModifyInstanceSSLStatusResponse,
   RestartDBInstancesResponse,
+  DescribeSlowLogsRequest,
   ModifyInstanceNameRequest,
   DescribeUserPrivilegesResponse,
   DescribeDBSecurityGroupsResponse,
   InstanceFilter,
+  Explain,
   BackupStatisticsModel,
   BackupPolicyModelOutPut,
+  ModifyInstanceSSLStatusRequest,
   ModifyInstanceNameResponse,
   DescribeDBSBackupStatisticsDetailRequest,
   DescribeDBParametersResponse,
   StorageNodeSpec,
   IsolateDBInstanceResponse,
+  ResetUserPasswordResponse,
+  DescribeInstanceSSLStatusResponse,
   DeleteDBSBackupSetsResponse,
   DescribeFlowResponse,
   MaintenanceWindowInfo,
@@ -51,6 +59,7 @@ import {
   ModifyDBInstanceSecurityGroupsResponse,
   CreateCloneInstanceResponse,
   ModifyUserPrivilegesResponse,
+  DescribeSlowLogsResponse,
   CreateDBSBackupResponse,
   BackupSetsReqFilter,
   DescribeDBSBackupSetsResponse,
@@ -58,33 +67,39 @@ import {
   CreateCloneInstanceRequest,
   DescribeDBInstancesRequest,
   DescribeDBSecurityGroupsRequest,
+  DescribeSaleRegionInfo,
   DescribeSaleInfoRequest,
-  ModifyUserPrivilegesRequest,
   DescribeDBSArchiveLogsRequest,
   DatabaseFunction,
+  CreateUsersResponse,
   ModifyDBSBackupPolicyRequest,
   DescribeDBInstanceDetailResponse,
   DescribeDatabaseObjectsRequest,
+  ModifyMaintenanceWindowRequest,
   DestroyInstancesResponse,
   DescribeSaleInfoResponse,
-  DescribeDBSBackupSetsRequest,
+  DeleteUsersResponse,
+  DatabaseTable,
   DescribeDBInstanceDetailRequest,
   ModifyAutoRenewFlagResponse,
   DescribeUsersRequest,
   DatabaseView,
   DataBackupStatisticsModel,
+  LogFilter,
   ModifyDBSBackupPolicyResponse,
   DBParamValue,
-  UserInfo,
+  CreateUsersRequest,
   ModifyDBParametersRequest,
   CloneInstanceModel,
   ArchiveLogInterval,
   ModifyDBParametersResponse,
+  DescribeInstanceSSLStatusRequest,
   SecurityGroup,
-  DescribeDBSAvailableRecoveryTimeRequest,
+  DeleteUsersRequest,
+  ModifyUserPrivilegesRequest,
   DescribeDBSArchiveLogsResponse,
   DescribeDatabaseObjectsResponse,
-  DescribeSaleRegionInfo,
+  DescribeMaintenanceWindowResponse,
   InstanceNode,
   SecurityGroupBound,
   DescribeDBSBackupStatisticsResponse,
@@ -92,23 +107,26 @@ import {
   DescribeDBSCloneInstancesResponse,
   InstanceInfo,
   User,
-  DatabaseTable,
+  DescribeDBSBackupSetsRequest,
   AnalysisInstanceInfo,
   ServerlessCcu,
   Database,
   DescribeSaleZonesGroup,
   DescribeDBSBackupStatisticsRequest,
   DescribeUsersResponse,
+  LogBackupStatisticsModel,
   CancelIsolateDBInstancesResponse,
   BackupMethodStatisticsModel,
   DescribeDBSBackupPolicyRequest,
   UpgradeInstanceResponse,
   CancelIsolateDBInstancesRequest,
+  SlowLogData,
   ExpandInstanceRequest,
   DescribeDatabasesResponse,
   ArchiveLogModel,
   AnalysisRelationInfo,
   ResourceTag,
+  ModifyMaintenanceWindowResponse,
   IsolateDBInstanceRequest,
   DescribeFlowRequest,
   ModifyDBSBackupSetCommentResponse,
@@ -117,16 +135,21 @@ import {
   ModifyAutoRenewFlagRequest,
   CreateDBSBackupRequest,
   DestroyInstancesRequest,
+  DescribeMaintenanceWindowRequest,
   DescribeSpecsRequest,
   ParamDesc,
+  ModifyInstanceNetworkRequest,
   BackupPolicyModelInput,
   DescribeDBInstancesResponse,
   ConstraintRange,
+  UserInfo,
   RestartDBInstancesRequest,
+  ResetUserPasswordRequest,
   DescribeDBSAvailableRecoveryTimeResponse,
   TablePrivileges,
   DescribeUserPrivilegesRequest,
-  LogBackupStatisticsModel,
+  DescribeDBSAvailableRecoveryTimeRequest,
+  ModifyDBInstanceVPortResponse,
   UpgradeInstanceRequest,
   BackupSetModel,
   InstanceParam,
@@ -154,6 +177,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ModifyInstanceSSLStatus）提供开关实例SSL的功能
+   */
+  async ModifyInstanceSSLStatus(
+    req: ModifyInstanceSSLStatusRequest,
+    cb?: (error: string, rep: ModifyInstanceSSLStatusResponse) => void
+  ): Promise<ModifyInstanceSSLStatusResponse> {
+    return this.request("ModifyInstanceSSLStatus", req, cb)
+  }
+
+  /**
    * 本接口（DescribeDatabaseObjects）用于查询云数据库实例的数据库中的对象列表，包含表、存储过程、视图和函数。
    */
   async DescribeDatabaseObjects(
@@ -161,6 +194,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDatabaseObjectsResponse) => void
   ): Promise<DescribeDatabaseObjectsResponse> {
     return this.request("DescribeDatabaseObjects", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyInstanceNetwork）用于修改实例所属网络
+   */
+  async ModifyInstanceNetwork(
+    req: ModifyInstanceNetworkRequest,
+    cb?: (error: string, rep: ModifyInstanceNetworkResponse) => void
+  ): Promise<ModifyInstanceNetworkResponse> {
+    return this.request("ModifyInstanceNetwork", req, cb)
+  }
+
+  /**
+   * 新增/修改实例维护时间窗口配置
+   */
+  async ModifyMaintenanceWindow(
+    req: ModifyMaintenanceWindowRequest,
+    cb?: (error: string, rep: ModifyMaintenanceWindowResponse) => void
+  ): Promise<ModifyMaintenanceWindowResponse> {
+    return this.request("ModifyMaintenanceWindow", req, cb)
   }
 
   /**
@@ -204,6 +257,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口(ModifyDBInstanceVPort)修改实例VPC端口
+   */
+  async ModifyDBInstanceVPort(
+    req: ModifyDBInstanceVPortRequest,
+    cb?: (error: string, rep: ModifyDBInstanceVPortResponse) => void
+  ): Promise<ModifyDBInstanceVPortResponse> {
+    return this.request("ModifyDBInstanceVPort", req, cb)
+  }
+
+  /**
    * 本接口（ModifyDBParameters）用于修改实例参数。
    */
   async ModifyDBParameters(
@@ -224,6 +287,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（ResetUserPassword）提供重置用户密码功能
+   */
+  async ResetUserPassword(
+    req: ResetUserPasswordRequest,
+    cb?: (error: string, rep: ResetUserPasswordResponse) => void
+  ): Promise<ResetUserPasswordResponse> {
+    return this.request("ResetUserPassword", req, cb)
+  }
+
+  /**
    * 本接口（DescribeFlow）用于查询异步任务流程状态
    */
   async DescribeFlow(
@@ -231,6 +304,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFlowResponse) => void
   ): Promise<DescribeFlowResponse> {
     return this.request("DescribeFlow", req, cb)
+  }
+
+  /**
+   * 本接口（RestartDBInstances）用于重启数据库实例
+   */
+  async RestartDBInstances(
+    req: RestartDBInstancesRequest,
+    cb?: (error: string, rep: RestartDBInstancesResponse) => void
+  ): Promise<RestartDBInstancesResponse> {
+    return this.request("RestartDBInstances", req, cb)
   }
 
   /**
@@ -324,6 +407,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DeleteUsers）用于批量删除用户
+   */
+  async DeleteUsers(
+    req: DeleteUsersRequest,
+    cb?: (error: string, rep: DeleteUsersResponse) => void
+  ): Promise<DeleteUsersResponse> {
+    return this.request("DeleteUsers", req, cb)
+  }
+
+  /**
    * 查询实例备份空间概览 DescribeDBSBackupStatistics
    */
   async DescribeDBSBackupStatistics(
@@ -331,6 +424,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBSBackupStatisticsResponse) => void
   ): Promise<DescribeDBSBackupStatisticsResponse> {
     return this.request("DescribeDBSBackupStatistics", req, cb)
+  }
+
+  /**
+   * 本接口提供查询慢日志功能
+   */
+  async DescribeSlowLogs(
+    req: DescribeSlowLogsRequest,
+    cb?: (error: string, rep: DescribeSlowLogsResponse) => void
+  ): Promise<DescribeSlowLogsResponse> {
+    return this.request("DescribeSlowLogs", req, cb)
   }
 
   /**
@@ -344,13 +447,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取可恢复时间 DescribeDBSAvailableRecoveryTime
+   * 本接口（CreateUsers）用于批量创建用户
    */
-  async DescribeDBSAvailableRecoveryTime(
-    req: DescribeDBSAvailableRecoveryTimeRequest,
-    cb?: (error: string, rep: DescribeDBSAvailableRecoveryTimeResponse) => void
-  ): Promise<DescribeDBSAvailableRecoveryTimeResponse> {
-    return this.request("DescribeDBSAvailableRecoveryTime", req, cb)
+  async CreateUsers(
+    req: CreateUsersRequest,
+    cb?: (error: string, rep: CreateUsersResponse) => void
+  ): Promise<CreateUsersResponse> {
+    return this.request("CreateUsers", req, cb)
   }
 
   /**
@@ -364,6 +467,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DescribeInstanceSSLStatus）提供实例SSL状态查询
+   */
+  async DescribeInstanceSSLStatus(
+    req: DescribeInstanceSSLStatusRequest,
+    cb?: (error: string, rep: DescribeInstanceSSLStatusResponse) => void
+  ): Promise<DescribeInstanceSSLStatusResponse> {
+    return this.request("DescribeInstanceSSLStatus", req, cb)
+  }
+
+  /**
    * 创建实例手工备份  CreateDBSBackup
    */
   async CreateDBSBackup(
@@ -374,13 +487,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（RestartDBInstances）用于重启数据库实例
+   * 获取可恢复时间 DescribeDBSAvailableRecoveryTime
    */
-  async RestartDBInstances(
-    req: RestartDBInstancesRequest,
-    cb?: (error: string, rep: RestartDBInstancesResponse) => void
-  ): Promise<RestartDBInstancesResponse> {
-    return this.request("RestartDBInstances", req, cb)
+  async DescribeDBSAvailableRecoveryTime(
+    req: DescribeDBSAvailableRecoveryTimeRequest,
+    cb?: (error: string, rep: DescribeDBSAvailableRecoveryTimeResponse) => void
+  ): Promise<DescribeDBSAvailableRecoveryTimeResponse> {
+    return this.request("DescribeDBSAvailableRecoveryTime", req, cb)
   }
 
   /**
@@ -461,6 +574,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ExpandInstanceResponse) => void
   ): Promise<ExpandInstanceResponse> {
     return this.request("ExpandInstance", req, cb)
+  }
+
+  /**
+   * 查询维护时间窗口配置
+   */
+  async DescribeMaintenanceWindow(
+    req: DescribeMaintenanceWindowRequest,
+    cb?: (error: string, rep: DescribeMaintenanceWindowResponse) => void
+  ): Promise<DescribeMaintenanceWindowResponse> {
+    return this.request("DescribeMaintenanceWindow", req, cb)
   }
 
   /**

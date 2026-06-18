@@ -453,6 +453,11 @@ export interface ResourceConfiguration {
    * <p>内存资源量</p>
    */
   Memory?: string
+  /**
+   * <p>自定义磁盘大小</p><p>枚举值：</p><ul><li>1Gi： 1Gi</li><li>5Gi： 5Gi</li><li>10Gi： 10Gi</li><li>20Gi： 20Gi</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Storage?: string
 }
 
 /**

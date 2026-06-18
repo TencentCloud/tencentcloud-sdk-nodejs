@@ -158,6 +158,20 @@ export interface CreateDBInstancesRequest {
 }
 
 /**
+ * ModifyDBInstanceVPort请求参数结构体
+ */
+export interface ModifyDBInstanceVPortRequest {
+  /**
+   * 实例 ID，形如：tdsql3-5baee8df。
+   */
+  InstanceId: string
+  /**
+   * 新的VPC端口，3308
+   */
+  Vport: number
+}
+
+/**
  * ExpandInstance返回参数结构体
  */
 export interface ExpandInstanceResponse {
@@ -256,6 +270,30 @@ export interface DescribeDBParametersRequest {
 }
 
 /**
+ * ModifyInstanceNetwork返回参数结构体
+ */
+export interface ModifyInstanceNetworkResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyInstanceSSLStatus返回参数结构体
+ */
+export interface ModifyInstanceSSLStatusResponse {
+  /**
+   * <p>异步流程ID</p>
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RestartDBInstances返回参数结构体
  */
 export interface RestartDBInstancesResponse {
@@ -267,6 +305,44 @@ export interface RestartDBInstancesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeSlowLogs请求参数结构体
+ */
+export interface DescribeSlowLogsRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 要检索日志的起始时间
+   */
+  StartTime: string
+  /**
+   * 要检索日志的结束时间
+   */
+  EndTime: string
+  /**
+   * 过滤条件
+   */
+  LogFilter?: Array<LogFilter>
+  /**
+   * 单页条数限制
+   */
+  Limit?: number
+  /**
+   * 偏移量
+   */
+  Offset?: number
+  /**
+   * 排序，可选：ASC，DESC
+   */
+  Order?: string
+  /**
+   * 排序条件，根据业务字段不同，可选排序字段不一样
+   */
+  OrderBy?: string
 }
 
 /**
@@ -334,6 +410,72 @@ export interface InstanceFilter {
    * 过滤value
    */
   Values?: Array<string>
+}
+
+/**
+ * 执行计划
+ */
+export interface Explain {
+  /**
+   * <p>标识符</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ID?: string
+  /**
+   * <p>查询类型</p><p>枚举值：</p><ul><li>SIMPLE： 没有子查询和 UNION 的普通查询，单表或普通 JOIN 都是 SIMPLE。</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SelectType?: string
+  /**
+   * <p>表名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Table?: string
+  /**
+   * <p>分区</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Partitions?: string
+  /**
+   * <p>访问类型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * <p>可能使用的索引</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PossibleKeys?: string
+  /**
+   * <p>实际使用的索引</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * <p>使用的索引长度</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeyLen?: string
+  /**
+   * <p>与索引比较的列或常量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Ref?: string
+  /**
+   * <p>估算扫描行数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rows?: string
+  /**
+   * <p>条件过滤后剩余行的估算百分比</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Filtered?: string
+  /**
+   * <p>附加信息，如 Using index、Using filesort 等</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Extra?: string
 }
 
 /**
@@ -449,6 +591,20 @@ export interface BackupPolicyModelOutPut {
 }
 
 /**
+ * ModifyInstanceSSLStatus请求参数结构体
+ */
+export interface ModifyInstanceSSLStatusRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>是否启用SSL</p>
+   */
+  Enabled: boolean
+}
+
+/**
  * ModifyInstanceName返回参数结构体
  */
 export interface ModifyInstanceNameResponse {
@@ -559,6 +715,30 @@ export interface IsolateDBInstanceResponse {
    * 隔离失败实例Id列表
    */
   FailedInstanceIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ResetUserPassword返回参数结构体
+ */
+export interface ResetUserPasswordResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeInstanceSSLStatus返回参数结构体
+ */
+export interface DescribeInstanceSSLStatusResponse {
+  /**
+   * <p>SSL启用状态</p><p>枚举值：</p><ul><li>Enabled： SSL已开启</li><li>Disabled： SSL已关闭</li><li>Enabling： SSL开启中</li><li>Disabling： SSL关闭中</li></ul>
+   */
+  SSLStatus?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -860,6 +1040,25 @@ export interface ModifyUserPrivilegesResponse {
 }
 
 /**
+ * DescribeSlowLogs返回参数结构体
+ */
+export interface DescribeSlowLogsResponse {
+  /**
+   * 日志总数
+   */
+  TotalCount?: number
+  /**
+   * 日志详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<SlowLogData>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateDBSBackup返回参数结构体
  */
 export interface CreateDBSBackupResponse {
@@ -1087,6 +1286,46 @@ export interface DescribeDBSecurityGroupsRequest {
 }
 
 /**
+ * 查询售卖接口，region信息返回类型
+ */
+export interface DescribeSaleRegionInfo {
+  /**
+   * <p>Region英文字符串</p>
+   */
+  Region?: string
+  /**
+   * <p>售卖Zone列表</p>
+   */
+  ZoneList?: Array<DescribeSaleZonesInfo>
+  /**
+   * <p>Region中文字符串</p>
+   */
+  RegionName?: string
+  /**
+   * <p>是否售卖。1:售卖，0不售卖</p>
+   */
+  Enable?: number
+  /**
+   * <p>多可用可选数量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AvailableZoneNum?: number
+  /**
+   * <p>是否允许使用日志副本</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsSupportedLogReplica?: boolean
+  /**
+   * <p>可用区组合</p>
+   */
+  ZoneGroup?: Array<DescribeSaleZonesGroup>
+  /**
+   * <p>是否支持serverless</p>
+   */
+  IsSupportServerless?: boolean
+}
+
+/**
  * DescribeSaleInfo请求参数结构体
  */
 export interface DescribeSaleInfoRequest {
@@ -1102,32 +1341,6 @@ export interface DescribeSaleInfoRequest {
    * <p>指定支持某种类型实例的 sale 信息</p><p>枚举值：</p><ul><li>serverless： 返回支持 serverless 型实例的所有 region</li></ul><p>默认值：无</p><p>当前仅支持指定 serverless，传入其他信息或者不传则默认返回所有售卖地域信息</p>
    */
   InstanceType?: string
-}
-
-/**
- * ModifyUserPrivileges请求参数结构体
- */
-export interface ModifyUserPrivilegesRequest {
-  /**
-   * 实例 ID，形如：tdsql3-5baee8df。
-   */
-  InstanceId: string
-  /**
-   * 登录用户名和主机信息
-   */
-  Users: Array<User>
-  /**
-   * 全局权限
-   */
-  GlobalPrivileges?: Array<string>
-  /**
-   * Database级别权限
-   */
-  DatabasePrivileges?: Array<DatabasePrivileges>
-  /**
-   * Table级别权限
-   */
-  TablePrivileges?: Array<TablePrivileges>
 }
 
 /**
@@ -1180,6 +1393,20 @@ export interface DatabaseFunction {
    * 函数名称
    */
   Func: string
+}
+
+/**
+ * CreateUsers返回参数结构体
+ */
+export interface CreateUsersResponse {
+  /**
+   * <p>任务id</p>
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1482,6 +1709,28 @@ export interface DescribeDatabaseObjectsRequest {
 }
 
 /**
+ * ModifyMaintenanceWindow请求参数结构体
+ */
+export interface ModifyMaintenanceWindowRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>运维窗口开始时间</p><p>参数格式：hh:mm:ss</p>
+   */
+  StartTime: string
+  /**
+   * <p>运维窗口持续时间</p><p>取值范围：[1, 3]</p><p>单位：时</p>
+   */
+  Duration: number
+  /**
+   * <p>运维窗口日期</p><p>枚举值：</p><ul><li>Monday： 星期一</li><li>Tuesday： 星期二</li><li>Wednesday： 星期三</li><li>Thursday： 星期四</li><li>Friday： 星期五</li><li>Saturday： 星期六</li><li>Sunday： 星期日</li></ul>
+   */
+  WeekDays: Array<string>
+}
+
+/**
  * DestroyInstances返回参数结构体
  */
 export interface DestroyInstancesResponse {
@@ -1514,45 +1763,27 @@ export interface DescribeSaleInfoResponse {
 }
 
 /**
- * DescribeDBSBackupSets请求参数结构体
+ * DeleteUsers返回参数结构体
  */
-export interface DescribeDBSBackupSetsRequest {
+export interface DeleteUsersResponse {
   /**
-   * <p>实例ID</p>
+   * <p>任务id</p>
    */
-  InstanceId: string
+  FlowId?: number
   /**
-   * <p>实例备份集ID</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  BackupSetId?: number
+  RequestId?: string
+}
+
+/**
+ * 数据库表信息
+ */
+export interface DatabaseTable {
   /**
-   * <p>结束时间</p>
+   * 表名
    */
-  EndTime?: string
-  /**
-   * <p>过滤条件</p>
-   */
-  FilterBy?: BackupSetsReqFilter
-  /**
-   * <p>单次查询数量[0,200]</p>
-   */
-  Limit?: number
-  /**
-   * <p>本次查询偏移[0,INF]</p>
-   */
-  Offset?: number
-  /**
-   * <p>StartTime,EndTime,ExpiredTime,BackupSetId,BackupDuration</p>
-   */
-  OrderBy?: string
-  /**
-   * <p>ASC,DESC</p>
-   */
-  OrderType?: string
-  /**
-   * <p>开始时间</p>
-   */
-  StartTime?: string
+  Table: string
 }
 
 /**
@@ -1642,6 +1873,50 @@ export interface DataBackupStatisticsModel {
 }
 
 /**
+ * 慢日志过滤
+ */
+export interface LogFilter {
+  /**
+   * 过滤条件名称。
+
+如：sql - SQL命令详情
+
+host – 客户端 IP；
+user – 数据库账户；
+dbName – 数据库名称；
+sqlType - SQL类型；
+errCode - 错误码
+
+execTime - 执行时间
+lockWaitTime - 锁等待时间
+ioWaitTime - IO等待时间
+trxLivingTime - 事务执行时间
+cpuTime- Cpu时间
+
+threadId - 线程ID
+trxId - 事物ID
+checkRows - 扫描行数
+affectRows - 影响行数
+sentRows - 返回行数
+   */
+  Type?: string
+  /**
+   * 过滤条件匹配类型。支持：
+INC – 包含；     （多个值之前是||的关系）
+EXC – 不包含； （多个值之前是&&的关系）
+EQS – 等于；     （多个值之前是||的关系）
+NEQ – 不等于；（多个值之前是&&的关系）
+
+RG – 范围；
+   */
+  Compare?: string
+  /**
+   * 过滤条件匹配值。当Compare=RG时，例：["1-100","200-300"]
+   */
+  Value?: Array<string>
+}
+
+/**
  * ModifyDBSBackupPolicy返回参数结构体
  */
 export interface ModifyDBSBackupPolicyResponse {
@@ -1674,30 +1949,29 @@ export interface DBParamValue {
 }
 
 /**
- * 用户信息类型
+ * CreateUsers请求参数结构体
  */
-export interface UserInfo {
+export interface CreateUsersRequest {
   /**
-   * 用户名
+   * <p>实例id</p>
    */
-  UserName?: string
+  InstanceId: string
   /**
-   * 用户描述
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>新增用户列表</p>
+   */
+  Users?: Array<User>
+  /**
+   * <p>未加密密码</p>
+   */
+  Password?: string
+  /**
+   * <p>加密密码</p>
+   */
+  EncryptedPassword?: string
+  /**
+   * <p>用户描述</p>
    */
   Description?: string
-  /**
-   * 主机IP，IP段以%结尾，表示允许该IP段的所有IP
-   */
-  Host?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 更新时间
-   */
-  UpdateTime?: string
 }
 
 /**
@@ -1831,6 +2105,16 @@ export interface ModifyDBParametersResponse {
 }
 
 /**
+ * DescribeInstanceSSLStatus请求参数结构体
+ */
+export interface DescribeInstanceSSLStatusRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+}
+
+/**
  * 安全组详情
  */
 export interface SecurityGroup {
@@ -1865,13 +2149,43 @@ export interface SecurityGroup {
 }
 
 /**
- * DescribeDBSAvailableRecoveryTime请求参数结构体
+ * DeleteUsers请求参数结构体
  */
-export interface DescribeDBSAvailableRecoveryTimeRequest {
+export interface DeleteUsersRequest {
   /**
-   * <p>实例ID</p>
+   * <p>实例id</p>
    */
   InstanceId: string
+  /**
+   * <p>批量删除用户列表</p>
+   */
+  Users?: Array<User>
+}
+
+/**
+ * ModifyUserPrivileges请求参数结构体
+ */
+export interface ModifyUserPrivilegesRequest {
+  /**
+   * 实例 ID，形如：tdsql3-5baee8df。
+   */
+  InstanceId: string
+  /**
+   * 登录用户名和主机信息
+   */
+  Users: Array<User>
+  /**
+   * 全局权限
+   */
+  GlobalPrivileges?: Array<string>
+  /**
+   * Database级别权限
+   */
+  DatabasePrivileges?: Array<DatabasePrivileges>
+  /**
+   * Table级别权限
+   */
+  TablePrivileges?: Array<TablePrivileges>
 }
 
 /**
@@ -1932,43 +2246,25 @@ export interface DescribeDatabaseObjectsResponse {
 }
 
 /**
- * 查询售卖接口，region信息返回类型
+ * DescribeMaintenanceWindow返回参数结构体
  */
-export interface DescribeSaleRegionInfo {
+export interface DescribeMaintenanceWindowResponse {
   /**
-   * <p>Region英文字符串</p>
+   * <p>实例ID</p>
    */
-  Region?: string
+  InstanceId?: string
   /**
-   * <p>售卖Zone列表</p>
+   * <p>运维窗口时间范围</p>
    */
-  ZoneList?: Array<DescribeSaleZonesInfo>
+  MaintenanceWindow?: string
   /**
-   * <p>Region中文字符串</p>
+   * <p>运维窗口天数范围</p>
    */
-  RegionName?: string
+  WeekDays?: Array<string>
   /**
-   * <p>是否售卖。1:售卖，0不售卖</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Enable?: number
-  /**
-   * <p>多可用可选数量</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AvailableZoneNum?: number
-  /**
-   * <p>是否允许使用日志副本</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsSupportedLogReplica?: boolean
-  /**
-   * <p>可用区组合</p>
-   */
-  ZoneGroup?: Array<DescribeSaleZonesGroup>
-  /**
-   * <p>是否支持serverless</p>
-   */
-  IsSupportServerless?: boolean
+  RequestId?: string
 }
 
 /**
@@ -2507,13 +2803,45 @@ export interface User {
 }
 
 /**
- * 数据库表信息
+ * DescribeDBSBackupSets请求参数结构体
  */
-export interface DatabaseTable {
+export interface DescribeDBSBackupSetsRequest {
   /**
-   * 表名
+   * <p>实例ID</p>
    */
-  Table: string
+  InstanceId: string
+  /**
+   * <p>实例备份集ID</p>
+   */
+  BackupSetId?: number
+  /**
+   * <p>结束时间</p>
+   */
+  EndTime?: string
+  /**
+   * <p>过滤条件</p>
+   */
+  FilterBy?: BackupSetsReqFilter
+  /**
+   * <p>单次查询数量[0,200]</p>
+   */
+  Limit?: number
+  /**
+   * <p>本次查询偏移[0,INF]</p>
+   */
+  Offset?: number
+  /**
+   * <p>StartTime,EndTime,ExpiredTime,BackupSetId,BackupDuration</p>
+   */
+  OrderBy?: string
+  /**
+   * <p>ASC,DESC</p>
+   */
+  OrderType?: string
+  /**
+   * <p>开始时间</p>
+   */
+  StartTime?: string
 }
 
 /**
@@ -2610,6 +2938,32 @@ export interface DescribeUsersResponse {
 }
 
 /**
+ * 日志备份统计对象
+ */
+export interface LogBackupStatisticsModel {
+  /**
+   * <p>平均每个日志备份大小,单位Byte</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AverageSizePerBackup?: number
+  /**
+   * <p>平均每天日志备份大小,单位Byte</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AverageSizePerDay?: number
+  /**
+   * <p>日志备份个数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * <p>日志备份大小，单位Byte</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalSize?: number
+}
+
+/**
  * CancelIsolateDBInstances返回参数结构体
  */
 export interface CancelIsolateDBInstancesResponse {
@@ -2685,6 +3039,102 @@ export interface CancelIsolateDBInstancesRequest {
    * 需要隔离的实例ID列表
    */
   InstanceIds: Array<string>
+}
+
+/**
+ * 慢日志信息
+ */
+export interface SlowLogData {
+  /**
+   * <p>Sql的执行时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timestamp?: string
+  /**
+   * <p>Sql的执行时长（秒）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryTime?: number
+  /**
+   * <p>Sql语句</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlText?: string
+  /**
+   * <p>客户端地址</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserHost?: string
+  /**
+   * <p>用户名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserName?: string
+  /**
+   * <p>数据库名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Database?: string
+  /**
+   * <p>锁时长（秒）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LockTime?: number
+  /**
+   * <p>扫描行数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RowsExamined?: number
+  /**
+   * <p>结果集行数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RowsSent?: number
+  /**
+   * <p>事物ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TransactionId?: string
+  /**
+   * <p>rpc耗时</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RpcTime?: number
+  /**
+   * <p>与存储节点交互rpc耗时</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageRpcTime?: number
+  /**
+   * <p>rpc重试延迟耗时</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RpcRetryDelayTime?: number
+  /**
+   * <p>node名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeId?: string
+  /**
+   * <p>rpc 链路追踪</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RpcTrace?: string
+  /**
+   * <p>TDStore锁时长</p><p>单位：秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TDStoreLockTime?: number
+  /**
+   * <p>全局标识ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TraceId?: string
+  /**
+   * <p>执行计划</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Explain?: Array<Explain>
 }
 
 /**
@@ -2836,6 +3286,16 @@ export interface ResourceTag {
 }
 
 /**
+ * ModifyMaintenanceWindow返回参数结构体
+ */
+export interface ModifyMaintenanceWindowResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * IsolateDBInstance请求参数结构体
  */
 export interface IsolateDBInstanceRequest {
@@ -2941,6 +3401,16 @@ export interface DestroyInstancesRequest {
 }
 
 /**
+ * DescribeMaintenanceWindow请求参数结构体
+ */
+export interface DescribeMaintenanceWindowRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+}
+
+/**
  * DescribeSpecs请求参数结构体
  */
 export interface DescribeSpecsRequest {
@@ -2993,6 +3463,32 @@ export interface ParamDesc {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description: string
+}
+
+/**
+ * ModifyInstanceNetwork请求参数结构体
+ */
+export interface ModifyInstanceNetworkRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 希望转到的VPC网络的VpcId
+   */
+  VpcId: string
+  /**
+   * 希望转到的VPC网络的子网ID
+   */
+  SubnetId: string
+  /**
+   * VIP保留时长，单位小时，取值范围（0~168），0表示立即释放，有一分钟释放延迟。不传此参数，默认24小时释放VIP。
+   */
+  VipReleaseDelay?: number
+  /**
+   * 指定vip变更，不填表示随机vip
+   */
+  Vip?: string
 }
 
 /**
@@ -3074,6 +3570,33 @@ export interface ConstraintRange {
 }
 
 /**
+ * 用户信息类型
+ */
+export interface UserInfo {
+  /**
+   * 用户名
+   */
+  UserName?: string
+  /**
+   * 用户描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 主机IP，IP段以%结尾，表示允许该IP段的所有IP
+   */
+  Host?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+}
+
+/**
  * RestartDBInstances请求参数结构体
  */
 export interface RestartDBInstancesRequest {
@@ -3085,6 +3608,32 @@ export interface RestartDBInstancesRequest {
    * <p>重启时间，不传表示立即重启</p>
    */
   RestartTime?: string
+}
+
+/**
+ * ResetUserPassword请求参数结构体
+ */
+export interface ResetUserPasswordRequest {
+  /**
+   * 用户名
+   */
+  UserName: string
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 主机IP，IP段以%结尾，表示允许该IP段的所有IP
+   */
+  Host: string
+  /**
+   * 新密码，要求长度8-32，至少包含英文、数字和符号中的两种
+   */
+  Password?: string
+  /**
+   * 加密密码
+   */
+  EncryptedPassword?: string
 }
 
 /**
@@ -3165,29 +3714,27 @@ export interface DescribeUserPrivilegesRequest {
 }
 
 /**
- * 日志备份统计对象
+ * DescribeDBSAvailableRecoveryTime请求参数结构体
  */
-export interface LogBackupStatisticsModel {
+export interface DescribeDBSAvailableRecoveryTimeRequest {
   /**
-   * <p>平均每个日志备份大小,单位Byte</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>实例ID</p>
    */
-  AverageSizePerBackup?: number
+  InstanceId: string
+}
+
+/**
+ * ModifyDBInstanceVPort返回参数结构体
+ */
+export interface ModifyDBInstanceVPortResponse {
   /**
-   * <p>平均每天日志备份大小,单位Byte</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 返回异步任务FlowId
    */
-  AverageSizePerDay?: number
+  FlowId?: number
   /**
-   * <p>日志备份个数</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TotalCount?: number
-  /**
-   * <p>日志备份大小，单位Byte</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalSize?: number
+  RequestId?: string
 }
 
 /**

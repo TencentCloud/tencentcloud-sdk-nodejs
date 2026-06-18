@@ -25,12 +25,10 @@ import {
   ListOrganizationChannelsRequest,
   DescribeDevicePresetData,
   ListSubTasksRequest,
-  DescribeGatewayMonitor,
   AddRecordBackupPlanResponse,
   DescribeCNAMERequest,
   DescribeVideoDownloadUrlData,
   ControlRecordTimelineRequest,
-  UpdateRecordBackupTemplateModify,
   DeleteOrganizationRequest,
   SetForbidPlayChannelsRequest,
   SubTaskData,
@@ -39,7 +37,6 @@ import {
   UpdateOrganizationResponse,
   DescribeDeviceData,
   BatchDeleteVideoDownloadTaskRequest,
-  ListGatewaysResponse,
   UpdateDeviceOrganizationRequest,
   UpdateDeviceOrganizationResponse,
   AddOrganizationResponse,
@@ -50,7 +47,6 @@ import {
   DescribeDomainResponse,
   DescribeRecordRetrieveTaskData,
   DescribeRecordBackupTemplateData,
-  UpgradeGatewayRequest,
   ControlDeviceStreamResponse,
   DeleteRecordRetrieveTaskResponse,
   DeleteRecordPlanResponse,
@@ -61,27 +57,20 @@ import {
   DescribeVideoBitRateRequest,
   SetForbidplayChannelParam,
   DescribeUserDeviceListRequest,
-  UpdateGatewayResponse,
   DescribeRecordRetrieveTaskRequest,
   ControlDeviceSnapshotResponse,
   RefreshDeviceChannelResponse,
   DeleteOrganizationResponse,
   DescribeRecordTemplateRequest,
   DeleteRecordTemplateRequest,
-  DescribeGatewayResponse,
+  DescribeRecordPlanResponse,
   ListRecordBackupPlanDevicesData,
-  DeleteTaskResponse,
-  DescribeGatewayRequest,
+  TaskData,
   AddRecordBackupTemplateData,
   DeleteUserDeviceRequest,
   AddRecordPlanResponse,
-  DescribeGatewayData,
   ListOrganizationChannelNumbersRequest,
-  GatewayVersion,
-  UpdateRecordBackupPlanModify,
   ListVideoDownloadTaskResponse,
-  UpgradeGatewayResponse,
-  ListVideoDownloadTaskData,
   DeleteDomainRequest,
   ListRecordRetrieveTasksRequest,
   DeleteRecordPlanRequest,
@@ -93,7 +82,6 @@ import {
   ListDeviceSnapshotsRequest,
   UpdateRecordPlanRequest,
   DescribeOrganizationRequest,
-  TaskData,
   ControlRecordResponse,
   UpdateDeviceData,
   AddRecordPlanRequest,
@@ -102,9 +90,8 @@ import {
   DescribeVideoDownloadUrlResponse,
   RecordPlanOptData,
   DescribeUserDeviceListResponse,
-  DescribeRecordPlanResponse,
   Timeline,
-  ListGatewaysData,
+  UpdateRecordBackupPlanModify,
   RecordRetrieveTaskChannelInfo,
   CallISAPIRequest,
   AddRecordRetrieveTaskRequest,
@@ -126,13 +113,11 @@ import {
   AddStreamAuthResponse,
   ListDevicesResponse,
   AddStreamAuthData,
-  DescribeGatewayMonitorRequest,
-  DeleteGatewayRequest,
+  RefreshDeviceChannelRequest,
   GBDeviceSnapInfo,
   ListDeviceInfo,
   LifeCycleData,
   ListOrganizationChannelNumbersResponse,
-  ListGatewayDevicesResponse,
   DescribeDomainData,
   ListRecordBackupTemplatesResponse,
   ListRecordPlanChannelsResponse,
@@ -146,7 +131,6 @@ import {
   DescribeDevicePresetResponse,
   UpdateRecordBackupPlanRequest,
   RecordTimeLine,
-  DescribeGatewayVersionData,
   ControlRecordRequest,
   ControlDevicePTZResponse,
   ListRecordBackupPlansRequest,
@@ -154,43 +138,36 @@ import {
   AddUserDeviceRequest,
   ListRecordBackupPlanDevicesResponse,
   DeleteTaskRequest,
-  GatewayDevice,
   ControlDevicePTZRequest,
   DescribeRecordBackupPlanRequest,
   DescribeRecordBackupPlanResponse,
   DescribeDeviceChannelRequest,
   UpdateUserDeviceResponse,
-  GatewaysData,
   VideoDownloadTaskData,
-  ListGatewayDevicesData,
+  ListTasksRequest,
   ListForbidplayChannelsData,
   CreateVideoDownloadTaskResponse,
   UpdateOrganizationRequest,
   AddRecordBackupPlanData,
-  DescribeGatewayProtocolResponse,
   DescribeGBDeviceAddrRequest,
   ControlDeviceSnapshotRequest,
   UpdateRecordTemplateData,
   DescribeDomainRegionRequest,
   AddRecordTemplateRequest,
-  DescribeGatewayProtocolRequest,
-  DescribeGatewayProtocolData,
+  DescribeRecordFileRequest,
+  RecordSliceInfo,
   QueryForbidPlayChannelListResponse,
   DescribeVideoDownloadUrlRequest,
-  DescribeGatewayVersionResponse,
-  ListGatewaysRequest,
-  ListTasksRequest,
-  DescribeGatewayVersionRequest,
+  RecordPlanBaseInfo,
+  ListRecordBackupTemplatesRequest,
   DescribeRecordSliceRequest,
   DescribeUserDeviceRequest,
   DescribeDeviceRegionRequest,
-  RefreshDeviceChannelRequest,
-  DescribeRecordFileRequest,
   AddStreamAuthRequest,
   RecordTemplateTimeSections,
   BitRateInfo,
   PlayRecordRequest,
-  RecordSliceInfo,
+  UpdateRecordBackupTemplateModify,
   QueryForbidPlayChannelListRequest,
   DescribeDeviceChannelData,
   DescribeRecordFileResponse,
@@ -198,7 +175,6 @@ import {
   ControlDevicePresetRequest,
   ControlDeviceStreamRequest,
   ListRecordRetrieveTasksResponse,
-  RecordPlanBaseInfo,
   ListRecordBackupPlanDevicesRequest,
   DeleteDomainResponse,
   AddRecordRetrieveTaskResponse,
@@ -215,32 +191,27 @@ import {
   ChannelAttrInfo,
   UpdateRecordPlanResponse,
   DescribeTaskResponse,
-  DescribeGatewayVersion,
-  RecordRetrieveTaskDetailsInfo,
+  ListVideoDownloadTaskData,
   DeleteRecordBackupPlanRequest,
-  UpdateGatewayData,
-  ListRecordBackupTemplatesRequest,
   ListRecordPlanChannelsRequest,
   DescribeDeviceRegion,
   RecordPlanChannelInfo,
   SetForbidPlayChannelsResponse,
   ListVideoDownloadTaskRequest,
   DeleteRecordBackupTemplateRequest,
-  ListGatewayDevicesRequest,
+  RecordRetrieveTaskDetailsInfo,
   DescribeVideoBitRateList,
   UpdateRecordTemplateResponse,
   AddRecordBackupTemplateResponse,
   PlayRecordResponse,
-  DescribeGatewayMonitorResponse,
   DescribeRecordBackupTemplateResponse,
   AddUserDeviceResponse,
   PlayRecordData,
-  DeleteGatewayResponse,
+  DeleteTaskResponse,
   DescribeRecordPlaybackUrlResponse,
   UpdateRecordPlanData,
   DescribeTaskRequest,
   ListOrganizationChannelsResponse,
-  UpdateGatewayRequest,
   DescribeRecordFileData,
   UpdateOrgData,
   DescribeDomainRegionResponse,
@@ -297,16 +268,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateDeviceStatusResponse) => void
   ): Promise<UpdateDeviceStatusResponse> {
     return this.request("UpdateDeviceStatus", req, cb)
-  }
-
-  /**
-   * 用于修改网关信息（支持对网关名称和描述的修改）。
-   */
-  async UpdateGateway(
-    req: UpdateGatewayRequest,
-    cb?: (error: string, rep: UpdateGatewayResponse) => void
-  ): Promise<UpdateGatewayResponse> {
-    return this.request("UpdateGateway", req, cb)
   }
 
   /**
@@ -381,16 +342,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询网关接入协议。
-   */
-  async DescribeGatewayProtocol(
-    req?: DescribeGatewayProtocolRequest,
-    cb?: (error: string, rep: DescribeGatewayProtocolResponse) => void
-  ): Promise<DescribeGatewayProtocolResponse> {
-    return this.request("DescribeGatewayProtocol", req, cb)
-  }
-
-  /**
    * 用于查询录像上云模板详情。
    */
   async DescribeRecordBackupTemplate(
@@ -401,13 +352,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于获取网关的数据及流量监控信息。
+   * 用于修改录像上云模板。
    */
-  async DescribeGatewayMonitor(
-    req: DescribeGatewayMonitorRequest,
-    cb?: (error: string, rep: DescribeGatewayMonitorResponse) => void
-  ): Promise<DescribeGatewayMonitorResponse> {
-    return this.request("DescribeGatewayMonitor", req, cb)
+  async UpdateRecordBackupTemplate(
+    req: UpdateRecordBackupTemplateRequest,
+    cb?: (error: string, rep: UpdateRecordBackupTemplateResponse) => void
+  ): Promise<UpdateRecordBackupTemplateResponse> {
+    return this.request("UpdateRecordBackupTemplate", req, cb)
   }
 
   /**
@@ -441,23 +392,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询网关服务版本
+   * 查询禁播通道列表
    */
-  async DescribeGatewayVersion(
-    req: DescribeGatewayVersionRequest,
-    cb?: (error: string, rep: DescribeGatewayVersionResponse) => void
-  ): Promise<DescribeGatewayVersionResponse> {
-    return this.request("DescribeGatewayVersion", req, cb)
-  }
-
-  /**
-   * 用于查询任务的子任务列表
-   */
-  async ListSubTasks(
-    req: ListSubTasksRequest,
-    cb?: (error: string, rep: ListSubTasksResponse) => void
-  ): Promise<ListSubTasksResponse> {
-    return this.request("ListSubTasks", req, cb)
+  async QueryForbidPlayChannelList(
+    req: QueryForbidPlayChannelListRequest,
+    cb?: (error: string, rep: QueryForbidPlayChannelListResponse) => void
+  ): Promise<QueryForbidPlayChannelListResponse> {
+    return this.request("QueryForbidPlayChannelList", req, cb)
   }
 
   /**
@@ -511,16 +452,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询实时上云计划列表
-   */
-  async ListRecordPlans(
-    req?: ListRecordPlansRequest,
-    cb?: (error: string, rep: ListRecordPlansResponse) => void
-  ): Promise<ListRecordPlansResponse> {
-    return this.request("ListRecordPlans", req, cb)
-  }
-
-  /**
    * 用于查询录像上云计划详情。
    */
   async DescribeRecordBackupPlan(
@@ -558,16 +489,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUserDeviceResponse) => void
   ): Promise<DescribeUserDeviceResponse> {
     return this.request("DescribeUserDevice", req, cb)
-  }
-
-  /**
-   * 查询禁播通道列表
-   */
-  async QueryForbidPlayChannelList(
-    req: QueryForbidPlayChannelListRequest,
-    cb?: (error: string, rep: QueryForbidPlayChannelListResponse) => void
-  ): Promise<QueryForbidPlayChannelListResponse> {
-    return this.request("QueryForbidPlayChannelList", req, cb)
   }
 
   /**
@@ -781,16 +702,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于获取网关详情。
-   */
-  async DescribeGateway(
-    req: DescribeGatewayRequest,
-    cb?: (error: string, rep: DescribeGatewayResponse) => void
-  ): Promise<DescribeGatewayResponse> {
-    return this.request("DescribeGateway", req, cb)
-  }
-
-  /**
    * 用于修改组织。
    */
   async UpdateOrganization(
@@ -971,16 +882,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于网关升级（支持对所有待更新的服务一键升级）。
-   */
-  async UpgradeGateway(
-    req: UpgradeGatewayRequest,
-    cb?: (error: string, rep: UpgradeGatewayResponse) => void
-  ): Promise<UpgradeGatewayResponse> {
-    return this.request("UpgradeGateway", req, cb)
-  }
-
-  /**
    * 用于设置推拉流鉴权配置。
    */
   async AddStreamAuth(
@@ -1021,16 +922,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询推拉流鉴权配置。
-   */
-  async DescribeStreamAuth(
-    req?: DescribeStreamAuthRequest,
-    cb?: (error: string, rep: DescribeStreamAuthResponse) => void
-  ): Promise<DescribeStreamAuthResponse> {
-    return this.request("DescribeStreamAuth", req, cb)
-  }
-
-  /**
    * 用于查询设备本地录像时间轴信息，为NVR/IPC本地存储的录像。
    */
   async ControlRecordTimeline(
@@ -1041,13 +932,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于获取网关列表。
+   * 用于查询任务的子任务列表
    */
-  async ListGateways(
-    req: ListGatewaysRequest,
-    cb?: (error: string, rep: ListGatewaysResponse) => void
-  ): Promise<ListGatewaysResponse> {
-    return this.request("ListGateways", req, cb)
+  async ListSubTasks(
+    req: ListSubTasksRequest,
+    cb?: (error: string, rep: ListSubTasksResponse) => void
+  ): Promise<ListSubTasksResponse> {
+    return this.request("ListSubTasks", req, cb)
   }
 
   /**
@@ -1061,33 +952,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于删除网关。
+   * 用于查询推拉流鉴权配置。
    */
-  async DeleteGateway(
-    req: DeleteGatewayRequest,
-    cb?: (error: string, rep: DeleteGatewayResponse) => void
-  ): Promise<DeleteGatewayResponse> {
-    return this.request("DeleteGateway", req, cb)
+  async DescribeStreamAuth(
+    req?: DescribeStreamAuthRequest,
+    cb?: (error: string, rep: DescribeStreamAuthResponse) => void
+  ): Promise<DescribeStreamAuthResponse> {
+    return this.request("DescribeStreamAuth", req, cb)
   }
 
   /**
-   * 用于修改录像上云模板。
+   * 用于查询实时上云计划列表
    */
-  async UpdateRecordBackupTemplate(
-    req: UpdateRecordBackupTemplateRequest,
-    cb?: (error: string, rep: UpdateRecordBackupTemplateResponse) => void
-  ): Promise<UpdateRecordBackupTemplateResponse> {
-    return this.request("UpdateRecordBackupTemplate", req, cb)
-  }
-
-  /**
-   * 用于查询网关下挂载的设备列表。
-   */
-  async ListGatewayDevices(
-    req: ListGatewayDevicesRequest,
-    cb?: (error: string, rep: ListGatewayDevicesResponse) => void
-  ): Promise<ListGatewayDevicesResponse> {
-    return this.request("ListGatewayDevices", req, cb)
+  async ListRecordPlans(
+    req?: ListRecordPlansRequest,
+    cb?: (error: string, rep: ListRecordPlansResponse) => void
+  ): Promise<ListRecordPlansResponse> {
+    return this.request("ListRecordPlans", req, cb)
   }
 
   /**

@@ -40,6 +40,8 @@ import {
   DeleteUserGroupMemberResponse,
   UserResourceDTO,
   ModifyDatasourceCloudResponse,
+  ParamCreateDTO,
+  EditCorpTagResponse,
   CreateUserRoleResponse,
   ApplyEmbedTokenInfo,
   ModifyResourceUserGroupResponse,
@@ -47,6 +49,8 @@ import {
   ExportScreenPageRequest,
   DeleteUserGroupMemberRequest,
   JoinSourceTable,
+  ModifyUserTagRequest,
+  CreateTagTableVO,
   CreateUserRoleProjectRequest,
   WidgetVO,
   RowColumnStatus,
@@ -59,6 +63,7 @@ import {
   DeleteDatasourceResponse,
   CreateProjectRequest,
   UserRoleListDataRoleInfo,
+  ModifyTagTableResponse,
   ExportScreenPageResponse,
   ApiKeyAuthApplyVOList,
   ModifyResourceUserResponse,
@@ -70,6 +75,7 @@ import {
   ModifyUserRoleRequest,
   CreateUserRoleRequest,
   CreateEmbedTokenRequest,
+  CreateCorpTagRequest,
   DescribeAuthApiKeyInfoResponse,
   ModifyDatasourceRequest,
   CreatePermissionRanksResponse,
@@ -79,6 +85,7 @@ import {
   DeleteProjectResponse,
   ModifyAuthApiKeyRequest,
   DescribeUserGroupInfoResponse,
+  ResourceDTO,
   ApplyEmbedIntervalResponse,
   ResourceItem,
   CreateUserGroupMemberResponse,
@@ -88,6 +95,7 @@ import {
   UserIdAndUserName,
   EmptyValue,
   DescribeUserRoleListResponse,
+  CreateCorpTagResponse,
   RowColumnTagValue,
   UserGroupUserInfoVO,
   DescribeResourceUserGroupPageListRequest,
@@ -103,6 +111,7 @@ import {
   DeleteAuthApiKeyRequest,
   TableColumn,
   DatasourceInfoData,
+  UserTagInfo,
   DescribePermissionRoleInfoResponse,
   DescribePageWidgetListRequest,
   DescribeUserRoleProjectListRequest,
@@ -117,7 +126,8 @@ import {
   DeleteUserRoleProjectRequest,
   DescribeAuthApiKeyListRequest,
   ClearEmbedTokenResponse,
-  ParamCreateDTO,
+  CreateTagTableRequest,
+  ModifyTagTableRequest,
   DescribeAuthApiKeyInfoRequest,
   DescribeSourceFieldListRequest,
   EmptyValueConfig,
@@ -125,6 +135,7 @@ import {
   DeleteUserRoleProjectResponse,
   DescribePermissionRoleInfoRequest,
   CreateDatasourceCloudRequest,
+  ModifyTagTableVO,
   ModifyResourceUserGroupRequest,
   IdDTO,
   ModifyDatasourceCloudRequest,
@@ -138,11 +149,13 @@ import {
   CreateDatasourceRequest,
   DeleteDatasourceRequest,
   WidgetListVO,
+  ModifyUserTagResponse,
   ModifyDatasourceResponse,
   DescribePageWidgetListResponse,
   UserGroupVO,
   UserGroupPageTreeVO,
   CreateDatasourceCloudResponse,
+  CreateTagTableResponse,
   ProjectConfigList,
   PermissionGroup,
   ApiDatasourceConfig,
@@ -166,7 +179,7 @@ import {
   DeleteUserGroupResponse,
   UserGroupTreeVO,
   DatasourceInfo,
-  ResourceDTO,
+  EditTagVO,
   ProjectListData,
   CreateEmbedTokenResponse,
   DeleteUserGroupRequest,
@@ -176,6 +189,7 @@ import {
   DescribeUserGroupMemberListRequest,
   DescribeDatasourceListResponse,
   ErrorInfo,
+  EditCorpTagRequest,
   PermissionComponent,
 } from "./bi_models"
 
@@ -229,13 +243,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DeleteUserGroupMember
+   * ApiKey列表
    */
-  async DeleteUserGroupMember(
-    req: DeleteUserGroupMemberRequest,
-    cb?: (error: string, rep: DeleteUserGroupMemberResponse) => void
-  ): Promise<DeleteUserGroupMemberResponse> {
-    return this.request("DeleteUserGroupMember", req, cb)
+  async DescribeAuthApiKeyList(
+    req: DescribeAuthApiKeyListRequest,
+    cb?: (error: string, rep: DescribeAuthApiKeyListResponse) => void
+  ): Promise<DescribeAuthApiKeyListResponse> {
+    return this.request("DescribeAuthApiKeyList", req, cb)
   }
 
   /**
@@ -269,6 +283,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建标签表
+   */
+  async CreateTagTable(
+    req: CreateTagTableRequest,
+    cb?: (error: string, rep: CreateTagTableResponse) => void
+  ): Promise<CreateTagTableResponse> {
+    return this.request("CreateTagTable", req, cb)
+  }
+
+  /**
    * 创建项目
    */
   async CreateProject(
@@ -279,13 +303,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * ApiKey列表
+   * DeleteUserGroupMember
    */
-  async DescribeAuthApiKeyList(
-    req: DescribeAuthApiKeyListRequest,
-    cb?: (error: string, rep: DescribeAuthApiKeyListResponse) => void
-  ): Promise<DescribeAuthApiKeyListResponse> {
-    return this.request("DescribeAuthApiKeyList", req, cb)
+  async DeleteUserGroupMember(
+    req: DeleteUserGroupMemberRequest,
+    cb?: (error: string, rep: DeleteUserGroupMemberResponse) => void
+  ): Promise<DeleteUserGroupMemberResponse> {
+    return this.request("DeleteUserGroupMember", req, cb)
+  }
+
+  /**
+   * 编辑企业标签(异步)
+   */
+  async EditCorpTag(
+    req: EditCorpTagRequest,
+    cb?: (error: string, rep: EditCorpTagResponse) => void
+  ): Promise<EditCorpTagResponse> {
+    return this.request("EditCorpTag", req, cb)
   }
 
   /**
@@ -356,6 +390,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateEmbedTokenResponse) => void
   ): Promise<CreateEmbedTokenResponse> {
     return this.request("CreateEmbedToken", req, cb)
+  }
+
+  /**
+   * 修改用户标签值
+   */
+  async ModifyUserTag(
+    req: ModifyUserTagRequest,
+    cb?: (error: string, rep: ModifyUserTagResponse) => void
+  ): Promise<ModifyUserTagResponse> {
+    return this.request("ModifyUserTag", req, cb)
   }
 
   /**
@@ -489,6 +533,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建企业标签
+   */
+  async CreateCorpTag(
+    req: CreateCorpTagRequest,
+    cb?: (error: string, rep: CreateCorpTagResponse) => void
+  ): Promise<CreateCorpTagResponse> {
+    return this.request("CreateCorpTag", req, cb)
+  }
+
+  /**
    * 项目内-用户角色列表
    */
   async DescribeUserRoleProjectList(
@@ -576,6 +630,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSourceFieldListResponse) => void
   ): Promise<DescribeSourceFieldListResponse> {
     return this.request("DescribeSourceFieldList", req, cb)
+  }
+
+  /**
+   * 编辑标签表
+   */
+  async ModifyTagTable(
+    req: ModifyTagTableRequest,
+    cb?: (error: string, rep: ModifyTagTableResponse) => void
+  ): Promise<ModifyTagTableResponse> {
+    return this.request("ModifyTagTable", req, cb)
   }
 
   /**

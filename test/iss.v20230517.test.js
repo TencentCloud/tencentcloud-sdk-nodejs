@@ -38,16 +38,6 @@ it("iss.v20230517.UpdateDeviceStatus", async function () {
     }
 })
 
-it("iss.v20230517.UpdateGateway", async function () {
-    try {
-       const data = await client.UpdateGateway({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("iss.v20230517.ListRecordRetrieveTasks", async function () {
     try {
        const data = await client.ListRecordRetrieveTasks({})
@@ -118,16 +108,6 @@ it("iss.v20230517.DescribeRecordSlice", async function () {
     }
 })
 
-it("iss.v20230517.DescribeGatewayProtocol", async function () {
-    try {
-       const data = await client.DescribeGatewayProtocol({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("iss.v20230517.DescribeRecordBackupTemplate", async function () {
     try {
        const data = await client.DescribeRecordBackupTemplate({})
@@ -138,9 +118,9 @@ it("iss.v20230517.DescribeRecordBackupTemplate", async function () {
     }
 })
 
-it("iss.v20230517.DescribeGatewayMonitor", async function () {
+it("iss.v20230517.UpdateRecordBackupTemplate", async function () {
     try {
-       const data = await client.DescribeGatewayMonitor({})
+       const data = await client.UpdateRecordBackupTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -178,19 +158,9 @@ it("iss.v20230517.CreateVideoDownloadTask", async function () {
     }
 })
 
-it("iss.v20230517.DescribeGatewayVersion", async function () {
+it("iss.v20230517.QueryForbidPlayChannelList", async function () {
     try {
-       const data = await client.DescribeGatewayVersion({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("iss.v20230517.ListSubTasks", async function () {
-    try {
-       const data = await client.ListSubTasks({})
+       const data = await client.QueryForbidPlayChannelList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,16 +218,6 @@ it("iss.v20230517.BatchDeleteVideoDownloadTask", async function () {
     }
 })
 
-it("iss.v20230517.ListRecordPlans", async function () {
-    try {
-       const data = await client.ListRecordPlans({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("iss.v20230517.DescribeRecordBackupPlan", async function () {
     try {
        const data = await client.DescribeRecordBackupPlan({})
@@ -291,16 +251,6 @@ it("iss.v20230517.DescribeRecordRetrieveTask", async function () {
 it("iss.v20230517.DescribeUserDevice", async function () {
     try {
        const data = await client.DescribeUserDevice({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("iss.v20230517.QueryForbidPlayChannelList", async function () {
-    try {
-       const data = await client.QueryForbidPlayChannelList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -518,16 +468,6 @@ it("iss.v20230517.UpdateRecordPlan", async function () {
     }
 })
 
-it("iss.v20230517.DescribeGateway", async function () {
-    try {
-       const data = await client.DescribeGateway({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("iss.v20230517.UpdateOrganization", async function () {
     try {
        const data = await client.UpdateOrganization({})
@@ -708,16 +648,6 @@ it("iss.v20230517.ListRecordPlanDevices", async function () {
     }
 })
 
-it("iss.v20230517.UpgradeGateway", async function () {
-    try {
-       const data = await client.UpgradeGateway({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("iss.v20230517.AddStreamAuth", async function () {
     try {
        const data = await client.AddStreamAuth({})
@@ -758,16 +688,6 @@ it("iss.v20230517.AddRecordBackupPlan", async function () {
     }
 })
 
-it("iss.v20230517.DescribeStreamAuth", async function () {
-    try {
-       const data = await client.DescribeStreamAuth({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("iss.v20230517.ControlRecordTimeline", async function () {
     try {
        const data = await client.ControlRecordTimeline({})
@@ -778,9 +698,9 @@ it("iss.v20230517.ControlRecordTimeline", async function () {
     }
 })
 
-it("iss.v20230517.ListGateways", async function () {
+it("iss.v20230517.ListSubTasks", async function () {
     try {
-       const data = await client.ListGateways({})
+       const data = await client.ListSubTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -798,9 +718,9 @@ it("iss.v20230517.DeleteRecordBackupPlan", async function () {
     }
 })
 
-it("iss.v20230517.DeleteGateway", async function () {
+it("iss.v20230517.DescribeStreamAuth", async function () {
     try {
-       const data = await client.DeleteGateway({})
+       const data = await client.DescribeStreamAuth({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -808,19 +728,9 @@ it("iss.v20230517.DeleteGateway", async function () {
     }
 })
 
-it("iss.v20230517.UpdateRecordBackupTemplate", async function () {
+it("iss.v20230517.ListRecordPlans", async function () {
     try {
-       const data = await client.UpdateRecordBackupTemplate({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("iss.v20230517.ListGatewayDevices", async function () {
-    try {
-       const data = await client.ListGatewayDevices({})
+       const data = await client.ListRecordPlans({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

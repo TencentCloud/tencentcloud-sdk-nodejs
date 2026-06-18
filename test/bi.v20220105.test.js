@@ -58,9 +58,9 @@ it("bi.v20220105.CreateDatasource", async function () {
     }
 })
 
-it("bi.v20220105.DeleteUserGroupMember", async function () {
+it("bi.v20220105.DescribeAuthApiKeyList", async function () {
     try {
-       const data = await client.DeleteUserGroupMember({})
+       const data = await client.DescribeAuthApiKeyList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,6 +98,16 @@ it("bi.v20220105.DescribeProjectInfo", async function () {
     }
 })
 
+it("bi.v20220105.CreateTagTable", async function () {
+    try {
+       const data = await client.CreateTagTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bi.v20220105.CreateProject", async function () {
     try {
        const data = await client.CreateProject({})
@@ -108,9 +118,19 @@ it("bi.v20220105.CreateProject", async function () {
     }
 })
 
-it("bi.v20220105.DescribeAuthApiKeyList", async function () {
+it("bi.v20220105.DeleteUserGroupMember", async function () {
     try {
-       const data = await client.DescribeAuthApiKeyList({})
+       const data = await client.DeleteUserGroupMember({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.EditCorpTag", async function () {
+    try {
+       const data = await client.EditCorpTag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -181,6 +201,16 @@ it("bi.v20220105.DeleteUserGroup", async function () {
 it("bi.v20220105.CreateEmbedToken", async function () {
     try {
        const data = await client.CreateEmbedToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.ModifyUserTag", async function () {
+    try {
+       const data = await client.ModifyUserTag({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,6 +348,16 @@ it("bi.v20220105.CreateUserGroupMember", async function () {
     }
 })
 
+it("bi.v20220105.CreateCorpTag", async function () {
+    try {
+       const data = await client.CreateCorpTag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("bi.v20220105.DescribeUserRoleProjectList", async function () {
     try {
        const data = await client.DescribeUserRoleProjectList({})
@@ -401,6 +441,16 @@ it("bi.v20220105.CreateUserRoleProject", async function () {
 it("bi.v20220105.DescribeSourceFieldList", async function () {
     try {
        const data = await client.DescribeSourceFieldList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("bi.v20220105.ModifyTagTable", async function () {
+    try {
+       const data = await client.ModifyTagTable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
