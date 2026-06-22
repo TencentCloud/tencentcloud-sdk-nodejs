@@ -8500,41 +8500,49 @@ export interface ModifyTrafficMirrorFilterRulesRequest {
 }
 
 /**
- * 查询云联网策略路由匹配规则
+ * 云联网策略路由匹配规则
  */
 export interface CcnPolicyBasedRoutingRule {
   /**
-   * 策略路由下一跳ID
+   * <p>策略路由下一跳ID</p>
    */
   PolicyBasedRoutingNextHopId: string
   /**
-   * 实例类型[VPC,DIRECTCONNECT,VPNGW]
+   * <p>实例类型[VPC,DIRECTCONNECT,VPNGW]</p>
    */
   InstanceType: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId: string
   /**
-   * 源地址CIDR
+   * <p>源地址CIDR</p>
    */
   SourceCidrBlock: string
   /**
-   * 目的地址CIDR
+   * <p>目的地址CIDR</p>
    */
   DestinationCidrBlock: string
   /**
-   * 优先级
+   * <p>优先级</p>
    */
   Priority: number
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
   /**
-   * 策略路由匹配策略ID
+   * <p>策略路由匹配策略ID</p>
    */
   PolicyBasedRoutingRuleId?: string
+  /**
+   * <p>目的端实例ID</p><p>枚举值：</p><ul><li>VPC： 私有网络</li></ul>
+   */
+  DestinationInstanceType?: string
+  /**
+   * <p>目的端实例ID</p>
+   */
+  DestinationInstanceId?: string
 }
 
 /**

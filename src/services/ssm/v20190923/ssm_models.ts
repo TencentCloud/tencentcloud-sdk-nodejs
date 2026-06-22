@@ -142,6 +142,14 @@ export interface DescribeSecretResponse {
    */
   EncryptSwitching?: boolean
   /**
+   * <p>创建者 uin 字符串</p>
+   */
+  CreateUinString?: string
+  /**
+   * <p>所属用户UIN 字符串</p>
+   */
+  TargetUinString?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -485,6 +493,14 @@ export interface SecretMetadata {
    * <p>凭据密钥加密切换中</p>
    */
   EncryptSwitching?: boolean
+  /**
+   * <p>创建者 UIN 字符串</p>
+   */
+  CreateUinString?: string
+  /**
+   * <p>所属者 UIN 字符串</p><p>用以兼容uint64,防止精度丢失</p>
+   */
+  TargetUinString?: string
 }
 
 /**

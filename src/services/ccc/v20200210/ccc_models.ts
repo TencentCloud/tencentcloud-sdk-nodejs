@@ -3328,6 +3328,10 @@ export interface AISpeakEvent {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LatencyMetrics?: AICallLatencyMetrics
+  /**
+   * <p>节点跳转的原因，仅画布为灵活模式时有值</p>
+   */
+  TraverseReason?: string
 }
 
 /**

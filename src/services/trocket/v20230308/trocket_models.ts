@@ -386,6 +386,10 @@ export interface DescribeMessageListRequest {
    * 消息 Tag，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口返回的 [MessageItem](https://cloud.tencent.com/document/api/1493/96031#MessageItem) 或业务日志中获得。
    */
   Tag?: string
+  /**
+   * 轻量主题
+   */
+  LiteTopic?: string
 }
 
 /**
@@ -697,56 +701,57 @@ export interface InstanceItemExtraInfo {
  */
 export interface DescribeConsumerGroupResponse {
   /**
-   * 在线消费者数量
+   * <p>在线消费者数量</p>
    */
   ConsumerNum?: number
   /**
-   * TPS
+   * <p>TPS</p>
    */
   Tps?: number
   /**
-   * 消息堆积数量
+   * <p>消息堆积数量</p>
    */
   ConsumerLag?: number
   /**
-   * 消费类型，枚举值如下：
-
-- PULL：PULL 消费类型
-- PUSH：PUSH 消费类型
-- POP：POP 消费类型
+   * <p>消费类型，枚举值如下：</p><ul><li>PULL：PULL 消费类型</li><li>PUSH：PUSH 消费类型</li><li>POP：POP 消费类型</li></ul>
    */
   ConsumeType?: string
   /**
-   * 创建时间，**Unix时间戳（毫秒）**
+   * <p>创建时间，<strong>Unix时间戳（毫秒）</strong></p>
    */
   CreatedTime?: number
   /**
-   * 顺序投递：true
-并发投递：false
+   * <p>顺序投递：true<br>并发投递：false</p>
    */
   ConsumeMessageOrderly?: boolean
   /**
-   * 是否开启消费
+   * <p>是否开启消费</p>
    */
   ConsumeEnable?: boolean
   /**
-   * 最大重试次数
+   * <p>最大重试次数</p>
    */
   MaxRetryTimes?: number
   /**
-   * 备注
+   * <p>备注</p>
    */
   Remark?: string
   /**
-   * 消费模式：
-BROADCASTING 广播模式
-CLUSTERING 集群模式
+   * <p>消费模式：<br>BROADCASTING 广播模式<br>CLUSTERING 集群模式</p>
    */
   MessageModel?: string
   /**
-   * 重试策略
+   * <p>重试策略</p>
    */
   RetryPolicy?: RetryPolicy
+  /**
+   * <p>消费模式</p><p>枚举值：</p><ul><li>CLUSTERING： 集群/广播消费</li><li>LITE： LiteTopic消费</li></ul><p>默认值：CLUSTERING</p>
+   */
+  ConsumeModel?: string
+  /**
+   * <p>订阅的轻量主题（仅适用于轻量消费模式）</p>
+   */
+  LiteTopic?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -938,6 +943,10 @@ export interface SendMessageRequest {
    * 消息Tag
    */
   MsgTag?: string
+  /**
+   * 轻量主题
+   */
+  LiteTopic?: string
 }
 
 /**
@@ -1083,16 +1092,15 @@ export interface CreateConsumerGroupRequest {
    */
   InstanceId: string
   /**
-   * 最大重试次数，取值范围0～1000
+   * <p>最大重试次数，取值范围0～1000</p>
    */
   MaxRetryTimes: number
   /**
-   * 是否开启消费
+   * <p>是否开启消费</p>
    */
   ConsumeEnable: boolean
   /**
-   * 顺序投递：true
-并发投递：false
+   * <p>顺序投递：true<br>并发投递：false</p>
    */
   ConsumeMessageOrderly: boolean
   /**
@@ -1100,17 +1108,21 @@ export interface CreateConsumerGroupRequest {
    */
   ConsumerGroup?: string
   /**
-   * 备注信息，最多 128 个字符
+   * <p>备注信息，最多 128 个字符</p>
    */
   Remark?: string
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   TagList?: Array<Tag>
   /**
-   * 重试策略
+   * <p>重试策略</p>
    */
   RetryPolicy?: RetryPolicy
+  /**
+   * <p>轻量主题</p>
+   */
+  LiteTopic?: string
 }
 
 /**
@@ -1341,46 +1353,49 @@ export interface DeleteInstanceResponse {
  */
 export interface DescribeTopicResponse {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 主题名称
+   * <p>主题名称</p>
    */
   Topic?: string
   /**
-   * 主题类型
-UNSPECIFIED:未指定,
-NORMAL:普通消息,
-FIFO:顺序消息,
-DELAY:延时消息,
-TRANSACTION:事务消息
+   * <p>主题类型<br>UNSPECIFIED:未指定,<br>NORMAL:普通消息,<br>FIFO:顺序消息,<br>DELAY:延时消息,<br>TRANSACTION:事务消息</p>
    */
   TopicType?: string
   /**
-   * 备注
+   * <p>备注</p>
    */
   Remark?: string
   /**
-   * 创建时间，**Unix时间戳（毫秒）**
+   * <p>创建时间，<strong>Unix时间戳（毫秒）</strong></p>
    */
   CreatedTime?: number
   /**
-   * 最后写入时间，**Unix时间戳（毫秒）**
+   * <p>最后写入时间，<strong>Unix时间戳（毫秒）</strong></p>
    */
   LastUpdateTime?: number
   /**
-   * 订阅数量
+   * <p>订阅数量</p>
    */
   SubscriptionCount?: number
   /**
-   * 订阅关系列表
+   * <p>订阅关系列表</p>
    */
   SubscriptionData?: Array<SubscriptionData>
   /**
-   * 消息保留时长，单位：小时
+   * <p>消息保留时长，单位：小时</p>
    */
   MsgTTL?: number
+  /**
+   * <p>是否自动删除</p><p>仅适用于轻量主题</p>
+   */
+  AutoExpireDelete?: boolean
+  /**
+   * <p>自动过期时间</p><p>单位：分钟</p><p>仅适用于轻量主题</p>
+   */
+  AutoExpireTime?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1516,12 +1531,13 @@ export interface CreateTopicRequest {
 - FIFO: 顺序消息
 - DELAY: 延时消息
 - TRANSACTION: 事务消息
+- LITE: 轻量消息
    */
   TopicType: string
   /**
    * 队列数量，取值范围3～16
    */
-  QueueNum: number
+  QueueNum?: number
   /**
    * 备注信息，最多 128 个字符
    */
@@ -1534,6 +1550,14 @@ export interface CreateTopicRequest {
    * 标签列表
    */
   TagList?: Array<Tag>
+  /**
+   * 是否过期自动删除（仅针对轻量主题类型）
+   */
+  AutoExpireDelete?: boolean
+  /**
+   * 过期时间，单位：秒（仅针对轻量主题类型）
+   */
+  AutoExpireTime?: number
 }
 
 /**
@@ -1549,7 +1573,7 @@ export interface DescribeMessageRequest {
    */
   Topic: string
   /**
-   * 消息 ID，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口或业务日志中获得。
+   * <p>消息 ID，从 <a href="https://cloud.tencent.com/document/api/1493/114593">DescribeMessageList</a> 接口或业务日志中获得。</p>
    */
   MsgId: string
   /**
@@ -1561,11 +1585,11 @@ export interface DescribeMessageRequest {
    */
   Limit?: number
   /**
-   * 是否是死信消息，默认为false
+   * <p>是否是死信消息，默认为false</p>
    */
   QueryDeadLetterMessage?: boolean
   /**
-   * 是否是延时消息，默认为false
+   * <p>是否是延时消息，默认为false</p>
    */
   QueryDelayMessage?: boolean
 }
@@ -1648,11 +1672,11 @@ export interface DeleteConsumerGroupRequest {
  */
 export interface CreateConsumerGroupResponse {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   InstanceId?: string
   /**
-   * 消费组名称
+   * <p>消费组名称</p>
    */
   ConsumerGroup?: string
   /**
@@ -1704,11 +1728,15 @@ export interface DescribeTopicListByGroupResponse {
  */
 export interface DescribeMessageTraceResponse {
   /**
-   * 主题名称
+   * <p>主题名称</p>
    */
   ShowTopicName?: string
   /**
-   * 轨迹详情
+   * <p>轻量主题名称</p>
+   */
+  LiteTopic?: string
+  /**
+   * <p>轨迹详情</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Array<MessageTraceItem>
@@ -1954,15 +1982,15 @@ export interface DescribeMessageTraceRequest {
    */
   Topic: string
   /**
-   * 消息 ID，从 [DescribeMessageList](https://cloud.tencent.com/document/api/1493/114593) 接口返回的 [MessageItem](https://cloud.tencent.com/document/api/1493/96031#MessageItem) 或业务日志中获得。
+   * <p>消息 ID，从 <a href="https://cloud.tencent.com/document/api/1493/114593">DescribeMessageList</a> 接口返回的 <a href="https://cloud.tencent.com/document/api/1493/96031#MessageItem">MessageItem</a> 或业务日志中获得。</p>
    */
   MsgId: string
   /**
-   * 是否是死信消息，默认为false
+   * <p>是否是死信消息，默认为false</p>
    */
   QueryDeadLetterMessage?: boolean
   /**
-   * 是否是延时消息，默认为false
+   * <p>是否是延时消息，默认为false</p>
    */
   QueryDelayMessage?: boolean
 }
@@ -2081,37 +2109,41 @@ export interface RemoveMigratingTopicRequest {
  */
 export interface DescribeMessageResponse {
   /**
-   * 消息体
+   * <p>消息体</p>
    */
   Body?: string
   /**
-   * 详情参数
+   * <p>详情参数</p>
    */
   Properties?: string
   /**
-   * 生产时间
+   * <p>生产时间</p>
    */
   ProduceTime?: string
   /**
-   * 消息ID
+   * <p>消息ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MessageId?: string
   /**
-   * 生产者地址
+   * <p>生产者地址</p>
    */
   ProducerAddr?: string
   /**
-   * 消息消费情况列表
+   * <p>消息消费情况列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MessageTracks?: Array<MessageTrackItem>
   /**
-   * 主题名称
+   * <p>主题名称</p>
    */
   ShowTopicName?: string
   /**
-   * 消息消费情况列表总条数
+   * <p>轻量主题名称</p>
+   */
+  LiteTopic?: string
+  /**
+   * <p>消息消费情况列表总条数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MessageTracksCount?: number
@@ -2736,17 +2768,25 @@ export interface ModifyTopicRequest {
    */
   Topic: string
   /**
-   * 队列数量，取值范围3～16
+   * <p>队列数量，取值范围3～16</p>
    */
   QueueNum?: number
   /**
-   * 备注信息，最多 128 个字符
+   * <p>备注信息，最多 128 个字符</p>
    */
   Remark?: string
   /**
-   * 消息保留时长（单位：小时）
+   * <p>消息保留时长（单位：小时）</p>
    */
   MsgTTL?: number
+  /**
+   * <p>是否过期自动删除（仅针对轻量主题类型）</p>
+   */
+  AutoExpireDelete?: boolean
+  /**
+   * <p>过期时间（仅针对轻量主题类型）</p><p>取值范围：[30, 720]</p><p>单位：分钟</p>
+   */
+  AutoExpireTime?: number
 }
 
 /**

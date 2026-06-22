@@ -20,6 +20,7 @@ import { ClientConfig } from "../../../common/interface"
 import {
   DescribeRabbitMQServerlessConnectionResponse,
   DeleteRabbitMQServerlessPermissionResponse,
+  RabbitMQServerlessKeyValuePair,
   RabbitMQBindingListInfo,
   ModifyRabbitMQServerlessUserResponse,
   CreateRabbitMQServerlessVirtualHostRequest,

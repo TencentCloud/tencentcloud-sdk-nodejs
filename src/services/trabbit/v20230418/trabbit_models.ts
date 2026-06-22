@@ -44,45 +44,63 @@ export interface DeleteRabbitMQServerlessPermissionResponse {
 }
 
 /**
+ * 键值对
+ */
+export interface RabbitMQServerlessKeyValuePair {
+  /**
+   * 键
+   */
+  Key?: string
+  /**
+   * 值
+   */
+  Value?: string
+}
+
+/**
  * Rabbitmq路由关系列表成员
  */
 export interface RabbitMQBindingListInfo {
   /**
-   * 路由关系id
+   * <p>路由关系id</p>
    */
   BindingId?: number
   /**
-   * Vhost参数
+   * <p>Vhost参数</p>
    */
   VirtualHost?: string
   /**
-   * 源exchange名称
+   * <p>源exchange名称</p>
    */
   Source?: string
   /**
-   * 目标类型,queue或exchange
+   * <p>目标类型,queue或exchange</p>
    */
   DestinationType?: string
   /**
-   * 目标资源名称
+   * <p>目标资源名称</p>
    */
   Destination?: string
   /**
-   * 绑定key
+   * <p>绑定key</p>
    */
   RoutingKey?: string
   /**
-   * 源exchange类型
+   * <p>源exchange类型</p>
    */
   SourceExchangeType?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 修改时间
+   * <p>修改时间</p>
    */
   ModifyTime?: string
+  /**
+   * <p>绑定参数，header类型的Exchange绑定时，可以传入参数。其它类型 Exchange 无需传入</p>
+   */
+  Arguments?: Array<RabbitMQServerlessKeyValuePair>
 }
 
 /**
@@ -821,11 +839,11 @@ export interface DescribeRabbitMQServerlessVirtualHostResponse {
  */
 export interface DescribeRabbitMQServerlessQueuesResponse {
   /**
-   * 队列列表信息
+   * <p>队列列表信息</p>
    */
   QueueInfoList?: Array<RabbitMQQueueListInfo>
   /**
-   * 数量
+   * <p>数量</p>
    */
   TotalCount?: number
   /**
@@ -1253,15 +1271,15 @@ export interface RabbitMQConsumersListInfo {
  */
 export interface CreateRabbitMQServerlessBindingResponse {
   /**
-   * 队列名称
+   * <p>队列名称</p>
    */
   InstanceId?: string
   /**
-   * vhost参数
+   * <p>vhost参数</p>
    */
   VirtualHost?: string
   /**
-   * 路由关系Id
+   * <p>路由关系Id</p>
    */
   BindingId?: number
   /**
@@ -1681,29 +1699,33 @@ export interface ModifyRabbitMQServerlessQueueResponse {
  */
 export interface CreateRabbitMQServerlessBindingRequest {
   /**
-   * 实例Id
+   * <p>实例Id</p>
    */
   InstanceId: string
   /**
-   * Vhost参数
+   * <p>Vhost参数</p>
    */
   VirtualHost: string
   /**
-   * 源exchange
+   * <p>源exchange</p>
    */
   Source: string
   /**
-   * 目标类型,取值queue或exchange
+   * <p>目标类型,取值queue或exchange</p>
    */
   DestinationType: string
   /**
-   * 目标队列或者交换机
+   * <p>目标队列或者交换机</p>
    */
   Destination: string
   /**
-   * 绑定key
+   * <p>绑定key</p>
    */
   RoutingKey?: string
+  /**
+   * <p>创建 Header 类型 Exchange 的 Binding 时，可以传入参数。其它类型 Exchange 无需传入</p>
+   */
+  Arguments?: Array<RabbitMQServerlessKeyValuePair>
 }
 
 /**
@@ -2137,40 +2159,35 @@ export interface CreateRabbitMQServerlessQueueResponse {
  */
 export interface DescribeRabbitMQServerlessQueuesRequest {
   /**
-   * 实例Id
+   * <p>实例Id</p>
    */
   InstanceId: string
   /**
-   * Vhost参数
+   * <p>Vhost参数</p>
    */
   VirtualHost?: string
   /**
-   * 分页Offset
+   * <p>分页Offset</p>
    */
   Offset?: number
   /**
-   * 分页Limit
+   * <p>分页Limit</p>
    */
   Limit?: number
   /**
-   * 搜索关键词
+   * <p>搜索关键词</p>
    */
   SearchWord?: string
   /**
-   * 队列类型筛选，不填或 "all"：classic 和 quorum 队列；"classic"：筛选 classic 队列；"quorum"：筛选 quorum 队列
+   * <p>队列类型筛选，不填或 &quot;all&quot;：classic 和 quorum 队列；&quot;classic&quot;：筛选 classic 队列；&quot;quorum&quot;：筛选 quorum 队列</p>
    */
   QueueType?: string
   /**
-   * 排序依据的字段：
-ConsumerNumber - 在线消费者数量；
-MessageHeapCount - 消息堆积数；
-MessageRateInOut - 生产消费速率之和；
-MessageRateIn - 生产速率；
-MessageRateOut - 消费速率；
+   * <p>排序依据的字段：<br>messages_ready - 消息堆积数；<br>publish - 生产速率；<br>deliver - 消费速率；<br>consumers - 在线消费者数量；</p>
    */
   SortElement?: string
   /**
-   * 排序顺序，ascend 或 descend
+   * <p>排序顺序，asc 或 desc</p>
    */
   SortOrder?: string
 }

@@ -1689,7 +1689,7 @@ export interface DescribeBuildInImagesRequest {
  */
 export interface MountConfigureInfo {
   /**
-   * 数据源的相对路径，支持<@subaccount>这样的占位符
+   * <p>数据源的相对路径，支持&lt;@subaccount&gt;这样的占位符</p>
    */
   WorkDir?: string
 }
@@ -2544,6 +2544,10 @@ export interface Event {
  * DescribeBillingResourceGroupAttachedWorkspaces请求参数结构体
  */
 export interface DescribeBillingResourceGroupAttachedWorkspacesRequest {
+  /**
+   * <p>资源组ID</p>
+   */
+  ResourceGroupId: string
   /**
    * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
    */
@@ -4928,6 +4932,43 @@ export interface Instance {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrMsg?: string
+  /**
+   * <p>节点可用资源</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AvailableResource?: ResourceInfo
+  /**
+   * <p>资源组节点的IP</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceIP?: string
+  /**
+   * <p>资源组节点的名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * <p>cvm机型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CvmInstanceType?: string
+  /**
+   * <p>是否自动续买</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoRenew?: boolean
+  /**
+   * <p>是否被隔离</p>
+   */
+  Isolated?: boolean
+  /**
+   * <p>维修任务信息</p>
+   */
+  RepairTaskInfo?: RepairTaskInfo
+  /**
+   * <p>节点可用区名称</p>
+   */
+  ZoneName?: string
 }
 
 /**
@@ -6151,6 +6192,36 @@ export interface CreateDatasetRequest {
    * <p>数据集CFS配置。仅支持LLM场景</p>
    */
   CFSConfig?: CFSConfig
+}
+
+/**
+ * cvm维修任务信息
+ */
+export interface RepairTaskInfo {
+  /**
+   * <p>维修任务ID</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务类型ID<br>// - <code>101</code>：实例运行隐患<br>    // - <code>102</code>：实例运行异常<br>    // - <code>103</code>：实例硬盘异常<br>    // - <code>104</code>：实例网络连接异常<br>    // - <code>105</code>：实例运行预警<br>    // - <code>106</code>：实例硬盘预警<br>    // - <code>107</code>：实例维护升级</p>
+   */
+  TaskTypeId?: number
+  /**
+   * <p>任务类型中文名</p>
+   */
+  TaskTypeName?: string
+  /**
+   * <p>任务创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>任务详情</p>
+   */
+  TaskDetail?: string
+  /**
+   * <p>产品类型，支持取值：<br>    //<br>    // - <code>CVM</code>：云服务器<br>    // - <code>CDH</code>：专用宿主机<br>    // - <code>CPM2.0</code>：裸金属云服务器</p>
+   */
+  Product?: string
 }
 
 /**

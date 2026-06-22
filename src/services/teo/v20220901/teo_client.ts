@@ -250,6 +250,7 @@ import {
   NextOriginACL,
   DescribeMultiPathGatewayRegionsRequest,
   DescribeZoneSettingRequest,
+  AdvancedOriginRoutingParameters,
   ModifyL4ProxyStatusResponse,
   FileVerification,
   ModifyWebSecurityTemplateResponse,

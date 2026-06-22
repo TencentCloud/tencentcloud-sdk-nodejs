@@ -184,79 +184,79 @@ export interface ModifyRabbitMQVipInstanceRequest {
  */
 export interface RocketMQVipInstance {
   /**
-   * 实例id
+   * <p>实例id</p>
    */
   InstanceId?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 实例版本
+   * <p>实例版本</p>
    */
   InstanceVersion?: string
   /**
-   * 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败，6 - 变配中，7 - 变配失败
+   * <p>实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败，6 - 变配中，7 - 变配失败</p>
    */
   Status?: number
   /**
-   * 节点数量
+   * <p>节点数量</p>
    */
   NodeCount?: number
   /**
-   * 实例配置规格名称
+   * <p>实例配置规格名称</p>
    */
   ConfigDisplay?: string
   /**
-   * 峰值TPS
+   * <p>峰值TPS</p>
    */
   MaxTps?: number
   /**
-   * 峰值带宽，Mbps为单位
+   * <p>峰值带宽，Mbps为单位</p>
    */
   MaxBandWidth?: number
   /**
-   * 存储容量，GB为单位
+   * <p>存储容量，GB为单位</p>
    */
   MaxStorage?: number
   /**
-   * 实例到期时间，毫秒为单位
+   * <p>实例到期时间，毫秒为单位</p>
    */
   ExpireTime?: number
   /**
-   * 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)
+   * <p>自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)</p>
    */
   AutoRenewFlag?: number
   /**
-   * 0-后付费，1-预付费
+   * <p>0-后付费，1-预付费</p>
    */
   PayMode?: number
   /**
-   * 备注信息
+   * <p>备注信息</p>
    */
   Remark?: string
   /**
-   * 实例配置ID
+   * <p>实例规格</p><p>枚举值：</p><ul><li>rocket-vip-basic-0： 通用集群</li><li>rocket-vip-basic-1： 专享集群-基础型</li><li>rocket-vip-basic-2： 专享集群-标准型</li><li>rocket-vip-basic-3： 专享集群-高阶I型</li><li>rocket-vip-basic-4： 专享集群-高阶II型</li></ul>
    */
   SpecName?: string
   /**
-   * 最大可设置消息保留时间，小时为单位
+   * <p>最大可设置消息保留时间，小时为单位</p>
    */
   MaxRetention?: number
   /**
-   * 最小可设置消息保留时间，小时为单位
+   * <p>最小可设置消息保留时间，小时为单位</p>
    */
   MinRetention?: number
   /**
-   * 实例消息保留时间，小时为单位
+   * <p>实例消息保留时间，小时为单位</p>
    */
   Retention?: number
   /**
-   * 是否开启ACL鉴权
+   * <p>是否开启ACL鉴权</p>
    */
   AclEnabled?: boolean
   /**
-   * 销毁时间
+   * <p>销毁时间</p>
    */
   DestroyTime?: number
 }
@@ -1406,46 +1406,50 @@ export interface ModifyRoleRequest {
  */
 export interface DescribeRocketMQMsgRequest {
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   ClusterId: string
   /**
-   * 命名空间，4.x 通用集群命名空间固定为: tdmq_default
+   * <p>命名空间，4.x 通用集群命名空间固定为: tdmq_default</p>
    */
   EnvironmentId: string
   /**
-   * 主题，查询死信时传groupId
+   * <p>主题，查询死信时传groupId</p>
    */
   TopicName: string
   /**
-   * 消息id
+   * <p>消息id</p>
    */
   MsgId: string
   /**
-   * pulsar消息id
+   * <p>pulsar消息id</p>
    */
   PulsarMsgId: string
   /**
-   * 查询死信时该值为true，只对Rocketmq有效
+   * <p>查询死信时该值为true，只对Rocketmq有效</p>
    * @deprecated
    */
   QueryDlqMsg?: boolean
   /**
-   * 查询死信时该值为true，只对Rocketmq有效
+   * <p>查询死信时该值为true，只对Rocketmq有效</p>
    */
   QueryDeadLetterMessage?: boolean
   /**
-   * 分页Offset
+   * <p>分页Offset</p>
    */
   Offset?: number
   /**
-   * 分页Limit
+   * <p>分页Limit</p>
    */
   Limit?: number
   /**
-   * 根据消费组名称过滤消费详情
+   * <p>根据消费组名称过滤消费详情</p>
    */
   FilterTrackGroup?: string
+  /**
+   * <p>查询延迟消息或定时消息时，该值为true</p>
+   */
+  QueryDelayMessage?: boolean
 }
 
 /**
@@ -4325,29 +4329,33 @@ export interface CreateProClusterResponse {
  */
 export interface ModifyRocketMQInstanceRequest {
   /**
-   * 专享实例ID
+   * <p>专享实例ID</p>
    */
   InstanceId: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   Name?: string
   /**
-   * 实例备注信息
+   * <p>实例备注信息</p>
    */
   Remark?: string
   /**
-   * 实例消息保留时间，小时为单位
+   * <p>实例消息保留时间，小时为单位</p>
    */
   MessageRetention?: number
   /**
-   * 是否开启删除保护
+   * <p>是否开启删除保护</p>
    */
   EnableDeletionProtection?: boolean
   /**
-   * 控制生产和消费消息的 TPS 占比，取值范围0～1，默认值为0.5
+   * <p>控制生产和消费消息的 TPS 占比，取值范围0～1，默认值为0.5</p>
    */
   SendReceiveRatio?: number
+  /**
+   * <p>是否开启ACL</p>
+   */
+  AclEnabled?: boolean
 }
 
 /**
@@ -6634,37 +6642,37 @@ export interface VpcBindRecord {
  */
 export interface DescribeRocketMQMsgResponse {
   /**
-   * 消息体
+   * <p>消息体</p>
    */
   Body?: string
   /**
-   * 详情参数
+   * <p>详情参数</p>
    */
   Properties?: string
   /**
-   * 生产时间
+   * <p>生产时间</p>
    */
   ProduceTime?: string
   /**
-   * 消息id
+   * <p>消息id</p>
    */
   MsgId?: string
   /**
-   * 生产者地址
+   * <p>生产者地址</p>
    */
   ProducerAddr?: string
   /**
-   * 消费组消费情况列表
+   * <p>消费组消费情况列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MessageTracks?: Array<RocketMQMessageTrack>
   /**
-   * 详情页展示的topic名称
+   * <p>详情页展示的topic名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ShowTopicName?: string
   /**
-   * 消费组消费情况列表总数
+   * <p>消费组消费情况列表总数</p>
    */
   MessageTracksCount?: number
   /**
@@ -7815,150 +7823,155 @@ export interface ModifyRocketMQTopicRequest {
  */
 export interface RocketMQClusterInfo {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName?: string
   /**
-   * 地域信息
+   * <p>地域信息</p>
    */
   Region?: string
   /**
-   * 创建时间，毫秒为单位
+   * <p>创建时间，毫秒为单位</p>
    */
   CreateTime?: number
   /**
-   * 集群说明信息
+   * <p>集群说明信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
-   * 公网接入地址
+   * <p>公网接入地址</p>
    */
   PublicEndPoint?: string
   /**
-   * VPC接入地址
+   * <p>VPC接入地址</p>
    */
   VpcEndPoint?: string
   /**
-   * 是否支持命名空间接入点
+   * <p>是否支持命名空间接入点</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportNamespaceEndpoint?: boolean
   /**
-   * VPC信息
+   * <p>VPC信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Vpcs?: Array<VpcConfig>
   /**
-   * 是否为专享实例
+   * <p>是否为专享实例</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsVip?: boolean
   /**
-   * Rocketmq集群标识
+   * <p>Rocketmq集群标识</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RocketMQFlag?: boolean
   /**
-   * 计费状态，1表示正常，2表示已停服，3表示已销毁
+   * <p>计费状态，1表示正常，2表示已停服，3表示已销毁</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
-   * 欠费停服时间，毫秒为单位
+   * <p>欠费停服时间，毫秒为单位</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsolateTime?: number
   /**
-   * HTTP协议公网接入地址
+   * <p>HTTP协议公网接入地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HttpPublicEndpoint?: string
   /**
-   * HTTP协议VPC接入地址
+   * <p>HTTP协议VPC接入地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HttpVpcEndpoint?: string
   /**
-   * TCP内部接入地址
+   * <p>TCP内部接入地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InternalEndpoint?: string
   /**
-   * HTTP协议内部接入地址
+   * <p>HTTP协议内部接入地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HttpInternalEndpoint?: string
   /**
-   * 是否开启ACL鉴权，专享实例支持关闭
+   * <p>是否开启ACL鉴权，专享实例支持关闭</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AclEnabled?: boolean
   /**
-   * 公网CLB实例ID
+   * <p>公网CLB实例ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PublicClbId?: string
   /**
-   * vip
+   * <p>vip</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Vip?: string
   /**
-   * 所属VPC
+   * <p>所属VPC</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
-   * 是否支持迁移
+   * <p>是否支持迁移</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportMigration?: boolean
   /**
-   * 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败，6 - 变配中，7 - 变配失败
+   * <p>实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败，6 - 变配中，7 - 变配失败</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceStatus?: number
   /**
-   * 集群所属可用区，表明集群归属的可用区
+   * <p>集群所属可用区，表明集群归属的可用区</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneId?: number
   /**
-   * 集群节点所在的可用区，若该集群为跨可用区集群，则包含该集群节点所在的多个可用区。
+   * <p>集群节点所在的可用区，若该集群为跨可用区集群，则包含该集群节点所在的多个可用区。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneIds?: Array<number | bigint>
   /**
-   * 是否已冻结
+   * <p>是否已冻结</p>
    */
   IsFrozen?: boolean
   /**
-   * 是否开启自动创建主题
+   * <p>是否开启自动创建主题</p>
    */
   AutoCreateTopicEnabled?: boolean
   /**
-   * 是否开启集群Admin能力
+   * <p>是否开启集群Admin能力</p>
    */
   AdminFeatureEnabled?: boolean
   /**
-   * Admin AK
+   * <p>Admin AK</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdminAccessKey?: string
   /**
-   * Admin SK
+   * <p>Admin SK</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdminSecretKey?: string
   /**
-   * 是否开启删除保护
+   * <p>是否开启删除保护</p>
    */
   EnableDeletionProtection?: boolean
+  /**
+   * <p>是否开启自动创建消费组</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoCreateConsumeGroupEnabled?: boolean
 }
 
 /**

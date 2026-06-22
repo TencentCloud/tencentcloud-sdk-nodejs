@@ -210,6 +210,7 @@ import {
   ModelInfo,
   UpdateDataSourceResponse,
   CreateDatasetRequest,
+  RepairTaskInfo,
   CreateModelServiceResponse,
   DeleteExportRequest,
   ServiceGroup,
