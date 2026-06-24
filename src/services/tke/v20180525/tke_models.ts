@@ -2339,7 +2339,7 @@ second：二级目录
  */
 export interface ModifyClusterTagsResponse {
   /**
-   * 集群标签
+   * <p>集群标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
@@ -13332,18 +13332,21 @@ export interface DeleteLogConfigsRequest {
  */
 export interface ModifyClusterTagsRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 集群标签:
-[{"TagKey":"env","TagValue":"dev"}]}]
+   * <p>集群标签:<br>[{&quot;TagKey&quot;:&quot;env&quot;,&quot;TagValue&quot;:&quot;dev&quot;}]}]</p>
    */
   Tags?: Array<Tag>
   /**
-   * 是否同步集群内子资源标签
+   * <p>是否同步集群内子资源标签</p>
    */
   SyncSubresource?: boolean
+  /**
+   * <p>是否同步节点池标签</p>
+   */
+  SyncNodePoolTags?: boolean
 }
 
 /**

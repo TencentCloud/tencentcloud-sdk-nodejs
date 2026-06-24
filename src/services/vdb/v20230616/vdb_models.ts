@@ -234,7 +234,7 @@ export interface DescribePriceResizeInstanceResponse {
  */
 export interface CreateInstanceResponse {
   /**
-   * 实例 ID。
+   * <p>实例 ID。</p>
    */
   InstanceIds?: Array<string>
   /**
@@ -352,156 +352,142 @@ export interface Tag {
  */
 export interface CreateInstanceRequest {
   /**
-   * 私有网络 ID。
+   * <p>私有网络 ID。</p>
    */
   VpcId: string
   /**
-   * 私有网络 VPC 的子网 ID。
+   * <p>私有网络 VPC 的子网 ID。</p>
    */
   SubnetId: string
   /**
-   * 指定实例计费方式。
-- 0：按量付费。
-- 1：包年包月。
+   * <p>指定实例计费方式。</p><ul><li>0：按量付费。</li><li>1：包年包月。</li></ul>
    */
   PayMode: number
   /**
-   * 设置实例名称。仅支持长度不超过 60 的中文/英文/数字/-/_。
+   * <p>设置实例名称。仅支持长度不超过 60 的中文/英文/数字/-/_。</p>
    */
   InstanceName?: string
   /**
-   * 安全组 ID。
+   * <p>安全组 ID。</p>
    */
   SecurityGroupIds?: Array<string>
   /**
-   * 若计费方式为包年包月，指定包年包月续费的时长。
-- 单位：月。
-- 取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。默认为1。
+   * <p>若计费方式为包年包月，指定包年包月续费的时长。</p><ul><li>单位：月。</li><li>取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36。默认为1。</li></ul>
    */
   PayPeriod?: number
   /**
-   * 若为包年包月计费，需指定是否开启自动续费。
-- 0：不开启自动续费。
-- 1：开启自动续费。
+   * <p>若为包年包月计费，需指定是否开启自动续费。</p><ul><li>0：不开启自动续费。</li><li>1：开启自动续费。</li></ul>
    */
   AutoRenew?: number
   /**
-   * 实例额外参数，通过json提交。
+   * <p>实例额外参数，通过json提交。</p>
    */
   Params?: string
   /**
-   * 以数组形式列出标签信息。
+   * <p>以数组形式列出标签信息。</p>
    */
   ResourceTags?: Array<Tag>
   /**
-   * 指定实例所属项目 ID。
+   * <p>指定实例所属项目 ID。</p>
    * @deprecated
    */
   Project?: string
   /**
-   * 产品版本，0-标准版，1-容量增强版
+   * <p>产品版本，0-标准版，1-容量增强版</p>
    */
   ProductType?: number
   /**
-   * 实例类型。
-- base：免费测试版。
-- single：单机版。
-- cluster：高可用版。
+   * <p>实例类型。</p><ul><li>base：免费测试版。</li><li>single：单机版。</li><li>cluster：高可用版。</li></ul>
    */
   InstanceType?: string
   /**
-   * 实例类型为高可用版，需指定可用区选项。
-- two：两可用区。
-- three：三可用区。
+   * <p>实例类型为高可用版，需指定可用区选项。</p><ul><li>two：两可用区。</li><li>three：三可用区。</li></ul>
    */
   Mode?: string
   /**
-   * 购买实例数量。
+   * <p>购买实例数量。</p>
    */
   GoodsNum?: number
   /**
-   * 网络类型。
-VPC或TCS
+   * <p>网络类型。<br>VPC或TCS</p>
    * @deprecated
    */
   NetworkType?: string
   /**
-   * 实例所应用的参数模板 ID。
+   * <p>实例所应用的参数模板 ID。</p>
    * @deprecated
    */
   TemplateId?: string
   /**
-   * 组件具体设置列表。
+   * <p>组件具体设置列表。</p>
    * @deprecated
    */
   Components?: Array<CreateInstancesComponent>
   /**
-   * 实例类型为高可用版，通过该参数指定主可用区。
+   * <p>实例类型为高可用版，通过该参数指定主可用区。</p>
    * @deprecated
    */
   Zone?: string
   /**
-   * 实例类型为高可用版，通过该参数指定备可用区。
+   * <p>实例类型为高可用版，通过该参数指定备可用区。</p>
    * @deprecated
    */
   SlaveZones?: Array<string>
   /**
-   * 是否长期有效
+   * <p>是否长期有效</p>
    * @deprecated
    */
   IsNoExpired?: boolean
   /**
-   * 引擎名称，业务自定义。
+   * <p>引擎名称，业务自定义。</p>
    * @deprecated
    */
   EngineName?: string
   /**
-   * 引擎版本，业务自定义。
+   * <p>引擎版本，业务自定义。</p>
    * @deprecated
    */
   EngineVersion?: string
   /**
-   * 实例描述。
+   * <p>实例描述。</p>
    * @deprecated
    */
   Brief?: string
   /**
-   * 负责人信息。
+   * <p>负责人信息。</p>
    * @deprecated
    */
   Chief?: string
   /**
-   * DBA人员信息
+   * <p>DBA人员信息</p>
    * @deprecated
    */
   DBA?: string
   /**
-   * 指定实例的节点类型。具体信息，请参见[选择节点类型](https://cloud.tencent.com/document/product/1709/113399)。
-- compute：计费型。
-- normal：标准型。
-- store：存储型。
+   * <p>指定实例的节点类型。具体信息，请参见<a href="https://cloud.tencent.com/document/product/1709/113399">选择节点类型</a>。</p><ul><li>compute：计费型。</li><li>normal：标准型。</li><li>store：存储型。</li></ul>
    * @deprecated
    */
   NodeType?: string
   /**
-   * 指定实例所需的 CPU 核数。实例类型不同，支持的 CPU 核数存在差异。
-- 计算型： 1、2、4、8、16、24、32。
-- 标准型： 1、2、4、8、12、16。
-- 存储型： 1、2、4、6、8。
+   * <p>指定实例所需的 CPU 核数。实例类型不同，支持的 CPU 核数存在差异。</p><ul><li>计算型： 1、2、4、8、16、24、32。</li><li>标准型： 1、2、4、8、12、16。</li><li>存储型： 1、2、4、6、8。</li></ul>
    */
   Cpu?: number
   /**
-   * 指定实例所需的内存大小。单位：GB。选择具体规格，请参见[配置规格（选型）](https://cloud.tencent.com/document/product/1709/113399)。
+   * <p>指定实例所需的内存大小。单位：GB。选择具体规格，请参见<a href="https://cloud.tencent.com/document/product/1709/113399">配置规格（选型）</a>。</p>
    */
   Memory?: number
   /**
-   * 指定实例所需的磁盘大小，单位：GB。选择具体规格，请参见[配置规格（选型）](https://cloud.tencent.com/document/product/1709/113399)。
+   * <p>指定实例所需的磁盘大小，单位：GB。选择具体规格，请参见<a href="https://cloud.tencent.com/document/product/1709/113399">配置规格（选型）</a>。</p>
    */
   DiskSize?: number
   /**
-   * 指定实例所需配置的节点数量。选择方法，请参见[配置规格（选型）](https://cloud.tencent.com/document/product/1709/113399)。
+   * <p>指定实例所需配置的节点数量。选择方法，请参见<a href="https://cloud.tencent.com/document/product/1709/113399">配置规格（选型）</a>。</p>
    */
   WorkerNodeNum?: number
+  /**
+   * <p>是否开启磁盘数据存储加密（仅 CBS 数据盘生效，需落在 VECTORDB_DISK_ENCRYPT_REGION 白名单地域，默认 false 不开启）</p><p>默认值：true</p>
+   */
+  EnableEncryption?: boolean
 }
 
 /**

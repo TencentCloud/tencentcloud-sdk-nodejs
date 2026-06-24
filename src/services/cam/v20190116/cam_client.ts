@@ -117,6 +117,7 @@ import {
   AddUserRequest,
   UpdateAssumeRolePolicyRequest,
   LoginActionFlag,
+  ListAccountsResponse,
   DeleteRoleRequest,
   ListWeChatWorkSubAccountsRequest,
   UpdateRoleConsoleLoginRequest,
@@ -132,6 +133,7 @@ import {
   CreateGroupRequest,
   SAMLProviderInfo,
   ListReceiverRequest,
+  ListGrantServiceAccessPolicy,
   DisableUserSSORequest,
   ListPoliciesGrantingServiceAccessRequest,
   UpdateSAMLProviderResponse,
@@ -217,7 +219,7 @@ import {
   AttachEntityOfPolicy,
   DeleteOIDCConfigResponse,
   PolicyVersionDetail,
-  ListGrantServiceAccessPolicy,
+  ListAllUser,
   ListGrantServiceAccessService,
   CreateUserSAMLConfigResponse,
   DescribeSubAccountsResponse,
@@ -231,6 +233,7 @@ import {
   PutRolePermissionsBoundaryResponse,
   SetMfaFlagRequest,
   ListCollaboratorsResponse,
+  ListAccountsRequest,
   ListAccessKeysResponse,
   GetSecurityLastUsedResponse,
   ListAttachedUserPoliciesRequest,
@@ -1130,6 +1133,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateUserSAMLConfigResponse) => void
   ): Promise<CreateUserSAMLConfigResponse> {
     return this.request("CreateUserSAMLConfig", req, cb)
+  }
+
+  /**
+   * 查询所有账号列表
+   */
+  async ListAccounts(
+    req: ListAccountsRequest,
+    cb?: (error: string, rep: ListAccountsResponse) => void
+  ): Promise<ListAccountsResponse> {
+    return this.request("ListAccounts", req, cb)
   }
 
   /**

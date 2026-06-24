@@ -31,6 +31,10 @@ export interface ImageTranslateLLMRequest {
    * <p>输入图 Url。 使用Url的时候，Data参数需要传入&quot;&quot;。 图片限制：小于 10MB，分辨率建议600*800以上，格式支持 jpg、jpeg、png。</p>
    */
   Url?: string
+  /**
+   * <p>调用模式。</p><p>枚举值：</p><ul><li>0： 端到端图片翻译大模型pro版</li><li>1： 端到端图片翻译大模型lite版</li></ul><p>默认值：0</p>
+   */
+  Mode?: number
 }
 
 /**

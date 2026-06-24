@@ -1874,6 +1874,28 @@ export interface LoginActionFlag {
 }
 
 /**
+ * ListAccounts返回参数结构体
+ */
+export interface ListAccountsResponse {
+  /**
+   * <p>子账号列表。</p>
+   */
+  Users?: Array<ListAllUser>
+  /**
+   * <p>当IsTruncated为true时才有此字段，当返回true时，需要继续调用此接口，并且使用Marker获取截断后的内容 。</p>
+   */
+  Marker?: string
+  /**
+   * <p>请求返回结果是否被截断。</p>
+   */
+  IsTruncated?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteRole请求参数结构体
  */
 export interface DeleteRoleRequest {
@@ -2114,6 +2136,28 @@ export interface ListReceiverRequest {
    * 分页限制数目
    */
   Limit?: number
+}
+
+/**
+ * 用于ListPoliciesGrantingServiceAccess接口的Policy节点
+ */
+export interface ListGrantServiceAccessPolicy {
+  /**
+   * 策略ID
+   */
+  PolicyId: string
+  /**
+   * 策略名
+   */
+  PolicyName: string
+  /**
+   * 策略类型: Custom自定义策略，Presetting预设策略
+   */
+  PolicyType: string
+  /**
+   * 策略描述
+   */
+  PolicyDescription: string
 }
 
 /**
@@ -3763,25 +3807,49 @@ export interface PolicyVersionDetail {
 }
 
 /**
- * 用于ListPoliciesGrantingServiceAccess接口的Policy节点
+ * 账号详情
  */
-export interface ListGrantServiceAccessPolicy {
+export interface ListAllUser {
   /**
-   * 策略ID
+   * <p>子账号账号ID。</p>
    */
-  PolicyId: string
+  Uin?: number
   /**
-   * 策略名
+   * <p>子账号用户名。</p>
    */
-  PolicyName: string
+  Name?: string
   /**
-   * 策略类型: Custom自定义策略，Presetting预设策略
+   * <p>子账号 UID。</p>
    */
-  PolicyType: string
+  Uid?: number
   /**
-   * 策略描述
+   * <p>子账号备注。</p>
    */
-  PolicyDescription: string
+  Remark?: string
+  /**
+   * <p>子账号能否登录控制台。</p>
+   */
+  ConsoleLogin?: number
+  /**
+   * <p>手机号。</p>
+   */
+  PhoneNum?: string
+  /**
+   * <p>区号。</p>
+   */
+  CountryCode?: string
+  /**
+   * <p>邮箱。</p>
+   */
+  Email?: string
+  /**
+   * <p>创建时间。</p><p>参数格式：YYYY-MM-DD hh:mm:ss</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>账号类型</p><p>枚举值：</p><ul><li>Owner： 主账号</li><li>SubUser： 子用户</li><li>CICUser： CIC 用户</li><li>WechatCorpUser： 企业微信子用户</li><li>AgentIdentity： AgentIdentity用户</li><li>Collaborator： 协作者</li><li>MessageReceiver： 消息接收者</li><li>Unknown： 未知</li></ul>
+   */
+  UserType?: string
 }
 
 /**
@@ -3960,6 +4028,24 @@ export interface ListCollaboratorsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ListAccounts请求参数结构体
+ */
+export interface ListAccountsRequest {
+  /**
+   * <p>返回结果的条数，当返回结果达到 MaxItems 限制被截断时，返回参数IsTruncated将等于true。</p><p>取值范围：[1, 100]</p>
+   */
+  MaxItems?: number
+  /**
+   * <p>当请求的返回结果被截断时，可以使用Marker获取从当前截断位置之后的内容。</p>
+   */
+  Marker?: string
+  /**
+   * <p>用户类型</p><p>枚举值：</p><ul><li>Owner： 主账号</li><li>SubUser： 普通子用户</li><li>CICUser： CIC 子用户</li><li>WechatCorpUser： 企业微信子用户</li><li>AgentIdentity： AgentIdentity子用户</li><li>Collaborator： 协作者</li><li>MessageReceiver： 消息接收者</li></ul>
+   */
+  UserType?: string
 }
 
 /**

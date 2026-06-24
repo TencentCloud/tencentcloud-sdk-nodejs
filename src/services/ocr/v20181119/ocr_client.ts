@@ -29,7 +29,7 @@ import {
   VinOCRResponse,
   ResidencePermitInfo,
   BankCardOCRRequest,
-  TollInvoice,
+  VatInvoiceVerifyNewResponse,
   CarInvoiceOCRRequest,
   DescribeQuestionMarkAgentJobResponse,
   CoordList,
@@ -111,14 +111,12 @@ import {
   BizLicenseOCRRequest,
   MixedInvoiceDetectResponse,
   RideHailingDriverLicenseOCRRequest,
-  ShoppingReceipt,
   VatInvoiceUserInfo,
   GeneralMachineItem,
   GeneralAccurateOCRResponse,
   ElectronicTrainTicketFull,
   BusInvoice,
   QrcodeOCRRequest,
-  VatInvoiceVerifyNewResponse,
   RecognizeGeneralInvoiceRequest,
   GeneralBasicOCRResponse,
   MainlandTravelPermitBackInfos,
@@ -152,7 +150,7 @@ import {
   MachinePrintedInvoice,
   FinancialBillItem,
   SingleInvoiceInfo,
-  RecognizeContainerOCRRequest,
+  ShoppingReceipt,
   TrainTicket,
   TextDetectRequest,
   EduPaperOCRResponse,
@@ -292,7 +290,7 @@ import {
   Positions,
   RideHailingTransportLicenseOCRResponse,
   CandWord,
-  RecognizeContainerOCRResponse,
+  TollInvoice,
   EnterpriseLicenseInfo,
   PermitOCRResponse,
   InsuranceBillOCRRequest,
@@ -584,17 +582,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: VerifyBizLicenseEnterprise4Response) => void
   ): Promise<VerifyBizLicenseEnterprise4Response> {
     return this.request("VerifyBizLicenseEnterprise4", req, cb)
-  }
-
-  /**
-     * 本接口支持集装箱箱门信息识别，识别字段包括集装箱箱号、类型、总重量、有效承重、容量、自身重量，具备集装箱箱号、类型不完整或者不清晰的告警功能。
-默认接口请求频率限制：5次/秒。
-     */
-  async RecognizeContainerOCR(
-    req: RecognizeContainerOCRRequest,
-    cb?: (error: string, rep: RecognizeContainerOCRResponse) => void
-  ): Promise<RecognizeContainerOCRResponse> {
-    return this.request("RecognizeContainerOCR", req, cb)
   }
 
   /**

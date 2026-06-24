@@ -2292,65 +2292,65 @@ export interface BudgetConditionsForm {
  */
 export interface DescribeAccountBalanceResponse {
   /**
-   * 接口做过变更,为兼容老接口,本字段与RealBalance相同,为当前真实可用余额,单位 分
+   * <p>接口做过变更,为兼容老接口,本字段与RealBalance相同,为当前真实可用余额,单位 分</p>
    */
   Balance?: number
   /**
-   * 查询的用户Uin
+   * <p>查询的用户Uin</p>
    */
   Uin?: number
   /**
-   * 当前真实可用余额,单位 分
+   * <p>当前真实可用余额,单位 分。RealBalance=CashAccountBalance+IncomeIntoAccountBalance+PresentAccountBalance-FreezeAmount-OweAmount</p><p>单位：分</p>
    */
   RealBalance?: number
   /**
-   * 现金账户余额,单位 分
+   * <p>现金账户余额,单位 分</p>
    */
   CashAccountBalance?: number
   /**
-   * 收益转入账户余额,单位 分
+   * <p>收益转入账户余额,单位 分</p>
    */
   IncomeIntoAccountBalance?: number
   /**
-   * 赠送账户余额,单位 分
+   * <p>赠送账户余额,单位 分</p>
    */
   PresentAccountBalance?: number
   /**
-   * 冻结金额,单位 分
+   * <p>冻结金额,单位 分</p>
    */
   FreezeAmount?: number
   /**
-   * 欠费金额,单位 分
+   * <p>欠费金额,单位 分</p>
    */
   OweAmount?: number
   /**
-   * 是否允许欠费消费
+   * <p>是否允许欠费消费</p>
    * @deprecated
    */
   IsAllowArrears?: boolean
   /**
-   * 是否限制信用额度
+   * <p>是否限制信用额度</p>
    * @deprecated
    */
   IsCreditLimited?: boolean
   /**
-   * 信用额度,单位 分
+   * <p>信用额度,单位 分</p>
    */
   CreditAmount?: number
   /**
-   * 可用信用额度,单位 分
+   * <p>可用信用额度,单位 分。CreditBalance=CashAccountBalance+IncomeIntoAccountBalance+PresentAccountBalance+CreditAmount-OweAmount</p><p>单位：分</p>
    */
   CreditBalance?: number
   /**
-   * 真实可用信用额度,单位 分
+   * <p>真实可用信用额度,单位 分。RealCreditBalance=CreditBalance-FreezeAmount</p><p>单位：分</p>
    */
   RealCreditBalance?: number
   /**
-   * 临时额度，单位 分
+   * <p>临时额度，单位 分</p>
    */
   TempCredit?: number
   /**
-   * 临时额度详情
+   * <p>临时额度详情</p>
    */
   TempAmountInfoList?: Array<UinTempAmountModel>
   /**
@@ -4818,53 +4818,61 @@ export interface DescribeAllocationBillConditionsResponse {
  */
 export interface CostComponentSet {
   /**
-   * 组件类型名称
+   * <p>组件类型名称</p>
    */
   ComponentCodeName?: string
   /**
-   * 组件名称
+   * <p>组件名称</p>
    */
   ItemCodeName?: string
   /**
-   * 刊例价
+   * <p>刊例价</p>
    */
   SinglePrice?: string
   /**
-   * 刊例价单位
+   * <p>刊例价单位</p>
    */
   PriceUnit?: string
   /**
-   * 用量
+   * <p>用量</p>
    */
   UsedAmount?: string
   /**
-   * 用量单位
+   * <p>用量单位</p>
    */
   UsedAmountUnit?: string
   /**
-   * 原价
+   * <p>原价</p>
    */
   Cost?: string
   /**
-   * 折扣
+   * <p>折扣</p>
    */
   Discount?: string
   /**
-   * 折后价
+   * <p>折后价</p>
    */
   RealCost?: string
   /**
-   * 代金券支付金额
+   * <p>代金券支付金额</p>
    */
   VoucherPayAmount?: string
   /**
-   * 现金支付金额
+   * <p>现金支付金额</p>
    */
   CashPayAmount?: string
   /**
-   * 赠送金支付金额
+   * <p>赠送金支付金额</p>
    */
   IncentivePayAmount?: string
+  /**
+   * <p>组件类型code</p>
+   */
+  ComponentCode?: string
+  /**
+   * <p>组件名称code</p>
+   */
+  ItemCode?: string
 }
 
 /**
@@ -7277,6 +7285,10 @@ export interface CostDetail {
    * <p>扣费时间：结算扣费时间</p>
    */
   PayTime?: string
+  /**
+   * <p>产品名称code</p>
+   */
+  BusinessCode?: string
 }
 
 /**
@@ -7601,7 +7613,7 @@ export interface ModifyGatherRuleResponse {
  */
 export interface DescribeAccountBalanceRequest {
   /**
-   * 是否查询临时额度
+   * <p>是否查询临时额度</p>
    */
   TempCredit?: boolean
 }

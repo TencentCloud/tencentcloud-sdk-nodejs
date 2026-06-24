@@ -498,6 +498,10 @@ export interface DescribeDynamicInstanceDetailResponse {
    */
   RayClusterYaml?: string
   /**
+   * <p>镜像信息</p>
+   */
+  ImageInfoV2?: ImageInfoV2
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -997,6 +1001,27 @@ export interface JobFlowResourceSpec {
 }
 
 /**
+ * WebUI访问信息
+ */
+export interface WebUIInfo {
+  /**
+   * <p>访问地址，可能为空</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+  /**
+   * <p>WebUI状态包括：<br>-1表示当前服务没有WebUI；<br>0表示当前服务有WebUI，但是没有安装KNOX服务；<br>1表示当前服务有WebUI并安装有KNOX服务，但是KNOX没有开启公网访问；<br>2表示，当前服务有WebUI，安装有KNOX服务且已开启公网访问。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WebUIStatus?: number
+  /**
+   * <p>服务名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceName?: string
+}
+
+/**
  * Serverless HBase 预付费设置
  */
 export interface PrePaySetting {
@@ -1475,71 +1500,21 @@ export interface NodeSpecDisk {
 }
 
 /**
- * RunJobFlow请求参数结构体
+ * ModifyInspectionSettings返回参数结构体
  */
-export interface RunJobFlowRequest {
+export interface ModifyInspectionSettingsResponse {
   /**
-   * 作业名称。
+   * 返回值描述
    */
-  Name: string
+  Info?: string
   /**
-   * 是否新创建集群。
-true，新创建集群，则使用Instance中的参数进行集群创建。
-false，使用已有集群，则通过InstanceId传入。
+   * 返回成功修改的巡检任务Id
    */
-  CreateCluster: boolean
+  JobId?: string
   /**
-   * 作业流程执行步骤。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Steps: Array<Step>
-  /**
-   * 作业流程正常完成时，集群的处理方式，可选择:
-Terminate 销毁集群。
-Reserve 保留集群。
-   */
-  InstancePolicy: string
-  /**
-   * 只有CreateCluster为true时生效，目前只支持EMR版本，例如EMR-2.2.0，不支持ClickHouse和Druid版本。
-   */
-  ProductVersion?: string
-  /**
-   * 只在CreateCluster为true时生效。
-true 表示安装kerberos，false表示不安装kerberos。
-   */
-  SecurityClusterFlag?: boolean
-  /**
-   * 只在CreateCluster为true时生效。
-新建集群时，要安装的软件列表。
-   */
-  Software?: Array<string>
-  /**
-   * 引导脚本。
-   */
-  BootstrapActions?: Array<BootstrapAction>
-  /**
-   * 指定配置创建集群。
-   */
-  Configurations?: Array<Configuration>
-  /**
-   * 作业日志保存地址。
-   */
-  LogUri?: string
-  /**
-   * 只在CreateCluster为false时生效。
-   */
-  InstanceId?: string
-  /**
-   * 自定义应用角色，大数据应用访问外部服务时使用的角色，默认为"EME_QCSRole"。
-   */
-  ApplicationRole?: string
-  /**
-   * 重入标签，用来可重入检查，防止在一段时间内，创建相同的流程作业。
-   */
-  ClientToken?: string
-  /**
-   * 只在CreateCluster为true时生效，使用该配置创建集群。
-   */
-  Instance?: ClusterSetting
+  RequestId?: string
 }
 
 /**
@@ -2440,6 +2415,32 @@ export interface DeleteAutoScaleStrategyResponse {
 }
 
 /**
+ * spark开启app监控 对应的Prometheus
+ */
+export interface EnableSparkAppMonitorInfo {
+  /**
+   * <p>实例id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrometheusInstanceId?: string
+  /**
+   * <p>grafana实例id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GrafanaInstanceId?: string
+  /**
+   * <p>开启关闭状态</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableMonitor?: boolean
+  /**
+   * <p>grafana访问地址</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GrafanaURL?: string
+}
+
+/**
  * 组件重启策略
  */
 export interface RestartPolicy {
@@ -2565,32 +2566,41 @@ export interface NodeSelector {
 }
 
 /**
- * 用户Hive-MetaDB信息
+ * 用户自定义数据库信息
  */
 export interface CustomMetaDBInfo {
   /**
-   * 自定义MetaDB的JDBC连接，示例: jdbc:mysql://10.10.10.10:3306/dbname
+   * <p>自定义MetaDB的JDBC连接，示例: jdbc:mysql://10.10.10.10:3306/dbname</p>
    */
   MetaDataJdbcUrl?: string
   /**
-   * 自定义MetaDB用户名
+   * <p>自定义MetaDB用户名</p>
    */
   MetaDataUser?: string
   /**
-   * 自定义MetaDB密码
+   * <p>自定义MetaDB密码</p>
    */
   MetaDataPass?: string
   /**
-   * hive共享元数据库类型。取值范围：
-<li>EMR_DEFAULT_META：表示集群默认创建</li>
-<li>EMR_EXIST_META：表示集群使用指定EMR-MetaDB。</li>
-<li>USER_CUSTOM_META：表示集群使用自定义MetaDB。</li>
+   * <p>hive共享元数据库类型。取值范围：</p><li>EMR_DEFAULT_META：表示集群默认创建</li><li>EMR_EXIST_META：表示集群使用指定EMR-MetaDB。</li><li>USER_CUSTOM_META：表示集群使用自定义MetaDB。</li>
    */
   MetaType?: string
   /**
-   * EMR-MetaDB实例
+   * <p>EMR-MetaDB实例</p>
    */
   UnifyMetaInstanceId?: string
+  /**
+   * <p>组件</p>
+   */
+  Components?: Array<string>
+  /**
+   * <p>metadb版本</p>
+   */
+  DefaultMetaVersion?: string
+  /**
+   * <p>CDBId</p>
+   */
+  LinkInstanceId?: string
 }
 
 /**
@@ -3571,6 +3581,10 @@ export interface PersistentVolume {
    * <p>cfs trubo存储卷</p>
    */
   CFSTurboVolumes?: Array<CFSTurboVolume>
+  /**
+   * <p>goosefs volume挂载信息</p>
+   */
+  GooseFSVolumes?: Array<GooseFSVolume>
 }
 
 /**
@@ -4833,6 +4847,44 @@ export interface DescribeKyuubiQueryInfoRequest {
    * 分页查询时的页号，从1开始
    */
   Page: number
+}
+
+/**
+ * GooseFSVolume
+ */
+export interface GooseFSVolume {
+  /**
+   * <p>存储卷名</p>
+   */
+  VolumeName?: string
+  /**
+   * <p>gooseFS实例ID</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>gooseFS 命名空间</p>
+   */
+  Namespace?: string
+  /**
+   * <p>在命名空间中的挂载路径</p>
+   */
+  SubPath?: string
+  /**
+   * <p>FuseVERSION描述</p>
+   */
+  FuseVersion?: string
+  /**
+   * <p>Client Version描述，例如 GOOSE-1.5.2</p>
+   */
+  ClientVersion?: string
+  /**
+   * <p>默认挂载参数</p>
+   */
+  MountOptions?: string
+  /**
+   * <p>默认JVM参数</p>
+   */
+  JvmOptions?: string
 }
 
 /**
@@ -6126,7 +6178,7 @@ export interface TableSchemaItem {
  */
 export interface DescribeDynamicInstanceListRequest {
   /**
-   * emr 集群 id
+   * <p>emr 集群 id</p>
    */
   InstanceId: string
 }
@@ -6943,9 +6995,13 @@ export interface DescribeEMREventListRequest {
  */
 export interface DescribeDynamicInstanceListResponse {
   /**
-   * RayCluster 集群列表
+   * <p>RayCluster 集群列表</p>
    */
   DynamicInstanceList?: Array<RayCluster>
+  /**
+   * <p>服务访问url</p>
+   */
+  WebUIInfos?: Array<WebUIInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7209,10 +7265,12 @@ export interface StopParams {
 export interface DependService {
   /**
    * 共用组件名
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceName: string
   /**
    * 共用组件集群
+注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId: string
 }
@@ -7296,6 +7354,14 @@ export interface CloudResource {
    * <p>是否创建默认raycluster</p>
    */
   EnableDefaultRayCluster?: boolean
+  /**
+   * <p>自定义镜像</p>
+   */
+  ImageInfoV2?: ImageInfoV2
+  /**
+   * <p>创建动态实例参数</p>
+   */
+  DynamicInstanceForm?: DynamicInstanceForm
 }
 
 /**
@@ -7728,88 +7794,121 @@ export interface DescribeYarnQueueRequest {
 export interface DynamicInstanceGroup {
   /**
    * <p>资源组类型</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupType?: string
   /**
    * <p>资源组名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupName?: string
   /**
    * <p>pod cpu核数</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PodCpu?: number
   /**
    * <p>pod mem大小（GB）</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PodMem?: number
   /**
    * <p>pod gpu类型</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PodGpuType?: string
   /**
    * <p>pod gpu块数</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PodGpu?: number
   /**
    * <p>pod个数</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PodNum?: number
   /**
    * <p>pod弹性最小个数</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MinPodNum?: number
   /**
    * <p>pod弹性最大个数，当MaxPodNum &gt; MinPodNum时，默认表示开启弹性扩缩容，将在范围内扩缩容</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxPodNum?: number
   /**
    * <p>是否支持存储配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportPV?: boolean
   /**
    * <p>cbs存储卷列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CBSVolumes?: Array<CBSVolume>
   /**
    * <p>cfs存储卷列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CFSVolumes?: Array<CFSVolume>
   /**
    * <p>cos存储卷列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   COSVolumes?: Array<COSVolume>
   /**
    * <p>挂载卷列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeMounts?: Array<VolumeMount>
   /**
    * <p>pod标签</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Labels?: Array<TkeLabel>
   /**
    * <p>Tolerations定义</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Tolerations?: Array<Toleration>
   /**
    * <p>环境变量</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Envs?: Array<NameValue>
   /**
    * <p>节点调度策略</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SchedulingPolicy?: string
   /**
    * <p>资源标签</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceLabel?: string
   /**
    * <p>GPU资源厂商key</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   PodGpuResourceKey?: string
   /**
    * <p>CFS Turbo 挂载列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CFSTurboVolumes?: Array<CFSTurboVolume>
+  /**
+   * <p>GooseFS盘</p>
+   */
+  GooseFSVolumes?: Array<GooseFSVolume>
+  /**
+   * <p>启动前指令</p>
+   */
+  PreStartCommand?: string
+  /**
+   * <p>Ray启动前指令</p>
+   */
+  RayStartParams?: string
 }
 
 /**
@@ -8378,6 +8477,64 @@ export interface OpScope {
 }
 
 /**
+ * EMR on TKE集群组件镜像信息
+ */
+export interface ImageInfoV2 {
+  /**
+   * <p>镜像类型</p><p>枚举值：</p><ul><li>official： 官方镜像</li><li>custom： 自定义镜像</li><li>imageUrl： 镜像地址</li></ul>
+   */
+  ImageMode?: string
+  /**
+   * <p>地域</p>
+   */
+  Region?: string
+  /**
+   * <p>是否是存量镜像</p>
+   */
+  LegacyCCR?: boolean
+  /**
+   * <p>镜像地址</p>
+   */
+  FullImageUrl?: string
+  /**
+   * <p>版本</p>
+   */
+  MainVersion?: string
+  /**
+   * <p>镜像地址域名</p>
+   */
+  RegistryUrl?: string
+  /**
+   * <p>镜像命名空间</p>
+   */
+  NamespaceName?: string
+  /**
+   * <p>镜像仓库名</p>
+   */
+  RepoName?: string
+  /**
+   * <p>镜像版本标签</p>
+   */
+  Tag?: string
+  /**
+   * <p>用户名</p>
+   */
+  Username?: string
+  /**
+   * <p>密码</p>
+   */
+  Password?: string
+  /**
+   * <p>镜像拉取密钥</p>
+   */
+  ImagePullSecret?: ImagePullSecret
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+}
+
+/**
  * VPC 参数
  */
 export interface VPCSettings {
@@ -8800,6 +8957,10 @@ export interface RayCluster {
    * <p>head访问地址,也是dashboard地址</p>
    */
   DashboardUrl?: string
+  /**
+   * <p>命名空间</p>
+   */
+  Namespace?: string
 }
 
 /**
@@ -8909,68 +9070,93 @@ type AclForYarnQueue struct {
 export interface DynamicInstanceForm {
   /**
    * <p>DynamicInstance名，长度限制1-64字符，只能包含小写字母</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DynamicInstanceName?: string
   /**
    * <p>命名空间</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
   /**
    * <p>是否支持高可用</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportHA?: boolean
   /**
    * <p>自定义镜像信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomImage?: CustomImage
   /**
    * <p>资源组配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DynamicInstanceGroups?: Array<DynamicInstanceGroup>
   /**
    * <p>是否支持存储配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportPV?: boolean
   /**
    * <p>cbs存储卷列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CBSVolumes?: Array<CBSVolume>
   /**
    * <p>cfs存储卷列表，只包含cfs，不包含cfs turbo</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CFSVolumes?: Array<CFSVolume>
   /**
    * <p>cos存储卷列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   COSVolumes?: Array<COSVolume>
   /**
    * <p>挂载卷列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   VolumeMounts?: Array<VolumeMount>
   /**
    * <p>pod标签</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Labels?: Array<TkeLabel>
   /**
    * <p>Tolerations定义</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Tolerations?: Array<Toleration>
   /**
    * <p>环境变量</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Envs?: Array<NameValue>
   /**
    * <p>依赖外部组件</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   DependServices?: Array<DependService>
   /**
    * <p>是否开启token鉴权</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportToken?: boolean
   /**
    * <p>cfs trubo挂载列表，不包含标准版cfs</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   CFSTurboVolumes?: Array<CFSTurboVolume>
+  /**
+   * <p>自定义镜像</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageInfoV2?: ImageInfoV2
+  /**
+   * <p>GooseFS盘</p>
+   */
+  GooseFSVolumes?: Array<GooseFSVolume>
 }
 
 /**
@@ -9992,21 +10178,71 @@ export interface ClusterInstancesInfo {
 }
 
 /**
- * ModifyInspectionSettings返回参数结构体
+ * RunJobFlow请求参数结构体
  */
-export interface ModifyInspectionSettingsResponse {
+export interface RunJobFlowRequest {
   /**
-   * 返回值描述
+   * 作业名称。
    */
-  Info?: string
+  Name: string
   /**
-   * 返回成功修改的巡检任务Id
+   * 是否新创建集群。
+true，新创建集群，则使用Instance中的参数进行集群创建。
+false，使用已有集群，则通过InstanceId传入。
    */
-  JobId?: string
+  CreateCluster: boolean
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 作业流程执行步骤。
    */
-  RequestId?: string
+  Steps: Array<Step>
+  /**
+   * 作业流程正常完成时，集群的处理方式，可选择:
+Terminate 销毁集群。
+Reserve 保留集群。
+   */
+  InstancePolicy: string
+  /**
+   * 只有CreateCluster为true时生效，目前只支持EMR版本，例如EMR-2.2.0，不支持ClickHouse和Druid版本。
+   */
+  ProductVersion?: string
+  /**
+   * 只在CreateCluster为true时生效。
+true 表示安装kerberos，false表示不安装kerberos。
+   */
+  SecurityClusterFlag?: boolean
+  /**
+   * 只在CreateCluster为true时生效。
+新建集群时，要安装的软件列表。
+   */
+  Software?: Array<string>
+  /**
+   * 引导脚本。
+   */
+  BootstrapActions?: Array<BootstrapAction>
+  /**
+   * 指定配置创建集群。
+   */
+  Configurations?: Array<Configuration>
+  /**
+   * 作业日志保存地址。
+   */
+  LogUri?: string
+  /**
+   * 只在CreateCluster为false时生效。
+   */
+  InstanceId?: string
+  /**
+   * 自定义应用角色，大数据应用访问外部服务时使用的角色，默认为"EME_QCSRole"。
+   */
+  ApplicationRole?: string
+  /**
+   * 重入标签，用来可重入检查，防止在一段时间内，创建相同的流程作业。
+   */
+  ClientToken?: string
+  /**
+   * 只在CreateCluster为true时生效，使用该配置创建集群。
+   */
+  Instance?: ClusterSetting
 }
 
 /**
@@ -10131,6 +10367,14 @@ export interface NodeSpecInstanceType {
    * <p>配额单位</p>
    */
   QuotaUnit?: string
+  /**
+   * <p>是否需要提供高性能计算集群</p>
+   */
+  NeedHpcClusterId?: boolean
+  /**
+   * <p>是否是GPU机型</p>
+   */
+  IsGpuInstance?: boolean
 }
 
 /**
@@ -11352,6 +11596,10 @@ export interface CreateCloudInstanceRequest {
    * <p>额外容器相关配置</p>
    */
   ContainerExtraConf?: ContainerExtraConf
+  /**
+   * <p>spark监控</p>
+   */
+  EnableSparkAppMonitorInfo?: EnableSparkAppMonitorInfo
 }
 
 /**
@@ -11551,6 +11799,18 @@ export interface ModifyDynamicInstanceForm {
    * <p>cfs turbo挂载列表，不包含标准版</p>
    */
   CFSTurboVolumes?: Array<CFSTurboVolume>
+  /**
+   * <p>自定义镜像</p>
+   */
+  CustomImage?: CustomImage
+  /**
+   * <p>自定义镜像</p>
+   */
+  ImageInfoV2?: ImageInfoV2
+  /**
+   * <p>GooseFS盘</p>
+   */
+  GooseFSVolumes?: Array<GooseFSVolume>
 }
 
 /**
@@ -11789,70 +12049,77 @@ export interface InquiryPriceRenewInstanceRequest {
  */
 export interface DynamicInstanceGroupSpec {
   /**
-   * group 名称
+   * <p>group 名称</p>
    */
   Name: string
   /**
-   * pod 数量
+   * <p>pod 数量</p>
    */
   PodCount: number
   /**
-   * 最小节点数
+   * <p>最小节点数</p>
    */
   MinNodes: number
   /**
-   * 最大节点数
+   * <p>最大节点数</p>
    */
   MaxNodes: number
   /**
-   *  是否开启存储配置
+   * <p>是否开启存储配置</p>
    */
   StorageConfigEnabled: boolean
   /**
-   * headGroup:head;
-workerGroup:worker
+   * <p>headGroup:head;<br>workerGroup:worker</p>
    */
   GroupType?: string
   /**
-   * CPU 核数
+   * <p>CPU 核数</p>
    */
   Cpu?: number
   /**
-   * 内存(GB)
+   * <p>内存(GB)</p>
    */
   MemSize?: number
   /**
-   * GPU类型
+   * <p>GPU类型</p>
    */
   GpuType?: string
   /**
-   * GPU核数
+   * <p>GPU核数</p>
    */
   Gpu?: number
   /**
-   * 资源标签
+   * <p>资源标签</p>
    */
   ResourceLabels?: string
   /**
-   * 环境变量
+   * <p>环境变量</p>
    */
   Env?: Array<NameValue>
   /**
-   * 标签
+   * <p>标签</p>
    */
   Labels?: Array<NameValue>
   /**
-   * 容忍度
+   * <p>容忍度</p>
    */
   Tolerations?: Array<Toleration>
   /**
-   * 调度策略
+   * <p>调度策略</p>
    */
   Scheduler?: string
   /**
-   * 卷目录
+   * <p>卷目录</p>
    */
   PersistentVolume?: PersistentVolume
+  /**
+   * <p>前置启动命令</p>
+   */
+  PreStartCommand?: string
+  /**
+   * <p>RayStart启动参数</p>
+   */
+  RayStartParams?: string
 }
 
 /**

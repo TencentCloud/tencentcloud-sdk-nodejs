@@ -374,53 +374,42 @@ export interface BankCardOCRRequest {
 }
 
 /**
- * 过路过桥费发票
+ * VatInvoiceVerifyNew返回参数结构体
  */
-export interface TollInvoice {
+export interface VatInvoiceVerifyNewResponse {
   /**
-   * 发票名称
+   * 增值税发票、购车发票、全电发票的基础要素字段信息。
    */
-  Title?: string
+  Invoice?: VatInvoice
   /**
-   * 发票代码
+   * 机动车销售统一发票详细字段信息。
    */
-  Code?: string
+  VehicleInvoiceInfo?: VehicleInvoiceInfo
   /**
-   * 发票号码
+   * 二手车销售统一发票详细字段信息。
    */
-  Number?: string
+  UsedVehicleInvoiceInfo?: UsedVehicleInvoiceInfo
   /**
-   * 价税合计（小写）
+   * 通行费发票详细字段信息。
    */
-  Total?: string
+  PassInvoiceInfoList?: Array<PassInvoiceInfo>
   /**
-   * 发票消费类型
+   * 全电发票（铁路电子客票）详细字段信息。
+
    */
-  Kind?: string
+  ElectronicTrainTicket?: ElectronicTrainTicket
   /**
-   * 日期
+   * 全电发票（航空运输电子客票行程单）详细字段信息。
    */
-  Date?: string
+  ElectronicAirTransport?: ElectronicAirTransport
   /**
-   * 时间
+   * 财政发票详细字段信息
    */
-  Time?: string
+  FinancialBill?: FinancialBill
   /**
-   * 入口
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Entrance?: string
-  /**
-   * 出口
-   */
-  Exit?: string
-  /**
-   * 高速标志（0：没有，1：有）
-   */
-  HighwayMark?: number
-  /**
-   * 是否存在二维码（1：有，0：无）
-   */
-  QRCodeMark?: number
+  RequestId?: string
 }
 
 /**
@@ -2989,20 +2978,6 @@ export interface RideHailingDriverLicenseOCRRequest {
 }
 
 /**
- * 购物小票
- */
-export interface ShoppingReceipt {
-  /**
-   * 发票名称
-   */
-  Title?: string
-  /**
-   * 识别出的字段名称(关键字)
-   */
-  Content?: Array<OtherInvoiceItem>
-}
-
-/**
  * 发票人员信息
  */
 export interface VatInvoiceUserInfo {
@@ -3277,45 +3252,6 @@ export interface QrcodeOCRRequest {
    * 图片的 Url 地址。要求图片经Base64编码后不超过 10M，支持PNG、JPG、JPEG格式。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
    */
   ImageUrl?: string
-}
-
-/**
- * VatInvoiceVerifyNew返回参数结构体
- */
-export interface VatInvoiceVerifyNewResponse {
-  /**
-   * 增值税发票、购车发票、全电发票的基础要素字段信息。
-   */
-  Invoice?: VatInvoice
-  /**
-   * 机动车销售统一发票详细字段信息。
-   */
-  VehicleInvoiceInfo?: VehicleInvoiceInfo
-  /**
-   * 二手车销售统一发票详细字段信息。
-   */
-  UsedVehicleInvoiceInfo?: UsedVehicleInvoiceInfo
-  /**
-   * 通行费发票详细字段信息。
-   */
-  PassInvoiceInfoList?: Array<PassInvoiceInfo>
-  /**
-   * 全电发票（铁路电子客票）详细字段信息。
-
-   */
-  ElectronicTrainTicket?: ElectronicTrainTicket
-  /**
-   * 全电发票（航空运输电子客票行程单）详细字段信息。
-   */
-  ElectronicAirTransport?: ElectronicAirTransport
-  /**
-   * 财政发票详细字段信息
-   */
-  FinancialBill?: FinancialBill
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -4843,17 +4779,17 @@ export interface SingleInvoiceInfo {
 }
 
 /**
- * RecognizeContainerOCR请求参数结构体
+ * 购物小票
  */
-export interface RecognizeContainerOCRRequest {
+export interface ShoppingReceipt {
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 发票名称
    */
-  ImageBase64?: string
+  Title?: string
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 识别出的字段名称(关键字)
    */
-  ImageUrl?: string
+  Content?: Array<OtherInvoiceItem>
 }
 
 /**
@@ -10333,59 +10269,53 @@ export interface CandWord {
 }
 
 /**
- * RecognizeContainerOCR返回参数结构体
+ * 过路过桥费发票
  */
-export interface RecognizeContainerOCRResponse {
+export interface TollInvoice {
   /**
-   * 集装箱箱号
+   * 发票名称
    */
-  ContainerId?: string
+  Title?: string
   /**
-   * 集装箱类型
+   * 发票代码
    */
-  ContainerType?: string
+  Code?: string
   /**
-   * 集装箱总重量，单位：千克（KG）
+   * 发票号码
    */
-  GrossKG?: string
+  Number?: string
   /**
-   * 集装箱总重量，单位：磅（LB）
+   * 价税合计（小写）
    */
-  GrossLB?: string
+  Total?: string
   /**
-   * 集装箱有效承重，单位：千克（KG）
+   * 发票消费类型
    */
-  PayloadKG?: string
+  Kind?: string
   /**
-   * 集装箱有效承重，单位：磅（LB）
+   * 日期
    */
-  PayloadLB?: string
+  Date?: string
   /**
-   * 集装箱容量，单位：立方米
+   * 时间
    */
-  CapacityM3?: string
+  Time?: string
   /**
-   * 集装箱容量，单位：立英尺
+   * 入口
    */
-  CapacityFT3?: string
+  Entrance?: string
   /**
-   * 告警码
--9926	集装箱箱号不完整或者不清晰
--9927	集装箱类型不完整或者不清晰
+   * 出口
    */
-  Warn?: Array<number | bigint>
+  Exit?: string
   /**
-   * 集装箱自身重量，单位：千克（KG）
+   * 高速标志（0：没有，1：有）
    */
-  TareKG?: string
+  HighwayMark?: number
   /**
-   * 集装箱自身重量，单位：磅（LB）
+   * 是否存在二维码（1：有，0：无）
    */
-  TareLB?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  QRCodeMark?: number
 }
 
 /**

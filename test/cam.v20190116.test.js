@@ -898,6 +898,16 @@ it("cam.v20190116.CreateUserSAMLConfig", async function () {
     }
 })
 
+it("cam.v20190116.ListAccounts", async function () {
+    try {
+       const data = await client.ListAccounts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cam.v20190116.AddUserToGroup", async function () {
     try {
        const data = await client.AddUserToGroup({})

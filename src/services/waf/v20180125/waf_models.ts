@@ -745,6 +745,10 @@ export interface LLMDetectResult {
    * <p>toolcall的检测结果</p>
    */
   ToolCallResult?: ToolCallResult
+  /**
+   * <p>意图检测结果</p>
+   */
+  IntentDetectResult?: IntentDetectResult
 }
 
 /**
@@ -4047,6 +4051,48 @@ export interface DeleteBotSceneUCBRuleRequest {
    * 1.BOT全局白名单处调用时，传"global";2.BOT场景配置时，传具体的场景ID
    */
   SceneId: string
+}
+
+/**
+ * ModifyObject请求参数结构体
+ */
+export interface ModifyObjectRequest {
+  /**
+   * <p>修改对象标识</p>
+   */
+  ObjectId: string
+  /**
+   * <p>改动作类型:Status修改开关，InstanceId绑定实例, Proxy设置代理状态</p>
+   */
+  OpType: string
+  /**
+   * <p>新的Waf开关状态，如果和已有状态相同认为修改成功。状态可以为0或1</p>
+   */
+  Status?: number
+  /**
+   * <p>新的实例ID，如果和已绑定的实例相同认为修改成功</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>是否开启代理，0:不开启,1:以XFF的第一个IP地址作为客户端IP,2:以remote_addr作为客户端IP,3:从指定的头部字段获取客户端IP，字段通过IpHeaders字段给出(OpType为Status或Proxy时，该值有效)</p>
+   */
+  Proxy?: number
+  /**
+   * <p>IsCdn=3时，需要填此参数，表示自定义header(OpType为Status或Proxy时，该值有效)</p>
+   */
+  IpHeaders?: Array<string>
+  /**
+   * <p>对象所属集团成员appid</p>
+   */
+  MemberAppId?: number
+  /**
+   * <p>对象所属集团成员uin</p>
+   */
+  MemberUin?: string
+  /**
+   * <p>标签信息</p>
+   */
+  Tags?: Array<TagInfo>
 }
 
 /**
@@ -9304,6 +9350,16 @@ export interface IpAccessControlParam {
 }
 
 /**
+ * 大模型意图检测的请求内容
+ */
+export interface IntentContent {
+  /**
+   * <p>agent的轨迹内容，参考用例</p>
+   */
+  AgentTrace?: string
+}
+
+/**
  * token有效性配置信息
  */
 export interface TokenValidation {
@@ -12280,45 +12336,13 @@ export interface BatchOperateUserSignatureRulesRequest {
 }
 
 /**
- * ModifyObject请求参数结构体
+ * 大模型安全意图检测响应数据
  */
-export interface ModifyObjectRequest {
+export interface IntentDetectResult {
   /**
-   * <p>修改对象标识</p>
+   * <p>是否恶意意图</p><p>枚举值：</p><ul><li>1： 恶意</li><li>0： 正常</li></ul>
    */
-  ObjectId: string
-  /**
-   * <p>改动作类型:Status修改开关，InstanceId绑定实例, Proxy设置代理状态</p>
-   */
-  OpType: string
-  /**
-   * <p>新的Waf开关状态，如果和已有状态相同认为修改成功。状态可以为0或1</p>
-   */
-  Status?: number
-  /**
-   * <p>新的实例ID，如果和已绑定的实例相同认为修改成功</p>
-   */
-  InstanceId?: string
-  /**
-   * <p>是否开启代理，0:不开启,1:以XFF的第一个IP地址作为客户端IP,2:以remote_addr作为客户端IP,3:从指定的头部字段获取客户端IP，字段通过IpHeaders字段给出(OpType为Status或Proxy时，该值有效)</p>
-   */
-  Proxy?: number
-  /**
-   * <p>IsCdn=3时，需要填此参数，表示自定义header(OpType为Status或Proxy时，该值有效)</p>
-   */
-  IpHeaders?: Array<string>
-  /**
-   * <p>对象所属集团成员appid</p>
-   */
-  MemberAppId?: number
-  /**
-   * <p>对象所属集团成员uin</p>
-   */
-  MemberUin?: string
-  /**
-   * <p>标签信息</p>
-   */
-  Tags?: Array<TagInfo>
+  IsUnSafe?: number
 }
 
 /**
@@ -16746,7 +16770,7 @@ export interface DescribeDomainWhiteRulesResponse {
  */
 export interface DescribeLLMContentSecCheckRequest {
   /**
-   * <p>服务id,使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则</p>
+   * <p>服务id，使用哪一套防护策略，就需要传哪一套服务id，模型会检测该服务id下的所有规则</p>
    */
   ServiceId: string
   /**
@@ -16762,7 +16786,7 @@ export interface DescribeLLMContentSecCheckRequest {
    */
   Content?: string
   /**
-   * <p>对话的id</p>
+   * <p>一问一答的对话的id</p>
    */
   ChatId?: string
   /**
@@ -16785,6 +16809,14 @@ export interface DescribeLLMContentSecCheckRequest {
    * <p>tool_call 场景工具参数</p>
    */
   ToolArgs?: string
+  /**
+   * <p>多轮对话的id</p>
+   */
+  SessionId?: string
+  /**
+   * <p>意图检测请求内容</p>
+   */
+  IntentContent?: IntentContent
 }
 
 /**
