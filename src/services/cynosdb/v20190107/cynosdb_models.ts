@@ -9045,27 +9045,27 @@ export interface DescribeClusterPasswordComplexityRequest {
 }
 
 /**
- * 查询过滤器
+ * 查询过滤器。用于 DescribeClusterAndInstances 接口的过滤条件。
  */
 export interface QueryFilter {
   /**
-   * 搜索字符串
+   * 字段值列表，与 Names 一一对应。InstanceId/ClusterId 为精确匹配，InstanceName 默认模糊匹配
    */
   Values: Array<string>
   /**
-   * 搜索字段，目前支持："InstanceId", "ProjectId", "InstanceName", "Vip"
+   * 搜索字段名称列表，仅支持以下 3 个字段（不区分大小写，多个值为 OR 关系）：ClusterId（按集群 ID 过滤，精确匹配）、InstanceId（按实例 ID 反查所属集群）、InstanceName（按实例名称反查所属集群，默认 LIKE 模糊匹配，ExactMatch=true 时精确匹配）。InstanceId 与 InstanceName 同时传入时取交集（AND 语义）。
    */
-  Names: Array<string>
+  Names?: Array<string>
   /**
-   * 是否精确匹配
+   * 是否精确匹配。仅对 InstanceName 生效：true 精确匹配，false（默认）LIKE 模糊匹配。
    */
   ExactMatch?: boolean
   /**
-   * 搜索字段
+   * 搜索字段名称（单个字段模式，与 Names 二选一）。支持：ClusterId、InstanceId、InstanceName
    */
   Name?: string
   /**
-   * 操作符
+   * 操作符（预留字段，当前未启用）。可选值：>、>=、!=、=、<、<=
    * @deprecated
    */
   Operator?: string

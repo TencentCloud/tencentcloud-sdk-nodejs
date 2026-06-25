@@ -18,6 +18,16 @@ const client = new tencentcloud.tdmysql.v20211122.Client({
 })
 describe("tdmysql.v20211122.test.js", function () {
 
+it("tdmysql.v20211122.ResetUsersPassword", async function () {
+    try {
+       const data = await client.ResetUsersPassword({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmysql.v20211122.DescribeDBSBackupPolicy", async function () {
     try {
        const data = await client.DescribeDBSBackupPolicy({})

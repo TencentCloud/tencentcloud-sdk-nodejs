@@ -18,17 +18,20 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  ModifyTargetWeightRequest,
   DeleteRewriteRequest,
   DescribeTargetGroupListResponse,
   DescribeQuotaRequest,
   DescribeTargetGroupListRequest,
   BatchDeregisterTargetsResponse,
-  SetLoadBalancerSecurityGroupsResponse,
+  ModifyDomainAttributesRequest,
   RulesItems,
   ExtraInfo,
+  RouterSettingWithoutFallBack,
   BatchModifyTargetWeightResponse,
+  ModifyKeysBlockStatusRequest,
   SetSecurityGroupForLoadbalancersRequest,
-  CreateLoadBalancerRequest,
+  CreateKeyRequest,
   DescribeLoadBalancerOverviewResponse,
   DeleteRuleRequest,
   CloneLoadBalancerRequest,
@@ -37,28 +40,42 @@ import {
   SetLoadBalancerClsLogResponse,
   TargetGroupInstance,
   DescribeLoadBalancerTrafficResponse,
+  TargetGroupInfo,
   MultiCertInfo,
-  RsTagRule,
+  RegenerateKeysRequest,
   ModifyRuleRequest,
   DescribeCustomizedConfigListResponse,
+  ServiceEndPoints,
   DescribeBlockIPListResponse,
+  ModifyUserGroupAttributesRequest,
+  RsTagRule,
   DescribeRewriteRequest,
-  ModifyLoadBalancerAttributesResponse,
+  LoadBalancerTraffic,
   DescribeTargetGroupInstancesRequest,
   DescribeLBOperateProtectRequest,
+  SetLoadBalancerSecurityGroupsResponse,
+  RouterSettingWithFallBack,
+  DeleteBudgetsRequest,
   DescribeIdleLoadBalancersResponse,
-  BindItem,
+  ModifyLoadBalancerAttributesResponse,
+  AssociateTargetGroupsRequest,
+  AssociateBudgetRequest,
   DescribeLoadBalancersRequest,
+  CreateBudgetRequest,
   ClassicalTarget,
   ListenerItem,
   RsWeightRule,
   RegisterFunctionTargetsRequest,
+  DeleteUserGroupsResponse,
   DeregisterTargetsFromClassicalLBRequest,
   InquiryPriceModifyLoadBalancerRequest,
+  UserGroupInfo,
   BasicTargetGroupInfo,
+  RateLimitConfigForModelRouter,
+  DescribeModelRouterQuotaRequest,
   ModifyTargetWeightResponse,
+  DescribeModelRoutersRequest,
   ZoneResource,
-  AssociateTargetGroupsRequest,
   DescribeTaskStatusRequest,
   DescribeTargetGroupInstanceStatusResponse,
   DescribeClassicalLBByInstanceIdResponse,
@@ -72,20 +89,26 @@ import {
   RegisterTargetGroupInstancesResponse,
   ClassicalTargetInfo,
   DescribeTargetsRequest,
+  Quota,
   ZoneInfo,
   RegisterTargetsWithClassicalLBResponse,
+  DeleteModelRoutersRequest,
   DescribeTargetGroupsResponse,
   LoadBalancerHealth,
   InquiryPriceCreateLoadBalancerRequest,
+  DescribeQuotaResponse,
   TargetGroupInstanceStatus,
-  DeleteLoadBalancerListenersRequest,
+  BindItem,
+  CreateLoadBalancerRequest,
   BlockedIP,
   ModifyRuleResponse,
   DescribeClassicalLBTargetsRequest,
   RuleOutput,
+  ModelRouterSet,
   InquiryPriceRenewLoadBalancerResponse,
   DeregisterFunctionTargetsResponse,
   DescribeCustomizedConfigListRequest,
+  DisassociateBudgetRequest,
   AutoRewriteRequest,
   IdleLoadBalancer,
   DescribeCrossTargetsResponse,
@@ -105,24 +128,30 @@ import {
   DescribeBlockIPListRequest,
   MigrateClassicalLoadBalancersResponse,
   CertIdRelatedWithLoadBalancers,
-  ItemPrice,
+  DescribeTargetsResponse,
+  DescribeUserGroupsRequest,
   DescribeClassicalLBHealthStatusResponse,
   ModifyLoadBalancerSlaResponse,
   DescribeClsLogSetRequest,
   Listener,
-  LoadBalancerTraffic,
+  Job,
+  CreditUsage,
   SpecAvailability,
   ConfigListItem,
   RegisterTargetsWithClassicalLBRequest,
-  HealthCheck,
+  CreateKeysResponse,
   ModifyDomainAttributesResponse,
+  ModifyLoadBalancersProjectResponse,
   ReplaceCertForLoadBalancersResponse,
-  DescribeTargetsResponse,
-  ModifyListenerRequest,
+  DescribeBudgetAssociationsResponse,
+  DescribeModelRouterDetailRequest,
   SetSecurityGroupForLoadbalancersResponse,
   DeregisterTargetGroupInstancesResponse,
+  CreateBudgetResponse,
+  DeleteBudgetsResponse,
   RegisterTargetsRequest,
   DisassociateCustomizedConfigRequest,
+  DeleteLoadBalancerListenersRequest,
   AssociateTargetGroupsResponse,
   CreateTopicRequest,
   DeleteListenerRequest,
@@ -134,50 +163,74 @@ import {
   DescribeLoadBalancersDetailRequest,
   TargetGroupBackend,
   DeregisterFunctionTargetsRequest,
+  ModifyKeyAttributesResponse,
   DescribeClassicalLBByInstanceIdRequest,
   FunctionTarget,
+  ModifyBudgetAttributesRequest,
   InquiryPriceRefundLoadBalancerResponse,
   DescribeResourcesResponse,
+  FallBackItem,
   ModifyTargetGroupInstancesWeightRequest,
   ManualRewriteResponse,
+  RegeneratedKey,
   ModifyBlockIPListRequest,
+  CreateKeysRequest,
   DescribeClusterResourcesResponse,
+  ModifyBudgetAttributesResponse,
   ModifyBlockIPListResponse,
   DescribeClusterResourcesRequest,
-  ModifyDomainAttributesRequest,
+  RateLimitConfigForKey,
+  LbRsItem,
+  DeleteKeysResponse,
   DescribeClassicalLBHealthStatusRequest,
   DescribeListenersRequest,
+  DescribeCrossTargetsRequest,
   CreateClsLogSetResponse,
-  Backend,
+  BudgetConfigInput,
+  CreateUserGroupRequest,
+  CreatedKey,
   LBChargePrepaid,
   ClassicalListener,
   DeleteLoadBalancerRequest,
   ModifyLoadBalancersProjectRequest,
   AssociateCustomizedConfigRequest,
   CertificateInput,
-  ResourceAvailability,
+  ModelRouterQuota,
   SetLoadBalancerSecurityGroupsRequest,
   DescribeCustomizedConfigAssociateListResponse,
   RenewLoadBalancersRequest,
+  ModifyListenerRequest,
+  RegenerateKeysResponse,
+  InputKeyInfo,
+  TargetRegionInfo,
+  DescribeAsyncJobsRequest,
   SetCustomizedConfigForLoadBalancerRequest,
   CreateListenerResponse,
   CreateTargetGroupResponse,
+  DescribeModelRouterDetailResponse,
   AssociateCustomizedConfigResponse,
   CreateLoadBalancerSnatIpsResponse,
+  ModifyUserGroupAttributesResponse,
   ClassicalLoadBalancerInfo,
+  CreateKeyResponse,
   DescribeListenersResponse,
   LBOperateProtectInfo,
   RegisterFunctionTargetsResponse,
   CreateTopicResponse,
   CreateRuleRequest,
+  DescribeModelRoutersResponse,
+  ModifyKeyAttributesRequest,
+  ReplaceCertForLoadBalancersRequest,
   ModifyTargetGroupInstancesPortResponse,
-  LbRsItem,
+  DeleteUserGroupsRequest,
+  BudgetResource,
   RuleTargets,
   BatchDeregisterTargetsRequest,
   DeregisterTargetGroupInstancesRequest,
-  ManualRewriteRequest,
+  DescribeBudgetsResponse,
   InquiryPriceRefundLoadBalancerRequest,
-  ModifyListenerResponse,
+  BudgetAssociation,
+  DescribeBudgetAssociationsRequest,
   DescribeTargetHealthResponse,
   CertInfo,
   CreateTargetGroupRequest,
@@ -185,22 +238,27 @@ import {
   BindDetailItem,
   CreateListenerRequest,
   CreateClsLogSetRequest,
-  TypeInfo,
-  DisassociateTargetGroupsRequest,
+  ResourceAvailability,
+  ModifyModelRouterAttributesRequest,
+  DeleteModelRoutersResponse,
   Filter,
   ClusterResource,
   ModifyDomainResponse,
   RegisterTargetsResponse,
+  RegisterTargetGroupInstancesRequest,
   DeregisterTargetsFromClassicalLBResponse,
+  ModifyKeysUserGroupRequest,
   ClustersZone,
   SetCustomizedConfigForLoadBalancerResponse,
   DeleteLoadBalancerResponse,
   AutoRewriteResponse,
   DeregisterTargetsResponse,
+  BudgetConfig,
   DescribeLoadBalancerOverviewRequest,
   RewriteTarget,
+  ManualRewriteRequest,
   Cluster,
-  ModifyTargetWeightRequest,
+  ModifyKeysBlockStatusResponse,
   DescribeLoadBalancersDetailResponse,
   TargetHealth,
   LoadBalancerDetail,
@@ -211,24 +269,30 @@ import {
   DeleteRewriteResponse,
   BatchTarget,
   DescribeLoadBalancerListByCertIdRequest,
-  TargetRegionInfo,
+  ModifyModelRouterAttributesResponse,
   DescribeTargetHealthRequest,
-  ReplaceCertForLoadBalancersRequest,
+  ModifyListenerResponse,
   DeleteRuleResponse,
+  HealthCheck,
+  TypeInfo,
   CloneLoadBalancerResponse,
+  DescribeUserGroupsResponse,
   DescribeClsLogSetResponse,
   ModifyTargetGroupAttributeRequest,
   ExclusiveCluster,
   DeregisterTargetsRequest,
   ModifyLoadBalancerMixIpTargetResponse,
   InquiryPriceCreateLoadBalancerResponse,
+  ModelRouterDetail,
+  AssociateBudgetResponse,
   CreateLoadBalancerSnatIpsRequest,
-  TargetGroupHealthCheck,
   DescribeTargetGroupInstancesResponse,
-  DescribeQuotaResponse,
+  DeleteKeysRequest,
+  DescribeClassicalLBListenersRequest,
   DeleteTargetGroupsResponse,
   Price,
   ModifyTargetGroupInstancesPortRequest,
+  CreateUserGroupResponse,
   BatchRegisterTargetsRequest,
   ListenerBackend,
   DescribeLBOperateProtectResponse,
@@ -239,14 +303,20 @@ import {
   DescribeBlockIPTaskResponse,
   DescribeResourcesRequest,
   DescribeClassicalLBListenersResponse,
+  TargetGroupHealthCheck,
+  CreateModelRouterResponse,
   DescribeExclusiveClustersRequest,
+  DescribeBudgetsRequest,
   ModifyLoadBalancerSlaRequest,
+  RewriteLocationMap,
   DescribeBlockIPTaskRequest,
   Resource,
   CreateLoadBalancerResponse,
+  DisassociateBudgetResponse,
   ModifyFunctionTargetsRequest,
   DescribeRewriteResponse,
-  Quota,
+  BudgetInfo,
+  ModifyKeysUserGroupResponse,
   AvailableZoneAffinityInfo,
   SetLoadBalancerClsLogRequest,
   LBItem,
@@ -257,25 +327,27 @@ import {
   InternetAccessible,
   OAuth,
   DescribeClassicalLBTargetsResponse,
-  RewriteLocationMap,
+  DisassociateTargetGroupsRequest,
+  RateLimitConfigForBudget,
   ModifyTargetPortRequest,
-  ModifyLoadBalancersProjectResponse,
+  ClusterInfo,
   DescribeLoadBalancersResponse,
   DescribeLBListenersResponse,
-  TargetGroupInfo,
+  CreateModelRouterRequest,
   DeleteListenerResponse,
   DeleteLoadBalancerSnatIpsResponse,
   InquiryPriceRenewLoadBalancerRequest,
   CertificateOutput,
   DeleteTargetGroupsRequest,
-  DescribeClassicalLBListenersRequest,
+  DescribeAsyncJobsResponse,
   SetLoadBalancerStartStatusRequest,
   TargetGroupAssociation,
   ListenerHealth,
   AssociationItem,
-  DescribeCrossTargetsRequest,
-  RegisterTargetGroupInstancesRequest,
+  Backend,
+  DescribeModelRouterQuotaResponse,
   LoadBalancer,
+  ItemPrice,
 } from "./clb_models"
 
 /**
@@ -360,6 +432,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 解除Budget与模型路由实例或Key的关联。
+   */
+  async DisassociateBudget(
+    req: DisassociateBudgetRequest,
+    cb?: (error: string, rep: DisassociateBudgetResponse) => void
+  ): Promise<DisassociateBudgetResponse> {
+    return this.request("DisassociateBudget", req, cb)
+  }
+
+  /**
    * DeregisterTargetsFromClassicalLB 接口用于解绑负载均衡后端服务。本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
    */
   async DeregisterTargetsFromClassicalLB(
@@ -370,13 +452,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询负载均衡的详细信息，包括监听器，规则及后端目标。
+   * 查询异步任务信息
    */
-  async DescribeLoadBalancersDetail(
-    req: DescribeLoadBalancersDetailRequest,
-    cb?: (error: string, rep: DescribeLoadBalancersDetailResponse) => void
-  ): Promise<DescribeLoadBalancersDetailResponse> {
-    return this.request("DescribeLoadBalancersDetail", req, cb)
+  async DescribeAsyncJobs(
+    req: DescribeAsyncJobsRequest,
+    cb?: (error: string, rep: DescribeAsyncJobsResponse) => void
+  ): Promise<DescribeAsyncJobsResponse> {
+    return this.request("DescribeAsyncJobs", req, cb)
   }
 
   /**
@@ -456,6 +538,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 根据 ModifyBlockIPList 接口返回的异步任务的ID，查询封禁IP（黑名单）异步任务的执行状态。（接口灰度中，如需使用请提工单）
+   */
+  async DescribeBlockIPTask(
+    req: DescribeBlockIPTaskRequest,
+    cb?: (error: string, rep: DescribeBlockIPTaskResponse) => void
+  ): Promise<DescribeBlockIPTaskResponse> {
+    return this.request("DescribeBlockIPTask", req, cb)
+  }
+
+  /**
    * RegisterTargetsWithClassicalLB 接口用于绑定后端服务到传统型负载均衡。本接口为异步接口，接口返回成功后，需以返回的 RequestId 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
    */
   async RegisterTargetsWithClassicalLB(
@@ -463,6 +555,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RegisterTargetsWithClassicalLBResponse) => void
   ): Promise<RegisterTargetsWithClassicalLBResponse> {
     return this.request("RegisterTargetsWithClassicalLB", req, cb)
+  }
+
+  /**
+   * 查询模型路由列表页
+   */
+  async DescribeModelRouters(
+    req: DescribeModelRoutersRequest,
+    cb?: (error: string, rep: DescribeModelRoutersResponse) => void
+  ): Promise<DescribeModelRoutersResponse> {
+    return this.request("DescribeModelRouters", req, cb)
   }
 
   /**
@@ -489,14 +591,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 批量修改目标组服务器端口。
-本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
-     */
-  async ModifyTargetGroupInstancesPort(
-    req: ModifyTargetGroupInstancesPortRequest,
-    cb?: (error: string, rep: ModifyTargetGroupInstancesPortResponse) => void
-  ): Promise<ModifyTargetGroupInstancesPortResponse> {
-    return this.request("ModifyTargetGroupInstancesPort", req, cb)
+   * 在指定模型路由实例下创建一个用户组。用户组是介于模型路由实例与 Key 之间的一层可选分组，可为组内 Key 统一配置模型白名单，并通过关联 Budget 统一管理额度。创建为异步操作，接口会同步返回用户组ID，可凭返回的 RequestId 调用 DescribeAsyncJobs 查询创建进度。
+   */
+  async CreateUserGroup(
+    req: CreateUserGroupRequest,
+    cb?: (error: string, rep: CreateUserGroupResponse) => void
+  ): Promise<CreateUserGroupResponse> {
+    return this.request("CreateUserGroup", req, cb)
   }
 
   /**
@@ -507,6 +608,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BatchModifyTargetWeightResponse) => void
   ): Promise<BatchModifyTargetWeightResponse> {
     return this.request("BatchModifyTargetWeight", req, cb)
+  }
+
+  /**
+   * 批量变更 Key 的用户组归属：UserGroupId 传真实用户组ID表示批量入组/跨组移动，传 ugrp-ungrouped 表示批量移出到未分组。变更为异步操作，可凭返回的 RequestId 调用 DescribeAsyncJobs 查询进度。
+   */
+  async ModifyKeysUserGroup(
+    req: ModifyKeysUserGroupRequest,
+    cb?: (error: string, rep: ModifyKeysUserGroupResponse) => void
+  ): Promise<ModifyKeysUserGroupResponse> {
+    return this.request("ModifyKeysUserGroup", req, cb)
   }
 
   /**
@@ -585,6 +696,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询指定模型路由实例下的用户组列表或详情，支持按ID、名称、状态、标签过滤及分页。真实用户组按名称字典序升序返回；返回列表末尾恒追加一个「未分组」虚拟分组（UserGroupId 固定为 ugrp-ungrouped、UserGroupName 固定为 ungrouped），它并非用户真实创建的用户组，而是代表该实例下所有未归属任何用户组的 Key（其 KeyCount 为无组 Key 数，不计入 TotalCount，不可修改或删除）。
+   */
+  async DescribeUserGroups(
+    req: DescribeUserGroupsRequest,
+    cb?: (error: string, rep: DescribeUserGroupsResponse) => void
+  ): Promise<DescribeUserGroupsResponse> {
+    return this.request("DescribeUserGroups", req, cb)
+  }
+
+  /**
      * 启停负载均衡实例或者监听器。
 本接口为异步接口，接口返回成功后，需以得到的 RequestID 为入参，调用  [DescribeTaskStatus](https://cloud.tencent.com/document/product/214/30683)  接口查询本次任务是否成功。
      */
@@ -617,6 +738,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除Budget对象。Budget存在任何关联资源时不允许删除，需要先调用DisassociateBudget解除关联。
+   */
+  async DeleteBudgets(
+    req: DeleteBudgetsRequest,
+    cb?: (error: string, rep: DeleteBudgetsResponse) => void
+  ): Promise<DeleteBudgetsResponse> {
+    return this.request("DeleteBudgets", req, cb)
+  }
+
+  /**
+   * 禁用/启用Key
+   */
+  async ModifyKeysBlockStatus(
+    req: ModifyKeysBlockStatusRequest,
+    cb?: (error: string, rep: ModifyKeysBlockStatusResponse) => void
+  ): Promise<ModifyKeysBlockStatusResponse> {
+    return this.request("ModifyKeysBlockStatus", req, cb)
+  }
+
+  /**
    * 查询后端云主机或弹性网卡绑定的负载均衡，支持弹性网卡和cvm查询。
    */
   async DescribeLBListeners(
@@ -624,6 +765,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLBListenersResponse) => void
   ): Promise<DescribeLBListenersResponse> {
     return this.request("DescribeLBListeners", req, cb)
+  }
+
+  /**
+     * 批量修改目标组服务器端口。
+本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+     */
+  async ModifyTargetGroupInstancesPort(
+    req: ModifyTargetGroupInstancesPortRequest,
+    cb?: (error: string, rep: ModifyTargetGroupInstancesPortResponse) => void
+  ): Promise<ModifyTargetGroupInstancesPortResponse> {
+    return this.request("ModifyTargetGroupInstancesPort", req, cb)
   }
 
   /**
@@ -658,6 +810,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建 API Key
+   */
+  async CreateKey(
+    req: CreateKeyRequest,
+    cb?: (error: string, rep: CreateKeyResponse) => void
+  ): Promise<CreateKeyResponse> {
+    return this.request("CreateKey", req, cb)
+  }
+
+  /**
    * 拉取个性化配置列表，返回用户 AppId 下指定类型的配置。
    */
   async DescribeCustomizedConfigList(
@@ -668,14 +830,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * ModifyRule 接口用来修改负载均衡七层监听器下的转发规则的各项属性，包括转发路径、健康检查属性、转发策略等。
-本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用 [DescribeTaskStatus](https://cloud.tencent.com/document/product/214/30683) 接口查询本次任务是否成功。
-     */
-  async ModifyRule(
-    req: ModifyRuleRequest,
-    cb?: (error: string, rep: ModifyRuleResponse) => void
-  ): Promise<ModifyRuleResponse> {
-    return this.request("ModifyRule", req, cb)
+   * 查询用户配额信息
+   */
+  async DescribeModelRouterQuota(
+    req: DescribeModelRouterQuotaRequest,
+    cb?: (error: string, rep: DescribeModelRouterQuotaResponse) => void
+  ): Promise<DescribeModelRouterQuotaResponse> {
+    return this.request("DescribeModelRouterQuota", req, cb)
+  }
+
+  /**
+   * 查询独占集群中的资源列表，支持按集群ID、VIP、负载均衡ID、是否闲置为过滤条件检索。
+   */
+  async DescribeClusterResources(
+    req: DescribeClusterResourcesRequest,
+    cb?: (error: string, rep: DescribeClusterResourcesResponse) => void
+  ): Promise<DescribeClusterResourcesResponse> {
+    return this.request("DescribeClusterResources", req, cb)
   }
 
   /**
@@ -700,13 +871,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (RenewLoadBalancers) 用于续费包年包月实例。
+   * DescribeRewrite 接口可根据负载均衡实例ID，查询一个负载均衡实例下转发规则的重定向关系。如果不指定监听器ID或转发规则ID，则返回该负载均衡实例下的所有重定向关系。
    */
-  async RenewLoadBalancers(
-    req: RenewLoadBalancersRequest,
-    cb?: (error: string, rep: RenewLoadBalancersResponse) => void
-  ): Promise<RenewLoadBalancersResponse> {
-    return this.request("RenewLoadBalancers", req, cb)
+  async DescribeRewrite(
+    req: DescribeRewriteRequest,
+    cb?: (error: string, rep: DescribeRewriteResponse) => void
+  ): Promise<DescribeRewriteResponse> {
+    return this.request("DescribeRewrite", req, cb)
   }
 
   /**
@@ -755,23 +926,24 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询独占集群中的资源列表，支持按集群ID、VIP、负载均衡ID、是否闲置为过滤条件检索。
-   */
-  async DescribeClusterResources(
-    req: DescribeClusterResourcesRequest,
-    cb?: (error: string, rep: DescribeClusterResourcesResponse) => void
-  ): Promise<DescribeClusterResourcesResponse> {
-    return this.request("DescribeClusterResources", req, cb)
+     * ModifyRule 接口用来修改负载均衡七层监听器下的转发规则的各项属性，包括转发路径、健康检查属性、转发策略等。
+本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用 [DescribeTaskStatus](https://cloud.tencent.com/document/product/214/30683) 接口查询本次任务是否成功。
+     */
+  async ModifyRule(
+    req: ModifyRuleRequest,
+    cb?: (error: string, rep: ModifyRuleResponse) => void
+  ): Promise<ModifyRuleResponse> {
+    return this.request("ModifyRule", req, cb)
   }
 
   /**
-   * 根据 ModifyBlockIPList 接口返回的异步任务的ID，查询封禁IP（黑名单）异步任务的执行状态。（接口灰度中，如需使用请提工单）
+   * 查询负载均衡的详细信息，包括监听器，规则及后端目标。
    */
-  async DescribeBlockIPTask(
-    req: DescribeBlockIPTaskRequest,
-    cb?: (error: string, rep: DescribeBlockIPTaskResponse) => void
-  ): Promise<DescribeBlockIPTaskResponse> {
-    return this.request("DescribeBlockIPTask", req, cb)
+  async DescribeLoadBalancersDetail(
+    req: DescribeLoadBalancersDetailRequest,
+    cb?: (error: string, rep: DescribeLoadBalancersDetailResponse) => void
+  ): Promise<DescribeLoadBalancersDetailResponse> {
+    return this.request("DescribeLoadBalancersDetail", req, cb)
   }
 
   /**
@@ -795,6 +967,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除模型路由实例
+   */
+  async DeleteModelRouters(
+    req: DeleteModelRoutersRequest,
+    cb?: (error: string, rep: DeleteModelRoutersResponse) => void
+  ): Promise<DeleteModelRoutersResponse> {
+    return this.request("DeleteModelRouters", req, cb)
+  }
+
+  /**
    * 查询跨域2.0版本云联网后端子机和网卡信息。
    */
   async DescribeCrossTargets(
@@ -815,6 +997,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改 API Key 的属性
+   */
+  async ModifyKeyAttributes(
+    req: ModifyKeyAttributesRequest,
+    cb?: (error: string, rep: ModifyKeyAttributesResponse) => void
+  ): Promise<ModifyKeyAttributesResponse> {
+    return this.request("ModifyKeyAttributes", req, cb)
+  }
+
+  /**
      * 用户手动配置原访问地址和重定向地址，系统自动将原访问地址的请求重定向至对应路径的目的地址。同一域名下可以配置多条路径作为重定向策略，实现http/https之间请求的自动跳转。设置重定向时，需满足如下约束条件：若A已经重定向至B，则A不能再重定向至C（除非先删除老的重定向关系，再建立新的重定向关系），B不能重定向至任何其它地址。
 本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用DescribeTaskStatus接口查询本次任务是否成功。
      */
@@ -823,6 +1015,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ManualRewriteResponse) => void
   ): Promise<ManualRewriteResponse> {
     return this.request("ManualRewrite", req, cb)
+  }
+
+  /**
+   * 批量重新生成Key
+   */
+  async RegenerateKeys(
+    req: RegenerateKeysRequest,
+    cb?: (error: string, rep: RegenerateKeysResponse) => void
+  ): Promise<RegenerateKeysResponse> {
+    return this.request("RegenerateKeys", req, cb)
   }
 
   /**
@@ -867,6 +1069,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateRuleResponse) => void
   ): Promise<CreateRuleResponse> {
     return this.request("CreateRule", req, cb)
+  }
+
+  /**
+   * 将Budget关联到企业型模型路由实例或企业型实例下的Key。资源已关联其他Budget时，本次请求会替换为新的Budget。
+   */
+  async AssociateBudget(
+    req: AssociateBudgetRequest,
+    cb?: (error: string, rep: AssociateBudgetResponse) => void
+  ): Promise<AssociateBudgetResponse> {
+    return this.request("AssociateBudget", req, cb)
   }
 
   /**
@@ -933,6 +1145,46 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询Budget列表。
+   */
+  async DescribeBudgets(
+    req: DescribeBudgetsRequest,
+    cb?: (error: string, rep: DescribeBudgetsResponse) => void
+  ): Promise<DescribeBudgetsResponse> {
+    return this.request("DescribeBudgets", req, cb)
+  }
+
+  /**
+   * 批量创建Key
+   */
+  async CreateKeys(
+    req: CreateKeysRequest,
+    cb?: (error: string, rep: CreateKeysResponse) => void
+  ): Promise<CreateKeysResponse> {
+    return this.request("CreateKeys", req, cb)
+  }
+
+  /**
+   * 批量删除 API Key。
+   */
+  async DeleteKeys(
+    req: DeleteKeysRequest,
+    cb?: (error: string, rep: DeleteKeysResponse) => void
+  ): Promise<DeleteKeysResponse> {
+    return this.request("DeleteKeys", req, cb)
+  }
+
+  /**
+   * 修改模型路由属性。支持修改实例名称、限速配置、路由配置，以及替换企业型实例 HTTPS 服务端点绑定的证书（CertId）。每次调用至少传入一个待修改的属性字段，未传入的字段保持原值不变。其中证书替换在请求内同步完成，成功返回即已生效；其余属性修改异步生效，可通过 DescribeModelRouterDetail 接口查询修改结果。
+   */
+  async ModifyModelRouterAttributes(
+    req: ModifyModelRouterAttributesRequest,
+    cb?: (error: string, rep: ModifyModelRouterAttributesResponse) => void
+  ): Promise<ModifyModelRouterAttributesResponse> {
+    return this.request("ModifyModelRouterAttributes", req, cb)
+  }
+
+  /**
    * 本接口用于查询异步任务的执行状态，对于非查询类的接口（创建/删除负载均衡实例、监听器、规则以及绑定或解绑后端服务等），在接口调用成功后，都需要使用本接口查询任务最终是否执行成功。
    */
   async DescribeTaskStatus(
@@ -940,6 +1192,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskStatusResponse) => void
   ): Promise<DescribeTaskStatusResponse> {
     return this.request("DescribeTaskStatus", req, cb)
+  }
+
+  /**
+   * 批量删除用户组。组内若仍存在 Key，将拒绝删除（错误码 ResourceInUse），需先将 Key 移出或迁移到其他组。删除为异步操作，可凭返回的 RequestId 调用 DescribeAsyncJobs 查询进度。
+   */
+  async DeleteUserGroups(
+    req: DeleteUserGroupsRequest,
+    cb?: (error: string, rep: DeleteUserGroupsResponse) => void
+  ): Promise<DeleteUserGroupsResponse> {
+    return this.request("DeleteUserGroups", req, cb)
   }
 
   /**
@@ -953,13 +1215,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribeRewrite 接口可根据负载均衡实例ID，查询一个负载均衡实例下转发规则的重定向关系。如果不指定监听器ID或转发规则ID，则返回该负载均衡实例下的所有重定向关系。
+   * 本接口 (RenewLoadBalancers) 用于续费包年包月实例。
    */
-  async DescribeRewrite(
-    req: DescribeRewriteRequest,
-    cb?: (error: string, rep: DescribeRewriteResponse) => void
-  ): Promise<DescribeRewriteResponse> {
-    return this.request("DescribeRewrite", req, cb)
+  async RenewLoadBalancers(
+    req: RenewLoadBalancersRequest,
+    cb?: (error: string, rep: RenewLoadBalancersResponse) => void
+  ): Promise<RenewLoadBalancersResponse> {
+    return this.request("RenewLoadBalancers", req, cb)
   }
 
   /**
@@ -990,6 +1252,19 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateClsLogSetResponse) => void
   ): Promise<CreateClsLogSetResponse> {
     return this.request("CreateClsLogSet", req, cb)
+  }
+
+  /**
+     * ReplaceCertForLoadBalancers 接口用以替换负载均衡实例所关联的证书，对于各个地域的负载均衡，如果指定的老的证书ID与其有关联关系，则会先解除关联，再建立新证书与该负载均衡的关联关系。
+此接口支持替换服务端证书或客户端证书。
+需要使用的新证书，可以通过传入证书ID来指定，如果不指定证书ID，则必须传入证书内容等相关信息，用以新建证书并绑定至负载均衡。
+注：本接口仅可从广州地域调用。
+     */
+  async ReplaceCertForLoadBalancers(
+    req: ReplaceCertForLoadBalancersRequest,
+    cb?: (error: string, rep: ReplaceCertForLoadBalancersResponse) => void
+  ): Promise<ReplaceCertForLoadBalancersResponse> {
+    return this.request("ReplaceCertForLoadBalancers", req, cb)
   }
 
   /**
@@ -1046,16 +1321,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * ReplaceCertForLoadBalancers 接口用以替换负载均衡实例所关联的证书，对于各个地域的负载均衡，如果指定的老的证书ID与其有关联关系，则会先解除关联，再建立新证书与该负载均衡的关联关系。
-此接口支持替换服务端证书或客户端证书。
-需要使用的新证书，可以通过传入证书ID来指定，如果不指定证书ID，则必须传入证书内容等相关信息，用以新建证书并绑定至负载均衡。
-注：本接口仅可从广州地域调用。
-     */
-  async ReplaceCertForLoadBalancers(
-    req: ReplaceCertForLoadBalancersRequest,
-    cb?: (error: string, rep: ReplaceCertForLoadBalancersResponse) => void
-  ): Promise<ReplaceCertForLoadBalancersResponse> {
-    return this.request("ReplaceCertForLoadBalancers", req, cb)
+   * 查询指定Budget关联的资源列表。支持按资源类型过滤。
+   */
+  async DescribeBudgetAssociations(
+    req: DescribeBudgetAssociationsRequest,
+    cb?: (error: string, rep: DescribeBudgetAssociationsResponse) => void
+  ): Promise<DescribeBudgetAssociationsResponse> {
+    return this.request("DescribeBudgetAssociations", req, cb)
+  }
+
+  /**
+   * 创建Budget对象。可在创建时通过Resources同时关联已存在的企业型模型路由实例或企业型实例下的Key。创建请求提交后，可通过DescribeBudgets查询状态。
+   */
+  async CreateBudget(
+    req: CreateBudgetRequest,
+    cb?: (error: string, rep: CreateBudgetResponse) => void
+  ): Promise<CreateBudgetResponse> {
+    return this.request("CreateBudget", req, cb)
   }
 
   /**
@@ -1174,6 +1456,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改Budget属性。BudgetResetAt不支持作为入参设置。修改请求提交后，可通过DescribeBudgets查询状态。
+   */
+  async ModifyBudgetAttributes(
+    req: ModifyBudgetAttributesRequest,
+    cb?: (error: string, rep: ModifyBudgetAttributesResponse) => void
+  ): Promise<ModifyBudgetAttributesResponse> {
+    return this.request("ModifyBudgetAttributes", req, cb)
+  }
+
+  /**
      * ModifyTargetWeight 接口用于修改负载均衡绑定的后端服务的转发权重。
 本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用 [DescribeTaskStatus](https://cloud.tencent.com/document/product/214/30683) 接口查询本次任务是否成功。
      */
@@ -1202,6 +1494,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTargetsResponse) => void
   ): Promise<DescribeTargetsResponse> {
     return this.request("DescribeTargets", req, cb)
+  }
+
+  /**
+   * 创建模型路由实例
+   */
+  async CreateModelRouter(
+    req: CreateModelRouterRequest,
+    cb?: (error: string, rep: CreateModelRouterResponse) => void
+  ): Promise<CreateModelRouterResponse> {
+    return this.request("CreateModelRouter", req, cb)
+  }
+
+  /**
+   * 修改用户组的名称、模型白名单或关联预算。仅修改传入的字段；其中数组类字段（Models）传入即整体覆盖。BudgetId 传入即关联/替换该组预算（不支持解绑，解绑用 DisassociateBudget）。修改为异步操作，可凭返回的 RequestId 调用 DescribeAsyncJobs 查询进度。
+   */
+  async ModifyUserGroupAttributes(
+    req: ModifyUserGroupAttributesRequest,
+    cb?: (error: string, rep: ModifyUserGroupAttributesResponse) => void
+  ): Promise<ModifyUserGroupAttributesResponse> {
+    return this.request("ModifyUserGroupAttributes", req, cb)
+  }
+
+  /**
+   * 查询模型路由详细信息
+   */
+  async DescribeModelRouterDetail(
+    req: DescribeModelRouterDetailRequest,
+    cb?: (error: string, rep: DescribeModelRouterDetailResponse) => void
+  ): Promise<DescribeModelRouterDetailResponse> {
+    return this.request("DescribeModelRouterDetail", req, cb)
   }
 
   /**

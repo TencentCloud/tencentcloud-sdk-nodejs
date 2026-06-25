@@ -510,6 +510,20 @@ export interface BackupStatisticsModel {
 }
 
 /**
+ * ResetUsersPassword请求参数结构体
+ */
+export interface ResetUsersPasswordRequest {
+  /**
+   * <p>实例id</p>
+   */
+  InstanceId: string
+  /**
+   * <p>重置用户密码列表</p>
+   */
+  Users?: Array<ResetUserPasswordInfo>
+}
+
+/**
  * 备份策略对象
  */
 export interface BackupPolicyModelOutPut {
@@ -1760,6 +1774,28 @@ export interface DescribeSaleInfoResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 重置密码的用户类型
+ */
+export interface ResetUserPasswordInfo {
+  /**
+   * <p>用户名</p>
+   */
+  UserName?: string
+  /**
+   * <p>host</p>
+   */
+  Host?: string
+  /**
+   * <p>明文密码</p>
+   */
+  Password?: string
+  /**
+   * <p>加密密码</p>
+   */
+  EncryptedPassword?: string
 }
 
 /**
@@ -3366,6 +3402,20 @@ export interface ModifyAutoRenewFlagRequest {
    * <p>1表示开启自动续费，0为关闭自动续费</p>
    */
   AutoRenewFlag: number
+}
+
+/**
+ * ResetUsersPassword返回参数结构体
+ */
+export interface ResetUsersPasswordResponse {
+  /**
+   * <p>任务id</p>
+   */
+  FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

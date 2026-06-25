@@ -3176,9 +3176,13 @@ export interface DescribeInstanceMonitorTopNCmdTookResponse {
  */
 export interface CloseSSLRequest {
   /**
-   * 实例 ID。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
+   * <p>实例 ID。请登录<a href="https://console.cloud.tencent.com/redis">Redis控制台</a>在实例列表复制实例 ID。</p>
    */
   InstanceId: string
+  /**
+   * <p>SSL地址类型。</p><p>枚举值：</p><ul><li>0：  不限。</li><li>1： 内网IPv4。</li><li>2：  内网IPv6。</li><li>3： 外网。</li><li>-1： 未指定。</li></ul><p>默认值：0</p>
+   */
+  AddressType?: number
 }
 
 /**
@@ -5503,7 +5507,7 @@ export interface InquiryPriceRenewInstanceRequest {
  */
 export interface CloseSSLResponse {
   /**
-   * 任务ID。
+   * <p>任务ID。</p>
    */
   TaskId?: number
   /**

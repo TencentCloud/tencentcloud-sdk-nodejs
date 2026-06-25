@@ -228,16 +228,6 @@ it("apigateway.v20180808.DescribeApiAppsStatus", async function () {
     }
 })
 
-it("apigateway.v20180808.DescribeApiApp", async function () {
-    try {
-       const data = await client.DescribeApiApp({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("apigateway.v20180808.ModifyUsagePlan", async function () {
     try {
        const data = await client.ModifyUsagePlan({})

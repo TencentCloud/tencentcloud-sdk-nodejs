@@ -3757,6 +3757,10 @@ export interface CreateInstanceRequest {
    */
   EnableDiagnose?: boolean
   /**
+   * <p>是否开启自动备份</p>
+   */
+  EnableCosBackup?: boolean
+  /**
    * <p>cdcId，使用cdc子网时传递</p>
    */
   CdcId?: string

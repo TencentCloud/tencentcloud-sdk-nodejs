@@ -153,6 +153,7 @@ import {
   WaterMark,
   McuStorageParams,
   DescribeScaleInfoResponse,
+  WordItem,
   MixLayoutParams,
   ModifyCloudSliceTaskRequest,
   StopMCUMixTranscodeResponse,

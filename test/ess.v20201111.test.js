@@ -18,6 +18,16 @@ const client = new tencentcloud.ess.v20201111.Client({
 })
 describe("ess.v20201111.test.js", function () {
 
+it("ess.v20201111.DescribeEnterpriseContractReviewChecklists", async function () {
+    try {
+       const data = await client.DescribeEnterpriseContractReviewChecklists({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.DescribeContractReviewTaskListWebUrl", async function () {
     try {
        const data = await client.DescribeContractReviewTaskListWebUrl({})
@@ -1448,9 +1458,9 @@ it("ess.v20201111.CreatePrepareFlowGroup", async function () {
     }
 })
 
-it("ess.v20201111.DescribeEnterpriseContractReviewChecklists", async function () {
+it("ess.v20201111.CancelOrganizationFlows", async function () {
     try {
-       const data = await client.DescribeEnterpriseContractReviewChecklists({})
+       const data = await client.CancelOrganizationFlows({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

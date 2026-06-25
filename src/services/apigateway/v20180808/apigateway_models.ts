@@ -1249,13 +1249,29 @@ export interface DeleteIPStrategyRequest {
 }
 
 /**
- * DescribeApiApp请求参数结构体
+ * ModifyAPIDoc请求参数结构体
  */
-export interface DescribeApiAppRequest {
+export interface ModifyAPIDocRequest {
   /**
-   * 应用ID。
+   * API文档名称
    */
-  ApiAppId: string
+  ApiDocName: string
+  /**
+   * 服务名称
+   */
+  ServiceId: string
+  /**
+   * 环境名称
+   */
+  Environment: string
+  /**
+   * 生成文档的API列表
+   */
+  ApiIds: Array<string>
+  /**
+   * API文档ID
+   */
+  ApiDocId: string
 }
 
 /**
@@ -2306,7 +2322,7 @@ export interface ModifyIPStrategyResponse {
    * 修改操作是否成功。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2664,32 +2680,6 @@ req_id：请求id。
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ModifyAPIDoc请求参数结构体
- */
-export interface ModifyAPIDocRequest {
-  /**
-   * API文档名称
-   */
-  ApiDocName: string
-  /**
-   * 服务名称
-   */
-  ServiceId: string
-  /**
-   * 环境名称
-   */
-  Environment: string
-  /**
-   * 生成文档的API列表
-   */
-  ApiIds: Array<string>
-  /**
-   * API文档ID
-   */
-  ApiDocId: string
 }
 
 /**
@@ -4765,21 +4755,6 @@ DISABLE_NOTIFY_AND_MANUAL_RENEW 不续费
 export type DescribeExclusiveInstanceRegionsRequest = null
 
 /**
- * DescribeApiApp返回参数结构体
- */
-export interface DescribeApiAppResponse {
-  /**
-   * 应用详情。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Result?: ApiAppInfos
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeServiceSubDomainMappings返回参数结构体
  */
 export interface DescribeServiceSubDomainMappingsResponse {
@@ -5065,7 +5040,7 @@ export interface ModifyPluginResponse {
   /**
    * 修改操作是否成功。
    */
-  Result: boolean
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

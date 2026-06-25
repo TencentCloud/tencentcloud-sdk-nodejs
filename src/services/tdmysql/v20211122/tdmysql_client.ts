@@ -35,6 +35,7 @@ import {
   InstanceFilter,
   Explain,
   BackupStatisticsModel,
+  ResetUsersPasswordRequest,
   BackupPolicyModelOutPut,
   ModifyInstanceSSLStatusRequest,
   ModifyInstanceNameResponse,
@@ -78,6 +79,7 @@ import {
   ModifyMaintenanceWindowRequest,
   DestroyInstancesResponse,
   DescribeSaleInfoResponse,
+  ResetUserPasswordInfo,
   DeleteUsersResponse,
   DatabaseTable,
   DescribeDBInstanceDetailRequest,
@@ -133,6 +135,7 @@ import {
   AutoScalingConfig,
   DatabaseProcedure,
   ModifyAutoRenewFlagRequest,
+  ResetUsersPasswordResponse,
   CreateDBSBackupRequest,
   DestroyInstancesRequest,
   DescribeMaintenanceWindowRequest,
@@ -164,6 +167,16 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tdmysql.tencentcloudapi.com", "2021-11-22", clientConfig)
+  }
+
+  /**
+   * 本接口（ResetUsersPassword）用于批量重置用户密码
+   */
+  async ResetUsersPassword(
+    req: ResetUsersPasswordRequest,
+    cb?: (error: string, rep: ResetUsersPasswordResponse) => void
+  ): Promise<ResetUsersPasswordResponse> {
+    return this.request("ResetUsersPassword", req, cb)
   }
 
   /**

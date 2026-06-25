@@ -103,6 +103,7 @@ import {
   FormulaOCRResponse,
   RecognizeGeneralCardWarnRequest,
   Encryption,
+  VinOCRRequest,
   MixedInvoiceItem,
   SmartStructuralOCRRequest,
   ExtractDocMultiProResponse,
@@ -126,7 +127,7 @@ import {
   RecognizeValidIDCardOCRRequest,
   MixedInvoiceOCRResponse,
   ClassifyDetectOCRResponse,
-  VinOCRRequest,
+  MultimodalDocParseResponse,
   ExtractDocAgentResponse,
   OCRResult,
   VehicleLicenseOCRResponse,
@@ -134,6 +135,7 @@ import {
   ElectronicTollSummaryList,
   ElectronicAirTransport,
   ClassifyDetectOCRRequest,
+  MultimodalDocParseRequest,
   LicensePlateOCRResponse,
   ExtractDocBasicRequest,
   ReflectDetailInfo,
@@ -1127,6 +1129,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SealOCRResponse) => void
   ): Promise<SealOCRResponse> {
     return this.request("SealOCR", req, cb)
+  }
+
+  /**
+     * 本接口支持解析多种类型的文档文件（PDF、Word、PPT、Excel、Markdown、TXT、图片、WPS），返回解析后的结果文件下载地址（zip压缩包，包含markdown、json和图片）。
+
+支持的文件大小：PDF/Word/PPT支持150M且300页以内、Excel支持10M以内、TXT支持10M以内、图片文件支持70M以内。
+
+默认接口请求频率限制：5 并发。
+     */
+  async MultimodalDocParse(
+    req: MultimodalDocParseRequest,
+    cb?: (error: string, rep: MultimodalDocParseResponse) => void
+  ): Promise<MultimodalDocParseResponse> {
+    return this.request("MultimodalDocParse", req, cb)
   }
 
   /**

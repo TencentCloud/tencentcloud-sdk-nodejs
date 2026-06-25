@@ -218,6 +218,16 @@ it("tke.v20220501.ModifyNodePool", async function () {
     }
 })
 
+it("tke.v20220501.DescribeNodePoolsElasticityStrength", async function () {
+    try {
+       const data = await client.DescribeNodePoolsElasticityStrength({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tke.v20220501.StopMachines", async function () {
     try {
        const data = await client.StopMachines({})

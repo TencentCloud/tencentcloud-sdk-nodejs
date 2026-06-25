@@ -4147,154 +4147,157 @@ export interface BillDetailAssociatedOrder {
  */
 export interface BillDetail {
   /**
-   * 产品名称：用户所采购的各类云产品，例如：云服务器 CVM
+   * <p>产品名称：用户所采购的各类云产品，例如：云服务器 CVM</p>
    */
   BusinessCodeName?: string
   /**
-   * 子产品名称：用户采购的具体产品细分类型，例如：云服务器 CVM-标准型 S1
+   * <p>子产品名称：用户采购的具体产品细分类型，例如：云服务器 CVM-标准型 S1</p>
    */
   ProductCodeName?: string
   /**
-   * 计费模式：资源的计费模式，区分为包年包月和按量计费
+   * <p>计费模式：资源的计费模式，区分为包年包月和按量计费</p>
    */
   PayModeName?: string
   /**
-   * 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目
+   * <p>项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目</p>
    */
   ProjectName?: string
   /**
-   * 地域：资源所属地域，如华南地区（广州）
+   * <p>地域：资源所属地域，如华南地区（广州）</p>
    */
   RegionName?: string
   /**
-   * 可用区：资源所属可用区，如广州三区
+   * <p>可用区：资源所属可用区，如广州三区</p>
    */
   ZoneName?: string
   /**
-   * 资源 ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID
+   * <p>资源 ID：账单中出账对象 ID，不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID</p>
    */
   ResourceId?: string
   /**
-   * 资源别名：用户在控制台为资源设置的名称，如果未设置，则默认为空
+   * <p>资源别名：用户在控制台为资源设置的名称，如果未设置，则默认为空</p>
    */
   ResourceName?: string
   /**
-   * 交易类型，如包年包月新购、包年包月续费、按量计费扣费等类型
+   * <p>交易类型，如包年包月新购、包年包月续费、按量计费扣费等类型</p>
    */
   ActionTypeName?: string
   /**
-   * 订单ID：包年包月计费模式下对应子订单号。后付费计费模式下账单费用不存在订单概念，可忽略此参数。
-
+   * <p>订单ID：包年包月计费模式下对应子订单号。后付费计费模式下账单费用不存在订单概念，可忽略此参数。</p>
    */
   OrderId?: string
   /**
-   * 交易ID：结算扣费单号
+   * <p>交易ID：结算扣费单号</p>
    */
   BillId?: string
   /**
-   * 扣费时间：结算扣费时间
+   * <p>扣费时间：结算扣费时间</p>
    */
   PayTime?: string
   /**
-   * 开始使用时间：产品服务开始使用时间
+   * <p>开始使用时间：产品服务开始使用时间</p>
    */
   FeeBeginTime?: string
   /**
-   * 结束使用时间：产品服务结束使用时间
+   * <p>结束使用时间：产品服务结束使用时间</p>
    */
   FeeEndTime?: string
   /**
-   * 组件列表
+   * <p>组件列表</p>
    */
   ComponentSet?: Array<BillDetailComponent>
   /**
-   * 支付者UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识
+   * <p>支付者UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识</p>
    */
   PayerUin?: string
   /**
-   * 使用者UIN：实际使用资源的账号 ID
+   * <p>使用者UIN：实际使用资源的账号 ID</p>
    */
   OwnerUin?: string
   /**
-   * 操作者UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的 ID 或者角色 ID ）
+   * <p>操作者UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的 ID 或者角色 ID ）</p>
    */
   OperateUin?: string
   /**
-   * 标签信息
+   * <p>标签信息</p>
    */
   Tags?: Array<BillTagInfo>
   /**
-   * 产品编码
+   * <p>产品编码</p>
    */
   BusinessCode?: string
   /**
-   * 子产品编码
+   * <p>子产品编码</p>
    */
   ProductCode?: string
   /**
-   * 交易类型编码
+   * <p>交易类型编码</p>
    */
   ActionType?: string
   /**
-   * 地域ID
+   * <p>地域ID</p>
    */
   RegionId?: string
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId?: number
   /**
-   * 价格属性：该组件除单价、时长外的其他影响折扣定价的属性信息
+   * <p>价格属性：该组件除单价、时长外的其他影响折扣定价的属性信息</p>
    */
   PriceInfo?: Array<string>
   /**
-   * 关联交易单据ID：和本笔交易关联单据 ID，如，冲销订单，记录原订单、重结订单，退费单记录对应的原购买订单号
+   * <p>关联交易单据ID：和本笔交易关联单据 ID，如，冲销订单，记录原订单、重结订单，退费单记录对应的原购买订单号</p>
    */
   AssociatedOrder?: BillDetailAssociatedOrder
   /**
-   * 计算说明：特殊交易类型计费结算的详细计算说明，如退费及变配
+   * <p>计算说明：特殊交易类型计费结算的详细计算说明，如退费及变配</p>
    */
   Formula?: string
   /**
-   * 计费规则：各产品详细的计费规则官网说明链接
+   * <p>计费规则：各产品详细的计费规则官网说明链接</p>
    */
   FormulaUrl?: string
   /**
-   * 账单归属日
+   * <p>账单归属日</p>
    */
   BillDay?: string
   /**
-   * 账单归属月
+   * <p>账单归属月</p>
    */
   BillMonth?: string
   /**
-   * 账单记录ID
+   * <p>账单记录ID</p>
    */
   Id?: string
   /**
-   * 国内国际编码
+   * <p>国内国际编码</p>
    */
   RegionType?: string
   /**
-   * 国内国际：资源所属区域类型（国内、国际）
+   * <p>国内国际：资源所属区域类型（国内、国际）</p>
    */
   RegionTypeName?: string
   /**
-   * 备注属性（实例配置）：其他备注信息，如预留实例的预留实例类型和交易类型、CCN 产品的两端地域信息
+   * <p>备注属性（实例配置）：其他备注信息，如预留实例的预留实例类型和交易类型、CCN 产品的两端地域信息</p>
    */
   ReserveDetail?: string
   /**
-   * 优惠对象
+   * <p>优惠对象</p>
    */
   DiscountObject?: string
   /**
-   * 优惠类型
+   * <p>优惠类型</p>
    */
   DiscountType?: string
   /**
-   * 优惠内容
+   * <p>优惠内容</p>
    */
   DiscountContent?: string
+  /**
+   * <p>资源扩展信息：体现资源维度的扩展信息，与L2账单的扩展字段信息保持一致。</p>
+   */
+  ExtendField?: string
 }
 
 /**

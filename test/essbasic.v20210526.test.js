@@ -888,6 +888,16 @@ it("essbasic.v20210526.CreateOrganizationAuthFile", async function () {
     }
 })
 
+it("essbasic.v20210526.CancelOrganizationFlows", async function () {
+    try {
+       const data = await client.CancelOrganizationFlows({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelCreateUserRoles", async function () {
     try {
        const data = await client.ChannelCreateUserRoles({})

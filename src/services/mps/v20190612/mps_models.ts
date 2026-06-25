@@ -8844,7 +8844,7 @@ export interface DescribeStreamPackageSourceLocationResponse {
  */
 export interface CreateAigcAudioTaskRequest {
   /**
-   * <p>模型名称。生音乐当前支持的模型: GL、MinimaxMusic。</p>
+   * <p>模型名称。生音乐当前支持的模型: GL、MiniMaxMusic。</p>
    */
   ModelName?: string
   /**

@@ -30,7 +30,7 @@ export interface ResetDeviceAccountPasswordResponse {
  */
 export interface CreateUserDirectoryResponse {
   /**
-   * 目录Id
+   * <p>目录Id</p>
    */
   Id?: number
   /**
@@ -248,25 +248,29 @@ export interface DescribeDeviceGroupsResponse {
  */
 export interface UserOrg {
   /**
-   * ioa用户组织id
+   * <p>ioa用户组织id</p>
    */
   OrgId: number
   /**
-   * ioa用户组织名称
+   * <p>ioa用户组织名称</p>
    */
   OrgName: string
   /**
-   * ioa用户组织id路径
+   * <p>ioa用户组织id路径</p>
    */
   OrgIdPath: string
   /**
-   * ioa用户组织名称路径
+   * <p>ioa用户组织名称路径</p>
    */
   OrgNamePath: string
   /**
-   * ioa用户组织id下的用户数
+   * <p>ioa用户组织id下的用户数</p>
    */
   UserTotal?: number
+  /**
+   * <p>组织绑定的用户组 id 列表</p>
+   */
+  BindGroupIds?: Array<number | bigint>
 }
 
 /**
@@ -1171,29 +1175,37 @@ export interface BindDeviceResourceResponse {
  */
 export interface CreateUserDirectoryRequest {
   /**
-   * 目录id
+   * <p>目录id</p>
    */
   DirId: number
   /**
-   * 目录名称
+   * <p>目录名称</p>
    */
   DirName: string
   /**
-   * ioa分组信息
+   * <p>ioa分组信息</p>
    */
   UserOrgSet: Array<UserOrg>
   /**
-   * ioa关联用户源类型
+   * <p>ioa关联用户源类型</p>
    */
   Source: number
   /**
-   * ioa关联用户源名称
+   * <p>ioa关联用户源名称</p>
    */
   SourceName: string
   /**
-   * 目录包含用户数
+   * <p>目录包含用户数</p>
    */
   UserCount?: number
+  /**
+   * <p>是否开启自动同步</p>
+   */
+  AutoSync?: boolean
+  /**
+   * <p>同步周期（5段式 crontab 表达式）</p>
+   */
+  SyncCron?: string
 }
 
 /**
@@ -1536,25 +1548,29 @@ export interface BindDeviceAccountPrivateKeyResponse {
  */
 export interface IOAUserGroup {
   /**
-   * ioa用户组织id
+   * <p>ioa用户组织id</p>
    */
   OrgId?: number
   /**
-   * ioa用户组织名称
+   * <p>ioa用户组织名称</p>
    */
   OrgName?: string
   /**
-   * ioa用户组织id路径
+   * <p>ioa用户组织id路径</p>
    */
   OrgIdPath?: string
   /**
-   * ioa用户组织名称路径
+   * <p>ioa用户组织名称路径</p>
    */
   OrgNamePath?: string
   /**
-   * ioa关联用户源类型
+   * <p>ioa关联用户源类型</p>
    */
   Source?: number
+  /**
+   * <p>用户所属目录</p>
+   */
+  UserDirName?: string
 }
 
 /**
@@ -2096,11 +2112,11 @@ export interface DisableClientTcpAccessRequest {
  */
 export interface DescribeUserDirectoryResponse {
   /**
-   * 用户目录集
+   * <p>用户目录集</p>
    */
   UserDirSet?: Array<UserDirectory>
   /**
-   * 用户目录集总数
+   * <p>用户目录集总数</p>
    */
   TotalCount?: number
   /**
@@ -3717,37 +3733,49 @@ export interface DescribeUserGroupMembersResponse {
  */
 export interface UserDirectory {
   /**
-   * 目录id
+   * <p>目录id</p>
    */
   Id?: number
   /**
-   * ioa目录id
+   * <p>ioa目录id</p>
    */
   DirId?: number
   /**
-   * ioa目录名称
+   * <p>ioa目录名称</p>
    */
   DirName?: string
   /**
-   * ioa关联用户源类型
+   * <p>ioa关联用户源类型</p>
    */
   Source?: number
   /**
-   * ioa关联用户源名称
+   * <p>ioa关联用户源名称</p>
    */
   SourceName?: string
   /**
-   * 目录包含用户数
+   * <p>目录包含用户数</p>
    */
   UserTotal?: number
   /**
-   * 目录接入时间
+   * <p>目录接入时间</p>
    */
   CreateTime?: string
   /**
-   * 目录下的组织细节信息
+   * <p>目录下的组织细节信息</p>
    */
   UserOrgSet?: Array<UserOrg>
+  /**
+   * <p>是否开启自动同步</p>
+   */
+  AutoSync?: boolean
+  /**
+   * <p>同步周期（5段式 crontab 表达式）</p>
+   */
+  SyncCron?: string
+  /**
+   * <p>下次同步时间</p><p>参数格式：2026-06-05T11:30:00+08:00</p>
+   */
+  NextSyncTime?: string
 }
 
 /**
@@ -5076,11 +5104,11 @@ export interface DescribeUserGroupsResponse {
  */
 export interface DescribeUserDirectoryRequest {
   /**
-   * 分页大小
+   * <p>分页大小</p>
    */
   Limit?: number
   /**
-   * 分页偏移
+   * <p>分页偏移</p>
    */
   Offset?: number
 }
@@ -6607,13 +6635,21 @@ export interface EnableIntranetAccessResponse {
  */
 export interface ModifyUserDirectoryRequest {
   /**
-   * 目录id
+   * <p>目录id</p>
    */
   Id: number
   /**
-   * ioa分组信息
+   * <p>ioa分组信息</p>
    */
   UserOrgSet: Array<UserOrg>
+  /**
+   * <p>是否开启自动同步</p>
+   */
+  AutoSync?: boolean
+  /**
+   * <p>同步周期（5段式 crontab 表达式）</p>
+   */
+  SyncCron?: string
 }
 
 /**

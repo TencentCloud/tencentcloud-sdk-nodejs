@@ -4362,41 +4362,49 @@ export interface OpenIdentityCenterResponse {
  */
 export interface NotAllowReason {
   /**
-   * 是否创建的成员。true-是、false-否；成员不是创建的成员不允许删除
+   * <p>是否创建的成员。true-是、false-否；成员不是创建的成员不允许删除</p>
    */
   IsCreateMember?: boolean
   /**
-   * 成员删除许可。true-开启、false-关闭；成员删除许可关闭时不允许删除
+   * <p>成员删除许可。true-开启、false-关闭；成员删除许可关闭时不允许删除</p>
    */
   DeletionPermission?: boolean
   /**
-   * 是否可信服务委派管理员。true-是、false-否；成员是可信服务委派管理员不允许删除
+   * <p>是否可信服务委派管理员。true-是、false-否；成员是可信服务委派管理员不允许删除</p>
    */
   IsAssignManager?: boolean
   /**
-   * 是否主体管理员。true-是、false-否；成员是主体管理员不允许删除
+   * <p>是否主体管理员。true-是、false-否；成员是主体管理员不允许删除</p>
    */
   IsAuthManager?: boolean
   /**
-   * 是否共享资源管理员。true-是、false-否；成员是共享资源管理员不允许删除
+   * <p>是否共享资源管理员。true-是、false-否；成员是共享资源管理员不允许删除</p>
    */
   IsShareManager?: boolean
   /**
-   * 成员是否设置了操作审批。true-是、false-否；成员设置了操作审批时不允许删除
+   * <p>成员是否设置了操作审批。true-是、false-否；成员设置了操作审批时不允许删除</p>
    */
   OperateProcess?: boolean
   /**
-   * 是否允许解除成员财务权限。true-是、false-否；成员不能解除财务权限时不允许删除
+   * <p>是否允许解除成员财务权限。true-是、false-否；成员不能解除财务权限时不允许删除</p>
    */
   BillingPermission?: boolean
   /**
-   * 存在的资源列表。账号存在资源时不允许删除
+   * <p>存在的资源列表。账号存在资源时不允许删除</p>
    */
   ExistResources?: Array<string>
   /**
-   * 检测失败的资源列表。账号有资源检测失败时不允许删除。
+   * <p>检测失败的资源列表。账号有资源检测失败时不允许删除。</p>
    */
   DetectFailedResources?: Array<string>
+  /**
+   * <p>是否部署身份中心权限。部署权限不允许删除</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul>
+   */
+  CICRoleConfig?: boolean
+  /**
+   * <p>是否同步身份中心用户。同步用户不允许删除</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul>
+   */
+  CICUserConfig?: boolean
 }
 
 /**

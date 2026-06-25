@@ -538,6 +538,16 @@ it("ocr.v20181119.SealOCR", async function () {
     }
 })
 
+it("ocr.v20181119.MultimodalDocParse", async function () {
+    try {
+       const data = await client.MultimodalDocParse({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ocr.v20181119.ClassifyStoreName", async function () {
     try {
        const data = await client.ClassifyStoreName({})

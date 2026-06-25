@@ -88,6 +88,10 @@ export interface CreateNativeNodePoolParam {
    */
   Replicas?: number
   /**
+   * <p>机型和GPU配置相关信息</p>
+   */
+  GPUConfigs?: Array<GPUConfig>
+  /**
    * <p>公网带宽设置</p>
    */
   InternetAccessible?: InternetAccessible
@@ -1292,14 +1296,21 @@ export interface Disk {
 export type DescribeHealthCheckTemplateRequest = null
 
 /**
- * 节点自定义参数
+ * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云主机实例。
  */
-export interface InstanceExtraArgs {
+export interface TagSpecification {
   /**
-   * kubelet自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["root-dir=/var/lib/kubelet","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"]
+   * 标签绑定的资源类型，当前支持类型：
+1.cluster：集群相关接口，TagSpecification 的 ResourceType 传参为 cluster
+2.machine：节点池相关接口，如：CreateNodePool, DescribeNodePools 等，TagSpecification 的 ResourceType 传参为 machine
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Kubelet?: Array<string>
+  ResourceType?: string
+  /**
+   * 标签对列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -1559,21 +1570,24 @@ export interface RegularNodePoolInfo {
 }
 
 /**
- * 标签描述列表。通过指定该参数可以同时绑定标签到相应的资源实例，当前仅支持绑定标签到云主机实例。
+ * 节点自定义参数
  */
-export interface TagSpecification {
+export interface InstanceExtraArgs {
   /**
-   * 标签绑定的资源类型，当前支持类型：
-1.cluster：集群相关接口，TagSpecification 的 ResourceType 传参为 cluster
-2.machine：节点池相关接口，如：CreateNodePool, DescribeNodePools 等，TagSpecification 的 ResourceType 传参为 machine
+   * kubelet自定义参数，参数格式为["k1=v1", "k1=v2"]， 例如["root-dir=/var/lib/kubelet","feature-gates=PodShareProcessNamespace=true,DynamicKubeletConfig=true"]
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceType?: string
+  Kubelet?: Array<string>
+}
+
+/**
+ * DescribeNodePoolsElasticityStrength返回参数结构体
+ */
+export interface DescribeNodePoolsElasticityStrengthResponse {
   /**
-   * 标签对列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Tags?: Array<Tag>
+  RequestId?: string
 }
 
 /**
@@ -1878,6 +1892,11 @@ export interface Cluster {
    */
   VpcId?: string
 }
+
+/**
+ * DescribeNodePoolsElasticityStrength请求参数结构体
+ */
+export type DescribeNodePoolsElasticityStrengthRequest = null
 
 /**
  * 第三方节点池信息

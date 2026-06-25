@@ -57,7 +57,7 @@ import {
   NativeNodePoolInfo,
   Disk,
   DescribeHealthCheckTemplateRequest,
-  InstanceExtraArgs,
+  TagSpecification,
   DescribeClustersResponse,
   SortBy,
   DataDisk,
@@ -68,7 +68,8 @@ import {
   MachineSetScaling,
   StartMachinesResponse,
   RegularNodePoolInfo,
-  TagSpecification,
+  InstanceExtraArgs,
+  DescribeNodePoolsElasticityStrengthResponse,
   DeleteClusterMachinesResponse,
   DeleteNodePoolResponse,
   DescribeClusterInstancesRequest,
@@ -82,6 +83,7 @@ import {
   RuntimeConfig,
   DescribeZoneInstanceConfigInfosRequest,
   Cluster,
+  DescribeNodePoolsElasticityStrengthRequest,
   ExternalNodePoolInfo,
   DescribeClusterMachinesRequest,
   DeleteHealthCheckPolicyRequest,
@@ -320,6 +322,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyNodePoolResponse) => void
   ): Promise<ModifyNodePoolResponse> {
     return this.request("ModifyNodePool", req, cb)
+  }
+
+  /**
+   * 查询节点池健康度相关信息
+   */
+  async DescribeNodePoolsElasticityStrength(
+    req?: DescribeNodePoolsElasticityStrengthRequest,
+    cb?: (error: string, rep: DescribeNodePoolsElasticityStrengthResponse) => void
+  ): Promise<DescribeNodePoolsElasticityStrengthResponse> {
+    return this.request("DescribeNodePoolsElasticityStrength", req, cb)
   }
 
   /**
