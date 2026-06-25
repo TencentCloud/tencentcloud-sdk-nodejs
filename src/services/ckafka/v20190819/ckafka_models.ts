@@ -677,53 +677,57 @@ export interface JgwOperateResponse {
  */
 export interface MqttParam {
   /**
-   * 需要同步的MQTT Topic列表, CSV格式
+   * <p>需要同步的MQTT Topic列表, CSV格式</p>
    */
   Topics: string
   /**
-   * 用于控制会话的持久性。cleanSession 为true时，连接时会创建一个全新的会话。 cleanSession = false时，连接时会恢复之前的会话。
+   * <p>用于控制会话的持久性。cleanSession 为true时，连接时会创建一个全新的会话。 cleanSession = false时，连接时会恢复之前的会话。</p>
    */
   CleanSession: boolean
   /**
-   * MQTT instance-id
+   * <p>MQTT instance-id</p>
    */
   Resource?: string
   /**
-   * MQTT实例VIP
+   * <p>MQTT实例VIP</p>
    */
   Ip?: string
   /**
-   * MQTT VIP 端口
+   * <p>MQTT VIP 端口</p>
    */
   Port?: number
   /**
-   * MQTT实例用户名
+   * <p>MQTT实例用户名</p>
    */
   UserName?: string
   /**
-   * MQTT实例内账户密码
+   * <p>MQTT实例内账户密码</p>
    */
   Password?: string
   /**
-   * QoS
+   * <p>QoS</p>
    */
   Qos?: number
   /**
-   * tasks.max 订阅Topic的并发Task个数, 默认为1; 当设置大于1时, 使用Shared Subscription
+   * <p>tasks.max 订阅Topic的并发Task个数, 默认为1; 当设置大于1时, 使用Shared Subscription</p>
    */
   MaxTasks?: number
   /**
-   * MQTT 实例的Service VIP
+   * <p>MQTT 实例的Service VIP</p>
    */
   ServiceVip?: string
   /**
-   * MQTT实例的VPC ID
+   * <p>MQTT实例的VPC ID</p>
    */
   UniqVpcId?: string
   /**
-   * 是否为自建集群, MQTT只支持非自建集群
+   * <p>是否为自建集群, MQTT只支持非自建集群</p>
    */
   SelfBuilt?: boolean
+  /**
+   * <p>MQTT消息过滤sql语句</p>
+   */
+  SqlFilter?: string
 }
 
 /**
@@ -1048,6 +1052,10 @@ export interface CreatePostPaidInstanceRequest {
    * <p>自定义证书Id,仅当SpecificationsType为profession时生效,支持自定义证书能力</p><p>可通过<a href="https://cloud.tencent.com/document/product/400/41673">DescribeCertificateDetail</a>接口获取</p>
    */
   CustomSSLCertId?: string
+  /**
+   * <p>弹性存储开关</p><p>枚举值：</p><ul><li>0： 关闭</li><li>1： 开启</li></ul><p>默认值：0</p>
+   */
+  StoreQuantityType?: number
 }
 
 /**
@@ -7269,7 +7277,7 @@ export interface CreateInstancePreRequest {
    */
   ZoneId: number
   /**
-   * <p>预付费购买时长，例如 "1m",就是一个月,取值范围 1m~36m</p>
+   * <p>预付费购买时长，例如 &quot;1m&quot;,就是一个月,取值范围 1m~36m</p>
    */
   Period: string
   /**
@@ -7301,7 +7309,7 @@ export interface CreateInstancePreRequest {
    */
   KafkaVersion?: string
   /**
-   * <p>实例类型: [标准版实例]填写 "standard" (默认), [专业版实例]填写 "profession",[高级版实例]填写"premium"</p>
+   * <p>实例类型: [标准版实例]填写 &quot;standard&quot; (默认), [专业版实例]填写 &quot;profession&quot;,[高级版实例]填写&quot;premium&quot;</p>
    */
   SpecificationsType?: string
   /**
@@ -7321,7 +7329,7 @@ export interface CreateInstancePreRequest {
    */
   Tags?: Array<Tag>
   /**
-   * <p>专业版/高级版实例磁盘类型，标准版实例不需要填写。"CLOUD_SSD"：SSD云硬盘；"CLOUD_BASIC"：高性能云硬盘。不传默认为 "CLOUD_BASIC"</p>
+   * <p>专业版/高级版实例磁盘类型，标准版实例不需要填写。&quot;CLOUD_SSD&quot;：SSD云硬盘；&quot;CLOUD_BASIC&quot;：高性能云硬盘。不传默认为 &quot;CLOUD_BASIC&quot;</p>
    */
   DiskType?: string
   /**
@@ -7352,6 +7360,10 @@ export interface CreateInstancePreRequest {
    * <p>自定义证书Id,仅当SpecificationsType为profession时生效,支持自定义证书能力</p><p>可通过<a href="https://cloud.tencent.com/document/product/400/41673">DescribeCertificateDetail</a>接口获取</p>
    */
   CustomSSLCertId?: string
+  /**
+   * <p>弹性存储开关</p><p>枚举值：</p><ul><li>0： 关闭</li><li>1： 开启</li></ul><p>默认值：0</p>
+   */
+  StoreQuantityType?: number
 }
 
 /**

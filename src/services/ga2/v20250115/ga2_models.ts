@@ -110,11 +110,11 @@ export interface DescribeForwardingRuleRequest {
  */
 export interface DescribeEndpointGroupsResponse {
   /**
-   * 符合条件的终端节点组。
+   * <p>符合条件的终端节点组。</p>
    */
   EndpointGroupConfigurationSet?: Array<EndpointGroupConfigurationSet>
   /**
-   * 符合条件的实例个数。
+   * <p>符合条件的实例个数。</p>
    */
   TotalCount?: number
   /**
@@ -926,19 +926,19 @@ export interface DescribeTaskResultRequest {
  */
 export interface DescribeEndpointGroupsRequest {
   /**
-   * 全球加速实例ID。
+   * <p>全球加速实例ID。</p>
    */
   GlobalAcceleratorId: string
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认为20，最大值为100。
+   * <p>返回数量，默认为10，最大值为10。</p>
    */
   Limit?: number
   /**
-   * 过滤条件。  endpoint-group-id- String -（过滤条件）终端节点组实例ID。endpoint-group-type- String -（过滤条件）终端节点组实例类型。
+   * <p>过滤条件。  endpoint-group-id- String -（过滤条件）终端节点组实例ID。endpoint-group-type- String -（过滤条件）终端节点组实例类型。</p>
    */
   Filters?: Array<Filter>
 }

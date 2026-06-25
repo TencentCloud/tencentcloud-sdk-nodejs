@@ -1278,6 +1278,16 @@ it("csip.v20221121.DeleteIaCAccessToken", async function () {
     }
 })
 
+it("csip.v20221121.DescribeCWPMachineDetail", async function () {
+    try {
+       const data = await client.DescribeCWPMachineDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeClusterPodAssets", async function () {
     try {
        const data = await client.DescribeClusterPodAssets({})
@@ -1451,6 +1461,16 @@ it("csip.v20221121.DeleteDspmExportTask", async function () {
 it("csip.v20221121.DescribeAccessKeyAlarm", async function () {
     try {
        const data = await client.DescribeAccessKeyAlarm({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.ModifyMachineRemark", async function () {
+    try {
+       const data = await client.ModifyMachineRemark({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2281,6 +2301,16 @@ it("csip.v20221121.DescribeAccessKeyRiskDetail", async function () {
 it("csip.v20221121.DescribeDspmAssetAccessTopology", async function () {
     try {
        const data = await client.DescribeDspmAssetAccessTopology({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeCWPMachines", async function () {
+    try {
+       const data = await client.DescribeCWPMachines({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

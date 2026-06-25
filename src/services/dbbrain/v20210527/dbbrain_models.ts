@@ -114,29 +114,61 @@ export interface DescribeMetricTopProxiesResponse {
 }
 
 /**
- * DescribeRedisTopKeyPrefixList请求参数结构体
+ * DescribeDBAuditLogTopSqls请求参数结构体
  */
-export interface DescribeRedisTopKeyPrefixListRequest {
+export interface DescribeDBAuditLogTopSqlsRequest {
   /**
-   * 实例ID。
+   * <p>开始时间，如“2019-09-10 12:13:14”。</p>
    */
-  InstanceId: string
+  StartTime: string
   /**
-   * 查询日期，如2021-05-27，最早可为前30天的日期。
+   * <p>截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。</p>
    */
-  Date: string
+  EndTime: string
   /**
-   * 服务产品类型，支持值包括 "redis" - 云数据库 Redis。
+   * <p>服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 CynosDB  for MySQL，默认为&quot;mysql&quot;。</p>
    */
   Product: string
   /**
-   * 查询数目，默认为20，最大值为500。
+   * <p>实例 ID 。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>排序键，目前支持 QueryTime,ExecTimes,RowsSent,LockTime以及RowsExamined 等排序键，默认为QueryTime。</p>
+   */
+  OrderBy?: string
+  /**
+   * <p>排序方式，支持ASC（升序）以及DESC（降序），默认为DESC。</p>
+   */
+  OrderByDirection?: string
+  /**
+   * <p>返回数量，默认为20，最大值为100。</p>
    */
   Limit?: number
   /**
-   * 分片ID数组。
+   * <p>偏移量，默认为0。</p>
    */
-  ShardIds?: Array<number | bigint>
+  Offset?: number
+  /**
+   * <p>表名</p>
+   */
+  TableName?: string
+  /**
+   * <p>Hosts名</p>
+   */
+  Hosts?: Array<string>
+  /**
+   * <p>sql codes</p>
+   */
+  SqlCodes?: Array<string>
+  /**
+   * <p>sql语句</p>
+   */
+  SqlSample?: string
+  /**
+   * <p>用户名列表</p>
+   */
+  Users?: Array<string>
 }
 
 /**
@@ -318,29 +350,21 @@ export interface CreateDBDiagReportTaskRequest {
 }
 
 /**
- * ModifyAuditService请求参数结构体
+ * DescribeDBAuditLogTopSqls返回参数结构体
  */
-export interface ModifyAuditServiceRequest {
+export interface DescribeDBAuditLogTopSqlsResponse {
   /**
-   * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB。
+   * <p>符合条件的记录总数。</p>
    */
-  Product: string
+  TotalCount?: number
   /**
-   * 与Product保持一致。如："dcdb" ,"mariadb"。
+   * <p>top sql 列表</p>
    */
-  NodeRequestType: string
+  TopSqls?: Array<TopSqlTpl>
   /**
-   * 实例ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
-  /**
-   * 日志保存总时长，只能是7,30,90,180,365,1095,1825。
-   */
-  LogExpireDay: number
-  /**
-   * 高频日志保存时长，只能是7,30,90,180,365,1095,1825。
-   */
-  HotLogExpireDay: number
+  RequestId?: string
 }
 
 /**
@@ -2122,6 +2146,32 @@ export interface DescribeDBAutonomyActionRequest {
 }
 
 /**
+ * DescribeRedisTopKeyPrefixList请求参数结构体
+ */
+export interface DescribeRedisTopKeyPrefixListRequest {
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+  /**
+   * 查询日期，如2021-05-27，最早可为前30天的日期。
+   */
+  Date: string
+  /**
+   * 服务产品类型，支持值包括 "redis" - 云数据库 Redis。
+   */
+  Product: string
+  /**
+   * 查询数目，默认为20，最大值为500。
+   */
+  Limit?: number
+  /**
+   * 分片ID数组。
+   */
+  ShardIds?: Array<number | bigint>
+}
+
+/**
  * 自治指标阈值
  */
 export interface MetricThreshold {
@@ -3001,6 +3051,32 @@ export interface ReceiveUin {
    * 用户id
    */
   Uin?: string
+}
+
+/**
+ * ModifyAuditService请求参数结构体
+ */
+export interface ModifyAuditServiceRequest {
+  /**
+   * 服务产品类型，支持值包括： "dcdb" - 云数据库 Tdsql， "mariadb" - 云数据库 MariaDB。
+   */
+  Product: string
+  /**
+   * 与Product保持一致。如："dcdb" ,"mariadb"。
+   */
+  NodeRequestType: string
+  /**
+   * 实例ID。
+   */
+  InstanceId: string
+  /**
+   * 日志保存总时长，只能是7,30,90,180,365,1095,1825。
+   */
+  LogExpireDay: number
+  /**
+   * 高频日志保存时长，只能是7,30,90,180,365,1095,1825。
+   */
+  HotLogExpireDay: number
 }
 
 /**
@@ -5015,6 +5091,174 @@ export interface CreateProxySessionKillTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 审计日志TopSql
+ */
+export interface TopSqlTpl {
+  /**
+   * <p>执行次数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecTimes?: number
+  /**
+   * <p>SQL模板Id，数据类型Long。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlTemplateId?: string
+  /**
+   * <p>最小影响行数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AffectRowsMin?: number
+  /**
+   * <p>sql模板</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlTemplate?: string
+  /**
+   * <p>表名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TableName?: string
+  /**
+   * <p>最大影响行数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AffectRowsMax?: number
+  /**
+   * <p>sql类型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlType?: string
+  /**
+   * <p>影响行数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AffectRows?: number
+  /**
+   * <p>DB名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DB?: string
+  /**
+   * <p>最小锁等待时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LockWaitTimeMin?: number
+  /**
+   * <p>cpu时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuTime?: number
+  /**
+   * <p>最大io等待时间，单位秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IoWaitTimeMax?: number
+  /**
+   * <p>最大锁等待时间，单位秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LockWaitTimeMax?: number
+  /**
+   * <p>最小检查行数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckRowsMin?: number
+  /**
+   * <p>检查行数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckRows?: number
+  /**
+   * <p>最大cpu时间，单位秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuTimeMax?: number
+  /**
+   * <p>最小io等待时间，单位秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IoWaitTimeMin?: number
+  /**
+   * <p>最大执行时间，单位秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LatencyMax?: number
+  /**
+   * <p>io等待时间，单位秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IoWaitTime?: number
+  /**
+   * <p>最大检查行数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckRowsMax?: number
+  /**
+   * <p>最小cpu时间，单位秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuTimeMin?: number
+  /**
+   * <p>sql详情</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SqlText?: string
+  /**
+   * <p>锁等待时间，单位秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LockWaitTime?: number
+  /**
+   * <p>最小执行时间，单位秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LatencyMin?: number
+  /**
+   * <p>执行时间，单位秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Latency?: number
+  /**
+   * <p>queryTime 占比，单位%</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryTimeRatio?: string
+  /**
+   * <p>平均扫描行数</p>
+   */
+  CheckRowsAvg?: number
+  /**
+   * <p>平均cpu时间</p>
+   */
+  CpuTimeAvg?: number
+  /**
+   * <p>平均io等待时间</p>
+   */
+  IoWaitTimeAvg?: number
+  /**
+   * <p>平均执行时间</p>
+   */
+  LatencyAvg?: number
+  /**
+   * <p>平均锁等待时长</p>
+   */
+  LockWaitTimeAvg?: number
+  /**
+   * <p>发送行数</p>
+   */
+  SentRows?: number
+  /**
+   * <p>平均发送行数</p>
+   */
+  SentRowsAvg?: number
+  /**
+   * <p>平均影响行数</p>
+   */
+  AffectRowsAvg?: number
 }
 
 /**

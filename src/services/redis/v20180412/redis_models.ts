@@ -547,6 +547,20 @@ export interface CreateReplicationGroupRequest {
 }
 
 /**
+ * RemoveReplicationInstance返回参数结构体
+ */
+export interface RemoveReplicationInstanceResponse {
+  /**
+   * 异步任务ID。
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 导出文件
  */
 export interface ExportFile {
@@ -3056,16 +3070,16 @@ export interface SwitchAccessNewInstanceResponse {
  */
 export interface CloneInstancesResponse {
   /**
-   * 交易的ID。
+   * <p>交易的ID。</p>
    * @deprecated
    */
   DealId?: string
   /**
-   * 克隆实例的 ID。
+   * <p>克隆实例的 ID。</p>
    */
   InstanceIds?: Array<string>
   /**
-   * 订单号。
+   * <p>订单号。</p>
    */
   DealName?: string
   /**
@@ -3571,95 +3585,101 @@ export interface DescribeTaskInfoRequest {
  */
 export interface CloneInstancesRequest {
   /**
-   * 指定待克隆的源实例 ID。例如：crs-xjhsdj****。请登录[Redis控制台](https://console.cloud.tencent.com/redis)在实例列表复制实例 ID。
+   * <p>指定待克隆的源实例 ID。例如：crs-xjhsdj****。请登录<a href="https://console.cloud.tencent.com/redis">Redis控制台</a>在实例列表复制实例 ID。</p>
    */
   InstanceId: string
   /**
-   * 单次克隆实例的数量。
-- 包年包月每次购买最大数量为100。
-- 按量计费每次购买最大数量为30。
+   * <p>单次克隆实例的数量。</p><ul><li>包年包月每次购买最大数量为100。</li><li>按量计费每次购买最大数量为30。</li></ul>
    */
   GoodsNum: number
   /**
-   * 克隆实例所属的可用区ID。当前所支持的可用区 ID，请参见[地域和可用区](https://cloud.tencent.com/document/product/239/4106) 。
+   * <p>克隆实例所属的可用区ID。当前所支持的可用区 ID，请参见<a href="https://cloud.tencent.com/document/product/239/4106">地域和可用区</a> 。</p>
    */
   ZoneId: number
   /**
-   * 付费方式。<ul><li>0：按量计费。</li><li>1：包年包月。</li></ul>
+   * <p>付费方式。<ul><li>0：按量计费。</li><li>1：包年包月。</li></ul></p>
    */
   BillingMode: number
   /**
-   * 购买实例时长。<ul><li>单位：月。</li><li>付费方式选择包年包月计费时，取值范围为[1,2,3,4,5,6,7,8,9,10,11,12,24,36,48,60]。</li><li>付费方式选择按量计费时，设置为1。</li></ul>
+   * <p>购买实例时长。<ul><li>单位：月。</li><li>付费方式选择包年包月计费时，取值范围为[1,2,3,4,5,6,7,8,9,10,11,12,24,36,48,60]。</li><li>付费方式选择按量计费时，设置为1。</li></ul></p>
    */
   Period: number
   /**
-   * 安全组ID。请通过 [DescribeInstanceSecurityGroup](https://cloud.tencent.com/document/product/239/34447) 接口获取实例的安全组 ID。
+   * <p>安全组ID。请通过 <a href="https://cloud.tencent.com/document/product/239/34447">DescribeInstanceSecurityGroup</a> 接口获取实例的安全组 ID。</p>
    */
   SecurityGroupIdList: Array<string>
   /**
-   * 克隆实例使用的备份ID。请通过接口[DescribeInstanceBackups](https://cloud.tencent.com/document/product/239/20011)获取备份ID。
+   * <p>克隆实例使用的备份ID。请通过接口<a href="https://cloud.tencent.com/document/product/239/20011">DescribeInstanceBackups</a>获取备份ID。</p>
    */
   BackupId: string
   /**
-   * 配置克隆实例是否支持免密访问。开启 SSL 与外网均不支持免密访问。<ul><li>true：免密实例，</li><li>false：非免密实例。默认为非免密实例。</li></ul>
+   * <p>配置克隆实例是否支持免密访问。开启 SSL 与外网均不支持免密访问。<ul><li>true：免密实例，</li><li>false：非免密实例。默认为非免密实例。</li></ul></p>
    */
   NoAuth?: boolean
   /**
-   * 配置克隆实例的私有网络ID。如果未配置该参数，默认选择基础网络。
+   * <p>配置克隆实例的私有网络ID。如果未配置该参数，默认选择基础网络。</p>
    */
   VpcId?: string
   /**
-   * 配置克隆实例所属私有网络的子网。基础网络时该参数无需配置。
+   * <p>配置克隆实例所属私有网络的子网。基础网络时该参数无需配置。</p>
    */
   SubnetId?: string
   /**
-   * 克隆实例的名称。<br>仅支持长度小于60的中文、英文或者数字，短划线"-"、下划线"_"。</br>
+   * <p>克隆实例的名称。<br>仅支持长度小于60的中文、英文或者数字，短划线&quot;-&quot;、下划线&quot;_&quot;。<br></p>
    */
   InstanceName?: string
   /**
-   * 克隆实例的访问密码。<ul><li>当输入参数<b>NoAuth</b>为<b>true</b>时，可不设置该参数。</li><li>当实例为Redis2.8、4.0和5.0时，其密码格式为：8-30个字符，至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&*-+=_|{}[]:;<>,.?/ 中的2种，不能以"/"开头；</li><li>当实例为CKV 3.2时，其密码格式为：8-30个字符，必须包含字母和数字，且不包含其他字符。</li></ul>
+   * <p>克隆实例的访问密码。<ul><li>当输入参数<b>NoAuth</b>为<b>true</b>时，可不设置该参数。</li><li>当实例为Redis2.8、4.0和5.0时，其密码格式为：8-30个字符，至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/ 中的2种，不能以&quot;/&quot;开头；</li><li>当实例为CKV 3.2时，其密码格式为：8-30个字符，必须包含字母和数字，且不包含其他字符。</li></ul></p>
    */
   Password?: string
   /**
-   * 自动续费标识。<ul><li>0：默认状态，手动续费。</li><li>1：自动续费。</li><li>2：不自动续费，到期自动隔离。</li></ul>
+   * <p>自动续费标识。<ul><li>0：默认状态，手动续费。</li><li>1：自动续费。</li><li>2：不自动续费，到期自动隔离。</li></ul></p>
    */
   AutoRenew?: number
   /**
-   * 用户自定义的端口，默认为6379，取值范围[1024,65535]。
+   * <p>用户自定义的端口，默认为6379，取值范围[1024,65535]。</p>
    */
   VPort?: number
   /**
-   * 实例的节点信息。<ul><li>目前支持配置节点的类型（主节点或者副本节点），及其节点的可用区信息。具体信息，请参见[RedisNodeInfo](https://cloud.tencent.com/document/product/239/20022#RedisNodeInfo)。</li><li>单可用区部署可不配置该参数。</li></ul>
+   * <p>实例的节点信息。<ul><li>目前支持配置节点的类型（主节点或者副本节点），及其节点的可用区信息。具体信息，请参见<a href="https://cloud.tencent.com/document/product/239/20022#RedisNodeInfo">RedisNodeInfo</a>。</li><li>单可用区部署可不配置该参数。</li></ul></p>
    */
   NodeSet?: Array<RedisNodeInfo>
   /**
-   * 项目 ID。登录[Redis 控制台](https://console.cloud.tencent.com/redis#/)，可在右上角的<b>账号中心</b> > <b>项目管理</b>中查找项目ID。
+   * <p>项目 ID。登录<a href="https://console.cloud.tencent.com/redis#/">Redis 控制台</a>，可在右上角的<b>账号中心</b> &gt; <b>项目管理</b>中查找项目ID。</p>
    */
   ProjectId?: number
   /**
-   * 克隆实例需绑定的标签。
+   * <p>克隆实例需绑定的标签。</p>
    */
   ResourceTags?: Array<ResourceTag>
   /**
-   * 指定克隆实例相关的参数模板 ID。
-- 若不配置该参数，则系统会依据所选择的兼容版本及架构，自动适配对应的默认模板。
-- 请通过[DescribeParamTemplates](https://cloud.tencent.com/document/product/239/58750)接口，查询实例的参数模板列表，获取模板 ID 编号。
+   * <p>指定克隆实例相关的参数模板 ID。</p><ul><li>若不配置该参数，则系统会依据所选择的兼容版本及架构，自动适配对应的默认模板。</li><li>请通过<a href="https://cloud.tencent.com/document/product/239/58750">DescribeParamTemplates</a>接口，查询实例的参数模板列表，获取模板 ID 编号。</li></ul>
    */
   TemplateId?: string
   /**
-   * 指定克隆实例的告警策略 ID。请登录[腾讯云可观测平台控制台](https://console.cloud.tencent.com/monitor/alarm2/policy)，在 <b>告警管理</b> > <b>策略管理</b>页面获取策略 ID 信息。
+   * <p>指定克隆实例的告警策略 ID。请登录<a href="https://console.cloud.tencent.com/monitor/alarm2/policy">腾讯云可观测平台控制台</a>，在 <b>告警管理</b> &gt; <b>策略管理</b>页面获取策略 ID 信息。</p>
    */
   AlarmPolicyList?: Array<string>
   /**
-   * 克隆指定恢复数据的时间。
-仅支持已开通秒级备份的实例
-
+   * <p>克隆指定恢复数据的时间。<br>仅支持已开通秒级备份的实例</p>
    */
   CloneTime?: string
   /**
-   * 是否加密密码
+   * <p>是否加密密码</p>
    */
   EncryptPassword?: boolean
+  /**
+   * <p>实例密码复杂度策略</p><p>入参限制：未传或 Enabled=false 视为不启用，按默认规则校验</p>
+   */
+  PasswordPolicy?: PasswordPolicy
+  /**
+   * <p>是否开启 SSL 加密传输。</p><p>枚举值：</p><ul><li>true： 开启。</li><li>false： 关闭（默认值）。</li></ul><p>默认值：false</p>
+   */
+  EnableSSL?: boolean
+  /**
+   * <p>开启 SSL 时，是否将实例的内网 IPv4 地址写入证书的域名别名（SAN）中。仅在 EnableSSL 为 true 时生效。</p><p>枚举值：</p><ul><li>true： 允许使用内网 IP 进行 SSL 证书校验。</li><li>false： 不添加证书的 SAN 扩展信息。</li></ul><p>默认值：false</p>
+   */
+  SSLBindPrivateIPv4?: boolean
 }
 
 /**
@@ -5863,7 +5883,7 @@ export interface ModifyInstanceParamsRequest {
  */
 export interface DescribeSSLStatusRequest {
   /**
-   * 实例 ID。请登录 [Redis 控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。
+   * <p>实例 ID。请登录 <a href="https://console.cloud.tencent.com/redis/instance/list">Redis 控制台</a>在实例列表复制实例 ID。</p>
    */
   InstanceId: string
 }
@@ -5873,9 +5893,13 @@ export interface DescribeSSLStatusRequest {
  */
 export interface OpenSSLRequest {
   /**
-   * 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。
+   * <p>实例 ID，请登录<a href="https://console.cloud.tencent.com/redis/instance/list">Redis控制台</a>在实例列表复制实例 ID。</p>
    */
   InstanceId: string
+  /**
+   * <p>SSL地址类型。</p><p>枚举值：</p><ul><li>0： 不限。</li><li>1： 内网IPv4。</li><li>2： 内网IPv6。</li><li>3： 外网。</li><li>-1： 未指定。</li></ul><p>默认值：0</p>
+   */
+  AddressType?: number
 }
 
 /**
@@ -6074,31 +6098,33 @@ export interface InstanceClusterNode {
  */
 export interface DescribeSSLStatusResponse {
   /**
-   * SSL 证书下载地址。
+   * <p>SSL 证书下载地址。</p>
    */
   CertDownloadUrl?: string
   /**
-   * 证书下载链接到期时间。
+   * <p>证书下载链接到期时间。</p>
    */
   UrlExpiredTime?: string
   /**
-   * 标识实例开启 SSL 功能。
-- true：开启 。
-- false：关闭。
+   * <p>标识实例开启 SSL 功能。</p><ul><li>true：开启 。</li><li>false：关闭。</li></ul>
    */
   SSLConfig?: boolean
   /**
-   * 标识实例是否支持 SSL特性。
-- true：支持。
-- false：不支持。
+   * <p>标识实例是否支持 SSL特性。</p><ul><li>true：支持。</li><li>false：不支持。</li></ul>
    */
   FeatureSupport?: boolean
   /**
-   * 说明配置 SSL 的状态。
-- 1: 配置中。
-- 2：配置成功。
+   * <p>说明配置 SSL 的状态。</p><ul><li>1: 配置中。</li><li>2：配置成功。</li></ul>
    */
   Status?: number
+  /**
+   * <p>地址类型</p><p>枚举值：</p><ul><li>0： 不限</li><li>1： 内网IPv4</li><li>2： 内网IPv6</li><li>3： 外网</li><li>-1： 未指定</li></ul>
+   */
+  AddressType?: number
+  /**
+   * <p>当前加密连接地址</p>
+   */
+  EncryptAddress?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6891,17 +6917,29 @@ export interface DescribeInstanceBackupsRequest {
 }
 
 /**
- * RemoveReplicationInstance返回参数结构体
+ * Redis实例级密码复杂度
  */
-export interface RemoveReplicationInstanceResponse {
+export interface PasswordPolicy {
   /**
-   * 异步任务ID。
+   * <p>是否启用实例级密码复杂度策略。</p><ul><li>true：开启。所有密码变动（创建/重置）必须通过下方定义的复杂度校验。</li><li>false：关闭。不进行复杂度过滤。</li></ul><p>默认值：false</p>
    */
-  TaskId?: number
+  Enabled: boolean
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>大小写字母最小字符数。</p><ul><li>取值范围：[1,16]。</li><li>默认值：1。</li></ul>
    */
-  RequestId?: string
+  MinLetterCount?: number
+  /**
+   * <p>数字字符的最小字符数。</p><ul><li>取值范围：[1,16]。</li><li>默认值：1。</li></ul>
+   */
+  MinDigitCount?: number
+  /**
+   * <p>特殊字符最小字符数。</p><ul><li>取值范围：[1,16]。</li><li>默认值：1。</li></ul>
+   */
+  MinSpecialCount?: number
+  /**
+   * <p>密码的最小总长度（字符数）。</p><ul><li>取值范围：[8, 64]。</li><li>默认值：8。</li><li>约束限制：密码的最小总长度必须大于或等于 MinLetterCount 、MinDigitCount 与 MinSpecialCount 三个参数之和。</li></ul>
+   */
+  MinLength?: number
 }
 
 /**
@@ -7075,7 +7113,7 @@ export interface InstanceClusterShard {
  */
 export interface OpenSSLResponse {
   /**
-   * 任务ID。
+   * <p>任务ID。</p>
    */
   TaskId?: number
   /**

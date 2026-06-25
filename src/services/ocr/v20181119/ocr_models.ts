@@ -795,15 +795,19 @@ export interface OverseasInvoice {
  */
 export interface ItemInfo {
   /**
-   * key信息组
+   * <p>key信息组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Key?: Key
   /**
-   * Value信息组
+   * <p>Value信息组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: Value
+  /**
+   * <p>返回这个字段是否比对审核通过</p><p>默认值：false</p>
+   */
+  AuditResult?: boolean
 }
 
 /**
@@ -4118,19 +4122,25 @@ export interface QuotaInvoice {
  */
 export interface ItemNames {
   /**
-   * 自定义抽取功能需返回的字段名称。
+   * <p>自定义抽取功能需返回的字段名称。</p>
    */
   KeyName?: string
   /**
-   * 默认 0；0表示kv对  1表示 表格字段。
-
+   * <p>默认 0；0表示kv对  1表示 表格字段。</p>
    */
   KeyType?: number
   /**
-   * 抽取字段的描述内容。
-
+   * <p>抽取字段的描述内容。</p>
    */
   KeyPrompt?: string
+  /**
+   * <p>自定义字段对应期望的值内容（这个一般需要对字段审核比对才需要输入）。</p>
+   */
+  KeyExpectedValue?: string
+  /**
+   * <p>自定义字段审核比对的规则prompt。</p><p>比如keyname是姓名，KeyExpectedValue 张三，KeyAuditPrompt设置为“字符需要完全匹配则审核返回正确”/“字符匹配90%就审核返回正确”</p>
+   */
+  KeyAuditPrompt?: string
 }
 
 /**

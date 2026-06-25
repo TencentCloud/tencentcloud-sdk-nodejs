@@ -781,6 +781,32 @@ export interface GetHardwareInfoRequest {
 }
 
 /**
+ * 网关信息
+ */
+export interface GatewayInfo {
+  /**
+   * <p>网关ID</p>
+   */
+  GatewayId?: string
+  /**
+   * <p>网关名称</p>
+   */
+  GatewayName?: string
+  /**
+   * <p>创建时间，单位：秒</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>网关状态。0：正常，1：异常</p>
+   */
+  Status?: number
+  /**
+   * <p>网关实例数</p>
+   */
+  InstanceSize?: number
+}
+
+/**
  * GetFlowStatisticByGroup返回参数结构体
  */
 export interface GetFlowStatisticByGroupResponse {
@@ -907,6 +933,24 @@ export interface DeleteDeviceRequest {
    * 删除设备的唯一ID
    */
   DeviceId: string
+}
+
+/**
+ * GetGatewayList请求参数结构体
+ */
+export interface GetGatewayListRequest {
+  /**
+   * 页码，从1开始
+   */
+  PageNumber: number
+  /**
+   * 每页个数
+   */
+  PageSize: number
+  /**
+   * 网关名称
+   */
+  GatewayName?: string
 }
 
 /**
@@ -2245,6 +2289,24 @@ export interface GetGroupListResponse {
    * 总页数
    */
   TotalPage?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetGatewayList返回参数结构体
+ */
+export interface GetGatewayListResponse {
+  /**
+   * 网关列表
+   */
+  GatewayList?: Array<GatewayInfo>
+  /**
+   * 总个数
+   */
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

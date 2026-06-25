@@ -23,7 +23,7 @@ import {
   DescribeSlowLogTimeSeriesStatsRequest,
   DescribeUserAutonomyProfileRequest,
   DescribeMetricTopProxiesResponse,
-  DescribeRedisTopKeyPrefixListRequest,
+  DescribeDBAuditLogTopSqlsRequest,
   DescribeDBAutonomyActionsRequest,
   SecLogExportTaskInfo,
   CancelDBAutonomyActionResponse,
@@ -31,7 +31,7 @@ import {
   DescribeUserAutonomyProfileResponse,
   DescribeRedisTopHotKeysRequest,
   CreateDBDiagReportTaskRequest,
-  ModifyAuditServiceRequest,
+  DescribeDBAuditLogTopSqlsResponse,
   TableSpaceTimeSeries,
   DescribeAuditLogFilesResponse,
   DescribeIndexRecommendAggregationSlowLogsRequest,
@@ -101,6 +101,7 @@ import {
   CreateMailProfileResponse,
   UpdateMonitorSwitchResponse,
   DescribeDBAutonomyActionRequest,
+  DescribeRedisTopKeyPrefixListRequest,
   MetricThreshold,
   CancelKillTaskRequest,
   InstanceID,
@@ -140,6 +141,7 @@ import {
   AuditInstanceFilter,
   DescribeMailProfileRequest,
   ReceiveUin,
+  ModifyAuditServiceRequest,
   DeleteSecurityAuditLogExportTasksResponse,
   KillMySqlThreadsRequest,
   DescribeSqlFiltersResponse,
@@ -221,6 +223,7 @@ import {
   DescribeTopSpaceSchemasResponse,
   DescribeSlowLogQueryTimeStatsResponse,
   CreateProxySessionKillTaskResponse,
+  TopSqlTpl,
   CancelDBAutonomyActionRequest,
   DeleteDBDiagReportTasksRequest,
   DescribeAlarmTemplateRequest,
@@ -799,6 +802,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSlowLogTimeSeriesStatsResponse) => void
   ): Promise<DescribeSlowLogTimeSeriesStatsResponse> {
     return this.request("DescribeSlowLogTimeSeriesStats", req, cb)
+  }
+
+  /**
+   * 按照Sql模板+schema的聚合方式，统计排序指定时间段内的top慢sql。
+   */
+  async DescribeDBAuditLogTopSqls(
+    req: DescribeDBAuditLogTopSqlsRequest,
+    cb?: (error: string, rep: DescribeDBAuditLogTopSqlsResponse) => void
+  ): Promise<DescribeDBAuditLogTopSqlsResponse> {
+    return this.request("DescribeDBAuditLogTopSqls", req, cb)
   }
 
   /**

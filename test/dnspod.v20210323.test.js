@@ -958,6 +958,16 @@ it("dnspod.v20210323.ModifyRecordBatchV3", async function () {
     }
 })
 
+it("dnspod.v20210323.DescribeDomainLogFilterFile", async function () {
+    try {
+       const data = await client.DescribeDomainLogFilterFile({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dnspod.v20210323.ModifyPackageDomain", async function () {
     try {
        const data = await client.ModifyPackageDomain({})

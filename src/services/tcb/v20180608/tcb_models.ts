@@ -3606,6 +3606,16 @@ export interface MySQLTaskStatus {
 }
 
 /**
+ * DescribeEnvPlans请求参数结构体
+ */
+export interface DescribeEnvPlansRequest {
+  /**
+   * <p>套餐英文标识，不指定则返回所有可售卖套餐</p><p>枚举值：</p><ul><li>baas_integration： 集成版</li><li>baas_personal： 个人版</li><li>baas_pf_standard： 标准版</li><li>baas_pf_enterprise： 企业版</li><li>baas_pf_enterprise_senior： 企业高级版</li></ul>
+   */
+  PackageId?: string
+}
+
+/**
  * 查询开通Mysql结果
  */
 export interface DescribeCreateMySQLResult {
@@ -5918,6 +5928,36 @@ export interface DescribeAIModelsResponse {
 }
 
 /**
+ * 套餐信息
+ */
+export interface PlanInfo {
+  /**
+   * <p>套餐标识</p>
+   */
+  PackageId?: string
+  /**
+   * <p>套餐中文名称</p>
+   */
+  PackageTitle?: string
+  /**
+   * <p>套餐描述</p>
+   */
+  PackageDescription?: string
+  /**
+   * <p>单位原价</p>
+   */
+  UnitPrice?: string
+  /**
+   * <p>套餐类型</p>
+   */
+  PackageType?: string
+  /**
+   * <p>json格式化用户资源限制</p>
+   */
+  ResourceLimit?: string
+}
+
+/**
  * 标签键值对
  */
 export interface Tag {
@@ -6101,6 +6141,20 @@ export interface RunSqlRequest {
    * 是否只读；当 `true` 时仅允许以 `SELECT/WITH/SHOW/DESCRIBE/DESC/EXPLAIN` 开头的 SQL
    */
   ReadOnly?: boolean
+}
+
+/**
+ * DescribeEnvPlans返回参数结构体
+ */
+export interface DescribeEnvPlansResponse {
+  /**
+   * <p>云开发新套餐详情</p>
+   */
+  PlanList?: Array<PlanInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -538,6 +538,16 @@ it("dbbrain.v20210527.DescribeSlowLogTimeSeriesStats", async function () {
     }
 })
 
+it("dbbrain.v20210527.DescribeDBAuditLogTopSqls", async function () {
+    try {
+       const data = await client.DescribeDBAuditLogTopSqls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.UpdateMonitorSwitch", async function () {
     try {
        const data = await client.UpdateMonitorSwitch({})

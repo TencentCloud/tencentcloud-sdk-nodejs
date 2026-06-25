@@ -28,9 +28,9 @@ it("mna.v20210119.SetNotifyUrl", async function () {
     }
 })
 
-it("mna.v20210119.ModifyDeviceAccessRegions", async function () {
+it("mna.v20210119.GetGatewayList", async function () {
     try {
-       const data = await client.ModifyDeviceAccessRegions({})
+       const data = await client.GetGatewayList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -141,6 +141,16 @@ it("mna.v20210119.GroupAddDevice", async function () {
 it("mna.v20210119.DeleteApplication", async function () {
     try {
        const data = await client.DeleteApplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mna.v20210119.ModifyDeviceAccessRegions", async function () {
+    try {
+       const data = await client.ModifyDeviceAccessRegions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

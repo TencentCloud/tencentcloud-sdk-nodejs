@@ -56,6 +56,7 @@ import {
   UpdateApplicationInfoRequest,
   GetPublicKeyRequest,
   GetHardwareInfoRequest,
+  GatewayInfo,
   GetFlowStatisticByGroupResponse,
   GetNetMonitorResponse,
   GetFlowStatisticByNameResponse,
@@ -64,6 +65,7 @@ import {
   GetVendorHardwareRequest,
   CreateEncryptedKeyRequest,
   DeleteDeviceRequest,
+  GetGatewayListRequest,
   DeleteGroupRequest,
   CreateEncryptedKeyResponse,
   UpdateL3SwitchResponse,
@@ -119,6 +121,7 @@ import {
   GetNetMonitorRequest,
   GetNetMonitorByNameRequest,
   GetGroupListResponse,
+  GetGatewayListResponse,
   UpdateApplicationInfoResponse,
   OrderFlowPackageResponse,
   UpdateDeviceResponse,
@@ -169,13 +172,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改设备接入地域。
+   * 支持网关列表查询。包含网关名称、创建时间和网关状态（正常/异常）。支持基于网关名称的查询。默认按照创建时间倒序排列。
    */
-  async ModifyDeviceAccessRegions(
-    req: ModifyDeviceAccessRegionsRequest,
-    cb?: (error: string, rep: ModifyDeviceAccessRegionsResponse) => void
-  ): Promise<ModifyDeviceAccessRegionsResponse> {
-    return this.request("ModifyDeviceAccessRegions", req, cb)
+  async GetGatewayList(
+    req: GetGatewayListRequest,
+    cb?: (error: string, rep: GetGatewayListResponse) => void
+  ): Promise<GetGatewayListResponse> {
+    return this.request("GetGatewayList", req, cb)
   }
 
   /**
@@ -286,6 +289,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteApplicationResponse) => void
   ): Promise<DeleteApplicationResponse> {
     return this.request("DeleteApplication", req, cb)
+  }
+
+  /**
+   * 修改设备接入地域。
+   */
+  async ModifyDeviceAccessRegions(
+    req: ModifyDeviceAccessRegionsRequest,
+    cb?: (error: string, rep: ModifyDeviceAccessRegionsResponse) => void
+  ): Promise<ModifyDeviceAccessRegionsResponse> {
+    return this.request("ModifyDeviceAccessRegions", req, cb)
   }
 
   /**

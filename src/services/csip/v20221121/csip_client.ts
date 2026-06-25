@@ -22,15 +22,17 @@ import {
   DescribeCosInvokeUaRequest,
   CsipRiskCenterStatistics,
   ModifyDspmApproveStatusRequest,
+  DescribeCWPMachineDetailRequest,
   DescribeRiskItemListResponse,
   ModifyPolicyStatusRequest,
   DescribeCosAssetResponse,
   CreateCosAssetSyncTaskResponse,
   DescribeDspmSupportedAssetTypeRequest,
-  DescribeDspmAssetAccessTopologyResponse,
+  DescribeDspmSupportedAssetTypeResponse,
   ModifyDspmBackupSettingRequest,
   AuditLogInfo,
   CreateAccessKeySyncTaskRequest,
+  DescribeIpInvokeRecordDetailRequest,
   DescribeRiskCenterAssetViewWeakPasswordRiskListResponse,
   DescribeCosBucketBillingInfoResponse,
   RiskRuleInfo,
@@ -80,6 +82,7 @@ import {
   DescribeVulRiskListResponse,
   CreateRiskCenterScanTaskResponse,
   DescribeDspmAssetsRequest,
+  DescribeCWPMachineDetailResponse,
   StopRiskCenterTaskResponse,
   DescribeVpcAssetsRequest,
   TaskLogURL,
@@ -90,6 +93,7 @@ import {
   DeleteDspmApplyOrderRequest,
   SubUserInfo,
   CloudCountDesc,
+  DiskPartitionInfo,
   ModifyDspmApproveStatusResponse,
   DescribeAIAgentAssetListRequest,
   SendDspmAssetLoginSmsCodeResponse,
@@ -121,7 +125,7 @@ import {
   DescribeDspmIdentifyInfoListRequest,
   VulRiskItem,
   DeleteCosAkAssetResponse,
-  DescribeIpInvokeRecordDetailRequest,
+  AssetTagModifyAssetItem,
   DescribeAccessKeyAlarmResponse,
   DescribeGatewayAssetsResponse,
   CreateCosObjectScanTaskResponse,
@@ -167,6 +171,7 @@ import {
   DspmAssetFieldInfo,
   ModifyRiskCenterRiskStatusResponse,
   RetryDspmExportLogResponse,
+  MachineDetail,
   DescribeExposuresResponse,
   CreateDspmApproveHistoryExportJobRequest,
   CreateDspmRiskExportJobResponse,
@@ -265,6 +270,7 @@ import {
   CreateDspmAssetAccessTopologyExportJobRequest,
   DeleteDspmApplyOrderResponse,
   DescribeCosPolicyRequest,
+  DescribeCWPMachinesRequest,
   DspmAssetAccount,
   DescribeDspmIdentifyIdListRequest,
   DescribeCVMAssetInfoResponse,
@@ -304,6 +310,7 @@ import {
   TaskLogInfo,
   DescribeTaskLogURLResponse,
   CosAssetFileIdentifyInfo,
+  Machine,
   UserCallRecord,
   DescribeCosAuditDictionaryListResponse,
   UebaRule,
@@ -395,6 +402,7 @@ import {
   DeleteIaCAccessTokenResponse,
   Location,
   CosRoleAccessInfo,
+  MiniTagItem,
   UebaEventContent,
   CreateAccessKeySyncTaskResponse,
   ModifyIaCTokenPeriodResponse,
@@ -430,6 +438,7 @@ import {
   DescribePublicIpAssetsRequest,
   DescribeDspmBackupSettingRequest,
   DescribeCVMAssetInfoRequest,
+  ModifyMachineRemarkResponse,
   WebsiteRisk,
   DescribeDspmSyncAssetsStatusResponse,
   DspmRiskCount,
@@ -446,7 +455,7 @@ import {
   ModifyDspmIpInfoRequest,
   ScanTaskInfo,
   TrafficPluginState,
-  DescribeDspmAssetTableListResponse,
+  DescribeAccessKeyAlarmDetailRequest,
   Tags,
   ModifyDspmRiskInfoRequest,
   PortViewPortRisk,
@@ -564,7 +573,7 @@ import {
   DescribeScanReportListResponse,
   DescribeDspmWhitelistStrategyResponse,
   DescribeDspmAssetAccountIdentifyRequest,
-  DescribeDspmSupportedAssetTypeResponse,
+  DescribeDspmAssetAccessTopologyResponse,
   DescribeSkillScanPayInfoRequest,
   DescribeCosInvokeUaResponse,
   DescribeDspmApplyHistoryRequest,
@@ -573,6 +582,7 @@ import {
   DescribeCosAuditPayInfoResponse,
   AssetInfoDetail,
   SubnetAsset,
+  ContainerEnvInfo,
   RiskCenterStatusKey,
   TaskAssetObject,
   DbAssetInfo,
@@ -582,7 +592,7 @@ import {
   CosIdentifyRuleDetail,
   Element,
   SyncDspmUsersRequest,
-  DescribeAccessKeyAlarmDetailRequest,
+  DescribeDspmAssetTableListResponse,
   ModifyAlarmRiskStatusResponse,
   Tag,
   DspmIdentifyCategoryDetail,
@@ -595,6 +605,7 @@ import {
   AssetViewWeakPassRisk,
   ModifyPolicyStatusResponse,
   CFGViewCFGRisk,
+  DescribeCWPMachinesResponse,
   CreateIaCFileReScanTaskRequest,
   CosBucketInfo,
   ReportItemKey,
@@ -615,6 +626,7 @@ import {
   DescribeDspmAssetDatabaseListResponse,
   CreateSkillScanRequest,
   ModifyDspmAccessRecordResponse,
+  ModifyMachineRemarkRequest,
   DescribeVulViewVulRiskListRequest,
   DescribeCosBucketListRequest,
   DescribeVulRiskListRequest,
@@ -659,9 +671,11 @@ import {
   DescribeCSIPRiskStatisticsRequest,
   DescribeUebaRuleResponse,
   DescribeDomainAssetsResponse,
+  RegionInfo,
   DescribeTaskLogListRequest,
   DescribeNICAssetsResponse,
   DescribeRiskTrendDataRequest,
+  NetworkCardInfo,
   CosRiskViewInfo,
   Filters,
   ModifyRiskCenterScanTaskRequest,
@@ -1959,6 +1973,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 主机详情
+   */
+  async DescribeCWPMachineDetail(
+    req: DescribeCWPMachineDetailRequest,
+    cb?: (error: string, rep: DescribeCWPMachineDetailResponse) => void
+  ): Promise<DescribeCWPMachineDetailResponse> {
+    return this.request("DescribeCWPMachineDetail", req, cb)
+  }
+
+  /**
    * 集群pod列表
    */
   async DescribeClusterPodAssets(
@@ -2136,6 +2160,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccessKeyAlarmResponse) => void
   ): Promise<DescribeAccessKeyAlarmResponse> {
     return this.request("DescribeAccessKeyAlarm", req, cb)
+  }
+
+  /**
+   * 修改主机资产备注信息
+   */
+  async ModifyMachineRemark(
+    req: ModifyMachineRemarkRequest,
+    cb?: (error: string, rep: ModifyMachineRemarkResponse) => void
+  ): Promise<ModifyMachineRemarkResponse> {
+    return this.request("ModifyMachineRemark", req, cb)
   }
 
   /**
@@ -2966,6 +3000,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDspmAssetAccessTopologyResponse) => void
   ): Promise<DescribeDspmAssetAccessTopologyResponse> {
     return this.request("DescribeDspmAssetAccessTopology", req, cb)
+  }
+
+  /**
+   * 主机列表
+   */
+  async DescribeCWPMachines(
+    req: DescribeCWPMachinesRequest,
+    cb?: (error: string, rep: DescribeCWPMachinesResponse) => void
+  ): Promise<DescribeCWPMachinesResponse> {
+    return this.request("DescribeCWPMachines", req, cb)
   }
 
   /**

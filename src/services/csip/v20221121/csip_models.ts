@@ -138,6 +138,20 @@ export interface ModifyDspmApproveStatusRequest {
 }
 
 /**
+ * DescribeCWPMachineDetail请求参数结构体
+ */
+export interface DescribeCWPMachineDetailRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+}
+
+/**
  * DescribeRiskItemList返回参数结构体
  */
 export interface DescribeRiskItemListResponse {
@@ -212,13 +226,13 @@ export interface DescribeDspmSupportedAssetTypeRequest {
 }
 
 /**
- * DescribeDspmAssetAccessTopology返回参数结构体
+ * DescribeDspmSupportedAssetType返回参数结构体
  */
-export interface DescribeDspmAssetAccessTopologyResponse {
+export interface DescribeDspmSupportedAssetTypeResponse {
   /**
-   * 拓扑数据
+   * <p>实例支持的全局权限。</p>
    */
-  ItemSet?: Array<DspmAssetAccessTopologyItem>
+  AssetTypeSet?: Array<DspmSupportedAssetType>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -429,6 +443,16 @@ export interface CreateAccessKeySyncTaskRequest {
    * 集团账号的成员id
    */
   MemberId?: Array<string>
+}
+
+/**
+ * DescribeIpInvokeRecordDetail请求参数结构体
+ */
+export interface DescribeIpInvokeRecordDetailRequest {
+  /**
+   * 过滤器
+   */
+  Filter?: Filter
 }
 
 /**
@@ -1756,6 +1780,20 @@ export interface DescribeDspmAssetsRequest {
 }
 
 /**
+ * DescribeCWPMachineDetail返回参数结构体
+ */
+export interface DescribeCWPMachineDetailResponse {
+  /**
+   * <p>主机详情</p>
+   */
+  MachineDetail?: MachineDetail
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * StopRiskCenterTask返回参数结构体
  */
 export interface StopRiskCenterTaskResponse {
@@ -1982,6 +2020,36 @@ export interface CloudCountDesc {
    * 该云账号类型描述
    */
   CloudDesc?: string
+}
+
+/**
+ * 磁盘分区信息
+ */
+export interface DiskPartitionInfo {
+  /**
+   * <p>分区名称</p>
+   */
+  Name?: string
+  /**
+   * <p>挂载路径</p>
+   */
+  Path?: string
+  /**
+   * <p>使用百分比</p>
+   */
+  Percent?: number
+  /**
+   * <p>分区大小(MB)</p>
+   */
+  Size?: number
+  /**
+   * <p>分区类型</p>
+   */
+  Type?: string
+  /**
+   * <p>已使用(MB)</p>
+   */
+  Used?: number
 }
 
 /**
@@ -2660,13 +2728,25 @@ export interface DeleteCosAkAssetResponse {
 }
 
 /**
- * DescribeIpInvokeRecordDetail请求参数结构体
+ * 操作资产标签资产信息
  */
-export interface DescribeIpInvokeRecordDetailRequest {
+export interface AssetTagModifyAssetItem {
   /**
-   * 过滤器
+   * <p>appid</p>
    */
-  Filter?: Filter
+  AppID: number
+  /**
+   * <p>资产类型</p>
+   */
+  AssetType: string
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceID: string
+  /**
+   * <p>云厂商</p>
+   */
+  Provider: string
 }
 
 /**
@@ -3891,6 +3971,216 @@ export interface RetryDspmExportLogResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 主机列表
+ */
+export interface MachineDetail {
+  /**
+   * <p>Agent状态</p>
+   */
+  AgentStatus?: string
+  /**
+   * <p>Agent版本</p>
+   */
+  AgentVersion?: string
+  /**
+   * <p>账号AppId</p>
+   */
+  AppId?: number
+  /**
+   * <p>资产类型名称</p>
+   */
+  AssetTypeName?: string
+  /**
+   * <p>系统启动时间（Unix时间戳）</p>
+   */
+  BootTime?: number
+  /**
+   * <p>购买时间（Unix时间戳）</p>
+   */
+  BuyTime?: number
+  /**
+   * <p>云服务商</p>
+   */
+  CloudFromEnum?: string
+  /**
+   * <p>云标签列表</p>
+   */
+  CloudTags?: Array<Tags>
+  /**
+   * <p>内核版本</p>
+   */
+  CoreVersion?: string
+  /**
+   * <p>CPU信息</p>
+   */
+  Cpu?: string
+  /**
+   * <p>CPU负载</p>
+   */
+  CpuLoad?: string
+  /**
+   * <p>CPU核数</p>
+   */
+  CpuSize?: number
+  /**
+   * <p>设备型号</p>
+   */
+  DeviceVersion?: string
+  /**
+   * <p>磁盘分区信息</p>
+   */
+  Disks?: Array<DiskPartitionInfo>
+  /**
+   * <p>到期时间（Unix时间戳）</p>
+   */
+  EndTime?: number
+  /**
+   * <p>暴露状态</p>
+   */
+  ExposedStatus?: string
+  /**
+   * <p>安装时间（Unix时间戳）</p>
+   */
+  InstallTime?: number
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceID?: string
+  /**
+   * <p>实例状态</p>
+   */
+  InstanceStatus?: string
+  /**
+   * <p>内核版本</p>
+   */
+  KernelVersion?: string
+  /**
+   * <p>最近一次在线时间（Unix时间戳）</p>
+   */
+  LatestLiveTime?: number
+  /**
+   * <p>最近一次离线时间（Unix时间戳）</p>
+   */
+  LatestOfflineTime?: number
+  /**
+   * <p>内网IP</p>
+   */
+  MachineIp?: string
+  /**
+   * <p>主机名称</p>
+   */
+  MachineName?: string
+  /**
+   * <p>操作系统（云采集）</p>
+   */
+  MachineOs?: string
+  /**
+   * <p>主机状态</p>
+   */
+  MachineStatus?: string
+  /**
+   * <p>外网IP</p>
+   */
+  MachineWanIp?: string
+  /**
+   * <p>内存大小(MB)</p>
+   */
+  MemSize?: number
+  /**
+   * <p>内存使用率</p>
+   */
+  MemoryLoad?: string
+  /**
+   * <p>网卡信息</p>
+   */
+  NetCards?: Array<NetworkCardInfo>
+  /**
+   * <p>操作系统（端采集）</p>
+   */
+  OsByAgent?: string
+  /**
+   * <p>付费模式</p>
+   */
+  PayMode?: string
+  /**
+   * <p>项目ID</p>
+   */
+  ProjectId?: number
+  /**
+   * <p>已防护天数</p>
+   */
+  ProtectDays?: number
+  /**
+   * <p>防护类型</p>
+   */
+  ProtectType?: string
+  /**
+   * <p>主机唯一标识</p>
+   */
+  Quuid?: string
+  /**
+   * <p>地域信息</p>
+   */
+  RegionInfo?: RegionInfo
+  /**
+   * <p>备注</p>
+   */
+  Remark?: string
+  /**
+   * <p>序列号</p>
+   */
+  SerialNumber?: string
+  /**
+   * <p>资产标签列表</p>
+   */
+  TagItems?: Array<MiniTagItem>
+  /**
+   * <p>标签修改信息</p>
+   */
+  TagModifyInfo?: AssetTagModifyAssetItem
+  /**
+   * <p>Agent唯一标识</p>
+   */
+  Uuid?: string
+  /**
+   * <p>VPC CIDR</p>
+   */
+  VpcCidrBlock?: string
+  /**
+   * <p>VPC ID</p>
+   */
+  VpcId?: string
+  /**
+   * <p>VPC名称</p>
+   */
+  VpcName?: string
+  /**
+   * <p>主机节点类型</p><p>枚举值：</p><ul><li>NONE： 主机节点</li><li>CLUSTER： 集群节点</li><li>CONTAINER： 容器节点</li></ul>
+   */
+  NodeType?: string
+  /**
+   * <p>容器防护状态</p><p>枚举值：</p><ul><li>Enabled： 开启防护</li><li>Disabled： 关闭防护</li><li>Unknown： 未知</li></ul>
+   */
+  ContainerDefendStatus?: string
+  /**
+   * <p>集群签证md5</p>
+   */
+  ClusterCaMd5?: string
+  /**
+   * <p>容器环境信息</p>
+   */
+  ContainerEnvInfo?: ContainerEnvInfo
+  /**
+   * <p>集群id</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>集群名称</p>
+   */
+  ClusterName?: string
 }
 
 /**
@@ -6604,6 +6894,32 @@ export interface DescribeCosPolicyRequest {
 }
 
 /**
+ * DescribeCWPMachines请求参数结构体
+ */
+export interface DescribeCWPMachinesRequest {
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>一、主表字段筛选（需要指定 OperatorType）<br>MachineName：主机名称，支持 OperatorType 9(模糊)、7(IN)，Values示例：[&quot;test-server&quot;]<br>MachineIp：内网IP，支持 OperatorType 9(模糊)、7(IN)，Values示例：[&quot;10.0.0.1&quot;]<br>MachineWanIp：外网IP，支持 OperatorType 9(模糊)、7(IN)，Values示例：[&quot;1.2.3.4&quot;]<br>InstanceID：实例ID，支持 OperatorType 9(模糊)、7(IN)，Values示例：[&quot;ins-xxxxx&quot;]<br>MachineStatus / InstanceStatus：实例状态，支持 OperatorType 7(IN)、1(等于)，Values示例：[&quot;RUNNING&quot;]，可选值：RUNNING/STOPPED/EXPIRED<br>MachineOs：操作系统类型，支持 OperatorType 7(IN)，Values示例：[&quot;1&quot;]，值为数字编码，见下方OsType说明<br>VpcId：VPC ID，支持 OperatorType 7(IN)、1(等于)，Values示例：[&quot;vpc-xxxxx&quot;]<br>CloudFromEnum：云服务商，支持 OperatorType 7(IN)、1(等于)，Values示例：[&quot;0&quot;]，值为数字编码，见下方CloudFrom说明<br>Region ：地域，支持 OperatorType 7(IN)、1(等于)，Values示例：[&quot;ap-guangzhou&quot;]<br>AppId：账号AppId，支持 OperatorType 7(IN)、1(等于)，Values示例：[&quot;1234567890&quot;]<br>ProjectId：项目ID，支持 OperatorType 7(IN)、1(等于)，Values示例：[&quot;0&quot;]</p><p>二、预筛选字段（不需要指定 OperatorType）<br>AgentStatus：Agent状态，单选，Values示例：[&quot;ONLINE&quot;]，可选值：ONLINE/OFFLINE/UNINSTALL<br>ProtectType：防护类型（综合），Values示例：[&quot;ULTIMATE&quot;]，可选值：BASIC/PRO/ULTIMATE/NONE<br>CsipProtectType：CSIP防护类型，Values示例：[&quot;ULTIMATE&quot;]，可选值：BASIC/PRO/ULTIMATE/NONE<br>CloudTags：云标签，Values示例：[&quot;tagKey$tagValue&quot;]，格式：tagKey$tagValue 或 tagKey（只匹配key），最多5个值<br>Tags：资产标签，Values示例：[&quot;123&quot;]，值为标签ID<br>ExposedStatus：暴露状态，单选，Values示例：[&quot;EXPOSED&quot;]，可选值：NOT_APPLICABLE/EXPOSED/UNEXPOSED</p><p>三、特殊筛选字段（不需要指定 OperatorType）<br>NetworkType：网络类型，单选，Values示例：[&quot;1&quot;]，1=VPC网络, 2=基础网络, 3=非腾讯云网络<br>MachineType：机器类型，可多选，Values示例：[&quot;CVM&quot;]，可选值：CVM/BM/ECM/LH/EKS-NATIVE/ECS/EC2/VMS<br>Common：通用搜索，单选，Values示例：[&quot;关键词&quot;]，同时对内网IP、外网IP、主机名称、实例ID做模糊匹配</p>
+   */
+  Filter?: Filter
+  /**
+   * <p>是否需要tat状态信息</p>
+   */
+  NeedTatStatus?: boolean
+  /**
+   * <p>是否需要额外信息，如安全中心标签、腾讯云标签</p>
+   */
+  MoreInformation?: boolean
+  /**
+   * <p>是否需要容器信息，如容器数、核数、容器防护状态</p>
+   */
+  NeedContainerInfo?: boolean
+}
+
+/**
  * 资产账号信息
  */
 export interface DspmAssetAccount {
@@ -8196,6 +8512,140 @@ export interface CosAssetFileIdentifyInfo {
    * 分类数据项详情
    */
   CategoryDetails?: Array<CosIdentifyCategoryDetail>
+}
+
+/**
+ * 主机列表
+ */
+export interface Machine {
+  /**
+   * <p>Agent状态，取值：ONLINE-在线，OFFLINE-离线，UNINSTALL-未安装</p>
+   */
+  AgentStatus?: string
+  /**
+   * <p>Agent版本</p>
+   */
+  AgentVersion?: string
+  /**
+   * <p>账号AppId</p>
+   */
+  AppId?: number
+  /**
+   * <p>云服务商</p>
+   */
+  CloudFromEnum?: string
+  /**
+   * <p>云标签列表</p>
+   */
+  CloudTags?: Array<Tag>
+  /**
+   * <p>CSIP防护类型，取值：BASIC-基础版，PRO-专业版，ULTIMATE-旗舰版</p>
+   */
+  CsipProtectType?: string
+  /**
+   * <p>暴露状态</p>
+   */
+  ExposedStatus?: string
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceID?: string
+  /**
+   * <p>实例状态，取值：RUNNING-运行中，STOPPED-已关机，EXPIRED-待回收</p>
+   */
+  InstanceStatus?: string
+  /**
+   * <p>网卡IP列表</p>
+   */
+  IpList?: Array<string>
+  /**
+   * <p>是否为新增主机（15天内新增）</p>
+   */
+  IsNew?: boolean
+  /**
+   * <p>内核版本</p>
+   */
+  KernelVersion?: string
+  /**
+   * <p>最近一次离线时间（Unix时间戳）</p>
+   */
+  LatestOfflineTime?: number
+  /**
+   * <p>内网IP</p>
+   */
+  MachineIp?: string
+  /**
+   * <p>主机名称</p>
+   */
+  MachineName?: string
+  /**
+   * <p>操作系统</p>
+   */
+  MachineOs?: string
+  /**
+   * <p>外网IP</p>
+   */
+  MachineWanIp?: string
+  /**
+   * <p>付费模式，取值：PREPAID-预付费，POSTPAID-后付费</p>
+   */
+  PayMode?: string
+  /**
+   * <p>项目ID</p>
+   */
+  ProjectId?: number
+  /**
+   * <p>防护类型，取值：NONE-无防护，BASIC-基础版，PRO-专业版，ULTIMATE-旗舰版，PRO_LH-轻量版</p>
+   */
+  ProtectType?: string
+  /**
+   * <p>主机唯一标识</p>
+   */
+  Quuid?: string
+  /**
+   * <p>地域信息</p>
+   */
+  RegionInfo?: RegionInfo
+  /**
+   * <p>备注</p>
+   */
+  Remark?: string
+  /**
+   * <p>资产标签列表</p>
+   */
+  TagItems?: Array<MiniTagItem>
+  /**
+   * <p>标签修改信息</p>
+   */
+  TagModifyInfo?: AssetTagModifyAssetItem
+  /**
+   * <p>TAT状态，取值：ONLINE-在线，OFFLINE-离线</p>
+   */
+  TatStatus?: string
+  /**
+   * <p>Agent唯一标识</p>
+   */
+  Uuid?: string
+  /**
+   * <p>VPC ID</p>
+   */
+  VpcId?: string
+  /**
+   * <p>主机节点类型</p><p>枚举值：</p><ul><li>NONE： 主机节点</li><li>CLUSTER： 集群节点</li><li>CONTAINER： 容器节点</li></ul>
+   */
+  NodeType?: string
+  /**
+   * <p>容器防护状态</p><p>枚举值：</p><ul><li>Enabled： 开启防护</li><li>Disabled： 关闭防护</li><li>Unknown： 未知</li></ul>
+   */
+  ContainerDefendStatus?: string
+  /**
+   * <p>容器数量</p>
+   */
+  ContainerCount?: number
+  /**
+   * <p>核数</p>
+   */
+  CpuCoreCount?: number
 }
 
 /**
@@ -11154,6 +11604,40 @@ export interface CosRoleAccessInfo {
 }
 
 /**
+ * 简要的资产标签元素
+ */
+export interface MiniTagItem {
+  /**
+   * <p>标签颜色</p>
+   */
+  Color?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>标签ID</p>
+   */
+  ID?: number
+  /**
+   * <p>标签键</p>
+   */
+  TagKey?: string
+  /**
+   * <p>标签值</p>
+   */
+  TagValue?: string
+  /**
+   * <p>标签键英文</p>
+   */
+  TagKeyEn?: string
+  /**
+   * <p>标签值英文</p>
+   */
+  TagValueEn?: string
+}
+
+/**
  * 用户行为分析 发生事件结构体
  */
 export interface UebaEventContent {
@@ -12395,6 +12879,16 @@ export interface DescribeCVMAssetInfoRequest {
 }
 
 /**
+ * ModifyMachineRemark返回参数结构体
+ */
+export interface ModifyMachineRemarkResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 网站风险对象
  */
 export interface WebsiteRisk {
@@ -12882,21 +13376,17 @@ REDIRECT_FAILED：流量重定向失败
 }
 
 /**
- * DescribeDspmAssetTableList返回参数结构体
+ * DescribeAccessKeyAlarmDetail请求参数结构体
  */
-export interface DescribeDspmAssetTableListResponse {
+export interface DescribeAccessKeyAlarmDetailRequest {
   /**
-   * 总数
+   * 告警记录ID
    */
-  TotalCount?: number
+  ID: number
   /**
-   * 结果集
+   * 集团账号的成员id
    */
-  DataSet?: Array<DspmAssetTableInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  MemberId?: Array<string>
 }
 
 /**
@@ -16153,13 +16643,13 @@ export interface DescribeDspmAssetAccountIdentifyRequest {
 }
 
 /**
- * DescribeDspmSupportedAssetType返回参数结构体
+ * DescribeDspmAssetAccessTopology返回参数结构体
  */
-export interface DescribeDspmSupportedAssetTypeResponse {
+export interface DescribeDspmAssetAccessTopologyResponse {
   /**
-   * <p>实例支持的全局权限。</p>
+   * 拓扑数据
    */
-  AssetTypeSet?: Array<DspmSupportedAssetType>
+  ItemSet?: Array<DspmAssetAccessTopologyItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16379,6 +16869,28 @@ export interface SubnetAsset {
    * 是否新资产 1新
    */
   IsNewAsset?: number
+}
+
+/**
+ * 容器环境信息
+ */
+export interface ContainerEnvInfo {
+  /**
+   * <p>节点类型</p>
+   */
+  NodeType?: string
+  /**
+   * <p>docker版本</p>
+   */
+  DockerVersion?: string
+  /**
+   * <p>containerd版本</p>
+   */
+  ContainerdVersion?: string
+  /**
+   * <p>文件系统类型</p>
+   */
+  FileSystemType?: string
 }
 
 /**
@@ -16619,17 +17131,21 @@ export interface Element {
 export type SyncDspmUsersRequest = null
 
 /**
- * DescribeAccessKeyAlarmDetail请求参数结构体
+ * DescribeDspmAssetTableList返回参数结构体
  */
-export interface DescribeAccessKeyAlarmDetailRequest {
+export interface DescribeDspmAssetTableListResponse {
   /**
-   * 告警记录ID
+   * 总数
    */
-  ID: number
+  TotalCount?: number
   /**
-   * 集团账号的成员id
+   * 结果集
    */
-  MemberId?: Array<string>
+  DataSet?: Array<DspmAssetTableInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -17219,6 +17735,24 @@ export interface CFGViewCFGRisk {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CFGHelpURL?: string
+}
+
+/**
+ * DescribeCWPMachines返回参数结构体
+ */
+export interface DescribeCWPMachinesResponse {
+  /**
+   * <p>主机列表</p>
+   */
+  Machines?: Array<Machine>
+  /**
+   * <p>总数</p>
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -17819,6 +18353,24 @@ export interface ModifyDspmAccessRecordResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyMachineRemark请求参数结构体
+ */
+export interface ModifyMachineRemarkRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>备注信息</p>
+   */
+  Remark: string
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -18892,6 +19444,32 @@ export interface DescribeDomainAssetsResponse {
 }
 
 /**
+ * 地域信息
+ */
+export interface RegionInfo {
+  /**
+   * <p>地域</p>
+   */
+  Region?: string
+  /**
+   * <p>地域编码</p>
+   */
+  RegionCode?: string
+  /**
+   * <p>地域ID</p>
+   */
+  RegionId?: number
+  /**
+   * <p>地域名称</p>
+   */
+  RegionName?: string
+  /**
+   * <p>地域英文名称</p>
+   */
+  RegionNameEn?: string
+}
+
+/**
  * DescribeTaskLogList请求参数结构体
  */
 export interface DescribeTaskLogListRequest {
@@ -18951,6 +19529,36 @@ export interface DescribeRiskTrendDataRequest {
    * 指定的日期
    */
   LastDays?: number
+}
+
+/**
+ * 网卡信息
+ */
+export interface NetworkCardInfo {
+  /**
+   * <p>DNS服务器</p>
+   */
+  DnsServer?: string
+  /**
+   * <p>网关</p>
+   */
+  Gateway?: string
+  /**
+   * <p>IP地址</p>
+   */
+  Ip?: string
+  /**
+   * <p>IPv6地址</p>
+   */
+  Ipv6?: string
+  /**
+   * <p>MAC地址</p>
+   */
+  Mac?: string
+  /**
+   * <p>网卡名称</p>
+   */
+  Name?: string
 }
 
 /**

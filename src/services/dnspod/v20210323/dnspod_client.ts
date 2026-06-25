@@ -37,6 +37,7 @@ import {
   CreateRecordBatchResponse,
   DescribeSnapshotListResponse,
   CreateDomainBatchRecord,
+  DescribeDomainLogFilterFileRequest,
   DomainAnalyticsInfo,
   ModifyRecordGroupRequest,
   DescribeVASStatisticResponse,
@@ -180,6 +181,7 @@ import {
   DescribeVasListRequest,
   CreateLineGroupCopyResponse,
   CreateDomainAliasResponse,
+  DescribeDomainLogFilterFileResponse,
   DescribeRecordListRequest,
   PayOrderWithBalanceRequest,
   CreateTXTRecordRequest,
@@ -1232,6 +1234,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRecordBatchV3Response) => void
   ): Promise<ModifyRecordBatchV3Response> {
     return this.request("ModifyRecordBatchV3", req, cb)
+  }
+
+  /**
+   * 获取域名操作日志导出文件下载地址
+   */
+  async DescribeDomainLogFilterFile(
+    req: DescribeDomainLogFilterFileRequest,
+    cb?: (error: string, rep: DescribeDomainLogFilterFileResponse) => void
+  ): Promise<DescribeDomainLogFilterFileResponse> {
+    return this.request("DescribeDomainLogFilterFile", req, cb)
   }
 
   /**

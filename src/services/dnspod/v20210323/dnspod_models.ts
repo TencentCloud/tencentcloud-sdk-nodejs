@@ -439,6 +439,44 @@ export interface CreateDomainBatchRecord {
 }
 
 /**
+ * DescribeDomainLogFilterFile请求参数结构体
+ */
+export interface DescribeDomainLogFilterFileRequest {
+  /**
+   * 要获取操作日志的域名
+   */
+  Domain: string
+  /**
+   * 要获取操作日志的域名 Id，如果传了 DomainId，系统将会忽略 Domain 参数。 可以通过接口 DescribeDomainList 查到所有的 Domain 以及 DomainId
+   */
+  DomainId?: number
+  /**
+   * 通过关键字搜索，支持搜索字段：账户 UIN、操作 IP、操作内容
+   */
+  Keyword?: string
+  /**
+   * 操作时间范围起始时间(仅支持近6个月的日志查询)
+   */
+  OperateBegin?: string
+  /**
+   * 操作时间范围截止时间(仅支持近6个月的日志查询)
+   */
+  OperateEnd?: string
+  /**
+   * 操作账号 UIN 精确匹配
+   */
+  OperateUin?: number
+  /**
+   * 操作 IP 精确匹配
+   */
+  OperateClientIP?: string
+  /**
+   * 操作内容 模糊匹配
+   */
+  OperateContent?: string
+}
+
+/**
  * 域名解析量统计查询信息
  */
 export interface DomainAnalyticsInfo {
@@ -3694,6 +3732,20 @@ export interface CreateDomainAliasResponse {
    * 域名别名ID
    */
   DomainAliasId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeDomainLogFilterFile返回参数结构体
+ */
+export interface DescribeDomainLogFilterFileResponse {
+  /**
+   * 文件下载地址。
+   */
+  DownloadURL?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

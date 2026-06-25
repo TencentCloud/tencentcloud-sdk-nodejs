@@ -208,6 +208,16 @@ it("tcb.v20180608.CreateStaticStore", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeCurveData", async function () {
+    try {
+       const data = await client.DescribeCurveData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribeTables", async function () {
     try {
        const data = await client.DescribeTables({})
@@ -448,9 +458,9 @@ it("tcb.v20180608.CreateBillDeal", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeCurveData", async function () {
+it("tcb.v20180608.DestroyStaticStore", async function () {
     try {
-       const data = await client.DescribeCurveData({})
+       const data = await client.DestroyStaticStore({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -471,16 +481,6 @@ it("tcb.v20180608.ModifyDatabaseACL", async function () {
 it("tcb.v20180608.DescribeEnvLimit", async function () {
     try {
        const data = await client.DescribeEnvLimit({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("tcb.v20180608.DestroyStaticStore", async function () {
-    try {
-       const data = await client.DestroyStaticStore({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -921,6 +921,16 @@ it("tcb.v20180608.ModifyUser", async function () {
 it("tcb.v20180608.ModifyEnv", async function () {
     try {
        const data = await client.ModifyEnv({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeEnvPlans", async function () {
+    try {
+       const data = await client.DescribeEnvPlans({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
