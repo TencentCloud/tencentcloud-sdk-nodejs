@@ -1421,6 +1421,28 @@ export interface RuleInfoData {
 }
 
 /**
+ * DescribeNDRAssetIdentificationCursorList返回参数结构体
+ */
+export interface DescribeNDRAssetIdentificationCursorListResponse {
+  /**
+   * <p>查询结果列表</p>
+   */
+  Data?: Array<NDRAssetServiceInfo>
+  /**
+   * <p>下一页游标</p>
+   */
+  NextCursor?: string
+  /**
+   * <p>是否存在更多数据</p>
+   */
+  HasMore?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifySequenceAclRules返回参数结构体
  */
 export interface ModifySequenceAclRulesResponse {
@@ -3403,6 +3425,24 @@ export interface ModifyResourceGroupRequest {
    * 上级组资产组id
    */
   ParentId: string
+}
+
+/**
+ * DescribeNDRAssetIdentificationCursorList请求参数结构体
+ */
+export interface DescribeNDRAssetIdentificationCursorListRequest {
+  /**
+   * <p>每页条数</p>
+   */
+  Limit: number
+  /**
+   * <p>分页游标</p><p>前一页返回的NextCursor</p>
+   */
+  Cursor?: string
+  /**
+   * <p>查询过滤条件，多个条件之间为AND的关系</p>
+   */
+  Filters?: Array<OperatorFilter>
 }
 
 /**

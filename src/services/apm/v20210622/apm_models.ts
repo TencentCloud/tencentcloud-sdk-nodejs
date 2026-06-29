@@ -1254,6 +1254,22 @@ export interface ApmAppConfig {
    * <p>是否默认使用探针自带熔断阈值</p>
    */
   UseDefaultFuseConfig?: boolean
+  /**
+   * <p>是否开启自动分析</p>
+   */
+  AnalysisAutoEnable?: boolean
+  /**
+   * <p>头采样开关</p>
+   */
+  EnableHeadSampler?: boolean
+  /**
+   * <p>头采样类型</p><p>枚举值：</p><ul><li>parentbased_traceidratio： 跟随父类型</li></ul>
+   */
+  HeadSamplerType?: string
+  /**
+   * <p>采样阈值，100等于关闭采样，0表示全采样</p>
+   */
+  HeadSamplerArg?: number
 }
 
 /**
@@ -3557,6 +3573,18 @@ export interface ModifyApmApplicationConfigRequest {
    * <p>是否使用探针默认熔断阈值</p>
    */
   UseDefaultFuseConfig?: boolean
+  /**
+   * <p>是否开启探针头采样</p>
+   */
+  EnableHeadSampler?: boolean
+  /**
+   * <p>头采样类型</p><p>枚举值：</p><ul><li>parentbased_traceidratio： 跟随parent</li></ul>
+   */
+  HeadSamplerType?: string
+  /**
+   * <p>采样率</p><p>取值范围：[0, 100]</p><p>默认值：100</p>
+   */
+  HeadSamplerArg?: number
 }
 
 /**

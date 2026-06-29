@@ -7574,6 +7574,16 @@ export interface DescribeAssetPortCountRequest {
 }
 
 /**
+ * AddVulIgnoreRule请求参数结构体
+ */
+export interface AddVulIgnoreRuleRequest {
+  /**
+   * 忽略规则集合
+   */
+  RuleDetailList?: Array<VulIgnoreRule>
+}
+
+/**
  * ModifyWebHookPolicy返回参数结构体
  */
 export interface ModifyWebHookPolicyResponse {
@@ -22791,6 +22801,53 @@ export interface ExportAssetWebLocationListRequest {
 }
 
 /**
+ * 漏洞忽略规则
+ */
+export interface VulIgnoreRule {
+  /**
+   * 漏洞规则ID
+   */
+  VulID: number
+  /**
+   * <li>0:全部主机</li>
+<li>1:自选主机</li>
+   */
+  AssetScopeType: number
+  /**
+   * 自选主机情况下自选主机quuid列表
+   */
+  IncludeQuuidList?: Array<string>
+  /**
+   * 全部主机情况下排出的主机
+   */
+  ExcludeQuuidList?: Array<string>
+  /**
+   * 忽略的原因
+   */
+  Remark?: string
+  /**
+   * 配置主机数
+   */
+  ConfigHostCount?: number
+  /**
+   * 实际受影响主机数
+   */
+  AffectedHostCount?: number
+  /**
+   * 漏洞名字
+   */
+  VulName?: string
+  /**
+   * 忽略规则ID
+   */
+  RuleID?: number
+  /**
+   * 最近更新时间
+   */
+  ModifyTime?: string
+}
+
+/**
  * DescribeRansomDefenseEventsList返回参数结构体
  */
 export interface DescribeRansomDefenseEventsListResponse {
@@ -30106,6 +30163,16 @@ export interface DescribeBaselineHostDetectListResponse {
    * 总数
    */
   Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AddVulIgnoreRule返回参数结构体
+ */
+export interface AddVulIgnoreRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

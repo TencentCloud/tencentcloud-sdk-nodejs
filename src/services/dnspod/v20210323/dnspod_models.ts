@@ -1832,49 +1832,35 @@ export interface DomainAliasInfo {
  */
 export interface CreateDealRequest {
   /**
-   * 询价类型，1 新购，2 续费，3 套餐升级（增值服务暂时只支持新购）
+   * <p>询价类型，1 新购，2 续费，3 套餐升级（增值服务暂时只支持新购）</p>
    */
   DealType: number
   /**
-   * 商品类型，1 域名套餐 2 增值服务
+   * <p>商品类型，1 域名套餐 2 增值服务</p>
    */
   GoodsType: number
   /**
-   * 套餐类型：
-DP_PLUS：专业版
-DP_EXPERT：企业版
-DP_ULTRA：尊享版
-
-增值服务类型
-LB：负载均衡
-URL：URL转发
-DMONITOR_TASKS：D监控任务数
-DMONITOR_IP：D监控备用 IP 数
-CUSTOMLINE：自定义线路数
+   * <p>套餐类型 或 增值服务类型</p><p>枚举值：</p><ul><li>DP_PLUS： 专业版</li><li>DP_EXPERT： 企业版</li><li>DP_ULTRA： 尊享版</li><li>LB： 负载均衡</li><li>URL： URL转发</li><li>DMONITOR_TASKS： D监控任务数</li><li>DMONITOR_IP： D监控备用 IP 数</li><li>CUSTOMLINE： 自定义线路数</li></ul><p>升级场景，需传入当前域名绑定的套餐类型</p>
    */
   GoodsChildType: string
   /**
-   * 增值服务购买数量，如果是域名套餐固定为1，如果是增值服务则按以下规则：
-负载均衡、D监控任务数、D监控备用 IP 数、自定义线路数、URL 转发（必须是5的正整数倍，如 5、10、15 等）
+   * <p>增值服务购买数量，如果是域名套餐固定为1，如果是增值服务则按以下规则：<br>负载均衡、D监控任务数、D监控备用 IP 数、自定义线路数、URL 转发（必须是5的正整数倍，如 5、10、15 等）</p>
    */
   GoodsNum: number
   /**
-   * 是否开启自动续费，1 开启，2 不开启（增值服务暂不支持自动续费），默认值为 2 不开启
+   * <p>是否开启自动续费，1 开启，2 不开启（增值服务暂不支持自动续费），默认值为 2 不开启</p>
    */
   AutoRenew: number
   /**
-   * 需要绑定套餐的域名，如 dnspod.cn，如果是续费或升级，domain 参数必须要传，新购可不传。
+   * <p>需要绑定套餐的域名，如 dnspod.cn，如果是续费或升级，domain 参数必须要传，新购可不传。</p>
    */
   Domain?: string
   /**
-   * 套餐时长：
-1. 套餐以月为单位（按月只能是 3、6 还有 12 的倍数），套餐例如购买一年则传12，最大120 。（续费最低一年）
-2. 升级套餐时不需要传。
-3. 增值服务的时长单位为年，买一年传1（增值服务新购按年只能是 1，增值服务续费最大为 10）
+   * <p>套餐时长：</p><ol><li>套餐以月为单位（按月只能是 3、6 还有 12 的倍数），套餐例如购买一年则传12，最大120 。（续费最低一年）</li><li>升级套餐时不需要传。</li><li>增值服务的时长单位为年，买一年传1（增值服务新购按年只能是 1，增值服务续费最大为 10）</li></ol>
    */
   TimeSpan?: number
   /**
-   * 套餐类型，需要升级到的套餐类型，只有升级时需要。
+   * <p>套餐类型，需要升级到的套餐类型，只有升级时需要。</p>
    */
   NewPackageType?: string
 }
@@ -5383,11 +5369,11 @@ export interface LineItem {
  */
 export interface CreateDealResponse {
   /**
-   * 大订单号，一个大订单号下可以有多个子订单，说明是同一次下单
+   * <p>大订单号，一个大订单号下可以有多个子订单，说明是同一次下单</p>
    */
   BigDealId?: string
   /**
-   * 子订单列表
+   * <p>子订单列表</p>
    */
   DealList?: Array<Deals>
   /**

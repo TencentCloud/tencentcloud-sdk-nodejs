@@ -1528,6 +1528,16 @@ it("monitor.v20180724.GetMonitorData", async function () {
     }
 })
 
+it("monitor.v20180724.DescribePrometheusCreateInstanceQuota", async function () {
+    try {
+       const data = await client.DescribePrometheusCreateInstanceQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.CreateExternalCluster", async function () {
     try {
        const data = await client.CreateExternalCluster({})

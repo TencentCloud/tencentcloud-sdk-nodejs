@@ -1290,17 +1290,21 @@ export interface DescribeDataStaticResourceV2Request {
  */
 export interface DescribeReleaseFilesRequest {
   /**
-   * 项目 id
+   * <p>项目 id</p>
    */
   ProjectID: number
   /**
-   * 文件版本
+   * <p>文件版本</p>
    */
   FileVersion?: string
   /**
-   * 查询过滤条件（根据sourcemap的文件名模糊匹配）
+   * <p>查询过滤条件（根据sourcemap的文件名模糊匹配）</p>
    */
   FileName?: string
+  /**
+   * <p>false/不传=保留「最近 3 个月」约束（旧行为）；true=绕过时间窗口</p>
+   */
+  IgnoreDefaultTimeRange?: boolean
 }
 
 /**
@@ -3112,25 +3116,29 @@ export interface DescribeFOOMProblemListRequest {
  */
 export interface ReleaseFile {
   /**
-   * 文件版本
+   * <p>文件版本</p>
    */
   Version?: string
   /**
-   * 文件唯一 key
+   * <p>文件唯一 key</p>
    */
   FileKey?: string
   /**
-   * 文件名
+   * <p>文件名</p>
    */
   FileName?: string
   /**
-   * 文件哈希值
+   * <p>文件哈希值</p>
    */
   FileHash?: string
   /**
-   * 文件 id
+   * <p>文件 id</p>
    */
   ID?: number
+  /**
+   * <p>创建时间</p>
+   */
+  CreatedAt?: string
 }
 
 /**
@@ -4944,7 +4952,7 @@ export interface DescribeFOOMReportListResponse {
  */
 export interface DescribeReleaseFilesResponse {
   /**
-   * 文件信息列表
+   * <p>文件信息列表</p>
    */
   Files?: Array<ReleaseFile>
   /**

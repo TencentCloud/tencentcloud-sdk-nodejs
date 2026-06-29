@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DeleteAlarmShieldsRequest,
+  DescribePrometheusCreateInstanceQuotaResponse,
   ModifyAlarmPolicyInfoRequest,
   AlarmPolicyTriggerTask,
   GetTopNMonitorDataRequest,
@@ -55,6 +56,7 @@ import {
   UpdateGrafanaWhiteListResponse,
   DescribePolicyGroupListResponse,
   DescribeGrafanaEnvironmentsRequest,
+  DescribePrometheusCreateInstanceQuotaRequest,
   PrometheusConfigItem,
   AlarmPolicy,
   DeleteExporterIntegrationRequest,
@@ -481,6 +483,7 @@ import {
   AlarmHierarchicalNotice,
   BindingPolicyObjectDimension,
   DescribePrometheusTempRequest,
+  PrometheusInstanceQuotaDetail,
   UpdateServiceDiscoveryResponse,
   UpdateOnCallFormRequest,
   UpdatePrometheusAlertGroupStateResponse,
@@ -2113,6 +2116,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetMonitorDataResponse) => void
   ): Promise<GetMonitorDataResponse> {
     return this.request("GetMonitorData", req, cb)
+  }
+
+  /**
+     * 查询Prometheus实例创建配额
+
+配额不分地域，可从任意支持地域请求
+     */
+  async DescribePrometheusCreateInstanceQuota(
+    req?: DescribePrometheusCreateInstanceQuotaRequest,
+    cb?: (error: string, rep: DescribePrometheusCreateInstanceQuotaResponse) => void
+  ): Promise<DescribePrometheusCreateInstanceQuotaResponse> {
+    return this.request("DescribePrometheusCreateInstanceQuota", req, cb)
   }
 
   /**

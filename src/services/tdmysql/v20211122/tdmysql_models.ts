@@ -736,16 +736,6 @@ export interface IsolateDBInstanceResponse {
 }
 
 /**
- * ResetUserPassword返回参数结构体
- */
-export interface ResetUserPasswordResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeInstanceSSLStatus返回参数结构体
  */
 export interface DescribeInstanceSSLStatusResponse {
@@ -3658,32 +3648,6 @@ export interface RestartDBInstancesRequest {
    * <p>重启时间，不传表示立即重启</p>
    */
   RestartTime?: string
-}
-
-/**
- * ResetUserPassword请求参数结构体
- */
-export interface ResetUserPasswordRequest {
-  /**
-   * 用户名
-   */
-  UserName: string
-  /**
-   * 实例ID
-   */
-  InstanceId: string
-  /**
-   * 主机IP，IP段以%结尾，表示允许该IP段的所有IP
-   */
-  Host: string
-  /**
-   * 新密码，要求长度8-32，至少包含英文、数字和符号中的两种
-   */
-  Password?: string
-  /**
-   * 加密密码
-   */
-  EncryptedPassword?: string
 }
 
 /**

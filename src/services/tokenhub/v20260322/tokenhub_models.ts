@@ -510,17 +510,29 @@ export interface DescribeApiKeyListRequest {
  */
 export interface UsageSeries {
   /**
-   * 总 token 数用量时间周期内的 JSON 字符串形式，如 `"[12,null,15]"`。
+   * <p>[tokens 族]总 token 数用量时间周期内的 JSON 字符串形式，如 <code>&quot;[12,null,15]&quot;</code>。</p>
    */
   TotalToken?: string
   /**
-   * 输入 token 数用量时间周期内的 JSON 字符串形式，如 `"[7,null,9]"`。
+   * <p>[tokens 族]输入 token 数用量时间周期内的 JSON 字符串形式，如 <code>&quot;[7,null,9]&quot;</code>。</p>
    */
   InputTotalToken?: string
   /**
-   * 输出 token 数用量时间周期内的 JSON 字符串形式，如 `"[5,null,6]"`。
+   * <p>[tokens 族]输出 token 数用量时间周期内的 JSON 字符串形式，如 <code>&quot;[5,null,6]&quot;</code>。</p>
    */
   OutputTotalToken?: string
+  /**
+   * <p>[tokens 族]读缓存 token 数用量时间周期内的 JSON 字符串形式，如<code>&quot;[5,null,6]&quot;</code>。</p>
+   */
+  CacheTotalToken?: string
+  /**
+   * <p>[search 族] 搜索请求数用量时间周期内的 JSON 字符串形式，如<code>&quot;[5,null,6]&quot;</code>。</p>
+   */
+  SearchRequestCount?: string
+  /**
+   * <p>[search 族] 搜索引擎调用次数用量时间周期内的 JSON 字符串形式，如<code>&quot;[5,null,6]&quot;</code>。</p>
+   */
+  SearchCount?: string
 }
 
 /**
@@ -1027,39 +1039,35 @@ export interface UpgradeTokenPlanTeamOrderRequest {
  */
 export interface DescribeUsageRankListRequest {
   /**
-   * 统计维度。取值：apikey（按 APIKey 统计）、endpoint（按接入点统计）、model（按模型统计）。
+   * <p>统计维度。取值：apikey（按 APIKey 统计）、endpoint（按接入点统计）、model（按模型统计）。</p>
    */
   Dimension: string
   /**
-   * 起始时间（闭区间），RFC3339 格式。
+   * <p>起始时间（闭区间），RFC3339 格式。</p>
    */
   StartTime: string
   /**
-   * 结束时间（开区间），RFC3339 格式。与 StartTime 的跨度最大 90 天。
+   * <p>结束时间（开区间），RFC3339 格式。与 StartTime 的跨度最大 90 天。</p>
    */
   EndTime: string
   /**
-   * 指标族切换字段。本期支持 tokens（累计 Token 用量，statistics=sum）；传其他值将返回 InvalidParameter。空字符串或不传时默认 tokens。接口预留 MetricType 字段以支持后续指标族扩展。
+   * <p>指标族切换字段。</p><ul><li>tokens（默认）：Token 消耗图（statistics=sum），支持 Dimension = apikey/endpoint/model</li><li>search【待上线】：联网搜索调用次数（statistics=sum），仅支持 Dimension = model</li><li>其他值返回 InvalidParameter。</li></ul><p>枚举值：</p><ul><li>tokens： tokens</li></ul>
    */
   MetricType?: string
   /**
-   * 维度过滤值。空字符串表示查询全部对象，非空时仅查询指定单个对象（如指定 APIKey ID）。最大 256 字符。
+   * <p>维度过滤值。空字符串表示查询全部对象，非空时仅查询指定单个对象（如指定 APIKey ID）。最大 256 字符。</p>
    */
   Target?: string
   /**
-   * 统计粒度（秒）。取值：60、300、3600、86400。必须不小于跨度对应下限：跨度 ≤ 1 天 → 60；1 ~ 5 天 → 300；5 ~ 10 天 → 3600；> 10 天 → 86400。仅 ShowAll=false 时使用。
+   * <p>统计粒度（秒）。取值：60、300、3600、86400。必须不小于跨度对应下限：跨度 ≤ 1 天 → 60；1 ~ 5 天 → 300；5 ~ 10 天 → 3600；&gt; 10 天 → 86400。仅 ShowAll=false 时使用。</p>
    */
   Period?: number
   /**
-   * 翻页起点，从 0 起，默认 0。ShowAll=true 时忽略。页大小固定为 10。
+   * <p>翻页起点，从 0 起，默认 0。ShowAll=true 时忽略。页大小固定为 10。</p>
    */
   Offset?: number
   /**
-   * 是否返回全量结果。
-- false（默认）：按 Offset 分页返回 TopList（每页 10 条），每个对象包含
-  Series 时序点用于绘制曲线。
-- true：忽略 Offset，返回全量对象列表，不返回 Series（CSV 导出场景）。
-
+   * <p>是否返回全量结果。</p><ul><li>false（默认）：按 Offset 分页返回 TopList（每页 10 条），每个对象包含<br>Series 时序点用于绘制曲线。</li><li>true：忽略 Offset，返回全量对象列表，不返回 Series（CSV 导出场景）。</li></ul>
    */
   ShowAll?: boolean
 }
@@ -1519,21 +1527,33 @@ export interface CreateTokenPlanApiKeysRequest {
 }
 
 /**
- * 时间周期内的统计聚合值（按 metric key 索引）。本期返回 tokens 族（statistics=sum）的累计 Token 用量；具体包含哪些 key、顺序如何，参见响应顶层 `MetricKeys` 字段。接口预留 MetricType 字段以支持后续指标族扩展，本期仅支持 tokens。
+ * 时间周期内的统计聚合值（按 metric key 索引）。声明 tokens / search 两族字段都在本 schema 中，按 MetricKeys 实际返回取值，参见响应顶层 `MetricKeys` 字段。
  */
 export interface UsageStats {
   /**
-   * 时间周期内的累计总 token 数。
+   * <p>[tokens 族] 时间周期内的累计总 token 数。</p>
    */
   TotalToken?: number
   /**
-   * 时间周期内的累计输入 token 数。
+   * <p>[tokens 族] 时间周期内的累计输入 token 数。</p>
    */
   InputTotalToken?: number
   /**
-   * 时间周期内的累计输出 token 数。
+   * <p>[tokens 族] 时间周期内的累计输出 token 数。</p>
    */
   OutputTotalToken?: number
+  /**
+   * <p>[tokens 族] 时间周期内的累计读缓存 token 数（命中缓存部分）</p>
+   */
+  CacheTotalToken?: number
+  /**
+   * <p>[search 族] 整段累计联网搜索请求数</p>
+   */
+  SearchRequestCount?: number
+  /**
+   * <p>[search 族] 整段累计搜索引擎调用次数</p>
+   */
+  SearchCount?: number
 }
 
 /**
@@ -1541,59 +1561,59 @@ export interface UsageStats {
  */
 export interface DescribeUsageRankListResponse {
   /**
-   * 回填请求的统计维度。
+   * <p>回填请求的统计维度。</p>
    */
   Dimension?: string
   /**
-   * 回填请求的指标族（本期固定为 tokens）。前端按本字段切换图表渲染逻辑。
+   * <p>回填请求的指标族：tokens / search 。</p>
    */
   MetricType?: string
   /**
-   * 本次响应中 Stats / Series / PageStats / TotalStats 实际包含的 metric key 列表，顺序固定为 [Total, Input, Output]。本期为 [TotalToken, InputTotalToken, OutputTotalToken]。前端可遍历此列表渲染图表，无需硬编码 key 名。
+   * <p>本次响应中 Stats / Series / PageStats / TotalStats 实际包含的 metric key 列表，按MetricType 区分：tokens=[Total,Input,Output,Cache]、search=[SearchRequestCount,SearchCount]</p>
    */
   MetricKeys?: Array<string>
   /**
-   * 视图（数据来源）
+   * <p>视图（数据来源）</p>
    */
   ViewName?: string
   /**
-   * 回填请求的统计粒度（秒）。ShowAll=true 时为 0。
+   * <p>回填请求的统计粒度（秒）。ShowAll=true 时为 0。</p>
    */
   Period?: number
   /**
-   * 回填请求的起始时间。
+   * <p>回填请求的起始时间。</p>
    */
   StartTime?: string
   /**
-   * 回填请求的结束时间。
+   * <p>回填请求的结束时间。</p>
    */
   EndTime?: string
   /**
-   * 全量对象数。
+   * <p>全量对象数。</p>
    */
   Total?: number
   /**
-   * 回填请求的翻页起点。ShowAll=true 时为 0。
+   * <p>回填请求的翻页起点。ShowAll=true 时为 0。</p>
    */
   Offset?: number
   /**
-   * 页大小，恒为 10。ShowAll=true 时为 Total。
+   * <p>页大小，恒为 10。ShowAll=true 时为 Total。</p>
    */
   Limit?: number
   /**
-   * Series 数组对应的时间戳序列（Unix 秒）。ShowAll=true 时为空数组。
+   * <p>Series 数组对应的时间戳序列（Unix 秒）。ShowAll=true 时为空数组。</p>
    */
   Timestamps?: Array<number | bigint>
   /**
-   * 对象排行列表，按主指标（`MetricKeys[0]`，本期为 TotalToken）降序排序。ShowAll=false 时为当前页 10 个对象（含 Series）；ShowAll=true 时为全量对象（不含 Series，用于 CSV 导出）。
+   * <p>对象排行列表，按<code>MetricKeys[0]</code>降序排序。ShowAll=false 时为当前页 10 个对象（含 Series）；ShowAll=true 时为全量对象（不含 Series，用于 CSV 导出）。</p>
    */
   TopList?: Array<UsageRankItem>
   /**
-   * 分页统计结果
+   * <p>分页统计结果</p>
    */
   PageStats?: UsageStats
   /**
-   * 总统计结果
+   * <p>总统计结果</p>
    */
   TotalStats?: UsageStats
   /**

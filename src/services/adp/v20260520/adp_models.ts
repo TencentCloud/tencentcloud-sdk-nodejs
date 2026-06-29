@@ -20,11 +20,11 @@
  */
 export interface MCPToolConfig {
   /**
-   * 输入参数
+   * <p>输入参数</p>
    */
   Inputs?: Array<RequestParam>
   /**
-   * 输出参数
+   * <p>输出参数</p>
    */
   Outputs?: Array<ResponseParam>
 }
@@ -109,6 +109,34 @@ export interface ConversationContent {
 }
 
 /**
+ * CAM授权信息
+ */
+export interface CamAuthConfig {
+  /**
+   * 角色名称
+   */
+  RoleName: string
+  /**
+   * 密钥位置 HEADER/QUERY
+
+枚举值:
+| uint | 描述 |
+| --- | --- |
+| 0 | 头鉴权 |
+| 1 | 请求信息鉴权 |
+   */
+  KeyLocation?: number
+  /**
+   * SecretId字段名称
+   */
+  SecretIdName?: string
+  /**
+   * SecretKey字段名称
+   */
+  SecretKeyName?: string
+}
+
+/**
  * 模型超参
  */
 export interface ModelParameter {
@@ -117,7 +145,7 @@ export interface ModelParameter {
    */
   DefaultValue?: string
   /**
-   * 枚举值列表（仅枚举类型有效）
+   * 可选值列表
    */
   EnumValueList?: Array<string>
   /**
@@ -133,68 +161,51 @@ export interface ModelParameter {
    */
   Name?: string
   /**
-   * 超参类型。1-浮点数, 2-整数, 3-字符串, 4-枚举
+   * 超参类型。1-浮点数, 2-整数, 3-字符串
    */
   Type?: number
 }
 
 /**
- * 定义工具的请求参数
+ * RequestParam
  */
 export interface RequestParam {
   /**
-   * 默认值
-   */
-  DefaultValue: string
-  /**
-   * 参数描述
-   */
-  Description: string
-  /**
-   * 全局隐藏不可见（区别于Agent场景的agent_hidden），true-全局隐藏不可见，false-可见
-   */
-  IsGlobalHidden: boolean
-  /**
-   * 是否必选
-   */
-  IsRequired: boolean
-  /**
-   * 参数名称
-   */
-  Name: string
-  /**
-   * 参数类型
-
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | 默认值是string，如果不填就按string处理 |
-| 1 |  |
-| 2 |  |
-| 3 |  |
-| 4 |  |
-| 5 |  |
-| 6 |  |
-| 7 |  |
-| 8 |  |
-| 9 |  |
-| 20 |  |
-| 99 | 空值 |
-| 100 | 未指定类型，用于类型为OneOf和AnyOf的场景 |
-   */
-  Type: number
-  /**
-   * AnyOf类型的参数
+   * <p>AnyOf类型的参数</p>
    */
   AnyOf?: Array<RequestParam>
   /**
-   * OneOf类型的参数
+   * <p>默认值</p>
+   */
+  DefaultValue?: string
+  /**
+   * <p>参数描述</p>
+   */
+  Description?: string
+  /**
+   * <p>全局隐藏不可见（区别于Agent场景的agent_hidden），true-全局隐藏不可见，false-可见</p>
+   */
+  IsGlobalHidden?: boolean
+  /**
+   * <p>是否必选</p>
+   */
+  IsRequired?: boolean
+  /**
+   * <p>参数名称</p>
+   */
+  Name?: string
+  /**
+   * <p>OneOf类型的参数</p>
    */
   OneOf?: Array<RequestParam>
   /**
-   * 子参数,ParamType 是OBJECT 或 ARRAY<>类型有用
+   * <p>子参数,ParamType 是OBJECT 或 ARRAY&lt;&gt;类型有用</p>
    */
   SubParams?: Array<RequestParam>
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>PARAM_TYPE_STRING</td><td>0</td><td>字符串</td></tr><tr><td>PARAM_TYPE_INT</td><td>1</td><td>整数</td></tr><tr><td>PARAM_TYPE_FLOAT</td><td>2</td><td>浮点数</td></tr><tr><td>PARAM_TYPE_BOOL</td><td>3</td><td>布尔值</td></tr><tr><td>PARAM_TYPE_OBJECT</td><td>4</td><td>对象</td></tr><tr><td>PARAM_TYPE_ARRAY_STRING</td><td>5</td><td>字符串数组</td></tr><tr><td>PARAM_TYPE_ARRAY_INT</td><td>6</td><td>整数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_FLOAT</td><td>7</td><td>浮点数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_BOOL</td><td>8</td><td>布尔值数组</td></tr><tr><td>PARAM_TYPE_ARRAY_OBJECT</td><td>9</td><td>对象数组</td></tr><tr><td>PARAM_TYPE_ARRAY_ARRAY</td><td>20</td><td>数组嵌套</td></tr><tr><td>PARAM_TYPE_NULL</td><td>99</td><td>空值</td></tr><tr><td>PARAM_TYPE_UNSPECIFIED</td><td>100</td><td>未指定类型，用于OneOf和AnyOf场景</td></tr></tbody></table>
+   */
+  Type?: number
 }
 
 /**
@@ -363,7 +374,7 @@ export interface ModifySpaceRequest {
    */
   SpaceId?: string
   /**
-   * 指定需要更新的字段，支持name和description
+   * 指定需要更新的字段，支持Name和Description
    */
   FieldMask?: FieldMask
 }
@@ -405,6 +416,43 @@ export interface AgentAdvancedConfig {
    * <p>最大推理轮数</p>
    */
   MaxReasoningRound?: number
+}
+
+/**
+ * SkillShare Skill 企业共享信息。
+ */
+export interface SkillShare {
+  /**
+   * 审批ID
+   */
+  ApprovalId: string
+  /**
+   * 共享后关联的新 skill_id
+   */
+  ShareSkillId: string
+  /**
+   * 共享版本，如 1.0.0
+   */
+  ShareVersion: string
+  /**
+   * 共享版本ID
+   */
+  ShareVersionId: string
+  /**
+   * 原 skill_id
+   */
+  SkillId: string
+  /**
+   * 共享状态
+
+枚举值:
+| uint | 描述 |
+| --- | --- |
+| 0 | 未共享 |
+| 1 | 已共享 |
+| 2 | 审批中 |
+   */
+  Status: number
 }
 
 /**
@@ -558,9 +606,13 @@ export interface DescribeAgentReleasePreviewListRequest {
  */
 export interface DescribeModelListResponse {
   /**
-   * 模型列表
+   * <p>模型列表</p>
    */
   ModelList?: Array<Model>
+  /**
+   * <p>模型总数</p>
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -644,6 +696,7 @@ export interface AgentModelConfig {
   InstructionsWordsLimit?: number
   /**
    * <p>模型参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelParameters?: ModelParams
 }
@@ -662,6 +715,11 @@ export interface SearchResourceStatusInfo {
  * 插件详情
  */
 export interface Plugin {
+  /**
+   * 插件配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Config?: PluginConfig
   /**
    * 创建时间，unix时间戳
    */
@@ -705,6 +763,30 @@ export interface Plugin {
 }
 
 /**
+ * ApiKey鉴权配置
+ */
+export interface ApiKeyAuthConfig {
+  /**
+   * 密钥位置 HEADER/QUERY
+
+枚举值:
+| uint | 描述 |
+| --- | --- |
+| 0 | Header鉴权 |
+| 1 | Query鉴权 |
+   */
+  KeyLocation: number
+  /**
+   * 密钥参数名
+   */
+  KeyParamName: string
+  /**
+   * 密钥参数值
+   */
+  KeyParamValue: string
+}
+
+/**
  * CreateConversation返回参数结构体
  */
 export interface CreateConversationResponse {
@@ -723,7 +805,7 @@ export interface CreateConversationResponse {
  */
 export interface DescribePluginResponse {
   /**
-   * 插件详情
+   * <p>插件详情</p>
    */
   Plugin?: Plugin
   /**
@@ -801,71 +883,62 @@ export interface Variable {
 }
 
 /**
- * Message 消息信息
+ * Conversation 会话信息
  */
-export interface ConversationMessage {
+export interface Conversation {
+  /**
+   * <p>应用 ID</p>
+   */
+  AppId: string
   /**
    * <p>会话 ID</p>
    */
   ConversationId: string
   /**
-   * <p>消息图标</p>
+   * <p>创建时间</p>
    */
-  Icon: string
+  CreateTime: string
   /**
-   * <p>消息 ID</p>
+   * <p>会话类型 枚举值: 0-CONVERSATION_TYPE_UNSPECIFIED(未指定；列表查询时表示全部), 1-CONVERSATION_TYPE_VISITOR(访客端体验), 2-CONVERSATION_TYPE_EVALUATION(评测), 5-CONVERSATION_TYPE_API(API 接入), 10-CONVERSATION_TYPE_WORKFLOW(工作流调试), 20-CONVERSATION_TYPE_SHARE(分享链接)</p>
    */
-  MessageId: string
+  Type: number
   /**
-   * <p>消息名称</p>
+   * <p>更新时间</p>
    */
-  Name: string
+  UpdateTime: string
   /**
-   * <p>记录 ID</p>
+   * <p>会话标题</p>
    */
-  RecordId: string
+  Title?: string
   /**
-   * <p>消息角色</p>
+   * <p>会话使用的用户端 AgentId</p>
    */
-  Role: string
-  /**
-   * <p>消息状态，pending:待执行，processing:处理中，success:已完成，failed:处理失败，stop:已取消</p>
-   */
-  Status: string
-  /**
-   * <p>状态描述</p>
-   */
-  StatusDesc: string
-  /**
-   * <p>消息标题</p>
-   */
-  Title: string
-  /**
-   * <p>消息内容列表</p>
-   */
-  ContentList?: Array<ConversationContent>
-  /**
-   * <p>消息内容列表</p>
-   */
-  Contents?: Array<ConversationContent>
-  /**
-   * <p>类型</p>
-   */
-  Type?: string
+  AgentId?: string
 }
 
 /**
- * 应用引用的共享知识库简要信息(查询时仅返回ID和名称)
+ * 插件授权配置
  */
-export interface AppSharedKnowledgeInfo {
+export interface AuthConfig {
   /**
-   * 共享知识库ID
+   * <p>授权方式。</p><p>枚举值：</p><ul><li>0：无鉴权</li><li>1：API Key 鉴权</li><li>2：CAM 授权</li><li>3：OAuth 2.0 授权</li></ul>
    */
-  KnowledgeId: string
+  AuthType: number
   /**
-   * 共享知识库名称
+   * API Key授权配置
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  KnowledgeName: string
+  ApiKeyAuthConfig?: ApiKeyAuthConfig
+  /**
+   * CAM授权配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CamAuthConfig?: CamAuthConfig
+  /**
+   * OAuth2.0授权配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OAuthConfig?: OAuthConfig
 }
 
 /**
@@ -895,13 +968,7 @@ export interface PluginOperation {
    */
   AllowExternalAccess?: boolean
   /**
-   * 计费类型
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | 免费 |
-| 1 | 限时免费 |
-| 2 | 官方收费 |
+   * <p>计费类型。</p><p>枚举值：</p><ul><li>0：免费</li><li>1：公测</li><li>2：官方收费</li></ul>
    */
   BillingType?: number
   /**
@@ -919,40 +986,17 @@ export interface PluginOperation {
 }
 
 /**
- * SkillShare Skill 企业共享信息。
+ * 应用引用的共享知识库简要信息(查询时仅返回ID和名称)
  */
-export interface SkillShare {
+export interface AppSharedKbInfo {
   /**
-   * 审批ID
+   * 共享知识库ID
    */
-  ApprovalId: string
+  KbId: string
   /**
-   * 共享后关联的新 skill_id
+   * 共享知识库名称
    */
-  ShareSkillId: string
-  /**
-   * 共享版本，如 1.0.0
-   */
-  ShareVersion: string
-  /**
-   * 共享版本ID
-   */
-  ShareVersionId: string
-  /**
-   * 原 skill_id
-   */
-  SkillId: string
-  /**
-   * 共享状态
-
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | 未共享 |
-| 1 | 已共享 |
-| 2 | 审批中 |
-   */
-  Status: number
+  KbName: string
 }
 
 /**
@@ -995,56 +1039,13 @@ export interface PromptRewriteModel {
 }
 
 /**
- * DescribePluginSummaryList请求参数结构体
+ * DeleteApp返回参数结构体
  */
-export interface DescribePluginSummaryListRequest {
+export interface DeleteAppResponse {
   /**
-   * 空间ID，查询空间内的插件列表时使用
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SpaceId: string
-  /**
-   * 过滤条件列表 支持：PluginKind、CategoryKey、PluginSource、PluginId、PluginClass、BillingType
-   */
-  FilterList?: Array<Filter>
-  /**
-   * true-筛选收藏的插件，false不过滤
-   */
-  IsFavoriteOnly?: boolean
-  /**
-   * module
-
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | 所有模块 |
-| 1 | agent模式模块 |
-| 2 | 工作流模块 |
-| 3 | 企业员工助理模块 |
-   */
-  Module?: number
-  /**
-   * 页码 从0开始
-   */
-  PageNumber?: number
-  /**
-   * 每页大小
-   */
-  PageSize?: number
-  /**
-   * 查询内容 模糊匹配：插件名称/插件描述/工具名称/工具描述
-   */
-  Query?: string
-  /**
-   * 排序类型，仅搜索场景有效
-
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | 未指定，使用默认行为 |
-| 1 | 按相关性排序 |
-| 2 | 按更新时间排序 |
-   */
-  SortType?: number
+  RequestId?: string
 }
 
 /**
@@ -1194,6 +1195,58 @@ export interface DescribeAgentDetailRequest {
 }
 
 /**
+ * DescribePluginSummaryList请求参数结构体
+ */
+export interface DescribePluginSummaryListRequest {
+  /**
+   * 空间ID，查询空间内的插件列表时使用
+   */
+  SpaceId: string
+  /**
+   * 过滤条件列表 支持：PluginKind、CategoryKey、PluginSource、PluginId、PluginClass、BillingType
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>是否只返回已收藏插件。取 true 时，仅返回当前用户已收藏的插件；取 false 或不传时不按收藏状态过滤。</p>
+   */
+  IsFavoriteOnly?: boolean
+  /**
+   * <p>插件展示场景。不传或取 0 时不限定场景。</p><p>枚举值：</p><ul><li>0：不限定场景</li><li>1：Agent 模式</li><li>2：工作流</li><li>3：智能工作台</li></ul>
+   */
+  Module?: number
+  /**
+   * 页码 从0开始
+   */
+  PageNumber?: number
+  /**
+   * 每页大小
+   */
+  PageSize?: number
+  /**
+   * 查询内容 模糊匹配：插件名称/插件描述/工具名称/工具描述
+   */
+  Query?: string
+  /**
+   * <p>排序方式。</p><p>枚举值：</p><ul><li>0：未指定，默认排序</li><li>1：按相关性排序</li><li>2：按更新时间排序</li><li>3：默认排序</li><li>4：按热度排序</li></ul>
+   */
+  SortType?: number
+}
+
+/**
+ * 模型作者信息
+ */
+export interface ModelDeveloperBasic {
+  /**
+   * <p>作者标识</p>
+   */
+  Name?: string
+  /**
+   * <p>作者显示名称</p>
+   */
+  Alias?: string
+}
+
+/**
  * DescribeConversationMessageList返回参数结构体
  */
 export interface DescribeConversationMessageListResponse {
@@ -1325,6 +1378,28 @@ export interface DeleteVariableResponse {
 }
 
 /**
+ * MCP插件参数信息
+ */
+export interface PluginParam {
+  /**
+   * 参数配置是否隐藏不可见
+   */
+  IsGlobalHidden?: boolean
+  /**
+   * 参数是否必填
+   */
+  IsRequired?: boolean
+  /**
+   * 参数名称
+   */
+  Name?: string
+  /**
+   * 参数值
+   */
+  Value?: string
+}
+
+/**
  * CreateRelease请求参数结构体
  */
 export interface CreateReleaseRequest {
@@ -1389,17 +1464,14 @@ export interface CreateWorkspaceCredentialRequest {
 }
 
 /**
- * DescribePlugin请求参数结构体
+ * API插件配置
  */
-export interface DescribePluginRequest {
+export interface ApiPluginConfig {
   /**
-   * 插件id
+   * 授权配置信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PluginId: string
-  /**
-   * 当前空间id
-   */
-  SpaceId: string
+  AuthConfig?: AuthConfig
 }
 
 /**
@@ -1446,6 +1518,10 @@ export interface DescribeConversationListRequest {
    * <p>Type=CONVERSATION_TYPE_API 时必填，访客ID</p>
    */
   UserId?: string
+  /**
+   * <p>用户端 AgentId，当需要查询基于用户端 AgentId 创建的会话时使用</p>
+   */
+  AgentId?: string
 }
 
 /**
@@ -1467,19 +1543,19 @@ export interface DescribeVariableResponse {
  */
 export interface CodeToolConfig {
   /**
-   * 代码
+   * <p>代码</p>
    */
-  Code: string
+  Code?: string
   /**
-   * 示例
+   * <p>示例</p>
    */
   Example?: ToolExample
   /**
-   * 输入参数
+   * <p>输入参数</p>
    */
   Inputs?: Array<RequestParam>
   /**
-   * 输出参数
+   * <p>输出参数</p>
    */
   Outputs?: Array<ResponseParam>
 }
@@ -1496,6 +1572,10 @@ export interface CreateAgentRequest {
    * <p>Agent 配置</p>
    */
   Agent?: AgentSpec
+  /**
+   * <p>Agent 类型，区分 B 端配置态 Agent 与 C 端用户态 Agent</p><p>枚举值：</p><ul><li>0： 配置端Agent</li><li>1： 用户态 Agent</li></ul>
+   */
+  Kind?: number
 }
 
 /**
@@ -1570,13 +1650,7 @@ export interface PluginUserState {
    */
   IsInWhiteList?: boolean
   /**
-   * 白名单类型
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | 非白名单插件，全量开放 |
-| 1 | 在白名单里 |
-| 2 | 不在白名单里，需要提交申请 |
+   * <p>白名单类型，用于表示当前用户是否可直接使用该插件。</p><p>枚举值：</p><ul><li>0：非白名单插件，全量开放</li><li>1：当前用户在白名单内</li><li>2：当前用户不在白名单内，需提交申请</li></ul>
    */
   WhiteListType?: number
 }
@@ -1593,41 +1667,29 @@ export interface AIOptimizeModel {
 }
 
 /**
- * 插件的工具信息
+ * DuplexBilling
  */
-export interface Tool {
+export interface DuplexBilling {
   /**
-   * 工具描述信息
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>UNKNOW</td><td>0</td><td></td></tr><tr><td>TOKEN</td><td>1</td><td>按token</td></tr><tr><td>PAGE_COUNT</td><td>2</td><td>按页数</td></tr><tr><td>TIMES</td><td>3</td><td>按次数</td></tr><tr><td>TIMES_THOUSAND</td><td>4</td><td>按千次数</td></tr><tr><td>SECOND</td><td>5</td><td>按时长</td></tr><tr><td>CHARACTER</td><td>6</td><td>按字符数</td></tr><tr><td>CHARACTER_THOUSAND</td><td>7</td><td>按千字符数</td></tr><tr><td>SHEET</td><td>8</td><td>按张</td></tr><tr><td>NUMBER</td><td>9</td><td>按个数</td></tr></tbody></table>
    */
-  Description?: string
+  BillingUnit?: number
   /**
-   * 工具名称
+   * <p>输入现金价格</p><p>单位：元</p>
    */
-  Name?: string
+  InputCashPrice?: number
   /**
-   * 插件id
+   * <p>输入pu价格</p><p>单位：pu</p>
    */
-  PluginId?: string
+  InputPuPrice?: number
   /**
-   * 工具id
+   * <p>输出现金价格</p><p>单位：元</p>
    */
-  ToolId?: string
+  OutputCashPrice?: number
   /**
-   * 工具计费信息
+   * <p>输出pu价格</p><p>单位：pu</p>
    */
-  Billing?: ToolBilling
-  /**
-   * 工具调用次数
-   */
-  CallCount?: number
-  /**
-   * <p>工具访问模式</p><p>枚举值：</p><ul><li>0： 未指定</li><li>1： READ_ONLY</li><li>2： WRITE_DELETE</li></ul>
-   */
-  ToolAccessMode?: number
-  /**
-   * 工具配置
-   */
-  ToolConfig?: ToolConfig
+  OutputPuPrice?: number
 }
 
 /**
@@ -1806,6 +1868,10 @@ export interface CreateConversationRequest {
    * <p>Type=CONVERSATION_TYPE_API 时必填，访客ID</p>
    */
   UserId?: string
+  /**
+   * <p>用户端 AgnetId，当Claw模式开启了“允许在对话中动态修改配置”时可用</p>
+   */
+  AgentId?: string
 }
 
 /**
@@ -1855,6 +1921,20 @@ export interface ConversationWorkspace {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageType?: string
+}
+
+/**
+ * BillingAttribute
+ */
+export interface BillingAttribute {
+  /**
+   * <p>属性名称</p>
+   */
+  Name?: string
+  /**
+   * <p>属性值</p>
+   */
+  Value?: string
 }
 
 /**
@@ -1921,6 +2001,17 @@ export interface ModifyConversationResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ClawAgent配置
+ */
+export interface ClawAgentConfig {
+  /**
+   * 调用方自定义配置(控制C端用户在对话时可动态传入哪些自定义配置)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CustomConfig: ClawAgentCustomConfig
 }
 
 /**
@@ -2099,13 +2190,43 @@ export interface CreateAppRequest {
 }
 
 /**
- * DeleteApp返回参数结构体
+ * App 应用完整信息
  */
-export interface DeleteAppResponse {
+export interface App {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 辅助信息(子状态/审批/申诉/搜索资源/特殊状态等)
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  AuxiliaryInfo: AppAuxiliaryInfo
+  /**
+   * 配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Config: AppConfig
+  /**
+   * 元数据
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Metadata: AppMetadata
+  /**
+   * 应用密钥信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecretInfo: AppSecretInfo
+  /**
+   * 分享链接信息(含访问控制)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ShareUrlInfo: AppShareURLInfo
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status: AppStatusInfo
+  /**
+   * 应用引用的共享知识库列表
+   */
+  SharedKbList?: Array<AppSharedKbInfo>
 }
 
 /**
@@ -2132,11 +2253,6 @@ export interface AppAuxiliaryInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubStatus: AppSubStatusInfo
-  /**
-   * 模版中心同步信息(私有化独有)
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TemplatePublish: TemplatePublishInfo
 }
 
 /**
@@ -2186,16 +2302,6 @@ export interface AgentToolBasicConfig {
 }
 
 /**
- * 模版中心同步信息(私有化独有 - 公有云/SaaS 版本忽略此字段)
- */
-export interface TemplatePublishInfo {
-  /**
-   * 是否已同步到模版中心
-   */
-  IsPublished: boolean
-}
-
-/**
  * PluginStatistics
  */
 export interface PluginStatistics {
@@ -2221,6 +2327,16 @@ export interface AppStatusInfo {
    * 状态描述
    */
   StatusDescription: string
+}
+
+/**
+ * ComplexBilling
+ */
+export interface ComplexBilling {
+  /**
+   * <p>复合计费列表</p>
+   */
+  ComplexList?: Array<ComplexBillingItem>
 }
 
 /**
@@ -2312,11 +2428,11 @@ export interface DeleteConversationResponse {
  */
 export interface AppToolConfig {
   /**
-   * 输入参数
+   * <p>输入参数</p>
    */
   Inputs?: Array<RequestParam>
   /**
-   * 输出参数
+   * <p>输出参数</p>
    */
   Outputs?: Array<ResponseParam>
 }
@@ -2384,51 +2500,66 @@ export interface DescribeLatestReleaseResponse {
 }
 
 /**
- * 定义工具的回复参数
+ * Skill 异常通知。
  */
-export interface ResponseParam {
+export interface SkillNotice {
   /**
-   * 变量描述
-   */
-  Description: string
-  /**
-   * 参数名称
-   */
-  Name: string
-  /**
-   * 参数类型
+   * 通知级别
 
 枚举值:
 | uint | 描述 |
 | --- | --- |
-| 0 | 默认值是string，如果不填就按string处理 |
-| 1 |  |
-| 2 |  |
-| 3 |  |
-| 4 |  |
-| 5 |  |
-| 6 |  |
-| 7 |  |
-| 8 |  |
-| 9 |  |
-| 20 |  |
-| 99 | 空值 |
-| 100 | 未指定类型，用于类型为OneOf和AnyOf的场景 |
+| 0 | 占位 |
+| 1 | 成功，字符串面："success" |
+| 2 | 警告，字符串面："warning" |
+| 3 | 错误，字符串面："error" |
    */
-  Type: number
+  Level?: number
   /**
-   * 
+   * 文案（i18n 后字符串）
+   */
+  NoticeContent?: string
+  /**
+   * 触发本通知的 Skill 版本ID
+   */
+  TriggerVersionId?: string
+  /**
+   * 通知类型 
+
 枚举值:
 | uint | 描述 |
 | --- | --- |
-| 0 | 覆盖（全量替换） |
-| 1 | 增量追加 |
+| 0 | 占位 |
+| 1 | 发布失败 |
+| 2 | 共享审批被拒 |
+   */
+  Type?: number
+}
+
+/**
+ * ResponseParam
+ */
+export interface ResponseParam {
+  /**
+   * <p>变量描述</p>
+   */
+  Description?: string
+  /**
+   * <p>参数名称</p>
+   */
+  Name?: string
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>OUTPUT_RENDER_REPLACE</td><td>0</td><td>覆盖（全量替换）</td></tr><tr><td>OUTPUT_RENDER_APPEND</td><td>1</td><td>增量追加</td></tr></tbody></table>
    */
   RenderMode?: number
   /**
-   * 只对 OBJECT 或 ARRAY_OBJECT 类型有用
+   * <p>只对 OBJECT 或 ARRAY_OBJECT 类型有用</p>
    */
   SubParams?: Array<ResponseParam>
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>PARAM_TYPE_STRING</td><td>0</td><td>字符串</td></tr><tr><td>PARAM_TYPE_INT</td><td>1</td><td>整数</td></tr><tr><td>PARAM_TYPE_FLOAT</td><td>2</td><td>浮点数</td></tr><tr><td>PARAM_TYPE_BOOL</td><td>3</td><td>布尔值</td></tr><tr><td>PARAM_TYPE_OBJECT</td><td>4</td><td>对象</td></tr><tr><td>PARAM_TYPE_ARRAY_STRING</td><td>5</td><td>字符串数组</td></tr><tr><td>PARAM_TYPE_ARRAY_INT</td><td>6</td><td>整数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_FLOAT</td><td>7</td><td>浮点数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_BOOL</td><td>8</td><td>布尔值数组</td></tr><tr><td>PARAM_TYPE_ARRAY_OBJECT</td><td>9</td><td>对象数组</td></tr><tr><td>PARAM_TYPE_ARRAY_ARRAY</td><td>20</td><td>数组嵌套</td></tr><tr><td>PARAM_TYPE_NULL</td><td>99</td><td>空值</td></tr><tr><td>PARAM_TYPE_UNSPECIFIED</td><td>100</td><td>未指定类型，用于OneOf和AnyOf场景</td></tr></tbody></table>
+   */
+  Type?: number
 }
 
 /**
@@ -2447,16 +2578,21 @@ export interface MultiModalQAModel {
  */
 export interface ToolBilling {
   /**
-   * 计费类型
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | 免费 |
-| 1 | 限时免费 |
-| 2 | 官方收费 |
-| 3 | 官方收费(存量老用户限时免费) |
+   * <p>基础计费信息</p>
+   */
+  BasicBilling?: BasicBilling
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>BILLING_TYPE_FREE</td><td>0</td><td>免费</td></tr><tr><td>BILLING_TYPE_LIMITED_FREE</td><td>1</td><td>限时免费</td></tr><tr><td>BILLING_TYPE_OFFICIAL_PAID</td><td>2</td><td>官方收费</td></tr><tr><td>BILLING_TYPE_OFFICIAL_PAID_OLD_FREE</td><td>3</td><td>官方收费（新/升级用户收费，存量老用户限时免费）</td></tr></tbody></table>
    */
   BillingType?: number
+  /**
+   * <p>复合类型计费信息</p>
+   */
+  ComplexBilling?: ComplexBilling
+  /**
+   * <p>双向计费信息</p>
+   */
+  DuplexBilling?: DuplexBilling
 }
 
 /**
@@ -2486,6 +2622,24 @@ export interface SingleWorkflowConfig {
 }
 
 /**
+ * BasicBilling
+ */
+export interface BasicBilling {
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>UNKNOW</td><td>0</td><td></td></tr><tr><td>TOKEN</td><td>1</td><td>按token</td></tr><tr><td>PAGE_COUNT</td><td>2</td><td>按页数</td></tr><tr><td>TIMES</td><td>3</td><td>按次数</td></tr><tr><td>TIMES_THOUSAND</td><td>4</td><td>按千次数</td></tr><tr><td>SECOND</td><td>5</td><td>按时长</td></tr><tr><td>CHARACTER</td><td>6</td><td>按字符数</td></tr><tr><td>CHARACTER_THOUSAND</td><td>7</td><td>按千字符数</td></tr><tr><td>SHEET</td><td>8</td><td>按张</td></tr><tr><td>NUMBER</td><td>9</td><td>按个数</td></tr></tbody></table>
+   */
+  BillingUnit?: number
+  /**
+   * <p>现金价格</p><p>单位：元</p>
+   */
+  CashPrice?: number
+  /**
+   * <p>PU价格</p><p>单位：pu</p>
+   */
+  PuPrice?: number
+}
+
+/**
  * DescribeApp请求参数结构体
  */
 export interface DescribeAppRequest {
@@ -2498,7 +2652,7 @@ export interface DescribeAppRequest {
    */
   Domain?: number
   /**
-   * 字段掩码，指定需要返回的字段(Paths为空则返回所有字段)。Paths枚举值：AppConfig(应用配置), SecretInfo(应用密钥信息), ShareUrlInfo(分享链接信息), SpecialStatusInfo(特殊状态信息), SearchResourceStatus(搜索资源状态), SharedKnowledgeList(应用引用的共享知识库列表)
+   * 字段掩码，指定需要返回的字段(Paths为空则返回所有字段)。Paths枚举值：AppConfig(应用配置), SecretInfo(应用密钥信息), ShareUrlInfo(分享链接信息), SpecialStatusInfo(特殊状态信息), SearchResourceStatus(搜索资源状态), SharedKbList(应用引用的共享知识库列表)
    */
   FieldMask?: FieldMask
   /**
@@ -2554,7 +2708,7 @@ export interface ModifyAgentRequest {
    */
   Agent?: AgentSpec
   /**
-   * <p>需要更新的字段路径，如 [&quot;instructions&quot;, &quot;model&quot;, &quot;tool_list&quot;, &quot;plugin_list&quot;, &quot;skill_list&quot;, &quot;advanced_config&quot;]</p>
+   * <p>需要更新的字段路径，如 ["Profile.Name", "Profile.IconUrl", "Instructions", "Model", "ToolList", "PluginList", "SkillList", "AdvancedConfig"]</p>
    */
   UpdateMask?: FieldMask
 }
@@ -2564,13 +2718,29 @@ export interface ModifyAgentRequest {
  */
 export interface DescribeModelListRequest {
   /**
-   * 模型场景。1-标准生成, 2-标准思考, 3-Agent思考, 4-多模态理解, 5-多模态问答, 6-改写, 7-长期记忆, 8-自然语言转SQL, 9-AI优化, 10-实时文件解析, 11-文件解析, 12-GraphRAG, 13-OpenClaw, 14-多模态Embedding, 15-Rerank, 16-文本Embedding, 17-Widget, 18-Claw模式, 19-工作流代码生成, 20-工作流大模型节点, 21-工作流节点专用向量化, 22-工作流参数提取, 23-工作流大模型知识问答, 24-工作流标签提取, 25-工作流意图识别, 26-工作流选项卡, 27-工作流逻辑判断, 28-文档生成问答, 29-知识库Schema
+   * <p>模型场景。0-不区分场景, 1-标准生成, 2-标准思考, 3-Agent思考, 4-多模态理解, 5-多模态问答, 6-改写, 7-长期记忆, 8-自然语言转SQL, 9-AI优化, 10-实时文件解析, 11-文件解析, 12-GraphRAG, 13-OpenClaw, 14-多模态Embedding, 15-Rerank, 16-文本Embedding, 17-Widget, 18-Claw模式, 19-工作流代码生成, 20-工作流大模型节点, 21-工作流节点专用向量化, 22-工作流参数提取, 23-工作流大模型知识问答, 24-工作流标签提取, 25-工作流意图识别, 26-工作流选项卡, 27-工作流逻辑判断, 28-文档生成问答, 29-知识库Schema</p><p>枚举值：</p><ul><li>0： 不区分场景</li><li>1： 标准生成</li><li>2： 标准思考</li><li>3： Agent思考</li><li>4： 多模态理解</li><li>5： 多模态问答</li><li>6： 改写</li><li>7： 长期记忆</li><li>8： 自然语言转SQL</li><li>9： AI优化</li><li>10： 实时文件解析</li><li>11： 文件解析</li><li>12： GraphRAG</li><li>13： OpenClaw</li><li>14： 多模态Embedding</li><li>15： Rerank</li><li>16： 文本Embedding</li><li>17： Widget</li><li>18： Claw模式</li><li>19： 工作流代码生成</li><li>20： 工作流大模型节点</li><li>21： 工作流节点专用向量化</li><li>22： 工作流参数提取</li><li>23： 工作流大模型知识问答</li><li>24： 工作流标签提取</li><li>25： 工作流意图识别</li><li>26： 工作流选项卡</li><li>27： 工作流逻辑判断</li><li>28： 文档生成问答</li><li>29： 知识库Schema</li></ul>
    */
   ModelScene: number
   /**
-   * 空间ID
+   * <p>空间ID</p>
    */
   SpaceId?: string
+  /**
+   * <p>关键词模糊搜索</p>
+   */
+  Query?: string
+  /**
+   * <p>页码。从0开始</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数量，默认20，最大100</p>
+   */
+  PageSize?: number
+  /**
+   * <p>过滤条件(多个 Filter 之间为 AND, 同一 Filter 多 Values 为 OR)<br>DeveloperName： 模型作者名称<br>ProviderName： 模型提供商名称<br>ProviderType：模型提供商类型</p>
+   */
+  FilterList?: Array<Filter>
 }
 
 /**
@@ -2618,19 +2788,19 @@ export interface AgentPluginConfig {
  */
 export interface PluginSummary {
   /**
-   * 插件运营管理信息
+   * <p>插件运营管理信息</p>
    */
   Operation?: PluginOperation
   /**
-   * 插件id
+   * <p>插件id</p>
    */
   PluginId?: string
   /**
-   * 插件基础信息
+   * <p>插件基础信息</p>
    */
   Profile?: PluginProfile
   /**
-   * 插件统计信息
+   * <p>插件统计信息</p>
    */
   Statistics?: PluginStatistics
   /**
@@ -2638,9 +2808,13 @@ export interface PluginSummary {
    */
   Status?: number
   /**
-   * 用户维度的插件状态信息
+   * <p>用户维度的插件状态信息</p>
    */
   UserState?: PluginUserState
+  /**
+   * <p>插件配置信息</p>
+   */
+  Config?: PluginConfig
 }
 
 /**
@@ -2655,6 +2829,52 @@ export interface AgentProfile {
    * <p>图标URL</p>
    */
   IconUrl?: string
+  /**
+   * <p>Agent 角色：0=主 / 1=子</p>
+   */
+  Role?: number
+  /**
+   * <p>Agent 描述</p>
+   */
+  Description?: string
+  /**
+   * <p>应用名称</p>
+   */
+  AppName?: string
+  /**
+   * <p>开发者</p>
+   */
+  Developer?: string
+  /**
+   * <p>主AgentId，只读，不可通过修改接口进行变更</p>
+   */
+  ParentAgentId?: string
+}
+
+/**
+ * OAuth2.0授权信息
+ */
+export interface OAuthConfig {
+  /**
+   * OAuth服务方授权页url地址
+   */
+  AuthorizationUrl?: string
+  /**
+   * 客户端ID
+   */
+  ClientId?: string
+  /**
+   * 客户端密钥
+   */
+  ClientSecret?: string
+  /**
+   * 请求授权的数据范围
+   */
+  ScopeList?: Array<string>
+  /**
+   * 获取access token的url地址
+   */
+  TokenUrl?: string
 }
 
 /**
@@ -2683,15 +2903,7 @@ export interface ModelParams {
   /**
    * 是否开启深度思考
    */
-  DeepThinking: string
-  /**
-   * 深度思考效果
-   */
-  ReasoningEffort: string
-  /**
-   * 输出格式  text、json_object
-   */
-  ReplyFormat: string
+  DeepThinking?: string
   /**
    * 频率惩罚
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2708,10 +2920,18 @@ export interface ModelParams {
    */
   PresencePenalty?: number
   /**
+   * 深度思考效果
+   */
+  ReasoningEffort?: string
+  /**
    * 重复惩罚
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RepetitionPenalty?: number
+  /**
+   * 输出格式（text、json_object）
+   */
+  ReplyFormat?: string
   /**
    * seed 随机种子
 注意：此字段可能返回 null，表示取不到有效值。
@@ -2842,23 +3062,19 @@ export interface AgentReleasePreview {
  */
 export interface ToolConfig {
   /**
-   * API插件工具配置
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>API工具配置信息</p>
    */
   ApiToolConfig?: ApiToolConfig
   /**
-   * 应用插件工具配置
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>应用配置信息</p>
    */
   AppToolConfig?: AppToolConfig
   /**
-   * 代码插件工具配置
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>代码工具配置信息</p>
    */
   CodeToolConfig?: CodeToolConfig
   /**
-   * mcp插件工具配置
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>MCP工具配置信息</p>
    */
   MCPToolConfig?: MCPToolConfig
 }
@@ -2998,15 +3214,19 @@ export interface CreateVariableResponse {
 }
 
 /**
- * Filter
+ * 列表通用过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 value_list 为 OR 关系）
  */
 export interface Filter {
   /**
-   * 检索名称
+   * 过滤字段名
    */
   Name?: string
   /**
-   * 检索值
+   * 操作符，默认 IN（向后兼容）<table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>FILTER_OPERATOR_IN</td><td>0</td><td>属于 value_list（默认值，向后兼容；value_list 不可为空）</td></tr><tr><td>FILTER_OPERATOR_NOT_IN</td><td>1</td><td>不属于 value_list（value_list 不可为空）</td></tr></table>
+   */
+  Operator?: number
+  /**
+   * 过滤值数组
    */
   ValueList?: Array<string>
 }
@@ -3016,46 +3236,41 @@ export interface Filter {
  */
 export interface ApiToolConfig {
   /**
-   * API插件支持对外调用的工具URL
-   */
-  ExternalApiUrl?: string
-  /**
-   * 请求method
-   */
-  Method?: string
-  /**
-   * 请求的url
-   */
-  Url?: string
-  /**
-   * body参数
+   * <p>请求体参数</p>
    */
   Body?: Array<RequestParam>
   /**
-   * 示例
+   * <p>示例</p>
    */
   Example?: ToolExample
   /**
-   * Header信息
+   * <p>API插件外部调用地址</p>
+   */
+  ExternalApiUrl?: string
+  /**
+   * <p>Header</p>
    */
   Header?: Array<RequestParam>
   /**
-   * 输出参数
+   * <p>请求方式</p>
+   */
+  Method?: string
+  /**
+   * <p>输出</p>
    */
   Outputs?: Array<ResponseParam>
   /**
-   * query参数
+   * <p>查询参数</p>
    */
   Query?: Array<RequestParam>
   /**
-   * 流式模式
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | 非流式 |
-| 1 | 流式 |
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>STREAM_MODE_UNARY</td><td>0</td><td>非流式</td></tr><tr><td>STREAM_MODE_STREAMING</td><td>1</td><td>流式</td></tr></tbody></table>
    */
   StreamMode?: number
+  /**
+   * <p>地址</p>
+   */
+  Url?: string
 }
 
 /**
@@ -3063,11 +3278,11 @@ export interface ApiToolConfig {
  */
 export interface ToolExample {
   /**
-   * 请求示例，json字符串
+   * <p>请求参数</p>
    */
   Request?: string
   /**
-   * 回复示例，json字符串
+   * <p>响应参数</p>
    */
   Response?: string
 }
@@ -3184,10 +3399,10 @@ export interface ModifyAppRequest {
   /**
    * 引用的共享知识库ID列表(全量覆盖)
    */
-  SharedKnowledgeIdList?: Array<string>
+  SharedKbIdList?: Array<string>
   /**
    * 字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：
-【顶层】Name, Avatar, Description, AppMode, ShareConfig, SharedKnowledgeIdList
+【顶层】Name, Avatar, Description, AppMode, ShareConfig, SharedKbIdList
 【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList
 【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel
 【WebSearch】Config.WebSearch
@@ -3262,15 +3477,15 @@ export interface ModelDetailInfo {
   /**
    * 模型别名
    */
-  Alias: string
+  Alias?: string
   /**
    * 历史对话条数限制
    */
-  HistoryLimit: number
+  HistoryLimit?: number
   /**
-   * 模型唯一ID
+   * 模型唯一 ID
    */
-  ModelId: string
+  ModelId?: string
   /**
    * 模型参数
 注意：此字段可能返回 null，表示取不到有效值。
@@ -3325,6 +3540,62 @@ export interface VoiceConfig {
 }
 
 /**
+ * MCP插件配置信息
+ */
+export interface MCPPluginConfig {
+  /**
+   * <p>MCP插件外部访问地址</p>
+   */
+  ExternalMCPServerUrl?: string
+  /**
+   * <p>MCP server地址</p>
+   */
+  MCPServerUrl?: string
+  /**
+   * <p>MCP传输类型: SSE/Streamable<br>枚举值:<br>| uint | 描述 |<br>| --- | --- |<br>| 0 | SSE + HTTP 模式 |<br>| 1 | Streamable HTTP 模式 |</p>
+   */
+  MCPTransport?: number
+  /**
+   * <p>MCP插件的header参数</p>
+   */
+  PluginHeader?: Array<PluginParam>
+  /**
+   * <p>MCP插件的query参数</p>
+   */
+  PluginQuery?: Array<PluginParam>
+  /**
+   * <p>SSE长连接超时时间，单位秒</p>
+   */
+  SSEReadTimeout?: number
+  /**
+   * <p>请求超时时间，单位秒</p>
+   */
+  Timeout?: number
+  /**
+   * <p>授权信息</p>
+   */
+  AuthConfig?: AuthConfig
+}
+
+/**
+ * DescribePlugin请求参数结构体
+ */
+export interface DescribePluginRequest {
+  /**
+   * <p>插件id</p>
+   */
+  PluginId: string
+  /**
+   * <p>当前空间id</p>
+   */
+  SpaceId: string
+  /**
+   * <p>获取指定字段</p>
+   */
+  FieldMask?: FieldMask
+}
+
+/**
  * DescribeSystemVariableList请求参数结构体
  */
 export interface DescribeSystemVariableListRequest {
@@ -3335,43 +3606,44 @@ export interface DescribeSystemVariableListRequest {
 }
 
 /**
- * App 应用完整信息
+ * 应用配置 - 用户可修改的所有配置
  */
-export interface App {
+export interface AppConfig {
   /**
-   * 辅助信息(子状态/审批/申诉/搜索资源/特殊状态等)
+   * 体验配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AuxiliaryInfo: AppAuxiliaryInfo
+  Experience: AppExperienceConfig
   /**
-   * 配置
+   * 欢迎语配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Config: AppConfig
+  Greeting: AppGreetingConfig
   /**
-   * 元数据
+   * 记忆配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Metadata: AppMetadata
+  Memory: AppMemoryConfig
   /**
-   * 应用密钥信息
+   * 模式相关配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SecretInfo: AppSecretInfo
+  Mode: AppModeConfig
   /**
-   * 分享链接信息(含访问控制)
+   * 模型配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ShareUrlInfo: AppShareURLInfo
+  Model: AppModelConfig
   /**
-   * 状态
+   * 联网搜索配置
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Status: AppStatusInfo
+  WebSearch: AppWebSearchConfig
   /**
-   * 应用引用的共享知识库列表
+   * 工作流配置
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SharedKnowledgeList?: Array<AppSharedKnowledgeInfo>
+  Workflow: AppWorkflowConfig
 }
 
 /**
@@ -3440,9 +3712,29 @@ export interface SkillSummary {
    */
   SkillId: string
   /**
+   * Skill 异常通知列表
+   */
+  NoticeList?: Array<SkillNotice>
+  /**
+   * 当前用户对该 Skill 的资源操作权限位列表；内置/共享 Skill 固定为空数组
+   */
+  PermissionIdList?: Array<string>
+  /**
    * 共享信息；可能有两条，一条是已共享的，一条是审核中的
    */
   ShareList?: Array<SkillShare>
+  /**
+   * Skill状态 
+
+枚举值:
+| uint | 描述 |
+| --- | --- |
+| 0 | 初始化（无任何已发布版本，且最新版本处于 INITIALIZED/UNRELEASED） |
+| 1 | 安全检测中（无任何已发布版本，且最新版本处于 AUDITING） |
+| 2 | 待发布（无任何已发布版本，且最新版本处于 PENDING_RELEASE） |
+| 3 | 已发布（存在任一 RELEASED 版本，吸收态） |
+   */
+  SkillStatus?: number
 }
 
 /**
@@ -3552,6 +3844,16 @@ export interface DeleteVariableRequest {
 }
 
 /**
+ * 应用插件配置信息
+ */
+export interface AppPluginConfig {
+  /**
+   * 基于发布应用创建插件的应用ID
+   */
+  AppId: string
+}
+
+/**
  * 模型状态信息
  */
 export interface ModelStatus {
@@ -3653,13 +3955,23 @@ export interface RoleConfig {
  */
 export interface CreateAgentResponse {
   /**
-   * Agent Id
+   * <p>Agent Id</p>
    */
   AgentId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ClawAgent调用方自定义配置开关集合
+ */
+export interface ClawAgentCustomConfig {
+  /**
+   * <p>是否允许C端用户在对话时动态传入自定义Agent配置</p>
+   */
+  Enabled?: boolean
 }
 
 /**
@@ -3731,6 +4043,27 @@ export interface DeleteConversationRequest {
 }
 
 /**
+ * 插件配置
+ */
+export interface PluginConfig {
+  /**
+   * API插件配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiPluginConfig?: ApiPluginConfig
+  /**
+   * 应用插件配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppPluginConfig?: AppPluginConfig
+  /**
+   * mcp插件配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MCPPluginConfig?: MCPPluginConfig
+}
+
+/**
  * 模型徽章
  */
 export interface ModelBadge {
@@ -3789,7 +4122,24 @@ export interface DescribeSkillSummaryListRequest {
    */
   FavoriteOnly?: boolean
   /**
-   * 过滤条件(多个Filter之间为AND关系,同一Filter的多个Values为OR关系): - SkillIdList: Skill ID列表,字符串数组,精确匹配 - ProviderType: Skill 提供方类型,枚举值数组,精确匹配 (SKILL_PROVIDER_TYPE_OFFICIAL=1/SKILL_PROVIDER_TYPE_THIRD_PARTY=2/SKILL_PROVIDER_TYPE_CUSTOM=3/SKILL_PROVIDER_TYPE_CUSTOM_SHARED=4) - CategoryKey: 分类标识,字符串数组,精确匹配 - AnalysisStatus: 安全检测状态,枚举值数组,精确匹配 (SKILL_ANALYSIS_PENDING=0/SKILL_ANALYSIS_RUNNING=1/SKILL_ANALYSIS_AVAILABLE=2/SKILL_ANALYSIS_UNAVAILABLE=3/SKILL_ANALYSIS_FAILED=4) - RiskLevel: 风险等级,枚举值数组,精确匹配 (SKILL_RISK_NONE=0/SKILL_RISK_LOW=1/SKILL_RISK_MEDIUM=2/SKILL_RISK_HIGH=3) - ShareStatus: 共享状态,枚举值数组,精确匹配,仅在ProviderType包含SKILL_PROVIDER_TYPE_CUSTOM/SKILL_PROVIDER_TYPE_CUSTOM_SHARED时生效 (SHARE_STATUS_UNSHARED=0/SHARE_STATUS_SHARED=1/SHARE_STATUS_APPROVING=2)
+   *    过滤条件(多个Filter之间为AND关系,同一Filter的多个Values为OR关系):
+   - SkillIdList: Skill ID列表,字符串数组,精确匹配
+   - ProviderType: Skill 提供方类型,枚举值数组,精确匹配
+     (SKILL_PROVIDER_TYPE_OFFICIAL=1/SKILL_PROVIDER_TYPE_THIRD_PARTY=2/SKILL_PROVIDER_TYPE_CUSTOM=3/SKILL_PROVIDER_TYPE_CUSTOM_SHARED=4)
+   - CategoryKey: 分类标识,字符串数组,精确匹配
+   - AnalysisStatus: 安全检测状态,枚举值数组,精确匹配
+     (SKILL_ANALYSIS_PENDING=0/SKILL_ANALYSIS_RUNNING=1/SKILL_ANALYSIS_AVAILABLE=2/SKILL_ANALYSIS_UNAVAILABLE=3/SKILL_ANALYSIS_FAILED=4)
+   - RiskLevel: 风险等级,枚举值数组,精确匹配
+     (SKILL_RISK_NONE=0/SKILL_RISK_LOW=1/SKILL_RISK_MEDIUM=2/SKILL_RISK_HIGH=3)
+- SkillStatus: Skill 维度发布状态,枚举值数组,精确匹配,多值之间 OR;仅在 Perspective=EDITOR/ALL 时有实际意义
+(SKILL_STATUS_INITIALIZED=0/SKILL_STATUS_AUDITING=1/SKILL_STATUS_PENDING_RELEASE=2/SKILL_STATUS_RELEASED=3)
+   - ShareStatus: 共享状态,枚举值数组,精确匹配,仅在ProviderType包含SKILL_PROVIDER_TYPE_CUSTOM/SKILL_PROVIDER_TYPE_CUSTOM_SHARED时生效
+     (SHARE_STATUS_UNSHARED=0/SHARE_STATUS_SHARED=1/SHARE_STATUS_APPROVING=2)
+   - Perspective: 视角枚举,字符串单值,Values 长度必须为 1,多值视为非法;仅在 ProviderType=SKILL_PROVIDER_TYPE_CUSTOM 时生效;不传默认 USER
+     (USER=使用者视角,仅返回仅有使用权限的 Skill / EDITOR=编辑者视角,仅返回有编辑权限的 Skill / ALL=全量视角,返回有任一权限位的 Skill)
+  - Creator: 创建者过滤,字符串单值,Values 长度必须为 1,多值视为非法;仅在 ProviderType=SKILL_PROVIDER_TYPE_CUSTOM 时生效
+   当前仅支持占位符 "$self",表示仅返回当前调用者创建的 Skill
+   后续如需扩展为指定身份,再在此处追加约定
    */
   FilterList?: Array<Filter>
   /**
@@ -3822,47 +4172,6 @@ export interface DescribeAppSummaryListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 应用配置 - 用户可修改的所有配置
- */
-export interface AppConfig {
-  /**
-   * 体验配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Experience: AppExperienceConfig
-  /**
-   * 欢迎语配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Greeting: AppGreetingConfig
-  /**
-   * 记忆配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Memory: AppMemoryConfig
-  /**
-   * 模式相关配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Mode: AppModeConfig
-  /**
-   * 模型配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Model: AppModelConfig
-  /**
-   * 联网搜索配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  WebSearch: AppWebSearchConfig
-  /**
-   * 工作流配置
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Workflow: AppWorkflowConfig
 }
 
 /**
@@ -3976,33 +4285,15 @@ export interface PluginProfile {
    */
   Name?: string
   /**
-   * 插件产品分类
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | 普通插件 |
-| 1 | 连接器类插件 |
+   * <p>插件产品分类</p><p>枚举值：</p><ul><li>0：普通插件</li><li>1：连接器类插件</li></ul>
    */
   PluginClass?: number
   /**
-   * 插件类型
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | API接口 |
-| 1 | 代码 |
-| 2 | MCP |
-| 3 | 应用 |
+   * <p>插件类型</p><p>枚举值：</p><ul><li>0：API接口</li><li>1：代码</li><li>2：MCP</li><li>3：应用</li></ul>
    */
   PluginKind?: number
   /**
-   * 插件来源
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | 自定义插件 |
-| 1 | 官方插件 |
-| 2 | 第三方插件 |
+   * <p>插件来源</p><p>枚举值：</p><ul><li>0：自定义插件</li><li>1：官方插件</li><li>2：第三方插件</li></ul>
    */
   PluginSource?: number
 }
@@ -4036,7 +4327,7 @@ export interface SkillCategory {
  */
 export interface FieldMask {
   /**
-   * paths
+   * <p>参数名称</p><p>参数格式：需要获取的指定字段路径</p>
    */
   Paths?: Array<string>
 }
@@ -4057,6 +4348,28 @@ export interface DescribeReleaseListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ComplexBillingItem
+ */
+export interface ComplexBillingItem {
+  /**
+   * <p>复合计费维度信息</p>
+   */
+  BillingAttributeList?: Array<BillingAttribute>
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>UNKNOW</td><td>0</td><td></td></tr><tr><td>TOKEN</td><td>1</td><td>按token</td></tr><tr><td>PAGE_COUNT</td><td>2</td><td>按页数</td></tr><tr><td>TIMES</td><td>3</td><td>按次数</td></tr><tr><td>TIMES_THOUSAND</td><td>4</td><td>按千次数</td></tr><tr><td>SECOND</td><td>5</td><td>按时长</td></tr><tr><td>CHARACTER</td><td>6</td><td>按字符数</td></tr><tr><td>CHARACTER_THOUSAND</td><td>7</td><td>按千字符数</td></tr><tr><td>SHEET</td><td>8</td><td>按张</td></tr><tr><td>NUMBER</td><td>9</td><td>按个数</td></tr></tbody></table>
+   */
+  BillingUnit?: number
+  /**
+   * <p>现金价格</p><p>单位：元</p>
+   */
+  CashPrice?: number
+  /**
+   * <p>pu价格</p><p>单位：pu</p>
+   */
+  PuPrice?: number
 }
 
 /**
@@ -4113,41 +4426,45 @@ export type DescribeSkillCategoryListRequest = null
  */
 export interface Model {
   /**
-   * 模型徽章列表
+   * <p>模型徽章列表</p>
    */
   BadgeList?: Array<ModelBadge>
   /**
-   * 模型限制信息
+   * <p>模型限制信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LimitInfo?: ModelLimit
   /**
-   * 模型基本信息
+   * <p>模型基本信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelBasic?: ModelBasic
   /**
-   * 模型超参配置
+   * <p>模型超参配置</p>
    */
   ParameterList?: Array<ModelParameter>
   /**
-   * 模型属性配置
+   * <p>模型属性配置</p>
    */
   PropertyList?: Array<ModelProperty>
   /**
-   * 模型提供商信息
+   * <p>模型提供商信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProviderInfo?: ModelProviderBasic
   /**
-   * 模型状态信息
+   * <p>模型状态信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusInfo?: ModelStatus
   /**
-   * 模型标签列表
+   * <p>模型标签列表</p>
    */
   TagList?: Array<string>
+  /**
+   * <p>模型作者信息</p>
+   */
+  DeveloperInfo?: ModelDeveloperBasic
 }
 
 /**
@@ -4255,33 +4572,57 @@ export interface ModelProviderBasic {
 }
 
 /**
- * Conversation 会话信息
+ * Message 消息信息
  */
-export interface Conversation {
-  /**
-   * <p>应用 ID</p>
-   */
-  AppId: string
+export interface ConversationMessage {
   /**
    * <p>会话 ID</p>
    */
   ConversationId: string
   /**
-   * <p>创建时间</p>
+   * <p>消息图标</p>
    */
-  CreateTime: string
+  Icon: string
   /**
-   * <p>会话类型 枚举值: 0-CONVERSATION_TYPE_UNSPECIFIED(未指定；列表查询时表示全部), 1-CONVERSATION_TYPE_VISITOR(访客端体验), 2-CONVERSATION_TYPE_EVALUATION(评测), 5-CONVERSATION_TYPE_API(API 接入), 10-CONVERSATION_TYPE_WORKFLOW(工作流调试), 20-CONVERSATION_TYPE_SHARE(分享链接)</p>
+   * <p>消息 ID</p>
    */
-  Type: number
+  MessageId: string
   /**
-   * <p>更新时间</p>
+   * <p>消息名称</p>
    */
-  UpdateTime: string
+  Name: string
   /**
-   * 会话标题
+   * <p>记录 ID</p>
    */
-  Title?: string
+  RecordId: string
+  /**
+   * <p>消息角色</p>
+   */
+  Role: string
+  /**
+   * <p>消息状态，pending:待执行，processing:处理中，success:已完成，failed:处理失败，stop:已取消</p>
+   */
+  Status: string
+  /**
+   * <p>状态描述</p>
+   */
+  StatusDesc: string
+  /**
+   * <p>消息标题</p>
+   */
+  Title: string
+  /**
+   * <p>消息内容列表</p>
+   */
+  ContentList?: Array<ConversationContent>
+  /**
+   * <p>消息内容列表</p>
+   */
+  Contents?: Array<ConversationContent>
+  /**
+   * <p>类型</p>
+   */
+  Type?: string
 }
 
 /**
@@ -4314,9 +4655,13 @@ export interface DescribeConversationResponse {
    */
   Workspace?: ConversationWorkspace
   /**
-   * 会话标题
+   * <p>会话标题</p>
    */
   Title?: string
+  /**
+   * <p>会话使用的用户端 AgentId</p>
+   */
+  AgentId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4372,6 +4717,36 @@ export interface SkillVersion {
    * 当前生效版本ID
    */
   VersionId: string
+  /**
+   *     Skill 版本发布流程状态：
+      - 0 INITIALIZED      初始化（版本初始态）
+      - 1 AUDITING         审核中（f_analysis_status ∈ {PENDING, RUNNING}）
+      - 2 PENDING_RELEASE  待发布（低/中风险，等用户确认上架）
+      - 3 RELEASED         已发布
+      - 4 UNRELEASED       未发布（HIGH / UNAVAILABLE / FAILED / 用户放弃，含历史"不通过"语义）
+    与 SkillAnalysisStatus 解耦：前者是用户视角发布生命周期，后者是安全检测阶段。
+   */
+  VersionStatus?: number
+  /**
+   * Skill包的md5信息
+   */
+  SkillMd5?: string
+  /**
+   * 版本包地址
+   */
+  SkillUrl?: string
+  /**
+   * 版本创建时间（Unix秒）
+   */
+  CreateTime?: string
+  /**
+   * skill md文档
+   */
+  SkillMarkdownUrl?: string
+  /**
+   * 版本变更说明
+   */
+  UpdateDesc?: string
 }
 
 /**
@@ -4414,6 +4789,51 @@ export interface AppModeConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SingleWorkflowConfig: SingleWorkflowConfig
+  /**
+   * ClawAgent配置(ClawAgent模式)
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClawAgentConfig?: ClawAgentConfig
+}
+
+/**
+ * Tool
+ */
+export interface Tool {
+  /**
+   * <p>工具计费信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Billing?: ToolBilling
+  /**
+   * <p>工具调用次数</p><p>单位：次数</p>
+   */
+  CallCount?: number
+  /**
+   * <p>工具描述信息</p>
+   */
+  Description?: string
+  /**
+   * <p>工具名称</p>
+   */
+  Name?: string
+  /**
+   * <p>插件ID</p>
+   */
+  PluginId?: string
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>TOOL_ACCESS_MODE_UNKNOWN</td><td>0</td><td>未指定</td></tr><tr><td>TOOL_ACCESS_MODE_READ_ONLY</td><td>1</td><td>只读</td></tr><tr><td>TOOL_ACCESS_MODE_WRITE_DELETE</td><td>2</td><td>写/删除</td></tr></tbody></table>
+   */
+  ToolAccessMode?: number
+  /**
+   * <p>工具配置信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ToolConfig?: ToolConfig
+  /**
+   * <p>工具ID</p>
+   */
+  ToolId?: string
 }
 
 /**

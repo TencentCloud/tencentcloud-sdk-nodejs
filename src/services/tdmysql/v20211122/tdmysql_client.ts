@@ -43,7 +43,6 @@ import {
   DescribeDBParametersResponse,
   StorageNodeSpec,
   IsolateDBInstanceResponse,
-  ResetUserPasswordResponse,
   DescribeInstanceSSLStatusResponse,
   DeleteDBSBackupSetsResponse,
   DescribeFlowResponse,
@@ -147,7 +146,6 @@ import {
   ConstraintRange,
   UserInfo,
   RestartDBInstancesRequest,
-  ResetUserPasswordRequest,
   DescribeDBSAvailableRecoveryTimeResponse,
   TablePrivileges,
   DescribeUserPrivilegesRequest,
@@ -297,16 +295,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: IsolateDBInstanceResponse) => void
   ): Promise<IsolateDBInstanceResponse> {
     return this.request("IsolateDBInstance", req, cb)
-  }
-
-  /**
-   * 本接口（ResetUserPassword）提供重置用户密码功能
-   */
-  async ResetUserPassword(
-    req: ResetUserPasswordRequest,
-    cb?: (error: string, rep: ResetUserPasswordResponse) => void
-  ): Promise<ResetUserPasswordResponse> {
-    return this.request("ResetUserPassword", req, cb)
   }
 
   /**

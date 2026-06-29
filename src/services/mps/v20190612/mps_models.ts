@@ -850,6 +850,20 @@ export interface MediaProcessTaskImageSpriteResult {
 }
 
 /**
+ * 自定义描述变量
+ */
+export interface CustomVariable {
+  /**
+   * <p>用户自定义变量类型。</p><p>参数格式：PascalCase格式。</p><p>不能为UserPrompt。默认平台模板未适配自定义内容，如需适配需提交工单。</p>
+   */
+  Type?: string
+  /**
+   * <p>自定义变量描述。</p>
+   */
+  Description?: string
+}
+
+/**
  * AI解说二创结果信息
  */
 export interface AiAnalysisTaskReelOutput {
@@ -4288,6 +4302,10 @@ export interface ImageTaskInput {
    * <p>Ai 换装配置。</p>
    */
   AiTryOnConfig?: AiTryOnConfig
+  /**
+   * <p>Ai套图配置。</p>
+   */
+  AiPosterSuiteConfig?: AiPosterSuiteConfig
 }
 
 /**
@@ -14444,6 +14462,20 @@ export interface PlaybackInfoReq {
    * 垫片配置。
    */
   ClipRangeConf?: ClipRangeInfo
+}
+
+/**
+ * 套图图片信息
+ */
+export interface RecipeItem {
+  /**
+   * <p>子图类型</p><p>枚举值：</p><ul><li>hero： 商品主图</li><li>detail： 商品细节图</li><li>selling： 核心卖点图</li><li>atmosphere： 场景氛围图</li><li>angles： 多角度图</li><li>scene： 使用场景图</li></ul>
+   */
+  Theme?: string
+  /**
+   * <p>对应子图数量。</p><p>取值范围：[1, 4]</p><p>单位：张</p><p>单种子图最多4张，子图总数必须在4-12张范围内。</p>
+   */
+  Num?: number
 }
 
 /**
@@ -25471,6 +25503,44 @@ export interface DeleteStreamPackageLinearAssemblyProgramResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 智能套图配置
+ */
+export interface AiPosterSuiteConfig {
+  /**
+   * <p>出图模式</p><p>枚举值：</p><ul><li>auto： 全自动模式。此模式下支持CustomVariables传入。</li><li>modify： 修改模式。此模式下需要在AddOnParameter.ExtPrompt字段提供对应描述。此模式下禁止CustomVariables传入。</li></ul><p>默认值：auto</p>
+   */
+  Mode?: string
+  /**
+   * <p>电商平台视觉模板id</p><p>如需个性化定制视觉模板，请提交工单。</p>
+   */
+  Definition?: number
+  /**
+   * <p>子图配置。</p>
+   */
+  Recipe?: Array<RecipeItem>
+  /**
+   * <p>子图文案语言。</p><p>枚举值：</p><ul><li>zh-CN： 简体中文</li><li>en-US： 美式英语</li></ul><p>默认值：zh-CN</p><p>如需支持更多语言输出，请提交工单。</p>
+   */
+  Language?: string
+  /**
+   * <p>子图比例。</p><p>枚举值：</p><ul><li>1:1： 1:1</li><li>3:4： 3:4</li><li>4:3： 4:3</li><li>9:16： 9:16</li><li>16:9： 16:9</li></ul><p>默认值：1:1</p>
+   */
+  PanelRatio?: string
+  /**
+   * <p>子图分辨率</p><p>枚举值：</p><ul><li>720： 720</li><li>1K： 1K</li><li>2K： 2K</li><li>4K： 4K</li></ul><p>默认值：1K</p>
+   */
+  PanelResolution?: string
+  /**
+   * <p>用户自定义变量。</p>
+   */
+  CustomVariables?: Array<CustomVariable>
+  /**
+   * <p>模型名称。</p><p>枚举值：</p><ul><li>WAND-suite-1.0-flash： WAND-suite-1.0-flash</li></ul>
+   */
+  Model?: string
 }
 
 /**

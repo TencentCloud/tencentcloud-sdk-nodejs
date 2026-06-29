@@ -828,6 +828,20 @@ export interface DescribeDspmRiskStrategyResponse {
 }
 
 /**
+ * 日志高亮信息
+ */
+export interface LogHighLightItem {
+  /**
+   * <p>键</p>
+   */
+  Key?: string
+  /**
+   * <p>值</p>
+   */
+  Values?: Array<string>
+}
+
+/**
  * DeleteIaCFile返回参数结构体
  */
 export interface DeleteIaCFileResponse {
@@ -929,6 +943,20 @@ export interface DescribeDspmAccessTopologyIpsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 日志键值索引规则信息
+ */
+export interface LogRuleKeyValueInfo {
+  /**
+   * <p>大小写敏感</p>
+   */
+  CaseSensitive?: boolean
+  /**
+   * <p>键值索引信息</p>
+   */
+  KeyValues?: Array<LogKeyValueInfo>
 }
 
 /**
@@ -1127,13 +1155,21 @@ export interface DspmApproverOrder {
 }
 
 /**
- * SyncDspmAssets返回参数结构体
+ * 日志全文索引信息
  */
-export interface SyncDspmAssetsResponse {
+export interface LogFullTextInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>大小写敏感</p>
    */
-  RequestId?: string
+  CaseSensitive?: boolean
+  /**
+   * <p>token</p>
+   */
+  Tokenizer?: string
+  /**
+   * <p>包含中文</p>
+   */
+  ContainZH?: boolean
 }
 
 /**
@@ -1451,6 +1487,24 @@ export interface DescribeCosBucketBillingInfoRequest {
 }
 
 /**
+ * DescribeDspmRiskTendency请求参数结构体
+ */
+export interface DescribeDspmRiskTendencyRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 起始日期
+   */
+  StartDate?: string
+  /**
+   * 结束日期
+   */
+  EndDate?: string
+}
+
+/**
  * DescribeDspmRisk返回参数结构体
  */
 export interface DescribeDspmRiskResponse {
@@ -1466,6 +1520,16 @@ export interface DescribeDspmRiskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 日志条目列表
+ */
+export interface LogItems {
+  /**
+   * <p>数值</p>
+   */
+  Data?: Array<LogItem>
 }
 
 /**
@@ -1507,21 +1571,73 @@ export interface DescribeDspmDictionaryListRequest {
 }
 
 /**
- * DescribeDspmRiskTendency请求参数结构体
+ * 检查项视角风险
  */
-export interface DescribeDspmRiskTendencyRequest {
+export interface CheckViewRiskItem {
   /**
-   * 集团账号的成员id
+   * <p>检查项规则ID</p>
    */
-  MemberId?: Array<string>
+  RiskRuleId?: string
   /**
-   * 起始日期
+   * <p>风险名称</p>
    */
-  StartDate?: string
+  RiskTitle?: string
   /**
-   * 结束日期
+   * <p>检查类型</p>
    */
-  EndDate?: string
+  CheckType?: string
+  /**
+   * <p>风险等级</p>
+   */
+  Severity?: string
+  /**
+   * <p>存在1个风险项</p>
+   */
+  RiskDesc?: string
+  /**
+   * <p>首次发现时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>风险更新时间</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>云厂商</p>
+   */
+  Provider?: string
+  /**
+   * <p>风险状态</p>
+   */
+  RiskStatus?: number
+  /**
+   * <p>受影响资产数量</p>
+   */
+  AssetCount?: number
+  /**
+   * <p>风险数量</p>
+   */
+  RiskCount?: number
+  /**
+   * <p>资产类型</p>
+   */
+  AssetType?: string
+  /**
+   * <p>事件类型</p>
+   */
+  EventType?: string
+  /**
+   * <p>处置分类</p>
+   */
+  Classify?: string
+  /**
+   * <p>cspm规范条款</p>
+   */
+  StandardTerms?: Array<StandardTerm>
+  /**
+   * <p>资产类型图标</p>
+   */
+  AssetTypeIconURL?: string
 }
 
 /**
@@ -2213,20 +2329,6 @@ export interface DspmIdentifyAssetStatistic {
    * 关联资产普通成员数。
    */
   MemberCount?: number
-}
-
-/**
- * DescribeIaCFileList请求参数结构体
- */
-export interface DescribeIaCFileListRequest {
-  /**
-   * <p>过滤条件</p>
-   */
-  Filter?: Filter
-  /**
-   * 集团账号的成员id
-   */
-  MemberId?: Array<string>
 }
 
 /**
@@ -2936,6 +3038,20 @@ export interface CosDictionary {
    * <p>字典名称</p>
    */
   DictName?: string
+}
+
+/**
+ * 日志检索主题信息
+ */
+export interface LogSearchTopics {
+  /**
+   * <p>错误信息</p>
+   */
+  Errors?: Array<LogSearchErrors>
+  /**
+   * <p>正常信息</p>
+   */
+  Infos?: Array<LogSearchInfos>
 }
 
 /**
@@ -5014,6 +5130,28 @@ export interface DspmAssetTypeCount {
 }
 
 /**
+ * DescribeCLSLogIndexV3请求参数结构体
+ */
+export interface DescribeCLSLogIndexV3Request {
+  /**
+   * <p>过滤条件</p>
+   */
+  Filters: Array<LogCLSFilter>
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>limit限制</p>
+   */
+  Limit?: number
+  /**
+   * <p>offset</p>
+   */
+  Offset?: number
+}
+
+/**
  * DescribeCosAssetSyncTask返回参数结构体
  */
 export interface DescribeCosAssetSyncTaskResponse {
@@ -5395,6 +5533,20 @@ export interface DescribeSkillScanResultRequest {
 补充说明：对返回的 ReportURL 生效
    */
   ReportURLExpireHours?: number
+}
+
+/**
+ * 日志过滤器
+ */
+export interface LogCLSFilter {
+  /**
+   * <p>键</p>
+   */
+  Key?: string
+  /**
+   * <p>值</p>
+   */
+  Values?: Array<string>
 }
 
 /**
@@ -5961,6 +6113,56 @@ export interface NICAsset {
    * 是否新资产 1新
    */
   IsNewAsset?: number
+}
+
+/**
+ * DescribeCLSLogListV3返回参数结构体
+ */
+export interface DescribeCLSLogListV3Response {
+  /**
+   * <p>上下文</p>
+   */
+  Context?: string
+  /**
+   * <p>listover</p>
+   */
+  ListOver?: boolean
+  /**
+   * <p>是否采用分析</p>
+   */
+  Analysis?: boolean
+  /**
+   * <p>结果</p>
+   */
+  Results?: Array<LogSearchResult>
+  /**
+   * <p>列名</p>
+   */
+  ColNames?: Array<string>
+  /**
+   * <p>分析结果</p>
+   */
+  AnalysisResults?: Array<LogItems>
+  /**
+   * <p>分析记录</p>
+   */
+  AnalysisRecords?: Array<string>
+  /**
+   * <p>列名</p>
+   */
+  Columns?: Array<LogColumn>
+  /**
+   * <p>采样</p>
+   */
+  SamplingRate?: number
+  /**
+   * <p>主题信息</p>
+   */
+  Topics?: LogSearchTopics
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7174,6 +7376,24 @@ export interface CosActionInfo {
 }
 
 /**
+ * 日志检索信息
+ */
+export interface LogSearchInfos {
+  /**
+   * <p>主题</p>
+   */
+  TopicId?: string
+  /**
+   * <p>时间间隔</p>
+   */
+  Period?: number
+  /**
+   * <p>上下文</p>
+   */
+  Context?: string
+}
+
+/**
  * DescribeUserDspmInfoList返回参数结构体
  */
 export interface DescribeUserDspmInfoListResponse {
@@ -7211,6 +7431,24 @@ export interface DspmSensitiveScanTaskConfig {
    * 是否立即扫描
    */
   IsRunAtOnce?: boolean
+}
+
+/**
+ * 日志检索错误信息
+ */
+export interface LogSearchErrors {
+  /**
+   * <p>主题</p>
+   */
+  TopicId?: string
+  /**
+   * <p>错误信息</p>
+   */
+  ErrorMsg?: string
+  /**
+   * <p>错误信息</p>
+   */
+  ErrorCodeStr?: string
 }
 
 /**
@@ -7767,13 +8005,33 @@ export interface DescribeRiskCenterWebsiteRiskListRequest {
 }
 
 /**
- * DescribeDspmStatistics请求参数结构体
+ * DescribeCallRecord请求参数结构体
  */
-export interface DescribeDspmStatisticsRequest {
+export interface DescribeCallRecordRequest {
   /**
    * 集团账号的成员id
    */
   MemberId?: Array<string>
+  /**
+   * 访问密钥的ID
+   */
+  AccessKeyID?: number
+  /**
+   * 调用源IP的ID
+   */
+  SourceIPID?: number
+  /**
+   * 访问账号uin
+   */
+  AccUin?: string
+  /**
+   * 访问密钥，注意：不支持临时密钥的情况
+   */
+  AccessKey?: string
+  /**
+   * 过滤器
+   */
+  Filter?: Filter
 }
 
 /**
@@ -8480,6 +8738,20 @@ export interface TaskLogInfo {
    * 报告模板id
    */
   TemplateId?: number
+}
+
+/**
+ * 日志列信息
+ */
+export interface LogColumn {
+  /**
+   * <p>名称</p>
+   */
+  Name?: string
+  /**
+   * <p>类型</p>
+   */
+  Type?: string
 }
 
 /**
@@ -9823,33 +10095,13 @@ export interface AddDspmAssetManagerRequest {
 }
 
 /**
- * DescribeCallRecord请求参数结构体
+ * DescribeDspmStatistics请求参数结构体
  */
-export interface DescribeCallRecordRequest {
+export interface DescribeDspmStatisticsRequest {
   /**
    * 集团账号的成员id
    */
   MemberId?: Array<string>
-  /**
-   * 访问密钥的ID
-   */
-  AccessKeyID?: number
-  /**
-   * 调用源IP的ID
-   */
-  SourceIPID?: number
-  /**
-   * 访问账号uin
-   */
-  AccUin?: string
-  /**
-   * 访问密钥，注意：不支持临时密钥的情况
-   */
-  AccessKey?: string
-  /**
-   * 过滤器
-   */
-  Filter?: Filter
 }
 
 /**
@@ -10755,73 +11007,17 @@ export interface AssetViewCFGRisk {
 }
 
 /**
- * 检查项视角风险
+ * DescribeIaCFileList请求参数结构体
  */
-export interface CheckViewRiskItem {
+export interface DescribeIaCFileListRequest {
   /**
-   * <p>检查项规则ID</p>
+   * <p>过滤条件</p>
    */
-  RiskRuleId?: string
+  Filter?: Filter
   /**
-   * <p>风险名称</p>
+   * 集团账号的成员id
    */
-  RiskTitle?: string
-  /**
-   * <p>检查类型</p>
-   */
-  CheckType?: string
-  /**
-   * <p>风险等级</p>
-   */
-  Severity?: string
-  /**
-   * <p>存在1个风险项</p>
-   */
-  RiskDesc?: string
-  /**
-   * <p>首次发现时间</p>
-   */
-  CreateTime?: string
-  /**
-   * <p>风险更新时间</p>
-   */
-  UpdateTime?: string
-  /**
-   * <p>云厂商</p>
-   */
-  Provider?: string
-  /**
-   * <p>风险状态</p>
-   */
-  RiskStatus?: number
-  /**
-   * <p>受影响资产数量</p>
-   */
-  AssetCount?: number
-  /**
-   * <p>风险数量</p>
-   */
-  RiskCount?: number
-  /**
-   * <p>资产类型</p>
-   */
-  AssetType?: string
-  /**
-   * <p>事件类型</p>
-   */
-  EventType?: string
-  /**
-   * <p>处置分类</p>
-   */
-  Classify?: string
-  /**
-   * <p>cspm规范条款</p>
-   */
-  StandardTerms?: Array<StandardTerm>
-  /**
-   * <p>资产类型图标</p>
-   */
-  AssetTypeIconURL?: string
+  MemberId?: Array<string>
 }
 
 /**
@@ -11873,6 +12069,20 @@ export interface DescribeOrganizationUserInfoResponse {
 }
 
 /**
+ * 日志条目
+ */
+export interface LogItem {
+  /**
+   * <p>键</p>
+   */
+  Key?: string
+  /**
+   * <p>值</p>
+   */
+  Value?: string
+}
+
+/**
  * 访问密钥风险记录
  */
 export interface AccessKeyRisk {
@@ -12725,21 +12935,73 @@ export interface DescribeDspmAssetLoginCredentialRequest {
 }
 
 /**
- * DescribeDspmIdentifyInfoList返回参数结构体
+ * DescribeCLSLogListV3请求参数结构体
  */
-export interface DescribeDspmIdentifyInfoListResponse {
+export interface DescribeCLSLogListV3Request {
   /**
-   * 身份总数
+   * <p>开始时间</p>
    */
-  TotalCount?: number
+  From: number
   /**
-   * 身份 信息
+   * <p>结束时间</p>
    */
-  InfoSet?: Array<DspmIdentifyInfoItem>
+  To: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>查询条件</p>
    */
-  RequestId?: string
+  Query: string
+  /**
+   * <p>语法</p>
+   */
+  SyntaxRule: number
+  /**
+   * <p>主题</p>
+   */
+  Topics?: Array<LogContextInfo>
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>排序</p>
+   */
+  Sort?: string
+  /**
+   * <p>limit</p>
+   */
+  Limit?: number
+  /**
+   * <p>offset</p>
+   */
+  Offset?: number
+  /**
+   * <p>采样</p>
+   */
+  SamplingRate?: number
+  /**
+   * <p>是否高亮</p>
+   */
+  HighLight?: boolean
+  /**
+   * <p>是否采用新分析</p>
+   */
+  UseNewAnalysis?: boolean
+  /**
+   * <p>查询优化</p>
+   */
+  QueryOptimize?: number
+  /**
+   * <p>主题id</p>
+   */
+  TopicId?: string
+  /**
+   * <p>上下文信息</p>
+   */
+  Context?: string
+  /**
+   * <p>查询类型</p>
+   */
+  SubQueryTypes?: Array<string>
 }
 
 /**
@@ -12806,6 +13068,28 @@ export interface DescribeCVMAssetsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 日志索引规则信息
+ */
+export interface LogIndexRuleInfo {
+  /**
+   * <p>全文索引</p>
+   */
+  FullText?: LogFullTextInfo
+  /**
+   * <p>键值索引</p>
+   */
+  KeyValue?: LogRuleKeyValueInfo
+  /**
+   * <p>标签</p>
+   */
+  Tag?: LogRuleKeyValueInfo
+  /**
+   * <p>动态索引</p>
+   */
+  DynamicIndex?: LogDynamicIndex
 }
 
 /**
@@ -13151,6 +13435,32 @@ export interface CreateDspmExportTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 日志索引值描述信息
+ */
+export interface LogValueInfo {
+  /**
+   * <p>类型</p>
+   */
+  Type?: string
+  /**
+   * <p>标签</p>
+   */
+  Tokenizer?: string
+  /**
+   * <p>sql标签</p>
+   */
+  SqlFlag?: boolean
+  /**
+   * <p>包含中文</p>
+   */
+  ContainZH?: boolean
+  /**
+   * <p>别名</p>
+   */
+  Alias?: string
 }
 
 /**
@@ -13724,6 +14034,24 @@ export interface SkillState {
 }
 
 /**
+ * DescribeDspmIdentifyInfoList返回参数结构体
+ */
+export interface DescribeDspmIdentifyInfoListResponse {
+  /**
+   * 身份总数
+   */
+  TotalCount?: number
+  /**
+   * 身份 信息
+   */
+  InfoSet?: Array<DspmIdentifyInfoItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCosRiskActionList返回参数结构体
  */
 export interface DescribeCosRiskActionListResponse {
@@ -13775,6 +14103,16 @@ export interface DescribeAccessKeyRiskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 日志动态索引信息
+ */
+export interface LogDynamicIndex {
+  /**
+   * <p>状态</p>
+   */
+  Status?: boolean
 }
 
 /**
@@ -13863,6 +14201,24 @@ export interface DspmFrequency {
  * SyncDspmUsers返回参数结构体
  */
 export interface SyncDspmUsersResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCLSLogIndexV3返回参数结构体
+ */
+export interface DescribeCLSLogIndexV3Response {
+  /**
+   * <p>主题信息</p>
+   */
+  TopicIndexInfos?: Array<LogTopicIndexInfo>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14564,6 +14920,20 @@ export interface DeleteIaCFileRequest {
    * <p>删除ID列表</p>
    */
   Id: Array<number | bigint>
+}
+
+/**
+ * 日志键值索引详情
+ */
+export interface LogKeyValueInfo {
+  /**
+   * <p>键</p>
+   */
+  Key?: string
+  /**
+   * <p>值</p>
+   */
+  Value?: LogValueInfo
 }
 
 /**
@@ -15426,21 +15796,21 @@ export interface DspmIdentifyIdItem {
 }
 
 /**
- * DescribeCosAkInvokeIpList请求参数结构体
+ * DescribeCosPolicy返回参数结构体
  */
-export interface DescribeCosAkInvokeIpListRequest {
+export interface DescribeCosPolicyResponse {
   /**
-   * appid
+   * 策略总数
    */
-  RelAppId: number
+  Total?: number
   /**
-   * ak
+   * 策略信息
    */
-  Ak: string
+  Data?: Array<CosPolicyInfo>
   /**
-   * 过滤条件
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Filter?: Filter
+  RequestId?: string
 }
 
 /**
@@ -15976,21 +16346,21 @@ export interface DescribeDspmAssetLoginCredentialResponse {
 }
 
 /**
- * DescribeCosPolicy返回参数结构体
+ * DescribeCosAkInvokeIpList请求参数结构体
  */
-export interface DescribeCosPolicyResponse {
+export interface DescribeCosAkInvokeIpListRequest {
   /**
-   * 策略总数
+   * appid
    */
-  Total?: number
+  RelAppId: number
   /**
-   * 策略信息
+   * ak
    */
-  Data?: Array<CosPolicyInfo>
+  Ak: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 过滤条件
    */
-  RequestId?: string
+  Filter?: Filter
 }
 
 /**
@@ -16049,6 +16419,36 @@ export interface DescribeCosRoleAccessPermissionsRequest {
    * 过滤条件
    */
   Filter?: Filter
+}
+
+/**
+ * 日志主题索性信息
+ */
+export interface LogTopicIndexInfo {
+  /**
+   * <p>主题</p>
+   */
+  TopicId?: string
+  /**
+   * <p>状态</p>
+   */
+  Status?: boolean
+  /**
+   * <p>规则</p>
+   */
+  Rule?: LogIndexRuleInfo
+  /**
+   * <p>修改时间</p>
+   */
+  ModifyTime?: string
+  /**
+   * <p>是否包含</p>
+   */
+  IncludeInternalFields?: boolean
+  /**
+   * <p>元数据标签</p>
+   */
+  MetadataFlag?: number
 }
 
 /**
@@ -19138,6 +19538,20 @@ export interface DescribeDbAssetInfoResponse {
 }
 
 /**
+ * 日志检索上下文信息
+ */
+export interface LogContextInfo {
+  /**
+   * <p>主题id</p>
+   */
+  TopicId?: string
+  /**
+   * <p>上下文</p>
+   */
+  Context?: string
+}
+
+/**
  * DescribeAlertList请求参数结构体
  */
 export interface DescribeAlertListRequest {
@@ -19562,6 +19976,60 @@ export interface NetworkCardInfo {
 }
 
 /**
+ * 日志检索结果
+ */
+export interface LogSearchResult {
+  /**
+   * <p>时间</p>
+   */
+  Time?: number
+  /**
+   * <p>主题</p>
+   */
+  TopicId?: string
+  /**
+   * <p>主题名</p>
+   */
+  TopicName?: string
+  /**
+   * <p>源</p>
+   */
+  Source?: string
+  /**
+   * <p>文件名</p>
+   */
+  FileName?: string
+  /**
+   * <p>pkgid</p>
+   */
+  PkgId?: string
+  /**
+   * <p>pkglogid</p>
+   */
+  PkgLogId?: string
+  /**
+   * <p>json数据</p>
+   */
+  LogJson?: string
+  /**
+   * <p>主机名</p>
+   */
+  HostName?: string
+  /**
+   * <p>log信息</p>
+   */
+  RawLog?: string
+  /**
+   * <p>索引状态</p>
+   */
+  IndexStatus?: string
+  /**
+   * <p>高亮信息</p>
+   */
+  HighLights?: Array<LogHighLightItem>
+}
+
+/**
  * 风险视角风险列表
  */
 export interface CosRiskViewInfo {
@@ -19911,6 +20379,16 @@ export interface DeleteIaCAccessTokenRequest {
  * DeleteRiskScanTask返回参数结构体
  */
 export interface DeleteRiskScanTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SyncDspmAssets返回参数结构体
+ */
+export interface SyncDspmAssetsResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

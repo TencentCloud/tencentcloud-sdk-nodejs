@@ -332,6 +332,7 @@ import {
   AssetUserDetail,
   ModifyOrderAttributeResponse,
   DescribeAssetPortCountRequest,
+  AddVulIgnoreRuleRequest,
   ModifyWebHookPolicyResponse,
   DescribeFileTamperEventsResponse,
   DescribeVulLabelsResponse,
@@ -968,6 +969,7 @@ import {
   DescribeVulDefencePluginStatusResponse,
   BaselineFix,
   ExportAssetWebLocationListRequest,
+  VulIgnoreRule,
   DescribeRansomDefenseEventsListResponse,
   DescribeVulEffectModulesRequest,
   ModifyRiskDnsPolicyStatusRequest,
@@ -1251,6 +1253,7 @@ import {
   JavaMemShellDetail,
   WarningObject,
   DescribeBaselineHostDetectListResponse,
+  AddVulIgnoreRuleResponse,
   AssetWebLocationPath,
   DescribeAssetProcessInfoListResponse,
   ChangeStrategyEnableStatusRequest,
@@ -4149,6 +4152,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRiskDnsPolicyStatusResponse) => void
   ): Promise<ModifyRiskDnsPolicyStatusResponse> {
     return this.request("ModifyRiskDnsPolicyStatus", req, cb)
+  }
+
+  /**
+   * 添加漏洞忽略规则
+   */
+  async AddVulIgnoreRule(
+    req: AddVulIgnoreRuleRequest,
+    cb?: (error: string, rep: AddVulIgnoreRuleResponse) => void
+  ): Promise<AddVulIgnoreRuleResponse> {
+    return this.request("AddVulIgnoreRule", req, cb)
   }
 
   /**

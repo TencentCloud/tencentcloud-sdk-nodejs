@@ -148,16 +148,6 @@ it("tdmysql.v20211122.IsolateDBInstance", async function () {
     }
 })
 
-it("tdmysql.v20211122.ResetUserPassword", async function () {
-    try {
-       const data = await client.ResetUserPassword({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tdmysql.v20211122.DescribeFlow", async function () {
     try {
        const data = await client.DescribeFlow({})

@@ -2798,6 +2798,16 @@ it("cwp.v20180228.ModifyRiskDnsPolicyStatus", async function () {
     }
 })
 
+it("cwp.v20180228.AddVulIgnoreRule", async function () {
+    try {
+       const data = await client.AddVulIgnoreRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cwp.v20180228.DescribeVulList", async function () {
     try {
        const data = await client.DescribeVulList({})

@@ -7878,36 +7878,36 @@ export interface CreateBackupRequest {
  */
 export interface AccountInfo {
   /**
-   * 账号备注信息
+   * <p>账号备注信息</p>
    */
   Notes?: string
   /**
-   * 账号的域名
+   * <p>账号的域名</p>
    */
   Host?: string
   /**
-   * 账号的名称
+   * <p>账号的名称</p>
    */
   User?: string
   /**
-   * 账号信息修改时间
+   * <p>账号信息修改时间</p>
    */
   ModifyTime?: string
   /**
-   * 修改密码的时间
+   * <p>修改密码的时间</p>
    */
   ModifyPasswordTime?: string
   /**
-   * 该值已废弃
+   * <p>该值已废弃</p>
    * @deprecated
    */
   CreateTime?: string
   /**
-   * 用户最大可用实例连接数
+   * <p>用户最大可用实例连接数</p>
    */
   MaxUserConnections?: number
   /**
-   * 用户账号是否开启了密码轮转
+   * <p>用户账号是否开启了密码轮转</p>
    */
   OpenCam?: boolean
 }

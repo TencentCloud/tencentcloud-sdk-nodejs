@@ -30,6 +30,20 @@ export interface DeleteAlarmShieldsRequest {
 }
 
 /**
+ * DescribePrometheusCreateInstanceQuota返回参数结构体
+ */
+export interface DescribePrometheusCreateInstanceQuotaResponse {
+  /**
+   * <p>prometheus实例创建配额</p>
+   */
+  QuotaDetail?: PrometheusInstanceQuotaDetail
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAlarmPolicyInfo请求参数结构体
  */
 export interface ModifyAlarmPolicyInfoRequest {
@@ -485,40 +499,36 @@ export interface DescribePolicyConditionListResponseDeprecatingInfo {
  */
 export interface PrometheusTempModify {
   /**
-   * 修改名称
+   * <p>修改名称</p>
    */
   Name?: string
   /**
-   * 修改描述
+   * <p>修改描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Describe?: string
   /**
-   * 当Level为cluster时有效，
-模板中的ServiceMonitor规则列表
+   * <p>当Level为cluster时有效，<br>模板中的ServiceMonitor规则列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceMonitors?: Array<PrometheusConfigItem>
   /**
-   * 当Level为cluster时有效，
-模板中的PodMonitors规则列表
+   * <p>当Level为cluster时有效，<br>模板中的PodMonitors规则列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PodMonitors?: Array<PrometheusConfigItem>
   /**
-   * 当Level为cluster时有效，
-模板中的RawJobs规则列表
+   * <p>当Level为cluster时有效，<br>模板中的RawJobs规则列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RawJobs?: Array<PrometheusConfigItem>
   /**
-   * 当Level为instance时有效，
-模板中的聚合规则列表
+   * <p>当Level为instance时有效，<br>模板中的聚合规则列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordRules?: Array<PrometheusConfigItem>
   /**
-   * 修改内容，只有当模板类型是Alert时生效
+   * <p>修改内容，只有当模板类型是Alert时生效</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlertDetailRules?: Array<PrometheusAlertPolicyItem>
@@ -823,6 +833,11 @@ export interface DescribeGrafanaEnvironmentsRequest {
 }
 
 /**
+ * DescribePrometheusCreateInstanceQuota请求参数结构体
+ */
+export type DescribePrometheusCreateInstanceQuotaRequest = null
+
+/**
  * prometheus配置
  */
 export interface PrometheusConfigItem {
@@ -1100,11 +1115,11 @@ export interface DeleteExporterIntegrationRequest {
  */
 export interface PrometheusRuleKV {
   /**
-   * 键
+   * <p>键</p>
    */
   Key: string
   /**
-   * 值
+   * <p>值</p>
    */
   Value: string
 }
@@ -1128,62 +1143,58 @@ export interface DescribePolicyConditionListResponse {
  */
 export interface PrometheusRuleSet {
   /**
-   * 规则 ID
+   * <p>规则 ID</p>
    */
   RuleId: string
   /**
-   * 规则名称
+   * <p>规则名称</p>
    */
   RuleName: string
   /**
-   * 规则状态码
+   * <p>规则状态码</p>
    */
   RuleState: number
   /**
-   * 规则类别
+   * <p>规则类别</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type: string
   /**
-   * 规则标签列表
+   * <p>规则标签列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Labels: Array<PrometheusRuleKV>
   /**
-   * 规则注释列表
+   * <p>规则注释列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Annotations: Array<PrometheusRuleKV>
   /**
-   * 规则表达式
+   * <p>规则表达式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Expr: string
   /**
-   * 规则报警持续时间
+   * <p>规则报警持续时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Duration: string
   /**
-   * 报警接收组列表
+   * <p>报警接收组列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Receivers: Array<string>
   /**
-   * 规则运行健康状态，取值如下：
-<li>unknown 未知状态</li>
-<li>pending 加载中</li>
-<li>ok 运行正常</li>
-<li>err 运行错误</li>
+   * <p>规则运行健康状态，取值如下：</p><li>unknown 未知状态</li><li>pending 加载中</li><li>ok 运行正常</li><li>err 运行错误</li>
    */
   Health: string
   /**
-   * 规则创建时间
+   * <p>规则创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatedAt: string
   /**
-   * 规则更新时间
+   * <p>规则更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdatedAt: string
@@ -1522,20 +1533,20 @@ export interface Dimension {
  */
 export interface DescribeBindingPolicyObjectListResponse {
   /**
-   * 绑定的对象实例列表
+   * <p>绑定的对象实例列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   List: Array<DescribeBindingPolicyObjectListInstance>
   /**
-   * 绑定的对象实例总数
+   * <p>绑定的对象实例总数</p>
    */
   Total: number
   /**
-   * 未屏蔽的对象实例数
+   * <p>未屏蔽的对象实例数</p>
    */
   NoShieldedSum: number
   /**
-   * 绑定的实例分组信息，没有绑定实例分组则为空
+   * <p>绑定的实例分组信息，没有绑定实例分组则为空</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceGroup: DescribeBindingPolicyObjectListInstanceGroup
@@ -2257,7 +2268,7 @@ export interface ModifyAlarmPolicyStatusResponse {
  */
 export interface DescribeExporterIntegrationsResponse {
   /**
-   * 集成配置列表
+   * <p>集成配置列表</p>
    */
   IntegrationSet?: Array<IntegrationConfiguration>
   /**
@@ -2765,35 +2776,35 @@ export interface DescribePolicyGroupInfoReceiverInfo {
  */
 export interface RecordingRuleSet {
   /**
-   * 规则 ID
+   * <p>规则 ID</p>
    */
   RuleId?: string
   /**
-   * 规则状态码
+   * <p>规则状态码</p>
    */
   RuleState?: number
   /**
-   * 分组名称
+   * <p>分组名称</p>
    */
   Name?: string
   /**
-   * 规则内容组
+   * <p>规则内容组</p>
    */
   Group?: string
   /**
-   * 规则数量
+   * <p>规则数量</p>
    */
   Total?: number
   /**
-   * 规则创建时间
+   * <p>规则创建时间</p>
    */
   CreatedAt?: string
   /**
-   * 规则最近更新时间
+   * <p>规则最近更新时间</p>
    */
   UpdatedAt?: string
   /**
-   * 规则名称
+   * <p>规则名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleName?: string
@@ -2804,51 +2815,51 @@ export interface RecordingRuleSet {
  */
 export interface DescribeBasicAlarmListRequest {
   /**
-   * 接口模块名，当前取值monitor
+   * <p>接口模块名，当前取值monitor</p>
    */
   Module: string
   /**
-   * 起始时间，默认一天前的时间戳
+   * <p>起始时间，默认一天前的时间戳</p>
    */
   StartTime?: number
   /**
-   * 结束时间，默认当前时间戳
+   * <p>结束时间，默认当前时间戳</p>
    */
   EndTime?: number
   /**
-   * 分页参数，每页返回的数量，取值1~100，默认20
+   * <p>分页参数，每页返回的数量，取值1~100，默认20</p>
    */
   Limit?: number
   /**
-   * 分页参数，页偏移量，从0开始计数，默认0
+   * <p>分页参数，页偏移量，从0开始计数，默认0</p>
    */
   Offset?: number
   /**
-   * 根据发生时间排序，取值ASC或DESC
+   * <p>根据发生时间排序，取值ASC或DESC</p>
    */
   OccurTimeOrder?: string
   /**
-   * 根据项目ID过滤
+   * <p>根据项目ID过滤</p>
    */
   ProjectIds?: Array<number | bigint>
   /**
-   * 根据策略类型过滤
+   * <p>根据策略类型过滤</p>
    */
   ViewNames?: Array<string>
   /**
-   * 根据告警状态过滤
+   * <p>根据告警状态过滤</p>
    */
   AlarmStatus?: Array<number | bigint>
   /**
-   * 根据告警对象过滤
+   * <p>根据告警对象过滤</p>
    */
   ObjLike?: string
   /**
-   * 根据实例组ID过滤
+   * <p>根据实例组ID过滤</p>
    */
   InstanceGroupIds?: Array<number | bigint>
   /**
-   * 根据指标名过滤
+   * <p>根据指标名过滤</p>
    */
   MetricNames?: Array<string>
 }
@@ -2878,7 +2889,7 @@ export interface DescribePrometheusAlertGroupsResponse {
  */
 export interface CreateConditionsTemplateResponse {
   /**
-   * 模板策略组ID
+   * <p>模板策略组ID</p>
    */
   GroupID?: number
   /**
@@ -3576,11 +3587,11 @@ export interface ExportPrometheusReadOnlyDynamicAPIRequest {
  */
 export interface PrometheusTag {
   /**
-   * 标签的健值
+   * <p>标签的健值</p>
    */
   Key: string
   /**
-   * 标签对应的值
+   * <p>标签对应的值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
@@ -3910,27 +3921,27 @@ export interface CreateAlarmPolicyRequest {
  */
 export interface PrometheusZoneItem {
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone?: string
   /**
-   * 可用区 ID
+   * <p>可用区 ID</p>
    */
   ZoneId?: number
   /**
-   * 可用区状态( 0: 不可用；1: 可用)
+   * <p>可用区状态( 0: 不可用；1: 可用)</p>
    */
   ZoneState?: number
   /**
-   * 地域 ID
+   * <p>地域 ID</p>
    */
   RegionId?: number
   /**
-   * 可用区名（目前为中文）
+   * <p>可用区名（目前为中文）</p>
    */
   ZoneName?: string
   /**
-   * 可用区资源状态(0:资源不足，不可使用；1:资源足够)
+   * <p>可用区资源状态(0:资源不足，不可使用；1:资源足够)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ZoneResourceState?: number
@@ -4005,40 +4016,40 @@ export interface UpdateOnCallFormResponse {
  */
 export interface PrometheusTemplateSyncTarget {
   /**
-   * 目标所在地域
+   * <p>目标所在地域</p>
    */
   Region: string
   /**
-   * 目标实例
+   * <p>目标实例</p>
    */
   InstanceId: string
   /**
-   * 集群id，只有当采集模板的Level为cluster的时候需要
+   * <p>集群id，只有当采集模板的Level为cluster的时候需要</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
-   * 最后一次同步时间， 用于出参
+   * <p>最后一次同步时间， 用于出参</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SyncTime?: string
   /**
-   * 当前使用的模板版本，用于出参
+   * <p>当前使用的模板版本，用于出参</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Version?: string
   /**
-   * 集群类型，只有当采集模板的Level为cluster的时候需要
+   * <p>集群类型，只有当采集模板的Level为cluster的时候需要</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterType?: string
   /**
-   * 用于出参，实例名称
+   * <p>用于出参，实例名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceName?: string
   /**
-   * 用于出参，集群名称
+   * <p>用于出参，集群名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterName?: string
@@ -4194,11 +4205,11 @@ export interface DataPoint {
  */
 export interface DescribeAlarmPoliciesResponse {
   /**
-   * 策略总数
+   * <p>策略总数</p>
    */
   TotalCount?: number
   /**
-   * 策略数组
+   * <p>策略数组</p>
    */
   Policies?: Array<AlarmPolicy>
   /**
@@ -4478,11 +4489,11 @@ export interface DescribeGrafanaWhiteListResponse {
  */
 export interface DescribeAlertRulesResponse {
   /**
-   * 报警规则数量
+   * <p>报警规则数量</p>
    */
   TotalCount: number
   /**
-   * 报警规则详情
+   * <p>报警规则详情</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlertRuleSet: Array<PrometheusRuleSet>
@@ -4539,17 +4550,17 @@ export interface UpdateExporterIntegrationResponse {
  */
 export interface DescribeBasicAlarmListResponse {
   /**
-   * 告警列表
+   * <p>告警列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Alarms?: Array<DescribeBasicAlarmListAlarms>
   /**
-   * 总数
+   * <p>总数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
-   * 备注信息
+   * <p>备注信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Warning?: string
@@ -4582,26 +4593,23 @@ export interface ModifyAlarmReceiversRequest {
  */
 export interface DescribeExporterIntegrationsRequest {
   /**
-   * 实例 ID
+   * <p>实例 ID</p>
    */
   InstanceId: string
   /**
-   * Kubernetes 集群类型，可不填。取值如下：
-<li> 1= 容器集群(TKE) </li>
-<li> 2=弹性集群(EKS) </li>
-<li> 3= Prometheus管理的弹性集群(MEKS) </li>
+   * <p>Kubernetes 集群类型，可不填。取值如下：</p><li> 1= 容器集群(TKE) </li><li> 2=弹性集群(EKS) </li><li> 3= Prometheus管理的弹性集群(MEKS) </li>
    */
   KubeType?: number
   /**
-   * 集群 ID，可不填
+   * <p>集群 ID，可不填</p>
    */
   ClusterId?: string
   /**
-   * 类型(不填返回全部集成。可通过 DescribePrometheusIntegrations 接口获取，取每一项中的 ExporterType 字段)
+   * <p>类型(不填返回全部集成。可通过 DescribePrometheusIntegrations 接口获取，取每一项中的 ExporterType 字段)</p>
    */
   Kind?: string
   /**
-   * 名字
+   * <p>名字</p>
    */
   Name?: string
 }
@@ -5098,16 +5106,16 @@ export interface UpdatePrometheusAlertGroupStateRequest {
  */
 export interface PrometheusAlertManagerConfig {
   /**
-   * alertmanager url
+   * <p>alertmanager url</p>
    */
   Url: string
   /**
-   * alertmanager部署所在集群类型
+   * <p>alertmanager部署所在集群类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterType?: string
   /**
-   * alertmanager部署所在集群ID
+   * <p>alertmanager部署所在集群ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
@@ -5698,11 +5706,11 @@ export interface UninstallGrafanaPluginsRequest {
  */
 export interface PrometheusStringKeyValuePair {
   /**
-   * 键
+   * <p>键</p>
    */
   Key: string
   /**
-   * 值
+   * <p>值</p>
    */
   Value: string
 }
@@ -6228,33 +6236,31 @@ export interface DestroyPrometheusInstanceResponse {
  */
 export interface DescribeAlertRulesRequest {
   /**
-   * Prometheus 实例 ID
+   * <p>Prometheus 实例 ID</p>
    */
   InstanceId: string
   /**
-   * 返回数量，默认为 20，最大值为 100
+   * <p>返回数量，默认为 20，最大值为 100</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为 0
+   * <p>偏移量，默认为 0</p>
    */
   Offset?: number
   /**
-   * 规则 ID
+   * <p>规则 ID</p>
    */
   RuleId?: string
   /**
-   * 规则状态码，取值如下：
-<li>2=RuleEnabled</li>
-<li>3=RuleDisabled</li>
+   * <p>规则状态码，取值如下：</p><li>2=RuleEnabled</li><li>3=RuleDisabled</li>
    */
   RuleState?: number
   /**
-   * 规则名称
+   * <p>规则名称</p>
    */
   RuleName?: string
   /**
-   * 报警策略模板分类
+   * <p>报警策略模板分类</p>
    */
   Type?: string
 }
@@ -6360,40 +6366,40 @@ export interface ModifyPrometheusConfigResponse {
  */
 export interface PrometheusAgent {
   /**
-   * Agent 名
+   * <p>Agent 名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name: string
   /**
-   * Agent ID
+   * <p>Agent ID</p>
    */
   AgentId: string
   /**
-   * 实例 ID
+   * <p>实例 ID</p>
    */
   InstanceId: string
   /**
-   * Agent IP
+   * <p>Agent IP</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Ipv4: string
   /**
-   * 心跳时间
+   * <p>心跳时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HeartbeatTime: string
   /**
-   * 最近一次错误
+   * <p>最近一次错误</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastError: string
   /**
-   * Agent 版本
+   * <p>Agent 版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AgentVersion: string
   /**
-   * Agent 状态
+   * <p>Agent 状态</p>
    */
   Status: number
 }
@@ -6659,35 +6665,35 @@ export interface PrometheusInstancesItem {
  */
 export interface DescribeConditionsTemplateListRequest {
   /**
-   * 固定值，为"monitor"
+   * <p>固定值，为&quot;monitor&quot;</p>
    */
   Module: string
   /**
-   * 视图名，由 [DescribeAllNamespaces](https://cloud.tencent.com/document/product/248/48683) 获得。对于云产品监控，取接口出参的 QceNamespacesNew.N.Id，例如 cvm_device
+   * <p>视图名，由 <a href="https://cloud.tencent.com/document/product/248/48683">DescribeAllNamespaces</a> 获得。对于云产品监控，取接口出参的 QceNamespacesNew.N.Id，例如 cvm_device</p>
    */
   ViewName?: string
   /**
-   * 根据触发条件模板名称过滤查询
+   * <p>根据触发条件模板名称过滤查询</p>
    */
   GroupName?: string
   /**
-   * 根据触发条件模板ID过滤查询
+   * <p>根据触发条件模板ID过滤查询</p>
    */
   GroupID?: string
   /**
-   * 分页参数，每页返回的数量，取值1~100，默认20
+   * <p>分页参数，每页返回的数量，取值1~100，默认20</p>
    */
   Limit?: number
   /**
-   * 分页参数，页偏移量，从0开始计数，默认0
+   * <p>分页参数，页偏移量，从0开始计数，默认0</p>
    */
   Offset?: number
   /**
-   * 指定按更新时间的排序方式，asc=升序, desc=降序
+   * <p>指定按更新时间的排序方式，asc=升序, desc=降序</p>
    */
   UpdateTimeOrder?: string
   /**
-   * 指定按绑定策略数目的排序方式，asc=升序, desc=降序
+   * <p>指定按绑定策略数目的排序方式，asc=升序, desc=降序</p>
    */
   PolicyCountOrder?: string
 }
@@ -7474,19 +7480,19 @@ export interface DescribeBindingPolicyObjectListInstance {
   /**
    * 对象唯一id
    */
-  UniqueId: string
+  UniqueId?: string
   /**
    * 表示对象实例的维度集合，jsonObj字符串
    */
-  Dimensions: string
+  Dimensions?: string
   /**
    * 对象是否被屏蔽，0表示未屏蔽，1表示被屏蔽
    */
-  IsShielded: number
+  IsShielded?: number
   /**
    * 对象所在的地域
    */
-  Region: string
+  Region?: string
 }
 
 /**
@@ -7602,11 +7608,11 @@ export interface NoticeBindPolicys {
  */
 export interface PrometheusDynamicAPIResponseHTTP {
   /**
-   * HTTP 状态码
+   * <p>HTTP 状态码</p>
    */
   StatusCode?: number
   /**
-   * HTTP 响应体
+   * <p>HTTP 响应体</p>
    */
   ResponseBody?: string
 }
@@ -7616,37 +7622,37 @@ export interface PrometheusDynamicAPIResponseHTTP {
  */
 export interface PrometheusAlertRule {
   /**
-   * 规则名称
+   * <p>规则名称</p>
    */
   Name: string
   /**
-   * prometheus语句
+   * <p>prometheus语句</p>
    */
   Rule: string
   /**
-   * 额外标签
+   * <p>额外标签</p>
    */
   Labels: Array<Label>
   /**
-   * 告警发送模板
+   * <p>告警发送模板</p>
    */
   Template: string
   /**
-   * 持续时间
+   * <p>持续时间</p>
    */
   For: string
   /**
-   * 该条规则的描述信息
+   * <p>该条规则的描述信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Describe?: string
   /**
-   * 参考prometheus rule中的annotations
+   * <p>参考prometheus rule中的annotations</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Annotations?: Array<Label>
   /**
-   * 告警规则状态
+   * <p>告警规则状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleState?: number
@@ -7695,75 +7701,67 @@ export interface DescribeAlarmPolicyResponse {
  */
 export interface PrometheusNotificationItem {
   /**
-   * 是否启用
+   * <p>是否启用</p>
    */
   Enabled: boolean
   /**
-   * 通道类型，默认为amp，支持以下
-amp
-webhook
-alertmanager
+   * <p>通道类型，默认为amp，支持以下<br>amp<br>webhook<br>alertmanager</p>
    */
   Type: string
   /**
-   * 如果Type为webhook, 则该字段为必填项
+   * <p>如果Type为webhook, 则该字段为必填项</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WebHook?: string
   /**
-   * 如果Type为alertmanager, 则该字段为必填项
+   * <p>如果Type为alertmanager, 则该字段为必填项</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlertManager?: PrometheusAlertManagerConfig
   /**
-   * 收敛时间
+   * <p>收敛时间</p>
    */
   RepeatInterval?: string
   /**
-   * 生效起始时间
+   * <p>生效起始时间</p>
    */
   TimeRangeStart?: string
   /**
-   * 生效结束时间
+   * <p>生效结束时间</p>
    */
   TimeRangeEnd?: string
   /**
-   * 告警通知方式。目前有SMS、EMAIL、CALL、WECHAT方式。
+   * <p>告警通知方式。目前有SMS、EMAIL、CALL、WECHAT方式。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NotifyWay?: Array<string>
   /**
-   * 告警接收组（用户组）
+   * <p>告警接收组（用户组）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReceiverGroups?: Array<string>
   /**
-   * 电话告警顺序。
-注：NotifyWay选择CALL，采用该参数。
+   * <p>电话告警顺序。<br>注：NotifyWay选择CALL，采用该参数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PhoneNotifyOrder?: Array<number | bigint>
   /**
-   * 电话告警次数。
-注：NotifyWay选择CALL，采用该参数。
+   * <p>电话告警次数。<br>注：NotifyWay选择CALL，采用该参数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PhoneCircleTimes?: number
   /**
-   * 电话告警轮内间隔。单位：秒
-注：NotifyWay选择CALL，采用该参数。
+   * <p>电话告警轮内间隔。单位：秒<br>注：NotifyWay选择CALL，采用该参数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PhoneInnerInterval?: number
   /**
-   * 电话告警轮外间隔。单位：秒
-注：NotifyWay选择CALL，采用该参数。
+   * <p>电话告警轮外间隔。单位：秒<br>注：NotifyWay选择CALL，采用该参数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PhoneCircleInterval?: number
   /**
-   * 电话告警触达通知
-注：NotifyWay选择CALL，采用该参数。
+   * <p>电话告警触达通知<br>注：NotifyWay选择CALL，采用该参数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PhoneArriveNotice?: boolean
@@ -8166,27 +8164,27 @@ export interface CreatePrometheusAlertPolicyRequest {
  */
 export interface DescribeBindingPolicyObjectListRequest {
   /**
-   * 固定值，为"monitor"
+   * <p>固定值，为&quot;monitor&quot;</p>
    */
   Module: string
   /**
-   * 策略组id，如果有形如 policy-xxxx 的 id，请填到 PolicyId 字段中，本字段填 0
+   * <p>策略组id，如果有形如 policy-xxxx 的 id，请填到 PolicyId 字段中，本字段填 0</p>
    */
   GroupId: number
   /**
-   * 告警策略id，形如 policy-xxxx，如果填入，则GroupId可以填0
+   * <p>告警策略id，形如 policy-xxxx，如果填入，则GroupId可以填0</p>
    */
   PolicyId?: string
   /**
-   * 每次返回的数量，取值1~100，默认20
+   * <p>每次返回的数量，取值1~100，默认20</p>
    */
   Limit?: number
   /**
-   * 偏移量，从0开始计数，默认0。举例来说，参数 Offset=0&Limit=20 返回第 0 到 19 项，Offset=20&Limit=20 返回第 20 到 39 项，以此类推
+   * <p>偏移量，从0开始计数，默认0。举例来说，参数 Offset=0&amp;Limit=20 返回第 0 到 19 项，Offset=20&amp;Limit=20 返回第 20 到 39 项，以此类推</p>
    */
   Offset?: number
   /**
-   * 筛选对象的维度信息
+   * <p>筛选对象的维度信息</p>
    */
   Dimensions?: Array<DescribeBindingPolicyObjectListDimension>
 }
@@ -8508,11 +8506,11 @@ export interface DescribePolicyGroupListGroupInstanceGroup {
  */
 export interface DescribeConditionsTemplateListResponse {
   /**
-   * 模板总数
+   * <p>模板总数</p>
    */
   Total?: number
   /**
-   * 模板列表
+   * <p>模板列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TemplateGroupList?: Array<TemplateGroup>
@@ -8575,78 +8573,78 @@ export interface MetricConfig {
  */
 export interface PrometheusInstancesOverview {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId: string
   /**
-   * 实例名
+   * <p>实例名</p>
    */
   InstanceName: string
   /**
-   * VPC ID
+   * <p>VPC ID</p>
    */
   VpcId: string
   /**
-   * 子网ID
+   * <p>子网ID</p>
    */
   SubnetId: string
   /**
-   * 运行状态（1:正在创建；2:运行中；3:异常；4:重启中；5:销毁中； 6:已停机； 7: 已删除）
+   * <p>运行状态（1:正在创建；2:运行中；3:异常；4:重启中；5:销毁中； 6:已停机； 7: 已删除）</p>
    */
   InstanceStatus: number
   /**
-   * 计费状态（1:正常；2:过期; 3:销毁; 4:分配中; 5:分配失败）
+   * <p>计费状态（1:正常；2:过期; 3:销毁; 4:分配中; 5:分配失败）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ChargeStatus: number
   /**
-   * 是否开启 Grafana（0:不开启，1:开启）
+   * <p>是否开启 Grafana（0:不开启，1:开启）</p>
    */
   EnableGrafana: number
   /**
-   * Grafana 面板 URL
+   * <p>Grafana 面板 URL</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GrafanaURL: string
   /**
-   * 实例付费类型（1:试用版；2:预付费）
+   * <p>实例付费类型（1:试用版；2:预付费）</p>
    */
   InstanceChargeType: number
   /**
-   * 规格名称
+   * <p>规格名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SpecName: string
   /**
-   * 存储周期
+   * <p>存储周期</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DataRetentionTime: number
   /**
-   * 购买的实例过期时间
+   * <p>购买的实例过期时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpireTime: string
   /**
-   * 自动续费标记(0:不自动续费；1:开启自动续费；2:禁止自动续费；-1:无效)
+   * <p>自动续费标记(0:不自动续费；1:开启自动续费；2:禁止自动续费；-1:无效)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AutoRenewFlag: number
   /**
-   * 绑定集群总数
+   * <p>绑定集群总数</p>
    */
   BoundTotal: number
   /**
-   * 绑定集群正常状态总数
+   * <p>绑定集群正常状态总数</p>
    */
   BoundNormal: number
   /**
-   * 资源包状态，0-无可用资源包，1-有可用资源包
+   * <p>资源包状态，0-无可用资源包，1-有可用资源包</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourcePackageStatus?: number
   /**
-   * 资源包规格名称
+   * <p>资源包规格名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourcePackageSpecName?: string
@@ -10707,27 +10705,27 @@ export interface BindPrometheusManagedGrafanaResponse {
  */
 export interface ManagementCommand {
   /**
-   * Agent 安装命令
+   * <p>Agent 安装命令</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Install: string
   /**
-   * Agent 重启命令
+   * <p>Agent 重启命令</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Restart: string
   /**
-   * Agent 停止命令
+   * <p>Agent 停止命令</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Stop: string
   /**
-   * Agent 状态检测命令
+   * <p>Agent 状态检测命令</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusCheck: string
   /**
-   * Agent 日志检测命令
+   * <p>Agent 日志检测命令</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogCheck: string
@@ -11216,6 +11214,24 @@ export interface DescribePrometheusTempRequest {
 }
 
 /**
+ * Prometheus实例创建配额信息
+ */
+export interface PrometheusInstanceQuotaDetail {
+  /**
+   * <p>prometheus实例创建总限制数量</p>
+   */
+  Limit?: number
+  /**
+   * <p>当前账号下创建prometheus实例数量</p>
+   */
+  Usage?: number
+  /**
+   * <p>剩余可用prometheus实例创建数量</p>
+   */
+  Available?: number
+}
+
+/**
  * UpdateServiceDiscovery返回参数结构体
  */
 export interface UpdateServiceDiscoveryResponse {
@@ -11694,118 +11710,115 @@ export interface UpdatePrometheusScrapeJobResponse {
  */
 export interface DescribeAlarmPoliciesRequest {
   /**
-   * 固定值，为"monitor"
+   * <p>固定值，为&quot;monitor&quot;</p>
    */
   Module: string
   /**
-   * 页数，从 1 开始计数，默认 1
+   * <p>页数，从 1 开始计数，默认 1</p>
    */
   PageNumber?: number
   /**
-   * 每页的数量，取值1~100，默认20
+   * <p>每页的数量，取值1~100，默认20</p>
    */
   PageSize?: number
   /**
-   * 按策略名称模糊搜索
+   * <p>按策略名称模糊搜索</p>
    */
   PolicyName?: string
   /**
-   * 根据监控类型过滤 不选默认查所有类型 "MT_QCE"=云产品监控,当Dimension不为空时，该项为必填项
+   * <p>根据监控类型过滤 不选默认查所有类型 &quot;MT_QCE&quot;=云产品监控,当Dimension不为空时，该项为必填项</p>
    */
   MonitorTypes?: Array<string>
   /**
-   * 根据命名空间过滤，不同策略类型的值详见
-[策略类型列表](https://cloud.tencent.com/document/product/248/50397)当Dimension不为空时，该项为必填项
+   * <p>根据命名空间过滤，不同策略类型的值详见<br><a href="https://cloud.tencent.com/document/product/248/50397">策略类型列表</a>当Dimension不为空时，该项为必填项</p>
    */
   Namespaces?: Array<string>
   /**
-   * 告警对象列表，JSON 字符串。外层数组，对应多个实例，内层为对象的维度。例如“云服务器-基础监控”可写为：`[[{"name":"unInstanceId","value":"ins-qr888845g"}]]`具体也可以参考下方的示例 2。不同云产品参数示例详见 [维度信息Dimensions列表](https://cloud.tencent.com/document/product/248/50397)注意：如果NeedCorrespondence传入1，即需要返回策略与实例对应关系，请传入不多于20个告警对象维度，否则容易请求超时
+   * <p>告警对象列表，JSON 字符串。外层数组，对应多个实例，内层为对象的维度。例如“云服务器-基础监控”可写为：<code>[[{&quot;name&quot;:&quot;unInstanceId&quot;,&quot;value&quot;:&quot;ins-qr888845g&quot;}]]</code>具体也可以参考下方的示例 2。不同云产品参数示例详见 <a href="https://cloud.tencent.com/document/product/248/50397">维度信息Dimensions列表</a>注意：如果NeedCorrespondence传入1，即需要返回策略与实例对应关系，请传入不多于20个告警对象维度，否则容易请求超时</p>
    */
   Dimensions?: string
   /**
-   * 根据接收人搜索，可以使用“访问管理”的 [拉取子用户 ListUsers](https://cloud.tencent.com/document/product/598/34587) 接口获取用户列表 或 [查询子用户 GetUser](https://cloud.tencent.com/document/product/598/34590) 接口查询子用户详情，此处填入返回结果中的 `Uid` 字段
+   * <p>根据接收人搜索，可以使用“访问管理”的 <a href="https://cloud.tencent.com/document/product/598/34587">拉取子用户 ListUsers</a> 接口获取用户列表 或 <a href="https://cloud.tencent.com/document/product/598/34590">查询子用户 GetUser</a> 接口查询子用户详情，此处填入返回结果中的 <code>Uid</code> 字段</p>
    */
   ReceiverUids?: Array<number | bigint>
   /**
-   * 根据接收组搜索，可以使用“访问管理”的 [查询用户组列表 ListGroups](https://cloud.tencent.com/document/product/598/34589) 接口获取用户组列表 或 [列出用户关联的用户组 ListGroupsForUser](https://cloud.tencent.com/document/product/598/34588) 查询某个子用户所在的用户组列表 ，此处填入返回结果中的 `GroupId ` 字段
+   * <p>根据接收组搜索，可以使用“访问管理”的 <a href="https://cloud.tencent.com/document/product/598/34589">查询用户组列表 ListGroups</a> 接口获取用户组列表 或 <a href="https://cloud.tencent.com/document/product/598/34588">列出用户关联的用户组 ListGroupsForUser</a> 查询某个子用户所在的用户组列表 ，此处填入返回结果中的 <code>GroupId</code> 字段</p>
    */
   ReceiverGroups?: Array<number | bigint>
   /**
-   * 根据默认策略筛选 不传展示全部策略 DEFAULT=展示默认策略 NOT_DEFAULT=展示非默认策略
+   * <p>根据默认策略筛选 不传展示全部策略 DEFAULT=展示默认策略 NOT_DEFAULT=展示非默认策略</p>
    */
   PolicyType?: Array<string>
   /**
-   * 排序字段，例如按照最后修改时间排序，Field: "UpdateTime"
+   * <p>排序字段，例如按照最后修改时间排序，Field: &quot;UpdateTime&quot;</p>
    */
   Field?: string
   /**
-   * 排序顺序：升序：ASC  降序：DESC
+   * <p>排序顺序：升序：ASC  降序：DESC</p>
    */
   Order?: string
   /**
-   * 策略所属项目的id数组，可在此页面查看
-[项目管理](https://console.cloud.tencent.com/project)
+   * <p>策略所属项目的id数组，可在此页面查看<br><a href="https://console.cloud.tencent.com/project">项目管理</a></p>
    */
   ProjectIds?: Array<number | bigint>
   /**
-   * 通知模板的id列表，可查询通知模板列表获取。
-可使用 [查询通知模板列表](https://cloud.tencent.com/document/product/248/51280) 接口查询。
+   * <p>通知模板的id列表，可查询通知模板列表获取。<br>可使用 <a href="https://cloud.tencent.com/document/product/248/51280">查询通知模板列表</a> 接口查询。</p>
    */
   NoticeIds?: Array<string>
   /**
-   * 根据触发条件筛选 不传展示全部策略 STATIC=展示静态阈值策略 DYNAMIC=展示动态阈值策略
+   * <p>根据触发条件筛选 不传展示全部策略 STATIC=展示静态阈值策略 DYNAMIC=展示动态阈值策略</p>
    */
   RuleTypes?: Array<string>
   /**
-   * 告警启停筛选，[1]：启用   [0]：停止，全部[0, 1]
+   * <p>告警启停筛选，[1]：启用   [0]：停止，全部[0, 1]</p>
    */
   Enable?: Array<number | bigint>
   /**
-   * 传 1 查询未配置通知规则的告警策略；不传或传其他数值，查询所有策略。
+   * <p>传 1 查询未配置通知规则的告警策略；不传或传其他数值，查询所有策略。</p>
    */
   NotBindingNoticeRule?: number
   /**
-   * 实例分组id
+   * <p>实例分组id</p>
    */
   InstanceGroupId?: number
   /**
-   * 是否需要策略与入参过滤维度参数的对应关系，1：是  0：否，默认为0
+   * <p>是否需要策略与入参过滤维度参数的对应关系，1：是  0：否，默认为0</p>
    */
   NeedCorrespondence?: number
   /**
-   * 按照触发任务（例如弹性伸缩）过滤策略。最多10个
+   * <p>按照触发任务（例如弹性伸缩）过滤策略。最多10个</p>
    */
   TriggerTasks?: Array<AlarmPolicyTriggerTask>
   /**
-   * 根据一键告警策略筛选 不传展示全部策略 ONECLICK=展示一键告警策略 NOT_ONECLICK=展示非一键告警策略
+   * <p>根据一键告警策略筛选 不传展示全部策略 ONECLICK=展示一键告警策略 NOT_ONECLICK=展示非一键告警策略</p>
    */
   OneClickPolicyType?: Array<string>
   /**
-   * 返回结果过滤掉绑定全部对象的策略，1代表需要过滤，0则无需过滤
+   * <p>返回结果过滤掉绑定全部对象的策略，1代表需要过滤，0则无需过滤</p>
    */
   NotBindAll?: number
   /**
-   * 返回结果过滤掉关联实例为实例分组的策略，1代表需要过滤，0则无需过滤
+   * <p>返回结果过滤掉关联实例为实例分组的策略，1代表需要过滤，0则无需过滤</p>
    */
   NotInstanceGroup?: number
   /**
-   * 策略根据标签过滤
+   * <p>策略根据标签过滤</p>
    */
   Tags?: Array<Tag>
   /**
-   * prom实例id，自定义指标策略时会用到
+   * <p>prom实例id，自定义指标策略时会用到</p>
    */
   PromInsId?: string
   /**
-   * 根据排班表搜索
+   * <p>根据排班表搜索</p>
    */
   ReceiverOnCallFormIDs?: Array<string>
   /**
-   * 通知内容模板ID筛选
+   * <p>通知内容模板ID筛选</p>
    */
   NoticeContentTmplIDs?: Array<string>
   /**
-   * 是否为预设策略，1是，0否
+   * <p>是否为预设策略，1是，0否</p>
    */
   IsPredefined?: number
 }
@@ -11893,31 +11906,31 @@ export interface DescribePolicyConditionListConfigManualStatType {
  */
 export interface IntegrationConfiguration {
   /**
-   * 名字
+   * <p>名字</p>
    */
   Name?: string
   /**
-   * 类型
+   * <p>类型</p>
    */
   Kind?: string
   /**
-   * 内容
+   * <p>内容</p>
    */
   Content?: string
   /**
-   * 状态
+   * <p>状态</p>
    */
   Status?: number
   /**
-   * 实例类型
+   * <p>实例类型</p>
    */
   Category?: string
   /**
-   * 实例描述
+   * <p>实例描述</p>
    */
   InstanceDesc?: string
   /**
-   * dashboard 的 URL
+   * <p>dashboard 的 URL</p>
    */
   GrafanaDashboardURL?: string
 }
@@ -12277,43 +12290,43 @@ export interface GrafanaNotificationChannel {
  */
 export interface CreateConditionsTemplateRequest {
   /**
-   * 固定值，monitor
+   * <p>固定值，monitor</p>
    */
   Module: string
   /**
-   * 视图名
+   * <p>视图名</p>
    */
   ViewName: string
   /**
-   * 组名
+   * <p>组名</p>
    */
   GroupName: string
   /**
-   * 是否为与关系
+   * <p>是否为与关系</p>
    */
   IsUnionRule?: number
   /**
-   * 备注
+   * <p>备注</p>
    */
   Remark?: string
   /**
-   * 父ID
+   * <p>父ID</p>
    */
   ParentGroupID?: number
   /**
-   * 是否屏蔽
+   * <p>是否屏蔽</p>
    */
   IsShielded?: number
   /**
-   * 复合告警表达式
+   * <p>复合告警表达式</p>
    */
   ComplexExpression?: string
   /**
-   * 指标告警条件
+   * <p>指标告警条件</p>
    */
   Conditions?: Array<ModifyConditionsTemplateRequestCondition>
   /**
-   * 事件告警条件
+   * <p>事件告警条件</p>
    */
   EventConditions?: Array<ModifyConditionsTemplateRequestEventCondition>
 }

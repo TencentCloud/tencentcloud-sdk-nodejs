@@ -4781,6 +4781,40 @@ PicUrlExpireTime 时间点后图片将被删除）。
 }
 
 /**
+ * 输出的音频流信息
+ */
+export interface OutputAudioStream {
+  /**
+   * 音频流的编码格式，可选值：
+<li>libfdk_aac：适合 mp4 文件。</li>
+默认值：libfdk_aac。
+   */
+  Codec?: string
+  /**
+   * 音频流的采样率，可选值：
+<li>16000</li>
+<li>32000</li>
+<li>44100</li>
+<li>48000</li>
+单位：Hz。
+默认值：16000。
+   */
+  SampleRate?: number
+  /**
+   * 音频声道数，可选值：
+<li>1：单声道 。</li>
+<li>2：双声道</li>
+默认值：2。
+   */
+  AudioChannel?: number
+  /**
+   * 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。
+当取值为 0，将自动设置音频码率。
+   */
+  Bitrate?: number
+}
+
+/**
  * ModifyLLMComprehendTemplate返回参数结构体
  */
 export interface ModifyLLMComprehendTemplateResponse {
@@ -10055,6 +10089,10 @@ export interface KnowledgeBasesInfo {
    * <p>当前媒资当导入的知识库列表</p>
    */
   Bases?: Array<string>
+  /**
+   * <p>知识库中媒体分析信息</p>
+   */
+  KnowledgeAnalysisInfos?: Array<KnowledgeAnalysisInfo>
 }
 
 /**
@@ -11205,6 +11243,20 @@ export interface ModifyEnhanceMediaTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 知识库媒体分析信息。
+ */
+export interface KnowledgeAnalysisInfo {
+  /**
+   * <p>大模型解析模板号</p>
+   */
+  Definition?: number
+  /**
+   * <p>大模型解析结果</p>
+   */
+  AnalysisResults?: Array<KnowledgeAnalysisResult>
 }
 
 /**
@@ -18855,37 +18907,17 @@ export interface AiReviewPoliticalAsrTaskOutput {
 }
 
 /**
- * 输出的音频流信息
+ * 知识库媒体分析结果。
  */
-export interface OutputAudioStream {
+export interface KnowledgeAnalysisResult {
   /**
-   * 音频流的编码格式，可选值：
-<li>libfdk_aac：适合 mp4 文件。</li>
-默认值：libfdk_aac。
+   * <p>处理任务类型</p><p>枚举值：</p><ul><li>AiAnalysis.DescriptionTask： 智能摘要任务</li><li>AiAnalysis.VideoComprehensionTask： 视频理解任务</li><li>SmartSubtitle.AsrFullTextTask： 智能语音全文识别任务</li></ul>
    */
-  Codec?: string
+  TaskType?: string
   /**
-   * 音频流的采样率，可选值：
-<li>16000</li>
-<li>32000</li>
-<li>44100</li>
-<li>48000</li>
-单位：Hz。
-默认值：16000。
+   * <p>任务输出文件集合</p>
    */
-  SampleRate?: number
-  /**
-   * 音频声道数，可选值：
-<li>1：单声道 。</li>
-<li>2：双声道</li>
-默认值：2。
-   */
-  AudioChannel?: number
-  /**
-   * 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。
-当取值为 0，将自动设置音频码率。
-   */
-  Bitrate?: number
+  File?: MPSOutputFileInfo
 }
 
 /**

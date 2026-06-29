@@ -43,19 +43,21 @@ import {
   DspmSupportedAssetType,
   DspmIdentifyInfoItem,
   DescribeDspmRiskStrategyResponse,
+  LogHighLightItem,
   DeleteIaCFileResponse,
   DspmAccountCount,
   ModifyDspmRiskStrategyRequest,
   DeleteDspmPersonalIdentifyRequest,
   ModifyCosAuditMonitorAccountRequest,
   DescribeDspmAccessTopologyIpsResponse,
+  LogRuleKeyValueInfo,
   CreateDspmAssetsExportJobResponse,
   DescribeRiskCenterWebsiteRiskListResponse,
   DescribeDspmSyncAssetsStatusRequest,
   DspmApplyOrder,
   DescribeRiskCenterCFGViewCFGRiskListRequest,
   DspmApproverOrder,
-  SyncDspmAssetsResponse,
+  LogFullTextInfo,
   DescribeCSIPRiskStatisticsResponse,
   DescribeCosActionListResponse,
   VULViewVULRiskData,
@@ -67,11 +69,13 @@ import {
   DescribeDspmBackupLogListRequest,
   ModifyDspmAssetSecurityAnalysisSwitchRequest,
   DescribeCosBucketBillingInfoRequest,
+  DescribeDspmRiskTendencyRequest,
   DescribeDspmRiskResponse,
+  LogItems,
   ModifyDspmWhitelistStrategyResponse,
   DescribeKeySandboxCredentialRequest,
   DescribeDspmDictionaryListRequest,
-  DescribeDspmRiskTendencyRequest,
+  CheckViewRiskItem,
   DspmApproverStep,
   AddNewBindRoleUserRequest,
   ModifyDspmAssetLogDeliverySwitchResponse,
@@ -103,7 +107,6 @@ import {
   ModifyDspmRestoreLogTaskRequest,
   UpdateAlertStatusListRequest,
   DspmIdentifyAssetStatistic,
-  DescribeIaCFileListRequest,
   DescribeCosActionListRequest,
   DescribeUserDspmInfoListRequest,
   DescribeCosAlarmListRequest,
@@ -135,6 +138,7 @@ import {
   DeleteDomainAndIpResponse,
   CreateDomainAndIpRequest,
   CosDictionary,
+  LogSearchTopics,
   DescribeRiskRulesResponse,
   SkillCapabilityTag,
   VerifyDspmAssetLoginCodeResponse,
@@ -211,6 +215,7 @@ import {
   CreateIaCAccessTokenResponse,
   DescribeVULRiskAdvanceCFGListRequest,
   DspmAssetTypeCount,
+  DescribeCLSLogIndexV3Request,
   DescribeCosAssetSyncTaskResponse,
   DescribeDspmApproveHistoryRequest,
   RepositoryImageVO,
@@ -226,6 +231,7 @@ import {
   ModifyDspmWhitelistStrategyRequest,
   CICDToken,
   DescribeSkillScanResultRequest,
+  LogCLSFilter,
   GateWayAsset,
   DescribeSourceIPAssetResponse,
   CosBucketBillingInfo,
@@ -235,6 +241,7 @@ import {
   AssetViewVULRiskData,
   DspmIp,
   NICAsset,
+  DescribeCLSLogListV3Response,
   ModifyDspmAssetDataScanTaskResponse,
   DescribeAccessKeyAssetResponse,
   DescribeAccessKeyRiskDetailResponse,
@@ -278,8 +285,10 @@ import {
   DspmRisk,
   DescribeAIAgentAssetListResponse,
   CosActionInfo,
+  LogSearchInfos,
   DescribeUserDspmInfoListResponse,
   DspmSensitiveScanTaskConfig,
+  LogSearchErrors,
   AlertExtraInfo,
   DspmAssetTableInfo,
   SourceIPVpcInfo,
@@ -287,7 +296,7 @@ import {
   DescribeUebaRuleRequest,
   DescribeDspmAssetAccessTopologyRequest,
   DescribeRiskCenterWebsiteRiskListRequest,
-  DescribeDspmStatisticsRequest,
+  DescribeCallRecordRequest,
   AssetViewVULRisk,
   DescribeClusterPodAssetsResponse,
   DescribeCFWAssetStatisticsResponse,
@@ -308,6 +317,7 @@ import {
   DescribeExposePathResponse,
   DeleteDspmWhitelistStrategyResponse,
   TaskLogInfo,
+  LogColumn,
   DescribeTaskLogURLResponse,
   CosAssetFileIdentifyInfo,
   Machine,
@@ -346,7 +356,7 @@ import {
   AddDspmAssetManagerResponse,
   UpdateAccessKeyRemarkRequest,
   AddDspmAssetManagerRequest,
-  DescribeCallRecordRequest,
+  DescribeDspmStatisticsRequest,
   CreateDspmPersonalIdentifyRequest,
   DescribeAssumeRoleRequest,
   DescribeCosOverviewResponse,
@@ -366,7 +376,7 @@ import {
   VULBaseInfo,
   DescribeCallRecordResponse,
   AssetViewCFGRisk,
-  CheckViewRiskItem,
+  DescribeIaCFileListRequest,
   KeyValueInt,
   DspmUinUser,
   CosAkSet,
@@ -411,6 +421,7 @@ import {
   DescribeDspmRiskDetailResponse,
   DescribeCosRiskScanTaskRequest,
   DescribeOrganizationUserInfoResponse,
+  LogItem,
   AccessKeyRisk,
   DspmIdentifyRuleDetail,
   DBAssetVO,
@@ -431,8 +442,9 @@ import {
   VULViewVULRisk,
   DescribeDspmAssetAccountIdentifyResponse,
   DescribeDspmAssetLoginCredentialRequest,
-  DescribeDspmIdentifyInfoListResponse,
+  DescribeCLSLogListV3Request,
   DescribeCVMAssetsResponse,
+  LogIndexRuleInfo,
   UpdateAccessKeyRemarkResponse,
   DescribeCosSourceIpRequest,
   DescribePublicIpAssetsRequest,
@@ -449,6 +461,7 @@ import {
   CosBucketId,
   AccessCredentialOutput,
   CreateDspmExportTaskResponse,
+  LogValueInfo,
   VULRiskAdvanceCFGList,
   CreateDspmIdentifyInfoListExportJobResponse,
   TaskCenterVulRiskInputParam,
@@ -469,15 +482,18 @@ import {
   DescribeTopAttackInfoRequest,
   VulTrend,
   SkillState,
+  DescribeDspmIdentifyInfoListResponse,
   DescribeCosRiskActionListResponse,
   DescribeDspmAssetAccountsRequest,
   DescribeAccessKeyRiskResponse,
+  LogDynamicIndex,
   ModifyCosMarkInfoRequest,
   DescribeDspmApplyHistoryResponse,
   ModifyDspmIpInfoResponse,
   CreateAccessKeyCheckTaskRequest,
   DspmFrequency,
   SyncDspmUsersResponse,
+  DescribeCLSLogIndexV3Response,
   DescribeDspmAssetAccountsResponse,
   AssetBaseInfoResponse,
   DescribeRiskCallRecordResponse,
@@ -495,6 +511,7 @@ import {
   DescribeCosAuditDictionaryListRequest,
   DescribeRiskCenterAssetViewVULRiskListRequest,
   DeleteIaCFileRequest,
+  LogKeyValueInfo,
   DeleteDspmExportTaskResponse,
   SourceIPAsset,
   DescribeUserCallRecordRequest,
@@ -528,7 +545,7 @@ import {
   DescribeTaskLogURLRequest,
   ModifyCosAuditMonitorAccountResponse,
   DspmIdentifyIdItem,
-  DescribeCosAkInvokeIpListRequest,
+  DescribeCosPolicyResponse,
   CreateDspmRiskExportJobRequest,
   BugInfoDetail,
   CosInvokeIpVpcInfo,
@@ -551,10 +568,11 @@ import {
   ModifyRiskCenterRiskStatusRequest,
   NewAlertKey,
   DescribeDspmAssetLoginCredentialResponse,
-  DescribeCosPolicyResponse,
+  DescribeCosAkInvokeIpListRequest,
   DescribeCosBucketRiskResponse,
   DescribeCosRiskActionListRequest,
   DescribeCosRoleAccessPermissionsRequest,
+  LogTopicIndexInfo,
   DescribeVULRiskDetailResponse,
   ModifyRiskCenterScanTaskResponse,
   ModifyAlarmRiskStatusRequest,
@@ -658,6 +676,7 @@ import {
   DescribeRiskDetailListResponse,
   DescribeDbAssetsRequest,
   DescribeDbAssetInfoResponse,
+  LogContextInfo,
   DescribeAlertListRequest,
   DescribeRiskCenterCFGViewCFGRiskListResponse,
   TaskCenterCFGRiskInputParam,
@@ -676,6 +695,7 @@ import {
   DescribeNICAssetsResponse,
   DescribeRiskTrendDataRequest,
   NetworkCardInfo,
+  LogSearchResult,
   CosRiskViewInfo,
   Filters,
   ModifyRiskCenterScanTaskRequest,
@@ -687,6 +707,7 @@ import {
   DescribeIaCFileOverviewRequest,
   DeleteIaCAccessTokenRequest,
   DeleteRiskScanTaskResponse,
+  SyncDspmAssetsResponse,
   CreateCosPolicyResponse,
   DescribeCFWAssetStatisticsRequest,
   DescribeAccessKeyUserListResponse,
@@ -1733,6 +1754,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 日志分析检索接口v3
+   */
+  async DescribeCLSLogListV3(
+    req: DescribeCLSLogListV3Request,
+    cb?: (error: string, rep: DescribeCLSLogListV3Response) => void
+  ): Promise<DescribeCLSLogListV3Response> {
+    return this.request("DescribeCLSLogListV3", req, cb)
+  }
+
+  /**
    * 获取vpc列表
    */
   async DescribeVpcAssets(
@@ -2280,6 +2311,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDspmAssetAccountsResponse) => void
   ): Promise<DescribeDspmAssetAccountsResponse> {
     return this.request("DescribeDspmAssetAccounts", req, cb)
+  }
+
+  /**
+   * 获取日志索引信息
+   */
+  async DescribeCLSLogIndexV3(
+    req: DescribeCLSLogIndexV3Request,
+    cb?: (error: string, rep: DescribeCLSLogIndexV3Response) => void
+  ): Promise<DescribeCLSLogIndexV3Response> {
+    return this.request("DescribeCLSLogIndexV3", req, cb)
   }
 
   /**

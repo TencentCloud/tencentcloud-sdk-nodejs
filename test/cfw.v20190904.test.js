@@ -198,6 +198,16 @@ it("cfw.v20190904.DescribeNDRAssetIdentificationList", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeNDRAssetIdentificationCursorList", async function () {
+    try {
+       const data = await client.DescribeNDRAssetIdentificationCursorList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeUnHandleEventTabList", async function () {
     try {
        const data = await client.DescribeUnHandleEventTabList({})

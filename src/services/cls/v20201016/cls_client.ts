@@ -135,6 +135,7 @@ import {
   KeyValueInfo,
   DataTransformSqlDataSource,
   ModifyMachineGroupRequest,
+  JsonExpandInfo,
   AnonymousInfo,
   DescribeHostMetricConfigsResponse,
   CreateNoticeContentRequest,
