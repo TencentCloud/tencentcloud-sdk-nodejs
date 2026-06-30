@@ -241,6 +241,7 @@ import {
   DescribeRuleTemplateResponse,
   CreateDataModelResponse,
   PageTaskTemplateInfo,
+  TaskMissingInstanceStrategy,
   DescribeDependTaskListsRequest,
   DatabaseMeta,
   DescribeAllByFolderNewRequest,

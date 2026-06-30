@@ -524,9 +524,17 @@ export interface SendEmailRequest {
  */
 export interface UpdateEmailIdentityRequest {
   /**
-   * 请求验证的域名
+   * <p>请求验证的域名</p>
    */
   EmailIdentity: string
+  /**
+   * <p>匹分控制台新老API</p>
+   */
+  NewAPI?: boolean
+  /**
+   * <p>dkim位数</p><p>枚举值：</p><ul><li>0： 1024</li><li>1： 2048</li><li>2： 双签</li></ul>
+   */
+  DKIMOption?: number
 }
 
 /**
@@ -921,17 +929,21 @@ export interface ListReceiversRequest {
  */
 export interface GetEmailIdentityResponse {
   /**
-   * 验证类型。固定值：DOMAIN
+   * <p>验证类型。固定值：DOMAIN</p>
    */
   IdentityType?: string
   /**
-   * 是否已通过验证
+   * <p>是否已通过验证</p>
    */
   VerifiedForSendingStatus?: boolean
   /**
-   * DNS配置详情
+   * <p>DNS配置详情</p>
    */
   Attributes?: Array<DNSAttributes>
+  /**
+   * <p>dkim密钥长度</p><p>枚举值：</p><ul><li>0： 1024</li><li>1： 2048</li><li>2： both</li></ul>
+   */
+  DKIMOption?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1031,7 +1043,7 @@ export interface ListEmailTemplatesResponse {
  */
 export interface GetEmailIdentityRequest {
   /**
-   * 发信域名
+   * <p>发信域名</p>
    */
   EmailIdentity: string
 }
@@ -1095,15 +1107,15 @@ export interface AddressUnsubscribeConfigData {
  */
 export interface CreateEmailIdentityRequest {
   /**
-   * 您的发信域名，建议使用三级以上域名。例如：mail.qcloud.com。
+   * <p>您的发信域名，建议使用三级以上域名。例如：mail.qcloud.com。</p>
    */
   EmailIdentity: string
   /**
-   * 生成的dkim密钥长度。0:1024，1:2048
+   * <p>生成的dkim密钥长度。0:1024，1:2048</p>
    */
   DKIMOption?: number
   /**
-   * tag 标签
+   * <p>tag 标签</p>
    */
   TagList?: Array<TagList>
 }
@@ -1361,17 +1373,21 @@ export interface ListReceiverDetailsRequest {
  */
 export interface CreateEmailIdentityResponse {
   /**
-   * 验证类型。固定值：DOMAIN
+   * <p>验证类型。固定值：DOMAIN</p>
    */
   IdentityType?: string
   /**
-   * 是否已通过验证
+   * <p>是否已通过验证</p>
    */
   VerifiedForSendingStatus?: boolean
   /**
-   * 需要配置的DNS信息
+   * <p>需要配置的DNS信息</p>
    */
   Attributes?: Array<DNSAttributes>
+  /**
+   * <p>dkim位数</p><p>枚举值：</p><ul><li>0： 1024</li><li>1： 2048</li><li>2： 双签</li></ul>
+   */
+  DKIMOption?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1706,17 +1722,21 @@ export interface CreateAddressUnsubscribeConfigRequest {
  */
 export interface UpdateEmailIdentityResponse {
   /**
-   * 验证类型。固定值：DOMAIN
+   * <p>验证类型。固定值：DOMAIN</p>
    */
   IdentityType?: string
   /**
-   * 是否已通过验证
+   * <p>是否已通过验证</p>
    */
   VerifiedForSendingStatus?: boolean
   /**
-   * 需要配置的DNS信息
+   * <p>需要配置的DNS信息</p>
    */
   Attributes?: Array<DNSAttributes>
+  /**
+   * <p>dkim位数</p><p>枚举值：</p><ul><li>0： 1024</li><li>1： 2048</li><li>2： 双签</li></ul>
+   */
+  DKIMOption?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1792,33 +1812,37 @@ export interface DeleteEmailAddressRequest {
  */
 export interface EmailIdentity {
   /**
-   * 发信域名
+   * <p>发信域名</p>
    */
   IdentityName?: string
   /**
-   * 验证类型，固定为DOMAIN
+   * <p>验证类型，固定为DOMAIN</p>
    */
   IdentityType?: string
   /**
-   * 是否已通过验证
+   * <p>是否已通过验证</p>
    */
   SendingEnabled?: boolean
   /**
-   * 当前信誉等级
+   * <p>当前信誉等级</p>
    */
   CurrentReputationLevel?: number
   /**
-   * 当日最高发信量
+   * <p>当日最高发信量</p>
    */
   DailyQuota?: number
   /**
-   * 域名配置的独立ip
+   * <p>域名配置的独立ip</p>
    */
   SendIp?: Array<string>
   /**
-   * tag 标签
+   * <p>tag 标签</p>
    */
   TagList?: Array<TagList>
+  /**
+   * <p>dkim位数</p><p>枚举值：</p><ul><li>0： 1024</li><li>1： 2048</li><li>2： 双签</li></ul><p>默认值：0</p>
+   */
+  DKIMOption?: number
 }
 
 /**

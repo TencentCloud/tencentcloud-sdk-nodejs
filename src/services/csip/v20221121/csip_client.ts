@@ -111,6 +111,7 @@ import {
   DescribeUserDspmInfoListRequest,
   DescribeCosAlarmListRequest,
   DescribeSkillScanPayInfoResponse,
+  PublicIpDomainListKey,
   DescribeDspmApproveHistoryResponse,
   DescribeCosAccessPermissionsResponse,
   DescribeConfigCheckRulesResponse,
@@ -201,6 +202,7 @@ import {
   CreateIaCAccessTokenRequest,
   DescribeDspmExportTaskResponse,
   DescribeRepositoryImageAssetsResponse,
+  ModifyNotifySettingResponse,
   CreateDspmApproveHistoryExportJobResponse,
   CosPermissionInfo,
   DescribeDspmDictionaryListResponse,
@@ -224,10 +226,12 @@ import {
   DescribeDspmBackupSettingResponse,
   CreateSkillScanResponse,
   DescribeCosAkAssetResponse,
+  ModifyNotifySettingRequest,
   DescribeDspmPayInfoRequest,
   TableField,
   DescribeIaCFileReportRequest,
   ModifyDspmAssetAccountPrivilegesResponse,
+  ModifyNotifyAssetConfigRequest,
   ModifyDspmWhitelistStrategyRequest,
   CICDToken,
   DescribeSkillScanResultRequest,
@@ -251,7 +255,7 @@ import {
   DescribeCosIpInvokeRecordFileResponse,
   DescribeCosAccessPermissionResponse,
   DescribeAccessKeyRiskRequest,
-  PublicIpDomainListKey,
+  DescribeNotifySettingAlertRequest,
   DescribeDspmLogListRequest,
   AssetInstanceTypeMap,
   DspmDbAccountPrivilege,
@@ -321,7 +325,7 @@ import {
   DescribeTaskLogURLResponse,
   CosAssetFileIdentifyInfo,
   Machine,
-  UserCallRecord,
+  NotifySetting,
   DescribeCosAuditDictionaryListResponse,
   UebaRule,
   DspmTablePrivilege,
@@ -350,6 +354,7 @@ import {
   DescribeScanStatisticRequest,
   Filter,
   CosAssetDataScanDetail,
+  ModifyNotifySettingAlertRequest,
   AssetCluster,
   DspmRiskStrategyGroup,
   ExportTask,
@@ -394,6 +399,7 @@ import {
   TaskCenterWeakPwdRiskInputParam,
   DeleteCosAkAssetRequest,
   DescribeDomainAssetsRequest,
+  DescribeNotifyAssetConfigResponse,
   DescribeNICAssetsRequest,
   DescribeIaCFileReportResponse,
   DescribeDspmAssetFieldListResponse,
@@ -460,6 +466,7 @@ import {
   DeleteDspmRestoreLogListResponse,
   CosBucketId,
   AccessCredentialOutput,
+  DescribeNotifySettingResponse,
   CreateDspmExportTaskResponse,
   LogValueInfo,
   VULRiskAdvanceCFGList,
@@ -518,6 +525,7 @@ import {
   DescribeDspmSyncUsersStatusRequest,
   DomainAssetVO,
   DescribeAccessKeyUserDetailResponse,
+  NotifyAssetConfigItem,
   CosAlarmTrendInfo,
   CredentialEffectScope,
   RevertDspmAssetAccountResponse,
@@ -526,6 +534,7 @@ import {
   DeleteDspmBackupLogListRequest,
   DescribeDspmRiskTendencyResponse,
   HighBaseLineRiskItem,
+  DescribeNotifySettingAlertResponse,
   CreateCosAssetSyncTaskRequest,
   DescribeCVMAssetsRequest,
   DescribeRiskCenterServerRiskListRequest,
@@ -533,6 +542,7 @@ import {
   DescribeOtherCloudAssetsRequest,
   DescribeDspmAssetSecurityAnalyseStatusResponse,
   CosAlarmRiskIdInfo,
+  ModifyNotifyAssetConfigResponse,
   DescribeDspmBackupLogListResponse,
   ModifyDspmIdentifyInfoRequest,
   DescribeDspmWhitelistStrategyRequest,
@@ -585,6 +595,7 @@ import {
   AssetRiskItem,
   DescribeRiskDetailListRequest,
   DspmAccessRecordId,
+  DescribeNotifySettingRequest,
   RoleInfo,
   RegionConfig,
   SyncDspmAssetsRequest,
@@ -655,6 +666,7 @@ import {
   DspmWhitelistStrategy,
   DescribeVulViewVulRiskListResponse,
   DescribeDspmRiskRequest,
+  DescribeNotifyAssetConfigRequest,
   DeleteDspmExportTaskRequest,
   AIAgentAsset,
   DspmSecurityAnalyseStatusCount,
@@ -664,6 +676,7 @@ import {
   DescribeDspmExportTaskRequest,
   DescribeDspmApplyOrderListRequest,
   DescribeCosBucketRiskRequest,
+  UserCallRecord,
   CallRecord,
   DescribeRiskCenterPortViewPortRiskListResponse,
   DescribeDspmRiskStrategyRequest,
@@ -671,6 +684,7 @@ import {
   DescribeDspmAssetsResponse,
   DescribeDspmAccessTopologyAccountsRequest,
   DescribeDspmPersonalIdentifyListRequest,
+  ModifyNotifySettingAlertResponse,
   CosSourceIpInfo,
   ModifyOrganizationAccountStatusResponse,
   DescribeRiskDetailListResponse,
@@ -1084,6 +1098,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改告警中心通知高级配置
+   */
+  async ModifyNotifySettingAlert(
+    req: ModifyNotifySettingAlertRequest,
+    cb?: (error: string, rep: ModifyNotifySettingAlertResponse) => void
+  ): Promise<ModifyNotifySettingAlertResponse> {
+    return this.request("ModifyNotifySettingAlert", req, cb)
+  }
+
+  /**
    * 查询cos文件数据识别结果列表
    */
   async DescribeCosIdentifyFileList(
@@ -1164,6 +1188,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取通知资产范围配置
+   */
+  async DescribeNotifyAssetConfig(
+    req: DescribeNotifyAssetConfigRequest,
+    cb?: (error: string, rep: DescribeNotifyAssetConfigResponse) => void
+  ): Promise<DescribeNotifyAssetConfigResponse> {
+    return this.request("DescribeNotifyAssetConfig", req, cb)
+  }
+
+  /**
    * 修改Dspm资产账号信息
    */
   async ModifyDspmAssetAccount(
@@ -1181,6 +1215,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyUebaRuleSwitchResponse) => void
   ): Promise<ModifyUebaRuleSwitchResponse> {
     return this.request("ModifyUebaRuleSwitch", req, cb)
+  }
+
+  /**
+   * 修改通知设置
+   */
+  async ModifyNotifySetting(
+    req: ModifyNotifySettingRequest,
+    cb?: (error: string, rep: ModifyNotifySettingResponse) => void
+  ): Promise<ModifyNotifySettingResponse> {
+    return this.request("ModifyNotifySetting", req, cb)
   }
 
   /**
@@ -1884,6 +1928,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改通知资产范围配置
+   */
+  async ModifyNotifyAssetConfig(
+    req: ModifyNotifyAssetConfigRequest,
+    cb?: (error: string, rep: ModifyNotifyAssetConfigResponse) => void
+  ): Promise<ModifyNotifyAssetConfigResponse> {
+    return this.request("ModifyNotifyAssetConfig", req, cb)
+  }
+
+  /**
    * 验证Dspm资产登录验证码
    */
   async VerifyDspmAssetLoginCode(
@@ -2321,6 +2375,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCLSLogIndexV3Response) => void
   ): Promise<DescribeCLSLogIndexV3Response> {
     return this.request("DescribeCLSLogIndexV3", req, cb)
+  }
+
+  /**
+   * 获取通知设置
+   */
+  async DescribeNotifySetting(
+    req?: DescribeNotifySettingRequest,
+    cb?: (error: string, rep: DescribeNotifySettingResponse) => void
+  ): Promise<DescribeNotifySettingResponse> {
+    return this.request("DescribeNotifySetting", req, cb)
   }
 
   /**
@@ -2791,6 +2855,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDspmIpInfoResponse) => void
   ): Promise<ModifyDspmIpInfoResponse> {
     return this.request("ModifyDspmIpInfo", req, cb)
+  }
+
+  /**
+   * 获取告警中心通知高级配置
+   */
+  async DescribeNotifySettingAlert(
+    req?: DescribeNotifySettingAlertRequest,
+    cb?: (error: string, rep: DescribeNotifySettingAlertResponse) => void
+  ): Promise<DescribeNotifySettingAlertResponse> {
+    return this.request("DescribeNotifySettingAlert", req, cb)
   }
 
   /**

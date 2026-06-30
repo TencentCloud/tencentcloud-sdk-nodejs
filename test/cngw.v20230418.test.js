@@ -128,6 +128,16 @@ it("cngw.v20230418.ModifyCloudNativeAPIGatewayMCPToolStatus", async function () 
     }
 })
 
+it("cngw.v20230418.UnbindCloudNativeAPIGatewaySecretKey", async function () {
+    try {
+       const data = await client.UnbindCloudNativeAPIGatewaySecretKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cngw.v20230418.ModifyCloudNativeAPIGatewayLLMModelService", async function () {
     try {
        const data = await client.ModifyCloudNativeAPIGatewayLLMModelService({})
@@ -141,6 +151,16 @@ it("cngw.v20230418.ModifyCloudNativeAPIGatewayLLMModelService", async function (
 it("cngw.v20230418.DescribeCloudNativeAPIGatewayConsumerGroup", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayConsumerGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.RemoveCloudNativeAPIGatewayConsumerInGroup", async function () {
+    try {
+       const data = await client.RemoveCloudNativeAPIGatewayConsumerInGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -191,6 +211,16 @@ it("cngw.v20230418.DescribeCloudNativeAPIGatewayMCPServer", async function () {
 it("cngw.v20230418.DescribeCloudNativeAPIGatewayLLMModelAPIs", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayLLMModelAPIs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.AddCloudNativeAPIGatewayConsumerInGroup", async function () {
+    try {
+       const data = await client.AddCloudNativeAPIGatewayConsumerInGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -431,6 +461,16 @@ it("cngw.v20230418.DescribeCloudNativeAPIGatewaySecretKey", async function () {
 it("cngw.v20230418.AddCloudNativeAPIGatewayConsumerGroupAuth", async function () {
     try {
        const data = await client.AddCloudNativeAPIGatewayConsumerGroupAuth({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.BindCloudNativeAPIGatewaySecretKey", async function () {
+    try {
+       const data = await client.BindCloudNativeAPIGatewaySecretKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

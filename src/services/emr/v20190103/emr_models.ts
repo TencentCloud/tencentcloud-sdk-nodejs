@@ -853,6 +853,10 @@ export interface InstallSoftwareRequest {
    * <p>额外容器相关配置</p>
    */
   ContainerExtraConf?: ContainerExtraConf
+  /**
+   * <p>是否强制检查自定义组件的合理性，目前仅提供给tf侧使用</p>
+   */
+  CheckServiceDeployInfo?: boolean
 }
 
 /**

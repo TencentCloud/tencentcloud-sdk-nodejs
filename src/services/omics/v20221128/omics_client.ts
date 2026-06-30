@@ -24,7 +24,7 @@ import {
   RebootHPCNodesRequest,
   CreateVolumeRequest,
   LimitRange,
-  DescribeTablesResponse,
+  GetRunJobLogResponse,
   RetryRunsRequest,
   HPCDisk,
   ClusterOption,
@@ -35,6 +35,7 @@ import {
   RunGroup,
   Project,
   DescribeApplicationVersionsRequest,
+  GetRunJobLogRequest,
   InputTemplate,
   ImportCommonApplicationResponse,
   GetRunStatusRequest,
@@ -76,6 +77,7 @@ import {
   TableColumn,
   DescribeHPCNodesRequest,
   DescribeEnvironmentsResponse,
+  DescribeTablesResponse,
   RunApplicationResponse,
   DescribeInputTemplatesResponse,
   DescribeHPCClustersResponse,
@@ -226,6 +228,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RunApplicationResponse) => void
   ): Promise<RunApplicationResponse> {
     return this.request("RunApplication", req, cb)
+  }
+
+  /**
+   * 获取任务详情文件。
+   */
+  async GetRunJobLog(
+    req: GetRunJobLogRequest,
+    cb?: (error: string, rep: GetRunJobLogResponse) => void
+  ): Promise<GetRunJobLogResponse> {
+    return this.request("GetRunJobLog", req, cb)
   }
 
   /**

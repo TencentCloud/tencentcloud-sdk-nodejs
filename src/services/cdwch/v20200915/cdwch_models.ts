@@ -90,15 +90,15 @@ export interface EventTask {
  */
 export interface CreateInstanceNewResponse {
   /**
-   * 流程ID
+   * <p>流程ID</p>
    */
   FlowId?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 错误信息
+   * <p>错误信息</p>
    */
   ErrorMsg?: string
   /**
@@ -697,75 +697,78 @@ export interface DatabasePrivilegeInfo {
  */
 export interface CreateInstanceNewRequest {
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone: string
   /**
-   * 是否高可用
+   * <p>是否高可用</p>
    */
   HaFlag: boolean
   /**
-   * 私有网络
+   * <p>私有网络</p>
    */
   UserVPCId: string
   /**
-   * 子网
+   * <p>子网</p>
    */
   UserSubnetId: string
   /**
-   * 系统版本
+   * <p>系统版本</p>
    */
   ProductVersion: string
   /**
-   * 计费方式
+   * <p>计费方式</p>
    */
   ChargeProperties: Charge
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName: string
   /**
-   * 数据节点
-SpecName从DescribeSpec接口中返回的DataSpec.Name获取
+   * <p>数据节点<br>SpecName从DescribeSpec接口中返回的DataSpec.Name获取</p>
    */
   DataSpec: NodeSpec
   /**
-   * 标签列表（废弃）
+   * <p>标签列表（废弃）</p>
    * @deprecated
    */
   Tags?: Tag
   /**
-   * 日志主题ID
+   * <p>日志主题ID</p>
    */
   ClsLogSetId?: string
   /**
-   * COS桶名称
+   * <p>COS桶名称</p>
    */
   CosBucketName?: string
   /**
-   * 是否是裸盘挂载，默认值 0 为 未挂载，1 为挂载。
+   * <p>是否是裸盘挂载，默认值 0 为 未挂载，1 为挂载。</p>
    */
   MountDiskType?: number
   /**
-   * 是否是ZK高可用
+   * <p>是否是ZK高可用</p>
    */
   HAZk?: boolean
   /**
-   * ZK节点SpecName从DescribeSpec接口中返回的CommonSpec结构体的Name（ZK节点）获取
+   * <p>ZK节点SpecName从DescribeSpec接口中返回的CommonSpec结构体的Name（ZK节点）获取</p>
    */
   CommonSpec?: NodeSpec
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   TagItems?: Array<Tag>
   /**
-   * 副可用区信息
+   * <p>副可用区信息</p>
    */
   SecondaryZoneInfo?: Array<SecondaryZoneInfo>
   /**
-   * default账号登陆实例的密码。8-16个字符，至少包含大写字母、小写字母、数字和特殊字符!@#%^*中的三种，第一个字符不能为特殊字符
+   * <p>default账号登录实例的密码。8-16个字符，至少包含大写字母、小写字母、数字和特殊字符!@#%^*中的三种，第一个字符不能为特殊字符</p>
    */
   CkDefaultUserPwd?: string
+  /**
+   * <p>集群类型</p>
+   */
+  ClusterType?: string
 }
 
 /**
@@ -1910,7 +1913,6 @@ export interface DescribeCkSqlApisResponse {
 
 /**
  * 集群计费相关信息
-
  */
 export interface Charge {
   /**
@@ -1918,11 +1920,11 @@ export interface Charge {
    */
   ChargeType: string
   /**
-   * PREPAID需要传递，是否自动续费，1表示自动续费开启
+   * ChargeType为PREPAID时，必传，表示是否自动续费，1表示自动续费开启
    */
   RenewFlag?: number
   /**
-   * 预付费需要传递，计费时间长度，多少个月
+   * ChargeType为PREPAID时，必传，表示计费时间长度，多少个月
    */
   TimeSpan?: number
 }

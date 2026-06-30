@@ -95,19 +95,19 @@ export interface LogFilters {
  */
 export interface CreateEventBusRequest {
   /**
-   * 事件集名称，只能包含字母、中文、数字、下划线、连字符，以字母/中文开头，以数字、字母或中文结尾，2~60个字符
+   * <p>事件集名称，只能包含字母、中文、数字、下划线、连字符，以字母/中文开头，以数字、字母或中文结尾，2~60个字符</p>
    */
   EventBusName: string
   /**
-   * 事件集描述，只能包含数字、中英文及常用标点符号，不超过200个字符
+   * <p>事件集描述，只能包含数字、中英文及常用标点符号，不超过200个字符</p>
    */
   Description?: string
   /**
-   * EB存储时长
+   * <p>事件存储时长</p><p>单位：day</p>
    */
   SaveDays?: number
   /**
-   * EB是否开启存储
+   * <p>是否开启事件存储</p>
    */
   EnableStore?: boolean
 }
@@ -117,12 +117,12 @@ export interface CreateEventBusRequest {
  */
 export interface PlatformEventSummary {
   /**
-   * 平台事件名称
+   * <p>平台事件名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventName?: string
   /**
-   * 平台事件匹配规则
+   * <p>平台事件匹配规则</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventPattern?: string
@@ -165,22 +165,22 @@ export interface CreateTransformationRequest {
  */
 export interface SearchLogResponse {
   /**
-   * 事件总数
+   * <p>事件总数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
-   * 每页事件条数
+   * <p>每页事件条数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Limit?: number
   /**
-   * 页码
+   * <p>页码</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Page?: number
   /**
-   * 事件查询结果
+   * <p>事件查询结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Results?: Array<SearchLogResult>
@@ -256,42 +256,42 @@ es类型示例:
  */
 export interface SearchLogResult {
   /**
-   * 单条日志上报时间
+   * <p>单条日志上报时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Timestamp?: string
   /**
-   * 日志内容详情
+   * <p>日志内容详情</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Message?: string
   /**
-   * 事件来源
+   * <p>事件来源</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Source?: string
   /**
-   * 事件类型
+   * <p>事件类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
-   * 事件匹配规则
+   * <p>事件匹配规则</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleIds?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Subject?: string
   /**
-   * 地域
+   * <p>地域</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
-   * 事件状态
+   * <p>事件状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
@@ -350,7 +350,7 @@ export interface ListPlatformProductsResponse {
  */
 export interface GetEventBusRequest {
   /**
-   * 事件集ID
+   * <p>事件集ID</p>
    */
   EventBusId: string
 }
@@ -418,11 +418,11 @@ export interface Tag {
  */
 export interface GetRuleRequest {
   /**
-   * 事件集ID
+   * <p>事件集ID</p>
    */
   EventBusId: string
   /**
-   * 事件规则ID
+   * <p>事件规则ID</p>
    */
   RuleId: string
 }
@@ -473,11 +473,11 @@ export interface APIGWParams {
  */
 export interface PlatformProduct {
   /**
-   * 平台产品名称
+   * <p>平台产品名称</p>
    */
   ProductName?: string
   /**
-   * 平台产品类型
+   * <p>平台产品类型</p>
    */
   ProductType?: string
 }
@@ -583,27 +583,27 @@ export interface CreateConnectionResponse {
  */
 export interface ListTargetsRequest {
   /**
-   * 事件集ID
+   * <p>事件集ID</p>
    */
   EventBusId: string
   /**
-   * 事件规则ID
+   * <p>事件规则ID</p>
    */
   RuleId: string
   /**
-   * 根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间）
+   * <p>根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间）</p>
    */
   OrderBy?: string
   /**
-   * 返回数量，默认为20，最大值为100。
+   * <p>返回数量，默认为20，最大值为100。</p>
    */
   Limit?: number
   /**
-   * 分页偏移量，默认为0。
+   * <p>分页偏移量，默认为0。</p>
    */
   Offset?: number
   /**
-   * 以升序还是降序的方式返回结果，可选值 ASC（升序） 和 DESC（降序）
+   * <p>以升序还是降序的方式返回结果，可选值 ASC（升序） 和 DESC（降序）</p>
    */
   Order?: string
 }
@@ -658,11 +658,11 @@ export interface CheckTransformationResponse {
  */
 export interface ListTargetsResponse {
   /**
-   * 目标总数
+   * <p>目标总数</p>
    */
   TotalCount?: number
   /**
-   * 目标信息
+   * <p>目标信息</p>
    */
   Targets?: Array<Target>
   /**
@@ -716,37 +716,37 @@ export interface ConnectionDescription {
  */
 export interface Target {
   /**
-   * 目标类型
+   * <p>目标类型</p>
    */
   Type?: string
   /**
-   * 事件集ID
+   * <p>事件集ID</p>
    */
   EventBusId?: string
   /**
-   * 目标ID
+   * <p>目标ID</p>
    */
   TargetId?: string
   /**
-   * 目标描述
+   * <p>目标描述</p>
    */
   TargetDescription?: TargetDescription
   /**
-   * 事件规则ID
+   * <p>事件规则ID</p>
    */
   RuleId?: string
   /**
-   * 开启批量投递使能
+   * <p>开启批量投递使能</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableBatchDelivery?: boolean
   /**
-   * 批量投递最长等待时间
+   * <p>批量投递最长等待时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BatchTimeout?: number
   /**
-   * 批量投递最大事件条数
+   * <p>批量投递最大事件条数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BatchEventCount?: number
@@ -807,12 +807,12 @@ export interface CreateTransformationResponse {
  */
 export interface PlatformEventDetail {
   /**
-   * 事件名称
+   * <p>事件名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventName?: string
   /**
-   * 事件类型
+   * <p>事件类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventType?: string
@@ -1271,7 +1271,7 @@ export interface DeleteEventBusResponse {
  */
 export interface CreateEventBusResponse {
   /**
-   * 事件集ID
+   * <p>事件集ID</p>
    */
   EventBusId?: string
   /**
@@ -1321,7 +1321,7 @@ export interface UpdateTransformationRequest {
  */
 export interface GetPlatformEventTemplateRequest {
   /**
-   * 平台产品事件类型
+   * <p>平台产品事件类型</p>
    */
   EventType: string
 }
@@ -1375,12 +1375,12 @@ export interface UpdateEventBusResponse {
  */
 export interface TDMQParams {
   /**
-   * 集群类型
+   * <p>集群类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterType?: string
   /**
-   * 集群支撑网接入点
+   * <p>集群支撑网接入点</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterEndPoint?: string
@@ -1391,58 +1391,58 @@ export interface TDMQParams {
  */
 export interface GetEventBusResponse {
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   ModTime?: string
   /**
-   * 事件集描述
+   * <p>事件集描述</p>
    */
   Description?: string
   /**
-   * 日志主题ID
+   * <p>日志主题ID</p>
    */
   ClsTopicId?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   AddTime?: string
   /**
-   * 日志集ID
+   * <p>日志集ID</p>
    */
   ClsLogsetId?: string
   /**
-   * 事件集名称
+   * <p>事件集名称</p>
    */
   EventBusName?: string
   /**
-   * 事件集ID
+   * <p>事件集ID</p>
    */
   EventBusId?: string
   /**
-   * （已废弃）事件集类型
+   * <p>事件集类型</p><p>枚举值：</p><ul><li>Cloud： 云服务事件集</li><li>Platform： 平台事件集</li><li>Custom： 自定义事件集</li></ul>
    */
   Type?: string
   /**
-   * 计费模式
+   * <p>计费模式</p>
    */
   PayMode?: string
   /**
-   * EB日志存储时长
+   * <p>EB日志存储时长</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SaveDays?: number
   /**
-   * EB日志主题ID
+   * <p>EB日志主题ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogTopicId?: string
   /**
-   * 是否开启存储
+   * <p>是否开启存储</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableStore?: boolean
   /**
-   * 消息序列，是否有序
+   * <p>消息序列，是否有序</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LinkMode?: string
@@ -1467,31 +1467,31 @@ export interface DeleteRuleResponse {
  */
 export interface DescribeLogTagValueRequest {
   /**
-   * 起始时间
+   * <p>起始时间</p>
    */
   StartTime: number
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime: number
   /**
-   * 事件集ID
+   * <p>事件集ID</p>
    */
   EventBusId: string
   /**
-   * 聚合字段,取值范围如下：Source(事件源),RuleIds(命中规则),Subject(实例ID),Region(地域)
+   * <p>聚合字段,取值范围如下：Source(事件源),RuleIds(命中规则),Subject(实例ID),Region(地域)</p>
    */
   GroupField: string
   /**
-   * 页数
+   * <p>页数</p>
    */
   Page: number
   /**
-   * 每页数据大小
+   * <p>每页数据大小</p>
    */
   Limit: number
   /**
-   * 筛选条件
+   * <p>筛选条件</p>
    */
   Filter?: Array<LogFilter>
 }
@@ -1533,32 +1533,32 @@ export interface ListRulesResponse {
  */
 export interface ESTargetParams {
   /**
-   * 网络连接类型
+   * <p>网络连接类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NetMode: string
   /**
-   * 索引前缀
+   * <p>索引前缀</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexPrefix: string
   /**
-   * es日志轮换粒度
+   * <p>es日志轮换粒度</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RotationInterval: string
   /**
-   * DTS事件配置
+   * <p>DTS事件配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OutputMode: string
   /**
-   * DTS索引配置
+   * <p>DTS索引配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexSuffixMode: string
   /**
-   * es模版类型
+   * <p>es模版类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IndexTemplateType?: string
@@ -1569,39 +1569,39 @@ export interface ESTargetParams {
  */
 export interface GetRuleResponse {
   /**
-   * 事件集id
+   * <p>事件集id</p>
    */
   EventBusId?: string
   /**
-   * 事件规则id
+   * <p>事件规则id</p>
    */
   RuleId?: string
   /**
-   * 事件规则名称
+   * <p>事件规则名称</p>
    */
   RuleName?: string
   /**
-   * 事件规则状态
+   * <p>事件规则状态</p>
    */
   Status?: string
   /**
-   * 使能开关
+   * <p>使能开关</p>
    */
   Enable?: boolean
   /**
-   * 事件规则描述
+   * <p>事件规则描述</p>
    */
   Description?: string
   /**
-   * 事件模式
+   * <p>事件模式</p>
    */
   EventPattern?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   AddTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   ModTime?: string
   /**
@@ -1615,27 +1615,27 @@ export interface GetRuleResponse {
  */
 export interface UpdateEventBusRequest {
   /**
-   * 事件集ID
+   * <p>事件集ID</p>
    */
   EventBusId: string
   /**
-   * 事件集描述，不限字符类型，200字符描述以内
+   * <p>事件集描述，不限字符类型，200字符描述以内</p>
    */
   Description?: string
   /**
-   * 事件集名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符
+   * <p>事件集名称，只能包含字母、数字、下划线、连字符，以字母开头，以数字或字母结尾，2~60个字符</p>
    */
   EventBusName?: string
   /**
-   * EB日志存储时长
+   * <p>事件存储时长</p><p>单位：day</p>
    */
   SaveDays?: number
   /**
-   * EB日志主题ID
+   * <p>事件存储主题ID</p>
    */
   LogTopicId?: string
   /**
-   * 是否开启存储
+   * <p>是否开启存储</p>
    */
   EnableStore?: boolean
 }
@@ -1645,7 +1645,7 @@ export interface UpdateEventBusRequest {
  */
 export interface GetPlatformEventTemplateResponse {
   /**
-   * 平台产品事件模板
+   * <p>平台产品事件模板</p>
    */
   EventTemplate?: string
   /**
@@ -1737,35 +1737,35 @@ export interface TextParams {
  */
 export interface SearchLogRequest {
   /**
-   * 起始时间unix 毫秒时间戳
+   * <p>起始时间unix 毫秒时间戳</p>
    */
   StartTime: number
   /**
-   * 结束时间unix 毫秒时间戳
+   * <p>结束时间unix 毫秒时间戳</p>
    */
   EndTime: number
   /**
-   * 事件集ID
+   * <p>事件集ID</p>
    */
   EventBusId: string
   /**
-   * 页码
+   * <p>页码</p>
    */
   Page: number
   /**
-   * 每页数据大小
+   * <p>每页数据大小</p>
    */
   Limit: number
   /**
-   * 事件查询筛选条件；示例如下：[{"key":"host","operator":"eq","value":"106.53.106.243"},{"type":"AND","filters":[{"key":"region","operator":"like","value":"*guangzhou*"},{"key":"type","operator":"eq","value":"cvm:ErrorEvent:GuestReboot"}]},{"type":"OR","filters":[{"key":"field1","operator":"like","value":"*access*"},{"key":"field2","operator":"eq","value":"custorm"}]}]
+   * <p>事件查询筛选条件；示例如下：[{&quot;key&quot;:&quot;host&quot;,&quot;operator&quot;:&quot;eq&quot;,&quot;value&quot;:&quot;106.53.106.243&quot;},{&quot;type&quot;:&quot;AND&quot;,&quot;filters&quot;:[{&quot;key&quot;:&quot;region&quot;,&quot;operator&quot;:&quot;like&quot;,&quot;value&quot;:&quot;<em>guangzhou</em>&quot;},{&quot;key&quot;:&quot;type&quot;,&quot;operator&quot;:&quot;eq&quot;,&quot;value&quot;:&quot;cvm:ErrorEvent:GuestReboot&quot;}]},{&quot;type&quot;:&quot;OR&quot;,&quot;filters&quot;:[{&quot;key&quot;:&quot;field1&quot;,&quot;operator&quot;:&quot;like&quot;,&quot;value&quot;:&quot;<em>access</em>&quot;},{&quot;key&quot;:&quot;field2&quot;,&quot;operator&quot;:&quot;eq&quot;,&quot;value&quot;:&quot;custom&quot;}]}]</p>
    */
   Filter?: Array<LogFilter>
   /**
-   * 事件查询结果排序，["timestamp","subject"]
+   * <p>事件查询结果排序，[&quot;timestamp&quot;,&quot;subject&quot;]</p>
    */
   OrderFields?: Array<string>
   /**
-   * 排序方式，asc 从旧到新，desc 从新到旧
+   * <p>排序方式，asc 从旧到新，desc 从新到旧</p>
    */
   OrderBy?: string
 }
@@ -1917,7 +1917,7 @@ export interface DeleteTargetRequest {
  */
 export interface DescribeLogTagValueResponse {
   /**
-   * 事件查询维度值结果
+   * <p>事件查询维度值结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Results?: Array<string>

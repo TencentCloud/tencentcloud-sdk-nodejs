@@ -180,7 +180,7 @@ export interface DescribeDBCustomClusterDetailResponse {
    */
   Region?: string
   /**
-   * <p>DB Custom 集群状态</p><p>枚举值：</p><ul><li>Creating： 创建中</li><li>Running： 运行中</li><li>Destroying： 销毁中</li></ul>
+   * <p>DB Custom 集群状态</p><p>枚举值：</p><ul><li>Creating： 创建中</li><li>Running： 运行中</li><li>Destroying： 销毁中</li><li>Initializing： 初始化中</li></ul>
    */
   ClusterStatus?: string
   /**
@@ -1833,7 +1833,7 @@ export interface DBCustomNode {
    */
   Tags?: Array<Tag>
   /**
-   * <p>节点是否自动续费标记</p><p>枚举值：</p><ul><li>1： 自动续费</li><li>0： 不自动续费</li></ul>
+   * <p>节点是否自动续费标记</p><p>枚举值：</p><ul><li>1： 自动续费</li><li>2： 不自动续费</li></ul>
    */
   AutoRenew?: number
   /**

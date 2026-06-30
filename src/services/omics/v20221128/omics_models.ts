@@ -134,17 +134,13 @@ export interface LimitRange {
 }
 
 /**
- * DescribeTables返回参数结构体
+ * GetRunJobLog返回参数结构体
  */
-export interface DescribeTablesResponse {
+export interface GetRunJobLogResponse {
   /**
-   * 结果总数。
+   * <p>日志内容</p>
    */
-  TotalCount?: number
-  /**
-   * 表格列表。
-   */
-  Tables?: Array<Table>
+  Content?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -541,6 +537,32 @@ export interface DescribeApplicationVersionsRequest {
    * <p>翻页入参</p>
    */
   Limit?: number
+}
+
+/**
+ * GetRunJobLog请求参数结构体
+ */
+export interface GetRunJobLogRequest {
+  /**
+   * <p>任务Uuid。</p>
+   */
+  RunUuid: string
+  /**
+   * <p>子任务id</p>
+   */
+  JobId: string
+  /**
+   * <p>日志类型</p><p>枚举值：</p><ul><li>stdout： 标准输出</li><li>stderr： 标准错误</li></ul>
+   */
+  LogType: string
+  /**
+   * <p>项目ID。<br>（不填使用指定地域下的默认项目）</p>
+   */
+  ProjectId?: string
+  /**
+   * <p>子任务路径，无子任务可填空</p>
+   */
+  Path?: string
 }
 
 /**
@@ -1601,6 +1623,24 @@ export interface DescribeEnvironmentsResponse {
    * 环境详情列表。
    */
   Environments?: Array<Environment>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTables返回参数结构体
+ */
+export interface DescribeTablesResponse {
+  /**
+   * 结果总数。
+   */
+  TotalCount?: number
+  /**
+   * 表格列表。
+   */
+  Tables?: Array<Table>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

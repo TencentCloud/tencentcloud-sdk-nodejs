@@ -265,45 +265,49 @@ export interface DescribeReportTaskListRequest {
  */
 export interface DescribeStreamTaskLogListRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 任务ID
+   * <p>任务ID</p>
    */
   TaskId: string
   /**
-   * 作业ID
+   * <p>作业ID</p>
    */
   JobId: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime: number
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime: number
   /**
-   * container名字
+   * <p>container名字</p>
    */
   Container?: string
   /**
-   * 条数
+   * <p>条数</p>
    */
   Limit?: number
   /**
-   * 排序类型 desc asc
+   * <p>排序类型 desc asc</p>
    */
   OrderType?: string
   /**
-   * 作业运行的实例ID
+   * <p>作业运行的实例ID</p>
    */
   RunningOrderId?: number
   /**
-   * 关键字
+   * <p>关键字</p>
    */
   Keyword?: string
+  /**
+   * <p>任务类型，不传时按 <code>INTEGRATION</code> 处理 </p><p>枚举值：</p><ul><li>INTEGRATION： 集成任务</li><li>VALIDATE： 对账任务</li></ul>
+   */
+  JobType?: string
 }
 
 /**
@@ -2155,7 +2159,7 @@ export interface RuleGroupExecResult {
    */
   RuleGroupId?: number
   /**
-   * 执行触发类型（1：手动触发， 2：调度事中触发，3：周期调度触发）
+   * 触发类型：1-手动触发，2-调度事件触发，3-周期调度触发
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerType?: number
@@ -2215,7 +2219,7 @@ export interface RuleGroupExecResult {
    */
   ExecDetail?: string
   /**
-   * 实际执行引擎
+   * 执行引擎类型，可选值：MYSQL, HIVE, SPARK, LIVY, DLC, GBASE, CDW_PG, TCHouse-P, DORIS, TCHouse-D
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EngineType?: string
@@ -6102,7 +6106,7 @@ export interface ModifyRuleGroupSubscriptionRequest {
    */
   Receivers?: Array<SubscribeReceiver>
   /**
-   * 订阅类型
+   * 订阅方式：1-邮件，2-短信，3-微信，4-语音，5-企微，6-HTTP连接，7-飞书群，8-钉钉群
    */
   SubscribeType?: Array<number | bigint>
   /**
@@ -7173,7 +7177,7 @@ export interface RuleExecResultDetail {
    */
   TableOwnerUserId?: number
   /**
-   * 2.HIVE 3.DLC
+   * 数据源类型：2-HIVE(EMR-Hive)，3-DLC，5-TCHouse-P，6-ICEBERG(EMR-Iceberg)，7-DORIS，8-TCHouse-D，9-EMR-StarRocks，11-TCHouse-X
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceType?: number
@@ -8325,6 +8329,20 @@ export interface PageTaskTemplateInfo {
 }
 
 /**
+ * 单任务的缺失实例处理策略
+ */
+export interface TaskMissingInstanceStrategy {
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId?: string
+  /**
+   * <p>缺失实例处理策略</p>
+   */
+  MissingInstanceStrategy?: string
+}
+
+/**
  * DescribeDependTaskLists请求参数结构体
  */
 export interface DescribeDependTaskListsRequest {
@@ -9385,170 +9403,180 @@ export interface TaskExtOpsDto {
  */
 export interface RuleGroup {
   /**
-   * 规则组Id
+   * <p>规则组Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleGroupId?: number
   /**
-   * 数据源Id
+   * <p>数据源Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceId?: string
   /**
-   * 数据源名称
+   * <p>数据源名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceName?: string
   /**
-   * 数据源类型
+   * <p>数据源类型：2-HIVE(EMR-Hive)，3-DLC，5-TCHouse-P，6-ICEBERG(EMR-Iceberg)，7-DORIS，8-TCHouse-D，9-EMR-StarRocks，11-TCHouse-X</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceType?: number
   /**
-   * 监控类型 1.未配置, 2.关联生产调度, 3.离线周期检测
+   * <p>监控类型：1-未配置，2-关联生产调度，3-离线周期检测</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorType?: number
   /**
-   * 更新时间
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
-   * 关联数据表名称
+   * <p>关联数据表名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TableName?: string
   /**
-   * 关联数据表Id
+   * <p>关联数据表Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TableId?: string
   /**
-   * 关联数据表负责人
+   * <p>关联数据表负责人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TableOwnerName?: string
   /**
-   * 执行策略
+   * <p>执行策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecStrategy?: RuleGroupExecStrategy
   /**
-   * 执行策略
+   * <p>执行策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Subscription?: RuleGroupSubscribe
   /**
-   * 数据库id
+   * <p>数据库id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseId?: string
   /**
-   * 数据库名称
+   * <p>数据库名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseName?: string
   /**
-   * 模式名称
+   * <p>模式名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SchemaName?: string
   /**
-   * 是否有权限
+   * <p>是否有权限</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Permission?: boolean
   /**
-   * 已经配置的规则数量
+   * <p>已经配置的规则数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleCount?: number
   /**
-   * 监控状态
+   * <p>监控是否开启：0-关闭，1-开启</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorStatus?: boolean
   /**
-   * 表负责人UserId
+   * <p>表负责人UserId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TableOwnerUserId?: number
   /**
-   * 实例ID
+   * <p>实例ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 是否已配置执行策略
+   * <p>是否已配置执行策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StrategyConfig?: boolean
   /**
-   * 是否已配置执行策略
+   * <p>是否已配置执行策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubscribeConfig?: boolean
   /**
-   * 数据源环境：0或者未返回.未定义，1.生产 2.开发
+   * <p>数据源环境：0或者未返回.未定义，1.生产 2.开发</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DsEnvType?: number
   /**
-   * EMR集群部署方式：CVM/TKE
+   * <p>EMR集群部署方式：CVM/TKE</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterDeployType?: string
   /**
-   * 任务名称
+   * <p>任务名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 执行详情
+   * <p>执行详情</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecDetail?: string
   /**
-   * 事中关联任务数量
+   * <p>事中关联任务数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PipelineTaskCount?: number
   /**
-   * 有效规则数
+   * <p>有效规则数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableRuleCount?: number
   /**
-   * 任务描述
+   * <p>任务描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 监控创建人
+   * <p>监控创建人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateUserName?: string
   /**
-   * 任务类型
+   * <p>任务类型（同MonitorType）：1-未配置，2-关联生产调度，3-离线周期检测</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupType?: string
   /**
-   * 任务id
+   * <p>任务id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AspectTaskId?: string
   /**
-   * catalog名称
+   * <p>catalog名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CatalogName?: string
+  /**
+   * <p>负责人ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InChargeId?: string
+  /**
+   * <p>负责人名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InChargeName?: string
 }
 
 /**
@@ -9859,11 +9887,11 @@ export interface ModifyRuleRequest {
    */
   RuleTemplateId?: number
   /**
-   * 规则类型 1.系统模版, 2.自定义模版, 3.自定义SQL
+   * 规则类型：1-系统模版，2-自定义模版，3-自定义SQL
    */
   Type?: number
   /**
-   * 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性）
+   * 质量维度：1-准确性，2-唯一性，3-完整性，4-一致性，5-及时性，6-有效性
    */
   QualityDim?: number
   /**
@@ -9875,7 +9903,7 @@ export interface ModifyRuleRequest {
    */
   SourceObjectValue?: string
   /**
-   * 检测范围 1.全表   2.条件扫描
+   * 检测范围类型：1-全表，2-条件扫描
    */
   ConditionType?: number
   /**
@@ -9891,7 +9919,7 @@ export interface ModifyRuleRequest {
    */
   CompareRule?: CompareRule
   /**
-   * 报警触发级别 1.低, 2.中, 3.高
+   * 告警级别：1-低，2-中，3-高
    */
   AlarmLevel?: number
   /**
@@ -9923,7 +9951,7 @@ export interface ModifyRuleRequest {
    */
   TargetObjectValue?: string
   /**
-   * 该规则适配的执行引擎
+   * 执行引擎多选（位运算数组）：2-HIVE，4-SPARK，8-LIVY，16-DLC，64-TCHouse-P，128-DORIS，256-TCHouse-D，512-EMR-StarRocks，1024-TCHouse-X
    */
   SourceEngineTypes?: Array<number | bigint>
   /**
@@ -13403,7 +13431,7 @@ export interface ModifyRuleTemplateRequest {
    */
   TemplateId?: number
   /**
-   * 模板类型  1.系统模板   2.自定义模板
+   * 模版类型：1-系统模版，2-用户自定义模版
    */
   Type?: number
   /**
@@ -13411,11 +13439,11 @@ export interface ModifyRuleTemplateRequest {
    */
   Name?: string
   /**
-   * 质量检测维度 1.准确性 2.唯一性 3.完整性 4.一致性 5.及时性 6.有效性
+   * 质量维度：1-准确性，2-唯一性，3-完整性，4-一致性，5-及时性，6-有效性
    */
   QualityDim?: number
   /**
-   * 源端数据对象类型 1.常量  2.离线表级   2.离线字段级
+   * 源数据对象类型：1-常量，2-离线表级，3-离线字段级别
    */
   SourceObjectType?: number
   /**
@@ -13423,7 +13451,7 @@ export interface ModifyRuleTemplateRequest {
    */
   Description?: string
   /**
-   * 源端对应的引擎类型
+   * 执行引擎多选（位运算数组）：2-HIVE，4-SPARK，8-LIVY，16-DLC，64-TCHouse-P，128-DORIS，256-TCHouse-D，512-EMR-StarRocks，1024-TCHouse-X
    */
   SourceEngineTypes?: Array<number | bigint>
   /**
@@ -14666,37 +14694,41 @@ export interface TableQualityDetailPage {
  */
 export interface BatchCreateTaskVersionAsyncRequest {
   /**
-   * 任务信息
+   * <p>任务信息</p>
    */
   Tasks: Array<BatchCreateTaskVersionDTO>
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 是否自动运行
+   * <p>是否自动运行</p>
    */
   AutoRun?: boolean
   /**
-   * 告警方式:email-邮件;sms-短信;wecom-企业微信
+   * <p>告警方式:email-邮件;sms-短信;wecom-企业微信</p>
    */
   AlarmWays?: string
   /**
-   * 告警对象:1-项目管理员，2-任务责任人
+   * <p>告警对象:1-项目管理员，2-任务责任人</p>
    */
   AlarmRecipientTypes?: string
   /**
-   * 是否需要校验父任务已经提交到调度
+   * <p>是否需要校验父任务已经提交到调度</p>
    */
   NeedCheckParentSubmitted?: boolean
   /**
-   * 是否需要补录中间实例
+   * <p>是否需要补录中间实例</p>
    */
   EnableMakeUp?: boolean
   /**
-   * 指定审批人列表
+   * <p>指定审批人列表</p>
    */
   AssignApprovalList?: Array<string>
+  /**
+   * <p>任务缺失实例处理策略</p><p>MAKEUP:补录缺失的实例;FORCE_SUCCESS:将缺失的实例置成功;SKIP:不处理，忽略缺失的实例</p>
+   */
+  PerTaskMissingInstanceStrategy?: Array<TaskMissingInstanceStrategy>
 }
 
 /**
@@ -15771,196 +15803,209 @@ export interface ModifyWorkflowInfoRequest {
  */
 export interface MakePlanOpsDto {
   /**
-   * 补录计划ID
+   * <p>补录计划ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PlanId?: string
   /**
-   * 补录计划名称
+   * <p>补录计划名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MakeName?: string
   /**
-   * 项目ID
+   * <p>项目ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: string
   /**
-   * 补录是否检查父任务状态
+   * <p>补录是否检查父任务状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckParent?: boolean
   /**
-   * 是否使用任务原有自依赖配置
+   * <p>是否使用任务原有自依赖配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SameSelfDependType?: boolean
   /**
-   * 并行度，在SameSelfDependType为false时生效
+   * <p>并行度，在SameSelfDependType为false时生效</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParallelNum?: number
   /**
-   * 补录实例生成周期是否修改
+   * <p>补录实例生成周期是否修改</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SameCycle?: boolean
   /**
-   * 调度周期转换方式-原始周期类型
+   * <p>调度周期转换方式-原始周期类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceTaskCycle?: string
   /**
-   * 调度周期转换方式-目标周期类型
+   * <p>调度周期转换方式-目标周期类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetTaskCycle?: string
   /**
-   * 调度周期转换方式-目标周期类型指定时间
+   * <p>调度周期转换方式-目标周期类型指定时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetTaskAction?: number
   /**
-   * 补录实例自定义参数
+   * <p>补录实例自定义参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MapParamList?: Array<StrToStrMap>
   /**
-   * 补录扩展属性
+   * <p>补录扩展属性</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MakeExtList?: Array<StrToStrMap>
   /**
-   * 创建人ID
+   * <p>创建人ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatorId?: string
   /**
-   * 创建人
+   * <p>创建人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Creator?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 补录任务ID集合
+   * <p>补录任务ID集合</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskIdList?: Array<string>
   /**
-   * 补录计划日期范围
+   * <p>补录计划日期范围</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MakeDatetimeList?: Array<CreateMakeDatetimeInfo>
   /**
-   * 补录计划说明
+   * <p>补录计划说明</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
-   * 补录指定的调度资源组（ID）
+   * <p>补录指定的调度资源组（ID）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SchedulerResourceGroup?: string
   /**
-   * 补录指定的调度资源组名称
+   * <p>补录指定的调度资源组名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SchedulerResourceGroupName?: string
   /**
-   * 补录指定的集成资源组（ID）
+   * <p>补录指定的集成资源组（ID）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IntegrationResourceGroup?: string
   /**
-   * 补录指定的集成资源组名称
+   * <p>补录指定的集成资源组名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IntegrationResourceGroupName?: string
   /**
-   * 补录计划任务数量
+   * <p>补录计划任务数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskCount?: number
   /**
-   * 补录计划实例完成百分数
+   * <p>补录计划实例完成百分数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CompletePercent?: number
   /**
-   * 补录计划实例成功百分数
+   * <p>补录计划实例成功百分数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SuccessPercent?: number
   /**
-   * 补录检查父任务类型。取值范围：
-<li> NONE: 全部不检查 </li>
-<li> ALL: 检查全部上游父任务 </li>
-<li> MAKE_SCOPE: 只在（当前补录计划）选中任务中检查 </li>
+   * <p>补录检查父任务类型。取值范围：</p><li> NONE: 全部不检查 </li><li> ALL: 检查全部上游父任务 </li><li> MAKE_SCOPE: 只在（当前补录计划）选中任务中检查 </li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckParentType?: string
   /**
-   * 是否和原任务保持相同工作流自依赖属性
+   * <p>是否和原任务保持相同工作流自依赖属性</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SameSelfWorkflowDependType?: boolean
   /**
-   * 工作流自依赖类型
+   * <p>工作流自依赖类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SelfWorkflowDependency?: string
   /**
-   * 补录时间顺序
-NORMAL： 正常
-ORDER ： 按照实例时间顺序执行
-REVERSE： 实例数据时间逆序
+   * <p>补录时间顺序<br>NORMAL： 正常<br>ORDER ： 按照实例时间顺序执行<br>REVERSE： 实例数据时间逆序</p>
    */
   MakeDataTimeOrder?: string
   /**
-   * 补录时间范围的时区
+   * <p>补录时间范围的时区</p>
    */
   ScheduleTimeZone?: string
   /**
-   * 执行应用参数
+   * <p>执行应用参数</p>
    */
   AppParam?: string
   /**
-   * 补录计划时间范围的类型： 
-DATA_TIME：实例数据时间；SCHEDULE_TIME 计划调度时间
+   * <p>补录计划时间范围的类型：<br>DATA_TIME：实例数据时间；SCHEDULE_TIME 计划调度时间</p>
    */
   TimeType?: string
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime?: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime?: string
   /**
-   * 失败百分比
+   * <p>失败百分比</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FailurePercent?: number
   /**
-   * 补录计划的告警规则
+   * <p>补录计划的告警规则</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmRule?: MakePlanAlarmRule
   /**
-   * 运行类型
+   * <p>运行类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunType?: number
   /**
-   * 定时运行时间
+   * <p>定时运行时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunDateTime?: string
+  /**
+   * <p>定时补录计划 或者 指定时间段补录 执行时间点的时区</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunScheduleTimeZone?: string
+  /**
+   * <p>指定时间段补录开始时间</p><p>参数格式：00:00 - 23:59</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunScheduleRangeStartTime?: string
+  /**
+   * <p>指定时间段补录结束时间</p><p>参数格式：00:00 - 23:59</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunScheduleRangeEndTime?: string
+  /**
+   * <p>指定时间段补录生效日，星期一到星期日，1-7</p><p>枚举值：</p><ul><li>星期一： 1</li><li>星期二： 2</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RunScheduleRangeWeekDays?: Array<number | bigint>
 }
 
 /**
@@ -17783,7 +17828,7 @@ export interface CommitRuleGroupTaskRequest {
    */
   RuleGroupId?: number
   /**
-   * 触发类型 1.手动触发 2.调度事中触发 3.周期调度触发
+   * 触发类型：1-手动触发，2-调度事件触发，3-周期调度触发
    */
   TriggerType?: number
   /**
@@ -17799,7 +17844,7 @@ export interface CommitRuleGroupTaskRequest {
    */
   ProjectId?: string
   /**
-   * 该规则运行的执行引擎，不传时会请求该数据源下默认的执行引擎
+   * 执行引擎类型，可选值：MYSQL, HIVE, SPARK, LIVY, DLC, GBASE, CDW_PG, TCHouse-P, DORIS, TCHouse-D
    */
   EngineType?: string
 }
@@ -18709,12 +18754,12 @@ export interface CreateOpsMakePlanResponse {
  */
 export interface DescribeStreamTaskLogListResponse {
   /**
-   * 是否是全量
+   * <p>是否是全量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ListOver?: boolean
   /**
-   * 日志集合
+   * <p>日志集合</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogContentList?: Array<LogContentInfo>
@@ -20203,7 +20248,7 @@ export interface ModifyMonitorStatusRequest {
    */
   RuleGroupId?: number
   /**
-   * 监控开关状态
+   * 监控是否开启：0-关闭，1-开启
    */
   MonitorStatus?: boolean
 }
@@ -22307,11 +22352,11 @@ export interface CreateRuleRequest {
    */
   RuleTemplateId?: number
   /**
-   * 规则类型 1.系统模版, 2.自定义模版, 3.自定义SQL
+   * 规则类型：1-系统模版，2-自定义模版，3-自定义SQL
    */
   Type?: number
   /**
-   * 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性
+   * 质量维度：1-准确性，2-唯一性，3-完整性，4-一致性，5-及时性，6-有效性
    */
   QualityDim?: number
   /**
@@ -22323,7 +22368,7 @@ export interface CreateRuleRequest {
    */
   SourceObjectValue?: string
   /**
-   * 检测范围 1.全表   2.条件扫描
+   * 检测范围类型：1-全表，2-条件扫描
    */
   ConditionType?: number
   /**
@@ -22339,7 +22384,7 @@ export interface CreateRuleRequest {
    */
   CompareRule?: CompareRule
   /**
-   * 报警触发级别 1.低, 2.中, 3.高
+   * 告警级别：1-低，2-中，3-高
    */
   AlarmLevel?: number
   /**
@@ -22379,7 +22424,7 @@ export interface CreateRuleRequest {
    */
   TargetObjectValue?: string
   /**
-   * 该规则支持的执行引擎列表
+   * 执行引擎多选（位运算数组）：2-HIVE，4-SPARK，8-LIVY，16-DLC，64-TCHouse-P，128-DORIS，256-TCHouse-D，512-EMR-StarRocks，1024-TCHouse-X
    */
   SourceEngineTypes?: Array<number | bigint>
 }
@@ -22494,11 +22539,11 @@ export interface RuleTemplate {
    */
   Description?: string
   /**
-   * 模版类型（1：系统模版，2：自定义）
+   * 模版类型：1-系统模版，2-用户自定义模版
    */
   Type?: number
   /**
-   * 规则适用的源数据对象类型（1：常量，2：离线表级，3：离线字段级别）
+   * 源数据对象类型：1-常量，2-离线表级，3-离线字段级别
    */
   SourceObjectType?: number
   /**
@@ -22511,12 +22556,12 @@ export interface RuleTemplate {
    */
   SourceContent?: string
   /**
-   * 源数据适用类型
+   * 执行引擎多选（位运算数组）：2-HIVE，4-SPARK，8-LIVY，16-DLC，64-TCHouse-P，128-DORIS，256-TCHouse-D，512-EMR-StarRocks，1024-TCHouse-X
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceEngineTypes?: Array<number | bigint>
   /**
-   * 规则所属质量维度（1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性）
+   * 质量维度：1-准确性，2-唯一性，3-完整性，4-一致性，5-及时性，6-有效性
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityDim?: number
@@ -23072,7 +23117,7 @@ export interface ModifyExecStrategyRequest {
    */
   RuleGroupId?: number
   /**
-   * 监控类型 1.未配置, 2.关联生产调度, 3.离线周期检测
+   * 监控类型：1-未配置，2-关联生产调度，3-离线周期检测
    */
   MonitorType?: number
   /**
@@ -23104,12 +23149,7 @@ export interface ModifyExecStrategyRequest {
    */
   EndTime?: string
   /**
-   * 离线周期模式下,调度周期 
-MINUTE_CYCLE:I,
-HOUR_CYCLE:H,
-DAY_CYCLE:D,
-WEEK_CYCLE:W,
-MONTH_CYCLE:M
+   * 周期类型：MINUTE-分钟，HOUR-小时，DAY-天，WEEK-周，MONTH-月，YEAR-年
    */
   CycleType?: string
   /**
@@ -23137,11 +23177,11 @@ MONTH_CYCLE:M
    */
   TableId?: string
   /**
-   * 运行的执行引擎，不传时会请求该数据源下默认的执行引擎
+   * 执行引擎类型，可选值：MYSQL, HIVE, SPARK, LIVY, DLC, GBASE, CDW_PG, TCHouse-P, DORIS, TCHouse-D
    */
   ExecEngineType?: string
   /**
-   * 触发场景
+   * 触发类型数组：1-手动触发，2-调度事件触发，3-周期调度触发
    */
   TriggerTypes?: Array<string>
 }
@@ -25465,7 +25505,7 @@ export interface RuleGroupSubscribe {
    */
   Receivers?: Array<SubscribeReceiver>
   /**
-   * 订阅方式 1.邮件email  2.短信sms
+   * 订阅方式：1-邮件，2-短信，3-微信，4-语音，5-企微，6-HTTP连接，7-飞书群，8-钉钉群
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubscribeType?: Array<number | bigint>
@@ -26161,185 +26201,189 @@ export interface TableLineagePair {
  */
 export interface RuleExecResult {
   /**
-   * 规则执行ID
+   * <p>规则执行ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleExecId?: number
   /**
-   * 规则组执行ID
+   * <p>规则组执行ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleGroupExecId?: number
   /**
-   * 规则组ID
+   * <p>规则组ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleGroupId?: number
   /**
-   * 规则ID
+   * <p>规则ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleId?: number
   /**
-   * 规则名称
+   * <p>规则名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleName?: string
   /**
-   * 规则类型 1.系统模版, 2.自定义模版, 3.自定义SQL
+   * <p>规则类型 1.系统模版, 2.自定义模版, 3.自定义SQL</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleType?: number
   /**
-   * 源字段详细类型，int string
+   * <p>源字段详细类型，int string</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceObjectDataTypeName?: string
   /**
-   * 源字段名称
+   * <p>源字段名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceObjectValue?: string
   /**
-   * 条件扫描WHERE条件表达式
+   * <p>条件扫描WHERE条件表达式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConditionExpression?: string
   /**
-   * 检测结果（1:检测通过，2：触发规则，3：检测失败）
+   * <p>检测结果（1:检测通过，2：触发规则，3：检测失败）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecResultStatus?: number
   /**
-   * 触发结果，告警发送成功, 阻断任务成功
+   * <p>触发结果，告警发送成功, 阻断任务成功</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerResult?: string
   /**
-   * 对比结果
+   * <p>对比结果</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CompareResult?: CompareResult
   /**
-   * 模版名称
+   * <p>模版名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TemplateName?: string
   /**
-   * 质量维度
+   * <p>质量维度</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityDim?: number
   /**
-   * 目标表-库表名称
+   * <p>目标表-库表名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetDBTableName?: string
   /**
-   * 目标表-字段名称
+   * <p>目标表-字段名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetObjectValue?: string
   /**
-   * 目标表-字段类型
+   * <p>目标表-字段类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetObjectDataType?: string
   /**
-   * 自定义模版sql表达式参数
+   * <p>自定义模版sql表达式参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FieldConfig?: RuleFieldConfig
   /**
-   * 源字段与目标字段关联条件on表达式
+   * <p>源字段与目标字段关联条件on表达式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RelConditionExpr?: string
   /**
-   * 执行时间
+   * <p>执行时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
-   * 1/2/3:低/中/高
+   * <p>1/2/3:低/中/高</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmLevel?: number
   /**
-   * 触发条件
+   * <p>触发条件</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerCondition?: string
   /**
-   * 任务名称
+   * <p>任务名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleGroupName?: string
   /**
-   * 数据源ID
+   * <p>数据源ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceId?: string
   /**
-   * 数据源名称
+   * <p>数据源名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceName?: string
   /**
-   * 数据库名称
+   * <p>数据库名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseName?: string
   /**
-   * 模式名称
+   * <p>模式名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SchemaName?: string
   /**
-   * 表名称
+   * <p>表名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TableName?: string
   /**
-   * 判断是否屏蔽监控 0.屏蔽 1.不屏蔽
+   * <p>判断是否屏蔽监控 0.屏蔽 1.不屏蔽</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleGroupExist?: number
   /**
-   * 数据源类型
+   * <p>数据源类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceType?: number
   /**
-   * 数据表id
+   * <p>数据表id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleGroupTableId?: number
   /**
-   * 监控方式 1.未配置, 2.关联生产调度, 3.离线周期检测
+   * <p>监控方式 1.未配置, 2.关联生产调度, 3.离线周期检测</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorType?: number
   /**
-   * 执行结束时间
+   * <p>执行结束时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FinishTime?: string
   /**
-   * 任务类型
+   * <p>任务类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupType?: string
   /**
-   * 编排任务id
+   * <p>编排任务id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AspectTaskId?: string
   /**
-   * 目录
+   * <p>目录</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CatalogName?: string
+  /**
+   * <p>规则执行状态</p><p>枚举值：</p><ul><li>0： 初始状态</li><li>1： 运行中</li><li>2： 运行成功</li><li>3： 运行失败</li><li>4： 被杀死</li></ul>
+   */
+  RuleExecStatus?: number
 }
 
 /**
@@ -27550,12 +27594,12 @@ export interface CompareResultItem {
    */
   Operator: string
   /**
-   * 比较类型
+   * 比较类型：1-固定值, 2-波动值, 3-数值范围比较, 4-枚举范围比较, 5-不用比较, 6-字段数据相关性, 7-公平性
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CompareType: number
   /**
-   * 值比较类型
+   * 值比较类型：1-绝对值, 2-上升, 3-下降, 4-范围内, 5-范围外, 6-公平率, 7-公平差
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ValueComputeType: number
@@ -28859,7 +28903,7 @@ export interface DescribeRulesRequest {
    */
   RuleGroupId?: number
   /**
-   * 该规则运行的执行引擎，不传时会请求该数据源下默认的执行引擎
+   * 执行引擎类型，可选值：MYSQL, HIVE, SPARK, LIVY, DLC, GBASE, CDW_PG, TCHouse-P, DORIS, TCHouse-D
    */
   EngineType?: string
 }
@@ -28945,145 +28989,150 @@ export interface AiopsSimpleTaskDto {
  */
 export interface RuleGroupExecStrategy {
   /**
-   * 规则组Id
+   * <p>规则组Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleGroupId?: number
   /**
-   * 监控类型 1.未配置, 2.关联生产调度, 3.离线周期检测
+   * 监控类型：1-未配置，2-关联生产调度，3-离线周期检测
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorType?: number
   /**
-   * 计算队列
+   * <p>计算队列</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecQueue?: string
   /**
-   * 执行资源组ID
+   * <p>执行资源组ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorGroupId?: string
   /**
-   * 执行资源组名称
+   * <p>执行资源组名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorGroupName?: string
   /**
-   * 关联的生产调度任务列表
+   * <p>关联的生产调度任务列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tasks?: Array<ProdSchedulerTask>
   /**
-   * 周期开始时间
+   * <p>周期开始时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
-   * 周期结束时间
+   * <p>周期结束时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
-   * 调度周期类型
+   * 周期类型：MINUTE-分钟，HOUR-小时，DAY-天，WEEK-周，MONTH-月，YEAR-年
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleType?: string
   /**
-   * 延迟调度时间
+   * <p>延迟调度时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DelayTime?: number
   /**
-   * 间隔
+   * <p>间隔</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleStep?: number
   /**
-   * 时间指定
+   * <p>时间指定</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskAction?: string
   /**
-   * 运行的执行引擎，不传时会请求该数据源下默认的执行引擎
+   * 执行引擎类型，可选值：MYSQL, HIVE, SPARK, LIVY, DLC, GBASE, CDW_PG, TCHouse-P, DORIS, TCHouse-D
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecEngineType?: string
   /**
-   * 执行计划
+   * <p>执行计划</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecPlan?: string
   /**
-   * 规则id
+   * <p>规则id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleId?: number
   /**
-   * 规则名称
+   * <p>规则名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleName?: string
   /**
-   * 触发类型
+   * 触发类型数组：1-手动触发，2-调度事件触发，3-周期调度触发
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerTypes?: Array<string>
   /**
-   * DLC资源组
+   * <p>DLC资源组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DlcGroupName?: string
   /**
-   * 任务名称
+   * <p>任务名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleGroupName?: string
   /**
-   * 数据库名称
+   * <p>数据库名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseName?: string
   /**
-   * schema名称
+   * <p>schema名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SchemaName?: string
   /**
-   * 表名称
+   * <p>表名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TableName?: string
   /**
-   * 数据源id
+   * <p>数据源id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceId?: string
   /**
-   * 任务描述
+   * <p>任务描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 时区
+   * <p>时区</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleTimeZone?: string
   /**
-   * 任务监控参数
+   * <p>任务监控参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupConfig?: RuleGroupConfig
   /**
-   * 引擎参数
+   * <p>引擎参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EngineParam?: string
   /**
-   * catalog名称
+   * <p>catalog名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CatalogName?: string
+  /**
+   * <p>执行失败是否阻塞下游</p><p>枚举值：</p><ul><li>0： 失败不阻塞（默认）</li><li>1： 失败阻塞</li></ul><p>默认值：0</p><p>仅作用于“关联生产调度”类型的质量监控</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecFailBlock?: number
 }
 
 /**
@@ -31438,87 +31487,92 @@ export interface DescribeExecStrategyRequest {
  */
 export interface DescribeDataServicePublishedApiDetailResp {
   /**
-   * 服务Api名称
+   * <p>服务Api名称</p>
    */
   ApiName?: string
   /**
-   * 服务请求Path
+   * <p>服务请求Path</p>
    */
   PathUrl?: string
   /**
-   * 服务责任人名称
+   * <p>服务责任人名称</p>
    */
   OwnerName?: string
   /**
-   * 服务请求方式
+   * <p>服务请求方式</p>
    */
   RequestType?: string
   /**
-   * 服务标签名称集合
+   * <p>服务标签名称集合</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiTagNames?: string
   /**
-   * 服务描述
+   * <p>服务描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiDescription?: string
   /**
-   * 服务请求返回示例
+   * <p>服务请求返回示例</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RequestExample?: string
   /**
-   * 服务请求成功返回示例
+   * <p>服务请求成功返回示例</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RequestSuccess?: string
   /**
-   * 服务请求失败返回示例
+   * <p>服务请求失败返回示例</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RequestError?: string
   /**
-   * 服务请求参数列表
+   * <p>服务请求参数列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RequestParam?: Array<DataServiceRequestParam>
   /**
-   * 服务响应参数列表
+   * <p>服务响应参数列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResponseParam?: Array<DataServiceResponseParam>
   /**
-   * 最大qps
+   * <p>最大qps</p>
    */
   MaxAllowQps?: number
   /**
-   * 最大记录数
+   * <p>最大记录数</p>
    */
   MaxAllowPageSize?: number
   /**
-   * 超时时间，单位ms
+   * <p>超时时间，单位ms</p>
    */
   TimeoutPeriod?: number
   /**
-   * ApiId
+   * <p>ApiId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiId?: string
   /**
-   * 0:免认证 1:应用认证
+   * <p>认证方式</p><p>枚举值：</p><ul><li>0： 免认证</li><li>1： 应用认证</li><li>2： OAuth2.0认证</li></ul>
    */
   AuthType?: number
   /**
-   * 请求地址
+   * <p>请求地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GatewayApiUrl?: string
   /**
-   * 服务Api状态 1:已上线  3:已下线
+   * <p>服务Api状态 1:已上线  3:已下线</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApiStatus?: number
+  /**
+   * <p>是否开启分页</p><p>枚举值：</p><ul><li>0： 开启分页</li><li>1： 未开启</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnablePage?: number
 }
 
 /**
@@ -31903,7 +31957,7 @@ export interface Rule {
    */
   Name?: string
   /**
-   * 规则类型 1.系统模版, 2.自定义模版, 3.自定义SQL
+   * 规则类型：1-系统模版，2-自定义模版，3-自定义SQL
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: number
@@ -31918,12 +31972,12 @@ export interface Rule {
    */
   RuleTemplateContent?: string
   /**
-   * 规则所属质量维度 1：准确性，2：唯一性，3：完整性，4：一致性，5：及时性，6：有效性
+   * 质量维度：1-准确性，2-唯一性，3-完整性，4-一致性，5-及时性，6-有效性
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QualityDim?: number
   /**
-   * 规则适用的源数据对象类型（1：常量，2：离线表级，3：离线字段级别）
+   * 源数据对象类型：1-常量，2-离线表级，3-离线字段级别
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceObjectType?: number
@@ -31943,7 +31997,7 @@ export interface Rule {
    */
   SourceObjectValue?: string
   /**
-   * 检测范围 1.全表, 2.条件扫描
+   * 检测范围类型：1-全表，2-条件扫描
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConditionType?: number
@@ -31963,7 +32017,7 @@ export interface Rule {
    */
   CompareRule?: CompareRule
   /**
-   * 报警触发级别 1.低, 2.中, 3.高
+   * 告警级别：1-低，2-中，3-高
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmLevel?: number
@@ -32033,12 +32087,12 @@ export interface Rule {
    */
   SubQualityDim?: number
   /**
-   * 规则适用的目标数据对象类型（1：常量，2：离线表级，3：离线字段级别）
+   * 目标数据对象类型：1-常量，2-离线表级，3-离线字段级别
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetObjectType?: number
   /**
-   * 规则适用的目标数据对象类型（1：数值，2：字符串）
+   * 目标字段数据类型：1-数值，2-字符串
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetObjectDataType?: number
@@ -32053,7 +32107,7 @@ export interface Rule {
    */
   TargetObjectValue?: string
   /**
-   * 源端对应的引擎类型
+   * 执行引擎多选（位运算数组）：2-HIVE，4-SPARK，8-LIVY，16-DLC，64-TCHouse-P，128-DORIS，256-TCHouse-D，512-EMR-StarRocks，1024-TCHouse-X
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceEngineTypes?: Array<number | bigint>
@@ -32093,7 +32147,7 @@ export interface Rule {
    */
   DatabaseId?: string
   /**
-   * 监控是否开启.0false,1true
+   * 监控是否开启：0-关闭，1-开启
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorStatus?: number
@@ -32108,7 +32162,7 @@ export interface Rule {
    */
   DsEnvType?: number
   /**
-   * 数据源类型
+   * 数据源类型：2-HIVE(EMR-Hive)，3-DLC，5-TCHouse-P，6-ICEBERG(EMR-Iceberg)，7-DORIS，8-TCHouse-D，9-EMR-StarRocks，11-TCHouse-X
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceType?: number
@@ -32153,7 +32207,7 @@ export interface Rule {
    */
   FailMsg?: string
   /**
-   * 任务类型
+   * 任务类型（同MonitorType）：1-未配置，2-关联生产调度，3-离线周期检测
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupType?: string
@@ -32269,7 +32323,7 @@ export interface CommonId {
  */
 export interface CreateRuleTemplateRequest {
   /**
-   * 模板类型  1.系统模板   2.自定义模板
+   * 模版类型：1-系统模版，2-用户自定义模版
    */
   Type?: number
   /**
@@ -32277,11 +32331,11 @@ export interface CreateRuleTemplateRequest {
    */
   Name?: string
   /**
-   * 质量检测维度 1.准确性 2.唯一性 3.完整性 4.一致性 5.及时性 6.有效性
+   * 质量维度：1-准确性，2-唯一性，3-完整性，4-一致性，5-及时性，6-有效性
    */
   QualityDim?: number
   /**
-   * 源端数据对象类型 1.常量  2.离线表级   2.离线字段级
+   * 源数据对象类型：1-常量，2-离线表级，3-离线字段级别
    */
   SourceObjectType?: number
   /**
@@ -32289,7 +32343,7 @@ export interface CreateRuleTemplateRequest {
    */
   Description?: string
   /**
-   * 源端对应的引擎类型
+   * 执行引擎多选（位运算数组）：2-HIVE，4-SPARK，8-LIVY，16-DLC，64-TCHouse-P，128-DORIS，256-TCHouse-D，512-EMR-StarRocks，1024-TCHouse-X
    */
   SourceEngineTypes?: Array<number | bigint>
   /**
@@ -32554,7 +32608,7 @@ export interface TableBaseInfo {
  */
 export interface BatchCreateTaskVersionAsyncResponse {
   /**
-   * 批量操作返回
+   * <p>批量操作返回</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: BatchTaskOperateNew
@@ -33417,11 +33471,11 @@ export interface OpsTaskCanvasDto {
  */
 export interface DescribeRuleTemplatesRequest {
   /**
-   * 模板类型 1.系统模板 2.自定义模板
+   * 模版类型：1-系统模版，2-用户自定义模版
    */
   Type?: number
   /**
-   * 1.常量 2.离线表级 2.离线字段级
+   * 源数据对象类型：1-常量，2-离线表级，3-离线字段级别
    */
   SourceObjectType?: number
   /**
@@ -33429,7 +33483,7 @@ export interface DescribeRuleTemplatesRequest {
    */
   ProjectId?: string
   /**
-   * 源端对应的引擎类型
+   * 执行引擎多选（位运算数组）：2-HIVE，4-SPARK，8-LIVY，16-DLC，64-TCHouse-P，128-DORIS，256-TCHouse-D，512-EMR-StarRocks，1024-TCHouse-X
    */
   SourceEngineTypes?: Array<number | bigint>
 }

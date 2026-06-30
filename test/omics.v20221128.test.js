@@ -108,6 +108,16 @@ it("omics.v20221128.RunApplication", async function () {
     }
 })
 
+it("omics.v20221128.GetRunJobLog", async function () {
+    try {
+       const data = await client.GetRunJobLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("omics.v20221128.DeleteVolume", async function () {
     try {
        const data = await client.DeleteVolume({})

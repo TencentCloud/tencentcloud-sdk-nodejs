@@ -2152,7 +2152,7 @@ export interface CreateCloudTranscriptionResponse {
  */
 export interface DescribeTRTCMarketQualityDataResponse {
   /**
-   * TRTC监控数据出参
+   * <p>TRTC监控数据出参</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: TRTCDataResult
@@ -5131,25 +5131,23 @@ export interface MixUserInfo {
  */
 export interface DescribeTRTCMarketQualityDataRequest {
   /**
-   * 用户SdkAppId（如：1400xxxxxx）
+   * <p>用户SdkAppId（如：1400xxxxxx）</p>
    */
   SdkAppId: string
   /**
-   * 查询开始时间，格式为YYYY-MM-DD。（查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天）
+   * <p>查询开始时间，格式为YYYY-MM-DD。（查询时间范围根据监控仪表盘功能版本而定，【基础版】可查近30天，【进阶版】可查近60天）</p>
    */
   StartTime: string
   /**
-   * 查询结束时间，格式为YYYY-MM-DD。
+   * <p>查询结束时间，格式为YYYY-MM-DD。</p>
    */
   EndTime: string
   /**
-   * 返回数据的粒度，支持设为以下值：
-d：按天。此时返回查询时间范围内 UTC 时间为零点的数据。
-h：按小时。此时返回查询时间范围内 UTC 时间为整小时的数据。
+   * <p>返回数据的粒度，支持设为以下值：<br>d：按天。此时返回查询时间范围内 UTC 时间为零点的数据。<br>h：按小时。此时返回查询时间范围内 UTC 时间为整小时的数据。</p>
    */
   Period: string
   /**
-   * 返回数据是否为小数
+   * <p>返回数据是否为小数</p>
    */
   IsFloat?: boolean
 }

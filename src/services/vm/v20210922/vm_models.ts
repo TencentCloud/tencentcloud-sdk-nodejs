@@ -191,6 +191,10 @@ export interface StorageInfo {
    * <p>大模型审核场景下，base64编码的审核要求内容</p>
    */
   TextContent?: string
+  /**
+   * <p>文章标题</p>
+   */
+  Title?: string
 }
 
 /**
@@ -303,6 +307,80 @@ export interface CancelTaskRequest {
 }
 
 /**
+ * 视频解码参数
+ */
+export interface DecodeParams {
+  /**
+   * <p>视频截帧参数</p><p>取值范围：[0, 30]</p>
+   */
+  ImageFrequency?: number
+}
+
+/**
+ * 单个视频切片审核详情
+ */
+export interface VideoSegmentResult {
+  /**
+   * <p>违规标志 0 未命中 1 命中</p>
+   */
+  HitFlag?: number
+  /**
+   * <p>审核建议，可选值： Pass 通过， Review 建议人审， Block 确认违规</p>
+   */
+  Suggestion?: string
+  /**
+   * <p>Asr文本内容</p>
+   */
+  Text?: string
+  /**
+   * <p>审核结果</p>
+   */
+  Detail?: Array<VideoLLMDetail>
+  /**
+   * <p>视频切片存储URL</p>
+   */
+  VideoUrl?: string
+  /**
+   * <p>音频切片存储URL</p>
+   */
+  AudioUrl?: string
+  /**
+   * <p>切片时长</p>
+   */
+  Duration?: string
+  /**
+   * <p>切片请求ID</p>
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTasks请求参数结构体
+ */
+export interface DescribeTasksRequest {
+  /**
+   * 该参数表示任务列表每页展示的任务条数，**默认值为10，最大值为100**（每页展示10条任务）。
+   */
+  Limit?: number
+  /**
+   * 该参数表示任务筛选器的输入参数，可根据业务类型、审核文件类型、处理建议及任务状态筛选想要查看的审核任务，具体参数内容请参见TaskFilter数据结构的详细描述。
+   */
+  Filter?: TaskFilter
+  /**
+   * 该参数表示翻页时使用的Token信息，由系统自动生成，并在翻页时向下一个生成的页面传递此参数，以方便快速翻页功能的实现。当到最后一页时，该字段为空。
+   */
+  PageToken?: string
+  /**
+   * 该参数表示任务列表的开始时间，格式为ISO8601标准的时间戳。**默认值为最近3天**，若传入该参数，则在这一时间到EndTime之间的任务将会被筛选出来。<br>备注：该参数与Filter共同起到任务筛选作用，二者作用无先后顺序。
+   */
+  StartTime?: string
+  /**
+   * 该参数表示任务列表的结束时间，格式为ISO8601标准的时间戳。**默认值为空**，若传入该参数，则在这StartTime到这一时间之间的任务将会被筛选出来。<br>备注：该参数与Filter共同起到任务筛选作用，二者作用无先后顺序。
+   */
+  EndTime?: string
+}
+
+/**
  * DescribeTaskDetail返回参数结构体
  */
 export interface DescribeTaskDetailResponse {
@@ -401,85 +479,25 @@ export interface DescribeTaskDetailResponse {
 }
 
 /**
- * 单个视频切片审核详情
- */
-export interface VideoSegmentResult {
-  /**
-   * <p>违规标志 0 未命中 1 命中</p>
-   */
-  HitFlag?: number
-  /**
-   * <p>审核建议，可选值： Pass 通过， Review 建议人审， Block 确认违规</p>
-   */
-  Suggestion?: string
-  /**
-   * <p>Asr文本内容</p>
-   */
-  Text?: string
-  /**
-   * <p>审核结果</p>
-   */
-  Detail?: Array<VideoLLMDetail>
-  /**
-   * <p>视频切片存储URL</p>
-   */
-  VideoUrl?: string
-  /**
-   * <p>音频切片存储URL</p>
-   */
-  AudioUrl?: string
-  /**
-   * <p>切片时长</p>
-   */
-  Duration?: string
-  /**
-   * <p>切片请求ID</p>
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeTasks请求参数结构体
- */
-export interface DescribeTasksRequest {
-  /**
-   * 该参数表示任务列表每页展示的任务条数，**默认值为10，最大值为100**（每页展示10条任务）。
-   */
-  Limit?: number
-  /**
-   * 该参数表示任务筛选器的输入参数，可根据业务类型、审核文件类型、处理建议及任务状态筛选想要查看的审核任务，具体参数内容请参见TaskFilter数据结构的详细描述。
-   */
-  Filter?: TaskFilter
-  /**
-   * 该参数表示翻页时使用的Token信息，由系统自动生成，并在翻页时向下一个生成的页面传递此参数，以方便快速翻页功能的实现。当到最后一页时，该字段为空。
-   */
-  PageToken?: string
-  /**
-   * 该参数表示任务列表的开始时间，格式为ISO8601标准的时间戳。**默认值为最近3天**，若传入该参数，则在这一时间到EndTime之间的任务将会被筛选出来。<br>备注：该参数与Filter共同起到任务筛选作用，二者作用无先后顺序。
-   */
-  StartTime?: string
-  /**
-   * 该参数表示任务列表的结束时间，格式为ISO8601标准的时间戳。**默认值为空**，若传入该参数，则在这StartTime到这一时间之间的任务将会被筛选出来。<br>备注：该参数与Filter共同起到任务筛选作用，二者作用无先后顺序。
-   */
-  EndTime?: string
-}
-
-/**
  * 音视频任务结构
  */
 export interface TaskInput {
   /**
-   * 数据ID
+   * <p>数据ID</p>
    */
   DataId?: string
   /**
-   * 任务名
+   * <p>任务名</p>
    */
   Name?: string
   /**
-   * 任务输入
+   * <p>任务输入</p>
    */
   Input?: StorageInfo
+  /**
+   * <p>视频解码参数</p>
+   */
+  DecodeParams?: DecodeParams
 }
 
 /**
@@ -690,6 +708,10 @@ export interface InputInfo {
    * <p>大模型审核场景下，base64编码的审核要求内容</p>
    */
   TextContent?: string
+  /**
+   * <p>文章标题</p>
+   */
+  Title?: string
 }
 
 /**

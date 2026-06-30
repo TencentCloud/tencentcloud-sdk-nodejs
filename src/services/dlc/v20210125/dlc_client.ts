@@ -157,6 +157,7 @@ import {
   CreateStoreLocationResponse,
   BatchSQLCostInfo,
   DescribeTablesNameRequest,
+  DescribeTaskDetailRequest,
   WorkGroupInfo,
   SwitchDataEngineRequest,
   DLCCatalogAccess,
@@ -342,7 +343,7 @@ import {
   AddUsersToWorkGroupResponse,
   LaunchStandardEngineResourceGroupsResponse,
   UpdateNetworkConnectionResponse,
-  GenerateCreateMangedTableSqlResponse,
+  CreateSparkAppTaskResponse,
   DatasourceConnectionInfo,
   DescribeDataEngineImageVersionsRequest,
   BindWorkGroupsToUserResponse,
@@ -417,6 +418,7 @@ import {
   WorkGroupMessage,
   DescribeUserDataEngineConfigResponse,
   DescribeSparkAppJobRequest,
+  DescribeTaskDetailResponse,
   TCHouseD,
   CreateResultDownloadResponse,
   RestartDataEngineRequest,
@@ -453,7 +455,7 @@ import {
   KVPair,
   TableBaseInfo,
   UnlockMetaDataRequest,
-  CreateSparkAppTaskResponse,
+  GenerateCreateMangedTableSqlResponse,
   ListTaskJobLogDetailRequest,
   DescribeNativeSparkSessionsRequest,
   DescribeSessionImageVersionRequest,
@@ -764,6 +766,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDatasourceConnectionResponse) => void
   ): Promise<CreateDatasourceConnectionResponse> {
     return this.request("CreateDatasourceConnection", req, cb)
+  }
+
+  /**
+   * 该接口（DescribeTaskDetail）用于查询历史任务详情
+   */
+  async DescribeTaskDetail(
+    req: DescribeTaskDetailRequest,
+    cb?: (error: string, rep: DescribeTaskDetailResponse) => void
+  ): Promise<DescribeTaskDetailResponse> {
+    return this.request("DescribeTaskDetail", req, cb)
   }
 
   /**

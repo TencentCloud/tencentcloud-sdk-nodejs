@@ -20,11 +20,11 @@
  */
 export interface DeleteAlarmShieldsRequest {
   /**
-   * 模块名，这里填“monitor”
+   * <p>模块名，这里填“monitor”</p>
    */
   Module: string
   /**
-   * 屏蔽策略Id列表
+   * <p>屏蔽策略Id列表</p>
    */
   Shields: Array<string>
 }
@@ -250,76 +250,76 @@ export interface DescribeExternalClusterRegisterCommandResponse {
  */
 export interface DescribePolicyGroupInfoResponse {
   /**
-   * 策略组名称
+   * <p>策略组名称</p>
    */
   GroupName?: string
   /**
-   * 策略组所属的项目id
+   * <p>策略组所属的项目id</p>
    */
   ProjectId?: number
   /**
-   * 是否为默认策略，0表示非默认策略，1表示默认策略
+   * <p>是否为默认策略，0表示非默认策略，1表示默认策略</p>
    */
   IsDefault?: number
   /**
-   * 策略类型
+   * <p>策略类型</p>
    */
   ViewName?: string
   /**
-   * 策略说明
+   * <p>策略说明</p>
    */
   Remark?: string
   /**
-   * 策略类型名称
+   * <p>策略类型名称</p>
    */
   ShowName?: string
   /**
-   * 最近编辑的用户uin
+   * <p>最近编辑的用户uin</p>
    */
   LastEditUin?: string
   /**
-   * 最近编辑时间
+   * <p>最近编辑时间</p>
    */
   UpdateTime?: string
   /**
-   * 该策略支持的地域
+   * <p>该策略支持的地域</p>
    */
   Region?: Array<string>
   /**
-   * 策略类型的维度列表
+   * <p>策略类型的维度列表</p>
    */
   DimensionGroup?: Array<string>
   /**
-   * 阈值规则列表
+   * <p>阈值规则列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConditionsConfig?: Array<DescribePolicyGroupInfoCondition>
   /**
-   * 产品事件规则列表
+   * <p>产品事件规则列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventConfig?: Array<DescribePolicyGroupInfoEventCondition>
   /**
-   * 用户接收人列表
+   * <p>用户接收人列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReceiverInfos?: Array<DescribePolicyGroupInfoReceiverInfo>
   /**
-   * 用户回调信息
+   * <p>用户回调信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Callback?: DescribePolicyGroupInfoCallback
   /**
-   * 模板策略组
+   * <p>模板策略组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConditionsTemp?: DescribePolicyGroupInfoConditionTpl
   /**
-   * 是否可以设置成默认策略
+   * <p>是否可以设置成默认策略</p>
    */
   CanSetDefault?: boolean
   /**
-   * 是否且规则
+   * <p>是否且规则</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsUnionRule?: number
@@ -354,11 +354,13 @@ export interface NotificationContentTemplateSupport {
  */
 export interface PolicyTag {
   /**
-   * 标签Key
+   * <p>标签Key</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Key: string
   /**
-   * 标签Value
+   * <p>标签Value</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
 }
@@ -803,16 +805,16 @@ export interface UpdateGrafanaWhiteListResponse {
  */
 export interface DescribePolicyGroupListResponse {
   /**
-   * 策略组列表
+   * <p>策略组列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupList?: Array<DescribePolicyGroupListGroup>
   /**
-   * 策略组总数
+   * <p>策略组总数</p>
    */
   Total?: number
   /**
-   * 备注信息
+   * <p>备注信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Warning?: string
@@ -1129,7 +1131,7 @@ export interface PrometheusRuleKV {
  */
 export interface DescribePolicyConditionListResponse {
   /**
-   * 告警策略条件列表
+   * <p>告警策略条件列表</p>
    */
   Conditions?: Array<DescribePolicyConditionListCondition>
   /**
@@ -1582,7 +1584,7 @@ export interface UpdateAlertRuleStateRequest {
  */
 export interface DescribeAlarmSmsQuotaRequest {
   /**
-   * 固定值，为"monitor"
+   * <p>固定值，为&quot;monitor&quot;</p>
    */
   Module: string
 }
@@ -1705,11 +1707,11 @@ export interface GetTopNMonitorDataResponse {
  */
 export interface RegionPolicyObjectCount {
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region: string
   /**
-   * 绑定的实例数量
+   * <p>绑定的实例数量</p>
    */
   Count: number
 }
@@ -1781,11 +1783,11 @@ export interface DeleteSSOAccountRequest {
  */
 export interface DescribePolicyObjectCountRequest {
   /**
-   * 固定值，为"monitor"
+   * <p>固定值，为&quot;monitor&quot;</p>
    */
   Module: string
   /**
-   * 策略组Id
+   * <p>策略组Id</p>
    */
   GroupId: number
 }
@@ -1838,11 +1840,11 @@ export interface DescribePrometheusAgentInstancesResponse {
  */
 export interface DescribeAlarmNoticesResponse {
   /**
-   * 告警通知模板总数
+   * <p>告警通知模板总数</p>
    */
   TotalCount?: number
   /**
-   * 告警通知模板列表
+   * <p>告警通知模板列表</p>
    */
   Notices?: Array<AlarmNotice>
   /**
@@ -1981,12 +1983,12 @@ export interface DeletePrometheusConfigResponse {
  */
 export interface DescribePolicyObjectCountResponse {
   /**
-   * 是否为多地域
+   * <p>是否为多地域</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsMultiRegion?: boolean
   /**
-   * 地域统计列表
+   * <p>地域统计列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RegionList?: Array<RegionPolicyObjectCount>
@@ -2043,7 +2045,7 @@ export interface AlarmEvent {
  */
 export interface ModifyPolicyGroupResponse {
   /**
-   * 策略组id
+   * <p>策略组id</p>
    */
   GroupId?: number
   /**
@@ -2346,12 +2348,12 @@ export interface UpdateAlertRuleResponse {
  */
 export interface InstanceGroup {
   /**
-   * 实例组ID
+   * <p>实例组ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceGroupId: number
   /**
-   * 实例组名
+   * <p>实例组名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceGroupName: string
@@ -2447,60 +2449,60 @@ export interface DestroyPrometheusInstanceRequest {
  */
 export interface PolicyGroupReceiverInfo {
   /**
-   * 有效时段结束时间
+   * <p>有效时段结束时间</p>
    */
   EndTime: number
   /**
-   * 是否需要发送通知
+   * <p>是否需要发送通知</p>
    */
   NeedSendNotice: number
   /**
-   * 告警接收渠道
+   * <p>告警接收渠道</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NotifyWay: Array<string>
   /**
-   * 电话告警对个人间隔（秒）
+   * <p>电话告警对个人间隔（秒）</p>
    */
   PersonInterval: number
   /**
-   * 消息接收组列表
+   * <p>消息接收组列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReceiverGroupList: Array<number | bigint>
   /**
-   * 接受者类型
+   * <p>接受者类型</p>
    */
   ReceiverType: string
   /**
-   * 接收人列表。通过平台接口查询到的接收人id列表
+   * <p>接收人列表。通过平台接口查询到的接收人id列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReceiverUserList: Array<number | bigint>
   /**
-   * 告警恢复通知方式
+   * <p>告警恢复通知方式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecoverNotify: Array<string>
   /**
-   * 电话告警每轮间隔（秒）
+   * <p>电话告警每轮间隔（秒）</p>
    */
   RoundInterval: number
   /**
-   * 电话告警轮数
+   * <p>电话告警轮数</p>
    */
   RoundNumber: number
   /**
-   * 电话告警通知时机。可选"OCCUR"(告警时通知),"RECOVER"(恢复时通知)
+   * <p>电话告警通知时机。可选&quot;OCCUR&quot;(告警时通知),&quot;RECOVER&quot;(恢复时通知)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SendFor: Array<string>
   /**
-   * 有效时段开始时间
+   * <p>有效时段开始时间</p>
    */
   StartTime: number
   /**
-   * 电话告警接收者uid
+   * <p>电话告警接收者uid</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UIDList: Array<number | bigint>
@@ -3139,11 +3141,11 @@ export interface CreateAlarmNoticeRequest {
  */
 export interface InstanceGroups {
   /**
-   * 实例组 Id
+   * <p>实例组 Id</p>
    */
   Id: number
   /**
-   * 实例组名称
+   * <p>实例组名称</p>
    */
   Name: string
 }
@@ -3185,23 +3187,23 @@ export interface CreateExporterIntegrationResponse {
  */
 export interface UnBindingAllPolicyObjectRequest {
   /**
-   * 固定值，为"monitor"
+   * <p>固定值，为&quot;monitor&quot;</p>
    */
   Module: string
   /**
-   * 策略组id，如传入 PolicyId 则该字段被忽略可传入任意值如 0
+   * <p>策略组id，如传入 PolicyId 则该字段被忽略可传入任意值如 0</p>
    */
   GroupId: number
   /**
-   * 告警策略ID，使用此字段时 GroupId 会被忽略
+   * <p>告警策略ID，使用此字段时 GroupId 会被忽略</p>
    */
   PolicyId?: string
   /**
-   * 事件配置的告警
+   * <p>事件配置的告警</p>
    */
   EbSubject?: string
   /**
-   * 是否配置了事件告警
+   * <p>是否配置了事件告警</p>
    */
   EbEventFlag?: number
 }
@@ -4619,15 +4621,15 @@ export interface DescribeExporterIntegrationsRequest {
  */
 export interface DescribeAlarmSmsQuotaResponse {
   /**
-   * 配额总数
+   * <p>配额总数</p>
    */
   Total?: number
   /**
-   * 总使用量
+   * <p>总使用量</p>
    */
   Used?: number
   /**
-   * 短信配额信息列表
+   * <p>短信配额信息列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QuotaList?: Array<DescribeAlarmSmsQuotaQuota>
@@ -4770,11 +4772,11 @@ export interface DescribeExternalClusterRegisterCommandRequest {
  */
 export interface Point {
   /**
-   * 该监控数据点生成的时间点
+   * <p>该监控数据点生成的时间点</p>
    */
   Timestamp: number
   /**
-   * 监控数据点的值
+   * <p>监控数据点的值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: number
@@ -4785,19 +4787,19 @@ export interface Point {
  */
 export interface ModifyPolicyGroupEventCondition {
   /**
-   * 事件id
+   * <p>事件id</p>
    */
   EventId: number
   /**
-   * 告警发送收敛类型。0连续告警，1指数告警
+   * <p>告警发送收敛类型。0连续告警，1指数告警</p>
    */
   AlarmNotifyType: number
   /**
-   * 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次
+   * <p>告警发送周期单位秒。&lt;0 不触发, 0 只触发一次, &gt;0 每隔triggerTime秒触发一次</p>
    */
   AlarmNotifyPeriod: number
   /**
-   * 规则id，不填表示新增，填写了ruleId表示在已存在的规则基础上进行修改
+   * <p>规则id，不填表示新增，填写了ruleId表示在已存在的规则基础上进行修改</p>
    */
   RuleId?: number
 }
@@ -5652,11 +5654,11 @@ export interface DeleteRecordingRulesRequest {
  */
 export interface MonitorTypeNamespace {
   /**
-   * 监控类型
+   * <p>监控类型</p>
    */
   MonitorType: string
   /**
-   * 策略类型值
+   * <p>策略类型值</p>
    */
   Namespace: string
 }
@@ -5941,11 +5943,11 @@ export interface DescribeRemoteWritesRequest {
  */
 export interface DescribeAlarmNoticeRequest {
   /**
-   * 模块名，这里填“monitor”
+   * <p>模块名，这里填“monitor”</p>
    */
   Module: string
   /**
-   * 告警通知模板 id
+   * <p>告警通知模板 id</p>
    */
   NoticeId: string
 }
@@ -6855,7 +6857,7 @@ export interface CreateAlarmShieldResponse {
  */
 export interface DescribePolicyConditionListRequest {
   /**
-   * 固定值，为"monitor"
+   * <p>固定值，为&quot;monitor&quot;</p>
    */
   Module: string
 }
@@ -6960,7 +6962,7 @@ export interface NoticeContentTmplBindInfo {
  */
 export interface DescribePhoneAlarmFlowTotalCountResponse {
   /**
-   * 电话流水总数
+   * <p>电话流水总数</p>
    */
   Count: number
   /**
@@ -7594,11 +7596,11 @@ export interface ModifyAlarmPolicyNoticeResponse {
  */
 export interface NoticeBindPolicys {
   /**
-   * 告警通知模板 ID
+   * <p>告警通知模板 ID</p>
    */
   NoticeId?: string
   /**
-   * 告警通知模板绑定的告警策略ID列表
+   * <p>告警通知模板绑定的告警策略ID列表</p>
    */
   PolicyIds?: Array<string>
 }
@@ -7687,7 +7689,7 @@ export interface DescribeGrafanaChannelsResponse {
  */
 export interface DescribeAlarmPolicyResponse {
   /**
-   * 策略详情
+   * <p>策略详情</p>
    */
   Policy: AlarmPolicy
   /**
@@ -8357,68 +8359,68 @@ export interface DescribeAllNamespacesRequest {
  */
 export interface PolicyGroup {
   /**
-   * 是否可设为默认告警策略
+   * <p>是否可设为默认告警策略</p>
    */
   CanSetDefault: boolean
   /**
-   * 告警策略组ID
+   * <p>告警策略组ID</p>
    */
   GroupID: number
   /**
-   * 告警策略组名称
+   * <p>告警策略组名称</p>
    */
   GroupName: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   InsertTime: number
   /**
-   * 是否为默认告警策略
+   * <p>是否为默认告警策略</p>
    */
   IsDefault: number
   /**
-   * 告警策略启用状态
+   * <p>告警策略启用状态</p>
    */
   Enable: boolean
   /**
-   * 最后修改人UIN
+   * <p>最后修改人UIN</p>
    */
   LastEditUin: number
   /**
-   * 未屏蔽的实例数
+   * <p>未屏蔽的实例数</p>
    */
   NoShieldedInstanceCount: number
   /**
-   * 父策略组ID
+   * <p>父策略组ID</p>
    */
   ParentGroupID: number
   /**
-   * 所属项目ID
+   * <p>所属项目ID</p>
    */
   ProjectID: number
   /**
-   * 告警接收对象信息
+   * <p>告警接收对象信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReceiverInfos: Array<PolicyGroupReceiverInfo>
   /**
-   * 备注信息
+   * <p>备注信息</p>
    */
   Remark: string
   /**
-   * 修改时间
+   * <p>修改时间</p>
    */
   UpdateTime: number
   /**
-   * 总绑定实例数
+   * <p>总绑定实例数</p>
    */
   TotalInstanceCount: number
   /**
-   * 视图
+   * <p>视图</p>
    */
   ViewName: string
   /**
-   * 是否为与关系规则
+   * <p>是否为与关系规则</p>
    */
   IsUnionRule: number
 }
@@ -8555,15 +8557,15 @@ export interface ModifyAlarmPolicyInfoResponse {
  */
 export interface MetricConfig {
   /**
-   * 允许使用的运算符
+   * <p>允许使用的运算符</p>
    */
   Operator: Array<string>
   /**
-   * 允许配置的数据周期，以秒为单位
+   * <p>允许配置的数据周期，以秒为单位</p>
    */
   Period: Array<number | bigint>
   /**
-   * 允许配置的持续周期个数
+   * <p>允许配置的持续周期个数</p>
    */
   ContinuePeriod: Array<number | bigint>
 }
@@ -8673,51 +8675,51 @@ export interface DescribeAlarmEventsRequest {
  */
 export interface ModifyAlarmPolicyConditionRequest {
   /**
-   * 模块名，固定值 monitor
+   * <p>模块名，固定值 monitor</p>
    */
   Module: string
   /**
-   * 告警策略 ID
+   * <p>告警策略 ID</p>
    */
   PolicyId: string
   /**
-   * 触发条件模板 Id，可不传
+   * <p>触发条件模板 Id，可不传</p>
    */
   ConditionTemplateId?: number
   /**
-   * 指标触发条件
+   * <p>指标触发条件</p>
    */
   Condition?: AlarmPolicyCondition
   /**
-   * 事件触发条件
+   * <p>事件触发条件</p>
    */
   EventCondition?: AlarmPolicyEventCondition
   /**
-   * 全局过滤条件
+   * <p>全局过滤条件</p>
    */
   Filter?: AlarmPolicyFilter
   /**
-   * 聚合维度列表，指定按哪些维度 key 来做 group by
+   * <p>聚合维度列表，指定按哪些维度 key 来做 group by</p>
    */
   GroupBy?: Array<string>
   /**
-   * 日志告警创建请求参数信息
+   * <p>日志告警创建请求参数信息</p>
    */
   LogAlarmReqInfo?: LogAlarmReq
   /**
-   * 模板id，专供prom使用
+   * <p>模板id，专供prom使用</p>
    */
   NoticeIds?: Array<string>
   /**
-   * 启停状态，0=停用，1=启用
+   * <p>启停状态，0=停用，1=启用</p>
    */
   Enable?: number
   /**
-   * 专供prom策略名称
+   * <p>专供prom策略名称</p>
    */
   PolicyName?: string
   /**
-   * 事件配置的告警
+   * <p>事件配置的告警</p>
    */
   EbSubject?: string
 }
@@ -9156,63 +9158,63 @@ export interface DescribePolicyConditionListEventMetric {
  */
 export interface DescribePolicyGroupListRequest {
   /**
-   * 固定值，为"monitor"
+   * <p>固定值，为&quot;monitor&quot;</p>
    */
   Module: string
   /**
-   * 分页参数，每页返回的数量，取值1~100
+   * <p>分页参数，每页返回的数量，取值1~100</p>
    */
   Limit: number
   /**
-   * 分页参数，页偏移量，从0开始计数
+   * <p>分页参数，页偏移量，从0开始计数</p>
    */
   Offset: number
   /**
-   * 按策略名搜索
+   * <p>按策略名搜索</p>
    */
   Like?: string
   /**
-   * 实例分组id
+   * <p>实例分组id</p>
    */
   InstanceGroupId?: number
   /**
-   * 按更新时间排序, asc 或者 desc
+   * <p>按更新时间排序, asc 或者 desc</p>
    */
   UpdateTimeOrder?: string
   /**
-   * 项目id列表
+   * <p>项目id列表</p>
    */
   ProjectIds?: Array<number | bigint>
   /**
-   * 告警策略类型列表
+   * <p>告警策略类型列表</p>
    */
   ViewNames?: Array<string>
   /**
-   * 是否过滤无接收人策略组, 1表示过滤, 0表示不过滤
+   * <p>是否过滤无接收人策略组, 1表示过滤, 0表示不过滤</p>
    */
   FilterUnuseReceiver?: number
   /**
-   * 过滤条件, 接收组列表
+   * <p>过滤条件, 接收组列表</p>
    */
   Receivers?: Array<string>
   /**
-   * 过滤条件, 接收人列表
+   * <p>过滤条件, 接收人列表</p>
    */
   ReceiverUserList?: Array<string>
   /**
-   * 维度组合字段(json字符串), 例如[[{"name":"unInstanceId","value":"ins-6e4b2aaa"}]]
+   * <p>维度组合字段(json字符串), 例如[[{&quot;name&quot;:&quot;unInstanceId&quot;,&quot;value&quot;:&quot;ins-6e4b2aaa&quot;}]]</p>
    */
   Dimensions?: string
   /**
-   * 模板策略组id, 多个id用逗号分隔
+   * <p>模板策略组id, 多个id用逗号分隔</p>
    */
   ConditionTempGroupId?: string
   /**
-   * 过滤条件, 接收人或者接收组, user表示接收人, group表示接收组
+   * <p>过滤条件, 接收人或者接收组, user表示接收人, group表示接收组</p>
    */
   ReceiverType?: string
   /**
-   * 过滤条件，告警策略是否已启动或停止
+   * <p>过滤条件，告警策略是否已启动或停止</p>
    */
   IsOpen?: boolean
 }
@@ -9232,51 +9234,51 @@ export interface UnBindingAllPolicyObjectResponse {
  */
 export interface DescribeAlarmNoticesRequest {
   /**
-   * 模块名，这里填“monitor”
+   * <p>模块名，这里填“monitor”</p>
    */
   Module: string
   /**
-   * 页码 最小为1
+   * <p>页码 最小为1</p>
    */
   PageNumber: number
   /**
-   * 分页大小 1～200
+   * <p>分页大小 1～200</p>
    */
   PageSize: number
   /**
-   * 按更新时间排序方式 ASC=正序 DESC=倒序
+   * <p>按更新时间排序方式 ASC=正序 DESC=倒序</p>
    */
   Order: string
   /**
-   * 主账号 uid 用于创建预设通知
+   * <p>主账号 uid 用于创建预设通知</p>
    */
   OwnerUid?: number
   /**
-   * 告警通知模板名称 用来模糊搜索
+   * <p>告警通知模板名称 用来模糊搜索</p>
    */
   Name?: string
   /**
-   * 根据接收人过滤告警通知模板需要选定通知用户类型 USER=用户 GROUP=用户组 传空=不按接收人过滤
+   * <p>根据接收人过滤告警通知模板需要选定通知用户类型 USER=用户 GROUP=用户组 传空=不按接收人过滤</p>
    */
   ReceiverType?: string
   /**
-   * 接收对象列表
+   * <p>接收对象列表</p>
    */
   UserIds?: Array<number | bigint>
   /**
-   * 接收组列表
+   * <p>接收组列表</p>
    */
   GroupIds?: Array<number | bigint>
   /**
-   * 根据通知模板 id 过滤，空数组/不传则不过滤
+   * <p>根据通知模板 id 过滤，空数组/不传则不过滤</p>
    */
   NoticeIds?: Array<string>
   /**
-   * 模板根据标签过滤
+   * <p>模板根据标签过滤</p>
    */
   Tags?: Array<Tag>
   /**
-   * 值班列表
+   * <p>值班列表</p>
    */
   OnCallFormIDs?: Array<string>
 }
@@ -9362,7 +9364,7 @@ webhook -- vpc内webhook地址
  */
 export interface DescribeAlarmNoticeResponse {
   /**
-   * 告警通知模板详细信息
+   * <p>告警通知模板详细信息</p>
    */
   Notice: AlarmNotice
   /**
@@ -9974,11 +9976,11 @@ export interface DescribeRemoteURLsResponse {
  */
 export interface DescribePolicyGroupInfoRequest {
   /**
-   * 固定值，为"monitor"
+   * <p>固定值，为&quot;monitor&quot;</p>
    */
   Module: string
   /**
-   * 策略组id
+   * <p>策略组id</p>
    */
   GroupId: number
 }
@@ -10881,35 +10883,35 @@ export interface DescribePrometheusAlertGroupsRequest {
  */
 export interface ModifyPolicyGroupCondition {
   /**
-   * 指标id
+   * <p>指标id</p>
    */
   MetricId: number
   /**
-   * 比较类型，1表示大于，2表示大于等于，3表示小于，4表示小于等于，5表示相等，6表示不相等
+   * <p>比较类型，1表示大于，2表示大于等于，3表示小于，4表示小于等于，5表示相等，6表示不相等</p>
    */
   CalcType: number
   /**
-   * 检测阈值
+   * <p>检测阈值</p>
    */
   CalcValue: string
   /**
-   * 检测指标的数据周期
+   * <p>检测指标的数据周期</p>
    */
   CalcPeriod: number
   /**
-   * 持续周期个数
+   * <p>持续周期个数</p>
    */
   ContinuePeriod: number
   /**
-   * 告警发送收敛类型。0连续告警，1指数告警
+   * <p>告警发送收敛类型。0连续告警，1指数告警</p>
    */
   AlarmNotifyType: number
   /**
-   * 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次
+   * <p>告警发送周期单位秒。&lt;0 不触发, 0 只触发一次, &gt;0 每隔triggerTime秒触发一次</p>
    */
   AlarmNotifyPeriod: number
   /**
-   * 规则id，不填表示新增，填写了ruleId表示在已存在的规则基础上进行修改
+   * <p>规则id，不填表示新增，填写了ruleId表示在已存在的规则基础上进行修改</p>
    */
   RuleId?: number
 }
@@ -10919,35 +10921,35 @@ export interface ModifyPolicyGroupCondition {
  */
 export interface ModifyPolicyGroupRequest {
   /**
-   * 固定值，为"monitor"
+   * <p>固定值，为&quot;monitor&quot;</p>
    */
   Module: string
   /**
-   * 策略组id
+   * <p>策略组id</p>
    */
   GroupId: number
   /**
-   * 告警类型
+   * <p>告警类型</p>
    */
   ViewName: string
   /**
-   * 策略组名称
+   * <p>策略组名称</p>
    */
   GroupName: string
   /**
-   * 指标告警条件的且或关系，1表示且告警，所有指标告警条件都达到才告警，0表示或告警，任意指标告警条件达到都告警
+   * <p>是否复合告警</p><p>枚举值：</p><ul><li>1： 所有指标告警条件都达到才告警</li><li>0： 任意指标告警条件达到都告警</li></ul>
    */
   IsUnionRule: number
   /**
-   * 指标告警条件规则，不填表示删除已有的所有指标告警条件规则
+   * <p>指标告警条件规则，不填表示删除已有的所有指标告警条件规则</p>
    */
   Conditions?: Array<ModifyPolicyGroupCondition>
   /**
-   * 事件告警条件，不填表示删除已有的事件告警条件
+   * <p>事件告警条件，不填表示删除已有的事件告警条件</p>
    */
   EventConditions?: Array<ModifyPolicyGroupEventCondition>
   /**
-   * 模板策略组id
+   * <p>模板策略组id</p>
    */
   ConditionTempGroupId?: number
 }
@@ -10975,11 +10977,11 @@ export interface DescribeBaseMetricsRequest {
  */
 export interface DescribePhoneAlarmFlowTotalCountRequest {
   /**
-   * 默认monitor
+   * <p>默认monitor</p>
    */
   Module: string
   /**
-   * unix时间戳，单位：s
+   * <p>unix时间戳，单位：s</p>
    */
   QueryTime: number
 }
@@ -12083,11 +12085,11 @@ export interface DeletePrometheusScrapeJobsResponse {
  */
 export interface DescribeAlarmPolicyRequest {
   /**
-   * 固定值，为"monitor"
+   * <p>固定值，为&quot;monitor&quot;</p>
    */
   Module: string
   /**
-   * 告警策略ID
+   * <p>告警策略ID</p>
    */
   PolicyId: string
 }

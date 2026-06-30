@@ -127,6 +127,10 @@ export interface CreateModelServiceRequest {
    * <p>模型协议</p>
    */
   ModelProtocol?: string
+  /**
+   * <p>自定义模型协议配置</p>
+   */
+  RawCustomModelProtocolConfig?: string
 }
 
 /**
@@ -943,6 +947,10 @@ export interface ModifyModelServiceRequest {
    * <p>模型类型</p>
    */
   ModelProtocol?: string
+  /**
+   * <p>自定义模型协议配置</p>
+   */
+  RawCustomModelProtocolConfig?: string
 }
 
 /**
@@ -3799,6 +3807,10 @@ export interface DescribeModelServiceResponseVO {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelProtocol?: string
+  /**
+   * <p>自定义模型协议配置</p>
+   */
+  RawCustomModelProtocolConfig?: string
 }
 
 /**

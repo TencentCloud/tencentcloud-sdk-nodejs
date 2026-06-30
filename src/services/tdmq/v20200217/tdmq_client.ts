@@ -899,8 +899,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询Topic迁移状态列表，源集群和目标集群客户端数量信息需要配合DescribeRocketMQSmoothMigrationTaskTopicInsNum接口查询
-   */
+     * 历史接口，对应接口已迁移到trocket
+
+查询Topic迁移状态列表，源集群和目标集群客户端数量信息需要配合DescribeRocketMQSmoothMigrationTaskTopicInsNum接口查询
+     */
   async DescribeRocketMQMigratingTopicList(
     req: DescribeRocketMQMigratingTopicListRequest,
     cb?: (error: string, rep: DescribeRocketMQMigratingTopicListResponse) => void
@@ -1024,8 +1026,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 导入topic列表
-   */
+     * 历史接口，对应接口已迁移到trocket
+
+导入topic列表
+     */
   async ImportRocketMQTopics(
     req: ImportRocketMQTopicsRequest,
     cb?: (error: string, rep: ImportRocketMQTopicsResponse) => void
@@ -1326,8 +1330,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 输入迁移任务id和要导入的Group，导入后台
-   */
+     * 历史接口，对应接口已迁移到trocket
+
+输入迁移任务id和要导入的Group，导入后台
+     */
   async ImportRocketMQConsumerGroups(
     req: ImportRocketMQConsumerGroupsRequest,
     cb?: (error: string, rep: ImportRocketMQConsumerGroupsResponse) => void
@@ -1533,8 +1539,10 @@ BatchReceivePolicy 的接口会一次性返回多条消息：
   }
 
   /**
-   * 用于获取RocketMQ平滑迁移任务详情
-   */
+     * 历史接口，对应接口已迁移到trocket
+
+用于获取RocketMQ平滑迁移任务详情
+     */
   async DescribeRocketMQSmoothMigrationTask(
     req: DescribeRocketMQSmoothMigrationTaskRequest,
     cb?: (error: string, rep: DescribeRocketMQSmoothMigrationTaskResponse) => void

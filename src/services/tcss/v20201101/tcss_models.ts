@@ -1504,67 +1504,67 @@ export interface DescribeVulDefencePluginResponse {
  */
 export interface DescribeAssetImageRegistryRegistryDetailResponse {
   /**
-   * 仓库名
+   * <p>仓库名</p>
    */
   Name?: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   Username?: string
   /**
-   * 密码
+   * <p>密码</p>
    */
   Password?: string
   /**
-   * 仓库url
+   * <p>仓库url</p>
    */
   Url?: string
   /**
-   * 仓库类型，列表：harbor
+   * <p>仓库类型，列表：harbor</p>
    */
   RegistryType?: string
   /**
-   * 仓库版本
+   * <p>仓库版本</p>
    */
   RegistryVersion?: string
   /**
-   * 网络类型，列表：public（公网）,private（私网）
+   * <p>网络类型，列表：public（公网）,private（私网）</p>
    */
   NetType?: string
   /**
-   * 区域，列表:default（默认）
+   * <p>区域，列表:default（默认）</p>
    */
   RegistryRegion?: string
   /**
-   * 限速
+   * <p>限速</p>
    */
   SpeedLimit?: number
   /**
-   * 安全模式（证书校验）：0（默认） 非安全模式（跳过证书校验）：1
+   * <p>安全模式（证书校验）：0（默认） 非安全模式（跳过证书校验）：1</p>
    */
   Insecure?: number
   /**
-   * 联通性检测结果详情
+   * <p>联通性检测结果详情</p>
    */
   ConnDetectDetail?: Array<RegistryConnDetectResult>
   /**
-   * tcr情况下instance_id
+   * <p>tcr情况下instance_id</p>
    */
   InstanceID?: string
   /**
-   * 同步方式，0全量同步，1增量同步
+   * <p>同步方式，0全量同步，1增量同步</p>
    */
   SyncMode?: number
   /**
-   * 是否自动授权&扫描，选择全量同步时只针对最新版本镜像，增量同步时则包含所有新增镜像
+   * <p>是否自动授权&amp;扫描，选择全量同步时只针对最新版本镜像，增量同步时则包含所有新增镜像</p>
    */
   NeedScan?: boolean
   /**
-   * webhook接入地址
+   * <p>webhook接入地址</p>
    */
   WebhookUrl?: string
   /**
-   * webhook接入token
+   * <p>webhook接入token</p>
    */
   WebhookToken?: string
   /**
@@ -6266,7 +6266,7 @@ export interface CreateAssetImageRegistryScanTaskOneKeyRequest {
  */
 export interface RemoveAssetImageRegistryRegistryDetailRequest {
   /**
-   * 仓库唯一id
+   * <p>仓库唯一id</p>
    */
   RegistryId: number
 }
@@ -23490,7 +23490,7 @@ export interface DescribeAssetImageRegistryScanStatusOneKeyResponse {
  */
 export interface DescribeAssetImageRegistryRegistryDetailRequest {
   /**
-   * 仓库唯一id
+   * <p>仓库唯一id</p>
    */
   RegistryId: number
 }

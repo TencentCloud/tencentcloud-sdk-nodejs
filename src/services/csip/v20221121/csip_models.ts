@@ -2440,6 +2440,16 @@ export interface DescribeSkillScanPayInfoResponse {
 }
 
 /**
+ * 公网IP和域名资产列表key
+ */
+export interface PublicIpDomainListKey {
+  /**
+   * 资产值
+   */
+  Asset: string
+}
+
+/**
  * DescribeDspmApproveHistory返回参数结构体
  */
 export interface DescribeDspmApproveHistoryResponse {
@@ -4870,6 +4880,16 @@ export interface DescribeRepositoryImageAssetsResponse {
 }
 
 /**
+ * ModifyNotifySetting返回参数结构体
+ */
+export interface ModifyNotifySettingResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateDspmApproveHistoryExportJob返回参数结构体
  */
 export interface CreateDspmApproveHistoryExportJobResponse {
@@ -5389,6 +5409,36 @@ export interface DescribeCosAkAssetResponse {
 }
 
 /**
+ * ModifyNotifySetting请求参数结构体
+ */
+export interface ModifyNotifySettingRequest {
+  /**
+   * <p>通知模块</p><p>枚举值：</p><ul><li>AkSk： 云API风险治理</li><li>Alert： 告警中心</li><li>Agent： 客户端</li></ul>
+   */
+  Module?: string
+  /**
+   * <p>通知设置模式</p><p>枚举值：</p><ul><li>0： 标准模式</li><li>1： 高级模式</li></ul>
+   */
+  Mode?: number
+  /**
+   * <p>通知状态</p><p>枚举值：</p><ul><li>0： 通知关闭</li><li>1： 通知开启</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>通知开始时间</p><p>参数格式：hh:mm:ss</p>
+   */
+  BeginTime?: string
+  /**
+   * <p>通知结束时间</p><p>参数格式：hh:mm:ss</p>
+   */
+  EndTime?: string
+  /**
+   * <p>通知选项</p><p>枚举值：</p><ul><li>CRITICAL： 告警等级：严重</li><li>HIGH： 告警等级：高危</li><li>MEDIUM： 告警等级：中危</li><li>LOW： 告警等级：低危</li><li>INFO： 告警等级：提醒</li><li>AGENT_UNINSTALL： 客户端卸载</li><li>AGENT_OFFLINE： 客户端离线</li></ul>
+   */
+  Option?: Array<string>
+}
+
+/**
  * DescribeDspmPayInfo请求参数结构体
  */
 export interface DescribeDspmPayInfoRequest {
@@ -5446,6 +5496,16 @@ export interface ModifyDspmAssetAccountPrivilegesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyNotifyAssetConfig请求参数结构体
+ */
+export interface ModifyNotifyAssetConfigRequest {
+  /**
+   * <p>资产范围配置</p>
+   */
+  Items?: Array<NotifyAssetConfigItem>
 }
 
 /**
@@ -6369,14 +6429,9 @@ export interface DescribeAccessKeyRiskRequest {
 }
 
 /**
- * 公网IP和域名资产列表key
+ * DescribeNotifySettingAlert请求参数结构体
  */
-export interface PublicIpDomainListKey {
-  /**
-   * 资产值
-   */
-  Asset: string
-}
+export type DescribeNotifySettingAlertRequest = null
 
 /**
  * DescribeDspmLogList请求参数结构体
@@ -8921,60 +8976,45 @@ export interface Machine {
 }
 
 /**
- * 调用记录详情
+ * 通知设置
  */
-export interface UserCallRecord {
+export interface NotifySetting {
   /**
-   * 调用源IP
+   * <p>通知模块</p><p>枚举值：</p><ul><li>AkSk： 云API风险治理</li><li>Alert： 告警中心</li><li>Agent： 客户端</li></ul>
    */
-  SourceIP?: string
+  Module: string
   /**
-   * 调用类型
-0:控制台调用
-1:API
+   * <p>通知设置模式</p><p>枚举值：</p><ul><li>0： 标准模式</li><li>1： 高级模式</li></ul>
    */
-  EventType?: number
+  Mode: number
   /**
-   * 调用次数
+   * <p>通知状态</p><p>枚举值：</p><ul><li>0： 通知关闭</li><li>1： 通知开启</li></ul>
    */
-  CallCount?: number
+  Status: number
   /**
-   * 调用错误码
-0表示成功
+   * <p>通知开始时间</p><p>参数格式：hh:mm:ss</p>
    */
-  Code?: number
+  BeginTime: string
   /**
-   * 首次调用时间
+   * <p>通知结束时间</p><p>参数格式：hh:mm:ss</p>
    */
-  FirstCallTime?: string
+  EndTime: string
   /**
-   * 最后调用时间
+   * <p>资产范围</p><p>枚举值：</p><ul><li>1： 全部主机</li><li>2： 自选主机</li><li>3： 按标签选择</li></ul>
    */
-  LastCallTime?: string
+  AssetRange: number
   /**
-   * 调用源IP备注
+   * <p>通知选项</p><p>枚举值：</p><ul><li>CRITICAL： 告警等级：严重</li><li>HIGH： 告警等级：高危</li><li>MEDIUM： 告警等级：中危</li><li>LOW： 告警等级：低危</li><li>INFO： 告警等级：提醒</li><li>AGENT_UNINSTALL： 客户端卸载</li><li>AGENT_OFFLINE： 客户端离线</li></ul>
    */
-  SourceIPRemark?: string
+  Option?: Array<string>
   /**
-   * 调用源IP地域
+   * <p>通知模块（二级模块）</p>
    */
-  Region?: string
+  SubModule?: string
   /**
-   * 用户/角色名称
+   * <p>处置状态等</p>
    */
-  UserName?: string
-  /**
-   * 聚合日期
-   */
-  Date?: string
-  /**
-   * appid
-   */
-  AppID?: number
-  /**
-   * 运营商
-   */
-  ISP?: string
+  Item?: Array<string>
 }
 
 /**
@@ -9828,6 +9868,16 @@ export interface CosAssetDataScanDetail {
    * <p>识别结果分类详情</p>
    */
   CategoryDetails?: Array<CosIdentifyCategoryDetail>
+}
+
+/**
+ * ModifyNotifySettingAlert请求参数结构体
+ */
+export interface ModifyNotifySettingAlertRequest {
+  /**
+   * <p>通知配置</p>
+   */
+  Settings: Array<NotifySetting>
 }
 
 /**
@@ -11410,6 +11460,20 @@ export interface DescribeDomainAssetsRequest {
    * 安全中心自定义标签
    */
   Tags?: Array<AssetTag>
+}
+
+/**
+ * DescribeNotifyAssetConfig返回参数结构体
+ */
+export interface DescribeNotifyAssetConfigResponse {
+  /**
+   * <p>资产范围配置</p>
+   */
+  Items?: Array<NotifyAssetConfigItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13428,6 +13492,24 @@ export interface AccessCredentialOutput {
 }
 
 /**
+ * DescribeNotifySetting返回参数结构体
+ */
+export interface DescribeNotifySettingResponse {
+  /**
+   * <p>通知设置列表</p>
+   */
+  List?: Array<NotifySetting>
+  /**
+   * <p>成员账号Id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateDspmExportTask返回参数结构体
  */
 export interface CreateDspmExportTaskResponse {
@@ -15236,6 +15318,44 @@ export interface DescribeAccessKeyUserDetailResponse {
 }
 
 /**
+ * 通知资产范围配置项
+ */
+export interface NotifyAssetConfigItem {
+  /**
+   * <p>模块名</p>
+   */
+  Module: string
+  /**
+   * <p>子模块</p>
+   */
+  SubModule: string
+  /**
+   * <p>资产范围</p><p>枚举值：</p><ul><li>0： 无含义</li><li>1： 全部</li><li>2： 自选</li><li>3： 按标签</li></ul>
+   */
+  AssetRange: number
+  /**
+   * <p>选中的实例ID</p>
+   */
+  InstanceIds?: Array<string>
+  /**
+   * <p>剔除的实例ID</p>
+   */
+  ExcludedInstanceIds?: Array<string>
+  /**
+   * <p>标签ID</p>
+   */
+  TagIds?: Array<number | bigint>
+  /**
+   * <p>云标签</p>
+   */
+  CloudTags?: Array<string>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+}
+
+/**
  * cos每日告警/风险信息
  */
 export interface CosAlarmTrendInfo {
@@ -15416,6 +15536,20 @@ export interface HighBaseLineRiskItem {
 }
 
 /**
+ * DescribeNotifySettingAlert返回参数结构体
+ */
+export interface DescribeNotifySettingAlertResponse {
+  /**
+   * <p>通知配置</p>
+   */
+  Settings?: Array<NotifySetting>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCosAssetSyncTask请求参数结构体
  */
 export interface CreateCosAssetSyncTaskRequest {
@@ -15535,6 +15669,16 @@ export interface CosAlarmRiskIdInfo {
    * 租户id
    */
   AppId: number
+}
+
+/**
+ * ModifyNotifyAssetConfig返回参数结构体
+ */
+export interface ModifyNotifyAssetConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -16830,6 +16974,11 @@ export interface DspmAccessRecordId {
    */
   RecordTime?: string
 }
+
+/**
+ * DescribeNotifySetting请求参数结构体
+ */
+export type DescribeNotifySettingRequest = null
 
 /**
  * 告警数据攻击者或受害者信息
@@ -19050,6 +19199,16 @@ export interface DescribeDspmRiskRequest {
 }
 
 /**
+ * DescribeNotifyAssetConfig请求参数结构体
+ */
+export interface DescribeNotifyAssetConfigRequest {
+  /**
+   * <p>模块名</p>
+   */
+  Modules?: Array<string>
+}
+
+/**
  * DeleteDspmExportTask请求参数结构体
  */
 export interface DeleteDspmExportTaskRequest {
@@ -19241,6 +19400,63 @@ export interface DescribeCosBucketRiskRequest {
    * 过滤器
    */
   Filter?: Filter
+}
+
+/**
+ * 调用记录详情
+ */
+export interface UserCallRecord {
+  /**
+   * 调用源IP
+   */
+  SourceIP?: string
+  /**
+   * 调用类型
+0:控制台调用
+1:API
+   */
+  EventType?: number
+  /**
+   * 调用次数
+   */
+  CallCount?: number
+  /**
+   * 调用错误码
+0表示成功
+   */
+  Code?: number
+  /**
+   * 首次调用时间
+   */
+  FirstCallTime?: string
+  /**
+   * 最后调用时间
+   */
+  LastCallTime?: string
+  /**
+   * 调用源IP备注
+   */
+  SourceIPRemark?: string
+  /**
+   * 调用源IP地域
+   */
+  Region?: string
+  /**
+   * 用户/角色名称
+   */
+  UserName?: string
+  /**
+   * 聚合日期
+   */
+  Date?: string
+  /**
+   * appid
+   */
+  AppID?: number
+  /**
+   * 运营商
+   */
+  ISP?: string
 }
 
 /**
@@ -19457,6 +19673,16 @@ export interface DescribeDspmPersonalIdentifyListRequest {
    * 筛选项
    */
   Filter?: Filter
+}
+
+/**
+ * ModifyNotifySettingAlert返回参数结构体
+ */
+export interface ModifyNotifySettingAlertResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

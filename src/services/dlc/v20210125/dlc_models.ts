@@ -3614,6 +3614,16 @@ table-id - String - （过滤条件）table id形如：12342。
 }
 
 /**
+ * DescribeTaskDetail请求参数结构体
+ */
+export interface DescribeTaskDetailRequest {
+  /**
+   * 任务id
+   */
+  TaskInstanceId: string
+}
+
+/**
  * 工作组信息
  */
 export interface WorkGroupInfo {
@@ -8314,13 +8324,17 @@ export interface UpdateNetworkConnectionResponse {
 }
 
 /**
- * GenerateCreateMangedTableSql返回参数结构体
+ * CreateSparkAppTask返回参数结构体
  */
-export interface GenerateCreateMangedTableSqlResponse {
+export interface CreateSparkAppTaskResponse {
   /**
-   * 创建托管存储内表sql语句描述
+   * 批Id
    */
-  Execution?: Execution
+  BatchId?: string
+  /**
+   * 任务Id
+   */
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10200,6 +10214,20 @@ export interface DescribeSparkAppJobRequest {
 }
 
 /**
+ * DescribeTaskDetail返回参数结构体
+ */
+export interface DescribeTaskDetailResponse {
+  /**
+   * 任务详情信息
+   */
+  TaskDetail?: TaskFullRespInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Doris数据源详细信息
  */
 export interface TCHouseD {
@@ -11050,17 +11078,13 @@ export interface UnlockMetaDataRequest {
 }
 
 /**
- * CreateSparkAppTask返回参数结构体
+ * GenerateCreateMangedTableSql返回参数结构体
  */
-export interface CreateSparkAppTaskResponse {
+export interface GenerateCreateMangedTableSqlResponse {
   /**
-   * 批Id
+   * 创建托管存储内表sql语句描述
    */
-  BatchId?: string
-  /**
-   * 任务Id
-   */
-  TaskId?: string
+  Execution?: Execution
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

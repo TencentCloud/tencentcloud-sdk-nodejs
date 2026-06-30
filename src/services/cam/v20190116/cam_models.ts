@@ -1844,33 +1844,37 @@ export interface UpdateAssumeRolePolicyRequest {
  */
 export interface LoginActionFlag {
   /**
-   * 0: 非安全手机校验 1: 安全手机校验。
+   * <p>0: 非安全手机校验 1: 安全手机校验。</p>
    */
   Phone?: number
   /**
-   * 0: 非硬token校验 1: 硬token校验。
+   * <p>0: 非硬token校验 1: 硬token校验。</p>
    */
   Token?: number
   /**
-   * 0: 非软token校验 1: 软token校验
+   * <p>0: 非软token校验 1: 软token校验</p>
    */
   Stoken?: number
   /**
-   * 0: 非微信校验 1: 微信校验
+   * <p>0: 非微信校验 1: 微信校验</p>
    */
   Wechat?: number
   /**
-   * 0: 非自定义校验 1: 自定义校验
+   * <p>0: 非自定义校验 1: 自定义校验</p>
    */
   Custom?: number
   /**
-   * 0: 非邮箱校验 1: 邮箱校验
+   * <p>0: 非邮箱校验 1: 邮箱校验</p>
    */
   Mail?: number
   /**
-   * 0: 非u2f硬件token 1: u2f硬件token
+   * <p>0: 非u2f硬件token 1: u2f硬件token</p>
    */
   U2FToken?: number
+  /**
+   * <p>0: 非passkey 校验 1: passkey校验</p>
+   */
+  Passkey?: number
 }
 
 /**

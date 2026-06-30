@@ -52,6 +52,7 @@ import {
   IsolateSyncJobRequest,
   PauseMigrateJobRequest,
   ContinueMigrateJobRequest,
+  DescribeMigrateGtidCompareReportRequest,
   ResetConsumerGroupOffsetRequest,
   ModifySyncRateLimitRequest,
   DescribeCheckSyncJobResultRequest,
@@ -103,6 +104,7 @@ import {
   ResetSubscribeResponse,
   CompareObject,
   DescribeCompareReportResponse,
+  DescribeSyncGtidCompareReportResponse,
   RecoverSyncJobResponse,
   MigrateAction,
   ConfigureSubscribeJobResponse,
@@ -114,6 +116,7 @@ import {
   ModifySyncJobConfigResponse,
   CompareColumnItem,
   DiffChunkItem,
+  ModifySyncCompareTaskNameResponse,
   DescribeSubscribeDetailResponse,
   ContinueSyncJobResponse,
   TradeInfo,
@@ -158,6 +161,7 @@ import {
   DescribeMigrationCheckJobResponse,
   StopSyncJobRequest,
   DifferenceDetail,
+  DifferenceDetails,
   DBInfo,
   TopicRule,
   DestroySyncJobRequest,
@@ -193,6 +197,7 @@ import {
   ModifyMigrateRateLimitRequest,
   CompareTableItem,
   DescribeSyncCompareReportResponse,
+  DescribeMigrateGtidCompareReportResponse,
   ConfigureSyncJobResponse,
   CompareViewItem,
   StepInfo,
@@ -245,7 +250,7 @@ import {
   ResetSyncJobResponse,
   Endpoint,
   ConfigureSubscribeJobRequest,
-  ModifySyncCompareTaskNameResponse,
+  DescribeSyncGtidCompareReportRequest,
   DescribeSubscribeCheckJobResponse,
   RoleItem,
   TagFilter,
@@ -308,6 +313,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DestroyIsolatedSubscribeResponse) => void
   ): Promise<DestroyIsolatedSubscribeResponse> {
     return this.request("DestroyIsolatedSubscribe", req, cb)
+  }
+
+  /**
+   * gtid校验
+   */
+  async DescribeSyncGtidCompareReport(
+    req: DescribeSyncGtidCompareReportRequest,
+    cb?: (error: string, rep: DescribeSyncGtidCompareReportResponse) => void
+  ): Promise<DescribeSyncGtidCompareReportResponse> {
+    return this.request("DescribeSyncGtidCompareReport", req, cb)
   }
 
   /**
@@ -640,6 +655,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySyncJobConfigResponse) => void
   ): Promise<ModifySyncJobConfigResponse> {
     return this.request("ModifySyncJobConfig", req, cb)
+  }
+
+  /**
+   * gtid校验
+   */
+  async DescribeMigrateGtidCompareReport(
+    req: DescribeMigrateGtidCompareReportRequest,
+    cb?: (error: string, rep: DescribeMigrateGtidCompareReportResponse) => void
+  ): Promise<DescribeMigrateGtidCompareReportResponse> {
+    return this.request("DescribeMigrateGtidCompareReport", req, cb)
   }
 
   /**

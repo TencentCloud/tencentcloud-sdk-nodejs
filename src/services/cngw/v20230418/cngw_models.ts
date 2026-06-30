@@ -438,13 +438,25 @@ export interface ModifyCloudNativeAPIGatewayMCPServerRequest {
 }
 
 /**
- * AI 网关 MCP Server 认证配置详情
+ * 默认kong路由，目前只在 LLM 模型 API相 关接口使用
  */
-export interface AIGWMCPServerAuthResult {
+export interface DefaultKongRoute {
   /**
-   * <p>MCP服务认证类型</p><p>枚举值：</p><ul><li>None： 无认证</li><li>ApiKey： API Key认证</li></ul>
+   * <p>服务名字</p>
    */
-  AuthType?: string
+  Name: string
+  /**
+   * <p>服务ID</p>
+   */
+  ID?: string
+  /**
+   * <p>HTTP Method</p>
+   */
+  Methods?: Array<string>
+  /**
+   * <p>Http Path</p>
+   */
+  Paths?: Array<string>
 }
 
 /**
@@ -539,6 +551,20 @@ export interface CloudNativeAPIGatewayLLMModelServiceRouteWeightedStrategy {
  * ModifyCloudNativeAPIGatewaySecretKey返回参数结构体
  */
 export interface ModifyCloudNativeAPIGatewaySecretKeyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AddCloudNativeAPIGatewayConsumerInGroup返回参数结构体
+ */
+export interface AddCloudNativeAPIGatewayConsumerInGroupResponse {
+  /**
+   * <p>是否成功。</p>
+   */
+  Result?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -910,6 +936,34 @@ export interface AIGWTopConsumersItem {
    * <p>该消费者花费的Token数</p>
    */
   TotalTokens?: number
+}
+
+/**
+ * RemoveCloudNativeAPIGatewayConsumerInGroup请求参数结构体
+ */
+export interface RemoveCloudNativeAPIGatewayConsumerInGroupRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * <p>消费者组 ID（以 cg- 开头）。</p>
+   */
+  ConsumerGroupId: string
+  /**
+   * <p>消费者 ID 列表，长度 1-10。</p>
+   */
+  ConsumerIds: Array<string>
+}
+
+/**
+ * AI 网关 MCP Server 认证配置详情
+ */
+export interface AIGWMCPServerAuthResult {
+  /**
+   * <p>MCP服务认证类型</p><p>枚举值：</p><ul><li>None： 无认证</li><li>ApiKey： API Key认证</li></ul>
+   */
+  AuthType?: string
 }
 
 /**
@@ -1392,25 +1446,17 @@ export interface AIGWMCPSessionConfig {
 }
 
 /**
- * 默认kong路由，目前只在 LLM 模型 API相 关接口使用
+ * DeleteCloudNativeAPIGatewayLLMModelService返回参数结构体
  */
-export interface DefaultKongRoute {
+export interface DeleteCloudNativeAPIGatewayLLMModelServiceResponse {
   /**
-   * <p>服务名字</p>
+   * <p>是否成功。</p>
    */
-  Name: string
+  Result?: boolean
   /**
-   * <p>服务ID</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ID?: string
-  /**
-   * <p>HTTP Method</p>
-   */
-  Methods?: Array<string>
-  /**
-   * <p>Http Path</p>
-   */
-  Paths?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -1550,20 +1596,6 @@ export interface ListCloudNativeAPIGatewayLLMModelAPI {
 }
 
 /**
- * DeleteCloudNativeAPIGatewayLLMModelService返回参数结构体
- */
-export interface DeleteCloudNativeAPIGatewayLLMModelServiceResponse {
-  /**
-   * <p>是否成功。</p>
-   */
-  Result?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeCloudNativeAPIGatewayMCPTool返回参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayMCPToolResponse {
@@ -1677,6 +1709,28 @@ export interface ModifyCloudNativeAPIGatewayMCPServerStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * BindCloudNativeAPIGatewaySecretKey请求参数结构体
+ */
+export interface BindCloudNativeAPIGatewaySecretKeyRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * 资源类型
+   */
+  ResourceType: string
+  /**
+   * 资源ID，当前最多支持一个
+   */
+  ResourceIds: Array<string>
+  /**
+   * 密钥id
+   */
+  SecretKeyId: string
 }
 
 /**
@@ -1998,6 +2052,16 @@ export interface ModifyCloudNativeAPIGatewayMCPToolResponse {
 }
 
 /**
+ * RemoveCloudNativeAPIGatewayConsumerInGroup返回参数结构体
+ */
+export interface RemoveCloudNativeAPIGatewayConsumerInGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 跨服务降级配置
  */
 export interface AIGWCrossServiceFallbackConfig {
@@ -2027,6 +2091,24 @@ export interface DescribeCloudNativeAPIGatewayLLMModelAPIsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AddCloudNativeAPIGatewayConsumerInGroup请求参数结构体
+ */
+export interface AddCloudNativeAPIGatewayConsumerInGroupRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * <p>消费者组 ID（以 cg- 开头）。</p>
+   */
+  ConsumerGroupId: string
+  /**
+   * <p>消费者 ID 列表，长度 1-10。</p>
+   */
+  ConsumerIds: Array<string>
 }
 
 /**
@@ -2069,6 +2151,16 @@ export interface DeleteCloudNativeAPIGatewayLLMModelAPIResponse {
    * <p>是否成功。</p>
    */
   Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UnbindCloudNativeAPIGatewaySecretKey返回参数结构体
+ */
+export interface UnbindCloudNativeAPIGatewaySecretKeyResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2421,6 +2513,96 @@ export interface CNAPIGwMCPToolList {
 }
 
 /**
+ * DescribeCloudNativeAPIGatewayLLMModelAPI请求参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayLLMModelAPIRequest {
+  /**
+   * <p>网关 id。</p>
+   */
+  GatewayId: string
+  /**
+   * <p>模型 API ID，全局唯一标识。</p>
+   */
+  ModelAPIId: string
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayConsumerGroup请求参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayConsumerGroupRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * <p>消费者组 ID（以 cg- 开头）。</p>
+   */
+  ConsumerGroupId: string
+  /**
+   * <p>消费者组名称，最长 60 字符。</p>
+   */
+  Name: string
+  /**
+   * <p>启用状态。</p><p>枚举值：</p><ul><li>Enable：启用</li><li>Disable：禁用</li></ul>
+   */
+  Status: string
+  /**
+   * <p>消费者组描述。最长 200 字符。</p>
+   */
+  Description?: string
+}
+
+/**
+ * UnbindCloudNativeAPIGatewaySecretKey请求参数结构体
+ */
+export interface UnbindCloudNativeAPIGatewaySecretKeyRequest {
+  /**
+   * 网关实例id
+   */
+  GatewayId: string
+  /**
+   * 资源类型
+   */
+  ResourceType: string
+  /**
+   * 资源ID，当前最多支持一个
+   */
+  ResourceIds: Array<string>
+  /**
+   * 密钥id
+   */
+  SecretKeyId: string
+}
+
+/**
+ * BindCloudNativeAPIGatewaySecretKey返回参数结构体
+ */
+export interface BindCloudNativeAPIGatewaySecretKeyResponse {
+  /**
+   * 结果
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayMCPToolList返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayMCPToolListResponse {
+  /**
+   * <p>tool 列表</p>
+   */
+  Result?: CNAPIGwMCPToolList
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * LLM 模型服务
  */
 export interface CloudNativeAPIGatewayLLMModelService {
@@ -2520,60 +2702,6 @@ export interface CloudNativeAPIGatewayLLMModelService {
    * <p>绑定的模型服务秘钥</p>
    */
   SecretKeyIds?: Array<string>
-}
-
-/**
- * ModifyCloudNativeAPIGatewayConsumerGroup请求参数结构体
- */
-export interface ModifyCloudNativeAPIGatewayConsumerGroupRequest {
-  /**
-   * 网关实例id
-   */
-  GatewayId: string
-  /**
-   * <p>消费者组 ID（以 cg- 开头）。</p>
-   */
-  ConsumerGroupId: string
-  /**
-   * <p>消费者组名称，最长 60 字符。</p>
-   */
-  Name: string
-  /**
-   * <p>启用状态。</p><p>枚举值：</p><ul><li>Enable：启用</li><li>Disable：禁用</li></ul>
-   */
-  Status: string
-  /**
-   * <p>消费者组描述。最长 200 字符。</p>
-   */
-  Description?: string
-}
-
-/**
- * DescribeCloudNativeAPIGatewayMCPToolList返回参数结构体
- */
-export interface DescribeCloudNativeAPIGatewayMCPToolListResponse {
-  /**
-   * <p>tool 列表</p>
-   */
-  Result?: CNAPIGwMCPToolList
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeCloudNativeAPIGatewayLLMModelAPI请求参数结构体
- */
-export interface DescribeCloudNativeAPIGatewayLLMModelAPIRequest {
-  /**
-   * <p>网关 id。</p>
-   */
-  GatewayId: string
-  /**
-   * <p>模型 API ID，全局唯一标识。</p>
-   */
-  ModelAPIId: string
 }
 
 /**

@@ -2423,38 +2423,43 @@ export interface DescribeUserGroupTreeListResponse {
  */
 export interface UserInfo {
   /**
-   * 用户ID
+   * <p>用户ID</p>
    */
   UserId?: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   UserName?: string
   /**
-   * 邮箱
+   * <p>邮箱</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Email?: string
   /**
-   * 手机号
+   * <p>手机号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PhoneNumber?: string
   /**
-   * 手机号区号
+   * <p>手机号区号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AreaCode?: string
   /**
-   * 企微账号id
+   * <p>企微账号id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppUserId?: string
   /**
-   * 企微账号名称
+   * <p>企微账号名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppUserName?: string
+  /**
+   * <p>飞书OpenId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LarkOpenId?: string
 }
 
 /**
@@ -2574,6 +2579,26 @@ export interface UserIdAndUserName {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
+  /**
+   * <p>飞书应用ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LarkAppId?: string
+  /**
+   * <p>飞书UserId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LarkUserId?: string
+  /**
+   * <p>飞书OpenId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LarkOpenId?: string
+  /**
+   * <p>飞书UserName</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LarkUserName?: string
 }
 
 /**

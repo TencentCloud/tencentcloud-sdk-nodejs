@@ -135,7 +135,7 @@ Trigger 告警触发; Recovery 告警恢复
  */
 export interface DeleteNoticeContentTmplsRequest {
   /**
-   * 要删除的模板id
+   * <p>要删除的模板id</p>
    */
   TmplIDs?: Array<string>
 }
@@ -343,7 +343,7 @@ export interface QCloudYeheNoticeTmplItem {
  */
 export interface CreateNoticeContentTmplResponse {
   /**
-   * 自定义内容模板ID
+   * <p>自定义内容模板ID</p>
    */
   TmplID?: string
   /**
@@ -976,19 +976,19 @@ export interface ModifyNoticeContentTmplRequest {
  */
 export interface CreateNoticeContentTmplRequest {
   /**
-   * 模板名称
+   * <p>模板名称</p>
    */
   TmplName: string
   /**
-   * 监控类型
+   * <p>监控类型</p>
    */
   MonitorType: string
   /**
-   * 模板内容
+   * <p>模板内容</p>
    */
   TmplContents: NoticeContentTmplItem
   /**
-   * 模板语言 en/zh
+   * <p>模板语言 en/zh</p>
    */
   TmplLanguage: string
 }
@@ -1048,46 +1048,46 @@ export interface DescribeAIWorkbenchSREDigitalTwinWorkLogDetailResponse {
  */
 export interface NoticeContentTmpl {
   /**
-   * 自定义通知内容模板id，唯一id
+   * <p>自定义通知内容模板id，唯一id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TmplID?: string
   /**
-   * 自定义通知内容模板名
+   * <p>自定义通知内容模板名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TmplName?: string
   /**
-   * 通知内容
+   * <p>通知内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TmplContents?: NoticeContentTmplItem
   /**
-   * Unix时间戳，秒
+   * <p>Unix时间戳，秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
   /**
-   * Unix时间戳，秒
+   * <p>Unix时间戳，秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: number
   /**
-   * 最后修改人
+   * <p>最后修改人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastModifier?: string
   /**
-   * 创建人
+   * <p>创建人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Creator?: string
   /**
-   * 监控类型
+   * <p>监控类型</p>
    */
   MonitorType?: string
   /**
-   * 模板语言 en/zh
+   * <p>模板语言 en/zh</p>
    */
   TmplLanguage?: string
 }

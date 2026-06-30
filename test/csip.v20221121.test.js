@@ -368,6 +368,16 @@ it("csip.v20221121.DescribeIaCFileList", async function () {
     }
 })
 
+it("csip.v20221121.ModifyNotifySettingAlert", async function () {
+    try {
+       const data = await client.ModifyNotifySettingAlert({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DescribeCosIdentifyFileList", async function () {
     try {
        const data = await client.DescribeCosIdentifyFileList({})
@@ -448,6 +458,16 @@ it("csip.v20221121.DescribeSubUserInfo", async function () {
     }
 })
 
+it("csip.v20221121.DescribeNotifyAssetConfig", async function () {
+    try {
+       const data = await client.DescribeNotifyAssetConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.ModifyDspmAssetAccount", async function () {
     try {
        const data = await client.ModifyDspmAssetAccount({})
@@ -461,6 +481,16 @@ it("csip.v20221121.ModifyDspmAssetAccount", async function () {
 it("csip.v20221121.ModifyUebaRuleSwitch", async function () {
     try {
        const data = await client.ModifyUebaRuleSwitch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.ModifyNotifySetting", async function () {
+    try {
+       const data = await client.ModifyNotifySetting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1168,6 +1198,16 @@ it("csip.v20221121.DescribeTaskLogList", async function () {
     }
 })
 
+it("csip.v20221121.ModifyNotifyAssetConfig", async function () {
+    try {
+       const data = await client.ModifyNotifyAssetConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.VerifyDspmAssetLoginCode", async function () {
     try {
        const data = await client.VerifyDspmAssetLoginCode({})
@@ -1601,6 +1641,16 @@ it("csip.v20221121.DescribeDspmAssetAccounts", async function () {
 it("csip.v20221121.DescribeCLSLogIndexV3", async function () {
     try {
        const data = await client.DescribeCLSLogIndexV3({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeNotifySetting", async function () {
+    try {
+       const data = await client.DescribeNotifySetting({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2071,6 +2121,16 @@ it("csip.v20221121.DescribeSearchBugInfo", async function () {
 it("csip.v20221121.ModifyDspmIpInfo", async function () {
     try {
        const data = await client.ModifyDspmIpInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("csip.v20221121.DescribeNotifySettingAlert", async function () {
+    try {
+       const data = await client.DescribeNotifySettingAlert({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

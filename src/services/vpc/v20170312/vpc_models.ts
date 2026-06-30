@@ -4861,29 +4861,53 @@ export type DescribeNetworkAccountTypeRequest = null
  */
 export interface TrafficQosPolicySet {
   /**
-   * CCN实例ID。形如：ccn-f49l6u0z。
+   * <p>CCN实例ID。形如：ccn-f49l6u0z。</p>
    */
   CcnId?: string
   /**
-   * qos id。
+   * <p>qos id。</p>
    */
   QosId?: number
   /**
-   * 描述。
+   * <p>描述。</p>
    */
   QosPolicyDescription?: string
   /**
-   * 名称。
+   * <p>名称。</p>
    */
   QosPolicyName?: string
   /**
-   * 带宽。
+   * <p>带宽。</p>
    */
   Bandwidth?: number
   /**
-   * 流量调度策略ID。
+   * <p>流量调度策略ID。</p>
    */
   QosPolicyId?: string
+  /**
+   * <p>服务等级信息</p>
+   */
+  QosLevel?: string
+  /**
+   * <p>服务等级信息</p>
+   */
+  ServiceLevel?: string
+  /**
+   * <p>带宽ID</p><p>参数格式：fcr-xxx</p>
+   */
+  RegionFlowControlId?: string
+  /**
+   * <p>源地域</p><p>参数格式：ap-xxx</p>
+   */
+  LocalRegion?: string
+  /**
+   * <p>目的地域</p><p>参数格式：ap-xxx</p>
+   */
+  RemoteRegion?: string
+  /**
+   * <p>流量匹配策略ID</p>
+   */
+  TrafficMatchPolicyId?: string
 }
 
 /**

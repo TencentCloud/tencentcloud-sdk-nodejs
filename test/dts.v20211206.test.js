@@ -48,6 +48,16 @@ it("dts.v20211206.DestroyIsolatedSubscribe", async function () {
     }
 })
 
+it("dts.v20211206.DescribeSyncGtidCompareReport", async function () {
+    try {
+       const data = await client.DescribeSyncGtidCompareReport({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dts.v20211206.CreateModifyCheckSyncJob", async function () {
     try {
        const data = await client.CreateModifyCheckSyncJob({})
@@ -371,6 +381,16 @@ it("dts.v20211206.ModifySubscribeAutoRenewFlag", async function () {
 it("dts.v20211206.ModifySyncJobConfig", async function () {
     try {
        const data = await client.ModifySyncJobConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dts.v20211206.DescribeMigrateGtidCompareReport", async function () {
+    try {
+       const data = await client.DescribeMigrateGtidCompareReport({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
