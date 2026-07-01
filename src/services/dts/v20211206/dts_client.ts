@@ -224,6 +224,7 @@ import {
   ModifyMigrateJobSpecResponse,
   DescribeCompareDiffItemsRequest,
   CreateSyncJobResponse,
+  RateLimit,
   ModifySyncCompareTaskNameRequest,
   CreateCompareTaskRequest,
   ErrInfo,

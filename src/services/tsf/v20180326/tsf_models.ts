@@ -14194,6 +14194,10 @@ export interface DeployContainerApplicationRequest {
    * <p>是否不立即启动</p>
    */
   DoNotStart?: boolean
+  /**
+   * <p>镜像Secret列表</p>
+   */
+  ImagePullSecretList?: Array<string>
 }
 
 /**

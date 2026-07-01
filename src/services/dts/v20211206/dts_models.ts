@@ -2348,6 +2348,10 @@ export interface MigrateOption {
    * <p>pgsql迁移分类：logical(逻辑迁移)、physical(物理迁移)</p>
    */
   MigrateWay?: string
+  /**
+   * <p>迁移配置阶段限速相关参数</p>
+   */
+  RateLimit?: RateLimit
 }
 
 /**
@@ -4645,6 +4649,32 @@ export interface CreateSyncJobResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 数据迁移限速配置对象
+ */
+export interface RateLimit {
+  /**
+   * <p>全量导出线程数，如果不设置或设置为0则表示保持当前值，最大值为16</p>
+   */
+  DumpThread?: number
+  /**
+   * <p>全量导出Rps，如果不设置或设置为0则表示保持当前值，最大值为50000000</p>
+   */
+  DumpRps?: number
+  /**
+   * <p>全量导入线程数，如果不设置或设置为0则表示保持当前值，最大值为16</p>
+   */
+  LoadThread?: number
+  /**
+   * <p>全量导入Rps，如果不设置或设置为0则表示保持当前值，最大值为50000000</p>
+   */
+  LoadRps?: number
+  /**
+   * <p>增量导入线程数，如果不设置或设置为0则表示保持当前值，最大值为128</p>
+   */
+  SinkerThread?: number
 }
 
 /**

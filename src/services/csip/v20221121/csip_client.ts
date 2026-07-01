@@ -51,6 +51,7 @@ import {
   ModifyCosAuditMonitorAccountRequest,
   DescribeDspmAccessTopologyIpsResponse,
   LogRuleKeyValueInfo,
+  DescribeEdrAlertListRequest,
   CreateDspmAssetsExportJobResponse,
   DescribeRiskCenterWebsiteRiskListResponse,
   DescribeDspmSyncAssetsStatusRequest,
@@ -70,6 +71,7 @@ import {
   ModifyDspmAssetSecurityAnalysisSwitchRequest,
   DescribeCosBucketBillingInfoRequest,
   DescribeDspmRiskTendencyRequest,
+  EdrAlertTarget,
   DescribeDspmRiskResponse,
   LogItems,
   ModifyDspmWhitelistStrategyResponse,
@@ -83,6 +85,7 @@ import {
   DescribeBucketInvokeIpListRequest,
   OrganizationInfo,
   TagCount,
+  UpdateAccessKeyAlarmStatusResponse,
   DescribeVulRiskListResponse,
   CreateRiskCenterScanTaskResponse,
   DescribeDspmAssetsRequest,
@@ -99,14 +102,17 @@ import {
   CloudCountDesc,
   DiskPartitionInfo,
   ModifyDspmApproveStatusResponse,
+  IaCFile,
   DescribeAIAgentAssetListRequest,
   SendDspmAssetLoginSmsCodeResponse,
   CosRiskActionInfo,
+  DetectTypeCount,
   DescribeRiskCenterAssetViewCFGRiskListResponse,
   ModifyDspmAssetAccountResponse,
   ModifyDspmRestoreLogTaskRequest,
   UpdateAlertStatusListRequest,
   DspmIdentifyAssetStatistic,
+  IPIntelInfo,
   DescribeCosActionListRequest,
   DescribeUserDspmInfoListRequest,
   DescribeCosAlarmListRequest,
@@ -137,12 +143,14 @@ import {
   DescribeDspmApproveOrderListRequest,
   DspmRiskTendency,
   DeleteDomainAndIpResponse,
+  CSIPTag,
   CreateDomainAndIpRequest,
   CosDictionary,
   LogSearchTopics,
   DescribeRiskRulesResponse,
   SkillCapabilityTag,
   VerifyDspmAssetLoginCodeResponse,
+  RuleContentProcessInfo,
   DescribeScanStatisticResponse,
   DescribeAccessKeyAlarmRequest,
   DescribeCosAlarmListResponse,
@@ -176,9 +184,10 @@ import {
   DspmAssetFieldInfo,
   ModifyRiskCenterRiskStatusResponse,
   RetryDspmExportLogResponse,
-  MachineDetail,
+  DescribeEdrAlertInfoResponse,
   DescribeExposuresResponse,
   CreateDspmApproveHistoryExportJobRequest,
+  AttackStageCount,
   CreateDspmRiskExportJobResponse,
   DescribeIpInvokeRecordResponse,
   DescribeCosRoleAccessPermissionsResponse,
@@ -261,6 +270,7 @@ import {
   DspmDbAccountPrivilege,
   ModifyDspmIdentifyInfoResponse,
   DspmAssetDatabaseInfo,
+  RuleContentCmdLine,
   DspmColumnPrivilege,
   CreateDspmAssetAccessTopologyExportJobResponse,
   DescribeCosBucketListResponse,
@@ -284,6 +294,7 @@ import {
   DescribeCWPMachinesRequest,
   DspmAssetAccount,
   DescribeDspmIdentifyIdListRequest,
+  DescribeAILinkSettingRequest,
   DescribeCVMAssetInfoResponse,
   ModifyDspmBackupSettingResponse,
   DspmRisk,
@@ -298,6 +309,7 @@ import {
   SourceIPVpcInfo,
   CreateDspmApplyOrderResponse,
   DescribeUebaRuleRequest,
+  ModifyEDRRuleRequest,
   DescribeDspmAssetAccessTopologyRequest,
   DescribeRiskCenterWebsiteRiskListRequest,
   DescribeCallRecordRequest,
@@ -346,17 +358,19 @@ import {
   CosAssetSyncTaskInfo,
   DspmDictionary,
   InquireInfo,
+  ModifyUebaRuleSwitchRequest,
   RiskCallRecord,
   DspmRiskStrategy,
   AssetProcessItem,
-  ModifyUebaRuleSwitchRequest,
+  MachineDetail,
   DspmAssetCount,
   DescribeScanStatisticRequest,
   Filter,
   CosAssetDataScanDetail,
   ModifyNotifySettingAlertRequest,
   AssetCluster,
-  DspmRiskStrategyGroup,
+  EDRRule,
+  DescribeEdrAlertInfoRequest,
   ExportTask,
   AddDspmAssetManagerResponse,
   UpdateAccessKeyRemarkRequest,
@@ -375,7 +389,7 @@ import {
   DescribeRepositoryImageAssetsRequest,
   DescribeRiskTrendDataResponse,
   CosAuditPayInfo,
-  UpdateAccessKeyAlarmStatusResponse,
+  EDRFilter,
   VulImpactComponentInfo,
   CVMAssetVO,
   VULBaseInfo,
@@ -422,6 +436,7 @@ import {
   UebaEventContent,
   CreateAccessKeySyncTaskResponse,
   ModifyIaCTokenPeriodResponse,
+  EdrAlertItem,
   DescribeDspmSyncUsersStatusResponse,
   DescribeSearchBugInfoRequest,
   DescribeDspmRiskDetailResponse,
@@ -463,6 +478,7 @@ import {
   ServiceSupport,
   DescribeDspmAssetAccountRecycledPrivilegesResponse,
   DescribeAssetRiskListResponse,
+  ModifyAILinkSettingRequest,
   DeleteDspmRestoreLogListResponse,
   CosBucketId,
   AccessCredentialOutput,
@@ -509,6 +525,7 @@ import {
   DescribeDspmAssetIdsResponse,
   StopRiskCenterTaskRequest,
   ModifyDspmAssetSecurityAnalysisSwitchResponse,
+  DescribeEdrAlertListResponse,
   ExposesItem,
   AKInfo,
   WhereFilter,
@@ -526,6 +543,7 @@ import {
   DomainAssetVO,
   DescribeAccessKeyUserDetailResponse,
   NotifyAssetConfigItem,
+  EdrAlertDetail,
   CosAlarmTrendInfo,
   CredentialEffectScope,
   RevertDspmAssetAccountResponse,
@@ -538,12 +556,17 @@ import {
   CreateCosAssetSyncTaskRequest,
   DescribeCVMAssetsRequest,
   DescribeRiskCenterServerRiskListRequest,
+  DomainInfo,
   DescribeAccessKeyAlarmDetailResponse,
+  RuleContentProcessNetwork,
   DescribeOtherCloudAssetsRequest,
+  DescribeAILinkSettingResponse,
+  ModifyAILinkSettingResponse,
   DescribeDspmAssetSecurityAnalyseStatusResponse,
   CosAlarmRiskIdInfo,
   ModifyNotifyAssetConfigResponse,
   DescribeDspmBackupLogListResponse,
+  ModifyEdrAlertPermanentIgnoreResponse,
   ModifyDspmIdentifyInfoRequest,
   DescribeDspmWhitelistStrategyRequest,
   DescribeOtherCloudAssetsResponse,
@@ -587,12 +610,14 @@ import {
   ModifyRiskCenterScanTaskResponse,
   ModifyAlarmRiskStatusRequest,
   TrafficRuleState,
+  ModifyEDRRuleResponse,
   AccessKeyAlarmCount,
   RiskRuleItem,
   DescribeAbnormalCallRecordRequest,
   UpdateAccessKeyAlarmStatusRequest,
   ModifyDspmAssetDataScanTaskRequest,
   AssetRiskItem,
+  ModifyEdrAlertPermanentIgnoreRequest,
   DescribeRiskDetailListRequest,
   DspmAccessRecordId,
   DescribeNotifySettingRequest,
@@ -615,7 +640,7 @@ import {
   RiskCenterStatusKey,
   TaskAssetObject,
   DbAssetInfo,
-  IaCFile,
+  DspmRiskStrategyGroup,
   DescribeCosAccessPermissionsRequest,
   CreateCosRiskScanTaskRequest,
   CosIdentifyRuleDetail,
@@ -624,6 +649,7 @@ import {
   DescribeDspmAssetTableListResponse,
   ModifyAlarmRiskStatusResponse,
   Tag,
+  DescribeEDRRuleListRequest,
   DspmIdentifyCategoryDetail,
   AccessKeyAlarm,
   AssetClusterPod,
@@ -652,10 +678,12 @@ import {
   RiskDetailItem,
   DescribePublicIpAssetsResponse,
   DescribeCosAlarmTrendDataResponse,
+  DescribeEDRRuleListResponse,
   DescribeDspmAssetDatabaseListResponse,
   CreateSkillScanRequest,
   ModifyDspmAccessRecordResponse,
   ModifyMachineRemarkRequest,
+  InstanceIDWithAppIdItem,
   DescribeVulViewVulRiskListRequest,
   DescribeCosBucketListRequest,
   DescribeVulRiskListRequest,
@@ -722,12 +750,14 @@ import {
   DeleteIaCAccessTokenRequest,
   DeleteRiskScanTaskResponse,
   SyncDspmAssetsResponse,
+  EdrAlertCategoryCount,
   CreateCosPolicyResponse,
   DescribeCFWAssetStatisticsRequest,
   DescribeAccessKeyUserListResponse,
   CosAlarmInfo,
   ExposeAssetTypeItem,
   DescribeDspmLogListResponse,
+  EdrAlertTargetForIgnore,
   FilterDataObject,
   DeleteDspmWhitelistStrategyRequest,
   DescribeDbAssetsResponse,
@@ -1158,6 +1188,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取EDR告警详情，包含告警内容JSON、资产富化、情报富化等完整信息
+   */
+  async DescribeEdrAlertInfo(
+    req: DescribeEdrAlertInfoRequest,
+    cb?: (error: string, rep: DescribeEdrAlertInfoResponse) => void
+  ): Promise<DescribeEdrAlertInfoResponse> {
+    return this.request("DescribeEdrAlertInfo", req, cb)
+  }
+
+  /**
    * 对象存储异常检测调用记录信息
    */
   async DescribeIpInvokeRecord(
@@ -1338,13 +1378,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * cos概览信息
+   * 检测AK 异步任务
    */
-  async DescribeCosOverview(
-    req: DescribeCosOverviewRequest,
-    cb?: (error: string, rep: DescribeCosOverviewResponse) => void
-  ): Promise<DescribeCosOverviewResponse> {
-    return this.request("DescribeCosOverview", req, cb)
+  async CreateAccessKeyCheckTask(
+    req: CreateAccessKeyCheckTaskRequest,
+    cb?: (error: string, rep: CreateAccessKeyCheckTaskResponse) => void
+  ): Promise<CreateAccessKeyCheckTaskResponse> {
+    return this.request("CreateAccessKeyCheckTask", req, cb)
   }
 
   /**
@@ -1418,6 +1458,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取EDR告警列表
+   */
+  async DescribeEdrAlertList(
+    req: DescribeEdrAlertListRequest,
+    cb?: (error: string, rep: DescribeEdrAlertListResponse) => void
+  ): Promise<DescribeEdrAlertListResponse> {
+    return this.request("DescribeEdrAlertList", req, cb)
+  }
+
+  /**
    * 云边界分析资产列表
    */
   async DescribeExposures(
@@ -1448,13 +1498,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取调用记录列表
+   * 查询AI-Link智链引擎配置
    */
-  async DescribeAbnormalCallRecord(
-    req: DescribeAbnormalCallRecordRequest,
-    cb?: (error: string, rep: DescribeAbnormalCallRecordResponse) => void
-  ): Promise<DescribeAbnormalCallRecordResponse> {
-    return this.request("DescribeAbnormalCallRecord", req, cb)
+  async DescribeAILinkSetting(
+    req: DescribeAILinkSettingRequest,
+    cb?: (error: string, rep: DescribeAILinkSettingResponse) => void
+  ): Promise<DescribeAILinkSettingResponse> {
+    return this.request("DescribeAILinkSetting", req, cb)
   }
 
   /**
@@ -1588,13 +1638,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 检测AK 异步任务
+   * cos概览信息
    */
-  async CreateAccessKeyCheckTask(
-    req: CreateAccessKeyCheckTaskRequest,
-    cb?: (error: string, rep: CreateAccessKeyCheckTaskResponse) => void
-  ): Promise<CreateAccessKeyCheckTaskResponse> {
-    return this.request("CreateAccessKeyCheckTask", req, cb)
+  async DescribeCosOverview(
+    req: DescribeCosOverviewRequest,
+    cb?: (error: string, rep: DescribeCosOverviewResponse) => void
+  ): Promise<DescribeCosOverviewResponse> {
+    return this.request("DescribeCosOverview", req, cb)
   }
 
   /**
@@ -2208,13 +2258,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取网关列表
+   * 获取调用记录列表
    */
-  async DescribeGatewayAssets(
-    req: DescribeGatewayAssetsRequest,
-    cb?: (error: string, rep: DescribeGatewayAssetsResponse) => void
-  ): Promise<DescribeGatewayAssetsResponse> {
-    return this.request("DescribeGatewayAssets", req, cb)
+  async DescribeAbnormalCallRecord(
+    req: DescribeAbnormalCallRecordRequest,
+    cb?: (error: string, rep: DescribeAbnormalCallRecordResponse) => void
+  ): Promise<DescribeAbnormalCallRecordResponse> {
+    return this.request("DescribeAbnormalCallRecord", req, cb)
   }
 
   /**
@@ -2458,6 +2508,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取网关列表
+   */
+  async DescribeGatewayAssets(
+    req: DescribeGatewayAssetsRequest,
+    cb?: (error: string, rep: DescribeGatewayAssetsResponse) => void
+  ): Promise<DescribeGatewayAssetsResponse> {
+    return this.request("DescribeGatewayAssets", req, cb)
+  }
+
+  /**
    * 集群列表
    */
   async DescribeClusterAssets(
@@ -2555,6 +2615,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDspmAssetAccountPresetPrivilegesResponse) => void
   ): Promise<DescribeDspmAssetAccountPresetPrivilegesResponse> {
     return this.request("DescribeDspmAssetAccountPresetPrivileges", req, cb)
+  }
+
+  /**
+   * 获取EDR策略列表
+   */
+  async DescribeEDRRuleList(
+    req: DescribeEDRRuleListRequest,
+    cb?: (error: string, rep: DescribeEDRRuleListResponse) => void
+  ): Promise<DescribeEDRRuleListResponse> {
+    return this.request("DescribeEDRRuleList", req, cb)
   }
 
   /**
@@ -2968,6 +3038,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 编辑或者创建EDR策略
+   */
+  async ModifyEDRRule(
+    req: ModifyEDRRuleRequest,
+    cb?: (error: string, rep: ModifyEDRRuleResponse) => void
+  ): Promise<ModifyEDRRuleResponse> {
+    return this.request("ModifyEDRRule", req, cb)
+  }
+
+  /**
    * 获取资产视角的配置风险列表
    */
   async DescribeRiskCenterAssetViewCFGRiskList(
@@ -3025,6 +3105,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDspmPersonalIdentifyListResponse) => void
   ): Promise<DescribeDspmPersonalIdentifyListResponse> {
     return this.request("DescribeDspmPersonalIdentifyList", req, cb)
+  }
+
+  /**
+   * 修改AI-Link智链引擎配置
+   */
+  async ModifyAILinkSetting(
+    req: ModifyAILinkSettingRequest,
+    cb?: (error: string, rep: ModifyAILinkSettingResponse) => void
+  ): Promise<ModifyAILinkSettingResponse> {
+    return this.request("ModifyAILinkSetting", req, cb)
   }
 
   /**
@@ -3135,6 +3225,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRiskCallRecordResponse) => void
   ): Promise<DescribeRiskCallRecordResponse> {
     return this.request("DescribeRiskCallRecord", req, cb)
+  }
+
+  /**
+   * 永久忽略EDR多行为告警，将告警对应的主机+规则加入AI-Link永久忽略白名单，后续同类告警将自动丢弃
+   */
+  async ModifyEdrAlertPermanentIgnore(
+    req: ModifyEdrAlertPermanentIgnoreRequest,
+    cb?: (error: string, rep: ModifyEdrAlertPermanentIgnoreResponse) => void
+  ): Promise<ModifyEdrAlertPermanentIgnoreResponse> {
+    return this.request("ModifyEdrAlertPermanentIgnore", req, cb)
   }
 
   /**

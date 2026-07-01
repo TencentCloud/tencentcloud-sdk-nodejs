@@ -1175,6 +1175,7 @@ DELETING，删除中
   SharedSubscriptionGroupLimit?: number
   /**
    * 单个共享订阅组TopicFilter数限制
+   * @deprecated
    */
   MaxTopicFilterPerSharedSubscriptionGroup?: number
   /**
@@ -1185,6 +1186,10 @@ DELETING，删除中
    * 单条自动订阅规则TopicFilter数限制
    */
   MaxTopicFilterPerAutoSubscriptionPolicy?: number
+  /**
+   * 集群删除保护开关
+   */
+  DeleteProtect?: boolean
 }
 
 /**
@@ -1192,11 +1197,11 @@ DELETING，删除中
  */
 export interface DescribeInstanceListResponse {
   /**
-   * 查询总数
+   * <p>查询总数</p>
    */
   TotalCount?: number
   /**
-   * 实例列表
+   * <p>实例列表</p>
    */
   Data?: Array<MQTTInstanceItem>
   /**
@@ -2246,6 +2251,17 @@ export interface DescribeClientListRequest {
    * 客户端数量限制,最大1024，默认1024
    */
   Number?: string
+  /**
+   * 0:查询在线和离线客户端（默认值）
+1:查询在线客户端
+2:查询离线客户端
+   */
+  OnlineStatus?: number
+  /**
+   * 在线连接：表示最后的连接时间
+离线连接：表示最后的断开连接时间
+   */
+  MaxTimestamp?: number
 }
 
 /**
@@ -2876,6 +2892,18 @@ export interface DescribeInstanceResponse {
    */
   BlockRuleLimit?: number
   /**
+   * <p>删除保护开关</p>
+   */
+  DeleteProtect?: boolean
+  /**
+   * <p>集群客户端事件格式</p><p>枚举值：</p><ul><li>V1： 详见官网文档</li><li>V2： 详见官网文档</li><li>V3： 详见官网文档</li></ul><p>默认值：V3</p>
+   */
+  EventDialect?: string
+  /**
+   * <p>消息HASH策略</p><p>枚举值：</p><ul><li>TOPIC_NAME： 按主题名</li><li>CLIENT_ID： 按客户端ID</li></ul><p>默认值：TOPIC_NAME</p>
+   */
+  HashMessagePolicy?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -3037,6 +3065,10 @@ export interface KickOutClientRequest {
    * 客户端id
    */
   ClientId: string
+  /**
+   * 是否清理session，默认false
+   */
+  DeleteSession?: boolean
 }
 
 /**
@@ -3338,6 +3370,22 @@ export interface CreateHttpAuthenticatorRequest {
    * 转发请求body
    */
   Body?: Array<BodyItem>
+  /**
+   * 连接UserProperty作为Header转发，默认false
+   */
+  IncludingUserProperties?: boolean
+  /**
+   * vpcsvcId
+HTTP认证需要通过vpc网络访问时需要配置
+   */
+  VpcSvcId?: string
+  /**
+   * 网络连接类型
+vpc：vpc网络
+public：公网
+通过vpc网络连接需要设置VpcSvcId参数
+   */
+  NetworkType?: string
 }
 
 /**
@@ -3440,23 +3488,19 @@ JITP：自动注册
  */
 export interface DescribeInstanceListRequest {
   /**
-   * 查询条件列表,支持以下字段
-InstanceName：集群名模糊搜索
-InstanceId：集群id精确搜索
-InstanceStatus：集群状态搜索（RUNNING-运行中，CREATING-创建中，MODIFYING-变配中，DELETING-删除中）
-注意：配置TagFilters时该查询条件不生效。
+   * <p>查询条件列表,支持以下字段<br>InstanceName：集群名模糊搜索<br>InstanceId：集群id精确搜索<br>InstanceStatus：集群状态搜索（RUNNING-运行中，CREATING-创建中，MODIFYING-变配中，DELETING-删除中）<br>PayMode：付费模式搜索（PREPAID-包年包月，POSTPAID-按小时计费）<br>ExpiredBefore：按过期时间过滤：仅筛选包年包月（PREPAID）集群<br>注意：配置TagFilters时该查询条件不生效。</p>
    */
   Filters?: Array<Filter>
   /**
-   * 查询起始位置，默认0
+   * <p>查询起始位置，默认0</p>
    */
   Offset?: number
   /**
-   * 查询结果限制数量，默认20，最大100
+   * <p>查询结果限制数量，默认20，最大100</p>
    */
   Limit?: number
   /**
-   * 标签过滤器
+   * <p>标签过滤器</p>
    */
   TagFilters?: Array<TagFilter>
 }
@@ -3693,6 +3737,14 @@ export interface MQTTClientInfo {
    * 客户端的订阅列表
    */
   MQTTClientSubscriptions?: Array<MQTTClientSubscription>
+  /**
+   * clean-session标志，在客户端使用mqtt5协议时，该字段即clean-start
+   */
+  CleanSession?: boolean
+  /**
+   * MQTT5协议：expireIntervalInSeconds
+   */
+  ExpireIntervalInSeconds?: number
 }
 
 /**

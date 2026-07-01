@@ -78,6 +78,16 @@ it("adp.v20260520.DescribeConversation", async function () {
     }
 })
 
+it("adp.v20260520.CopyAgentFromApp", async function () {
+    try {
+       const data = await client.CopyAgentFromApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.DescribeVariable", async function () {
     try {
        const data = await client.DescribeVariable({})

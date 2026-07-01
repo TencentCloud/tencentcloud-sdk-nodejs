@@ -248,6 +248,16 @@ it("trocket.v20230308.DescribeProductSKUs", async function () {
     }
 })
 
+it("trocket.v20230308.DescribeTopicStats", async function () {
+    try {
+       const data = await client.DescribeTopicStats({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.ChangeMigratingTopicToNextStage", async function () {
     try {
        const data = await client.ChangeMigratingTopicToNextStage({})

@@ -2850,6 +2850,18 @@ export interface TextWatermarkTemplateInput {
 }
 
 /**
+ * 视频拆条识别任务控制参数
+ */
+export interface SegmentConfigureInfoForUpdate {
+  /**
+   * 视频拆条识别任务开关，可选值：
+<li>ON：开启智能视频拆条识别任务；</li>
+<li>OFF：关闭智能视频拆条识别任务。</li>
+   */
+  Switch?: string
+}
+
+/**
  * 用户自定义语音审核任务控制参数
  */
 export interface UserDefineAsrTextReviewTemplateInfoForUpdate {
@@ -3868,6 +3880,16 @@ export interface ModifyMediaStorageClassResponse {
 }
 
 /**
+ * CreateAigcQuota返回参数结构体
+ */
+export interface CreateAigcQuotaResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeProcedureTemplates请求参数结构体
  */
 export interface DescribeProcedureTemplatesRequest {
@@ -4032,17 +4054,21 @@ export interface MediaProcessTaskAnimatedGraphicResult {
 }
 
 /**
- * DescribeAigcUsageData返回参数结构体
+ * DeleteAigcQuota请求参数结构体
  */
-export interface DescribeAigcUsageDataResponse {
+export interface DeleteAigcQuotaRequest {
   /**
-   * <p>AIGC统计数据。</p>
+   * <p><strong>点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</strong></p>
    */
-  AigcUsageDataSet?: Array<AigcUsageDataItem>
+  SubAppId: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>配额类型</p><p>枚举值：</p><ul><li>Image： AIGC 生图任务</li><li>Video： AIGC 生视频任务</li><li>Text： AIGC 生文任务</li></ul>
    */
-  RequestId?: string
+  QuotaType: string
+  /**
+   * <p>仅当QuotaLimit=Text时有效，用于选择需要进行配额限制ApiToken</p>
+   */
+  ApiToken?: string
 }
 
 /**
@@ -5775,6 +5801,21 @@ export interface SplitMediaTaskConfig {
    * 视频拆条输出信息。
    */
   OutputConfig?: SplitMediaOutputConfig
+}
+
+/**
+ * 极速高清参数配置。
+ */
+export interface TEHDConfig {
+  /**
+   * 极速高清类型，可选值：<li>TEHD-100 表示极速高清-100;</li> <li>OFF 表示关闭极速高清。</li>不填表示 OFF。
+   */
+  Type: string
+  /**
+   * 视频码率上限，当 Type 指定了极速高清类型时有效。
+不填或填0表示由云点播自动设置码率上限。
+   */
+  MaxVideoBitrate?: number
 }
 
 /**
@@ -8502,6 +8543,16 @@ export interface DeleteProcedureTemplateResponse {
 }
 
 /**
+ * ModifyAigcQuota返回参数结构体
+ */
+export interface ModifyAigcQuotaResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeReviewTemplates返回参数结构体
  */
 export interface DescribeReviewTemplatesResponse {
@@ -9755,15 +9806,62 @@ export interface CoverBySnapshotTaskInput {
 }
 
 /**
- * 视频拆条识别任务控制参数
+ * DescribeMediaProcessUsageData请求参数结构体
  */
-export interface SegmentConfigureInfoForUpdate {
+export interface DescribeMediaProcessUsageDataRequest {
   /**
-   * 视频拆条识别任务开关，可选值：
-<li>ON：开启智能视频拆条识别任务；</li>
-<li>OFF：关闭智能视频拆条识别任务。</li>
+   * 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
    */
-  Switch?: string
+  StartTime: string
+  /**
+   * 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
+   */
+  EndTime: string
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 查询视频处理任务类型，目前支持的任务类型包括：
+<li> Transcoding: 普通转码</li>
+<li> Transcoding-TESHD: 极速高清转码</li>
+<li> Editing: 视频编辑</li>
+<li> Editing-TESHD: 极速高清视频编辑</li>
+<li> AdaptiveBitrateStreaming: 自适应码流</li>
+<li> ContentAudit: 内容审核</li>
+<li> ContentRecognition: 内容识别</li>
+<li> RemoveWatermark: 去除水印</li>
+<li> ExtractTraceWatermark: 提取水印</li>
+<li> AddTraceWatermark: 添加水印</li>
+<li> RebuildMedia: 音画质重生</li>
+<li> QualityInspect: 音画质检测</li>
+<li> VideoHighlight: 视频智能集锦</li>
+<li> VideoTag: 视频智能标签</li>
+<li> VideoClassification:  视频智能分类</li>
+<li> VideoCover: 视频智能封面</li>
+<li> VideoSegment: 视频智能拆条</li>
+<li> VideoProduce: 视频制作</li>
+<li> MediaCast: 媒体转推</li>
+<li>Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）</li>
+<li>VoiceTranslation: 语音翻译</li>
+<li>JITTranscoding: 即时转码</li>
+<li>VideoSnapshot: 视频截图</li>
+<li>JITEncryption: 即时加密</li>
+<li>MediaEnhancement: 音视频增强</li>
+<li>ImageCompression: 图片压缩</li>
+<li>ImageEnhancement: 图片增强</li>
+<li>ImageSuperResolution: 图片超分</li>
+<li>ImageAdvanceCompression: 图片高级压缩</li>
+<li>ImageUnderstanding: 图片理解</li>
+<li>AddTraceWatermark: 添加溯源水印</li>
+<li>AddBlindWatermark: 添加盲水印</li>
+<li>AddNagraWatermark: 添加NAGRA数字水印</li>
+<li>ExtractTraceWatermark: 提取溯源水印</li>
+<li>ExtractBlindWatermark: 提取盲水印</li>
+<li>ExtractNagraWatermark: 提取NAGRA数字水印</li>
+
+   */
+  Type?: string
 }
 
 /**
@@ -9904,6 +10002,32 @@ export interface LiveRecordInfo {
    * <p>录制结束时间，使用  <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   RecordEndTime?: string
+}
+
+/**
+ * DescribeAigcQuotas请求参数结构体
+ */
+export interface DescribeAigcQuotasRequest {
+  /**
+   * <p><strong>点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</strong></p>
+   */
+  SubAppId: number
+  /**
+   * <p>配额类型</p><p>枚举值：</p><ul><li>Image： AIGC 生图任务</li><li>Video： AIGC 生视频任务</li><li>Text： AIGC 生文任务</li></ul>
+   */
+  QuotaType: string
+  /**
+   * <p>仅当QuotaLimit=Text时有效，用于选择需要进行配额限制ApiToken</p>
+   */
+  ApiToken?: string
+  /**
+   * <p>分页返回的记录条数，将返回第 Offset 到第 Offset+Limit-1 条。</p><p>取值范围：[1, 100]</p><p>默认值：10</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页返回的起始偏移量，默认值：0。将返回第 Offset 到第 Offset+Limit-1 条。</p><p>默认值：0</p>
+   */
+  Offset?: number
 }
 
 /**
@@ -11536,6 +11660,28 @@ export interface AiRecognitionTaskAsrWordsResultOutput {
 }
 
 /**
+ * CreateAigcQuota请求参数结构体
+ */
+export interface CreateAigcQuotaRequest {
+  /**
+   * <p><strong>点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</strong></p>
+   */
+  SubAppId: number
+  /**
+   * <p>配额类型</p><p>枚举值：</p><ul><li>Image： AIGC 生图任务</li><li>Video： AIGC 生视频任务</li><li>Text： AIGC 生文任务</li></ul>
+   */
+  QuotaType: string
+  /**
+   * <p>任务的配额数</p><p>单位：</p><ul><li>当QuotaLimit=Image时，单位为张</li><li>当QuotaLimit=Video时，单位为秒</li><li>当QuotaLimit=Text时，单位为token</li></ul>
+   */
+  QuotaLimit: number
+  /**
+   * <p>仅当QuotaLimit=Text时有效，用于选择需要进行配额限制ApiToken</p>
+   */
+  ApiToken?: string
+}
+
+/**
  * DescribeHeadTailTemplates请求参数结构体
  */
 export interface DescribeHeadTailTemplatesRequest {
@@ -12552,18 +12698,13 @@ export interface ProductImageConfig {
 }
 
 /**
- * 极速高清参数配置。
+ * DeleteAigcQuota返回参数结构体
  */
-export interface TEHDConfig {
+export interface DeleteAigcQuotaResponse {
   /**
-   * 极速高清类型，可选值：<li>TEHD-100 表示极速高清-100;</li> <li>OFF 表示关闭极速高清。</li>不填表示 OFF。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Type: string
-  /**
-   * 视频码率上限，当 Type 指定了极速高清类型时有效。
-不填或填0表示由云点播自动设置码率上限。
-   */
-  MaxVideoBitrate?: number
+  RequestId?: string
 }
 
 /**
@@ -15958,6 +16099,24 @@ export interface AiContentReviewTaskInput {
    * 音视频审核模板 ID。
    */
   Definition: number
+}
+
+/**
+ * DescribeAigcQuotas返回参数结构体
+ */
+export interface DescribeAigcQuotasResponse {
+  /**
+   * <p>配额列表</p>
+   */
+  QuotaSet?: Array<AigcQuotaItem>
+  /**
+   * <p>总条数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -21557,13 +21716,25 @@ export interface ModifyVodDomainAccelerateConfigResponse {
 }
 
 /**
- * 视频拆条输入。
+ * AIGC 配额
  */
-export interface AiRecognitionTaskSegmentResultInput {
+export interface AigcQuotaItem {
   /**
-   * 视频拆条模板 ID。
+   * <p>配额类型</p><p>枚举值：</p><ul><li>Image： AIGC 生图任务</li><li>Video： AIGC 生视频任务</li><li>Text： AIGC 生文任务</li></ul>
    */
-  Definition?: number
+  QuotaType?: string
+  /**
+   * <p>仅当QuotaLimit=Text时有效，用于选择需要进行配额限制ApiToken</p>
+   */
+  ApiToken?: string
+  /**
+   * <p>任务的配额数</p><p>单位：</p><ul><li>当QuotaLimit=Image时，单位为张</li><li>当QuotaLimit=Video时，单位为秒</li><li>当QuotaLimit=Text时，单位为token</li></ul>
+   */
+  QuotaLimit?: number
+  /**
+   * <p>已经使用的用量数</p><p>单位：</p><ul><li>当QuotaLimit=Image时，单位为张</li><li>当QuotaLimit=Video时，单位为秒</li><li>当QuotaLimit=Text时，单位为token</li></ul>
+   */
+  Usage?: number
 }
 
 /**
@@ -24102,6 +24273,28 @@ export interface ExecuteFunctionRequest {
 }
 
 /**
+ * ModifyAigcQuota请求参数结构体
+ */
+export interface ModifyAigcQuotaRequest {
+  /**
+   * <p><strong>点播应用 ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</strong></p>
+   */
+  SubAppId: number
+  /**
+   * <p>配额类型</p><p>枚举值：</p><ul><li>Image： AIGC 生图任务</li><li>Video： AIGC 生视频任务</li><li>Text： AIGC 生文任务</li></ul>
+   */
+  QuotaType: string
+  /**
+   * <p>任务的配额数</p><p>单位：</p><ul><li>当QuotaLimit=Image时，单位为张</li><li>当QuotaLimit=Video时，单位为秒</li><li>当QuotaLimit=Text时，单位为token</li></ul>
+   */
+  QuotaLimit: number
+  /**
+   * <p>仅当QuotaLimit=Text时有效，用于选择需要进行配额限制ApiToken</p>
+   */
+  ApiToken?: string
+}
+
+/**
  * 音画质重生任务
  */
 export interface RebuildMediaTask {
@@ -25974,62 +26167,17 @@ export interface QualityInspectItem {
 }
 
 /**
- * DescribeMediaProcessUsageData请求参数结构体
+ * DescribeAigcUsageData返回参数结构体
  */
-export interface DescribeMediaProcessUsageDataRequest {
+export interface DescribeAigcUsageDataResponse {
   /**
-   * 起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
+   * <p>AIGC统计数据。</p>
    */
-  StartTime: string
+  AigcUsageDataSet?: Array<AigcUsageDataItem>
   /**
-   * 结束日期，需大于等于起始日期。使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#52)。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EndTime: string
-  /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
-   */
-  SubAppId?: number
-  /**
-   * 查询视频处理任务类型，目前支持的任务类型包括：
-<li> Transcoding: 普通转码</li>
-<li> Transcoding-TESHD: 极速高清转码</li>
-<li> Editing: 视频编辑</li>
-<li> Editing-TESHD: 极速高清视频编辑</li>
-<li> AdaptiveBitrateStreaming: 自适应码流</li>
-<li> ContentAudit: 内容审核</li>
-<li> ContentRecognition: 内容识别</li>
-<li> RemoveWatermark: 去除水印</li>
-<li> ExtractTraceWatermark: 提取水印</li>
-<li> AddTraceWatermark: 添加水印</li>
-<li> RebuildMedia: 音画质重生</li>
-<li> QualityInspect: 音画质检测</li>
-<li> VideoHighlight: 视频智能集锦</li>
-<li> VideoTag: 视频智能标签</li>
-<li> VideoClassification:  视频智能分类</li>
-<li> VideoCover: 视频智能封面</li>
-<li> VideoSegment: 视频智能拆条</li>
-<li> VideoProduce: 视频制作</li>
-<li> MediaCast: 媒体转推</li>
-<li>Transcode: 转码，包含普通转码、极速高清和视频编辑（不推荐使用）</li>
-<li>VoiceTranslation: 语音翻译</li>
-<li>JITTranscoding: 即时转码</li>
-<li>VideoSnapshot: 视频截图</li>
-<li>JITEncryption: 即时加密</li>
-<li>MediaEnhancement: 音视频增强</li>
-<li>ImageCompression: 图片压缩</li>
-<li>ImageEnhancement: 图片增强</li>
-<li>ImageSuperResolution: 图片超分</li>
-<li>ImageAdvanceCompression: 图片高级压缩</li>
-<li>ImageUnderstanding: 图片理解</li>
-<li>AddTraceWatermark: 添加溯源水印</li>
-<li>AddBlindWatermark: 添加盲水印</li>
-<li>AddNagraWatermark: 添加NAGRA数字水印</li>
-<li>ExtractTraceWatermark: 提取溯源水印</li>
-<li>ExtractBlindWatermark: 提取盲水印</li>
-<li>ExtractNagraWatermark: 提取NAGRA数字水印</li>
-
-   */
-  Type?: string
+  RequestId?: string
 }
 
 /**
@@ -26779,6 +26927,16 @@ export interface ThirdPartyDrmInfo {
    * <p>第三方DRM厂商信息。</p>
    */
   SPEKEDrm?: SPEKEDrm
+}
+
+/**
+ * 视频拆条输入。
+ */
+export interface AiRecognitionTaskSegmentResultInput {
+  /**
+   * 视频拆条模板 ID。
+   */
+  Definition?: number
 }
 
 /**

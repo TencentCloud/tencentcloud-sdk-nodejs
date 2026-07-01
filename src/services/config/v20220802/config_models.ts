@@ -66,27 +66,27 @@ export interface ResourceListInfo {
  */
 export interface ListAggregateDiscoveredResourcesRequest {
   /**
-   * 每页显示数量
+   * <p>每页显示数量</p>
    */
   MaxResults: number
   /**
-   * 账号组ID
+   * <p>账号组ID</p>
    */
   AccountGroupId: string
   /**
-   * resourceName：资源名  resourceId ：资源ID resourceType：资源类型
+   * <p>resourceName：资源名  resourceId ：资源ID resourceType：资源类型</p>
    */
   Filters?: Array<Filter>
   /**
-   * 标签
+   * <p>标签</p>
    */
   Tags?: Array<Tag>
   /**
-   * 下一页token
+   * <p>下一页token</p>
    */
   NextToken?: string
   /**
-   * 排序方式 asc、desc
+   * <p>排序方式 asc、desc</p>
    */
   OrderType?: string
 }
@@ -752,14 +752,18 @@ export interface DescribeCompliancePackRequest {
  */
 export interface ListDiscoveredResourcesResponse {
   /**
-   * 详情
+   * <p>详情</p>
    */
   Items?: Array<ResourceListInfo>
   /**
-   * 下一页
+   * <p>下一页</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NextToken?: string
+  /**
+   * <p>总数</p>
+   */
+  Count?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -906,23 +910,23 @@ export interface DescribeConfigRuleResponse {
  */
 export interface UpdateCompliancePackRequest {
   /**
-   * 合规包名称
+   * <p>合规包名称</p>
    */
   CompliancePackName: string
   /**
-   * 风险等级
+   * <p>风险等级</p>
    */
   RiskLevel: number
   /**
-   * 合规包ID
+   * <p>合规包ID</p>
    */
   CompliancePackId: string
   /**
-   * 合规包规则
+   * <p>合规包规则</p>
    */
   ConfigRules: Array<CompliancePackRule>
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
 }
@@ -932,37 +936,37 @@ export interface UpdateCompliancePackRequest {
  */
 export interface ListCompliancePacksRequest {
   /**
-   * 数量
+   * <p>数量</p>
    */
   Limit: number
   /**
-   * 偏移量
+   * <p>偏移量</p>
    */
   Offset: number
   /**
-   * 合规包名称
+   * <p>合规包名称</p>
    */
   CompliancePackName?: string
   /**
-   * 风险等级
-1：高风险。
-2：中风险。
-3：低风险。
+   * <p>风险等级<br>1：高风险。<br>2：中风险。<br>3：低风险。</p>
    */
   RiskLevel?: Array<number | bigint>
   /**
-   * 合规包状态 ACTIVE、NO_ACTIVE
+   * <p>合规包状态 ACTIVE、NO_ACTIVE</p>
    */
   Status?: string
   /**
-   * 评估状态合规： 'COMPLIANT'
-不合规： 'NON_COMPLIANT'
+   * <p>评估状态合规： &#39;COMPLIANT&#39;<br>不合规： &#39;NON_COMPLIANT&#39;</p>
    */
   ComplianceResult?: Array<string>
   /**
-   * 排序类型, 倒序：desc，顺序：asc
+   * <p>排序类型, 倒序：desc，顺序：asc</p>
    */
   OrderType?: string
+  /**
+   * <p>包含合规包规则统计信息</p><p>枚举值：</p><ul><li>1： 是</li></ul>
+   */
+  IncludeCompliancePackRuleResult?: string
 }
 
 /**
@@ -1498,43 +1502,39 @@ export interface PutEvaluationsRequest {
  */
 export interface UpdateConfigRuleRequest {
   /**
-   * 触发类型，最多支持两种
+   * <p>触发类型，最多支持两种</p>
    */
   TriggerType: Array<TriggerType>
   /**
-   * 风险等级
-1：高风险。
-2：中风险。
-3：低风险。
+   * <p>风险等级<br>1：高风险。<br>2：中风险。<br>3：低风险。</p>
    */
   RiskLevel: number
   /**
-   * 规则ID
+   * <p>规则ID</p>
    */
   RuleId: string
   /**
-   * 规则名称
+   * <p>规则名称</p>
    */
   RuleName?: string
   /**
-   * 入参
+   * <p>入参</p>
    */
   InputParameter?: Array<InputParameter>
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
   /**
-   * 规则评估地域范围，规则仅对指定地域中的资源生效。
-支持的地域范围config:ListResourceRegions返回的地域
+   * <p>规则评估地域范围，规则仅对指定地域中的资源生效。<br>支持的地域范围config:ListResourceRegions返回的地域</p>
    */
   RegionsScope?: Array<string>
   /**
-   * 规则评估标签范围，规则仅对绑定指定标签的资源生效。
+   * <p>规则评估标签范围，规则仅对绑定指定标签的资源生效。</p>
    */
   TagsScope?: Array<Tag>
   /**
-   * 规则对指定资源ID无效，即不对该资源执行评估。
+   * <p>规则对指定资源ID无效，即不对该资源执行评估。</p>
    */
   ExcludeResourceIdsScope?: Array<string>
 }
@@ -1575,11 +1575,11 @@ export interface UserConfigResource {
  */
 export interface DetachConfigRuleToCompliancePackRequest {
   /**
-   * 合规包ID
+   * <p>合规包ID</p>
    */
   CompliancePackId: string
   /**
-   * 规则ID
+   * <p>规则ID</p>
    */
   ConfigRuleId: string
 }
@@ -1887,13 +1887,13 @@ export interface AddConfigRuleRequest {
  */
 export interface ListCompliancePacksResponse {
   /**
-   * 总数
+   * <p>总数</p>
    */
-  Total: number
+  Total?: number
   /**
-   * 详情
+   * <p>详情</p>
    */
-  Items: Array<ConfigCompliancePack>
+  Items?: Array<ConfigCompliancePack>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2000,7 +2000,7 @@ export interface UpdateAlarmPolicyRequest {
  */
 export interface CloseConfigRuleRequest {
   /**
-   * 规则ID
+   * <p>规则ID</p>
    */
   RuleId: string
 }
@@ -2242,7 +2242,7 @@ export interface DeleteRemediationsResponse {
  */
 export interface DeleteConfigRuleRequest {
   /**
-   * 规则ID
+   * <p>规则ID</p>
    */
   RuleId: string
 }
@@ -2304,12 +2304,11 @@ export interface ListAggregateConfigRuleEvaluationResultsRequest {
  */
 export interface UpdateCompliancePackStatusRequest {
   /**
-   * 合规包ID
+   * <p>合规包ID</p>
    */
   CompliancePackId: string
   /**
-   * ACTIVE：启用
-UN_ACTIVE ：停用
+   * <p>ACTIVE：启用<br>UN_ACTIVE ：停用</p>
    */
   Status: string
 }
@@ -2885,23 +2884,23 @@ qcs::cls:$region:$account:cls/topicId
  */
 export interface ListDiscoveredResourcesRequest {
   /**
-   * 每页显示数量
+   * <p>每页显示数量</p>
    */
   MaxResults: number
   /**
-   * resourceName：资源名  resourceId ：资源ID
+   * <p>resourceName：资源名  resourceId ：资源ID</p>
    */
   Filters?: Array<Filter>
   /**
-   * 标签
+   * <p>标签</p>
    */
   Tags?: Array<Tag>
   /**
-   * 下一页token
+   * <p>下一页token</p>
    */
   NextToken?: string
   /**
-   * 排序方式 asc、desc
+   * <p>排序方式 asc、desc</p>
    */
   OrderType?: string
 }
@@ -3212,7 +3211,7 @@ export interface DescribeAggregateCompliancePackRequest {
  */
 export interface OpenConfigRuleRequest {
   /**
-   * 规则ID
+   * <p>规则ID</p>
    */
   RuleId: string
 }
@@ -3424,7 +3423,7 @@ export interface AddAggregateConfigRuleRequest {
  */
 export interface DeleteCompliancePackRequest {
   /**
-   * 合规包ID
+   * <p>合规包ID</p>
    */
   CompliancePackId: string
 }
@@ -3444,14 +3443,18 @@ export interface StartConfigRuleEvaluationResponse {
  */
 export interface ListAggregateDiscoveredResourcesResponse {
   /**
-   * 详情
+   * <p>详情</p>
    */
   Items?: Array<AggregateResourceInfo>
   /**
-   * 下一页
+   * <p>下一页</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NextToken?: string
+  /**
+   * <p>总数</p>
+   */
+  Count?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

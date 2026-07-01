@@ -801,17 +801,21 @@ export interface CreateConversationResponse {
 }
 
 /**
- * DescribePlugin返回参数结构体
+ * CopyAgentFromApp请求参数结构体
  */
-export interface DescribePluginResponse {
+export interface CopyAgentFromAppRequest {
   /**
-   * <p>插件详情</p>
+   * <p>应用Id</p>
    */
-  Plugin?: Plugin
+  AppId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>目标应用ID，kind=0时需传入</p>
    */
-  RequestId?: string
+  TargetAppId?: string
+  /**
+   * <p>Agent 类型，区分 B 端配置态 Agent 与 C 端用户态 Agent</p><p>枚举值：</p><ul><li>0：  配置端Agent </li><li>1：  用户态 Agent</li></ul>
+   */
+  Kind?: number
 }
 
 /**
@@ -2882,6 +2886,20 @@ export interface OAuthConfig {
 }
 
 /**
+ * CopyAgentFromApp返回参数结构体
+ */
+export interface CopyAgentFromAppResponse {
+  /**
+   * <p>主 Agent Id</p>
+   */
+  ParentAgentId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateWorkspaceCredential返回参数结构体
  */
 export interface CreateWorkspaceCredentialResponse {
@@ -4327,13 +4345,17 @@ export interface SkillCategory {
 }
 
 /**
- * FieldMask
+ * DescribePlugin返回参数结构体
  */
-export interface FieldMask {
+export interface DescribePluginResponse {
   /**
-   * <p>参数名称</p><p>参数格式：需要获取的指定字段路径</p>
+   * <p>插件详情</p>
    */
-  Paths?: Array<string>
+  Plugin?: Plugin
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4670,6 +4692,16 @@ export interface DescribeConversationResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * FieldMask
+ */
+export interface FieldMask {
+  /**
+   * <p>参数名称</p><p>参数格式：需要获取的指定字段路径</p>
+   */
+  Paths?: Array<string>
 }
 
 /**

@@ -2194,6 +2194,11 @@ export interface QualityRuleExecResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CatalogName?: string
+  /**
+   * 规则执行状态（0：初始状态，1：运行中，2：运行成功，3：运行失败，4：被杀死）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleExecStatus?: number
 }
 
 /**
@@ -2616,7 +2621,7 @@ export interface GetOpsWorkflowRequest {
  */
 export interface ListTaskVersionsResponse {
   /**
-   * 版本列表
+   * <p>版本列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: ListTaskVersions
@@ -2852,65 +2857,70 @@ export interface SQLScriptConfig {
  */
 export interface CodeFile {
   /**
-   * 脚本ID
+   * <p>脚本ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CodeFileId?: string
   /**
-   * 脚本名称
+   * <p>脚本名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CodeFileName?: string
   /**
-   * 脚本所有者 uin
+   * <p>脚本所有者 uin</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnerUin?: string
   /**
-   * 脚本配置
+   * <p>脚本配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CodeFileConfig?: CodeFileConfig
   /**
-   * 脚本内容
+   * <p>脚本内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CodeFileContent?: string
   /**
-   * 最近一次操作人
+   * <p>最近一次操作人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateUserUin?: string
   /**
-   * 项目ID
+   * <p>项目ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: string
   /**
-   * 更新时间 yyyy-MM-dd hh:mm:ss
+   * <p>更新时间 yyyy-MM-dd hh:mm:ss</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
-   * 创建时间 yyyy-MM-dd hh:mm:ss
+   * <p>创建时间 yyyy-MM-dd hh:mm:ss</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 权限范围：SHARED, PRIVATE
+   * <p>权限范围：SHARED, PRIVATE</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessScope?: string
   /**
-   * 节点全路径，/aaa/bbb/ccc.ipynb，由各个节点的名称组成
+   * <p>节点全路径，/aaa/bbb/ccc.ipynb，由各个节点的名称组成</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Path?: string
   /**
-   * 父文件夹路径
+   * <p>父文件夹路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentFolderPath?: string
+  /**
+   * <p>返回保存后的versionId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionId?: string
 }
 
 /**
@@ -3660,163 +3670,150 @@ export interface GetTriggerTaskCodeRequest {
  */
 export interface QualityRuleGroupExecStrategy {
   /**
-   * 监控类型 2.关联生产调度, 3.离线周期检测
+   * <p>监控类型 2.关联生产调度, 3.离线周期检测</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorType: number
   /**
-   * 执行资源组ID
+   * <p>执行资源组ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorGroupId: string
   /**
-   * 监控任务名称
+   * <p>监控任务名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleGroupName: string
   /**
-   * 数据库名称
+   * <p>数据库名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseName: string
   /**
-   * 数据源id
+   * <p>数据源id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceId: string
   /**
-   * 表名称
+   * <p>表名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TableName: string
   /**
-   * 监控任务的Id，编辑更新监控任务时必填
+   * <p>监控任务的Id，编辑更新监控任务时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleGroupId?: number
   /**
-   * 计算队列，数据源为HIVE、ICEBERG、DLC时必填，数据源为DLC时，该字段填写DLC数据引擎名称
+   * <p>计算队列，数据源为HIVE、ICEBERG、DLC时必填，数据源为DLC时，该字段填写DLC数据引擎名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecQueue?: string
   /**
-   * 执行资源组名称
+   * <p>执行资源组名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorGroupName?: string
   /**
-   * 关联的生产调度任务列表，MonitorType=2时必填
+   * <p>关联的生产调度任务列表，MonitorType=2时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tasks?: Array<QualityProdSchedulerTask>
   /**
-   * 周期开始时间，MonitorType=3时必填
+   * <p>周期开始时间，MonitorType=3时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
-   * 周期结束时间，MonitorType=3时必填
+   * <p>周期结束时间，MonitorType=3时必填</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
-   * 调度周期类型，MonitorType=3时必填，具体可填值参考：
-I：按分钟调度
-H：按小时调度
-D：按天调度
-W：按周调度
-M：按月调度
+   * <p>调度周期类型，MonitorType=3时必填，具体可填值参考：<br>I：按分钟调度<br>H：按小时调度<br>D：按天调度<br>W：按周调度<br>M：按月调度</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleType?: string
   /**
-   * 延迟调度时间，MonitorType=3时必填，主要用于调度周期为天/周/月的任务，
-计量单位为分钟，比如天任务需要延迟到02:00执行，则该字段值为120，表示延迟2小时（120分钟）
-对于小时/分钟任务，该字段无意义，填固定值0，否则字段校验不通过
+   * <p>延迟调度时间，MonitorType=3时必填，主要用于调度周期为天/周/月的任务，<br>计量单位为分钟，比如天任务需要延迟到02:00执行，则该字段值为120，表示延迟2小时（120分钟）<br>对于小时/分钟任务，该字段无意义，填固定值0，否则字段校验不通过</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DelayTime?: number
   /**
-   * 间隔，MonitorType=3时必填，表示周期任务间隔时间
-周/月/天任务可选：1
-分钟任务可选：10，20，30
-小时任务可选：1，2，3，4，6，8，12
+   * <p>间隔，MonitorType=3时必填，表示周期任务间隔时间<br>周/月/天任务可选：1<br>分钟任务可选：10，20，30<br>小时任务可选：1，2，3，4，6，8，12</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleStep?: number
   /**
-   * 时间指定，主要用于调度周期为周/月的任务
-调度周期为周时：含义为指定周几运行，可选多个，英文逗号隔开
-可填1,2...7，依次代表周日，周一...周六，例如填“1,2”，表示周日、周一执行；
-
-调度周期为月时，含义为指定每月的几号运行，可选多个，英文逗号隔开
-可填1,2,...,31，依次代表1号，2号...31号，例如填“1,2”，表示每月的1号、2号执行
+   * <p>时间指定，主要用于调度周期为周/月的任务<br>调度周期为周时：含义为指定周几运行，可选多个，英文逗号隔开<br>可填1,2...7，依次代表周日，周一...周六，例如填“1,2”，表示周日、周一执行；</p><p>调度周期为月时，含义为指定每月的几号运行，可选多个，英文逗号隔开<br>可填1,2,...,31，依次代表1号，2号...31号，例如填“1,2”，表示每月的1号、2号执行</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskAction?: string
   /**
-   * 运行的执行引擎，不传时会请求该数据源下默认的执行引擎
+   * <p>运行的执行引擎，不传时会请求该数据源下默认的执行引擎</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecEngineType?: string
   /**
-   * 执行计划
+   * <p>执行计划</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecPlan?: string
   /**
-   * 规则id
+   * <p>规则id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleId?: number
   /**
-   * 规则名称
+   * <p>规则名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleName?: string
   /**
-   * 触发类型，主要用于“关联生产调度”（MonitorType=2）的监控任务，可选值：
-CYCLE：周期调度
-MAKE_UP：补录
-RERUN：重跑
+   * <p>触发类型，主要用于“关联生产调度”（MonitorType=2）的监控任务，可选值：<br>CYCLE：周期调度<br>MAKE_UP：补录<br>RERUN：重跑</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerTypes?: Array<string>
   /**
-   * 数据源为DLC时，对应DLC资源组，根据ExecQueue中填的DLC引擎名称，选择对应引擎下的资源组
+   * <p>数据源为DLC时，对应DLC资源组，根据ExecQueue中填的DLC引擎名称，选择对应引擎下的资源组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DlcGroupName?: string
   /**
-   * schema名称
+   * <p>schema名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SchemaName?: string
   /**
-   * 任务描述
+   * <p>任务描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 时区，默认为UTC+8
+   * <p>时区，默认为UTC+8</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleTimeZone?: string
   /**
-   * 任务监控参数
+   * <p>任务监控参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupConfig?: QualityRuleGroupConfig
   /**
-   * 引擎参数
+   * <p>引擎参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EngineParam?: string
   /**
-   * 数据目录名称，不填默认为DataLakeCatalog（更新质量监控时该参数无效）
+   * <p>数据目录名称，不填默认为DataLakeCatalog（更新质量监控时该参数无效）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CatalogName?: string
+  /**
+   * <p>执行失败是否阻塞下游</p><p>枚举值：</p><ul><li>0： 失败不阻塞（默认）</li><li>1： 失败阻塞</li></ul><p>默认值：0</p><p>仅作用于“关联生产调度”类型的质量监控</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExecFailBlock?: number
 }
 
 /**
@@ -3976,6 +3973,16 @@ export interface QualityProdSchedulerTask {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InChargeNameList?: Array<string>
+  /**
+   * 生产调度任务状态，参考调度任务侧状态信息，“DELETED”状态为质量侧单独加的，查不到任务时认为任务“DELETED”
+'Y': '调度中',
+'F': '已下线',
+'O': '已暂停',
+'INVALID': '已失效',
+'DELETED': '已删除' 
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskStatus?: string
 }
 
 /**
@@ -4393,6 +4400,11 @@ export interface TriggerWorkflowDetail {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerWorkflowRunConfiguration?: WorkflowRunConfig
+  /**
+   * <p>触发方式：定时触发：TIME_TRIGGER 。这里配置之后，内部的触发方式可不填，否则需要保持一致</p><p>枚举值：</p><ul><li>TIME_TRIGGER： 定时触发</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TriggerMode?: string
 }
 
 /**
@@ -4911,7 +4923,7 @@ export interface DeleteCodeFileRequest {
  */
 export interface UpdateTriggerWorkflowResponse {
   /**
-   * true代表成功，false代表失败
+   * <p>true代表成功，false代表失败</p>
    */
   Data?: UpdateTriggerWorkflowResult
   /**
@@ -5324,6 +5336,10 @@ export interface UpdateCodeFileRequest {
    * 代码文件内容
    */
   CodeFileContent?: string
+  /**
+   *
+   */
+  SubmitAction?: boolean
 }
 
 /**
@@ -8317,27 +8333,29 @@ export interface ListCodeFolderContentsRequest {
  */
 export interface ListTaskVersionsRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 任务ID
+   * <p>任务ID</p>
    */
   TaskId: string
   /**
-   * 保存版本：SAVE
-提交版本：SUBMIT
-默认为SAVE
+   * <p>保存版本：SAVE<br>提交版本：SUBMIT<br>默认为SAVE</p>
    */
   TaskVersionType?: string
   /**
-   * 请求的数据页数。默认值为1，取值大于等于1。
+   * <p>请求的数据页数。默认值为1，取值大于等于1。</p>
    */
   PageNumber?: number
   /**
-   * 每页显示的数据条数。默认值为10 ，最小值为10，最大值为200。
+   * <p>每页显示的数据条数。默认值为10 ，最小值为10，最大值为200。</p>
    */
   PageSize?: number
+  /**
+   * <p>是否为使用版本</p>
+   */
+  UsedVersion?: boolean
 }
 
 /**
@@ -9099,170 +9117,180 @@ export interface LineageProperty {
  */
 export interface QualityRuleGroup {
   /**
-   * 规则组Id
+   * <p>规则组Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleGroupId?: number
   /**
-   * 数据源Id
+   * <p>数据源Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceId?: string
   /**
-   * 数据源名称
+   * <p>数据源名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceName?: string
   /**
-   * 数据源类型
+   * <p>数据源类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatasourceType?: number
   /**
-   * 监控类型 1.未配置, 2.关联生产调度, 3.离线周期检测
+   * <p>监控类型 1.未配置, 2.关联生产调度, 3.离线周期检测</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorType?: number
   /**
-   * 更新时间
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
-   * 关联数据表名称
+   * <p>关联数据表名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TableName?: string
   /**
-   * 关联数据表Id
+   * <p>关联数据表Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TableId?: string
   /**
-   * 关联数据表负责人
+   * <p>关联数据表负责人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TableOwnerName?: string
   /**
-   * 执行策略
+   * <p>执行策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecStrategy?: QualityRuleGroupExecStrategy
   /**
-   * 订阅信息
+   * <p>订阅信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Subscription?: QualityRuleGroupSubscribe
   /**
-   * 数据库id
+   * <p>数据库id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseId?: string
   /**
-   * 数据库名称
+   * <p>数据库名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DatabaseName?: string
   /**
-   * 模式名称
+   * <p>模式名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SchemaName?: string
   /**
-   * 是否有权限
+   * <p>是否有权限</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Permission?: boolean
   /**
-   * 已经配置的规则数量
+   * <p>已经配置的规则数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleCount?: number
   /**
-   * 监控状态
+   * <p>监控状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorStatus?: boolean
   /**
-   * 表负责人UserId
+   * <p>表负责人UserId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TableOwnerUserId?: number
   /**
-   * 实例ID
+   * <p>实例ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceId?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 是否已配置执行策略
+   * <p>是否已配置执行策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StrategyConfig?: boolean
   /**
-   * 是否已配置执行策略
+   * <p>是否已配置执行策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubscribeConfig?: boolean
   /**
-   * 数据源环境：0或者未返回.未定义，1.生产 2.开发
+   * <p>数据源环境：0或者未返回.未定义，1.生产 2.开发</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DsEnvType?: number
   /**
-   * EMR集群部署方式：CVM/TKE
+   * <p>EMR集群部署方式：CVM/TKE</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterDeployType?: string
   /**
-   * 任务名称
+   * <p>任务名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 执行详情
+   * <p>执行详情</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecDetail?: string
   /**
-   * 事中关联任务数量
+   * <p>事中关联任务数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PipelineTaskCount?: number
   /**
-   * 有效规则数
+   * <p>有效规则数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnableRuleCount?: number
   /**
-   * 任务描述
+   * <p>任务描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 监控创建人
+   * <p>监控创建人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateUserName?: string
   /**
-   * 任务类型
+   * <p>任务类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupType?: string
   /**
-   * 任务id
+   * <p>任务id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AspectTaskId?: string
   /**
-   * 数据目录名称
+   * <p>数据目录名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CatalogName?: string
+  /**
+   * <p>负责人ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InChargeId?: string
+  /**
+   * <p>负责人名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InChargeName?: string
 }
 
 /**
@@ -11961,70 +11989,65 @@ export interface ListSQLScriptRunsRequest {
  */
 export interface CreateDataBackfillPlanRequest {
   /**
-   * 所属项目Id
+   * <p>所属项目Id</p>
    */
   ProjectId: string
   /**
-   * 补录任务集合
+   * <p>补录任务集合</p>
    */
   TaskIds: Array<string>
   /**
-   * 补录任务的数据时间配置
+   * <p>补录任务的数据时间配置</p>
    */
   DataBackfillRangeList: Array<DataBackfillRange>
   /**
-   * 时区，默认UTC+8
+   * <p>时区，默认UTC+8</p>
    */
   TimeZone?: string
   /**
-   * 数据补录计划名称，不填则由系统随机生成一串字符
+   * <p>数据补录计划名称，不填则由系统随机生成一串字符</p>
    */
   DataBackfillPlanName?: string
   /**
-   * 检查父任务类型，取值范围：- NONE-全部不检查- ALL-检查全部上游父任务- MAKE_SCOPE-只在（当前补录计划）选中任务中检查,默认NONE不检查
+   * <p>检查父任务类型，取值范围：- NONE-全部不检查- ALL-检查全部上游父任务- MAKE_SCOPE-只在（当前补录计划）选中任务中检查,默认NONE不检查</p>
    */
   CheckParentType?: string
   /**
-   * 补录是否忽略事件依赖,默认true
+   * <p>补录是否忽略事件依赖,默认true</p>
    */
   SkipEventListening?: boolean
   /**
-   * 自定义的工作流自依赖，yes或者no；如果不配置，则使用工作流原有自依赖
+   * <p>自定义的工作流自依赖，yes或者no；如果不配置，则使用工作流原有自依赖</p>
    */
   RedefineSelfWorkflowDependency?: string
   /**
-   * 自定义实例运行并发度, 如果不配置，则使用任务原有自依赖
+   * <p>自定义实例运行并发度, 如果不配置，则使用任务原有自依赖</p>
    */
   RedefineParallelNum?: number
   /**
-   * 调度资源组id，为空则表示使用任务原有调度执行资源组
+   * <p>调度资源组id，为空则表示使用任务原有调度执行资源组</p>
    */
   SchedulerResourceGroupId?: string
   /**
-   * 集成任务资源组id，为空则表示使用任务原有调度执行资源组
+   * <p>集成任务资源组id，为空则表示使用任务原有调度执行资源组</p>
    */
   IntegrationResourceGroupId?: string
   /**
-   * 自定义参数，可以重新指定任务的参数，方便补录实例执行新的逻辑
+   * <p>自定义参数，可以重新指定任务的参数，方便补录实例执行新的逻辑</p>
    */
   RedefineParamList?: Array<KVPair>
   /**
-   * 补录是实例数据时间顺序，生效必须满足2个条件:
-1. 必须同周期任务
-2. 优先按依赖关系执行，无依赖关系影响的情况下按配置执行顺序执行
- 
-可选值
-- NORMAL: 不设置
-- ORDER: 顺序
-- REVERSE: 逆序
-不设置默认为NORMAL
+   * <p>补录是实例数据时间顺序，生效必须满足2个条件:</p><ol><li>必须同周期任务</li><li>优先按依赖关系执行，无依赖关系影响的情况下按配置执行顺序执行</li></ol><p>可选值</p><ul><li>NORMAL: 不设置</li><li>ORDER: 顺序</li><li>REVERSE: 逆序<br>不设置默认为NORMAL</li></ul>
    */
   DataTimeOrder?: string
   /**
-   * 补录实例重新生成周期，如果设置会重新指定补录任务实例的生成周期，目前只会将天实例转换成每月1号生成的实例
-   * MONTH_CYCLE: 月
+   * <p>补录实例重新生成周期，如果设置会重新指定补录任务实例的生成周期，目前只会将天实例转换成每月1号生成的实例</p><ul><li>MONTH_CYCLE: 月</li></ul>
    */
   RedefineCycleType?: string
+  /**
+   * <p>存算配置映射列表，对应页面“存算引擎配置”</p>
+   */
+  ComputeConfigMappings?: Array<ComputeConfigMapping>
 }
 
 /**
@@ -12032,49 +12055,57 @@ export interface CreateDataBackfillPlanRequest {
  */
 export interface UpdateTriggerWorkflowRequest {
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId: string
   /**
-   * 工作流ID
+   * <p>工作流ID</p>
    */
   WorkflowId: string
   /**
-   * 工作流名称
+   * <p>工作流名称</p>
    */
   WorkflowName?: string
   /**
-   * 责任人ID
+   * <p>责任人ID</p>
    */
   OwnerUin?: string
   /**
-   * 备注
+   * <p>备注</p>
    */
   WorkflowDesc?: string
   /**
-   * 工作流参数列表
+   * <p>工作流参数列表</p>
    */
   WorkflowParams?: Array<ParamInfo>
   /**
-   * 统一调度参数
+   * <p>统一调度参数</p>
    */
   TriggerWorkflowSchedulerConfigurations?: Array<WorkflowTriggerConfig>
   /**
-   * BundleId项
+   * <p>BundleId项</p>
    */
   BundleId?: string
   /**
-   * Bundle信息
+   * <p>Bundle信息</p>
    */
   BundleInfo?: string
   /**
-   * 通用参数配置
+   * <p>通用参数配置</p>
    */
   GeneralTaskParams?: Array<WorkflowGeneralTaskParam>
   /**
-   *
+   * <p>调度运行配置</p>
    */
   TriggerWorkflowRunConfiguration?: WorkflowRunConfig
+  /**
+   * <p>Trigger 状态 启动ACTIVE，暂停PAUSED。配置完之后，内部的SchedulerStatus可不配置，如果配置，内容会被改值覆盖。</p><p>枚举值：</p><ul><li>ACTIVE： 启动</li><li>PAUSED： 暂停</li></ul>
+   */
+  SchedulerStatus?: string
+  /**
+   * <p>触发方式：定时触发：TIME_TRIGGER 。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。</p><p>枚举值：</p><ul><li>TIME_TRIGGER： 定时触发</li></ul>
+   */
+  TriggerMode?: string
 }
 
 /**
@@ -12974,45 +13005,50 @@ export interface QualityTableConfig {
  */
 export interface TriggerTaskVersion {
   /**
-   * 保存时间
+   * <p>保存时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 版本号
+   * <p>版本号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VersionNum?: string
   /**
-   * 创建人
+   * <p>创建人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateUserUin?: string
   /**
-   * 保存版本id
+   * <p>保存版本id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VersionId?: string
   /**
-   * 版本描述信息
+   * <p>版本描述信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VersionRemark?: string
   /**
-   * 审批状态（只有提交版本有）
+   * <p>审批状态（只有提交版本有）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproveStatus?: string
   /**
-   * 生产状态（只有提交版本有）
+   * <p>生产状态（只有提交版本有）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
-   * 审批人（只有提交版本有）
+   * <p>审批人（只有提交版本有）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproveUserUin?: string
+  /**
+   * <p>是否生产态使用版本，保存版本没有该字段</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsedVersion?: boolean
 }
 
 /**
@@ -13677,7 +13713,7 @@ CRONTAB_CYCLE: crontab表达式类型
  */
 export interface CreateDataBackfillPlanResponse {
   /**
-   * 数据补录计划创建结果
+   * <p>数据补录计划创建结果</p>
    */
   Data?: CreateDataReplenishmentPlan
   /**
@@ -14086,56 +14122,45 @@ export interface CreateTriggerWorkflowRequest {
    * <p>工作流调度运行配置</p>
    */
   TriggerWorkflowRunConfiguration?: WorkflowRunConfig
+  /**
+   * <p>Trigger 状态 启动ACTIVE，暂停PAUSED。配置完之后，内部的Trigger状态可不配置，如果配置，内容会被该值覆盖</p><p>枚举值：</p><ul><li>ACTIVE： 启动</li><li>PAUSED： 暂停</li></ul>
+   */
+  SchedulerStatus?: string
+  /**
+   * <p>触发方式：定时触发：TIME_TRIGGER 。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。</p><p>枚举值：</p><ul><li>TIME_TRIGGER： 定时触发</li></ul>
+   */
+  TriggerMode?: string
 }
 
 /**
- * 项目信息
+ * 存算配置映射列表，对应页面“存算引擎配置”
  */
-export interface Project {
+export interface ComputeConfigMapping {
   /**
-   * 项目id
+   * <p>任务类型ID</p><p>枚举值：</p><ul><li>32： DLC_SQL</li><li>46： DLC_SPARK</li><li>50： DLC_PYSPARK</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectId?: string
+  TaskTypeId?: number
   /**
-   * 项目标识，英文名
+   * <p>存算配置项。当前支持：COMPUTE_ENGINE、DLC_ENGINE_RESOURCE_GROUP</p><p>枚举值：</p><ul><li>COMPUTE_ENGINE： DLC 标准计算引擎</li><li>DLC_ENGINE_RESOURCE_GROUP：  DLC 标准引擎资源组</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProjectName?: string
+  ComputeConfigItem?: string
   /**
-   * 项目显示名称，可以为中文名
+   * <p>指定任务列表，非空时表示任务级覆盖，当前仅支持 DLC_SQL</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DisplayName?: string
+  TaskIds?: Array<string>
   /**
-   * 备注
+   * <p>ComputeConfigItem=COMPUTE_ENGINE 时表示原引擎名；ComputeConfigItem=DLC_ENGINE_RESOURCE_GROUP 时表示原 DLC 标准引擎资源组名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description?: string
+  SourceValue?: string
   /**
-   * 创建时间
+   * <p>ComputeConfigItem=COMPUTE_ENGINE 时表示目标引擎名；ComputeConfigItem=DLC_ENGINE_RESOURCE_GROUP 时表示目标 DLC 标准引擎资源组名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreateTime?: string
-  /**
-   * 项目创建人id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreatorUin?: string
-  /**
-   * 项目责任人id
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProjectOwnerUin?: string
-  /**
-   * 项目状态：0：禁用，1：启用，-3:禁用中，2：启用中
-   */
-  Status?: number
-  /**
-   * 项目模式，SIMPLE：简单模式 STANDARD：标准模式
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProjectModel?: string
+  TargetValue?: string
 }
 
 /**
@@ -16129,6 +16154,56 @@ export interface ModifyQualityRuleGroupResponse {
 }
 
 /**
+ * 项目信息
+ */
+export interface Project {
+  /**
+   * 项目id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: string
+  /**
+   * 项目标识，英文名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectName?: string
+  /**
+   * 项目显示名称，可以为中文名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DisplayName?: string
+  /**
+   * 备注
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 项目创建人id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatorUin?: string
+  /**
+   * 项目责任人id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectOwnerUin?: string
+  /**
+   * 项目状态：0：禁用，1：启用，-3:禁用中，2：启用中
+   */
+  Status?: number
+  /**
+   * 项目模式，SIMPLE：简单模式 STANDARD：标准模式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectModel?: string
+}
+
+/**
  * CreateCodePermissions请求参数结构体
  */
 export interface CreateCodePermissionsRequest {
@@ -17679,82 +17754,67 @@ export interface DatabaseInfo {
  */
 export interface WorkflowTriggerConfig {
   /**
-   * 触发方式，
-- 定时触发：TIME_TRIGGER
-- 持续运行：CONTINUE_RUN
-- 文件到达：FILE_ARRIVAL
-
-注意：
-- TIME_TRIGGER 和 CONTINUE_RUN 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；
-- FILE_ARRIVAL 模式下，FileArrivalPath、TriggerMinimumIntervalSecond、TriggerWaitTimeSecond 必填；
+   * <p>触发方式，非必填，外部结构的TriggerMode字段优先级比当前字段高</p><ul><li>定时触发：TIME_TRIGGER</li><li>持续运行：CONTINUE_RUN（暂不支持）</li><li>文件到达：FILE_ARRIVAL（暂不支持）</li></ul><p>注意：</p><ul><li>TIME_TRIGGER 和 CONTINUE_RUN 模式下，SchedulerStatus、SchedulerTimeZone、StartTime、EndTime、ConfigMode、CycleType、CrontabExpression 必填；</li><li>FILE_ARRIVAL 模式下，FileArrivalPath、TriggerMinimumIntervalSecond、TriggerWaitTimeSecond 必填；</li></ul><p>枚举值：</p><ul><li>TIME_TRIGGER： 定时触发</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TriggerMode: string
+  TriggerMode?: string
   /**
-   * WorkflowTriggerConfig转换成Json格式，对账使用
+   * <p>WorkflowTriggerConfig转换成Json格式，对账使用</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtraInfo?: string
   /**
-   * 调度时区
+   * <p>调度时区</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleTimeZone?: string
   /**
-   * 调度生效时间
+   * <p>调度生效时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
-   * 调度结束时间
+   * <p>调度结束时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime?: string
   /**
-   * 配置方式，常规：COMMON，CRON表达式：CRON_EXPRESSION
+   * <p>配置方式，常规：COMMON，CRON表达式：CRON_EXPRESSION</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigMode?: string
   /**
-   * 周期类型：支持的类型为
-ONEOFF_CYCLE: 一次性
-YEAR_CYCLE: 年
-MONTH_CYCLE: 月
-WEEK_CYCLE: 周
-DAY_CYCLE: 天
-HOUR_CYCLE: 小时
-MINUTE_CYCLE: 分钟
-CRONTAB_CYCLE: crontab表达式类型
+   * <p>周期类型：支持的类型为<br>ONEOFF_CYCLE: 一次性<br>YEAR_CYCLE: 年<br>MONTH_CYCLE: 月<br>WEEK_CYCLE: 周<br>DAY_CYCLE: 天<br>HOUR_CYCLE: 小时<br>MINUTE_CYCLE: 分钟<br>CRONTAB_CYCLE: crontab表达式类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleType?: string
   /**
-   * cron表达式
+   * <p>cron表达式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CrontabExpression?: string
   /**
-   * triggerId, uuid
+   * <p>triggerId, uuid</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerId?: string
   /**
-   * 文件到达模式下	存储系统中的监听路径
+   * <p>文件到达模式下    存储系统中的监听路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FileArrivalPath?: string
   /**
-   * 文件到达模式下	触发最短间隔时间（单位：秒）
+   * <p>文件到达模式下    触发最短间隔时间（单位：秒）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerMinimumIntervalSecond?: number
   /**
-   * 文件到达模式下	触发等待时间（单位：秒）
+   * <p>文件到达模式下    触发等待时间（单位：秒）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerWaitTimeSecond?: number
   /**
-   * Trigger 状态 启动ACTIVE，暂停PAUSED
+   * <p>Trigger 状态 启动ACTIVE，暂停PAUSED。外部的TriggerStatus优先级大于当前值</p><p>枚举值：</p><ul><li>ACTIVE： 启动</li><li>PAUSED： 暂停</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SchedulerStatus?: string
@@ -17765,45 +17825,50 @@ CRONTAB_CYCLE: crontab表达式类型
  */
 export interface TaskVersion {
   /**
-   * 保存时间
+   * <p>保存时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 版本号
+   * <p>版本号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VersionNum?: string
   /**
-   * 创建人
+   * <p>创建人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateUserUin?: string
   /**
-   * 保存版本id
+   * <p>保存版本id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VersionId?: string
   /**
-   * 版本描述信息
+   * <p>版本描述信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VersionRemark?: string
   /**
-   * 审批状态（只有提交版本有）
+   * <p>审批状态（只有提交版本有）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproveStatus?: string
   /**
-   * 生产状态（只有提交版本有）
+   * <p>生产状态（只有提交版本有）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
-   * 审批人（只有提交版本有）
+   * <p>审批人（只有提交版本有）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApproveUserUin?: string
+  /**
+   * <p>是否为使用版本</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UsedVersion?: boolean
 }
 
 /**
@@ -18327,6 +18392,14 @@ export interface UpdateTriggerWorkflowPartially {
    * <p>工作流运行参数配置</p>
    */
   TriggerWorkflowRunConfiguration?: WorkflowRunConfig
+  /**
+   * <p>Trigger 状态 启动ACTIVE，暂停PAUSED。配置完之后，内部的Trigger状态可不配置，如果配置，内容会被该值覆盖。</p><p>枚举值：</p><ul><li>ACTIVE： 启动</li><li>PAUSED： 暂停</li></ul>
+   */
+  SchedulerStatus?: string
+  /**
+   * <p>触发方式：定时触发：TIME_TRIGGER 。配置完之后，内部的TriggerMode状态可不配置，如果配置，内容会被该值覆盖。</p><p>枚举值：</p><ul><li>TIME_TRIGGER： 定时触发</li></ul>
+   */
+  TriggerMode?: string
 }
 
 /**

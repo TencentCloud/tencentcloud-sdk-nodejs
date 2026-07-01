@@ -628,6 +628,16 @@ it("iotexplorer.v20190423.TransferCloudStorage", async function () {
     }
 })
 
+it("iotexplorer.v20190423.CreateTWeSeeDirectUploadCredential", async function () {
+    try {
+       const data = await client.CreateTWeSeeDirectUploadCredential({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeVideoLicense", async function () {
     try {
        const data = await client.DescribeVideoLicense({})

@@ -62,6 +62,7 @@ import {
   CreateLoRaFrequencyRequest,
   ChangeP2PRouteResponse,
   UpdateDeviceTWeCallAuthorizeStatusRequest,
+  CreateTWeSeeDirectUploadCredentialResponse,
   CreateProjectResponse,
   DeleteProjectResponse,
   CallDeviceActionAsyncRequest,
@@ -106,6 +107,7 @@ import {
   GetDeviceListRequest,
   DescribeDeviceDataHistoryRequest,
   DescribeStudioProductRequest,
+  CreateTWeSeeDirectUploadCredentialRequest,
   TalkAIBotInfo,
   DescribeCloudStorageThumbnailListResponse,
   DeletePositionFenceRequest,
@@ -1204,6 +1206,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TransferCloudStorageResponse) => void
   ): Promise<TransferCloudStorageResponse> {
     return this.request("TransferCloudStorage", req, cb)
+  }
+
+  /**
+   * 创建 TWeSee COS 直传凭据。调用方获取临时密钥后，可将视频 / 图片上传到返回的 StoragePath 前缀下；对象上传成功后由 COS 事件触发 TWeSee 任务创建。
+   */
+  async CreateTWeSeeDirectUploadCredential(
+    req: CreateTWeSeeDirectUploadCredentialRequest,
+    cb?: (error: string, rep: CreateTWeSeeDirectUploadCredentialResponse) => void
+  ): Promise<CreateTWeSeeDirectUploadCredentialResponse> {
+    return this.request("CreateTWeSeeDirectUploadCredential", req, cb)
   }
 
   /**

@@ -1502,129 +1502,127 @@ export interface Tag {
  */
 export interface DescribeDataPvUrlStatisticsV2Request {
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime: number
   /**
-   * allcount：性能视图，day：14天数据，vp：性能，ckuv：uv，ckpv：pv，condition：条件列表，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等
+   * <p>allcount：性能视图，day：14天数据，vp：性能，ckuv：uv，ckpv：pv，condition：条件列表，nettype/version/platform/isp/region/device/browser/ext1/ext2/ext3/ret/status/from/url/env/：网络平台视图/Version视图/设备视图/ISP视图/地区视图/浏览器视图/ext1视图等</p>
    */
   Type: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime: number
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ID: number
   /**
-   * 自定义2
+   * <p>自定义2</p>
    */
   ExtSecond?: string
   /**
-   * 浏览器引擎
+   * <p>浏览器引擎</p>
    */
   Engine?: string
   /**
-   * 运营商
+   * <p>运营商</p>
    */
   Isp?: string
   /**
-   * 来源页面
+   * <p>来源页面， 可多选，用 “,” 隔开的 String</p>
    */
   From?: string
   /**
-   * 日志等级
+   * <p>日志等级</p>
    */
   Level?: string
   /**
-   * 品牌
+   * <p>品牌</p>
    */
   Brand?: string
   /**
-   * 地区
+   * <p>地区</p>
    */
   Area?: string
   /**
-   * 版本
+   * <p>版本</p>
    */
   VersionNum?: string
   /**
-   * 平台
+   * <p>平台</p>
    */
   Platform?: string
   /**
-   * 自定义3
+   * <p>自定义3</p>
    */
   ExtThird?: string
   /**
-   * 自定义1
+   * <p>自定义1</p>
    */
   ExtFirst?: string
   /**
-   * 网络类型（1,2,3,4,5,100），1表示WIFI, 2表示2G, 3表示3G, 4表示4G, 5表示5G, 6表示6G, 100表示未知
+   * <p>网络类型（1,2,3,4,5,100），1表示WIFI, 2表示2G, 3表示3G, 4表示4G, 5表示5G, 6表示6G, 100表示未知</p>
    */
   NetType?: string
   /**
-   * 机型
+   * <p>机型</p>
    */
   Device?: string
   /**
-   * 显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。
+   * <p>显示是否海外,1表示海外，0表示非海外；默认值为空，查询所有。</p>
    */
   IsAbroad?: string
   /**
-   * 操作系统
+   * <p>操作系统</p>
    */
   Os?: string
   /**
-   * 浏览器
+   * <p>浏览器</p>
    */
   Browser?: string
   /**
-   * 环境
+   * <p>环境</p>
    */
   Env?: string
   /**
-   * group by 参数值枚举1:1m  2:5m  3:30m  4:1h 
- 5:1d
+   * <p>group by 参数值枚举1:1m  2:5m  3:30m  4:1h<br> 5:1d</p>
    */
   GroupByType?: number
   /**
-   * 1: 查询智研
-0: 走旧逻辑，已下线，勿使用
+   * <p>1: 查询智研<br>0: 走旧逻辑，已下线，勿使用</p>
    */
   IsNewData?: number
   /**
-   * 自定义4
+   * <p>自定义4</p>
    */
   ExtFourth?: string
   /**
-   * 自定义5
+   * <p>自定义5</p>
    */
   ExtFifth?: string
   /**
-   * 自定义6
+   * <p>自定义6</p>
    */
   ExtSixth?: string
   /**
-   * 自定义7
+   * <p>自定义7</p>
    */
   ExtSeventh?: string
   /**
-   * 自定义8
+   * <p>自定义8</p>
    */
   ExtEighth?: string
   /**
-   * 自定义9
+   * <p>自定义9</p>
    */
   ExtNinth?: string
   /**
-   * 自定义10
+   * <p>自定义10</p>
    */
   ExtTenth?: string
   /**
-   * 时间段
+   * <p>时间段</p>
    */
   Granularity?: string
 }
@@ -3652,7 +3650,7 @@ export interface DescribeProjectLimitsRequest {
  */
 export interface DescribeDataPvUrlStatisticsV2Response {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Result?: string
   /**

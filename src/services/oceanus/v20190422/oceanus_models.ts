@@ -409,17 +409,29 @@ export interface CreateJobConfigRequest {
    */
   ProgramArgsAfterGzip?: string
   /**
-   * <p>checkpoint 超时时间</p>
+   * <p>checkpoint 超时时间</p><p>单位：秒</p>
    */
   CheckpointTimeoutSecond?: number
   /**
-   * <p>checkpoint 间隔时间</p>
+   * <p>checkpoint 间隔时间</p><p>单位：秒</p>
    */
   CheckpointIntervalSecond?: number
   /**
    * <p>变量替换模式</p><p>枚举值：</p><ul><li>0： 表变量替换</li><li>1： SQL全局变量替换</li></ul><p>默认值：1</p>
    */
   VariableReplaceMode?: number
+  /**
+   * <p>user</p>
+   */
+  OperatorName?: string
+  /**
+   * <p>配置更新范围 0=全量(默认) 1=仅开发 2=仅运维</p>
+   */
+  ConfigScope?: number
+  /**
+   * <p>状态桶名字</p>
+   */
+  StateCOSBucket?: string
 }
 
 /**
@@ -592,6 +604,66 @@ export interface JobRuntimeInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
+}
+
+/**
+ * ClusterBucketInfo 结构
+ */
+export interface ClusterBucketInfo {
+  /**
+   * <p>桶唯一id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SerialId?: string
+  /**
+   * <p>集群id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: number
+  /**
+   * <p>桶名字</p>
+   */
+  Bucket?: string
+  /**
+   * <p>桶类型</p><p>枚举值：</p><ul><li>0： 普通桶</li><li>1： 加速桶</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BucketType?: number
+  /**
+   * <p>鉴权类型</p><p>枚举值：</p><ul><li>0： 不鉴权</li><li>1： 鉴权</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthMode?: number
+  /**
+   * <p>是否默认属性</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsDefault?: number
+  /**
+   * <p>桶状态</p><p>枚举值：</p><ul><li>1： 正常</li><li>0： 禁用</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * <p>作业数量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobCount?: number
+  /**
+   * <p>地域</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * <p>创建时间</p><p>参数格式：yyyy-MM-dd HH:mm:ss</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p><p>参数格式：yyyy-MM-dd HH:mm:ss</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -864,6 +936,10 @@ export interface Setats {
    * <p>Setats集群描述</p>
    */
   Remark?: string
+  /**
+   * <p>集群隔离时间，0为7天，1为15天</p>
+   */
+  IsolationPolicyVersion?: number
 }
 
 /**
@@ -871,55 +947,58 @@ export interface Setats {
  */
 export interface TreeJobSets {
   /**
-   * 作业Id
+   * <p>作业Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobId?: string
   /**
-   * 作业名
+   * <p>作业名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 作业类型
+   * <p>作业类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobType?: number
   /**
-   * 作业占用资源
+   * <p>作业占用资源</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningCu?: number
   /**
-   * 作业状态 启动或者停止或者暂停
+   * <p>作业状态 启动或者停止或者暂停</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
-   * 0:代表没开启调优任务，1:开启智能调优，2:代表定时调优
-
+   * <p>0:代表没开启调优任务，1:开启智能调优，2:代表定时调优</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScalingType?: number
   /**
-   * RunningCpu
+   * <p>RunningCpu</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningCpu?: number
   /**
-   * RunningMem
+   * <p>RunningMem</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningMem?: number
   /**
-   * sql
+   * <p>sql</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DecodeSqlCode?: string
   /**
-   * 发布版本配置id
+   * <p>发布版本配置id</p>
    */
   PublishedJobConfigId?: number
+  /**
+   * <p>完整的文件夹路径，仅在平铺模式下返回</p>
+   */
+  FolderPath?: string
 }
 
 /**
@@ -2381,17 +2460,21 @@ export interface CheckSavepointRequest {
  */
 export interface DeleteJobConfigsRequest {
   /**
-   * 作业ID
+   * <p>作业ID</p>
    */
   JobId: string
   /**
-   * 作业配置版本数组
+   * <p>作业配置版本数组</p>
    */
   JobConfigVersions: Array<number | bigint>
   /**
-   * 工作空间 SerialId
+   * <p>工作空间 SerialId</p>
    */
   WorkSpaceId?: string
+  /**
+   * <p>配置更新范围 0=全量(默认) 1=仅开发 2=仅运维</p><p>取值范围：[0, 2]</p>
+   */
+  ConfigScope?: number
 }
 
 /**
@@ -2631,75 +2714,89 @@ export interface JobGraphEdge {
  */
 export interface Savepoint {
   /**
-   * 主键
+   * <p>主键</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: number
   /**
-   * 版本号
+   * <p>版本号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VersionId?: number
   /**
-   * 状态 1: Active; 2: Expired; 3: InProgress; 4: Failed; 5: Timeout
+   * <p>状态 1: Active; 2: Expired; 3: InProgress; 4: Failed; 5: Timeout</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: number
   /**
-   * 更新时间
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: number
   /**
-   * 路径
+   * <p>路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Path?: string
   /**
-   * 大小
+   * <p>大小</p><p>单位：Byte</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Size?: number
   /**
-   * 快照类型 1: savepoint；2: checkpoint；3: cancelWithSavepoint
+   * <p>快照类型 1: savepoint；2: checkpoint；3: cancelWithSavepoint</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RecordType?: number
   /**
-   * 运行作业实例的顺序 ID
+   * <p>运行作业实例的顺序 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobRuntimeId?: number
   /**
-   * 描述
+   * <p>描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 固定超时时间
+   * <p>固定超时时间</p><p>单位：毫秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Timeout?: number
   /**
-   * 快照 serialId
+   * <p>快照 serialId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SerialId?: string
   /**
-   * 耗时
+   * <p>耗时</p><p>单位：毫秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TimeConsuming?: number
   /**
-   * 快照路径状态 1：可用；2：不可用；
+   * <p>快照路径状态 1：可用；2：不可用；</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PathStatus?: number
+  /**
+   * <p>Flink版本</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlinkVersion?: string
+  /**
+   * <p>CheckPoint是否增量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsIncremental?: string
+  /**
+   * <p>checkpoint 大小</p><p>单位：Byte</p>
+   */
+  CheckpointSize?: number
 }
 
 /**
@@ -3624,6 +3721,16 @@ export interface Cluster {
    * <p>弹性网卡方案，0：POD弹性网卡，1：Node弹性网卡。</p><p>枚举值：</p><ul><li>0： POD弹性网卡</li><li>1： Node弹性网卡</li></ul>
    */
   NetEniType?: number
+  /**
+   * <p>桶列表信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterBuckets?: Array<ClusterBucketInfo>
+  /**
+   * <p>集群隔离时间，0为7天，1为15天</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsolationPolicyVersion?: number
 }
 
 /**
@@ -3765,221 +3872,240 @@ export interface DescribeJobsRequest {
  */
 export interface JobV1 {
   /**
-   * 作业ID
+   * <p>作业ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobId?: string
   /**
-   * 地域
+   * <p>地域</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: string
   /**
-   * 可用区
+   * <p>可用区</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Zone?: string
   /**
-   * 用户AppId
+   * <p>用户AppId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppId?: number
   /**
-   * 用户UIN
+   * <p>用户UIN</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnerUin?: string
   /**
-   * 创建者UIN
+   * <p>创建者UIN</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatorUin?: string
   /**
-   * 作业名字
+   * <p>作业名字</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 作业类型，1：sql作业，2：Jar作业
+   * <p>作业类型，1：sql作业，2：Jar作业</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   JobType?: number
   /**
-   * 作业状态，1：未初始化，2：未发布，3：操作中，4：运行中，5：停止，6：暂停，-1：故障
+   * <p>作业状态，1：未初始化，2：未发布，3：操作中，4：运行中，5：停止，6：暂停，-1：故障</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
-   * 作业创建时间
+   * <p>作业创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 作业启动时间
+   * <p>作业启动时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime?: string
   /**
-   * 作业停止时间
+   * <p>作业停止时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StopTime?: string
   /**
-   * 作业更新时间
+   * <p>作业更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
-   * 作业累计运行时间
+   * <p>作业累计运行时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalRunMillis?: number
   /**
-   * 备注信息
+   * <p>备注信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
-   * 操作错误提示信息
+   * <p>操作错误提示信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastOpResult?: string
   /**
-   * 集群名字
+   * <p>集群名字</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterName?: string
   /**
-   * 最新配置版本号，包括已经删除的版本
+   * <p>最新配置版本号，包括已经删除的版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestJobConfigVersion?: number
   /**
-   * 最新的版本号，不包括已经删除的版本号
+   * <p>最新的版本号，不包括已经删除的版本号</p>
    */
   LatestValidJobConfigVersion?: number
   /**
-   * 已发布的配置版本
+   * <p>已发布的配置版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PublishedJobConfigVersion?: number
   /**
-   * 运行的CU数量
+   * <p>运行的CU数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningCuNum?: number
   /**
-   * 作业内存规格
+   * <p>作业内存规格</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CuMem?: number
   /**
-   * 作业状态描述
+   * <p>作业状态描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusDesc?: string
   /**
-   * 运行状态时表示单次运行时间
+   * <p>运行状态时表示单次运行时间</p><p>单位：毫秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CurrentRunMillis?: number
   /**
-   * 作业所在的集群ID
+   * <p>作业所在的集群ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId?: string
   /**
-   * 作业管理WEB UI 入口
+   * <p>作业管理WEB UI 入口</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WebUIUrl?: string
   /**
-   * 作业所在集群类型
+   * <p>作业所在集群类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SchedulerType?: number
   /**
-   * 作业所在集群状态
+   * <p>作业所在集群状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterStatus?: number
   /**
-   * 细粒度下的运行的CU数量
+   * <p>细粒度下的运行的CU数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningCu?: number
   /**
-   * 作业运行的 Flink 版本
+   * <p>作业运行的 Flink 版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FlinkVersion?: string
   /**
-   * 工作空间 SerialId
+   * <p>工作空间 SerialId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkSpaceId?: string
   /**
-   * 工作空间名称
+   * <p>工作空间名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkSpaceName?: string
   /**
-   * 作业标签
+   * <p>作业标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
-   * 作业异常事件信息	
+   * <p>作业异常事件信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventInfo?: JobEventInfo
   /**
-   * 描述信息
+   * <p>描述信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 0:代表没开启调优任务，1:开启智能调优，2:代表定时调优
-
+   * <p>0:代表没开启调优任务，1:开启智能调优，2:代表定时调优</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScalingType?: number
   /**
-   * 使用CPU数目
+   * <p>使用CPU数目</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningCpu?: number
   /**
-   * 使用内存数量
+   * <p>使用内存数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningMem?: number
   /**
-   * 是否开了默认告警
+   * <p>是否开了默认告警</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OpenJobDefaultAlarm?: number
   /**
-   * 操作中描述
+   * <p>操作中描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProgressDesc?: string
   /**
-   * 停止持续告警
+   * <p>停止持续告警</p>
    */
   ContinueAlarm?: number
   /**
-   * 作业重启次数
+   * <p>作业重启次数</p>
    */
   RestartCount?: number
   /**
-   * 期望是开启默认告警
+   * <p>期望是开启默认告警</p>
    */
   ExpectJobDefaultAlarmStatus?: number
   /**
-   * jdk版本
+   * <p>jdk版本</p>
    */
   JdkVersion?: string
+  /**
+   * <p>状态桶名字</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StateCOSBucket?: string
+  /**
+   * <p>新的状态桶名字</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NewStateCOSBucket?: string
+  /**
+   * <p>同类型</p><p>枚举值：</p><ul><li>0： 普通桶</li><li>1： 加速桶</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StateCOSBucketType?: number
+  /**
+   * <p>新的桶类型</p><p>枚举值：</p><ul><li>0： 普通桶</li><li>1： 加速桶</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NewStateCOSBucketType?: number
 }
 
 /**
@@ -4178,17 +4304,27 @@ export interface JobConfig {
    */
   JobConfigItem?: JobConfig
   /**
-   * <p>checkpoint 超时时间</p>
+   * <p>checkpoint 超时时间</p><p>单位：秒</p>
    */
   CheckpointTimeoutSecond?: number
   /**
-   * <p>checkpoint 间隔时间</p>
+   * <p>checkpoint 间隔时间</p><p>单位：秒</p>
    */
   CheckpointIntervalSecond?: number
   /**
    * <p>变量替换模式</p><p>枚举值：</p><ul><li>0： 表变量替换</li><li>1： 全局SQL变量替换</li></ul><p>默认值：0</p>
    */
   VariableReplaceMode?: number
+  /**
+   * <p>快照桶</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StateCOSBucket?: string
+  /**
+   * <p>日志桶</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogCOSBucket?: string
 }
 
 /**
@@ -4931,6 +5067,10 @@ export interface DescribeTreeJobsRequest {
    * <p>工作空间 Serialid</p>
    */
   WorkSpaceId?: string
+  /**
+   * <p>返回形式</p><p>枚举值：</p><ul><li>0： 树形结构</li><li>1： 平铺结构</li></ul>
+   */
+  FlatMode?: number
 }
 
 /**

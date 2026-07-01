@@ -47,7 +47,7 @@ import {
   Plugin,
   ApiKeyAuthConfig,
   CreateConversationResponse,
-  DescribePluginResponse,
+  CopyAgentFromAppRequest,
   DescribeConversationRequest,
   Variable,
   Conversation,
@@ -142,6 +142,7 @@ import {
   PluginSummary,
   AgentProfile,
   OAuthConfig,
+  CopyAgentFromAppResponse,
   CreateWorkspaceCredentialResponse,
   ModelParams,
   RetryReleaseResponse,
@@ -207,7 +208,7 @@ import {
   PluginProfile,
   DeleteSpaceRequest,
   SkillCategory,
-  FieldMask,
+  DescribePluginResponse,
   DescribeReleaseListResponse,
   ComplexBillingItem,
   BackgroundImage,
@@ -220,6 +221,7 @@ import {
   ModelProviderBasic,
   ConversationMessage,
   DescribeConversationResponse,
+  FieldMask,
   AppAdvancedConf,
   DescribeSpaceListRequest,
   SkillVersion,
@@ -296,6 +298,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeConversationResponse) => void
   ): Promise<DescribeConversationResponse> {
     return this.request("DescribeConversation", req, cb)
+  }
+
+  /**
+   * 创建Agent
+   */
+  async CopyAgentFromApp(
+    req: CopyAgentFromAppRequest,
+    cb?: (error: string, rep: CopyAgentFromAppResponse) => void
+  ): Promise<CopyAgentFromAppResponse> {
+    return this.request("CopyAgentFromApp", req, cb)
   }
 
   /**

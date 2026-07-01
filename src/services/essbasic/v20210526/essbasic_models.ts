@@ -4772,7 +4772,7 @@ export interface ChannelCreateBatchQuickSignUrlRequest {
    */
   CanBatchReject?: boolean
   /**
-   * <p>预设的动态签署方的补充信息，仅匹配对应信息的签署方才能领取合同。暂时仅对个人参与方生效。</p>
+   * <p>预设的动态签署方的补充信息，仅匹配对应信息的签署方才能领取合同。若为个人动态签署方，支持预设姓名、证件、手机号。若为企业员工动态签署方，仅支持预设企业名称（仅限预设SaaS企业参与方，不支持子客企业）。</p>
    */
   PresetApproverInfo?: PresetApproverInfo
   /**
@@ -7122,27 +7122,25 @@ export interface ChannelDescribeAccountBillDetailResponse {
  */
 export interface PresetApproverInfo {
   /**
-   * 预设参与方姓名。
+   * <p>预设参与方姓名。</p>
    */
   Name?: string
   /**
-   * 预设参与方手机号。
+   * <p>预设参与方手机号。</p>
    */
   Mobile?: string
   /**
-   * 预设参与方证件号，需要和IdCardType同时传入。
-
-证件号码，应符合以下规则
-<ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。</li></ul>
+   * <p>预设参与方证件号，需要和IdCardType同时传入。</p><p>证件号码，应符合以下规则</p><ul><li>中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成(如存在X，请大写)。</li></ul>
    */
   IdCardNumber?: string
   /**
-   * 预设参与方的证件类型，需要与IdCardNumber同时传入。
-
-证件类型，支持以下类型
-<ul><li><b>ID_CARD</b>: 居民身份证</li></ul>
+   * <p>预设参与方的证件类型，需要与IdCardNumber同时传入。</p><p>证件类型，支持以下类型</p><ul><li><b>ID_CARD</b>: 居民身份证</li></ul>
    */
   IdCardType?: string
+  /**
+   * <p>企业用户动态签署方场景指定预设企业名称。<code>注意：1. 若为企业动态签署方场景，此参数必须要指定。2. 企业动态签署方场景暂不支持指定姓名证件手机号等参数，仅支持指定企业名称。3. 暂不支持指定子客企业，此处预设的企业仅支持SaaS企业。</code></p>
+   */
+  OrganizationName?: string
 }
 
 /**

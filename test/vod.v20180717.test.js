@@ -178,6 +178,16 @@ it("vod.v20180717.PullEvents", async function () {
     }
 })
 
+it("vod.v20180717.ModifyAigcQuota", async function () {
+    try {
+       const data = await client.ModifyAigcQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.ProcessMediaByProcedure", async function () {
     try {
        const data = await client.ProcessMediaByProcedure({})
@@ -378,9 +388,9 @@ it("vod.v20180717.DescribeCdnLogs", async function () {
     }
 })
 
-it("vod.v20180717.CreateCLSLogset", async function () {
+it("vod.v20180717.DeleteAigcQuota", async function () {
     try {
-       const data = await client.CreateCLSLogset({})
+       const data = await client.DeleteAigcQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -648,9 +658,9 @@ it("vod.v20180717.DescribeSnapshotByTimeOffsetTemplates", async function () {
     }
 })
 
-it("vod.v20180717.ComposeMedia", async function () {
+it("vod.v20180717.DescribeAdaptiveDynamicStreamingTemplates", async function () {
     try {
-       const data = await client.ComposeMedia({})
+       const data = await client.DescribeAdaptiveDynamicStreamingTemplates({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1021,6 +1031,16 @@ it("vod.v20180717.DescribeCurrentPlaylist", async function () {
 it("vod.v20180717.DescribeDailyMediaPlayStat", async function () {
     try {
        const data = await client.DescribeDailyMediaPlayStat({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.CreateAigcQuota", async function () {
+    try {
+       const data = await client.CreateAigcQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1478,6 +1498,16 @@ it("vod.v20180717.ForbidMediaDistribution", async function () {
     }
 })
 
+it("vod.v20180717.DescribeAigcQuotas", async function () {
+    try {
+       const data = await client.DescribeAigcQuotas({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.ImportMediaKnowledge", async function () {
     try {
        const data = await client.ImportMediaKnowledge({})
@@ -1618,9 +1648,9 @@ it("vod.v20180717.ModifyRoundPlay", async function () {
     }
 })
 
-it("vod.v20180717.DescribeAdaptiveDynamicStreamingTemplates", async function () {
+it("vod.v20180717.ComposeMedia", async function () {
     try {
-       const data = await client.DescribeAdaptiveDynamicStreamingTemplates({})
+       const data = await client.ComposeMedia({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1968,6 +1998,16 @@ it("vod.v20180717.ModifyAnimatedGraphicsTemplate", async function () {
     }
 })
 
+it("vod.v20180717.ModifyClass", async function () {
+    try {
+       const data = await client.ModifyClass({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.ModifyMPSTemplate", async function () {
     try {
        const data = await client.ModifyMPSTemplate({})
@@ -2128,9 +2168,9 @@ it("vod.v20180717.DeleteRoundPlay", async function () {
     }
 })
 
-it("vod.v20180717.ModifyClass", async function () {
+it("vod.v20180717.CreateCLSLogset", async function () {
     try {
-       const data = await client.ModifyClass({})
+       const data = await client.CreateCLSLogset({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

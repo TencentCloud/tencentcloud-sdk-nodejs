@@ -24537,9 +24537,13 @@ export interface ModifyLiveRecordTemplateRequest {
  */
 export interface ImageProcessPrompt {
   /**
-   * 图片处理相关的prompt。
+   * <p>图片处理相关的prompt。</p>
    */
   Prompt?: string
+  /**
+   * <p>prompt 对应的 role。</p>
+   */
+  Role?: string
 }
 
 /**

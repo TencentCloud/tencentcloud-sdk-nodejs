@@ -220,7 +220,7 @@ export interface ComplexRule {
  */
 export interface DescribeDeviceHardwareInfoListResponse {
   /**
-   * 分页的data数据
+   * <p>分页的data数据</p>
    */
   Data?: DescribeDeviceHardwareInfoListRspData
   /**
@@ -2131,16 +2131,19 @@ export interface DescribeBusinessResourcesRequest {
  */
 export interface DescribeSoftwareInformationRequest {
   /**
-   * 终端唯一标识Mid
+   * 管理域实例ID，用于CAM管理域权限分配。若企业未进行管理域的划分，可直接传入根域"1"，此时表示针对当前企业的全部设备和账号进行接口CRUD，具体CRUD的影响范围限制于相应接口的入参。
+   */
+  DomainInstanceId?: string
+  /**
+   * <p>终端唯一标识Mid</p>
    */
   Mid?: string
   /**
-   * 过滤条件、分页参数
-<li>Name - String - 过滤支持：是 - 操作符:eq,like - 排序支持：是 。</li>
+   * <p>过滤条件、分页参数</p><li>Name - String - 过滤支持：是 - 操作符:eq,like - 排序支持：是 。</li>
    */
   Condition?: Condition
   /**
-   * 0:win 2:mac
+   * <p>0:win 2:mac</p>
    */
   OsType?: number
 }
@@ -2824,7 +2827,7 @@ export interface DescribeDeviceDetailListPageData {
  */
 export interface DescribeSoftwareInformationResponse {
   /**
-   * 业务响应数据
+   * <p>业务响应数据</p>
    */
   Data?: DescribeSoftwareInformationPageData
   /**
@@ -4035,11 +4038,11 @@ export interface CreatePrivilegeCodeResponse {
  */
 export interface DescribeDeviceHardwareInfoListRequest {
   /**
-   * 【必填】设备分组id（需要和OsType匹配），下面是私有化场景下默认id：id-名称-操作系统1	全网终端	Win2	未分组终端	Win30000000	服务器	Win40000101	全网终端	Linux40000102	未分组终端	Linux40000103	服务器	Linux40000201	全网终端	macOS40000202	未分组终端	macOS40000203	服务器	macOS40000401	全网终端	Android40000402	未分组终端	Android40000501	全网终端	iOS40000502	未分组终端	iOSSaaS需要调用分组接口DescribeDeviceChildGroups获取对应分组id
+   * <p>【必填】设备分组id（需要和OsType匹配），下面是私有化场景下默认id：id-名称-操作系统1    全网终端    Win2    未分组终端    Win30000000    服务器    Win40000101    全网终端    Linux40000102    未分组终端    Linux40000103    服务器    Linux40000201    全网终端    macOS40000202    未分组终端    macOS40000203    服务器    macOS40000401    全网终端    Android40000402    未分组终端    Android40000501    全网终端    iOS40000502    未分组终端    iOSSaaS需要调用分组接口DescribeDeviceChildGroups获取对应分组id</p>
    */
   GroupId: number
   /**
-   * 【必填】系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本） ； 不传默认为0）(只支持32位)，需要和GroupId或者GroupIds匹配
+   * <p>【必填】系统类型（0: win，1：linux，2: mac，4：android，5：ios，-1：全系统（SaaS一体化版本））(只支持32位)，需要和GroupId或者GroupIds匹配</p><p>枚举值：</p><ul><li>0： Windows</li><li>1： Linux</li><li>2： macOS</li><li>4： Android</li><li>5： iOS</li><li>-1： 全系统（SaaS一体化版本）</li></ul>
    */
   OsType: number
   /**
@@ -4047,7 +4050,7 @@ export interface DescribeDeviceHardwareInfoListRequest {
    */
   DomainInstanceId?: string
   /**
-   * 过滤条件参数（字段含义请参考接口返回值）  - Name, 类型String，支持操作：【eq，like，ilike】，支持排序  - UserName, 类型String，支持操作：【eq，like，ilike】，支持排序  - IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序  - MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序  - Ip, 类型String，支持操作：【eq，like，ilike】，支持排序  - Mid, 类型String，支持操作：【eq，like，ilike】，支持排序  ，支持排序分页参数  - PageNum 从1开始，小于等于0时使用默认参数 - PageSize 最大值5000，最好不超过100
+   * <p>过滤条件参数（字段含义请参考接口返回值）  - Name, 类型String，支持操作：【eq，like，ilike】，支持排序  - UserName, 类型String，支持操作：【eq，like，ilike】，支持排序  - IoaUserName，类型String，支持操作：【eq，like，ilike】，支持排序  - MacAddr, 类型String，支持操作：【eq，like，ilike】，支持排序  - Ip, 类型String，支持操作：【eq，like，ilike】，支持排序  - Mid, 类型String，支持操作：【eq，like，ilike】，支持排序  ，支持排序分页参数  - PageNum 从1开始，小于等于0时使用默认参数 - PageSize 最大值5000，最好不超过100</p>
    */
   Condition?: Condition
 }

@@ -17141,31 +17141,31 @@ export interface CheckAssistantCidrRequest {
  */
 export interface UpdateTrafficMirrorAllFilterRequest {
   /**
-   * 流量镜像实例ID
+   * <p>流量镜像实例ID</p>
    */
   TrafficMirrorId: string
   /**
-   * 流量镜像采集方向
+   * <p>流量镜像采集方向</p>
    */
   Direction?: string
   /**
-   * 流量镜像采集对象
+   * <p>流量镜像采集对象</p>
    */
   CollectorSrcs?: Array<string>
   /**
-   * 流量镜像需要过滤的natgw实例
+   * <p>流量镜像需要过滤的natgw实例</p>
    */
   NatId?: string
   /**
-   * 流量镜像需要过滤的五元组规则
+   * <p>流量镜像需要过滤的五元组规则</p>
    */
   CollectorNormalFilters?: Array<TrafficMirrorFilter>
   /**
-   * 流量镜像入站过滤规则。
+   * <p>流量镜像入站过滤规则。</p>
    */
   IngressFilterRules?: Array<TrafficMirrorFilter>
   /**
-   * 流量镜像出站过滤规则。
+   * <p>流量镜像出站过滤规则。</p>
    */
   EgressFilterRules?: Array<TrafficMirrorFilter>
 }

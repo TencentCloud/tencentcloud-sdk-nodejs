@@ -124,6 +124,7 @@ import {
   AiRecognitionTaskAsrWordsSegmentItem,
   CreateAigcAdvancedCustomElementResponse,
   TextWatermarkTemplateInput,
+  SegmentConfigureInfoForUpdate,
   UserDefineAsrTextReviewTemplateInfoForUpdate,
   QualityEvaluationConfigureInfoForUpdate,
   AiRecognitionTaskInput,
@@ -165,13 +166,14 @@ import {
   MediaSnapshotByTimeOffsetItem,
   SceneAigcImageTaskOutputFileInfo,
   ModifyMediaStorageClassResponse,
+  CreateAigcQuotaResponse,
   DescribeProcedureTemplatesRequest,
   AiReviewPornTaskInput,
   JitterConfigureInfoForUpdate,
   UserDefineAsrTextReviewTemplateInfo,
   CreateProcedureTemplateRequest,
   MediaProcessTaskAnimatedGraphicResult,
-  DescribeAigcUsageDataResponse,
+  DeleteAigcQuotaRequest,
   AigcUsageDataItem,
   MPSOutputFile,
   QualityEvaluationConfigureInfo,
@@ -242,6 +244,7 @@ import {
   DescribeDailyMostPlayedStatResponse,
   ModifyAIRecognitionTemplateResponse,
   SplitMediaTaskConfig,
+  TEHDConfig,
   PlayStatFileInfo,
   ModifyMediaInfoRequest,
   MediaProcessTaskAdaptiveDynamicStreamingResult,
@@ -342,6 +345,7 @@ import {
   CreateReviewTemplateRequest,
   DescribeMediaInfosResponse,
   DeleteProcedureTemplateResponse,
+  ModifyAigcQuotaResponse,
   DescribeReviewTemplatesResponse,
   DescribeAdaptiveDynamicStreamingTemplatesResponse,
   MediaMiniProgramReviewInfo,
@@ -386,12 +390,13 @@ import {
   ArtifactRepairInfo,
   CreateAigcAudioTaskRequest,
   CoverBySnapshotTaskInput,
-  SegmentConfigureInfoForUpdate,
+  DescribeMediaProcessUsageDataRequest,
   RebuildMediaTaskInput,
   ModifyProcessImageAsyncTemplateResponse,
   UserDefineConfigureInfo,
   NoiseConfigureInfoForUpdate,
   LiveRecordInfo,
+  DescribeAigcQuotasRequest,
   AiRecognitionTaskSegmentSegmentItem,
   RestoreMediaTask,
   AiReviewPornOcrTaskInput,
@@ -463,6 +468,7 @@ import {
   AudioVolumeBalanceInfo,
   ModifyBlindWatermarkTemplateRequest,
   AiRecognitionTaskAsrWordsResultOutput,
+  CreateAigcQuotaRequest,
   DescribeHeadTailTemplatesRequest,
   CreateLLMComprehendTemplateResponse,
   DescribeCdnLogsRequest,
@@ -503,7 +509,7 @@ import {
   LowLightEnhanceInfo,
   DescribeContentReviewTemplatesResponse,
   ProductImageConfig,
-  TEHDConfig,
+  DeleteAigcQuotaResponse,
   ProcessImageAsyncTaskInput,
   ImageReviewUsageDataItem,
   AnimatedGraphicsTemplate,
@@ -635,6 +641,7 @@ import {
   CreateLLMComprehendTemplateRequest,
   AiAnalysisTaskCoverOutput,
   AiContentReviewTaskInput,
+  DescribeAigcQuotasResponse,
   CreateAdaptiveDynamicStreamingTemplateResponse,
   DeleteSampleSnapshotTemplateRequest,
   AiAnalysisTaskInput,
@@ -852,7 +859,7 @@ import {
   DescribeAigcUsageDataRequest,
   CreateVodDomainResponse,
   ModifyVodDomainAccelerateConfigResponse,
-  AiRecognitionTaskSegmentResultInput,
+  AigcQuotaItem,
   MPSOverrideEraseParameter,
   ModifyHeadTailTemplateRequest,
   DescribeTasksResponse,
@@ -947,6 +954,7 @@ import {
   RemoveWatermarkRequest,
   SPEKEDrm,
   ExecuteFunctionRequest,
+  ModifyAigcQuotaRequest,
   RebuildMediaTask,
   ConfirmEventsResponse,
   CreateAigcApiTokenResponse,
@@ -1014,7 +1022,7 @@ import {
   ExtractCopyRightWatermarkTask,
   MediaAiAnalysisFrameTagItem,
   QualityInspectItem,
-  DescribeMediaProcessUsageDataRequest,
+  DescribeAigcUsageDataResponse,
   DescribeCLSPushTargetsResponse,
   PullUploadTask,
   DescribeImageProcessingTemplatesResponse,
@@ -1044,6 +1052,7 @@ import {
   EnhanceMediaQualityResponse,
   SubtitleFormatsOperation,
   ThirdPartyDrmInfo,
+  AiRecognitionTaskSegmentResultInput,
   MediaTrack,
   FastEditMediaFileInfo,
   StorageStatData,
@@ -1271,6 +1280,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 用于编辑 AIGC 配额配置，配额用量从启用配额功能时开始累计，达到限额后将无法继续使用 AIGC 功能。
+
+由于AGC内客生成为异步任务，无法获取实时用量数据，因此配额限制存在一定误差，无法实现与设置额度完全精准的控制。
+     */
+  async ModifyAigcQuota(
+    req: ModifyAigcQuotaRequest,
+    cb?: (error: string, rep: ModifyAigcQuotaResponse) => void
+  ): Promise<ModifyAigcQuotaResponse> {
+    return this.request("ModifyAigcQuota", req, cb)
+  }
+
+  /**
      * 使用任务流模板，对点播中的视频发起处理任务。
 有两种方式创建任务流模板：
 1. 在控制台上创建和修改任务流模板；
@@ -1489,13 +1510,15 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 由 VOD 创建新的日志集。
-   */
-  async CreateCLSLogset(
-    req: CreateCLSLogsetRequest,
-    cb?: (error: string, rep: CreateCLSLogsetResponse) => void
-  ): Promise<CreateCLSLogsetResponse> {
-    return this.request("CreateCLSLogset", req, cb)
+     * 用于删除 AIGC 配额配置，删除后，将不再限制 AIGC 任务的发起。
+
+如果删除配额后重新启用，用量将清零并重新计算。
+     */
+  async DeleteAigcQuota(
+    req: DeleteAigcQuotaRequest,
+    cb?: (error: string, rep: DeleteAigcQuotaResponse) => void
+  ): Promise<DeleteAigcQuotaResponse> {
+    return this.request("DeleteAigcQuota", req, cb)
   }
 
   /**
@@ -1798,24 +1821,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 该接口用于合成媒体文件，可以达到以下效果：
-
-1. **画面旋转**：对视频、图片的画面旋转一定角度，或按照某个方向翻转。
-2. **声音控制**：升高降低视频、音频中声音的音量，或者对视频静音。
-3. **画面叠加**：将视频、图片中的画面依序叠加在一起，如实现“画中画”的效果。
-4. **声音混合**：将视频、音频中的声音混合在一起（混音）。
-5. **声音提取**：将视频中的音频提取出来（不保留画面）。
-6. **裁剪**：对视频、音频裁剪出指定时间段。
-7. **拼接**：对视频、音频、图片按时间顺序前后拼接。
-8. **转场**：将多段视频或图片拼接时，可以在段落之间添加转场效果。
-
-合成后的媒体封装格式可以是 MP4（视频）或 MP3（音频）。如使用事件通知，事件通知的类型为 [视频合成完成](https://cloud.tencent.com/document/product/266/43000)。
-     */
-  async ComposeMedia(
-    req: ComposeMediaRequest,
-    cb?: (error: string, rep: ComposeMediaResponse) => void
-  ): Promise<ComposeMediaResponse> {
-    return this.request("ComposeMedia", req, cb)
+   * 查询转自适应码流模板，支持根据条件，分页查询。
+   */
+  async DescribeAdaptiveDynamicStreamingTemplates(
+    req: DescribeAdaptiveDynamicStreamingTemplatesRequest,
+    cb?: (error: string, rep: DescribeAdaptiveDynamicStreamingTemplatesResponse) => void
+  ): Promise<DescribeAdaptiveDynamicStreamingTemplatesResponse> {
+    return this.request("DescribeAdaptiveDynamicStreamingTemplates", req, cb)
   }
 
   /**
@@ -2253,6 +2265,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDailyMediaPlayStatResponse) => void
   ): Promise<DescribeDailyMediaPlayStatResponse> {
     return this.request("DescribeDailyMediaPlayStat", req, cb)
+  }
+
+  /**
+     * 用于创建并启用 AIGC 配额配置，配额用量从启用配额功能时开始累计，达到限额后将无法继续使用 AIGC 功能。
+
+如果删除配额后重新启用，用量将清零并重新计算。
+
+由于AGC内客生成为异步任务，无法获取实时用量数据，因此配额限制存在一定误差，无法实现与设置额度完全精准的控制。
+     */
+  async CreateAigcQuota(
+    req: CreateAigcQuotaRequest,
+    cb?: (error: string, rep: CreateAigcQuotaResponse) => void
+  ): Promise<CreateAigcQuotaResponse> {
+    return this.request("CreateAigcQuota", req, cb)
   }
 
   /**
@@ -2762,6 +2788,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 用于查询 AIGC 配额配置。
+   */
+  async DescribeAigcQuotas(
+    req: DescribeAigcQuotasRequest,
+    cb?: (error: string, rep: DescribeAigcQuotasResponse) => void
+  ): Promise<DescribeAigcQuotasResponse> {
+    return this.request("DescribeAigcQuotas", req, cb)
+  }
+
+  /**
    * 用于将智能分析的结果导入到知识库中。
    */
   async ImportMediaKnowledge(
@@ -2920,13 +2956,24 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询转自适应码流模板，支持根据条件，分页查询。
-   */
-  async DescribeAdaptiveDynamicStreamingTemplates(
-    req: DescribeAdaptiveDynamicStreamingTemplatesRequest,
-    cb?: (error: string, rep: DescribeAdaptiveDynamicStreamingTemplatesResponse) => void
-  ): Promise<DescribeAdaptiveDynamicStreamingTemplatesResponse> {
-    return this.request("DescribeAdaptiveDynamicStreamingTemplates", req, cb)
+     * 该接口用于合成媒体文件，可以达到以下效果：
+
+1. **画面旋转**：对视频、图片的画面旋转一定角度，或按照某个方向翻转。
+2. **声音控制**：升高降低视频、音频中声音的音量，或者对视频静音。
+3. **画面叠加**：将视频、图片中的画面依序叠加在一起，如实现“画中画”的效果。
+4. **声音混合**：将视频、音频中的声音混合在一起（混音）。
+5. **声音提取**：将视频中的音频提取出来（不保留画面）。
+6. **裁剪**：对视频、音频裁剪出指定时间段。
+7. **拼接**：对视频、音频、图片按时间顺序前后拼接。
+8. **转场**：将多段视频或图片拼接时，可以在段落之间添加转场效果。
+
+合成后的媒体封装格式可以是 MP4（视频）或 MP3（音频）。如使用事件通知，事件通知的类型为 [视频合成完成](https://cloud.tencent.com/document/product/266/43000)。
+     */
+  async ComposeMedia(
+    req: ComposeMediaRequest,
+    cb?: (error: string, rep: ComposeMediaResponse) => void
+  ): Promise<ComposeMediaResponse> {
+    return this.request("ComposeMedia", req, cb)
   }
 
   /**
@@ -3319,6 +3366,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改媒体分类属性。
+   */
+  async ModifyClass(
+    req: ModifyClassRequest,
+    cb?: (error: string, rep: ModifyClassResponse) => void
+  ): Promise<ModifyClassResponse> {
+    return this.request("ModifyClass", req, cb)
+  }
+
+  /**
      * 修改用户自定义 MPS 任务模板。
 修改模板时，需要将 MPS 相关参数以 JSON 格式填入 MPSModifyTemplateParams 参数中。关于具体的任务参数配置方法，请参考 MPS 任务模板相关文档说明。
      */
@@ -3522,13 +3579,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改媒体分类属性。
+   * 由 VOD 创建新的日志集。
    */
-  async ModifyClass(
-    req: ModifyClassRequest,
-    cb?: (error: string, rep: ModifyClassResponse) => void
-  ): Promise<ModifyClassResponse> {
-    return this.request("ModifyClass", req, cb)
+  async CreateCLSLogset(
+    req: CreateCLSLogsetRequest,
+    cb?: (error: string, rep: CreateCLSLogsetResponse) => void
+  ): Promise<CreateCLSLogsetResponse> {
+    return this.request("CreateCLSLogset", req, cb)
   }
 
   /**

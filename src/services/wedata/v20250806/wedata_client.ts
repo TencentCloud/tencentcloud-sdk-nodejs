@@ -492,7 +492,7 @@ import {
   GetOpsAsyncJobResponse,
   DeleteSQLFolderRequest,
   CreateTriggerWorkflowRequest,
-  Project,
+  ComputeConfigMapping,
   ListDatabasePage,
   ListResourceGroupsRequest,
   GetResourceFolderResponse,
@@ -573,6 +573,7 @@ import {
   DeleteOpsAlarmRuleRequest,
   GetTaskCodeResponse,
   ModifyQualityRuleGroupResponse,
+  Project,
   CreateCodePermissionsRequest,
   SQLContentActionResult,
   DeleteTriggerWorkflowRequest,
@@ -1671,7 +1672,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询数据探索文件夹树，包括文件夹下的脚本
+   * 查询SQL文件夹树，包括文件夹下的脚本
    */
   async ListSQLFolderContents(
     req: ListSQLFolderContentsRequest,

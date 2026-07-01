@@ -24130,7 +24130,7 @@ export interface DescribeProtectDirListResponse {
  */
 export interface DescribeLoginTypeGlobalConfResponse {
   /**
-   * <p>是否开启防卸载 <li>0 否</li> <li>1 是</li> <li>9 未设置,和0一样是未开启</li></p>
+   * <p>是否开启扫码登录 <li>0 否</li> <li>1 是</li> <li>9 未设置,和0一样是未开启</li></p>
    */
   Enable?: number
   /**

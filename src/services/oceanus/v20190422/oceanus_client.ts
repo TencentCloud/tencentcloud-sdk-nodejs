@@ -37,6 +37,7 @@ import {
   TriggerJobSavepointRequest,
   LogContent,
   JobRuntimeInfo,
+  ClusterBucketInfo,
   JobEventInfo,
   DescribeWorkSpaceUsersResponse,
   NodeConfig,

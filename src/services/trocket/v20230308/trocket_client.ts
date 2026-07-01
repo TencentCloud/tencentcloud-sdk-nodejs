@@ -28,6 +28,7 @@ import {
   CreateInstanceResponse,
   SourceClusterTopicConfig,
   ConsumeGroupItem,
+  TopicStatsDetail,
   DescribeMessageListRequest,
   RetryPolicy,
   ModifyInstanceRequest,
@@ -37,6 +38,7 @@ import {
   DescribeConsumerGroupResponse,
   ImportSourceClusterConsumerGroupsResponse,
   DeleteTopicRequest,
+  DescribeTopicStatsRequest,
   DescribeSmoothMigrationTaskListResponse,
   DescribeMigrationTaskListResponse,
   VpcInfo,
@@ -68,6 +70,7 @@ import {
   DescribeTopicResponse,
   SmoothMigrationTaskItem,
   ModifyRoleRequest,
+  DescribeTopicStatsResponse,
   DescribeFusionInstanceListResponse,
   CreateTopicRequest,
   DescribeMessageRequest,
@@ -445,6 +448,17 @@ Filters示例：
     cb?: (error: string, rep: DescribeProductSKUsResponse) => void
   ): Promise<DescribeProductSKUsResponse> {
     return this.request("DescribeProductSKUs", req, cb)
+  }
+
+  /**
+     * 获取主题队列级别的消费详情
+当前 API 适用集群：5.x 铂金版集群
+     */
+  async DescribeTopicStats(
+    req: DescribeTopicStatsRequest,
+    cb?: (error: string, rep: DescribeTopicStatsResponse) => void
+  ): Promise<DescribeTopicStatsResponse> {
+    return this.request("DescribeTopicStats", req, cb)
   }
 
   /**

@@ -1763,33 +1763,37 @@ export interface RemoveUserFromGroupRequest {
  */
 export interface AddPermissionPolicyToRoleConfigurationRequest {
   /**
-   * 空间 ID
+   * <p>空间 ID</p>
    */
   ZoneId: string
   /**
-   * 权限配置 ID
+   * <p>权限配置 ID</p>
    */
   RoleConfigurationId: string
   /**
-   * 权限策略类型。取值：  System：系统策略。复用 CAM 的系统策略。 Custom: 自定义策略。按照 CAM 权限策略语法和结构编写的自定义策略。
+   * <p>权限策略类型。取值：  System：系统策略。复用 CAM 的系统策略。 Custom: 自定义策略。按照 CAM 权限策略语法和结构编写的自定义策略。</p>
    */
   RolePolicyType: string
   /**
-   * 权限策略名称，长度最大为 20策略，每个策略长度最大32个字符。如果要添加系统策略，建议使用RolePolicies参数。自定义策略时，数组长度最大为1。
+   * <p>权限策略名称，长度最大为 20策略，每个策略长度最大32个字符。如果要添加系统策略，建议使用RolePolicies参数。自定义策略时，数组长度最大为1。</p>
    */
   RolePolicyNames?: Array<string>
   /**
-   * 添加的系统策略详情。
+   * <p>添加的系统策略详情。</p>
    */
   RolePolicies?: Array<PolicyDetail>
   /**
-   * 自定义策略内容。长度：最大 4096 个字符。当RolePolicyType为Inline时，该参数必须配置。关于权限策略的语法和结构，请参见权限策略语法和结构。
+   * <p>自定义策略内容。长度：最大 4096 个字符。当RolePolicyType为Inline时，该参数必须配置。关于权限策略的语法和结构，请参见权限策略语法和结构。</p>
    */
   CustomPolicyDocument?: string
   /**
-   * 自定义策略内容列表（跟RolePolicyNames一一对应）
+   * <p>自定义策略内容列表（跟RolePolicyNames一一对应）</p>
    */
   CustomPolicyDocuments?: Array<string>
+  /**
+   * <p>是否公共策略</p><p>枚举值：</p><ul><li>1： 是</li><li>0： 不是</li></ul><p>默认值：1</p>
+   */
+  PolicyType?: number
 }
 
 /**

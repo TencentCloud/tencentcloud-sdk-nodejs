@@ -4925,7 +4925,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取防卸载全局配置
+   * 获取扫码登录全局配置
    */
   async DescribeLoginTypeGlobalConf(
     req?: DescribeLoginTypeGlobalConfRequest,

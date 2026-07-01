@@ -331,6 +331,42 @@ export interface ConsumeGroupItem {
 }
 
 /**
+ * 主题队列级别的消费详情
+ */
+export interface TopicStatsDetail {
+  /**
+   * <p>Broker节点名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BrokerName?: string
+  /**
+   * <p>队列编号</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueueId?: number
+  /**
+   * <p>生产消息位点</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BrokerOffset?: number
+  /**
+   * <p>最新消费位点</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CommitOffset?: number
+  /**
+   * <p>堆积总数</p><p>单位：条</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MessageCount?: number
+  /**
+   * <p>最后消费时间</p><p>单位：毫秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastUpdateTimestamp?: number
+}
+
+/**
  * DescribeMessageList请求参数结构体
  */
 export interface DescribeMessageListRequest {
@@ -780,6 +816,32 @@ export interface DeleteTopicRequest {
    * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得。
    */
   Topic: string
+}
+
+/**
+ * DescribeTopicStats请求参数结构体
+ */
+export interface DescribeTopicStatsRequest {
+  /**
+   * 主题名称，从 [DescribeTopicList](https://cloud.tencent.com/document/api/1493/96030) 接口返回的 [TopicItem](https://cloud.tencent.com/document/api/1493/96031#TopicItem) 或控制台获得。
+   */
+  Topic: string
+  /**
+   * 腾讯云 RocketMQ 实例 ID，从 [DescribeFusionInstanceList](https://cloud.tencent.com/document/api/1493/106745) 接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * <p>消费组ID，可通过DescribeConsumerGroupList接口返回的ConsumerGroup字段或控制台查询</p>
+   */
+  GroupId: string
+  /**
+   * 查询起始位置，默认为0。
+   */
+  Offset?: number
+  /**
+   * 查询结果限制数量，默认20。
+   */
+  Limit?: number
 }
 
 /**
@@ -1492,6 +1554,24 @@ export interface ModifyRoleRequest {
    * Topic&Group维度权限配置，权限类型为 TopicAndGroup 时必填
    */
   DetailedPerms?: Array<DetailedRolePerm>
+}
+
+/**
+ * DescribeTopicStats返回参数结构体
+ */
+export interface DescribeTopicStatsResponse {
+  /**
+   * 查询总数
+   */
+  TotalCount?: number
+  /**
+   * <p>队列级别的消费详情</p>
+   */
+  Data?: Array<TopicStatsDetail>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

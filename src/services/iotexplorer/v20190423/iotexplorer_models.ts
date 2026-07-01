@@ -949,6 +949,44 @@ export interface UpdateDeviceTWeCallAuthorizeStatusRequest {
 }
 
 /**
+ * CreateTWeSeeDirectUploadCredential返回参数结构体
+ */
+export interface CreateTWeSeeDirectUploadCredentialResponse {
+  /**
+   * <p>访问 COS 的临时密钥过期时间（秒级 UNIX 时间戳）</p>
+   */
+  ExpiredTime?: number
+  /**
+   * <p>访问 COS 的临时密钥 SecretId</p>
+   */
+  SecretId?: string
+  /**
+   * <p>访问 COS 的临时密钥 SecretKey</p>
+   */
+  SecretKey?: string
+  /**
+   * <p>COS 存储桶名称</p>
+   */
+  StorageBucket?: string
+  /**
+   * <p>COS 对象 Key 前缀。返回的临时凭据仅允许上传到此前缀下，格式为 Direct/{Uin}/{SessionId}/。</p>
+   */
+  StoragePath?: string
+  /**
+   * <p>COS 存储桶所在地域</p>
+   */
+  StorageRegion?: string
+  /**
+   * <p>访问 COS 的临时密钥 Token</p>
+   */
+  Token?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateProject返回参数结构体
  */
 export interface CreateProjectResponse {
@@ -1839,6 +1877,56 @@ export interface DescribeStudioProductRequest {
    * 产品ID
    */
   ProductId: string
+}
+
+/**
+ * CreateTWeSeeDirectUploadCredential请求参数结构体
+ */
+export interface CreateTWeSeeDirectUploadCredentialRequest {
+  /**
+   * <p>产品 ID</p><p>非 IoT 设备可传 <code>default</code></p>
+   */
+  ProductId: string
+  /**
+   * <p>设备名称</p>
+   */
+  DeviceName: string
+  /**
+   * <p>算法类型</p><p>枚举值：</p><ul><li>VID_COMP： 视频理解（支持视频文件或多帧图片）</li><li>IMG_COMP： 图片理解（单帧图片）</li></ul>
+   */
+  ServiceType: string
+  /**
+   * <p>通道 ID</p><p>默认值：0</p>
+   */
+  ChannelId?: number
+  /**
+   * <p>回调目标 ID</p>
+   */
+  CallbackId?: string
+  /**
+   * <p>视觉理解配置项</p>
+   */
+  ComprehensionConfig?: SeeComprehensionConfig
+  /**
+   * <p>自定义事件 ID，会透传到任务元数据与回调中</p>
+   */
+  CustomId?: string
+  /**
+   * <p>临时密钥有效期，单位：秒。默认 300 秒，取值范围 5 到 86400。</p>
+   */
+  DurationSeconds?: number
+  /**
+   * <p>该直传凭据最多可触发的分析次数</p><p>取值范围：[1, 10000]</p><p>默认值：1</p>
+   */
+  MaxInvokeCount?: number
+  /**
+   * <p>上传 COS 存储桶所在地域。不填时使用默认地域。</p>
+   */
+  StorageRegion?: string
+  /**
+   * <p>上传方式</p><p>枚举值：</p><ul><li>single： 单文件上传</li><li>manifest： 上传源文件与 Manifest（先上传多个源文件，然后上传 Manifest JSON 触发分析）</li></ul><p>默认值：single</p>
+   */
+  UploadMethod?: string
 }
 
 /**
@@ -5978,6 +6066,10 @@ export interface InvokeAISearchServiceRequest {
    * <p>搜索结果的排序方式，可选值：</p><ul><li><code>CORRELATION</code>：按相关性（默认）</li><li><code>TIME_ASC</code>：按时间升序</li><li><code>TIME_DESC</code>：按时间降序</li></ul>
    */
   Order?: string
+  /**
+   * <p>是否输出原始任务信息</p>
+   */
+  WithTaskInfo?: boolean
 }
 
 /**

@@ -960,6 +960,36 @@ export interface LogRuleKeyValueInfo {
 }
 
 /**
+ * DescribeEdrAlertList请求参数结构体
+ */
+export interface DescribeEdrAlertListRequest {
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>PolicyType - int - 是否必填：否 - 策略类型PolicyName - string - 是否必填：否 - 策略名称Domain - string - 是否必填：否 - 域名(先对域名做urlencode,再base64)PolicyAction- int - 是否必填：否 - 策略动作IsEnabled - int - 是否必填：否 - 是否生效</p>
+   */
+  Filters?: Array<EDRFilter>
+  /**
+   * <p>限制条数,默认10,最大100</p>
+   */
+  Limit?: number
+  /**
+   * <p>偏移量,默认0</p>
+   */
+  Offset?: number
+  /**
+   * <p>排序方式: [ASC:升序|DESC:降序]</p>
+   */
+  Order?: string
+  /**
+   * <p>可选排序列: [LatestDetectTime]</p>
+   */
+  By?: string
+}
+
+/**
  * CreateDspmAssetsExportJob返回参数结构体
  */
 export interface CreateDspmAssetsExportJobResponse {
@@ -1505,6 +1535,36 @@ export interface DescribeDspmRiskTendencyRequest {
 }
 
 /**
+ * EDR告警定位信息（ID + AlertID + AppID 三元组）
+ */
+export interface EdrAlertTarget {
+  /**
+   * <p>告警主键ID</p>
+   */
+  Id: number
+  /**
+   * <p>告警所属账号ID（跨账号，前端必传）</p>
+   */
+  AppId: number
+  /**
+   * <p>告警唯一标识</p>
+   */
+  AlertId?: string
+  /**
+   * <p>主机UUID（可选，由列表带回透传）</p>
+   */
+  Quuid?: string
+  /**
+   * <p>实例ID（可选，由列表带回透传，用于安全中心标签富化）</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>告警子类型</p>
+   */
+  AlertSubType?: string
+}
+
+/**
  * DescribeDspmRisk返回参数结构体
  */
 export interface DescribeDspmRiskResponse {
@@ -1839,6 +1899,24 @@ export interface TagCount {
    * 日志条数
    */
   Count?: number
+}
+
+/**
+ * UpdateAccessKeyAlarmStatus返回参数结构体
+ */
+export interface UpdateAccessKeyAlarmStatusResponse {
+  /**
+   * 0成功，1失败
+   */
+  Code?: number
+  /**
+   * 错误信息
+   */
+  Msg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2179,6 +2257,60 @@ export interface ModifyDspmApproveStatusResponse {
 }
 
 /**
+ * IaC检测文件
+ */
+export interface IaCFile {
+  /**
+   * <p>ID</p>
+   */
+  Id?: number
+  /**
+   * <p>appid</p>
+   */
+  AppId?: number
+  /**
+   * <p>文件ID</p>
+   */
+  FileId?: string
+  /**
+   * <p>文件名称</p>
+   */
+  FileName?: string
+  /**
+   * <p>CI/CD名称</p>
+   */
+  CICDName?: string
+  /**
+   * <p>文件路径</p>
+   */
+  FilePath?: string
+  /**
+   * <p>文件类型(1:Dockerfile,2:Terraform,3:KubernetesYaml)</p>
+   */
+  FileType?: number
+  /**
+   * <p>风险总计数量</p>
+   */
+  RiskTotalCnt?: number
+  /**
+   * <p>风险等级数量(0:低危,1:中危,2:高危,3:严重)</p>
+   */
+  RiskLevelCnt?: Array<KeyValueInt>
+  /**
+   * <p>扫描时间</p>
+   */
+  ScanTime?: string
+  /**
+   * <p>检测状态(0:待扫描,1:检测中,2:已完成,3:检测异常)</p>
+   */
+  Status?: number
+  /**
+   * <p>扫描失败类型(0:无失败, 1:检测超时, 2:文件格式解析失败, 3:检测失败)</p>
+   */
+  FailType?: number
+}
+
+/**
  * DescribeAIAgentAssetList请求参数结构体
  */
 export interface DescribeAIAgentAssetListRequest {
@@ -2222,6 +2354,20 @@ export interface CosRiskActionInfo {
    * 最后访问时间Unix时间单位毫秒
    */
   ActionAccessTime?: number
+}
+
+/**
+ * EDR-检测方式对应策略数量
+ */
+export interface DetectTypeCount {
+  /**
+   * <p>检测方式，0：主机检测，1：网络检测</p>
+   */
+  DetectType?: number
+  /**
+   * <p>策略数量</p>
+   */
+  Count?: number
 }
 
 /**
@@ -2329,6 +2475,40 @@ export interface DspmIdentifyAssetStatistic {
    * 关联资产普通成员数。
    */
   MemberCount?: number
+}
+
+/**
+ * IP威胁情报信息（通过TIX IPAnalysis接口获取）
+ */
+export interface IPIntelInfo {
+  /**
+   * <p>情报标签（如常规木马、漏洞软件、窃密木马）</p>
+   */
+  Tags?: Array<string>
+  /**
+   * <p>研判依据</p>
+   */
+  Basis?: string
+  /**
+   * <p>所属运营商</p>
+   */
+  ISP?: string
+  /**
+   * <p>地理位置</p>
+   */
+  Location?: string
+  /**
+   * <p>家族团伙</p>
+   */
+  Characteristic?: string
+  /**
+   * <p>IP画像</p>
+   */
+  Purpose?: string
+  /**
+   * <p>反查域名列表</p>
+   */
+  Referer?: Array<DomainInfo>
 }
 
 /**
@@ -3019,6 +3199,28 @@ export interface DeleteDomainAndIpResponse {
 }
 
 /**
+ * 安全中心标签
+ */
+export interface CSIPTag {
+  /**
+   * <p>标签颜色</p>
+   */
+  TagColor?: string
+  /**
+   * <p>标签ID</p>
+   */
+  TagID?: number
+  /**
+   * <p>标签键（根据语言环境返回中文或英文）</p>
+   */
+  TagKey?: string
+  /**
+   * <p>标签值（根据语言环境返回中文或英文）</p>
+   */
+  TagValue?: string
+}
+
+/**
  * CreateDomainAndIp请求参数结构体
  */
 export interface CreateDomainAndIpRequest {
@@ -3124,6 +3326,20 @@ export interface VerifyDspmAssetLoginCodeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * EDR命令行规则单规则
+ */
+export interface RuleContentProcessInfo {
+  /**
+   * <p>进程文件路径</p>
+   */
+  Exe: string
+  /**
+   * <p>进程命令行</p>
+   */
+  CmdLine: string
 }
 
 /**
@@ -4100,213 +4316,17 @@ export interface RetryDspmExportLogResponse {
 }
 
 /**
- * 主机列表
+ * DescribeEdrAlertInfo返回参数结构体
  */
-export interface MachineDetail {
+export interface DescribeEdrAlertInfoResponse {
   /**
-   * <p>Agent状态</p>
+   * <p>告警详情</p>
    */
-  AgentStatus?: string
+  Alert?: EdrAlertDetail
   /**
-   * <p>Agent版本</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AgentVersion?: string
-  /**
-   * <p>账号AppId</p>
-   */
-  AppId?: number
-  /**
-   * <p>资产类型名称</p>
-   */
-  AssetTypeName?: string
-  /**
-   * <p>系统启动时间（Unix时间戳）</p>
-   */
-  BootTime?: number
-  /**
-   * <p>购买时间（Unix时间戳）</p>
-   */
-  BuyTime?: number
-  /**
-   * <p>云服务商</p>
-   */
-  CloudFromEnum?: string
-  /**
-   * <p>云标签列表</p>
-   */
-  CloudTags?: Array<Tags>
-  /**
-   * <p>内核版本</p>
-   */
-  CoreVersion?: string
-  /**
-   * <p>CPU信息</p>
-   */
-  Cpu?: string
-  /**
-   * <p>CPU负载</p>
-   */
-  CpuLoad?: string
-  /**
-   * <p>CPU核数</p>
-   */
-  CpuSize?: number
-  /**
-   * <p>设备型号</p>
-   */
-  DeviceVersion?: string
-  /**
-   * <p>磁盘分区信息</p>
-   */
-  Disks?: Array<DiskPartitionInfo>
-  /**
-   * <p>到期时间（Unix时间戳）</p>
-   */
-  EndTime?: number
-  /**
-   * <p>暴露状态</p>
-   */
-  ExposedStatus?: string
-  /**
-   * <p>安装时间（Unix时间戳）</p>
-   */
-  InstallTime?: number
-  /**
-   * <p>实例ID</p>
-   */
-  InstanceID?: string
-  /**
-   * <p>实例状态</p>
-   */
-  InstanceStatus?: string
-  /**
-   * <p>内核版本</p>
-   */
-  KernelVersion?: string
-  /**
-   * <p>最近一次在线时间（Unix时间戳）</p>
-   */
-  LatestLiveTime?: number
-  /**
-   * <p>最近一次离线时间（Unix时间戳）</p>
-   */
-  LatestOfflineTime?: number
-  /**
-   * <p>内网IP</p>
-   */
-  MachineIp?: string
-  /**
-   * <p>主机名称</p>
-   */
-  MachineName?: string
-  /**
-   * <p>操作系统（云采集）</p>
-   */
-  MachineOs?: string
-  /**
-   * <p>主机状态</p>
-   */
-  MachineStatus?: string
-  /**
-   * <p>外网IP</p>
-   */
-  MachineWanIp?: string
-  /**
-   * <p>内存大小(MB)</p>
-   */
-  MemSize?: number
-  /**
-   * <p>内存使用率</p>
-   */
-  MemoryLoad?: string
-  /**
-   * <p>网卡信息</p>
-   */
-  NetCards?: Array<NetworkCardInfo>
-  /**
-   * <p>操作系统（端采集）</p>
-   */
-  OsByAgent?: string
-  /**
-   * <p>付费模式</p>
-   */
-  PayMode?: string
-  /**
-   * <p>项目ID</p>
-   */
-  ProjectId?: number
-  /**
-   * <p>已防护天数</p>
-   */
-  ProtectDays?: number
-  /**
-   * <p>防护类型</p>
-   */
-  ProtectType?: string
-  /**
-   * <p>主机唯一标识</p>
-   */
-  Quuid?: string
-  /**
-   * <p>地域信息</p>
-   */
-  RegionInfo?: RegionInfo
-  /**
-   * <p>备注</p>
-   */
-  Remark?: string
-  /**
-   * <p>序列号</p>
-   */
-  SerialNumber?: string
-  /**
-   * <p>资产标签列表</p>
-   */
-  TagItems?: Array<MiniTagItem>
-  /**
-   * <p>标签修改信息</p>
-   */
-  TagModifyInfo?: AssetTagModifyAssetItem
-  /**
-   * <p>Agent唯一标识</p>
-   */
-  Uuid?: string
-  /**
-   * <p>VPC CIDR</p>
-   */
-  VpcCidrBlock?: string
-  /**
-   * <p>VPC ID</p>
-   */
-  VpcId?: string
-  /**
-   * <p>VPC名称</p>
-   */
-  VpcName?: string
-  /**
-   * <p>主机节点类型</p><p>枚举值：</p><ul><li>NONE： 主机节点</li><li>CLUSTER： 集群节点</li><li>CONTAINER： 容器节点</li></ul>
-   */
-  NodeType?: string
-  /**
-   * <p>容器防护状态</p><p>枚举值：</p><ul><li>Enabled： 开启防护</li><li>Disabled： 关闭防护</li><li>Unknown： 未知</li></ul>
-   */
-  ContainerDefendStatus?: string
-  /**
-   * <p>集群签证md5</p>
-   */
-  ClusterCaMd5?: string
-  /**
-   * <p>容器环境信息</p>
-   */
-  ContainerEnvInfo?: ContainerEnvInfo
-  /**
-   * <p>集群id</p>
-   */
-  ClusterId?: string
-  /**
-   * <p>集群名称</p>
-   */
-  ClusterName?: string
+  RequestId?: string
 }
 
 /**
@@ -4335,6 +4355,20 @@ export interface CreateDspmApproveHistoryExportJobRequest {
    * 过滤器
    */
   Filter?: Filter
+}
+
+/**
+ * EDR-攻击阶段对应数量
+ */
+export interface AttackStageCount {
+  /**
+   * <p>攻击阶段</p>
+   */
+  AttackStage?: string
+  /**
+   * <p>策略数量</p>
+   */
+  Count?: number
 }
 
 /**
@@ -6676,6 +6710,24 @@ export interface DspmAssetDatabaseInfo {
 }
 
 /**
+ * EDR命令行规则
+ */
+export interface RuleContentCmdLine {
+  /**
+   * <p>进程命令行信息</p>
+   */
+  Process?: RuleContentProcessInfo
+  /**
+   * <p>父进程命令行信息</p>
+   */
+  ParentProcess?: RuleContentProcessInfo
+  /**
+   * <p>祖先进程命令行信息</p>
+   */
+  AncestorProcess?: RuleContentProcessInfo
+}
+
+/**
  * 列权限信息
  */
 export interface DspmColumnPrivilege {
@@ -7258,6 +7310,16 @@ export interface DescribeDspmIdentifyIdListRequest {
    * 筛选项
    */
   Filter?: Filter
+}
+
+/**
+ * DescribeAILinkSetting请求参数结构体
+ */
+export interface DescribeAILinkSettingRequest {
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -7985,6 +8047,120 @@ export interface DescribeUebaRuleRequest {
    * 过滤条件
    */
   Filter?: Filter
+}
+
+/**
+ * ModifyEDRRule请求参数结构体
+ */
+export interface ModifyEDRRuleRequest {
+  /**
+   * <p>策略类型 / Rule Type: 0-系统策略/System Rule, 1-自定义策略/Custom Rule</p>
+   */
+  RuleType: number
+  /**
+   * <p>执行动作 / Action: 0-告警/Alert, 1-放行/Allow, 2-告警并拦截/Alert and Block</p>
+   */
+  AlertAction: number
+  /**
+   * <p>生效资产 / Effective Scope: 0-指定主机/Specified Hosts, 1-全部主机/All Hosts, 2-专业版/Professional, 3-旗舰版/Flagship, 4-专业版+旗舰版/Professional+Flagship     QUUIDS        []string json:&quot;QUUIDS&quot;                                      // 主机列表 / Host QUUIDS (when Scope=0)</p>
+   */
+  CWPScope: number
+  /**
+   * <p>容器生效镜像范围 / Container Image Scope: 0-指定镜像/Specified Images, 1-全部镜像/All Images</p>
+   */
+  TCSSScope: number
+  /**
+   * <p>开关 / Status: 0-开启/Enabled, 1-关闭/Disabled</p>
+   */
+  Status: number
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>策略名称</p>
+   */
+  Name?: string
+  /**
+   * <p>内容类型 / Content Type: md5-文件MD5/File MD5, cmdline-命令行/Command Line, dns-DNS, ip_inbound-入站IP/Inbound IP, ip_outbound-出站IP/Outbound IP, custom_file-自定义文件/Custom File, process_network-进程网络/Process Network</p>
+   */
+  ContentType?: string
+  /**
+   * <p>告警等级 / Alert Level: 1-高危/High, 2-中危/Medium, 3-低危/Low, 4-提示/Reminder</p>
+   */
+  Level?: number
+  /**
+   * <p>检测模式 / Detect Mode: 0-精准/Precise, 1-均衡/Balanced, 2-深度/Deep</p>
+   */
+  DetectMode?: number
+  /**
+   * <p>攻击阶段</p>
+   */
+  AttackStage?: string
+  /**
+   * <p>策略</p>
+   */
+  RuleID?: string
+  /**
+   * <p>策略描述</p>
+   */
+  Description?: string
+  /**
+   * <p>处理历史告警 / Handle Old Events: 0-否/No, 1-是/Yes</p>
+   */
+  DealOldEvents?: number
+  /**
+   * <p>ContentType=md5 时传入的 MD5 列表</p>
+   */
+  Md5List?: Array<string>
+  /**
+   * <p>ContentType=custom_file 时传入的文件名列表(Base64编码)</p>
+   */
+  FileName?: Array<string>
+  /**
+   * <p>ContentType=custom_file 时传入的文件目录列表(Base64编码)</p>
+   */
+  FileDirectory?: Array<string>
+  /**
+   * <p>ContentType=cmdline 时传入的命令行规则，Process/PProcess/AProcess 的 Exe/Cmdline 字段需要 Base64 编码</p>
+   */
+  CmdLineRules?: RuleContentCmdLine
+  /**
+   * <p>ContentType=dns 时传入的域名列表(Base64编码)</p>
+   */
+  Domains?: Array<string>
+  /**
+   * <p>ContentType=ip_outbound 时传入的出站IP列表(Base64编码)</p>
+   */
+  OutboundIP?: Array<string>
+  /**
+   * <p>ContentType=ip_inbound 时传入的入站IP列表(Base64编码)</p>
+   */
+  InboundIP?: Array<string>
+  /**
+   * <p>镜像ID列表 / Image IDs (when TCSSScope=0)</p>
+   */
+  ImageIDs?: Array<string>
+  /**
+   * <p>ContentType=process_network 时传入的进程网络规则</p>
+   */
+  ProcessNetworkRules?: RuleContentProcessNetwork
+  /**
+   * <p>选择的多账号的APPID</p>
+   */
+  TargetAppIDs?: Array<number | bigint>
+  /**
+   * <p>告警的加白目标机器信息</p>
+   */
+  Target?: EdrAlertTarget
+  /**
+   * <p>自选资产对应的实例ID和APPID</p>
+   */
+  InstanceIDsWithAppId?: Array<InstanceIDWithAppIdItem>
+  /**
+   * <p>全选资产排除的实例ID和APPID</p>
+   */
+  ExcludeInstanceIDsWithAppId?: Array<InstanceIDWithAppIdItem>
 }
 
 /**
@@ -9611,6 +9787,24 @@ export interface InquireInfo {
 }
 
 /**
+ * ModifyUebaRuleSwitch请求参数结构体
+ */
+export interface ModifyUebaRuleSwitchRequest {
+  /**
+   * 策略ID
+   */
+  RuleID: string
+  /**
+   * 开关状态
+   */
+  Status: boolean
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+}
+
+/**
  * 风险调用记录详情
  */
 export interface RiskCallRecord {
@@ -9753,21 +9947,213 @@ export interface AssetProcessItem {
 }
 
 /**
- * ModifyUebaRuleSwitch请求参数结构体
+ * 主机列表
  */
-export interface ModifyUebaRuleSwitchRequest {
+export interface MachineDetail {
   /**
-   * 策略ID
+   * <p>Agent状态</p>
    */
-  RuleID: string
+  AgentStatus?: string
   /**
-   * 开关状态
+   * <p>Agent版本</p>
    */
-  Status: boolean
+  AgentVersion?: string
   /**
-   * 集团账号的成员id
+   * <p>账号AppId</p>
    */
-  MemberId?: Array<string>
+  AppId?: number
+  /**
+   * <p>资产类型名称</p>
+   */
+  AssetTypeName?: string
+  /**
+   * <p>系统启动时间（Unix时间戳）</p>
+   */
+  BootTime?: number
+  /**
+   * <p>购买时间（Unix时间戳）</p>
+   */
+  BuyTime?: number
+  /**
+   * <p>云服务商</p>
+   */
+  CloudFromEnum?: string
+  /**
+   * <p>云标签列表</p>
+   */
+  CloudTags?: Array<Tags>
+  /**
+   * <p>内核版本</p>
+   */
+  CoreVersion?: string
+  /**
+   * <p>CPU信息</p>
+   */
+  Cpu?: string
+  /**
+   * <p>CPU负载</p>
+   */
+  CpuLoad?: string
+  /**
+   * <p>CPU核数</p>
+   */
+  CpuSize?: number
+  /**
+   * <p>设备型号</p>
+   */
+  DeviceVersion?: string
+  /**
+   * <p>磁盘分区信息</p>
+   */
+  Disks?: Array<DiskPartitionInfo>
+  /**
+   * <p>到期时间（Unix时间戳）</p>
+   */
+  EndTime?: number
+  /**
+   * <p>暴露状态</p>
+   */
+  ExposedStatus?: string
+  /**
+   * <p>安装时间（Unix时间戳）</p>
+   */
+  InstallTime?: number
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceID?: string
+  /**
+   * <p>实例状态</p>
+   */
+  InstanceStatus?: string
+  /**
+   * <p>内核版本</p>
+   */
+  KernelVersion?: string
+  /**
+   * <p>最近一次在线时间（Unix时间戳）</p>
+   */
+  LatestLiveTime?: number
+  /**
+   * <p>最近一次离线时间（Unix时间戳）</p>
+   */
+  LatestOfflineTime?: number
+  /**
+   * <p>内网IP</p>
+   */
+  MachineIp?: string
+  /**
+   * <p>主机名称</p>
+   */
+  MachineName?: string
+  /**
+   * <p>操作系统（云采集）</p>
+   */
+  MachineOs?: string
+  /**
+   * <p>主机状态</p>
+   */
+  MachineStatus?: string
+  /**
+   * <p>外网IP</p>
+   */
+  MachineWanIp?: string
+  /**
+   * <p>内存大小(MB)</p>
+   */
+  MemSize?: number
+  /**
+   * <p>内存使用率</p>
+   */
+  MemoryLoad?: string
+  /**
+   * <p>网卡信息</p>
+   */
+  NetCards?: Array<NetworkCardInfo>
+  /**
+   * <p>操作系统（端采集）</p>
+   */
+  OsByAgent?: string
+  /**
+   * <p>付费模式</p>
+   */
+  PayMode?: string
+  /**
+   * <p>项目ID</p>
+   */
+  ProjectId?: number
+  /**
+   * <p>已防护天数</p>
+   */
+  ProtectDays?: number
+  /**
+   * <p>防护类型</p>
+   */
+  ProtectType?: string
+  /**
+   * <p>主机唯一标识</p>
+   */
+  Quuid?: string
+  /**
+   * <p>地域信息</p>
+   */
+  RegionInfo?: RegionInfo
+  /**
+   * <p>备注</p>
+   */
+  Remark?: string
+  /**
+   * <p>序列号</p>
+   */
+  SerialNumber?: string
+  /**
+   * <p>资产标签列表</p>
+   */
+  TagItems?: Array<MiniTagItem>
+  /**
+   * <p>标签修改信息</p>
+   */
+  TagModifyInfo?: AssetTagModifyAssetItem
+  /**
+   * <p>Agent唯一标识</p>
+   */
+  Uuid?: string
+  /**
+   * <p>VPC CIDR</p>
+   */
+  VpcCidrBlock?: string
+  /**
+   * <p>VPC ID</p>
+   */
+  VpcId?: string
+  /**
+   * <p>VPC名称</p>
+   */
+  VpcName?: string
+  /**
+   * <p>主机节点类型</p><p>枚举值：</p><ul><li>NONE： 主机节点</li><li>CLUSTER： 集群节点</li><li>CONTAINER： 容器节点</li></ul>
+   */
+  NodeType?: string
+  /**
+   * <p>容器防护状态</p><p>枚举值：</p><ul><li>Enabled： 开启防护</li><li>Disabled： 关闭防护</li><li>Unknown： 未知</li></ul>
+   */
+  ContainerDefendStatus?: string
+  /**
+   * <p>集群签证md5</p>
+   */
+  ClusterCaMd5?: string
+  /**
+   * <p>容器环境信息</p>
+   */
+  ContainerEnvInfo?: ContainerEnvInfo
+  /**
+   * <p>集群id</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>集群名称</p>
+   */
+  ClusterName?: string
 }
 
 /**
@@ -10015,37 +10401,155 @@ export interface AssetCluster {
 }
 
 /**
- * Dspm 风险分组策略
+ * EDR-策略内容
  */
-export interface DspmRiskStrategyGroup {
+export interface EDRRule {
   /**
-   * 策略类型
+   * <p>策略ID</p>
    */
-  StrategyType?: string
+  RuleID?: string
   /**
-   * 策略名
+   * <p>策略类型，0-系统策略/System Rule, 1-自定义策略/Custom Rule</p>
+   */
+  RuleType?: number
+  /**
+   * <p>策略名称</p>
    */
   Name?: string
   /**
-   * 策略类型
+   * <p>策略描述</p>
    */
-  StrategyCategory?: string
+  Description?: string
   /**
-   * 是否启用。0-禁用 1-启用
+   * <p>内容类型 / Content Type: md5-文件MD5/File MD5, cmdline-命令行/Command Line, dns-DNS, ip_inbound-入站IP/Inbound IP, ip_outbound-出站IP/Outbound IP, custom_file-自定义文件/Custom File, process_network-进程网络/Process Network</p>
    */
-  IsEnabled?: number
+  ContentType?: string
   /**
-   * 命中次数
+   * <p>执行动作 / Action: 0-告警/Alert, 1-放行/Allow, 2-告警并拦截/Alert and Block</p>
    */
-  HitCount?: number
+  Action?: number
   /**
-   * 风险类型。risk-风险；alarm-告警。
+   * <p>告警等级 / Alert Level: 0-无/None, 1-高危/High, 2-中危/Medium, 3-低危/Low, 4-提示/Reminder</p>
    */
-  RiskType?: string
+  Level?: number
   /**
-   * 策略列表
+   * <p>检测模式 / Detect Mode: 0-精准/Precise, 1-均衡/Balanced, 2-深度/Deep</p>
    */
-  StrategyList?: Array<DspmRiskStrategy>
+  DetectMode?: number
+  /**
+   * <p>检测方式 / Detect Type: 0-主机检测/Host Detection, 1-网络检测/Network Detection</p>
+   */
+  DetectType?: number
+  /**
+   * <p>攻击阶段</p>
+   */
+  AttackStage?: string
+  /**
+   * <p>主机生效资产范围 / Effective Scope: 0-指定主机/Specified Hosts, 1-全部主机/All Hosts, 2-专业版/Professional, 3-旗舰版/Flagship, 4-专业版+旗舰版/Professional+Flagship</p>
+   */
+  CWPScope?: number
+  /**
+   * <p>主机运行时的自选主机</p>
+   */
+  QUUIDS?: Array<string>
+  /**
+   * <p>状态 / Status: 0-开启/Enabled, 1-关闭/Disabled</p>
+   */
+  Status?: number
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>修改时间</p>
+   */
+  ModifyTime?: string
+  /**
+   * <p>是否支持拦截 / Support Block: 0-不支持/Not Supported, 1-支持/Supported</p>
+   */
+  SupportBlock?: number
+  /**
+   * <p>MD5列表,ContentType=md5 时填充</p>
+   */
+  Md5List?: Array<string>
+  /**
+   * <p>文件名列表,ContentType=custom_file 时填充</p>
+   */
+  FileName?: Array<string>
+  /**
+   * <p>文件目录列表,ContentType=custom_file 时填充</p>
+   */
+  FileDirectory?: Array<string>
+  /**
+   * <p>域名列表,ContentType=dns 时填充</p>
+   */
+  Domains?: Array<string>
+  /**
+   * <p>出站IP列表,ContentType=ip_outbound 时填充</p>
+   */
+  OutboundIP?: Array<string>
+  /**
+   * <p>入站IP列表,ContentType=ip_inbound 时填充</p>
+   */
+  InboundIP?: Array<string>
+  /**
+   * <p>命令行规则,ContentType=cmdline 时填充</p>
+   */
+  CmdLineRules?: RuleContentCmdLine
+  /**
+   * <p>容器生效镜像范围 / Container Image Scope: 0-指定镜像/Specified Images, 1-全部镜像/All Images</p>
+   */
+  TCSSScope?: number
+  /**
+   * <p>生效镜像ID列表 / Image IDs (when TCSSScope=0)</p>
+   */
+  ImageIDs?: Array<string>
+  /**
+   * <p>镜像名正则表达式 / Image Names Regex</p>
+   */
+  ImageNamesRegex?: string
+  /**
+   * <p>置信度 / Confidence: 0-低/Low, 1-中/Medium, 2-高/High</p>
+   */
+  Confidence?: number
+  /**
+   * <p>排除的主机列表 / Excluded Host QUUIDS</p>
+   */
+  ExcludeQUUIDS?: Array<string>
+  /**
+   * <p>排除的镜像ID列表 / Excluded Image IDs</p>
+   */
+  ExcludeImageIDs?: Array<string>
+  /**
+   * <p>进程网络规则 / Process network rules</p>
+   */
+  ProcessNetworkRules?: RuleContentProcessNetwork
+  /**
+   * <p>策略对应APPID</p>
+   */
+  AppID?: number
+  /**
+   * <p>自选实例ID范围</p>
+   */
+  InstanceIDs?: Array<string>
+  /**
+   * <p>排除实例ID</p>
+   */
+  ExcludeInstanceIDs?: Array<string>
+}
+
+/**
+ * DescribeEdrAlertInfo请求参数结构体
+ */
+export interface DescribeEdrAlertInfoRequest {
+  /**
+   * <p>告警定位信息（含跨账号AppID）</p>
+   */
+  Target: EdrAlertTarget
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -10485,21 +10989,28 @@ export interface CosAuditPayInfo {
 }
 
 /**
- * UpdateAccessKeyAlarmStatus返回参数结构体
+ * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
+
+若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
+
+* 最多只能有5个Filter
+* 同一个Filter存在多个Values，Values值数量最多不能超过5个。
+
  */
-export interface UpdateAccessKeyAlarmStatusResponse {
+export interface EDRFilter {
   /**
-   * 0成功，1失败
+   * <p>过滤键的名称。</p>
    */
-  Code?: number
+  Name: string
   /**
-   * 错误信息
+   * <p>一个或者多个过滤值。</p>
    */
-  Msg?: string
+  Values: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>模糊搜索</p>
    */
-  RequestId?: string
+  ExactMatch?: boolean
 }
 
 /**
@@ -11952,6 +12463,120 @@ export interface ModifyIaCTokenPeriodResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * EDR告警列表信息
+ */
+export interface EdrAlertItem {
+  /**
+   * <p>告警表id</p>
+   */
+  Id?: number
+  /**
+   * <p>APPID</p>
+   */
+  AppId?: number
+  /**
+   * <p>告警ID</p>
+   */
+  AlertId?: string
+  /**
+   * <p>告警大类</p>
+   */
+  AlertCategory?: string
+  /**
+   * <p>告警子类</p>
+   */
+  AlertSubType?: string
+  /**
+   * <p>策略ID</p>
+   */
+  RuleId?: string
+  /**
+   * <p>策略类型</p>
+   */
+  RuleType?: number
+  /**
+   * <p>告警等级</p>
+   */
+  Level?: string
+  /**
+   * <p>告警状态</p>
+   */
+  Status?: string
+  /**
+   * <p>攻击阶段</p>
+   */
+  AttackStage?: string
+  /**
+   * <p>检测模式</p>
+   */
+  DetectMode?: string
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>QUUID</p>
+   */
+  Quuid?: string
+  /**
+   * <p>是否付费</p>
+   */
+  IsProVersion?: number
+  /**
+   * <p>告警来源</p>
+   */
+  AlertSource?: string
+  /**
+   * <p>镜像ID</p>
+   */
+  ImageId?: string
+  /**
+   * <p>容器id</p>
+   */
+  ContainerId?: string
+  /**
+   * <p>集群ID</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>告警数量</p>
+   */
+  EventCount?: number
+  /**
+   * <p>最初发现时间</p>
+   */
+  FirstDetectTime?: string
+  /**
+   * <p>最近发现时间</p>
+   */
+  LatestDetectTime?: string
+  /**
+   * <p>规则名</p>
+   */
+  RuleName?: string
+  /**
+   * <p>策略类型</p>
+   */
+  ContentType?: string
+  /**
+   * <p>实例名</p>
+   */
+  InstanceName?: string
+  /**
+   * <p>公共IP</p>
+   */
+  PublicIp?: string
+  /**
+   * <p>内网IP</p>
+   */
+  PrivateIp?: string
+  /**
+   * <p>该机器是否开启应用防护</p>
+   */
+  RaspOpen?: boolean
 }
 
 /**
@@ -13453,6 +14078,48 @@ export interface DescribeAssetRiskListResponse {
 }
 
 /**
+ * ModifyAILinkSetting请求参数结构体
+ */
+export interface ModifyAILinkSettingRequest {
+  /**
+   * <p>0 关闭AI-Link智链引擎，1 开启AI-Link智链引擎</p>
+   */
+  AILinkEnable: number
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>深度模式 0-关闭 1-开启</p>
+   */
+  RuleScopeDeep?: number
+  /**
+   * <p>均衡模式 0-关闭 1-开启</p>
+   */
+  RuleScopeBalanced?: number
+  /**
+   * <p>精准模式 0-关闭 1-开启</p>
+   */
+  RuleScopePrecise?: number
+  /**
+   * <p>1 全部专业/旗舰版主机，0 自选主机列表</p>
+   */
+  Scope?: number
+  /**
+   * <p>自选主机Quuid列表（Scope=0时必填）</p>
+   */
+  Quuids?: Array<string>
+  /**
+   * <p>排除主机Quuid列表（Scope=1时生效）</p>
+   */
+  ExcludeQuuids?: Array<string>
+  /**
+   * <p>新增资产自动包含 0 不包含 1包含</p>
+   */
+  AutoInclude?: number
+}
+
+/**
  * DeleteDspmRestoreLogList返回参数结构体
  */
 export interface DeleteDspmRestoreLogListResponse {
@@ -14540,6 +15207,32 @@ export interface ModifyDspmAssetSecurityAnalysisSwitchResponse {
 }
 
 /**
+ * DescribeEdrAlertList返回参数结构体
+ */
+export interface DescribeEdrAlertListResponse {
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>列表</p>
+   */
+  List?: Array<EdrAlertItem>
+  /**
+   * <p>攻击阶段对应的策略数量</p>
+   */
+  AttackStageCounts?: Array<AttackStageCount>
+  /**
+   * <p>告警大类统计（随筛选变化，排除 AlertCategory filter）</p>
+   */
+  AlertCategoryCounts?: Array<EdrAlertCategoryCount>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 暴露资产
  */
 export interface ExposesItem {
@@ -15356,6 +16049,204 @@ export interface NotifyAssetConfigItem {
 }
 
 /**
+ * EDR告警详情（含content JSON + 资产/情报富化字段）
+ */
+export interface EdrAlertDetail {
+  /**
+   * <p>主键ID</p>
+   */
+  Id?: number
+  /**
+   * <p>租户ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>告警唯一标识</p>
+   */
+  AlertId?: string
+  /**
+   * <p>告警大类（英文枚举：VIRUS_TROJAN/ABNORMAL_LOGIN/HOST_BEHAVIOR/NETWORK_BEHAVIOR/LINK_ENGINE）</p>
+   */
+  AlertCategory?: string
+  /**
+   * <p>告警子类型（英文枚举：MALWARE_FILE/MALWARE_PROCESS/RISK_LOGIN/BRUTE_FORCE/DNS/BASH/PRIV_ESCALATION/REVERSE_SHELL/NET_ATTACK/VUL_DEFENCE/MEMORY_SHELL_INJECT/MEMORY_SHELL_SCAN/MULTI_BEHAVIOR_ATTACK）</p>
+   */
+  AlertSubType?: string
+  /**
+   * <p>关联规则ID</p>
+   */
+  RuleId?: string
+  /**
+   * <p>规则类型: 0-系统规则 1-用户自定义</p>
+   */
+  RuleType?: number
+  /**
+   * <p>告警等级（英文枚举：CRITICAL/HIGH/MEDIUM/LOW/INFO）</p>
+   */
+  Level?: string
+  /**
+   * <p>处理状态（英文枚举：PENDING/PROCESSED/WHITELISTED/ISOLATED/CLEANED/IGNORED/ISOLATING/RESTORING/BLOCKED/DELETED）</p>
+   */
+  Status?: string
+  /**
+   * <p>ATT&amp;CK攻击阶段</p>
+   */
+  AttackStage?: string
+  /**
+   * <p>检测模式（英文枚举：PRECISE/BALANCED/DEEP）</p>
+   */
+  DetectMode?: string
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>主机UUID</p>
+   */
+  Quuid?: string
+  /**
+   * <p>聚合事件数</p>
+   */
+  EventCount?: number
+  /**
+   * <p>是否付费版</p>
+   */
+  IsProVersion?: number
+  /**
+   * <p>告警来源（英文枚举：HOST/CONTAINER/K8S/CSIP）</p>
+   */
+  AlertSource?: string
+  /**
+   * <p>容器镜像ID（保留字段，恒为空串）</p>
+   */
+  ImageId?: string
+  /**
+   * <p>容器ID（保留字段，恒为空串）</p>
+   */
+  ContainerId?: string
+  /**
+   * <p>集群ID（保留字段，恒为空串）</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>首次发现时间</p>
+   */
+  FirstDetectTime?: string
+  /**
+   * <p>最近发现时间</p>
+   */
+  LatestDetectTime?: string
+  /**
+   * <p>规则名称（规则富化）</p>
+   */
+  RuleName?: string
+  /**
+   * <p>内容类型: md5/cmdline/dns/ip_inbound/ip_outbound/custom_file/process_network</p>
+   */
+  ContentType?: string
+  /**
+   * <p>实例名（资产富化）</p>
+   */
+  InstanceName?: string
+  /**
+   * <p>公网IP（资产富化）</p>
+   */
+  PublicIp?: string
+  /**
+   * <p>内网IP（资产富化）</p>
+   */
+  PrivateIp?: string
+  /**
+   * <p>告警详情JSON字符串（前端通过JSON.parse解析，空值为&quot;{}&quot;）</p>
+   */
+  Content?: string
+  /**
+   * <p>告警名称（子类型中英文名）</p>
+   */
+  AlertName?: string
+  /**
+   * <p>安全中心标签</p>
+   */
+  CSIPTags?: Array<CSIPTag>
+  /**
+   * <p>危害描述（统一字段，合并原各子类型独立字段）</p>
+   */
+  HarmDesc?: string
+  /**
+   * <p>修复建议（统一字段）</p>
+   */
+  SuggestScheme?: string
+  /**
+   * <p>数据来源: vuldb/vdc/intel/default</p>
+   */
+  HarmDescSource?: string
+  /**
+   * <p>统一威胁情报标签（按子类型路由不同情报源）</p>
+   */
+  ThreatTags?: Array<string>
+  /**
+   * <p>Base64解码后的命令（高危命令子类型独有）</p>
+   */
+  BashCmdDecoded?: string
+  /**
+   * <p>漏洞名称（网络攻击子类型独有）</p>
+   */
+  NetVulName?: string
+  /**
+   * <p>CVE编号（网络攻击子类型独有）</p>
+   */
+  NetCVEId?: string
+  /**
+   * <p>异常行为（网络攻击子类型独有）</p>
+   */
+  NetAbnormalAction?: string
+  /**
+   * <p>IP情报信息（为空时不返回）</p>
+   */
+  IPIntel?: IPIntelInfo
+  /**
+   * <p>多行为攻击规则类型分类: sequence/threshold/command</p>
+   */
+  MultiBehaviorDetectionMode?: string
+  /**
+   * <p>告警来源描述（按子类型派生，描述哪个引擎/规则检出）</p>
+   */
+  SourceDesc?: string
+  /**
+   * <p>处理时间参数格式：2026-05-26 19:45:48</p>
+   */
+  ModifyTime?: string
+  /**
+   * <p>情报富化结果来源（标识本次详情是否成功命中外部情报）；取值 &quot;VDC&quot; / &quot;IPAnalysis&quot; / &quot;BreakingTI&quot; / 空串</p>
+   */
+  IntelSource?: string
+  /**
+   * <p>综合研判，中英文已翻译，中：恶意/安全/未知；英：Malicious/Safe/Unknown</p>
+   */
+  Verdict?: string
+  /**
+   * <p>研判依据</p>
+   */
+  VerdictBasis?: string
+  /**
+   * <p>病毒名称</p>
+   */
+  VirusName?: string
+  /**
+   * <p>病毒家族</p>
+   */
+  VirusFamily?: string
+  /**
+   * <p>NetResponsePayload 响应数据包（base64 编码后的字符串）</p>
+   */
+  NetResponsePayload?: string
+  /**
+   * <p>服务进程信息（base64 编码后的 JSON 字符串）</p>
+   */
+  NetSvcPs?: string
+}
+
+/**
  * cos每日告警/风险信息
  */
 export interface CosAlarmTrendInfo {
@@ -15596,6 +16487,24 @@ export interface DescribeRiskCenterServerRiskListRequest {
 }
 
 /**
+ * 反查域名信息
+ */
+export interface DomainInfo {
+  /**
+   * <p>域名</p>
+   */
+  Domain?: string
+  /**
+   * <p>分析时间</p>
+   */
+  AnalysisTime?: string
+  /**
+   * <p>标签</p>
+   */
+  Tags?: Array<string>
+}
+
+/**
  * DescribeAccessKeyAlarmDetail返回参数结构体
  */
 export interface DescribeAccessKeyAlarmDetailResponse {
@@ -15622,6 +16531,28 @@ export interface DescribeAccessKeyAlarmDetailResponse {
 }
 
 /**
+ * 定义进程网络规则内容结构，用于反弹Shell白名单场景，支持进程匹配 + IP/端口过滤
+ */
+export interface RuleContentProcessNetwork {
+  /**
+   * <p>当前进程</p>
+   */
+  Process: RuleContentProcessInfo
+  /**
+   * <p>目标IP（必填）: 支持单个IP/IP范围/CIDR, 支持IPv4和IPv6</p>
+   */
+  DstIP: string
+  /**
+   * <p>父进程</p>
+   */
+  ParentProcess?: RuleContentProcessInfo
+  /**
+   * <p>目标端口列表（可选）: 支持1-65535, 为空表示不限端口</p>
+   */
+  DstPorts?: Array<number | bigint>
+}
+
+/**
  * DescribeOtherCloudAssets请求参数结构体
  */
 export interface DescribeOtherCloudAssetsRequest {
@@ -15637,6 +16568,58 @@ export interface DescribeOtherCloudAssetsRequest {
    * 资产类型:MYSQL/MARIADB/REDIS/MONGODB/POSTGRES/CTS/ES/KAFKA/COS/CBS/CFS
    */
   AssetTypes?: Array<string>
+}
+
+/**
+ * DescribeAILinkSetting返回参数结构体
+ */
+export interface DescribeAILinkSettingResponse {
+  /**
+   * <p>0 关闭AI-Link智链引擎，1 开启AI-Link智链引擎</p>
+   */
+  AILinkEnable?: number
+  /**
+   * <p>深度模式 0-关闭 1-开启</p>
+   */
+  RuleScopeDeep?: number
+  /**
+   * <p>均衡模式 0-关闭 1-开启</p>
+   */
+  RuleScopeBalanced?: number
+  /**
+   * <p>精准模式 0-关闭 1-开启</p>
+   */
+  RuleScopePrecise?: number
+  /**
+   * <p>1 全部专业/旗舰版主机，0 Quuids列表主机</p>
+   */
+  Scope?: number
+  /**
+   * <p>自选主机Quuid列表</p>
+   */
+  Quuids?: Array<string>
+  /**
+   * <p>排除主机Quuid列表</p>
+   */
+  ExcludeQuuids?: Array<string>
+  /**
+   * <p>新增资产自动包含 0 不包含 1包含</p>
+   */
+  AutoInclude?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAILinkSetting返回参数结构体
+ */
+export interface ModifyAILinkSettingResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -15701,6 +16684,20 @@ export interface DescribeDspmBackupLogListResponse {
    * <p>最大恢复空间</p>
    */
   MaxRestoreSizeInGB?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyEdrAlertPermanentIgnore返回参数结构体
+ */
+export interface ModifyEdrAlertPermanentIgnoreResponse {
+  /**
+   * <p>成功忽略的告警数</p>
+   */
+  IgnoredCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16680,6 +17677,16 @@ export interface TrafficRuleState {
 }
 
 /**
+ * ModifyEDRRule返回参数结构体
+ */
+export interface ModifyEDRRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 访问密钥告警数量
  */
 export interface AccessKeyAlarmCount {
@@ -16905,6 +17912,20 @@ export interface AssetRiskItem {
    * <p>资产类型</p>
    */
   AssetTypeName?: string
+}
+
+/**
+ * ModifyEdrAlertPermanentIgnore请求参数结构体
+ */
+export interface ModifyEdrAlertPermanentIgnoreRequest {
+  /**
+   * <p>告警定位列表（支持跨账号），最多500条</p>
+   */
+  Targets: Array<EdrAlertTargetForIgnore>
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -17545,57 +18566,37 @@ export interface DbAssetInfo {
 }
 
 /**
- * IaC检测文件
+ * Dspm 风险分组策略
  */
-export interface IaCFile {
+export interface DspmRiskStrategyGroup {
   /**
-   * <p>ID</p>
+   * 策略类型
    */
-  Id?: number
+  StrategyType?: string
   /**
-   * <p>appid</p>
+   * 策略名
    */
-  AppId?: number
+  Name?: string
   /**
-   * <p>文件ID</p>
+   * 策略类型
    */
-  FileId?: string
+  StrategyCategory?: string
   /**
-   * <p>文件名称</p>
+   * 是否启用。0-禁用 1-启用
    */
-  FileName?: string
+  IsEnabled?: number
   /**
-   * <p>CI/CD名称</p>
+   * 命中次数
    */
-  CICDName?: string
+  HitCount?: number
   /**
-   * <p>文件路径</p>
+   * 风险类型。risk-风险；alarm-告警。
    */
-  FilePath?: string
+  RiskType?: string
   /**
-   * <p>文件类型(1:Dockerfile,2:Terraform,3:KubernetesYaml)</p>
+   * 策略列表
    */
-  FileType?: number
-  /**
-   * <p>风险总计数量</p>
-   */
-  RiskTotalCnt?: number
-  /**
-   * <p>风险等级数量(0:低危,1:中危,2:高危,3:严重)</p>
-   */
-  RiskLevelCnt?: Array<KeyValueInt>
-  /**
-   * <p>扫描时间</p>
-   */
-  ScanTime?: string
-  /**
-   * <p>检测状态(0:待扫描,1:检测中,2:已完成,3:检测异常)</p>
-   */
-  Status?: number
-  /**
-   * <p>扫描失败类型(0:无失败, 1:检测超时, 2:文件格式解析失败, 3:检测失败)</p>
-   */
-  FailType?: number
+  StrategyList?: Array<DspmRiskStrategy>
 }
 
 /**
@@ -17719,6 +18720,36 @@ export interface Tag {
    * 标签内容
    */
   Value: string
+}
+
+/**
+ * DescribeEDRRuleList请求参数结构体
+ */
+export interface DescribeEDRRuleListRequest {
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>PolicyType - int - 是否必填：否 - 策略类型<br>PolicyName - string - 是否必填：否 - 策略名称<br>Domain - string - 是否必填：否 - 域名(先对域名做urlencode,再base64)<br>PolicyAction- int - 是否必填：否 - 策略动作<br>IsEnabled - int - 是否必填：否 - 是否生效</p>
+   */
+  Filters?: Array<EDRFilter>
+  /**
+   * <p>限制条数,默认10,最大100</p>
+   */
+  Limit?: number
+  /**
+   * <p>偏移量,默认0</p>
+   */
+  Offset?: number
+  /**
+   * <p>排序方式: [ASC:升序|DESC:降序]</p>
+   */
+  Order?: string
+  /**
+   * <p>可选排序列: [ModifyTime]</p>
+   */
+  By?: string
 }
 
 /**
@@ -18865,6 +19896,32 @@ export interface DescribeCosAlarmTrendDataResponse {
 }
 
 /**
+ * DescribeEDRRuleList返回参数结构体
+ */
+export interface DescribeEDRRuleListResponse {
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>列表</p>
+   */
+  List?: Array<EDRRule>
+  /**
+   * <p>攻击阶段对应的策略数量</p>
+   */
+  AttackStageCounts?: Array<AttackStageCount>
+  /**
+   * <p>检测方式对应的策略数量</p>
+   */
+  DetectTypeCounts?: Array<DetectTypeCount>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDspmAssetDatabaseList返回参数结构体
  */
 export interface DescribeDspmAssetDatabaseListResponse {
@@ -18924,6 +19981,20 @@ export interface ModifyMachineRemarkRequest {
    * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
+}
+
+/**
+ * instance_id和对应的appid账号信息
+ */
+export interface InstanceIDWithAppIdItem {
+  /**
+   * <p>APPID</p>
+   */
+  AppId: number
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceID: string
 }
 
 /**
@@ -20626,6 +21697,20 @@ export interface SyncDspmAssetsResponse {
 }
 
 /**
+ * EDR告警大类对应的告警数量
+ */
+export interface EdrAlertCategoryCount {
+  /**
+   * <p>告警大类</p>
+   */
+  AlertCategory?: string
+  /**
+   * <p>告警数量</p>
+   */
+  Count?: number
+}
+
+/**
  * CreateCosPolicy返回参数结构体
  */
 export interface CreateCosPolicyResponse {
@@ -20784,6 +21869,32 @@ export interface DescribeDspmLogListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * EDR告警定位信息，用于永久忽略
+ */
+export interface EdrAlertTargetForIgnore {
+  /**
+   * <p>告警主键ID</p>
+   */
+  Id: number
+  /**
+   * <p>告警所属账号ID（跨账号，前端必传）</p>
+   */
+  AppId: number
+  /**
+   * <p>告警唯一标识</p>
+   */
+  AlertId?: string
+  /**
+   * <p>主机UUID（可选）</p>
+   */
+  Quuid?: string
+  /**
+   * <p>实例ID（可选，用于白名单写入）</p>
+   */
+  InstanceId?: string
 }
 
 /**

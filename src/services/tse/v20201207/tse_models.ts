@@ -7302,7 +7302,7 @@ export interface CreateCloudNativeAPIGatewayRouteRateLimitResponse {
  */
 export interface DescribeCloudNativeAPIGatewaysResponse {
   /**
-   * 获取云原生API网关实例列表响应结果。
+   * <p>获取云原生API网关实例列表响应结果。</p>
    */
   Result?: ListCloudNativeAPIGatewayResult
   /**
@@ -9792,15 +9792,15 @@ export interface ModifyGovernanceNamespacesResponse {
  */
 export interface DescribeCloudNativeAPIGatewaysRequest {
   /**
-   * 返回数量，默认为 20，最大值为 100。
+   * <p>返回数量，默认为 20，最大值为 100。</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为 0。
+   * <p>偏移量，默认为 0。</p>
    */
   Offset?: number
   /**
-   * 请求过滤参数，支持按照实例名称、ID和标签键值（Name、GatewayId、Tag）筛选
+   * <p>请求过滤参数，支持按照实例名称、ID和标签键值（Name、GatewayId、Tag）筛选</p>
    */
   Filters?: Array<Filter>
 }
