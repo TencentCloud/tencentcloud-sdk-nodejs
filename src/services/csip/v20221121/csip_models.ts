@@ -18802,6 +18802,10 @@ export interface RiskDetailItem {
    * <p>资产类型</p>
    */
   AssetType?: string
+  /**
+   * <p>风险忽略原因</p>
+   */
+  Reason?: string
 }
 
 /**

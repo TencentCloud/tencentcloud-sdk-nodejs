@@ -2240,6 +2240,10 @@ export interface CreateVideoRedrawTaskRequest {
    * <p>用户自定义cos信息</p>
    */
   CosInfo?: VideoRedrawCosInfo
+  /**
+   * <p>转绘任务参数</p>
+   */
+  TaskInfo?: VideoRedrawTaskInfo
 }
 
 /**
@@ -9606,6 +9610,16 @@ export interface CreateLiveRecordTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Aigc 转绘、替换等任务参数
+ */
+export interface VideoRedrawTaskInfo {
+  /**
+   * <p>转绘视频风格，如动漫、赛博朋克、水墨等</p>
+   */
+  Style?: string
 }
 
 /**

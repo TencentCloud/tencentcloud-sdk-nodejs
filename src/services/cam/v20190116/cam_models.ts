@@ -442,7 +442,7 @@ export interface GetUserPermissionBoundaryRequest {
  */
 export interface DescribeOIDCConfigRequest {
   /**
-   * 名称
+   * <p>名称</p>
    */
   Name: string
 }
@@ -608,33 +608,37 @@ export interface CreateSubAccountLoginIpPolicyResponse {
  */
 export interface DescribeOIDCConfigResponse {
   /**
-   * 身份提供商类型 11角色身份提供商
+   * <p>身份提供商类型 11角色身份提供商</p>
    */
   ProviderType?: number
   /**
-   * 身份提供商URL
+   * <p>身份提供商URL</p>
    */
   IdentityUrl?: string
   /**
-   * 签名公钥
+   * <p>签名公钥</p>
    */
   IdentityKey?: string
   /**
-   * 客户端id
+   * <p>客户端id</p>
    */
   ClientId?: Array<string>
   /**
-   * 状态：0:未设置，11:已开启，2:已禁用
+   * <p>状态：0:未设置，11:已开启，2:已禁用</p>
    */
   Status?: number
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
   /**
-   * 名称
+   * <p>名称</p>
    */
   Name?: string
+  /**
+   * <p>OIDC公钥自动轮转开关</p><p>枚举值：</p><ul><li>0： 关闭</li><li>1： 开启</li></ul><p>默认值：0</p>
+   */
+  AutoRotateKey?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2568,25 +2572,29 @@ export interface ConsumeCustomMFATokenRequest {
  */
 export interface CreateOIDCConfigRequest {
   /**
-   * 身份提供商URL
+   * <p>身份提供商URL</p>
    */
   IdentityUrl: string
   /**
-   * 客户端ID
+   * <p>客户端ID</p>
    */
   ClientId: Array<string>
   /**
-   * 名称
+   * <p>名称</p>
    */
   Name: string
   /**
-   * 签名公钥，需要base64
+   * <p>签名公钥，需要base64</p>
    */
   IdentityKey: string
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
+  /**
+   * <p>OIDC公钥自动轮转开关</p><p>枚举值：</p><ul><li>0： 关闭</li><li>1： 开启</li></ul><p>默认值：0</p>
+   */
+  AutoRotateKey?: number
 }
 
 /**
@@ -3179,25 +3187,29 @@ export interface DeleteSAMLProviderRequest {
  */
 export interface UpdateOIDCConfigRequest {
   /**
-   * 身份提供商URL
+   * <p>身份提供商URL</p>
    */
   IdentityUrl: string
   /**
-   * 客户端ID
+   * <p>客户端ID</p>
    */
   ClientId: Array<string>
   /**
-   * 名称
+   * <p>名称</p>
    */
   Name: string
   /**
-   * 签名公钥，需要base64
+   * <p>签名公钥，需要base64</p>
    */
   IdentityKey: string
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
+  /**
+   * <p>OIDC公钥自动轮转开关</p><p>枚举值：</p><ul><li>0： 关闭</li><li>1： 开启</li></ul><p>默认值：0</p>
+   */
+  AutoRotateKey?: number
 }
 
 /**

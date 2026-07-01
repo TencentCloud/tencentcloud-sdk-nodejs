@@ -9763,6 +9763,10 @@ export interface DescribeAccountStatisticsResponse {
  */
 export interface DescribeProVersionStatusResponse {
   /**
+   * <p>开通状态。</p><li>UNOPENED：未开通专业版</li><li>OPENED：已开通专业版</li>
+   */
+  Status?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -10588,6 +10592,70 @@ export interface DescribeEventByTableRequest {
  * DescribeTrialReport返回参数结构体
  */
 export interface DescribeTrialReportResponse {
+  /**
+   * <p>是否展示</p>
+   */
+  IsShow?: boolean
+  /**
+   * <p>新增机器数</p>
+   */
+  AddMachineCnt?: number
+  /**
+   * <p>基线风险数(检测项)</p>
+   */
+  BaselineRiskCnt?: number
+  /**
+   * <p>漏洞数</p>
+   */
+  VulCnt?: number
+  /**
+   * <p>木马告警成功数</p>
+   */
+  MalwareAlarmCnt?: number
+  /**
+   * <p>爆破告警成功数</p>
+   */
+  BruteAlarmCnt?: number
+  /**
+   * <p>自动隔离木马数(成功)</p>
+   */
+  AutoIsolateMalwareCnt?: number
+  /**
+   * <p>自动阻断数(成功)</p>
+   */
+  AutoBlockBruteCnt?: number
+  /**
+   * <p>自动防御漏洞数(成功)</p>
+   */
+  AutoDefenceCnt?: number
+  /**
+   * <p>漏洞自动修复数</p>
+   */
+  AutoVulFixCnt?: number
+  /**
+   * <p>java内存码告警数</p>
+   */
+  JavaShellCnt?: number
+  /**
+   * <p>核心文件监控告警数</p>
+   */
+  FileTamperCnt?: number
+  /**
+   * <p>事件调查数</p>
+   */
+  EventCnt?: number
+  /**
+   * <p>恶意请求事件数</p>
+   */
+  DnsCnt?: number
+  /**
+   * <p>高危命令事件数</p>
+   */
+  BashCnt?: number
+  /**
+   * <p>云服务器厂商类型</p>
+   */
+  CloudFrom?: Array<CloudFromCnt>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13270,19 +13338,19 @@ export interface RemoveLocalStorageItemRequest {
  */
 export interface CreateBuyBindTaskRequest {
   /**
-   * 订单号
+   * <p>订单号</p>
    */
   DealName: string
   /**
-   * 可选参数: 1专业版-包年包月 , 2 旗舰版-包年包月
+   * <p>授权类型</p><p>枚举值：</p><ul><li>1： 专业版-包年包月</li><li>2： 旗舰版-包年包月</li></ul>
    */
   LicenseType: number
   /**
-   * 机器列表
+   * <p>机器列表</p>
    */
   QuuidList?: Array<string>
   /**
-   * 是否全选机器
+   * <p>是否全选机器</p>
    */
   IsAll?: boolean
 }
@@ -13804,7 +13872,7 @@ export interface VulDefencePluginStatus {
  */
 export interface ModifyLicenseBindsResponse {
   /**
-   * 任务ID
+   * <p>任务ID</p>
    */
   TaskId?: number
   /**
@@ -14044,24 +14112,19 @@ export interface CreateMalwareWhiteListRequest {
  */
 export interface ModifyLicenseUnBindsRequest {
   /**
-   * 资源ID
+   * <p>资源ID</p>
    */
   ResourceId: string
   /**
-   * 授权类型
-- 0 按量付费-专业版
-- 1 包年包月-专业版
-- 2 包年包月-旗舰版
-- 3 包年包月-轻量版
+   * <p>授权类型</p><p>枚举值：</p><ul><li>1： 专业版-包年包月</li><li>2： 旗舰版-包年包月</li></ul>
    */
   LicenseType: number
   /**
-   * 是否全部机器(当全部机器数大于当前订单可用授权数时,多余机器会被跳过)
+   * <p>是否全部机器(当全部机器数大于当前订单可用授权数时,多余机器会被跳过)</p>
    */
   IsAll?: boolean
   /**
-   * 需要绑定的机器quuid列表, 当IsAll = false 时必填,反之忽略该参数.
-最大长度=100
+   * <p>需要绑定的机器quuid列表, 当IsAll = false 时必填,反之忽略该参数.<br>最大长度=100</p>
    */
   QuuidList?: Array<string>
 }
@@ -23976,7 +24039,7 @@ export interface DescribeMalWareListResponse {
  */
 export interface ModifyLicenseUnBindsResponse {
   /**
-   * 只有解绑失败的才有该值.
+   * <p>只有解绑失败的才有该值.</p>
    */
   ErrMsg?: Array<LicenseUnBindRsp>
   /**
@@ -27482,6 +27545,38 @@ export interface DescribeRaspLicenseListResponse {
  */
 export interface DescribeSafeInfoResponse {
   /**
+   * <p>文本内容</p>
+   */
+  Context?: string
+  /**
+   * <p>标题</p>
+   */
+  Title?: string
+  /**
+   * <p>超链接地址</p>
+   */
+  Url?: string
+  /**
+   * <p>受影响机器数</p>
+   */
+  EffectHostCount?: number
+  /**
+   * <p>受影响事件名称</p>
+   */
+  EventName?: string
+  /**
+   * <p>受影响事件类型 0 无 1 木马 2 漏洞 3基线</p>
+   */
+  EventCategory?: number
+  /**
+   * <p>是否展示通知</p>
+   */
+  IsShow?: boolean
+  /**
+   * <p>Id值</p>
+   */
+  Id?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -29946,6 +30041,10 @@ export interface ExportAssetWebAppListRequest {
  */
 export interface DescribeRecommendedProtectCpuResponse {
   /**
+   * <p>推荐购买数</p>
+   */
+  Number?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -30242,19 +30341,19 @@ export interface ChangeStrategyEnableStatusRequest {
  */
 export interface ModifyLicenseBindsRequest {
   /**
-   * 资源ID
+   * <p>资源ID</p>
    */
   ResourceId: string
   /**
-   * 授权类型
+   * <p>授权类型</p><p>枚举值：</p><ul><li>1： 专业版-包年包月</li><li>2： 旗舰版-包年包月</li></ul>
    */
   LicenseType: number
   /**
-   * 是否全部机器(当全部机器数大于当前订单可用授权数时,多余机器会被跳过)
+   * <p>是否全部机器(当全部机器数大于当前订单可用授权数时,多余机器会被跳过)</p>
    */
   IsAll?: boolean
   /**
-   * 需要绑定的机器quuid列表, 当IsAll = false 时必填,反之忽略该参数. 最大长度=2000
+   * <p>需要绑定的机器quuid列表, 当IsAll = false 时必填,反之忽略该参数. 最大长度=2000</p>
    */
   QuuidList?: Array<string>
 }
@@ -30939,7 +31038,7 @@ export type DeleteWebPageEventLogRequest = null
  */
 export interface DescribeProVersionStatusRequest {
   /**
-   * 主机安全客户端UUID、填写"all"表示所有主机。
+   * <p>主机安全客户端UUID、填写&quot;all&quot;表示所有主机。</p>
    */
   Uuid: string
 }

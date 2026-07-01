@@ -731,6 +731,24 @@ export interface QueryKnowledgeTaskResponse {
 }
 
 /**
+ * ExecuteAgentApi请求参数结构体
+ */
+export interface ExecuteAgentApiRequest {
+  /**
+   * <p>参数路径</p>
+   */
+  RequestPath?: string
+  /**
+   * <p>参数值</p>
+   */
+  RequestData?: string
+  /**
+   * <p>post还是get</p><p>枚举值：</p><ul><li>post： post请求</li><li>get： get请求</li></ul>
+   */
+  RequestType?: string
+}
+
+/**
  * ModifyChunk返回参数结构体
  */
 export interface ModifyChunkResponse {
@@ -1029,6 +1047,28 @@ export interface AppendKnowledgeTaskResponse {
 }
 
 /**
+ * ExecuteAgentApi返回参数结构体
+ */
+export interface ExecuteAgentApiResponse {
+  /**
+   * <p>请求路径</p>
+   */
+  RequestPath?: string
+  /**
+   * <p>返回的具体指</p>
+   */
+  AgentData?: string
+  /**
+   * <p>错误码信息</p>
+   */
+  ErrorMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * GetUploadJobDetails请求参数结构体
  */
 export interface GetUploadJobDetailsRequest {
@@ -1040,6 +1080,40 @@ export interface GetUploadJobDetailsRequest {
    * 任务id
    */
   JobId?: string
+}
+
+/**
+ * 任务步骤
+ */
+export interface StepInfo {
+  /**
+   * 步骤id
+   */
+  Id: number
+  /**
+   * 步骤名称
+   */
+  Name: string
+  /**
+   * 步骤状态
+   */
+  Status: string
+  /**
+   * 类型(text/expand)
+   */
+  Type: string
+  /**
+   * 总结
+   */
+  Summary?: string
+  /**
+   * 步骤扩展结构
+   */
+  Expand?: StepExpand
+  /**
+   * 描述
+   */
+  Desc?: string
 }
 
 /**
@@ -1103,37 +1177,17 @@ export interface AddChunkResponse {
 }
 
 /**
- * 任务步骤
+ * ExecuteAgentApiV1请求参数结构体
  */
-export interface StepInfo {
+export interface ExecuteAgentApiV1Request {
   /**
-   * 步骤id
+   * <p>参数路径</p>
    */
-  Id: number
+  RequestPath?: string
   /**
-   * 步骤名称
+   * <p>post还是get</p><p>枚举值：</p><ul><li>post： post请求</li><li>get： get请求</li></ul>
    */
-  Name: string
-  /**
-   * 步骤状态
-   */
-  Status: string
-  /**
-   * 类型(text/expand)
-   */
-  Type: string
-  /**
-   * 总结
-   */
-  Summary?: string
-  /**
-   * 步骤扩展结构
-   */
-  Expand?: StepExpand
-  /**
-   * 描述
-   */
-  Desc?: string
+  RequestType?: string
 }
 
 /**
@@ -1381,6 +1435,16 @@ export interface DeleteDataAgentSessionRequest {
    * 批量删除 会话id 列表
    */
   SessionIds?: Array<string>
+}
+
+/**
+ * ExecuteAgentApiV1返回参数结构体
+ */
+export interface ExecuteAgentApiV1Response {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
+   */
+  RequestId?: string
 }
 
 /**

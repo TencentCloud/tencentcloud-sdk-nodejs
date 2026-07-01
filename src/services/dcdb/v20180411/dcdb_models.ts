@@ -818,6 +818,24 @@ export interface DescribeDatabaseTableRequest {
 }
 
 /**
+ * DCN实例添加分片时对端实例期望添加的分片规格
+ */
+export interface DcnInsShardConfig {
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>内存大小</p>
+   */
+  Memory: number
+  /**
+   * <p>磁盘大小</p>
+   */
+  Storage: number
+}
+
+/**
  * IsolateHourDCDBInstance请求参数结构体
  */
 export interface IsolateHourDCDBInstanceRequest {
@@ -856,48 +874,17 @@ export interface DescribeFlowResponse {
 }
 
 /**
- * UpgradeHourDCDBInstance请求参数结构体
+ * 约束类型值的范围
  */
-export interface UpgradeHourDCDBInstanceRequest {
+export interface ConstraintRange {
   /**
-   * 待升级的实例ID。形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
+   * 约束类型为section时的最小值
    */
-  InstanceId: string
+  Min?: string
   /**
-   * 升级类型，取值范围: 
-<li> ADD: 新增分片 </li> 
- <li> EXPAND: 升级实例中的已有分片 </li> 
- <li> SPLIT: 将已有分片中的数据切分到新增分片上</li>
+   * 约束类型为section时的最大值
    */
-  UpgradeType: string
-  /**
-   * 新增分片配置，当UpgradeType为ADD时生效。
-   */
-  AddShardConfig?: AddShardConfig
-  /**
-   * 扩容分片配置，当UpgradeType为EXPAND时生效。
-   */
-  ExpandShardConfig?: ExpandShardConfig
-  /**
-   * 切分分片配置，当UpgradeType为SPLIT时生效。
-   */
-  SplitShardConfig?: SplitShardConfig
-  /**
-   * 切换开始时间，格式如: "2019-12-12 07:00:00"。开始时间必须在当前时间一个小时以后，3天以内。
-   */
-  SwitchStartTime?: string
-  /**
-   * 切换结束时间,  格式如: "2019-12-12 07:15:00"，结束时间必须大于开始时间。
-   */
-  SwitchEndTime?: string
-  /**
-   * 是否自动重试。 0：不自动重试  1：自动重试
-   */
-  SwitchAutoRetry?: number
-  /**
-   * 变更部署时指定的新可用区列表，第1个为主可用区，其余为从可用区
-   */
-  Zones?: Array<string>
+  Max?: string
 }
 
 /**
@@ -4589,6 +4576,51 @@ export interface DatabaseProcedure {
 }
 
 /**
+ * UpgradeHourDCDBInstance请求参数结构体
+ */
+export interface UpgradeHourDCDBInstanceRequest {
+  /**
+   * 待升级的实例ID。形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
+   */
+  InstanceId: string
+  /**
+   * 升级类型，取值范围: 
+<li> ADD: 新增分片 </li> 
+ <li> EXPAND: 升级实例中的已有分片 </li> 
+ <li> SPLIT: 将已有分片中的数据切分到新增分片上</li>
+   */
+  UpgradeType: string
+  /**
+   * 新增分片配置，当UpgradeType为ADD时生效。
+   */
+  AddShardConfig?: AddShardConfig
+  /**
+   * 扩容分片配置，当UpgradeType为EXPAND时生效。
+   */
+  ExpandShardConfig?: ExpandShardConfig
+  /**
+   * 切分分片配置，当UpgradeType为SPLIT时生效。
+   */
+  SplitShardConfig?: SplitShardConfig
+  /**
+   * 切换开始时间，格式如: "2019-12-12 07:00:00"。开始时间必须在当前时间一个小时以后，3天以内。
+   */
+  SwitchStartTime?: string
+  /**
+   * 切换结束时间,  格式如: "2019-12-12 07:15:00"，结束时间必须大于开始时间。
+   */
+  SwitchEndTime?: string
+  /**
+   * 是否自动重试。 0：不自动重试  1：自动重试
+   */
+  SwitchAutoRetry?: number
+  /**
+   * 变更部署时指定的新可用区列表，第1个为主可用区，其余为从可用区
+   */
+  Zones?: Array<string>
+}
+
+/**
  * DescribeDBTmpInstances返回参数结构体
  */
 export interface DescribeDBTmpInstancesResponse {
@@ -4625,17 +4657,21 @@ export interface DescribeDCDBBinlogTimeResponse {
  */
 export interface AddShardConfig {
   /**
-   * 新增分片的数量
+   * <p>新增分片的数量</p>
    */
   ShardCount: number
   /**
-   * 分片内存大小，单位 GB
+   * <p>分片内存大小，单位 GB</p>
    */
   ShardMemory: number
   /**
-   * 分片存储大小，单位 GB
+   * <p>分片存储大小，单位 GB</p>
    */
   ShardStorage: number
+  /**
+   * <p>DCN实例的规格</p>
+   */
+  DcnInsShardConfigs?: Array<DcnInsShardConfig>
 }
 
 /**
@@ -4912,17 +4948,23 @@ export interface DestroyHourDCDBInstanceResponse {
 }
 
 /**
- * 约束类型值的范围
+ * DescribeDCDBRenewalPrice请求参数结构体
  */
-export interface ConstraintRange {
+export interface DescribeDCDBRenewalPriceRequest {
   /**
-   * 约束类型为section时的最小值
+   * 待续费的实例ID。形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
    */
-  Min?: string
+  InstanceId: string
   /**
-   * 约束类型为section时的最大值
+   * 续费时长，单位：月。不传则默认为1个月。
    */
-  Max?: string
+  Period?: number
+  /**
+   * 价格金额单位，不传默认单位为分，取值：
+   * pent：分
+   * microPent：微分
+   */
+  AmountUnit?: string
 }
 
 /**
@@ -5124,26 +5166,6 @@ export interface DescribeDBSlowLogsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeDCDBRenewalPrice请求参数结构体
- */
-export interface DescribeDCDBRenewalPriceRequest {
-  /**
-   * 待续费的实例ID。形如：dcdbt-ow728lmc，可以通过 DescribeDCDBInstances 查询实例详情获得。
-   */
-  InstanceId: string
-  /**
-   * 续费时长，单位：月。不传则默认为1个月。
-   */
-  Period?: number
-  /**
-   * 价格金额单位，不传默认单位为分，取值：
-   * pent：分
-   * microPent：微分
-   */
-  AmountUnit?: string
 }
 
 /**

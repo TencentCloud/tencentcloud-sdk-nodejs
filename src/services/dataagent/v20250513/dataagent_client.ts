@@ -52,6 +52,7 @@ import {
   GetUploadJobDetailsResponse,
   UploadAndCommitFileResponse,
   QueryKnowledgeTaskResponse,
+  ExecuteAgentApiRequest,
   ModifyChunkResponse,
   DeleteDataAgentSessionResponse,
   AddSceneResponse,
@@ -63,12 +64,14 @@ import {
   FileInfo,
   GetKnowledgeBaseFileListRequest,
   AppendKnowledgeTaskResponse,
+  ExecuteAgentApiResponse,
   GetUploadJobDetailsRequest,
+  StepInfo,
   FileTaskStatus,
   StopChatAIResponse,
   ModifyUserAuthorityResponse,
   AddChunkResponse,
-  StepInfo,
+  ExecuteAgentApiV1Request,
   Chunk,
   UpdateSceneResponse,
   Scene,
@@ -80,6 +83,7 @@ import {
   DeleteSceneRequest,
   Task,
   DeleteDataAgentSessionRequest,
+  ExecuteAgentApiV1Response,
   ColumnInfo,
   GetKnowledgeBaseListResponse,
   AppendDocument,
@@ -172,6 +176,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: QueryUserAuthorityResponse) => void
   ): Promise<QueryUserAuthorityResponse> {
     return this.request("QueryUserAuthority", req, cb)
+  }
+
+  /**
+   * 执行datateam相关的命令行请求
+   */
+  async ExecuteAgentApi(
+    req: ExecuteAgentApiRequest,
+    cb?: (error: string, rep: ExecuteAgentApiResponse) => void
+  ): Promise<ExecuteAgentApiResponse> {
+    return this.request("ExecuteAgentApi", req, cb)
   }
 
   /**
@@ -332,5 +346,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetJobsByKnowledgeBaseIdResponse) => void
   ): Promise<GetJobsByKnowledgeBaseIdResponse> {
     return this.request("GetJobsByKnowledgeBaseId", req, cb)
+  }
+
+  /**
+   * 执行datateam相关的命令行请求
+   */
+  async ExecuteAgentApiV1(
+    req: ExecuteAgentApiV1Request,
+    cb?: (error: string, rep: ExecuteAgentApiV1Response) => void
+  ): Promise<ExecuteAgentApiV1Response> {
+    return this.request("ExecuteAgentApiV1", req, cb)
   }
 }

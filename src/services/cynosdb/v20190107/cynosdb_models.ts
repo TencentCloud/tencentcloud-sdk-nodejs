@@ -2822,49 +2822,57 @@ export interface CreateIntegrateClusterRequest {
  */
 export interface ProxyNodeInfo {
   /**
-   * 数据库代理节点ID
+   * <p>数据库代理节点ID</p>
    */
   ProxyNodeId?: string
   /**
-   * 节点当前连接数, DescribeProxyNodes接口此字段值不返回
+   * <p>节点当前连接数, DescribeProxyNodes接口此字段值不返回</p>
    */
   ProxyNodeConnections?: number
   /**
-   * 数据库代理节点cpu
+   * <p>数据库代理节点cpu</p>
    */
   Cpu?: number
   /**
-   * 数据库代理节点内存
+   * <p>数据库代理节点内存</p>
    */
   Mem?: number
   /**
-   * 数据库代理节点状态
+   * <p>数据库代理节点状态</p>
    */
   Status?: string
   /**
-   * 数据库代理组ID
+   * <p>数据库代理组ID</p>
    */
   ProxyGroupId?: string
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId?: string
   /**
-   * 用户AppID
+   * <p>用户AppID</p>
    */
   AppId?: number
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region?: string
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone?: string
   /**
-   * 数据库代理节点名字
+   * <p>数据库代理节点名字</p>
    */
   OssProxyNodeName?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -13703,41 +13711,49 @@ export interface ActivateLibraDBClusterRequest {
  */
 export interface ProxyGroup {
   /**
-   * 数据库代理组ID
+   * <p>数据库代理组ID</p>
    */
   ProxyGroupId?: string
   /**
-   * 数据库代理组节点个数
+   * <p>数据库代理组节点个数</p>
    */
   ProxyNodeCount?: number
   /**
-   * 数据库代理组状态
+   * <p>数据库代理组状态</p>
    */
   Status?: string
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region?: string
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone?: string
   /**
-   * 当前代理版本
+   * <p>当前代理版本</p>
    */
   CurrentProxyVersion?: string
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId?: string
   /**
-   * 用户AppId
+   * <p>用户AppId</p>
    */
   AppId?: number
   /**
-   * 读写节点开通数据库代理
+   * <p>读写节点开通数据库代理</p>
    */
   OpenRw?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
 }
 
 /**

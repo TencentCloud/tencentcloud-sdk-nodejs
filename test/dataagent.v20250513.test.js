@@ -98,6 +98,16 @@ it("dataagent.v20250513.QueryUserAuthority", async function () {
     }
 })
 
+it("dataagent.v20250513.ExecuteAgentApi", async function () {
+    try {
+       const data = await client.ExecuteAgentApi({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dataagent.v20250513.AddChunk", async function () {
     try {
        const data = await client.AddChunk({})
@@ -251,6 +261,16 @@ it("dataagent.v20250513.QueryKnowledgeTask", async function () {
 it("dataagent.v20250513.GetJobsByKnowledgeBaseId", async function () {
     try {
        const data = await client.GetJobsByKnowledgeBaseId({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dataagent.v20250513.ExecuteAgentApiV1", async function () {
+    try {
+       const data = await client.ExecuteAgentApiV1({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -419,6 +419,7 @@ import {
   DescribeLiveCloudEffectListRequest,
   DescribeLiveStreamStateRequest,
   CreateLiveRecordTemplateResponse,
+  VideoRedrawTaskInfo,
   AddCasterMarkWordInfoRequest,
   DescribeLiveAvatarTimbreListRequest,
   ModifyLivePlayAuthKeyResponse,
