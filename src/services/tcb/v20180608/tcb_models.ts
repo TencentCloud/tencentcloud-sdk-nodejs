@@ -5280,32 +5280,6 @@ export interface StorageInfo {
 }
 
 /**
- * RollbackPGUserMigrations返回参数结构体
- */
-export interface RollbackPGUserMigrationsResponse {
-  /**
-   * <p>任务ID</p><p>可通过DescribeTaskResult 接口查询进度</p>
-   */
-  TaskId?: string
-  /**
-   * <p>已成功回滚并删除 history 的 migration</p>
-   */
-  RolledBack?: Array<MigrationSummary>
-  /**
-   * <p>未提供 Rollback SQL、视为成功并删除 history 的 migration</p>
-   */
-  SkippedRollbackSql?: Array<MigrationSummary>
-  /**
-   * <p>执行 Rollback SQL 失败的 migration，可为空</p>
-   */
-  Failed?: MigrationSummary
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 修改用户返回值
  */
 export interface ModifyUserResp {
@@ -5415,32 +5389,6 @@ export interface UpdateTableRequest {
    * MongoDB连接器配置
    */
   MongoConnector?: MongoConnector
-}
-
-/**
- * RollbackPGUserMigrations请求参数结构体
- */
-export interface RollbackPGUserMigrationsRequest {
-  /**
-   * <p>云开发环境ID</p>
-   */
-  EnvId: string
-  /**
-   * <p>要回滚的条数</p><p>按照逆序回滚最近N条migration</p>
-   */
-  LastN: number
-  /**
-   * <p>等待获取数据库锁的最长时间</p><p>单位：毫秒</p><p>默认值：5000</p>
-   */
-  LockTimeoutMs?: number
-  /**
-   * <p>单条 SQL 执行最长时间，超过后由 PostgreSQL 取消该语句</p><p>单位：毫秒</p><p>默认值：300000</p>
-   */
-  StatementTimeoutMs?: number
-  /**
-   * <p>标记API调用来源</p>
-   */
-  Source?: string
 }
 
 /**

@@ -240,14 +240,12 @@ import {
   DescribeVmInstancesResponse,
   ApiKeyToken,
   StorageInfo,
-  RollbackPGUserMigrationsResponse,
   ModifyUserResp,
   ModifySafeRuleResponse,
   MigrationSummary,
   ModifyClientResponse,
   DescribeTableRequest,
   UpdateTableRequest,
-  RollbackPGUserMigrationsRequest,
   DescribeCreditsUsageDetailRequest,
   AuthDomain,
   RunSqlResponse,
@@ -1344,16 +1342,6 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DescribeQuotaDataResponse) => void
   ): Promise<DescribeQuotaDataResponse> {
     return this.request("DescribeQuotaData", req, cb)
-  }
-
-  /**
-   * 本接口（RollbackPGUserMigrations）用于按最近 N 条已应用 migration 倒序执行 rollback。
-   */
-  async RollbackPGUserMigrations(
-    req: RollbackPGUserMigrationsRequest,
-    cb?: (error: string, rep: RollbackPGUserMigrationsResponse) => void
-  ): Promise<RollbackPGUserMigrationsResponse> {
-    return this.request("RollbackPGUserMigrations", req, cb)
   }
 
   /**

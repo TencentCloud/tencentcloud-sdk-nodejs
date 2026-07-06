@@ -857,6 +857,10 @@ export interface InstallSoftwareRequest {
    * <p>是否强制检查自定义组件的合理性，目前仅提供给tf侧使用</p>
    */
   CheckServiceDeployInfo?: boolean
+  /**
+   * <p>自定义metadb信息</p>
+   */
+  MetaDBGroupInfo?: Array<CustomMetaDBInfo>
 }
 
 /**
@@ -920,25 +924,23 @@ export interface DescribeInspectionTaskResultRequest {
  */
 export interface InquiryPriceCreateInstanceResponse {
   /**
-   * 原价，单位为元。
+   * <p>原价，单位为元。</p>
    */
   OriginalCost?: number
   /**
-   * 折扣价，单位为元。
+   * <p>折扣价，单位为元。</p>
    */
   DiscountCost?: number
   /**
-   * 购买实例的时间单位。取值范围：
-<li>s：表示秒。</li>
-<li>m：表示月份。</li>
+   * <p>购买实例的时间单位。取值范围：</p><li>s：表示秒。</li><li>m：表示月份。</li>
    */
   TimeUnit?: string
   /**
-   * 购买实例的时长。
+   * <p>购买实例的时长。</p>
    */
   TimeSpan?: number
   /**
-   * 价格清单
+   * <p>价格清单</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PriceList?: Array<ZoneDetailPriceResult>
@@ -4383,6 +4385,52 @@ export interface DescribeInstanceRenewNodesResponse {
 }
 
 /**
+ * 磁盘
+ */
+export interface DiskHealthIssue {
+  /**
+   * <p>磁盘id</p>
+   */
+  DiskId?: string
+  /**
+   * <p>挂载的目录</p>
+   */
+  MountDir?: string
+  /**
+   * <p>设备路径</p>
+   */
+  DeviceName?: string
+  /**
+   * <p>异常类型</p>
+   */
+  CheckType?: number
+  /**
+   * <p>优先级</p>
+   */
+  Severity?: number
+  /**
+   * <p>状态</p>
+   */
+  State?: number
+  /**
+   * <p>探测来源</p>
+   */
+  DetectSource?: string
+  /**
+   * <p>第一次探测时间</p>
+   */
+  FirstDetectTime?: string
+  /**
+   * <p>最新探测时间</p>
+   */
+  LastDetectTime?: string
+  /**
+   * <p>探测信息</p>
+   */
+  DetectDetail?: string
+}
+
+/**
  * 通用字符串map
  */
 export interface StringMap {
@@ -5788,93 +5836,85 @@ export interface ConfigurationItem {
  */
 export interface InquiryPriceCreateInstanceRequest {
   /**
-   * 购买实例的时间单位。取值范围：
-<li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li>
-<li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
+   * <p>购买实例的时间单位。取值范围：</p><li>s：表示秒。PayMode取值为0时，TimeUnit只能取值为s。</li><li>m：表示月份。PayMode取值为1时，TimeUnit只能取值为m。</li>
    */
   TimeUnit: string
   /**
-   * 购买实例的时长。结合TimeUnit一起使用。
-<li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li>
-<li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
+   * <p>购买实例的时长。结合TimeUnit一起使用。</p><li>TimeUnit为s时，该参数只能填写3600，表示按量计费实例。</li><li>TimeUnit为m时，该参数填写的数字表示包年包月实例的购买时长，如1表示购买一个月</li>
    */
   TimeSpan: number
   /**
-   * 货币种类。取值范围：
-<li>CNY：表示人民币。</li>
+   * <p>货币种类。取值范围：</p><li>CNY：表示人民币。</li>
    */
   Currency: string
   /**
-   * 实例计费模式。取值范围：
-<li>0：表示按量计费。</li>
-<li>1：表示包年包月。</li>
+   * <p>实例计费模式。取值范围：</p><li>0：表示按量计费。</li><li>1：表示包年包月。</li>
    */
   PayMode: number
   /**
-   * 是否开启节点高可用。取值范围：
-<li>0：表示不开启节点高可用。</li>
-<li>1：表示开启节点高可用。</li>
+   * <p>是否开启节点高可用。取值范围：</p><li>0：表示不开启节点高可用。</li><li>1：表示开启节点高可用。x07</li>
    */
   SupportHA: number
   /**
-   * 部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）需要选择不同的必选组件：<li>ProductId为2(EMR-V2.0.1)的时候，必选组件包括：hdfs-2.7.3,yarn-2.7.3,zookeeper-3.4.9,knox-1.2.0</li><li>ProductId为16(EMR-V2.3.0)的时候，必选组件包括：hdfs-2.8.5,yarn-2.8.5,zookeeper-3.5.5,knox-1.2.0</li><li>ProductId为20(EMR-V2.5.0)的时候，必选组件包括：hdfs-2.8.5,yarn-2.8.5,zookeeper-3.6.1,knox-1.2.0</li><li>ProductId为30(EMR-V2.6.0)的时候，必选组件包括：hdfs-2.8.5,yarn-2.8.5,zookeeper-3.6.1,openldap-2.4.44,knox-1.2.0</li><li>ProductId为38(EMR-V2.7.0)的时候，必选组件包括：hdfs-2.8.5,yarn-2.8.5,zookeeper-3.6.3,openldap-2.4.44,knox-1.6.1</li><li>ProductId为57(EMR-V2.8.0)的时候，必选组件包括：hdfs-2.8.5,yarn-2.8.5,zookeeper-3.6.3,openldap-2.4.44,knox-1.6.1</li><li>ProductId为7(EMR-V3.0.0)的时候，必选组件包括：hdfs-3.1.2,yarn-3.1.2,zookeeper-3.4.9,knox-1.2.0</li><li>ProductId为25(EMR-V3.1.0)的时候，必选组件包括：hdfs-3.1.2,yarn-3.1.2,zookeeper-3.6.1,knox-1.2.0</li><li>ProductId为31(EMR-V3.1.1)的时候，必选组件包括：hdfs-3.1.2,yarn-3.1.2,zookeeper-3.6.1,knox-1.2.0</li><li>ProductId为28(EMR-V3.2.0)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.1,knox-1.2.0</li><li>ProductId为33(EMR-V3.2.1)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.1,openldap-2.4.44,knox-1.2.0</li><li>ProductId为34(EMR-V3.3.0)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.1,openldap-2.4.44,knox-1.2.0</li><li>ProductId为37(EMR-V3.4.0)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.3,openldap-2.4.44,knox-1.6.1</li><li>ProductId为44(EMR-V3.5.0)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.3,openldap-2.4.44,knox-1.6.1</li><li>ProductId为53(EMR-V3.6.0)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.3,openldap-2.4.44,knox-1.6.1</li><li>ProductId为58(EMR-V3.6.1)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.3,openldap-2.4.46,knox-1.6.1</li><li>ProductId为47(EMR-V4.0.0)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.3,openldap-2.4.44,knox-1.6.1</li>
+   * <p>部署的组件列表。不同的EMR产品ID（ProductId：具体含义参考入参ProductId字段）需要选择不同的必选组件：<li>ProductId为2(EMR-V2.0.1)的时候，必选组件包括：hdfs-2.7.3,yarn-2.7.3,zookeeper-3.4.9,knox-1.2.0</li><li>ProductId为16(EMR-V2.3.0)的时候，必选组件包括：hdfs-2.8.5,yarn-2.8.5,zookeeper-3.5.5,knox-1.2.0</li><li>ProductId为20(EMR-V2.5.0)的时候，必选组件包括：hdfs-2.8.5,yarn-2.8.5,zookeeper-3.6.1,knox-1.2.0</li><li>ProductId为30(EMR-V2.6.0)的时候，必选组件包括：hdfs-2.8.5,yarn-2.8.5,zookeeper-3.6.1,openldap-2.4.44,knox-1.2.0</li><li>ProductId为38(EMR-V2.7.0)的时候，必选组件包括：hdfs-2.8.5,yarn-2.8.5,zookeeper-3.6.3,openldap-2.4.44,knox-1.6.1</li><li>ProductId为57(EMR-V2.8.0)的时候，必选组件包括：hdfs-2.8.5,yarn-2.8.5,zookeeper-3.6.3,openldap-2.4.44,knox-1.6.1</li><li>ProductId为7(EMR-V3.0.0)的时候，必选组件包括：hdfs-3.1.2,yarn-3.1.2,zookeeper-3.4.9,knox-1.2.0</li><li>ProductId为25(EMR-V3.1.0)的时候，必选组件包括：hdfs-3.1.2,yarn-3.1.2,zookeeper-3.6.1,knox-1.2.0</li><li>ProductId为31(EMR-V3.1.1)的时候，必选组件包括：hdfs-3.1.2,yarn-3.1.2,zookeeper-3.6.1,knox-1.2.0</li><li>ProductId为28(EMR-V3.2.0)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.1,knox-1.2.0</li><li>ProductId为33(EMR-V3.2.1)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.1,openldap-2.4.44,knox-1.2.0</li><li>ProductId为34(EMR-V3.3.0)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.1,openldap-2.4.44,knox-1.2.0</li><li>ProductId为37(EMR-V3.4.0)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.3,openldap-2.4.44,knox-1.6.1</li><li>ProductId为44(EMR-V3.5.0)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.3,openldap-2.4.44,knox-1.6.1</li><li>ProductId为53(EMR-V3.6.0)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.3,openldap-2.4.44,knox-1.6.1</li><li>ProductId为58(EMR-V3.6.1)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.3,openldap-2.4.46,knox-1.6.1</li><li>ProductId为47(EMR-V4.0.0)的时候，必选组件包括：hdfs-3.2.2,yarn-3.2.2,zookeeper-3.6.3,openldap-2.4.44,knox-1.6.1</li></p>
    */
   Software: Array<string>
   /**
-   * 询价的节点规格。
+   * <p>询价的节点规格。</p>
    */
   ResourceSpec?: NewResourceSpec
   /**
-   * 实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。
+   * <p>实例所在的位置。通过该参数可以指定实例所属可用区，所属项目等属性。</p>
    */
   Placement?: Placement
   /**
-   * 私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。
+   * <p>私有网络相关信息配置。通过该参数可以指定私有网络的ID，子网ID等信息。</p>
    */
   VPCSettings?: VPCSettings
   /**
-   * hive共享元数据库类型。取值范围：
-<li>EMR_NEW_META：表示集群默认创建</li>
-<li>EMR_EXIT_METE：表示集群使用指定EMR-MetaDB。</li>
-<li>USER_CUSTOM_META：表示集群使用自定义MetaDB。</li>
+   * <p>hive共享元数据库类型。取值范围：</p><li>EMR_NEW_META：表示集群默认创建</li><li>EMR_EXIT_METE：表示集群使用指定EMR-MetaDB。</li><li>USER_CUSTOM_META：表示集群使用自定义MetaDB。</li>
    */
   MetaType?: string
   /**
-   * EMR-MetaDB实例
+   * <p>EMR-MetaDB实例</p>
    */
   UnifyMetaInstanceId?: string
   /**
-   * 自定义MetaDB信息
+   * <p>自定义MetaDB信息</p>
    */
   MetaDBInfo?: CustomMetaInfo
   /**
-   * 产品ID，不同产品ID表示不同的EMR产品版本。取值范围：<li>2：表示EMR-V2.0.1</li><li>16：表示EMR-V2.3.0</li><li>20：表示EMR-V2.5.0</li><li>30：表示EMR-V2.6.0</li><li>38：表示EMR-V2.7.0</li><li>57：表示EMR-V2.8.0</li><li>7：表示EMR-V3.0.0</li><li>25：表示EMR-V3.1.0</li><li>31：表示EMR-V3.1.1</li><li>28：表示EMR-V3.2.0</li><li>33：表示EMR-V3.2.1</li><li>34：表示EMR-V3.3.0</li><li>37：表示EMR-V3.4.0</li><li>44：表示EMR-V3.5.0</li><li>53：表示EMR-V3.6.0</li><li>58：表示EMR-V3.6.1</li><li>47：表示EMR-V4.0.0</li>
+   * <p>产品ID，不同产品ID表示不同的EMR产品版本。取值范围：<li>2：表示EMR-V2.0.1</li><li>16：表示EMR-V2.3.0</li><li>20：表示EMR-V2.5.0</li><li>30：表示EMR-V2.6.0</li><li>38：表示EMR-V2.7.0</li><li>57：表示EMR-V2.8.0</li><li>7：表示EMR-V3.0.0</li><li>25：表示EMR-V3.1.0</li><li>31：表示EMR-V3.1.1</li><li>28：表示EMR-V3.2.0</li><li>33：表示EMR-V3.2.1</li><li>34：表示EMR-V3.3.0</li><li>37：表示EMR-V3.4.0</li><li>44：表示EMR-V3.5.0</li><li>53：表示EMR-V3.6.0</li><li>58：表示EMR-V3.6.1</li><li>47：表示EMR-V4.0.0</li></p>
    */
   ProductId?: number
   /**
-   * 场景化取值：Hadoop-Kudu，Hadoop-Zookeeper，Hadoop-Presto，Hadoop-Hbase
+   * <p>场景化取值：Hadoop-Kudu，Hadoop-Zookeeper，Hadoop-Presto，Hadoop-Hbase</p>
    */
   SceneName?: string
   /**
-   * 共用组件信息
+   * <p>共用组件信息</p>
    */
   ExternalService?: Array<ExternalService>
   /**
-   * 当前默认值为0，跨AZ特性支持后为1
+   * <p>当前默认值为0，跨AZ特性支持后为1</p>
    */
   VersionID?: number
   /**
-   * 可用区的规格信息
+   * <p>可用区的规格信息</p>
    */
   MultiZoneSettings?: Array<MultiZoneSetting>
   /**
-   * 数据库版本
+   * <p>数据库版本</p>
    */
   DefaultMetaVersion?: string
   /**
-   * 0:不开通审计；1:开通审计
+   * <p>0:不开通审计；1:开通审计</p>
    */
   NeedCdbAudit?: number
+  /**
+   * <p>自定义db数据</p>
+   */
+  MetaDBGroupInfo?: Array<CustomMetaDBInfo>
 }
 
 /**
@@ -9956,229 +9996,211 @@ export interface ModifyUserManagerPwdRequest {
  */
 export interface ClusterInstancesInfo {
   /**
-   * ID号
+   * <p>ID号</p>
    */
   Id?: number
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId?: string
   /**
-   * 标题
+   * <p>标题</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   Ftitle?: string
   /**
-   * 集群名
+   * <p>集群名</p>
    */
   ClusterName?: string
   /**
-   * 地域ID
+   * <p>地域ID</p>
    */
   RegionId?: number
   /**
-   * 地区ID
+   * <p>地区ID</p>
    */
   ZoneId?: number
   /**
-   * 用户APPID
+   * <p>用户APPID</p>
    */
   AppId?: number
   /**
-   * 用户UIN
+   * <p>用户UIN</p>
    */
   Uin?: string
   /**
-   * 项目Id
+   * <p>项目Id</p>
    */
   ProjectId?: number
   /**
-   * 集群VPCID
+   * <p>集群VPCID</p>
    */
   VpcId?: number
   /**
-   * 子网ID
+   * <p>子网ID</p>
    */
   SubnetId?: number
   /**
-   * 实例的状态码。取值范围：
-<li>2：表示集群运行中。</li>
-<li>3：表示集群创建中。</li>
-<li>4：表示集群扩容中。</li>
-<li>5：表示集群增加router节点中。</li>
-<li>6：表示集群安装组件中。</li>
-<li>7：表示集群执行命令中。</li>
-<li>8：表示重启服务中。</li>
-<li>9：表示进入维护中。</li>
-<li>10：表示服务暂停中。</li>
-<li>11：表示退出维护中。</li>
-<li>12：表示退出暂停中。</li>
-<li>13：表示配置下发中。</li>
-<li>14：表示销毁集群中。</li>
-<li>15：表示销毁core节点中。</li>
-<li>16：销毁task节点中。</li>
-<li>17：表示销毁router节点中。</li>
-<li>18：表示更改webproxy密码中。</li>
-<li>19：表示集群隔离中。</li>
-<li>20：表示集群冲正中。</li>
-<li>21：表示集群回收中。</li>
-<li>22：表示变配等待中。</li>
-<li>23：表示集群已隔离。</li>
-<li>24：表示缩容节点中。</li>
-<li>33：表示集群等待退费中。</li>
-<li>34：表示集群已退费。</li>
-<li>301：表示创建失败。</li>
-<li>302：表示扩容失败。</li>
+   * <p>实例的状态码。取值范围：</p><li>2：表示集群运行中。</li><li>3：表示集群创建中。</li><li>4：表示集群扩容中。</li><li>5：表示集群增加router节点中。</li><li>6：表示集群安装组件中。</li><li>7：表示集群执行命令中。</li><li>8：表示重启服务中。</li><li>9：表示进入维护中。</li><li>10：表示服务暂停中。</li><li>11：表示退出维护中。</li><li>12：表示退出暂停中。</li><li>13：表示配置下发中。</li><li>14：表示销毁集群中。</li><li>15：表示销毁core节点中。</li><li>16：销毁task节点中。</li><li>17：表示销毁router节点中。</li><li>18：表示更改webproxy密码中。</li><li>19：表示集群隔离中。</li><li>20：表示集群冲正中。</li><li>21：表示集群回收中。</li><li>22：表示变配等待中。</li><li>23：表示集群已隔离。</li><li>24：表示缩容节点中。</li><li>33：表示集群等待退费中。</li><li>34：表示集群已退费。</li><li>301：表示创建失败。</li><li>302：表示扩容失败。</li>
    */
   Status?: number
   /**
-   * 添加时间
+   * <p>添加时间</p>
    */
   AddTime?: string
   /**
-   * 已经运行时间
+   * <p>已经运行时间</p>
    */
   RunTime?: string
   /**
-   * 集群产品配置信息
+   * <p>集群产品配置信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   Config?: EmrProductConfigOutter
   /**
-   * 主节点外网IP
+   * <p>主节点外网IP</p>
    */
   MasterIp?: string
   /**
-   * EMR版本
+   * <p>EMR版本</p>
    */
   EmrVersion?: string
   /**
-   * 收费类型
+   * <p>收费类型</p>
    */
   ChargeType?: number
   /**
-   * 交易版本
+   * <p>交易版本</p>
    */
   TradeVersion?: number
   /**
-   * 资源订单ID
+   * <p>资源订单ID</p>
    */
   ResourceOrderId?: number
   /**
-   * 是否计费集群
+   * <p>是否计费集群</p>
    */
   IsTradeCluster?: number
   /**
-   * 集群错误状态告警信息
+   * <p>集群错误状态告警信息</p>
    */
   AlarmInfo?: string
   /**
-   * 是否采用新架构
+   * <p>是否采用新架构</p>
    */
   IsWoodpeckerCluster?: number
   /**
-   * 元数据库信息
+   * <p>元数据库信息</p>
    */
   MetaDb?: string
   /**
-   * 标签信息
+   * <p>标签信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
-   * Hive元数据信息
+   * <p>Hive元数据信息</p>
    */
   HiveMetaDb?: string
   /**
-   * 集群类型:EMR,CLICKHOUSE,DRUID
+   * <p>集群类型:EMR,CLICKHOUSE,DRUID</p>
    */
   ServiceClass?: string
   /**
-   * 集群所有节点的别名序列化
+   * <p>集群所有节点的别名序列化</p>
    */
   AliasInfo?: string
   /**
-   * 集群版本Id
+   * <p>集群版本Id</p>
    */
   ProductId?: number
   /**
-   * 地区ID
+   * <p>地区ID</p>
    */
   Zone?: string
   /**
-   * 场景名称
+   * <p>场景名称</p>
    */
   SceneName?: string
   /**
-   * 场景化集群类型
+   * <p>场景化集群类型</p>
    */
   SceneServiceClass?: string
   /**
-   * 场景化EMR版本
+   * <p>场景化EMR版本</p>
    */
   SceneEmrVersion?: string
   /**
-   * 场景化集群类型
+   * <p>场景化集群类型</p>
    */
   DisplayName?: string
   /**
-   * vpc name
+   * <p>vpc name</p>
    */
   VpcName?: string
   /**
-   * subnet name
+   * <p>subnet name</p>
    */
   SubnetName?: string
   /**
-   * 集群依赖关系
+   * <p>集群依赖关系</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterExternalServiceInfo?: Array<ClusterExternalServiceInfo>
   /**
-   * 集群vpcid 字符串类型
+   * <p>集群vpcid 字符串类型</p>
    */
   UniqVpcId?: string
   /**
-   * 子网id 字符串类型
+   * <p>子网id 字符串类型</p>
    */
   UniqSubnetId?: string
   /**
-   * 节点信息
+   * <p>节点信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopologyInfoList?: Array<TopologyInfo>
   /**
-   * 是否是跨AZ集群
+   * <p>是否是跨AZ集群</p>
    */
   IsMultiZoneCluster?: boolean
   /**
-   * 是否开通异常节点自动补偿
+   * <p>是否开通异常节点自动补偿</p>
    */
   IsCvmReplace?: boolean
   /**
-   * 标题
+   * <p>标题</p>
    */
   ClusterTitle?: string
   /**
-   * 集群产品配置信息
+   * <p>集群产品配置信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigDetail?: EmrProductConfigDetail
   /**
-   * 集群绑定的文件系统数
+   * <p>集群绑定的文件系统数</p>
    */
   BindFileSystemNum?: number
   /**
-   * rss集群的绑定列表
+   * <p>rss集群的绑定列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterRelationInfoList?: Array<ClusterRelationMeta>
   /**
-   * Redis信息
+   * <p>Redis信息</p>
    */
   RedisId?: string
+  /**
+   * <p>是否开启IO故障自愈</p>
+   */
+  IsIOHungSelfRecovery?: boolean
+  /**
+   * <p>元数据信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetaDBGroupInfo?: Array<CustomMetaDBInfo>
 }
 
 /**
@@ -10809,65 +10831,69 @@ export interface OverviewMetricData {
  */
 export interface AutoScaleRecord {
   /**
-   * 扩缩容规则名。
+   * <p>扩缩容规则名。</p>
    */
   StrategyName?: string
   /**
-   * "SCALE_OUT"和"SCALE_IN"，分别表示扩容和缩容。
+   * <p>&quot;SCALE_OUT&quot;和&quot;SCALE_IN&quot;，分别表示扩容和缩容。</p>
    */
   ScaleAction?: string
   /**
-   * 取值为"SUCCESS","FAILED","PART_SUCCESS","IN_PROCESS"，分别表示成功、失败、部分成功和流程中。
+   * <p>取值为&quot;SUCCESS&quot;,&quot;FAILED&quot;,&quot;PART_SUCCESS&quot;,&quot;IN_PROCESS&quot;，分别表示成功、失败、部分成功和流程中。</p>
    */
   ActionStatus?: string
   /**
-   * 流程触发时间。
+   * <p>流程触发时间。</p>
    */
   ActionTime?: string
   /**
-   * 扩缩容相关描述信息。
+   * <p>扩缩容相关描述信息。</p>
    */
   ScaleInfo?: string
   /**
-   * 只在ScaleAction为SCALE_OUT时有效。
+   * <p>只在ScaleAction为SCALE_OUT时有效。</p>
    */
   ExpectScaleNum?: number
   /**
-   * 流程结束时间。
+   * <p>流程结束时间。</p>
    */
   EndTime?: string
   /**
-   * 策略类型，按负载或者按时间，1表示负载伸缩，2表示时间伸缩
+   * <p>策略类型，按负载或者按时间，1表示负载伸缩，2表示时间伸缩</p>
    */
   StrategyType?: number
   /**
-   * 扩容时所使用规格信息。
+   * <p>扩容时所使用规格信息。</p>
    */
   SpecInfo?: string
   /**
-   * 补偿扩容，0表示不开启，1表示开启
+   * <p>补偿扩容，0表示不开启，1表示开启</p>
    */
   CompensateFlag?: number
   /**
-   * 补偿次数
+   * <p>补偿次数</p>
    */
   CompensateCount?: number
   /**
-   * 重试次数
+   * <p>重试次数</p>
    */
   RetryCount?: number
   /**
-   * 重试信息
+   * <p>重试信息</p>
    */
   RetryInfo?: string
   /**
-   * 重试英文描述
+   * <p>重试英文描述</p>
    */
   RetryEnReason?: string
   /**
-   * 重试描述
+   * <p>重试描述</p>
    */
   RetryReason?: string
+  /**
+   * <p>缺失分类</p>
+   */
+  ShortageClass?: number
 }
 
 /**
@@ -12690,252 +12716,253 @@ export interface EmrPrice {
  */
 export interface NodeHardwareInfo {
   /**
-   * 用户APPID
+   * <p>用户APPID</p>
    */
   AppId?: number
   /**
-   * 序列号
+   * <p>序列号</p>
    */
   SerialNo?: string
   /**
-   * 机器实例ID
+   * <p>机器实例ID</p>
    */
   OrderNo?: string
   /**
-   * master节点绑定外网IP
+   * <p>master节点绑定外网IP</p>
    */
   WanIp?: string
   /**
-   * 节点类型。0:common节点；1:master节点
-；2:core节点；3:task节点
+   * <p>节点类型。0:common节点；1:master节点<br>；2:core节点；3:task节点</p>
    */
   Flag?: number
   /**
-   * 节点规格
+   * <p>节点规格</p>
    */
   Spec?: string
   /**
-   * 节点核数
+   * <p>节点核数</p>
    */
   CpuNum?: number
   /**
-   * 节点内存,单位b
+   * <p>节点内存,单位b</p>
    */
   MemSize?: number
   /**
-   * 节点内存描述，单位GB
+   * <p>节点内存描述，单位GB</p>
    */
   MemDesc?: string
   /**
-   * 节点所在region
+   * <p>节点所在region</p>
    */
   RegionId?: number
   /**
-   * 节点所在Zone
+   * <p>节点所在Zone</p>
    */
   ZoneId?: number
   /**
-   * 申请时间
+   * <p>申请时间</p>
    */
   ApplyTime?: string
   /**
-   * 释放时间
+   * <p>释放时间</p>
    */
   FreeTime?: string
   /**
-   * 硬盘大小
+   * <p>硬盘大小</p>
    */
   DiskSize?: string
   /**
-   * 节点描述
+   * <p>节点描述</p>
    */
   NameTag?: string
   /**
-   * 节点部署服务
+   * <p>节点部署服务</p>
    */
   Services?: string
   /**
-   * 磁盘类型，1 :本地盘 2 :云硬盘 3 : 本地SSD 4 : 云SSD 5 : 高效云盘 6 : 增强型SSD云硬盘 11 : 吞吐型云硬盘 12 : 极速型SSD云硬盘 13 : 通用型SSD云硬盘 14 : 大数据型云硬盘 15 : 高IO型云硬盘 16 : 远端SSD盘
-
+   * <p>磁盘类型，1 :本地盘 2 :云硬盘 3 : 本地SSD 4 : 云SSD 5 : 高效云盘 6 : 增强型SSD云硬盘 11 : 吞吐型云硬盘 12 : 极速型SSD云硬盘 13 : 通用型SSD云硬盘 14 : 大数据型云硬盘 15 : 高IO型云硬盘 16 : 远端SSD盘</p>
    */
   StorageType?: number
   /**
-   * 系统盘大小，单位GB
+   * <p>系统盘大小，单位GB</p>
    */
   RootSize?: number
   /**
-   * 付费类型，0：按量计费；1：包年包月
+   * <p>付费类型，0：按量计费；1：包年包月</p>
    */
   ChargeType?: number
   /**
-   * 数据库IP
+   * <p>数据库IP</p>
    */
   CdbIp?: string
   /**
-   * 数据库端口
+   * <p>数据库端口</p>
    */
   CdbPort?: number
   /**
-   * 硬盘容量,单位b
+   * <p>硬盘容量,单位b</p>
    */
   HwDiskSize?: number
   /**
-   * 硬盘容量描述
+   * <p>硬盘容量描述</p>
    */
   HwDiskSizeDesc?: string
   /**
-   * 内存容量，单位b
+   * <p>内存容量，单位b</p>
    */
   HwMemSize?: number
   /**
-   * 内存容量描述
+   * <p>内存容量描述</p>
    */
   HwMemSizeDesc?: string
   /**
-   * 过期时间
+   * <p>过期时间</p>
    */
   ExpireTime?: string
   /**
-   * 节点资源ID
+   * <p>节点资源ID</p>
    */
   EmrResourceId?: string
   /**
-   * 续费标志
+   * <p>续费标志</p>
    */
   IsAutoRenew?: number
   /**
-   * 设备标识
+   * <p>设备标识</p>
    */
   DeviceClass?: string
   /**
-   * 支持变配
+   * <p>支持变配</p>
    */
   Mutable?: number
   /**
-   * 多云盘
+   * <p>多云盘</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MCMultiDisk?: Array<MultiDiskMC>
   /**
-   * 数据库信息
+   * <p>数据库信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CdbNodeInfo?: CdbInfo
   /**
-   * 内网IP
+   * <p>内网IP</p>
    */
   Ip?: string
   /**
-   * 此节点是否可销毁，1可销毁，0不可销毁
+   * <p>此节点是否可销毁，1可销毁，0不可销毁</p>
    */
   Destroyable?: number
   /**
-   * 节点绑定的标签
+   * <p>节点绑定的标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
-   * 是否是自动扩缩容节点，0为普通节点，1为自动扩缩容节点。
+   * <p>是否是自动扩缩容节点，0为普通节点，1为自动扩缩容节点。</p>
    */
   AutoFlag?: number
   /**
-   * 资源类型, host/pod
+   * <p>资源类型, host/pod</p>
    */
   HardwareResourceType?: string
   /**
-   * 是否浮动规格，1是，0否
+   * <p>是否浮动规格，1是，0否</p>
    */
   IsDynamicSpec?: number
   /**
-   * 浮动规格值json字符串
+   * <p>浮动规格值json字符串</p>
    */
   DynamicPodSpec?: string
   /**
-   * 是否支持变更计费类型 1是，0否
+   * <p>是否支持变更计费类型 1是，0否</p>
    */
   SupportModifyPayMode?: number
   /**
-   * 系统盘类型，1 :本地盘 2 :云硬盘 3 : 本地SSD 4 : 云SSD 5 : 高效云盘 6 : 增强型SSD云硬盘 11 : 吞吐型云硬盘 12 : 极速型SSD云硬盘 13 : 通用型SSD云硬盘 14 : 大数据型云硬盘 15 : 高IO型云硬盘 16 : 远端SSD盘
-
+   * <p>系统盘类型，1 :本地盘 2 :云硬盘 3 : 本地SSD 4 : 云SSD 5 : 高效云盘 6 : 增强型SSD云硬盘 11 : 吞吐型云硬盘 12 : 极速型SSD云硬盘 13 : 通用型SSD云硬盘 14 : 大数据型云硬盘 15 : 高IO型云硬盘 16 : 远端SSD盘</p>
    */
   RootStorageType?: number
   /**
-   * 可用区信息
+   * <p>可用区信息</p>
    */
   Zone?: string
   /**
-   * 子网
+   * <p>子网</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetInfo?: SubnetInfo
   /**
-   * 客户端
+   * <p>客户端</p>
    */
   Clients?: string
   /**
-   * 系统当前时间
+   * <p>系统当前时间</p>
    */
   CurrentTime?: string
   /**
-   * 是否用于联邦 ,1是，0否
+   * <p>是否用于联邦 ,1是，0否</p>
    */
   IsFederation?: number
   /**
-   * 设备名称
+   * <p>设备名称</p>
    */
   DeviceName?: string
   /**
-   * 服务
+   * <p>服务</p>
    */
   ServiceClient?: string
   /**
-   * 该实例是否开启实例保护，true为开启 false为关闭
+   * <p>该实例是否开启实例保护，true为开启 false为关闭</p>
    */
   DisableApiTermination?: boolean
   /**
-   * 0表示老计费，1表示新计费
+   * <p>0表示老计费，1表示新计费</p>
    */
   TradeVersion?: number
   /**
-   * 各组件状态，Zookeeper:STARTED,ResourceManager:STARTED，STARTED已启动，STOPED已停止
+   * <p>各组件状态，Zookeeper:STARTED,ResourceManager:STARTED，STARTED已启动，STOPED已停止</p>
    */
   ServicesStatus?: string
   /**
-   * 备注
+   * <p>备注</p>
    */
   Remark?: string
   /**
-   * 共享集群id
+   * <p>共享集群id</p>
    */
   SharedClusterId?: string
   /**
-   * 共享集群id描述
+   * <p>共享集群id描述</p>
    */
   SharedClusterIdDesc?: string
   /**
-   * 是否是定时销毁资源
+   * <p>是否是定时销毁资源</p>
    */
   TimingResource?: boolean
   /**
-   * 资源类型（HardwareResourceType）为pod时，对应的TKE集群id
+   * <p>资源类型（HardwareResourceType）为pod时，对应的TKE集群id</p>
    */
   TkeClusterId?: string
   /**
-   * 新挂磁盘时可支持配置的服务名称列表
+   * <p>新挂磁盘时可支持配置的服务名称列表</p>
    */
   ConfigurableServices?: Array<string>
   /**
-   * 节点标注信息，目前只提供给tf平台使用
+   * <p>节点标注信息，目前只提供给tf平台使用</p>
    */
   NodeMark?: string
   /**
-   * 包销资源是否支持设置自动续费
+   * <p>包销资源是否支持设置自动续费</p>
    */
   UnderwriteSetAutoRenew?: boolean
   /**
-   * Gpu信息
+   * <p>Gpu信息</p>
    */
   GpuDesc?: string
+  /**
+   * <p>磁盘问题描述</p>
+   */
+  DiskHealthIssues?: Array<DiskHealthIssue>
 }
 
 /**

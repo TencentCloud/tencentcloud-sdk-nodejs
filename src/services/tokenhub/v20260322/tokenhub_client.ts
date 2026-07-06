@@ -150,7 +150,7 @@ export class Client extends AbstractClient {
 支持按模型 ID、模型名称、模型能力等条件筛选，支持分页和排序。
      */
   async DescribeModelList(
-    req?: DescribeModelListRequest,
+    req: DescribeModelListRequest,
     cb?: (error: string, rep: DescribeModelListResponse) => void
   ): Promise<DescribeModelListResponse> {
     return this.request("DescribeModelList", req, cb)

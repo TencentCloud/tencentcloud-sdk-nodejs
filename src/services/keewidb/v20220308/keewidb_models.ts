@@ -110,15 +110,15 @@ export interface TaskInfoDetail {
  */
 export interface CreateInstancesRequest {
   /**
-   * <p>产品版本。14：极速版。</p>
+   * <p>实例版本类型。</p><p>枚举值：</p><ul><li>11： 存储版标准架构。</li><li>12： 存储版集群架构。</li><li>13： 极速版标准架构。</li><li>14： 极速版集群架构。</li></ul>
    */
   TypeId: number
   /**
-   * <p>私有网络唯一ID。请登录控制台在私有网络列表查询，如：vpc-azlk3***。</p>
+   * <p>私有网络唯一ID。<br>请登录控制台在私有网络列表查询，如：vpc-azlk3***。</p>
    */
   UniqVpcId: string
   /**
-   * <p>私有网络所属子网唯一ID。请登录控制台在私有网络列表查询，如：subnet-8abje***。</p>
+   * <p>私有网络所属子网唯一ID。<br>请登录控制台在私有网络列表查询，如：subnet-8abje***。</p>
    */
   UniqSubnetId: string
   /**
@@ -142,7 +142,7 @@ export interface CreateInstancesRequest {
    */
   ReplicasNum: number
   /**
-   * <p>实例内存容量，单位：GB。KeeWiDB 内存容量<b>MachineMemory</b>与持久内存容量<b>MemSize</b>为固定搭配，即2GB内存，固定分配8GB的持久内存，不可选择。具体信息，请参见<a href="https://cloud.tencent.com/document/product/1520/80808">产品规格</a>。</p>
+   * <p>实例内存容量，单位：GB。<br>极速版内存容量<b>MachineMemory</b>与持久内存容量<b>MemSize</b>为固定搭配，即2GB内存，固定分配8GB的持久内存，不可选择。具体信息，请参见<a href="https://cloud.tencent.com/document/product/1520/80808">产品规格</a>。</p><p>单位：GB</p>
    */
   MachineMemory: number
   /**
@@ -154,7 +154,7 @@ export interface CreateInstancesRequest {
    */
   ZoneName?: string
   /**
-   * <p>创建实例的名称。仅支持长度小于60的中文、英文或者数字，短划线"-"、下划线"_"。</p>
+   * <p>创建实例的名称。<br>仅支持长度小于60的中文、英文或者数字，短划线&quot;-&quot;、下划线&quot;_&quot;。</p>
    */
   InstanceName?: string
   /**
@@ -162,7 +162,7 @@ export interface CreateInstancesRequest {
    */
   NoAuth?: boolean
   /**
-   * <p>实例访问密码。<ul><li>当参数<b>NoAuth</b>为<b>true</b>时，Password为无需设置，否则Password为必填参数。</li><li>密码复杂度要求：<ul><li>8-30个字符。</li><li>至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/ 中的2种。</li><li>不能以"/"开头。</li></ul></li></ul></p>
+   * <p>实例访问密码。<ul><li>当参数<b>NoAuth</b>为<b>true</b>时，Password为无需设置，否则Password为必填参数。</li></p><li>密码复杂度要求：<ul><li>8-30个字符。</li><li>至少包含小写字母、大写字母、数字和字符 ()`~!@#$%^&amp;*-+=_|{}[]:;&lt;&gt;,.?/ 中的2种。</li><li>不能以"/"开头。</li></ul></li></ul>
    */
   Password?: string
   /**
@@ -182,15 +182,15 @@ export interface CreateInstancesRequest {
    */
   ResourceTags?: Array<ResourceTag>
   /**
-   * <p>极速版，单分片持久化内存容量。KeeWiDB 内存容量<b>MachineMemory</b>与持久内存容量<b>MemSize</b>为固定搭配，即2GB内存，固定分配8GB的持久内存，不可选择。具体信息，请参见<a href="https://cloud.tencent.com/document/product/1520/80808">产品规格</a>。</p>单位：GB。
+   * <p>极速版，单分片持久化内存容量。<b>MachineMemory</b>与持久内存容量<b>MemSize</b>为固定搭配，即2GB内存，固定分配8GB的持久内存，不可选择。具体信息，请参见<a href="https://cloud.tencent.com/document/product/1520/80808">产品规格</a>。</p><p>单位：GB。</p>
    */
   MemSize?: number
   /**
-   * <p>每个分片硬盘的容量。单位：GB。每一缓存分片容量，对应的磁盘容量范围不同。具体信息，请参见<a href="https://cloud.tencent.com/document/product/1520/80808">产品规格</a>。</p>
+   * <p>每个分片硬盘的容量。单位：GB。<br>每一缓存分片容量，对应的磁盘容量范围不同。具体信息，请参见<a href="https://cloud.tencent.com/document/product/1520/80808">产品规格</a>。</p>
    */
   DiskSize?: number
   /**
-   * <p>计算 CPU 核数，可忽略不传。CPU 核数与内存为固定搭配，具体信息，请参见<a href="https://cloud.tencent.com/document/product/1520/80808">产品规格</a>。</p>
+   * <p>计算 CPU 核数。CPU 核数与内存为固定搭配，具体信息，请参见<a href="https://cloud.tencent.com/document/product/1520/80808">产品规格</a>。</p>
    */
   MachineCpu?: number
   /**
@@ -463,6 +463,10 @@ export interface ProxyNodeInfo {
    * 节点ID
    */
   NodeId?: string
+  /**
+   * 可用区ID
+   */
+  ZoneId?: number
 }
 
 /**
@@ -1083,7 +1087,7 @@ export interface CreateInstancesResponse {
    */
   InstanceIds?: Array<string>
   /**
-   * <p>订单号。    </p>
+   * <p>订单号。</p>
    */
   DealName?: string
   /**
@@ -1620,211 +1624,211 @@ export interface ReplicaGroup {
  */
 export interface InstanceInfo {
   /**
-   * 实例名称。
+   * <p>实例名称。</p>
    */
   InstanceName?: string
   /**
-   * 实例 ID。
+   * <p>实例 ID。</p>
    */
   InstanceId?: string
   /**
-   * 用户的Appid。
+   * <p>用户的Appid。</p>
    */
   Appid?: number
   /**
-   * 项目 ID。
+   * <p>项目 ID。</p>
    */
   ProjectId?: number
   /**
-   * 地域ID。<ul><li>1：广州。</li><li>4：上海。</li><li>8：北京。</li></ul>
+   * <p>地域ID。<ul><li>1：广州。</li><li>4：上海。</li><li>8：北京。</li></ul></p>
    */
   RegionId?: number
   /**
-   * 可用区 ID。
+   * <p>可用区 ID。</p>
    */
   ZoneId?: number
   /**
-   * VPC 网络 ID， 如：75101。该参数当前暂保留，可忽略。
+   * <p>VPC 网络 ID， 如：75101。该参数当前暂保留，可忽略。</p>
    */
   VpcId?: number
   /**
-   * 实例当前状态。<ul><li>0：待初始化。</li><li>1：实例在流程中。</li><li>2：实例运行中。</li><li>-2：实例已隔离。</li><li>-3：实例待删除。</li></ul>
+   * <p>实例当前状态。<ul><li>0：待初始化。</li><li>1：实例在流程中。</li><li>2：实例运行中。</li><li>-2：实例已隔离。</li><li>-3：实例待删除。</li></ul></p>
    */
   Status?: number
   /**
-   * VPC 网络下子网 ID， 如：46315。该参数当前暂保留，可忽略。
+   * <p>VPC 网络下子网 ID， 如：46315。该参数当前暂保留，可忽略。</p>
    */
   SubnetId?: number
   /**
-   * 实例 VIP。
+   * <p>实例 VIP。</p>
    */
   WanIp?: string
   /**
-   * 实例端口号。
+   * <p>实例端口号。</p>
    */
   Port?: number
   /**
-   * 实例创建时间。
+   * <p>实例创建时间。</p>
    */
   Createtime?: string
   /**
-   * 实例持久内存总容量大小，单位：MB。
+   * <p>实例持久内存总容量大小，单位：MB。</p>
    */
   Size?: number
   /**
-   * 实例类型。<ul><li>13：标准版。</li><li>14：集群版。</li></ul>
+   * <p>实例类型。</p><p>枚举值：</p><ul><li>11： 存储版标准架构。</li><li>12： 存储版集群架构。</li><li>13： 极速版标准架构。</li><li>14： 极速版集群架构。</li></ul>
    */
   Type?: number
   /**
-   * 实例是否设置自动续费标识。<ul><li>1：设置自动续费。</li><li>0：未设置自动续费。</li></ul>
+   * <p>实例是否设置自动续费标识。<ul><li>1：设置自动续费。</li><li>0：未设置自动续费。</li></ul></p>
    */
   AutoRenewFlag?: number
   /**
-   * 实例到期时间。
+   * <p>实例到期时间。</p>
    */
   DeadlineTime?: string
   /**
-   * 存储引擎。
+   * <p>存储引擎。</p>
    */
   Engine?: string
   /**
-   * 产品类型。<ul><li>standalone ：标准版。</li><li>cluster ：集群版。</li></ul>
+   * <p>产品类型。<ul><li>standalone ：标准版。</li><li>cluster ：集群版。</li></ul></p>
    */
   ProductType?: string
   /**
-   * VPC 网络 ID， 如：vpc-fk33jsf4****。
+   * <p>VPC 网络 ID， 如：vpc-fk33jsf4****。</p>
    */
   UniqVpcId?: string
   /**
-   * VPC 网络下子网 ID，如：subnet-fd3j6l3****。
+   * <p>VPC 网络下子网 ID，如：subnet-fd3j6l3****。</p>
    */
   UniqSubnetId?: string
   /**
-   * 计费模式。<ul><li>0：按量计费。</li><li>1：包年包月。</li></ul>
+   * <p>计费模式。<ul><li>0：按量计费。</li><li>1：包年包月。</li></ul></p>
    */
   BillingMode?: number
   /**
-   * 实例运行状态描述：如”实例运行中“。
+   * <p>实例运行状态描述：如”实例运行中“。</p>
    */
   InstanceTitle?: string
   /**
-   * 计划下线时间。
+   * <p>计划下线时间。</p>
    */
   OfflineTime?: string
   /**
-   * 流程中的实例，返回子状态。
+   * <p>流程中的实例，返回子状态。</p>
    */
   SubStatus?: number
   /**
-   * 反亲和性标签
+   * <p>反亲和性标签</p>
    */
   Tags?: Array<string>
   /**
-   * 分片大小。
+   * <p>分片大小。</p>
    */
   RedisShardSize?: number
   /**
-   * 分片数量。
+   * <p>分片数量。</p>
    */
   RedisShardNum?: number
   /**
-   * 副本数量。
+   * <p>副本数量。</p>
    */
   RedisReplicasNum?: number
   /**
-   * 计费 ID。
+   * <p>计费 ID。</p>
    */
   PriceId?: number
   /**
-   * 隔离时间。
+   * <p>隔离时间。</p>
    */
   CloseTime?: string
   /**
-   * 从节点读取权重。
+   * <p>从节点读取权重。</p>
    */
   SlaveReadWeight?: number
   /**
-   * 实例关联的标签信息。
+   * <p>实例关联的标签信息。</p>
    */
   InstanceTags?: Array<InstanceTagInfo>
   /**
-   * 项目名称。
+   * <p>项目名称。</p>
    */
   ProjectName?: string
   /**
-   * 是否为免密实例；<ul><li>true：免密实例。</li><li>false：非免密实例。</li></ul>
+   * <p>是否为免密实例；<ul><li>true：免密实例。</li><li>false：非免密实例。</li></ul></p>
    */
   NoAuth?: boolean
   /**
-   * 客户端连接数。
+   * <p>客户端连接数。</p>
    */
   ClientLimit?: number
   /**
-   * DTS状态（内部参数，用户可忽略）。
+   * <p>DTS状态（内部参数，用户可忽略）。</p>
    */
   DtsStatus?: number
   /**
-   * 分片带宽上限，单位 MB。
+   * <p>分片带宽上限，单位 MB。</p>
    */
   NetLimit?: number
   /**
-   * 免密实例标识（内部参数，用户可忽略）。
+   * <p>免密实例标识（内部参数，用户可忽略）。</p>
    */
   PasswordFree?: number
   /**
-   * 实例只读标识（内部参数，用户可忽略）。
+   * <p>实例只读标识（内部参数，用户可忽略）。</p>
    */
   ReadOnly?: number
   /**
-   * 内部参数，用户可忽略。
+   * <p>内部参数，用户可忽略。</p>
    */
   Vip6?: string
   /**
-   * 内部参数，用户可忽略。
+   * <p>内部参数，用户可忽略。</p>
    */
   RemainBandwidthDuration?: string
   /**
-   * 实例的磁盘容量大小。
+   * <p>实例的磁盘容量大小。</p>
    */
   DiskSize?: number
   /**
-   * 监控版本。<ul><li>1m：分钟粒度监控。</li><li>5s：5秒粒度监控。</li></ul>
+   * <p>监控版本。<ul><li>1m：分钟粒度监控。</li><li>5s：5秒粒度监控。</li></ul></p>
    */
   MonitorVersion?: string
   /**
-   * 客户端最大连接数可设置的最小值。
+   * <p>客户端最大连接数可设置的最小值。</p>
    */
   ClientLimitMin?: number
   /**
-   * 客户端最大连接数可设置的最大值。
+   * <p>客户端最大连接数可设置的最大值。</p>
    */
   ClientLimitMax?: number
   /**
-   * 实例的节点详细信息。
+   * <p>实例的节点详细信息。</p>
    */
   NodeSet?: Array<NodeInfo>
   /**
-   * 实例所在的地域信息，比如ap-guangzhou。
+   * <p>实例所在的地域信息，比如ap-guangzhou。</p>
    */
   Region?: string
   /**
-   * 实例内存容量，单位：GB。KeeWiDB 内存容量
+   * <p>实例内存容量，单位：GB。KeeWiDB 内存容量</p>
    */
   MachineMemory?: number
   /**
-   * 单分片磁盘大小，单位：MB
+   * <p>单分片磁盘大小，单位：MB</p>
    */
   DiskShardSize?: number
   /**
-   * 3
+   * <p>分片数量</p>
    */
   DiskShardNum?: number
   /**
-   * 1
+   * <p>副本数量</p>
    */
   DiskReplicasNum?: number
   /**
-   * 数据压缩开关。<ul><li>ON：开启。</li><li>OFF：关闭。</li></ul>
+   * <p>数据压缩开关。<ul><li>ON：开启。</li><li>OFF：关闭。</li></ul></p>
    */
   Compression?: string
 }
@@ -1858,93 +1862,92 @@ export interface DescribeInstanceDealDetailResponse {
  */
 export interface DescribeInstancesRequest {
   /**
-   * 每页输出的实例列表的大小，即每页输出的实例数量，默认值20，取值范围为[1,1000]。
+   * <p>每页输出的实例列表的大小，即每页输出的实例数量，默认值20，取值范围为[1,1000]。</p>
    */
   Limit?: number
   /**
-   * 分页偏移量，取Limit整数倍。
-计算公式为offset=limit*(页码-1)。例如 limit=10，第1页offset就为0，第2页offset就为10，依次类推。
+   * <p>分页偏移量，取Limit整数倍。<br>计算公式为offset=limit*(页码-1)。例如 limit=10，第1页offset就为0，第2页offset就为10，依次类推。</p>
    */
   Offset?: number
   /**
-   * 实例 ID，如：kee-6ubh****。
+   * <p>实例 ID，如：kee-6ubh****。</p>
    */
   InstanceId?: string
   /**
-   * 排序依据。枚举范围如下所示。 <ul><li>projectId：实例按照项目ID排序。</li><li>createtime：实例按照创建时间排序。</li><li>instancename：实例按照实例名称排序。</li><li>type：实例按照类型排序。</li><li>curDeadline：实例按照到期时间排序。</li></ul>
+   * <p>排序依据。枚举范围如下所示。 <ul><li>projectId：实例按照项目ID排序。</li><li>createtime：实例按照创建时间排序。</li><li>instancename：实例按照实例名称排序。</li><li>type：实例按照类型排序。</li><li>curDeadline：实例按照到期时间排序。</li></ul></p>
    */
   OrderBy?: string
   /**
-   * 排序方式。<ul><li>1：倒序。默认为倒序。</li><li>0：顺序。</li></ul>
+   * <p>排序方式。<ul><li>1：倒序。默认为倒序。</li><li>0：顺序。</li></ul></p>
    */
   OrderType?: number
   /**
-   * 私有网络ID数组。数组下标从0开始，如果不传则默认选择基础网络，如：47525
+   * <p>私有网络ID数组。数组下标从0开始，如果不传则默认选择基础网络，如：47525</p>
    */
   VpcIds?: Array<string>
   /**
-   * 子网ID数组，数组下标从0开始，如：56854
+   * <p>子网ID数组，数组下标从0开始，如：56854</p>
    */
   SubnetIds?: Array<string>
   /**
-   * 项目ID 组成的数组，数组下标从0开始
+   * <p>项目ID 组成的数组，数组下标从0开始</p>
    */
   ProjectIds?: Array<number | bigint>
   /**
-   * 查找关键字，可输入实例的ID或者实例名称。
+   * <p>查找关键字，可输入实例的ID或者实例名称。</p>
    */
   SearchKey?: string
   /**
-   * 实例名称。
+   * <p>实例名称。</p>
    */
   InstanceName?: string
   /**
-   * 私有网络ID数组，数组下标从0开始，如果不传则默认选择基础网络，如：vpc-sad23jfdfk
+   * <p>私有网络ID数组，数组下标从0开始，如果不传则默认选择基础网络，如：vpc-sad23jfdfk</p>
    */
   UniqVpcIds?: Array<string>
   /**
-   * 子网ID数组，数组下标从0开始，如：subnet-fdj24n34j2
+   * <p>子网ID数组，数组下标从0开始，如：subnet-fdj24n34j2</p>
    */
   UniqSubnetIds?: Array<string>
   /**
-   * 实例状态。<ul><li>0：待初始化。</li><li>1：流程中。</li><li>2：运行中。</li><li>-2：已隔离。</li><li>-3：待删除。</li></ul>
+   * <p>实例状态。<ul><li>0：待初始化。</li><li>1：流程中。</li><li>2：运行中。</li><li>-2：已隔离。</li><li>-3：待删除。</li></ul></p>
    */
   Status?: Array<number | bigint>
   /**
-   * 续费模式。- 0：手动续费。- 1：自动续费。- 2：到期不再续费。
+   * <p>续费模式。- 0：手动续费。- 1：自动续费。- 2：到期不再续费。</p>
    */
   AutoRenew?: Array<number | bigint>
   /**
-   * 计费模式。<ul><li>postpaid：按量计费。</li><li>prepaid：包年包月。</li></ul>
+   * <p>计费模式。<ul><li>postpaid：按量计费。</li><li>prepaid：包年包月。</li></ul></p>
    */
   BillingMode?: string
   /**
-   * 实例类型。<ul><li>13：标准版。</li><li>14：集群版。</li></ul>
+   * <p>实例类型。</p><p>枚举值：</p><ul><li>11： 存储版标准架构。</li><li>12： 存储版集群架构。</li><li>13： 极速版标准架构。</li><li>14： 极速版集群架构。</li></ul>
    */
   Type?: number
   /**
-   * 搜索关键词：支持实例 ID、实例名称、私有网络IP地址。
+   * <p>搜索关键词：支持实例 ID、实例名称、私有网络IP地址。</p>
    */
   SearchKeys?: Array<string>
   /**
-   * 内部参数，用户可忽略。
+   * <p>内部参数，用户可忽略。</p>
    */
   TypeList?: Array<number | bigint>
   /**
-   * 内部参数，用户可忽略。
+   * <p>内部参数，用户可忽略。</p>
    */
   MonitorVersion?: string
   /**
-   * 废弃字段。请使用TagList传参。
+   * <p>废弃字段。请使用TagList传参。</p>
    * @deprecated
    */
   InstanceTags?: InstanceTagInfo
   /**
-   * 根据标签的 Key 筛选资源，该参数不配置或者数组设置为空值，则不根据标签Key进行过滤。
+   * <p>根据标签的 Key 筛选资源，该参数不配置或者数组设置为空值，则不根据标签Key进行过滤。</p>
    */
   TagKeys?: Array<string>
   /**
-   * 根据标签的 Key 和 Value 筛选资源。该参数不配置或者数组设置为空值，则不根据标签进行过滤。
+   * <p>根据标签的 Key 和 Value 筛选资源。该参数不配置或者数组设置为空值，则不根据标签进行过滤。</p>
    */
   TagList?: Array<InstanceTagInfo>
 }
@@ -2051,11 +2054,11 @@ export interface UpgradeInstanceResponse {
  */
 export interface DescribeInstancesResponse {
   /**
-   * 实例数
+   * <p>实例数</p>
    */
   TotalCount?: number
   /**
-   * 实例详细信息列表
+   * <p>实例详细信息列表</p>
    */
   InstanceSet?: Array<InstanceInfo>
   /**
@@ -2138,11 +2141,15 @@ export interface InstanceNodeInfo {
   /**
    * 节点ID
    */
-  NodeId: string
+  NodeId?: string
   /**
    * 节点角色
    */
-  NodeRole: string
+  NodeRole?: string
+  /**
+   * 可用区ID
+   */
+  ZoneId?: number
 }
 
 /**

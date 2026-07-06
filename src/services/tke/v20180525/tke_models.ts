@@ -14938,11 +14938,11 @@ export interface UpdateClusterKubeconfigResponse {
  */
 export interface RuntimeConfig {
   /**
-   * 运行时类型，支持的类型有 docker、containerd
+   * <p>运行时类型，支持的类型有 docker、containerd</p>
    */
   RuntimeType?: string
   /**
-   * 运行时版本，参考：https://cloud.tencent.com/document/api/457/105241
+   * <p>运行时版本，参考：https://cloud.tencent.com/document/api/457/105241</p>
    */
   RuntimeVersion?: string
 }

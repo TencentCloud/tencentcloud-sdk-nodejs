@@ -1497,18 +1497,22 @@ export interface ExternalNodeInfo {
  */
 export interface MachineSetScaling {
   /**
-   * 节点池最小副本数
+   * <p>节点池最小副本数</p>
    */
   MinReplicas?: number
   /**
-   * 节点池最大副本数
+   * <p>节点池最大副本数</p>
    */
   MaxReplicas?: number
   /**
-   * 节点池扩容策略。ZoneEquality：多可用区打散；ZonePriority：首选可用区优先；
+   * <p>节点池扩容策略。ZoneEquality：多可用区打散；ZonePriority：首选可用区优先；</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatePolicy?: string
+  /**
+   * <p>扩缩容模式</p><p>枚举值：</p><ul><li>ShutdownAndDelete： 释放模式，默认</li><li>Shutdown： 停机模式，关机不计费</li></ul><p>默认值：ShutdownAndDelete</p>
+   */
+  ScaleDownMode?: string
 }
 
 /**
@@ -1816,17 +1820,17 @@ export interface Machine {
  */
 export interface RuntimeConfig {
   /**
-   * 运行时类型
+   * <p>运行时类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuntimeType?: string
   /**
-   * 运行时版本
+   * <p>运行时版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuntimeVersion?: string
   /**
-   * 运行时根目录
+   * <p>运行时根目录</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuntimeRootDir?: string
@@ -2078,6 +2082,14 @@ export interface ModifyClusterMachineRequest {
    * <p>节点预付费信息</p>
    */
   InstanceChargePrepaid?: InstanceChargePrepaid
+  /**
+   * <p>节点计费类型变更</p><p>枚举值：</p><ul><li>POSTPAID_BY_HOUR： 目标计费类型为按量计费</li><li>PREPAID： 目标计费类型为包年包月计费</li></ul>
+   */
+  InstanceChargeType?: string
+  /**
+   * <p>是否同时切换弹性数据云盘计费模式。取值范围：  true：表示切换弹性数据云盘计费模式 false：表示不切换弹性数据云盘计费模式 默认取值：true。</p><p>默认值：true</p>
+   */
+  ModifyPortableDataDisk?: boolean
 }
 
 /**

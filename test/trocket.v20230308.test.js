@@ -38,6 +38,16 @@ it("trocket.v20230308.DescribeSourceClusterGroupList", async function () {
     }
 })
 
+it("trocket.v20230308.PutConsumerRouteConfig", async function () {
+    try {
+       const data = await client.PutConsumerRouteConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.DescribeMigratingTopicList", async function () {
     try {
        const data = await client.DescribeMigratingTopicList({})
@@ -108,6 +118,16 @@ it("trocket.v20230308.ImportSourceClusterConsumerGroups", async function () {
     }
 })
 
+it("trocket.v20230308.CreateConsumerLabel", async function () {
+    try {
+       const data = await client.CreateConsumerLabel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.DescribeSmoothMigrationTaskList", async function () {
     try {
        const data = await client.DescribeSmoothMigrationTaskList({})
@@ -158,6 +178,16 @@ it("trocket.v20230308.DescribeRoleList", async function () {
     }
 })
 
+it("trocket.v20230308.DescribeConsumerLabel", async function () {
+    try {
+       const data = await client.DescribeConsumerLabel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.DoHealthCheckOnMigratingTopic", async function () {
     try {
        const data = await client.DoHealthCheckOnMigratingTopic({})
@@ -201,6 +231,16 @@ it("trocket.v20230308.DeleteConsumerGroup", async function () {
 it("trocket.v20230308.ModifyConsumerGroup", async function () {
     try {
        const data = await client.ModifyConsumerGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DescribeConsumerLabelList", async function () {
+    try {
+       const data = await client.DescribeConsumerLabelList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +348,9 @@ it("trocket.v20230308.CreateTopic", async function () {
     }
 })
 
-it("trocket.v20230308.CreateInstance", async function () {
+it("trocket.v20230308.DescribeMessageList", async function () {
     try {
-       const data = await client.CreateInstance({})
+       const data = await client.DescribeMessageList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,9 +358,9 @@ it("trocket.v20230308.CreateInstance", async function () {
     }
 })
 
-it("trocket.v20230308.DescribeMessageList", async function () {
+it("trocket.v20230308.CreateInstance", async function () {
     try {
-       const data = await client.DescribeMessageList({})
+       const data = await client.CreateInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -361,6 +401,16 @@ it("trocket.v20230308.DescribeTopicList", async function () {
 it("trocket.v20230308.ResendDeadLetterMessage", async function () {
     try {
        const data = await client.ResendDeadLetterMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DescribeConsumerRouteVersionList", async function () {
+    try {
+       const data = await client.DescribeConsumerRouteVersionList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,6 +478,16 @@ it("trocket.v20230308.ModifyRole", async function () {
     }
 })
 
+it("trocket.v20230308.DeleteConsumerRouteConfig", async function () {
+    try {
+       const data = await client.DeleteConsumerRouteConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trocket.v20230308.DescribeTopic", async function () {
     try {
        const data = await client.DescribeTopic({})
@@ -441,6 +501,26 @@ it("trocket.v20230308.DescribeTopic", async function () {
 it("trocket.v20230308.DescribeMigrationTaskList", async function () {
     try {
        const data = await client.DescribeMigrationTaskList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DeleteConsumerLabel", async function () {
+    try {
+       const data = await client.DeleteConsumerLabel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trocket.v20230308.DescribeConsumerRouteConfig", async function () {
+    try {
+       const data = await client.DescribeConsumerRouteConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

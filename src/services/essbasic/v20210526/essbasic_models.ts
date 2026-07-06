@@ -6618,7 +6618,7 @@ export interface CreateEmployeeChangeUrlRequest {
    */
   OpenId?: string
   /**
-   * <p>待修改的员工手机号，支持海外格式</p>
+   * <p>待修改的员工手机号，支持海外格式</p><p>参数格式：<br><br>国内：+86 1825195xxxx 或者 1825195xxxx <br><br>海外：+12 12345xxx</p>
    */
   NewMobile?: string
 }

@@ -2397,122 +2397,105 @@ export interface DescribeLivePullStreamTaskStatusResponse {
  */
 export interface ModifyLiveTranscodeTemplateRequest {
   /**
-   * 模板 Id。
+   * <p>模板 Id。</p>
    */
   TemplateId: number
   /**
-   * 视频编码：h264/h265/origin，默认origin。
-
-origin: 保持原始编码格式
+   * <p>视频编码：h264/h265/origin，默认origin。</p><p>origin: 保持原始编码格式</p>
    */
   Vcodec?: string
   /**
-   * 音频编码：aac，默认aac。
-注意：当前该参数未生效，待后续支持！
+   * <p>音频编码：aac，默认aac。<br>注意：当前该参数未生效，待后续支持！</p>
    */
   Acodec?: string
   /**
-   * 音频码率，默认0。
-范围：0-500。
+   * <p>音频码率，默认0。<br>范围：0-500。</p>
    */
   AudioBitrate?: number
   /**
-   * 模板描述。
+   * <p>模板描述。</p>
    */
   Description?: string
   /**
-   * 视频码率。范围：0kbps - 8000kbps。
-0为保持原始码率。
-注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。
+   * <p>视频码率。范围：0kbps - 8000kbps。<br>0为保持原始码率。<br>注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。</p>
    */
   VideoBitrate?: number
   /**
-   * 宽。0-3000。
-数值必须是2的倍数，0是原始宽度
+   * <p>宽。0-3000。<br>数值必须是2的倍数，0是原始宽度</p>
    */
   Width?: number
   /**
-   * 是否保留视频，0：否，1：是。默认1。
+   * <p>是否保留视频，0：否，1：是。默认1。</p>
    */
   NeedVideo?: number
   /**
-   * 是否保留音频，0：否，1：是。默认1。
+   * <p>是否保留音频，0：否，1：是。默认1。</p>
    */
   NeedAudio?: number
   /**
-   * 高。0-3000。
-数值必须是2的倍数，0是原始宽度
+   * <p>高。0-3000。<br>数值必须是2的倍数，0是原始宽度</p>
    */
   Height?: number
   /**
-   * 帧率，默认0。
-范围0-60
+   * <p>帧率，默认0。<br>范围0-60</p>
    */
   Fps?: number
   /**
-   * 关键帧间隔，单位：秒。
-范围2-6
+   * <p>关键帧间隔，单位：秒。<br>范围2-6</p>
    */
   Gop?: number
   /**
-   * 旋转角度，默认0。
-可取值：0，90，180，270
+   * <p>旋转角度，默认0。<br>可取值：0，90，180，270</p>
    */
   Rotate?: number
   /**
-   * 编码质量：
-baseline/main/high。
+   * <p>编码质量：<br>baseline/main/high。</p>
    */
   Profile?: string
   /**
-   * 当设置的码率>原始码率时，是否以原始码率为准。
-0：否， 1：是
-默认 0。
+   * <p>当设置的码率&gt;原始码率时，是否以原始码率为准。<br>0：否， 1：是<br>默认 0。</p>
    */
   BitrateToOrig?: number
   /**
-   * 当设置的高度>原始高度时，是否以原始高度为准。
-0：否， 1：是
-默认 0。
+   * <p>当设置的高度&gt;原始高度时，是否以原始高度为准。<br>0：否， 1：是<br>默认 0。</p>
    */
   HeightToOrig?: number
   /**
-   * 当设置的帧率>原始帧率时，是否以原始帧率为准。
-0：否， 1：是
-默认 0。
+   * <p>当设置的帧率&gt;原始帧率时，是否以原始帧率为准。<br>0：否， 1：是<br>默认 0。</p>
    */
   FpsToOrig?: number
   /**
-   * 极速高清视频码率压缩比。
-极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)
-
-取值范围：0.0到0.5
+   * <p>极速高清视频码率压缩比。<br>极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)</p><p>取值范围：0.0 到 0.5<br>智能降码：0.5 到 0.9</p>
    */
   AdaptBitratePercent?: number
   /**
-   * 是否以短边作为高度，0：否，1：是。默认0。
+   * <p>是否以短边作为高度，0：否，1：是。默认0。</p>
    */
   ShortEdgeAsHeight?: number
   /**
-   * DRM 加密类型，可选值：fairplay、normalaes、widevine。
-不传递或者为空字符串，清空之前的DRM配置。
+   * <p>DRM 加密类型，可选值：fairplay、normalaes、widevine。<br>不传递或者为空字符串，清空之前的DRM配置。</p>
    */
   DRMType?: string
   /**
-   * DRM 加密项，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。
-不传递或者为空字符串，清空之前的DRM配置。
+   * <p>DRM 加密项，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。<br>不传递或者为空字符串，清空之前的DRM配置。</p>
    */
   DRMTracks?: string
   /**
-   * 是否创建自适应码率，默认值 0。
-0：否。
-1：是。
+   * <p>是否创建自适应码率，默认值 0。<br>0：否。<br>1：是。</p>
    */
   IsAdaptiveBitRate?: number
   /**
-   * 自适应码率，子转码模板信息，当 IsAdaptiveBitRate 为 1 时有效。
+   * <p>自适应码率，子转码模板信息，当 IsAdaptiveBitRate 为 1 时有效。</p>
    */
   AdaptiveChildren?: Array<ChildTemplateInfo>
+  /**
+   * <p>是否智能降码，1 表示智能降码。</p>
+   */
+  AudienceDrivenTranscode?: number
+  /**
+   * <p>智能降码人数阈值，当 AudienceDrivenTranscode = 1 时生效。  取值范围：[100, 1000000]。</p>
+   */
+  AudienceThreshold?: number
 }
 
 /**
@@ -2554,133 +2537,109 @@ export interface HttpStatusInfo {
  */
 export interface CreateLiveTranscodeTemplateRequest {
   /**
-   * 模板名称，例： 900p 仅支持字母和数字的组合。
-长度限制：
-  标准转码：1-10个字符
-  极速高清转码：3-10个字符
+   * <p>模板名称，例： 900p 仅支持字母和数字的组合。<br>长度限制：<br>  标准转码：1-10个字符<br>  极速高清转码：3-10个字符</p>
    */
   TemplateName: string
   /**
-   * 视频码率。范围：0kbps - 8000kbps。
-0为保持原始码率。
-注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。
+   * <p>视频码率。范围：0kbps - 8000kbps。<br>0为保持原始码率。<br>注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。</p>
    */
   VideoBitrate: number
   /**
-   * 音频编码：aac，默认aac。
-注意：当前该参数未生效，待后续支持！
+   * <p>音频编码：aac，默认aac。<br>注意：当前该参数未生效，待后续支持！</p>
    */
   Acodec?: string
   /**
-   * 音频码率，默认0。
-范围：0-500。
+   * <p>音频码率，默认0。<br>范围：0-500。</p>
    */
   AudioBitrate?: number
   /**
-   * 视频编码：h264/h265/origin，默认origin。
-
-origin: 保持原始编码格式
+   * <p>视频编码：h264/h265/origin，默认origin。</p><p>origin: 保持原始编码格式</p>
    */
   Vcodec?: string
   /**
-   * 模板描述。
+   * <p>模板描述。</p>
    */
   Description?: string
   /**
-   * 是否保留视频，0：否，1：是。默认1。
+   * <p>是否保留视频，0：否，1：是。默认1。</p>
    */
   NeedVideo?: number
   /**
-   * 宽，默认0。
-范围[0-3000]
-数值必须是2的倍数，0是原始宽度
+   * <p>宽，默认0。<br>范围[0-3000]<br>数值必须是2的倍数，0是原始宽度</p>
    */
   Width?: number
   /**
-   * 是否保留音频，0：否，1：是。默认1。
+   * <p>是否保留音频，0：否，1：是。默认1。</p>
    */
   NeedAudio?: number
   /**
-   * 高，默认0。
-范围[0-3000]
-数值必须是2的倍数，0是原始高度。
-极速高清模板（AiTransCode = 1 的时候）必须传。
+   * <p>高，默认0。<br>范围[0-3000]<br>数值必须是2的倍数，0是原始高度。<br>极速高清模板（AiTransCode = 1 的时候）必须传。</p>
    */
   Height?: number
   /**
-   * 帧率，默认0。
-范围0-60fps
+   * <p>帧率，默认0。<br>范围0-60fps</p>
    */
   Fps?: number
   /**
-   * 关键帧间隔，单位：秒。
-默认原始的间隔
-范围1-6
+   * <p>关键帧间隔，单位：秒。<br>默认原始的间隔<br>范围1-6</p>
    */
   Gop?: number
   /**
-   * 旋转角度，默认0。
-可取值：0，90，180，270
+   * <p>旋转角度，默认0。<br>可取值：0，90，180，270</p>
    */
   Rotate?: number
   /**
-   * 编码质量：
-baseline/main/high。默认baseline
+   * <p>编码质量：<br>baseline/main/high。默认baseline</p>
    */
   Profile?: string
   /**
-   * 当设置的码率>原始码率时，是否以原始码率为准。
-0：否， 1：是
-默认 0。
+   * <p>当设置的码率&gt;原始码率时，是否以原始码率为准。<br>0：否， 1：是<br>默认 0。</p>
    */
   BitrateToOrig?: number
   /**
-   * 当设置的高度>原始高度时，是否以原始高度为准。
-0：否， 1：是
-默认 0。
+   * <p>当设置的高度&gt;原始高度时，是否以原始高度为准。<br>0：否， 1：是<br>默认 0。</p>
    */
   HeightToOrig?: number
   /**
-   * 当设置的帧率>原始帧率时，是否以原始帧率为准。
-0：否， 1：是
-默认 0。
+   * <p>当设置的帧率&gt;原始帧率时，是否以原始帧率为准。<br>0：否， 1：是<br>默认 0。</p>
    */
   FpsToOrig?: number
   /**
-   * 是否是极速高清模板，0：否，1：是。默认0。
+   * <p>是否是极速高清模板，0：否，1：是。默认0。</p>
    */
   AiTransCode?: number
   /**
-   * 极速高清视频码率压缩比。
-极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)
-
-取值范围：0.0到0.5
+   * <p>极速高清视频码率压缩比。<br>极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)</p><p>取值范围：0.0 到 0.5<br>智能降码：0.5 到 0.9。</p>
    */
   AdaptBitratePercent?: number
   /**
-   * 是否以短边作为高度，0：否，1：是。默认0。
+   * <p>是否以短边作为高度，0：否，1：是。默认0。</p>
    */
   ShortEdgeAsHeight?: number
   /**
-   * DRM 加密类型，可选值：fairplay、normalaes、widevine。
-不传递或者为空字符串，清空之前的DRM配置。
+   * <p>DRM 加密类型，可选值：fairplay、normalaes、widevine。<br>不传递或者为空字符串，清空之前的DRM配置。</p>
    */
   DRMType?: string
   /**
-   * DRM 加密项，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。
-不传递或者为空字符串，清空之前的DRM配置。
+   * <p>DRM 加密项，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。<br>不传递或者为空字符串，清空之前的DRM配置。</p>
    */
   DRMTracks?: string
   /**
-   * 是否创建自适应码率，默认值 0。
-0：否。
-1：是。
+   * <p>是否创建自适应码率，默认值 0。<br>0：否。<br>1：是。</p>
    */
   IsAdaptiveBitRate?: number
   /**
-   * 自适应码率，子转码模板信息，当 IsAdaptiveBitRate 为 1 时有效。
+   * <p>自适应码率，子转码模板信息，当 IsAdaptiveBitRate 为 1 时有效。</p>
    */
   AdaptiveChildren?: Array<ChildTemplateInfo>
+  /**
+   * <p>是否智能降码，1 表示智能降码。如果设置了智能降码，AiTransCode  = 1、Height = 0、VideoBitrate = 0、AdaptBitratePercent、AudienceThreshold 必须传递。</p>
+   */
+  AudienceDrivenTranscode?: number
+  /**
+   * <p>智能降码人数阈值，当 AudienceDrivenTranscode = 1 时需要传递。</p><p>取值范围：[100, 1000000]</p>
+   */
+  AudienceThreshold?: number
 }
 
 /**
@@ -5707,136 +5666,118 @@ eg. record_interval=3600&storage_time=2592000。
  */
 export interface TemplateInfo {
   /**
-   * 视频编码：h264/h265/origin，默认h264。
-
-origin: 保持原始编码格式
+   * <p>视频编码：h264/h265/origin，默认h264。</p><p>origin: 保持原始编码格式</p>
    */
   Vcodec?: string
   /**
-   * 视频码率。范围：0kbps - 8000kbps。
-0为保持原始码率。
-注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。
+   * <p>视频码率。范围：0kbps - 8000kbps。<br>0为保持原始码率。<br>注: 转码模板有码率唯一要求，最终保存的码率可能与输入码率有所差别。</p>
    */
   VideoBitrate?: number
   /**
-   * 音频编码：aac，默认aac。
-注意：当前该参数未生效，待后续支持！
+   * <p>音频编码：aac，默认aac。<br>注意：当前该参数未生效，待后续支持！</p>
    */
   Acodec?: string
   /**
-   * 音频码率。取值范围：0kbps - 500kbps。
-默认0。
+   * <p>音频码率。取值范围：0kbps - 500kbps。<br>默认0。</p>
    */
   AudioBitrate?: number
   /**
-   * 宽，默认0。
-范围[0-3000]
-数值必须是2的倍数，0是原始宽度
+   * <p>宽，默认0。<br>范围[0-3000]<br>数值必须是2的倍数，0是原始宽度</p>
    */
   Width?: number
   /**
-   * 高，默认0。
-范围[0-3000]
-数值必须是2的倍数，0是原始宽度
+   * <p>高，默认0。<br>范围[0-3000]<br>数值必须是2的倍数，0是原始宽度</p>
    */
   Height?: number
   /**
-   * 帧率，默认0。
-范围0-60fps
+   * <p>帧率，默认0。<br>范围0-60fps</p>
    */
   Fps?: number
   /**
-   * 关键帧间隔，单位：秒。
-默认原始的间隔
-范围2-6
+   * <p>关键帧间隔，单位：秒。<br>默认原始的间隔<br>范围2-6</p>
    */
   Gop?: number
   /**
-   * 旋转角度，默认0。
-可取值：0，90，180，270
+   * <p>旋转角度，默认0。<br>可取值：0，90，180，270</p>
    */
   Rotate?: number
   /**
-   * 编码质量：
-baseline/main/high。默认baseline
+   * <p>编码质量：<br>baseline/main/high。默认baseline</p>
    */
   Profile?: string
   /**
-   * 当设置的码率>原始码率时，是否以原始码率为准。
-0：否， 1：是
-默认 0。
+   * <p>当设置的码率&gt;原始码率时，是否以原始码率为准。<br>0：否， 1：是<br>默认 0。</p>
    */
   BitrateToOrig?: number
   /**
-   * 当设置的高度>原始高度时，是否以原始高度为准。
-0：否， 1：是
-默认 0。
+   * <p>当设置的高度&gt;原始高度时，是否以原始高度为准。<br>0：否， 1：是<br>默认 0。</p>
    */
   HeightToOrig?: number
   /**
-   * 当设置的帧率>原始帧率时，是否以原始帧率为准。
-0：否， 1：是
-默认 0。
+   * <p>当设置的帧率&gt;原始帧率时，是否以原始帧率为准。<br>0：否， 1：是<br>默认 0。</p>
    */
   FpsToOrig?: number
   /**
-   * 是否保留视频。0：否，1：是。
+   * <p>是否保留视频。0：否，1：是。</p>
    */
   NeedVideo?: number
   /**
-   * 是否保留音频。0：否，1：是。
+   * <p>是否保留音频。0：否，1：是。</p>
    */
   NeedAudio?: number
   /**
-   * 模板 ID。
+   * <p>模板 ID。</p>
    */
   TemplateId?: number
   /**
-   * 模板名称。
+   * <p>模板名称。</p>
    */
   TemplateName?: string
   /**
-   * 模板描述。
+   * <p>模板描述。</p>
    */
   Description?: string
   /**
-   * 是否是极速高清模板，0：否，1：是。默认0。
+   * <p>是否是极速高清模板，0：否，1：是。默认0。</p>
    */
   AiTransCode?: number
   /**
-   * 极速高清视频码率压缩比。
-极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)
-
-取值范围：0.0到0.5
+   * <p>极速高清视频码率压缩比。<br>极速高清目标码率=VideoBitrate * (1-AdaptBitratePercent)</p><p>取值范围：0.0到0.5</p>
    */
   AdaptBitratePercent?: number
   /**
-   * 是否以短边作为高度，0：否，1：是。默认0。
+   * <p>是否以短边作为高度，0：否，1：是。默认0。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ShortEdgeAsHeight?: number
   /**
-   * DRM 加密类型，可选值：fairplay、normalaes、widevine。
+   * <p>DRM 加密类型，可选值：fairplay、normalaes、widevine。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DRMType?: string
   /**
-   * DRM 加密项，多个用|分割，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。
+   * <p>DRM 加密项，多个用|分割，可选值：AUDIO、SD、HD、UHD1、UHD2，后四个为一组，同组中的内容只能选一个。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DRMTracks?: string
   /**
-   * 是否创建自适应码率，默认值 0。
-0：否。
-1：是。
+   * <p>是否创建自适应码率，默认值 0。<br>0：否。<br>1：是。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsAdaptiveBitRate?: number
   /**
-   * 自适应码率，子转码模板信息，当 IsAdaptiveBitRate 为 1 时有效。
+   * <p>自适应码率，子转码模板信息，当 IsAdaptiveBitRate 为 1 时有效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdaptiveChildren?: Array<ChildTemplateInfo>
+  /**
+   * <p>是否按需转码，0 否，1 是。</p>
+   */
+  AudienceDrivenTranscode?: number
+  /**
+   * <p>按需转码人数阈值。</p>
+   */
+  AudienceThreshold?: number
 }
 
 /**
@@ -13219,7 +13160,7 @@ export interface CreateLiveTranscodeRuleResponse {
  */
 export interface CreateLiveTranscodeTemplateResponse {
   /**
-   * 模板Id。
+   * <p>模板Id。</p>
    */
   TemplateId?: number
   /**

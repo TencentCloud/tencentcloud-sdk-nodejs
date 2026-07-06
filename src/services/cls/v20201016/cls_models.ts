@@ -2136,33 +2136,41 @@ export interface QueryMetricRequest {
  */
 export interface CloudProductLogTaskInfo {
   /**
-   * 日志服务地域
+   * <p>日志服务地域</p>
    */
   ClsRegion?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 日志集ID
+   * <p>日志集ID</p>
    */
   LogsetId?: string
   /**
-   * 日志主题ID
+   * <p>日志主题ID</p>
    */
   TopicId?: string
   /**
-   * 日志配置拓展信息， 一般用于存储额外的日志投递配置
+   * <p>日志配置拓展信息， 一般用于存储额外的日志投递配置</p>
    */
   Extend?: string
   /**
-   * 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS
+   * <p>日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS</p>
    */
   LogType?: string
   /**
-   * 任务状态， 0创建中 1创建完成 2 删除中
+   * <p>任务状态， 0创建中 1创建完成 2 删除中</p>
    */
   Status?: number
+  /**
+   * <p>投递任务关联topic的标签信息</p>
+   */
+  TopicTags?: Array<Tag>
+  /**
+   * <p>投递任务关联logset的标签信息</p>
+   */
+  LogsetTags?: Array<Tag>
 }
 
 /**
@@ -3463,6 +3471,10 @@ export interface DescribeCloudProductLogTasksRequest {
    * <ul><li>assumerName<ul><li>按照【云产品标识】进行过滤。</li><li>类型：String</li><li>必选：否</li><li>枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS</li></ul></li><li>logType<ul><li>按照【日志类型】进行过滤。</li><li>类型：String</li><li>必选：否</li><li>枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS</li></ul></li><li>instanceId<ul><li>按照【实例ID】进行过滤。</li><li>类型：String</li><li>必选：否</li></ul></li></ul>
    */
   Filters?: Array<Filter>
+  /**
+   * <p>是否携带topic和logset的标签信息</p>
+   */
+  WithTags?: boolean
 }
 
 /**
@@ -7145,6 +7157,20 @@ export interface ModifyLogsetResponse {
 }
 
 /**
+ * dlc投递失败处理信息
+ */
+export interface DlcFailHandle {
+  /**
+   * <p>是否存储到DLC</p><p>默认值：false</p><p>用于控制是否开启投递失败的日志存储至DLC表</p>
+   */
+  StoreToDlc?: boolean
+  /**
+   * <p>DLC表信息</p>
+   */
+  DlcFailTableInfo?: DlcFailTableInfo
+}
+
+/**
  * 采集配置信息
  */
 export interface CollectConfig {
@@ -7862,6 +7888,20 @@ export interface ConsoleSharingConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsSupportLogExport?: boolean
+}
+
+/**
+ * dlc失败日志存储表信息
+ */
+export interface DlcFailTableInfo {
+  /**
+   * <p>DLC的表名称</p>
+   */
+  TableName: string
+  /**
+   * <p>表中的字段名称</p><p>字段类型必须是String类型</p>
+   */
+  FieldName: string
 }
 
 /**
@@ -9323,6 +9363,10 @@ export interface ModifyWebCallbackResponse {
  * ModifyCloudProductLogCollection返回参数结构体
  */
 export interface ModifyCloudProductLogCollectionResponse {
+  /**
+   * <p>额外信息。如修改topic、logset标签失败。</p>
+   */
+  Message?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11982,69 +12026,81 @@ export interface DescribeRebuildIndexTasksRequest {
  */
 export interface DlcDeliverInfo {
   /**
-   * 任务id。
+   * <p>任务id。</p>
    */
   TaskId?: string
   /**
-   * 账号id。
+   * <p>账号id。</p>
    */
   Uin?: number
   /**
-   * 日志主题id。
+   * <p>日志主题id。</p>
    */
   TopicId?: string
   /**
-   * 任务名称。
+   * <p>任务名称。</p>
    */
   Name?: string
   /**
-   * 投递类型，0：实时投递，1：历史投递
+   * <p>投递类型，0：实时投递，1：历史投递</p>
    */
   DeliverType?: number
   /**
-   * 投递文件大小，单位MB
+   * <p>投递文件大小，单位MB</p>
    */
   MaxSize?: number
   /**
-   * 投递间隔 单位秒
+   * <p>投递间隔 单位秒</p>
    */
   Interval?: number
   /**
-   * 投递时间范围的开始时间
+   * <p>投递时间范围的开始时间</p>
    */
   StartTime?: number
   /**
-   * 投递时间范围的结束时间
+   * <p>投递时间范围的结束时间</p>
    */
   EndTime?: number
   /**
-   * dlc配置信息
+   * <p>dlc配置信息</p>
    */
   DlcInfo?: DlcInfo
   /**
-   * 是否开启投递服务日志。1关闭，2开启
+   * <p>是否开启投递服务日志。1关闭，2开启</p>
    */
   HasServicesLog?: number
   /**
-   * 任务状态。
+   * <p>任务状态。</p>
    */
   Status?: number
   /**
-   * 任务进度。历史投递任务生效。
+   * <p>任务进度。历史投递任务生效。</p>
    */
   Progress?: number
   /**
-   * 日志主题类型。0:标准主题，1:指标主题
+   * <p>日志主题类型。0:标准主题，1:指标主题</p>
    */
   BizType?: number
   /**
-   * 任务创建时间。
+   * <p>任务创建时间。</p>
    */
   CreateTime?: number
   /**
-   * 任务修改时间。
+   * <p>任务修改时间。</p>
    */
   UpdateTime?: number
+  /**
+   * <p>自动创建dlc字段</p><p>默认值：false</p><p>当您的日志中有新增字段时，系统自动将其投递至DLC</p>
+   */
+  AutoCreateField?: boolean
+  /**
+   * <p>将投递失败的日志存储至DLC表</p>
+   */
+  DlcFailHandle?: DlcFailHandle
+  /**
+   * <p>日志预过滤-数据写入 Splunk 的原始数据进行预过滤处理</p>
+   */
+  DSLFilter?: string
 }
 
 /**
@@ -12094,6 +12150,10 @@ export interface DescribeCloudProductLogTasksResponse {
    * <p>日志配置总数</p>
    */
   TotalCount?: number
+  /**
+   * <p>额外信息。如查询topic、logset标签信息错误</p>
+   */
+  Message?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13146,37 +13206,29 @@ export interface CreateShipperResponse {
  */
 export interface ModifyCloudProductLogCollectionRequest {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId: string
   /**
-   * 云产品标识，支持枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS
+   * <p>云产品标识，支持枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS</p>
    */
   AssumerName: string
   /**
-   * 日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS
+   * <p>日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS</p>
    */
   LogType: string
   /**
-   * 云产品地域。 不同日志类型(LogType)地域入參格式存在差异， 请参考如下示例：
-- CDS所有日志类型：ap-guangzhou
-- CDB-AUDIT: gz
-- TDSQL-C-AUDIT: gz
-- MongoDB-AUDIT: gz
-- MongoDB-SlowLog：ap-guangzhou
-- MongoDB-ErrorLog：ap-guangzhou
-- TDMYSQL-SLOW：gz
-- DCDB所有日志类型：gz
-- MariaDB所有日志类型：gz
-- PostgreSQL所有日志类型：gz
-- BH所有日志类型：overseas-polaris(中国香港地区和其他)/fsi-polaris(金融区)/general-polaris(普通区)/intl-sg-prod(国际站)
-- APIS所有日志类型：gz
+   * <p>云产品地域。 不同日志类型(LogType)地域入參格式存在差异， 请参考如下示例：</p><ul><li>CDS所有日志类型：ap-guangzhou</li><li>CDB-AUDIT: gz</li><li>TDSQL-C-AUDIT: gz</li><li>MongoDB-AUDIT: gz</li><li>MongoDB-SlowLog：ap-guangzhou</li><li>MongoDB-ErrorLog：ap-guangzhou</li><li>TDMYSQL-SLOW：gz</li><li>DCDB所有日志类型：gz</li><li>MariaDB所有日志类型：gz</li><li>PostgreSQL所有日志类型：gz</li><li>BH所有日志类型：overseas-polaris(中国香港地区和其他)/fsi-polaris(金融区)/general-polaris(普通区)/intl-sg-prod(国际站)</li><li>APIS所有日志类型：gz</li></ul>
    */
   CloudProductRegion: string
   /**
-   * 日志配置拓展信息， 一般用于存储额外的日志投递配置
+   * <p>日志配置拓展信息， 一般用于存储额外的日志投递配置</p>
    */
   Extend?: string
+  /**
+   * <p>标签描述列表，通过指定该参数可以同时绑定标签到相应的logset和topic。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。</p>
+   */
+  Tags?: Array<Tag>
 }
 
 /**

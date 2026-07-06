@@ -171,6 +171,7 @@ import {
   DescribeHiveQueriesResponse,
   CreateDynamicInstanceRequest,
   DescribeInstanceRenewNodesResponse,
+  DiskHealthIssue,
   StringMap,
   CreateClusterRequest,
   CreateSLInstanceResponse,
