@@ -30,6 +30,24 @@ export interface MCPToolConfig {
 }
 
 /**
+ * DeleteAgent请求参数结构体
+ */
+export interface DeleteAgentRequest {
+  /**
+   * <p>应用Id</p>
+   */
+  AppId: string
+  /**
+   * <p>待删除AgentId</p>
+   */
+  AgentId: string
+  /**
+   * 协作模式；0-Claw模式；1-Multi-Agent模式
+   */
+  CollaborationMode?: number
+}
+
+/**
  * Content 消息内容信息
  */
 export interface ConversationContent {
@@ -137,75 +155,31 @@ export interface CamAuthConfig {
 }
 
 /**
- * 模型超参
+ * FavoriteSkill请求参数结构体
  */
-export interface ModelParameter {
+export interface FavoriteSkillRequest {
   /**
-   * 默认值
+   * <p>SkillId</p>
    */
-  DefaultValue?: string
+  SkillId: string
   /**
-   * 可选值列表
+   * <p>空间ID</p>
    */
-  EnumValueList?: Array<string>
-  /**
-   * 最大值（仅数值类型有效）
-   */
-  MaxValue?: number
-  /**
-   * 最小值（仅数值类型有效）
-   */
-  MinValue?: number
-  /**
-   * 超参名称
-   */
-  Name?: string
-  /**
-   * 超参类型。1-浮点数, 2-整数, 3-字符串
-   */
-  Type?: number
+  SpaceId: string
 }
 
 /**
- * RequestParam
+ * DescribeSkillReferenceList返回参数结构体
  */
-export interface RequestParam {
+export interface DescribeSkillReferenceListResponse {
   /**
-   * <p>AnyOf类型的参数</p>
+   * <p>按 SkillRefType 分组的引用汇总：某类型 total_count = 0 时不入组（不返回空占位） 本期同时落 OPENCLAW / AGENT / CORP_ASSISTANT 三路</p>
    */
-  AnyOf?: Array<RequestParam>
+  ReferenceList?: Array<SkillReferenceGroup>
   /**
-   * <p>默认值</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DefaultValue?: string
-  /**
-   * <p>参数描述</p>
-   */
-  Description?: string
-  /**
-   * <p>全局隐藏不可见（区别于Agent场景的agent_hidden），true-全局隐藏不可见，false-可见</p>
-   */
-  IsGlobalHidden?: boolean
-  /**
-   * <p>是否必选</p>
-   */
-  IsRequired?: boolean
-  /**
-   * <p>参数名称</p>
-   */
-  Name?: string
-  /**
-   * <p>OneOf类型的参数</p>
-   */
-  OneOf?: Array<RequestParam>
-  /**
-   * <p>子参数,ParamType 是OBJECT 或 ARRAY&lt;&gt;类型有用</p>
-   */
-  SubParams?: Array<RequestParam>
-  /**
-   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>PARAM_TYPE_STRING</td><td>0</td><td>字符串</td></tr><tr><td>PARAM_TYPE_INT</td><td>1</td><td>整数</td></tr><tr><td>PARAM_TYPE_FLOAT</td><td>2</td><td>浮点数</td></tr><tr><td>PARAM_TYPE_BOOL</td><td>3</td><td>布尔值</td></tr><tr><td>PARAM_TYPE_OBJECT</td><td>4</td><td>对象</td></tr><tr><td>PARAM_TYPE_ARRAY_STRING</td><td>5</td><td>字符串数组</td></tr><tr><td>PARAM_TYPE_ARRAY_INT</td><td>6</td><td>整数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_FLOAT</td><td>7</td><td>浮点数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_BOOL</td><td>8</td><td>布尔值数组</td></tr><tr><td>PARAM_TYPE_ARRAY_OBJECT</td><td>9</td><td>对象数组</td></tr><tr><td>PARAM_TYPE_ARRAY_ARRAY</td><td>20</td><td>数组嵌套</td></tr><tr><td>PARAM_TYPE_NULL</td><td>99</td><td>空值</td></tr><tr><td>PARAM_TYPE_UNSPECIFIED</td><td>100</td><td>未指定类型，用于OneOf和AnyOf场景</td></tr></tbody></table>
-   */
-  Type?: number
+  RequestId?: string
 }
 
 /**
@@ -274,6 +248,16 @@ export interface AgentToolInputParameter {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Input?: AgentInput
+}
+
+/**
+ * UnfavoritePlugin返回参数结构体
+ */
+export interface UnfavoritePluginResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -380,21 +364,25 @@ export interface ModifySpaceRequest {
 }
 
 /**
- * DescribeReleaseList请求参数结构体
+ * DeleteSkillShare请求参数结构体
  */
-export interface DescribeReleaseListRequest {
+export interface DeleteSkillShareRequest {
   /**
-   * 应用ID
+   * <p>申请备注，必填（弹窗&quot;申请备注&quot;）</p>
    */
-  AppId: string
+  ApplyRemark: string
   /**
-   * 页码(从0开始)
+   * <p>原 Skill ID，必填（前端无须感知 _shared 后缀）</p>
    */
-  PageNumber?: number
+  SkillId: string
   /**
-   * 每页数量(最大值:100)
+   * <p>空间ID，必填</p>
    */
-  PageSize?: number
+  SpaceId: string
+  /**
+   * <p>原版本 ID，必填（与 CreateSkillShare 上架时传的同一 version_id）</p>
+   */
+  VersionId: string
 }
 
 /**
@@ -406,6 +394,20 @@ export interface GenerateModel {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Model: ModelDetailInfo
+}
+
+/**
+ * DescribeSkillDetail返回参数结构体
+ */
+export interface DescribeSkillDetailResponse {
+  /**
+   * skill详情
+   */
+  SkillDetail?: SkillDetail
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -467,6 +469,20 @@ export interface AppShareWhitelistItem {
    * 白名单值列表(UIN/手机号/邮箱/IP等)
    */
   Values?: Array<string>
+}
+
+/**
+ * ModifyVariable请求参数结构体
+ */
+export interface ModifyVariableRequest {
+  /**
+   * app_id
+   */
+  AppId: string
+  /**
+   * 变量信息
+   */
+  Variable?: Variable
 }
 
 /**
@@ -562,6 +578,16 @@ export interface RollbackReleaseRequest {
 }
 
 /**
+ * DeleteSkill返回参数结构体
+ */
+export interface DeleteSkillResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 模型属性
  */
 export interface ModelProperty {
@@ -613,6 +639,16 @@ export interface DescribeModelListResponse {
    * <p>模型总数</p>
    */
   TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UnfavoriteSkill返回参数结构体
+ */
+export interface UnfavoriteSkillResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1032,6 +1068,20 @@ export interface ResetConversationResponse {
 }
 
 /**
+ * ToolExample
+ */
+export interface ToolExample {
+  /**
+   * <p>请求参数</p>
+   */
+  Request?: string
+  /**
+   * <p>响应参数</p>
+   */
+  Response?: string
+}
+
+/**
  * Prompt改写配置
  */
 export interface PromptRewriteModel {
@@ -1040,6 +1090,80 @@ export interface PromptRewriteModel {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Model: ModelDetailInfo
+}
+
+/**
+ * ModifyApp请求参数结构体
+ */
+export interface ModifyAppRequest {
+  /**
+   * 应用ID
+   */
+  AppId: string
+  /**
+   * 应用模式。枚举值: 1:标准模式, 2:Agent模式, 3:单工作流模式, 4:ClawAgent模式
+   */
+  AppMode?: number
+  /**
+   * 应用头像
+   */
+  Avatar?: string
+  /**
+   * 应用配置
+   */
+  Config?: AppConfig
+  /**
+   * 应用描述
+   */
+  Description?: string
+  /**
+   * 应用名称
+   */
+  Name?: string
+  /**
+   * 分享配置
+   */
+  ShareConfig?: AppShareAccessControl
+  /**
+   * 引用的共享知识库ID列表(全量覆盖)
+   */
+  SharedKbIdList?: Array<string>
+  /**
+   * 字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：
+【顶层】Name, Avatar, Description, AppMode, ShareConfig, SharedKbIdList
+【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList
+【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel
+【WebSearch】Config.WebSearch
+【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent
+【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig
+【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced
+【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch
+【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman
+【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility
+   */
+  UpdateMask?: FieldMask
+}
+
+/**
+ * DescribeApp请求参数结构体
+ */
+export interface DescribeAppRequest {
+  /**
+   * 应用ID
+   */
+  AppId: string
+  /**
+   * 应用域: ADP_DOMAIN_DEV(1)=开发域, ADP_DOMAIN_PROD(2)=发布域。枚举值: 1:开发域, 2:生产域
+   */
+  Domain?: number
+  /**
+   * 字段掩码，指定需要返回的字段(Paths为空则返回所有字段)。Paths枚举值：AppConfig(应用配置), SecretInfo(应用密钥信息), ShareUrlInfo(分享链接信息), SpecialStatusInfo(特殊状态信息), SearchResourceStatus(搜索资源状态), SharedKbList(应用引用的共享知识库列表)
+   */
+  FieldMask?: FieldMask
+  /**
+   * 特殊状态类型(当FieldMask包含SpecialStatusInfo时必填)。枚举值: 1:回滚状态, 2:首次导入状态
+   */
+  StatusType?: number
 }
 
 /**
@@ -1156,14 +1280,21 @@ export interface AppSummary {
 }
 
 /**
- * 多智能体配置
+ * DescribeReleaseList请求参数结构体
  */
-export interface MultiAgentConfig {
+export interface DescribeReleaseListRequest {
   /**
-   * Agent协同配置
-注意：此字段可能返回 null，表示取不到有效值。
+   * 应用ID
    */
-  AgentCollaboration: AgentCollaborationConfig
+  AppId: string
+  /**
+   * 页码(从0开始)
+   */
+  PageNumber?: number
+  /**
+   * 每页数量(最大值:100)
+   */
+  PageSize?: number
 }
 
 /**
@@ -1234,6 +1365,36 @@ export interface DescribePluginSummaryListRequest {
    * <p>排序方式。</p><p>枚举值：</p><ul><li>0：未指定，默认排序</li><li>1：按相关性排序</li><li>2：按更新时间排序</li><li>3：默认排序</li><li>4：按热度排序</li></ul>
    */
   SortType?: number
+}
+
+/**
+ * 引用摘要（用于详情页展示，对应DB t_skill_reference）
+ */
+export interface SkillReferenceSummary {
+  /**
+   * <p>关联ID</p>
+   */
+  ReferenceId?: string
+  /**
+   * <p>关联名称</p>
+   */
+  ReferenceName?: string
+  /**
+   * <p>关联类型</p><p>枚举值:<br>| uint | 描述 |<br>| --- | --- |<br>| 0 | 占位 |<br>| 1 | ClawPro |<br>| 2 | agent |</p>
+   */
+  ReferenceType?: number
+  /**
+   * <p>空间ID</p>
+   */
+  SpaceId?: string
+  /**
+   * <p>空间名称</p>
+   */
+  SpaceName?: string
+  /**
+   * <p>Reference实例拥有者</p>
+   */
+  Owner?: string
 }
 
 /**
@@ -1372,6 +1533,36 @@ export interface ConversationAgentTask {
 }
 
 /**
+ * ModifyPlugin请求参数结构体
+ */
+export interface ModifyPluginRequest {
+  /**
+   * <p>插件id</p>
+   */
+  PluginId: string
+  /**
+   * <p>插件版本号</p>
+   */
+  PluginVersion: number
+  /**
+   * <p>插件基础资料</p>
+   */
+  Profile?: PluginProfile
+  /**
+   * <p>插件类型配置</p>
+   */
+  Config?: PluginConfig
+  /**
+   * <p>指定需要更新的字段，避免全量覆盖</p>
+   */
+  UpdateMask?: FieldMask
+  /**
+   * <p>插件的工具列表，mcp插件不传</p>
+   */
+  ToolList?: Array<Tool>
+}
+
+/**
  * DeleteVariable返回参数结构体
  */
 export interface DeleteVariableResponse {
@@ -1465,6 +1656,20 @@ export interface CreateWorkspaceCredentialRequest {
    * <p>Type=CONVERSATION_TYPE_API 时必填，访客ID</p>
    */
   UserId?: string
+}
+
+/**
+ * DeleteSkill请求参数结构体
+ */
+export interface DeleteSkillRequest {
+  /**
+   * <p>Skill ID，必填</p>
+   */
+  SkillId: string
+  /**
+   * <p>空间ID，必填</p>
+   */
+  SpaceId: string
 }
 
 /**
@@ -1583,6 +1788,17 @@ export interface CreateAgentRequest {
 }
 
 /**
+ * 多智能体配置
+ */
+export interface MultiAgentConfig {
+  /**
+   * Agent协同配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AgentCollaboration: AgentCollaborationConfig
+}
+
+/**
  * 对话体验配置
  */
 export interface ConversationExperience {
@@ -1628,35 +1844,27 @@ export interface ConversationExperience {
 }
 
 /**
- * DescribeSystemVariableList返回参数结构体
+ * DescribeSkillReferenceList请求参数结构体
  */
-export interface DescribeSystemVariableListResponse {
+export interface DescribeSkillReferenceListRequest {
   /**
-   * system_variable_list
+   * <p>Skill ID，必填</p>
    */
-  SystemVariableList?: Array<SystemVariable>
+  SkillId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>空间ID，必填</p>
    */
-  RequestId?: string
+  SpaceId: string
 }
 
 /**
- * PluginUserState
+ * DeletePlugin请求参数结构体
  */
-export interface PluginUserState {
+export interface DeletePluginRequest {
   /**
-   * 是否已收藏该插件
+   * <p>插件id</p>
    */
-  IsFavorite?: boolean
-  /**
-   * 是否在插件白名单内
-   */
-  IsInWhiteList?: boolean
-  /**
-   * <p>白名单类型，用于表示当前用户是否可直接使用该插件。</p><p>枚举值：</p><ul><li>0：非白名单插件，全量开放</li><li>1：当前用户在白名单内</li><li>2：当前用户不在白名单内，需提交申请</li></ul>
-   */
-  WhiteListType?: number
+  PluginId: string
 }
 
 /**
@@ -1697,6 +1905,36 @@ export interface DuplexBilling {
 }
 
 /**
+ * 模型超参
+ */
+export interface ModelParameter {
+  /**
+   * 默认值
+   */
+  DefaultValue?: string
+  /**
+   * 可选值列表
+   */
+  EnumValueList?: Array<string>
+  /**
+   * 最大值（仅数值类型有效）
+   */
+  MaxValue?: number
+  /**
+   * 最小值（仅数值类型有效）
+   */
+  MinValue?: number
+  /**
+   * 超参名称
+   */
+  Name?: string
+  /**
+   * 超参类型。1-浮点数, 2-整数, 3-字符串
+   */
+  Type?: number
+}
+
+/**
  * ModifySpace返回参数结构体
  */
 export interface ModifySpaceResponse {
@@ -1704,6 +1942,24 @@ export interface ModifySpaceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * skill详情
+ */
+export interface SkillDetail {
+  /**
+   * 调用情况摘要
+   */
+  ReferenceSummaryList?: Array<SkillReferenceSummary>
+  /**
+   * Skill 摘要
+   */
+  SkillSummary?: SkillSummary
+  /**
+   * 版本列表
+   */
+  VersionList?: Array<SkillVersion>
 }
 
 /**
@@ -1942,6 +2198,24 @@ export interface BillingAttribute {
 }
 
 /**
+ * 同一 SkillRefType 下的引用分组（含总数 + 引用详情列表）。 total_count 始终以未过滤的原始总量为准；reference_summary_list 受二次鉴权开关影响。
+ */
+export interface SkillReferenceGroup {
+  /**
+   * <p>该类型下的引用详情列表</p>
+   */
+  ReferenceSummaryList?: Array<SkillReferenceSummary>
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>SKILL_REF_UNKNOWN</td><td>0</td><td>占位</td></tr><tr><td>SKILL_REF_OPENCLAW</td><td>1</td><td>openclaw</td></tr><tr><td>SKILL_REF_AGENT</td><td>2</td><td>agent</td></tr><tr><td>SKILL_REF_CORP_ASSISTANT</td><td>3</td><td>企业助手</td></tr></tbody></table>
+   */
+  ReferenceType?: number
+  /**
+   * <p>该类型下的引用总数</p>
+   */
+  TotalCount?: number
+}
+
+/**
  * 联网搜索配置(国际版使用)
  */
 export interface AppWebSearchConfig {
@@ -2047,41 +2321,25 @@ export interface AppSecretInfo {
 }
 
 /**
- * Agent 详情
+ * CreatePlugin请求参数结构体
  */
-export interface AgentDetail {
+export interface CreatePluginRequest {
   /**
-   * <p>Agent ID</p>
+   * <p>插件基础资料</p>
    */
-  AgentId?: string
+  Profile: PluginProfile
   /**
-   * <p>Agent基本配置</p>
+   * <p>插件类型配置</p>
    */
-  Profile?: AgentProfile
+  Config: PluginConfig
   /**
-   * <p>系统提示词</p>
+   * <p>当前空间id</p>
    */
-  Instructions?: string
+  SpaceId: string
   /**
-   * <p>模型信息</p>
+   * <p>插件的工具列表</p>
    */
-  Model?: AgentModelConfig
-  /**
-   * <p>工具详情</p>
-   */
-  ToolList?: Array<AgentTool>
-  /**
-   * <p>插件配置</p>
-   */
-  PluginList?: Array<AgentPlugin>
-  /**
-   * <p>技能详情</p>
-   */
-  SkillList?: Array<AgentSkill>
-  /**
-   * <p>高级配置</p>
-   */
-  AdvancedConfig?: AgentAdvancedConfig
+  ToolList?: Tool
 }
 
 /**
@@ -2093,6 +2351,16 @@ export interface ThinkModel {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Model: ModelDetailInfo
+}
+
+/**
+ * DeleteAgent返回参数结构体
+ */
+export interface DeleteAgentResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2257,6 +2525,24 @@ export interface AppAuxiliaryInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubStatus: AppSubStatusInfo
+}
+
+/**
+ * ReleaseSkill请求参数结构体
+ */
+export interface ReleaseSkillRequest {
+  /**
+   * <p>SkillId</p>
+   */
+  SkillId: string
+  /**
+   * <p>空间ID</p>
+   */
+  SpaceId: string
+  /**
+   * <p>版本ID</p>
+   */
+  VersionId: string
 }
 
 /**
@@ -2428,6 +2714,24 @@ export interface DeleteConversationResponse {
 }
 
 /**
+ * DescribeVariable请求参数结构体
+ */
+export interface DescribeVariableRequest {
+  /**
+   * app_id
+   */
+  AppId: string
+  /**
+   * variable_id
+   */
+  VariableId: string
+  /**
+   * module_type。枚举值: 1:环境参数, 2:应用参数, 3:系统参数, -1:所有参数
+   */
+  ModuleType?: number
+}
+
+/**
  * AppToolConfig
  */
 export interface AppToolConfig {
@@ -2578,6 +2882,16 @@ export interface MultiModalQAModel {
 }
 
 /**
+ * FavoriteSkill返回参数结构体
+ */
+export interface FavoriteSkillResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ToolBilling
  */
 export interface ToolBilling {
@@ -2648,25 +2962,17 @@ export interface BasicBilling {
 }
 
 /**
- * DescribeApp请求参数结构体
+ * DeleteSkillShare返回参数结构体
  */
-export interface DescribeAppRequest {
+export interface DeleteSkillShareResponse {
   /**
-   * 应用ID
+   * <p>是否走审批流（false 表示无需审批已直接执行下架）</p>
    */
-  AppId: string
+  NeedApproval?: boolean
   /**
-   * 应用域: ADP_DOMAIN_DEV(1)=开发域, ADP_DOMAIN_PROD(2)=发布域。枚举值: 1:开发域, 2:生产域
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Domain?: number
-  /**
-   * 字段掩码，指定需要返回的字段(Paths为空则返回所有字段)。Paths枚举值：AppConfig(应用配置), SecretInfo(应用密钥信息), ShareUrlInfo(分享链接信息), SpecialStatusInfo(特殊状态信息), SearchResourceStatus(搜索资源状态), SharedKbList(应用引用的共享知识库列表)
-   */
-  FieldMask?: FieldMask
-  /**
-   * 特殊状态类型(当FieldMask包含SpecialStatusInfo时必填)。枚举值: 1:回滚状态, 2:首次导入状态
-   */
-  StatusType?: number
+  RequestId?: string
 }
 
 /**
@@ -2677,6 +2983,20 @@ export interface AgentToolConfig {
    * <p>工具配置</p>
    */
   Config?: AgentToolBasicConfig
+}
+
+/**
+ * CreatePlugin返回参数结构体
+ */
+export interface CreatePluginResponse {
+  /**
+   * <p>插件id</p>
+   */
+  PluginId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2823,6 +3143,44 @@ export interface PluginSummary {
    * <p>插件配置信息</p>
    */
   Config?: PluginConfig
+}
+
+/**
+ * Agent 详情
+ */
+export interface AgentDetail {
+  /**
+   * <p>Agent ID</p>
+   */
+  AgentId?: string
+  /**
+   * <p>Agent基本配置</p>
+   */
+  Profile?: AgentProfile
+  /**
+   * <p>系统提示词</p>
+   */
+  Instructions?: string
+  /**
+   * <p>模型信息</p>
+   */
+  Model?: AgentModelConfig
+  /**
+   * <p>工具详情</p>
+   */
+  ToolList?: Array<AgentTool>
+  /**
+   * <p>插件配置</p>
+   */
+  PluginList?: Array<AgentPlugin>
+  /**
+   * <p>技能详情</p>
+   */
+  SkillList?: Array<AgentSkill>
+  /**
+   * <p>高级配置</p>
+   */
+  AdvancedConfig?: AgentAdvancedConfig
 }
 
 /**
@@ -3146,6 +3504,20 @@ export interface ModelLimit {
 }
 
 /**
+ * CreateSkillShare返回参数结构体
+ */
+export interface CreateSkillShareResponse {
+  /**
+   * <p>是否走了审批流（false表示无需审批已直接创建共享任务）</p>
+   */
+  NeedApproval?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeReleaseSummary返回参数结构体
  */
 export interface DescribeReleaseSummaryResponse {
@@ -3157,6 +3529,24 @@ export interface DescribeReleaseSummaryResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Agent摘要信息
+ */
+export interface AgentSummary {
+  /**
+   * <p>AgentId</p>
+   */
+  AgentId?: string
+  /**
+   * <p>Agent 身份画像</p>
+   */
+  Profile?: AgentProfile
+  /**
+   * <p>高级设置;scope=0 时返回</p>
+   */
+  AdvancedConfig?: AgentAdvancedConfig
 }
 
 /**
@@ -3296,17 +3686,13 @@ export interface ApiToolConfig {
 }
 
 /**
- * ToolExample
+ * ModifySkill返回参数结构体
  */
-export interface ToolExample {
+export interface ModifySkillResponse {
   /**
-   * <p>请求参数</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Request?: string
-  /**
-   * <p>响应参数</p>
-   */
-  Response?: string
+  RequestId?: string
 }
 
 /**
@@ -3369,6 +3755,16 @@ export interface ModelBasic {
 }
 
 /**
+ * ModifyPlugin返回参数结构体
+ */
+export interface ModifyPluginResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateRelease返回参数结构体
  */
 export interface CreateReleaseResponse {
@@ -3387,55 +3783,65 @@ export interface CreateReleaseResponse {
 }
 
 /**
- * ModifyApp请求参数结构体
+ * FavoritePlugin返回参数结构体
  */
-export interface ModifyAppRequest {
+export interface FavoritePluginResponse {
   /**
-   * 应用ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AppId: string
+  RequestId?: string
+}
+
+/**
+ * UnfavoritePlugin请求参数结构体
+ */
+export interface UnfavoritePluginRequest {
   /**
-   * 应用模式。枚举值: 1:标准模式, 2:Agent模式, 3:单工作流模式, 4:ClawAgent模式
+   * <p>插件id</p>
    */
-  AppMode?: number
+  PluginId: string
   /**
-   * 应用头像
+   * <p>当前空间id</p>
    */
-  Avatar?: string
+  SpaceId: string
+}
+
+/**
+ * ModifySkill请求参数结构体
+ */
+export interface ModifySkillRequest {
   /**
-   * 应用配置
+   * <p>SkillId</p>
    */
-  Config?: AppConfig
+  SkillId: string
   /**
-   * 应用描述
+   * <p>空间ID</p>
    */
-  Description?: string
+  SpaceId: string
   /**
-   * 应用名称
+   * <p>skill描述</p>
    */
-  Name?: string
+  DisplayDescription?: string
   /**
-   * 分享配置
+   * <p>skill名称</p>
    */
-  ShareConfig?: AppShareAccessControl
+  DisplayName?: string
   /**
-   * 引用的共享知识库ID列表(全量覆盖)
+   * <p>skill包文件地址（zip）；传入则触发新版本生成，需与SkillVersion、UpdateDescription配套传入</p>
    */
-  SharedKbIdList?: Array<string>
+  FileUrl?: string
   /**
-   * 字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：
-【顶层】Name, Avatar, Description, AppMode, ShareConfig, SharedKbIdList
-【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList
-【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel
-【WebSearch】Config.WebSearch
-【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent
-【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig
-【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced
-【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch
-【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman
-【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility
+   * <p>图标地址</p>
    */
-  UpdateMask?: FieldMask
+  IconUrl?: string
+  /**
+   * <p>skill版本号（与FileUrl配套传入）</p>
+   */
+  SkillVersion?: string
+  /**
+   * <p>版本变更说明（与FileUrl配套传入）</p>
+   */
+  UpdateDescription?: string
 }
 
 /**
@@ -3516,17 +3922,35 @@ export interface ModelDetailInfo {
 }
 
 /**
- * ModifyVariable请求参数结构体
+ * CreateSkillShare请求参数结构体
  */
-export interface ModifyVariableRequest {
+export interface CreateSkillShareRequest {
   /**
-   * app_id
+   * <p>必填，申请备注（弹窗&quot;申请备注&quot;）</p>
    */
-  AppId: string
+  ApplyRemark: string
   /**
-   * 变量信息
+   * <p>必填，原skill_id</p>
    */
-  Variable?: Variable
+  SkillId: string
+  /**
+   * <p>空间ID，必填</p>
+   */
+  SpaceId: string
+  /**
+   * <p>必填，被共享的版本id（必须高于已共享版本）</p>
+   */
+  VersionId: string
+}
+
+/**
+ * DeletePlugin返回参数结构体
+ */
+export interface DeletePluginResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3541,6 +3965,24 @@ export interface CreateVariableRequest {
    * 变量信息
    */
   Variable?: Variable
+}
+
+/**
+ * CreateSkill返回参数结构体
+ */
+export interface CreateSkillResponse {
+  /**
+   * <p>创建成功后的skillID</p>
+   */
+  SkillId?: string
+  /**
+   * <p>创建成功后的版本ID</p>
+   */
+  VersionId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3866,6 +4308,16 @@ export interface DeleteVariableRequest {
 }
 
 /**
+ * ReleaseSkill返回参数结构体
+ */
+export interface ReleaseSkillResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 应用插件配置信息
  */
 export interface AppPluginConfig {
@@ -3891,6 +4343,48 @@ export interface ModelStatus {
    * 资源状态。1-资源可用, 2-资源已用尽
    */
   ResourceStatus?: number
+}
+
+/**
+ * CreateSkill请求参数结构体
+ */
+export interface CreateSkillRequest {
+  /**
+   * <p>Skill 创建方式，必填；仅允许</p><p>枚举值：</p><ul><li>1： FILE_UPLOAD（文件上传）</li><li>3： AIGC（AIGC生成）</li></ul>
+   */
+  CreateType: number
+  /**
+   * <p>skill包文件地址（zip）；FILE_UPLOAD / AIGC 均必填</p>
+   */
+  FileUrl: string
+  /**
+   * <p>空间ID</p>
+   */
+  SpaceId: string
+  /**
+   * <p>skill展示描述</p>
+   */
+  DisplayDescription?: string
+  /**
+   * <p>skill展示名称</p>
+   */
+  DisplayName?: string
+  /**
+   * <p>图标地址</p>
+   */
+  IconUrl?: string
+  /**
+   * <p>skill业务唯一标识名（同企业下唯一）；未传时从skill包解析</p>
+   */
+  Name?: string
+  /**
+   * <p>版本号</p>
+   */
+  SkillVersion?: string
+  /**
+   * <p>版本变更说明</p>
+   */
+  UpdateDescription?: string
 }
 
 /**
@@ -4108,6 +4602,20 @@ export interface ModelBadge {
 }
 
 /**
+ * DescribeSystemVariableList返回参数结构体
+ */
+export interface DescribeSystemVariableListResponse {
+  /**
+   * system_variable_list
+   */
+  SystemVariableList?: Array<SystemVariable>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeApp返回参数结构体
  */
 export interface DescribeAppResponse {
@@ -4194,6 +4702,20 @@ export interface DescribeAppSummaryListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * FavoritePlugin请求参数结构体
+ */
+export interface FavoritePluginRequest {
+  /**
+   * <p>插件id</p>
+   */
+  PluginId: string
+  /**
+   * <p>当前空间id</p>
+   */
+  SpaceId: string
 }
 
 /**
@@ -4331,6 +4853,32 @@ export interface DeleteSpaceRequest {
 }
 
 /**
+ * DescribeAgentSummaryList请求参数结构体
+ */
+export interface DescribeAgentSummaryListRequest {
+  /**
+   * <p>查询范围；0-单应用查询；1-跨应用查询</p>
+   */
+  Scope?: number
+  /**
+   * <p>应用Id，Scope=0 时为目标应用ID（必填）；scope=1 时无需填写</p>
+   */
+  AppId?: string
+  /**
+   * <p>过滤条件（name: "SearchWord", "SpaceId", "AgentSource", "AppId"）</p>
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>每页数目</p>
+   */
+  PageSize?: number
+  /**
+   * <p>页码</p>
+   */
+  PageNumber?: number
+}
+
+/**
  * SkillCategory Skill 分类信息。
  */
 export interface SkillCategory {
@@ -4425,21 +4973,21 @@ export interface BackgroundImage {
 }
 
 /**
- * DescribeVariable请求参数结构体
+ * DescribeSkillDetail请求参数结构体
  */
-export interface DescribeVariableRequest {
+export interface DescribeSkillDetailRequest {
   /**
-   * app_id
+   * skillID
    */
-  AppId: string
+  SkillId: string
   /**
-   * variable_id
+   * 空间ID
    */
-  VariableId: string
+  SpaceId: string
   /**
-   * module_type。枚举值: 1:环境参数, 2:应用参数, 3:系统参数, -1:所有参数
+   * 版本过滤条件(多个Filter之间为AND关系,同一Filter的多个Values为OR关系): - Perspective: 视角枚举,字符串单值,Values 长度必须为 1,多值视为非法;仅作用于详情返回的 version_list 裁剪,不决定接口本身可见性;不传默认 USER (USER=使用者视角,version_list 仅返回已上线版本 / EDITOR=编辑者视角,version_list 返回全部存活版本 / ALL=全量视角,同 EDITOR)
    */
-  ModuleType?: number
+  VersionFilterList?: Array<Filter>
 }
 
 /**
@@ -4598,6 +5146,20 @@ export interface ModelProviderBasic {
 }
 
 /**
+ * UnfavoriteSkill请求参数结构体
+ */
+export interface UnfavoriteSkillRequest {
+  /**
+   * <p>SkillId</p>
+   */
+  SkillId: string
+  /**
+   * <p>空间ID</p>
+   */
+  SpaceId: string
+}
+
+/**
  * Message 消息信息
  */
 export interface ConversationMessage {
@@ -4652,6 +5214,48 @@ export interface ConversationMessage {
 }
 
 /**
+ * RequestParam
+ */
+export interface RequestParam {
+  /**
+   * <p>AnyOf类型的参数</p>
+   */
+  AnyOf?: Array<RequestParam>
+  /**
+   * <p>默认值</p>
+   */
+  DefaultValue?: string
+  /**
+   * <p>参数描述</p>
+   */
+  Description?: string
+  /**
+   * <p>全局隐藏不可见（区别于Agent场景的agent_hidden），true-全局隐藏不可见，false-可见</p>
+   */
+  IsGlobalHidden?: boolean
+  /**
+   * <p>是否必选</p>
+   */
+  IsRequired?: boolean
+  /**
+   * <p>参数名称</p>
+   */
+  Name?: string
+  /**
+   * <p>OneOf类型的参数</p>
+   */
+  OneOf?: Array<RequestParam>
+  /**
+   * <p>子参数,ParamType 是OBJECT 或 ARRAY&lt;&gt;类型有用</p>
+   */
+  SubParams?: Array<RequestParam>
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>PARAM_TYPE_STRING</td><td>0</td><td>字符串</td></tr><tr><td>PARAM_TYPE_INT</td><td>1</td><td>整数</td></tr><tr><td>PARAM_TYPE_FLOAT</td><td>2</td><td>浮点数</td></tr><tr><td>PARAM_TYPE_BOOL</td><td>3</td><td>布尔值</td></tr><tr><td>PARAM_TYPE_OBJECT</td><td>4</td><td>对象</td></tr><tr><td>PARAM_TYPE_ARRAY_STRING</td><td>5</td><td>字符串数组</td></tr><tr><td>PARAM_TYPE_ARRAY_INT</td><td>6</td><td>整数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_FLOAT</td><td>7</td><td>浮点数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_BOOL</td><td>8</td><td>布尔值数组</td></tr><tr><td>PARAM_TYPE_ARRAY_OBJECT</td><td>9</td><td>对象数组</td></tr><tr><td>PARAM_TYPE_ARRAY_ARRAY</td><td>20</td><td>数组嵌套</td></tr><tr><td>PARAM_TYPE_NULL</td><td>99</td><td>空值</td></tr><tr><td>PARAM_TYPE_UNSPECIFIED</td><td>100</td><td>未指定类型，用于OneOf和AnyOf场景</td></tr></tbody></table>
+   */
+  Type?: number
+}
+
+/**
  * DescribeConversation返回参数结构体
  */
 export interface DescribeConversationResponse {
@@ -4702,6 +5306,42 @@ export interface FieldMask {
    * <p>参数名称</p><p>参数格式：需要获取的指定字段路径</p>
    */
   Paths?: Array<string>
+}
+
+/**
+ * DescribeAgentSummaryList返回参数结构体
+ */
+export interface DescribeAgentSummaryListResponse {
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>Agent摘要信息</p>
+   */
+  AgentList?: Array<AgentSummary>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * PluginUserState
+ */
+export interface PluginUserState {
+  /**
+   * 是否已收藏该插件
+   */
+  IsFavorite?: boolean
+  /**
+   * 是否在插件白名单内
+   */
+  IsInWhiteList?: boolean
+  /**
+   * <p>白名单类型，用于表示当前用户是否可直接使用该插件。</p><p>枚举值：</p><ul><li>0：非白名单插件，全量开放</li><li>1：当前用户在白名单内</li><li>2：当前用户不在白名单内，需提交申请</li></ul>
+   */
+  WhiteListType?: number
 }
 
 /**

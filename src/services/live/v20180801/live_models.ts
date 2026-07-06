@@ -9959,65 +9959,51 @@ export interface ModifyLiveDomainRefererRequest {
  */
 export interface DomainInfo {
   /**
-   * 直播域名。
+   * <p>直播域名。</p>
    */
   Name?: string
   /**
-   * 域名类型:
-0: 推流。
-1: 播放。
+   * <p>域名类型:<br>0: 推流。<br>1: 播放。</p>
    */
   Type?: number
   /**
-   * 域名状态:
-0: 停用。
-1: 启用。
+   * <p>域名状态:<br>0: 停用。<br>1: 启用。</p>
    */
   Status?: number
   /**
-   * 添加时间。
-注：此字段为北京时间（UTC+8时区）。
+   * <p>添加时间。<br>注：此字段为北京时间（UTC+8时区）。</p>
    */
   CreateTime?: string
   /**
-   * 是否有 CName 到固定规则域名:
-0: 否。
-1: 是。
+   * <p>是否有 CName 到固定规则域名:<br>0: 否。<br>1: 是。</p>
    */
   BCName?: number
   /**
-   * cname 对应的域名。
+   * <p>cname 对应的域名。</p>
    */
   TargetDomain?: string
   /**
-   * 播放区域，只在 Type=1 时该参数有意义。
-1: 国内。
-2: 全球。
-3: 海外。
+   * <p>播放区域，只在 Type=1 时该参数有意义。<br>1: 国内。<br>2: 全球。<br>3: 海外。</p>
    */
   PlayType?: number
   /**
-   * 是否慢直播:
-0: 普通直播。
-1: 慢直播。
+   * <p>是否慢直播:<br>0: 普通直播。<br>1: 慢直播。</p>
    */
   IsDelayLive?: number
   /**
-   * 当前客户使用的 cname 信息。
+   * <p>当前客户使用的 cname 信息。</p>
    */
   CurrentCName?: string
   /**
-   * 失效参数，可忽略。
+   * <p>失效参数，可忽略。</p>
    */
   RentTag?: number
   /**
-   * 失效参数，可忽略。
-注：此字段为北京时间（UTC+8时区）。
+   * <p>失效参数，可忽略。<br>注：此字段为北京时间（UTC+8时区）。</p>
    */
   RentExpireTime?: string
   /**
-   * 0: 标准直播。
-1: 小程序直播。
+   * <p>0: 标准直播。<br>1: 小程序直播。</p>
    */
   IsMiniProgramLive?: number
 }

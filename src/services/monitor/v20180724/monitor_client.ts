@@ -1316,8 +1316,10 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 分页获取产品事件的列表
-   */
+     * 已不再使用
+
+分页获取产品事件的列表
+     */
   async DescribeProductEventList(
     req: DescribeProductEventListRequest,
     cb?: (error: string, rep: DescribeProductEventListResponse) => void

@@ -773,11 +773,11 @@ export interface DeleteDedicatedClustersRequest {
  */
 export interface DeleteDedicatedClusterImageCacheRequest {
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   DedicatedClusterId: string
   /**
-   * 镜像id
+   * <p>镜像id</p>
    */
   ImageId: string
 }

@@ -39,6 +39,7 @@ import {
   StaticInfo,
   DescribeAclRuleRequest,
   ModifyClusterVpcFwSwitchResponse,
+  DescribeOfflineExportTemporaryCredentialsRequest,
   ExpandCfwVerticalRequest,
   SyncFwOperateRequest,
   AddEnterpriseSecurityGroupRulesRequest,
@@ -47,6 +48,7 @@ import {
   ModifyAclRuleResponse,
   CreateNatFwInstanceRequest,
   SecurityGroupSimplifyRule,
+  ClusterFwPreAccessCheckResult,
   DescribeEnterpriseSecurityGroupRuleRequest,
   VpcRuleItem,
   CreateAlertCenterOmitRequest,
@@ -88,7 +90,6 @@ import {
   EnterpriseSecurityGroupRuleRuleInfo,
   UpdateCheckCcnNonDirectFlagResponse,
   DescribeFwSyncStatusRequest,
-  DeleteBlockIgnoreRuleNewRequest,
   DeleteNatFwDnatRuleResponse,
   ModifyVpcAcRuleResponse,
   ModifyBlockIgnoreRuleNewRequest,
@@ -127,9 +128,10 @@ import {
   CreateBlockIgnoreRuleNewRequest,
   DescribeCcnInstanceRegionStatusRequest,
   DescribeNatAcRuleResponse,
+  DeleteVpcFwGroupResponse,
   AddAclRuleRequest,
   DescribeVpcFwGroupSwitchRequest,
-  FilterDataObject,
+  DescribeOfflineExportTemporaryCredentialsResponse,
   ModifyAcRuleResponse,
   DescribeTableStatusResponse,
   BlockIgnoreRule,
@@ -138,9 +140,11 @@ import {
   VpcZoneData,
   DatabaseWhiteListRuleData,
   DescribeTLogInfoResponse,
+  PolicyRoutePreCheckReport,
   NatFwInstance,
   ModifyAllPublicIPSwitchStatusResponse,
   BanAndAllowRuleDel,
+  SecurityGroupRule,
   ModifySecurityGroupItemRuleStatusResponse,
   LogInfo,
   DeleteBlockIgnoreRuleListResponse,
@@ -162,7 +166,7 @@ import {
   ModifyClusterFwBypassResponse,
   AddNatAcRuleRequest,
   ScanInfo,
-  DeleteVpcFwGroupResponse,
+  OfflineExportTask,
   NatFwFilter,
   IpStatic,
   AddEnterpriseSecurityGroupRulesResponse,
@@ -177,7 +181,7 @@ import {
   ModifyIpsModeSwitchResponse,
   DescribeIPStatusListRequest,
   DescribeFwSyncStatusResponse,
-  SearchLogErrors,
+  ModifyAssetSyncRequest,
   DescribeRuleOverviewRequest,
   DescribeVpcFwCcnPolicyWhiteListRequest,
   ModifyEWRuleStatusRequest,
@@ -187,10 +191,11 @@ import {
   ModifyBlockIgnoreRuleResponse,
   DescribeCcnAssociatedInstancesResponse,
   ModifyNatFwReSelectRequest,
+  ModifyFwGroupSwitchResponse,
   SecurityGroupBothWayInfo,
   ModifyAllRuleStatusResponse,
   RemoveAclRuleResponse,
-  ModifyAssetSyncRequest,
+  SearchLogErrors,
   DescAcItem,
   ExpandCfwVerticalResponse,
   DescribeNatAcRuleRequest,
@@ -227,6 +232,7 @@ import {
   DescribeAssociatedInstanceListResponse,
   AssociatedInstanceInfo,
   ModifyNatAcRuleResponse,
+  ExportLogsOfflineResponse,
   ModifyAssetScanRequest,
   VpcFwCvmInsInfo,
   DescribeEnterpriseSGRuleProgressResponse,
@@ -237,10 +243,12 @@ import {
   SgDnsParseCount,
   DescribeClusterNatCcnFwSwitchListRequest,
   DescribeVpcFwCcnPolicyWhiteListResponse,
+  RemoveOfflineExportTaskResponse,
   DeleteRemoteAccessDomainResponse,
   NatCcnSwitchConfig,
   DeleteRemoteAccessDomainRequest,
   DescribeLogStorageStatisticResponse,
+  DescribeOfflineExportTaskRequest,
   DescribeSourceAssetRequest,
   DescribeCfwInsStatusRequest,
   LogItem,
@@ -252,6 +260,7 @@ import {
   DescribeAssetSyncResponse,
   ModifyNatSequenceRulesResponse,
   EndpointInfo,
+  FilterDataObject,
   DescribeNatFwInfoCountResponse,
   ModifyVpcFwGroupRequest,
   ModifyEnterpriseSecurityDispatchStatusResponse,
@@ -265,8 +274,9 @@ import {
   ModifySequenceAclRulesRequest,
   DescribeResourceGroupNewRequest,
   ModifyBlockTopRequest,
+  RemoveOfflineExportTaskRequest,
   DeleteAcRuleResponse,
-  SecurityGroupRule,
+  InstanceInfo,
   ModifyNatFwSwitchResponse,
   FwGroupSwitchShow,
   DescribeBlockByIpTimesListResponse,
@@ -317,6 +327,7 @@ import {
   DescribeCcnVpcFwPolicyLimitResponse,
   ModifySequenceRulesRequest,
   DescribeEnterpriseSecurityGroupRuleResponse,
+  ClusterFwPreAccessCheckStage,
   ModifyNatFwReSelectResponse,
   DescribeVpcAcRuleRequest,
   AddAclRuleResponse,
@@ -342,6 +353,7 @@ import {
   IPDefendStatus,
   CreateAddressTemplateRequest,
   CreateDatabaseWhiteListRulesResponse,
+  ExportLogsOfflineRequest,
   DescribeUnHandleEventTabListResponse,
   SerialRegionInfo,
   DescribeNatFwInstancesInfoResponse,
@@ -351,6 +363,7 @@ import {
   DescribeEnterpriseSecurityGroupRuleListRequest,
   CreateAlertCenterOmitResponse,
   DescribeSerialRegionRequest,
+  DescribeOfflineExportTaskResponse,
   IocListData,
   ModifyEdgeIpSwitchResponse,
   UpdateCheckCcnNonDirectFlagRequest,
@@ -361,10 +374,9 @@ import {
   DescribeDefenseSwitchResponse,
   DescribeAcListsRequest,
   CcnAssociatedInstance,
-  InstanceInfo,
   DeleteAcRuleRequest,
   ModifyNatFwSwitchRequest,
-  ModifyFwGroupSwitchResponse,
+  DeleteBlockIgnoreRuleNewRequest,
   CfwInsStatus,
   RegionFwStatus,
   NatInstanceInfo,
@@ -929,6 +941,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 删除日志离线导出任务
+   */
+  async RemoveOfflineExportTask(
+    req: RemoveOfflineExportTaskRequest,
+    cb?: (error: string, rep: RemoveOfflineExportTaskResponse) => void
+  ): Promise<RemoveOfflineExportTaskResponse> {
+    return this.request("RemoveOfflineExportTask", req, cb)
+  }
+
+  /**
    * 查询NAT边界防火墙开关列表
    */
   async DescribeNatFwSwitch(
@@ -1272,7 +1294,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 日志审计日志查询
+   * 请使用 [日志分析SearchLog接口](https://cloud.tencent.com/document/product/1132/118363)
    */
   async DescribeLogs(
     req: DescribeLogsRequest,
@@ -1415,7 +1437,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
    * 租户日志存储统计
    */
   async DescribeLogStorageStatistic(
-    req?: DescribeLogStorageStatisticRequest,
+    req: DescribeLogStorageStatisticRequest,
     cb?: (error: string, rep: DescribeLogStorageStatisticResponse) => void
   ): Promise<DescribeLogStorageStatisticResponse> {
     return this.request("DescribeLogStorageStatistic", req, cb)
@@ -1442,6 +1464,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 获取日志离线导出任务列表
+   */
+  async DescribeOfflineExportTask(
+    req: DescribeOfflineExportTaskRequest,
+    cb?: (error: string, rep: DescribeOfflineExportTaskResponse) => void
+  ): Promise<DescribeOfflineExportTaskResponse> {
+    return this.request("DescribeOfflineExportTask", req, cb)
+  }
+
+  /**
    * 开启NAT CCN集群模式防火墙开关
    */
   async OpenClusterNatFwSwitch(
@@ -1459,6 +1491,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: DescribeEdgeIpSimpleResponse) => void
   ): Promise<DescribeEdgeIpSimpleResponse> {
     return this.request("DescribeEdgeIpSimple", req, cb)
+  }
+
+  /**
+   * 日志审计日志离线导出
+   */
+  async ExportLogsOffline(
+    req: ExportLogsOfflineRequest,
+    cb?: (error: string, rep: ExportLogsOfflineResponse) => void
+  ): Promise<ExportLogsOfflineResponse> {
+    return this.request("ExportLogsOffline", req, cb)
   }
 
   /**
@@ -1754,6 +1796,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: AddNatAcRuleResponse) => void
   ): Promise<AddNatAcRuleResponse> {
     return this.request("AddNatAcRule", req, cb)
+  }
+
+  /**
+   * 获取日志离线导出任务文件下载临时凭证
+   */
+  async DescribeOfflineExportTemporaryCredentials(
+    req: DescribeOfflineExportTemporaryCredentialsRequest,
+    cb?: (error: string, rep: DescribeOfflineExportTemporaryCredentialsResponse) => void
+  ): Promise<DescribeOfflineExportTemporaryCredentialsResponse> {
+    return this.request("DescribeOfflineExportTemporaryCredentials", req, cb)
   }
 
   /**

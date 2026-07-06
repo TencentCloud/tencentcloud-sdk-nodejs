@@ -136,7 +136,7 @@ export interface UpdateFilesetGeneralConfigResponse {
  */
 export interface CreateDataRepositoryTaskResponse {
   /**
-   * 任务ID
+   * <p>任务ID</p>
    */
   TaskId?: string
   /**
@@ -481,41 +481,55 @@ export interface MountMultipleStorageFileSystemResponse {
  */
 export interface CreateDataRepositoryTaskRequest {
   /**
-   * 数据流通任务类型, FS_TO_COS(文件系统到COS Bucket),或者COS_TO_FS(COS Bucket到文件系统)
+   * <p>数据流通任务类型, FS_TO_COS(文件系统到COS Bucket),或者COS_TO_FS(COS Bucket到文件系统)</p>
    */
   TaskType: string
   /**
-   * COS存储桶名
+   * <p>COS存储桶名</p>
    */
   Bucket: string
   /**
-   * 文件系统ID
+   * <p>文件系统ID</p>
    */
   FileSystemId: string
   /**
-   * 对于FS_TO_COS, TaskPath是Bucket映射目录的相对路径, 对于COS_TO_FS是COS上的路径。如果置为空, 则表示全部数据
+   * <p>对于FS_TO_COS, TaskPath是Bucket映射目录的相对路径, 对于COS_TO_FS是COS上的路径。如果置为空, 则表示全部数据</p>
    */
   TaskPath: string
   /**
-   * 任务名称
+   * <p>任务名称</p>
    */
   TaskName: string
   /**
-   * 数据流通方式 MSP_AFM 手动加载  RAW_AFM 按需加载
+   * <p>任务路径是否表示绝对路径（暂时仅支持沉降使用）</p>
+   */
+  IsTaskPathAbsolute?: boolean
+  /**
+   * <p>数据流通方式 MSP_AFM 手动加载  RAW_AFM 按需加载</p>
    */
   RepositoryType?: string
   /**
-   * 文件列表下载地址，以http开头
+   * <p>文件列表下载地址，以http开头</p>
    */
   TextLocation?: string
   /**
-   * 是否开启自定义路径(暂时仅供预热使用)
+   * <p>是否开启自定义路径(暂时仅供预热使用)</p>
+   * @deprecated
    */
   EnableDataFlowSubPath?: boolean
   /**
-   * 自定义路径(暂时仅供预热使用)
+   * <p>自定义路径(暂时仅供预热使用)</p>
+   * @deprecated
    */
   DataFlowSubPath?: string
+  /**
+   * <p>是否开启自定义目的路径（预热任务表示本地路径，沉降任务表示COS桶前缀）</p>
+   */
+  EnableCustomDestPath?: boolean
+  /**
+   * <p>自定义目的路径（预热任务表示本地路径，沉降任务表示COS桶前缀）</p>
+   */
+  CustomDestPath?: string
 }
 
 /**
@@ -602,33 +616,37 @@ export interface CreateFilesetRequest {
  */
 export interface ClientNodeAttribute {
   /**
-   * 客户端节点IP
+   * <p>客户端节点IP</p>
    */
   ClientNodeIp?: string
   /**
-   * 客户端节点服务状态, Active(运行中), Adding(添加中), Destroying(销毁中), Down(已停止)
+   * <p>客户端节点服务状态, Active(运行中), Adding(添加中), Destroying(销毁中), Down(已停止)</p>
    */
   Status?: string
   /**
-   * 客户端节点类型，extend(扩展节点)，manager(管理节点)
+   * <p>客户端节点类型，extend(扩展节点)，manager(管理节点)</p>
    */
   ClientType?: string
   /**
-   * 节点所属vpcid
+   * <p>节点所属vpcid</p>
    */
   VpcId?: string
   /**
-   * 节点所属子网id
+   * <p>节点所属子网id</p>
    */
   SubnetId?: string
   /**
-   * cvmId
+   * <p>cvmId</p>
    */
   InstanceId?: string
   /**
-   * 自定义挂载点
+   * <p>自定义挂载点</p>
    */
   MountPoint?: string
+  /**
+   * <p>客户端集群id</p>
+   */
+  ClusterId?: string
 }
 
 /**

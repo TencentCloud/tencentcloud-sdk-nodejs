@@ -175,6 +175,7 @@ import {
   TextWatermarkTemplateInputForUpdate,
   SubtitleTransResultItem,
   AiReviewTerrorismOcrTaskInput,
+  AddOnAudio,
   AiRecognitionTaskOcrWordsResultInput,
   SlateInfo,
   CreateQualityControlTemplateResponse,

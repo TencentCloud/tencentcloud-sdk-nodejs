@@ -272,56 +272,49 @@ export interface DeleteNatFwInstanceResponse {
  */
 export interface SearchLogResponse {
   /**
-   * 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时。
-注意：
-* 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context
+   * <p>透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时。<br>注意：</p><ul><li>仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context</li></ul>
    */
   Context?: string
   /**
-   * 符合检索条件的日志是否已全部返回，如未全部返回可使用Context参数获取后续更多日志
-注意：仅当检索分析语句(Query)不包含SQL时有效
+   * <p>符合检索条件的日志是否已全部返回，如未全部返回可使用Context参数获取后续更多日志<br>注意：仅当检索分析语句(Query)不包含SQL时有效</p>
    */
   ListOver?: boolean
   /**
-   * 返回的是否为统计分析（即SQL）结果
+   * <p>返回的是否为统计分析（即SQL）结果</p>
    */
   Analysis?: boolean
   /**
-   * 匹配检索条件的原始日志
+   * <p>匹配检索条件的原始日志</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Results?: Array<LogInfo>
   /**
-   * 日志统计分析结果的列名
-当UseNewAnalysis为false时生效
+   * <p>日志统计分析结果的列名<br>当UseNewAnalysis为false时生效</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ColNames?: Array<string>
   /**
-   * 日志统计分析结果
-当UseNewAnalysis为false时生效
+   * <p>日志统计分析结果<br>当UseNewAnalysis为false时生效</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AnalysisResults?: Array<LogItems>
   /**
-   * 日志统计分析结果
-当UseNewAnalysis为true时生效
+   * <p>日志统计分析结果<br>当UseNewAnalysis为true时生效</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AnalysisRecords?: Array<string>
   /**
-   * 日志统计分析结果的列属性
-当UseNewAnalysis为true时生效
+   * <p>日志统计分析结果的列属性<br>当UseNewAnalysis为true时生效</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Columns?: Array<Column>
   /**
-   * 本次统计分析使用的采样率
+   * <p>本次统计分析使用的采样率</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SamplingRate?: number
   /**
-   * 使用多日志主题检索时，各个日志主题的基本信息，例如报错信息。
+   * <p>使用多日志主题检索时，各个日志主题的基本信息，例如报错信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Topics?: SearchLogTopics
@@ -518,6 +511,16 @@ export interface ModifyClusterVpcFwSwitchResponse {
 }
 
 /**
+ * DescribeOfflineExportTemporaryCredentials请求参数结构体
+ */
+export interface DescribeOfflineExportTemporaryCredentialsRequest {
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId: string
+}
+
+/**
  * ExpandCfwVertical请求参数结构体
  */
 export interface ExpandCfwVerticalRequest {
@@ -570,27 +573,27 @@ export interface SyncFwOperateRequest {
  */
 export interface AddEnterpriseSecurityGroupRulesRequest {
   /**
-   * 创建规则数据
+   * <p>创建规则数据</p>
    */
   Data: Array<SecurityGroupRule>
   /**
-   * 添加类型，0：添加到最后，1：添加到最前；2：中间插入；默认0添加到最后
+   * <p>添加类型，0：添加到最后，1：添加到最前；2：中间插入；默认0添加到最后</p>
    */
   Type?: number
   /**
-   * 保证请求幂等性。从您的客户端生成一个参数值，确保不同请求间该参数值唯一。ClientToken只支持ASCII字符，且不能超过64个字符。
+   * <p>保证请求幂等性。从您的客户端生成一个参数值，确保不同请求间该参数值唯一。ClientToken只支持ASCII字符，且不能超过64个字符。</p>
    */
   ClientToken?: string
   /**
-   * （IsDelay为老版参数，新版无需输入）是否延迟下发，1则延迟下发，否则立即下发
+   * <p>（IsDelay为老版参数，新版无需输入）是否延迟下发，1则延迟下发，否则立即下发</p>
    */
   IsDelay?: number
   /**
-   * 来源 默认空 覆盖导入是 batch_import_cover
+   * <p>来源 默认空 覆盖导入是 batch_import_cover</p>
    */
   From?: string
   /**
-   * 是否复用rule id，1为是，默认不需要
+   * <p>是否复用rule id，1为是，默认不需要</p>
    */
   IsUseId?: number
 }
@@ -723,6 +726,33 @@ region：地域(ap-gaungzhou)
    * 规则生效范围，SG安全组，LH轻量服务器
    */
   Scope?: string
+}
+
+/**
+ * 预接入检查结果，序列化后写入 cfw_gwlb_lead_switch.check_result 列
+ */
+export interface ClusterFwPreAccessCheckResult {
+  /**
+   * 检查状态，0：进行中，1：通过，2：失败
+   */
+  Status?: number
+  /**
+   * 当前/最后所处检查项。Status=1（通过）时为 done，Status=2（失败）时为失败的检查项 key，Status=0（进行中）时为正在执行的检查项 key
+   */
+  CurrentStage?: string
+  /**
+   * 逐条检查项结果列表，按执行顺序追加
+   */
+  Stages?: Array<ClusterFwPreAccessCheckStage>
+  /**
+   * 策略路由配额核算报告，仅在 Status=1（通过）时非空
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PolicyRouteReport?: PolicyRoutePreCheckReport
+  /**
+   * 最近一次更新时间，格式：YYYY-MM-DD HH:MM:SS
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -1144,6 +1174,10 @@ export interface ClusterSwitchDetail {
    * <p>防火墙开关操作时的进度状态：</p><p>// 开启 — 自动模式（3步）<br>&quot;AUTO_OPEN_ORCHESTRATING&quot; // 步骤1: 预编排策略路由<br>&quot;AUTO_OPEN_CREATING_RESOURCES&quot; // 步骤2: 创建引流网络和资源<br>&quot;AUTO_OPEN_PUSHING_ROUTES&quot; // 步骤3: 创建策略路由</p><p>// 开启 — 手动模式（1步）<br>&quot;MANUAL_OPEN_CREATING_RESOURCES&quot; // 步骤1: 创建引流网络和资源</p><p>// 关闭 — 自动模式（2步）<br>&quot;AUTO_CLOSE_DELETING_ROUTES&quot; // 步骤1: 删除策略路由<br>&quot;AUTO_CLOSE_DELETING_RESOURCES&quot; // 步骤2: 删除引流网络和资源<br>// 关闭 — 手动模式（1步）<br>&quot;MANUAL_CLOSE_DELETING_RESOURCES&quot; // 步骤1: 删除引流网络和资源</p><p>// 修改 — 自动模式（3步）<br>&quot;AUTO_MODIFY_ORCHESTRATING&quot; // 步骤1: 预编排策略路由<br>&quot;AUTO_MODIFY_DELETING_ROUTES&quot; // 步骤2: 删除旧策略路由<br>&quot;AUTO_MODIFY_PUSHING_ROUTES&quot; // 步骤3: 创建新策略路由</p><p>// 修改 — 手动模式（1步，仅 VPC 防火墙存在手动模式修改）<br>&quot;MANUAL_MODIFY_UPDATING_RESOURCES&quot; // 步骤1: 更新引流网络和资源</p>
    */
   Progress?: string
+  /**
+   * <p>预检查项的结果</p>
+   */
+  CheckResult?: ClusterFwPreAccessCheckResult
 }
 
 /**
@@ -1161,25 +1195,29 @@ export interface ModifyBlockIgnoreRuleNewResponse {
  */
 export interface ModifyBlockIgnoreListRequest {
   /**
-   * 1封禁列表 2 放通列表
+   * <p>1封禁列表 2 放通列表</p>
    */
   RuleType: number
   /**
-   * IP、Domain二选一（注：封禁列表，只能填写IP），不能同时为空
+   * <p>IP、Domain二选一（注：封禁列表，只能填写IP），不能同时为空</p>
    */
   IOC: Array<IocListData>
   /**
-   * 可选值：delete（删除）、edit（编辑）、add（添加）  其他值无效
+   * <p>可选值：delete（删除）、edit（编辑）、add（添加）  其他值无效</p>
    */
   IocAction: string
   /**
-   * 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填
+   * <p>时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填</p>
    */
   StartTime?: string
   /**
-   * 时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填，必须大于当前时间且大于StartTime
+   * <p>时间格式：yyyy-MM-dd HH:mm:ss，IocAction 为edit或add时必填，必须大于当前时间且大于StartTime</p>
    */
   EndTime?: string
+  /**
+   * <p>是否来自微信</p><p>取值范围：[0, 1]</p>
+   */
+  IsFromWeChat?: number
 }
 
 /**
@@ -1915,9 +1953,7 @@ ANY:表示所有
  */
 export interface UpdateCheckCcnNonDirectFlagResponse {
   /**
-   * 检测更新状态
-"Checked"：重新检测完成
-"Checking": 正在重新检测中，请稍后刷新状态查看
+   * <p>检测更新状态<br>&quot;Checked&quot;：重新检测完成<br>&quot;Checking&quot;: 正在重新检测中，请稍后刷新状态查看</p>
    */
   Message?: string
   /**
@@ -1934,29 +1970,6 @@ export interface DescribeFwSyncStatusRequest {
    * 查询的同步状态类型：Route,同步路由状态
    */
   SyncType?: string
-}
-
-/**
- * DeleteBlockIgnoreRuleNew请求参数结构体
- */
-export interface DeleteBlockIgnoreRuleNewRequest {
-  /**
-   * 是否删除全部
-   */
-  DeleteAll: number
-  /**
-   * blocklist 封禁列表 whitelist 白名单列表
-   */
-  ShowType: string
-  /**
-   * 规则列表
-   */
-  Rules?: Array<BanAndAllowRuleDel>
-  /**
-   * 封禁：1，放通：100，
-主要用于全部删除时区分列表类型
-   */
-  RuleType?: number
 }
 
 /**
@@ -2373,30 +2386,50 @@ export interface DescribeClusterVpcFwSwitchsRequest {
  */
 export interface DescribeSerialRegionResponse {
   /**
-   * 串行地域带宽分配
+   * <p>串行地域带宽分配</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SerialRegionLst?: Array<SerialRegionInfo>
   /**
-   * 剩余可分配通用带宽 单位M
+   * <p>剩余可分配通用带宽 单位M</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UnUsedWidth?: number
   /**
-   * 可配置实例个数
+   * <p>可配置实例个数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UnUsedQuota?: number
   /**
-   * 旁路带宽数据
+   * <p>旁路带宽数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BypassWidth?: number
   /**
-   * 赠送的旁路带宽数据
+   * <p>赠送的旁路带宽数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SendBypassWidth?: number
+  /**
+   * <p>互联网边界防火墙总带宽</p>
+   */
+  EdgeWidth?: number
+  /**
+   * <p>互联网边界弹性开关</p>
+   */
+  EdgeElasticSwitch?: number
+  /**
+   * <p>互联网边界弹性带宽值</p>
+   */
+  EdgeElasticBandwidth?: number
+  /**
+   * <p>互联网边界弹性带宽上限</p>
+   */
+  EdgeElasticBandwidthLimit?: number
+  /**
+   * <p>互联网边界防火墙计量开关</p><p>枚举值：</p><ul><li>0： 关闭</li><li>1： 打开</li></ul>
+   */
+  EdgeElasticTrafficSwitch?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2663,6 +2696,16 @@ export interface DescribeNatAcRuleResponse {
 }
 
 /**
+ * DeleteVpcFwGroup返回参数结构体
+ */
+export interface DeleteVpcFwGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddAclRule请求参数结构体
  */
 export interface AddAclRuleRequest {
@@ -2711,19 +2754,21 @@ export interface DescribeVpcFwGroupSwitchRequest {
 }
 
 /**
- * 查询下拉选择选项数据
+ * DescribeOfflineExportTemporaryCredentials返回参数结构体
  */
-export interface FilterDataObject {
+export interface DescribeOfflineExportTemporaryCredentialsResponse {
   /**
-   * 显示名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>返回状态码 0 成功 非0不成功</p>
    */
-  Text?: string
+  ReturnCode?: number
   /**
-   * 实际值
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>返回信息  success 成功 其他 不成功</p>
    */
-  Value?: string
+  ReturnMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3000,6 +3045,44 @@ export interface DescribeTLogInfoResponse {
 }
 
 /**
+ * 策略路由预编排配额报告
+ */
+export interface PolicyRoutePreCheckReport {
+  /**
+   * 本次编排生成的下一跳数量
+   */
+  NextHopCount?: number
+  /**
+   * 下一跳上限
+   */
+  NextHopLimit?: number
+  /**
+   * 本次编排生成的匹配规则数
+   */
+  MatchRuleCount?: number
+  /**
+   * 匹配规则上限
+   */
+  MatchRuleLimit?: number
+  /**
+   * 云上已有匹配规则数（其他防火墙类型占用）
+   */
+  CloudExistingRuleCount?: number
+  /**
+   * 云上已有下一跳数（其他防火墙类型占用）
+   */
+  CloudExistingNextHopCount?: number
+  /**
+   * 可用匹配规则配额 = MatchRuleLimit - CloudExistingRuleCount - MatchRuleCount
+   */
+  AvailableRuleQuota?: number
+  /**
+   * 可用下一跳配额 = NextHopLimit - CloudExistingNextHopCount - NextHopCount
+   */
+  AvailableNextHopQuota?: number
+}
+
+/**
  * Nat实例类型
  */
 export interface NatFwInstance {
@@ -3064,6 +3147,85 @@ export interface BanAndAllowRuleDel {
 RuleType: 1黑名单 2外部IP 3域名 4情报 5资产 6自定义规则  7入侵防御规则
    */
   RuleType?: number
+}
+
+/**
+ * 安全组规则
+ */
+export interface SecurityGroupRule {
+  /**
+   * 访问源示例：
+net：IP/CIDR(192.168.0.2)
+template：参数模板id(ipm-dyodhpby)
+instance：资产实例id(ins-123456)
+resourcegroup：资产分组id(cfwrg-xxxx)
+tag：资源标签({\"Key\":\"标签key值\",\"Value\":\"标签Value值\"})
+region：地域(ap-gaungzhou)
+   */
+  SourceContent: string
+  /**
+   * 访问源类型，类型可以为以下6种：net|template|instance|resourcegroup|tag|region
+   */
+  SourceType: string
+  /**
+   * 访问目的示例：
+net：IP/CIDR(192.168.0.2)
+template：参数模板id(ipm-dyodhpby)
+instance：资产实例id(ins-123456)
+resourcegroup：资产分组id(cfwrg-xxxx)
+tag：资源标签({\"Key\":\"标签key值\",\"Value\":\"标签Value值\"})
+region：地域(ap-gaungzhou)
+   */
+  DestContent: string
+  /**
+   * 访问目的类型，类型可以为以下6种：net|template|instance|resourcegroup|tag|region
+   */
+  DestType: string
+  /**
+   * 访问控制策略中设置的流量通过云防火墙的方式。取值：
+accept：放行
+drop：拒绝
+   */
+  RuleAction: string
+  /**
+   * 规则描述 用于规则使用或者场景的描述，最多支持50个字符
+   */
+  Description: string
+  /**
+   * 规则顺序，-1表示最低，1表示最高，请勿和外层Type冲突（和外层的Type配合使用，当中间插入时，指定添加位置）
+   */
+  OrderIndex: string
+  /**
+   * 协议；TCP/UDP/ICMP/ICMPv6/ANY
+   */
+  Protocol?: string
+  /**
+   * 访问控制策略的端口。取值：
+-1/-1：全部端口
+80：80端口
+   */
+  Port?: string
+  /**
+   * 端口协议类型参数模板id；协议端口模板id；与Protocol,Port互斥
+   */
+  ServiceTemplateId?: string
+  /**
+   * （入参时无需填写，自动生成）规则对应的唯一id
+   */
+  Id?: string
+  /**
+   * （入参时Enable无意义；由通用配置中新增规则启用状态控制）
+规则状态，true表示启用，false表示禁用
+   */
+  Enable?: string
+  /**
+   * 规则对应的唯一内部id
+   */
+  Uid?: string
+  /**
+   * 规则生效范围，SG安全组，LH轻量服务器
+   */
+  Scope?: string
 }
 
 /**
@@ -3566,13 +3728,47 @@ export interface ScanInfo {
 }
 
 /**
- * DeleteVpcFwGroup返回参数结构体
+ * 离线导出任务
  */
-export interface DeleteVpcFwGroupResponse {
+export interface OfflineExportTask {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 任务ID
    */
-  RequestId?: string
+  TaskId?: string
+  /**
+   * 任务名称
+   */
+  TaskName?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 日志总数
+   */
+  DataLength?: number
+  /**
+   * 任务状态，0等待下载，1下载中，2下载完成，3下载失败，4文件过期
+   */
+  Status?: number
+  /**
+   * 文件过期时间
+   */
+  ExpireTime?: string
+  /**
+   * 下载进度
+   */
+  Progress?: number
+  /**
+   * 导出失败信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: string
+  /**
+   * 是否使用Cos
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UseUserCos?: number
 }
 
 /**
@@ -3608,11 +3804,11 @@ export interface IpStatic {
  */
 export interface AddEnterpriseSecurityGroupRulesResponse {
   /**
-   * 状态值，0：添加成功，非0：添加失败
+   * <p>状态值，0：添加成功，非0：添加失败</p>
    */
   Status?: number
   /**
-   * 添加成功的规则详情
+   * <p>添加成功的规则详情</p>
    */
   Rules?: Array<SecurityGroupSimplifyRule>
   /**
@@ -3801,25 +3997,9 @@ export interface DescribeFwSyncStatusResponse {
 }
 
 /**
- * 多日志主题检索错误信息
+ * ModifyAssetSync请求参数结构体
  */
-export interface SearchLogErrors {
-  /**
-   * 日志主题ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TopicId?: string
-  /**
-   * 错误信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrorMsg?: string
-  /**
-   * 错误码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrorCodeStr?: string
-}
+export type ModifyAssetSyncRequest = null
 
 /**
  * DescribeRuleOverview请求参数结构体
@@ -3967,6 +4147,16 @@ export interface ModifyNatFwReSelectRequest {
 }
 
 /**
+ * ModifyFwGroupSwitch返回参数结构体
+ */
+export interface ModifyFwGroupSwitchResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 双向下发的企业安全组规则
  */
 export interface SecurityGroupBothWayInfo {
@@ -4093,9 +4283,25 @@ export interface RemoveAclRuleResponse {
 }
 
 /**
- * ModifyAssetSync请求参数结构体
+ * 多日志主题检索错误信息
  */
-export type ModifyAssetSyncRequest = null
+export interface SearchLogErrors {
+  /**
+   * 日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicId?: string
+  /**
+   * 错误信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMsg?: string
+  /**
+   * 错误码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorCodeStr?: string
+}
 
 /**
  * 访问控制列表对象
@@ -5140,6 +5346,24 @@ export interface ModifyNatAcRuleResponse {
 }
 
 /**
+ * ExportLogsOffline返回参数结构体
+ */
+export interface ExportLogsOfflineResponse {
+  /**
+   * <p>返回状态码 0 成功 非0不成功</p>
+   */
+  ReturnCode?: number
+  /**
+   * <p>返回信息  success 成功 其他 不成功</p>
+   */
+  ReturnMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAssetScan请求参数结构体
  */
 export interface ModifyAssetScanRequest {
@@ -5427,6 +5651,24 @@ export interface DescribeVpcFwCcnPolicyWhiteListResponse {
 }
 
 /**
+ * RemoveOfflineExportTask返回参数结构体
+ */
+export interface RemoveOfflineExportTaskResponse {
+  /**
+   * 返回状态码 0 成功 非0不成功
+   */
+  ReturnCode?: number
+  /**
+   * 返回信息  success 成功 其他 不成功
+   */
+  ReturnMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteRemoteAccessDomain返回参数结构体
  */
 export interface DeleteRemoteAccessDomainResponse {
@@ -5485,77 +5727,95 @@ export interface DeleteRemoteAccessDomainRequest {
  */
 export interface DescribeLogStorageStatisticResponse {
   /**
-   * 返回状态码 0 成功 非0不成功
+   * <p>返回状态码 0 成功 非0不成功</p>
    */
   ReturnCode?: number
   /**
-   * 返回信息  success 成功 其他 不成功
+   * <p>返回信息  success 成功 其他 不成功</p>
    */
   ReturnMsg?: string
   /**
-   * 已使用存储量，单位B
+   * <p>已使用存储量，单位B</p>
    */
   UsedSize?: number
   /**
-   * 配额存储总量，单位B
+   * <p>配额存储总量，单位B</p>
    */
   TotalSize?: number
   /**
-   * 存储天数
+   * <p>存储天数</p>
    */
   StorageDay?: number
   /**
-   * 访问控制日志存储量，单位B
+   * <p>访问控制日志存储量，单位B</p>
    */
   AclSize?: number
   /**
-   * 入侵防御日志存储量，单位B
+   * <p>入侵防御日志存储量，单位B</p>
    */
   IdsSize?: number
   /**
-   * 流量日志存储量，单位B
+   * <p>流量日志存储量，单位B</p>
    */
   NetFlowSize?: number
   /**
-   * 操作日志存储量，单位B
+   * <p>操作日志存储量，单位B</p>
    */
   OperateSize?: number
   /**
-   * 剩余存储量，单位B
+   * <p>剩余存储量，单位B</p>
    */
   LeftSize?: number
   /**
-   * 计费模式，0后付费，1预付费
+   * <p>计费模式，0后付费，1预付费</p>
    */
   PayMode?: number
   /**
-   * 每日增加日志存储量柱状图
+   * <p>每日增加日志存储量柱状图</p>
    */
   TimeHistogram?: Array<StorageHistogram>
   /**
-   * 柱形图格式数据
+   * <p>柱形图格式数据</p>
    */
   TimeHistogramShow?: StorageHistogramShow
   /**
-   * 后付费模式存储状态，0正常，1欠费停止写入
+   * <p>后付费模式存储状态，0正常，1欠费停止写入</p>
    */
   ArrearsStopWriting?: number
   /**
-   * NDR流量日志存储量，单位B
+   * <p>NDR流量日志存储量，单位B</p>
    */
   NDRNetFlowSize?: number
   /**
-   * NDR风险日志存储量，单位B
+   * <p>NDR风险日志存储量，单位B</p>
    */
   NDRRiskSize?: number
   /**
-   * NDR日志存储天数
+   * <p>NDR日志存储天数</p>
    */
   NDRStorageDay?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeOfflineExportTask请求参数结构体
+ */
+export interface DescribeOfflineExportTaskRequest {
+  /**
+   * <p>分页参数</p>
+   */
+  Limit: number
+  /**
+   * <p>分页参数</p>
+   */
+  Offset: number
+  /**
+   * <p>任务ID/任务名称</p>
+   */
+  TaskName?: string
 }
 
 /**
@@ -5687,7 +5947,16 @@ export interface IntrusionDefenseRule {
 /**
  * DescribeLogStorageStatistic请求参数结构体
  */
-export type DescribeLogStorageStatisticRequest = null
+export interface DescribeLogStorageStatisticRequest {
+  /**
+   * <p>开始时间</p><p>参数格式：2026-07-01 15:02:01</p>
+   */
+  StartTime?: string
+  /**
+   * <p>结束时间</p><p>参数格式：2026-07-01 15:02:01</p>
+   */
+  EndTime?: string
+}
 
 /**
  * DescribeFwGroupInstanceInfo返回参数结构体
@@ -5765,6 +6034,22 @@ export interface EndpointInfo {
    * 引流Vpc的Cidr
    */
   VpcCidr?: string
+}
+
+/**
+ * 查询下拉选择选项数据
+ */
+export interface FilterDataObject {
+  /**
+   * 显示名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text?: string
+  /**
+   * 实际值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
 }
 
 /**
@@ -5982,6 +6267,20 @@ export interface ModifyBlockTopRequest {
 }
 
 /**
+ * RemoveOfflineExportTask请求参数结构体
+ */
+export interface RemoveOfflineExportTaskRequest {
+  /**
+   * 任务ID
+   */
+  TaskId: string
+  /**
+   * 是否保留文件，1保留，非1删除
+   */
+  KeepFile?: number
+}
+
+/**
  * DeleteAcRule返回参数结构体
  */
 export interface DeleteAcRuleResponse {
@@ -6000,82 +6299,75 @@ export interface DeleteAcRuleResponse {
 }
 
 /**
- * 安全组规则
+ * 实例详情结果
  */
-export interface SecurityGroupRule {
+export interface InstanceInfo {
   /**
-   * 访问源示例：
-net：IP/CIDR(192.168.0.2)
-template：参数模板id(ipm-dyodhpby)
-instance：资产实例id(ins-123456)
-resourcegroup：资产分组id(cfwrg-xxxx)
-tag：资源标签({\"Key\":\"标签key值\",\"Value\":\"标签Value值\"})
-region：地域(ap-gaungzhou)
+   * appid信息
    */
-  SourceContent: string
+  AppId?: string
   /**
-   * 访问源类型，类型可以为以下6种：net|template|instance|resourcegroup|tag|region
+   * 资产来源
+1公网 2内网
    */
-  SourceType: string
+  InsSource?: string
   /**
-   * 访问目的示例：
-net：IP/CIDR(192.168.0.2)
-template：参数模板id(ipm-dyodhpby)
-instance：资产实例id(ins-123456)
-resourcegroup：资产分组id(cfwrg-xxxx)
-tag：资源标签({\"Key\":\"标签key值\",\"Value\":\"标签Value值\"})
-region：地域(ap-gaungzhou)
+   * 资产类型
+ 3是cvm实例,4是clb实例,5是eni实例,6是mysql,7是redis,8是NAT,9是VPN,10是ES,11是MARIADB,12是KAFKA 13 NATFW
    */
-  DestContent: string
+  InsType?: number
   /**
-   * 访问目的类型，类型可以为以下6种：net|template|instance|resourcegroup|tag|region
+   * 资产id
    */
-  DestType: string
+  InstanceId?: string
   /**
-   * 访问控制策略中设置的流量通过云防火墙的方式。取值：
-accept：放行
-drop：拒绝
+   * 资产名
    */
-  RuleAction: string
+  InstanceName?: string
   /**
-   * 规则描述 用于规则使用或者场景的描述，最多支持50个字符
+   * 漏洞数
    */
-  Description: string
+  LeakNum?: string
   /**
-   * 规则顺序，-1表示最低，1表示最高，请勿和外层Type冲突（和外层的Type配合使用，当中间插入时，指定添加位置）
+   * 端口数
    */
-  OrderIndex: string
+  PortNum?: string
   /**
-   * 协议；TCP/UDP/ICMP/ICMPv6/ANY
+   * 内网ip
    */
-  Protocol?: string
+  PrivateIp?: string
   /**
-   * 访问控制策略的端口。取值：
--1/-1：全部端口
-80：80端口
+   * 公网ip
    */
-  Port?: string
+  PublicIp?: string
   /**
-   * 端口协议类型参数模板id；协议端口模板id；与Protocol,Port互斥
+   * 地域
    */
-  ServiceTemplateId?: string
+  Region?: string
   /**
-   * （入参时无需填写，自动生成）规则对应的唯一id
+   * 地域
    */
-  Id?: string
+  RegionKey?: string
   /**
-   * （入参时Enable无意义；由通用配置中新增规则启用状态控制）
-规则状态，true表示启用，false表示禁用
+   * 资产路径
    */
-  Enable?: string
+  ResourcePath?: Array<string>
   /**
-   * 规则对应的唯一内部id
+   * 扫描结果
    */
-  Uid?: string
+  Server?: Array<string>
   /**
-   * 规则生效范围，SG安全组，LH轻量服务器
+   * 子网id
    */
-  Scope?: string
+  SubnetId?: string
+  /**
+   * vpc名称
+   */
+  VPCName?: string
+  /**
+   * vpcid信息
+   */
+  VpcId?: string
 }
 
 /**
@@ -6645,6 +6937,10 @@ export interface NatFwSwitchDetailS {
    * <p>防火墙开关操作时的进度状态：</p><p>// 开启 — 自动模式（3步）<br>&quot;AUTO_OPEN_ORCHESTRATING&quot;      // 步骤1: 预编排策略路由<br>&quot;AUTO_OPEN_CREATING_RESOURCES&quot; // 步骤2: 创建引流网络和资源<br>&quot;AUTO_OPEN_PUSHING_ROUTES&quot;     // 步骤3: 创建策略路由</p><p>// 开启 — 手动模式（1步）<br>&quot;MANUAL_OPEN_CREATING_RESOURCES&quot; // 步骤1: 创建引流网络和资源</p><p>// 关闭 — 自动模式（2步）<br>&quot;AUTO_CLOSE_DELETING_ROUTES&quot;    // 步骤1: 删除策略路由<br>&quot;AUTO_CLOSE_DELETING_RESOURCES&quot; // 步骤2: 删除引流网络和资源<br>// 关闭 — 手动模式（1步）<br>&quot;MANUAL_CLOSE_DELETING_RESOURCES&quot; // 步骤1: 删除引流网络和资源</p><p>// 修改 — 自动模式（3步）<br>&quot;AUTO_MODIFY_ORCHESTRATING&quot;   // 步骤1: 预编排策略路由<br>&quot;AUTO_MODIFY_DELETING_ROUTES&quot; // 步骤2: 删除旧策略路由<br>&quot;AUTO_MODIFY_PUSHING_ROUTES&quot;  // 步骤3: 创建新策略路由</p><p>// 修改 — 手动模式（1步，仅 VPC 防火墙存在手动模式修改）<br>&quot;MANUAL_MODIFY_UPDATING_RESOURCES&quot; // 步骤1: 更新引流网络和资源</p>
    */
   Progress?: string
+  /**
+   * <p>预接入检查结果</p>
+   */
+  CheckResult?: ClusterFwPreAccessCheckResult
 }
 
 /**
@@ -6968,7 +7264,7 @@ export interface CloseClusterNatFwSwitchRequest {
  */
 export interface ModifyClusterNatFwSwitchRequest {
   /**
-   * NAT CCN防火墙开关配置
+   * <p>NAT CCN防火墙开关配置</p>
    */
   NatCcnSwitch: NatCcnSwitchConfig
 }
@@ -7113,7 +7409,7 @@ export interface CfwNatDnatRule {
  */
 export interface UpdateClusterVpcFwRequest {
   /**
-   * ccn防火墙开关配置信息
+   * <p>ccn防火墙开关配置信息</p>
    */
   CcnSwitch: CcnSwitchInfo
 }
@@ -7169,11 +7465,11 @@ export interface ModifyNatInstanceRequest {
  */
 export interface ModifyBlockIgnoreListResponse {
   /**
-   * 接口返回信息
+   * <p>接口返回信息</p>
    */
   ReturnMsg?: string
   /**
-   * 接口返回错误码，0请求成功  非0失败
+   * <p>接口返回错误码，0请求成功  非0失败</p>
    */
   ReturnCode?: number
   /**
@@ -7272,6 +7568,28 @@ export interface DescribeEnterpriseSecurityGroupRuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 单个阶段的实时检查状态
+ */
+export interface ClusterFwPreAccessCheckStage {
+  /**
+   * 检查项 key，与发起检查接口返回的 CheckItems[].Stage 一一对应
+   */
+  Stage?: string
+  /**
+   * 该检查项状态，0：进行中，1：通过，2：失败
+   */
+  Status?: number
+  /**
+   * 失败时的错误码（仅 Status=2 时有值）
+   */
+  ErrorCode?: string
+  /**
+   * 失败时的具体错误信息（仅 Status=2 时有值）
+   */
+  ErrorMessage?: string
 }
 
 /**
@@ -8055,6 +8373,68 @@ export interface CreateDatabaseWhiteListRulesResponse {
 }
 
 /**
+ * ExportLogsOffline请求参数结构体
+ */
+export interface ExportLogsOfflineRequest {
+  /**
+   * <p>日志类型标识</p><p>枚举值：</p><ul><li>cfw_netflow_border： 流量日志-互联网边界</li><li>cfw_netflow_vpc： 流量日志-VPC边界</li><li>cfw_netflow_nat： 流量日志-NAT边界</li><li>cfw_rule_acl： 访问控制-互联网边界</li><li>cfw_rule_vpc_acl： 访问控制-VPC边界</li><li>cfw_rule_nat_acl： 访问控制-NAT边界</li><li>cfw_rule_threatinfo： 入侵防御-入侵防御</li><li>cfw_netflow_nta： 全流量检测与响应-流量分析</li><li>cfw_ndr_subject_risk： 全流量检测与响应-流量风险</li><li>cfw_ndr_ai_audit： 全流量检测与响应-AI流量风险</li><li>operate_log_all： 操作日志</li></ul>
+   */
+  Index: string
+  /**
+   * <p>筛选开始时间</p>
+   */
+  StartTime: string
+  /**
+   * <p>筛选结束时间</p>
+   */
+  EndTime: string
+  /**
+   * <p>任务名称</p>
+   */
+  TaskName: string
+  /**
+   * <p>数据格式</p><p>枚举值：</p><ul><li>.json： JSON格式</li><li>.csv： CSV格式</li></ul>
+   */
+  DataFormat: string
+  /**
+   * <p>压缩方式，.zip、.tar.gz、.tar.zst、.tar.lz4、传空不压缩</p>
+   */
+  CompressionFormat: string
+  /**
+   * <p>日志排序，desc时间降序，asc时间升序</p>
+   */
+  Order: string
+  /**
+   * <p>日志数量，传0按单次上限导出</p>
+   */
+  Length: number
+  /**
+   * <p>过滤条件组合</p>
+   */
+  Filters?: Array<CommonFilter>
+  /**
+   * <p>COS存储桶名称</p>
+   */
+  BucketName?: string
+  /**
+   * <p>COS存储桶地域</p>
+   */
+  BucketRegion?: string
+  /**
+   * <p>文件过期时长，1一天，7七天，-1永久</p>
+   */
+  StorageDays?: number
+  /**
+   * <p>日志分析查询语句，Query和Filters不能同时使用，在一次请求中有且只能选择一个</p>
+   */
+  Query?: string
+  /**
+   * <p>导出任务类型，LogAnalysis日志分析导出，LogSearch日志审计导出</p>
+   */
+  TaskType?: string
+}
+
+/**
  * DescribeUnHandleEventTabList返回参数结构体
  */
 export interface DescribeUnHandleEventTabListResponse {
@@ -8272,6 +8652,44 @@ success 成功
 export type DescribeSerialRegionRequest = null
 
 /**
+ * DescribeOfflineExportTask返回参数结构体
+ */
+export interface DescribeOfflineExportTaskResponse {
+  /**
+   * <p>返回状态码 0 成功 非0不成功</p>
+   */
+  ReturnCode?: number
+  /**
+   * <p>返回信息  success 成功 其他 不成功</p>
+   */
+  ReturnMsg?: string
+  /**
+   * <p>离线导出任务列表</p>
+   */
+  Data?: Array<OfflineExportTask>
+  /**
+   * <p>任务数量</p>
+   */
+  Total?: number
+  /**
+   * <p>剩余导出文件配额，单位B</p>
+   */
+  ExportRemainQuota?: number
+  /**
+   * <p>导出文件配额，单位B</p>
+   */
+  ExportQuota?: number
+  /**
+   * <p>导出数据限制</p>
+   */
+  ExportLimit?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 封禁放通IOC列表
  */
 export interface IocListData {
@@ -8304,7 +8722,7 @@ export interface ModifyEdgeIpSwitchResponse {
  */
 export interface UpdateCheckCcnNonDirectFlagRequest {
   /**
-   * 云联网ID
+   * <p>云联网ID</p>
    */
   CcnId: string
 }
@@ -8477,78 +8895,6 @@ export interface CcnAssociatedInstance {
 }
 
 /**
- * 实例详情结果
- */
-export interface InstanceInfo {
-  /**
-   * appid信息
-   */
-  AppId?: string
-  /**
-   * 资产来源
-1公网 2内网
-   */
-  InsSource?: string
-  /**
-   * 资产类型
- 3是cvm实例,4是clb实例,5是eni实例,6是mysql,7是redis,8是NAT,9是VPN,10是ES,11是MARIADB,12是KAFKA 13 NATFW
-   */
-  InsType?: number
-  /**
-   * 资产id
-   */
-  InstanceId?: string
-  /**
-   * 资产名
-   */
-  InstanceName?: string
-  /**
-   * 漏洞数
-   */
-  LeakNum?: string
-  /**
-   * 端口数
-   */
-  PortNum?: string
-  /**
-   * 内网ip
-   */
-  PrivateIp?: string
-  /**
-   * 公网ip
-   */
-  PublicIp?: string
-  /**
-   * 地域
-   */
-  Region?: string
-  /**
-   * 地域
-   */
-  RegionKey?: string
-  /**
-   * 资产路径
-   */
-  ResourcePath?: Array<string>
-  /**
-   * 扫描结果
-   */
-  Server?: Array<string>
-  /**
-   * 子网id
-   */
-  SubnetId?: string
-  /**
-   * vpc名称
-   */
-  VPCName?: string
-  /**
-   * vpcid信息
-   */
-  VpcId?: string
-}
-
-/**
  * DeleteAcRule请求参数结构体
  */
 export interface DeleteAcRuleRequest {
@@ -8593,13 +8939,26 @@ export interface ModifyNatFwSwitchRequest {
 }
 
 /**
- * ModifyFwGroupSwitch返回参数结构体
+ * DeleteBlockIgnoreRuleNew请求参数结构体
  */
-export interface ModifyFwGroupSwitchResponse {
+export interface DeleteBlockIgnoreRuleNewRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 是否删除全部
    */
-  RequestId?: string
+  DeleteAll: number
+  /**
+   * blocklist 封禁列表 whitelist 白名单列表
+   */
+  ShowType: string
+  /**
+   * 规则列表
+   */
+  Rules?: Array<BanAndAllowRuleDel>
+  /**
+   * 封禁：1，放通：100，
+主要用于全部删除时区分列表类型
+   */
+  RuleType?: number
 }
 
 /**
@@ -9220,104 +9579,51 @@ export interface DeleteResourceGroupResponse {
  */
 export interface SearchLogRequest {
   /**
-   * 要检索分析的日志的起始时间，Unix时间戳（毫秒）
+   * <p>要检索分析的日志的起始时间，Unix时间戳（毫秒）</p>
    */
   From: number
   /**
-   * 要检索分析的日志的结束时间，Unix时间戳（毫秒）
+   * <p>要检索分析的日志的结束时间，Unix时间戳（毫秒）</p>
    */
   To: number
   /**
-   * 检索分析语句，最大长度为12KB
-语句由 <a href="https://cloud.tencent.com/document/product/614/47044" target="_blank">[检索条件]</a> | <a href="https://cloud.tencent.com/document/product/614/44061" target="_blank">[SQL语句]</a>构成，无需对日志进行统计分析时，可省略其中的管道符<code> | </code>及SQL语句
-使用*或空字符串可查询所有日志
+   * <p>检索分析语句，最大长度为12KB<br>语句由 <a href="https://cloud.tencent.com/document/product/614/47044" target="_blank">[检索条件]</a> | <a href="https://cloud.tencent.com/document/product/614/44061" target="_blank">[SQL语句]</a>构成，无需对日志进行统计分析时，可省略其中的管道符<code> | </code>及SQL语句<br>使用*或空字符串可查询所有日志</p>
    */
   Query: string
   /**
-   * 检索语法规则，默认值为0，推荐使用1 。
-
-- 0：Lucene语法
-- 1：CQL语法（日志服务专用检索语法，控制台默认也使用该语法规则）。
-
-详细说明参见<a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules" target="_blank">检索条件语法规则</a>
+   * <p>检索语法规则，默认值为0，推荐使用1 。</p><ul><li>0：Lucene语法</li><li>1：CQL语法（日志服务专用检索语法，控制台默认也使用该语法规则）。</li></ul><p>详细说明参见<a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules" target="_blank">检索条件语法规则</a></p>
    */
   SyntaxRule?: number
   /**
-   * - 要检索分析的日志主题ID，仅能指定一个日志主题。
-- 如需同时检索多个日志主题，请使用Topics参数。
-- TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。
-各日志主题ID如下
-访问控制-互联网边界 cfw_rule_acl
-访问控制-NAT边界 cfw_rule_nat_acl
-访问控制-VPC边界 cfw_rule_vpc_acl
-访问控制-DNS开关 cfw_rule_dns_acl
-入侵防御 cfw_rule_threatinfo
-全流量检测与响应日志-流量分析 cfw_netflow_nta
-全流量检测与响应日志-流量告警 cfw_rule_ndr_threatinfo
-零信任运维-数据库登录 cfw_operate_db
-零信任运维-服务器访问 operate_remote_om
-零信任运维-Web服务访问 operate_web_access
-零信任运维-行为审计 remoteom_commands
-流量日志-互联网边界 cfw_netflow_border
-流量日志-NAT边界 cfw_netflow_nat
-流量日志-VPC边界 cfw_netflow_vpc
-流量日志-DNS开关 cfw_netflow_dns
-流量日志-内网流量 cfw_netflow_fl
-操作日志 operate_log_all
+   * <ul><li>要检索分析的日志主题ID，仅能指定一个日志主题。</li><li>如需同时检索多个日志主题，请使用Topics参数。</li><li>TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。<br>各日志主题ID如下<br>访问控制-互联网边界 cfw_rule_acl<br>访问控制-NAT边界 cfw_rule_nat_acl<br>访问控制-VPC边界 cfw_rule_vpc_acl<br>访问控制-DNS开关 cfw_rule_dns_acl<br>入侵防御 cfw_rule_threatinfo<br>全流量检测与响应日志-流量分析 cfw_netflow_nta<br>全流量检测与响应日志-流量告警 cfw_rule_ndr_threatinfo<br>零信任运维-数据库登录 cfw_operate_db<br>零信任运维-服务器访问 operate_remote_om<br>零信任运维-Web服务访问 operate_web_access<br>零信任运维-行为审计 remoteom_commands<br>流量日志-互联网边界 cfw_netflow_border<br>流量日志-NAT边界 cfw_netflow_nat<br>流量日志-VPC边界 cfw_netflow_vpc<br>流量日志-DNS开关 cfw_netflow_dns<br>流量日志-内网流量 cfw_netflow_fl<br>操作日志 operate_log_all</li></ul>
    */
   TopicId?: string
   /**
-   * - 要检索分析的日志主题列表，最大支持50个日志主题。
-- 检索单个日志主题时请使用TopicId。
-- TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。
+   * <ul><li>要检索分析的日志主题列表，最大支持50个日志主题。</li><li>检索单个日志主题时请使用TopicId。</li><li>TopicId 和 Topics 不能同时使用，在一次请求中有且只能选择一个。</li></ul>
    */
   Topics?: Array<MultiTopicSearchInformation>
   /**
-   * 原始日志是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
-注意：
-* 仅当检索分析语句(Query)不包含SQL时有效
-* SQL结果排序方式参考<a href="https://cloud.tencent.com/document/product/614/58978" target="_blank">SQL ORDER BY语法</a>
+   * <p>原始日志是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc<br>注意：</p><ul><li>仅当检索分析语句(Query)不包含SQL时有效</li><li>SQL结果排序方式参考<a href="https://cloud.tencent.com/document/product/614/58978" target="_blank">SQL ORDER BY语法</a></li></ul>
    */
   Sort?: string
   /**
-   * 表示单次查询返回的原始日志条数，默认为100，最大值为1000。
-注意：
-* 仅当检索分析语句(Query)不包含SQL时有效
-* SQL结果条数指定方式参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a>
-
-可通过两种方式获取后续更多日志：
-* Context:透传上次接口返回的Context值，获取后续更多日志，总计最多可获取1万条原始日志
-* Offset:偏移量，表示从第几行开始返回原始日志，无日志条数限制
+   * <p>表示单次查询返回的原始日志条数，默认为100，最大值为1000。<br>注意：</p><ul><li>仅当检索分析语句(Query)不包含SQL时有效</li><li>SQL结果条数指定方式参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a></li></ul><p>可通过两种方式获取后续更多日志：</p><ul><li>Context:透传上次接口返回的Context值，获取后续更多日志，总计最多可获取1万条原始日志</li><li>Offset:偏移量，表示从第几行开始返回原始日志，无日志条数限制</li></ul>
    */
   Limit?: number
   /**
-   * 查询原始日志的偏移量，表示从第几行开始返回原始日志，默认为0。 
-注意：
-* 仅当检索分析语句(Query)不包含SQL时有效
-* 不能与Context参数同时使用
-* 仅适用于单日志主题检索
+   * <p>查询原始日志的偏移量，表示从第几行开始返回原始日志，默认为0。<br>注意：</p><ul><li>仅当检索分析语句(Query)不包含SQL时有效</li><li>不能与Context参数同时使用</li><li>仅适用于单日志主题检索</li></ul>
    */
   Offset?: number
   /**
-   * 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时。
-注意：
-* 透传该参数时，请勿修改除该参数外的其它参数
-* 仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context
-* 仅当检索分析语句(Query)不包含SQL时有效，SQL获取后续结果参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a>
+   * <p>透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时。<br>注意：</p><ul><li>透传该参数时，请勿修改除该参数外的其它参数</li><li>仅适用于单日志主题检索，检索多个日志主题时，请使用Topics中的Context</li><li>仅当检索分析语句(Query)不包含SQL时有效，SQL获取后续结果参考<a href="https://cloud.tencent.com/document/product/614/58977" target="_blank">SQL LIMIT语法</a></li></ul>
    */
   Context?: string
   /**
-   * 执行统计分析（Query中包含SQL）时，是否对原始日志先进行采样，再进行统计分析。
-0：自动采样;
-0～1：按指定采样率采样，例如0.02;
-1：不采样，即精确分析
-默认值为1
+   * <p>执行统计分析（Query中包含SQL）时，是否对原始日志先进行采样，再进行统计分析。<br>0：自动采样;<br>0～1：按指定采样率采样，例如0.02;<br>1：不采样，即精确分析<br>默认值为1</p>
    */
   SamplingRate?: number
   /**
-   * 为true代表使用新的检索结果返回方式，输出参数AnalysisRecords和Columns有效
-为false时代表使用老的检索结果返回方式, 输出AnalysisResults和ColNames有效
-两种返回方式在编码格式上有少量区别，建议使用true
+   * <p>为true代表使用新的检索结果返回方式，输出参数AnalysisRecords和Columns有效<br>为false时代表使用老的检索结果返回方式, 输出AnalysisResults和ColNames有效<br>两种返回方式在编码格式上有少量区别，建议使用true</p>
    */
   UseNewAnalysis?: boolean
 }

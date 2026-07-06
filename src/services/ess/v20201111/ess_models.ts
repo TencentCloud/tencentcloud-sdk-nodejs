@@ -298,6 +298,32 @@ export interface UploadFilesRequest {
 }
 
 /**
+ * CreateFileConvertTask请求参数结构体
+ */
+export interface CreateFileConvertTaskRequest {
+  /**
+   * <p>需要进行转换的资源文件类型<br>支持的文件类型如下：</p><p>枚举值：</p><ul><li>doc： doc</li><li>docx： docx</li><li>xls： xls</li><li>xlsx： xlsx</li><li>jpg： jpg</li><li>jpeg： jpeg</li><li>png： png</li><li>html： html</li><li>bmp： bmp</li></ul>
+   */
+  ResourceType: string
+  /**
+   * <p>需要进行转换操作的文件资源名称，带资源后缀名。</p><p>注:  <code>资源名称长度限制为256个字符</code></p>
+   */
+  ResourceName: string
+  /**
+   * <p>需要进行转换操作的文件资源Id，通过<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/UploadFiles" target="_blank">UploadFiles</a>接口获取文件资源Id。</p><p>注:  <code>目前，此接口仅支持单个文件进行转换。</code></p>
+   */
+  ResourceId: string
+  /**
+   * <p>执行本接口操作的员工信息。<br>注: <code>在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。</code></p>
+   */
+  Operator: UserInfo
+  /**
+   * <p>代理企业和员工的信息。<br>在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。</p>
+   */
+  Agent?: Agent
+}
+
+/**
  * 意愿核身问答模式结果。若未使用该意愿核身功能，该字段返回值可以不处理。
  */
 export interface IntentionQuestionResult {
@@ -3056,13 +3082,20 @@ export interface DescribeBillUsageDetailResponse {
 }
 
 /**
- * 发起合同流程时对合同流程的部分操作加以限制的配置。
+ * 合同摘要
  */
-export interface FlowOperateLimit {
+export interface ContractSummary {
   /**
-   * 发起合同流程时，对签署完成后是否能发起对应的解除合同加以限制：<ul><li><b>false（默认值）</b>: 合同流程完成签署后，支持发起对应的解除协议。</li><li><b>true </b>: 合同流程完成签署后，<b>不支持</b>发起对应的解除协议。</li></ul>
+   * 提取内容分类：
+Base 合同信息
+Identity 主体信息
+Performance 履约条款
    */
-  NoRelease?: boolean
+  Name?: string
+  /**
+   * 详细信息
+   */
+  Infos?: Array<ContractSummaryInfo>
 }
 
 /**
@@ -3288,6 +3321,20 @@ export interface CreateIntegrationSubOrganizationActiveRecordRequest {
    * 待激活成员企业ID集合
    */
   SubOrganizationIds: Array<string>
+}
+
+/**
+ * CreateFileConvertTask返回参数结构体
+ */
+export interface CreateFileConvertTaskResponse {
+  /**
+   * <p>接口返回的文件转换任务Id，可以调用接口<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/GetTaskResultApi" target="_blank">查询转换任务状态</a>获取转换任务的状态和转换后的文件资源Id。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4710,20 +4757,13 @@ export interface DescribeThirdPartyAuthCodeRequest {
 }
 
 /**
- * 合同摘要
+ * 发起合同流程时对合同流程的部分操作加以限制的配置。
  */
-export interface ContractSummary {
+export interface FlowOperateLimit {
   /**
-   * 提取内容分类：
-Base 合同信息
-Identity 主体信息
-Performance 履约条款
+   * 发起合同流程时，对签署完成后是否能发起对应的解除合同加以限制：<ul><li><b>false（默认值）</b>: 合同流程完成签署后，支持发起对应的解除协议。</li><li><b>true </b>: 合同流程完成签署后，<b>不支持</b>发起对应的解除协议。</li></ul>
    */
-  Name?: string
-  /**
-   * 详细信息
-   */
-  Infos?: Array<ContractSummaryInfo>
+  NoRelease?: boolean
 }
 
 /**
@@ -6147,28 +6187,25 @@ export interface MiniAppCreateApproverInfo {
 }
 
 /**
- * 印章扩展信息
+ * ExportContractReviewResult请求参数结构体
  */
-export interface ExtendScene {
+export interface ExportContractReviewResultRequest {
   /**
-   * 印章来源类型
-印章来源类型包括下面几种：
-<ul>
-<li>CREATE-客户上传图片创建</li>
-<li>GENERATE-系统模板印章生成</li>
-<li>SIST_SEAL-深圳电子印章</li>
-</ul>
+   * <p>执行本接口操作的员工信息。<br>注: <code>在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。</code></p>
    */
-  GenerateType?: string
+  Operator: UserInfo
   /**
-   * 印章来源类型描述
-
+   * <p>合同审查任务ID</p>
    */
-  GenerateTypeDesc?: string
+  TaskId: string
   /**
-   * 印章来源logo
+   * <p>导出文件类型</p><p>枚举值：</p><ul><li>1： WORD、PDF当前带风险批注文件</li><li>2： 审查结果＆摘要（.xIsx）</li><li>3： WORD、PDF审查合同内容时的文件（最原始文件）</li><li>4： WORD、PDF当前无风险批注文件</li></ul>
    */
-  GenerateTypeLogo?: string
+  FileType: number
+  /**
+   * <p>代理企业和员工的信息。<br>在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。</p>
+   */
+  Agent?: Agent
 }
 
 /**
@@ -8106,6 +8143,24 @@ export interface Agent {
 }
 
 /**
+ * DescribeFileConvertTask请求参数结构体
+ */
+export interface DescribeFileConvertTaskRequest {
+  /**
+   * <p>转换任务Id，通过接口<a href="https://qian.tencent.com/developers/companyApis/templatesAndFiles/CreateFileConvertTask" target="_blank">创建文件转换任务接口</a>得到的转换任务id</p>
+   */
+  TaskId: string
+  /**
+   * <p>执行本接口操作的员工信息。<br>注: <code>在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。</code></p>
+   */
+  Operator: UserInfo
+  /**
+   * <p>代理企业和员工的信息。<br>在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。</p>
+   */
+  Agent?: Agent
+}
+
+/**
  * 企业应用回调信息
  */
 export interface CallbackInfo {
@@ -9266,8 +9321,7 @@ true - 可以，false - 不可以。
  */
 export interface CreatePreparedPersonalEsignResponse {
   /**
-   * 导入生成的印章ID，为32位字符串。
-建议开发者保存此印章ID，开头实名认证后，通过此 ID查询导入的印章。
+   * <p>导入生成的印章ID，为32位字符串。<br>建议开发者保存此印章ID，开头实名认证后，通过此 ID查询导入的印章。</p>
    */
   SealId?: string
   /**
@@ -12469,87 +12523,65 @@ export interface ExportContractComparisonTaskRequest {
  */
 export interface CreatePreparedPersonalEsignRequest {
   /**
-   * 个人用户姓名
+   * <p>个人用户姓名</p>
    */
   UserName: string
   /**
-   * 证件号码，应符合以下规则
-<ul><li> 中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li>
-<li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。。</li>
-<li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
+   * <p>证件号码，应符合以下规则</p><ul><li> 中国大陆居民身份证号码应为18位字符串，由数字和大写字母X组成（如存在X，请大写）。</li><li>中国港澳居民来往内地通行证号码共11位。第1位为字母，“H”字头签发给中国香港居民，“M”字头签发给中国澳门居民；第2位至第11位为数字。。</li><li>中国港澳台居民居住证号码编码规则与中国大陆身份证相同，应为18位字符串。</li></ul>
    */
   IdCardNumber: string
   /**
-   * 印章名称，长度1-50个字。
+   * <p>印章名称，长度1-50个字。</p>
    */
   SealName: string
   /**
-   * 执行本接口操作的员工信息。
-注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   * <p>执行本接口操作的员工信息。<br>注: <code>在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。</code></p>
    */
   Operator?: UserInfo
   /**
-   * 证件类型，支持以下类型
-<ul><li>ID_CARD : 中国大陆居民身份证 (默认值)</li>
-<li>HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证</li>
-<li>HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同 中国大陆居民身份证)</li></ul>
+   * <p>证件类型，支持以下类型</p><ul><li>ID_CARD : 中国大陆居民身份证 (默认值)</li><li>HONGKONG_AND_MACAO : 中国港澳居民来往内地通行证</li><li>HONGKONG_MACAO_AND_TAIWAN : 中国港澳台居民居住证(格式同 中国大陆居民身份证)</li></ul>
    */
   IdCardType?: string
   /**
-   * 该字段已不再使用
+   * <p>该字段已不再使用</p>
    * @deprecated
    */
   SealImage?: string
   /**
-   * 是否开启印章图片压缩处理，默认不开启，如需开启请设置为 true。当印章超过 2M 时建议开启，开启后图片的 hash 将发生变化。
+   * <p>是否开启印章图片压缩处理，默认不开启，如需开启请设置为 true。当印章超过 2M 时建议开启，开启后图片的 hash 将发生变化。</p>
    */
   SealImageCompress?: boolean
   /**
-   * 手机号码；当需要开通自动签时，该参数必传
+   * <p>手机号码；当需要开通自动签时，该参数必传</p>
    */
   Mobile?: string
   /**
-   * 该字段已不再使用
+   * <p>该字段已不再使用</p>
+   * @deprecated
    */
   EnableAutoSign?: boolean
   /**
-   * 印章颜色（参数ProcessSeal=true时生效）
-默认值：BLACK黑色
-取值: 
-BLACK 黑色,
-RED 红色,
-BLUE 蓝色。
+   * <p>印章颜色（参数ProcessSeal=true时生效）<br>默认值：BLACK黑色<br>取值:<br>BLACK 黑色,<br>RED 红色,<br>BLUE 蓝色。</p>
    */
   SealColor?: string
   /**
-   * 是否处理印章，默认不做印章处理。
-取值如下：
-<ul>
-<li>false：不做任何处理；</li>
-<li>true：做透明化处理和颜色增强。</li>
-</ul>
+   * <p>是否处理印章，默认不做印章处理。<br>取值如下：</p><ul><li>false：不做任何处理；</li><li>true：做透明化处理和颜色增强。</li></ul>
    */
   ProcessSeal?: boolean
   /**
-   * 印章图片文件 id
-取值：
-填写的FileId通过UploadFiles接口上传文件获取。
+   * <p>印章图片文件 id<br>取值：<br>填写的FileId通过UploadFiles接口上传文件获取。</p>
    */
   FileId?: string
   /**
-   * 代理企业和员工的信息。
-在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   * <p>代理企业和员工的信息。<br>在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。</p>
    */
   Agent?: Agent
   /**
-   * 设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次 1-不绑定，发起合同时将按标准合同套餐进行扣减
+   * <p>设置用户开通自动签时是否绑定个人自动签账号许可。一旦绑定后，将扣减购买的个人自动签账号许可一次（1年有效期），不可解绑释放。不传默认为绑定自动签账号许可。 0-绑定个人自动签账号许可，开通后将扣减购买的个人自动签账号许可一次 1-不绑定，发起合同时将按标准合同套餐进行扣减</p>
    */
   LicenseType?: number
   /**
-   * 自动签使用的场景值, 可以选择的场景值如下:
-<ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul>
-
-注: `不传默认为处方单场景，即E_PRESCRIPTION_AUTO_SIGN`
+   * <p>自动签使用的场景值, 可以选择的场景值如下:</p><ul><li> **E_PRESCRIPTION_AUTO_SIGN** :  电子处方场景</li><li> **OTHER** :  通用场景</li></ul><p>注: <code>不传默认为处方单场景，即E_PRESCRIPTION_AUTO_SIGN</code></p>
    */
   SceneKey?: string
 }
@@ -13184,6 +13216,32 @@ export interface CreateIntegrationEmployeesResponse {
 }
 
 /**
+ * DescribeFileConvertTask返回参数结构体
+ */
+export interface DescribeFileConvertTaskResponse {
+  /**
+   * <p>任务Id</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务状态，需要关注的状态</p><p>枚举值：</p><ul><li>0： NeedTranform - 任务已提交</li><li>4： Processing - 文档转换中</li><li>8： TaskEnd - 任务处理完成</li><li>-2： DownloadFailed - 下载失败</li><li>-6： ProcessFailed - 转换失败</li><li>-13： ProcessTimeout - 转换文件超时</li></ul>
+   */
+  TaskStatus?: number
+  /**
+   * <p>状态描述，需要关注的状态</p><ul><li> **NeedTranform** : 任务已提交</li><li> **Processing** : 文档转换中</li><li> **TaskEnd** : 任务处理完成</li><li> **DownloadFailed** : 下载失败</li><li> **ProcessFailed** : 转换失败</li><li> **ProcessTimeout** : 转换文件超时</li></ul>
+   */
+  TaskMessage?: string
+  /**
+   * <p>资源Id（即FileId），用于<a href="https://qian.tencent.com/developers/companyApis/startFlows/CreateFlowByFiles">用PDF文件创建签署流程</a></p>
+   */
+  ResourceId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * VerifyDigitalDataSign返回参数结构体
  */
 export interface VerifyDigitalDataSignResponse {
@@ -13202,25 +13260,28 @@ export interface VerifyDigitalDataSignResponse {
 }
 
 /**
- * ExportContractReviewResult请求参数结构体
+ * 印章扩展信息
  */
-export interface ExportContractReviewResultRequest {
+export interface ExtendScene {
   /**
-   * <p>执行本接口操作的员工信息。<br>注: <code>在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。</code></p>
+   * 印章来源类型
+印章来源类型包括下面几种：
+<ul>
+<li>CREATE-客户上传图片创建</li>
+<li>GENERATE-系统模板印章生成</li>
+<li>SIST_SEAL-深圳电子印章</li>
+</ul>
    */
-  Operator: UserInfo
+  GenerateType?: string
   /**
-   * <p>合同审查任务ID</p>
+   * 印章来源类型描述
+
    */
-  TaskId: string
+  GenerateTypeDesc?: string
   /**
-   * <p>导出文件类型</p><p>枚举值：</p><ul><li>1： WORD、PDF当前带风险批注文件</li><li>2： 审查结果＆摘要（.xIsx）</li><li>3： WORD、PDF审查合同内容时的文件（最原始文件）</li><li>4： WORD、PDF当前无风险批注文件</li></ul>
+   * 印章来源logo
    */
-  FileType: number
-  /**
-   * <p>代理企业和员工的信息。<br>在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。</p>
-   */
-  Agent?: Agent
+  GenerateTypeLogo?: string
 }
 
 /**

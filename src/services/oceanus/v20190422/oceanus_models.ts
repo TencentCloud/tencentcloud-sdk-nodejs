@@ -4789,32 +4789,40 @@ export interface StopJobsResponse {
  */
 export interface JobEvent {
   /**
-   * 内部定义的事件类型
+   * <p>内部定义的事件类型</p>
    */
-  Type: string
+  Type?: string
   /**
-   * 事件类型的说明文字
+   * <p>事件类型的说明文字</p>
    */
-  Description: string
+  Description?: string
   /**
-   * 事件发生的 Unix 时间戳（秒）
+   * <p>事件发生的 Unix 时间戳（秒）</p>
    */
-  Timestamp: number
+  Timestamp?: number
   /**
-   * 事件发生时的运行 ID
+   * <p>事件发生时的运行 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RunningOrderId: number
+  RunningOrderId?: number
   /**
-   * 事件的一些可选说明
+   * <p>事件的一些可选说明</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Message: string
+  Message?: string
   /**
-   * 异常事件的排查手册链接
+   * <p>异常事件的排查手册链接</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SolutionLink: string
+  SolutionLink?: string
+  /**
+   * <p>异常事件原因分析</p>
+   */
+  CauseAnalysis?: string
+  /**
+   * <p>异常事件处理的参考方案</p>
+   */
+  Solution?: string
 }
 
 /**
@@ -4853,29 +4861,37 @@ export interface DescribeResourcesRequest {
  */
 export interface DescribeJobEventsRequest {
   /**
-   * 作业的 ID
+   * <p>作业的 ID</p>
    */
   JobId: string
   /**
-   * 筛选条件：起始 Unix 时间戳（秒）
+   * <p>筛选条件：起始 Unix 时间戳（秒）</p>
    */
   StartTimestamp: number
   /**
-   * 筛选条件：结束 Unix 时间戳（秒）
+   * <p>筛选条件：结束 Unix 时间戳（秒）</p>
    */
   EndTimestamp: number
   /**
-   * 事件类型。如果不传则返回所有类型的数据
+   * <p>事件类型。如果不传则返回所有类型的数据</p>
    */
   Types?: Array<string>
   /**
-   * 运行实例 ID 数组
+   * <p>运行实例 ID 数组</p>
    */
   RunningOrderIds?: Array<number | bigint>
   /**
-   * 工作空间 SerialId
+   * <p>工作空间 SerialId</p>
    */
   WorkSpaceId?: string
+  /**
+   * <p>返回条数</p>
+   */
+  Limit?: number
+  /**
+   * <p>起始偏移个数</p>
+   */
+  Offset?: number
 }
 
 /**
@@ -5144,22 +5160,22 @@ export interface SessionClusterRefItem {
  */
 export interface DescribeJobEventsResponse {
   /**
-   * 该作业指定范围内的事件列表
+   * <p>该作业指定范围内的事件列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Events?: Array<JobEvent>
   /**
-   * 该作业指定范围内运行实例 ID 数组，仅当入参没有传入 RunningOrderIds 参数时才会返回。倒序输出
+   * <p>该作业指定范围内运行实例 ID 数组，仅当入参没有传入 RunningOrderIds 参数时才会返回。倒序输出</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunningOrderIds?: Array<number | bigint>
   /**
-   * 事件的总数
+   * <p>事件的总数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
   /**
-   * 实例对应的版本
+   * <p>实例对应的版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Versions?: Array<number | bigint>

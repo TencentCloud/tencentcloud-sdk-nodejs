@@ -8613,22 +8613,13 @@ export interface ForbidMediaDistributionResponse {
 }
 
 /**
- * 智能精彩片段结果信息
+ * DeleteBlindWatermarkTemplate返回参数结构体
  */
-export interface AiAnalysisTaskHighlightOutput {
+export interface DeleteBlindWatermarkTemplateResponse {
   /**
-   * 视频智能精彩片段列表。
-<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 HighlightSetFileUrl 对应的文件中获取。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  HighlightSet: Array<MediaAiAnalysisHighlightItem>
-  /**
-   * 视频智能精彩片段列表文件 URL。文件的内容为 JSON，数据结构与 HighlightSet 字段一致。 （文件不会永久存储，到达 HighlightSetFileUrlExpireTime 时间点后文件将被删除）。
-   */
-  HighlightSetFileUrl: string
-  /**
-   * 视频智能精彩片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  HighlightSetFileUrlExpireTime: string
+  RequestId?: string
 }
 
 /**
@@ -10731,13 +10722,22 @@ export interface DescribeTranscodeTemplatesResponse {
 }
 
 /**
- * DeleteBlindWatermarkTemplate返回参数结构体
+ * 智能精彩片段结果信息
  */
-export interface DeleteBlindWatermarkTemplateResponse {
+export interface AiAnalysisTaskHighlightOutput {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 视频智能精彩片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 HighlightSetFileUrl 对应的文件中获取。
    */
-  RequestId?: string
+  HighlightSet: Array<MediaAiAnalysisHighlightItem>
+  /**
+   * 视频智能精彩片段列表文件 URL。文件的内容为 JSON，数据结构与 HighlightSet 字段一致。 （文件不会永久存储，到达 HighlightSetFileUrlExpireTime 时间点后文件将被删除）。
+   */
+  HighlightSetFileUrl: string
+  /**
+   * 视频智能精彩片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  HighlightSetFileUrlExpireTime: string
 }
 
 /**
@@ -21678,7 +21678,7 @@ export interface DescribeAigcUsageDataRequest {
    */
   EndTime: string
   /**
-   * <p>AIGC类型。</p><p>枚举值：</p><ul><li>Video： 视频</li><li>Image： 图片</li><li>Text： 文本</li><li>Audio： 音频</li><li>SceneAigcVideo： 场景化视频处理</li><li>SceneAigcImage： 场景化图片处理</li><li>SceneAigcTime： 场景化处理次数</li></ul>
+   * <p>AIGC类型。</p><p>枚举值：</p><ul><li>Video： 视频</li><li>Image： 图片</li><li>Text： 文本</li><li>Audio： 音频</li><li>SceneAigcVideo： 场景化视频处理</li><li>SceneAigcImage： 场景化图片处理</li><li>SceneAigcTime： 场景化处理次数</li><li>TextDetail： 文本详细记录</li></ul>
    */
   AigcType: string
   /**
@@ -21693,6 +21693,18 @@ export interface DescribeAigcUsageDataRequest {
    * <p>API Key</p>
    */
   APIKeys?: Array<string>
+  /**
+   * <p>查询游标</p>
+   */
+  ScrollToken?: string
+  /**
+   * <p>每页大小，最大 200，超出会被截断为 200</p>
+   */
+  PageSize?: number
+  /**
+   * <p>生文RequestId，当AigcType为TextDetail时有效。</p>
+   */
+  ReqId?: string
 }
 
 /**
@@ -24499,6 +24511,24 @@ export interface DeleteTranscodeTemplateResponse {
 }
 
 /**
+ * AIGC生文明细
+ */
+export interface AigcTextDetail {
+  /**
+   * <p>每页条数</p>
+   */
+  PageSize?: number
+  /**
+   * <p>上一页响应中返回的 scroll_token,用于翻下一页</p>
+   */
+  ScrollToken?: string
+  /**
+   * <p>生文详细数据</p>
+   */
+  Data?: Array<AigcTextDetailData>
+}
+
+/**
  * 音画质重生视频控制控制信息。
  */
 export interface RebuildVideoInfo {
@@ -25887,6 +25917,76 @@ export interface AiReviewPoliticalOcrTaskOutput {
 }
 
 /**
+ * Aigc生文明细数据
+ */
+export interface AigcTextDetailData {
+  /**
+   * <p>请求开始时间(RFC3339)</p>
+   */
+  Timestamp?: string
+  /**
+   * <p>网关层请求 ID</p>
+   */
+  ReqId?: string
+  /**
+   * <p>后端模型返回的对话 ID</p>
+   */
+  ChatId?: string
+  /**
+   * <p>返回给客户端的 HTTP 状态码</p>
+   */
+  StatusCode?: number
+  /**
+   * <p>模型名</p>
+   */
+  Model?: string
+  /**
+   * <p>应用ID</p>
+   */
+  SubAppId?: number
+  /**
+   * <p>脱敏后的 api_key:前 8 位 + ****(长度 ≤ 8 时原样返回)</p>
+   */
+  ApiKey?: string
+  /**
+   * <p>是否流式返回</p>
+   */
+  Stream?: boolean
+  /**
+   * <p>输入 token 数</p>
+   */
+  InputTokens?: number
+  /**
+   * <p>输出 token 数</p>
+   */
+  OutputTokens?: number
+  /**
+   * <p>命中 prompt 缓存的 token 数</p>
+   */
+  CacheInputTokens?: number
+  /**
+   * <p>总 token 数</p>
+   */
+  TotalTokens?: number
+  /**
+   * <p>生成阶段的tokens/秒</p>
+   */
+  TPS?: number
+  /**
+   * <p>首字延迟(Time To First Token)</p><p>单位：秒</p>
+   */
+  TTFT?: number
+  /**
+   * <p>端到端总耗时</p><p>单位：秒</p>
+   */
+  Total?: number
+  /**
+   * <p>入口协议:completions / responses / anthropic</p>
+   */
+  ApiType?: string
+}
+
+/**
  * 文件删除结果信息
  */
 export interface FileDeleteResultItem {
@@ -26174,6 +26274,11 @@ export interface DescribeAigcUsageDataResponse {
    * <p>AIGC统计数据。</p>
    */
   AigcUsageDataSet?: Array<AigcUsageDataItem>
+  /**
+   * <p>生文详细日志</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AigcTextDetails?: AigcTextDetail
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

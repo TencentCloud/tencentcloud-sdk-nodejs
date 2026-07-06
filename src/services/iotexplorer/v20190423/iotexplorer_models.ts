@@ -1632,6 +1632,10 @@ export interface SeeComprehensionConfig {
    * <p>是否生成关键词</p><p>默认值：false</p>
    */
   EnableKeywords?: boolean
+  /**
+   * <p>自定义摘要提示词</p>
+   */
+  SummaryPrompt?: string
 }
 
 /**

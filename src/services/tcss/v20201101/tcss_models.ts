@@ -1377,90 +1377,93 @@ export interface DescribeVulDefenceEventTendencyRequest {
  */
 export interface DescribePurchaseStateInfoResponse {
   /**
-   * 0：可申请试用可购买；1：只可购买(含试用审核不通过和试用过期)；2：试用生效中；3：专业版生效中；4：专业版过期
+   * <p>0：可申请试用可购买；1：只可购买(含试用审核不通过和试用过期)；2：试用生效中；3：专业版生效中；4：专业版过期</p>
    */
   State?: number
   /**
-   * 总资源核数 = 总防护核数 + 未防护核数
+   * <p>总资源核数 = 总防护核数 + 未防护核数</p>
    */
   AllCoresCnt?: number
   /**
-   * 总防护核数 =已购核数+ 试用赠送核数 +弹性计费核数
+   * <p>总防护核数 =已购核数+ 试用赠送核数 +弹性计费核数</p>
    */
   CoresCnt?: number
   /**
-   * 未防护核数(未开启防护资源核数)
+   * <p>未防护核数(未开启防护资源核数)</p>
    */
   UndefendCoresCnt?: number
   /**
-   * 已购买核数
+   * <p>已购买核数</p>
    */
   AuthorizedCoresCnt?: number
   /**
-   * 试用赠送专业版核心数
+   * <p>试用赠送专业版核心数</p>
    */
   GivenAuthorizedCoresCnt?: number
   /**
-   * 当前弹性计费核数数量
+   * <p>当前弹性计费核数数量</p>
    */
   CurrentFlexibleCoresCnt?: number
   /**
-   * 镜像数
+   * <p>镜像数</p>
    */
   ImageCnt?: number
   /**
-   * 已授权镜像数
+   * <p>已授权镜像数</p>
    */
   AuthorizedImageCnt?: number
   /**
-   * 过期时间
+   * <p>过期时间</p>
    */
   ExpirationTime?: string
   /**
-   * 已购买镜像授权数
+   * <p>已购买镜像授权数</p>
    */
   PurchasedAuthorizedCnt?: number
   /**
-   * 0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)
+   * <p>0表示默认状态(用户未设置，即初始状态)， 1表示自动续费，2表示明确不自动续费(用户设置)</p>
    */
   AutomaticRenewal?: number
   /**
-   * 试用期间赠送镜像授权数，可能会过期
+   * <p>试用期间赠送镜像授权数，可能会过期</p>
    */
   GivenAuthorizedCnt?: number
   /**
-   * 起始时间
+   * <p>起始时间</p>
    */
   BeginTime?: string
   /**
-   * 子状态(具体意义依据State字段而定)
-State为4时，有效值为: ISOLATE(隔离) DESTROED(已销毁)
+   * <p>子状态(具体意义依据State字段而定)<br>State为4时，有效值为: ISOLATE(隔离) DESTROED(已销毁)</p>
    */
   SubState?: string
   /**
-   * 计费key
+   * <p>计费key</p>
    */
   InquireKey?: string
   /**
-   * 防护策略
+   * <p>防护策略</p>
    */
   DefendPolicy?: string
   /**
-   * 弹性计费核数上限
+   * <p>弹性计费核数上限</p>
    */
   FlexibleCoresLimit?: number
   /**
-   * 已防护集群核数
+   * <p>已防护集群核数</p>
    */
   DefendClusterCoresCnt?: number
   /**
-   * 已防护主机核数
+   * <p>已防护主机核数</p>
    */
   DefendHostCoresCnt?: number
   /**
-   * 试用的专业版核数
+   * <p>试用的专业版核数</p>
    */
   TrialCoresCnt?: number
+  /**
+   * <p>无容器核数</p>
+   */
+  NoContainerCoresCnt?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7213,147 +7216,139 @@ export interface DescribeImageRegistryTimingScanTaskResponse {
  */
 export interface ClusterInfoItem {
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   ClusterId?: string
   /**
-   * 集群名字
+   * <p>集群ca证书md5值</p>
+   */
+  ClusterCAMD5?: string
+  /**
+   * <p>集群名字</p>
    */
   ClusterName?: string
   /**
-   * 集群版本
+   * <p>集群版本</p>
    */
   ClusterVersion?: string
   /**
-   * 集群操作系统
+   * <p>集群操作系统</p>
    */
   ClusterOs?: string
   /**
-   * 集群类型
+   * <p>集群类型</p>
    */
   ClusterType?: string
   /**
-   * 集群节点数
+   * <p>集群节点数</p>
    */
   ClusterNodeNum?: number
   /**
-   * 集群区域
+   * <p>集群区域</p>
    */
   Region?: string
   /**
-   * 防护状态: 
-已防护: Defended 
-未防护: UnDefended
-部分防护: PartDefened
+   * <p>防护状态:<br>已防护: Defended<br>未防护: UnDefended<br>部分防护: PartDefened</p>
    */
   DefenderStatus?: string
   /**
-   * 集群状态
+   * <p>集群状态</p>
    */
   ClusterStatus?: string
   /**
-   * 集群运行子状态
+   * <p>集群运行子状态</p>
    */
   ClusterSubStatus?: string
   /**
-   * 集群的检测模式，为Cluster_Normal或者Cluster_Actived.
+   * <p>集群的检测模式，为Cluster_Normal或者Cluster_Actived.</p>
    */
   ClusterCheckMode?: string
   /**
-   * 是否自动定期检测
+   * <p>是否自动定期检测</p>
    */
   ClusterAutoCheck?: boolean
   /**
-   * 防护容器部署失败原因，为UserDaemonSetNotReady时,和UnreadyNodeNum转成"N个节点防御容器为就绪"，其他错误直接展示
+   * <p>防护容器部署失败原因，为UserDaemonSetNotReady时,和UnreadyNodeNum转成&quot;N个节点防御容器为就绪&quot;，其他错误直接展示</p>
    */
   DefenderErrorReason?: string
   /**
-   * 防御容器没有ready状态的节点数量
+   * <p>防御容器没有ready状态的节点数量</p>
    */
   UnreadyNodeNum?: number
   /**
-   * 严重风险检查项的数量
+   * <p>严重风险检查项的数量</p>
    */
   SeriousRiskCount?: number
   /**
-   * 高风险检查项的数量
+   * <p>高风险检查项的数量</p>
    */
   HighRiskCount?: number
   /**
-   * 中风险检查项的数量
+   * <p>中风险检查项的数量</p>
    */
   MiddleRiskCount?: number
   /**
-   * 提示风险检查项的数量
+   * <p>提示风险检查项的数量</p>
    */
   HintRiskCount?: number
   /**
-   * 检查失败原因
+   * <p>检查失败原因</p>
    */
   CheckFailReason?: string
   /**
-   * 检查状态,为Task_Running, NoRisk, HasRisk, Uncheck, Task_Error
+   * <p>检查状态,为Task_Running, NoRisk, HasRisk, Uncheck, Task_Error</p>
    */
   CheckStatus?: string
   /**
-   * 任务创建时间,检查时间
+   * <p>任务创建时间,检查时间</p>
    */
   TaskCreateTime?: string
   /**
-   * 接入状态:
-未接入: AccessedNone
-已防护: AccessedDefended
-未防护: AccessedInstalled
-部分防护: AccessedPartialDefence
-接入异常: AccessedException
-卸载异常: AccessedUninstallException
-接入中: AccessedInstalling
-卸载中: AccessedUninstalling
+   * <p>接入状态:<br>未接入: AccessedNone<br>已防护: AccessedDefended<br>未防护: AccessedInstalled<br>部分防护: AccessedPartialDefence<br>接入异常: AccessedException<br>卸载异常: AccessedUninstallException<br>接入中: AccessedInstalling<br>卸载中: AccessedUninstalling</p>
    */
   AccessedStatus?: string
   /**
-   * 接入失败原因
+   * <p>接入失败原因</p>
    */
   AccessedSubStatus?: string
   /**
-   * 接入/卸载失败原因
+   * <p>接入/卸载失败原因</p>
    */
   AccessedErrorReason?: string
   /**
-   * 节点总数
+   * <p>节点总数</p>
    */
   NodeCount?: number
   /**
-   * 离线节点数
+   * <p>离线节点数</p>
    */
   OffLineNodeCount?: number
   /**
-   * 未安装agent节点数
+   * <p>未安装agent节点数</p>
    */
   UnInstallAgentNodeCount?: number
   /**
-   * 计费核数(弹性计费核数+普通计费核数)
+   * <p>计费核数(弹性计费核数+普通计费核数)</p>
    */
   ChargeCoresCnt?: number
   /**
-   * master 地址列表
+   * <p>master 地址列表</p>
    */
   MasterAddresses?: Array<string>
   /**
-   * 核数
+   * <p>核数</p>
    */
   CoresCnt?: number
   /**
-   * 集群审计开关状态：
-已关闭Closed/关闭中Closing/关闭失败CloseFailed/已开启Opened/开启中Opening/开启失败OpenFailed
+   * <p>集群审计开关状态：<br>已关闭Closed/关闭中Closing/关闭失败CloseFailed/已开启Opened/开启中Opening/开启失败OpenFailed</p>
    */
   ClusterAuditStatus?: string
   /**
-   * 集群审计开关失败信息
+   * <p>集群审计开关失败信息</p>
    */
   ClusterAuditFailedInfo?: string
   /**
-   * 所有者名称
+   * <p>所有者名称</p>
    */
   OwnerName?: string
 }

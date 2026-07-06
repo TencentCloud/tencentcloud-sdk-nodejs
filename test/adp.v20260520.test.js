@@ -18,6 +18,26 @@ const client = new tencentcloud.adp.v20260520.Client({
 })
 describe("adp.v20260520.test.js", function () {
 
+it("adp.v20260520.ModifyAgent", async function () {
+    try {
+       const data = await client.ModifyAgent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DescribeSkillDetail", async function () {
+    try {
+       const data = await client.DescribeSkillDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.DescribeSpaceList", async function () {
     try {
        const data = await client.DescribeSpaceList({})
@@ -31,6 +51,16 @@ it("adp.v20260520.DescribeSpaceList", async function () {
 it("adp.v20260520.DeleteSpace", async function () {
     try {
        const data = await client.DeleteSpace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.ResetConversation", async function () {
+    try {
+       const data = await client.ResetConversation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +118,39 @@ it("adp.v20260520.CopyAgentFromApp", async function () {
     }
 })
 
-it("adp.v20260520.DescribeVariable", async function () {
+it("adp.v20260520.ReleaseSkill", async function () {
     try {
-       const data = await client.DescribeVariable({})
+       const data = await client.ReleaseSkill({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.UnfavoriteSkill", async function () {
+    try {
+       const data = await client.UnfavoriteSkill({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.ModifyPlugin", async function () {
+    try {
+       const data = await client.ModifyPlugin({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DescribeSkillReferenceList", async function () {
+    try {
+       const data = await client.DescribeSkillReferenceList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +178,39 @@ it("adp.v20260520.CreateWorkspaceCredential", async function () {
     }
 })
 
-it("adp.v20260520.ModifyAgent", async function () {
+it("adp.v20260520.DescribeVariable", async function () {
     try {
-       const data = await client.ModifyAgent({})
+       const data = await client.DescribeVariable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DescribeAgentSummaryList", async function () {
+    try {
+       const data = await client.DescribeAgentSummaryList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.ModifySpace", async function () {
+    try {
+       const data = await client.ModifySpace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.FavoritePlugin", async function () {
+    try {
+       const data = await client.FavoritePlugin({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -131,6 +221,16 @@ it("adp.v20260520.ModifyAgent", async function () {
 it("adp.v20260520.DescribeModelList", async function () {
     try {
        const data = await client.DescribeModelList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.UnfavoritePlugin", async function () {
+    try {
+       const data = await client.UnfavoritePlugin({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -208,9 +308,19 @@ it("adp.v20260520.CopyApp", async function () {
     }
 })
 
-it("adp.v20260520.ResetConversation", async function () {
+it("adp.v20260520.DeletePlugin", async function () {
     try {
-       const data = await client.ResetConversation({})
+       const data = await client.DeletePlugin({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DeleteSkillShare", async function () {
+    try {
+       const data = await client.DeleteSkillShare({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -241,6 +351,16 @@ it("adp.v20260520.DescribeAgentReleasePreviewList", async function () {
 it("adp.v20260520.CreateSpace", async function () {
     try {
        const data = await client.CreateSpace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.CreateSkill", async function () {
+    try {
+       const data = await client.CreateSkill({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +428,9 @@ it("adp.v20260520.DescribeConversationList", async function () {
     }
 })
 
-it("adp.v20260520.ModifySpace", async function () {
+it("adp.v20260520.DescribeApp", async function () {
     try {
-       const data = await client.ModifySpace({})
+       const data = await client.DescribeApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -318,9 +438,9 @@ it("adp.v20260520.ModifySpace", async function () {
     }
 })
 
-it("adp.v20260520.DescribePlugin", async function () {
+it("adp.v20260520.CreateSkillShare", async function () {
     try {
-       const data = await client.DescribePlugin({})
+       const data = await client.CreateSkillShare({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +458,19 @@ it("adp.v20260520.DescribeSkillSummaryList", async function () {
     }
 })
 
-it("adp.v20260520.DescribeApp", async function () {
+it("adp.v20260520.FavoriteSkill", async function () {
     try {
-       const data = await client.DescribeApp({})
+       const data = await client.FavoriteSkill({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DeleteSkill", async function () {
+    try {
+       const data = await client.DeleteSkill({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -351,6 +481,16 @@ it("adp.v20260520.DescribeApp", async function () {
 it("adp.v20260520.CreateApp", async function () {
     try {
        const data = await client.CreateApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.ModifySkill", async function () {
+    try {
+       const data = await client.ModifySkill({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,9 +518,39 @@ it("adp.v20260520.DescribeVariableList", async function () {
     }
 })
 
+it("adp.v20260520.CreatePlugin", async function () {
+    try {
+       const data = await client.CreatePlugin({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DeleteAgent", async function () {
+    try {
+       const data = await client.DeleteAgent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.DescribeConversationMessageList", async function () {
     try {
        const data = await client.DescribeConversationMessageList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DescribePlugin", async function () {
+    try {
+       const data = await client.DescribePlugin({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

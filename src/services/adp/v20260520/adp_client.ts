@@ -19,27 +19,33 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   MCPToolConfig,
+  DeleteAgentRequest,
   ConversationContent,
   CamAuthConfig,
-  ModelParameter,
-  RequestParam,
+  FavoriteSkillRequest,
+  DescribeSkillReferenceListResponse,
   AgentRelease,
   AgentToolInputParameter,
+  UnfavoritePluginResponse,
   DescribeVariableListResponse,
   SkillClassification,
   ModifySpaceRequest,
-  DescribeReleaseListRequest,
+  DeleteSkillShareRequest,
   GenerateModel,
+  DescribeSkillDetailResponse,
   AgentAdvancedConfig,
   SkillShare,
   AppShareWhitelistItem,
+  ModifyVariableRequest,
   ReleaseSummary,
   CreateWebSocketTokenRequest,
   IntentAchievementInfo,
   RollbackReleaseRequest,
+  DeleteSkillResponse,
   ModelProperty,
   DescribeAgentReleasePreviewListRequest,
   DescribeModelListResponse,
+  UnfavoriteSkillResponse,
   AppModelConfig,
   CreateSpaceRequest,
   AgentModelConfig,
@@ -57,16 +63,20 @@ import {
   AppSharedKbInfo,
   ModifyAppResponse,
   ResetConversationResponse,
+  ToolExample,
   PromptRewriteModel,
+  ModifyAppRequest,
+  DescribeAppRequest,
   DeleteAppResponse,
   DescribeConversationListResponse,
   CreateAppResponse,
   DescribeAppSummaryListRequest,
   AppSummary,
-  MultiAgentConfig,
+  DescribeReleaseListRequest,
   CreateWebSocketTokenResponse,
   DescribeAgentDetailRequest,
   DescribePluginSummaryListRequest,
+  SkillReferenceSummary,
   ModelDeveloperBasic,
   DescribeConversationMessageListResponse,
   AppExperienceConfig,
@@ -75,21 +85,26 @@ import {
   DescribeReleaseSummaryRequest,
   AppWorkflowConfig,
   ConversationAgentTask,
+  ModifyPluginRequest,
   DeleteVariableResponse,
   PluginParam,
   CreateReleaseRequest,
   CreateWorkspaceCredentialRequest,
+  DeleteSkillRequest,
   ApiPluginConfig,
   DescribeConversationListRequest,
   DescribeVariableResponse,
   CodeToolConfig,
   CreateAgentRequest,
+  MultiAgentConfig,
   ConversationExperience,
-  DescribeSystemVariableListResponse,
-  PluginUserState,
+  DescribeSkillReferenceListRequest,
+  DeletePluginRequest,
   AIOptimizeModel,
   DuplexBilling,
+  ModelParameter,
   ModifySpaceResponse,
+  SkillDetail,
   DescribePluginSummaryListResponse,
   MultiModalUnderstandingModel,
   SkillAnalysisInfo,
@@ -100,19 +115,22 @@ import {
   DescribeVariableListRequest,
   ConversationWorkspace,
   BillingAttribute,
+  SkillReferenceGroup,
   AppWebSearchConfig,
   AgentSpec,
   ModifyConversationResponse,
   ClawAgentConfig,
   ConversationQuoteInfo,
   AppSecretInfo,
-  AgentDetail,
+  CreatePluginRequest,
   ThinkModel,
+  DeleteAgentResponse,
   DescribeSpaceListResponse,
   ReleaseRecord,
   CreateAppRequest,
   App,
   AppAuxiliaryInfo,
+  ReleaseSkillRequest,
   AgentToolBasicConfig,
   PluginStatistics,
   AppStatusInfo,
@@ -121,6 +139,7 @@ import {
   AppAppeal,
   DescribeAgentReleasePreviewListResponse,
   DeleteConversationResponse,
+  DescribeVariableRequest,
   AppToolConfig,
   ResetConversationRequest,
   ModifyAgentResponse,
@@ -128,11 +147,13 @@ import {
   SkillNotice,
   ResponseParam,
   MultiModalQAModel,
+  FavoriteSkillResponse,
   ToolBilling,
   SingleWorkflowConfig,
   BasicBilling,
-  DescribeAppRequest,
+  DeleteSkillShareResponse,
   AgentToolConfig,
+  CreatePluginResponse,
   ModifyVariableResponse,
   AgentSkillConfig,
   ModifyAgentRequest,
@@ -140,6 +161,7 @@ import {
   DescribeLatestReleaseRequest,
   AgentPluginConfig,
   PluginSummary,
+  AgentDetail,
   AgentProfile,
   OAuthConfig,
   CopyAgentFromAppResponse,
@@ -152,25 +174,32 @@ import {
   ToolConfig,
   AgentToolOutputParameter,
   ModelLimit,
+  CreateSkillShareResponse,
   DescribeReleaseSummaryResponse,
+  AgentSummary,
   AgentUserInputValue,
   DescribeAgentDetailResponse,
   SkillProfile,
   CreateVariableResponse,
   Filter,
   ApiToolConfig,
-  ToolExample,
+  ModifySkillResponse,
   ConversationReference,
   AppShareURLInfo,
   ModelBasic,
+  ModifyPluginResponse,
   CreateReleaseResponse,
-  ModifyAppRequest,
+  FavoritePluginResponse,
+  UnfavoritePluginRequest,
+  ModifySkillRequest,
   RetryReleaseRequest,
   CreateSpaceResponse,
   AppealingStatus,
   ModelDetailInfo,
-  ModifyVariableRequest,
+  CreateSkillShareRequest,
+  DeletePluginResponse,
   CreateVariableRequest,
+  CreateSkillResponse,
   VoiceConfig,
   MCPPluginConfig,
   DescribePluginRequest,
@@ -185,8 +214,10 @@ import {
   AppMetadata,
   AgentCollaborationConfig,
   DeleteVariableRequest,
+  ReleaseSkillResponse,
   AppPluginConfig,
   ModelStatus,
+  CreateSkillRequest,
   AppMemoryConfig,
   ModifyConversationRequest,
   RoleConfig,
@@ -196,10 +227,12 @@ import {
   DeleteConversationRequest,
   PluginConfig,
   ModelBadge,
+  DescribeSystemVariableListResponse,
   DescribeAppResponse,
   DeleteAppRequest,
   DescribeSkillSummaryListRequest,
   DescribeAppSummaryListResponse,
+  FavoritePluginRequest,
   CopyAppResponse,
   AgentPluginParameter,
   CopyAppRequest,
@@ -207,21 +240,26 @@ import {
   AppOperation,
   PluginProfile,
   DeleteSpaceRequest,
+  DescribeAgentSummaryListRequest,
   SkillCategory,
   DescribePluginResponse,
   DescribeReleaseListResponse,
   ComplexBillingItem,
   BackgroundImage,
-  DescribeVariableRequest,
+  DescribeSkillDetailRequest,
   DescribeSkillCategoryListRequest,
   Model,
   DescribeSkillSummaryListResponse,
   DescribeConversationMessageListRequest,
   DigitalHumanConfig,
   ModelProviderBasic,
+  UnfavoriteSkillRequest,
   ConversationMessage,
+  RequestParam,
   DescribeConversationResponse,
   FieldMask,
+  DescribeAgentSummaryListResponse,
+  PluginUserState,
   AppAdvancedConf,
   DescribeSpaceListRequest,
   SkillVersion,
@@ -238,6 +276,26 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("adp.tencentcloudapi.com", "2026-05-20", clientConfig)
+  }
+
+  /**
+   * 修改Agent配置信息
+   */
+  async ModifyAgent(
+    req: ModifyAgentRequest,
+    cb?: (error: string, rep: ModifyAgentResponse) => void
+  ): Promise<ModifyAgentResponse> {
+    return this.request("ModifyAgent", req, cb)
+  }
+
+  /**
+   * 查询skill详情
+   */
+  async DescribeSkillDetail(
+    req: DescribeSkillDetailRequest,
+    cb?: (error: string, rep: DescribeSkillDetailResponse) => void
+  ): Promise<DescribeSkillDetailResponse> {
+    return this.request("DescribeSkillDetail", req, cb)
   }
 
   /**
@@ -258,6 +316,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteSpaceResponse) => void
   ): Promise<DeleteSpaceResponse> {
     return this.request("DeleteSpace", req, cb)
+  }
+
+  /**
+   * 重置会话
+   */
+  async ResetConversation(
+    req: ResetConversationRequest,
+    cb?: (error: string, rep: ResetConversationResponse) => void
+  ): Promise<ResetConversationResponse> {
+    return this.request("ResetConversation", req, cb)
   }
 
   /**
@@ -311,13 +379,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取参数变量
+   * 上架skill
    */
-  async DescribeVariable(
-    req: DescribeVariableRequest,
-    cb?: (error: string, rep: DescribeVariableResponse) => void
-  ): Promise<DescribeVariableResponse> {
-    return this.request("DescribeVariable", req, cb)
+  async ReleaseSkill(
+    req: ReleaseSkillRequest,
+    cb?: (error: string, rep: ReleaseSkillResponse) => void
+  ): Promise<ReleaseSkillResponse> {
+    return this.request("ReleaseSkill", req, cb)
+  }
+
+  /**
+   * 取消收藏skill
+   */
+  async UnfavoriteSkill(
+    req: UnfavoriteSkillRequest,
+    cb?: (error: string, rep: UnfavoriteSkillResponse) => void
+  ): Promise<UnfavoriteSkillResponse> {
+    return this.request("UnfavoriteSkill", req, cb)
+  }
+
+  /**
+   * 修改插件
+   */
+  async ModifyPlugin(
+    req: ModifyPluginRequest,
+    cb?: (error: string, rep: ModifyPluginResponse) => void
+  ): Promise<ModifyPluginResponse> {
+    return this.request("ModifyPlugin", req, cb)
+  }
+
+  /**
+   * 查询某个 Skill 被引用的详情列表（按 SkillRefType 分组：OpenClaw / cloud agent / 企业助手 agent） 鉴权：同 DescribeSkillDetail（能看该 Skill 即可查）
+   */
+  async DescribeSkillReferenceList(
+    req: DescribeSkillReferenceListRequest,
+    cb?: (error: string, rep: DescribeSkillReferenceListResponse) => void
+  ): Promise<DescribeSkillReferenceListResponse> {
+    return this.request("DescribeSkillReferenceList", req, cb)
   }
 
   /**
@@ -341,13 +439,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改Agent配置信息
+   * 获取参数变量
    */
-  async ModifyAgent(
-    req: ModifyAgentRequest,
-    cb?: (error: string, rep: ModifyAgentResponse) => void
-  ): Promise<ModifyAgentResponse> {
-    return this.request("ModifyAgent", req, cb)
+  async DescribeVariable(
+    req: DescribeVariableRequest,
+    cb?: (error: string, rep: DescribeVariableResponse) => void
+  ): Promise<DescribeVariableResponse> {
+    return this.request("DescribeVariable", req, cb)
+  }
+
+  /**
+   * 查询 Agent 摘要信息列表
+   */
+  async DescribeAgentSummaryList(
+    req: DescribeAgentSummaryListRequest,
+    cb?: (error: string, rep: DescribeAgentSummaryListResponse) => void
+  ): Promise<DescribeAgentSummaryListResponse> {
+    return this.request("DescribeAgentSummaryList", req, cb)
+  }
+
+  /**
+   * 编辑空间
+   */
+  async ModifySpace(
+    req: ModifySpaceRequest,
+    cb?: (error: string, rep: ModifySpaceResponse) => void
+  ): Promise<ModifySpaceResponse> {
+    return this.request("ModifySpace", req, cb)
+  }
+
+  /**
+   * 收藏插件
+   */
+  async FavoritePlugin(
+    req: FavoritePluginRequest,
+    cb?: (error: string, rep: FavoritePluginResponse) => void
+  ): Promise<FavoritePluginResponse> {
+    return this.request("FavoritePlugin", req, cb)
   }
 
   /**
@@ -358,6 +486,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeModelListResponse) => void
   ): Promise<DescribeModelListResponse> {
     return this.request("DescribeModelList", req, cb)
+  }
+
+  /**
+   * 取消收藏插件
+   */
+  async UnfavoritePlugin(
+    req: UnfavoritePluginRequest,
+    cb?: (error: string, rep: UnfavoritePluginResponse) => void
+  ): Promise<UnfavoritePluginResponse> {
+    return this.request("UnfavoritePlugin", req, cb)
   }
 
   /**
@@ -431,13 +569,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重置会话
+   * 修改插件
    */
-  async ResetConversation(
-    req: ResetConversationRequest,
-    cb?: (error: string, rep: ResetConversationResponse) => void
-  ): Promise<ResetConversationResponse> {
-    return this.request("ResetConversation", req, cb)
+  async DeletePlugin(
+    req: DeletePluginRequest,
+    cb?: (error: string, rep: DeletePluginResponse) => void
+  ): Promise<DeletePluginResponse> {
+    return this.request("DeletePlugin", req, cb)
+  }
+
+  /**
+   * 提交共享 Skill 下架审批（v2，两段式：提交→审批→回调下架共享 Skill） 鉴权：删除权 拒绝场景：未共享 / 上架审批中 / 下架审批中
+   */
+  async DeleteSkillShare(
+    req: DeleteSkillShareRequest,
+    cb?: (error: string, rep: DeleteSkillShareResponse) => void
+  ): Promise<DeleteSkillShareResponse> {
+    return this.request("DeleteSkillShare", req, cb)
   }
 
   /**
@@ -468,6 +616,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateSpaceResponse) => void
   ): Promise<CreateSpaceResponse> {
     return this.request("CreateSpace", req, cb)
+  }
+
+  /**
+   * 创建skill
+   */
+  async CreateSkill(
+    req: CreateSkillRequest,
+    cb?: (error: string, rep: CreateSkillResponse) => void
+  ): Promise<CreateSkillResponse> {
+    return this.request("CreateSkill", req, cb)
   }
 
   /**
@@ -531,23 +689,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 编辑空间
+   * 获取应用信息
    */
-  async ModifySpace(
-    req: ModifySpaceRequest,
-    cb?: (error: string, rep: ModifySpaceResponse) => void
-  ): Promise<ModifySpaceResponse> {
-    return this.request("ModifySpace", req, cb)
+  async DescribeApp(
+    req: DescribeAppRequest,
+    cb?: (error: string, rep: DescribeAppResponse) => void
+  ): Promise<DescribeAppResponse> {
+    return this.request("DescribeApp", req, cb)
   }
 
   /**
-   * 获取插件详情
+   * 提交自定义Skill至企业级共享审批（两段式：提交→审批→回调创建共享任务）
    */
-  async DescribePlugin(
-    req: DescribePluginRequest,
-    cb?: (error: string, rep: DescribePluginResponse) => void
-  ): Promise<DescribePluginResponse> {
-    return this.request("DescribePlugin", req, cb)
+  async CreateSkillShare(
+    req: CreateSkillShareRequest,
+    cb?: (error: string, rep: CreateSkillShareResponse) => void
+  ): Promise<CreateSkillShareResponse> {
+    return this.request("CreateSkillShare", req, cb)
   }
 
   /**
@@ -561,13 +719,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取应用信息
+   * 收藏skill
    */
-  async DescribeApp(
-    req: DescribeAppRequest,
-    cb?: (error: string, rep: DescribeAppResponse) => void
-  ): Promise<DescribeAppResponse> {
-    return this.request("DescribeApp", req, cb)
+  async FavoriteSkill(
+    req: FavoriteSkillRequest,
+    cb?: (error: string, rep: FavoriteSkillResponse) => void
+  ): Promise<FavoriteSkillResponse> {
+    return this.request("FavoriteSkill", req, cb)
+  }
+
+  /**
+   * 删除自定义 Skill  鉴权：创建者 ∨ (编辑权限 ∧ 删除权限） 拒绝场景：非 Custom 类型 / 已共享 / 安全检测中 / 上架审批中 / 下架审批中
+   */
+  async DeleteSkill(
+    req: DeleteSkillRequest,
+    cb?: (error: string, rep: DeleteSkillResponse) => void
+  ): Promise<DeleteSkillResponse> {
+    return this.request("DeleteSkill", req, cb)
   }
 
   /**
@@ -578,6 +746,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAppResponse) => void
   ): Promise<CreateAppResponse> {
     return this.request("CreateApp", req, cb)
+  }
+
+  /**
+   * Skill修改
+   */
+  async ModifySkill(
+    req: ModifySkillRequest,
+    cb?: (error: string, rep: ModifySkillResponse) => void
+  ): Promise<ModifySkillResponse> {
+    return this.request("ModifySkill", req, cb)
   }
 
   /**
@@ -601,6 +779,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取插件详情
+   */
+  async CreatePlugin(
+    req: CreatePluginRequest,
+    cb?: (error: string, rep: CreatePluginResponse) => void
+  ): Promise<CreatePluginResponse> {
+    return this.request("CreatePlugin", req, cb)
+  }
+
+  /**
+   * 删除Agent
+   */
+  async DeleteAgent(
+    req: DeleteAgentRequest,
+    cb?: (error: string, rep: DeleteAgentResponse) => void
+  ): Promise<DeleteAgentResponse> {
+    return this.request("DeleteAgent", req, cb)
+  }
+
+  /**
    * 获取会话历史消息
    */
   async DescribeConversationMessageList(
@@ -608,6 +806,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeConversationMessageListResponse) => void
   ): Promise<DescribeConversationMessageListResponse> {
     return this.request("DescribeConversationMessageList", req, cb)
+  }
+
+  /**
+   * 获取插件详情
+   */
+  async DescribePlugin(
+    req: DescribePluginRequest,
+    cb?: (error: string, rep: DescribePluginResponse) => void
+  ): Promise<DescribePluginResponse> {
+    return this.request("DescribePlugin", req, cb)
   }
 
   /**

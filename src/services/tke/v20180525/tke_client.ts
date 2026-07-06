@@ -88,6 +88,7 @@ import {
   SwitchClusterEndpointRequest,
   CreateEdgeLogConfigRequest,
   CreatePrometheusDashboardResponse,
+  RotateClusterTokenRequest,
   CancelClusterReleaseRequest,
   DescribeTKEEdgeClusterStatusResponse,
   DeleteUserPermissionsResponse,
@@ -350,6 +351,7 @@ import {
   DeleteReservedInstancesResponse,
   DescribeLogSwitchesResponse,
   ModifyClusterVirtualNodePoolResponse,
+  RotateClusterTokenResponse,
   SuperNodeResource,
   InstanceUpgradeClusterStatus,
   DescribeClusterRoutesRequest,
@@ -1113,13 +1115,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新镜像缓存接口
+   * 轮转集群的token
    */
-  async UpdateImageCache(
-    req: UpdateImageCacheRequest,
-    cb?: (error: string, rep: UpdateImageCacheResponse) => void
-  ): Promise<UpdateImageCacheResponse> {
-    return this.request("UpdateImageCache", req, cb)
+  async RotateClusterToken(
+    req?: RotateClusterTokenRequest,
+    cb?: (error: string, rep: RotateClusterTokenResponse) => void
+  ): Promise<RotateClusterTokenResponse> {
+    return this.request("RotateClusterToken", req, cb)
   }
 
   /**
@@ -1796,6 +1798,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeUpgradeTasksResponse) => void
   ): Promise<DescribeUpgradeTasksResponse> {
     return this.request("DescribeUpgradeTasks", req, cb)
+  }
+
+  /**
+   * 更新镜像缓存接口
+   */
+  async UpdateImageCache(
+    req: UpdateImageCacheRequest,
+    cb?: (error: string, rep: UpdateImageCacheResponse) => void
+  ): Promise<UpdateImageCacheResponse> {
+    return this.request("UpdateImageCache", req, cb)
   }
 
   /**

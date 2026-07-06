@@ -348,9 +348,9 @@ it("tke.v20180525.CreateClusterRouteTable", async function () {
     }
 })
 
-it("tke.v20180525.UpdateImageCache", async function () {
+it("tke.v20180525.RotateClusterToken", async function () {
     try {
-       const data = await client.UpdateImageCache({})
+       const data = await client.RotateClusterToken({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1021,6 +1021,16 @@ it("tke.v20180525.CreateReservedInstances", async function () {
 it("tke.v20180525.DescribeUpgradeTasks", async function () {
     try {
        const data = await client.DescribeUpgradeTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tke.v20180525.UpdateImageCache", async function () {
+    try {
+       const data = await client.UpdateImageCache({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

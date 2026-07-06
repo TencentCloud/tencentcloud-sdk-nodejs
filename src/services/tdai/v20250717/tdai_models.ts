@@ -162,6 +162,10 @@ export interface DescribeMemoryPlusSpaceResponse {
    */
   PayMode?: number
   /**
+   * <p>是否自动续费</p><p>枚举值：</p><ul><li>0： 不自动续费</li><li>1： 自动续费</li></ul>
+   */
+  AutoRenew?: number
+  /**
    * <p>Memory 版本信息：v1。</p>
    */
   Version?: string
@@ -785,6 +789,18 @@ export interface CreateMemoryPlusSpaceRequest {
    * <p>单次批量创建 Memory 实例的数量。取值范围为 1-50。</p>
    */
   GoodsNum?: number
+  /**
+   * <p>计费模式。</p><p>枚举值：</p><ul><li>0： 按量计费。</li><li>1： 包年包月。</li></ul>
+   */
+  PayMode?: number
+  /**
+   * <p>包年包月周期</p>
+   */
+  PayPeriod?: number
+  /**
+   * <p>是否自动续费</p>
+   */
+  AutoRenew?: number
 }
 
 /**
@@ -883,6 +899,10 @@ export interface RecoverMemoryPlusSpaceRequest {
    * <p>指定需要恢复的 Memory 实例 ID 列表。</p>
    */
   SpaceIds: Array<string>
+  /**
+   * <p>包年包月续费周期</p><p>单位：月</p>
+   */
+  PayPeriod?: number
 }
 
 /**

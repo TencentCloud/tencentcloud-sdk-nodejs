@@ -1387,31 +1387,19 @@ export interface UpgradeNatGatewayProductVersionRequest {
  */
 export interface DescribeReserveIpAddressesRequest {
   /**
-   * 内网保留IP唯一ID 列表
+   * <p>内网保留IP唯一ID 列表</p>
    */
   ReserveIpIds?: Array<string>
   /**
-   * 过滤条件，参数不支持同时指定ReserveIpIds和Filters。
-
-reserve-ip-id  - String - （过滤条件）内网保留 IP唯一 ID，形如：rsvip-pvqgv9vi。
-vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。
-subnet-id - String - （过滤条件）所属子网实例ID，形如：subnet-f49l6u0z。
-address-ip - String - （过滤条件）内网保留 IP 地址，形如：192.168.0.10。
-ip-type - String - （过滤条件）业务类型 ipType，0。
-name - String - （过滤条件）名称。
-state - String - （过滤条件）状态，可选值：Bind， UnBind。
-resource-id - String - （过滤条件）绑定的实例资源，形如：eni-059qmnif。
-tag-key - String -（过滤条件）按照标签键进行过滤。
-tag:tag-key - String - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。
-
+   * <p>过滤条件，参数不支持同时指定ReserveIpIds和Filters。</p><p>reserve-ip-id  - String - （过滤条件）内网保留 IP唯一 ID，形如：rsvip-pvqgv9vi。<br>vpc-id - String - （过滤条件）VPC实例ID，形如：vpc-f49l6u0z。<br>subnet-id - String - （过滤条件）所属子网实例ID，形如：subnet-f49l6u0z。<br>reserve-address-ip - String - （过滤条件）内网保留 IP 地址，形如：192.168.0.10。<br>ip-type - String - （过滤条件）业务类型 ipType，0。<br>name - String - （过滤条件）名称。<br>state - String - （过滤条件）状态，可选值：Bind， UnBind。<br>resource-id - String - （过滤条件）绑定的实例资源，形如：eni-059qmnif。<br>tag-key - String -（过滤条件）按照标签键进行过滤。<br>tag:tag-key - String - （过滤条件）按照标签键值对进行过滤。 tag-key使用具体的标签键进行替换。</p>
    */
   Filters?: Array<Filter>
   /**
-   * 偏移量。
+   * <p>偏移量。</p>
    */
   Offset?: number
   /**
-   * 请求对象个数。
+   * <p>请求对象个数。</p>
    */
   Limit?: number
 }
@@ -8594,11 +8582,11 @@ export interface DeletePrivateNatGatewayDestinationIpPortTranslationNatRuleRespo
  */
 export interface DescribeReserveIpAddressesResponse {
   /**
-   * 内网保留 IP返回信息。
+   * <p>内网保留 IP返回信息。</p>
    */
   ReserveIpAddressSet?: Array<ReserveIpAddressInfo>
   /**
-   * 返回内网保留IP的个数。
+   * <p>返回内网保留IP的个数。</p>
    */
   TotalCount?: number
   /**
@@ -16378,6 +16366,10 @@ export interface CreateBandwidthPackageRequest {
    * 网络出口，默认值：center_egress1，其它可选值：center_egress2、center_egress3。
    */
   Egress?: string
+  /**
+   * 仅用于申请特殊可用区带宽包，如：TEZ/EZ边缘可用区，CDZ专属可用区。具体可选可用区信息，请参考[DescribeDesignatedZones](https://cloud.tencent.com/document/product/215/128830)接口查询结果。
+   */
+  DesignatedZone?: string
 }
 
 /**

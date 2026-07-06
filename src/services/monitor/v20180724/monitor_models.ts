@@ -1238,80 +1238,79 @@ export interface DescribeAllNamespacesResponse {
  */
 export interface CreateAlarmShieldRequest {
   /**
-   * 模块名，这里填“monitor”
+   * <p>模块名，这里填“monitor”</p>
    */
   Module: string
   /**
-   * 屏蔽策略名称
+   * <p>屏蔽策略名称</p>
    */
   Name: string
   /**
-   * 监控类型
+   * <p>监控类型</p>
    */
   MonitorType: string
   /**
-   * 命名空间即策略类型
+   * <p>命名空间即策略类型</p>
    */
   NameSpace: string
   /**
-   * 屏蔽时间类型 FOREVER_SHIELD:永久屏蔽 PERIOD_SHIELD:绝对时间范围屏蔽 LOOP_SHIELD:相对时间范围屏蔽
+   * <p>屏蔽时间类型 FOREVER_SHIELD:永久屏蔽 PERIOD_SHIELD:绝对时间范围屏蔽 LOOP_SHIELD:相对时间范围屏蔽</p>
    */
   ShieldTimeType: string
   /**
-   * 屏蔽对象
+   * <p>屏蔽对象</p>
    */
   ShieldObject?: Array<string>
   /**
-   * 屏蔽指标 为空则为全部指标
+   * <p>屏蔽指标 为空则为全部指标</p>
    */
   ShieldMetric?: Array<string>
   /**
-   * 开始时间 相对时间范围:36000 绝对时间范围:1648742400 缺省:0
+   * <p>开始时间 相对时间范围:36000 绝对时间范围:1648742400 缺省:0</p>
    */
   StartTime?: number
   /**
-   * 结束时间 相对时间范围:72000 绝对时间范围:1649088000 缺省:0
+   * <p>结束时间 相对时间范围:72000 绝对时间范围:1649088000 缺省:0</p>
    */
   EndTime?: number
   /**
-   * 循环开始日期 2022/04/01 缺省:0
+   * <p>循环开始日期 2022/04/01 缺省:0</p>
    */
   LoopStartDate?: number
   /**
-   * 循环结束日期 2022/04/05 缺省:0
+   * <p>循环结束日期 2022/04/05 缺省:0</p>
    */
   LoopEndDate?: number
   /**
-   * 需要屏蔽的策略ID
+   * <p>需要屏蔽的策略ID</p>
    */
   ShieldPolicyId?: string
   /**
-   * 需要屏蔽的告警等级，取值范围Warn,Remind,Serious
+   * <p>需要屏蔽的告警等级，取值范围Warn,Remind,Serious</p>
    */
   ShieldAlarmLevel?: Array<string>
   /**
-   * 屏蔽类型，为OBJNAME是老版本实例名屏蔽，为POLICY是新版本维度匹配
+   * <p>屏蔽类型，为OBJNAME是实例屏蔽，为POLICY是策略屏蔽</p>
    */
   VersionTag?: string
   /**
-   * 屏蔽规则的描述
+   * <p>屏蔽规则的描述</p>
    */
   Description?: string
   /**
-   *  时区，东八区+8，西八区减8，以此类推
-
+   * <p>时区，东八区+8，西八区减8，以此类推</p>
    */
   TimeZone?: number
   /**
-   * 屏蔽事件 为空则为全部指标
+   * <p>屏蔽事件 为空则为全部指标</p>
    */
   ShieldEvent?: Array<string>
   /**
-   * 是否对指标屏蔽 1=是 0=否
+   * <p>是否对指标屏蔽 1=是 0=否</p>
    */
   ShieldMetricFlag?: number
   /**
-   * 是否对事件屏蔽 1=是 0=否
+   * <p>是否对事件屏蔽 1=是 0=否</p>
    */
   ShieldEventFlag?: number
 }
@@ -6843,7 +6842,7 @@ export interface DescribeGrafanaEnvironmentsResponse {
  */
 export interface CreateAlarmShieldResponse {
   /**
-   * 屏蔽规则的Id
+   * <p>屏蔽规则的Id</p>
    */
   ShieldId?: string
   /**

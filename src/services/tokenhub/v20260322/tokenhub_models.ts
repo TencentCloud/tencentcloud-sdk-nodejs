@@ -34,42 +34,6 @@ export interface DescribeTokenPlanListResponse {
 }
 
 /**
- * 绑定资源项
- */
-export interface BindingItem {
-  /**
-   * 资源 ID（模型 ID 或服务 ID）。
-   */
-  ResourceId: string
-  /**
-   * 资源类型。取值：endpoint（服务）、model（模型）。
-   */
-  ResourceType: string
-  /**
-   * 资源状态
-   */
-  Status?: string
-}
-
-/**
- * DescribeTokenPlanApiKeySecret返回参数结构体
- */
-export interface DescribeTokenPlanApiKeySecretResponse {
-  /**
-   * APIKey ID。
-   */
-  ApiKeyId?: string
-  /**
-   * APIKey 密钥值（明文）。请妥善保管。
-   */
-  ApiKey?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * Token Plan API Key 列表项
  */
 export interface TokenPlanApiKeyListItem {
@@ -141,6 +105,72 @@ export interface TokenPlanApiKeyListItem {
    * 套餐类型。取值：enterprise（企业版专业套餐）、enterprise-auto（企业版轻享套餐）。
    */
   ProductType?: string
+}
+
+/**
+ * 绑定资源项
+ */
+export interface BindingItem {
+  /**
+   * 资源 ID（模型 ID 或服务 ID）。
+   */
+  ResourceId: string
+  /**
+   * 资源类型。取值：endpoint（服务）、model（模型）。
+   */
+  ResourceType: string
+  /**
+   * 资源状态
+   */
+  Status?: string
+}
+
+/**
+ * DescribeTokenPlanApiKeySecret返回参数结构体
+ */
+export interface DescribeTokenPlanApiKeySecretResponse {
+  /**
+   * APIKey ID。
+   */
+  ApiKeyId?: string
+  /**
+   * APIKey 密钥值（明文）。请妥善保管。
+   */
+  ApiKey?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 模型计费信息
+ */
+export interface ModelChargingInfo {
+  /**
+   * 计费类型。取值：Uniform（统一计费）、Tiered（阶梯计费）。
+   */
+  Type?: string
+  /**
+   * 计费名称，阶梯计费时表示区间标识，统一计费为空。
+   */
+  Name?: string
+  /**
+   * 计费场景，用于区分同一产品不同功能的计费。
+   */
+  Scenario?: string
+  /**
+   * 计费条目列表，顺序即前端展示顺序。
+   */
+  ChargingItems?: Array<ModelChargingItem>
+  /**
+   * 计费单位。取值：TOKEN（词元）、COUNT（次）、CREDIT（积分）、PICTURE（张）。
+   */
+  ChargeUnit?: string
+  /**
+   * 计费参考链接。
+   */
+  Reference?: string
 }
 
 /**
@@ -401,77 +431,13 @@ endpoint / model 维度等于 Key。
 }
 
 /**
- * Token Plan API Key 详情
+ * 模型图标信息
  */
-export interface TokenPlanApiKeyInfo {
+export interface ModelImage {
   /**
-   * API Key ID。
+   * 图标 URL。
    */
-  ApiKeyId?: string
-  /**
-   * API Key 密钥值（脱敏）。
-   */
-  ApiKey?: string
-  /**
-   * API Key 名称。
-   */
-  Name?: string
-  /**
-   * 所属套餐 ID。
-   */
-  TeamId?: string
-  /**
-   * 账号APP ID。
-   */
-  AppId?: string
-  /**
-   * 主账号 UIN。
-   */
-  Uin?: string
-  /**
-   * API Key 可用模型列表（JSON 数组字符串）。
-   */
-  AllowedModels?: string
-  /**
-   * API Key 是否可用。取值：enable（启用）、disable（停用）。
-   */
-  Status?: string
-  /**
-   * API Key 停用原因。取值：NORMAL（正常，默认值），QUOTA_EXHAUSTED（API Key额度包耗尽），ABNORMAL（异常，需人工介入）
-   */
-  StopReason?: string
-  /**
-   * 用户侧开关。取值：enable（启用）、disable（停用）。
-   */
-  UseStatus?: string
-  /**
-   * 密钥版本号。
-   */
-  KeyVersion?: number
-  /**
-   * 最近一次重置时间。（ISO 8601）
-   */
-  LastRotatedAt?: string
-  /**
-   * 创建人，如果是子账号创建，则该值为子账号UIN。
-   */
-  Creator?: string
-  /**
-   * 创建时间。
-   */
-  CreatedAt?: string
-  /**
-   * 更新时间。
-   */
-  UpdatedAt?: string
-  /**
-   * TPM 限制（Tokens Per Minute）。
-   */
-  TPM?: number
-  /**
-   * 套餐类型。取值：enterprise（企业版专业套餐）、enterprise-auto（企业版轻享套餐）
-   */
-  ProductType?: string
+  Url?: string
 }
 
 /**
@@ -506,33 +472,21 @@ export interface DescribeApiKeyListRequest {
 }
 
 /**
- * 用量时间周期内的时序点列表（按 metric key 索引）。为 JSON 数组的字符串形式,数组长度与响应 Timestamps 一致，无数据点处为 null。具体包含哪些 key 由响应 MetricKeys 决定。
+ * 修改术语条目项
  */
-export interface UsageSeries {
+export interface ModifyGlossaryEntryInput {
   /**
-   * <p>[tokens 族]总 token 数用量时间周期内的 JSON 字符串形式，如 <code>&quot;[12,null,15]&quot;</code>。</p>
+   * 术语条目 ID。可通过 DescribeGlossaryEntries 接口获取。
    */
-  TotalToken?: string
+  EntryId: string
   /**
-   * <p>[tokens 族]输入 token 数用量时间周期内的 JSON 字符串形式，如 <code>&quot;[7,null,9]&quot;</code>。</p>
+   * 源语言术语。最大 1000 字符。不传则保持不变。
    */
-  InputTotalToken?: string
+  SourceTerm?: string
   /**
-   * <p>[tokens 族]输出 token 数用量时间周期内的 JSON 字符串形式，如 <code>&quot;[5,null,6]&quot;</code>。</p>
+   * 目标语言术语。最大 1000 字符。不传则保持不变。
    */
-  OutputTotalToken?: string
-  /**
-   * <p>[tokens 族]读缓存 token 数用量时间周期内的 JSON 字符串形式，如<code>&quot;[5,null,6]&quot;</code>。</p>
-   */
-  CacheTotalToken?: string
-  /**
-   * <p>[search 族] 搜索请求数用量时间周期内的 JSON 字符串形式，如<code>&quot;[5,null,6]&quot;</code>。</p>
-   */
-  SearchRequestCount?: string
-  /**
-   * <p>[search 族] 搜索引擎调用次数用量时间周期内的 JSON 字符串形式，如<code>&quot;[5,null,6]&quot;</code>。</p>
-   */
-  SearchCount?: string
+  TargetTerm?: string
 }
 
 /**
@@ -612,6 +566,80 @@ export interface DescribeGlossaryEntriesRequest {
 }
 
 /**
+ * Token Plan API Key 详情
+ */
+export interface TokenPlanApiKeyInfo {
+  /**
+   * API Key ID。
+   */
+  ApiKeyId?: string
+  /**
+   * API Key 密钥值（脱敏）。
+   */
+  ApiKey?: string
+  /**
+   * API Key 名称。
+   */
+  Name?: string
+  /**
+   * 所属套餐 ID。
+   */
+  TeamId?: string
+  /**
+   * 账号APP ID。
+   */
+  AppId?: string
+  /**
+   * 主账号 UIN。
+   */
+  Uin?: string
+  /**
+   * API Key 可用模型列表（JSON 数组字符串）。
+   */
+  AllowedModels?: string
+  /**
+   * API Key 是否可用。取值：enable（启用）、disable（停用）。
+   */
+  Status?: string
+  /**
+   * API Key 停用原因。取值：NORMAL（正常，默认值），QUOTA_EXHAUSTED（API Key额度包耗尽），ABNORMAL（异常，需人工介入）
+   */
+  StopReason?: string
+  /**
+   * 用户侧开关。取值：enable（启用）、disable（停用）。
+   */
+  UseStatus?: string
+  /**
+   * 密钥版本号。
+   */
+  KeyVersion?: number
+  /**
+   * 最近一次重置时间。（ISO 8601）
+   */
+  LastRotatedAt?: string
+  /**
+   * 创建人，如果是子账号创建，则该值为子账号UIN。
+   */
+  Creator?: string
+  /**
+   * 创建时间。
+   */
+  CreatedAt?: string
+  /**
+   * 更新时间。
+   */
+  UpdatedAt?: string
+  /**
+   * TPM 限制（Tokens Per Minute）。
+   */
+  TPM?: number
+  /**
+   * 套餐类型。取值：enterprise（企业版专业套餐）、enterprise-auto（企业版轻享套餐）
+   */
+  ProductType?: string
+}
+
+/**
  * DeleteGlossaryEntries请求参数结构体
  */
 export interface DeleteGlossaryEntriesRequest {
@@ -686,21 +714,13 @@ export interface DescribeApiKeyRequest {
 }
 
 /**
- * 修改术语条目项
+ * 模型访问信息
  */
-export interface ModifyGlossaryEntryInput {
+export interface ModelAccessInfo {
   /**
-   * 术语条目 ID。可通过 DescribeGlossaryEntries 接口获取。
+   * 各站点的地域可用性列表。为空时表示未配置地域信息，模型不可用。
    */
-  EntryId: string
-  /**
-   * 源语言术语。最大 1000 字符。不传则保持不变。
-   */
-  SourceTerm?: string
-  /**
-   * 目标语言术语。最大 1000 字符。不传则保持不变。
-   */
-  TargetTerm?: string
+  ModelSiteRegions?: Array<ModelSiteRegion>
 }
 
 /**
@@ -763,6 +783,14 @@ export interface TokenSummaryBillingItem {
  */
 export interface DescribeModelListResponse {
   /**
+   * <p>模型列表。</p>
+   */
+  ModelSet?: Array<Model>
+  /**
+   * <p>符合条件的模型总数。</p>
+   */
+  TotalCount?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -806,6 +834,28 @@ export interface RequestSort {
    * 排序方向。取值：ASC（升序）、DESC（降序）。
    */
   Order: string
+}
+
+/**
+ * 计费条目
+ */
+export interface ModelChargingItem {
+  /**
+   * 价格维度标识。取值：Input（输入）、Output（输出）、Cache（缓存命中）、Thinking（思考）、BatchInput（批量输入）、BatchOutput（批量输出）、BatchCache（批量缓存命中）、ImageInput（输入图片）、ImageOutput（输出图片）、Search（搜索调用）。
+   */
+  PriceName?: string
+  /**
+   * 价格维度展示名，后端直接提供当前语言文本（如 输入、Input），前端无需翻译。
+   */
+  DisplayName?: string
+  /**
+   * 价格数值。
+   */
+  Price?: string
+  /**
+   * 价格单位，后端直接提供当前语言文本（如 元/百万tokens、元/张、积分/次）。
+   */
+  PriceUnit?: string
 }
 
 /**
@@ -979,6 +1029,20 @@ export interface DeleteTokenPlanApiKeyResponse {
 }
 
 /**
+ * 模型上线的站点、地域信息
+ */
+export interface ModelSiteRegion {
+  /**
+   * 站点标识。取值：domestic（国内站）、international（国际站）。
+   */
+  Site?: string
+  /**
+   * 该站点下可用的地域列表，遵循腾讯云标准地域编码（如 ap-guangzhou、ap-beijing、ap-singapore、na-siliconvalley 等）。为空数组时表示该站点无可用地域。
+   */
+  Regions?: Array<string>
+}
+
+/**
  * DescribeTokenPlanApiKeyUsageDetail请求参数结构体
  */
 export interface DescribeTokenPlanApiKeyUsageDetailRequest {
@@ -1097,6 +1161,36 @@ export interface CreateGlossaryEntriesRequest {
 }
 
 /**
+ * 用量时间周期内的时序点列表（按 metric key 索引）。为 JSON 数组的字符串形式,数组长度与响应 Timestamps 一致，无数据点处为 null。具体包含哪些 key 由响应 MetricKeys 决定。
+ */
+export interface UsageSeries {
+  /**
+   * <p>[tokens 族]总 token 数用量时间周期内的 JSON 字符串形式，如 <code>&quot;[12,null,15]&quot;</code>。</p>
+   */
+  TotalToken?: string
+  /**
+   * <p>[tokens 族]输入 token 数用量时间周期内的 JSON 字符串形式，如 <code>&quot;[7,null,9]&quot;</code>。</p>
+   */
+  InputTotalToken?: string
+  /**
+   * <p>[tokens 族]输出 token 数用量时间周期内的 JSON 字符串形式，如 <code>&quot;[5,null,6]&quot;</code>。</p>
+   */
+  OutputTotalToken?: string
+  /**
+   * <p>[tokens 族]读缓存 token 数用量时间周期内的 JSON 字符串形式，如<code>&quot;[5,null,6]&quot;</code>。</p>
+   */
+  CacheTotalToken?: string
+  /**
+   * <p>[search 族] 搜索请求数用量时间周期内的 JSON 字符串形式，如<code>&quot;[5,null,6]&quot;</code>。</p>
+   */
+  SearchRequestCount?: string
+  /**
+   * <p>[search 族] 搜索引擎调用次数用量时间周期内的 JSON 字符串形式，如<code>&quot;[5,null,6]&quot;</code>。</p>
+   */
+  SearchCount?: string
+}
+
+/**
  * API 密钥详情
  */
 export interface ApiKeyDetail {
@@ -1198,6 +1292,84 @@ export interface DescribeGlossariesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 模型信息
+ */
+export interface Model {
+  /**
+   * <p>模型名称</p>
+   */
+  ModelName?: string
+  /**
+   * <p>模型 ID。</p>
+   */
+  ModelId?: string
+  /**
+   * <p>模型显示名称。</p>
+   */
+  DisplayName?: string
+  /**
+   * <p>模型描述。</p>
+   */
+  Description?: string
+  /**
+   * <p>模型概要。</p>
+   */
+  Summary?: string
+  /**
+   * <p>模型类型。取值：Text（文本）、Vision（视觉）、Multimodal（多模态）、Speech（语音）、Embedding（向量）。</p><p>枚举值：</p><ul><li>Text： 语言模型</li><li>Vision： 视觉模型</li><li>Multimodal： 多模态模型</li></ul>
+   */
+  ModelType?: string
+  /**
+   * <p>模型品牌。</p>
+   */
+  Brand?: string
+  /**
+   * <p>模型图标。</p>
+   */
+  ModelImage?: ModelImage
+  /**
+   * <p>模型供应商。</p>
+   */
+  Provider?: string
+  /**
+   * <p>模型状态。取值：online（上线）、offline（下线）。</p><p>枚举值：</p><ul><li>online ： 上线</li><li>pre-offline： 预下线</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>标签列表。</p>
+   */
+  Tags?: Array<string>
+  /**
+   * <p>计费信息列表。</p>
+   */
+  ModelChargingInfo?: Array<ModelChargingInfo>
+  /**
+   * <p>模型规格。</p>
+   */
+  ModelSpec?: ModelSpec
+  /**
+   * <p>发布时间。</p>
+   */
+  ReleaseAt?: string
+  /**
+   * <p>推荐顺序，值越小排序越靠前。</p>
+   */
+  RecommendWeight?: number
+  /**
+   * <p>模型访问信息。包含模型在各站点和地域的可用性配置。为空时表示未配置地域信息，模型不可用。</p>
+   */
+  ModelAccessInfo?: ModelAccessInfo
+  /**
+   * <p>体验包信息。</p>
+   */
+  FreeTrialInfo?: ModelFreeTrialInfo
+  /**
+   * <p>模型下线时间，Status=pre-offline 时，会配置模型下线时间</p>
+   */
+  OfflineAt?: string
 }
 
 /**
@@ -1322,6 +1494,40 @@ export interface CreateTokenPlanTeamOrderAndBuyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 模型规格信息
+ */
+export interface ModelSpec {
+  /**
+   * 每分钟处理 Token 数（Tokens Per Minute）。
+   */
+  TPM?: string
+  /**
+   * 每分钟请求数（Queries Per Minute）。
+   */
+  QPM?: string
+  /**
+   * 最大输入 Token 长度。
+   */
+  MaxInputToken?: string
+  /**
+   * 最大输出 Token 长度。
+   */
+  MaxOutputToken?: string
+  /**
+   * 上下文窗口长度。
+   */
+  ContextLength?: string
+  /**
+   * 并发数。
+   */
+  Concurrency?: string
+  /**
+   * 输入要求描述。
+   */
+  InputDescription?: string
 }
 
 /**
@@ -1630,6 +1836,28 @@ export interface DeleteTokenPlanApiKeyRequest {
    * API Key ID。可通过DescribeTokenPlanApiKeyList接口获取。
    */
   ApiKeyId: string
+}
+
+/**
+ * 模型体验包信息
+ */
+export interface ModelFreeTrialInfo {
+  /**
+   * 推荐顺序，值越小排序越靠前。为空表示使用模型默认权重。
+   */
+  RecommendWeight?: number
+  /**
+   * 体验包容量大小。
+   */
+  CapacitySize?: number
+  /**
+   * 容量单位。取值：token。
+   */
+  Unit?: string
+  /**
+   * 有效期天数（如90天）。为空表示不限期。
+   */
+  ValidityDays?: number
 }
 
 /**

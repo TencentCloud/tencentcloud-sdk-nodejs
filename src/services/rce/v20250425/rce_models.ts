@@ -34,20 +34,6 @@ export interface ManageIPPortraitRiskOutput {
 }
 
 /**
- * 业务入参
- */
-export interface ManageIPPortraitRiskInput {
-  /**
-   * <p>用户公网ip（仅支持IPv4）</p>
-   */
-  UserIp: string
-  /**
-   * <p>渠道号<br>1：pc<br>2：H5<br>3：app<br>4：ott</p>
-   */
-  Channel: number
-}
-
-/**
  * ManageIPPortraitRisk返回参数结构体
  */
 export interface ManageIPPortraitRiskResponse {
@@ -76,6 +62,58 @@ export interface ManageIPPortraitRiskRequest {
 }
 
 /**
+ * IP地理位置信息
+ */
+export interface IpLocationInfo {
+  /**
+   * <p>IP地址所属国家</p>
+   */
+  Country?: string
+  /**
+   * <p>IP地址所属省份</p>
+   */
+  Region?: string
+  /**
+   * <p>IP地址所属城市</p>
+   */
+  City?: string
+  /**
+   * <p>IP地址所属地区</p>
+   */
+  District?: string
+  /**
+   * <p>IP地址的经度</p>
+   */
+  Longitude?: string
+  /**
+   * <p>IP地址的纬度</p>
+   */
+  Latitude?: string
+  /**
+   * <p>IP地址所属时区</p>
+   */
+  Timezone?: string
+  /**
+   * <p>IP地址的邮政编码</p>
+   */
+  ZipCode?: string
+}
+
+/**
+ * 业务入参
+ */
+export interface ManageIPPortraitRiskInput {
+  /**
+   * <p>用户公网ip（仅支持IPv4）</p>
+   */
+  UserIp: string
+  /**
+   * <p>渠道号<br>1：pc<br>2：H5<br>3：app<br>4：ott</p>
+   */
+  Channel: number
+}
+
+/**
  * 业务出参
  */
 export interface ManageIPPortraitRiskValueOutput {
@@ -91,4 +129,86 @@ export interface ManageIPPortraitRiskValueOutput {
    * <p>风险类型<br>730001：垃圾邮件，当前IP存在未经用户请求或同意，大量发送的广告、欺诈或推广信息，通常通过邮件、短信或社交消息传播。<br>730002：恶意行为，当前IP存在破坏、窃取、干扰或未授权访问为目的的故意行为。<br>730003：恶意工具，当前IP关联用于实施恶意行为的软件或脚本，如病毒、木马、勒索软件、漏洞利用工具等。<br>730004：匿名IP，通过代理、Tor网络等技术手段隐藏真实来源的IP地址，存在逃避定位或实施攻击风险。<br>730005：开放端口，网络上处于开放状态的服务入口，若配置不当或存在漏洞。<br>730006：养号，当前IP存在通过模拟正常操作（如登录、浏览）维护和提升账号的活跃度与可信度行为。<br>730007：IDC，互联网数据中心，可能被黑客利用来托管恶意服务或发动攻击。<br>730008：晒号，当前IP在公开或地下论坛展示、交易非法获取的各类账号（如游戏、社交、金融账号）的行为。<br>730009：盗号，当前IP存在通过钓鱼、撞库、木马等手段，非法获取他人账号的登录凭证（用户名、密码等）行为。<br>730010：代理，作为中间节点转发网络流量，可用于隐藏真实IP、绕过地域限制。<br>730011：扫描，使用工具自动探测目标网络或系统的开放端口、服务、漏洞等。<br>730012：秒拨，当前IP通过不断重新拨号以快速切换IP地址，常被用于绕过基于IP的频率限制或封禁。<br>730013：爬虫，自动抓取网络信息的脚本或程序。<br>730014：VPN 虚拟专用网络。<br>730015：僵尸网络，当前IP由攻击者通过恶意软件控制的、大规模联网设备（如电脑、IoT设备）集群，可能被用于发动DDoS攻击、发送垃圾邮件等。<br>730016：网络攻击，当前IP存在对计算机系统、网络或数据的任何进攻行为。</p>
    */
   RiskType?: Array<number | bigint>
+  /**
+   * <p>IP地理位置信息</p>
+   */
+  IpLocation?: IpLocationInfo
+  /**
+   * <p>IP基础网络信息</p>
+   */
+  IpNetwork?: IpNetworkInfo
+}
+
+/**
+ * IP基础网络信息
+ */
+export interface IpNetworkInfo {
+  /**
+   * <p>互联网服务提供商</p>
+   */
+  ISP?: string
+  /**
+   * <p>自治系统号</p>
+   */
+  ASN?: string
+  /**
+   * <p>IP注册组织名称</p>
+   */
+  Organization?: string
+  /**
+   * <p>是否保留IP</p>
+   */
+  IsReserved?: boolean
+  /**
+   * <p>是否网关IP</p>
+   */
+  IsGateway?: boolean
+  /**
+   * <p>是否任播网络</p>
+   */
+  IsAnycast?: boolean
+  /**
+   * <p>是否移动网络</p>
+   */
+  IsMobile?: boolean
+  /**
+   * <p>是否动态IP</p>
+   */
+  IsDynamic?: boolean
+  /**
+   * <p>是否网络出口</p>
+   */
+  IsEgress?: boolean
+  /**
+   * <p>是否域名解析</p>
+   */
+  IsDNS?: boolean
+  /**
+   * <p>是否教育机构</p>
+   */
+  IsEducation?: boolean
+  /**
+   * <p>是否组织机构</p>
+   */
+  IsInstitution?: boolean
+  /**
+   * <p>是否企业专线</p>
+   */
+  IsCompany?: boolean
+  /**
+   * <p>是否家用宽带</p>
+   */
+  IsResidence?: boolean
+  /**
+   * <p>是否云服务</p>
+   */
+  IsCloudService?: boolean
+  /**
+   * <p>是否基础设施</p>
+   */
+  IsInfrastructure?: boolean
+  /**
+   * <p>是否邮箱服务</p>
+   */
+  IsMXServer?: boolean
 }

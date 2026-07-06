@@ -1621,11 +1621,15 @@ export interface DescribeKeySandboxCredentialRequest {
  */
 export interface DescribeDspmDictionaryListRequest {
   /**
-   * 字典类型（RootCategory：一级分类，IdentifyRule:敏感识别数据项）
+   * <p>字典类型（RootCategory：一级分类，IdentifyRule:敏感识别数据项）</p>
    */
   DictType: string
   /**
-   * 筛选条件
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>筛选条件</p>
    */
   Filters?: Array<WhereFilter>
 }
@@ -2526,7 +2530,7 @@ export interface DescribeCosActionListRequest {
  */
 export interface DescribeUserDspmInfoListRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -3587,7 +3591,7 @@ export interface DescribeDspmAssetTableListRequest {
    */
   DbName: string
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -4968,7 +4972,7 @@ export interface CosPermissionInfo {
  */
 export interface DescribeDspmDictionaryListResponse {
   /**
-   * 结果集
+   * <p>结果集</p>
    */
   DataSet?: Array<DspmDictionary>
   /**
@@ -5477,7 +5481,7 @@ export interface ModifyNotifySettingRequest {
  */
 export interface DescribeDspmPayInfoRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
 }
@@ -6672,39 +6676,39 @@ export interface ModifyDspmIdentifyInfoResponse {
  */
 export interface DspmAssetDatabaseInfo {
   /**
-   * 资产实例id
+   * <p>资产实例id</p>
    */
   AssetId?: string
   /**
-   * 数据库名称
+   * <p>数据库名称</p>
    */
   DbName?: string
   /**
-   * 总表数
+   * <p>总表数</p>
    */
   TableCount?: number
   /**
-   * 敏感表数
+   * <p>敏感表数</p>
    */
   SensitiveTableCount?: number
   /**
-   * 数据项id集合
+   * <p>数据项id集合</p>
    */
   RuleIds?: Array<number | bigint>
   /**
-   * 数据项名称集合
+   * <p>数据项名称集合</p>
    */
   RuleNames?: Array<string>
   /**
-   * 分类id集合
+   * <p>分类id集合</p>
    */
   CategoryIds?: Array<number | bigint>
   /**
-   * 分类名称集合
+   * <p>分类名称集合</p>
    */
   CategoryNames?: Array<string>
   /**
-   * 分类详情
+   * <p>分类详情</p>
    */
   CategoryDetails?: Array<DspmIdentifyCategoryDetail>
 }
@@ -9615,6 +9619,10 @@ None 暂无异常
    */
   InstanceType?: number
   /**
+   * 集群类型（MongoDB），与云接口 DescribeDBInstances 的 ClusterType 一致：0-副本集 1-分片；非 MongoDB 资产固定 0
+   */
+  ClusterType?: number
+  /**
    * 是否支持敏感数据识别。0 不支持；1 支持
    */
   IdentifyScanSupported?: number
@@ -10653,9 +10661,13 @@ export interface AddDspmAssetManagerRequest {
  */
 export interface DescribeDspmStatisticsRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
+  /**
+   * <p>按照资产类型过滤</p><p>枚举值：</p><ul><li>cdb： cdb</li><li>mariadb： mariadb</li><li>cynosdb： cynosdb</li></ul><p>默认值：默认值为空，即不按照资产类型过滤，返回所有资产信息</p>
+   */
+  AssetType?: Array<string>
 }
 
 /**
@@ -11784,45 +11796,49 @@ export interface DspmAssetSecurityAnalyseStatus {
  */
 export interface DspmAssetDataScanDetail {
   /**
-   * 识别任务状态 0:未识别 1:识别中 2:识别终止 3:识别成功 4:识别失败
+   * <p>识别任务状态 0:未识别 1:识别中 2:识别终止 3:识别成功 4:识别失败</p>
    */
   Status?: number
   /**
-   * 识别任务状态 0:未识别 1:识别中 2:识别终止 3:识别成功 4:识别失败
+   * <p>识别任务状态 0:未识别 1:识别中 2:识别终止 3:识别成功 4:识别失败</p>
    */
   StatusInfo?: string
   /**
-   * 识别进度
+   * <p>识别进度</p>
    */
   Progress?: number
   /**
-   * 最近扫描时间
+   * <p>最近扫描时间</p>
    */
   LatestScanTime?: string
   /**
-   * 识别失败信息
+   * <p>识别失败信息</p>
    */
   ErrorInfo?: string
   /**
-   * 数据库数量
+   * <p>数据库数量</p>
    */
   DbCount?: number
   /**
-   * 分类id集合
+   * <p>分类id集合</p>
    */
   CategoryIds?: Array<number | bigint>
   /**
-   * 分类名称集合
+   * <p>分类名称集合</p>
    */
   CategoryNames?: Array<string>
   /**
-   * 扫描任务配置
+   * <p>扫描任务配置</p>
    */
   TaskConfig?: DspmSensitiveScanTaskConfig
   /**
-   * 识别结果分类详情
+   * <p>识别结果分类详情</p>
    */
   CategoryDetails?: Array<DspmIdentifyCategoryDetail>
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId?: number
 }
 
 /**
@@ -12375,35 +12391,35 @@ export interface CosRoleAccessInfo {
 }
 
 /**
- * 简要的资产标签元素
+ * 简要的资产标签元素，CSIP 内部使用。
  */
 export interface MiniTagItem {
   /**
-   * <p>标签颜色</p>
+   * 标签展示颜色。
    */
   Color?: string
   /**
-   * <p>描述</p>
+   * 标签描述。
    */
   Description?: string
   /**
-   * <p>标签ID</p>
+   * 标签 ID。
    */
   ID?: number
   /**
-   * <p>标签键</p>
+   * 标签键（中文）。
    */
   TagKey?: string
   /**
-   * <p>标签值</p>
+   * 标签值（中文）。
    */
   TagValue?: string
   /**
-   * <p>标签键英文</p>
+   * 标签键（英文）。
    */
   TagKeyEn?: string
   /**
-   * <p>标签值英文</p>
+   * 标签值（英文）。
    */
   TagValueEn?: string
 }
@@ -12881,23 +12897,23 @@ export interface AccessKeyRisk {
  */
 export interface DspmIdentifyRuleDetail {
   /**
-   * 数据项id
+   * <p>数据项id</p>
    */
   RuleId?: number
   /**
-   * 数据项名称
+   * <p>数据项名称</p>
    */
   RuleName?: string
   /**
-   * 敏感级别id
+   * <p>敏感级别id</p>
    */
   LevelId?: number
   /**
-   * 敏感级别名称
+   * <p>敏感级别名称</p>
    */
   LevelName?: string
   /**
-   * 敏感程度
+   * <p>敏感程度</p>
    */
   LevelScore?: number
 }
@@ -13071,15 +13087,15 @@ export interface DeleteCosPolicyResponse {
  */
 export interface DescribeDspmAssetDatabaseListRequest {
   /**
-   * 资产实例id
+   * <p>资产实例id</p>
    */
   AssetId: string
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
-   * 筛选项
+   * <p>筛选项</p>
    */
   Filter?: Filter
 }
@@ -17223,7 +17239,7 @@ export interface DescribeDspmAssetFieldListRequest {
    */
   TableName: string
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -17823,7 +17839,7 @@ export interface ModifyDspmAssetDataScanTaskRequest {
    */
   IsRunAtOnce: boolean
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -18709,15 +18725,15 @@ export interface ModifyAlarmRiskStatusResponse {
 }
 
 /**
- * 标签
+ * 云上原生标签键值对。
  */
 export interface Tag {
   /**
-   * 标签名称
+   * 标签键。
    */
   Name: string
   /**
-   * 标签内容
+   * 标签值。
    */
   Value: string
 }
@@ -19926,11 +19942,11 @@ export interface DescribeEDRRuleListResponse {
  */
 export interface DescribeDspmAssetDatabaseListResponse {
   /**
-   * 总数
+   * <p>总数</p>
    */
   TotalCount?: number
   /**
-   * 结果集
+   * <p>结果集</p>
    */
   DataSet?: Array<DspmAssetDatabaseInfo>
   /**
@@ -21063,23 +21079,23 @@ export interface DescribeSubUserInfoResponse {
  */
 export interface DescribeDspmStatisticsResponse {
   /**
-   * 资产统计信息
+   * <p>资产统计信息</p>
    */
   AssetCount?: DspmAssetCount
   /**
-   * 访问Ip统计信息
+   * <p>访问Ip统计信息</p>
    */
   IpCount?: DspmIpCount
   /**
-   * 用户账号统计信息
+   * <p>用户账号统计信息</p>
    */
   UserCount?: DspmAccountCount
   /**
-   * 风险统计信息
+   * <p>风险统计信息</p>
    */
   RiskCount?: DspmRiskCount
   /**
-   * 资产安全分析统计信息
+   * <p>资产安全分析统计信息</p>
    */
   AnalyseAssetStatusCount?: DspmSecurityAnalyseStatusCount
   /**

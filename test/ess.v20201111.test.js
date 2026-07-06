@@ -148,6 +148,16 @@ it("ess.v20201111.CreatePreparedPersonalEsign", async function () {
     }
 })
 
+it("ess.v20201111.CreateFileConvertTask", async function () {
+    try {
+       const data = await client.CreateFileConvertTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ess.v20201111.CreateFlowSignReview", async function () {
     try {
        const data = await client.CreateFlowSignReview({})
@@ -271,6 +281,16 @@ it("ess.v20201111.CreateFlowForwards", async function () {
 it("ess.v20201111.DescribeIntegrationRoles", async function () {
     try {
        const data = await client.DescribeIntegrationRoles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ess.v20201111.DescribeFileConvertTask", async function () {
+    try {
+       const data = await client.DescribeFileConvertTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

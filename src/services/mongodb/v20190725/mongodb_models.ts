@@ -531,14 +531,11 @@ export interface DescribeSRVConnectionDomainResponse {
  */
 export interface ModifyInstanceParamsResponse {
   /**
-   * 修改参数配置是否生效。
-- true：参数修改后的值已生效。
-- false：执行失败。
-
+   * <p>修改参数配置是否生效。</p><ul><li>true：参数修改后的值已生效。</li><li>false：执行失败。</li></ul>
    */
   Changed?: boolean
   /**
-   * 该参数暂时无意义(兼容前端保留)。
+   * <p>该参数暂时无意义(兼容前端保留)。</p>
    */
   TaskId?: number
   /**
@@ -4406,18 +4403,15 @@ export interface CreateLogDownloadTaskResponse {
  */
 export interface ModifyInstanceParamsRequest {
   /**
-   * 指定实例 ID。例如：cmgo-p8vn****。请登录 [MongoDB 控制台](https://console.cloud.tencent.com/mongodb)在实例列表复制实例 ID。
-
+   * <p>指定实例 ID。例如：cmgo-p8vn****。请登录 <a href="https://console.cloud.tencent.com/mongodb">MongoDB 控制台</a>在实例列表复制实例 ID。</p>
    */
   InstanceId: string
   /**
-   * 指定需修改的参数名及值。当前所支持的参数名及对应取值范围，请通过 [DescribeInstanceParams ](https://cloud.tencent.com/document/product/240/65903)获取。
+   * <p>指定需修改的参数名及值。当前所支持的参数名及对应取值范围，请通过 <a href="https://cloud.tencent.com/document/product/240/65903">DescribeInstanceParams </a>获取。</p>
    */
   InstanceParams: Array<ModifyMongoDBParamType>
   /**
-   * 操作类型，包括：
-- IMMEDIATELY：立即调整。
-- DELAY：延迟调整。可选字段，不配置该参数则默认为立即调整。
+   * <p>操作类型，包括：</p><ul><li>IMMEDIATELY：立即调整。</li><li>DELAY：延迟调整。可选字段，不配置该参数则默认为立即调整。</li></ul>
    */
   ModifyType?: string
 }

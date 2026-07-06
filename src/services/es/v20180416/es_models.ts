@@ -4049,6 +4049,11 @@ export interface InstanceInfo {
    */
   LicenseType?: string
   /**
+   * <p>License类型<li>oss：开源版</li><li>basic：基础版</li><li>platinum：白金版</li><li>enterprise：企业版</li>默认值platinum</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RealLicenseType?: string
+  /**
    * <p>是否为冷热集群<li>true: 冷热集群</li><li>false: 非冷热集群</li></p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
@@ -4313,7 +4318,7 @@ export interface InstanceInfo {
    */
   DisasterRecoverGroupAffinity?: number
   /**
-   * <p>子产品ID枚举值： 开源版：&quot;sp_es_io2&quot;， 基础版：&quot;sp_es_basic&quot;，白金版：&quot;sp_es_platinum&quot;，企业版：&quot;sp_es_enterprise&quot;，CDC白金版：&quot;sp_es_cdc_platinum&quot;，日志增强版：&quot;sp_es_enlogging&quot;，tsearch：&quot;sp_tsearch_io2&quot;，logstash：&quot;sp_es_logstash&quot; ，可以为空，为空的时候后台取LicenseType映射该字段</p>
+   * <p>子产品ID枚举值： 开源版：&quot;sp_es_io2&quot;， 基础版：&quot;sp_es_basic&quot;，白金版：&quot;sp_es_platinum&quot;，AI搜索增强版：&quot;sp_es_aisearch&quot;，企业版：&quot;sp_es_enterprise&quot;，CDC白金版：&quot;sp_es_cdc_platinum&quot;，日志增强版：&quot;sp_es_enlogging&quot;，tsearch：&quot;sp_tsearch_io2&quot;，logstash：&quot;sp_es_logstash&quot; ，可以为空，为空的时候后台取LicenseType映射该字段</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubProductCode?: string
@@ -4370,6 +4375,18 @@ export interface InstanceInfo {
    * <p>延迟销毁的时间</p><p>单位：天</p>
    */
   DelayDestroyInterval?: number
+  /**
+   * <p>开启异常节点自动替换，0关闭，1开启</p>
+   */
+  EnableAutoReplace?: number
+  /**
+   * <p>开启mtls，0关闭，1开启</p>
+   */
+  OpenMTLS?: number
+  /**
+   * <p>证书类型</p>
+   */
+  ServerCertSource?: string
 }
 
 /**

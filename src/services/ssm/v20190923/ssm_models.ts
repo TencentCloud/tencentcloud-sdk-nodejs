@@ -954,46 +954,49 @@ export interface DescribeAsyncRequestInfoRequest {
  */
 export interface GetServiceStatusResponse {
   /**
-   * true表示服务已开通，false 表示服务尚未开通。
+   * <p>true表示服务已开通，false 表示服务尚未开通。</p>
    */
   ServiceEnabled?: boolean
   /**
-   * 服务不可用类型： 0-未购买，1-正常， 2-欠费停服， 3-资源释放。
+   * <p>服务不可用类型： 0-未购买，1-正常， 2-欠费停服， 3-资源释放。</p>
    */
   InvalidType?: number
   /**
-   * true表示用户已经可以使用密钥安全托管功能，
-false表示用户暂时不能使用密钥安全托管功能。
+   * <p>true表示用户已经可以使用密钥安全托管功能，<br>false表示用户暂时不能使用密钥安全托管功能。</p>
    */
   AccessKeyEscrowEnabled?: boolean
   /**
-   * 过期时间
+   * <p>过期时间</p>
    */
   ExpireTime?: string
   /**
-   * 计算性能限制
+   * <p>计算性能限制</p>
    */
   QPSLimit?: number
   /**
-   * 凭据个数限制
+   * <p>凭据个数限制</p>
    */
   SecretLimit?: number
   /**
-   * 付费模式
+   * <p>付费模式</p>
    */
   PayModel?: string
   /**
-   * 自动续费标识，0:手动续费 1:自动续费 2:到期不续
+   * <p>自动续费标识，0:手动续费 1:自动续费 2:到期不续</p>
    */
   RenewFlag?: number
   /**
-   * 资源id
+   * <p>资源id</p>
    */
   ResourceId?: string
   /**
-   * 已托管凭据个数
+   * <p>已托管凭据个数</p>
    */
   TotalCount?: number
+  /**
+   * <p>预付费购买 SSM 资源的地域 ID</p>
+   */
+  ResourceRegion?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

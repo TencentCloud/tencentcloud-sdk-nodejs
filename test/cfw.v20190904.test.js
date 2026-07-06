@@ -538,6 +538,16 @@ it("cfw.v20190904.DeleteResourceGroup", async function () {
     }
 })
 
+it("cfw.v20190904.RemoveOfflineExportTask", async function () {
+    try {
+       const data = await client.RemoveOfflineExportTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeNatFwSwitch", async function () {
     try {
        const data = await client.DescribeNatFwSwitch({})
@@ -1048,6 +1058,16 @@ it("cfw.v20190904.CreateVpcFwGroup", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeOfflineExportTask", async function () {
+    try {
+       const data = await client.DescribeOfflineExportTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.OpenClusterNatFwSwitch", async function () {
     try {
        const data = await client.OpenClusterNatFwSwitch({})
@@ -1061,6 +1081,16 @@ it("cfw.v20190904.OpenClusterNatFwSwitch", async function () {
 it("cfw.v20190904.DescribeEdgeIpSimple", async function () {
     try {
        const data = await client.DescribeEdgeIpSimple({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ExportLogsOffline", async function () {
+    try {
+       const data = await client.ExportLogsOffline({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1351,6 +1381,16 @@ it("cfw.v20190904.CreateAddressTemplate", async function () {
 it("cfw.v20190904.AddNatAcRule", async function () {
     try {
        const data = await client.AddNatAcRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeOfflineExportTemporaryCredentials", async function () {
+    try {
+       const data = await client.DescribeOfflineExportTemporaryCredentials({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

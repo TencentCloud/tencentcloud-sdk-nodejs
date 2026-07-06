@@ -19,10 +19,12 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ManageIPPortraitRiskOutput,
-  ManageIPPortraitRiskInput,
   ManageIPPortraitRiskResponse,
   ManageIPPortraitRiskRequest,
+  IpLocationInfo,
+  ManageIPPortraitRiskInput,
   ManageIPPortraitRiskValueOutput,
+  IpNetworkInfo,
 } from "./rce_models"
 
 /**

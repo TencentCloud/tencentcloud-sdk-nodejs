@@ -19,111 +19,88 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeImageToVideoGeneralJobResponse,
-  SubmitVideoStylizationJobRequest,
-  SubmitImageToVideoJobRequest,
-  DescribeVideoVoiceJobResponse,
-  SubmitHumanActorJobRequest,
-  DescribeImageToVideoViduJobResponse,
-  SubmitTextToVideoViduJobRequest,
-  SubmitVideoEditJobRequest,
-  DescribeVideoExtendKlingJobRequest,
+  DescribeTextToVideoViduJobRequest,
+  SubmitImageToVideoViduJobRequest,
+  LogoParam,
   SubmitVideoEditKlingJobRequest,
-  DescribeAigcElementResponse,
-  Voice,
-  SubmitImageAnimateJobResponse,
-  SubmitVideoFaceFusionJobResponse,
+  SubmitHumanActorJobRequest,
+  DescribeImageToVideoJobRequest,
+  DeleteAigcElementRequest,
+  FaceTemplateInfo,
+  DescribeImageToVideoViduJobResponse,
+  SubmitImageToVideoViduJobResponse,
+  DescribeTextToVideoViduJobResponse,
+  DescribeVideoExtendKlingJobRequest,
+  SubmitReferenceToVideoViduJobRequest,
   DescribeTemplateToVideoJobResponse,
+  CameraControl,
+  DescribeVideoFaceFusionJobResponse,
+  CreateAigcElementResponse,
+  DescribeImageToVideoJobResponse,
+  DescribeVideoFaceFusionJobRequest,
+  FaceRect,
+  SubmitReferenceToVideoViduJobResponse,
+  DescribePortraitSingJobRequest,
+  DescribeImageToVideoViduJobRequest,
+  SubmitImageToVideoGeneralJobResponse,
+  SubmitTextToVideoViduJobRequest,
+  SubmitImageToVideoJobRequest,
+  DescribeHunyuanToVideoJobRequest,
+  SubmitVideoFaceFusionJobResponse,
+  DescribeAigcElementResponse,
+  SubmitTextToVideoViduJobResponse,
+  Trajectory,
+  FaceMergeInfo,
+  CameraControlConfig,
+  DescribeAigcElementRequest,
   DescribeReferenceToVideoViduJobResponse,
+  ProviderDetail,
   SubmitMotionControlKlingJobRequest,
   SubmitVideoExtendKlingJobRequest,
   SubmitTemplateToVideoJobResponse,
-  DeleteAigcElementResponse,
-  LogoRect,
-  DescribeVideoEditKlingJobRequest,
-  SubmitVideoVoiceJobRequest,
-  DescribeTextToVideoJobResponse,
-  ExtraParam,
-  DescribeVideoEditJobResponse,
-  SubmitVideoStylizationJobResponse,
-  SubmitVideoFaceFusionJobRequest,
-  SubmitReferenceToVideoViduJobRequest,
-  SubmitImageToVideoGeneralJobRequest,
-  SubmitImageToVideoViduJobRequest,
-  DescribeHumanActorJobRequest,
-  DescribeImageToVideoGeneralJobRequest,
-  SubmitAigcVideoJobResponse,
-  SubmitVideoVoiceJobResponse,
-  DeleteAigcElementRequest,
-  SubmitImageToVideoViduJobResponse,
-  SubmitPortraitSingJobResponse,
-  CreateAigcElementResponse,
-  DescribeImageToVideoJobResponse,
-  DescribePortraitSingJobRequest,
-  DescribeHunyuanToVideoJobRequest,
-  SubmitTextToVideoViduJobResponse,
-  CheckAnimateImageJobResponse,
-  SubmitVideoEditJobResponse,
-  DescribeVideoStylizationJobRequest,
   SubmitHumanActorJobResponse,
-  VideoEditParam,
-  ReferenceSubject,
+  DescribeVideoExtendKlingJobResponse,
+  DeleteAigcElementResponse,
+  SubmitPortraitSingJobRequest,
+  LogoRect,
   ReferImageItem,
-  ImageInfo,
-  Image,
-  DescribeMotionControlKlingJobResponse,
-  ReferVideoInfo,
-  SubmitAigcVideoJobRequest,
-  SubmitReferenceToVideoViduJobResponse,
-  LogoParam,
-  FaceTemplateInfo,
-  DescribeAigcVideoJobRequest,
-  SubmitImageAnimateJobRequest,
-  SubmitTextToVideoJobResponse,
-  DescribeVideoFaceFusionJobRequest,
-  DescribeImageToVideoViduJobRequest,
-  SubmitVideoEditKlingJobResponse,
-  CameraControlConfig,
-  DescribeReferenceToVideoViduJobRequest,
-  ElementImageList,
-  ProviderDetail,
-  DescribeImageAnimateJobResponse,
-  DescribeAigcVideoJobResponse,
-  SubmitVideoExtendKlingJobResponse,
-  DescribeHumanActorJobResponse,
   SubmitMotionControlKlingJobResponse,
+  DescribeVideoEditKlingJobRequest,
+  SubmitVideoEditKlingJobResponse,
+  DescribeTextToVideoJobResponse,
+  SubmitHunyuanToVideoJobResponse,
+  DescribeHumanActorJobResponse,
+  ExtraParam,
+  SubmitTextToVideoJobRequest,
+  Voice,
+  Element,
+  DescribeReferenceToVideoViduJobRequest,
+  SubmitVideoFaceFusionJobRequest,
   CreateAigcElementRequest,
+  SubmitPortraitSingJobResponse,
   SubmitTemplateToVideoJobRequest,
   MultiPrompt,
+  ElementImageList,
+  SubmitImageToVideoGeneralJobRequest,
+  ImageInfo,
+  ReferenceSubject,
+  SubmitHunyuanToVideoJobRequest,
+  Image,
   DescribeTextToVideoJobRequest,
-  DescribeImageToVideoJobRequest,
+  DescribeMotionControlKlingJobResponse,
+  DescribeHumanActorJobRequest,
+  DescribeImageToVideoGeneralJobRequest,
+  DescribeVideoEditKlingJobResponse,
+  ReferVideoInfo,
   DescribeTemplateToVideoJobRequest,
   DescribeMotionControlKlingJobRequest,
-  DescribeImageAnimateJobRequest,
-  DescribePortraitSingJobResponse,
-  DescribeHunyuanToVideoJobResponse,
-  DescribeTextToVideoViduJobRequest,
-  Trajectory,
-  DescribeTextToVideoViduJobResponse,
-  DescribeVideoVoiceJobRequest,
-  CameraControl,
-  DescribeVideoFaceFusionJobResponse,
-  SubmitImageToVideoGeneralJobResponse,
-  FaceMergeInfo,
-  DescribeAigcElementRequest,
-  CheckAnimateImageJobRequest,
-  DescribeVideoExtendKlingJobResponse,
-  SubmitPortraitSingJobRequest,
-  Element,
-  DynamicMask,
-  SubmitHunyuanToVideoJobResponse,
-  SubmitTextToVideoJobRequest,
-  DescribeVideoStylizationJobResponse,
-  SubmitHunyuanToVideoJobRequest,
-  DescribeVideoEditJobRequest,
-  DescribeVideoEditKlingJobResponse,
-  FaceRect,
+  SubmitTextToVideoJobResponse,
   SubmitImageToVideoJobResponse,
+  DynamicMask,
+  DescribePortraitSingJobResponse,
   TagList,
+  DescribeHunyuanToVideoJobResponse,
+  SubmitVideoExtendKlingJobResponse,
 } from "./vclm_models"
 
 /**
@@ -148,13 +125,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于提交视频编辑任务，支持上传视频、文本及图片素材开展编辑操作，涵盖风格迁移、元素替换、内容增减等核心能力。
+   * 用于查询文生视频任务。
    */
-  async DescribeVideoEditJob(
-    req: DescribeVideoEditJobRequest,
-    cb?: (error: string, rep: DescribeVideoEditJobResponse) => void
-  ): Promise<DescribeVideoEditJobResponse> {
-    return this.request("DescribeVideoEditJob", req, cb)
+  async DescribeTextToVideoJob(
+    req: DescribeTextToVideoJobRequest,
+    cb?: (error: string, rep: DescribeTextToVideoJobResponse) => void
+  ): Promise<DescribeTextToVideoJobResponse> {
+    return this.request("DescribeTextToVideoJob", req, cb)
   }
 
   /**
@@ -176,16 +153,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVideoEditKlingJobResponse) => void
   ): Promise<DescribeVideoEditKlingJobResponse> {
     return this.request("DescribeVideoEditKlingJob", req, cb)
-  }
-
-  /**
-   * 用于查询文生视频任务。
-   */
-  async DescribeTextToVideoJob(
-    req: DescribeTextToVideoJobRequest,
-    cb?: (error: string, rep: DescribeTextToVideoJobResponse) => void
-  ): Promise<DescribeTextToVideoJobResponse> {
-    return this.request("DescribeTextToVideoJob", req, cb)
   }
 
   /**
@@ -239,16 +206,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 检查图片跳舞输入图
-   */
-  async CheckAnimateImageJob(
-    req: CheckAnimateImageJobRequest,
-    cb?: (error: string, rep: CheckAnimateImageJobResponse) => void
-  ): Promise<CheckAnimateImageJobResponse> {
-    return this.request("CheckAnimateImageJob", req, cb)
-  }
-
-  /**
    * 用于提交视频延长任务接口。
    */
   async SubmitVideoExtendKlingJob(
@@ -276,16 +233,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTemplateToVideoJobResponse) => void
   ): Promise<DescribeTemplateToVideoJobResponse> {
     return this.request("DescribeTemplateToVideoJob", req, cb)
-  }
-
-  /**
-   * 用于提交视频风格化任务。支持将输入视频生成特定风格的视频。生成后的视频画面风格多样、流畅自然，能够满足社交娱乐、互动营销、视频素材制作等场景的需求。
-   */
-  async SubmitVideoStylizationJob(
-    req: SubmitVideoStylizationJobRequest,
-    cb?: (error: string, rep: SubmitVideoStylizationJobResponse) => void
-  ): Promise<SubmitVideoStylizationJobResponse> {
-    return this.request("SubmitVideoStylizationJob", req, cb)
   }
 
   /**
@@ -322,36 +269,6 @@ export class Client extends AbstractClient {
   /**
    * 提交视频特效任务接口
    */
-  async SubmitTemplateToVideoJob(
-    req: SubmitTemplateToVideoJobRequest,
-    cb?: (error: string, rep: SubmitTemplateToVideoJobResponse) => void
-  ): Promise<SubmitTemplateToVideoJobResponse> {
-    return this.request("SubmitTemplateToVideoJob", req, cb)
-  }
-
-  /**
-   * 用于提交视频编辑任务，支持上传视频、文本及图片素材开展编辑操作，涵盖风格迁移、元素替换、内容增减等核心能力。
-   */
-  async SubmitVideoEditJob(
-    req: SubmitVideoEditJobRequest,
-    cb?: (error: string, rep: SubmitVideoEditJobResponse) => void
-  ): Promise<SubmitVideoEditJobResponse> {
-    return this.request("SubmitVideoEditJob", req, cb)
-  }
-
-  /**
-   * 通过JobId提交请求，获取视频配音频任务的结果信息。
-   */
-  async DescribeVideoVoiceJob(
-    req: DescribeVideoVoiceJobRequest,
-    cb?: (error: string, rep: DescribeVideoVoiceJobResponse) => void
-  ): Promise<DescribeVideoVoiceJobResponse> {
-    return this.request("DescribeVideoVoiceJob", req, cb)
-  }
-
-  /**
-   * 提交视频特效任务接口
-   */
   async SubmitImageToVideoJob(
     req: SubmitImageToVideoJobRequest,
     cb?: (error: string, rep: SubmitImageToVideoJobResponse) => void
@@ -370,23 +287,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 提交生视频任务
+   * 通过提交对视频内容的描述文本生成一个短视频。文生视频为异步处理任务，成功提交任务后返回任务的JobId。
    */
-  async SubmitAigcVideoJob(
-    req: SubmitAigcVideoJobRequest,
-    cb?: (error: string, rep: SubmitAigcVideoJobResponse) => void
-  ): Promise<SubmitAigcVideoJobResponse> {
-    return this.request("SubmitAigcVideoJob", req, cb)
-  }
-
-  /**
-   * 提交视频配音效任务，输入视频后提交请求，会返回一个JobId，用于查询视频配音效的处理进度。
-   */
-  async SubmitVideoVoiceJob(
-    req: SubmitVideoVoiceJobRequest,
-    cb?: (error: string, rep: SubmitVideoVoiceJobResponse) => void
-  ): Promise<SubmitVideoVoiceJobResponse> {
-    return this.request("SubmitVideoVoiceJob", req, cb)
+  async SubmitTextToVideoJob(
+    req: SubmitTextToVideoJobRequest,
+    cb?: (error: string, rep: SubmitTextToVideoJobResponse) => void
+  ): Promise<SubmitTextToVideoJobResponse> {
+    return this.request("SubmitTextToVideoJob", req, cb)
   }
 
   /**
@@ -411,33 +318,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询混元生视频任务
+   * 提交视频特效任务接口
    */
-  async DescribeHunyuanToVideoJob(
-    req: DescribeHunyuanToVideoJobRequest,
-    cb?: (error: string, rep: DescribeHunyuanToVideoJobResponse) => void
-  ): Promise<DescribeHunyuanToVideoJobResponse> {
-    return this.request("DescribeHunyuanToVideoJob", req, cb)
-  }
-
-  /**
-   * 用于查询图片跳舞任务。图片跳舞能力支持舞蹈动作结合图片生成跳舞视频，满足社交娱乐、互动营销等场景的需求。
-   */
-  async DescribeImageAnimateJob(
-    req: DescribeImageAnimateJobRequest,
-    cb?: (error: string, rep: DescribeImageAnimateJobResponse) => void
-  ): Promise<DescribeImageAnimateJobResponse> {
-    return this.request("DescribeImageAnimateJob", req, cb)
-  }
-
-  /**
-   * 用于提交图片跳舞任务。图片跳舞能力支持舞蹈动作结合图片生成跳舞视频，满足社交娱乐、互动营销等场景的需求。
-   */
-  async SubmitImageAnimateJob(
-    req: SubmitImageAnimateJobRequest,
-    cb?: (error: string, rep: SubmitImageAnimateJobResponse) => void
-  ): Promise<SubmitImageAnimateJobResponse> {
-    return this.request("SubmitImageAnimateJob", req, cb)
+  async SubmitTemplateToVideoJob(
+    req: SubmitTemplateToVideoJobRequest,
+    cb?: (error: string, rep: SubmitTemplateToVideoJobResponse) => void
+  ): Promise<SubmitTemplateToVideoJobResponse> {
+    return this.request("SubmitTemplateToVideoJob", req, cb)
   }
 
   /**
@@ -461,16 +348,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于查询视频风格化任务。视频风格化支持将输入视频生成特定风格的视频。生成后的视频画面风格多样、流畅自然，能够满足社交娱乐、互动营销、视频素材制作等场景的需求。
-   */
-  async DescribeVideoStylizationJob(
-    req: DescribeVideoStylizationJobRequest,
-    cb?: (error: string, rep: DescribeVideoStylizationJobResponse) => void
-  ): Promise<DescribeVideoStylizationJobResponse> {
-    return this.request("DescribeVideoStylizationJob", req, cb)
-  }
-
-  /**
    * 查询Vidu文生视频任务接口
    */
   async DescribeTextToVideoViduJob(
@@ -488,16 +365,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SubmitVideoEditKlingJobResponse) => void
   ): Promise<SubmitVideoEditKlingJobResponse> {
     return this.request("SubmitVideoEditKlingJob", req, cb)
-  }
-
-  /**
-   * 通过提交对视频内容的描述文本生成一个短视频。文生视频为异步处理任务，成功提交任务后返回任务的JobId。
-   */
-  async SubmitTextToVideoJob(
-    req: SubmitTextToVideoJobRequest,
-    cb?: (error: string, rep: SubmitTextToVideoJobResponse) => void
-  ): Promise<SubmitTextToVideoJobResponse> {
-    return this.request("SubmitTextToVideoJob", req, cb)
   }
 
   /**
@@ -541,13 +408,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询生视频任务
+   * 查询混元生视频任务
    */
-  async DescribeAigcVideoJob(
-    req: DescribeAigcVideoJobRequest,
-    cb?: (error: string, rep: DescribeAigcVideoJobResponse) => void
-  ): Promise<DescribeAigcVideoJobResponse> {
-    return this.request("DescribeAigcVideoJob", req, cb)
+  async DescribeHunyuanToVideoJob(
+    req: DescribeHunyuanToVideoJobRequest,
+    cb?: (error: string, rep: DescribeHunyuanToVideoJobResponse) => void
+  ): Promise<DescribeHunyuanToVideoJobResponse> {
+    return this.request("DescribeHunyuanToVideoJob", req, cb)
   }
 
   /**

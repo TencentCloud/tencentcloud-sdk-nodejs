@@ -399,6 +399,38 @@ export interface ResumeSyncJobRequest {
 }
 
 /**
+ * ModifySubscribeObjects请求参数结构体
+ */
+export interface ModifySubscribeObjectsRequest {
+  /**
+   * 数据订阅实例的ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。
+   */
+  SubscribeId: string
+  /**
+   * 数据订阅的类型，非mongo任务的枚举值：0-全实例更新；1-数据更新；2-结构更新；3-数据更新+结构更新。mongo任务的枚举值：0-全实例更新；4-订阅单库；5-订阅单集合
+   */
+  SubscribeObjectType: number
+  /**
+   * 修改后的订阅数据库表信息。会覆盖原来的订阅对象，所以除非 SubscribeObjectType = 0或2，否则该字段必填。
+   */
+  Objects?: Array<ModifiedSubscribeObject>
+  /**
+   * kafka分区策略。如果不填，默认不修改。如果填了，会覆盖原来的策略。
+   */
+  DistributeRules?: Array<DistributeRule>
+  /**
+   * 默认分区策略。不满足DistributeRules中正则表达式的数据，将按照默认分区策略计算分区。
+非mongo产品支持的默认策略: table-按表名分区，pk-按表名+主键分区。mongo的默认策略仅支持：collection-按集合名分区。
+该字段与DistributeRules搭配使用。如果配置了DistributeRules，该字段也必填。如果配置了该字段，视为配置了一条DistributeRules，原来的分区策略也会被覆盖。
+   */
+  DefaultRuleType?: string
+  /**
+   * mongo输出聚合设置，mongo任务可选。如果不填，默认不修改。
+   */
+  PipelineInfo?: Array<PipelineInfo>
+}
+
+/**
  * 数据订阅中kafka消费者组的分区分配情况。该数据是实时查询的，如果需要最新数据，需重新掉接口查询。
  */
 export interface PartitionAssignment {
@@ -595,6 +627,60 @@ export interface PauseMigrateJobRequest {
 
    */
   JobId: string
+}
+
+/**
+ * 不一致的表的校验结果详情。增量和全量都是这个结构，某些字段对增量没有意义，可以忽略。
+ */
+export interface CompareTableResult {
+  /**
+   * 库名
+   */
+  Db?: string
+  /**
+   * schema名
+   */
+  Schema?: string
+  /**
+   * 表名
+   */
+  Table?: string
+  /**
+   * 校验结果
+   */
+  Conclusion?: string
+  /**
+   * 校验状态。仅全量阶段有意义
+   */
+  Status?: string
+  /**
+   * 校验进度。仅全量阶段有意义
+   */
+  Progress?: number
+  /**
+   * 不一致行数
+   */
+  RowCount?: number
+  /**
+   * 该表开始校验的时间
+   */
+  StartedAt?: string
+  /**
+   * 该表校验结束的时间
+   */
+  FinishedAt?: string
+  /**
+   * 预计该表校验结束的时间
+   */
+  ExpectedAt?: string
+  /**
+   * 源端行数，如果是行数校验此值有意义
+   */
+  SrcItem?: string
+  /**
+   * 目标端行数，如果是行数校验此值有意义
+   */
+  DstItem?: string
 }
 
 /**
@@ -1628,11 +1714,11 @@ export interface CompareObject {
  */
 export interface DescribeCompareReportResponse {
   /**
-   * 一致性校验摘要信息
+   * <p>一致性校验摘要信息</p>
    */
   Abstract?: CompareAbstractInfo
   /**
-   * 一致性校验详细信息
+   * <p>一致性校验详细信息</p>
    */
   Detail?: CompareDetailInfo
   /**
@@ -4002,17 +4088,17 @@ export interface CompareTableItem {
  */
 export interface DescribeSyncCompareReportResponse {
   /**
-   * 一致性校验摘要信息
+   * <p>一致性校验摘要信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Abstract?: CompareAbstractInfo
   /**
-   * 一致性校验详细信息
+   * <p>一致性校验详细信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Detail?: CompareDetailInfo
   /**
-   * 增量校验阶段的摘要
+   * <p>增量校验阶段的摘要</p>
    */
   IncAbstract?: IncCompareAbstractInfo
   /**
@@ -4181,6 +4267,21 @@ export interface PauseSyncJobResponse {
 }
 
 /**
+ * 不一致的表的校验结果
+ */
+export interface CompareTableInfo {
+  /**
+   * 不一致表的数量
+   */
+  TotalCount?: number
+  /**
+   * 不一致的表的校验结果详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<CompareTableResult>
+}
+
+/**
  * DescribeSubscribeCheckJob请求参数结构体
  */
 export interface DescribeSubscribeCheckJobRequest {
@@ -4188,38 +4289,6 @@ export interface DescribeSubscribeCheckJobRequest {
    * 数据订阅实例的 ID，可通过[DescribeSyncJobs](https://cloud.tencent.com/document/product/571/82103)接口获取。
    */
   SubscribeId: string
-}
-
-/**
- * ModifySubscribeObjects请求参数结构体
- */
-export interface ModifySubscribeObjectsRequest {
-  /**
-   * 数据订阅实例的ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。
-   */
-  SubscribeId: string
-  /**
-   * 数据订阅的类型，非mongo任务的枚举值：0-全实例更新；1-数据更新；2-结构更新；3-数据更新+结构更新。mongo任务的枚举值：0-全实例更新；4-订阅单库；5-订阅单集合
-   */
-  SubscribeObjectType: number
-  /**
-   * 修改后的订阅数据库表信息。会覆盖原来的订阅对象，所以除非 SubscribeObjectType = 0或2，否则该字段必填。
-   */
-  Objects?: Array<ModifiedSubscribeObject>
-  /**
-   * kafka分区策略。如果不填，默认不修改。如果填了，会覆盖原来的策略。
-   */
-  DistributeRules?: Array<DistributeRule>
-  /**
-   * 默认分区策略。不满足DistributeRules中正则表达式的数据，将按照默认分区策略计算分区。
-非mongo产品支持的默认策略: table-按表名分区，pk-按表名+主键分区。mongo的默认策略仅支持：collection-按集合名分区。
-该字段与DistributeRules搭配使用。如果配置了DistributeRules，该字段也必填。如果配置了该字段，视为配置了一条DistributeRules，原来的分区策略也会被覆盖。
-   */
-  DefaultRuleType?: string
-  /**
-   * mongo输出聚合设置，mongo任务可选。如果不填，默认不修改。
-   */
-  PipelineInfo?: Array<PipelineInfo>
 }
 
 /**
@@ -5132,43 +5201,43 @@ export interface Objects {
  */
 export interface DescribeSyncCompareReportRequest {
   /**
-   * 任务 Id
+   * <p>任务 Id</p>
    */
   JobId: string
   /**
-   * 校验任务 Id
+   * <p>校验任务 Id</p>
    */
   CompareTaskId: string
   /**
-   * 校验不一致结果的 limit
+   * <p>校验不一致结果的 limit</p>
    */
   DifferenceLimit?: number
   /**
-   * 不一致的 Offset
+   * <p>不一致的 Offset</p>
    */
   DifferenceOffset?: number
   /**
-   * 搜索条件，不一致的库名
+   * <p>搜索条件，不一致的库名</p>
    */
   DifferenceDB?: string
   /**
-   * 搜索条件，不一致的表名
+   * <p>搜索条件，不一致的表名</p>
    */
   DifferenceTable?: string
   /**
-   * 未校验的 Limit
+   * <p>未校验的 Limit</p>
    */
   SkippedLimit?: number
   /**
-   * 未校验的 Offset
+   * <p>未校验的 Offset</p>
    */
   SkippedOffset?: number
   /**
-   * 搜索条件，未校验的库名
+   * <p>搜索条件，未校验的库名</p>
    */
   SkippedDB?: string
   /**
-   * 搜索条件，未校验的表名
+   * <p>搜索条件，未校验的表名</p>
    */
   SkippedTable?: string
 }
@@ -5729,43 +5798,43 @@ export interface SubscribeKafkaConfig {
  */
 export interface DescribeCompareReportRequest {
   /**
-   * 迁移任务 Id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+   * <p>迁移任务 Id，可通过<a href="https://cloud.tencent.com/document/product/571/82084">DescribeMigrationJobs</a>接口获取。</p>
    */
   JobId: string
   /**
-   * 校验任务 Id，可通过[DescribeMigrationJobs](https://cloud.tencent.com/document/product/571/82084)接口获取。
+   * <p>校验任务 Id，可通过<a href="https://cloud.tencent.com/document/product/571/82084">DescribeMigrationJobs</a>接口获取。</p>
    */
   CompareTaskId: string
   /**
-   * 校验不一致结果的 limit
+   * <p>校验不一致结果的 limit</p>
    */
   DifferenceLimit?: number
   /**
-   * 不一致的 Offset
+   * <p>不一致的 Offset</p>
    */
   DifferenceOffset?: number
   /**
-   * 搜索条件，不一致的库名
+   * <p>搜索条件，不一致的库名</p>
    */
   DifferenceDB?: string
   /**
-   * 搜索条件，不一致的表名
+   * <p>搜索条件，不一致的表名</p>
    */
   DifferenceTable?: string
   /**
-   * 未校验的 Limit
+   * <p>未校验的 Limit</p>
    */
   SkippedLimit?: number
   /**
-   * 未校验的 Offset
+   * <p>未校验的 Offset</p>
    */
   SkippedOffset?: number
   /**
-   * 搜索条件，未校验的库名
+   * <p>搜索条件，未校验的库名</p>
    */
   SkippedDB?: string
   /**
-   * 搜索条件，未校验的表名
+   * <p>搜索条件，未校验的表名</p>
    */
   SkippedTable?: string
 }
@@ -5965,33 +6034,41 @@ export interface StartSyncJobRequest {
  */
 export interface CompareDetailInfo {
   /**
-   * 数据不一致的表详情
+   * <p>数据不一致的表详情</p>
    */
   Difference?: DifferenceDetail
   /**
-   * 跳过校验的表详情
+   * <p>跳过校验的表详情</p>
    */
   Skipped?: SkippedDetail
   /**
-   * 数据库不一致的详情，mongodb业务用到
+   * <p>数据库不一致的详情，mongodb业务用到</p>
    */
   DifferenceAdvancedObjects?: DifferenceAdvancedObjectsDetail
   /**
-   * 数据不一致的详情，mongodb业务用到
+   * <p>数据不一致的详情，mongodb业务用到</p>
    */
   DifferenceData?: DifferenceDataDetail
   /**
-   * 数据行不一致的详情，mongodb业务用到
+   * <p>数据行不一致的详情，mongodb业务用到</p>
    */
   DifferenceRow?: DifferenceRowDetail
   /**
-   * 表结构不一致详情，pg用
+   * <p>表结构不一致详情，pg用</p>
    */
   DifferenceSchema?: DifferenceSchemaDetail
   /**
-   * 对象owner不一致详情，pg用
+   * <p>对象owner不一致详情，pg用</p>
    */
   DifferenceOwner?: DifferenceOwnerDetail
+  /**
+   * <p>全量阶段表的校验进度。该字段后续逐步取代Difference</p>
+   */
+  FullProgress?: CompareTableInfo
+  /**
+   * <p>增量阶段表的校验进度</p>
+   */
+  IncDifference?: CompareTableInfo
 }
 
 /**

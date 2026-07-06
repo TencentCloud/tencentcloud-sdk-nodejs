@@ -1542,6 +1542,11 @@ export interface CreatePrometheusDashboardResponse {
 }
 
 /**
+ * RotateClusterToken请求参数结构体
+ */
+export type RotateClusterTokenRequest = null
+
+/**
  * CancelClusterRelease请求参数结构体
  */
 export interface CancelClusterReleaseRequest {
@@ -4898,11 +4903,11 @@ export interface DeleteGlobalMaintenanceWindowAndExclusionRequest {
  */
 export interface DisableClusterAuditRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 取值为true代表关闭集群审计时删除默认创建的日志集和主题，false代表不删除
+   * <p>取值为true代表关闭集群审计时删除默认创建的日志集和主题，false代表不删除</p>
    */
   DeleteLogSetAndTopic?: boolean
 }
@@ -7025,6 +7030,16 @@ export interface ModifyClusterVirtualNodePoolResponse {
 }
 
 /**
+ * RotateClusterToken返回参数结构体
+ */
+export interface RotateClusterTokenResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 超级节点上的资源统计
  */
 export interface SuperNodeResource {
@@ -7276,21 +7291,25 @@ export interface SetNodePoolNodeProtectionRequest {
  */
 export interface EnableClusterAuditRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * CLS日志集ID，可以通过cls接口或者控制台获取
+   * <p>CLS日志集ID，可以通过cls接口或者控制台获取</p>
    */
   LogsetId?: string
   /**
-   * CLS日志主题ID，可以通过cls接口或者控制台获取
+   * <p>CLS日志主题ID，可以通过cls接口或者控制台获取</p>
    */
   TopicId?: string
   /**
-   * topic所在region，默认为集群当前region
+   * <p>topic所在region，默认为集群当前region</p>
    */
   TopicRegion?: string
+  /**
+   * <p>集群类型 tke/eks</p><p>默认值：tke</p>
+   */
+  ClusterType?: string
 }
 
 /**
@@ -10110,9 +10129,13 @@ export interface ModifyPrometheusRecordRuleYamlRequest {
  */
 export interface UninstallLogAgentRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
+  /**
+   * <p>集群类型tke/eks</p><p>默认值：tke</p>
+   */
+  ClusterType?: string
 }
 
 /**
@@ -11258,13 +11281,17 @@ export interface ForwardTKEEdgeApplicationRequestV3Request {
  */
 export interface DisableEventPersistenceRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 取值为true代表关闭集群审计时删除默认创建的日志集和主题，false代表不删除
+   * <p>取值为true代表关闭集群审计时删除默认创建的日志集和主题，false代表不删除</p>
    */
   DeleteLogSetAndTopic?: boolean
+  /**
+   * <p>集群类型 tke/eks</p><p>默认值：tke</p>
+   */
+  ClusterType?: string
 }
 
 /**
@@ -12301,21 +12328,25 @@ export interface CommonName {
  */
 export interface EnableEventPersistenceRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * cls服务的logsetID，通过cls接口或者控制台获取
+   * <p>cls服务的logsetID，通过cls接口或者控制台获取</p>
    */
   LogsetId?: string
   /**
-   * cls服务的topicID，通过cls接口或者控制台获取
+   * <p>cls服务的topicID，通过cls接口或者控制台获取</p>
    */
   TopicId?: string
   /**
-   * topic所在地域，默认为集群所在地域
+   * <p>topic所在地域，默认为集群所在地域</p>
    */
   TopicRegion?: string
+  /**
+   * <p>集群类型 tke/eks</p><p>默认值：tke</p>
+   */
+  ClusterType?: string
 }
 
 /**

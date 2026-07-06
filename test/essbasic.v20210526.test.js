@@ -88,6 +88,16 @@ it("essbasic.v20210526.DescribeUsage", async function () {
     }
 })
 
+it("essbasic.v20210526.CreateFileConvertTask", async function () {
+    try {
+       const data = await client.CreateFileConvertTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("essbasic.v20210526.ChannelDescribeSignFaceVideo", async function () {
     try {
        const data = await client.ChannelDescribeSignFaceVideo({})
@@ -151,6 +161,16 @@ it("essbasic.v20210526.ChannelCreateWebThemeConfig", async function () {
 it("essbasic.v20210526.ChannelCreateFlowReminds", async function () {
     try {
        const data = await client.ChannelCreateFlowReminds({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.DescribeFileConvertTask", async function () {
+    try {
+       const data = await client.DescribeFileConvertTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

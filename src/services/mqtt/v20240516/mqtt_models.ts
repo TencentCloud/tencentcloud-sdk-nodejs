@@ -3971,6 +3971,10 @@ export interface ModifyHttpAuthenticatorRequest {
    * 请求body
    */
   Body?: Array<BodyItem>
+  /**
+   * 连接UserProperty作为Header转发，默认false
+   */
+  IncludingUserProperties?: boolean
 }
 
 /**
