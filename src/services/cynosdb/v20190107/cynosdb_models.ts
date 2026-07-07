@@ -624,6 +624,16 @@ export interface DescribeParamTemplatesRequest {
 }
 
 /**
+ * DescribeBackupOverview请求参数结构体
+ */
+export interface DescribeBackupOverviewRequest {
+  /**
+   * 集群id
+   */
+  ClusterId: string
+}
+
+/**
  * DescribeAuditInstanceList返回参数结构体
  */
 export interface DescribeAuditInstanceListResponse {
@@ -5742,6 +5752,24 @@ export interface IsolateLibraDBInstanceRequest {
 }
 
 /**
+ * DescribeVaults返回参数结构体
+ */
+export interface DescribeVaultsResponse {
+  /**
+   * 保险箱列表
+   */
+  Vaults?: Array<DescribeVaultsItem>
+  /**
+   * 总数量
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBSecurityGroups请求参数结构体
  */
 export interface DescribeDBSecurityGroupsRequest {
@@ -6648,21 +6676,17 @@ export interface InstanceAuditStatus {
 }
 
 /**
- * DescribeVaults返回参数结构体
+ * CopyClusterPasswordComplexity请求参数结构体
  */
-export interface DescribeVaultsResponse {
+export interface CopyClusterPasswordComplexityRequest {
   /**
-   * 保险箱列表
+   * 复制集群ID数组，例如["cynosdbmysql-bzxxrmtq","cynosdbmysql-qwer"]
    */
-  Vaults?: Array<DescribeVaultsItem>
+  ClusterIds: Array<string>
   /**
-   * 总数量
+   * 集群id，例如"cynosdbmysql-bzxxrmtq"
    */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  SourceClusterId: string
 }
 
 /**
@@ -6792,17 +6816,61 @@ export interface NetAddr {
 }
 
 /**
- * CopyClusterPasswordComplexity请求参数结构体
+ * DescribeBackupOverview返回参数结构体
  */
-export interface CopyClusterPasswordComplexityRequest {
+export interface DescribeBackupOverviewResponse {
   /**
-   * 复制集群ID数组，例如["cynosdbmysql-bzxxrmtq","cynosdbmysql-qwer"]
+   * 备份总容量
    */
-  ClusterIds: Array<string>
+  BackupTotalVolume?: number
   /**
-   * 集群id，例如"cynosdbmysql-bzxxrmtq"
+   * 备份快照容量
    */
-  SourceClusterId: string
+  BackupSnapshotVolume?: number
+  /**
+   * 备份逻辑容量
+   */
+  BackupLogicVolume?: number
+  /**
+   * 日志总容量
+   */
+  LogTotalVolume?: number
+  /**
+   * 日志binlog容量
+   */
+  LogBinlogVolume?: number
+  /**
+   * 日志redolog容量
+   */
+  LogRedoLogVolume?: number
+  /**
+   * 跨地域备份总容量
+   */
+  CrossTotalVolume?: number
+  /**
+   * 跨地域备份容量
+   */
+  CrossRegionBackupVolume?: number
+  /**
+   * 跨地域日志容量
+   */
+  CrossRegionLogVolume?: number
+  /**
+   * 备份容量详情
+   */
+  BackupVolumeInfos?: Array<BackupVolumeInfo>
+  /**
+   * 跨地域备份容量详情
+   */
+  CrossRegionBackupVolumeInfos?: Array<BackupVolumeInfo>
+  /**
+   * 跨地域信息
+   */
+  CrossRegions?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -12851,6 +12919,24 @@ export interface ModifyResourcePackageClustersResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 备份使用量信息
+ */
+export interface BackupVolumeInfo {
+  /**
+   * 备份使用量
+   */
+  BackupVolume?: number
+  /**
+   * 备份类型
+   */
+  BackupType?: string
+  /**
+   * 备份方式
+   */
+  BackupMethod?: string
 }
 
 /**

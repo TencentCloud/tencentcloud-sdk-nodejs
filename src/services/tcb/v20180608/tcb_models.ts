@@ -4572,10 +4572,6 @@ export interface PostgreSQLInfo {
    * <p>地域</p>
    */
   Region?: string
-  /**
-   * <p>数据库引擎版本</p>
-   */
-  Version?: string
 }
 
 /**

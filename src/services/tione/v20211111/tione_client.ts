@@ -19,6 +19,7 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateModelServiceRequest,
+  DescribePresetImageListRequest,
   DescribeLogsRequest,
   DescribeModelAccelerateVersionsRequest,
   StopModelAccelerateTaskRequest,
@@ -102,6 +103,7 @@ import {
   DescribeDataSourceRequest,
   DescribePublicAlgoVersionListResponse,
   DescribeBillingResourceInstanceRunningJobsResponse,
+  RuntimeLib,
   InferGatewayCallInfo,
   CreateDataSourceResponse,
   LabelValue,
@@ -136,6 +138,7 @@ import {
   ModifyModelServiceAuthorizationRequest,
   DeleteModelServiceGroupResponse,
   DeviceMaterialInfo,
+  PresetImageInfo,
   GpuDetail,
   CreateExportResponse,
   CronScaleJob,
@@ -182,6 +185,7 @@ import {
   DescribeBillingSpecsResponse,
   DeleteTrainingTaskResponse,
   CreateMountLimitRequest,
+  HostPath,
   AuthToken,
   DescribeEventsResponse,
   DatasetGroup,
@@ -221,7 +225,7 @@ import {
   AuthTokenLimit,
   DeleteDataSourceRequest,
   DeleteMountLimitRequest,
-  HostPath,
+  ExecAction,
   StopModelAccelerateTaskResponse,
   IngressPrivateLinkInfo,
   DescribeTrainingTaskPodUrlResponse,
@@ -233,7 +237,7 @@ import {
   Container,
   DeleteDatasetResponse,
   MountLimitInfo,
-  ExecAction,
+  DescribePresetImageListResponse,
   TrainingTaskDetail,
   DescribeExportRequest,
   UpdateSubAccountLinuxUserInfoRequest,
@@ -947,6 +951,16 @@ https://cloud.tencent.com/document/product/1278/85305
     cb?: (error: string, rep: DescribeBillingResourceGroupResponse) => void
   ): Promise<DescribeBillingResourceGroupResponse> {
     return this.request("DescribeBillingResourceGroup", req, cb)
+  }
+
+  /**
+   * 该接口用于查询内置镜像列表
+   */
+  async DescribePresetImageList(
+    req: DescribePresetImageListRequest,
+    cb?: (error: string, rep: DescribePresetImageListResponse) => void
+  ): Promise<DescribePresetImageListResponse> {
+    return this.request("DescribePresetImageList", req, cb)
   }
 
   /**

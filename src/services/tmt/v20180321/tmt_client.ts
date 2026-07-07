@@ -22,9 +22,7 @@ import {
   ImageTranslateLLMResponse,
   Coord,
   TransDetail,
-  TextTranslateRequest,
   BoundingBox,
-  TextTranslateResponse,
   RotateParagraphRect,
 } from "./tmt_models"
 
@@ -35,17 +33,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tmt.tencentcloudapi.com", "2018-03-21", clientConfig)
-  }
-
-  /**
-     * 腾讯翻译为合作伙伴提供文本翻译、文档翻译、交互翻译、AI同传等多种机器翻译服务，具有toB多行业解决方案。作为WMT世界机器翻译大赛冠军，翻译准确度值得信赖，其中，交互翻译能力是业界领先技术；腾讯同传是AI同传业界标杆。<br />
-提示：对于一般开发者，我们建议优先使用SDK接入简化开发。SDK使用介绍请直接查看 5. 开发者资源 部分。
-     */
-  async TextTranslate(
-    req: TextTranslateRequest,
-    cb?: (error: string, rep: TextTranslateResponse) => void
-  ): Promise<TextTranslateResponse> {
-    return this.request("TextTranslate", req, cb)
   }
 
   /**

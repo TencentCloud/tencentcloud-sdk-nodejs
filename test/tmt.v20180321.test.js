@@ -18,16 +18,6 @@ const client = new tencentcloud.tmt.v20180321.Client({
 })
 describe("tmt.v20180321.test.js", function () {
 
-it("tmt.v20180321.TextTranslate", async function () {
-    try {
-       const data = await client.TextTranslate({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tmt.v20180321.ImageTranslateLLM", async function () {
     try {
        const data = await client.ImageTranslateLLM({})

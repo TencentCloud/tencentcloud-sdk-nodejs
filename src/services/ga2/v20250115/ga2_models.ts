@@ -388,13 +388,17 @@ export interface DescribeCrossBorderSettlementRequest {
  */
 export interface IpAddressInfoSet {
   /**
-   * IP地址。
+   * <p>IP地址。</p>
    */
   IpAddress?: string
   /**
-   * IP类型。
+   * <p>IP类型。</p>
    */
   IspType?: string
+  /**
+   * <p>Ddos类型</p>
+   */
+  DdosProtectionType?: string
 }
 
 /**
@@ -1682,31 +1686,31 @@ export interface CreateForwardingPolicyResponse {
  */
 export interface AcceleratorAreas {
   /**
-   * 加速地域。
+   * <p>加速地域。</p>
    */
   AccelerateRegion: string
   /**
-   * 带宽。
+   * <p>带宽。</p>
    */
   Bandwidth: number
   /**
-   * 支持'BGP', '三网', '精品'，默认BGP。
+   * <p>支持&#39;BGP&#39;, &#39;QUALITY_BGP&#39;, &#39;STATIC_IP&#39;，默认BGP。</p><p>枚举值：</p><ul><li>BGP： BGP</li><li>STATIC_IP： 三网</li><li>QUALITY_BGP： 精品BGP</li></ul>
    */
   IspType?: string
   /**
-   * 仅支持IPv4，默认是IPv4。
+   * <p>仅支持IPv4，默认是IPv4。</p>
    */
   IpVersion?: string
   /**
-   * 加速地域ID。
+   * <p>加速地域ID。</p>
    */
   AcceleratorAreaId?: string
   /**
-   * IP。
+   * <p>IP。</p>
    */
   IpAddress?: Array<string>
   /**
-   * IP信息。
+   * <p>IP信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IpAddressInfoSet?: Array<IpAddressInfoSet>

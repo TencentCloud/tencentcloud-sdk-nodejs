@@ -283,6 +283,24 @@ export interface WorkOrderTypeDetail {
 }
 
 /**
+ * DescribeWorkOrderPersonnelCollectList返回参数结构体
+ */
+export interface DescribeWorkOrderPersonnelCollectListResponse {
+  /**
+   * <p>符合条件的记录总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>归集人员信息列表</p>
+   */
+  PersonnelSet?: Array<Personnel>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeModelVersionList返回参数结构体
  */
 export interface DescribeModelVersionListResponse {
@@ -378,6 +396,36 @@ export interface IdcUnitInfo {
    * 资产管理员电话
    */
   AssetManagerTelNumber?: string
+}
+
+/**
+ * DescribeCommonServiceWorkOrderDetail返回参数结构体
+ */
+export interface DescribeCommonServiceWorkOrderDetailResponse {
+  /**
+   * 进度
+   */
+  StepSet?: Array<OrderStep>
+  /**
+   * 基本信息
+   */
+  BaseInfo?: CommonServiceBaseInfo
+  /**
+   * 设备信息
+   */
+  DeviceSet?: Array<DevicePosition>
+  /**
+   * 工单状态
+   */
+  OrderStatus?: string
+  /**
+   * 拒绝原因
+   */
+  RejectReason?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -573,6 +621,24 @@ export interface DescribeDeviceListRequest {
    * 传入目标服务，返回允许进行此服务的设备列表；可以和Filters一起使用。允许的值：('rackOn', 'powerOn', 'powerOff', 'rackOff', 'quit', 'moving'，'netDeviceCommon', 'serverCommon')
    */
   DstService?: string
+}
+
+/**
+ * DescribeWorkOrderContactCollectList请求参数结构体
+ */
+export interface DescribeWorkOrderContactCollectListRequest {
+  /**
+   * <p>过滤条件，支持 contact-name（联系人姓名模糊匹配）、contact-phone（联系人电话模糊匹配）</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>偏移量，默认为0</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回数量，默认为20，最大值为100</p>
+   */
+  Limit?: number
 }
 
 /**
@@ -777,6 +843,24 @@ export interface CreateReceivingWorkOrderRequest {
 export type DescribeWorkOrderStatisticsRequest = null
 
 /**
+ * DescribeWorkOrderPersonnelCollectList请求参数结构体
+ */
+export interface DescribeWorkOrderPersonnelCollectListRequest {
+  /**
+   * <p>过滤条件，支持 personnel-name（姓名模糊匹配）、personnel-tel-number（手机号模糊匹配）</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>偏移量，默认为0</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回数量，默认为20，最大值为100</p>
+   */
+  Limit?: number
+}
+
+/**
  * DescribeResourceUsage请求参数结构体
  */
 export interface DescribeResourceUsageRequest {
@@ -818,6 +902,40 @@ export interface LogisticsReceipt {
    * 收货地址
    */
   ShippingAddress: string
+}
+
+/**
+ * 服务器收货信息
+ */
+export interface ServerReceivingInfo {
+  /**
+   * 设备sn
+   */
+  DeviceSn: string
+  /**
+   * 设备型号-版本
+   */
+  ModelVersion: string
+  /**
+   * 需要万兆机位
+   */
+  Need10GbSlot?: string
+  /**
+   * 需要直流电
+   */
+  NeedDCPower?: string
+  /**
+   * 需要外网
+   */
+  NeedExtranet?: string
+  /**
+   * 需要虚拟化
+   */
+  NeedVirtualization?: string
+  /**
+   * 硬件备注
+   */
+  HardwareMemo?: string
 }
 
 /**
@@ -1017,19 +1135,39 @@ export interface ExportCustomerWorkOrderDetailResponse {
 }
 
 /**
- * 已通过设备型号评估的型号信息
+ * 设备及位置信息
  */
-export interface AvailableModelVersion {
+export interface DevicePosition {
   /**
-   * 带有版本号的设备型号
+   * 设备SN
    */
-  ModelVersion?: string
+  Sn: string
   /**
-   * 设备高度
+   * 机架名称
    */
-  DevHeight?: string
+  RackName: string
   /**
-   * 设备类型，server 服务器，netDevice 网络设备
+   * 机房管理单元ID
+   */
+  IdcUnitId: number
+  /**
+   * 机房名称
+   */
+  IdcName?: string
+  /**
+   * 机房管理单元名称
+   */
+  IdcUnitName?: string
+  /**
+   * 设备固资。只有服务器设备才需要这个值
+   */
+  AssetId?: string
+  /**
+   * 机位编号，只有服务器设备才需要传这个值
+   */
+  PositionCode?: number
+  /**
+   * server 代表服务器，netDevice 代表网络设备
    */
   DeviceType?: string
 }
@@ -1293,6 +1431,24 @@ export interface NetReceivingInfo {
 }
 
 /**
+ * DescribeWorkOrderCarCollectList请求参数结构体
+ */
+export interface DescribeWorkOrderCarCollectListRequest {
+  /**
+   * <p>过滤条件，支持 car-number（车牌号模糊匹配）、driver-name（驾驶员姓名模糊匹配）</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>偏移量，默认为0</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回数量，默认为20，最大值为100</p>
+   */
+  Limit?: number
+}
+
+/**
  * DescribeCampusList返回参数结构体
  */
 export interface DescribeCampusListResponse {
@@ -1488,6 +1644,20 @@ export interface WorkOrderData {
    * 工单关联的dcops单号
    */
   TicketId?: string
+}
+
+/**
+ * 归集业务联系人信息
+ */
+export interface ContactCollectInfo {
+  /**
+   * 业务联系人姓名
+   */
+  ContactName?: string
+  /**
+   * 联系人电话
+   */
+  ContactPhone?: string
 }
 
 /**
@@ -1967,29 +2137,17 @@ export interface DescribeRacksDistributionRequest {
 }
 
 /**
- * DescribeCommonServiceWorkOrderDetail返回参数结构体
+ * DescribeWorkOrderContactCollectList返回参数结构体
  */
-export interface DescribeCommonServiceWorkOrderDetailResponse {
+export interface DescribeWorkOrderContactCollectListResponse {
   /**
-   * 进度
+   * <p>符合条件的记录总数</p>
    */
-  StepSet?: Array<OrderStep>
+  TotalCount?: number
   /**
-   * 基本信息
+   * <p>归集业务联系人信息列表</p>
    */
-  BaseInfo?: CommonServiceBaseInfo
-  /**
-   * 设备信息
-   */
-  DeviceSet?: Array<DevicePosition>
-  /**
-   * 工单状态
-   */
-  OrderStatus?: string
-  /**
-   * 拒绝原因
-   */
-  RejectReason?: string
+  ContactSet?: Array<ContactCollectInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2053,37 +2211,21 @@ export interface DescribeCommonServiceWorkOrderDetailRequest {
 }
 
 /**
- * 服务器收货信息
+ * DescribeWorkOrderCarCollectList返回参数结构体
  */
-export interface ServerReceivingInfo {
+export interface DescribeWorkOrderCarCollectListResponse {
   /**
-   * 设备sn
+   * <p>符合条件的记录总数</p>
    */
-  DeviceSn: string
+  TotalCount?: number
   /**
-   * 设备型号-版本
+   * <p>归集车辆信息列表</p>
    */
-  ModelVersion: string
+  CarSet?: Array<PersonnelVisitCar>
   /**
-   * 需要万兆机位
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Need10GbSlot?: string
-  /**
-   * 需要直流电
-   */
-  NeedDCPower?: string
-  /**
-   * 需要外网
-   */
-  NeedExtranet?: string
-  /**
-   * 需要虚拟化
-   */
-  NeedVirtualization?: string
-  /**
-   * 硬件备注
-   */
-  HardwareMemo?: string
+  RequestId?: string
 }
 
 /**
@@ -2657,39 +2799,19 @@ export interface CreateQuitWorkOrderResponse {
 }
 
 /**
- * 设备及位置信息
+ * 已通过设备型号评估的型号信息
  */
-export interface DevicePosition {
+export interface AvailableModelVersion {
   /**
-   * 设备SN
+   * 带有版本号的设备型号
    */
-  Sn: string
+  ModelVersion?: string
   /**
-   * 机架名称
+   * 设备高度
    */
-  RackName: string
+  DevHeight?: string
   /**
-   * 机房管理单元ID
-   */
-  IdcUnitId: number
-  /**
-   * 机房名称
-   */
-  IdcName?: string
-  /**
-   * 机房管理单元名称
-   */
-  IdcUnitName?: string
-  /**
-   * 设备固资。只有服务器设备才需要这个值
-   */
-  AssetId?: string
-  /**
-   * 机位编号，只有服务器设备才需要传这个值
-   */
-  PositionCode?: number
-  /**
-   * server 代表服务器，netDevice 代表网络设备
+   * 设备类型，server 服务器，netDevice 网络设备
    */
   DeviceType?: string
 }

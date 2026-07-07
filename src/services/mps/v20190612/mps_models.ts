@@ -3263,6 +3263,36 @@ export interface DescribeVideoDatabaseEntryTaskDetailRequest {
 }
 
 /**
+ * 智能字幕识别片段。
+ */
+export interface SmartSubtitleTaskFullTextSegmentItem {
+  /**
+   * <p>识别片段置信度。取值：0~100。</p>
+   */
+  Confidence?: number
+  /**
+   * <p>识别片段起始的偏移时间，单位：秒。</p>
+   */
+  StartTimeOffset?: number
+  /**
+   * <p>识别片段终止的偏移时间，单位：秒。</p>
+   */
+  EndTimeOffset?: number
+  /**
+   * <p>识别文本。</p>
+   */
+  Text?: string
+  /**
+   * <p>翻译文本。</p>
+   */
+  Trans?: string
+  /**
+   * <p>说话人ID</p>
+   */
+  SpeakerId?: string
+}
+
+/**
  * 用户自定义语音审核任务控制参数
  */
 export interface UserDefineAsrTextReviewTemplateInfoForUpdate {
@@ -3357,6 +3387,11 @@ export interface AiRecognitionTaskInput {
  * 智能字幕识别结果。
  */
 export interface SmartSubtitleTaskTextResultOutput {
+  /**
+   * <p>智能字幕识别片段列表。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SegmentSet?: Array<SmartSubtitleTaskFullTextSegmentItem>
   /**
    * <p>识别字幕结果</p>
 注意：此字段可能返回 null，表示取不到有效值。

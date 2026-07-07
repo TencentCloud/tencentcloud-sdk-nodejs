@@ -146,6 +146,7 @@ import {
   ParseLiveStreamProcessNotificationResponse,
   SubtitleShadowConfig,
   DescribeVideoDatabaseEntryTaskDetailRequest,
+  SmartSubtitleTaskFullTextSegmentItem,
   UserDefineAsrTextReviewTemplateInfoForUpdate,
   CreateStreamPackageLinearAssemblyProgramRequest,
   SegmentDeliverInfo,

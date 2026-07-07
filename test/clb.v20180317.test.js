@@ -18,9 +18,49 @@ const client = new tencentcloud.clb.v20180317.Client({
 })
 describe("clb.v20180317.test.js", function () {
 
+it("clb.v20180317.InquirePriceRefundModelRouterResourcePackage", async function () {
+    try {
+       const data = await client.InquirePriceRefundModelRouterResourcePackage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.AssociateModelsToModelRouter", async function () {
+    try {
+       const data = await client.AssociateModelsToModelRouter({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.RefundModelRouterResourcePackage", async function () {
+    try {
+       const data = await client.RefundModelRouterResourcePackage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DescribeCustomizedConfigAssociateList", async function () {
     try {
        const data = await client.DescribeCustomizedConfigAssociateList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.DisassociateTargetGroups", async function () {
+    try {
+       const data = await client.DisassociateTargetGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -61,6 +101,26 @@ it("clb.v20180317.DescribeExclusiveClusters", async function () {
 it("clb.v20180317.AutoRewrite", async function () {
     try {
        const data = await client.AutoRewrite({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.DescribeModelRouterLogs", async function () {
+    try {
+       const data = await client.DescribeModelRouterLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.DescribeModelNames", async function () {
+    try {
+       const data = await client.DescribeModelNames({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -118,9 +178,39 @@ it("clb.v20180317.DescribeAsyncJobs", async function () {
     }
 })
 
+it("clb.v20180317.RemoveModelKey", async function () {
+    try {
+       const data = await client.RemoveModelKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.DescribeIntentRouters", async function () {
+    try {
+       const data = await client.DescribeIntentRouters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.AssociateTargetGroups", async function () {
     try {
        const data = await client.AssociateTargetGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.DescribeIntentRouterTiers", async function () {
+    try {
+       const data = await client.DescribeIntentRouterTiers({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,6 +248,26 @@ it("clb.v20180317.CreateTopic", async function () {
     }
 })
 
+it("clb.v20180317.DescribeUpperModels", async function () {
+    try {
+       const data = await client.DescribeUpperModels({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.ModifyTargetGroupAttribute", async function () {
+    try {
+       const data = await client.ModifyTargetGroupAttribute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.ModifyLoadBalancersProject", async function () {
     try {
        const data = await client.ModifyLoadBalancersProject({})
@@ -188,9 +298,29 @@ it("clb.v20180317.DescribeTargetGroupInstanceStatus", async function () {
     }
 })
 
+it("clb.v20180317.DescribeModelAliases", async function () {
+    try {
+       const data = await client.DescribeModelAliases({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DescribeBlockIPTask", async function () {
     try {
        const data = await client.DescribeBlockIPTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.CreateModel", async function () {
+    try {
+       const data = await client.CreateModel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,6 +368,26 @@ it("clb.v20180317.ModifyLoadBalancerAttributes", async function () {
     }
 })
 
+it("clb.v20180317.DeleteModel", async function () {
+    try {
+       const data = await client.DeleteModel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.ModifyServiceProviderModelAttributes", async function () {
+    try {
+       const data = await client.ModifyServiceProviderModelAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.CreateUserGroup", async function () {
     try {
        const data = await client.CreateUserGroup({})
@@ -271,6 +421,16 @@ it("clb.v20180317.ModifyKeysUserGroup", async function () {
 it("clb.v20180317.DeleteRewrite", async function () {
     try {
        const data = await client.DeleteRewrite({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.DescribeSupportedProviders", async function () {
+    try {
+       const data = await client.DescribeSupportedProviders({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,6 +498,16 @@ it("clb.v20180317.RegisterTargetGroupInstances", async function () {
     }
 })
 
+it("clb.v20180317.ModifyModelRouterGuardrails", async function () {
+    try {
+       const data = await client.ModifyModelRouterGuardrails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DescribeUserGroups", async function () {
     try {
        const data = await client.DescribeUserGroups({})
@@ -351,6 +521,26 @@ it("clb.v20180317.DescribeUserGroups", async function () {
 it("clb.v20180317.SetLoadBalancerStartStatus", async function () {
     try {
        const data = await client.SetLoadBalancerStartStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.InquirePriceCreateModelRouterResourcePackage", async function () {
+    try {
+       const data = await client.InquirePriceCreateModelRouterResourcePackage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.DescribeModelRewrite", async function () {
+    try {
+       const data = await client.DescribeModelRewrite({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,9 +568,19 @@ it("clb.v20180317.DescribeResources", async function () {
     }
 })
 
-it("clb.v20180317.DeleteBudgets", async function () {
+it("clb.v20180317.ModifyBudgetAttributes", async function () {
     try {
-       const data = await client.DeleteBudgets({})
+       const data = await client.ModifyBudgetAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.DescribeModelAssociations", async function () {
+    try {
+       const data = await client.DescribeModelAssociations({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,6 +638,16 @@ it("clb.v20180317.RegisterFunctionTargets", async function () {
     }
 })
 
+it("clb.v20180317.ModifyModelAliasAttributes", async function () {
+    try {
+       const data = await client.ModifyModelAliasAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.CreateKey", async function () {
     try {
        const data = await client.CreateKey({})
@@ -458,9 +668,29 @@ it("clb.v20180317.DescribeCustomizedConfigList", async function () {
     }
 })
 
+it("clb.v20180317.AssociateModelRouterGuardrails", async function () {
+    try {
+       const data = await client.AssociateModelRouterGuardrails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DescribeModelRouterQuota", async function () {
     try {
        const data = await client.DescribeModelRouterQuota({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.DescribeQuota", async function () {
+    try {
+       const data = await client.DescribeQuota({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,9 +718,19 @@ it("clb.v20180317.SetLoadBalancerClsLog", async function () {
     }
 })
 
-it("clb.v20180317.ModifyBlockIPList", async function () {
+it("clb.v20180317.DescribeModelRouterResourcePackageDeduction", async function () {
     try {
-       const data = await client.ModifyBlockIPList({})
+       const data = await client.DescribeModelRouterResourcePackageDeduction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.ModifyIntentRouterAttribute", async function () {
+    try {
+       const data = await client.ModifyIntentRouterAttribute({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -548,6 +788,16 @@ it("clb.v20180317.ModifyRule", async function () {
     }
 })
 
+it("clb.v20180317.DescribeKeys", async function () {
+    try {
+       const data = await client.DescribeKeys({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DescribeLoadBalancersDetail", async function () {
     try {
        const data = await client.DescribeLoadBalancersDetail({})
@@ -598,9 +848,9 @@ it("clb.v20180317.DescribeCrossTargets", async function () {
     }
 })
 
-it("clb.v20180317.DescribeTargetHealth", async function () {
+it("clb.v20180317.DeleteIntentRouter", async function () {
     try {
-       const data = await client.DescribeTargetHealth({})
+       const data = await client.DeleteIntentRouter({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -611,6 +861,16 @@ it("clb.v20180317.DescribeTargetHealth", async function () {
 it("clb.v20180317.ModifyKeyAttributes", async function () {
     try {
        const data = await client.ModifyKeyAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.DescribeAssociatedModelAvailability", async function () {
+    try {
+       const data = await client.DescribeAssociatedModelAvailability({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -631,6 +891,16 @@ it("clb.v20180317.ManualRewrite", async function () {
 it("clb.v20180317.RegenerateKeys", async function () {
     try {
        const data = await client.RegenerateKeys({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.DescribeModelRouterGuardrails", async function () {
+    try {
+       const data = await client.DescribeModelRouterGuardrails({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -688,6 +958,16 @@ it("clb.v20180317.AssociateBudget", async function () {
     }
 })
 
+it("clb.v20180317.ModifyModelAttributes", async function () {
+    try {
+       const data = await client.ModifyModelAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.ModifyDomain", async function () {
     try {
        const data = await client.ModifyDomain({})
@@ -711,6 +991,16 @@ it("clb.v20180317.InquiryPriceRenewLoadBalancer", async function () {
 it("clb.v20180317.DescribeLoadBalancerOverview", async function () {
     try {
        const data = await client.DescribeLoadBalancerOverview({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.ModifyBlockIPList", async function () {
+    try {
+       const data = await client.ModifyBlockIPList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -748,6 +1038,26 @@ it("clb.v20180317.DeleteRule", async function () {
     }
 })
 
+it("clb.v20180317.AddModelKey", async function () {
+    try {
+       const data = await client.AddModelKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.TestModelInputModalities", async function () {
+    try {
+       const data = await client.TestModelInputModalities({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DescribeBudgets", async function () {
     try {
        const data = await client.DescribeBudgets({})
@@ -771,6 +1081,26 @@ it("clb.v20180317.CreateKeys", async function () {
 it("clb.v20180317.DeleteKeys", async function () {
     try {
        const data = await client.DeleteKeys({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.AddModelRewrite", async function () {
+    try {
+       const data = await client.AddModelRewrite({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.DescribeTargets", async function () {
+    try {
+       const data = await client.DescribeTargets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -808,9 +1138,39 @@ it("clb.v20180317.DeleteUserGroups", async function () {
     }
 })
 
+it("clb.v20180317.DescribeTargetHealth", async function () {
+    try {
+       const data = await client.DescribeTargetHealth({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DescribeTargetGroupList", async function () {
     try {
        const data = await client.DescribeTargetGroupList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.DisassociateModelsFromModelRouter", async function () {
+    try {
+       const data = await client.DisassociateModelsFromModelRouter({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.CreateIntentRouter", async function () {
+    try {
+       const data = await client.CreateIntentRouter({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -828,6 +1188,16 @@ it("clb.v20180317.RenewLoadBalancers", async function () {
     }
 })
 
+it("clb.v20180317.TestServiceProviderConnection", async function () {
+    try {
+       const data = await client.TestServiceProviderConnection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DescribeTargetGroups", async function () {
     try {
        const data = await client.DescribeTargetGroups({})
@@ -838,9 +1208,9 @@ it("clb.v20180317.DescribeTargetGroups", async function () {
     }
 })
 
-it("clb.v20180317.ModifyTargetGroupAttribute", async function () {
+it("clb.v20180317.DescribeModelRouterResourcePackages", async function () {
     try {
-       const data = await client.ModifyTargetGroupAttribute({})
+       const data = await client.DescribeModelRouterResourcePackages({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -868,9 +1238,9 @@ it("clb.v20180317.ReplaceCertForLoadBalancers", async function () {
     }
 })
 
-it("clb.v20180317.DescribeQuota", async function () {
+it("clb.v20180317.ChatCompletions", async function () {
     try {
-       const data = await client.DescribeQuota({})
+       const data = await client.ChatCompletions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -938,6 +1308,16 @@ it("clb.v20180317.CreateBudget", async function () {
     }
 })
 
+it("clb.v20180317.CreateBYOKNetwork", async function () {
+    try {
+       const data = await client.CreateBYOKNetwork({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.DeleteLoadBalancerListeners", async function () {
     try {
        const data = await client.DeleteLoadBalancerListeners({})
@@ -978,9 +1358,9 @@ it("clb.v20180317.ModifyDomainAttributes", async function () {
     }
 })
 
-it("clb.v20180317.DisassociateTargetGroups", async function () {
+it("clb.v20180317.DeregisterModelsFromServiceProvider", async function () {
     try {
-       const data = await client.DisassociateTargetGroups({})
+       const data = await client.DeregisterModelsFromServiceProvider({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1001,6 +1381,16 @@ it("clb.v20180317.DescribeLoadBalancers", async function () {
 it("clb.v20180317.DescribeBlockIPList", async function () {
     try {
        const data = await client.DescribeBlockIPList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.RegisterModelsToServiceProvider", async function () {
+    try {
+       const data = await client.RegisterModelsToServiceProvider({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1048,9 +1438,19 @@ it("clb.v20180317.DescribeClsLogSet", async function () {
     }
 })
 
-it("clb.v20180317.ModifyBudgetAttributes", async function () {
+it("clb.v20180317.DescribeModelKeys", async function () {
     try {
-       const data = await client.ModifyBudgetAttributes({})
+       const data = await client.DescribeModelKeys({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.DeleteBudgets", async function () {
+    try {
+       const data = await client.DeleteBudgets({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1068,6 +1468,26 @@ it("clb.v20180317.ModifyTargetWeight", async function () {
     }
 })
 
+it("clb.v20180317.CreateModelRouterResourcePackage", async function () {
+    try {
+       const data = await client.CreateModelRouterResourcePackage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.RemoveModelRewrite", async function () {
+    try {
+       const data = await client.RemoveModelRewrite({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.CreateTargetGroup", async function () {
     try {
        const data = await client.CreateTargetGroup({})
@@ -1078,9 +1498,9 @@ it("clb.v20180317.CreateTargetGroup", async function () {
     }
 })
 
-it("clb.v20180317.DescribeTargets", async function () {
+it("clb.v20180317.DescribeServiceProviderHealthStatus", async function () {
     try {
-       const data = await client.DescribeTargets({})
+       const data = await client.DescribeServiceProviderHealthStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1138,6 +1558,16 @@ it("clb.v20180317.DescribeClassicalLBHealthStatus", async function () {
     }
 })
 
+it("clb.v20180317.DisassociateModelRouterGuardrails", async function () {
+    try {
+       const data = await client.DisassociateModelRouterGuardrails({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("clb.v20180317.CreateLoadBalancerSnatIps", async function () {
     try {
        const data = await client.CreateLoadBalancerSnatIps({})
@@ -1171,6 +1601,16 @@ it("clb.v20180317.CloneLoadBalancer", async function () {
 it("clb.v20180317.BatchModifyTargetTag", async function () {
     try {
        const data = await client.BatchModifyTargetTag({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("clb.v20180317.ModifyModelRouterSecurityGroups", async function () {
+    try {
+       const data = await client.ModifyModelRouterSecurityGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

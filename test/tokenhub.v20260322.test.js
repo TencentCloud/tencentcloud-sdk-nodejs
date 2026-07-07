@@ -118,6 +118,16 @@ it("tokenhub.v20260322.DescribeGlossaries", async function () {
     }
 })
 
+it("tokenhub.v20260322.ModifyApiKeyInfo", async function () {
+    try {
+       const data = await client.ModifyApiKeyInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tokenhub.v20260322.DescribeGlossaryEntries", async function () {
     try {
        const data = await client.DescribeGlossaryEntries({})
@@ -148,9 +158,29 @@ it("tokenhub.v20260322.DeleteGlossaryEntries", async function () {
     }
 })
 
+it("tokenhub.v20260322.ModifyApiKeyStatus", async function () {
+    try {
+       const data = await client.ModifyApiKeyStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tokenhub.v20260322.UpgradeTokenPlanTeamOrder", async function () {
     try {
        const data = await client.UpgradeTokenPlanTeamOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tokenhub.v20260322.CreateApiKey", async function () {
+    try {
+       const data = await client.CreateApiKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,6 +228,16 @@ it("tokenhub.v20260322.DescribeTokenPlan", async function () {
     }
 })
 
+it("tokenhub.v20260322.ModifyTokenPlanApiKey", async function () {
+    try {
+       const data = await client.ModifyTokenPlanApiKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tokenhub.v20260322.ModifyGlossaryEntries", async function () {
     try {
        const data = await client.ModifyGlossaryEntries({})
@@ -238,9 +278,9 @@ it("tokenhub.v20260322.DeleteTokenPlanApiKey", async function () {
     }
 })
 
-it("tokenhub.v20260322.ModifyTokenPlanApiKey", async function () {
+it("tokenhub.v20260322.DeleteApiKey", async function () {
     try {
-       const data = await client.ModifyTokenPlanApiKey({})
+       const data = await client.DeleteApiKey({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -168,9 +168,9 @@ it("cynosdb.v20190107.DescribeClusterParamLogs", async function () {
     }
 })
 
-it("cynosdb.v20190107.ModifyMaintainPeriodConfig", async function () {
+it("cynosdb.v20190107.DescribeBackupOverview", async function () {
     try {
-       const data = await client.ModifyMaintainPeriodConfig({})
+       const data = await client.DescribeBackupOverview({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1151,6 +1151,16 @@ it("cynosdb.v20190107.DeleteLibraDBClusterAccounts", async function () {
 it("cynosdb.v20190107.DescribeClusterPeriodScalePolicy", async function () {
     try {
        const data = await client.DescribeClusterPeriodScalePolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.ModifyMaintainPeriodConfig", async function () {
+    try {
+       const data = await client.ModifyMaintainPeriodConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

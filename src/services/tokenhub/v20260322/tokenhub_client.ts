@@ -18,85 +18,93 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeTokenPlanListResponse,
   TokenPlanApiKeyListItem,
   BindingItem,
-  DescribeTokenPlanApiKeySecretResponse,
-  ModelChargingInfo,
   CreateApiKeysResultItem,
-  GlossaryEntryInput,
-  ModifyTokenPlanApiKeySecretResponse,
   DescribeTokenPlanApiKeyListResponse,
-  DeleteGlossaryEntryInput,
-  DescribeTokenPlanRequest,
-  GlossaryEntryItem,
   DeleteGlossaryResponse,
-  DescribeTokenPlanApiKeyResponse,
-  ModifyTokenPlanApiKeySecretRequest,
-  SubPackageBalance,
   DeleteGlossaryEntriesResponse,
-  DescribeApiKeyListResponse,
   RenewTokenPlanTeamOrderResponse,
-  UsageRankItem,
   ModelImage,
-  DescribeModelListRequest,
-  DescribeApiKeyListRequest,
-  ModifyGlossaryEntryInput,
-  CreateGlossaryRequest,
-  DescribeGlossaryEntriesResponse,
-  DeleteGlossaryRequest,
-  DescribeGlossaryEntriesRequest,
-  TokenPlanApiKeyInfo,
+  UsageSeries,
+  DescribeTokenPlanListResponse,
   DeleteGlossaryEntriesRequest,
   CreateGlossaryEntriesResponse,
   CreateTokenPlanApiKeysResponse,
-  DescribeTokenPlanApiKeyRequest,
-  DescribeApiKeyRequest,
   ModelAccessInfo,
-  ModifyTokenPlanApiKeyRequest,
-  TokenSummaryBillingItem,
   DescribeModelListResponse,
-  DescribeTokenPlanApiKeyUsageDetailResponse,
-  RequestSort,
-  ModelChargingItem,
-  TokenPlanListItem,
-  CreateGlossaryResponse,
   CreateTokenPlanTeamOrderAndBuyRequest,
-  ModifyGlossaryEntriesRequest,
-  RenewTokenPlanTeamOrderRequest,
-  DescribeGlossariesRequest,
   DeleteTokenPlanApiKeyResponse,
-  ModelSiteRegion,
-  DescribeTokenPlanApiKeyUsageDetailRequest,
-  UpgradeTokenPlanTeamOrderRequest,
-  DescribeUsageRankListRequest,
-  ModifyTokenPlanApiKeyResponse,
-  CreateGlossaryEntriesRequest,
-  UsageSeries,
-  ApiKeyDetail,
-  DescribeGlossariesResponse,
-  Model,
-  BatchCreateFailedItem,
-  GlossaryItem,
-  TokenPlanPackageInfo,
-  CreateTokenPlanTeamOrderAndBuyResponse,
-  ModelSpec,
-  RequestFilter,
-  TokenSummary,
-  DescribeTokenPlanListRequest,
-  UpgradeTokenPlanTeamOrderResponse,
+  GlossaryEntryItem,
   ModifyGlossaryEntriesResponse,
   DescribeTokenPlanResponse,
-  CreateTokenPlanApiKeysRequest,
+  DescribeModelListRequest,
+  DescribeTokenPlanApiKeySecretResponse,
+  GlossaryEntryInput,
+  ModifyTokenPlanApiKeySecretResponse,
+  DeleteGlossaryEntryInput,
+  QuotaInfo,
+  DescribeApiKeyListResponse,
+  ModifyApiKeyInfoResponse,
+  DeleteGlossaryRequest,
+  DescribeGlossaryEntriesRequest,
+  DescribeTokenPlanApiKeyRequest,
+  DeleteApiKeyResponse,
+  ModifyGlossaryEntryInput,
+  DescribeTokenPlanApiKeyListRequest,
+  DescribeGlossariesRequest,
+  DescribeTokenPlanApiKeyUsageDetailRequest,
+  DescribeGlossaryEntriesResponse,
+  ApiKeyDetail,
+  UsageDetailItem,
+  SubPackageBalance,
+  DeleteApiKeyRequest,
+  UpgradeTokenPlanTeamOrderResponse,
+  TokenPlanPackageInfo,
   UsageStats,
   DescribeUsageRankListResponse,
-  DeleteTokenPlanApiKeyRequest,
-  ModelFreeTrialInfo,
   DescribeApiKeyResponse,
-  DescribeTokenPlanApiKeyListRequest,
-  UsageDetailItem,
   DescribeTokenPlanApiKeySecretRequest,
-  QuotaInfo,
+  ModelChargingInfo,
+  ModifyApiKeyStatusRequest,
+  DescribeTokenPlanRequest,
+  GlossaryItem,
+  Model,
+  ModifyTokenPlanApiKeyResponse,
+  DescribeApiKeyListRequest,
+  UpgradeTokenPlanTeamOrderRequest,
+  TokenSummaryBillingItem,
+  DescribeTokenPlanApiKeyUsageDetailResponse,
+  ModifyApiKeyInfoRequest,
+  TokenPlanListItem,
+  DescribeApiKeyRequest,
+  DescribeUsageRankListRequest,
+  CreateGlossaryEntriesRequest,
+  DescribeGlossariesResponse,
+  BatchCreateFailedItem,
+  CreateApiKeyResponse,
+  ModelSpec,
+  TokenSummary,
+  CreateTokenPlanApiKeysRequest,
+  DeleteTokenPlanApiKeyRequest,
+  ModelChargingItem,
+  DescribeTokenPlanApiKeyResponse,
+  DescribeTokenPlanListRequest,
+  ModelFreeTrialInfo,
+  TokenPlanApiKeyInfo,
+  ModifyTokenPlanApiKeyRequest,
+  CreateGlossaryRequest,
+  UsageRankItem,
+  CreateGlossaryResponse,
+  ModifyGlossaryEntriesRequest,
+  RenewTokenPlanTeamOrderRequest,
+  ModelSiteRegion,
+  ModifyApiKeyStatusResponse,
+  CreateTokenPlanTeamOrderAndBuyResponse,
+  RequestFilter,
+  ModifyTokenPlanApiKeySecretRequest,
+  RequestSort,
+  CreateApiKeyRequest,
 } from "./tokenhub_models"
 
 /**
@@ -229,6 +237,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 更新 API 密钥信息。
+
+更新 API 密钥的备注信息、 IP 白名单和 Token 限额（修改限额推荐使用QuotaDesired参数）。所有可选参数不传表示不修改。
+     */
+  async ModifyApiKeyInfo(
+    req?: ModifyApiKeyInfoRequest,
+    cb?: (error: string, rep: ModifyApiKeyInfoResponse) => void
+  ): Promise<ModifyApiKeyInfoResponse> {
+    return this.request("ModifyApiKeyInfo", req, cb)
+  }
+
+  /**
      * 查询术语条目列表。
 
 查询指定术语库下的术语条目。支持分页。
@@ -275,6 +295,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新 API 密钥的启用或禁用状态。
+   */
+  async ModifyApiKeyStatus(
+    req?: ModifyApiKeyStatusRequest,
+    cb?: (error: string, rep: ModifyApiKeyStatusResponse) => void
+  ): Promise<ModifyApiKeyStatusResponse> {
+    return this.request("ModifyApiKeyStatus", req, cb)
+  }
+
+  /**
      * 升配套餐。
 
 对已有的 TokenPlan 套餐发起升配下单并完成支付，扩容积分或 Token 额度，成功后返回大订单 ID 及关联的子订单、资源信息。新额度必须大于当前额度。
@@ -284,6 +314,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpgradeTokenPlanTeamOrderResponse) => void
   ): Promise<UpgradeTokenPlanTeamOrderResponse> {
     return this.request("UpgradeTokenPlanTeamOrder", req, cb)
+  }
+
+  /**
+     * 创建 API 密钥。
+
+创建一个新的 API 密钥，创建成功后返回 API 密钥 ID。需指定平台类型、绑定方式和初始状态。
+     */
+  async CreateApiKey(
+    req?: CreateApiKeyRequest,
+    cb?: (error: string, rep: CreateApiKeyResponse) => void
+  ): Promise<CreateApiKeyResponse> {
+    return this.request("CreateApiKey", req, cb)
   }
 
   /**
@@ -335,6 +377,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 修改 TokenPlan APIKey 配置（网关关注字段）。
+
+修改后自动通知网关更新缓存并同步额度中心。
+     */
+  async ModifyTokenPlanApiKey(
+    req: ModifyTokenPlanApiKeyRequest,
+    cb?: (error: string, rep: ModifyTokenPlanApiKeyResponse) => void
+  ): Promise<ModifyTokenPlanApiKeyResponse> {
+    return this.request("ModifyTokenPlanApiKey", req, cb)
+  }
+
+  /**
      * 批量修改术语条目。
 
 在指定术语库下批量修改术语条目。单次最多修改 200 条。
@@ -381,15 +435,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 修改 TokenPlan APIKey 配置（网关关注字段）。
-
-修改后自动通知网关更新缓存并同步额度中心。
-     */
-  async ModifyTokenPlanApiKey(
-    req: ModifyTokenPlanApiKeyRequest,
-    cb?: (error: string, rep: ModifyTokenPlanApiKeyResponse) => void
-  ): Promise<ModifyTokenPlanApiKeyResponse> {
-    return this.request("ModifyTokenPlanApiKey", req, cb)
+   * 删除指定的 API 密钥，同时清理关联的模型绑定关系。
+   */
+  async DeleteApiKey(
+    req?: DeleteApiKeyRequest,
+    cb?: (error: string, rep: DeleteApiKeyResponse) => void
+  ): Promise<DeleteApiKeyResponse> {
+    return this.request("DeleteApiKey", req, cb)
   }
 
   /**

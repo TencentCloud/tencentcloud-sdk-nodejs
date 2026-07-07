@@ -206,6 +206,36 @@ export interface CreateModelServiceRequest {
 }
 
 /**
+ * DescribePresetImageList请求参数结构体
+ */
+export interface DescribePresetImageListRequest {
+  /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+  /**
+   * <p>业务过滤表达式</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>分页排序</p>
+   */
+  Offset?: number
+  /**
+   * <p>单页大小</p>
+   */
+  Limit?: number
+  /**
+   * <p>排序字段</p>
+   */
+  OrderField?: Array<string>
+  /**
+   * <p>对应字段的排序方式</p>
+   */
+  Order?: Array<string>
+}
+
+/**
  * DescribeLogs请求参数结构体
  */
 export interface DescribeLogsRequest {
@@ -2679,6 +2709,20 @@ export interface DescribeBillingResourceInstanceRunningJobsResponse {
 }
 
 /**
+ * 预制镜像中的运行库详情
+ */
+export interface RuntimeLib {
+  /**
+   * <p>运行库名称</p>
+   */
+  Name?: string
+  /**
+   * <p>运行库版本号</p>
+   */
+  Version?: string
+}
+
+/**
  * 服务的调用信息，服务组下唯一
  */
 export interface InferGatewayCallInfo {
@@ -3641,6 +3685,108 @@ export interface DeviceMaterialInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaterialInfo?: MaterialInfo
+}
+
+/**
+ * 预制镜像详情
+ */
+export interface PresetImageInfo {
+  /**
+   * <p>镜像id</p>
+   */
+  ImageId?: string
+  /**
+   * <p>镜像仓库名称</p>
+   */
+  ImageRepo?: string
+  /**
+   * <p>镜像标签</p>
+   */
+  ImageTag?: string
+  /**
+   * <p>镜像url地址</p>
+   */
+  ImageUrl?: string
+  /**
+   * <p>镜像的大小</p>
+   */
+  ImageSize?: string
+  /**
+   * <p>镜像描述</p>
+   */
+  Description?: string
+  /**
+   * <p>适用模块</p>
+   */
+  ApplicableModuleList?: Array<string>
+  /**
+   * <p>使用场景</p>
+   */
+  Scenario?: string
+  /**
+   * <p>框架名称</p>
+   */
+  Framework?: string
+  /**
+   * <p>框架版本</p>
+   */
+  FrameworkVersion?: string
+  /**
+   * <p>芯片类型</p>
+   */
+  ChipTypeList?: Array<string>
+  /**
+   * <p>运行库版本</p>
+   */
+  ComputeLibVersion?: string
+  /**
+   * <p>python版本</p>
+   */
+  PythonVersion?: string
+  /**
+   * <p>操作系统</p>
+   */
+  OS?: string
+  /**
+   * <p>运行库列表</p>
+   */
+  RuntimeLibList?: Array<RuntimeLib>
+  /**
+   * <p>支持的gpu列表</p>
+   */
+  SupportGpuList?: Array<string>
+  /**
+   * <p>扩展属性</p>
+   */
+  ExtraAttributeList?: Array<Attribute>
+  /**
+   * <p>是否支持分布式部署</p>
+   */
+  SupportDistributedDeploy?: boolean
+  /**
+   * <p>是否最新稳定版本</p>
+   */
+  IsLatestStable?: boolean
+  /**
+   * <p>镜像的名称</p>
+   */
+  ImageName?: string
+  /**
+   * <p>镜像版本号（内部）</p>
+   */
+  Version?: number
+  /**
+   * <p>录入时间</p><p>参数格式：YYYY-MM-DDThh:mm:ssZ</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>更新时间</p><p>参数格式：YYYY-MM-DDThh:mm:ssZ</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>镜像类型</p><p>枚举值：</p><ul><li>TCR： TCR类型的镜像</li></ul>
+   */
+  ImageType?: string
 }
 
 /**
@@ -5105,6 +5251,16 @@ export interface CreateMountLimitRequest {
 }
 
 /**
+ * 主机路径挂载配置
+ */
+export interface HostPath {
+  /**
+   * 需要挂载的主机路径
+   */
+  Path?: string
+}
+
+/**
  * 在线服务的 AuthToken 数据
  */
 export interface AuthToken {
@@ -6530,13 +6686,13 @@ export interface DeleteMountLimitRequest {
 }
 
 /**
- * 主机路径挂载配置
+ * 执行命令探针检查行为
  */
-export interface HostPath {
+export interface ExecAction {
   /**
-   * 需要挂载的主机路径
+   * 执行命令列表
    */
-  Path?: string
+  Command?: Array<string>
 }
 
 /**
@@ -6882,13 +7038,21 @@ export interface MountLimitInfo {
 }
 
 /**
- * 执行命令探针检查行为
+ * DescribePresetImageList返回参数结构体
  */
-export interface ExecAction {
+export interface DescribePresetImageListResponse {
   /**
-   * 执行命令列表
+   * <p>记录总数</p>
    */
-  Command?: Array<string>
+  TotalCount?: number
+  /**
+   * <p>镜像列表</p>
+   */
+  PresetImageList?: Array<PresetImageInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

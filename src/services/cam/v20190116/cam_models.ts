@@ -751,78 +751,82 @@ export interface GetGroupRequest {
  */
 export interface StrategyInfo {
   /**
-   * 策略ID。
+   * <p>策略ID。</p>
    */
   PolicyId?: number
   /**
-   * 策略名称。
+   * <p>策略名称。</p>
    */
   PolicyName?: string
   /**
-   * 策略创建时间。
+   * <p>策略创建时间。</p>
    */
   AddTime?: string
   /**
-   * 策略类型。1 表示自定义策略，2 表示预设策略。
+   * <p>策略类型。1 表示自定义策略，2 表示预设策略。</p>
    */
   Type?: number
   /**
-   * 策略描述。
+   * <p>策略描述。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 创建来源，1 通过控制台创建, 2 通过策略语法创建。
+   * <p>创建来源，1 通过控制台创建, 2 通过策略语法创建。</p>
    */
   CreateMode?: number
   /**
-   * 关联的用户数
+   * <p>关联的用户数</p>
    */
   Attachments?: number
   /**
-   * 策略关联的产品
+   * <p>策略关联的产品</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServiceType?: string
   /**
-   * 当需要查询标记实体是否已经关联策略时不为null。0表示未关联策略，1表示已关联策略
+   * <p>当需要查询标记实体是否已经关联策略时不为null。0表示未关联策略，1表示已关联策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsAttached?: number
   /**
-   * 是否已下线
+   * <p>是否已下线</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Deactived?: number
   /**
-   * 已下线产品列表
+   * <p>已下线产品列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeactivedDetail?: Array<string>
   /**
-   * 是否是服务相关角色策略
+   * <p>是否是服务相关角色策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsServiceLinkedPolicy?: number
   /**
-   * 关联策略实体数
+   * <p>关联策略实体数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AttachEntityCount?: number
   /**
-   * 关联权限边界实体数
+   * <p>关联权限边界实体数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AttachEntityBoundaryCount?: number
   /**
-   * 最后编辑时间
+   * <p>最后编辑时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<Tag>
+  /**
+   * <p>权限级别</p><p>枚举值：</p><ul><li>Global： 全局权限</li><li>Finance： 财务权限</li><li>CloudProduct： 云产品权限</li></ul>
+   */
+  PermissionLevel?: string
 }
 
 /**
@@ -1091,24 +1095,15 @@ export interface CreatePolicyVersionResponse {
  */
 export interface ListPoliciesResponse {
   /**
-   * 策略总数
+   * <p>策略总数</p>
    */
   TotalNum?: number
   /**
-   * 策略数组，数组每个成员包括 policyId、policyName、addTime、type、description、 createMode 字段。其中： 
-policyId：策略 id 
-policyName：策略名
-addTime：策略创建时间
-type：1 表示自定义策略，2 表示预设策略 
-description：策略描述 
-createMode：1 表示按业务权限创建的策略，其他值表示可以查看策略语法和通过策略语法更新策略
-Attachments: 关联的用户数
-ServiceType: 策略关联的产品
-IsAttached: 当需要查询标记实体是否已经关联策略时不为null。0表示未关联策略，1表示已关联策略
+   * <p>策略数组，数组每个成员包括 policyId、policyName、addTime、type、description、 createMode 字段。其中：<br>policyId：策略 id<br>policyName：策略名<br>addTime：策略创建时间<br>type：1 表示自定义策略，2 表示预设策略<br>description：策略描述<br>createMode：1 表示按业务权限创建的策略，其他值表示可以查看策略语法和通过策略语法更新策略<br>Attachments: 关联的用户数<br>ServiceType: 策略关联的产品<br>IsAttached: 当需要查询标记实体是否已经关联策略时不为null。0表示未关联策略，1表示已关联策略</p>
    */
   List?: Array<StrategyInfo>
   /**
-   * 保留字段
+   * <p>保留字段</p>
    */
   ServiceTypeList?: Array<string>
   /**
@@ -2950,19 +2945,19 @@ export interface TagRoleRequest {
  */
 export interface ListPoliciesRequest {
   /**
-   * 每页数量，默认值是 20，必须大于 0 且小于或等于 200
+   * <p>每页数量，默认值是 20，必须大于 0 且小于或等于 200</p>
    */
   Rp?: number
   /**
-   * 页码，默认值是 1，从 1开始，不能大于 200
+   * <p>页码，默认值是 1，从 1开始，不能大于 200</p>
    */
   Page?: number
   /**
-   * 可取值 'All'、'QCS' 和 'Local'，'All' 获取所有策略，'QCS' 只获取预设策略，'Local' 只获取自定义策略，默认取 'All'
+   * <p>可取值 &#39;All&#39;、&#39;QCS&#39; 和 &#39;Local&#39;，&#39;All&#39; 获取所有策略，&#39;QCS&#39; 只获取预设策略，&#39;Local&#39; 只获取自定义策略，默认取 &#39;All&#39;</p>
    */
   Scope?: string
   /**
-   * 按策略名匹配
+   * <p>按策略名匹配</p>
    */
   Keyword?: string
 }

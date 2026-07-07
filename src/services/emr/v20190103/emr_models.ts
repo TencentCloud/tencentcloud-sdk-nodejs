@@ -3011,6 +3011,10 @@ export interface PodSpecInfo {
  */
 export interface ModifyUserGroupResponse {
   /**
+   * <p>流程id</p>
+   */
+  FlowId?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -4780,27 +4784,27 @@ export interface ModifyBootScriptResponse {
  */
 export interface DeleteUserManagerUserListRequest {
   /**
-   * 集群实例ID
+   * <p>集群实例ID</p>
    */
   InstanceId: string
   /**
-   * 集群用户名列表
+   * <p>集群用户名列表</p>
    */
   UserNameList?: Array<string>
   /**
-   * tke/eks集群id，容器集群传
+   * <p>tke/eks集群id，容器集群传</p>
    */
   TkeClusterId?: string
   /**
-   * 默认空，容器版传"native"
+   * <p>默认空，容器版传&quot;native&quot;</p>
    */
   DisplayStrategy?: string
   /**
-   * 用户组
+   * <p>用户组</p>
    */
   UserGroupList?: Array<UserAndGroup>
   /**
-   * 是否删除家目录，只针对cvm集群
+   * <p>是否删除家目录，只针对cvm集群</p>
    */
   DeleteHomeDir?: boolean
 }
@@ -5381,31 +5385,23 @@ export interface NodeSelectorTerm {
  */
 export interface ModifyUsersOfGroupSTDRequest {
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   InstanceId: string
   /**
-   * 用户组名
+   * <p>用户组名</p>
    */
   Group: string
   /**
-   * 用户列表
+   * <p>用户列表</p>
    */
   Users?: Array<string>
   /**
-   * 用户组描述
+   * <p>用户组描述</p>
    */
   Description?: string
   /**
-   * 枚举类, ADD, DELETE, SYNC
-
-
-枚举类说明:
-- ADD: 新增的批量用户, 多次新增相同的用户不会报错
-- DELETE: 从用户组里删除的批量用户, 删除不存在的用户不会报错
-- SYNC: 用于同步整个用户组, 当列表为空时代表清空整个用户组
-默认为SYNC
-
+   * <p>枚举类, ADD, DELETE, SYNC</p><p>枚举类说明:</p><ul><li>ADD: 新增的批量用户, 多次新增相同的用户不会报错</li><li>DELETE: 从用户组里删除的批量用户, 删除不存在的用户不会报错</li><li>SYNC: 用于同步整个用户组, 当列表为空时代表清空整个用户组<br>默认为SYNC</li></ul>
    */
   OperateAction?: string
 }
@@ -6412,6 +6408,10 @@ export interface ScaleOutInstanceResponse {
  * ModifyUserManagerPwd返回参数结构体
  */
 export interface ModifyUserManagerPwdResponse {
+  /**
+   * <p>流程id</p>
+   */
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8203,9 +8203,13 @@ export interface DescribeSLInstanceListRequest {
  */
 export interface DeleteGroupsSTDResponse {
   /**
-   * 删除返回结果
+   * <p>删除返回结果</p>
    */
   Data?: Array<ResultItem>
+  /**
+   * <p>流程id</p>
+   */
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8291,23 +8295,23 @@ export interface ModifyPodNumRequest {
  */
 export interface ModifyUserGroupRequest {
   /**
-   * 集群字符串ID
+   * <p>集群字符串ID</p>
    */
   InstanceId: string
   /**
-   * 用户信息列表
+   * <p>用户信息列表</p>
    */
   Users: Array<string>
   /**
-   * 用户主组，cvm集群为必填参数，tke集群选填
+   * <p>用户主组，cvm集群为必填参数，tke集群选填</p>
    */
   UserGroup?: string
   /**
-   * 用户副组
+   * <p>用户副组</p>
    */
   Groups?: Array<string>
   /**
-   * 备注
+   * <p>备注</p>
    */
   Remark?: string
 }
@@ -9974,19 +9978,19 @@ export interface SLInstanceInfo {
  */
 export interface ModifyUserManagerPwdRequest {
   /**
-   * 集群实例ID
+   * <p>集群实例ID</p>
    */
   InstanceId: string
   /**
-   * 用户名
+   * <p>用户名</p>
    */
   UserName: string
   /**
-   * 密码
+   * <p>密码</p>
    */
   PassWord: string
   /**
-   * 是否同步密码
+   * <p>是否同步密码</p>
    */
   SyncPwd?: boolean
 }
@@ -10658,9 +10662,13 @@ export interface PodAffinityTerm {
  */
 export interface ModifyUsersOfGroupSTDResponse {
   /**
-   * 是否修改成功
+   * <p>是否修改成功</p>
    */
   Data?: boolean
+  /**
+   * <p>流程id</p>
+   */
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12010,6 +12018,10 @@ export interface DeployYarnConfResponse {
  */
 export interface DeleteUserManagerUserListResponse {
   /**
+   * <p>流程id</p>
+   */
+  FlowId?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -12227,11 +12239,11 @@ export interface CustomMetaInfo {
  */
 export interface DeleteGroupsSTDRequest {
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   InstanceId: string
   /**
-   * 用户组名称数组
+   * <p>用户组名称数组</p>
    */
   GroupNames: Array<string>
 }

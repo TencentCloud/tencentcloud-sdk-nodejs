@@ -28,11 +28,13 @@ import {
   SelfOperation,
   CreateServerModelRequest,
   WorkOrderTypeDetail,
+  DescribeWorkOrderPersonnelCollectListResponse,
   DescribeModelVersionListResponse,
   CreateModelEvaluationWorkOrderRequest,
   DescribeModelVersionListRequest,
   CreateNetDeviceModelRequest,
   IdcUnitInfo,
+  DescribeCommonServiceWorkOrderDetailResponse,
   ServerModel,
   DescribeIdcUnitDetailResponse,
   DescribeIdcsRequest,
@@ -41,6 +43,7 @@ import {
   WorkOrderFamilyDetail,
   DescribePositionStatusSummaryResponse,
   DescribeDeviceListRequest,
+  DescribeWorkOrderContactCollectListRequest,
   CreateSpeciallyQuitWorkOrderRequest,
   ConfirmCommonServiceWorkOrderRequest,
   OtherDevReceivingInfo,
@@ -48,8 +51,10 @@ import {
   TemplateOption,
   CreateReceivingWorkOrderRequest,
   DescribeWorkOrderStatisticsRequest,
+  DescribeWorkOrderPersonnelCollectListRequest,
   DescribeResourceUsageRequest,
   LogisticsReceipt,
+  ServerReceivingInfo,
   CreateCommonServiceWorkOrderRequest,
   CreateCommonServiceWorkOrderResponse,
   DescribeIdcUnitDetailRequest,
@@ -60,7 +65,7 @@ import {
   ModelVersionDetail,
   CreateRackOffWorkOrderRequest,
   ExportCustomerWorkOrderDetailResponse,
-  AvailableModelVersion,
+  DevicePosition,
   CustomerReceipt,
   Cage,
   PowerOffConfirm,
@@ -74,6 +79,7 @@ import {
   DescribeWorkOrderTypesRequest,
   CreateRackOnWorkOrderRequest,
   NetReceivingInfo,
+  DescribeWorkOrderCarCollectListRequest,
   DescribeCampusListResponse,
   WireReceivingInfo,
   DescribeModelTemplateRequest,
@@ -81,6 +87,7 @@ import {
   CreateMovingWorkOrderResponse,
   Campus,
   WorkOrderData,
+  ContactCollectInfo,
   ExportCustomerWorkOrderDetailRequest,
   NetDeviceModel,
   ModelVersion,
@@ -100,12 +107,12 @@ import {
   IdcUnit,
   ModifyWorkOrderTypeCollectFlagResponse,
   DescribeRacksDistributionRequest,
-  DescribeCommonServiceWorkOrderDetailResponse,
+  DescribeWorkOrderContactCollectListResponse,
   ModifyWorkOrderTypeCollectFlagRequest,
   CreateNetDeviceModelResponse,
   PersonnelVisitCar,
   DescribeCommonServiceWorkOrderDetailRequest,
-  ServerReceivingInfo,
+  DescribeWorkOrderCarCollectListResponse,
   CustomerInfo,
   ModelVersionCount,
   CreateModelEvaluationWorkOrderResponse,
@@ -127,7 +134,7 @@ import {
   ConfirmCommonServiceWorkOrderResponse,
   CreatePowerOffWorkOrderRequest,
   CreateQuitWorkOrderResponse,
-  DevicePosition,
+  AvailableModelVersion,
   DescribeRacksDistributionResponse,
   DescribeCustomerInfoRequest,
   DescribeDeviceListResponse,
@@ -290,6 +297,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询工单归集的车辆信息列表，支持按车牌号、驾驶员姓名模糊搜索
+   */
+  async DescribeWorkOrderCarCollectList(
+    req: DescribeWorkOrderCarCollectListRequest,
+    cb?: (error: string, rep: DescribeWorkOrderCarCollectListResponse) => void
+  ): Promise<DescribeWorkOrderCarCollectListResponse> {
+    return this.request("DescribeWorkOrderCarCollectList", req, cb)
+  }
+
+  /**
    * 获取机位列表
    */
   async DescribePositions(
@@ -307,6 +324,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCommonServiceWorkOrderResponse) => void
   ): Promise<CreateCommonServiceWorkOrderResponse> {
     return this.request("CreateCommonServiceWorkOrder", req, cb)
+  }
+
+  /**
+   * 查询工单归集的人员信息列表，支持按姓名、手机号模糊搜索
+   */
+  async DescribeWorkOrderPersonnelCollectList(
+    req: DescribeWorkOrderPersonnelCollectListRequest,
+    cb?: (error: string, rep: DescribeWorkOrderPersonnelCollectListResponse) => void
+  ): Promise<DescribeWorkOrderPersonnelCollectListResponse> {
+    return this.request("DescribeWorkOrderPersonnelCollectList", req, cb)
   }
 
   /**
@@ -477,6 +504,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIdcUnitAssetDetailResponse) => void
   ): Promise<DescribeIdcUnitAssetDetailResponse> {
     return this.request("DescribeIdcUnitAssetDetail", req, cb)
+  }
+
+  /**
+   * 查询工单归集的业务联系人信息列表，支持按姓名、电话模糊搜索
+   */
+  async DescribeWorkOrderContactCollectList(
+    req: DescribeWorkOrderContactCollectListRequest,
+    cb?: (error: string, rep: DescribeWorkOrderContactCollectListResponse) => void
+  ): Promise<DescribeWorkOrderContactCollectListResponse> {
+    return this.request("DescribeWorkOrderContactCollectList", req, cb)
   }
 
   /**

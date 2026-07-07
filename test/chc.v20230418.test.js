@@ -158,6 +158,16 @@ it("chc.v20230418.DescribeRacksDistribution", async function () {
     }
 })
 
+it("chc.v20230418.DescribeWorkOrderCarCollectList", async function () {
+    try {
+       const data = await client.DescribeWorkOrderCarCollectList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("chc.v20230418.DescribePositions", async function () {
     try {
        const data = await client.DescribePositions({})
@@ -171,6 +181,16 @@ it("chc.v20230418.DescribePositions", async function () {
 it("chc.v20230418.CreateCommonServiceWorkOrder", async function () {
     try {
        const data = await client.CreateCommonServiceWorkOrder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("chc.v20230418.DescribeWorkOrderPersonnelCollectList", async function () {
+    try {
+       const data = await client.DescribeWorkOrderPersonnelCollectList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -341,6 +361,16 @@ it("chc.v20230418.DescribeResourceUsage", async function () {
 it("chc.v20230418.DescribeIdcUnitAssetDetail", async function () {
     try {
        const data = await client.DescribeIdcUnitAssetDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("chc.v20230418.DescribeWorkOrderContactCollectList", async function () {
+    try {
+       const data = await client.DescribeWorkOrderContactCollectList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

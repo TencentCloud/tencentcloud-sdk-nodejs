@@ -18,336 +18,460 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  ModifyTargetWeightRequest,
-  DeleteRewriteRequest,
   DescribeTargetGroupListResponse,
-  DescribeQuotaRequest,
-  DescribeTargetGroupListRequest,
-  BatchDeregisterTargetsResponse,
-  ModifyDomainAttributesRequest,
   RulesItems,
   ExtraInfo,
-  RouterSettingWithoutFallBack,
-  BatchModifyTargetWeightResponse,
-  ModifyKeysBlockStatusRequest,
-  SetSecurityGroupForLoadbalancersRequest,
-  CreateKeyRequest,
-  DescribeLoadBalancerOverviewResponse,
-  DeleteRuleRequest,
-  CloneLoadBalancerRequest,
-  DisassociateTargetGroupsResponse,
-  SetLoadBalancerStartStatusResponse,
-  SetLoadBalancerClsLogResponse,
-  TargetGroupInstance,
+  DescribeRewriteResponse,
+  ModelRouterModel,
   DescribeLoadBalancerTrafficResponse,
-  TargetGroupInfo,
-  MultiCertInfo,
-  RegenerateKeysRequest,
-  ModifyRuleRequest,
-  DescribeCustomizedConfigListResponse,
-  ServiceEndPoints,
-  DescribeBlockIPListResponse,
-  ModifyUserGroupAttributesRequest,
   RsTagRule,
-  DescribeRewriteRequest,
-  LoadBalancerTraffic,
-  DescribeTargetGroupInstancesRequest,
-  DescribeLBOperateProtectRequest,
-  SetLoadBalancerSecurityGroupsResponse,
-  RouterSettingWithFallBack,
+  DescribeCustomizedConfigListResponse,
+  Job,
+  CreateModelRouterResourcePackageRequest,
   DeleteBudgetsRequest,
-  DescribeIdleLoadBalancersResponse,
-  ModifyLoadBalancerAttributesResponse,
   AssociateTargetGroupsRequest,
-  AssociateBudgetRequest,
-  DescribeLoadBalancersRequest,
+  RemoveModelRewriteRequest,
+  ModelAlias,
   CreateBudgetRequest,
-  ClassicalTarget,
-  ListenerItem,
-  RsWeightRule,
   RegisterFunctionTargetsRequest,
   DeleteUserGroupsResponse,
-  DeregisterTargetsFromClassicalLBRequest,
-  InquiryPriceModifyLoadBalancerRequest,
-  UserGroupInfo,
+  InquirePriceRefundModelRouterResourcePackageResponse,
+  ModifyModelRouterSecurityGroupsRequest,
   BasicTargetGroupInfo,
-  RateLimitConfigForModelRouter,
-  DescribeModelRouterQuotaRequest,
-  ModifyTargetWeightResponse,
-  DescribeModelRoutersRequest,
-  ZoneResource,
-  DescribeTaskStatusRequest,
+  AssociatedModelRouterItem,
   DescribeTargetGroupInstanceStatusResponse,
   DescribeClassicalLBByInstanceIdResponse,
-  CreateRuleResponse,
-  CrossTargets,
-  RuleHealth,
-  DescribeExclusiveClustersResponse,
-  ModifyDomainRequest,
-  DisassociateCustomizedConfigResponse,
-  BatchModifyTargetTagRequest,
-  RegisterTargetGroupInstancesResponse,
-  ClassicalTargetInfo,
-  DescribeTargetsRequest,
-  Quota,
-  ZoneInfo,
-  RegisterTargetsWithClassicalLBResponse,
+  DeleteModelResponse,
+  CreateBYOKNetworkResponse,
+  ModifyServiceProviderModelAttributesResponse,
   DeleteModelRoutersRequest,
   DescribeTargetGroupsResponse,
-  LoadBalancerHealth,
-  InquiryPriceCreateLoadBalancerRequest,
-  DescribeQuotaResponse,
-  TargetGroupInstanceStatus,
-  BindItem,
-  CreateLoadBalancerRequest,
-  BlockedIP,
-  ModifyRuleResponse,
-  DescribeClassicalLBTargetsRequest,
-  RuleOutput,
-  ModelRouterSet,
-  InquiryPriceRenewLoadBalancerResponse,
-  DeregisterFunctionTargetsResponse,
-  DescribeCustomizedConfigListRequest,
-  DisassociateBudgetRequest,
-  AutoRewriteRequest,
-  IdleLoadBalancer,
-  DescribeCrossTargetsResponse,
-  FunctionInfo,
-  ModifyFunctionTargetsResponse,
-  DescribeLoadBalancerListByCertIdResponse,
-  ModifyTargetGroupInstancesWeightResponse,
-  DescribeTargetGroupsRequest,
-  DescribeTaskStatusResponse,
-  BatchRegisterTargetsResponse,
-  ModifyLoadBalancerAttributesRequest,
-  InquiryPriceModifyLoadBalancerResponse,
-  DescribeLBListenersRequest,
-  SlaUpdateParam,
-  Target,
-  DescribeLoadBalancerTrafficRequest,
-  DescribeBlockIPListRequest,
-  MigrateClassicalLoadBalancersResponse,
-  CertIdRelatedWithLoadBalancers,
-  DescribeTargetsResponse,
-  DescribeUserGroupsRequest,
-  DescribeClassicalLBHealthStatusResponse,
   ModifyLoadBalancerSlaResponse,
-  DescribeClsLogSetRequest,
-  Listener,
-  Job,
-  CreditUsage,
+  DescribeModelNamesRequest,
+  CreateUserGroupRequest,
+  DeregisterModelsFromServiceProviderResponse,
+  BlockedIP,
+  DeleteModelRequest,
+  DescribeListenersResponse,
+  AutoRewriteRequest,
+  DescribeModelRouterResourcePackageDeductionResponse,
+  DescribeLoadBalancerTrafficRequest,
+  DescribeClassicalLBHealthStatusResponse,
+  AssociateModelsToModelRouterResponse,
+  DescribeModelAssociationsRequest,
   SpecAvailability,
-  ConfigListItem,
-  RegisterTargetsWithClassicalLBRequest,
-  CreateKeysResponse,
-  ModifyDomainAttributesResponse,
-  ModifyLoadBalancersProjectResponse,
-  ReplaceCertForLoadBalancersResponse,
-  DescribeBudgetAssociationsResponse,
-  DescribeModelRouterDetailRequest,
-  SetSecurityGroupForLoadbalancersResponse,
-  DeregisterTargetGroupInstancesResponse,
-  CreateBudgetResponse,
-  DeleteBudgetsResponse,
-  RegisterTargetsRequest,
+  HealthCheck,
+  DescribeLoadBalancersDetailResponse,
   DisassociateCustomizedConfigRequest,
-  DeleteLoadBalancerListenersRequest,
-  AssociateTargetGroupsResponse,
   CreateTopicRequest,
   DeleteListenerRequest,
-  ClassicalHealth,
-  DescribeCustomizedConfigAssociateListRequest,
-  RenewLoadBalancersResponse,
-  ModifyTargetPortResponse,
+  ModifyBlockIPListResponse,
   MigrateClassicalLoadBalancersRequest,
-  DescribeLoadBalancersDetailRequest,
   TargetGroupBackend,
-  DeregisterFunctionTargetsRequest,
   ModifyKeyAttributesResponse,
-  DescribeClassicalLBByInstanceIdRequest,
-  FunctionTarget,
-  ModifyBudgetAttributesRequest,
-  InquiryPriceRefundLoadBalancerResponse,
-  DescribeResourcesResponse,
-  FallBackItem,
-  ModifyTargetGroupInstancesWeightRequest,
-  ManualRewriteResponse,
-  RegeneratedKey,
+  ModifyKeysBlockStatusRequest,
+  DescribeModelAliasesResponse,
   ModifyBlockIPListRequest,
   CreateKeysRequest,
-  DescribeClusterResourcesResponse,
-  ModifyBudgetAttributesResponse,
-  ModifyBlockIPListResponse,
-  DescribeClusterResourcesRequest,
-  RateLimitConfigForKey,
-  LbRsItem,
+  CreateIntentRouterRequest,
   DeleteKeysResponse,
-  DescribeClassicalLBHealthStatusRequest,
-  DescribeListenersRequest,
-  DescribeCrossTargetsRequest,
-  CreateClsLogSetResponse,
+  ModifyDomainRequest,
   BudgetConfigInput,
-  CreateUserGroupRequest,
-  CreatedKey,
-  LBChargePrepaid,
-  ClassicalListener,
-  DeleteLoadBalancerRequest,
-  ModifyLoadBalancersProjectRequest,
-  AssociateCustomizedConfigRequest,
-  CertificateInput,
-  ModelRouterQuota,
-  SetLoadBalancerSecurityGroupsRequest,
-  DescribeCustomizedConfigAssociateListResponse,
-  RenewLoadBalancersRequest,
-  ModifyListenerRequest,
-  RegenerateKeysResponse,
-  InputKeyInfo,
-  TargetRegionInfo,
-  DescribeAsyncJobsRequest,
-  SetCustomizedConfigForLoadBalancerRequest,
-  CreateListenerResponse,
-  CreateTargetGroupResponse,
-  DescribeModelRouterDetailResponse,
-  AssociateCustomizedConfigResponse,
+  KeyItem,
+  ModelRouterResourcePackageRefundPrice,
+  AssociateModelsToModelRouterRequest,
   CreateLoadBalancerSnatIpsResponse,
-  ModifyUserGroupAttributesResponse,
   ClassicalLoadBalancerInfo,
-  CreateKeyResponse,
-  DescribeListenersResponse,
-  LBOperateProtectInfo,
+  DisassociateModelRouterGuardrailsResponse,
   RegisterFunctionTargetsResponse,
-  CreateTopicResponse,
-  CreateRuleRequest,
-  DescribeModelRoutersResponse,
-  ModifyKeyAttributesRequest,
-  ReplaceCertForLoadBalancersRequest,
-  ModifyTargetGroupInstancesPortResponse,
+  DeleteLoadBalancerRequest,
+  ModelRouterQuota,
+  AddModelRewriteRequest,
+  RuleTargets,
+  IntentRouterTierItem,
+  BatchDeregisterTargetsRequest,
+  ModifyListenerResponse,
+  DescribeTargetHealthResponse,
+  GuardrailConfig,
+  ClusterItem,
+  ModifyModelRouterAttributesRequest,
+  ModelRouterLog,
+  DescribeLoadBalancersRequest,
+  RemoveModelKeyResponse,
+  RegenerateKeysRequest,
+  FallBackItem,
+  BatchModifyTargetTagResponse,
+  DeleteRewriteResponse,
+  ModifyTargetGroupAttributeRequest,
+  ExclusiveCluster,
+  ModelRouterDetail,
+  DescribeLoadBalancerListByCertIdRequest,
+  CreateModelRouterResourcePackageResponse,
+  RegenerateKeysResponse,
+  DescribeClassicalLBListenersResponse,
+  DescribeModelKeysRequest,
+  Coefficient,
+  DescribeAssociatedModelAvailabilityRequest,
+  DescribeBlockIPTaskRequest,
+  TypeInfo,
+  OAuth,
+  DescribeClassicalLBTargetsResponse,
+  DeleteListenerResponse,
+  ModifyModelRouterAttributesResponse,
+  InquiryPriceRenewLoadBalancerRequest,
+  InternetAccessible,
+  DeleteTargetGroupsRequest,
+  SetLoadBalancerStartStatusRequest,
+  AssociationItem,
+  ModelTestResult,
+  LoadBalancer,
+  DescribeIntentRouterTiersRequest,
+  RsWeightRule,
+  DescribeUpperModelsResponse,
+  BatchModifyTargetWeightResponse,
+  DescribeLoadBalancerOverviewResponse,
+  MultiModalityAttachments,
+  ModifyRuleRequest,
+  DescribeModelRouterResourcePackagesRequest,
+  ModifyModelAttributesRequest,
+  ModifyUserGroupAttributesRequest,
+  RegisterTargetsWithClassicalLBRequest,
+  DescribeLBOperateProtectRequest,
+  RouterSettingWithFallBack,
+  CrossTargets,
+  AssociateBudgetRequest,
+  ClassicalTarget,
+  ServiceProviderModelItem,
+  SetLoadBalancerClsLogRequest,
+  DeregisterTargetsFromClassicalLBRequest,
+  InquiryPriceModifyLoadBalancerRequest,
+  ModelHealthCheckResults,
+  DescribeServiceProviderHealthStatusResponse,
+  ModifyTargetWeightResponse,
+  ZoneResource,
+  DescribeExclusiveClustersResponse,
+  BatchModifyTargetTagRequest,
+  LoadBalancerHealth,
+  ModifyRuleResponse,
+  DeregisterFunctionTargetsResponse,
+  ModifyListenerRequest,
+  FunctionInfo,
+  RenewLoadBalancersResponse,
+  LBItem,
+  DescribeTargetHealthRequest,
+  DeleteIntentRouterRequest,
+  DescribeBlockIPListRequest,
+  CertIdRelatedWithLoadBalancers,
+  DescribeClsLogSetRequest,
+  ModifyLoadBalancerAttributesResponse,
+  CreditUsage,
+  DescribeModelAliasesRequest,
+  AssociateModelRouterGuardrailsRequest,
+  DescribeBudgetAssociationsResponse,
+  TargetHealth,
+  CreateKeyResponse,
+  TestServiceProviderConnectionRequest,
+  DescribeModelAssociationsResponse,
+  DescribeModelRouterGuardrailsResponse,
+  KeyInfo,
+  ModifyDomainAttributesResponse,
+  ModifyTargetPortResponse,
+  TestConnectionRequestInfo,
+  DescribeClassicalLBByInstanceIdRequest,
+  ModifyBudgetAttributesRequest,
+  InquiryPriceRefundLoadBalancerResponse,
+  DescribeClusterResourcesRequest,
+  ModifyTargetGroupAttributeResponse,
+  DescribeSupportedProvidersResponse,
+  Backend,
+  ModifyLoadBalancersProjectRequest,
+  RenewLoadBalancersRequest,
+  RemoveModelKeyRequest,
+  DisassociateGuardrailConfig,
+  DescribeModelRouterDetailResponse,
+  MigrateClassicalLoadBalancersResponse,
+  ModifyUserGroupAttributesResponse,
+  DeleteBudgetsResponse,
+  RemoveModelRewriteResponse,
+  ModifyServiceProviderModelAttributesRequest,
+  RegisterModelsToServiceProviderResponse,
   DeleteUserGroupsRequest,
   BudgetResource,
-  RuleTargets,
-  BatchDeregisterTargetsRequest,
-  DeregisterTargetGroupInstancesRequest,
   DescribeBudgetsResponse,
   InquiryPriceRefundLoadBalancerRequest,
   BudgetAssociation,
   DescribeBudgetAssociationsRequest,
-  DescribeTargetHealthResponse,
-  CertInfo,
-  CreateTargetGroupRequest,
-  ClusterItem,
-  BindDetailItem,
-  CreateListenerRequest,
+  ModifyIntentRouterAttributeRequest,
+  ModifyTargetGroupInstancesPortRequest,
   CreateClsLogSetRequest,
-  ResourceAvailability,
-  ModifyModelRouterAttributesRequest,
-  DeleteModelRoutersResponse,
-  Filter,
-  ClusterResource,
+  ModalityProbeDetail,
   ModifyDomainResponse,
-  RegisterTargetsResponse,
-  RegisterTargetGroupInstancesRequest,
-  DeregisterTargetsFromClassicalLBResponse,
+  ProviderItem,
   ModifyKeysUserGroupRequest,
-  ClustersZone,
-  SetCustomizedConfigForLoadBalancerResponse,
-  DeleteLoadBalancerResponse,
-  AutoRewriteResponse,
-  DeregisterTargetsResponse,
-  BudgetConfig,
-  DescribeLoadBalancerOverviewRequest,
   RewriteTarget,
   ManualRewriteRequest,
+  CreateModelRequest,
   Cluster,
-  ModifyKeysBlockStatusResponse,
-  DescribeLoadBalancersDetailResponse,
-  TargetHealth,
-  LoadBalancerDetail,
-  LbRsTargets,
-  BatchModifyTargetWeightRequest,
+  DisassociateModelRouterGuardrailsRequest,
   DescribeTargetGroupInstanceStatusRequest,
-  BatchModifyTargetTagResponse,
-  DeleteRewriteResponse,
-  BatchTarget,
-  DescribeLoadBalancerListByCertIdRequest,
-  ModifyModelRouterAttributesResponse,
-  DescribeTargetHealthRequest,
-  ModifyListenerResponse,
+  TargetRegionInfo,
   DeleteRuleResponse,
-  HealthCheck,
-  TypeInfo,
+  DescribeModelRewriteRequest,
   CloneLoadBalancerResponse,
-  DescribeUserGroupsResponse,
-  DescribeClsLogSetResponse,
-  ModifyTargetGroupAttributeRequest,
-  ExclusiveCluster,
   DeregisterTargetsRequest,
-  ModifyLoadBalancerMixIpTargetResponse,
-  InquiryPriceCreateLoadBalancerResponse,
-  ModelRouterDetail,
+  ModelAvailability,
   AssociateBudgetResponse,
   CreateLoadBalancerSnatIpsRequest,
-  DescribeTargetGroupInstancesResponse,
-  DeleteKeysRequest,
-  DescribeClassicalLBListenersRequest,
+  ModifyLoadBalancersProjectResponse,
   DeleteTargetGroupsResponse,
   Price,
-  ModifyTargetGroupInstancesPortRequest,
-  CreateUserGroupResponse,
-  BatchRegisterTargetsRequest,
-  ListenerBackend,
+  BudgetConfig,
   DescribeLBOperateProtectResponse,
-  RuleInput,
   TagInfo,
-  SnatIp,
-  ModifyLoadBalancerMixIpTargetRequest,
-  DescribeBlockIPTaskResponse,
-  DescribeResourcesRequest,
-  DescribeClassicalLBListenersResponse,
-  TargetGroupHealthCheck,
+  BindDetailItem,
   CreateModelRouterResponse,
+  ModelRouterPackage,
   DescribeExclusiveClustersRequest,
   DescribeBudgetsRequest,
   ModifyLoadBalancerSlaRequest,
-  RewriteLocationMap,
-  DescribeBlockIPTaskRequest,
-  Resource,
   CreateLoadBalancerResponse,
-  DisassociateBudgetResponse,
   ModifyFunctionTargetsRequest,
-  DescribeRewriteResponse,
-  BudgetInfo,
-  ModifyKeysUserGroupResponse,
+  ProviderTestConnectionErrorInfo,
   AvailableZoneAffinityInfo,
-  SetLoadBalancerClsLogRequest,
-  LBItem,
-  ModifyTargetGroupAttributeResponse,
-  DeleteLoadBalancerListenersResponse,
-  DescribeIdleLoadBalancersRequest,
   DeleteLoadBalancerSnatIpsRequest,
-  InternetAccessible,
-  OAuth,
-  DescribeClassicalLBTargetsResponse,
-  DisassociateTargetGroupsRequest,
+  SetLoadBalancerSecurityGroupsRequest,
+  RewriteLocationMap,
   RateLimitConfigForBudget,
-  ModifyTargetPortRequest,
-  ClusterInfo,
-  DescribeLoadBalancersResponse,
-  DescribeLBListenersResponse,
-  CreateModelRouterRequest,
-  DeleteListenerResponse,
+  InquirePriceCreateModelRouterResourcePackageRequest,
+  AssociateGuardrailConfig,
   DeleteLoadBalancerSnatIpsResponse,
-  InquiryPriceRenewLoadBalancerRequest,
-  CertificateOutput,
-  DeleteTargetGroupsRequest,
-  DescribeAsyncJobsResponse,
-  SetLoadBalancerStartStatusRequest,
+  InquiryPriceCreateLoadBalancerResponse,
   TargetGroupAssociation,
   ListenerHealth,
-  AssociationItem,
-  Backend,
+  DeleteRewriteRequest,
+  ModifyTargetPortRequest,
+  DescribeTargetGroupListRequest,
+  SetSecurityGroupForLoadbalancersRequest,
+  CreateKeyRequest,
+  DeleteRuleRequest,
+  ModifyFunctionTargetsResponse,
+  ModifyLoadBalancerAttributesRequest,
+  InquirePriceCreateModelRouterResourcePackageResponse,
+  MultiCertInfo,
+  DescribeBlockIPListResponse,
+  ModifyIntentRouterAttributeResponse,
+  BindItem,
+  ListenerItem,
+  SetLoadBalancerStartStatusResponse,
+  DisassociateTargetGroupsResponse,
+  RouterSettingWithoutFallBack,
+  TargetGroupInstance,
+  CreateRuleResponse,
+  RegisterTargetGroupInstancesResponse,
+  ClassicalTargetInfo,
+  ZoneInfo,
+  InquiryPriceCreateLoadBalancerRequest,
+  ChatCompletionsResponse,
+  DescribeClassicalLBTargetsRequest,
+  ModelRouterSet,
+  InquiryPriceRenewLoadBalancerResponse,
+  DescribeCustomizedConfigListRequest,
+  DescribeTaskStatusResponse,
+  InquiryPriceModifyLoadBalancerResponse,
+  DescribeLBListenersRequest,
+  Target,
+  ModifyKeysUserGroupResponse,
   DescribeModelRouterQuotaResponse,
-  LoadBalancer,
+  DescribeModelRewriteResponse,
+  Listener,
+  ConfigListItem,
+  DisassociateBudgetRequest,
+  DeregisterTargetGroupInstancesResponse,
+  CreateBudgetResponse,
+  DeregisterModelsFromServiceProviderRequest,
+  DescribeCustomizedConfigAssociateListRequest,
+  ServiceEndPoints,
+  DeregisterFunctionTargetsRequest,
+  LbRsItem,
+  DescribeResourcesResponse,
+  ModifyTargetGroupInstancesWeightRequest,
+  RegeneratedKey,
+  ServiceProvider,
+  ModelRouterResourcePackageDeduction,
+  ClassicalHealth,
+  DescribeIntentRouterTiersResponse,
+  AddModelRewriteResponse,
+  DescribeClassicalLBHealthStatusRequest,
+  DisassociateModelsFromModelRouterRequest,
+  CreatedKey,
+  ChatCompletionsRequest,
+  ClassicalListener,
+  CreateBYOKNetworkRequest,
+  AssociateCustomizedConfigRequest,
+  CertificateInput,
+  DescribeIntentRoutersRequest,
+  ModifyBudgetAttributesResponse,
+  DescribeAsyncJobsRequest,
+  ModifyModelAliasAttributesRequest,
+  FunctionTarget,
+  LBOperateProtectInfo,
+  CreateRuleRequest,
+  DescribeModelRoutersResponse,
+  ModifyModelRouterGuardrailsRequest,
+  CertInfo,
+  CreateTargetGroupRequest,
+  ModifyLoadBalancerMixIpTargetRequest,
+  CreateListenerRequest,
+  SetCustomizedConfigForLoadBalancerResponse,
+  RuleInput,
+  TestModelInputModalitiesResponse,
+  DescribeTaskStatusRequest,
+  AutoRewriteResponse,
+  DescribeLoadBalancerOverviewRequest,
+  DescribeTargetsResponse,
+  BatchModifyTargetWeightRequest,
+  BatchTarget,
+  DeleteModelRoutersResponse,
+  RefundModelRouterResourcePackageRequest,
+  DescribeClsLogSetResponse,
+  ModifyDomainAttributesRequest,
+  ModifyLoadBalancerMixIpTargetResponse,
+  ModifyModelAttributesResponse,
+  Sort,
+  TargetGroupHealthCheck,
+  DisassociateModelsFromModelRouterResponse,
+  BatchRegisterTargetsRequest,
+  DescribeResourcesRequest,
+  ServiceProviderItem,
+  Resource,
+  DisassociateBudgetResponse,
+  AddModelKeyResponse,
+  BudgetInfo,
+  IntentRouterItem,
+  DeleteLoadBalancerListenersResponse,
+  DescribeIdleLoadBalancersRequest,
+  TestModelInputModalitiesRequest,
+  DeleteKeysRequest,
+  DescribeLBListenersResponse,
+  DescribeQuotaResponse,
+  TargetGroupInfo,
+  RegisterTargetGroupInstancesRequest,
+  RewriteItem,
+  DescribeQuotaRequest,
+  BatchDeregisterTargetsResponse,
+  SetLoadBalancerSecurityGroupsResponse,
+  CreateUserGroupResponse,
+  LoadBalancerDetail,
+  CreateLoadBalancerRequest,
+  CloneLoadBalancerRequest,
+  ServiceProviderCoefficient,
+  SetLoadBalancerClsLogResponse,
+  RefundModelRouterResourcePackageResponse,
+  DeleteIntentRouterResponse,
+  DescribeRewriteRequest,
+  DescribeIdleLoadBalancersResponse,
+  TargetGroupInstanceStatus,
+  SetSecurityGroupForLoadbalancersResponse,
+  RateLimitConfigForModelRouter,
+  AddModelKeyRequest,
+  DescribeModelRoutersRequest,
+  ModelNameAggregatedItem,
+  DescribeTargetGroupInstancesRequest,
+  DescribeModelRouterLogsResponse,
+  DisassociateCustomizedConfigResponse,
+  DescribeTargetsRequest,
+  RegisterTargetsWithClassicalLBResponse,
+  IntentRouterTierDictItem,
+  DeleteLoadBalancerListenersRequest,
+  DescribeKeysRequest,
+  LBChargePrepaid,
+  RuleOutput,
+  ModifyTargetGroupInstancesPortResponse,
+  DescribeModelRouterGuardrailsRequest,
+  DescribeCrossTargetsResponse,
+  DescribeLoadBalancerListByCertIdResponse,
+  ModifyTargetGroupInstancesWeightResponse,
+  DescribeTargetGroupsRequest,
+  BatchRegisterTargetsResponse,
+  SlaUpdateParam,
+  DescribeUpperModelsRequest,
+  TierItem,
+  DescribeModelNamesResponse,
+  DescribeUserGroupsRequest,
+  RuleHealth,
+  LoadBalancerTraffic,
+  CreateKeysResponse,
+  CreateModelResponse,
+  ReplaceCertForLoadBalancersResponse,
+  DescribeModelRouterDetailRequest,
+  RegisterTargetsRequest,
+  DescribeModelRouterResourcePackageDeductionRequest,
+  AssociateTargetGroupsResponse,
+  DescribeKeysResponse,
+  DescribeLoadBalancersDetailRequest,
+  ModelKeyInfoItem,
+  ModifyModelRouterGuardrailsResponse,
+  AssociateModelRouterGuardrailsResponse,
+  ManualRewriteResponse,
+  DescribeClusterResourcesResponse,
+  InquirePriceRefundModelRouterResourcePackageRequest,
+  UserGroupInfo,
+  ModifyTargetWeightRequest,
+  CreateClsLogSetResponse,
+  DescribeCrossTargetsRequest,
+  KeyDetailItem,
+  CreateTopicResponse,
+  ResourceAvailability,
+  DescribeCustomizedConfigAssociateListResponse,
+  RegisterModelsToServiceProviderRequest,
+  InputKeyInfo,
+  TestServiceProviderConnectionResponse,
+  ModelItem,
+  SetCustomizedConfigForLoadBalancerRequest,
+  CreateListenerResponse,
+  CreateTargetGroupResponse,
+  AssociateCustomizedConfigResponse,
+  DescribeModelKeysResponse,
+  ModifyKeyAttributesRequest,
+  CreateIntentRouterResponse,
+  DeregisterTargetGroupInstancesRequest,
+  ReplaceCertForLoadBalancersRequest,
+  ModifyModelAliasAttributesResponse,
+  IdleLoadBalancer,
+  DisassociateTargetGroupsRequest,
+  Filter,
+  ClusterResource,
+  RegisterTargetsResponse,
+  DeregisterTargetsFromClassicalLBResponse,
+  ClustersZone,
+  DescribeModelRouterResourcePackagesResponse,
+  DeleteLoadBalancerResponse,
+  DescribeSupportedProvidersRequest,
+  DeregisterTargetsResponse,
   ItemPrice,
+  ModifyModelRouterSecurityGroupsResponse,
+  LbRsTargets,
+  DescribeModelRouterLogsRequest,
+  DescribeAssociatedModelAvailabilityResponse,
+  DescribeUserGroupsResponse,
+  ModifyKeysBlockStatusResponse,
+  CertificateOutput,
+  DescribeTargetGroupInstancesResponse,
+  DescribeAsyncJobsResponse,
+  DescribeModelRouterQuotaRequest,
+  RateLimitConfigForKey,
+  ModelAssociation,
+  Quota,
+  ListenerBackend,
+  SnatIp,
+  DescribeBlockIPTaskResponse,
+  DescribeServiceProviderHealthStatusRequest,
+  DescribeListenersRequest,
+  ClusterInfo,
+  DescribeLoadBalancersResponse,
+  CreateModelRouterRequest,
+  DescribeClassicalLBListenersRequest,
+  DescribeIntentRoutersResponse,
 } from "./clb_models"
 
 /**
@@ -360,6 +484,36 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询退还模型路由资源包的价格。非有效状态或者设置了自动续订且自动续订已生效的资源包不允许退款。
+   */
+  async InquirePriceRefundModelRouterResourcePackage(
+    req: InquirePriceRefundModelRouterResourcePackageRequest,
+    cb?: (error: string, rep: InquirePriceRefundModelRouterResourcePackageResponse) => void
+  ): Promise<InquirePriceRefundModelRouterResourcePackageResponse> {
+    return this.request("InquirePriceRefundModelRouterResourcePackage", req, cb)
+  }
+
+  /**
+   * 将模型关联到模型路由实例
+   */
+  async AssociateModelsToModelRouter(
+    req: AssociateModelsToModelRouterRequest,
+    cb?: (error: string, rep: AssociateModelsToModelRouterResponse) => void
+  ): Promise<AssociateModelsToModelRouterResponse> {
+    return this.request("AssociateModelsToModelRouter", req, cb)
+  }
+
+  /**
+   * 退还模型路由资源包，非有效状态或者设置了自动续订且自动续订已生效的资源包不允许退款。
+   */
+  async RefundModelRouterResourcePackage(
+    req: RefundModelRouterResourcePackageRequest,
+    cb?: (error: string, rep: RefundModelRouterResourcePackageResponse) => void
+  ): Promise<RefundModelRouterResourcePackageResponse> {
+    return this.request("RefundModelRouterResourcePackage", req, cb)
+  }
+
+  /**
    * 拉取配置绑定的 server 或 location，如果 domain 存在，结果将根据 domain 过滤。或拉取配置绑定的 loadbalancer。
    */
   async DescribeCustomizedConfigAssociateList(
@@ -367,6 +521,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCustomizedConfigAssociateListResponse) => void
   ): Promise<DescribeCustomizedConfigAssociateListResponse> {
     return this.request("DescribeCustomizedConfigAssociateList", req, cb)
+  }
+
+  /**
+     * 解除规则的目标组关联关系。
+本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
+当解绑七层转发规则时，LocationId 为必填项。
+     */
+  async DisassociateTargetGroups(
+    req: DisassociateTargetGroupsRequest,
+    cb?: (error: string, rep: DisassociateTargetGroupsResponse) => void
+  ): Promise<DisassociateTargetGroupsResponse> {
+    return this.request("DisassociateTargetGroups", req, cb)
   }
 
   /**
@@ -408,6 +574,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AutoRewriteResponse) => void
   ): Promise<AutoRewriteResponse> {
     return this.request("AutoRewrite", req, cb)
+  }
+
+  /**
+   * 查询实例的使用日志
+   */
+  async DescribeModelRouterLogs(
+    req: DescribeModelRouterLogsRequest,
+    cb?: (error: string, rep: DescribeModelRouterLogsResponse) => void
+  ): Promise<DescribeModelRouterLogsResponse> {
+    return this.request("DescribeModelRouterLogs", req, cb)
+  }
+
+  /**
+   * 查询模型标识聚合列表
+   */
+  async DescribeModelNames(
+    req: DescribeModelNamesRequest,
+    cb?: (error: string, rep: DescribeModelNamesResponse) => void
+  ): Promise<DescribeModelNamesResponse> {
+    return this.request("DescribeModelNames", req, cb)
   }
 
   /**
@@ -462,6 +648,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除 BYOK 模型下的指定 Key
+   */
+  async RemoveModelKey(
+    req: RemoveModelKeyRequest,
+    cb?: (error: string, rep: RemoveModelKeyResponse) => void
+  ): Promise<RemoveModelKeyResponse> {
+    return this.request("RemoveModelKey", req, cb)
+  }
+
+  /**
+   * 查询模型路由实例下的意图路由（Intent Router）列表。
+   */
+  async DescribeIntentRouters(
+    req: DescribeIntentRoutersRequest,
+    cb?: (error: string, rep: DescribeIntentRoutersResponse) => void
+  ): Promise<DescribeIntentRoutersResponse> {
+    return this.request("DescribeIntentRouters", req, cb)
+  }
+
+  /**
      * 本接口(AssociateTargetGroups)用来将目标组绑定到负载均衡的监听器（四层协议）或转发规则（七层协议）上。
 本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用  [DescribeTaskStatus](https://cloud.tencent.com/document/product/214/30683)  接口查询本次任务是否成功。
 限制说明：
@@ -474,6 +680,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AssociateTargetGroupsResponse) => void
   ): Promise<AssociateTargetGroupsResponse> {
     return this.request("AssociateTargetGroups", req, cb)
+  }
+
+  /**
+   * 查询平台维护的 IntentRouter Tier 字典。
+   */
+  async DescribeIntentRouterTiers(
+    req?: DescribeIntentRouterTiersRequest,
+    cb?: (error: string, rep: DescribeIntentRouterTiersResponse) => void
+  ): Promise<DescribeIntentRouterTiersResponse> {
+    return this.request("DescribeIntentRouterTiers", req, cb)
   }
 
   /**
@@ -508,6 +724,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询上游 Provider 支持的模型列表。通过代理转发用户提供的 ApiBase 和 ApiKey 到上游 Provider 的模型列表端点，返回可用的模型名称列表。
+   */
+  async DescribeUpperModels(
+    req: DescribeUpperModelsRequest,
+    cb?: (error: string, rep: DescribeUpperModelsResponse) => void
+  ): Promise<DescribeUpperModelsResponse> {
+    return this.request("DescribeUpperModels", req, cb)
+  }
+
+  /**
+   * 修改目标组的名称或者默认端口属性
+   */
+  async ModifyTargetGroupAttribute(
+    req: ModifyTargetGroupAttributeRequest,
+    cb?: (error: string, rep: ModifyTargetGroupAttributeResponse) => void
+  ): Promise<ModifyTargetGroupAttributeResponse> {
+    return this.request("ModifyTargetGroupAttribute", req, cb)
+  }
+
+  /**
    * 修改一个或多个负载均衡实例所属项目。
    */
   async ModifyLoadBalancersProject(
@@ -538,6 +774,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询当前用户 BYOK 中已经配置过的模型别名列表，按 Provider 和 ModelAliasName 去重。
+   */
+  async DescribeModelAliases(
+    req: DescribeModelAliasesRequest,
+    cb?: (error: string, rep: DescribeModelAliasesResponse) => void
+  ): Promise<DescribeModelAliasesResponse> {
+    return this.request("DescribeModelAliases", req, cb)
+  }
+
+  /**
    * 根据 ModifyBlockIPList 接口返回的异步任务的ID，查询封禁IP（黑名单）异步任务的执行状态。（接口灰度中，如需使用请提工单）
    */
   async DescribeBlockIPTask(
@@ -545,6 +791,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBlockIPTaskResponse) => void
   ): Promise<DescribeBlockIPTaskResponse> {
     return this.request("DescribeBlockIPTask", req, cb)
+  }
+
+  /**
+   * 创建 BYOK 模型
+   */
+  async CreateModel(
+    req: CreateModelRequest,
+    cb?: (error: string, rep: CreateModelResponse) => void
+  ): Promise<CreateModelResponse> {
+    return this.request("CreateModel", req, cb)
   }
 
   /**
@@ -591,6 +847,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除 BYOK 模型
+   */
+  async DeleteModel(
+    req: DeleteModelRequest,
+    cb?: (error: string, rep: DeleteModelResponse) => void
+  ): Promise<DeleteModelResponse> {
+    return this.request("DeleteModel", req, cb)
+  }
+
+  /**
+   * 修改byok实例下指定模型的属性。该接口为异步接口，可使用DescribeAsyncJobs根据requestId查询异步任务的进度。
+   */
+  async ModifyServiceProviderModelAttributes(
+    req: ModifyServiceProviderModelAttributesRequest,
+    cb?: (error: string, rep: ModifyServiceProviderModelAttributesResponse) => void
+  ): Promise<ModifyServiceProviderModelAttributesResponse> {
+    return this.request("ModifyServiceProviderModelAttributes", req, cb)
+  }
+
+  /**
    * 在指定模型路由实例下创建一个用户组。用户组是介于模型路由实例与 Key 之间的一层可选分组，可为组内 Key 统一配置模型白名单，并通过关联 Budget 统一管理额度。创建为异步操作，接口会同步返回用户组ID，可凭返回的 RequestId 调用 DescribeAsyncJobs 查询创建进度。
    */
   async CreateUserGroup(
@@ -629,6 +905,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteRewriteResponse) => void
   ): Promise<DeleteRewriteResponse> {
     return this.request("DeleteRewrite", req, cb)
+  }
+
+  /**
+   * 查询平台支持的 Provider 列表
+   */
+  async DescribeSupportedProviders(
+    req?: DescribeSupportedProvidersRequest,
+    cb?: (error: string, rep: DescribeSupportedProvidersResponse) => void
+  ): Promise<DescribeSupportedProvidersResponse> {
+    return this.request("DescribeSupportedProviders", req, cb)
   }
 
   /**
@@ -696,6 +982,20 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 修改模型路由实例已关联的 Guardrail 防护配置。调用时需要指定已有的 GuardrailId，并在 Type 为 WAF 时传入 InstanceId 和 ServiceId；InputCheckDepth 为选填字段，未传时沿用当前已关联 Guardrail 的取值。修改成功后，GuardrailId 保持不变。
+
+本接口为异步接口。接口返回成功表示请求已受理，可使用返回的 RequestId 调用 DescribeAsyncJobs 查询任务执行结果；修改完成后，可调用 DescribeModelRouterGuardrails 查询最新防护配置。
+
+当前每个模型路由实例最多关联 1 个 Guardrail。
+     */
+  async ModifyModelRouterGuardrails(
+    req: ModifyModelRouterGuardrailsRequest,
+    cb?: (error: string, rep: ModifyModelRouterGuardrailsResponse) => void
+  ): Promise<ModifyModelRouterGuardrailsResponse> {
+    return this.request("ModifyModelRouterGuardrails", req, cb)
+  }
+
+  /**
    * 查询指定模型路由实例下的用户组列表或详情，支持按ID、名称、状态、标签过滤及分页。真实用户组按名称字典序升序返回；返回列表末尾恒追加一个「未分组」虚拟分组（UserGroupId 固定为 ugrp-ungrouped、UserGroupName 固定为 ungrouped），它并非用户真实创建的用户组，而是代表该实例下所有未归属任何用户组的 Key（其 KeyCount 为无组 Key 数，不计入 TotalCount，不可修改或删除）。
    */
   async DescribeUserGroups(
@@ -714,6 +1014,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SetLoadBalancerStartStatusResponse) => void
   ): Promise<SetLoadBalancerStartStatusResponse> {
     return this.request("SetLoadBalancerStartStatus", req, cb)
+  }
+
+  /**
+   * 查询创建模型路由资源包的价格。
+   */
+  async InquirePriceCreateModelRouterResourcePackage(
+    req: InquirePriceCreateModelRouterResourcePackageRequest,
+    cb?: (error: string, rep: InquirePriceCreateModelRouterResourcePackageResponse) => void
+  ): Promise<InquirePriceCreateModelRouterResourcePackageResponse> {
+    return this.request("InquirePriceCreateModelRouterResourcePackage", req, cb)
+  }
+
+  /**
+   * 查询模型路由实例上的全部模型重写规则（Model Rewrite），或按 SourceModel 精确过滤后的单条规则。该接口为同步只读接口。
+   */
+  async DescribeModelRewrite(
+    req: DescribeModelRewriteRequest,
+    cb?: (error: string, rep: DescribeModelRewriteResponse) => void
+  ): Promise<DescribeModelRewriteResponse> {
+    return this.request("DescribeModelRewrite", req, cb)
   }
 
   /**
@@ -738,13 +1058,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除Budget对象。Budget存在任何关联资源时不允许删除，需要先调用DisassociateBudget解除关联。
+   * 修改Budget属性。BudgetConfigs最多支持1d、7d、30d三个刷新周期各一个；BudgetResetAt不支持作为入参设置，由系统自动维护。修改请求提交后，可通过DescribeBudgets查询状态。
    */
-  async DeleteBudgets(
-    req: DeleteBudgetsRequest,
-    cb?: (error: string, rep: DeleteBudgetsResponse) => void
-  ): Promise<DeleteBudgetsResponse> {
-    return this.request("DeleteBudgets", req, cb)
+  async ModifyBudgetAttributes(
+    req: ModifyBudgetAttributesRequest,
+    cb?: (error: string, rep: ModifyBudgetAttributesResponse) => void
+  ): Promise<ModifyBudgetAttributesResponse> {
+    return this.request("ModifyBudgetAttributes", req, cb)
+  }
+
+  /**
+   * 查询实例关联的模型列表
+   */
+  async DescribeModelAssociations(
+    req: DescribeModelAssociationsRequest,
+    cb?: (error: string, rep: DescribeModelAssociationsResponse) => void
+  ): Promise<DescribeModelAssociationsResponse> {
+    return this.request("DescribeModelAssociations", req, cb)
   }
 
   /**
@@ -810,6 +1140,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量修改模型别名属性。本期支持批量修改模型别名的 Coefficient 配置。接口为异步接口，提交成功后返回 RequestId。
+   */
+  async ModifyModelAliasAttributes(
+    req: ModifyModelAliasAttributesRequest,
+    cb?: (error: string, rep: ModifyModelAliasAttributesResponse) => void
+  ): Promise<ModifyModelAliasAttributesResponse> {
+    return this.request("ModifyModelAliasAttributes", req, cb)
+  }
+
+  /**
    * 创建 API Key
    */
   async CreateKey(
@@ -830,6 +1170,20 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 为指定模型路由实例关联 Guardrails 防护。当前支持关联腾讯云 WAF LLM SDK 接入配置，关联成功后，模型路由转发的请求会按照绑定的 WAF 防护配置进行安全检测。
+
+本接口为异步接口。接口返回成功表示请求已受理，可使用返回的 RequestId 调用 DescribeAsyncJobs 查询任务执行结果；防护配置生效后，可调用 DescribeModelRouterGuardrails 查询当前关联。
+
+当前每个模型路由实例最多关联 1 个 Guardrail。如需替换已关联的防护配置，请调用 ModifyModelRouterGuardrails。
+     */
+  async AssociateModelRouterGuardrails(
+    req: AssociateModelRouterGuardrailsRequest,
+    cb?: (error: string, rep: AssociateModelRouterGuardrailsResponse) => void
+  ): Promise<AssociateModelRouterGuardrailsResponse> {
+    return this.request("AssociateModelRouterGuardrails", req, cb)
+  }
+
+  /**
    * 查询用户配额信息
    */
   async DescribeModelRouterQuota(
@@ -837,6 +1191,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeModelRouterQuotaResponse) => void
   ): Promise<DescribeModelRouterQuotaResponse> {
     return this.request("DescribeModelRouterQuota", req, cb)
+  }
+
+  /**
+   * 查询用户当前地域下的各项配额
+   */
+  async DescribeQuota(
+    req?: DescribeQuotaRequest,
+    cb?: (error: string, rep: DescribeQuotaResponse) => void
+  ): Promise<DescribeQuotaResponse> {
+    return this.request("DescribeQuota", req, cb)
   }
 
   /**
@@ -860,14 +1224,24 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 修改负载均衡的IP（client IP）封禁黑名单列表，一个转发规则最多支持封禁 2000000 个IP，及黑名单容量为 2000000。
-（接口灰度中，如需使用请提工单）
+   * 查询模型路由资源包抵扣明细
+   */
+  async DescribeModelRouterResourcePackageDeduction(
+    req: DescribeModelRouterResourcePackageDeductionRequest,
+    cb?: (error: string, rep: DescribeModelRouterResourcePackageDeductionResponse) => void
+  ): Promise<DescribeModelRouterResourcePackageDeductionResponse> {
+    return this.request("DescribeModelRouterResourcePackageDeduction", req, cb)
+  }
+
+  /**
+     * 修改意图路由（Intent Router）的属性，支持修改路由名称（RouteName）和分层配置（Tiers）。
+RouteName和Tiers均为选填，至少传入一个。Tiers为全量替换（非增量）。
      */
-  async ModifyBlockIPList(
-    req: ModifyBlockIPListRequest,
-    cb?: (error: string, rep: ModifyBlockIPListResponse) => void
-  ): Promise<ModifyBlockIPListResponse> {
-    return this.request("ModifyBlockIPList", req, cb)
+  async ModifyIntentRouterAttribute(
+    req: ModifyIntentRouterAttributeRequest,
+    cb?: (error: string, rep: ModifyIntentRouterAttributeResponse) => void
+  ): Promise<ModifyIntentRouterAttributeResponse> {
+    return this.request("ModifyIntentRouterAttribute", req, cb)
   }
 
   /**
@@ -937,6 +1311,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询指定实例的 API Key 列表。
+   */
+  async DescribeKeys(
+    req: DescribeKeysRequest,
+    cb?: (error: string, rep: DescribeKeysResponse) => void
+  ): Promise<DescribeKeysResponse> {
+    return this.request("DescribeKeys", req, cb)
+  }
+
+  /**
    * 查询负载均衡的详细信息，包括监听器，规则及后端目标。
    */
   async DescribeLoadBalancersDetail(
@@ -987,13 +1371,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribeTargetHealth 接口用来获取负载均衡后端服务的健康检查结果，不支持传统型负载均衡。
+   * 删除模型路由实例下的一个意图路由（Intent Router）。
    */
-  async DescribeTargetHealth(
-    req: DescribeTargetHealthRequest,
-    cb?: (error: string, rep: DescribeTargetHealthResponse) => void
-  ): Promise<DescribeTargetHealthResponse> {
-    return this.request("DescribeTargetHealth", req, cb)
+  async DeleteIntentRouter(
+    req: DeleteIntentRouterRequest,
+    cb?: (error: string, rep: DeleteIntentRouterResponse) => void
+  ): Promise<DeleteIntentRouterResponse> {
+    return this.request("DeleteIntentRouter", req, cb)
   }
 
   /**
@@ -1004,6 +1388,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyKeyAttributesResponse) => void
   ): Promise<ModifyKeyAttributesResponse> {
     return this.request("ModifyKeyAttributes", req, cb)
+  }
+
+  /**
+   * 查询实例下关联模型的可用性
+   */
+  async DescribeAssociatedModelAvailability(
+    req: DescribeAssociatedModelAvailabilityRequest,
+    cb?: (error: string, rep: DescribeAssociatedModelAvailabilityResponse) => void
+  ): Promise<DescribeAssociatedModelAvailabilityResponse> {
+    return this.request("DescribeAssociatedModelAvailability", req, cb)
   }
 
   /**
@@ -1025,6 +1419,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RegenerateKeysResponse) => void
   ): Promise<RegenerateKeysResponse> {
     return this.request("RegenerateKeys", req, cb)
+  }
+
+  /**
+     * 查询模型路由实例当前已关联的 Guardrails 防护配置。
+
+本接口为同步只读接口，不触发状态变更。AssociateModelRouterGuardrails、DisassociateModelRouterGuardrails 和 ModifyModelRouterGuardrails 为异步受理接口；如需确认变更任务是否执行成功，请优先使用写接口返回的 RequestId 调用 DescribeAsyncJobs 查询任务状态。
+     */
+  async DescribeModelRouterGuardrails(
+    req: DescribeModelRouterGuardrailsRequest,
+    cb?: (error: string, rep: DescribeModelRouterGuardrailsResponse) => void
+  ): Promise<DescribeModelRouterGuardrailsResponse> {
+    return this.request("DescribeModelRouterGuardrails", req, cb)
   }
 
   /**
@@ -1082,6 +1488,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改BYOK的属性，包含：自定义名字
+   */
+  async ModifyModelAttributes(
+    req: ModifyModelAttributesRequest,
+    cb?: (error: string, rep: ModifyModelAttributesResponse) => void
+  ): Promise<ModifyModelAttributesResponse> {
+    return this.request("ModifyModelAttributes", req, cb)
+  }
+
+  /**
      * ModifyDomain接口用来修改负载均衡七层监听器下的域名。
 本接口为异步接口，本接口返回成功后需以返回的RequestID为入参，调用 [DescribeTaskStatus](https://cloud.tencent.com/document/product/214/30683) 接口查询本次任务是否成功。
      */
@@ -1110,6 +1526,17 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLoadBalancerOverviewResponse) => void
   ): Promise<DescribeLoadBalancerOverviewResponse> {
     return this.request("DescribeLoadBalancerOverview", req, cb)
+  }
+
+  /**
+     * 修改负载均衡的IP（client IP）封禁黑名单列表，一个转发规则最多支持封禁 2000000 个IP，及黑名单容量为 2000000。
+（接口灰度中，如需使用请提工单）
+     */
+  async ModifyBlockIPList(
+    req: ModifyBlockIPListRequest,
+    cb?: (error: string, rep: ModifyBlockIPListResponse) => void
+  ): Promise<ModifyBlockIPListResponse> {
+    return this.request("ModifyBlockIPList", req, cb)
   }
 
   /**
@@ -1145,6 +1572,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 给 BYOK 模型添加 Key
+   */
+  async AddModelKey(
+    req: AddModelKeyRequest,
+    cb?: (error: string, rep: AddModelKeyResponse) => void
+  ): Promise<AddModelKeyResponse> {
+    return this.request("AddModelKey", req, cb)
+  }
+
+  /**
+   * 探测模型支持的输入多模态能力。可在创建byok实例勾选模型支持的多模态能力列表、编辑byok实例下模型支持的多模态能力列表时探测。探测完成可根据探测结果一键录入多模态能力列表。
+   */
+  async TestModelInputModalities(
+    req: TestModelInputModalitiesRequest,
+    cb?: (error: string, rep: TestModelInputModalitiesResponse) => void
+  ): Promise<TestModelInputModalitiesResponse> {
+    return this.request("TestModelInputModalities", req, cb)
+  }
+
+  /**
    * 查询Budget列表。
    */
   async DescribeBudgets(
@@ -1172,6 +1619,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteKeysResponse) => void
   ): Promise<DeleteKeysResponse> {
     return this.request("DeleteKeys", req, cb)
+  }
+
+  /**
+   * 为模型路由实例新增或覆盖一条模型重写规则（Model Rewrite）。当 SourceModel 已存在重写规则时，本次请求会用新的 TargetModel 覆盖原值（覆盖语义）。该接口为异步接口。
+   */
+  async AddModelRewrite(
+    req: AddModelRewriteRequest,
+    cb?: (error: string, rep: AddModelRewriteResponse) => void
+  ): Promise<AddModelRewriteResponse> {
+    return this.request("AddModelRewrite", req, cb)
+  }
+
+  /**
+   * DescribeTargets 接口用来查询负载均衡实例的某些监听器绑定的后端服务列表。
+   */
+  async DescribeTargets(
+    req: DescribeTargetsRequest,
+    cb?: (error: string, rep: DescribeTargetsResponse) => void
+  ): Promise<DescribeTargetsResponse> {
+    return this.request("DescribeTargets", req, cb)
   }
 
   /**
@@ -1205,6 +1672,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * DescribeTargetHealth 接口用来获取负载均衡后端服务的健康检查结果，不支持传统型负载均衡。
+   */
+  async DescribeTargetHealth(
+    req: DescribeTargetHealthRequest,
+    cb?: (error: string, rep: DescribeTargetHealthResponse) => void
+  ): Promise<DescribeTargetHealthResponse> {
+    return this.request("DescribeTargetHealth", req, cb)
+  }
+
+  /**
    * 获取目标组列表
    */
   async DescribeTargetGroupList(
@@ -1212,6 +1689,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTargetGroupListResponse) => void
   ): Promise<DescribeTargetGroupListResponse> {
     return this.request("DescribeTargetGroupList", req, cb)
+  }
+
+  /**
+   * 将模型从模型路由实例解除关联
+   */
+  async DisassociateModelsFromModelRouter(
+    req: DisassociateModelsFromModelRouterRequest,
+    cb?: (error: string, rep: DisassociateModelsFromModelRouterResponse) => void
+  ): Promise<DisassociateModelsFromModelRouterResponse> {
+    return this.request("DisassociateModelsFromModelRouter", req, cb)
+  }
+
+  /**
+   * 为模型路由实例创建一个意图路由（Intent Router）。意图路由是独立资源，请求匹配model=<RouteName>时将通过配置的分层进行路由。
+   */
+  async CreateIntentRouter(
+    req: CreateIntentRouterRequest,
+    cb?: (error: string, rep: CreateIntentRouterResponse) => void
+  ): Promise<CreateIntentRouterResponse> {
+    return this.request("CreateIntentRouter", req, cb)
   }
 
   /**
@@ -1225,6 +1722,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * BYOK健康检查
+   */
+  async TestServiceProviderConnection(
+    req: TestServiceProviderConnectionRequest,
+    cb?: (error: string, rep: TestServiceProviderConnectionResponse) => void
+  ): Promise<TestServiceProviderConnectionResponse> {
+    return this.request("TestServiceProviderConnection", req, cb)
+  }
+
+  /**
    * 查询目标组信息
    */
   async DescribeTargetGroups(
@@ -1235,13 +1742,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改目标组的名称或者默认端口属性
+   * 查询模型路由资源包
    */
-  async ModifyTargetGroupAttribute(
-    req: ModifyTargetGroupAttributeRequest,
-    cb?: (error: string, rep: ModifyTargetGroupAttributeResponse) => void
-  ): Promise<ModifyTargetGroupAttributeResponse> {
-    return this.request("ModifyTargetGroupAttribute", req, cb)
+  async DescribeModelRouterResourcePackages(
+    req: DescribeModelRouterResourcePackagesRequest,
+    cb?: (error: string, rep: DescribeModelRouterResourcePackagesResponse) => void
+  ): Promise<DescribeModelRouterResourcePackagesResponse> {
+    return this.request("DescribeModelRouterResourcePackages", req, cb)
   }
 
   /**
@@ -1268,13 +1775,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询用户当前地域下的各项配额
+   * 聊天测试，发送聊天请求验证模型连通性。用户传入 ApiKey 和 Model，支持自定义消息和额外参数、支持多模态附件。stream 强制关闭，max_tokens 上限 100。
    */
-  async DescribeQuota(
-    req?: DescribeQuotaRequest,
-    cb?: (error: string, rep: DescribeQuotaResponse) => void
-  ): Promise<DescribeQuotaResponse> {
-    return this.request("DescribeQuota", req, cb)
+  async ChatCompletions(
+    req: ChatCompletionsRequest,
+    cb?: (error: string, rep: ChatCompletionsResponse) => void
+  ): Promise<ChatCompletionsResponse> {
+    return this.request("ChatCompletions", req, cb)
   }
 
   /**
@@ -1331,13 +1838,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建Budget对象。可在创建时通过Resources同时关联已存在的企业型模型路由实例或企业型实例下的Key。创建请求提交后，可通过DescribeBudgets查询状态。
+   * 创建Budget对象。BudgetConfigs最多支持1d、7d、30d三个刷新周期各一个；BudgetResetAt不支持作为入参设置，由系统自动维护。可在创建时通过Resources同时关联已存在的企业型模型路由实例或企业型实例下的Key。创建请求提交后，可通过DescribeBudgets查询状态。
    */
   async CreateBudget(
     req: CreateBudgetRequest,
     cb?: (error: string, rep: CreateBudgetResponse) => void
   ): Promise<CreateBudgetResponse> {
     return this.request("CreateBudget", req, cb)
+  }
+
+  /**
+   * 初始化 BYOK VPC 网络资源。PrivateCustom 场景的 Phase 1：创建 BYOK 模型主表记录并提交 VPC 网络初始化异步任务（申请 IP、创建 LBNAT、绑定 SNAT 等）。完成后需调用 CreateModel 传入返回的 ServiceProviderId 完成业务资源创建。
+   */
+  async CreateBYOKNetwork(
+    req: CreateBYOKNetworkRequest,
+    cb?: (error: string, rep: CreateBYOKNetworkResponse) => void
+  ): Promise<CreateBYOKNetworkResponse> {
+    return this.request("CreateBYOKNetwork", req, cb)
   }
 
   /**
@@ -1383,15 +1900,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 解除规则的目标组关联关系。
-本接口为异步接口，本接口返回成功后需以返回的 RequestID 为入参，调用 DescribeTaskStatus 接口查询本次任务是否成功。
-当解绑七层转发规则时，LocationId 为必填项。
-     */
-  async DisassociateTargetGroups(
-    req: DisassociateTargetGroupsRequest,
-    cb?: (error: string, rep: DisassociateTargetGroupsResponse) => void
-  ): Promise<DisassociateTargetGroupsResponse> {
-    return this.request("DisassociateTargetGroups", req, cb)
+   * 将模型关联到模型路由实例
+   */
+  async DeregisterModelsFromServiceProvider(
+    req: DeregisterModelsFromServiceProviderRequest,
+    cb?: (error: string, rep: DeregisterModelsFromServiceProviderResponse) => void
+  ): Promise<DeregisterModelsFromServiceProviderResponse> {
+    return this.request("DeregisterModelsFromServiceProvider", req, cb)
   }
 
   /**
@@ -1412,6 +1927,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBlockIPListResponse) => void
   ): Promise<DescribeBlockIPListResponse> {
     return this.request("DescribeBlockIPList", req, cb)
+  }
+
+  /**
+   * 将模型关联到模型路由实例
+   */
+  async RegisterModelsToServiceProvider(
+    req: RegisterModelsToServiceProviderRequest,
+    cb?: (error: string, rep: RegisterModelsToServiceProviderResponse) => void
+  ): Promise<RegisterModelsToServiceProviderResponse> {
+    return this.request("RegisterModelsToServiceProvider", req, cb)
   }
 
   /**
@@ -1456,13 +1981,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改Budget属性。BudgetResetAt不支持作为入参设置。修改请求提交后，可通过DescribeBudgets查询状态。
+   * 查询 BYOK 模型列表及 Key 信息
    */
-  async ModifyBudgetAttributes(
-    req: ModifyBudgetAttributesRequest,
-    cb?: (error: string, rep: ModifyBudgetAttributesResponse) => void
-  ): Promise<ModifyBudgetAttributesResponse> {
-    return this.request("ModifyBudgetAttributes", req, cb)
+  async DescribeModelKeys(
+    req: DescribeModelKeysRequest,
+    cb?: (error: string, rep: DescribeModelKeysResponse) => void
+  ): Promise<DescribeModelKeysResponse> {
+    return this.request("DescribeModelKeys", req, cb)
+  }
+
+  /**
+   * 删除Budget对象。Budget存在任何关联资源时不允许删除，需要先调用DisassociateBudget解除关联。
+   */
+  async DeleteBudgets(
+    req: DeleteBudgetsRequest,
+    cb?: (error: string, rep: DeleteBudgetsResponse) => void
+  ): Promise<DeleteBudgetsResponse> {
+    return this.request("DeleteBudgets", req, cb)
   }
 
   /**
@@ -1477,6 +2012,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建模型路由资源包
+   */
+  async CreateModelRouterResourcePackage(
+    req: CreateModelRouterResourcePackageRequest,
+    cb?: (error: string, rep: CreateModelRouterResourcePackageResponse) => void
+  ): Promise<CreateModelRouterResourcePackageResponse> {
+    return this.request("CreateModelRouterResourcePackage", req, cb)
+  }
+
+  /**
+   * 删除模型路由实例上的一条模型重写规则（按 SourceModel 定位）。该接口为幂等接口：当指定的 SourceModel 不存在重写规则时，请求默认成功。
+   */
+  async RemoveModelRewrite(
+    req: RemoveModelRewriteRequest,
+    cb?: (error: string, rep: RemoveModelRewriteResponse) => void
+  ): Promise<RemoveModelRewriteResponse> {
+    return this.request("RemoveModelRewrite", req, cb)
+  }
+
+  /**
    * 创建目标组。该功能正在内测中，如需使用，请通过[工单申请](https://console.cloud.tencent.com/workorder/category?level1_id=6&level2_id=163&source=0&data_title=%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%20LB&step=1)。
    */
   async CreateTargetGroup(
@@ -1487,13 +2042,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribeTargets 接口用来查询负载均衡实例的某些监听器绑定的后端服务列表。
+   * 查询BYOK健康检查信息
    */
-  async DescribeTargets(
-    req: DescribeTargetsRequest,
-    cb?: (error: string, rep: DescribeTargetsResponse) => void
-  ): Promise<DescribeTargetsResponse> {
-    return this.request("DescribeTargets", req, cb)
+  async DescribeServiceProviderHealthStatus(
+    req: DescribeServiceProviderHealthStatusRequest,
+    cb?: (error: string, rep: DescribeServiceProviderHealthStatusResponse) => void
+  ): Promise<DescribeServiceProviderHealthStatusResponse> {
+    return this.request("DescribeServiceProviderHealthStatus", req, cb)
   }
 
   /**
@@ -1545,6 +2100,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClassicalLBHealthStatusResponse) => void
   ): Promise<DescribeClassicalLBHealthStatusResponse> {
     return this.request("DescribeClassicalLBHealthStatus", req, cb)
+  }
+
+  /**
+     * 解除模型路由实例与 Guardrails 防护配置的关联。解除后，模型路由不再使用指定的 Guardrail 防护配置。
+
+本接口为异步接口。接口返回成功表示请求已受理，可使用返回的 RequestId 调用 DescribeAsyncJobs 查询任务执行结果；解除完成后，可调用 DescribeModelRouterGuardrails 查询当前关联。
+
+本接口通过 GuardrailId 定位要解除的防护配置。GuardrailId 可通过 DescribeModelRouterGuardrails 获取。若传入的 GuardrailId 当前未关联到该模型路由实例，接口按幂等成功处理。
+     */
+  async DisassociateModelRouterGuardrails(
+    req: DisassociateModelRouterGuardrailsRequest,
+    cb?: (error: string, rep: DisassociateModelRouterGuardrailsResponse) => void
+  ): Promise<DisassociateModelRouterGuardrailsResponse> {
+    return this.request("DisassociateModelRouterGuardrails", req, cb)
   }
 
   /**
@@ -1606,5 +2175,15 @@ BGP带宽包必须传带宽包id
     cb?: (error: string, rep: BatchModifyTargetTagResponse) => void
   ): Promise<BatchModifyTargetTagResponse> {
     return this.request("BatchModifyTargetTag", req, cb)
+  }
+
+  /**
+   * 修改模型路由实例关联的安全组
+   */
+  async ModifyModelRouterSecurityGroups(
+    req: ModifyModelRouterSecurityGroupsRequest,
+    cb?: (error: string, rep: ModifyModelRouterSecurityGroupsResponse) => void
+  ): Promise<ModifyModelRouterSecurityGroupsResponse> {
+    return this.request("ModifyModelRouterSecurityGroups", req, cb)
   }
 }

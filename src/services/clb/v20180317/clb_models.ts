@@ -16,62 +16,6 @@
  */
 
 /**
- * ModifyTargetWeight请求参数结构体
- */
-export interface ModifyTargetWeightRequest {
-  /**
-   * 负载均衡实例ID。
-   */
-  LoadBalancerId: string
-  /**
-   * 负载均衡监听器ID。
-   */
-  ListenerId: string
-  /**
-   * 要修改权重的后端服务列表。
-   */
-  Targets: Array<Target>
-  /**
-   * 转发规则的ID，当绑定机器到七层转发规则时，必须提供此参数或Domain+Url两者之一。
-   */
-  LocationId?: string
-  /**
-   * 目标规则的域名，提供LocationId参数时本参数不生效。
-   */
-  Domain?: string
-  /**
-   * 目标规则的URL，提供LocationId参数时本参数不生效。
-   */
-  Url?: string
-  /**
-   * 后端服务新的转发权重，取值范围：0~100，默认值10。如果设置了 Targets.Weight 参数，则此参数不生效。
-   */
-  Weight?: number
-}
-
-/**
- * DeleteRewrite请求参数结构体
- */
-export interface DeleteRewriteRequest {
-  /**
-   * 负载均衡实例ID。
-   */
-  LoadBalancerId: string
-  /**
-   * 源监听器ID。
-   */
-  SourceListenerId: string
-  /**
-   * 目标监听器ID。
-   */
-  TargetListenerId: string
-  /**
-   * 转发规则之间的重定向关系。
-   */
-  RewriteInfos: Array<RewriteLocationMap>
-}
-
-/**
  * DescribeTargetGroupList返回参数结构体
  */
 export interface DescribeTargetGroupListResponse {
@@ -87,104 +31,6 @@ export interface DescribeTargetGroupListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeQuota请求参数结构体
- */
-export type DescribeQuotaRequest = null
-
-/**
- * DescribeTargetGroupList请求参数结构体
- */
-export interface DescribeTargetGroupListRequest {
-  /**
-   * <p>目标组ID数组。</p>
-   */
-  TargetGroupIds?: Array<string>
-  /**
-   * <p>过滤条件数组，支持TargetGroupVpcId和TargetGroupName。与TargetGroupIds互斥，优先使用目标组ID。</p>
-   */
-  Filters?: Array<Filter>
-  /**
-   * <p>显示的偏移起始量。</p>
-   */
-  Offset?: number
-  /**
-   * <p>每页显示条目数。</p><p>取值范围：[0, 100]</p><p>默认值：20</p>
-   */
-  Limit?: number
-}
-
-/**
- * BatchDeregisterTargets返回参数结构体
- */
-export interface BatchDeregisterTargetsResponse {
-  /**
-   * 解绑失败的监听器ID。
-   */
-  FailListenerIdSet?: Array<string>
-  /**
-   * 解绑失败错误原因信息。
-   */
-  Message?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyDomainAttributes请求参数结构体
- */
-export interface ModifyDomainAttributesRequest {
-  /**
-   * 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。
-   */
-  LoadBalancerId: string
-  /**
-   * 负载均衡监听器ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。
-   */
-  ListenerId: string
-  /**
-   * 域名（必须是已经创建的转发规则下的域名），如果是多域名，可以指定多域名列表中的任意一个，可以通过[DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。
-   */
-  Domain: string
-  /**
-   * 要修改的新域名。NewDomain和NewDomains只能传一个。
-   */
-  NewDomain?: string
-  /**
-   * 域名相关的证书信息，注意，仅对启用SNI的监听器适用，不可和MultiCertInfo 同时传入。
-   */
-  Certificate?: CertificateInput
-  /**
-   * 是否开启HTTP2，注意，只有HTTPS域名才能开启HTTP2。
-True: 开启HTTP2，Fasle: 不开启HTTP2。
-   */
-  Http2?: boolean
-  /**
-   * 是否设为默认域名，注意，一个监听器下只能设置一个默认域名。
-True: 设为默认域名，Fasle: 不设置为默认域名。
-   */
-  DefaultServer?: boolean
-  /**
-   * 是否开启 QUIC，注意，只有 HTTPS 域名才能开启 QUIC。
-True: 开启 QUIC，False: 不开启QUIC。
-   */
-  Quic?: boolean
-  /**
-   * 监听器下必须配置一个默认域名，若要关闭原默认域名，必须同时指定另一个域名作为新的默认域名，如果新的默认域名是多域名，可以指定多域名列表中的任意一个。
-   */
-  NewDefaultServerDomain?: string
-  /**
-   * 要修改的新域名列表。NewDomain和NewDomains只能传一个。
-   */
-  NewDomains?: Array<string>
-  /**
-   * 域名相关的证书信息，注意，仅对启用SNI的监听器适用；支持同时传入多本算法类型不同的服务器证书，不可和Certificate 同时传入。
-   */
-  MultiCertInfo?: MultiCertInfo
 }
 
 /**
@@ -224,19 +70,13 @@ export interface ExtraInfo {
 }
 
 /**
- * 路由设置
+ * DescribeRewrite返回参数结构体
  */
-export interface RouterSettingWithoutFallBack {
+export interface DescribeRewriteResponse {
   /**
-   * <p>路由策略</p><p>枚举值：</p><ul><li>SimpleShuffle： 简单随机路由</li><li>LeastBusy： 最低繁忙路由</li><li>LatencyBasedRouting： 最低延迟路由</li><li>UsageBasedRouting： 用量均衡路由</li><li>CostBasedRouting： 最低积分路由</li></ul>
+   * 重定向转发规则构成的数组，若无重定向规则，则返回空数组。
    */
-  RoutingStrategy?: string
-}
-
-/**
- * BatchModifyTargetWeight返回参数结构体
- */
-export interface BatchModifyTargetWeightResponse {
+  RewriteSet?: Array<RuleOutput>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -244,266 +84,25 @@ export interface BatchModifyTargetWeightResponse {
 }
 
 /**
- * ModifyKeysBlockStatus请求参数结构体
+ * 模型路由关联的模型
  */
-export interface ModifyKeysBlockStatusRequest {
+export interface ModelRouterModel {
   /**
-   * <p>模型路由实例ID</p>
+   * <p>模型名称</p>
    */
-  ModelRouterId: string
+  ModelName: string
   /**
-   * <p>是否停止使用</p>
+   * <p>所属厂商</p>
    */
-  Blocked: boolean
+  Provider: string
   /**
-   * <p>需要修改的Key的ID列表</p>
+   * <p>模型类型。</p><p>枚举值：</p><ul><li>BYOK： BYOK类型</li><li>Platform： 平台类型</li></ul>
    */
-  KeyIds?: Array<string>
-}
-
-/**
- * SetSecurityGroupForLoadbalancers请求参数结构体
- */
-export interface SetSecurityGroupForLoadbalancersRequest {
+  Type: string
   /**
-   * 安全组ID，如 sg-12345678。可以通过 [DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808) 接口获取。
+   * <p>服务商/模型 ID（byok_model.model_id，形如 model-xxxxxxxx；Platform 类型不传）</p>
    */
-  SecurityGroup: string
-  /**
-   * ADD 绑定安全组；
-DEL 解绑安全组
-   */
-  OperationType: string
-  /**
-   * 负载均衡实例ID数组，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
-列表支持的最大长度为20。
-   */
-  LoadBalancerIds: Array<string>
-}
-
-/**
- * CreateKey请求参数结构体
- */
-export interface CreateKeyRequest {
-  /**
-   * <p>模型路由实例ID</p>
-   */
-  ModelRouterId: string
-  /**
-   * <p>Key名称</p>
-   */
-  KeyName?: string
-  /**
-   * <p>限速配置</p>
-   */
-  RateLimitConfig?: RateLimitConfigForKey
-  /**
-   * <p>关联的积分预算ID</p>
-   */
-  BudgetId?: string
-  /**
-   * <p>需要关联的用户组ID</p>
-   */
-  UserGroupId?: string
-  /**
-   * <p>标签</p>
-   */
-  Tags?: Array<TagInfo>
-}
-
-/**
- * DescribeLoadBalancerOverview返回参数结构体
- */
-export interface DescribeLoadBalancerOverviewResponse {
-  /**
-   * 负载均衡总数
-   */
-  TotalCount?: number
-  /**
-   * 运行中的负载均衡数目
-   */
-  RunningCount?: number
-  /**
-   * 隔离中的负载均衡数目
-   */
-  IsolationCount?: number
-  /**
-   * 即将到期的负载均衡数目
-   */
-  WillExpireCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteRule请求参数结构体
- */
-export interface DeleteRuleRequest {
-  /**
-   * 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。
-   */
-  LoadBalancerId: string
-  /**
-   * 负载均衡监听器ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。
-   */
-  ListenerId: string
-  /**
-   * 要删除的转发规则的ID组成的数组，可以通过 [DescribeLoadBalancersDetail](https://cloud.tencent.com/document/api/214/46916) 接口查询。
-   */
-  LocationIds?: Array<string>
-  /**
-   * 要删除的转发规则的域名，如果是多域名，可以指定多域名列表中的任意一个，可以通过 [DescribeLoadBalancersDetail](https://cloud.tencent.com/document/api/214/46916) 接口查询。
-   */
-  Domain?: string
-  /**
-   * 要删除的转发规则的转发路径，可以通过 [DescribeLoadBalancersDetail](https://cloud.tencent.com/document/api/214/46916) 接口查询。
-   */
-  Url?: string
-  /**
-   * 监听器下必须配置一个默认域名，当需要删除默认域名时，可以指定另一个域名作为新的默认域名，如果新的默认域名是多域名，可以指定多域名列表中的任意一个，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。
-   */
-  NewDefaultServerDomain?: string
-}
-
-/**
- * CloneLoadBalancer请求参数结构体
- */
-export interface CloneLoadBalancerRequest {
-  /**
-   * 负载均衡ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。
-   */
-  LoadBalancerId: string
-  /**
-   * 克隆出负载均衡实例的名称，规则：1-60 个英文、汉字、数字、连接线“-”或下划线“_”。
-注意：如果名称与系统中已有负载均衡实例的名称相同，则系统将会自动生成此次创建的负载均衡实例的名称。
-   */
-  LoadBalancerName?: string
-  /**
-   * 负载均衡实例所属的项目 ID，默认项目 ID 为0，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。不传此参数则视为默认项目。
-   */
-  ProjectId?: number
-  /**
-   * 仅适用于公网负载均衡。设置跨可用区容灾时的主可用区ID，可用区 ID 和名称均支持，例如 100001 或 ap-guangzhou-1。
-注：主可用区是需要承载流量的可用区，备可用区默认不承载流量，主可用区不可用时才使用备可用区，平台将为您自动选择最佳备可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主可用区的列表。
-   */
-  MasterZoneId?: string
-  /**
-   * 仅适用于公网负载均衡。设置跨可用区容灾时的备可用区ID，可用区 ID 和名称均支持，例如 100001 或 ap-guangzhou-1。
-注：备可用区是主可用区故障后，需要承载流量的可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主/备可用区的列表。
-   */
-  SlaveZoneId?: string
-  /**
-   * 仅适用于公网负载均衡。可用区ID，可用区 ID 和名称均支持，指定可用区以创建负载均衡实例。如：100001 或 ap-guangzhou-1。不传则查询所有可用区的 CVM 实例。如需指定可用区，可调用查询可用区列表 [DescribeZones](https://cloud.tencent.com/document/product/213/15707) 接口查询。
-   */
-  ZoneId?: string
-  /**
-   * 仅适用于公网负载均衡。负载均衡的网络计费模式。
-   */
-  InternetAccessible?: InternetAccessible
-  /**
-   * 仅适用于公网负载均衡。目前仅广州、上海、南京、济南、杭州、福州、北京、石家庄、武汉、长沙、成都、重庆地域支持静态单线 IP 线路类型，如需体验，请联系商务经理申请。申请通过后，即可选择中国移动（CMCC）、中国联通（CUCC）或中国电信（CTCC）的运营商类型，网络计费模式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。 如果不指定本参数，则默认使用BGP。可通过 DescribeResources 接口查询一个地域所支持的Isp。
-   */
-  VipIsp?: string
-  /**
-   * 指定Vip申请负载均衡。
-   */
-  Vip?: string
-  /**
-   * 购买负载均衡同时，给负载均衡打上标签。
-   */
-  Tags?: Array<TagInfo>
-  /**
-   * 独占集群信息。
-   */
-  ExclusiveCluster?: ExclusiveCluster
-  /**
-   * 带宽包ID，可以通过 [DescribeBandwidthPackages](https://cloud.tencent.com/document/api/215/19209) 接口获取。指定此参数时，网络计费方式（InternetAccessible.InternetChargeType）只支持按带宽包计费（BANDWIDTH_PACKAGE）。
-   */
-  BandwidthPackageId?: string
-  /**
-   * 是否支持绑定跨地域/跨Vpc绑定IP的功能。
-   */
-  SnatPro?: boolean
-  /**
-   * 开启绑定跨地域/跨Vpc绑定IP的功能后，创建SnatIp。
-   */
-  SnatIps?: Array<SnatIp>
-  /**
-   * 公网独占集群ID或者CDCId，可以通过 [DescribeExclusiveClusters](https://cloud.tencent.com/document/product/214/49278) 接口获取。
-   */
-  ClusterIds?: Array<string>
-  /**
-   * 性能容量型规格。<li>clb.c2.medium（标准型）</li><li>clb.c3.small（高阶型1）</li><li>clb.c3.medium（高阶型2）</li><li>clb.c4.small（超强型1）</li><li>clb.c4.medium（超强型2）</li><li>clb.c4.large（超强型3）</li><li>clb.c4.xlarge（超强型4）</li>
-   */
-  SlaType?: string
-  /**
-   * Stgw独占集群的标签。
-   */
-  ClusterTag?: string
-  /**
-   * 仅适用于私有网络内网负载均衡。内网就近接入时，选择可用区下发。可调用[DescribeZones](https://cloud.tencent.com/document/product/213/15707)接口查询可用区列表。
-   */
-  Zones?: Array<string>
-  /**
-   * EIP 的唯一 ID，形如：eip-qhx8udkc，仅适用于内网负载均衡绑定EIP，可以通过 [DescribeAddresses](https://cloud.tencent.com/document/product/215/16702) 接口查询。
-   */
-  EipAddressId?: string
-}
-
-/**
- * DisassociateTargetGroups返回参数结构体
- */
-export interface DisassociateTargetGroupsResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SetLoadBalancerStartStatus返回参数结构体
- */
-export interface SetLoadBalancerStartStatusResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SetLoadBalancerClsLog返回参数结构体
- */
-export interface SetLoadBalancerClsLogResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 目标组实例
- */
-export interface TargetGroupInstance {
-  /**
-   * 目标组实例的内网IP
-   */
-  BindIP: string
-  /**
-   * 目标组实例的端口，全监听目标组不支持传此字段。
-   */
-  Port?: number
-  /**
-   * 目标组实例的权重
-v2目标组需要配置权重，调用CreateTargetGroup接口创建目标组时该参数与创建接口中的Weight参数必填其一。
-取值范围：0-100
-   */
-  Weight?: number
-  /**
-   * 目标组实例的新端口，全监听目标组不支持传此字段。
-   */
-  NewPort?: number
+  ServiceProviderId?: string
 }
 
 /**
@@ -518,274 +117,6 @@ export interface DescribeLoadBalancerTrafficResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * 目标组信息
- */
-export interface TargetGroupInfo {
-  /**
-   * <p>目标组ID</p>
-   */
-  TargetGroupId?: string
-  /**
-   * <p>目标组的vpcid</p>
-   */
-  VpcId?: string
-  /**
-   * <p>目标组的名字</p>
-   */
-  TargetGroupName?: string
-  /**
-   * <p>目标组的默认端口，全监听目标组此字段返回0，表示无效端口。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Port?: number
-  /**
-   * <p>目标组的创建时间</p>
-   */
-  CreatedTime?: string
-  /**
-   * <p>目标组的修改时间</p>
-   */
-  UpdatedTime?: string
-  /**
-   * <p>关联到的规则数组。在DescribeTargetGroupList接口调用时无法获取到该参数。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AssociatedRule?: Array<AssociationItem>
-  /**
-   * <p>目标组后端转发协议, 仅v2新版目标组返回有效值。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Protocol?: string
-  /**
-   * <p>调度算法，仅后端转发协议为(HTTP、HTTPS、GRPC)的目标组返回有效值， 可选值：<br><ur></p><li>WRR:按权重轮询。</li><li>LEAST_CONN:最小连接数。</li><li>IP_HASH:按IP哈希。</li></ur>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ScheduleAlgorithm?: string
-  /**
-   * <p>健康检查详情。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HealthCheck?: TargetGroupHealthCheck
-  /**
-   * <p>目标组类型，当前支持v1(旧版目标组), v2(新版目标组)。默认为v1旧版目标组。</p>
-   */
-  TargetGroupType?: string
-  /**
-   * <p>目标组已关联的规则数。</p>
-   */
-  AssociatedRuleCount?: number
-  /**
-   * <p>目标组内的实例数量。</p>
-   */
-  RegisteredInstancesCount?: number
-  /**
-   * <p>标签。</p>
-   */
-  Tag?: Array<TagInfo>
-  /**
-   * <p>默认权重。只有v2类型目标组返回该字段。当返回为NULL时， 表示未设置默认权重。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Weight?: number
-  /**
-   * <p>是否全监听目标组。</p>
-   */
-  FullListenSwitch?: boolean
-  /**
-   * <p>是否开启长连接,  仅后端转发协议为HTTP/HTTPS/GRPC目标组返回有效值。</p>
-   */
-  KeepaliveEnable?: boolean
-  /**
-   * <p>会话保持时间，仅后端转发协议为HTTP/HTTPS/GRPC目标组返回有效值。</p>
-   */
-  SessionExpireTime?: number
-  /**
-   * <p>IP版本。</p>
-   */
-  IpVersion?: string
-  /**
-   * <p>是否开启SNAT</p>
-   */
-  SnatEnable?: boolean
-}
-
-/**
- * CLB监听器或规则绑定的多证书信息
- */
-export interface MultiCertInfo {
-  /**
-   * 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证
-   */
-  SSLMode: string
-  /**
-   * 监听器或规则证书列表，单双向认证，多本服务端证书算法类型不能重复;若SSLMode为双向认证，证书列表必须包含一本ca证书。
-   */
-  CertList: Array<CertInfo>
-  /**
-   * 双向认证时，是否开启客户端认证，ON:开启，OPTIONAL:自适应，默认ON
-   */
-  SSLVerifyClient?: string
-}
-
-/**
- * RegenerateKeys请求参数结构体
- */
-export interface RegenerateKeysRequest {
-  /**
-   * <p>模型路由实例ID</p>
-   */
-  ModelRouterId: string
-  /**
-   * <p>Key的ID列表</p>
-   */
-  KeyIds?: Array<string>
-}
-
-/**
- * ModifyRule请求参数结构体
- */
-export interface ModifyRuleRequest {
-  /**
-   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。
-   */
-  LoadBalancerId: string
-  /**
-   * 负载均衡监听器 ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口获取。
-   */
-  ListenerId: string
-  /**
-   * 要修改的转发规则的 ID， 可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口获取。
-   */
-  LocationId: string
-  /**
-   * 转发规则的新的转发路径，如不需修改Url，则不需提供此参数。
-   */
-  Url?: string
-  /**
-   * 健康检查信息。
-   */
-  HealthCheck?: HealthCheck
-  /**
-   * 规则的请求转发方式，可选值：WRR、LEAST_CONN、IP_HASH
-分别表示按权重轮询、最小连接数、按IP哈希， 默认为 WRR。
-   */
-  Scheduler?: string
-  /**
-   * 会话保持时间。取值范围0或30-86400（单位：秒）。
-默认为0。
-   */
-  SessionExpireTime?: number
-  /**
-   * 负载均衡实例与后端服务之间的转发协议，默认HTTP，可取值：HTTP、HTTPS、GRPC。仅HTTPS监听器该参数有效。
-   */
-  ForwardType?: string
-  /**
-   * TRPC被调服务器路由，ForwardType为TRPC时必填。目前暂未对外开放。
-   */
-  TrpcCallee?: string
-  /**
-   * TRPC调用服务接口，ForwardType为TRPC时必填。目前暂未对外开放。
-   */
-  TrpcFunc?: string
-  /**
-   * OAuth配置信息。
-   */
-  OAuth?: OAuth
-  /**
-   * 自定义cookie名
-   */
-  CookieName?: string
-}
-
-/**
- * DescribeCustomizedConfigList返回参数结构体
- */
-export interface DescribeCustomizedConfigListResponse {
-  /**
-   * 配置列表
-   */
-  ConfigList?: Array<ConfigListItem>
-  /**
-   * 配置数目
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 模型路由网络服务信息
- */
-export interface ServiceEndPoints {
-  /**
-   * <p>证书ID</p>
-   */
-  CertId?: string
-  /**
-   * <p>监听端口</p>
-   */
-  Port?: number
-  /**
-   * <p>网络协议</p>
-   */
-  Schema?: string
-}
-
-/**
- * DescribeBlockIPList返回参数结构体
- */
-export interface DescribeBlockIPListResponse {
-  /**
-   * 返回的IP的数量
-   */
-  BlockedIPCount?: number
-  /**
-   * 获取用户真实IP的字段
-   */
-  ClientIPField?: string
-  /**
-   * 加入了12360黑名单的IP列表
-   */
-  BlockedIPList?: Array<BlockedIP>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyUserGroupAttributes请求参数结构体
- */
-export interface ModifyUserGroupAttributesRequest {
-  /**
-   * <p>模型路由实例ID。</p>
-   */
-  ModelRouterId: string
-  /**
-   * <p>待修改的用户组ID。不可为「未分组」虚拟分组 ugrp-ungrouped。</p>
-   */
-  UserGroupId: string
-  /**
-   * <p>用户组关联的预算ID。不传则不修改预算关联；传入有效 budget-xxx 则将该用户组关联到此预算（若已关联其它预算则替换为本预算）。仅支持关联/替换，不支持解绑——解绑请用 DisassociateBudget。预算与组内 Key、所属实例的预算各自独立判定。</p>
-   */
-  BudgetId?: string
-  /**
-   * <p>用户组意图路由白名单（ir-xxx）。每一项须为该实例已创建的意图路由名。不传则不修改；传入即整体覆盖。</p>
-   */
-  IntentRouters?: Array<string>
-  /**
-   * <p>用户组真实模型白名单。每一项须为该实例已关联的模型名。不传则不修改；传入即整体覆盖。</p>
-   */
-  Models?: Array<string>
-  /**
-   * <p>用户组名称。不传则不修改；传入时长度不超过255个字符、同实例下唯一。</p>
-   */
-  UserGroupName?: string
 }
 
 /**
@@ -811,85 +142,17 @@ export interface RsTagRule {
 }
 
 /**
- * DescribeRewrite请求参数结构体
+ * DescribeCustomizedConfigList返回参数结构体
  */
-export interface DescribeRewriteRequest {
+export interface DescribeCustomizedConfigListResponse {
   /**
-   * 负载均衡实例ID。
+   * 配置列表
    */
-  LoadBalancerId: string
+  ConfigList?: Array<ConfigListItem>
   /**
-   * 负载均衡监听器ID数组。
+   * 配置数目
    */
-  SourceListenerIds?: Array<string>
-  /**
-   * 负载均衡转发规则的ID数组。
-   */
-  SourceLocationIds?: Array<string>
-}
-
-/**
- * 负载均衡流量数据。
- */
-export interface LoadBalancerTraffic {
-  /**
-   * 负载均衡ID
-   */
-  LoadBalancerId?: string
-  /**
-   * 负载均衡名字
-   */
-  LoadBalancerName?: string
-  /**
-   * 负载均衡所在地域
-   */
-  Region?: string
-  /**
-   * 负载均衡的vip
-   */
-  Vip?: string
-  /**
-   * 最大出带宽，单位：Mbps
-   */
-  OutBandwidth?: number
-  /**
-   * CLB域名
-   */
-  Domain?: string
-}
-
-/**
- * DescribeTargetGroupInstances请求参数结构体
- */
-export interface DescribeTargetGroupInstancesRequest {
-  /**
-   * 过滤条件，当前支持按照 TargetGroupId，BindIP，InstanceId 多个条件组合过滤。
-   */
-  Filters: Array<Filter>
-  /**
-   * 显示数量限制，默认20。
-   */
-  Limit?: number
-  /**
-   * 显示的偏移量，默认为0。
-   */
-  Offset?: number
-}
-
-/**
- * DescribeLBOperateProtect请求参数结构体
- */
-export interface DescribeLBOperateProtectRequest {
-  /**
-   * 负载均衡实例ID。
-   */
-  LoadBalancerIds: Array<string>
-}
-
-/**
- * SetLoadBalancerSecurityGroups返回参数结构体
- */
-export interface SetLoadBalancerSecurityGroupsResponse {
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -897,24 +160,43 @@ export interface SetLoadBalancerSecurityGroupsResponse {
 }
 
 /**
- * 路由设置
+ * 异步任务信息
  */
-export interface RouterSettingWithFallBack {
+export interface Job {
   /**
-   * <p>回退策略</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>接口名称</p>
    */
-  FallBack?: FallBackItem
+  ApiName?: string
   /**
-   * <p>模型内路由策略</p><p>枚举值：</p><ul><li>SimpleShuffle： 简单随机路由</li><li>LeastBusy： 最低繁忙路由</li><li>LatencyBasedRouting： 最低延迟路由</li><li>UsageBasedRouting： 用量均衡路由</li><li>CostBasedRouting： 最低积分路由</li></ul>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>请求ID</p>
    */
-  RoutingStrategy?: string
+  RequestId?: string
   /**
-   * <p>模型间路由策略。</p><p>枚举值：</p><ul><li>SimpleShuffle： 简单随机路由</li><li>CostBasedRouting： 最低积分路由</li></ul>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>异步任务状态</p><p>枚举值：</p><ul><li>Processing： 进行中</li><li>Succeeded： 成功</li><li>Failed： 失败</li></ul>
    */
-  CrossModelGroupRoutingStrategy?: string
+  Status?: string
+  /**
+   * <p>资源ID</p>
+   */
+  ResourceIds?: Array<string>
+}
+
+/**
+ * CreateModelRouterResourcePackage请求参数结构体
+ */
+export interface CreateModelRouterResourcePackageRequest {
+  /**
+   * <p>模型路由资源包容量</p><p>取值范围：[1000, 10000000]</p><p>单次购买的模型路由资源包容量下限为1000，上限为10000000</p>
+   */
+  ModelRouterResourcePackageAmount: number
+  /**
+   * <p>是否自动续订。</p><p>0:不自动续订, 1:用尽到期续订</p>
+   */
+  AutoPurchaseFlag?: number
+  /**
+   * <p>该笔订单是否自动选择代金券</p><p>默认值：false（不自动选择代金券）</p><p>true时会为本笔订单自动匹配满足条件、最优惠的代金券</p>
+   */
+  AutoVoucher?: boolean
 }
 
 /**
@@ -925,39 +207,6 @@ export interface DeleteBudgetsRequest {
    * <p>要删除的Budget ID列表。</p>
    */
   BudgetIds: Array<string>
-}
-
-/**
- * DescribeIdleLoadBalancers返回参数结构体
- */
-export interface DescribeIdleLoadBalancersResponse {
-  /**
-   * 闲置实例列表
-   */
-  IdleLoadBalancers?: Array<IdleLoadBalancer>
-  /**
-   * 所有闲置实例数目
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyLoadBalancerAttributes返回参数结构体
- */
-export interface ModifyLoadBalancerAttributesResponse {
-  /**
-   * <p>切换负载均衡计费方式时，可用此参数查询切换任务是否成功。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DealName?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -973,17 +222,1265 @@ export interface AssociateTargetGroupsRequest {
 }
 
 /**
- * AssociateBudget请求参数结构体
+ * RemoveModelRewrite请求参数结构体
  */
-export interface AssociateBudgetRequest {
+export interface RemoveModelRewriteRequest {
   /**
-   * <p>Budget ID。</p>
+   * <p>模型路由实例 ID。</p>
    */
-  BudgetId: string
+  ModelRouterId: string
   /**
-   * <p>要关联的资源列表。</p><p>仅支持企业型模型路由实例和企业型实例下的Key。同一请求内不允许重复资源；资源已关联其他Budget时将替换为新的Budget。</p>
+   * <p>要删除的源模型名（重写规则的 key）。</p><p>长度 1-255 字符；支持特殊值 <code>default</code> 表示删除兜底规则。</p><p>当指定的 SourceModel 当前不存在重写规则时，请求幂等成功。</p>
    */
-  Resources: Array<BudgetResource>
+  SourceModel: string
+}
+
+/**
+ * 模型别名对象
+ */
+export interface ModelAlias {
+  /**
+   * <p>模型积分系数配置，包含 <code>InputCoefficient</code>、<code>InputCachedCoefficient</code> 和 <code>OutputCoefficient</code>。</p><p>未配置时输入系数默认为 25，缓存命中输入系数默认为 3，输出系数默认为 100。</p>
+   */
+  Coefficient?: Coefficient
+  /**
+   * <p>模型别名名称。</p><p>若用户配置了模型别名，则为该别名；未配置时为原始模型名称。</p>
+   */
+  ModelAliasName?: string
+  /**
+   * <p>该模型别名下各 BYOK 实例（ServiceProvider）的积分系数明细，体现 ModelAlias 与 ServiceProvider 的层级关系。</p><p>默认返回该别名引用的全部实例；某实例返回 <code>Coefficient</code> 表示其单独配置了 ServiceProvider 维度系数，否则继承顶层 ModelAlias 的 <code>Coefficient</code>。</p><p>该别名当前无有效 BYOK 引用时返回空数组。</p>
+   */
+  ServiceProviderCoefficientSet?: Array<ServiceProviderCoefficient>
+  /**
+   * <p>模型来源。</p><p>枚举值：</p><ul><li>BYOK：用户 BYOK 配置的模型。</li></ul>
+   */
+  Source?: string
+  /**
+   * <p>状态</p><p>枚举值：</p><ul><li>Active： 正常可用</li><li>Configuring： 变配中</li><li>ConfigureFailed： 变配失败</li></ul>
+   */
+  Status?: string
+}
+
+/**
+ * CreateBudget请求参数结构体
+ */
+export interface CreateBudgetRequest {
+  /**
+   * <p>预算配置数组。</p><p>数组长度最大为3，最多可同时配置1d、7d、30d三个刷新周期，且每种刷新周期只能出现一次。BudgetResetAt不支持作为入参设置，系统会按配置的刷新周期自动维护刷新时间。</p>
+   */
+  BudgetConfigs?: Array<BudgetConfigInput>
+  /**
+   * <p>Budget名称。</p><p>不传默认为 '-'。</p>
+   */
+  BudgetName?: string
+  /**
+   * <p>Budget限速配置。</p>
+   */
+  RateLimitConfig?: RateLimitConfigForBudget
+  /**
+   * <p>创建Budget时同时关联的资源列表。</p><p>仅支持企业型模型路由实例和企业型实例下的Key。如果资源不存在或不可关联，创建请求失败；资源已关联其他Budget时将替换为新创建的Budget。</p>
+   */
+  Resources?: Array<BudgetResource>
+}
+
+/**
+ * RegisterFunctionTargets请求参数结构体
+ */
+export interface RegisterFunctionTargetsRequest {
+  /**
+   * 负载均衡实例 ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 负载均衡监听器 ID。
+   */
+  ListenerId: string
+  /**
+   * 待绑定的云函数列表。
+   */
+  FunctionTargets: Array<FunctionTarget>
+  /**
+   * 目标转发规则的 ID，当将云函数绑定到七层转发规则时，必须输入此参数或 Domain+Url 参数。
+   */
+  LocationId?: string
+  /**
+   * 目标转发规则的域名，若已经输入 LocationId 参数，则本参数不生效。
+   */
+  Domain?: string
+  /**
+   * 目标转发规则的 URL，若已经输入 LocationId 参数，则本参数不生效。
+   */
+  Url?: string
+}
+
+/**
+ * DeleteUserGroups返回参数结构体
+ */
+export interface DeleteUserGroupsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * InquirePriceRefundModelRouterResourcePackage返回参数结构体
+ */
+export interface InquirePriceRefundModelRouterResourcePackageResponse {
+  /**
+   * <p>待退款的模型路由资源包可退价格</p>
+   */
+  ModelRouterResourcePackageRefundPrice?: Array<ModelRouterResourcePackageRefundPrice>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyModelRouterSecurityGroups请求参数结构体
+ */
+export interface ModifyModelRouterSecurityGroupsRequest {
+  /**
+   * <p>模型路由实例ID</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>需要绑定的安全组ID列表</p>
+   */
+  SecurityGroups: Array<string>
+}
+
+/**
+ * 监听器或者转发规则绑定的目标组基本信息
+ */
+export interface BasicTargetGroupInfo {
+  /**
+   * 目标组ID
+   */
+  TargetGroupId?: string
+  /**
+   * 目标组名称
+   */
+  TargetGroupName?: string
+  /**
+   * 目标组权重
+   */
+  Weight?: number
+}
+
+/**
+ * 关联的模型路由实例
+ */
+export interface AssociatedModelRouterItem {
+  /**
+   * <p>模型路由实例ID</p>
+   */
+  ModelRouterId?: string
+}
+
+/**
+ * DescribeTargetGroupInstanceStatus返回参数结构体
+ */
+export interface DescribeTargetGroupInstanceStatusResponse {
+  /**
+   * 健康检查后端rs状态列表
+   */
+  TargetGroupInstanceSet?: Array<TargetGroupInstanceStatus>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeClassicalLBByInstanceId返回参数结构体
+ */
+export interface DescribeClassicalLBByInstanceIdResponse {
+  /**
+   * 负载均衡相关信息列表。
+   */
+  LoadBalancerInfoList: Array<ClassicalLoadBalancerInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteModel返回参数结构体
+ */
+export interface DeleteModelResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateBYOKNetwork返回参数结构体
+ */
+export interface CreateBYOKNetworkResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyServiceProviderModelAttributes返回参数结构体
+ */
+export interface ModifyServiceProviderModelAttributesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteModelRouters请求参数结构体
+ */
+export interface DeleteModelRoutersRequest {
+  /**
+   * <p>模型路由实例ID列表</p>
+   */
+  ModelRouterIds?: Array<string>
+}
+
+/**
+ * DescribeTargetGroups返回参数结构体
+ */
+export interface DescribeTargetGroupsResponse {
+  /**
+   * 显示的结果数量。
+   */
+  TotalCount?: number
+  /**
+   * 显示的目标组信息集合。
+   */
+  TargetGroupSet?: Array<TargetGroupInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyLoadBalancerSla返回参数结构体
+ */
+export interface ModifyLoadBalancerSlaResponse {
+  /**
+   * 订单号。
+   */
+  DealName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeModelNames请求参数结构体
+ */
+export interface DescribeModelNamesRequest {
+  /**
+   * <p>分页偏移量（&gt;=0）</p>
+   */
+  Offset?: number
+  /**
+   * <p>每页数量（1-100）</p>
+   */
+  Limit?: number
+  /**
+   * <p>过滤PrivateCustom类型自建模型。如果传递了此参数，则只返回具有相同VPC Id的模型。</p>
+   */
+  VpcId?: string
+}
+
+/**
+ * CreateUserGroup请求参数结构体
+ */
+export interface CreateUserGroupRequest {
+  /**
+   * <p>模型路由实例ID。用户组将创建在该实例下。</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>用户组名称。必填。同一模型路由实例下名称唯一，长度不超过255个字符。</p>
+   */
+  UserGroupName: string
+  /**
+   * <p>建组时直接关联的预算 ID（须为已存在的 Budget）。关联后由该 Budget 统一管理本组的消费上限与限速。不传表示不关联预算，可建组后再用 AssociateBudget 关联。</p>
+   */
+  BudgetId?: string
+  /**
+   * <p>用户组意图路由白名单（ir-xxx）。每一项须为该实例已创建的意图路由名。命中意图路由名时其内部真实模型自动豁免白名单。为空表示不授权任何意图路由。</p>
+   */
+  IntentRouters?: Array<string>
+  /**
+   * <p>建组时同时绑定的已有 Key ID 列表，最多100个。每个 Key 须属于同一模型路由实例。建组与绑定为一个原子异步任务，任一 Key 失败则整组创建回滚。不传表示建空组。</p>
+   */
+  KeyIds?: Array<string>
+  /**
+   * <p>用户组真实模型白名单。每一项须为该实例已关联的模型名。为空表示不在用户组层限制真实模型（按实例层白名单生效）。</p>
+   */
+  Models?: Array<string>
+  /**
+   * <p>标签列表，最多50个。</p>
+   */
+  Tags?: Array<TagInfo>
+}
+
+/**
+ * DeregisterModelsFromServiceProvider返回参数结构体
+ */
+export interface DeregisterModelsFromServiceProviderResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 加入了12306黑名单的IP
+ */
+export interface BlockedIP {
+  /**
+   * 黑名单IP
+   */
+  IP?: string
+  /**
+   * 加入黑名单的时间
+   */
+  CreateTime?: string
+  /**
+   * 过期时间
+   */
+  ExpireTime?: string
+}
+
+/**
+ * DeleteModel请求参数结构体
+ */
+export interface DeleteModelRequest {
+  /**
+   * <p>服务提供商ID列表</p>
+   */
+  ServiceProviderIds: Array<string>
+}
+
+/**
+ * DescribeListeners返回参数结构体
+ */
+export interface DescribeListenersResponse {
+  /**
+   * 监听器列表。
+   */
+  Listeners?: Array<Listener>
+  /**
+   * 总的监听器个数（根据端口、协议、监听器ID过滤后）。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AutoRewrite请求参数结构体
+ */
+export interface AutoRewriteRequest {
+  /**
+   * 负载均衡实例ID。
+   */
+  LoadBalancerId: string
+  /**
+   * HTTPS:443监听器的ID。
+   */
+  ListenerId: string
+  /**
+   * HTTPS:443监听器下需要重定向的域名，若不填，则对HTTPS:443监听器下的所有域名都设置重定向。
+   */
+  Domains?: Array<string>
+  /**
+   * 重定向状态码，可取值301,302,307。
+   */
+  RewriteCodes?: Array<number | bigint>
+  /**
+   * 重定向是否携带匹配的URL。
+   */
+  TakeUrls?: Array<boolean>
+}
+
+/**
+ * DescribeModelRouterResourcePackageDeduction返回参数结构体
+ */
+export interface DescribeModelRouterResourcePackageDeductionResponse {
+  /**
+   * <p>模型路由资源包抵扣信息</p>
+   */
+  ModelRouterResourcePackageDeductionSet?: Array<ModelRouterResourcePackageDeduction>
+  /**
+   * <p>符合查询条件的详情信息总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLoadBalancerTraffic请求参数结构体
+ */
+export interface DescribeLoadBalancerTrafficRequest {
+  /**
+   * 负载均衡所在地域，不传默认返回所有地域负载均衡。
+   */
+  LoadBalancerRegion?: string
+}
+
+/**
+ * DescribeClassicalLBHealthStatus返回参数结构体
+ */
+export interface DescribeClassicalLBHealthStatusResponse {
+  /**
+   * 后端健康状态列表。
+   */
+  HealthList?: Array<ClassicalHealth>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AssociateModelsToModelRouter返回参数结构体
+ */
+export interface AssociateModelsToModelRouterResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeModelAssociations请求参数结构体
+ */
+export interface DescribeModelAssociationsRequest {
+  /**
+   * <p>模型路由实例ID</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>翻页限制</p><p>取值范围：[1, 100]</p><p>默认值：20</p>
+   */
+  Limit?: number
+  /**
+   * <p>翻页偏移量</p><p>默认值：0</p>
+   */
+  Offset?: number
+}
+
+/**
+ * 规格可用性
+ */
+export interface SpecAvailability {
+  /**
+   * 规格类型。
+<li>clb.c2.medium（标准型）</li><li>clb.c3.small（高阶型1）</li><li>clb.c3.medium（高阶型2）</li>
+<li>clb.c4.small（超强型1）</li><li>clb.c4.medium（超强型2）</li><li>clb.c4.large（超强型3）</li><li>clb.c4.xlarge（超强型4）</li><li>shared（共享型）</li>
+
+   */
+  SpecType?: string
+  /**
+   * 规格可用性。资源可用性，"Available"：可用，"Unavailable"：不可用
+   */
+  Availability?: string
+}
+
+/**
+ * 健康检查信息。
+注意，自定义探测相关参数 目前只有少量区域灰度支持。
+ */
+export interface HealthCheck {
+  /**
+   * 是否开启健康检查：1（开启）、0（关闭）。
+默认为开启。
+   */
+  HealthSwitch?: number
+  /**
+   * 健康检查的响应超时时间，可选值：2~60，默认值：2，单位：秒。响应超时时间要小于检查间隔时间。
+   */
+  TimeOut?: number
+  /**
+   * 健康检查探测间隔时间，默认值：5，IPv4 CLB实例的取值范围为：2-300，IPv6 CLB 实例的取值范围为：5-300。单位：秒。
+说明：部分老旧 IPv4 CLB实例的取值范围为：5-300。
+   */
+  IntervalTime?: number
+  /**
+   * 健康阈值，默认值：3，表示当连续探测三次健康则表示该转发正常，可选值：2~10，单位：次。
+   */
+  HealthNum?: number
+  /**
+   * 不健康阈值，默认值：3，表示当连续探测三次不健康则表示该转发异常，可选值：2~10，单位：次。
+   */
+  UnHealthNum?: number
+  /**
+   * 健康检查状态码（仅适用于HTTP/HTTPS转发规则、TCP监听器的HTTP健康检查方式）。可选值：1~31，默认 31。
+1 表示探测后返回值 1xx 代表健康，2 表示返回 2xx 代表健康，4 表示返回 3xx 代表健康，8 表示返回 4xx 代表健康，16 表示返回 5xx 代表健康。若希望多种返回码都可代表健康，则将相应的值相加。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpCode?: number
+  /**
+   * 健康检查路径（仅适用于HTTP/HTTPS转发规则、TCP监听器的HTTP健康检查方式）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpCheckPath?: string
+  /**
+   * 健康检查域名，将在HTTP协议 Host 头字段中携带。（仅适用于HTTP/HTTPS监听器和TCP监听器的HTTP健康检查方式。针对TCP监听器，当使用HTTP健康检查方式时，该参数为必填项）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpCheckDomain?: string
+  /**
+   * 健康检查方法（仅适用于HTTP/HTTPS转发规则、TCP监听器的HTTP健康检查方式），默认值：HEAD，可选值HEAD或GET。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpCheckMethod?: string
+  /**
+   * 自定义探测相关参数。健康检查端口，默认为后端服务的端口，除非您希望指定特定端口，否则建议留空。传参数值-1可恢复默认设置。（仅适用于TCP/UDP监听器）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CheckPort?: number
+  /**
+   * 自定义探测相关参数。健康检查协议CheckType的值取CUSTOM时，必填此字段，代表健康检查的输入格式，可取值：HEX或TEXT；取值为HEX时，SendContext和RecvContext的字符只能在0123456789ABCDEF中选取且长度必须是偶数位。（仅适用于TCP/UDP监听器）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContextType?: string
+  /**
+   * 自定义探测相关参数。健康检查协议CheckType的值取CUSTOM时，必填此字段，代表健康检查发送的请求内容，只允许ASCII可见字符，最大长度限制500。（仅适用于TCP/UDP监听器）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SendContext?: string
+  /**
+   * 自定义探测相关参数。健康检查协议CheckType的值取CUSTOM时，必填此字段，代表健康检查返回的结果，只允许ASCII可见字符，最大长度限制500。（仅适用于TCP/UDP监听器）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecvContext?: string
+  /**
+   * 健康检查使用的协议。取值 TCP | HTTP | HTTPS | GRPC | PING | CUSTOM，UDP监听器支持PING/CUSTOM，TCP监听器支持TCP/HTTP/CUSTOM，TCP_SSL/QUIC监听器支持TCP/HTTP，HTTP规则支持HTTP/GRPC，HTTPS规则支持HTTP/HTTPS/GRPC。HTTP监听器默认值为HTTP;TCP、TCP_SSL、QUIC监听器默认值为TCP;UDP监听器默认为PING;HTTPS监听器的CheckType默认值与后端转发协议一致。
+   */
+  CheckType?: string
+  /**
+   * HTTP版本。健康检查协议CheckType的值取HTTP时，必传此字段，代表后端服务的HTTP版本：HTTP/1.0、HTTP/1.1；（仅适用于TCP监听器）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpVersion?: string
+  /**
+   * 健康检查源IP类型：0（使用LB的VIP作为源IP），1（使用100.64网段IP作为源IP）。
+   */
+  SourceIpType?: number
+  /**
+   * GRPC健康检查状态码（仅适用于后端转发协议为GRPC的规则）。默认值为 12，可输入值为数值、多个数值、或者范围，例如 20 或 20,25 或 0-99
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtendedCode?: string
+}
+
+/**
+ * DescribeLoadBalancersDetail返回参数结构体
+ */
+export interface DescribeLoadBalancersDetailResponse {
+  /**
+   * 负载均衡详情列表总数。
+   */
+  TotalCount?: number
+  /**
+   * 负载均衡详情列表。
+   */
+  LoadBalancerDetailSet?: Array<LoadBalancerDetail>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DisassociateCustomizedConfig请求参数结构体
+ */
+export interface DisassociateCustomizedConfigRequest {
+  /**
+   * 配置ID
+   */
+  UconfigId: string
+  /**
+   * 解绑的列表
+   */
+  BindList: Array<BindItem>
+}
+
+/**
+ * CreateTopic请求参数结构体
+ */
+export interface CreateTopicRequest {
+  /**
+   * 日志主题的名称。
+   */
+  TopicName: string
+  /**
+   * 主题分区Partition的数量，不传参默认创建1个，最大创建允许10个，分裂/合并操作会改变分区数量，整体上限50个。
+   */
+  PartitionCount?: number
+  /**
+   * 日志类型，ACCESS：访问日志，HEALTH：健康检查日志，默认ACCESS。
+   */
+  TopicType?: string
+  /**
+   * 存储时间，单位天，默认为 30。
+- 日志接入标准存储时，支持1至3600天，值为3640时代表永久保存。
+- 日志接入低频存储时，支持7至3600天，值为3640时代表永久保存。
+   */
+  Period?: number
+  /**
+   * 日志主题的存储类型，可选值 HOT（标准存储），COLD（低频存储）；默认为HOT。
+   */
+  StorageType?: string
+}
+
+/**
+ * DeleteListener请求参数结构体
+ */
+export interface DeleteListenerRequest {
+  /**
+   * 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。
+   */
+  LoadBalancerId: string
+  /**
+   * 要删除的监听器ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。
+   */
+  ListenerId: string
+}
+
+/**
+ * ModifyBlockIPList返回参数结构体
+ */
+export interface ModifyBlockIPListResponse {
+  /**
+   * 异步任务的ID
+   */
+  JodId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * MigrateClassicalLoadBalancers请求参数结构体
+ */
+export interface MigrateClassicalLoadBalancersRequest {
+  /**
+   * 传统型负载均衡ID数组
+   */
+  LoadBalancerIds: Array<string>
+  /**
+   * 独占集群信息
+   */
+  ExclusiveCluster?: ExclusiveCluster
+}
+
+/**
+ * 目标组绑定的后端服务器
+ */
+export interface TargetGroupBackend {
+  /**
+   * 目标组ID
+   */
+  TargetGroupId?: string
+  /**
+   * 后端服务的类型，可取：CVM、ENI（即将支持）
+   */
+  Type?: string
+  /**
+   * 后端服务的唯一 ID
+   */
+  InstanceId?: string
+  /**
+   * 后端服务的监听端口，全端口段监听器此字段返回0，代表无效端口，即不支持设置。
+   */
+  Port?: number
+  /**
+   * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
+   */
+  Weight?: number
+  /**
+   * 后端服务的外网 IP
+   */
+  PublicIpAddresses?: Array<string>
+  /**
+   * 后端服务的内网 IP
+   */
+  PrivateIpAddresses?: Array<string>
+  /**
+   * 后端服务的实例名称
+   */
+  InstanceName?: string
+  /**
+   * 后端服务被绑定的时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegisteredTime?: string
+  /**
+   * 弹性网卡唯一ID
+   */
+  EniId?: string
+  /**
+   * 后端服务的可用区ID
+   */
+  ZoneId?: number
+}
+
+/**
+ * ModifyKeyAttributes返回参数结构体
+ */
+export interface ModifyKeyAttributesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyKeysBlockStatus请求参数结构体
+ */
+export interface ModifyKeysBlockStatusRequest {
+  /**
+   * <p>模型路由实例ID</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>是否停止使用</p>
+   */
+  Blocked: boolean
+  /**
+   * <p>需要修改的Key的ID列表</p>
+   */
+  KeyIds?: Array<string>
+}
+
+/**
+ * DescribeModelAliases返回参数结构体
+ */
+export interface DescribeModelAliasesResponse {
+  /**
+   * <p>模型别名列表。</p>
+   */
+  ModelAliasSet?: Array<ModelAlias>
+  /**
+   * <p>符合条件的总数。</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyBlockIPList请求参数结构体
+ */
+export interface ModifyBlockIPListRequest {
+  /**
+   * 负载均衡实例ID
+   */
+  LoadBalancerIds: Array<string>
+  /**
+   * 操作类型，可取：
+<li> add_customized_field（首次设置header，开启黑名单功能）</li>
+<li> set_customized_field（修改header）</li>
+<li> del_customized_field（删除header）</li>
+<li> add_blocked（添加黑名单）</li>
+<li> del_blocked（删除黑名单）</li>
+<li> flush_blocked（清空黑名单）</li>
+   */
+  Type: string
+  /**
+   * 客户端真实IP存放的header字段名
+   */
+  ClientIPField: string
+  /**
+   * 封禁IP列表，单次操作数组最大长度支持200000
+   */
+  BlockIPList?: Array<string>
+  /**
+   * 过期时间，单位秒，默认值3600
+   */
+  ExpireTime?: number
+  /**
+   * 添加IP的策略，可取：fifo（如果黑名单容量已满，新加入黑名单的IP采用先进先出策略）
+   */
+  AddStrategy?: string
+}
+
+/**
+ * CreateKeys请求参数结构体
+ */
+export interface CreateKeysRequest {
+  /**
+   * <p>模型路由ID</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>需要绑定的预算信息，所有Key共用</p>
+   */
+  BudgetId?: string
+  /**
+   * <p>Key列表</p>
+   */
+  Keys?: Array<InputKeyInfo>
+  /**
+   * <p>批量创建Key的模式</p><p>枚举值：</p><ul><li>Generate： 平台生成Key</li><li>Import： 导入自带Key</li></ul><p>默认值：Generate</p>
+   */
+  Mode?: string
+  /**
+   * <p>限速信息，所有Key共用</p>
+   */
+  RateLimitConfig?: RateLimitConfigForKey
+  /**
+   * <p>标签。所有Key都会绑定该标签。</p>
+   */
+  Tags?: Array<TagInfo>
+  /**
+   * <p>需要关联的用户组ID</p>
+   */
+  UserGroupId?: string
+}
+
+/**
+ * CreateIntentRouter请求参数结构体
+ */
+export interface CreateIntentRouterRequest {
+  /**
+   * <p>模型路由实例ID。</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>路由名称，用作LiteLLM的model_name。</p><p>必须以"IntentRouter/"为前缀，后缀仅支持字母、数字、连字符和下划线，后缀长度1-128个字符。</p>
+   */
+  RouteName: string
+  /**
+   * <p>Tier配置列表。</p><p>每个Tier至少包含一个模型，模型名称必须是已关联到该实例的模型。</p>
+   */
+  Tiers: Array<TierItem>
+  /**
+   * <p>意图路由描述。</p>
+   */
+  RouterDescribe?: string
+}
+
+/**
+ * DeleteKeys返回参数结构体
+ */
+export interface DeleteKeysResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDomain请求参数结构体
+ */
+export interface ModifyDomainRequest {
+  /**
+   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。
+   */
+  LoadBalancerId: string
+  /**
+   * 负载均衡监听器 ID， 可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。
+   */
+  ListenerId: string
+  /**
+   * 监听器下的某个旧域名， 可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 查询。
+   */
+  Domain: string
+  /**
+   * 新域名，	长度限制为：1-120。有三种使用格式：非正则表达式格式，通配符格式，正则表达式格式。非正则表达式格式只能使用字母、数字、‘-’、‘.’。通配符格式的使用 ‘*’ 只能在开头或者结尾。正则表达式以'~'开头。
+   */
+  NewDomain: string
+}
+
+/**
+ * Budget预算配置入参
+ */
+export interface BudgetConfigInput {
+  /**
+   * <p>预算刷新周期。</p><p>支持取值：</p><ul><li>1d：按天刷新</li><li>7d：按周刷新</li><li>30d：按月刷新</li></ul><p>不传时默认使用30d。同一个Budget下每种刷新周期最多配置一次。</p>
+   */
+  BudgetDuration?: string
+  /**
+   * <p>最大预算。</p><p>单位：credit。取值需大于0且不超过10000000000；不传时默认100000。</p>
+   */
+  MaxBudget?: number
+}
+
+/**
+ * Key 项
+ */
+export interface KeyItem {
+  /**
+   * Provider API Key
+   */
+  ApiKey: string
+  /**
+   * Key 标识名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+}
+
+/**
+ * 模型路由资源包退款价格
+ */
+export interface ModelRouterResourcePackageRefundPrice {
+  /**
+   * <p>模型路由资源包Id</p>
+   */
+  ModelRouterPackageId?: string
+  /**
+   * <p>可退还金额</p>
+   */
+  Price?: number
+}
+
+/**
+ * AssociateModelsToModelRouter请求参数结构体
+ */
+export interface AssociateModelsToModelRouterRequest {
+  /**
+   * <p>模型路由实例ID</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>需要关联的模型信息</p>
+   */
+  Models?: Array<ModelRouterModel>
+}
+
+/**
+ * CreateLoadBalancerSnatIps返回参数结构体
+ */
+export interface CreateLoadBalancerSnatIpsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 负载均衡信息
+ */
+export interface ClassicalLoadBalancerInfo {
+  /**
+   * 后端实例ID
+   */
+  InstanceId?: string
+  /**
+   * 负载均衡实例ID列表
+   */
+  LoadBalancerIds?: Array<string>
+}
+
+/**
+ * DisassociateModelRouterGuardrails返回参数结构体
+ */
+export interface DisassociateModelRouterGuardrailsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RegisterFunctionTargets返回参数结构体
+ */
+export interface RegisterFunctionTargetsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteLoadBalancer请求参数结构体
+ */
+export interface DeleteLoadBalancerRequest {
+  /**
+   * 要删除的负载均衡实例 ID 数组，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取，数组大小最大支持20。
+   */
+  LoadBalancerIds: Array<string>
+  /**
+   * 是否强制删除clb。true表示强制删除，false表示不是强制删除，需要做拦截校验。
+默认为false。
+以下几种情况会默认拦截删除操作，如果触发情况1、2但确认强制删除则需要传强制校验参数ForceDelete为true。
+1、删除后端绑定大于等于 20 个 RS 的实例时。
+2、删除后端有 RS 且 5 分钟 内“出/入带宽”峰值取大 > 10Mbps 的实例时。
+3、单地域内 5 分钟 内删除大于等于 30 个实例时。
+   */
+  ForceDelete?: boolean
+}
+
+/**
+ * 模型路由相关配额
+ */
+export interface ModelRouterQuota {
+  /**
+   * <p>配额名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QuotaType?: string
+  /**
+   * <p>资源ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceId?: string
+  /**
+   * <p>配额上限</p><p>单位：个</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Limit?: number
+  /**
+   * <p>已使用配额数量</p><p>单位：个</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Used?: number
+  /**
+   * <p>剩余配额数量</p><p>单位：个</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Available?: number
+}
+
+/**
+ * AddModelRewrite请求参数结构体
+ */
+export interface AddModelRewriteRequest {
+  /**
+   * <p>模型路由实例 ID。</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>源模型名（重写规则的 key）。</p><p>长度 1-255 字符；支持特殊值 <code>default</code> 表示兜底规则（命中所有未显式列出的源模型）。</p><p>不允许使用 <code>IntentRouter/</code> 前缀（大小写不敏感），即 IntentRouter 不能作为 source。</p>
+   */
+  SourceModel: string
+  /**
+   * <p>目标模型名（重写规则的 value）。</p><p>长度 1-255 字符；必须是已关联到该模型路由实例的模型（含 IntentRouter/* 也需先通过 AssociateModels 关联）。</p><p>不允许使用 <code>default</code>；不允许与 SourceModel 相同（大小写不敏感）。</p>
+   */
+  TargetModel: string
+}
+
+/**
+ * HTTP/HTTPS监听器下的转发规则绑定的后端服务信息
+ */
+export interface RuleTargets {
+  /**
+   * 转发规则的 ID
+   */
+  LocationId?: string
+  /**
+   * 转发规则的域名
+   */
+  Domain?: string
+  /**
+   * 转发规则的路径。
+   */
+  Url?: string
+  /**
+   * 后端服务的信息
+   */
+  Targets?: Array<Backend>
+  /**
+   * 后端云函数的信息
+   */
+  FunctionTargets?: Array<FunctionTarget>
+}
+
+/**
+ * 意图路由分层配置对象，包含分层名称和该分层下的模型列表。
+ */
+export interface IntentRouterTierItem {
+  /**
+   * <p>该分层下的模型显示名称列表。</p>
+   */
+  Models?: Array<string>
+  /**
+   * <p>Tier 标识。<br>枚举值：</p><ul><li>复杂度分层（4 个固定值，需全部包含）：SIMPLE、MEDIUM、COMPLEX、REASONING</li><li>default： 默认</li><li>general_chat： 通用对话</li><li>transformation_rewrite： 转换与改写</li><li>knowledge_qa： 知识问答</li><li>summarization： 摘要</li><li>extraction_structuring： 抽取与结构化输出</li><li>content_generation： 内容生成</li><li>coding_technical： 编码与技术</li><li>data_math_analysis： 数据、数学与分析</li><li>reasoning_planning： 推理与规划</li><li>tool_agentic_workflow： 工具与智能体工作流</li></ul>
+   */
+  TierName?: string
+}
+
+/**
+ * BatchDeregisterTargets请求参数结构体
+ */
+export interface BatchDeregisterTargetsRequest {
+  /**
+   * 负载均衡ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 解绑目标。
+   */
+  Targets: Array<BatchTarget>
+}
+
+/**
+ * ModifyListener返回参数结构体
+ */
+export interface ModifyListenerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTargetHealth返回参数结构体
+ */
+export interface DescribeTargetHealthResponse {
+  /**
+   * <p>负载均衡实例列表。</p>
+   */
+  LoadBalancers?: Array<LoadBalancerHealth>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 模型路由 Guardrail 防护配置
+ */
+export interface GuardrailConfig {
+  /**
+   * <p>Guardrail 防护配置 ID。</p><p>DescribeModelRouterGuardrails 会返回该字段；DisassociateModelRouterGuardrails 和 ModifyModelRouterGuardrails 需要使用该字段定位要操作的防护配置。</p>
+   */
+  GuardrailId?: string
+  /**
+   * <p>Guardrail 防护类型。</p><p>枚举值：</p><ul><li>WAF：使用腾讯云 WAF LLM SDK 接入配置对模型路由请求进行安全防护。</li></ul><p>当前仅支持 WAF；AssociateModelRouterGuardrails 不传时默认为 WAF，ModifyModelRouterGuardrails 不传时沿用当前已关联 Guardrail 的 Type。</p>
+   */
+  Type?: string
+  /**
+   * <p>关联的腾讯云 WAF 实例 ID。</p><p>ModifyModelRouterGuardrails 在 Type 为 WAF 时必填。DescribeModelRouterGuardrails 返回。接口会校验该 WAF 实例存在且属于当前账号。</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>WAF LLM SDK 接入服务 ID。</p><p>该字段对应 WAF LLM SDK 接入配置中的服务标识，用于指定模型路由请求要绑定的 WAF 防护配置。ModifyModelRouterGuardrails 在 Type 为 WAF 时必填。DescribeModelRouterGuardrails 返回。接口会校验该服务配置存在于指定的 WAF 实例下。</p>
+   */
+  ServiceId?: string
+  /**
+   * <p>最大检测对话轮数。</p><p>ModifyModelRouterGuardrails 选填；未传时沿用当前已关联 Guardrail 的 InputCheckDepth。DescribeModelRouterGuardrails 返回。若传入，取值必须为正整数。</p>
+   */
+  InputCheckDepth?: number
+}
+
+/**
+ * 独占集群信息
+ */
+export interface ClusterItem {
+  /**
+   * 集群唯一ID
+   */
+  ClusterId: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 集群所在可用区，如ap-guangzhou-1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
+}
+
+/**
+ * ModifyModelRouterAttributes请求参数结构体
+ */
+export interface ModifyModelRouterAttributesRequest {
+  /**
+   * <p>模型路由ID</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>新的 HTTPS 证书ID，用于替换实例 HTTPS 服务端点当前绑定的证书。常用于证书到期前的更换场景。</p><p>使用限制：</p><ul><li>仅企业型（Enterprise）且服务端点协议为 HTTPS 的实例支持修改证书。</li><li>证书须为 SSL 证书控制台中状态为“已签发”（可用）且未过期的服务器证书（SVR 类型）。可在 <a href="https://console.cloud.tencent.com/ssl">SSL 证书控制台</a> 查看证书ID。</li><li>替换后新证书立即生效，过程中不会中断业务流量。</li><li>若传入的证书与当前绑定的证书相同，接口直接返回成功，不做任何变更。</li></ul><p>不传则证书保持不变。可通过 <code>DescribeModelRouterDetail</code> 接口的 <code>ServiceEndPoints.CertId</code> 字段查询当前绑定的证书。</p>
+   */
+  CertId?: string
+  /**
+   * <p>模型路由名称</p>
+   */
+  ModelRouterName?: string
+  /**
+   * <p>限速配置</p>
+   */
+  RateLimitConfig?: RateLimitConfigForModelRouter
+  /**
+   * <p>路由配置</p>
+   */
+  RouterSetting?: RouterSettingWithFallBack
+}
+
+/**
+ * 模型路由日志
+ */
+export interface ModelRouterLog {
+  /**
+   * <p>API Key的ID</p>
+   */
+  KeyId?: string
+  /**
+   * <p>模型</p>
+   */
+  Model?: string
+  /**
+   * <p>所属厂商</p>
+   */
+  Provider?: string
+  /**
+   * <p>请求状态</p><p>枚举值：</p><ul><li>failure： 失败</li><li>success： 成功</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>最大重试次数</p>
+   */
+  MaxRetries?: number
+  /**
+   * <p>单次请求消耗的总Token数量</p>
+   */
+  TotalTokens?: number
+  /**
+   * <p>单次请求输入消耗的Token数量</p>
+   */
+  InputTokens?: number
+  /**
+   * <p>单次请求输出消耗的Token数量</p>
+   */
+  OutputTokens?: number
+  /**
+   * <p>请求耗时</p><p>单位：ms</p>
+   */
+  RequestDuration?: number
+  /**
+   * <p>请求IP</p>
+   */
+  RequesterIp?: string
+  /**
+   * <p>日志查询起始时间</p>
+   */
+  StartTime?: string
+  /**
+   * <p>日志查询结束时间</p>
+   */
+  EndTime?: string
 }
 
 /**
@@ -1130,160 +1627,9 @@ OPEN：公网属性， INTERNAL：内网属性。
 }
 
 /**
- * CreateBudget请求参数结构体
+ * RemoveModelKey返回参数结构体
  */
-export interface CreateBudgetRequest {
-  /**
-   * <p>预算配置数组。</p><p>数组长度最大为1。BudgetResetAt不支持作为入参设置。</p>
-   */
-  BudgetConfigs?: Array<BudgetConfigInput>
-  /**
-   * <p>Budget名称。</p><p>不传默认为空字符串。</p>
-   */
-  BudgetName?: string
-  /**
-   * <p>Budget限速配置。</p>
-   */
-  RateLimitConfig?: RateLimitConfigForBudget
-  /**
-   * <p>创建Budget时同时关联的资源列表。</p><p>仅支持企业型模型路由实例和企业型实例下的Key。如果资源不存在或不可关联，创建请求失败；资源已关联其他Budget时将替换为新创建的Budget。</p>
-   */
-  Resources?: Array<BudgetResource>
-}
-
-/**
- * 传统型负载均衡的后端服务相关信息
- */
-export interface ClassicalTarget {
-  /**
-   * 后端服务的类型，可取值：CVM、ENI（即将支持）
-   */
-  Type?: string
-  /**
-   * 后端服务的唯一 ID，可通过 DescribeInstances 接口返回字段中的 unInstanceId 字段获取
-   */
-  InstanceId?: string
-  /**
-   * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
-   */
-  Weight?: number
-  /**
-   * 后端服务的外网 IP
-   */
-  PublicIpAddresses?: Array<string>
-  /**
-   * 后端服务的内网 IP
-   */
-  PrivateIpAddresses?: Array<string>
-  /**
-   * 后端服务的实例名称
-   */
-  InstanceName?: string
-  /**
-   * 后端服务的状态
-1：故障，2：运行中，3：创建中，4：已关机，5：已退还，6：退还中， 7：重启中，8：开机中，9：关机中，10：密码重置中，11：格式化中，12：镜像制作中，13：带宽设置中，14：重装系统中，19：升级中，21：热迁移中
-   */
-  RunFlag?: number
-}
-
-/**
- * 反查监听器类型
- */
-export interface ListenerItem {
-  /**
-   * 监听器ID
-   */
-  ListenerId?: string
-  /**
-   * 监听器协议
-   */
-  Protocol?: string
-  /**
-   * 监听器端口
-   */
-  Port?: number
-  /**
-   * 绑定规则
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Rules?: Array<RulesItems>
-  /**
-   * 四层绑定对象
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Targets?: Array<LbRsTargets>
-  /**
-   * 端口段监听器的结束端口
-   */
-  EndPort?: number
-}
-
-/**
- * 修改节点权重的数据类型
- */
-export interface RsWeightRule {
-  /**
-   * 负载均衡监听器 ID。
-   */
-  ListenerId: string
-  /**
-   * 要修改权重的后端机器列表。
-   */
-  Targets: Array<Target>
-  /**
-   * 转发规则的ID，七层规则时需要此参数，4层规则不需要。
-   */
-  LocationId?: string
-  /**
-   * 目标规则的域名，提供LocationId参数时本参数不生效。
-   * @deprecated
-   */
-  Domain?: string
-  /**
-   * 目标规则的URL，提供LocationId参数时本参数不生效。
-   * @deprecated
-   */
-  Url?: string
-  /**
-   * 后端服务修改后的转发权重，取值范围：[0，100]。此参数的优先级低于前述[Target](https://cloud.tencent.com/document/api/214/30694#Target)中的Weight参数，即最终的权重值以Target中的Weight参数值为准，仅当Target中的Weight参数为空时，才以RsWeightRule中的Weight参数为准。
-   */
-  Weight?: number
-}
-
-/**
- * RegisterFunctionTargets请求参数结构体
- */
-export interface RegisterFunctionTargetsRequest {
-  /**
-   * 负载均衡实例 ID。
-   */
-  LoadBalancerId: string
-  /**
-   * 负载均衡监听器 ID。
-   */
-  ListenerId: string
-  /**
-   * 待绑定的云函数列表。
-   */
-  FunctionTargets: Array<FunctionTarget>
-  /**
-   * 目标转发规则的 ID，当将云函数绑定到七层转发规则时，必须输入此参数或 Domain+Url 参数。
-   */
-  LocationId?: string
-  /**
-   * 目标转发规则的域名，若已经输入 LocationId 参数，则本参数不生效。
-   */
-  Domain?: string
-  /**
-   * 目标转发规则的 URL，若已经输入 LocationId 参数，则本参数不生效。
-   */
-  Url?: string
-}
-
-/**
- * DeleteUserGroups返回参数结构体
- */
-export interface DeleteUserGroupsResponse {
+export interface RemoveModelKeyResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1291,2354 +1637,17 @@ export interface DeleteUserGroupsResponse {
 }
 
 /**
- * DeregisterTargetsFromClassicalLB请求参数结构体
+ * RegenerateKeys请求参数结构体
  */
-export interface DeregisterTargetsFromClassicalLBRequest {
-  /**
-   * 负载均衡实例ID。
-   */
-  LoadBalancerId: string
-  /**
-   * 后端服务的实例ID列表。
-   */
-  InstanceIds: Array<string>
-}
-
-/**
- * InquiryPriceModifyLoadBalancer请求参数结构体
- */
-export interface InquiryPriceModifyLoadBalancerRequest {
-  /**
-   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
-   */
-  LoadBalancerId: string
-  /**
-   * 修改后的网络带宽信息
-   */
-  InternetAccessible: InternetAccessible
-}
-
-/**
- * 用户组信息。
- */
-export interface UserGroupInfo {
-  /**
-   * <p>用户组ID。「未分组」虚拟分组固定为 ugrp-ungrouped。</p>
-   */
-  UserGroupId?: string
-  /**
-   * <p>用户组名称。「未分组」虚拟分组固定为 ungrouped。</p>
-   */
-  UserGroupName?: string
-  /**
-   * <p>所属模型路由实例ID。</p>
-   */
-  ModelRouterId?: string
-  /**
-   * <p>用户组状态。</p><p>枚举值：</p><ul><li>Creating：创建中</li><li>Active：正常</li><li>Configuring：配置中</li><li>Deleting：删除中</li></ul><p>「未分组」虚拟分组（ugrp-ungrouped）恒为 Active。</p>
-   */
-  Status?: string
-  /**
-   * <p>用户组真实模型白名单。「未分组」虚拟分组为空数组。</p>
-   */
-  Models?: Array<string>
-  /**
-   * <p>用户组意图路由白名单（ir-xxx）。「未分组」虚拟分组为空数组。</p>
-   */
-  IntentRouters?: Array<string>
-  /**
-   * <p>关联的Budget ID。</p><p>未关联时为空；「未分组」虚拟分组恒为空。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BudgetId?: string
-  /**
-   * <p>关联的Budget名称。</p><p>未关联时为空；「未分组」虚拟分组恒为空。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BudgetName?: string
-  /**
-   * <p>用户组多刷新周期 Credit 使用情况。</p><p>无多周期预算时为空数组。</p>
-   */
-  CreditUsageSet?: Array<CreditUsage>
-  /**
-   * <p>用户组当前包含的 Key 数量。「未分组」虚拟分组（ugrp-ungrouped）返回该模型路由实例下未归属任何用户组的 Key 数量。</p>
-   */
-  KeyCount?: number
-  /**
-   * <p>标签列表。「未分组」虚拟分组为空数组。</p>
-   */
-  Tags?: Array<TagInfo>
-  /**
-   * <p>创建时间。「未分组」虚拟分组不返回此字段。</p>
-   */
-  CreatedTime?: string
-  /**
-   * <p>修改时间。「未分组」虚拟分组不返回此字段。</p>
-   */
-  ModifiedTime?: string
-}
-
-/**
- * 监听器或者转发规则绑定的目标组基本信息
- */
-export interface BasicTargetGroupInfo {
-  /**
-   * 目标组ID
-   */
-  TargetGroupId?: string
-  /**
-   * 目标组名称
-   */
-  TargetGroupName?: string
-  /**
-   * 目标组权重
-   */
-  Weight?: number
-}
-
-/**
- * 限速配置
- */
-export interface RateLimitConfigForModelRouter {
-  /**
-   * <p>每分钟限制的请求数量</p><p>单位：次/分钟</p>
-   */
-  RPM?: number
-  /**
-   * <p>每分钟限制的Token数量</p><p>单位：个/分钟</p>
-   */
-  TPM?: number
-}
-
-/**
- * DescribeModelRouterQuota请求参数结构体
- */
-export interface DescribeModelRouterQuotaRequest {
-  /**
-   * <p>配额类型</p>
-   */
-  QuotaTypes: Array<string>
-  /**
-   * <p>要查询的资源ID</p>
-   */
-  ResourceIds?: Array<string>
-  /**
-   * <p>需要展示的字段</p><p>枚举值：</p><ul><li>Used： 已使用的配额数量</li><li>Available： 剩余的配额数量</li></ul>
-   */
-  DisplayFields?: Array<string>
-}
-
-/**
- * ModifyTargetWeight返回参数结构体
- */
-export interface ModifyTargetWeightResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeModelRouters请求参数结构体
- */
-export interface DescribeModelRoutersRequest {
-  /**
-   * <p>过滤条件</p><p>支持：ModelRouterName、ModelRouterType、Status、BudgetId、tag-key、tag:&lt;tag-key&gt;。</p>
-   */
-  Filters?: Array<Filter>
-  /**
-   * <p>每页数量，1-100，默认 20</p>
-   */
-  Limit?: number
-  /**
-   * <p>模型路由实例ID列表</p>
-   */
-  ModelRouterIds?: Array<string>
-  /**
-   * <p>分页偏移量，默认 0</p>
-   */
-  Offset?: number
-}
-
-/**
- * 可用区资源列表
- */
-export interface ZoneResource {
-  /**
-   * 主可用区，如"ap-guangzhou-1"。
-   */
-  MasterZone?: string
-  /**
-   * 资源列表。
-   */
-  ResourceSet?: Array<Resource>
-  /**
-   * 备可用区，如"ap-guangzhou-2"，单可用区时，备可用区为null。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SlaveZone?: string
-  /**
-   * IP版本，如IPv4，IPv6，IPv6_Nat。
-   */
-  IPVersion?: string
-  /**
-   * 可用区所属地域，如：ap-guangzhou
-   */
-  ZoneRegion?: string
-  /**
-   * 可用区是否是LocalZone可用区，如：false
-   */
-  LocalZone?: boolean
-  /**
-   * 可用区资源的类型，SHARED表示共享资源，EXCLUSIVE表示独占资源。
-   */
-  ZoneResourceType?: string
-  /**
-   * 可用区是否是EdgeZone可用区，如：false
-   */
-  EdgeZone?: boolean
-  /**
-   * 网络出口
-   */
-  Egress?: string
-}
-
-/**
- * DescribeTaskStatus请求参数结构体
- */
-export interface DescribeTaskStatusRequest {
-  /**
-   * 请求ID，即接口返回的 RequestId 参数。
-   */
-  TaskId?: string
-  /**
-   * 订单ID。
-注意：参数TaskId和DealName必须传一个。
-   */
-  DealName?: string
-}
-
-/**
- * DescribeTargetGroupInstanceStatus返回参数结构体
- */
-export interface DescribeTargetGroupInstanceStatusResponse {
-  /**
-   * 健康检查后端rs状态列表
-   */
-  TargetGroupInstanceSet?: Array<TargetGroupInstanceStatus>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeClassicalLBByInstanceId返回参数结构体
- */
-export interface DescribeClassicalLBByInstanceIdResponse {
-  /**
-   * 负载均衡相关信息列表。
-   */
-  LoadBalancerInfoList: Array<ClassicalLoadBalancerInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateRule返回参数结构体
- */
-export interface CreateRuleResponse {
-  /**
-   * 创建的转发规则的唯一标识数组。
-   */
-  LocationIds?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 跨域2.0云联网下子机和网卡信息
- */
-export interface CrossTargets {
-  /**
-   * 本地私有网络ID，即负载均衡的VpcId。
-   */
-  LocalVpcId?: string
-  /**
-   * 子机或网卡所属的私有网络ID。
-   */
-  VpcId?: string
-  /**
-   * 子机或网卡的IP地址
-   */
-  IP?: string
-  /**
-   * 子机或网卡所属的私有网络名称。
-   */
-  VpcName?: string
-  /**
-   * 子机的网卡ID。
-   */
-  EniId?: string
-  /**
-   * 子机实例ID。
-   */
-  InstanceId?: string
-  /**
-   * 子机实例名称。
-   */
-  InstanceName?: string
-  /**
-   * 子机或者网卡所属的地域。
-   */
-  Region?: string
-}
-
-/**
- * 一条转发规则的健康检查状态
- */
-export interface RuleHealth {
-  /**
-   * 转发规则ID
-   */
-  LocationId?: string
-  /**
-   * 转发规则的域名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Domain?: string
-  /**
-   * 转发规则的Url
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Url?: string
-  /**
-   * 高级路由规则ID
-   */
-  RuleId?: string
-  /**
-   * 本规则上绑定的后端服务的健康检查状态
-   */
-  Targets?: Array<TargetHealth>
-}
-
-/**
- * DescribeExclusiveClusters返回参数结构体
- */
-export interface DescribeExclusiveClustersResponse {
-  /**
-   * 集群列表。
-   */
-  ClusterSet?: Array<Cluster>
-  /**
-   * 集群总数量。
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyDomain请求参数结构体
- */
-export interface ModifyDomainRequest {
-  /**
-   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。
-   */
-  LoadBalancerId: string
-  /**
-   * 负载均衡监听器 ID， 可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。
-   */
-  ListenerId: string
-  /**
-   * 监听器下的某个旧域名， 可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 查询。
-   */
-  Domain: string
-  /**
-   * 新域名，	长度限制为：1-120。有三种使用格式：非正则表达式格式，通配符格式，正则表达式格式。非正则表达式格式只能使用字母、数字、‘-’、‘.’。通配符格式的使用 ‘*’ 只能在开头或者结尾。正则表达式以'~'开头。
-   */
-  NewDomain: string
-}
-
-/**
- * DisassociateCustomizedConfig返回参数结构体
- */
-export interface DisassociateCustomizedConfigResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * BatchModifyTargetTag请求参数结构体
- */
-export interface BatchModifyTargetTagRequest {
-  /**
-   * 负载均衡实例 ID。
-   */
-  LoadBalancerId: string
-  /**
-   * 要批量修改标签的列表。
-   */
-  ModifyList: Array<RsTagRule>
-}
-
-/**
- * RegisterTargetGroupInstances返回参数结构体
- */
-export interface RegisterTargetGroupInstancesResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 传统型负载均衡的后端信息
- */
-export interface ClassicalTargetInfo {
-  /**
-   * 后端实例ID
-   */
-  InstanceId: string
-  /**
-   * 权重，取值范围 [0, 100]
-   */
-  Weight?: number
-}
-
-/**
- * DescribeTargets请求参数结构体
- */
-export interface DescribeTargetsRequest {
-  /**
-   * 负载均衡实例 ID。
-   */
-  LoadBalancerId: string
-  /**
-   * 监听器 ID 列表。ID 数量上限为20个。
-   */
-  ListenerIds?: Array<string>
-  /**
-   * 监听器协议类型。
-   */
-  Protocol?: string
-  /**
-   * 监听器端口。
-   */
-  Port?: number
-  /**
-   * 查询负载均衡绑定的后端服务列表，过滤条件如下：
-<li> location-id - String - 是否必填：否 - （过滤条件）按照 规则ID 过滤，如："loc-12345678"。</li>
-<li> private-ip-address - String - 是否必填：否 - （过滤条件）按照 后端服务内网IP 过滤，如："172.16.1.1"。</li>
-<li> tag - String - 是否必填：否 - （过滤条件）按照 标签 过滤，如："tag-test"。</li>
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * 描述配额信息，所有配额均指当前地域下的配额。
- */
-export interface Quota {
-  /**
-   * 配额名称，取值范围：
-<li> TOTAL_OPEN_CLB_QUOTA：用户当前地域下的公网CLB配额 </li>
-<li> TOTAL_INTERNAL_CLB_QUOTA：用户当前地域下的内网CLB配额 </li>
-<li> TOTAL_LISTENER_QUOTA：一个CLB下的监听器配额 </li>
-<li> TOTAL_LISTENER_RULE_QUOTA：一个监听器下的转发规则配额 </li>
-<li> TOTAL_TARGET_BIND_QUOTA：一条转发规则下可绑定设备的配额 </li>
-<li> TOTAL_SNAT_IP_QUOTA： 一个CLB实例下跨地域2.0的SNAT IP配额 </li>
-<li>TOTAL_ISP_CLB_QUOTA：用户当前地域下的三网CLB配额 </li>
-<li>TOTAL_FULL_PORT_RANGE_LISTENER_QUOTA：一个CLB实例下的单个协议全端口段监听器配额</li>
-   */
-  QuotaId?: string
-  /**
-   * 当前使用数量，为 null 时表示无意义。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  QuotaCurrent?: number
-  /**
-   * 配额数量。
-   */
-  QuotaLimit?: number
-}
-
-/**
- * 可用区相关信息
- */
-export interface ZoneInfo {
-  /**
-   * 可用区数值形式的唯一ID，如：100001
-   */
-  ZoneId?: number
-  /**
-   * 可用区字符串形式的唯一ID，如：ap-guangzhou-1
-   */
-  Zone?: string
-  /**
-   * 可用区名称，如：广州一区
-   */
-  ZoneName?: string
-  /**
-   * 可用区所属地域，如：ap-guangzhou
-   */
-  ZoneRegion?: string
-  /**
-   * 可用区是否是LocalZone可用区，如：false
-   */
-  LocalZone?: boolean
-  /**
-   * 可用区是否是EdgeZone可用区，如：false
-   */
-  EdgeZone?: boolean
-}
-
-/**
- * RegisterTargetsWithClassicalLB返回参数结构体
- */
-export interface RegisterTargetsWithClassicalLBResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteModelRouters请求参数结构体
- */
-export interface DeleteModelRoutersRequest {
-  /**
-   * <p>模型路由实例ID列表</p>
-   */
-  ModelRouterIds?: Array<string>
-}
-
-/**
- * DescribeTargetGroups返回参数结构体
- */
-export interface DescribeTargetGroupsResponse {
-  /**
-   * 显示的结果数量。
-   */
-  TotalCount?: number
-  /**
-   * 显示的目标组信息集合。
-   */
-  TargetGroupSet?: Array<TargetGroupInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 负载均衡实例的健康检查状态
- */
-export interface LoadBalancerHealth {
-  /**
-   * 负载均衡实例ID
-   */
-  LoadBalancerId?: string
-  /**
-   * 负载均衡实例名称
-   */
-  LoadBalancerName?: string
-  /**
-   * 监听器列表
-   */
-  Listeners?: Array<ListenerHealth>
-}
-
-/**
- * InquiryPriceCreateLoadBalancer请求参数结构体
- */
-export interface InquiryPriceCreateLoadBalancerRequest {
-  /**
-   * 询价的负载均衡类型，OPEN为公网类型，INTERNAL为内网类型
-   */
-  LoadBalancerType: string
-  /**
-   * 询价的收费类型，POSTPAID为按量计费，"PREPAID"为预付费包年包月
-   */
-  LoadBalancerChargeType: string
-  /**
-   * 询价的收费周期。（仅包年包月支持该参数）
-   */
-  LoadBalancerChargePrepaid?: LBChargePrepaid
-  /**
-   * 询价的网络计费方式
-   */
-  InternetAccessible?: InternetAccessible
-  /**
-   * 询价的负载均衡实例个数，默认为1
-   */
-  GoodsNum?: number
-  /**
-   * 指定可用区询价。如：ap-guangzhou-1
-   */
-  ZoneId?: string
-  /**
-   * 包年包月询价时传性能容量型规格，如：<li>clb.c2.medium（标准型）</li><li>clb.c3.small（高阶型1）</li><li>clb.c3.medium（高阶型2）</li>
-<li>clb.c4.small（超强型1）</li><li>clb.c4.medium（超强型2）</li><li>clb.c4.large（超强型3）</li><li>clb.c4.xlarge（超强型4）</li>
-按量付费询价时传SLA
-   */
-  SlaType?: string
-  /**
-   * IP版本，可取值：IPV4、IPV6、IPv6FullChain，不区分大小写，默认值 IPV4。说明：取值为IPV6表示为IPV6 NAT64版本；取值为IPv6FullChain，表示为IPv6版本。
-   */
-  AddressIPVersion?: string
-  /**
-   * 仅适用于公网负载均衡。目前仅广州、上海、南京、济南、杭州、福州、北京、石家庄、武汉、长沙、成都、重庆地域支持静态单线 IP 线路类型，如需体验，请联系商务经理申请。申请通过后，即可选择中国移动（CMCC）、中国联通（CUCC）或中国电信（CTCC）的运营商类型，网络计费模式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。 如果不指定本参数，则默认使用BGP。可通过 DescribeResources 接口查询一个地域所支持的Isp。
-   */
-  VipIsp?: string
-}
-
-/**
- * DescribeQuota返回参数结构体
- */
-export interface DescribeQuotaResponse {
-  /**
-   * 配额列表
-   */
-  QuotaSet?: Array<Quota>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 用于目标组后端rs健康检查状态。
- */
-export interface TargetGroupInstanceStatus {
-  /**
-   * 后端rs的IP
-   */
-  InstanceIp?: string
-  /**
-   * 健康检查状态，参数值及含义如下：
-● on：表示探测中。
-● off：表示健康检查关闭。
-● health：表示健康。
-● unhealth：表示异常。
-   */
-  Status?: string
-  /**
-   * 实例ID
-   */
-  InstanceId?: string
-  /**
-   * 端口
-   */
-  Port?: number
-  /**
-   * 网卡ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EniId?: string
-}
-
-/**
- * 配置绑定关系
- */
-export interface BindItem {
-  /**
-   * 配置绑定的CLB ID
-   */
-  LoadBalancerId: string
-  /**
-   * 配置绑定的监听器ID
-   */
-  ListenerId: string
-  /**
-   * 配置绑定的域名
-   */
-  Domain: string
-  /**
-   * 配置绑定的规则
-   */
-  LocationId?: string
-}
-
-/**
- * CreateLoadBalancer请求参数结构体
- */
-export interface CreateLoadBalancerRequest {
-  /**
-   * <p>负载均衡实例的网络类型：<br>OPEN：公网属性， INTERNAL：内网属性。</p>
-   */
-  LoadBalancerType: string
-  /**
-   * <p>负载均衡实例的类型。1：通用的负载均衡实例，目前只支持传入1。</p>
-   */
-  Forward?: number
-  /**
-   * <p>负载均衡实例的名称，只在创建一个实例的时候才会生效。规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。注意：如果名称与系统中已有负载均衡实例的名称相同，则系统将会自动生成此次创建的负载均衡实例的名称。</p>
-   */
-  LoadBalancerName?: string
-  /**
-   * <p>负载均衡后端目标设备所属的网络 ID，如vpc-12345678，可以通过 <a href="https://cloud.tencent.com/document/product/215/15778">DescribeVpcs</a> 接口获取。 不填此参数则默认为DefaultVPC。创建内网负载均衡实例时，此参数必填。</p>
-   */
-  VpcId?: string
-  /**
-   * <p>在私有网络内购买内网负载均衡实例的情况下，必须指定子网 ID，内网负载均衡实例的 VIP 将从这个子网中产生。<br>创建内网负载均衡实例，或者创建 IPv6FullChain 版本的负载均衡实例，此参数必填。<br>创建公网IPv4负载均衡实例时，不支持指定该参数。</p>
-   */
-  SubnetId?: string
-  /**
-   * <p>负载均衡实例所属的项目 ID，默认项目 ID 为0。可以通过 <a href="https://cloud.tencent.com/document/api/651/78725">DescribeProject</a> 接口获取。不填此参数则视为默认项目。</p>
-   */
-  ProjectId?: number
-  /**
-   * <p>仅适用于公网负载均衡。IP版本，可取值：IPV4、IPV6、IPv6FullChain，不区分大小写，默认值 IPV4。说明：取值为IPV6表示为IPV6 NAT64版本；取值为IPv6FullChain，表示为IPv6版本。</p>
-   */
-  AddressIPVersion?: string
-  /**
-   * <p>创建负载均衡的个数，默认值 1。创建个数不能超过账号所能创建的最大值，默认创建最大值为20。</p>
-   */
-  Number?: number
-  /**
-   * <p>仅适用于公网且IP版本为IPv4的负载均衡。设置跨可用区容灾时的主可用区ID， 可用区 ID 和名称均支持，例如 100001 或 ap-guangzhou-1<br>注：主可用区是需要承载流量的可用区，备可用区默认不承载流量，主可用区不可用时才使用备可用区。</p>
-   */
-  MasterZoneId?: string
-  /**
-   * <p>仅适用于公网且IP版本为IPv4的负载均衡。可用区ID，可用区 ID 和名称均支持，指定可用区以创建负载均衡实例。如：100001 或 ap-guangzhou-1。</p>
-   */
-  ZoneId?: string
-  /**
-   * <p>网络计费模式，其中的最大出带宽，仅对内网属性的性能容量型实例和公网属性的所有实例生效。</p>
-   */
-  InternetAccessible?: InternetAccessible
-  /**
-   * <p>仅适用于公网负载均衡。目前仅广州、上海、南京、济南、杭州、福州、北京、石家庄、武汉、长沙、成都、重庆地域支持静态单线 IP 线路类型，如需体验，请联系商务经理申请。申请通过后，即可选择中国移动（CMCC）、中国联通（CUCC）或中国电信（CTCC）的运营商类型，网络计费模式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。 如果不指定本参数，则默认使用BGP。可通过 <a href="https://cloud.tencent.com/document/api/214/70213">DescribeResources</a>  接口查询一个地域所支持的Isp。</p>
-   */
-  VipIsp?: string
-  /**
-   * <p>购买负载均衡的同时，给负载均衡打上标签，最大支持20个标签键值对。</p>
-   */
-  Tags?: Array<TagInfo>
-  /**
-   * <p>指定VIP申请负载均衡。此参数选填，不填写此参数时自动分配VIP。IPv4和IPv6类型支持此参数，IPv6 NAT64类型不支持。<br>注意：当指定VIP创建内网实例、或公网IPv6 BGP实例时，若VIP不属于指定VPC子网的网段内时，会创建失败；若VIP已被占用，也会创建失败。</p>
-   */
-  Vip?: string
-  /**
-   * <p>带宽包ID，可以通过 <a href="https://cloud.tencent.com/document/api/215/19209">DescribeBandwidthPackages</a> 接口获取。指定此参数时，网络计费方式（InternetAccessible.InternetChargeType）只支持按带宽包计费（BANDWIDTH_PACKAGE），带宽包的属性即为其结算方式。非上移用户购买的 IPv6 负载均衡实例，且运营商类型非 BGP 时 ，不支持指定具体带宽包id。</p>
-   */
-  BandwidthPackageId?: string
-  /**
-   * <p>独占型实例信息。若创建独占型的内网负载均衡实例，则此参数必填。</p>
-   */
-  ExclusiveCluster?: ExclusiveCluster
-  /**
-   * <p>性能容量型规格。</p><ul><li>若需要创建性能容量型实例，则此参数必填，取值范围：<ul><li> clb.c2.medium：标准型规格 </li><li> clb.c3.small：高阶型1规格 </li><li> clb.c3.medium：高阶型2规格 </li><li> clb.c4.small：超强型1规格 </li><li> clb.c4.medium：超强型2规格 </li><li> clb.c4.large：超强型3规格 </li><li> clb.c4.xlarge：超强型4规格 </li></ul></li><li>中国站用户若需要创建共享型实例，则无需填写此参数。国际站用户不传该参数默认购买的是标准型实例。</li></ul>如需了解规格详情，请参见[实例规格对比](https://cloud.tencent.com/document/product/214/84689)。
-   */
-  SlaType?: string
-  /**
-   * <p>集群ID，集群标识，在需要配置公有云独占集群或本地专有集群时使用。公有云独占集群申请请<a href="https://console.cloud.tencent.com/workorder/category">提交工单</a>，本地专有集群请参考<a href="https://cloud.tencent.com/document/product/1346">本地专有集群</a>描述。</p>
-   */
-  ClusterIds?: Array<string>
-  /**
-   * <p>用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。</p>
-   */
-  ClientToken?: string
-  /**
-   * <p>是否支持绑定跨地域/跨Vpc绑定IP的功能。</p>
-   */
-  SnatPro?: boolean
-  /**
-   * <p>开启绑定跨地域/跨Vpc绑定IP的功能后，创建SnatIp。</p>
-   */
-  SnatIps?: Array<SnatIp>
-  /**
-   * <p>Stgw独占集群的标签。</p>
-   */
-  ClusterTag?: string
-  /**
-   * <p>仅适用于公网且IP版本为IPv4的负载均衡。设置跨可用区容灾时的备可用区ID，可用区 ID 和名称均支持，例如 100001 或 ap-guangzhou-1<br>注：备可用区是主可用区故障后，需要承载流量的可用区。可通过 <a href="https://cloud.tencent.com/document/api/214/70213">DescribeResources</a> 接口查询一个地域的主/备可用区的列表。【如果您需要体验该功能，请通过 <a href="https://console.cloud.tencent.com/workorder/category">工单申请</a>】</p>
-   */
-  SlaveZoneId?: string
-  /**
-   * <p>EIP 的唯一 ID，可以通过 <a href="https://cloud.tencent.com/document/product/215/16702">DescribeAddresses</a> 接口查询。形如：eip-qhx8udkc，仅适用于内网负载均衡绑定EIP。</p>
-   */
-  EipAddressId?: string
-  /**
-   * <p>Target是否放通来自CLB的流量。开启放通（true）：只验证CLB上的安全组；不开启放通（false）：需同时验证CLB和后端实例上的安全组。IPv6 CLB安全组默认放通，不需要传此参数。</p>
-   */
-  LoadBalancerPassToTarget?: boolean
-  /**
-   * <p>创建域名化负载均衡。</p>
-   */
-  DynamicVip?: boolean
-  /**
-   * <p>网络出口</p>
-   */
-  Egress?: string
-  /**
-   * <p>负载均衡实例的预付费相关属性</p>
-   */
-  LBChargePrepaid?: LBChargePrepaid
-  /**
-   * <p>负载均衡实例计费类型，取值：POSTPAID_BY_HOUR，PREPAID，默认是POSTPAID_BY_HOUR。</p><p>枚举值：</p><ul><li>POSTPAID_BY_HOUR： 按量计费</li><li>PREPAID： 包年包月</li></ul>
-   */
-  LBChargeType?: string
-  /**
-   * <p>七层访问日志主题ID</p>
-   */
-  AccessLogTopicId?: string
-  /**
-   * <p>是否开启七层高级路由</p>
-   */
-  AdvancedRoute?: boolean
-  /**
-   * <p>可用区亲和信息</p>
-   */
-  AvailableZoneAffinityInfo?: AvailableZoneAffinityInfo
-}
-
-/**
- * 加入了12306黑名单的IP
- */
-export interface BlockedIP {
-  /**
-   * 黑名单IP
-   */
-  IP?: string
-  /**
-   * 加入黑名单的时间
-   */
-  CreateTime?: string
-  /**
-   * 过期时间
-   */
-  ExpireTime?: string
-}
-
-/**
- * ModifyRule返回参数结构体
- */
-export interface ModifyRuleResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeClassicalLBTargets请求参数结构体
- */
-export interface DescribeClassicalLBTargetsRequest {
-  /**
-   * 负载均衡实例 ID。
-   */
-  LoadBalancerId: string
-}
-
-/**
- * HTTP/HTTPS监听器的转发规则（输出）
- */
-export interface RuleOutput {
-  /**
-   * 转发规则的 ID
-   */
-  LocationId?: string
-  /**
-   * 转发规则的域名。
-   */
-  Domain?: string
-  /**
-   * 转发规则的路径。
-   */
-  Url?: string
-  /**
-   * 会话保持时间
-   */
-  SessionExpireTime?: number
-  /**
-   * 健康检查信息
-   */
-  HealthCheck?: HealthCheck
-  /**
-   * 证书信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Certificate?: CertificateOutput
-  /**
-   * 规则的请求转发方式。
-WRR、LEAST_CONN、IP_HASH分别表示按权重轮询、最小连接数、IP Hash。
-   */
-  Scheduler?: string
-  /**
-   * 转发规则所属的监听器 ID
-   */
-  ListenerId?: string
-  /**
-   * 转发规则的重定向目标信息
-   */
-  RewriteTarget?: RewriteTarget
-  /**
-   * 是否开启gzip
-   */
-  HttpGzip?: boolean
-  /**
-   * 转发规则是否为自动创建
-   */
-  BeAutoCreated?: boolean
-  /**
-   * 是否作为默认域名
-   */
-  DefaultServer?: boolean
-  /**
-   * 是否开启Http2
-   */
-  Http2?: boolean
-  /**
-   * 负载均衡与后端服务之间的转发协议
-   */
-  ForwardType?: string
-  /**
-   * 转发规则的创建时间
-   */
-  CreateTime?: string
-  /**
-   * 后端服务器类型。NODE表示绑定普通节点，TARGETGROUP表示绑定目标组。
-   */
-  TargetType?: string
-  /**
-   * 绑定的目标组基本信息；当规则绑定目标组时，会返回该字段
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TargetGroup?: BasicTargetGroupInfo
-  /**
-   * WAF实例ID
-   */
-  WafDomainId?: string
-  /**
-   * TRPC被调服务器路由，ForwardType为TRPC时有效。目前暂未对外开放。
-   */
-  TrpcCallee?: string
-  /**
-   * TRPC调用服务接口，ForwardType为TRPC时有效。目前暂未对外开放。
-   */
-  TrpcFunc?: string
-  /**
-   * QUIC状态。QUIC_ACTIVE表示开启，QUIC_INACTIVE表示未开启。注意，只有HTTPS域名才能开启QUIC。
-   */
-  QuicStatus?: string
-  /**
-   * 转发规则的域名列表。
-   */
-  Domains?: Array<string>
-  /**
-   * 绑定的目标组列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TargetGroupList?: Array<BasicTargetGroupInfo>
-  /**
-   * OAuth配置状态信息。
-   */
-  OAuth?: OAuth
-  /**
-   * 自定义cookie名。
-   */
-  CookieName?: string
-}
-
-/**
- * 模型路由列表
- */
-export interface ModelRouterSet {
-  /**
-   * <p>模型路由实例关联的Budget ID。</p><p>未关联Budget时返回空字符串。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BudgetId?: string
-  /**
-   * <p>模型路由实例关联的Budget名称。</p><p>未关联Budget时返回空字符串。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BudgetName?: string
-  /**
-   * <p>集群信息</p>
-   */
-  ClusterInfo?: ClusterInfo
-  /**
-   * <p>创建时间</p>
-   */
-  CreatedTime?: string
-  /**
-   * <p>模型路由实例按Budget刷新周期划分的Credit使用情况。</p><p>当关联Budget配置多个刷新周期时，按1d、7d、30d顺序返回各周期用量；未关联Budget时返回空数组。</p>
-   */
-  CreditUsageSet?: Array<CreditUsage>
-  /**
-   * <p>模型路由实例域名</p>
-   */
-  Domain?: string
-  /**
-   * <p>模型路由ID</p>
-   */
-  ModelRouterId?: string
-  /**
-   * <p>模型路由名称</p><p>默认值：-</p>
-   */
-  ModelRouterName?: string
-  /**
-   * <p>模型路由类型</p><p>枚举值：</p><ul><li>Shared： 共享型</li><li>Enterprise： 企业级</li></ul>
-   */
-  ModelRouterType?: string
-  /**
-   * <p>修改时间</p>
-   */
-  ModifiedTime?: string
-  /**
-   * <p>模型路由实例网络类型</p><p>枚举值：</p><ul><li>Internet： 公网</li><li>Intranet： 内网</li></ul>
-   */
-  NetworkType?: string
-  /**
-   * <p>模型路由实例的安全状态</p><p>枚举值：</p><ul><li>Normal： 正常</li><li>Banned： 已封禁</li><li>Frozen： 已冻结</li></ul>
-   */
-  SecurityStatus?: string
-  /**
-   * <p>模型路由实例状态</p><p>枚举值：</p><ul><li>Active： 运行中</li><li>Provisioning： 创建中</li><li>Configuring： 变配中</li></ul>
-   */
-  Status?: string
-  /**
-   * <p>标签</p>
-   */
-  Tags?: Array<TagInfo>
-  /**
-   * <p>模型路由实例的计费状态</p><p>枚举值：</p><ul><li>Normal： 正常</li><li>Isolated： 已隔离</li></ul>
-   */
-  TradeStatus?: string
-  /**
-   * <p>模型路由实例VIP</p>
-   */
-  Vip?: string
-  /**
-   * <p>模型路由实例所属VPC的ID</p>
-   */
-  VpcId?: string
-}
-
-/**
- * InquiryPriceRenewLoadBalancer返回参数结构体
- */
-export interface InquiryPriceRenewLoadBalancerResponse {
-  /**
-   * 表示续费价格
-   */
-  Price?: Price
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeregisterFunctionTargets返回参数结构体
- */
-export interface DeregisterFunctionTargetsResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeCustomizedConfigList请求参数结构体
- */
-export interface DescribeCustomizedConfigListRequest {
-  /**
-   * 配置类型:CLB 负载均衡维度。 SERVER 域名维度。 LOCATION 规则维度。
-   */
-  ConfigType: string
-  /**
-   * 拉取页偏移，默认值0。
-   */
-  Offset?: number
-  /**
-   * 拉取数目，默认值20。
-   */
-  Limit?: number
-  /**
-   * 拉取指定配置名字，模糊匹配。
-   */
-  ConfigName?: string
-  /**
-   * 配置ID，可以通过 [DescribeCustomizedConfigList](https://cloud.tencent.com/document/api/214/60009) 接口查询。
-   */
-  UconfigIds?: Array<string>
-  /**
-   * 过滤条件如下：
-- loadbalancer-id
-按照【负载均衡 ID】进行过滤。实例计费模式例如：lb-9vxezxza。
-类型：String
-必选：否
-获取方式：[DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459)
-- vip
-按照【负载均衡VIP】进行过滤。网络计费模式例如："1.1.1.1","2204::22:3"。
-类型：String
-必选：否
-获取方式：[DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459)
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * DisassociateBudget请求参数结构体
- */
-export interface DisassociateBudgetRequest {
-  /**
-   * <p>Budget ID。</p>
-   */
-  BudgetId: string
-  /**
-   * <p>要解除关联的资源列表。</p>
-   */
-  Resources: Array<BudgetResource>
-}
-
-/**
- * AutoRewrite请求参数结构体
- */
-export interface AutoRewriteRequest {
-  /**
-   * 负载均衡实例ID。
-   */
-  LoadBalancerId: string
-  /**
-   * HTTPS:443监听器的ID。
-   */
-  ListenerId: string
-  /**
-   * HTTPS:443监听器下需要重定向的域名，若不填，则对HTTPS:443监听器下的所有域名都设置重定向。
-   */
-  Domains?: Array<string>
-  /**
-   * 重定向状态码，可取值301,302,307。
-   */
-  RewriteCodes?: Array<number | bigint>
-  /**
-   * 重定向是否携带匹配的URL。
-   */
-  TakeUrls?: Array<boolean>
-}
-
-/**
- * 闲置实例。
- */
-export interface IdleLoadBalancer {
-  /**
-   * 负载均衡ID
-   */
-  LoadBalancerId?: string
-  /**
-   * 负载均衡名字
-   */
-  LoadBalancerName?: string
-  /**
-   * 负载均衡所在地域
-   */
-  Region?: string
-  /**
-   * 负载均衡的vip
-   */
-  Vip?: string
-  /**
-   * 闲置原因。NO_RULES：没有规则，NO_RS：有规则没有绑定子机。
-   */
-  IdleReason?: string
-  /**
-   * 负载均衡实例的状态，包括
-0：创建中，1：正常运行。
-   */
-  Status?: number
-  /**
-   * 负载均衡类型标识，1：负载均衡，0：传统型负载均衡。
-   */
-  Forward?: number
-  /**
-   * 负载均衡域名
-   */
-  Domain?: string
-}
-
-/**
- * DescribeCrossTargets返回参数结构体
- */
-export interface DescribeCrossTargetsResponse {
-  /**
-   * 后端服务列表总数。
-   */
-  TotalCount?: number
-  /**
-   * 后端服务列表。
-   */
-  CrossTargetSet?: Array<CrossTargets>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * SCF云函数（Serverless Cloud Function）相关信息。
- */
-export interface FunctionInfo {
-  /**
-   * 函数命名空间
-   */
-  FunctionNamespace: string
-  /**
-   * 函数名称
-   */
-  FunctionName: string
-  /**
-   * 函数的版本名称或别名
-   */
-  FunctionQualifier: string
-  /**
-   * 标识 FunctionQualifier 参数的类型，可取值： VERSION（版本）、ALIAS（别名）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FunctionQualifierType?: string
-}
-
-/**
- * ModifyFunctionTargets返回参数结构体
- */
-export interface ModifyFunctionTargetsResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeLoadBalancerListByCertId返回参数结构体
- */
-export interface DescribeLoadBalancerListByCertIdResponse {
-  /**
-   * 证书ID，以及与该证书ID关联的负载均衡实例列表
-   */
-  CertSet?: Array<CertIdRelatedWithLoadBalancers>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyTargetGroupInstancesWeight返回参数结构体
- */
-export interface ModifyTargetGroupInstancesWeightResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeTargetGroups请求参数结构体
- */
-export interface DescribeTargetGroupsRequest {
-  /**
-   * 目标组ID，与Filters互斥。
-   */
-  TargetGroupIds?: Array<string>
-  /**
-   * 显示条数限制，默认为20。
-   */
-  Limit?: number
-  /**
-   * 显示的偏移起始量。
-   */
-  Offset?: number
-  /**
-   * 过滤条件数组，与TargetGroupIds互斥，支持 TargetGroupVpcId（私有网络 ID）和 TargetGroupName（目标组名称）以及 Tag（标签）。
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * DescribeTaskStatus返回参数结构体
- */
-export interface DescribeTaskStatusResponse {
-  /**
-   * 任务的当前状态。 0：成功，1：失败，2：进行中。
-   */
-  Status?: number
-  /**
-   * 由负载均衡实例唯一 ID 组成的数组。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LoadBalancerIds?: Array<string>
-  /**
-   * 辅助描述信息，如失败原因等。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Message?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * BatchRegisterTargets返回参数结构体
- */
-export interface BatchRegisterTargetsResponse {
-  /**
-   * 绑定失败的监听器ID，如为空表示全部绑定成功。
-   */
-  FailListenerIdSet?: Array<string>
-  /**
-   * 绑定失败错误原因信息。
-   */
-  Message?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyLoadBalancerAttributes请求参数结构体
- */
-export interface ModifyLoadBalancerAttributesRequest {
-  /**
-   * <p>负载均衡的唯一ID，可以通过 <a href="https://cloud.tencent.com/document/product/214/30685">DescribeLoadBalancers</a> 接口获取。</p>
-   */
-  LoadBalancerId: string
-  /**
-   * <p>负载均衡实例名称，规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。</p>
-   */
-  LoadBalancerName?: string
-  /**
-   * <p>设置负载均衡跨地域绑定1.0的后端服务信息</p>
-   */
-  TargetRegionInfo?: TargetRegionInfo
-  /**
-   * <p>网络计费相关参数</p>
-   */
-  InternetChargeInfo?: InternetAccessible
-  /**
-   * <p>Target是否放通来自CLB的流量。<br>开启放通（true）：只验证CLB上的安全组；<br>不开启放通（false）：需同时验证CLB和后端实例上的安全组。<br>不填则不修改。</p>
-   */
-  LoadBalancerPassToTarget?: boolean
-  /**
-   * <p>不同计费模式之间的切换：0表示不切换，1表示预付费和后付费切换，2表示后付费之间切换。默认值：0</p>
-   */
-  SwitchFlag?: number
-  /**
-   * <p>是否开启跨地域绑定2.0功能。不填则不修改。</p>
-   */
-  SnatPro?: boolean
-  /**
-   * <p>是否开启删除保护，不填则不修改。</p>
-   */
-  DeleteProtect?: boolean
-  /**
-   * <p>将负载均衡二级域名由mycloud.com改为tencentclb.com，子域名也会变换，修改后mycloud.com域名将失效。不填则不修改。</p>
-   */
-  ModifyClassicDomain?: boolean
-  /**
-   * <p>关联的终端节点Id，可通过<a href="https://cloud.tencent.com/document/product/215/54679">DescribeVpcEndPoint</a>接口查询。传空字符串代表解除关联。</p>
-   */
-  AssociateEndpoint?: string
-}
-
-/**
- * InquiryPriceModifyLoadBalancer返回参数结构体
- */
-export interface InquiryPriceModifyLoadBalancerResponse {
-  /**
-   * 描述价格信息
-   */
-  Price?: Price
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeLBListeners请求参数结构体
- */
-export interface DescribeLBListenersRequest {
-  /**
-   * 需要查询的内网ip列表
-   */
-  Backends: Array<LbRsItem>
-}
-
-/**
- * 升级为性能容量型参数
- */
-export interface SlaUpdateParam {
-  /**
-   * 负载均衡实例 ID。
-可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
-   */
-  LoadBalancerId: string
-  /**
-   * 性能容量型规格，取值范围：
-<li> clb.c2.medium：标准型规格 </li>
-<li> clb.c3.small：高阶型1规格 </li>
-<li> clb.c3.medium：高阶型2规格 </li>
-<li> clb.c4.small：超强型1规格 </li>
-<li> clb.c4.medium：超强型2规格 </li>
-<li> clb.c4.large：超强型3规格 </li>
-<li> clb.c4.xlarge：超强型4规格 </li>如需了解规格详情，请参见[实例规格对比](https://cloud.tencent.com/document/product/214/84689)
-   */
-  SlaType: string
-}
-
-/**
- * 转发目标，即绑定在负载均衡上的后端服务
- */
-export interface Target {
-  /**
-   * 后端服务的监听端口。
-注意：绑定CVM（云服务器）或ENI（弹性网卡）时必传此参数
-   */
-  Port: number
-  /**
-   * 后端服务的类型，可取：CVM（云服务器）、ENI（弹性网卡）；作为入参时，目前本参数暂不生效。
-   */
-  Type?: string
-  /**
-   * 绑定CVM时需要传入此参数，代表CVM的唯一 ID，可通过 DescribeInstances 接口返回字段中的 InstanceId 字段获取。表示绑定主网卡主IPv4地址；以下场景都不支持指定InstanceId：绑定非CVM，绑定CVM上的辅助网卡IP，通过跨域2.0绑定CVM，以及绑定CVM的IPv6地址等。
-注意：参数 InstanceId、EniIp 有且只能传入其中一个参数。
-   */
-  InstanceId?: string
-  /**
-   * 后端服务修改后的转发权重，取值范围：[0, 100]，默认为 10。此参数的优先级高于[RsWeightRule](https://cloud.tencent.com/document/api/214/30694#RsWeightRule)中的Weight参数，即最终的权重值以此Weight参数值为准，仅当此Weight参数为空时，才以RsWeightRule中的Weight参数为准。
-   */
-  Weight?: number
-  /**
-   * 绑定IP时需要传入此参数，支持弹性网卡的IP和其他内网IP，如果是弹性网卡则必须先绑定至CVM，然后才能绑定到负载均衡实例。
-注意：参数 InstanceId、EniIp 有且只能传入其中一个参数。如果绑定双栈IPV6子机，则必须传该参数。如果是跨地域绑定，则必须传该参数，不支持传InstanceId参数。
-   */
-  EniIp?: string
-  /**
-   * 标签。
-   */
-  Tag?: string
-}
-
-/**
- * DescribeLoadBalancerTraffic请求参数结构体
- */
-export interface DescribeLoadBalancerTrafficRequest {
-  /**
-   * 负载均衡所在地域，不传默认返回所有地域负载均衡。
-   */
-  LoadBalancerRegion?: string
-}
-
-/**
- * DescribeBlockIPList请求参数结构体
- */
-export interface DescribeBlockIPListRequest {
-  /**
-   * 负载均衡实例 ID。
-   */
-  LoadBalancerId: string
-  /**
-   * 数据偏移量，默认为 0。
-   */
-  Offset?: number
-  /**
-   * 返回IP的最大个数，默认为 100000。
-   */
-  Limit?: number
-}
-
-/**
- * MigrateClassicalLoadBalancers返回参数结构体
- */
-export interface MigrateClassicalLoadBalancersResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 证书ID，以及与该证书ID关联的负载均衡实例列表
- */
-export interface CertIdRelatedWithLoadBalancers {
-  /**
-   * 证书ID
-   */
-  CertId?: string
-  /**
-   * 与证书关联的负载均衡实例列表
-   */
-  LoadBalancers?: Array<LoadBalancer>
-}
-
-/**
- * DescribeTargets返回参数结构体
- */
-export interface DescribeTargetsResponse {
-  /**
-   * 监听器后端绑定的机器信息。
-   */
-  Listeners?: Array<ListenerBackend>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeUserGroups请求参数结构体
- */
-export interface DescribeUserGroupsRequest {
-  /**
-   * <p>模型路由实例ID。</p>
-   */
-  ModelRouterId: string
-  /**
-   * <p>用户组ID列表，用于按ID过滤，单次最多100个；可包含「未分组」虚拟分组 ugrp-ungrouped。</p>
-   */
-  UserGroupIds?: Array<string>
-  /**
-   * <p>过滤列表。支持：UserGroupName、Status、tag-key、tag:&lt;tag-key&gt;。</p>
-   */
-  Filters?: Array<Filter>
-  /**
-   * <p>本次查询限制的数量</p><p>取值范围：[1, 100]</p><p>默认值：20</p>
-   */
-  Limit?: number
-  /**
-   * <p>本次查询偏移量</p><p>默认值：0</p>
-   */
-  Offset?: number
-}
-
-/**
- * DescribeClassicalLBHealthStatus返回参数结构体
- */
-export interface DescribeClassicalLBHealthStatusResponse {
-  /**
-   * 后端健康状态列表。
-   */
-  HealthList?: Array<ClassicalHealth>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyLoadBalancerSla返回参数结构体
- */
-export interface ModifyLoadBalancerSlaResponse {
-  /**
-   * 订单号。
-   */
-  DealName?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeClsLogSet请求参数结构体
- */
-export type DescribeClsLogSetRequest = null
-
-/**
- * 监听器的信息
- */
-export interface Listener {
-  /**
-   * <p>负载均衡监听器 ID</p>
-   */
-  ListenerId?: string
-  /**
-   * <p>监听器协议，可选值：TCP、UDP、HTTP、HTTPS、TCP_SSL、QUIC</p>
-   */
-  Protocol?: string
-  /**
-   * <p>监听器端口，端口范围：1-65535</p>
-   */
-  Port?: number
-  /**
-   * <p>监听器绑定的证书信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Certificate?: CertificateOutput
-  /**
-   * <p>监听器的健康检查信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HealthCheck?: HealthCheck
-  /**
-   * <p>请求的调度方式。 WRR、LEAST_CONN、IP_HASH分别表示按权重轮询、最小连接数、IP Hash。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Scheduler?: string
-  /**
-   * <p>会话保持时间，单位：秒。可选值：30~3600，默认 0，默认不开启。此参数仅适用于TCP/UDP监听器。</p><p>单位：秒</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SessionExpireTime?: number
-  /**
-   * <p>是否开启SNI特性，1：表示开启，0：表示不开启（本参数仅对于HTTPS监听器有意义）</p>
-   */
-  SniSwitch?: number
-  /**
-   * <p>监听器下的全部转发规则（本参数仅对于HTTP/HTTPS监听器有意义）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Rules?: Array<RuleOutput>
-  /**
-   * <p>监听器的名称</p>
-   */
-  ListenerName?: string
-  /**
-   * <p>监听器的创建时间。</p>
-   */
-  CreateTime?: string
-  /**
-   * <p>端口段结束端口，端口范围：2-65535</p>
-   */
-  EndPort?: number
-  /**
-   * <p>后端服务器类型，可选值：NODE、POLARIS、TARGETGROUP、TARGETGROUP-V2</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TargetType?: string
-  /**
-   * <p>绑定的目标组基本信息；当监听器绑定目标组时，会返回该字段</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TargetGroup?: BasicTargetGroupInfo
-  /**
-   * <p>会话保持类型。NORMAL表示默认会话保持类型。QUIC_CID 表示根据Quic Connection ID做会话保持。</p>
-   */
-  SessionType?: string
-  /**
-   * <p>是否开启长连接，1开启，0关闭，（本参数仅对于HTTP/HTTPS监听器有意义）</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  KeepaliveEnable?: number
-  /**
-   * <p>仅支持Nat64 CLB TCP监听器</p>
-   */
-  Toa?: boolean
-  /**
-   * <p>重新调度功能，解绑后端服务开关，打开此开关，当解绑后端服务时触发重新调度。仅TCP/UDP监听器支持。</p>
-   */
-  DeregisterTargetRst?: boolean
-  /**
-   * <p>监听器的属性</p>
-   */
-  AttrFlags?: Array<string>
-  /**
-   * <p>绑定的目标组列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TargetGroupList?: Array<BasicTargetGroupInfo>
-  /**
-   * <p>监听器最大连接数，-1表示监听器维度不限速。</p>
-   */
-  MaxConn?: number
-  /**
-   * <p>监听器最大新增连接数，-1表示监听器维度不限速。</p>
-   */
-  MaxCps?: number
-  /**
-   * <p>空闲连接超时时间，仅支持TCP监听器。默认值:900；共享型实例和独占型实例取值范围：300～900，性能容量型实例取值范围:300～1980。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IdleConnectTimeout?: number
-  /**
-   * <p>重新调度触发持续时间，取值0~3600s。仅TCP/UDP监听器支持。触发重新调度后，长连接将会在设置的调度时间内断开并完成重新分配。</p><p>单位：秒</p>
-   */
-  RescheduleInterval?: number
-  /**
-   * <p>数据压缩模式</p>
-   */
-  DataCompressMode?: string
-  /**
-   * <p>重新调度启动时间，配置了重新调度启动时间后，会在启动时间到达时触发重新调度。</p>
-   */
-  RescheduleStartTime?: number
-}
-
-/**
- * 异步任务信息
- */
-export interface Job {
-  /**
-   * <p>接口名称</p>
-   */
-  ApiName?: string
-  /**
-   * <p>请求ID</p>
-   */
-  RequestId?: string
-  /**
-   * <p>异步任务状态</p><p>枚举值：</p><ul><li>Processing： 进行中</li><li>Succeeded： 成功</li><li>Failed： 失败</li></ul>
-   */
-  Status?: string
-  /**
-   * <p>资源ID</p>
-   */
-  ResourceIds?: Array<string>
-}
-
-/**
- * Credit使用情况。该结构用于 CreditUsageSet 数组中的逐周期用量。
- */
-export interface CreditUsage {
-  /**
-   * <p>Budget刷新周期。</p><p>枚举值：</p><ul><li>1d：按天刷新</li><li>7d：按周刷新</li><li>30d：按月刷新</li></ul><p>仅在 CreditUsageSet 数组元素中返回。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BudgetDuration?: string
-  /**
-   * <p>下次刷新时间。</p><p>用户组关联Budget且Budget设置重置周期时返回；未关联Budget或未设置重置周期时为空。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BudgetResetAt?: string
-  /**
-   * <p>Credit上限。</p><p>用户组关联Budget且Budget设置最大预算时返回；未设置最大预算时为空。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Limit?: number
-  /**
-   * <p>用户组已使用的Credit数量。</p>
-   */
-  Used?: number
-}
-
-/**
- * 规格可用性
- */
-export interface SpecAvailability {
-  /**
-   * 规格类型。
-<li>clb.c2.medium（标准型）</li><li>clb.c3.small（高阶型1）</li><li>clb.c3.medium（高阶型2）</li>
-<li>clb.c4.small（超强型1）</li><li>clb.c4.medium（超强型2）</li><li>clb.c4.large（超强型3）</li><li>clb.c4.xlarge（超强型4）</li><li>shared（共享型）</li>
-
-   */
-  SpecType?: string
-  /**
-   * 规格可用性。资源可用性，"Available"：可用，"Unavailable"：不可用
-   */
-  Availability?: string
-}
-
-/**
- * 配置内容
- */
-export interface ConfigListItem {
-  /**
-   * 配置ID
-   */
-  UconfigId?: string
-  /**
-   * 配置类型， 可选值：CLB（实例维度配置）， SERVER（服务维度配置），LOCATION（规则维度配置）
-   */
-  ConfigType?: string
-  /**
-   * 配置名字
-   */
-  ConfigName?: string
-  /**
-   * 配置内容
-   */
-  ConfigContent?: string
-  /**
-   * 配置的创建时间。
-格式：YYYY-MM-DD HH:mm:ss
-   */
-  CreateTimestamp?: string
-  /**
-   * 配置的修改时间。
-格式：YYYY-MM-DD HH:mm:ss
-   */
-  UpdateTimestamp?: string
-}
-
-/**
- * RegisterTargetsWithClassicalLB请求参数结构体
- */
-export interface RegisterTargetsWithClassicalLBRequest {
-  /**
-   * 负载均衡实例ID。
-   */
-  LoadBalancerId: string
-  /**
-   * 后端服务信息。
-   */
-  Targets: Array<ClassicalTargetInfo>
-}
-
-/**
- * CreateKeys返回参数结构体
- */
-export interface CreateKeysResponse {
-  /**
-   * <p>创建的Key的信息</p>
-   */
-  CreatedKeys?: Array<CreatedKey>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyDomainAttributes返回参数结构体
- */
-export interface ModifyDomainAttributesResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyLoadBalancersProject返回参数结构体
- */
-export interface ModifyLoadBalancersProjectResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ReplaceCertForLoadBalancers返回参数结构体
- */
-export interface ReplaceCertForLoadBalancersResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeBudgetAssociations返回参数结构体
- */
-export interface DescribeBudgetAssociationsResponse {
-  /**
-   * <p>Budget关联资源列表。</p>
-   */
-  AssociationSet?: Array<BudgetAssociation>
-  /**
-   * <p>符合条件的总数。</p>
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeModelRouterDetail请求参数结构体
- */
-export interface DescribeModelRouterDetailRequest {
+export interface RegenerateKeysRequest {
   /**
    * <p>模型路由实例ID</p>
    */
   ModelRouterId: string
-}
-
-/**
- * SetSecurityGroupForLoadbalancers返回参数结构体
- */
-export interface SetSecurityGroupForLoadbalancersResponse {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>Key的ID列表</p>
    */
-  RequestId?: string
-}
-
-/**
- * DeregisterTargetGroupInstances返回参数结构体
- */
-export interface DeregisterTargetGroupInstancesResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateBudget返回参数结构体
- */
-export interface CreateBudgetResponse {
-  /**
-   * <p>Budget ID。</p><p>创建请求提交后返回，可通过DescribeBudgets查询状态。</p>
-   */
-  BudgetId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteBudgets返回参数结构体
- */
-export interface DeleteBudgetsResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * RegisterTargets请求参数结构体
- */
-export interface RegisterTargetsRequest {
-  /**
-   * 负载均衡实例ID。
-   */
-  LoadBalancerId: string
-  /**
-   * 负载均衡监听器ID。
-   */
-  ListenerId: string
-  /**
-   * 待绑定的后端服务列表，数组长度最大支持20。
-   */
-  Targets: Array<Target>
-  /**
-   * 转发规则的ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口获取，当绑定后端服务到七层转发规则时，必须提供此参数或Domain+Url两者之一。
-   */
-  LocationId?: string
-  /**
-   * 目标转发规则的域名，提供LocationId参数时本参数不生效。
-   */
-  Domain?: string
-  /**
-   * 目标转发规则的URL，提供LocationId参数时本参数不生效。
-   */
-  Url?: string
-}
-
-/**
- * DisassociateCustomizedConfig请求参数结构体
- */
-export interface DisassociateCustomizedConfigRequest {
-  /**
-   * 配置ID
-   */
-  UconfigId: string
-  /**
-   * 解绑的列表
-   */
-  BindList: Array<BindItem>
-}
-
-/**
- * DeleteLoadBalancerListeners请求参数结构体
- */
-export interface DeleteLoadBalancerListenersRequest {
-  /**
-   * 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。
-   */
-  LoadBalancerId: string
-  /**
-   * 指定删除的监听器ID数组，最大为20个。若不填则删除负载均衡的所有监听器，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。
-   */
-  ListenerIds?: Array<string>
-}
-
-/**
- * AssociateTargetGroups返回参数结构体
- */
-export interface AssociateTargetGroupsResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateTopic请求参数结构体
- */
-export interface CreateTopicRequest {
-  /**
-   * 日志主题的名称。
-   */
-  TopicName: string
-  /**
-   * 主题分区Partition的数量，不传参默认创建1个，最大创建允许10个，分裂/合并操作会改变分区数量，整体上限50个。
-   */
-  PartitionCount?: number
-  /**
-   * 日志类型，ACCESS：访问日志，HEALTH：健康检查日志，默认ACCESS。
-   */
-  TopicType?: string
-  /**
-   * 存储时间，单位天，默认为 30。
-- 日志接入标准存储时，支持1至3600天，值为3640时代表永久保存。
-- 日志接入低频存储时，支持7至3600天，值为3640时代表永久保存。
-   */
-  Period?: number
-  /**
-   * 日志主题的存储类型，可选值 HOT（标准存储），COLD（低频存储）；默认为HOT。
-   */
-  StorageType?: string
-}
-
-/**
- * DeleteListener请求参数结构体
- */
-export interface DeleteListenerRequest {
-  /**
-   * 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。
-   */
-  LoadBalancerId: string
-  /**
-   * 要删除的监听器ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。
-   */
-  ListenerId: string
-}
-
-/**
- * 传统型负载均衡后端服务的健康状态
- */
-export interface ClassicalHealth {
-  /**
-   * 后端服务的内网 IP
-   */
-  IP?: string
-  /**
-   * 后端服务的端口
-   */
-  Port?: number
-  /**
-   * 负载均衡的监听端口
-   */
-  ListenerPort?: number
-  /**
-   * 转发协议
-   */
-  Protocol?: string
-  /**
-   * 健康检查结果，1 表示健康，0 表示不健康
-   */
-  HealthStatus?: number
-}
-
-/**
- * DescribeCustomizedConfigAssociateList请求参数结构体
- */
-export interface DescribeCustomizedConfigAssociateListRequest {
-  /**
-   * 配置ID，可以通过 [DescribeCustomizedConfigList](https://cloud.tencent.com/document/product/214/60009) 接口获取。
-   */
-  UconfigId?: string
-  /**
-   * 拉取绑定关系列表开始位置，默认值 0
-   */
-  Offset?: number
-  /**
-   * 拉取绑定关系列表数目，默认值 20
-   */
-  Limit?: number
-  /**
-   * 搜索域名，可以通过 [DescribeLoadBalancersDetail](https://cloud.tencent.com/document/product/214/46916) 接口返回值的 `Domain` 字段查询。
-   */
-  Domain?: string
-}
-
-/**
- * RenewLoadBalancers返回参数结构体
- */
-export interface RenewLoadBalancersResponse {
-  /**
-   * 订单号。
-   */
-  DealName?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyTargetPort返回参数结构体
- */
-export interface ModifyTargetPortResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * MigrateClassicalLoadBalancers请求参数结构体
- */
-export interface MigrateClassicalLoadBalancersRequest {
-  /**
-   * 传统型负载均衡ID数组
-   */
-  LoadBalancerIds: Array<string>
-  /**
-   * 独占集群信息
-   */
-  ExclusiveCluster?: ExclusiveCluster
-}
-
-/**
- * DescribeLoadBalancersDetail请求参数结构体
- */
-export interface DescribeLoadBalancersDetailRequest {
-  /**
-   * 返回负载均衡列表数目，默认20，最大值100。
-   */
-  Limit?: number
-  /**
-   * 返回负载均衡列表起始偏移量，默认0。
-   */
-  Offset?: number
-  /**
-   * 选择返回的Fields列表，系统仅会返回Fileds中填写的字段，可填写的字段详情请参见<a href="https://cloud.tencent.com/document/api/214/30694#LoadBalancerDetail">LoadBalancerDetail</a>。若未在Fileds填写相关字段，则此字段返回null。Fileds中默认添加LoadBalancerId和LoadBalancerName字段。
-   */
-  Fields?: Array<string>
-  /**
-   * 当Fields包含TargetId、TargetAddress、TargetPort、TargetWeight、ListenerId、Protocol、Port、LocationId、Domain、Url等Fields时，必选选择导出目标组的Target或者非目标组Target，取值范围NODE、GROUP。
-   */
-  TargetType?: string
-  /**
-   * 查询负载均衡详细信息列表条件，详细的过滤条件如下：
-- loadbalancer-id
-按照【负载均衡ID】进行过滤。例如：lb-rbw5skde。
-类型：String
-必选：否
-获取方式：[DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459)
-- project-id
-按照【项目ID】进行过滤。例如： "0"、"123"。
-类型：String
-必选：否
-获取方式：[DescribeProject](https://cloud.tencent.com/document/api/651/78725)
-- network
-按照【负载均衡网络类型】进行过滤。例如：Public。
-类型：String
-必选：否
-可选值：Private（内网）、Public（公网）
-- vip
-按照【负载均衡 VIP】进行过滤。例如："1.1.1.1","2204::22:3"。
-类型：String
-必选：否
-- vpcid
-按照【负载均衡所属 VPCID】进行过滤。例如："vpc-12345678"。
-类型：String
-必选：否
-获取方式：[DescribeZones](https://cloud.tencent.com/document/product/213/15707)
-- target-ip
-按照【后端目标内网 IP】进行过滤。例如："1.1.1.1","2203::214:4"。
-类型：String
-必选：否
-- zone
-按照【负载均衡所属的可用区】进行过滤。例如："ap-guangzhou-1"。
-类型：String
-必选：否
-获取方式：[DescribeZones](https://cloud.tencent.com/document/product/213/15707)
-- tag-key
-按照【负载均衡标签的标签键】进行过滤，例如："name"。
-类型：String
-必选：否
-获取方式：[DescribeTags](https://cloud.tencent.com/document/api/651/35316)
-- tag:*
-按照【负载均衡的标签】进行过滤，':' 后面跟的是标签键。如过滤标签键name，标签值zhangsan,lisi，{"Name": "tag:name","Values": ["zhangsan", "lisi"]}。
-类型：String
-必选：否
-获取方式：[DescribeTagKeys](https://cloud.tencent.com/document/api/651/35318)
-- fuzzy-search
-按照【负载均衡VIP，负载均衡名称】模糊搜索，例如："1.1"。
-类型：String
-必选：否
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * 目标组绑定的后端服务器
- */
-export interface TargetGroupBackend {
-  /**
-   * 目标组ID
-   */
-  TargetGroupId?: string
-  /**
-   * 后端服务的类型，可取：CVM、ENI（即将支持）
-   */
-  Type?: string
-  /**
-   * 后端服务的唯一 ID
-   */
-  InstanceId?: string
-  /**
-   * 后端服务的监听端口，全端口段监听器此字段返回0，代表无效端口，即不支持设置。
-   */
-  Port?: number
-  /**
-   * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
-   */
-  Weight?: number
-  /**
-   * 后端服务的外网 IP
-   */
-  PublicIpAddresses?: Array<string>
-  /**
-   * 后端服务的内网 IP
-   */
-  PrivateIpAddresses?: Array<string>
-  /**
-   * 后端服务的实例名称
-   */
-  InstanceName?: string
-  /**
-   * 后端服务被绑定的时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RegisteredTime?: string
-  /**
-   * 弹性网卡唯一ID
-   */
-  EniId?: string
-  /**
-   * 后端服务的可用区ID
-   */
-  ZoneId?: number
-}
-
-/**
- * DeregisterFunctionTargets请求参数结构体
- */
-export interface DeregisterFunctionTargetsRequest {
-  /**
-   * 负载均衡实例 ID。
-   */
-  LoadBalancerId: string
-  /**
-   * 负载均衡监听器 ID。
-   */
-  ListenerId: string
-  /**
-   * 待解绑的云函数列表。
-   */
-  FunctionTargets: Array<FunctionTarget>
-  /**
-   * 目标转发规则的 ID，当将云函数从七层转发规则上解绑时，必须输入此参数或 Domain+Url 参数。
-   */
-  LocationId?: string
-  /**
-   * 目标转发规则的域名，若已经输入 LocationId 参数，则本参数不生效。
-   */
-  Domain?: string
-  /**
-   * 目标转发规则的 URL，若已经输入 LocationId 参数，则本参数不生效。
-   */
-  Url?: string
-}
-
-/**
- * ModifyKeyAttributes返回参数结构体
- */
-export interface ModifyKeyAttributesResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeClassicalLBByInstanceId请求参数结构体
- */
-export interface DescribeClassicalLBByInstanceIdRequest {
-  /**
-   * 后端实例ID列表。
-   */
-  InstanceIds: Array<string>
-}
-
-/**
- * SCF云函数（Serverless Cloud Function）作为后端服务
- */
-export interface FunctionTarget {
-  /**
-   * 云函数相关信息
-   */
-  Function: FunctionInfo
-  /**
-   * 权重
-   */
-  Weight?: number
-}
-
-/**
- * ModifyBudgetAttributes请求参数结构体
- */
-export interface ModifyBudgetAttributesRequest {
-  /**
-   * <p>Budget ID。</p>
-   */
-  BudgetId: string
-  /**
-   * <p>预算配置数组。</p><p>数组长度最大为1。BudgetResetAt不支持作为入参设置。</p>
-   */
-  BudgetConfigs?: Array<BudgetConfigInput>
-  /**
-   * <p>Budget名称。</p>
-   */
-  BudgetName?: string
-  /**
-   * <p>Budget限速配置。</p>
-   */
-  RateLimitConfig?: RateLimitConfigForBudget
-}
-
-/**
- * InquiryPriceRefundLoadBalancer返回参数结构体
- */
-export interface InquiryPriceRefundLoadBalancerResponse {
-  /**
-   * 该参数表示对应的价格。
-   */
-  Price?: Price
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeResources返回参数结构体
- */
-export interface DescribeResourcesResponse {
-  /**
-   * 可用区支持的资源列表。
-   */
-  ZoneResourceSet?: Array<ZoneResource>
-  /**
-   * 可用区资源列表数目。
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  KeyIds?: Array<string>
 }
 
 /**
@@ -3649,2324 +1658,6 @@ export interface FallBackItem {
    * <p>默认回退模型列表</p>
    */
   DefaultFallBackModels?: Array<string>
-}
-
-/**
- * ModifyTargetGroupInstancesWeight请求参数结构体
- */
-export interface ModifyTargetGroupInstancesWeightRequest {
-  /**
-   * 目标组ID。
-   */
-  TargetGroupId: string
-  /**
-   * 待修改权重的服务器数组，在这个接口 Port 为必填项。
-   */
-  TargetGroupInstances: Array<TargetGroupInstance>
-}
-
-/**
- * ManualRewrite返回参数结构体
- */
-export interface ManualRewriteResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 重新生成的Key信息
- */
-export interface RegeneratedKey {
-  /**
-   * <p>Key的ID</p>
-   */
-  KeyId?: string
-  /**
-   * <p>重新生成的明文Key</p>
-   */
-  Key?: string
-}
-
-/**
- * ModifyBlockIPList请求参数结构体
- */
-export interface ModifyBlockIPListRequest {
-  /**
-   * 负载均衡实例ID
-   */
-  LoadBalancerIds: Array<string>
-  /**
-   * 操作类型，可取：
-<li> add_customized_field（首次设置header，开启黑名单功能）</li>
-<li> set_customized_field（修改header）</li>
-<li> del_customized_field（删除header）</li>
-<li> add_blocked（添加黑名单）</li>
-<li> del_blocked（删除黑名单）</li>
-<li> flush_blocked（清空黑名单）</li>
-   */
-  Type: string
-  /**
-   * 客户端真实IP存放的header字段名
-   */
-  ClientIPField: string
-  /**
-   * 封禁IP列表，单次操作数组最大长度支持200000
-   */
-  BlockIPList?: Array<string>
-  /**
-   * 过期时间，单位秒，默认值3600
-   */
-  ExpireTime?: number
-  /**
-   * 添加IP的策略，可取：fifo（如果黑名单容量已满，新加入黑名单的IP采用先进先出策略）
-   */
-  AddStrategy?: string
-}
-
-/**
- * CreateKeys请求参数结构体
- */
-export interface CreateKeysRequest {
-  /**
-   * <p>模型路由ID</p>
-   */
-  ModelRouterId: string
-  /**
-   * <p>需要绑定的预算信息，所有Key共用</p>
-   */
-  BudgetId?: string
-  /**
-   * <p>Key列表</p>
-   */
-  Keys?: Array<InputKeyInfo>
-  /**
-   * <p>批量创建Key的模式</p><p>枚举值：</p><ul><li>Generate： 平台生成Key</li><li>Import： 导入自带Key</li></ul><p>默认值：Generate</p>
-   */
-  Mode?: string
-  /**
-   * <p>限速信息，所有Key共用</p>
-   */
-  RateLimitConfig?: RateLimitConfigForKey
-  /**
-   * <p>标签。所有Key都会绑定该标签。</p>
-   */
-  Tags?: Array<TagInfo>
-  /**
-   * <p>需要关联的用户组ID</p>
-   */
-  UserGroupId?: string
-}
-
-/**
- * DescribeClusterResources返回参数结构体
- */
-export interface DescribeClusterResourcesResponse {
-  /**
-   * 集群中资源列表。
-   */
-  ClusterResourceSet?: Array<ClusterResource>
-  /**
-   * 集群中资源总数。
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyBudgetAttributes返回参数结构体
- */
-export interface ModifyBudgetAttributesResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyBlockIPList返回参数结构体
- */
-export interface ModifyBlockIPListResponse {
-  /**
-   * 异步任务的ID
-   */
-  JodId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeClusterResources请求参数结构体
- */
-export interface DescribeClusterResourcesRequest {
-  /**
-   * 返回集群中资源列表数目，默认为20，最大值为100。
-   */
-  Limit?: number
-  /**
-   * 返回集群中资源列表起始偏移量，默认为0。
-   */
-  Offset?: number
-  /**
-   * 查询集群中资源列表条件，详细的过滤条件如下：
-<li> cluster-id - String - 是否必填：否 - （过滤条件）按照 集群 的唯一ID过滤，如 ："tgw-12345678","stgw-12345678","vpcgw-12345678"。</li>
-<li> vip - String - 是否必填：否 - （过滤条件）按照vip过滤。</li>
-<li> loadbalancer-id - String - 是否必填：否 - （过滤条件）按照负载均衡唯一ID过滤。</li>
-<li> idle - String 是否必填：否 - （过滤条件）按照是否闲置过滤，如"True","False"。</li>
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * 限速配置
- */
-export interface RateLimitConfigForKey {
-  /**
-   * <p>最大并发请求数量</p><p>单位：次</p>
-   */
-  MaxParallelRequest?: number
-  /**
-   * <p>每分钟限制的请求数量</p><p>单位：次/分钟</p>
-   */
-  RPM?: number
-  /**
-   * <p>每分钟限制的Token数量</p><p>单位：个/分钟</p>
-   */
-  TPM?: number
-}
-
-/**
- * 查询类型
- */
-export interface LbRsItem {
-  /**
-   * vpc的字符串id，只支持字符串id。
-可以通过 [DescribeVpcs](https://cloud.tencent.com/document/api/215/15778) 接口查询。
-   */
-  VpcId: string
-  /**
-   * 需要查询后端的内网 IP，可以是 CVM 和弹性网卡。
-可以通过 [DescribeAddresses](https://cloud.tencent.com/document/product/215/16702) 接口查询。
-   */
-  PrivateIp: string
-}
-
-/**
- * DeleteKeys返回参数结构体
- */
-export interface DeleteKeysResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeClassicalLBHealthStatus请求参数结构体
- */
-export interface DescribeClassicalLBHealthStatusRequest {
-  /**
-   * 负载均衡实例ID。
-   */
-  LoadBalancerId: string
-  /**
-   * 负载均衡监听器ID。
-   */
-  ListenerId?: string
-}
-
-/**
- * DescribeListeners请求参数结构体
- */
-export interface DescribeListenersRequest {
-  /**
-   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/api/214/30685) 接口获取。
-   */
-  LoadBalancerId: string
-  /**
-   * 要查询的负载均衡监听器 ID 数组，最大为100个，可以通过 [DescribeListeners](https://cloud.tencent.com/document/api/214/30686) 接口获取。
-   */
-  ListenerIds?: Array<string>
-  /**
-   * 要查询的监听器协议类型，取值 TCP | UDP | HTTP | HTTPS | TCP_SSL | QUIC。
-   */
-  Protocol?: string
-  /**
-   * 要查询的监听器的端口，端口范围：1-65535
-   */
-  Port?: number
-}
-
-/**
- * DescribeCrossTargets请求参数结构体
- */
-export interface DescribeCrossTargetsRequest {
-  /**
-   * 返回后端服务列表数目，默认20，最大值100。
-   */
-  Limit?: number
-  /**
-   * 返回后端服务列表起始偏移量，默认0。
-   */
-  Offset?: number
-  /**
-   * 查询跨域2.0版本云联网后端子机和网卡服务列表条件，详细的过滤条件如下：
-<li> vpc-id - String - 是否必填：否 - （过滤条件）按照 本地私有网络ID，即负载均衡的VpcId 过滤，如："vpc-12345678"。</li>
-<li> ip - String - 是否必填：否 - （过滤条件）按照 后端服务ip 过滤，如："192.168.0.1"。</li>
-<li> listener-id - String - 是否必填：否 - （过滤条件）按照 监听器ID 过滤，如："lbl-12345678"。</li>
-<li> location-id - String - 是否必填：否 - （过滤条件）按照 七层监听器规则ID 过滤，如："loc-12345678"。</li>
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * CreateClsLogSet返回参数结构体
- */
-export interface CreateClsLogSetResponse {
-  /**
-   * 日志集的 ID。
-   */
-  LogsetId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * Budget预算配置入参
- */
-export interface BudgetConfigInput {
-  /**
-   * <p>预算刷新周期。</p><p>支持取值：</p><ul><li>1d：按天刷新</li><li>7d：按周刷新</li><li>30d：按月刷新</li></ul><p>不传时默认使用30d。同一个Budget下每种刷新周期最多配置一次。</p>
-   */
-  BudgetDuration?: string
-  /**
-   * <p>最大预算。</p><p>单位：credit。取值需大于0且不超过10000000000；不传时默认100000。</p>
-   */
-  MaxBudget?: number
-}
-
-/**
- * CreateUserGroup请求参数结构体
- */
-export interface CreateUserGroupRequest {
-  /**
-   * <p>模型路由实例ID。用户组将创建在该实例下。</p>
-   */
-  ModelRouterId: string
-  /**
-   * <p>用户组名称。必填。同一模型路由实例下名称唯一，长度不超过255个字符。</p>
-   */
-  UserGroupName: string
-  /**
-   * <p>建组时直接关联的预算 ID（须为已存在的 Budget）。关联后由该 Budget 统一管理本组的消费上限与限速。不传表示不关联预算，可建组后再用 AssociateBudget 关联。</p>
-   */
-  BudgetId?: string
-  /**
-   * <p>用户组意图路由白名单（ir-xxx）。每一项须为该实例已创建的意图路由名。命中意图路由名时其内部真实模型自动豁免白名单。为空表示不授权任何意图路由。</p>
-   */
-  IntentRouters?: Array<string>
-  /**
-   * <p>建组时同时绑定的已有 Key ID 列表，最多100个。每个 Key 须属于同一模型路由实例。建组与绑定为一个原子异步任务，任一 Key 失败则整组创建回滚。不传表示建空组。</p>
-   */
-  KeyIds?: Array<string>
-  /**
-   * <p>用户组真实模型白名单。每一项须为该实例已关联的模型名。为空表示不在用户组层限制真实模型（按实例层白名单生效）。</p>
-   */
-  Models?: Array<string>
-  /**
-   * <p>标签列表，最多50个。</p>
-   */
-  Tags?: Array<TagInfo>
-}
-
-/**
- * 批量创建的Key信息
- */
-export interface CreatedKey {
-  /**
-   * <p>明文Key</p>
-   */
-  Key?: string
-  /**
-   * <p>Key的ID</p>
-   */
-  KeyId?: string
-  /**
-   * <p>Key的名称</p>
-   */
-  KeyName?: string
-}
-
-/**
- * lb实例包年包月相关配置属性
- */
-export interface LBChargePrepaid {
-  /**
-   * 续费类型：AUTO_RENEW 自动续费，  MANUAL_RENEW 手动续费
-   */
-  RenewFlag?: string
-  /**
-   * 购买时长，单位：月
-   */
-  Period?: number
-}
-
-/**
- * 传统型负载均衡监听器信息
- */
-export interface ClassicalListener {
-  /**
-   * <p>负载均衡监听器ID</p>
-   */
-  ListenerId?: string
-  /**
-   * <p>负载均衡监听器端口</p>
-   */
-  ListenerPort?: number
-  /**
-   * <p>监听器后端转发端口</p>
-   */
-  InstancePort?: number
-  /**
-   * <p>监听器名称</p>
-   */
-  ListenerName?: string
-  /**
-   * <p>监听器协议类型</p>
-   */
-  Protocol?: string
-  /**
-   * <p>会话保持时间</p>
-   */
-  SessionExpire?: number
-  /**
-   * <p>是否开启了健康检查：1（开启）、0（关闭）</p>
-   */
-  HealthSwitch?: number
-  /**
-   * <p>响应超时时间</p><p>单位：秒</p>
-   */
-  TimeOut?: number
-  /**
-   * <p>检查间隔</p><p>单位：秒</p>
-   */
-  IntervalTime?: number
-  /**
-   * <p>健康阈值</p>
-   */
-  HealthNum?: number
-  /**
-   * <p>不健康阈值</p>
-   */
-  UnhealthNum?: number
-  /**
-   * <p>传统型公网负载均衡 监听器的请求均衡方法。空字符串或wrr 表示按权重轮询，ip_hash 表示根据访问的源 IP 进行一致性哈希方式来分发，least_conn表示按最小连接数。</p>
-   */
-  HttpHash?: string
-  /**
-   * <p>传统型公网负载均衡的 HTTP、HTTPS 监听器的健康检查返回码。具体可参考创建监听器中对该字段的解释</p>
-   */
-  HttpCode?: number
-  /**
-   * <p>传统型公网负载均衡的 HTTP、HTTPS 监听器的健康检查路径</p>
-   */
-  HttpCheckPath?: string
-  /**
-   * <p>传统型公网负载均衡的 HTTPS 监听器的认证方式</p>
-   */
-  SSLMode?: string
-  /**
-   * <p>传统型公网负载均衡的 HTTPS 监听器的服务端证书 ID</p>
-   */
-  CertId?: string
-  /**
-   * <p>传统型公网负载均衡的 HTTPS 监听器的客户端证书 ID</p>
-   */
-  CertCaId?: string
-  /**
-   * <p>监听器的状态，0 表示创建中，1 表示运行中</p>
-   */
-  Status?: number
-}
-
-/**
- * DeleteLoadBalancer请求参数结构体
- */
-export interface DeleteLoadBalancerRequest {
-  /**
-   * 要删除的负载均衡实例 ID 数组，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取，数组大小最大支持20。
-   */
-  LoadBalancerIds: Array<string>
-  /**
-   * 是否强制删除clb。true表示强制删除，false表示不是强制删除，需要做拦截校验。
-默认为false。
-以下几种情况会默认拦截删除操作，如果触发情况1、2但确认强制删除则需要传强制校验参数ForceDelete为true。
-1、删除后端绑定大于等于 20 个 RS 的实例时。
-2、删除后端有 RS 且 5 分钟 内“出/入带宽”峰值取大 > 10Mbps 的实例时。
-3、单地域内 5 分钟 内删除大于等于 30 个实例时。
-   */
-  ForceDelete?: boolean
-}
-
-/**
- * ModifyLoadBalancersProject请求参数结构体
- */
-export interface ModifyLoadBalancersProjectRequest {
-  /**
-   * 一个或多个待操作的负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
-列表支持最大长度为20。
-   */
-  LoadBalancerIds: Array<string>
-  /**
-   * 项目ID。可以通过 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 接口获取。
-   */
-  ProjectId: number
-}
-
-/**
- * AssociateCustomizedConfig请求参数结构体
- */
-export interface AssociateCustomizedConfigRequest {
-  /**
-   * 配置ID
-   */
-  UconfigId: string
-  /**
-   * 关联的server或location
-   */
-  BindList: Array<BindItem>
-}
-
-/**
- * 证书信息
- */
-export interface CertificateInput {
-  /**
-   * 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证。
-默认为 UNIDIRECTIONAL。
-   */
-  SSLMode?: string
-  /**
-   * 双向认证时，是否开启客户端认证，ON:开启，OPTIONAL:自适应，默认ON。
-   */
-  SSLVerifyClient?: string
-  /**
-   * 服务端证书的 ID，如果不填写此项则必须上传证书，包括 CertContent（服务端证书内容），CertKey（服务端证书密钥），CertName（服务端证书名称）。
-   */
-  CertId?: string
-  /**
-   * 客户端证书的 ID，当监听器采用双向认证，即 SSLMode=MUTUAL 时，如果不填写此项则必须上传客户端证书，包括 CertCaContent，CertCaName。
-   */
-  CertCaId?: string
-  /**
-   * 上传服务端证书的名称，如果没有 CertId，则此项必传。
-   */
-  CertName?: string
-  /**
-   * 上传服务端证书的 key，如果没有 CertId，则此项必传。
-   */
-  CertKey?: string
-  /**
-   * 上传服务端证书的内容，如果没有 CertId，则此项必传。
-   */
-  CertContent?: string
-  /**
-   * 上传客户端 CA 证书的名称，如果 SSLMode=MUTUAL，如果没有 CertCaId，则此项必传。
-   */
-  CertCaName?: string
-  /**
-   * 上传客户端证书的内容，如果 SSLMode=MUTUAL，如果没有 CertCaId，则此项必传。
-   */
-  CertCaContent?: string
-}
-
-/**
- * 模型路由相关配额
- */
-export interface ModelRouterQuota {
-  /**
-   * <p>配额名称</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  QuotaType?: string
-  /**
-   * <p>资源ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ResourceId?: string
-  /**
-   * <p>配额上限</p><p>单位：个</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Limit?: number
-  /**
-   * <p>已使用配额数量</p><p>单位：个</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Used?: number
-  /**
-   * <p>剩余配额数量</p><p>单位：个</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Available?: number
-}
-
-/**
- * SetLoadBalancerSecurityGroups请求参数结构体
- */
-export interface SetLoadBalancerSecurityGroupsRequest {
-  /**
-   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
-   */
-  LoadBalancerId: string
-  /**
-   * 安全组ID构成的数组，一个负载均衡实例最多可绑定50个安全组，如果要解绑所有安全组，可不传此参数。
-可以通过 [DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808) 接口查询。
-   */
-  SecurityGroups?: Array<string>
-}
-
-/**
- * DescribeCustomizedConfigAssociateList返回参数结构体
- */
-export interface DescribeCustomizedConfigAssociateListResponse {
-  /**
-   * 绑定关系列表
-   */
-  BindList?: Array<BindDetailItem>
-  /**
-   * 绑定关系总数目
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * RenewLoadBalancers请求参数结构体
- */
-export interface RenewLoadBalancersRequest {
-  /**
-   * 负载均衡实例唯一ID数组，最多支持20个。
-   */
-  LoadBalancerIds: Array<string>
-  /**
-   * 负载均衡实例的预付费相关属性。
-   */
-  LBChargePrepaid: LBChargePrepaid
-}
-
-/**
- * ModifyListener请求参数结构体
- */
-export interface ModifyListenerRequest {
-  /**
-   * <p>负载均衡实例ID，可以通过 <a href="https://cloud.tencent.com/document/product/214/30685">DescribeLoadBalancers</a> 接口查询。</p>
-   */
-  LoadBalancerId: string
-  /**
-   * <p>负载均衡监听器ID，可以通过 <a href="https://cloud.tencent.com/document/product/214/30686">DescribeListeners</a> 接口查询。</p>
-   */
-  ListenerId: string
-  /**
-   * <p>新的监听器名称。命名规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。</p>
-   */
-  ListenerName?: string
-  /**
-   * <p>会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。此参数仅适用于TCP/UDP监听器。</p>
-   */
-  SessionExpireTime?: number
-  /**
-   * <p>健康检查相关参数，此参数仅适用于TCP/UDP/TCP_SSL/QUIC监听器。</p>
-   */
-  HealthCheck?: HealthCheck
-  /**
-   * <p>证书相关信息，此参数仅适用于HTTPS/TCP_SSL/QUIC监听器；此参数和MultiCertInfo不能同时传入。</p>
-   */
-  Certificate?: CertificateInput
-  /**
-   * <p>监听器转发的方式。可选值：WRR（按权重轮询）、LEAST_CONN（按最小连接数）、IP_HASH（按 IP 地址哈希）<br>分别表示按权重轮询、最小连接数， 默认为 WRR。<br>使用场景：适用于TCP/UDP/TCP_SSL/QUIC监听器。七层监听器的均衡方式应在转发规则中修改。</p>
-   */
-  Scheduler?: string
-  /**
-   * <p>是否开启SNI特性，此参数仅适用于HTTPS监听器。默认0，表示不开启，1表示开启。注意：未开启SNI的监听器可以开启SNI；已开启SNI的监听器不能关闭SNI。</p>
-   */
-  SniSwitch?: number
-  /**
-   * <p>后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组。</p>
-   */
-  TargetType?: string
-  /**
-   * <p>是否开启长连接，此参数仅适用于HTTP/HTTPS监听器。<br>默认值0表示不开启，1表示开启。<br>若后端服务对连接数上限有限制，则建议谨慎开启。此功能目前处于内测中，如需使用，请提交 <a href="https://cloud.tencent.com/apply/p/tsodp6qm21">内测申请</a>。</p>
-   */
-  KeepaliveEnable?: number
-  /**
-   * <p>重新调度功能，解绑后端服务开关，打开此开关，当解绑后端服务时触发重新调度。仅TCP/UDP监听器支持。</p>
-   */
-  DeregisterTargetRst?: boolean
-  /**
-   * <p>会话保持类型。NORMAL表示默认会话保持类型。QUIC_CID表示根据Quic Connection ID做会话保持。QUIC_CID只支持UDP协议。<br>使用场景：适用于TCP/UDP/TCP_SSL/QUIC监听器。<br>默认为 NORMAL。</p>
-   */
-  SessionType?: string
-  /**
-   * <p>证书信息，支持同时传入不同算法类型的多本服务端证书；此参数仅适用于未开启SNI特性的HTTPS监听器。此参数和Certificate不能同时传入。</p>
-   */
-  MultiCertInfo?: MultiCertInfo
-  /**
-   * <p>监听器粒度并发连接数上限，当前仅性能容量型实例且仅TCP/UDP/TCP_SSL/QUIC监听器支持。取值范围：1-实例规格并发连接上限，其中-1表示关闭监听器粒度并发连接数限速。基础网络实例不支持该参数。<br>默认为 -1，表示不限速。</p>
-   */
-  MaxConn?: number
-  /**
-   * <p>监听器粒度新建连接数上限，当前仅性能容量型实例且仅TCP/UDP/TCP_SSL/QUIC监听器支持。取值范围：1-实例规格新建连接上限，其中-1表示关闭监听器粒度新建连接数限速。基础网络实例不支持该参数。<br>默认为 -1 表示不限速。</p>
-   */
-  MaxCps?: number
-  /**
-   * <p>空闲连接超时时间，此参数仅适用于TCP/UDP监听器。如需设置超过1980s，请通过 <a href="https://console.cloud.tencent.com/workorder/category">工单申请</a>,最大可设置到3600s。</p><p>取值范围：[10, 1980]</p><p>单位：秒</p><p>默认值：900</p><p>TCP监听器默认值：900，UDP监听器默认值：300s。取值范围：共享型实例和独占型实例支持：10～900，性能容量型实例支持：10~1980。</p>
-   */
-  IdleConnectTimeout?: number
-  /**
-   * <p>TCP_SSL和QUIC是否支持PP</p>
-   */
-  ProxyProtocol?: boolean
-  /**
-   * <p>是否开启SNAT（源IP替换），True（开启）、False（关闭）。默认为关闭。注意：SnatEnable开启时会替换客户端源IP，此时<code>透传客户端源IP</code>选项关闭，反之亦然。</p>
-   */
-  SnatEnable?: boolean
-  /**
-   * <p>数据压缩模式</p><p>枚举值：</p><ul><li>transparent： 透明模式（默认值）</li><li>compatibility： 兼容模式（开启 gzip 兼容压缩配置）</li></ul>
-   */
-  DataCompressMode?: string
-  /**
-   * <p>重新调度功能，权重调为0开关，打开此开关，后端服务器权重调为0时触发重新调度。仅TCP/UDP监听器支持。</p>
-   */
-  RescheduleTargetZeroWeight?: boolean
-  /**
-   * <p>重新调度功能，健康检查异常开关，打开此开关，后端服务器健康检查异常时触发重新调度。仅TCP/UDP监听器支持。</p>
-   */
-  RescheduleUnhealthy?: boolean
-  /**
-   * <p>重新调度功能，扩容后端服务开关，打开此开关，后端服务器增加或者减少时触发重新调度。仅TCP/UDP监听器支持。</p>
-   */
-  RescheduleExpandTarget?: boolean
-  /**
-   * <p>重新调度触发开始时间，取值0~3600s。仅TCP/UDP监听器支持。</p>
-   */
-  RescheduleStartTime?: number
-  /**
-   * <p>重新调度触发持续时间，取值0~3600s。仅TCP/UDP监听器支持。</p>
-   */
-  RescheduleInterval?: number
-}
-
-/**
- * RegenerateKeys返回参数结构体
- */
-export interface RegenerateKeysResponse {
-  /**
-   * <p>重新生成后的Key的信息</p>
-   */
-  RegeneratedKeys?: Array<RegeneratedKey>
-  /**
-   * <p>重新生成失败的Key的ID列表</p>
-   */
-  FailedKeyIds?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 创建Key的信息
- */
-export interface InputKeyInfo {
-  /**
-   * <p>Key的名称</p>
-   */
-  KeyName?: string
-  /**
-   * <p>导入的明文Key</p><p>仅允许导入Key模式下输入</p>
-   */
-  PlainKey?: string
-}
-
-/**
- * 负载均衡实例所绑定的后端服务的信息，包括所属地域、所属网络。
- */
-export interface TargetRegionInfo {
-  /**
-   * Target所属地域，如 ap-guangzhou
-   */
-  Region: string
-  /**
-   * Target所属网络，私有网络格式如 vpc-abcd1234，如果是基础网络，则为"0"
-   */
-  VpcId: string
-  /**
-   * Target所属网络，私有网络格式如86323，如果是基础网络，则为0
-   */
-  NumericalVpcId?: number
-}
-
-/**
- * DescribeAsyncJobs请求参数结构体
- */
-export interface DescribeAsyncJobsRequest {
-  /**
-   * <p>请求ID列表</p>
-   */
-  RequestIds?: Array<string>
-  /**
-   * <p>分页游标</p>
-   */
-  NextToken?: string
-  /**
-   * <p>本次查询最大数量</p><p>取值范围：[1, 100]</p><p>默认值：20</p>
-   */
-  MaxResults?: number
-}
-
-/**
- * SetCustomizedConfigForLoadBalancer请求参数结构体
- */
-export interface SetCustomizedConfigForLoadBalancerRequest {
-  /**
-   * 操作类型。
-- ADD：创建
-- DELETE：删除
-- UPDATE：修改
-- BIND：绑定
-- UNBIND：解绑
-   */
-  OperationType: string
-  /**
-   * 个性化配置ID。除了创建个性化配置外，必传此字段，如：pz-1234abcd
-   */
-  UconfigId?: string
-  /**
-   * 个性化配置内容。创建个性化配置或修改个性化配置的内容时，必传此字段。
-具体限制查看 [七层个性化配置](https://cloud.tencent.com/document/product/214/15171)
-   */
-  ConfigContent?: string
-  /**
-   * 个性化配置名称。创建个性化配置或修改个性化配置的名字时，必传此字段。
-   */
-  ConfigName?: string
-  /**
-   * 负载均衡实例ID。绑定解绑时，必传此字段。
-可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
-   */
-  LoadBalancerIds?: Array<string>
-  /**
-   * 标签
-   */
-  Tags?: Array<TagInfo>
-}
-
-/**
- * CreateListener返回参数结构体
- */
-export interface CreateListenerResponse {
-  /**
-   * <p>创建的监听器的唯一标识数组。</p>
-   */
-  ListenerIds?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateTargetGroup返回参数结构体
- */
-export interface CreateTargetGroupResponse {
-  /**
-   * <p>创建目标组后生成的id</p>
-   */
-  TargetGroupId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeModelRouterDetail返回参数结构体
- */
-export interface DescribeModelRouterDetailResponse {
-  /**
-   * <p>模型路由实例详情</p>
-   */
-  ModelRouter?: ModelRouterDetail
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * AssociateCustomizedConfig返回参数结构体
- */
-export interface AssociateCustomizedConfigResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateLoadBalancerSnatIps返回参数结构体
- */
-export interface CreateLoadBalancerSnatIpsResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyUserGroupAttributes返回参数结构体
- */
-export interface ModifyUserGroupAttributesResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 负载均衡信息
- */
-export interface ClassicalLoadBalancerInfo {
-  /**
-   * 后端实例ID
-   */
-  InstanceId?: string
-  /**
-   * 负载均衡实例ID列表
-   */
-  LoadBalancerIds?: Array<string>
-}
-
-/**
- * CreateKey返回参数结构体
- */
-export interface CreateKeyResponse {
-  /**
-   * <p>Key的ID</p>
-   */
-  KeyId?: string
-  /**
-   * <p>返回的真实Key</p>
-   */
-  Key?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeListeners返回参数结构体
- */
-export interface DescribeListenersResponse {
-  /**
-   * 监听器列表。
-   */
-  Listeners?: Array<Listener>
-  /**
-   * 总的监听器个数（根据端口、协议、监听器ID过滤后）。
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 负载均衡的操作保护信息
- */
-export interface LBOperateProtectInfo {
-  /**
-   * 负载均衡实例 ID。
-   */
-  LoadBalancerId: string
-  /**
-   * 保护状态，true：表示开启了操作保护，false：表示未开启操作保护。
-   */
-  ProtectState: boolean
-  /**
-   * 操作保护的设置uin。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OperatorUin: string
-  /**
-   * 设置操作保护时的描述信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Description: string
-  /**
-   * 最后修改时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ModifyTime: string
-}
-
-/**
- * RegisterFunctionTargets返回参数结构体
- */
-export interface RegisterFunctionTargetsResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateTopic返回参数结构体
- */
-export interface CreateTopicResponse {
-  /**
-   * 日志主题的 ID。
-   */
-  TopicId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateRule请求参数结构体
- */
-export interface CreateRuleRequest {
-  /**
-   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取
-   */
-  LoadBalancerId: string
-  /**
-   * 监听器 ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口获取
-   */
-  ListenerId: string
-  /**
-   * 新建转发规则的信息。
-   */
-  Rules: Array<RuleInput>
-}
-
-/**
- * DescribeModelRouters返回参数结构体
- */
-export interface DescribeModelRoutersResponse {
-  /**
-   * <p>模型路由实例列表</p>
-   */
-  ModelRouterSet?: Array<ModelRouterSet>
-  /**
-   * <p>符合条件的总数</p>
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyKeyAttributes请求参数结构体
- */
-export interface ModifyKeyAttributesRequest {
-  /**
-   * <p>模型路由实例ID</p>
-   */
-  ModelRouterId: string
-  /**
-   * <p>API Key的ID</p>
-   */
-  KeyId: string
-  /**
-   * <p>Key的名称</p>
-   */
-  KeyName?: string
-  /**
-   * <p>限速配置</p>
-   */
-  RateLimitConfig?: RateLimitConfigForKey
-}
-
-/**
- * ReplaceCertForLoadBalancers请求参数结构体
- */
-export interface ReplaceCertForLoadBalancersRequest {
-  /**
-   * 需要被替换的证书的ID，可以是服务端证书或客户端证书
-   */
-  OldCertificateId: string
-  /**
-   * 新证书的内容等相关信息
-   */
-  Certificate: CertificateInput
-}
-
-/**
- * ModifyTargetGroupInstancesPort返回参数结构体
- */
-export interface ModifyTargetGroupInstancesPortResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteUserGroups请求参数结构体
- */
-export interface DeleteUserGroupsRequest {
-  /**
-   * <p>模型路由实例ID。</p>
-   */
-  ModelRouterId: string
-  /**
-   * <p>待删除的用户组ID列表，单次1-100个。不可包含「未分组」虚拟分组 ugrp-ungrouped。组内仍有 Key 时将拒绝删除，需先将 Key 移出或迁移到其他组。</p>
-   */
-  UserGroupIds: Array<string>
-}
-
-/**
- * Budget关联资源对象。仅支持企业型模型路由实例和企业型实例下的Key。
- */
-export interface BudgetResource {
-  /**
-   * <p>模型路由实例ID。</p><p>当Type为ModelRouter时表示要关联的实例；当Type为Key时表示Key所属实例。</p>
-   */
-  ModelRouterId: string
-  /**
-   * <p>资源类型。</p><p>枚举值：</p><ul><li>ModelRouter：模型路由实例</li><li>Key：模型路由Key</li><li>UserGroup：用户组（Type 为 UserGroup 时需传 UserGroupId）</li></ul>
-   */
-  Type: string
-  /**
-   * <p>Key ID。</p><p>字段本身选填；当Type为Key时必填，当Type为ModelRouter时不传。</p>
-   */
-  KeyId?: string
-  /**
-   * <p>用户组ID</p>
-   */
-  UserGroupId?: string
-}
-
-/**
- * HTTP/HTTPS监听器下的转发规则绑定的后端服务信息
- */
-export interface RuleTargets {
-  /**
-   * 转发规则的 ID
-   */
-  LocationId?: string
-  /**
-   * 转发规则的域名
-   */
-  Domain?: string
-  /**
-   * 转发规则的路径。
-   */
-  Url?: string
-  /**
-   * 后端服务的信息
-   */
-  Targets?: Array<Backend>
-  /**
-   * 后端云函数的信息
-   */
-  FunctionTargets?: Array<FunctionTarget>
-}
-
-/**
- * BatchDeregisterTargets请求参数结构体
- */
-export interface BatchDeregisterTargetsRequest {
-  /**
-   * 负载均衡ID。
-   */
-  LoadBalancerId: string
-  /**
-   * 解绑目标。
-   */
-  Targets: Array<BatchTarget>
-}
-
-/**
- * DeregisterTargetGroupInstances请求参数结构体
- */
-export interface DeregisterTargetGroupInstancesRequest {
-  /**
-   * 目标组ID。
-   */
-  TargetGroupId: string
-  /**
-   * 待解绑的服务器信息，支持批量解除绑定，单次批量解除数量最多为20个。
-在这个接口 Port 参数为必填项。
-   */
-  TargetGroupInstances: Array<TargetGroupInstance>
-}
-
-/**
- * DescribeBudgets返回参数结构体
- */
-export interface DescribeBudgetsResponse {
-  /**
-   * <p>Budget列表。</p>
-   */
-  BudgetSet?: Array<BudgetInfo>
-  /**
-   * <p>符合条件的总数。</p>
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * InquiryPriceRefundLoadBalancer请求参数结构体
- */
-export interface InquiryPriceRefundLoadBalancerRequest {
-  /**
-   * 负载均衡实例ID。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
-   */
-  LoadBalancerId: string
-}
-
-/**
- * Budget关联资源信息
- */
-export interface BudgetAssociation {
-  /**
-   * <p>Budget ID。</p>
-   */
-  BudgetId?: string
-  /**
-   * <p>关联创建时间。</p>
-   */
-  CreatedTime?: string
-  /**
-   * <p>Key ID。仅当Type为Key时返回。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  KeyId?: string
-  /**
-   * <p>模型路由实例ID。</p><p>当Type为ModelRouter时表示关联资源本身；当Type为Key时表示Key所属实例。</p>
-   */
-  ModelRouterId?: string
-  /**
-   * <p>关联资源类型。</p><p>枚举值：</p><ul><li>ModelRouter：模型路由实例</li><li>Key：模型路由Key</li></ul>
-   */
-  Type?: string
-  /**
-   * <p>关联关系的状态</p><p>枚举值：</p><ul><li>Active： 已生效</li><li>Configuring： 配置中</li><li>ConfigureFailed： 配置失败</li></ul>
-   */
-  Status?: string
-}
-
-/**
- * DescribeBudgetAssociations请求参数结构体
- */
-export interface DescribeBudgetAssociationsRequest {
-  /**
-   * <p>Budget ID。</p><p>一次只允许查询一个Budget。</p>
-   */
-  BudgetId: string
-  /**
-   * <p>资源类型。</p><p>枚举值：</p><ul><li>ModelRouter：模型路由实例</li><li>Key：模型路由Key</li></ul><p>不传时返回全部资源类型。</p>
-   */
-  Type?: string
-  /**
-   * <p>本次查询偏移量</p>
-   */
-  Offset?: number
-  /**
-   * <p>本次查询限制的数量</p>
-   */
-  Limit?: number
-}
-
-/**
- * DescribeTargetHealth返回参数结构体
- */
-export interface DescribeTargetHealthResponse {
-  /**
-   * <p>负载均衡实例列表。</p>
-   */
-  LoadBalancers?: Array<LoadBalancerHealth>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 证书信息
- */
-export interface CertInfo {
-  /**
-   * 证书 ID，如果不填写此项则必须上传证书内容，包括CertName, CertContent，若为服务端证书必须包含CertKey。
-   */
-  CertId?: string
-  /**
-   * 上传证书的名称，如果没有 CertId，则此项必传。
-   */
-  CertName?: string
-  /**
-   * 上传证书的公钥；如果没有 CertId，则此项必传。
-   */
-  CertContent?: string
-  /**
-   * 上传服务端证书的私钥；如果没有 CertId，则此项必传。
-   */
-  CertKey?: string
-}
-
-/**
- * CreateTargetGroup请求参数结构体
- */
-export interface CreateTargetGroupRequest {
-  /**
-   * <p>目标组名称。命名规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。</p>
-   */
-  TargetGroupName?: string
-  /**
-   * <p>目标组的vpcId属性，不填则使用默认vpc。</p>
-   */
-  VpcId?: string
-  /**
-   * <p>目标组的默认端口， 后续添加服务器时可使用该默认端口。全监听目标组不支持此参数，非全监听目标组Port和TargetGroupInstances.N中的port二者必填其一。</p>
-   */
-  Port?: number
-  /**
-   * <p>目标组绑定的后端服务器，单次最多支持50个。</p>
-   */
-  TargetGroupInstances?: Array<TargetGroupInstance>
-  /**
-   * <p>目标组类型，当前支持v1(旧版目标组), v2(新版目标组), 默认为v1(旧版目标组)。</p>
-   */
-  Type?: string
-  /**
-   * <p>目标组后端转发协议。v2新版目标组该项必填。目前支持TCP、UDP、HTTP、HTTPS、GRPC。</p>
-   */
-  Protocol?: string
-  /**
-   * <p>健康检查。</p>
-   */
-  HealthCheck?: TargetGroupHealthCheck
-  /**
-   * <p>调度算法，仅V2新版目标组，且后端转发协议为(HTTP|HTTPS|GRPC)时该参数有效。可选值：</p><li>WRR:按权重轮询。</li><li>LEAST_CONN:最小连接数。</li><li>IP_HASH:按IP哈希。</li><li>默认为 WRR。</li>
-   */
-  ScheduleAlgorithm?: string
-  /**
-   * <p>标签。</p>
-   */
-  Tags?: Array<TagInfo>
-  /**
-   * <p>后端服务默认权重, 其中：</p><ul><li>取值范围[0, 100]</li><li>设置该值后，添加后端服务到目标组时， 若后端服务不单独设置权重， 则使用这里的默认权重。 </li><li>v1 目标组类型不支持设置 Weight 参数。</li></ul>
-   */
-  Weight?: number
-  /**
-   * <p>全监听目标组标识，true表示是全监听目标组，false表示不是全监听目标组。仅V2新版类型目标组支持该参数。</p>
-   */
-  FullListenSwitch?: boolean
-  /**
-   * <p>是否开启长连接，此参数仅适用于HTTP/HTTPS目标组，0:关闭；1:开启， 默认关闭。</p>
-   */
-  KeepaliveEnable?: boolean
-  /**
-   * <p>会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。仅V2新版且后端转发协议为HTTP/HTTPS/GRPC目标组支持该参数。</p>
-   */
-  SessionExpireTime?: number
-  /**
-   * <p>IP版本类型。</p>
-   */
-  IpVersion?: string
-  /**
-   * <p>是否开启SNAT（源IP替换），True（开启）、False（关闭）。默认为关闭。注意：SnatEnable开启时会替换客户端源IP，此时<code>透传客户端源IP</code>选项关闭，反之亦然。</p>
-   */
-  SnatEnable?: boolean
-}
-
-/**
- * 独占集群信息
- */
-export interface ClusterItem {
-  /**
-   * 集群唯一ID
-   */
-  ClusterId: string
-  /**
-   * 集群名称
-   */
-  ClusterName?: string
-  /**
-   * 集群所在可用区，如ap-guangzhou-1
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Zone?: string
-}
-
-/**
- * 绑定关系，包含监听器名字、协议、url、vport。
- */
-export interface BindDetailItem {
-  /**
-   * 配置绑定的CLB ID
-   */
-  LoadBalancerId?: string
-  /**
-   * 配置绑定的监听器ID
-   */
-  ListenerId?: string
-  /**
-   * 配置绑定的域名
-   */
-  Domain?: string
-  /**
-   * 配置绑定的规则
-   */
-  LocationId?: string
-  /**
-   * 监听器名字
-   */
-  ListenerName?: string
-  /**
-   * 监听器协议
-   */
-  Protocol?: string
-  /**
-   * 监听器端口
-   */
-  Vport?: number
-  /**
-   * location的url
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Url?: string
-  /**
-   * 配置ID
-   */
-  UconfigId?: string
-}
-
-/**
- * CreateListener请求参数结构体
- */
-export interface CreateListenerRequest {
-  /**
-   * <p>负载均衡实例 ID，可以通过 <a href="https://cloud.tencent.com/document/product/214/30685">DescribeLoadBalancers</a> 接口获取。</p>
-   */
-  LoadBalancerId: string
-  /**
-   * <p>要将监听器创建到哪些端口，每个端口对应一个新的监听器。<br>端口范围：1~65535</p>
-   */
-  Ports: Array<number | bigint>
-  /**
-   * <p>监听器协议： TCP | UDP | HTTP | HTTPS | TCP_SSL | QUIC。</p>
-   */
-  Protocol: string
-  /**
-   * <p>要创建的监听器名称列表，名称与Ports数组按序一一对应，如不需立即命名，则无需提供此参数。命名规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。</p>
-   */
-  ListenerNames?: Array<string>
-  /**
-   * <p>健康检查相关参数，此参数仅适用于TCP/UDP/TCP_SSL/QUIC监听器。</p>
-   */
-  HealthCheck?: HealthCheck
-  /**
-   * <p>证书相关信息。参数限制如下：</p><li>此参数仅适用于TCP_SSL监听器和未开启SNI特性的HTTPS监听器。</li><li>创建TCP_SSL监听器和未开启SNI特性的HTTPS监听器时，此参数和参数MultiCertInfo至少需要传一个， 但不能同时传入。</li>
-   */
-  Certificate?: CertificateInput
-  /**
-   * <p>会话保持时间，单位：秒。可选值：30~3600，默认为0，默认不开启。此参数仅适用于TCP/UDP监听器。</p>
-   */
-  SessionExpireTime?: number
-  /**
-   * <p>监听器转发的方式。可选值：WRR（按权重轮询）、LEAST_CONN（按最小连接数）<br>默认为 WRR。此参数仅适用于TCP/UDP/TCP_SSL/QUIC监听器。</p>
-   */
-  Scheduler?: string
-  /**
-   * <p>是否开启SNI特性，此参数仅适用于HTTPS监听器。0表示未开启，1表示开启。</p>
-   */
-  SniSwitch?: number
-  /**
-   * <p>后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组。此参数仅适用于TCP/UDP监听器。七层监听器应在转发规则中设置。</p>
-   */
-  TargetType?: string
-  /**
-   * <p>会话保持类型。不传或传NORMAL表示默认会话保持类型。QUIC_CID 表示根据Quic Connection ID做会话保持。QUIC_CID只支持UDP协议。此参数仅适用于TCP/UDP监听器。七层监听器应在转发规则中设置。（若选择QUIC_CID，则Protocol必须为UDP，Scheduler必须为WRR，同时只支持ipv4）</p>
-   */
-  SessionType?: string
-  /**
-   * <p>是否开启长连接，此参数仅适用于HTTP/HTTPS监听器，0:关闭；1:开启， 默认关闭。<br>若后端服务对连接数上限有限制，则建议谨慎开启。此功能目前处于内测中，如需使用，请提交 <a href="https://cloud.tencent.com/apply/p/tsodp6qm21">内测申请</a>。</p>
-   */
-  KeepaliveEnable?: number
-  /**
-   * <p>创建端口段监听器时必须传入此参数，用以标识结束端口。同时，入参Ports只允许传入一个成员，用以标识开始端口。【如果您需要体验端口段功能，请通过 <a href="https://console.cloud.tencent.com/workorder/category">工单申请</a>】。</p>
-   */
-  EndPort?: number
-  /**
-   * <p>重新调度功能，解绑后端服务开关，打开此开关，当解绑后端服务时触发重新调度。仅TCP/UDP监听器支持。</p>
-   */
-  DeregisterTargetRst?: boolean
-  /**
-   * <p>证书信息，支持同时传入不同算法类型的多本服务端证书，参数限制如下：</p><li>此参数仅适用于TCP_SSL监听器和未开启SNI特性的HTTPS监听器。</li><li>创建TCP_SSL监听器和未开启SNI特性的HTTPS监听器时，此参数和参数Certificate至少需要传一个， 但不能同时传入。</li>
-   */
-  MultiCertInfo?: MultiCertInfo
-  /**
-   * <p>监听器最大连接数，当前仅性能容量型实例且仅TCP/UDP/TCP_SSL/QUIC监听器支持，不传或者传-1表示监听器维度不限速。基础网络实例不支持该参数。</p>
-   */
-  MaxConn?: number
-  /**
-   * <p>监听器最大新增连接数，当前仅性能容量型实例且仅TCP/UDP/TCP_SSL/QUIC监听器支持，不传或者传-1表示监听器维度不限速。基础网络实例不支持该参数。</p>
-   */
-  MaxCps?: number
-  /**
-   * <p>空闲连接超时时间，此参数仅适用于TCP/UDP监听器，单位：秒。默认值：TCP监听器默认值为900s，UDP监听器默认值为300s。取值范围：共享型实例和独占型实例支持：10-900，性能容量型实例支持：10-1980。如需设置超过取值范围的值请通过 <a href="https://console.cloud.tencent.com/workorder/category">工单申请</a>。</p><p>取值范围：[10, 1980]</p><p>单位：秒</p><p>默认值：900</p><p>TCP监听器默认值为900s，UDP监听器默认值为300s。取值范围：共享型实例和独占型实例支持：10-900，性能容量型实例支持：10-1980。</p>
-   */
-  IdleConnectTimeout?: number
-  /**
-   * <p>TCP_SSL和QUIC是否支持PP</p>
-   */
-  ProxyProtocol?: boolean
-  /**
-   * <p>是否开启SNAT（源IP替换），True（开启）、False（关闭）。默认为关闭。注意：SnatEnable开启时会替换客户端源IP，此时<code>透传客户端源IP</code>选项关闭，反之亦然。</p>
-   */
-  SnatEnable?: boolean
-  /**
-   * <p>全端口段监听器的结束端口，端口范围：2 - 65535</p>
-   */
-  FullEndPorts?: Array<number | bigint>
-  /**
-   * <p>内网 HTTP 监听器开启 h2c 开关。<br>True（开启）、False（关闭）。默认为关闭。<br>开启后，监听器仅支持创建后端转发类型为 GRPC 或 GRPCS 的七层规则；创建规则时需在 Rules.N.ForwardType 中显式传入 GRPC 或 GRPCS。</p>
-   */
-  H2cSwitch?: boolean
-  /**
-   * <p>控制 TCP_SSL 类型的监听器是否移除 SSL 加密层。开启后，监听器将作为普通 TCP 协议运行。 可选值：</p><ul><li>True： 关闭 SSL 功能（协议降级为纯文本 TCP）。</li><li>False（默认）： 保持 SSL 功能开启。</li></ul>
-   */
-  SslCloseSwitch?: boolean
-  /**
-   * <p>数据压缩模式。可选值：transparent（透传模式）、compatibility（兼容模式）</p>
-   */
-  DataCompressMode?: string
-  /**
-   * <p>重新调度功能，权重调为0开关，打开此开关，后端服务器权重调为0时触发重新调度。仅TCP/UDP监听器支持。</p>
-   */
-  RescheduleTargetZeroWeight?: boolean
-  /**
-   * <p>重新调度功能，健康检查异常开关，打开此开关，后端服务器健康检查异常时触发重新调度。仅TCP/UDP监听器支持。</p>
-   */
-  RescheduleUnhealthy?: boolean
-  /**
-   * <p>重新调度功能，扩容后端服务开关，打开此开关，后端服务器增加或者减少时触发重新调度。仅TCP/UDP监听器支持。</p>
-   */
-  RescheduleExpandTarget?: boolean
-  /**
-   * <p>重新调度触发开始时间，取值0~3600s。仅TCP/UDP监听器支持。</p>
-   */
-  RescheduleStartTime?: number
-  /**
-   * <p>重新调度触发持续时间，取值0~3600s。仅TCP/UDP监听器支持。</p>
-   */
-  RescheduleInterval?: number
-}
-
-/**
- * CreateClsLogSet请求参数结构体
- */
-export interface CreateClsLogSetRequest {
-  /**
-   * 日志集的名字，不能和cls其他日志集重名。不填默认为clb_logset。
-   */
-  LogsetName?: string
-  /**
-   * 日志集的保存周期，单位：天。
-   * @deprecated
-   */
-  Period?: number
-  /**
-   * 日志集类型，ACCESS：访问日志，HEALTH：健康检查日志，默认ACCESS。
-   */
-  LogsetType?: string
-}
-
-/**
- * 资源可用性
- */
-export interface ResourceAvailability {
-  /**
-   * 运营商内具体资源信息，如"CMCC", "CUCC", "CTCC", "BGP"。
-   */
-  Type: string
-  /**
-   * 资源可用性，"Available"：可用，"Unavailable"：不可用
-   */
-  Availability: string
-}
-
-/**
- * ModifyModelRouterAttributes请求参数结构体
- */
-export interface ModifyModelRouterAttributesRequest {
-  /**
-   * <p>模型路由ID</p>
-   */
-  ModelRouterId: string
-  /**
-   * <p>模型路由名称</p>
-   */
-  ModelRouterName?: string
-  /**
-   * <p>限速配置</p>
-   */
-  RateLimitConfig?: RateLimitConfigForModelRouter
-  /**
-   * <p>路由配置</p>
-   */
-  RouterSetting?: RouterSettingWithFallBack
-  /**
-   * <p>新的 HTTPS 证书ID，用于替换实例 HTTPS 服务端点当前绑定的证书。常用于证书到期前的更换场景。</p><p>使用限制：</p><ul><li>仅企业型（Enterprise）且服务端点协议为 HTTPS 的实例支持修改证书。</li><li>证书须为 SSL 证书控制台中状态为“已签发”（可用）且未过期的服务器证书（SVR 类型）。可在 <a href="https://console.cloud.tencent.com/ssl">SSL 证书控制台</a> 查看证书ID。</li><li>替换后新证书立即生效，过程中不会中断业务流量。</li><li>若传入的证书与当前绑定的证书相同，接口直接返回成功，不做任何变更。</li></ul><p>不传则证书保持不变。可通过 <code>DescribeModelRouterDetail</code> 接口的 <code>ServiceEndPoints.CertId</code> 字段查询当前绑定的证书。</p>
-   */
-  CertId?: string
-}
-
-/**
- * DeleteModelRouters返回参数结构体
- */
-export interface DeleteModelRoutersResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 过滤器条件
- */
-export interface Filter {
-  /**
-   * <p>过滤器的名称</p>
-   */
-  Name: string
-  /**
-   * <p>过滤器的值数组</p>
-   */
-  Values: Array<string>
-}
-
-/**
- * 集群内资源类型
- */
-export interface ClusterResource {
-  /**
-   * 集群唯一ID，如tgw-12345678。
-   */
-  ClusterId?: string
-  /**
-   * ip地址。
-   */
-  Vip?: string
-  /**
-   * 负载均衡唯一ID，如lb-12345678。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LoadBalancerId?: string
-  /**
-   * 资源是否闲置。
-   */
-  Idle?: string
-  /**
-   * 集群名称。
-   */
-  ClusterName?: string
-  /**
-   * 集群的Isp属性，如："BGP","CMCC","CUCC","CTCC","INTERNAL"。
-   */
-  Isp?: string
-  /**
-   * 集群所在的可用区
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClustersZone?: ClustersZone
-}
-
-/**
- * ModifyDomain返回参数结构体
- */
-export interface ModifyDomainResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * RegisterTargets返回参数结构体
- */
-export interface RegisterTargetsResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * RegisterTargetGroupInstances请求参数结构体
- */
-export interface RegisterTargetGroupInstancesRequest {
-  /**
-   * 目标组ID
-   */
-  TargetGroupId: string
-  /**
-   * 服务器实例数组，服务器和目标组的 VPC 需相同。
-   */
-  TargetGroupInstances: Array<TargetGroupInstance>
-}
-
-/**
- * DeregisterTargetsFromClassicalLB返回参数结构体
- */
-export interface DeregisterTargetsFromClassicalLBResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyKeysUserGroup请求参数结构体
- */
-export interface ModifyKeysUserGroupRequest {
-  /**
-   * <p>模型路由实例ID。</p>
-   */
-  ModelRouterId: string
-  /**
-   * <p>目标归属用户组ID。传真实用户组ID表示批量入组或跨组移动（Key 已属其它组则改为目标组）；传 ugrp-ungrouped 表示批量移出到未分组。</p>
-   */
-  UserGroupId: string
-  /**
-   * <p>待变更归属的 Key ID 列表，单次1-100个。</p>
-   */
-  KeyIds: Array<string>
-}
-
-/**
- * 集群所在的可用区。
- */
-export interface ClustersZone {
-  /**
-   * 集群所在的主可用区。
-   */
-  MasterZone?: Array<string>
-  /**
-   * 集群所在的备可用区。
-   */
-  SlaveZone?: Array<string>
-}
-
-/**
- * SetCustomizedConfigForLoadBalancer返回参数结构体
- */
-export interface SetCustomizedConfigForLoadBalancerResponse {
-  /**
-   * 个性化配置ID，如：pz-1234abcd
-   */
-  ConfigId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteLoadBalancer返回参数结构体
- */
-export interface DeleteLoadBalancerResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * AutoRewrite返回参数结构体
- */
-export interface AutoRewriteResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeregisterTargets返回参数结构体
- */
-export interface DeregisterTargetsResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * Budget预算配置
- */
-export interface BudgetConfig {
-  /**
-   * <p>预算刷新周期。</p><p>枚举值：</p><ul><li>1d：按天刷新</li><li>7d：按周刷新</li><li>30d：按月刷新</li></ul><p>不传时默认30d。同一个Budget下每种刷新周期最多配置一次。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BudgetDuration?: string
-  /**
-   * <p>下一次刷新的时间</p>
-   */
-  BudgetResetAt?: string
-  /**
-   * <p>最大预算。</p><p>单位：credit。取值需大于0且不超过10000000000；不传时默认100000。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaxBudget?: number
-}
-
-/**
- * DescribeLoadBalancerOverview请求参数结构体
- */
-export type DescribeLoadBalancerOverviewRequest = null
-
-/**
- * 重定向目标的信息
- */
-export interface RewriteTarget {
-  /**
-   * 重定向目标的监听器ID，该字段仅配置了重定向时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TargetListenerId?: string
-  /**
-   * 重定向目标的转发规则ID，该字段仅配置了重定向时有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TargetLocationId?: string
-  /**
-   * 重定向状态码
-   */
-  RewriteCode?: number
-  /**
-   * 重定向是否携带匹配的url
-   */
-  TakeUrl?: boolean
-  /**
-   * 重定向类型，Manual: 手动重定向，Auto:  自动重定向
-   */
-  RewriteType?: string
-}
-
-/**
- * ManualRewrite请求参数结构体
- */
-export interface ManualRewriteRequest {
-  /**
-   * 负载均衡实例 ID。
-   */
-  LoadBalancerId: string
-  /**
-   * 源监听器 ID。
-   */
-  SourceListenerId: string
-  /**
-   * 目标监听器 ID。
-   */
-  TargetListenerId: string
-  /**
-   * 转发规则之间的重定向关系。
-   */
-  RewriteInfos: Array<RewriteLocationMap>
-}
-
-/**
- * 集群的详细信息，如集群ID，名称，类型，可用区，标签等
- */
-export interface Cluster {
-  /**
-   * 集群唯一ID
-   */
-  ClusterId?: string
-  /**
-   * 集群名称
-   */
-  ClusterName?: string
-  /**
-   * 集群类型，如TGW，STGW，VPCGW
-   */
-  ClusterType?: string
-  /**
-   * 集群标签，只有TGW/STGW集群有标签
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClusterTag?: string
-  /**
-   * 集群所在可用区，如ap-guangzhou-1
-   */
-  Zone?: string
-  /**
-   * 集群网络类型，如Public，Private
-   */
-  Network?: string
-  /**
-   * 最大连接数（个/秒）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaxConn?: number
-  /**
-   * 最大入带宽Mbps
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaxInFlow?: number
-  /**
-   * 最大入包量（个/秒）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaxInPkg?: number
-  /**
-   * 最大出带宽Mbps
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaxOutFlow?: number
-  /**
-   * 最大出包量（个/秒）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaxOutPkg?: number
-  /**
-   * 最大新建连接数（个/秒）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MaxNewConn?: number
-  /**
-   * http最大新建连接数（个/秒）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HTTPMaxNewConn?: number
-  /**
-   * https最大新建连接数（个/秒）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HTTPSMaxNewConn?: number
-  /**
-   * http QPS
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HTTPQps?: number
-  /**
-   * https QPS
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HTTPSQps?: number
-  /**
-   * 集群内资源总数目
-   */
-  ResourceCount?: number
-  /**
-   * 集群内空闲资源数目
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IdleResourceCount?: number
-  /**
-   * 集群内转发机的数目
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LoadBalanceDirectorCount?: number
-  /**
-   * 集群的Isp属性，如："BGP","CMCC","CUCC","CTCC","INTERNAL"。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Isp?: string
-  /**
-   * 集群所在的可用区
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClustersZone?: ClustersZone
-  /**
-   * 集群版本
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ClustersVersion?: string
-  /**
-   * 集群容灾类型，如SINGLE-ZONE，DISASTER-RECOVERY，MUTUAL-DISASTER-RECOVERY
-   */
-  DisasterRecoveryType?: string
-  /**
-   * 网络出口
-   */
-  Egress?: string
-  /**
-   * IP版本
-   */
-  IPVersion?: string
-  /**
-   * 标签信息
-   */
-  Tag?: Array<TagInfo>
-}
-
-/**
- * ModifyKeysBlockStatus返回参数结构体
- */
-export interface ModifyKeysBlockStatusResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeLoadBalancersDetail返回参数结构体
- */
-export interface DescribeLoadBalancersDetailResponse {
-  /**
-   * 负载均衡详情列表总数。
-   */
-  TotalCount?: number
-  /**
-   * 负载均衡详情列表。
-   */
-  LoadBalancerDetailSet?: Array<LoadBalancerDetail>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 描述一个Target的健康信息
- */
-export interface TargetHealth {
-  /**
-   * Target的内网IP
-   */
-  IP?: string
-  /**
-   * Target绑定的端口
-   */
-  Port?: number
-  /**
-   * 当前健康状态，true：健康，false：不健康（包括尚未开始探测、探测中、状态异常等几种状态）。只有处于健康状态（且权重大于0），负载均衡才会向其转发流量。
-   */
-  HealthStatus?: boolean
-  /**
-   * Target的实例ID，如 ins-12345678
-   */
-  TargetId?: string
-  /**
-   * 当前健康状态的详细信息。如：Alive、Dead、Unknown、Close。Alive状态为健康，Dead状态为异常，Unknown状态包括尚未开始探测、探测中、状态未知，Close表示健康检查关闭或监听器状态停止。
-   */
-  HealthStatusDetail?: string
-  /**
-   * (**该参数对象即将下线，不推荐使用，请使用HealthStatusDetail获取健康详情**) 当前健康状态的详细信息。如：Alive、Dead、Unknown。Alive状态为健康，Dead状态为异常，Unknown状态包括尚未开始探测、探测中、状态未知。
-   * @deprecated
-   */
-  HealthStatusDetial?: string
-  /**
-   * 目标组唯一ID。
-   */
-  TargetGroupId?: string
-  /**
-   * Target的权重。
-   */
-  Weight?: number
-}
-
-/**
- * 负载均衡详细信息
- */
-export interface LoadBalancerDetail {
-  /**
-   * 负载均衡实例 ID。
-   */
-  LoadBalancerId?: string
-  /**
-   * 负载均衡实例的名称。
-   */
-  LoadBalancerName?: string
-  /**
-   * 负载均衡实例的网络类型：
-Public：公网属性，Private：内网属性；对于内网属性的负载均衡，可通过绑定EIP出公网，具体可参考EIP文档。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LoadBalancerType?: string
-  /**
-   * 负载均衡实例的状态，包括
-0：创建中，1：正常运行。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Status?: number
-  /**
-   * 负载均衡实例的 VIP 。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Address?: string
-  /**
-   * 负载均衡实例 VIP 的IPv6地址。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AddressIPv6?: string
-  /**
-   * 负载均衡实例IP版本，IPv4 | IPv6。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AddressIPVersion?: string
-  /**
-   * 负载均衡实例IPv6地址类型，IPv6Nat64 | IPv6FullChain。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IPv6Mode?: string
-  /**
-   * 负载均衡实例所在可用区。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Zone?: string
-  /**
-   * 负载均衡实例IP地址所属的ISP。取值范围：BGP（多线）、CMCC（中国移动）、CUCC（中国联通）、CTCC（中国电信）、INTERNAL（内网）。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AddressIsp?: string
-  /**
-   * 负载均衡实例所属私有网络的 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VpcId?: string
-  /**
-   * 负载均衡实例所属的项目 ID， 0 表示默认项目。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProjectId?: number
-  /**
-   * 负载均衡实例的创建时间。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreateTime?: string
-  /**
-   * 负载均衡实例的计费类型。取值范围：PREPAID预付费、POSTPAID_BY_HOUR按量付费。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ChargeType?: string
-  /**
-   * 负载均衡实例的网络属性。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  NetworkAttributes?: InternetAccessible
-  /**
-   * 负载均衡实例的预付费相关属性。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PrepaidAttributes?: LBChargePrepaid
-  /**
-   * 暂做保留，一般用户无需关注。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExtraInfo?: ExtraInfo
-  /**
-   * 负载均衡维度的个性化配置ID，多个配置用逗号隔开。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ConfigId?: string
-  /**
-   * 负载均衡实例的标签信息。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Tags?: Array<TagInfo>
-  /**
-   * 负载均衡监听器 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ListenerId?: string
-  /**
-   * 监听器协议。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Protocol?: string
-  /**
-   * 监听器端口。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Port?: number
-  /**
-   * 转发规则的 ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LocationId?: string
-  /**
-   * 转发规则的域名。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Domain?: string
-  /**
-   * 转发规则的路径。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Url?: string
-  /**
-   * 后端目标ID。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TargetId?: string
-  /**
-   * 后端目标的IP地址。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TargetAddress?: string
-  /**
-   * 后端目标监听端口。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TargetPort?: number
-  /**
-   * 后端目标转发权重。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TargetWeight?: number
-  /**
-   * 0：表示未被隔离，1：表示被隔离。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Isolation?: number
-  /**
-   * 负载均衡绑定的安全组列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SecurityGroup?: Array<string>
-  /**
-   * 负载均衡安全组上移特性是否开启标识。取值范围：1表示开启、0表示未开启。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LoadBalancerPassToTarget?: number
-  /**
-   * 后端目标健康状态。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TargetHealth?: string
-  /**
-   * 转发规则的域名列表。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Domains?: string
-  /**
-   * 多可用区负载均衡实例所选备区
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SlaveZone?: Array<string>
-  /**
-   * 内网负载均衡实例所在可用区，由白名单CLB_Internal_Zone控制
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Zones?: Array<string>
-  /**
-   * 是否开启SNI特性，1：表示开启，0：表示不开启（本参数仅对于HTTPS监听器有意义）。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SniSwitch?: number
-  /**
-   * 负载均衡实例的域名。
-   */
-  LoadBalancerDomain?: string
-  /**
-   * 网络出口
-   */
-  Egress?: string
-  /**
-   * 负载均衡的属性
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AttributeFlags?: Array<string>
-  /**
-   * 负载均衡实例的规格类型信息<ul><li> clb.c1.small：简约型规格 </li><li>clb.c2.medium：标准型规格 </li><li> clb.c3.small：高阶型1规格 </li><li> clb.c3.medium：高阶型2规格 </li><li> clb.c4.small：超强型1规格 </li><li> clb.c4.medium：超强型2规格 </li><li> clb.c4.large：超强型3规格 </li><li> clb.c4.xlarge：超强型4规格 </li><li>""：非性能容量型实例</li></ul>
-
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SlaType?: string
-  /**
-   * 0：表示非独占型实例，1：表示独占型态实例。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Exclusive?: number
-  /**
-   * 可用区转发亲和信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AvailableZoneAffinityInfo?: AvailableZoneAffinityInfo
-}
-
-/**
- * 反查结果数据类型。
- */
-export interface LbRsTargets {
-  /**
-   * 内网ip类型。“cvm”或“eni”
-   */
-  Type?: string
-  /**
-   * 后端实例的内网ip。
-   */
-  PrivateIp?: string
-  /**
-   * 绑定后端实例的端口。
-   */
-  Port?: number
-  /**
-   * rs的vpcId
-   */
-  VpcId?: number
-  /**
-   * rs的权重
-   */
-  Weight?: number
-}
-
-/**
- * BatchModifyTargetWeight请求参数结构体
- */
-export interface BatchModifyTargetWeightRequest {
-  /**
-   * <p>负载均衡实例 ID。</p>
-   */
-  LoadBalancerId: string
-  /**
-   * <p>要批量修改权重的列表。ModifyList数组最多100个元素，ModifyList[i].Targets最多50个，全部Targets累加不超过500。</p>
-   */
-  ModifyList: Array<RsWeightRule>
-}
-
-/**
- * DescribeTargetGroupInstanceStatus请求参数结构体
- */
-export interface DescribeTargetGroupInstanceStatusRequest {
-  /**
-   * 目标组唯一id
-   */
-  TargetGroupId: string
-  /**
-   * 目标组绑定的后端服务ip列表
-   */
-  TargetGroupInstanceIps?: Array<string>
 }
 
 /**
@@ -5983,248 +1674,6 @@ export interface BatchModifyTargetTagResponse {
  * DeleteRewrite返回参数结构体
  */
 export interface DeleteRewriteResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 批量绑定类型
- */
-export interface BatchTarget {
-  /**
-   * 监听器 ID。
-   */
-  ListenerId: string
-  /**
-   * 绑定端口。
-   */
-  Port: number
-  /**
-   * 子机 ID。表示绑定主网卡主 IP。
-   */
-  InstanceId?: string
-  /**
-   * 绑定 IP 时需要传入此参数，支持弹性网卡的 IP 和其他内网 IP，如果是弹性网卡则必须先绑定至CVM，然后才能绑定到负载均衡实例。
-注意：参数 InstanceId、EniIp 只能传入一个且必须传入一个。如果绑定双栈IPV6子机，必须传该参数。
-   */
-  EniIp?: string
-  /**
-   * 子机权重，范围[0, 100]。绑定时如果不存在，则默认为10。
-   */
-  Weight?: number
-  /**
-   * 七层规则 ID。7层负载均衡该参数必填
-   */
-  LocationId?: string
-  /**
-   * 标签。
-   */
-  Tag?: string
-}
-
-/**
- * DescribeLoadBalancerListByCertId请求参数结构体
- */
-export interface DescribeLoadBalancerListByCertIdRequest {
-  /**
-   * 服务端证书的ID，或客户端证书的ID。可以通过 [DescribeCertificate](https://cloud.tencent.com/document/api/400/41674) 接口查询。
-数组最大长度为20。
-   */
-  CertIds: Array<string>
-}
-
-/**
- * ModifyModelRouterAttributes返回参数结构体
- */
-export interface ModifyModelRouterAttributesResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeTargetHealth请求参数结构体
- */
-export interface DescribeTargetHealthRequest {
-  /**
-   * <p>要查询的负载均衡实例ID列表。数组大小最大支持30。</p>
-   */
-  LoadBalancerIds: Array<string>
-  /**
-   * <p>要查询的监听器ID列表。</p>
-   */
-  ListenerIds?: Array<string>
-  /**
-   * <p>要查询的转发规则ID列表。</p>
-   */
-  LocationIds?: Array<string>
-}
-
-/**
- * ModifyListener返回参数结构体
- */
-export interface ModifyListenerResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteRule返回参数结构体
- */
-export interface DeleteRuleResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 健康检查信息。
-注意，自定义探测相关参数 目前只有少量区域灰度支持。
- */
-export interface HealthCheck {
-  /**
-   * 是否开启健康检查：1（开启）、0（关闭）。
-默认为开启。
-   */
-  HealthSwitch?: number
-  /**
-   * 健康检查的响应超时时间，可选值：2~60，默认值：2，单位：秒。响应超时时间要小于检查间隔时间。
-   */
-  TimeOut?: number
-  /**
-   * 健康检查探测间隔时间，默认值：5，IPv4 CLB实例的取值范围为：2-300，IPv6 CLB 实例的取值范围为：5-300。单位：秒。
-说明：部分老旧 IPv4 CLB实例的取值范围为：5-300。
-   */
-  IntervalTime?: number
-  /**
-   * 健康阈值，默认值：3，表示当连续探测三次健康则表示该转发正常，可选值：2~10，单位：次。
-   */
-  HealthNum?: number
-  /**
-   * 不健康阈值，默认值：3，表示当连续探测三次不健康则表示该转发异常，可选值：2~10，单位：次。
-   */
-  UnHealthNum?: number
-  /**
-   * 健康检查状态码（仅适用于HTTP/HTTPS转发规则、TCP监听器的HTTP健康检查方式）。可选值：1~31，默认 31。
-1 表示探测后返回值 1xx 代表健康，2 表示返回 2xx 代表健康，4 表示返回 3xx 代表健康，8 表示返回 4xx 代表健康，16 表示返回 5xx 代表健康。若希望多种返回码都可代表健康，则将相应的值相加。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HttpCode?: number
-  /**
-   * 健康检查路径（仅适用于HTTP/HTTPS转发规则、TCP监听器的HTTP健康检查方式）。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HttpCheckPath?: string
-  /**
-   * 健康检查域名，将在HTTP协议 Host 头字段中携带。（仅适用于HTTP/HTTPS监听器和TCP监听器的HTTP健康检查方式。针对TCP监听器，当使用HTTP健康检查方式时，该参数为必填项）。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HttpCheckDomain?: string
-  /**
-   * 健康检查方法（仅适用于HTTP/HTTPS转发规则、TCP监听器的HTTP健康检查方式），默认值：HEAD，可选值HEAD或GET。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HttpCheckMethod?: string
-  /**
-   * 自定义探测相关参数。健康检查端口，默认为后端服务的端口，除非您希望指定特定端口，否则建议留空。传参数值-1可恢复默认设置。（仅适用于TCP/UDP监听器）。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CheckPort?: number
-  /**
-   * 自定义探测相关参数。健康检查协议CheckType的值取CUSTOM时，必填此字段，代表健康检查的输入格式，可取值：HEX或TEXT；取值为HEX时，SendContext和RecvContext的字符只能在0123456789ABCDEF中选取且长度必须是偶数位。（仅适用于TCP/UDP监听器）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ContextType?: string
-  /**
-   * 自定义探测相关参数。健康检查协议CheckType的值取CUSTOM时，必填此字段，代表健康检查发送的请求内容，只允许ASCII可见字符，最大长度限制500。（仅适用于TCP/UDP监听器）。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SendContext?: string
-  /**
-   * 自定义探测相关参数。健康检查协议CheckType的值取CUSTOM时，必填此字段，代表健康检查返回的结果，只允许ASCII可见字符，最大长度限制500。（仅适用于TCP/UDP监听器）。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RecvContext?: string
-  /**
-   * 健康检查使用的协议。取值 TCP | HTTP | HTTPS | GRPC | PING | CUSTOM，UDP监听器支持PING/CUSTOM，TCP监听器支持TCP/HTTP/CUSTOM，TCP_SSL/QUIC监听器支持TCP/HTTP，HTTP规则支持HTTP/GRPC，HTTPS规则支持HTTP/HTTPS/GRPC。HTTP监听器默认值为HTTP;TCP、TCP_SSL、QUIC监听器默认值为TCP;UDP监听器默认为PING;HTTPS监听器的CheckType默认值与后端转发协议一致。
-   */
-  CheckType?: string
-  /**
-   * HTTP版本。健康检查协议CheckType的值取HTTP时，必传此字段，代表后端服务的HTTP版本：HTTP/1.0、HTTP/1.1；（仅适用于TCP监听器）
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HttpVersion?: string
-  /**
-   * 健康检查源IP类型：0（使用LB的VIP作为源IP），1（使用100.64网段IP作为源IP）。
-   */
-  SourceIpType?: number
-  /**
-   * GRPC健康检查状态码（仅适用于后端转发协议为GRPC的规则）。默认值为 12，可输入值为数值、多个数值、或者范围，例如 20 或 20,25 或 0-99
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExtendedCode?: string
-}
-
-/**
- * 运营商类型信息
- */
-export interface TypeInfo {
-  /**
-   * 运营商类型
-   */
-  Type?: string
-  /**
-   * 规格可用性
-   */
-  SpecAvailabilitySet?: Array<SpecAvailability>
-}
-
-/**
- * CloneLoadBalancer返回参数结构体
- */
-export interface CloneLoadBalancerResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeUserGroups返回参数结构体
- */
-export interface DescribeUserGroupsResponse {
-  /**
-   * <p>用户组列表。</p>
-   */
-  UserGroups?: Array<UserGroupInfo>
-  /**
-   * <p>符合条件的总数（含「未分组」逻辑组 ugrp-ungrouped：当其未被过滤条件排除时计入，即 TotalCount = 真实用户组数 + 1）。</p>
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeClsLogSet返回参数结构体
- */
-export interface DescribeClsLogSetResponse {
-  /**
-   * 日志集的 ID。
-   */
-  LogsetId: string
-  /**
-   * 健康检查日志集的 ID。
-   */
-  HealthLogsetId: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6295,67 +1744,31 @@ export interface ExclusiveCluster {
 }
 
 /**
- * DeregisterTargets请求参数结构体
- */
-export interface DeregisterTargetsRequest {
-  /**
-   * 负载均衡实例 ID，格式如 lb-12345678。
-   */
-  LoadBalancerId: string
-  /**
-   * 监听器 ID，格式如 lbl-12345678。
-   */
-  ListenerId: string
-  /**
-   * 要解绑的后端服务列表，数组长度最大支持20。
-   */
-  Targets: Array<Target>
-  /**
-   * 转发规则的ID，格式如 loc-12345678，当从七层转发规则解绑机器时，必须提供此参数或Domain+URL两者之一。
-   */
-  LocationId?: string
-  /**
-   * 目标规则的域名，提供LocationId参数时本参数不生效。
-   */
-  Domain?: string
-  /**
-   * 目标规则的URL，提供LocationId参数时本参数不生效。
-   */
-  Url?: string
-}
-
-/**
- * ModifyLoadBalancerMixIpTarget返回参数结构体
- */
-export interface ModifyLoadBalancerMixIpTargetResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * InquiryPriceCreateLoadBalancer返回参数结构体
- */
-export interface InquiryPriceCreateLoadBalancerResponse {
-  /**
-   * 该参数表示对应的价格。
-   */
-  Price?: Price
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 查询单个实例详细信息
  */
 export interface ModelRouterDetail {
   /**
+   * <p>模型路由实例关联的Budget ID。</p><p>未关联Budget时返回空字符串。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BudgetId?: string
+  /**
+   * <p>模型路由实例关联的Budget名称。</p><p>未关联Budget时返回空字符串。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BudgetName?: string
+  /**
+   * <p>集群信息</p>
+   */
+  ClusterInfo?: ClusterInfo
+  /**
    * <p>创建时间</p>
    */
   CreatedTime?: string
+  /**
+   * <p>模型路由实例按Budget刷新周期划分的Credit使用情况。</p><p>当关联Budget配置多个刷新周期时，按1d、7d、30d顺序返回各周期用量；未关联Budget时返回空数组。</p>
+   */
+  CreditUsageSet?: Array<CreditUsage>
   /**
    * <p>模型路由实例域名</p>
    */
@@ -6390,6 +1803,10 @@ export interface ModelRouterDetail {
    */
   RouterSetting?: RouterSettingWithFallBack
   /**
+   * <p>安全组ID列表</p>
+   */
+  SecurityGroups?: Array<string>
+  /**
    * <p>模型路由实例的安全状态</p><p>枚举值：</p><ul><li>Normal： 正常</li><li>Banned： 已封禁</li><li>Frozen： 已冻结</li></ul>
    */
   SecurityStatus?: string
@@ -6421,39 +1838,31 @@ export interface ModelRouterDetail {
    * <p>模型路由实例所属VPC的ID</p>
    */
   VpcId?: string
-  /**
-   * <p>模型路由实例关联的Budget ID。</p><p>未关联Budget时返回空字符串。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BudgetId?: string
-  /**
-   * <p>模型路由实例关联的Budget名称。</p><p>未关联Budget时返回空字符串。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BudgetName?: string
-  /**
-   * <p>模型路由实例的Credit使用情况。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CreditUsage?: CreditUsage
-  /**
-   * <p>模型路由实例按Budget刷新周期划分的Credit使用情况。</p><p>当关联Budget配置多个刷新周期时，按1d、7d、30d顺序返回各周期用量；未关联Budget时返回空数组。</p>
-   */
-  CreditUsageSet?: Array<CreditUsage>
-  /**
-   * <p>安全组ID列表</p>
-   */
-  SecurityGroups?: Array<string>
-  /**
-   * <p>集群信息</p>
-   */
-  ClusterInfo?: ClusterInfo
 }
 
 /**
- * AssociateBudget返回参数结构体
+ * DescribeLoadBalancerListByCertId请求参数结构体
  */
-export interface AssociateBudgetResponse {
+export interface DescribeLoadBalancerListByCertIdRequest {
+  /**
+   * 服务端证书的ID，或客户端证书的ID。可以通过 [DescribeCertificate](https://cloud.tencent.com/document/api/400/41674) 接口查询。
+数组最大长度为20。
+   */
+  CertIds: Array<string>
+}
+
+/**
+ * CreateModelRouterResourcePackage返回参数结构体
+ */
+export interface CreateModelRouterResourcePackageResponse {
+  /**
+   * <p>模型路由资源包Id</p>
+   */
+  ModelRouterResourcePackageIds?: Array<string>
+  /**
+   * <p>订单号</p>
+   */
+  DealName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6461,359 +1870,21 @@ export interface AssociateBudgetResponse {
 }
 
 /**
- * CreateLoadBalancerSnatIps请求参数结构体
+ * RegenerateKeys返回参数结构体
  */
-export interface CreateLoadBalancerSnatIpsRequest {
+export interface RegenerateKeysResponse {
   /**
-   * 负载均衡唯一性ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。例如：lb-12345678。
+   * <p>重新生成失败的Key的ID列表</p>
    */
-  LoadBalancerId: string
+  FailedKeyIds?: Array<string>
   /**
-   * 添加的SnatIp信息，可指定IP申请，或者指定子网自动申请。可以通过 [DescribeSubnets](https://cloud.tencent.com/document/api/215/15784) 查询获取，单个CLB实例可申请的默认上限为10个。
+   * <p>重新生成后的Key的信息</p>
    */
-  SnatIps: Array<SnatIp>
-  /**
-   * 添加的SnatIp的个数，可与SnatIps一起使用，但若指定IP时，则不能指定创建的SnatIp个数。默认值为1，数量上限与用户配置有关，默认上限为10。
-   */
-  Number?: number
-}
-
-/**
- * DescribeTargetGroupInstances返回参数结构体
- */
-export interface DescribeTargetGroupInstancesResponse {
-  /**
-   * 本次查询的结果数量。
-   */
-  TotalCount?: number
-  /**
-   * 绑定的服务器信息。
-   */
-  TargetGroupInstanceSet?: Array<TargetGroupBackend>
-  /**
-   * 实际统计数量，不受Limit、Offset、CAM的影响。
-   */
-  RealCount?: number
+  RegeneratedKeys?: Array<RegeneratedKey>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DeleteKeys请求参数结构体
- */
-export interface DeleteKeysRequest {
-  /**
-   * <p>模型路由ID</p>
-   */
-  ModelRouterId: string
-  /**
-   * <p>key的ID列表</p>
-   */
-  KeyIds: Array<string>
-}
-
-/**
- * DescribeClassicalLBListeners请求参数结构体
- */
-export interface DescribeClassicalLBListenersRequest {
-  /**
-   * 负载均衡实例ID。
-   */
-  LoadBalancerId: string
-  /**
-   * 负载均衡监听器ID列表。
-   */
-  ListenerIds?: Array<string>
-  /**
-   * 负载均衡监听的协议：'TCP', 'UDP', 'HTTP', 'HTTPS'。
-   */
-  Protocol?: string
-  /**
-   * 负载均衡监听端口，范围为[1-65535]。
-   */
-  ListenerPort?: number
-  /**
-   * 监听器的状态，0：创建中，1：运行中。
-   */
-  Status?: number
-}
-
-/**
- * DeleteTargetGroups返回参数结构体
- */
-export interface DeleteTargetGroupsResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 表示负载均衡的价格
- */
-export interface Price {
-  /**
-   * 描述了实例价格。
-   */
-  InstancePrice?: ItemPrice
-  /**
-   * 描述了网络价格。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BandwidthPrice?: ItemPrice
-  /**
-   * 描述了lcu价格。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LcuPrice?: ItemPrice
-}
-
-/**
- * ModifyTargetGroupInstancesPort请求参数结构体
- */
-export interface ModifyTargetGroupInstancesPortRequest {
-  /**
-   * 目标组ID。
-   */
-  TargetGroupId: string
-  /**
-   * 待修改端口的服务器数组，在这个接口 NewPort 和 Port 为必填项。
-   */
-  TargetGroupInstances: Array<TargetGroupInstance>
-}
-
-/**
- * CreateUserGroup返回参数结构体
- */
-export interface CreateUserGroupResponse {
-  /**
-   * <p>新建用户组的ID。</p>
-   */
-  UserGroupId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * BatchRegisterTargets请求参数结构体
- */
-export interface BatchRegisterTargetsRequest {
-  /**
-   * 负载均衡ID。
-   */
-  LoadBalancerId: string
-  /**
-   * 绑定目标。
-   */
-  Targets: Array<BatchTarget>
-}
-
-/**
- * 监听器上绑定的后端服务的信息
- */
-export interface ListenerBackend {
-  /**
-   * 监听器 ID
-   */
-  ListenerId?: string
-  /**
-   * 监听器的协议
-   */
-  Protocol?: string
-  /**
-   * 监听器的端口
-   */
-  Port?: number
-  /**
-   * 监听器下的规则信息（仅适用于HTTP/HTTPS监听器）
-   */
-  Rules?: Array<RuleTargets>
-  /**
-   * 监听器上绑定的后端服务列表（仅适用于TCP/UDP/TCP_SSL监听器）
-   */
-  Targets?: Array<Backend>
-  /**
-   * 若支持端口段，则为端口段结束端口；若不支持端口段，则为0
-   */
-  EndPort?: number
-}
-
-/**
- * DescribeLBOperateProtect返回参数结构体
- */
-export interface DescribeLBOperateProtectResponse {
-  /**
-   * 返回的负载均衡操作保护信息数组。
-   */
-  LoadBalancerSet: Array<LBOperateProtectInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * HTTP/HTTPS转发规则（输入）
- */
-export interface RuleInput {
-  /**
-   * 转发规则的路径。长度限制为：1~200。
-   */
-  Url: string
-  /**
-   * 转发规则的域名。长度限制为：1~80。Domain和Domains只需要传一个，单域名规则传Domain，多域名规则传Domains。
-   */
-  Domain?: string
-  /**
-   * 会话保持时间。设置为0表示关闭会话保持，开启会话保持可取值30~86400，单位：秒。
-   */
-  SessionExpireTime?: number
-  /**
-   * 健康检查信息。详情请参见：[健康检查](https://cloud.tencent.com/document/product/214/6097)
-   */
-  HealthCheck?: HealthCheck
-  /**
-   * 证书信息；此参数和MultiCertInfo不能同时传入。
-   */
-  Certificate?: CertificateInput
-  /**
-   * 规则的请求转发方式，可选值：WRR、LEAST_CONN、IP_HASH
-分别表示按权重轮询、最小连接数、按IP哈希， 默认为 WRR。
-   */
-  Scheduler?: string
-  /**
-   * 负载均衡与后端服务之间的转发协议，目前支持 HTTP/HTTPS/GRPC/GRPCS/TRPC，TRPC暂未对外开放，默认HTTP。
-   */
-  ForwardType?: string
-  /**
-   * 是否将该域名设为默认域名，注意，一个监听器下只能设置一个默认域名。
-   */
-  DefaultServer?: boolean
-  /**
-   * 是否开启Http2，注意，只有HTTPS域名才能开启Http2。
-   */
-  Http2?: boolean
-  /**
-   * 后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组
-   */
-  TargetType?: string
-  /**
-   * TRPC被调服务器路由，ForwardType为TRPC时必填。目前暂未对外开放。
-   */
-  TrpcCallee?: string
-  /**
-   * TRPC调用服务接口，ForwardType为TRPC时必填。目前暂未对外开放
-   */
-  TrpcFunc?: string
-  /**
-   * 是否开启QUIC，注意，只有HTTPS域名才能开启QUIC
-   */
-  Quic?: boolean
-  /**
-   * 转发规则的域名列表。每个域名的长度限制为：1~80。Domain和Domains只需要传一个，单域名规则传Domain，多域名规则传Domains。
-   */
-  Domains?: Array<string>
-  /**
-   * 证书信息，支持同时传入不同算法类型的多本服务端证书；此参数和Certificate不能同时传入。
-   */
-  MultiCertInfo?: MultiCertInfo
-  /**
-   * 自定义cookie名
-   */
-  CookieName?: string
-}
-
-/**
- * 模型路由实例的标签信息
- */
-export interface TagInfo {
-  /**
-   * 标签的键
-   */
-  TagKey: string
-  /**
-   * 标签的值
-   */
-  TagValue: string
-}
-
-/**
- * SnatIp的信息结构
- */
-export interface SnatIp {
-  /**
-   * 私有网络子网的唯一性id，如subnet-12345678
-   */
-  SubnetId: string
-  /**
-   * IP地址，如192.168.0.1
-   */
-  Ip?: string
-}
-
-/**
- * ModifyLoadBalancerMixIpTarget请求参数结构体
- */
-export interface ModifyLoadBalancerMixIpTargetRequest {
-  /**
-   * 负载均衡实例ID数组，默认支持20个负载均衡实例ID。
-可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
-   */
-  LoadBalancerIds: Array<string>
-  /**
-   * 开启/关闭IPv6FullChain负载均衡7层监听器支持混绑IPv4/IPv6目标特性。
-   */
-  MixIpTarget: boolean
-}
-
-/**
- * DescribeBlockIPTask返回参数结构体
- */
-export interface DescribeBlockIPTaskResponse {
-  /**
-   * 1 running，2 fail，6 succ
-   */
-  Status?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeResources请求参数结构体
- */
-export interface DescribeResourcesRequest {
-  /**
-   * 返回可用区资源列表数目，默认20，最大值100。
-   */
-  Limit?: number
-  /**
-   * 返回可用区资源列表起始偏移量，默认0。
-   */
-  Offset?: number
-  /**
-   * 查询可用区资源列表条件，详细的过滤条件如下：
-- master-zone
-按照【地域可用区】进行过滤，例如：ap-guangzhou-2。
-类型：String
-必选：否
-- ip-version
-按照【IP 类型】进行过滤，例如：IPv4。
-类型：String
-必选：否
-可选项：IPv4、IPv6、IPv6_Nat
-- isp
-按照【ISP 类型】进行过滤，例如：BGP。
-类型：String
-必选：否
-可选项：BGP、CMCC（中国移动）、CUCC（中国联通）、CTCC（中国电信）、BGP_PRO、INTERNAL（内网）
-   */
-  Filters?: Array<Filter>
 }
 
 /**
@@ -6831,191 +1902,61 @@ export interface DescribeClassicalLBListenersResponse {
 }
 
 /**
- * 目标组健康检查详情
+ * DescribeModelKeys请求参数结构体
  */
-export interface TargetGroupHealthCheck {
+export interface DescribeModelKeysRequest {
   /**
-   * 是否开启健康检查。
+   * <p>接入类型过滤：PublicBYOK/PublicCustom/PrivateCustom</p>
    */
-  HealthSwitch: boolean
+  AccessType?: string
   /**
-   * 健康检查方式， 其中仅V2新版目标组类型支持该参数， 支持取值 TCP | HTTP | HTTPS | PING | CUSTOM，其中:
-<ur><li>当目标组后端转发协议为TCP时， 健康检查方式支持 TCP/HTTP/CUSTOM， 默认为TCP。</li><li>当目标组后端转发协议为UDP时， 健康检查方式支持 PING/CUSTOM，默认为PING。</li><li>当目标组后端转发协议为HTTP时， 健康检查方式支持 HTTP/TCP， 默认为HTTP。</li><li>当目标组后端转发协议为HTTPS时， 健康检查方式支持 HTTPS/TCP， 默认为HTTPS。</li><li>当目标组后端转发协议为GRPC时， 健康检查方式支持GRPC/TCP， 默认为GRPC。</li></ur>
+   * <p>过滤条件</p>
    */
-  Protocol?: string
+  Filters?: Array<Filter>
   /**
-   * 自定义探测相关参数。健康检查端口，默认为后端服务的端口，除非您希望指定特定端口，否则建议留空。（仅适用于TCP/UDP目标组）。
-
+   * <p>返回数量限制</p>
    */
-  Port?: number
+  Limit?: number
   /**
-   * 健康检查超时时间。 默认为2秒。 可配置范围：2 - 30秒。
+   * <p>翻页启始索引</p>
    */
-  Timeout?: number
+  Offset?: number
   /**
-   * 检测间隔时间。 默认为5秒。 可配置范围：2 - 300秒。
+   * <p>服务提供商ID</p>
    */
-  GapTime?: number
-  /**
-   * 检测健康阈值。 默认为3秒。 可配置范围：2 - 10次。
-   */
-  GoodLimit?: number
-  /**
-   * 检测不健康阈值。 默认为3秒。 可配置范围：2 - 10次。
-   */
-  BadLimit?: number
-  /**
-   * 目标组下的所有rs的探测包是否开启巨帧。默认开启。仅GWLB类型目标组支持该参数。
-   */
-  JumboFrame?: boolean
-  /**
-   * 健康检查状态码（仅适用于HTTP/HTTPS目标组、TCP目标组的HTTP健康检查方式）。可选值：1~31，默认 31，其中：<url> <li>1 表示探测后返回值 1xx 代表健康。</li><li>2 表示返回 2xx 代表健康。</li><li>4 表示返回 3xx 代表健康。</li><li>8 表示返回 4xx 代表健康。</li><li>16 表示返回 5xx 代表健康。</li></url>若希望多种返回码都可代表健康，则将相应的值相加。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HttpCode?: number
-  /**
-   * 健康检查域名， 其中：<ur><li>仅适用于HTTP/HTTPS目标组和TCP目标组的HTTP健康检查方式。</li><li>针对HTTP/HTTPS目标组，当使用HTTP健康检查方式时，该参数为必填项。</li></ur>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HttpCheckDomain?: string
-  /**
-   * 健康检查路径（仅适用于HTTP/HTTPS转发规则、TCP监听器的HTTP健康检查方式）。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HttpCheckPath?: string
-  /**
-   * 健康检查方法（仅适用于HTTP/HTTPS转发规则、TCP监听器的HTTP健康检查方式），默认值：HEAD，可选值HEAD或GET。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HttpCheckMethod?: string
-  /**
-   * 健康检查的输入格式，健康检查方式取CUSTOM时，必填此字段，可取值：HEX或TEXT，其中：<ur><li>TEXT：文本格式。</li><li>HEX：十六进制格式， SendContext和RecvContext的字符只能在0123456789ABCDEF中选取且长度必须是偶数位。</li><li>仅适用于TCP/UDP目标组。</li></ur>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ContextType?: string
-  /**
-   * 自定义探测相关参数。健康检查协议CheckType的值取CUSTOM时，必填此字段，代表健康检查发送的请求内容，只允许ASCII可见字符，最大长度限制500。（仅适用于TCP/UDP目标组）。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SendContext?: string
-  /**
-   * 自定义探测相关参数。健康检查协议CheckType的值取CUSTOM时，必填此字段，代表健康检查返回的结果，只允许ASCII可见字符，最大长度限制500。（仅适用于TCP/UDP目标组）。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RecvContext?: string
-  /**
-   * HTTP版本, 其中：<ur><li>健康检查协议CheckType的值取HTTP时，必传此字段。</li><li>支持配置选项：HTTP/1.0, HTTP/1.1。</li><li>仅适用于TCP目标组。</li></ur>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HttpVersion?: string
-  /**
-   * GRPC健康检查状态码（仅适用于后端转发协议为GRPC的目标组）。默认值为 12，可输入值为数值、多个数值、或者范围，例如 20 或 20,25 或 0-99。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExtendedCode?: string
+  ServiceProviderIds?: Array<string>
 }
 
 /**
- * CreateModelRouter返回参数结构体
+ * ModelAlias 积分系数配置
  */
-export interface CreateModelRouterResponse {
+export interface Coefficient {
   /**
-   * <p>模型路由实例ID</p>
+   * <p>缓存命中输入积分系数。</p><p>用于 provider prompt cache 命中的输入 token。</p><p>取值范围：[0, 5000]</p><p>默认值：3</p>
+   */
+  InputCachedCoefficient?: number
+  /**
+   * <p>输入积分系数。</p><p>取值范围：[1, 5000]</p><p>默认值：25</p>
+   */
+  InputCoefficient?: number
+  /**
+   * <p>输出积分系数。</p><p>取值范围：[1, 5000]</p><p>默认值：100</p>
+   */
+  OutputCoefficient?: number
+}
+
+/**
+ * DescribeAssociatedModelAvailability请求参数结构体
+ */
+export interface DescribeAssociatedModelAvailabilityRequest {
+  /**
+   * <p>模型路由ID</p>
    */
   ModelRouterId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>模型列表</p>
    */
-  RequestId?: string
-}
-
-/**
- * DescribeExclusiveClusters请求参数结构体
- */
-export interface DescribeExclusiveClustersRequest {
-  /**
-   * 返回集群列表数目，默认值为20，最大值为100。
-   */
-  Limit?: number
-  /**
-   * 返回集群列表起始偏移量，默认为0。
-   */
-  Offset?: number
-  /**
-   * 查询集群列表条件，详细的过滤条件如下：
-<li> cluster-type - String - 是否必填：否 - （过滤条件）按照 集群 的类型过滤，包括"TGW","STGW","VPCGW"。</li>
-<li> cluster-id - String - 是否必填：否 - （过滤条件）按照 集群 的唯一ID过滤，如 ："tgw-12345678","stgw-12345678","vpcgw-12345678"。</li>
-<li> cluster-name - String - 是否必填：否 - （过滤条件）按照 集群 的名称过滤。</li>
-<li> cluster-tag - String - 是否必填：否 - （过滤条件）按照 集群 的标签过滤。（只有TGW/STGW集群有集群标签） </li>
-<li> vip - String - 是否必填：否 - （过滤条件）按照 集群 内的vip过滤。</li>
-<li> loadbalancer-id - String - 是否必填：否 - （过滤条件）按照 集群 内的负载均衡唯一ID过滤。</li>
-<li> network - String - 是否必填：否 - （过滤条件）按照 集群 的网络类型过滤，如："Public","Private"。</li>
-<li> zone - String - 是否必填：否 - （过滤条件）按照 集群 所在可用区过滤，如："ap-guangzhou-1"（广州一区）。</li>
-<li> isp -- String - 是否必填：否 - （过滤条件）按照TGW集群的 Isp 类型过滤，如："BGP","CMCC","CUCC","CTCC","INTERNAL"。</li>
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * DescribeBudgets请求参数结构体
- */
-export interface DescribeBudgetsRequest {
-  /**
-   * <p>Budget ID列表。</p>
-   */
-  BudgetIds?: Array<string>
-  /**
-   * <p>过滤列表。</p><p>支持：BudgetId、BudgetName、Status。</p>
-   */
-  Filters?: Array<Filter>
-  /**
-   * <p>本次查询限制的数量。</p><p>取值范围：[1, 100]</p><p>默认值：20。</p>
-   */
-  Limit?: number
-  /**
-   * <p>本次查询偏移量。</p><p>默认值：0。</p>
-   */
-  Offset?: number
-}
-
-/**
- * ModifyLoadBalancerSla请求参数结构体
- */
-export interface ModifyLoadBalancerSlaRequest {
-  /**
-   * 负载均衡实例信息。
-   */
-  LoadBalancerSla: Array<SlaUpdateParam>
-  /**
-   * 是否强制升级，默认否。
-   */
-  Force?: boolean
-}
-
-/**
- * 转发规则之间的重定向关系
- */
-export interface RewriteLocationMap {
-  /**
-   * 源转发规则ID
-   */
-  SourceLocationId: string
-  /**
-   * 重定向目标转发规则的ID
-   */
-  TargetLocationId: string
-  /**
-   * 重定向状态码，可取值301,302,307
-   */
-  RewriteCode?: number
-  /**
-   * 重定向是否携带匹配的url，配置RewriteCode时必填
-   */
-  TakeUrl?: boolean
-  /**
-   * 源转发的域名，必须是SourceLocationId对应的域名，配置RewriteCode时必填
-   */
-  SourceDomain?: string
+  Models?: Array<string>
 }
 
 /**
@@ -7029,307 +1970,17 @@ export interface DescribeBlockIPTaskRequest {
 }
 
 /**
- * 资源详细信息
+ * 运营商类型信息
  */
-export interface Resource {
+export interface TypeInfo {
   /**
-   * 运营商内具体资源信息，如"CMCC", "CUCC", "CTCC", "BGP", "INTERNAL"。
+   * 运营商类型
    */
-  Type?: Array<string>
+  Type?: string
   /**
-   * 运营商信息，如"CMCC", "CUCC", "CTCC", "BGP", "INTERNAL"。
+   * 规格可用性
    */
-  Isp?: string
-  /**
-   * 可用资源。
-   */
-  AvailabilitySet?: Array<ResourceAvailability>
-  /**
-   * 运营商类型信息
-   */
-  TypeSet?: Array<TypeInfo>
-}
-
-/**
- * CreateLoadBalancer返回参数结构体
- */
-export interface CreateLoadBalancerResponse {
-  /**
-   * <p>由负载均衡实例唯一 ID 组成的数组。<br>存在某些场景，如创建出现延迟时，此字段可能返回为空；此时可以根据接口返回的RequestId或DealName参数，通过DescribeTaskStatus接口查询创建的资源ID。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  LoadBalancerIds?: Array<string>
-  /**
-   * <p>订单号。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DealName?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DisassociateBudget返回参数结构体
- */
-export interface DisassociateBudgetResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyFunctionTargets请求参数结构体
- */
-export interface ModifyFunctionTargetsRequest {
-  /**
-   * 负载均衡实例ID。
-   */
-  LoadBalancerId: string
-  /**
-   * 负载均衡监听器ID。
-   */
-  ListenerId: string
-  /**
-   * 要修改的后端云函数服务列表，仅支持 Event 函数类型。
-   */
-  FunctionTargets: Array<FunctionTarget>
-  /**
-   * 转发规则的ID，当绑定机器到七层转发规则时，必须提供此参数或Domain+Url两者之一。
-   */
-  LocationId?: string
-  /**
-   * 目标规则的域名，提供LocationId参数时本参数不生效。
-   */
-  Domain?: string
-  /**
-   * 目标规则的URL，提供LocationId参数时本参数不生效。
-   */
-  Url?: string
-}
-
-/**
- * DescribeRewrite返回参数结构体
- */
-export interface DescribeRewriteResponse {
-  /**
-   * 重定向转发规则构成的数组，若无重定向规则，则返回空数组。
-   */
-  RewriteSet?: Array<RuleOutput>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * Budget信息
- */
-export interface BudgetInfo {
-  /**
-   * <p>关联的key数量</p>
-   */
-  AssociationKeyCount?: number
-  /**
-   * <p>关联的模型路由数量</p>
-   */
-  AssociationModelRouterCount?: number
-  /**
-   * <p>关联的用户组数量</p>
-   */
-  AssociationUserGroupCount?: number
-  /**
-   * <p>Budget预算配置数组。</p><p>最多返回3个元素，每种刷新周期（1d/7d/30d）各一个。</p>
-   */
-  BudgetConfigs?: Array<BudgetConfig>
-  /**
-   * <p>Budget ID。</p>
-   */
-  BudgetId?: string
-  /**
-   * <p>Budget名称。</p>
-   */
-  BudgetName?: string
-  /**
-   * <p>创建时间。</p>
-   */
-  CreatedTime?: string
-  /**
-   * <p>修改时间。</p>
-   */
-  ModifiedTime?: string
-  /**
-   * <p>Budget限速信息。</p>
-   */
-  RateLimitConfig?: RateLimitConfigForBudget
-  /**
-   * <p>Budget状态。</p><p>枚举值：</p><ul><li>Provisioning：创建中</li><li>Active：运行中</li><li>Configuring：变配中</li><li>Deleting：删除中</li><li>ProvisionFailed：创建失败</li><li>ConfigureFailed：变配失败</li><li>DeletionFailed：删除失败</li></ul>
-   */
-  Status?: string
-}
-
-/**
- * ModifyKeysUserGroup返回参数结构体
- */
-export interface ModifyKeysUserGroupResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 可用区转发亲和信息
- */
-export interface AvailableZoneAffinityInfo {
-  /**
-   * 是否开启可用区转发亲和。true：开启可用区转发亲和；false：开启可用区转发亲和。
-   */
-  Enable?: boolean
-  /**
-   * 可用区转发亲和失效阈值，当可用区内后端服务健康比例小于该阈值时，负载均衡会退出可用区转发亲和，转为全可用区转发。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ExitRatio?: number
-  /**
-   * 可用区转发亲和的重新生效阈值，当处于全可用区转发，且负载均衡可用区内的后端服务健康比例大于等于该阈值时，负载均衡会重新进入可用区转发亲和。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ReentryRatio?: number
-}
-
-/**
- * SetLoadBalancerClsLog请求参数结构体
- */
-export interface SetLoadBalancerClsLogRequest {
-  /**
-   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
-   */
-  LoadBalancerId: string
-  /**
-   * 日志服务(CLS)的日志集 ID。
-<li>增加和更新日志主题时可调用 [DescribeLogsets](https://cloud.tencent.com/document/product/614/58624) 接口获取日志集 ID。</li>
-<li>删除日志主题时，此参数填写为**空字符串**即可。</li>
-   */
-  LogSetId: string
-  /**
-   * 日志服务(CLS)的日志主题 ID。
-<li>增加和更新日志主题时可调用 [DescribeTopics](https://cloud.tencent.com/document/product/614/56454) 接口获取日志主题 ID。</li>
-<li>删除日志主题时，此参数填写为**空字符串**即可。</li>
-   */
-  LogTopicId: string
-  /**
-   * 日志类型：
-<li>ACCESS：访问日志</li>
-<li>HEALTH：健康检查日志</li>
-默认为ACCESS。
-   */
-  LogType?: string
-}
-
-/**
- * 反查Lb绑定关系。
- */
-export interface LBItem {
-  /**
-   * lb的字符串id
-   */
-  LoadBalancerId?: string
-  /**
-   * lb的vip
-   */
-  Vip?: string
-  /**
-   * 监听器规则
-   */
-  Listeners?: Array<ListenerItem>
-  /**
-   * LB所在地域
-   */
-  Region?: string
-}
-
-/**
- * ModifyTargetGroupAttribute返回参数结构体
- */
-export interface ModifyTargetGroupAttributeResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DeleteLoadBalancerListeners返回参数结构体
- */
-export interface DeleteLoadBalancerListenersResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeIdleLoadBalancers请求参数结构体
- */
-export interface DescribeIdleLoadBalancersRequest {
-  /**
-   * 数据偏移量，默认为0。
-   */
-  Offset?: number
-  /**
-   * 返回负载均衡实例的数量，默认为20，最大值为100。
-   */
-  Limit?: number
-  /**
-   * 负载均衡所在地域，可以通过 [DescribeRegions](https://cloud.tencent.com/document/product/1596/77930) 接口返回值 `RegionSet.Region` 字段获取。
-   */
-  LoadBalancerRegion?: string
-}
-
-/**
- * DeleteLoadBalancerSnatIps请求参数结构体
- */
-export interface DeleteLoadBalancerSnatIpsRequest {
-  /**
-   * 负载均衡唯一ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。例如：lb-12345678。
-   */
-  LoadBalancerId: string
-  /**
-   * 删除SnatIp地址数组，最大支持删除数量为20个。
-   */
-  Ips: Array<string>
-}
-
-/**
- * 网络计费模式，最大出带宽
- */
-export interface InternetAccessible {
-  /**
-   * TRAFFIC_POSTPAID_BY_HOUR 按流量按小时后计费 ; BANDWIDTH_POSTPAID_BY_HOUR 按带宽按小时后计费，国际站用户不支持该计费模式; BANDWIDTH_PACKAGE 按带宽包计费;BANDWIDTH_PREPAID按带宽预付费。
-   */
-  InternetChargeType?: string
-  /**
-   * 最大出带宽，单位Mbps，仅对公网属性的共享型、性能容量型和独占型 CLB 实例、以及内网属性的性能容量型 CLB 实例生效。
-- 对于公网属性的共享型和独占型 CLB 实例，最大出带宽的范围为1Mbps-2048Mbps。
-- 对于公网属性和内网属性的性能容量型 CLB实例，最大出带宽的范围为1Mbps-61440Mbps。
-（调用CreateLoadBalancer创建LB时不指定此参数则设置为默认值10Mbps。此上限可调整）
-   */
-  InternetMaxBandwidthOut?: number
-  /**
-   * 带宽包的类型，如 BGP（多线）。
-类型如下：
-SINGLEISP: 单线
-BGP: 多线
-HIGH_QUALITY_BGP: 精品BGP共享带宽包
-SINGLEISP_CMCC: 中国移动共享带宽包
-SINGLEISP_CTCC: 中国电信共享带宽包
-SINGLEISP_CUCC: 中国联通共享带宽包
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  BandwidthpkgSubType?: string
+  SpecAvailabilitySet?: Array<SpecAvailability>
 }
 
 /**
@@ -7367,168 +2018,6 @@ export interface DescribeClassicalLBTargetsResponse {
 }
 
 /**
- * DisassociateTargetGroups请求参数结构体
- */
-export interface DisassociateTargetGroupsRequest {
-  /**
-   * 待解绑的规则关系数组，支持批量解绑多个监听器，单次批量解除最多20个。
-   */
-  Associations: Array<TargetGroupAssociation>
-}
-
-/**
- * Budget限速配置
- */
-export interface RateLimitConfigForBudget {
-  /**
-   * <p>每分钟限制的请求数量。</p><p>单位：次/分钟。</p>
-   */
-  RPM?: number
-  /**
-   * <p>每分钟限制的Token数量。</p><p>单位：个/分钟。</p>
-   */
-  TPM?: number
-}
-
-/**
- * ModifyTargetPort请求参数结构体
- */
-export interface ModifyTargetPortRequest {
-  /**
-   * 负载均衡实例ID。
-   */
-  LoadBalancerId: string
-  /**
-   * 负载均衡监听器ID。
-   */
-  ListenerId: string
-  /**
-   * 要修改端口的后端服务列表。
-   */
-  Targets: Array<Target>
-  /**
-   * 后端服务绑定到监听器或转发规则的新端口。
-   */
-  NewPort: number
-  /**
-   * 转发规则的ID，当后端服务绑定到七层转发规则时，必须提供此参数或Domain+Url两者之一。
-   */
-  LocationId?: string
-  /**
-   * 目标规则的域名，提供LocationId参数时本参数不生效。
-   */
-  Domain?: string
-  /**
-   * 目标规则的URL，提供LocationId参数时本参数不生效。
-   */
-  Url?: string
-}
-
-/**
- * 模型路由集群信息
- */
-export interface ClusterInfo {
-  /**
-   * <p>独占集群ID</p>
-   */
-  ClusterId?: string
-  /**
-   * <p>集群类型</p><p>枚举值：</p><ul><li>Public： 公有云集群</li><li>Exclusive： 独占集群</li></ul><p>默认值：Public</p>
-   */
-  Type?: string
-}
-
-/**
- * DescribeLoadBalancers返回参数结构体
- */
-export interface DescribeLoadBalancersResponse {
-  /**
-   * 满足过滤条件的负载均衡实例总数。此数值与入参中的Limit无关。
-   */
-  TotalCount?: number
-  /**
-   * 返回的负载均衡实例数组。
-   */
-  LoadBalancerSet?: Array<LoadBalancer>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * DescribeLBListeners返回参数结构体
- */
-export interface DescribeLBListenersResponse {
-  /**
-   * 绑定的后端规则
-   */
-  LoadBalancers: Array<LBItem>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateModelRouter请求参数结构体
- */
-export interface CreateModelRouterRequest {
-  /**
-   * <p>模型路由类型</p><p>枚举值：</p><ul><li>Shared： 共享型</li><li>Enterprise： 企业级</li></ul>
-   */
-  ModelRouterType: string
-  /**
-   * <p>模型路由实例名称</p><p>默认值：-</p>
-   */
-  ModelRouterName?: string
-  /**
-   * <p>模型路由实例的网络协议</p><p>枚举值：</p><ul><li>HTTP： HTTP协议</li><li>HTTPS： HTTPS协议</li></ul>
-   */
-  Schema?: string
-  /**
-   * <p>模型路由的监听端口</p><p>取值范围：[1, 65535]</p>
-   */
-  Port?: number
-  /**
-   * <p>证书ID</p><p>入参限制：当Scheme为HTTPS时，该参数必传</p>
-   */
-  CertId?: string
-  /**
-   * <p>网络类型</p><p>枚举值：</p><ul><li>Internet： 公网</li><li>Intranet： 内网</li></ul>
-   */
-  NetworkType?: string
-  /**
-   * <p>模型路由实例所属VPC的ID</p>
-   */
-  VpcId?: string
-  /**
-   * <p>模型路由实例所属子网的ID</p>
-   */
-  SubnetId?: string
-  /**
-   * <p>关联的积分预算ID</p>
-   */
-  BudgetId?: string
-  /**
-   * <p>限速配置</p>
-   */
-  RateLimitConfig?: RateLimitConfigForModelRouter
-  /**
-   * <p>路由配置</p>
-   */
-  RouterSetting?: RouterSettingWithoutFallBack
-  /**
-   * <p>标签</p>
-   */
-  Tags?: Array<TagInfo>
-  /**
-   * <p>集群信息</p>
-   */
-  ClusterInfo?: ClusterInfo
-}
-
-/**
  * DeleteListener返回参数结构体
  */
 export interface DeleteListenerResponse {
@@ -7539,9 +2028,9 @@ export interface DeleteListenerResponse {
 }
 
 /**
- * DeleteLoadBalancerSnatIps返回参数结构体
+ * ModifyModelRouterAttributes返回参数结构体
  */
-export interface DeleteLoadBalancerSnatIpsResponse {
+export interface ModifyModelRouterAttributesResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7563,29 +2052,32 @@ export interface InquiryPriceRenewLoadBalancerRequest {
 }
 
 /**
- * 证书相关信息
+ * 网络计费模式，最大出带宽
  */
-export interface CertificateOutput {
+export interface InternetAccessible {
   /**
-   * 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证
+   * TRAFFIC_POSTPAID_BY_HOUR 按流量按小时后计费 ; BANDWIDTH_POSTPAID_BY_HOUR 按带宽按小时后计费，国际站用户不支持该计费模式; BANDWIDTH_PACKAGE 按带宽包计费;BANDWIDTH_PREPAID按带宽预付费。
    */
-  SSLMode?: string
+  InternetChargeType?: string
   /**
-   * 是否开启客户端证书验证，只在双向认证时生效。
+   * 最大出带宽，单位Mbps，仅对公网属性的共享型、性能容量型和独占型 CLB 实例、以及内网属性的性能容量型 CLB 实例生效。
+- 对于公网属性的共享型和独占型 CLB 实例，最大出带宽的范围为1Mbps-2048Mbps。
+- 对于公网属性和内网属性的性能容量型 CLB实例，最大出带宽的范围为1Mbps-61440Mbps。
+（调用CreateLoadBalancer创建LB时不指定此参数则设置为默认值10Mbps。此上限可调整）
    */
-  SSLVerifyClient?: string
+  InternetMaxBandwidthOut?: number
   /**
-   * 服务端证书的ID。
+   * 带宽包的类型，如 BGP（多线）。
+类型如下：
+SINGLEISP: 单线
+BGP: 多线
+HIGH_QUALITY_BGP: 精品BGP共享带宽包
+SINGLEISP_CMCC: 中国移动共享带宽包
+SINGLEISP_CTCC: 中国电信共享带宽包
+SINGLEISP_CUCC: 中国联通共享带宽包
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CertId?: string
-  /**
-   * 客户端证书的 ID。
-   */
-  CertCaId?: string
-  /**
-   * 多本服务器证书场景扩展的服务器证书ID。
-   */
-  ExtCertIds?: Array<string>
+  BandwidthpkgSubType?: string
 }
 
 /**
@@ -7596,32 +2088,6 @@ export interface DeleteTargetGroupsRequest {
    * 目标组的ID数组，单次最多支持删除20个。
    */
   TargetGroupIds: Array<string>
-}
-
-/**
- * DescribeAsyncJobs返回参数结构体
- */
-export interface DescribeAsyncJobsResponse {
-  /**
-   * <p>异步任务列表</p>
-   */
-  Jobs?: Array<Job>
-  /**
-   * <p>分页游标</p>
-   */
-  NextToken?: string
-  /**
-   * <p>本次查询最大数量</p>
-   */
-  MaxResults?: number
-  /**
-   * <p>本次查询总数</p>
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -7640,58 +2106,6 @@ export interface SetLoadBalancerStartStatusRequest {
    * 监听器ID。如果该字段为空，则表示操作负载均衡实例，如果不为空，则表示操作监听器。
    */
   ListenerIds?: Array<string>
-}
-
-/**
- * 规则与目标组的关联关系
- */
-export interface TargetGroupAssociation {
-  /**
-   * 负载均衡ID
-   */
-  LoadBalancerId: string
-  /**
-   * 目标组ID
-   */
-  TargetGroupId: string
-  /**
-   * 监听器ID。访问AssociateTargetGroups和DisassociateTargetGroups接口时必传此参数。
-   */
-  ListenerId?: string
-  /**
-   * 转发规则ID
-   */
-  LocationId?: string
-  /**
-   * 目标组权重，范围[0, 100]。仅绑定v2目标组时生效，如果不存在，则默认为10。
-   */
-  Weight?: number
-}
-
-/**
- * 监听器的健康检查信息
- */
-export interface ListenerHealth {
-  /**
-   * 监听器ID
-   */
-  ListenerId?: string
-  /**
-   * 监听器名称
-   */
-  ListenerName?: string
-  /**
-   * 监听器的协议
-   */
-  Protocol?: string
-  /**
-   * 监听器的端口
-   */
-  Port?: number
-  /**
-   * 监听器的转发规则列表
-   */
-  Rules?: Array<RuleHealth>
 }
 
 /**
@@ -7748,71 +2162,25 @@ export interface AssociationItem {
 }
 
 /**
- * 监听器绑定的后端服务的详细信息
+ * BYOK健康探测结果
  */
-export interface Backend {
+export interface ModelTestResult {
   /**
-   * 后端服务的类型，可取：CVM、ENI、CCN、EVM、GLOBALROUTE、NAT、SRV等
+   * <p>模型</p>
    */
-  Type?: string
+  Model?: string
   /**
-   * 后端服务的唯一 ID，如 ins-abcd1234
+   * <p>健康状况</p><p>枚举值：</p><ul><li>Success： 健康</li><li>Error： 不健康</li></ul>
    */
-  InstanceId?: string
+  Status?: string
   /**
-   * 后端服务的监听端口，如果是全端口段监听器绑定的全监听目标组场景，此端口返回0，表示无效端口，绑定的后端服务的端口随监听器端口。
+   * <p>错误信息</p>
    */
-  Port?: number
+  ErrorInfo?: ProviderTestConnectionErrorInfo
   /**
-   * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
+   * <p>探测请求</p>
    */
-  Weight?: number
-  /**
-   * 后端服务的外网 IP
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PublicIpAddresses?: Array<string>
-  /**
-   * 后端服务的内网 IP
-   */
-  PrivateIpAddresses?: Array<string>
-  /**
-   * 后端服务的实例名称
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InstanceName?: string
-  /**
-   * 后端服务被绑定的时间
-   */
-  RegisteredTime?: string
-  /**
-   * 弹性网卡唯一ID，如 eni-1234abcd
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EniId?: string
-  /**
-   * 标签。
-   */
-  Tag?: string
-  /**
-   * 后端服务所在的可用区，如ap-guangzhou-1
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Zone?: string
-}
-
-/**
- * DescribeModelRouterQuota返回参数结构体
- */
-export interface DescribeModelRouterQuotaResponse {
-  /**
-   * <p>配额信息</p>
-   */
-  Quotas?: Array<ModelRouterQuota>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  TestConnectionRequest?: TestConnectionRequestInfo
 }
 
 /**
@@ -8112,6 +2480,7523 @@ ToaClean: TOA（TCP Option Address）清理，清除TCP选项中的地址信息�
 }
 
 /**
+ * DescribeIntentRouterTiers请求参数结构体
+ */
+export type DescribeIntentRouterTiersRequest = null
+
+/**
+ * 修改节点权重的数据类型
+ */
+export interface RsWeightRule {
+  /**
+   * 负载均衡监听器 ID。
+   */
+  ListenerId: string
+  /**
+   * 要修改权重的后端机器列表。
+   */
+  Targets: Array<Target>
+  /**
+   * 转发规则的ID，七层规则时需要此参数，4层规则不需要。
+   */
+  LocationId?: string
+  /**
+   * 目标规则的域名，提供LocationId参数时本参数不生效。
+   * @deprecated
+   */
+  Domain?: string
+  /**
+   * 目标规则的URL，提供LocationId参数时本参数不生效。
+   * @deprecated
+   */
+  Url?: string
+  /**
+   * 后端服务修改后的转发权重，取值范围：[0，100]。此参数的优先级低于前述[Target](https://cloud.tencent.com/document/api/214/30694#Target)中的Weight参数，即最终的权重值以Target中的Weight参数值为准，仅当Target中的Weight参数为空时，才以RsWeightRule中的Weight参数为准。
+   */
+  Weight?: number
+}
+
+/**
+ * DescribeUpperModels返回参数结构体
+ */
+export interface DescribeUpperModelsResponse {
+  /**
+   * <p>上游模型列表</p>
+   */
+  Models?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * BatchModifyTargetWeight返回参数结构体
+ */
+export interface BatchModifyTargetWeightResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLoadBalancerOverview返回参数结构体
+ */
+export interface DescribeLoadBalancerOverviewResponse {
+  /**
+   * 负载均衡总数
+   */
+  TotalCount?: number
+  /**
+   * 运行中的负载均衡数目
+   */
+  RunningCount?: number
+  /**
+   * 隔离中的负载均衡数目
+   */
+  IsolationCount?: number
+  /**
+   * 即将到期的负载均衡数目
+   */
+  WillExpireCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 聊天测试接口多模态附件
+ */
+export interface MultiModalityAttachments {
+  /**
+   * <p>base64 url编码的文件内容</p>
+   */
+  Data: string
+  /**
+   * <p>附件类型</p><p>枚举值：</p><ul><li>image： 图像</li><li>pdf： pdf（文件）</li></ul>
+   */
+  Type: string
+}
+
+/**
+ * ModifyRule请求参数结构体
+ */
+export interface ModifyRuleRequest {
+  /**
+   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。
+   */
+  LoadBalancerId: string
+  /**
+   * 负载均衡监听器 ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口获取。
+   */
+  ListenerId: string
+  /**
+   * 要修改的转发规则的 ID， 可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口获取。
+   */
+  LocationId: string
+  /**
+   * 转发规则的新的转发路径，如不需修改Url，则不需提供此参数。
+   */
+  Url?: string
+  /**
+   * 健康检查信息。
+   */
+  HealthCheck?: HealthCheck
+  /**
+   * 规则的请求转发方式，可选值：WRR、LEAST_CONN、IP_HASH
+分别表示按权重轮询、最小连接数、按IP哈希， 默认为 WRR。
+   */
+  Scheduler?: string
+  /**
+   * 会话保持时间。取值范围0或30-86400（单位：秒）。
+默认为0。
+   */
+  SessionExpireTime?: number
+  /**
+   * 负载均衡实例与后端服务之间的转发协议，默认HTTP，可取值：HTTP、HTTPS、GRPC。仅HTTPS监听器该参数有效。
+   */
+  ForwardType?: string
+  /**
+   * TRPC被调服务器路由，ForwardType为TRPC时必填。目前暂未对外开放。
+   */
+  TrpcCallee?: string
+  /**
+   * TRPC调用服务接口，ForwardType为TRPC时必填。目前暂未对外开放。
+   */
+  TrpcFunc?: string
+  /**
+   * OAuth配置信息。
+   */
+  OAuth?: OAuth
+  /**
+   * 自定义cookie名
+   */
+  CookieName?: string
+}
+
+/**
+ * DescribeModelRouterResourcePackages请求参数结构体
+ */
+export interface DescribeModelRouterResourcePackagesRequest {
+  /**
+   * <p>模型路由资源包Id。</p>
+   */
+  ModelRouterResourcePackageIds?: Array<string>
+  /**
+   * <p>数据偏移量。</p><p>默认值：0</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回的数量，最大值为100。</p><p>取值范围：[1, 100]</p><p>默认值：20</p>
+   */
+  Limit?: number
+  /**
+   * <p>排序参数，支持以下字段：&quot;buyTime&quot;, &quot;startTime&quot;, &quot;endTime&quot;</p>
+   */
+  OrderBy?: string
+  /**
+   * <p>排序方式：asc，desc，默认asc</p>
+   */
+  SortBy?: string
+  /**
+   * <p>查询的过滤条件。</p><p>每次请求的Filters的上限为10，Filter.Values的上限为100。 Filter.Name和Filter.Values皆为必填项。详细的过滤条件如下： status - Integer - 是否必填：否 - 状态：0-有效 1-已退款 2-已过期 3-已用完。 effect_time_start - String - 是否必填：否 - 生效起始时间,YYYY-MM-DD HH:MM:SS格式。 effect_time_end - String - 是否必填：否 - 生效截止时间。 expire_time_start - String - 是否必填：否 - 失效起始时间。 expire_time_end - String - 是否必填：否 - 失效截止时间。</p>
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * ModifyModelAttributes请求参数结构体
+ */
+export interface ModifyModelAttributesRequest {
+  /**
+   * <p>BYOK的ID</p><p>参数格式：byok-kot39u7j</p>
+   */
+  ServiceProviderId: string
+  /**
+   * <p>BYOK的自定义名字</p><p>入参限制：1～256个字符</p>
+   */
+  ServiceProviderName?: string
+}
+
+/**
+ * ModifyUserGroupAttributes请求参数结构体
+ */
+export interface ModifyUserGroupAttributesRequest {
+  /**
+   * <p>模型路由实例ID。</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>待修改的用户组ID。不可为「未分组」虚拟分组 ugrp-ungrouped。</p>
+   */
+  UserGroupId: string
+  /**
+   * <p>用户组关联的预算ID。不传则不修改预算关联；传入有效 budget-xxx 则将该用户组关联到此预算（若已关联其它预算则替换为本预算）。仅支持关联/替换，不支持解绑——解绑请用 DisassociateBudget。预算与组内 Key、所属实例的预算各自独立判定。</p>
+   */
+  BudgetId?: string
+  /**
+   * <p>用户组意图路由白名单（ir-xxx）。每一项须为该实例已创建的意图路由名。不传则不修改；传入即整体覆盖。</p>
+   */
+  IntentRouters?: Array<string>
+  /**
+   * <p>用户组真实模型白名单。每一项须为该实例已关联的模型名。不传则不修改；传入即整体覆盖。</p>
+   */
+  Models?: Array<string>
+  /**
+   * <p>用户组名称。不传则不修改；传入时长度不超过255个字符、同实例下唯一。</p>
+   */
+  UserGroupName?: string
+}
+
+/**
+ * RegisterTargetsWithClassicalLB请求参数结构体
+ */
+export interface RegisterTargetsWithClassicalLBRequest {
+  /**
+   * 负载均衡实例ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 后端服务信息。
+   */
+  Targets: Array<ClassicalTargetInfo>
+}
+
+/**
+ * DescribeLBOperateProtect请求参数结构体
+ */
+export interface DescribeLBOperateProtectRequest {
+  /**
+   * 负载均衡实例ID。
+   */
+  LoadBalancerIds: Array<string>
+}
+
+/**
+ * 路由设置
+ */
+export interface RouterSettingWithFallBack {
+  /**
+   * <p>模型间路由策略。</p><p>枚举值：</p><ul><li>SimpleShuffle： 简单随机路由</li><li>LowestCost： 最低积分路由</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CrossModelGroupRoutingStrategy?: string
+  /**
+   * <p>回退策略</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FallBack?: FallBackItem
+  /**
+   * <p>模型内路由策略</p><p>枚举值：</p><ul><li>SimpleShuffle： 简单随机路由</li><li>LeastBusy： 最低繁忙路由</li><li>LatencyBasedRouting： 最低延迟路由</li><li>UsageBasedRouting： 用量均衡路由</li><li>CostBasedRouting： 最低积分路由</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoutingStrategy?: string
+}
+
+/**
+ * 跨域2.0云联网下子机和网卡信息
+ */
+export interface CrossTargets {
+  /**
+   * 本地私有网络ID，即负载均衡的VpcId。
+   */
+  LocalVpcId?: string
+  /**
+   * 子机或网卡所属的私有网络ID。
+   */
+  VpcId?: string
+  /**
+   * 子机或网卡的IP地址
+   */
+  IP?: string
+  /**
+   * 子机或网卡所属的私有网络名称。
+   */
+  VpcName?: string
+  /**
+   * 子机的网卡ID。
+   */
+  EniId?: string
+  /**
+   * 子机实例ID。
+   */
+  InstanceId?: string
+  /**
+   * 子机实例名称。
+   */
+  InstanceName?: string
+  /**
+   * 子机或者网卡所属的地域。
+   */
+  Region?: string
+}
+
+/**
+ * AssociateBudget请求参数结构体
+ */
+export interface AssociateBudgetRequest {
+  /**
+   * <p>Budget ID。</p>
+   */
+  BudgetId: string
+  /**
+   * <p>要关联的资源列表。</p><p>仅支持企业型模型路由实例和企业型实例下的Key。同一请求内不允许重复资源；资源已关联其他Budget时将替换为新的Budget。</p>
+   */
+  Resources: Array<BudgetResource>
+}
+
+/**
+ * 传统型负载均衡的后端服务相关信息
+ */
+export interface ClassicalTarget {
+  /**
+   * 后端服务的类型，可取值：CVM、ENI（即将支持）
+   */
+  Type?: string
+  /**
+   * 后端服务的唯一 ID，可通过 DescribeInstances 接口返回字段中的 unInstanceId 字段获取
+   */
+  InstanceId?: string
+  /**
+   * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
+   */
+  Weight?: number
+  /**
+   * 后端服务的外网 IP
+   */
+  PublicIpAddresses?: Array<string>
+  /**
+   * 后端服务的内网 IP
+   */
+  PrivateIpAddresses?: Array<string>
+  /**
+   * 后端服务的实例名称
+   */
+  InstanceName?: string
+  /**
+   * 后端服务的状态
+1：故障，2：运行中，3：创建中，4：已关机，5：已退还，6：退还中， 7：重启中，8：开机中，9：关机中，10：密码重置中，11：格式化中，12：镜像制作中，13：带宽设置中，14：重装系统中，19：升级中，21：热迁移中
+   */
+  RunFlag?: number
+}
+
+/**
+ * model 信息
+ */
+export interface ServiceProviderModelItem {
+  /**
+   * <p>关联的模型路由实例列表</p>
+   */
+  AssociatedModelRouters?: Array<AssociatedModelRouterItem>
+  /**
+   * <p>该模型当前支持的输入多模态能力列表</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>image： 支持图像输入</li><li>file： 支持文件输入（当前仅支持pdf）</li></ul><p>默认值：text</p>
+   */
+  InputModalities?: Array<string>
+  /**
+   * <p>模型别名, 可以用于实际访问</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelAlias?: string
+  /**
+   * <p>模型唯一标识, 原始模型名称</p>
+   */
+  ModelId?: string
+  /**
+   * <p>该模型经探测最多支持的输入多模态能力列表</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>file： 支持文件输入（当前仅支持pdf）</li><li>image： 支持图像输入</li></ul><p>模型不健康时列表为空</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProbedInputModalities?: Array<string>
+}
+
+/**
+ * SetLoadBalancerClsLog请求参数结构体
+ */
+export interface SetLoadBalancerClsLogRequest {
+  /**
+   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
+   */
+  LoadBalancerId: string
+  /**
+   * 日志服务(CLS)的日志集 ID。
+<li>增加和更新日志主题时可调用 [DescribeLogsets](https://cloud.tencent.com/document/product/614/58624) 接口获取日志集 ID。</li>
+<li>删除日志主题时，此参数填写为**空字符串**即可。</li>
+   */
+  LogSetId: string
+  /**
+   * 日志服务(CLS)的日志主题 ID。
+<li>增加和更新日志主题时可调用 [DescribeTopics](https://cloud.tencent.com/document/product/614/56454) 接口获取日志主题 ID。</li>
+<li>删除日志主题时，此参数填写为**空字符串**即可。</li>
+   */
+  LogTopicId: string
+  /**
+   * 日志类型：
+<li>ACCESS：访问日志</li>
+<li>HEALTH：健康检查日志</li>
+默认为ACCESS。
+   */
+  LogType?: string
+}
+
+/**
+ * DeregisterTargetsFromClassicalLB请求参数结构体
+ */
+export interface DeregisterTargetsFromClassicalLBRequest {
+  /**
+   * 负载均衡实例ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 后端服务的实例ID列表。
+   */
+  InstanceIds: Array<string>
+}
+
+/**
+ * InquiryPriceModifyLoadBalancer请求参数结构体
+ */
+export interface InquiryPriceModifyLoadBalancerRequest {
+  /**
+   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
+   */
+  LoadBalancerId: string
+  /**
+   * 修改后的网络带宽信息
+   */
+  InternetAccessible: InternetAccessible
+}
+
+/**
+ * BYOK的健康检查结果
+ */
+export interface ModelHealthCheckResults {
+  /**
+   * <p>BYOK的KeyID</p>
+   */
+  ProviderKeyId?: string
+  /**
+   * <p>模型</p>
+   */
+  Model?: string
+  /**
+   * <p>健康检查状态</p>
+   */
+  Status?: string
+}
+
+/**
+ * DescribeServiceProviderHealthStatus返回参数结构体
+ */
+export interface DescribeServiceProviderHealthStatusResponse {
+  /**
+   * <p>健康检查的结果</p>
+   */
+  HealthCheckResults?: Array<ModelHealthCheckResults>
+  /**
+   * <p>本次请求总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyTargetWeight返回参数结构体
+ */
+export interface ModifyTargetWeightResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 可用区资源列表
+ */
+export interface ZoneResource {
+  /**
+   * 主可用区，如"ap-guangzhou-1"。
+   */
+  MasterZone?: string
+  /**
+   * 资源列表。
+   */
+  ResourceSet?: Array<Resource>
+  /**
+   * 备可用区，如"ap-guangzhou-2"，单可用区时，备可用区为null。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SlaveZone?: string
+  /**
+   * IP版本，如IPv4，IPv6，IPv6_Nat。
+   */
+  IPVersion?: string
+  /**
+   * 可用区所属地域，如：ap-guangzhou
+   */
+  ZoneRegion?: string
+  /**
+   * 可用区是否是LocalZone可用区，如：false
+   */
+  LocalZone?: boolean
+  /**
+   * 可用区资源的类型，SHARED表示共享资源，EXCLUSIVE表示独占资源。
+   */
+  ZoneResourceType?: string
+  /**
+   * 可用区是否是EdgeZone可用区，如：false
+   */
+  EdgeZone?: boolean
+  /**
+   * 网络出口
+   */
+  Egress?: string
+}
+
+/**
+ * DescribeExclusiveClusters返回参数结构体
+ */
+export interface DescribeExclusiveClustersResponse {
+  /**
+   * 集群列表。
+   */
+  ClusterSet?: Array<Cluster>
+  /**
+   * 集群总数量。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * BatchModifyTargetTag请求参数结构体
+ */
+export interface BatchModifyTargetTagRequest {
+  /**
+   * 负载均衡实例 ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 要批量修改标签的列表。
+   */
+  ModifyList: Array<RsTagRule>
+}
+
+/**
+ * 负载均衡实例的健康检查状态
+ */
+export interface LoadBalancerHealth {
+  /**
+   * 负载均衡实例ID
+   */
+  LoadBalancerId?: string
+  /**
+   * 负载均衡实例名称
+   */
+  LoadBalancerName?: string
+  /**
+   * 监听器列表
+   */
+  Listeners?: Array<ListenerHealth>
+}
+
+/**
+ * ModifyRule返回参数结构体
+ */
+export interface ModifyRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeregisterFunctionTargets返回参数结构体
+ */
+export interface DeregisterFunctionTargetsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyListener请求参数结构体
+ */
+export interface ModifyListenerRequest {
+  /**
+   * <p>负载均衡实例ID，可以通过 <a href="https://cloud.tencent.com/document/product/214/30685">DescribeLoadBalancers</a> 接口查询。</p>
+   */
+  LoadBalancerId: string
+  /**
+   * <p>负载均衡监听器ID，可以通过 <a href="https://cloud.tencent.com/document/product/214/30686">DescribeListeners</a> 接口查询。</p>
+   */
+  ListenerId: string
+  /**
+   * <p>新的监听器名称。命名规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。</p>
+   */
+  ListenerName?: string
+  /**
+   * <p>会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。此参数仅适用于TCP/UDP监听器。</p>
+   */
+  SessionExpireTime?: number
+  /**
+   * <p>健康检查相关参数，此参数仅适用于TCP/UDP/TCP_SSL/QUIC监听器。</p>
+   */
+  HealthCheck?: HealthCheck
+  /**
+   * <p>证书相关信息，此参数仅适用于HTTPS/TCP_SSL/QUIC监听器；此参数和MultiCertInfo不能同时传入。</p>
+   */
+  Certificate?: CertificateInput
+  /**
+   * <p>监听器转发的方式。可选值：WRR（按权重轮询）、LEAST_CONN（按最小连接数）、IP_HASH（按 IP 地址哈希）<br>分别表示按权重轮询、最小连接数， 默认为 WRR。<br>使用场景：适用于TCP/UDP/TCP_SSL/QUIC监听器。七层监听器的均衡方式应在转发规则中修改。</p>
+   */
+  Scheduler?: string
+  /**
+   * <p>是否开启SNI特性，此参数仅适用于HTTPS监听器。默认0，表示不开启，1表示开启。注意：未开启SNI的监听器可以开启SNI；已开启SNI的监听器不能关闭SNI。</p>
+   */
+  SniSwitch?: number
+  /**
+   * <p>后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组。</p>
+   */
+  TargetType?: string
+  /**
+   * <p>是否开启长连接，此参数仅适用于HTTP/HTTPS监听器。<br>默认值0表示不开启，1表示开启。<br>若后端服务对连接数上限有限制，则建议谨慎开启。此功能目前处于内测中，如需使用，请提交 <a href="https://cloud.tencent.com/apply/p/tsodp6qm21">内测申请</a>。</p>
+   */
+  KeepaliveEnable?: number
+  /**
+   * <p>重新调度功能，解绑后端服务开关，打开此开关，当解绑后端服务时触发重新调度。仅TCP/UDP监听器支持。</p>
+   */
+  DeregisterTargetRst?: boolean
+  /**
+   * <p>会话保持类型。NORMAL表示默认会话保持类型。QUIC_CID表示根据Quic Connection ID做会话保持。QUIC_CID只支持UDP协议。<br>使用场景：适用于TCP/UDP/TCP_SSL/QUIC监听器。<br>默认为 NORMAL。</p>
+   */
+  SessionType?: string
+  /**
+   * <p>证书信息，支持同时传入不同算法类型的多本服务端证书；此参数仅适用于未开启SNI特性的HTTPS监听器。此参数和Certificate不能同时传入。</p>
+   */
+  MultiCertInfo?: MultiCertInfo
+  /**
+   * <p>监听器粒度并发连接数上限，当前仅性能容量型实例且仅TCP/UDP/TCP_SSL/QUIC监听器支持。取值范围：1-实例规格并发连接上限，其中-1表示关闭监听器粒度并发连接数限速。基础网络实例不支持该参数。<br>默认为 -1，表示不限速。</p>
+   */
+  MaxConn?: number
+  /**
+   * <p>监听器粒度新建连接数上限，当前仅性能容量型实例且仅TCP/UDP/TCP_SSL/QUIC监听器支持。取值范围：1-实例规格新建连接上限，其中-1表示关闭监听器粒度新建连接数限速。基础网络实例不支持该参数。<br>默认为 -1 表示不限速。</p>
+   */
+  MaxCps?: number
+  /**
+   * <p>空闲连接超时时间，此参数仅适用于TCP/UDP监听器。如需设置超过1980s，请通过 <a href="https://console.cloud.tencent.com/workorder/category">工单申请</a>,最大可设置到3600s。</p><p>取值范围：[10, 1980]</p><p>单位：秒</p><p>默认值：900</p><p>TCP监听器默认值：900，UDP监听器默认值：300s。取值范围：共享型实例和独占型实例支持：10～900，性能容量型实例支持：10~1980。</p>
+   */
+  IdleConnectTimeout?: number
+  /**
+   * <p>TCP_SSL和QUIC是否支持PP</p>
+   */
+  ProxyProtocol?: boolean
+  /**
+   * <p>是否开启SNAT（源IP替换），True（开启）、False（关闭）。默认为关闭。注意：SnatEnable开启时会替换客户端源IP，此时<code>透传客户端源IP</code>选项关闭，反之亦然。</p>
+   */
+  SnatEnable?: boolean
+  /**
+   * <p>数据压缩模式</p><p>枚举值：</p><ul><li>transparent： 透明模式（默认值）</li><li>compatibility： 兼容模式（开启 gzip 兼容压缩配置）</li></ul>
+   */
+  DataCompressMode?: string
+  /**
+   * <p>重新调度功能，权重调为0开关，打开此开关，后端服务器权重调为0时触发重新调度。仅TCP/UDP监听器支持。</p>
+   */
+  RescheduleTargetZeroWeight?: boolean
+  /**
+   * <p>重新调度功能，健康检查异常开关，打开此开关，后端服务器健康检查异常时触发重新调度。仅TCP/UDP监听器支持。</p>
+   */
+  RescheduleUnhealthy?: boolean
+  /**
+   * <p>重新调度功能，扩容后端服务开关，打开此开关，后端服务器增加或者减少时触发重新调度。仅TCP/UDP监听器支持。</p>
+   */
+  RescheduleExpandTarget?: boolean
+  /**
+   * <p>重新调度触发开始时间，取值0~3600s。仅TCP/UDP监听器支持。</p>
+   */
+  RescheduleStartTime?: number
+  /**
+   * <p>重新调度触发持续时间，取值0~3600s。仅TCP/UDP监听器支持。</p>
+   */
+  RescheduleInterval?: number
+}
+
+/**
+ * SCF云函数（Serverless Cloud Function）相关信息。
+ */
+export interface FunctionInfo {
+  /**
+   * 函数命名空间
+   */
+  FunctionNamespace: string
+  /**
+   * 函数名称
+   */
+  FunctionName: string
+  /**
+   * 函数的版本名称或别名
+   */
+  FunctionQualifier: string
+  /**
+   * 标识 FunctionQualifier 参数的类型，可取值： VERSION（版本）、ALIAS（别名）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FunctionQualifierType?: string
+}
+
+/**
+ * RenewLoadBalancers返回参数结构体
+ */
+export interface RenewLoadBalancersResponse {
+  /**
+   * 订单号。
+   */
+  DealName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 反查Lb绑定关系。
+ */
+export interface LBItem {
+  /**
+   * lb的字符串id
+   */
+  LoadBalancerId?: string
+  /**
+   * lb的vip
+   */
+  Vip?: string
+  /**
+   * 监听器规则
+   */
+  Listeners?: Array<ListenerItem>
+  /**
+   * LB所在地域
+   */
+  Region?: string
+}
+
+/**
+ * DescribeTargetHealth请求参数结构体
+ */
+export interface DescribeTargetHealthRequest {
+  /**
+   * <p>要查询的负载均衡实例ID列表。数组大小最大支持30。</p>
+   */
+  LoadBalancerIds: Array<string>
+  /**
+   * <p>要查询的监听器ID列表。</p>
+   */
+  ListenerIds?: Array<string>
+  /**
+   * <p>要查询的转发规则ID列表。</p>
+   */
+  LocationIds?: Array<string>
+}
+
+/**
+ * DeleteIntentRouter请求参数结构体
+ */
+export interface DeleteIntentRouterRequest {
+  /**
+   * <p>模型路由实例ID。</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>意图路由ID（ir-xxx格式）。</p>
+   */
+  IntentRouterId: string
+}
+
+/**
+ * DescribeBlockIPList请求参数结构体
+ */
+export interface DescribeBlockIPListRequest {
+  /**
+   * 负载均衡实例 ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 数据偏移量，默认为 0。
+   */
+  Offset?: number
+  /**
+   * 返回IP的最大个数，默认为 100000。
+   */
+  Limit?: number
+}
+
+/**
+ * 证书ID，以及与该证书ID关联的负载均衡实例列表
+ */
+export interface CertIdRelatedWithLoadBalancers {
+  /**
+   * 证书ID
+   */
+  CertId?: string
+  /**
+   * 与证书关联的负载均衡实例列表
+   */
+  LoadBalancers?: Array<LoadBalancer>
+}
+
+/**
+ * DescribeClsLogSet请求参数结构体
+ */
+export type DescribeClsLogSetRequest = null
+
+/**
+ * ModifyLoadBalancerAttributes返回参数结构体
+ */
+export interface ModifyLoadBalancerAttributesResponse {
+  /**
+   * <p>切换负载均衡计费方式时，可用此参数查询切换任务是否成功。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DealName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * Credit使用情况。该结构用于 CreditUsageSet 数组中的逐周期用量。
+ */
+export interface CreditUsage {
+  /**
+   * <p>Budget刷新周期。</p><p>枚举值：</p><ul><li>1d：按天刷新</li><li>7d：按周刷新</li><li>30d：按月刷新</li></ul><p>仅在 CreditUsageSet 数组元素中返回。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BudgetDuration?: string
+  /**
+   * <p>下次刷新时间。</p><p>用户组关联Budget且Budget设置重置周期时返回；未关联Budget或未设置重置周期时为空。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BudgetResetAt?: string
+  /**
+   * <p>Credit上限。</p><p>用户组关联Budget且Budget设置最大预算时返回；未设置最大预算时为空。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Limit?: number
+  /**
+   * <p>用户组已使用的Credit数量。</p>
+   */
+  Used?: number
+}
+
+/**
+ * DescribeModelAliases请求参数结构体
+ */
+export interface DescribeModelAliasesRequest {
+  /**
+   * <p>过滤条件</p><p>支持的过滤键：</p><ul><li>ModelAliasName：按模型别名过滤。</li></ul>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>每页数量，取值范围：[1, 100]，默认值：20。</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移量，默认值：0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>排序条件。支持按 InputCoefficient、InputCachedCoefficient 或 OutputCoefficient 排序，Order 支持 ASC、DESC。不传或传空数组时，默认按 OutputCoefficient 降序排列。最多支持 3 个排序条件，排序字段不可重复。</p>
+   */
+  Sort?: Array<Sort>
+}
+
+/**
+ * AssociateModelRouterGuardrails请求参数结构体
+ */
+export interface AssociateModelRouterGuardrailsRequest {
+  /**
+   * <p>待关联的 Guardrail 防护配置列表。</p><p>当前最多支持 1 个元素。每个元素必须填写 InstanceId、ServiceId；Type 和 InputCheckDepth 为选填，不传时分别使用默认值 WAF 和 5。本结构不包含 GuardrailId，关联成功后由系统生成。</p>
+   */
+  Guardrails: Array<AssociateGuardrailConfig>
+  /**
+   * <p>模型路由实例 ID。</p>
+   */
+  ModelRouterId: string
+}
+
+/**
+ * DescribeBudgetAssociations返回参数结构体
+ */
+export interface DescribeBudgetAssociationsResponse {
+  /**
+   * <p>Budget关联资源列表。</p>
+   */
+  AssociationSet?: Array<BudgetAssociation>
+  /**
+   * <p>符合条件的总数。</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 描述一个Target的健康信息
+ */
+export interface TargetHealth {
+  /**
+   * Target的内网IP
+   */
+  IP?: string
+  /**
+   * Target绑定的端口
+   */
+  Port?: number
+  /**
+   * 当前健康状态，true：健康，false：不健康（包括尚未开始探测、探测中、状态异常等几种状态）。只有处于健康状态（且权重大于0），负载均衡才会向其转发流量。
+   */
+  HealthStatus?: boolean
+  /**
+   * Target的实例ID，如 ins-12345678
+   */
+  TargetId?: string
+  /**
+   * 当前健康状态的详细信息。如：Alive、Dead、Unknown、Close。Alive状态为健康，Dead状态为异常，Unknown状态包括尚未开始探测、探测中、状态未知，Close表示健康检查关闭或监听器状态停止。
+   */
+  HealthStatusDetail?: string
+  /**
+   * (**该参数对象即将下线，不推荐使用，请使用HealthStatusDetail获取健康详情**) 当前健康状态的详细信息。如：Alive、Dead、Unknown。Alive状态为健康，Dead状态为异常，Unknown状态包括尚未开始探测、探测中、状态未知。
+   * @deprecated
+   */
+  HealthStatusDetial?: string
+  /**
+   * 目标组唯一ID。
+   */
+  TargetGroupId?: string
+  /**
+   * Target的权重。
+   */
+  Weight?: number
+}
+
+/**
+ * CreateKey返回参数结构体
+ */
+export interface CreateKeyResponse {
+  /**
+   * <p>Key的ID</p>
+   */
+  KeyId?: string
+  /**
+   * <p>返回的真实Key</p>
+   */
+  Key?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * TestServiceProviderConnection请求参数结构体
+ */
+export interface TestServiceProviderConnectionRequest {
+  /**
+   * <p>需要探测的模型列表</p><p>入参限制：上限为20个模型</p>
+   */
+  Models?: Array<string>
+  /**
+   * <p>需要探测的Key</p>
+   */
+  ProviderKey?: string
+  /**
+   * <p>需要探测的KeyId，和ProviderKey二者传一个即可</p>
+   */
+  ProviderKeyId?: string
+  /**
+   * <p>BYOK类型，当ProviderKey存在时必传</p>
+   */
+  AccessType?: string
+  /**
+   * <p>模型的厂商</p>
+   */
+  ModelProvider?: string
+  /**
+   * <p>模型厂商协议，当ProviderKey存在时必传</p>
+   */
+  ModelProtocol?: string
+  /**
+   * <p>BYOK类型，当AccessType为PublicCustom时生效</p>
+   */
+  ApiBase?: string
+  /**
+   * <p>请求携带的Host头部，当AccessType为PrivateCustom时生效</p>
+   */
+  HostHeader?: string
+  /**
+   * <p>BYOK的ID，当AccessType为PrivateCustom时生效</p>
+   */
+  ServiceProviderId?: string
+  /**
+   * <p>是否校验服务提供商的SSL证书</p><p>默认值：AccessType取值为：</p><ul><li>PublicBYOK时，该参数无效；</li><li>PublicCustom时，该参数默认为true；</li><li>PrivateCustom时，该参数默认为false；</li></ul>
+   */
+  VerifySSL?: boolean
+}
+
+/**
+ * DescribeModelAssociations返回参数结构体
+ */
+export interface DescribeModelAssociationsResponse {
+  /**
+   * <p>模型路由实例与模型的关联关系集合</p>
+   */
+  ModelAssociationSet?: Array<ModelAssociation>
+  /**
+   * <p>模型路由实例ID</p>
+   */
+  ModelRouterId?: string
+  /**
+   * <p>符合条件的总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeModelRouterGuardrails返回参数结构体
+ */
+export interface DescribeModelRouterGuardrailsResponse {
+  /**
+   * <p>当前已关联的 Guardrail 防护配置列表。</p><p>当前最多返回 1 个元素。</p>
+   */
+  Guardrails?: Array<GuardrailConfig>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * Key信息
+ */
+export interface KeyInfo {
+  /**
+   * <p>是否禁用Key</p>
+   */
+  Blocked?: boolean
+  /**
+   * <p>Key关联的Budget ID。</p><p>未关联Budget时返回空字符串。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BudgetId?: string
+  /**
+   * <p>Key关联的Budget名称。</p><p>未关联Budget时返回空字符串。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BudgetName?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreatedTime?: string
+  /**
+   * <p>Key按Budget刷新周期划分的Credit使用情况。</p><p>当关联Budget配置多个刷新周期时，按1d、7d、30d顺序返回各周期用量；未关联Budget时返回空数组。</p>
+   */
+  CreditUsageSet?: Array<CreditUsage>
+  /**
+   * <p>Key的值</p>
+   */
+  Key?: string
+  /**
+   * <p>Key的ID</p>
+   */
+  KeyId?: string
+  /**
+   * <p>Key名称</p>
+   */
+  KeyName?: string
+  /**
+   * <p>修改时间</p>
+   */
+  ModifiedTime?: string
+  /**
+   * <p>限速信息</p>
+   */
+  RateLimitConfig?: RateLimitConfigForKey
+  /**
+   * <p>Key状态</p><p>枚举值：</p><ul><li>Active： 正常</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>标签</p>
+   */
+  Tags?: Array<TagInfo>
+  /**
+   * <p>所属的用户组ID</p>
+   */
+  UserGroupId?: string
+  /**
+   * <p>所属的用户组名称</p>
+   */
+  UserGroupName?: string
+}
+
+/**
+ * ModifyDomainAttributes返回参数结构体
+ */
+export interface ModifyDomainAttributesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyTargetPort返回参数结构体
+ */
+export interface ModifyTargetPortResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * BYOK健康检查请求
+ */
+export interface TestConnectionRequestInfo {
+  /**
+   * <p>请求URL</p>
+   */
+  RequestUrl?: string
+  /**
+   * <p>请求体</p>
+   */
+  RequestBody?: string
+  /**
+   * <p>请求头</p>
+   */
+  RequestHeaders?: string
+}
+
+/**
+ * DescribeClassicalLBByInstanceId请求参数结构体
+ */
+export interface DescribeClassicalLBByInstanceIdRequest {
+  /**
+   * 后端实例ID列表。
+   */
+  InstanceIds: Array<string>
+}
+
+/**
+ * ModifyBudgetAttributes请求参数结构体
+ */
+export interface ModifyBudgetAttributesRequest {
+  /**
+   * <p>Budget ID。</p>
+   */
+  BudgetId: string
+  /**
+   * <p>预算配置数组。</p><p>数组长度最大为3，最多可同时配置1d、7d、30d三个刷新周期，且每种刷新周期只能出现一次。BudgetResetAt不支持作为入参设置，系统会按配置的刷新周期自动维护刷新时间。</p>
+   */
+  BudgetConfigs?: Array<BudgetConfigInput>
+  /**
+   * <p>Budget名称。</p>
+   */
+  BudgetName?: string
+  /**
+   * <p>Budget限速配置。</p>
+   */
+  RateLimitConfig?: RateLimitConfigForBudget
+}
+
+/**
+ * InquiryPriceRefundLoadBalancer返回参数结构体
+ */
+export interface InquiryPriceRefundLoadBalancerResponse {
+  /**
+   * 该参数表示对应的价格。
+   */
+  Price?: Price
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeClusterResources请求参数结构体
+ */
+export interface DescribeClusterResourcesRequest {
+  /**
+   * 返回集群中资源列表数目，默认为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 返回集群中资源列表起始偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 查询集群中资源列表条件，详细的过滤条件如下：
+<li> cluster-id - String - 是否必填：否 - （过滤条件）按照 集群 的唯一ID过滤，如 ："tgw-12345678","stgw-12345678","vpcgw-12345678"。</li>
+<li> vip - String - 是否必填：否 - （过滤条件）按照vip过滤。</li>
+<li> loadbalancer-id - String - 是否必填：否 - （过滤条件）按照负载均衡唯一ID过滤。</li>
+<li> idle - String 是否必填：否 - （过滤条件）按照是否闲置过滤，如"True","False"。</li>
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * ModifyTargetGroupAttribute返回参数结构体
+ */
+export interface ModifyTargetGroupAttributeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSupportedProviders返回参数结构体
+ */
+export interface DescribeSupportedProvidersResponse {
+  /**
+   * <p>Provider 列表</p>
+   */
+  Providers?: Array<ProviderItem>
+  /**
+   * <p>Provider 总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 监听器绑定的后端服务的详细信息
+ */
+export interface Backend {
+  /**
+   * 后端服务的类型，可取：CVM、ENI、CCN、EVM、GLOBALROUTE、NAT、SRV等
+   */
+  Type?: string
+  /**
+   * 后端服务的唯一 ID，如 ins-abcd1234
+   */
+  InstanceId?: string
+  /**
+   * 后端服务的监听端口，如果是全端口段监听器绑定的全监听目标组场景，此端口返回0，表示无效端口，绑定的后端服务的端口随监听器端口。
+   */
+  Port?: number
+  /**
+   * 后端服务的转发权重，取值范围：[0, 100]，默认为 10。
+   */
+  Weight?: number
+  /**
+   * 后端服务的外网 IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicIpAddresses?: Array<string>
+  /**
+   * 后端服务的内网 IP
+   */
+  PrivateIpAddresses?: Array<string>
+  /**
+   * 后端服务的实例名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * 后端服务被绑定的时间
+   */
+  RegisteredTime?: string
+  /**
+   * 弹性网卡唯一ID，如 eni-1234abcd
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EniId?: string
+  /**
+   * 标签。
+   */
+  Tag?: string
+  /**
+   * 后端服务所在的可用区，如ap-guangzhou-1
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
+}
+
+/**
+ * ModifyLoadBalancersProject请求参数结构体
+ */
+export interface ModifyLoadBalancersProjectRequest {
+  /**
+   * 一个或多个待操作的负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
+列表支持最大长度为20。
+   */
+  LoadBalancerIds: Array<string>
+  /**
+   * 项目ID。可以通过 [DescribeProject](https://cloud.tencent.com/document/api/651/78725) 接口获取。
+   */
+  ProjectId: number
+}
+
+/**
+ * RenewLoadBalancers请求参数结构体
+ */
+export interface RenewLoadBalancersRequest {
+  /**
+   * 负载均衡实例唯一ID数组，最多支持20个。
+   */
+  LoadBalancerIds: Array<string>
+  /**
+   * 负载均衡实例的预付费相关属性。
+   */
+  LBChargePrepaid: LBChargePrepaid
+}
+
+/**
+ * RemoveModelKey请求参数结构体
+ */
+export interface RemoveModelKeyRequest {
+  /**
+   * <p>服务提供商ID</p>
+   */
+  ServiceProviderId: string
+  /**
+   * <p>Key 业务 ID 列表，至少 1 个，最多 10 个</p>
+   */
+  KeyIds: Array<string>
+}
+
+/**
+ * 模型路由待解除关联 Guardrail 防护配置
+ */
+export interface DisassociateGuardrailConfig {
+  /**
+   * <p>Guardrail 防护配置 ID。</p><p>可通过 DescribeModelRouterGuardrails 获取；DisassociateModelRouterGuardrails 使用该字段定位要解除关联的防护配置。</p>
+   */
+  GuardrailId: string
+}
+
+/**
+ * DescribeModelRouterDetail返回参数结构体
+ */
+export interface DescribeModelRouterDetailResponse {
+  /**
+   * <p>模型路由实例详情</p>
+   */
+  ModelRouter?: ModelRouterDetail
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * MigrateClassicalLoadBalancers返回参数结构体
+ */
+export interface MigrateClassicalLoadBalancersResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyUserGroupAttributes返回参数结构体
+ */
+export interface ModifyUserGroupAttributesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteBudgets返回参数结构体
+ */
+export interface DeleteBudgetsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RemoveModelRewrite返回参数结构体
+ */
+export interface RemoveModelRewriteResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyServiceProviderModelAttributes请求参数结构体
+ */
+export interface ModifyServiceProviderModelAttributesRequest {
+  /**
+   * <p>BYOK 实例 ID</p>
+   */
+  ServiceProviderId: string
+  /**
+   * <p>待修改的模型的名称（原始模型名称）</p>
+   */
+  ModelName: string
+  /**
+   * <p>该模型支持的输入多模态能力列表</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>image： 支持图像输入</li><li>file： 支持文件输入（当前仅支持pdf）</li></ul>
+   */
+  InputModalities?: Array<string>
+}
+
+/**
+ * RegisterModelsToServiceProvider返回参数结构体
+ */
+export interface RegisterModelsToServiceProviderResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteUserGroups请求参数结构体
+ */
+export interface DeleteUserGroupsRequest {
+  /**
+   * <p>模型路由实例ID。</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>待删除的用户组ID列表，单次1-100个。不可包含「未分组」虚拟分组 ugrp-ungrouped。组内仍有 Key 时将拒绝删除，需先将 Key 移出或迁移到其他组。</p>
+   */
+  UserGroupIds: Array<string>
+}
+
+/**
+ * Budget关联资源对象。仅支持企业型模型路由实例和企业型实例下的Key。
+ */
+export interface BudgetResource {
+  /**
+   * <p>模型路由实例ID。</p><p>当Type为ModelRouter时表示要关联的实例；当Type为Key时表示Key所属实例。</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>资源类型。</p><p>枚举值：</p><ul><li>ModelRouter：模型路由实例</li><li>Key：模型路由Key</li><li>UserGroup：用户组（Type 为 UserGroup 时需传 UserGroupId）</li></ul>
+   */
+  Type: string
+  /**
+   * <p>Key ID。</p><p>字段本身选填；当Type为Key时必填，当Type为ModelRouter时不传。</p>
+   */
+  KeyId?: string
+  /**
+   * <p>用户组ID</p>
+   */
+  UserGroupId?: string
+}
+
+/**
+ * DescribeBudgets返回参数结构体
+ */
+export interface DescribeBudgetsResponse {
+  /**
+   * <p>Budget列表。</p>
+   */
+  BudgetSet?: Array<BudgetInfo>
+  /**
+   * <p>符合条件的总数。</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * InquiryPriceRefundLoadBalancer请求参数结构体
+ */
+export interface InquiryPriceRefundLoadBalancerRequest {
+  /**
+   * 负载均衡实例ID。可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
+   */
+  LoadBalancerId: string
+}
+
+/**
+ * Budget关联资源信息
+ */
+export interface BudgetAssociation {
+  /**
+   * <p>Budget ID。</p>
+   */
+  BudgetId?: string
+  /**
+   * <p>关联创建时间。</p>
+   */
+  CreatedTime?: string
+  /**
+   * <p>Key ID。仅当Type为Key时返回。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeyId?: string
+  /**
+   * <p>模型路由实例ID。</p><p>当Type为ModelRouter时表示关联资源本身；当Type为Key时表示Key所属实例。</p>
+   */
+  ModelRouterId?: string
+  /**
+   * <p>资源对象的名称。</p>
+   */
+  ResourceName?: string
+  /**
+   * <p>关联关系的状态</p><p>枚举值：</p><ul><li>Active： 已生效</li><li>Configuring： 配置中</li><li>ConfigureFailed： 配置失败</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>关联资源类型。</p><p>枚举值：</p><ul><li>ModelRouter：模型路由实例</li><li>Key：模型路由Key</li><li>UserGroup：用户组</li></ul>
+   */
+  Type?: string
+  /**
+   * <p>关联的用户组id</p>
+   */
+  UserGroupId?: string
+}
+
+/**
+ * DescribeBudgetAssociations请求参数结构体
+ */
+export interface DescribeBudgetAssociationsRequest {
+  /**
+   * <p>Budget ID。</p><p>一次只允许查询一个Budget。</p>
+   */
+  BudgetId: string
+  /**
+   * <p>本次查询限制的数量</p>
+   */
+  Limit?: number
+  /**
+   * <p>本次查询偏移量</p>
+   */
+  Offset?: number
+  /**
+   * <p>资源类型。</p><p>枚举值：</p><ul><li>ModelRouter：模型路由实例</li><li>Key：模型路由Key</li></ul><p>不传时返回全部资源类型。</p>
+   */
+  Type?: string
+}
+
+/**
+ * ModifyIntentRouterAttribute请求参数结构体
+ */
+export interface ModifyIntentRouterAttributeRequest {
+  /**
+   * <p>意图路由ID（ir-xxx格式）。</p>
+   */
+  IntentRouterId: string
+  /**
+   * <p>模型路由实例ID。</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>新的路由名称。</p><p>选填；必须以"IntentRouter/"为前缀，后缀仅支持字母、数字、连字符和下划线，后缀长度1-128个字符。不传则不修改。</p>
+   */
+  RouteName?: string
+  /**
+   * <p>意图路由描述。</p>
+   */
+  RouterDescribe?: string
+  /**
+   * <p>新的分层配置列表（全量替换）。</p><p>选填；不传则不修改。传入时必须为完整分层集合：复杂度分层须包含全部 4 个分层 SIMPLE/MEDIUM/COMPLEX/REASONING；语义分层须包含 default 及各语义 Tier（取决于实例所用协议，且不可跨协议变更）。每个分层至少包含一个模型，模型名称必须是已关联到该实例的模型。</p>
+   */
+  Tiers?: Array<TierItem>
+}
+
+/**
+ * ModifyTargetGroupInstancesPort请求参数结构体
+ */
+export interface ModifyTargetGroupInstancesPortRequest {
+  /**
+   * 目标组ID。
+   */
+  TargetGroupId: string
+  /**
+   * 待修改端口的服务器数组，在这个接口 NewPort 和 Port 为必填项。
+   */
+  TargetGroupInstances: Array<TargetGroupInstance>
+}
+
+/**
+ * CreateClsLogSet请求参数结构体
+ */
+export interface CreateClsLogSetRequest {
+  /**
+   * 日志集的名字，不能和cls其他日志集重名。不填默认为clb_logset。
+   */
+  LogsetName?: string
+  /**
+   * 日志集的保存周期，单位：天。
+   * @deprecated
+   */
+  Period?: number
+  /**
+   * 日志集类型，ACCESS：访问日志，HEALTH：健康检查日志，默认ACCESS。
+   */
+  LogsetType?: string
+}
+
+/**
+ * 每个待探测模态的详细结果。
+ */
+export interface ModalityProbeDetail {
+  /**
+   * <p>探测的模态</p>
+   */
+  Modality?: string
+  /**
+   * <p>探测结果</p><p>枚举值：</p><ul><li>Supported： 模型支持该输入模态</li><li>Unsupported： 模型不支持该输入模态</li><li>Inconclusive： 模型未明确是否支持该模态，待重新探测</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>探测该模态请求的报错详情</p>
+   */
+  ErrorInfo?: ProviderTestConnectionErrorInfo
+}
+
+/**
+ * ModifyDomain返回参数结构体
+ */
+export interface ModifyDomainResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * Provider 信息
+ */
+export interface ProviderItem {
+  /**
+   * <p>Provider 标识（如 openai）</p>
+   */
+  Provider: string
+  /**
+   * <p>显示名称（如 OpenAI）</p>
+   */
+  DisplayName: string
+  /**
+   * <p>模型协议列表</p>
+   */
+  Protocols?: Array<string>
+  /**
+   * <p>英文显示名称</p>
+   */
+  EnglishDisplayName?: string
+}
+
+/**
+ * ModifyKeysUserGroup请求参数结构体
+ */
+export interface ModifyKeysUserGroupRequest {
+  /**
+   * <p>模型路由实例ID。</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>目标归属用户组ID。传真实用户组ID表示批量入组或跨组移动（Key 已属其它组则改为目标组）；传 ugrp-ungrouped 表示批量移出到未分组。</p>
+   */
+  UserGroupId: string
+  /**
+   * <p>待变更归属的 Key ID 列表，单次1-100个。</p>
+   */
+  KeyIds: Array<string>
+}
+
+/**
+ * 重定向目标的信息
+ */
+export interface RewriteTarget {
+  /**
+   * 重定向目标的监听器ID，该字段仅配置了重定向时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetListenerId?: string
+  /**
+   * 重定向目标的转发规则ID，该字段仅配置了重定向时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetLocationId?: string
+  /**
+   * 重定向状态码
+   */
+  RewriteCode?: number
+  /**
+   * 重定向是否携带匹配的url
+   */
+  TakeUrl?: boolean
+  /**
+   * 重定向类型，Manual: 手动重定向，Auto:  自动重定向
+   */
+  RewriteType?: string
+}
+
+/**
+ * ManualRewrite请求参数结构体
+ */
+export interface ManualRewriteRequest {
+  /**
+   * 负载均衡实例 ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 源监听器 ID。
+   */
+  SourceListenerId: string
+  /**
+   * 目标监听器 ID。
+   */
+  TargetListenerId: string
+  /**
+   * 转发规则之间的重定向关系。
+   */
+  RewriteInfos: Array<RewriteLocationMap>
+}
+
+/**
+ * CreateModel请求参数结构体
+ */
+export interface CreateModelRequest {
+  /**
+   * <p>接入类型：PublicBYOK/PublicCustom/PrivateCustom</p>
+   */
+  AccessType: string
+  /**
+   * <p>模型提供商</p>
+   */
+  ModelProvider?: string
+  /**
+   * <p>通用模型标识列表</p>
+   */
+  ModelIds?: Array<ModelItem>
+  /**
+   * <p>Key 列表</p>
+   */
+  Keys?: Array<KeyItem>
+  /**
+   * <p>BYOK ID(在自定义模型时在部署网络后必须填写)</p>
+   */
+  ServiceProviderId?: string
+  /**
+   * <p>服务供应商(创建BYOK自定义名称)。</p>
+   */
+  ServiceProviderName?: string
+  /**
+   * <p>模型协议</p>
+   */
+  Protocol?: string
+  /**
+   * <p>API Base URL</p>
+   */
+  ApiBase?: string
+  /**
+   * <p>VPC ID</p>
+   */
+  VpcId?: string
+  /**
+   * <p>子网 ID</p>
+   */
+  SubnetId?: string
+  /**
+   * <p>转发请求时添加的Host请求头</p>
+   */
+  HostHeader?: string
+  /**
+   * <p>标签信息</p>
+   */
+  Tags?: Array<TagInfo>
+  /**
+   * <p>是否校验服务提供商的SSL证书</p>
+   */
+  VerifySSL?: boolean
+}
+
+/**
+ * 集群的详细信息，如集群ID，名称，类型，可用区，标签等
+ */
+export interface Cluster {
+  /**
+   * 集群唯一ID
+   */
+  ClusterId?: string
+  /**
+   * 集群名称
+   */
+  ClusterName?: string
+  /**
+   * 集群类型，如TGW，STGW，VPCGW
+   */
+  ClusterType?: string
+  /**
+   * 集群标签，只有TGW/STGW集群有标签
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterTag?: string
+  /**
+   * 集群所在可用区，如ap-guangzhou-1
+   */
+  Zone?: string
+  /**
+   * 集群网络类型，如Public，Private
+   */
+  Network?: string
+  /**
+   * 最大连接数（个/秒）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxConn?: number
+  /**
+   * 最大入带宽Mbps
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxInFlow?: number
+  /**
+   * 最大入包量（个/秒）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxInPkg?: number
+  /**
+   * 最大出带宽Mbps
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxOutFlow?: number
+  /**
+   * 最大出包量（个/秒）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxOutPkg?: number
+  /**
+   * 最大新建连接数（个/秒）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxNewConn?: number
+  /**
+   * http最大新建连接数（个/秒）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HTTPMaxNewConn?: number
+  /**
+   * https最大新建连接数（个/秒）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HTTPSMaxNewConn?: number
+  /**
+   * http QPS
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HTTPQps?: number
+  /**
+   * https QPS
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HTTPSQps?: number
+  /**
+   * 集群内资源总数目
+   */
+  ResourceCount?: number
+  /**
+   * 集群内空闲资源数目
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdleResourceCount?: number
+  /**
+   * 集群内转发机的数目
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadBalanceDirectorCount?: number
+  /**
+   * 集群的Isp属性，如："BGP","CMCC","CUCC","CTCC","INTERNAL"。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Isp?: string
+  /**
+   * 集群所在的可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClustersZone?: ClustersZone
+  /**
+   * 集群版本
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClustersVersion?: string
+  /**
+   * 集群容灾类型，如SINGLE-ZONE，DISASTER-RECOVERY，MUTUAL-DISASTER-RECOVERY
+   */
+  DisasterRecoveryType?: string
+  /**
+   * 网络出口
+   */
+  Egress?: string
+  /**
+   * IP版本
+   */
+  IPVersion?: string
+  /**
+   * 标签信息
+   */
+  Tag?: Array<TagInfo>
+}
+
+/**
+ * DisassociateModelRouterGuardrails请求参数结构体
+ */
+export interface DisassociateModelRouterGuardrailsRequest {
+  /**
+   * <p>待解除关联的 Guardrail 防护配置列表。</p><p>每个元素只需要填写 GuardrailId。</p>
+   */
+  Guardrails: Array<DisassociateGuardrailConfig>
+  /**
+   * <p>模型路由实例 ID。</p>
+   */
+  ModelRouterId: string
+}
+
+/**
+ * DescribeTargetGroupInstanceStatus请求参数结构体
+ */
+export interface DescribeTargetGroupInstanceStatusRequest {
+  /**
+   * 目标组唯一id
+   */
+  TargetGroupId: string
+  /**
+   * 目标组绑定的后端服务ip列表
+   */
+  TargetGroupInstanceIps?: Array<string>
+}
+
+/**
+ * 负载均衡实例所绑定的后端服务的信息，包括所属地域、所属网络。
+ */
+export interface TargetRegionInfo {
+  /**
+   * Target所属地域，如 ap-guangzhou
+   */
+  Region: string
+  /**
+   * Target所属网络，私有网络格式如 vpc-abcd1234，如果是基础网络，则为"0"
+   */
+  VpcId: string
+  /**
+   * Target所属网络，私有网络格式如86323，如果是基础网络，则为0
+   */
+  NumericalVpcId?: number
+}
+
+/**
+ * DeleteRule返回参数结构体
+ */
+export interface DeleteRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeModelRewrite请求参数结构体
+ */
+export interface DescribeModelRewriteRequest {
+  /**
+   * <p>模型路由实例 ID。</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>选填，按源模型名精确过滤（大小写敏感）。</p><p>长度 1-255 字符；不传则返回该实例的全部重写规则；命中至多 1 条；未命中返回空列表（不报错）。</p>
+   */
+  SourceModel?: string
+}
+
+/**
+ * CloneLoadBalancer返回参数结构体
+ */
+export interface CloneLoadBalancerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeregisterTargets请求参数结构体
+ */
+export interface DeregisterTargetsRequest {
+  /**
+   * 负载均衡实例 ID，格式如 lb-12345678。
+   */
+  LoadBalancerId: string
+  /**
+   * 监听器 ID，格式如 lbl-12345678。
+   */
+  ListenerId: string
+  /**
+   * 要解绑的后端服务列表，数组长度最大支持20。
+   */
+  Targets: Array<Target>
+  /**
+   * 转发规则的ID，格式如 loc-12345678，当从七层转发规则解绑机器时，必须提供此参数或Domain+URL两者之一。
+   */
+  LocationId?: string
+  /**
+   * 目标规则的域名，提供LocationId参数时本参数不生效。
+   */
+  Domain?: string
+  /**
+   * 目标规则的URL，提供LocationId参数时本参数不生效。
+   */
+  Url?: string
+}
+
+/**
+ * 模型可用性
+ */
+export interface ModelAvailability {
+  /**
+   * <p>该模型所有健康BYOK实例下支持的输入多模态能力的并集。模型不健康时返回空列表。</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>image： 支持图像输入</li><li>file： 支持文件输入（当前仅支持pdf）</li></ul>
+   */
+  InputModalities?: Array<string>
+  /**
+   * <p>模型</p>
+   */
+  Model?: string
+  /**
+   * <p>可用性状态</p><p>枚举值：</p><ul><li>Available： 可用</li><li>Unavailable： 不可用</li><li>Unknown： 未探测</li></ul>
+   */
+  Status?: string
+}
+
+/**
+ * AssociateBudget返回参数结构体
+ */
+export interface AssociateBudgetResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateLoadBalancerSnatIps请求参数结构体
+ */
+export interface CreateLoadBalancerSnatIpsRequest {
+  /**
+   * 负载均衡唯一性ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。例如：lb-12345678。
+   */
+  LoadBalancerId: string
+  /**
+   * 添加的SnatIp信息，可指定IP申请，或者指定子网自动申请。可以通过 [DescribeSubnets](https://cloud.tencent.com/document/api/215/15784) 查询获取，单个CLB实例可申请的默认上限为10个。
+   */
+  SnatIps: Array<SnatIp>
+  /**
+   * 添加的SnatIp的个数，可与SnatIps一起使用，但若指定IP时，则不能指定创建的SnatIp个数。默认值为1，数量上限与用户配置有关，默认上限为10。
+   */
+  Number?: number
+}
+
+/**
+ * ModifyLoadBalancersProject返回参数结构体
+ */
+export interface ModifyLoadBalancersProjectResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteTargetGroups返回参数结构体
+ */
+export interface DeleteTargetGroupsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 表示负载均衡的价格
+ */
+export interface Price {
+  /**
+   * 描述了实例价格。
+   */
+  InstancePrice?: ItemPrice
+  /**
+   * 描述了网络价格。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BandwidthPrice?: ItemPrice
+  /**
+   * 描述了lcu价格。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LcuPrice?: ItemPrice
+}
+
+/**
+ * Budget预算配置
+ */
+export interface BudgetConfig {
+  /**
+   * <p>预算刷新周期。</p><p>枚举值：</p><ul><li>1d：按天刷新</li><li>7d：按周刷新</li><li>30d：按月刷新</li></ul><p>不传时默认30d。同一个Budget下每种刷新周期最多配置一次。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BudgetDuration?: string
+  /**
+   * <p>下一次刷新的时间</p>
+   */
+  BudgetResetAt?: string
+  /**
+   * <p>最大预算。</p><p>单位：credit。取值需大于0且不超过10000000000；不传时默认100000。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxBudget?: number
+}
+
+/**
+ * DescribeLBOperateProtect返回参数结构体
+ */
+export interface DescribeLBOperateProtectResponse {
+  /**
+   * 返回的负载均衡操作保护信息数组。
+   */
+  LoadBalancerSet: Array<LBOperateProtectInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 模型路由实例的标签信息
+ */
+export interface TagInfo {
+  /**
+   * 标签的键
+   */
+  TagKey: string
+  /**
+   * 标签的值
+   */
+  TagValue: string
+}
+
+/**
+ * 绑定关系，包含监听器名字、协议、url、vport。
+ */
+export interface BindDetailItem {
+  /**
+   * 配置绑定的CLB ID
+   */
+  LoadBalancerId?: string
+  /**
+   * 配置绑定的监听器ID
+   */
+  ListenerId?: string
+  /**
+   * 配置绑定的域名
+   */
+  Domain?: string
+  /**
+   * 配置绑定的规则
+   */
+  LocationId?: string
+  /**
+   * 监听器名字
+   */
+  ListenerName?: string
+  /**
+   * 监听器协议
+   */
+  Protocol?: string
+  /**
+   * 监听器端口
+   */
+  Vport?: number
+  /**
+   * location的url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+  /**
+   * 配置ID
+   */
+  UconfigId?: string
+}
+
+/**
+ * CreateModelRouter返回参数结构体
+ */
+export interface CreateModelRouterResponse {
+  /**
+   * <p>模型路由实例ID</p>
+   */
+  ModelRouterId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 模型路由资源包
+ */
+export interface ModelRouterPackage {
+  /**
+   * <p>模型路由资源包总容量</p>
+   */
+  CapacitySize?: string
+  /**
+   * <p>模型路由资源包总余量</p>
+   */
+  CapacityRemain?: string
+  /**
+   * <p>模型路由资源包容量精确值</p>
+   */
+  CapacitySizePrecise?: string
+  /**
+   * <p>模型路由资源包总余量精确值</p>
+   */
+  CapacityRemainPrecise?: string
+  /**
+   * <p>模型路由资源包设置用尽续购标志位 0:未设置 1:用尽到期新购</p><p>取值范围：[0, 1]</p>
+   */
+  AutoPurchaseFlag?: number
+  /**
+   * <p>模型路由资源包Id</p>
+   */
+  ModelRouterResourcePackageId?: string
+  /**
+   * <p>模型路由资源包创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>模型路由资源包抵扣开始时间</p>
+   */
+  DeductionStartTime?: string
+  /**
+   * <p>模型路由资源包抵扣截止时间</p>
+   */
+  DeductionEndTime?: string
+  /**
+   * <p>模型路由资源包失效时间</p>
+   */
+  ExpiredTime?: string
+  /**
+   * <p>模型路由资源包状态</p><p>枚举值：</p><ul><li>0： 有效</li><li>1： 已退款</li><li>2： 已过期</li><li>3： 已用完</li></ul>
+   */
+  Status?: number
+}
+
+/**
+ * DescribeExclusiveClusters请求参数结构体
+ */
+export interface DescribeExclusiveClustersRequest {
+  /**
+   * 返回集群列表数目，默认值为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 返回集群列表起始偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 查询集群列表条件，详细的过滤条件如下：
+<li> cluster-type - String - 是否必填：否 - （过滤条件）按照 集群 的类型过滤，包括"TGW","STGW","VPCGW"。</li>
+<li> cluster-id - String - 是否必填：否 - （过滤条件）按照 集群 的唯一ID过滤，如 ："tgw-12345678","stgw-12345678","vpcgw-12345678"。</li>
+<li> cluster-name - String - 是否必填：否 - （过滤条件）按照 集群 的名称过滤。</li>
+<li> cluster-tag - String - 是否必填：否 - （过滤条件）按照 集群 的标签过滤。（只有TGW/STGW集群有集群标签） </li>
+<li> vip - String - 是否必填：否 - （过滤条件）按照 集群 内的vip过滤。</li>
+<li> loadbalancer-id - String - 是否必填：否 - （过滤条件）按照 集群 内的负载均衡唯一ID过滤。</li>
+<li> network - String - 是否必填：否 - （过滤条件）按照 集群 的网络类型过滤，如："Public","Private"。</li>
+<li> zone - String - 是否必填：否 - （过滤条件）按照 集群 所在可用区过滤，如："ap-guangzhou-1"（广州一区）。</li>
+<li> isp -- String - 是否必填：否 - （过滤条件）按照TGW集群的 Isp 类型过滤，如："BGP","CMCC","CUCC","CTCC","INTERNAL"。</li>
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * DescribeBudgets请求参数结构体
+ */
+export interface DescribeBudgetsRequest {
+  /**
+   * <p>Budget ID列表。</p>
+   */
+  BudgetIds?: Array<string>
+  /**
+   * <p>过滤列表。</p><p>支持：BudgetId、BudgetName、Status。</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>本次查询限制的数量。</p><p>取值范围：[1, 100]</p><p>默认值：20。</p>
+   */
+  Limit?: number
+  /**
+   * <p>本次查询偏移量。</p><p>默认值：0。</p>
+   */
+  Offset?: number
+}
+
+/**
+ * ModifyLoadBalancerSla请求参数结构体
+ */
+export interface ModifyLoadBalancerSlaRequest {
+  /**
+   * 负载均衡实例信息。
+   */
+  LoadBalancerSla: Array<SlaUpdateParam>
+  /**
+   * 是否强制升级，默认否。
+   */
+  Force?: boolean
+}
+
+/**
+ * CreateLoadBalancer返回参数结构体
+ */
+export interface CreateLoadBalancerResponse {
+  /**
+   * <p>由负载均衡实例唯一 ID 组成的数组。<br>存在某些场景，如创建出现延迟时，此字段可能返回为空；此时可以根据接口返回的RequestId或DealName参数，通过DescribeTaskStatus接口查询创建的资源ID。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadBalancerIds?: Array<string>
+  /**
+   * <p>订单号。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DealName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyFunctionTargets请求参数结构体
+ */
+export interface ModifyFunctionTargetsRequest {
+  /**
+   * 负载均衡实例ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 负载均衡监听器ID。
+   */
+  ListenerId: string
+  /**
+   * 要修改的后端云函数服务列表，仅支持 Event 函数类型。
+   */
+  FunctionTargets: Array<FunctionTarget>
+  /**
+   * 转发规则的ID，当绑定机器到七层转发规则时，必须提供此参数或Domain+Url两者之一。
+   */
+  LocationId?: string
+  /**
+   * 目标规则的域名，提供LocationId参数时本参数不生效。
+   */
+  Domain?: string
+  /**
+   * 目标规则的URL，提供LocationId参数时本参数不生效。
+   */
+  Url?: string
+}
+
+/**
+ * BYOK健康检查错误信息
+ */
+export interface ProviderTestConnectionErrorInfo {
+  /**
+   * <p>上游模型侧返回的HTTP状态码</p>
+   */
+  HttpCode?: number
+  /**
+   * <p>错误状态码</p>
+   */
+  ErrorStatus?: string
+  /**
+   * <p>探测请求错误信息</p>
+   */
+  OriginalMessage?: string
+}
+
+/**
+ * 可用区转发亲和信息
+ */
+export interface AvailableZoneAffinityInfo {
+  /**
+   * 是否开启可用区转发亲和。true：开启可用区转发亲和；false：开启可用区转发亲和。
+   */
+  Enable?: boolean
+  /**
+   * 可用区转发亲和失效阈值，当可用区内后端服务健康比例小于该阈值时，负载均衡会退出可用区转发亲和，转为全可用区转发。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExitRatio?: number
+  /**
+   * 可用区转发亲和的重新生效阈值，当处于全可用区转发，且负载均衡可用区内的后端服务健康比例大于等于该阈值时，负载均衡会重新进入可用区转发亲和。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReentryRatio?: number
+}
+
+/**
+ * DeleteLoadBalancerSnatIps请求参数结构体
+ */
+export interface DeleteLoadBalancerSnatIpsRequest {
+  /**
+   * 负载均衡唯一ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。例如：lb-12345678。
+   */
+  LoadBalancerId: string
+  /**
+   * 删除SnatIp地址数组，最大支持删除数量为20个。
+   */
+  Ips: Array<string>
+}
+
+/**
+ * SetLoadBalancerSecurityGroups请求参数结构体
+ */
+export interface SetLoadBalancerSecurityGroupsRequest {
+  /**
+   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
+   */
+  LoadBalancerId: string
+  /**
+   * 安全组ID构成的数组，一个负载均衡实例最多可绑定50个安全组，如果要解绑所有安全组，可不传此参数。
+可以通过 [DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808) 接口查询。
+   */
+  SecurityGroups?: Array<string>
+}
+
+/**
+ * 转发规则之间的重定向关系
+ */
+export interface RewriteLocationMap {
+  /**
+   * 源转发规则ID
+   */
+  SourceLocationId: string
+  /**
+   * 重定向目标转发规则的ID
+   */
+  TargetLocationId: string
+  /**
+   * 重定向状态码，可取值301,302,307
+   */
+  RewriteCode?: number
+  /**
+   * 重定向是否携带匹配的url，配置RewriteCode时必填
+   */
+  TakeUrl?: boolean
+  /**
+   * 源转发的域名，必须是SourceLocationId对应的域名，配置RewriteCode时必填
+   */
+  SourceDomain?: string
+}
+
+/**
+ * Budget限速配置
+ */
+export interface RateLimitConfigForBudget {
+  /**
+   * <p>每分钟限制的请求数量。</p><p>单位：次/分钟。</p>
+   */
+  RPM?: number
+  /**
+   * <p>每分钟限制的Token数量。</p><p>单位：个/分钟。</p>
+   */
+  TPM?: number
+}
+
+/**
+ * InquirePriceCreateModelRouterResourcePackage请求参数结构体
+ */
+export interface InquirePriceCreateModelRouterResourcePackageRequest {
+  /**
+   * <p>模型路由资源包容量</p><p>取值范围：[1000, 10000000]</p><p>单次购买的模型路由资源包容量下限为1000，上限为10000000</p>
+   */
+  ModelRouterResourcePackageAmount: number
+}
+
+/**
+ * 模型路由待关联 Guardrail 防护配置
+ */
+export interface AssociateGuardrailConfig {
+  /**
+   * <p>Guardrail 防护类型。</p><p>枚举值：</p><ul><li>WAF：使用腾讯云 WAF LLM SDK 接入配置对模型路由请求进行安全防护。</li></ul><p>当前仅支持 WAF；不传时默认为 WAF。</p>
+   */
+  Type?: string
+  /**
+   * <p>关联的腾讯云 WAF 实例 ID。</p><p>当 Type 为 WAF 时必填。接口会校验该 WAF 实例存在且属于当前账号。</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>WAF LLM SDK 接入服务 ID。</p><p>该字段对应 WAF LLM SDK 接入配置中的服务标识，用于指定模型路由请求要绑定的 WAF 防护配置。当 Type 为 WAF 时必填。接口会校验该服务配置存在于指定的 WAF 实例下。</p>
+   */
+  ServiceId?: string
+  /**
+   * <p>最大检测对话轮数。</p><p>当 Type 为 WAF 时选填；未传时默认取值为 5。若传入，取值必须为正整数。</p>
+   */
+  InputCheckDepth?: number
+}
+
+/**
+ * DeleteLoadBalancerSnatIps返回参数结构体
+ */
+export interface DeleteLoadBalancerSnatIpsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * InquiryPriceCreateLoadBalancer返回参数结构体
+ */
+export interface InquiryPriceCreateLoadBalancerResponse {
+  /**
+   * 该参数表示对应的价格。
+   */
+  Price?: Price
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 规则与目标组的关联关系
+ */
+export interface TargetGroupAssociation {
+  /**
+   * 负载均衡ID
+   */
+  LoadBalancerId: string
+  /**
+   * 目标组ID
+   */
+  TargetGroupId: string
+  /**
+   * 监听器ID。访问AssociateTargetGroups和DisassociateTargetGroups接口时必传此参数。
+   */
+  ListenerId?: string
+  /**
+   * 转发规则ID
+   */
+  LocationId?: string
+  /**
+   * 目标组权重，范围[0, 100]。仅绑定v2目标组时生效，如果不存在，则默认为10。
+   */
+  Weight?: number
+}
+
+/**
+ * 监听器的健康检查信息
+ */
+export interface ListenerHealth {
+  /**
+   * 监听器ID
+   */
+  ListenerId?: string
+  /**
+   * 监听器名称
+   */
+  ListenerName?: string
+  /**
+   * 监听器的协议
+   */
+  Protocol?: string
+  /**
+   * 监听器的端口
+   */
+  Port?: number
+  /**
+   * 监听器的转发规则列表
+   */
+  Rules?: Array<RuleHealth>
+}
+
+/**
+ * DeleteRewrite请求参数结构体
+ */
+export interface DeleteRewriteRequest {
+  /**
+   * 负载均衡实例ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 源监听器ID。
+   */
+  SourceListenerId: string
+  /**
+   * 目标监听器ID。
+   */
+  TargetListenerId: string
+  /**
+   * 转发规则之间的重定向关系。
+   */
+  RewriteInfos: Array<RewriteLocationMap>
+}
+
+/**
+ * ModifyTargetPort请求参数结构体
+ */
+export interface ModifyTargetPortRequest {
+  /**
+   * 负载均衡实例ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 负载均衡监听器ID。
+   */
+  ListenerId: string
+  /**
+   * 要修改端口的后端服务列表。
+   */
+  Targets: Array<Target>
+  /**
+   * 后端服务绑定到监听器或转发规则的新端口。
+   */
+  NewPort: number
+  /**
+   * 转发规则的ID，当后端服务绑定到七层转发规则时，必须提供此参数或Domain+Url两者之一。
+   */
+  LocationId?: string
+  /**
+   * 目标规则的域名，提供LocationId参数时本参数不生效。
+   */
+  Domain?: string
+  /**
+   * 目标规则的URL，提供LocationId参数时本参数不生效。
+   */
+  Url?: string
+}
+
+/**
+ * DescribeTargetGroupList请求参数结构体
+ */
+export interface DescribeTargetGroupListRequest {
+  /**
+   * <p>目标组ID数组。</p>
+   */
+  TargetGroupIds?: Array<string>
+  /**
+   * <p>过滤条件数组，支持TargetGroupVpcId和TargetGroupName。与TargetGroupIds互斥，优先使用目标组ID。</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>显示的偏移起始量。</p>
+   */
+  Offset?: number
+  /**
+   * <p>每页显示条目数。</p><p>取值范围：[0, 100]</p><p>默认值：20</p>
+   */
+  Limit?: number
+}
+
+/**
+ * SetSecurityGroupForLoadbalancers请求参数结构体
+ */
+export interface SetSecurityGroupForLoadbalancersRequest {
+  /**
+   * 安全组ID，如 sg-12345678。可以通过 [DescribeSecurityGroups](https://cloud.tencent.com/document/product/215/15808) 接口获取。
+   */
+  SecurityGroup: string
+  /**
+   * ADD 绑定安全组；
+DEL 解绑安全组
+   */
+  OperationType: string
+  /**
+   * 负载均衡实例ID数组，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
+列表支持的最大长度为20。
+   */
+  LoadBalancerIds: Array<string>
+}
+
+/**
+ * CreateKey请求参数结构体
+ */
+export interface CreateKeyRequest {
+  /**
+   * <p>模型路由实例ID</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>Key名称</p>
+   */
+  KeyName?: string
+  /**
+   * <p>限速配置</p>
+   */
+  RateLimitConfig?: RateLimitConfigForKey
+  /**
+   * <p>关联的积分预算ID</p>
+   */
+  BudgetId?: string
+  /**
+   * <p>需要关联的用户组ID</p>
+   */
+  UserGroupId?: string
+  /**
+   * <p>标签</p>
+   */
+  Tags?: Array<TagInfo>
+}
+
+/**
+ * DeleteRule请求参数结构体
+ */
+export interface DeleteRuleRequest {
+  /**
+   * 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。
+   */
+  LoadBalancerId: string
+  /**
+   * 负载均衡监听器ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。
+   */
+  ListenerId: string
+  /**
+   * 要删除的转发规则的ID组成的数组，可以通过 [DescribeLoadBalancersDetail](https://cloud.tencent.com/document/api/214/46916) 接口查询。
+   */
+  LocationIds?: Array<string>
+  /**
+   * 要删除的转发规则的域名，如果是多域名，可以指定多域名列表中的任意一个，可以通过 [DescribeLoadBalancersDetail](https://cloud.tencent.com/document/api/214/46916) 接口查询。
+   */
+  Domain?: string
+  /**
+   * 要删除的转发规则的转发路径，可以通过 [DescribeLoadBalancersDetail](https://cloud.tencent.com/document/api/214/46916) 接口查询。
+   */
+  Url?: string
+  /**
+   * 监听器下必须配置一个默认域名，当需要删除默认域名时，可以指定另一个域名作为新的默认域名，如果新的默认域名是多域名，可以指定多域名列表中的任意一个，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。
+   */
+  NewDefaultServerDomain?: string
+}
+
+/**
+ * ModifyFunctionTargets返回参数结构体
+ */
+export interface ModifyFunctionTargetsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyLoadBalancerAttributes请求参数结构体
+ */
+export interface ModifyLoadBalancerAttributesRequest {
+  /**
+   * <p>负载均衡的唯一ID，可以通过 <a href="https://cloud.tencent.com/document/product/214/30685">DescribeLoadBalancers</a> 接口获取。</p>
+   */
+  LoadBalancerId: string
+  /**
+   * <p>负载均衡实例名称，规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。</p>
+   */
+  LoadBalancerName?: string
+  /**
+   * <p>设置负载均衡跨地域绑定1.0的后端服务信息</p>
+   */
+  TargetRegionInfo?: TargetRegionInfo
+  /**
+   * <p>网络计费相关参数</p>
+   */
+  InternetChargeInfo?: InternetAccessible
+  /**
+   * <p>Target是否放通来自CLB的流量。<br>开启放通（true）：只验证CLB上的安全组；<br>不开启放通（false）：需同时验证CLB和后端实例上的安全组。<br>不填则不修改。</p>
+   */
+  LoadBalancerPassToTarget?: boolean
+  /**
+   * <p>不同计费模式之间的切换：0表示不切换，1表示预付费和后付费切换，2表示后付费之间切换。默认值：0</p>
+   */
+  SwitchFlag?: number
+  /**
+   * <p>是否开启跨地域绑定2.0功能。不填则不修改。</p>
+   */
+  SnatPro?: boolean
+  /**
+   * <p>是否开启删除保护，不填则不修改。</p>
+   */
+  DeleteProtect?: boolean
+  /**
+   * <p>将负载均衡二级域名由mycloud.com改为tencentclb.com，子域名也会变换，修改后mycloud.com域名将失效。不填则不修改。</p>
+   */
+  ModifyClassicDomain?: boolean
+  /**
+   * <p>关联的终端节点Id，可通过<a href="https://cloud.tencent.com/document/product/215/54679">DescribeVpcEndPoint</a>接口查询。传空字符串代表解除关联。</p>
+   */
+  AssociateEndpoint?: string
+}
+
+/**
+ * InquirePriceCreateModelRouterResourcePackage返回参数结构体
+ */
+export interface InquirePriceCreateModelRouterResourcePackageResponse {
+  /**
+   * <p>模型路由资源包价格</p>
+   */
+  ModelRouterResourcePackagePrice?: ItemPrice
+  /**
+   * <p>本次购买资源包是否可享受首购优惠</p><p>1:可享受首购优惠，0:不可享受首购优惠</p>
+   */
+  FirstBuy?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CLB监听器或规则绑定的多证书信息
+ */
+export interface MultiCertInfo {
+  /**
+   * 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证
+   */
+  SSLMode: string
+  /**
+   * 监听器或规则证书列表，单双向认证，多本服务端证书算法类型不能重复;若SSLMode为双向认证，证书列表必须包含一本ca证书。
+   */
+  CertList: Array<CertInfo>
+  /**
+   * 双向认证时，是否开启客户端认证，ON:开启，OPTIONAL:自适应，默认ON
+   */
+  SSLVerifyClient?: string
+}
+
+/**
+ * DescribeBlockIPList返回参数结构体
+ */
+export interface DescribeBlockIPListResponse {
+  /**
+   * 返回的IP的数量
+   */
+  BlockedIPCount?: number
+  /**
+   * 获取用户真实IP的字段
+   */
+  ClientIPField?: string
+  /**
+   * 加入了12360黑名单的IP列表
+   */
+  BlockedIPList?: Array<BlockedIP>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyIntentRouterAttribute返回参数结构体
+ */
+export interface ModifyIntentRouterAttributeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 配置绑定关系
+ */
+export interface BindItem {
+  /**
+   * 配置绑定的CLB ID
+   */
+  LoadBalancerId: string
+  /**
+   * 配置绑定的监听器ID
+   */
+  ListenerId: string
+  /**
+   * 配置绑定的域名
+   */
+  Domain: string
+  /**
+   * 配置绑定的规则
+   */
+  LocationId?: string
+}
+
+/**
+ * 反查监听器类型
+ */
+export interface ListenerItem {
+  /**
+   * 监听器ID
+   */
+  ListenerId?: string
+  /**
+   * 监听器协议
+   */
+  Protocol?: string
+  /**
+   * 监听器端口
+   */
+  Port?: number
+  /**
+   * 绑定规则
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rules?: Array<RulesItems>
+  /**
+   * 四层绑定对象
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Targets?: Array<LbRsTargets>
+  /**
+   * 端口段监听器的结束端口
+   */
+  EndPort?: number
+}
+
+/**
+ * SetLoadBalancerStartStatus返回参数结构体
+ */
+export interface SetLoadBalancerStartStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DisassociateTargetGroups返回参数结构体
+ */
+export interface DisassociateTargetGroupsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 路由设置
+ */
+export interface RouterSettingWithoutFallBack {
+  /**
+   * <p>路由策略</p><p>枚举值：</p><ul><li>SimpleShuffle： 简单随机路由</li><li>LeastBusy： 最低繁忙路由</li><li>LatencyBasedRouting： 最低延迟路由</li><li>UsageBasedRouting： 用量均衡路由</li><li>CostBasedRouting： 最低积分路由</li></ul>
+   */
+  RoutingStrategy?: string
+}
+
+/**
+ * 目标组实例
+ */
+export interface TargetGroupInstance {
+  /**
+   * 目标组实例的内网IP
+   */
+  BindIP: string
+  /**
+   * 目标组实例的端口，全监听目标组不支持传此字段。
+   */
+  Port?: number
+  /**
+   * 目标组实例的权重
+v2目标组需要配置权重，调用CreateTargetGroup接口创建目标组时该参数与创建接口中的Weight参数必填其一。
+取值范围：0-100
+   */
+  Weight?: number
+  /**
+   * 目标组实例的新端口，全监听目标组不支持传此字段。
+   */
+  NewPort?: number
+}
+
+/**
+ * CreateRule返回参数结构体
+ */
+export interface CreateRuleResponse {
+  /**
+   * 创建的转发规则的唯一标识数组。
+   */
+  LocationIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RegisterTargetGroupInstances返回参数结构体
+ */
+export interface RegisterTargetGroupInstancesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 传统型负载均衡的后端信息
+ */
+export interface ClassicalTargetInfo {
+  /**
+   * 后端实例ID
+   */
+  InstanceId: string
+  /**
+   * 权重，取值范围 [0, 100]
+   */
+  Weight?: number
+}
+
+/**
+ * 可用区相关信息
+ */
+export interface ZoneInfo {
+  /**
+   * 可用区数值形式的唯一ID，如：100001
+   */
+  ZoneId?: number
+  /**
+   * 可用区字符串形式的唯一ID，如：ap-guangzhou-1
+   */
+  Zone?: string
+  /**
+   * 可用区名称，如：广州一区
+   */
+  ZoneName?: string
+  /**
+   * 可用区所属地域，如：ap-guangzhou
+   */
+  ZoneRegion?: string
+  /**
+   * 可用区是否是LocalZone可用区，如：false
+   */
+  LocalZone?: boolean
+  /**
+   * 可用区是否是EdgeZone可用区，如：false
+   */
+  EdgeZone?: boolean
+}
+
+/**
+ * InquiryPriceCreateLoadBalancer请求参数结构体
+ */
+export interface InquiryPriceCreateLoadBalancerRequest {
+  /**
+   * 询价的负载均衡类型，OPEN为公网类型，INTERNAL为内网类型
+   */
+  LoadBalancerType: string
+  /**
+   * 询价的收费类型，POSTPAID为按量计费，"PREPAID"为预付费包年包月
+   */
+  LoadBalancerChargeType: string
+  /**
+   * 询价的收费周期。（仅包年包月支持该参数）
+   */
+  LoadBalancerChargePrepaid?: LBChargePrepaid
+  /**
+   * 询价的网络计费方式
+   */
+  InternetAccessible?: InternetAccessible
+  /**
+   * 询价的负载均衡实例个数，默认为1
+   */
+  GoodsNum?: number
+  /**
+   * 指定可用区询价。如：ap-guangzhou-1
+   */
+  ZoneId?: string
+  /**
+   * 包年包月询价时传性能容量型规格，如：<li>clb.c2.medium（标准型）</li><li>clb.c3.small（高阶型1）</li><li>clb.c3.medium（高阶型2）</li>
+<li>clb.c4.small（超强型1）</li><li>clb.c4.medium（超强型2）</li><li>clb.c4.large（超强型3）</li><li>clb.c4.xlarge（超强型4）</li>
+按量付费询价时传SLA
+   */
+  SlaType?: string
+  /**
+   * IP版本，可取值：IPV4、IPV6、IPv6FullChain，不区分大小写，默认值 IPV4。说明：取值为IPV6表示为IPV6 NAT64版本；取值为IPv6FullChain，表示为IPv6版本。
+   */
+  AddressIPVersion?: string
+  /**
+   * 仅适用于公网负载均衡。目前仅广州、上海、南京、济南、杭州、福州、北京、石家庄、武汉、长沙、成都、重庆地域支持静态单线 IP 线路类型，如需体验，请联系商务经理申请。申请通过后，即可选择中国移动（CMCC）、中国联通（CUCC）或中国电信（CTCC）的运营商类型，网络计费模式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。 如果不指定本参数，则默认使用BGP。可通过 DescribeResources 接口查询一个地域所支持的Isp。
+   */
+  VipIsp?: string
+}
+
+/**
+ * ChatCompletions返回参数结构体
+ */
+export interface ChatCompletionsResponse {
+  /**
+   * <p>聊天的返回信息</p>
+   */
+  ChatResponseMessage?: string
+  /**
+   * <p>聊天请求发送过程中的失败信息</p>
+   */
+  ErrorInChat?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeClassicalLBTargets请求参数结构体
+ */
+export interface DescribeClassicalLBTargetsRequest {
+  /**
+   * 负载均衡实例 ID。
+   */
+  LoadBalancerId: string
+}
+
+/**
+ * 模型路由列表
+ */
+export interface ModelRouterSet {
+  /**
+   * <p>模型路由实例关联的Budget ID。</p><p>未关联Budget时返回空字符串。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BudgetId?: string
+  /**
+   * <p>模型路由实例关联的Budget名称。</p><p>未关联Budget时返回空字符串。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BudgetName?: string
+  /**
+   * <p>集群信息</p>
+   */
+  ClusterInfo?: ClusterInfo
+  /**
+   * <p>创建时间</p>
+   */
+  CreatedTime?: string
+  /**
+   * <p>模型路由实例按Budget刷新周期划分的Credit使用情况。</p><p>当关联Budget配置多个刷新周期时，按1d、7d、30d顺序返回各周期用量；未关联Budget时返回空数组。</p>
+   */
+  CreditUsageSet?: Array<CreditUsage>
+  /**
+   * <p>模型路由实例域名</p>
+   */
+  Domain?: string
+  /**
+   * <p>模型路由ID</p>
+   */
+  ModelRouterId?: string
+  /**
+   * <p>模型路由名称</p><p>默认值：-</p>
+   */
+  ModelRouterName?: string
+  /**
+   * <p>模型路由类型</p><p>枚举值：</p><ul><li>Shared： 共享型</li><li>Enterprise： 企业级</li></ul>
+   */
+  ModelRouterType?: string
+  /**
+   * <p>修改时间</p>
+   */
+  ModifiedTime?: string
+  /**
+   * <p>模型路由实例网络类型</p><p>枚举值：</p><ul><li>Internet： 公网</li><li>Intranet： 内网</li></ul>
+   */
+  NetworkType?: string
+  /**
+   * <p>模型路由实例的安全状态</p><p>枚举值：</p><ul><li>Normal： 正常</li><li>Banned： 已封禁</li><li>Frozen： 已冻结</li></ul>
+   */
+  SecurityStatus?: string
+  /**
+   * <p>模型路由实例状态</p><p>枚举值：</p><ul><li>Active： 运行中</li><li>Provisioning： 创建中</li><li>Configuring： 变配中</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>标签</p>
+   */
+  Tags?: Array<TagInfo>
+  /**
+   * <p>模型路由实例的计费状态</p><p>枚举值：</p><ul><li>Normal： 正常</li><li>Isolated： 已隔离</li></ul>
+   */
+  TradeStatus?: string
+  /**
+   * <p>模型路由实例VIP</p>
+   */
+  Vip?: string
+  /**
+   * <p>模型路由实例所属VPC的ID</p>
+   */
+  VpcId?: string
+}
+
+/**
+ * InquiryPriceRenewLoadBalancer返回参数结构体
+ */
+export interface InquiryPriceRenewLoadBalancerResponse {
+  /**
+   * 表示续费价格
+   */
+  Price?: Price
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCustomizedConfigList请求参数结构体
+ */
+export interface DescribeCustomizedConfigListRequest {
+  /**
+   * 配置类型:CLB 负载均衡维度。 SERVER 域名维度。 LOCATION 规则维度。
+   */
+  ConfigType: string
+  /**
+   * 拉取页偏移，默认值0。
+   */
+  Offset?: number
+  /**
+   * 拉取数目，默认值20。
+   */
+  Limit?: number
+  /**
+   * 拉取指定配置名字，模糊匹配。
+   */
+  ConfigName?: string
+  /**
+   * 配置ID，可以通过 [DescribeCustomizedConfigList](https://cloud.tencent.com/document/api/214/60009) 接口查询。
+   */
+  UconfigIds?: Array<string>
+  /**
+   * 过滤条件如下：
+- loadbalancer-id
+按照【负载均衡 ID】进行过滤。实例计费模式例如：lb-9vxezxza。
+类型：String
+必选：否
+获取方式：[DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459)
+- vip
+按照【负载均衡VIP】进行过滤。网络计费模式例如："1.1.1.1","2204::22:3"。
+类型：String
+必选：否
+获取方式：[DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459)
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * DescribeTaskStatus返回参数结构体
+ */
+export interface DescribeTaskStatusResponse {
+  /**
+   * 任务的当前状态。 0：成功，1：失败，2：进行中。
+   */
+  Status?: number
+  /**
+   * 由负载均衡实例唯一 ID 组成的数组。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadBalancerIds?: Array<string>
+  /**
+   * 辅助描述信息，如失败原因等。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * InquiryPriceModifyLoadBalancer返回参数结构体
+ */
+export interface InquiryPriceModifyLoadBalancerResponse {
+  /**
+   * 描述价格信息
+   */
+  Price?: Price
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLBListeners请求参数结构体
+ */
+export interface DescribeLBListenersRequest {
+  /**
+   * 需要查询的内网ip列表
+   */
+  Backends: Array<LbRsItem>
+}
+
+/**
+ * 转发目标，即绑定在负载均衡上的后端服务
+ */
+export interface Target {
+  /**
+   * 后端服务的监听端口。
+注意：绑定CVM（云服务器）或ENI（弹性网卡）时必传此参数
+   */
+  Port: number
+  /**
+   * 后端服务的类型，可取：CVM（云服务器）、ENI（弹性网卡）；作为入参时，目前本参数暂不生效。
+   */
+  Type?: string
+  /**
+   * 绑定CVM时需要传入此参数，代表CVM的唯一 ID，可通过 DescribeInstances 接口返回字段中的 InstanceId 字段获取。表示绑定主网卡主IPv4地址；以下场景都不支持指定InstanceId：绑定非CVM，绑定CVM上的辅助网卡IP，通过跨域2.0绑定CVM，以及绑定CVM的IPv6地址等。
+注意：参数 InstanceId、EniIp 有且只能传入其中一个参数。
+   */
+  InstanceId?: string
+  /**
+   * 后端服务修改后的转发权重，取值范围：[0, 100]，默认为 10。此参数的优先级高于[RsWeightRule](https://cloud.tencent.com/document/api/214/30694#RsWeightRule)中的Weight参数，即最终的权重值以此Weight参数值为准，仅当此Weight参数为空时，才以RsWeightRule中的Weight参数为准。
+   */
+  Weight?: number
+  /**
+   * 绑定IP时需要传入此参数，支持弹性网卡的IP和其他内网IP，如果是弹性网卡则必须先绑定至CVM，然后才能绑定到负载均衡实例。
+注意：参数 InstanceId、EniIp 有且只能传入其中一个参数。如果绑定双栈IPV6子机，则必须传该参数。如果是跨地域绑定，则必须传该参数，不支持传InstanceId参数。
+   */
+  EniIp?: string
+  /**
+   * 标签。
+   */
+  Tag?: string
+}
+
+/**
+ * ModifyKeysUserGroup返回参数结构体
+ */
+export interface ModifyKeysUserGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeModelRouterQuota返回参数结构体
+ */
+export interface DescribeModelRouterQuotaResponse {
+  /**
+   * <p>配额信息</p>
+   */
+  Quotas?: Array<ModelRouterQuota>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeModelRewrite返回参数结构体
+ */
+export interface DescribeModelRewriteResponse {
+  /**
+   * <p>重写规则列表，按 SourceModel 字典序排序。无规则或过滤未命中时为空数组。</p>
+   */
+  Rewrites?: Array<RewriteItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 监听器的信息
+ */
+export interface Listener {
+  /**
+   * <p>负载均衡监听器 ID</p>
+   */
+  ListenerId?: string
+  /**
+   * <p>监听器协议，可选值：TCP、UDP、HTTP、HTTPS、TCP_SSL、QUIC</p>
+   */
+  Protocol?: string
+  /**
+   * <p>监听器端口，端口范围：1-65535</p>
+   */
+  Port?: number
+  /**
+   * <p>监听器绑定的证书信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Certificate?: CertificateOutput
+  /**
+   * <p>监听器的健康检查信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HealthCheck?: HealthCheck
+  /**
+   * <p>请求的调度方式。 WRR、LEAST_CONN、IP_HASH分别表示按权重轮询、最小连接数、IP Hash。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Scheduler?: string
+  /**
+   * <p>会话保持时间，单位：秒。可选值：30~3600，默认 0，默认不开启。此参数仅适用于TCP/UDP监听器。</p><p>单位：秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionExpireTime?: number
+  /**
+   * <p>是否开启SNI特性，1：表示开启，0：表示不开启（本参数仅对于HTTPS监听器有意义）</p>
+   */
+  SniSwitch?: number
+  /**
+   * <p>监听器下的全部转发规则（本参数仅对于HTTP/HTTPS监听器有意义）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Rules?: Array<RuleOutput>
+  /**
+   * <p>监听器的名称</p>
+   */
+  ListenerName?: string
+  /**
+   * <p>监听器的创建时间。</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>端口段结束端口，端口范围：2-65535</p>
+   */
+  EndPort?: number
+  /**
+   * <p>后端服务器类型，可选值：NODE、POLARIS、TARGETGROUP、TARGETGROUP-V2</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetType?: string
+  /**
+   * <p>绑定的目标组基本信息；当监听器绑定目标组时，会返回该字段</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetGroup?: BasicTargetGroupInfo
+  /**
+   * <p>会话保持类型。NORMAL表示默认会话保持类型。QUIC_CID 表示根据Quic Connection ID做会话保持。</p>
+   */
+  SessionType?: string
+  /**
+   * <p>是否开启长连接，1开启，0关闭，（本参数仅对于HTTP/HTTPS监听器有意义）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  KeepaliveEnable?: number
+  /**
+   * <p>仅支持Nat64 CLB TCP监听器</p>
+   */
+  Toa?: boolean
+  /**
+   * <p>重新调度功能，解绑后端服务开关，打开此开关，当解绑后端服务时触发重新调度。仅TCP/UDP监听器支持。</p>
+   */
+  DeregisterTargetRst?: boolean
+  /**
+   * <p>监听器的属性</p>
+   */
+  AttrFlags?: Array<string>
+  /**
+   * <p>绑定的目标组列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetGroupList?: Array<BasicTargetGroupInfo>
+  /**
+   * <p>监听器最大连接数，-1表示监听器维度不限速。</p>
+   */
+  MaxConn?: number
+  /**
+   * <p>监听器最大新增连接数，-1表示监听器维度不限速。</p>
+   */
+  MaxCps?: number
+  /**
+   * <p>空闲连接超时时间，仅支持TCP监听器。默认值:900；共享型实例和独占型实例取值范围：300～900，性能容量型实例取值范围:300～1980。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IdleConnectTimeout?: number
+  /**
+   * <p>重新调度触发持续时间，取值0~3600s。仅TCP/UDP监听器支持。触发重新调度后，长连接将会在设置的调度时间内断开并完成重新分配。</p><p>单位：秒</p>
+   */
+  RescheduleInterval?: number
+  /**
+   * <p>数据压缩模式</p>
+   */
+  DataCompressMode?: string
+  /**
+   * <p>重新调度启动时间，配置了重新调度启动时间后，会在启动时间到达时触发重新调度。</p>
+   */
+  RescheduleStartTime?: number
+}
+
+/**
+ * 配置内容
+ */
+export interface ConfigListItem {
+  /**
+   * 配置ID
+   */
+  UconfigId?: string
+  /**
+   * 配置类型， 可选值：CLB（实例维度配置）， SERVER（服务维度配置），LOCATION（规则维度配置）
+   */
+  ConfigType?: string
+  /**
+   * 配置名字
+   */
+  ConfigName?: string
+  /**
+   * 配置内容
+   */
+  ConfigContent?: string
+  /**
+   * 配置的创建时间。
+格式：YYYY-MM-DD HH:mm:ss
+   */
+  CreateTimestamp?: string
+  /**
+   * 配置的修改时间。
+格式：YYYY-MM-DD HH:mm:ss
+   */
+  UpdateTimestamp?: string
+}
+
+/**
+ * DisassociateBudget请求参数结构体
+ */
+export interface DisassociateBudgetRequest {
+  /**
+   * <p>Budget ID。</p>
+   */
+  BudgetId: string
+  /**
+   * <p>要解除关联的资源列表。</p>
+   */
+  Resources: Array<BudgetResource>
+}
+
+/**
+ * DeregisterTargetGroupInstances返回参数结构体
+ */
+export interface DeregisterTargetGroupInstancesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateBudget返回参数结构体
+ */
+export interface CreateBudgetResponse {
+  /**
+   * <p>Budget ID。</p><p>创建请求提交后返回，可通过DescribeBudgets查询状态。</p>
+   */
+  BudgetId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeregisterModelsFromServiceProvider请求参数结构体
+ */
+export interface DeregisterModelsFromServiceProviderRequest {
+  /**
+   * <p>BYOK的ID</p>
+   */
+  ServiceProviderId: string
+  /**
+   * <p>模型别名列表</p>
+   */
+  ModelAliases?: Array<string>
+}
+
+/**
+ * DescribeCustomizedConfigAssociateList请求参数结构体
+ */
+export interface DescribeCustomizedConfigAssociateListRequest {
+  /**
+   * 配置ID，可以通过 [DescribeCustomizedConfigList](https://cloud.tencent.com/document/product/214/60009) 接口获取。
+   */
+  UconfigId?: string
+  /**
+   * 拉取绑定关系列表开始位置，默认值 0
+   */
+  Offset?: number
+  /**
+   * 拉取绑定关系列表数目，默认值 20
+   */
+  Limit?: number
+  /**
+   * 搜索域名，可以通过 [DescribeLoadBalancersDetail](https://cloud.tencent.com/document/product/214/46916) 接口返回值的 `Domain` 字段查询。
+   */
+  Domain?: string
+}
+
+/**
+ * 模型路由网络服务信息
+ */
+export interface ServiceEndPoints {
+  /**
+   * <p>证书ID</p>
+   */
+  CertId?: string
+  /**
+   * <p>监听端口</p>
+   */
+  Port?: number
+  /**
+   * <p>网络协议</p>
+   */
+  Schema?: string
+}
+
+/**
+ * DeregisterFunctionTargets请求参数结构体
+ */
+export interface DeregisterFunctionTargetsRequest {
+  /**
+   * 负载均衡实例 ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 负载均衡监听器 ID。
+   */
+  ListenerId: string
+  /**
+   * 待解绑的云函数列表。
+   */
+  FunctionTargets: Array<FunctionTarget>
+  /**
+   * 目标转发规则的 ID，当将云函数从七层转发规则上解绑时，必须输入此参数或 Domain+Url 参数。
+   */
+  LocationId?: string
+  /**
+   * 目标转发规则的域名，若已经输入 LocationId 参数，则本参数不生效。
+   */
+  Domain?: string
+  /**
+   * 目标转发规则的 URL，若已经输入 LocationId 参数，则本参数不生效。
+   */
+  Url?: string
+}
+
+/**
+ * 查询类型
+ */
+export interface LbRsItem {
+  /**
+   * vpc的字符串id，只支持字符串id。
+可以通过 [DescribeVpcs](https://cloud.tencent.com/document/api/215/15778) 接口查询。
+   */
+  VpcId: string
+  /**
+   * 需要查询后端的内网 IP，可以是 CVM 和弹性网卡。
+可以通过 [DescribeAddresses](https://cloud.tencent.com/document/product/215/16702) 接口查询。
+   */
+  PrivateIp: string
+}
+
+/**
+ * DescribeResources返回参数结构体
+ */
+export interface DescribeResourcesResponse {
+  /**
+   * 可用区支持的资源列表。
+   */
+  ZoneResourceSet?: Array<ZoneResource>
+  /**
+   * 可用区资源列表数目。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyTargetGroupInstancesWeight请求参数结构体
+ */
+export interface ModifyTargetGroupInstancesWeightRequest {
+  /**
+   * 目标组ID。
+   */
+  TargetGroupId: string
+  /**
+   * 待修改权重的服务器数组，在这个接口 Port 为必填项。
+   */
+  TargetGroupInstances: Array<TargetGroupInstance>
+}
+
+/**
+ * 重新生成的Key信息
+ */
+export interface RegeneratedKey {
+  /**
+   * <p>重新生成的明文Key</p>
+   */
+  Key?: string
+  /**
+   * <p>Key的ID</p>
+   */
+  KeyId?: string
+}
+
+/**
+ * BYOK信息
+ */
+export interface ServiceProvider {
+  /**
+   * <p>BYOK类型</p>
+   */
+  AccessType?: string
+  /**
+   * <p>单个byok实例下该模型可支持的输入多模态能力列表。</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>file： 支持文件输入（当前仅支持pdf）</li><li>image： 支持图像输入</li></ul>
+   */
+  InputModalities?: Array<string>
+  /**
+   * <p>模型协议</p>
+   */
+  Protocol?: string
+  /**
+   * <p>BYOK的所属厂商</p>
+   */
+  Provider?: string
+  /**
+   * <p>BYOK实例ID</p>
+   */
+  ServiceProviderId?: string
+  /**
+   * <p>BYOK名称</p>
+   */
+  ServiceProviderName?: string
+}
+
+/**
+ * 模型路由资源包抵扣信息
+ */
+export interface ModelRouterResourcePackageDeduction {
+  /**
+   * <p>实际抵扣量</p>
+   */
+  ActualDosage?: string
+  /**
+   * <p>抵扣后包剩余量</p>
+   */
+  AfterDeductionRemain?: string
+  /**
+   * <p>抵扣前包剩余量</p>
+   */
+  BeforeDeductionRemain?: string
+  /**
+   * <p>抵扣时间</p>
+   */
+  DeductionTime?: string
+  /**
+   * <p>原始用量</p>
+   */
+  Dosage?: string
+  /**
+   * <p>用量结束时间</p>
+   */
+  EndTime?: string
+  /**
+   * <p>产生用量的模型路由实例Id</p>
+   */
+  ModelRouterId?: string
+  /**
+   * <p>模型路由资源包Id</p>
+   */
+  ModelRouterResourcePackageId?: string
+  /**
+   * <p>用量开始时间</p>
+   */
+  StartTime?: string
+}
+
+/**
+ * 传统型负载均衡后端服务的健康状态
+ */
+export interface ClassicalHealth {
+  /**
+   * 后端服务的内网 IP
+   */
+  IP?: string
+  /**
+   * 后端服务的端口
+   */
+  Port?: number
+  /**
+   * 负载均衡的监听端口
+   */
+  ListenerPort?: number
+  /**
+   * 转发协议
+   */
+  Protocol?: string
+  /**
+   * 健康检查结果，1 表示健康，0 表示不健康
+   */
+  HealthStatus?: number
+}
+
+/**
+ * DescribeIntentRouterTiers返回参数结构体
+ */
+export interface DescribeIntentRouterTiersResponse {
+  /**
+   * <p>Tier 字典列表（按 tier_id 升序排列）</p>
+   */
+  TierSet?: Array<IntentRouterTierDictItem>
+  /**
+   * <p>Tier 总条数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AddModelRewrite返回参数结构体
+ */
+export interface AddModelRewriteResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeClassicalLBHealthStatus请求参数结构体
+ */
+export interface DescribeClassicalLBHealthStatusRequest {
+  /**
+   * 负载均衡实例ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 负载均衡监听器ID。
+   */
+  ListenerId?: string
+}
+
+/**
+ * DisassociateModelsFromModelRouter请求参数结构体
+ */
+export interface DisassociateModelsFromModelRouterRequest {
+  /**
+   * <p>模型路由实例ID</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>需要解除关联的模型信息</p>
+   */
+  Models?: Array<ModelRouterModel>
+}
+
+/**
+ * 批量创建的Key信息
+ */
+export interface CreatedKey {
+  /**
+   * <p>明文Key</p>
+   */
+  Key?: string
+  /**
+   * <p>Key的ID</p>
+   */
+  KeyId?: string
+  /**
+   * <p>Key的名称</p>
+   */
+  KeyName?: string
+}
+
+/**
+ * ChatCompletions请求参数结构体
+ */
+export interface ChatCompletionsRequest {
+  /**
+   * <p>virtual key，用于向代理网关鉴权</p>
+   */
+  ApiKey?: string
+  /**
+   * <p>多模态附件列表</p>
+   */
+  Attachments?: Array<MultiModalityAttachments>
+  /**
+   * <p>聊天内容</p>
+   */
+  ChatContent?: string
+  /**
+   * <p>模型名称，配置的模型标识</p><p>示例：gpt-4o、deepseek-chat</p>
+   */
+  Model?: string
+  /**
+   * <p>模型路由实例ID</p>
+   */
+  ModelRouterId?: string
+  /**
+   * <p>请求路径</p><p>默认值：/v1/chat/completions</p>
+   */
+  RequestPath?: string
+}
+
+/**
+ * 传统型负载均衡监听器信息
+ */
+export interface ClassicalListener {
+  /**
+   * <p>负载均衡监听器ID</p>
+   */
+  ListenerId?: string
+  /**
+   * <p>负载均衡监听器端口</p>
+   */
+  ListenerPort?: number
+  /**
+   * <p>监听器后端转发端口</p>
+   */
+  InstancePort?: number
+  /**
+   * <p>监听器名称</p>
+   */
+  ListenerName?: string
+  /**
+   * <p>监听器协议类型</p>
+   */
+  Protocol?: string
+  /**
+   * <p>会话保持时间</p>
+   */
+  SessionExpire?: number
+  /**
+   * <p>是否开启了健康检查：1（开启）、0（关闭）</p>
+   */
+  HealthSwitch?: number
+  /**
+   * <p>响应超时时间</p><p>单位：秒</p>
+   */
+  TimeOut?: number
+  /**
+   * <p>检查间隔</p><p>单位：秒</p>
+   */
+  IntervalTime?: number
+  /**
+   * <p>健康阈值</p>
+   */
+  HealthNum?: number
+  /**
+   * <p>不健康阈值</p>
+   */
+  UnhealthNum?: number
+  /**
+   * <p>传统型公网负载均衡 监听器的请求均衡方法。空字符串或wrr 表示按权重轮询，ip_hash 表示根据访问的源 IP 进行一致性哈希方式来分发，least_conn表示按最小连接数。</p>
+   */
+  HttpHash?: string
+  /**
+   * <p>传统型公网负载均衡的 HTTP、HTTPS 监听器的健康检查返回码。具体可参考创建监听器中对该字段的解释</p>
+   */
+  HttpCode?: number
+  /**
+   * <p>传统型公网负载均衡的 HTTP、HTTPS 监听器的健康检查路径</p>
+   */
+  HttpCheckPath?: string
+  /**
+   * <p>传统型公网负载均衡的 HTTPS 监听器的认证方式</p>
+   */
+  SSLMode?: string
+  /**
+   * <p>传统型公网负载均衡的 HTTPS 监听器的服务端证书 ID</p>
+   */
+  CertId?: string
+  /**
+   * <p>传统型公网负载均衡的 HTTPS 监听器的客户端证书 ID</p>
+   */
+  CertCaId?: string
+  /**
+   * <p>监听器的状态，0 表示创建中，1 表示运行中</p>
+   */
+  Status?: number
+}
+
+/**
+ * CreateBYOKNetwork请求参数结构体
+ */
+export interface CreateBYOKNetworkRequest {
+  /**
+   * <p>子网 ID</p><p>参数格式：subnet-xxxxxxxx</p>
+   */
+  SubnetId: string
+  /**
+   * <p>VPC 实例 ID</p><p>参数格式：vpc-xxxxxxxx</p>
+   */
+  VpcId: string
+  /**
+   * <p>BYOK 的自定义名字</p><p>入参限制：1～256个字符，可选</p>
+   */
+  ServiceProviderName?: string
+  /**
+   * <p>标签</p>
+   */
+  Tags?: Array<TagInfo>
+}
+
+/**
+ * AssociateCustomizedConfig请求参数结构体
+ */
+export interface AssociateCustomizedConfigRequest {
+  /**
+   * 配置ID
+   */
+  UconfigId: string
+  /**
+   * 关联的server或location
+   */
+  BindList: Array<BindItem>
+}
+
+/**
+ * 证书信息
+ */
+export interface CertificateInput {
+  /**
+   * 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证。
+默认为 UNIDIRECTIONAL。
+   */
+  SSLMode?: string
+  /**
+   * 双向认证时，是否开启客户端认证，ON:开启，OPTIONAL:自适应，默认ON。
+   */
+  SSLVerifyClient?: string
+  /**
+   * 服务端证书的 ID，如果不填写此项则必须上传证书，包括 CertContent（服务端证书内容），CertKey（服务端证书密钥），CertName（服务端证书名称）。
+   */
+  CertId?: string
+  /**
+   * 客户端证书的 ID，当监听器采用双向认证，即 SSLMode=MUTUAL 时，如果不填写此项则必须上传客户端证书，包括 CertCaContent，CertCaName。
+   */
+  CertCaId?: string
+  /**
+   * 上传服务端证书的名称，如果没有 CertId，则此项必传。
+   */
+  CertName?: string
+  /**
+   * 上传服务端证书的 key，如果没有 CertId，则此项必传。
+   */
+  CertKey?: string
+  /**
+   * 上传服务端证书的内容，如果没有 CertId，则此项必传。
+   */
+  CertContent?: string
+  /**
+   * 上传客户端 CA 证书的名称，如果 SSLMode=MUTUAL，如果没有 CertCaId，则此项必传。
+   */
+  CertCaName?: string
+  /**
+   * 上传客户端证书的内容，如果 SSLMode=MUTUAL，如果没有 CertCaId，则此项必传。
+   */
+  CertCaContent?: string
+}
+
+/**
+ * DescribeIntentRouters请求参数结构体
+ */
+export interface DescribeIntentRoutersRequest {
+  /**
+   * <p>模型路由实例ID。</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>意图路由ID列表</p>
+   */
+  IntentRouterIds?: Array<string>
+}
+
+/**
+ * ModifyBudgetAttributes返回参数结构体
+ */
+export interface ModifyBudgetAttributesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAsyncJobs请求参数结构体
+ */
+export interface DescribeAsyncJobsRequest {
+  /**
+   * <p>请求ID列表</p>
+   */
+  RequestIds?: Array<string>
+  /**
+   * <p>分页游标</p>
+   */
+  NextToken?: string
+  /**
+   * <p>本次查询最大数量</p><p>取值范围：[1, 100]</p><p>默认值：20</p>
+   */
+  MaxResults?: number
+}
+
+/**
+ * ModifyModelAliasAttributes请求参数结构体
+ */
+export interface ModifyModelAliasAttributesRequest {
+  /**
+   * <p>模型积分系数配置。</p><p>必填，至少包含 <code>InputCoefficient</code>、<code>InputCachedCoefficient</code>、<code>OutputCoefficient</code> 中的一个字段，未传字段保持原值。</p><p><code>InputCoefficient</code> 为非缓存命中输入积分系数。</p><p><code>InputCachedCoefficient</code> 为缓存命中输入积分系数，用于 provider prompt cache 命中的输入 token。</p><p><code>OutputCoefficient</code> 为输出积分系数。</p><p>各字段取值范围：[0, 5000]，仅支持整数，0 表示该类 token 不计积分。</p>
+   */
+  Coefficient: Coefficient
+  /**
+   * <p>模型别名列表。</p><p>不传 <code>ServiceProviderIds</code>（按 ModelAlias 账号维度修改）时支持数组批量，同一份 Coefficient 应用到多个别名。</p><p>传入 <code>ServiceProviderIds</code>（按 ServiceProvider 维度修改）时只能传 1 个别名，锁定唯一 model 别名；去重后不等于 1 个将返回 InvalidParameter。</p>
+   */
+  ModelAliasNames: Array<string>
+  /**
+   * <p>BYOK 实例（ServiceProvider）ID 列表。</p><p>可选，数组。传入时按 ServiceProvider 维度修改：把同一份 Coefficient 批量应用到数组内每一个实例（覆盖配置，仅作用于这些实例），此时 <code>ModelAliasNames</code> 只能传 1 个别名（即 1 别名 × N ServiceProvider）；数组需去重、非空、上限 100，任一实例不归属/不存在/该实例下无该别名将整批返回错误。不传时按 ModelAlias（账号）维度修改，作用于该别名下未单独配置覆盖的全部实例。</p>
+   */
+  ServiceProviderIds?: Array<string>
+}
+
+/**
+ * SCF云函数（Serverless Cloud Function）作为后端服务
+ */
+export interface FunctionTarget {
+  /**
+   * 云函数相关信息
+   */
+  Function: FunctionInfo
+  /**
+   * 权重
+   */
+  Weight?: number
+}
+
+/**
+ * 负载均衡的操作保护信息
+ */
+export interface LBOperateProtectInfo {
+  /**
+   * 负载均衡实例 ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 保护状态，true：表示开启了操作保护，false：表示未开启操作保护。
+   */
+  ProtectState: boolean
+  /**
+   * 操作保护的设置uin。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OperatorUin: string
+  /**
+   * 设置操作保护时的描述信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description: string
+  /**
+   * 最后修改时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModifyTime: string
+}
+
+/**
+ * CreateRule请求参数结构体
+ */
+export interface CreateRuleRequest {
+  /**
+   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取
+   */
+  LoadBalancerId: string
+  /**
+   * 监听器 ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口获取
+   */
+  ListenerId: string
+  /**
+   * 新建转发规则的信息。
+   */
+  Rules: Array<RuleInput>
+}
+
+/**
+ * DescribeModelRouters返回参数结构体
+ */
+export interface DescribeModelRoutersResponse {
+  /**
+   * <p>模型路由实例列表</p>
+   */
+  ModelRouterSet?: Array<ModelRouterSet>
+  /**
+   * <p>符合条件的总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyModelRouterGuardrails请求参数结构体
+ */
+export interface ModifyModelRouterGuardrailsRequest {
+  /**
+   * <p>待修改的 Guardrail 防护配置列表。</p><p>当前最多支持 1 个元素。每个元素必须填写 GuardrailId；当 Type 为 WAF 或未传按 WAF 处理时，InstanceId 和 ServiceId 必填；InputCheckDepth 为选填，不传时沿用当前已关联 Guardrail 的取值。</p>
+   */
+  Guardrails: Array<GuardrailConfig>
+  /**
+   * <p>模型路由实例 ID。</p>
+   */
+  ModelRouterId: string
+}
+
+/**
+ * 证书信息
+ */
+export interface CertInfo {
+  /**
+   * 证书 ID，如果不填写此项则必须上传证书内容，包括CertName, CertContent，若为服务端证书必须包含CertKey。
+   */
+  CertId?: string
+  /**
+   * 上传证书的名称，如果没有 CertId，则此项必传。
+   */
+  CertName?: string
+  /**
+   * 上传证书的公钥；如果没有 CertId，则此项必传。
+   */
+  CertContent?: string
+  /**
+   * 上传服务端证书的私钥；如果没有 CertId，则此项必传。
+   */
+  CertKey?: string
+}
+
+/**
+ * CreateTargetGroup请求参数结构体
+ */
+export interface CreateTargetGroupRequest {
+  /**
+   * <p>目标组名称。命名规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。</p>
+   */
+  TargetGroupName?: string
+  /**
+   * <p>目标组的vpcId属性，不填则使用默认vpc。</p>
+   */
+  VpcId?: string
+  /**
+   * <p>目标组的默认端口， 后续添加服务器时可使用该默认端口。全监听目标组不支持此参数，非全监听目标组Port和TargetGroupInstances.N中的port二者必填其一。</p>
+   */
+  Port?: number
+  /**
+   * <p>目标组绑定的后端服务器，单次最多支持50个。</p>
+   */
+  TargetGroupInstances?: Array<TargetGroupInstance>
+  /**
+   * <p>目标组类型，当前支持v1(旧版目标组), v2(新版目标组), 默认为v1(旧版目标组)。</p>
+   */
+  Type?: string
+  /**
+   * <p>目标组后端转发协议。v2新版目标组该项必填。目前支持TCP、UDP、HTTP、HTTPS、GRPC。</p>
+   */
+  Protocol?: string
+  /**
+   * <p>健康检查。</p>
+   */
+  HealthCheck?: TargetGroupHealthCheck
+  /**
+   * <p>调度算法，仅V2新版目标组，且后端转发协议为(HTTP|HTTPS|GRPC)时该参数有效。可选值：</p><li>WRR:按权重轮询。</li><li>LEAST_CONN:最小连接数。</li><li>IP_HASH:按IP哈希。</li><li>默认为 WRR。</li>
+   */
+  ScheduleAlgorithm?: string
+  /**
+   * <p>标签。</p>
+   */
+  Tags?: Array<TagInfo>
+  /**
+   * <p>后端服务默认权重, 其中：</p><ul><li>取值范围[0, 100]</li><li>设置该值后，添加后端服务到目标组时， 若后端服务不单独设置权重， 则使用这里的默认权重。 </li><li>v1 目标组类型不支持设置 Weight 参数。</li></ul>
+   */
+  Weight?: number
+  /**
+   * <p>全监听目标组标识，true表示是全监听目标组，false表示不是全监听目标组。仅V2新版类型目标组支持该参数。</p>
+   */
+  FullListenSwitch?: boolean
+  /**
+   * <p>是否开启长连接，此参数仅适用于HTTP/HTTPS目标组，0:关闭；1:开启， 默认关闭。</p>
+   */
+  KeepaliveEnable?: boolean
+  /**
+   * <p>会话保持时间，单位：秒。可选值：30~3600，默认 0，表示不开启。仅V2新版且后端转发协议为HTTP/HTTPS/GRPC目标组支持该参数。</p>
+   */
+  SessionExpireTime?: number
+  /**
+   * <p>IP版本类型。</p>
+   */
+  IpVersion?: string
+  /**
+   * <p>是否开启SNAT（源IP替换），True（开启）、False（关闭）。默认为关闭。注意：SnatEnable开启时会替换客户端源IP，此时<code>透传客户端源IP</code>选项关闭，反之亦然。</p>
+   */
+  SnatEnable?: boolean
+}
+
+/**
+ * ModifyLoadBalancerMixIpTarget请求参数结构体
+ */
+export interface ModifyLoadBalancerMixIpTargetRequest {
+  /**
+   * 负载均衡实例ID数组，默认支持20个负载均衡实例ID。
+可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
+   */
+  LoadBalancerIds: Array<string>
+  /**
+   * 开启/关闭IPv6FullChain负载均衡7层监听器支持混绑IPv4/IPv6目标特性。
+   */
+  MixIpTarget: boolean
+}
+
+/**
+ * CreateListener请求参数结构体
+ */
+export interface CreateListenerRequest {
+  /**
+   * <p>负载均衡实例 ID，可以通过 <a href="https://cloud.tencent.com/document/product/214/30685">DescribeLoadBalancers</a> 接口获取。</p>
+   */
+  LoadBalancerId: string
+  /**
+   * <p>要将监听器创建到哪些端口，每个端口对应一个新的监听器。<br>端口范围：1~65535</p>
+   */
+  Ports: Array<number | bigint>
+  /**
+   * <p>监听器协议： TCP | UDP | HTTP | HTTPS | TCP_SSL | QUIC。</p>
+   */
+  Protocol: string
+  /**
+   * <p>要创建的监听器名称列表，名称与Ports数组按序一一对应，如不需立即命名，则无需提供此参数。命名规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。</p>
+   */
+  ListenerNames?: Array<string>
+  /**
+   * <p>健康检查相关参数，此参数仅适用于TCP/UDP/TCP_SSL/QUIC监听器。</p>
+   */
+  HealthCheck?: HealthCheck
+  /**
+   * <p>证书相关信息。参数限制如下：</p><li>此参数仅适用于TCP_SSL监听器和未开启SNI特性的HTTPS监听器。</li><li>创建TCP_SSL监听器和未开启SNI特性的HTTPS监听器时，此参数和参数MultiCertInfo至少需要传一个， 但不能同时传入。</li>
+   */
+  Certificate?: CertificateInput
+  /**
+   * <p>会话保持时间，单位：秒。可选值：30~3600，默认为0，默认不开启。此参数仅适用于TCP/UDP监听器。</p>
+   */
+  SessionExpireTime?: number
+  /**
+   * <p>监听器转发的方式。可选值：WRR（按权重轮询）、LEAST_CONN（按最小连接数）<br>默认为 WRR。此参数仅适用于TCP/UDP/TCP_SSL/QUIC监听器。</p>
+   */
+  Scheduler?: string
+  /**
+   * <p>是否开启SNI特性，此参数仅适用于HTTPS监听器。0表示未开启，1表示开启。</p>
+   */
+  SniSwitch?: number
+  /**
+   * <p>后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组。此参数仅适用于TCP/UDP监听器。七层监听器应在转发规则中设置。</p>
+   */
+  TargetType?: string
+  /**
+   * <p>会话保持类型。不传或传NORMAL表示默认会话保持类型。QUIC_CID 表示根据Quic Connection ID做会话保持。QUIC_CID只支持UDP协议。此参数仅适用于TCP/UDP监听器。七层监听器应在转发规则中设置。（若选择QUIC_CID，则Protocol必须为UDP，Scheduler必须为WRR，同时只支持ipv4）</p>
+   */
+  SessionType?: string
+  /**
+   * <p>是否开启长连接，此参数仅适用于HTTP/HTTPS监听器，0:关闭；1:开启， 默认关闭。<br>若后端服务对连接数上限有限制，则建议谨慎开启。此功能目前处于内测中，如需使用，请提交 <a href="https://cloud.tencent.com/apply/p/tsodp6qm21">内测申请</a>。</p>
+   */
+  KeepaliveEnable?: number
+  /**
+   * <p>创建端口段监听器时必须传入此参数，用以标识结束端口。同时，入参Ports只允许传入一个成员，用以标识开始端口。【如果您需要体验端口段功能，请通过 <a href="https://console.cloud.tencent.com/workorder/category">工单申请</a>】。</p>
+   */
+  EndPort?: number
+  /**
+   * <p>重新调度功能，解绑后端服务开关，打开此开关，当解绑后端服务时触发重新调度。仅TCP/UDP监听器支持。</p>
+   */
+  DeregisterTargetRst?: boolean
+  /**
+   * <p>证书信息，支持同时传入不同算法类型的多本服务端证书，参数限制如下：</p><li>此参数仅适用于TCP_SSL监听器和未开启SNI特性的HTTPS监听器。</li><li>创建TCP_SSL监听器和未开启SNI特性的HTTPS监听器时，此参数和参数Certificate至少需要传一个， 但不能同时传入。</li>
+   */
+  MultiCertInfo?: MultiCertInfo
+  /**
+   * <p>监听器最大连接数，当前仅性能容量型实例且仅TCP/UDP/TCP_SSL/QUIC监听器支持，不传或者传-1表示监听器维度不限速。基础网络实例不支持该参数。</p>
+   */
+  MaxConn?: number
+  /**
+   * <p>监听器最大新增连接数，当前仅性能容量型实例且仅TCP/UDP/TCP_SSL/QUIC监听器支持，不传或者传-1表示监听器维度不限速。基础网络实例不支持该参数。</p>
+   */
+  MaxCps?: number
+  /**
+   * <p>空闲连接超时时间，此参数仅适用于TCP/UDP监听器，单位：秒。默认值：TCP监听器默认值为900s，UDP监听器默认值为300s。取值范围：共享型实例和独占型实例支持：10-900，性能容量型实例支持：10-1980。如需设置超过取值范围的值请通过 <a href="https://console.cloud.tencent.com/workorder/category">工单申请</a>。</p><p>取值范围：[10, 1980]</p><p>单位：秒</p><p>默认值：900</p><p>TCP监听器默认值为900s，UDP监听器默认值为300s。取值范围：共享型实例和独占型实例支持：10-900，性能容量型实例支持：10-1980。</p>
+   */
+  IdleConnectTimeout?: number
+  /**
+   * <p>TCP_SSL和QUIC是否支持PP</p>
+   */
+  ProxyProtocol?: boolean
+  /**
+   * <p>是否开启SNAT（源IP替换），True（开启）、False（关闭）。默认为关闭。注意：SnatEnable开启时会替换客户端源IP，此时<code>透传客户端源IP</code>选项关闭，反之亦然。</p>
+   */
+  SnatEnable?: boolean
+  /**
+   * <p>全端口段监听器的结束端口，端口范围：2 - 65535</p>
+   */
+  FullEndPorts?: Array<number | bigint>
+  /**
+   * <p>内网 HTTP 监听器开启 h2c 开关。<br>True（开启）、False（关闭）。默认为关闭。<br>开启后，监听器仅支持创建后端转发类型为 GRPC 或 GRPCS 的七层规则；创建规则时需在 Rules.N.ForwardType 中显式传入 GRPC 或 GRPCS。</p>
+   */
+  H2cSwitch?: boolean
+  /**
+   * <p>控制 TCP_SSL 类型的监听器是否移除 SSL 加密层。开启后，监听器将作为普通 TCP 协议运行。 可选值：</p><ul><li>True： 关闭 SSL 功能（协议降级为纯文本 TCP）。</li><li>False（默认）： 保持 SSL 功能开启。</li></ul>
+   */
+  SslCloseSwitch?: boolean
+  /**
+   * <p>数据压缩模式。可选值：transparent（透传模式）、compatibility（兼容模式）</p>
+   */
+  DataCompressMode?: string
+  /**
+   * <p>重新调度功能，权重调为0开关，打开此开关，后端服务器权重调为0时触发重新调度。仅TCP/UDP监听器支持。</p>
+   */
+  RescheduleTargetZeroWeight?: boolean
+  /**
+   * <p>重新调度功能，健康检查异常开关，打开此开关，后端服务器健康检查异常时触发重新调度。仅TCP/UDP监听器支持。</p>
+   */
+  RescheduleUnhealthy?: boolean
+  /**
+   * <p>重新调度功能，扩容后端服务开关，打开此开关，后端服务器增加或者减少时触发重新调度。仅TCP/UDP监听器支持。</p>
+   */
+  RescheduleExpandTarget?: boolean
+  /**
+   * <p>重新调度触发开始时间，取值0~3600s。仅TCP/UDP监听器支持。</p>
+   */
+  RescheduleStartTime?: number
+  /**
+   * <p>重新调度触发持续时间，取值0~3600s。仅TCP/UDP监听器支持。</p>
+   */
+  RescheduleInterval?: number
+}
+
+/**
+ * SetCustomizedConfigForLoadBalancer返回参数结构体
+ */
+export interface SetCustomizedConfigForLoadBalancerResponse {
+  /**
+   * 个性化配置ID，如：pz-1234abcd
+   */
+  ConfigId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * HTTP/HTTPS转发规则（输入）
+ */
+export interface RuleInput {
+  /**
+   * 转发规则的路径。长度限制为：1~200。
+   */
+  Url: string
+  /**
+   * 转发规则的域名。长度限制为：1~80。Domain和Domains只需要传一个，单域名规则传Domain，多域名规则传Domains。
+   */
+  Domain?: string
+  /**
+   * 会话保持时间。设置为0表示关闭会话保持，开启会话保持可取值30~86400，单位：秒。
+   */
+  SessionExpireTime?: number
+  /**
+   * 健康检查信息。详情请参见：[健康检查](https://cloud.tencent.com/document/product/214/6097)
+   */
+  HealthCheck?: HealthCheck
+  /**
+   * 证书信息；此参数和MultiCertInfo不能同时传入。
+   */
+  Certificate?: CertificateInput
+  /**
+   * 规则的请求转发方式，可选值：WRR、LEAST_CONN、IP_HASH
+分别表示按权重轮询、最小连接数、按IP哈希， 默认为 WRR。
+   */
+  Scheduler?: string
+  /**
+   * 负载均衡与后端服务之间的转发协议，目前支持 HTTP/HTTPS/GRPC/GRPCS/TRPC，TRPC暂未对外开放，默认HTTP。
+   */
+  ForwardType?: string
+  /**
+   * 是否将该域名设为默认域名，注意，一个监听器下只能设置一个默认域名。
+   */
+  DefaultServer?: boolean
+  /**
+   * 是否开启Http2，注意，只有HTTPS域名才能开启Http2。
+   */
+  Http2?: boolean
+  /**
+   * 后端目标类型，NODE表示绑定普通节点，TARGETGROUP表示绑定目标组
+   */
+  TargetType?: string
+  /**
+   * TRPC被调服务器路由，ForwardType为TRPC时必填。目前暂未对外开放。
+   */
+  TrpcCallee?: string
+  /**
+   * TRPC调用服务接口，ForwardType为TRPC时必填。目前暂未对外开放
+   */
+  TrpcFunc?: string
+  /**
+   * 是否开启QUIC，注意，只有HTTPS域名才能开启QUIC
+   */
+  Quic?: boolean
+  /**
+   * 转发规则的域名列表。每个域名的长度限制为：1~80。Domain和Domains只需要传一个，单域名规则传Domain，多域名规则传Domains。
+   */
+  Domains?: Array<string>
+  /**
+   * 证书信息，支持同时传入不同算法类型的多本服务端证书；此参数和Certificate不能同时传入。
+   */
+  MultiCertInfo?: MultiCertInfo
+  /**
+   * 自定义cookie名
+   */
+  CookieName?: string
+}
+
+/**
+ * TestModelInputModalities返回参数结构体
+ */
+export interface TestModelInputModalitiesResponse {
+  /**
+   * <p>探测的模型</p>
+   */
+  Model?: string
+  /**
+   * <p>该模型确认支持的输入模态列表</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>image： 支持图像输入</li><li>file： 支持文件输入（当前仅支持pdf）</li></ul><p>收到上游大模型对于输入模态的响应即为“确认支持”</p>
+   */
+  SupportedModalities?: Array<string>
+  /**
+   * <p>每个待探测模态的详细请求结果</p>
+   */
+  ProbeDetails?: Array<ModalityProbeDetail>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTaskStatus请求参数结构体
+ */
+export interface DescribeTaskStatusRequest {
+  /**
+   * 请求ID，即接口返回的 RequestId 参数。
+   */
+  TaskId?: string
+  /**
+   * 订单ID。
+注意：参数TaskId和DealName必须传一个。
+   */
+  DealName?: string
+}
+
+/**
+ * AutoRewrite返回参数结构体
+ */
+export interface AutoRewriteResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLoadBalancerOverview请求参数结构体
+ */
+export type DescribeLoadBalancerOverviewRequest = null
+
+/**
+ * DescribeTargets返回参数结构体
+ */
+export interface DescribeTargetsResponse {
+  /**
+   * 监听器后端绑定的机器信息。
+   */
+  Listeners?: Array<ListenerBackend>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * BatchModifyTargetWeight请求参数结构体
+ */
+export interface BatchModifyTargetWeightRequest {
+  /**
+   * <p>负载均衡实例 ID。</p>
+   */
+  LoadBalancerId: string
+  /**
+   * <p>要批量修改权重的列表。ModifyList数组最多100个元素，ModifyList[i].Targets最多50个，全部Targets累加不超过500。</p>
+   */
+  ModifyList: Array<RsWeightRule>
+}
+
+/**
+ * 批量绑定类型
+ */
+export interface BatchTarget {
+  /**
+   * 监听器 ID。
+   */
+  ListenerId: string
+  /**
+   * 绑定端口。
+   */
+  Port: number
+  /**
+   * 子机 ID。表示绑定主网卡主 IP。
+   */
+  InstanceId?: string
+  /**
+   * 绑定 IP 时需要传入此参数，支持弹性网卡的 IP 和其他内网 IP，如果是弹性网卡则必须先绑定至CVM，然后才能绑定到负载均衡实例。
+注意：参数 InstanceId、EniIp 只能传入一个且必须传入一个。如果绑定双栈IPV6子机，必须传该参数。
+   */
+  EniIp?: string
+  /**
+   * 子机权重，范围[0, 100]。绑定时如果不存在，则默认为10。
+   */
+  Weight?: number
+  /**
+   * 七层规则 ID。7层负载均衡该参数必填
+   */
+  LocationId?: string
+  /**
+   * 标签。
+   */
+  Tag?: string
+}
+
+/**
+ * DeleteModelRouters返回参数结构体
+ */
+export interface DeleteModelRoutersResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RefundModelRouterResourcePackage请求参数结构体
+ */
+export interface RefundModelRouterResourcePackageRequest {
+  /**
+   * <p>待退还的模型路由资源包Id</p><p>非有效状态或者设置了自动续订且自动续订已生效的资源包不允许退款。</p>
+   */
+  ModelRouterResourcePackageIds: Array<string>
+}
+
+/**
+ * DescribeClsLogSet返回参数结构体
+ */
+export interface DescribeClsLogSetResponse {
+  /**
+   * 日志集的 ID。
+   */
+  LogsetId: string
+  /**
+   * 健康检查日志集的 ID。
+   */
+  HealthLogsetId: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDomainAttributes请求参数结构体
+ */
+export interface ModifyDomainAttributesRequest {
+  /**
+   * 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。
+   */
+  LoadBalancerId: string
+  /**
+   * 负载均衡监听器ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。
+   */
+  ListenerId: string
+  /**
+   * 域名（必须是已经创建的转发规则下的域名），如果是多域名，可以指定多域名列表中的任意一个，可以通过[DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。
+   */
+  Domain: string
+  /**
+   * 要修改的新域名。NewDomain和NewDomains只能传一个。
+   */
+  NewDomain?: string
+  /**
+   * 域名相关的证书信息，注意，仅对启用SNI的监听器适用，不可和MultiCertInfo 同时传入。
+   */
+  Certificate?: CertificateInput
+  /**
+   * 是否开启HTTP2，注意，只有HTTPS域名才能开启HTTP2。
+True: 开启HTTP2，Fasle: 不开启HTTP2。
+   */
+  Http2?: boolean
+  /**
+   * 是否设为默认域名，注意，一个监听器下只能设置一个默认域名。
+True: 设为默认域名，Fasle: 不设置为默认域名。
+   */
+  DefaultServer?: boolean
+  /**
+   * 是否开启 QUIC，注意，只有 HTTPS 域名才能开启 QUIC。
+True: 开启 QUIC，False: 不开启QUIC。
+   */
+  Quic?: boolean
+  /**
+   * 监听器下必须配置一个默认域名，若要关闭原默认域名，必须同时指定另一个域名作为新的默认域名，如果新的默认域名是多域名，可以指定多域名列表中的任意一个。
+   */
+  NewDefaultServerDomain?: string
+  /**
+   * 要修改的新域名列表。NewDomain和NewDomains只能传一个。
+   */
+  NewDomains?: Array<string>
+  /**
+   * 域名相关的证书信息，注意，仅对启用SNI的监听器适用；支持同时传入多本算法类型不同的服务器证书，不可和Certificate 同时传入。
+   */
+  MultiCertInfo?: MultiCertInfo
+}
+
+/**
+ * ModifyLoadBalancerMixIpTarget返回参数结构体
+ */
+export interface ModifyLoadBalancerMixIpTargetResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyModelAttributes返回参数结构体
+ */
+export interface ModifyModelAttributesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 排序条件
+ */
+export interface Sort {
+  /**
+   * <p>排序的字段</p>
+   */
+  Field?: string
+  /**
+   * <p>排序方式，支持ASC、DESC</p>
+   */
+  Order?: string
+}
+
+/**
+ * 目标组健康检查详情
+ */
+export interface TargetGroupHealthCheck {
+  /**
+   * 是否开启健康检查。
+   */
+  HealthSwitch: boolean
+  /**
+   * 健康检查方式， 其中仅V2新版目标组类型支持该参数， 支持取值 TCP | HTTP | HTTPS | PING | CUSTOM，其中:
+<ur><li>当目标组后端转发协议为TCP时， 健康检查方式支持 TCP/HTTP/CUSTOM， 默认为TCP。</li><li>当目标组后端转发协议为UDP时， 健康检查方式支持 PING/CUSTOM，默认为PING。</li><li>当目标组后端转发协议为HTTP时， 健康检查方式支持 HTTP/TCP， 默认为HTTP。</li><li>当目标组后端转发协议为HTTPS时， 健康检查方式支持 HTTPS/TCP， 默认为HTTPS。</li><li>当目标组后端转发协议为GRPC时， 健康检查方式支持GRPC/TCP， 默认为GRPC。</li></ur>
+   */
+  Protocol?: string
+  /**
+   * 自定义探测相关参数。健康检查端口，默认为后端服务的端口，除非您希望指定特定端口，否则建议留空。（仅适用于TCP/UDP目标组）。
+
+   */
+  Port?: number
+  /**
+   * 健康检查超时时间。 默认为2秒。 可配置范围：2 - 30秒。
+   */
+  Timeout?: number
+  /**
+   * 检测间隔时间。 默认为5秒。 可配置范围：2 - 300秒。
+   */
+  GapTime?: number
+  /**
+   * 检测健康阈值。 默认为3秒。 可配置范围：2 - 10次。
+   */
+  GoodLimit?: number
+  /**
+   * 检测不健康阈值。 默认为3秒。 可配置范围：2 - 10次。
+   */
+  BadLimit?: number
+  /**
+   * 目标组下的所有rs的探测包是否开启巨帧。默认开启。仅GWLB类型目标组支持该参数。
+   */
+  JumboFrame?: boolean
+  /**
+   * 健康检查状态码（仅适用于HTTP/HTTPS目标组、TCP目标组的HTTP健康检查方式）。可选值：1~31，默认 31，其中：<url> <li>1 表示探测后返回值 1xx 代表健康。</li><li>2 表示返回 2xx 代表健康。</li><li>4 表示返回 3xx 代表健康。</li><li>8 表示返回 4xx 代表健康。</li><li>16 表示返回 5xx 代表健康。</li></url>若希望多种返回码都可代表健康，则将相应的值相加。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpCode?: number
+  /**
+   * 健康检查域名， 其中：<ur><li>仅适用于HTTP/HTTPS目标组和TCP目标组的HTTP健康检查方式。</li><li>针对HTTP/HTTPS目标组，当使用HTTP健康检查方式时，该参数为必填项。</li></ur>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpCheckDomain?: string
+  /**
+   * 健康检查路径（仅适用于HTTP/HTTPS转发规则、TCP监听器的HTTP健康检查方式）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpCheckPath?: string
+  /**
+   * 健康检查方法（仅适用于HTTP/HTTPS转发规则、TCP监听器的HTTP健康检查方式），默认值：HEAD，可选值HEAD或GET。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpCheckMethod?: string
+  /**
+   * 健康检查的输入格式，健康检查方式取CUSTOM时，必填此字段，可取值：HEX或TEXT，其中：<ur><li>TEXT：文本格式。</li><li>HEX：十六进制格式， SendContext和RecvContext的字符只能在0123456789ABCDEF中选取且长度必须是偶数位。</li><li>仅适用于TCP/UDP目标组。</li></ur>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ContextType?: string
+  /**
+   * 自定义探测相关参数。健康检查协议CheckType的值取CUSTOM时，必填此字段，代表健康检查发送的请求内容，只允许ASCII可见字符，最大长度限制500。（仅适用于TCP/UDP目标组）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SendContext?: string
+  /**
+   * 自定义探测相关参数。健康检查协议CheckType的值取CUSTOM时，必填此字段，代表健康检查返回的结果，只允许ASCII可见字符，最大长度限制500。（仅适用于TCP/UDP目标组）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecvContext?: string
+  /**
+   * HTTP版本, 其中：<ur><li>健康检查协议CheckType的值取HTTP时，必传此字段。</li><li>支持配置选项：HTTP/1.0, HTTP/1.1。</li><li>仅适用于TCP目标组。</li></ur>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HttpVersion?: string
+  /**
+   * GRPC健康检查状态码（仅适用于后端转发协议为GRPC的目标组）。默认值为 12，可输入值为数值、多个数值、或者范围，例如 20 或 20,25 或 0-99。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtendedCode?: string
+}
+
+/**
+ * DisassociateModelsFromModelRouter返回参数结构体
+ */
+export interface DisassociateModelsFromModelRouterResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * BatchRegisterTargets请求参数结构体
+ */
+export interface BatchRegisterTargetsRequest {
+  /**
+   * 负载均衡ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 绑定目标。
+   */
+  Targets: Array<BatchTarget>
+}
+
+/**
+ * DescribeResources请求参数结构体
+ */
+export interface DescribeResourcesRequest {
+  /**
+   * 返回可用区资源列表数目，默认20，最大值100。
+   */
+  Limit?: number
+  /**
+   * 返回可用区资源列表起始偏移量，默认0。
+   */
+  Offset?: number
+  /**
+   * 查询可用区资源列表条件，详细的过滤条件如下：
+- master-zone
+按照【地域可用区】进行过滤，例如：ap-guangzhou-2。
+类型：String
+必选：否
+- ip-version
+按照【IP 类型】进行过滤，例如：IPv4。
+类型：String
+必选：否
+可选项：IPv4、IPv6、IPv6_Nat
+- isp
+按照【ISP 类型】进行过滤，例如：BGP。
+类型：String
+必选：否
+可选项：BGP、CMCC（中国移动）、CUCC（中国联通）、CTCC（中国电信）、BGP_PRO、INTERNAL（内网）
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * 服务商详情
+ */
+export interface ServiceProviderItem {
+  /**
+   * <p>服务提供商 ID</p>
+   */
+  ServiceProviderId: string
+  /**
+   * <p>用户自定义服务提供商名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceProviderName?: string
+  /**
+   * <p>模型供应商</p>
+   */
+  ModelProvider?: string
+  /**
+   * <p>该byok实例下该模型可支持的输入多模态能力列表。</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>file： 支持文件输入（当前仅支持pdf）</li><li>image： 支持图像输入</li></ul>
+   */
+  InputModalities?: Array<string>
+}
+
+/**
+ * 资源详细信息
+ */
+export interface Resource {
+  /**
+   * 运营商内具体资源信息，如"CMCC", "CUCC", "CTCC", "BGP", "INTERNAL"。
+   */
+  Type?: Array<string>
+  /**
+   * 运营商信息，如"CMCC", "CUCC", "CTCC", "BGP", "INTERNAL"。
+   */
+  Isp?: string
+  /**
+   * 可用资源。
+   */
+  AvailabilitySet?: Array<ResourceAvailability>
+  /**
+   * 运营商类型信息
+   */
+  TypeSet?: Array<TypeInfo>
+}
+
+/**
+ * DisassociateBudget返回参数结构体
+ */
+export interface DisassociateBudgetResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AddModelKey返回参数结构体
+ */
+export interface AddModelKeyResponse {
+  /**
+   * <p>生成的 Key ID 列表</p>
+   */
+  KeyIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * Budget信息
+ */
+export interface BudgetInfo {
+  /**
+   * <p>关联的key数量</p>
+   */
+  AssociationKeyCount?: number
+  /**
+   * <p>关联的模型路由数量</p>
+   */
+  AssociationModelRouterCount?: number
+  /**
+   * <p>关联的用户组数量</p>
+   */
+  AssociationUserGroupCount?: number
+  /**
+   * <p>Budget预算配置数组。</p><p>最多返回3个元素，每种刷新周期（1d/7d/30d）各一个。</p>
+   */
+  BudgetConfigs?: Array<BudgetConfig>
+  /**
+   * <p>Budget ID。</p>
+   */
+  BudgetId?: string
+  /**
+   * <p>Budget名称。</p>
+   */
+  BudgetName?: string
+  /**
+   * <p>创建时间。</p>
+   */
+  CreatedTime?: string
+  /**
+   * <p>修改时间。</p>
+   */
+  ModifiedTime?: string
+  /**
+   * <p>Budget限速信息。</p>
+   */
+  RateLimitConfig?: RateLimitConfigForBudget
+  /**
+   * <p>Budget状态。</p><p>枚举值：</p><ul><li>Provisioning：创建中</li><li>Active：运行中</li><li>Configuring：变配中</li><li>Deleting：删除中</li><li>ProvisionFailed：创建失败</li><li>ConfigureFailed：变配失败</li><li>DeletionFailed：删除失败</li></ul>
+   */
+  Status?: string
+}
+
+/**
+ * 意图路由摘要信息对象（不含分层详情）。
+ */
+export interface IntentRouterItem {
+  /**
+   * <p>创建时间（ISO 8601格式）。</p>
+   */
+  CreatedTime?: string
+  /**
+   * <p>意图路由ID（ir-xxx格式）。</p>
+   */
+  IntentRouterId?: string
+  /**
+   * <p>路由名称（例如 IntentRouter/customer-support）。</p>
+   */
+  RouteName?: string
+  /**
+   * <p>意图路由描述。</p>
+   */
+  RouterDescribe?: string
+  /**
+   * <p>状态。</p><p>枚举值：</p><ul><li>Provisioning：创建中</li><li>Active：正常</li><li>Configuring：配置中</li><li>ConfigureFailed：配置失败</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>分层配置列表。</p>
+   */
+  Tiers?: Array<IntentRouterTierItem>
+  /**
+   * <p>更新时间（ISO 8601格式）。</p>
+   */
+  UpdatedTime?: string
+}
+
+/**
+ * DeleteLoadBalancerListeners返回参数结构体
+ */
+export interface DeleteLoadBalancerListenersResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeIdleLoadBalancers请求参数结构体
+ */
+export interface DescribeIdleLoadBalancersRequest {
+  /**
+   * 数据偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 返回负载均衡实例的数量，默认为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 负载均衡所在地域，可以通过 [DescribeRegions](https://cloud.tencent.com/document/product/1596/77930) 接口返回值 `RegionSet.Region` 字段获取。
+   */
+  LoadBalancerRegion?: string
+}
+
+/**
+ * TestModelInputModalities请求参数结构体
+ */
+export interface TestModelInputModalitiesRequest {
+  /**
+   * <p>待探测的模型（原始模型名称）</p>
+   */
+  Model: string
+  /**
+   * <p>待探测的API Key（明文）</p>
+   */
+  ProviderKey?: string
+  /**
+   * <p>已创建的BYOK API Key ID（与ProviderKey二选一传入）</p>
+   */
+  ProviderKeyId?: string
+  /**
+   * <p>BYOK类型，当ProviderKey传入时必填</p>
+   */
+  AccessType?: string
+  /**
+   * <p>模型厂商协议，当ProviderKey传入时必填</p>
+   */
+  ModelProtocol?: string
+  /**
+   * <p>模型的厂商</p>
+   */
+  ModelProvider?: string
+  /**
+   * <p>自定义ApiBase，当ProviderKey传入且AccessType且PrivateCustom/PublicCustom时必填</p>
+   */
+  ApiBase?: string
+  /**
+   * <p>请求携带的Host头部，当AccessType为PrivateCustom时生效</p>
+   */
+  HostHeader?: string
+  /**
+   * <p>BYOK实例ID，当AccessType为PrivateCustom时生效，ProviderKey传入时必填</p>
+   */
+  ServiceProviderId?: string
+  /**
+   * <p>是否校验服务提供商的SSL证书</p><p>PublicBYOK时为True且禁止传入；若传入VerifySSL，则优先同步入参逻辑；若传入了ServiceProviderId则同步已创建的Byok实例该Model的逻辑；否则PublicCustom模式下为True，PrivateCustom模式下为False。</p>
+   */
+  VerifySSL?: boolean
+}
+
+/**
+ * DeleteKeys请求参数结构体
+ */
+export interface DeleteKeysRequest {
+  /**
+   * <p>模型路由ID</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>key的ID列表</p>
+   */
+  KeyIds: Array<string>
+}
+
+/**
+ * DescribeLBListeners返回参数结构体
+ */
+export interface DescribeLBListenersResponse {
+  /**
+   * 绑定的后端规则
+   */
+  LoadBalancers: Array<LBItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeQuota返回参数结构体
+ */
+export interface DescribeQuotaResponse {
+  /**
+   * 配额列表
+   */
+  QuotaSet?: Array<Quota>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 目标组信息
+ */
+export interface TargetGroupInfo {
+  /**
+   * <p>目标组ID</p>
+   */
+  TargetGroupId?: string
+  /**
+   * <p>目标组的vpcid</p>
+   */
+  VpcId?: string
+  /**
+   * <p>目标组的名字</p>
+   */
+  TargetGroupName?: string
+  /**
+   * <p>目标组的默认端口，全监听目标组此字段返回0，表示无效端口。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
+  /**
+   * <p>目标组的创建时间</p>
+   */
+  CreatedTime?: string
+  /**
+   * <p>目标组的修改时间</p>
+   */
+  UpdatedTime?: string
+  /**
+   * <p>关联到的规则数组。在DescribeTargetGroupList接口调用时无法获取到该参数。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AssociatedRule?: Array<AssociationItem>
+  /**
+   * <p>目标组后端转发协议, 仅v2新版目标组返回有效值。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Protocol?: string
+  /**
+   * <p>调度算法，仅后端转发协议为(HTTP、HTTPS、GRPC)的目标组返回有效值， 可选值：<br><ur></p><li>WRR:按权重轮询。</li><li>LEAST_CONN:最小连接数。</li><li>IP_HASH:按IP哈希。</li></ur>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScheduleAlgorithm?: string
+  /**
+   * <p>健康检查详情。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HealthCheck?: TargetGroupHealthCheck
+  /**
+   * <p>目标组类型，当前支持v1(旧版目标组), v2(新版目标组)。默认为v1旧版目标组。</p>
+   */
+  TargetGroupType?: string
+  /**
+   * <p>目标组已关联的规则数。</p>
+   */
+  AssociatedRuleCount?: number
+  /**
+   * <p>目标组内的实例数量。</p>
+   */
+  RegisteredInstancesCount?: number
+  /**
+   * <p>标签。</p>
+   */
+  Tag?: Array<TagInfo>
+  /**
+   * <p>默认权重。只有v2类型目标组返回该字段。当返回为NULL时， 表示未设置默认权重。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Weight?: number
+  /**
+   * <p>是否全监听目标组。</p>
+   */
+  FullListenSwitch?: boolean
+  /**
+   * <p>是否开启长连接,  仅后端转发协议为HTTP/HTTPS/GRPC目标组返回有效值。</p>
+   */
+  KeepaliveEnable?: boolean
+  /**
+   * <p>会话保持时间，仅后端转发协议为HTTP/HTTPS/GRPC目标组返回有效值。</p>
+   */
+  SessionExpireTime?: number
+  /**
+   * <p>IP版本。</p>
+   */
+  IpVersion?: string
+  /**
+   * <p>是否开启SNAT</p>
+   */
+  SnatEnable?: boolean
+}
+
+/**
+ * RegisterTargetGroupInstances请求参数结构体
+ */
+export interface RegisterTargetGroupInstancesRequest {
+  /**
+   * 目标组ID
+   */
+  TargetGroupId: string
+  /**
+   * 服务器实例数组，服务器和目标组的 VPC 需相同。
+   */
+  TargetGroupInstances: Array<TargetGroupInstance>
+}
+
+/**
+ * 单条模型重写规则。
+ */
+export interface RewriteItem {
+  /**
+   * <p>源模型名（重写规则的 key）。</p><p>特殊值 <code>default</code> 表示兜底规则（命中所有未显式列出的源模型）。</p>
+   */
+  SourceModel?: string
+  /**
+   * <p>目标模型名（重写规则的 value）。</p>
+   */
+  TargetModel?: string
+}
+
+/**
+ * DescribeQuota请求参数结构体
+ */
+export type DescribeQuotaRequest = null
+
+/**
+ * BatchDeregisterTargets返回参数结构体
+ */
+export interface BatchDeregisterTargetsResponse {
+  /**
+   * 解绑失败的监听器ID。
+   */
+  FailListenerIdSet?: Array<string>
+  /**
+   * 解绑失败错误原因信息。
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SetLoadBalancerSecurityGroups返回参数结构体
+ */
+export interface SetLoadBalancerSecurityGroupsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateUserGroup返回参数结构体
+ */
+export interface CreateUserGroupResponse {
+  /**
+   * <p>新建用户组的ID。</p>
+   */
+  UserGroupId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 负载均衡详细信息
+ */
+export interface LoadBalancerDetail {
+  /**
+   * 负载均衡实例 ID。
+   */
+  LoadBalancerId?: string
+  /**
+   * 负载均衡实例的名称。
+   */
+  LoadBalancerName?: string
+  /**
+   * 负载均衡实例的网络类型：
+Public：公网属性，Private：内网属性；对于内网属性的负载均衡，可通过绑定EIP出公网，具体可参考EIP文档。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadBalancerType?: string
+  /**
+   * 负载均衡实例的状态，包括
+0：创建中，1：正常运行。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 负载均衡实例的 VIP 。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Address?: string
+  /**
+   * 负载均衡实例 VIP 的IPv6地址。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AddressIPv6?: string
+  /**
+   * 负载均衡实例IP版本，IPv4 | IPv6。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AddressIPVersion?: string
+  /**
+   * 负载均衡实例IPv6地址类型，IPv6Nat64 | IPv6FullChain。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IPv6Mode?: string
+  /**
+   * 负载均衡实例所在可用区。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
+  /**
+   * 负载均衡实例IP地址所属的ISP。取值范围：BGP（多线）、CMCC（中国移动）、CUCC（中国联通）、CTCC（中国电信）、INTERNAL（内网）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AddressIsp?: string
+  /**
+   * 负载均衡实例所属私有网络的 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 负载均衡实例所属的项目 ID， 0 表示默认项目。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProjectId?: number
+  /**
+   * 负载均衡实例的创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 负载均衡实例的计费类型。取值范围：PREPAID预付费、POSTPAID_BY_HOUR按量付费。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ChargeType?: string
+  /**
+   * 负载均衡实例的网络属性。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkAttributes?: InternetAccessible
+  /**
+   * 负载均衡实例的预付费相关属性。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PrepaidAttributes?: LBChargePrepaid
+  /**
+   * 暂做保留，一般用户无需关注。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExtraInfo?: ExtraInfo
+  /**
+   * 负载均衡维度的个性化配置ID，多个配置用逗号隔开。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigId?: string
+  /**
+   * 负载均衡实例的标签信息。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Tags?: Array<TagInfo>
+  /**
+   * 负载均衡监听器 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ListenerId?: string
+  /**
+   * 监听器协议。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Protocol?: string
+  /**
+   * 监听器端口。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Port?: number
+  /**
+   * 转发规则的 ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocationId?: string
+  /**
+   * 转发规则的域名。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domain?: string
+  /**
+   * 转发规则的路径。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+  /**
+   * 后端目标ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetId?: string
+  /**
+   * 后端目标的IP地址。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetAddress?: string
+  /**
+   * 后端目标监听端口。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetPort?: number
+  /**
+   * 后端目标转发权重。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetWeight?: number
+  /**
+   * 0：表示未被隔离，1：表示被隔离。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Isolation?: number
+  /**
+   * 负载均衡绑定的安全组列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecurityGroup?: Array<string>
+  /**
+   * 负载均衡安全组上移特性是否开启标识。取值范围：1表示开启、0表示未开启。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadBalancerPassToTarget?: number
+  /**
+   * 后端目标健康状态。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetHealth?: string
+  /**
+   * 转发规则的域名列表。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domains?: string
+  /**
+   * 多可用区负载均衡实例所选备区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SlaveZone?: Array<string>
+  /**
+   * 内网负载均衡实例所在可用区，由白名单CLB_Internal_Zone控制
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zones?: Array<string>
+  /**
+   * 是否开启SNI特性，1：表示开启，0：表示不开启（本参数仅对于HTTPS监听器有意义）。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SniSwitch?: number
+  /**
+   * 负载均衡实例的域名。
+   */
+  LoadBalancerDomain?: string
+  /**
+   * 网络出口
+   */
+  Egress?: string
+  /**
+   * 负载均衡的属性
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AttributeFlags?: Array<string>
+  /**
+   * 负载均衡实例的规格类型信息<ul><li> clb.c1.small：简约型规格 </li><li>clb.c2.medium：标准型规格 </li><li> clb.c3.small：高阶型1规格 </li><li> clb.c3.medium：高阶型2规格 </li><li> clb.c4.small：超强型1规格 </li><li> clb.c4.medium：超强型2规格 </li><li> clb.c4.large：超强型3规格 </li><li> clb.c4.xlarge：超强型4规格 </li><li>""：非性能容量型实例</li></ul>
+
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SlaType?: string
+  /**
+   * 0：表示非独占型实例，1：表示独占型态实例。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Exclusive?: number
+  /**
+   * 可用区转发亲和信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AvailableZoneAffinityInfo?: AvailableZoneAffinityInfo
+}
+
+/**
+ * CreateLoadBalancer请求参数结构体
+ */
+export interface CreateLoadBalancerRequest {
+  /**
+   * <p>负载均衡实例的网络类型：<br>OPEN：公网属性， INTERNAL：内网属性。</p>
+   */
+  LoadBalancerType: string
+  /**
+   * <p>负载均衡实例的类型。1：通用的负载均衡实例，目前只支持传入1。</p>
+   */
+  Forward?: number
+  /**
+   * <p>负载均衡实例的名称，只在创建一个实例的时候才会生效。规则：1-80 个英文字母、汉字等国际通用语言字符，数字，连接线“-”、下划线“_”等常见字符（禁止Unicode补充字符，如emoji表情、生僻汉字等）。注意：如果名称与系统中已有负载均衡实例的名称相同，则系统将会自动生成此次创建的负载均衡实例的名称。</p>
+   */
+  LoadBalancerName?: string
+  /**
+   * <p>负载均衡后端目标设备所属的网络 ID，如vpc-12345678，可以通过 <a href="https://cloud.tencent.com/document/product/215/15778">DescribeVpcs</a> 接口获取。 不填此参数则默认为DefaultVPC。创建内网负载均衡实例时，此参数必填。</p>
+   */
+  VpcId?: string
+  /**
+   * <p>在私有网络内购买内网负载均衡实例的情况下，必须指定子网 ID，内网负载均衡实例的 VIP 将从这个子网中产生。<br>创建内网负载均衡实例，或者创建 IPv6FullChain 版本的负载均衡实例，此参数必填。<br>创建公网IPv4负载均衡实例时，不支持指定该参数。</p>
+   */
+  SubnetId?: string
+  /**
+   * <p>负载均衡实例所属的项目 ID，默认项目 ID 为0。可以通过 <a href="https://cloud.tencent.com/document/api/651/78725">DescribeProject</a> 接口获取。不填此参数则视为默认项目。</p>
+   */
+  ProjectId?: number
+  /**
+   * <p>仅适用于公网负载均衡。IP版本，可取值：IPV4、IPV6、IPv6FullChain，不区分大小写，默认值 IPV4。说明：取值为IPV6表示为IPV6 NAT64版本；取值为IPv6FullChain，表示为IPv6版本。</p>
+   */
+  AddressIPVersion?: string
+  /**
+   * <p>创建负载均衡的个数，默认值 1。创建个数不能超过账号所能创建的最大值，默认创建最大值为20。</p>
+   */
+  Number?: number
+  /**
+   * <p>仅适用于公网且IP版本为IPv4的负载均衡。设置跨可用区容灾时的主可用区ID， 可用区 ID 和名称均支持，例如 100001 或 ap-guangzhou-1<br>注：主可用区是需要承载流量的可用区，备可用区默认不承载流量，主可用区不可用时才使用备可用区。</p>
+   */
+  MasterZoneId?: string
+  /**
+   * <p>仅适用于公网且IP版本为IPv4的负载均衡。可用区ID，可用区 ID 和名称均支持，指定可用区以创建负载均衡实例。如：100001 或 ap-guangzhou-1。</p>
+   */
+  ZoneId?: string
+  /**
+   * <p>网络计费模式，其中的最大出带宽，仅对内网属性的性能容量型实例和公网属性的所有实例生效。</p>
+   */
+  InternetAccessible?: InternetAccessible
+  /**
+   * <p>仅适用于公网负载均衡。目前仅广州、上海、南京、济南、杭州、福州、北京、石家庄、武汉、长沙、成都、重庆地域支持静态单线 IP 线路类型，如需体验，请联系商务经理申请。申请通过后，即可选择中国移动（CMCC）、中国联通（CUCC）或中国电信（CTCC）的运营商类型，网络计费模式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。 如果不指定本参数，则默认使用BGP。可通过 <a href="https://cloud.tencent.com/document/api/214/70213">DescribeResources</a>  接口查询一个地域所支持的Isp。</p>
+   */
+  VipIsp?: string
+  /**
+   * <p>购买负载均衡的同时，给负载均衡打上标签，最大支持20个标签键值对。</p>
+   */
+  Tags?: Array<TagInfo>
+  /**
+   * <p>指定VIP申请负载均衡。此参数选填，不填写此参数时自动分配VIP。IPv4和IPv6类型支持此参数，IPv6 NAT64类型不支持。<br>注意：当指定VIP创建内网实例、或公网IPv6 BGP实例时，若VIP不属于指定VPC子网的网段内时，会创建失败；若VIP已被占用，也会创建失败。</p>
+   */
+  Vip?: string
+  /**
+   * <p>带宽包ID，可以通过 <a href="https://cloud.tencent.com/document/api/215/19209">DescribeBandwidthPackages</a> 接口获取。指定此参数时，网络计费方式（InternetAccessible.InternetChargeType）只支持按带宽包计费（BANDWIDTH_PACKAGE），带宽包的属性即为其结算方式。非上移用户购买的 IPv6 负载均衡实例，且运营商类型非 BGP 时 ，不支持指定具体带宽包id。</p>
+   */
+  BandwidthPackageId?: string
+  /**
+   * <p>独占型实例信息。若创建独占型的内网负载均衡实例，则此参数必填。</p>
+   */
+  ExclusiveCluster?: ExclusiveCluster
+  /**
+   * <p>性能容量型规格。</p><ul><li>若需要创建性能容量型实例，则此参数必填，取值范围：<ul><li> clb.c2.medium：标准型规格 </li><li> clb.c3.small：高阶型1规格 </li><li> clb.c3.medium：高阶型2规格 </li><li> clb.c4.small：超强型1规格 </li><li> clb.c4.medium：超强型2规格 </li><li> clb.c4.large：超强型3规格 </li><li> clb.c4.xlarge：超强型4规格 </li></ul></li><li>中国站用户若需要创建共享型实例，则无需填写此参数。国际站用户不传该参数默认购买的是标准型实例。</li></ul>如需了解规格详情，请参见[实例规格对比](https://cloud.tencent.com/document/product/214/84689)。
+   */
+  SlaType?: string
+  /**
+   * <p>集群ID，集群标识，在需要配置公有云独占集群或本地专有集群时使用。公有云独占集群申请请<a href="https://console.cloud.tencent.com/workorder/category">提交工单</a>，本地专有集群请参考<a href="https://cloud.tencent.com/document/product/1346">本地专有集群</a>描述。</p>
+   */
+  ClusterIds?: Array<string>
+  /**
+   * <p>用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。</p>
+   */
+  ClientToken?: string
+  /**
+   * <p>是否支持绑定跨地域/跨Vpc绑定IP的功能。</p>
+   */
+  SnatPro?: boolean
+  /**
+   * <p>开启绑定跨地域/跨Vpc绑定IP的功能后，创建SnatIp。</p>
+   */
+  SnatIps?: Array<SnatIp>
+  /**
+   * <p>Stgw独占集群的标签。</p>
+   */
+  ClusterTag?: string
+  /**
+   * <p>仅适用于公网且IP版本为IPv4的负载均衡。设置跨可用区容灾时的备可用区ID，可用区 ID 和名称均支持，例如 100001 或 ap-guangzhou-1<br>注：备可用区是主可用区故障后，需要承载流量的可用区。可通过 <a href="https://cloud.tencent.com/document/api/214/70213">DescribeResources</a> 接口查询一个地域的主/备可用区的列表。【如果您需要体验该功能，请通过 <a href="https://console.cloud.tencent.com/workorder/category">工单申请</a>】</p>
+   */
+  SlaveZoneId?: string
+  /**
+   * <p>EIP 的唯一 ID，可以通过 <a href="https://cloud.tencent.com/document/product/215/16702">DescribeAddresses</a> 接口查询。形如：eip-qhx8udkc，仅适用于内网负载均衡绑定EIP。</p>
+   */
+  EipAddressId?: string
+  /**
+   * <p>Target是否放通来自CLB的流量。开启放通（true）：只验证CLB上的安全组；不开启放通（false）：需同时验证CLB和后端实例上的安全组。IPv6 CLB安全组默认放通，不需要传此参数。</p>
+   */
+  LoadBalancerPassToTarget?: boolean
+  /**
+   * <p>创建域名化负载均衡。</p>
+   */
+  DynamicVip?: boolean
+  /**
+   * <p>网络出口</p>
+   */
+  Egress?: string
+  /**
+   * <p>负载均衡实例的预付费相关属性</p>
+   */
+  LBChargePrepaid?: LBChargePrepaid
+  /**
+   * <p>负载均衡实例计费类型，取值：POSTPAID_BY_HOUR，PREPAID，默认是POSTPAID_BY_HOUR。</p><p>枚举值：</p><ul><li>POSTPAID_BY_HOUR： 按量计费</li><li>PREPAID： 包年包月</li></ul>
+   */
+  LBChargeType?: string
+  /**
+   * <p>七层访问日志主题ID</p>
+   */
+  AccessLogTopicId?: string
+  /**
+   * <p>是否开启七层高级路由</p>
+   */
+  AdvancedRoute?: boolean
+  /**
+   * <p>可用区亲和信息</p>
+   */
+  AvailableZoneAffinityInfo?: AvailableZoneAffinityInfo
+}
+
+/**
+ * CloneLoadBalancer请求参数结构体
+ */
+export interface CloneLoadBalancerRequest {
+  /**
+   * 负载均衡ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。
+   */
+  LoadBalancerId: string
+  /**
+   * 克隆出负载均衡实例的名称，规则：1-60 个英文、汉字、数字、连接线“-”或下划线“_”。
+注意：如果名称与系统中已有负载均衡实例的名称相同，则系统将会自动生成此次创建的负载均衡实例的名称。
+   */
+  LoadBalancerName?: string
+  /**
+   * 负载均衡实例所属的项目 ID，默认项目 ID 为0，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口获取。不传此参数则视为默认项目。
+   */
+  ProjectId?: number
+  /**
+   * 仅适用于公网负载均衡。设置跨可用区容灾时的主可用区ID，可用区 ID 和名称均支持，例如 100001 或 ap-guangzhou-1。
+注：主可用区是需要承载流量的可用区，备可用区默认不承载流量，主可用区不可用时才使用备可用区，平台将为您自动选择最佳备可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主可用区的列表。
+   */
+  MasterZoneId?: string
+  /**
+   * 仅适用于公网负载均衡。设置跨可用区容灾时的备可用区ID，可用区 ID 和名称均支持，例如 100001 或 ap-guangzhou-1。
+注：备可用区是主可用区故障后，需要承载流量的可用区。可通过 [DescribeResources](https://cloud.tencent.com/document/api/214/70213) 接口查询一个地域的主/备可用区的列表。
+   */
+  SlaveZoneId?: string
+  /**
+   * 仅适用于公网负载均衡。可用区ID，可用区 ID 和名称均支持，指定可用区以创建负载均衡实例。如：100001 或 ap-guangzhou-1。不传则查询所有可用区的 CVM 实例。如需指定可用区，可调用查询可用区列表 [DescribeZones](https://cloud.tencent.com/document/product/213/15707) 接口查询。
+   */
+  ZoneId?: string
+  /**
+   * 仅适用于公网负载均衡。负载均衡的网络计费模式。
+   */
+  InternetAccessible?: InternetAccessible
+  /**
+   * 仅适用于公网负载均衡。目前仅广州、上海、南京、济南、杭州、福州、北京、石家庄、武汉、长沙、成都、重庆地域支持静态单线 IP 线路类型，如需体验，请联系商务经理申请。申请通过后，即可选择中国移动（CMCC）、中国联通（CUCC）或中国电信（CTCC）的运营商类型，网络计费模式只能使用按带宽包计费(BANDWIDTH_PACKAGE)。 如果不指定本参数，则默认使用BGP。可通过 DescribeResources 接口查询一个地域所支持的Isp。
+   */
+  VipIsp?: string
+  /**
+   * 指定Vip申请负载均衡。
+   */
+  Vip?: string
+  /**
+   * 购买负载均衡同时，给负载均衡打上标签。
+   */
+  Tags?: Array<TagInfo>
+  /**
+   * 独占集群信息。
+   */
+  ExclusiveCluster?: ExclusiveCluster
+  /**
+   * 带宽包ID，可以通过 [DescribeBandwidthPackages](https://cloud.tencent.com/document/api/215/19209) 接口获取。指定此参数时，网络计费方式（InternetAccessible.InternetChargeType）只支持按带宽包计费（BANDWIDTH_PACKAGE）。
+   */
+  BandwidthPackageId?: string
+  /**
+   * 是否支持绑定跨地域/跨Vpc绑定IP的功能。
+   */
+  SnatPro?: boolean
+  /**
+   * 开启绑定跨地域/跨Vpc绑定IP的功能后，创建SnatIp。
+   */
+  SnatIps?: Array<SnatIp>
+  /**
+   * 公网独占集群ID或者CDCId，可以通过 [DescribeExclusiveClusters](https://cloud.tencent.com/document/product/214/49278) 接口获取。
+   */
+  ClusterIds?: Array<string>
+  /**
+   * 性能容量型规格。<li>clb.c2.medium（标准型）</li><li>clb.c3.small（高阶型1）</li><li>clb.c3.medium（高阶型2）</li><li>clb.c4.small（超强型1）</li><li>clb.c4.medium（超强型2）</li><li>clb.c4.large（超强型3）</li><li>clb.c4.xlarge（超强型4）</li>
+   */
+  SlaType?: string
+  /**
+   * Stgw独占集群的标签。
+   */
+  ClusterTag?: string
+  /**
+   * 仅适用于私有网络内网负载均衡。内网就近接入时，选择可用区下发。可调用[DescribeZones](https://cloud.tencent.com/document/product/213/15707)接口查询可用区列表。
+   */
+  Zones?: Array<string>
+  /**
+   * EIP 的唯一 ID，形如：eip-qhx8udkc，仅适用于内网负载均衡绑定EIP，可以通过 [DescribeAddresses](https://cloud.tencent.com/document/product/215/16702) 接口查询。
+   */
+  EipAddressId?: string
+}
+
+/**
+ * BYOK 实例（ServiceProvider）维度积分系数明细
+ */
+export interface ServiceProviderCoefficient {
+  /**
+   * <p>该 BYOK 实例（ServiceProvider）维度的积分系数。</p><p>可选字段：仅当该实例单独配置了 ServiceProvider 维度系数时返回，返回值即该实例的生效系数；未返回时表示该实例继承所属 ModelAlias 的 <code>Coefficient</code>。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Coefficient?: Coefficient
+  /**
+   * <p>BYOK 实例（ServiceProvider）ID。</p>
+   */
+  ServiceProviderId?: string
+  /**
+   * <p>BYOK 实例（ServiceProvider）名称。</p>
+   */
+  ServiceProviderName?: string
+}
+
+/**
+ * SetLoadBalancerClsLog返回参数结构体
+ */
+export interface SetLoadBalancerClsLogResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RefundModelRouterResourcePackage返回参数结构体
+ */
+export interface RefundModelRouterResourcePackageResponse {
+  /**
+   * <p>退还模型路由资源包的订单号</p>
+   */
+  DealNames?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteIntentRouter返回参数结构体
+ */
+export interface DeleteIntentRouterResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRewrite请求参数结构体
+ */
+export interface DescribeRewriteRequest {
+  /**
+   * 负载均衡实例ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 负载均衡监听器ID数组。
+   */
+  SourceListenerIds?: Array<string>
+  /**
+   * 负载均衡转发规则的ID数组。
+   */
+  SourceLocationIds?: Array<string>
+}
+
+/**
+ * DescribeIdleLoadBalancers返回参数结构体
+ */
+export interface DescribeIdleLoadBalancersResponse {
+  /**
+   * 闲置实例列表
+   */
+  IdleLoadBalancers?: Array<IdleLoadBalancer>
+  /**
+   * 所有闲置实例数目
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 用于目标组后端rs健康检查状态。
+ */
+export interface TargetGroupInstanceStatus {
+  /**
+   * 后端rs的IP
+   */
+  InstanceIp?: string
+  /**
+   * 健康检查状态，参数值及含义如下：
+● on：表示探测中。
+● off：表示健康检查关闭。
+● health：表示健康。
+● unhealth：表示异常。
+   */
+  Status?: string
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 端口
+   */
+  Port?: number
+  /**
+   * 网卡ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EniId?: string
+}
+
+/**
+ * SetSecurityGroupForLoadbalancers返回参数结构体
+ */
+export interface SetSecurityGroupForLoadbalancersResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 限速配置
+ */
+export interface RateLimitConfigForModelRouter {
+  /**
+   * <p>每分钟限制的请求数量</p><p>单位：次/分钟</p>
+   */
+  RPM?: number
+  /**
+   * <p>每分钟限制的Token数量</p><p>单位：个/分钟</p>
+   */
+  TPM?: number
+}
+
+/**
+ * AddModelKey请求参数结构体
+ */
+export interface AddModelKeyRequest {
+  /**
+   * <p>服务提供商ID</p>
+   */
+  ServiceProviderId: string
+  /**
+   * <p>Key 列表，至少 1 个，最多 10 个</p>
+   */
+  Keys: Array<KeyItem>
+}
+
+/**
+ * DescribeModelRouters请求参数结构体
+ */
+export interface DescribeModelRoutersRequest {
+  /**
+   * <p>过滤条件</p><p>支持：ModelRouterName、ModelRouterType、Status、BudgetId、tag-key、tag:&lt;tag-key&gt;。</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>每页数量，1-100，默认 20</p>
+   */
+  Limit?: number
+  /**
+   * <p>模型路由实例ID列表</p>
+   */
+  ModelRouterIds?: Array<string>
+  /**
+   * <p>分页偏移量，默认 0</p>
+   */
+  Offset?: number
+}
+
+/**
+ * 按模型标识聚合的信息
+ */
+export interface ModelNameAggregatedItem {
+  /**
+   * <p>模型标识显示名称（优先使用 model_alias，否则使用 model_name）</p>
+   */
+  ModelName: string
+  /**
+   * <p>关联的服务商列表</p>
+   */
+  ServiceProviders?: Array<ServiceProviderItem>
+  /**
+   * <p>该模型最大可支持的输入多模态能力列表。</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>image： 支持图像输入</li><li>file： 支持文件输入（当前仅支持pdf）</li></ul>
+   */
+  InputModalitiesUnion?: Array<string>
+}
+
+/**
+ * DescribeTargetGroupInstances请求参数结构体
+ */
+export interface DescribeTargetGroupInstancesRequest {
+  /**
+   * 过滤条件，当前支持按照 TargetGroupId，BindIP，InstanceId 多个条件组合过滤。
+   */
+  Filters: Array<Filter>
+  /**
+   * 显示数量限制，默认20。
+   */
+  Limit?: number
+  /**
+   * 显示的偏移量，默认为0。
+   */
+  Offset?: number
+}
+
+/**
+ * DescribeModelRouterLogs返回参数结构体
+ */
+export interface DescribeModelRouterLogsResponse {
+  /**
+   * <p>日志列表</p>
+   */
+  Logs?: Array<ModelRouterLog>
+  /**
+   * <p>满足条件的数量</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>游标NextToken</p>
+   */
+  NextToken?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DisassociateCustomizedConfig返回参数结构体
+ */
+export interface DisassociateCustomizedConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTargets请求参数结构体
+ */
+export interface DescribeTargetsRequest {
+  /**
+   * 负载均衡实例 ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 监听器 ID 列表。ID 数量上限为20个。
+   */
+  ListenerIds?: Array<string>
+  /**
+   * 监听器协议类型。
+   */
+  Protocol?: string
+  /**
+   * 监听器端口。
+   */
+  Port?: number
+  /**
+   * 查询负载均衡绑定的后端服务列表，过滤条件如下：
+<li> location-id - String - 是否必填：否 - （过滤条件）按照 规则ID 过滤，如："loc-12345678"。</li>
+<li> private-ip-address - String - 是否必填：否 - （过滤条件）按照 后端服务内网IP 过滤，如："172.16.1.1"。</li>
+<li> tag - String - 是否必填：否 - （过滤条件）按照 标签 过滤，如："tag-test"。</li>
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * RegisterTargetsWithClassicalLB返回参数结构体
+ */
+export interface RegisterTargetsWithClassicalLBResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * IntentRouter Tier 字典项
+ */
+export interface IntentRouterTierDictItem {
+  /**
+   * <p>Tier 标识</p><p>枚举值：</p><ul><li>default： 默认</li><li>general_chat： 通用对话</li><li>transformation_rewrite： 转换与改写</li><li>knowledge_qa： 知识问答</li><li>summarization： 摘要</li><li>extraction_structuring： 抽取与结构化输出</li><li>content_generation： 内容生成</li><li>coding_technical： 编码与技术</li><li>data_math_analysis： 数据、数学与分析</li><li>reasoning_planning： 推理与规划</li><li>tool_agentic_workflow： 工具与智能体工作流</li></ul>
+   */
+  TierId: string
+  /**
+   * <p>Tier 显示名称（已国际化）</p>
+   */
+  DisplayName?: string
+  /**
+   * <p>Tier 描述（已国际化）</p>
+   */
+  Description?: string
+}
+
+/**
+ * DeleteLoadBalancerListeners请求参数结构体
+ */
+export interface DeleteLoadBalancerListenersRequest {
+  /**
+   * 负载均衡实例ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/214/30685) 接口查询。
+   */
+  LoadBalancerId: string
+  /**
+   * 指定删除的监听器ID数组，最大为20个。若不填则删除负载均衡的所有监听器，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口查询。
+   */
+  ListenerIds?: Array<string>
+}
+
+/**
+ * DescribeKeys请求参数结构体
+ */
+export interface DescribeKeysRequest {
+  /**
+   * <p>模型路由实例ID</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>过滤列表</p><p>支持：KeyName、BudgetId、tag-key、tag:&lt;tag-key&gt;。</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>API Key的ID列表</p>
+   */
+  KeyIds?: Array<string>
+  /**
+   * <p>本次查询限制的数量</p><p>取值范围：[1, 100]</p><p>默认值：20</p>
+   */
+  Limit?: number
+  /**
+   * <p>本次查询偏移量</p>
+   */
+  Offset?: number
+}
+
+/**
+ * lb实例包年包月相关配置属性
+ */
+export interface LBChargePrepaid {
+  /**
+   * 续费类型：AUTO_RENEW 自动续费，  MANUAL_RENEW 手动续费
+   */
+  RenewFlag?: string
+  /**
+   * 购买时长，单位：月
+   */
+  Period?: number
+}
+
+/**
+ * HTTP/HTTPS监听器的转发规则（输出）
+ */
+export interface RuleOutput {
+  /**
+   * 转发规则的 ID
+   */
+  LocationId?: string
+  /**
+   * 转发规则的域名。
+   */
+  Domain?: string
+  /**
+   * 转发规则的路径。
+   */
+  Url?: string
+  /**
+   * 会话保持时间
+   */
+  SessionExpireTime?: number
+  /**
+   * 健康检查信息
+   */
+  HealthCheck?: HealthCheck
+  /**
+   * 证书信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Certificate?: CertificateOutput
+  /**
+   * 规则的请求转发方式。
+WRR、LEAST_CONN、IP_HASH分别表示按权重轮询、最小连接数、IP Hash。
+   */
+  Scheduler?: string
+  /**
+   * 转发规则所属的监听器 ID
+   */
+  ListenerId?: string
+  /**
+   * 转发规则的重定向目标信息
+   */
+  RewriteTarget?: RewriteTarget
+  /**
+   * 是否开启gzip
+   */
+  HttpGzip?: boolean
+  /**
+   * 转发规则是否为自动创建
+   */
+  BeAutoCreated?: boolean
+  /**
+   * 是否作为默认域名
+   */
+  DefaultServer?: boolean
+  /**
+   * 是否开启Http2
+   */
+  Http2?: boolean
+  /**
+   * 负载均衡与后端服务之间的转发协议
+   */
+  ForwardType?: string
+  /**
+   * 转发规则的创建时间
+   */
+  CreateTime?: string
+  /**
+   * 后端服务器类型。NODE表示绑定普通节点，TARGETGROUP表示绑定目标组。
+   */
+  TargetType?: string
+  /**
+   * 绑定的目标组基本信息；当规则绑定目标组时，会返回该字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetGroup?: BasicTargetGroupInfo
+  /**
+   * WAF实例ID
+   */
+  WafDomainId?: string
+  /**
+   * TRPC被调服务器路由，ForwardType为TRPC时有效。目前暂未对外开放。
+   */
+  TrpcCallee?: string
+  /**
+   * TRPC调用服务接口，ForwardType为TRPC时有效。目前暂未对外开放。
+   */
+  TrpcFunc?: string
+  /**
+   * QUIC状态。QUIC_ACTIVE表示开启，QUIC_INACTIVE表示未开启。注意，只有HTTPS域名才能开启QUIC。
+   */
+  QuicStatus?: string
+  /**
+   * 转发规则的域名列表。
+   */
+  Domains?: Array<string>
+  /**
+   * 绑定的目标组列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetGroupList?: Array<BasicTargetGroupInfo>
+  /**
+   * OAuth配置状态信息。
+   */
+  OAuth?: OAuth
+  /**
+   * 自定义cookie名。
+   */
+  CookieName?: string
+}
+
+/**
+ * ModifyTargetGroupInstancesPort返回参数结构体
+ */
+export interface ModifyTargetGroupInstancesPortResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeModelRouterGuardrails请求参数结构体
+ */
+export interface DescribeModelRouterGuardrailsRequest {
+  /**
+   * <p>模型路由实例 ID。</p>
+   */
+  ModelRouterId: string
+}
+
+/**
+ * DescribeCrossTargets返回参数结构体
+ */
+export interface DescribeCrossTargetsResponse {
+  /**
+   * 后端服务列表总数。
+   */
+  TotalCount?: number
+  /**
+   * 后端服务列表。
+   */
+  CrossTargetSet?: Array<CrossTargets>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLoadBalancerListByCertId返回参数结构体
+ */
+export interface DescribeLoadBalancerListByCertIdResponse {
+  /**
+   * 证书ID，以及与该证书ID关联的负载均衡实例列表
+   */
+  CertSet?: Array<CertIdRelatedWithLoadBalancers>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyTargetGroupInstancesWeight返回参数结构体
+ */
+export interface ModifyTargetGroupInstancesWeightResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTargetGroups请求参数结构体
+ */
+export interface DescribeTargetGroupsRequest {
+  /**
+   * 目标组ID，与Filters互斥。
+   */
+  TargetGroupIds?: Array<string>
+  /**
+   * 显示条数限制，默认为20。
+   */
+  Limit?: number
+  /**
+   * 显示的偏移起始量。
+   */
+  Offset?: number
+  /**
+   * 过滤条件数组，与TargetGroupIds互斥，支持 TargetGroupVpcId（私有网络 ID）和 TargetGroupName（目标组名称）以及 Tag（标签）。
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * BatchRegisterTargets返回参数结构体
+ */
+export interface BatchRegisterTargetsResponse {
+  /**
+   * 绑定失败的监听器ID，如为空表示全部绑定成功。
+   */
+  FailListenerIdSet?: Array<string>
+  /**
+   * 绑定失败错误原因信息。
+   */
+  Message?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 升级为性能容量型参数
+ */
+export interface SlaUpdateParam {
+  /**
+   * 负载均衡实例 ID。
+可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
+   */
+  LoadBalancerId: string
+  /**
+   * 性能容量型规格，取值范围：
+<li> clb.c2.medium：标准型规格 </li>
+<li> clb.c3.small：高阶型1规格 </li>
+<li> clb.c3.medium：高阶型2规格 </li>
+<li> clb.c4.small：超强型1规格 </li>
+<li> clb.c4.medium：超强型2规格 </li>
+<li> clb.c4.large：超强型3规格 </li>
+<li> clb.c4.xlarge：超强型4规格 </li>如需了解规格详情，请参见[实例规格对比](https://cloud.tencent.com/document/product/214/84689)
+   */
+  SlaType: string
+}
+
+/**
+ * DescribeUpperModels请求参数结构体
+ */
+export interface DescribeUpperModelsRequest {
+  /**
+   * <p>接入类型：PublicBYOK/PublicCustom/PrivateCustom</p>
+   */
+  AccessType?: string
+  /**
+   * <p>上游 Provider API 地址</p><p>示例：https://api.moonshot.cn</p>
+   */
+  ApiBase?: string
+  /**
+   * <p>上游 Provider API Key</p><p>用于鉴权访问上游模型列表接口</p>
+   */
+  ApiKey?: string
+  /**
+   * <p>自定义 Host Header，可选</p><p>仅 VPC 内网场景需要，用于指定请求的 Host 头</p>
+   */
+  HostHeader?: string
+  /**
+   * <p>Key Id 配合ServiceProviderId一同输入，不指定则默认选用最近创建的Key</p>
+   */
+  KeyId?: string
+  /**
+   * <p>模型列表端点路径，可选</p><p>默认值：/v1/models</p>
+   */
+  ModelPath?: string
+  /**
+   * <p>模型协议</p>
+   */
+  ModelProtocol?: string
+  /**
+   * <p>模型提供商</p>
+   */
+  ModelProvider?: string
+  /**
+   * <p>BYOK 业务 ID，可选</p><p>格式：byok-xxxxxxxx</p>
+   */
+  ServiceProviderId?: string
+}
+
+/**
+ * 意图路由分层配置对象。支持两种分层协议（二选一，不可混用）：① 复杂度分层——必须包含全部 4 个固定分层：SIMPLE/MEDIUM/COMPLEX/REASONING；② 语义分层——包含 default 及各语义 Tier。TierName 取值见下。
+ */
+export interface TierItem {
+  /**
+   * <p>该分层下的模型显示名称列表。</p><p>至少包含一个模型，模型名称必须是已关联到该模型路由实例的模型。同一分层内不允许重复模型名称。</p>
+   */
+  Models: Array<string>
+  /**
+   * <p>Tier 标识。<br>枚举值：</p><ul><li>复杂度分层（4 个固定值，需全部包含）：SIMPLE、MEDIUM、COMPLEX、REASONING</li><li>default：默认</li><li>general_chat：通用对话</li><li>transformation_rewrite：转换与改写</li><li>knowledge_qa：知识问答</li><li>summarization：摘要</li><li>extraction_structuring：抽取与结构化输出</li><li>content_generation：内容生成</li><li>coding_technical：编码与技术</li><li>data_math_analysis：数据、数学与分析</li><li>reasoning_planning：推理与规划</li><li>tool_agentic_workflow：工具与智能体工作流</li></ul>
+   */
+  TierName: string
+}
+
+/**
+ * DescribeModelNames返回参数结构体
+ */
+export interface DescribeModelNamesResponse {
+  /**
+   * <p>模型标识聚合列表</p>
+   */
+  ModelNames?: Array<ModelNameAggregatedItem>
+  /**
+   * <p>聚合后的模型标识总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeUserGroups请求参数结构体
+ */
+export interface DescribeUserGroupsRequest {
+  /**
+   * <p>模型路由实例ID。</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>用户组ID列表，用于按ID过滤，单次最多100个；可包含「未分组」虚拟分组 ugrp-ungrouped。</p>
+   */
+  UserGroupIds?: Array<string>
+  /**
+   * <p>过滤列表。支持：UserGroupName、Status、tag-key、tag:&lt;tag-key&gt;。</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>本次查询限制的数量</p><p>取值范围：[1, 100]</p><p>默认值：20</p>
+   */
+  Limit?: number
+  /**
+   * <p>本次查询偏移量</p><p>默认值：0</p>
+   */
+  Offset?: number
+}
+
+/**
+ * 一条转发规则的健康检查状态
+ */
+export interface RuleHealth {
+  /**
+   * 转发规则ID
+   */
+  LocationId?: string
+  /**
+   * 转发规则的域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domain?: string
+  /**
+   * 转发规则的Url
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Url?: string
+  /**
+   * 高级路由规则ID
+   */
+  RuleId?: string
+  /**
+   * 本规则上绑定的后端服务的健康检查状态
+   */
+  Targets?: Array<TargetHealth>
+}
+
+/**
+ * 负载均衡流量数据。
+ */
+export interface LoadBalancerTraffic {
+  /**
+   * 负载均衡ID
+   */
+  LoadBalancerId?: string
+  /**
+   * 负载均衡名字
+   */
+  LoadBalancerName?: string
+  /**
+   * 负载均衡所在地域
+   */
+  Region?: string
+  /**
+   * 负载均衡的vip
+   */
+  Vip?: string
+  /**
+   * 最大出带宽，单位：Mbps
+   */
+  OutBandwidth?: number
+  /**
+   * CLB域名
+   */
+  Domain?: string
+}
+
+/**
+ * CreateKeys返回参数结构体
+ */
+export interface CreateKeysResponse {
+  /**
+   * <p>创建的Key的信息</p>
+   */
+  CreatedKeys?: Array<CreatedKey>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateModel返回参数结构体
+ */
+export interface CreateModelResponse {
+  /**
+   * <p>服务供应商ID</p>
+   */
+  ServiceProviderId?: string
+  /**
+   * <p>生成的 Key ID 列表</p>
+   */
+  KeyIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ReplaceCertForLoadBalancers返回参数结构体
+ */
+export interface ReplaceCertForLoadBalancersResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeModelRouterDetail请求参数结构体
+ */
+export interface DescribeModelRouterDetailRequest {
+  /**
+   * <p>模型路由实例ID</p>
+   */
+  ModelRouterId: string
+}
+
+/**
+ * RegisterTargets请求参数结构体
+ */
+export interface RegisterTargetsRequest {
+  /**
+   * 负载均衡实例ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 负载均衡监听器ID。
+   */
+  ListenerId: string
+  /**
+   * 待绑定的后端服务列表，数组长度最大支持20。
+   */
+  Targets: Array<Target>
+  /**
+   * 转发规则的ID，可以通过 [DescribeListeners](https://cloud.tencent.com/document/product/214/30686) 接口获取，当绑定后端服务到七层转发规则时，必须提供此参数或Domain+Url两者之一。
+   */
+  LocationId?: string
+  /**
+   * 目标转发规则的域名，提供LocationId参数时本参数不生效。
+   */
+  Domain?: string
+  /**
+   * 目标转发规则的URL，提供LocationId参数时本参数不生效。
+   */
+  Url?: string
+}
+
+/**
+ * DescribeModelRouterResourcePackageDeduction请求参数结构体
+ */
+export interface DescribeModelRouterResourcePackageDeductionRequest {
+  /**
+   * <p>抵扣起始时间</p>
+   */
+  DeductionTimeBegin: string
+  /**
+   * <p>抵扣截止时间</p>
+   */
+  DeductionTimeEnd: string
+  /**
+   * <p>模型路由资源包Id</p>
+   */
+  ModelRouterResourcePackageId: string
+  /**
+   * <p>返回的数量</p><p>取值范围：[0, 100]</p><p>默认值：20</p>
+   */
+  Limit?: number
+  /**
+   * <p>数据偏移量</p><p>默认值：0</p>
+   */
+  Offset?: number
+  /**
+   * <p>排序方式：asc，desc</p>
+   */
+  SortBy?: string
+}
+
+/**
+ * AssociateTargetGroups返回参数结构体
+ */
+export interface AssociateTargetGroupsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeKeys返回参数结构体
+ */
+export interface DescribeKeysResponse {
+  /**
+   * <p>API Key列表</p>
+   */
+  Keys?: Array<KeyInfo>
+  /**
+   * <p>符合条件的总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeLoadBalancersDetail请求参数结构体
+ */
+export interface DescribeLoadBalancersDetailRequest {
+  /**
+   * 返回负载均衡列表数目，默认20，最大值100。
+   */
+  Limit?: number
+  /**
+   * 返回负载均衡列表起始偏移量，默认0。
+   */
+  Offset?: number
+  /**
+   * 选择返回的Fields列表，系统仅会返回Fileds中填写的字段，可填写的字段详情请参见<a href="https://cloud.tencent.com/document/api/214/30694#LoadBalancerDetail">LoadBalancerDetail</a>。若未在Fileds填写相关字段，则此字段返回null。Fileds中默认添加LoadBalancerId和LoadBalancerName字段。
+   */
+  Fields?: Array<string>
+  /**
+   * 当Fields包含TargetId、TargetAddress、TargetPort、TargetWeight、ListenerId、Protocol、Port、LocationId、Domain、Url等Fields时，必选选择导出目标组的Target或者非目标组Target，取值范围NODE、GROUP。
+   */
+  TargetType?: string
+  /**
+   * 查询负载均衡详细信息列表条件，详细的过滤条件如下：
+- loadbalancer-id
+按照【负载均衡ID】进行过滤。例如：lb-rbw5skde。
+类型：String
+必选：否
+获取方式：[DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459)
+- project-id
+按照【项目ID】进行过滤。例如： "0"、"123"。
+类型：String
+必选：否
+获取方式：[DescribeProject](https://cloud.tencent.com/document/api/651/78725)
+- network
+按照【负载均衡网络类型】进行过滤。例如：Public。
+类型：String
+必选：否
+可选值：Private（内网）、Public（公网）
+- vip
+按照【负载均衡 VIP】进行过滤。例如："1.1.1.1","2204::22:3"。
+类型：String
+必选：否
+- vpcid
+按照【负载均衡所属 VPCID】进行过滤。例如："vpc-12345678"。
+类型：String
+必选：否
+获取方式：[DescribeZones](https://cloud.tencent.com/document/product/213/15707)
+- target-ip
+按照【后端目标内网 IP】进行过滤。例如："1.1.1.1","2203::214:4"。
+类型：String
+必选：否
+- zone
+按照【负载均衡所属的可用区】进行过滤。例如："ap-guangzhou-1"。
+类型：String
+必选：否
+获取方式：[DescribeZones](https://cloud.tencent.com/document/product/213/15707)
+- tag-key
+按照【负载均衡标签的标签键】进行过滤，例如："name"。
+类型：String
+必选：否
+获取方式：[DescribeTags](https://cloud.tencent.com/document/api/651/35316)
+- tag:*
+按照【负载均衡的标签】进行过滤，':' 后面跟的是标签键。如过滤标签键name，标签值zhangsan,lisi，{"Name": "tag:name","Values": ["zhangsan", "lisi"]}。
+类型：String
+必选：否
+获取方式：[DescribeTagKeys](https://cloud.tencent.com/document/api/651/35318)
+- fuzzy-search
+按照【负载均衡VIP，负载均衡名称】模糊搜索，例如："1.1"。
+类型：String
+必选：否
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * 模型及其 Key 信息
+ */
+export interface ModelKeyInfoItem {
+  /**
+   * <p>接入类型</p>
+   */
+  AccessType?: string
+  /**
+   * <p>API Base URL</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiBase?: string
+  /**
+   * <p>模型创建时间（ISO 8601）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedAt?: string
+  /**
+   * <p>自定义host header</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HostHeader?: string
+  /**
+   * <p>Key 数量</p>
+   */
+  KeyCount?: number
+  /**
+   * <p>Key 详情列表</p>
+   */
+  Keys?: Array<KeyDetailItem>
+  /**
+   * <p>model信息</p>
+   */
+  ModelIdsWithAlias?: Array<ServiceProviderModelItem>
+  /**
+   * <p>模型供应商</p>
+   */
+  ModelProvider?: string
+  /**
+   * <p>模型协议</p>
+   */
+  Protocol?: string
+  /**
+   * <p>内部通信占用IP</p>
+   */
+  ServiceIps?: Array<string>
+  /**
+   * <p>服务提供商ID</p>
+   */
+  ServiceProviderId?: string
+  /**
+   * <p>服务提供商自定义名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceProviderName?: string
+  /**
+   * <p>模型状态</p><p>枚举值：</p><ul><li>Active： 运行中</li><li>Provisioning： 创建中</li><li>Configuring： 变配中</li><li>Deleting： 删除中</li><li>ProvisionFailed： 创建失败</li><li>ConfigureFailed： 变配失败</li><li>DeletionFailed： 删除失败</li><li>Disabled： 已禁用</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>子网 ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * <p>标签信息</p>
+   */
+  Tags?: Array<TagInfo>
+  /**
+   * <p>是否校验上游SSL</p>
+   */
+  VerifySSL?: boolean
+  /**
+   * <p>VPC 实例 ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+}
+
+/**
+ * ModifyModelRouterGuardrails返回参数结构体
+ */
+export interface ModifyModelRouterGuardrailsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AssociateModelRouterGuardrails返回参数结构体
+ */
+export interface AssociateModelRouterGuardrailsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ManualRewrite返回参数结构体
+ */
+export interface ManualRewriteResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeClusterResources返回参数结构体
+ */
+export interface DescribeClusterResourcesResponse {
+  /**
+   * 集群中资源列表。
+   */
+  ClusterResourceSet?: Array<ClusterResource>
+  /**
+   * 集群中资源总数。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * InquirePriceRefundModelRouterResourcePackage请求参数结构体
+ */
+export interface InquirePriceRefundModelRouterResourcePackageRequest {
+  /**
+   * <p>待退款的模型路由资源包Id</p><p>非有效状态或者设置了自动续订且自动续订已生效的资源包不允许退款。</p>
+   */
+  ModelRouterResourcePackageIds: Array<string>
+}
+
+/**
+ * 用户组信息。
+ */
+export interface UserGroupInfo {
+  /**
+   * <p>用户组ID。「未分组」虚拟分组固定为 ugrp-ungrouped。</p>
+   */
+  UserGroupId?: string
+  /**
+   * <p>用户组名称。「未分组」虚拟分组固定为 ungrouped。</p>
+   */
+  UserGroupName?: string
+  /**
+   * <p>所属模型路由实例ID。</p>
+   */
+  ModelRouterId?: string
+  /**
+   * <p>用户组状态。</p><p>枚举值：</p><ul><li>Creating：创建中</li><li>Active：正常</li><li>Configuring：配置中</li><li>Deleting：删除中</li></ul><p>「未分组」虚拟分组（ugrp-ungrouped）恒为 Active。</p>
+   */
+  Status?: string
+  /**
+   * <p>用户组真实模型白名单。「未分组」虚拟分组为空数组。</p>
+   */
+  Models?: Array<string>
+  /**
+   * <p>用户组意图路由白名单（ir-xxx）。「未分组」虚拟分组为空数组。</p>
+   */
+  IntentRouters?: Array<string>
+  /**
+   * <p>关联的Budget ID。</p><p>未关联时为空；「未分组」虚拟分组恒为空。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BudgetId?: string
+  /**
+   * <p>关联的Budget名称。</p><p>未关联时为空；「未分组」虚拟分组恒为空。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BudgetName?: string
+  /**
+   * <p>用户组多刷新周期 Credit 使用情况。</p><p>无多周期预算时为空数组。</p>
+   */
+  CreditUsageSet?: Array<CreditUsage>
+  /**
+   * <p>用户组当前包含的 Key 数量。「未分组」虚拟分组（ugrp-ungrouped）返回该模型路由实例下未归属任何用户组的 Key 数量。</p>
+   */
+  KeyCount?: number
+  /**
+   * <p>标签列表。「未分组」虚拟分组为空数组。</p>
+   */
+  Tags?: Array<TagInfo>
+  /**
+   * <p>创建时间。「未分组」虚拟分组不返回此字段。</p>
+   */
+  CreatedTime?: string
+  /**
+   * <p>修改时间。「未分组」虚拟分组不返回此字段。</p>
+   */
+  ModifiedTime?: string
+}
+
+/**
+ * ModifyTargetWeight请求参数结构体
+ */
+export interface ModifyTargetWeightRequest {
+  /**
+   * 负载均衡实例ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 负载均衡监听器ID。
+   */
+  ListenerId: string
+  /**
+   * 要修改权重的后端服务列表。
+   */
+  Targets: Array<Target>
+  /**
+   * 转发规则的ID，当绑定机器到七层转发规则时，必须提供此参数或Domain+Url两者之一。
+   */
+  LocationId?: string
+  /**
+   * 目标规则的域名，提供LocationId参数时本参数不生效。
+   */
+  Domain?: string
+  /**
+   * 目标规则的URL，提供LocationId参数时本参数不生效。
+   */
+  Url?: string
+  /**
+   * 后端服务新的转发权重，取值范围：0~100，默认值10。如果设置了 Targets.Weight 参数，则此参数不生效。
+   */
+  Weight?: number
+}
+
+/**
+ * CreateClsLogSet返回参数结构体
+ */
+export interface CreateClsLogSetResponse {
+  /**
+   * 日志集的 ID。
+   */
+  LogsetId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCrossTargets请求参数结构体
+ */
+export interface DescribeCrossTargetsRequest {
+  /**
+   * 返回后端服务列表数目，默认20，最大值100。
+   */
+  Limit?: number
+  /**
+   * 返回后端服务列表起始偏移量，默认0。
+   */
+  Offset?: number
+  /**
+   * 查询跨域2.0版本云联网后端子机和网卡服务列表条件，详细的过滤条件如下：
+<li> vpc-id - String - 是否必填：否 - （过滤条件）按照 本地私有网络ID，即负载均衡的VpcId 过滤，如："vpc-12345678"。</li>
+<li> ip - String - 是否必填：否 - （过滤条件）按照 后端服务ip 过滤，如："192.168.0.1"。</li>
+<li> listener-id - String - 是否必填：否 - （过滤条件）按照 监听器ID 过滤，如："lbl-12345678"。</li>
+<li> location-id - String - 是否必填：否 - （过滤条件）按照 七层监听器规则ID 过滤，如："loc-12345678"。</li>
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * Key 详情
+ */
+export interface KeyDetailItem {
+  /**
+   * Key 业务 ID
+   */
+  KeyId: string
+  /**
+   * Key 创建时间（ISO 8601）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreatedAt?: string
+  /**
+   * Key 显示名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+}
+
+/**
+ * CreateTopic返回参数结构体
+ */
+export interface CreateTopicResponse {
+  /**
+   * 日志主题的 ID。
+   */
+  TopicId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 资源可用性
+ */
+export interface ResourceAvailability {
+  /**
+   * 运营商内具体资源信息，如"CMCC", "CUCC", "CTCC", "BGP"。
+   */
+  Type: string
+  /**
+   * 资源可用性，"Available"：可用，"Unavailable"：不可用
+   */
+  Availability: string
+}
+
+/**
+ * DescribeCustomizedConfigAssociateList返回参数结构体
+ */
+export interface DescribeCustomizedConfigAssociateListResponse {
+  /**
+   * 绑定关系列表
+   */
+  BindList?: Array<BindDetailItem>
+  /**
+   * 绑定关系总数目
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RegisterModelsToServiceProvider请求参数结构体
+ */
+export interface RegisterModelsToServiceProviderRequest {
+  /**
+   * <p>BYOK的ID</p>
+   */
+  ServiceProviderId: string
+  /**
+   * <p>需要关联的模型信息</p>
+   */
+  Models?: Array<ModelItem>
+}
+
+/**
+ * 创建Key的信息
+ */
+export interface InputKeyInfo {
+  /**
+   * <p>Key的名称</p>
+   */
+  KeyName?: string
+  /**
+   * <p>导入的明文Key</p><p>仅允许导入Key模式下输入</p>
+   */
+  PlainKey?: string
+}
+
+/**
+ * TestServiceProviderConnection返回参数结构体
+ */
+export interface TestServiceProviderConnectionResponse {
+  /**
+   * <p>探测结果</p>
+   */
+  Results?: Array<ModelTestResult>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * model 信息
+ */
+export interface ModelItem {
+  /**
+   * <p>模型唯一标识, 用于实际访问</p>
+   */
+  ModelId: string
+  /**
+   * <p>该模型当前支持的输入多模态能力列表</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>image： 支持图像输入</li><li>file： 支持文件输入（当前仅支持pdf）</li></ul><p>默认值：text</p>
+   */
+  InputModalities?: Array<string>
+  /**
+   * <p>模型别名, 可以用于实际访问</p>
+   */
+  ModelAlias?: string
+}
+
+/**
+ * SetCustomizedConfigForLoadBalancer请求参数结构体
+ */
+export interface SetCustomizedConfigForLoadBalancerRequest {
+  /**
+   * 操作类型。
+- ADD：创建
+- DELETE：删除
+- UPDATE：修改
+- BIND：绑定
+- UNBIND：解绑
+   */
+  OperationType: string
+  /**
+   * 个性化配置ID。除了创建个性化配置外，必传此字段，如：pz-1234abcd
+   */
+  UconfigId?: string
+  /**
+   * 个性化配置内容。创建个性化配置或修改个性化配置的内容时，必传此字段。
+具体限制查看 [七层个性化配置](https://cloud.tencent.com/document/product/214/15171)
+   */
+  ConfigContent?: string
+  /**
+   * 个性化配置名称。创建个性化配置或修改个性化配置的名字时，必传此字段。
+   */
+  ConfigName?: string
+  /**
+   * 负载均衡实例ID。绑定解绑时，必传此字段。
+可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/product/1108/48459) 接口查询。
+   */
+  LoadBalancerIds?: Array<string>
+  /**
+   * 标签
+   */
+  Tags?: Array<TagInfo>
+}
+
+/**
+ * CreateListener返回参数结构体
+ */
+export interface CreateListenerResponse {
+  /**
+   * <p>创建的监听器的唯一标识数组。</p>
+   */
+  ListenerIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateTargetGroup返回参数结构体
+ */
+export interface CreateTargetGroupResponse {
+  /**
+   * <p>创建目标组后生成的id</p>
+   */
+  TargetGroupId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AssociateCustomizedConfig返回参数结构体
+ */
+export interface AssociateCustomizedConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeModelKeys返回参数结构体
+ */
+export interface DescribeModelKeysResponse {
+  /**
+   * <p>模型列表（含 Key 信息）</p>
+   */
+  Models?: Array<ModelKeyInfoItem>
+  /**
+   * <p>模型总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyKeyAttributes请求参数结构体
+ */
+export interface ModifyKeyAttributesRequest {
+  /**
+   * <p>模型路由实例ID</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>API Key的ID</p>
+   */
+  KeyId: string
+  /**
+   * <p>Key的名称</p>
+   */
+  KeyName?: string
+  /**
+   * <p>限速配置</p>
+   */
+  RateLimitConfig?: RateLimitConfigForKey
+}
+
+/**
+ * CreateIntentRouter返回参数结构体
+ */
+export interface CreateIntentRouterResponse {
+  /**
+   * <p>创建的意图路由ID（ir-xxx格式）。</p>
+   */
+  IntentRouterId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeregisterTargetGroupInstances请求参数结构体
+ */
+export interface DeregisterTargetGroupInstancesRequest {
+  /**
+   * 目标组ID。
+   */
+  TargetGroupId: string
+  /**
+   * 待解绑的服务器信息，支持批量解除绑定，单次批量解除数量最多为20个。
+在这个接口 Port 参数为必填项。
+   */
+  TargetGroupInstances: Array<TargetGroupInstance>
+}
+
+/**
+ * ReplaceCertForLoadBalancers请求参数结构体
+ */
+export interface ReplaceCertForLoadBalancersRequest {
+  /**
+   * 需要被替换的证书的ID，可以是服务端证书或客户端证书
+   */
+  OldCertificateId: string
+  /**
+   * 新证书的内容等相关信息
+   */
+  Certificate: CertificateInput
+}
+
+/**
+ * ModifyModelAliasAttributes返回参数结构体
+ */
+export interface ModifyModelAliasAttributesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 闲置实例。
+ */
+export interface IdleLoadBalancer {
+  /**
+   * 负载均衡ID
+   */
+  LoadBalancerId?: string
+  /**
+   * 负载均衡名字
+   */
+  LoadBalancerName?: string
+  /**
+   * 负载均衡所在地域
+   */
+  Region?: string
+  /**
+   * 负载均衡的vip
+   */
+  Vip?: string
+  /**
+   * 闲置原因。NO_RULES：没有规则，NO_RS：有规则没有绑定子机。
+   */
+  IdleReason?: string
+  /**
+   * 负载均衡实例的状态，包括
+0：创建中，1：正常运行。
+   */
+  Status?: number
+  /**
+   * 负载均衡类型标识，1：负载均衡，0：传统型负载均衡。
+   */
+  Forward?: number
+  /**
+   * 负载均衡域名
+   */
+  Domain?: string
+}
+
+/**
+ * DisassociateTargetGroups请求参数结构体
+ */
+export interface DisassociateTargetGroupsRequest {
+  /**
+   * 待解绑的规则关系数组，支持批量解绑多个监听器，单次批量解除最多20个。
+   */
+  Associations: Array<TargetGroupAssociation>
+}
+
+/**
+ * 过滤器条件
+ */
+export interface Filter {
+  /**
+   * <p>过滤器的名称</p>
+   */
+  Name: string
+  /**
+   * <p>过滤器的值数组</p>
+   */
+  Values: Array<string>
+}
+
+/**
+ * 集群内资源类型
+ */
+export interface ClusterResource {
+  /**
+   * 集群唯一ID，如tgw-12345678。
+   */
+  ClusterId?: string
+  /**
+   * ip地址。
+   */
+  Vip?: string
+  /**
+   * 负载均衡唯一ID，如lb-12345678。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LoadBalancerId?: string
+  /**
+   * 资源是否闲置。
+   */
+  Idle?: string
+  /**
+   * 集群名称。
+   */
+  ClusterName?: string
+  /**
+   * 集群的Isp属性，如："BGP","CMCC","CUCC","CTCC","INTERNAL"。
+   */
+  Isp?: string
+  /**
+   * 集群所在的可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClustersZone?: ClustersZone
+}
+
+/**
+ * RegisterTargets返回参数结构体
+ */
+export interface RegisterTargetsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeregisterTargetsFromClassicalLB返回参数结构体
+ */
+export interface DeregisterTargetsFromClassicalLBResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 集群所在的可用区。
+ */
+export interface ClustersZone {
+  /**
+   * 集群所在的主可用区。
+   */
+  MasterZone?: Array<string>
+  /**
+   * 集群所在的备可用区。
+   */
+  SlaveZone?: Array<string>
+}
+
+/**
+ * DescribeModelRouterResourcePackages返回参数结构体
+ */
+export interface DescribeModelRouterResourcePackagesResponse {
+  /**
+   * <p>模型路由资源包信息</p>
+   */
+  ModelRouterResourcePackageSet?: Array<ModelRouterPackage>
+  /**
+   * <p>符合查询条件的模型路由资源包数量</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>资源包的剩余总量</p>
+   */
+  TotalDosage?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteLoadBalancer返回参数结构体
+ */
+export interface DeleteLoadBalancerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeSupportedProviders请求参数结构体
+ */
+export type DescribeSupportedProvidersRequest = null
+
+/**
+ * DeregisterTargets返回参数结构体
+ */
+export interface DeregisterTargetsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 描述了单项的价格信息
  */
 export interface ItemPrice {
@@ -8147,4 +10032,511 @@ GB：表示计价单元是按每GB来计算。当前涉及该计价单元的场�
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Discount: number
+}
+
+/**
+ * ModifyModelRouterSecurityGroups返回参数结构体
+ */
+export interface ModifyModelRouterSecurityGroupsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 反查结果数据类型。
+ */
+export interface LbRsTargets {
+  /**
+   * 内网ip类型。“cvm”或“eni”
+   */
+  Type?: string
+  /**
+   * 后端实例的内网ip。
+   */
+  PrivateIp?: string
+  /**
+   * 绑定后端实例的端口。
+   */
+  Port?: number
+  /**
+   * rs的vpcId
+   */
+  VpcId?: number
+  /**
+   * rs的权重
+   */
+  Weight?: number
+}
+
+/**
+ * DescribeModelRouterLogs请求参数结构体
+ */
+export interface DescribeModelRouterLogsRequest {
+  /**
+   * <p>模型路由实例ID</p>
+   */
+  ModelRouterId: string
+  /**
+   * <p>Key的ID</p>
+   */
+  KeyId?: string
+  /**
+   * <p>模型名称</p>
+   */
+  Model?: string
+  /**
+   * <p>请求状态</p>
+   */
+  Status?: string
+  /**
+   * <p>开始时间，与EndTime需要同时传入、开始时间不得早于24小时前，默认仅查询近5分钟日志</p>
+   */
+  StartTime?: string
+  /**
+   * <p>结束时间，与StartTime需要同时传入、开始时间不得早于24小时前，默认仅查询近5分钟日志</p>
+   */
+  EndTime?: string
+  /**
+   * <p>游标NextToken</p>
+   */
+  NextToken?: string
+  /**
+   * <p>本次查询最大数量</p><p>取值范围：[1, 100]</p><p>默认值：20</p>
+   */
+  MaxResults?: number
+}
+
+/**
+ * DescribeAssociatedModelAvailability返回参数结构体
+ */
+export interface DescribeAssociatedModelAvailabilityResponse {
+  /**
+   * <p>模型可用性列表</p>
+   */
+  ModelAvailability?: Array<ModelAvailability>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeUserGroups返回参数结构体
+ */
+export interface DescribeUserGroupsResponse {
+  /**
+   * <p>用户组列表。</p>
+   */
+  UserGroups?: Array<UserGroupInfo>
+  /**
+   * <p>符合条件的总数（含「未分组」逻辑组 ugrp-ungrouped：当其未被过滤条件排除时计入，即 TotalCount = 真实用户组数 + 1）。</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyKeysBlockStatus返回参数结构体
+ */
+export interface ModifyKeysBlockStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 证书相关信息
+ */
+export interface CertificateOutput {
+  /**
+   * 认证类型，UNIDIRECTIONAL：单向认证，MUTUAL：双向认证
+   */
+  SSLMode?: string
+  /**
+   * 是否开启客户端证书验证，只在双向认证时生效。
+   */
+  SSLVerifyClient?: string
+  /**
+   * 服务端证书的ID。
+   */
+  CertId?: string
+  /**
+   * 客户端证书的 ID。
+   */
+  CertCaId?: string
+  /**
+   * 多本服务器证书场景扩展的服务器证书ID。
+   */
+  ExtCertIds?: Array<string>
+}
+
+/**
+ * DescribeTargetGroupInstances返回参数结构体
+ */
+export interface DescribeTargetGroupInstancesResponse {
+  /**
+   * 本次查询的结果数量。
+   */
+  TotalCount?: number
+  /**
+   * 绑定的服务器信息。
+   */
+  TargetGroupInstanceSet?: Array<TargetGroupBackend>
+  /**
+   * 实际统计数量，不受Limit、Offset、CAM的影响。
+   */
+  RealCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAsyncJobs返回参数结构体
+ */
+export interface DescribeAsyncJobsResponse {
+  /**
+   * <p>异步任务列表</p>
+   */
+  Jobs?: Array<Job>
+  /**
+   * <p>分页游标</p>
+   */
+  NextToken?: string
+  /**
+   * <p>本次查询最大数量</p>
+   */
+  MaxResults?: number
+  /**
+   * <p>本次查询总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeModelRouterQuota请求参数结构体
+ */
+export interface DescribeModelRouterQuotaRequest {
+  /**
+   * <p>配额类型</p>
+   */
+  QuotaTypes: Array<string>
+  /**
+   * <p>要查询的资源ID</p>
+   */
+  ResourceIds?: Array<string>
+  /**
+   * <p>需要展示的字段</p><p>枚举值：</p><ul><li>Used： 已使用的配额数量</li><li>Available： 剩余的配额数量</li></ul>
+   */
+  DisplayFields?: Array<string>
+}
+
+/**
+ * 限速配置
+ */
+export interface RateLimitConfigForKey {
+  /**
+   * <p>最大并发请求数量</p><p>单位：次</p>
+   */
+  MaxParallelRequest?: number
+  /**
+   * <p>每分钟限制的请求数量</p><p>单位：次/分钟</p>
+   */
+  RPM?: number
+  /**
+   * <p>每分钟限制的Token数量</p><p>单位：个/分钟</p>
+   */
+  TPM?: number
+}
+
+/**
+ * 模型关联信息
+ */
+export interface ModelAssociation {
+  /**
+   * <p>该模型最大可支持的输入多模态能力列表</p><p>枚举值：</p><ul><li>text： 支持文本输入</li><li>image： 支持图像输入</li><li>file： 支持文件输入（当前仅支持pdf）</li></ul>
+   */
+  InputModalitiesUnion?: Array<string>
+  /**
+   * <p>模型名称</p>
+   */
+  ModelName?: string
+  /**
+   * <p>BYOK列表</p>
+   */
+  ServiceProviders?: Array<ServiceProvider>
+  /**
+   * <p>模型类型</p>
+   */
+  Type?: string
+}
+
+/**
+ * 描述配额信息，所有配额均指当前地域下的配额。
+ */
+export interface Quota {
+  /**
+   * 配额名称，取值范围：
+<li> TOTAL_OPEN_CLB_QUOTA：用户当前地域下的公网CLB配额 </li>
+<li> TOTAL_INTERNAL_CLB_QUOTA：用户当前地域下的内网CLB配额 </li>
+<li> TOTAL_LISTENER_QUOTA：一个CLB下的监听器配额 </li>
+<li> TOTAL_LISTENER_RULE_QUOTA：一个监听器下的转发规则配额 </li>
+<li> TOTAL_TARGET_BIND_QUOTA：一条转发规则下可绑定设备的配额 </li>
+<li> TOTAL_SNAT_IP_QUOTA： 一个CLB实例下跨地域2.0的SNAT IP配额 </li>
+<li>TOTAL_ISP_CLB_QUOTA：用户当前地域下的三网CLB配额 </li>
+<li>TOTAL_FULL_PORT_RANGE_LISTENER_QUOTA：一个CLB实例下的单个协议全端口段监听器配额</li>
+   */
+  QuotaId?: string
+  /**
+   * 当前使用数量，为 null 时表示无意义。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QuotaCurrent?: number
+  /**
+   * 配额数量。
+   */
+  QuotaLimit?: number
+}
+
+/**
+ * 监听器上绑定的后端服务的信息
+ */
+export interface ListenerBackend {
+  /**
+   * 监听器 ID
+   */
+  ListenerId?: string
+  /**
+   * 监听器的协议
+   */
+  Protocol?: string
+  /**
+   * 监听器的端口
+   */
+  Port?: number
+  /**
+   * 监听器下的规则信息（仅适用于HTTP/HTTPS监听器）
+   */
+  Rules?: Array<RuleTargets>
+  /**
+   * 监听器上绑定的后端服务列表（仅适用于TCP/UDP/TCP_SSL监听器）
+   */
+  Targets?: Array<Backend>
+  /**
+   * 若支持端口段，则为端口段结束端口；若不支持端口段，则为0
+   */
+  EndPort?: number
+}
+
+/**
+ * SnatIp的信息结构
+ */
+export interface SnatIp {
+  /**
+   * 私有网络子网的唯一性id，如subnet-12345678
+   */
+  SubnetId: string
+  /**
+   * IP地址，如192.168.0.1
+   */
+  Ip?: string
+}
+
+/**
+ * DescribeBlockIPTask返回参数结构体
+ */
+export interface DescribeBlockIPTaskResponse {
+  /**
+   * 1 running，2 fail，6 succ
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeServiceProviderHealthStatus请求参数结构体
+ */
+export interface DescribeServiceProviderHealthStatusRequest {
+  /**
+   * <p>BYOK的ID</p>
+   */
+  ServiceProviderId: string
+  /**
+   * <p>本次查询的限制数量</p><p>取值范围：[1, 100]</p><p>默认值：20</p>
+   */
+  Limit?: number
+  /**
+   * <p>本次查询翻页的偏移量</p>
+   */
+  Offset?: number
+}
+
+/**
+ * DescribeListeners请求参数结构体
+ */
+export interface DescribeListenersRequest {
+  /**
+   * 负载均衡实例 ID，可以通过 [DescribeLoadBalancers](https://cloud.tencent.com/document/api/214/30685) 接口获取。
+   */
+  LoadBalancerId: string
+  /**
+   * 要查询的负载均衡监听器 ID 数组，最大为100个，可以通过 [DescribeListeners](https://cloud.tencent.com/document/api/214/30686) 接口获取。
+   */
+  ListenerIds?: Array<string>
+  /**
+   * 要查询的监听器协议类型，取值 TCP | UDP | HTTP | HTTPS | TCP_SSL | QUIC。
+   */
+  Protocol?: string
+  /**
+   * 要查询的监听器的端口，端口范围：1-65535
+   */
+  Port?: number
+}
+
+/**
+ * 模型路由集群信息
+ */
+export interface ClusterInfo {
+  /**
+   * <p>独占集群ID</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>集群类型</p><p>枚举值：</p><ul><li>Public： 公有云集群</li><li>Exclusive： 独占集群</li></ul><p>默认值：Public</p>
+   */
+  Type?: string
+}
+
+/**
+ * DescribeLoadBalancers返回参数结构体
+ */
+export interface DescribeLoadBalancersResponse {
+  /**
+   * 满足过滤条件的负载均衡实例总数。此数值与入参中的Limit无关。
+   */
+  TotalCount?: number
+  /**
+   * 返回的负载均衡实例数组。
+   */
+  LoadBalancerSet?: Array<LoadBalancer>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateModelRouter请求参数结构体
+ */
+export interface CreateModelRouterRequest {
+  /**
+   * <p>模型路由类型</p><p>枚举值：</p><ul><li>Shared： 共享型</li><li>Enterprise： 企业级</li></ul>
+   */
+  ModelRouterType: string
+  /**
+   * <p>关联的积分预算ID</p>
+   */
+  BudgetId?: string
+  /**
+   * <p>证书ID</p><p>入参限制：当Schema为HTTPS时，该参数必传</p>
+   */
+  CertId?: string
+  /**
+   * <p>集群信息</p>
+   */
+  ClusterInfo?: ClusterInfo
+  /**
+   * <p>模型路由实例名称</p><p>默认值：-</p>
+   */
+  ModelRouterName?: string
+  /**
+   * <p>网络类型</p><p>枚举值：</p><ul><li>Internet： 公网</li><li>Intranet： 内网</li></ul>
+   */
+  NetworkType?: string
+  /**
+   * <p>模型路由的监听端口</p><p>取值范围：[1, 65535]</p>
+   */
+  Port?: number
+  /**
+   * <p>限速配置</p>
+   */
+  RateLimitConfig?: RateLimitConfigForModelRouter
+  /**
+   * <p>路由配置</p>
+   */
+  RouterSetting?: RouterSettingWithoutFallBack
+  /**
+   * <p>模型路由实例的网络协议</p><p>枚举值：</p><ul><li>HTTP： HTTP协议</li><li>HTTPS： HTTPS协议</li></ul>
+   */
+  Schema?: string
+  /**
+   * <p>模型路由实例所属子网的ID</p>
+   */
+  SubnetId?: string
+  /**
+   * <p>标签</p>
+   */
+  Tags?: Array<TagInfo>
+  /**
+   * <p>模型路由实例所属VPC的ID</p>
+   */
+  VpcId?: string
+}
+
+/**
+ * DescribeClassicalLBListeners请求参数结构体
+ */
+export interface DescribeClassicalLBListenersRequest {
+  /**
+   * 负载均衡实例ID。
+   */
+  LoadBalancerId: string
+  /**
+   * 负载均衡监听器ID列表。
+   */
+  ListenerIds?: Array<string>
+  /**
+   * 负载均衡监听的协议：'TCP', 'UDP', 'HTTP', 'HTTPS'。
+   */
+  Protocol?: string
+  /**
+   * 负载均衡监听端口，范围为[1-65535]。
+   */
+  ListenerPort?: number
+  /**
+   * 监听器的状态，0：创建中，1：运行中。
+   */
+  Status?: number
+}
+
+/**
+ * DescribeIntentRouters返回参数结构体
+ */
+export interface DescribeIntentRoutersResponse {
+  /**
+   * <p>意图路由列表。</p>
+   */
+  IntentRouterSet?: Array<IntentRouterItem>
+  /**
+   * <p>意图路由总数。</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }

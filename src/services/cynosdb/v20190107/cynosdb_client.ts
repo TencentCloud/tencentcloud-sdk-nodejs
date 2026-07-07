@@ -46,6 +46,7 @@ import {
   RefundResourcePackageResponse,
   ModifyInstanceNameResponse,
   DescribeParamTemplatesRequest,
+  DescribeBackupOverviewRequest,
   DescribeAuditInstanceListResponse,
   DescribeVaultBackupClusterInfoResponse,
   DescribeSlaveZonesResponse,
@@ -235,6 +236,7 @@ import {
   ModifyClusterDatabaseResponse,
   InstanceParamItem,
   IsolateLibraDBInstanceRequest,
+  DescribeVaultsResponse,
   DescribeDBSecurityGroupsRequest,
   RollbackData,
   UnbindClusterResourcePackagesRequest,
@@ -273,14 +275,14 @@ import {
   DbInfo,
   DescribeBackupDownloadUrlRequest,
   InstanceAuditStatus,
-  DescribeVaultsResponse,
+  CopyClusterPasswordComplexityRequest,
   DescribeClusterInstanceGroupsResponse,
   CreateLibraDBClusterAccountsResponse,
   MigrateTableItem,
   CreateProxyEndPointResponse,
   DescribeSQLExecutionPlanResponse,
   NetAddr,
-  CopyClusterPasswordComplexityRequest,
+  DescribeBackupOverviewResponse,
   ReplayInstanceAuditLogRequest,
   MigrateDBItem,
   RegionInstanceSpecInfo,
@@ -503,6 +505,7 @@ import {
   DescribeClusterDetailResponse,
   DescribeInstanceSlowQueriesRequest,
   ModifyResourcePackageClustersResponse,
+  BackupVolumeInfo,
   InputAccount,
   DescribeSaveBackupClustersRequest,
   DescribeLibraDBClusterAccountAllPrivilegesResponse,
@@ -832,13 +835,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（ModifyMaintainPeriodConfig）用于修改维护时间配置。
+   * 本接口（DescribeBackupOverview）用于查询备份用量总览。
    */
-  async ModifyMaintainPeriodConfig(
-    req: ModifyMaintainPeriodConfigRequest,
-    cb?: (error: string, rep: ModifyMaintainPeriodConfigResponse) => void
-  ): Promise<ModifyMaintainPeriodConfigResponse> {
-    return this.request("ModifyMaintainPeriodConfig", req, cb)
+  async DescribeBackupOverview(
+    req: DescribeBackupOverviewRequest,
+    cb?: (error: string, rep: DescribeBackupOverviewResponse) => void
+  ): Promise<DescribeBackupOverviewResponse> {
+    return this.request("DescribeBackupOverview", req, cb)
   }
 
   /**
@@ -1819,6 +1822,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeClusterPeriodScalePolicyResponse) => void
   ): Promise<DescribeClusterPeriodScalePolicyResponse> {
     return this.request("DescribeClusterPeriodScalePolicy", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyMaintainPeriodConfig）用于修改维护时间配置。
+   */
+  async ModifyMaintainPeriodConfig(
+    req: ModifyMaintainPeriodConfigRequest,
+    cb?: (error: string, rep: ModifyMaintainPeriodConfigResponse) => void
+  ): Promise<ModifyMaintainPeriodConfigResponse> {
+    return this.request("ModifyMaintainPeriodConfig", req, cb)
   }
 
   /**
