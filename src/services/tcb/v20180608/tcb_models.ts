@@ -1319,31 +1319,31 @@ export interface DescribePGUserMigrationResponse {
    */
   Query?: string
   /**
-   * <p>回滚的sql 语句</p>
+   * <p>回滚的sql 语句</p><p>deprecated</p>
    */
   Rollback?: string
   /**
-   * <p>migration query 语句的checksum值</p><p>由服务端自动生成，同版本 checksum 不一致会拒绝执行</p>
+   * <p>migration query 语句的checksum值,由服务端自动生成，同版本 checksum 不一致会拒绝执行</p><p>deprecated</p>
    */
   Checksum?: string
   /**
-   * <p>用于标记调用来源</p>
+   * <p>用于标记调用来源</p><p>deprecated</p>
    */
   Source?: string
   /**
-   * <p>用于标记该条migration由谁创建，目前默认调用的用户uin</p>
+   * <p>用于标记该条migration由谁创建，目前默认调用的用户uin</p><p>deprecated</p>
    */
   CreatedBy?: string
   /**
-   * <p>该migration创建时间</p>
+   * <p>该migration创建时间</p><p>deprecated</p>
    */
   CreatedAt?: string
   /**
-   * <p>该migration应用时间</p>
+   * <p>该migration应用时间</p><p>deprecated</p>
    */
   AppliedAt?: string
   /**
-   * <p>该migration执行耗时</p><p>单位：毫秒</p>
+   * <p>该migration执行耗时</p><p>单位：毫秒</p><p>deprecated</p>
    */
   DurationMs?: number
   /**
@@ -4360,9 +4360,13 @@ export interface PreviewPGUserMigrationsRequest {
    */
   Migrations: Array<MigrationInput>
   /**
-   * <p>标记请求来源</p>
+   * <p>标记请求来源</p><p>deprecated</p>
    */
   Source?: string
+  /**
+   * <p>是否允许 out-of-order local migrations</p><p>默认值：false</p>
+   */
+  IncludeAll?: boolean
 }
 
 /**
@@ -5187,9 +5191,13 @@ export interface PushPGUserMigrationsRequest {
    */
   StatementTimeoutMs?: number
   /**
-   * <p>标记请求来源</p>
+   * <p>标记请求来源</p><p>deprecated</p>
    */
   Source?: string
+  /**
+   * <p>为true时允许 out-of-order local migrations</p><p>默认值：false</p>
+   */
+  IncludeAll?: boolean
 }
 
 /**
@@ -5308,19 +5316,19 @@ export interface MigrationSummary {
    */
   Name?: string
   /**
-   * <p>migration query sql 语句checksum</p><p>服务端自动生成，同版本不同checksum会拒绝执行</p>
+   * <p>migration query sql 语句checksum，服务端自动生成，同版本不同checksum会拒绝执行</p><p>deprecated</p>
    */
   Checksum?: string
   /**
-   * <p>应用时间</p>
+   * <p>应用时间</p><p>deprecated</p>
    */
   AppliedAt?: string
   /**
-   * <p>请求来源</p>
+   * <p>请求来源</p><p>deprecated</p>
    */
   Source?: string
   /**
-   * <p>migration 创建时间</p>
+   * <p>migration 创建时间</p><p>deprecated</p>
    */
   CreatedBy?: string
 }

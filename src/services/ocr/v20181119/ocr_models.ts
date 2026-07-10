@@ -115,6 +115,48 @@ export interface FieldsInfo {
 }
 
 /**
+ * 表格识别结果
+ */
+export interface TextTable {
+  /**
+   * 单元格左上角的列索引
+   */
+  ColTl?: number
+  /**
+   * 单元格左上角的行索引
+   */
+  RowTl?: number
+  /**
+   * 单元格右下角的列索引
+   */
+  ColBr?: number
+  /**
+   * 单元格右下角的行索引
+   */
+  RowBr?: number
+  /**
+   * 单元格文字
+   */
+  Text?: string
+  /**
+   * 单元格类型，包含body（表格主体）、header（表头）、footer（表尾）三种
+   */
+  Type?: string
+  /**
+   * 置信度 0 ~100
+   */
+  Confidence?: number
+  /**
+   * 文本行坐标，以四个顶点坐标表示
+   */
+  Polygon?: Array<Coord>
+  /**
+   * 此字段为扩展字段
+   */
+  AdvancedInfo?: string
+}
+
+/**
  * 混贴票据单张发票识别信息
  */
 export interface InvoiceItem {
@@ -3018,41 +3060,34 @@ export interface VatInvoiceUserInfo {
 }
 
 /**
- * 通用机打发票条目
+ * CropEnhanceImageOCR返回参数结构体
  */
-export interface GeneralMachineItem {
+export interface CropEnhanceImageOCRResponse {
   /**
-   * 项目名称
+   * <p>处理后图的宽</p>
    */
-  Name?: string
+  CroppedWidth?: number
   /**
-   * 规格型号
+   * <p>处理后图的高</p>
    */
-  Specification?: string
+  CroppedHeight?: number
   /**
-   * 单位
+   * <p>图像处理后的jpg图片，base64格式</p>
    */
-  Unit?: string
+  CroppedImage?: string
   /**
-   * 数量
+   * <p>切图区域的4个角点坐标, 是个长度为8的数组<br>[0,1,2,3,4,5,6,7]</p><p>(0,1) 左上角坐标<br>(2,3) 右上角坐标<br>(4,5) 右下角坐标<br>(6,7) 左下角坐标</p>
    */
-  Quantity?: string
+  Position?: Array<number | bigint>
   /**
-   * 单价
+   * <p>图像角度，AdjustOrientation =1时生效, 返回值如下  -1: 失败  0、90、180、270</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Price?: string
+  Angle?: number
   /**
-   * 金额
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Total?: string
-  /**
-   * 税率
-   */
-  TaxRate?: string
-  /**
-   * 税额
-   */
-  Tax?: string
+  RequestId?: string
 }
 
 /**
@@ -3596,6 +3631,28 @@ export interface ExtractDocAgentResponse {
    * <p>任务执行错误信息。当任务状态不为 FAIL 时，该值为&quot;&quot;。</p>
    */
   ErrorMessage?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RecognizeStoreName返回参数结构体
+ */
+export interface RecognizeStoreNameResponse {
+  /**
+   * 门头照名称
+   */
+  StoreInfo?: Array<StoreInfo>
+  /**
+   * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负
+   */
+  Angle?: number
+  /**
+   * 门头照标签
+   */
+  StoreLabel?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7167,6 +7224,20 @@ export interface SceneWarnInfo {
 }
 
 /**
+ * EraseHandwrittenImageOCR返回参数结构体
+ */
+export interface EraseHandwrittenImageOCRResponse {
+  /**
+   * 图像处理后的jpg图片，base64格式
+   */
+  Image?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 全电发票（铁路电子客票）
  */
 export interface ElectronicTrainTicket {
@@ -7751,6 +7822,20 @@ export interface SealOCRResponse {
 三角形印章：4
    */
   SealShape?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * InsuranceBillOCR返回参数结构体
+ */
+export interface InsuranceBillOCRResponse {
+  /**
+   * 保险单据识别结果，具体内容请点击左侧链接。
+   */
+  InsuranceBillInfos?: Array<InsuranceBillInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8944,17 +9029,41 @@ export interface RecognizeMedicalInvoiceOCRRequest {
 }
 
 /**
- * InsuranceBillOCR返回参数结构体
+ * 通用机打发票条目
  */
-export interface InsuranceBillOCRResponse {
+export interface GeneralMachineItem {
   /**
-   * 保险单据识别结果，具体内容请点击左侧链接。
+   * 项目名称
    */
-  InsuranceBillInfos?: Array<InsuranceBillInfo>
+  Name?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 规格型号
    */
-  RequestId?: string
+  Specification?: string
+  /**
+   * 单位
+   */
+  Unit?: string
+  /**
+   * 数量
+   */
+  Quantity?: string
+  /**
+   * 单价
+   */
+  Price?: string
+  /**
+   * 金额
+   */
+  Total?: string
+  /**
+   * 税率
+   */
+  TaxRate?: string
+  /**
+   * 税额
+   */
+  Tax?: string
 }
 
 /**
@@ -9110,25 +9219,41 @@ export interface MLIDPassportOCRResponse {
 }
 
 /**
- * SealOCR请求参数结构体
+ * CropEnhanceImageOCR请求参数结构体
  */
-export interface SealOCRRequest {
+export interface CropEnhanceImageOCRRequest {
   /**
-   * 图片的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * <p>图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。</p>
    */
   ImageBase64?: string
   /**
-   * 图片的 Url 地址。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
+   * <p>图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。</p>
    */
   ImageUrl?: string
   /**
-   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
-   */
-  EnablePdf?: boolean
-  /**
-   * 需要识别的PDF页面的对应页码，传入时仅支持PDF单页识别，当上传文件为PDF且EnablePdf参数值为true时有效，默认值为1。
+   * <p>需要识别的PDF页面的对应页码，仅支持PDF单页识别，默认值为1。</p>
    */
   PdfPageNumber?: number
+  /**
+   * <p>0表示关闭切边<br>1表示开启切边，默认为1</p>
+   */
+  Crop?: number
+  /**
+   * <p>0表示关闭弯曲矫正<br>1表示开启弯曲矫正，默认为1</p>
+   */
+  Deskew?: number
+  /**
+   * <p>0表示返回处理后的图和坐标，默认为0<br>1表示只返回坐标，不返回图片</p>
+   */
+  OnlyPosition?: number
+  /**
+   * <p>默认-1</p><ul><li>-1 不处理增强</li><li>1 增亮</li><li>2 增强并锐化</li><li>3 黑白</li><li>4 灰度</li><li>5 去阴影增强</li><li>6 点阵图</li></ul>
+   */
+  EnhanceType?: number
+  /**
+   * <p>0表示不矫正图像方向，默认为0  1表示矫正图像方向</p>
+   */
+  AdjustOrientation?: number
 }
 
 /**
@@ -9270,45 +9395,25 @@ export interface MedicalInvoice {
 }
 
 /**
- * 表格识别结果
+ * SealOCR请求参数结构体
  */
-export interface TextTable {
+export interface SealOCRRequest {
   /**
-   * 单元格左上角的列索引
+   * 图片的 Base64 值。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。建议卡片部分占据图片2/3以上。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  ColTl?: number
+  ImageBase64?: string
   /**
-   * 单元格左上角的行索引
+   * 图片的 Url 地址。要求图片经Base64编码后不超过 10M，分辨率建议500*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。建议卡片部分占据图片2/3以上。图片下载时间不超过 3 秒。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。
    */
-  RowTl?: number
+  ImageUrl?: string
   /**
-   * 单元格右下角的列索引
+   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
    */
-  ColBr?: number
+  EnablePdf?: boolean
   /**
-   * 单元格右下角的行索引
+   * 需要识别的PDF页面的对应页码，传入时仅支持PDF单页识别，当上传文件为PDF且EnablePdf参数值为true时有效，默认值为1。
    */
-  RowBr?: number
-  /**
-   * 单元格文字
-   */
-  Text?: string
-  /**
-   * 单元格类型，包含body（表格主体）、header（表头）、footer（表尾）三种
-   */
-  Type?: string
-  /**
-   * 置信度 0 ~100
-   */
-  Confidence?: number
-  /**
-   * 文本行坐标，以四个顶点坐标表示
-   */
-  Polygon?: Array<Coord>
-  /**
-   * 此字段为扩展字段
-   */
-  AdvancedInfo?: string
+  PdfPageNumber?: number
 }
 
 /**
@@ -9422,26 +9527,41 @@ export interface SubItemGroup {
 }
 
 /**
- * 二维码/条形码识别结果信息
+ * EraseHandwrittenImageOCR请求参数结构体
  */
-export interface QrcodeResultsInfo {
+export interface EraseHandwrittenImageOCRRequest {
   /**
-   * 类型包括
-二维码：QR_CODE
-一维码：EAN-13、EAN-8、EAN-2、UPC-A、UPC-E、CODE-39、CODE-93、CODE-128 
-PDF：PDF_417
-DataMatrix：DATA_MATRIX
-小程序码：WX_CODE
+   * 图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  TypeName?: string
+  ImageBase64?: string
   /**
-   * 二维码/条形码包含的地址
+   * 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  Url?: string
+  ImageUrl?: string
   /**
-   * 二维码/条形码坐标
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，默认值为1。
    */
-  Position?: QrcodePositionObj
+  PdfPageNumber?: number
+  /**
+   * 0表示关闭切边，默认为0
+1表示开启切边
+   */
+  Crop?: number
+  /**
+   * 0表示关闭弯曲矫正，默认为0
+1表示开启弯曲矫正
+   */
+  Deskew?: number
+  /**
+   * 0表示关闭增强锐化，默认为0
+1表示开启增强锐化
+   */
+  Sharpen?: number
+  /**
+   * 0表示返回黑白图像
+1表示返回彩色图像，默认为1
+   */
+  Grayscale?: number
 }
 
 /**
@@ -10825,25 +10945,26 @@ export interface WaybillOCRRequest {
 }
 
 /**
- * RecognizeStoreName返回参数结构体
+ * 二维码/条形码识别结果信息
  */
-export interface RecognizeStoreNameResponse {
+export interface QrcodeResultsInfo {
   /**
-   * 门头照名称
+   * 类型包括
+二维码：QR_CODE
+一维码：EAN-13、EAN-8、EAN-2、UPC-A、UPC-E、CODE-39、CODE-93、CODE-128 
+PDF：PDF_417
+DataMatrix：DATA_MATRIX
+小程序码：WX_CODE
    */
-  StoreInfo?: Array<StoreInfo>
+  TypeName?: string
   /**
-   * 图片旋转角度（角度制），文本的水平方向为0°，顺时针为正，逆时针为负
+   * 二维码/条形码包含的地址
    */
-  Angle?: number
+  Url?: string
   /**
-   * 门头照标签
+   * 二维码/条形码坐标
    */
-  StoreLabel?: Array<string>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Position?: QrcodePositionObj
 }
 
 /**

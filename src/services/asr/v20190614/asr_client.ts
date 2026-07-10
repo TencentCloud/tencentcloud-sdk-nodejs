@@ -30,6 +30,7 @@ import {
   CloseAsyncRecognitionTaskRequest,
   Task,
   AsyncRecognitionTasks,
+  VoicePrintGroupListRequest,
   DeleteCustomizationResponse,
   TaskStatus,
   GetCustomizationListRequest,
@@ -67,6 +68,7 @@ import {
   GetAsrVocabResponse,
   HotWord,
   UpdateAsrKeyWordLibRequest,
+  VoicePrintGroupList,
   GetUsageByDateResponse,
   VoicePrintDeleteResponse,
   DownloadCustomizationResponse,
@@ -96,6 +98,7 @@ import {
   VoicePrintCompareData,
   VoicePrintVerifyRequest,
   SetVocabStateRequest,
+  VoicePrintGroupListResponse,
   Model,
   CreateAsrVocabRequest,
   VoicePrintVerifyResponse,
@@ -189,6 +192,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetAsrVocabListResponse) => void
   ): Promise<GetAsrVocabListResponse> {
     return this.request("GetAsrVocabList", req, cb)
+  }
+
+  /**
+   * 返回注册的说话人分组信息列表
+   */
+  async VoicePrintGroupList(
+    req?: VoicePrintGroupListRequest,
+    cb?: (error: string, rep: VoicePrintGroupListResponse) => void
+  ): Promise<VoicePrintGroupListResponse> {
+    return this.request("VoicePrintGroupList", req, cb)
   }
 
   /**

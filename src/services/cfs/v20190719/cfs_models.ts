@@ -2637,7 +2637,12 @@ export interface AvailableZone {
 /**
  * RunDataRetrievalTask请求参数结构体
  */
-export type RunDataRetrievalTaskRequest = null
+export interface RunDataRetrievalTaskRequest {
+  /**
+   * <p>数据检索 ID。可通过 DescribeDataRetrieval 接口获取。</p>
+   */
+  DataRetrievalId: string
+}
 
 /**
  * DescribeMigrationTasks请求参数结构体

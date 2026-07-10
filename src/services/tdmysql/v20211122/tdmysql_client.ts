@@ -301,7 +301,7 @@ export class Client extends AbstractClient {
    * 本接口（DescribeFlow）用于查询异步任务流程状态
    */
   async DescribeFlow(
-    req?: DescribeFlowRequest,
+    req: DescribeFlowRequest,
     cb?: (error: string, rep: DescribeFlowResponse) => void
   ): Promise<DescribeFlowResponse> {
     return this.request("DescribeFlow", req, cb)

@@ -2488,7 +2488,7 @@ export interface DescribeCompareDiffItemsResponse {
  */
 export interface CreateSubscribeResponse {
   /**
-   * 数据订阅实例的ID数组
+   * <p>数据订阅实例的ID数组</p>
    */
   SubscribeIds?: Array<string>
   /**
@@ -5087,35 +5087,39 @@ export interface ModifyMigrateNameRequest {
  */
 export interface CreateSubscribeRequest {
   /**
-   * 订阅的数据库类型，目前支持 cynosdbmysql(tdsql-c mysql版),mariadb,mongodb,mysql,percona,tdpg(tdsql postgresql版),tdsqlpercona(tdsql mysql版)
+   * <p>订阅的数据库类型，目前支持 cynosdbmysql(tdsql-c mysql版),mariadb,mongodb,mysql,percona,tdpg(tdsql postgresql版),tdsqlpercona(tdsql mysql版)</p>
    */
   Product: string
   /**
-   * 付费方式，枚举值：0-包年包月，1-按量计费
+   * <p>付费方式，枚举值：0-包年包月，1-按量计费</p>
    */
   PayType: number
   /**
-   * 购买时长。当 payType 为包年包月时，该项需要填，单位为月，最小值为 1，最大值为 120。不填默认1
+   * <p>购买时长。当 payType 为包年包月时，该项需要填，单位为月，最小值为 1，最大值为 120。不填默认1</p>
    */
   Duration?: number
   /**
-   * 是否自动续费。当 payType 为包年包月时，该项需要填。枚举值：0-不自动续费，1-自动续费。默认不自动续费。按量计费设置该标识无效。
+   * <p>是否自动续费。当 payType 为包年包月时，该项需要填。枚举值：0-不自动续费，1-自动续费。默认不自动续费。按量计费设置该标识无效。</p>
    */
   AutoRenew?: number
   /**
-   * 购买数量,默认为1，最大为10
+   * <p>购买数量,默认为1，最大为10</p>
    */
   Count?: number
   /**
-   * 实例资源标签
+   * <p>实例资源标签</p>
    */
   Tags?: Array<TagItem>
   /**
-   * 任务名，自定义
+   * <p>任务名，自定义</p>
    */
   Name?: string
   /**
-   * 订阅实例规格，当前仅支持small、medium、large
+   * <p>数据订阅版本，目前支持kafka和kafkaPro（专业版），如果不填，默认kafkaPro</p>
+   */
+  SubscribeVersion?: string
+  /**
+   * <p>订阅实例规格，当前仅支持small、medium、large</p>
    */
   InstanceClass?: string
 }

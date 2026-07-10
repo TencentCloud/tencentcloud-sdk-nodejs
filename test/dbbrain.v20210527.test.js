@@ -498,6 +498,16 @@ it("dbbrain.v20210527.DescribeDBPerfTimeSeries", async function () {
     }
 })
 
+it("dbbrain.v20210527.CreateIgnoreDiagRecord", async function () {
+    try {
+       const data = await client.CreateIgnoreDiagRecord({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeDBDiagReportTasks", async function () {
     try {
        const data = await client.DescribeDBDiagReportTasks({})

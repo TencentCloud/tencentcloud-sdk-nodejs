@@ -508,24 +508,24 @@ export interface DescribeTablesResponse {
  */
 export interface DescribeDataEngineEventsResponse {
   /**
-   * 事件详细信息
+   * <p>事件详细信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Events?: Array<HouseEventsInfo>
   /**
-   * 分页号
+   * <p>分页号</p>
    */
   Page?: number
   /**
-   * 分页大小
+   * <p>分页大小</p>
    */
   Size?: number
   /**
-   * 总页数
+   * <p>总页数</p>
    */
   TotalPages?: number
   /**
-   * 总条数
+   * <p>总条数</p>
    */
   TotalCount?: number
   /**
@@ -6393,21 +6393,29 @@ export interface UpdateRowFilterResponse {
  */
 export interface DescribeDataEngineEventsRequest {
   /**
-   * 虚拟集群名称
+   * <p>虚拟集群名称</p>
    */
   DataEngineName: string
   /**
-   * 返回数量，默认为10，最大为100
+   * <p>返回数量，默认为10，最大为100</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为0
+   * <p>偏移量，默认为0</p>
    */
   Offset?: number
   /**
-   * 资源组id
+   * <p>资源组id</p>
    */
   SessionId?: string
+  /**
+   * <p>查询开始时间，用于筛选资源组启停事件的时间范围，不传则不限制开始时间</p><p>参数格式：YYYY-mm-dd HH:MM:SS</p>
+   */
+  StartTime?: string
+  /**
+   * <p>查询结束时间，用于筛选资源组启停事件的时间范围，不传则不限制结束时间。需大于等于 StartTime</p><p>参数格式：YYYY-mm-dd HH:MM:SS</p>
+   */
+  EndTime?: string
 }
 
 /**

@@ -215,7 +215,7 @@ export class Client extends AbstractClient {
   /**
      * 查询 TokenPlan APIKey 调用明细。
 
-从 CLS 日志服务查询套餐下的调用明细，按 pkg_id 过滤，支持游标分页。
+从 CLS 日志服务查询套餐下的调用明细，按 team_id 过滤，支持游标分页。
      */
   async DescribeTokenPlanApiKeyUsageDetail(
     req: DescribeTokenPlanApiKeyUsageDetailRequest,

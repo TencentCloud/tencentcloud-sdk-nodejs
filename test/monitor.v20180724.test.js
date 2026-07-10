@@ -1368,6 +1368,16 @@ it("monitor.v20180724.UpdatePrometheusAgentStatus", async function () {
     }
 })
 
+it("monitor.v20180724.EnablePredefinedPolicies", async function () {
+    try {
+       const data = await client.EnablePredefinedPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.CreateRecordingRule", async function () {
     try {
        const data = await client.CreateRecordingRule({})

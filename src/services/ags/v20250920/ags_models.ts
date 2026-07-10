@@ -772,15 +772,15 @@ export interface DescribeAPIKeyListResponse {
  */
 export interface CreatePreCacheImageTaskResponse {
   /**
-   * 镜像地址
+   * <p>镜像地址</p>
    */
   Image?: string
   /**
-   * 镜像 Digest
+   * <p>镜像 Digest</p>
    */
   ImageDigest?: string
   /**
-   * 镜像仓库类型：`enterprise`、`personal`。
+   * <p>镜像仓库类型：<code>enterprise</code>、<code>personal</code>。</p>
    */
   ImageRegistryType?: string
   /**
@@ -985,13 +985,17 @@ export interface ProbeConfiguration {
  */
 export interface CreatePreCacheImageTaskRequest {
   /**
-   * 镜像地址
+   * <p>镜像地址</p>
    */
   Image: string
   /**
-   * 镜像仓库类型：`enterprise`、`personal`。
+   * <p>镜像仓库类型：<code>enterprise</code>、<code>personal</code>、<code>custom</code></p><p>枚举值：</p><ul><li>enterprise： tcr 企业容器镜像服务</li><li>personal： ccr 个人容器镜像服务</li></ul>
    */
   ImageRegistryType: string
+  /**
+   * <p>预热超时时长</p>
+   */
+  TimeoutMinutes?: number
 }
 
 /**

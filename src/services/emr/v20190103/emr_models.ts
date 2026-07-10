@@ -8957,6 +8957,10 @@ export interface Resource {
    * <p>分区置放群组分区数</p>
    */
   PartitionNumber?: number
+  /**
+   * <p>高性能集群ID</p>
+   */
+  HCCHpcClusterId?: string
 }
 
 /**

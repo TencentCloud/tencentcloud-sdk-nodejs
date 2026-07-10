@@ -200,6 +200,11 @@ export interface AsyncRecognitionTasks {
 }
 
 /**
+ * VoicePrintGroupList请求参数结构体
+ */
+export type VoicePrintGroupListRequest = null
+
+/**
  * DeleteCustomization返回参数结构体
  */
 export interface DeleteCustomizationResponse {
@@ -993,6 +998,20 @@ export interface UpdateAsrKeyWordLibRequest {
 }
 
 /**
+ * 声纹分组名称列表
+ */
+export interface VoicePrintGroupList {
+  /**
+   * <p>总数量</p>
+   */
+  Total?: number
+  /**
+   * <p>分组名称列表</p>
+   */
+  GroupIds?: Array<string>
+}
+
+/**
  * GetUsageByDate返回参数结构体
  */
 export interface GetUsageByDateResponse {
@@ -1632,6 +1651,20 @@ export interface SetVocabStateRequest {
    * 热词表状态，1：设为默认状态；0：设为非默认状态。
    */
   State: number
+}
+
+/**
+ * VoicePrintGroupList返回参数结构体
+ */
+export interface VoicePrintGroupListResponse {
+  /**
+   * <p>返回分组名称列表数据</p>
+   */
+  Data?: VoicePrintGroupList
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

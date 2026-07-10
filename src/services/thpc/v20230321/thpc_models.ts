@@ -1833,63 +1833,71 @@ export interface Application {
  */
 export interface SpaceInfo {
   /**
-   * 工作空间ID
+   * <p>工作空间ID</p>
    */
   SpaceId?: string
   /**
-   * 工作空间类型
+   * <p>工作空间类别</p>
+   */
+  SpaceClass?: string
+  /**
+   * <p>工作空间类型</p>
    */
   SpaceFamily?: string
   /**
-   * 工作空间规格
+   * <p>工作空间规格</p>
    */
   SpaceType?: string
   /**
-   * 工作空间名称
+   * <p>工作空间名称</p>
    */
   SpaceName?: string
   /**
-   * 工作空间状态。取值范围：<br><li>PENDING：表示创建中<br></li><li>LAUNCH_FAILED：表示创建失败<br></li><li>ONLINE：表示运行中<br></li><li>ARREARS：表示隔离中<br></li><li>TERMINATING：表示销毁中。<br></li>
+   * <p>工作空间状态。取值范围：<br><li>PENDING：表示创建中<br></li><li>LAUNCH_FAILED：表示创建失败<br></li><li>ONLINE：表示运行中<br></li><li>ARREARS：表示隔离中<br></li><li>TERMINATING：表示销毁中。<br></li></p>
    */
   SpaceState?: string
   /**
-   * 工作空间计费模式
+   * <p>工作空间计费模式</p>
    */
   SpaceChargeType?: string
   /**
-   * 工作空间对应资源ID
+   * <p>工作空间对应资源ID</p>
    */
   ResourceId?: string
   /**
-   * 自动续费标识
+   * <p>自动续费标识</p>
    */
   RenewFlag?: string
   /**
-   * 工作空间关联的工作列表
+   * <p>工作空间关联的工作列表</p>
    */
   Tags?: Array<Tag>
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreatedTime?: string
   /**
-   * 到期时间
+   * <p>到期时间</p>
    */
   ExpiredTime?: string
   /**
-   * 工作空间所在位置
+   * <p>工作空间所在位置</p>
    */
   Placement?: Placement
   /**
-   * 工作空间的最新操作
+   * <p>工作空间的最新操作</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestOperation?: string
   /**
-   * 工作空间的最新操作状态
+   * <p>工作空间的最新操作状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LatestOperationState?: string
+  /**
+   * <p>实例的内网IP</p>
+   */
+  PrivateIpAddresses?: Array<string>
 }
 
 /**

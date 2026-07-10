@@ -350,21 +350,21 @@ export interface CreateDBDiagReportTaskRequest {
 }
 
 /**
- * DescribeDBAuditLogTopSqls返回参数结构体
+ * DescribeDBDiagReportContent请求参数结构体
  */
-export interface DescribeDBAuditLogTopSqlsResponse {
+export interface DescribeDBDiagReportContentRequest {
   /**
-   * <p>符合条件的记录总数。</p>
+   * 实例名
    */
-  TotalCount?: number
+  InstanceId: string
   /**
-   * <p>top sql 列表</p>
+   * 异步任务ID
    */
-  TopSqls?: Array<TopSqlTpl>
+  AsyncRequestId: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，默认为"mysql"。
    */
-  RequestId?: string
+  Product?: string
 }
 
 /**
@@ -681,6 +681,30 @@ export interface DescribeDBDiagEventResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDBDiagHistory请求参数结构体
+ */
+export interface DescribeDBDiagHistoryRequest {
+  /**
+   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+
+查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&Shard实例ID，如：dcdbt-157xxxk&shard-qxxxx
+   */
+  InstanceId: string
+  /**
+   * 开始时间，如“2019-09-10 12:13:14”。结束时间与开始时间的间隔最大可为2天。
+   */
+  StartTime: string
+  /**
+   * 结束时间，如“2019-09-11 12:13:14”，结束时间与开始时间的间隔最大可为2天。
+   */
+  EndTime: string
+  /**
+   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"mariadb"-mariadb;"cynosdb"-TDSQL-C for MySQL ;"dcdb"-TDSQL MySQL ;"redis" - 云数据库 Redis，默认为"mysql"。
+   */
+  Product?: string
 }
 
 /**
@@ -2214,27 +2238,13 @@ export interface InstanceID {
 }
 
 /**
- * DescribeDBDiagHistory请求参数结构体
+ * CreateIgnoreDiagRecord返回参数结构体
  */
-export interface DescribeDBDiagHistoryRequest {
+export interface CreateIgnoreDiagRecordResponse {
   /**
-   * 实例 ID。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
-
-查询TDSQL MySQL分布式实例:Instanceld：填写集群ID&Shard实例ID，如：dcdbt-157xxxk&shard-qxxxx
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId: string
-  /**
-   * 开始时间，如“2019-09-10 12:13:14”。结束时间与开始时间的间隔最大可为2天。
-   */
-  StartTime: string
-  /**
-   * 结束时间，如“2019-09-11 12:13:14”，结束时间与开始时间的间隔最大可为2天。
-   */
-  EndTime: string
-  /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"mariadb"-mariadb;"cynosdb"-TDSQL-C for MySQL ;"dcdb"-TDSQL MySQL ;"redis" - 云数据库 Redis，默认为"mysql"。
-   */
-  Product?: string
+  RequestId?: string
 }
 
 /**
@@ -4489,21 +4499,21 @@ export interface DescribeTopSpaceSchemaTimeSeriesRequest {
 }
 
 /**
- * DescribeDBDiagReportContent请求参数结构体
+ * DescribeDBAuditLogTopSqls返回参数结构体
  */
-export interface DescribeDBDiagReportContentRequest {
+export interface DescribeDBAuditLogTopSqlsResponse {
   /**
-   * 实例名
+   * <p>符合条件的记录总数。</p>
    */
-  InstanceId: string
+  TotalCount?: number
   /**
-   * 异步任务ID
+   * <p>top sql 列表</p>
    */
-  AsyncRequestId: number
+  TopSqls?: Array<TopSqlTpl>
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，默认为"mysql"。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Product?: string
+  RequestId?: string
 }
 
 /**
@@ -4823,6 +4833,28 @@ export interface DescribeHealthScoreRequest {
    * <p>服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 TDSQL-C for MySQL，&quot;redis&quot; - 云数据库 Redis，默认为&quot;mysql&quot;。</p>
    */
   Product: string
+}
+
+/**
+ * CreateIgnoreDiagRecord请求参数结构体
+ */
+export interface CreateIgnoreDiagRecordRequest {
+  /**
+   * <p>实例ID。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>服务产品类型，取值：mysql（云数据库 MySQL）、cynosdb（TDSQL-C MySQL 版）、dcdb（TDSQL MySQL 版）、mariadb（TDSQL MariaDB 版）、redis（云数据库 Redis）、mongodb（云数据库 MongoDB）、postgres（云数据库 PostgreSQL）。</p>
+   */
+  Product: string
+  /**
+   * <p>诊断项名称，用于指定需要忽略或取消忽略的诊断事件类型。</p>
+   */
+  DiagItem: string
+  /**
+   * <p>忽略状态，取值：1（取消忽略），2（忽略）。</p>
+   */
+  Status: number
 }
 
 /**

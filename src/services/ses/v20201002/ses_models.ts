@@ -466,7 +466,7 @@ export interface SendEmailRequest {
    */
   FromEmailAddress: string
   /**
-   * <p>邮件主题</p>
+   * <p>邮件主题</p><p>当使用模版发送时，支持使用模版变量参数填充</p>
    */
   Subject: string
   /**
@@ -1473,7 +1473,7 @@ export interface BatchSendEmailRequest {
    */
   ReceiverId: number
   /**
-   * <p>邮件主题</p>
+   * <p>邮件主题</p><p>当使用模版发送时，支持使用模版变量参数填充</p>
    */
   Subject: string
   /**

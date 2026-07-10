@@ -742,6 +742,14 @@ export interface RabbitMQVipInstance {
    * <p>公有数据流Stream接入点</p>
    */
   PublicStreamAccessEndpoint?: string
+  /**
+   * <p>集群类型</p><p>枚举值：</p><ul><li>NORMAL： 公有云</li><li>CDC： 本地专用集群</li></ul>
+   */
+  ClusterType?: string
+  /**
+   * <p>CDC 集群 ID</p>
+   */
+  CdcClusterId?: string
 }
 
 /**
@@ -749,134 +757,142 @@ export interface RabbitMQVipInstance {
  */
 export interface RabbitMQClusterInfo {
   /**
-   * 集群 ID
+   * <p>集群 ID</p>
    */
   ClusterId?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName?: string
   /**
-   * 地域信息
+   * <p>地域信息</p>
    */
   Region?: string
   /**
-   * 创建时间，毫秒为单位。unix 时间戳
+   * <p>创建时间，毫秒为单位。unix 时间戳</p>
    */
   CreateTime?: number
   /**
-   * 集群说明信息
+   * <p>集群说明信息</p>
    */
   Remark?: string
   /**
-   * VPC及网络信息
+   * <p>VPC及网络信息</p>
    */
   Vpcs?: Array<VpcEndpointInfo>
   /**
-   * 可用区信息
+   * <p>可用区信息</p>
    */
   ZoneIds?: Array<number | bigint>
   /**
-   * 虚拟主机数量
+   * <p>虚拟主机数量</p>
    */
   VirtualHostNumber?: number
   /**
-   * 队列数量
+   * <p>队列数量</p>
    */
   QueueNumber?: number
   /**
-   * 每秒生产消息数 单位：条/秒
+   * <p>每秒生产消息数 单位：条/秒</p>
    */
   MessagePublishRate?: number
   /**
-   * 堆积消息数 单位：条
+   * <p>堆积消息数 单位：条</p>
    */
   MessageStackNumber?: number
   /**
-   * 实例到期时间，按量付费的资源该值为 0，毫秒为单位。unix 时间戳
+   * <p>实例到期时间，按量付费的资源该值为 0，毫秒为单位。unix 时间戳</p>
    */
   ExpireTime?: number
   /**
-   * Channel数量
+   * <p>Channel数量</p>
    */
   ChannelNumber?: number
   /**
-   * Connection数量
+   * <p>Connection数量</p>
    */
   ConnectionNumber?: number
   /**
-   * Consumer数量
+   * <p>Consumer数量</p>
    */
   ConsumerNumber?: number
   /**
-   * Exchang数量
+   * <p>Exchang数量</p>
    */
   ExchangeNumber?: number
   /**
-   * 集群异常信息
+   * <p>集群异常信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExceptionInformation?: string
   /**
-   * 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败
+   * <p>实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败</p>
    */
   ClusterStatus?: number
   /**
-   * 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)
+   * <p>自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)</p>
    */
   AutoRenewFlag?: number
   /**
-   * 是否开启镜像队列策略。1表示开启，0表示没开启。
+   * <p>是否开启镜像队列策略。1表示开启，0表示没开启。</p>
    */
   MirrorQueuePolicyFlag?: number
   /**
-   * 每秒消费消息数 单位：条/秒
+   * <p>每秒消费消息数 单位：条/秒</p>
    */
   MessageConsumeRate?: number
   /**
-   * 集群版本信息
+   * <p>集群版本信息</p>
    */
   ClusterVersion?: string
   /**
-   * 计费模式，0-后付费，1-预付费
+   * <p>计费模式，0-后付费，1-预付费</p>
    */
   PayMode?: number
   /**
-   * 实例类型，0 专享版、1 Serverless 版
+   * <p>实例类型，0 专享版、1 Serverless 版</p>
    */
   InstanceType?: number
   /**
-   * 开始隔离时间。unix 时间戳
+   * <p>开始隔离时间。unix 时间戳</p>
    */
   IsolatedTime?: number
   /**
-   * 是否为容器实例，默认 true
+   * <p>是否为容器实例，默认 true</p>
    */
   Container?: boolean
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<Tag>
   /**
-   * 是否已开启删除保护
+   * <p>是否已开启删除保护</p>
    */
   EnableDeletionProtection?: boolean
   /**
-   * 是否有vhost未开启镜像队列风险
+   * <p>是否有vhost未开启镜像队列风险</p>
    */
   MirroredQueueRisk?: boolean
   /**
-   * 是否提示风险
+   * <p>是否提示风险</p>
    */
   EnableRiskWarning?: boolean
   /**
-   * 消费超时时间
+   * <p>消费超时时间</p>
    */
   ConsumeTimeout?: number
   /**
-   * 最大Channel数
+   * <p>最大Channel数</p>
    */
   ChannelMax?: number
+  /**
+   * <p>集群类型</p><p>枚举值：</p><ul><li>NORMAL： 公有云</li><li>CDC： 本地专用集群</li></ul>
+   */
+  ClusterType?: string
+  /**
+   * <p>CDC集群ID</p>
+   */
+  CdcClusterId?: string
 }
 
 /**
@@ -3520,82 +3536,81 @@ export interface RocketMQConsumerConnection {
  */
 export interface CreateRabbitMQVipInstanceRequest {
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   ZoneIds: Array<number | bigint>
   /**
-   * 私有网络ID，形如 vpc-xxx。有效的 VpcId 可通过登录[私有网络](https://console.cloud.tencent.com/vpc/vpc?rid=1)控制台查询；也可以调用接口 [DescribeVpcEx](https://cloud.tencent.com/document/api/215/1372)，从接口返回中的 unVpcId 字段获取。若在创建子机时 VpcId 与 SubnetId 同时传入 DEFAULT，则强制使用默认 vpc 网络。
+   * <p>私有网络ID，形如 vpc-xxx。有效的 VpcId 可通过登录<a href="https://console.cloud.tencent.com/vpc/vpc?rid=1">私有网络</a>控制台查询；也可以调用接口 <a href="https://cloud.tencent.com/document/api/215/1372">DescribeVpcEx</a>，从接口返回中的 unVpcId 字段获取。若在创建子机时 VpcId 与 SubnetId 同时传入 DEFAULT，则强制使用默认 vpc 网络。</p>
    */
   VpcId: string
   /**
-   * 私有网络子网 ID，形如 subnet-xxx。有效的私有网络子网 ID 可通过登录[子网控制台](https://console.cloud.tencent.com/vpc/subnet?rid=1)查询；也可以调用接口 [DescribeSubnets](https://cloud.tencent.com/document/api/215/15784)，从接口返回中的 unSubnetId 字段获取。若在创建子机时 SubnetId 与 VpcId 同时传入 DEFAULT，则强制使用默认 vpc 网络。
+   * <p>私有网络子网 ID，形如 subnet-xxx。有效的私有网络子网 ID 可通过登录<a href="https://console.cloud.tencent.com/vpc/subnet?rid=1">子网控制台</a>查询；也可以调用接口 <a href="https://cloud.tencent.com/document/api/215/15784">DescribeSubnets</a>，从接口返回中的 unSubnetId 字段获取。若在创建子机时 SubnetId 与 VpcId 同时传入 DEFAULT，则强制使用默认 vpc 网络。</p>
    */
   SubnetId: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName: string
   /**
-   * 集群的节点规格，需要输入对应的规格标识：
-2C8G：rabbit-vip-profession-2c8g
-4C16G：rabbit-vip-profession-4c16g
-8C32G：rabbit-vip-profession-8c32g
-16C32G：rabbit-vip-basic-4
-16C64G：rabbit-vip-profession-16c64g
-2C4G：rabbit-vip-basic-5
-4C8G：rabbit-vip-basic-1
-8C16G（已售罄）：rabbit-vip-basic-2
-不传默认为 4C8G：rabbit-vip-basic-1
+   * <p>集群的节点规格，需要输入对应的规格标识：<br>2C8G：rabbit-vip-profession-2c8g<br>4C16G：rabbit-vip-profession-4c16g<br>8C32G：rabbit-vip-profession-8c32g<br>16C32G：rabbit-vip-basic-4<br>16C64G：rabbit-vip-profession-16c64g<br>2C4G：rabbit-vip-basic-5<br>4C8G：rabbit-vip-basic-1<br>8C16G（已售罄）：rabbit-vip-basic-2<br>不传默认为 4C8G：rabbit-vip-basic-1</p>
    */
   NodeSpec?: string
   /**
-   * 节点数量,多可用区最少为3节点。不传默认单可用区为1,多可用区为3
+   * <p>节点数量,多可用区最少为3节点。不传默认单可用区为1,多可用区为3</p>
    */
   NodeNum?: number
   /**
-   * 单节点存储规格,不传默认为200G
+   * <p>单节点存储规格,不传默认为200G</p>
    */
   StorageSize?: number
   /**
-   * 是否开启默认镜像队列，true 表示为开启，false 表示为不开启。不传默认为 false
+   * <p>是否开启默认镜像队列，true 表示为开启，false 表示为不开启。不传默认为 false。该参数对4.x集群不生效。</p>
    */
   EnableCreateDefaultHaMirrorQueue?: boolean
   /**
-   * 仅预付费集群（PayMode 参数为 1 时）使用该参数，表示是否自动续费，true 表示打开自动续费。不传默认为 true
+   * <p>仅预付费集群（PayMode 参数为 1 时）使用该参数，表示是否自动续费，true 表示打开自动续费。不传默认为 true</p>
    */
   AutoRenewFlag?: boolean
   /**
-   * 购买时长,不传默认为1(月)
+   * <p>购买时长,不传默认为1(月)</p>
    */
   TimeSpan?: number
   /**
-   * 付费方式，0 为后付费，即按量计费；1 为预付费，即包年包月。默认包年包月
+   * <p>付费方式，0 为后付费，即按量计费；1 为预付费，即包年包月。默认包年包月</p>
    */
   PayMode?: number
   /**
-   * 集群版本，不传默认为 3.8.30，可选值为 3.8.30、3.11.8和3.13.7
+   * <p>集群版本，不传默认为 3.8.30，可选值为 3.8.30、3.11.8和3.13.7</p>
    */
   ClusterVersion?: string
   /**
-   * 是否国际站请求，默认 false
+   * <p>是否国际站请求，默认 false</p>
    */
   IsIntl?: boolean
   /**
-   * 资源标签列表
+   * <p>资源标签列表</p>
    */
   ResourceTags?: Array<Tag>
   /**
-   * 公网带宽大小，单位 Mbps
+   * <p>公网带宽大小，单位 Mbps</p>
    */
   Bandwidth?: number
   /**
-   * 是否打开公网接入，不传默认为false
+   * <p>是否打开公网接入，不传默认为false</p>
    */
   EnablePublicAccess?: boolean
   /**
-   * 是否打开集群删除保护，不传默认为 false
+   * <p>是否打开集群删除保护，不传默认为 false</p>
    */
   EnableDeletionProtection?: boolean
+  /**
+   * <p>集群类型</p><p>枚举值：</p><ul><li>NORMAL： 公有云</li><li>CDC： 本地专用集群</li></ul>
+   */
+  ClusterType?: string
+  /**
+   * <p>CDC 集群 ID</p>
+   */
+  CdcClusterId?: string
 }
 
 /**
@@ -5784,23 +5799,23 @@ export type DescribeBindClustersRequest = null
  */
 export interface CreateRabbitMQVirtualHostRequest {
   /**
-   * 实例 ID，形如amqp-xxxxxxxx。有效的 InstanceId 可通过登录 [TDMQ RabbitMQ 控制台](https://console.cloud.tencent.com/trabbitmq/cluster?rid=1)查询。
+   * <p>实例 ID，形如amqp-xxxxxxxx。有效的 InstanceId 可通过登录 <a href="https://console.cloud.tencent.com/trabbitmq/cluster?rid=1">TDMQ RabbitMQ 控制台</a>查询。</p>
    */
   InstanceId: string
   /**
-   * vhost名
+   * <p>vhost名</p>
    */
   VirtualHost: string
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
   /**
-   * 消息轨迹开关,true打开,false关闭,默认关闭
+   * <p>消息轨迹开关,true打开,false关闭,默认关闭</p>
    */
   TraceFlag?: boolean
   /**
-   * 是否创建镜像队列策略，默认值 true
+   * <p>是否创建镜像队列策略，默认值 true。该参数对4.x集群不生效。</p>
    */
   MirrorQueuePolicyFlag?: boolean
 }
@@ -6375,7 +6390,7 @@ export interface RabbitMQUserQuota {
  */
 export interface CreateRabbitMQVirtualHostResponse {
   /**
-   * vhost名
+   * <p>vhost名</p>
    */
   VirtualHost?: string
   /**
@@ -10947,11 +10962,11 @@ export interface DeleteRabbitMQVirtualHostRequest {
  */
 export interface CreateRabbitMQVipInstanceResponse {
   /**
-   * 订单号 ID
+   * <p>订单号 ID</p>
    */
   TranId?: string
   /**
-   * 实例 ID
+   * <p>实例 ID</p>
    */
   InstanceId?: string
   /**

@@ -30807,496 +30807,503 @@ export interface DatabaseSchemaIInfo {
  */
 export interface TaskOpsDto {
   /**
-   * 任务ID
+   * <p>任务ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskId: string
   /**
-   * 虚拟任务id
+   * <p>虚拟任务id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VirtualTaskId: string
   /**
-   * 虚拟任务标记
+   * <p>虚拟任务标记</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VirtualFlag: boolean
   /**
-   * 任务名
+   * <p>任务名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskName: string
   /**
-   * 工作流id
+   * <p>工作流id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowId: string
   /**
-   * 任务为虚拟任务时，任务所在的真实工作流Id
+   * <p>任务为虚拟任务时，任务所在的真实工作流Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RealWorkflowId: string
   /**
-   * 工作流名称
+   * <p>工作流名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowName: string
   /**
-   * 文件夹id
+   * <p>文件夹id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FolderId: string
   /**
-   * 文件夹名字
+   * <p>文件夹名字</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FolderName: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime: string
   /**
-   * 最近更新时间
+   * <p>最近更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastUpdate: string
   /**
-   * 任务状态
+   * <p>任务状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status: string
   /**
-   * 责任人
+   * <p>责任人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InCharge: string
   /**
-   * 责任人用户id
+   * <p>责任人用户id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InChargeId: string
   /**
-   * 调度生效日期
+   * <p>调度生效日期</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartTime: string
   /**
-   * 调度结束日期
+   * <p>调度结束日期</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndTime: string
   /**
-   * 执行时间左闭区间
+   * <p>执行时间左闭区间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionStartTime: string
   /**
-   * 执行时间右闭区间
+   * <p>执行时间右闭区间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionEndTime: string
   /**
-   * 周期类型
+   * <p>周期类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleType: string
   /**
-   * 步长
+   * <p>步长</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleStep: number
   /**
-   * 调度cron表达式
+   * <p>调度cron表达式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CrontabExpression: string
   /**
-   * 延时执行时间，unit=分钟
+   * <p>延时执行时间，unit=分钟</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DelayTime: number
   /**
-   * 开始执行时间
+   * <p>开始执行时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartupTime: number
   /**
-   * 重试等待时间, unit=分钟
+   * <p>重试等待时间, unit=分钟</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RetryWait: number
   /**
-   * 是否可重试，1 代表可以重试
+   * <p>是否可重试，1 代表可以重试</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RetryAble: number
   /**
-   * 调度配置-弹性周期配置，小时/周/月/年调度才有，小时任务指定每天的0点3点4点跑，则为'0,3,4'
+   * <p>调度配置-弹性周期配置，小时/周/月/年调度才有，小时任务指定每天的0点3点4点跑，则为&#39;0,3,4&#39;</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskAction: string
   /**
-   * 运行次数限制
+   * <p>运行次数限制</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TryLimit: number
   /**
-   * 运行优先级
+   * <p>运行优先级</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RunPriority: number
   /**
-   * 任务类型
+   * <p>任务类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskType: TaskTypeOpsDto
   /**
-   * 指定的运行节点
+   * <p>指定的运行节点</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BrokerIp: string
   /**
-   * 集群name
+   * <p>集群name</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ClusterId: string
   /**
-   * 最小数据时间
+   * <p>最小数据时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MinDateTime: string
   /**
-   * 最大数据时间
+   * <p>最大数据时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxDateTime: string
   /**
-   * 运行耗时超时时间
+   * <p>运行耗时超时时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutionTTL: number
   /**
-   * 自依赖类型
+   * <p>自依赖类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SelfDepend: string
   /**
-   * 左侧坐标
+   * <p>左侧坐标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LeftCoordinate: number
   /**
-   * 顶部坐标
+   * <p>顶部坐标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopCoordinate: number
   /**
-   * 任务备注
+   * <p>任务备注</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Notes: string
   /**
-   * 任务初始化策略
+   * <p>任务初始化策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceInitStrategy: string
   /**
-   * 计算队列
+   * <p>计算队列</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   YarnQueue: string
   /**
-   * 最新调度提交时间
+   * <p>最新调度提交时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastSchedulerCommitTime: string
   /**
-   * 按cron表达式计算的任务开始执行时间
+   * <p>按cron表达式计算的任务开始执行时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NormalizedJobStartTime: string
   /**
-   * 调度计划描述
+   * <p>调度计划描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SchedulerDesc: string
   /**
-   * 计算资源组
+   * <p>计算资源组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceGroup: string
   /**
-   * 任务创建人
+   * <p>任务创建人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Creator: string
   /**
-   * 任务依赖类型 and、or
+   * <p>任务依赖类型 and、or</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependencyRel: string
   /**
-   * 任务工作流依赖 yes、no
+   * <p>任务工作流依赖 yes、no</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DependencyWorkflow: string
   /**
-   * 事件监听配置
+   * <p>事件监听配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventListenerConfig: string
   /**
-   * 事件驱动配置
+   * <p>事件驱动配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventPublisherConfig: string
   /**
-   * 虚拟任务状态
+   * <p>虚拟任务状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VirtualTaskStatus: string
   /**
-   * 任务依赖边详情
+   * <p>任务依赖边详情</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskLinkInfo: LinkOpsDto
   /**
-   * 任务产品类型
+   * <p>任务产品类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductName: string
   /**
-   * 项目id
+   * <p>项目id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId: string
   /**
-   * 项目标识
+   * <p>项目标识</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectIdent: string
   /**
-   * 项目名称
+   * <p>项目名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectName: string
   /**
-   * 主账户userId
+   * <p>主账户userId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnId: string
   /**
-   * 用户userId
+   * <p>用户userId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserId: string
   /**
-   * 租户id
+   * <p>租户id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TenantId: string
   /**
-   * 更新人昵称
+   * <p>更新人昵称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateUser: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime: string
   /**
-   * 更新人userId
+   * <p>更新人userId</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateUserId: string
   /**
-   * 任务类型id
+   * <p>任务类型id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskTypeId: number
   /**
-   * 任务类型描述
+   * <p>任务类型描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskTypeDesc: string
   /**
-   * 是否展示工作流
+   * <p>是否展示工作流</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ShowWorkflow: boolean
   /**
-   * 首次提交时间
+   * <p>首次提交时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FirstSubmitTime: string
   /**
-   * 首次运行时间
+   * <p>首次运行时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FirstRunTime: string
   /**
-   * 调度描述
+   * <p>调度描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleDesc: string
   /**
-   * 周期
+   * <p>周期</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleNum: number
   /**
-   * 表达式
+   * <p>表达式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Crontab: string
   /**
-   * 开始日期
+   * <p>开始日期</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StartDate: string
   /**
-   * 结束日期
+   * <p>结束日期</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EndDate: string
   /**
-   * 周期单位
+   * <p>周期单位</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CycleUnit: string
   /**
-   * 初始化策略
+   * <p>初始化策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InitStrategy: string
   /**
-   * 层级
+   * <p>层级</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Layer: string
   /**
-   * 来源数据源ID
+   * <p>来源数据源ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceServiceId: string
   /**
-   * 来源数据源类型
+   * <p>来源数据源类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SourceServiceType: string
   /**
-   * 目标数据源ID
+   * <p>目标数据源ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetServiceId: string
   /**
-   * 目标数据源类型
+   * <p>目标数据源类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetServiceType: string
   /**
-   * 子任务列表
+   * <p>子任务列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TasksStr: string
   /**
-   * 任务版本是否已提交
+   * <p>任务版本是否已提交</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Submit: boolean
   /**
-   * 资源组id
+   * <p>资源组id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorGroupId?: string
   /**
-   * 资源组名称
+   * <p>资源组名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExecutorGroupName?: string
   /**
-   * 任务扩展信息(目前返沪离线同步的任务详情)
+   * <p>任务扩展信息(目前返沪离线同步的任务详情)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskExtInfo?: string
   /**
-   * 任务绑定的事件信息
+   * <p>任务绑定的事件信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventListenerInfos?: Array<AiOpsEventListenerDTO>
   /**
-   * 脚本信息
+   * <p>脚本信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScriptInfo?: AiopsScriptInfo
   /**
-   * DLC资源配置
+   * <p>DLC资源配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DLCResourceConfig?: AiopsDLCResourceConfigDto
   /**
-   * 父任务simple信息
+   * <p>父任务simple信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentTaskInfos?: AiopsSimpleTaskDto
   /**
-   * 资源获取标识
+   * <p>资源获取标识</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtResourceFlag?: ExtResourceFlagDto
   /**
-   * 父任务simple信息(新)
+   * <p>父任务simple信息(新)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NewParentTaskInfos?: Array<AiopsSimpleTaskDto>
   /**
-   * 任务自依赖类型：
-yes： 任务需满足自依赖
-no：任务无需满足自依赖
+   * <p>任务自依赖类型：<br>yes： 任务需满足自依赖<br>no：任务无需满足自依赖</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SelfWorkFlowDependType?: string
   /**
-   * 允许重跑类型，ALL 表示无论实例运行成功还是失败都允许重跑，NONE表示无论成功或者失败都不允许重跑，FAILURE 表示只有运行失败才能重跑
+   * <p>允许重跑类型，ALL 表示无论实例运行成功还是失败都允许重跑，NONE表示无论成功或者失败都不允许重跑，FAILURE 表示只有运行失败才能重跑</p>
    */
   AllowRedoType?: string
   /**
-   * 负责人Id
+   * <p>负责人Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnerId?: string
   /**
-   * 当前用户对该任务的权限列表， 当前支持
-CAN_MANAGE : 有权限管理操作
+   * <p>当前用户对该任务的权限列表， 当前支持<br>CAN_MANAGE : 有权限管理操作</p>
    */
   Privileges?: Array<string>
   /**
-   * bundle客户端唯一id
+   * <p>bundle客户端唯一id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BundleId?: string
   /**
-   * bundle客户端信息
+   * <p>bundle客户端信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BundleInfo?: string
   /**
-   * 工作流类型
+   * <p>工作流类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WorkflowType?: string
   /**
-   * 任务扩展信息
+   * <p>任务扩展信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskExtDTO?: TaskExtOpsDto
   /**
-   * 任务时区
+   * <p>任务时区</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScheduleTimeZone?: string
+  /**
+   * <p>代理任务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProxyTaskId?: string
+  /**
+   * <p>代理任务类型ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProxyTaskTypeId?: number
 }
 
 /**

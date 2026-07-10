@@ -4151,11 +4151,11 @@ export interface CopyLiveAvatarRoomResponse {
  */
 export interface CreateAuditKeywordsRequest {
   /**
-   * 关键词列表。
+   * <p>关键词列表。</p>
    */
   Keywords: Array<AuditKeyword>
   /**
-   * 直播审核词库Id。
+   * <p>直播审核词库Id。</p>
    */
   LibId: string
 }
@@ -6297,13 +6297,17 @@ export interface CopyCasterRequest {
  */
 export interface CreateAuditKeywordsResponse {
   /**
-   * 添加成功的关键词 Id 列表。
+   * <p>添加成功的关键词 Id 列表。</p>
    */
   KeywordIds?: Array<string>
   /**
-   * 重复关键词列表。
+   * <p>重复关键词列表。</p>
    */
   DupInfos?: Array<AuditKeywordInfo>
+  /**
+   * <p>新增成功关键词列表</p>
+   */
+  Keywords?: Array<AuditKeywordInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -3334,7 +3334,12 @@ export interface IsolateDBInstanceRequest {
 /**
  * DescribeFlow请求参数结构体
  */
-export type DescribeFlowRequest = null
+export interface DescribeFlowRequest {
+  /**
+   * <p>流程ID</p>
+   */
+  FlowId: number
+}
 
 /**
  * ModifyDBSBackupSetComment返回参数结构体

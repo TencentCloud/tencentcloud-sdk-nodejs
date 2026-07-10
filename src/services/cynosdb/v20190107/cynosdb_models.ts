@@ -1994,13 +1994,17 @@ export interface DescribeInstanceParamsRequest {
  */
 export interface ModifyBinlogSaveDaysRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * Binlog保留天数
+   * <p>Binlog保留天数</p>
    */
   BinlogSaveDays: number
+  /**
+   * <p>跨地域备份保留时间</p><p>单位：天</p>
+   */
+  BinlogCrossRegionSaveDays?: number
 }
 
 /**
@@ -3168,11 +3172,11 @@ export interface DescribeAuditLogsRequest {
  */
 export interface InquirePriceCreateResponse {
   /**
-   * 实例价格
+   * <p>实例价格</p>
    */
   InstancePrice?: TradePrice
   /**
-   * 存储价格
+   * <p>存储价格</p>
    */
   StoragePrice?: TradePrice
   /**
@@ -4960,17 +4964,21 @@ export interface DescribeProxiesRequest {
  */
 export interface ModifySnapBackupCrossRegionConfigRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 是否开启跨地域快照备份ON/OFF
+   * <p>是否开启跨地域快照备份ON/OFF</p>
    */
   CrossRegionsEnable?: string
   /**
-   * 快照备份所跨地域
+   * <p>快照备份所跨地域</p>
    */
   CrossRegions?: Array<string>
+  /**
+   * <p>跨地域备份保留时间</p><p>单位：天</p>
+   */
+  CrossRegionSaveDays?: number
 }
 
 /**
@@ -7004,51 +7012,57 @@ export interface ModifyAccountPrivilegesResponse {
  */
 export interface InquirePriceCreateRequest {
   /**
-   * 可用区,每个地域提供最佳实践
+   * <p>可用区,每个地域提供最佳实践</p>
    */
   Zone: string
   /**
-   * 购买计算节点个数
+   * <p>购买计算节点个数</p>
    */
   GoodsNum: number
   /**
-   * 实例购买类型，可选值为：PREPAID, POSTPAID, SERVERLESS
+   * <p>实例购买类型，可选值为：PREPAID, POSTPAID, SERVERLESS</p>
    */
   InstancePayMode: string
   /**
-   * 存储购买类型，可选值为：PREPAID, POSTPAID
+   * <p>存储购买类型，可选值为：PREPAID, POSTPAID</p>
    */
   StoragePayMode: string
   /**
-   * 实例设备类型，支持值如下：
-- common：表示通用型
-- exclusive：表示独享型
+   * <p>实例设备类型，支持值如下：</p><ul><li>common：表示通用型</li><li>exclusive：表示独享型</li></ul>
    */
   DeviceType?: string
   /**
-   * CPU核数，PREPAID与POSTPAID实例类型必传
+   * <p>CPU核数，PREPAID与POSTPAID实例类型必传</p>
    */
   Cpu?: number
   /**
-   * 内存大小，单位G，PREPAID与POSTPAID实例类型必传
+   * <p>内存大小，单位G，PREPAID与POSTPAID实例类型必传</p>
    */
   Memory?: number
   /**
-   * Ccu大小，serverless类型必传
+   * <p>Ccu大小，serverless类型必传</p>
    */
   Ccu?: number
   /**
-   * 存储大小，PREPAID存储类型必传
+   * <p>存储大小，PREPAID存储类型必传</p>
    */
   StorageLimit?: number
   /**
-   * 购买时长，PREPAID购买类型必传
+   * <p>购买时长，PREPAID购买类型必传</p>
    */
   TimeSpan?: number
   /**
-   * 时长单位，可选值为：m,d。PREPAID购买类型必传
+   * <p>时长单位，可选值为：m,d。PREPAID购买类型必传</p>
    */
   TimeUnit?: string
+  /**
+   * <p>存储架构类型。 枚举值：1.0/2.0 默认值：1.0</p>
+   */
+  StorageVersion?: string
+  /**
+   * <p>存储是否跨AZ，2.0存储架构下有效</p>
+   */
+  IsMultiAz?: boolean
 }
 
 /**
@@ -7410,7 +7424,7 @@ export interface InstanceSet {
  */
 export interface ModifySnapBackupCrossRegionConfigResponse {
   /**
-   * 任务id
+   * <p>任务id</p>
    */
   TaskId?: number
   /**
@@ -9018,6 +9032,20 @@ export interface DescribeBinlogListByVaultItem {
    * <p>Binlog文件信息</p>
    */
   BinlogFileInfo?: BinlogItem
+}
+
+/**
+ * 各地域binlog保留信息
+ */
+export interface BinlogRegionInfo {
+  /**
+   * <p>备份地域</p>
+   */
+  BackupRegion?: string
+  /**
+   * <p>备份ID</p>
+   */
+  BackupId?: number
 }
 
 /**
@@ -10718,45 +10746,49 @@ export interface RollbackToNewClusterRequest {
  */
 export interface BinlogItem {
   /**
-   * Binlog文件名称
+   * <p>Binlog文件名称</p>
    */
   FileName?: string
   /**
-   * 文件大小，单位：字节
+   * <p>文件大小，单位：字节</p>
    */
   FileSize?: number
   /**
-   * 事务最早时间
+   * <p>事务最早时间</p>
    */
   StartTime?: string
   /**
-   * 事务最晚时间
+   * <p>事务最晚时间</p>
    */
   FinishTime?: string
   /**
-   * Binlog文件ID
+   * <p>Binlog文件ID</p>
    */
   BinlogId?: number
   /**
-   * binlog所跨地域
+   * <p>binlog所跨地域</p>
    */
   CrossRegions?: Array<string>
   /**
-   * 备份投递状态
+   * <p>备份投递状态</p>
    */
   CopyStatus?: string
   /**
-   * 保险箱信息
+   * <p>保险箱信息</p>
    */
   VaultInfos?: Array<VaultInfo>
   /**
-   * 加密秘钥key
+   * <p>加密秘钥key</p>
    */
   EncryptKeyId?: string
   /**
-   * 加密秘钥地域
+   * <p>加密秘钥地域</p>
    */
   EncryptRegion?: string
+  /**
+   * <p>备份的地域分布信息</p>
+   */
+  ExistRegions?: Array<BinlogRegionInfo>
 }
 
 /**
@@ -14782,20 +14814,24 @@ export interface ParamItemDetail {
  */
 export interface BinlogConfigInfo {
   /**
-   * binlog保留时间
+   * <p>binlog保留时间</p>
    */
   BinlogSaveDays: number
   /**
-   * binlog异地地域备份是否开启
+   * <p>binlog异地地域备份是否开启</p>
    */
   BinlogCrossRegionsEnable: string
   /**
-   * binlog异地地域
+   * <p>binlog异地地域</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BinlogCrossRegions?: Array<string>
   /**
-   * 保险箱信息
+   * <p>跨地域备份保留时间</p><p>单位：天</p>
+   */
+  BinlogCrossRegionSaveDays?: number
+  /**
+   * <p>保险箱信息</p>
    */
   AutoCopyVaults?: Array<CreateBackupVaultItem>
 }
@@ -14872,47 +14908,49 @@ export interface ModifyLibraDBForwardConfigRequest {
  */
 export interface BackupConfigInfo {
   /**
-   * 系统自动时间
+   * <p>系统自动时间</p>
    */
   BackupCustomAutoTime?: boolean
   /**
-   * 表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
+   * <p>表示全备开始时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200</p>
    */
   BackupTimeBeg?: number
   /**
-   * 表示全备结束时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200
+   * <p>表示全备结束时间，[0-24*3600]， 如0:00, 1:00, 2:00 分别为 0，3600， 7200</p>
    */
   BackupTimeEnd?: number
   /**
-   * 该参数目前不支持修改，无需填写。备份频率，长度为7的数组，分别对应周日到周六的备份方式，full-全量备份，increment-增量备份
+   * <p>该参数目前不支持修改，无需填写。备份频率，长度为7的数组，分别对应周日到周六的备份方式，full-全量备份，increment-增量备份</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BackupWeekDays?: Array<string>
   /**
-   * 间隔时间
+   * <p>间隔时间</p>
    */
   BackupIntervalTime?: number
   /**
-   * 表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600247=604800，最大为158112000
+   * <p>表示保留备份时长, 单位秒，超过该时间将被清理, 七天表示为3600247=604800，最大为158112000</p>
    */
   ReserveDuration?: number
   /**
-   * 跨地域备份开启
-yes-开启
-no-关闭
+   * <p>跨地域备份开启<br>yes-开启<br>no-关闭</p>
    */
   CrossRegionsEnable?: string
   /**
-   * 跨地域备份地域
+   * <p>跨地域备份地域</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CrossRegions?: Array<string>
   /**
-   * 自动数据备份触发策略，periodically:自动周期备份,frequent:高频备份
+   * <p>跨地域备份保留时间</p><p>单位：天</p>
+   */
+  CrossRegionSaveDays?: number
+  /**
+   * <p>自动数据备份触发策略，periodically:自动周期备份,frequent:高频备份</p>
    */
   BackupTriggerStrategy?: string
   /**
-   * 备份投递关系
+   * <p>备份投递关系</p>
    */
   AutoCopyVaults?: Array<CreateBackupVaultItem>
 }
@@ -16370,36 +16408,38 @@ export interface ClusterParamModifyLog {
  */
 export interface LogicBackupConfigInfo {
   /**
-   * 是否开启自动逻辑备份
+   * <p>是否开启自动逻辑备份</p>
    */
   LogicBackupEnable?: string
   /**
-   * 自动逻辑备份开始时间
+   * <p>自动逻辑备份开始时间</p>
    */
   LogicBackupTimeBeg?: number
   /**
-   * 自动逻辑备份结束时间
+   * <p>自动逻辑备份结束时间</p>
    */
   LogicBackupTimeEnd?: number
   /**
-   * 自动逻辑备份保留时间
-单位：秒
+   * <p>自动逻辑备份保留时间<br>单位：秒</p>
    */
   LogicReserveDuration?: number
   /**
-   * 是否开启跨地域逻辑备份
-可选值：ON/OFF
+   * <p>是否开启跨地域逻辑备份<br>可选值：ON/OFF</p>
    */
   LogicCrossRegionsEnable?: string
   /**
-   * 逻辑备份所跨地域
+   * <p>逻辑备份所跨地域</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LogicCrossRegions?: Array<string>
   /**
-   * 备份投递关系
+   * <p>备份投递关系</p>
    */
   AutoCopyVaults?: Array<CreateBackupVaultItem>
+  /**
+   * <p>天</p><p>单位：跨地域逻辑备份保留时间</p>
+   */
+  LogicCrossRegionSaveDays?: number
 }
 
 /**

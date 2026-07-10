@@ -70,12 +70,12 @@ export interface ModifyAlarmPolicyInfoRequest {
  */
 export interface AlarmPolicyTriggerTask {
   /**
-   * 触发任务类型 AS=弹性伸缩
+   * <p>触发任务类型 AS=弹性伸缩</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type: string
   /**
-   * 用 json 表示配置信息 {"Key1":"Value1","Key2":"Value2"}
+   * <p>用 json 表示配置信息 {&quot;Key1&quot;:&quot;Value1&quot;,&quot;Key2&quot;:&quot;Value2&quot;}</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TaskConfig: string
@@ -480,17 +480,17 @@ export interface CreatePrometheusMultiTenantInstancePostPayModeRequest {
  */
 export interface DescribePolicyConditionListResponseDeprecatingInfo {
   /**
-   * 是否隐藏
+   * <p>是否隐藏</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Hidden?: boolean
   /**
-   * 新视图名称
+   * <p>新视图名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NewViewNames?: Array<string>
   /**
-   * 描述
+   * <p>描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
@@ -709,35 +709,35 @@ export interface Label {
  */
 export interface ModifyConditionsTemplateRequestCondition {
   /**
-   * 统计周期
+   * <p>统计周期</p>
    */
   CalcPeriod: string
   /**
-   * 统计方式
+   * <p>统计方式</p>
    */
   CalcType: string
   /**
-   * 持续周期
+   * <p>持续周期</p>
    */
   ContinuePeriod: string
   /**
-   * 指标ID
+   * <p>指标ID</p>
    */
   MetricID: number
   /**
-   * 统计值
+   * <p>统计值</p>
    */
   CalcValue: string
   /**
-   * 告警通知周期
+   * <p>告警通知周期</p>
    */
   AlarmNotifyPeriod?: string
   /**
-   * 告警通知方式
+   * <p>告警通知方式</p>
    */
   AlarmNotifyType?: number
   /**
-   * 规则ID
+   * <p>规则ID</p>
    */
   RuleID?: number
 }
@@ -2026,15 +2026,15 @@ export interface MetricObjectMeaning {
  */
 export interface AlarmEvent {
   /**
-   * 事件名
+   * <p>事件名</p>
    */
   EventName: string
   /**
-   * 展示的事件名
+   * <p>展示的事件名</p>
    */
   Description: string
   /**
-   * 告警策略类型
+   * <p>告警策略类型</p>
    */
   Namespace: string
 }
@@ -2713,60 +2713,60 @@ export interface CreatePolicyGroupCondition {
  */
 export interface DescribePolicyGroupInfoReceiverInfo {
   /**
-   * 告警接收组id列表
+   * <p>告警接收组id列表</p>
    */
   ReceiverGroupList: Array<number | bigint>
   /**
-   * 告警接收人id列表
+   * <p>告警接收人id列表</p>
    */
   ReceiverUserList: Array<number | bigint>
   /**
-   * 告警时间段开始时间。范围[0,86400)，作为 UNIX 时间戳转成北京时间后去掉日期，例如7200表示"10:0:0"
+   * <p>告警时间段开始时间。范围[0,86400)，作为 UNIX 时间戳转成北京时间后去掉日期，例如7200表示&quot;10:0:0&quot;</p>
    */
   StartTime: number
   /**
-   * 告警时间段结束时间。含义同StartTime
+   * <p>告警时间段结束时间。含义同StartTime</p>
    */
   EndTime: number
   /**
-   * 接收类型。“group”(接收组)或“user”(接收人)
+   * <p>接收类型。“group”(接收组)或“user”(接收人)</p>
    */
   ReceiverType: string
   /**
-   * 告警通知方式。可选 "SMS","SITE","EMAIL","CALL","WECHAT"
+   * <p>告警通知方式。可选 &quot;SMS&quot;,&quot;SITE&quot;,&quot;EMAIL&quot;,&quot;CALL&quot;,&quot;WECHAT&quot;</p>
    */
   NotifyWay: Array<string>
   /**
-   * 电话告警接收者uid
+   * <p>电话告警接收者uid</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UidList: Array<number | bigint>
   /**
-   * 电话告警轮数
+   * <p>电话告警轮数</p>
    */
   RoundNumber: number
   /**
-   * 电话告警每轮间隔（秒）
+   * <p>电话告警每轮间隔（秒）</p>
    */
   RoundInterval: number
   /**
-   * 电话告警对个人间隔（秒）
+   * <p>电话告警对个人间隔（秒）</p>
    */
   PersonInterval: number
   /**
-   * 是否需要电话告警触达提示。0不需要，1需要
+   * <p>是否需要电话告警触达提示。0不需要，1需要</p>
    */
   NeedSendNotice: number
   /**
-   * 电话告警通知时机。可选"OCCUR"(告警时通知),"RECOVER"(恢复时通知)
+   * <p>电话告警通知时机。可选&quot;OCCUR&quot;(告警时通知),&quot;RECOVER&quot;(恢复时通知)</p>
    */
   SendFor: Array<string>
   /**
-   * 恢复通知方式。可选"SMS"
+   * <p>恢复通知方式。可选&quot;SMS&quot;</p>
    */
   RecoverNotify: Array<string>
   /**
-   * 告警发送语言
+   * <p>告警发送语言</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReceiveLanguage: string
@@ -3331,27 +3331,27 @@ export interface UpdateRecordingRuleRequest {
  */
 export interface DescribePolicyConditionListConfigManualCalcValue {
   /**
-   * 默认值
+   * <p>默认值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Default: string
   /**
-   * 固定值
+   * <p>固定值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Fixed: string
   /**
-   * 最大值
+   * <p>最大值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Max: string
   /**
-   * 最小值
+   * <p>最小值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Min: string
   /**
-   * 是否必须
+   * <p>是否必须</p>
    */
   Need: boolean
 }
@@ -3474,32 +3474,32 @@ export interface TagInstance {
  */
 export interface DescribePolicyConditionListConfigManual {
   /**
-   * 检测方式
+   * <p>检测方式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CalcType: DescribePolicyConditionListConfigManualCalcType
   /**
-   * 检测阈值
+   * <p>检测阈值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CalcValue: DescribePolicyConditionListConfigManualCalcValue
   /**
-   * 持续时间
+   * <p>持续时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ContinueTime: DescribePolicyConditionListConfigManualContinueTime
   /**
-   * 数据周期
+   * <p>数据周期</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Period: DescribePolicyConditionListConfigManualPeriod
   /**
-   * 持续周期个数
+   * <p>持续周期个数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PeriodNum: DescribePolicyConditionListConfigManualPeriodNum
   /**
-   * 聚合方式
+   * <p>聚合方式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StatType: DescribePolicyConditionListConfigManualStatType
@@ -3603,20 +3603,20 @@ export interface PrometheusTag {
  */
 export interface DescribePolicyConditionListMetric {
   /**
-   * 指标配置
+   * <p>指标配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConfigManual: DescribePolicyConditionListConfigManual
   /**
-   * 指标id
+   * <p>指标id</p>
    */
   MetricId: number
   /**
-   * 指标名称
+   * <p>指标名称</p>
    */
   MetricShowName: string
   /**
-   * 指标单位
+   * <p>指标单位</p>
    */
   MetricUnit: string
 }
@@ -3953,23 +3953,23 @@ export interface PrometheusZoneItem {
  */
 export interface DescribeAlarmSmsQuotaQuota {
   /**
-   * 配额类型
+   * <p>配额类型</p>
    */
   Type: string
   /**
-   * 配额名称
+   * <p>配额名称</p>
    */
   Name: string
   /**
-   * 免费配额剩余量
+   * <p>免费配额剩余量</p>
    */
   FreeLeft: number
   /**
-   * 付费配额剩余量
+   * <p>付费配额剩余量</p>
    */
   PurchaseLeft: number
   /**
-   * 已使用量
+   * <p>已使用量</p>
    */
   Used: number
 }
@@ -4238,17 +4238,17 @@ export interface ModifyPrometheusGlobalNotificationRequest {
  */
 export interface DescribePolicyConditionListConfigManualPeriod {
   /**
-   * 默认周期，单位：秒
+   * <p>默认周期，单位：秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Default: number
   /**
-   * 可选周期，单位：秒
+   * <p>可选周期，单位：秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Keys: Array<number | bigint>
   /**
-   * 是否必须
+   * <p>是否必须</p>
    */
   Need: boolean
 }
@@ -4808,65 +4808,65 @@ export interface ModifyPolicyGroupEventCondition {
  */
 export interface Metric {
   /**
-   * 告警策略类型
+   * <p>告警策略类型</p>
    */
   Namespace?: string
   /**
-   * 指标名
+   * <p>指标名</p>
    */
   MetricName?: string
   /**
-   * 指标展示名
+   * <p>指标展示名</p>
    */
   Description?: string
   /**
-   * 最小值
+   * <p>最小值</p>
    */
   Min?: number
   /**
-   * 最大值
+   * <p>最大值</p>
    */
   Max?: number
   /**
-   * 维度列表
+   * <p>维度列表</p>
    */
   Dimensions?: Array<string>
   /**
-   * 单位
+   * <p>单位</p>
    */
   Unit?: string
   /**
-   * 指标配置
+   * <p>指标配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MetricConfig?: MetricConfig
   /**
-   * 是否为高级指标。1是 0否
+   * <p>是否为高级指标。1是 0否</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsAdvanced?: number
   /**
-   * 高级指标是否开通。1是 0否
+   * <p>高级指标是否开通。1是 0否</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsOpen?: number
   /**
-   * 集成中心产品ID
+   * <p>集成中心产品ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductId?: number
   /**
-   * 匹配运算符
+   * <p>匹配运算符</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Operators?: Array<Operator>
   /**
-   * 指标触发
+   * <p>指标触发</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Periods?: Array<number | bigint>
   /**
-   * 是否延迟指标
+   * <p>是否延迟指标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsLatenessMetric?: number
@@ -5520,12 +5520,12 @@ export interface WriteDestination {
  */
 export interface DescribePolicyConditionListConfigManualCalcType {
   /**
-   * CalcType 取值
+   * <p>CalcType 取值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Keys: Array<number | bigint>
   /**
-   * 是否必须
+   * <p>是否必须</p>
    */
   Need: boolean
 }
@@ -5731,88 +5731,88 @@ export interface DeleteSSOAccountResponse {
  */
 export interface DescribePolicyGroupListGroup {
   /**
-   * 策略组id
+   * <p>策略组id</p>
    */
   GroupId: number
   /**
-   * 策略组名称
+   * <p>策略组名称</p>
    */
   GroupName: string
   /**
-   * 是否开启
+   * <p>是否开启</p>
    */
   IsOpen: boolean
   /**
-   * 策略视图名称
+   * <p>策略视图名称</p>
    */
   ViewName: string
   /**
-   * 最近编辑的用户uin
+   * <p>最近编辑的用户uin</p>
    */
   LastEditUin: string
   /**
-   * 最后修改时间
+   * <p>最后修改时间</p>
    */
   UpdateTime: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   InsertTime: number
   /**
-   * 策略组绑定的实例数
+   * <p>策略组绑定的实例数</p>
    */
   UseSum: number
   /**
-   * 策略组绑定的未屏蔽实例数
+   * <p>策略组绑定的未屏蔽实例数</p>
    */
   NoShieldedSum: number
   /**
-   * 是否为默认策略，0表示非默认策略，1表示默认策略
+   * <p>是否为默认策略，0表示非默认策略，1表示默认策略</p>
    */
   IsDefault: number
   /**
-   * 是否可以设置成默认策略
+   * <p>是否可以设置成默认策略</p>
    */
   CanSetDefault: boolean
   /**
-   * 父策略组id
+   * <p>父策略组id</p>
    */
   ParentGroupId: number
   /**
-   * 策略组备注
+   * <p>策略组备注</p>
    */
   Remark: string
   /**
-   * 策略组所属项目id
+   * <p>策略组所属项目id</p>
    */
   ProjectId: number
   /**
-   * 阈值规则列表
+   * <p>阈值规则列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Conditions: Array<DescribePolicyGroupInfoCondition>
   /**
-   * 产品事件规则列表
+   * <p>产品事件规则列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventConditions: Array<DescribePolicyGroupInfoEventCondition>
   /**
-   * 用户接收人列表
+   * <p>用户接收人列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReceiverInfos: Array<DescribePolicyGroupInfoReceiverInfo>
   /**
-   * 模板策略组
+   * <p>模板策略组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConditionsTemp: DescribePolicyGroupInfoConditionTpl
   /**
-   * 策略组绑定的实例组信息
+   * <p>策略组绑定的实例组信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceGroup: DescribePolicyGroupListGroupInstanceGroup
   /**
-   * 且或规则标识, 0表示或规则(任意一条规则满足阈值条件就告警), 1表示且规则(所有规则都满足阈值条件才告警)
+   * <p>且或规则标识, 0表示或规则(任意一条规则满足阈值条件就告警), 1表示且规则(所有规则都满足阈值条件才告警)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsUnionRule: number
@@ -6710,6 +6710,24 @@ export interface DeletePrometheusRecordRuleYamlResponse {
 }
 
 /**
+ * EnablePredefinedPolicies请求参数结构体
+ */
+export interface EnablePredefinedPoliciesRequest {
+  /**
+   * 预设配置id
+   */
+  PredefinedConfigID?: string
+  /**
+   * 云产品id
+   */
+  PredefinedGroupID?: string
+  /**
+   * 通知模板id
+   */
+  NoticeIDs?: Array<string>
+}
+
+/**
  * DescribeMetricData出参
  */
 export interface MetricDataPoint {
@@ -7318,6 +7336,16 @@ export interface DescribePrometheusInstancesOverviewResponse {
 }
 
 /**
+ * EnablePredefinedPolicies返回参数结构体
+ */
+export interface EnablePredefinedPoliciesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 对业务指标的单位及支持统计周期的描述
  */
 export interface MetricSet {
@@ -7426,50 +7454,50 @@ export interface RoutePrometheusDynamicAPIRequest {
  */
 export interface TemplateGroup {
   /**
-   * 指标告警规则
+   * <p>指标告警规则</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Conditions: Array<Condition>
   /**
-   * 事件告警规则
+   * <p>事件告警规则</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventConditions: Array<EventCondition>
   /**
-   * 关联告警策略组
+   * <p>关联告警策略组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyGroups: Array<PolicyGroup>
   /**
-   * 模板策略组ID
+   * <p>模板策略组ID</p>
    */
   GroupID: number
   /**
-   * 模板策略组名称
+   * <p>模板策略组名称</p>
    */
   GroupName: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   InsertTime: number
   /**
-   * 最后修改人UIN
+   * <p>最后修改人UIN</p>
    */
   LastEditUin: number
   /**
-   * 备注
+   * <p>备注</p>
    */
   Remark: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime: number
   /**
-   * 视图
+   * <p>视图</p>
    */
   ViewName: string
   /**
-   * 是否为与关系
+   * <p>是否为与关系</p>
    */
   IsUnionRule: number
 }
@@ -7569,12 +7597,12 @@ export interface CreateSSOAccountRequest {
  */
 export interface AlarmPolicyFilter {
   /**
-   * 过滤条件类型 DIMENSION=使用 Dimensions 做过滤
+   * <p>过滤条件类型 DIMENSION=使用 Dimensions 做过滤</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type: string
   /**
-   * AlarmPolicyDimension 二维数组序列化后的json字符串，一维数组之间互为或关系，一维数组内的元素互为与关系
+   * <p>AlarmPolicyDimension 二维数组序列化后的json字符串，一维数组之间互为或关系，一维数组内的元素互为与关系</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Dimensions?: string
@@ -8306,17 +8334,17 @@ export interface DescribeProductEventListEvents {
  */
 export interface DescribePolicyConditionListConfigManualPeriodNum {
   /**
-   * 默认周期数
+   * <p>默认周期数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Default: number
   /**
-   * 可选周期数
+   * <p>可选周期数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Keys: Array<number | bigint>
   /**
-   * 是否必须
+   * <p>是否必须</p>
    */
   Need: boolean
 }
@@ -9135,19 +9163,19 @@ export interface CreatePrometheusTempResponse {
  */
 export interface DescribePolicyConditionListEventMetric {
   /**
-   * 事件id
+   * <p>事件id</p>
    */
   EventId: number
   /**
-   * 事件名称
+   * <p>事件名称</p>
    */
   EventShowName: string
   /**
-   * 是否需要恢复
+   * <p>是否需要恢复</p>
    */
   NeedRecovered: boolean
   /**
-   * 事件类型，预留字段，当前固定取值为2
+   * <p>事件类型，预留字段，当前固定取值为2</p>
    */
   Type: number
 }
@@ -9439,63 +9467,63 @@ export interface GetMonitorDataResponse {
  */
 export interface ReceiverInfo {
   /**
-   * 告警时间段开始时间。范围[0,86400)，作为 UNIX 时间戳转成北京时间后去掉日期，例如7200表示"10:0:0"
+   * <p>告警时间段开始时间。范围[0,86400)，作为 UNIX 时间戳转成北京时间后去掉日期，例如7200表示&quot;10:0:0&quot;</p>
    */
   StartTime: number
   /**
-   * 告警时间段结束时间。含义同StartTime
+   * <p>告警时间段结束时间。含义同StartTime</p>
    */
   EndTime: number
   /**
-   * 告警通知方式。可选 "SMS","SITE","EMAIL","CALL","WECHAT"
+   * <p>告警通知方式。可选 &quot;SMS&quot;,&quot;SITE&quot;,&quot;EMAIL&quot;,&quot;CALL&quot;,&quot;WECHAT&quot;</p>
    */
   NotifyWay: Array<string>
   /**
-   * 接收人类型。“group” 或 “user”
+   * <p>接收人类型。“group” 或 “user”</p>
    */
   ReceiverType: string
   /**
-   * ReceiverId
+   * <p>ReceiverId</p>
    */
   Id?: number
   /**
-   * 电话告警通知时机。可选"OCCUR"(告警时通知),"RECOVER"(恢复时通知)
+   * <p>电话告警通知时机。可选&quot;OCCUR&quot;(告警时通知),&quot;RECOVER&quot;(恢复时通知)</p>
    */
   SendFor?: Array<string>
   /**
-   * 电话告警接收者 UID
+   * <p>电话告警接收者 UID</p>
    */
   UidList?: Array<number | bigint>
   /**
-   * 电话告警轮数
+   * <p>电话告警轮数</p>
    */
   RoundNumber?: number
   /**
-   * 电话告警对个人间隔（秒）
+   * <p>电话告警对个人间隔（秒）</p>
    */
   PersonInterval?: number
   /**
-   * 电话告警每轮间隔（秒）
+   * <p>电话告警每轮间隔（秒）</p>
    */
   RoundInterval?: number
   /**
-   * 恢复通知方式。可选"SMS"
+   * <p>恢复通知方式。可选&quot;SMS&quot;</p>
    */
   RecoverNotify?: Array<string>
   /**
-   * 是否需要电话告警触达提示。0不需要，1需要
+   * <p>是否需要电话告警触达提示。0不需要，1需要</p>
    */
   NeedSendNotice?: number
   /**
-   * 接收组列表。通过平台接口查询到的接收组 ID 列表
+   * <p>接收组列表。通过平台接口查询到的接收组 ID 列表</p>
    */
   ReceiverGroupList?: Array<number | bigint>
   /**
-   * 接收人列表。通过平台接口查询到的接收人 ID 列表
+   * <p>接收人列表。通过平台接口查询到的接收人 ID 列表</p>
    */
   ReceiverUserList?: Array<number | bigint>
   /**
-   * 告警接收语言，枚举值（zh-CN，en-US）
+   * <p>告警接收语言，枚举值（zh-CN，en-US）</p>
    */
   ReceiveLanguage?: string
 }
@@ -10126,29 +10154,29 @@ export interface DeleteAlarmPolicyRequest {
  */
 export interface EventCondition {
   /**
-   * 告警通知频率
+   * <p>告警通知频率</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmNotifyPeriod?: string
   /**
-   * 重复通知策略预定义（0 - 只告警一次， 1 - 指数告警，2 - 连接告警）
+   * <p>重复通知策略预定义（0 - 只告警一次， 1 - 指数告警，2 - 连接告警）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmNotifyType?: string
   /**
-   * 事件ID
+   * <p>事件ID</p>
    */
   EventID?: string
   /**
-   * 事件展示名称（对外）
+   * <p>事件展示名称（对外）</p>
    */
   EventDisplayName?: string
   /**
-   * 规则ID
+   * <p>规则ID</p>
    */
   RuleID?: string
   /**
-   * 指标名
+   * <p>指标名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MetricName?: string
@@ -10188,17 +10216,17 @@ export interface CreateAlertRuleResponse {
  */
 export interface DescribePolicyConditionListConfigManualContinueTime {
   /**
-   * 默认持续时间，单位：秒
+   * <p>默认持续时间，单位：秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Default: number
   /**
-   * 可选持续时间，单位：秒
+   * <p>可选持续时间，单位：秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Keys: Array<number | bigint>
   /**
-   * 是否必须
+   * <p>是否必须</p>
    */
   Need: boolean
 }
@@ -10236,51 +10264,51 @@ export interface MonitorTypeInfo {
  */
 export interface DimensionNew {
   /**
-   * 维度 key 标示，后台英文名
+   * <p>维度 key 标示，后台英文名</p>
    */
   Key: string
   /**
-   * 维度 key 名称，中英文前台展示名
+   * <p>维度 key 名称，中英文前台展示名</p>
    */
   Name: string
   /**
-   * 是否必选
+   * <p>是否必选</p>
    */
   IsRequired: boolean
   /**
-   * 支持的操作符列表
+   * <p>支持的操作符列表</p>
    */
   Operators: Array<Operator>
   /**
-   * 是否支持多选
+   * <p>是否支持多选</p>
    */
   IsMultiple: boolean
   /**
-   * 创建后是否可以修改
+   * <p>创建后是否可以修改</p>
    */
   IsMutable: boolean
   /**
-   * 是否展示给用户
+   * <p>是否展示给用户</p>
    */
   IsVisible: boolean
   /**
-   * 能否用来过滤策略列表
+   * <p>能否用来过滤策略列表</p>
    */
   CanFilterPolicy: boolean
   /**
-   * 能否用来过滤告警历史
+   * <p>能否用来过滤告警历史</p>
    */
   CanFilterHistory: boolean
   /**
-   * 能否作为聚合维度
+   * <p>能否作为聚合维度</p>
    */
   CanGroupBy: boolean
   /**
-   * 是否必须作为聚合维度
+   * <p>是否必须作为聚合维度</p>
    */
   MustGroupBy: boolean
   /**
-   * 前端翻译要替换的 key
+   * <p>前端翻译要替换的 key</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ShowValueReplace: string
@@ -10608,42 +10636,42 @@ cluster 集群级别
  */
 export interface DescribePolicyConditionListCondition {
   /**
-   * 策略视图名称
+   * <p>策略视图名称</p>
    */
   PolicyViewName: string
   /**
-   * 事件告警条件
+   * <p>事件告警条件</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventMetrics: Array<DescribePolicyConditionListEventMetric>
   /**
-   * 是否支持多地域
+   * <p>是否支持多地域</p>
    */
   IsSupportMultiRegion: boolean
   /**
-   * 指标告警条件
+   * <p>指标告警条件</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Metrics: Array<DescribePolicyConditionListMetric>
   /**
-   * 策略类型名称
+   * <p>策略类型名称</p>
    */
   Name: string
   /**
-   * 排序id
+   * <p>排序id</p>
    */
   SortId: number
   /**
-   * 是否支持默认策略
+   * <p>是否支持默认策略</p>
    */
   SupportDefault: boolean
   /**
-   * 支持该策略类型的地域列表
+   * <p>支持该策略类型的地域列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportRegions: Array<string>
   /**
-   * 弃用信息
+   * <p>弃用信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeprecatingInfo?: DescribePolicyConditionListResponseDeprecatingInfo
@@ -11332,111 +11360,111 @@ export interface CoverStaffInfo {
  */
 export interface DescribeBasicAlarmListAlarms {
   /**
-   * 该条告警的ID
+   * <p>该条告警的ID</p>
    */
   Id: number
   /**
-   * 项目ID
+   * <p>项目ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId: number
   /**
-   * 项目名称
+   * <p>项目名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectName: string
   /**
-   * 告警状态ID，0表示未恢复；1表示已恢复；2,3,5表示数据不足；4表示已失效
+   * <p>告警状态ID，0表示未恢复；1表示已恢复；2,3,5表示数据不足；4表示已失效</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status: number
   /**
-   * 告警状态，ALARM表示未恢复；OK表示已恢复；NO_DATA表示数据不足；NO_CONF表示已失效
+   * <p>告警状态，ALARM表示未恢复；OK表示已恢复；NO_DATA表示数据不足；NO_CONF表示已失效</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmStatus: string
   /**
-   * 策略组ID
+   * <p>策略组ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId: number
   /**
-   * 策略组名
+   * <p>策略组名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupName: string
   /**
-   * 发生时间
+   * <p>发生时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FirstOccurTime: string
   /**
-   * 持续时间，单位s
+   * <p>持续时间，单位s</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Duration: number
   /**
-   * 结束时间
+   * <p>结束时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastOccurTime: string
   /**
-   * 告警内容
+   * <p>告警内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Content: string
   /**
-   * 告警对象
+   * <p>告警对象</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjName: string
   /**
-   * 告警对象ID
+   * <p>告警对象ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjId: string
   /**
-   * 策略类型
+   * <p>策略类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ViewName: string
   /**
-   * VPC，只有CVM有
+   * <p>VPC，只有CVM有</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Vpc: string
   /**
-   * 指标ID
+   * <p>指标ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MetricId: number
   /**
-   * 指标名
+   * <p>指标名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MetricName: string
   /**
-   * 告警类型，0表示指标告警，2表示产品事件告警，3表示平台事件告警
+   * <p>告警类型，0表示指标告警，2表示产品事件告警，3表示平台事件告警</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlarmType: number
   /**
-   * 地域
+   * <p>地域</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region: string
   /**
-   * 告警对象维度信息
+   * <p>告警对象维度信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Dimensions: string
   /**
-   * 通知方式
+   * <p>通知方式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NotifyWay: Array<string>
   /**
-   * 所属实例组信息
+   * <p>所属实例组信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceGroup: Array<InstanceGroup>
@@ -11861,42 +11889,42 @@ export interface UpdateSSOAccountRequest {
  */
 export interface DescribePolicyConditionListConfigManualStatType {
   /**
-   * 数据聚合方式，周期5秒
+   * <p>数据聚合方式，周期5秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   P5: string
   /**
-   * 数据聚合方式，周期10秒
+   * <p>数据聚合方式，周期10秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   P10: string
   /**
-   * 数据聚合方式，周期1分钟
+   * <p>数据聚合方式，周期1分钟</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   P60: string
   /**
-   * 数据聚合方式，周期5分钟
+   * <p>数据聚合方式，周期5分钟</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   P300: string
   /**
-   * 数据聚合方式，周期10分钟
+   * <p>数据聚合方式，周期10分钟</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   P600: string
   /**
-   * 数据聚合方式，周期30分钟
+   * <p>数据聚合方式，周期30分钟</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   P1800: string
   /**
-   * 数据聚合方式，周期1小时
+   * <p>数据聚合方式，周期1小时</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   P3600: string
   /**
-   * 数据聚合方式，周期1天
+   * <p>数据聚合方式，周期1天</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   P86400: string

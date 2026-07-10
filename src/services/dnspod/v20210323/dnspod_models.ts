@@ -112,7 +112,7 @@ export interface DescribeDomainListRequest {
  */
 export interface CreateSubdomainValidateTXTValueRequest {
   /**
-   * 要添加的子域名 Zone 域。
+   * <p>要添加的子域名 Zone 域。</p>
    */
   DomainZone: string
 }
@@ -481,25 +481,35 @@ export interface DescribeDomainLogFilterFileRequest {
  */
 export interface DomainAnalyticsInfo {
   /**
-   * DATE:按天维度统计 HOUR:按小时维度统计
+   * <p>DATE:按天维度统计 HOUR:按小时维度统计</p>
+   * @deprecated
    */
-  DnsFormat: string
+  DnsFormat?: string
   /**
-   * 当前统计周期解析量总计
+   * <p>当前统计周期解析量总计</p>
+   * @deprecated
    */
-  DnsTotal: number
+  DnsTotal?: number
   /**
-   * 当前查询的域名
+   * <p>当前查询的域名</p>
    */
-  Domain: string
+  Domain?: string
   /**
-   * 当前统计周期开始时间
+   * <p>当前统计周期开始时间</p>
    */
-  StartDate: string
+  StartDate?: string
   /**
-   * 当前统计周期结束时间
+   * <p>当前统计周期结束时间</p>
    */
-  EndDate: string
+  EndDate?: string
+  /**
+   * <p>解析量数据格式</p><p>枚举值：</p><ul><li>DATE： 按天维度统计</li><li>HOUR： 按小时维度统计</li></ul>
+   */
+  DNSFormat?: string
+  /**
+   * <p>当前统计周期解析量总计</p>
+   */
+  DNSTotal?: number
 }
 
 /**
@@ -756,141 +766,151 @@ export interface SnapshotPageInfo {
  */
 export interface DomainInfo {
   /**
-   * 域名ID
+   * <p>域名ID</p>
    */
   DomainId?: number
   /**
-   * 域名状态，正常：ENABLE，暂停：PAUSE，封禁：SPAM
+   * <p>域名状态，正常：ENABLE，暂停：PAUSE，封禁：SPAM</p>
    */
   Status?: string
   /**
-   * 域名套餐等级
+   * <p>域名套餐等级</p>
    */
   Grade?: string
   /**
-   * 域名分组ID
+   * <p>域名分组ID</p>
    */
   GroupId?: number
   /**
-   * 是否星标域名
+   * <p>是否星标域名</p>
    */
   IsMark?: string
   /**
-   * TTL(DNS记录缓存时间)，单位：秒
+   * <p>TTL(DNS记录缓存时间)，单位：秒</p>
    */
   TTL?: number
   /**
-   * cname加速启用状态
+   * <p>CNAME加速启用状态</p>
+   * @deprecated
    */
   CnameSpeedup?: string
   /**
-   * 域名备注
+   * <p>域名备注</p>
    */
   Remark?: string
   /**
-   * 域名Punycode
+   * <p>域名Punycode</p>
    */
   Punycode?: string
   /**
-   * 域名DNS状态，错误：dnserror，正常：空字符串
+   * <p>域名DNS状态，错误：dnserror，正常：空字符串</p>
+   * @deprecated
    */
   DnsStatus?: string
   /**
-   * 域名的NS列表
+   * <p>域名的NS列表</p>
    */
   DnspodNsList?: Array<string>
   /**
-   * 域名
+   * <p>域名</p>
    */
   Domain?: string
   /**
-   * 域名等级代号
+   * <p>域名等级代号</p>
    */
   GradeLevel?: number
   /**
-   * 域名所属的用户ID
+   * <p>域名所属的用户ID</p>
    */
   UserId?: number
   /**
-   * 是否为付费域名
+   * <p>是否为付费域名</p>
    */
   IsVip?: string
   /**
-   * 域名所有者的账号
+   * <p>域名所有者的账号</p>
    */
   Owner?: string
   /**
-   * 域名等级的描述
+   * <p>域名等级的描述</p>
    */
   GradeTitle?: string
   /**
-   * 域名创建时间
+   * <p>域名创建时间</p>
    */
   CreatedOn?: string
   /**
-   * 最后操作时间
+   * <p>最后操作时间</p>
    */
   UpdatedOn?: string
   /**
-   * 腾讯云账户Uin
+   * <p>腾讯云账户Uin</p>
    */
   Uin?: string
   /**
-   * 域名实际使用的NS列表
+   * <p>域名实际使用的NS列表</p>
    */
   ActualNsList?: Array<string>
   /**
-   * 域名的记录数量
+   * <p>域名的记录数量</p>
    */
   RecordCount?: number
   /**
-   * 域名所有者的账户昵称
+   * <p>域名所有者的账户昵称</p>
    */
   OwnerNick?: string
   /**
-   * 是否在付费套餐宽限期
+   * <p>是否在付费套餐宽限期</p>
    */
   IsGracePeriod?: string
   /**
-   * 是否在付费套餐缓冲期
+   * <p>是否在付费套餐缓冲期</p>
    */
   VipBuffered?: string
   /**
-   * VIP套餐有效期开始时间
+   * <p>VIP套餐有效期开始时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VipStartAt?: string
   /**
-   * VIP套餐有效期结束时间
+   * <p>VIP套餐有效期结束时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VipEndAt?: string
   /**
-   * VIP套餐自动续费标识。可能的值为：default-默认；no-不自动续费；yes-自动续费
+   * <p>VIP套餐自动续费标识。可能的值为：default-默认；no-不自动续费；yes-自动续费</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VipAutoRenew?: string
   /**
-   * VIP套餐资源ID
+   * <p>VIP套餐资源ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VipResourceId?: string
   /**
-   * 是否是子域名。
+   * <p>是否是子域名。</p>
    */
   IsSubDomain?: boolean
   /**
-   * 域名关联的标签列表
+   * <p>域名关联的标签列表</p>
    */
   TagList?: Array<TagItem>
   /**
-   * 是否启用搜索引擎推送
+   * <p>是否启用搜索引擎推送</p>
    */
   SearchEnginePush?: string
   /**
-   * 是否开启辅助 DNS
+   * <p>是否开启辅助 DNS</p>
    */
   SlaveDNS?: string
+  /**
+   * <p>域名DNS状态，错误：dnserror，正常：空字符串</p>
+   */
+  DNSStatus?: string
+  /**
+   * <p>CNAME加速启用状态</p>
+   */
+  CNAMESpeedup?: string
 }
 
 /**
@@ -1587,15 +1607,15 @@ export interface ModifyDomainOwnerRequest {
  */
 export interface DescribeSubdomainAnalyticsResponse {
   /**
-   * 当前统计维度解析量小计
+   * <p>当前统计维度解析量小计</p>
    */
   Data?: Array<DomainAnalyticsDetail>
   /**
-   * 子域名解析量统计查询信息
+   * <p>子域名解析量统计查询信息</p>
    */
   Info?: SubdomainAnalyticsInfo
   /**
-   * 子域名别名解析量统计信息
+   * <p>子域名别名解析量统计信息</p>
    */
   AliasData?: Array<SubdomainAliasAnalyticsItem>
   /**
@@ -1870,29 +1890,44 @@ export interface CreateDealRequest {
  */
 export interface SubdomainAnalyticsInfo {
   /**
-   * DATE:按天维度统计 HOUR:按小时维度统计
+   * <p>DATE:按天维度统计 HOUR:按小时维度统计</p>
+   * @deprecated
    */
-  DnsFormat: string
+  DnsFormat?: string
   /**
-   * 当前统计周期解析量总计
+   * <p>当前统计周期解析量总计</p>
+   * @deprecated
    */
-  DnsTotal: number
+  DnsTotal?: number
   /**
-   * 当前查询的域名
+   * <p>当前查询的域名</p>
    */
-  Domain: string
+  Domain?: string
   /**
-   * 当前统计周期开始时间
+   * <p>当前统计周期开始时间</p>
    */
-  StartDate: string
+  StartDate?: string
   /**
-   * 当前统计周期结束时间
+   * <p>当前统计周期结束时间</p>
    */
-  EndDate: string
+  EndDate?: string
   /**
-   * 当前统计的子域名
+   * <p>当前统计的子域名</p>
+   * @deprecated
    */
-  Subdomain: string
+  Subdomain?: string
+  /**
+   * <p>解析量数据格式</p><p>枚举值：</p><ul><li>DATE： 按天维度统计</li><li>HOUR： 按小时维度统计</li></ul>
+   */
+  DNSFormat?: string
+  /**
+   * <p>当前统计周期解析量总计</p>
+   */
+  DNSTotal?: number
+  /**
+   * <p>当前统计的子域名</p>
+   */
+  SubDomain?: string
 }
 
 /**
@@ -2064,29 +2099,39 @@ export interface CreateDomainGroupResponse {
  */
 export interface DescribeSubdomainAnalyticsRequest {
   /**
-   * 要查询解析量的域名
+   * <p>要查询解析量的域名</p>
    */
   Domain: string
   /**
-   * 查询的开始时间，格式：YYYY-MM-DD
+   * <p>查询的开始时间，格式：YYYY-MM-DD</p>
    */
   StartDate: string
   /**
-   * 查询的结束时间，格式：YYYY-MM-DD
+   * <p>查询的结束时间，格式：YYYY-MM-DD</p>
    */
   EndDate: string
   /**
-   * 要查询解析量的子域名
-   */
-  Subdomain: string
-  /**
-   * DATE:按天维度统计 HOUR:按小时维度统计
+   * <p>DATE:按天维度统计 HOUR:按小时维度统计</p>
+   * @deprecated
    */
   DnsFormat?: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   * <p>域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId</p>
    */
   DomainId?: number
+  /**
+   * <p>要查询解析量的子域名</p>
+   * @deprecated
+   */
+  Subdomain?: string
+  /**
+   * <p>要查询解析量的子域名</p><p>新增规范参数，同时传递SubDomain和Subdomain参数时，后端优先使用SubDomain参数</p>
+   */
+  SubDomain?: string
+  /**
+   * <p>解析量数据格式</p><p>枚举值：</p><ul><li>DATE： 按天维度统计</li><li>HOUR： 按小时维度统计</li></ul><p>新增规范参数，同时传递DNSFormat和DnsFormat参数时，后端优先使用DNSFormat参数</p>
+   */
+  DNSFormat?: string
 }
 
 /**
@@ -2894,25 +2939,30 @@ export interface DomainCountInfo {
  */
 export interface CreateSubdomainValidateTXTValueResponse {
   /**
-   * 需要添加 TXT 记录的主域名。
+   * <p>需要添加 TXT 记录的主域名。</p>
    */
   Domain?: string
   /**
-   * 需要添加 TXT 记录的主机记录。
+   * <p>需要添加 TXT 记录的主机记录。</p>
+   * @deprecated
    */
   Subdomain?: string
   /**
-   * 需要添加记录类型。
+   * <p>需要添加记录类型。</p>
    */
   RecordType?: string
   /**
-   * 需要添加 TXT 记录的记录值。
+   * <p>需要添加 TXT 记录的记录值。</p>
    */
   Value?: string
   /**
-   * 需要添加 TXT 记录的上级域名(可选，主域名和上级域名任选一个添加即可)。
+   * <p>需要添加 TXT 记录的上级域名(可选，主域名和上级域名任选一个添加即可)。</p>
    */
   ParentDomain?: string
+  /**
+   * <p>需要添加 TXT 记录的主机记录。</p><p>新增规范参数，建议优先使用SubDomain参数</p>
+   */
+  SubDomain?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3679,23 +3729,23 @@ export interface BatchSearchDomainInfo {
  */
 export interface DescribeVasListRequest {
   /**
-   * 偏移量，默认值为0。
+   * <p>偏移量，默认值为0。</p>
    */
   Offset?: number
   /**
-   * 限制数量，默认值为20。
+   * <p>限制数量，默认值为20。</p>
    */
   Limit?: number
   /**
-   * 域名ID
+   * <p>域名ID</p>
    */
   DomainId?: number
   /**
-   * 使用资源 ID 列表查询
+   * <p>使用资源 ID 列表查询</p>
    */
   ResourceIdList?: Array<string>
   /**
-   * 增值服务类型
+   * <p>增值服务类型</p>
    */
   LimitType?: string
 }
@@ -3752,6 +3802,7 @@ export interface DescribeRecordListRequest {
   DomainId?: number
   /**
    * <p>解析记录的主机头，如果传了此参数，则只会返回此主机头对应的解析记录</p>
+   * @deprecated
    */
   Subdomain?: string
   /**
@@ -3791,9 +3842,13 @@ export interface DescribeRecordListRequest {
    */
   Limit?: number
   /**
-   * <p>查询不到数据时是否报错</p>枚举值：<ul><li> yes： 报错</li><li> no： 不报错，返回空列表</li></ul>默认值：yes
+   * <p>查询不到数据时是否报错</p><p>枚举值：</p><ul><li>yes： 报错</li><li>no： 不报错，返回空列表</li></ul><p>默认值：yes</p>
    */
   ErrorOnEmpty?: string
+  /**
+   * <p>解析记录的主机头，如果传了此参数，则只会返回此主机头对应的解析记录</p><p>新增规范参数，同时传递SubDomain和Subdomain参数时，后端优先使用SubDomain参数</p>
+   */
+  SubDomain?: string
 }
 
 /**
@@ -4123,15 +4178,15 @@ export interface DescribeSubdomainValidateStatusResponse {
  */
 export interface DescribeDomainAnalyticsResponse {
   /**
-   * 当前统计维度解析量小计
+   * <p>当前统计维度解析量小计</p>
    */
   Data?: Array<DomainAnalyticsDetail>
   /**
-   * 域名解析量统计查询信息
+   * <p>域名解析量统计查询信息</p>
    */
   Info?: DomainAnalyticsInfo
   /**
-   * 域名别名解析量统计信息
+   * <p>域名别名解析量统计信息</p>
    */
   AliasData?: Array<DomainAliasAnalyticsItem>
   /**
@@ -4517,13 +4572,18 @@ export interface DescribeRecordSnapshotRollbackResultResponse {
  */
 export interface DescribeVasListResponse {
   /**
-   * 符合筛选条件的套餐总数
+   * <p>符合筛选条件的套餐总数</p>
    */
   TotalCount?: number
   /**
-   * 增值服务信息列表
+   * <p>增值服务信息列表</p>
+   * @deprecated
    */
   VasList?: Array<VasListItem>
+  /**
+   * <p>增值服务信息列表</p>
+   */
+  VASList?: Array<VasListItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4553,25 +4613,30 @@ export interface ModifySnapshotConfigRequest {
  */
 export interface DescribeResolveCountRequest {
   /**
-   * 要查询解析量的域名
+   * <p>要查询解析量的域名</p>
    */
   Domain: string
   /**
-   * 查询的开始时间，格式：YYYY-MM-DD，最多允许查询最近32天的数据。
+   * <p>查询的开始时间，格式：YYYY-MM-DD，最多允许查询最近32天的数据。</p>
    */
   StartDate: string
   /**
-   * 查询的结束时间，格式：YYYY-MM-DD，最多允许查询最近32天的数据。
+   * <p>查询的结束时间，格式：YYYY-MM-DD，最多允许查询最近32天的数据。</p>
    */
   EndDate: string
   /**
-   * 数据统计格式，取值为minute、hour、day，分别表示按十分钟、小时、天统计数据
+   * <p>数据统计格式</p><p>枚举值：</p><ul><li>minute： 按十分钟维度统计数据</li><li>hour： 按小时维度统计数据</li><li>day： 按天维度统计数据</li></ul>
+   * @deprecated
    */
-  DnsFormat: string
+  DnsFormat?: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId
+   * <p>域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。可以通过接口DescribeDomainList查到所有的Domain以及DomainId</p>
    */
   DomainId?: number
+  /**
+   * <p>数据统计格式</p><p>枚举值：</p><ul><li>minute： 按十分钟维度统计数据</li><li>hour： 按小时维度统计数据</li><li>day： 按天维度统计数据</li></ul><p>新增规范参数，同时传递DNSFormat和DnsFormat参数时，后端优先使用DNSFormat参数</p>
+   */
+  DNSFormat?: string
 }
 
 /**
@@ -4691,37 +4756,42 @@ export interface SnapshotInfo {
  */
 export interface ModifyDynamicDNSRequest {
   /**
-   * 域名
+   * <p>域名</p>
    */
   Domain: string
   /**
-   * 记录ID。 可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId
+   * <p>记录ID。 可以通过接口DescribeRecordList查到所有的解析记录列表以及对应的RecordId</p>
    */
   RecordId: number
   /**
-   * 记录线路，中文，比如：默认。
+   * <p>记录线路，中文，比如：默认。</p>
    */
   RecordLine: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   * <p>域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。</p>
    */
   DomainId?: number
   /**
-   * 主机记录，如 www，如果不传，默认为 @。
+   * <p>主机记录，如 www，如果不传，默认为 @。</p>
    */
   SubDomain?: string
   /**
-   * 线路的 ID，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。
+   * <p>线路的 ID，英文字符串，比如：10=1。参数RecordLineId优先级高于RecordLine，如果同时传递二者，优先使用RecordLineId参数。</p>
    */
   RecordLineId?: string
   /**
-   * IP 地址，支持 IPv4、IPv6，例如 119.29.29.29 或者 2402:4e00::
+   * <p>IP 地址，支持 IPv4、IPv6，例如 119.29.29.29 或者 2402:4e00::</p>
    */
   Value?: string
   /**
-   * TTL值，如果不传，默认为域名的TTL值。
+   * <p>TTL值，如果不传，默认为域名的TTL值。</p>
+   * @deprecated
    */
   Ttl?: number
+  /**
+   * <p>TTL值，如果不传，默认为域名的TTL值。</p><p>新增规范参数，同时传递TTL和Ttl参数时，后端优先使用TTL参数</p>
+   */
+  TTL?: number
 }
 
 /**
@@ -5387,29 +5457,39 @@ export interface CreateDealResponse {
  */
 export interface ResolveCountInfo {
   /**
-   * 当前统计周期解析量总计
+   * <p>当前统计周期解析量总计</p>
+   * @deprecated
    */
   DnsTotal?: number
   /**
-   * 当前查询的域名
+   * <p>当前查询的域名</p>
    */
   Domain?: string
   /**
-   * 当前统计周期开始时间
+   * <p>当前统计周期开始时间</p>
    */
   StartDate?: string
   /**
-   * 当前统计周期结束时间
+   * <p>当前统计周期结束时间</p>
    */
   EndDate?: string
   /**
-   * 当前统计的子域名
+   * <p>当前统计的子域名</p>
    */
   SubDomain?: string
   /**
-   * 数据统计格式，取值为minute、hour、day，分别表示按十分钟、小时、天统计数据
+   * <p>数据统计格式，取值为minute、hour、day，分别表示按十分钟、小时、天统计数据</p>
+   * @deprecated
    */
   DnsFormat?: string
+  /**
+   * <p>当前统计周期解析量总计</p>
+   */
+  DNSTotal?: number
+  /**
+   * <p>数据统计格式，取值为minute、hour、day，分别表示按十分钟、小时、天统计数据</p>
+   */
+  DNSFormat?: string
 }
 
 /**
@@ -5524,15 +5604,15 @@ export interface WhoisInfo {
  */
 export interface DescribeResolveCountResponse {
   /**
-   * 解析量明细
+   * <p>解析量明细</p>
    */
   Data?: Array<ResolveCountDataItem>
   /**
-   * 解析量统计信息
+   * <p>解析量统计信息</p>
    */
   Info?: ResolveCountInfo
   /**
-   * 别名解析量明细
+   * <p>别名解析量明细</p>
    */
   AliasData?: Array<ResolveCountAliasItem>
   /**
@@ -5753,25 +5833,30 @@ export interface CreateDomainCustomLineResponse {
  */
 export interface DescribeDomainAnalyticsRequest {
   /**
-   * 要查询解析量的域名
+   * <p>要查询解析量的域名</p>
    */
   Domain: string
   /**
-   * 查询的开始时间，格式：YYYY-MM-DD
+   * <p>查询的开始时间，格式：YYYY-MM-DD</p>
    */
   StartDate: string
   /**
-   * 查询的结束时间，格式：YYYY-MM-DD
+   * <p>查询的结束时间，格式：YYYY-MM-DD</p>
    */
   EndDate: string
   /**
-   * DATE:按天维度统计 HOUR:按小时维度统计
+   * <p>DATE:按天维度统计 HOUR:按小时维度统计</p>
+   * @deprecated
    */
   DnsFormat?: string
   /**
-   * 域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。
+   * <p>域名 ID 。参数 DomainId 优先级比参数 Domain 高，如果传递参数 DomainId 将忽略参数 Domain 。</p>
    */
   DomainId?: number
+  /**
+   * <p>解析量数据格式</p><p>枚举值：</p><ul><li>DATE： 按天维度统计</li><li>HOUR： 按小时维度统计</li></ul><p>新增规范参数，同时传递DNSFormat和DnsFormat参数时，后端优先使用DNSFormat参数</p>
+   */
+  DNSFormat?: string
 }
 
 /**
@@ -5779,7 +5864,7 @@ export interface DescribeDomainAnalyticsRequest {
  */
 export interface ModifyDynamicDNSResponse {
   /**
-   * 记录ID
+   * <p>记录ID</p>
    */
   RecordId?: number
   /**

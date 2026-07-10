@@ -438,17 +438,21 @@ export interface DescribeGlobalAcceleratorsRequest {
  */
 export interface DescribeAccelerateAreasRequest {
   /**
-   * 全球加速实例ID。
+   * <p>全球加速实例ID。</p>
    */
   GlobalAcceleratorId: string
   /**
-   * 偏移量。
+   * <p>偏移量。默认为0。</p>
    */
   Offset?: number
   /**
-   * 符合条件实例数量。
+   * <p>符合条件实例数量。默认为20，最大200。</p>
    */
   Limit?: number
+  /**
+   * <p>过滤条件。 accelerate-region- String -（过滤条件）终端节点组地域。</p>
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1194,11 +1198,11 @@ export interface ListenerSet {
  */
 export interface DescribeAccelerateAreasResponse {
   /**
-   * 加速地域信息。
+   * <p>加速地域信息。</p>
    */
   AccelerateAreaSet?: Array<AcceleratorAreas>
   /**
-   * 实例个数。
+   * <p>实例个数。</p>
    */
   TotalCount?: number
   /**

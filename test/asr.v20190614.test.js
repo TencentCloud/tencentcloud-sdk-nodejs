@@ -88,6 +88,16 @@ it("asr.v20190614.GetAsrVocabList", async function () {
     }
 })
 
+it("asr.v20190614.VoicePrintGroupList", async function () {
+    try {
+       const data = await client.VoicePrintGroupList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("asr.v20190614.GetAsrVocab", async function () {
     try {
        const data = await client.GetAsrVocab({})

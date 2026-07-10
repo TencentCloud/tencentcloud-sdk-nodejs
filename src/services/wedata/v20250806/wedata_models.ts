@@ -13082,19 +13082,19 @@ export interface UpdateTriggerWorkflowPartiallyRequest {
  */
 export interface ListUpstreamOpsTasksRequest {
   /**
-   * 项目Id
+   * <p>项目Id</p>
    */
   ProjectId: string
   /**
-   * 任务Id
+   * <p>任务Id</p>
    */
   TaskId: string
   /**
-   * 分页页码
+   * <p>分页页码</p>
    */
   PageNumber?: string
   /**
-   * 分页大小
+   * <p>分页大小</p>
    */
   PageSize?: string
 }
@@ -14931,7 +14931,7 @@ export interface ParentDependencyConfigPage {
  */
 export interface ListUpstreamOpsTasksResponse {
   /**
-   * 上游任务详情
+   * <p>上游任务详情</p>
    */
   Data?: ParentDependencyConfigPage
   /**

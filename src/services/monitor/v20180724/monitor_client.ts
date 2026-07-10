@@ -297,6 +297,7 @@ import {
   PrometheusInstancesItem,
   DescribeConditionsTemplateListRequest,
   DeletePrometheusRecordRuleYamlResponse,
+  EnablePredefinedPoliciesRequest,
   MetricDataPoint,
   GetMonitorDataRequest,
   CreateRecordingRuleRequest,
@@ -329,6 +330,7 @@ import {
   CreatePrometheusClusterAgentRequest,
   ModifyAlarmPolicyConditionResponse,
   DescribePrometheusInstancesOverviewResponse,
+  EnablePredefinedPoliciesResponse,
   MetricSet,
   PrometheusInstanceGrantInfo,
   RoutePrometheusDynamicAPIRequest,
@@ -1951,6 +1953,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdatePrometheusAgentStatusResponse) => void
   ): Promise<UpdatePrometheusAgentStatusResponse> {
     return this.request("UpdatePrometheusAgentStatus", req, cb)
+  }
+
+  /**
+   * 一键启用（创建）某个云产品下的预设策略
+   */
+  async EnablePredefinedPolicies(
+    req: EnablePredefinedPoliciesRequest,
+    cb?: (error: string, rep: EnablePredefinedPoliciesResponse) => void
+  ): Promise<EnablePredefinedPoliciesResponse> {
+    return this.request("EnablePredefinedPolicies", req, cb)
   }
 
   /**

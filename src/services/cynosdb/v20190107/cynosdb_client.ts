@@ -362,6 +362,7 @@ import {
   DescribeVaultBackupClusterInfoRequest,
   DescribeRollbackTimeRangeResponse,
   DescribeBinlogListByVaultItem,
+  BinlogRegionInfo,
   DescribeClusterServerlessScalePlansRequest,
   DescribeAuditLogFilesResponse,
   SwitchClusterZoneResponse,

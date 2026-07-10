@@ -31,7 +31,7 @@ import {
   DescribeUserAutonomyProfileResponse,
   DescribeRedisTopHotKeysRequest,
   CreateDBDiagReportTaskRequest,
-  DescribeDBAuditLogTopSqlsResponse,
+  DescribeDBDiagReportContentRequest,
   TableSpaceTimeSeries,
   DescribeAuditLogFilesResponse,
   DescribeIndexRecommendAggregationSlowLogsRequest,
@@ -43,6 +43,7 @@ import {
   CreateSecurityAuditLogExportTaskRequest,
   DescribeTopSpaceTableTimeSeriesResponse,
   DescribeDBDiagEventResponse,
+  DescribeDBDiagHistoryRequest,
   DescribeDBAutonomyActionsResponse,
   DescribeSlowLogTopSqlsRequest,
   DescribeRedisBigKeyAnalysisTasksResponse,
@@ -105,7 +106,7 @@ import {
   MetricThreshold,
   CancelKillTaskRequest,
   InstanceID,
-  DescribeDBDiagHistoryRequest,
+  CreateIgnoreDiagRecordResponse,
   SlowLogInfoItem,
   CreateAuditLogFileResponse,
   AuditInstance,
@@ -195,7 +196,7 @@ import {
   RedisCmdInfo,
   DescribeAlarmTemplateResponse,
   DescribeTopSpaceSchemaTimeSeriesRequest,
-  DescribeDBDiagReportContentRequest,
+  DescribeDBAuditLogTopSqlsResponse,
   DescribeIndexRecommendAggregationSlowLogsResponse,
   DescribeDBDiagEventsResponse,
   DescribeMailProfileResponse,
@@ -209,6 +210,7 @@ import {
   ModifyAuditServiceResponse,
   DescribeDBAutonomyEventsRequest,
   DescribeHealthScoreRequest,
+  CreateIgnoreDiagRecordRequest,
   DeleteRedisBigKeyAnalysisTasksRequest,
   IssueTypeInfo,
   DescribeDiagDBInstancesResponse,
@@ -762,6 +764,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBPerfTimeSeriesResponse) => void
   ): Promise<DescribeDBPerfTimeSeriesResponse> {
     return this.request("DescribeDBPerfTimeSeries", req, cb)
+  }
+
+  /**
+   * 对实例的某个诊断项设置忽略或取消忽略状态。
+   */
+  async CreateIgnoreDiagRecord(
+    req: CreateIgnoreDiagRecordRequest,
+    cb?: (error: string, rep: CreateIgnoreDiagRecordResponse) => void
+  ): Promise<CreateIgnoreDiagRecordResponse> {
+    return this.request("CreateIgnoreDiagRecord", req, cb)
   }
 
   /**

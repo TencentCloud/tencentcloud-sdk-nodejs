@@ -2477,19 +2477,19 @@ export interface ModifyPortAclConfigResponse {
  */
 export interface DescribeBasicDeviceStatusRequest {
   /**
-   * IP 资源列表
+   * <p>IP 资源列表</p>
    */
   IpList?: Array<string>
   /**
-   * 域名化资源传id
+   * <p>域名化资源传id</p>
    */
   IdList?: Array<string>
   /**
-   * 地域名称
+   * <p>地域名称</p>
    */
   FilterRegion?: number
   /**
-   * cnameWaf资源
+   * <p>cnameWaf资源</p>
    */
   CnameWafIdList?: Array<string>
 }
@@ -2833,18 +2833,15 @@ export interface DescribeListDDoSGeoIPBlockConfigResponse {
  */
 export interface DescribeBasicDeviceStatusResponse {
   /**
-   * 返回资源及状态，状态码：
-1 - 封堵状态
-2 - 正常状态
-3 - 攻击状态
+   * <p>返回资源及状态，状态码：<br>1 - 封堵状态<br>2 - 正常状态<br>3 - 攻击状态</p>
    */
   Data?: Array<KeyValue>
   /**
-   * 域名化资产的名称
+   * <p>域名化资产的名称</p>
    */
   CLBData?: Array<KeyValue>
   /**
-   * cnamewaf资源状态
+   * <p>cnamewaf资源状态</p>
    */
   CnameWafData?: Array<KeyValue>
   /**

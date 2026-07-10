@@ -7319,16 +7319,11 @@ export interface DescribePublicAlgoVersionListRequest {
  */
 export interface StorageExtraConf {
   /**
-   * cfs的存储类型
-  // HP:通用性能型
-  // SD:通用标准型
-  // TP:turbo性能型
-  // TB:turbo标准型
-  // THP:吞吐型
+   * <p>cfs的存储类型<br>  // HP:通用性能型<br>  // SD:通用标准型<br>  // TP:turbo性能型<br>  // TB:turbo标准型<br>  // THP:吞吐型</p>
    */
   CFSStorageType?: string
   /**
-   * cfs的协议
+   * <p>cfs的协议</p>
    */
   CFSProtocol?: string
 }
