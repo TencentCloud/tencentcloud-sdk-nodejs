@@ -10604,6 +10604,10 @@ export interface CreateAigcVideoTaskRequest {
    */
   VideoInfos?: Array<AigcVideoReferenceVideoInfo>
   /**
+   * <p>部分模型支持参考音频传入，使用URL传入。</p>
+   */
+  AudioInfos?: Array<AigcVideoReferenceAudioInfo>
+  /**
    * <p>生成视频的时长。<br>注意：</p><ol><li>Kling，默认：5 秒。<ul><li>O1 支持 3-10 秒。</li><li>3.0-Omni 支持 3-15 秒，当使用视频参考时只支持 3-10 秒。</li><li>3.0 支持 3-15 秒。</li><li>其他版本支持 5、10 秒。</li></ul></li><li>Hailuo 的 std 模式可支持 6、10 秒，其他仅 6 秒。默认：6 秒。</li><li>Vidu，默认：5 秒。<ul><li>q3-pro、q3-turbo、q3、q3-mix 支持 3-16 秒。</li><li>q2-pro、q2-turbo、q2 支持 1-10 秒。 </li></ul></li><li>PixVerse，默认：5 秒。<ul><li>v5.6 支持 5、8、10 秒。</li><li>v6、c1 支持 1-15 秒。</li></ul></li><li>H2，支持 3-15 秒，默认 ：5 秒。</li></ol>
    */
   Duration?: number
@@ -19941,6 +19945,16 @@ export interface StreamUrlDetail {
    * Playback: 拉流播放地址； RelayDestination：转推目的地址；SourceCaptureUrl：回源拉流地址；IngestEndpoint：推流地址
    */
   Type?: string
+}
+
+/**
+ * 参考音频信息。
+ */
+export interface AigcVideoReferenceAudioInfo {
+  /**
+   * <p>参考音频URL信息。需外网可访问。</p>
+   */
+  AudioUrl?: string
 }
 
 /**

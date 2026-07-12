@@ -8211,19 +8211,24 @@ export interface LicenseUsageDataItem {
 }
 
 /**
- * 图片异步处理配置
+ * 图片异步处理配置。
  */
 export interface ProcessImageAsyncTask {
   /**
-   * 图片转码输出配置。
+   * <p>图片转码输出配置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EncodeConfig?: ImageEncodeConfig
   /**
-   * 图片增强配置。
+   * <p>图片增强配置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnhanceConfig?: ImageEnhanceConfig
+  /**
+   * <p>图片美颜配置。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BeautyConfig?: ImageBeautyConfig
 }
 
 /**
@@ -13529,6 +13534,32 @@ export interface ModifyJustInTimeTranscodeTemplateResponse {
 }
 
 /**
+ * 图片美颜效果项。
+ */
+export interface BeautyEffectItem {
+  /**
+   * <p>是否开启美颜。</p><p>枚举值：</p><ul><li>ON： 开</li><li>OFF： 关</li></ul>
+   */
+  Switch?: string
+  /**
+   * <p>美颜项。</p>
+   */
+  Type?: string
+  /**
+   * <p>美颜强度。</p>
+   */
+  Value?: number
+  /**
+   * <p>附加资源路径。</p>
+   */
+  ResourcePath?: string
+  /**
+   * <p>附加信息。</p>
+   */
+  ExtInfo?: string
+}
+
+/**
  * 图片智能内容识别任务输入
  */
 export interface ImageContentReviewInput {
@@ -14658,15 +14689,19 @@ export interface CreateAIRecognitionTemplateResponse {
  */
 export interface ProcessImageAsyncInput {
   /**
-   * 图片处理的FileId。
+   * <p>图片处理的FileId。</p>
    */
   FileId?: string
   /**
-   * 图片处理参数。
+   * <p>图片URL。</p>
+   */
+  Url?: string
+  /**
+   * <p>图片处理参数。</p>
    */
   ImageTaskInput?: ProcessImageAsyncTaskInput
   /**
-   * 图片处理任务的输出媒体文件配置。
+   * <p>图片处理任务的输出媒体文件配置。</p>
    */
   OutputConfig?: ProcessImageAsyncOutputConfig
 }
@@ -22514,6 +22549,20 @@ export interface DescribeReviewDetailsResponse {
 }
 
 /**
+ * 图片美颜配置。
+ */
+export interface ImageBeautyConfig {
+  /**
+   * <p>美颜效果项。</p>
+   */
+  BeautyEffectItems?: Array<BeautyEffectItem>
+  /**
+   * <p>美颜滤镜项。</p>
+   */
+  BeautyFilterItems?: Array<BeautyFilterItem>
+}
+
+/**
  * CreateTranscodeTemplate返回参数结构体
  */
 export interface CreateTranscodeTemplateResponse {
@@ -26514,6 +26563,24 @@ export interface ObjectConfigureInfo {
 默认值： All，同时使用默认物体库和用户自定义物体库。
    */
   ObjectLibrary?: string
+}
+
+/**
+ * 美颜滤镜项。
+ */
+export interface BeautyFilterItem {
+  /**
+   * <p>是否开启滤镜。</p><p>枚举值：</p><ul><li>ON： 开</li><li>OFF： 关</li></ul>
+   */
+  Switch?: string
+  /**
+   * <p>滤镜项。</p>
+   */
+  Type?: string
+  /**
+   * <p>滤镜强度。</p>
+   */
+  Value?: number
 }
 
 /**

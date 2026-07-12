@@ -212,6 +212,7 @@ import {
   IsolateInstanceResponse,
   CopyClusterPasswordComplexityResponse,
   DescribeClusterTransparentEncryptInfoRequest,
+  DescribeClusterLevelsRequest,
   DeleteVaultsResponse,
   MigrateOpt,
   GoodsSpec,
@@ -345,6 +346,7 @@ import {
   DisassociateSecurityGroupsResponse,
   DescribeClusterDatabasesRequest,
   OfflineLibraDBInstanceResponse,
+  RenewLibraDBClustersResponse,
   VaultInfo,
   RemoveClusterSlaveZoneRequest,
   ModifyResourcePackagesDeductionPriorityRequest,
@@ -554,7 +556,7 @@ import {
   ModifyInstanceUpgradeLimitDaysRequest,
   ModifyLibraDBClusterAccountHostRequest,
   CloseClusterPasswordComplexityRequest,
-  ModifyLibraDBClusterAccountDescriptionResponse,
+  DescribeClusterLevelsResponse,
   DescribeIsolatedInstancesRequest,
   ModifyAccountParamsRequest,
   ResetAccountPasswordRequest,
@@ -620,7 +622,7 @@ import {
   LibraDBClusterSet,
   DeleteClusterSaveBackupRequest,
   DescribeSlaveZonesRequest,
-  RenewLibraDBClustersResponse,
+  ModifyLibraDBClusterAccountDescriptionResponse,
   BillingResourceInfo,
   InstanceNameWeight,
   DescribeBackupDownloadRestrictionResponse,
@@ -963,6 +965,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CloseProxyResponse) => void
   ): Promise<CloseProxyResponse> {
     return this.request("CloseProxy", req, cb)
+  }
+
+  /**
+   * 查询可支持的集群类型列表
+   */
+  async DescribeClusterLevels(
+    req: DescribeClusterLevelsRequest,
+    cb?: (error: string, rep: DescribeClusterLevelsResponse) => void
+  ): Promise<DescribeClusterLevelsResponse> {
+    return this.request("DescribeClusterLevels", req, cb)
   }
 
   /**

@@ -807,6 +807,7 @@ import {
   UserDefineFaceReviewTemplateInfoForUpdate,
   DescribeInputRTMPSettings,
   StreamUrlDetail,
+  AigcVideoReferenceAudioInfo,
   DeleteProcessImageTemplateResponse,
   DescribeStreamLinkSecurityGroupsRequest,
   OcrFullTextConfigureInfoForUpdate,

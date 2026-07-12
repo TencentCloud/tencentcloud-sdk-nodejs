@@ -47,6 +47,14 @@ export interface ComputeDetail {
    * 内存
    */
   Memory?: string
+  /**
+   * 该套餐是否支持包年包月
+   */
+  PrepaidEnable?: boolean
+  /**
+   * 该套餐是否支持按量计费
+   */
+  PostpaidEnable?: boolean
 }
 
 /**
@@ -364,6 +372,26 @@ export interface ServiceDetail {
    *
    */
   TargetReplicas?: number
+  /**
+   * 计费类型：POSTPAID_BY_HOUR(按量)/PREPAID_BY_MONTH(包月)
+   */
+  ChargeType?: string
+  /**
+   * 到期时间(包月)，按量为空
+   */
+  ExpireTime?: string
+  /**
+   * 自动续费标识(包月)
+   */
+  RenewFlag?: string
+  /**
+   * 受限状态(如欠费隔离)
+   */
+  RestrictState?: string
+  /**
+   * 是否自定义部署：1是 0否
+   */
+  IsCustomDeploy?: number
 }
 
 /**
@@ -457,7 +485,7 @@ export interface DescribeRegionsResponse {
  */
 export interface DeleteServiceRequest {
   /**
-   * 服务ID
+   * <p>服务ID</p>
    */
   ServiceId: string
 }
@@ -586,6 +614,24 @@ export interface DeployInferServiceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 服务级包年包月入参
+ */
+export interface ServiceChargePrepaid {
+  /**
+   * <p>购买时长，默认1</p>
+   */
+  Period?: number
+  /**
+   * <p>时长单位：MONTH(月)/DAY(天)</p>
+   */
+  TimeUnit?: string
+  /**
+   * <p>自动续费：NOTIFY_AND_AUTO_RENEW/NOTIFY_AND_MANUAL_RENEW/DISABLE_NOTIFY_AND_MANUAL_RENEW</p>
+   */
+  RenewFlag?: string
 }
 
 /**
@@ -720,6 +766,10 @@ export interface DeployInferServiceRequest {
    * <p>安全类型</p><p>枚举值：</p><ul><li>STANDARD： 标准推理</li><li>CONFIDENTIAL： 可信推理</li></ul>
    */
   SecurityType?: string
+  /**
+   * <p>包年包月参数(包月时必填)</p>
+   */
+  ServiceChargePrepaid?: ServiceChargePrepaid
 }
 
 /**
@@ -764,6 +814,10 @@ export interface CreateInferServiceByTemplateRequest {
    * <p>推理服务安全类型</p><p>枚举值：</p><ul><li>STANDARD： 标准推理服务</li><li>CONFIDENTIAL： 可信推理服务</li></ul>
    */
   SecurityType?: string
+  /**
+   * <p>包年包月参数(ServiceChargeType为包月时必填)</p>
+   */
+  ServiceChargePrepaid?: ServiceChargePrepaid
 }
 
 /**

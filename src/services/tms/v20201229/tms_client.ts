@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  HitPosition,
   SentimentAnalysis,
   GetFinancialLLMTaskResultRequest,
   RiskDetails,
@@ -28,6 +29,7 @@ import {
   FinancialLLMViolationReason,
   CreateFinancialLLMTaskResponse,
   Tag,
+  HitSnippetInfo,
   CreateFinancialLLMTaskRequest,
   FinancialLLMViolationDetail,
   Device,

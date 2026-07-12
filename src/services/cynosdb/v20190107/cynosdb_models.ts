@@ -5266,6 +5266,16 @@ export interface DescribeClusterTransparentEncryptInfoRequest {
 }
 
 /**
+ * DescribeClusterLevels请求参数结构体
+ */
+export interface DescribeClusterLevelsRequest {
+  /**
+   * 可用区
+   */
+  Zone: string
+}
+
+/**
  * DeleteVaults返回参数结构体
  */
 export interface DeleteVaultsResponse {
@@ -8695,6 +8705,36 @@ export interface OfflineLibraDBInstanceResponse {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FlowId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RenewLibraDBClusters返回参数结构体
+ */
+export interface RenewLibraDBClustersResponse {
+  /**
+   * 预付费总订单号
+   */
+  BigDealIds?: Array<string>
+  /**
+   * 冻结流水
+   */
+  TranId?: string
+  /**
+   * 订单名称
+   */
+  DealNames?: Array<string>
+  /**
+   * 资源id
+   */
+  ResourceIds?: Array<string>
+  /**
+   * 集群id
+   */
+  ClusterIds?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -14067,9 +14107,13 @@ export interface CloseClusterPasswordComplexityRequest {
 }
 
 /**
- * ModifyLibraDBClusterAccountDescription返回参数结构体
+ * DescribeClusterLevels返回参数结构体
  */
-export interface ModifyLibraDBClusterAccountDescriptionResponse {
+export interface DescribeClusterLevelsResponse {
+  /**
+   * 集群类型列表
+   */
+  LevelList?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15735,29 +15779,9 @@ export interface DescribeSlaveZonesRequest {
 }
 
 /**
- * RenewLibraDBClusters返回参数结构体
+ * ModifyLibraDBClusterAccountDescription返回参数结构体
  */
-export interface RenewLibraDBClustersResponse {
-  /**
-   * 预付费总订单号
-   */
-  BigDealIds?: Array<string>
-  /**
-   * 冻结流水
-   */
-  TranId?: string
-  /**
-   * 订单名称
-   */
-  DealNames?: Array<string>
-  /**
-   * 资源id
-   */
-  ResourceIds?: Array<string>
-  /**
-   * 集群id
-   */
-  ClusterIds?: Array<string>
+export interface ModifyLibraDBClusterAccountDescriptionResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

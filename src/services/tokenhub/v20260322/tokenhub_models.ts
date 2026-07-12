@@ -94,15 +94,15 @@ export interface TokenPlanApiKeyListItem {
  */
 export interface BindingItem {
   /**
-   * 资源 ID（模型 ID 或服务 ID）。
+   * <p>资源 ID（模型 ID 或服务 ID）。</p>
    */
   ResourceId: string
   /**
-   * 资源类型。取值：endpoint（服务）、model（模型）。
+   * <p>资源类型。取值：endpoint（推理服务）、model（模型）。推荐绑定endpoint，绑定model即将下线。已绑定model的apikey仍可使用，但控制台回显将不会展示模型绑定列表。</p><p>枚举值：</p><ul><li>endpoint： 绑定到endpoint（默认推理服务或自定义推理服务）</li></ul>
    */
   ResourceType: string
   /**
-   * 资源状态
+   * <p>资源状态</p>
    */
   Status?: string
 }
@@ -133,6 +133,24 @@ export interface DescribeTokenPlanApiKeyListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Token 限额期望状态
+ */
+export interface QuotasDesired {
+  /**
+   * <p>限额周期，必填。取值：d（按日）、m（按月）、lifetime（总额度）。</p>
+   */
+  CycleUnit: string
+  /**
+   * <p>单周期额度（Token 数），必填，不能大于10万亿。使用字符串避免大数精度丢失。同维度若与现网不同视为升配/降配。</p>
+   */
+  CycleCredits: string
+  /**
+   * <p>月度限额起始日。CycleUnit=m 时可选，1~31，默认 1。小月（如 2 月）由下游自动取该月最后一天。已有月度限额包时，更新月起始日视为周期窗口切换，会 delete 旧包后 add 新包，累计额度会重置</p>
+   */
+  MonthStartDay?: number
 }
 
 /**
@@ -357,6 +375,24 @@ export interface GlossaryEntryItem {
    * 更新时间。Unix 时间戳（毫秒）。
    */
   UpdatedAt?: number
+}
+
+/**
+ * Token 限额配置项（创建 API 密钥时用）
+ */
+export interface QuotaCreateItem {
+  /**
+   * <p>限额周期。取值：d（按日）、m（按月）、lifetime（总额度，不重置）。</p>
+   */
+  CycleUnit: string
+  /**
+   * <p>维度当期限额总量（Token 数），不能大于10万亿。使用字符串避免大数精度丢失。</p>
+   */
+  CycleCredits: string
+  /**
+   * <p>月度限额起始日。CycleUnit 为 m 时可选，1~31，默认 1。小月（如 2 月）由下游自动取该月最后一天。</p>
+   */
+  MonthStartDay?: number
 }
 
 /**
@@ -978,7 +1014,16 @@ export interface SubPackageBalance {
 /**
  * DeleteApiKey请求参数结构体
  */
-export type DeleteApiKeyRequest = null
+export interface DeleteApiKeyRequest {
+  /**
+   * <p>API 密钥 ID。</p>
+   */
+  ApiKeyId: string
+  /**
+   * <p>平台类型。取值：maas。</p>
+   */
+  Platform: string
+}
 
 /**
  * UpgradeTokenPlanTeamOrder返回参数结构体
@@ -1273,7 +1318,20 @@ export interface ModelChargingInfo {
 /**
  * ModifyApiKeyStatus请求参数结构体
  */
-export type ModifyApiKeyStatusRequest = null
+export interface ModifyApiKeyStatusRequest {
+  /**
+   * <p>API 密钥 ID。</p>
+   */
+  ApiKeyId: string
+  /**
+   * <p>平台类型。取值：maas。</p>
+   */
+  Platform: string
+  /**
+   * <p>状态。取值：enable（启用）、disable（禁用）。</p>
+   */
+  Status: string
+}
 
 /**
  * DescribeTokenPlan请求参数结构体
@@ -1490,7 +1548,32 @@ export interface DescribeTokenPlanApiKeyUsageDetailResponse {
 /**
  * ModifyApiKeyInfo请求参数结构体
  */
-export type ModifyApiKeyInfoRequest = null
+export interface ModifyApiKeyInfoRequest {
+  /**
+   * <p>API 密钥 ID。</p>
+   */
+  ApiKeyId: string
+  /**
+   * <p>平台类型。取值：maas。</p>
+   */
+  Platform: string
+  /**
+   * <p>API 密钥名称。最大 128 字符。不传表示不修改。</p>
+   */
+  ApiKeyName?: string
+  /**
+   * <p>备注。</p>
+   */
+  Remark?: string
+  /**
+   * <p>IP 白名单列表。支持 IPv4（如 1.2.3.4）、CIDR（如 10.0.0.0/24）格式，IPv6暂不支持。最多 50 个，不支持重复。传入空数组表示清空白名单（不限制 IP）。不传表示不修改。</p>
+   */
+  IpWhitelist?: Array<string>
+  /**
+   * <p>【修改限额推荐使用QuotaDesired参数】Token 限额期望状态。可选，不传表示不修改，传入空数组表示清空。和 Quotas（Token限额配置）字段互斥，不支持同时传入</p>
+   */
+  QuotasDesired?: Array<QuotasDesired>
+}
 
 /**
  * Token Plan 套餐列表项
@@ -1672,6 +1755,10 @@ export interface BatchCreateFailedItem {
  * CreateApiKey返回参数结构体
  */
 export interface CreateApiKeyResponse {
+  /**
+   * <p>apikey id</p>
+   */
+  ApiKeyId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2169,4 +2256,37 @@ export interface RequestSort {
 /**
  * CreateApiKey请求参数结构体
  */
-export type CreateApiKeyRequest = null
+export interface CreateApiKeyRequest {
+  /**
+   * <p>API 密钥名称，创建后不可修改。</p>
+   */
+  ApiKeyName: string
+  /**
+   * <p>平台类型。取值：maas</p>
+   */
+  Platform: string
+  /**
+   * <p>绑定类型。取值：all（全部模型和接入点）、model_custom_endpoint_custom（自定义模型+自定义接入点）。</p><p>枚举值：</p><ul><li>all： 全部模型和接入点</li><li>model_custom_endpoint_custom： 自定义模型+自定义接入点</li></ul>
+   */
+  BindType: string
+  /**
+   * <p>备注信息</p>
+   */
+  Remark?: string
+  /**
+   * <p>初始状态。取值：enable（启用）、disable（禁用）。不传默认 enable。</p>
+   */
+  Status?: string
+  /**
+   * <p>资源绑定列表（model 和 endpoint 混合），每项需显式指定 ResourceType。BindType 为 all 时不填；BindType 为model_custom_endpoint_custom时必填。</p>
+   */
+  Bindings?: Array<BindingItem>
+  /**
+   * <p>IP 白名单列表。支持 IPv4（如 1.2.3.4）和 CIDR（如 10.0.0.0/24）格式，IPv6暂不支持。最多 50 个条目，不支持重复。不传或传空数组表示不限制 IP。</p>
+   */
+  IpWhitelist?: Array<string>
+  /**
+   * <p>Token 限额配置多维度列表。可选，不传表示不开启限额。</p>
+   */
+  Quotas?: Array<QuotaCreateItem>
+}

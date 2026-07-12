@@ -16,6 +16,34 @@
  */
 
 /**
+ * 灰度命中规则
+ */
+export interface BetaLabel {
+  /**
+   * <p>键</p>
+   */
+  Key?: string
+  /**
+   * <p>值</p>
+   */
+  Value?: BetaLabelMatchString
+}
+
+/**
+ * CreateConfigFileGroup请求参数结构体
+ */
+export interface CreateConfigFileGroupRequest {
+  /**
+   * tse 实例 id
+   */
+  InstanceId: string
+  /**
+   * 配置文件组实体
+   */
+  ConfigFileGroup: ConfigFileGroup
+}
+
+/**
  * DescribeNacosReplicas请求参数结构体
  */
 export interface DescribeNacosReplicasRequest {
@@ -31,20 +59,6 @@ export interface DescribeNacosReplicasRequest {
    * 副本列表Offset
    */
   Offset?: number
-}
-
-/**
- * CreateConfigFileGroup请求参数结构体
- */
-export interface CreateConfigFileGroupRequest {
-  /**
-   * tse 实例 id
-   */
-  InstanceId: string
-  /**
-   * 配置文件组实体
-   */
-  ConfigFileGroup: ConfigFileGroup
 }
 
 /**
@@ -2964,45 +2978,17 @@ export interface AutoScalerRules {
 }
 
 /**
- * 服务契约接口定义
+ * CreateWafDomains请求参数结构体
  */
-export interface GovernanceInterfaceDescription {
+export interface CreateWafDomainsRequest {
   /**
-   * 契约接口ID
+   * 网关ID
    */
-  ID?: string
+  GatewayId: string
   /**
-   * 方法名称
+   * WAF 防护域名列表
    */
-  Method?: string
-  /**
-   * 路径/接口名称
-   */
-  Path?: string
-  /**
-   * 内容
-   */
-  Content?: string
-  /**
-   * 创建来源
-   */
-  Source?: string
-  /**
-   * 信息摘要
-   */
-  Revision?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 修改时间
-   */
-  ModifyTime?: string
-  /**
-   * 接口名称
-   */
-  Name?: string
+  Domains: Array<string>
 }
 
 /**
@@ -4067,17 +4053,45 @@ export interface UpdateUpstreamTargetsResponse {
 }
 
 /**
- * CreateWafDomains请求参数结构体
+ * 服务契约接口定义
  */
-export interface CreateWafDomainsRequest {
+export interface GovernanceInterfaceDescription {
   /**
-   * 网关ID
+   * 契约接口ID
    */
-  GatewayId: string
+  ID?: string
   /**
-   * WAF 防护域名列表
+   * 方法名称
    */
-  Domains: Array<string>
+  Method?: string
+  /**
+   * 路径/接口名称
+   */
+  Path?: string
+  /**
+   * 内容
+   */
+  Content?: string
+  /**
+   * 创建来源
+   */
+  Source?: string
+  /**
+   * 信息摘要
+   */
+  Revision?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 修改时间
+   */
+  ModifyTime?: string
+  /**
+   * 接口名称
+   */
+  Name?: string
 }
 
 /**
@@ -4433,81 +4447,89 @@ export interface DefaultKongRoute {
  */
 export interface ConfigFileRelease {
   /**
-   * 配置文件发布id
+   * <p>配置文件发布id</p>
    */
   Id?: number
   /**
-   * 配置文件发布名称
+   * <p>配置文件发布名称</p>
    */
   Name?: string
   /**
-   * 配置文件发布命名空间
+   * <p>配置文件发布命名空间</p>
    */
   Namespace?: string
   /**
-   * 配置文件发布组
+   * <p>配置文件发布组</p>
    */
   Group?: string
   /**
-   * 配置文件发布文件名称
+   * <p>配置文件发布文件名称</p>
    */
   FileName?: string
   /**
-   * 配置文件发布内容
+   * <p>配置文件发布内容</p>
    */
   Content?: string
   /**
-   * 配置文件发布注释
+   * <p>配置文件发布注释</p>
    */
   Comment?: string
   /**
-   * 配置文件发布Md5
+   * <p>配置文件发布Md5</p>
    */
   Md5?: string
   /**
-   * 配置文件发布版本
+   * <p>配置文件发布版本</p>
    */
   Version?: number
   /**
-   * 配置文件发布创建时间
+   * <p>配置文件发布创建时间</p>
    */
   CreateTime?: string
   /**
-   * 配置文件发布创建者
+   * <p>配置文件发布创建者</p>
    */
   CreateBy?: string
   /**
-   * 配置文件发布修改时间
+   * <p>配置文件发布修改时间</p>
    */
   ModifyTime?: string
   /**
-   * 配置文件发布修改者
+   * <p>配置文件发布修改者</p>
    */
   ModifyBy?: string
   /**
-   * 发布描述
+   * <p>发布描述</p>
    */
   ReleaseDescription?: string
   /**
-   * 是否生效
+   * <p>是否生效</p>
    */
   Active?: boolean
   /**
-   * 格式
+   * <p>格式</p>
    */
   Format?: string
   /**
-   * 配置文件ID
+   * <p>配置文件ID</p>
    */
   ConfigFileId?: string
   /**
-   * 配置文件类型
+   * <p>配置文件类型</p>
    */
   ConfigFileSupportedClient?: number
   /**
-   * 配置文件持久化
+   * <p>配置文件持久化</p>
    */
   ConfigFilePersistent?: ConfigFilePersistent
+  /**
+   * <p>灰度标签</p>
+   */
+  BetaLabels?: Array<BetaLabel>
+  /**
+   * <p>发布类型</p><p>枚举值：</p><ul><li>gary： 灰度发布</li></ul>
+   */
+  ReleaseType?: string
 }
 
 /**
@@ -5548,6 +5570,24 @@ export interface ArgumentValue {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ValueType: string
+}
+
+/**
+ * 命中匹配方式与值
+ */
+export interface BetaLabelMatchString {
+  /**
+   * <p>类型</p><p>枚举值：</p><ul><li>EXAT： 精确匹配</li></ul>
+   */
+  Type?: string
+  /**
+   * <p>值</p>
+   */
+  Value?: string
+  /**
+   * <p>值类型</p><p>枚举值：</p><ul><li>TEXT： 文本</li></ul>
+   */
+  ValueType?: string
 }
 
 /**

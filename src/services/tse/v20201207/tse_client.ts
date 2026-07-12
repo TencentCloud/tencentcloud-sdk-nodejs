@@ -18,8 +18,9 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  DescribeNacosReplicasRequest,
+  BetaLabel,
   CreateConfigFileGroupRequest,
+  DescribeNacosReplicasRequest,
   DeleteWafDomainsRequest,
   DescribeCloudNativeAPIGatewayNodesRequest,
   GovernanceAlias,
@@ -128,7 +129,7 @@ import {
   DescribeSREInstancesResponse,
   DescribeCloudNativeAPIGatewayConsumerGroupResponse,
   AutoScalerRules,
-  GovernanceInterfaceDescription,
+  CreateWafDomainsRequest,
   CreateCloudNativeAPIGatewayServiceRateLimitRequest,
   ModifyNativeGatewayServerGroupRequest,
   AIGWForwardDesensitizeConfig,
@@ -179,7 +180,7 @@ import {
   InstanceTagInfo,
   UnbindAutoScalerResourceStrategyFromGroupsResponse,
   UpdateUpstreamTargetsResponse,
-  CreateWafDomainsRequest,
+  GovernanceInterfaceDescription,
   DescribeGovernanceServiceContractVersionsRequest,
   DescribeCloudNativeAPIGatewayCertificatesResponse,
   KongUpstreamPreview,
@@ -244,6 +245,7 @@ import {
   SourceInstanceVpcInfo,
   ModifyConfigFileGroupResponse,
   ArgumentValue,
+  BetaLabelMatchString,
   RateLimitResponse,
   RollbackConfigFileReleasesRequest,
   DescribeCloudNativeAPIGatewayInfoByIpResponse,

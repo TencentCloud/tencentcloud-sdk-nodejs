@@ -46,6 +46,7 @@ import {
   ServicePriceDetail,
   StartInstanceRequest,
   DeployInferServiceResponse,
+  ServiceChargePrepaid,
   LoginSetting,
   DescribeMuskPromptsResponse,
   UpdateServiceConfigsResponse,

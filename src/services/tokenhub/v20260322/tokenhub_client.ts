@@ -22,6 +22,7 @@ import {
   BindingItem,
   CreateApiKeysResultItem,
   DescribeTokenPlanApiKeyListResponse,
+  QuotasDesired,
   DeleteGlossaryResponse,
   DeleteGlossaryEntriesResponse,
   RenewTokenPlanTeamOrderResponse,
@@ -36,6 +37,7 @@ import {
   CreateTokenPlanTeamOrderAndBuyRequest,
   DeleteTokenPlanApiKeyResponse,
   GlossaryEntryItem,
+  QuotaCreateItem,
   ModifyGlossaryEntriesResponse,
   DescribeTokenPlanResponse,
   DescribeModelListRequest,
@@ -242,7 +244,7 @@ export class Client extends AbstractClient {
 更新 API 密钥的备注信息、 IP 白名单和 Token 限额（修改限额推荐使用QuotaDesired参数）。所有可选参数不传表示不修改。
      */
   async ModifyApiKeyInfo(
-    req?: ModifyApiKeyInfoRequest,
+    req: ModifyApiKeyInfoRequest,
     cb?: (error: string, rep: ModifyApiKeyInfoResponse) => void
   ): Promise<ModifyApiKeyInfoResponse> {
     return this.request("ModifyApiKeyInfo", req, cb)
@@ -298,7 +300,7 @@ export class Client extends AbstractClient {
    * 更新 API 密钥的启用或禁用状态。
    */
   async ModifyApiKeyStatus(
-    req?: ModifyApiKeyStatusRequest,
+    req: ModifyApiKeyStatusRequest,
     cb?: (error: string, rep: ModifyApiKeyStatusResponse) => void
   ): Promise<ModifyApiKeyStatusResponse> {
     return this.request("ModifyApiKeyStatus", req, cb)
@@ -322,7 +324,7 @@ export class Client extends AbstractClient {
 创建一个新的 API 密钥，创建成功后返回 API 密钥 ID。需指定平台类型、绑定方式和初始状态。
      */
   async CreateApiKey(
-    req?: CreateApiKeyRequest,
+    req: CreateApiKeyRequest,
     cb?: (error: string, rep: CreateApiKeyResponse) => void
   ): Promise<CreateApiKeyResponse> {
     return this.request("CreateApiKey", req, cb)
@@ -438,7 +440,7 @@ export class Client extends AbstractClient {
    * 删除指定的 API 密钥，同时清理关联的模型绑定关系。
    */
   async DeleteApiKey(
-    req?: DeleteApiKeyRequest,
+    req: DeleteApiKeyRequest,
     cb?: (error: string, rep: DeleteApiKeyResponse) => void
   ): Promise<DeleteApiKeyResponse> {
     return this.request("DeleteApiKey", req, cb)
