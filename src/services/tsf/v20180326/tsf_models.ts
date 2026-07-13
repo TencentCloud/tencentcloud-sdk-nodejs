@@ -10536,25 +10536,29 @@ export interface DeleteUnitRuleRequest {
  */
 export interface ApplicationAttribute {
   /**
-   * 总实例个数
+   * <p>总实例个数</p>
    */
   InstanceCount?: number
   /**
-   * 运行实例个数
+   * <p>运行实例个数</p>
    */
   RunInstanceCount?: number
   /**
-   * 应用下部署组个数
+   * <p>应用下部署组个数</p>
    */
   GroupCount?: number
   /**
-   * 运行中部署组个数
+   * <p>运行中部署组个数</p>
    */
   RunningGroupCount?: string
   /**
-   * 异常部署组个数
+   * <p>异常部署组个数</p>
    */
   AbnormalCount?: string
+  /**
+   * <p>镜像tag数量</p>
+   */
+  ImageTagCount?: number
 }
 
 /**

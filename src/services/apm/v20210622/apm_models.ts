@@ -1634,177 +1634,189 @@ export interface TopologyNodeStats {
  */
 export interface ModifyApmInstanceRequest {
   /**
-   * 业务系统 ID
+   * <p>业务系统 ID</p>
    */
   InstanceId: string
   /**
-   * 业务系统名
+   * <p>业务系统名</p>
    */
   Name: string
   /**
-   * Tag 列表
+   * <p>Tag 列表</p>
    */
   Tags?: Array<ApmTag>
   /**
-   * 业务系统描述
+   * <p>业务系统描述</p>
    */
   Description?: string
   /**
-   * Trace 数据保存时长（单位：天）
+   * <p>Trace 数据保存时长（单位：天）</p>
    */
   TraceDuration?: number
   /**
-   * 是否开启计费
+   * <p>是否开启计费</p>
    */
   OpenBilling?: boolean
   /**
-   * 业务系统上报额度
+   * <p>业务系统上报额度</p>
    */
   SpanDailyCounters?: number
   /**
-   * 错误率警示线，当应用的平均错误率超出该阈值时，系统会给出异常提示。
+   * <p>错误率警示线，当应用的平均错误率超出该阈值时，系统会给出异常提示。</p>
    */
   ErrRateThreshold?: number
   /**
-   * 采样率（单位：%）
+   * <p>采样率（单位：%）</p>
    */
   SampleRate?: number
   /**
-   * 是否开启错误采样（0=关, 1=开）
+   * <p>是否开启错误采样（0=关, 1=开）</p>
    */
   ErrorSample?: number
   /**
-   * 采样慢调用保存阈值（单位：ms）
+   * <p>采样慢调用保存阈值（单位：ms）</p>
    */
   SlowRequestSavedThreshold?: number
   /**
-   * 是否开启日志功能（0=关, 1=开）
+   * <p>是否开启日志功能（0=关, 1=开）</p>
    */
   IsRelatedLog?: number
   /**
-   * 日志地域，开启日志功能后才会生效
+   * <p>日志地域，开启日志功能后才会生效</p>
    */
   LogRegion?: string
   /**
-   * CLS 日志主题 ID，开启日志功能后才会生效
+   * <p>CLS 日志主题 ID，开启日志功能后才会生效</p>
    */
   LogTopicID?: string
   /**
-   * 日志集，开启日志功能后才会生效
+   * <p>日志集，开启日志功能后才会生效</p>
    */
   LogSet?: string
   /**
-   * 日志源，开启日志功能后才会生效
+   * <p>日志源，开启日志功能后才会生效</p>
    */
   LogSource?: string
   /**
-   * 用户自定义展示标签列表
+   * <p>用户自定义展示标签列表</p>
    */
   CustomShowTags?: Array<string>
   /**
-   * 修改计费模式（1为预付费，0为按量付费）
+   * <p>修改计费模式（1为预付费，0为按量付费）</p>
    */
   PayMode?: number
   /**
-   * 响应时间警示线
+   * <p>响应时间警示线</p>
    */
   ResponseDurationWarningThreshold?: number
   /**
-   * 是否免费（0=付费版；1=TSF 受限免费版；2=免费版），默认0
+   * <p>是否免费（0=付费版；1=TSF 受限免费版；2=免费版），默认0</p>
    */
   Free?: number
   /**
-   * 是否关联 Dashboard（0=关,1=开）
+   * <p>是否关联 Dashboard（0=关,1=开）</p>
    */
   IsRelatedDashboard?: number
   /**
-   * 关联的 Dashboard ID，开启关联 Dashboard 后才会生效
+   * <p>关联的 Dashboard ID，开启关联 Dashboard 后才会生效</p>
    */
   DashboardTopicID?: string
   /**
-   * 是否开启 SQL 注入检测（0=关,1=开）
+   * <p>是否开启 SQL 注入检测（0=关,1=开）</p>
    */
   IsSqlInjectionAnalysis?: number
   /**
-   * 是否开启组件漏洞检测（0=关,1=开）
+   * <p>是否开启组件漏洞检测（0=关,1=开）</p>
    */
   IsInstrumentationVulnerabilityScan?: number
   /**
-   * 是否开启远程命令攻击检测
+   * <p>是否开启远程命令攻击检测</p>
    */
   IsRemoteCommandExecutionAnalysis?: number
   /**
-   * 是否开启内存马检测
+   * <p>是否开启内存马检测</p>
    */
   IsMemoryHijackingAnalysis?: number
   /**
-   * CLS索引类型(0=全文索引，1=键值索引)
+   * <p>CLS索引类型(0=全文索引，1=键值索引)</p>
    */
   LogIndexType?: number
   /**
-   * traceId的索引key: 当CLS索引类型为键值索引时生效
+   * <p>traceId的索引key: 当CLS索引类型为键值索引时生效</p>
    */
   LogTraceIdKey?: string
   /**
-   * 是否开启删除任意文件检测（0-关闭，1-开启）
+   * <p>是否开启删除任意文件检测（0-关闭，1-开启）</p>
    */
   IsDeleteAnyFileAnalysis?: number
   /**
-   * 是否开启读取任意文件检测（0-关闭，1-开启）
+   * <p>是否开启读取任意文件检测（0-关闭，1-开启）</p>
    */
   IsReadAnyFileAnalysis?: number
   /**
-   * 是否开启上传任意文件检测（0-关闭，1-开启）
+   * <p>是否开启上传任意文件检测（0-关闭，1-开启）</p>
    */
   IsUploadAnyFileAnalysis?: number
   /**
-   * 是否开启包含任意文件检测（0-关闭，1-开启）
+   * <p>是否开启包含任意文件检测（0-关闭，1-开启）</p>
    */
   IsIncludeAnyFileAnalysis?: number
   /**
-   * 是否开启目录遍历检测（0-关闭，1-开启）
+   * <p>是否开启目录遍历检测（0-关闭，1-开启）</p>
    */
   IsDirectoryTraversalAnalysis?: number
   /**
-   * 是否开启模板引擎注入检测（0-关闭，1-开启）
+   * <p>是否开启模板引擎注入检测（0-关闭，1-开启）</p>
    */
   IsTemplateEngineInjectionAnalysis?: number
   /**
-   * 是否开启脚本引擎注入检测（0-关闭，1-开启）
+   * <p>是否开启脚本引擎注入检测（0-关闭，1-开启）</p>
    */
   IsScriptEngineInjectionAnalysis?: number
   /**
-   * 是否开启表达式注入检测（0-关闭，1-开启）
+   * <p>是否开启表达式注入检测（0-关闭，1-开启）</p>
    */
   IsExpressionInjectionAnalysis?: number
   /**
-   * 是否开启JNDI注入检测（0-关闭，1-开启）
+   * <p>是否开启JNDI注入检测（0-关闭，1-开启）</p>
    */
   IsJNDIInjectionAnalysis?: number
   /**
-   * 是否开启JNI注入检测（0-关闭，1-开启）
+   * <p>是否开启JNI注入检测（0-关闭，1-开启）</p>
    */
   IsJNIInjectionAnalysis?: number
   /**
-   * 是否开启Webshell后门检测（0-关闭，1-开启）
+   * <p>是否开启Webshell后门检测（0-关闭，1-开启）</p>
    */
   IsWebshellBackdoorAnalysis?: number
   /**
-   * 是否开启反序列化检测（0-关闭，1-开启）
+   * <p>是否开启反序列化检测（0-关闭，1-开启）</p>
    */
   IsDeserializationAnalysis?: number
   /**
-   * URL长分段收敛阈值
+   * <p>URL长分段收敛阈值</p>
    */
   UrlLongSegmentThreshold?: number
   /**
-   * URL数字分段收敛阈值
+   * <p>URL数字分段收敛阈值</p>
    */
   UrlNumberSegmentThreshold?: number
   /**
-   * spanId的索引key: 当CLS索引类型为键值索引时生效
+   * <p>spanId的索引key: 当CLS索引类型为键值索引时生效</p>
    */
   LogSpanIdKey?: string
+  /**
+   * <p>是否开启探针头采样</p>
+   */
+  EnableHeadSampler?: boolean
+  /**
+   * <p>头采类型</p><p>枚举值：</p><ul><li>parentbased_traceidratio： 默认</li></ul>
+   */
+  HeadSamplerType?: string
+  /**
+   * <p>头采采样率</p><p>取值范围：[0, 100]</p>
+   */
+  HeadSamplerArg?: number
 }
 
 /**

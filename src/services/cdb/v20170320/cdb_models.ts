@@ -385,100 +385,93 @@ export interface ModifyBackupDownloadRestrictionResponse {
  */
 export interface InstanceDbAuditStatus {
   /**
-   * 实例ID。
+   * <p>实例ID。</p>
    */
   InstanceId?: string
   /**
-   * 审计状态。ON-表示审计已开启，OFF-表示审计关闭
+   * <p>审计状态。ON-表示审计已开启，OFF-表示审计关闭</p>
    */
   AuditStatus?: string
   /**
-   * 任务状态。0-无任务；1-审计开启中，2-审计关闭中。
+   * <p>任务状态。0-无任务；1-审计开启中，2-审计关闭中。</p>
    */
   AuditTask?: number
   /**
-   * 日志保留时长。支持值包括：
-7 - 一周；
-30 - 一个月；
-90 - 三个月；
-180 - 六个月；
-365 - 一年；
-1095 - 三年；
-1825 - 五年。
+   * <p>日志保留时长。支持值包括：<br>7 - 一周；<br>30 - 一个月；<br>90 - 三个月；<br>180 - 六个月；<br>365 - 一年；<br>1095 - 三年；<br>1825 - 五年。</p>
    */
   LogExpireDay?: number
   /**
-   * 高频存储时长。支持值包括：
-3 - 3天；
-7 - 一周；
-30 - 一个月；
-90 - 三个月；
-180 - 六个月；
-365 - 一年；
-1095 - 三年；
-1825 - 五年。
+   * <p>高频存储时长。支持值包括：<br>3 - 3天；<br>7 - 一周；<br>30 - 一个月；<br>90 - 三个月；<br>180 - 六个月；<br>365 - 一年；<br>1095 - 三年；<br>1825 - 五年。</p>
    */
   HighLogExpireDay?: number
   /**
-   * 低频存储时长。单位：天，等于日志保存时长减去高频存储时长。
+   * <p>低频存储时长。单位：天，等于日志保存时长减去高频存储时长。</p>
    */
   LowLogExpireDay?: number
   /**
-   * 日志存储量(单位：GB)。
+   * <p>日志存储量(单位：GB)。</p>
    */
   BillingAmount?: number
   /**
-   * 高频存储量(单位：GB)。
+   * <p>高频存储量(单位：GB)。</p>
    */
   HighRealStorage?: number
   /**
-   * 低频存储量(单位：GB)。
+   * <p>低频存储量(单位：GB)。</p>
    */
   LowRealStorage?: number
   /**
-   * 是否为全审计。true-表示全审计。
+   * <p>是否为全审计（true-表示全审计）</p>
    */
   AuditAll?: boolean
   /**
-   * 审计开通时间。
+   * <p>审计开通时间。</p>
    */
   CreateAt?: string
   /**
-   * 实例相关信息
+   * <p>实例相关信息</p>
    */
   InstanceInfo?: AuditInstanceInfo
   /**
-   * 总存储量(单位：GB)。
+   * <p>总存储量(单位：GB)。</p>
    */
   RealStorage?: number
   /**
-   * 是否包含审计策略
+   * <p>是否包含审计策略</p>
    */
   OldRule?: boolean
   /**
-   * 实例所应用的规则模板。
+   * <p>实例所应用的规则模板。</p>
    */
   RuleTemplateIds?: Array<string>
   /**
-   * 限免状态
+   * <p>限免状态</p>
    */
   TrialStatus?: string
   /**
-   * 限免开启时间
+   * <p>限免开启时间</p>
    */
   TrialStartTime?: number
   /**
-   * 限免持续时间
+   * <p>限免持续时间</p>
    */
   TrialDuration?: number
   /**
-   * 限免关闭时间
+   * <p>限免关闭时间</p>
    */
   TrialCloseTime?: number
   /**
-   * 限免期查询日志时长
+   * <p>限免期查询日志时长</p>
    */
   TrialDescribeLogHours?: number
+  /**
+   * <p>投递信息</p>
+   */
+  DeliverSummary?: Array<DeliverSummary>
+  /**
+   * <p>是否开启了投递，ON：开启，OFF：关闭</p>
+   */
+  Deliver?: string
 }
 
 /**
@@ -581,11 +574,11 @@ export interface DescribeBackupOverviewRequest {
  */
 export interface DescribeAuditInstanceListResponse {
   /**
-   * 符合查询条件的实例总数。
+   * <p>符合查询条件的实例总数。</p>
    */
   TotalCount?: number
   /**
-   * 审计实例详细信息列表。
+   * <p>审计实例详细信息列表。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Items?: Array<InstanceDbAuditStatus>
@@ -4569,6 +4562,32 @@ export interface StartBatchRollbackRequest {
    * 用于回档的实例详情信息。
    */
   Instances: Array<RollbackInstancesInfo>
+}
+
+/**
+ * 投递错误
+ */
+export interface DeliverSummary {
+  /**
+   * <p>投递类型，store（存储类），mq（消息通道）</p>
+   */
+  DeliverType?: string
+  /**
+   * <p>投递子类型：cls，ckafka。</p>
+   */
+  DeliverSubType?: string
+  /**
+   * <p>投递者</p>
+   */
+  DeliverConsumer?: string
+  /**
+   * <p>投递者名称</p>
+   */
+  DeliverConsumerName?: string
+  /**
+   * <p>投递异常错误</p>
+   */
+  DeliverError?: string
 }
 
 /**
@@ -10635,23 +10654,23 @@ export interface CloseSSLResponse {
  */
 export interface DescribeAuditInstanceListRequest {
   /**
-   * 实例审计开启的状态。1-已开启审计；0-未开启审计。
+   * <p>实例审计开启的状态。1-已开启审计；0-未开启审计。</p>
    */
   AuditSwitch?: number
   /**
-   * 查询实例列表的过滤条件。
+   * <p>查询实例列表的过滤条件。</p>
    */
   Filters?: Array<AuditInstanceFilters>
   /**
-   * 实例的审计规则模式。1-规则审计；0-全审计。
+   * <p>实例的审计规则模式。1-规则审计；0-全审计。</p>
    */
   AuditMode?: number
   /**
-   * 单次请求返回的数量。默认值为30，最大值为 20000。
+   * <p>单次请求返回的数量。默认值为30，最大值为 20000。</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认值为 0。
+   * <p>偏移量，默认值为 0。</p>
    */
   Offset?: number
 }

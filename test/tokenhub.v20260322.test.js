@@ -18,6 +18,16 @@ const client = new tencentcloud.tokenhub.v20260322.Client({
 })
 describe("tokenhub.v20260322.test.js", function () {
 
+it("tokenhub.v20260322.DescribeModelEndpointList", async function () {
+    try {
+       const data = await client.DescribeModelEndpointList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tokenhub.v20260322.RenewTokenPlanTeamOrder", async function () {
     try {
        const data = await client.RenewTokenPlanTeamOrder({})
@@ -128,6 +138,16 @@ it("tokenhub.v20260322.ModifyApiKeyInfo", async function () {
     }
 })
 
+it("tokenhub.v20260322.CreateEndpoint", async function () {
+    try {
+       const data = await client.CreateEndpoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tokenhub.v20260322.DescribeGlossaryEntries", async function () {
     try {
        const data = await client.DescribeGlossaryEntries({})
@@ -208,9 +228,29 @@ it("tokenhub.v20260322.DeleteGlossary", async function () {
     }
 })
 
+it("tokenhub.v20260322.DescribeEndpoint", async function () {
+    try {
+       const data = await client.DescribeEndpoint({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tokenhub.v20260322.ModifyTokenPlanApiKeySecret", async function () {
     try {
        const data = await client.ModifyTokenPlanApiKeySecret({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tokenhub.v20260322.DeleteEndpoint", async function () {
+    try {
+       const data = await client.DeleteEndpoint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -271,6 +311,16 @@ it("tokenhub.v20260322.DescribeApiKey", async function () {
 it("tokenhub.v20260322.DeleteTokenPlanApiKey", async function () {
     try {
        const data = await client.DeleteTokenPlanApiKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tokenhub.v20260322.ModifyEndpoint", async function () {
+    try {
+       const data = await client.ModifyEndpoint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -207,74 +207,69 @@ export interface ModifyInstanceAvailabilityZonesRequest {
  */
 export interface RedisBackupSet {
   /**
-   * 备份开始时间。
+   * <p>备份开始时间。</p>
    */
   StartTime?: string
   /**
-   * 备份任务ID。
+   * <p>备份任务ID。</p>
    */
   BackupId?: string
   /**
-   * 备份类型。
-- 1：凌晨系统发起的自动备份。
-- 0：用户发起的手动备份。
+   * <p>备份类型。</p><ul><li>1：凌晨系统发起的自动备份。</li><li>0：用户发起的手动备份。</li></ul>
    */
   BackupType?: string
   /**
-   * 备份状态。 
-- 1：备份被其它流程锁定。
-- 2：备份正常，没有被任何流程锁定。
-- -1：备份已过期。
-- 3：备份正在被导出。
-- 4：备份导出成功。
+   * <p>备份状态。 </p><ul><li>1：备份被其它流程锁定。</li><li>2：备份正常，没有被任何流程锁定。</li><li>-1：备份已过期。</li><li>3：备份正在被导出。</li><li>4：备份导出成功。</li></ul>
    */
   Status?: number
   /**
-   * 备份的备注信息。
+   * <p>备份的备注信息。</p>
    */
   Remark?: string
   /**
-   * 备份是否被锁定。
-- 0：未被锁定。
-- 1：已被锁定。
+   * <p>备份是否被锁定。</p><ul><li>0：未被锁定。</li><li>1：已被锁定。</li></ul>
    */
   Locked?: number
   /**
-   * 内部字段，用户可忽略。
+   * <p>内部字段，用户可忽略。</p>
    */
   BackupSize?: number
   /**
-   * 内部字段，用户可忽略。
+   * <p>内部字段，用户可忽略。</p>
    */
   FullBackup?: number
   /**
-   * 内部字段，用户可忽略。
+   * <p>内部字段，用户可忽略。</p>
    */
   InstanceType?: number
   /**
-   * 实例 ID。
+   * <p>实例 ID。</p>
    */
   InstanceId?: string
   /**
-   * 实例名称。
+   * <p>实例名称。</p>
    */
   InstanceName?: string
   /**
-   * 本地备份所在地域。
+   * <p>本地备份所在地域。</p>
    */
   Region?: string
   /**
-   * 备份结束时间。
+   * <p>备份结束时间。</p>
    */
   EndTime?: string
   /**
-   * 备份文件类型。
+   * <p>备份文件类型。</p>
    */
   FileType?: string
   /**
-   * 备份文件过期时间。
+   * <p>备份文件过期时间。</p>
    */
   ExpireTime?: string
+  /**
+   * <p>备份文件是否加密</p>
+   */
+  Encrypted?: boolean
 }
 
 /**
@@ -2823,11 +2818,11 @@ export interface ModifyInstanceReadOnlyResponse {
  */
 export interface DescribeBackupDetailRequest {
   /**
-   * 实例 ID，请登录[Redis控制台](https://console.cloud.tencent.com/redis/instance/list)在实例列表复制实例 ID。
+   * <p>实例 ID，请登录<a href="https://console.cloud.tencent.com/redis/instance/list">Redis控制台</a>在实例列表复制实例 ID。</p>
    */
   InstanceId: string
   /**
-   * 备份 ID，可通过接口 [DescribeInstanceBackups](https://cloud.tencent.com/document/product/239/20011) 返回的参数 **RedisBackupSet** 获取。
+   * <p>备份 ID，可通过接口 <a href="https://cloud.tencent.com/document/product/239/20011">DescribeInstanceBackups</a> 返回的参数 <strong>RedisBackupSet</strong> 获取。</p>
    */
   BackupId: string
 }
@@ -2851,11 +2846,11 @@ export interface DescribeInstanceMonitorTookDistResponse {
  */
 export interface DescribeInstanceBackupsResponse {
   /**
-   * 备份总数。
+   * <p>备份总数。</p>
    */
   TotalCount?: number
   /**
-   * 实例的备份数组。
+   * <p>实例的备份数组。</p>
    */
   BackupSet?: Array<RedisBackupSet>
   /**
@@ -3472,65 +3467,69 @@ export interface SecondLevelBackupMissingTimestamps {
  */
 export interface DescribeBackupDetailResponse {
   /**
-   * 备份 ID。
+   * <p>备份 ID。</p>
    */
   BackupId?: string
   /**
-   * 备份开始时间。
+   * <p>备份开始时间。</p>
    */
   StartTime?: string
   /**
-   * 备份结束时间。
+   * <p>备份结束时间。</p>
    */
   EndTime?: string
   /**
-   * 备份方式。 
-
-- 1：手动备份。
--  0：自动备份。
+   * <p>备份方式。 </p><ul><li>1：手动备份。</li><li>0：自动备份。</li></ul>
    */
   BackupType?: string
   /**
-   * 备份状态。 
-
-- 1：备份被其它流程锁定。
-- 2：备份正常，没有被任何流程锁定。
-- -1：备份已过期。
-- 3：备份正在被导出。
-- 4：备份导出成功。
+   * <p>备份状态。 </p><ul><li>1：备份被其它流程锁定。</li><li>2：备份正常，没有被任何流程锁定。</li><li>-1：备份已过期。</li><li>3：备份正在被导出。</li><li>4：备份导出成功。</li></ul>
    */
   Status?: number
   /**
-   * 备份的备注信息。
+   * <p>备份的备注信息。</p>
    */
   Remark?: string
   /**
-   * 备份是否被锁定。
-
-- 0：未被锁定。
-- 1：已被锁定。
+   * <p>备份是否被锁定。</p><ul><li>0：未被锁定。</li><li>1：已被锁定。</li></ul>
    */
   Locked?: number
   /**
-   * 备份文件大小。单位：Byte。
+   * <p>备份文件大小。单位：Byte。</p>
    */
   BackupSize?: number
   /**
-   * 实例类型。
+   * <p>实例类型。</p>
    */
   InstanceType?: number
   /**
-   * 单分片内存规格大小，单位：MB。
+   * <p>单分片内存规格大小，单位：MB。</p>
    */
   MemSize?: number
   /**
-   * 分片数量。
+   * <p>分片数量。</p>
    */
   ShardNum?: number
   /**
-   * 副本数量。
+   * <p>副本数量。</p>
    */
   ReplicasNum?: number
+  /**
+   * <p>是否已加密。</p><p>枚举值：</p><ul><li>true： 已加密</li><li>false： 未加密</li></ul>
+   */
+  Encrypted?: boolean
+  /**
+   * <p>解密密钥。</p>
+   */
+  DecryptKey?: string
+  /**
+   * <p>KMS的密钥ID。</p>
+   */
+  KmsKeyId?: string
+  /**
+   * <p>加密该备份文件的加密算法。</p><p>枚举值：</p><ul><li>AES-256-CBC： 当前仅支持AES-256-CBC</li></ul>
+   */
+  KeyAlgorithm?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6889,37 +6888,31 @@ export interface DescribeMaintenanceWindowRequest {
  */
 export interface DescribeInstanceBackupsRequest {
   /**
-   * 每页输出的备份列表大小。默认大小为20，最大值为 100。
+   * <p>每页输出的备份列表大小。默认大小为20，最大值为 100。</p>
    */
   Limit?: number
   /**
-   * 分页偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。
+   * <p>分页偏移量，取Limit整数倍。计算公式：offset=limit*(页码-1)。</p>
    */
   Offset?: number
   /**
-   * 待操作的实例ID，可通过 DescribeInstance 接口返回值中的 InstanceId 获取。
+   * <p>待操作的实例ID，可通过 DescribeInstance 接口返回值中的 InstanceId 获取。</p>
    */
   InstanceId?: string
   /**
-   * 开始时间，格式如：2017-02-08 16:46:34。查询实例在 [beginTime, endTime] 时间段内开始备份的备份列表，查询时间最大跨度30天。
+   * <p>开始时间，格式如：2017-02-08 16:46:34。查询实例在 [beginTime, endTime] 时间段内开始备份的备份列表，查询时间最大跨度30天。</p>
    */
   BeginTime?: string
   /**
-   * 结束时间，格式如：2017-02-08 19:09:26。查询实例在 [beginTime, endTime] 时间段内开始备份的备份列表，查询时间最大跨度30天。
+   * <p>结束时间，格式如：2017-02-08 19:09:26。查询实例在 [beginTime, endTime] 时间段内开始备份的备份列表，查询时间最大跨度30天。</p>
    */
   EndTime?: string
   /**
-   * 备份任务的状态：
-1：备份在流程中。
-2：备份正常。
-3：备份转RDB文件处理中。
-4：已完成RDB转换。
--1：备份已过期。
--2：备份已删除。
+   * <p>备份任务的状态：<br>1：备份在流程中。<br>2：备份正常。<br>3：备份转RDB文件处理中。<br>4：已完成RDB转换。<br>-1：备份已过期。<br>-2：备份已删除。</p>
    */
   Status?: Array<number | bigint>
   /**
-   * 实例名称，支持根据实例名称模糊搜索。
+   * <p>实例名称，支持根据实例名称模糊搜索。</p>
    */
   InstanceName?: string
 }

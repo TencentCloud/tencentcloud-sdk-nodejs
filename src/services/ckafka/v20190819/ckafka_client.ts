@@ -74,6 +74,7 @@ import {
   BatchContent,
   ScfParam,
   DescribeTopicRequest,
+  IsolatedInstancePreRequest,
   PostgreSQLModifyConnectParam,
   ModifyAclRuleRequest,
   Group,
@@ -334,6 +335,7 @@ import {
   BatchModifyGroupOffsetsResponse,
   CreateDatahubTopicRequest,
   CreateInstancePostResp,
+  IsolatedInstancePreResponse,
   DescribeDatahubTopicResponse,
   CreateCdcClusterResponse,
   OperateResponseData,
@@ -1114,6 +1116,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopicResponse) => void
   ): Promise<DescribeTopicResponse> {
     return this.request("DescribeTopic", req, cb)
+  }
+
+  /**
+   * 隔离预付费实例，该接口会对实例执行隔离的动作，执行成功后实例会被隔离
+   */
+  async IsolatedInstancePre(
+    req: IsolatedInstancePreRequest,
+    cb?: (error: string, rep: IsolatedInstancePreResponse) => void
+  ): Promise<IsolatedInstancePreResponse> {
+    return this.request("IsolatedInstancePre", req, cb)
   }
 
   /**

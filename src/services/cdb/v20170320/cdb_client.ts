@@ -220,6 +220,7 @@ import {
   DescribeDBInstanceLogToCLSRequest,
   AnalysisNodeInfo,
   StartBatchRollbackRequest,
+  DeliverSummary,
   OpenDBInstanceEncryptionRequest,
   DescribeDBInstanceCharsetRequest,
   ModifyInstancePasswordComplexityResponse,

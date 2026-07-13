@@ -30,20 +30,6 @@ export interface BetaLabel {
 }
 
 /**
- * CreateConfigFileGroup请求参数结构体
- */
-export interface CreateConfigFileGroupRequest {
-  /**
-   * tse 实例 id
-   */
-  InstanceId: string
-  /**
-   * 配置文件组实体
-   */
-  ConfigFileGroup: ConfigFileGroup
-}
-
-/**
  * DescribeNacosReplicas请求参数结构体
  */
 export interface DescribeNacosReplicasRequest {
@@ -73,6 +59,20 @@ export interface DeleteWafDomainsRequest {
    * WAF 防护域名列表
    */
   Domains: Array<string>
+}
+
+/**
+ * 列表过滤条件，模糊匹配
+ */
+export interface ListFilter {
+  /**
+   * 过滤字段
+   */
+  Key?: string
+  /**
+   * 过滤值
+   */
+  Value?: string
 }
 
 /**
@@ -502,6 +502,42 @@ export interface ModifyCloudNativeAPIGatewayLLMModelServiceRequest {
    * <p>标签</p>
    */
   Tags?: Array<string>
+  /**
+   * <p>模型改写规则</p>
+   */
+  ModelRewriteRules?: Array<AIGWModelRewriteRule>
+  /**
+   * <p>来源 id</p>
+   */
+  SourceId?: string
+  /**
+   * <p>命名空间</p>
+   */
+  Namespace?: string
+  /**
+   * <p>服务名字</p>
+   */
+  ServiceName?: string
+  /**
+   * <p>协议</p>
+   */
+  Protocol?: string
+  /**
+   * <p>扩展参数</p>
+   */
+  ExtParams?: Array<KeyValue>
+  /**
+   * <p>密钥轮转开关</p>
+   */
+  KeyRotationEnabled?: boolean
+  /**
+   * <p>密钥轮转天数</p>
+   */
+  KeyRotationPeriodDays?: number
+  /**
+   * <p>外部服务来源ID</p>
+   */
+  ExternalInstanceId?: string
 }
 
 /**
@@ -669,6 +705,28 @@ export interface CreateCloudNativeAPIGatewayServiceRequest {
    * 请求路径
    */
   Path?: string
+}
+
+/**
+ * AI网关 JWT 凭证物料配置
+ */
+export interface AIGWJWTCredentialConfig {
+  /**
+   * <p>JWT 消费者标识，iss claim</p>
+   */
+  Key: string
+  /**
+   * <p>签名算法，取值：HS256 HS384 HS512 RS256 RS384 RS512 ES256 ES384 ES512</p>
+   */
+  Algorithm: string
+  /**
+   * <p>HS 对称密钥，仅 Algorithm 为 HS256/HS384/HS512 时必填；RS/ES* 时留空</p>
+   */
+  Secret?: string
+  /**
+   * <p>RS/ES PEM 格式公钥，仅 Algorithm 为 RS256/RS384/RS512/ES256/ES384/ES512 时必填；HS* 时留空</p>
+   */
+  RSAPublicKey?: string
 }
 
 /**
@@ -1007,13 +1065,21 @@ export interface DescribeCloudNativeAPIGatewayConsumerListRequest {
    */
   GatewayId: string
   /**
-   * <p>每页条数，范围 [1, 100]，默认 20。</p>
+   * <p>页显示条数，最大20</p>
    */
   Limit: number
   /**
-   * <p>起始位置，从 0 开始。</p>
+   * <p>起始位置</p>
    */
   Offset: number
+  /**
+   * <p>资源类型</p><p>枚举值：</p><ul><li>ModelAPI： 模型API</li><li>MCPServer： MCP服务</li></ul>
+   */
+  ResourceType?: string
+  /**
+   * <p>资源ID</p>
+   */
+  ResourceId?: string
 }
 
 /**
@@ -1227,129 +1293,130 @@ export interface DescribeAutoScalerResourceStrategiesResponse {
  */
 export interface DescribeCloudNativeAPIGatewayResult {
   /**
-   * 云原生API网关ID。
+   * <p>云原生API网关ID。</p>
    */
   GatewayId?: string
   /**
-   * 云原生API网关状态。
+   * <p>云原生API网关状态。</p>
    */
   Status?: string
   /**
-   * 云原生API网关名。
+   * <p>云原生API网关名。</p>
    */
   Name?: string
   /**
-   * 云原生API网关类型。
+   * <p>云原生API网关类型。</p>
    */
   Type?: string
   /**
-   * 实例版本：
-- 2.4.1
-- 2.5.1
+   * <p>实例版本：</p><ul><li>2.4.1</li><li>2.5.1</li></ul>
    */
   GatewayVersion?: string
   /**
-   * 云原生API网关节点信息。
+   * <p>云原生API网关节点信息。</p>
    */
   NodeConfig?: CloudNativeAPIGatewayNodeConfig
   /**
-   * 云原生API网关vpc配置。
+   * <p>云原生API网关vpc配置。</p>
    */
   VpcConfig?: CloudNativeAPIGatewayVpcConfig
   /**
-   * 云原生API网关描述。
+   * <p>云原生API网关描述。</p>
    */
   Description?: string
   /**
-   * 云原生API网关创建时间。
+   * <p>云原生API网关创建时间。</p>
    */
   CreateTime?: string
   /**
-   * 实例的标签信息
+   * <p>实例的标签信息</p>
    */
   Tags?: Array<InstanceTagInfo>
   /**
-   * 是否开启 cls 日志
+   * <p>是否开启 cls 日志</p>
    */
   EnableCls?: boolean
   /**
-   * 付费模式，0表示后付费，1预付费
+   * <p>付费模式，0表示后付费，1预付费</p>
    */
   TradeType?: number
   /**
-   * 实例版本，当前支持开发版、标准版、专业版【TRIAL、STANDARD、PROFESSIONAL】
+   * <p>实例版本，当前支持开发版、标准版、专业版【TRIAL、STANDARD、PROFESSIONAL】</p>
    */
   FeatureVersion?: string
   /**
-   * 公网出流量带宽，[1,2048]Mbps
+   * <p>公网出流量带宽，[1,2048]Mbps</p>
    */
   InternetMaxBandwidthOut?: number
   /**
-   * 自动续费标记，0表示默认状态(用户未设置，即初始状态)；
-1表示自动续费，2表示明确不自动续费(用户设置)，若业务无续费概念或无需自动续费，需要设置为0
+   * <p>自动续费标记，0表示默认状态(用户未设置，即初始状态)；<br>1表示自动续费，2表示明确不自动续费(用户设置)，若业务无续费概念或无需自动续费，需要设置为0</p>
    */
   AutoRenewFlag?: number
   /**
-   * 到期时间，预付费时使用
+   * <p>到期时间，预付费时使用</p>
    */
   CurDeadline?: string
   /**
-   * 隔离时间，实例隔离时使用
+   * <p>隔离时间，实例隔离时使用</p>
    */
   IsolateTime?: string
   /**
-   * 是否开启客户端公网。
+   * <p>是否开启客户端公网。</p>
    */
   EnableInternet?: boolean
   /**
-   * 实例实际的地域信息
+   * <p>实例实际的地域信息</p>
    */
   EngineRegion?: string
   /**
-   * Ingress class名称
+   * <p>Ingress class名称</p>
    */
   IngressClassName?: string
   /**
-   * 公网计费方式。可选取值 BANDWIDTH | TRAFFIC ，表示按带宽和按流量计费。
+   * <p>公网计费方式。可选取值 BANDWIDTH | TRAFFIC ，表示按带宽和按流量计费。</p>
    */
   InternetPayMode?: string
   /**
-   * 云原生API网关小版本号
+   * <p>云原生API网关小版本号</p>
    */
   GatewayMinorVersion?: string
   /**
-   * 实例监听的端口信息
+   * <p>实例监听的端口信息</p>
    */
   InstancePort?: InstancePort
   /**
-   * 公网CLB默认类型
+   * <p>公网CLB默认类型</p>
    */
   LoadBalancerType?: string
   /**
-   * 公网IP地址列表
+   * <p>公网IP地址列表</p>
    */
   PublicIpAddresses?: Array<string>
   /**
-   * 是否开启删除保护
+   * <p>是否开启删除保护</p>
    */
   DeleteProtect?: boolean
   /**
-   * 表示可以升级的版本号
+   * <p>表示可以升级的版本号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AvailableVersions?: Array<string>
   /**
-   * 网关可以升级的版本号列表
+   * <p>网关可以升级的版本号列表</p>
    */
   AvailableUpgradeVersions?: Array<string>
   /**
-   * 是否提示可升级
+   * <p>是否提示可升级</p>
    */
   AvailableUpgrade?: boolean
   /**
-   * 可回退的版本
+   * <p>可回退的版本</p>
    */
   AvailableRollbackVersion?: string
+  /**
+   * <p>强制跳转HTTPS开关</p>
+   */
+  ForceHTTPSRedirect?: boolean
 }
 
 /**
@@ -1725,25 +1792,21 @@ export interface KVMapping {
 }
 
 /**
- * 定时伸缩配置参数
+ * AI 网关token长度路由配置
  */
-export interface CloudNativeAPIGatewayStrategyCronScalerConfigParam {
+export interface AIGWTokenLengthRoute {
   /**
-   * 定时伸缩周期
+   * <p>默认tokenizer编码器</p><p>枚举值：</p><ul><li>o200k_base： OpenApi o200k_base</li><li>cl100k_base： OpenApi cl100k_base</li><li>p50k_base： OpenApi p50k_base</li><li>r50k_base： OpenApi r50k_base</li></ul>
    */
-  Period?: string
+  DefaultEncodingName?: string
   /**
-   * 定时伸缩开始时间
+   * <p>token 计数失败、规则为空或未命中任何规则时执行的默认二级路由（暂时只能选择一个指定模型路由）</p>
    */
-  StartAt?: string
+  DefaultTarget?: AIGWLLMModelServiceSubRoute
   /**
-   * 定时伸缩目标节点数，不超过指标伸缩中定义的最大节点数
+   * <p>规则</p>
    */
-  TargetReplicas?: number
-  /**
-   * 定时伸缩cron表达式，无需输入
-   */
-  Crontab?: string
+  Rules?: Array<AIGWTokenLengthRouteRule>
 }
 
 /**
@@ -1820,6 +1883,28 @@ export interface ModifyCloudNativeAPIGatewayConsumerResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 定时伸缩配置参数
+ */
+export interface CloudNativeAPIGatewayStrategyCronScalerConfigParam {
+  /**
+   * 定时伸缩周期
+   */
+  Period?: string
+  /**
+   * 定时伸缩开始时间
+   */
+  StartAt?: string
+  /**
+   * 定时伸缩目标节点数，不超过指标伸缩中定义的最大节点数
+   */
+  TargetReplicas?: number
+  /**
+   * 定时伸缩cron表达式，无需输入
+   */
+  Crontab?: string
 }
 
 /**
@@ -1972,17 +2057,13 @@ export interface AutoScalerBehavior {
 }
 
 /**
- * 列表过滤条件，模糊匹配
+ * 缓存感知路由
  */
-export interface ListFilter {
+export interface AIGWCacheAwareRouteConfig {
   /**
-   * 过滤字段
+   * <p>前缀缓存感知路由模型服务候选列表</p>
    */
-  Key?: string
-  /**
-   * 过滤值
-   */
-  Value?: string
+  Candidates?: Array<AIGWCacheAwareRouteCandidate>
 }
 
 /**
@@ -2946,6 +3027,20 @@ export interface DescribeSREInstancesResponse {
 }
 
 /**
+ * OAuth2 凭证物料配置
+ */
+export interface AIGWOAuthCredentialConfig {
+  /**
+   * <p>OAuth2 client_id</p>
+   */
+  ClientId: string
+  /**
+   * <p>OAuth2 client_secret</p>
+   */
+  ClientSecret: string
+}
+
+/**
  * DescribeCloudNativeAPIGatewayConsumerGroup返回参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayConsumerGroupResponse {
@@ -3007,6 +3102,28 @@ export interface CreateCloudNativeAPIGatewayServiceRateLimitRequest {
    * 限流配置
    */
   LimitDetail: CloudNativeAPIGatewayRateLimitDetail
+}
+
+/**
+ * 模型服务二级路由配置
+ */
+export interface AIGWLLMModelServiceSubRoute {
+  /**
+   * <p>生效的路由算法类型：权重路由，模型名称路由、参数路由等Weighted/ModelName/Query (预留多个，暂时只能填写一个)</p>
+   */
+  SelectedTypes: Array<string>
+  /**
+   * <p>权重路由配置，最多10个</p>
+   */
+  WeightedConfig?: Array<CloudNativeAPIGatewayLLMModelServiceRouteWeightedStrategy>
+  /**
+   * <p>延迟路由</p>
+   */
+  LatencyPriorityConfig?: AIGWLatencyPriorityConfig
+  /**
+   * <p>指定模型路由（暂时只用在Token长度路由时的子路由选择）</p>
+   */
+  ModelServiceConfig?: AIGWRouteModelServiceConfig
 }
 
 /**
@@ -3642,6 +3759,16 @@ export interface AddCloudNativeAPIGatewayConsumerInGroupResponse {
 }
 
 /**
+ * AI 网关指定模型路由（暂时只用在Token长度路由时的子路由选择）
+ */
+export interface AIGWRouteModelServiceConfig {
+  /**
+   * <p>模型服务名字</p>
+   */
+  ModelServiceName?: string
+}
+
+/**
  * AI网关标签过滤
  */
 export interface AIGWTagFilter {
@@ -3895,6 +4022,22 @@ export interface CNAPIGwSecretKey {
    * <p>密钥归属资源类型。</p><p>枚举值：</p><ul><li>Consumer： 消费者</li><li>ModelService： 模型服务</li></ul>
    */
   ResourceType?: string
+  /**
+   * <p>JWT凭证配置</p>
+   */
+  JWTCredentialConfig?: AIGWJWTCredentialConfig
+  /**
+   * <p>OAuth凭证配置</p>
+   */
+  OAuthCredentialConfig?: AIGWOAuthCredentialConfig
+  /**
+   * <p>OIDC凭证配置</p>
+   */
+  OIDCCredentialConfig?: AIGWOIDCCredentialConfig
+  /**
+   * <p>secret key provider方</p><p>枚举值：</p><ul><li>Dify： Dify</li></ul>
+   */
+  Provider?: string
 }
 
 /**
@@ -4331,17 +4474,37 @@ export interface CreateCloudNativeAPIGatewayRouteRateLimitRequest {
 }
 
 /**
- * DeleteGovernanceAliases返回参数结构体
+ * 多环境网络信息
  */
-export interface DeleteGovernanceAliasesResponse {
+export interface EnvAddressInfo {
   /**
-   * 创建是否成功。
+   * 环境名
    */
-  Result?: boolean
+  EnvName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 是否开启config公网
    */
-  RequestId?: string
+  EnableConfigInternet?: boolean
+  /**
+   * config公网ip
+   */
+  ConfigInternetServiceIp?: string
+  /**
+   * config内网访问地址
+   */
+  ConfigIntranetAddress?: string
+  /**
+   * 是否开启config内网clb
+   */
+  EnableConfigIntranet?: boolean
+  /**
+   * 客户端公网带宽
+   */
+  InternetBandWidth?: number
+  /**
+   * 客户端公网CLB多可用区信息
+   */
+  CLBMultiRegion?: CLBMultiRegion
 }
 
 /**
@@ -4921,7 +5084,7 @@ export interface AccurateQpsThreshold {
  */
 export interface CreateCloudNativeAPIGatewaySecretKeyRequest {
   /**
-   * 实例 ID
+   * <p>实例 ID</p>
    */
   GatewayId: string
   /**
@@ -4956,6 +5119,22 @@ export interface CreateCloudNativeAPIGatewaySecretKeyRequest {
    * <p>密钥描述。最长 200 字符。</p>
    */
   Description?: string
+  /**
+   * <p>JWT凭证配置</p>
+   */
+  JWTCredentialConfig?: AIGWJWTCredentialConfig
+  /**
+   * <p>OAuth2.0凭证配置</p>
+   */
+  OAuthCredentialConfig?: AIGWOAuthCredentialConfig
+  /**
+   * <p>OIDC凭证配置</p>
+   */
+  OIDCCredentialConfig?: AIGWOIDCCredentialConfig
+  /**
+   * <p>第三方平台类型</p><p>枚举值：</p><ul><li>Dify： Dify平台</li></ul>
+   */
+  Provider?: string
 }
 
 /**
@@ -5701,6 +5880,24 @@ Standard｜Lane
 }
 
 /**
+ * AI 网关Token长度路由规则
+ */
+export interface AIGWTokenLengthRouteRule {
+  /**
+   * <p>token 长度下界，闭区间；0 合法</p>
+   */
+  MinTokenLength: number
+  /**
+   * <p>token 长度上界，闭区间</p>
+   */
+  MaxTokenLength: number
+  /**
+   * <p>命中该分段后执行的二级路由</p>
+   */
+  Target: AIGWLLMModelServiceSubRoute
+}
+
+/**
  * LLM 模型服务
  */
 export interface CloudNativeAPIGatewayLLMModelService {
@@ -5800,6 +5997,46 @@ export interface CloudNativeAPIGatewayLLMModelService {
    * <p>绑定的模型服务秘钥</p>
    */
   SecretKeyIds?: Array<string>
+  /**
+   * <p>模型改写规则</p>
+   */
+  ModelRewriteRules?: Array<AIGWModelRewriteRule>
+  /**
+   * <p>服务来源ID</p>
+   */
+  SourceId?: string
+  /**
+   * <p>命名空间</p>
+   */
+  Namespace?: string
+  /**
+   * <p>服务名称</p>
+   */
+  ServiceName?: string
+  /**
+   * <p>协议</p>
+   */
+  Protocol?: string
+  /**
+   * <p>扩展参数</p>
+   */
+  ExtParams?: Array<KeyValue>
+  /**
+   * <p>自定义供应商名称</p>
+   */
+  CustomProviderName?: string
+  /**
+   * <p>是否开启密钥轮转</p>
+   */
+  KeyRotationEnabled?: boolean
+  /**
+   * <p>密钥轮转周期</p><p>单位：天数</p>
+   */
+  KeyRotationPeriodDays?: number
+  /**
+   * <p>外部服务来源ID</p>
+   */
+  ExternalInstanceId?: string
 }
 
 /**
@@ -6549,6 +6786,14 @@ export interface AIGWLogConfig {
    * <p>日志记录的响应body的最大字节数</p><p>取值范围：[512, 1048576]</p><p>EnableResponseLogPayloads 为true时必填</p>
    */
   ResponseLogPayloadMaxSize?: number
+  /**
+   * <p>请求 payload access log 输出模式</p><p>枚举值：</p><ul><li>raw： access log 中 body 记录客户端原始请求</li><li>processed： access log 中 body 记录 AI 网关协议适配、改写、归一化后的 OpenAI-compatible 内容</li></ul>
+   */
+  RequestLogPayloadMode?: string
+  /**
+   * <p>上游原始 payload access log 输出模式</p><p>枚举值：</p><ul><li>raw： access log 中 body 记录客户端原始上游响应</li><li>processed： access log 中 body 记录 AI 网关协议适配、改写、归一化后的 OpenAI-compatible 内容</li></ul>
+   */
+  ResponseLogPayloadMode?: string
 }
 
 /**
@@ -6658,37 +6903,17 @@ export interface ModifyCloudNativeAPIGatewayCertificateRequest {
 }
 
 /**
- * 多环境网络信息
+ * DeleteGovernanceAliases返回参数结构体
  */
-export interface EnvAddressInfo {
+export interface DeleteGovernanceAliasesResponse {
   /**
-   * 环境名
+   * 创建是否成功。
    */
-  EnvName?: string
+  Result?: boolean
   /**
-   * 是否开启config公网
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  EnableConfigInternet?: boolean
-  /**
-   * config公网ip
-   */
-  ConfigInternetServiceIp?: string
-  /**
-   * config内网访问地址
-   */
-  ConfigIntranetAddress?: string
-  /**
-   * 是否开启config内网clb
-   */
-  EnableConfigIntranet?: boolean
-  /**
-   * 客户端公网带宽
-   */
-  InternetBandWidth?: number
-  /**
-   * 客户端公网CLB多可用区信息
-   */
-  CLBMultiRegion?: CLBMultiRegion
+  RequestId?: string
 }
 
 /**
@@ -6846,7 +7071,7 @@ export interface DeleteCloudNativeAPIGatewayLLMModelAPIRequest {
  */
 export interface DescribeCloudNativeAPIGatewayLLMModelAPIsRequest {
   /**
-   * 网关 id。
+   * <p>网关 id。</p>
    */
   GatewayId: string
   /**
@@ -6873,6 +7098,10 @@ export interface DescribeCloudNativeAPIGatewayLLMModelAPIsRequest {
    * <p>是否用于绑定场景。true 时仅返回可被绑定到指定消费者组的模型 API。</p>
    */
   UseToBind?: boolean
+  /**
+   * <p>消费者ID</p>
+   */
+  ConsumerId?: string
 }
 
 /**
@@ -6951,6 +7180,14 @@ export interface CloudNativeAPIGatewayLLMModelServiceRoute {
    * <p>延迟路由</p>
    */
   LatencyPriorityConfig?: AIGWLatencyPriorityConfig
+  /**
+   * <p>缓存感知路由配置（前缀缓存）</p>
+   */
+  CacheAwareRouteConfig?: AIGWCacheAwareRouteConfig
+  /**
+   * <p>token 长度路由</p>
+   */
+  TokenLengthRouteConfig?: AIGWTokenLengthRoute
 }
 
 /**
@@ -7137,6 +7374,28 @@ export interface DescribeCloudNativeAPIGatewayConfigResponse {
 }
 
 /**
+ * OIDC 凭证物料配置
+ */
+export interface AIGWOIDCCredentialConfig {
+  /**
+   * <p>IdP 注册的 client_id</p>
+   */
+  ClientId: string
+  /**
+   * <p>IdP 注册的 client_secret</p>
+   */
+  ClientSecret: string
+  /**
+   * <p>IdP Issuer URL</p>
+   */
+  IssuerURL: string
+  /**
+   * <p>IdP 中该用户的 claim 值</p>
+   */
+  ConsumerClaimValue?: string
+}
+
+/**
  * CreateCloudNativeAPIGatewayConsumerGroup返回参数结构体
  */
 export interface CreateCloudNativeAPIGatewayConsumerGroupResponse {
@@ -7284,18 +7543,17 @@ export interface ListCloudNativeAPIGatewayStrategyBindingGroupInfoResult {
 }
 
 /**
- * DescribeCloudNativeAPIGatewayCORS返回参数结构体
+ * 缓存感知路由候选模型服务
  */
-export interface DescribeCloudNativeAPIGatewayCORSResponse {
+export interface AIGWCacheAwareRouteCandidate {
   /**
-   * 出参
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>模型服务ID</p>
    */
-  Result?: DescribeKongCORSResult
+  ModelServiceId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>模型服务名称</p>
    */
-  RequestId?: string
+  ModelServiceName?: string
 }
 
 /**
@@ -7532,7 +7790,7 @@ export interface DescribeOneCloudNativeAPIGatewayServiceRequest {
  */
 export interface DescribeCloudNativeAPIGatewayLLMModelAPIsResponse {
   /**
-   * 模型 API 列表。
+   * <p>模型 API 列表。</p>
    */
   Result?: ListCloudNativeAPIGatewayLLMModelAPI
   /**
@@ -7553,6 +7811,10 @@ export interface AIGWLLMQuotaLimit {
    * <p>该模型服务每分钟 Token 数上限，0 表示该维度不限</p>
    */
   TPMLimit?: number
+  /**
+   * <p>并发限流数</p>
+   */
+  ConcurrentCountLimit?: number
 }
 
 /**
@@ -8097,6 +8359,21 @@ export interface ModifyCloudNativeAPIGatewayConsumerGroupRequest {
    * <p>消费者组描述。最长 200 字符。</p>
    */
   Description?: string
+}
+
+/**
+ * DescribeCloudNativeAPIGatewayCORS返回参数结构体
+ */
+export interface DescribeCloudNativeAPIGatewayCORSResponse {
+  /**
+   * 出参
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Result?: DescribeKongCORSResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9268,6 +9545,46 @@ export interface CreateCloudNativeAPIGatewayLLMModelServiceRequest {
    * <p>标签</p>
    */
   Tags?: Array<string>
+  /**
+   * <p>模型改写规则</p>
+   */
+  ModelRewriteRules?: Array<AIGWModelRewriteRule>
+  /**
+   * <p>服务来源ID</p>
+   */
+  SourceId?: string
+  /**
+   * <p>服务来源命名空间</p>
+   */
+  Namespace?: string
+  /**
+   * <p>服务来源服务名</p>
+   */
+  ServiceName?: string
+  /**
+   * <p>服务来源协议</p>
+   */
+  Protocol?: string
+  /**
+   * <p>扩展参数</p>
+   */
+  ExtParams?: Array<KeyValue>
+  /**
+   * <p>自定义供应商名字</p>
+   */
+  CustomProviderName?: string
+  /**
+   * <p>是否开启密钥轮转</p>
+   */
+  KeyRotationEnabled?: boolean
+  /**
+   * <p>密钥轮转周期</p><p>单位：天数</p>
+   */
+  KeyRotationPeriodDays?: number
+  /**
+   * <p>外部服务来源ID</p>
+   */
+  ExternalInstanceId?: string
 }
 
 /**
@@ -9351,21 +9668,17 @@ export interface DescribePublicAddressConfigRequest {
 }
 
 /**
- * CreateConfigFile返回参数结构体
+ * CreateConfigFileGroup请求参数结构体
  */
-export interface CreateConfigFileResponse {
+export interface CreateConfigFileGroupRequest {
   /**
-   * 是否创建成功
+   * tse 实例 id
    */
-  Result?: boolean
+  InstanceId: string
   /**
-   * 创建的配置文件Id
+   * 配置文件组实体
    */
-  ConfigFileId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ConfigFileGroup: ConfigFileGroup
 }
 
 /**
@@ -9390,6 +9703,20 @@ export interface CreateOrModifyCloudNativeAPIGatewayIPRestrictionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 模型名字重写规则
+ */
+export interface AIGWModelRewriteRule {
+  /**
+   * <p>原始模型</p>
+   */
+  SourceModel?: string
+  /**
+   * <p>目标模型</p>
+   */
+  TargetModel?: string
 }
 
 /**
@@ -9821,6 +10148,24 @@ export interface ModifyGovernanceNamespacesResponse {
    * 操作是否成功。
    */
   Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateConfigFile返回参数结构体
+ */
+export interface CreateConfigFileResponse {
+  /**
+   * 是否创建成功
+   */
+  Result?: boolean
+  /**
+   * 创建的配置文件Id
+   */
+  ConfigFileId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

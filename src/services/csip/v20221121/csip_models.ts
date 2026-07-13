@@ -15315,6 +15315,10 @@ export interface CosBucketId {
    */
   AppId?: string
   /**
+   *
+   */
+  IsAutoMonitor?: number
+  /**
    * bucket id集合
    */
   BucketIdSet?: Array<string>

@@ -11951,31 +11951,35 @@ export interface DeleteBatchIpAccessControlResponse {
 }
 
 /**
- * 有效大模型安全包信息
+ * 大模型安全「后付费」资源信息（数据源：tb_waf_llm_resource），与 DescribeInstances 的 InstanceDetail.LLMPkg 保持一致
  */
 export interface LLMPkg {
   /**
-   * 资源id
+   * <p>资源id</p>
    */
   ResourceIds?: string
   /**
-   * 状态
+   * <p>状态</p>
    */
   Status?: number
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region?: number
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   BeginTime?: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime?: string
   /**
-   * 计费项
+   * <p>申请数量</p>
+   */
+  InquireNum?: number
+  /**
+   * <p>计费项标签，如 sv_wsm_waf_llm_prompt_attack</p>
    */
   InquireKey?: string
 }

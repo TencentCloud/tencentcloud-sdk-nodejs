@@ -160,6 +160,22 @@ export interface CreateDBInstanceRequest {
    */
   ParamTemplateId?: string
   /**
+   * <p>数据库存储加密取值。</p><ul><li>No_Encryption：不采用存储加密。</li><li>TDE：开启 TDE 存储加密方式。</li></ul>
+   */
+  DataEncryption?: string
+  /**
+   * <p>如选取 TDE 存储加密，须指定密钥来源。</p><ul><li>auto 自动生成密钥。</li><li>manual 手动指定密钥。</li></ul>
+   */
+  EncryptionKeySource?: string
+  /**
+   * <p>密钥 ID。如密钥资源选取为指定自定义，须输入指定的密钥 ID。</p>
+   */
+  KeyId?: string
+  /**
+   * <p>如果密钥来源为指定自定义密钥，须填写该字段指定密钥的地域信息。</p>
+   */
+  KmsRegion?: string
+  /**
    * <p>实例CPU核大小，单位：C。具体售卖的CPU规格，请通过接口 <a href="https://cloud.tencent.com/document/product/240/38567">DescribeSpecInfo</a> 获取<br>注意：通用 I 型实例必须设置 CPU 大小。</p>
    */
   CpuCore?: number
@@ -461,11 +477,11 @@ export interface DescribeCurrentOpResponse {
  */
 export interface PromoteDBInstanceToActiveRequest {
   /**
-   * 灾备实例id
+   * <p>指定需转为普通实例的灾备或只读实例 ID。请登录 <a href="https://console.cloud.tencent.com/mongodb">MongoDB 控制台</a>在实例列表复制灾备或只读实例 ID。</p>
    */
   InstanceId: string
   /**
-   * 主实例id
+   * <p>指定灾备或只读实例所属的主实例。请登录 <a href="https://console.cloud.tencent.com/mongodb">MongoDB 控制台</a>在实例列表复制实例 ID。</p>
    */
   MasterId: string
 }
@@ -3155,6 +3171,22 @@ export interface CreateDBInstanceHourRequest {
    */
   ParamTemplateId?: string
   /**
+   * <p>数据库存储加密取值。</p><ul><li>No_Encryption：不采用存储加密。</li><li>TDE：开启 TDE 存储加密方式。</li></ul>
+   */
+  DataEncryption?: string
+  /**
+   * <p>如选取 TDE 存储加密，须指定密钥来源。</p><ul><li>auto 自动生成密钥。</li><li>manual 手动指定密钥。</li></ul>
+   */
+  EncryptionKeySource?: string
+  /**
+   * <p>密钥 ID。如密钥资源选取为指定自定义，须输入指定的密钥 ID。</p>
+   */
+  KeyId?: string
+  /**
+   * <p>如果密钥来源为指定自定义密钥，须填写该字段指定密钥的地域信息。</p>
+   */
+  KmsRegion?: string
+  /**
    * <p>实例CPU核大小，单位：C。具体售卖的CPU规格，请通过接口 <a href="https://cloud.tencent.com/document/product/240/38567">DescribeSpecInfo</a> 获取。<br>注意：通用 I 型实例必须设置 CPU 大小。</p>
    */
   CpuCore?: number
@@ -5470,7 +5502,7 @@ export interface RenewDBInstancesRequest {
  */
 export interface PromoteDBInstanceToActiveResponse {
   /**
-   * 任务id
+   * <p>任务 ID。</p>
    */
   FlowId?: number
   /**

@@ -178,15 +178,15 @@ export interface ModifyGrafanaInstanceResponse {
  */
 export interface DescribePolicyGroupInfoCallback {
   /**
-   * 用户回调接口地址
+   * <p>用户回调接口地址</p>
    */
   CallbackUrl: string
   /**
-   * 用户回调接口状态，0表示未验证，1表示已验证，2表示存在url但没有通过验证
+   * <p>用户回调接口状态，0表示未验证，1表示已验证，2表示存在url但没有通过验证</p>
    */
   ValidFlag: number
   /**
-   * 用户回调接口验证码
+   * <p>用户回调接口验证码</p>
    */
   VerifyCode: string
 }
@@ -2186,37 +2186,37 @@ export interface DescribeDNSConfigRequest {
  */
 export interface DescribePolicyGroupInfoConditionTpl {
   /**
-   * 策略组id
+   * <p>策略组id</p>
    */
   GroupId: number
   /**
-   * 策略组名称
+   * <p>策略组名称</p>
    */
   GroupName: string
   /**
-   * 策略类型
+   * <p>策略类型</p>
    */
   ViewName: string
   /**
-   * 策略组说明
+   * <p>策略组说明</p>
    */
   Remark: string
   /**
-   * 最后编辑的用户uin
+   * <p>最后编辑的用户uin</p>
    */
   LastEditUin: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InsertTime: number
   /**
-   * 是否且规则
+   * <p>是否且规则</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsUnionRule: number
@@ -5885,35 +5885,35 @@ export interface DescribePrometheusTargetsTMPRequest {
  */
 export interface DescribeBindingPolicyObjectListInstanceGroup {
   /**
-   * 实例分组id
+   * <p>实例分组id</p>
    */
   InstanceGroupId: number
   /**
-   * 告警策略类型名称
+   * <p>告警策略类型名称</p>
    */
   ViewName: string
   /**
-   * 最后编辑uin
+   * <p>最后编辑uin</p>
    */
   LastEditUin: string
   /**
-   * 实例分组名称
+   * <p>实例分组名称</p>
    */
   GroupName: string
   /**
-   * 实例数量
+   * <p>实例数量</p>
    */
   InstanceSum: number
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   InsertTime: number
   /**
-   * 实例所在的地域集合
+   * <p>实例所在的地域集合</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Regions: Array<string>
@@ -5970,19 +5970,19 @@ export interface GetPrometheusAgentManagementCommandRequest {
  */
 export interface DescribeBindingPolicyObjectListDimension {
   /**
-   * 地域id
+   * <p>地域id</p>
    */
   RegionId: number
   /**
-   * 地域简称
+   * <p>地域简称</p>
    */
   Region: string
   /**
-   * 维度组合json字符串
+   * <p>维度组合json字符串</p>
    */
   Dimensions: string
   /**
-   * 事件维度组合json字符串
+   * <p>事件维度组合json字符串</p>
    */
   EventDimensions: string
 }
@@ -6013,23 +6013,23 @@ export interface BindProgressResponse {
  */
 export interface DescribePolicyGroupInfoEventCondition {
   /**
-   * 事件id
+   * <p>事件id</p>
    */
   EventId: number
   /**
-   * 事件告警规则id
+   * <p>事件告警规则id</p>
    */
   RuleId: number
   /**
-   * 事件名称
+   * <p>事件名称</p>
    */
   EventShowName: string
   /**
-   * 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次
+   * <p>告警发送周期单位秒。&lt;0 不触发, 0 只触发一次, &gt;0 每隔triggerTime秒触发一次</p>
    */
   AlarmNotifyPeriod: number
   /**
-   * 告警发送收敛类型。0连续告警，1指数告警
+   * <p>告警发送收敛类型。0连续告警，1指数告警</p>
    */
   AlarmNotifyType: number
 }
@@ -7507,19 +7507,19 @@ export interface TemplateGroup {
  */
 export interface DescribeBindingPolicyObjectListInstance {
   /**
-   * 对象唯一id
+   * <p>对象唯一id</p>
    */
   UniqueId?: string
   /**
-   * 表示对象实例的维度集合，jsonObj字符串
+   * <p>表示对象实例的维度集合，jsonObj字符串</p>
    */
   Dimensions?: string
   /**
-   * 对象是否被屏蔽，0表示未屏蔽，1表示被屏蔽
+   * <p>对象是否被屏蔽，0表示未屏蔽，1表示被屏蔽</p>
    */
   IsShielded?: number
   /**
-   * 对象所在的地域
+   * <p>对象所在的地域</p>
    */
   Region?: string
 }
@@ -8094,50 +8094,50 @@ export interface DescribePrometheusAgentsRequest {
  */
 export interface DescribePolicyGroupInfoCondition {
   /**
-   * 指标名称
+   * <p>指标名称</p>
    */
   MetricShowName: string
   /**
-   * 数据聚合周期(单位秒)
+   * <p>数据聚合周期(单位秒)</p>
    */
   Period: number
   /**
-   * 指标id
+   * <p>指标id</p>
    */
   MetricId: number
   /**
-   * 阈值规则id
+   * <p>阈值规则id</p>
    */
   RuleId: number
   /**
-   * 指标单位
+   * <p>指标单位</p>
    */
   Unit: string
   /**
-   * 告警发送收敛类型。0连续告警，1指数告警
+   * <p>告警发送收敛类型。0连续告警，1指数告警</p>
    */
   AlarmNotifyType: number
   /**
-   * 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次
+   * <p>告警发送周期单位秒。&lt;0 不触发, 0 只触发一次, &gt;0 每隔triggerTime秒触发一次</p>
    */
   AlarmNotifyPeriod: number
   /**
-   * 比较类型，1表示大于，2表示大于等于，3表示小于，4表示小于等于，5表示相等，6表示不相等，7表示日同比上涨，8表示日同比下降，9表示周同比上涨，10表示周同比下降，11表示周期环比上涨，12表示周期环比下降
+   * <p>比较类型，1表示大于，2表示大于等于，3表示小于，4表示小于等于，5表示相等，6表示不相等，7表示日同比上涨，8表示日同比下降，9表示周同比上涨，10表示周同比下降，11表示周期环比上涨，12表示周期环比下降</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CalcType: number
   /**
-   * 检测阈值
+   * <p>检测阈值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CalcValue: string
   /**
-   * 持续多长时间触发规则会告警(单位秒)
+   * <p>持续多长时间触发规则会告警(单位秒)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ContinueTime: number
   /**
-   * 告警指标名
+   * <p>告警指标名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MetricName: string
@@ -8501,31 +8501,31 @@ export interface UnbindPrometheusManagedGrafanaRequest {
  */
 export interface DescribePolicyGroupListGroupInstanceGroup {
   /**
-   * 实例分组名称id
+   * <p>实例分组名称id</p>
    */
   InstanceGroupId: number
   /**
-   * 策略类型视图名称
+   * <p>策略类型视图名称</p>
    */
   ViewName: string
   /**
-   * 最近编辑的用户uin
+   * <p>最近编辑的用户uin</p>
    */
   LastEditUin: string
   /**
-   * 实例分组名称
+   * <p>实例分组名称</p>
    */
   GroupName: string
   /**
-   * 实例数量
+   * <p>实例数量</p>
    */
   InstanceSum: number
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   InsertTime: number
 }

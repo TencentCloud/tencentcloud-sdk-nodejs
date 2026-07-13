@@ -20,7 +20,7 @@
  */
 export interface CreateAccelerateAreasResponse {
   /**
-   * 异步任务ID。
+   * <p>异步任务ID。</p>
    */
   TaskId?: string
   /**
@@ -460,11 +460,11 @@ export interface DescribeAccelerateAreasRequest {
  */
 export interface ModifyAccelerateAreasRequest {
   /**
-   * 全球加速实例ID。
+   * <p>全球加速实例ID。</p>
    */
   GlobalAcceleratorId: string
   /**
-   * 加速地域信息。
+   * <p>加速地域信息。</p><p>入参限制：数组长度不能超过10。</p>
    */
   AcceleratorAreas: Array<AcceleratorAreas>
 }
@@ -670,7 +670,7 @@ export interface DeleteAccelerateAreasResponse {
  */
 export interface ModifyAccelerateAreasResponse {
   /**
-   * 异步任务ID。
+   * <p>异步任务ID。</p>
    */
   TaskId?: string
   /**
@@ -956,11 +956,11 @@ export interface DescribeEndpointGroupsRequest {
  */
 export interface CreateAccelerateAreasRequest {
   /**
-   * 全球加速实例ID。
+   * <p>全球加速实例ID。</p>
    */
   GlobalAcceleratorId: string
   /**
-   * 加速地域信息。
+   * <p>加速地域信息。一次最多创建10组加速地域。</p>
    */
   AcceleratorAreas: Array<AcceleratorAreas>
 }

@@ -1055,23 +1055,23 @@ export interface Tag {
  */
 export interface UpdateSandboxToolRequest {
   /**
-   * 沙箱工具ID
+   * <p>沙箱工具ID</p>
    */
   ToolId: string
   /**
-   * 沙箱工具描述，最大长度200字符
+   * <p>沙箱工具描述，最大长度200字符</p>
    */
   Description?: string
   /**
-   * 网络配置
+   * <p>网络配置</p>
    */
   NetworkConfiguration?: NetworkConfiguration
   /**
-   * 标签
+   * <p>标签</p>
    */
   Tags?: Array<Tag>
   /**
-   * 沙箱工具自定义配置
+   * <p>沙箱工具自定义配置</p>
    */
   CustomConfiguration?: CustomConfiguration
 }

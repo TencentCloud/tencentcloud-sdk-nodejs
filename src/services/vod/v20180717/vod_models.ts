@@ -15835,6 +15835,10 @@ export interface AigcVideoTaskOutput {
    * <p>任务类型为 Procedure 的任务 ID。若发起<a href="https://cloud.tencent.com/document/product/266/126239">创建 AIGC 生视频任务</a>时指定了任务流模板(Procedure)，当该任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。</p>
    */
   ProcedureTaskIds?: Array<string>
+  /**
+   * <p>AIGC 生视频任务的用量信息。</p>
+   */
+  Usage?: AigcVideoTaskUsage
 }
 
 /**
@@ -22132,6 +22136,84 @@ export interface DescribeStorageRegionsResponse {
 }
 
 /**
+ * 采样截图模板详情
+ */
+export interface SampleSnapshotTemplate {
+  /**
+   * 采样截图模板唯一标识。
+   */
+  Definition: number
+  /**
+   * 模板类型，取值范围：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
+   */
+  Type: string
+  /**
+   * 采样截图模板名称。
+   */
+  Name: string
+  /**
+   * 模板描述信息。
+   */
+  Comment: string
+  /**
+   * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+   */
+  Width: number
+  /**
+   * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+   */
+  Height: number
+  /**
+   * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+   */
+  ResolutionAdaptive: string
+  /**
+   * 图片格式。
+   */
+  Format: string
+  /**
+   * 采样截图类型。
+   */
+  SampleType: string
+  /**
+   * 采样间隔。
+   */
+  SampleInterval: number
+  /**
+   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  CreateTime: string
+  /**
+   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  UpdateTime: string
+  /**
+   * 填充方式，当截图配置宽高参数与原始视频的宽高比不一致时，对截图的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+<li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
+<li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
+默认值：black 。
+   */
+  FillType: string
+}
+
+/**
  * ModifySnapshotByTimeOffsetTemplate请求参数结构体
  */
 export interface ModifySnapshotByTimeOffsetTemplateRequest {
@@ -26748,81 +26830,17 @@ export interface CreateAnimatedGraphicsTemplateResponse {
 }
 
 /**
- * 采样截图模板详情
+ * AIGC 生视频任务的用量。
  */
-export interface SampleSnapshotTemplate {
+export interface AigcVideoTaskUsage {
   /**
-   * 采样截图模板唯一标识。
+   * <p>输入 Token 数目。</p>
    */
-  Definition: number
+  InputTokens?: number
   /**
-   * 模板类型，取值范围：
-<li>Preset：系统预置模板；</li>
-<li>Custom：用户自定义模板。</li>
+   * <p>思考产生的 Token 数目。</p>
    */
-  Type: string
-  /**
-   * 采样截图模板名称。
-   */
-  Name: string
-  /**
-   * 模板描述信息。
-   */
-  Comment: string
-  /**
-   * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
-   */
-  Width: number
-  /**
-   * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
-   */
-  Height: number
-  /**
-   * 分辨率自适应，可选值：
-<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
-<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
-默认值：open。
-   */
-  ResolutionAdaptive: string
-  /**
-   * 图片格式。
-   */
-  Format: string
-  /**
-   * 采样截图类型。
-   */
-  SampleType: string
-  /**
-   * 采样间隔。
-   */
-  SampleInterval: number
-  /**
-   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  CreateTime: string
-  /**
-   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  UpdateTime: string
-  /**
-   * 填充方式，当截图配置宽高参数与原始视频的宽高比不一致时，对截图的处理方式，即为“填充”。可选填充方式：
-<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
-<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
-<li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
-<li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
-默认值：black 。
-   */
-  FillType: string
+  ThoughtTokens?: number
 }
 
 /**

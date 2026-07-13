@@ -1556,21 +1556,25 @@ export interface BuildClientNodeMountCommandRequest {
  */
 export interface BuildCustomerClusterRequest {
   /**
-   * 文件系统id
+   * <p>文件系统id</p>
    */
   FileSystemId?: string
   /**
-   * vpc网络ID
+   * <p>vpc网络ID</p>
    */
   VpcId?: string
   /**
-   * 子网id
+   * <p>子网id</p>
    */
   SubnetId?: string
   /**
-   * 集群名称
+   * <p>集群名称</p>
    */
   ClusterName?: string
+  /**
+   * <p>可用区</p>
+   */
+  Zone?: string
 }
 
 /**
@@ -1614,7 +1618,7 @@ export interface UpdateFilesetGeneralConfigRequest {
  */
 export interface BuildCustomerClusterResponse {
   /**
-   * 客户端集群Id
+   * <p>客户端集群Id</p>
    */
   ClusterId?: string
   /**

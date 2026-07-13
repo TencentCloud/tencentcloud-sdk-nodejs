@@ -1157,17 +1157,17 @@ export interface VpcAclRule {
  */
 export interface CommonFilter {
   /**
-   * 筛选字段名。支持：SecurityGroupId、FwGroupId、Ip（IP地址模糊搜索）、InstanceName（实例名称模糊搜索）、VpcId（VPC ID精确搜索）
+   * <p>筛选字段名。支持：SecurityGroupId、FwGroupId、IP（IP地址模糊搜索）、InstanceName（实例名称模糊搜索）、VpcId（VPC ID精确搜索）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 筛选值列表
+   * <p>筛选值列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Values?: Array<string>
   /**
-   * 操作类型。1=等于，7=in，9=模糊匹配
+   * <p>操作类型。1=等于，7=in，9=模糊匹配</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OperatorType?: number
@@ -1232,7 +1232,7 @@ export interface CreateSecurityGroupRuleGroupResponse {
 }
 
 /**
- * 安全组服务模版
+ * 安全组服务模板
  */
 export interface ServiceTemplateSpecification {
   /**
@@ -1274,7 +1274,7 @@ export interface ModifyNatAclRuleRequest {
 }
 
 /**
- * 安全组地址模版
+ * 安全组地址模板
  */
 export interface AddressTemplateSpecification {
   /**
@@ -1538,172 +1538,139 @@ export interface DescribeRiskCategoryStatsRequest {
  */
 export interface AnalysisSgRuleInfoResp {
   /**
-   * 规则id  等同RuleUuid
+   * <p>规则id  等同RuleUuid</p>
    */
   Id?: number
   /**
-   * 规则Id
+   * <p>规则Id</p>
    */
   RuleId?: string
   /**
-   * 排序
+   * <p>排序</p>
    */
   OrderIndex?: number
   /**
-   * 云防排序
+   * <p>云防排序</p>
    */
   CfwOrderIndex?: number
   /**
-   * 源规则内容
+   * <p>源规则内容</p>
    */
   SourceId?: string
   /**
-   * 源规则类型 
-取值范围 0/1/2/3/4/5/6/7/8/9/100
-0表示ip(net),
-1表示VPC实例(instance)
-2表示子网实例(instance)
-3表示CVM实例(instance)
-4表示CLB实例(instance)
-5表示ENI实例(instance)
-6表示数据库实例(instance)
-7表示模板(template)
-8表示标签(tag)
-9表示地域(region)
-100表示资产分组(resourcegroup)
+   * <p>源规则类型<br>取值范围 0/1/2/3/4/5/6/7/8/9<br>0表示ip(net),<br>1表示VPC实例(instance)<br>2表示子网实例(instance)<br>3表示CVM实例(instance)<br>4表示CLB实例(instance)<br>5表示ENI实例(instance)<br>6表示数据库实例(instance)<br>7表示模板(template)<br>8表示标签(tag)<br>9表示地域(region)</p><p>枚举值：</p><ul><li>0： IP / CIDR</li><li>1： VPC 实例</li><li>2： 子网 </li><li>3： CVM 实例</li><li>4： CLB 实例</li><li>5： ENI（弹性网卡）实例</li><li>6： CDB（云数据库）实例</li><li>7： 参数模板</li><li>8： 标签</li><li>9： 地域</li></ul>
    */
   SourceType?: number
   /**
-   * 目的规则内容
+   * <p>目的规则内容</p>
    */
   TargetId?: string
   /**
-   * 目的规则类型 
-取值范围 0/1/2/3/4/5/6/7/8/9/100
-0表示ip(net),
-1表示VPC实例(instance)
-2表示子网实例(instance)
-3表示CVM实例(instance)
-4表示CLB实例(instance)
-5表示ENI实例(instance)
-6表示数据库实例(instance)
-7表示模板(template)
-8表示标签(tag)
-9表示地域(region)
-100表示资产分组(resourcegroup)
+   * <p>目的规则类型<br>取值范围 0/1/2/3/4/5/6/7/8/9/100<br>0表示ip(net),<br>1表示VPC实例(instance)<br>2表示子网实例(instance)<br>3表示CVM实例(instance)<br>4表示CLB实例(instance)<br>5表示ENI实例(instance)<br>6表示数据库实例(instance)<br>7表示模板(template)<br>8表示标签(tag)<br>9表示地域(region)<br>100表示资产分组(resourcegroup)</p><p>枚举值：</p><ul><li>0： IP / CIDR</li><li>1： VPC 实例</li><li>2： 子网 </li><li>3： CVM 实例</li><li>4： CLB 实例</li><li>5： ENI（弹性网卡）实例</li><li>6： CDB（云数据库）实例</li><li>7： 参数模板</li><li>8： 标签</li><li>9： 地域</li></ul>
    */
   TargetType?: number
   /**
-   * 协议名称
-取值范围:TCP/ANY/ICMP/UDP
-ANY:表示所有
-
+   * <p>协议名称<br>取值范围:TCP/ANY/ICMP/UDP<br>ANY:表示所有</p>
    */
   Protocol?: string
   /**
-   * 端口
+   * <p>端口</p>
    */
   Port?: string
   /**
-   * 规则策略
-取值范围:1/2
-1:阻断
-2:放行
+   * <p>规则策略<br>取值范围:1/2<br>1:阻断<br>2:放行</p>
    */
   Strategy?: number
   /**
-   * 描述
+   * <p>描述</p>
    */
   Detail?: string
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region?: string
   /**
-   * 服务模板id
+   * <p>服务模板id</p>
    */
   ServiceTemplateId?: string
   /**
-   * 源资产名称
+   * <p>源资产名称</p>
    */
   SouInstanceName?: string
   /**
-   * 源资产公网ip
+   * <p>源资产公网ip</p>
    */
   SouPublicIp?: string
   /**
-   * 源资产内网ip
+   * <p>源资产内网ip</p>
    */
   SouPrivateIp?: string
   /**
-   * 源资产网段信息
+   * <p>源资产网段信息</p>
    */
   SouCidr?: string
   /**
-   * 源模板名称
+   * <p>源模板名称</p>
    */
   SouParameterName?: string
   /**
-   * 目的资产名称
+   * <p>目的资产名称</p>
    */
   InstanceName?: string
   /**
-   * 目的资产公网ip
+   * <p>目的资产公网ip</p>
    */
   PublicIp?: string
   /**
-   * 目的资产内网ip
+   * <p>目的资产内网ip</p>
    */
   PrivateIp?: string
   /**
-   * 目的资产网段信息
+   * <p>目的资产网段信息</p>
    */
   Cidr?: string
   /**
-   * 目的模板名称
+   * <p>目的模板名称</p>
    */
   ParameterName?: string
   /**
-   * 端口模板名称
+   * <p>端口模板名称</p>
    */
   ProtocolPortName?: string
   /**
-   * 域名解析的IP统计
+   * <p>域名解析的IP统计</p>
    */
   DnsParseCount?: SgDnsParseCount
   /**
-   * 规则生效范围
+   * <p>规则生效范围</p>
    */
   Scope?: string
   /**
-   * 分区：
-1防火墙管理最前分区
-2是云防规则
-3防火墙管理最后分区
+   * <p>分区：<br>1防火墙管理最前分区<br>2是云防规则<br>3防火墙管理最后分区</p>
    */
   RulePartition?: number
   /**
-   * 规则组Id
+   * <p>规则组Id</p>
    */
   GroupId?: string
   /**
-   * 规则组名称
+   * <p>规则组名称</p>
    */
   GroupName?: string
   /**
-   * 规则组内规则id
+   * <p>规则组内规则id</p>
    */
   GroupRuleId?: string
   /**
-   * 策略Id
+   * <p>策略Id</p>
    */
   StrategyId?: string
   /**
-   * ip类型
+   * <p>ip类型</p>
    */
   IpVersion?: string
   /**
-   * 成员信息
+   * <p>成员信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BelongMember?: MemberInfo
@@ -1714,63 +1681,63 @@ ANY:表示所有
  */
 export interface NatAclRule {
   /**
-   * 源地址内容
+   * <p>源地址内容</p>
    */
   SourceContent: string
   /**
-   * 源类型：ip/url/template/instance/tag
+   * <p>源类型：ip/url/template/instance/tag</p>
    */
   SourceType: string
   /**
-   * 目的地址内容
+   * <p>目的地址内容</p>
    */
   TargetContent: string
   /**
-   * 目的类型：ip/url/template/instance/tag
+   * <p>目的类型：ip/url/template/instance/tag</p>
    */
   TargetType: string
   /**
-   * 协议：TCP/UDP/ICMP/ANY/HTTP/HTTPS/DNS/FTP等
+   * <p>协议：TCP/UDP/ICMP/ANY/HTTP/HTTPS/DNS/FTP等</p>
    */
   Protocol: string
   /**
-   * 动作：accept/drop/log
+   * <p>动作：accept/drop/log</p>
    */
   RuleAction: string
   /**
-   * 优先级（从1开始）
+   * <p>优先级（从1开始）</p>
    */
   OrderIndex: number
   /**
-   * 规则生效范围：ALL-全局生效，ap-xxx-地域生效，cfwnat-xxx-NAT防火墙实例生效
+   * <p>规则生效范围：ALL-全局生效，ap-xxx-地域生效，cfwnat-xxx-NAT防火墙实例生效</p>
    */
   Scope: string
   /**
-   * 规则方向：1-入站规则，0-出站规则
+   * <p>规则方向：1-入站规则，0-出站规则</p>
    */
   Direction?: number
   /**
-   * 规则ID（修改时必填）
+   * <p>规则ID（修改时必填）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleId?: string
   /**
-   * 端口（ICMP协议时为空）
+   * <p>端口（ICMP协议时为空）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Port?: string
   /**
-   * 规则描述
+   * <p>规则描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 端口模板ID
+   * <p>端口模板ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamTemplateId?: string
   /**
-   * 规则归属的成员账号ID（当Scope为cfwnat-xxx或SourceType/DestType为instance/tag时必填）
+   * <p>规则归属的成员账号ID(当Scope为cfwnat-xxx或SourceType/DestType为instance/tag时必填)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BelongMemberId?: string
@@ -2311,146 +2278,119 @@ export interface SecurityGroupRiskPolicy {
  */
 export interface SecGroupRuleResp {
   /**
-   * 排序
+   * <p>排序</p>
    */
   OrderIndex?: number
   /**
-   * 主键id
+   * <p>主键id</p>
    */
   RuleId?: string
   /**
-   * ip类型
+   * <p>ip类型</p>
    */
   IpVersion?: string
   /**
-   * 源规则内容
+   * <p>源规则内容</p>
    */
   SourceId?: string
   /**
-   * 源规则类型 
-取值范围 0/1/2/3/4/5/6/7/8/9/100
-0表示ip(net),
-1表示VPC实例(instance)
-2表示子网实例(instance)
-3表示CVM实例(instance)
-4表示CLB实例(instance)
-5表示ENI实例(instance)
-6表示数据库实例(instance)
-7表示模板(template)
-8表示标签(tag)
-9表示地域(region)
-100表示资产分组(resourcegroup)
+   * <p>源规则类型<br>取值范围 0/1/2/3/4/5/6/7/8/9/100<br>0表示ip(net),<br>1表示VPC实例(instance)<br>2表示子网实例(instance)<br>3表示CVM实例(instance)<br>4表示CLB实例(instance)<br>5表示ENI实例(instance)<br>6表示数据库实例(instance)<br>7表示模板(template)<br>8表示标签(tag)<br>9表示地域(region)<br>100表示资产分组(resourcegroup)</p>
    */
   SourceType?: number
   /**
-   * 目的规则内容
+   * <p>目的规则内容</p>
    */
   TargetId?: string
   /**
-   * 目的规则类型 
-取值范围 0/1/2/3/4/5/6/7/8/9/100
-0表示ip(net),
-1表示VPC实例(instance)
-2表示子网实例(instance)
-3表示CVM实例(instance)
-4表示CLB实例(instance)
-5表示ENI实例(instance)
-6表示数据库实例(instance)
-7表示模板(template)
-8表示标签(tag)
-9表示地域(region)
-100表示资产分组(resourcegroup)
+   * <p>目的规则类型<br>取值范围 0/1/2/3/4/5/6/7/8/9/100<br>0表示ip(net),<br>1表示VPC实例(instance)<br>2表示子网实例(instance)<br>3表示CVM实例(instance)<br>4表示CLB实例(instance)<br>5表示ENI实例(instance)<br>6表示数据库实例(instance)<br>7表示模板(template)<br>8表示标签(tag)<br>9表示地域(region)<br>100表示资产分组(resourcegroup)</p>
    */
   TargetType?: number
   /**
-   * 协议名称
-取值范围:TCP/ANY/ICMP/UDP
-ANY:表示所有
-
+   * <p>协议名称<br>取值范围:TCP/ANY/ICMP/UDP<br>ANY:表示所有</p>
    */
   Protocol?: string
   /**
-   * 端口
+   * <p>端口</p>
    */
   Port?: string
   /**
-   * 策略
+   * <p>策略</p>
    */
   Strategy?: number
   /**
-   * 描述
+   * <p>描述</p>
    */
   Detail?: string
   /**
-   * 地域
+   * <p>地域</p>
    */
   Region?: string
   /**
-   * 服务模板id
+   * <p>服务模板id</p>
    */
   ServiceTemplateId?: string
   /**
-   * 源资产名称
+   * <p>源资产名称</p>
    */
   SouInstanceName?: string
   /**
-   * 源资产公网ip
+   * <p>源资产公网ip</p>
    */
   SouPublicIp?: string
   /**
-   * 源资产内网ip
+   * <p>源资产内网ip</p>
    */
   SouPrivateIp?: string
   /**
-   * 源资产网段信息
+   * <p>源资产网段信息</p>
    */
   SouCidr?: string
   /**
-   * 源模板名称
+   * <p>源模板名称</p>
    */
   SouParameterName?: string
   /**
-   * 目的资产名称
+   * <p>目的资产名称</p>
    */
   InstanceName?: string
   /**
-   * 目的资产公网ip
+   * <p>目的资产公网ip</p>
    */
   PublicIp?: string
   /**
-   * 目的资产内网ip
+   * <p>目的资产内网ip</p>
    */
   PrivateIp?: string
   /**
-   * 目的资产网段信息
+   * <p>目的资产网段信息</p>
    */
   Cidr?: string
   /**
-   * 目的模板名称
+   * <p>目的模板名称</p>
    */
   ParameterName?: string
   /**
-   * 端口模板名称
+   * <p>端口模板名称</p>
    */
   ProtocolPortName?: string
   /**
-   * 规则id  等同RuleUuid
+   * <p>规则id  等同RuleUuid</p>
    */
   Id?: number
   /**
-   * 域名解析的IP统计
+   * <p>域名解析的IP统计</p>
    */
   DnsParseCount?: SgDnsParseCount
   /**
-   * 规则生效范围
+   * <p>规则生效范围</p>
    */
   Scope?: string
   /**
-   * 规则最新一次是否有改动 取值范围：0/1 0:否 1:是
+   * <p>规则最近一次是否有改动 取值范围：0/1 0:否 1:是</p>
    */
   IsNew?: number
   /**
-   * 规则归属的成员账号（当FwGroupId为cfwg-xxx或SourceType/DestType为instance/tag时必填)
+   * <p>规则归属的成员账号（当FwGroupId为cfwg-xxx或SourceType/DestType为instance/tag时必填)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BelongMember?: MemberInfo

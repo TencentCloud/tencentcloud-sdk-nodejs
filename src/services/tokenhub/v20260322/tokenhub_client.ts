@@ -29,17 +29,22 @@ import {
   ModelImage,
   UsageSeries,
   DescribeTokenPlanListResponse,
+  DescribeModelEndpointListResponse,
   DeleteGlossaryEntriesRequest,
   CreateGlossaryEntriesResponse,
   CreateTokenPlanApiKeysResponse,
   ModelAccessInfo,
   DescribeModelListResponse,
+  DeleteEndpointResponse,
   CreateTokenPlanTeamOrderAndBuyRequest,
+  CreateEndpointRequest,
   DeleteTokenPlanApiKeyResponse,
+  EndpointCreateDetail,
   GlossaryEntryItem,
   QuotaCreateItem,
   ModifyGlossaryEntriesResponse,
   DescribeTokenPlanResponse,
+  EndpointDetail,
   DescribeModelListRequest,
   DescribeTokenPlanApiKeySecretResponse,
   GlossaryEntryInput,
@@ -53,6 +58,7 @@ import {
   DescribeTokenPlanApiKeyRequest,
   DeleteApiKeyResponse,
   ModifyGlossaryEntryInput,
+  CreateEndpointResponse,
   DescribeTokenPlanApiKeyListRequest,
   DescribeGlossariesRequest,
   DescribeTokenPlanApiKeyUsageDetailRequest,
@@ -74,7 +80,9 @@ import {
   Model,
   ModifyTokenPlanApiKeyResponse,
   DescribeApiKeyListRequest,
+  ModifyEndpointRequest,
   UpgradeTokenPlanTeamOrderRequest,
+  ModelEndpointView,
   TokenSummaryBillingItem,
   DescribeTokenPlanApiKeyUsageDetailResponse,
   ModifyApiKeyInfoRequest,
@@ -86,10 +94,14 @@ import {
   BatchCreateFailedItem,
   CreateApiKeyResponse,
   ModelSpec,
+  DescribeEndpointRequest,
   TokenSummary,
+  DescribeEndpointResponse,
   CreateTokenPlanApiKeysRequest,
+  ModifyEndpointResponse,
   DeleteTokenPlanApiKeyRequest,
   ModelChargingItem,
+  DescribeModelEndpointListRequest,
   DescribeTokenPlanApiKeyResponse,
   DescribeTokenPlanListRequest,
   ModelFreeTrialInfo,
@@ -99,6 +111,7 @@ import {
   UsageRankItem,
   CreateGlossaryResponse,
   ModifyGlossaryEntriesRequest,
+  DeleteEndpointRequest,
   RenewTokenPlanTeamOrderRequest,
   ModelSiteRegion,
   ModifyApiKeyStatusResponse,
@@ -116,6 +129,18 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("tokenhub.tencentcloudapi.com", "2026-03-22", clientConfig)
+  }
+
+  /**
+     * 查询模型接入点列表。
+
+以模型为基准展示所有在线文本类型模型的接入点概览，支持按状态、计费方式、创建来源等条件筛选，使用 Offset/Limit 分页。
+     */
+  async DescribeModelEndpointList(
+    req: DescribeModelEndpointListRequest,
+    cb?: (error: string, rep: DescribeModelEndpointListResponse) => void
+  ): Promise<DescribeModelEndpointListResponse> {
+    return this.request("DescribeModelEndpointList", req, cb)
   }
 
   /**
@@ -251,6 +276,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 创建推理服务。
+
+创建一个在线推理服务，创建成功后返回推理服务 ID。
+     */
+  async CreateEndpoint(
+    req: CreateEndpointRequest,
+    cb?: (error: string, rep: CreateEndpointResponse) => void
+  ): Promise<CreateEndpointResponse> {
+    return this.request("CreateEndpoint", req, cb)
+  }
+
+  /**
      * 查询术语条目列表。
 
 查询指定术语库下的术语条目。支持分页。
@@ -355,6 +392,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 查询推理服务详情。
+
+根据推理服务 ID 查询推理服务的详细信息，包括计费信息、免费额度、API 调用地址等。
+     */
+  async DescribeEndpoint(
+    req: DescribeEndpointRequest,
+    cb?: (error: string, rep: DescribeEndpointResponse) => void
+  ): Promise<DescribeEndpointResponse> {
+    return this.request("DescribeEndpoint", req, cb)
+  }
+
+  /**
      * 重置 TokenPlan APIKey 密钥。
 
 重新生成密钥值，密钥版本号递增，旧密钥立即失效。APIKey ID 不变。重置后需通过 DescribeTokenPlanApiKeySecret 查询新密钥。
@@ -364,6 +413,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyTokenPlanApiKeySecretResponse) => void
   ): Promise<ModifyTokenPlanApiKeySecretResponse> {
     return this.request("ModifyTokenPlanApiKeySecret", req, cb)
+  }
+
+  /**
+     * 删除推理服务。
+
+删除指定的推理服务端点，操作不可逆。调用接口后，若通过 DescribeEndpoint 接口查询不到对应的端点，则表示删除成功。
+     */
+  async DeleteEndpoint(
+    req?: DeleteEndpointRequest,
+    cb?: (error: string, rep: DeleteEndpointResponse) => void
+  ): Promise<DeleteEndpointResponse> {
+    return this.request("DeleteEndpoint", req, cb)
   }
 
   /**
@@ -434,6 +495,23 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteTokenPlanApiKeyResponse) => void
   ): Promise<DeleteTokenPlanApiKeyResponse> {
     return this.request("DeleteTokenPlanApiKey", req, cb)
+  }
+
+  /**
+     * 修改推理服务。
+
+修改推理服务的属性，支持修改服务名称、QPM/TPM 限流上限、TPM 包续费设置、智能路由开关和手动重试 TPM 购买。
+
+注意事项：
+- 不支持通过本接口切换计费类型（ChargeType），计费类型仅可在创建推理服务（CreateEndpoint）时指定。
+- 不支持通过本接口修改 TPM 预付费保障包的 quota（TpmInputLimit/TpmOutputLimit/TimeSpan），这些值仅可在创建推理服务时指定。
+- 当 RetryTPMPurchase 为 true 时，系统会异步重试 TPM 包购买，调用后需轮询推理服务状态确认结果。
+     */
+  async ModifyEndpoint(
+    req: ModifyEndpointRequest,
+    cb?: (error: string, rep: ModifyEndpointResponse) => void
+  ): Promise<ModifyEndpointResponse> {
+    return this.request("ModifyEndpoint", req, cb)
   }
 
   /**
