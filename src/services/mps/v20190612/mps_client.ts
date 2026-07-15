@@ -706,6 +706,7 @@ import {
   TextToSpeechAsyncRequest,
   DescribeInputHLSPullSettings,
   CreateSubtitleEmbedTemplateResponse,
+  ImageTaskInfo,
   CreateStreamPackageSourceLocationResponse,
   DeleteSmartSubtitleTemplateRequest,
   DescribeStreamPackageLinearAssemblyProgramSchedulesRequest,
@@ -754,6 +755,7 @@ import {
   BatchProcessMediaRequest,
   FlowLogInfo,
   DeleteWordSamplesResponse,
+  DescribeImageTasksResponse,
   DeleteStreamLinkOutputResponse,
   ImageEnhanceConfig,
   WatermarkInput,
@@ -1047,6 +1049,7 @@ import {
   FailOverOption,
   LowLightEnhanceConfig,
   DescribeMediaMetaDataRequest,
+  DescribeImageTasksRequest,
   AigcVideoReferenceImageInfo,
   FrameTagConfigureInfoForUpdate,
   CreateImageSpriteTemplateResponse,
@@ -1552,6 +1555,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteContentReviewTemplateResponse) => void
   ): Promise<DeleteContentReviewTemplateResponse> {
     return this.request("DeleteContentReviewTemplate", req, cb)
+  }
+
+  /**
+   * 图片处理任务查询接口。
+   */
+  async DescribeImageTasks(
+    req: DescribeImageTasksRequest,
+    cb?: (error: string, rep: DescribeImageTasksResponse) => void
+  ): Promise<DescribeImageTasksResponse> {
+    return this.request("DescribeImageTasks", req, cb)
   }
 
   /**

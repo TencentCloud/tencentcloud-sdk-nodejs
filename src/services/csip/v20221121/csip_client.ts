@@ -148,7 +148,7 @@ import {
   DescribeExposeAssetCategoryResponse,
   DescribeDspmIdentifyInfoListRequest,
   ModifyCosAuditObjectSampleRateResponse,
-  VulRiskItem,
+  ModifyCosAuditBucketMonitorStatusResponse,
   DeleteCosAkAssetResponse,
   AssetTagModifyAssetItem,
   DescribeAccessKeyAlarmResponse,
@@ -201,6 +201,7 @@ import {
   CreateDspmPersonalIdentifyResponse,
   DspmIpCount,
   DescribeGatewayAssetsRequest,
+  ModifyCosAuditBucketMonitorStatusRequest,
   AccessKeyAsset,
   DescribeRiskCallRecordRequest,
   DspmAssetFieldInfo,
@@ -247,6 +248,7 @@ import {
   HitRules,
   DspmIdentifyCount,
   DspmAccessRecord,
+  VulRiskItem,
   DescribeTopAttackInfoResponse,
   ModifyDspmPersonalIdentifyRequest,
   CreateIaCAccessTokenResponse,
@@ -2409,6 +2411,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改主机资产备注信息
+   */
+  async ModifyMachineRemark(
+    req: ModifyMachineRemarkRequest,
+    cb?: (error: string, rep: ModifyMachineRemarkResponse) => void
+  ): Promise<ModifyMachineRemarkResponse> {
+    return this.request("ModifyMachineRemark", req, cb)
+  }
+
+  /**
    * 删除IaC检测接入Token
    */
   async DeleteIaCAccessToken(
@@ -2629,13 +2641,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改主机资产备注信息
+   * 修改存储桶监测状态
    */
-  async ModifyMachineRemark(
-    req: ModifyMachineRemarkRequest,
-    cb?: (error: string, rep: ModifyMachineRemarkResponse) => void
-  ): Promise<ModifyMachineRemarkResponse> {
-    return this.request("ModifyMachineRemark", req, cb)
+  async ModifyCosAuditBucketMonitorStatus(
+    req: ModifyCosAuditBucketMonitorStatusRequest,
+    cb?: (error: string, rep: ModifyCosAuditBucketMonitorStatusResponse) => void
+  ): Promise<ModifyCosAuditBucketMonitorStatusResponse> {
+    return this.request("ModifyCosAuditBucketMonitorStatus", req, cb)
   }
 
   /**

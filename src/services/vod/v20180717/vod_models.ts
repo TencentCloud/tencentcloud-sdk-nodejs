@@ -1766,6 +1766,43 @@ export interface AiSampleWord {
 }
 
 /**
+ * 自定义视频转码参数。
+ */
+export interface OverrideTranscodeParameter {
+  /**
+   * 封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。
+   */
+  Container?: string
+  /**
+   * 是否去除视频数据，取值：
+<li>0：保留；<\li>
+<li>1：去除。<\li>
+   */
+  RemoveVideo?: number
+  /**
+   * 是否去除音频数据，取值：
+<li>0：保留；<\li>
+<li>1：去除。<\li>
+   */
+  RemoveAudio?: number
+  /**
+   * 视频流配置参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VideoTemplate?: VideoTemplateInfoForUpdate
+  /**
+   * 音频流配置参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AudioTemplate?: AudioTemplateInfoForUpdate
+  /**
+   * 极速高清转码配置参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TEHDConfig?: TEHDConfigForUpdate
+}
+
+/**
  * 文本鉴别涉及令人不适宜的信息的任务控制参数
  */
 export interface PoliticalOcrReviewTemplateInfo {
@@ -2630,49 +2667,25 @@ export interface ModifyWordSampleResponse {
  */
 export interface AudioTemplateInfoForUpdate {
   /**
-   * 音频流的编码格式。
-当外层参数 Container 为 mp3 时，可选值为：
-<li>libmp3lame。</li>
-当外层参数 Container 为 ogg 或 flac 时，可选值为：
-<li>flac。</li>
-当外层参数 Container 为 m4a 时，可选值为：
-<li>libfdk_aac；</li>
-<li>libmp3lame；</li>
-<li>ac3。</li>
-当外层参数 Container 为 mp4 或 flv 时，可选值为：
-<li>libfdk_aac：更适合 mp4；</li>
-<li>libmp3lame：更适合 flv；</li>
-<li>mp2。</li>
-当外层参数 Container 为 hls 时，可选值为：
-<li>libfdk_aac。</li>
-当外层参数 Format 为 HLS 或 MPEG-DASH 时，可选值为：
-<li>libfdk_aac。</li>
-当外层参数 Container 为 wav 时，可选值为：
-<li>pcm16。</li>
+   * <p>音频流的编码格式。<br>当外层参数 Container 为 mp3 时，可选值为：</p><li>libmp3lame。</li>当外层参数 Container 为 ogg 或 flac 时，可选值为：<li>flac。</li>当外层参数 Container 为 m4a 时，可选值为：<li>libfdk_aac；</li><li>libmp3lame；</li><li>ac3。</li>当外层参数 Container 为 mp4 或 flv 时，可选值为：<li>libfdk_aac：更适合 mp4；</li><li>libmp3lame：更适合 flv；</li><li>mp2。</li>当外层参数 Container 为 hls 时，可选值为：<li>libfdk_aac。</li>当外层参数 Format 为 HLS 或 MPEG-DASH 时，可选值为：<li>libfdk_aac。</li>当外层参数 Container 为 wav 时，可选值为：<li>pcm16。</li>
    */
   Codec?: string
   /**
-   * 音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。 当取值为 0，表示由云点播自动设置码率。
+   * <p>音频流的码率，取值范围：0 和 [26, 256]，单位：kbps。 当取值为 0，表示由云点播自动设置码率。</p>
    */
   Bitrate?: number
   /**
-   * 音频流的采样率，可选值：
-<li>16000，仅当 Codec 为 pcm16 时可选。</li>
-<li>32000</li>
-<li>44100</li>
-<li>48000</li>
-单位：Hz。
+   * <p>音频流的采样率，可选值：</p><li>16000，仅当 Codec 为 pcm16 时可选。</li><li>32000</li><li>44100</li><li>48000</li>单位：Hz。
    */
   SampleRate?: number
   /**
-   * 音频通道，可选值：
-<li>1：单通道</li>
-<li>2：双通道</li>
-<li>6：立体声</li>
-<li>0：音频声道数和原始音频保持一致</li>
-当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为立体声。
+   * <p>音频通道，可选值：</p><li>1：单通道</li><li>2：双通道</li><li>6：立体声</li><li>0：音频声道数和原始音频保持一致</li>当媒体的封装格式是音频格式时（flac，ogg，mp3，m4a）时，声道数不允许设为立体声。
    */
   AudioChannel?: number
+  /**
+   * <p>指定输出要保留的音频轨道。默认是全部保留源的。</p><p>仅当在参数 OverrideParameter 中指定时生效，其他情况下不生效。</p>
+   */
+  StreamSelects?: Array<number | bigint>
 }
 
 /**
@@ -18026,6 +18039,10 @@ export interface TranscodeTaskInput {
    * <p>转码后视频的终止时间偏移，单位：秒。</p><li>不填或填0，表示转码后的视频持续到原始视频的末尾终止；</li><li>当数值大于0时（假设为 n），表示转码后的视频持续到原始视频第 n 秒时终止；</li><li>当数值小于0时（假设为 -n），表示转码后的视频持续到原始视频结束 n 秒前终止。</li>
    */
   EndTimeOffset?: number
+  /**
+   * <p>自定义视频转码参数。</p>
+   */
+  OverrideParameter?: OverrideTranscodeParameter
   /**
    * <p>字幕压制信息列表。最大可支持 2 个。</p>
    */

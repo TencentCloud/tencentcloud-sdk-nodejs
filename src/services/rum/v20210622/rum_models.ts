@@ -4052,15 +4052,15 @@ export interface DescribeDataSetUrlStatisticsV2Request {
  */
 export interface DescribeRumLogExportsV2Request {
   /**
-   * Page size
+   * <p>Page size</p>
    */
   PageSize: number
   /**
-   * Page number
+   * <p>Page number</p>
    */
   PageNum: number
   /**
-   * Project ID
+   * <p>Project ID</p>
    */
   ID: number
 }
@@ -5830,7 +5830,7 @@ export interface DescribeIssuesStatisticsTrendResponse {
  */
 export interface DescribeRumLogExportsV2Response {
   /**
-   * Query result in JSON string format
+   * <p>日志导出列表</p>
    */
   Result?: string
   /**

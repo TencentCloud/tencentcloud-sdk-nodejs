@@ -28,6 +28,7 @@ import {
   DeleteL4ProxyRulesRequest,
   DescribeOriginGroupResponse,
   ModifySecurityJSInjectionRuleRequest,
+  CreateLogAnalysisDownloadTaskResponse,
   DescribeSecurityIPGroupInfoResponse,
   AdaptiveFrequencyControl,
   RenewFlag,
@@ -75,7 +76,7 @@ import {
   RateLimitConfig,
   CreateRealtimeLogDeliveryTaskRequest,
   ModifyAccelerationDomainStatusesResponse,
-  DescribeOriginACLRequest,
+  DeployRecord,
   RuleExtraParameter,
   ModifyL7AccRulePriorityRequest,
   EdgeKVListRequest,
@@ -302,6 +303,7 @@ import {
   ModifyPlanResponse,
   DropPageDetail,
   CnameStatus,
+  DescribeLogAnalysisDownloadTasksResponse,
   WafConfig,
   BandwidthAbuseDefense,
   ServerCertInfo,
@@ -328,6 +330,7 @@ import {
   MaxAgeParameters,
   ModifyApplicationProxyRuleResponse,
   DeleteFunctionReplicaRequest,
+  LogAnalysisDownloadTask,
   DDoS,
   ModifyL7AccRulePriorityResponse,
   APIService,
@@ -337,6 +340,7 @@ import {
   DownloadL7LogsRequest,
   DNSPodDetail,
   DescribeSecurityClientAttesterRequest,
+  DescribeLogAnalysisDetailRequest,
   WebSocketParameters,
   RuleItem,
   SlowRateConfig,
@@ -358,7 +362,7 @@ import {
   ModifyRealtimeLogDeliveryTaskResponse,
   RateLimitUserRule,
   ModifyFunctionReplicaResponse,
-  DeployRecord,
+  DescribeOriginACLRequest,
   CreatePlanForZoneRequest,
   DeviceProfile,
   ConfirmMultiPathGatewayOriginACLResponse,
@@ -395,7 +399,7 @@ import {
   DeleteJustInTimeTranscodeTemplatesResponse,
   DeleteRulesResponse,
   ModifyDnsRecordsRequest,
-  IdentifyZoneRequest,
+  DescribeLogAnalysisDetailResponse,
   CacheConfig,
   ClientAttestationRules,
   DescribeL7AccSettingRequest,
@@ -487,6 +491,7 @@ import {
   ForceRedirectHTTPSParameters,
   MutualTLS,
   ClientBehaviorDetection,
+  CacheConfigCustomTime,
   ModifyApplicationProxyRuleRequest,
   CreateFunctionResponse,
   DescribeLoadBalancerListResponse,
@@ -535,6 +540,7 @@ import {
   DescribeApplicationProxiesRequest,
   DescribeContentQuotaRequest,
   AllowActionParameters,
+  LogItem,
   Hsts,
   OwnershipVerification,
   CreateRuleRequest,
@@ -567,6 +573,7 @@ import {
   DropPageConfig,
   DescribeSecurityIPGroupInfoRequest,
   ExceptUserRuleScope,
+  CreateLogAnalysisDownloadTaskRequest,
   PartialModule,
   DescribeZoneConfigImportResultRequest,
   ModifyApplicationProxyRuleStatusRequest,
@@ -604,6 +611,7 @@ import {
   OriginGroup,
   ModifySecurityIPGroupRequest,
   DescribeFunctionReplicasRequest,
+  IdentifyZoneRequest,
   VaryParameters,
   L4Proxy,
   SkipCondition,
@@ -751,7 +759,7 @@ import {
   DeleteL7AccRulesResponse,
   DescribeOriginGroupHealthStatusResponse,
   DescribeContentIdentifiersResponse,
-  CacheConfigCustomTime,
+  DescribeLogAnalysisDownloadTasksRequest,
   ManagedRules,
   SecurityTemplateBinding,
   DescribeMultiPathGatewaySecretKeyResponse,
@@ -1029,6 +1037,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口用以查询日志分析日志下载任务列表。注意：只保留最近三天的下载任务记录。
+   */
+  async DescribeLogAnalysisDownloadTasks(
+    req: DescribeLogAnalysisDownloadTasksRequest,
+    cb?: (error: string, rep: DescribeLogAnalysisDownloadTasksResponse) => void
+  ): Promise<DescribeLogAnalysisDownloadTasksResponse> {
+    return this.request("DescribeLogAnalysisDownloadTasks", req, cb)
+  }
+
+  /**
    * 本接口用于修改[规则引擎](https://cloud.tencent.com/document/product/1552/70901)中的规则，单次仅支持修改单条规则。
    */
   async ModifyL7AccRule(
@@ -1178,6 +1196,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CheckCnameStatusResponse) => void
   ): Promise<CheckCnameStatusResponse> {
     return this.request("CheckCnameStatus", req, cb)
+  }
+
+  /**
+   * 本接口用以查询日志分析日志详情，数据来自站点下实时日志推送任务目的地为 "log-analysis" 的任务推送的日志数据。
+   */
+  async DescribeLogAnalysisDetail(
+    req: DescribeLogAnalysisDetailRequest,
+    cb?: (error: string, rep: DescribeLogAnalysisDetailResponse) => void
+  ): Promise<DescribeLogAnalysisDetailResponse> {
+    return this.request("DescribeLogAnalysisDetail", req, cb)
   }
 
   /**
@@ -1743,6 +1771,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribeTopL7AnalysisDataResponse) => void
   ): Promise<DescribeTopL7AnalysisDataResponse> {
     return this.request("DescribeTopL7AnalysisData", req, cb)
+  }
+
+  /**
+   * 查询站点下的 API 服务。
+   */
+  async DescribeSecurityAPIService(
+    req: DescribeSecurityAPIServiceRequest,
+    cb?: (error: string, rep: DescribeSecurityAPIServiceResponse) => void
+  ): Promise<DescribeSecurityAPIServiceResponse> {
+    return this.request("DescribeSecurityAPIService", req, cb)
   }
 
   /**
@@ -2865,13 +2903,17 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 查询站点下的 API 服务。
-   */
-  async DescribeSecurityAPIService(
-    req: DescribeSecurityAPIServiceRequest,
-    cb?: (error: string, rep: DescribeSecurityAPIServiceResponse) => void
-  ): Promise<DescribeSecurityAPIServiceResponse> {
-    return this.request("DescribeSecurityAPIService", req, cb)
+     * 本接口用以创建日志分析下载任务，创建完成后可通过 DescribeLogAnalysisDownloadTasks 接口查询下载任务。
+注意：
+1.单次最多支持下载 5000万条日志。
+2.日志文件将保留 3 天。
+3.同时存在多个任务时将按照任务创建时间依次处理。
+     */
+  async CreateLogAnalysisDownloadTask(
+    req: CreateLogAnalysisDownloadTaskRequest,
+    cb?: (error: string, rep: CreateLogAnalysisDownloadTaskResponse) => void
+  ): Promise<CreateLogAnalysisDownloadTaskResponse> {
+    return this.request("CreateLogAnalysisDownloadTask", req, cb)
   }
 
   /**

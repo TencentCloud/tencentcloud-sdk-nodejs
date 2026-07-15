@@ -78,9 +78,9 @@ it("essbasic.v20210526.DescribeBatchOrganizationRegistrationUrls", async functio
     }
 })
 
-it("essbasic.v20210526.DescribeUsage", async function () {
+it("essbasic.v20210526.DescribeBatchOrganizationRegistrationTasks", async function () {
     try {
-       const data = await client.DescribeUsage({})
+       const data = await client.DescribeBatchOrganizationRegistrationTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -131,6 +131,16 @@ it("essbasic.v20210526.CreateSignUrls", async function () {
 it("essbasic.v20210526.ChannelCreateBoundFlows", async function () {
     try {
        const data = await client.ChannelCreateBoundFlows({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.ModifyOrganizationBusinessInfo", async function () {
+    try {
+       const data = await client.ModifyOrganizationBusinessInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -248,9 +258,9 @@ it("essbasic.v20210526.CreateSealByImage", async function () {
     }
 })
 
-it("essbasic.v20210526.DescribeBatchOrganizationRegistrationTasks", async function () {
+it("essbasic.v20210526.DescribeUsage", async function () {
     try {
-       const data = await client.DescribeBatchOrganizationRegistrationTasks({})
+       const data = await client.DescribeUsage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -421,6 +431,16 @@ it("essbasic.v20210526.DescribeResourceUrlsByFlows", async function () {
 it("essbasic.v20210526.DescribeChannelOrganizations", async function () {
     try {
        const data = await client.DescribeChannelOrganizations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.CreateBatchAdminChangeInvitationsUrl", async function () {
+    try {
+       const data = await client.CreateBatchAdminChangeInvitationsUrl({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -881,6 +901,16 @@ it("essbasic.v20210526.ChannelCreateReleaseFlow", async function () {
 it("essbasic.v20210526.ChannelDescribeEmployees", async function () {
     try {
        const data = await client.ChannelDescribeEmployees({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("essbasic.v20210526.CreateBatchAdminChangeInvitations", async function () {
+    try {
+       const data = await client.CreateBatchAdminChangeInvitations({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

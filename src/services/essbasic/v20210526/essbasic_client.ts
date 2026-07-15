@@ -21,6 +21,7 @@ import {
   SyncProxyOrganizationResponse,
   FlowBatchUrlInfo,
   ChannelCreateConvertTaskApiResponse,
+  CreateBatchAdminChangeInvitationsResponse,
   ChannelCreateFlowRemindsResponse,
   Component,
   DescribeUserFlowTypeResponse,
@@ -53,6 +54,7 @@ import {
   HasAuthUser,
   DescribeFileConvertTaskResponse,
   ChannelCreateBatchSignUrlResponse,
+  CreateBatchAdminChangeInvitationsUrlRequest,
   ChannelCreatePrepareFlowResponse,
   CreateBatchInitOrganizationUrlResponse,
   DetectInfoVideoData,
@@ -95,6 +97,7 @@ import {
   CreateChannelSubOrganizationActiveRequest,
   ChannelRenewAutoSignLicenseResponse,
   ApproverItem,
+  ModifyOrganizationBusinessInfoResponse,
   BatchOrganizationRegistrationTasksDetails,
   RecipientComponentInfo,
   CancelFailureFlow,
@@ -118,7 +121,7 @@ import {
   FlowOperateLimit,
   ChannelVerifyPdfRequest,
   CreateChannelFlowEvidenceReportRequest,
-  ChannelCancelFlowRequest,
+  ChannelBillUsageDetail,
   ChannelCancelUserAutoSignEnableUrlRequest,
   DeleteOrganizationAuthorizationsResponse,
   ChannelCreatePrepareFlowGroupRequest,
@@ -179,6 +182,7 @@ import {
   ChannelDeleteRoleUsersResponse,
   SyncProxyOrganizationOperatorsRequest,
   ChannelCreateFlowApproversResponse,
+  CreateBatchAdminChangeInvitationsUrlResponse,
   DescribeUsageResponse,
   CreateSignUrlsRequest,
   RegistrationOrganizationInfo,
@@ -217,6 +221,7 @@ import {
   FilledComponent,
   FlowApproverItem,
   ChannelOrganizationInfo,
+  ModifyOrganizationBusinessInfoRequest,
   CreateSignUrlsResponse,
   ChannelDeleteRoleRequest,
   CreateBatchOrganizationRegistrationTasksRequest,
@@ -245,6 +250,7 @@ import {
   DynamicSignOption,
   DeleteOrganizationAuthorizationsRequest,
   ChannelCreateFlowGroupByFilesResponse,
+  AdminChangeInvitationInfo,
   ChannelCreateMultiFlowSignQRCodeResponse,
   ApproverOption,
   ChannelCreatePrepareFlowGroupResponse,
@@ -274,10 +280,11 @@ import {
   RuleIdConfig,
   CreateBatchInitOrganizationUrlRequest,
   CreateFlowGroupSignReviewRequest,
-  ChannelBillUsageDetail,
+  ChannelCancelFlowRequest,
   DescribeTemplatesRequest,
   RelieveInfo,
   ChannelCreateSealPolicyRequest,
+  CreateBatchAdminChangeInvitationsRequest,
   OccupiedSeal,
   CreateFlowsByTemplatesRequest,
   DescribeBatchOrganizationRegistrationUrlsResponse,
@@ -429,17 +436,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 此接口（DescribeUsage）用于获取此应用下子客企业的合同消耗数量。
-
-<font color="red">此接口于 2026 年 2 月 3 日下线</font>， 请使用新接口:<a   href="https://qian.tencent.com/developers/partnerApis/fee/ChannelDescribeBillUsageDetail">查询渠道计费消耗情况 </a>
-
-注: 此接口**每日限频50次**，若要扩大限制次数,请提前与客服经理或邮件至e-contract@tencent.com进行联系。
-     */
-  async DescribeUsage(
-    req: DescribeUsageRequest,
-    cb?: (error: string, rep: DescribeUsageResponse) => void
-  ): Promise<DescribeUsageResponse> {
-    return this.request("DescribeUsage", req, cb)
+   * 本接口（DescribeBatchOrganizationRegistrationTasks）用于查询企业批量认证任务状态。
+   */
+  async DescribeBatchOrganizationRegistrationTasks(
+    req: DescribeBatchOrganizationRegistrationTasksRequest,
+    cb?: (error: string, rep: DescribeBatchOrganizationRegistrationTasksResponse) => void
+  ): Promise<DescribeBatchOrganizationRegistrationTasksResponse> {
+    return this.request("DescribeBatchOrganizationRegistrationTasks", req, cb)
   }
 
   /**
@@ -544,6 +547,50 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ChannelCreateBoundFlowsResponse) => void
   ): Promise<ChannelCreateBoundFlowsResponse> {
     return this.request("ChannelCreateBoundFlows", req, cb)
+  }
+
+  /**
+     * 本接口用于企业在已完成工商变更登记后，在电子签侧同步更新企业基础信息，并上传最新的营业执照或相关证照图片作为变更凭证。
+⚠️ 重要说明
+本接口不做营业执照 OCR 识别：系统不会对上传的营业执照图片进行内容识别。调用方需自行把工商变更后的最新信息，通过 organization_name / legal_name / address 等字段显式传入；营业执照图片仅作为变更凭证上传与留存。
+只传"变了"的字段即可：各信息字段均为"变更后的新值"，未变更的字段留空不传，系统会自动沿用电子签侧当前值（含统一社会信用代码）。四项信息（企业名称、法人姓名、地址、新法人手机号）至少需传入其一。
+受理请求后，接口会依次完成以下处理：
+操作人身份校验：调用方（operator.user_id）必须是该企业的法定代表人或超级管理员，否则返回无权限错误。
+营业执照校验：校验 biz_license_resource_id 对应的图片资源归属（须属于当前企业/应用），仅作凭证存储，不做 OCR。
+工商信息比对：将传入的新值（已传的字段）与电子签侧现有数据比对，确认确实存在变更内容；若与现状完全一致，则返回「企业信息未变更」。
+未完结合同检查：仅当企业名称发生变更时，才检查该企业在 SaaS 与渠道子客下是否存在尚未完成的签署合同（白名单企业豁免）；若存在未完结合同则拦截并提示先处理合同。
+工商三要素核验与变更执行：对企业名称、法人、统一社会信用代码进行工商三要素核验（每日最多 10 次）。核验通过则直接执行信息变更；核验不通过则转入收录审核流程，待审核通过后生效。
+
+收录申请触发的场景
+本接口在工商信息变更时，会用**「新企业名称 + 统一社会信用代码(USCC) + 新法定代表人姓名」三要素与工商登记信息做校验，以此决定是直接执行变更还是提交收录申请（人工审核）**。
+统一社会信用代码不可变更：系统自动取企业当前在库的 USCC 参与校验，不接受入参修改。
+企业名称 / 法定代表人姓名取您本次传入的新值（未传则沿用当前值）。
+
+<p>
+  当工商三要素校验未通过时，接口不会直接修改企业信息，而是<strong>提交收录申请进入人工审核</strong>。具体触发场景如下：
+</p>
+<table>
+  <tr>
+    <th>触发场景</th>
+    <th>说明</th>
+  </tr>
+  <tr>
+    <td>三要素与工商登记不一致</td>
+    <td>传入的<strong>新企业名称</strong>或<strong>新法人姓名</strong>，与当前统一社会信用代码（USCC）在工商登记中的记录不匹配</td>
+  </tr>
+  <tr>
+    <td>工商库企业状态异常</td>
+    <td>依据当前 USCC 在工商库中查到的企业状态非正常（如查无此企业、已注销、已吊销等）</td>
+  </tr>
+</table>
+
+反向说明：三要素校验全部通过时，接口会直接执行企业信息变更，无需收录审批。
+     */
+  async ModifyOrganizationBusinessInfo(
+    req: ModifyOrganizationBusinessInfoRequest,
+    cb?: (error: string, rep: ModifyOrganizationBusinessInfoResponse) => void
+  ): Promise<ModifyOrganizationBusinessInfoResponse> {
+    return this.request("ModifyOrganizationBusinessInfo", req, cb)
   }
 
   /**
@@ -772,13 +819,17 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口（DescribeBatchOrganizationRegistrationTasks）用于查询企业批量认证任务状态。
-   */
-  async DescribeBatchOrganizationRegistrationTasks(
-    req: DescribeBatchOrganizationRegistrationTasksRequest,
-    cb?: (error: string, rep: DescribeBatchOrganizationRegistrationTasksResponse) => void
-  ): Promise<DescribeBatchOrganizationRegistrationTasksResponse> {
-    return this.request("DescribeBatchOrganizationRegistrationTasks", req, cb)
+     * 此接口（DescribeUsage）用于获取此应用下子客企业的合同消耗数量。
+
+<font color="red">此接口于 2026 年 2 月 3 日下线</font>， 请使用新接口:<a   href="https://qian.tencent.com/developers/partnerApis/fee/ChannelDescribeBillUsageDetail">查询渠道计费消耗情况 </a>
+
+注: 此接口**每日限频50次**，若要扩大限制次数,请提前与客服经理或邮件至e-contract@tencent.com进行联系。
+     */
+  async DescribeUsage(
+    req: DescribeUsageRequest,
+    cb?: (error: string, rep: DescribeUsageResponse) => void
+  ): Promise<DescribeUsageResponse> {
+    return this.request("DescribeUsage", req, cb)
   }
 
   /**
@@ -1120,6 +1171,20 @@ Agent参数中的OpenId 必须为审批者的openId，且链接必须由审批�
     cb?: (error: string, rep: DescribeChannelOrganizationsResponse) => void
   ): Promise<DescribeChannelOrganizationsResponse> {
     return this.request("DescribeChannelOrganizations", req, cb)
+  }
+
+  /**
+     * 此接口用于获取企业批量变更超管链接，包含多条超管变更任务。 
+一次性最多获取 500 条任务。
+
+前提条件：已调用 [CreateBatchAdminChangeInvitations生成批量变更超管任务接口](https://qian.tencent.com/developers/partnerApis/accounts/CreateBatchAdminChangeInvitations) 确保任务提交。
+此链接包含多条超管变更流程，使用该链接可以批量的对企业进行超管变更。
+     */
+  async CreateBatchAdminChangeInvitationsUrl(
+    req: CreateBatchAdminChangeInvitationsUrlRequest,
+    cb?: (error: string, rep: CreateBatchAdminChangeInvitationsUrlResponse) => void
+  ): Promise<CreateBatchAdminChangeInvitationsUrlResponse> {
+    return this.request("CreateBatchAdminChangeInvitationsUrl", req, cb)
   }
 
   /**
@@ -2119,6 +2184,22 @@ Web链接访问后，会根据子客企业(**Agent中ProxyOrganizationOpenId表�
     cb?: (error: string, rep: ChannelDescribeEmployeesResponse) => void
   ): Promise<ChannelDescribeEmployeesResponse> {
     return this.request("ChannelDescribeEmployees", req, cb)
+  }
+
+  /**
+     * 本接口（CreateBatchAdminChangeInvitations）用于批量创建企业超管信息变更。
+该接口为提交任务接口,如果需要获得链接， 需要使用接口创建超管变更链接(CreateBatchAdminChangeInvitationsUrl)。
+
+批量创建链接有以下限制：
+
+单次最多创建10个企业的超管变更。
+同一批创建的企业不能重复,唯一值为企业 Id或者企业 OrganizationOpenId。
+     */
+  async CreateBatchAdminChangeInvitations(
+    req: CreateBatchAdminChangeInvitationsRequest,
+    cb?: (error: string, rep: CreateBatchAdminChangeInvitationsResponse) => void
+  ): Promise<CreateBatchAdminChangeInvitationsResponse> {
+    return this.request("CreateBatchAdminChangeInvitations", req, cb)
   }
 
   /**

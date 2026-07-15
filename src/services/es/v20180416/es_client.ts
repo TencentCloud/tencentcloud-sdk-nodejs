@@ -18,6 +18,7 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  UpdateLogstashInstanceRequest,
   TaskDetail,
   ServerlessSpaceUser,
   ServerlessIndexSettingsField,
@@ -42,7 +43,7 @@ import {
   DescribeClusterSnapshotRequest,
   MetricMapByIndexId,
   UpdateLogstashPipelineDescResponse,
-  IpTraceLogEntry,
+  DescribeAutoScaleDiskInfoResponse,
   DescribeInstancesResponse,
   DescribeInstanceLogsResponse,
   IndexMetaField,
@@ -54,23 +55,35 @@ import {
   LogstashBindedES,
   UpdateDiagnoseSettingsRequest,
   DeleteServerlessInstanceResponse,
-  InstallInstanceModelResponse,
+  IndexPolicyField,
   DescribeInstanceOperationsResponse,
+  DescribeLogstashViewsResponse,
+  DescribeCosBackupStrategyViewsRequest,
+  DescribeUpgradeRequest,
   IndexOptionsField,
+  DescribeRegionsResponse,
   UpdateRequestTargetNodeTypesResponse,
+  ZoneResource,
+  UpgradeInstanceRequest,
   JobParam,
   Failures,
   DeleteLogstashInstanceResponse,
+  DiagnoseJobMeta,
+  DescribeEventDataDetailResponse,
   AutoScaleDiskInfo,
   CreateServerlessSpaceV2Response,
-  ServerlessSpace,
+  DescribeUpgradeResponse,
   DeleteClusterSnapshotRequest,
-  SubTaskDetail,
+  ServerlessSpace,
   CheckMigrateIndexMetaDataResponse,
+  RegionsData,
   DescribeDiagnoseRequest,
   MetricAllData,
   EsConfigSetInfo,
   GetRequestTargetNodeTypesResponse,
+  QueryZoneResourceRequest,
+  UpdateJdkRequest,
+  CrontabTaskInfo,
   Operation,
   DiDataSourceCvm,
   UpdateIpTraceStatusRequest,
@@ -81,9 +94,9 @@ import {
   LogDetail,
   CreateCollectorRequest,
   DescribeAutoBackUpStrategyRequest,
-  DescribeLogstashInstanceLogsRequest,
+  CosSnapShotInfo,
   DescribeIndexMetaResponse,
-  DiagnoseJobMeta,
+  DescribeLogstashViewsRequest,
   StartLogstashPipelinesRequest,
   DescribeServerlessMetricsRequest,
   GetDiagnoseSettingsResponse,
@@ -92,18 +105,25 @@ import {
   CollectorTarget,
   DeleteServerlessSpaceUserResponse,
   DiData,
+  UpdateServerlessInstanceResponse,
   RequestInstancesByGetRequest,
-  KeyValue,
+  DescribeForceMergeTaskRequest,
   QueryIpTraceLogResponse,
-  LogstashExtendedFile,
-  UpdateLogstashInstanceRequest,
+  EventTypeInfo,
+  SubTaskDetail,
   UpdateRequestTargetNodeTypesRequest,
   DescribeLogstashInstancesResponse,
-  CreateAutoBackUpStrategyRequest,
   InstallInstanceModelRequest,
+  CreateAutoBackUpStrategyRequest,
+  DescribeRequestInstancePolicyResponse,
   DiDataSinkServerless,
+  DescribeEventInfoListResponse,
+  NodeTypeDiskSizeRange,
   DeleteInstanceResponse,
-  UpdateDiagnoseSettingsResponse,
+  VpcInfo,
+  RequestInstancesRequest,
+  RestartKibanaResponse,
+  DescribeRequestInstancePolicyRequest,
   SettingDetail,
   DescribeLogstashInstanceOperationsResponse,
   CreateIndexRequest,
@@ -116,25 +136,30 @@ import {
   GetIpTraceStatusRequest,
   Dimension,
   DescribeServerlessSpacesResponse,
+  QueryZoneResourceForLogstashRequest,
   InquirePriceRenewInstanceRequest,
   KibanaView,
   IpTraceConfig,
   Metric,
+  LogstashZoneResource,
   UpdateInstanceResponse,
   CreateCollectorResponse,
   DeleteIndexRequest,
   DescribeViewsRequest,
   ModifyAutoBackUpStrategyResponse,
   DescribeIndexListResponse,
-  DescribeUserCosSnapshotListRequest,
+  StopLogstashPipelinesRequest,
+  DescribeClusterDiskRangeRequest,
   UpgradeLicenseResponse,
   DescribeLogstashInstanceOperationsRequest,
+  QueryIpTraceLogRequest,
   DescribeInstancePluginInfo,
   CreateLogstashInstanceResponse,
   DeleteServerlessInstanceRequest,
   SaveAndDeployLogstashPipelineRequest,
   DiDataSourceTke,
   ClusterView,
+  EventDataDetail,
   CommonIndexInfo,
   DeleteAutoBackUpStrategyRequest,
   InquirePriceRenewInstanceResponse,
@@ -143,32 +168,33 @@ import {
   DiagnoseResult,
   RestartKibanaRequest,
   SaveAndDeployLogstashPipelineResponse,
+  UpdateDiagnoseSettingsResponse,
   DescribeAutoBackUpStrategyResponse,
-  ServerlessIndexOptionsField,
+  DiskCountRange,
   UpdateDictionariesRequest,
-  DiSourceTkePodLabel,
+  DescribeUserCosSnapshotListRequest,
   OperationDuration,
   UpgradeLicenseRequest,
   DescribeIndexListRequest,
   NodeInfo,
   CosBackup,
-  DescribeLogstashPipelinesResponse,
+  DescribeEventDataDetailRequest,
   OperationDurationUpdated,
   CreateInstanceRequest,
   CreateLogstashInstanceRequest,
-  UpdateServerlessInstanceResponse,
+  DescribeSnapshotViewsResponse,
   UpdateDictionariesResponse,
   InstanceInfo,
   CollectorConfigInfo,
   DeleteIndexResponse,
-  RequestInstancesRequest,
+  KeyValue,
   DeleteServerlessSpaceUserRequest,
-  RestartNodesResponse,
+  LogstashNodeTypeResource,
   DescribeInstancesRequest,
   CheckMigrateIndexMetaDataRequest,
   EsDictionaryInfo,
   DescribeLogstashPipelinesRequest,
-  OutboundPublicAcl,
+  DescribeForceMergeTaskResponse,
   DataStreamInfo,
   ServerlessIndexMetaField,
   RequestInstancesResponse,
@@ -176,8 +202,11 @@ import {
   ModifyEsVipSecurityGroupRequest,
   ProcessDetail,
   PodLabel,
+  DescribeEventInfoListRequest,
   DescribeLogstashInstancesRequest,
   CreateCosMigrateToServerlessInstanceRequest,
+  ServerlessIndexOptionsField,
+  IpTraceLogEntry,
   GetIpTraceStatusResponse,
   DeleteInstanceRequest,
   MetricDetail,
@@ -187,19 +216,25 @@ import {
   DescribeIndexMetaRequest,
   Snapshots,
   UpdateJdkResponse,
-  RestartKibanaResponse,
+  QueryZoneResourceForLogstashResponse,
+  LogstashNodeView,
   DescribeUserCosSnapshotListResponse,
+  UpdateLogstashInstanceResponse,
   UpdateIndexRequest,
   ServerlessIndexNetworkField,
+  ExportIpTraceLogResponse,
+  DescribeRegionsRequest,
+  EventDataInfoOverview,
   WebNodeTypeInfo,
   LocalDiskInfo,
-  IndexPolicyField,
+  DescribeCosBackupStrategyViewsResponse,
   UpdatePluginsResponse,
+  NodeTypeResource,
   UpdateIndexResponse,
   DiagnoseJobResult,
   EnableScheduleOperationDuration,
-  UpdateLogstashInstanceResponse,
-  StopLogstashPipelinesRequest,
+  NodeTypeInfo,
+  DiskSizeRange,
   ZoneDetail,
   DescribeClusterSnapshotResponse,
   LogstashNodeInfo,
@@ -209,6 +244,7 @@ import {
   IpTimePair,
   IndexSettingsField,
   UpdateServerlessSpaceResponse,
+  DescribeAutoScaleDiskInfoRequest,
   UpdateLogstashPipelineDescRequest,
   UpdateServerlessInstanceRequest,
   NodeView,
@@ -217,36 +253,42 @@ import {
   UpdateInstanceRequest,
   CreateAutoBackUpStrategyResponse,
   DiSourceTke,
+  DescribeLogstashPipelinesResponse,
   CreateServerlessInstanceResponse,
-  ExportIpTraceLogResponse,
+  DescribeEsInstanceEventListsRequest,
+  DescribeEsInstanceEventListsResponse,
   DeleteClusterSnapshotResponse,
   GpuInfo,
   DescribeInstancePluginListResponse,
   DiSourceCvm,
-  CosSnapShotInfo,
+  DescribeLogstashInstanceLogsRequest,
+  RestartNodesResponse,
   DescribeServerlessSpacesRequest,
   RestartInstanceRequest,
-  UpdateJdkRequest,
+  LogstashExtendedFile,
+  DescribeSnapshotViewsRequest,
   ServerlessDi,
   DescribeServerlessMetricsResponse,
   ExportIpTraceLogRequest,
   DescribeServerlessInstancesRequest,
-  VpcInfo,
+  InstallInstanceModelResponse,
   KibanaNodeInfo,
   StartLogstashPipelinesResponse,
   GetDiagnoseSettingsRequest,
-  QueryIpTraceLogRequest,
+  DescribeClusterDiskRangeResponse,
   EsAcl,
   DescribeInstancePluginListRequest,
-  RestartNodesRequest,
+  OutboundPublicAcl,
+  QueryZoneResourceResponse,
   DescribeServerlessInstancesResponse,
   DeleteLogstashInstanceRequest,
-  UpgradeInstanceRequest,
+  DiSourceTkePodLabel,
   DescribeViewsResponse,
   KibanaPublicAcl,
   CollectorOutputInstance,
   CreateClusterSnapshotResponse,
   RestartLogstashInstanceResponse,
+  RestartNodesRequest,
   ModifyAutoBackUpCommonInfoResponse,
   OptionalWebServiceInfo,
 } from "./es_models"
@@ -271,26 +313,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于删除Logstash实例
-   */
-  async DeleteLogstashInstance(
-    req: DeleteLogstashInstanceRequest,
-    cb?: (error: string, rep: DeleteLogstashInstanceResponse) => void
-  ): Promise<DeleteLogstashInstanceResponse> {
-    return this.request("DeleteLogstashInstance", req, cb)
-  }
-
-  /**
-   * 快照备份恢复，从仓库中恢复快照到集群中
-   */
-  async RestoreClusterSnapshot(
-    req: RestoreClusterSnapshotRequest,
-    cb?: (error: string, rep: RestoreClusterSnapshotResponse) => void
-  ): Promise<RestoreClusterSnapshotResponse> {
-    return this.request("RestoreClusterSnapshot", req, cb)
-  }
-
-  /**
    * 用于创建Beats采集器
    */
   async CreateCollector(
@@ -298,46 +320,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCollectorResponse) => void
   ): Promise<CreateCollectorResponse> {
     return this.request("CreateCollector", req, cb)
-  }
-
-  /**
-   * 用于批量停止Logstash管道
-   */
-  async StopLogstashPipelines(
-    req: StopLogstashPipelinesRequest,
-    cb?: (error: string, rep: StopLogstashPipelinesResponse) => void
-  ): Promise<StopLogstashPipelinesResponse> {
-    return this.request("StopLogstashPipelines", req, cb)
-  }
-
-  /**
-   * 获取Serverless索引空间列表
-   */
-  async DescribeServerlessSpaces(
-    req: DescribeServerlessSpacesRequest,
-    cb?: (error: string, rep: DescribeServerlessSpacesResponse) => void
-  ): Promise<DescribeServerlessSpacesResponse> {
-    return this.request("DescribeServerlessSpaces", req, cb)
-  }
-
-  /**
-   * 修改自动备份快照策略
-   */
-  async ModifyAutoBackUpStrategy(
-    req: ModifyAutoBackUpStrategyRequest,
-    cb?: (error: string, rep: ModifyAutoBackUpStrategyResponse) => void
-  ): Promise<ModifyAutoBackUpStrategyResponse> {
-    return this.request("ModifyAutoBackUpStrategy", req, cb)
-  }
-
-  /**
-   * ES集群安装模型接口
-   */
-  async InstallInstanceModel(
-    req: InstallInstanceModelRequest,
-    cb?: (error: string, rep: InstallInstanceModelResponse) => void
-  ): Promise<InstallInstanceModelResponse> {
-    return this.request("InstallInstanceModel", req, cb)
   }
 
   /**
@@ -351,90 +333,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于更新管道描述信息
+   * 快照备份恢复，从仓库中恢复快照到集群中
    */
-  async UpdateLogstashPipelineDesc(
-    req: UpdateLogstashPipelineDescRequest,
-    cb?: (error: string, rep: UpdateLogstashPipelineDescResponse) => void
-  ): Promise<UpdateLogstashPipelineDescResponse> {
-    return this.request("UpdateLogstashPipelineDesc", req, cb)
-  }
-
-  /**
-   * 更新实例Jdk配置
-   */
-  async UpdateJdk(
-    req: UpdateJdkRequest,
-    cb?: (error: string, rep: UpdateJdkResponse) => void
-  ): Promise<UpdateJdkResponse> {
-    return this.request("UpdateJdk", req, cb)
-  }
-
-  /**
-   * 查询快照信息接口
-   */
-  async DescribeUserCosSnapshotList(
-    req: DescribeUserCosSnapshotListRequest,
-    cb?: (error: string, rep: DescribeUserCosSnapshotListResponse) => void
-  ): Promise<DescribeUserCosSnapshotListResponse> {
-    return this.request("DescribeUserCosSnapshotList", req, cb)
-  }
-
-  /**
-   * 升级ES集群版本
-   */
-  async UpgradeInstance(
-    req: UpgradeInstanceRequest,
-    cb?: (error: string, rep: UpgradeInstanceResponse) => void
-  ): Promise<UpgradeInstanceResponse> {
-    return this.request("UpgradeInstance", req, cb)
-  }
-
-  /**
-   * 更新索引
-   */
-  async UpdateIndex(
-    req: UpdateIndexRequest,
-    cb?: (error: string, rep: UpdateIndexResponse) => void
-  ): Promise<UpdateIndexResponse> {
-    return this.request("UpdateIndex", req, cb)
-  }
-
-  /**
-   * 销毁集群实例
-   */
-  async DeleteInstance(
-    req: DeleteInstanceRequest,
-    cb?: (error: string, rep: DeleteInstanceResponse) => void
-  ): Promise<DeleteInstanceResponse> {
-    return this.request("DeleteInstance", req, cb)
-  }
-
-  /**
-   * 查看智能运维配置
-   */
-  async GetDiagnoseSettings(
-    req: GetDiagnoseSettingsRequest,
-    cb?: (error: string, rep: GetDiagnoseSettingsResponse) => void
-  ): Promise<GetDiagnoseSettingsResponse> {
-    return this.request("GetDiagnoseSettings", req, cb)
-  }
-
-  /**
-     * 对集群进行节点规格变更，修改实例名称，修改配置，重置密码， 添加Kibana黑白名单等操作。参数中InstanceId为必传参数，ForceRestart为选填参数，剩余参数传递组合及含义如下：
-- InstanceName：修改实例名称(仅用于标识实例)
-- NodeInfoList: 修改节点配置（节点横向扩缩容，纵向扩缩容，增加主节点，增加冷节点等）
-- EsConfig：修改集群配置
-- Password：修改默认用户elastic的密码
-- EsAcl：修改访问控制列表
-- CosBackUp: 设置集群COS自动备份信息
-以上参数组合只能传递一种，多传或少传均会导致请求失败
-     */
-  async UpdateInstance(
-    req: UpdateInstanceRequest,
-    cb?: (error: string, rep: UpdateInstanceResponse) => void
-  ): Promise<UpdateInstanceResponse> {
-    return this.request("UpdateInstance", req, cb)
+  async RestoreClusterSnapshot(
+    req: RestoreClusterSnapshotRequest,
+    cb?: (error: string, rep: RestoreClusterSnapshotResponse) => void
+  ): Promise<RestoreClusterSnapshotResponse> {
+    return this.request("RestoreClusterSnapshot", req, cb)
   }
 
   /**
@@ -448,43 +353,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于启动Logstash管道
+   * 获取指定region下指定zone列表的资源情况
    */
-  async StartLogstashPipelines(
-    req: StartLogstashPipelinesRequest,
-    cb?: (error: string, rep: StartLogstashPipelinesResponse) => void
-  ): Promise<StartLogstashPipelinesResponse> {
-    return this.request("StartLogstashPipelines", req, cb)
-  }
-
-  /**
-   * 更新接收客户端请求的节点类型
-   */
-  async UpdateRequestTargetNodeTypes(
-    req: UpdateRequestTargetNodeTypesRequest,
-    cb?: (error: string, rep: UpdateRequestTargetNodeTypesResponse) => void
-  ): Promise<UpdateRequestTargetNodeTypesResponse> {
-    return this.request("UpdateRequestTargetNodeTypes", req, cb)
-  }
-
-  /**
-   * 更新智能运维配置
-   */
-  async UpdateDiagnoseSettings(
-    req: UpdateDiagnoseSettingsRequest,
-    cb?: (error: string, rep: UpdateDiagnoseSettingsResponse) => void
-  ): Promise<UpdateDiagnoseSettingsResponse> {
-    return this.request("UpdateDiagnoseSettings", req, cb)
-  }
-
-  /**
-   * cos迁移流程
-   */
-  async CreateCosMigrateToServerlessInstance(
-    req: CreateCosMigrateToServerlessInstanceRequest,
-    cb?: (error: string, rep: CreateCosMigrateToServerlessInstanceResponse) => void
-  ): Promise<CreateCosMigrateToServerlessInstanceResponse> {
-    return this.request("CreateCosMigrateToServerlessInstance", req, cb)
+  async QueryZoneResource(
+    req: QueryZoneResourceRequest,
+    cb?: (error: string, rep: QueryZoneResourceResponse) => void
+  ): Promise<QueryZoneResourceResponse> {
+    return this.request("QueryZoneResource", req, cb)
   }
 
   /**
@@ -495,31 +370,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAutoBackUpStrategyResponse) => void
   ): Promise<DeleteAutoBackUpStrategyResponse> {
     return this.request("DeleteAutoBackUpStrategy", req, cb)
-  }
-
-  /**
-   * 变更插件列表
-   */
-  async UpdatePlugins(
-    req: UpdatePluginsRequest,
-    cb?: (error: string, rep: UpdatePluginsResponse) => void
-  ): Promise<UpdatePluginsResponse> {
-    return this.request("UpdatePlugins", req, cb)
-  }
-
-  /**
-     * 对集群进行节点规格变更，修改实例名称，修改配置，等操作。参数中InstanceId为必传参数，参数传递组合及含义如下：
-- InstanceName：修改实例名称(仅用于标识实例)
-- NodeNum: 修改实例节点数量（节点横向扩缩容，纵向扩缩容等）
-- YMLConfig: 修改实例YML配置
-- BindedES：修改绑定的ES集群配置
-以上参数组合只能传递一种，多传或少传均会导致请求失败
-     */
-  async UpdateLogstashInstance(
-    req: UpdateLogstashInstanceRequest,
-    cb?: (error: string, rep: UpdateLogstashInstanceResponse) => void
-  ): Promise<UpdateLogstashInstanceResponse> {
-    return this.request("UpdateLogstashInstance", req, cb)
   }
 
   /**
@@ -543,6 +393,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询事件类型列表
+   */
+  async DescribeEventInfoList(
+    req?: DescribeEventInfoListRequest,
+    cb?: (error: string, rep: DescribeEventInfoListResponse) => void
+  ): Promise<DescribeEventInfoListResponse> {
+    return this.request("DescribeEventInfoList", req, cb)
+  }
+
+  /**
    * 删除Serverless索引
    */
   async DeleteServerlessInstance(
@@ -563,36 +423,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取快照备份列表
-   */
-  async DescribeClusterSnapshot(
-    req: DescribeClusterSnapshotRequest,
-    cb?: (error: string, rep: DescribeClusterSnapshotResponse) => void
-  ): Promise<DescribeClusterSnapshotResponse> {
-    return this.request("DescribeClusterSnapshot", req, cb)
-  }
-
-  /**
-   * 用于创建Logstash实例
-   */
-  async CreateLogstashInstance(
-    req: CreateLogstashInstanceRequest,
-    cb?: (error: string, rep: CreateLogstashInstanceResponse) => void
-  ): Promise<CreateLogstashInstanceResponse> {
-    return this.request("CreateLogstashInstance", req, cb)
-  }
-
-  /**
-   * 重启ES集群实例(用于系统版本更新等操作)
-   */
-  async RestartInstance(
-    req: RestartInstanceRequest,
-    cb?: (error: string, rep: RestartInstanceResponse) => void
-  ): Promise<RestartInstanceResponse> {
-    return this.request("RestartInstance", req, cb)
-  }
-
-  /**
    * 新建自动备份快照策略
    */
   async CreateAutoBackUpStrategy(
@@ -603,234 +433,33 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取自动备份快照策略信息
-   */
-  async DescribeAutoBackUpStrategy(
-    req: DescribeAutoBackUpStrategyRequest,
-    cb?: (error: string, rep: DescribeAutoBackUpStrategyResponse) => void
-  ): Promise<DescribeAutoBackUpStrategyResponse> {
-    return this.request("DescribeAutoBackUpStrategy", req, cb)
-  }
-
-  /**
-   * 查询用户该地域下符合条件的ES集群的日志
-   */
-  async DescribeInstanceLogs(
-    req: DescribeInstanceLogsRequest,
-    cb?: (error: string, rep: DescribeInstanceLogsResponse) => void
-  ): Promise<DescribeInstanceLogsResponse> {
-    return this.request("DescribeInstanceLogs", req, cb)
-  }
-
-  /**
-   * 重启Kibana
-   */
-  async RestartKibana(
-    req: RestartKibanaRequest,
-    cb?: (error: string, rep: RestartKibanaResponse) => void
-  ): Promise<RestartKibanaResponse> {
-    return this.request("RestartKibana", req, cb)
-  }
-
-  /**
-   * 修改绑定VIP的安全组，传安全组id列表
-   */
-  async ModifyEsVipSecurityGroup(
-    req: ModifyEsVipSecurityGroupRequest,
-    cb?: (error: string, rep: ModifyEsVipSecurityGroupResponse) => void
-  ): Promise<ModifyEsVipSecurityGroupResponse> {
-    return this.request("ModifyEsVipSecurityGroup", req, cb)
-  }
-
-  /**
-   * 创建Serverless索引
-   */
-  async CreateServerlessInstance(
-    req: CreateServerlessInstanceRequest,
-    cb?: (error: string, rep: CreateServerlessInstanceResponse) => void
-  ): Promise<CreateServerlessInstanceResponse> {
-    return this.request("CreateServerlessInstance", req, cb)
-  }
-
-  /**
-     * 获取serverless实例对应指标，获取space维度时不需要传入indexid，获取index时不需要传入spaceid
-获取一段时间时间范围内的指标数据
-     */
-  async DescribeServerlessMetrics(
-    req: DescribeServerlessMetricsRequest,
-    cb?: (error: string, rep: DescribeServerlessMetricsResponse) => void
-  ): Promise<DescribeServerlessMetricsResponse> {
-    return this.request("DescribeServerlessMetrics", req, cb)
-  }
-
-  /**
    * 查询实例指定条件下的操作记录
    */
-  async DescribeInstanceOperations(
-    req: DescribeInstanceOperationsRequest,
-    cb?: (error: string, rep: DescribeInstanceOperationsResponse) => void
-  ): Promise<DescribeInstanceOperationsResponse> {
-    return this.request("DescribeInstanceOperations", req, cb)
+  async DescribeLogstashInstanceOperations(
+    req: DescribeLogstashInstanceOperationsRequest,
+    cb?: (error: string, rep: DescribeLogstashInstanceOperationsResponse) => void
+  ): Promise<DescribeLogstashInstanceOperationsResponse> {
+    return this.request("DescribeLogstashInstanceOperations", req, cb)
   }
 
   /**
-   * space维度的kibana获取登录token
+   * 更新接收客户端请求的节点类型
    */
-  async DescribeSpaceKibanaTools(
-    req: DescribeSpaceKibanaToolsRequest,
-    cb?: (error: string, rep: DescribeSpaceKibanaToolsResponse) => void
-  ): Promise<DescribeSpaceKibanaToolsResponse> {
-    return this.request("DescribeSpaceKibanaTools", req, cb)
+  async UpdateRequestTargetNodeTypes(
+    req: UpdateRequestTargetNodeTypesRequest,
+    cb?: (error: string, rep: UpdateRequestTargetNodeTypesResponse) => void
+  ): Promise<UpdateRequestTargetNodeTypesResponse> {
+    return this.request("UpdateRequestTargetNodeTypes", req, cb)
   }
 
   /**
-   * 用于获取Logstash实例管道列表
+   * Serverless获取索引列表
    */
-  async DescribeLogstashPipelines(
-    req: DescribeLogstashPipelinesRequest,
-    cb?: (error: string, rep: DescribeLogstashPipelinesResponse) => void
-  ): Promise<DescribeLogstashPipelinesResponse> {
-    return this.request("DescribeLogstashPipelines", req, cb)
-  }
-
-  /**
-   * 查询用户该地域下符合条件的所有Logstash实例
-   */
-  async DescribeLogstashInstances(
-    req: DescribeLogstashInstancesRequest,
-    cb?: (error: string, rep: DescribeLogstashInstancesResponse) => void
-  ): Promise<DescribeLogstashInstancesResponse> {
-    return this.request("DescribeLogstashInstances", req, cb)
-  }
-
-  /**
-   * 创建Serverless索引空间
-   */
-  async CreateServerlessSpaceV2(
-    req: CreateServerlessSpaceV2Request,
-    cb?: (error: string, rep: CreateServerlessSpaceV2Response) => void
-  ): Promise<CreateServerlessSpaceV2Response> {
-    return this.request("CreateServerlessSpaceV2", req, cb)
-  }
-
-  /**
-   * 查询集群各视图数据，包括集群维度、节点维度、Kibana维度
-   */
-  async DescribeViews(
-    req: DescribeViewsRequest,
-    cb?: (error: string, rep: DescribeViewsResponse) => void
-  ): Promise<DescribeViewsResponse> {
-    return this.request("DescribeViews", req, cb)
-  }
-
-  /**
-   * 创建指定规格的ES集群实例
-   */
-  async CreateInstance(
-    req: CreateInstanceRequest,
-    cb?: (error: string, rep: CreateInstanceResponse) => void
-  ): Promise<CreateInstanceResponse> {
-    return this.request("CreateInstance", req, cb)
-  }
-
-  /**
-   * 更新Serverless索引
-   */
-  async UpdateServerlessInstance(
-    req: UpdateServerlessInstanceRequest,
-    cb?: (error: string, rep: UpdateServerlessInstanceResponse) => void
-  ): Promise<UpdateServerlessInstanceResponse> {
-    return this.request("UpdateServerlessInstance", req, cb)
-  }
-
-  /**
-   * 查询IP溯源日志
-   */
-  async QueryIpTraceLog(
-    req: QueryIpTraceLogRequest,
-    cb?: (error: string, rep: QueryIpTraceLogResponse) => void
-  ): Promise<QueryIpTraceLogResponse> {
-    return this.request("QueryIpTraceLog", req, cb)
-  }
-
-  /**
-   * GET请求集群实例
-   */
-  async RequestInstancesByGet(
-    req?: RequestInstancesByGetRequest,
-    cb?: (error: string, rep: RequestInstancesByGetResponse) => void
-  ): Promise<RequestInstancesByGetResponse> {
-    return this.request("RequestInstancesByGet", req, cb)
-  }
-
-  /**
-   * 查询IP溯源状态
-   */
-  async GetIpTraceStatus(
-    req: GetIpTraceStatusRequest,
-    cb?: (error: string, rep: GetIpTraceStatusResponse) => void
-  ): Promise<GetIpTraceStatusResponse> {
-    return this.request("GetIpTraceStatus", req, cb)
-  }
-
-  /**
-   * 删除Serverless空间子用户
-   */
-  async DeleteServerlessSpaceUser(
-    req: DeleteServerlessSpaceUserRequest,
-    cb?: (error: string, rep: DeleteServerlessSpaceUserResponse) => void
-  ): Promise<DeleteServerlessSpaceUserResponse> {
-    return this.request("DeleteServerlessSpaceUser", req, cb)
-  }
-
-  /**
-   * 用于批量删除Logstash管道
-   */
-  async DeleteLogstashPipelines(
-    req: DeleteLogstashPipelinesRequest,
-    cb?: (error: string, rep: DeleteLogstashPipelinesResponse) => void
-  ): Promise<DeleteLogstashPipelinesResponse> {
-    return this.request("DeleteLogstashPipelines", req, cb)
-  }
-
-  /**
-   * 查询用户该地域下符合条件的所有实例
-   */
-  async DescribeInstances(
-    req: DescribeInstancesRequest,
-    cb?: (error: string, rep: DescribeInstancesResponse) => void
-  ): Promise<DescribeInstancesResponse> {
-    return this.request("DescribeInstances", req, cb)
-  }
-
-  /**
-   * 更新Serverless索引空间
-   */
-  async UpdateServerlessSpace(
-    req: UpdateServerlessSpaceRequest,
-    cb?: (error: string, rep: UpdateServerlessSpaceResponse) => void
-  ): Promise<UpdateServerlessSpaceResponse> {
-    return this.request("UpdateServerlessSpace", req, cb)
-  }
-
-  /**
-   * 删除索引
-   */
-  async DeleteIndex(
-    req: DeleteIndexRequest,
-    cb?: (error: string, rep: DeleteIndexResponse) => void
-  ): Promise<DeleteIndexResponse> {
-    return this.request("DeleteIndex", req, cb)
-  }
-
-  /**
-   * 用于重启Logstash实例
-   */
-  async RestartLogstashInstance(
-    req: RestartLogstashInstanceRequest,
-    cb?: (error: string, rep: RestartLogstashInstanceResponse) => void
-  ): Promise<RestartLogstashInstanceResponse> {
-    return this.request("RestartLogstashInstance", req, cb)
+  async DescribeServerlessInstances(
+    req: DescribeServerlessInstancesRequest,
+    cb?: (error: string, rep: DescribeServerlessInstancesResponse) => void
+  ): Promise<DescribeServerlessInstancesResponse> {
+    return this.request("DescribeServerlessInstances", req, cb)
   }
 
   /**
@@ -844,13 +473,190 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除快照仓库里备份的快照
+   * 查询Logstash集群视图
    */
-  async DeleteClusterSnapshot(
-    req: DeleteClusterSnapshotRequest,
-    cb?: (error: string, rep: DeleteClusterSnapshotResponse) => void
-  ): Promise<DeleteClusterSnapshotResponse> {
-    return this.request("DeleteClusterSnapshot", req, cb)
+  async DescribeLogstashViews(
+    req: DescribeLogstashViewsRequest,
+    cb?: (error: string, rep: DescribeLogstashViewsResponse) => void
+  ): Promise<DescribeLogstashViewsResponse> {
+    return this.request("DescribeLogstashViews", req, cb)
+  }
+
+  /**
+   * 用于更新管道描述信息
+   */
+  async UpdateLogstashPipelineDesc(
+    req: UpdateLogstashPipelineDescRequest,
+    cb?: (error: string, rep: UpdateLogstashPipelineDescResponse) => void
+  ): Promise<UpdateLogstashPipelineDescResponse> {
+    return this.request("UpdateLogstashPipelineDesc", req, cb)
+  }
+
+  /**
+   * 查询实例插件列表
+   */
+  async DescribeInstancePluginList(
+    req: DescribeInstancePluginListRequest,
+    cb?: (error: string, rep: DescribeInstancePluginListResponse) => void
+  ): Promise<DescribeInstancePluginListResponse> {
+    return this.request("DescribeInstancePluginList", req, cb)
+  }
+
+  /**
+   * 用于批量停止Logstash管道
+   */
+  async StopLogstashPipelines(
+    req: StopLogstashPipelinesRequest,
+    cb?: (error: string, rep: StopLogstashPipelinesResponse) => void
+  ): Promise<StopLogstashPipelinesResponse> {
+    return this.request("StopLogstashPipelines", req, cb)
+  }
+
+  /**
+   * 变更插件列表
+   */
+  async UpdatePlugins(
+    req: UpdatePluginsRequest,
+    cb?: (error: string, rep: UpdatePluginsResponse) => void
+  ): Promise<UpdatePluginsResponse> {
+    return this.request("UpdatePlugins", req, cb)
+  }
+
+  /**
+     * 对集群进行节点规格变更，修改实例名称，修改配置，重置密码， 添加Kibana黑白名单等操作。参数中InstanceId为必传参数，ForceRestart为选填参数，剩余参数传递组合及含义如下：
+- InstanceName：修改实例名称(仅用于标识实例)
+- NodeInfoList: 修改节点配置（节点横向扩缩容，纵向扩缩容，增加主节点，增加冷节点等）
+- EsConfig：修改集群配置
+- Password：修改默认用户elastic的密码
+- EsAcl：修改访问控制列表
+- CosBackUp: 设置集群COS自动备份信息
+以上参数组合只能传递一种，多传或少传均会导致请求失败
+     */
+  async UpdateInstance(
+    req: UpdateInstanceRequest,
+    cb?: (error: string, rep: UpdateInstanceResponse) => void
+  ): Promise<UpdateInstanceResponse> {
+    return this.request("UpdateInstance", req, cb)
+  }
+
+  /**
+   * 重启ES集群实例(用于系统版本更新等操作)
+   */
+  async RestartInstance(
+    req: RestartInstanceRequest,
+    cb?: (error: string, rep: RestartInstanceResponse) => void
+  ): Promise<RestartInstanceResponse> {
+    return this.request("RestartInstance", req, cb)
+  }
+
+  /**
+   * 获取Logstash指定region下指定zone列表的资源情况
+   */
+  async QueryZoneResourceForLogstash(
+    req: QueryZoneResourceForLogstashRequest,
+    cb?: (error: string, rep: QueryZoneResourceForLogstashResponse) => void
+  ): Promise<QueryZoneResourceForLogstashResponse> {
+    return this.request("QueryZoneResourceForLogstash", req, cb)
+  }
+
+  /**
+   * 更新ES集群词典
+   */
+  async UpdateDictionaries(
+    req: UpdateDictionariesRequest,
+    cb?: (error: string, rep: UpdateDictionariesResponse) => void
+  ): Promise<UpdateDictionariesResponse> {
+    return this.request("UpdateDictionaries", req, cb)
+  }
+
+  /**
+   * 查询事件中心列表
+   */
+  async DescribeEsInstanceEventLists(
+    req: DescribeEsInstanceEventListsRequest,
+    cb?: (error: string, rep: DescribeEsInstanceEventListsResponse) => void
+  ): Promise<DescribeEsInstanceEventListsResponse> {
+    return this.request("DescribeEsInstanceEventLists", req, cb)
+  }
+
+  /**
+   * 查询实例指定条件下的操作记录
+   */
+  async DescribeInstanceOperations(
+    req: DescribeInstanceOperationsRequest,
+    cb?: (error: string, rep: DescribeInstanceOperationsResponse) => void
+  ): Promise<DescribeInstanceOperationsResponse> {
+    return this.request("DescribeInstanceOperations", req, cb)
+  }
+
+  /**
+   * 用于获取Logstash实例管道列表
+   */
+  async DescribeLogstashPipelines(
+    req: DescribeLogstashPipelinesRequest,
+    cb?: (error: string, rep: DescribeLogstashPipelinesResponse) => void
+  ): Promise<DescribeLogstashPipelinesResponse> {
+    return this.request("DescribeLogstashPipelines", req, cb)
+  }
+
+  /**
+   * 创建指定规格的ES集群实例
+   */
+  async CreateInstance(
+    req: CreateInstanceRequest,
+    cb?: (error: string, rep: CreateInstanceResponse) => void
+  ): Promise<CreateInstanceResponse> {
+    return this.request("CreateInstance", req, cb)
+  }
+
+  /**
+   * 更新智能运维配置
+   */
+  async UpdateDiagnoseSettings(
+    req: UpdateDiagnoseSettingsRequest,
+    cb?: (error: string, rep: UpdateDiagnoseSettingsResponse) => void
+  ): Promise<UpdateDiagnoseSettingsResponse> {
+    return this.request("UpdateDiagnoseSettings", req, cb)
+  }
+
+  /**
+   * 查询ES支持的地域列表
+   */
+  async DescribeRegions(
+    req?: DescribeRegionsRequest,
+    cb?: (error: string, rep: DescribeRegionsResponse) => void
+  ): Promise<DescribeRegionsResponse> {
+    return this.request("DescribeRegions", req, cb)
+  }
+
+  /**
+   * 更新Serverless索引空间
+   */
+  async UpdateServerlessSpace(
+    req: UpdateServerlessSpaceRequest,
+    cb?: (error: string, rep: UpdateServerlessSpaceResponse) => void
+  ): Promise<UpdateServerlessSpaceResponse> {
+    return this.request("UpdateServerlessSpace", req, cb)
+  }
+
+  /**
+   * 查询新增的forcemerge任务列表
+   */
+  async DescribeForceMergeTask(
+    req: DescribeForceMergeTaskRequest,
+    cb?: (error: string, rep: DescribeForceMergeTaskResponse) => void
+  ): Promise<DescribeForceMergeTaskResponse> {
+    return this.request("DescribeForceMergeTask", req, cb)
+  }
+
+  /**
+   * 删除索引
+   */
+  async DeleteIndex(
+    req: DeleteIndexRequest,
+    cb?: (error: string, rep: DeleteIndexResponse) => void
+  ): Promise<DeleteIndexResponse> {
+    return this.request("DeleteIndex", req, cb)
   }
 
   /**
@@ -864,16 +670,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于重启集群节点
-   */
-  async RestartNodes(
-    req: RestartNodesRequest,
-    cb?: (error: string, rep: RestartNodesResponse) => void
-  ): Promise<RestartNodesResponse> {
-    return this.request("RestartNodes", req, cb)
-  }
-
-  /**
    * 查看Serverless空间子用户
    */
   async DescribeServerlessSpaceUser(
@@ -881,26 +677,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeServerlessSpaceUserResponse) => void
   ): Promise<DescribeServerlessSpaceUserResponse> {
     return this.request("DescribeServerlessSpaceUser", req, cb)
-  }
-
-  /**
-   * 用于下发并且部署管道
-   */
-  async SaveAndDeployLogstashPipeline(
-    req: SaveAndDeployLogstashPipelineRequest,
-    cb?: (error: string, rep: SaveAndDeployLogstashPipelineResponse) => void
-  ): Promise<SaveAndDeployLogstashPipelineResponse> {
-    return this.request("SaveAndDeployLogstashPipeline", req, cb)
-  }
-
-  /**
-   * 更新ES集群词典
-   */
-  async UpdateDictionaries(
-    req: UpdateDictionariesRequest,
-    cb?: (error: string, rep: UpdateDictionariesResponse) => void
-  ): Promise<UpdateDictionariesResponse> {
-    return this.request("UpdateDictionaries", req, cb)
   }
 
   /**
@@ -924,43 +700,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改自动备份快照策略公共信息
+   * 集群可访问API展示
    */
-  async ModifyAutoBackUpCommonInfo(
-    req?: ModifyAutoBackUpCommonInfoRequest,
-    cb?: (error: string, rep: ModifyAutoBackUpCommonInfoResponse) => void
-  ): Promise<ModifyAutoBackUpCommonInfoResponse> {
-    return this.request("ModifyAutoBackUpCommonInfo", req, cb)
+  async DescribeRequestInstancePolicy(
+    req: DescribeRequestInstancePolicyRequest,
+    cb?: (error: string, rep: DescribeRequestInstancePolicyResponse) => void
+  ): Promise<DescribeRequestInstancePolicyResponse> {
+    return this.request("DescribeRequestInstancePolicy", req, cb)
   }
 
   /**
-   * 查询实例插件列表
+   * 集群续费询价接口，续费前通过调用该接口，可获取集群续费的价格。
    */
-  async DescribeInstancePluginList(
-    req: DescribeInstancePluginListRequest,
-    cb?: (error: string, rep: DescribeInstancePluginListResponse) => void
-  ): Promise<DescribeInstancePluginListResponse> {
-    return this.request("DescribeInstancePluginList", req, cb)
-  }
-
-  /**
-   * Serverless获取索引列表
-   */
-  async DescribeServerlessInstances(
-    req: DescribeServerlessInstancesRequest,
-    cb?: (error: string, rep: DescribeServerlessInstancesResponse) => void
-  ): Promise<DescribeServerlessInstancesResponse> {
-    return this.request("DescribeServerlessInstances", req, cb)
-  }
-
-  /**
-   * 获取索引元数据
-   */
-  async DescribeIndexMeta(
-    req: DescribeIndexMetaRequest,
-    cb?: (error: string, rep: DescribeIndexMetaResponse) => void
-  ): Promise<DescribeIndexMetaResponse> {
-    return this.request("DescribeIndexMeta", req, cb)
+  async InquirePriceRenewInstance(
+    req: InquirePriceRenewInstanceRequest,
+    cb?: (error: string, rep: InquirePriceRenewInstanceResponse) => void
+  ): Promise<InquirePriceRenewInstanceResponse> {
+    return this.request("InquirePriceRenewInstance", req, cb)
   }
 
   /**
@@ -974,13 +730,203 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询实例指定条件下的操作记录
+   * 获取Serverless索引空间列表
    */
-  async DescribeLogstashInstanceOperations(
-    req: DescribeLogstashInstanceOperationsRequest,
-    cb?: (error: string, rep: DescribeLogstashInstanceOperationsResponse) => void
-  ): Promise<DescribeLogstashInstanceOperationsResponse> {
-    return this.request("DescribeLogstashInstanceOperations", req, cb)
+  async DescribeServerlessSpaces(
+    req: DescribeServerlessSpacesRequest,
+    cb?: (error: string, rep: DescribeServerlessSpacesResponse) => void
+  ): Promise<DescribeServerlessSpacesResponse> {
+    return this.request("DescribeServerlessSpaces", req, cb)
+  }
+
+  /**
+   * ES集群安装模型接口
+   */
+  async InstallInstanceModel(
+    req: InstallInstanceModelRequest,
+    cb?: (error: string, rep: InstallInstanceModelResponse) => void
+  ): Promise<InstallInstanceModelResponse> {
+    return this.request("InstallInstanceModel", req, cb)
+  }
+
+  /**
+   * 查询快照信息接口
+   */
+  async DescribeUserCosSnapshotList(
+    req: DescribeUserCosSnapshotListRequest,
+    cb?: (error: string, rep: DescribeUserCosSnapshotListResponse) => void
+  ): Promise<DescribeUserCosSnapshotListResponse> {
+    return this.request("DescribeUserCosSnapshotList", req, cb)
+  }
+
+  /**
+   * 获取实例可升级列表，包括可升级的大版本、商业特性
+   */
+  async DescribeUpgrade(
+    req: DescribeUpgradeRequest,
+    cb?: (error: string, rep: DescribeUpgradeResponse) => void
+  ): Promise<DescribeUpgradeResponse> {
+    return this.request("DescribeUpgrade", req, cb)
+  }
+
+  /**
+   * 销毁集群实例
+   */
+  async DeleteInstance(
+    req: DeleteInstanceRequest,
+    cb?: (error: string, rep: DeleteInstanceResponse) => void
+  ): Promise<DeleteInstanceResponse> {
+    return this.request("DeleteInstance", req, cb)
+  }
+
+  /**
+   * 查看智能运维配置
+   */
+  async GetDiagnoseSettings(
+    req: GetDiagnoseSettingsRequest,
+    cb?: (error: string, rep: GetDiagnoseSettingsResponse) => void
+  ): Promise<GetDiagnoseSettingsResponse> {
+    return this.request("GetDiagnoseSettings", req, cb)
+  }
+
+  /**
+   * 获取集群快照列表概览
+   */
+  async DescribeSnapshotViews(
+    req: DescribeSnapshotViewsRequest,
+    cb?: (error: string, rep: DescribeSnapshotViewsResponse) => void
+  ): Promise<DescribeSnapshotViewsResponse> {
+    return this.request("DescribeSnapshotViews", req, cb)
+  }
+
+  /**
+   * 用于重启集群节点
+   */
+  async RestartNodes(
+    req: RestartNodesRequest,
+    cb?: (error: string, rep: RestartNodesResponse) => void
+  ): Promise<RestartNodesResponse> {
+    return this.request("RestartNodes", req, cb)
+  }
+
+  /**
+   * 创建Serverless索引空间
+   */
+  async CreateServerlessSpaceV2(
+    req: CreateServerlessSpaceV2Request,
+    cb?: (error: string, rep: CreateServerlessSpaceV2Response) => void
+  ): Promise<CreateServerlessSpaceV2Response> {
+    return this.request("CreateServerlessSpaceV2", req, cb)
+  }
+
+  /**
+   * 查询IP溯源状态
+   */
+  async GetIpTraceStatus(
+    req: GetIpTraceStatusRequest,
+    cb?: (error: string, rep: GetIpTraceStatusResponse) => void
+  ): Promise<GetIpTraceStatusResponse> {
+    return this.request("GetIpTraceStatus", req, cb)
+  }
+
+  /**
+   * 获取自动备份快照策略信息
+   */
+  async DescribeAutoBackUpStrategy(
+    req: DescribeAutoBackUpStrategyRequest,
+    cb?: (error: string, rep: DescribeAutoBackUpStrategyResponse) => void
+  ): Promise<DescribeAutoBackUpStrategyResponse> {
+    return this.request("DescribeAutoBackUpStrategy", req, cb)
+  }
+
+  /**
+   * 创建Serverless索引
+   */
+  async CreateServerlessInstance(
+    req: CreateServerlessInstanceRequest,
+    cb?: (error: string, rep: CreateServerlessInstanceResponse) => void
+  ): Promise<CreateServerlessInstanceResponse> {
+    return this.request("CreateServerlessInstance", req, cb)
+  }
+
+  /**
+   * 查询用户该地域下符合条件的所有Logstash实例
+   */
+  async DescribeLogstashInstances(
+    req: DescribeLogstashInstancesRequest,
+    cb?: (error: string, rep: DescribeLogstashInstancesResponse) => void
+  ): Promise<DescribeLogstashInstancesResponse> {
+    return this.request("DescribeLogstashInstances", req, cb)
+  }
+
+  /**
+   * 修改绑定VIP的安全组，传安全组id列表
+   */
+  async ModifyEsVipSecurityGroup(
+    req: ModifyEsVipSecurityGroupRequest,
+    cb?: (error: string, rep: ModifyEsVipSecurityGroupResponse) => void
+  ): Promise<ModifyEsVipSecurityGroupResponse> {
+    return this.request("ModifyEsVipSecurityGroup", req, cb)
+  }
+
+  /**
+   * GET请求集群实例
+   */
+  async RequestInstancesByGet(
+    req: RequestInstancesByGetRequest,
+    cb?: (error: string, rep: RequestInstancesByGetResponse) => void
+  ): Promise<RequestInstancesByGetResponse> {
+    return this.request("RequestInstancesByGet", req, cb)
+  }
+
+  /**
+   * 更新索引
+   */
+  async UpdateIndex(
+    req: UpdateIndexRequest,
+    cb?: (error: string, rep: UpdateIndexResponse) => void
+  ): Promise<UpdateIndexResponse> {
+    return this.request("UpdateIndex", req, cb)
+  }
+
+  /**
+   * 查询用户该地域下符合条件的所有实例
+   */
+  async DescribeInstances(
+    req: DescribeInstancesRequest,
+    cb?: (error: string, rep: DescribeInstancesResponse) => void
+  ): Promise<DescribeInstancesResponse> {
+    return this.request("DescribeInstances", req, cb)
+  }
+
+  /**
+   * 用于启动Logstash管道
+   */
+  async StartLogstashPipelines(
+    req: StartLogstashPipelinesRequest,
+    cb?: (error: string, rep: StartLogstashPipelinesResponse) => void
+  ): Promise<StartLogstashPipelinesResponse> {
+    return this.request("StartLogstashPipelines", req, cb)
+  }
+
+  /**
+   * 用于重启Logstash实例
+   */
+  async RestartLogstashInstance(
+    req: RestartLogstashInstanceRequest,
+    cb?: (error: string, rep: RestartLogstashInstanceResponse) => void
+  ): Promise<RestartLogstashInstanceResponse> {
+    return this.request("RestartLogstashInstance", req, cb)
+  }
+
+  /**
+   * 删除Serverless空间子用户
+   */
+  async DeleteServerlessSpaceUser(
+    req: DeleteServerlessSpaceUserRequest,
+    cb?: (error: string, rep: DeleteServerlessSpaceUserResponse) => void
+  ): Promise<DeleteServerlessSpaceUserResponse> {
+    return this.request("DeleteServerlessSpaceUser", req, cb)
   }
 
   /**
@@ -994,12 +940,248 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 集群续费询价接口，续费前通过调用该接口，可获取集群续费的价格。
+   * 修改自动备份快照策略公共信息
    */
-  async InquirePriceRenewInstance(
-    req: InquirePriceRenewInstanceRequest,
-    cb?: (error: string, rep: InquirePriceRenewInstanceResponse) => void
-  ): Promise<InquirePriceRenewInstanceResponse> {
-    return this.request("InquirePriceRenewInstance", req, cb)
+  async ModifyAutoBackUpCommonInfo(
+    req?: ModifyAutoBackUpCommonInfoRequest,
+    cb?: (error: string, rep: ModifyAutoBackUpCommonInfoResponse) => void
+  ): Promise<ModifyAutoBackUpCommonInfoResponse> {
+    return this.request("ModifyAutoBackUpCommonInfo", req, cb)
+  }
+
+  /**
+   * 用于删除Logstash实例
+   */
+  async DeleteLogstashInstance(
+    req: DeleteLogstashInstanceRequest,
+    cb?: (error: string, rep: DeleteLogstashInstanceResponse) => void
+  ): Promise<DeleteLogstashInstanceResponse> {
+    return this.request("DeleteLogstashInstance", req, cb)
+  }
+
+  /**
+     * 获取serverless实例对应指标，获取space维度时不需要传入indexid，获取index时不需要传入spaceid
+获取一段时间时间范围内的指标数据
+     */
+  async DescribeServerlessMetrics(
+    req: DescribeServerlessMetricsRequest,
+    cb?: (error: string, rep: DescribeServerlessMetricsResponse) => void
+  ): Promise<DescribeServerlessMetricsResponse> {
+    return this.request("DescribeServerlessMetrics", req, cb)
+  }
+
+  /**
+   * 修改自动备份快照策略
+   */
+  async ModifyAutoBackUpStrategy(
+    req: ModifyAutoBackUpStrategyRequest,
+    cb?: (error: string, rep: ModifyAutoBackUpStrategyResponse) => void
+  ): Promise<ModifyAutoBackUpStrategyResponse> {
+    return this.request("ModifyAutoBackUpStrategy", req, cb)
+  }
+
+  /**
+   * cos迁移流程
+   */
+  async CreateCosMigrateToServerlessInstance(
+    req: CreateCosMigrateToServerlessInstanceRequest,
+    cb?: (error: string, rep: CreateCosMigrateToServerlessInstanceResponse) => void
+  ): Promise<CreateCosMigrateToServerlessInstanceResponse> {
+    return this.request("CreateCosMigrateToServerlessInstance", req, cb)
+  }
+
+  /**
+   * 更新实例Jdk配置
+   */
+  async UpdateJdk(
+    req: UpdateJdkRequest,
+    cb?: (error: string, rep: UpdateJdkResponse) => void
+  ): Promise<UpdateJdkResponse> {
+    return this.request("UpdateJdk", req, cb)
+  }
+
+  /**
+   * 查询IP溯源日志
+   */
+  async QueryIpTraceLog(
+    req: QueryIpTraceLogRequest,
+    cb?: (error: string, rep: QueryIpTraceLogResponse) => void
+  ): Promise<QueryIpTraceLogResponse> {
+    return this.request("QueryIpTraceLog", req, cb)
+  }
+
+  /**
+   * 获取快照备份列表
+   */
+  async DescribeClusterSnapshot(
+    req: DescribeClusterSnapshotRequest,
+    cb?: (error: string, rep: DescribeClusterSnapshotResponse) => void
+  ): Promise<DescribeClusterSnapshotResponse> {
+    return this.request("DescribeClusterSnapshot", req, cb)
+  }
+
+  /**
+   * 用于创建Logstash实例
+   */
+  async CreateLogstashInstance(
+    req: CreateLogstashInstanceRequest,
+    cb?: (error: string, rep: CreateLogstashInstanceResponse) => void
+  ): Promise<CreateLogstashInstanceResponse> {
+    return this.request("CreateLogstashInstance", req, cb)
+  }
+
+  /**
+   * 查询用户该地域下符合条件的ES集群的日志
+   */
+  async DescribeInstanceLogs(
+    req: DescribeInstanceLogsRequest,
+    cb?: (error: string, rep: DescribeInstanceLogsResponse) => void
+  ): Promise<DescribeInstanceLogsResponse> {
+    return this.request("DescribeInstanceLogs", req, cb)
+  }
+
+  /**
+   * 重启Kibana
+   */
+  async RestartKibana(
+    req: RestartKibanaRequest,
+    cb?: (error: string, rep: RestartKibanaResponse) => void
+  ): Promise<RestartKibanaResponse> {
+    return this.request("RestartKibana", req, cb)
+  }
+
+  /**
+   * 用于下发并且部署管道
+   */
+  async SaveAndDeployLogstashPipeline(
+    req: SaveAndDeployLogstashPipelineRequest,
+    cb?: (error: string, rep: SaveAndDeployLogstashPipelineResponse) => void
+  ): Promise<SaveAndDeployLogstashPipelineResponse> {
+    return this.request("SaveAndDeployLogstashPipeline", req, cb)
+  }
+
+  /**
+   * 获取自动扩盘参数
+   */
+  async DescribeAutoScaleDiskInfo(
+    req: DescribeAutoScaleDiskInfoRequest,
+    cb?: (error: string, rep: DescribeAutoScaleDiskInfoResponse) => void
+  ): Promise<DescribeAutoScaleDiskInfoResponse> {
+    return this.request("DescribeAutoScaleDiskInfo", req, cb)
+  }
+
+  /**
+     * 对集群进行节点规格变更，修改实例名称，修改配置，等操作。参数中InstanceId为必传参数，参数传递组合及含义如下：
+- InstanceName：修改实例名称(仅用于标识实例)
+- NodeNum: 修改实例节点数量（节点横向扩缩容，纵向扩缩容等）
+- YMLConfig: 修改实例YML配置
+- BindedES：修改绑定的ES集群配置
+以上参数组合只能传递一种，多传或少传均会导致请求失败
+     */
+  async UpdateLogstashInstance(
+    req: UpdateLogstashInstanceRequest,
+    cb?: (error: string, rep: UpdateLogstashInstanceResponse) => void
+  ): Promise<UpdateLogstashInstanceResponse> {
+    return this.request("UpdateLogstashInstance", req, cb)
+  }
+
+  /**
+   * space维度的kibana获取登录token
+   */
+  async DescribeSpaceKibanaTools(
+    req: DescribeSpaceKibanaToolsRequest,
+    cb?: (error: string, rep: DescribeSpaceKibanaToolsResponse) => void
+  ): Promise<DescribeSpaceKibanaToolsResponse> {
+    return this.request("DescribeSpaceKibanaTools", req, cb)
+  }
+
+  /**
+   * 查询集群各视图数据，包括集群维度、节点维度、Kibana维度
+   */
+  async DescribeViews(
+    req: DescribeViewsRequest,
+    cb?: (error: string, rep: DescribeViewsResponse) => void
+  ): Promise<DescribeViewsResponse> {
+    return this.request("DescribeViews", req, cb)
+  }
+
+  /**
+   * 更新Serverless索引
+   */
+  async UpdateServerlessInstance(
+    req: UpdateServerlessInstanceRequest,
+    cb?: (error: string, rep: UpdateServerlessInstanceResponse) => void
+  ): Promise<UpdateServerlessInstanceResponse> {
+    return this.request("UpdateServerlessInstance", req, cb)
+  }
+
+  /**
+   * 用于批量删除Logstash管道
+   */
+  async DeleteLogstashPipelines(
+    req: DeleteLogstashPipelinesRequest,
+    cb?: (error: string, rep: DeleteLogstashPipelinesResponse) => void
+  ): Promise<DeleteLogstashPipelinesResponse> {
+    return this.request("DeleteLogstashPipelines", req, cb)
+  }
+
+  /**
+   * 查询事件详情
+   */
+  async DescribeEventDataDetail(
+    req: DescribeEventDataDetailRequest,
+    cb?: (error: string, rep: DescribeEventDataDetailResponse) => void
+  ): Promise<DescribeEventDataDetailResponse> {
+    return this.request("DescribeEventDataDetail", req, cb)
+  }
+
+  /**
+   * 获取集群节点磁盘大小上下限
+   */
+  async DescribeClusterDiskRange(
+    req: DescribeClusterDiskRangeRequest,
+    cb?: (error: string, rep: DescribeClusterDiskRangeResponse) => void
+  ): Promise<DescribeClusterDiskRangeResponse> {
+    return this.request("DescribeClusterDiskRange", req, cb)
+  }
+
+  /**
+   * 升级ES集群版本
+   */
+  async UpgradeInstance(
+    req: UpgradeInstanceRequest,
+    cb?: (error: string, rep: UpgradeInstanceResponse) => void
+  ): Promise<UpgradeInstanceResponse> {
+    return this.request("UpgradeInstance", req, cb)
+  }
+
+  /**
+   * 删除快照仓库里备份的快照
+   */
+  async DeleteClusterSnapshot(
+    req: DeleteClusterSnapshotRequest,
+    cb?: (error: string, rep: DeleteClusterSnapshotResponse) => void
+  ): Promise<DeleteClusterSnapshotResponse> {
+    return this.request("DeleteClusterSnapshot", req, cb)
+  }
+
+  /**
+   * 获取集群自动备份策略概览
+   */
+  async DescribeCosBackupStrategyViews(
+    req: DescribeCosBackupStrategyViewsRequest,
+    cb?: (error: string, rep: DescribeCosBackupStrategyViewsResponse) => void
+  ): Promise<DescribeCosBackupStrategyViewsResponse> {
+    return this.request("DescribeCosBackupStrategyViews", req, cb)
+  }
+
+  /**
+   * 获取索引元数据
+   */
+  async DescribeIndexMeta(
+    req: DescribeIndexMetaRequest,
+    cb?: (error: string, rep: DescribeIndexMetaResponse) => void
+  ): Promise<DescribeIndexMetaResponse> {
+    return this.request("DescribeIndexMeta", req, cb)
   }
 }

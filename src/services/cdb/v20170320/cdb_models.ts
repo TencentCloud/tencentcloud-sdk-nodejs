@@ -1348,7 +1348,7 @@ export interface CreateCdbProxyAddressRequest {
    */
   AutoLoadBalance?: boolean
   /**
-   * <p>接入模式。nearBy - 就近访问，balance - 均衡分配，默认值：nearBy。</p>
+   * <p>接入模式。</p><p>枚举值：</p><ul><li>nearBy： 就近访问</li><li>balance： 均衡分配</li><li>direct_nearby： 纯网络转发就近访问</li><li>direct_balance： 纯网络转发均衡分配</li></ul><p>默认值：nearBy</p>
    */
   AccessMode?: string
 }
@@ -2006,6 +2006,7 @@ export interface SwitchDBInstanceMasterSlaveRequest {
   DstSlave?: string
   /**
    * 是否强制切换。默认为 False。注意，若设置强制切换为 True，实例存在丢失数据的风险，请谨慎使用。
+   * @deprecated
    */
   ForceSwitch?: boolean
   /**
@@ -3578,11 +3579,11 @@ export interface DescribeSupportedPrivilegesRequest {
  */
 export interface DescribeAsyncRequestInfoResponse {
   /**
-   * 任务执行结果。可能的取值：INITIAL - 初始化，RUNNING - 运行中，SUCCESS - 执行成功，FAILED - 执行失败，KILLED - 已终止，REMOVED - 已删除，PAUSED - 终止中。
+   * <p>任务执行结果。</p><p>枚举值：</p><ul><li>INITIAL： 初始化。</li><li>RUNNING： 运行中。</li><li>SUCCESS： 执行成功。</li><li>FAILED： 执行失败。</li><li>KILLED： 已终止。</li><li>REMOVED： 已删除。</li><li>PAUSED： 终止中。</li><li>UNDEFINED： 任务已创建但未开始执行，在 WaitSwitch = true 场景下，表示任务正在等待维护时间窗到来。</li></ul>
    */
   Status?: string
   /**
-   * 任务执行信息描述。
+   * <p>任务执行信息描述。</p>
    */
   Info?: string
   /**
@@ -4062,7 +4063,7 @@ export interface OpenDBInstanceGTIDRequest {
  */
 export interface DescribeAsyncRequestInfoRequest {
   /**
-   * 异步任务的请求 ID。
+   * <p>异步任务的请求 ID。</p>
    */
   AsyncRequestId: string
 }
@@ -7573,7 +7574,7 @@ export interface AdjustCdbProxyAddressRequest {
    */
   AutoLoadBalance?: boolean
   /**
-   * <p>访问模式：nearby - 就近访问，balance - 均衡分配，默认就近访问。</p>
+   * <p>访问模式。</p><p>枚举值：</p><ul><li>nearby： 就近访问</li><li>balance： 均衡分配</li><li>direct_nearby： 纯网络转发就近访问</li><li>direct_balance： 纯网络转发均衡分配</li></ul>
    */
   AccessMode?: string
   /**
@@ -9080,86 +9081,89 @@ export interface ModifyAccountDescriptionResponse {
  */
 export interface ProxyAddress {
   /**
-   * 代理组地址ID
+   * <p>代理组地址ID</p>
    */
   ProxyAddressId?: string
   /**
-   * 私有网络ID
+   * <p>私有网络ID</p>
    */
   UniqVpcId?: string
   /**
-   * 私有子网ID
+   * <p>私有子网ID</p>
    */
   UniqSubnetId?: string
   /**
-   * IP地址
+   * <p>IP地址</p>
    */
   Vip?: string
   /**
-   * 端口
+   * <p>端口</p>
    */
   VPort?: number
   /**
-   * 权重分配模式；
-系统自动分配："system"， 自定义："custom"
+   * <p>权重分配模式；<br>系统自动分配：&quot;system&quot;， 自定义：&quot;custom&quot;</p>
    */
   WeightMode?: string
   /**
-   * 是否开启延迟剔除，取值："true" | "false"
+   * <p>是否开启延迟剔除，取值：&quot;true&quot; | &quot;false&quot;</p>
    */
   IsKickOut?: boolean
   /**
-   * 最小保留数量，最小取值：0
+   * <p>最小保留数量，最小取值：0</p>
    */
   MinCount?: number
   /**
-   * 延迟剔除阈值，最小取值：0
+   * <p>延迟剔除阈值，最小取值：0</p>
    */
   MaxDelay?: number
   /**
-   * 是否自动添加RO，取值："true" | "false"
+   * <p>是否自动添加RO，取值：&quot;true&quot; | &quot;false&quot;</p>
    */
   AutoAddRo?: boolean
   /**
-   * 是否是只读，取值："true" | "false"
+   * <p>是否是只读，取值：&quot;true&quot; | &quot;false&quot;</p>
    */
   ReadOnly?: boolean
   /**
-   * 是否开启事务分离
+   * <p>是否开启事务分离</p>
    */
   TransSplit?: boolean
   /**
-   * 是否开启故障转移
+   * <p>是否开启故障转移</p>
    */
   FailOver?: boolean
   /**
-   * 是否开启连接池
+   * <p>是否开启连接池</p>
    */
   ConnectionPool?: boolean
   /**
-   * 描述
+   * <p>描述</p>
    */
   Desc?: string
   /**
-   * 实例读权重分配
+   * <p>实例读权重分配</p>
    */
   ProxyAllocation?: Array<ProxyAllocation>
   /**
-   * 接入模式
+   * <p>接入模式</p><p>枚举值：</p><ul><li>nearby： 就近访问</li><li>balance： 均衡分配</li><li>direct_nearby： 纯网络转发就近访问</li><li>direct_balance： 纯网络转发均衡分配</li></ul>
    */
   AccessMode?: string
   /**
-   * 是否开启自动负载均衡
+   * <p>是否开启自动负载均衡</p>
    */
   AutoLoadBalance?: boolean
   /**
-   * 是否把libra当作ro节点
+   * <p>是否把libra当作ro节点</p>
    */
   ApNodeAsRoNode?: boolean
   /**
-   * libra节点故障，是否转发给其他节点
+   * <p>libra节点故障，是否转发给其他节点</p>
    */
   ApQueryToOtherNode?: boolean
+  /**
+   * <p>地址所在地域名</p>
+   */
+  Region?: string
 }
 
 /**

@@ -16,6 +16,56 @@
  */
 
 /**
+ * UpdateLogstashInstance请求参数结构体
+ */
+export interface UpdateLogstashInstanceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 实例节点数量
+   */
+  NodeNum?: number
+  /**
+   * 实例YML配置
+   */
+  YMLConfig?: string
+  /**
+   * 客户自定义dns配置
+   */
+  UserDnsIp?: string
+  /**
+   * 实例绑定的ES集群信息
+   */
+  BindedES?: LogstashBindedES
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 扩展文件列表
+   */
+  ExtendedFiles?: Array<LogstashExtendedFile>
+  /**
+   * 实例规格
+   */
+  NodeType?: string
+  /**
+   * 节点磁盘容量
+   */
+  DiskSize?: number
+  /**
+   * 可维护时间段
+   */
+  OperationDuration?: OperationDurationUpdated
+  /**
+   * 多可用区部署
+   */
+  MultiZoneInfo?: Array<ZoneDetail>
+}
+
+/**
  * 实例操作记录中的流程任务信息
  */
 export interface TaskDetail {
@@ -623,45 +673,21 @@ export interface UpdateLogstashPipelineDescResponse {
 }
 
 /**
- * IP溯源日志
+ * DescribeAutoScaleDiskInfo返回参数结构体
  */
-export interface IpTraceLogEntry {
+export interface DescribeAutoScaleDiskInfoResponse {
   /**
-   * 时间
+   * 自动扩盘参数列表
    */
-  Timestamp?: string
+  AutoScaleDiskInfoList?: Array<AutoScaleDiskInfo>
   /**
-   * 访问IP
+   * 0 修改中; 1 正常
    */
-  RemoteIp?: string
+  Status?: number
   /**
-   * 溯源类型rsp/req
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TraceType?: string
-  /**
-   * 访问网络类型，公网/私网
-   */
-  NetType?: string
-  /**
-   * 原始消息
-   */
-  Message?: string
-  /**
-   * 访问uri
-   */
-  Uri?: string
-  /**
-   * 公网IP
-   */
-  PublicIp?: string
-  /**
-   * 请求类型或返回状态
-   */
-  ReqTypeOrRspStatus?: string
-  /**
-   * 集群节点IP
-   */
-  NodeIp?: string
+  RequestId?: string
 }
 
 /**
@@ -883,6 +909,10 @@ export interface Namespaces {
  */
 export interface RequestInstancesByGetResponse {
   /**
+   * <p>集群返回信息</p>
+   */
+  Detail?: string
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -935,21 +965,44 @@ export interface DeleteServerlessInstanceResponse {
 }
 
 /**
- * InstallInstanceModel返回参数结构体
+ * 索引生命周期字段
  */
-export interface InstallInstanceModelResponse {
+export interface IndexPolicyField {
   /**
-   * 发起异步流程的flowId
+   * 是否开启warm阶段
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  FlowId?: string
+  WarmEnable?: string
   /**
-   * 调用接口的错误信息
+   * warm阶段转入时间
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ErrMsg?: string
+  WarmMinAge?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 是否开启cold阶段
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  ColdEnable?: string
+  /**
+   * cold阶段转入时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ColdMinAge?: string
+  /**
+   * 是否开启frozen阶段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FrozenEnable?: string
+  /**
+   * frozen阶段转入时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FrozenMinAge?: string
+  /**
+   * /
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ColdAction?: string
 }
 
 /**
@@ -968,6 +1021,40 @@ export interface DescribeInstanceOperationsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeLogstashViews返回参数结构体
+ */
+export interface DescribeLogstashViewsResponse {
+  /**
+   * Logstash节点维度视图
+   */
+  NodesView?: Array<LogstashNodeView>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCosBackupStrategyViews请求参数结构体
+ */
+export interface DescribeCosBackupStrategyViewsRequest {
+  /**
+   * <p>集群实例ID</p>
+   */
+  InstanceId?: Array<string>
+}
+
+/**
+ * DescribeUpgrade请求参数结构体
+ */
+export interface DescribeUpgradeRequest {
+  /**
+   * <p>需要升级的实例ID</p>
+   */
+  InstanceId: string
 }
 
 /**
@@ -1024,6 +1111,24 @@ export interface IndexOptionsField {
 }
 
 /**
+ * DescribeRegions返回参数结构体
+ */
+export interface DescribeRegionsResponse {
+  /**
+   * 地域总数
+   */
+  TotalCount?: number
+  /**
+   * 地域详细信息
+   */
+  RegionSet?: Array<RegionsData>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateRequestTargetNodeTypes返回参数结构体
  */
 export interface UpdateRequestTargetNodeTypesResponse {
@@ -1031,6 +1136,86 @@ export interface UpdateRequestTargetNodeTypesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 可用区资源描述
+ */
+export interface ZoneResource {
+  /**
+   * 可用区名称
+   */
+  ZoneName: string
+  /**
+   * 是否可售
+   */
+  Available: boolean
+  /**
+   * 节点规格资源列表
+   */
+  NodeTypeList: Array<NodeTypeResource>
+  /**
+   * 可用节点机型族列表
+   */
+  AvailNodeFamilies: Array<string>
+}
+
+/**
+ * UpgradeInstance请求参数结构体
+ */
+export interface UpgradeInstanceRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 目标ES版本，支持：”6.4.3“, "6.8.2"，"7.5.1", "7.10.1", "7.14.2"
+   */
+  EsVersion: string
+  /**
+   * 是否只做升级检查，默认值为false
+   */
+  CheckOnly?: boolean
+  /**
+   * 目标商业特性版本：<li>oss 开源版</li><li>basic 基础版</li>当前仅在5.6.4升级6.x版本时使用，默认值为basic
+   */
+  LicenseType?: string
+  /**
+   * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
+   */
+  BasicSecurityType?: number
+  /**
+   * 升级方式：<li>scale 蓝绿变更</li><li>restart 滚动重启</li>默认值为scale
+   */
+  UpgradeMode?: string
+  /**
+   * 升级版本前是否对集群进行备份，默认不备份
+   */
+  CosBackup?: boolean
+  /**
+   * 滚动模式时，是否跳过检查，进行强制重启。默认值为false
+   */
+  SkipCheckForceRestart?: boolean
+  /**
+   * cvm延迟上架参数
+   */
+  CvmDelayOnlineTime?: number
+  /**
+   * 分片迁移并发数
+   */
+  ShardAllocationConcurrents?: number
+  /**
+   * 分片迁移并发速度
+   */
+  ShardAllocationBytes?: number
+  /**
+   * 是否开启置放群组异步任务
+   */
+  EnableScheduleRecoverGroup?: boolean
+  /**
+   * 置放群组异步任务时间段
+   */
+  EnableScheduleOperationDuration?: EnableScheduleOperationDuration
 }
 
 /**
@@ -1082,6 +1267,38 @@ export interface Failures {
  * DeleteLogstashInstance返回参数结构体
  */
 export interface DeleteLogstashInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 智能运维支持的诊断项和元信息
+ */
+export interface DiagnoseJobMeta {
+  /**
+   * 智能运维诊断项英文名
+   */
+  JobName: string
+  /**
+   * 智能运维诊断项中文名
+   */
+  JobZhName: string
+  /**
+   * 智能运维诊断项描述
+   */
+  JobDescription: string
+}
+
+/**
+ * DescribeEventDataDetail返回参数结构体
+ */
+export interface DescribeEventDataDetailResponse {
+  /**
+   * 异常事件详情
+   */
+  EventDataDetail?: EventDataDetail
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1141,6 +1358,52 @@ export interface CreateServerlessSpaceV2Response {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeUpgrade返回参数结构体
+ */
+export interface DescribeUpgradeResponse {
+  /**
+   * <p>可以升级到的大版本</p>
+   */
+  EsVersions?: Array<string>
+  /**
+   * <p>可以升级到的商业特性</p>
+   */
+  EsLicenses?: Array<string>
+  /**
+   * <p>可以升级到的子产品</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EsSubProducts?: Array<string>
+  /**
+   * <p>可以升级到的商业特性</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EsRealLicenses?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteClusterSnapshot请求参数结构体
+ */
+export interface DeleteClusterSnapshotRequest {
+  /**
+   * 集群实例Id，格式：es-xxxx
+   */
+  InstanceId: string
+  /**
+   * 快照仓库名称
+   */
+  RepositoryName: string
+  /**
+   * 集群快照名称
+   */
+  SnapshotName: string
 }
 
 /**
@@ -1253,62 +1516,6 @@ export interface ServerlessSpace {
 }
 
 /**
- * DeleteClusterSnapshot请求参数结构体
- */
-export interface DeleteClusterSnapshotRequest {
-  /**
-   * 集群实例Id，格式：es-xxxx
-   */
-  InstanceId: string
-  /**
-   * 快照仓库名称
-   */
-  RepositoryName: string
-  /**
-   * 集群快照名称
-   */
-  SnapshotName: string
-}
-
-/**
- * 实例操作记录流程任务中的子任务信息（如升级检查任务中的各个检查项）
- */
-export interface SubTaskDetail {
-  /**
-   * 子任务名
-   */
-  Name?: string
-  /**
-   * 子任务结果
-   */
-  Result?: boolean
-  /**
-   * 子任务错误信息
-   */
-  ErrMsg?: string
-  /**
-   * 子任务类型
-   */
-  Type?: string
-  /**
-   * 子任务状态，0处理中 1成功 -1失败
-   */
-  Status?: number
-  /**
-   * 升级检查失败的索引名
-   */
-  FailedIndices?: Array<string>
-  /**
-   * 子任务结束时间
-   */
-  FinishTime?: string
-  /**
-   * 子任务等级，1警告 2失败
-   */
-  Level?: number
-}
-
-/**
  * CheckMigrateIndexMetaData返回参数结构体
  */
 export interface CheckMigrateIndexMetaDataResponse {
@@ -1328,6 +1535,20 @@ export interface CheckMigrateIndexMetaDataResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 支持的地域名
+ */
+export interface RegionsData {
+  /**
+   * 地域英文名
+   */
+  Region: string
+  /**
+   * 地域中文名
+   */
+  RegionName: string
 }
 
 /**
@@ -1400,6 +1621,145 @@ export interface GetRequestTargetNodeTypesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * QueryZoneResource请求参数结构体
+ */
+export interface QueryZoneResourceRequest {
+  /**
+   * 要检查的可用区
+   */
+  Zones: Array<string>
+  /**
+   * 操作类型（create数据节点创建，masterCreate专用主节点创建，scaleUp数据节点纵向扩容，masterAdd添加专用主节点，masterScaleUp专用主节点纵向扩容）
+   */
+  OptType: string
+  /**
+   * 实例ID(变配检查需要传递)
+   */
+  InstanceId?: string
+  /**
+   * 集群部署方式
+<li>0, 单可用区部署</li>
+<li>1, 多可用区部署</li>
+   */
+  DeployMode?: number
+  /**
+   * 计费类型<li>PREPAID：预付费，即包年包月</li><li>POSTPAID_BY_HOUR：按小时后付费</li>
+   */
+  ChargeType?: string
+  /**
+   * ES版本号如5.6.4，6.4.3，6.8.2，7.5.1
+   */
+  EsVersion?: string
+  /**
+   * cdcId，使用cdc子网时传递
+   */
+  CdcId?: string
+}
+
+/**
+ * UpdateJdk请求参数结构体
+ */
+export interface UpdateJdkRequest {
+  /**
+   * ES实例ID
+   */
+  InstanceId: string
+  /**
+   * Jdk类型，支持kona和oracle
+   */
+  Jdk?: string
+  /**
+   * Gc类型，支持g1和cms
+   */
+  Gc?: string
+  /**
+   * 是否强制重启
+   */
+  ForceRestart?: boolean
+}
+
+/**
+ * forcemerge任务信息
+ */
+export interface CrontabTaskInfo {
+  /**
+   * forcemerge任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: number
+  /**
+   * 集群地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegionId?: number
+  /**
+   * 集群id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: number
+  /**
+   * forcemerge任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskName?: string
+  /**
+   * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskType?: string
+  /**
+   * 任务执行时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskTime?: string
+  /**
+   * 执行forcemerge的索引
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Target?: string
+  /**
+   * 上次执行时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastExecTime?: string
+  /**
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  State?: string
+  /**
+   * 任务状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskStatus?: number
+  /**
+   * 创建任务时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 任务更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 任务详情
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskDetail?: string
+  /**
+   * 是否只合并有deleted标记的索引，对应ES _forcemerge API中的only_expunge_deletes参数,默认值false
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OnlyExpungeDeletes?: boolean
+  /**
+   * 最大合并Segment数量，对应ES _forcemerge API中的max_num_segments参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxMumSegments?: number
 }
 
 /**
@@ -1695,46 +2055,44 @@ export interface DescribeAutoBackUpStrategyRequest {
 }
 
 /**
- * DescribeLogstashInstanceLogs请求参数结构体
+ * 无
  */
-export interface DescribeLogstashInstanceLogsRequest {
+export interface CosSnapShotInfo {
   /**
-   * 实例ID
+   * cos 桶名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  CosBucket?: string
   /**
-   * 日志类型，默认值为1
-<li>1, 主日志</li>
-<li>2, 慢日志</li>
-<li>3, GC日志</li>
+   * base path
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  LogType?: number
+  BasePath?: string
   /**
-   * 搜索词，支持LUCENE语法，如 level:WARN、ip:1.1.1.1、message:test-index等
+   * 快照名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  SearchKey?: string
+  SnapshotName?: string
   /**
-   * 日志开始时间，格式为YYYY-MM-DD HH:MM:SS, 如2019-01-22 20:15:53
+   * 状态
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  StartTime?: string
+  State?: string
   /**
-   * 日志结束时间，格式为YYYY-MM-DD HH:MM:SS, 如2019-01-22 20:15:53
+   * 快照版本
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EndTime?: string
+  Version?: string
   /**
-   * 分页起始值, 默认值为0
+   * 普通[{"DataStreamName":"ilm-history-5","Is索引信息列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset?: number
+  CommonIndexArr?: Array<CommonIndexInfo>
   /**
-   * 分页大小，默认值为100，最大值100
+   * 自治索引信息列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Limit?: number
-  /**
-   * 时间排序方式，默认值为0
-<li>0, 降序</li>
-<li>1, 升序</li>
-   */
-  OrderByType?: number
+  DataStreamArr?: Array<DataStreamInfo>
 }
 
 /**
@@ -1753,21 +2111,13 @@ export interface DescribeIndexMetaResponse {
 }
 
 /**
- * 智能运维支持的诊断项和元信息
+ * DescribeLogstashViews请求参数结构体
  */
-export interface DiagnoseJobMeta {
+export interface DescribeLogstashViewsRequest {
   /**
-   * 智能运维诊断项英文名
+   * longstash集群ID
    */
-  JobName: string
-  /**
-   * 智能运维诊断项中文名
-   */
-  JobZhName: string
-  /**
-   * 智能运维诊断项描述
-   */
-  JobDescription: string
+  LogstashInstanceId: string
 }
 
 /**
@@ -2005,22 +2355,49 @@ export interface DiData {
 }
 
 /**
- * RequestInstancesByGet请求参数结构体
+ * UpdateServerlessInstance返回参数结构体
  */
-export type RequestInstancesByGetRequest = null
+export interface UpdateServerlessInstanceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
- * OperationDetail使用此结构的数组描述新旧配置
+ * RequestInstancesByGet请求参数结构体
  */
-export interface KeyValue {
+export interface RequestInstancesByGetRequest {
   /**
-   * 键
+   * <p>集群id</p>
    */
-  Key?: string
+  InstanceId: string
   /**
-   * 值
+   * <p>请求路径</p>
    */
-  Value?: string
+  Uri?: string
+  /**
+   * <p>调用方</p>
+   */
+  Caller?: string
+}
+
+/**
+ * DescribeForceMergeTask请求参数结构体
+ */
+export interface DescribeForceMergeTaskRequest {
+  /**
+   * 集群实例ID
+   */
+  InstanceId: string
+  /**
+   * 分页页数
+   */
+  Offset?: number
+  /**
+   * 每页展示记录条数
+   */
+  Limit?: number
 }
 
 /**
@@ -2042,67 +2419,55 @@ export interface QueryIpTraceLogResponse {
 }
 
 /**
- * Logstash扩展文件信息
+ * 事件类型详情结构
  */
-export interface LogstashExtendedFile {
+export interface EventTypeInfo {
   /**
-   * 扩展文件名称
+   * <p>事件类型</p>
    */
-  Name: string
+  EventType?: number
   /**
-   * 扩展文件大小，单位B
+   * <p>事件名称</p>
    */
-  Size: number
+  EventTypeName?: string
 }
 
 /**
- * UpdateLogstashInstance请求参数结构体
+ * 实例操作记录流程任务中的子任务信息（如升级检查任务中的各个检查项）
  */
-export interface UpdateLogstashInstanceRequest {
+export interface SubTaskDetail {
   /**
-   * 实例ID
+   * 子任务名
    */
-  InstanceId: string
+  Name?: string
   /**
-   * 实例节点数量
+   * 子任务结果
    */
-  NodeNum?: number
+  Result?: boolean
   /**
-   * 实例YML配置
+   * 子任务错误信息
    */
-  YMLConfig?: string
+  ErrMsg?: string
   /**
-   * 客户自定义dns配置
+   * 子任务类型
    */
-  UserDnsIp?: string
+  Type?: string
   /**
-   * 实例绑定的ES集群信息
+   * 子任务状态，0处理中 1成功 -1失败
    */
-  BindedES?: LogstashBindedES
+  Status?: number
   /**
-   * 实例名称
+   * 升级检查失败的索引名
    */
-  InstanceName?: string
+  FailedIndices?: Array<string>
   /**
-   * 扩展文件列表
+   * 子任务结束时间
    */
-  ExtendedFiles?: Array<LogstashExtendedFile>
+  FinishTime?: string
   /**
-   * 实例规格
+   * 子任务等级，1警告 2失败
    */
-  NodeType?: string
-  /**
-   * 节点磁盘容量
-   */
-  DiskSize?: number
-  /**
-   * 可维护时间段
-   */
-  OperationDuration?: OperationDurationUpdated
-  /**
-   * 多可用区部署
-   */
-  MultiZoneInfo?: Array<ZoneDetail>
+  Level?: number
 }
 
 /**
@@ -2135,20 +2500,6 @@ export interface DescribeLogstashInstancesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * CreateAutoBackUpStrategy请求参数结构体
- */
-export interface CreateAutoBackUpStrategyRequest {
-  /**
-   * 实例名称
-   */
-  InstanceId: string
-  /**
-   * 策略信息
-   */
-  CosBackup: CosBackup
 }
 
 /**
@@ -2190,6 +2541,54 @@ export interface InstallInstanceModelRequest {
 }
 
 /**
+ * CreateAutoBackUpStrategy请求参数结构体
+ */
+export interface CreateAutoBackUpStrategyRequest {
+  /**
+   * 实例名称
+   */
+  InstanceId: string
+  /**
+   * 策略信息
+   */
+  CosBackup: CosBackup
+}
+
+/**
+ * DescribeRequestInstancePolicy返回参数结构体
+ */
+export interface DescribeRequestInstancePolicyResponse {
+  /**
+   * <p>GET路径可请求的命令合集</p>
+   */
+  GetPaths?: Array<string>
+  /**
+   * <p>POST路径可请求的命令合集</p>
+   */
+  PostPaths?: Array<string>
+  /**
+   * <p>PUT路径可请求的命令合集</p>
+   */
+  PutPaths?: Array<string>
+  /**
+   * <p>是否是默认的参数</p>
+   */
+  IsDefault?: boolean
+  /**
+   * <p>变更时间</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>变更人</p>
+   */
+  Operator?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 数据接入serverless目的端信息
  */
 export interface DiDataSinkServerless {
@@ -2198,6 +2597,74 @@ export interface DiDataSinkServerless {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ServerlessId?: string
+}
+
+/**
+ * DescribeEventInfoList返回参数结构体
+ */
+export interface DescribeEventInfoListResponse {
+  /**
+   * <p>事件类型详情</p>
+   */
+  EventTypeInfoList?: Array<EventTypeInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 磁盘上下限
+ */
+export interface NodeTypeDiskSizeRange {
+  /**
+   * 机器类型
+   */
+  NodeType?: string
+  /**
+   * 节点类型
+   */
+  Type?: string
+  /**
+   * 磁盘类型
+   */
+  DiskType?: string
+  /**
+   * 磁盘最小值
+   */
+  Min?: number
+  /**
+   * 中刻度值
+   */
+  Med?: number
+  /**
+   * 磁盘最大值
+   */
+  Max?: number
+  /**
+   * 磁盘最小个数
+   */
+  DiskCountMin?: number
+  /**
+   * 磁盘最大个数
+   */
+  DiskCountMax?: number
+  /**
+   * 是否加密盘
+   */
+  DiskEncrypt?: number
+  /**
+   * 是否增强
+   */
+  DiskEnhance?: number
+  /**
+   * 是否lvm
+   */
+  IsLvm?: number
+  /**
+   * 是否本地盘
+   */
+  IsLocalDiskType?: boolean
 }
 
 /**
@@ -2211,13 +2678,59 @@ export interface DeleteInstanceResponse {
 }
 
 /**
- * UpdateDiagnoseSettings返回参数结构体
+ * vpc信息
  */
-export interface UpdateDiagnoseSettingsResponse {
+export interface VpcInfo {
+  /**
+   * vpcId信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * SubnetId信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetId?: string
+  /**
+   * VpcUid信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcUid?: number
+  /**
+   * SubnetUid 信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetUid?: number
+  /**
+   * 可用ip数量
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AvailableIpAddressCount?: number
+}
+
+/**
+ * RequestInstances请求参数结构体
+ */
+export type RequestInstancesRequest = null
+
+/**
+ * RestartKibana返回参数结构体
+ */
+export interface RestartKibanaResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeRequestInstancePolicy请求参数结构体
+ */
+export interface DescribeRequestInstancePolicyRequest {
+  /**
+   * <p>集群id</p>
+   */
+  InstanceId: string
 }
 
 /**
@@ -2521,6 +3034,20 @@ export interface DescribeServerlessSpacesResponse {
 }
 
 /**
+ * QueryZoneResourceForLogstash请求参数结构体
+ */
+export interface QueryZoneResourceForLogstashRequest {
+  /**
+   * 要检查的可用区
+   */
+  Zones: Array<string>
+  /**
+   * 计费类型<li>PREPAID：预付费，即包年包月</li><li>POSTPAID_BY_HOUR：按小时后付费</li>
+   */
+  ChargeType?: string
+}
+
+/**
  * InquirePriceRenewInstance请求参数结构体
  */
 export interface InquirePriceRenewInstanceRequest {
@@ -2622,6 +3149,28 @@ export interface Metric {
    * 指标值
    */
   Value: number
+}
+
+/**
+ * Logstash可用区资源描述
+ */
+export interface LogstashZoneResource {
+  /**
+   * 可用区名称
+   */
+  ZoneName: string
+  /**
+   * 是否可售
+   */
+  Available: boolean
+  /**
+   * 节点规格资源列表
+   */
+  NodeTypeList: Array<LogstashNodeTypeResource>
+  /**
+   * 可用节点机型族列表
+   */
+  AvailNodeFamilies: Array<string>
 }
 
 /**
@@ -2732,21 +3281,27 @@ export interface DescribeIndexListResponse {
 }
 
 /**
- * DescribeUserCosSnapshotList请求参数结构体
+ * StopLogstashPipelines请求参数结构体
  */
-export interface DescribeUserCosSnapshotListRequest {
+export interface StopLogstashPipelinesRequest {
   /**
-   * cos桶名
+   * 实例ID
    */
-  CosBucket?: string
+  InstanceId: string
   /**
-   * bucket 桶下的备份路径
+   * 管道ID列表
    */
-  BasePath?: string
+  PipelineIds: Array<string>
+}
+
+/**
+ * DescribeClusterDiskRange请求参数结构体
+ */
+export interface DescribeClusterDiskRangeRequest {
   /**
-   * 云上集群迁移集群名
+   * 实例名称
    */
-  ClusterInstanceId?: string
+  InstanceId: string
 }
 
 /**
@@ -2788,6 +3343,60 @@ export interface DescribeLogstashInstanceOperationsRequest {
    * 分页大小
    */
   Limit?: number
+}
+
+/**
+ * QueryIpTraceLog请求参数结构体
+ */
+export interface QueryIpTraceLogRequest {
+  /**
+   * ES集群ID
+   */
+  InstanceId: string
+  /**
+   * 开始时间
+   */
+  StartTime?: string
+  /**
+   * 结束时间
+   */
+  EndTime?: string
+  /**
+   * 起始偏移量
+   */
+  Offset?: number
+  /**
+   * 数据条数
+   */
+  Limit?: number
+  /**
+   * 访问IP
+   */
+  RemoteIp?: Array<string>
+  /**
+   * Request/Response 请求/返回, 非必填
+   */
+  TraceType?: Array<string>
+  /**
+   * Public/Private 公网访问/内网访问, 非必填
+   */
+  NetType?: Array<string>
+  /**
+   * POST/GET/PUT/DELETE/HEAD/OPTIONS/PATCH/CONNECT/TRACE/CONNECT等, 非必填
+   */
+  ReqTypeOrRspStatus?: Array<string>
+  /**
+   * 关键字模糊查询，支持Lucene Query String
+   */
+  SearchKey?: string
+  /**
+   * Uri搜索
+   */
+  Uri?: string
+  /**
+   * 集群节点IP
+   */
+  NodeIp?: Array<string>
 }
 
 /**
@@ -3039,6 +3648,80 @@ export interface ClusterView {
 }
 
 /**
+ * 事件详情
+ */
+export interface EventDataDetail {
+  /**
+   * <p>事件名称</p>
+   */
+  EventName?: string
+  /**
+   * <p>事件重要程度;0: 一般  1: 重要</p>
+   */
+  EventImportance?: number
+  /**
+   * <p>事件内容</p>
+   */
+  EventContent?: string
+  /**
+   * <p>ES集群id</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>集群名称</p>
+   */
+  InstanceName?: string
+  /**
+   * <p>节点Id</p>
+   */
+  NodeId?: string
+  /**
+   * <p>节点类型</p>
+   */
+  NodeRole?: string
+  /**
+   * <p>事件状态,0:待处理，1:处理中，2:处理完成</p>
+   */
+  EventStatus?: number
+  /**
+   * <p>事件类型;1：硬件异常；2：用户变更；3：智能运维</p>
+   */
+  EventType?: number
+  /**
+   * <p>事件任务id</p>
+   */
+  EventTaskId?: number
+  /**
+   * <p>节点隔离状态，0:未隔离；1:已隔离</p>
+   */
+  EventIsolationStatus?: number
+  /**
+   * <p>开始时间</p>
+   */
+  StartTime?: string
+  /**
+   * <p>结束时间</p>
+   */
+  EndTime?: string
+  /**
+   * <p>子事件异常类型</p>
+   */
+  SubEventType?: number
+  /**
+   * <p>cvm维修任务Id</p>
+   */
+  CvmRepairId?: string
+  /**
+   * <p>处理类型</p>
+   */
+  ProcessType?: string
+  /**
+   * <p>子事件名称</p>
+   */
+  SubEventName?: string
+}
+
+/**
  * 普通索引信息列表
  */
 export interface CommonIndexInfo {
@@ -3225,6 +3908,16 @@ export interface SaveAndDeployLogstashPipelineResponse {
 }
 
 /**
+ * UpdateDiagnoseSettings返回参数结构体
+ */
+export interface UpdateDiagnoseSettingsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAutoBackUpStrategy返回参数结构体
  */
 export interface DescribeAutoBackUpStrategyResponse {
@@ -3239,29 +3932,17 @@ export interface DescribeAutoBackUpStrategyResponse {
 }
 
 /**
- * 索引自治字段
+ * 多盘的取值范围
  */
-export interface ServerlessIndexOptionsField {
+export interface DiskCountRange {
   /**
-   * 过期时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 云盘块数下限
    */
-  ExpireMaxAge?: string
+  Min: number
   /**
-   * 时间分区字段
-注意：此字段可能返回 null，表示取不到有效值。
+   * 云盘块数上限
    */
-  TimestampField?: string
-  /**
-   * 标准存储时长
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SinkCycleAge?: string
-  /**
-   * 标准存储时长
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  StandardStorageAge?: string
+  Max: number
 }
 
 /**
@@ -3299,19 +3980,21 @@ export interface UpdateDictionariesRequest {
 }
 
 /**
- * tke pod标签
+ * DescribeUserCosSnapshotList请求参数结构体
  */
-export interface DiSourceTkePodLabel {
+export interface DescribeUserCosSnapshotListRequest {
   /**
-   * 标签key
-注意：此字段可能返回 null，表示取不到有效值。
+   * cos桶名
    */
-  Key?: string
+  CosBucket?: string
   /**
-   * 标签value
-注意：此字段可能返回 null，表示取不到有效值。
+   * bucket 桶下的备份路径
    */
-  Value?: string
+  BasePath?: string
+  /**
+   * 云上集群迁移集群名
+   */
+  ClusterInstanceId?: string
 }
 
 /**
@@ -3573,21 +4256,21 @@ export interface CosBackup {
 }
 
 /**
- * DescribeLogstashPipelines返回参数结构体
+ * DescribeEventDataDetail请求参数结构体
  */
-export interface DescribeLogstashPipelinesResponse {
+export interface DescribeEventDataDetailRequest {
   /**
-   * 管道总数
+   * ES集群Id
    */
-  TotalCount?: number
+  InstanceId: string
   /**
-   * 管道列表
+   * 事件类型,1：硬件异常；2：用户变更；3：智能运维
    */
-  LogstashPipelineList?: Array<LogstashPipelineInfo>
+  EventType: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 异常事件任务id
    */
-  RequestId?: string
+  EventTaskId: number
 }
 
 /**
@@ -3885,9 +4568,19 @@ export interface CreateLogstashInstanceRequest {
 }
 
 /**
- * UpdateServerlessInstance返回参数结构体
+ * DescribeSnapshotViews返回参数结构体
  */
-export interface UpdateServerlessInstanceResponse {
+export interface DescribeSnapshotViewsResponse {
+  /**
+   * <p>快照信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Snapshots?: Array<Snapshots>
+  /**
+   * <p>集群快照获取失败信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FailedMsgs?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4414,9 +5107,18 @@ export interface DeleteIndexResponse {
 }
 
 /**
- * RequestInstances请求参数结构体
+ * OperationDetail使用此结构的数组描述新旧配置
  */
-export type RequestInstancesRequest = null
+export interface KeyValue {
+  /**
+   * 键
+   */
+  Key?: string
+  /**
+   * 值
+   */
+  Value?: string
+}
 
 /**
  * DeleteServerlessSpaceUser请求参数结构体
@@ -4433,13 +5135,135 @@ export interface DeleteServerlessSpaceUserRequest {
 }
 
 /**
- * RestartNodes返回参数结构体
+ * Logstash节点规格资源描述
  */
-export interface RestartNodesResponse {
+export interface LogstashNodeTypeResource {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 规格名称
    */
-  RequestId?: string
+  NodeTypeName?: string
+  /**
+   * 是否可售
+   */
+  Available?: boolean
+  /**
+   * 规格信息
+   */
+  NodeTypeInfo?: NodeTypeInfo
+  /**
+   * SSD盘是否可售
+   */
+  SsdAvailable?: boolean
+  /**
+   * SSD磁盘取值范围
+   */
+  SsdDiskSizeRange?: DiskSizeRange
+  /**
+   * SATA盘是否可售
+   */
+  SataAvailable?: boolean
+  /**
+   * SATA磁盘取值范围
+   */
+  SataDiskSizeRange?: DiskSizeRange
+  /**
+   * SSD机型售罄原因
+   */
+  SsdSoldOutReason?: string
+  /**
+   * SATA机型售罄原因
+   */
+  SataSoldOutReason?: string
+  /**
+   * 本地盘信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocalDiskInfo?: LocalDiskInfo
+  /**
+   * 云盘块数取值范围
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskCountRange?: DiskCountRange
+  /**
+   * 增强型SSD是否可用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HSsdAvailable?: boolean
+  /**
+   * 增强型SSD机型售罄原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HSsdSoldOutReason?: string
+  /**
+   * 增强型SSD磁盘取值范围
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HSsdDiskSizeRange?: DiskSizeRange
+  /**
+   * 吞吐型云盘是否可用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ThroughputAvailable?: boolean
+  /**
+   * 吞吐型云盘售罄原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ThroughputSoldOutReason?: string
+  /**
+   * 吞吐型云盘取值范围
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ThroughputDiskSizeRange?: DiskSizeRange
+  /**
+   * BigData盘是否可售
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BigDataAvailable?: boolean
+  /**
+   * BigData盘售罄原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BigDataSoldOutReason?: string
+  /**
+   * BigData磁盘取值范围
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BigDataDiskSizeRange?: DiskSizeRange
+  /**
+   * HighIO盘是否可售
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HighIOAvailable?: boolean
+  /**
+   * HighIO盘售罄原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HighIOSoldOutReason?: string
+  /**
+   * HighIO磁盘取值范围
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HighIODiskSizeRange?: DiskSizeRange
+  /**
+   * Bssd盘是否可售
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BssdAvailable?: boolean
+  /**
+   * Bssd盘售罄原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BssdSoldOutReason?: string
+  /**
+   * Bssd盘取值范围
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BssdDiskSizeRange?: DiskSizeRange
+  /**
+   * GpuInfo
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GpuInfo?: GpuInfo
 }
 
 /**
@@ -4591,19 +5415,23 @@ export interface DescribeLogstashPipelinesRequest {
 }
 
 /**
- * 节点出站访问信息
+ * DescribeForceMergeTask返回参数结构体
  */
-export interface OutboundPublicAcl {
+export interface DescribeForceMergeTaskResponse {
   /**
-   * 允许节点出站访问的节点类型
-注意：此字段可能返回 null，表示取不到有效值。
+   * 新增的forcemerge任务列表
+Uin
+
    */
-  NodeType: string
+  CrontabTaskInfo?: Array<CrontabTaskInfo>
   /**
-   * 允许节点出站访问的白名单
-注意：此字段可能返回 null，表示取不到有效值。
+   * 记录总条数
    */
-  WhiteHostList?: Array<string>
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4801,6 +5629,11 @@ export interface PodLabel {
 }
 
 /**
+ * DescribeEventInfoList请求参数结构体
+ */
+export type DescribeEventInfoListRequest = null
+
+/**
  * DescribeLogstashInstances请求参数结构体
  */
 export interface DescribeLogstashInstancesRequest {
@@ -4874,6 +5707,74 @@ export interface CreateCosMigrateToServerlessInstanceRequest {
    * 待迁移自治索引名列表
    */
   DataStreamArr?: Array<string>
+}
+
+/**
+ * 索引自治字段
+ */
+export interface ServerlessIndexOptionsField {
+  /**
+   * 过期时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireMaxAge?: string
+  /**
+   * 时间分区字段
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimestampField?: string
+  /**
+   * 标准存储时长
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SinkCycleAge?: string
+  /**
+   * 标准存储时长
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StandardStorageAge?: string
+}
+
+/**
+ * IP溯源日志
+ */
+export interface IpTraceLogEntry {
+  /**
+   * 时间
+   */
+  Timestamp?: string
+  /**
+   * 访问IP
+   */
+  RemoteIp?: string
+  /**
+   * 溯源类型rsp/req
+   */
+  TraceType?: string
+  /**
+   * 访问网络类型，公网/私网
+   */
+  NetType?: string
+  /**
+   * 原始消息
+   */
+  Message?: string
+  /**
+   * 访问uri
+   */
+  Uri?: string
+  /**
+   * 公网IP
+   */
+  PublicIp?: string
+  /**
+   * 请求类型或返回状态
+   */
+  ReqTypeOrRspStatus?: string
+  /**
+   * 集群节点IP
+   */
+  NodeIp?: string
 }
 
 /**
@@ -5195,13 +6096,78 @@ export interface UpdateJdkResponse {
 }
 
 /**
- * RestartKibana返回参数结构体
+ * QueryZoneResourceForLogstash返回参数结构体
  */
-export interface RestartKibanaResponse {
+export interface QueryZoneResourceForLogstashResponse {
+  /**
+   * 可用区资源描述列表
+   */
+  ZoneResources?: Array<LogstashZoneResource>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Logstash节点维度视图数据
+ */
+export interface LogstashNodeView {
+  /**
+   * 节点ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeId?: string
+  /**
+   * 节点IP	
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeIp?: string
+  /**
+   * 节点HTTP IP
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeHttpIp?: string
+  /**
+   * 可用区
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
+  /**
+   * 节点总磁盘大小
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskSize?: number
+  /**
+   * 磁盘使用率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskUsage?: number
+  /**
+   * 节点内存大小，单位GB
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemSize?: number
+  /**
+   * 内存使用率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MemUsage?: number
+  /**
+   * JVM内存使用率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JvmMemUsage?: number
+  /**
+   * 节点cpu个数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuNum?: number
+  /**
+   * cpu使用率
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CpuUsage?: number
 }
 
 /**
@@ -5216,6 +6182,16 @@ export interface DescribeUserCosSnapshotListResponse {
    * cos 快照数量
    */
   TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateLogstashInstance返回参数结构体
+ */
+export interface UpdateLogstashInstanceResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5305,6 +6281,87 @@ export interface ServerlessIndexNetworkField {
 }
 
 /**
+ * ExportIpTraceLog返回参数结构体
+ */
+export interface ExportIpTraceLogResponse {
+  /**
+   * IP时间列表
+   */
+  IpTraceList?: Array<IpTimePair>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeRegions请求参数结构体
+ */
+export type DescribeRegionsRequest = null
+
+/**
+ * 事件中心记录信息
+ */
+export interface EventDataInfoOverview {
+  /**
+   * <p>1：硬件异常；2：用户变更；3：智能运维</p>
+   */
+  EventType?: number
+  /**
+   * <p>事件任务Id</p>
+   */
+  EventTaskId?: number
+  /**
+   * <p>事件名称</p>
+   */
+  EventName?: string
+  /**
+   * <p>事件重要程度;0: 一般  1: 重要</p>
+   */
+  EventImportance?: number
+  /**
+   * <p>事件内容</p>
+   */
+  EventContent?: string
+  /**
+   * <p>ES集群Id</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>集群名称</p>
+   */
+  InstanceName?: string
+  /**
+   * <p>ES集群节点id</p>
+   */
+  NodeId?: string
+  /**
+   * <p>节点类型</p>
+   */
+  NodeRole?: string
+  /**
+   * <p>事件状态：0:待处理，1:处理中，2:处理完成</p>
+   */
+  EventStatus?: number
+  /**
+   * <p>事件发生时间</p>
+   */
+  StartTime?: string
+  /**
+   * <p>事件结束时间</p>
+   */
+  EndTime?: string
+  /**
+   * <p>子事件类型</p>
+   */
+  SubEventType?: number
+  /**
+   * <p>子事件名称</p>
+   */
+  SubEventName?: string
+}
+
+/**
  * 可视化节点配置
  */
 export interface WebNodeTypeInfo {
@@ -5337,44 +6394,17 @@ export interface LocalDiskInfo {
 }
 
 /**
- * 索引生命周期字段
+ * DescribeCosBackupStrategyViews返回参数结构体
  */
-export interface IndexPolicyField {
+export interface DescribeCosBackupStrategyViewsResponse {
   /**
-   * 是否开启warm阶段
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>自动备份策略列表</p>
    */
-  WarmEnable?: string
+  CosBackupList?: Array<CosBackup>
   /**
-   * warm阶段转入时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  WarmMinAge?: string
-  /**
-   * 是否开启cold阶段
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ColdEnable?: string
-  /**
-   * cold阶段转入时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ColdMinAge?: string
-  /**
-   * 是否开启frozen阶段
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FrozenEnable?: string
-  /**
-   * frozen阶段转入时间
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  FrozenMinAge?: string
-  /**
-   * /
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ColdAction?: string
+  RequestId?: string
 }
 
 /**
@@ -5385,6 +6415,125 @@ export interface UpdatePluginsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 节点规格资源描述
+ */
+export interface NodeTypeResource {
+  /**
+   * 规格名称
+   */
+  NodeTypeName?: string
+  /**
+   * 是否可售
+   */
+  Available?: boolean
+  /**
+   * 规格信息
+   */
+  NodeTypeInfo?: NodeTypeInfo
+  /**
+   * SSD盘是否可售
+   */
+  SsdAvailable?: boolean
+  /**
+   * SSD磁盘取值范围
+   */
+  SsdDiskSizeRange?: DiskSizeRange
+  /**
+   * SATA盘是否可售
+   */
+  SataAvailable?: boolean
+  /**
+   * SATA磁盘取值范围
+   */
+  SataDiskSizeRange?: DiskSizeRange
+  /**
+   * SSD机型售罄原因
+   */
+  SsdSoldOutReason?: string
+  /**
+   * SATA机型售罄原因
+   */
+  SataSoldOutReason?: string
+  /**
+   * 本地盘信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LocalDiskInfo?: LocalDiskInfo
+  /**
+   * 云盘块数取值范围
+   */
+  DiskCountRange?: DiskCountRange
+  /**
+   * HSSD盘是否可售
+   */
+  HSsdAvailable?: boolean
+  /**
+   * HSSD机型售罄原因
+   */
+  HSsdSoldOutReason?: string
+  /**
+   * HSSD磁盘取值范围
+   */
+  HSsdDiskSizeRange?: DiskSizeRange
+  /**
+   * Throughput盘是否可售
+   */
+  ThroughputAvailable?: boolean
+  /**
+   * Throughput机型售罄原因
+   */
+  ThroughputSoldOutReason?: string
+  /**
+   * Throughput磁盘取值范围
+   */
+  ThroughputDiskSizeRange?: DiskSizeRange
+  /**
+   * BigData盘是否可售
+   */
+  BigDataAvailable?: boolean
+  /**
+   * BigData盘售罄原因
+   */
+  BigDataSoldOutReason?: string
+  /**
+   * BigData磁盘取值范围
+   */
+  BigDataDiskSizeRange?: DiskSizeRange
+  /**
+   * HighIO盘是否可售
+   */
+  HighIOAvailable?: boolean
+  /**
+   * HighIO盘售罄原因
+   */
+  HighIOSoldOutReason?: string
+  /**
+   * HighIO磁盘取值范围
+   */
+  HighIODiskSizeRange?: DiskSizeRange
+  /**
+   * Bssd盘是否可售
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BssdAvailable?: boolean
+  /**
+   * Bssd盘售罄原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BssdSoldOutReason?: string
+  /**
+   * Bssd盘取值范围
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BssdDiskSizeRange?: DiskSizeRange
+  /**
+   * 节点Gpu信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GpuInfo?: GpuInfo
 }
 
 /**
@@ -5469,27 +6618,53 @@ export interface EnableScheduleOperationDuration {
 }
 
 /**
- * UpdateLogstashInstance返回参数结构体
+ * 节点规格信息
  */
-export interface UpdateLogstashInstanceResponse {
+export interface NodeTypeInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * CPU核数
    */
-  RequestId?: string
+  Cpu: number
+  /**
+   * 内存大小，单位GB
+   */
+  Mem: number
+  /**
+   * 规格描述
+   */
+  Desc: string
 }
 
 /**
- * StopLogstashPipelines请求参数结构体
+ * 磁盘大小范围
  */
-export interface StopLogstashPipelinesRequest {
+export interface DiskSizeRange {
   /**
-   * 实例ID
+   * 最小值
    */
-  InstanceId: string
+  Min: number
   /**
-   * 管道ID列表
+   * 小刻度值
    */
-  PipelineIds: Array<string>
+  Sml: number
+  /**
+   * 中刻度值
+   */
+  Med: number
+  /**
+   * 最大值
+   */
+  Max: number
+  /**
+   * 磁盘块数最小值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskCountMin?: number
+  /**
+   * 磁盘块数最大值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DiskCountMax?: number
 }
 
 /**
@@ -5660,6 +6835,16 @@ export interface UpdateServerlessSpaceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAutoScaleDiskInfo请求参数结构体
+ */
+export interface DescribeAutoScaleDiskInfoRequest {
+  /**
+   * 实例名称
+   */
+  InstanceId: string
 }
 
 /**
@@ -6106,6 +7291,24 @@ export interface DiSourceTke {
 }
 
 /**
+ * DescribeLogstashPipelines返回参数结构体
+ */
+export interface DescribeLogstashPipelinesResponse {
+  /**
+   * 管道总数
+   */
+  TotalCount?: number
+  /**
+   * 管道列表
+   */
+  LogstashPipelineList?: Array<LogstashPipelineInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateServerlessInstance返回参数结构体
  */
 export interface CreateServerlessInstanceResponse {
@@ -6125,13 +7328,52 @@ export interface CreateServerlessInstanceResponse {
 }
 
 /**
- * ExportIpTraceLog返回参数结构体
+ * DescribeEsInstanceEventLists请求参数结构体
  */
-export interface ExportIpTraceLogResponse {
+export interface DescribeEsInstanceEventListsRequest {
   /**
-   * IP时间列表
+   * 返回数量，默认为20，最大值为100。
    */
-  IpTraceList?: Array<IpTimePair>
+  Limit: number
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset: number
+  /**
+   * 起始时间, e.g. "2019-03-07 16:30:39"
+   */
+  StartTime: string
+  /**
+   * 结束时间, e.g. "2019-03-30 20:18:03"
+   */
+  EndTime: string
+  /**
+   * 集群id，非必填，查询集群相关的事件
+   */
+  InstanceIds?: Array<string>
+  /**
+   * 查询的类型，包括：硬件异常、用户变更和智能运维等，默认查询所有。1：硬件异常；2：用户变更；3：智能运维
+   */
+  EventTypes?: Array<number | bigint>
+  /**
+   * 事件状态
+   */
+  EventStatus?: Array<number | bigint>
+}
+
+/**
+ * DescribeEsInstanceEventLists返回参数结构体
+ */
+export interface DescribeEsInstanceEventListsResponse {
+  /**
+   * 事件中心记录总数
+   */
+  TotalCount?: number
+  /**
+   * 事件中心记录信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EventDataInfoList?: Array<EventDataInfoOverview>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6203,44 +7445,56 @@ export interface DiSourceCvm {
 }
 
 /**
- * 无
+ * DescribeLogstashInstanceLogs请求参数结构体
  */
-export interface CosSnapShotInfo {
+export interface DescribeLogstashInstanceLogsRequest {
   /**
-   * cos 桶名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 实例ID
    */
-  CosBucket?: string
+  InstanceId: string
   /**
-   * base path
-注意：此字段可能返回 null，表示取不到有效值。
+   * 日志类型，默认值为1
+<li>1, 主日志</li>
+<li>2, 慢日志</li>
+<li>3, GC日志</li>
    */
-  BasePath?: string
+  LogType?: number
   /**
-   * 快照名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 搜索词，支持LUCENE语法，如 level:WARN、ip:1.1.1.1、message:test-index等
    */
-  SnapshotName?: string
+  SearchKey?: string
   /**
-   * 状态
-注意：此字段可能返回 null，表示取不到有效值。
+   * 日志开始时间，格式为YYYY-MM-DD HH:MM:SS, 如2019-01-22 20:15:53
    */
-  State?: string
+  StartTime?: string
   /**
-   * 快照版本
-注意：此字段可能返回 null，表示取不到有效值。
+   * 日志结束时间，格式为YYYY-MM-DD HH:MM:SS, 如2019-01-22 20:15:53
    */
-  Version?: string
+  EndTime?: string
   /**
-   * 普通[{"DataStreamName":"ilm-history-5","Is索引信息列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分页起始值, 默认值为0
    */
-  CommonIndexArr?: Array<CommonIndexInfo>
+  Offset?: number
   /**
-   * 自治索引信息列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * 分页大小，默认值为100，最大值100
    */
-  DataStreamArr?: Array<DataStreamInfo>
+  Limit?: number
+  /**
+   * 时间排序方式，默认值为0
+<li>0, 降序</li>
+<li>1, 升序</li>
+   */
+  OrderByType?: number
+}
+
+/**
+ * RestartNodes返回参数结构体
+ */
+export interface RestartNodesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6304,25 +7558,39 @@ export interface RestartInstanceRequest {
 }
 
 /**
- * UpdateJdk请求参数结构体
+ * Logstash扩展文件信息
  */
-export interface UpdateJdkRequest {
+export interface LogstashExtendedFile {
   /**
-   * ES实例ID
+   * 扩展文件名称
    */
-  InstanceId: string
+  Name: string
   /**
-   * Jdk类型，支持kona和oracle
+   * 扩展文件大小，单位B
    */
-  Jdk?: string
+  Size: number
+}
+
+/**
+ * DescribeSnapshotViews请求参数结构体
+ */
+export interface DescribeSnapshotViewsRequest {
   /**
-   * Gc类型，支持g1和cms
+   * <p>集群实例ID</p>
    */
-  Gc?: string
+  InstanceId?: Array<string>
   /**
-   * 是否强制重启
+   * <p>快照状态，IN_PROGRESS,SUCCESS,FAILED,PARTIAL</p>
    */
-  ForceRestart?: boolean
+  State?: Array<string>
+  /**
+   * <p>创建方式: true(手动备份); false(自动备份); 空字符串表示全部</p>
+   */
+  UserBackUp?: string
+  /**
+   * <p>时间范围, 最近多少天, 0表示查询所有时间范围</p>
+   */
+  Duration?: number
 }
 
 /**
@@ -6479,34 +7747,21 @@ export interface DescribeServerlessInstancesRequest {
 }
 
 /**
- * vpc信息
+ * InstallInstanceModel返回参数结构体
  */
-export interface VpcInfo {
+export interface InstallInstanceModelResponse {
   /**
-   * vpcId信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 发起异步流程的flowId
    */
-  VpcId?: string
+  FlowId?: string
   /**
-   * SubnetId信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 调用接口的错误信息
    */
-  SubnetId?: string
+  ErrMsg?: string
   /**
-   * VpcUid信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  VpcUid?: number
-  /**
-   * SubnetUid 信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubnetUid?: number
-  /**
-   * 可用ip数量
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  AvailableIpAddressCount?: number
+  RequestId?: string
 }
 
 /**
@@ -6560,57 +7815,17 @@ export interface GetDiagnoseSettingsRequest {
 }
 
 /**
- * QueryIpTraceLog请求参数结构体
+ * DescribeClusterDiskRange返回参数结构体
  */
-export interface QueryIpTraceLogRequest {
+export interface DescribeClusterDiskRangeResponse {
   /**
-   * ES集群ID
+   * 节点磁盘大小上下限
    */
-  InstanceId: string
+  NodeTypeDiskSizeRangeList?: Array<NodeTypeDiskSizeRange>
   /**
-   * 开始时间
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  StartTime?: string
-  /**
-   * 结束时间
-   */
-  EndTime?: string
-  /**
-   * 起始偏移量
-   */
-  Offset?: number
-  /**
-   * 数据条数
-   */
-  Limit?: number
-  /**
-   * 访问IP
-   */
-  RemoteIp?: Array<string>
-  /**
-   * Request/Response 请求/返回, 非必填
-   */
-  TraceType?: Array<string>
-  /**
-   * Public/Private 公网访问/内网访问, 非必填
-   */
-  NetType?: Array<string>
-  /**
-   * POST/GET/PUT/DELETE/HEAD/OPTIONS/PATCH/CONNECT/TRACE/CONNECT等, 非必填
-   */
-  ReqTypeOrRspStatus?: Array<string>
-  /**
-   * 关键字模糊查询，支持Lucene Query String
-   */
-  SearchKey?: string
-  /**
-   * Uri搜索
-   */
-  Uri?: string
-  /**
-   * 集群节点IP
-   */
-  NodeIp?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -6658,53 +7873,33 @@ export interface DescribeInstancePluginListRequest {
 }
 
 /**
- * RestartNodes请求参数结构体
+ * 节点出站访问信息
  */
-export interface RestartNodesRequest {
+export interface OutboundPublicAcl {
   /**
-   * 集群实例ID
+   * 允许节点出站访问的节点类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  NodeType: string
   /**
-   * 节点名称列表
+   * 允许节点出站访问的白名单
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeNames: Array<string>
+  WhiteHostList?: Array<string>
+}
+
+/**
+ * QueryZoneResource返回参数结构体
+ */
+export interface QueryZoneResourceResponse {
   /**
-   * 是否强制重启
+   * 可用区资源描述列表
    */
-  ForceRestart?: boolean
+  ZoneResources?: Array<ZoneResource>
   /**
-   * 可选重启模式"in-place","blue-green"，分别表示重启，蓝绿重启；默认值为"in-place"
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RestartMode?: string
-  /**
-   * 节点状态，在蓝绿模式中使用；离线节点蓝绿有风险
-   */
-  IsOffline?: boolean
-  /**
-   * cvm延迟上架时间
-   */
-  CvmDelayOnlineTime?: number
-  /**
-   * 分片迁移并发数
-   */
-  ShardAllocationConcurrents?: number
-  /**
-   * 分片迁移并发速度
-   */
-  ShardAllocationBytes?: number
-  /**
-   * 是否开启置放群组异步任务
-   */
-  EnableScheduleRecoverGroup?: boolean
-  /**
-   * 置放群组异步任务时间段
-   */
-  EnableScheduleOperationDuration?: EnableScheduleOperationDuration
-  /**
-   * 事件id列表
-   */
-  EventTypeIds?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -6738,61 +7933,19 @@ export interface DeleteLogstashInstanceRequest {
 }
 
 /**
- * UpgradeInstance请求参数结构体
+ * tke pod标签
  */
-export interface UpgradeInstanceRequest {
+export interface DiSourceTkePodLabel {
   /**
-   * 实例ID
+   * 标签key
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  Key?: string
   /**
-   * 目标ES版本，支持：”6.4.3“, "6.8.2"，"7.5.1", "7.10.1", "7.14.2"
+   * 标签value
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EsVersion: string
-  /**
-   * 是否只做升级检查，默认值为false
-   */
-  CheckOnly?: boolean
-  /**
-   * 目标商业特性版本：<li>oss 开源版</li><li>basic 基础版</li>当前仅在5.6.4升级6.x版本时使用，默认值为basic
-   */
-  LicenseType?: string
-  /**
-   * 6.8（及以上版本）基础版是否开启xpack security认证<li>1：不开启</li><li>2：开启</li>
-   */
-  BasicSecurityType?: number
-  /**
-   * 升级方式：<li>scale 蓝绿变更</li><li>restart 滚动重启</li>默认值为scale
-   */
-  UpgradeMode?: string
-  /**
-   * 升级版本前是否对集群进行备份，默认不备份
-   */
-  CosBackup?: boolean
-  /**
-   * 滚动模式时，是否跳过检查，进行强制重启。默认值为false
-   */
-  SkipCheckForceRestart?: boolean
-  /**
-   * cvm延迟上架参数
-   */
-  CvmDelayOnlineTime?: number
-  /**
-   * 分片迁移并发数
-   */
-  ShardAllocationConcurrents?: number
-  /**
-   * 分片迁移并发速度
-   */
-  ShardAllocationBytes?: number
-  /**
-   * 是否开启置放群组异步任务
-   */
-  EnableScheduleRecoverGroup?: boolean
-  /**
-   * 置放群组异步任务时间段
-   */
-  EnableScheduleOperationDuration?: EnableScheduleOperationDuration
+  Value?: string
 }
 
 /**
@@ -6919,6 +8072,56 @@ export interface RestartLogstashInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RestartNodes请求参数结构体
+ */
+export interface RestartNodesRequest {
+  /**
+   * 集群实例ID
+   */
+  InstanceId: string
+  /**
+   * 节点名称列表
+   */
+  NodeNames: Array<string>
+  /**
+   * 是否强制重启
+   */
+  ForceRestart?: boolean
+  /**
+   * 可选重启模式"in-place","blue-green"，分别表示重启，蓝绿重启；默认值为"in-place"
+   */
+  RestartMode?: string
+  /**
+   * 节点状态，在蓝绿模式中使用；离线节点蓝绿有风险
+   */
+  IsOffline?: boolean
+  /**
+   * cvm延迟上架时间
+   */
+  CvmDelayOnlineTime?: number
+  /**
+   * 分片迁移并发数
+   */
+  ShardAllocationConcurrents?: number
+  /**
+   * 分片迁移并发速度
+   */
+  ShardAllocationBytes?: number
+  /**
+   * 是否开启置放群组异步任务
+   */
+  EnableScheduleRecoverGroup?: boolean
+  /**
+   * 置放群组异步任务时间段
+   */
+  EnableScheduleOperationDuration?: EnableScheduleOperationDuration
+  /**
+   * 事件id列表
+   */
+  EventTypeIds?: Array<string>
 }
 
 /**

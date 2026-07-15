@@ -28,69 +28,9 @@ it("es.v20180416.DiagnoseInstance", async function () {
     }
 })
 
-it("es.v20180416.DeleteLogstashInstance", async function () {
-    try {
-       const data = await client.DeleteLogstashInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.RestoreClusterSnapshot", async function () {
-    try {
-       const data = await client.RestoreClusterSnapshot({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("es.v20180416.CreateCollector", async function () {
     try {
        const data = await client.CreateCollector({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.StopLogstashPipelines", async function () {
-    try {
-       const data = await client.StopLogstashPipelines({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.DescribeServerlessSpaces", async function () {
-    try {
-       const data = await client.DescribeServerlessSpaces({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.ModifyAutoBackUpStrategy", async function () {
-    try {
-       const data = await client.ModifyAutoBackUpStrategy({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.InstallInstanceModel", async function () {
-    try {
-       const data = await client.InstallInstanceModel({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,79 +48,9 @@ it("es.v20180416.DescribeIndexList", async function () {
     }
 })
 
-it("es.v20180416.UpdateLogstashPipelineDesc", async function () {
+it("es.v20180416.RestoreClusterSnapshot", async function () {
     try {
-       const data = await client.UpdateLogstashPipelineDesc({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.UpdateJdk", async function () {
-    try {
-       const data = await client.UpdateJdk({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.DescribeUserCosSnapshotList", async function () {
-    try {
-       const data = await client.DescribeUserCosSnapshotList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.UpgradeInstance", async function () {
-    try {
-       const data = await client.UpgradeInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.UpdateIndex", async function () {
-    try {
-       const data = await client.UpdateIndex({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.DeleteInstance", async function () {
-    try {
-       const data = await client.DeleteInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.GetDiagnoseSettings", async function () {
-    try {
-       const data = await client.GetDiagnoseSettings({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.UpdateInstance", async function () {
-    try {
-       const data = await client.UpdateInstance({})
+       const data = await client.RestoreClusterSnapshot({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,39 +68,9 @@ it("es.v20180416.CreateIndex", async function () {
     }
 })
 
-it("es.v20180416.StartLogstashPipelines", async function () {
+it("es.v20180416.QueryZoneResource", async function () {
     try {
-       const data = await client.StartLogstashPipelines({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.UpdateRequestTargetNodeTypes", async function () {
-    try {
-       const data = await client.UpdateRequestTargetNodeTypes({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.UpdateDiagnoseSettings", async function () {
-    try {
-       const data = await client.UpdateDiagnoseSettings({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.CreateCosMigrateToServerlessInstance", async function () {
-    try {
-       const data = await client.CreateCosMigrateToServerlessInstance({})
+       const data = await client.QueryZoneResource({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -241,26 +81,6 @@ it("es.v20180416.CreateCosMigrateToServerlessInstance", async function () {
 it("es.v20180416.DeleteAutoBackUpStrategy", async function () {
     try {
        const data = await client.DeleteAutoBackUpStrategy({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.UpdatePlugins", async function () {
-    try {
-       const data = await client.UpdatePlugins({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.UpdateLogstashInstance", async function () {
-    try {
-       const data = await client.UpdateLogstashInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,6 +108,16 @@ it("es.v20180416.RequestInstances", async function () {
     }
 })
 
+it("es.v20180416.DescribeEventInfoList", async function () {
+    try {
+       const data = await client.DescribeEventInfoList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.DeleteServerlessInstance", async function () {
     try {
        const data = await client.DeleteServerlessInstance({})
@@ -308,36 +138,6 @@ it("es.v20180416.DescribeDiagnose", async function () {
     }
 })
 
-it("es.v20180416.DescribeClusterSnapshot", async function () {
-    try {
-       const data = await client.DescribeClusterSnapshot({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.CreateLogstashInstance", async function () {
-    try {
-       const data = await client.CreateLogstashInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.RestartInstance", async function () {
-    try {
-       const data = await client.RestartInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("es.v20180416.CreateAutoBackUpStrategy", async function () {
     try {
        const data = await client.CreateAutoBackUpStrategy({})
@@ -348,9 +148,9 @@ it("es.v20180416.CreateAutoBackUpStrategy", async function () {
     }
 })
 
-it("es.v20180416.DescribeAutoBackUpStrategy", async function () {
+it("es.v20180416.DescribeLogstashInstanceOperations", async function () {
     try {
-       const data = await client.DescribeAutoBackUpStrategy({})
+       const data = await client.DescribeLogstashInstanceOperations({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,9 +158,9 @@ it("es.v20180416.DescribeAutoBackUpStrategy", async function () {
     }
 })
 
-it("es.v20180416.DescribeInstanceLogs", async function () {
+it("es.v20180416.UpdateRequestTargetNodeTypes", async function () {
     try {
-       const data = await client.DescribeInstanceLogs({})
+       const data = await client.UpdateRequestTargetNodeTypes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -368,209 +168,9 @@ it("es.v20180416.DescribeInstanceLogs", async function () {
     }
 })
 
-it("es.v20180416.RestartKibana", async function () {
+it("es.v20180416.DescribeServerlessInstances", async function () {
     try {
-       const data = await client.RestartKibana({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.ModifyEsVipSecurityGroup", async function () {
-    try {
-       const data = await client.ModifyEsVipSecurityGroup({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.CreateServerlessInstance", async function () {
-    try {
-       const data = await client.CreateServerlessInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.DescribeServerlessMetrics", async function () {
-    try {
-       const data = await client.DescribeServerlessMetrics({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.DescribeInstanceOperations", async function () {
-    try {
-       const data = await client.DescribeInstanceOperations({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.DescribeSpaceKibanaTools", async function () {
-    try {
-       const data = await client.DescribeSpaceKibanaTools({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.DescribeLogstashPipelines", async function () {
-    try {
-       const data = await client.DescribeLogstashPipelines({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.DescribeLogstashInstances", async function () {
-    try {
-       const data = await client.DescribeLogstashInstances({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.CreateServerlessSpaceV2", async function () {
-    try {
-       const data = await client.CreateServerlessSpaceV2({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.DescribeViews", async function () {
-    try {
-       const data = await client.DescribeViews({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.CreateInstance", async function () {
-    try {
-       const data = await client.CreateInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.UpdateServerlessInstance", async function () {
-    try {
-       const data = await client.UpdateServerlessInstance({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.QueryIpTraceLog", async function () {
-    try {
-       const data = await client.QueryIpTraceLog({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.RequestInstancesByGet", async function () {
-    try {
-       const data = await client.RequestInstancesByGet({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.GetIpTraceStatus", async function () {
-    try {
-       const data = await client.GetIpTraceStatus({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.DeleteServerlessSpaceUser", async function () {
-    try {
-       const data = await client.DeleteServerlessSpaceUser({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.DeleteLogstashPipelines", async function () {
-    try {
-       const data = await client.DeleteLogstashPipelines({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.DescribeInstances", async function () {
-    try {
-       const data = await client.DescribeInstances({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.UpdateServerlessSpace", async function () {
-    try {
-       const data = await client.UpdateServerlessSpace({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.DeleteIndex", async function () {
-    try {
-       const data = await client.DeleteIndex({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.RestartLogstashInstance", async function () {
-    try {
-       const data = await client.RestartLogstashInstance({})
+       const data = await client.DescribeServerlessInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -588,9 +188,179 @@ it("es.v20180416.CreateClusterSnapshot", async function () {
     }
 })
 
-it("es.v20180416.DeleteClusterSnapshot", async function () {
+it("es.v20180416.DescribeLogstashViews", async function () {
     try {
-       const data = await client.DeleteClusterSnapshot({})
+       const data = await client.DescribeLogstashViews({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdateLogstashPipelineDesc", async function () {
+    try {
+       const data = await client.UpdateLogstashPipelineDesc({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeInstancePluginList", async function () {
+    try {
+       const data = await client.DescribeInstancePluginList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.StopLogstashPipelines", async function () {
+    try {
+       const data = await client.StopLogstashPipelines({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdatePlugins", async function () {
+    try {
+       const data = await client.UpdatePlugins({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdateInstance", async function () {
+    try {
+       const data = await client.UpdateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.RestartInstance", async function () {
+    try {
+       const data = await client.RestartInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.QueryZoneResourceForLogstash", async function () {
+    try {
+       const data = await client.QueryZoneResourceForLogstash({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdateDictionaries", async function () {
+    try {
+       const data = await client.UpdateDictionaries({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeEsInstanceEventLists", async function () {
+    try {
+       const data = await client.DescribeEsInstanceEventLists({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeInstanceOperations", async function () {
+    try {
+       const data = await client.DescribeInstanceOperations({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeLogstashPipelines", async function () {
+    try {
+       const data = await client.DescribeLogstashPipelines({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.CreateInstance", async function () {
+    try {
+       const data = await client.CreateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdateDiagnoseSettings", async function () {
+    try {
+       const data = await client.UpdateDiagnoseSettings({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeRegions", async function () {
+    try {
+       const data = await client.DescribeRegions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdateServerlessSpace", async function () {
+    try {
+       const data = await client.UpdateServerlessSpace({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeForceMergeTask", async function () {
+    try {
+       const data = await client.DescribeForceMergeTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DeleteIndex", async function () {
+    try {
+       const data = await client.DeleteIndex({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -608,39 +378,9 @@ it("es.v20180416.DescribeLogstashInstanceLogs", async function () {
     }
 })
 
-it("es.v20180416.RestartNodes", async function () {
-    try {
-       const data = await client.RestartNodes({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("es.v20180416.DescribeServerlessSpaceUser", async function () {
     try {
        const data = await client.DescribeServerlessSpaceUser({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.SaveAndDeployLogstashPipeline", async function () {
-    try {
-       const data = await client.SaveAndDeployLogstashPipeline({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.UpdateDictionaries", async function () {
-    try {
-       const data = await client.UpdateDictionaries({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -668,9 +408,9 @@ it("es.v20180416.UpgradeLicense", async function () {
     }
 })
 
-it("es.v20180416.ModifyAutoBackUpCommonInfo", async function () {
+it("es.v20180416.DescribeRequestInstancePolicy", async function () {
     try {
-       const data = await client.ModifyAutoBackUpCommonInfo({})
+       const data = await client.DescribeRequestInstancePolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -678,29 +418,9 @@ it("es.v20180416.ModifyAutoBackUpCommonInfo", async function () {
     }
 })
 
-it("es.v20180416.DescribeInstancePluginList", async function () {
+it("es.v20180416.InquirePriceRenewInstance", async function () {
     try {
-       const data = await client.DescribeInstancePluginList({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.DescribeServerlessInstances", async function () {
-    try {
-       const data = await client.DescribeServerlessInstances({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("es.v20180416.DescribeIndexMeta", async function () {
-    try {
-       const data = await client.DescribeIndexMeta({})
+       const data = await client.InquirePriceRenewInstance({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -718,9 +438,199 @@ it("es.v20180416.GetRequestTargetNodeTypes", async function () {
     }
 })
 
-it("es.v20180416.DescribeLogstashInstanceOperations", async function () {
+it("es.v20180416.DescribeServerlessSpaces", async function () {
     try {
-       const data = await client.DescribeLogstashInstanceOperations({})
+       const data = await client.DescribeServerlessSpaces({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.InstallInstanceModel", async function () {
+    try {
+       const data = await client.InstallInstanceModel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeUserCosSnapshotList", async function () {
+    try {
+       const data = await client.DescribeUserCosSnapshotList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeUpgrade", async function () {
+    try {
+       const data = await client.DescribeUpgrade({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DeleteInstance", async function () {
+    try {
+       const data = await client.DeleteInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.GetDiagnoseSettings", async function () {
+    try {
+       const data = await client.GetDiagnoseSettings({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeSnapshotViews", async function () {
+    try {
+       const data = await client.DescribeSnapshotViews({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.RestartNodes", async function () {
+    try {
+       const data = await client.RestartNodes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.CreateServerlessSpaceV2", async function () {
+    try {
+       const data = await client.CreateServerlessSpaceV2({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.GetIpTraceStatus", async function () {
+    try {
+       const data = await client.GetIpTraceStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeAutoBackUpStrategy", async function () {
+    try {
+       const data = await client.DescribeAutoBackUpStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.CreateServerlessInstance", async function () {
+    try {
+       const data = await client.CreateServerlessInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeLogstashInstances", async function () {
+    try {
+       const data = await client.DescribeLogstashInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.ModifyEsVipSecurityGroup", async function () {
+    try {
+       const data = await client.ModifyEsVipSecurityGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.RequestInstancesByGet", async function () {
+    try {
+       const data = await client.RequestInstancesByGet({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdateIndex", async function () {
+    try {
+       const data = await client.UpdateIndex({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeInstances", async function () {
+    try {
+       const data = await client.DescribeInstances({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.StartLogstashPipelines", async function () {
+    try {
+       const data = await client.StartLogstashPipelines({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.RestartLogstashInstance", async function () {
+    try {
+       const data = await client.RestartLogstashInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DeleteServerlessSpaceUser", async function () {
+    try {
+       const data = await client.DeleteServerlessSpaceUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -738,9 +648,239 @@ it("es.v20180416.UpdateIpTraceStatus", async function () {
     }
 })
 
-it("es.v20180416.InquirePriceRenewInstance", async function () {
+it("es.v20180416.ModifyAutoBackUpCommonInfo", async function () {
     try {
-       const data = await client.InquirePriceRenewInstance({})
+       const data = await client.ModifyAutoBackUpCommonInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DeleteLogstashInstance", async function () {
+    try {
+       const data = await client.DeleteLogstashInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeServerlessMetrics", async function () {
+    try {
+       const data = await client.DescribeServerlessMetrics({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.ModifyAutoBackUpStrategy", async function () {
+    try {
+       const data = await client.ModifyAutoBackUpStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.CreateCosMigrateToServerlessInstance", async function () {
+    try {
+       const data = await client.CreateCosMigrateToServerlessInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdateJdk", async function () {
+    try {
+       const data = await client.UpdateJdk({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.QueryIpTraceLog", async function () {
+    try {
+       const data = await client.QueryIpTraceLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeClusterSnapshot", async function () {
+    try {
+       const data = await client.DescribeClusterSnapshot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.CreateLogstashInstance", async function () {
+    try {
+       const data = await client.CreateLogstashInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeInstanceLogs", async function () {
+    try {
+       const data = await client.DescribeInstanceLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.RestartKibana", async function () {
+    try {
+       const data = await client.RestartKibana({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.SaveAndDeployLogstashPipeline", async function () {
+    try {
+       const data = await client.SaveAndDeployLogstashPipeline({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeAutoScaleDiskInfo", async function () {
+    try {
+       const data = await client.DescribeAutoScaleDiskInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdateLogstashInstance", async function () {
+    try {
+       const data = await client.UpdateLogstashInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeSpaceKibanaTools", async function () {
+    try {
+       const data = await client.DescribeSpaceKibanaTools({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeViews", async function () {
+    try {
+       const data = await client.DescribeViews({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpdateServerlessInstance", async function () {
+    try {
+       const data = await client.UpdateServerlessInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DeleteLogstashPipelines", async function () {
+    try {
+       const data = await client.DeleteLogstashPipelines({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeEventDataDetail", async function () {
+    try {
+       const data = await client.DescribeEventDataDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeClusterDiskRange", async function () {
+    try {
+       const data = await client.DescribeClusterDiskRange({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.UpgradeInstance", async function () {
+    try {
+       const data = await client.UpgradeInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DeleteClusterSnapshot", async function () {
+    try {
+       const data = await client.DeleteClusterSnapshot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeCosBackupStrategyViews", async function () {
+    try {
+       const data = await client.DescribeCosBackupStrategyViews({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeIndexMeta", async function () {
+    try {
+       const data = await client.DescribeIndexMeta({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

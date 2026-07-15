@@ -868,219 +868,216 @@ export interface PrometheusConfigItem {
  */
 export interface AlarmPolicy {
   /**
-   * 告警策略 ID
+   * <p>告警策略 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyId?: string
   /**
-   * 告警策略名称
+   * <p>告警策略名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyName?: string
   /**
-   * 备注信息
+   * <p>备注信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Remark?: string
   /**
-   * 监控类型 MT_QCE=云产品监控
+   * <p>监控类型 MT_QCE=云产品监控</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MonitorType?: string
   /**
-   * 启停状态 0=停用 1=启用
+   * <p>启停状态 0=停用 1=启用</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Enable?: number
   /**
-   * 策略组绑定的实例数
+   * <p>策略组绑定的实例数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UseSum?: number
   /**
-   * 项目 Id -1=无项目 0=默认项目
+   * <p>项目 Id -1=无项目 0=默认项目</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectId?: number
   /**
-   * 项目名
+   * <p>项目名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProjectName?: string
   /**
-   * 告警策略类型
+   * <p>告警策略类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Namespace?: string
   /**
-   * 触发条件模板 Id
+   * <p>触发条件模板 Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConditionTemplateId?: string
   /**
-   * 指标触发条件
+   * <p>指标触发条件</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Condition?: AlarmPolicyCondition
   /**
-   * 事件触发条件
+   * <p>事件触发条件</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventCondition?: AlarmPolicyEventCondition
   /**
-   * 通知规则 id 列表
+   * <p>通知规则 id 列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NoticeIds?: Array<string>
   /**
-   * 通知规则 列表
+   * <p>通知规则 列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Notices?: Array<AlarmNotice>
   /**
-   * 触发任务列表
+   * <p>触发任务列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TriggerTasks?: Array<AlarmPolicyTriggerTask>
   /**
-   * 模板策略组
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>模板策略组<br>注意：此字段可能返回 null，表示取不到有效值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ConditionsTemp?: ConditionsTemp
   /**
-   * 最后编辑的用户uin
+   * <p>最后编辑的用户uin</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastEditUin?: string
   /**
-   * 更新时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>更新时间<br>注意：此字段可能返回 null，表示取不到有效值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: number
   /**
-   * 创建时间
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>创建时间<br>注意：此字段可能返回 null，表示取不到有效值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InsertTime?: number
   /**
-   * 地域
+   * <p>地域</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Region?: Array<string>
   /**
-   * namespace显示名字
+   * <p>namespace显示名字</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NamespaceShowName?: string
   /**
-   * 是否默认策略，1是，0否
+   * <p>是否默认策略，1是，0否</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsDefault?: number
   /**
-   * 能否设置默认策略，1是，0否
+   * <p>能否设置默认策略，1是，0否</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CanSetDefault?: number
   /**
-   * 实例分组ID
+   * <p>实例分组ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceGroupId?: number
   /**
-   * 实例分组总实例数
+   * <p>实例分组总实例数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceSum?: number
   /**
-   * 实例分组名称
+   * <p>实例分组名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceGroupName?: string
   /**
-   * 触发条件类型 STATIC=静态阈值 DYNAMIC=动态类型
+   * <p>触发条件类型 STATIC=静态阈值 DYNAMIC=动态类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleType?: string
   /**
-   * 用于实例、实例组绑定和解绑接口（BindingPolicyObject、UnBindingAllPolicyObject、UnBindingPolicyObject）的策略 ID
+   * <p>用于实例、实例组绑定和解绑接口（BindingPolicyObject、UnBindingAllPolicyObject、UnBindingPolicyObject）的策略 ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OriginId?: string
   /**
-   * 标签
+   * <p>标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagInstances?: Array<TagInstance>
   /**
-   * 过滤条件
+   * <p>过滤条件</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Filter?: AlarmConditionFilter
   /**
-   * 聚合条件
+   * <p>聚合条件</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupBy?: Array<AlarmGroupByItem>
   /**
-   * 策略关联的过滤维度信息
+   * <p>策略关联的过滤维度信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FilterDimensionsParam?: string
   /**
-   * 是否为一键告警策略
+   * <p>是否为一键告警策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsOneClick?: number
   /**
-   * 一键告警策略是否开启
+   * <p>一键告警策略是否开启</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OneClickStatus?: number
   /**
-   * 高级指标数量
+   * <p>高级指标数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdvancedMetricNumber?: number
   /**
-   * 策略是否是全部对象策略
+   * <p>策略是否是全部对象策略</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsBindAll?: number
   /**
-   * 策略标签
+   * <p>策略标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
   /**
-   * 是否支持告警标签
+   * <p>是否支持告警标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsSupportAlarmTag?: number
   /**
-   * 多标签交/并集关系
+   * <p>多标签交/并集关系</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TagOperation?: string
   /**
-   * 通知模板绑定内容模板信息
+   * <p>通知模板绑定内容模板信息</p>
    */
   NoticeTmplBindInfos?: Array<NoticeContentTmplBindInfo>
   /**
-   * 模板通知的等级
+   * <p>模板通知的等级</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HierarchicalNotices?: Array<AlarmHierarchicalNotice>
   /**
-   * 通知模板绑定内容模板信息，同NoticeTmplBindInfos
+   * <p>通知模板绑定内容模板信息，同NoticeTmplBindInfos</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NoticeContentTmplBindInfos?: Array<NoticeContentTmplBindInfo>
   /**
-   * 预设配置id
+   * <p>预设配置id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PredefinedConfigID?: string
@@ -1372,110 +1369,92 @@ export interface ProductSimple {
  */
 export interface AlarmPolicyRule {
   /**
-   * 指标名或事件名，支持的指标可以从 [DescribeAlarmMetrics](https://cloud.tencent.com/document/product/248/51283) 查询，支持的事件可以从 [DescribeAlarmEvents](https://cloud.tencent.com/document/product/248/51284) 查询 。
+   * <p>指标名或事件名，支持的指标可以从 <a href="https://cloud.tencent.com/document/product/248/51283">DescribeAlarmMetrics</a> 查询，支持的事件可以从 <a href="https://cloud.tencent.com/document/product/248/51284">DescribeAlarmEvents</a> 查询 。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MetricName?: string
   /**
-   * 秒数 统计周期，支持的值可以从 [DescribeAlarmMetrics](https://cloud.tencent.com/document/product/248/51283) 查询。
+   * <p>秒数 统计周期，支持的值可以从 <a href="https://cloud.tencent.com/document/product/248/51283">DescribeAlarmMetrics</a> 查询。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Period?: number
   /**
-   * 英文运算符
-intelligent=无阈值智能检测
-eq=等于
-ge=大于等于
-gt=大于
-le=小于等于
-lt=小于
-ne=不等于
-day_increase=天同比增长
-day_decrease=天同比下降
-day_wave=天同比波动
-week_increase=周同比增长
-week_decrease=周同比下降
-week_wave=周同比波动
-cycle_increase=环比增长
-cycle_decrease=环比下降
-cycle_wave=环比波动
-re=正则匹配
-支持的值可以从 [DescribeAlarmMetrics](https://cloud.tencent.com/document/product/248/51283) 查询。
+   * <p>英文运算符<br>intelligent=无阈值智能检测<br>eq=等于<br>ge=大于等于<br>gt=大于<br>le=小于等于<br>lt=小于<br>ne=不等于<br>day_increase=天同比增长<br>day_decrease=天同比下降<br>day_wave=天同比波动<br>week_increase=周同比增长<br>week_decrease=周同比下降<br>week_wave=周同比波动<br>cycle_increase=环比增长<br>cycle_decrease=环比下降<br>cycle_wave=环比波动<br>re=正则匹配<br>支持的值可以从 <a href="https://cloud.tencent.com/document/product/248/51283">DescribeAlarmMetrics</a> 查询。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Operator?: string
   /**
-   * 阈值，支持的范围可以从 [DescribeAlarmMetrics](https://cloud.tencent.com/document/product/248/51283) 查询。
+   * <p>阈值，支持的范围可以从 <a href="https://cloud.tencent.com/document/product/248/51283">DescribeAlarmMetrics</a> 查询。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value?: string
   /**
-   * 周期数 持续通知周期 1=持续1个周期 2=持续2个周期...，支持的值可以从 [DescribeAlarmMetrics](https://cloud.tencent.com/document/product/248/51283) 查询
+   * <p>周期数 持续通知周期 1=持续1个周期 2=持续2个周期...，支持的值可以从 <a href="https://cloud.tencent.com/document/product/248/51283">DescribeAlarmMetrics</a> 查询</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ContinuePeriod?: number
   /**
-   * 秒数 告警间隔  0=不重复 300=每5分钟告警一次 600=每10分钟告警一次 900=每15分钟告警一次 1800=每30分钟告警一次 3600=每1小时告警一次 7200=每2小时告警一次 10800=每3小时告警一次 21600=每6小时告警一次 43200=每12小时告警一次 86400=每1天告警一次
+   * <p>秒数 告警间隔  0=不重复 300=每5分钟告警一次 600=每10分钟告警一次 900=每15分钟告警一次 1800=每30分钟告警一次 3600=每1小时告警一次 7200=每2小时告警一次 10800=每3小时告警一次 21600=每6小时告警一次 43200=每12小时告警一次 86400=每1天告警一次</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NoticeFrequency?: number
   /**
-   * 告警频率是否指数增长 0=否 1=是
+   * <p>告警频率是否指数增长 0=否 1=是</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsPowerNotice?: number
   /**
-   * 对于单个触发规则的过滤条件
+   * <p>对于单个触发规则的过滤条件</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Filter?: AlarmPolicyFilter
   /**
-   * 指标展示名，用于出参
+   * <p>指标展示名，用于出参</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 单位，用于出参
+   * <p>单位，用于出参</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Unit?: string
   /**
-   * 触发条件类型 STATIC=静态阈值 DYNAMIC=动态阈值。创建或编辑策略时，如不填则默认为 STATIC。
+   * <p>触发条件类型 STATIC=静态阈值 DYNAMIC=动态阈值。创建或编辑策略时，如不填则默认为 STATIC。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleType?: string
   /**
-   * 是否为高级指标，0否，1是
+   * <p>是否为高级指标，0否，1是</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsAdvanced?: number
   /**
-   * 高级指标是否开通，0否，1是
+   * <p>高级指标是否开通，0否，1是</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsOpen?: number
   /**
-   * 集成中心产品ID
+   * <p>集成中心产品ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductId?: string
   /**
-   * 最大值
+   * <p>最大值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ValueMax?: number
   /**
-   * 最小值
+   * <p>最小值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ValueMin?: number
   /**
-   * 告警分级阈值配置
+   * <p>告警分级阈值配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HierarchicalValue?: AlarmHierarchicalValue
   /**
-   * 是否延迟指标
+   * <p>是否延迟指标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsLatenessMetric?: number
@@ -1720,12 +1699,12 @@ export interface RegionPolicyObjectCount {
  */
 export interface AlarmGroupByItem {
   /**
-   * Item Id
+   * <p>Item Id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Id?: string
   /**
-   * 名称
+   * <p>名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
@@ -2675,35 +2654,35 @@ export interface DeletePrometheusTempResponse {
  */
 export interface CreatePolicyGroupCondition {
   /**
-   * 指标Id
+   * <p>指标Id</p>
    */
   MetricId: number
   /**
-   * 告警发送收敛类型。0连续告警，1指数告警
+   * <p>告警发送收敛类型。0连续告警，1指数告警</p>
    */
   AlarmNotifyType: number
   /**
-   * 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次
+   * <p>告警发送周期单位秒。&lt;0 不触发, 0 只触发一次, &gt;0 每隔triggerTime秒触发一次</p>
    */
   AlarmNotifyPeriod: number
   /**
-   * 比较类型，1表示大于，2表示大于等于，3表示小于，4表示小于等于，5表示相等，6表示不相等。如果指标有配置默认比较类型值可以不填。
+   * <p>比较类型，1表示大于，2表示大于等于，3表示小于，4表示小于等于，5表示相等，6表示不相等。如果指标有配置默认比较类型值可以不填。</p>
    */
   CalcType?: number
   /**
-   * 比较的值，如果指标不必须CalcValue可不填
+   * <p>比较的值，如果指标不必须CalcValue可不填</p>
    */
   CalcValue?: number
   /**
-   * 数据聚合周期(单位秒)，若指标有默认值可不填
+   * <p>数据聚合周期(单位秒)，若指标有默认值可不填</p>
    */
   CalcPeriod?: number
   /**
-   * 持续几个检测周期触发规则会告警
+   * <p>持续几个检测周期触发规则会告警</p>
    */
   ContinuePeriod?: number
   /**
-   * 如果通过模板创建，需要传入模板中该指标的对应RuleId
+   * <p>如果通过模板创建，需要传入模板中该指标的对应RuleId</p>
    */
   RuleId?: number
 }
@@ -4095,35 +4074,35 @@ export interface UpdateGrafanaEnvironmentsRequest {
  */
 export interface CommonNamespace {
   /**
-   * 命名空间标示
+   * <p>命名空间标示</p>
    */
   Id: string
   /**
-   * 命名空间名称
+   * <p>命名空间名称</p>
    */
   Name: string
   /**
-   * 命名空间值
+   * <p>命名空间值</p>
    */
   Value: string
   /**
-   * 产品名称
+   * <p>产品名称</p>
    */
   ProductName: string
   /**
-   * 配置信息
+   * <p>配置信息</p>
    */
   Config: string
   /**
-   * 支持地域列表
+   * <p>支持地域列表</p>
    */
   AvailableRegions: Array<string>
   /**
-   * 排序Id
+   * <p>排序Id</p>
    */
   SortId: number
   /**
-   * Dashboard中的唯一表示
+   * <p>Dashboard中的唯一表示</p>
    */
   DashboardId: string
 }
@@ -6093,22 +6072,22 @@ export interface DescribeStatisticDataResponse {
  */
 export interface DescribeProductEventListOverView {
   /**
-   * 状态变更的事件数量
+   * <p>状态变更的事件数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusChangeAmount: number
   /**
-   * 告警状态未配置的事件数量
+   * <p>告警状态未配置的事件数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UnConfigAlarmAmount: number
   /**
-   * 异常事件数量
+   * <p>异常事件数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UnNormalEventAmount: number
   /**
-   * 未恢复的事件数量
+   * <p>未恢复的事件数量</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UnRecoverAmount: number
@@ -6139,17 +6118,17 @@ export interface UninstallGrafanaDashboardResponse {
  */
 export interface AlarmHierarchicalValue {
   /**
-   * 提醒等级阈值
+   * <p>提醒等级阈值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Remind?: string
   /**
-   * 警告等级阈值
+   * <p>警告等级阈值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Warn?: string
   /**
-   * 严重等级阈值
+   * <p>严重等级阈值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Serious?: string
@@ -6190,19 +6169,19 @@ export interface UpdateGrafanaNotificationChannelRequest {
  */
 export interface CreatePolicyGroupEventCondition {
   /**
-   * 告警事件的Id
+   * <p>告警事件的Id</p>
    */
   EventId: number
   /**
-   * 告警发送收敛类型。0连续告警，1指数告警
+   * <p>告警发送收敛类型。0连续告警，1指数告警</p>
    */
   AlarmNotifyType: number
   /**
-   * 告警发送周期单位秒。<0 不触发, 0 只触发一次, >0 每隔triggerTime秒触发一次
+   * <p>告警发送周期单位秒。&lt;0 不触发, 0 只触发一次, &gt;0 每隔triggerTime秒触发一次</p>
    */
   AlarmNotifyPeriod: number
   /**
-   * 如果通过模板创建，需要传入模板中该指标的对应RuleId
+   * <p>如果通过模板创建，需要传入模板中该指标的对应RuleId</p>
    */
   RuleId?: number
 }
@@ -7276,17 +7255,17 @@ export interface AlarmNotice {
  */
 export interface DescribeProductEventListEventsDimensions {
   /**
-   * 维度名（英文）
+   * <p>维度名（英文）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Key: string
   /**
-   * 维度名（中文）
+   * <p>维度名（中文）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name: string
   /**
-   * 维度值
+   * <p>维度值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Value: string
@@ -8158,17 +8137,17 @@ export interface DescribePrometheusInstanceInitStatusRequest {
  */
 export interface AlarmConditionFilter {
   /**
-   * 类型
+   * <p>类型</p><p>枚举值：</p><ul><li>EXPRESSION： 用表达式过滤</li><li>DIMENSION： 用维度条件过滤</li><li>BIND_ALL： 绑定全部实例</li><li>LOG_ALARM： 日志告警专用过滤</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
   /**
-   * 表达式
+   * <p>表达式</p><p>Type为Expression有值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Expression?: string
   /**
-   * 过滤条件
+   * <p>过滤条件</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Dimensions?: string
@@ -10065,11 +10044,11 @@ export interface DescribePrometheusRegionsRequest {
  */
 export interface DescribeProductEventListDimensions {
   /**
-   * 维度名
+   * <p>维度名</p>
    */
   Name: string
   /**
-   * 维度值
+   * <p>维度值</p>
    */
   Value: string
 }
@@ -10401,17 +10380,17 @@ export interface ModifyAlarmPolicyStatusRequest {
  */
 export interface ConditionsTemp {
   /**
-   * 模板名称
+   * <p>模板名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TemplateName: string
   /**
-   * 指标触发条件
+   * <p>指标触发条件</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Condition: AlarmPolicyCondition
   /**
-   * 事件触发条件
+   * <p>事件触发条件</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EventCondition: AlarmPolicyEventCondition
@@ -11176,17 +11155,17 @@ unknown = 未知
  */
 export interface AlarmHierarchicalNotice {
   /**
-   * 通知模板ID
+   * <p>通知模板ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NoticeId?: string
   /**
-   * 通知等级列表，["Remind","Serious"]表示该通知模板仅接收提醒和严重类别的告警
+   * <p>通知等级列表，[&quot;Remind&quot;,&quot;Serious&quot;]表示该通知模板仅接收提醒和严重类别的告警</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Classification?: Array<string>
   /**
-   * 模板对应的策略id
+   * <p>模板对应的策略id</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PolicyId?: string
@@ -11489,68 +11468,68 @@ export interface CreateAlarmNoticeResponse {
  */
 export interface Condition {
   /**
-   * 告警通知频率
+   * <p>告警通知频率</p>
    */
   AlarmNotifyPeriod?: number
   /**
-   * 重复通知策略预定义（0 - 只告警一次， 1 - 指数告警，2 - 连接告警）
+   * <p>重复通知策略预定义（0 - 只告警一次， 1 - 指数告警，2 - 连接告警）</p>
    */
   AlarmNotifyType?: number
   /**
-   * 检测方式
+   * <p>检测方式</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CalcType?: string
   /**
-   * 检测值
+   * <p>检测值</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CalcValue?: string
   /**
-   * 持续时间，单位秒
+   * <p>持续时间，单位秒</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ContinueTime?: string
   /**
-   * 指标ID
+   * <p>指标ID</p>
    */
   MetricID?: number
   /**
-   * 指标展示名称（对外）
+   * <p>指标展示名称（对外）</p>
    */
   MetricDisplayName?: string
   /**
-   * 周期
+   * <p>周期</p>
    */
   Period?: number
   /**
-   * 规则ID
+   * <p>规则ID</p>
    */
   RuleID?: number
   /**
-   * 指标单位
+   * <p>指标单位</p>
    */
   Unit?: string
   /**
-   * 是否为高级指标，0：否；1：是
+   * <p>是否为高级指标，0：否；1：是</p>
    */
   IsAdvanced?: number
   /**
-   * 是否开通高级指标，0：否；1：是
+   * <p>是否开通高级指标，0：否；1：是</p>
    */
   IsOpen?: number
   /**
-   * 产品ID
+   * <p>产品ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ProductId?: string
   /**
-   * 告警分级阈值配置
+   * <p>告警分级阈值配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HierarchicalValue?: AlarmHierarchicalValue
   /**
-   * 指标类型，用于区分动态指标
+   * <p>指标类型，用于区分动态指标</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleType?: string
@@ -11662,12 +11641,12 @@ export interface Filter {
  */
 export interface DescribeProductEventListEventsGroupInfo {
   /**
-   * 策略ID
+   * <p>策略ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupId: number
   /**
-   * 策略名
+   * <p>策略名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GroupName: string

@@ -202,6 +202,20 @@ export interface ModifySecurityJSInjectionRuleRequest {
 }
 
 /**
+ * CreateLogAnalysisDownloadTask返回参数结构体
+ */
+export interface CreateLogAnalysisDownloadTaskResponse {
+  /**
+   * <p>日志分析下载任务 ID。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSecurityIPGroupInfo返回参数结构体
  */
 export interface DescribeSecurityIPGroupInfoResponse {
@@ -1216,13 +1230,36 @@ export interface ModifyAccelerationDomainStatusesResponse {
 }
 
 /**
- * DescribeOriginACL请求参数结构体
+ * 配置组版本发布记录详情。
  */
-export interface DescribeOriginACLRequest {
+export interface DeployRecord {
   /**
-   * 站点 ID。
+   * 发布版本的详细信息。
    */
-  ZoneId: string
+  ConfigGroupVersionInfos?: Array<ConfigGroupVersionInfo>
+  /**
+   * 发布时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。
+   */
+  DeployTime?: string
+  /**
+   * 发布状态，取值有：
+<li> deploying ：发布中；</li>
+<li>failure ：发布失败；</li>
+<li>success： 发布成功。</li>
+   */
+  Status?: string
+  /**
+   * 发布结果信息。
+   */
+  Message?: string
+  /**
+   * 发布记录 ID。
+   */
+  RecordId?: string
+  /**
+   * 变更说明。
+   */
+  Description?: string
 }
 
 /**
@@ -6425,6 +6462,24 @@ export interface CnameStatus {
 }
 
 /**
+ * DescribeLogAnalysisDownloadTasks返回参数结构体
+ */
+export interface DescribeLogAnalysisDownloadTasksResponse {
+  /**
+   * <p>符合日志匹配条件的日志分析下载任务总条数。</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>符合日志匹配条件的日志分析下载任务列表。</p>
+   */
+  Tasks?: Array<LogAnalysisDownloadTask>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Waf配置。
  */
 export interface WafConfig {
@@ -6970,6 +7025,64 @@ export interface DeleteFunctionReplicaRequest {
 }
 
 /**
+ * 日志分析日志下载任务。
+ */
+export interface LogAnalysisDownloadTask {
+  /**
+   * <p>任务 ID。</p>
+   */
+  TaskId?: string
+  /**
+   * <p>站点 ID。</p>
+   */
+  ZoneId?: string
+  /**
+   * <p>数据归属地区，取值有：<ul><li>mainland：中国大陆境内；</li><li>overseas：全球（不含中国大陆）。</li></ul></p>
+   */
+  Area?: string
+  /**
+   * <p>开始时间，示例值：2020-04-29T00:00:00Z。</p>
+   */
+  StartTime?: string
+  /**
+   * <p>结束时间，示例值：2020-04-30T00:00:00Z。</p>
+   */
+  EndTime?: string
+  /**
+   * <p>日志类型，取值有：<ul><li> l7-access-logs：七层访问日志；</li><li>web-attack：托管规则日志。</li></ul></p>
+   */
+  LogType?: string
+  /**
+   * <p><a href="https://cloud.tencent.com/document/product/1552/124662">日志匹配条件</a>，长度上限 12KB。</p>
+   */
+  Condition?: string
+  /**
+   * <p>文件格式，取值有：</p><ul><li>csv 。</li></ul>
+   */
+  Format?: string
+  /**
+   * <p>原始日志是否按时间排序返回，取值有：<ul><li>asc：升序；</li><li>desc：降序。</li></ul></p>
+   */
+  Sort?: string
+  /**
+   * <p>任务状态，取值有：<ul><li>loading：处理中，等待生成下载链接；</li><li> failed: 处理失败，当前任务无法下载;</li><li>completed：已完成打包，可以下载。</li></ul></p>
+   */
+  Status?: string
+  /**
+   * <p>任务创建时间，任务创建成功后将保留3天。</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>下载地址，仅当 Status = completed 时有返回值。</p>
+   */
+  Url?: string
+  /**
+   * <p>下载任务过期时间，过期后下载地址将不可用，请通过本接口获取新的下载地址。</p>
+   */
+  ExpireTime?: string
+}
+
+/**
  * DDoS配置
  */
 export interface DDoS {
@@ -7106,6 +7219,48 @@ export interface DescribeSecurityClientAttesterRequest {
    * 分页查询偏移量。默认值：0。
    */
   Offset?: number
+}
+
+/**
+ * DescribeLogAnalysisDetail请求参数结构体
+ */
+export interface DescribeLogAnalysisDetailRequest {
+  /**
+   * <p>站点 ID。</p>
+   */
+  ZoneId: string
+  /**
+   * <p>数据归属地区，可选值：<ul><li>mainland：中国大陆境内；</li><li>overseas：全球（不含中国大陆）。</li></ul>注意：若站点服务区域为“全球可用区”，获取全部数据需要分别查询 mainland 和 overseas 的数据。</p>
+   */
+  Area: string
+  /**
+   * <p>开始时间，示例值：2020-04-29T00:00:00Z。套餐版本不同，支持的可查询开始时间至今的最大时间跨度不同，详情请见 <a href="https://cloud.tencent.com/document/product/1552/94165#45435466-9103-4ff6-be22-e31717044fb2">套餐选型对比</a>。</p>
+   */
+  StartTime: string
+  /**
+   * <p>结束时间，示例值：2020-04-30T00:00:00Z。单次查询的开始时间到结束时间跨度最大为 31 天。</p>
+   */
+  EndTime: string
+  /**
+   * <p>日志类型，可选值：<ul><li> l7-access-logs：七层访问日志；</li><li>web-attack：托管规则日志。</li></ul>默认为 l7-access-logs 。</p>
+   */
+  LogType?: string
+  /**
+   * <p><a href="https://cloud.tencent.com/document/product/1552/124662">日志匹配条件</a>，最大长度 12KB。</p>
+   */
+  Condition?: string
+  /**
+   * <p>分页查询限制数目，默认值：20，最大值 100。</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页查询偏移量，默认为 0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>原始日志是否按时间排序返回；可选值：<ul><li>asc：升序；</li><li>desc：降序。</li></ul>默认为 desc。</p>
+   */
+  Sort?: string
 }
 
 /**
@@ -7689,36 +7844,13 @@ export interface ModifyFunctionReplicaResponse {
 }
 
 /**
- * 配置组版本发布记录详情。
+ * DescribeOriginACL请求参数结构体
  */
-export interface DeployRecord {
+export interface DescribeOriginACLRequest {
   /**
-   * 发布版本的详细信息。
+   * 站点 ID。
    */
-  ConfigGroupVersionInfos?: Array<ConfigGroupVersionInfo>
-  /**
-   * 发布时间。时间为世界标准时间（UTC）， 遵循 ISO 8601 标准的日期和时间格式。
-   */
-  DeployTime?: string
-  /**
-   * 发布状态，取值有：
-<li> deploying ：发布中；</li>
-<li>failure ：发布失败；</li>
-<li>success： 发布成功。</li>
-   */
-  Status?: string
-  /**
-   * 发布结果信息。
-   */
-  Message?: string
-  /**
-   * 发布记录 ID。
-   */
-  RecordId?: string
-  /**
-   * 变更说明。
-   */
-  Description?: string
+  ZoneId: string
 }
 
 /**
@@ -8476,18 +8608,21 @@ export interface ModifyDnsRecordsRequest {
 }
 
 /**
- * IdentifyZone请求参数结构体
+ * DescribeLogAnalysisDetail返回参数结构体
  */
-export interface IdentifyZoneRequest {
+export interface DescribeLogAnalysisDetailResponse {
   /**
-   * 站点名称。
+   * <p>符合日志匹配条件的日志详情列表。</p>
    */
-  ZoneName: string
+  LogDetail?: Array<LogItem>
   /**
-   * 站点下的子域名。如果验证站点下的子域名，则传该值，否则为空。
-
+   * <p>符合日志匹配条件的日志总数。</p>
    */
-  Domain?: string
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10379,6 +10514,22 @@ export interface ClientBehaviorDetection {
 }
 
 /**
+ * 节点缓存 TTL 自定义缓存时间配置参数。
+ */
+export interface CacheConfigCustomTime {
+  /**
+   * 自定义缓存时间开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
+   */
+  Switch?: string
+  /**
+   * 自定义缓存时间数值，单位为秒，取值：0-315360000。<br>注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
+   */
+  CacheTime?: number
+}
+
+/**
  * ModifyApplicationProxyRule请求参数结构体
  */
 export interface ModifyApplicationProxyRuleRequest {
@@ -11415,6 +11566,20 @@ export interface AllowActionParameters {
    * 最大延迟响应时间，支持的单位有：<li>s：秒，取值范围 5～10。</li>
    */
   MaxDelayTime?: string
+}
+
+/**
+ * 日志分析的日志信息
+ */
+export interface LogItem {
+  /**
+   * 日志产生的时间点，采用 unix 毫秒级时间戳。
+   */
+  Timestamp?: number
+  /**
+   * 日志的具体内容，采用JSON字符串格式。
+   */
+  LogJson?: string
 }
 
 /**
@@ -12470,6 +12635,44 @@ export interface ExceptUserRuleScope {
 }
 
 /**
+ * CreateLogAnalysisDownloadTask请求参数结构体
+ */
+export interface CreateLogAnalysisDownloadTaskRequest {
+  /**
+   * <p>站点 ID。</p>
+   */
+  ZoneId: string
+  /**
+   * <p>数据归属地区，可选值：<ul><li>mainland：中国大陆境内；</li><li>overseas：全球（不含中国大陆）。</li></ul>注意：若站点服务区域为“全球可用区”，获取全部数据需要分别查询 mainland 和 overseas 的数据。</p>
+   */
+  Area: string
+  /**
+   * <p>开始时间，示例值：2020-04-29T00:00:00Z。套餐版本不同，支持的可查询开始时间至今的最大时间跨度不同，详情请见 <a href="https://cloud.tencent.com/document/product/1552/94165#45435466-9103-4ff6-be22-e31717044fb2">套餐选型对比</a>。</p>
+   */
+  StartTime: string
+  /**
+   * <p>结束时间，示例值：2020-04-30T00:00:00Z。单次查询的开始时间到结束时间跨度最大为 31 天。</p>
+   */
+  EndTime: string
+  /**
+   * <p>日志类型，可选值：<ul><li> l7-access-logs：七层访问日志；</li><li>web-attack：托管规则日志。</li></ul>默认为 l7-access-logs 。</p>
+   */
+  LogType?: string
+  /**
+   * <p><a href="https://cloud.tencent.com/document/product/1552/124662">日志匹配条件</a>，最大长度 12KB。</p>
+   */
+  Condition?: string
+  /**
+   * <p>文件格式，可选值：<ul><li>csv</li></ul>默认为 csv。</p>
+   */
+  Format?: string
+  /**
+   * <p>原始日志的时间排序，可选值：  <ul><li>asc：升序；</li>  <li>desc：降序。</li></ul>  默认为 desc。</p>
+   */
+  Sort?: string
+}
+
+/**
  * 例外规则的详细模块配置。
  */
 export interface PartialModule {
@@ -13298,6 +13501,21 @@ export interface DescribeFunctionReplicasRequest {
    * 过滤条件，Filters.Values 的上限为 20。该参数不填写时，返回函数 ID 下全部函数副本。详细的过滤条件如下：  <li> replica-name：按照函数副本名称进行过滤，支持模糊查询。</li>
    */
   Filters?: Array<AdvancedFilter>
+}
+
+/**
+ * IdentifyZone请求参数结构体
+ */
+export interface IdentifyZoneRequest {
+  /**
+   * 站点名称。
+   */
+  ZoneName: string
+  /**
+   * 站点下的子域名。如果验证站点下的子域名，则传该值，否则为空。
+
+   */
+  Domain?: string
 }
 
 /**
@@ -16563,19 +16781,33 @@ export interface DescribeContentIdentifiersResponse {
 }
 
 /**
- * 节点缓存 TTL 自定义缓存时间配置参数。
+ * DescribeLogAnalysisDownloadTasks请求参数结构体
  */
-export interface CacheConfigCustomTime {
+export interface DescribeLogAnalysisDownloadTasksRequest {
   /**
-   * 自定义缓存时间开关，取值有：
-<li>on：开启；</li>
-<li>off：关闭。</li>
+   * <p>站点 ID。</p>
    */
-  Switch?: string
+  ZoneId: string
   /**
-   * 自定义缓存时间数值，单位为秒，取值：0-315360000。<br>注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
+   * <p>数据归属地区，可选值： <ul><li>mainland：中国大陆境内；</li> <li>overseas：全球（不含中国大陆）。</li></ul> 注意：若站点服务区域为“全球可用区”，获取全部数据需要分别查询 mainland 和 overseas 的数据。</p>
    */
-  CacheTime?: number
+  Area: string
+  /**
+   * <p>日志类型，可选值：<ul><li> l7-access-logs：七层访问日志；</li><li>web-attack：托管规则日志。</li></ul>默认为 l7-access-logs 。</p>
+   */
+  LogType?: string
+  /**
+   * <p>过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：<ul><li>task-id：按照日志下载任务 ID进行过滤，可选值参考 CreateLogAnalysisDownloadTask 接口返回的 TaskId。</li></ul></p><p>取值参考：CreateLogAnalysisDownloadTask</p>
+   */
+  Filters?: Array<AdvancedFilter>
+  /**
+   * <p>分页查询限制数目，默认值：20，最大值 100。</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页查询偏移量，默认为 0。</p>
+   */
+  Offset?: number
 }
 
 /**

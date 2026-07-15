@@ -1558,6 +1558,16 @@ it("csip.v20221121.ModifyCosMarkInfo", async function () {
     }
 })
 
+it("csip.v20221121.ModifyMachineRemark", async function () {
+    try {
+       const data = await client.ModifyMachineRemark({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("csip.v20221121.DeleteIaCAccessToken", async function () {
     try {
        const data = await client.DeleteIaCAccessToken({})
@@ -1778,9 +1788,9 @@ it("csip.v20221121.DescribeAccessKeyAlarm", async function () {
     }
 })
 
-it("csip.v20221121.ModifyMachineRemark", async function () {
+it("csip.v20221121.ModifyCosAuditBucketMonitorStatus", async function () {
     try {
-       const data = await client.ModifyMachineRemark({})
+       const data = await client.ModifyCosAuditBucketMonitorStatus({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

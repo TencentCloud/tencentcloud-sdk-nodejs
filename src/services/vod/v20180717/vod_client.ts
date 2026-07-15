@@ -82,6 +82,7 @@ import {
   AiReviewTaskPoliticalOcrResult,
   QualityEnhanceTask,
   AiSampleWord,
+  OverrideTranscodeParameter,
   PoliticalOcrReviewTemplateInfo,
   CreateImageSpriteTemplateRequest,
   AigcAudioReferenceAudioInfo,

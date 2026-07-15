@@ -3434,77 +3434,13 @@ export interface ModifyCosAuditObjectSampleRateResponse {
 }
 
 /**
- * 主机漏洞风险内容
+ * ModifyCosAuditBucketMonitorStatus返回参数结构体
  */
-export interface VulRiskItem {
+export interface ModifyCosAuditBucketMonitorStatusResponse {
   /**
-   * 云账号ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CloudAccountID?: string
-  /**
-   * 实例ID
-   */
-  AssetID?: string
-  /**
-   * 实例状态
-   */
-  InstanceStatus?: string
-  /**
-   * 实例名称
-   */
-  InstanceName?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 更新时间
-   */
-  UpdateTime?: string
-  /**
-   * 漏洞名称
-   */
-  VulName?: string
-  /**
-   * 漏洞类型
-   */
-  VulCategory?: string
-  /**
-   * 漏洞等级
-   */
-  VulLevel?: string
-  /**
-   * CVE编号
-   */
-  CveID?: string
-  /**
-   * 漏洞描述
-   */
-  Description?: string
-  /**
-   * 容器ID
-   */
-  ContainerID?: string
-  /**
-   * 漏洞风险修复建议
-   */
-  Fix?: string
-  /**
-   * Linux漏洞
-   */
-  VulCategoryName?: string
-  /**
-   * 漏洞等级名称
-   */
-  VulLevelName?: string
-  /**
-   * 实例状态中文信息
-   */
-  InstanceStatusName?: string
-  /**
-   * 租户ID
-   */
-  AppID?: number
+  RequestId?: string
 }
 
 /**
@@ -3809,7 +3745,7 @@ export interface DescribeRiskRulesResponse {
  */
 export interface SkillCapabilityTag {
   /**
-   * 能力标签标识，适合程序判定、过滤或聚合使用
+   * 能力标签标识
    */
   ID?: string
   /**
@@ -4745,6 +4681,20 @@ export interface DescribeGatewayAssetsRequest {
 }
 
 /**
+ * ModifyCosAuditBucketMonitorStatus请求参数结构体
+ */
+export interface ModifyCosAuditBucketMonitorStatusRequest {
+  /**
+   * 存储桶集合
+   */
+  BucketNameSet: Array<string>
+  /**
+   * 0 关闭 1 开启
+   */
+  MonitorStatus: number
+}
+
+/**
  * 访问密钥资产信息
  */
 export interface AccessKeyAsset {
@@ -5068,11 +5018,12 @@ export interface ModifyCosMarkInfoResponse {
  */
 export interface SkillScanRuleHit {
   /**
-   * 融合规则编号（9xxxx），可与 RuleCatalog 交叉引用
+   * 融合规则编号
+参数格式：形如 9xxxx
    */
   RuleID?: string
   /**
-   * 当前命中规则的具体发现描述，包含文件位置、行为特征、风险点等信息
+   * 风险发现描述
    */
   Description?: string
 }
@@ -5767,6 +5718,80 @@ export interface DspmAccessRecord {
    * 登录失败次数
    */
   LoginFailedCount?: number
+}
+
+/**
+ * 主机漏洞风险内容
+ */
+export interface VulRiskItem {
+  /**
+   * 云账号ID
+   */
+  CloudAccountID?: string
+  /**
+   * 实例ID
+   */
+  AssetID?: string
+  /**
+   * 实例状态
+   */
+  InstanceStatus?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 漏洞名称
+   */
+  VulName?: string
+  /**
+   * 漏洞类型
+   */
+  VulCategory?: string
+  /**
+   * 漏洞等级
+   */
+  VulLevel?: string
+  /**
+   * CVE编号
+   */
+  CveID?: string
+  /**
+   * 漏洞描述
+   */
+  Description?: string
+  /**
+   * 容器ID
+   */
+  ContainerID?: string
+  /**
+   * 漏洞风险修复建议
+   */
+  Fix?: string
+  /**
+   * Linux漏洞
+   */
+  VulCategoryName?: string
+  /**
+   * 漏洞等级名称
+   */
+  VulLevelName?: string
+  /**
+   * 实例状态中文信息
+   */
+  InstanceStatusName?: string
+  /**
+   * 租户ID
+   */
+  AppID?: number
 }
 
 /**
@@ -14267,7 +14292,7 @@ STATIC：静态分析引擎
    */
   ScanType?: string
   /**
-   * 该引擎命中的规则列表
+   * 命中规则列表
    */
   RuleList?: Array<SkillScanRuleHit>
 }
@@ -21057,7 +21082,8 @@ export interface CreateDspmIdentifyComplianceGroupCopyRequest {
  */
 export interface SkillRuleCatalogItem {
   /**
-   * 融合规则 ID（9xxxx）
+   * 融合规则 ID
+参数格式：形如 9xxxx
    */
   RuleID?: string
   /**

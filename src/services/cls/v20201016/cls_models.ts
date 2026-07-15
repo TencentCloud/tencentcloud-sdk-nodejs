@@ -869,87 +869,89 @@ export interface Tag {
  */
 export interface ScheduledSqlTaskInfo {
   /**
-   * ScheduledSql任务id
+   * <p>ScheduledSql任务id</p>
    */
   TaskId?: string
   /**
-   * ScheduledSql任务名称
+   * <p>ScheduledSql任务名称</p>
    */
   Name?: string
   /**
-   * 源日志主题id
+   * <p>源日志主题id</p>
    */
   SrcTopicId?: string
   /**
-   * 源日志主题名称
+   * <p>源日志主题名称</p>
    */
   SrcTopicName?: string
   /**
-   * 定时SQL分析目标主题
+   * <p>定时SQL分析目标主题</p>
    */
   DstResource?: ScheduledSqlResouceInfo
   /**
-   * 任务创建时间。格式：yyyy-MM-dd HH:mm:ss
+   * <p>任务创建时间。格式：yyyy-MM-dd HH:mm:ss</p>
    */
   CreateTime?: string
   /**
-   * 任务更新时间，格式：yyyy-MM-dd HH:mm:ss
+   * <p>任务更新时间，格式：yyyy-MM-dd HH:mm:ss</p>
    */
   UpdateTime?: string
   /**
-   * 任务状态，1:运行 2:停止 3:异常-找不到源日志主题 4:异常-找不到目标主题
-
-5: 访问权限问题 6:内部故障 7:其他故障
+   * <p>任务状态，1:运行 2:停止 3:异常-找不到源日志主题 4:异常-找不到目标主题</p><p>5: 访问权限问题 6:内部故障 7:其他故障</p>
    */
   Status?: number
   /**
-   * 任务启用状态，1开启,  2关闭
+   * <p>任务启用状态，1开启,  2关闭</p>
    */
   EnableFlag?: number
   /**
-   * 查询语句
+   * <p>查询语句</p>
    */
   ScheduledSqlContent?: string
   /**
-   * 调度开始时间，格式：yyyy-MM-dd HH:mm:ss
+   * <p>调度开始时间，格式：yyyy-MM-dd HH:mm:ss</p>
    */
   ProcessStartTime?: string
   /**
-   * 调度类型，1:持续运行 2:指定时间范围
+   * <p>调度类型，1:持续运行 2:指定时间范围</p>
    */
   ProcessType?: number
   /**
-   * 调度结束时间，格式：yyyy-MM-dd HH:mm:ss，当process_type=2时为必传字段
+   * <p>调度结束时间，格式：yyyy-MM-dd HH:mm:ss，当process_type=2时为必传字段</p>
    */
   ProcessEndTime?: string
   /**
-   * 调度周期(分钟)，1~1440分钟
+   * <p>调度周期(分钟)，1~1440分钟</p>
    */
   ProcessPeriod?: number
   /**
-   * 查询的时间窗口. @m-15m, @m，意为近15分钟
+   * <p>查询的时间窗口. @m-15m, @m，意为近15分钟</p>
    */
   ProcessTimeWindow?: string
   /**
-   * 执行延迟(秒)，0~120秒，默认60秒
+   * <p>执行延迟(秒)，0~120秒，默认60秒</p>
    */
   ProcessDelay?: number
   /**
-   * 源topicId的地域信息，支持地域见 [地域列表](https://cloud.tencent.com/document/api/614/56474#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8) 文档。
+   * <p>源topicId的地域信息，支持地域见 <a href="https://cloud.tencent.com/document/api/614/56474#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">地域列表</a> 文档。</p>
    */
   SrcTopicRegion?: string
   /**
-   * 语法规则，0：Lucene语法，1：CQL语法
+   * <p>语法规则，0：Lucene语法，1：CQL语法</p>
    */
   SyntaxRule?: number
   /**
-   * 是否开启投递服务日志。1：关闭，2：开启。
+   * <p>是否开启投递服务日志。1：关闭，2：开启。</p>
    */
   HasServicesLog?: number
   /**
-   * 全文检索标记。1：关闭，2：打开。
+   * <p>全文检索标记。1：关闭，2：打开。</p>
    */
   FullQuery?: number
+  /**
+   * <p>调度周期时间单位</p><p>取值范围：[1, 2]</p><p>默认值：1</p><p>默认值1（分钟），其他值2（秒）</p>
+   */
+  ProcessPeriodUnit?: number
 }
 
 /**
@@ -1886,6 +1888,10 @@ export interface ModifyScheduledSqlRequest {
    * <p>全文检索查询标记。1：关闭，2：打开。</p>
    */
   FullQuery?: number
+  /**
+   * <p>调度周期单位</p><p>取值范围：[1, 2]</p><p>默认值：1</p><p>默认值1（分钟），其他值2（秒）</p>
+   */
+  ProcessPeriodUnit?: number
 }
 
 /**
@@ -7617,6 +7623,10 @@ export interface CreateScheduledSqlRequest {
    * <p>源topicId的地域信息,支持地域见 <a href="https://cloud.tencent.com/document/api/614/56474#.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8">地域列表</a> 文档</p>
    */
   SrcTopicRegion: string
+  /**
+   * <p>调度时间单位</p><p>取值范围：[1, 2]</p><p>默认值：1</p><p>默认值为1（分钟），其他值2（秒）</p>
+   */
+  ProcessPeriodUnit?: number
   /**
    * <p>调度结束时间，当ProcessType=2时为必传字段, Unix时间戳，单位ms</p>
    */

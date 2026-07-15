@@ -17554,6 +17554,40 @@ export interface CreateSubtitleEmbedTemplateResponse {
 }
 
 /**
+ * 图片处理任务概览。
+ */
+export interface ImageTaskInfo {
+  /**
+   * <p>图片处理任务TaskId。</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务状态。</p><p>枚举值：</p><ul><li>FINISH： 任务结束</li><li>PROCESSING： 任务处理中</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>输入文件。</p>
+   */
+  Input?: string
+  /**
+   * <p>创建时间。</p><p>参数格式：YYYY-MM-DDThh:mm:ssZ</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>开始处理时间。</p><p>参数格式：YYYY-MM-DDThh:mm:ssZ</p>
+   */
+  BeginProcessTime?: string
+  /**
+   * <p>结束时间。</p><p>参数格式：YYYY-MM-DDThh:mm:ssZ</p>
+   */
+  FinishTime?: string
+  /**
+   * <p>子任务失败标识。</p>
+   */
+  SubTaskHasFailed?: boolean
+}
+
+/**
  * CreateStreamPackageSourceLocation返回参数结构体
  */
 export interface CreateStreamPackageSourceLocationResponse {
@@ -18641,6 +18675,28 @@ export interface FlowLogInfo {
  * DeleteWordSamples返回参数结构体
  */
 export interface DeleteWordSamplesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeImageTasks返回参数结构体
+ */
+export interface DescribeImageTasksResponse {
+  /**
+   * <p>符合过滤条件的记录总数。</p><p>单位：条</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>翻页标识，当请求未返回所有数据，该字段表示下一条记录的 ID。当该字段为空字符串，说明已无更多数据。</p>
+   */
+  ScrollToken?: string
+  /**
+   * <p>图片任务概要列表。</p>
+   */
+  TaskSet?: Array<ImageTaskInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -26445,6 +26501,36 @@ export interface DescribeMediaMetaDataRequest {
    * 需要获取元信息的文件输入信息。
    */
   InputInfo: MediaInputInfo
+}
+
+/**
+ * DescribeImageTasks请求参数结构体
+ */
+export interface DescribeImageTasksRequest {
+  /**
+   * <p>任务状态过滤条件。</p>
+   */
+  Status: string
+  /**
+   * <p>返回记录条数。</p>
+   */
+  Limit?: number
+  /**
+   * <p>翻页标识，分批拉取时使用：当单次请求无法拉取所有数据，接口将会返回 ScrollToken，下一次请求携带该 Token，将会从下一条记录开始获取。</p>
+   */
+  ScrollToken?: string
+  /**
+   * <p>任务开始时间。</p><p>参数格式：YYYY-MM-DDThh:mm:ssZ</p>
+   */
+  StartTime?: string
+  /**
+   * <p>任务结束时间。</p><p>参数格式：YYYY-MM-DDThh:mm:ssZ</p>
+   */
+  EndTime?: string
+  /**
+   * <p>筛选子任务状态。</p>
+   */
+  SubTaskHasFailed?: boolean
 }
 
 /**

@@ -218,6 +218,16 @@ it("teo.v20220901.DescribeDefaultCertificates", async function () {
     }
 })
 
+it("teo.v20220901.DescribeLogAnalysisDownloadTasks", async function () {
+    try {
+       const data = await client.DescribeLogAnalysisDownloadTasks({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("teo.v20220901.ModifyL7AccRule", async function () {
     try {
        const data = await client.ModifyL7AccRule({})
@@ -361,6 +371,16 @@ it("teo.v20220901.DeleteApplicationProxyRule", async function () {
 it("teo.v20220901.CheckCnameStatus", async function () {
     try {
        const data = await client.CheckCnameStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeLogAnalysisDetail", async function () {
+    try {
+       const data = await client.DescribeLogAnalysisDetail({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -901,6 +921,16 @@ it("teo.v20220901.DescribeMultiPathGateways", async function () {
 it("teo.v20220901.DescribeTopL7AnalysisData", async function () {
     try {
        const data = await client.DescribeTopL7AnalysisData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("teo.v20220901.DescribeSecurityAPIService", async function () {
+    try {
+       const data = await client.DescribeSecurityAPIService({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1988,9 +2018,9 @@ it("teo.v20220901.ModifyDDoSProtection", async function () {
     }
 })
 
-it("teo.v20220901.DescribeSecurityAPIService", async function () {
+it("teo.v20220901.CreateLogAnalysisDownloadTask", async function () {
     try {
-       const data = await client.DescribeSecurityAPIService({})
+       const data = await client.CreateLogAnalysisDownloadTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
