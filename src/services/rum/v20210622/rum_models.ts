@@ -1646,7 +1646,7 @@ export interface DescribeDataFetchUrlV2Response {
  */
 export interface DescribeRumGroupLogResponse {
   /**
-   * 返回字符串
+   * <p>返回字符串</p>
    */
   Result?: string
   /**
@@ -1848,23 +1848,23 @@ export interface DescribeUvListRequest {
  */
 export interface DescribeDataReportCountV2Request {
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime: number
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime: number
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ID?: number
   /**
-   * 上报类型（custom，event，log，miniProgramData，performance，pv，speed，webvitals）
+   * <p>上报类型（custom，event，log，miniProgramData，performance，pv，speed，webvitals）</p>
    */
   ReportType?: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceID?: string
 }
@@ -2600,23 +2600,23 @@ export interface DescribeRumLogListResponse {
  */
 export interface DescribeScoresV2Request {
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime: string
   /**
-   * 结束时间
+   * <p>结束时间</p>
    */
   EndTime: string
   /**
-   * 项目 ID 列表
+   * <p>项目 ID 列表</p>
    */
   IDList?: Array<number | bigint>
   /**
-   * 查询粒度，hour 或 day
+   * <p>查询粒度，hour 或 day</p>
    */
   Type?: string
   /**
-   * 环境
+   * <p>环境</p>
    */
   Env?: string
 }
@@ -2944,7 +2944,7 @@ export interface DeleteProjectResponse {
  */
 export interface DescribeScoresV2Response {
   /**
-   * 项目得分数组
+   * <p>项目得分数组</p>
    */
   ScoreSet?: Array<ScoreInfoV2>
   /**
@@ -5446,35 +5446,35 @@ export interface DescribeAppSingleCaseDetailListRequest {
  */
 export interface DescribeRumGroupLogRequest {
   /**
-   * 排序方式  desc  asc（必填）
+   * <p>排序方式  desc  asc（必填）</p>
    */
   OrderBy: string
   /**
-   * 开始时间（必填）
+   * <p>开始时间（必填）</p>
    */
   StartTime: string
   /**
-   * 单次查询返回的原始日志条数，最大值为100（必填）
+   * <p>单次查询返回的原始日志条数，最大值为100（必填）</p>
    */
   Limit: number
   /**
-   * 页数，第几页
+   * <p>页数，第几页（注意：该字段已废弃！）</p>
    */
   Page: number
   /**
-   * 查询语句，参考控制台请求参数，语句长度最大为4096（必填）
+   * <p>查询语句，参考控制台请求参数，语句长度最大为4096（必填）</p>
    */
   Query: string
   /**
-   * 结束时间（必填）
+   * <p>结束时间（必填）</p>
    */
   EndTime: string
   /**
-   * 项目ID（必填）
+   * <p>项目ID（必填）</p>
    */
   ID: number
   /**
-   * 聚合字段
+   * <p>聚合字段</p>
    */
   GroupField: string
 }
@@ -5686,7 +5686,7 @@ export interface DescribeProjectsResponse {
  */
 export interface DescribeDataReportCountV2Response {
   /**
-   * 返回值
+   * <p>返回值</p>
    */
   Result?: string
   /**
@@ -5878,7 +5878,7 @@ export interface DescribeRumLogListRequest {
  */
 export interface DescribeRumGroupLogV2Response {
   /**
-   * Query result in JSON string format
+   * <p>Query result in JSON string format</p>
    */
   Result?: string
   /**
@@ -6740,35 +6740,35 @@ export interface Filters {
  */
 export interface DescribeRumGroupLogV2Request {
   /**
-   * 排序方式 desc asc（必填）
+   * <p>排序方式 desc asc（必填）</p>
    */
   OrderBy: string
   /**
-   * 开始时间（必填）
+   * <p>开始时间（必填）</p>
    */
   StartTime: number
   /**
-   * 单次查询返回的原始日志条数，最大值为100（必填）
+   * <p>单次查询返回的原始日志条数，最大值为100（必填）</p>
    */
   Limit: number
   /**
-   * 过滤条件
+   * <p>过滤条件</p>
    */
   Filter: string
   /**
-   * 结束时间（必填）
+   * <p>结束时间（必填）</p>
    */
   EndTime: number
   /**
-   * 项目ID（必填）
+   * <p>项目ID（必填）</p>
    */
   ID: number
   /**
-   * 聚合字段
+   * <p>聚合字段</p>
    */
   Label: string
   /**
-   * 页数，第几页
+   * <p>页数，第几页（注意：该字段已废弃！）</p>
    */
   Last?: number
 }

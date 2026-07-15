@@ -2470,11 +2470,11 @@ export interface ModifyOrganizationBusinessInfoResponse {
    */
   UnfinishedCount?: number
   /**
-   * <p>SaaS 企业下未完结合同的 flowId 列表。</p>
+   * <p>SaaS 企业下未完结合同的 flowId 列表。注:<code>SaaS企业下的合同ID可能无法查询，可通知子客企业去处理相应的合同</code></p>
    */
   FlowIds?: Array<string>
   /**
-   * <p>渠道子客企业下未完结合同的 flowId 列表。</p>
+   * <p>渠道子客企业下未完结合同的 flowId 列表。注：<code>子客企业在其他渠道下的合同ID可能无法查询，可通知子客企业去处理其他渠道下相应的合同</code></p>
    */
   ChannelFlowIds?: Array<string>
   /**
@@ -7044,6 +7044,10 @@ export interface ModifyOrganizationBusinessInfoRequest {
    * <p>变更后的最新工商登记法人姓名。<br>仅当法人发生变更时传入，未变更则不传（系统自动沿用当前法人姓名）。</p>
    */
   LegalName?: string
+  /**
+   * <p>新法人的手机号。<br>仅当法人发生变更时传入，用于向新法人发送短信通知。<br>需为合法的手机号或固定电话格式。</p>
+   */
+  NewLegalMobile?: string
 }
 
 /**

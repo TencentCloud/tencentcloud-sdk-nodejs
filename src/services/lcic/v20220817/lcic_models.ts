@@ -956,6 +956,20 @@ export interface BatchCreateRoomResponse {
 }
 
 /**
+ * DescribeEditVersions请求参数结构体
+ */
+export interface DescribeEditVersionsRequest {
+  /**
+   * <p>应用ID</p>
+   */
+  SdkAppId: number
+  /**
+   * <p>课堂ID</p>
+   */
+  RoomId: number
+}
+
+/**
  * LoginUserWithRoom请求参数结构体
  */
 export interface LoginUserWithRoomRequest {
@@ -1005,6 +1019,69 @@ export interface DescribeMarqueeRequest {
    * 房间号
    */
   RoomId: number
+}
+
+/**
+ * SetWatermark请求参数结构体
+ */
+export interface SetWatermarkRequest {
+  /**
+   * 低代码互动课堂的SdkAppId。
+
+   */
+  SdkAppId: number
+  /**
+   * 老师视频区域的水印参数地址，设置为空字符串表示删除
+   */
+  TeacherUrl?: string
+  /**
+   * 白板视频区域的水印参数地址，设置为空字符串表示删除
+   */
+  BoardUrl?: string
+  /**
+   * 视频默认图片（在没有视频流的时候显示），设置为空字符串表示删除
+   */
+  VideoUrl?: string
+  /**
+   * 白板区域水印的宽度，取值:0-100，默认为0，表示区域X方向的百分比
+   */
+  BoardW?: number
+  /**
+   * 白板区域水印的高度，取值:0-100，默认为0, 表示区域Y方向的百分比
+   */
+  BoardH?: number
+  /**
+   * 白板区域水印X偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
+   */
+  BoardX?: number
+  /**
+   * 白板区域水印Y偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
+   */
+  BoardY?: number
+  /**
+   * 老师视频区域水印的宽度，取值:0-100，默认为0，表示区域X方向的百分比
+   */
+  TeacherW?: number
+  /**
+   * 老师视频区域水印的高度，取值:0-100，默认为0, 表示区域Y方向的百分比
+   */
+  TeacherH?: number
+  /**
+   * 老师视频区域水印X偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
+   */
+  TeacherX?: number
+  /**
+   * 老师视频区域水印Y偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
+   */
+  TeacherY?: number
+  /**
+   * 文字水印内容，设置为空字符串表示删除
+   */
+  Text?: string
+  /**
+   * 文字水印颜色
+   */
+  TextColor?: string
 }
 
 /**
@@ -2169,6 +2246,28 @@ export interface DescribeUserResponse {
 }
 
 /**
+ * GetEditVersionToken请求参数结构体
+ */
+export interface GetEditVersionTokenRequest {
+  /**
+   * <p>实时互动-教育版的SdkAppId。</p>
+   */
+  SdkAppId: number
+  /**
+   * <p>课堂ID</p>
+   */
+  RoomId: number
+  /**
+   * <p>用户ID</p>
+   */
+  UserId: string
+  /**
+   * <p>token过期时间，0代表无过期时间，单位毫秒。</p>
+   */
+  ExpireSeconds?: number
+}
+
+/**
  * DescribeScoreList返回参数结构体
  */
 export interface DescribeScoreListResponse {
@@ -2456,6 +2555,52 @@ export interface BatchUserInfo {
    * 用户在客户系统的Id。 若用户注册时该字段为空，则默认为 UserId 值一致。
    */
   OriginId?: string
+}
+
+/**
+ * 编辑版本信息
+ */
+export interface EditVersions {
+  /**
+   * <p>版本号</p><p>取值范围：[0, 100]</p><p>默认值：0</p>
+   */
+  Version?: number
+  /**
+   * <p>版本状态</p><p>枚举值：</p><ul><li>READY： 已完成</li><li>FAILED： 失败</li><li>PROCESSING： 进行中</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>是否是主版本</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul>
+   */
+  IsMain?: boolean
+  /**
+   * <p>是否源头版本</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul>
+   */
+  IsSource?: boolean
+  /**
+   * <p>版本时长</p><p>取值范围：[0, 1000000]</p><p>单位：秒</p>
+   */
+  KeepDurationSec?: number
+  /**
+   * <p>创建时间</p><p>取值范围：[0, 10000000]</p>
+   */
+  CreatedAtMs?: number
+  /**
+   * <p>创建用户id</p>
+   */
+  CreatorUserId?: string
+  /**
+   * <p>失败原因</p><p>默认值：空</p><p>仅失败才会有原因</p>
+   */
+  FailReason?: string
+  /**
+   * <p>更新时间</p><p>取值范围：[0, 100000]</p>
+   */
+  UpdatedAtMs?: number
+  /**
+   * <p>版本名字</p>
+   */
+  VersionName?: string
 }
 
 /**
@@ -2786,6 +2931,32 @@ export interface SendRoomNotificationMessageRequest {
 }
 
 /**
+ * GetEditVersionToken返回参数结构体
+ */
+export interface GetEditVersionTokenResponse {
+  /**
+   * <p>信令回放剪辑页面token</p>
+   */
+  Token?: string
+  /**
+   * <p>课堂ID</p>
+   */
+  RoomId?: number
+  /**
+   * <p>用户ID</p>
+   */
+  UserId?: string
+  /**
+   * <p>版本号，预留</p><p>默认值：0</p>
+   */
+  VersionNo?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSdkAppIdUsers返回参数结构体
  */
 export interface DescribeSdkAppIdUsersResponse {
@@ -3039,6 +3210,54 @@ export interface EndRoomRequest {
    * 课堂ID
    */
   RoomId: number
+}
+
+/**
+ * SetMainEditVersion返回参数结构体
+ */
+export interface SetMainEditVersionResponse {
+  /**
+   * <p>课堂ID</p>
+   */
+  ClassId?: number
+  /**
+   * <p>上一个主版本的版本号</p>
+   */
+  PreviousMainVersion?: number
+  /**
+   * <p>当前生效中的主版本号</p>
+   */
+  MainVersion?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeEditVersions返回参数结构体
+ */
+export interface DescribeEditVersionsResponse {
+  /**
+   * <p>课堂ID</p>
+   */
+  ClassId?: number
+  /**
+   * <p>当前课堂最新的版本号</p>
+   */
+  LatestVersionNo?: number
+  /**
+   * <p>当前课堂设置的主版本号</p>
+   */
+  MainVersion?: number
+  /**
+   * <p>当前课堂所有版本信息</p>
+   */
+  Versions?: Array<EditVersions>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3744,66 +3963,25 @@ export interface KickUserFromRoomRequest {
 }
 
 /**
- * SetWatermark请求参数结构体
+ * SetMainEditVersion请求参数结构体
  */
-export interface SetWatermarkRequest {
+export interface SetMainEditVersionRequest {
   /**
-   * 低代码互动课堂的SdkAppId。
-
+   * <p>应用ID</p>
    */
   SdkAppId: number
   /**
-   * 老师视频区域的水印参数地址，设置为空字符串表示删除
+   * <p>课堂ID</p>
    */
-  TeacherUrl?: string
+  RoomId: number
   /**
-   * 白板视频区域的水印参数地址，设置为空字符串表示删除
+   * <p>版本号，可通过DescribeEditVersion接口获取当前课堂全部版本，来查看到版本号。</p>
    */
-  BoardUrl?: string
+  VersionNo: number
   /**
-   * 视频默认图片（在没有视频流的时候显示），设置为空字符串表示删除
+   * <p>操作者ID</p>
    */
-  VideoUrl?: string
-  /**
-   * 白板区域水印的宽度，取值:0-100，默认为0，表示区域X方向的百分比
-   */
-  BoardW?: number
-  /**
-   * 白板区域水印的高度，取值:0-100，默认为0, 表示区域Y方向的百分比
-   */
-  BoardH?: number
-  /**
-   * 白板区域水印X偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
-   */
-  BoardX?: number
-  /**
-   * 白板区域水印Y偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
-   */
-  BoardY?: number
-  /**
-   * 老师视频区域水印的宽度，取值:0-100，默认为0，表示区域X方向的百分比
-   */
-  TeacherW?: number
-  /**
-   * 老师视频区域水印的高度，取值:0-100，默认为0, 表示区域Y方向的百分比
-   */
-  TeacherH?: number
-  /**
-   * 老师视频区域水印X偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
-   */
-  TeacherX?: number
-  /**
-   * 老师视频区域水印Y偏移, 取值:0-100, 表示区域X方向的百分比。比如50，则表示位于X轴中间
-   */
-  TeacherY?: number
-  /**
-   * 文字水印内容，设置为空字符串表示删除
-   */
-  Text?: string
-  /**
-   * 文字水印颜色
-   */
-  TextColor?: string
+  Operator?: string
 }
 
 /**

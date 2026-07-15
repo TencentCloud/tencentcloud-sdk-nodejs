@@ -1295,7 +1295,7 @@ export interface DeleteAccountUserRequest {
   /**
    * 配置 mongouser 对应的密码。mongouser为系统默认账号，输入其对应的密码。
    */
-  MongoUserPassword: string
+  MongoUserPassword?: string
 }
 
 /**

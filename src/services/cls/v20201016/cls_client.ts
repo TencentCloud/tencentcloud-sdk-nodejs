@@ -27,6 +27,7 @@ import {
   DynamicIndex,
   CreateRebuildIndexTaskResponse,
   CreateSearchViewRequest,
+  DescribeAgentConfigsResponse,
   CheckFunctionRequest,
   ModifyNetworkApplicationResponse,
   NetInfo,
@@ -55,6 +56,7 @@ import {
   ScheduledSqlTaskInfo,
   CreateDlcDeliverResponse,
   CreateConsumerGroupRequest,
+  AgentTopicInfo,
   Label,
   ModifyMachineGroupResponse,
   RuleInfo,
@@ -101,6 +103,7 @@ import {
   Instance,
   DescribeAlarmNoticesResponse,
   DeleteDataTransformRequest,
+  DescribeRemoteWriteTasksResponse,
   AddMachineGroupInfoRequest,
   DescribeKafkaConsumerGroupListResponse,
   CreateHostMetricConfigResponse,
@@ -125,9 +128,11 @@ import {
   ModifyShipperRequest,
   MonitorNoticeRule,
   DescribeKafkaConsumerPreviewRequest,
+  DescribeAgentApplicationsRequest,
   CreateDeliverCloudFunctionResponse,
   DescribeDashboardsResponse,
   CompressInfo,
+  ModifyRemoteWriteTaskResponse,
   CreateConfigResponse,
   CreateCloudProductLogCollectionResponse,
   SearchCosRechargeInfoResponse,
@@ -169,6 +174,7 @@ import {
   DeleteAlarmShieldRequest,
   ModifyEsRechargeRequest,
   CreateNetworkApplicationRequest,
+  ModifyS3RechargeResponse,
   DeleteLogsetResponse,
   TopicPartitionOffsetInfo,
   DeleteDlcDeliverResponse,
@@ -192,7 +198,7 @@ import {
   QueryMetricResponse,
   DeleteLogsetRequest,
   OpenKafkaConsumerResponse,
-  DeleteSearchViewResponse,
+  AlarmTargetInfo,
   CreateSplunkDeliverResponse,
   FilePathInfo,
   ModifyScheduledSqlResponse,
@@ -214,7 +220,7 @@ import {
   SearchDashboardSubscribeRequest,
   DescribePartitionsResponse,
   ModifyHostMetricConfigResponse,
-  DescribeMetricCorrectDimensionResponse,
+  DescribeConsumerOffsetsRequest,
   ModifyAlarmNoticeRequest,
   ToolCallFunction,
   CreateAlarmRequest,
@@ -240,11 +246,13 @@ import {
   NoticeContentInfo,
   ModifyMetricConfigResponse,
   DeleteSearchViewRequest,
+  SearchS3RechargeInfoRequest,
   DescribeConsumerResponse,
   EstimateRebuildIndexTaskRequest,
   EsTimeInfo,
   DescribeClusterBaseMetricConfigsResponse,
   ModifyKafkaRechargeRequest,
+  DescribeS3RechargesRequest,
   CreateIndexResponse,
   ModifyDashboardSubscribeResponse,
   DescribeSplunkPreviewRequest,
@@ -258,10 +266,12 @@ import {
   Delta,
   DeleteIndexResponse,
   AlarmAnalysisConfig,
+  CreateRemoteWriteTaskRequest,
   SearchLogErrors,
   DescribeSplunkDeliversRequest,
   DeleteScheduledSqlRequest,
   ModifyKafkaConsumerRequest,
+  DescribeS3RechargesResponse,
   ModifyRecordingRuleYamlTaskRequest,
   DescribeConsumerGroupsResponse,
   NoticeContent,
@@ -271,6 +281,7 @@ import {
   CreateConsumerRequest,
   DeleteHostMetricConfigRequest,
   DeleteMetricConfigResponse,
+  DescribeRemoteWriteTasksRequest,
   DashboardInfo,
   DataTransformTaskInfo,
   NoticeRule,
@@ -281,6 +292,7 @@ import {
   DescribeLogContextResponse,
   ModifyConsoleSharingResponse,
   EstimateRebuildIndexTaskResponse,
+  LogConfigInfo,
   DeleteDashboardRequest,
   CreateCosRechargeResponse,
   NoticeReceiver,
@@ -288,6 +300,7 @@ import {
   MultiCondition,
   Filter,
   SearchViewInfo,
+  RemoteWriteInfo,
   ModifyLogsetResponse,
   DlcFailHandle,
   CollectConfig,
@@ -315,7 +328,9 @@ import {
   ModifyDashboardRequest,
   SendConsumerHeartbeatResponse,
   DeleteHostMetricConfigResponse,
+  EsRechargeInfo,
   GetClsServiceResponse,
+  DescribeAgentApplicationsResponse,
   Choice,
   DeleteMetricConfigRequest,
   CreateEsRechargeRequest,
@@ -324,7 +339,9 @@ import {
   DlcFailTableInfo,
   DescribeDashboardsRequest,
   DeleteNoticeContentResponse,
+  CreateAgentApplicationResponse,
   ContainerStdoutInfo,
+  ModifyS3RechargeRequest,
   MetricYamlSpec,
   DeleteCloudProductLogCollectionRequest,
   DescribeKafkaConsumerResponse,
@@ -359,7 +376,7 @@ import {
   DescribeConfigMachineGroupsResponse,
   ModifySplunkDeliverRequest,
   HighLightItem,
-  EsRechargeInfo,
+  DeleteAgentApplicationResponse,
   CreateMetricSubscribeRequest,
   NoticeContentTemplate,
   LogItem,
@@ -378,17 +395,20 @@ import {
   MetricSubscribeInfo,
   CreateNetworkApplicationResponse,
   DeleteIndexRequest,
-  DescribeRecordingRuleTaskRequest,
+  DeleteAgentApplicationRequest,
   DescribeAlertRecordHistoryRequest,
   ChatCompletionsRequest,
   DeleteNetworkApplicationRequest,
+  CreateS3RechargeResponse,
   LogsetInfo,
   CreateExportRequest,
   DashboardTemplateVariable,
   CancelRebuildIndexTaskRequest,
   DescribeConsoleSharingListRequest,
+  RecordingRuleTaskInfo,
   DescribeLogsetsResponse,
   DescribeKafkaConsumerPreviewResponse,
+  RemoteWriteAuthInfo,
   NetworkApplicationInfo,
   ModifySearchViewRequest,
   WebCallback,
@@ -405,10 +425,12 @@ import {
   DeleteCloudProductLogCollectionResponse,
   ExportInfo,
   MetricConfigLabel,
+  DeleteS3RechargeRequest,
   DashboardSubscribeInfo,
   DescribeWebCallbacksResponse,
   DeleteExportRequest,
   ModifyKafkaConsumerGroupOffsetRequest,
+  ModifyRemoteWriteTaskRequest,
   DescribeConsolesRequest,
   AlarmShieldInfo,
   CreateConsoleResponse,
@@ -428,8 +450,11 @@ import {
   DescribeEsRechargesRequest,
   DescribeAlarmNoticesRequest,
   DescribeEsRechargePreviewResponse,
+  DeleteS3RechargeResponse,
   MergePartitionRequest,
+  DescribeRecordingRuleTaskRequest,
   MonitorTime,
+  ModifyAgentApplicationResponse,
   ApplyConfigToMachineGroupRequest,
   DescribeMachineGroupConfigsResponse,
   DescribeConfigExtrasRequest,
@@ -455,7 +480,7 @@ import {
   DeleteRecordingRuleYamlTaskResponse,
   RuleTagInfo,
   OpenClawServiceRequest,
-  AlarmTargetInfo,
+  CreateAgentApplicationRequest,
   SearchCosRechargeInfoRequest,
   DescribeNoticeContentsRequest,
   DescribeDlcDeliversRequest,
@@ -463,18 +488,22 @@ import {
   GetClsServiceRequest,
   DescribeShipperTasksRequest,
   CreateCloudProductLogCollectionRequest,
+  S3RechargeInfo,
   DescribeIndexRequest,
   DescribeKafkaConsumerGroupListRequest,
   CreateConsoleRequest,
   DeleteMachineGroupInfoRequest,
   ModifyNoticeContentResponse,
+  ServiceLogConfigInfo,
   DeleteWebCallbackResponse,
   DescribeSearchViewsResponse,
+  CreateS3RechargeRequest,
   DescribeAlarmShieldsRequest,
   CreateRecordingRuleYamlTaskResponse,
   DescribeTopicsResponse,
   EventLog,
   ConsumerGroupInfo,
+  CreateRemoteWriteTaskResponse,
   DescribeRebuildIndexTasksRequest,
   DlcDeliverInfo,
   DescribeShippersRequest,
@@ -504,6 +533,7 @@ import {
   CreateSearchViewResponse,
   PartitionOffsetInfo,
   KafkaConsumerContent,
+  DeleteSearchViewResponse,
   DeleteConfigRequest,
   AnalysisDimensional,
   DeleteWebCallbackRequest,
@@ -513,12 +543,14 @@ import {
   AlarmNoticeDeliverConfig,
   DeleteConfigExtraRequest,
   DlcTableInfo,
+  DeleteRemoteWriteTaskRequest,
   ModifyKafkaConsumerGroupOffsetResponse,
   CreateShipperRequest,
   InstanceData,
   HostMetricConfig,
   CreateShipperResponse,
   ModifyCloudProductLogCollectionRequest,
+  DeleteRemoteWriteTaskResponse,
   OpenClawServiceResponse,
   Column,
   DescribeDataTransformInfoRequest,
@@ -530,6 +562,7 @@ import {
   DeleteSplunkDeliverRequest,
   ModifyEsRechargeResponse,
   ModifyConsumerGroupResponse,
+  SearchS3RechargeInfoResponse,
   CreateKafkaRechargeRequest,
   DeleteKafkaRechargeRequest,
   DlcInfo,
@@ -539,7 +572,8 @@ import {
   AlarmNotice,
   ModifyNoticeContentRequest,
   ModifyKafkaRechargeResponse,
-  RecordingRuleTaskInfo,
+  MetricLabel,
+  DescribeAgentConfigsRequest,
   MetricSpec,
   DescribeMachinesResponse,
   DeleteEsRechargeRequest,
@@ -551,14 +585,14 @@ import {
   DescribeRecordingRuleTaskResponse,
   AddMachineGroupInfoResponse,
   UserKafkaMeta,
-  MetricLabel,
+  AgentApplicationInfo,
   ModifyRecordingRuleTaskRequest,
   DescribeMetricSubscribePreviewResponse,
   DescribeScheduledSqlInfoRequest,
   DeleteConsumerGroupResponse,
   SearchLogRequest,
   DescribeKafkaConsumerGroupDetailRequest,
-  DescribeConsumerOffsetsRequest,
+  DescribeMetricCorrectDimensionResponse,
   DeleteConsoleRequest,
   ModifyConfigExtraRequest,
   CreateDataTransformRequest,
@@ -567,6 +601,7 @@ import {
   MetadataItem,
   ParquetInfo,
   ModifyRecordingRuleTaskResponse,
+  ModifyAgentApplicationRequest,
   DescribeConsolesResponse,
   ConsoleSharingParam,
   SendConsumerHeartbeatRequest,
@@ -686,6 +721,16 @@ API 中 Region 填写任意一个地域均可，建议使用广州(ap-guangzhou)
   }
 
   /**
+   * 该接口用于获取通知渠道组列表
+   */
+  async DescribeAlarmNotices(
+    req: DescribeAlarmNoticesRequest,
+    cb?: (error: string, rep: DescribeAlarmNoticesResponse) => void
+  ): Promise<DescribeAlarmNoticesResponse> {
+    return this.request("DescribeAlarmNotices", req, cb)
+  }
+
+  /**
      * 查询指定时刻指标的最新值。
 如果该时刻向前推5分钟内均无指标数据，则无相应的查询结果。
      */
@@ -734,6 +779,16 @@ API 中 Region 填写任意一个地域均可，建议使用广州(ap-guangzhou)
     cb?: (error: string, rep: CreateDeliverCloudFunctionResponse) => void
   ): Promise<CreateDeliverCloudFunctionResponse> {
     return this.request("CreateDeliverCloudFunction", req, cb)
+  }
+
+  /**
+   * 本接口用于获取cos导入配置
+   */
+  async DescribeS3Recharges(
+    req: DescribeS3RechargesRequest,
+    cb?: (error: string, rep: DescribeS3RechargesResponse) => void
+  ): Promise<DescribeS3RechargesResponse> {
+    return this.request("DescribeS3Recharges", req, cb)
   }
 
   /**
@@ -928,6 +983,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
+   * 本接口用于修改aws导入任务
+   */
+  async ModifyS3Recharge(
+    req: ModifyS3RechargeRequest,
+    cb?: (error: string, rep: ModifyS3RechargeResponse) => void
+  ): Promise<ModifyS3RechargeResponse> {
+    return this.request("ModifyS3Recharge", req, cb)
+  }
+
+  /**
    * 取消重建索引任务
    */
   async CancelRebuildIndexTask(
@@ -1088,6 +1153,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
+   * 本接口用于预览cos导入信息
+   */
+  async SearchCosRechargeInfo(
+    req: SearchCosRechargeInfoRequest,
+    cb?: (error: string, rep: SearchCosRechargeInfoResponse) => void
+  ): Promise<SearchCosRechargeInfoResponse> {
+    return this.request("SearchCosRechargeInfo", req, cb)
+  }
+
+  /**
    * 本接口用于修改索引配置，该接口除受默认接口请求频率限制外，针对单个日志主题，并发数不能超过1，即同一时间同一个日志主题只能有一个正在执行的索引配置修改操作。
    */
   async ModifyIndex(
@@ -1208,13 +1283,13 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
-   * 该接口用于创建通知内容。
+   * 本接口用于删除Agent应用
    */
-  async CreateNoticeContent(
-    req: CreateNoticeContentRequest,
-    cb?: (error: string, rep: CreateNoticeContentResponse) => void
-  ): Promise<CreateNoticeContentResponse> {
-    return this.request("CreateNoticeContent", req, cb)
+  async DeleteAgentApplication(
+    req: DeleteAgentApplicationRequest,
+    cb?: (error: string, rep: DeleteAgentApplicationResponse) => void
+  ): Promise<DeleteAgentApplicationResponse> {
+    return this.request("DeleteAgentApplication", req, cb)
   }
 
   /**
@@ -1305,6 +1380,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: DescribeKafkaRechargesResponse) => void
   ): Promise<DescribeKafkaRechargesResponse> {
     return this.request("DescribeKafkaRecharges", req, cb)
+  }
+
+  /**
+   * 删除RemoteWrite任务
+   */
+  async DeleteRemoteWriteTask(
+    req: DeleteRemoteWriteTaskRequest,
+    cb?: (error: string, rep: DeleteRemoteWriteTaskResponse) => void
+  ): Promise<DeleteRemoteWriteTaskResponse> {
+    return this.request("DeleteRemoteWriteTask", req, cb)
   }
 
   /**
@@ -1548,6 +1633,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
+   * 修改采集规则配置
+   */
+  async ModifyConfig(
+    req: ModifyConfigRequest,
+    cb?: (error: string, rep: ModifyConfigResponse) => void
+  ): Promise<ModifyConfigResponse> {
+    return this.request("ModifyConfig", req, cb)
+  }
+
+  /**
    * 获取告警屏蔽配置规则
    */
   async DescribeAlarmShields(
@@ -1668,13 +1763,13 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
-   * 本接口用于预览cos导入信息
+   * 创建remote write投递任务
    */
-  async SearchCosRechargeInfo(
-    req: SearchCosRechargeInfoRequest,
-    cb?: (error: string, rep: SearchCosRechargeInfoResponse) => void
-  ): Promise<SearchCosRechargeInfoResponse> {
-    return this.request("SearchCosRechargeInfo", req, cb)
+  async CreateRemoteWriteTask(
+    req: CreateRemoteWriteTaskRequest,
+    cb?: (error: string, rep: CreateRemoteWriteTaskResponse) => void
+  ): Promise<CreateRemoteWriteTaskResponse> {
+    return this.request("CreateRemoteWriteTask", req, cb)
   }
 
   /**
@@ -1791,6 +1886,18 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
+     * 本接口用于检索分析日志，使用该接口时请注意如下事项：
+1. 该接口除受默认接口请求频率限制外，针对单个日志主题，查询并发数不能超过15。
+2. API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Accept-Encoding:gzip）。
+     */
+  async SearchLog(
+    req: SearchLogRequest,
+    cb?: (error: string, rep: SearchLogResponse) => void
+  ): Promise<SearchLogResponse> {
+    return this.request("SearchLog", req, cb)
+  }
+
+  /**
    * 本接口用于修改日志或指标主题。
    */
   async ModifyTopic(
@@ -1861,13 +1968,13 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
-   * 该接口用于获取通知渠道组列表
+   * 本接口用于删除日志主题的索引配置，删除索引配置后将无法检索和查询采集到的日志。
    */
-  async DescribeAlarmNotices(
-    req: DescribeAlarmNoticesRequest,
-    cb?: (error: string, rep: DescribeAlarmNoticesResponse) => void
-  ): Promise<DescribeAlarmNoticesResponse> {
-    return this.request("DescribeAlarmNotices", req, cb)
+  async DeleteIndex(
+    req: DeleteIndexRequest,
+    cb?: (error: string, rep: DeleteIndexResponse) => void
+  ): Promise<DeleteIndexResponse> {
+    return this.request("DeleteIndex", req, cb)
   }
 
   /**
@@ -1921,15 +2028,13 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
-     * 本接口用于检索分析日志，使用该接口时请注意如下事项：
-1. 该接口除受默认接口请求频率限制外，针对单个日志主题，查询并发数不能超过15。
-2. API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Accept-Encoding:gzip）。
-     */
-  async SearchLog(
-    req: SearchLogRequest,
-    cb?: (error: string, rep: SearchLogResponse) => void
-  ): Promise<SearchLogResponse> {
-    return this.request("SearchLog", req, cb)
+   * 本接口用于修改投递Ckafka任务
+   */
+  async ModifyConsumer(
+    req: ModifyConsumerRequest,
+    cb?: (error: string, rep: ModifyConsumerResponse) => void
+  ): Promise<ModifyConsumerResponse> {
+    return this.request("ModifyConsumer", req, cb)
   }
 
   /**
@@ -1943,6 +2048,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
+   * 获取agent对应的采集配置
+   */
+  async DescribeAgentConfigs(
+    req: DescribeAgentConfigsRequest,
+    cb?: (error: string, rep: DescribeAgentConfigsResponse) => void
+  ): Promise<DescribeAgentConfigsResponse> {
+    return this.request("DescribeAgentConfigs", req, cb)
+  }
+
+  /**
    * 删除投递COS任务
    */
   async DeleteShipper(
@@ -1950,6 +2065,26 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: DeleteShipperResponse) => void
   ): Promise<DeleteShipperResponse> {
     return this.request("DeleteShipper", req, cb)
+  }
+
+  /**
+   * 该接口用于修改告警渠道回调配置。
+   */
+  async ModifyWebCallback(
+    req: ModifyWebCallbackRequest,
+    cb?: (error: string, rep: ModifyWebCallbackResponse) => void
+  ): Promise<ModifyWebCallbackResponse> {
+    return this.request("ModifyWebCallback", req, cb)
+  }
+
+  /**
+   * 本接口用于预览aws导入信息
+   */
+  async SearchS3RechargeInfo(
+    req: SearchS3RechargeInfoRequest,
+    cb?: (error: string, rep: SearchS3RechargeInfoResponse) => void
+  ): Promise<SearchS3RechargeInfoResponse> {
+    return this.request("SearchS3RechargeInfo", req, cb)
   }
 
   /**
@@ -1980,6 +2115,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: DescribeConfigMachineGroupsResponse) => void
   ): Promise<DescribeConfigMachineGroupsResponse> {
     return this.request("DescribeConfigMachineGroups", req, cb)
+  }
+
+  /**
+   * 本接口用于创建aws导入任务
+   */
+  async CreateS3Recharge(
+    req: CreateS3RechargeRequest,
+    cb?: (error: string, rep: CreateS3RechargeResponse) => void
+  ): Promise<CreateS3RechargeResponse> {
+    return this.request("CreateS3Recharge", req, cb)
   }
 
   /**
@@ -2085,13 +2230,13 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
-   * 该接口用于修改告警渠道回调配置。
+   * 本接口用于删除aws导入任务
    */
-  async ModifyWebCallback(
-    req: ModifyWebCallbackRequest,
-    cb?: (error: string, rep: ModifyWebCallbackResponse) => void
-  ): Promise<ModifyWebCallbackResponse> {
-    return this.request("ModifyWebCallback", req, cb)
+  async DeleteS3Recharge(
+    req: DeleteS3RechargeRequest,
+    cb?: (error: string, rep: DeleteS3RechargeResponse) => void
+  ): Promise<DeleteS3RechargeResponse> {
+    return this.request("DeleteS3Recharge", req, cb)
   }
 
   /**
@@ -2236,6 +2381,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
+   * 本接口用于创建Agent应用
+   */
+  async CreateAgentApplication(
+    req: CreateAgentApplicationRequest,
+    cb?: (error: string, rep: CreateAgentApplicationResponse) => void
+  ): Promise<CreateAgentApplicationResponse> {
+    return this.request("CreateAgentApplication", req, cb)
+  }
+
+  /**
    * 获取指标订阅配置
    */
   async DescribeMetricSubscribes(
@@ -2243,6 +2398,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: DescribeMetricSubscribesResponse) => void
   ): Promise<DescribeMetricSubscribesResponse> {
     return this.request("DescribeMetricSubscribes", req, cb)
+  }
+
+  /**
+   * 本接口用于修改Agent应用
+   */
+  async ModifyAgentApplication(
+    req: ModifyAgentApplicationRequest,
+    cb?: (error: string, rep: ModifyAgentApplicationResponse) => void
+  ): Promise<ModifyAgentApplicationResponse> {
+    return this.request("ModifyAgentApplication", req, cb)
   }
 
   /**
@@ -2273,6 +2438,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: DeleteNetworkApplicationResponse) => void
   ): Promise<DeleteNetworkApplicationResponse> {
     return this.request("DeleteNetworkApplication", req, cb)
+  }
+
+  /**
+   * 获取Agent应用列表
+   */
+  async DescribeAgentApplications(
+    req: DescribeAgentApplicationsRequest,
+    cb?: (error: string, rep: DescribeAgentApplicationsResponse) => void
+  ): Promise<DescribeAgentApplicationsResponse> {
+    return this.request("DescribeAgentApplications", req, cb)
   }
 
   /**
@@ -2316,13 +2491,13 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
   }
 
   /**
-   * 修改采集规则配置
+   * 本接口获取RemoteWrite投递任务列表
    */
-  async ModifyConfig(
-    req: ModifyConfigRequest,
-    cb?: (error: string, rep: ModifyConfigResponse) => void
-  ): Promise<ModifyConfigResponse> {
-    return this.request("ModifyConfig", req, cb)
+  async DescribeRemoteWriteTasks(
+    req: DescribeRemoteWriteTasksRequest,
+    cb?: (error: string, rep: DescribeRemoteWriteTasksResponse) => void
+  ): Promise<DescribeRemoteWriteTasksResponse> {
+    return this.request("DescribeRemoteWriteTasks", req, cb)
   }
 
   /**
@@ -2498,13 +2673,13 @@ cls.pb.cc cls.pb.h cls.proto
   }
 
   /**
-   * 本接口用于修改投递Ckafka任务
+   * 该接口用于创建通知内容。
    */
-  async ModifyConsumer(
-    req: ModifyConsumerRequest,
-    cb?: (error: string, rep: ModifyConsumerResponse) => void
-  ): Promise<ModifyConsumerResponse> {
-    return this.request("ModifyConsumer", req, cb)
+  async CreateNoticeContent(
+    req: CreateNoticeContentRequest,
+    cb?: (error: string, rep: CreateNoticeContentResponse) => void
+  ): Promise<CreateNoticeContentResponse> {
+    return this.request("CreateNoticeContent", req, cb)
   }
 
   /**
@@ -2599,16 +2774,6 @@ API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Ac
   }
 
   /**
-   * 本接口用于删除日志主题的索引配置，删除索引配置后将无法检索和查询采集到的日志。
-   */
-  async DeleteIndex(
-    req: DeleteIndexRequest,
-    cb?: (error: string, rep: DeleteIndexResponse) => void
-  ): Promise<DeleteIndexResponse> {
-    return this.request("DeleteIndex", req, cb)
-  }
-
-  /**
    * 创建指标采集配置
    */
   async ModifyMetricConfig(
@@ -2666,5 +2831,15 @@ API返回数据包最大49MB，建议启用 gzip 压缩（HTTP Request Header Ac
     cb?: (error: string, rep: DeleteTopicResponse) => void
   ): Promise<DeleteTopicResponse> {
     return this.request("DeleteTopic", req, cb)
+  }
+
+  /**
+   * 修改RemoteWrite任务
+   */
+  async ModifyRemoteWriteTask(
+    req: ModifyRemoteWriteTaskRequest,
+    cb?: (error: string, rep: ModifyRemoteWriteTaskResponse) => void
+  ): Promise<ModifyRemoteWriteTaskResponse> {
+    return this.request("ModifyRemoteWriteTask", req, cb)
   }
 }

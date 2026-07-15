@@ -919,7 +919,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（DescribleTasks）用于查询任务列表
+   * 该接口（DescribeTasks）用于查询任务列表
    */
   async DescribeTasks(
     req: DescribeTasksRequest,

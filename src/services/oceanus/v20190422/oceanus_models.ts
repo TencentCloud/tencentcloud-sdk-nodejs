@@ -667,6 +667,24 @@ export interface ClusterBucketInfo {
 }
 
 /**
+ * ScaleOceanusCluster请求参数结构体
+ */
+export interface ScaleOceanusClusterRequest {
+  /**
+   * <p>集群ID</p>
+   */
+  ClusterId: string
+  /**
+   * <p>集群的目标CU，需大于12CU，并且集群CU需要满足 12 + 7*n (n&gt;=0)</p>
+   */
+  NewCU: number
+  /**
+   * <p>扩容集群或者缩容集群</p><p>枚举值：</p><ul><li>ScaleDown： 缩容集群</li><li>ScaleUp： 扩容集群</li></ul><p>默认值：ScaleUp</p>
+   */
+  ScaleMode?: string
+}
+
+/**
  * 事件信息
  */
 export interface JobEventInfo {
@@ -817,6 +835,20 @@ export interface DescribeJobConfigsRequest {
    * true 表示只展示草稿
    */
   OnlyDraft?: boolean
+  /**
+   * 工作空间 SerialId
+   */
+  WorkSpaceId?: string
+}
+
+/**
+ * StopJobs请求参数结构体
+ */
+export interface StopJobsRequest {
+  /**
+   * 批量停止作业的描述信息
+   */
+  StopJobDescriptions: Array<StopJobDescription>
   /**
    * 工作空间 SerialId
    */
@@ -1243,6 +1275,20 @@ export interface ResourceLoc {
 }
 
 /**
+ * RenewOceanusCluster返回参数结构体
+ */
+export interface RenewOceanusClusterResponse {
+  /**
+   * <p>参数值success代表操作执行成功</p>
+   */
+  TaskExecResult?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 云联网描述信息
  */
 export interface CCN {
@@ -1301,24 +1347,17 @@ export interface ResourceRefJobInfo {
 }
 
 /**
- * SqlGateway返回LogicalType类型
+ * CreateOceanusCluster返回参数结构体
  */
-export interface LogicalType {
+export interface CreateOceanusClusterResponse {
   /**
-   * <p>类型</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>创建的集群ID</p><p>参数格式：cluster-xxx</p>
    */
-  Type?: string
+  ClusterId?: string
   /**
-   * <p>是否允许为空</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  NullAble?: boolean
-  /**
-   * <p>长度</p><p>单位：字符数</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Length?: number
+  RequestId?: string
 }
 
 /**
@@ -2057,6 +2096,72 @@ export interface GatewayRefItem {
 }
 
 /**
+ * CreateOceanusCluster请求参数结构体
+ */
+export interface CreateOceanusClusterRequest {
+  /**
+   * <p>集群名称</p><p>入参限制：支持1-50个英文、汉字、数字、连接线-或下划线_</p>
+   */
+  ClusterName: string
+  /**
+   * <p>地域Id，可通过地域管理系统<a href="https://cloud.tencent.com/document/api/1596/77930"> DescribeRegions</a>查询Product参数设置 oceanus</p>
+   */
+  RegionId: number
+  /**
+   * <p>可用区Id，可通过地域管理系统<a href="https://cloud.tencent.com/document/api/1596/77929"> DescribeZones</a>查询<br>Product参数设置 oceanus</p>
+   */
+  ZoneId: number
+  /**
+   * <p>FlinkUI访问密码</p><p>用户名与密码将用于登录查看作业的 Flink UI 界面，集群用户名:admin</p>
+   */
+  LoginPassword: string
+  /**
+   * <p>流计算通过 VPC 和弹性网卡来访问同地域中的其他云产品资源，并需要占用一定的子网 IP 数量，请确保所选子网的可用 IP 数量充足 如现有网络不符合您的要求，请前往 VPC 控制台<a href="https://console.cloud.tencent.com/vpc/vpc?rid=undefined">新建私有网络</a> 或 <a href="https://console.cloud.tencent.com/vpc/subnet?rid=undefined">新建子网</a></p>
+   */
+  VpcDescriptions: Array<VPCDescription>
+  /**
+   * <p>流计算使用对象存储 COS 来保存作业的 checkpoint、jar 包、或投递日志等，如本地域无可用存储桶，请前往<a href="https://console.cloud.tencent.com/cos5">对象存储控制台</a>新建 为了保证您的正常使用，对应COS的生命周期配置请参考<a href="https://cloud.tencent.com/document/product/436/33417?from=console_document_search">文档</a></p>
+   */
+  DefaultCOSBucket: string
+  /**
+   * <p>集群CU数， 12 CU 是流计算的最小计算资源和计费单位，1CU 包含1个 CPU 和 4GB 内存。 当CU数大于等于 48 时，减免管理节点费用。</p>
+   */
+  CU?: number
+  /**
+   * <p>集群描述</p><p>入参限制：支持1-50个英文、汉字、数字、连接线-或下划线_</p>
+   */
+  Remark?: string
+  /**
+   * <p>购买时长，以月为单位</p><p>取值范围：[1, 48]</p>
+   */
+  Period?: number
+  /**
+   * <p>集群计费类型</p><p>枚举值：</p><ul><li>PREPAID： 包年包月</li><li>POSTPAID_BY_SECOND： 按量计费</li></ul><p>默认值：POSTPAID_BY_SECOND</p>
+   */
+  InstanceChargeType?: string
+  /**
+   * <p>集群类型</p><p>枚举值：</p><ul><li>MULTI_AZ_CLUSTER： 多可用区集群</li></ul>
+   */
+  ClusterType?: string
+  /**
+   * <p>自动续费标识</p><p>枚举值：</p><ul><li>NOTIFY_AND_MANUAL_RENEW： 通知并手动续费</li><li>NOTIFY_AND_AUTO_RENEW： 通知并自动续费</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW： 不通知并不自动续费</li></ul><p>默认值：NOTIFY_AND_MANUAL_RENEW</p><p>InstanceChargeType设置PREPAID时，对应包年包月集群，需要设置自动续费标识，按量计费集群不需要设置</p>
+   */
+  RenewFlag?: string
+  /**
+   * <p>Flink UI访问类型设置</p><p>枚举值：</p><ul><li>NetworkAccess_INTERNAL： 内网访问</li><li>NetworkAccess_EXTERNAL： 公网访问</li></ul><p>默认值：NetworkAccess_EXTERNAL</p>
+   */
+  FlinkWebUINetworkAccessType?: string
+  /**
+   * <p>多可用区VPC</p>
+   */
+  SlaveVpcDescriptions?: Array<SlaveVpcDescriptions>
+  /**
+   * <p>核心内存比值，只支持 [0，2，4，8]</p>
+   */
+  CUMemory?: number
+}
+
+/**
  * CreateResource返回参数结构体
  */
 export interface CreateResourceResponse {
@@ -2221,6 +2326,28 @@ export interface RunJobDescription {
 }
 
 /**
+ * 多可用区VPC
+ */
+export interface SlaveVpcDescriptions {
+  /**
+   * <p>私有网络ID</p>
+   */
+  VpcId: string
+  /**
+   * <p>子网ID</p>
+   */
+  SubnetId: string
+  /**
+   * <p>用户AppId</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户UIN</p>
+   */
+  OwnerUin?: string
+}
+
+/**
  * DescribeResourceRelatedJobs返回参数结构体
  */
 export interface DescribeResourceRelatedJobsResponse {
@@ -2236,6 +2363,27 @@ export interface DescribeResourceRelatedJobsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * SqlGateway返回LogicalType类型
+ */
+export interface LogicalType {
+  /**
+   * <p>类型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * <p>是否允许为空</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NullAble?: boolean
+  /**
+   * <p>长度</p><p>单位：字符数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Length?: number
 }
 
 /**
@@ -2478,17 +2626,17 @@ export interface DeleteJobConfigsRequest {
 }
 
 /**
- * StopJobs请求参数结构体
+ * RenewOceanusCluster请求参数结构体
  */
-export interface StopJobsRequest {
+export interface RenewOceanusClusterRequest {
   /**
-   * 批量停止作业的描述信息
+   * <p>集群ID</p><p>参数格式：cluster-xxx</p>
    */
-  StopJobDescriptions: Array<StopJobDescription>
+  ClusterId: string
   /**
-   * 工作空间 SerialId
+   * <p>续费的时长，单位为月，只支持包年包月集群</p><p>取值范围：[1, 36]</p>
    */
-  WorkSpaceId?: string
+  Period: number
 }
 
 /**
@@ -3137,24 +3285,43 @@ export interface TreeResourceItem {
 }
 
 /**
- * 作业配置 -- 专家模式的详细配置
+ * DescribeTreeResources返回参数结构体
  */
-export interface ExpertModeConfiguration {
+export interface DescribeTreeResourcesResponse {
   /**
-   * Job graph
+   * 父节点ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  JobGraph?: JobGraph
+  ParentId?: string
   /**
-   * Node configuration
+   * 文件夹ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NodeConfig?: Array<NodeConfig>
+  Id?: string
   /**
-   * Slot sharing groups
+   * 文件夹名
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SlotSharingGroups?: Array<SlotSharingGroup>
+  Name?: string
+  /**
+   * 文件列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<TreeResourceItem>
+  /**
+   * 子目录列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Children?: Array<DescribeTreeResourcesRsp>
+  /**
+   * 资源总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3197,6 +3364,30 @@ export interface DeleteResourcesRequest {
    * 工作空间 SerialId
    */
   WorkSpaceId?: string
+}
+
+/**
+ * 客户VPC描述信息，包含VpcId和SubnetId参数
+ */
+export interface VPCDescription {
+  /**
+   * 私有网络ID
+   */
+  VpcId: string
+  /**
+   * 子网ID
+   */
+  SubnetId: string
+  /**
+   * 用户AppId
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: number
+  /**
+   * 用户UIN
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerUin?: string
 }
 
 /**
@@ -3780,19 +3971,13 @@ export interface CreateVariableRequest {
 }
 
 /**
- * 作业运行图
+ * DeleteOceanusCluster请求参数结构体
  */
-export interface JobGraph {
+export interface DeleteOceanusClusterRequest {
   /**
-   * 运行图的点集合
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>集群ID</p><p>参数格式：cluster-xxxx</p>
    */
-  Nodes?: Array<JobGraphNode>
-  /**
-   * 运行图的边集合
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Edges?: Array<JobGraphEdge>
+  ClusterId: string
 }
 
 /**
@@ -4489,6 +4674,20 @@ export interface CreateJobRequest {
 }
 
 /**
+ * ScaleOceanusCluster返回参数结构体
+ */
+export interface ScaleOceanusClusterResponse {
+  /**
+   * <p>参数值success代表操作执行成功</p>
+   */
+  TaskExecResult?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 搜索启动日志时返回的作业实例
  */
 export interface JobInstanceForSubmissionLog {
@@ -4755,6 +4954,22 @@ export interface CreateResourceConfigRequest {
 }
 
 /**
+ * 作业运行图
+ */
+export interface JobGraph {
+  /**
+   * 运行图的点集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Nodes?: Array<JobGraphNode>
+  /**
+   * 运行图的边集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Edges?: Array<JobGraphEdge>
+}
+
+/**
  * ModifyConnector返回参数结构体
  */
 export interface ModifyConnectorResponse {
@@ -4927,6 +5142,20 @@ export interface CheckSavepointResponse {
 }
 
 /**
+ * DeleteOceanusCluster返回参数结构体
+ */
+export interface DeleteOceanusClusterResponse {
+  /**
+   * <p>参数值success代表操作执行成功</p>
+   */
+  TaskExecResult?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeJobs返回参数结构体
  */
 export interface DescribeJobsResponse {
@@ -4945,43 +5174,24 @@ export interface DescribeJobsResponse {
 }
 
 /**
- * DescribeTreeResources返回参数结构体
+ * 作业配置 -- 专家模式的详细配置
  */
-export interface DescribeTreeResourcesResponse {
+export interface ExpertModeConfiguration {
   /**
-   * 父节点ID
+   * Job graph
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ParentId?: string
+  JobGraph?: JobGraph
   /**
-   * 文件夹ID
+   * Node configuration
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id?: string
+  NodeConfig?: Array<NodeConfig>
   /**
-   * 文件夹名
+   * Slot sharing groups
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
-  /**
-   * 文件列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Items?: Array<TreeResourceItem>
-  /**
-   * 子目录列表
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Children?: Array<DescribeTreeResourcesRsp>
-  /**
-   * 资源总数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  SlotSharingGroups?: Array<SlotSharingGroup>
 }
 
 /**

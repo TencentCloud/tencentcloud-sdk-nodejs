@@ -788,6 +788,16 @@ it("vod.v20180717.ModifySampleSnapshotTemplate", async function () {
     }
 })
 
+it("vod.v20180717.UpdateAigcApiToken", async function () {
+    try {
+       const data = await client.UpdateAigcApiToken({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.DescribeImageSpriteTemplates", async function () {
     try {
        const data = await client.DescribeImageSpriteTemplates({})

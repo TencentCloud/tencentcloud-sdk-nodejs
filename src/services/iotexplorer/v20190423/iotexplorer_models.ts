@@ -326,6 +326,28 @@ export interface DescribeTWeTalkProductConfigResponse {
 }
 
 /**
+ * Webhook鉴权配置
+ */
+export interface TalkWebhookAuth {
+  /**
+   * 鉴权类型：none、hmac、static_headers、bearer
+   */
+  Type: string
+  /**
+   * HMAC签名密钥，Type=hmac时必填
+   */
+  SignKey?: string
+  /**
+   * 静态鉴权请求头，JSON对象字符串，仅允许白名单header名
+   */
+  Headers?: string
+  /**
+   * Bearer Token，Type=bearer时用于生成Authorization请求头
+   */
+  BearerToken?: string
+}
+
+/**
  * Talk激活审计信息。
  */
 export interface TalkActivateRecordLogInfo {
@@ -667,6 +689,56 @@ export interface DescribeCloudStorageOrderRequest {
 }
 
 /**
+ * CreateTWeTalkAgent请求参数结构体
+ */
+export interface CreateTWeTalkAgentRequest {
+  /**
+   * <p>语音识别配置</p>
+   */
+  STTConfig: TalkSTTConfig
+  /**
+   * <p>大模型配置</p>
+   */
+  LLMConfig: TalkLLMConfig
+  /**
+   * <p>语音合成配置</p>
+   */
+  TTSConfig: TalkTTSConfig
+  /**
+   * <p>智能体名称；为空时使用默认智能体名称</p>
+   */
+  Name?: string
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>智能体描述，最长1024字符</p>
+   */
+  Description?: string
+  /**
+   * <p>对话行为配置</p>
+   */
+  ConversationConfig?: TalkConversationConfig
+  /**
+   * <p>长期记忆配置</p>
+   */
+  MemoryConfig?: TalkMemoryConfig
+  /**
+   * <p>IoT工具配置列表</p>
+   */
+  IOTTools?: Array<TalkIOTTool>
+  /**
+   * <p>Webhook工具配置列表</p>
+   */
+  WebhookTools?: Array<TalkWebhookTool>
+  /**
+   * <p>元信息扩展JSON对象字符串</p>
+   */
+  Metadata?: string
+}
+
+/**
  * 会话配置信息。
  */
 export interface TalkConversationConfigInfo {
@@ -847,6 +919,28 @@ export interface InvokeTWeSeeComprehensionRequest {
 }
 
 /**
+ * IoT工具配置列表
+ */
+export interface TalkIOTTool {
+  /**
+   * 工具名称，同时作为IoT ActionId
+   */
+  Name: string
+  /**
+   * 工具描述，用于模型判断何时调用
+   */
+  Description: string
+  /**
+   * 工具参数JSON Schema，JSON对象字符串，必须为type=object
+   */
+  Parameters: string
+  /**
+   * 必填参数名列表，必须存在于Parameters.properties中
+   */
+  Required?: Array<string>
+}
+
+/**
  * DescribeDeviceFirmWare请求参数结构体
  */
 export interface DescribeDeviceFirmWareRequest {
@@ -876,6 +970,16 @@ export interface BindCloudStorageUserRequest {
    * 用户ID
    */
   UserId: string
+}
+
+/**
+ * UnbindTWeTalkAgent返回参数结构体
+ */
+export interface UnbindTWeTalkAgentResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1496,6 +1600,24 @@ export interface CreateTWeTalkAIBotResponse {
  * DeleteTWeSeeCallback返回参数结构体
  */
 export interface DeleteTWeSeeCallbackResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTWeTalkAgentList返回参数结构体
+ */
+export interface DescribeTWeTalkAgentListResponse {
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>智能体列</p>
+   */
+  Data?: Array<TalkAgentInfo>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2191,6 +2313,32 @@ export interface DeleteDevicesRequest {
 }
 
 /**
+ * BindTWeTalkAgent请求参数结构体
+ */
+export interface BindTWeTalkAgentRequest {
+  /**
+   * <p>产品 ID</p>
+   */
+  ProductId: string
+  /**
+   * <p>智能体 ID</p>
+   */
+  AgentId: string
+  /**
+   * <p>绑定维度：product 或 device</p>
+   */
+  BindingScope: string
+  /**
+   * <p>设备名称；<code>BindingScope=device</code> 时必填</p>
+   */
+  DeviceName?: string
+  /**
+   * <p>绑定优先级，数值越小优先级越高</p>
+   */
+  Priority?: number
+}
+
+/**
  * ModifyProject返回参数结构体
  */
 export interface ModifyProjectResponse {
@@ -2270,41 +2418,21 @@ export interface CreateExternalSourceAIServiceTaskRequest {
 }
 
 /**
- * GetDeviceSumStatistics返回参数结构体
+ * DescribeCloudStorageAIServiceCallback返回参数结构体
  */
-export interface GetDeviceSumStatisticsResponse {
+export interface DescribeCloudStorageAIServiceCallbackResponse {
   /**
-   * 激活设备总数
+   * 推送类型。http：HTTP 回调
    */
-  ActivationCount?: number
+  Type?: string
   /**
-   * 在线设备总数
+   * HTTP 回调 URL
    */
-  OnlineCount?: number
+  CallbackUrl?: string
   /**
-   * 前一天激活设备数
+   * HTTP 回调鉴权 Token
    */
-  ActivationBeforeDay?: number
-  /**
-   * 前一天活跃设备数
-   */
-  ActiveBeforeDay?: number
-  /**
-   * 前一周激活设备数
-   */
-  ActivationWeekDayCount?: number
-  /**
-   * 前一周活跃设备数
-   */
-  ActiveWeekDayCount?: number
-  /**
-   * 上一周激活设备数
-   */
-  ActivationBeforeWeekDayCount?: number
-  /**
-   * 上一周活跃设备数
-   */
-  ActiveBeforeWeekDayCount?: number
+  CallbackToken?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2369,6 +2497,80 @@ export interface PauseTWeCallDeviceRequest {
    * 设备列表
    */
   DeviceList?: Array<TWeCallInfo>
+}
+
+/**
+ * TWeTalk智能体配置信息描述
+ */
+export interface TalkAgentInfo {
+  /**
+   * 主账号UIN
+   */
+  Uin?: number
+  /**
+   * 账号AppId
+   */
+  AppId?: number
+  /**
+   * 实例 ID
+   */
+  InstanceId?: string
+  /**
+   * 智能体ID
+   */
+  AgentId?: string
+  /**
+   * 智能体名称
+   */
+  Name?: string
+  /**
+   * 智能体描述
+   */
+  Description?: string
+  /**
+   * 语音识别配置
+   */
+  STTConfig?: TalkSTTConfig
+  /**
+   * 大模型配置
+   */
+  LLMConfig?: TalkLLMConfig
+  /**
+   * 语音合成配置
+   */
+  TTSConfig?: TalkTTSConfig
+  /**
+   * 对话行为配置
+   */
+  ConversationConfig?: TalkConversationConfig
+  /**
+   * 长期记忆配置
+   */
+  MemoryConfig?: TalkMemoryConfig
+  /**
+   * IoT 工具列表
+   */
+  IOTTools?: Array<TalkIOTTool>
+  /**
+   * Webhook 工具列表
+   */
+  WebhookTools?: Array<TalkWebhookTool>
+  /**
+   * 元信息JSON object 字符串
+   */
+  Metadata?: string
+  /**
+   * 绑定关系列表
+   */
+  Bindings?: Array<TalkAgentBinding>
+  /**
+   * 创建时间，Unix 秒
+   */
+  CreateTime?: number
+  /**
+   * 更新时间，Unix 秒
+   */
+  UpdateTime?: number
 }
 
 /**
@@ -3189,13 +3391,25 @@ export interface DescribeGatewaySubProductsResponse {
 }
 
 /**
- * BindProducts返回参数结构体
+ * 批量创建 TWeSee 语义理解任务的响应
  */
-export interface BindProductsResponse {
+export interface CreateVisionRecognitionTaskOutput {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 创建任务成功
    */
-  RequestId?: string
+  Created?: boolean
+  /**
+   * 任务 ID
+   */
+  TaskId?: string
+  /**
+   * 错误码
+   */
+  ErrorCode?: string
+  /**
+   * 错误消息
+   */
+  ErrorMessage?: string
 }
 
 /**
@@ -3696,6 +3910,20 @@ export interface ListTopicPolicyResponse {
 }
 
 /**
+ * CreateTWeTalkAgent返回参数结构体
+ */
+export interface CreateTWeTalkAgentResponse {
+  /**
+   * <p>智能体ID</p>
+   */
+  AgentId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateAISearchTaskAsync请求参数结构体
  */
 export interface CreateAISearchTaskAsyncRequest {
@@ -4064,28 +4292,6 @@ export interface SearchPositionSpaceRequest {
 }
 
 /**
- * DescribeCloudStorageAIServiceCallback返回参数结构体
- */
-export interface DescribeCloudStorageAIServiceCallbackResponse {
-  /**
-   * 推送类型。http：HTTP 回调
-   */
-  Type?: string
-  /**
-   * HTTP 回调 URL
-   */
-  CallbackUrl?: string
-  /**
-   * HTTP 回调鉴权 Token
-   */
-  CallbackToken?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeTWeTalkAIBot请求参数结构体
  */
 export interface DescribeTWeTalkAIBotRequest {
@@ -4121,6 +4327,28 @@ export interface ModifyLoRaGatewayResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 对话行为配置
+ */
+export interface TalkConversationConfig {
+  /**
+   * 欢迎语
+   */
+  WelcomeMessage?: string
+  /**
+   * 欢迎语优先级。`0`=默认，`1`=高优不可打断
+   */
+  WelcomeMessagePriority?: number
+  /**
+   * 智能打断模式。`0`=服务端自动打断，`1`=端上发送打断信令
+   */
+  InterruptMode?: number
+  /**
+   * 打断词列表。AI 说话期间，仅当用户说出列表中的词才打断 AI；不会触发新的回复
+   */
+  InterruptWordList?: Array<string>
 }
 
 /**
@@ -4505,6 +4733,20 @@ export interface DescribePackageConsumeTaskResponse {
 }
 
 /**
+ * 当前仅支持 `flow`（TRTC Flow TTS）
+ */
+export interface TalkTTSConfig {
+  /**
+   * TTS的类型
+   */
+  Type: string
+  /**
+   * Flow TTS 的具体配置
+   */
+  Flow?: TalkTTSFlow
+}
+
+/**
  * CheckFirmwareUpdate请求参数结构体
  */
 export interface CheckFirmwareUpdateRequest {
@@ -4516,6 +4758,24 @@ export interface CheckFirmwareUpdateRequest {
    * 设备名称。
    */
   DeviceName: string
+}
+
+/**
+ * DescribeTWeTalkAgentBinding返回参数结构体
+ */
+export interface DescribeTWeTalkAgentBindingResponse {
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>绑定关系列表</p>
+   */
+  Bindings?: Array<TalkAgentBinding>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4657,6 +4917,16 @@ export interface TalkIdleDetectionConfigInfo {
 }
 
 /**
+ * DeleteTWeTalkAgent请求参数结构体
+ */
+export interface DeleteTWeTalkAgentRequest {
+  /**
+   * <p>智能体ID</p>
+   */
+  AgentId: string
+}
+
+/**
  * CreateFenceBind返回参数结构体
  */
 export interface CreateFenceBindResponse {
@@ -4664,6 +4934,48 @@ export interface CreateFenceBindResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 大模型配置。基础对话必填；如使用平台默认能力，请显式设置 Type=default。
+ */
+export interface TalkLLMConfig {
+  /**
+   * <p>LLM类型：default-平台默认；openai-OpenAI兼容模型</p>
+   */
+  Type: string
+  /**
+   * <p>系统提示词</p>
+   */
+  SystemPrompt?: string
+  /**
+   * <p>采样温度，建议范围0-2</p>
+   */
+  Temperature?: number
+  /**
+   * <p>上下文历史轮数，建议范围0-50</p>
+   */
+  History?: number
+  /**
+   * <p>超时时间，秒</p>
+   */
+  Timeout?: number
+  /**
+   * <p>OpenAI兼容模型Base URL，仅支持 80 和 443 端口，Type=openai时必填</p>
+   */
+  BaseUrl?: string
+  /**
+   * <p>模型名称，Type=openai时必填</p>
+   */
+  Model?: string
+  /**
+   * <p>模型API Key，Type=openai时必填</p>
+   */
+  ApiKey?: string
+  /**
+   * <p>额外模型请求体参数，JSON对象字符串，只允许JSON object，不允许普通字符串</p>
+   */
+  ExtraBody?: string
 }
 
 /**
@@ -5373,6 +5685,16 @@ export interface ResetTWeCallDeviceResponse {
 }
 
 /**
+ * ModifyTWeTalkAgent返回参数结构体
+ */
+export interface ModifyTWeTalkAgentResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 云api直接绑定设备出参
  */
 export interface AppDeviceInfo {
@@ -5446,6 +5768,40 @@ export interface DescribeCloudStorageResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 智能体绑定配置
+ */
+export interface TalkAgentBinding {
+  /**
+   * product 或 device
+   */
+  BindingScope?: string
+  /**
+   * 产品ID
+   */
+  ProductId?: string
+  /**
+   * 设备名称
+   */
+  DeviceName?: string
+  /**
+   * 智能体ID
+   */
+  AgentId?: string
+  /**
+   * 绑定优先级
+   */
+  Priority?: number
+  /**
+   * 创建时间，Unix 秒
+   */
+  CreateTime?: number
+  /**
+   * 更新时间，Unix 秒
+   */
+  UpdateTime?: number
 }
 
 /**
@@ -6928,6 +7284,36 @@ export interface DescribeSubscribedTopicPolicyRequest {
 }
 
 /**
+ * Webhook工具配置列表
+ */
+export interface TalkWebhookTool {
+  /**
+   * Webhook工具名称
+   */
+  Name: string
+  /**
+   * Webhook工具描述
+   */
+  Description: string
+  /**
+   * 工具参数JSON Schema，JSON对象字符串，必须为type=object
+   */
+  Parameters: string
+  /**
+   * Webhook HTTP端点配置
+   */
+  Endpoint: TalkWebhookEndpoint
+  /**
+   * 必填参数名列表，必须存在于Parameters.properties中
+   */
+  Required?: Array<string>
+  /**
+   * Webhook鉴权配置
+   */
+  Auth?: TalkWebhookAuth
+}
+
+/**
  * BatchInvokeTWeSeeRecognitionTask请求参数结构体
  */
 export interface BatchInvokeTWeSeeRecognitionTaskRequest {
@@ -7186,6 +7572,16 @@ export interface ListFirmwaresResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 长期记忆配置。
+ */
+export interface TalkMemoryConfig {
+  /**
+   * 是否启用长期记忆；启用时需满足产品和运行时能力要求
+   */
+  Enabled?: boolean
 }
 
 /**
@@ -7496,23 +7892,33 @@ export interface DescribeCsReportCountDataInfoResponse {
 }
 
 /**
- * DescribeFirmwareTaskDevices返回参数结构体
+ * DescribeTWeTalkAgentBinding请求参数结构体
  */
-export interface DescribeFirmwareTaskDevicesResponse {
+export interface DescribeTWeTalkAgentBindingRequest {
   /**
-   * 固件升级任务的设备总数
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>产品 ID</p>
    */
-  Total?: number
+  ProductId?: string
   /**
-   * 固件升级任务的设备列表
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>设备名称</p>
    */
-  Devices?: Array<DeviceUpdateStatus>
+  DeviceName?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>绑定维度：product 或 device</p>
    */
-  RequestId?: string
+  BindingScope?: string
+  /**
+   * <p>智能体 ID</p>
+   */
+  AgentId?: string
+  /**
+   * <p>偏移量</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回数量，最大 100</p>
+   */
+  Limit?: number
 }
 
 /**
@@ -7807,6 +8213,16 @@ export interface DescribeCloudStorageAIServiceTasksRequest {
 }
 
 /**
+ * DescribeTWeTalkAgent请求参数结构体
+ */
+export interface DescribeTWeTalkAgentRequest {
+  /**
+   * <p>智能体ID</p>
+   */
+  AgentId: string
+}
+
+/**
  * ListFirmwares请求参数结构体
  */
 export interface ListFirmwaresRequest {
@@ -7856,6 +8272,36 @@ export interface PublishMessageRequest {
    * Payload的内容编码格式，取值为base64或空。base64表示云端将接收到的base64编码后的报文再转换成二进制报文下发至设备，为空表示不作转换，透传下发至设备
    */
   PayloadEncoding?: string
+}
+
+/**
+ * DescribeFirmwareTaskDevices返回参数结构体
+ */
+export interface DescribeFirmwareTaskDevicesResponse {
+  /**
+   * 固件升级任务的设备总数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * 固件升级任务的设备列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Devices?: Array<DeviceUpdateStatus>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UnbindDevices返回参数结构体
+ */
+export interface UnbindDevicesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7967,29 +8413,21 @@ export interface GenerateCloudStorageAIServiceTaskFileURLResponse {
 }
 
 /**
- * 设备激活详情信息
+ * ChangeP2PRoute请求参数结构体
  */
-export interface ActivateDeviceInfo {
+export interface ChangeP2PRouteRequest {
   /**
-   * 实例ID
+   * 产品ID
    */
-  InstanceId: string
+  ProductId: string
   /**
-   * 实例类型
+   * 设备名称
    */
-  InstanceType: number
+  DeviceName: string
   /**
-   * 设备激活信息
+   * P2P线路
    */
-  DeviceActivationDetails: DeviceActivationDetail
-  /**
-   * 已注册设备类型信息
-   */
-  RegisteredDeviceType: RegisteredDeviceTypeInfo
-  /**
-   * 已注册设备通信类型信息
-   */
-  RegisteredDeviceNetType: RegisteredDeviceNetTypeInfo
+  RouteId: number
 }
 
 /**
@@ -8046,6 +8484,20 @@ export interface CallDeviceActionAsyncResponse {
    * 异步调用状态
    */
   Status?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTWeTalkAgent返回参数结构体
+ */
+export interface DescribeTWeTalkAgentResponse {
+  /**
+   * <p>智能体详情</p>
+   */
+  Data?: TalkAgentInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8414,6 +8866,44 @@ export interface DescribeDevicePackagesResponse {
 }
 
 /**
+ * DescribeTWeTalkAgentList请求参数结构体
+ */
+export interface DescribeTWeTalkAgentListRequest {
+  /**
+   * <p>产品 ID</p>
+   */
+  ProductId?: string
+  /**
+   * <p>设备名称，设备级绑定查询时使用</p>
+   */
+  DeviceName?: string
+  /**
+   * <p>绑定维度：product 或 device</p>
+   */
+  BindingScope?: string
+  /**
+   * <p>智能体 ID</p>
+   */
+  AgentId?: string
+  /**
+   * <p>实例 ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>智能体名称筛选</p>
+   */
+  Name?: string
+  /**
+   * <p>偏移量</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回数量，最大 100</p>
+   */
+  Limit?: number
+}
+
+/**
  * DeleteDeviceSDP请求参数结构体
  */
 export interface DeleteDeviceSDPRequest {
@@ -8524,6 +9014,28 @@ export interface GetFamilyDeviceUserListResponse {
 }
 
 /**
+ * UnbindTWeTalkAgent请求参数结构体
+ */
+export interface UnbindTWeTalkAgentRequest {
+  /**
+   * <p>产品 ID</p>
+   */
+  ProductId: string
+  /**
+   * <p>智能体 ID</p>
+   */
+  AgentId: string
+  /**
+   * <p>设备名称；BindingScope=device 时必填</p>
+   */
+  DeviceName?: string
+  /**
+   * <p>绑定维度：product 或 device</p>
+   */
+  BindingScope?: string
+}
+
+/**
  * DeleteLoRaGateway返回参数结构体
  */
 export interface DeleteLoRaGatewayResponse {
@@ -8534,21 +9046,13 @@ export interface DeleteLoRaGatewayResponse {
 }
 
 /**
- * ChangeP2PRoute请求参数结构体
+ * DeleteTWeTalkAgent返回参数结构体
  */
-export interface ChangeP2PRouteRequest {
+export interface DeleteTWeTalkAgentResponse {
   /**
-   * 产品ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ProductId: string
-  /**
-   * 设备名称
-   */
-  DeviceName: string
-  /**
-   * P2P线路
-   */
-  RouteId: number
+  RequestId?: string
 }
 
 /**
@@ -8613,6 +9117,24 @@ export interface BindTWeTalkAIBotRequest {
    * 产品ID
    */
   ProductId: string
+}
+
+/**
+ * TRTC STT配置
+ */
+export interface TalkSTTTRTC {
+  /**
+   * <p>识别语言，只支持 <code>zh</code>、<code>16k_zh_large</code></p>
+   */
+  Language?: string
+  /**
+   * <p>VAD 静默检测时间，单位 ms，范围 240–2000</p>
+   */
+  VADSilenceTime?: number
+  /**
+   * <p>远场人声抑制等级，范围 0–5</p>
+   */
+  VADLevel?: number
 }
 
 /**
@@ -8904,25 +9426,13 @@ export interface GenSingleDeviceSignatureOfPublicRequest {
 }
 
 /**
- * 批量创建 TWeSee 语义理解任务的响应
+ * BindProducts返回参数结构体
  */
-export interface CreateVisionRecognitionTaskOutput {
+export interface BindProductsResponse {
   /**
-   * 创建任务成功
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Created?: boolean
-  /**
-   * 任务 ID
-   */
-  TaskId?: string
-  /**
-   * 错误码
-   */
-  ErrorCode?: string
-  /**
-   * 错误消息
-   */
-  ErrorMessage?: string
+  RequestId?: string
 }
 
 /**
@@ -10069,6 +10579,48 @@ export interface DescribeFirmwareUpdateStatusRequest {
 }
 
 /**
+ * GetDeviceSumStatistics返回参数结构体
+ */
+export interface GetDeviceSumStatisticsResponse {
+  /**
+   * 激活设备总数
+   */
+  ActivationCount?: number
+  /**
+   * 在线设备总数
+   */
+  OnlineCount?: number
+  /**
+   * 前一天激活设备数
+   */
+  ActivationBeforeDay?: number
+  /**
+   * 前一天活跃设备数
+   */
+  ActiveBeforeDay?: number
+  /**
+   * 前一周激活设备数
+   */
+  ActivationWeekDayCount?: number
+  /**
+   * 前一周活跃设备数
+   */
+  ActiveWeekDayCount?: number
+  /**
+   * 上一周激活设备数
+   */
+  ActivationBeforeWeekDayCount?: number
+  /**
+   * 上一周活跃设备数
+   */
+  ActiveBeforeWeekDayCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDevicePositionList返回参数结构体
  */
 export interface DescribeDevicePositionListResponse {
@@ -10084,6 +10636,20 @@ export interface DescribeDevicePositionListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 语音识别配置
+ */
+export interface TalkSTTConfig {
+  /**
+   * 当前仅支持 `trtc`（使用 TRTC 内置语音识别）。
+   */
+  Type: string
+  /**
+   * `Type=trtc` 时生效。整体省略表示全部使用 TRTC 默认值。
+   */
+  TRTC?: TalkSTTTRTC
 }
 
 /**
@@ -10350,6 +10916,32 @@ export interface GenerateSignedVideoURLResponse {
 }
 
 /**
+ * 设备激活详情信息
+ */
+export interface ActivateDeviceInfo {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 实例类型
+   */
+  InstanceType: number
+  /**
+   * 设备激活信息
+   */
+  DeviceActivationDetails: DeviceActivationDetail
+  /**
+   * 已注册设备类型信息
+   */
+  RegisteredDeviceType: RegisteredDeviceTypeInfo
+  /**
+   * 已注册设备通信类型信息
+   */
+  RegisteredDeviceNetType: RegisteredDeviceNetTypeInfo
+}
+
+/**
  * InvokeVideosKeywordsAnalyzer请求参数结构体
  */
 export interface InvokeVideosKeywordsAnalyzerRequest {
@@ -10415,6 +11007,20 @@ export interface DescribeFirmwareTaskDevicesRequest {
    * 固件类型
    */
   FwType?: string
+}
+
+/**
+ * Flow TTS 的具体配置
+ */
+export interface TalkTTSFlow {
+  /**
+   * <p>精品音色 ID 或克隆音色 ID：具体可参考https://cloud.tencent.com/document/product/647/115414</p>
+   */
+  VoiceId: string
+  /**
+   * <p>语速，范围 0.5–2.0；为 0 表示采用默认值</p>
+   */
+  Speed?: number
 }
 
 /**
@@ -10901,6 +11507,20 @@ export interface CreateTWeTalkAIBotRequest {
    * 知识库相关配置(JSON字符串格式)
    */
   RAGConfig?: string
+}
+
+/**
+ * Webhook工具配置列表
+ */
+export interface TalkWebhookEndpoint {
+  /**
+   * <p>Webhook地址，仅支持 80 和 443 端口</p>
+   */
+  Url: string
+  /**
+   * <p>超时时间，0~30 秒</p><p>取值范围：[0, 30]</p>
+   */
+  Timeout?: number
 }
 
 /**
@@ -11996,9 +12616,9 @@ export interface DiarySHLConfig {
 }
 
 /**
- * UnbindDevices返回参数结构体
+ * BindTWeTalkAgent返回参数结构体
  */
-export interface UnbindDevicesResponse {
+export interface BindTWeTalkAgentResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12013,6 +12633,56 @@ export interface CreateOtaModuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyTWeTalkAgent请求参数结构体
+ */
+export interface ModifyTWeTalkAgentRequest {
+  /**
+   * <p>智能体ID</p>
+   */
+  AgentId: string
+  /**
+   * <p>智能体名称</p>
+   */
+  Name?: string
+  /**
+   * <p>智能体描述</p>
+   */
+  Description?: string
+  /**
+   * <p>语音识别配置</p>
+   */
+  STTConfig?: TalkSTTConfig
+  /**
+   * <p>大模型配置</p>
+   */
+  LLMConfig?: TalkLLMConfig
+  /**
+   * <p>语音合成配置</p>
+   */
+  TTSConfig?: TalkTTSConfig
+  /**
+   * <p>对话行为配置</p>
+   */
+  ConversationConfig?: TalkConversationConfig
+  /**
+   * <p>长期记忆配置</p>
+   */
+  MemoryConfig?: TalkMemoryConfig
+  /**
+   * <p>IoT工具配置列表</p>
+   */
+  IOTTools?: Array<TalkIOTTool>
+  /**
+   * <p>Webhook工具配置列表</p>
+   */
+  WebhookTools?: Array<TalkWebhookTool>
+  /**
+   * <p>元信息扩展JSON对象字符串</p>
+   */
+  Metadata?: string
 }
 
 /**

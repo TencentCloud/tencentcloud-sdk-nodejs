@@ -118,6 +118,16 @@ it("lcic.v20220817.DeleteAppCustomContent", async function () {
     }
 })
 
+it("lcic.v20220817.DescribeWhiteBoardSnapshot", async function () {
+    try {
+       const data = await client.DescribeWhiteBoardSnapshot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lcic.v20220817.GetRoomMessage", async function () {
     try {
        const data = await client.GetRoomMessage({})
@@ -158,9 +168,19 @@ it("lcic.v20220817.GetWatermark", async function () {
     }
 })
 
-it("lcic.v20220817.DescribeWhiteBoardSnapshot", async function () {
+it("lcic.v20220817.DescribeEditVersions", async function () {
     try {
-       const data = await client.DescribeWhiteBoardSnapshot({})
+       const data = await client.DescribeEditVersions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.StartRecord", async function () {
+    try {
+       const data = await client.StartRecord({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -211,6 +231,16 @@ it("lcic.v20220817.DescribeDocument", async function () {
 it("lcic.v20220817.DescribeSdkAppIdUsers", async function () {
     try {
        const data = await client.DescribeSdkAppIdUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("lcic.v20220817.SetMainEditVersion", async function () {
+    try {
+       const data = await client.SetMainEditVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -768,9 +798,9 @@ it("lcic.v20220817.DescribeGroupLiveCodes", async function () {
     }
 })
 
-it("lcic.v20220817.StartRecord", async function () {
+it("lcic.v20220817.GetEditVersionToken", async function () {
     try {
-       const data = await client.StartRecord({})
+       const data = await client.GetEditVersionToken({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -143,57 +143,69 @@ export interface DescribeJobRecordsResponse {
  */
 export interface DisplayLeakageCode {
   /**
-   * 主键ID
+   * <p>主键ID</p>
    */
   Id?: number
   /**
-   * 公共字段
+   * <p>公共字段</p>
    */
   DisplayToolCommon?: DisplayToolCommon
   /**
-   * 事件名称
+   * <p>事件名称</p>
    */
   Name?: string
   /**
-   * 事件描述
+   * <p>事件描述</p>
    */
   Description?: string
   /**
-   * 数据源
+   * <p>数据源</p>
    */
   Source?: string
   /**
-   * 风险等级：1-低危 2-中危 3-高危 4-严重 5-误报
+   * <p>风险等级：1-低危 2-中危 3-高危 4-严重 5-误报</p>
    */
   RiskLevel?: number
   /**
-   * 仓库名称
+   * <p>仓库名称</p>
    */
   HubName?: string
   /**
-   * 链接
+   * <p>链接</p>
    */
   Url?: string
   /**
-   * 截图
+   * <p>截图</p>
    */
   Screenshot?: string
   /**
-   * 建议
+   * <p>建议</p>
    */
   Suggestion?: string
   /**
-   * 关键词
+   * <p>关键词</p>
    */
   Keyword?: string
   /**
-   * 处置状态：0-待处理 1-处理中 2-已处理
+   * <p>处置状态</p><p>枚举值：</p><ul><li>0： 待处理</li><li>1： 处理中</li><li>2： 已处理</li><li>3： 误报</li></ul>
    */
   HandlingStatus?: number
   /**
-   * 备注
+   * <p>备注</p>
    */
   Remark?: string
+  /**
+   * <p>仓库命名空间</p>
+   */
+  RepoNamespace?: string
+  /**
+   * <p>仓库名称</p>
+   */
+  RepoName?: string
+  /**
+   * <p>作者名称</p>
+   */
+  AuthorName?: string
 }
 
 /**
@@ -465,7 +477,7 @@ export interface DescribeCustomersRequest {
    */
   Filters?: Array<Filter>
   /**
-   * 企业名称模糊搜索
+   * <p>企业名称模糊搜索</p>
    */
   Keyword?: string
 }
@@ -818,11 +830,11 @@ export interface CreateJobRecordResponse {
  */
 export interface DescribeCustomersResponse {
   /**
-   * 总数
+   * <p>总数</p>
    */
   Total?: number
   /**
-   * 企业列表
+   * <p>企业列表</p>
    */
   List?: Array<Customer>
   /**
@@ -1235,6 +1247,10 @@ export interface CreateJobRecordRequest {
    * <p>知情同意勾选清单，用于审计回放</p>
    */
   ScanRateAckChecklist?: Array<string>
+  /**
+   * <p>扫描优先级配置</p>
+   */
+  ScanPriority?: ScanPriorityReq
 }
 
 /**
@@ -2461,6 +2477,20 @@ export interface DescribeSeedsRequest {
 }
 
 /**
+ * 优先级入参
+ */
+export interface ScanPriorityReq {
+  /**
+   * <p>只对新增资产进行漏洞扫描</p>
+   */
+  OnlyScanNewAsset?: boolean
+  /**
+   * <p>启用的优先级规则(有序):new_asset,high_risk_port,admin_panel,high_risk_fingerprint</p>
+   */
+  PriorityRules?: Array<string>
+}
+
+/**
  * CreateSubDomain请求参数结构体
  */
 export interface CreateSubDomainRequest {
@@ -2982,6 +3012,10 @@ export interface ModifyCustomerRequest {
    * <p>知情同意勾选清单，用于审计回放</p>
    */
   ScanRateAckChecklist?: Array<string>
+  /**
+   * <p>扫描优先级配置</p>
+   */
+  ScanPriority?: ScanPriorityReq
 }
 
 /**
@@ -3692,6 +3726,22 @@ export interface CreateWechatOfficialAccountRequest {
 }
 
 /**
+ * 优先级出参
+ */
+export interface ScanPriorityDisplay {
+  /**
+   * <p>只对新增资产进行漏洞扫描</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OnlyScanNewAsset?: boolean
+  /**
+   * <p>启用的优先级规则(有序):new_asset,high_risk_port,admin_panel,high_risk_fingerprint</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PriorityRules?: Array<string>
+}
+
+/**
  * DeleteWechatOfficialAccounts返回参数结构体
  */
 export interface DeleteWechatOfficialAccountsResponse {
@@ -4197,6 +4247,10 @@ export interface CreateCustomerRequest {
    * <p>知情同意勾选清单，用于审计回放</p>
    */
   ScanRateAckChecklist?: Array<string>
+  /**
+   * <p>扫描优先级配置</p>
+   */
+  ScanPriority?: ScanPriorityReq
 }
 
 /**
@@ -4658,6 +4712,11 @@ export interface Customer {
    * <p>端口扫描 QPS，默认 100，下限 10，保守值 200，上限 5000</p>
    */
   PortScanQps?: number
+  /**
+   * <p>扫描优先级配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScanPriority?: ScanPriorityDisplay
 }
 
 /**

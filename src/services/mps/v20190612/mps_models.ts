@@ -346,6 +346,20 @@ export interface ExtractBlindWatermarkRequest {
 }
 
 /**
+ * CreateAiDramaTask请求参数结构体
+ */
+export interface CreateAiDramaTaskRequest {
+  /**
+   * <p>ai漫剧输入</p>
+   */
+  Input: AiDramaInput
+  /**
+   * <p>用户cos信息</p>
+   */
+  CosInfo?: VideoDramaCosInfo
+}
+
+/**
  * 视频（音频）理解结果
  */
 export interface AiAnalysisTaskVideoComprehensionResult {
@@ -2026,13 +2040,34 @@ export interface DescribeStreamPackageLinearAssemblyChannelsRequest {
 }
 
 /**
- * EnableWorkflow请求参数结构体
+ * DescribeStreamPackageSources返回参数结构体
  */
-export interface EnableWorkflowRequest {
+export interface DescribeStreamPackageSourcesResponse {
   /**
-   * 工作流 ID。
+   * Source列表。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkflowId: number
+  Infos?: Array<SourceInfo>
+  /**
+   * 页数。
+   */
+  PageNum?: number
+  /**
+   * 每页大小。
+   */
+  PageSize?: number
+  /**
+   * 总数量。
+   */
+  TotalNum?: number
+  /**
+   * 总页数。
+   */
+  TotalPage?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4788,30 +4823,13 @@ export interface DescribeStreamLinkEventResponse {
 }
 
 /**
- * DescribeStreamPackageSources返回参数结构体
+ * CreateAiDramaTask返回参数结构体
  */
-export interface DescribeStreamPackageSourcesResponse {
+export interface CreateAiDramaTaskResponse {
   /**
-   * Source列表。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>任务id</p>
    */
-  Infos?: Array<SourceInfo>
-  /**
-   * 页数。
-   */
-  PageNum?: number
-  /**
-   * 每页大小。
-   */
-  PageSize?: number
-  /**
-   * 总数量。
-   */
-  TotalNum?: number
-  /**
-   * 总页数。
-   */
-  TotalPage?: number
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5429,70 +5447,25 @@ export interface OcrWordsConfigureInfoForUpdate {
 }
 
 /**
- * 水印模板详情
+ * Ai自动生成漫剧的输入
  */
-export interface WatermarkTemplate {
+export interface AiDramaInput {
   /**
-   * 水印模板唯一标识。
+   * <p>ai漫剧剧本</p><p>参数格式：无</p><p>入参限制：无</p>
    */
-  Definition?: number
+  Script: string
   /**
-   * 水印类型，取值：
-<li>image：图片水印；</li>
-<li>text：文字水印。</li>
+   * <p>ai漫剧风格</p><p>枚举值：</p><ul><li>chinese_ink_wash： 国风水墨</li><li>fantasy_cyberpunk： 奇幻赛博朋克</li><li>japanese_anime_2d： 日漫二次元</li></ul><p>默认值：chinese_ink_wash</p><p>枚举值：</p><ul><li>realistic_live_action： 真人写实</li><li>chinese_ink_wash： 国风水墨</li><li>fantasy_cyberpunk： 奇幻赛博朋克</li><li>japanese_anime_2d： 日漫二次元</li></ul><p>默认值：chinese_ink_wash</p>
    */
-  Type?: string
+  Style: string
   /**
-   * 水印模板名称。
+   * <p>宽高比</p><p>枚举值：</p><ul><li>16:9： 16:9</li><li>9:16： 9:16</li></ul><p>默认值：16:9</p>
    */
-  Name?: string
+  Ratio: string
   /**
-   * 模板描述信息。
+   * <p>输出视频分辨率</p><p>枚举值：</p><ul><li>720p： 720p</li><li>1080p： 1080p</li></ul><p>默认值：720p</p>
    */
-  Comment?: string
-  /**
-   * 水印图片原点距离视频图像原点的水平位置。
-<li>当字符串以 % 结尾，表示水印 Left 为视频宽度指定百分比的位置，如 10% 表示 Left 为视频宽度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 Left 为视频宽度指定像素的位置，如 100px 表示 Left 为 100 像素。</li>
-   */
-  XPos?: string
-  /**
-   * 水印图片原点距离视频图像原点的垂直位置。
-<li>当字符串以 % 结尾，表示水印 Top 为视频高度指定百分比的位置，如 10% 表示 Top 为视频高度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 Top 为视频高度指定像素的位置，如 100px 表示 Top 为 100 像素。</li>
-   */
-  YPos?: string
-  /**
-   * 图片水印模板，仅当 Type 为 image，该字段有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ImageTemplate?: ImageWatermarkTemplate
-  /**
-   * 文字水印模板，仅当 Type 为 text，该字段有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TextTemplate?: TextWatermarkTemplateInput
-  /**
-   * SVG 水印模板，当 Type 为 svg，该字段有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SvgTemplate?: SvgWatermarkInput
-  /**
-   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
-   */
-  CreateTime?: string
-  /**
-   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
-   */
-  UpdateTime?: string
-  /**
-   * 原点位置，可选值：
-<li>TopLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角；</li>
-<li>TopRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；</li>
-<li>BottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；</li>
-<li>BottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下角。</li>
-   */
-  CoordinateOrigin?: string
+  Resolution: string
 }
 
 /**
@@ -6073,6 +6046,73 @@ export interface ModifySnapshotByTimeOffsetTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 水印模板详情
+ */
+export interface WatermarkTemplate {
+  /**
+   * 水印模板唯一标识。
+   */
+  Definition?: number
+  /**
+   * 水印类型，取值：
+<li>image：图片水印；</li>
+<li>text：文字水印。</li>
+   */
+  Type?: string
+  /**
+   * 水印模板名称。
+   */
+  Name?: string
+  /**
+   * 模板描述信息。
+   */
+  Comment?: string
+  /**
+   * 水印图片原点距离视频图像原点的水平位置。
+<li>当字符串以 % 结尾，表示水印 Left 为视频宽度指定百分比的位置，如 10% 表示 Left 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Left 为视频宽度指定像素的位置，如 100px 表示 Left 为 100 像素。</li>
+   */
+  XPos?: string
+  /**
+   * 水印图片原点距离视频图像原点的垂直位置。
+<li>当字符串以 % 结尾，表示水印 Top 为视频高度指定百分比的位置，如 10% 表示 Top 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Top 为视频高度指定像素的位置，如 100px 表示 Top 为 100 像素。</li>
+   */
+  YPos?: string
+  /**
+   * 图片水印模板，仅当 Type 为 image，该字段有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageTemplate?: ImageWatermarkTemplate
+  /**
+   * 文字水印模板，仅当 Type 为 text，该字段有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TextTemplate?: TextWatermarkTemplateInput
+  /**
+   * SVG 水印模板，当 Type 为 svg，该字段有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SvgTemplate?: SvgWatermarkInput
+  /**
+   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  CreateTime?: string
+  /**
+   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  UpdateTime?: string
+  /**
+   * 原点位置，可选值：
+<li>TopLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角；</li>
+<li>TopRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；</li>
+<li>BottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；</li>
+<li>BottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下角。</li>
+   */
+  CoordinateOrigin?: string
 }
 
 /**
@@ -7820,18 +7860,13 @@ PicUrlExpireTime 时间点后图片将被删除）。
 }
 
 /**
- * 智能精彩片段结果信息
+ * DeleteBlindWatermarkTemplate返回参数结构体
  */
-export interface AiAnalysisTaskHighlightOutput {
+export interface DeleteBlindWatermarkTemplateResponse {
   /**
-   * 视频智能精彩片段列表。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  HighlightSet?: Array<MediaAiAnalysisHighlightItem>
-  /**
-   * 精彩片段的存储位置。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OutputStorage?: TaskOutputStorage
+  RequestId?: string
 }
 
 /**
@@ -8313,6 +8348,16 @@ export interface EnableScheduleRequest {
    * 编排唯一标识。
    */
   ScheduleId: number
+}
+
+/**
+ * EnableWorkflow请求参数结构体
+ */
+export interface EnableWorkflowRequest {
+  /**
+   * 工作流 ID。
+   */
+  WorkflowId: number
 }
 
 /**
@@ -9847,13 +9892,18 @@ export interface CreateAsrHotwordsResponse {
 }
 
 /**
- * DeleteBlindWatermarkTemplate返回参数结构体
+ * 智能精彩片段结果信息
  */
-export interface DeleteBlindWatermarkTemplateResponse {
+export interface AiAnalysisTaskHighlightOutput {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 视频智能精彩片段列表。
    */
-  RequestId?: string
+  HighlightSet?: Array<MediaAiAnalysisHighlightItem>
+  /**
+   * 精彩片段的存储位置。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputStorage?: TaskOutputStorage
 }
 
 /**
@@ -10275,6 +10325,24 @@ export interface DashManifestInfo {
    * 播放器启播时距离最新直播时间点的时间，是一个回退量（以秒为单位）。[2, 60]，类型：整数，默认值10。
    */
   SuggestedPresentationDelay?: number
+}
+
+/**
+ * aigc cos信息，存储用户请求时填写的cos信息，存放结果
+ */
+export interface VideoDramaCosInfo {
+  /**
+   * <p>cos通地域</p>
+   */
+  CosBucketRegion?: string
+  /**
+   * <p>cos桶名称</p>
+   */
+  CosBucketName?: string
+  /**
+   * <p>cos桶路径</p>
+   */
+  CosBucketPath?: string
 }
 
 /**
@@ -12238,13 +12306,31 @@ export interface EvaluationMediaInputInfo {
 }
 
 /**
- * 直播流 AI 识别结果
+ * DescribeContentReviewTemplates请求参数结构体
  */
-export interface LiveStreamAiRecognitionResultInfo {
+export interface DescribeContentReviewTemplatesRequest {
   /**
-   * 内容识别结果列表。
+   * 智能审核模板唯一标识过滤条件，数组长度限制：50。
    */
-  ResultSet: Array<LiveStreamAiRecognitionResultItem>
+  Definitions?: Array<number | bigint>
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数，默认值：10，最大值：50。
+   */
+  Limit?: number
+  /**
+   * 模板类型过滤条件，不填则返回所有，可选值：
+   * Preset：系统预置模板；
+   * Custom：用户自定义模板。
+   */
+  Type?: string
+  /**
+   * 智能审核模板标识过滤条件，长度限制：64 个字符。
+   */
+  Name?: string
 }
 
 /**
@@ -14717,6 +14803,16 @@ export interface LiveStreamAiReviewVoicePornResult {
 <li>sexual_moan：呻吟。</li>
    */
   Label?: string
+}
+
+/**
+ * 视频转绘的输入源
+ */
+export interface VideoRedrawInput {
+  /**
+   * <p>输入待转绘的视频URL</p>
+   */
+  Url: string
 }
 
 /**
@@ -17741,21 +17837,17 @@ export interface ModifySmartSubtitleTemplateResponse {
 }
 
 /**
- * 用户自定义审核任务控制参数。
+ * CreateVideoRedrawTask请求参数结构体
  */
-export interface UserDefineConfigureInfoForUpdate {
+export interface CreateVideoRedrawTaskRequest {
   /**
-   * 用户自定义人物审核控制参数。
+   * <p>输入待转绘视频url信息</p>
    */
-  FaceReviewInfo: UserDefineFaceReviewTemplateInfoForUpdate
+  Input: VideoRedrawInput
   /**
-   * 用户自定义语音审核控制参数。
+   * <p>用户cos信息，用于保存生成结果</p>
    */
-  AsrReviewInfo: UserDefineAsrTextReviewTemplateInfoForUpdate
-  /**
-   * 用户自定义文本审核控制参数。
-   */
-  OcrReviewInfo: UserDefineOcrTextReviewTemplateInfoForUpdate
+  CosInfo?: VideoRedrawCosInfo
 }
 
 /**
@@ -18936,6 +19028,24 @@ export interface ComposeMediaTrack {
 }
 
 /**
+ * 用户自定义审核任务控制参数。
+ */
+export interface UserDefineConfigureInfoForUpdate {
+  /**
+   * 用户自定义人物审核控制参数。
+   */
+  FaceReviewInfo: UserDefineFaceReviewTemplateInfoForUpdate
+  /**
+   * 用户自定义语音审核控制参数。
+   */
+  AsrReviewInfo: UserDefineAsrTextReviewTemplateInfoForUpdate
+  /**
+   * 用户自定义文本审核控制参数。
+   */
+  OcrReviewInfo: UserDefineOcrTextReviewTemplateInfoForUpdate
+}
+
+/**
  * 文本违禁任务控制参数
  */
 export interface ProhibitedOcrReviewTemplateInfo {
@@ -19220,31 +19330,17 @@ export interface CreateContentReviewTemplateRequest {
 }
 
 /**
- * DescribeContentReviewTemplates请求参数结构体
+ * CreateVideoRedrawTask返回参数结构体
  */
-export interface DescribeContentReviewTemplatesRequest {
+export interface CreateVideoRedrawTaskResponse {
   /**
-   * 智能审核模板唯一标识过滤条件，数组长度限制：50。
+   * <p>任务id</p>
    */
-  Definitions?: Array<number | bigint>
+  TaskId?: string
   /**
-   * 分页偏移量，默认值：0。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: number
-  /**
-   * 返回记录条数，默认值：10，最大值：50。
-   */
-  Limit?: number
-  /**
-   * 模板类型过滤条件，不填则返回所有，可选值：
-   * Preset：系统预置模板；
-   * Custom：用户自定义模板。
-   */
-  Type?: string
-  /**
-   * 智能审核模板标识过滤条件，长度限制：64 个字符。
-   */
-  Name?: string
+  RequestId?: string
 }
 
 /**
@@ -19313,6 +19409,10 @@ export interface AdaptiveDynamicStreamingTaskInput {
    * <p>外挂音频功能，指定要插入的音频文件。</p>
    */
   AddOnAudios?: Array<AddOnAudio>
+  /**
+   * <p>非空时直接替换模板的 StreamInfos 字段，字段格式与创建自适应模板时的 StreamInfos 完全一致</p>
+   */
+  StdExtStreamInfos?: Array<AdaptiveStreamTemplate>
 }
 
 /**
@@ -22157,6 +22257,16 @@ export interface TextTranslationRequest {
    * <p>用户拓展参数</p>
    */
   UserExtPara?: string
+}
+
+/**
+ * 直播流 AI 识别结果
+ */
+export interface LiveStreamAiRecognitionResultInfo {
+  /**
+   * 内容识别结果列表。
+   */
+  ResultSet: Array<LiveStreamAiRecognitionResultItem>
 }
 
 /**
@@ -26409,6 +26519,24 @@ export interface DeleteWatermarkTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * aigc cos信息，存储用户请求时填写的cos信息，存放结果
+ */
+export interface VideoRedrawCosInfo {
+  /**
+   * <p>cos桶地域</p>
+   */
+  CosBucketRegion?: string
+  /**
+   * <p>cos桶名称</p>
+   */
+  CosBucketName?: string
+  /**
+   * <p>cos桶路径</p>
+   */
+  CosBucketPath?: string
 }
 
 /**

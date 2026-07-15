@@ -411,43 +411,43 @@ export interface IntOrString {
  */
 export interface CreateNodePoolRequest {
   /**
-   * 集群 ID
+   * <p>集群 ID</p>
    */
   ClusterId: string
   /**
-   * 节点池名称
+   * <p>节点池名称</p>
    */
   Name: string
   /**
-   * 节点池类型
+   * <p>节点池类型</p>
    */
   Type: string
   /**
-   * 节点  Labels
+   * <p>节点  Labels</p>
    */
   Labels?: Array<Label>
   /**
-   * 节点污点
+   * <p>节点污点</p>
    */
   Taints?: Array<Taint>
   /**
-   * 节点标签
+   * <p>节点标签</p>
    */
   Tags?: Array<TagSpecification>
   /**
-   * 是否开启删除保护
+   * <p>是否开启删除保护</p>
    */
   DeletionProtection?: boolean
   /**
-   * 节点是否默认不可调度
+   * <p>节点是否默认不可调度</p>
    */
   Unschedulable?: boolean
   /**
-   * 原生节点池创建参数（Type字段设置为Native时需填写）
+   * <p>原生节点池创建参数（Type字段设置为Native时需填写）</p>
    */
   Native?: CreateNativeNodePoolParam
   /**
-   * 节点 Annotation 列表
+   * <p>节点 Annotation 列表</p>
    */
   Annotations?: Array<Annotation>
 }
@@ -1096,6 +1096,10 @@ export interface ModifyNodePoolResponse {
  */
 export interface Taint {
   /**
+   * Taint的Effect
+   */
+  Effect?: string
+  /**
    * Taint的Key
    */
   Key?: string
@@ -1103,10 +1107,6 @@ export interface Taint {
    * Taint的Value
    */
   Value?: string
-  /**
-   * Taint的Effect
-   */
-  Effect?: string
 }
 
 /**
@@ -1444,7 +1444,7 @@ export interface HealthCheckTemplateRule {
  */
 export interface CreateNodePoolResponse {
   /**
-   * 节点池 ID
+   * <p>节点池 ID</p>
    */
   NodePoolId?: string
   /**

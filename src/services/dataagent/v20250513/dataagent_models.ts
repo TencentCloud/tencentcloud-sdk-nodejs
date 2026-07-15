@@ -918,6 +918,10 @@ export interface ChatAIRequest {
    * <p>知识库id列表</p>
    */
   KnowledgeBaseIds?: Array<string>
+  /**
+   * <p>版本信息</p>
+   */
+  ArchVersion?: string
 }
 
 /**

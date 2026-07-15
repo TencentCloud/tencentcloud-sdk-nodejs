@@ -148,6 +148,16 @@ it("oceanus.v20190422.DescribeJobSavepoint", async function () {
     }
 })
 
+it("oceanus.v20190422.DeleteOceanusCluster", async function () {
+    try {
+       const data = await client.DeleteOceanusCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("oceanus.v20190422.DescribeJobSubmissionLog", async function () {
     try {
        const data = await client.DescribeJobSubmissionLog({})
@@ -198,9 +208,9 @@ it("oceanus.v20190422.RunJobs", async function () {
     }
 })
 
-it("oceanus.v20190422.DescribeJobEvents", async function () {
+it("oceanus.v20190422.DescribeClusters", async function () {
     try {
-       const data = await client.DescribeJobEvents({})
+       const data = await client.DescribeClusters({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -258,6 +268,16 @@ it("oceanus.v20190422.CreateJob", async function () {
     }
 })
 
+it("oceanus.v20190422.DescribeWorkSpaceUsers", async function () {
+    try {
+       const data = await client.DescribeWorkSpaceUsers({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("oceanus.v20190422.TriggerJobSavepoint", async function () {
     try {
        const data = await client.TriggerJobSavepoint({})
@@ -308,9 +328,9 @@ it("oceanus.v20190422.CreateFolder", async function () {
     }
 })
 
-it("oceanus.v20190422.DescribeWorkSpaceUsers", async function () {
+it("oceanus.v20190422.DescribeSystemResources", async function () {
     try {
-       const data = await client.DescribeWorkSpaceUsers({})
+       const data = await client.DescribeSystemResources({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -338,9 +358,9 @@ it("oceanus.v20190422.CreateJobConfig", async function () {
     }
 })
 
-it("oceanus.v20190422.DescribeClusters", async function () {
+it("oceanus.v20190422.DescribeJobEvents", async function () {
     try {
-       const data = await client.DescribeClusters({})
+       const data = await client.DescribeJobEvents({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -361,6 +381,16 @@ it("oceanus.v20190422.DeleteJobConfigs", async function () {
 it("oceanus.v20190422.StopJobs", async function () {
     try {
        const data = await client.StopJobs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.RenewOceanusCluster", async function () {
+    try {
+       const data = await client.RenewOceanusCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,9 +478,19 @@ it("oceanus.v20190422.CreateResource", async function () {
     }
 })
 
-it("oceanus.v20190422.DescribeSystemResources", async function () {
+it("oceanus.v20190422.ScaleOceanusCluster", async function () {
     try {
-       const data = await client.DescribeSystemResources({})
+       const data = await client.ScaleOceanusCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.CreateOceanusCluster", async function () {
+    try {
+       const data = await client.CreateOceanusCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

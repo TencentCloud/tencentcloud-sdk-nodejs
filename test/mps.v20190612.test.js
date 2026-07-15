@@ -48,6 +48,16 @@ it("mps.v20190612.DescribeStreamLinkFlowRealtimeStatus", async function () {
     }
 })
 
+it("mps.v20190612.CreateAnimatedGraphicsTemplate", async function () {
+    try {
+       const data = await client.CreateAnimatedGraphicsTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DeleteStreamPackageLinearAssemblyProgram", async function () {
     try {
        const data = await client.DeleteStreamPackageLinearAssemblyProgram({})
@@ -1028,6 +1038,16 @@ it("mps.v20190612.ModifyPersonSample", async function () {
     }
 })
 
+it("mps.v20190612.CreateVideoRedrawTask", async function () {
+    try {
+       const data = await client.CreateVideoRedrawTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.CreateLiveRecordTemplate", async function () {
     try {
        const data = await client.CreateLiveRecordTemplate({})
@@ -1428,6 +1448,16 @@ it("mps.v20190612.ManageTask", async function () {
     }
 })
 
+it("mps.v20190612.CreateAiDramaTask", async function () {
+    try {
+       const data = await client.CreateAiDramaTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DescribeStreamPackageSources", async function () {
     try {
        const data = await client.DescribeStreamPackageSources({})
@@ -1798,9 +1828,9 @@ it("mps.v20190612.DeleteStreamPackageSSAIChannel", async function () {
     }
 })
 
-it("mps.v20190612.CreateAnimatedGraphicsTemplate", async function () {
+it("mps.v20190612.DeleteSnapshotByTimeOffsetTemplate", async function () {
     try {
-       const data = await client.CreateAnimatedGraphicsTemplate({})
+       const data = await client.DeleteSnapshotByTimeOffsetTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1831,16 +1861,6 @@ it("mps.v20190612.EnableSchedule", async function () {
 it("mps.v20190612.DescribeAnimatedGraphicsTemplates", async function () {
     try {
        const data = await client.DescribeAnimatedGraphicsTemplates({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("mps.v20190612.DeleteSnapshotByTimeOffsetTemplate", async function () {
-    try {
-       const data = await client.DeleteSnapshotByTimeOffsetTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -208,6 +208,26 @@ it("ga2.v20250115.CreateAccelerateAreas", async function () {
     }
 })
 
+it("ga2.v20250115.DeleteListenerAdditionalCert", async function () {
+    try {
+       const data = await client.DeleteListenerAdditionalCert({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ga2.v20250115.CreateListenerAdditionalCert", async function () {
+    try {
+       const data = await client.CreateListenerAdditionalCert({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ga2.v20250115.ModifyEndpointGroup", async function () {
     try {
        const data = await client.ModifyEndpointGroup({})
@@ -241,6 +261,16 @@ it("ga2.v20250115.CreateForwardingRule", async function () {
 it("ga2.v20250115.CreateGlobalAccelerator", async function () {
     try {
        const data = await client.CreateGlobalAccelerator({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ga2.v20250115.ReplaceListenerAdditionalCert", async function () {
+    try {
+       const data = await client.ReplaceListenerAdditionalCert({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

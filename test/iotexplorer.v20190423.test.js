@@ -168,6 +168,16 @@ it("iotexplorer.v20190423.GetProjectList", async function () {
     }
 })
 
+it("iotexplorer.v20190423.UnbindTWeTalkAgent", async function () {
+    try {
+       const data = await client.UnbindTWeTalkAgent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.CallDeviceActionSync", async function () {
     try {
        const data = await client.CallDeviceActionSync({})
@@ -718,6 +728,16 @@ it("iotexplorer.v20190423.CreateTWeSeeSubscription", async function () {
     }
 })
 
+it("iotexplorer.v20190423.CreateTWeTalkAgent", async function () {
+    try {
+       const data = await client.CreateTWeTalkAgent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.InheritCloudStorageUser", async function () {
     try {
        const data = await client.InheritCloudStorageUser({})
@@ -748,6 +768,16 @@ it("iotexplorer.v20190423.DescribeFirmwareTasks", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeTWeTalkAgentList", async function () {
+    try {
+       const data = await client.DescribeTWeTalkAgentList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.ModifyTWeTalkProductConfig", async function () {
     try {
        const data = await client.ModifyTWeTalkProductConfig({})
@@ -761,6 +791,16 @@ it("iotexplorer.v20190423.ModifyTWeTalkProductConfig", async function () {
 it("iotexplorer.v20190423.TransferTWeCallDevice", async function () {
     try {
        const data = await client.TransferTWeCallDevice({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ListTWeSeeTasks", async function () {
+    try {
+       const data = await client.ListTWeSeeTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1161,6 +1201,16 @@ it("iotexplorer.v20190423.DescribeGatewayBindDevices", async function () {
 it("iotexplorer.v20190423.DismissRoomByStrRoomIdFromTRTC", async function () {
     try {
        const data = await client.DismissRoomByStrRoomIdFromTRTC({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ModifyTWeTalkAgent", async function () {
+    try {
+       const data = await client.ModifyTWeTalkAgent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1638,6 +1688,16 @@ it("iotexplorer.v20190423.DestroyTWeSeeSubscription", async function () {
     }
 })
 
+it("iotexplorer.v20190423.DescribeTWeTalkAgentBinding", async function () {
+    try {
+       const data = await client.DescribeTWeTalkAgentBinding({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.CreateCloudStorageAIServiceTask", async function () {
     try {
        const data = await client.CreateCloudStorageAIServiceTask({})
@@ -1821,6 +1881,16 @@ it("iotexplorer.v20190423.CreateDeviceChannel", async function () {
 it("iotexplorer.v20190423.DescribeDeviceBindGateway", async function () {
     try {
        const data = await client.DescribeDeviceBindGateway({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.BindTWeTalkAgent", async function () {
+    try {
+       const data = await client.BindTWeTalkAgent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2018,9 +2088,9 @@ it("iotexplorer.v20190423.DeleteTopicPolicy", async function () {
     }
 })
 
-it("iotexplorer.v20190423.ListTWeSeeTasks", async function () {
+it("iotexplorer.v20190423.DeleteTWeTalkAgent", async function () {
     try {
-       const data = await client.ListTWeSeeTasks({})
+       const data = await client.DeleteTWeTalkAgent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2231,6 +2301,16 @@ it("iotexplorer.v20190423.DescribeProject", async function () {
 it("iotexplorer.v20190423.BindCloudStorageUser", async function () {
     try {
        const data = await client.BindCloudStorageUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.DescribeTWeTalkAgent", async function () {
+    try {
+       const data = await client.DescribeTWeTalkAgent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -63,10 +63,12 @@ import {
   BatchDescribeDocumentRequest,
   RegisterUserRequest,
   BatchCreateRoomResponse,
+  DescribeEditVersionsRequest,
   LoginUserWithRoomRequest,
   UnbindDocumentFromRoomResponse,
   CreateDocumentResponse,
   DescribeMarqueeRequest,
+  SetWatermarkRequest,
   DescribeGroupResponse,
   SetAppCustomContentResponse,
   UnblockKickedUserRequest,
@@ -113,6 +115,7 @@ import {
   DescribeRoomForbiddenUserResponse,
   UserInfo,
   DescribeUserResponse,
+  GetEditVersionTokenRequest,
   DescribeScoreListResponse,
   DescribeDocumentRequest,
   BatchDeleteRecordResponse,
@@ -128,6 +131,7 @@ import {
   GetRoomMessageResponse,
   GroupBaseInfo,
   BatchUserInfo,
+  EditVersions,
   BatchAddGroupMemberRequest,
   StartRecordResponse,
   LoginUserWithRoomResponse,
@@ -138,6 +142,7 @@ import {
   DescribeRecordStreamResponse,
   DescribeCurrentMemberListRequest,
   SendRoomNotificationMessageRequest,
+  GetEditVersionTokenResponse,
   DescribeSdkAppIdUsersResponse,
   EventDataInfo,
   DescribeAnswerListResponse,
@@ -151,6 +156,8 @@ import {
   EndRoomResponse,
   GetPlaybackTokenRequest,
   EndRoomRequest,
+  SetMainEditVersionResponse,
+  DescribeEditVersionsResponse,
   CreateGroupWithMembersResponse,
   BatchDeleteGroupMemberRequest,
   ImageInfo,
@@ -181,7 +188,7 @@ import {
   SetMarqueeResponse,
   QuestionInfo,
   KickUserFromRoomRequest,
-  SetWatermarkRequest,
+  SetMainEditVersionRequest,
   GetRoomsRequest,
   BatchGetPlaybackTokenResponse,
   ForbidSendMsgResponse,
@@ -332,6 +339,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 查询白板板书截图
+课程结束后，可以查询和以图片的形式导出这些内容，方便后续查看、整理与分享。
+注意：不支持屏幕共享中的板书导出。
+     */
+  async DescribeWhiteBoardSnapshot(
+    req: DescribeWhiteBoardSnapshotRequest,
+    cb?: (error: string, rep: DescribeWhiteBoardSnapshotResponse) => void
+  ): Promise<DescribeWhiteBoardSnapshotResponse> {
+    return this.request("DescribeWhiteBoardSnapshot", req, cb)
+  }
+
+  /**
    * 获取房间历史消息(房间历史消息保存7天)
    */
   async GetRoomMessage(
@@ -372,15 +391,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询白板板书截图
-课程结束后，可以查询和以图片的形式导出这些内容，方便后续查看、整理与分享。
-注意：不支持屏幕共享中的板书导出。
-     */
-  async DescribeWhiteBoardSnapshot(
-    req: DescribeWhiteBoardSnapshotRequest,
-    cb?: (error: string, rep: DescribeWhiteBoardSnapshotResponse) => void
-  ): Promise<DescribeWhiteBoardSnapshotResponse> {
-    return this.request("DescribeWhiteBoardSnapshot", req, cb)
+   * 获取课堂的所有编辑版本（含源版本）
+   */
+  async DescribeEditVersions(
+    req: DescribeEditVersionsRequest,
+    cb?: (error: string, rep: DescribeEditVersionsResponse) => void
+  ): Promise<DescribeEditVersionsResponse> {
+    return this.request("DescribeEditVersions", req, cb)
+  }
+
+  /**
+   * 开始录制
+   */
+  async StartRecord(
+    req: StartRecordRequest,
+    cb?: (error: string, rep: StartRecordResponse) => void
+  ): Promise<StartRecordResponse> {
+    return this.request("StartRecord", req, cb)
   }
 
   /**
@@ -431,6 +458,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeSdkAppIdUsersResponse) => void
   ): Promise<DescribeSdkAppIdUsersResponse> {
     return this.request("DescribeSdkAppIdUsers", req, cb)
+  }
+
+  /**
+   * 切换课堂的主编辑版本
+   */
+  async SetMainEditVersion(
+    req: SetMainEditVersionRequest,
+    cb?: (error: string, rep: SetMainEditVersionResponse) => void
+  ): Promise<SetMainEditVersionResponse> {
+    return this.request("SetMainEditVersion", req, cb)
   }
 
   /**
@@ -1007,13 +1044,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 开始录制
+   * 获取剪辑信令回放token
    */
-  async StartRecord(
-    req: StartRecordRequest,
-    cb?: (error: string, rep: StartRecordResponse) => void
-  ): Promise<StartRecordResponse> {
-    return this.request("StartRecord", req, cb)
+  async GetEditVersionToken(
+    req: GetEditVersionTokenRequest,
+    cb?: (error: string, rep: GetEditVersionTokenResponse) => void
+  ): Promise<GetEditVersionTokenResponse> {
+    return this.request("GetEditVersionToken", req, cb)
   }
 
   /**

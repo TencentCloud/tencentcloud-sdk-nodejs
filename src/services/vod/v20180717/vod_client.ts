@@ -902,6 +902,7 @@ import {
   PornAsrReviewTemplateInfoForUpdate,
   ModifySubAppIdStatusResponse,
   CreateAIAnalysisTemplateRequest,
+  UpdateAigcApiTokenResponse,
   AiReviewTerrorismTaskInput,
   ComplexAdaptiveDynamicStreamingTaskStreamPara,
   MPSUpdateSmartEraseSubtitleConfig,
@@ -951,6 +952,7 @@ import {
   DescribeWatermarkTemplatesResponse,
   WeChatMiniProgramPublishResponse,
   DescribeRoundPlaysResponse,
+  UpdateAigcApiTokenRequest,
   ImageTransform,
   CreateAnimatedGraphicsTemplateRequest,
   AigcVideoRedrawTaskOutput,
@@ -1998,6 +2000,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySampleSnapshotTemplateResponse) => void
   ): Promise<ModifySampleSnapshotTemplateResponse> {
     return this.request("ModifySampleSnapshotTemplate", req, cb)
+  }
+
+  /**
+   * 创建AIGC调用API的Token。创建后数据同步有延时，约30秒后可查询或删除。
+   */
+  async UpdateAigcApiToken(
+    req: UpdateAigcApiTokenRequest,
+    cb?: (error: string, rep: UpdateAigcApiTokenResponse) => void
+  ): Promise<UpdateAigcApiTokenResponse> {
+    return this.request("UpdateAigcApiToken", req, cb)
   }
 
   /**

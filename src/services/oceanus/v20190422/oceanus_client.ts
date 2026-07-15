@@ -38,11 +38,13 @@ import {
   LogContent,
   JobRuntimeInfo,
   ClusterBucketInfo,
+  ScaleOceanusClusterRequest,
   JobEventInfo,
   DescribeWorkSpaceUsersResponse,
   NodeConfig,
   WorkSpaceSetItem,
   DescribeJobConfigsRequest,
+  StopJobsRequest,
   ResultColumn,
   Setats,
   TreeJobSets,
@@ -53,10 +55,11 @@ import {
   ModifyConnectorRequest,
   SetatsDisk,
   ResourceLoc,
+  RenewOceanusClusterResponse,
   CCN,
   DescribeWorkSpacesRequest,
   ResourceRefJobInfo,
-  LogicalType,
+  CreateOceanusClusterResponse,
   DescribeTreeResourcesRequest,
   DescribeResourceConfigsResponse,
   VariableItem,
@@ -89,13 +92,16 @@ import {
   DescribeJobRuntimeInfoRequest,
   DescribeWorkSpacesResponse,
   GatewayRefItem,
+  CreateOceanusClusterRequest,
   CreateResourceResponse,
   ResourceRefLatest,
   DescribeSystemResourcesRequest,
   CreateFolderResponse,
   DescribeResourcesResponse,
   RunJobDescription,
+  SlaveVpcDescriptions,
   DescribeResourceRelatedJobsResponse,
+  LogicalType,
   Connectors,
   DescribeClustersResponse,
   CheckConnectorNameResponse,
@@ -106,7 +112,7 @@ import {
   WorkSpaceClusterItem,
   CheckSavepointRequest,
   DeleteJobConfigsRequest,
-  StopJobsRequest,
+  RenewOceanusClusterRequest,
   TraceModeConfiguration,
   RunJobsRequest,
   DeleteWorkSpaceResponse,
@@ -126,10 +132,11 @@ import {
   ResourceRefDetail,
   SetatsCvmInfo,
   TreeResourceItem,
-  ExpertModeConfiguration,
+  DescribeTreeResourcesResponse,
   CreateVariableResponse,
   Filter,
   DeleteResourcesRequest,
+  VPCDescription,
   RunJobsResponse,
   ClusterGroupSetItem,
   DescribeJobSavepointRequest,
@@ -139,7 +146,7 @@ import {
   DeleteResourceConfigsResponse,
   Cluster,
   CreateVariableRequest,
-  JobGraph,
+  DeleteOceanusClusterRequest,
   DescribeJobSubmissionLogRequest,
   DescribeJobsRequest,
   JobV1,
@@ -150,6 +157,7 @@ import {
   ModifyWorkSpaceResponse,
   ResourceLocParam,
   CreateJobRequest,
+  ScaleOceanusClusterResponse,
   JobInstanceForSubmissionLog,
   DescribeFolderRequest,
   DescribeWorkSpaceUsersRequest,
@@ -159,6 +167,7 @@ import {
   ClusterSession,
   ParseConnectorResponse,
   CreateResourceConfigRequest,
+  JobGraph,
   ModifyConnectorResponse,
   CheckConnectorNameRequest,
   StopJobsResponse,
@@ -167,8 +176,9 @@ import {
   DescribeJobEventsRequest,
   FlinkJdkVersion,
   CheckSavepointResponse,
+  DeleteOceanusClusterResponse,
   DescribeJobsResponse,
-  DescribeTreeResourcesResponse,
+  ExpertModeConfiguration,
   Order,
   CreateConnectorRequest,
   CopyJobItem,
@@ -319,6 +329,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 销毁Oceanus集群
+   */
+  async DeleteOceanusCluster(
+    req: DeleteOceanusClusterRequest,
+    cb?: (error: string, rep: DeleteOceanusClusterResponse) => void
+  ): Promise<DeleteOceanusClusterResponse> {
+    return this.request("DeleteOceanusCluster", req, cb)
+  }
+
+  /**
    * 查询作业实例启动日志
    */
   async DescribeJobSubmissionLog(
@@ -369,13 +389,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 请求参数不包含 "RunningOrderIds"时，接口获取指定作业的事件，包括作业启动停止、运行失败、快照失败、作业异常等各种事件类型;请求参数不包含 "RunningOrderIds"时，接口为查询作业实例ID接口,获取作业实例
+   * 查询集群
    */
-  async DescribeJobEvents(
-    req: DescribeJobEventsRequest,
-    cb?: (error: string, rep: DescribeJobEventsResponse) => void
-  ): Promise<DescribeJobEventsResponse> {
-    return this.request("DescribeJobEvents", req, cb)
+  async DescribeClusters(
+    req: DescribeClustersRequest,
+    cb?: (error: string, rep: DescribeClustersResponse) => void
+  ): Promise<DescribeClustersResponse> {
+    return this.request("DescribeClusters", req, cb)
   }
 
   /**
@@ -429,6 +449,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 工作空间用户列表
+   */
+  async DescribeWorkSpaceUsers(
+    req: DescribeWorkSpaceUsersRequest,
+    cb?: (error: string, rep: DescribeWorkSpaceUsersResponse) => void
+  ): Promise<DescribeWorkSpaceUsersResponse> {
+    return this.request("DescribeWorkSpaceUsers", req, cb)
+  }
+
+  /**
    * 触发Savepoint
    */
   async TriggerJobSavepoint(
@@ -479,13 +509,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 工作空间用户列表
+   * 描述系统资源接口
    */
-  async DescribeWorkSpaceUsers(
-    req: DescribeWorkSpaceUsersRequest,
-    cb?: (error: string, rep: DescribeWorkSpaceUsersResponse) => void
-  ): Promise<DescribeWorkSpaceUsersResponse> {
-    return this.request("DescribeWorkSpaceUsers", req, cb)
+  async DescribeSystemResources(
+    req: DescribeSystemResourcesRequest,
+    cb?: (error: string, rep: DescribeSystemResourcesResponse) => void
+  ): Promise<DescribeSystemResourcesResponse> {
+    return this.request("DescribeSystemResources", req, cb)
   }
 
   /**
@@ -509,13 +539,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询集群
+   * 请求参数不包含 "RunningOrderIds"时，接口获取指定作业的事件，包括作业启动停止、运行失败、快照失败、作业异常等各种事件类型;请求参数不包含 "RunningOrderIds"时，接口为查询作业实例ID接口,获取作业实例
    */
-  async DescribeClusters(
-    req: DescribeClustersRequest,
-    cb?: (error: string, rep: DescribeClustersResponse) => void
-  ): Promise<DescribeClustersResponse> {
-    return this.request("DescribeClusters", req, cb)
+  async DescribeJobEvents(
+    req: DescribeJobEventsRequest,
+    cb?: (error: string, rep: DescribeJobEventsResponse) => void
+  ): Promise<DescribeJobEventsResponse> {
+    return this.request("DescribeJobEvents", req, cb)
   }
 
   /**
@@ -536,6 +566,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopJobsResponse) => void
   ): Promise<StopJobsResponse> {
     return this.request("StopJobs", req, cb)
+  }
+
+  /**
+   * 续费Oceanus集群
+   */
+  async RenewOceanusCluster(
+    req: RenewOceanusClusterRequest,
+    cb?: (error: string, rep: RenewOceanusClusterResponse) => void
+  ): Promise<RenewOceanusClusterResponse> {
+    return this.request("RenewOceanusCluster", req, cb)
   }
 
   /**
@@ -627,13 +667,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 描述系统资源接口
+   * 扩缩容Oceanus集群
    */
-  async DescribeSystemResources(
-    req: DescribeSystemResourcesRequest,
-    cb?: (error: string, rep: DescribeSystemResourcesResponse) => void
-  ): Promise<DescribeSystemResourcesResponse> {
-    return this.request("DescribeSystemResources", req, cb)
+  async ScaleOceanusCluster(
+    req: ScaleOceanusClusterRequest,
+    cb?: (error: string, rep: ScaleOceanusClusterResponse) => void
+  ): Promise<ScaleOceanusClusterResponse> {
+    return this.request("ScaleOceanusCluster", req, cb)
+  }
+
+  /**
+   * 创建Oceanus集群
+   */
+  async CreateOceanusCluster(
+    req: CreateOceanusClusterRequest,
+    cb?: (error: string, rep: CreateOceanusClusterResponse) => void
+  ): Promise<CreateOceanusClusterResponse> {
+    return this.request("CreateOceanusCluster", req, cb)
   }
 
   /**

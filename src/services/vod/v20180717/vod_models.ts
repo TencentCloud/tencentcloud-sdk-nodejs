@@ -10626,7 +10626,7 @@ export interface ModifyAIAnalysisTemplateResponse {
  */
 export interface DescribeAigcApiTokensRequest {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
 }
@@ -22376,9 +22376,13 @@ export interface FaceRecognitionTask {
  */
 export interface DescribeAigcApiTokensResponse {
   /**
-   * API Token 列表
+   * <p>API Token 列表</p>
    */
   ApiTokens?: Array<string>
+  /**
+   * <p>ExtInfo信息，和API Token列表一一对应</p>
+   */
+  ExtInfos?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -22769,6 +22773,16 @@ export interface CreateAIAnalysisTemplateRequest {
    * 智能精彩集锦任务控制参数。
    */
   HighlightConfigure?: HighlightsConfigureInfo
+}
+
+/**
+ * UpdateAigcApiToken返回参数结构体
+ */
+export interface UpdateAigcApiTokenResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -24237,6 +24251,28 @@ export interface DescribeRoundPlaysResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateAigcApiToken请求参数结构体
+ */
+export interface UpdateAigcApiTokenRequest {
+  /**
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
+   */
+  SubAppId: number
+  /**
+   * <p>要更新Api Key</p>
+   */
+  ApiToken: string
+  /**
+   * <p>Merge（默认，对 ExtInfo JSON 按顶层 key 合并）、Overwrite（直接覆盖）</p>
+   */
+  ActionType?: string
+  /**
+   * <p>token 的扩展信息</p>
+   */
+  ExtInfo?: string
 }
 
 /**

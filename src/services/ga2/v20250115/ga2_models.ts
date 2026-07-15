@@ -124,29 +124,17 @@ export interface DescribeEndpointGroupsResponse {
 }
 
 /**
- * ModifyGlobalAccelerator请求参数结构体
+ * DeleteListenerAdditionalCert返回参数结构体
  */
-export interface ModifyGlobalAcceleratorRequest {
+export interface DeleteListenerAdditionalCertResponse {
   /**
-   * <p>全球加速实例ID。</p>
+   * 任务ID。
    */
-  GlobalAcceleratorId: string
+  TaskId?: string
   /**
-   * <p>名称，最大长度不能超过60个字节。</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Name?: string
-  /**
-   * <p>描述信息，最大长度不能超过100个字节。</p>
-   */
-  Description?: string
-  /**
-   * <p>跨境类型。</p><p>枚举值：</p><ul><li>HighQuality： 精品跨境。</li><li>Unicom： 联通跨境。</li></ul>
-   */
-  CrossBorderType?: string
-  /**
-   * <p>代表是否填写跨境服务承诺书。</p><p>当CrossBorderType传入时，此字段必须填ture，代表填写跨境承诺书。</p>
-   */
-  CrossBorderPromiseFlag?: boolean
+  RequestId?: string
 }
 
 /**
@@ -282,17 +270,21 @@ export interface AcceleratorRegionSet {
 }
 
 /**
- * ModifyEndpointGroup返回参数结构体
+ * DeleteListenerAdditionalCert请求参数结构体
  */
-export interface ModifyEndpointGroupResponse {
+export interface DeleteListenerAdditionalCertRequest {
   /**
-   * <p>任务ID。</p>
+   * 全球加速实例ID。
    */
-  TaskId?: string
+  GlobalAcceleratorId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 监听器ID。
    */
-  RequestId?: string
+  ListenerId: string
+  /**
+   * 证书ID。
+   */
+  AdditionalCertificates: Array<string>
 }
 
 /**
@@ -416,21 +408,17 @@ export interface ModifyForwardingPolicyResponse {
 }
 
 /**
- * DescribeGlobalAccelerators请求参数结构体
+ * CreateListenerAdditionalCert返回参数结构体
  */
-export interface DescribeGlobalAcceleratorsRequest {
+export interface CreateListenerAdditionalCertResponse {
   /**
-   * <p>偏移量，默认为0。</p>
+   * <p>任务ID。</p>
    */
-  Offset?: number
+  TaskId?: string
   /**
-   * <p>返回数量。</p><p>取值范围：[1, 200]</p><p>默认值：20</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Limit?: number
-  /**
-   * <p>过滤条件。<li>global-accelerator-id - String -（过滤条件）全球加速实例ID。</li> <li>global-accelerator-state - String -（过滤条件）全球加速实例状态。</li></p>
-   */
-  Filters?: Array<Filter>
+  RequestId?: string
 }
 
 /**
@@ -513,20 +501,6 @@ export interface DeleteAccelerateAreasRequest {
    * 加速地域ID。
    */
   AcceleratorAreaIds: Array<string>
-}
-
-/**
- * ModifyListener返回参数结构体
- */
-export interface ModifyListenerResponse {
-  /**
-   * <p>任务ID。</p>
-   */
-  TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -652,6 +626,34 @@ export interface EndpointGroupConfigurationSet {
 }
 
 /**
+ * ModifyListener返回参数结构体
+ */
+export interface ModifyListenerResponse {
+  /**
+   * <p>任务ID。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteGlobalAccelerator返回参数结构体
+ */
+export interface DeleteGlobalAcceleratorResponse {
+  /**
+   * 任务ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAccelerateAreas返回参数结构体
  */
 export interface DeleteAccelerateAreasResponse {
@@ -744,11 +746,11 @@ export interface OriginHeader {
 }
 
 /**
- * DeleteEndpointGroups返回参数结构体
+ * DeleteForwardingRule返回参数结构体
  */
-export interface DeleteEndpointGroupsResponse {
+export interface DeleteForwardingRuleResponse {
   /**
-   * 任务ID。
+   * 异步任务ID。
    */
   TaskId?: string
   /**
@@ -858,65 +860,35 @@ export interface ModifyForwardingRuleRequest {
 }
 
 /**
- * ModifyListener请求参数结构体
+ * DescribeGlobalAccelerators请求参数结构体
  */
-export interface ModifyListenerRequest {
+export interface DescribeGlobalAcceleratorsRequest {
   /**
-   * <p>全球加速实例ID。</p>
+   * <p>偏移量，默认为0。</p>
    */
-  GlobalAcceleratorId: string
+  Offset?: number
   /**
-   * <p>监听器ID。</p>
+   * <p>返回数量。</p><p>取值范围：[1, 200]</p><p>默认值：20</p>
    */
-  ListenerId: string
+  Limit?: number
   /**
-   * <p>名称，最大长度不能超过60个字节。</p>
+   * <p>过滤条件。<li>global-accelerator-id - String -（过滤条件）全球加速实例ID。</li> <li>global-accelerator-state - String -（过滤条件）全球加速实例状态。</li></p>
    */
-  Name?: string
+  Filters?: Array<Filter>
+}
+
+/**
+ * 标签键值对
+ */
+export interface Tag {
   /**
-   * <p>描述信息，最大长度不能超过100个字节。</p>
+   * 标签键
    */
-  Description?: string
+  Key: string
   /**
-   * <p>连接空闲等待时间。</p><p>1、HTTP/HTTPS监听器，支持范围为1-60；2、TCP监听器，支持范围为10-900；3、UDP监听器，支持范围为10-20；</p>
+   * 标签值
    */
-  IdleTimeout?: number
-  /**
-   * <p>是否开启会话保持。</p><p>枚举值：</p><ul><li>Open： 打开。</li><li>Close： 关闭。</li></ul><p>TCP/UDP监听器支持修改此参数。</p>
-   */
-  ClientAffinity?: string
-  /**
-   * <p>会话保持时间。</p><p>取值范围：[60, 3600]</p>
-   */
-  ClientAffinityTime?: number
-  /**
-   * <p>请求超时时间。</p><p>取值范围：[1, 180]</p><p>HTTPS监听器才支持此参数修改。</p>
-   */
-  RequestTimeout?: number
-  /**
-   * <p>是否打开七层获取源IP方式。</p><p>HTTPS/HTTP监听器才支持此参数修改。</p>
-   */
-  XForwardedForRealIp?: boolean
-  /**
-   * <p>解析方式。</p><p>枚举值：</p><ul><li>UNIDIRECTIONAL： 双向。</li><li>MUTUAL： 单向。</li></ul><p>HTTPS/HTTP监听器才支持修改此参数。</p>
-   */
-  CertificationType?: string
-  /**
-   * <p>加密算法套件。</p><p>入参限制：支持选择tls_policy_1.0-2&#39;, &#39;tls_policy_1.1-2&#39;, &#39;tls_policy_1.2&#39;, &#39;tls_policy_1.2_strict&#39;, &#39;tls_policy_1.2_strict-1.3&#39;。</p><p>HTTPS监听器才支持此参数修改。</p>
-   */
-  CipherPolicyId?: string
-  /**
-   * <p>服务器证书。</p><p>HTTPS监听器才支持此参数修改。</p>
-   */
-  ServerCertificates?: Array<string>
-  /**
-   * <p>客户端证书。</p><p>HTTPS监听器才支持此参数修改，并且开启双向认证。</p>
-   */
-  ClientCaCertificates?: Array<string>
-  /**
-   * <p>获取源IP方式。</p><p>入参限制：支持选择&#39;ProxyProtocol&#39;, &#39;Close&#39;, &#39;ProxyProtocolV2&#39;, &#39;TOA&#39;。</p><p>TCP监听器才支持此参数修改。</p>
-   */
-  GetRealIpType?: string
+  Value: string
 }
 
 /**
@@ -1194,6 +1166,32 @@ export interface ListenerSet {
 }
 
 /**
+ * ModifyGlobalAccelerator请求参数结构体
+ */
+export interface ModifyGlobalAcceleratorRequest {
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>名称，最大长度不能超过60个字节。</p>
+   */
+  Name?: string
+  /**
+   * <p>描述信息，最大长度不能超过100个字节。</p>
+   */
+  Description?: string
+  /**
+   * <p>跨境类型。</p><p>枚举值：</p><ul><li>HighQuality： 精品跨境。</li><li>Unicom： 联通跨境。</li></ul>
+   */
+  CrossBorderType?: string
+  /**
+   * <p>代表是否填写跨境服务承诺书。</p><p>当CrossBorderType传入时，此字段必须填ture，代表填写跨境承诺书。</p>
+   */
+  CrossBorderPromiseFlag?: boolean
+}
+
+/**
  * DescribeAccelerateAreas返回参数结构体
  */
 export interface DescribeAccelerateAreasResponse {
@@ -1335,6 +1333,20 @@ export interface RuleCondition {
 export type DescribeAccelerateRegionsRequest = null
 
 /**
+ * ReplaceListenerAdditionalCert返回参数结构体
+ */
+export interface ReplaceListenerAdditionalCertResponse {
+  /**
+   * 任务ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 响应Header
  */
 export interface ResponseHeaders {
@@ -1349,11 +1361,11 @@ export interface ResponseHeaders {
 }
 
 /**
- * DeleteForwardingRule返回参数结构体
+ * DeleteEndpointGroups返回参数结构体
  */
-export interface DeleteForwardingRuleResponse {
+export interface DeleteEndpointGroupsResponse {
   /**
-   * 异步任务ID。
+   * 任务ID。
    */
   TaskId?: string
   /**
@@ -1721,6 +1733,20 @@ export interface AcceleratorAreas {
 }
 
 /**
+ * ModifyEndpointGroup返回参数结构体
+ */
+export interface ModifyEndpointGroupResponse {
+  /**
+   * <p>任务ID。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateEndpointGroup请求参数结构体
  */
 export interface CreateEndpointGroupRequest {
@@ -1743,6 +1769,28 @@ export interface CreateEndpointGroupRequest {
 }
 
 /**
+ * ReplaceListenerAdditionalCert请求参数结构体
+ */
+export interface ReplaceListenerAdditionalCertRequest {
+  /**
+   * 全球加速实例ID。
+   */
+  GlobalAcceleratorId: string
+  /**
+   * 监听器ID。
+   */
+  ListenerId: string
+  /**
+   * 证书ID。
+   */
+  AdditionalCertificate: string
+  /**
+   * 旧的证书ID。
+   */
+  OldCertificate: string
+}
+
+/**
  * CreateEndpointGroup返回参数结构体
  */
 export interface CreateEndpointGroupResponse {
@@ -1761,17 +1809,21 @@ export interface CreateEndpointGroupResponse {
 }
 
 /**
- * DeleteGlobalAccelerator返回参数结构体
+ * CreateListenerAdditionalCert请求参数结构体
  */
-export interface DeleteGlobalAcceleratorResponse {
+export interface CreateListenerAdditionalCertRequest {
   /**
-   * 任务ID。
+   * <p>全球加速实例ID。</p>
    */
-  TaskId?: string
+  GlobalAcceleratorId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>监听器ID。</p>
    */
-  RequestId?: string
+  ListenerId: string
+  /**
+   * <p>证书ID。</p><p>当前只能添加服务器证书。</p>
+   */
+  AdditionalCertificates: Array<string>
 }
 
 /**
@@ -1859,15 +1911,63 @@ export interface PortOverride {
 }
 
 /**
- * 标签键值对
+ * ModifyListener请求参数结构体
  */
-export interface Tag {
+export interface ModifyListenerRequest {
   /**
-   * 标签键
+   * <p>全球加速实例ID。</p>
    */
-  Key: string
+  GlobalAcceleratorId: string
   /**
-   * 标签值
+   * <p>监听器ID。</p>
    */
-  Value: string
+  ListenerId: string
+  /**
+   * <p>名称，最大长度不能超过60个字节。</p>
+   */
+  Name?: string
+  /**
+   * <p>描述信息，最大长度不能超过100个字节。</p>
+   */
+  Description?: string
+  /**
+   * <p>连接空闲等待时间。</p><p>1、HTTP/HTTPS监听器，支持范围为1-60；2、TCP监听器，支持范围为10-900；3、UDP监听器，支持范围为10-20；</p>
+   */
+  IdleTimeout?: number
+  /**
+   * <p>是否开启会话保持。</p><p>枚举值：</p><ul><li>Open： 打开。</li><li>Close： 关闭。</li></ul><p>TCP/UDP监听器支持修改此参数。</p>
+   */
+  ClientAffinity?: string
+  /**
+   * <p>会话保持时间。</p><p>取值范围：[60, 3600]</p>
+   */
+  ClientAffinityTime?: number
+  /**
+   * <p>请求超时时间。</p><p>取值范围：[1, 180]</p><p>HTTPS监听器才支持此参数修改。</p>
+   */
+  RequestTimeout?: number
+  /**
+   * <p>是否打开七层获取源IP方式。</p><p>HTTPS/HTTP监听器才支持此参数修改。</p>
+   */
+  XForwardedForRealIp?: boolean
+  /**
+   * <p>解析方式。</p><p>枚举值：</p><ul><li>UNIDIRECTIONAL： 双向。</li><li>MUTUAL： 单向。</li></ul><p>HTTPS/HTTP监听器才支持修改此参数。</p>
+   */
+  CertificationType?: string
+  /**
+   * <p>加密算法套件。</p><p>入参限制：支持选择tls_policy_1.0-2&#39;, &#39;tls_policy_1.1-2&#39;, &#39;tls_policy_1.2&#39;, &#39;tls_policy_1.2_strict&#39;, &#39;tls_policy_1.2_strict-1.3&#39;。</p><p>HTTPS监听器才支持此参数修改。</p>
+   */
+  CipherPolicyId?: string
+  /**
+   * <p>服务器证书。</p><p>HTTPS监听器才支持此参数修改。</p>
+   */
+  ServerCertificates?: Array<string>
+  /**
+   * <p>客户端证书。</p><p>HTTPS监听器才支持此参数修改，并且开启双向认证。</p>
+   */
+  ClientCaCertificates?: Array<string>
+  /**
+   * <p>获取源IP方式。</p><p>入参限制：支持选择&#39;ProxyProtocol&#39;, &#39;Close&#39;, &#39;ProxyProtocolV2&#39;, &#39;TOA&#39;。</p><p>TCP监听器才支持此参数修改。</p>
+   */
+  GetRealIpType?: string
 }

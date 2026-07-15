@@ -254,6 +254,46 @@ export interface CreateSearchViewRequest {
 }
 
 /**
+ * DescribeAgentConfigs返回参数结构体
+ */
+export interface DescribeAgentConfigsResponse {
+  /**
+   * 采集配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogConfigs: Array<LogConfigInfo>
+  /**
+   * 服务日志的配置信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceLogConfigs: Array<ServiceLogConfigInfo>
+  /**
+   * 弃用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LastVersion: string
+  /**
+   * 弃用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NeedUpdate: boolean
+  /**
+   * 弃用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  URL: string
+  /**
+   * 弃用
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FileMd5: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CheckFunction请求参数结构体
  */
 export interface CheckFunctionRequest {
@@ -989,6 +1029,20 @@ export interface CreateConsumerGroupRequest {
    * 日志集Id（日志主题所属的日志集）
    */
   LogsetId: string
+}
+
+/**
+ * agent 应用主题信息
+ */
+export interface AgentTopicInfo {
+  /**
+   * <p>日志主题id</p>
+   */
+  TopicId?: string
+  /**
+   * <p>主题对应的标识</p><p>Langfuse类型对应一个trace标识的日志主题</p>
+   */
+  Flag?: string
 }
 
 /**
@@ -2230,6 +2284,24 @@ export interface DeleteDataTransformRequest {
 }
 
 /**
+ * DescribeRemoteWriteTasks返回参数结构体
+ */
+export interface DescribeRemoteWriteTasksResponse {
+  /**
+   * RemoteWrite 信息列表
+   */
+  Infos?: Array<RemoteWriteInfo>
+  /**
+   * RemoteWrite信息总条数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddMachineGroupInfo请求参数结构体
  */
 export interface AddMachineGroupInfoRequest {
@@ -2921,6 +2993,24 @@ export interface MonitorNoticeRule {
 export type DescribeKafkaConsumerPreviewRequest = null
 
 /**
+ * DescribeAgentApplications请求参数结构体
+ */
+export interface DescribeAgentApplicationsRequest {
+  /**
+   * <p>过滤项</p><ul><li><p>applicationName<br>按照【应用名称】进行过滤。模糊匹配方式查询。<br>类型：String<br>必选：否</p></li><li><p>applicationId<br>按照【应用id】进行过滤。<br>类型：String<br>必选：否</p></li><li><p>accessType<br>按照【接入类型】进行过滤。<br>类型：String<br>支持：<code>Langfuse</code><br>必选：否</p></li></ul><p>每次请求的Filters的上限为10，Filter.Values的上限为10。</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>分页的偏移量，默认值为0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>分页单页限制数目，默认值为20，最大值100。</p>
+   */
+  Limit?: number
+}
+
+/**
  * CreateDeliverCloudFunction返回参数结构体
  */
 export interface CreateDeliverCloudFunctionResponse {
@@ -2956,6 +3046,16 @@ export interface CompressInfo {
    * 压缩格式，支持gzip、lzop、snappy和none不压缩
    */
   Format: string
+}
+
+/**
+ * ModifyRemoteWriteTask返回参数结构体
+ */
+export interface ModifyRemoteWriteTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4028,6 +4128,16 @@ export interface CreateNetworkApplicationRequest {
 }
 
 /**
+ * ModifyS3Recharge返回参数结构体
+ */
+export interface ModifyS3RechargeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteLogset返回参数结构体
  */
 export interface DeleteLogsetResponse {
@@ -4461,13 +4571,52 @@ export interface OpenKafkaConsumerResponse {
 }
 
 /**
- * DeleteSearchView返回参数结构体
+ * 告警对象
  */
-export interface DeleteSearchViewResponse {
+export interface AlarmTargetInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 日志集ID。
    */
-  RequestId?: string
+  LogsetId?: string
+  /**
+   * 日志集名称。
+   */
+  LogsetName?: string
+  /**
+   * 日志主题ID。
+   */
+  TopicId?: string
+  /**
+   * 日志主题名称。
+   */
+  TopicName?: string
+  /**
+   * 查询语句。
+   */
+  Query?: string
+  /**
+   * 告警对象序号。
+   */
+  Number?: number
+  /**
+   * 查询范围起始时间相对于告警执行时间的偏移，单位为分钟，取值为非正，最大值为0，最小值为-1440。
+   */
+  StartTimeOffset?: number
+  /**
+   * 查询范围终止时间相对于告警执行时间的偏移，单位为分钟，取值为非正，须大于StartTimeOffset，最大值为0，最小值为-1440。
+   */
+  EndTimeOffset?: number
+  /**
+   * 检索语法规则，默认值为0。
+0：Lucene语法，1：CQL语法。
+详细说明参见<a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules" target="_blank">检索条件语法规则</a>
+   */
+  SyntaxRule?: number
+  /**
+   * 主题类型。
+0: 日志主题，1: 指标主题
+   */
+  BizType?: number
 }
 
 /**
@@ -5075,13 +5224,29 @@ export interface ModifyHostMetricConfigResponse {
 }
 
 /**
- * DescribeMetricCorrectDimension返回参数结构体
+ * DescribeConsumerOffsets请求参数结构体
  */
-export interface DescribeMetricCorrectDimensionResponse {
+export interface DescribeConsumerOffsetsRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 日志主题对应的消费组标识
    */
-  RequestId?: string
+  ConsumerGroup: string
+  /**
+   * 时间戳(秒级时间戳)
+   */
+  From: string
+  /**
+   * 日志集id(日志主题对应的id)
+   */
+  LogsetId: string
+  /**
+   * 日志主题id
+   */
+  TopicId?: string
+  /**
+   * 分区id
+   */
+  PartitionId?: string
 }
 
 /**
@@ -5762,6 +5927,48 @@ export interface DeleteSearchViewRequest {
 }
 
 /**
+ * SearchS3RechargeInfo请求参数结构体
+ */
+export interface SearchS3RechargeInfoRequest {
+  /**
+   * <p>日志主题Id。</p><ul><li>通过<a href="https://cloud.tencent.com/document/product/614/56454">获取日志主题列表</a>获取日志主题Id。</li></ul>
+   */
+  TopicId: string
+  /**
+   * <p>s3导入任务名称,最大支持128个字节。</p>
+   */
+  Name: string
+  /**
+   * <p>s3存储桶</p>
+   */
+  Bucket: string
+  /**
+   * <p>地域</p>
+   */
+  S3Region: string
+  /**
+   * <p>访问密钥 ID（Access Key ID）</p>
+   */
+  AccessKeyId: string
+  /**
+   * <p>访问密钥Key（Secret Access Key）</p>
+   */
+  SecretAccessKey: string
+  /**
+   * <p>自定义端点</p>
+   */
+  Endpoint?: string
+  /**
+   * <p>s3文件所在文件夹的前缀。默认为空，投递存储桶下所有的文件。</p>
+   */
+  Prefix?: string
+  /**
+   * <p>压缩模式。支持: &quot;&quot;, &quot;gzip&quot;, &quot;lzop&quot;, &quot;snappy&quot;。</p><p>默认值：不压缩</p>
+   */
+  Compress?: string
+}
+
+/**
  * DescribeConsumer返回参数结构体
  */
 export interface DescribeConsumerResponse {
@@ -5920,6 +6127,28 @@ export interface ModifyKafkaRechargeRequest {
    * 用户kafka拓展信息
    */
   UserKafkaMeta?: UserKafkaMeta
+}
+
+/**
+ * DescribeS3Recharges请求参数结构体
+ */
+export interface DescribeS3RechargesRequest {
+  /**
+   * <p>日志主题Id。</p><ul><li>通过<a href="https://cloud.tencent.com/document/api/614/56454">获取日志主题列表</a>获取日志主题Id。</li></ul>
+   */
+  TopicId: string
+  /**
+   * <ul><li>name 按照【主题名称】进行过滤，默认为模糊匹配，可使用 PreciseSearch 参数设置为精确匹配。类型：String。必选：否</li><li>bucket 按照【S3 存储桶名称】进行过滤。类型：String。必选：否</li><li>status 按照【任务状态】进行过滤，支持0:已创建, 1:运行中, 2:已停止, 3:已完成, 4:运行失败。 类型：String。必选：否</li><li>enable 按照【启用状态】进行过滤，支持0:暂停，1:启用。类型：String。必选：否</li></ul><p>注意：每次请求的 Filters 的上限为10，Filter.Values 的上限为10。</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>分页的偏移量，默认值为0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>分页单页限制数目，默认值为20，最大值100。</p>
+   */
+  Limit?: number
 }
 
 /**
@@ -6258,6 +6487,53 @@ Limit：最大日志条数。 value示例： 5。
 }
 
 /**
+ * CreateRemoteWriteTask请求参数结构体
+ */
+export interface CreateRemoteWriteTaskRequest {
+  /**
+   * 日志主题 ID
+   */
+  TopicId: string
+  /**
+   * 任务名称
+   */
+  Name: string
+  /**
+   * 目标服务名称
+   */
+  Target: string
+  /**
+   * 目标地址
+   */
+  RemoteWriteURL: string
+  /**
+   * 鉴权类型
+0: 无鉴权
+1: basic_auth 
+2: token
+   */
+  AuthType: number
+  /**
+   * 网络类型： 1 内网 2外网
+   */
+  NetType: number
+  /**
+   * 私有网络id
+   */
+  VpcId?: string
+  /**
+   * 鉴权信息
+   */
+  AuthInfo?: RemoteWriteAuthInfo
+  /**
+   * 后端服务类型
+0 CVM
+1025 CLB
+   */
+  VirtualGatewayType?: number
+}
+
+/**
  * 多日志主题检索错误信息
  */
 export interface SearchLogErrors {
@@ -6335,6 +6611,24 @@ export interface ModifyKafkaConsumerRequest {
    * <p>消费范围类型，0:最新，1:历史+最新</p>
    */
   ScopeType?: number
+}
+
+/**
+ * DescribeS3Recharges返回参数结构体
+ */
+export interface DescribeS3RechargesResponse {
+  /**
+   * <p>S3导入任务配置列表</p>
+   */
+  Infos?: Array<S3RechargeInfo>
+  /**
+   * <p>任务总数</p>
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6615,6 +6909,45 @@ export interface DeleteMetricConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeRemoteWriteTasks请求参数结构体
+ */
+export interface DescribeRemoteWriteTasksRequest {
+  /**
+   * - taskId
+按照【任务ID】进行过滤。
+类型：String
+必选：否
+
+- topicId
+按照【日志主题】进行过滤。
+类型：String
+必选：否
+
+- taskStatus
+按照【任务运行状态】进行过滤。 支持`1`：运行中，`2`：停止，`3`：异常
+类型：String
+必选：否
+
+- name
+按照【任务名称】进行模糊过滤。 
+类型：String
+必选：否
+
+
+每次请求的Filters的上限为10，Filter.Values的上限为10。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 分页的偏移量，默认值为0。
+   */
+  Offset?: number
+  /**
+   * 分页单页限制数目，默认值为20，最大值100。
+   */
+  Limit?: number
 }
 
 /**
@@ -6979,6 +7312,57 @@ export interface EstimateRebuildIndexTaskResponse {
 }
 
 /**
+ * 采集日志配置信息
+ */
+export interface LogConfigInfo {
+  /**
+   * 日志主题ID
+   */
+  TopicId?: string
+  /**
+   * 日志集ID
+   */
+  LogsetId?: string
+  /**
+   * 采集日志路径列表
+   */
+  Path?: string
+  /**
+   * 日志类型
+   */
+  LogType?: string
+  /**
+   * 提取规则
+   */
+  ExtractRule?: ExtractRuleInfo
+  /**
+   * 日志格式化格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogFormat?: string
+  /**
+   * 黑名单path列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExcludePaths?: Array<ExcludePathInfo>
+  /**
+   * 用户自定义解析字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserDefineRule?: string
+  /**
+   * 采集配置ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigId?: string
+  /**
+   * 使用了元数据的机器组ID列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupIds?: Array<string>
+}
+
+/**
  * DeleteDashboard请求参数结构体
  */
 export interface DeleteDashboardRequest {
@@ -7162,6 +7546,93 @@ export interface SearchViewInfo {
    * <p>更新时间</p><p>单位：秒级别时间戳</p>
    */
   UpdateTime?: number
+}
+
+/**
+ * RemoteWrite配置信息
+ */
+export interface RemoteWriteInfo {
+  /**
+   * 任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 日志主题ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TopicId?: string
+  /**
+   * Remote Write任务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 网络类型
+1: 内网
+2:外网
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetType?: number
+  /**
+   * 私有网络id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcId?: string
+  /**
+   * 任务运行状态
+1: 运行中
+2:暂停
+3: 失败
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: string
+  /**
+   * 目标服务名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Target?: string
+  /**
+   * 目标地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RemoteWriteURL?: string
+  /**
+   * 鉴权类型
+0: 无鉴权 1: basic_auth 2: token
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthType?: number
+  /**
+   * 鉴权信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AuthInfo?: RemoteWriteAuthInfo
+  /**
+   * 日志集
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogsetId?: string
+  /**
+   * 任务状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Enable?: number
+  /**
+   * 后端服务类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VirtualGatewayType?: number
 }
 
 /**
@@ -7726,6 +8197,78 @@ export interface DeleteHostMetricConfigResponse {
 }
 
 /**
+ * es导入配置信息
+ */
+export interface EsRechargeInfo {
+  /**
+   * 任务id。
+   */
+  TaskId?: string
+  /**
+   * 主账号id。
+   */
+  Uin?: number
+  /**
+   * 日志主题id。
+- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。
+- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。
+   */
+  TopicId?: string
+  /**
+   * 配置名称。
+   */
+  Name?: string
+  /**
+   * es索引。
+   */
+  Index?: string
+  /**
+   * es查询语句。
+   */
+  Query?: string
+  /**
+   * es集群信息。
+   */
+  EsInfo?: EsInfo
+  /**
+   * es导入信息。
+   */
+  ImportInfo?: EsImportInfo
+  /**
+   * es导入时间配置信息。
+   */
+  TimeInfo?: EsTimeInfo
+  /**
+   * 任务状态。
+1. 运行中
+2. 暂停
+3. 完成
+4. 异常
+   */
+  Status?: number
+  /**
+   * 任务进度 0~100 百分比。100：表示完成。
+   */
+  Progress?: number
+  /**
+   * 子账号id。
+   */
+  SubUin?: number
+  /**
+   * 创建时间。
+   */
+  CreateTime?: number
+  /**
+   * 修改时间。
+   */
+  UpdateTime?: number
+  /**
+   * 是否开启投递服务日志。1：关闭，2：开启。
+   */
+  HasServicesLog?: number
+}
+
+/**
  * GetClsService返回参数结构体
  */
 export interface GetClsServiceResponse {
@@ -7733,6 +8276,24 @@ export interface GetClsServiceResponse {
    * 账户服务开通状态，0:服务已开通，1:服务未开通
    */
   Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAgentApplications返回参数结构体
+ */
+export interface DescribeAgentApplicationsResponse {
+  /**
+   * <p>符合查询条件的大模型性能剖析任务列表</p>
+   */
+  Infos?: Array<AgentApplicationInfo>
+  /**
+   * <p>符合查询条件的任务总数。</p>
+   */
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8019,6 +8580,28 @@ export interface DeleteNoticeContentResponse {
 }
 
 /**
+ * CreateAgentApplication返回参数结构体
+ */
+export interface CreateAgentApplicationResponse {
+  /**
+   * <p>应用id</p>
+   */
+  ApplicationId?: string
+  /**
+   * <p>日志主题列表</p>
+   */
+  LogTopics?: Array<AgentTopicInfo>
+  /**
+   * <p>指标主题列表</p>
+   */
+  MetricsTopics?: Array<AgentTopicInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 自建k8s-容器标准输出信息
  */
 export interface ContainerStdoutInfo {
@@ -8058,6 +8641,68 @@ export interface ContainerStdoutInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomLabels?: Array<string>
+}
+
+/**
+ * ModifyS3Recharge请求参数结构体
+ */
+export interface ModifyS3RechargeRequest {
+  /**
+   * <p>导入任务Id</p>
+   */
+  TaskId: string
+  /**
+   * <p>日志主题Id。</p><ul><li>通过<a href="https://cloud.tencent.com/document/product/614/56454">获取日志主题列表</a>获取日志主题Id。</li></ul>
+   */
+  TopicId: string
+  /**
+   * <p>s3导入任务名称,最大支持128个字节。</p><p>同一个TopicId下的s3任务Name必须唯一</p>
+   */
+  Name?: string
+  /**
+   * <p>s3导入任务类型.</p><p>枚举值：</p><ul><li>1： 一次性导入任务</li><li>2： 持续性导入任务</li></ul>
+   */
+  TaskType?: number
+  /**
+   * <p>是否启用</p><p>枚举值：</p><ul><li>0： 暂停</li><li>1： 启用</li></ul>
+   */
+  Enable?: number
+  /**
+   * <p>s3存储桶</p>
+   */
+  Bucket?: string
+  /**
+   * <p>地域</p>
+   */
+  S3Region?: string
+  /**
+   * <p>访问密钥 ID（Access Key ID）</p>
+   */
+  AccessKeyId?: string
+  /**
+   * <p>访问密钥Key（Secret Access Key）</p>
+   */
+  SecretAccessKey?: string
+  /**
+   * <p>自定义端点</p>
+   */
+  Endpoint?: string
+  /**
+   * <p>采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文；<br>默认为minimalist_log</p>
+   */
+  LogType?: string
+  /**
+   * <p>s3文件所在文件夹的前缀。默认为空，投递存储桶下所有的文件。</p>
+   */
+  Prefix?: string
+  /**
+   * <p>压缩模式。支持: &quot;&quot;, &quot;gzip&quot;, &quot;lzop&quot;, &quot;snappy&quot;。</p>
+   */
+  Compress?: string
+  /**
+   * <p>提取规则，如果设置了ExtractRule，则必须设置LogType</p>
+   */
+  ExtractRuleInfo?: ExtractRuleInfo
 }
 
 /**
@@ -9034,75 +9679,13 @@ export interface HighLightItem {
 }
 
 /**
- * es导入配置信息
+ * DeleteAgentApplication返回参数结构体
  */
-export interface EsRechargeInfo {
+export interface DeleteAgentApplicationResponse {
   /**
-   * 任务id。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TaskId?: string
-  /**
-   * 主账号id。
-   */
-  Uin?: number
-  /**
-   * 日志主题id。
-- 通过 [获取日志主题列表](https://cloud.tencent.com/document/product/614/56454) 获取日志主题Id。
-- 通过 [创建日志主题](https://cloud.tencent.com/document/product/614/56456) 获取日志主题Id。
-   */
-  TopicId?: string
-  /**
-   * 配置名称。
-   */
-  Name?: string
-  /**
-   * es索引。
-   */
-  Index?: string
-  /**
-   * es查询语句。
-   */
-  Query?: string
-  /**
-   * es集群信息。
-   */
-  EsInfo?: EsInfo
-  /**
-   * es导入信息。
-   */
-  ImportInfo?: EsImportInfo
-  /**
-   * es导入时间配置信息。
-   */
-  TimeInfo?: EsTimeInfo
-  /**
-   * 任务状态。
-1. 运行中
-2. 暂停
-3. 完成
-4. 异常
-   */
-  Status?: number
-  /**
-   * 任务进度 0~100 百分比。100：表示完成。
-   */
-  Progress?: number
-  /**
-   * 子账号id。
-   */
-  SubUin?: number
-  /**
-   * 创建时间。
-   */
-  CreateTime?: number
-  /**
-   * 修改时间。
-   */
-  UpdateTime?: number
-  /**
-   * 是否开启投递服务日志。1：关闭，2：开启。
-   */
-  HasServicesLog?: number
+  RequestId?: string
 }
 
 /**
@@ -9486,25 +10069,17 @@ export interface DeleteIndexRequest {
 }
 
 /**
- * DescribeRecordingRuleTask请求参数结构体
+ * DeleteAgentApplication请求参数结构体
  */
-export interface DescribeRecordingRuleTaskRequest {
+export interface DeleteAgentApplicationRequest {
   /**
-   * <p>源指标主题id</p>
+   * <p>应用id</p>
    */
-  TopicId: string
+  ApplicationId: string
   /**
-   * <p>分页的偏移量，默认值为0。</p>
+   * <p>是否删除agent应用关联的主题</p><p>枚举值：</p><ul><li>false： 不删除agent应用关联的主题</li><li>true： 删除agent应用关联的主题</li></ul><p>默认值：false</p>
    */
-  Offset: number
-  /**
-   * <p>分页单页限制数目，默认值为20，最大值100。</p>
-   */
-  Limit: number
-  /**
-   * <li>yamlId【关联yaml配置ID】进行过滤，模糊匹配。类型：String。必选：否</li> <li>taskName按照【任务名称】进行过滤，模糊匹配。类型：String。必选：否</li> <li>taskId按照【任务ID】进行过滤，模糊匹配。类型：String。必选：否</li>
-   */
-  Filters?: Array<Filter>
+  DeleteTopics?: boolean
 }
 
 /**
@@ -9568,6 +10143,20 @@ export interface DeleteNetworkApplicationRequest {
    * <p>网络应用id。</p>
    */
   NetworkAppId: string
+}
+
+/**
+ * CreateS3Recharge返回参数结构体
+ */
+export interface CreateS3RechargeResponse {
+  /**
+   * <p>导入任务Id</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9690,6 +10279,82 @@ export interface CancelRebuildIndexTaskRequest {
 export type DescribeConsoleSharingListRequest = null
 
 /**
+ * 预聚合任务详情
+ */
+export interface RecordingRuleTaskInfo {
+  /**
+   * 预聚合任务id
+   */
+  TaskId?: string
+  /**
+   * 源日志主题id
+   */
+  TopicId?: string
+  /**
+   * 预聚合任务名称
+   */
+  Name?: string
+  /**
+   * 任务创建时间
+   */
+  CreateTime?: string
+  /**
+   * 任务更新时间
+   */
+  UpdateTime?: string
+  /**
+   * 任务状态，1:运行 2:停止 3:异常-找不到源日志主题 4:异常-找不到目标主题
+
+5: 访问权限问题 6:内部故障 7:其他故障
+   */
+  Status?: number
+  /**
+   * 任务启用状态，1开启,  2关闭
+   */
+  EnableFlag?: number
+  /**
+   * 调度开始时间
+   */
+  ProcessStartTime?: number
+  /**
+   * 调度周期(分钟)
+   */
+  ProcessPeriod?: number
+  /**
+   * 执行延迟(秒)
+   */
+  ProcessDelay?: number
+  /**
+   * 是否开启投递服务日志。1：关闭，2：开启。
+   */
+  HasServicesLog?: number
+  /**
+   * 预聚合检索语句
+   */
+  RecordingRuleContent?: string
+  /**
+   * 指标名称
+   */
+  MetricName?: string
+  /**
+   * 自定义指标名称
+   */
+  CustomMetricLabels?: Array<MetricLabel>
+  /**
+   * yaml配置文件id
+   */
+  YamlId?: string
+  /**
+   * yaml配置文件名称
+   */
+  YamlConfigName?: string
+  /**
+   * 目标日志主题id
+   */
+  DstTopicId?: string
+}
+
+/**
  * DescribeLogsets返回参数结构体
  */
 export interface DescribeLogsetsResponse {
@@ -9715,6 +10380,27 @@ export interface DescribeKafkaConsumerPreviewResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * Remote Write鉴权信息
+ */
+export interface RemoteWriteAuthInfo {
+  /**
+   * basic auth username
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Username?: string
+  /**
+   * basic auth password
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * basic auth token
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Token?: string
 }
 
 /**
@@ -10281,6 +10967,20 @@ export interface MetricConfigLabel {
 }
 
 /**
+ * DeleteS3Recharge请求参数结构体
+ */
+export interface DeleteS3RechargeRequest {
+  /**
+   * <p>导入任务Id</p>
+   */
+  TaskId: string
+  /**
+   * <p>日志主题Id。</p><ul><li>通过<a href="https://cloud.tencent.com/document/api/614/56454">获取日志主题列表</a>获取日志主题Id。</li></ul>
+   */
+  TopicId: string
+}
+
+/**
  * 仪表盘订阅信息
  */
 export interface DashboardSubscribeInfo {
@@ -10364,6 +11064,60 @@ export interface DeleteExportRequest {
  * ModifyKafkaConsumerGroupOffset请求参数结构体
  */
 export type ModifyKafkaConsumerGroupOffsetRequest = null
+
+/**
+ * ModifyRemoteWriteTask请求参数结构体
+ */
+export interface ModifyRemoteWriteTaskRequest {
+  /**
+   * 任务id
+   */
+  TaskId: string
+  /**
+   * 日志主题id
+   */
+  TopicId: string
+  /**
+   * 任务状态
+0 关闭 1 开启
+   */
+  Enable?: number
+  /**
+   * RemoteWrite任务名称
+   */
+  Name?: string
+  /**
+   * 1 内网 2外网
+   */
+  NetType?: number
+  /**
+   * 私有网络id
+   */
+  VpcId?: string
+  /**
+   * 目标服务名称
+   */
+  Target?: string
+  /**
+   * 目标地址
+   */
+  RemoteWriteURL?: string
+  /**
+   * 0: 无鉴权 1: basic_auth 2: token
+   */
+  AuthType?: number
+  /**
+   * 鉴权信息
+   */
+  AuthInfo?: RemoteWriteAuthInfo
+  /**
+   * 后端服务类型
+-1 没有
+0 CVM
+1025 CLB
+   */
+  VirtualGatewayType?: number
+}
 
 /**
  * DescribeConsoles请求参数结构体
@@ -10882,6 +11636,16 @@ export interface DescribeEsRechargePreviewResponse {
 }
 
 /**
+ * DeleteS3Recharge返回参数结构体
+ */
+export interface DeleteS3RechargeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * MergePartition请求参数结构体
  */
 export interface MergePartitionRequest {
@@ -10901,6 +11665,28 @@ export interface MergePartitionRequest {
 }
 
 /**
+ * DescribeRecordingRuleTask请求参数结构体
+ */
+export interface DescribeRecordingRuleTaskRequest {
+  /**
+   * <p>源指标主题id</p>
+   */
+  TopicId: string
+  /**
+   * <p>分页的偏移量，默认值为0。</p>
+   */
+  Offset: number
+  /**
+   * <p>分页单页限制数目，默认值为20，最大值100。</p>
+   */
+  Limit: number
+  /**
+   * <li>yamlId【关联yaml配置ID】进行过滤，模糊匹配。类型：String。必选：否</li> <li>taskName按照【任务名称】进行过滤，模糊匹配。类型：String。必选：否</li> <li>taskId按照【任务ID】进行过滤，模糊匹配。类型：String。必选：否</li>
+   */
+  Filters?: Array<Filter>
+}
+
+/**
  * 告警策略中监控任务的执行时间点
  */
 export interface MonitorTime {
@@ -10916,6 +11702,16 @@ export interface MonitorTime {
    * <p>执行的周期cron表达式。示例：<code>0/1 * * * *</code> 从左到右每个field的含义 Minutes field(分钟), Hours field(小时),Day of month field(日期),Month field(月份),Day of week field(星期)， 不支持秒级别。当type为<code>Cron</code>时，CronExpression字段生效。</p>
    */
   CronExpression?: string
+}
+
+/**
+ * ModifyAgentApplication返回参数结构体
+ */
+export interface ModifyAgentApplicationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11512,52 +12308,21 @@ export interface OpenClawServiceRequest {
 }
 
 /**
- * 告警对象
+ * CreateAgentApplication请求参数结构体
  */
-export interface AlarmTargetInfo {
+export interface CreateAgentApplicationRequest {
   /**
-   * 日志集ID。
+   * <p>应用名称</p><p>入参限制：</p><ul><li>不能为空字符串</li><li>不能包含字符<code>|</code></li><li>不能超过64字符</li></ul>
    */
-  LogsetId?: string
+  ApplicationName: string
   /**
-   * 日志集名称。
+   * <p>接入类型</p><p>枚举值：</p><ul><li>Langfuse： Langfuse 是一款开源的 LLM（大语言模型）工程与可观测性平台（LLMOps Tool）</li></ul>
    */
-  LogsetName?: string
+  AccessType: string
   /**
-   * 日志主题ID。
+   * <p>日志集Id。通过 <a href="https://cloud.tencent.com/document/product/614/58624">获取日志集列表</a>获取日志集Id。</p>
    */
-  TopicId?: string
-  /**
-   * 日志主题名称。
-   */
-  TopicName?: string
-  /**
-   * 查询语句。
-   */
-  Query?: string
-  /**
-   * 告警对象序号。
-   */
-  Number?: number
-  /**
-   * 查询范围起始时间相对于告警执行时间的偏移，单位为分钟，取值为非正，最大值为0，最小值为-1440。
-   */
-  StartTimeOffset?: number
-  /**
-   * 查询范围终止时间相对于告警执行时间的偏移，单位为分钟，取值为非正，须大于StartTimeOffset，最大值为0，最小值为-1440。
-   */
-  EndTimeOffset?: number
-  /**
-   * 检索语法规则，默认值为0。
-0：Lucene语法，1：CQL语法。
-详细说明参见<a href="https://cloud.tencent.com/document/product/614/47044#RetrievesConditionalRules" target="_blank">检索条件语法规则</a>
-   */
-  SyntaxRule?: number
-  /**
-   * 主题类型。
-0: 日志主题，1: 指标主题
-   */
-  BizType?: number
+  LogsetId: string
 }
 
 /**
@@ -11720,15 +12485,15 @@ export interface CreateCloudProductLogCollectionRequest {
    */
   InstanceId: string
   /**
-   * <p>云产品标识，支持枚举：CDS、CWP、CDB、TDSQL-C、MongoDB、TDStore、DCDB、MariaDB、PostgreSQL、BH、APIS</p>
+   * <p>云产品标识。支持以下产品</p><ul><li>APIS</li><li>BH</li><li>CDB</li><li>CDS</li><li>CFS</li><li>CLB</li><li>CSIP</li><li>CWP</li><li>DCDB</li><li>DNSPod</li><li>EMR</li><li>HTTPDNS</li><li>KHL</li><li>llmsgw</li><li>MariaDB</li><li>MDP</li><li>MongoDB</li><li>PostgreSQL</li><li>TCSS</li><li>TDSQL-C</li><li>TDStore</li><li>TencentDB-Redis</li><li>TEO</li><li>TokenHub</li><li>TSE</li></ul>
    */
   AssumerName: string
   /**
-   * <p>日志类型，支持枚举：CDS-AUDIT、CDS-RISK、CDB-AUDIT、TDSQL-C-AUDIT、MongoDB-AUDIT、MongoDB-SlowLog、MongoDB-ErrorLog、TDMYSQL-SLOW、DCDB-AUDIT、DCDB-SLOW、DCDB-ERROR、MariaDB-AUDIT、MariaDB-SLOW、MariaDB-ERROR、PostgreSQL-SLOW、PostgreSQL-ERROR、PostgreSQL-AUDIT、BH-FILELOG、BH-COMMANDLOG、APIS-ACCESS</p>
+   * <p>各云产品支持的日志类型如下：</p><table><thead><tr><th>assumer_name</th><th>支持的 log_type</th></tr></thead><tbody><tr><td>APIS</td><td>APIS-ACCESS</td></tr><tr><td>BH</td><td>BH-COMMANDLOG, BH-FILELOG</td></tr><tr><td>CDB</td><td>CDB-AUDIT</td></tr><tr><td>CDS</td><td>CDS-AUDIT, CDS-RISK</td></tr><tr><td>CFS</td><td>CFS-AUDIT</td></tr><tr><td>CLB</td><td>CMR-SPEND</td></tr><tr><td>CSIP</td><td>CSIP</td></tr><tr><td>CWP</td><td>CWP</td></tr><tr><td>DCDB</td><td>DCDB-AUDIT, DCDB-ERROR, DCDB-SLOW</td></tr><tr><td>DNSPod</td><td>DNSPod-RESOLVELOG</td></tr><tr><td>EMR</td><td>EMR-OPERATION</td></tr><tr><td>HTTPDNS</td><td>HTTPDNS-RESOLVELOG</td></tr><tr><td>MariaDB</td><td>MariaDB-AUDIT, MariaDB-ERROR, MariaDB-SLOW</td></tr><tr><td>MDP</td><td>MDP-SSAI</td></tr><tr><td>MongoDB</td><td>MongoDB-AUDIT, MongoDB-ErrorLog, MongoDB-OperationLog, MongoDB-SlowLog</td></tr><tr><td>PostgreSQL</td><td>PostgreSQL-AUDIT, PostgreSQL-ERROR, PostgreSQL-SLOW</td></tr><tr><td>TCSS</td><td>TCSS</td></tr><tr><td>TDSQL-C</td><td>TDSQL-C-AUDIT</td></tr><tr><td>TDStore</td><td>TDMYSQL-SLOW</td></tr><tr><td>TencentDB-Redis</td><td>Redis-AUDIT, Redis-ERROR, Redis-SLOW</td></tr><tr><td>TEO</td><td>TEO-INEFERENCE</td></tr><tr><td>llmsgw</td><td>llmsgw-mcp-security-alarm</td></tr></tbody></table>
    */
   LogType: string
   /**
-   * <p>云产品地域。 不同日志类型(LogType)地域入参格式存在差异， 请参考如下示例：</p><ul><li>CDS所有日志类型：ap-guangzhou</li><li>CDB-AUDIT: gz</li><li>TDSQL-C-AUDIT:  gz</li><li>MongoDB-AUDIT:  gz</li><li>MongoDB-SlowLog：ap-guangzhou</li><li>MongoDB-ErrorLog：ap-guangzhou</li><li>TDMYSQL-SLOW：gz</li><li>DCDB所有日志类型：gz</li><li>MariaDB所有日志类型：gz</li><li>PostgreSQL所有日志类型：gz</li><li>BH所有日志类型：overseas-polaris(中国香港地区和其他)/fsi-polaris(金融区)/general-polaris(普通区)/intl-sg-prod(国际站)</li><li>APIS所有日志类型：gz</li></ul>
+   * <p>云产品地域。不同 LogType 入参格式存在差异：</p><p><strong>格式 A：短 region 码</strong>（gz / sh / bj …）</p><ul><li>APIS 全部日志类型：如 <code>gz</code></li><li>CDB-AUDIT</li><li>TDSQL-C-AUDIT</li><li>TDMYSQL-SLOW</li><li>DCDB 全部日志类型</li><li>MariaDB 全部日志类型</li><li>PostgreSQL 全部日志类型</li><li>MongoDB-AUDIT（<strong>注意与 SlowLog/ErrorLog/OperationLog 不同</strong>）</li><li>TencentDB-Redis 全部日志类型</li><li>EMR-OPERATION</li></ul><p><strong>格式 B：长 region 码</strong>（ap-guangzhou / ap-shanghai / ap-singapore …）</p><ul><li>CDS 全部日志类型：如 <code>ap-guangzhou</code></li><li>MongoDB-SlowLog / MongoDB-ErrorLog / MongoDB-OperationLog</li><li>DNSPod-RESOLVELOG</li><li>HTTPDNS-RESOLVELOG</li><li>MDP-SSAI</li><li>CFS-AUDIT</li><li>TEO-INEFERENCE</li><li>TokenHub-ActivityLog / TokenHub-AuditLog</li><li>llmsgw-mcp-security-alarm</li><li>CSIP / TCSS / TSE / CWP / KHL 等</li></ul><p><strong>格式 C：BH 专用 Polaris 名</strong></p><ul><li>BH 全部日志类型：<code>overseas-polaris</code>（中国香港及其他海外）/ <code>fsi-polaris</code>（金融区）/ <code>general-polaris</code>（普通区）/ <code>intl-sg-prod</code>（国际站）</li></ul>
    */
   CloudProductRegion: string
   /**
@@ -11759,6 +12524,88 @@ export interface CreateCloudProductLogCollectionRequest {
    * <p>标签描述列表，通过指定该参数可以同时绑定标签到相应的主题。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。</p>
    */
   Tags?: Array<Tag>
+}
+
+/**
+ * aws 导入信息
+ */
+export interface S3RechargeInfo {
+  /**
+   * <p>导入任务Id</p>
+   */
+  TaskId?: string
+  /**
+   * <p>日志主题Id。- 通过<a href="https://cloud.tencent.com/document/product/614/56454">获取日志主题列表</a>获取日志主题Id。</p>
+   */
+  TopicId?: string
+  /**
+   * <p>日志集Id。通过 <a href="https://cloud.tencent.com/document/product/614/58624">获取日志集列表</a>获取日志集Id。</p>
+   */
+  LogsetId?: string
+  /**
+   * <p>任务名称</p>
+   */
+  Name?: string
+  /**
+   * <p>s3存储桶</p>
+   */
+  Bucket?: string
+  /**
+   * <p>地域</p>
+   */
+  S3Region?: string
+  /**
+   * <p>访问密钥 ID（Access Key ID）</p>
+   */
+  AccessKeyId?: string
+  /**
+   * <p>自定义端点</p>
+   */
+  Endpoint?: string
+  /**
+   * <p>采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文；默认为minimalist_log</p>
+   */
+  LogType?: string
+  /**
+   * <p>s3文件所在文件夹的前缀。默认为空，投递存储桶下所有的文件。</p>
+   */
+  Prefix?: string
+  /**
+   * <p>压缩模式。支持: &quot;&quot;, &quot;gzip&quot;, &quot;lzop&quot;, &quot;snappy&quot;。</p><p>默认值：不压缩</p>
+   */
+  Compress?: string
+  /**
+   * <p>提取规则，如果设置了ExtractRule，则必须设置LogType</p>
+   */
+  ExtractRule?: ExtractRuleInfo
+  /**
+   * <p>s3导入任务类型.</p><p>枚举值：</p><ul><li>1： 一次性导入任务</li><li>2： 持续性导入任务</li></ul>
+   */
+  TaskType?: number
+  /**
+   * <p>元数据。</p><p>枚举值：</p><ul><li>bucket： 桶</li><li>object： 对象</li></ul><p>选中元数据将以 <strong>TAG</strong>.{元数据}:xxx 的形式与日志一起导入。如：<strong>TAG</strong>.object: csv/object.gz</p>
+   */
+  Metadata?: Array<string>
+  /**
+   * <p>任务状态</p><p>枚举值：</p><ul><li>0： 已创建</li><li>1： 运行中</li><li>2： 已停止</li><li>3： 已完成</li><li>4： 运行失败</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>是否启用</p><p>枚举值：</p><ul><li>0： 暂停</li><li>1： 启用</li></ul>
+   */
+  Enable?: number
+  /**
+   * <p>进度条百分值</p>
+   */
+  Progress?: number
+  /**
+   * <p>创建时间</p><p>单位：秒</p><p>秒级时间戳</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p><p>单位：秒</p><p>秒级时间戳</p>
+   */
+  UpdateTime?: number
 }
 
 /**
@@ -11893,6 +12740,11 @@ export interface ModifyNoticeContentResponse {
 }
 
 /**
+ * 服务日志topic信息
+ */
+export type ServiceLogConfigInfo = null
+
+/**
  * DeleteWebCallback返回参数结构体
  */
 export interface DeleteWebCallbackResponse {
@@ -11918,6 +12770,60 @@ export interface DescribeSearchViewsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateS3Recharge请求参数结构体
+ */
+export interface CreateS3RechargeRequest {
+  /**
+   * <p>日志主题Id。</p><ul><li>通过<a href="https://cloud.tencent.com/document/product/614/56454">获取日志主题列表</a>获取日志主题Id。</li></ul>
+   */
+  TopicId: string
+  /**
+   * <p>s3导入任务名称,最大支持128个字节。</p><p>同一个TopicId下的s3任务Name必须唯一</p>
+   */
+  Name: string
+  /**
+   * <p>s3存储桶</p>
+   */
+  Bucket: string
+  /**
+   * <p>地域</p>
+   */
+  S3Region: string
+  /**
+   * <p>访问密钥 ID（Access Key ID）</p>
+   */
+  AccessKeyId: string
+  /**
+   * <p>访问密钥Key（Secret Access Key）</p>
+   */
+  SecretAccessKey: string
+  /**
+   * <p>采集的日志类型，json_log代表json格式日志，delimiter_log代表分隔符格式日志，minimalist_log代表单行全文；<br>默认为minimalist_log</p>
+   */
+  LogType: string
+  /**
+   * <p>自定义端点</p>
+   */
+  Endpoint?: string
+  /**
+   * <p>s3文件所在文件夹的前缀。默认为空，投递存储桶下所有的文件。</p>
+   */
+  Prefix?: string
+  /**
+   * <p>压缩模式。支持: &quot;&quot;, &quot;gzip&quot;, &quot;lzop&quot;, &quot;snappy&quot;。</p><p>默认值：不压缩</p>
+   */
+  Compress?: string
+  /**
+   * <p>提取规则，如果设置了ExtractRule，则必须设置LogType</p>
+   */
+  ExtractRuleInfo?: ExtractRuleInfo
+  /**
+   * <p>s3导入任务类型.</p><p>枚举值：</p><ul><li>1： 一次性导入任务</li><li>2： 持续性导入任务</li></ul><p>默认值：1</p>
+   */
+  TaskType?: number
 }
 
 /**
@@ -12027,6 +12933,21 @@ export interface ConsumerGroupInfo {
    * topic列表
    */
   Topics?: Array<string>
+}
+
+/**
+ * CreateRemoteWriteTask返回参数结构体
+ */
+export interface CreateRemoteWriteTaskResponse {
+  /**
+   * remoteWrite任务id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -12803,6 +13724,16 @@ JsonType为2：转义。示例：
 }
 
 /**
+ * DeleteSearchView返回参数结构体
+ */
+export interface DeleteSearchViewResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteConfig请求参数结构体
  */
 export interface DeleteConfigRequest {
@@ -13055,6 +13986,20 @@ export interface DlcTableInfo {
 }
 
 /**
+ * DeleteRemoteWriteTask请求参数结构体
+ */
+export interface DeleteRemoteWriteTaskRequest {
+  /**
+   * RemoteWrite导入任务ID
+   */
+  TaskId: string
+  /**
+   * 日志主题ID
+   */
+  TopicId: string
+}
+
+/**
  * ModifyKafkaConsumerGroupOffset返回参数结构体
  */
 export interface ModifyKafkaConsumerGroupOffsetResponse {
@@ -13263,6 +14208,16 @@ export interface ModifyCloudProductLogCollectionRequest {
    * <p>标签描述列表，通过指定该参数可以同时绑定标签到相应的logset和topic。最大支持10个标签键值对，同一个资源只能绑定到同一个标签键下。</p>
    */
   Tags?: Array<Tag>
+}
+
+/**
+ * DeleteRemoteWriteTask返回参数结构体
+ */
+export interface DeleteRemoteWriteTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13583,6 +14538,36 @@ export interface ModifyEsRechargeResponse {
  * ModifyConsumerGroup返回参数结构体
  */
 export interface ModifyConsumerGroupResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * SearchS3RechargeInfo返回参数结构体
+ */
+export interface SearchS3RechargeInfoResponse {
+  /**
+   * <p>匹配到的存储桶下的某个文件的前几行数据</p>
+   */
+  Data?: Array<string>
+  /**
+   * <p>匹配到的存储桶下的文件个数</p>
+   */
+  Sum?: number
+  /**
+   * <p>当前预览文件路径</p>
+   */
+  Path?: string
+  /**
+   * <p>预览获取数据失败原因</p>
+   */
+  Msg?: string
+  /**
+   * <p>状态。</p><ul><li>0：成功</li><li>10000：参数错误，请确认参数</li><li>10001：授权失败，请确认授权</li><li>10002：获取文件列表失败，请稍后再试。若无法解决，请咨询 <a href="https://cloud.tencent.com/online-service">在线支持</a> 或 <a href="https://console.cloud.tencent.com/workorder/category?level1_id=83&amp;level2_id=469&amp;source=14&amp;data_title=%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1&amp;step=1">提交工单</a> 处理。</li><li>10003：桶内无相应前缀文件，请使用正确的桶、文件前缀和压缩方式</li><li>10004：文件下载失败，请稍后再试。若无法解决，请咨询 <a href="https://cloud.tencent.com/online-service">在线支持</a> 或 <a href="https://console.cloud.tencent.com/workorder/category?level1_id=83&amp;level2_id=469&amp;source=14&amp;data_title=%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1&amp;step=1">提交工单</a> 处理。</li><li>10005：文件解压缩失败，请选择正确的压缩方式然后再试</li><li>10006：读取文件内容失败，请确认文件可读</li><li>10007：文件预览失败，请稍后再试。若无法解决，请咨询 <a href="https://cloud.tencent.com/online-service">在线支持</a> 或 <a href="https://console.cloud.tencent.com/workorder/category?level1_id=83&amp;level2_id=469&amp;source=14&amp;data_title=%E6%97%A5%E5%BF%97%E6%9C%8D%E5%8A%A1&amp;step=1">提交工单</a> 处理。</li></ul>
+   */
+  Status?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13915,79 +14900,39 @@ export interface ModifyKafkaRechargeResponse {
 }
 
 /**
- * 预聚合任务详情
+ * 过滤器
  */
-export interface RecordingRuleTaskInfo {
-  /**
-   * 预聚合任务id
-   */
-  TaskId?: string
-  /**
-   * 源日志主题id
-   */
-  TopicId?: string
-  /**
-   * 预聚合任务名称
-   */
-  Name?: string
-  /**
-   * 任务创建时间
-   */
-  CreateTime?: string
-  /**
-   * 任务更新时间
-   */
-  UpdateTime?: string
-  /**
-   * 任务状态，1:运行 2:停止 3:异常-找不到源日志主题 4:异常-找不到目标主题
-
-5: 访问权限问题 6:内部故障 7:其他故障
-   */
-  Status?: number
-  /**
-   * 任务启用状态，1开启,  2关闭
-   */
-  EnableFlag?: number
-  /**
-   * 调度开始时间
-   */
-  ProcessStartTime?: number
-  /**
-   * 调度周期(分钟)
-   */
-  ProcessPeriod?: number
-  /**
-   * 执行延迟(秒)
-   */
-  ProcessDelay?: number
-  /**
-   * 是否开启投递服务日志。1：关闭，2：开启。
-   */
-  HasServicesLog?: number
-  /**
-   * 预聚合检索语句
-   */
-  RecordingRuleContent?: string
+export interface MetricLabel {
   /**
    * 指标名称
    */
-  MetricName?: string
+  Key: string
   /**
-   * 自定义指标名称
+   * 指标内容
    */
-  CustomMetricLabels?: Array<MetricLabel>
+  Value: string
+}
+
+/**
+ * DescribeAgentConfigs请求参数结构体
+ */
+export interface DescribeAgentConfigsRequest {
   /**
-   * yaml配置文件id
+   * agent的版本号
    */
-  YamlId?: string
+  AgentVersion: string
   /**
-   * yaml配置文件名称
+   * agent的IP地址
    */
-  YamlConfigName?: string
+  AgentIp: string
   /**
-   * 目标日志主题id
+   * 机器组标签列表
    */
-  DstTopicId?: string
+  Labels?: Array<string>
+  /**
+   * agent的instance id
+   */
+  InstanceId?: string
 }
 
 /**
@@ -14238,17 +15183,41 @@ export interface UserKafkaMeta {
 }
 
 /**
- * 过滤器
+ * agent 应用信息
  */
-export interface MetricLabel {
+export interface AgentApplicationInfo {
   /**
-   * 指标名称
+   * <p>应用id</p>
    */
-  Key: string
+  ApplicationId?: string
   /**
-   * 指标内容
+   * <p>应用名称</p>
    */
-  Value: string
+  ApplicationName?: string
+  /**
+   * <p>接入类型</p><p>枚举值：</p><ul><li>Langfuse：  Langfuse​ 是一款开源的 LLM（大语言模型）工程与可观测性平台（LLMOps Tool）</li></ul>
+   */
+  AccessType?: string
+  /**
+   * <p>应用下资源所属地域</p><p>例如：ap-guangzhou</p>
+   */
+  Region?: string
+  /**
+   * <p>日志主题列表</p>
+   */
+  LogTopics?: Array<AgentTopicInfo>
+  /**
+   * <p>指标主题列表</p>
+   */
+  MetricsTopics?: Array<AgentTopicInfo>
+  /**
+   * <p>创建时间</p><p>单位：秒</p><p>秒级时间戳</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p><p>单位：秒</p><p>秒级时间戳</p>
+   */
+  UpdateTime?: number
 }
 
 /**
@@ -14462,29 +15431,13 @@ export interface DescribeKafkaConsumerGroupDetailRequest {
 }
 
 /**
- * DescribeConsumerOffsets请求参数结构体
+ * DescribeMetricCorrectDimension返回参数结构体
  */
-export interface DescribeConsumerOffsetsRequest {
+export interface DescribeMetricCorrectDimensionResponse {
   /**
-   * 日志主题对应的消费组标识
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ConsumerGroup: string
-  /**
-   * 时间戳(秒级时间戳)
-   */
-  From: string
-  /**
-   * 日志集id(日志主题对应的id)
-   */
-  LogsetId: string
-  /**
-   * 日志主题id
-   */
-  TopicId?: string
-  /**
-   * 分区id
-   */
-  PartitionId?: string
+  RequestId?: string
 }
 
 /**
@@ -14801,6 +15754,20 @@ export interface ModifyRecordingRuleTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyAgentApplication请求参数结构体
+ */
+export interface ModifyAgentApplicationRequest {
+  /**
+   * <p>应用id</p>
+   */
+  ApplicationId: string
+  /**
+   * <p>应用名称</p><p>参数格式：- 不能为空字符串- 不能包含字符<code>|</code>- 不能超过64字符</p>
+   */
+  ApplicationName: string
 }
 
 /**

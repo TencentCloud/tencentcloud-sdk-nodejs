@@ -24,36 +24,38 @@ import {
   CreateForwardingPolicyRequest,
   DescribeForwardingRuleRequest,
   DescribeEndpointGroupsResponse,
-  ModifyGlobalAcceleratorRequest,
+  DeleteListenerAdditionalCertResponse,
   ModifyForwardingPolicyRequest,
   CreateForwardingRuleRequest,
   ForwardingPolicySet,
   AcceleratorRegionSet,
-  ModifyEndpointGroupResponse,
+  DeleteListenerAdditionalCertRequest,
   CreateListenerResponse,
   DescribeForwardingPolicyResponse,
   CreateGlobalAcceleratorRequest,
   DescribeCrossBorderSettlementRequest,
   IpAddressInfoSet,
   ModifyForwardingPolicyResponse,
-  DescribeGlobalAcceleratorsRequest,
+  CreateListenerAdditionalCertResponse,
   DescribeAccelerateAreasRequest,
   ModifyAccelerateAreasRequest,
   DescribeCrossBorderSettlementResponse,
   DescribeForwardingRuleResponse,
   DeleteAccelerateAreasRequest,
-  ModifyListenerResponse,
   EndpointGroupConfigurationSet,
+  ModifyListenerResponse,
+  DeleteGlobalAcceleratorResponse,
   DeleteAccelerateAreasResponse,
   ModifyAccelerateAreasResponse,
   DeleteGlobalAcceleratorRequest,
   EndpointConfigurations,
   PortRanges,
   OriginHeader,
-  DeleteEndpointGroupsResponse,
+  DeleteForwardingRuleResponse,
   ForwardingRuleSet,
   ModifyForwardingRuleRequest,
-  ModifyListenerRequest,
+  DescribeGlobalAcceleratorsRequest,
+  Tag,
   DescribeTaskResultRequest,
   DescribeEndpointGroupsRequest,
   CreateAccelerateAreasRequest,
@@ -63,6 +65,7 @@ import {
   ModifyForwardingRuleResponse,
   DeleteForwardingRuleRequest,
   ListenerSet,
+  ModifyGlobalAcceleratorRequest,
   DescribeAccelerateAreasResponse,
   DeleteListenerRequest,
   ModifyGlobalAcceleratorResponse,
@@ -72,8 +75,9 @@ import {
   DescribeForwardingPolicyRequest,
   RuleCondition,
   DescribeAccelerateRegionsRequest,
+  ReplaceListenerAdditionalCertResponse,
   ResponseHeaders,
-  DeleteForwardingRuleResponse,
+  DeleteEndpointGroupsResponse,
   Filter,
   DeleteEndpointGroupsRequest,
   EndpointGroupConfiguration,
@@ -82,15 +86,17 @@ import {
   ModifyEndpointGroupRequest,
   CreateForwardingPolicyResponse,
   AcceleratorAreas,
+  ModifyEndpointGroupResponse,
   CreateEndpointGroupRequest,
+  ReplaceListenerAdditionalCertRequest,
   CreateEndpointGroupResponse,
-  DeleteGlobalAcceleratorResponse,
+  CreateListenerAdditionalCertRequest,
   DeleteForwardingPolicyResponse,
   CreateGlobalAcceleratorResponse,
   DescribeGlobalAcceleratorsResponse,
   CreateForwardingRuleResponse,
   PortOverride,
-  Tag,
+  ModifyListenerRequest,
 } from "./ga2_models"
 
 /**
@@ -293,6 +299,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除扩展证书
+   */
+  async DeleteListenerAdditionalCert(
+    req: DeleteListenerAdditionalCertRequest,
+    cb?: (error: string, rep: DeleteListenerAdditionalCertResponse) => void
+  ): Promise<DeleteListenerAdditionalCertResponse> {
+    return this.request("DeleteListenerAdditionalCert", req, cb)
+  }
+
+  /**
+   * 添加扩展证书
+   */
+  async CreateListenerAdditionalCert(
+    req: CreateListenerAdditionalCertRequest,
+    cb?: (error: string, rep: CreateListenerAdditionalCertResponse) => void
+  ): Promise<CreateListenerAdditionalCertResponse> {
+    return this.request("CreateListenerAdditionalCert", req, cb)
+  }
+
+  /**
    * 修改终端节点组。
    */
   async ModifyEndpointGroup(
@@ -330,6 +356,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateGlobalAcceleratorResponse) => void
   ): Promise<CreateGlobalAcceleratorResponse> {
     return this.request("CreateGlobalAccelerator", req, cb)
+  }
+
+  /**
+   * 替换扩展证书
+   */
+  async ReplaceListenerAdditionalCert(
+    req: ReplaceListenerAdditionalCertRequest,
+    cb?: (error: string, rep: ReplaceListenerAdditionalCertResponse) => void
+  ): Promise<ReplaceListenerAdditionalCertResponse> {
+    return this.request("ReplaceListenerAdditionalCert", req, cb)
   }
 
   /**

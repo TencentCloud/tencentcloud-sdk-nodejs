@@ -156,6 +156,7 @@ import {
   CreateRiskIdentificationTaskFeedbackResponse,
   BatchOrganizationRegistrationTasksDetails,
   RecipientComponentInfo,
+  SealPolicyAuthorizationFlows,
   ExportContractReviewResultResponse,
   SingleSignOnEmployees,
   WebThemeConfig,

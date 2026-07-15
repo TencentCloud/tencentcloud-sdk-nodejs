@@ -809,7 +809,7 @@ export interface DspmIdentifyRuleItem {
    */
   UnStructuredStatus?: boolean
   /**
-   * <p>无</p>
+   * <p>关联的识别模板信息</p>
    */
   ComplianceRelations?: Array<DspmIdentifyRefComplianceInfo>
 }
@@ -12612,11 +12612,11 @@ export interface DspmIdentifyComplianceCategoryRelation {
    */
   CategoryGrade?: number
   /**
-   * <p>无</p>
+   * <p>关联的数据项信息</p>
    */
   RuleRelations?: Array<DspmIdentifyComplianceRuleRelation>
   /**
-   * <p>无</p>
+   * <p>子节点信息</p>
    */
   Children?: Array<DspmIdentifyComplianceCategoryRelation>
 }
@@ -15336,15 +15336,15 @@ export interface DescribeRiskDetailListResponse {
  */
 export interface CosBucketId {
   /**
-   * appid
+   * <p>appid</p>
    */
   AppId?: string
   /**
-   *
+   * <p>是否自动监测</p>
    */
   IsAutoMonitor?: number
   /**
-   * bucket id集合
+   * <p>bucket id集合</p>
    */
   BucketIdSet?: Array<string>
 }
@@ -18669,7 +18669,7 @@ export interface DspmIdentifyCategoryItem {
    */
   UpdateTime?: string
   /**
-   * <p>无</p>
+   * <p>关联的识别模板信息</p>
    */
   ComplianceRelations?: Array<DspmIdentifyRefComplianceInfo>
 }
@@ -21902,7 +21902,7 @@ export interface DspmIdentifyLevelGroupItem {
    */
   UpdateTime?: string
   /**
-   * <p>无</p>
+   * <p>关联的识别模板信息</p>
    */
   ComplianceRelations?: Array<DspmIdentifyRefComplianceInfo>
 }
@@ -21994,7 +21994,7 @@ export interface AIAgentAsset {
    */
   MetadataRiskURL?: string
   /**
-   * <p>无</p>
+   * <p>凭据 Skill 安装状态</p>
    */
   SkillState?: SkillState
   /**

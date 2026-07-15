@@ -35,6 +35,7 @@ import {
   DescribeCsReportCountDataInfoRequest,
   CreateFreeCloudStorageResponse,
   DescribeTWeTalkProductConfigResponse,
+  TalkWebhookAuth,
   TalkActivateRecordLogInfo,
   ModifyPositionFenceResponse,
   DescribeTWeSeeRecognitionTaskResponse,
@@ -49,6 +50,7 @@ import {
   RenewTWeSeeSubscriptionRequest,
   CreateCloudStorageAIServiceTaskRequest,
   DescribeCloudStorageOrderRequest,
+  CreateTWeTalkAgentRequest,
   TalkConversationConfigInfo,
   GetTWeTalkProductConfigListRequest,
   DescribeSpaceFenceEventListResponse,
@@ -57,8 +59,10 @@ import {
   SearchTopicRuleResponse,
   ModifyCloudStorageAIServiceResponse,
   InvokeTWeSeeComprehensionRequest,
+  TalkIOTTool,
   DescribeDeviceFirmWareRequest,
   BindCloudStorageUserRequest,
+  UnbindTWeTalkAgentResponse,
   CreateLoRaFrequencyRequest,
   ChangeP2PRouteResponse,
   UpdateDeviceTWeCallAuthorizeStatusRequest,
@@ -91,6 +95,7 @@ import {
   TopicItem,
   CreateTWeTalkAIBotResponse,
   DeleteTWeSeeCallbackResponse,
+  DescribeTWeTalkAgentListResponse,
   DescribeTWeSeeTaskStatisticsResponse,
   GetFamilyDeviceUserListRequest,
   CreateTRTCSignaturesWithRoomIdRequest,
@@ -118,15 +123,17 @@ import {
   GetTWeTalkProductConfigListV2Response,
   InvokeVisionRecognitionTaskOutput,
   DeleteDevicesRequest,
+  BindTWeTalkAgentRequest,
   ModifyProjectResponse,
   DescribeCloudStorageThumbnailRequest,
   ModifyProductCloudStorageAIServiceRequest,
   CreateExternalSourceAIServiceTaskRequest,
-  GetDeviceSumStatisticsResponse,
+  DescribeCloudStorageAIServiceCallbackResponse,
   InheritCloudStorageUserRequest,
   ModifyProjectRequest,
   ModifySpacePropertyResponse,
   PauseTWeCallDeviceRequest,
+  TalkAgentInfo,
   ModifyTWeSeeCallbackResponse,
   DescribeDeviceDataHistoryResponse,
   CreateTWeSeeRecognitionTaskWithFileResponse,
@@ -159,7 +166,7 @@ import {
   DescribeCloudStorageTimeResponse,
   GetPositionSpaceListRequest,
   DescribeGatewaySubProductsResponse,
-  BindProductsResponse,
+  CreateVisionRecognitionTaskOutput,
   GetDeviceListResponse,
   DescribeCloudStorageMultiThumbnailResponse,
   BindProductInfo,
@@ -181,6 +188,7 @@ import {
   ModifyTWeTalkProductConfigV2Response,
   DescribeP2PRouteResponse,
   ListTopicPolicyResponse,
+  CreateTWeTalkAgentResponse,
   CreateAISearchTaskAsyncRequest,
   GenSingleDeviceSignatureOfPublicResponse,
   DeleteTWeTalkProductConfigV2Request,
@@ -198,10 +206,10 @@ import {
   GetTWeTalkActiveRecordListResponse,
   DeleteCloudStorageEventRequest,
   SearchPositionSpaceRequest,
-  DescribeCloudStorageAIServiceCallbackResponse,
   DescribeTWeTalkAIBotRequest,
   VisionCustomDetectQuery,
   ModifyLoRaGatewayResponse,
+  TalkConversationConfig,
   CallDeviceActionSyncResponse,
   CreateLoRaGatewayRequest,
   ModifyTopicRuleRequest,
@@ -220,7 +228,9 @@ import {
   VisionRecognitionResult,
   CreateIotVideoCloudStorageResponse,
   DescribePackageConsumeTaskResponse,
+  TalkTTSConfig,
   CheckFirmwareUpdateRequest,
+  DescribeTWeTalkAgentBindingResponse,
   RemoveUserByRoomIdFromTRTCRequest,
   DescribeTWeSeePostPaidServiceResponse,
   ModifyPositionSpaceResponse,
@@ -229,7 +239,9 @@ import {
   PositionItem,
   ListTWeSeeCallbackResponse,
   TalkIdleDetectionConfigInfo,
+  DeleteTWeTalkAgentRequest,
   CreateFenceBindResponse,
+  TalkLLMConfig,
   DescribeBindedProductsResponse,
   LoRaGatewayLocation,
   SeeTaskMetadata,
@@ -265,8 +277,10 @@ import {
   PauseTWeCallDeviceResponse,
   DescribeActivateDeviceResponse,
   ResetTWeCallDeviceResponse,
+  ModifyTWeTalkAgentResponse,
   AppDeviceInfo,
   DescribeCloudStorageResponse,
+  TalkAgentBinding,
   DescribeCloudStorageStreamDataRequest,
   ListEventHistoryResponse,
   BatchCreateTWeSeeRecognitionTaskRequest,
@@ -335,6 +349,7 @@ import {
   DescribeTWeSeeCallbackRequest,
   DeviceDataHistoryItem,
   DescribeSubscribedTopicPolicyRequest,
+  TalkWebhookTool,
   BatchInvokeTWeSeeRecognitionTaskRequest,
   InvokeTWeSeeRecognitionTaskRequest,
   ModifyProductDynamicRegisterRequest,
@@ -344,6 +359,7 @@ import {
   ControlDeviceDataRequest,
   TalkSTTConfigInfo,
   ListFirmwaresResponse,
+  TalkMemoryConfig,
   ReleaseStudioProductResponse,
   DescribeFirmwareResponse,
   DescribePackageConsumeTasksResponse,
@@ -360,7 +376,7 @@ import {
   LicenseServiceNumInfo,
   TRTCParams,
   DescribeCsReportCountDataInfoResponse,
-  DescribeFirmwareTaskDevicesResponse,
+  DescribeTWeTalkAgentBindingRequest,
   ModifyCloudStorageAIServiceRequest,
   DescribeTWeSeeConfigResponse,
   GetProjectListResponse,
@@ -369,19 +385,23 @@ import {
   DisableTopicRuleResponse,
   TopicRuleInfo,
   DescribeCloudStorageAIServiceTasksRequest,
+  DescribeTWeTalkAgentRequest,
   ListFirmwaresRequest,
   PublishMessageRequest,
+  DescribeFirmwareTaskDevicesResponse,
+  UnbindDevicesResponse,
   ModifySpacePropertyRequest,
   VideoLicenseEntity,
   GetCOSURLResponse,
   GetTopicRuleListResponse,
   SearchPositionSpaceResponse,
   GenerateCloudStorageAIServiceTaskFileURLResponse,
-  ActivateDeviceInfo,
+  ChangeP2PRouteRequest,
   CreateTWeSeePostPaidServiceResponse,
   ResetTWeCallDeviceRequest,
   CreateTopicPolicyResponse,
   CallDeviceActionAsyncResponse,
+  DescribeTWeTalkAgentResponse,
   TerminateTWeSeeSubscriptionRequest,
   ModifyTWeSeeSubscriptionRenewFlagResponse,
   GetPositionSpaceListResponse,
@@ -399,6 +419,7 @@ import {
   CloudStorageEventWithAITasks,
   CreateDeviceChannelRequest,
   DescribeDevicePackagesResponse,
+  DescribeTWeTalkAgentListRequest,
   DeleteDeviceSDPRequest,
   CloudStorageAIServiceTaskVideoMetaInfo,
   DescribeGatewaySubDeviceListResponse,
@@ -406,10 +427,12 @@ import {
   DescribeVideoLicenseResponse,
   DescribePackageConsumeTasksRequest,
   GetFamilyDeviceUserListResponse,
+  UnbindTWeTalkAgentRequest,
   DeleteLoRaGatewayResponse,
-  ChangeP2PRouteRequest,
+  DeleteTWeTalkAgentResponse,
   LoRaGatewayItem,
   BindTWeTalkAIBotRequest,
+  TalkSTTTRTC,
   UpdateOtaModuleRequest,
   ModifyLoRaFrequencyRequest,
   InvokeVideosKeywordsAnalyzerResponse,
@@ -422,7 +445,7 @@ import {
   SearchStudioProductRequest,
   CreateDevicePublishSDPAnswerResponse,
   GenSingleDeviceSignatureOfPublicRequest,
-  CreateVisionRecognitionTaskOutput,
+  BindProductsResponse,
   BatchCreateTWeSeeRecognitionTaskResponse,
   DescribeGatewayBindDevicesRequest,
   DescribeGatewaySubProductsRequest,
@@ -475,7 +498,9 @@ import {
   DescribePositionFenceListResponse,
   DescribeCloudStorageMultiThumbnailRequest,
   DescribeFirmwareUpdateStatusRequest,
+  GetDeviceSumStatisticsResponse,
   DescribeDevicePositionListResponse,
+  TalkSTTConfig,
   DescribeProjectResponse,
   VisionDetectedObject,
   CreateTWeTalkProductConfigV2Response,
@@ -485,8 +510,10 @@ import {
   DescribeLicenseOverviewResponse,
   ListTopicPolicyRequest,
   GenerateSignedVideoURLResponse,
+  ActivateDeviceInfo,
   InvokeVideosKeywordsAnalyzerRequest,
   DescribeFirmwareTaskDevicesRequest,
+  TalkTTSFlow,
   InvokeExternalSourceAIServiceTaskRequest,
   DescribeProductCloudStorageAIServiceRequest,
   DeleteLoRaGatewayRequest,
@@ -507,6 +534,7 @@ import {
   CreateTWeSeeSubscriptionRequest,
   CreateFenceBindRequest,
   CreateTWeTalkAIBotRequest,
+  TalkWebhookEndpoint,
   AuthMiniProgramAppInfo,
   FamilySubDevice,
   TalkActivationStatusInfo,
@@ -552,8 +580,9 @@ import {
   DeleteTopicPolicyResponse,
   DeviceActivationDetail,
   DiarySHLConfig,
-  UnbindDevicesResponse,
+  BindTWeTalkAgentResponse,
   CreateOtaModuleResponse,
+  ModifyTWeTalkAgentRequest,
   CreateBatchProductionResponse,
   VisionObjectDetectConfig,
   BatchUpdateFirmwareRequest,
@@ -746,6 +775,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetProjectListResponse) => void
   ): Promise<GetProjectListResponse> {
     return this.request("GetProjectList", req, cb)
+  }
+
+  /**
+   * 解绑产品或设备上的智能体
+   */
+  async UnbindTWeTalkAgent(
+    req: UnbindTWeTalkAgentRequest,
+    cb?: (error: string, rep: UnbindTWeTalkAgentResponse) => void
+  ): Promise<UnbindTWeTalkAgentResponse> {
+    return this.request("UnbindTWeTalkAgent", req, cb)
   }
 
   /**
@@ -1301,6 +1340,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 新增TWeTalk智能体。
+   */
+  async CreateTWeTalkAgent(
+    req: CreateTWeTalkAgentRequest,
+    cb?: (error: string, rep: CreateTWeTalkAgentResponse) => void
+  ): Promise<CreateTWeTalkAgentResponse> {
+    return this.request("CreateTWeTalkAgent", req, cb)
+  }
+
+  /**
    * 继承云存用户
    */
   async InheritCloudStorageUser(
@@ -1331,6 +1380,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 分页查询智能体列表
+   */
+  async DescribeTWeTalkAgentList(
+    req: DescribeTWeTalkAgentListRequest,
+    cb?: (error: string, rep: DescribeTWeTalkAgentListResponse) => void
+  ): Promise<DescribeTWeTalkAgentListResponse> {
+    return this.request("DescribeTWeTalkAgentList", req, cb)
+  }
+
+  /**
    * 用于修改TWeTalk服务连接产品配置信息。
    */
   async ModifyTWeTalkProductConfig(
@@ -1348,6 +1407,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: TransferTWeCallDeviceResponse) => void
   ): Promise<TransferTWeCallDeviceResponse> {
     return this.request("TransferTWeCallDevice", req, cb)
+  }
+
+  /**
+   * 短摘要列表查询
+   */
+  async ListTWeSeeTasks(
+    req: ListTWeSeeTasksRequest,
+    cb?: (error: string, rep: ListTWeSeeTasksResponse) => void
+  ): Promise<ListTWeSeeTasksResponse> {
+    return this.request("ListTWeSeeTasks", req, cb)
   }
 
   /**
@@ -1750,6 +1819,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DismissRoomByStrRoomIdFromTRTCResponse) => void
   ): Promise<DismissRoomByStrRoomIdFromTRTCResponse> {
     return this.request("DismissRoomByStrRoomIdFromTRTC", req, cb)
+  }
+
+  /**
+   * 修改TWeTalk智能体
+   */
+  async ModifyTWeTalkAgent(
+    req: ModifyTWeTalkAgentRequest,
+    cb?: (error: string, rep: ModifyTWeTalkAgentResponse) => void
+  ): Promise<ModifyTWeTalkAgentResponse> {
+    return this.request("ModifyTWeTalkAgent", req, cb)
   }
 
   /**
@@ -2225,6 +2304,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询智能体绑定关系
+   */
+  async DescribeTWeTalkAgentBinding(
+    req: DescribeTWeTalkAgentBindingRequest,
+    cb?: (error: string, rep: DescribeTWeTalkAgentBindingResponse) => void
+  ): Promise<DescribeTWeTalkAgentBindingResponse> {
+    return this.request("DescribeTWeTalkAgentBinding", req, cb)
+  }
+
+  /**
    * 创建设备云存 AI 分析任务
    */
   async CreateCloudStorageAIServiceTask(
@@ -2412,6 +2501,18 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDeviceBindGatewayResponse) => void
   ): Promise<DescribeDeviceBindGatewayResponse> {
     return this.request("DescribeDeviceBindGateway", req, cb)
+  }
+
+  /**
+     * 绑定智能体到产品或设备
+- `BindingScope=product` 时，`DeviceName` 必须为空。
+- `BindingScope=device` 时，`DeviceName` 必填。
+     */
+  async BindTWeTalkAgent(
+    req: BindTWeTalkAgentRequest,
+    cb?: (error: string, rep: BindTWeTalkAgentResponse) => void
+  ): Promise<BindTWeTalkAgentResponse> {
+    return this.request("BindTWeTalkAgent", req, cb)
   }
 
   /**
@@ -2605,13 +2706,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 短摘要列表查询
+   * 用于删除TWeTalk智能体
    */
-  async ListTWeSeeTasks(
-    req: ListTWeSeeTasksRequest,
-    cb?: (error: string, rep: ListTWeSeeTasksResponse) => void
-  ): Promise<ListTWeSeeTasksResponse> {
-    return this.request("ListTWeSeeTasks", req, cb)
+  async DeleteTWeTalkAgent(
+    req: DeleteTWeTalkAgentRequest,
+    cb?: (error: string, rep: DeleteTWeTalkAgentResponse) => void
+  ): Promise<DeleteTWeTalkAgentResponse> {
+    return this.request("DeleteTWeTalkAgent", req, cb)
   }
 
   /**
@@ -2822,6 +2923,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BindCloudStorageUserResponse) => void
   ): Promise<BindCloudStorageUserResponse> {
     return this.request("BindCloudStorageUser", req, cb)
+  }
+
+  /**
+   * 用户查询TWeTalk智能体详情
+   */
+  async DescribeTWeTalkAgent(
+    req: DescribeTWeTalkAgentRequest,
+    cb?: (error: string, rep: DescribeTWeTalkAgentResponse) => void
+  ): Promise<DescribeTWeTalkAgentResponse> {
+    return this.request("DescribeTWeTalkAgent", req, cb)
   }
 
   /**

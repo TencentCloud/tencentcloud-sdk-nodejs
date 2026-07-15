@@ -118,6 +118,16 @@ it("cls.v20201016.GetClsService", async function () {
     }
 })
 
+it("cls.v20201016.DescribeAlarmNotices", async function () {
+    try {
+       const data = await client.DescribeAlarmNotices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.QueryMetric", async function () {
     try {
        const data = await client.QueryMetric({})
@@ -161,6 +171,16 @@ it("cls.v20201016.DescribeConfigs", async function () {
 it("cls.v20201016.CreateDeliverCloudFunction", async function () {
     try {
        const data = await client.CreateDeliverCloudFunction({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeS3Recharges", async function () {
+    try {
+       const data = await client.DescribeS3Recharges({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -358,6 +378,16 @@ it("cls.v20201016.DescribeTopics", async function () {
     }
 })
 
+it("cls.v20201016.ModifyS3Recharge", async function () {
+    try {
+       const data = await client.ModifyS3Recharge({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.CancelRebuildIndexTask", async function () {
     try {
        const data = await client.CancelRebuildIndexTask({})
@@ -518,6 +548,16 @@ it("cls.v20201016.CreateDlcDeliver", async function () {
     }
 })
 
+it("cls.v20201016.SearchCosRechargeInfo", async function () {
+    try {
+       const data = await client.SearchCosRechargeInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.ModifyIndex", async function () {
     try {
        const data = await client.ModifyIndex({})
@@ -638,9 +678,9 @@ it("cls.v20201016.CreateShipper", async function () {
     }
 })
 
-it("cls.v20201016.CreateNoticeContent", async function () {
+it("cls.v20201016.DeleteAgentApplication", async function () {
     try {
-       const data = await client.CreateNoticeContent({})
+       const data = await client.DeleteAgentApplication({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -731,6 +771,16 @@ it("cls.v20201016.ModifySplunkDeliver", async function () {
 it("cls.v20201016.DescribeKafkaRecharges", async function () {
     try {
        const data = await client.DescribeKafkaRecharges({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DeleteRemoteWriteTask", async function () {
+    try {
+       const data = await client.DeleteRemoteWriteTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -978,6 +1028,16 @@ it("cls.v20201016.DescribeRebuildIndexTasks", async function () {
     }
 })
 
+it("cls.v20201016.ModifyConfig", async function () {
+    try {
+       const data = await client.ModifyConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeAlarmShields", async function () {
     try {
        const data = await client.DescribeAlarmShields({})
@@ -1098,9 +1158,9 @@ it("cls.v20201016.ModifyNoticeContent", async function () {
     }
 })
 
-it("cls.v20201016.SearchCosRechargeInfo", async function () {
+it("cls.v20201016.CreateRemoteWriteTask", async function () {
     try {
-       const data = await client.SearchCosRechargeInfo({})
+       const data = await client.CreateRemoteWriteTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1208,6 +1268,16 @@ it("cls.v20201016.CreateRebuildIndexTask", async function () {
     }
 })
 
+it("cls.v20201016.SearchLog", async function () {
+    try {
+       const data = await client.SearchLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.ModifyTopic", async function () {
     try {
        const data = await client.ModifyTopic({})
@@ -1278,9 +1348,9 @@ it("cls.v20201016.DeleteConsoleSharing", async function () {
     }
 })
 
-it("cls.v20201016.DescribeAlarmNotices", async function () {
+it("cls.v20201016.DeleteIndex", async function () {
     try {
-       const data = await client.DescribeAlarmNotices({})
+       const data = await client.DeleteIndex({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1338,9 +1408,9 @@ it("cls.v20201016.DescribeRecordingRuleYamlTask", async function () {
     }
 })
 
-it("cls.v20201016.SearchLog", async function () {
+it("cls.v20201016.ModifyConsumer", async function () {
     try {
-       const data = await client.SearchLog({})
+       const data = await client.ModifyConsumer({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1358,9 +1428,39 @@ it("cls.v20201016.ModifyRecordingRuleTask", async function () {
     }
 })
 
+it("cls.v20201016.DescribeAgentConfigs", async function () {
+    try {
+       const data = await client.DescribeAgentConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DeleteShipper", async function () {
     try {
        const data = await client.DeleteShipper({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyWebCallback", async function () {
+    try {
+       const data = await client.ModifyWebCallback({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.SearchS3RechargeInfo", async function () {
+    try {
+       const data = await client.SearchS3RechargeInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1391,6 +1491,16 @@ it("cls.v20201016.QueryRangeMetric", async function () {
 it("cls.v20201016.DescribeConfigMachineGroups", async function () {
     try {
        const data = await client.DescribeConfigMachineGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.CreateS3Recharge", async function () {
+    try {
+       const data = await client.CreateS3Recharge({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1498,9 +1608,9 @@ it("cls.v20201016.DescribeShipperTasks", async function () {
     }
 })
 
-it("cls.v20201016.ModifyWebCallback", async function () {
+it("cls.v20201016.DeleteS3Recharge", async function () {
     try {
-       const data = await client.ModifyWebCallback({})
+       const data = await client.DeleteS3Recharge({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1648,9 +1758,29 @@ it("cls.v20201016.ModifyConsoleSharing", async function () {
     }
 })
 
+it("cls.v20201016.CreateAgentApplication", async function () {
+    try {
+       const data = await client.CreateAgentApplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.DescribeMetricSubscribes", async function () {
     try {
        const data = await client.DescribeMetricSubscribes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyAgentApplication", async function () {
+    try {
+       const data = await client.ModifyAgentApplication({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1681,6 +1811,16 @@ it("cls.v20201016.DescribeConsumers", async function () {
 it("cls.v20201016.DeleteNetworkApplication", async function () {
     try {
        const data = await client.DeleteNetworkApplication({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.DescribeAgentApplications", async function () {
+    try {
+       const data = await client.DescribeAgentApplications({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1728,9 +1868,9 @@ it("cls.v20201016.ModifyCosRecharge", async function () {
     }
 })
 
-it("cls.v20201016.ModifyConfig", async function () {
+it("cls.v20201016.DescribeRemoteWriteTasks", async function () {
     try {
-       const data = await client.ModifyConfig({})
+       const data = await client.DescribeRemoteWriteTasks({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1768,9 +1908,9 @@ it("cls.v20201016.ModifyLogset", async function () {
     }
 })
 
-it("cls.v20201016.ModifyConsumer", async function () {
+it("cls.v20201016.CreateNoticeContent", async function () {
     try {
-       const data = await client.ModifyConsumer({})
+       const data = await client.CreateNoticeContent({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1868,16 +2008,6 @@ it("cls.v20201016.DescribeNoticeContents", async function () {
     }
 })
 
-it("cls.v20201016.DeleteIndex", async function () {
-    try {
-       const data = await client.DeleteIndex({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("cls.v20201016.ModifyMetricConfig", async function () {
     try {
        const data = await client.ModifyMetricConfig({})
@@ -1931,6 +2061,16 @@ it("cls.v20201016.CreateAlarm", async function () {
 it("cls.v20201016.DeleteTopic", async function () {
     try {
        const data = await client.DeleteTopic({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyRemoteWriteTask", async function () {
+    try {
+       const data = await client.ModifyRemoteWriteTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

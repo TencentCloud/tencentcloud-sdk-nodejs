@@ -31,6 +31,7 @@ import {
   DeleteStreamLinkFlowRequest,
   FrameRateConfig,
   ExtractBlindWatermarkRequest,
+  CreateAiDramaTaskRequest,
   AiAnalysisTaskVideoComprehensionResult,
   DeleteStreamLinkSecurityGroupResponse,
   DeleteStreamPackageLinearAssemblyProgramsByChannelRequest,
@@ -94,7 +95,7 @@ import {
   AiAnalysisTaskCutoutOutput,
   DiagnoseResult,
   DescribeStreamPackageLinearAssemblyChannelsRequest,
-  EnableWorkflowRequest,
+  DescribeStreamPackageSourcesResponse,
   AiReviewTaskPoliticalOcrResult,
   ModifyAIAnalysisTemplateRequest,
   SmartSubtitlesResult,
@@ -210,7 +211,7 @@ import {
   AudioBeautifyConfig,
   CreateStreamLinkSecurityGroupRequest,
   DescribeStreamLinkEventResponse,
-  DescribeStreamPackageSourcesResponse,
+  CreateAiDramaTaskResponse,
   CreateStreamLinkFlowResponse,
   AigcImageExtraParam,
   AiAnalysisTaskClassificationOutput,
@@ -239,7 +240,7 @@ import {
   RecognizeMediaForZhiXueRequest,
   MediaProcessTaskAdaptiveDynamicStreamingResult,
   OcrWordsConfigureInfoForUpdate,
-  WatermarkTemplate,
+  AiDramaInput,
   ModifyStreamLinkOutputInfoRequest,
   OverrideEraseParameter,
   TextWatermarkTemplateInput,
@@ -266,6 +267,7 @@ import {
   ModifyStreamLinkEventResponse,
   VideoComprehensionResultItem,
   ModifySnapshotByTimeOffsetTemplateResponse,
+  WatermarkTemplate,
   ImageProcessTaskOutput,
   ComposeTargetInfo,
   TaskStatData,
@@ -343,7 +345,7 @@ import {
   DescribeAdaptiveDynamicStreamingTemplatesResponse,
   DescribeStreamPackageActivateStateRequest,
   MediaContentReviewOcrTextSegmentItem,
-  AiAnalysisTaskHighlightOutput,
+  DeleteBlindWatermarkTemplateResponse,
   SourceInfo,
   SmartSubtitleTaskResultInput,
   BatchStartStreamLinkFlowRequest,
@@ -370,6 +372,7 @@ import {
   SRTSourceAddressReq,
   DescribeLiveRecordTemplatesResponse,
   EnableScheduleRequest,
+  EnableWorkflowRequest,
   NameServer,
   RawTranscodeParameter,
   LiveStreamTaskNotifyConfig,
@@ -418,7 +421,7 @@ import {
   AiAnalysisTaskTagOutput,
   SharpEnhanceConfig,
   CreateAsrHotwordsResponse,
-  DeleteBlindWatermarkTemplateResponse,
+  AiAnalysisTaskHighlightOutput,
   QualityControlItemConfig,
   CreateSnapshotByTimeOffsetTemplateRequest,
   CreateStreamLinkEventResponse,
@@ -430,6 +433,7 @@ import {
   ProcessImageResponse,
   DescribeRTSPPullSourceAddress,
   DashManifestInfo,
+  VideoDramaCosInfo,
   DescribeOutputRTSPPullSettings,
   SourceAlert,
   CreateBlindWatermarkTemplateResponse,
@@ -504,7 +508,7 @@ import {
   DescribeStreamPackageSourceLocationRequest,
   QueryProjectRequest,
   EvaluationMediaInputInfo,
-  LiveStreamAiRecognitionResultInfo,
+  DescribeContentReviewTemplatesRequest,
   ActivityPara,
   DescribeStreamPackageSourcesRequest,
   ModifyAsrHotwordsResponse,
@@ -598,6 +602,7 @@ import {
   AiReviewTaskTerrorismResult,
   DescribeOutput,
   LiveStreamAiReviewVoicePornResult,
+  VideoRedrawInput,
   DeleteSmartEraseTemplateRequest,
   MediaContentReviewPoliticalSegmentItem,
   DeletePersonSampleResponse,
@@ -716,7 +721,7 @@ import {
   OutputRISTSourceAddressResp,
   DetectVideoWatermarkRequest,
   ModifySmartSubtitleTemplateResponse,
-  UserDefineConfigureInfoForUpdate,
+  CreateVideoRedrawTaskRequest,
   S3OutputStorage,
   CosFileUploadTrigger,
   AiReviewPoliticalAsrTaskOutput,
@@ -766,6 +771,7 @@ import {
   AdaptiveDynamicStreamingInfoItem,
   CreateStreamLinkOutputInfoRequest,
   ComposeMediaTrack,
+  UserDefineConfigureInfoForUpdate,
   ProhibitedOcrReviewTemplateInfo,
   ImageEraseLogoConfig,
   ModifyStreamLinkInputRequest,
@@ -779,7 +785,7 @@ import {
   ExpressionConfigInfo,
   CreateLiveRecordTemplateRequest,
   CreateContentReviewTemplateRequest,
-  DescribeContentReviewTemplatesRequest,
+  CreateVideoRedrawTaskResponse,
   AdaptiveDynamicStreamingTaskInput,
   ModifyQualityControlTemplateRequest,
   DescribeImageSpriteTemplatesResponse,
@@ -884,6 +890,7 @@ import {
   DescribeOutputRISTSettings,
   DrmInfo,
   TextTranslationRequest,
+  LiveStreamAiRecognitionResultInfo,
   DescribeSampleSnapshotTemplatesResponse,
   DescribeProcessImageTemplatesRequest,
   ComposeImageItem,
@@ -1043,6 +1050,7 @@ import {
   SmartEraseTemplateItem,
   CreateStreamPackageSourceLocationRequest,
   DeleteWatermarkTemplateResponse,
+  VideoRedrawCosInfo,
   DescribeStreamPackageLinearAssemblyChannelsResponse,
   StopStreamPackageLinearAssemblyChannelRequest,
   DescribeOutputRTSPPullServerUrl,
@@ -1096,6 +1104,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeStreamLinkFlowRealtimeStatusResponse) => void
   ): Promise<DescribeStreamLinkFlowRealtimeStatusResponse> {
     return this.request("DescribeStreamLinkFlowRealtimeStatus", req, cb)
+  }
+
+  /**
+   * 创建用户自定义转动图模板，数量上限：16。
+   */
+  async CreateAnimatedGraphicsTemplate(
+    req: CreateAnimatedGraphicsTemplateRequest,
+    cb?: (error: string, rep: CreateAnimatedGraphicsTemplateResponse) => void
+  ): Promise<CreateAnimatedGraphicsTemplateResponse> {
+    return this.request("CreateAnimatedGraphicsTemplate", req, cb)
   }
 
   /**
@@ -2117,6 +2135,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建AIGC转绘任务
+   */
+  async CreateVideoRedrawTask(
+    req: CreateVideoRedrawTaskRequest,
+    cb?: (error: string, rep: CreateVideoRedrawTaskResponse) => void
+  ): Promise<CreateVideoRedrawTaskResponse> {
+    return this.request("CreateVideoRedrawTask", req, cb)
+  }
+
+  /**
    * 创建直播录制模板
    */
   async CreateLiveRecordTemplate(
@@ -2518,6 +2546,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * Ai漫剧工作流，输入剧本，自动拆分分镜，生成Ai漫剧
+   */
+  async CreateAiDramaTask(
+    req: CreateAiDramaTaskRequest,
+    cb?: (error: string, rep: CreateAiDramaTaskResponse) => void
+  ): Promise<CreateAiDramaTaskResponse> {
+    return this.request("CreateAiDramaTask", req, cb)
+  }
+
+  /**
    * 查询Source信息列表。
    */
   async DescribeStreamPackageSources(
@@ -2916,13 +2954,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建用户自定义转动图模板，数量上限：16。
+   * 删除用户自定义指定时间点截图模板。
    */
-  async CreateAnimatedGraphicsTemplate(
-    req: CreateAnimatedGraphicsTemplateRequest,
-    cb?: (error: string, rep: CreateAnimatedGraphicsTemplateResponse) => void
-  ): Promise<CreateAnimatedGraphicsTemplateResponse> {
-    return this.request("CreateAnimatedGraphicsTemplate", req, cb)
+  async DeleteSnapshotByTimeOffsetTemplate(
+    req: DeleteSnapshotByTimeOffsetTemplateRequest,
+    cb?: (error: string, rep: DeleteSnapshotByTimeOffsetTemplateResponse) => void
+  ): Promise<DeleteSnapshotByTimeOffsetTemplateResponse> {
+    return this.request("DeleteSnapshotByTimeOffsetTemplate", req, cb)
   }
 
   /**
@@ -2953,16 +2991,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAnimatedGraphicsTemplatesResponse) => void
   ): Promise<DescribeAnimatedGraphicsTemplatesResponse> {
     return this.request("DescribeAnimatedGraphicsTemplates", req, cb)
-  }
-
-  /**
-   * 删除用户自定义指定时间点截图模板。
-   */
-  async DeleteSnapshotByTimeOffsetTemplate(
-    req: DeleteSnapshotByTimeOffsetTemplateRequest,
-    cb?: (error: string, rep: DeleteSnapshotByTimeOffsetTemplateResponse) => void
-  ): Promise<DeleteSnapshotByTimeOffsetTemplateResponse> {
-    return this.request("DeleteSnapshotByTimeOffsetTemplate", req, cb)
   }
 
   /**
