@@ -9372,6 +9372,10 @@ export interface AiAnalysisTaskDubbingOutput {
    * <p>译制视频存储位置。</p>
    */
   OutputStorage?: TaskOutputStorage
+  /**
+   * <p>额外结果，目前包含字幕文件结果 Url</p>
+   */
+  ExtraOutput?: string
 }
 
 /**
@@ -19729,15 +19733,15 @@ export interface ModifyStreamLinkInputResponse {
  */
 export interface VODOutputStorage {
   /**
-   * 媒体处理生成的文件输出的目标 *Bucket ID*
+   * <p>媒体处理生成的文件输出的目标 <em>Bucket ID</em></p>
    */
   Bucket?: string
   /**
-   * 媒体处理生成的文件输出的目标 Bucket 的园区
+   * <p>媒体处理生成的文件输出的目标 Bucket 的园区</p>
    */
   Region?: string
   /**
-   * 点播专业版应用Id
+   * <p>点播专业版应用Id</p>
    */
   SubAppId?: number
 }

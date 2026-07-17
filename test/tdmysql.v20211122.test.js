@@ -108,6 +108,16 @@ it("tdmysql.v20211122.CreateCloneInstance", async function () {
     }
 })
 
+it("tdmysql.v20211122.DescribeDBEngines", async function () {
+    try {
+       const data = await client.DescribeDBEngines({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tdmysql.v20211122.DescribeUsers", async function () {
     try {
        const data = await client.DescribeUsers({})

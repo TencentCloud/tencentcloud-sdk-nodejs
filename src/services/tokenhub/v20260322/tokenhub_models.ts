@@ -352,25 +352,29 @@ export interface DeleteEndpointResponse {
  */
 export interface CreateTokenPlanTeamOrderAndBuyRequest {
   /**
-   * 套餐类型。取值：enterprise（企业版专业套餐）、enterprise-auto（企业版轻享套餐）。
+   * <p>套餐类型。取值：enterprise（企业版专业套餐）、enterprise-auto（企业版轻享套餐）。</p>
    */
   ProductType: string
   /**
-   * 套餐名称。只能包含中文、字母、数字、下划线、连字符，以中文或者字母开头，以中文或字母或数字结尾，2~50个字符
+   * <p>套餐名称。只能包含中文、字母、数字、下划线、连字符，以中文或者字母开头，以中文或字母或数字结尾，2~50个字符</p>
    */
   TeamName: string
   /**
-   * 购买时长。单位：月。必须大于 0。
+   * <p>购买时长。单位：月。必须大于 0，支持1个月～12个月。</p>
    */
   TimeSpan: number
   /**
-   * 购买的套餐规格。套餐类型为专业套餐（enterprise），单位取值为积分；轻享套餐（enterprise-auto），单位取值为 tokens。
+   * <p>购买的套餐规格。套餐类型为专业套餐（enterprise），单位取值为积分；轻享套餐（enterprise-auto），单位取值为 tokens。</p>
    */
   CreditOrToken: number
   /**
-   * 是否开启自动续费。默认不开启。
+   * <p>是否开启自动续费。默认不开启。</p>
    */
   EnableAutoRenew?: boolean
+  /**
+   * <p>已有套餐 ID（非空时走过期续费，空时走新购）</p>
+   */
+  TeamId?: string
 }
 
 /**
@@ -2479,7 +2483,7 @@ export interface ModifyApiKeyStatusResponse {
  */
 export interface CreateTokenPlanTeamOrderAndBuyResponse {
   /**
-   * 腾讯云订单 ID。用于关联一次购买操作下的所有子订单。
+   * <p>腾讯云订单 ID。用于关联一次购买操作下的所有子订单。</p>
    */
   BigOrderId?: string
   /**

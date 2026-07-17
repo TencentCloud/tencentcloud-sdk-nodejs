@@ -2849,12 +2849,12 @@ export interface DescribeBasicAlarmListRequest {
  */
 export interface DescribePrometheusAlertGroupsResponse {
   /**
-   * 告警分组信息
+   * <p>告警分组信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AlertGroupSet?: Array<PrometheusAlertGroupSet>
   /**
-   * 告警分组总数
+   * <p>告警分组总数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TotalCount?: number
@@ -10861,27 +10861,29 @@ export interface DescribePrometheusZonesRequest {
  */
 export interface DescribePrometheusAlertGroupsRequest {
   /**
-   * Prometheus 实例 ID
+   * <p>Prometheus 实例 ID</p>
    */
   InstanceId?: string
   /**
-   * 返回数量，默认为 20，最大值为 100
+   * <p>返回数量，默认为 20，最大值为 100</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为 0
+   * <p>偏移量，默认为 0</p>
    */
   Offset?: number
   /**
-   * 告警分组ID，形如alert-xxxx。
-查询给定ID的告警分组
+   * <p>告警分组ID，形如alert-xxxx。<br>查询给定ID的告警分组</p>
    */
   GroupId?: string
   /**
-   * 告警分组名称。
-查询名称中包含给定字符串的告警分组
+   * <p>告警分组名称。<br>查询名称中包含给定字符串的告警分组</p>
    */
   GroupName?: string
+  /**
+   * <p>通过自定义label查询告警规则：<br>返回包含符合过滤条件告警规则的整个分组</p><p>多个label过滤条件取交集</p>
+   */
+  Labels?: Array<PrometheusRuleKV>
 }
 
 /**

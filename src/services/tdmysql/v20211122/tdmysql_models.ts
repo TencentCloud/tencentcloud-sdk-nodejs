@@ -294,6 +294,11 @@ export interface ModifyInstanceSSLStatusResponse {
 }
 
 /**
+ * DescribeDBEngines请求参数结构体
+ */
+export type DescribeDBEnginesRequest = null
+
+/**
  * RestartDBInstances返回参数结构体
  */
 export interface RestartDBInstancesResponse {
@@ -1018,19 +1023,18 @@ export interface ModifyDBInstanceSecurityGroupsResponse {
 }
 
 /**
- * CreateCloneInstance返回参数结构体
+ * DescribeDBSArchiveLogs返回参数结构体
  */
-export interface CreateCloneInstanceResponse {
+export interface DescribeDBSArchiveLogsResponse {
   /**
-   * <p>克隆实例ID</p>
+   * <p>归档日志列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId?: string
+  Items?: Array<ArchiveLogModel>
   /**
-   * <p>任务ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>总数</p>
    */
-  FlowId?: number
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1045,6 +1049,48 @@ export interface ModifyUserPrivilegesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 数据库引擎信息
+ */
+export interface DBEngineInfo {
+  /**
+   * <p>引擎类型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * <p>引擎版本</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: string
+  /**
+   * <p>引擎名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * <p>引擎描述</p>
+   */
+  Description?: string
+  /**
+   * <p>是否最新版本</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  New?: boolean
+  /**
+   * <p>支持的兼容的模式，以,分隔</p>
+   */
+  SQLMode?: Array<string>
+  /**
+   * <p>是否支持参数模板</p>
+   */
+  IsSupportParamTemplate?: boolean
+  /**
+   * <p>是否支持Serverless模式</p>
+   */
+  IsSupportServerless?: boolean
 }
 
 /**
@@ -2219,18 +2265,19 @@ export interface ModifyUserPrivilegesRequest {
 }
 
 /**
- * DescribeDBSArchiveLogs返回参数结构体
+ * CreateCloneInstance返回参数结构体
  */
-export interface DescribeDBSArchiveLogsResponse {
+export interface CreateCloneInstanceResponse {
   /**
-   * <p>归档日志列表</p>
+   * <p>克隆实例ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Items?: Array<ArchiveLogModel>
+  InstanceId?: string
   /**
-   * <p>总数</p>
+   * <p>任务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TotalCount?: number
+  FlowId?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3387,6 +3434,24 @@ export interface DatabaseProcedure {
    * 存储过程名称
    */
   Proc: string
+}
+
+/**
+ * DescribeDBEngines返回参数结构体
+ */
+export interface DescribeDBEnginesResponse {
+  /**
+   * items总数
+   */
+  TotalCount?: number
+  /**
+   * DB引擎信息
+   */
+  Items?: Array<DBEngineInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

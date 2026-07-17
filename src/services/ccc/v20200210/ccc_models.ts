@@ -4388,6 +4388,10 @@ export interface CreateAutoCalloutTaskRequest {
    * <p>触发策略</p>
    */
   TriggerStrategy?: Array<TriggerStrategyItem>
+  /**
+   * <p>智能体并发限制</p>
+   */
+  ConcurrencyLimit?: number
 }
 
 /**

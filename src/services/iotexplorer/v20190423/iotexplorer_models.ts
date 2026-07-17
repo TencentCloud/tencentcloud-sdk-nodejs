@@ -814,17 +814,33 @@ export interface DescribeSpaceFenceEventListResponse {
 }
 
 /**
- * DescribeTWeSeeTask返回参数结构体
+ * CallDeviceRRPCSync请求参数结构体
  */
-export interface DescribeTWeSeeTaskResponse {
+export interface CallDeviceRRPCSyncRequest {
   /**
-   * 任务信息
+   * <p>产品 ID</p>
    */
-  TaskInfo?: SeeTaskInfo
+  ProductId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>设备名</p>
    */
-  RequestId?: string
+  DeviceName: string
+  /**
+   * <p>业务原始 payload，透传给设备</p>
+   */
+  Payload?: string
+  /**
+   * <p>下行传输层编码标识；base64 时下发到 broker 的 payload 会做一次 base64 编码</p>
+   */
+  Encoding?: string
+  /**
+   * <p>自定义下行 topic；为空则用 <code>$iotrrpc/down/{ProductId}/{DeviceName}/{mid}</code></p>
+   */
+  Topic?: string
+  /**
+   * <p>自定义上行 topic 模板（支持通配符）；可留空，留空时仅依赖 clientToken 关联 ack</p>
+   */
+  ReplyTopic?: string
 }
 
 /**
@@ -3872,6 +3888,32 @@ export interface TalkActivationInfo {
 }
 
 /**
+ * RevokeBindUserDevice请求参数结构体
+ */
+export interface RevokeBindUserDeviceRequest {
+  /**
+   * <p>应用 AppKey，用于解析 IotAppID 并完成签名校验</p>
+   */
+  AppKey: string
+  /**
+   * <p>产品 ID</p>
+   */
+  ProductId: string
+  /**
+   * <p>设备名</p>
+   */
+  DeviceName: string
+  /**
+   * <p>用户 OpenID（仅只读定位，不会创建）</p>
+   */
+  OpenID: string
+  /**
+   * <p>家庭名，默认 default</p>
+   */
+  FamilyName?: string
+}
+
+/**
  * ModifyTWeTalkProductConfigV2返回参数结构体
  */
 export interface ModifyTWeTalkProductConfigV2Response {
@@ -5379,6 +5421,24 @@ export interface DescribeDeviceBindGatewayResponse {
 }
 
 /**
+ * BindUserDevice返回参数结构体
+ */
+export interface BindUserDeviceResponse {
+  /**
+   * <p>用户 UserID（已存在则复用）</p>
+   */
+  UserID?: string
+  /**
+   * <p>家庭 ID（已存在则复用）</p>
+   */
+  FamilyId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ControlDeviceData返回参数结构体
  */
 export interface ControlDeviceDataResponse {
@@ -6480,6 +6540,20 @@ export interface PackageInfo {
 }
 
 /**
+ * DescribeTWeSeeTask返回参数结构体
+ */
+export interface DescribeTWeSeeTaskResponse {
+  /**
+   * 任务信息
+   */
+  TaskInfo?: SeeTaskInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteDevices返回参数结构体
  */
 export interface DeleteDevicesResponse {
@@ -6601,6 +6675,20 @@ export interface PublishFirmwareUpdateMessageResponse {
    * 请求状态
    */
   Status?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UnbindProducts返回参数结构体
+ */
+export interface UnbindProductsResponse {
+  /**
+   * 绑定了待解绑的LoRa产品下的设备的网关设备列表
+   */
+  GatewayDeviceNames?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7659,13 +7747,29 @@ export interface DescribePackageConsumeTasksResponse {
 }
 
 /**
- * UnbindProducts返回参数结构体
+ * CallDeviceRRPCSync返回参数结构体
  */
-export interface UnbindProductsResponse {
+export interface CallDeviceRRPCSyncResponse {
   /**
-   * 绑定了待解绑的LoRa产品下的设备的网关设备列表
+   * <p>平台为本次调用分配的关联 token（v2{instanceId}::{reqId} 形式）</p>
    */
-  GatewayDeviceNames?: Array<string>
+  ClientToken?: string
+  /**
+   * <p>调用状态</p>
+   */
+  Status?: string
+  /**
+   * <p>平台分配的 messageID</p>
+   */
+  MessageId?: number
+  /**
+   * <p>设备回包原始字节的 base64 编码（仅 Status=Replied 有值）</p>
+   */
+  PayloadBase64?: string
+  /**
+   * <p>实际生效的 reply topic 模板（默认模式由平台生成，自定义模式为入参原值）</p>
+   */
+  ReplyTopic?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9938,6 +10042,40 @@ export interface CreatePositionSpaceRequest {
    * 缩略图
    */
   Icon?: string
+}
+
+/**
+ * BindUserDevice请求参数结构体
+ */
+export interface BindUserDeviceRequest {
+  /**
+   * <p>应用 AppKey，用于解析 IotAppID 并完成签名校验</p>
+   */
+  AppKey: string
+  /**
+   * <p>产品 ID</p>
+   */
+  ProductId: string
+  /**
+   * <p>设备名（禁止使用虚拟设备名 ~virtualDev）</p>
+   */
+  DeviceName: string
+  /**
+   * <p>用户 OpenID，用于定位 / 兜底创建 App 用户</p>
+   */
+  OpenID: string
+  /**
+   * <p>家庭名，默认 default</p>
+   */
+  FamilyName?: string
+  /**
+   * <p>房间 ID，默认 &quot;0&quot;</p>
+   */
+  RoomId?: string
+  /**
+   * <p>用户昵称（仅首次创建用户时使用）</p>
+   */
+  NickName?: string
 }
 
 /**
@@ -12906,6 +13044,16 @@ export interface SeeDetectContinuousConfig {
    * 检测间隔分钟数。取值范围：5 ~ 60。
    */
   Interval: number
+}
+
+/**
+ * RevokeBindUserDevice返回参数结构体
+ */
+export interface RevokeBindUserDeviceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -1279,46 +1279,39 @@ export interface DescribeClustersRequest {
  */
 export interface UpgradeClusterInstancesRequest {
   /**
-   * 集群ID（请登录 [TKE 控制台](https://console.cloud.tencent.com/tke2) 获取集群 ID ）
+   * <p>集群ID（请登录 <a href="https://console.cloud.tencent.com/tke2">TKE 控制台</a> 获取集群 ID ）</p>
    */
   ClusterId: string
   /**
-   * create 表示开始一次升级任务
-pause 表示停止任务
-resume表示继续任务
-abort表示终止任务
+   * <p>create 表示开始一次升级任务<br>pause 表示停止任务<br>resume表示继续任务<br>abort表示终止任务</p>
    */
   Operation: string
   /**
-   * 升级类型，只有Operation是create需要设置
-reset 大版本重装升级
-hot 小版本热升级
-major 大版本原地升级
+   * <p>升级类型，只有Operation是create需要设置<br>reset 大版本重装升级<br>hot 小版本热升级<br>major 大版本原地升级</p>
    */
   UpgradeType?: string
   /**
-   * 需要升级的节点列表，可以通过控制台或 [查询待升级节点接口
-](https://cloud.tencent.com/document/api/457/50366) 获取
+   * <p>需要升级的节点列表，可以通过控制台或 <a href="https://cloud.tencent.com/document/api/457/50366">查询待升级节点接口</a> 获取</p>
    */
   InstanceIds?: Array<string>
   /**
-   * 当节点重新加入集群时候所使用的参数，参考添加已有节点接口
+   * <p>当节点重新加入集群时候所使用的参数，参考添加已有节点接口</p>
    */
   ResetParam?: UpgradeNodeResetParam
   /**
-   * 是否忽略节点升级前检查，默认值 false
+   * <p>是否忽略节点升级前检查，默认值 false</p>
    */
   SkipPreCheck?: boolean
   /**
-   * 最大可容忍的不可用Pod比例，如果设置 0 表示不做校验
+   * <p>最大可容忍的不可用Pod百分比，如果设置 0 表示不做校验</p><p>取值范围：[0, 100]</p><p>默认值：20</p>
    */
   MaxNotReadyPercent?: number
   /**
-   * 是否升级节点运行时，默认false不升级
+   * <p>是否升级节点运行时，默认false不升级</p>
    */
   UpgradeRunTime?: boolean
   /**
-   * 支持多个节点并行升级，默认值为 1，最大并行数为15
+   * <p>支持多个节点并行升级，默认值为 1，最大并行数为15</p>
    */
   Concurrent?: number
 }
@@ -5925,31 +5918,31 @@ export interface DescribePrometheusTemplatesResponse {
  */
 export interface ModifyExternalNodePoolRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 节点池ID
+   * <p>节点池ID</p>
    */
   NodePoolId: string
   /**
-   * 节点池名称
+   * <p>节点池名称</p>
    */
   Name?: string
   /**
-   * 注册节点标签
+   * <p>注册节点标签</p>
    */
   Labels?: Array<Label>
   /**
-   * 注册节点污点
+   * <p>注册节点污点</p>
    */
   Taints?: Array<Taint>
   /**
-   * 删除保护开关
+   * <p>删除保护开关</p>
    */
   DeletionProtection?: boolean
   /**
-   * base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看
+   * <p>base64 编码的用户脚本, 此脚本会在 k8s 组件运行后执行, 需要用户保证脚本的可重入及重试逻辑, 脚本及其生成的日志文件可在节点的 /data/ccs_userscript/ 路径查看</p>
    */
   UserScript?: string
 }
@@ -7538,63 +7531,63 @@ export interface ModifyRollOutSequenceRequest {
  */
 export interface CreateClusterNodePoolRequest {
   /**
-   * cluster id
+   * <p>cluster id</p>
    */
   ClusterId: string
   /**
-   * AutoScalingGroupPara AS组参数，参考 https://cloud.tencent.com/document/product/377/20440
+   * <p>AutoScalingGroupPara AS组参数，参考 https://cloud.tencent.com/document/product/377/20440</p>
    */
   AutoScalingGroupPara: string
   /**
-   * LaunchConfigurePara 运行参数，参考 https://cloud.tencent.com/document/product/377/20447
+   * <p>LaunchConfigurePara 运行参数，参考 https://cloud.tencent.com/document/product/377/20447</p>
    */
   LaunchConfigurePara: string
   /**
-   * InstanceAdvancedSettings
+   * <p>InstanceAdvancedSettings</p>
    */
   InstanceAdvancedSettings: InstanceAdvancedSettings
   /**
-   * 是否启用自动伸缩
+   * <p>是否启用自动伸缩</p>
    */
   EnableAutoscale: boolean
   /**
-   * 节点池名称
+   * <p>节点池名称</p>
    */
   Name?: string
   /**
-   * Labels标签
+   * <p>Labels标签</p>
    */
   Labels?: Array<Label>
   /**
-   * Taints互斥
+   * <p>Taints互斥</p>
    */
   Taints?: Array<Taint>
   /**
-   * 节点Annotation 列表
+   * <p>节点Annotation 列表</p>
    */
   Annotations?: Array<AnnotationValue>
   /**
-   * 节点池纬度运行时类型及版本
+   * <p>节点池纬度运行时类型及版本</p>
    */
   ContainerRuntime?: string
   /**
-   * 运行时版本
+   * <p>运行时版本</p>
    */
   RuntimeVersion?: string
   /**
-   * 节点池os，当为自定义镜像时，传镜像id；否则为公共镜像的osName
+   * <p>节点池os，当为自定义镜像时，传镜像id；否则为公共镜像的osName</p>
    */
   NodePoolOs?: string
   /**
-   * 容器的镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
+   * <p>容器的镜像版本，&quot;DOCKER_CUSTOMIZE&quot;(容器定制版),&quot;GENERAL&quot;(普通版本，默认值)</p>
    */
   OsCustomizeType?: string
   /**
-   * 资源标签
+   * <p>资源标签</p>
    */
   Tags?: Array<Tag>
   /**
-   * 删除保护开关
+   * <p>删除保护开关</p>
    */
   DeletionProtection?: boolean
 }
@@ -7638,7 +7631,7 @@ export interface ReleaseValues {
  */
 export interface CreateClusterNodePoolResponse {
   /**
-   * 节点池id
+   * <p>节点池id</p>
    */
   NodePoolId?: string
   /**
@@ -14630,83 +14623,83 @@ export interface DeleteEdgeCVMInstancesRequest {
  */
 export interface ModifyClusterNodePoolRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 节点池ID
+   * <p>节点池ID</p>
    */
   NodePoolId: string
   /**
-   * 名称，最长63个字符，只能包含小写字母、数字及分隔符“_”，且必须以小写字母开头，数字或小写字母结尾
+   * <p>名称，最长63个字符，只能包含小写字母、数字及分隔符“_”，且必须以小写字母开头，数字或小写字母结尾</p>
    */
   Name?: string
   /**
-   * 最大节点数
+   * <p>最大节点数</p>
    */
   MaxNodesNum?: number
   /**
-   * 最小节点数
+   * <p>最小节点数</p>
    */
   MinNodesNum?: number
   /**
-   * 标签
+   * <p>标签</p>
    */
   Labels?: Array<Label>
   /**
-   * 污点
+   * <p>污点</p>
    */
   Taints?: Array<Taint>
   /**
-   * 节点 Annotation 列表
+   * <p>节点 Annotation 列表</p>
    */
   Annotations?: Array<AnnotationValue>
   /**
-   * 是否开启伸缩
+   * <p>是否开启伸缩</p>
    */
   EnableAutoscale?: boolean
   /**
-   * 操作系统名称
+   * <p>操作系统名称</p>
    */
   OsName?: string
   /**
-   * 镜像版本，"DOCKER_CUSTOMIZE"(容器定制版),"GENERAL"(普通版本，默认值)
+   * <p>镜像版本，&quot;DOCKER_CUSTOMIZE&quot;(容器定制版),&quot;GENERAL&quot;(普通版本，默认值)</p>
    */
   OsCustomizeType?: string
   /**
-   * GPU驱动版本，CUDA版本，cuDNN版本以及是否启用MIG特性
+   * <p>GPU驱动版本，CUDA版本，cuDNN版本以及是否启用MIG特性</p>
    */
   GPUArgs?: GPUArgs
   /**
-   * base64编码后的自定义脚本
+   * <p>base64编码后的自定义脚本</p>
    */
   UserScript?: string
   /**
-   * 更新label和taint时忽略存量节点
+   * <p>更新label和taint时忽略存量节点</p>
    */
   IgnoreExistedNode?: boolean
   /**
-   * 节点自定义参数
+   * <p>节点自定义参数</p>
    */
   ExtraArgs?: InstanceExtraArgs
   /**
-   * 资源标签
+   * <p>资源标签</p>
    */
   Tags?: Array<Tag>
   /**
-   * 设置加入的节点是否参与调度，默认值为0，表示参与调度；非0表示不参与调度, 待节点初始化完成之后, 可执行kubectl uncordon nodename使node加入调度.
+   * <p>设置加入的节点是否参与调度，默认值为0，表示参与调度；非0表示不参与调度, 待节点初始化完成之后, 可执行kubectl uncordon nodename使node加入调度.</p>
    */
   Unschedulable?: number
   /**
-   * 删除保护开关
+   * <p>删除保护开关</p>
    */
   DeletionProtection?: boolean
   /**
-   * dockerd --graph 指定值, 默认为 /var/lib/docker
+   * <p>dockerd --graph 指定值, 默认为 /var/lib/docker</p>
    */
   DockerGraphPath?: string
   /**
-   * base64编码后的自定义脚本
+   * <p>base64编码后的自定义脚本</p>
    */
   PreStartUserScript?: string
 }

@@ -531,6 +531,36 @@ export interface OriginDetail {
 }
 
 /**
+ * 推理硬件规格信息。
+ */
+export interface InferenceHardwareSpecification {
+  /**
+   * 规格标识。
+   */
+  Spec?: string
+  /**
+   * 规格名称。
+   */
+  Name?: string
+  /**
+   * CPU 核数。
+   */
+  CPUNum?: number
+  /**
+   * 内存大小。单位为 MB。
+   */
+  MemSize?: number
+  /**
+   * GPU 卡数。
+   */
+  GPUNum?: number
+  /**
+   * 显存大小。单位为 MB。
+   */
+  GPUMemSize?: number
+}
+
+/**
  * DescribeSecurityClientAttester返回参数结构体
  */
 export interface DescribeSecurityClientAttesterResponse {
@@ -677,6 +707,24 @@ export interface BrowserImpersonationDetectionRule {
 }
 
 /**
+ * DescribeInferenceAPITokens请求参数结构体
+ */
+export interface DescribeInferenceAPITokensRequest {
+  /**
+   * <p>站点 ID。</p>
+   */
+  ZoneId: string
+  /**
+   * <p>分页查询偏移量。默认值：0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>分页查询限制数目。默认值：20，最大值：100。</p>
+   */
+  Limit?: number
+}
+
+/**
  * ModifyFunctionRulePriority请求参数结构体
  */
 export interface ModifyFunctionRulePriorityRequest {
@@ -739,41 +787,21 @@ export interface FunctionRegionSelection {
 }
 
 /**
- * ModifyMultiPathGatewayLine请求参数结构体
+ * DescribeInferenceServiceMonitorData返回参数结构体
  */
-export interface ModifyMultiPathGatewayLineRequest {
+export interface DescribeInferenceServiceMonitorDataResponse {
   /**
-   * 站点 ID。
+   * <p>查询结果的总条数。</p>
    */
-  ZoneId: string
+  TotalCount?: number
   /**
-   * 多通道安全加速网关 ID 。
+   * <p>推理服务监控数据。</p>
    */
-  GatewayId: string
+  InferenceServiceMonitorRecords?: Array<InferenceServiceMonitorRecord>
   /**
-   * 线路 ID ， 取值有:
-<li> line-1： EdgeOne 四层代理线路，支持修改实例和规则，不支持删除；</li>
-<li> line-2 及以上：EdgeOne 四层代理线路或者自定义线路，支持修改、删除实例和规则。</li>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  LineId: string
-  /**
-   * 线路类型，取值有： 
-<li>proxy ：EdgeOne 四层代理线路，支持修改实例和规则，不支持删除；</li> 
-<li>custom ：自定义线路，支持编辑、删除实例和规则。</li>
-   */
-  LineType?: string
-  /**
-   * 线路地址，格式为 host:port，直连线路（ LineType 取值为 direct ）不允许修改，其余类型支持修改。
-   */
-  LineAddress?: string
-  /**
-   * 四层代理实例 ID  ，当线路类型 LineType  取值为 proxy（EdgeOne 四层代理）可传入，进行修改。
-   */
-  ProxyId?: string
-  /**
-   * 转发规则 ID ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）可传入，进行修改。
-   */
-  RuleId?: string
+  RequestId?: string
 }
 
 /**
@@ -792,6 +820,24 @@ export interface DescribeHostsSettingResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * OperateInferenceService请求参数结构体
+ */
+export interface OperateInferenceServiceRequest {
+  /**
+   * 站点ID。
+   */
+  ZoneId: string
+  /**
+   * 推理服务 ID。
+   */
+  ServiceId: string
+  /**
+   * 操作类型，包含以下几种：<li>Stop：停止；</li><li>Resume：启动；</li><li>Delete：删除。</li>
+   */
+  Operation: string
 }
 
 /**
@@ -1028,6 +1074,40 @@ export interface DescribeEnvironmentsRequest {
 }
 
 /**
+ * CreateInferenceService请求参数结构体
+ */
+export interface CreateInferenceServiceRequest {
+  /**
+   * <p>站点 ID。</p>
+   */
+  ZoneId: string
+  /**
+   * <p>推理服务的名称。长度限制不超过 30 个字符，仅支持小写字母、数字、连字符，以字母开头，数字或字母结尾，不支持重复。</p>
+   */
+  Name: string
+  /**
+   * <p>模型服务需要监听的端口。仅支持 1-65535 之间的整数。</p>
+   */
+  ListenPort: number
+  /**
+   * <p>推理服务的容器配置。当前仅支持设置 1 个容器。</p>
+   */
+  Containers: Array<InferenceContainerConfig>
+  /**
+   * <p>推理服务的资源配置。</p>
+   */
+  ResourceConfig: InferenceResourceConfig
+  /**
+   * <p>推理服务的请求路径列表。最多支持 20 个路径。</p>
+   */
+  RequestPaths?: Array<string>
+  /**
+   * <p>描述信息。长度限制不超过 60 个字符。</p>
+   */
+  Description?: string
+}
+
+/**
  * 多通道安全网关详情
  */
 export interface MultiPathGateway {
@@ -1155,6 +1235,24 @@ export interface RateLimitConfig {
    * 速率限制-托管定制规则。如果为null，默认使用历史配置。
    */
   RateLimitCustomizes?: Array<RateLimitUserRule>
+}
+
+/**
+ * DescribeInferenceServiceDeploymentLogs返回参数结构体
+ */
+export interface DescribeInferenceServiceDeploymentLogsResponse {
+  /**
+   * 符合条件的部署日志总数。
+   */
+  TotalCount?: number
+  /**
+   * 部署日志列表。
+   */
+  DeploymentLogInfoSet?: Array<InferenceServiceDeploymentLogInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1502,6 +1600,20 @@ export interface CreateAliasDomainRequest {
 }
 
 /**
+ * 边缘推理定时伸缩动作配置，用于描述一条具体的定时伸缩动作。
+ */
+export interface InferenceScheduledScalingAction {
+  /**
+   * Cron 表达式，用于描述定时伸缩动作的触发时间。采用 5 字段标准 Cron 格式：分钟 小时 日期 月份 星期。不支持秒字段和年份字段。
+   */
+  CronExpression: string
+  /**
+   * 命中该定时伸缩动作后，推理服务需要调整到的最小实例数。若同一评估窗口内多个定时伸缩动作同时命中，则使用其中最大的 MinInstanceCount。
+   */
+  MinInstanceCount: number
+}
+
+/**
  * 实时日志投递到腾讯云 CLS 的配置信息。
  */
 export interface CLSTopic {
@@ -1795,6 +1907,38 @@ export interface DeleteJustInTimeTranscodeTemplatesRequest {
 }
 
 /**
+ * 多通道安全网关线路信息
+ */
+export interface MultiPathGatewayLine {
+  /**
+   * 线路 ID ， 其中 line-0 和 line-1 为系统内置线路 ID，取值有:
+<li> line-0：直连线路，不支持添加、编辑和删除；</li>
+<li> line-1： EdgeOne 四层代理线路，支持修改实例和规则，不支持删除；</li>
+<li> line-2 及以上：EdgeOne 四层代理线路或者自定义线路，支持修改、删除实例和规则。</li>
+   */
+  LineId?: string
+  /**
+   * 线路类型，取值有：
+<li>direct ：直连线路，不支持编辑、不支持删除；</li>
+<li>proxy ：EdgeOne 四层代理线路，支持编辑修改实例和规则，不支持删除；</li>
+<li>custom ：自定义线路，支持编辑、支持删除。</li>
+   */
+  LineType?: string
+  /**
+   * 线路地址，格式为 host:port 。
+   */
+  LineAddress?: string
+  /**
+   * 四层代理实例 ID  ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）返回。
+   */
+  ProxyId?: string
+  /**
+   * 转发规则 ID ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）返回。
+   */
+  RuleId?: string
+}
+
+/**
  * ModifyLoadBalancer返回参数结构体
  */
 export interface ModifyLoadBalancerResponse {
@@ -1812,6 +1956,20 @@ export interface ModifyL4ProxyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 推理服务自动伸缩配置。
+ */
+export interface InferenceAutoScalingConfig {
+  /**
+   * <p>最小实例数量。当配置了伸缩策略并且策略处于有效期时，将不会生效。</p>
+   */
+  MinInstanceCount: number
+  /**
+   * <p>伸缩策略列表。最多支持 5 个策略。</p>
+   */
+  ScalingPolicies?: Array<InferenceScalingPolicy>
 }
 
 /**
@@ -1921,21 +2079,39 @@ export interface CreateFunctionRuleRequest {
 }
 
 /**
- * 规则引擎条件使用StatusCode字段动作参数
+ * 推理服务监控数据项。
  */
-export interface RuleCodeActionParams {
+export interface InferenceServiceMonitorItem {
   /**
-   * 状态 Code。
+   * 监控数据对应时间点。
    */
-  StatusCode: number
+  Timestamp?: string
   /**
-   * 参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
+   * 具体数值。
    */
-  Name: string
+  Value?: number
+}
+
+/**
+ * 推理的 TCR 镜像仓库配置。
+ */
+export interface InferenceTCRRepositoryConfig {
   /**
-   * 参数值。
+   * <p>TCR 服务类型。取值有：<li>Personal：个人版；</li><li>Enterprise：企业版。</li></p>
    */
-  Values: Array<string>
+  TCRType: string
+  /**
+   * <p>镜像地址。</p>
+   */
+  Image: string
+  /**
+   * <p>镜像仓库实例 ID。当 TCRType = Enterprise 时必填。</p>
+   */
+  RegistryId?: string
+  /**
+   * <p>地域名称。</p>
+   */
+  RegionName?: string
 }
 
 /**
@@ -2400,33 +2576,33 @@ export interface DescribeTimingL7OriginPullDataResponse {
 }
 
 /**
- * DescribePrefetchTasks请求参数结构体
+ * DescribeInferenceServices请求参数结构体
  */
-export interface DescribePrefetchTasksRequest {
+export interface DescribeInferenceServicesRequest {
   /**
-   * 站点ID。此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。
+   * <p>站点ID。</p>
    */
-  ZoneId?: string
+  ZoneId: string
   /**
-   * 查询起始时间，时间与 job-id 必填一个。
+   * <p>过滤条件，上限 20 个，多个条件为且关系，Filters.Values 的上限为 20。详细的过滤条件如下：<li>service-name：按照服务名称进行过滤；</li><li>service-id：按照服务 ID 过滤；</li><li>status：按照服务状态过滤。</li>模糊查询时仅支持过滤字段名为 service-name。</p>
    */
-  StartTime?: string
+  Filters?: Array<AdvancedFilter>
   /**
-   * 查询结束时间，时间与 job-id 必填一个。
-   */
-  EndTime?: string
-  /**
-   * 分页查询偏移量，默认为 0。
+   * <p>分页查询偏移量。默认值：0。</p>
    */
   Offset?: number
   /**
-   * 分页查询限制数目，默认值：20，上限：1000。
+   * <p>分页查询限制数目。默认值：20，最大值：200。</p>
    */
   Limit?: number
   /**
-   * 过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：<li>job-id：按照任务 ID 进行过滤。job-id 形如：1379afjk91u32h，暂不支持多值，不支持模糊查询；</li><li>target：按照目标资源信息进行过滤。target 形如：http://www.qq.com/1.txt，暂不支持多值，不支持模糊查询；</li><li>domains：按照域名行过滤。domains 形如：www.qq.com，不支持模糊查询；</li><li>statuses：按照任务状态进行过滤，不支持模糊查询。可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时<br>   canceled：已取消<br>   invalid：无效。即源站响应非 2xx 状态码，请检查源站服务。</li>
+   * <p>可根据该字段对返回结果进行排序，取值有：<li>create-time：创建时间。</li>不填写时默认按照 create-time 排序。</p>
    */
-  Filters?: Array<AdvancedFilter>
+  Order?: string
+  /**
+   * <p>排序方向，如果是字段值为数字，则根据数字大小排序；如果字段值为文本，则根据 ASCII 码的大小排序。取值有：<li>asc：从小到大排序；</li><li>desc：从大到小排序。</li>不填写使用默认值 desc。</p>
+   */
+  Direction?: string
 }
 
 /**
@@ -2445,6 +2621,24 @@ export interface ForceRedirect {
 <li>302：302跳转。</li>
    */
   RedirectStatusCode?: number
+}
+
+/**
+ * 推理服务监控数据记录。
+ */
+export interface InferenceServiceMonitorRecord {
+  /**
+   * 推理服务 ID。
+   */
+  ServiceId?: string
+  /**
+   * 指标名称。
+   */
+  MetricName?: string
+  /**
+   * 详细推理服务监控数据。
+   */
+  InferenceServiceMonitorItems?: Array<InferenceServiceMonitorItem>
 }
 
 /**
@@ -2488,6 +2682,20 @@ export interface CreateL7AccRulesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 源站故障转移配置参数。
+ */
+export interface SiteFailoverParameters {
+  /**
+   * 源站故障转移条件状态码。当源站返回的响应状态码命中本字段返回时，才会按照SiteFailoverParams执行源站转移。该参数取值为 4xx、5xx 之一。
+   */
+  SiteFailoverStatusCodes: Array<number | bigint>
+  /**
+   * 源站故障转移配置参数列表。最小长度为1，最大长度为2。
+   */
+  SiteFailoverParams: Array<SiteFailover>
 }
 
 /**
@@ -2850,25 +3058,21 @@ export interface CacheKeyCookie {
 }
 
 /**
- * 策略模板信息
+ * DescribeInferenceServices返回参数结构体
  */
-export interface SecurityPolicyTemplateInfo {
+export interface DescribeInferenceServicesResponse {
   /**
-   * 策略模板所属的站点 ID。
+   * <p>满足条件的服务总数。</p>
    */
-  ZoneId?: string
+  TotalCount?: number
   /**
-   * 策略模板 ID。
+   * <p>推理服务列表。</p>
    */
-  TemplateId?: string
+  Services?: Array<InferenceService>
   /**
-   * 策略模板名称。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TemplateName?: string
-  /**
-   * 策略模板绑定的域名信息。
-   */
-  BindDomains?: Array<BindDomainInfo>
+  RequestId?: string
 }
 
 /**
@@ -2947,6 +3151,38 @@ export interface ModifySecurityAPIServiceRequest {
    * API 服务列表。
    */
   APIServices?: Array<APIService>
+}
+
+/**
+ * CreateInferenceAPIToken返回参数结构体
+ */
+export interface CreateInferenceAPITokenResponse {
+  /**
+   * 推理 API Token ID。
+   */
+  TokenId?: string
+  /**
+   * 推理 API Token 内容。
+   */
+  Content?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 推理服务部署日志信息。
+ */
+export interface InferenceServiceDeploymentLogInfo {
+  /**
+   * 日志消息内容。
+   */
+  LogMessage?: string
+  /**
+   * 日志产生时间。
+   */
+  Timestamp?: string
 }
 
 /**
@@ -3906,6 +4142,36 @@ export interface DefaultDenySecurityActionParameters {
 }
 
 /**
+ * DescribePrefetchTasks请求参数结构体
+ */
+export interface DescribePrefetchTasksRequest {
+  /**
+   * 站点ID。此参数将于2024年05月30日后由可选改为必填，详见公告：[【腾讯云 EdgeOne】云 API 变更通知](https://cloud.tencent.com/document/product/1552/104902)。
+   */
+  ZoneId?: string
+  /**
+   * 查询起始时间，时间与 job-id 必填一个。
+   */
+  StartTime?: string
+  /**
+   * 查询结束时间，时间与 job-id 必填一个。
+   */
+  EndTime?: string
+  /**
+   * 分页查询偏移量，默认为 0。
+   */
+  Offset?: number
+  /**
+   * 分页查询限制数目，默认值：20，上限：1000。
+   */
+  Limit?: number
+  /**
+   * 过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：<li>job-id：按照任务 ID 进行过滤。job-id 形如：1379afjk91u32h，暂不支持多值，不支持模糊查询；</li><li>target：按照目标资源信息进行过滤。target 形如：http://www.qq.com/1.txt，暂不支持多值，不支持模糊查询；</li><li>domains：按照域名行过滤。domains 形如：www.qq.com，不支持模糊查询；</li><li>statuses：按照任务状态进行过滤，不支持模糊查询。可选项：<br>   processing：处理中<br>   success：成功<br>   failed：失败<br>   timeout：超时<br>   canceled：已取消<br>   invalid：无效。即源站响应非 2xx 状态码，请检查源站服务。</li>
+   */
+  Filters?: Array<AdvancedFilter>
+}
+
+/**
  * ModifyL4ProxyRules请求参数结构体
  */
 export interface ModifyL4ProxyRulesRequest {
@@ -4308,26 +4574,21 @@ export interface DescribeSecurityTemplateBindingsRequest {
 }
 
 /**
- * 四层远程鉴权信息
+ * DescribeInferenceAPITokens返回参数结构体
  */
-export interface L4ProxyRemoteAuth {
+export interface DescribeInferenceAPITokensResponse {
   /**
-   * 四层远程鉴权开关，取值有：
-<li>on：表示开启;</li>
-<li>off：表示关闭。</li>
+   * <p>Token 的总数。</p>
    */
-  Switch: string
+  TotalCount?: number
   /**
-   * 远程鉴权服务地址，格式为: domain/ip:port。例：example.auth.com:8888
-
+   * <p>Token 列表。</p>
    */
-  Address: string
+  Tokens?: Array<InferenceAPIToken>
   /**
-   * 远程鉴权服务不可访问后，经过四层转发规则默认回源行为，取值有：
-<li>reject：表示进行拦截，拒绝访问;</li>
-<li>allow：表示允许通过。</li>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ServerFaultyBehavior: string
+  RequestId?: string
 }
 
 /**
@@ -5038,6 +5299,34 @@ export interface DescribePrefetchTasksResponse {
 }
 
 /**
+ * 推理服务的资源配置。
+ */
+export interface InferenceResourceConfig {
+  /**
+   * 扩容缩容的方式。取值有：<li>Auto：根据请求量自动调整实例数量；</li><li>Manual：人工设置固定的实例数量。</li>
+   */
+  ScalingMode: string
+  /**
+   * 硬件规格。
+   */
+  HardwareSpec: string
+  /**
+   * 推理服务自动伸缩配置。当 ScalingMode 为 Auto 时必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AutoScalingConfig?: InferenceAutoScalingConfig
+  /**
+   * 推理服务人工设置实例配置。当 ScalingMode 为 Manual 时必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ManualInstanceConfig?: InferenceManualInstanceConfig
+  /**
+   * 单实例的并发数。默认值为 1。
+   */
+  Concurrency?: number
+}
+
+/**
  * 托管规则详情
  */
 export interface ManagedRuleDetail {
@@ -5398,39 +5687,31 @@ export interface Task {
 }
 
 /**
- * DescribeL4ProxyRules返回参数结构体
+ * CreateInferenceAPIToken请求参数结构体
  */
-export interface DescribeL4ProxyRulesResponse {
+export interface CreateInferenceAPITokenRequest {
   /**
-   * 转发规则总数。
+   * 站点 ID。
    */
-  TotalCount?: number
+  ZoneId: string
   /**
-   * 转发规则列表。
+   * 推理 API Token 的名称，长度限制不超过 30 个字符。
    */
-  L4ProxyRules?: Array<L4ProxyRule>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Name: string
 }
 
 /**
- * 源站组里的源站健康状态。
+ * DescribeSecurityIPGroup请求参数结构体
  */
-export interface OriginHealthStatus {
+export interface DescribeSecurityIPGroupRequest {
   /**
-   * 源站。
+   * 站点 ID ，用于指定查询的站点范围。
    */
-  Origin?: string
+  ZoneId: string
   /**
-   * 源站健康状态，取值有：
-<li>Healthy：健康；</li>
-<li>Unhealthy：不健康；</li>
-<li>Undetected：未探测到数据。</li>
-
+   * 指定安全 IP 组 ID。 <li>提供该参数时，仅查询指定 ID 的安全 IP 组配置；</li> <li>不传递参数时，返回站点下所有安全 IP 组信息。</li>
    */
-  Healthy?: string
+  GroupIds?: Array<number | bigint>
 }
 
 /**
@@ -5763,6 +6044,27 @@ export interface DeleteApplicationProxyRuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 访问 URL 重定向路径配置参数。
+ */
+export interface URLPath {
+  /**
+   * 执行动作，取值有：
+<li>follow：跟随请求；</li>
+<li>custom：自定义；</li>
+<li>regex：正则匹配。</li>
+   */
+  Action?: string
+  /**
+   * 正则匹配的表达式，长度范围为 1～1024。<br>注意：当 Action 为 regex 时，此字段必填；当 Action 为 follow 或 custom 时，无需填写此字段，若填写则不生效。
+   */
+  Regex?: string
+  /**
+   * 重定向的目标URL，长度范围为 1～1024。<br>注意：当 Action 为 regex 或 custom 时，此字段必填；当 Action 为 follow 时，无需填写此字段，若填写则不生效。
+   */
+  Value?: string
 }
 
 /**
@@ -6635,6 +6937,40 @@ export interface DescribeZoneConfigImportResultResponse {
 }
 
 /**
+ * ModifyInferenceService请求参数结构体
+ */
+export interface ModifyInferenceServiceRequest {
+  /**
+   * <p>站点 ID。</p>
+   */
+  ZoneId: string
+  /**
+   * <p>推理服务 ID。</p>
+   */
+  ServiceId: string
+  /**
+   * <p>模型服务需要监听的端口。仅支持 1-65535 之间的整数。</p>
+   */
+  ListenPort?: number
+  /**
+   * <p>推理服务的请求路径列表。最多支持 20 个路径。</p>
+   */
+  RequestPaths?: Array<string>
+  /**
+   * <p>推理服务的容器配置。当前仅支持设置 1 个容器。</p>
+   */
+  Containers?: Array<InferenceContainerConfigForModify>
+  /**
+   * <p>推理服务的资源配置。</p>
+   */
+  ResourceConfig?: InferenceResourceConfigForModify
+  /**
+   * <p>描述信息。长度限制不超过 60 个字符。</p>
+   */
+  Description?: string
+}
+
+/**
  * ModifyFunctionComponentBindings返回参数结构体
  */
 export interface ModifyFunctionComponentBindingsResponse {
@@ -7204,6 +7540,24 @@ export interface DNSPodDetail {
 }
 
 /**
+ * 规则引擎条件使用StatusCode字段动作参数
+ */
+export interface RuleCodeActionParams {
+  /**
+   * 状态 Code。
+   */
+  StatusCode: number
+  /**
+   * 参数名称，参数填写规范可调用接口 [查询规则引擎的设置参数](https://cloud.tencent.com/document/product/1552/80618) 查看。
+   */
+  Name: string
+  /**
+   * 参数值。
+   */
+  Values: Array<string>
+}
+
+/**
  * DescribeSecurityClientAttester请求参数结构体
  */
 export interface DescribeSecurityClientAttesterRequest {
@@ -7379,6 +7733,20 @@ export interface CustomTime {
 }
 
 /**
+ * CreateInferenceService返回参数结构体
+ */
+export interface CreateInferenceServiceResponse {
+  /**
+   * <p>服务 ID。</p>
+   */
+  ServiceId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 权重策略配置。
  */
 export interface FunctionWeightedSelection {
@@ -7512,21 +7880,39 @@ export interface DetailHost {
 }
 
 /**
- * DescribeRealtimeLogDeliveryTasks返回参数结构体
+ * DescribeInferenceHardwareSpecifications返回参数结构体
  */
-export interface DescribeRealtimeLogDeliveryTasksResponse {
+export interface DescribeInferenceHardwareSpecificationsResponse {
   /**
-   * 符合查询条件的实时日志投递任务个数。
+   * <p>硬件规格列表。</p>
    */
-  TotalCount?: number
-  /**
-   * 符合查询条件的所有实时日志投递任务列表。
-   */
-  RealtimeLogDeliveryTasks?: Array<RealtimeLogDeliveryTask>
+  HardwareSpecifications?: Array<InferenceHardwareSpecification>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 推理服务单次部署配置。
+ */
+export interface InferenceServiceConfig {
+  /**
+   * 模型服务需要监听的端口。
+   */
+  ListenPort?: number
+  /**
+   * 推理服务的请求路径列表。
+   */
+  RequestPaths?: Array<string>
+  /**
+   * 推理服务的容器配置。
+   */
+  Containers?: Array<InferenceContainerConfig>
+  /**
+   * 推理服务的资源配置。
+   */
+  ResourceConfig?: InferenceResourceConfig
 }
 
 /**
@@ -7834,9 +8220,17 @@ export interface RateLimitUserRule {
 }
 
 /**
- * ModifyFunctionReplica返回参数结构体
+ * DescribeInferenceServiceDeploymentRecords返回参数结构体
  */
-export interface ModifyFunctionReplicaResponse {
+export interface DescribeInferenceServiceDeploymentRecordsResponse {
+  /**
+   * <p>部署历史总数。</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>推理服务部署历史列表。</p>
+   */
+  RecordSet?: Array<InferenceServiceDeploymentRecord>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8038,6 +8432,16 @@ export interface ModifyFunctionRuleResponse {
 }
 
 /**
+ * ModifyFunctionReplica返回参数结构体
+ */
+export interface ModifyFunctionReplicaResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeL7AccRules请求参数结构体
  */
 export interface DescribeL7AccRulesRequest {
@@ -8058,6 +8462,29 @@ export interface DescribeL7AccRulesRequest {
    * 分页查询偏移量，默认为 0。
    */
   Offset?: number
+}
+
+/**
+ * 四层远程鉴权信息
+ */
+export interface L4ProxyRemoteAuth {
+  /**
+   * 四层远程鉴权开关，取值有：
+<li>on：表示开启;</li>
+<li>off：表示关闭。</li>
+   */
+  Switch: string
+  /**
+   * 远程鉴权服务地址，格式为: domain/ip:port。例：example.auth.com:8888
+
+   */
+  Address: string
+  /**
+   * 远程鉴权服务不可访问后，经过四层转发规则默认回源行为，取值有：
+<li>reject：表示进行拦截，拒绝访问;</li>
+<li>allow：表示允许通过。</li>
+   */
+  ServerFaultyBehavior: string
 }
 
 /**
@@ -8990,6 +9417,49 @@ export interface CacheConfigParameters {
 }
 
 /**
+ * 推理服务部署历史记录。
+ */
+export interface InferenceServiceDeploymentRecord {
+  /**
+   * 部署记录 ID。
+   */
+  RecordId?: string
+  /**
+   * 部署操作类型，取值：
+<li>create：创建；</li>
+<li>update：更新；</li>
+<li>resume：启用；</li>
+<li>stop：停用。</li>
+   */
+  Operation?: string
+  /**
+   * 部署状态，取值：
+<li>processing：部署中；</li>
+<li>succeeded：部署成功；</li>
+<li>failed：部署失败。</li>
+   */
+  Status?: string
+  /**
+   * 部署时长，单位：秒。
+   */
+  Duration?: number
+  /**
+   * 本次推理服务部署的配置。
+   */
+  InferenceServiceConfig?: InferenceServiceConfig
+  /**
+   * 部署发起时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  CreateTime?: string
+  /**
+   * 该部署配置是否是当前生效配置，取值：
+<li> active：当前生效配置；</li>
+<li> inactive：历史版本或异常版本配置。</li>
+   */
+  ActiveStatus?: string
+}
+
+/**
  * 边缘函数组件绑定配置，用于建立边缘函数与组件（如 KV 命名空间）的关联关系。通过绑定配置，边缘函数代码可在运行时通过指定的变量名访问绑定的资源。
  */
 export interface FunctionComponentBinding {
@@ -9443,35 +9913,25 @@ export interface VerifyOwnershipRequest {
 }
 
 /**
- * 多通道安全网关线路信息
+ * 推理服务容器配置的修改参数。
  */
-export interface MultiPathGatewayLine {
+export interface InferenceContainerConfigForModify {
   /**
-   * 线路 ID ， 其中 line-0 和 line-1 为系统内置线路 ID，取值有:
-<li> line-0：直连线路，不支持添加、编辑和删除；</li>
-<li> line-1： EdgeOne 四层代理线路，支持修改实例和规则，不支持删除；</li>
-<li> line-2 及以上：EdgeOne 四层代理线路或者自定义线路，支持修改、删除实例和规则。</li>
+   * 镜像类型。取值有：<li>TCR：腾讯云容器镜像服务的镜像。</li>
    */
-  LineId?: string
+  ImageType?: string
   /**
-   * 线路类型，取值有：
-<li>direct ：直连线路，不支持编辑、不支持删除；</li>
-<li>proxy ：EdgeOne 四层代理线路，支持编辑修改实例和规则，不支持删除；</li>
-<li>custom ：自定义线路，支持编辑、支持删除。</li>
+   * TCR 镜像仓库信息。当 ImageType 为 TCR 时必填。
    */
-  LineType?: string
+  TcrRepositoryConfig?: InferenceTCRRepositoryConfig
   /**
-   * 线路地址，格式为 host:port 。
+   * 容器启动时执行的命令，未填写时默认使用镜像的 Entrypoint/CMD。最长支持 1024 字符。
    */
-  LineAddress?: string
+  StartupCommand?: string
   /**
-   * 四层代理实例 ID  ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）返回。
+   * 容器运行时的环境变量。最多支持 10 个变量。
    */
-  ProxyId?: string
-  /**
-   * 转发规则 ID ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）返回。
-   */
-  RuleId?: string
+  EnvironmentVariables?: Array<InferenceEnvironmentVariable>
 }
 
 /**
@@ -10514,19 +10974,33 @@ export interface ClientBehaviorDetection {
 }
 
 /**
- * 节点缓存 TTL 自定义缓存时间配置参数。
+ * DescribeLogAnalysisDownloadTasks请求参数结构体
  */
-export interface CacheConfigCustomTime {
+export interface DescribeLogAnalysisDownloadTasksRequest {
   /**
-   * 自定义缓存时间开关，取值有：
-<li>on：开启；</li>
-<li>off：关闭。</li>
+   * <p>站点 ID。</p>
    */
-  Switch?: string
+  ZoneId: string
   /**
-   * 自定义缓存时间数值，单位为秒，取值：0-315360000。<br>注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
+   * <p>数据归属地区，可选值： <ul><li>mainland：中国大陆境内；</li> <li>overseas：全球（不含中国大陆）。</li></ul> 注意：若站点服务区域为“全球可用区”，获取全部数据需要分别查询 mainland 和 overseas 的数据。</p>
    */
-  CacheTime?: number
+  Area: string
+  /**
+   * <p>日志类型，可选值：<ul><li> l7-access-logs：七层访问日志；</li><li>web-attack：托管规则日志。</li></ul>默认为 l7-access-logs 。</p>
+   */
+  LogType?: string
+  /**
+   * <p>过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：<ul><li>task-id：按照日志下载任务 ID进行过滤，可选值参考 CreateLogAnalysisDownloadTask 接口返回的 TaskId。</li></ul></p><p>取值参考：CreateLogAnalysisDownloadTask</p>
+   */
+  Filters?: Array<AdvancedFilter>
+  /**
+   * <p>分页查询限制数目，默认值：20，最大值 100。</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页查询偏移量，默认为 0。</p>
+   */
+  Offset?: number
 }
 
 /**
@@ -10599,6 +11073,16 @@ export interface ModifyApplicationProxyRuleRequest {
    * 规则标签。不填保持原有值。
    */
   RuleTag?: string
+}
+
+/**
+ * 推理服务人工设置实例配置。
+ */
+export interface InferenceManualInstanceConfig {
+  /**
+   * 固定实例数量。
+   */
+  FixedInstanceCount: number
 }
 
 /**
@@ -10711,6 +11195,24 @@ export interface DeleteSecurityIPGroupRequest {
    * IP 组 Id。
    */
   GroupId: number
+}
+
+/**
+ * 源站组里的源站健康状态。
+ */
+export interface OriginHealthStatus {
+  /**
+   * 源站。
+   */
+  Origin?: string
+  /**
+   * 源站健康状态，取值有：
+<li>Healthy：健康；</li>
+<li>Unhealthy：不健康；</li>
+<li>Undetected：未探测到数据。</li>
+
+   */
+  Healthy?: string
 }
 
 /**
@@ -10867,6 +11369,48 @@ export interface DescribeFunctionRuntimeEnvironmentResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeInferenceServiceDeploymentLogs请求参数结构体
+ */
+export interface DescribeInferenceServiceDeploymentLogsRequest {
+  /**
+   * 站点ID。
+   */
+  ZoneId: string
+  /**
+   * 推理服务 ID。
+   */
+  ServiceId: string
+  /**
+   * 部署记录 ID。
+   */
+  RecordId: string
+  /**
+   * 需检索日志的开始时间。
+   */
+  StartTime?: string
+  /**
+   * 需检索日志的结束时间。默认查询时间范围（EndTime - StartTime）为最近 7 天。
+   */
+  EndTime?: string
+  /**
+   * 排序字段，取值有：<li>timestamp：日志生成时间。</li>默认值为：timestamp。
+   */
+  SortBy?: string
+  /**
+   * 排序方式，取值有：<li>asc：升序方式；</li><li>desc：降序方式。</li>默认值为：desc。
+   */
+  SortOrder?: string
+  /**
+   * 分页偏移量，默认值：0。
+   */
+  Offset?: number
+  /**
+   * 返回记录条数，默认值：20，最大值：1000。
+   */
+  Limit?: number
 }
 
 /**
@@ -11194,6 +11738,36 @@ export interface AscriptionInfo {
 }
 
 /**
+ * DescribeInferenceServiceDeploymentRecords请求参数结构体
+ */
+export interface DescribeInferenceServiceDeploymentRecordsRequest {
+  /**
+   * <p>站点 ID。</p>
+   */
+  ZoneId: string
+  /**
+   * <p>推理服务 ID。</p>
+   */
+  ServiceId: string
+  /**
+   * <p>排序字段，取值有：<li>create-time：部署创建时间。</li>默认值为：create-time。</p>
+   */
+  SortBy?: string
+  /**
+   * <p>排序方式，取值有：<li>asc：升序方式；</li><li>desc：降序方式。</li>默认值为：desc。</p>
+   */
+  SortOrder?: string
+  /**
+   * <p>分页偏移量，默认值：0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回记录条数，默认值：20，最大值：100。</p>
+   */
+  Limit?: number
+}
+
+/**
  * ModifySecurityClientAttester返回参数结构体
  */
 export interface ModifySecurityClientAttesterResponse {
@@ -11373,17 +11947,13 @@ export interface JustInTimeTranscodeTemplate {
 }
 
 /**
- * 验证码认证实例信息。
+ * ModifyInferenceService返回参数结构体
  */
-export interface TCCaptchaOption {
+export interface ModifyInferenceServiceResponse {
   /**
-   * CaptchaAppId 信息。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CaptchaAppId: string
-  /**
-   * AppSecretKey 信息。
-   */
-  AppSecretKey: string
+  RequestId?: string
 }
 
 /**
@@ -11469,39 +12039,17 @@ export interface CreateL4ProxyRequest {
 }
 
 /**
- * ModifyZone请求参数结构体
+ * 推理容器运行时的环境变量。
  */
-export interface ModifyZoneRequest {
+export interface InferenceEnvironmentVariable {
   /**
-   * 站点 ID。
+   * 变量名。仅允许包含大小写字母、数字、下划线，且必须以字母或下划线开头。长度限制不超过 64 个字符。
    */
-  ZoneId: string
+  Key: string
   /**
-   * 站点接入方式，取值有：
-<li>full：NS 接入；</li>
-<li>partial：CNAME 接入，如果站点当前是无域名接入，仅支持切换到 CNAME 接入；</li>
-<li>dnsPodAccess：DNSPod 托管接入，该接入模式要求您的域名已托管在 DNSPod 内。</li>不填写保持原有配置。
+   * 变量值。支持任意可见字符如字母、数字、符号等。长度限制不超过 2048 个字符。
    */
-  Type?: string
-  /**
-   * 自定义站点信息，以替代系统默认分配的名称服务器。不填写保持原有配置。当站点是无域名接入方式时不允许传此参数。
-   */
-  VanityNameServers?: VanityNameServers
-  /**
-   * 同名站点标识。限制输入数字、英文、"." 、"-" 和 "_"，长度 200 个字符以内。
-   */
-  AliasZoneName?: string
-  /**
-   * 站点接入地域，取值有：
-<li> global：全球；</li>
-<li> mainland：中国大陆；</li>
-<li> overseas：境外区域。</li>当站点是无域名接入方式时，不允许传此参数。
-   */
-  Area?: string
-  /**
-   * 站点名称。仅当站点由无域名接入方式切换到CNAME接入方式的场景下有效。
-   */
-  ZoneName?: string
+  Value?: string
 }
 
 /**
@@ -11580,6 +12128,28 @@ export interface LogItem {
    * 日志的具体内容，采用JSON字符串格式。
    */
   LogJson?: string
+}
+
+/**
+ * 推理服务资源配置的修改参数。
+ */
+export interface InferenceResourceConfigForModify {
+  /**
+   * 扩容缩容的方式。取值有：<li>Auto：根据请求量自动调整实例数量；</li><li>Manual：人工设置固定的实例数量。</li>
+   */
+  ScalingMode?: string
+  /**
+   * 推理服务自动伸缩配置。当 ScalingMode 为 Auto 时必填。
+   */
+  AutoScalingConfig?: InferenceAutoScalingConfig
+  /**
+   * 推理服务人工设置实例配置。当 ScalingMode 为 Manual 时必填。
+   */
+  ManualInstanceConfig?: InferenceManualInstanceConfig
+  /**
+   * 单实例的并发数。默认值为 1。
+   */
+  Concurrency?: number
 }
 
 /**
@@ -11801,6 +12371,36 @@ export interface Plan {
    * 套餐所支持的功能，取值有：<li>ContentAcceleration：内容加速功能；</li><li>SmartAcceleration：智能加速功能；</li><li>L4：四层加速功能；</li><li>Waf：高级 Web 防护；</li><li>QUIC：QUIC功能；</li><li>CrossMLC：中国大陆网络优化功能；</li><li>ProcessMedia：媒体处理功能；</li><li>L4DDoS：四层DDoS防护功能；</li>L7DDoS功能只会出现以下所有规格中的一项<li>L7DDoS.CM30G；七层DDoS防护功能-中国大陆30G保底带宽规格；</li><li>L7DDoS.CM60G；七层DDoS防护功能-中国大陆60G保底带宽规格；</li><li>L7DDoS.CM100G；七层DDoS防护功能-中国大陆100G保底带宽规格；</li><li>L7DDoS.Anycast300G；七层DDoS防护功能-中国大陆以外Anycast300G保底带宽规格；</li><li>L7DDoS.AnycastUnlimited；七层DDoS防护功能-中国大陆以外Anycast无上限全力防护规格；</li><li>L7DDoS.CM30G_Anycast300G；七层DDoS防护功能-中国大陆30G保底带宽规格，中国大陆以外Anycast300G保底带宽规格；</li><li>L7DDoS.CM60G_Anycast300G；七层DDoS防护功能-中国大陆60G保底带宽规格，中国大陆以外Anycast300G保底带宽规格；</li><li>L7DDoS.CM100G_Anycast300G；七层DDoS防护功能-中国大陆100G保底带宽规格，中国大陆以外Anycast300G保底带宽规格；</li><li>L7DDoS.CM30G_AnycastUnlimited；七层DDoS防护功能-中国大陆30G保底带宽规格，中国大陆以外Anycast无上限全力防护规格；</li><li>L7DDoS.CM60G_AnycastUnlimited；七层DDoS防护功能-中国大陆60G保底带宽规格，中国大陆以外Anycast无上限全力防护规格；</li><li>L7DDoS.CM100G_AnycastUnlimited；七层DDoS防护功能-中国大陆100G保底带宽规格，中国大陆以外Anycast无上限全力防护规格；</li>
    */
   Features?: Array<string>
+}
+
+/**
+ * DescribeInferenceServiceMonitorData请求参数结构体
+ */
+export interface DescribeInferenceServiceMonitorDataRequest {
+  /**
+   * <p>站点 ID。</p>
+   */
+  ZoneId: string
+  /**
+   * <p>推理服务 ID。最多传入10个推理服务 ID。</p>
+   */
+  ServiceIds: Array<string>
+  /**
+   * <p>指标列表，最多支持 10 个指标。取值有：<li>cpu_usage_average: CPU 平均使用率，单位：%，指标类型：Float；</li><li>cpu_usage_max: CPU 最大使用率，单位：%，指标类型：Float；</li><li>gpu_usage_average: GPU 平均使用率，单位：%，指标类型：Float；</li><li>gpu_usage_max: GPU 最大使用率，单位：%，指标类型：Float；</li><li>instance_num_average: 实例平均数量，单位：个，指标类型：Float；</li><li>instance_num_max: 实例最大数量，单位：个，指标类型：Float；</li><li>gpu_memory_usage_max: 显存最大使用率，单位：%，指标类型：Float；</li><li>memory_usage_average: 内存平均使用率，单位：%，指标类型：Float；</li><li>memory_usage_max: 内存最大使用率，单位：%，指标类型：Float；</li></p>
+   */
+  MetricNames: Array<string>
+  /**
+   * <p>开始时间。</p>
+   */
+  StartTime: string
+  /**
+   * <p>结束时间。查询时间范围（<code>EndTime - StartTime</code>）需小于等于 30 天。</p>
+   */
+  EndTime: string
+  /**
+   * <p>查询时间粒度，取值有：</p><li>min: 1分钟，支持1天范围内的查询；</li><li>5min: 5分钟，支持7天范围内的查询；</li><li>hour: 1小时，支持30天范围内的查询；</li><li>day: 1天，支持30天范围内的查询；</li>不填将根据开始时间跟结束时间的间距自动推算粒度，具体为：2小时范围内以 min 粒度查询，2天范围内以 5min 粒度查询，7天范围内以 hour 粒度查询，超过7天以 day 粒度查询。
+   */
+  Interval?: string
 }
 
 /**
@@ -12754,17 +13354,25 @@ export interface DeliveryCondition {
 }
 
 /**
- * 源站故障转移配置参数。
+ * 推理 API Token 信息。
  */
-export interface SiteFailoverParameters {
+export interface InferenceAPIToken {
   /**
-   * 源站故障转移条件状态码。当源站返回的响应状态码命中本字段返回时，才会按照SiteFailoverParams执行源站转移。该参数取值为 4xx、5xx 之一。
+   * 推理 API Token ID。
    */
-  SiteFailoverStatusCodes: Array<number | bigint>
+  TokenId?: string
   /**
-   * 源站故障转移配置参数列表。最小长度为1，最大长度为2。
+   * 推理 API Token 名称。
    */
-  SiteFailoverParams: Array<SiteFailover>
+  Name?: string
+  /**
+   * 推理 API Token 内容。
+   */
+  Content?: string
+  /**
+   * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  CreateTime?: string
 }
 
 /**
@@ -12972,6 +13580,24 @@ export interface RuleRewriteActionParams {
    * 参数值。
    */
   Values: Array<string>
+}
+
+/**
+ * DescribeL4ProxyRules返回参数结构体
+ */
+export interface DescribeL4ProxyRulesResponse {
+  /**
+   * 转发规则总数。
+   */
+  TotalCount?: number
+  /**
+   * 转发规则列表。
+   */
+  L4ProxyRules?: Array<L4ProxyRule>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13952,6 +14578,24 @@ export interface DescribeTopL7CacheDataRequest {
 }
 
 /**
+ * 边缘推理定时伸缩有效期范围配置。
+ */
+export interface InferenceScheduledScalingEffectiveRange {
+  /**
+   * <p>有效期类型。取值有：<li>LongTerm：长期有效；</li><li>Custom：自定义起止日期。</li></p>
+   */
+  EffectiveType: string
+  /**
+   * <p>有效期起始日期。当 EffectiveType 为 Custom 时必填；当 EffectiveType 为 LongTerm 时不传该字段。</p>
+   */
+  StartDate?: string
+  /**
+   * <p>有效期终止日期。当 EffectiveType 为 Custom 时必填，且不得早于 StartDate；当 EffectiveType 为 LongTerm 时不传该字段。</p>
+   */
+  EndDate?: string
+}
+
+/**
  * 会话速率和周期特征校验配置。
  */
 export interface SessionRateControl {
@@ -14260,6 +14904,44 @@ export interface CacheKeyQueryString {
 }
 
 /**
+ * ModifyMultiPathGatewayLine请求参数结构体
+ */
+export interface ModifyMultiPathGatewayLineRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 多通道安全加速网关 ID 。
+   */
+  GatewayId: string
+  /**
+   * 线路 ID ， 取值有:
+<li> line-1： EdgeOne 四层代理线路，支持修改实例和规则，不支持删除；</li>
+<li> line-2 及以上：EdgeOne 四层代理线路或者自定义线路，支持修改、删除实例和规则。</li>
+   */
+  LineId: string
+  /**
+   * 线路类型，取值有： 
+<li>proxy ：EdgeOne 四层代理线路，支持修改实例和规则，不支持删除；</li> 
+<li>custom ：自定义线路，支持编辑、删除实例和规则。</li>
+   */
+  LineType?: string
+  /**
+   * 线路地址，格式为 host:port，直连线路（ LineType 取值为 direct ）不允许修改，其余类型支持修改。
+   */
+  LineAddress?: string
+  /**
+   * 四层代理实例 ID  ，当线路类型 LineType  取值为 proxy（EdgeOne 四层代理）可传入，进行修改。
+   */
+  ProxyId?: string
+  /**
+   * 转发规则 ID ，当线路类型 LineType 取值为 proxy（EdgeOne 四层代理）可传入，进行修改。
+   */
+  RuleId?: string
+}
+
+/**
  * 描述键值对过滤器，用于条件过滤查询，支持模糊查询。例如过滤ID、名称、状态等。
 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。
@@ -14413,6 +15095,20 @@ export interface DisableOriginACLRequest {
    * 站点 ID。
    */
   ZoneId: string
+}
+
+/**
+ * 验证码认证实例信息。
+ */
+export interface TCCaptchaOption {
+  /**
+   * CaptchaAppId 信息。
+   */
+  CaptchaAppId: string
+  /**
+   * AppSecretKey 信息。
+   */
+  AppSecretKey: string
 }
 
 /**
@@ -14675,6 +15371,20 @@ export interface OriginProtectionInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiffIPWhitelist?: DiffIPWhitelist
+}
+
+/**
+ * DeleteInferenceAPIToken请求参数结构体
+ */
+export interface DeleteInferenceAPITokenRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 推理 API Token 的 ID。
+   */
+  TokenId: string
 }
 
 /**
@@ -15915,6 +16625,29 @@ export interface DnsRecord {
 }
 
 /**
+ * 推理服务的容器配置。
+ */
+export interface InferenceContainerConfig {
+  /**
+   * 镜像类型。取值有：<li>TCR：腾讯云容器镜像服务的镜像。</li>
+   */
+  ImageType: string
+  /**
+   * TCR 镜像仓库信息。当 ImageType 为 TCR 时必填。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TcrRepositoryConfig?: InferenceTCRRepositoryConfig
+  /**
+   * 容器启动时执行的命令，未填写时默认使用镜像的 Entrypoint/CMD。最长支持 1024 字符。
+   */
+  StartupCommand?: string
+  /**
+   * 容器运行时的环境变量。最多支持 10 个变量。
+   */
+  EnvironmentVariables?: Array<InferenceEnvironmentVariable>
+}
+
+/**
  * 对象存储源站私有鉴权参数。
  */
 export interface OriginPrivateParameters {
@@ -16098,6 +16831,42 @@ export interface DescribeSharedCNAMERequest {
 }
 
 /**
+ * ModifyZone请求参数结构体
+ */
+export interface ModifyZoneRequest {
+  /**
+   * 站点 ID。
+   */
+  ZoneId: string
+  /**
+   * 站点接入方式，取值有：
+<li>full：NS 接入；</li>
+<li>partial：CNAME 接入，如果站点当前是无域名接入，仅支持切换到 CNAME 接入；</li>
+<li>dnsPodAccess：DNSPod 托管接入，该接入模式要求您的域名已托管在 DNSPod 内。</li>不填写保持原有配置。
+   */
+  Type?: string
+  /**
+   * 自定义站点信息，以替代系统默认分配的名称服务器。不填写保持原有配置。当站点是无域名接入方式时不允许传此参数。
+   */
+  VanityNameServers?: VanityNameServers
+  /**
+   * 同名站点标识。限制输入数字、英文、"." 、"-" 和 "_"，长度 200 个字符以内。
+   */
+  AliasZoneName?: string
+  /**
+   * 站点接入地域，取值有：
+<li> global：全球；</li>
+<li> mainland：中国大陆；</li>
+<li> overseas：境外区域。</li>当站点是无域名接入方式时，不允许传此参数。
+   */
+  Area?: string
+  /**
+   * 站点名称。仅当站点由无域名接入方式切换到CNAME接入方式的场景下有效。
+   */
+  ZoneName?: string
+}
+
+/**
  * ModifyL7AccSetting请求参数结构体
  */
 export interface ModifyL7AccSettingRequest {
@@ -16150,38 +16919,44 @@ export interface CreateCustomizeErrorPageRequest {
 }
 
 /**
- * 访问 URL 重定向路径配置参数。
+ * 边缘推理定时伸缩策略配置。
  */
-export interface URLPath {
+export interface InferenceScheduledScalingPolicy {
   /**
-   * 执行动作，取值有：
-<li>follow：跟随请求；</li>
-<li>custom：自定义；</li>
-<li>regex：正则匹配。</li>
+   * 定时伸缩动作列表。至少填写 1 个，最多支持 10 个。
    */
-  Action?: string
+  ScheduledActions: Array<InferenceScheduledScalingAction>
   /**
-   * 正则匹配的表达式，长度范围为 1～1024。<br>注意：当 Action 为 regex 时，此字段必填；当 Action 为 follow 或 custom 时，无需填写此字段，若填写则不生效。
+   * 有效期范围，用于描述该定时伸缩策略长期有效或仅在指定日期范围内有效。
    */
-  Regex?: string
+  EffectiveRange: InferenceScheduledScalingEffectiveRange
   /**
-   * 重定向的目标URL，长度范围为 1～1024。<br>注意：当 Action 为 regex 或 custom 时，此字段必填；当 Action 为 follow 时，无需填写此字段，若填写则不生效。
+   * 时区，使用 [IANA 时区](https://www.iana.org/time-zones) 标识 ScheduledActions 中的触发时间，例如 UTC、Asia/Shanghai、America/New_York、Europe/London、Asia/Kolkata。不传时默认使用 UTC。
+
+
+
+
+
    */
-  Value?: string
+  TimeZone?: string
 }
 
 /**
- * DescribeSecurityIPGroup请求参数结构体
+ * DescribeRealtimeLogDeliveryTasks返回参数结构体
  */
-export interface DescribeSecurityIPGroupRequest {
+export interface DescribeRealtimeLogDeliveryTasksResponse {
   /**
-   * 站点 ID ，用于指定查询的站点范围。
+   * 符合查询条件的实时日志投递任务个数。
    */
-  ZoneId: string
+  TotalCount?: number
   /**
-   * 指定安全 IP 组 ID。 <li>提供该参数时，仅查询指定 ID 的安全 IP 组配置；</li> <li>不传递参数时，返回站点下所有安全 IP 组信息。</li>
+   * 符合查询条件的所有实时日志投递任务列表。
    */
-  GroupIds?: Array<number | bigint>
+  RealtimeLogDeliveryTasks?: Array<RealtimeLogDeliveryTask>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -16192,6 +16967,16 @@ export interface ModifyApplicationProxyStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeInferenceHardwareSpecifications请求参数结构体
+ */
+export interface DescribeInferenceHardwareSpecificationsRequest {
+  /**
+   * <p>站点 ID。</p>
+   */
+  ZoneId: string
 }
 
 /**
@@ -16376,6 +17161,28 @@ export interface ChallengeActionParameters {
    * 客户端认证方式 ID 。当 Name 为 InterstitialChallenge/InlineChallenge 时，该字段必填。
    */
   AttesterId?: string
+}
+
+/**
+ * 策略模板信息
+ */
+export interface SecurityPolicyTemplateInfo {
+  /**
+   * 策略模板所属的站点 ID。
+   */
+  ZoneId?: string
+  /**
+   * 策略模板 ID。
+   */
+  TemplateId?: string
+  /**
+   * 策略模板名称。
+   */
+  TemplateName?: string
+  /**
+   * 策略模板绑定的域名信息。
+   */
+  BindDomains?: Array<BindDomainInfo>
 }
 
 /**
@@ -16781,33 +17588,19 @@ export interface DescribeContentIdentifiersResponse {
 }
 
 /**
- * DescribeLogAnalysisDownloadTasks请求参数结构体
+ * 节点缓存 TTL 自定义缓存时间配置参数。
  */
-export interface DescribeLogAnalysisDownloadTasksRequest {
+export interface CacheConfigCustomTime {
   /**
-   * <p>站点 ID。</p>
+   * 自定义缓存时间开关，取值有：
+<li>on：开启；</li>
+<li>off：关闭。</li>
    */
-  ZoneId: string
+  Switch?: string
   /**
-   * <p>数据归属地区，可选值： <ul><li>mainland：中国大陆境内；</li> <li>overseas：全球（不含中国大陆）。</li></ul> 注意：若站点服务区域为“全球可用区”，获取全部数据需要分别查询 mainland 和 overseas 的数据。</p>
+   * 自定义缓存时间数值，单位为秒，取值：0-315360000。<br>注意：当 Switch 为 on 时，此字段必填；当 Switch 为 off 时，无需填写此字段，若填写则不生效。
    */
-  Area: string
-  /**
-   * <p>日志类型，可选值：<ul><li> l7-access-logs：七层访问日志；</li><li>web-attack：托管规则日志。</li></ul>默认为 l7-access-logs 。</p>
-   */
-  LogType?: string
-  /**
-   * <p>过滤条件，Filters.Values 的上限为 20。详细的过滤条件如下：<ul><li>task-id：按照日志下载任务 ID进行过滤，可选值参考 CreateLogAnalysisDownloadTask 接口返回的 TaskId。</li></ul></p><p>取值参考：CreateLogAnalysisDownloadTask</p>
-   */
-  Filters?: Array<AdvancedFilter>
-  /**
-   * <p>分页查询限制数目，默认值：20，最大值 100。</p>
-   */
-  Limit?: number
-  /**
-   * <p>分页查询偏移量，默认为 0。</p>
-   */
-  Offset?: number
+  CacheTime?: number
 }
 
 /**
@@ -17085,6 +17878,16 @@ export interface MultiPathGatewayCurrentOriginACL {
 }
 
 /**
+ * OperateInferenceService返回参数结构体
+ */
+export interface OperateInferenceServiceResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeL4ProxyRules请求参数结构体
  */
 export interface DescribeL4ProxyRulesRequest {
@@ -17286,6 +18089,74 @@ export interface DetectLengthLimitCondition {
 }
 
 /**
+ * 推理服务信息。
+ */
+export interface InferenceService {
+  /**
+   * 推理服务 ID。
+   */
+  ServiceId?: string
+  /**
+   * 推理服务的名称。
+   */
+  Name?: string
+  /**
+   * 描述信息。
+   */
+  Description?: string
+  /**
+   * 模型服务需要监听的端口。仅支持 1-65535 之间的整数。
+   */
+  ListenPort?: number
+  /**
+   * 推理服务的请求路径列表。最多支持 20 个路径。
+   */
+  RequestPaths?: Array<string>
+  /**
+   * 推理服务的容器配置。
+   */
+  Containers?: Array<InferenceContainerConfig>
+  /**
+   * 推理服务的资源配置。
+   */
+  ResourceConfig?: InferenceResourceConfig
+  /**
+   * 推理服务状态，包含以下几种状态：<li>Deploying：部署中；</li><li>Running：运行中；</li><li>Stopping：停止中；</li><li>Stopped：已停止；</li><li>Exception：异常；</li><li>Banned：被封禁。</li>
+   */
+  Status?: string
+  /**
+   * 伸缩状态。取值有：<li>Normal：稳定运行，无进行中的伸缩操作；</li><li>ScalingOut：扩容中；</li><li>ScalingIn：缩容中。</li>
+   */
+  ScalingStatus?: string
+  /**
+   * 当前运行中的实例数量。
+   */
+  CurrentInstanceCount?: number
+  /**
+   * 推理访问地址，可通过链接访问底层模型进行推理。
+   */
+  InferenceURL?: string
+  /**
+   * 创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  CreateTime?: string
+  /**
+   * 最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  UpdateTime?: string
+}
+
+/**
+ * DeleteInferenceAPIToken返回参数结构体
+ */
+export interface DeleteInferenceAPITokenResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifySecurityAPIResource返回参数结构体
  */
 export interface ModifySecurityAPIResourceResponse {
@@ -17388,6 +18259,24 @@ export interface ModifyRequestHeaderParameters {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HeaderActions?: Array<HeaderAction>
+}
+
+/**
+ * 边缘推理弹性伸缩策略。
+ */
+export interface InferenceScalingPolicy {
+  /**
+   * 策略名称。长度限制为 1~30 个字符。同一服务内策略名称需唯一。
+   */
+  PolicyName: string
+  /**
+   * 策略类型，创建后不可修改。取值：<li>ScheduledScaling：定时伸缩。</li>
+   */
+  PolicyType: string
+  /**
+   * 定时伸缩配置。当 PolicyType 取值为 ScheduledScaling 时，该字段必填。
+   */
+  ScheduledScalingPolicy?: InferenceScheduledScalingPolicy
 }
 
 /**

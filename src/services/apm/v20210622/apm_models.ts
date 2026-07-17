@@ -51,6 +51,7 @@ export interface CreateApmInstanceRequest {
   Tags?: Array<ApmTag>
   /**
    * 业务系统上报额度值，默认赋值为0表示不限制上报额度，已废弃
+   * @deprecated
    */
   SpanDailyCounters?: number
   /**
@@ -316,7 +317,7 @@ export interface DescribeTopologyNewResponse {
    */
   Edges?: Array<TopologyEdgeNew>
   /**
-   * <p>拓扑图是否有修改</p>
+   * <p>拓扑图是否有修改</p><p>枚举值：</p><ul><li>0： 拓扑图未修改</li><li>1： 拓扑图已修改</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TopologyModifyFlag?: number
@@ -1400,6 +1401,7 @@ export interface DescribeApmAgentRequest {
   LanguageEnvironment?: string
   /**
    * 上报方式，已弃用
+   * @deprecated
    */
   ReportMethod?: string
 }
@@ -2989,7 +2991,7 @@ export interface ApmApplicationConfigView {
    */
   ErrorCodeFilter?: string
   /**
-   * <p>应用诊断开关（已废弃）</p>
+   * <p>应用诊断开关</p>
    */
   EventEnable?: boolean
   /**
@@ -3037,11 +3039,11 @@ export interface ApmApplicationConfigView {
    */
   AgentEnable?: boolean
   /**
-   * <p>组件列表开关（已废弃）</p>
+   * <p>组件列表开关</p>
    */
   InstrumentList?: Array<Instrument>
   /**
-   * <p>链路压缩开关（已废弃）</p>
+   * <p>链路压缩开关</p>
    */
   TraceSquash?: boolean
   /**
@@ -3634,15 +3636,15 @@ export interface CVMMeta {
  */
 export interface ModifyApmServiceRequest {
   /**
-   * 应用ID
+   * <p>应用ID</p>
    */
   ServiceID: string
   /**
-   * 应用描述
+   * <p>应用描述</p>
    */
   ServiceDescription?: string
   /**
-   * 标签列表
+   * <p>标签列表</p>
    */
   Tags?: Array<ApmTag>
 }

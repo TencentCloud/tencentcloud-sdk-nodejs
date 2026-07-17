@@ -688,6 +688,16 @@ it("iotexplorer.v20190423.CreateDevicePublishSDPAnswer", async function () {
     }
 })
 
+it("iotexplorer.v20190423.CallDeviceRRPCSync", async function () {
+    try {
+       const data = await client.CallDeviceRRPCSync({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.GetTWeTalkProductConfigList", async function () {
     try {
        const data = await client.GetTWeTalkProductConfigList({})
@@ -771,6 +781,16 @@ it("iotexplorer.v20190423.DescribeFirmwareTasks", async function () {
 it("iotexplorer.v20190423.DescribeTWeTalkAgentList", async function () {
     try {
        const data = await client.DescribeTWeTalkAgentList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.RevokeBindUserDevice", async function () {
+    try {
+       const data = await client.RevokeBindUserDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1341,6 +1361,16 @@ it("iotexplorer.v20190423.UpdateOtaTaskStatus", async function () {
 it("iotexplorer.v20190423.ModifyTWeTalkAIBot", async function () {
     try {
        const data = await client.ModifyTWeTalkAIBot({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.BindUserDevice", async function () {
+    try {
+       const data = await client.BindUserDevice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

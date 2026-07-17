@@ -34,23 +34,81 @@ export interface ModifyEWRuleStatusResponse {
 }
 
 /**
- * ModifyFwGroupSwitch请求参数结构体
+ * DescribeCfwStatusMonitor请求参数结构体
  */
-export interface ModifyFwGroupSwitchRequest {
+export interface DescribeCfwStatusMonitorRequest {
   /**
-   * 打开或关闭开关
-0：关闭开关
-1：打开开关
+   * <p>操作类型。describe_scene 表示发现场景和二级下拉选项；fetch_scene 表示获取具体场景快照。必填。</p>
    */
-  Enable: number
+  Op: string
   /**
-   * 是否操作全部开关 0 不操作全部开关，1 操作全部开关
+   * <p>防火墙场景类型。支持 internet_edge（互联网边界防火墙）、nat_cluster（NAT边界防火墙-集群）、nat_ha（NAT边界防火墙-主备）、vpc_cluster（VPC边界防火墙-集群）、vpc_ha（VPC边界防火墙-主备）。必填。</p>
    */
-  AllSwitch: number
+  FirewallType: string
   /**
-   * 开关列表
+   * <p>二级下拉选项 ID。fetch_scene 按需传入；internet_edge 为地域，NAT 为实例 ID，VPC 带宽场景为防火墙组 ID；vpc_cluster 的 connections 汇总场景会忽略该参数。</p>
    */
-  SwitchList?: Array<FwGroupSwitch>
+  SelectionId?: string
+  /**
+   * <p>二级下拉显示名称。可替代 SelectionId 按名称匹配。</p>
+   */
+  SelectionName?: string
+  /**
+   * <p>引擎实例 ID。主要用于 vpc_ha 下一个防火墙组对应多个实例的场景。</p>
+   */
+  SelectionInstanceId?: string
+  /**
+   * <p>指标页签。fetch_scene 可传；不传时使用该场景默认值。支持 bandwidth、connections。</p>
+   */
+  Metric?: string
+  /**
+   * <p>指标下的视角。fetch_scene 可传；不传时使用该场景默认值。支持 ip、subnet、session、switch、vpc，实际可用组合以 describe_scene 返回为准。</p>
+   */
+  Perspective?: string
+  /**
+   * <p>NAT 主备连接数 IP 视角范围。external 表示外部 IP，asset 表示资产 IP；仅 nat_ha + connections + ip 使用。</p>
+   */
+  IpScope?: string
+  /**
+   * <p>预设时间范围。默认 24h；fetch_scene 使用。支持 5m、15m、30m、1h、6h、24h、3d、7d、30d、today、yesterday、day_before_yesterday、this_week、last_week、this_month。</p>
+   */
+  TimePreset?: string
+  /**
+   * <p>自定义开始时间。格式 YYYY-MM-DD HH:MM:SS；必须与 EndTime 同时传，最大跨度 30 天。</p>
+   */
+  StartTime?: string
+  /**
+   * <p>自定义结束时间。格式 YYYY-MM-DD HH:MM:SS；必须与 StartTime 同时传，最大跨度 30 天。</p>
+   */
+  EndTime?: string
+  /**
+   * <p>页码，从 1 开始。默认 1；fetch_scene 列表视角使用。</p>
+   */
+  Page?: number
+  /**
+   * <p>每页条数。默认 10，最大 100；fetch_scene 列表视角使用。</p>
+   */
+  Limit?: number
+  /**
+   * <p>是否只获取概览数据。true 时 fetch_scene 只请求 overview，跳过 table/detail，适合只看场景快照汇总。</p>
+   */
+  OverviewOnly?: boolean
+  /**
+   * <p>原始偏移量覆盖。可选，传入后覆盖 Page 计算结果；必须大于等于 0 且不超过安全上限。</p>
+   */
+  Offset?: number
+  /**
+   * <p>排序字段。可选，只接受当前场景后端允许的安全字段。</p>
+   */
+  SortBy?: string
+  /**
+   * <p>排序方向。默认 desc；支持 asc、desc。</p>
+   */
+  SortOrder?: string
+  /**
+   * <p>过滤条件列表。可选，最多 5 个；是否支持以及字段名以具体 fetch_scene 场景为准。</p>
+   */
+  Filters?: Array<CfwStatusMonitorFilter>
 }
 
 /**
@@ -128,6 +186,11 @@ export interface NatClusterInfo {
 }
 
 /**
+ * DescribeCfwSwitches请求参数结构体
+ */
+export type DescribeCfwSwitchesRequest = null
+
+/**
  * DescribeNDRAssetIdentificationList返回参数结构体
  */
 export interface DescribeNDRAssetIdentificationListResponse {
@@ -182,9 +245,27 @@ export interface DescribeNDRAssetIdentificationListResponse {
  */
 export interface ModifyAclRuleRequest {
   /**
-   * 需要编辑的规则数组，基于Uuid唯一id修改该规则
+   * <p>需要编辑的规则数组，基于Uuid唯一id修改该规则</p>
    */
   Rules: Array<CreateRuleItem>
+  /**
+   * <p>AI操作来源</p><p>枚举值：</p><ul><li>console： 控制台来源值</li><li>wechat： 微信</li></ul>
+   */
+  CfwAiAgentOperationSource?: string
+}
+
+/**
+ * DescribeCfwAnalysisData返回参数结构体
+ */
+export interface DescribeCfwAnalysisDataResponse {
+  /**
+   * <p>查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。</p>
+   */
+  Data?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -255,6 +336,40 @@ export interface DescribeFwGroupInstanceInfoRequest {
    * <p>排序所用到的字段</p>
    */
   By?: string
+}
+
+/**
+ * DescribeCfwRules请求参数结构体
+ */
+export interface DescribeCfwRulesRequest {
+  /**
+   * <p>规则域。必填。枚举：border 互联网边界；nat NAT 边界；vpc VPC 间；enterprise_sg 企业安全组；intrusion_prevention 入侵防御。RuleType=intrusion_prevention 时还必须传 ListType。</p>
+   */
+  RuleType: string
+  /**
+   * <p>入侵防御列表类型。仅 RuleType=intrusion_prevention 时使用并必填。blocklist 表示封禁列表，whitelist 表示白名单策略，isolate 表示隔离列表。</p>
+   */
+  ListType?: string
+  /**
+   * <p>访问方向过滤。可选。0 表示出站，1 表示入站；不传则不过滤。RuleType=intrusion_prevention 时不支持。</p>
+   */
+  Direction?: number
+  /**
+   * <p>规则动作过滤。可选。0 表示观察，1 表示阻断，2 表示放行；不传则不过滤。</p>
+   */
+  RuleAction?: number
+  /**
+   * <p>精确规则 ID 过滤。可选。用于按数值规则标识定位单条规则。</p>
+   */
+  RuleId?: number
+  /**
+   * <p>单页返回规则数。可选，默认 100，最大 1000。</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移。可选，默认 0。</p>
+   */
+  Offset?: number
 }
 
 /**
@@ -405,11 +520,15 @@ export interface DescribeCfwEipsRequest {
  */
 export interface RemoveVpcAcRuleRequest {
   /**
-   * 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则
+   * <p>规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则</p>
    */
   RuleUuids: Array<number | bigint>
   /**
-   * 仅当RuleUuids为-1时有效；0：删除Ipv4规则，1：删除Ipv6规则；默认为Ipv4类型规则
+   * <p>AI操作来源</p><p>枚举值：</p><ul><li>console： 控制台来源值</li><li>wechat： 微信</li></ul>
+   */
+  CfwAiAgentOperationSource?: string
+  /**
+   * <p>仅当RuleUuids为-1时有效；0：删除Ipv4规则，1：删除Ipv6规则；默认为Ipv4类型规则</p>
    */
   IpVersion?: number
 }
@@ -577,6 +696,10 @@ export interface AddEnterpriseSecurityGroupRulesRequest {
    */
   Data: Array<SecurityGroupRule>
   /**
+   * <p>AI操作来源</p><p>枚举值：</p><ul><li>console： 控制台来源值</li><li>wechat： 微信</li></ul>
+   */
+  CfwAiAgentOperationSource?: string
+  /**
    * <p>添加类型，0：添加到最后，1：添加到最前；2：中间插入；默认0添加到最后</p>
    */
   Type?: number
@@ -631,7 +754,7 @@ export interface ModifyIpsModeSwitchRequest {
  */
 export interface ModifyAclRuleResponse {
   /**
-   * 编辑成功后返回新策略ID列表
+   * <p>编辑成功后返回新策略ID列表</p>
    */
   RuleUuid?: Array<number | bigint>
   /**
@@ -976,16 +1099,19 @@ log：观察
  */
 export interface CreateAlertCenterOmitRequest {
   /**
-   * 处置对象,ID列表，  IdLists和IpList二选一
+   * <p>处置对象,ID列表，  IdLists和IpList二选一</p>
    */
   HandleIdList: Array<string>
   /**
-   * 忽略数据来源：
-AlertTable 告警中心  InterceptionTable拦截列表
+   * <p>忽略数据来源：<br>AlertTable 告警中心  InterceptionTable拦截列表</p>
    */
   TableType: string
   /**
-   * 处置对象,事件ID列表
+   * <p>AI操作来源</p><p>枚举值：</p><ul><li>console： 控制台来源值</li><li>wechat： 微信</li></ul>
+   */
+  CfwAiAgentOperationSource?: string
+  /**
+   * <p>处置对象,事件ID列表</p>
    */
   HandleEventIdList?: Array<string>
 }
@@ -1238,6 +1364,20 @@ export interface ModifyBlockIgnoreRuleRequest {
  * DescribeEnterpriseSGRuleProgress请求参数结构体
  */
 export type DescribeEnterpriseSGRuleProgressRequest = null
+
+/**
+ * DescribeCfwSwitches返回参数结构体
+ */
+export interface DescribeCfwSwitchesResponse {
+  /**
+   * 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。
+   */
+  Data?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DescribeNatFwInstancesInfo请求参数结构体
@@ -1555,13 +1695,13 @@ export interface SyncFwOperateResponse {
 }
 
 /**
- * AddVpcAcRule返回参数结构体
+ * DescribeCfwRiskOverview返回参数结构体
  */
-export interface AddVpcAcRuleResponse {
+export interface DescribeCfwRiskOverviewResponse {
   /**
-   * 创建成功后返回新策略ID列表
+   * 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。
    */
-  RuleUuids?: Array<number | bigint>
+  Data?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1639,13 +1779,17 @@ export interface CreateAlertCenterRuleRequest {
  */
 export interface RemoveEnterpriseSecurityGroupRuleRequest {
   /**
-   * 规则的uuid，可通过查询规则列表获取
+   * <p>规则的uuid，可通过查询规则列表获取</p>
    */
   RuleUuid: number
   /**
-   * 删除类型，0是单条删除，RuleUuid填写删除规则id，1为全部删除，RuleUuid填0即可
+   * <p>删除类型，0是单条删除，RuleUuid填写删除规则id，1为全部删除，RuleUuid填0即可</p>
    */
   RemoveType: number
+  /**
+   * <p>AI操作来源</p><p>枚举值：</p><ul><li>console： 控制台来源值</li><li>wechat： 微信</li></ul>
+   */
+  CfwAiAgentOperationSource?: string
 }
 
 /**
@@ -1701,19 +1845,23 @@ export interface NetInstancesInfo {
  */
 export interface ModifyEnterpriseSecurityGroupRuleRequest {
   /**
-   * 规则的uuid，可通过查询规则列表获取
+   * <p>规则的uuid，可通过查询规则列表获取</p>
    */
   RuleUuid: number
   /**
-   * 修改类型，0：修改规则内容；1：修改单条规则开关状态；2：修改所有规则开关状态
+   * <p>修改类型，0：修改规则内容；1：修改单条规则开关状态；2：修改所有规则开关状态</p>
    */
   ModifyType: number
   /**
-   * 编辑后的企业安全组规则数据；修改规则状态不用填该字段
+   * <p>AI操作来源</p><p>枚举值：</p><ul><li>console： 控制台来源值</li><li>wechat： 微信</li></ul>
+   */
+  CfwAiAgentOperationSource?: string
+  /**
+   * <p>编辑后的企业安全组规则数据；修改规则状态不用填该字段</p>
    */
   Data?: SecurityGroupRule
   /**
-   * 0是关闭,1是开启
+   * <p>0是关闭,1是开启</p>
    */
   Enable?: number
 }
@@ -1987,7 +2135,7 @@ export interface DeleteNatFwDnatRuleResponse {
  */
 export interface ModifyVpcAcRuleResponse {
   /**
-   * 编辑成功后返回新策略ID列表
+   * <p>编辑成功后返回新策略ID列表</p>
    */
   RuleUuids?: Array<number | bigint>
   /**
@@ -2011,11 +2159,16 @@ export interface ModifyBlockIgnoreRuleNewRequest {
 }
 
 /**
+ * DescribeCfwRiskOverview请求参数结构体
+ */
+export type DescribeCfwRiskOverviewRequest = null
+
+/**
  * RemoveNatAcRule返回参数结构体
  */
 export interface RemoveNatAcRuleResponse {
   /**
-   * 删除成功后返回被删除策略的uuid列表
+   * <p>删除成功后返回被删除策略的uuid列表</p>
    */
   RuleUuid?: Array<number | bigint>
   /**
@@ -2074,6 +2227,36 @@ export interface DescribeFwEdgeIpsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeCfwLogs请求参数结构体
+ */
+export interface DescribeCfwLogsRequest {
+  /**
+   * <p>日志类型。首次查询必填；使用 NextToken 续查时不能传。枚举值包括 cfw_netflow_border、cfw_netflow_vpc、cfw_netflow_nat、cfw_netflow_nta、cfw_netflow_dns、cfw_rule_threatinfo、cfw_rule_acl、cfw_rule_vpc_acl、cfw_rule_nat_acl、cfw_ndr_subject_risk、cfw_ndr_dataleak_entry、cfw_ndr_ai_audit、cfw_feature_collect、cfw_behavior_collect、operate_log_all。</p>
+   */
+  LogType?: string
+  /**
+   * <p>CLS CQL 查询语句。默认 *；使用 NextToken 续查时不能传。</p>
+   */
+  Query?: string
+  /**
+   * <p>查询起始时间。支持 RFC3339、YYYY-MM-DD HH:MM:SS、YYYY-MM-DD 或 Unix 时间戳；传入后从该时间向后查询 TimeRange；使用 NextToken 续查时不能传。</p>
+   */
+  StartTime?: string
+  /**
+   * <p>查询时间范围。默认 1h；格式为正整数加单位 m/h/d，例如 5m、1h、24h、7d；使用 NextToken 续查时不能传。</p>
+   */
+  TimeRange?: string
+  /**
+   * <p>单页返回条数。默认 100，最大 1000；使用 NextToken 续查时不能传。</p>
+   */
+  Limit?: number
+  /**
+   * <p>上一页 Response.Data 返回的不透明续查 token。首次查询不传；续查时只传 NextToken。无效、篡改、过期或租户不匹配会被拒绝。</p>
+   */
+  NextToken?: string
 }
 
 /**
@@ -2382,6 +2565,20 @@ export interface DescribeClusterVpcFwSwitchsRequest {
 }
 
 /**
+ * DescribeCfwAlerts请求参数结构体
+ */
+export interface DescribeCfwAlertsRequest {
+  /**
+   * <p>单页返回告警数。可选，默认 10，最大 50。</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移。可选，默认 0。</p>
+   */
+  Offset?: number
+}
+
+/**
  * DescribeSerialRegion返回参数结构体
  */
 export interface DescribeSerialRegionResponse {
@@ -2642,15 +2839,19 @@ export interface ModifyNatFwVpcDnsSwitchResponse {
  */
 export interface CreateBlockIgnoreRuleNewRequest {
   /**
-   * 非自定义类型规则列表
+   * <p>非自定义类型规则列表</p>
    */
   Rules: Array<BanAndAllowRule>
   /**
-   * RuleType: 1黑名单 2外部IP 3域名 4情报 5资产 6自定义规则  7入侵防御规则
+   * <p>RuleType: 1黑名单 2外部IP 3域名 4情报 5资产 6自定义规则  7入侵防御规则</p>
    */
   RuleType: number
   /**
-   * 删除白名单冲突地址并继续添加/删除封禁列表冲突地址并继续添加；表示是否覆盖重复数据，1为覆盖，非1不覆盖，跳过重复数据
+   * <p>AI操作来源</p><p>枚举值：</p><ul><li>console： 控制台来源值</li><li>wechat： 微信</li></ul>
+   */
+  CfwAiAgentOperationSource?: string
+  /**
+   * <p>删除白名单冲突地址并继续添加/删除封禁列表冲突地址并继续添加；表示是否覆盖重复数据，1为覆盖，非1不覆盖，跳过重复数据</p>
    */
   CoverDuplicate?: number
 }
@@ -2710,11 +2911,15 @@ export interface DeleteVpcFwGroupResponse {
  */
 export interface AddAclRuleRequest {
   /**
-   * 需要添加的访问控制规则列表
+   * <p>需要添加的访问控制规则列表</p>
    */
   Rules: Array<CreateRuleItem>
   /**
-   * 添加规则的来源，一般不需要使用，值insert_rule 表示插入指定位置的规则；值batch_import 表示批量导入规则；为空时表示添加规则
+   * <p>AI操作来源</p><p>枚举值：</p><ul><li>console： 控制台来源值</li><li>wechat： 微信</li></ul>
+   */
+  CfwAiAgentOperationSource?: string
+  /**
+   * <p>添加规则的来源，一般不需要使用，值insert_rule 表示插入指定位置的规则；值batch_import 表示批量导入规则；为空时表示添加规则</p>
    */
   From?: string
 }
@@ -3117,6 +3322,20 @@ export interface NatFwInstance {
 }
 
 /**
+ * DescribeCfwLogs返回参数结构体
+ */
+export interface DescribeCfwLogsResponse {
+  /**
+   * <p>查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。</p>
+   */
+  Data?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyAllPublicIPSwitchStatus返回参数结构体
  */
 export interface ModifyAllPublicIPSwitchStatusResponse {
@@ -3151,6 +3370,20 @@ export interface BanAndAllowRuleDel {
 RuleType: 1黑名单 2外部IP 3域名 4情报 5资产 6自定义规则  7入侵防御规则
    */
   RuleType?: number
+}
+
+/**
+ * DescribeCfwAlerts返回参数结构体
+ */
+export interface DescribeCfwAlertsResponse {
+  /**
+   * <p>查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。</p>
+   */
+  Data?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3351,6 +3584,40 @@ export interface DescribeNatCcnFwSwitchRequest {
 }
 
 /**
+ * DescribeCfwAnalysisData请求参数结构体
+ */
+export interface DescribeCfwAnalysisDataRequest {
+  /**
+   * <p>分析场景。必填。full_traffic 表示全流量深度分析；east_west 表示东西向流量分析；alert_comprehensive 表示告警综合分析；asset_exposure 表示资产暴露面分析；access_troubleshoot 表示访问阻断排障分析。</p>
+   */
+  Scenario: string
+  /**
+   * <p>查询开始时间。可选，格式 YYYY-MM-DD HH:MM:SS；不传时默认查询最近 7 天。</p>
+   */
+  StartTime?: string
+  /**
+   * <p>查询结束时间。可选，格式 YYYY-MM-DD HH:MM:SS；不传时默认当前时间。</p>
+   */
+  EndTime?: string
+  /**
+   * <p>分析对象类型。可选，默认 user；user 表示租户全局，asset 表示单个资产，vpc 表示 VPC，domain 表示域名。</p>
+   */
+  ObjectType?: string
+  /**
+   * <p>分析对象标识。ObjectType 为 asset、vpc 或 domain 时按需传入，可填写 IP、实例 ID、VPC ID 或域名。</p>
+   */
+  ObjectId?: string
+  /**
+   * <p>排障目标。可选，主要用于 access_troubleshoot 场景，可填写 IP 或域名。</p>
+   */
+  Target?: string
+  /**
+   * <p>需要跳过的分析段名称列表。可选；不传时执行该场景全部分析段。</p>
+   */
+  SkipSections?: Array<string>
+}
+
+/**
  * 访问控制列表对象
  */
 export interface AcListsData {
@@ -3523,11 +3790,15 @@ enum FilterOperatorType {
  */
 export interface AddVpcAcRuleRequest {
   /**
-   * 需要添加的vpc内网间规则列表
+   * <p>需要添加的vpc内网间规则列表</p>
    */
   Rules: Array<VpcRuleItem>
   /**
-   * 添加规则的来源，一般不需要使用，值insert_rule 表示插入指定位置的规则；值batch_import 表示批量导入规则；为空时表示添加规则
+   * <p>AI操作来源</p><p>枚举值：</p><ul><li>console： 控制台来源值</li><li>wechat： 微信</li></ul>
+   */
+  CfwAiAgentOperationSource?: string
+  /**
+   * <p>添加规则的来源，一般不需要使用，值insert_rule 表示插入指定位置的规则；值batch_import 表示批量导入规则；为空时表示添加规则</p>
    */
   From?: string
 }
@@ -3636,9 +3907,13 @@ export interface DescribeCcnAssociatedInstancesRequest {
  */
 export interface ModifyVpcAcRuleRequest {
   /**
-   * 需要编辑的规则数组
+   * <p>需要编辑的规则数组</p>
    */
   Rules: Array<VpcRuleItem>
+  /**
+   * <p>AI操作来源</p><p>枚举值：</p><ul><li>console： 控制台来源值</li><li>wechat： 微信</li></ul>
+   */
+  CfwAiAgentOperationSource?: string
 }
 
 /**
@@ -3700,11 +3975,15 @@ export interface ModifyClusterFwBypassResponse {
  */
 export interface AddNatAcRuleRequest {
   /**
-   * 需要添加的nat访问控制规则列表
+   * <p>需要添加的nat访问控制规则列表</p>
    */
   Rules: Array<CreateNatRuleItem>
   /**
-   * 添加规则的来源，一般不需要使用，值insert_rule 表示插入指定位置的规则；值batch_import 表示批量导入规则；为空时表示添加规则
+   * <p>AI操作来源</p><p>枚举值：</p><ul><li>console： 控制台来源值</li><li>wechat： 微信</li></ul>
+   */
+  CfwAiAgentOperationSource?: string
+  /**
+   * <p>添加规则的来源，一般不需要使用，值insert_rule 表示插入指定位置的规则；值batch_import 表示批量导入规则；为空时表示添加规则</p>
    */
   From?: string
 }
@@ -3851,6 +4130,26 @@ export interface DeleteResourceGroupRequest {
 }
 
 /**
+ * ModifyFwGroupSwitch请求参数结构体
+ */
+export interface ModifyFwGroupSwitchRequest {
+  /**
+   * 打开或关闭开关
+0：关闭开关
+1：打开开关
+   */
+  Enable: number
+  /**
+   * 是否操作全部开关 0 不操作全部开关，1 操作全部开关
+   */
+  AllSwitch: number
+  /**
+   * 开关列表
+   */
+  SwitchList?: Array<FwGroupSwitch>
+}
+
+/**
  * CreateAddressTemplate返回参数结构体
  */
 export interface CreateAddressTemplateResponse {
@@ -3957,11 +4256,15 @@ export interface DescribeAddressTemplateListRequest {
  */
 export interface RemoveAclRuleRequest {
   /**
-   * 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则
+   * <p>规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则</p>
    */
   RuleUuid: Array<number | bigint>
   /**
-   * 规则方向：1，入站；0，出站
+   * <p>AI操作来源</p><p>枚举值：</p><ul><li>console： 控制台来源值</li><li>wechat： 微信</li></ul>
+   */
+  CfwAiAgentOperationSource?: string
+  /**
+   * <p>规则方向：1，入站；0，出站</p>
    */
   Direction?: number
 }
@@ -4277,7 +4580,7 @@ export interface ModifyAllRuleStatusResponse {
  */
 export interface RemoveAclRuleResponse {
   /**
-   * 删除成功后返回被删除策略的uuid列表
+   * <p>删除成功后返回被删除策略的uuid列表</p>
    */
   RuleUuid?: Array<number | bigint>
   /**
@@ -4701,13 +5004,47 @@ export interface DescribeCcnInstanceRegionStatusResponse {
  */
 export interface RemoveVpcAcRuleResponse {
   /**
-   * 删除成功后返回被删除策略的uuid列表
+   * <p>删除成功后返回被删除策略的uuid列表</p>
    */
   RuleUuids?: Array<number | bigint>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeLogs请求参数结构体
+ */
+export interface DescribeLogsRequest {
+  /**
+   * 日志类型标识
+流量日志：互联网边界防火墙netflow_border，NAT边界防火墙netflow_nat，VPC间防火墙vpcnetflow，内网流量日志netflow_fl，流量分析日志netflow_nta
+入侵防御日志rule_threatinfo
+访问控制日志：互联网边界规则rule_acl，NAT边界规则rule_acl，内网间规则rule_vpcacl，企业安全组rule_sg
+操作日志：防火墙开关-开关操作operate_switch，防火墙开关-实例配置operate_instance，资产中心操作operate_assetgroup，访问控制操作operate_acl，零信任防护操作operate_identity，入侵防御操作-入侵防御operate_ids，入侵防御操作-安全基线operate_baseline，常用工具操作operate_tool，网络蜜罐操作operate_honeypot，日志投递操作operate_logdelivery，通用设置操作operate_logstorage，登录日志operate_login
+   */
+  Index: string
+  /**
+   * 每页条数，最大支持1000
+   */
+  Limit: number
+  /**
+   * 偏移值，最大支持60000
+   */
+  Offset: number
+  /**
+   * 筛选开始时间
+   */
+  StartTime: string
+  /**
+   * 筛选结束时间
+   */
+  EndTime: string
+  /**
+   * 过滤条件组合，各数组元素间为AND关系，查询字段名Name参考文档https://cloud.tencent.com/document/product/1132/87894，数值类型字段不支持模糊匹配
+   */
+  Filters?: Array<CommonFilter>
 }
 
 /**
@@ -4879,37 +5216,24 @@ export interface DescribeAddressTemplateListResponse {
 }
 
 /**
- * DescribeLogs请求参数结构体
+ * 状态监控过滤条件。
  */
-export interface DescribeLogsRequest {
+export interface CfwStatusMonitorFilter {
   /**
-   * 日志类型标识
-流量日志：互联网边界防火墙netflow_border，NAT边界防火墙netflow_nat，VPC间防火墙vpcnetflow，内网流量日志netflow_fl，流量分析日志netflow_nta
-入侵防御日志rule_threatinfo
-访问控制日志：互联网边界规则rule_acl，NAT边界规则rule_acl，内网间规则rule_vpcacl，企业安全组rule_sg
-操作日志：防火墙开关-开关操作operate_switch，防火墙开关-实例配置operate_instance，资产中心操作operate_assetgroup，访问控制操作operate_acl，零信任防护操作operate_identity，入侵防御操作-入侵防御operate_ids，入侵防御操作-安全基线operate_baseline，常用工具操作operate_tool，网络蜜罐操作operate_honeypot，日志投递操作operate_logdelivery，通用设置操作operate_logstorage，登录日志operate_login
+   * <p>过滤字段名。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Index: string
+  Name: string
   /**
-   * 每页条数，最大支持1000
+   * <p>过滤值列表，最多 10 个。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Limit: number
+  Values: Array<string>
   /**
-   * 偏移值，最大支持60000
+   * <p>操作符类型，可选；仅支持后端允许的类型。</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Offset: number
-  /**
-   * 筛选开始时间
-   */
-  StartTime: string
-  /**
-   * 筛选结束时间
-   */
-  EndTime: string
-  /**
-   * 过滤条件组合，各数组元素间为AND关系，查询字段名Name参考文档https://cloud.tencent.com/document/product/1132/87894，数值类型字段不支持模糊匹配
-   */
-  Filters?: Array<CommonFilter>
+  OperatorType?: number
 }
 
 /**
@@ -4933,6 +5257,20 @@ export interface ModifyAssetSyncResponse {
 非0 失败
    */
   ReturnCode?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCfwRuleOptimization返回参数结构体
+ */
+export interface DescribeCfwRuleOptimizationResponse {
+  /**
+   * 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。示例仅展示代表性字段；完整结果还包含 rule_type_name、rule_total、rule_active、rule_skipped_geo_or_cloud、dimension_skipped、thresholds 和 generated_at，finding 还包含 risk_level、affected_rule_uuids、affected_rule_seqs、recommendation_action、reason 和 evidence。结果过大时返回摘要，不返回 findings，并增加 truncated 和 truncated_reason。
+   */
+  Data?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5114,9 +5452,13 @@ export interface VpcFwInstanceInfo {
  */
 export interface ModifyNatAcRuleRequest {
   /**
-   * 需要编辑的规则数组,基于Uuid唯一id来修改该规则
+   * <p>需要编辑的规则数组,基于Uuid唯一id来修改该规则</p>
    */
   Rules: Array<CreateNatRuleItem>
+  /**
+   * <p>AI操作来源</p><p>枚举值：</p><ul><li>console： 控制台来源值</li><li>wechat： 微信</li></ul>
+   */
+  CfwAiAgentOperationSource?: string
 }
 
 /**
@@ -5177,6 +5519,20 @@ export interface ModifyNatFwVpcDnsSwitchRequest {
  * DeleteBlockIgnoreRuleNew返回参数结构体
  */
 export interface DeleteBlockIgnoreRuleNewResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCfwStatusMonitor返回参数结构体
+ */
+export interface DescribeCfwStatusMonitorResponse {
+  /**
+   * <p>查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。describe_scene 返回 scene 与 selection.available_options；fetch_scene 返回选中场景的 data 快照。</p>
+   */
+  Data?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5340,7 +5696,7 @@ export interface AssociatedInstanceInfo {
  */
 export interface ModifyNatAcRuleResponse {
   /**
-   * 编辑成功后返回新策略ID列表
+   * <p>编辑成功后返回新策略ID列表</p>
    */
   RuleUuid?: Array<number | bigint>
   /**
@@ -5895,6 +6251,24 @@ export interface SwitchError {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InsertTime?: string
+}
+
+/**
+ * DescribeCfwRuleOptimization请求参数结构体
+ */
+export interface DescribeCfwRuleOptimizationRequest {
+  /**
+   * 长期零命中规则阈值天数。可选，必须为正整数，默认 180。
+   */
+  IdleDays?: number
+  /**
+   * 单 IP 离散过多聚合建议的最小数量。可选，最小为 2，默认 10。
+   */
+  IpAggMin?: number
+  /**
+   * 可迁移 IOC 建议中返回的样例 IOC 数量上限。可选，必须为正整数，默认 50。
+   */
+  IocSample?: number
 }
 
 /**
@@ -6948,6 +7322,16 @@ export interface NatFwSwitchDetailS {
 }
 
 /**
+ * DescribeCfwAssets请求参数结构体
+ */
+export interface DescribeCfwAssetsRequest {
+  /**
+   * 最大返回资产数。可选，默认 100；取值 1 至 1000。
+   */
+  Limit?: number
+}
+
+/**
  * DescribeNatFwSwitch返回参数结构体
  */
 export interface DescribeNatFwSwitchResponse {
@@ -7112,11 +7496,15 @@ export interface ModifyAllPublicIPSwitchStatusRequest {
  */
 export interface RemoveNatAcRuleRequest {
   /**
-   * 规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则
+   * <p>规则的uuid列表，可通过查询规则列表获取，注意：如果传入的是[-1]将删除所有规则</p>
    */
   RuleUuid: Array<number | bigint>
   /**
-   * 规则方向：1，入站；0，出站
+   * <p>AI操作来源</p><p>枚举值：</p><ul><li>console： 控制台来源值</li><li>wechat： 微信</li></ul>
+   */
+  CfwAiAgentOperationSource?: string
+  /**
+   * <p>规则方向：1，入站；0，出站</p>
    */
   Direction?: number
 }
@@ -7527,6 +7915,20 @@ export interface DescribeCcnVpcFwPolicyLimitResponse {
 }
 
 /**
+ * AddVpcAcRule返回参数结构体
+ */
+export interface AddVpcAcRuleResponse {
+  /**
+   * <p>创建成功后返回新策略ID列表</p>
+   */
+  RuleUuids?: Array<number | bigint>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifySequenceRules请求参数结构体
  */
 export interface ModifySequenceRulesRequest {
@@ -7607,6 +8009,20 @@ export interface ModifyNatFwReSelectResponse {
 }
 
 /**
+ * DescribeCfwAssets返回参数结构体
+ */
+export interface DescribeCfwAssetsResponse {
+  /**
+   * 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。
+   */
+  Data?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeVpcAcRule请求参数结构体
  */
 export interface DescribeVpcAcRuleRequest {
@@ -7649,7 +8065,7 @@ export interface DescribeVpcAcRuleRequest {
  */
 export interface AddAclRuleResponse {
   /**
-   * 创建成功后返回新策略ID列表
+   * <p>创建成功后返回新策略ID列表</p>
    */
   RuleUuid?: Array<number | bigint>
   /**
@@ -8499,17 +8915,17 @@ export interface SerialRegionInfo {
 }
 
 /**
- * DescribeNatFwInstancesInfo返回参数结构体
+ * ModifyEnterpriseSecurityGroupRule返回参数结构体
  */
-export interface DescribeNatFwInstancesInfoResponse {
+export interface ModifyEnterpriseSecurityGroupRuleResponse {
   /**
-   * 实例卡片信息数组
+   * <p>状态值，0：编辑成功，非0：编辑失败</p>
    */
-  NatinsLst?: Array<NatInstanceInfo>
+  Status?: number
   /**
-   * nat 防火墙个数
+   * <p>编辑后新生成规则的Id</p>
    */
-  Total?: number
+  NewRuleUuid?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8573,11 +8989,11 @@ export interface DescribeBlockByIpTimesListRequest {
  */
 export interface RemoveEnterpriseSecurityGroupRuleResponse {
   /**
-   * 删除成功后返回被删除策略的uuid
+   * <p>删除成功后返回被删除策略的uuid</p>
    */
   RuleUuid?: number
   /**
-   * 0代表成功，-1代表失败
+   * <p>0代表成功，-1代表失败</p>
    */
   Status?: number
   /**
@@ -8625,23 +9041,15 @@ export interface DescribeEnterpriseSecurityGroupRuleListRequest {
  */
 export interface CreateAlertCenterOmitResponse {
   /**
-   * 返回状态码：
-0 成功
-非0 失败
+   * <p>返回状态码：<br>0 成功<br>非0 失败</p>
    */
   ReturnCode?: number
   /**
-   * 返回信息：
-success 成功
-其他
+   * <p>返回信息：<br>success 成功<br>其他</p>
    */
   ReturnMsg?: string
   /**
-   * 处置状态码：
-0  处置成功
--1 通用错误，不用处理
--3 表示重复，需重新刷新列表
-其他
+   * <p>处置状态码：<br>0  处置成功<br>-1 通用错误，不用处理<br>-3 表示重复，需重新刷新列表<br>其他</p>
    */
   Status?: number
   /**
@@ -8739,6 +9147,20 @@ export interface DeleteNatFwInstanceRequest {
    * 防火墙实例id
    */
   CfwInstance: string
+}
+
+/**
+ * DescribeCfwRules返回参数结构体
+ */
+export interface DescribeCfwRulesResponse {
+  /**
+   * <p>查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。</p>
+   */
+  Data?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8947,20 +9369,23 @@ export interface ModifyNatFwSwitchRequest {
  */
 export interface DeleteBlockIgnoreRuleNewRequest {
   /**
-   * 是否删除全部
+   * <p>是否删除全部</p>
    */
   DeleteAll: number
   /**
-   * blocklist 封禁列表 whitelist 白名单列表
+   * <p>blocklist 封禁列表 whitelist 白名单列表</p>
    */
   ShowType: string
   /**
-   * 规则列表
+   * <p>AI操作来源</p><p>枚举值：</p><ul><li>console： 控制台来源值</li><li>wechat： 微信</li></ul>
+   */
+  CfwAiAgentOperationSource?: string
+  /**
+   * <p>规则列表</p>
    */
   Rules?: Array<BanAndAllowRuleDel>
   /**
-   * 封禁：1，放通：100，
-主要用于全部删除时区分列表类型
+   * <p>封禁：1，放通：100，<br>主要用于全部删除时区分列表类型</p>
    */
   RuleType?: number
 }
@@ -9733,17 +10158,17 @@ export interface IntArray {
 }
 
 /**
- * ModifyEnterpriseSecurityGroupRule返回参数结构体
+ * DescribeNatFwInstancesInfo返回参数结构体
  */
-export interface ModifyEnterpriseSecurityGroupRuleResponse {
+export interface DescribeNatFwInstancesInfoResponse {
   /**
-   * 状态值，0：编辑成功，非0：编辑失败
+   * 实例卡片信息数组
    */
-  Status?: number
+  NatinsLst?: Array<NatInstanceInfo>
   /**
-   * 编辑后新生成规则的Id
+   * nat 防火墙个数
    */
-  NewRuleUuid?: number
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -9755,7 +10180,7 @@ export interface ModifyEnterpriseSecurityGroupRuleResponse {
  */
 export interface AddNatAcRuleResponse {
   /**
-   * 创建成功后返回新策略ID列表
+   * <p>创建成功后返回新策略ID列表</p>
    */
   RuleUuid?: Array<number | bigint>
   /**

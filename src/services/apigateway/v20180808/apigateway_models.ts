@@ -133,97 +133,97 @@ export interface Service {
    * 内网访问https端口。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InnerHttpsPort: number
+  InnerHttpsPort?: number
   /**
    * 用户自定义的服务描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceDesc: string
+  ServiceDesc?: string
   /**
    * 服务的前端请求类型。如http、https 或者 http&https。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Protocol: string
+  Protocol?: string
   /**
    * 最后修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ModifiedTime: string
+  ModifiedTime?: string
   /**
    * 服务支持的网络类型。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  NetTypes: Array<string>
+  NetTypes?: Array<string>
   /**
    * 独占集群名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExclusiveSetName: string
+  ExclusiveSetName?: string
   /**
    * 服务唯一 ID。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceId: string
+  ServiceId?: string
   /**
    * IP版本。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  IpVersion: string
+  IpVersion?: string
   /**
    * 已经发布的环境列表。如test、prepub、release。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AvailableEnvironments: Array<string>
+  AvailableEnvironments?: Array<string>
   /**
    * 用户自定义的服务名称。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ServiceName: string
+  ServiceName?: string
   /**
    * 系统为该服务分配的外网域名。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  OuterSubDomain: string
+  OuterSubDomain?: string
   /**
    * 创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 内网访问http端口。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InnerHttpPort: number
+  InnerHttpPort?: number
   /**
    * 系统为该服务自动分配的内网域名。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InnerSubDomain: string
+  InnerSubDomain?: string
   /**
    * 服务的计费状态。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  TradeIsolateStatus: number
+  TradeIsolateStatus?: number
   /**
    * 服务绑定的标签
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags: Array<Tag>
+  Tags?: Array<Tag>
   /**
    * 独享实例
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  InstanceId: string
+  InstanceId?: string
   /**
    * 集群类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  SetType: string
+  SetType?: string
   /**
    * 服务部署的集群类型
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  DeploymentType: string
+  DeploymentType?: string
 }
 
 /**

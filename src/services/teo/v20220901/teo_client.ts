@@ -43,6 +43,7 @@ import {
   CompressionParameters,
   DescribeConfigGroupVersionDetailResponse,
   OriginDetail,
+  InferenceHardwareSpecification,
   DescribeSecurityClientAttesterResponse,
   MultiPathGatewayOriginACLInfo,
   HeaderAction,
@@ -51,13 +52,15 @@ import {
   MinimalRequestBodyTransferRate,
   AccessURLRedirectQueryString,
   BrowserImpersonationDetectionRule,
+  DescribeInferenceAPITokensRequest,
   ModifyFunctionRulePriorityRequest,
   ModifyAccelerationDomainResponse,
   DeleteSecurityAPIResourceRequest,
   ShieldParameters,
   FunctionRegionSelection,
-  ModifyMultiPathGatewayLineRequest,
+  DescribeInferenceServiceMonitorDataResponse,
   DescribeHostsSettingResponse,
+  OperateInferenceServiceRequest,
   DescribeWebSecurityTemplateResponse,
   Origin,
   DescribeRulesResponse,
@@ -69,11 +72,13 @@ import {
   DescribeBillingDataRequest,
   LogFormat,
   DescribeEnvironmentsRequest,
+  CreateInferenceServiceRequest,
   MultiPathGateway,
   DescribeAliasDomainsRequest,
   QUICParameters,
   ManagedRuleGroupMeta,
   RateLimitConfig,
+  DescribeInferenceServiceDeploymentLogsResponse,
   CreateRealtimeLogDeliveryTaskRequest,
   ModifyAccelerationDomainStatusesResponse,
   DeployRecord,
@@ -89,6 +94,7 @@ import {
   DeleteSecurityAPIServiceResponse,
   RuleAndConditions,
   CreateAliasDomainRequest,
+  InferenceScheduledScalingAction,
   CLSTopic,
   CreatePrefetchTaskRequest,
   DescribeApplicationProxiesResponse,
@@ -102,11 +108,14 @@ import {
   UpstreamRequestQueryString,
   FloatTimingDataItem,
   DeleteJustInTimeTranscodeTemplatesRequest,
+  MultiPathGatewayLine,
   ModifyLoadBalancerResponse,
   ModifyL4ProxyResponse,
+  InferenceAutoScalingConfig,
   HealthChecker,
   CreateFunctionRuleRequest,
-  RuleCodeActionParams,
+  InferenceServiceMonitorItem,
+  InferenceTCRRepositoryConfig,
   RuleBranch,
   ComponentReference,
   ConfirmOriginACLUpdateResponse,
@@ -125,11 +134,13 @@ import {
   S3,
   DescribeDDoSAttackEventResponse,
   DescribeTimingL7OriginPullDataResponse,
-  DescribePrefetchTasksRequest,
+  DescribeInferenceServicesRequest,
   ForceRedirect,
+  InferenceServiceMonitorRecord,
   CodeAction,
   ZoneConfigParameters,
   CreateL7AccRulesResponse,
+  SiteFailoverParameters,
   CachePrefresh,
   DescribePurgeTasksRequest,
   DescribeTimingL7AnalysisDataResponse,
@@ -143,11 +154,13 @@ import {
   OriginGroupReference,
   DeleteLoadBalancerRequest,
   CacheKeyCookie,
-  SecurityPolicyTemplateInfo,
+  DescribeInferenceServicesResponse,
   ExceptUserRule,
   SecEntry,
   ModifyCustomErrorPageResponse,
   ModifySecurityAPIServiceRequest,
+  CreateInferenceAPITokenResponse,
+  InferenceServiceDeploymentLogInfo,
   StandardDebugParameters,
   ConfigGroupVersionInfo,
   VerifyOwnershipResponse,
@@ -187,6 +200,7 @@ import {
   DescribeOriginACLResponse,
   SharedCNAMEInfo,
   DefaultDenySecurityActionParameters,
+  DescribePrefetchTasksRequest,
   ModifyL4ProxyRulesRequest,
   DescribeRulesSettingRequest,
   EntityStatus,
@@ -213,7 +227,7 @@ import {
   AccelerationDomainCertificate,
   DescribeFunctionComponentBindingsResponse,
   DescribeSecurityTemplateBindingsRequest,
-  L4ProxyRemoteAuth,
+  DescribeInferenceAPITokensResponse,
   AlgDetectResult,
   EdgeKVListResponse,
   ModifySharedCNAMERequest,
@@ -247,6 +261,7 @@ import {
   DescribeSharedCNAMEResponse,
   RenewPlanRequest,
   DescribePrefetchTasksResponse,
+  InferenceResourceConfig,
   ManagedRuleDetail,
   NextOriginACL,
   DescribeMultiPathGatewayRegionsRequest,
@@ -263,8 +278,8 @@ import {
   CreateApplicationProxyResponse,
   BotUserRule,
   Task,
-  DescribeL4ProxyRulesResponse,
-  OriginHealthStatus,
+  CreateInferenceAPITokenRequest,
+  DescribeSecurityIPGroupRequest,
   ZoneConfig,
   DescribeTimingL7OriginPullDataRequest,
   CustomizedHeader,
@@ -276,6 +291,7 @@ import {
   BotExtendAction,
   CreatePurgeTaskResponse,
   DeleteApplicationProxyRuleResponse,
+  URLPath,
   DeleteAccelerationDomainsResponse,
   ExceptionRules,
   ExceptConfig,
@@ -309,6 +325,7 @@ import {
   ServerCertInfo,
   DescribeZonesRequest,
   DescribeZoneConfigImportResultResponse,
+  ModifyInferenceServiceRequest,
   ModifyFunctionComponentBindingsResponse,
   BindSharedCNAMEResponse,
   DeleteSharedCNAMERequest,
@@ -339,6 +356,7 @@ import {
   CreateJustInTimeTranscodeTemplateResponse,
   DownloadL7LogsRequest,
   DNSPodDetail,
+  RuleCodeActionParams,
   DescribeSecurityClientAttesterRequest,
   DescribeLogAnalysisDetailRequest,
   WebSocketParameters,
@@ -346,9 +364,11 @@ import {
   SlowRateConfig,
   Cache,
   CustomTime,
+  CreateInferenceServiceResponse,
   FunctionWeightedSelection,
   DetailHost,
-  DescribeRealtimeLogDeliveryTasksResponse,
+  DescribeInferenceHardwareSpecificationsResponse,
+  InferenceServiceConfig,
   TopEntry,
   DescribeConfigGroupVersionsResponse,
   FunctionEnvironmentVariable,
@@ -361,7 +381,7 @@ import {
   OriginAuthenticationRequestProperties,
   ModifyRealtimeLogDeliveryTaskResponse,
   RateLimitUserRule,
-  ModifyFunctionReplicaResponse,
+  DescribeInferenceServiceDeploymentRecordsResponse,
   DescribeOriginACLRequest,
   CreatePlanForZoneRequest,
   DeviceProfile,
@@ -371,7 +391,9 @@ import {
   TimingDataItem,
   ModifyCustomErrorPageRequest,
   ModifyFunctionRuleResponse,
+  ModifyFunctionReplicaResponse,
   DescribeL7AccRulesRequest,
+  L4ProxyRemoteAuth,
   DescribeFunctionRulesResponse,
   CacheKey,
   DownloadL4LogsResponse,
@@ -417,6 +439,7 @@ import {
   DescribeFunctionComponentBindingsRequest,
   AccessURLRedirectParameters,
   CacheConfigParameters,
+  InferenceServiceDeploymentRecord,
   FunctionComponentBinding,
   CreateL4ProxyResponse,
   CacheKeyParameters,
@@ -440,7 +463,7 @@ import {
   CustomEndpoint,
   ModifyOriginACLResponse,
   VerifyOwnershipRequest,
-  MultiPathGatewayLine,
+  InferenceContainerConfigForModify,
   ResponseSpeedLimitParameters,
   ModifyMultiPathGatewayResponse,
   BotManagement,
@@ -491,14 +514,16 @@ import {
   ForceRedirectHTTPSParameters,
   MutualTLS,
   ClientBehaviorDetection,
-  CacheConfigCustomTime,
+  DescribeLogAnalysisDownloadTasksRequest,
   ModifyApplicationProxyRuleRequest,
+  InferenceManualInstanceConfig,
   CreateFunctionResponse,
   DescribeLoadBalancerListResponse,
   AlgDetectJS,
   SubRuleItem,
   DescribeL7AccRulesResponse,
   DeleteSecurityIPGroupRequest,
+  OriginHealthStatus,
   Grpc,
   CreateAliasDomainResponse,
   ClientIpCountry,
@@ -510,6 +535,7 @@ import {
   CreateRealtimeLogDeliveryTaskResponse,
   DescribeTopL7CacheDataResponse,
   DescribeFunctionRuntimeEnvironmentResponse,
+  DescribeInferenceServiceDeploymentLogsRequest,
   GrpcParameters,
   BotManagementCustomRules,
   MultiPathGatewayNextOriginACL,
@@ -525,28 +551,31 @@ import {
   BotSessionValidation,
   SecurityPolicy,
   AscriptionInfo,
+  DescribeInferenceServiceDeploymentRecordsRequest,
   ModifySecurityClientAttesterResponse,
   CheckFreeCertificateVerificationResponse,
   FirstPartConfig,
   Waf,
   CreateApplicationProxyRuleRequest,
   JustInTimeTranscodeTemplate,
-  TCCaptchaOption,
+  ModifyInferenceServiceResponse,
   DescribeDnsRecordsResponse,
   CreateWebSecurityTemplateRequest,
   CreateL4ProxyRequest,
-  ModifyZoneRequest,
+  InferenceEnvironmentVariable,
   CreatePlanResponse,
   DescribeApplicationProxiesRequest,
   DescribeContentQuotaRequest,
   AllowActionParameters,
   LogItem,
+  InferenceResourceConfigForModify,
   Hsts,
   OwnershipVerification,
   CreateRuleRequest,
   ModifyL4ProxyStatusRequest,
   DescribeSecurityPolicyResponse,
   Plan,
+  DescribeInferenceServiceMonitorDataRequest,
   CreateApplicationProxyRuleResponse,
   OriginRecord,
   RateLimitingRule,
@@ -579,7 +608,7 @@ import {
   ModifyApplicationProxyRuleStatusRequest,
   AccelerateType,
   DeliveryCondition,
-  SiteFailoverParameters,
+  InferenceAPIToken,
   ExceptionRule,
   FollowOrigin,
   EdgeKVDeleteRequest,
@@ -590,6 +619,7 @@ import {
   TLSConfigParameters,
   QueryCondition,
   RuleRewriteActionParams,
+  DescribeL4ProxyRulesResponse,
   ClientIPHeaderParameters,
   L4OfflineLog,
   ModifyAliasDomainResponse,
@@ -629,6 +659,7 @@ import {
   ClientFiltering,
   DescribePrefetchOriginLimitRequest,
   DescribeTopL7CacheDataRequest,
+  InferenceScheduledScalingEffectiveRange,
   SessionRateControl,
   CreateLoadBalancerRequest,
   Https,
@@ -639,6 +670,7 @@ import {
   L4ProxyRule,
   NetworkErrorLoggingParameters,
   CacheKeyQueryString,
+  ModifyMultiPathGatewayLineRequest,
   AdvancedFilter,
   DescribeDDoSAttackDataResponse,
   TemplateConfig,
@@ -649,6 +681,7 @@ import {
   DeleteL4ProxyResponse,
   ModifyApplicationProxyRuleStatusResponse,
   DisableOriginACLRequest,
+  TCCaptchaOption,
   ClientIPCountryParameters,
   IncreasePlanQuotaResponse,
   DescribeIPRegionResponse,
@@ -663,6 +696,7 @@ import {
   RefreshMultiPathGatewaySecretKeyRequest,
   CreateContentIdentifierRequest,
   OriginProtectionInfo,
+  DeleteInferenceAPITokenRequest,
   ModifyPrefetchOriginLimitRequest,
   ModifyDnsRecordsStatusResponse,
   ModifySecurityJSInjectionRuleResponse,
@@ -712,6 +746,7 @@ import {
   DeleteL4ProxyRulesResponse,
   ModifyMultiPathGatewaySecretKeyRequest,
   DnsRecord,
+  InferenceContainerConfig,
   OriginPrivateParameters,
   ModifyZoneWorkModeResponse,
   HSTSParameters,
@@ -722,12 +757,14 @@ import {
   BotManagementLite,
   IPWhitelist,
   DescribeSharedCNAMERequest,
+  ModifyZoneRequest,
   ModifyL7AccSettingRequest,
   ModifyFunctionRulePriorityResponse,
   CreateCustomizeErrorPageRequest,
-  URLPath,
-  DescribeSecurityIPGroupRequest,
+  InferenceScheduledScalingPolicy,
+  DescribeRealtimeLogDeliveryTasksResponse,
   ModifyApplicationProxyStatusResponse,
+  DescribeInferenceHardwareSpecificationsRequest,
   DescribeMultiPathGatewayLineResponse,
   OriginGroupInLoadBalancer,
   HTTPResponseParameters,
@@ -739,6 +776,7 @@ import {
   NsVerification,
   AccelerateMainland,
   ChallengeActionParameters,
+  SecurityPolicyTemplateInfo,
   StandardDebug,
   RateLimitTemplateDetail,
   AuthenticationParameters,
@@ -759,7 +797,7 @@ import {
   DeleteL7AccRulesResponse,
   DescribeOriginGroupHealthStatusResponse,
   DescribeContentIdentifiersResponse,
-  DescribeLogAnalysisDownloadTasksRequest,
+  CacheConfigCustomTime,
   ManagedRules,
   SecurityTemplateBinding,
   DescribeMultiPathGatewaySecretKeyResponse,
@@ -776,6 +814,7 @@ import {
   HostHeaderParameters,
   DescribeConfigGroupVersionsRequest,
   MultiPathGatewayCurrentOriginACL,
+  OperateInferenceServiceResponse,
   DescribeL4ProxyRulesRequest,
   AiRule,
   Function,
@@ -786,12 +825,15 @@ import {
   CheckCnameStatusRequest,
   CheckFreeCertificateVerificationRequest,
   DetectLengthLimitCondition,
+  InferenceService,
+  DeleteInferenceAPITokenResponse,
   ModifySecurityAPIResourceResponse,
   DescribePlansResponse,
   UpgradePlanRequest,
   CreatePurgeTaskRequest,
   DeleteDnsRecordsResponse,
   ModifyRequestHeaderParameters,
+  InferenceScalingPolicy,
   CreateWebSecurityTemplateResponse,
   BotIntelligence,
   OriginCertificateVerify,
@@ -987,6 +1029,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询推理服务部署历史列表，返回每次部署的操作类型、状态、耗时、配置快照和是否为当前生效配置，支持分页和排序。
+   */
+  async DescribeInferenceServiceDeploymentRecords(
+    req: DescribeInferenceServiceDeploymentRecordsRequest,
+    cb?: (error: string, rep: DescribeInferenceServiceDeploymentRecordsResponse) => void
+  ): Promise<DescribeInferenceServiceDeploymentRecordsResponse> {
+    return this.request("DescribeInferenceServiceDeploymentRecords", req, cb)
+  }
+
+  /**
    * 创建边缘函数的触发规则。支持通过自定义过滤条件来决定是否需要执行函数，当需要执行函数时，提供了多种选择目标函数的方式，包括：直接指定，基于客户端归属地区选择和基于权重选择。
    */
   async CreateFunctionRule(
@@ -1074,6 +1126,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeFunctionRuntimeEnvironmentResponse) => void
   ): Promise<DescribeFunctionRuntimeEnvironmentResponse> {
     return this.request("DescribeFunctionRuntimeEnvironment", req, cb)
+  }
+
+  /**
+   * 查询客户端认证选项配置。
+   */
+  async DescribeSecurityClientAttester(
+    req: DescribeSecurityClientAttesterRequest,
+    cb?: (error: string, rep: DescribeSecurityClientAttesterResponse) => void
+  ): Promise<DescribeSecurityClientAttesterResponse> {
+    return this.request("DescribeSecurityClientAttester", req, cb)
   }
 
   /**
@@ -1206,6 +1268,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLogAnalysisDetailResponse) => void
   ): Promise<DescribeLogAnalysisDetailResponse> {
     return this.request("DescribeLogAnalysisDetail", req, cb)
+  }
+
+  /**
+   * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [ModifyL7AccSetting](https://cloud.tencent.com/document/product/1552/115817)。
+   */
+  async ModifyZoneSetting(
+    req: ModifyZoneSettingRequest,
+    cb?: (error: string, rep: ModifyZoneSettingResponse) => void
+  ): Promise<ModifyZoneSettingResponse> {
+    return this.request("ModifyZoneSetting", req, cb)
   }
 
   /**
@@ -1545,6 +1617,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 操作推理服务，支持停止、启动和删除推理服务，删除后资源不可恢复。
+   */
+  async OperateInferenceService(
+    req: OperateInferenceServiceRequest,
+    cb?: (error: string, rep: OperateInferenceServiceResponse) => void
+  ): Promise<OperateInferenceServiceResponse> {
+    return this.request("OperateInferenceService", req, cb)
+  }
+
+  /**
    * 您可以通过本接口批量修改 DNS 记录。
    */
   async ModifyDnsRecords(
@@ -1647,13 +1729,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [ModifyL7AccSetting](https://cloud.tencent.com/document/product/1552/115817)。
+   * 创建推理 API Token，用于访问推理服务时进行鉴权，Token 内容仅在创建时返回一次，每个站点最多创建 100 个。
    */
-  async ModifyZoneSetting(
-    req: ModifyZoneSettingRequest,
-    cb?: (error: string, rep: ModifyZoneSettingResponse) => void
-  ): Promise<ModifyZoneSettingResponse> {
-    return this.request("ModifyZoneSetting", req, cb)
+  async CreateInferenceAPIToken(
+    req: CreateInferenceAPITokenRequest,
+    cb?: (error: string, rep: CreateInferenceAPITokenResponse) => void
+  ): Promise<CreateInferenceAPITokenResponse> {
+    return this.request("CreateInferenceAPIToken", req, cb)
   }
 
   /**
@@ -1794,13 +1876,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 查询客户端认证选项配置。
+   * 查询自定义错误页列表。
    */
-  async DescribeSecurityClientAttester(
-    req: DescribeSecurityClientAttesterRequest,
-    cb?: (error: string, rep: DescribeSecurityClientAttesterResponse) => void
-  ): Promise<DescribeSecurityClientAttesterResponse> {
-    return this.request("DescribeSecurityClientAttester", req, cb)
+  async DescribeCustomErrorPages(
+    req: DescribeCustomErrorPagesRequest,
+    cb?: (error: string, rep: DescribeCustomErrorPagesResponse) => void
+  ): Promise<DescribeCustomErrorPagesResponse> {
+    return this.request("DescribeCustomErrorPages", req, cb)
   }
 
   /**
@@ -2102,6 +2184,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [RuleEngineAction](https://cloud.tencent.com/document/product/1552/80721#RuleEngineAction)。
+   */
+  async DescribeRulesSetting(
+    req?: DescribeRulesSettingRequest,
+    cb?: (error: string, rep: DescribeRulesSettingResponse) => void
+  ): Promise<DescribeRulesSettingResponse> {
+    return this.request("DescribeRulesSetting", req, cb)
+  }
+
+  /**
    * 查询当前账户可用套餐信息列表
    */
   async DescribeAvailablePlans(
@@ -2112,13 +2204,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 查询自定义错误页列表。
+   * 创建推理服务，支持设置服务名称、监听端口、容器镜像配置和资源配置，创建成功后提供推理访问地址。
    */
-  async DescribeCustomErrorPages(
-    req: DescribeCustomErrorPagesRequest,
-    cb?: (error: string, rep: DescribeCustomErrorPagesResponse) => void
-  ): Promise<DescribeCustomErrorPagesResponse> {
-    return this.request("DescribeCustomErrorPages", req, cb)
+  async CreateInferenceService(
+    req: CreateInferenceServiceRequest,
+    cb?: (error: string, rep: CreateInferenceServiceResponse) => void
+  ): Promise<CreateInferenceServiceResponse> {
+    return this.request("CreateInferenceService", req, cb)
   }
 
   /**
@@ -2192,13 +2284,13 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 本接口为旧版，EdgeOne 已对规则引擎相关接口全面升级，详情请参考 [RuleEngineAction](https://cloud.tencent.com/document/product/1552/80721#RuleEngineAction)。
+   * 查询推理硬件规格列表，返回各规格的 CPU、内存、GPU 和显存等配置，创建服务时可从中选择所需规格。
    */
-  async DescribeRulesSetting(
-    req?: DescribeRulesSettingRequest,
-    cb?: (error: string, rep: DescribeRulesSettingResponse) => void
-  ): Promise<DescribeRulesSettingResponse> {
-    return this.request("DescribeRulesSetting", req, cb)
+  async DescribeInferenceHardwareSpecifications(
+    req: DescribeInferenceHardwareSpecificationsRequest,
+    cb?: (error: string, rep: DescribeInferenceHardwareSpecificationsResponse) => void
+  ): Promise<DescribeInferenceHardwareSpecificationsResponse> {
+    return this.request("DescribeInferenceHardwareSpecifications", req, cb)
   }
 
   /**
@@ -2259,6 +2351,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DescribePurgeTasksResponse) => void
   ): Promise<DescribePurgeTasksResponse> {
     return this.request("DescribePurgeTasks", req, cb)
+  }
+
+  /**
+   * 修改推理服务，支持更新监听端口、请求路径、容器镜像、资源配置和描述信息，仅传入的参数会被修改，未传入的参数保持不变。
+   */
+  async ModifyInferenceService(
+    req: ModifyInferenceServiceRequest,
+    cb?: (error: string, rep: ModifyInferenceServiceResponse) => void
+  ): Promise<ModifyInferenceServiceResponse> {
+    return this.request("ModifyInferenceService", req, cb)
   }
 
   /**
@@ -2572,6 +2674,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 查询推理 API Token 列表，返回 Token 的 ID、名称、内容和创建时间，支持分页查询。
+   */
+  async DescribeInferenceAPITokens(
+    req: DescribeInferenceAPITokensRequest,
+    cb?: (error: string, rep: DescribeInferenceAPITokensResponse) => void
+  ): Promise<DescribeInferenceAPITokensResponse> {
+    return this.request("DescribeInferenceAPITokens", req, cb)
+  }
+
+  /**
      * 即时转码已经提供了预置转码模板，满足大部分的需求。如果有个性化的转码需求，可以通过本接口创建自定义的转码模板，最多可创建100个自定义转码模板。
 为了确保即时转码效果的一致性，避免因 EO 缓存或 M3U8 分片处理过程中的模板变更导致视频输出异常，模板在创建后不可进行修改。
 即时转码详细能力了解：[EdgeOne视频即时处理功能介绍](https://cloud.tencent.com/document/product/1552/111927)。
@@ -2674,6 +2786,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 查询推理服务监控数据，支持 CPU、内存、GPU、显存使用率和实例数量等指标，可指定时间范围和聚合粒度，最多查询最近 30 天的数据。
+   */
+  async DescribeInferenceServiceMonitorData(
+    req: DescribeInferenceServiceMonitorDataRequest,
+    cb?: (error: string, rep: DescribeInferenceServiceMonitorDataResponse) => void
+  ): Promise<DescribeInferenceServiceMonitorDataResponse> {
+    return this.request("DescribeInferenceServiceMonitorData", req, cb)
+  }
+
+  /**
      * 本接口为旧版本查询源站防护接口，EdgeOne 于 2025 年 6 月 27 日已对源站防护相关接口全面升级，新版本查询源站防护接口详情请参考 [DescribeOriginACL](https://cloud.tencent.com/document/product/1552/120408)。
 
 <p style="color: red;">注意：自 2025 年 6 月 27 日起，旧版接口停止更新迭代，后续新增功能将仅在新版接口中提供。为避免在使用旧版接口时出现数据字段冲突，建议您尽早迁移到新版源站防护接口。</p>
@@ -2754,6 +2876,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: DeleteSecurityIPGroupResponse) => void
   ): Promise<DeleteSecurityIPGroupResponse> {
     return this.request("DeleteSecurityIPGroup", req, cb)
+  }
+
+  /**
+   * 查询推理服务列表，支持按服务名称、服务 ID、状态过滤，返回服务的配置、运行状态、实例数和推理访问地址等信息。
+   */
+  async DescribeInferenceServices(
+    req: DescribeInferenceServicesRequest,
+    cb?: (error: string, rep: DescribeInferenceServicesResponse) => void
+  ): Promise<DescribeInferenceServicesResponse> {
+    return this.request("DescribeInferenceServices", req, cb)
   }
 
   /**
@@ -2987,6 +3119,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
+   * 删除推理 API Token，删除后该 Token 立即失效，使用其访问推理服务的请求将无法通过鉴权。
+   */
+  async DeleteInferenceAPIToken(
+    req: DeleteInferenceAPITokenRequest,
+    cb?: (error: string, rep: DeleteInferenceAPITokenResponse) => void
+  ): Promise<DeleteInferenceAPITokenResponse> {
+    return this.request("DeleteInferenceAPIToken", req, cb)
+  }
+
+  /**
      * 查询别称域名信息列表。
 该功能仅企业版套餐支持，并且该功能当前仍在内测中，如需使用，请[联系我们](https://cloud.tencent.com/online-service?from=connect-us)。
      */
@@ -3065,6 +3207,16 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
     cb?: (error: string, rep: EdgeKVPutResponse) => void
   ): Promise<EdgeKVPutResponse> {
     return this.request("EdgeKVPut", req, cb)
+  }
+
+  /**
+   * 查询推理服务指定一次部署的日志，返回日志内容和产生时间，支持按时间范围检索、分页和排序。
+   */
+  async DescribeInferenceServiceDeploymentLogs(
+    req: DescribeInferenceServiceDeploymentLogsRequest,
+    cb?: (error: string, rep: DescribeInferenceServiceDeploymentLogsResponse) => void
+  ): Promise<DescribeInferenceServiceDeploymentLogsResponse> {
+    return this.request("DescribeInferenceServiceDeploymentLogs", req, cb)
   }
 
   /**

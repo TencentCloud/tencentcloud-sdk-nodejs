@@ -88,6 +88,16 @@ it("cfw.v20190904.ModifyResourceGroup", async function () {
     }
 })
 
+it("cfw.v20190904.ModifyBlockTop", async function () {
+    try {
+       const data = await client.ModifyBlockTop({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeResourceGroupNew", async function () {
     try {
        const data = await client.DescribeResourceGroupNew({})
@@ -218,6 +228,16 @@ it("cfw.v20190904.DescribeUnHandleEventTabList", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeCfwLogs", async function () {
+    try {
+       const data = await client.DescribeCfwLogs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.CreateNatFwInstance", async function () {
     try {
        const data = await client.CreateNatFwInstance({})
@@ -248,9 +268,9 @@ it("cfw.v20190904.UpdateCheckCcnNonDirectFlag", async function () {
     }
 })
 
-it("cfw.v20190904.ModifyBlockTop", async function () {
+it("cfw.v20190904.DescribeCfwRules", async function () {
     try {
-       const data = await client.ModifyBlockTop({})
+       const data = await client.DescribeCfwRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -288,6 +308,16 @@ it("cfw.v20190904.CreateBlockIgnoreRuleList", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeCfwAlerts", async function () {
+    try {
+       const data = await client.DescribeCfwAlerts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifyBlockIgnoreRuleNew", async function () {
     try {
        const data = await client.ModifyBlockIgnoreRuleNew({})
@@ -301,6 +331,16 @@ it("cfw.v20190904.ModifyBlockIgnoreRuleNew", async function () {
 it("cfw.v20190904.ModifyEdgeIpSwitch", async function () {
     try {
        const data = await client.ModifyEdgeIpSwitch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeCfwSwitches", async function () {
+    try {
+       const data = await client.DescribeCfwSwitches({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,6 +478,16 @@ it("cfw.v20190904.CreateSecurityGroupRules", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeSourceAsset", async function () {
+    try {
+       const data = await client.DescribeSourceAsset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.CreateNatFwDnatRule", async function () {
     try {
        const data = await client.CreateNatFwDnatRule({})
@@ -518,9 +568,9 @@ it("cfw.v20190904.CreateBlockIgnoreRuleNew", async function () {
     }
 })
 
-it("cfw.v20190904.DescribeSourceAsset", async function () {
+it("cfw.v20190904.CloseClusterNatFwSwitch", async function () {
     try {
-       const data = await client.DescribeSourceAsset({})
+       const data = await client.CloseClusterNatFwSwitch({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -848,6 +898,16 @@ it("cfw.v20190904.DescribeIPStatusList", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeCfwAssets", async function () {
+    try {
+       const data = await client.DescribeCfwAssets({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifyNatSequenceRules", async function () {
     try {
        const data = await client.ModifyNatSequenceRules({})
@@ -928,9 +988,9 @@ it("cfw.v20190904.DeleteBlockIgnoreRuleList", async function () {
     }
 })
 
-it("cfw.v20190904.SetNatFwEip", async function () {
+it("cfw.v20190904.DescribeCfwStatusMonitor", async function () {
     try {
-       const data = await client.SetNatFwEip({})
+       const data = await client.DescribeCfwStatusMonitor({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1168,9 +1228,9 @@ it("cfw.v20190904.DescribeNatFwInstance", async function () {
     }
 })
 
-it("cfw.v20190904.CloseClusterNatFwSwitch", async function () {
+it("cfw.v20190904.DescribeCfwRiskOverview", async function () {
     try {
-       const data = await client.CloseClusterNatFwSwitch({})
+       const data = await client.DescribeCfwRiskOverview({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1201,6 +1261,16 @@ it("cfw.v20190904.CreateNatFwInstanceWithDomain", async function () {
 it("cfw.v20190904.CreateAcRules", async function () {
     try {
        const data = await client.CreateAcRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeCfwRuleOptimization", async function () {
+    try {
+       const data = await client.DescribeCfwRuleOptimization({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1261,6 +1331,26 @@ it("cfw.v20190904.DescribeIpsModeSwitch", async function () {
 it("cfw.v20190904.DescribeAddressTemplateList", async function () {
     try {
        const data = await client.DescribeAddressTemplateList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.SetNatFwEip", async function () {
+    try {
+       const data = await client.SetNatFwEip({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DescribeCfwAnalysisData", async function () {
+    try {
+       const data = await client.DescribeCfwAnalysisData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

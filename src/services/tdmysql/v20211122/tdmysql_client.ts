@@ -27,6 +27,7 @@ import {
   DescribeDBParametersRequest,
   ModifyInstanceNetworkResponse,
   ModifyInstanceSSLStatusResponse,
+  DescribeDBEnginesRequest,
   RestartDBInstancesResponse,
   DescribeSlowLogsRequest,
   ModifyInstanceNameRequest,
@@ -57,8 +58,9 @@ import {
   NodeInfo,
   DescribeSpecsResponse,
   ModifyDBInstanceSecurityGroupsResponse,
-  CreateCloneInstanceResponse,
+  DescribeDBSArchiveLogsResponse,
   ModifyUserPrivilegesResponse,
+  DBEngineInfo,
   DescribeSlowLogsResponse,
   CreateDBSBackupResponse,
   BackupSetsReqFilter,
@@ -98,7 +100,7 @@ import {
   SecurityGroup,
   DeleteUsersRequest,
   ModifyUserPrivilegesRequest,
-  DescribeDBSArchiveLogsResponse,
+  CreateCloneInstanceResponse,
   DescribeDatabaseObjectsResponse,
   DescribeMaintenanceWindowResponse,
   InstanceNode,
@@ -133,6 +135,7 @@ import {
   ModifyDBSBackupSetCommentResponse,
   AutoScalingConfig,
   DatabaseProcedure,
+  DescribeDBEnginesResponse,
   ModifyAutoRenewFlagRequest,
   ResetUsersPasswordResponse,
   CreateDBSBackupRequest,
@@ -255,6 +258,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCloneInstanceResponse) => void
   ): Promise<CreateCloneInstanceResponse> {
     return this.request("CreateCloneInstance", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDBEngines）用于获取DB引擎版本列表
+   */
+  async DescribeDBEngines(
+    req?: DescribeDBEnginesRequest,
+    cb?: (error: string, rep: DescribeDBEnginesResponse) => void
+  ): Promise<DescribeDBEnginesResponse> {
+    return this.request("DescribeDBEngines", req, cb)
   }
 
   /**

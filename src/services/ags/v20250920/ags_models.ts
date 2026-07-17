@@ -909,11 +909,11 @@ export interface UpdateSandboxToolResponse {
  */
 export interface VPCConfig {
   /**
-   * VPC子网ID列表
+   * <p>VPC子网ID列表</p>
    */
   SubnetIds?: Array<string>
   /**
-   * 安全组ID列表
+   * <p>安全组ID列表</p>
    */
   SecurityGroupIds?: Array<string>
 }

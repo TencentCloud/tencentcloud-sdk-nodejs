@@ -19,15 +19,18 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   ModifyEWRuleStatusResponse,
-  ModifyFwGroupSwitchRequest,
+  DescribeCfwStatusMonitorRequest,
   FwDeploy,
   CreateAlertCenterIsolateResponse,
   NatClusterInfo,
+  DescribeCfwSwitchesRequest,
   DescribeNDRAssetIdentificationListResponse,
   ModifyAclRuleRequest,
+  DescribeCfwAnalysisDataResponse,
   DescribeAclRuleResponse,
   DescribeNatFwInstanceWithRegionResponse,
   DescribeFwGroupInstanceInfoRequest,
+  DescribeCfwRulesRequest,
   DeleteNatFwInstanceResponse,
   SearchLogResponse,
   ModifySecurityGroupRuleRequest,
@@ -62,6 +65,7 @@ import {
   ModifyBlockIgnoreListRequest,
   ModifyBlockIgnoreRuleRequest,
   DescribeEnterpriseSGRuleProgressRequest,
+  DescribeCfwSwitchesResponse,
   DescribeNatFwInstancesInfoRequest,
   DescribeTableStatusRequest,
   ModifyAddressTemplateResponse,
@@ -77,7 +81,7 @@ import {
   ScanResultInfo,
   DeleteBlockIgnoreRuleListRequest,
   SyncFwOperateResponse,
-  AddVpcAcRuleResponse,
+  DescribeCfwRiskOverviewResponse,
   CreateNatFwDnatRuleRequest,
   CreateAlertCenterRuleRequest,
   RemoveEnterpriseSecurityGroupRuleRequest,
@@ -93,9 +97,11 @@ import {
   DeleteNatFwDnatRuleResponse,
   ModifyVpcAcRuleResponse,
   ModifyBlockIgnoreRuleNewRequest,
+  DescribeCfwRiskOverviewRequest,
   RemoveNatAcRuleResponse,
   CustomWhiteRule,
   DescribeFwEdgeIpsResponse,
+  DescribeCfwLogsRequest,
   CcnSwitchInfo,
   SetNatFwEipRequest,
   DescribeTLogIpListResponse,
@@ -112,6 +118,7 @@ import {
   TLogInfo,
   DescribeLogsResponse,
   DescribeClusterVpcFwSwitchsRequest,
+  DescribeCfwAlertsRequest,
   DescribeSerialRegionResponse,
   DeleteAddressTemplateResponse,
   DescribeCfwEipsResponse,
@@ -142,14 +149,17 @@ import {
   DescribeTLogInfoResponse,
   PolicyRoutePreCheckReport,
   NatFwInstance,
+  DescribeCfwLogsResponse,
   ModifyAllPublicIPSwitchStatusResponse,
   BanAndAllowRuleDel,
+  DescribeCfwAlertsResponse,
   SecurityGroupRule,
   ModifySecurityGroupItemRuleStatusResponse,
   LogInfo,
   DeleteBlockIgnoreRuleListResponse,
   DescribeNDRAssetIdentificationListRequest,
   DescribeNatCcnFwSwitchRequest,
+  DescribeCfwAnalysisDataRequest,
   AcListsData,
   SequenceData,
   DescribeSwitchErrorRequest,
@@ -172,6 +182,7 @@ import {
   AddEnterpriseSecurityGroupRulesResponse,
   DescribeCfwInsStatusResponse,
   DeleteResourceGroupRequest,
+  ModifyFwGroupSwitchRequest,
   CreateAddressTemplateResponse,
   CreateNatFwDnatRuleResponse,
   DescribeResourceGroupNewResponse,
@@ -208,6 +219,7 @@ import {
   CommonIdName,
   DescribeCcnInstanceRegionStatusResponse,
   RemoveVpcAcRuleResponse,
+  DescribeLogsRequest,
   ModifySecurityGroupRuleResponse,
   DescribeSwitchErrorResponse,
   MultiTopicSearchInformation,
@@ -215,8 +227,9 @@ import {
   DescribeNatFwSwitchRequest,
   StorageHistogram,
   DescribeAddressTemplateListResponse,
-  DescribeLogsRequest,
+  CfwStatusMonitorFilter,
   ModifyAssetSyncResponse,
+  DescribeCfwRuleOptimizationResponse,
   ModifyClusterNatFwSwitchResponse,
   DescribeRuleOverviewResponse,
   VpcFwInstanceInfo,
@@ -225,6 +238,7 @@ import {
   DescribeSourceAssetResponse,
   ModifyNatFwVpcDnsSwitchRequest,
   DeleteBlockIgnoreRuleNewResponse,
+  DescribeCfwStatusMonitorResponse,
   ModifyEdgeIpSwitchRequest,
   RuleChangeItem,
   CommonIdNameStatus,
@@ -253,6 +267,7 @@ import {
   DescribeCfwInsStatusRequest,
   LogItem,
   SwitchError,
+  DescribeCfwRuleOptimizationRequest,
   StorageHistogramShow,
   IntrusionDefenseRule,
   DescribeLogStorageStatisticRequest,
@@ -297,6 +312,7 @@ import {
   DnsVpcSwitch,
   ModifyClusterFwBypassRequest,
   NatFwSwitchDetailS,
+  DescribeCfwAssetsRequest,
   DescribeNatFwSwitchResponse,
   ModifyAllRuleStatusRequest,
   ModifyVpcFwGroupResponse,
@@ -325,10 +341,12 @@ import {
   ModifyBlockIgnoreListResponse,
   RemoveAcRuleResponse,
   DescribeCcnVpcFwPolicyLimitResponse,
+  AddVpcAcRuleResponse,
   ModifySequenceRulesRequest,
   DescribeEnterpriseSecurityGroupRuleResponse,
   ClusterFwPreAccessCheckStage,
   ModifyNatFwReSelectResponse,
+  DescribeCfwAssetsResponse,
   DescribeVpcAcRuleRequest,
   AddAclRuleResponse,
   CreateAlertCenterIsolateRequest,
@@ -356,7 +374,7 @@ import {
   ExportLogsOfflineRequest,
   DescribeUnHandleEventTabListResponse,
   SerialRegionInfo,
-  DescribeNatFwInstancesInfoResponse,
+  ModifyEnterpriseSecurityGroupRuleResponse,
   ModifySecurityGroupSequenceRulesResponse,
   DescribeBlockByIpTimesListRequest,
   RemoveEnterpriseSecurityGroupRuleResponse,
@@ -368,6 +386,7 @@ import {
   ModifyEdgeIpSwitchResponse,
   UpdateCheckCcnNonDirectFlagRequest,
   DeleteNatFwInstanceRequest,
+  DescribeCfwRulesResponse,
   SetNatFwDnatRuleResponse,
   VpcFwInstanceShow,
   Column,
@@ -400,7 +419,7 @@ import {
   DescribeNatFwClusterRegionStatusResponse,
   ModifyAcRuleRequest,
   IntArray,
-  ModifyEnterpriseSecurityGroupRuleResponse,
+  DescribeNatFwInstancesInfoResponse,
   AddNatAcRuleResponse,
   DescribeResourceGroupRequest,
   NatFwEipsInfo,
@@ -488,6 +507,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: ModifyResourceGroupResponse) => void
   ): Promise<ModifyResourceGroupResponse> {
     return this.request("ModifyResourceGroup", req, cb)
+  }
+
+  /**
+   * ModifyBlockTop取消置顶接口
+   */
+  async ModifyBlockTop(
+    req: ModifyBlockTopRequest,
+    cb?: (error: string, rep: ModifyBlockTopResponse) => void
+  ): Promise<ModifyBlockTopResponse> {
+    return this.request("ModifyBlockTop", req, cb)
   }
 
   /**
@@ -621,6 +650,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 查询当前租户防火墙日志。分页只使用 Response.Data 内的 HasMore / NextToken。
+   */
+  async DescribeCfwLogs(
+    req: DescribeCfwLogsRequest,
+    cb?: (error: string, rep: DescribeCfwLogsResponse) => void
+  ): Promise<DescribeCfwLogsResponse> {
+    return this.request("DescribeCfwLogs", req, cb)
+  }
+
+  /**
    * 创建NAT防火墙实例（Region参数必填）
    */
   async CreateNatFwInstance(
@@ -651,13 +690,13 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * ModifyBlockTop取消置顶接口
+   * 查询当前租户防火墙规则配置。覆盖互联网边界、NAT、VPC、企业安全组，以及入侵防御 intrusion_prevention 的 blocklist、whitelist、isolate 三类有效列表。结果在 Response.Data 的 JSON 字符串中。
    */
-  async ModifyBlockTop(
-    req: ModifyBlockTopRequest,
-    cb?: (error: string, rep: ModifyBlockTopResponse) => void
-  ): Promise<ModifyBlockTopResponse> {
-    return this.request("ModifyBlockTop", req, cb)
+  async DescribeCfwRules(
+    req: DescribeCfwRulesRequest,
+    cb?: (error: string, rep: DescribeCfwRulesResponse) => void
+  ): Promise<DescribeCfwRulesResponse> {
+    return this.request("DescribeCfwRules", req, cb)
   }
 
   /**
@@ -691,6 +730,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 查询当前租户防火墙聚合告警事件。Response.Data 内 total 表示聚合告警事件数；alerts[].occurrence_count 表示单个聚合告警事件的告警发生次数/命中次数。
+   */
+  async DescribeCfwAlerts(
+    req: DescribeCfwAlertsRequest,
+    cb?: (error: string, rep: DescribeCfwAlertsResponse) => void
+  ): Promise<DescribeCfwAlertsResponse> {
+    return this.request("DescribeCfwAlerts", req, cb)
+  }
+
+  /**
    * 编辑单条入侵防御封禁列表、放通列表规则（新）
    */
   async ModifyBlockIgnoreRuleNew(
@@ -708,6 +757,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: ModifyEdgeIpSwitchResponse) => void
   ): Promise<ModifyEdgeIpSwitchResponse> {
     return this.request("ModifyEdgeIpSwitch", req, cb)
+  }
+
+  /**
+   * 查询当前租户防火墙防护开关总览。结果在 Response.Data 的 JSON 字符串中。本接口没有自定义业务入参，不支持过滤、排序或分页。
+   */
+  async DescribeCfwSwitches(
+    req?: DescribeCfwSwitchesRequest,
+    cb?: (error: string, rep: DescribeCfwSwitchesResponse) => void
+  ): Promise<DescribeCfwSwitchesResponse> {
+    return this.request("DescribeCfwSwitches", req, cb)
   }
 
   /**
@@ -841,6 +900,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * DescribeSourceAsset-查询全部资产信息
+   */
+  async DescribeSourceAsset(
+    req: DescribeSourceAssetRequest,
+    cb?: (error: string, rep: DescribeSourceAssetResponse) => void
+  ): Promise<DescribeSourceAssetResponse> {
+    return this.request("DescribeSourceAsset", req, cb)
+  }
+
+  /**
    * 创建Nat防火墙Dnat规则
    */
   async CreateNatFwDnatRule(
@@ -921,13 +990,13 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * DescribeSourceAsset-查询全部资产信息
+   * 关闭NAT CCN集群模式防火墙开关
    */
-  async DescribeSourceAsset(
-    req: DescribeSourceAssetRequest,
-    cb?: (error: string, rep: DescribeSourceAssetResponse) => void
-  ): Promise<DescribeSourceAssetResponse> {
-    return this.request("DescribeSourceAsset", req, cb)
+  async CloseClusterNatFwSwitch(
+    req: CloseClusterNatFwSwitchRequest,
+    cb?: (error: string, rep: CloseClusterNatFwSwitchResponse) => void
+  ): Promise<CloseClusterNatFwSwitchResponse> {
+    return this.request("CloseClusterNatFwSwitch", req, cb)
   }
 
   /**
@@ -1254,6 +1323,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * 查询当前租户防火墙纳管资产。默认查询主机资产；仅明确需要 VPC 或子网时传 AssetType。结果在 Response.Data 的 JSON 字符串中。
+   */
+  async DescribeCfwAssets(
+    req: DescribeCfwAssetsRequest,
+    cb?: (error: string, rep: DescribeCfwAssetsResponse) => void
+  ): Promise<DescribeCfwAssetsResponse> {
+    return this.request("DescribeCfwAssets", req, cb)
+  }
+
+  /**
    * NAT防火墙规则快速排序
    */
   async ModifyNatSequenceRules(
@@ -1334,13 +1413,13 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 设置防火墙实例弹性公网ip，目前仅支持新增模式的防火墙实例
+   * 查询状态监控场景。Op=describe_scene 用于发现可用场景、指标、视角和二级下拉 available_options；Op=fetch_scene 用于拉取具体场景快照，结果在 Response.Data 的 JSON 字符串中。
    */
-  async SetNatFwEip(
-    req: SetNatFwEipRequest,
-    cb?: (error: string, rep: SetNatFwEipResponse) => void
-  ): Promise<SetNatFwEipResponse> {
-    return this.request("SetNatFwEip", req, cb)
+  async DescribeCfwStatusMonitor(
+    req: DescribeCfwStatusMonitorRequest,
+    cb?: (error: string, rep: DescribeCfwStatusMonitorResponse) => void
+  ): Promise<DescribeCfwStatusMonitorResponse> {
+    return this.request("DescribeCfwStatusMonitor", req, cb)
   }
 
   /**
@@ -1574,13 +1653,13 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 关闭NAT CCN集群模式防火墙开关
+   * 查询当前租户风险中心未处理风险概览。默认查询最近 7 天；自定义时间范围需同时传 StartTime 和 EndTime。结果在 Response.Data 的 JSON 字符串中。
    */
-  async CloseClusterNatFwSwitch(
-    req: CloseClusterNatFwSwitchRequest,
-    cb?: (error: string, rep: CloseClusterNatFwSwitchResponse) => void
-  ): Promise<CloseClusterNatFwSwitchResponse> {
-    return this.request("CloseClusterNatFwSwitch", req, cb)
+  async DescribeCfwRiskOverview(
+    req?: DescribeCfwRiskOverviewRequest,
+    cb?: (error: string, rep: DescribeCfwRiskOverviewResponse) => void
+  ): Promise<DescribeCfwRiskOverviewResponse> {
+    return this.request("DescribeCfwRiskOverview", req, cb)
   }
 
   /**
@@ -1611,6 +1690,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: CreateAcRulesResponse) => void
   ): Promise<CreateAcRulesResponse> {
     return this.request("CreateAcRules", req, cb)
+  }
+
+  /**
+   * 查询当前租户防火墙规则优化建议。只读分析，不修改规则；Action 名保持单数 RuleOptimization。结果在 Response.Data 的 JSON 字符串中。
+   */
+  async DescribeCfwRuleOptimization(
+    req: DescribeCfwRuleOptimizationRequest,
+    cb?: (error: string, rep: DescribeCfwRuleOptimizationResponse) => void
+  ): Promise<DescribeCfwRuleOptimizationResponse> {
+    return this.request("DescribeCfwRuleOptimization", req, cb)
   }
 
   /**
@@ -1671,6 +1760,26 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: DescribeAddressTemplateListResponse) => void
   ): Promise<DescribeAddressTemplateListResponse> {
     return this.request("DescribeAddressTemplateList", req, cb)
+  }
+
+  /**
+   * 设置防火墙实例弹性公网ip，目前仅支持新增模式的防火墙实例
+   */
+  async SetNatFwEip(
+    req: SetNatFwEipRequest,
+    cb?: (error: string, rep: SetNatFwEipResponse) => void
+  ): Promise<SetNatFwEipResponse> {
+    return this.request("SetNatFwEip", req, cb)
+  }
+
+  /**
+   * 查询当前租户防火墙分析报告数据。按分析场景返回整组分析结果，结果在 Response.Data 的 JSON 字符串中。
+   */
+  async DescribeCfwAnalysisData(
+    req: DescribeCfwAnalysisDataRequest,
+    cb?: (error: string, rep: DescribeCfwAnalysisDataResponse) => void
+  ): Promise<DescribeCfwAnalysisDataResponse> {
+    return this.request("DescribeCfwAnalysisData", req, cb)
   }
 
   /**
