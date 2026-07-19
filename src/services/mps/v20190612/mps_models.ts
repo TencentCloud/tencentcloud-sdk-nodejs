@@ -3899,49 +3899,14 @@ export interface TerrorismImgReviewTemplateInfoForUpdate {
 }
 
 /**
- * ModifyTranscodeTemplate请求参数结构体
+ * type FailOverOption struct 
+{ FailOverType string json:"FailOverType" // 新增 冷/热备 COLDSTANDBY、HOTSTANDBY }
  */
-export interface ModifyTranscodeTemplateRequest {
+export interface FailOverOption {
   /**
-   * <p>转码模板唯一标识。</p>
+   * 热备
    */
-  Definition: number
-  /**
-   * <p>封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。</p>
-   */
-  Container?: string
-  /**
-   * <p>转码模板名称，长度限制：64 个字符。</p>
-   */
-  Name?: string
-  /**
-   * <p>模板描述信息，长度限制：256 个字符。</p>
-   */
-  Comment?: string
-  /**
-   * <p>是否去除视频数据，可选值：</p><li>0：保留</li><li>1：去除</li>
-   */
-  RemoveVideo?: number
-  /**
-   * <p>是否去除音频数据，可选值：</p><li>0：保留</li><li>1：去除</li>
-   */
-  RemoveAudio?: number
-  /**
-   * <p>视频流配置参数。</p>
-   */
-  VideoTemplate?: VideoTemplateInfoForUpdate
-  /**
-   * <p>音频流配置参数。</p>
-   */
-  AudioTemplate?: AudioTemplateInfoForUpdate
-  /**
-   * <p>极速高清转码参数。</p>
-   */
-  TEHDConfig?: TEHDConfigForUpdate
-  /**
-   * <p>音视频增强参数。</p>
-   */
-  EnhanceConfig?: EnhanceConfig
+  FailOverType?: string
 }
 
 /**
@@ -4336,6 +4301,24 @@ export interface CreateStreamLinkEventRequest {
    * 事件描述。
    */
   Description?: string
+}
+
+/**
+ * token 的用量
+ */
+export interface TokensUsage {
+  /**
+   * <p>输入token量</p>
+   */
+  InputTokens?: number
+  /**
+   * <p>输出token量</p>
+   */
+  OutputTokens?: number
+  /**
+   * <p>总token量，一般是输入+输出</p>
+   */
+  TotalTokens?: number
 }
 
 /**
@@ -5371,6 +5354,42 @@ export interface CreateAigcAudioTaskResponse {
 }
 
 /**
+ * 智能擦除任务
+ */
+export interface SmartEraseTaskInput {
+  /**
+   * 智能擦除模板id。
+   */
+  Definition?: number
+  /**
+   * 智能擦除自定义参数，当 Definition 填 0 时有效。 该参数用于高度定制场景，建议您优先使用 Definition 指定智能擦除参数。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RawParameter?: RawSmartEraseParameter
+  /**
+   * 智能擦除自定义参数，当 Definition 不填 0 时有效。 当填写了该结构中的部分擦除参数时，将使用填写的参数覆盖智能擦除模板中的参数。 该参数用于高度定制场景，建议您仅使用 Definition 指定智能擦除参数。
+   */
+  OverrideParameter?: OverrideEraseParameter
+  /**
+   * 文件的目标存储，不填则继承上层的 OutputStorage 值。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputStorage?: TaskOutputStorage
+  /**
+   * 文件的输出路径，可以为相对路径或者绝对路径。
+若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。
+相对路径示例：
+<li>文件名_{变量名}.{format}</li>
+<li>文件名.{format}</li>
+绝对路径示例：
+<li>/自定义路径/文件名_{变量名}.{format}</li>
+
+**注意**：目前不支持`BatchProcessMedia`接口。
+   */
+  OutputObjectPath?: string
+}
+
+/**
  * RecognizeMediaForZhiXue请求参数结构体
  */
 export interface RecognizeMediaForZhiXueRequest {
@@ -5466,6 +5485,52 @@ export interface AiDramaInput {
    * <p>输出视频分辨率</p><p>枚举值：</p><ul><li>720p： 720p</li><li>1080p： 1080p</li></ul><p>默认值：720p</p>
    */
   Resolution: string
+}
+
+/**
+ * ModifyTranscodeTemplate请求参数结构体
+ */
+export interface ModifyTranscodeTemplateRequest {
+  /**
+   * <p>转码模板唯一标识。</p>
+   */
+  Definition: number
+  /**
+   * <p>封装格式，可选值：mp4、flv、hls、mp3、flac、ogg、m4a、wav。其中，mp3、flac、ogg、m4a、wav 为纯音频文件。</p>
+   */
+  Container?: string
+  /**
+   * <p>转码模板名称，长度限制：64 个字符。</p>
+   */
+  Name?: string
+  /**
+   * <p>模板描述信息，长度限制：256 个字符。</p>
+   */
+  Comment?: string
+  /**
+   * <p>是否去除视频数据，可选值：</p><li>0：保留</li><li>1：去除</li>
+   */
+  RemoveVideo?: number
+  /**
+   * <p>是否去除音频数据，可选值：</p><li>0：保留</li><li>1：去除</li>
+   */
+  RemoveAudio?: number
+  /**
+   * <p>视频流配置参数。</p>
+   */
+  VideoTemplate?: VideoTemplateInfoForUpdate
+  /**
+   * <p>音频流配置参数。</p>
+   */
+  AudioTemplate?: AudioTemplateInfoForUpdate
+  /**
+   * <p>极速高清转码参数。</p>
+   */
+  TEHDConfig?: TEHDConfigForUpdate
+  /**
+   * <p>音视频增强参数。</p>
+   */
+  EnhanceConfig?: EnhanceConfig
 }
 
 /**
@@ -8043,39 +8108,30 @@ export interface AsrFullTextConfigureInfoForUpdate {
 }
 
 /**
- * 智能擦除任务
+ * 媒体质检任务结果类型
  */
-export interface SmartEraseTaskInput {
+export interface ScheduleExecRuleTaskResult {
   /**
-   * 智能擦除模板id。
+   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
    */
-  Definition?: number
+  Status?: string
   /**
-   * 智能擦除自定义参数，当 Definition 填 0 时有效。 该参数用于高度定制场景，建议您优先使用 Definition 指定智能擦除参数。
+   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   */
+  ErrCodeExt?: string
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 条件判断任务的输入。
+   */
+  Input?: ExecRulesTask
+  /**
+   * 条件判断任务的输出。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RawParameter?: RawSmartEraseParameter
-  /**
-   * 智能擦除自定义参数，当 Definition 不填 0 时有效。 当填写了该结构中的部分擦除参数时，将使用填写的参数覆盖智能擦除模板中的参数。 该参数用于高度定制场景，建议您仅使用 Definition 指定智能擦除参数。
-   */
-  OverrideParameter?: OverrideEraseParameter
-  /**
-   * 文件的目标存储，不填则继承上层的 OutputStorage 值。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OutputStorage?: TaskOutputStorage
-  /**
-   * 文件的输出路径，可以为相对路径或者绝对路径。
-若需定义输出路径，路径需以`.{format}`结尾。变量名请参考 [文件名变量说明](https://cloud.tencent.com/document/product/862/37039)。
-相对路径示例：
-<li>文件名_{变量名}.{format}</li>
-<li>文件名.{format}</li>
-绝对路径示例：
-<li>/自定义路径/文件名_{变量名}.{format}</li>
-
-**注意**：目前不支持`BatchProcessMedia`接口。
-   */
-  OutputObjectPath?: string
+  Output?: ExecRuleTaskData
 }
 
 /**
@@ -11394,30 +11450,21 @@ export interface RecognizeMediaForZhiXueResponse {
 }
 
 /**
- * 媒体质检任务结果类型
+ * EmbeddingData请求参数结构体
  */
-export interface ScheduleExecRuleTaskResult {
+export interface EmbeddingDataRequest {
   /**
-   * 任务状态，有 PROCESSING，SUCCESS 和 FAIL 三种。
+   * <p>embedding 的模型，现在只支持 text_embedding_v1</p><p>枚举值：</p><ul><li>text_embedding_v1： 文本embedding的模型，可以填写Prompt</li></ul>
    */
-  Status?: string
+  Model: string
   /**
-   * 错误码，空字符串表示成功，其他值表示失败，取值请参考 [媒体处理类错误码](https://cloud.tencent.com/document/product/862/50369#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) 列表。
+   * <p>embedding的输入</p>
    */
-  ErrCodeExt?: string
+  Files: Array<EmbeddingData>
   /**
-   * 错误信息。
+   * <p>embedding 的输入prompt</p>
    */
-  Message?: string
-  /**
-   * 条件判断任务的输入。
-   */
-  Input?: ExecRulesTask
-  /**
-   * 条件判断任务的输出。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Output?: ExecRuleTaskData
+  Prompt?: string
 }
 
 /**
@@ -13250,57 +13297,17 @@ export interface LiveSmartSubtitlesTaskInput {
 }
 
 /**
- * 媒体处理任务中的马赛克参数类型
+ * CreateDocToVideoTask请求参数结构体
  */
-export interface MosaicInput {
+export interface CreateDocToVideoTaskRequest {
   /**
-   * 原点位置，目前仅支持：
-<li>TopLeft：表示坐标原点位于视频图像左上角，马赛克原点为图片或文字的左上角。</li>
-默认值：TopLeft。
+   * <p>AIGC文档生成视频的输入信息</p>
    */
-  CoordinateOrigin?: string
+  Input: DocToVideoInput
   /**
-   * 马赛克原点距离视频图像坐标原点的水平位置。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示马赛克 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%；</li>
-<li>当字符串以 px 结尾，表示马赛克 XPos 为指定像素，如 100px 表示 XPos 为 100 像素。</li>
-默认值：0px。
+   * <p>用户cos信息，用于保存生成结果</p>
    */
-  XPos?: string
-  /**
-   * 马赛克原点距离视频图像坐标原点的垂直位置。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示马赛克 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%；</li>
-<li>当字符串以 px 结尾，表示马赛克 YPos 为指定像素，如 100px 表示 YPos 为 100 像素。</li>
-默认值：0px。
-   */
-  YPos?: string
-  /**
-   * 马赛克的宽度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示马赛克 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
-<li>当字符串以 px 结尾，表示马赛克 Width 单位为像素，如 100px 表示 Width 为 100 像素。</li>
-默认值：10%。
-   */
-  Width?: string
-  /**
-   * 马赛克的高度。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示马赛克 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
-<li>当字符串以 px 结尾，表示马赛克 Height 单位为像素，如 100px 表示 Height 为 100 像素。</li>
-默认值：10%。
-   */
-  Height?: string
-  /**
-   * 马赛克的起始时间偏移，单位：秒。不填或填0，表示马赛克从画面出现时开始显现。
-<li>不填或填0，表示马赛克从画面开始就出现；</li>
-<li>当数值大于0时（假设为 n），表示马赛克从画面开始的第 n 秒出现；</li>
-<li>当数值小于0时（假设为 -n），表示马赛克从离画面结束 n 秒前开始出现。</li>
-   */
-  StartTimeOffset?: number
-  /**
-   * 马赛克的结束时间偏移，单位：秒。
-<li>不填或填0，表示马赛克持续到画面结束；</li>
-<li>当数值大于0时（假设为 n），表示马赛克持续到第 n 秒时消失；</li>
-<li>当数值小于0时（假设为 -n），表示马赛克持续到离画面结束 n 秒前消失。</li>
-   */
-  EndTimeOffset?: number
+  CosInfo?: DocToVideoCosInfo
 }
 
 /**
@@ -13567,6 +13574,22 @@ export interface CreateQualityControlTemplateRequest {
    * 媒体质检抽检策略。
    */
   Strategy?: QualityControlStrategy
+}
+
+/**
+ * embedding 接口的输入:
+Type   数据类型,现在只支持text
+Data  数据内容，当前只支持为文本
+ */
+export interface EmbeddingData {
+  /**
+   * <p>数据类型</p><p>枚举值：</p><ul><li>text： 文本</li></ul>
+   */
+  Type: string
+  /**
+   * <p>数据内容，当Type 为text时，为文本字符串</p>
+   */
+  Data: string
 }
 
 /**
@@ -14185,6 +14208,44 @@ export interface BatchSubTaskResult {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SmartSubtitlesTaskResult?: BatchSmartSubtitlesResult
+}
+
+/**
+ * 内容审核涉黄/涉敏嫌疑片段
+ */
+export interface MediaContentReviewSegmentItem {
+  /**
+   * 嫌疑片段起始的偏移时间，单位：秒。
+   */
+  StartTimeOffset?: number
+  /**
+   * 嫌疑片段结束的偏移时间，单位：秒。
+   */
+  EndTimeOffset?: number
+  /**
+   * 嫌疑片段涉黄分数。
+   */
+  Confidence?: number
+  /**
+   * 嫌疑片段鉴黄结果标签。
+   */
+  Label?: string
+  /**
+   * 嫌疑片段鉴黄结果建议，取值范围：
+<li>pass。</li>
+<li>review。</li>
+<li>block。</li>
+   */
+  Suggestion?: string
+  /**
+   * 嫌疑图片 URL （图片不会永久存储，到达
+ PicUrlExpireTime 时间点后图片将被删除）。
+   */
+  Url?: string
+  /**
+   * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
+   */
+  PicUrlExpireTime?: string
 }
 
 /**
@@ -15400,6 +15461,60 @@ export interface BlindWatermarkConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoveBlindWatermark?: RemoveBlindWatermarkConfig
+}
+
+/**
+ * 媒体处理任务中的马赛克参数类型
+ */
+export interface MosaicInput {
+  /**
+   * 原点位置，目前仅支持：
+<li>TopLeft：表示坐标原点位于视频图像左上角，马赛克原点为图片或文字的左上角。</li>
+默认值：TopLeft。
+   */
+  CoordinateOrigin?: string
+  /**
+   * 马赛克原点距离视频图像坐标原点的水平位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示马赛克 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示马赛克 XPos 为指定像素，如 100px 表示 XPos 为 100 像素。</li>
+默认值：0px。
+   */
+  XPos?: string
+  /**
+   * 马赛克原点距离视频图像坐标原点的垂直位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示马赛克 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示马赛克 YPos 为指定像素，如 100px 表示 YPos 为 100 像素。</li>
+默认值：0px。
+   */
+  YPos?: string
+  /**
+   * 马赛克的宽度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示马赛克 Width 为视频宽度的百分比大小，如 10% 表示 Width 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示马赛克 Width 单位为像素，如 100px 表示 Width 为 100 像素。</li>
+默认值：10%。
+   */
+  Width?: string
+  /**
+   * 马赛克的高度。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示马赛克 Height 为视频高度的百分比大小，如 10% 表示 Height 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示马赛克 Height 单位为像素，如 100px 表示 Height 为 100 像素。</li>
+默认值：10%。
+   */
+  Height?: string
+  /**
+   * 马赛克的起始时间偏移，单位：秒。不填或填0，表示马赛克从画面出现时开始显现。
+<li>不填或填0，表示马赛克从画面开始就出现；</li>
+<li>当数值大于0时（假设为 n），表示马赛克从画面开始的第 n 秒出现；</li>
+<li>当数值小于0时（假设为 -n），表示马赛克从离画面结束 n 秒前开始出现。</li>
+   */
+  StartTimeOffset?: number
+  /**
+   * 马赛克的结束时间偏移，单位：秒。
+<li>不填或填0，表示马赛克持续到画面结束；</li>
+<li>当数值大于0时（假设为 n），表示马赛克持续到第 n 秒时消失；</li>
+<li>当数值小于0时（假设为 -n），表示马赛克持续到离画面结束 n 秒前消失。</li>
+   */
+  EndTimeOffset?: number
 }
 
 /**
@@ -17342,6 +17457,48 @@ export interface ModifyAIRecognitionTemplateRequest {
 }
 
 /**
+ * AIGC 文档生成视频输入
+ */
+export interface DocToVideoInput {
+  /**
+   * <p>用于生成视频的文档链接。</p><p>支持的文档类型：pdf、pptx、docx、png、jpg<br>文档数量限制：3个<br>文档大小限制：10MB<br>文档页数限制：100页</p>
+   */
+  FileUrl: Array<string>
+  /**
+   * <p>用于生成视频的prompt信息。</p><p>prompt长度限制：2000字符。</p>
+   */
+  Prompt: string
+  /**
+   * <p>文档生成视频模型名称</p><p>默认值：Wand</p>
+   */
+  ModelName: string
+  /**
+   * <p>文档生成视频模型版本号</p><p>默认值：1.0</p>
+   */
+  ModelVersion: string
+  /**
+   * <p>生成视频的宽高比。</p><p>枚举值：</p><ul><li>16:9： 16:9</li><li>9:16： 9:16</li><li>1:1： 1:1</li></ul><p>默认值：16:9</p>
+   */
+  Ratio?: string
+  /**
+   * <p>生成视频的语言。</p><p>枚举值：</p><ul><li>zh： 中文</li><li>en： 英文</li><li>ja： 日语</li><li>ko： 韩语</li><li>ru： 俄语</li><li>fr： 法语</li><li>es： 西班牙语</li><li>de： 德语</li></ul><p>默认值：zh</p>
+   */
+  Language?: string
+  /**
+   * <p>生成视频的时长参考。</p><p>非准确的视频时长，仅供大模型参考生成。</p><p>取值范围：[15, 1200]</p><p>单位：秒</p>
+   */
+  ReferenceDuration?: number
+  /**
+   * <p>是否开启AI配音功能。</p><p>默认值：false</p>
+   */
+  EnableTTS?: boolean
+  /**
+   * <p>音色ID。仅开启AI配音功能时有效。</p>
+   */
+  VoiceId?: string
+}
+
+/**
  * ParseNotification返回参数结构体
  */
 export interface ParseNotificationResponse {
@@ -17817,17 +17974,17 @@ export interface OutputRISTSourceAddressResp {
 }
 
 /**
- * DetectVideoWatermark请求参数结构体
+ * CreateDocToVideoTask返回参数结构体
  */
-export interface DetectVideoWatermarkRequest {
+export interface CreateDocToVideoTaskResponse {
   /**
-   * <p>输入信息，当前仅支持 URL、COS</p>
+   * <p>任务id</p>
    */
-  InputInfo: MediaInputInfo
+  TaskId?: string
   /**
-   * <p>扩展参数，默认不填</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UserExtPara?: string
+  RequestId?: string
 }
 
 /**
@@ -21935,6 +22092,24 @@ export interface DescribeWordSamplesRequest {
 }
 
 /**
+ * cos信息，存储用户请求时填写的cos信息，用于存放结果
+ */
+export interface DocToVideoCosInfo {
+  /**
+   * <p>cos桶地域</p>
+   */
+  CosBucketRegion?: string
+  /**
+   * <p>cos桶名称</p>
+   */
+  CosBucketName?: string
+  /**
+   * <p>cos桶路径</p>
+   */
+  CosBucketPath?: string
+}
+
+/**
  * 外挂字幕。
  */
 export interface AddOnSubtitle {
@@ -22487,41 +22662,13 @@ export interface TaskSimpleInfo {
 }
 
 /**
- * 内容审核涉黄/涉敏嫌疑片段
+ * embedding 的结果
  */
-export interface MediaContentReviewSegmentItem {
+export interface EmbeddingResultItem {
   /**
-   * 嫌疑片段起始的偏移时间，单位：秒。
+   * <p>向量</p>
    */
-  StartTimeOffset?: number
-  /**
-   * 嫌疑片段结束的偏移时间，单位：秒。
-   */
-  EndTimeOffset?: number
-  /**
-   * 嫌疑片段涉黄分数。
-   */
-  Confidence?: number
-  /**
-   * 嫌疑片段鉴黄结果标签。
-   */
-  Label?: string
-  /**
-   * 嫌疑片段鉴黄结果建议，取值范围：
-<li>pass。</li>
-<li>review。</li>
-<li>block。</li>
-   */
-  Suggestion?: string
-  /**
-   * 嫌疑图片 URL （图片不会永久存储，到达
- PicUrlExpireTime 时间点后图片将被删除）。
-   */
-  Url?: string
-  /**
-   * 嫌疑图片 URL 失效时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/862/37710#52)。
-   */
-  PicUrlExpireTime?: string
+  Result?: Array<number>
 }
 
 /**
@@ -22940,6 +23087,20 @@ no_config：未配置。
 <li>VideoAudioEnhance（视频音频增强都含）</li>
    */
   EnhanceType?: string
+}
+
+/**
+ * DetectVideoWatermark请求参数结构体
+ */
+export interface DetectVideoWatermarkRequest {
+  /**
+   * <p>输入信息，当前仅支持 URL、COS</p>
+   */
+  InputInfo: MediaInputInfo
+  /**
+   * <p>扩展参数，默认不填</p>
+   */
+  UserExtPara?: string
 }
 
 /**
@@ -26595,14 +26756,21 @@ export interface DescribeOutputRTSPPullServerUrl {
 }
 
 /**
- * type FailOverOption struct 
-{ FailOverType string json:"FailOverType" // 新增 冷/热备 COLDSTANDBY、HOTSTANDBY }
+ * EmbeddingData返回参数结构体
  */
-export interface FailOverOption {
+export interface EmbeddingDataResponse {
   /**
-   * 热备
+   * <p>embedding 的结果</p>
    */
-  FailOverType?: string
+  Data?: Array<EmbeddingResultItem>
+  /**
+   * <p>embedding 的 token 用量</p>
+   */
+  Usage?: TokensUsage
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

@@ -556,6 +556,32 @@ export interface CountDataInfo {
 }
 
 /**
+ * RevokeShareDeviceFromUser请求参数结构体
+ */
+export interface RevokeShareDeviceFromUserRequest {
+  /**
+   * <p>应用 AppKey，用于解析 IotAppID 并完成签名校验</p>
+   */
+  AppKey: string
+  /**
+   * <p>产品 ID</p>
+   */
+  ProductId: string
+  /**
+   * <p>设备名</p>
+   */
+  DeviceName: string
+  /**
+   * <p>设备所有者 OpenID（必须已存在）</p>
+   */
+  OwnerOpenID: string
+  /**
+   * <p>被取消分享用户 OpenID（不存在视为已取消，幂等成功）</p>
+   */
+  ToOpenID: string
+}
+
+/**
  * DescribeCloudStoragePackageConsumeDetails请求参数结构体
  */
 export interface DescribeCloudStoragePackageConsumeDetailsRequest {
@@ -3866,25 +3892,13 @@ export interface DescribeFirmwareRequest {
 }
 
 /**
- * Talk设备激活信息。
+ * RevokeShareDeviceFromUser返回参数结构体
  */
-export interface TalkActivationInfo {
+export interface RevokeShareDeviceFromUserResponse {
   /**
-   * 设备ID，产品ID_设备名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DeviceId?: string
-  /**
-   * 设备激活状态，0：激活成功；60001：激活码类型不匹配；60002：激活码数量不足；60003：设备不存在；60004：产品不存在；60005：权限不足；60006：设备已激活；60007：无效的参数；60008：系统错误；60009：产品不是码音视频类型
-   */
-  ErrCode?: number
-  /**
-   * 激活错误信息
-   */
-  ErrMessage?: string
-  /**
-   * 过期时间，秒级时间戳
-   */
-  ExpireTime?: number
+  RequestId?: string
 }
 
 /**
@@ -5540,6 +5554,24 @@ export interface EventHistoryItem {
    * 事件的数据
    */
   Data?: string
+}
+
+/**
+ * ShareDeviceToUser返回参数结构体
+ */
+export interface ShareDeviceToUserResponse {
+  /**
+   * <p>Owner 的 UserID</p>
+   */
+  OwnerUserID?: string
+  /**
+   * <p>被分享用户的 UserID</p>
+   */
+  ToUserID?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8349,6 +8381,28 @@ export interface ListFirmwaresRequest {
 }
 
 /**
+ * Talk设备激活信息。
+ */
+export interface TalkActivationInfo {
+  /**
+   * 设备ID，产品ID_设备名称
+   */
+  DeviceId?: string
+  /**
+   * 设备激活状态，0：激活成功；60001：激活码类型不匹配；60002：激活码数量不足；60003：设备不存在；60004：产品不存在；60005：权限不足；60006：设备已激活；60007：无效的参数；60008：系统错误；60009：产品不是码音视频类型
+   */
+  ErrCode?: number
+  /**
+   * 激活错误信息
+   */
+  ErrMessage?: string
+  /**
+   * 过期时间，秒级时间戳
+   */
+  ExpireTime?: number
+}
+
+/**
  * PublishMessage请求参数结构体
  */
 export interface PublishMessageRequest {
@@ -10012,6 +10066,36 @@ export interface DescribeInstanceRequest {
    * 产品ID，-1 代表全部产品
    */
   ProductId?: string
+}
+
+/**
+ * ShareDeviceToUser请求参数结构体
+ */
+export interface ShareDeviceToUserRequest {
+  /**
+   * <p>应用 AppKey，用于解析 IotAppID 并完成签名校验</p>
+   */
+  AppKey: string
+  /**
+   * <p>产品 ID</p>
+   */
+  ProductId: string
+  /**
+   * <p>设备名</p>
+   */
+  DeviceName: string
+  /**
+   * <p>设备所有者 OpenID（必须已存在）</p>
+   */
+  OwnerOpenID: string
+  /**
+   * <p>被分享用户 OpenID（不存在则自动创建）</p>
+   */
+  ToOpenID: string
+  /**
+   * <p>被分享用户昵称（仅自动创建时使用）</p>
+   */
+  ToNickName?: string
 }
 
 /**

@@ -21,12 +21,15 @@ import {
   CreateFileSystemResponse,
   ModifyResourceTagsRequest,
   DescribeAccessRulesRequest,
+  CreateTrashConfigResponse,
+  TrashConfig,
   AccessRule,
   DescribeFileSystemResponse,
   AccessGroup,
   ModifyFileSystemResponse,
   ModifyFileSystemRequest,
   DescribeLifeCycleRulesRequest,
+  ModifyTrashConfigRequest,
   Summary,
   AssociateAccessGroupsRequest,
   ModifyAccessGroupRequest,
@@ -42,6 +45,7 @@ import {
   DescribeAccessGroupsRequest,
   DeleteAccessGroupResponse,
   ModifyLifeCycleRulesResponse,
+  Transition,
   DeleteMountPointResponse,
   CreateMountPointResponse,
   CreateFileSystemRequest,
@@ -59,31 +63,36 @@ import {
   DescribeAccessRulesResponse,
   DeleteLifeCycleRulesResponse,
   CreateRestoreTasksRequest,
-  Transition,
+  DescribeTrashConfigResponse,
   DescribeRestoreTasksResponse,
   DescribeLifeCycleRulesResponse,
   CreateAccessGroupResponse,
   DisassociateAccessGroupsResponse,
+  ModifyTrashConfigResponse,
   DeleteAccessRulesRequest,
   DeleteAccessRulesResponse,
   DescribeFileSystemsRequest,
+  DeleteTrashConfigResponse,
   DescribeResourceTagsRequest,
   ModifyResourceTagsResponse,
   LifeCycleRule,
   CreateAccessRulesRequest,
   DescribeAccessGroupResponse,
   MountPoint,
+  DescribeTrashConfigRequest,
   DescribeMountPointsResponse,
   DescribeRestoreTasksRequest,
   DescribeAccessGroupRequest,
   AssociateAccessGroupsResponse,
   ModifyAccessRulesResponse,
+  DeleteTrashConfigRequest,
   CreateLifeCycleRulesResponse,
   ModifyAccessGroupResponse,
   Tag,
   ModifyMountPointResponse,
   ModifyAccessRulesRequest,
   CreateAccessGroupRequest,
+  CreateTrashConfigRequest,
   DescribeMountPointResponse,
 } from "./chdfs_models"
 
@@ -104,6 +113,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateRestoreTasksResponse) => void
   ): Promise<CreateRestoreTasksResponse> {
     return this.request("CreateRestoreTasks", req, cb)
+  }
+
+  /**
+   * 删除回收站配置。
+   */
+  async DeleteTrashConfig(
+    req: DeleteTrashConfigRequest,
+    cb?: (error: string, rep: DeleteTrashConfigResponse) => void
+  ): Promise<DeleteTrashConfigResponse> {
+    return this.request("DeleteTrashConfig", req, cb)
   }
 
   /**
@@ -144,6 +163,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccessRulesResponse) => void
   ): Promise<DescribeAccessRulesResponse> {
     return this.request("DescribeAccessRules", req, cb)
+  }
+
+  /**
+   * 创建回收站配置。
+   */
+  async CreateTrashConfig(
+    req: CreateTrashConfigRequest,
+    cb?: (error: string, rep: CreateTrashConfigResponse) => void
+  ): Promise<CreateTrashConfigResponse> {
+    return this.request("CreateTrashConfig", req, cb)
   }
 
   /**
@@ -207,6 +236,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改回收站配置，需要指定回收站路径，数据保留时间、和状态。
+   */
+  async ModifyTrashConfig(
+    req: ModifyTrashConfigRequest,
+    cb?: (error: string, rep: ModifyTrashConfigResponse) => void
+  ): Promise<ModifyTrashConfigResponse> {
+    return this.request("ModifyTrashConfig", req, cb)
+  }
+
+  /**
    * 查看权限组列表。
    */
   async DescribeAccessGroups(
@@ -214,6 +253,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccessGroupsResponse) => void
   ): Promise<DescribeAccessGroupsResponse> {
     return this.request("DescribeAccessGroups", req, cb)
+  }
+
+  /**
+   * 通过文件系统ID查看回收站配置。
+   */
+  async DescribeTrashConfig(
+    req: DescribeTrashConfigRequest,
+    cb?: (error: string, rep: DescribeTrashConfigResponse) => void
+  ): Promise<DescribeTrashConfigResponse> {
+    return this.request("DescribeTrashConfig", req, cb)
   }
 
   /**

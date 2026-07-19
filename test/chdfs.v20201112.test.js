@@ -28,6 +28,16 @@ it("chdfs.v20201112.CreateRestoreTasks", async function () {
     }
 })
 
+it("chdfs.v20201112.DeleteTrashConfig", async function () {
+    try {
+       const data = await client.DeleteTrashConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("chdfs.v20201112.CreateLifeCycleRules", async function () {
     try {
        const data = await client.CreateLifeCycleRules({})
@@ -61,6 +71,16 @@ it("chdfs.v20201112.ModifyAccessRules", async function () {
 it("chdfs.v20201112.DescribeAccessRules", async function () {
     try {
        const data = await client.DescribeAccessRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("chdfs.v20201112.CreateTrashConfig", async function () {
+    try {
+       const data = await client.CreateTrashConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -128,9 +148,29 @@ it("chdfs.v20201112.ModifyLifeCycleRules", async function () {
     }
 })
 
+it("chdfs.v20201112.ModifyTrashConfig", async function () {
+    try {
+       const data = await client.ModifyTrashConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("chdfs.v20201112.DescribeAccessGroups", async function () {
     try {
        const data = await client.DescribeAccessGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("chdfs.v20201112.DescribeTrashConfig", async function () {
+    try {
+       const data = await client.DescribeTrashConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

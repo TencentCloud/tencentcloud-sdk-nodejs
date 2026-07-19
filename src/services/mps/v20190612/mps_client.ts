@@ -169,7 +169,7 @@ import {
   CreateProcessImageTemplateResponse,
   CreateInputRTMPPullSettings,
   TerrorismImgReviewTemplateInfoForUpdate,
-  ModifyTranscodeTemplateRequest,
+  FailOverOption,
   ModifyStreamLinkFlowRequest,
   EditMediaTaskInput,
   DescribeImageSpriteTemplatesRequest,
@@ -190,6 +190,7 @@ import {
   ScheduleTask,
   DescribeInputRISTSettings,
   CreateStreamLinkEventRequest,
+  TokensUsage,
   CreatePersonSampleRequest,
   ImageTaskInput,
   DescribeOutputHLSPullServerUrl,
@@ -237,10 +238,12 @@ import {
   CreateOutputSRTSettingsDestinations,
   CreateBlindWatermarkTemplateRequest,
   CreateAigcAudioTaskResponse,
+  SmartEraseTaskInput,
   RecognizeMediaForZhiXueRequest,
   MediaProcessTaskAdaptiveDynamicStreamingResult,
   OcrWordsConfigureInfoForUpdate,
   AiDramaInput,
+  ModifyTranscodeTemplateRequest,
   ModifyStreamLinkOutputInfoRequest,
   OverrideEraseParameter,
   TextWatermarkTemplateInput,
@@ -355,7 +358,7 @@ import {
   BatchProcessMediaResponse,
   LiveRecordResult,
   AsrFullTextConfigureInfoForUpdate,
-  SmartEraseTaskInput,
+  ScheduleExecRuleTaskResult,
   LiveRecordFile,
   DescribeStreamPackageActivateStateResponse,
   ComposeSourceMedia,
@@ -481,7 +484,7 @@ import {
   SpliceInsertInfo,
   SourceTag,
   RecognizeMediaForZhiXueResponse,
-  ScheduleExecRuleTaskResult,
+  EmbeddingDataRequest,
   AiSamplePerson,
   FlowStatistics,
   BatchSmartSubtitlesResult,
@@ -545,7 +548,7 @@ import {
   LiveAiParagraphInfo,
   OutputAddress,
   LiveSmartSubtitlesTaskInput,
-  MosaicInput,
+  CreateDocToVideoTaskRequest,
   LiveRecordTaskInput,
   ClipRangeInfo,
   AIAnalysisTemplateItem,
@@ -556,6 +559,7 @@ import {
   RawImageWatermarkInput,
   DeleteAIAnalysisTemplateResponse,
   CreateQualityControlTemplateRequest,
+  EmbeddingData,
   AigcAudioExtraParam,
   AiSampleTagOperation,
   RawSmartEraseParameter,
@@ -581,6 +585,7 @@ import {
   ImageWatermarkInputForUpdate,
   TextToSpeechAsyncResponse,
   BatchSubTaskResult,
+  MediaContentReviewSegmentItem,
   AigcStoreCosParam,
   DescribeDesignTaskResponse,
   CreateProjectRequest,
@@ -626,6 +631,7 @@ import {
   ImageSpriteTemplate,
   AiRecognitionTaskOcrFullTextSegmentTextItem,
   BlindWatermarkConfig,
+  MosaicInput,
   DeleteAsrHotwordsResponse,
   SmartSubtitleTaskAsrFullTextSegmentItem,
   QualityControlItem,
@@ -698,6 +704,7 @@ import {
   SmartSubtitleTemplateItem,
   CreateStreamLinkSecurityGroupResponse,
   ModifyAIRecognitionTemplateRequest,
+  DocToVideoInput,
   ParseNotificationResponse,
   RemoveBlindWatermarkConfig,
   ComposeImageOperation,
@@ -719,7 +726,7 @@ import {
   CreateSmartEraseTemplateResponse,
   MediaProcessTaskSampleSnapshotResult,
   OutputRISTSourceAddressResp,
-  DetectVideoWatermarkRequest,
+  CreateDocToVideoTaskResponse,
   ModifySmartSubtitleTemplateResponse,
   CreateVideoRedrawTaskRequest,
   S3OutputStorage,
@@ -879,6 +886,7 @@ import {
   DeleteWatermarkTemplateRequest,
   ComposeSubtitleItem,
   DescribeWordSamplesRequest,
+  DocToVideoCosInfo,
   AddOnSubtitle,
   AwsSQS,
   MediaSampleSnapshotItem,
@@ -896,7 +904,7 @@ import {
   ComposeImageItem,
   SubtitleEmbedConfig,
   TaskSimpleInfo,
-  MediaContentReviewSegmentItem,
+  EmbeddingResultItem,
   AiContentReviewResult,
   LiveActivityResult,
   CreateAigcImageTaskRequest,
@@ -908,6 +916,7 @@ import {
   DescribeStreamPackageSSAIUsageResponse,
   QualityControlStrategy,
   DescribeTranscodeTemplatesRequest,
+  DetectVideoWatermarkRequest,
   DescribeSmartSubtitleTemplatesResponse,
   LLMDetectionReport,
   DescribeUsageDataRequest,
@@ -1054,7 +1063,7 @@ import {
   DescribeStreamPackageLinearAssemblyChannelsResponse,
   StopStreamPackageLinearAssemblyChannelRequest,
   DescribeOutputRTSPPullServerUrl,
-  FailOverOption,
+  EmbeddingDataResponse,
   LowLightEnhanceConfig,
   DescribeMediaMetaDataRequest,
   DescribeImageTasksRequest,
@@ -2395,6 +2404,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 模型embedding 接口
+   */
+  async EmbeddingData(
+    req: EmbeddingDataRequest,
+    cb?: (error: string, rep: EmbeddingDataResponse) => void
+  ): Promise<EmbeddingDataResponse> {
+    return this.request("EmbeddingData", req, cb)
+  }
+
+  /**
    * 删除用户自定义数字水印模板。
    */
   async DeleteBlindWatermarkTemplate(
@@ -2904,13 +2923,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除编排
+   * 创建 AiGC 文档生成视频任务
    */
-  async DeleteSchedule(
-    req: DeleteScheduleRequest,
-    cb?: (error: string, rep: DeleteScheduleResponse) => void
-  ): Promise<DeleteScheduleResponse> {
-    return this.request("DeleteSchedule", req, cb)
+  async CreateDocToVideoTask(
+    req: CreateDocToVideoTaskRequest,
+    cb?: (error: string, rep: CreateDocToVideoTaskResponse) => void
+  ): Promise<CreateDocToVideoTaskResponse> {
+    return this.request("CreateDocToVideoTask", req, cb)
+  }
+
+  /**
+   * 删除用户自定义智能擦除模板。
+   */
+  async DeleteSmartEraseTemplate(
+    req: DeleteSmartEraseTemplateRequest,
+    cb?: (error: string, rep: DeleteSmartEraseTemplateResponse) => void
+  ): Promise<DeleteSmartEraseTemplateResponse> {
+    return this.request("DeleteSmartEraseTemplate", req, cb)
   }
 
   /**
@@ -3232,13 +3261,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除用户自定义智能擦除模板。
+   * 删除编排
    */
-  async DeleteSmartEraseTemplate(
-    req: DeleteSmartEraseTemplateRequest,
-    cb?: (error: string, rep: DeleteSmartEraseTemplateResponse) => void
-  ): Promise<DeleteSmartEraseTemplateResponse> {
-    return this.request("DeleteSmartEraseTemplate", req, cb)
+  async DeleteSchedule(
+    req: DeleteScheduleRequest,
+    cb?: (error: string, rep: DeleteScheduleResponse) => void
+  ): Promise<DeleteScheduleResponse> {
+    return this.request("DeleteSchedule", req, cb)
   }
 
   /**

@@ -128,6 +128,16 @@ it("iotexplorer.v20190423.RenewTWeSeeSubscription", async function () {
     }
 })
 
+it("iotexplorer.v20190423.RevokeShareDeviceFromUser", async function () {
+    try {
+       const data = await client.RevokeShareDeviceFromUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("iotexplorer.v20190423.DescribeTopicPolicy", async function () {
     try {
        const data = await client.DescribeTopicPolicy({})
@@ -1951,6 +1961,16 @@ it("iotexplorer.v20190423.PublishMessage", async function () {
 it("iotexplorer.v20190423.GenerateCloudStorageAIServiceTaskFileURL", async function () {
     try {
        const data = await client.GenerateCloudStorageAIServiceTaskFileURL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("iotexplorer.v20190423.ShareDeviceToUser", async function () {
+    try {
+       const data = await client.ShareDeviceToUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

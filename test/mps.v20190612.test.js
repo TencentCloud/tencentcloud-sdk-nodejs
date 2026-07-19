@@ -1298,6 +1298,16 @@ it("mps.v20190612.DescribeStreamPackageLinearAssemblyPrograms", async function (
     }
 })
 
+it("mps.v20190612.EmbeddingData", async function () {
+    try {
+       const data = await client.EmbeddingData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DeleteBlindWatermarkTemplate", async function () {
     try {
        const data = await client.DeleteBlindWatermarkTemplate({})
@@ -1778,9 +1788,19 @@ it("mps.v20190612.DescribeStreamLinkFlow", async function () {
     }
 })
 
-it("mps.v20190612.DeleteSchedule", async function () {
+it("mps.v20190612.CreateDocToVideoTask", async function () {
     try {
-       const data = await client.DeleteSchedule({})
+       const data = await client.CreateDocToVideoTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DeleteSmartEraseTemplate", async function () {
+    try {
+       const data = await client.DeleteSmartEraseTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2098,9 +2118,9 @@ it("mps.v20190612.BatchStopStreamLinkFlow", async function () {
     }
 })
 
-it("mps.v20190612.DeleteSmartEraseTemplate", async function () {
+it("mps.v20190612.DeleteSchedule", async function () {
     try {
-       const data = await client.DeleteSmartEraseTemplate({})
+       const data = await client.DeleteSchedule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

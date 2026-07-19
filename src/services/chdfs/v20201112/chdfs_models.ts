@@ -54,6 +54,38 @@ export interface DescribeAccessRulesRequest {
 }
 
 /**
+ * CreateTrashConfig返回参数结构体
+ */
+export interface CreateTrashConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 回收站配置
+ */
+export interface TrashConfig {
+  /**
+   * 文件系统ID
+   */
+  FileSystemId?: string
+  /**
+   * 数据保留时间（天）
+   */
+  ReservedDays?: number
+  /**
+   * 回收站配置状态（1：打开；2：关闭）
+   */
+  Status?: number
+  /**
+   * 回收站路径
+   */
+  Path?: string
+}
+
+/**
  * 权限规则
  */
 export interface AccessRule {
@@ -204,6 +236,24 @@ export interface DescribeLifeCycleRulesRequest {
    * 文件系统ID
    */
   FileSystemId: string
+}
+
+/**
+ * ModifyTrashConfig请求参数结构体
+ */
+export interface ModifyTrashConfigRequest {
+  /**
+   * 文件系统ID
+   */
+  FileSystemId: string
+  /**
+   * 数据保留时间（天）
+   */
+  ReservedDays?: number
+  /**
+   * 规则状态（1：打开；2：关闭）
+   */
+  Status?: number
 }
 
 /**
@@ -424,6 +474,20 @@ export interface ModifyLifeCycleRulesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 生命周期规则转换属性
+ */
+export interface Transition {
+  /**
+   * 触发时间（单位天）
+   */
+  Days: number
+  /**
+   * 转换类型（1：归档；2：删除；3：低频；4：深度归档；5：智能分层）
+   */
+  Type: number
 }
 
 /**
@@ -749,17 +813,17 @@ export interface CreateRestoreTasksRequest {
 }
 
 /**
- * 生命周期规则转换属性
+ * DescribeTrashConfig返回参数结构体
  */
-export interface Transition {
+export interface DescribeTrashConfigResponse {
   /**
-   * 触发时间（单位天）
+   * <p>回收站配置</p>
    */
-  Days: number
+  TrashConfig?: TrashConfig
   /**
-   * 转换类型（1：归档；2：删除；3：低频；4：深度归档；5：智能分层）
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Type: number
+  RequestId?: string
 }
 
 /**
@@ -823,6 +887,16 @@ export interface DisassociateAccessGroupsResponse {
 }
 
 /**
+ * ModifyTrashConfig返回参数结构体
+ */
+export interface ModifyTrashConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAccessRules请求参数结构体
  */
 export interface DeleteAccessRulesRequest {
@@ -850,6 +924,16 @@ export interface DescribeFileSystemsRequest {
    * 起始文件系统ID标记
    */
   FileSystemIdMarker?: string
+}
+
+/**
+ * DeleteTrashConfig返回参数结构体
+ */
+export interface DeleteTrashConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -969,6 +1053,16 @@ export interface MountPoint {
 }
 
 /**
+ * DescribeTrashConfig请求参数结构体
+ */
+export interface DescribeTrashConfigRequest {
+  /**
+   * <p>文件系统ID</p>
+   */
+  FileSystemId: string
+}
+
+/**
  * DescribeMountPoints返回参数结构体
  */
 export interface DescribeMountPointsResponse {
@@ -1024,6 +1118,16 @@ export interface ModifyAccessRulesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DeleteTrashConfig请求参数结构体
+ */
+export interface DeleteTrashConfigRequest {
+  /**
+   * 文件系统ID
+   */
+  FileSystemId: string
 }
 
 /**
@@ -1100,6 +1204,28 @@ export interface CreateAccessGroupRequest {
    * 权限组描述，默认为空字符串
    */
   Description?: string
+}
+
+/**
+ * CreateTrashConfig请求参数结构体
+ */
+export interface CreateTrashConfigRequest {
+  /**
+   * <p>文件系统ID</p>
+   */
+  FileSystemId: string
+  /**
+   * <p>数据保留时间（天）</p>
+   */
+  ReservedDays: number
+  /**
+   * <p>规则状态（1：打开；2：关闭）</p>
+   */
+  Status: number
+  /**
+   * <ol><li>字段为空表示开启普通用户回收站 </li><li>字段不为空表示开启HDFS原生回收站，且值必须为/user/* /.Trash</li></ol>
+   */
+  Path?: string
 }
 
 /**

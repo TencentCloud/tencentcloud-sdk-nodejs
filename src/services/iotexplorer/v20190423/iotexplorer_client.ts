@@ -44,6 +44,7 @@ import {
   DescribeTWeSeeSubscriptionResponse,
   DescribeCloudStorageUsersResponse,
   CountDataInfo,
+  RevokeShareDeviceFromUserRequest,
   DescribeCloudStoragePackageConsumeDetailsRequest,
   BatchUpdateFirmwareResponse,
   DescribeActivateLicenseServiceResponse,
@@ -184,7 +185,7 @@ import {
   FenceAlarmPoint,
   UploadFirmwareRequest,
   DescribeFirmwareRequest,
-  TalkActivationInfo,
+  RevokeShareDeviceFromUserResponse,
   RevokeBindUserDeviceRequest,
   ModifyTWeTalkProductConfigV2Response,
   DescribeP2PRouteResponse,
@@ -268,6 +269,7 @@ import {
   ControlDeviceDataResponse,
   TalkLLMConfigInfo,
   EventHistoryItem,
+  ShareDeviceToUserResponse,
   CreatePositionSpaceResponse,
   CreateTWeTalkProductConfigResponse,
   ListProductOtaModulesResponse,
@@ -391,6 +393,7 @@ import {
   DescribeCloudStorageAIServiceTasksRequest,
   DescribeTWeTalkAgentRequest,
   ListFirmwaresRequest,
+  TalkActivationInfo,
   PublishMessageRequest,
   DescribeFirmwareTaskDevicesResponse,
   UnbindDevicesResponse,
@@ -468,6 +471,7 @@ import {
   DescribeTWeTalkProductConfigV2Response,
   DeviceInfo,
   DescribeInstanceRequest,
+  ShareDeviceToUserRequest,
   CreatePositionSpaceRequest,
   BindUserDeviceRequest,
   DeleteProjectRequest,
@@ -741,6 +745,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RenewTWeSeeSubscriptionResponse) => void
   ): Promise<RenewTWeSeeSubscriptionResponse> {
     return this.request("RenewTWeSeeSubscription", req, cb)
+  }
+
+  /**
+     * Owner 取消对指定用户的设备分享：
+1. 校验产品 ACL / 子产品禁止 / 设备真实存在；
+2. 只读定位 Owner（必须已存在），并校验 Owner 持有该设备；
+3. 只读定位被取消分享用户（不存在视为已取消，幂等成功）；
+4. 删除分享关系记录（不存在视为已取消，幂等成功）。
+     */
+  async RevokeShareDeviceFromUser(
+    req: RevokeShareDeviceFromUserRequest,
+    cb?: (error: string, rep: RevokeShareDeviceFromUserResponse) => void
+  ): Promise<RevokeShareDeviceFromUserResponse> {
+    return this.request("RevokeShareDeviceFromUser", req, cb)
   }
 
   /**
@@ -2617,6 +2635,20 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GenerateCloudStorageAIServiceTaskFileURLResponse) => void
   ): Promise<GenerateCloudStorageAIServiceTaskFileURLResponse> {
     return this.request("GenerateCloudStorageAIServiceTaskFileURL", req, cb)
+  }
+
+  /**
+     * Owner 将其名下的设备分享给指定 App 用户：
+1. 校验产品 ACL / 子产品禁止 / 设备真实存在；
+2. 只读定位 Owner（必须已存在），并校验 Owner 确实持有该设备；
+3. 兜底创建被分享用户（已存在则复用，昵称不覆盖）；
+4. 写入分享关系（重复分享幂等成功，不修改原 CreateTime）。
+     */
+  async ShareDeviceToUser(
+    req: ShareDeviceToUserRequest,
+    cb?: (error: string, rep: ShareDeviceToUserResponse) => void
+  ): Promise<ShareDeviceToUserResponse> {
+    return this.request("ShareDeviceToUser", req, cb)
   }
 
   /**

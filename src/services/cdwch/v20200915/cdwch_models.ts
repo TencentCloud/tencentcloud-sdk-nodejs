@@ -812,6 +812,40 @@ export interface AttachCBSSpec {
 }
 
 /**
+ * DescribeBackUpSchedule返回参数结构体
+ */
+export interface DescribeBackUpScheduleResponse {
+  /**
+   * 备份是否开启
+   */
+  BackUpOpened?: boolean
+  /**
+   * 元数据备份策略
+   */
+  MetaStrategy?: ScheduleStrategy
+  /**
+   * 表数据备份策略
+   */
+  DataStrategy?: ScheduleStrategy
+  /**
+   * 备份表列表
+   */
+  BackUpContents?: Array<BackupTableContent>
+  /**
+   * 备份的状态
+   */
+  BackUpStatus?: number
+  /**
+   * 错误信息
+   */
+  ErrorMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateBackUpSchedule请求参数结构体
  */
 export interface CreateBackUpScheduleRequest {
@@ -1623,6 +1657,10 @@ export interface InstanceInfo {
    * <p>实例是否开启HTTPS</p><p>枚举值：</p><ul><li>true： 已开启HTTPS</li><li>false： 未开启HTTPS</li></ul>
    */
   HttpsEnabled?: boolean
+  /**
+   * <p>集群磁盘加密配置</p>
+   */
+  DiskEncryptInfo?: DiskEncryptInfo
 }
 
 /**
@@ -1864,37 +1902,25 @@ export interface SearchTags {
 }
 
 /**
- * DescribeBackUpSchedule返回参数结构体
+ * 群磁盘加密信息。用于 DescribeInstances / DescribeInstance 返回实例的当前加密配置，供控制台、SDK、运维侧识别该集群是否启用磁盘加密、使用的是哪一把 KMS 根密钥
  */
-export interface DescribeBackUpScheduleResponse {
+export interface DiskEncryptInfo {
   /**
-   * 备份是否开启
+   * <p>加密类型</p><p>枚举值：</p><ul><li>CUSTOMER_KMS： 客户自定义的KMS密钥信息</li><li>TENCENT_KEY： 使用腾讯云自动创建的KMS密钥信息</li></ul>
    */
-  BackUpOpened?: boolean
+  EncryptType?: string
   /**
-   * 元数据备份策略
+   * <p>KMS 根密钥ID</p>
    */
-  MetaStrategy?: ScheduleStrategy
+  KmsKeyId?: string
   /**
-   * 表数据备份策略
+   * <p>KMS密钥地域</p>
    */
-  DataStrategy?: ScheduleStrategy
+  KmsRegion?: string
   /**
-   * 备份表列表
+   * <p>KMS 根密钥 key 名</p>
    */
-  BackUpContents?: Array<BackupTableContent>
-  /**
-   * 备份的状态
-   */
-  BackUpStatus?: number
-  /**
-   * 错误信息
-   */
-  ErrorMsg?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  KmsKeyName?: string
 }
 
 /**
