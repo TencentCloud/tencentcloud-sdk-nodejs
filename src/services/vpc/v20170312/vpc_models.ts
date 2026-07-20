@@ -3779,51 +3779,51 @@ export interface DisassociateVpcEndPointSecurityGroupsRequest {
  */
 export interface IKEOptionsSpecification {
   /**
-   * 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC'，'SM4', 默认为3DES-CBC
+   * <p>加密算法，可选值：&#39;3DES-CBC&#39;, &#39;AES-CBC-128&#39;, &#39;AES-CBC-192&#39;, &#39;AES-CBC-256&#39;, &#39;DES-CBC&#39;，&#39;SM4&#39;, 默认为3DES-CBC</p>
    */
   PropoEncryAlgorithm?: string
   /**
-   * 认证算法：可选值：'MD5'，'SHA'，'SHA-256'，'SHA-512'， 默认为SHA。
+   * <p>认证算法：可选值：&#39;MD5&#39;，&#39;SHA&#39;，&#39;SHA-256&#39;，&#39;SHA-512&#39;， 默认为SHA。</p>
    */
   PropoAuthenAlgorithm?: string
   /**
-   * 协商模式：可选值：'AGGRESSIVE'， 'MAIN'，默认为MAIN。
+   * <p>协商模式：可选值：&#39;AGGRESSIVE&#39;， &#39;MAIN&#39;，默认为MAIN。</p>
    */
   ExchangeMode?: string
   /**
-   * 本端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS
+   * <p>本端标识类型：可选值：&#39;ADDRESS&#39;, &#39;FQDN&#39;，默认为ADDRESS</p>
    */
   LocalIdentity?: string
   /**
-   * 对端标识类型：可选值：'ADDRESS', 'FQDN'，默认为ADDRESS
+   * <p>对端标识类型：可选值：&#39;ADDRESS&#39;, &#39;FQDN&#39;，默认为ADDRESS</p>
    */
   RemoteIdentity?: string
   /**
-   * 本端标识，当LocalIdentity选为ADDRESS时，LocalAddress必填。localAddress默认为vpn网关公网IP
+   * <p>本端标识，当LocalIdentity选为ADDRESS时，LocalAddress必填。localAddress默认为vpn网关公网IP</p>
    */
   LocalAddress?: string
   /**
-   * 对端标识，当RemoteIdentity选为ADDRESS时，RemoteAddress必填
+   * <p>对端标识，当RemoteIdentity选为ADDRESS时，RemoteAddress必填</p>
    */
   RemoteAddress?: string
   /**
-   * 本端标识，当LocalIdentity选为FQDN时，LocalFqdnName必填
+   * <p>本端标识，当LocalIdentity选为FQDN时，LocalFqdnName必填</p>
    */
   LocalFqdnName?: string
   /**
-   * 对端标识，当remoteIdentity选为FQDN时，RemoteFqdnName必填
+   * <p>对端标识，当remoteIdentity选为FQDN时，RemoteFqdnName必填</p>
    */
   RemoteFqdnName?: string
   /**
-   * DH group，指定IKE交换密钥时使用的DH组，可选值：'GROUP1', 'GROUP2', 'GROUP5', 'GROUP14', 'GROUP24'，默认是GROUP1。
+   * <p>DH group，指定IKE交换密钥时使用的DH组，可选值：&#39;GROUP1&#39;, &#39;GROUP2&#39;, &#39;GROUP5&#39;, &#39;GROUP14&#39;, &#39;GROUP15&#39;, &#39;GROUP16&#39;, &#39;GROUP19&#39;, &#39;GROUP20&#39;, &#39;GROUP21&#39;, &#39;GROUP24&#39;，默认是GROUP1。</p>
    */
   DhGroupName?: string
   /**
-   * IKE SA Lifetime，单位：秒，设置IKE SA的生存周期，取值范围：60-604800
+   * <p>IKE SA Lifetime，单位：秒，设置IKE SA的生存周期，取值范围：60-604800</p>
    */
   IKESaLifetimeSeconds?: number
   /**
-   * IKE版本
+   * <p>IKE版本</p>
    */
   IKEVersion?: string
 }
@@ -15185,29 +15185,29 @@ export interface DeleteNetDetectRequest {
  */
 export interface IPSECOptionsSpecification {
   /**
-   * 加密算法，可选值：'3DES-CBC', 'AES-CBC-128', 'AES-CBC-192', 'AES-CBC-256', 'DES-CBC', 'SM4', 'NULL'， 默认为AES-CBC-128
+   * <p>加密算法，可选值：&#39;3DES-CBC&#39;, &#39;AES-CBC-128&#39;, &#39;AES-CBC-192&#39;, &#39;AES-CBC-256&#39;, &#39;DES-CBC&#39;, &#39;SM4&#39;, &#39;NULL&#39;， 默认为AES-CBC-128</p>
    */
   EncryptAlgorithm?: string
   /**
-   * 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为
+   * <p>认证算法：可选值：&#39;MD5&#39;, &#39;SHA1&#39;，&#39;SHA-256&#39; 默认为</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   IntegrityAlgorith?: string
   /**
-   * IPsec SA lifetime(s)：单位秒，取值范围：180-604800
+   * <p>IPsec SA lifetime(s)</p><p>取值范围：[180, 604800]</p><p>单位：秒</p><p>默认值：14400</p>
    */
   IPSECSaLifetimeSeconds?: number
   /**
-   * PFS：可选值：'NULL', 'DH-GROUP1', 'DH-GROUP2', 'DH-GROUP5', 'DH-GROUP14', 'DH-GROUP24'，默认为NULL
+   * <p>PFS：可选值：&#39;NULL&#39;, &#39;DH-GROUP1&#39;, &#39;DH-GROUP2&#39;, &#39;DH-GROUP5&#39;, &#39;DH-GROUP14&#39;, &#39;DH-GROUP15&#39;,&#39;DH-GROUP16&#39;,&#39;DH-GROUP19&#39;,&#39;DH-GROUP20&#39;,&#39;DH-GROUP21&#39;,&#39;DH-GROUP24&#39;，默认为NULL</p>
    */
   PfsDhGroup?: string
   /**
-   * IPsec SA lifetime(KB)：单位KB，取值范围：2560-604800
+   * <p>IPsec SA lifetime(KB)</p><p>取值范围：[2560, 4294967295]</p><p>单位：KB</p><p>默认值：4096000000</p>
    */
   IPSECSaLifetimeTraffic?: number
   /**
-   * 认证算法：可选值：'MD5', 'SHA1'，'SHA-256' 默认为
+   * <p>认证算法：可选值：&#39;MD5&#39;, &#39;SHA1&#39;，&#39;SHA-256&#39; 默认为</p>
    */
   IntegrityAlgorithm?: string
 }

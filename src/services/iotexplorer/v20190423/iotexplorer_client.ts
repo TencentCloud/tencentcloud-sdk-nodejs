@@ -436,6 +436,7 @@ import {
   GetFamilyDeviceUserListResponse,
   UnbindTWeTalkAgentRequest,
   DeleteLoRaGatewayResponse,
+  ADPConfig,
   DeleteTWeTalkAgentResponse,
   LoRaGatewayItem,
   BindTWeTalkAIBotRequest,

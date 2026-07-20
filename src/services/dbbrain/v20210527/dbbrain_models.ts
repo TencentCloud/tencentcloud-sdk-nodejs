@@ -438,51 +438,51 @@ export interface DescribeIndexRecommendAggregationSlowLogsRequest {
  */
 export interface DescribeSlowLogsRequest {
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB for MySQL，默认为"mysql"。
+   * <p>服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 CynosDB for MySQL，&quot;tdstore&quot; - 云数据库TDSQL Boundless，默认为&quot;mysql&quot;。</p>
    */
   Product: string
   /**
-   * 实例id。
+   * <p>实例 ID。可通过 <a href="https://cloud.tencent.com/document/api/1130/57798">DescribeDiagDBInstances</a> 接口获取。</p>
    */
   InstanceId: string
   /**
-   * sql模板的md5值
+   * <p>sql 模板的 md5 值，可通过 <a href="https://cloud.tencent.com/document/product/1130/57784">DescribeSlowLogTopSqls</a> 接口获取。</p>
    */
   Md5: string
   /**
-   * 开始时间，如“2019-09-10 12:13:14”。
+   * <p>开始时间，如“2019-09-10 12:13:14”。</p>
    */
   StartTime: string
   /**
-   * 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。
+   * <p>截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。</p>
    */
   EndTime: string
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset: number
   /**
-   * 查询数目，默认为20，最大为100。
+   * <p>查询数目，默认为20，最大为100。</p>
    */
   Limit: number
   /**
-   * 数据库列表
+   * <p>数据库列表</p>
    */
   DB?: Array<string>
   /**
-   * 关键字
+   * <p>关键字</p>
    */
   Key?: Array<string>
   /**
-   * 用户
+   * <p>用户</p>
    */
   User?: Array<string>
   /**
-   * IP
+   * <p>IP 来源</p>
    */
   Ip?: Array<string>
   /**
-   * 耗时区间,耗时区间的左右边界分别对应数组的第0个元素和第一个元素
+   * <p>耗时区间,耗时区间的左右边界分别对应数组的第0个元素和第一个元素</p>
    */
   Time?: Array<number | bigint>
 }
@@ -730,39 +730,39 @@ export interface DescribeDBAutonomyActionsResponse {
  */
 export interface DescribeSlowLogTopSqlsRequest {
   /**
-   * 实例 ID 。
+   * <p>实例 ID。可通过 <a href="https://cloud.tencent.com/document/api/1130/57798">DescribeDiagDBInstances</a> 接口获取。</p>
    */
   InstanceId: string
   /**
-   * 开始时间，如“2019-09-10 12:13:14”。
+   * <p>开始时间，如“2019-09-10 12:13:14”。</p>
    */
   StartTime: string
   /**
-   * 截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。
+   * <p>截止时间，如“2019-09-11 10:13:14”，截止时间与开始时间的间隔小于7天。</p>
    */
   EndTime: string
   /**
-   * 排序键，目前支持 QueryTime,ExecTimes,RowsSent,LockTime以及RowsExamined 等排序键，默认为QueryTime。
+   * <p>排序键，目前支持 QueryTime,ExecTimes,RowsSent,LockTime以及RowsExamined 等排序键，默认为QueryTime。<br>其中：<br>QueryTime-查询耗时<br>ExecTimes-执行次数<br>RowsSent-返回行数<br>LockTime-锁等待时间<br>RowsExamined-扫描行数</p>
    */
   SortBy?: string
   /**
-   * 排序方式，支持ASC（升序）以及DESC（降序），默认为DESC。
+   * <p>排序方式，支持ASC（升序）以及DESC（降序），默认为DESC。</p>
    */
   OrderBy?: string
   /**
-   * 返回数量，默认为20，最大值为100。
+   * <p>返回数量，默认为20，最大值为100。</p>
    */
   Limit?: number
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
   /**
-   * 数据库名称数组。
+   * <p>数据库名称数组。</p>
    */
   SchemaList?: Array<SchemaItem>
   /**
-   * 服务产品类型，支持值包括： "mysql" - 云数据库 MySQL， "cynosdb" - 云数据库 CynosDB  for MySQL，默认为"mysql"。
+   * <p>服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 CynosDB  for MySQL， &quot;tdstore&quot; - 云数据库TDSQL Boundless，默认为&quot;mysql&quot;。</p>
    */
   Product?: string
 }
@@ -1821,7 +1821,7 @@ export interface DescribeDBSpaceStatusRequest {
    */
   RangeDays?: number
   /**
-   * <p>服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 CynosDB  for MySQL，&quot;mongodb&quot; - 云数据库 MongoDB，&quot;dcdb&quot; -（TDSQL MySQL 版）、&quot;mariadb&quot; -（TDSQL MariaDB 版）默认为&quot;mysql&quot;。</p>
+   * <p>服务产品类型，支持值包括： &quot;mysql&quot; - 云数据库 MySQL， &quot;cynosdb&quot; - 云数据库 CynosDB  for MySQL，&quot;mongodb&quot; - 云数据库 MongoDB，&quot;dcdb&quot; -（TDSQL MySQL 版）、&quot;mariadb&quot; -（TDSQL MariaDB 版）、&quot;tdstore&quot; - 云数据库TDSQL Boundless，默认为&quot;mysql&quot;。</p>
    */
   Product?: string
 }
@@ -1993,11 +1993,11 @@ export interface ModifyDiagDBInstanceConfRequest {
  */
 export interface DescribeSlowLogsResponse {
   /**
-   * 符合条件的记录总数。
+   * <p>符合条件的记录总数。</p>
    */
   TotalCount?: number
   /**
-   * 慢日志明细
+   * <p>慢日志明细</p>
    */
   Rows?: Array<SlowLogInfoItem>
   /**
@@ -2252,7 +2252,7 @@ export interface CreateIgnoreDiagRecordResponse {
  */
 export interface SlowLogInfoItem {
   /**
-   * 慢日志开始时间
+   * 慢日志开始时间，格式: "yyyy-MM-dd HH:mm:ss"
    */
   Timestamp?: string
   /**
@@ -6175,11 +6175,11 @@ export interface DescribeDBDiagReportContentResponse {
  */
 export interface DescribeSlowLogTopSqlsResponse {
   /**
-   * 符合条件的记录总数。
+   * <p>符合条件的记录总数。</p>
    */
   TotalCount?: number
   /**
-   * 慢日志 top sql 列表
+   * <p>慢日志 top sql 列表</p>
    */
   Rows?: Array<SlowLogTopSqlItem>
   /**

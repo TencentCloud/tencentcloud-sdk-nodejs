@@ -38,6 +38,16 @@ it("dataagent.v20250513.GetKnowledgeBaseList", async function () {
     }
 })
 
+it("dataagent.v20250513.QueryModels", async function () {
+    try {
+       const data = await client.QueryModels({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dataagent.v20250513.ModifyKnowledgeBase", async function () {
     try {
        const data = await client.ModifyKnowledgeBase({})
@@ -148,9 +158,9 @@ it("dataagent.v20250513.UpdateScene", async function () {
     }
 })
 
-it("dataagent.v20250513.QuerySceneList", async function () {
+it("dataagent.v20250513.DeleteDataAgentSession", async function () {
     try {
-       const data = await client.QuerySceneList({})
+       const data = await client.DeleteDataAgentSession({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +238,9 @@ it("dataagent.v20250513.DeleteScene", async function () {
     }
 })
 
-it("dataagent.v20250513.DeleteDataAgentSession", async function () {
+it("dataagent.v20250513.QuerySceneList", async function () {
     try {
-       const data = await client.DeleteDataAgentSession({})
+       const data = await client.QuerySceneList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

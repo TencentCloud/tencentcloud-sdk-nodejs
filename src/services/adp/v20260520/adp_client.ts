@@ -64,6 +64,7 @@ import {
   ModifyAppResponse,
   ResetConversationResponse,
   ToolExample,
+  DescribeAccountListRequest,
   PromptRewriteModel,
   ModifyAppRequest,
   DescribeAppRequest,
@@ -74,6 +75,7 @@ import {
   AppSummary,
   DescribeReleaseListRequest,
   CreateWebSocketTokenResponse,
+  AuditLogMetaField,
   DescribeAgentDetailRequest,
   DescribePluginSummaryListRequest,
   SkillReferenceSummary,
@@ -98,6 +100,7 @@ import {
   CreateAgentRequest,
   MultiAgentConfig,
   ConversationExperience,
+  ClawAgentAgentTeamConfig,
   DescribeSkillReferenceListRequest,
   DeletePluginRequest,
   AIOptimizeModel,
@@ -111,6 +114,7 @@ import {
   SupportedFileType,
   AgentPlugin,
   AppSubStatusInfo,
+  CorpShareConfig,
   CreateConversationRequest,
   DescribeVariableListRequest,
   ConversationWorkspace,
@@ -120,9 +124,10 @@ import {
   AgentSpec,
   ModifyConversationResponse,
   ClawAgentConfig,
+  ModelLimit,
   ConversationQuoteInfo,
   AppSecretInfo,
-  CreatePluginRequest,
+  AgentDetail,
   ThinkModel,
   DeleteAgentResponse,
   DescribeSpaceListResponse,
@@ -139,6 +144,7 @@ import {
   AppAppeal,
   DescribeAgentReleasePreviewListResponse,
   DeleteConversationResponse,
+  DescribeAuditLogMetaResponse,
   DescribeVariableRequest,
   AppToolConfig,
   ResetConversationRequest,
@@ -161,7 +167,7 @@ import {
   DescribeLatestReleaseRequest,
   AgentPluginConfig,
   PluginSummary,
-  AgentDetail,
+  CreatePluginRequest,
   AgentProfile,
   OAuthConfig,
   CopyAgentFromAppResponse,
@@ -173,7 +179,7 @@ import {
   AgentReleasePreview,
   ToolConfig,
   AgentToolOutputParameter,
-  ModelLimit,
+  DescribeAccountListResponse,
   CreateSkillShareResponse,
   DescribeReleaseSummaryResponse,
   AgentSummary,
@@ -200,6 +206,7 @@ import {
   DeletePluginResponse,
   CreateVariableRequest,
   CreateSkillResponse,
+  DescribeAuditLogListRequest,
   VoiceConfig,
   MCPPluginConfig,
   DescribePluginRequest,
@@ -215,6 +222,7 @@ import {
   AgentCollaborationConfig,
   DeleteVariableRequest,
   ReleaseSkillResponse,
+  AccountInfo,
   AppPluginConfig,
   ModelStatus,
   CreateSkillRequest,
@@ -223,15 +231,18 @@ import {
   RoleConfig,
   CreateAgentResponse,
   ClawAgentCustomConfig,
+  DescribeAuditLogListResponse,
   AgentSkill,
   DeleteConversationRequest,
   PluginConfig,
   ModelBadge,
   DescribeSystemVariableListResponse,
   DescribeAppResponse,
+  DescribeAuditLogMetaRequest,
   DeleteAppRequest,
   DescribeSkillSummaryListRequest,
   DescribeAppSummaryListResponse,
+  ClawAgentLongMemoryConfig,
   FavoritePluginRequest,
   CopyAppResponse,
   AgentPluginParameter,
@@ -249,6 +260,7 @@ import {
   DescribeSkillDetailRequest,
   DescribeSkillCategoryListRequest,
   Model,
+  AuditLog,
   DescribeSkillSummaryListResponse,
   DescribeConversationMessageListRequest,
   DigitalHumanConfig,
@@ -409,6 +421,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查看操作日志列表
+   */
+  async DescribeAuditLogList(
+    req: DescribeAuditLogListRequest,
+    cb?: (error: string, rep: DescribeAuditLogListResponse) => void
+  ): Promise<DescribeAuditLogListResponse> {
+    return this.request("DescribeAuditLogList", req, cb)
+  }
+
+  /**
    * 查询某个 Skill 被引用的详情列表（按 SkillRefType 分组：OpenClaw / cloud agent / 企业助手 agent） 鉴权：同 DescribeSkillDetail（能看该 Skill 即可查）
    */
   async DescribeSkillReferenceList(
@@ -439,13 +461,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取参数变量
+   * 获取应用信息
    */
-  async DescribeVariable(
-    req: DescribeVariableRequest,
-    cb?: (error: string, rep: DescribeVariableResponse) => void
-  ): Promise<DescribeVariableResponse> {
-    return this.request("DescribeVariable", req, cb)
+  async DescribeApp(
+    req: DescribeAppRequest,
+    cb?: (error: string, rep: DescribeAppResponse) => void
+  ): Promise<DescribeAppResponse> {
+    return this.request("DescribeApp", req, cb)
   }
 
   /**
@@ -689,13 +711,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取应用信息
+   * 查看企业下的员工列表
    */
-  async DescribeApp(
-    req: DescribeAppRequest,
-    cb?: (error: string, rep: DescribeAppResponse) => void
-  ): Promise<DescribeAppResponse> {
-    return this.request("DescribeApp", req, cb)
+  async DescribeAccountList(
+    req: DescribeAccountListRequest,
+    cb?: (error: string, rep: DescribeAccountListResponse) => void
+  ): Promise<DescribeAccountListResponse> {
+    return this.request("DescribeAccountList", req, cb)
   }
 
   /**
@@ -726,6 +748,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: FavoriteSkillResponse) => void
   ): Promise<FavoriteSkillResponse> {
     return this.request("FavoriteSkill", req, cb)
+  }
+
+  /**
+   * 获取审计日志元信息
+   */
+  async DescribeAuditLogMeta(
+    req?: DescribeAuditLogMetaRequest,
+    cb?: (error: string, rep: DescribeAuditLogMetaResponse) => void
+  ): Promise<DescribeAuditLogMetaResponse> {
+    return this.request("DescribeAuditLogMeta", req, cb)
   }
 
   /**
@@ -776,6 +808,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeVariableListResponse) => void
   ): Promise<DescribeVariableListResponse> {
     return this.request("DescribeVariableList", req, cb)
+  }
+
+  /**
+   * 重试发布(发布暂停之后再次重新发布)
+   */
+  async RetryRelease(
+    req: RetryReleaseRequest,
+    cb?: (error: string, rep: RetryReleaseResponse) => void
+  ): Promise<RetryReleaseResponse> {
+    return this.request("RetryRelease", req, cb)
   }
 
   /**
@@ -839,13 +881,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重试发布(发布暂停之后再次重新发布)
+   * 获取参数变量
    */
-  async RetryRelease(
-    req: RetryReleaseRequest,
-    cb?: (error: string, rep: RetryReleaseResponse) => void
-  ): Promise<RetryReleaseResponse> {
-    return this.request("RetryRelease", req, cb)
+  async DescribeVariable(
+    req: DescribeVariableRequest,
+    cb?: (error: string, rep: DescribeVariableResponse) => void
+  ): Promise<DescribeVariableResponse> {
+    return this.request("DescribeVariable", req, cb)
   }
 
   /**

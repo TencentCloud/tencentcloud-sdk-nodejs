@@ -182,6 +182,7 @@ import {
   BotIdConfig,
   DeleteHostRequest,
   ModifyIpAccessControlRequest,
+  ApiEventSample,
   AddCustomWhiteRuleResponse,
   ModifyBatchCustomWhiteRuleStatusRequest,
   ModifyUserSignatureClassRequest,

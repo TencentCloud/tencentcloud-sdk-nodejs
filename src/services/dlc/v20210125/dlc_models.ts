@@ -762,9 +762,17 @@ export interface CreateTasksInOrderRequest {
 }
 
 /**
- * UpdateStandardEngineResourceGroupConfigInfo返回参数结构体
+ * DescribeUpdatableDataEngines返回参数结构体
  */
-export interface UpdateStandardEngineResourceGroupConfigInfoResponse {
+export interface DescribeUpdatableDataEnginesResponse {
+  /**
+   * 集群基础信息
+   */
+  DataEngineBasicInfos?: Array<DataEngineBasicInfo>
+  /**
+   * 集群个数
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2762,37 +2770,29 @@ export interface DescribeEngineNetworksRequest {
 }
 
 /**
- * CreateTasks请求参数结构体
+ * GenerateCreateMangedTableSql请求参数结构体
  */
-export interface CreateTasksRequest {
+export interface GenerateCreateMangedTableSqlRequest {
   /**
-   * 数据库名称。如果SQL语句中有数据库名称，优先使用SQL语句中的数据库，否则使用该参数指定的数据库（注：当提交建库sql时，该字段传空字符串）。
+   * 表基本信息
    */
-  DatabaseName: string
+  TableBaseInfo: TableBaseInfo
   /**
-   * SQL任务信息
+   * 表字段信息
    */
-  Tasks: TasksInfo
+  Columns: Array<TColumn>
   /**
-   * 数据源名称，默认为DataLakeCatalog
+   * 表分区信息
    */
-  DatasourceConnectionName?: string
+  Partitions?: Array<TPartition>
   /**
-   * 计算引擎名称，不填任务提交到默认集群
+   * 表属性信息
    */
-  DataEngineName?: string
+  Properties?: Array<Property>
   /**
-   * spark集群资源组名称
+   * V2 upsert表 upsert键
    */
-  ResourceGroupName?: string
-  /**
-   * 是否使用multi- statement方式运行一批次任务，true: 是，false: 否
-   */
-  IsMultiStatement?: boolean
-  /**
-   * 任务来源信息
-   */
-  SourceInfo?: Array<KVPair>
+  UpsertKeys?: Array<string>
 }
 
 /**
@@ -3317,6 +3317,44 @@ export interface Param {
    * 下发操作，支持：ADD、DELETE、MODIFY
    */
   Operate?: string
+}
+
+/**
+ * GPU 机型
+ */
+export interface GPUInfo {
+  /**
+   * 计费项
+   */
+  BillingItem?: string
+  /**
+   * 机型
+   */
+  Model?: string
+  /**
+   * cu
+   */
+  CU?: number
+  /**
+   * gpu 机型
+   */
+  Type?: string
+  /**
+   * 数量
+   */
+  Num?: number
+  /**
+   * 显存
+   */
+  GPUMemory?: number
+  /**
+   * 机型
+   */
+  InstanceType?: string
+  /**
+   * 售卖情况（1-缺货，2-低库存，3-充足）
+   */
+  SaleStatus?: number
 }
 
 /**
@@ -3972,6 +4010,16 @@ export interface DescribeTaskResourceUsageRequest {
 export type DescribeLakeFsInfoRequest = null
 
 /**
+ * UpdateStandardEngineResourceGroupConfigInfo返回参数结构体
+ */
+export interface UpdateStandardEngineResourceGroupConfigInfoResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateCHDFSBindingProduct返回参数结构体
  */
 export interface CreateCHDFSBindingProductResponse {
@@ -4096,6 +4144,32 @@ export interface DescribeUserTypeResponse {
    * 用户类型。ADMIN：管理员 COMMON：普通用户
    */
   UserType?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * QueryResult返回参数结构体
+ */
+export interface QueryResultResponse {
+  /**
+   * 任务Id
+   */
+  TaskId?: string
+  /**
+   * 结果数据
+   */
+  ResultSet?: string
+  /**
+   * schema
+   */
+  ResultSchema?: Array<Column>
+  /**
+   * 分页信息
+   */
+  NextToken?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6647,17 +6721,9 @@ export interface CreateUserVpcConnectionResponse {
 }
 
 /**
- * DescribeUpdatableDataEngines返回参数结构体
+ * DescribeMCPTaskResult返回参数结构体
  */
-export interface DescribeUpdatableDataEnginesResponse {
-  /**
-   * 集群基础信息
-   */
-  DataEngineBasicInfos?: Array<DataEngineBasicInfo>
-  /**
-   * 集群个数
-   */
-  TotalCount?: number
+export interface DescribeMCPTaskResultResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7628,65 +7694,6 @@ export interface CreateTaskRequest {
 }
 
 /**
- * spark session详细信息
- */
-export interface SparkSessionInfo {
-  /**
-   * spark session id
-   */
-  SparkSessionId?: string
-  /**
-   * spark session名称
-   */
-  SparkSessionName?: string
-  /**
-   * 资源组id
-   */
-  ResourceGroupId?: string
-  /**
-   * engine session id
-   */
-  EngineSessionId?: string
-  /**
-   * engine session   
-name
-   */
-  EngineSessionName?: string
-  /**
-   * 自动销毁时间
-   */
-  IdleTimeoutMin?: number
-  /**
-   * driver规格
-   */
-  DriverSpec?: string
-  /**
-   * executor规格
-   */
-  ExecutorSpec?: string
-  /**
-   * executor最小数量
-   */
-  ExecutorNumMin?: number
-  /**
-   * executor最大数量
-   */
-  ExecutorNumMax?: number
-  /**
-   * 总规格最小
-   */
-  TotalSpecMin?: number
-  /**
-   * 总规格最大
-   */
-  TotalSpecMax?: number
-  /**
-   * 状态，STARTING、RUNNING、TERMINATED
-   */
-  State?: string
-}
-
-/**
  * DescribeClusterMonitorInfos请求参数结构体
  */
 export interface DescribeClusterMonitorInfosRequest {
@@ -8259,13 +8266,65 @@ export interface AttachWorkGroupPolicyResponse {
 }
 
 /**
- * AddUsersToWorkGroup返回参数结构体
+ * DescribeDMSTables请求参数结构体
  */
-export interface AddUsersToWorkGroupResponse {
+export interface DescribeDMSTablesRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 数据库名称
    */
-  RequestId?: string
+  DbName?: string
+  /**
+   * 数据库schema名称
+   */
+  SchemaName?: string
+  /**
+   * 表名称
+   */
+  Name?: string
+  /**
+   * catalog类型
+   */
+  Catalog?: string
+  /**
+   * 查询关键词
+   */
+  Keyword?: string
+  /**
+   * 查询模式，只支持填*
+   */
+  Pattern?: string
+  /**
+   * 表类型
+   */
+  Type?: string
+  /**
+   * 筛选参数：更新开始时间
+   */
+  StartTime?: string
+  /**
+   * 筛选参数：更新结束时间
+   */
+  EndTime?: string
+  /**
+   * 分页参数
+   */
+  Limit?: number
+  /**
+   * 分页参数
+   */
+  Offset?: number
+  /**
+   * 排序字段：create_time：创建时间
+   */
+  Sort?: string
+  /**
+   * 排序字段：true：升序（默认），false：降序
+   */
+  Asc?: boolean
+  /**
+   * 数据源连接名
+   */
+  DatasourceConnectionName?: string
 }
 
 /**
@@ -9241,29 +9300,37 @@ export interface MysqlInfo {
 }
 
 /**
- * GenerateCreateMangedTableSql请求参数结构体
+ * CreateTasks请求参数结构体
  */
-export interface GenerateCreateMangedTableSqlRequest {
+export interface CreateTasksRequest {
   /**
-   * 表基本信息
+   * 数据库名称。如果SQL语句中有数据库名称，优先使用SQL语句中的数据库，否则使用该参数指定的数据库（注：当提交建库sql时，该字段传空字符串）。
    */
-  TableBaseInfo: TableBaseInfo
+  DatabaseName: string
   /**
-   * 表字段信息
+   * SQL任务信息
    */
-  Columns: Array<TColumn>
+  Tasks: TasksInfo
   /**
-   * 表分区信息
+   * 数据源名称，默认为DataLakeCatalog
    */
-  Partitions?: Array<TPartition>
+  DatasourceConnectionName?: string
   /**
-   * 表属性信息
+   * 计算引擎名称，不填任务提交到默认集群
    */
-  Properties?: Array<Property>
+  DataEngineName?: string
   /**
-   * V2 upsert表 upsert键
+   * spark集群资源组名称
    */
-  UpsertKeys?: Array<string>
+  ResourceGroupName?: string
+  /**
+   * 是否使用multi- statement方式运行一批次任务，true: 是，false: 否
+   */
+  IsMultiStatement?: boolean
+  /**
+   * 任务来源信息
+   */
+  SourceInfo?: Array<KVPair>
 }
 
 /**
@@ -9337,41 +9404,13 @@ export interface DeleteThirdPartyAccessUserResponse {
 }
 
 /**
- * GPU 机型
+ * AddUsersToWorkGroup返回参数结构体
  */
-export interface GPUInfo {
+export interface AddUsersToWorkGroupResponse {
   /**
-   * 计费项
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  BillingItem?: string
-  /**
-   * 机型
-   */
-  Model?: string
-  /**
-   * cu
-   */
-  CU?: number
-  /**
-   * gpu 机型
-   */
-  Type?: string
-  /**
-   * 数量
-   */
-  Num?: number
-  /**
-   * 显存
-   */
-  GPUMemory?: number
-  /**
-   * 机型
-   */
-  InstanceType?: string
-  /**
-   * 售卖情况（1-缺货，2-低库存，3-充足）
-   */
-  SaleStatus?: number
+  RequestId?: string
 }
 
 /**
@@ -9720,6 +9759,16 @@ export interface ListTaskJobLogDetailResponse {
    * 日志url(字段已废弃)
    */
   LogUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeMCPTask返回参数结构体
+ */
+export interface DescribeMCPTaskResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10357,65 +10406,62 @@ export interface TagInfo {
 }
 
 /**
- * DescribeDMSTables请求参数结构体
+ * spark session详细信息
  */
-export interface DescribeDMSTablesRequest {
+export interface SparkSessionInfo {
   /**
-   * 数据库名称
+   * spark session id
    */
-  DbName?: string
+  SparkSessionId?: string
   /**
-   * 数据库schema名称
+   * spark session名称
    */
-  SchemaName?: string
+  SparkSessionName?: string
   /**
-   * 表名称
+   * 资源组id
    */
-  Name?: string
+  ResourceGroupId?: string
   /**
-   * catalog类型
+   * engine session id
    */
-  Catalog?: string
+  EngineSessionId?: string
   /**
-   * 查询关键词
+   * engine session   
+name
    */
-  Keyword?: string
+  EngineSessionName?: string
   /**
-   * 查询模式，只支持填*
+   * 自动销毁时间
    */
-  Pattern?: string
+  IdleTimeoutMin?: number
   /**
-   * 表类型
+   * driver规格
    */
-  Type?: string
+  DriverSpec?: string
   /**
-   * 筛选参数：更新开始时间
+   * executor规格
    */
-  StartTime?: string
+  ExecutorSpec?: string
   /**
-   * 筛选参数：更新结束时间
+   * executor最小数量
    */
-  EndTime?: string
+  ExecutorNumMin?: number
   /**
-   * 分页参数
+   * executor最大数量
    */
-  Limit?: number
+  ExecutorNumMax?: number
   /**
-   * 分页参数
+   * 总规格最小
    */
-  Offset?: number
+  TotalSpecMin?: number
   /**
-   * 排序字段：create_time：创建时间
+   * 总规格最大
    */
-  Sort?: string
+  TotalSpecMax?: number
   /**
-   * 排序字段：true：升序（默认），false：降序
+   * 状态，STARTING、RUNNING、TERMINATED
    */
-  Asc?: boolean
-  /**
-   * 数据源连接名
-   */
-  DatasourceConnectionName?: string
+  State?: string
 }
 
 /**
@@ -13042,6 +13088,11 @@ export interface UpdateDataEngineConfigRequest {
 }
 
 /**
+ * DescribeMCPTaskResult请求参数结构体
+ */
+export type DescribeMCPTaskResultRequest = null
+
+/**
  * DropDMSTable请求参数结构体
  */
 export interface DropDMSTableRequest {
@@ -13203,30 +13254,9 @@ export interface UserMessage {
 }
 
 /**
- * QueryResult返回参数结构体
+ * DescribeMCPTask请求参数结构体
  */
-export interface QueryResultResponse {
-  /**
-   * 任务Id
-   */
-  TaskId?: string
-  /**
-   * 结果数据
-   */
-  ResultSet?: string
-  /**
-   * schema
-   */
-  ResultSchema?: Array<Column>
-  /**
-   * 分页信息
-   */
-  NextToken?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DescribeMCPTaskRequest = null
 
 /**
  * SwitchDataEngineImage请求参数结构体

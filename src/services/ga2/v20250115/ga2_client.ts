@@ -18,85 +18,98 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  CreateAccelerateAreasResponse,
   DescribeTaskResultResponse,
-  DescribeListenersResponse,
-  CreateForwardingPolicyRequest,
-  DescribeForwardingRuleRequest,
   DescribeEndpointGroupsResponse,
-  DeleteListenerAdditionalCertResponse,
-  ModifyForwardingPolicyRequest,
+  ReplaceListenerAdditionalCertResponse,
   CreateForwardingRuleRequest,
-  ForwardingPolicySet,
-  AcceleratorRegionSet,
-  DeleteListenerAdditionalCertRequest,
-  CreateListenerResponse,
   DescribeForwardingPolicyResponse,
   CreateGlobalAcceleratorRequest,
   DescribeCrossBorderSettlementRequest,
-  IpAddressInfoSet,
-  ModifyForwardingPolicyResponse,
   CreateListenerAdditionalCertResponse,
-  DescribeAccelerateAreasRequest,
-  ModifyAccelerateAreasRequest,
-  DescribeCrossBorderSettlementResponse,
-  DescribeForwardingRuleResponse,
-  DeleteAccelerateAreasRequest,
+  DeleteGlobalAcceleratorAclPolicyResponse,
+  CreateAccelerateAreasResponse,
+  DescribeEndpointGroupsRequest,
+  ResponseHeaders,
+  DeleteGlobalAcceleratorAclRuleResponse,
+  ModifyGlobalAcceleratorResponse,
+  RuleAction,
+  DeleteEndpointGroupsRequest,
+  ModifyEndpointGroupRequest,
+  ReplaceListenerAdditionalCertRequest,
+  ModifyGlobalAcceleratorAclPolicyRequest,
   EndpointGroupConfigurationSet,
-  ModifyListenerResponse,
-  DeleteGlobalAcceleratorResponse,
-  DeleteAccelerateAreasResponse,
+  DescribeGlobalAcceleratorsResponse,
+  DescribeListenersResponse,
+  CreateForwardingPolicyRequest,
+  DeleteListenerAdditionalCertResponse,
+  AclEntries,
+  CreateListenerAdditionalCertRequest,
+  DeleteListenerAdditionalCertRequest,
+  DescribeGlobalAcceleratorsRequest,
+  DeleteGlobalAcceleratorAclRuleRequest,
+  Tag,
   ModifyAccelerateAreasResponse,
-  DeleteGlobalAcceleratorRequest,
   EndpointConfigurations,
   PortRanges,
-  OriginHeader,
-  DeleteForwardingRuleResponse,
+  ModifyGlobalAcceleratorAclPolicyResponse,
+  CreateGlobalAcceleratorAclRuleResponse,
+  DeleteListenerRequest,
+  CreateGlobalAcceleratorAclPolicyRequest,
+  DescribeForwardingRuleRequest,
+  DeleteEndpointGroupsResponse,
+  DescribeAccelerateAreasResponse,
+  EndpointGroupConfiguration,
+  GlobalAcceleratorSet,
+  AcceleratorAreas,
+  CreateEndpointGroupRequest,
+  CreateEndpointGroupResponse,
+  DeleteGlobalAcceleratorResponse,
+  DescribeAccelerateRegionsResponse,
   ForwardingRuleSet,
+  CreateForwardingRuleResponse,
+  CreateGlobalAcceleratorAclPolicyResponse,
+  ModifyGlobalAcceleratorAclRuleRequest,
+  AcceleratorRegionSet,
+  CreateListenerResponse,
+  ModifyForwardingPolicyResponse,
+  CreateGlobalAcceleratorAclRuleRequest,
+  ModifyListenerRequest,
+  RuleCondition,
+  HideResponseHeaders,
+  DescribeForwardingRuleResponse,
+  DeleteGlobalAcceleratorRequest,
   ModifyForwardingRuleRequest,
-  DescribeGlobalAcceleratorsRequest,
-  Tag,
-  DescribeTaskResultRequest,
-  DescribeEndpointGroupsRequest,
+  ModifyListenerResponse,
   CreateAccelerateAreasRequest,
   DeleteForwardingPolicyRequest,
   CreateListenerRequest,
-  DescribeAccelerateRegionsResponse,
-  ModifyForwardingRuleResponse,
-  DeleteForwardingRuleRequest,
-  ListenerSet,
+  DescribeTaskResultRequest,
   ModifyGlobalAcceleratorRequest,
-  DescribeAccelerateAreasResponse,
-  DeleteListenerRequest,
-  ModifyGlobalAcceleratorResponse,
-  HideResponseHeaders,
-  DescribeListenersRequest,
-  RuleAction,
-  DescribeForwardingPolicyRequest,
-  RuleCondition,
-  DescribeAccelerateRegionsRequest,
-  ReplaceListenerAdditionalCertResponse,
-  ResponseHeaders,
-  DeleteEndpointGroupsResponse,
   Filter,
-  DeleteEndpointGroupsRequest,
-  EndpointGroupConfiguration,
-  GlobalAcceleratorSet,
-  DeleteListenerResponse,
-  ModifyEndpointGroupRequest,
+  DescribeAccelerateRegionsRequest,
+  DeleteForwardingRuleResponse,
   CreateForwardingPolicyResponse,
-  AcceleratorAreas,
-  ModifyEndpointGroupResponse,
-  CreateEndpointGroupRequest,
-  ReplaceListenerAdditionalCertRequest,
-  CreateEndpointGroupResponse,
-  CreateListenerAdditionalCertRequest,
+  ModifyForwardingPolicyRequest,
+  ModifyGlobalAcceleratorAclRuleResponse,
+  IpAddressInfoSet,
   DeleteForwardingPolicyResponse,
+  ListenerSet,
+  ForwardingPolicySet,
+  ModifyEndpointGroupResponse,
+  DescribeAccelerateAreasRequest,
+  DescribeCrossBorderSettlementResponse,
+  DeleteAccelerateAreasRequest,
+  DeleteAccelerateAreasResponse,
+  ModifyForwardingRuleResponse,
+  ModifyAccelerateAreasRequest,
   CreateGlobalAcceleratorResponse,
-  DescribeGlobalAcceleratorsResponse,
-  CreateForwardingRuleResponse,
+  DescribeListenersRequest,
+  DescribeForwardingPolicyRequest,
+  DeleteForwardingRuleRequest,
+  OriginHeader,
+  DeleteListenerResponse,
+  DeleteGlobalAcceleratorAclPolicyRequest,
   PortOverride,
-  ModifyListenerRequest,
 } from "./ga2_models"
 
 /**
@@ -179,16 +192,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除七层转发规则
-   */
-  async DeleteForwardingRule(
-    req: DeleteForwardingRuleRequest,
-    cb?: (error: string, rep: DeleteForwardingRuleResponse) => void
-  ): Promise<DeleteForwardingRuleResponse> {
-    return this.request("DeleteForwardingRule", req, cb)
-  }
-
-  /**
    * 查询跨境账单
    */
   async DescribeCrossBorderSettlement(
@@ -196,6 +199,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCrossBorderSettlementResponse) => void
   ): Promise<DescribeCrossBorderSettlementResponse> {
     return this.request("DescribeCrossBorderSettlement", req, cb)
+  }
+
+  /**
+   * 删除ACL规则
+   */
+  async DeleteGlobalAcceleratorAclRule(
+    req: DeleteGlobalAcceleratorAclRuleRequest,
+    cb?: (error: string, rep: DeleteGlobalAcceleratorAclRuleResponse) => void
+  ): Promise<DeleteGlobalAcceleratorAclRuleResponse> {
+    return this.request("DeleteGlobalAcceleratorAclRule", req, cb)
   }
 
   /**
@@ -216,6 +229,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccelerateRegionsResponse) => void
   ): Promise<DescribeAccelerateRegionsResponse> {
     return this.request("DescribeAccelerateRegions", req, cb)
+  }
+
+  /**
+   * 修改访问控制策略状态
+   */
+  async ModifyGlobalAcceleratorAclPolicy(
+    req: ModifyGlobalAcceleratorAclPolicyRequest,
+    cb?: (error: string, rep: ModifyGlobalAcceleratorAclPolicyResponse) => void
+  ): Promise<ModifyGlobalAcceleratorAclPolicyResponse> {
+    return this.request("ModifyGlobalAcceleratorAclPolicy", req, cb)
+  }
+
+  /**
+   * 创建ACL规则
+   */
+  async CreateGlobalAcceleratorAclRule(
+    req: CreateGlobalAcceleratorAclRuleRequest,
+    cb?: (error: string, rep: CreateGlobalAcceleratorAclRuleResponse) => void
+  ): Promise<CreateGlobalAcceleratorAclRuleResponse> {
+    return this.request("CreateGlobalAcceleratorAclRule", req, cb)
   }
 
   /**
@@ -246,6 +279,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskResultResponse) => void
   ): Promise<DescribeTaskResultResponse> {
     return this.request("DescribeTaskResult", req, cb)
+  }
+
+  /**
+   * 创建访问控制策略
+   */
+  async CreateGlobalAcceleratorAclPolicy(
+    req: CreateGlobalAcceleratorAclPolicyRequest,
+    cb?: (error: string, rep: CreateGlobalAcceleratorAclPolicyResponse) => void
+  ): Promise<CreateGlobalAcceleratorAclPolicyResponse> {
+    return this.request("CreateGlobalAcceleratorAclPolicy", req, cb)
   }
 
   /**
@@ -329,13 +372,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除终端节点组。
+   * 修改ACL规则
    */
-  async DeleteEndpointGroups(
-    req: DeleteEndpointGroupsRequest,
-    cb?: (error: string, rep: DeleteEndpointGroupsResponse) => void
-  ): Promise<DeleteEndpointGroupsResponse> {
-    return this.request("DeleteEndpointGroups", req, cb)
+  async ModifyGlobalAcceleratorAclRule(
+    req: ModifyGlobalAcceleratorAclRuleRequest,
+    cb?: (error: string, rep: ModifyGlobalAcceleratorAclRuleResponse) => void
+  ): Promise<ModifyGlobalAcceleratorAclRuleResponse> {
+    return this.request("ModifyGlobalAcceleratorAclRule", req, cb)
+  }
+
+  /**
+   * 删除七层转发规则
+   */
+  async DeleteForwardingRule(
+    req: DeleteForwardingRuleRequest,
+    cb?: (error: string, rep: DeleteForwardingRuleResponse) => void
+  ): Promise<DeleteForwardingRuleResponse> {
+    return this.request("DeleteForwardingRule", req, cb)
   }
 
   /**
@@ -346,6 +399,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateForwardingRuleResponse) => void
   ): Promise<CreateForwardingRuleResponse> {
     return this.request("CreateForwardingRule", req, cb)
+  }
+
+  /**
+   * 删除访问控制策略
+   */
+  async DeleteGlobalAcceleratorAclPolicy(
+    req: DeleteGlobalAcceleratorAclPolicyRequest,
+    cb?: (error: string, rep: DeleteGlobalAcceleratorAclPolicyResponse) => void
+  ): Promise<DeleteGlobalAcceleratorAclPolicyResponse> {
+    return this.request("DeleteGlobalAcceleratorAclPolicy", req, cb)
   }
 
   /**
@@ -396,6 +459,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeForwardingRuleResponse) => void
   ): Promise<DescribeForwardingRuleResponse> {
     return this.request("DescribeForwardingRule", req, cb)
+  }
+
+  /**
+   * 删除终端节点组。
+   */
+  async DeleteEndpointGroups(
+    req: DeleteEndpointGroupsRequest,
+    cb?: (error: string, rep: DeleteEndpointGroupsResponse) => void
+  ): Promise<DeleteEndpointGroupsResponse> {
+    return this.request("DeleteEndpointGroups", req, cb)
   }
 
   /**

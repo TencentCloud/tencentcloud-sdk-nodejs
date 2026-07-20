@@ -17676,6 +17676,16 @@ export interface TrackSelector {
 }
 
 /**
+ * Aigc 转绘、替换等任务参数
+ */
+export interface VideoRedrawTaskInfo {
+  /**
+   * <p>转绘视频风格，如动漫、赛博朋克、水墨等</p>
+   */
+  Style?: string
+}
+
+/**
  * 编排任务输出
  */
 export interface ActivityResult {
@@ -18009,6 +18019,10 @@ export interface CreateVideoRedrawTaskRequest {
    * <p>用户cos信息，用于保存生成结果</p>
    */
   CosInfo?: VideoRedrawCosInfo
+  /**
+   * <p>ai转绘任务信息</p>
+   */
+  TaskInfo?: VideoRedrawTaskInfo
 }
 
 /**

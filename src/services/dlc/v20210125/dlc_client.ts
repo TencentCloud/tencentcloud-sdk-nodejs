@@ -43,7 +43,7 @@ import {
   DescribeDMSPartitionsRequest,
   DescribeDMSTableResponse,
   CreateTasksInOrderRequest,
-  UpdateStandardEngineResourceGroupConfigInfoResponse,
+  DescribeUpdatableDataEnginesResponse,
   DataEngineImageSessionParameter,
   CreateDatabaseRequest,
   DescribeDMSTablesResponse,
@@ -120,7 +120,7 @@ import {
   DescribeTaskLogRequest,
   DescribeDataEnginesScaleDetailRequest,
   DescribeEngineNetworksRequest,
-  CreateTasksRequest,
+  GenerateCreateMangedTableSqlRequest,
   SuspendResumeDataEngineRequest,
   DescribeNetworkConnectionsResponse,
   DescribeSparkAppJobsResponse,
@@ -148,6 +148,7 @@ import {
   AddDMSPartitionsResponse,
   CancelNotebookSessionStatementRequest,
   Param,
+  GPUInfo,
   UpdateStandardEngineResourceGroupBaseInfoRequest,
   SparkSessionBatchLogOperate,
   DescribeTablePartitionsRequest,
@@ -176,12 +177,14 @@ import {
   SwitchDataEngineResponse,
   DescribeTaskResourceUsageRequest,
   DescribeLakeFsInfoRequest,
+  UpdateStandardEngineResourceGroupConfigInfoResponse,
   CreateCHDFSBindingProductResponse,
   DescribeUserInfoRequest,
   PauseStandardEngineResourceGroupsResponse,
   DeleteStandardEngineResourceGroupRequest,
   GatewayInfo,
   DescribeUserTypeResponse,
+  QueryResultResponse,
   DeleteThirdPartyAccessUserRequest,
   DeleteUserResponse,
   CreateUserRoleRequest,
@@ -277,7 +280,7 @@ import {
   DeleteNativeSparkSessionRequest,
   AlterDMSTableResponse,
   CreateUserVpcConnectionResponse,
-  DescribeUpdatableDataEnginesResponse,
+  DescribeMCPTaskResultResponse,
   DeleteUserRequest,
   DataEngineScaleInfoDetail,
   DeleteDataEngineResponse,
@@ -320,7 +323,6 @@ import {
   QueryResultRequest,
   CheckDataEngineImageCanBeRollbackRequest,
   CreateTaskRequest,
-  SparkSessionInfo,
   DescribeClusterMonitorInfosRequest,
   CreateTableRequest,
   DescribeStandardEngineResourceGroupsRequest,
@@ -340,7 +342,7 @@ import {
   DescribeNetworkConnectionsRequest,
   CreateTcIcebergTableRequest,
   AttachWorkGroupPolicyResponse,
-  AddUsersToWorkGroupResponse,
+  DescribeDMSTablesRequest,
   LaunchStandardEngineResourceGroupsResponse,
   UpdateNetworkConnectionResponse,
   CreateSparkAppTaskResponse,
@@ -377,13 +379,13 @@ import {
   UpdateDataEngineConfigResponse,
   DataEngineImageVersion,
   MysqlInfo,
-  GenerateCreateMangedTableSqlRequest,
+  CreateTasksRequest,
   Sort,
   StatementInformation,
   OtherDatasourceConnection,
   DetachUserPolicyRequest,
   DeleteThirdPartyAccessUserResponse,
-  GPUInfo,
+  AddUsersToWorkGroupResponse,
   DescribeDataEngineImageVersionsResponse,
   CreateTcIcebergTableResponse,
   DeleteSparkAppResponse,
@@ -394,6 +396,7 @@ import {
   CreateSparkAppRequest,
   CreateSparkSessionBatchSQLRequest,
   ListTaskJobLogDetailResponse,
+  DescribeMCPTaskResponse,
   DescribeSubUserAccessPolicyRequest,
   HouseEventsInfo,
   SQLTask,
@@ -428,7 +431,7 @@ import {
   ModifyAdvancedStoreLocationResponse,
   CreateTasksInOrderResponse,
   TagInfo,
-  DescribeDMSTablesRequest,
+  SparkSessionInfo,
   DeleteSparkAppRequest,
   DescribeDLCCatalogAccessRequest,
   DescribeStandardEngineResourceGroupsResponse,
@@ -532,6 +535,7 @@ import {
   ModifyDataEngineDescriptionResponse,
   InitializeTCLakeResponse,
   UpdateDataEngineConfigRequest,
+  DescribeMCPTaskResultRequest,
   DropDMSTableRequest,
   CreateInternalTableResponse,
   DescribeSparkAppTasksRequest,
@@ -539,7 +543,7 @@ import {
   AttachDataMaskPolicyResponse,
   CreateUserVpcConnectionRequest,
   UserMessage,
-  QueryResultResponse,
+  DescribeMCPTaskRequest,
   SwitchDataEngineImageRequest,
   DescribeDMSTableRequest,
   ModifyGovernEventRuleRequest,
@@ -2181,6 +2185,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口（DescribeTasks）用于查询任务列表
+   */
+  async DescribeMCPTask(
+    req?: DescribeMCPTaskRequest,
+    cb?: (error: string, rep: DescribeMCPTaskResponse) => void
+  ): Promise<DescribeMCPTaskResponse> {
+    return this.request("DescribeMCPTask", req, cb)
+  }
+
+  /**
    * 开通TCLake
    */
   async InitializeTCLake(
@@ -2318,6 +2332,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskLogResponse) => void
   ): Promise<DescribeTaskLogResponse> {
     return this.request("DescribeTaskLog", req, cb)
+  }
+
+  /**
+   * 获取任务结果查询
+   */
+  async DescribeMCPTaskResult(
+    req?: DescribeMCPTaskResultRequest,
+    cb?: (error: string, rep: DescribeMCPTaskResultResponse) => void
+  ): Promise<DescribeMCPTaskResultResponse> {
+    return this.request("DescribeMCPTaskResult", req, cb)
   }
 
   /**

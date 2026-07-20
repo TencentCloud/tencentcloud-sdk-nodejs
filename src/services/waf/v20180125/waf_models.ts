@@ -2587,11 +2587,152 @@ export interface DescribePostCKafkaFlowsResponse {
  */
 export interface Strategy {
   /**
-   * 匹配字段
-
-    匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同具体如下所示：
-<table><thead><tr><th>匹配字段</th><th>匹配参数</th><th>逻辑符号</th><th>匹配内容</th></tr></thead><tbody><tr><td>IP（来源IP）</td><td>不支持参数</td><td>ipmatch（匹配）<br/>ipnmatch（不匹配）</td><td>多个IP以英文逗号隔开,最多20个</td></tr><tr><td>IPV6（来源IPv6）</td><td>不支持参数</td><td>ipmatch（匹配）<br/>ipnmatch（不匹配）</td><td>支持单个IPV6地址</td></tr><tr><td>Referer（Referer）</td><td>不支持参数</td><td>empty（内容为空）<br/>null（不存在）<br/>eq（等于）<br/>neq（不等于）<br/>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>URL（请求路径）</td><td>不支持参数</td><td>eq（等于）<br/>neq（不等于）<br/>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）<br/></td><td>请以/开头,512个字符以内</td></tr><tr><td>UserAgent（UserAgent）</td><td>不支持参数</td><td>同匹配字段<font color="Red">Referer</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>HTTP_METHOD（HTTP请求方法）</td><td>不支持参数</td><td>eq（等于）<br/>neq（不等于）</td><td>请输入方法名称,建议大写</td></tr><tr><td>QUERY_STRING（请求字符串）</td><td>不支持参数</td><td>同匹配字段<font color="Red">请求路径</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET（GET参数值）</td><td>支持参数录入</td><td>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_PARAMS_NAMES（GET参数名）</td><td>不支持参数</td><td>exsit（存在参数）<br/>nexsit（不存在参数）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>POST（POST参数值）</td><td>支持参数录入</td><td>同匹配字段<font color="Red">GET参数值</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_POST_NAMES（POST参数名）</td><td>不支持参数</td><td>同匹配字段<font color="Red">GET参数名</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>POST_BODY（完整BODY）</td><td>不支持参数</td><td>同匹配字段<font color="Red">请求路径</font>逻辑符号</td><td>请输入BODY内容,512个字符以内</td></tr><tr><td>COOKIE（Cookie）</td><td>不支持参数</td><td>empty（内容为空）<br/>null（不存在）<br/>rematch（正则匹配）</td><td><font color="Red">暂不支持</font></td></tr><tr><td>GET_COOKIES_NAMES（Cookie参数名）</td><td>不支持参数</td><td>同匹配字段<font color="Red">GET参数名</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>ARGS_COOKIE（Cookie参数值）</td><td>支持参数录入</td><td>同匹配字段<font color="Red">GET参数值</font>逻辑符号</td><td>请输入内容,512个字符以内</td></tr><tr><td>GET_HEADERS_NAMES（Header参数名）</td><td>不支持参数</td><td>exsit（存在参数）<br/>nexsit（不存在参数）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,建议小写,512个字符以内</td></tr><tr><td>ARGS_HEADER（Header参数值）</td><td>支持参数录入</td><td>contains（包含）<br/>ncontains（不包含）<br/>len_eq（长度等于）<br/>len_gt（长度大于）<br/>len_lt（长度小于）<br/>strprefix（前缀匹配）<br/>strsuffix（后缀匹配）<br/>rematch（正则匹配）</td><td>请输入内容,512个字符以内</td></tr><tr><td>CONTENT_LENGTH（Content-length）</td><td>支持参数录入</td><td>numgt（数值大于）<br/>numlt（数值小于）<br/>numeq（数值等于）<br/></td><td>请输入0-9999999999999之间的整数</td></tr><tr><td>IP_GEO（来源IP归属地）</td><td>支持参数录入</td><td>geo_in（属于）<br/>geo_not_in（不属于）<br/></td><td>请输入内容,10240字符以内，格式为序列化的JSON，格式为：[{"Country":"中国","Region":"广东","City":"深圳"}]</td></tr><tr><td>CAPTCHA_RISK（验证码风险）</td><td>不支持参数</td><td>eq（等于）<br/>neq（不等于）<br/>belong（属于）<br/>not_belong（不属于）<br/>null（不存在）<br/>exist（存在）</td><td>请输入风险等级值,支持数值范围0-255</td></tr><tr><td>CAPTCHA_DEVICE_RISK（验证码设备风险）</td><td>不支持参数</td><td>eq（等于）<br/>neq（不等于）<br/>belong（属于）<br/>not_belong（不属于）<br/>null（不存在）<br/>exist（存在）</td><td>请输入设备风险代码,支持取值：101、201、301、401、501、601、701</td></tr><tr><td>CAPTCHAR_SCORE（验证码风险评估分）</td><td>不支持参数</td><td>numeq（数值等于）<br/>numgt（数值大于）<br/>numlt（数值小于）<br/>numle（数值小于等于）<br/>numge（数值大于等于）<br/>null（不存在）<br/>exist（存在）</td><td>请输入评估分数,支持数值范围0-100</td></tr>
-</tbody></table>
+   * 匹配字段 匹配字段不同，相应的匹配参数、逻辑符号、匹配内容有所不同具体如下所示： <table>
+	<thead>
+		<tr>
+			<th>匹配字段</th>
+			<th>匹配参数</th>
+			<th>逻辑符号</th>
+			<th>匹配内容</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>IP（来源IP）</td>
+			<td>不支持参数</td>
+			<td>ipmatch（匹配）<br />ipnmatch（不匹配）</td>
+			<td>多个IP以英文逗号隔开,最多20个</td>
+		</tr>
+		<tr>
+			<td>IPV6（来源IPv6）</td>
+			<td>不支持参数</td>
+			<td>ipmatch（匹配）<br />ipnmatch（不匹配）</td>
+			<td>支持单个IPV6地址</td>
+		</tr>
+		<tr>
+			<td>Referer（Referer）</td>
+			<td>不支持参数</td>
+			<td>empty（内容为空）<br />null（不存在）<br />eq（等于）<br />neq（不等于）<br />contains（包含）<br />ncontains（不包含）<br/>belong_to（属于）<br/>not_belong_to（不属于）<br />len_eq（长度等于）<br />len_gt（长度大于）<br />len_lt（长度小于）<br />strprefix（前缀匹配）<br />strsuffix（后缀匹配）<br />rematch（正则匹配）</td>
+			<td>请输入内容,512个字符以内</td>
+		</tr>
+		<tr>
+			<td>URL（请求路径）</td>
+			<td>不支持参数</td>
+			<td>eq（等于）<br />neq（不等于）<br />contains（包含）<br />ncontains（不包含）<br />len_eq（长度等于）<br />belong_to（属于）<br />not_belong_to（不属于）<br />len_gt（长度大于）<br />len_lt（长度小于）<br />strprefix（前缀匹配）<br />strsuffix（后缀匹配）<br />rematch（正则匹配）<br /></td>
+			<td>请以/开头,512个字符以内</td>
+		</tr>
+		<tr>
+			<td>UserAgent（UserAgent）</td>
+			<td>不支持参数</td>
+			<td>同匹配字段<font color="Red">Referer</font>逻辑符号</td>
+			<td>请输入内容,512个字符以内</td>
+		</tr>
+		<tr>
+			<td>HTTP_METHOD（HTTP请求方法）</td>
+			<td>不支持参数</td>
+			<td>eq（等于）<br />neq（不等于）<br/>belong_to（属于）<br/>not_belong_to（不属于）</td>
+			<td>请输入方法名称,建议大写</td>
+		</tr>
+		<tr>
+			<td>QUERY_STRING（请求字符串）</td>
+			<td>不支持参数</td>
+			<td>同匹配字段<font color="Red">请求路径</font>逻辑符号</td>
+			<td>请输入内容,512个字符以内</td>
+		</tr>
+		<tr>
+			<td>GET（GET参数值）</td>
+			<td>支持参数录入</td>
+			<td>contains（包含）<br />ncontains（不包含）<br/>belong_to（属于）<br/>not_belong_to（不属于）<br />len_eq（长度等于）<br />len_gt（长度大于）<br />len_lt（长度小于）<br />strprefix（前缀匹配）<br />strsuffix（后缀匹配）</td>
+			<td>请输入内容,512个字符以内</td>
+		</tr>
+		<tr>
+			<td>GET_PARAMS_NAMES（GET参数名）</td>
+			<td>不支持参数</td>
+			<td>exsit（存在参数）<br />nexsit（不存在参数）<br/>belong_to（属于）<br/>not_belong_to（不属于）<br />len_eq（长度等于）<br />len_gt（长度大于）<br />len_lt（长度小于）<br />strprefix（前缀匹配）<br />strsuffix（后缀匹配）</td>
+			<td>请输入内容,512个字符以内</td>
+		</tr>
+		<tr>
+			<td>POST（POST参数值）</td>
+			<td>支持参数录入</td>
+			<td>同匹配字段<font color="Red">GET参数值</font>逻辑符号</td>
+			<td>请输入内容,512个字符以内</td>
+		</tr>
+		<tr>
+			<td>GET_POST_NAMES（POST参数名）</td>
+			<td>不支持参数</td>
+			<td>同匹配字段<font color="Red">GET参数名</font>逻辑符号</td>
+			<td>请输入内容,512个字符以内</td>
+		</tr>
+		<tr>
+			<td>POST_BODY（完整BODY）</td>
+			<td>不支持参数</td>
+			<td>同匹配字段<font color="Red">请求路径</font>逻辑符号</td>
+			<td>请输入BODY内容,512个字符以内</td>
+		</tr>
+		<tr>
+			<td>COOKIE（Cookie）</td>
+			<td>不支持参数</td>
+			<td>empty（内容为空）<br />null（不存在）<br />rematch（正则匹配）</td>
+			<td>
+				<font color="Red">暂不支持</font>
+			</td>
+		</tr>
+		<tr>
+			<td>GET_COOKIES_NAMES（Cookie参数名）</td>
+			<td>不支持参数</td>
+			<td>同匹配字段<font color="Red">GET参数名</font>逻辑符号</td>
+			<td>请输入内容,512个字符以内</td>
+		</tr>
+		<tr>
+			<td>ARGS_COOKIE（Cookie参数值）</td>
+			<td>支持参数录入</td>
+			<td>同匹配字段<font color="Red">GET参数值</font>逻辑符号</td>
+			<td>请输入内容,512个字符以内</td>
+		</tr>
+		<tr>
+			<td>GET_HEADERS_NAMES（Header参数名）</td>
+			<td>不支持参数</td>
+			<td>exsit（存在参数）<br />nexsit（不存在参数）<br />len_eq（长度等于）<br />len_gt（长度大于）<br />len_lt（长度小于）<br />strprefix（前缀匹配）<br />strsuffix（后缀匹配）<br />rematch（正则匹配）</td>
+			<td>请输入内容,建议小写,512个字符以内</td>
+		</tr>
+		<tr>
+			<td>ARGS_HEADER（Header参数值）</td>
+			<td>支持参数录入</td>
+			<td>contains（包含）<br />ncontains（不包含）<br />len_eq（长度等于）<br />len_gt（长度大于）<br />len_lt（长度小于）<br />strprefix（前缀匹配）<br />strsuffix（后缀匹配）<br />rematch（正则匹配）</td>
+			<td>请输入内容,512个字符以内</td>
+		</tr>
+		<tr>
+			<td>CONTENT_LENGTH（Content-length）</td>
+			<td>支持参数录入</td>
+			<td>numgt（数值大于）<br />numlt（数值小于）<br />numeq（数值等于）<br /></td>
+			<td>请输入0-9999999999999之间的整数</td>
+		</tr>
+		<tr>
+			<td>IP_GEO（来源IP归属地）</td>
+			<td>支持参数录入</td>
+			<td>geo_in（属于）<br />geo_not_in（不属于）<br /></td>
+			<td>请输入内容,10240字符以内，格式为序列化的JSON，格式为：[{"Country":"中国","Region":"广东","City":"深圳"}]</td>
+		</tr>
+		<tr>
+			<td>CAPTCHA_RISK（验证码风险）</td>
+			<td>不支持参数</td>
+			<td>eq（等于）<br />neq（不等于）<br />belong（属于）<br />not_belong（不属于）<br />null（不存在）<br />exist（存在）</td>
+			<td>请输入风险等级值,支持数值范围0-255</td>
+		</tr>
+		<tr>
+			<td>CAPTCHA_DEVICE_RISK（验证码设备风险）</td>
+			<td>不支持参数</td>
+			<td>eq（等于）<br />neq（不等于）<br />belong（属于）<br />not_belong（不属于）<br />null（不存在）<br />exist（存在）</td>
+			<td>请输入设备风险代码,支持取值：101、201、301、401、501、601、701</td>
+		</tr>
+		<tr>
+			<td>CAPTCHAR_SCORE（验证码风险评估分）</td>
+			<td>不支持参数</td>
+			<td>numeq（数值等于）<br />numgt（数值大于）<br />numlt（数值小于）<br />numle（数值小于等于）<br />numge（数值大于等于）<br />null（不存在）<br />exist（存在）</td>
+			<td>请输入评估分数,支持数值范围0-100</td>
+		</tr>
+	</tbody>
+</table>
    */
   Field: string
   /**
@@ -2617,6 +2758,8 @@ export interface Strategy {
         numneq （ 数值不等于）
         numle （ 数值小于等于）
         numge （ 数值大于等于）
+		belong_to（属于）
+		not_belong_to（不属于）
         geo_in （ IP地理属于）
         geo_not_in （ IP地理不属于）
     各匹配字段对应的逻辑符号不同，详见上述匹配字段表格
@@ -4184,6 +4327,24 @@ export interface ModifyIpAccessControlRequest {
 }
 
 /**
+ * API 安全事件样本
+ */
+export interface ApiEventSample {
+  /**
+   * <p>攻击样本的请求部分</p>
+   */
+  Request?: string
+  /**
+   * <p>攻击样本的响应</p>
+   */
+  Response?: string
+  /**
+   * <p>攻击样本状态码</p>
+   */
+  Status?: string
+}
+
+/**
  * AddCustomWhiteRule返回参数结构体
  */
 export interface AddCustomWhiteRuleResponse {
@@ -5402,7 +5563,7 @@ export interface AddBatchCustomWhiteRuleResponse {
  */
 export interface AddBatchCustomRuleResponse {
   /**
-   * 操作成功
+   * <p>操作成功</p>
    */
   Res?: string
   /**
@@ -8004,6 +8165,10 @@ export interface ClbObject {
    * <p>waf接入状态</p>
    */
   WafAccessStatus?: number
+  /**
+   * <p>备注</p>
+   */
+  Note?: string
 }
 
 /**
@@ -8301,49 +8466,61 @@ export type DescribeWafAutoDenyStatusRequest = null
  */
 export interface ApiSecAttackSource {
   /**
-   * 攻击来源ip
+   * <p>攻击来源ip</p>
    */
   SrcIp?: string
   /**
-   * 威胁等级
+   * <p>威胁等级</p>
    */
   EventLevel?: string
   /**
-   * BOT标签
+   * <p>BOT标签</p>
    */
   BotLabel?: string
   /**
-   * 变更时间
+   * <p>变更时间</p>
    */
   Timestamp?: number
   /**
-   * 地理位置
+   * <p>地理位置</p>
    */
   City?: string
   /**
-   * 开始时间
+   * <p>开始时间</p>
    */
   StartTime?: number
   /**
-   * 关联事件数量
+   * <p>关联事件数量</p>
    */
   EventCount?: number
   /**
-   * 攻击数量
+   * <p>攻击数量</p>
    */
   AttackCount?: number
   /**
-   * 缺失参数名，当事件类型是缺失参数名，缺失参数名和密码时，返回此字段
+   * <p>缺失参数名，当事件类型是缺失参数名，缺失参数名和密码时，返回此字段</p>
    */
   MissUserName?: string
   /**
-   * 当是水平越权和垂直越权时，返回此字段
+   * <p>当是水平越权和垂直越权时，返回此字段</p>
    */
   AttackDetail?: Array<string>
   /**
-   * 缺失密码参数，当事件类型是缺失参数名，缺失参数名和密码时，返回此字段
+   * <p>缺失密码参数，当事件类型是缺失参数名，缺失参数名和密码时，返回此字段</p>
    */
   MissPassword?: string
+  /**
+   * <p>事件描述</p>
+   */
+  EventDescription?: string
+  /**
+   * <p>事件描述(英文)</p>
+   */
+  EventDescriptionEng?: string
+  /**
+   * <p>攻击样本</p>
+   */
+  Sample?: ApiEventSample
 }
 
 /**
@@ -8868,93 +9045,97 @@ export interface DescribeFlowTrendResponse {
  */
 export interface BatchCustomRuleListItem {
   /**
-   * 规则Id
+   * <p>规则Id</p>
    */
   Id?: number
   /**
-   * 动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向，5代表JS校验
+   * <p>动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向，5代表JS校验</p>
    */
   ActionType?: number
   /**
-   * 加白模块
+   * <p>加白模块</p>
    */
   Bypass?: string
   /**
-   * 有效期
+   * <p>有效期</p>
    */
   ExpireTime?: number
   /**
-   * 规则名称
+   * <p>规则名称</p>
    */
   Name?: string
   /**
-   * 重定向地址
+   * <p>重定向地址</p>
    */
   Redirect?: string
   /**
-   * 优先级
+   * <p>优先级</p>
    */
   SortId?: number
   /**
-   * 开关状态
+   * <p>开关状态</p>
    */
   Status?: number
   /**
-   * 域名列表
+   * <p>域名列表</p>
    */
   Domains?: Array<string>
   /**
-   * 备注
+   * <p>备注</p>
    */
   Remark?: string
   /**
-   * 策略列表
+   * <p>策略列表</p>
    */
   Strategies?: Array<Strategy>
   /**
-   * 事件Id
+   * <p>事件Id</p>
    */
   EventId?: string
   /**
-   * 生效状态
+   * <p>生效状态</p>
    */
   ValidStatus?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
+   * <p>规则执行的方式，TimedJob为定时执行，CronJob为周期执行</p>
    */
   JobType?: string
   /**
-   * 定时任务配置
+   * <p>定时任务配置</p>
    */
   JobDateTime?: JobDateTime
   /**
-   * 周期任务粒度
+   * <p>周期任务粒度</p>
    */
   CronType?: string
   /**
-   * 标签
+   * <p>标签</p>
    */
   Label?: string
   /**
-   * 页面ID
+   * <p>页面ID</p>
    */
   PageId?: string
   /**
-   * 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系
+   * <p>匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系</p>
    */
   LogicalOp?: string
   /**
-   * 动作灰度的比例
+   * <p>动作灰度的比例</p>
    */
   ActionRatio?: number
+  /**
+   * <p>防护对象组ID</p>
+   */
+  GroupIds?: Array<number | bigint>
 }
 
 /**
@@ -11813,65 +11994,69 @@ export interface LimitRuleV2 {
  */
 export interface AddBatchCustomRuleRequest {
   /**
-   * 规则名称
+   * <p>规则名称</p>
    */
   Name: string
   /**
-   * 如果没有设置JobDateTime字段则用此字段，0表示永久生效，其它表示定时生效的截止时间（单位为秒）
+   * <p>如果没有设置JobDateTime字段则用此字段，0表示永久生效，其它表示定时生效的截止时间（单位为秒）</p>
    */
   ExpireTime: number
   /**
-   * 优先级
+   * <p>优先级</p>
    */
   SortId: number
   /**
-   * 动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向
+   * <p>动作类型，1代表阻断，2代表人机识别，3代表观察，4代表重定向</p>
    */
   ActionType: number
   /**
-   * 重定向地址
+   * <p>重定向地址</p>
    */
   Redirect: string
   /**
-   * 加白模块
+   * <p>加白模块</p>
    */
   Bypass: string
   /**
-   * 备注
+   * <p>备注</p>
    */
   Remark: string
   /**
-   * 事件Id
+   * <p>事件Id</p>
    */
   EventId: string
   /**
-   * 域名列表
+   * <p>域名列表</p>
    */
   Domains: Array<string>
   /**
-   * 策略详情列表
+   * <p>策略详情列表</p>
    */
   Strategies: Array<Strategy>
   /**
-   * 规则执行的方式，TimedJob为定时执行，CronJob为周期执行
+   * <p>规则执行的方式，TimedJob为定时执行，CronJob为周期执行</p>
    */
   JobType?: string
   /**
-   * 定时任务配置
+   * <p>定时任务配置</p>
    */
   JobDateTime?: JobDateTime
   /**
-   * 匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系
+   * <p>匹配条件的逻辑关系，支持and、or，分别表示多个逻辑匹配条件是与、或的关系</p>
    */
   LogicalOp?: string
   /**
-   * 页面ID
+   * <p>页面ID</p>
    */
   PageId?: string
   /**
-   * 动作灰度比例
+   * <p>动作灰度比例</p>
    */
   ActionRatio?: number
+  /**
+   * <p>绑定的防护组ID</p>
+   */
+  GroupIds?: Array<number | bigint>
 }
 
 /**
@@ -12347,6 +12532,10 @@ export interface IntentDetectResult {
    * <p>是否恶意意图</p><p>枚举值：</p><ul><li>1： 恶意</li><li>0： 正常</li></ul>
    */
   IsUnSafe?: number
+  /**
+   * <p>检出分类</p>
+   */
+  Category?: string
 }
 
 /**

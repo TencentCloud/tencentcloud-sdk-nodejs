@@ -458,15 +458,15 @@ export interface SkillShare {
 }
 
 /**
- * 应用分享白名单项
+ * AppShareWhitelistItem
  */
 export interface AppShareWhitelistItem {
   /**
-   * 白名单类型。枚举值: 1:UIN账号, 2:手机号码, 3:邮箱地址, 4:IP地址
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_SHARE_WHITELIST_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>APP_SHARE_WHITELIST_TYPE_UIN</td><td>1</td><td>UIN账号</td></tr><tr><td>APP_SHARE_WHITELIST_TYPE_PHONE</td><td>2</td><td>手机号码</td></tr><tr><td>APP_SHARE_WHITELIST_TYPE_EMAIL</td><td>3</td><td>邮箱地址</td></tr><tr><td>APP_SHARE_WHITELIST_TYPE_IP</td><td>4</td><td>IP地址</td></tr><tr><td>APP_SHARE_WHITELIST_TYPE_RTX</td><td>5</td><td>RTX账号</td></tr></tbody></table>
    */
-  Type: number
+  Type?: number
   /**
-   * 白名单值列表(UIN/手机号/邮箱/IP等)
+   * <p>白名单数组信息</p><p>参数格式：白名单值</p>
    */
   Values?: Array<string>
 }
@@ -490,29 +490,39 @@ export interface ModifyVariableRequest {
  */
 export interface ReleaseSummary {
   /**
-   * 创建时间 (Unix时间戳,秒级)
+   * <p>创建时间 (Unix时间戳,秒级)</p>
    */
   CreateTime: string
   /**
-   * 发布描述
+   * <p>发布描述</p>
    */
   Description: string
   /**
-   * 发布ID
+   * <p>发布ID</p>
    */
   ReleaseId: string
   /**
-   * 发布状态。枚举值: 1:待发布, 2:发布中, 3:发布成功, 4:发布失败, 5:审核中, 6:审核成功, 7:审核失败, 8:发布成功回调处理中, 9:发布暂停, 10:申诉审核中, 11:申诉审核通过, 12:申诉审核不通过
+   * <p>发布状态。枚举值: 1:待发布, 2:发布中, 3:发布成功, 4:发布失败, 5:审核中, 6:审核成功, 7:审核失败, 8:发布成功回调处理中, 9:发布暂停, 10:申诉审核中, 11:申诉审核通过, 12:申诉审核不通过</p>
    */
   Status: number
   /**
-   * 状态描述
+   * <p>状态描述</p>
    */
   StatusDescription: string
   /**
-   * 发布渠道ID列表
+   * <p>应用分享访问控制</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppShareAccessControl?: AppShareAccessControl
+  /**
+   * <p>发布渠道ID列表</p>
    */
   ChannelIdList?: Array<string>
+  /**
+   * <p>企业共享配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CorpShareConfig?: CorpShareConfig
 }
 
 /**
@@ -762,6 +772,7 @@ export interface Plugin {
   CreateTime?: string
   /**
    * 插件运营管理信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Operation?: PluginOperation
   /**
@@ -774,10 +785,12 @@ export interface Plugin {
   PluginVersion?: number
   /**
    * 插件基础信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Profile?: PluginProfile
   /**
    * 插件统计信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
   Statistics?: PluginStatistics
   /**
@@ -786,6 +799,7 @@ export interface Plugin {
   Status?: number
   /**
    * 工具列表
+注意：此字段可能返回 null，表示取不到有效值。
    */
   ToolList?: Array<Tool>
   /**
@@ -794,6 +808,7 @@ export interface Plugin {
   UpdateTime?: string
   /**
    * 用户维度的插件状态信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
   UserState?: PluginUserState
 }
@@ -893,33 +908,41 @@ export interface DescribeConversationRequest {
  */
 export interface Variable {
   /**
-   * 默认文件名称
+   * <p>默认文件名称</p>
    */
   DefaultFileName: string
   /**
-   * 默认值
+   * <p>默认值</p>
    */
   DefaultValue: string
   /**
-   * 变量描述
+   * <p>变量描述</p>
    */
   Description: string
   /**
-   * 模块类型。枚举值: 1:环境参数, 2:应用参数, 3:系统参数, -1:所有参数
+   * <p>模块类型。枚举值: 1:环境参数, 2:应用参数, 3:系统参数, -1:所有参数</p>
    */
   ModuleType: number
   /**
-   * 变量名称
+   * <p>变量名称</p>
    */
   Name: string
   /**
-   * 变量类型。枚举值: 1:字符串, 2:整数, 3:浮点数, 4:布尔值, 5:对象, 6:字符串数组, 7:整数数组, 8:浮点数数组, 9:布尔值数组, 10:对象数组, 11:文件, 12:文档, 13:图片, 14:音频, 15:视频, 16:文件数组, 17:文档数组, 18:图片数组, 19:音频数组, 20:视频数组, 21:数组的数组, 22:密钥/敏感信息, 99:空值
+   * <p>变量类型</p><p>枚举值：</p><ul><li>0： 字符串</li><li>1： 整数</li><li>2： 浮点数</li><li>3： 布尔值</li><li>4： 对象</li><li>5： 字符串数组</li><li>6： 整数数组</li><li>7： 浮点数数组</li><li>8： 布尔值数组</li><li>9： 对象数组</li><li>10： 文件</li><li>11： 文档</li><li>12： 图片</li><li>13： 音频</li><li>14： 视频</li><li>15： 文件数组</li><li>16： 文档数组</li><li>17： 图片数组</li><li>18： 音频数组</li><li>19： 视频数组</li><li>20： 数组的数组</li><li>21： 密钥</li></ul>
    */
   Type: number
   /**
-   * 变量ID
+   * <p>变量ID</p>
    */
   VariableId: string
+  /**
+   * <p>是否启用网络策略(仅环境变量生效)</p>
+   */
+  EnableEndpoints?: boolean
+  /**
+   * <p>网络策略列表(支持: 精确域名、*.通配子域名、可带协议/端口/路径前缀)</p>
+   */
+  EndpointList?: Array<string>
 }
 
 /**
@@ -982,19 +1005,19 @@ export interface AuthConfig {
 }
 
 /**
- * 应用分享访问控制配置
+ * AppShareAccessControl
  */
 export interface AppShareAccessControl {
   /**
-   * 访问控制类型。枚举值: 1:公开访问(所有用户都可访问), 2:内部访问(仅企业用户可访问), 3:账号白名单(指定UIN/手机/邮箱/IP可访问)
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_SHARE_ACCESS_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>APP_SHARE_ACCESS_TYPE_PUBLIC</td><td>1</td><td>公开访问(所有用户都可访问)</td></tr><tr><td>APP_SHARE_ACCESS_TYPE_INTERNAL</td><td>2</td><td>内部访问(仅企业用户可访问)</td></tr><tr><td>APP_SHARE_ACCESS_TYPE_ACCOUNT_WHITELIST</td><td>3</td><td>账号白名单(指定UIN/手机/邮箱/IP可访问)</td></tr></tbody></table>
    */
-  AccessType: number
+  AccessType?: number
   /**
-   * 体验链接开关
+   * <p>是否开启访问控制</p><p>枚举值：</p><ul><li>true： 启用</li><li>false： 禁用</li></ul>
    */
-  Enabled: boolean
+  Enabled?: boolean
   /**
-   * 白名单(仅 access_type=ACCOUNT_WHITELIST 时生效)
+   * <p>白名单信息</p>
    */
   Whitelist?: Array<AppShareWhitelistItem>
 }
@@ -1044,11 +1067,11 @@ export interface AppSharedKbInfo {
  */
 export interface ModifyAppResponse {
   /**
-   * app_id
+   * <p>app_id</p>
    */
   AppId?: string
   /**
-   * 更新时间 (Unix时间戳,秒级)
+   * <p>更新时间 (Unix时间戳,秒级)</p>
    */
   UpdateTime?: string
   /**
@@ -1082,6 +1105,24 @@ export interface ToolExample {
 }
 
 /**
+ * DescribeAccountList请求参数结构体
+ */
+export interface DescribeAccountListRequest {
+  /**
+   * <p>页码</p><p>从0开始</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>分页数量</p><p>取值范围：[1, 100]</p><p>单位：个</p><p>最大100</p>
+   */
+  PageSize?: number
+  /**
+   * <p>参数过滤</p><p>支持SpaceId,NIckName 过滤查询</p>
+   */
+  FilterList?: Array<Filter>
+}
+
+/**
  * Prompt改写配置
  */
 export interface PromptRewriteModel {
@@ -1097,49 +1138,35 @@ export interface PromptRewriteModel {
  */
 export interface ModifyAppRequest {
   /**
-   * 应用ID
+   * <p>应用ID</p>
    */
   AppId: string
   /**
-   * 应用模式。枚举值: 1:标准模式, 2:Agent模式, 3:单工作流模式, 4:ClawAgent模式
+   * <p>应用模式。枚举值: 1:标准模式, 2:Agent模式, 3:单工作流模式, 4:ClawAgent模式</p>
    */
   AppMode?: number
   /**
-   * 应用头像
+   * <p>应用头像</p>
    */
   Avatar?: string
   /**
-   * 应用配置
+   * <p>应用配置</p>
    */
   Config?: AppConfig
   /**
-   * 应用描述
+   * <p>应用描述</p>
    */
   Description?: string
   /**
-   * 应用名称
+   * <p>应用名称</p>
    */
   Name?: string
   /**
-   * 分享配置
-   */
-  ShareConfig?: AppShareAccessControl
-  /**
-   * 引用的共享知识库ID列表(全量覆盖)
+   * <p>引用的共享知识库ID列表(全量覆盖)</p>
    */
   SharedKbIdList?: Array<string>
   /**
-   * 字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：
-【顶层】Name, Avatar, Description, AppMode, ShareConfig, SharedKbIdList
-【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList
-【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel
-【WebSearch】Config.WebSearch
-【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent
-【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig
-【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced
-【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch
-【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman
-【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility
+   * <p>字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：<br>【顶层】Name, Avatar, Description, AppMode, SharedKbIdList<br>【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList<br>【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel<br>【WebSearch】Config.WebSearch<br>【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent<br>【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig<br>【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced<br>【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch<br>【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman<br>【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility</p>
    */
   UpdateMask?: FieldMask
 }
@@ -1149,19 +1176,19 @@ export interface ModifyAppRequest {
  */
 export interface DescribeAppRequest {
   /**
-   * 应用ID
+   * <p>应用ID</p>
    */
   AppId: string
   /**
-   * 应用域: ADP_DOMAIN_DEV(1)=开发域, ADP_DOMAIN_PROD(2)=发布域。枚举值: 1:开发域, 2:生产域
+   * <p>应用域: ADP_DOMAIN_DEV(1)=开发域, ADP_DOMAIN_PROD(2)=发布域。枚举值: 1:开发域, 2:生产域</p>
    */
   Domain?: number
   /**
-   * 字段掩码，指定需要返回的字段(Paths为空则返回所有字段)。Paths枚举值：AppConfig(应用配置), SecretInfo(应用密钥信息), ShareUrlInfo(分享链接信息), SpecialStatusInfo(特殊状态信息), SearchResourceStatus(搜索资源状态), SharedKbList(应用引用的共享知识库列表)
+   * <p>字段掩码，指定需要返回的字段(Paths为空则返回所有字段)。Paths枚举值：AppConfig(应用配置), SecretInfo(应用密钥信息), ShareUrlInfo(分享链接信息), SpecialStatusInfo(特殊状态信息), SearchResourceStatus(搜索资源状态), SharedKbList(应用引用的共享知识库列表),CorpShareConfig(企业共享配置)</p>
    */
   FieldMask?: FieldMask
   /**
-   * 特殊状态类型(当FieldMask包含SpecialStatusInfo时必填)。枚举值: 1:回滚状态, 2:首次导入状态
+   * <p>特殊状态类型(当FieldMask包含SpecialStatusInfo时必填)。枚举值: 1:回滚状态, 2:首次导入状态</p>
    */
   StatusType?: number
 }
@@ -1313,6 +1340,20 @@ export interface CreateWebSocketTokenResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 操作日志元数据
+ */
+export interface AuditLogMetaField {
+  /**
+   * <p>操作日志元数据key</p>
+   */
+  Key?: string
+  /**
+   * <p>操作日志元数据Name</p>
+   */
+  Name?: string
 }
 
 /**
@@ -1560,6 +1601,14 @@ export interface ModifyPluginRequest {
    * <p>插件的工具列表，mcp插件不传</p>
    */
   ToolList?: Array<Tool>
+  /**
+   * <p>登录用户主账号(集成商模式必填)</p>
+   */
+  LoginUin?: string
+  /**
+   * <p>登录用户子账号(集成商模式必填)</p>
+   */
+  LoginSubAccountUin?: string
 }
 
 /**
@@ -1599,23 +1648,31 @@ export interface PluginParam {
  */
 export interface CreateReleaseRequest {
   /**
-   * 应用ID
+   * <p>应用ID</p>
    */
   AppId: string
   /**
-   * 渠道ID列表
+   * <p>应用分享访问控制配置</p>
+   */
+  AppShareAccessControl?: AppShareAccessControl
+  /**
+   * <p>渠道ID列表</p>
    */
   ChannelIdList?: Array<string>
   /**
-   * 发布描述
+   * <p>企业共享配置</p>
+   */
+  CorpShareConfig?: CorpShareConfig
+  /**
+   * <p>发布描述</p>
    */
   Description?: string
   /**
-   * 将默认知识库中，仅调试生效的知识批量变更为"调试/发布都生效"
+   * <p>将默认知识库中，仅调试生效的知识批量变更为&quot;调试/发布都生效&quot;</p>
    */
   IsDevToRelease?: boolean
   /**
-   * 是否同步发布为应用模板
+   * <p>是否同步发布为应用模板</p>
    */
   IsPublishAsTemplate?: boolean
 }
@@ -1844,6 +1901,20 @@ export interface ConversationExperience {
 }
 
 /**
+ * ClawAgent Agent团队协作配置
+ */
+export interface ClawAgentAgentTeamConfig {
+  /**
+   * <p>是否开启Agent团队协作</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>prompt内容</p>
+   */
+  PromptContent?: string
+}
+
+/**
  * DescribeSkillReferenceList请求参数结构体
  */
 export interface DescribeSkillReferenceListRequest {
@@ -1865,6 +1936,14 @@ export interface DeletePluginRequest {
    * <p>插件id</p>
    */
   PluginId: string
+  /**
+   * <p>登录用户主账号(集成商模式必填)</p>
+   */
+  LoginUin?: string
+  /**
+   * <p>登录用户子账号(集成商模式必填)</p>
+   */
+  LoginSubAccountUin?: string
 }
 
 /**
@@ -2097,6 +2176,24 @@ export interface AppSubStatusInfo {
 }
 
 /**
+ * CorpShareConfig
+ */
+export interface CorpShareConfig {
+  /**
+   * <p>企业共享开关</p>
+   */
+  Enabled?: boolean
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>SHARE_SCOPE_TYPE_UNSPECIFIED</td><td>0</td><td></td></tr><tr><td>SHARE_SCOPE_TYPE_ALL</td><td>1</td><td></td></tr><tr><td>SHARE_SCOPE_TYPE_ACCOUNT</td><td>2</td><td></td></tr></tbody></table>
+   */
+  ShareScope?: number
+  /**
+   * <p>企业共享应用标签</p>
+   */
+  TagIdList?: Array<string>
+}
+
+/**
  * CreateConversation请求参数结构体
  */
 export interface CreateConversationRequest {
@@ -2290,6 +2387,34 @@ export interface ClawAgentConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomConfig: ClawAgentCustomConfig
+  /**
+   * Agent团队协作配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AgentTeamConfig?: ClawAgentAgentTeamConfig
+  /**
+   * 长期记忆配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LongMemoryConfig?: ClawAgentLongMemoryConfig
+}
+
+/**
+ * 模型限制信息
+ */
+export interface ModelLimit {
+  /**
+   * 模型上下文长度展示文案（如 "128K"、"1000K"）
+   */
+  ContextLengthDescription?: string
+  /**
+   * 模型对话框输入长度字符数限制
+   */
+  InputLengthLimit?: number
+  /**
+   * 模型提示词长度字符数限制
+   */
+  PromptLengthLimit?: number
 }
 
 /**
@@ -2321,25 +2446,41 @@ export interface AppSecretInfo {
 }
 
 /**
- * CreatePlugin请求参数结构体
+ * Agent 详情
  */
-export interface CreatePluginRequest {
+export interface AgentDetail {
   /**
-   * <p>插件基础资料</p>
+   * <p>Agent ID</p>
    */
-  Profile: PluginProfile
+  AgentId?: string
   /**
-   * <p>插件类型配置</p>
+   * <p>Agent基本配置</p>
    */
-  Config: PluginConfig
+  Profile?: AgentProfile
   /**
-   * <p>当前空间id</p>
+   * <p>系统提示词</p>
    */
-  SpaceId: string
+  Instructions?: string
   /**
-   * <p>插件的工具列表</p>
+   * <p>模型信息</p>
    */
-  ToolList?: Tool
+  Model?: AgentModelConfig
+  /**
+   * <p>工具详情</p>
+   */
+  ToolList?: Array<AgentTool>
+  /**
+   * <p>插件配置</p>
+   */
+  PluginList?: Array<AgentPlugin>
+  /**
+   * <p>技能详情</p>
+   */
+  SkillList?: Array<AgentSkill>
+  /**
+   * <p>高级配置</p>
+   */
+  AdvancedConfig?: AgentAdvancedConfig
 }
 
 /**
@@ -2466,39 +2607,44 @@ export interface CreateAppRequest {
  */
 export interface App {
   /**
-   * 辅助信息(子状态/审批/申诉/搜索资源/特殊状态等)
+   * <p>辅助信息(子状态/审批/申诉/搜索资源/特殊状态等)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AuxiliaryInfo: AppAuxiliaryInfo
   /**
-   * 配置
+   * <p>配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Config: AppConfig
   /**
-   * 元数据
+   * <p>元数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Metadata: AppMetadata
   /**
-   * 应用密钥信息
+   * <p>应用密钥信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SecretInfo: AppSecretInfo
   /**
-   * 分享链接信息(含访问控制)
+   * <p>分享链接信息(含访问控制)</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ShareUrlInfo: AppShareURLInfo
   /**
-   * 状态
+   * <p>状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status: AppStatusInfo
   /**
-   * 应用引用的共享知识库列表
+   * <p>应用引用的共享知识库列表</p>
    */
   SharedKbList?: Array<AppSharedKbInfo>
+  /**
+   * <p>企业共享配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CorpShareConfig?: CorpShareConfig
 }
 
 /**
@@ -2707,6 +2853,24 @@ export interface DescribeAgentReleasePreviewListResponse {
  * DeleteConversation返回参数结构体
  */
 export interface DeleteConversationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAuditLogMeta返回参数结构体
+ */
+export interface DescribeAuditLogMetaResponse {
+  /**
+   * <p>操作类型列表</p>
+   */
+  Actions?: Array<AuditLogMetaField>
+  /**
+   * <p>操作对象列表</p>
+   */
+  BizObjects?: Array<AuditLogMetaField>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3106,7 +3270,7 @@ export interface AgentPluginConfig {
    */
   AuthType?: number
   /**
-   * OAuth 授权同意模式；0-开发者授权；1-使用者授权（仅在auth_type=3时生效）
+   * <p>OAuth 授权同意模式；0-开发者授权；1-使用者授权（仅在auth_type=3时生效）</p>
    */
   OAuthConsent?: number
 }
@@ -3146,41 +3310,33 @@ export interface PluginSummary {
 }
 
 /**
- * Agent 详情
+ * CreatePlugin请求参数结构体
  */
-export interface AgentDetail {
+export interface CreatePluginRequest {
   /**
-   * <p>Agent ID</p>
+   * <p>插件基础资料</p>
    */
-  AgentId?: string
+  Profile: PluginProfile
   /**
-   * <p>Agent基本配置</p>
+   * <p>插件类型配置</p>
    */
-  Profile?: AgentProfile
+  Config: PluginConfig
   /**
-   * <p>系统提示词</p>
+   * <p>当前空间id</p>
    */
-  Instructions?: string
+  SpaceId: string
   /**
-   * <p>模型信息</p>
+   * <p>插件的工具列表</p>
    */
-  Model?: AgentModelConfig
+  ToolList?: Array<Tool>
   /**
-   * <p>工具详情</p>
+   * <p>登录用户主账号(集成商模式必填)</p>
    */
-  ToolList?: Array<AgentTool>
+  LoginUin?: string
   /**
-   * <p>插件配置</p>
+   * <p>登录用户子账号(集成商模式必填)</p>
    */
-  PluginList?: Array<AgentPlugin>
-  /**
-   * <p>技能详情</p>
-   */
-  SkillList?: Array<AgentSkill>
-  /**
-   * <p>高级配置</p>
-   */
-  AdvancedConfig?: AgentAdvancedConfig
+  LoginSubAccountUin?: string
 }
 
 /**
@@ -3486,21 +3642,21 @@ export interface AgentToolOutputParameter {
 }
 
 /**
- * 模型限制信息
+ * DescribeAccountList返回参数结构体
  */
-export interface ModelLimit {
+export interface DescribeAccountListResponse {
   /**
-   * 模型上下文长度展示文案（如 "128K"、"1000K"）
+   * <p>总数</p>
    */
-  ContextLengthDescription?: string
+  TotalCount?: string
   /**
-   * 模型对话框输入长度字符数限制
+   * <p>员工列表</p>
    */
-  InputLengthLimit?: number
+  AccountList?: Array<AccountInfo>
   /**
-   * 模型提示词长度字符数限制
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PromptLengthLimit?: number
+  RequestId?: string
 }
 
 /**
@@ -3626,7 +3782,7 @@ export interface CreateVariableResponse {
 }
 
 /**
- * 列表通用过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 value_list 为 OR 关系）
+ * 列表通用过滤条件（多个Filter之间为AND关系，同一Filter的多个value_list为OR关系）
  */
 export interface Filter {
   /**
@@ -3634,7 +3790,7 @@ export interface Filter {
    */
   Name?: string
   /**
-   * 操作符，默认 IN（向后兼容）<table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>FILTER_OPERATOR_IN</td><td>0</td><td>属于 value_list（默认值，向后兼容；value_list 不可为空）</td></tr><tr><td>FILTER_OPERATOR_NOT_IN</td><td>1</td><td>不属于 value_list（value_list 不可为空）</td></tr></table>
+   * 操作符：0-属于，1-不属于
    */
   Operator?: number
   /**
@@ -3769,11 +3925,11 @@ export interface ModifyPluginResponse {
  */
 export interface CreateReleaseResponse {
   /**
-   * need_approval
+   * <p>need_approval</p>
    */
   NeedApproval?: boolean
   /**
-   * release_id
+   * <p>release_id</p>
    */
   ReleaseId?: string
   /**
@@ -3983,6 +4139,28 @@ export interface CreateSkillResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeAuditLogList请求参数结构体
+ */
+export interface DescribeAuditLogListRequest {
+  /**
+   * <p>空间id</p>
+   */
+  SpaceId?: string
+  /**
+   * <p>每页数量</p><p>取值范围：[1, 100]</p>
+   */
+  Limit?: number
+  /**
+   * <p>es查询起始位置</p><p>对应接口返回SearchAfter</p>
+   */
+  SearchAfter?: Array<string>
+  /**
+   * <p>参数过滤</p><p>支持 Action,BizObject,Content<br>支持SpaceId,AccountUin,AppId(最多100个)<br>支持startTime,endTime(秒时间戳)</p>
+   */
+  FilterList?: Array<Filter>
 }
 
 /**
@@ -4318,6 +4496,24 @@ export interface ReleaseSkillResponse {
 }
 
 /**
+ * 员工信息
+ */
+export interface AccountInfo {
+  /**
+   * <p>员工子账号id</p>
+   */
+  AccountUin?: string
+  /**
+   * <p>员工昵称</p>
+   */
+  NickName?: string
+  /**
+   * <p>员工头像</p>
+   */
+  Avatar?: string
+}
+
+/**
  * 应用插件配置信息
  */
 export interface AppPluginConfig {
@@ -4491,6 +4687,24 @@ export interface ClawAgentCustomConfig {
 }
 
 /**
+ * DescribeAuditLogList返回参数结构体
+ */
+export interface DescribeAuditLogListResponse {
+  /**
+   * <p>操作日志列表</p>
+   */
+  AuditLogList?: Array<AuditLog>
+  /**
+   * <p>es查询起始位置</p><p>用于入参查询下一页</p>
+   */
+  SearchAfter?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * Agent 技能详情
  */
 export interface AgentSkill {
@@ -4620,7 +4834,7 @@ export interface DescribeSystemVariableListResponse {
  */
 export interface DescribeAppResponse {
   /**
-   * 应用详情
+   * <p>应用详情</p>
    */
   App?: App
   /**
@@ -4630,13 +4844,22 @@ export interface DescribeAppResponse {
 }
 
 /**
+ * DescribeAuditLogMeta请求参数结构体
+ */
+export type DescribeAuditLogMetaRequest = null
+
+/**
  * DeleteApp请求参数结构体
  */
 export interface DeleteAppRequest {
   /**
-   * app_id
+   * <p>app_id</p>
    */
   AppId: string
+  /**
+   * <p>删除原因(非必填,审批时展示)</p>
+   */
+  Reason?: string
 }
 
 /**
@@ -4702,6 +4925,16 @@ export interface DescribeAppSummaryListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ClawAgent长期记忆配置
+ */
+export interface ClawAgentLongMemoryConfig {
+  /**
+   * <p>是否开启长期记忆</p>
+   */
+  Enabled?: boolean
 }
 
 /**
@@ -5042,6 +5275,44 @@ export interface Model {
 }
 
 /**
+ * 操作日志
+ */
+export interface AuditLog {
+  /**
+   * <p>员工信息</p>
+   */
+  AccountInfo?: AccountInfo
+  /**
+   * <p>应用业务id</p>
+   */
+  AppId?: string
+  /**
+   * <p>应用名称</p><p>操作日志触发时的名称</p>
+   */
+  AppName?: string
+  /**
+   * <p>操作时间</p><p>参数格式：秒时间戳</p>
+   */
+  OperateTime?: string
+  /**
+   * <p>操作类型</p>
+   */
+  Action?: string
+  /**
+   * <p>操作对象</p>
+   */
+  Biz?: string
+  /**
+   * <p>操作内容</p>
+   */
+  Content?: string
+  /**
+   * <p>操作唯一ID</p>
+   */
+  UniqueId?: string
+}
+
+/**
  * DescribeSkillSummaryList返回参数结构体
  */
 export interface DescribeSkillSummaryListResponse {
@@ -5299,11 +5570,11 @@ export interface DescribeConversationResponse {
 }
 
 /**
- * FieldMask
+ * 字段掩码
  */
 export interface FieldMask {
   /**
-   * <p>参数名称</p><p>参数格式：需要获取的指定字段路径</p>
+   * 字段路径列表
    */
   Paths?: Array<string>
 }

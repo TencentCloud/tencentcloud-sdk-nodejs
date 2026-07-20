@@ -713,6 +713,7 @@ import {
   SuperResolutionConfig,
   CreateLiveRecordTemplateResponse,
   TrackSelector,
+  VideoRedrawTaskInfo,
   ActivityResult,
   DescribeAsrHotwordsResponse,
   TextToSpeechAsyncRequest,

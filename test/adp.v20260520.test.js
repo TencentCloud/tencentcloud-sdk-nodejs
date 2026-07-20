@@ -148,6 +148,16 @@ it("adp.v20260520.ModifyPlugin", async function () {
     }
 })
 
+it("adp.v20260520.DescribeAuditLogList", async function () {
+    try {
+       const data = await client.DescribeAuditLogList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.DescribeSkillReferenceList", async function () {
     try {
        const data = await client.DescribeSkillReferenceList({})
@@ -178,9 +188,9 @@ it("adp.v20260520.CreateWorkspaceCredential", async function () {
     }
 })
 
-it("adp.v20260520.DescribeVariable", async function () {
+it("adp.v20260520.DescribeApp", async function () {
     try {
-       const data = await client.DescribeVariable({})
+       const data = await client.DescribeApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -428,9 +438,9 @@ it("adp.v20260520.DescribeConversationList", async function () {
     }
 })
 
-it("adp.v20260520.DescribeApp", async function () {
+it("adp.v20260520.DescribeAccountList", async function () {
     try {
-       const data = await client.DescribeApp({})
+       const data = await client.DescribeAccountList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -461,6 +471,16 @@ it("adp.v20260520.DescribeSkillSummaryList", async function () {
 it("adp.v20260520.FavoriteSkill", async function () {
     try {
        const data = await client.FavoriteSkill({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DescribeAuditLogMeta", async function () {
+    try {
+       const data = await client.DescribeAuditLogMeta({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -511,6 +531,16 @@ it("adp.v20260520.RollbackRelease", async function () {
 it("adp.v20260520.DescribeVariableList", async function () {
     try {
        const data = await client.DescribeVariableList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.RetryRelease", async function () {
+    try {
+       const data = await client.RetryRelease({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -578,9 +608,9 @@ it("adp.v20260520.DescribeLatestRelease", async function () {
     }
 })
 
-it("adp.v20260520.RetryRelease", async function () {
+it("adp.v20260520.DescribeVariable", async function () {
     try {
-       const data = await client.RetryRelease({})
+       const data = await client.DescribeVariable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -168,6 +168,16 @@ it("cfw.v20190904.DescribeTableStatus", async function () {
     }
 })
 
+it("cfw.v20190904.DescribeSourceAsset", async function () {
+    try {
+       const data = await client.DescribeSourceAsset({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.ModifySecurityGroupSequenceRules", async function () {
     try {
        const data = await client.ModifySecurityGroupSequenceRules({})
@@ -478,9 +488,9 @@ it("cfw.v20190904.CreateSecurityGroupRules", async function () {
     }
 })
 
-it("cfw.v20190904.DescribeSourceAsset", async function () {
+it("cfw.v20190904.CreateAlertCenterRuleAsync", async function () {
     try {
-       const data = await client.DescribeSourceAsset({})
+       const data = await client.CreateAlertCenterRuleAsync({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1121,6 +1131,16 @@ it("cfw.v20190904.CreateVpcFwGroup", async function () {
 it("cfw.v20190904.DescribeOfflineExportTask", async function () {
     try {
        const data = await client.DescribeOfflineExportTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ModifyIsolateTable", async function () {
+    try {
+       const data = await client.ModifyIsolateTable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

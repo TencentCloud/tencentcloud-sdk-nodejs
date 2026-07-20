@@ -2121,7 +2121,7 @@ CNAME 模式接入时，若您未完成站点归属权校验，本接口将为�
   }
 
   /**
-   * 在版本管理模式下，用于创建指定配置组的新版本。版本管理功能内测中，当前仅白名单开放。
+   * 在版本管理模式下，用于创建指定配置组的新版本。
    */
   async CreateConfigGroupVersion(
     req: CreateConfigGroupVersionRequest,

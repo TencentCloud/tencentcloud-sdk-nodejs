@@ -20,11 +20,14 @@ import { ClientConfig } from "../../../common/interface"
 import {
   UploadAndCommitFileRequest,
   GetKnowledgeBaseListRequest,
+  QueryUserAuthorityResponse,
   AddChunkRequest,
   GetUserInstanceListRequest,
   QuerySceneListResponse,
+  ModelList,
   ModifyChunkRequest,
   ChatAIResponse,
+  QueryModelsResponse,
   DeleteChunkRequest,
   GetSessionDetailsResponse,
   ModelUserAuthority,
@@ -39,7 +42,7 @@ import {
   SearchConfig,
   StepExpand,
   GetSessionDetailsRequest,
-  QueryUserAuthorityResponse,
+  QueryModelsRequest,
   ModifyKnowledgeBaseRequest,
   DeleteChunkResponse,
   CreateDataAgentSessionResponse,
@@ -116,6 +119,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetKnowledgeBaseListResponse) => void
   ): Promise<GetKnowledgeBaseListResponse> {
     return this.request("GetKnowledgeBaseList", req, cb)
+  }
+
+  /**
+   * 查询聊天支持模型信息
+   */
+  async QueryModels(
+    req: QueryModelsRequest,
+    cb?: (error: string, rep: QueryModelsResponse) => void
+  ): Promise<QueryModelsResponse> {
+    return this.request("QueryModels", req, cb)
   }
 
   /**
@@ -229,13 +242,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询场景列表
+   * 删除会话
    */
-  async QuerySceneList(
-    req: QuerySceneListRequest,
-    cb?: (error: string, rep: QuerySceneListResponse) => void
-  ): Promise<QuerySceneListResponse> {
-    return this.request("QuerySceneList", req, cb)
+  async DeleteDataAgentSession(
+    req: DeleteDataAgentSessionRequest,
+    cb?: (error: string, rep: DeleteDataAgentSessionResponse) => void
+  ): Promise<DeleteDataAgentSessionResponse> {
+    return this.request("DeleteDataAgentSession", req, cb)
   }
 
   /**
@@ -309,13 +322,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除会话
+   * 查询场景列表
    */
-  async DeleteDataAgentSession(
-    req: DeleteDataAgentSessionRequest,
-    cb?: (error: string, rep: DeleteDataAgentSessionResponse) => void
-  ): Promise<DeleteDataAgentSessionResponse> {
-    return this.request("DeleteDataAgentSession", req, cb)
+  async QuerySceneList(
+    req: QuerySceneListRequest,
+    cb?: (error: string, rep: QuerySceneListResponse) => void
+  ): Promise<QuerySceneListResponse> {
+    return this.request("QuerySceneList", req, cb)
   }
 
   /**

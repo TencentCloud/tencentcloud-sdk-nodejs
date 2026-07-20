@@ -5338,6 +5338,10 @@ export interface CreateDBInstanceRequest {
    */
   DiskType?: string
   /**
+   * <p>是否对磁盘进行加密。仅云盘版实例支持该功能。 指定为 &quot;on&quot; 表示开启加密， 否则不加密。 购买只读实例、灾备实例、新克隆实例时该参数自动和主实例保持一致。</p>
+   */
+  DiskEncryption?: string
+  /**
    * <p>开启或关闭实例销毁保护。on-开启，off-关闭</p>
    */
   DestroyProtect?: string
@@ -9520,6 +9524,10 @@ export interface CreateDBInstanceHourRequest {
    * <p>集群类型:cage——金融围拢，cdc——CDB ON CDC；dedicate——独享集群</p>
    */
   ClusterType?: string
+  /**
+   * <p>是否对磁盘进行加密。仅云盘版实例支持该功能。 指定为 &quot;on&quot; 表示开启加密， 否则不加密。 购买只读实例、灾备实例、新克隆实例时该参数自动和主实例保持一致。</p>
+   */
+  DiskEncryption?: string
   /**
    * <p>开启或关闭实例销毁保护。on-开启，off-关闭</p>
    */

@@ -71,6 +71,7 @@ import {
   ModifyAddressTemplateResponse,
   UnHandleEventDetail,
   EdgeIpSwitch,
+  ModifyIsolateTableRequest,
   CreateNatFwInstanceWithDomainResponse,
   DescribeAssetSyncRequest,
   DeleteVpcFwGroupRequest,
@@ -135,7 +136,7 @@ import {
   CreateBlockIgnoreRuleNewRequest,
   DescribeCcnInstanceRegionStatusRequest,
   DescribeNatAcRuleResponse,
-  DeleteVpcFwGroupResponse,
+  OfflineExportTask,
   AddAclRuleRequest,
   DescribeVpcFwGroupSwitchRequest,
   DescribeOfflineExportTemporaryCredentialsResponse,
@@ -176,7 +177,7 @@ import {
   ModifyClusterFwBypassResponse,
   AddNatAcRuleRequest,
   ScanInfo,
-  OfflineExportTask,
+  DeleteVpcFwGroupResponse,
   NatFwFilter,
   IpStatic,
   AddEnterpriseSecurityGroupRulesResponse,
@@ -232,6 +233,7 @@ import {
   DescribeCfwRuleOptimizationResponse,
   ModifyClusterNatFwSwitchResponse,
   DescribeRuleOverviewResponse,
+  CreateAlertCenterRuleAsyncRequest,
   VpcFwInstanceInfo,
   ModifyNatAcRuleRequest,
   SwitchFailInfo,
@@ -282,6 +284,7 @@ import {
   InterconnectPair,
   ModifyVpcFwSequenceRulesResponse,
   ModifyVpcFwSequenceRulesRequest,
+  ModifyIsolateTableResponse,
   ModifySecurityGroupSequenceRulesRequest,
   CreateChooseVpcsResponse,
   DescribeNatCcnFwSwitchResponse,
@@ -336,6 +339,7 @@ import {
   CfwNatDnatRule,
   UpdateClusterVpcFwRequest,
   DeleteNatFwDnatRuleRequest,
+  CreateAlertCenterRuleAsyncResponse,
   CreateChooseVpcsRequest,
   ModifyNatInstanceRequest,
   ModifyBlockIgnoreListResponse,
@@ -590,6 +594,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * DescribeSourceAsset-查询全部资产信息
+   */
+  async DescribeSourceAsset(
+    req: DescribeSourceAssetRequest,
+    cb?: (error: string, rep: DescribeSourceAssetResponse) => void
+  ): Promise<DescribeSourceAssetResponse> {
+    return this.request("DescribeSourceAsset", req, cb)
+  }
+
+  /**
    * 企业安全组规则快速排序
    */
   async ModifySecurityGroupSequenceRules(
@@ -760,7 +774,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 查询当前租户防火墙防护开关总览。结果在 Response.Data 的 JSON 字符串中。本接口没有自定义业务入参，不支持过滤、排序或分页。
+   * 查询当前租户防火墙防护开关总览。结果在 Response.Data 的 JSON 字符串中。本接口没有自定义业务入参，不支持过滤、排序或分页。border_firewall、nat_firewall、vpc_firewall、ndr 的 available 表示至少一个对应防护开关实际开启，不表示仅已购买或已创建；ips.mode 可能为跟随全局、观察、拦截、严格、关闭或未知。
    */
   async DescribeCfwSwitches(
     req?: DescribeCfwSwitchesRequest,
@@ -900,13 +914,13 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * DescribeSourceAsset-查询全部资产信息
+   * 用户告警中心-封禁、放通处置按钮
    */
-  async DescribeSourceAsset(
-    req: DescribeSourceAssetRequest,
-    cb?: (error: string, rep: DescribeSourceAssetResponse) => void
-  ): Promise<DescribeSourceAssetResponse> {
-    return this.request("DescribeSourceAsset", req, cb)
+  async CreateAlertCenterRuleAsync(
+    req: CreateAlertCenterRuleAsyncRequest,
+    cb?: (error: string, rep: CreateAlertCenterRuleAsyncResponse) => void
+  ): Promise<CreateAlertCenterRuleAsyncResponse> {
+    return this.request("CreateAlertCenterRuleAsync", req, cb)
   }
 
   /**
@@ -1323,7 +1337,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 查询当前租户防火墙纳管资产。默认查询主机资产；仅明确需要 VPC 或子网时传 AssetType。结果在 Response.Data 的 JSON 字符串中。
+   * 查询当前租户防火墙纳管资产。首次查询传 AssetType、过滤条件和 Limit；Response.Data.HasMore=true 时，续查只传 NextToken。默认查询 host；broad 查询分页返回资产，exact InstanceId 查询分页返回该实例 fingerprints 且每页重复基础资产。仅明确需要 VPC 或子网时传 AssetType。
    */
   async DescribeCfwAssets(
     req: DescribeCfwAssetsRequest,
@@ -1553,6 +1567,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
+   * ModifyIsolateTable 隔离列表编辑和删除操作
+   */
+  async ModifyIsolateTable(
+    req: ModifyIsolateTableRequest,
+    cb?: (error: string, rep: ModifyIsolateTableResponse) => void
+  ): Promise<ModifyIsolateTableResponse> {
+    return this.request("ModifyIsolateTable", req, cb)
+  }
+
+  /**
    * 开启NAT CCN集群模式防火墙开关
    */
   async OpenClusterNatFwSwitch(
@@ -1656,7 +1680,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
    * 查询当前租户风险中心未处理风险概览。默认查询最近 7 天；自定义时间范围需同时传 StartTime 和 EndTime。结果在 Response.Data 的 JSON 字符串中。
    */
   async DescribeCfwRiskOverview(
-    req?: DescribeCfwRiskOverviewRequest,
+    req: DescribeCfwRiskOverviewRequest,
     cb?: (error: string, rep: DescribeCfwRiskOverviewResponse) => void
   ): Promise<DescribeCfwRiskOverviewResponse> {
     return this.request("DescribeCfwRiskOverview", req, cb)

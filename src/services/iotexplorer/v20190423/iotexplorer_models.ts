@@ -5017,7 +5017,7 @@ export interface TalkLLMConfig {
    */
   Timeout?: number
   /**
-   * <p>OpenAI兼容模型Base URL，仅支持 80 和 443 端口，Type=openai时必填</p>
+   * <p>OpenAI兼容模型的Base URL，Type=openai时必填</p>
    */
   BaseUrl?: string
   /**
@@ -5032,6 +5032,10 @@ export interface TalkLLMConfig {
    * <p>额外模型请求体参数，JSON对象字符串，只允许JSON object，不允许普通字符串</p>
    */
   ExtraBody?: string
+  /**
+   * <p>ADP 平台配置</p>
+   */
+  ADP?: ADPConfig
 }
 
 /**
@@ -9201,6 +9205,16 @@ export interface DeleteLoRaGatewayResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ADP 平台配置
+ */
+export interface ADPConfig {
+  /**
+   * <p>ADP 平台 AppKey</p>
+   */
+  AppKey?: string
 }
 
 /**

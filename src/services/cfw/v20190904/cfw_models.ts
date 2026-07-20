@@ -38,75 +38,75 @@ export interface ModifyEWRuleStatusResponse {
  */
 export interface DescribeCfwStatusMonitorRequest {
   /**
-   * <p>操作类型。describe_scene 表示发现场景和二级下拉选项；fetch_scene 表示获取具体场景快照。必填。</p>
+   * 操作类型。describe_scene 表示发现场景和二级下拉选项；fetch_scene 表示获取具体场景快照。必填。
    */
   Op: string
   /**
-   * <p>防火墙场景类型。支持 internet_edge（互联网边界防火墙）、nat_cluster（NAT边界防火墙-集群）、nat_ha（NAT边界防火墙-主备）、vpc_cluster（VPC边界防火墙-集群）、vpc_ha（VPC边界防火墙-主备）。必填。</p>
+   * 防火墙场景类型。支持 internet_edge（互联网边界防火墙）、nat_cluster（NAT边界防火墙-集群）、nat_ha（NAT边界防火墙-主备）、vpc_cluster（VPC边界防火墙-集群）、vpc_ha（VPC边界防火墙-主备）。必填。
    */
   FirewallType: string
   /**
-   * <p>二级下拉选项 ID。fetch_scene 按需传入；internet_edge 为地域，NAT 为实例 ID，VPC 带宽场景为防火墙组 ID；vpc_cluster 的 connections 汇总场景会忽略该参数。</p>
+   * 二级下拉选项 ID。fetch_scene 按需传入，值来自 describe_scene 返回的 selection.available_options[].id；internet_edge 为地域，NAT 为实例 ID，VPC 带宽场景为防火墙组 ID；vpc_cluster 的 connections 汇总场景会忽略该参数。
    */
   SelectionId?: string
   /**
-   * <p>二级下拉显示名称。可替代 SelectionId 按名称匹配。</p>
+   * 二级下拉显示名称。可替代 SelectionId 按名称匹配，值来自 describe_scene 返回的 selection.available_options[].name。
    */
   SelectionName?: string
   /**
-   * <p>引擎实例 ID。主要用于 vpc_ha 下一个防火墙组对应多个实例的场景。</p>
+   * 引擎实例 ID。主要用于 vpc_ha 下一个防火墙组对应多个实例的场景，优先使用 describe_scene 返回的 selection.available_options[].instance_id；如只有 instance_ids，则从数组中选择一个字符串值。
    */
   SelectionInstanceId?: string
   /**
-   * <p>指标页签。fetch_scene 可传；不传时使用该场景默认值。支持 bandwidth、connections。</p>
+   * 指标页签。fetch_scene 可传；不传时使用该场景默认值。支持 bandwidth、connections。
    */
   Metric?: string
   /**
-   * <p>指标下的视角。fetch_scene 可传；不传时使用该场景默认值。支持 ip、subnet、session、switch、vpc，实际可用组合以 describe_scene 返回为准。</p>
+   * 指标下的视角。fetch_scene 可传；不传时使用该场景默认值。支持 ip、subnet、session、switch、vpc，实际可用组合以 describe_scene 返回为准。
    */
   Perspective?: string
   /**
-   * <p>NAT 主备连接数 IP 视角范围。external 表示外部 IP，asset 表示资产 IP；仅 nat_ha + connections + ip 使用。</p>
+   * NAT 主备连接数 IP 视角范围。external 表示外部 IP，asset 表示资产 IP；仅 nat_ha + connections + ip 使用，其他组合传入将返回 InvalidParameter。
    */
   IpScope?: string
   /**
-   * <p>预设时间范围。默认 24h；fetch_scene 使用。支持 5m、15m、30m、1h、6h、24h、3d、7d、30d、today、yesterday、day_before_yesterday、this_week、last_week、this_month。</p>
+   * 预设时间范围。默认 24h；fetch_scene 使用。支持 5m、15m、30m、1h、6h、24h、3d、7d、30d、today、yesterday、day_before_yesterday、this_week、last_week、this_month。
    */
   TimePreset?: string
   /**
-   * <p>自定义开始时间。格式 YYYY-MM-DD HH:MM:SS；必须与 EndTime 同时传，最大跨度 30 天。</p>
+   * 自定义开始时间。格式 YYYY-MM-DD HH:MM:SS；必须与 EndTime 同时传，最大跨度 30 天。
    */
   StartTime?: string
   /**
-   * <p>自定义结束时间。格式 YYYY-MM-DD HH:MM:SS；必须与 StartTime 同时传，最大跨度 30 天。</p>
+   * 自定义结束时间。格式 YYYY-MM-DD HH:MM:SS；必须与 StartTime 同时传，最大跨度 30 天。
    */
   EndTime?: string
   /**
-   * <p>页码，从 1 开始。默认 1；fetch_scene 列表视角使用。</p>
+   * 页码，从 1 开始。默认 1；fetch_scene 列表视角使用。
    */
   Page?: number
   /**
-   * <p>每页条数。默认 10，最大 100；fetch_scene 列表视角使用。</p>
+   * 每页条数。默认 10，取值 1 至 100；fetch_scene 列表视角使用。
    */
   Limit?: number
   /**
-   * <p>是否只获取概览数据。true 时 fetch_scene 只请求 overview，跳过 table/detail，适合只看场景快照汇总。</p>
+   * 是否只获取概览数据。true 时 fetch_scene 只请求 overview，跳过 table/detail，适合只看场景快照汇总。
    */
   OverviewOnly?: boolean
   /**
-   * <p>原始偏移量覆盖。可选，传入后覆盖 Page 计算结果；必须大于等于 0 且不超过安全上限。</p>
+   * 原始偏移量覆盖。可选，传入后覆盖 Page 计算结果；取值 0 至 10000。
    */
   Offset?: number
   /**
-   * <p>排序字段。可选，只接受当前场景后端允许的安全字段。</p>
+   * 排序字段。可选。互联网边界 IP、NAT IP/子网视角支持 InputMax、OutputMax；VPC switch 视角支持 SwitchName；VPC ip/vpc 视角支持 FlowMax；其他组合不要传。
    */
   SortBy?: string
   /**
-   * <p>排序方向。默认 desc；支持 asc、desc。</p>
+   * 排序方向。默认 desc；支持 asc、desc。
    */
   SortOrder?: string
   /**
-   * <p>过滤条件列表。可选，最多 5 个；是否支持以及字段名以具体 fetch_scene 场景为准。</p>
+   * 过滤条件列表。保留字段；当前公开 fetch_scene 场景均不支持，调用方不要传。
    */
   Filters?: Array<CfwStatusMonitorFilter>
 }
@@ -259,7 +259,7 @@ export interface ModifyAclRuleRequest {
  */
 export interface DescribeCfwAnalysisDataResponse {
   /**
-   * <p>查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。</p>
+   * 查询结果。Response.Data 是 UTF-8 JSON object 字符串，调用方需要二次 JSON 解析。status 取值为 success、partial 或 error。section 查询失败时，error 只返回固定安全摘要，不包含底层服务内部信息。示例仅展示一个代表性 section；实际返回包含当前场景全部未跳过的 section；summary 包含 total_findings、high_risk_count 和 data_coverage，metadata 包含 scenario、time_range、object 和 query_stats，query_stats 包含 total_queries、successful 和 failed。
    */
   Data?: string
   /**
@@ -295,7 +295,7 @@ export interface DescribeAclRuleResponse {
  */
 export interface DescribeNatFwInstanceWithRegionResponse {
   /**
-   * 实例数组
+   * <p>实例数组</p>
    */
   NatinsLst?: Array<NatFwInstance>
   /**
@@ -359,9 +359,49 @@ export interface DescribeCfwRulesRequest {
    */
   RuleAction?: number
   /**
+   * <p>启用状态过滤。可选。默认只返回启用规则；传 false 只查询禁用规则。</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>是否同时包含启用和禁用规则。可选。true 表示包含两类；不能和 Enabled 同时使用。</p>
+   */
+  IncludeDisabled?: boolean
+  /**
    * <p>精确规则 ID 过滤。可选。用于按数值规则标识定位单条规则。</p>
    */
   RuleId?: number
+  /**
+   * <p>精确公开规则标识过滤。可选。推荐在用户提供规则标识时使用。</p>
+   */
+  RuleUuid?: string
+  /**
+   * <p>协议过滤。可选。例如 TCP、UDP、ICMP、HTTP、HTTPS、ANY；不传则不过滤。</p>
+   */
+  Protocol?: string
+  /**
+   * <p>源地址或源内容关键字过滤。可选，支持模糊匹配。</p>
+   */
+  SrcIp?: string
+  /**
+   * <p>目的地址、目的域名或目的内容关键字过滤。可选，支持模糊匹配。</p>
+   */
+  DstIp?: string
+  /**
+   * <p>规则描述关键字过滤。可选。</p>
+   */
+  Description?: string
+  /**
+   * <p>入侵防御列表关键字搜索。可选，最大 100 字符。blocklist 搜索 ioc/address/comment/rule_source；whitelist 搜索 rule_name/ioc/comment/src_ip/dst_ip；isolate 搜索实例、公网 IP、内网 IP、VPC、地域。</p>
+   */
+  Keyword?: string
+  /**
+   * <p>精确实例 ID 过滤。仅 RuleType=intrusion_prevention 且 ListType=isolate 时使用；写操作前后核验应使用该参数而不是 Keyword。</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>是否展开模板、资产组、实例等名称。可选，默认 true；传 false 返回原始标识。</p>
+   */
+  ExpandNames?: boolean
   /**
    * <p>单页返回规则数。可选，默认 100，最大 1000。</p>
    */
@@ -480,19 +520,19 @@ export interface CreateSecurityGroupRulesResponse {
  */
 export interface DescribeNatFwVpcDnsLstRequest {
   /**
-   * natfw 防火墙实例id
+   * <p>natfw 防火墙实例id</p>
    */
   NatFwInsId: string
   /**
-   * natfw 过滤，以','分隔
+   * <p>natfw 过滤，以&#39;,&#39;分隔</p>
    */
   NatInsIdFilter?: string
   /**
-   * 分页页数
+   * <p>分页页数</p>
    */
   Offset?: number
   /**
-   * 每页最多个数
+   * <p>每页最多个数</p>
    */
   Limit?: number
 }
@@ -502,15 +542,15 @@ export interface DescribeNatFwVpcDnsLstRequest {
  */
 export interface DescribeCfwEipsRequest {
   /**
-   * 1：cfw接入模式，目前仅支持接入模式实例
+   * <p>1：cfw接入模式，目前仅支持接入模式实例</p>
    */
   Mode: number
   /**
-   * ALL：查询所有弹性公网ip; nat-xxxxx：接入模式场景指定网关的弹性公网ip
+   * <p>ALL：查询所有弹性公网ip; nat-xxxxx：接入模式场景指定网关的弹性公网ip</p>
    */
   NatGatewayId: string
   /**
-   * 防火墙实例id，当前仅支持接入模式的实例，该字段必填
+   * <p>防火墙实例id，当前仅支持接入模式的实例，该字段必填</p>
    */
   CfwInstance?: string
 }
@@ -678,11 +718,11 @@ export interface ExpandCfwVerticalRequest {
  */
 export interface SyncFwOperateRequest {
   /**
-   * 同步操作类型：Route，同步防火墙路由
+   * <p>同步操作类型：Route，同步防火墙路由</p>
    */
   SyncType: string
   /**
-   * 防火墙类型；nat,nat防火墙;ew,vpc间防火墙
+   * <p>防火墙类型；nat,nat防火墙;ew,vpc间防火墙</p>
    */
   FwType?: string
 }
@@ -1167,7 +1207,7 @@ export interface DescNatDnatRule {
  */
 export interface OpenClusterNatFwSwitchRequest {
   /**
-   * NAT CCN防火墙开关配置
+   * <p>NAT CCN防火墙开关配置</p>
    */
   NatCcnSwitch: NatCcnSwitchConfig
 }
@@ -1370,7 +1410,7 @@ export type DescribeEnterpriseSGRuleProgressRequest = null
  */
 export interface DescribeCfwSwitchesResponse {
   /**
-   * 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。
+   * 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。border_firewall 返回公网 IP 总数、已防护数、未防护数、操作中数量和防护率；nat_firewall、vpc_firewall 按 cluster/ha 返回实例及子开关汇总；ndr 返回已开启开关数；ips 返回当前防护模式。
    */
   Data?: string
   /**
@@ -1384,15 +1424,15 @@ export interface DescribeCfwSwitchesResponse {
  */
 export interface DescribeNatFwInstancesInfoRequest {
   /**
-   * 获取实例列表过滤字段
+   * <p>获取实例列表过滤字段</p>
    */
   Filter?: Array<NatFwFilter>
   /**
-   * 第几页
+   * <p>第几页</p>
    */
   Offset?: number
   /**
-   * 每页长度
+   * <p>每页长度</p>
    */
   Limit?: number
 }
@@ -1478,11 +1518,37 @@ export interface EdgeIpSwitch {
 }
 
 /**
+ * ModifyIsolateTable请求参数结构体
+ */
+export interface ModifyIsolateTableRequest {
+  /**
+   * <p>资产唯一id</p>
+   */
+  InstanceID: string
+  /**
+   * <p>操作动作：编辑、删除</p>
+   */
+  ButtonAction: string
+  /**
+   * <p>AI操作来源</p><p>枚举值：</p><ul><li>console： 控制台来源值</li><li>wechat： 微信</li></ul>
+   */
+  CfwAiAgentOperationSource?: string
+  /**
+   * <p>起始时间</p>
+   */
+  StartTime?: string
+  /**
+   * <p>结束时间</p>
+   */
+  EndTime?: string
+}
+
+/**
  * CreateNatFwInstanceWithDomain返回参数结构体
  */
 export interface CreateNatFwInstanceWithDomainResponse {
   /**
-   * nat实例信息
+   * <p>nat实例信息</p>
    */
   CfwInsId?: string
   /**
@@ -1501,17 +1567,15 @@ export type DescribeAssetSyncRequest = null
  */
 export interface DeleteVpcFwGroupRequest {
   /**
-   * 防火墙(组)Id
+   * <p>防火墙(组)Id</p>
    */
   FwGroupId?: string
   /**
-   * 是否删除整个防火墙(组)
-0：不删除防火墙(组)，只删除单独实例
-1：删除整个防火墙(组)
+   * <p>是否删除整个防火墙(组)<br>0：不删除防火墙(组)，只删除单独实例<br>1：删除整个防火墙(组)</p>
    */
   DeleteFwGroup?: number
   /**
-   * 待删除的防火墙实例数组
+   * <p>待删除的防火墙实例数组</p>
    */
   VpcFwInsList?: Array<string>
 }
@@ -1699,7 +1763,7 @@ export interface SyncFwOperateResponse {
  */
 export interface DescribeCfwRiskOverviewResponse {
   /**
-   * 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。
+   * <p>查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。</p>
    */
   Data?: string
   /**
@@ -1713,15 +1777,15 @@ export interface DescribeCfwRiskOverviewResponse {
  */
 export interface CreateNatFwDnatRuleRequest {
   /**
-   * 0：cfw新增模式，1：cfw接入模式。
+   * <p>0：cfw新增模式，1：cfw接入模式。</p>
    */
   Mode: number
   /**
-   * 防火墙实例id，该字段必须传递。
+   * <p>防火墙实例id，该字段必须传递。</p>
    */
   CfwInstance?: string
   /**
-   * 添加或删除操作的Dnat规则列表。
+   * <p>添加或删除操作的Dnat规则列表。</p>
    */
   DnatRules?: Array<CfwNatDnatRule>
 }
@@ -1885,11 +1949,11 @@ export interface ModifySequenceRulesResponse {
  */
 export interface ModifyClusterVpcFwSwitchRequest {
   /**
-   * 开关，0：关闭，1：开启
+   * <p>开关，0：关闭，1：开启</p>
    */
   Enable: number
   /**
-   * 集群模式vpc间防火墙ccn开关信息
+   * <p>集群模式vpc间防火墙ccn开关信息</p>
    */
   CcnSwitch?: Array<CcnSwitchInfo>
 }
@@ -2115,7 +2179,7 @@ export interface UpdateCheckCcnNonDirectFlagResponse {
  */
 export interface DescribeFwSyncStatusRequest {
   /**
-   * 查询的同步状态类型：Route,同步路由状态
+   * <p>查询的同步状态类型：Route,同步路由状态</p>
    */
   SyncType?: string
 }
@@ -2161,7 +2225,16 @@ export interface ModifyBlockIgnoreRuleNewRequest {
 /**
  * DescribeCfwRiskOverview请求参数结构体
  */
-export type DescribeCfwRiskOverviewRequest = null
+export interface DescribeCfwRiskOverviewRequest {
+  /**
+   * <p>自定义开始时间。可选，格式 YYYY-MM-DD HH:MM:SS；必须和 EndTime 同时传。</p>
+   */
+  StartTime?: string
+  /**
+   * <p>自定义结束时间。可选，格式 YYYY-MM-DD HH:MM:SS；必须和 StartTime 同时传。</p>
+   */
+  EndTime?: string
+}
 
 /**
  * RemoveNatAcRule返回参数结构体
@@ -2204,23 +2277,23 @@ export interface CustomWhiteRule {
  */
 export interface DescribeFwEdgeIpsResponse {
   /**
-   * ip 开关列表
+   * <p>ip 开关列表</p>
    */
   Data?: Array<EdgeIpInfo>
   /**
-   * ip 开关列表个数
+   * <p>ip 开关列表个数</p>
    */
   Total?: number
   /**
-   * 地域列表
+   * <p>地域列表</p>
    */
   RegionLst?: Array<string>
   /**
-   * 实例类型列表
+   * <p>实例类型列表</p>
    */
   InstanceTypeLst?: Array<string>
   /**
-   * 串行模式开关个数
+   * <p>串行模式开关个数</p>
    */
   SerilCount?: number
   /**
@@ -2234,27 +2307,27 @@ export interface DescribeFwEdgeIpsResponse {
  */
 export interface DescribeCfwLogsRequest {
   /**
-   * <p>日志类型。首次查询必填；使用 NextToken 续查时不能传。枚举值包括 cfw_netflow_border、cfw_netflow_vpc、cfw_netflow_nat、cfw_netflow_nta、cfw_netflow_dns、cfw_rule_threatinfo、cfw_rule_acl、cfw_rule_vpc_acl、cfw_rule_nat_acl、cfw_ndr_subject_risk、cfw_ndr_dataleak_entry、cfw_ndr_ai_audit、cfw_feature_collect、cfw_behavior_collect、operate_log_all。</p>
+   * 日志类型。首次查询必填；使用 NextToken 续查时不能传。cfw_netflow_border=互联网边界流量，cfw_netflow_vpc=VPC 东西向流量，cfw_netflow_nat=NAT 防火墙流量，cfw_netflow_nta=NDR/NTA 流量，cfw_netflow_dns=DNS 防火墙日志，cfw_rule_threatinfo=入侵防御/威胁情报告警，cfw_rule_acl=互联网边界访问控制日志，cfw_rule_vpc_acl=VPC 访问控制日志，cfw_rule_nat_acl=NAT 访问控制日志，cfw_ndr_subject_risk=NDR 专题风险，cfw_ndr_dataleak_entry=NDR 敏感数据泄露，cfw_ndr_ai_audit=NDR AI 应用识别与大模型调用审计，cfw_feature_collect=统计特征与基线异常，cfw_behavior_collect=Beacon/DNS/端口/证书/VPC 互访行为，operate_log_all=操作审计日志。
    */
   LogType?: string
   /**
-   * <p>CLS CQL 查询语句。默认 *；使用 NextToken 续查时不能传。</p>
+   * 日志过滤表达式。默认 * 表示不过滤；例如 src_ip:1.1.1.1。可查询字段随 LogType 变化，应优先使用对应 Items 中已返回的字段名，不要猜测不存在的字段；使用 NextToken 续查时不能传。
    */
   Query?: string
   /**
-   * <p>查询起始时间。支持 RFC3339、YYYY-MM-DD HH:MM:SS、YYYY-MM-DD 或 Unix 时间戳；传入后从该时间向后查询 TimeRange；使用 NextToken 续查时不能传。</p>
+   * 查询起始时间。支持 RFC3339、YYYY-MM-DD HH:MM:SS、YYYY-MM-DD 或 Unix 时间戳；传入后从该时间向后查询 TimeRange；使用 NextToken 续查时不能传。
    */
   StartTime?: string
   /**
-   * <p>查询时间范围。默认 1h；格式为正整数加单位 m/h/d，例如 5m、1h、24h、7d；使用 NextToken 续查时不能传。</p>
+   * 查询时间范围。默认 1h；格式为正整数加单位 m/h/d，例如 5m、1h、24h、7d；使用 NextToken 续查时不能传。
    */
   TimeRange?: string
   /**
-   * <p>单页返回条数。默认 100，最大 1000；使用 NextToken 续查时不能传。</p>
+   * 单页返回条数。首次查询可选，默认 100；取值 1 至 1000；使用 NextToken 续查时不能传。
    */
   Limit?: number
   /**
-   * <p>上一页 Response.Data 返回的不透明续查 token。首次查询不传；续查时只传 NextToken。无效、篡改、过期或租户不匹配会被拒绝。</p>
+   * 上一页 Response.Data 返回的不透明续查 token。首次查询不传；续查时只传 NextToken。无效、篡改或租户不匹配会被拒绝。
    */
   NextToken?: string
 }
@@ -2297,15 +2370,15 @@ export interface CcnSwitchInfo {
  */
 export interface SetNatFwEipRequest {
   /**
-   * bind：绑定eip；unbind：解绑eip；newAdd：新增防火墙弹性公网ip
+   * <p>bind：绑定eip；unbind：解绑eip；newAdd：新增防火墙弹性公网ip</p>
    */
   OperationType: string
   /**
-   * 防火墙实例id
+   * <p>防火墙实例id</p>
    */
   CfwInstance: string
   /**
-   * 当OperationType 为bind或unbind操作时，使用该字段。
+   * <p>当OperationType 为bind或unbind操作时，使用该字段。</p>
    */
   EipList?: Array<string>
 }
@@ -2435,15 +2508,15 @@ export interface ModifyBlockTopResponse {
  */
 export interface DescribeNatFwVpcDnsLstResponse {
   /**
-   * nat防火墙vpc dns 信息数组
+   * <p>nat防火墙vpc dns 信息数组</p>
    */
   VpcDnsSwitchLst?: Array<VpcDnsInfo>
   /**
-   * 返回参数 success成功 failed 失败
+   * <p>返回参数 success成功 failed 失败</p>
    */
   ReturnMsg?: string
   /**
-   * 开关总条数
+   * <p>开关总条数</p>
    */
   Total?: number
   /**
@@ -2531,35 +2604,35 @@ export interface DescribeLogsResponse {
  */
 export interface DescribeClusterVpcFwSwitchsRequest {
   /**
-   * 需要查询的索引，特定场景使用，可不填
+   * <p>需要查询的索引，特定场景使用，可不填</p>
    */
   Index?: string
   /**
-   * 过滤条件组合
+   * <p>过滤条件组合</p>
    */
   Filters?: Array<CommonFilter>
   /**
-   * 每页条数
+   * <p>每页条数</p>
    */
   Limit?: number
   /**
-   * 偏移值
+   * <p>偏移值</p>
    */
   Offset?: number
   /**
-   * 检索的起始时间，可不传
+   * <p>检索的起始时间，可不传</p>
    */
   StartTime?: string
   /**
-   * 检索的截止时间，可不传
+   * <p>检索的截止时间，可不传</p>
    */
   EndTime?: string
   /**
-   * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+   * <p>desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值</p>
    */
   Order?: string
   /**
-   * 排序所用到的字段
+   * <p>排序所用到的字段</p>
    */
   By?: string
 }
@@ -2569,6 +2642,58 @@ export interface DescribeClusterVpcFwSwitchsRequest {
  */
 export interface DescribeCfwAlertsRequest {
   /**
+   * <p>告警开始时间。可选，格式 YYYY-MM-DD HH:MM:SS；默认查询最近 1 小时。</p>
+   */
+  StartTime?: string
+  /**
+   * <p>告警结束时间。可选，格式 YYYY-MM-DD HH:MM:SS；默认当前时间。</p>
+   */
+  EndTime?: string
+  /**
+   * <p>告警严重级别过滤。可选；枚举 low、middle、high。</p>
+   */
+  Level?: string
+  /**
+   * <p>流量方向过滤。可选；枚举 outbound 出站、inbound 入站、lateral 横向。</p>
+   */
+  Direction?: string
+  /**
+   * <p>处置状态过滤。可选；枚举 unhandled、handled、blocked、passed、isolated、ignored。</p>
+   */
+  ActionStatus?: string
+  /**
+   * <p>攻击链阶段过滤。可选；枚举 recon、brute_force、delivery、exploit、c2、lateral_movement、exfiltration。</p>
+   */
+  KillChain?: string
+  /**
+   * <p>攻击结果过滤。可选；枚举 attempt、success、fail、unknown。</p>
+   */
+  AttackResult?: string
+  /**
+   * <p>IPS 策略动作过滤。可选；枚举 observe、block。</p>
+   */
+  Strategy?: string
+  /**
+   * <p>攻击事件名称关键字过滤。可选，例如 SQL注入、暴力破解、恶意域名访问。</p>
+   */
+  EventName?: string
+  /**
+   * <p>精确告警事件 ID 过滤。用于指定事件的写操作前检查和写操作后核验；事件重新聚合时返回原请求 ID 和当前事件 ID。无匹配返回空结果，多匹配或定位过程异常时失败，不退化为宽查询。</p>
+   */
+  EventId?: string
+  /**
+   * <p>源 IP 过滤。可选。</p>
+   */
+  SrcIp?: string
+  /**
+   * <p>目的 IP 过滤。可选。</p>
+   */
+  DstIp?: string
+  /**
+   * <p>云资源实例 ID 过滤。可选，例如 ins-xxxxxxxx。</p>
+   */
+  InstanceId?: string
+  /**
    * <p>单页返回告警数。可选，默认 10，最大 50。</p>
    */
   Limit?: number
@@ -2576,6 +2701,14 @@ export interface DescribeCfwAlertsRequest {
    * <p>分页偏移。可选，默认 0。</p>
    */
   Offset?: number
+  /**
+   * <p>排序字段。可选，默认 EndTime；枚举 EndTime、StartTime、Count。排序字段。可选，默认 EndTime；枚举 EndTime、StartTime、Count；Count 表示按单个聚合告警事件的告警发生次数/命中次数排序，对应返回中的 occurrence_count</p>
+   */
+  OrderBy?: string
+  /**
+   * <p>排序方向。可选，默认 desc；枚举 desc、asc。</p>
+   */
+  Order?: string
 }
 
 /**
@@ -2652,7 +2785,7 @@ export interface DeleteAddressTemplateResponse {
  */
 export interface DescribeCfwEipsResponse {
   /**
-   * 返回值信息
+   * <p>返回值信息</p>
    */
   NatFwEipList?: Array<NatFwEipsInfo>
   /**
@@ -2825,7 +2958,7 @@ export type DescribeNatFwInstanceRequest = null
  */
 export interface ModifyNatFwVpcDnsSwitchResponse {
   /**
-   * 修改成功
+   * <p>修改成功</p>
    */
   ReturnMsg?: string
   /**
@@ -2861,15 +2994,15 @@ export interface CreateBlockIgnoreRuleNewRequest {
  */
 export interface DescribeCcnInstanceRegionStatusRequest {
   /**
-   * 云联网ID
+   * <p>云联网ID</p>
    */
   CcnId: string
   /**
-   * 要查询引流网络部署状态的云联网关联的实例ID列表
+   * <p>要查询引流网络部署状态的云联网关联的实例ID列表</p>
    */
   InstanceIds?: Array<string>
   /**
-   * 引流路由方法 0:多路由表, 1:策略路由
+   * <p>引流路由方法 0:多路由表, 1:策略路由</p>
    */
   RoutingMode?: number
 }
@@ -2897,13 +3030,47 @@ export interface DescribeNatAcRuleResponse {
 }
 
 /**
- * DeleteVpcFwGroup返回参数结构体
+ * 离线导出任务
  */
-export interface DeleteVpcFwGroupResponse {
+export interface OfflineExportTask {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 任务ID
    */
-  RequestId?: string
+  TaskId?: string
+  /**
+   * 任务名称
+   */
+  TaskName?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: string
+  /**
+   * 日志总数
+   */
+  DataLength?: number
+  /**
+   * 任务状态，0等待下载，1下载中，2下载完成，3下载失败，4文件过期
+   */
+  Status?: number
+  /**
+   * 文件过期时间
+   */
+  ExpireTime?: string
+  /**
+   * 下载进度
+   */
+  Progress?: number
+  /**
+   * 导出失败信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorInfo?: string
+  /**
+   * 是否使用Cos
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UseUserCos?: number
 }
 
 /**
@@ -2929,31 +3096,31 @@ export interface AddAclRuleRequest {
  */
 export interface DescribeVpcFwGroupSwitchRequest {
   /**
-   * 每页条数
+   * <p>每页条数</p>
    */
   Limit: number
   /**
-   * 偏移值
+   * <p>偏移值</p>
    */
   Offset: number
   /**
-   * 过滤条件组合
+   * <p>过滤条件组合</p>
    */
   Filters?: Array<CommonFilter>
   /**
-   * 检索的起始时间，可不传
+   * <p>检索的起始时间，可不传</p>
    */
   StartTime?: string
   /**
-   * 检索的截止时间，可不传
+   * <p>检索的截止时间，可不传</p>
    */
   EndTime?: string
   /**
-   * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+   * <p>desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值</p>
    */
   Order?: string
   /**
-   * 排序所用到的字段
+   * <p>排序所用到的字段</p>
    */
   By?: string
 }
@@ -3326,7 +3493,7 @@ export interface NatFwInstance {
  */
 export interface DescribeCfwLogsResponse {
   /**
-   * <p>查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。</p>
+   * 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。Items 是当前页日志数组，字段随 LogType 变化；TotalCount 是当前页返回条数，Limit 是页大小，LogType 和 TimeWindow 回显查询范围。HasMore=true 时必须保存并原样使用 NextToken 续查；HasMore=false 时分页结束。
    */
   Data?: string
   /**
@@ -3588,31 +3755,31 @@ export interface DescribeNatCcnFwSwitchRequest {
  */
 export interface DescribeCfwAnalysisDataRequest {
   /**
-   * <p>分析场景。必填。full_traffic 表示全流量深度分析；east_west 表示东西向流量分析；alert_comprehensive 表示告警综合分析；asset_exposure 表示资产暴露面分析；access_troubleshoot 表示访问阻断排障分析。</p>
+   * 分析场景。必填。full_traffic 表示全流量深度分析；east_west 表示东西向流量分析；alert_comprehensive 表示告警综合分析；asset_exposure 表示资产暴露面分析；access_troubleshoot 表示访问阻断排障分析。
    */
   Scenario: string
   /**
-   * <p>查询开始时间。可选，格式 YYYY-MM-DD HH:MM:SS；不传时默认查询最近 7 天。</p>
+   * 查询开始时间。可选，格式 YYYY-MM-DD HH:MM:SS；不传时默认查询最近 7 天。
    */
   StartTime?: string
   /**
-   * <p>查询结束时间。可选，格式 YYYY-MM-DD HH:MM:SS；不传时默认当前时间。</p>
+   * 查询结束时间。可选，格式 YYYY-MM-DD HH:MM:SS；不传时默认当前时间。
    */
   EndTime?: string
   /**
-   * <p>分析对象类型。可选，默认 user；user 表示租户全局，asset 表示单个资产，vpc 表示 VPC，domain 表示域名。</p>
+   * 分析对象类型。可选，默认 user；user 表示租户全局，asset 表示资产上下文，vpc 表示 VPC 上下文，domain 表示域名上下文。选择非 user 时建议同时传 ObjectId 以限定具体对象；当前未传 ObjectId 时仍按该对象类型执行宽查询。
    */
   ObjectType?: string
   /**
-   * <p>分析对象标识。ObjectType 为 asset、vpc 或 domain 时按需传入，可填写 IP、实例 ID、VPC ID 或域名。</p>
+   * 分析对象标识。ObjectType 为 asset、vpc 或 domain 时可传，用于限定具体 IP、实例 ID、VPC ID 或域名；当前为可选参数，省略时不会按具体对象过滤。
    */
   ObjectId?: string
   /**
-   * <p>排障目标。可选，主要用于 access_troubleshoot 场景，可填写 IP 或域名。</p>
+   * 目标 IP 或域名过滤。可选，常用于 access_troubleshoot，也可用于其他 Scenario；传入后优先于 ObjectType/ObjectId，并对该场景全部分析段追加源 IP、目的 IP 或目的域名过滤。
    */
   Target?: string
   /**
-   * <p>需要跳过的分析段名称列表。可选；不传时执行该场景全部分析段。</p>
+   * 需要跳过的分析段名称列表。可选；不传或传空数组时执行该场景全部分析段。full_traffic 支持 beacon、dns_large、dns_dga、dns_dga_fine、dns_tunnel、icmp_tunnel、mining、p2p、remote_tool、file_transfer、high_risk_outbound、lateral_baseline、vpc_sensitive、smb_write、outbound_baseline、inbound_high_risk、tls_expired、tls_self_signed、first_seen_ip、first_seen_country、first_seen_port；east_west 支持 vpc_inter_vpc、subnet_inter、service_port、lateral_baseline、vpc_sensitive、smb_write、database_lateral；alert_comprehensive 支持 outbound_baseline、lateral_baseline、beacon、inbound_high_risk、first_seen_ip、first_seen_country、first_seen_port；asset_exposure 支持 inbound_high_risk、tls_expired、tls_self_signed、high_risk_outbound；access_troubleshoot 支持 acl_border_block、acl_nat_block、acl_vpc_block、ips_block。传入当前 Scenario 不支持的名称会返回 InvalidParameter。
    */
   SkipSections?: Array<string>
 }
@@ -3744,7 +3911,7 @@ export interface SequenceData {
  */
 export interface DescribeSwitchErrorRequest {
   /**
-   * EDGE_FW : 互联网边界防火墙 , NDR: 流量分析，VPC_FW：VPC边界防火墙
+   * <p>EDGE_FW : 互联网边界防火墙 , NDR: 流量分析，VPC_FW：VPC边界防火墙</p>
    */
   FwType?: string
 }
@@ -3897,7 +4064,7 @@ export interface UpdateClusterVpcFwResponse {
  */
 export interface DescribeCcnAssociatedInstancesRequest {
   /**
-   * 云联网ID
+   * <p>云联网ID</p>
    */
   CcnId: string
 }
@@ -4011,47 +4178,13 @@ export interface ScanInfo {
 }
 
 /**
- * 离线导出任务
+ * DeleteVpcFwGroup返回参数结构体
  */
-export interface OfflineExportTask {
+export interface DeleteVpcFwGroupResponse {
   /**
-   * 任务ID
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  TaskId?: string
-  /**
-   * 任务名称
-   */
-  TaskName?: string
-  /**
-   * 创建时间
-   */
-  CreateTime?: string
-  /**
-   * 日志总数
-   */
-  DataLength?: number
-  /**
-   * 任务状态，0等待下载，1下载中，2下载完成，3下载失败，4文件过期
-   */
-  Status?: number
-  /**
-   * 文件过期时间
-   */
-  ExpireTime?: string
-  /**
-   * 下载进度
-   */
-  Progress?: number
-  /**
-   * 导出失败信息
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ErrorInfo?: string
-  /**
-   * 是否使用Cos
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  UseUserCos?: number
+  RequestId?: string
 }
 
 /**
@@ -4105,12 +4238,12 @@ export interface AddEnterpriseSecurityGroupRulesResponse {
  */
 export interface DescribeCfwInsStatusResponse {
   /**
-   * 防火墙实例运行状态
+   * <p>防火墙实例运行状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CfwInsStatus?: Array<CfwInsStatus>
   /**
-   * 0
+   * <p>0</p>
    */
   TotalCount?: number
   /**
@@ -4134,17 +4267,15 @@ export interface DeleteResourceGroupRequest {
  */
 export interface ModifyFwGroupSwitchRequest {
   /**
-   * 打开或关闭开关
-0：关闭开关
-1：打开开关
+   * <p>打开或关闭开关<br>0：关闭开关<br>1：打开开关</p>
    */
   Enable: number
   /**
-   * 是否操作全部开关 0 不操作全部开关，1 操作全部开关
+   * <p>是否操作全部开关 0 不操作全部开关，1 操作全部开关</p>
    */
   AllSwitch: number
   /**
-   * 开关列表
+   * <p>开关列表</p>
    */
   SwitchList?: Array<FwGroupSwitch>
 }
@@ -4294,7 +4425,7 @@ export interface DescribeIPStatusListRequest {
  */
 export interface DescribeFwSyncStatusResponse {
   /**
-   * 同步状态：1，同步中；0，同步完成
+   * <p>同步状态：1，同步中；0，同步完成</p>
    */
   SyncStatus?: number
   /**
@@ -4386,11 +4517,11 @@ export interface ModifyNatSequenceRulesRequest {
  */
 export interface DescribeVpcFwGroupSwitchResponse {
   /**
-   * 开关列表
+   * <p>开关列表</p>
    */
   SwitchList?: Array<FwGroupSwitchShow>
   /**
-   * 开关总个数
+   * <p>开关总个数</p>
    */
   Total?: number
   /**
@@ -4414,11 +4545,11 @@ export interface ModifyBlockIgnoreRuleResponse {
  */
 export interface DescribeCcnAssociatedInstancesResponse {
   /**
-   * 实例总数
+   * <p>实例总数</p>
    */
   Total?: number
   /**
-   * 云联网关联的实例信息
+   * <p>云联网关联的实例信息</p>
    */
   CcnAssociatedInstances?: Array<CcnAssociatedInstance>
   /**
@@ -4432,23 +4563,23 @@ export interface DescribeCcnAssociatedInstancesResponse {
  */
 export interface ModifyNatFwReSelectRequest {
   /**
-   * 模式 1：接入模式；0：新增模式
+   * <p>模式 1：接入模式；0：新增模式</p>
    */
   Mode: number
   /**
-   * 防火墙实例id
+   * <p>防火墙实例id</p>
    */
   CfwInstance: string
   /**
-   * 接入模式重新接入的nat网关列表，其中NatGwList和VpcList只能传递一个。
+   * <p>接入模式重新接入的nat网关列表，其中NatGwList和VpcList只能传递一个。</p>
    */
   NatGwList?: Array<string>
   /**
-   * 新增模式重新接入的vpc列表，其中NatGwList和NatgwList只能传递一个。
+   * <p>新增模式重新接入的vpc列表，其中NatGwList和NatgwList只能传递一个。</p>
    */
   VpcList?: Array<string>
   /**
-   * 指定防火墙使用网段信息
+   * <p>指定防火墙使用网段信息</p>
    */
   FwCidrInfo?: FwCidrInfo
 }
@@ -4986,11 +5117,11 @@ export interface CommonIdName {
  */
 export interface DescribeCcnInstanceRegionStatusResponse {
   /**
-   * 地域总数量
+   * <p>地域总数量</p>
    */
   Total?: number
   /**
-   * 地域防火墙引流网络状态列表
+   * <p>地域防火墙引流网络状态列表</p>
    */
   RegionFwStatus?: Array<RegionFwStatus>
   /**
@@ -5070,7 +5201,7 @@ export interface ModifySecurityGroupRuleResponse {
  */
 export interface DescribeSwitchErrorResponse {
   /**
-   * 错误信息列表
+   * <p>错误信息列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Array<SwitchError>
@@ -5113,23 +5244,23 @@ export interface ModifyTableStatusResponse {
  */
 export interface DescribeNatFwSwitchRequest {
   /**
-   * 偏移量，分页用
+   * <p>偏移量，分页用</p>
    */
   Offset: number
   /**
-   * 条数，分页用
+   * <p>条数，分页用</p>
    */
   Limit: number
   /**
-   * 过滤条件组合
+   * <p>过滤条件组合</p>
    */
   Filters?: Array<CommonFilter>
   /**
-   * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+   * <p>desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值</p>
    */
   Order?: string
   /**
-   * 排序所用到的字段
+   * <p>排序所用到的字段</p>
    */
   By?: string
 }
@@ -5220,17 +5351,17 @@ export interface DescribeAddressTemplateListResponse {
  */
 export interface CfwStatusMonitorFilter {
   /**
-   * <p>过滤字段名。</p>
+   * 过滤字段名。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name: string
   /**
-   * <p>过滤值列表，最多 10 个。</p>
+   * 过滤值列表，最多 10 个。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Values: Array<string>
   /**
-   * <p>操作符类型，可选；仅支持后端允许的类型。</p>
+   * 操作符类型，可选；仅支持后端允许的类型。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OperatorType?: number
@@ -5241,20 +5372,15 @@ export interface CfwStatusMonitorFilter {
  */
 export interface ModifyAssetSyncResponse {
   /**
-   * 返回状态
-0 请求成功
-2 请求失败
-3 请求失败-频率限制
+   * <p>返回状态<br>0 请求成功<br>2 请求失败<br>3 请求失败-频率限制</p>
    */
   Status?: number
   /**
-   * success 成功
-其他失败
+   * <p>success 成功<br>其他失败</p>
    */
   ReturnMsg?: string
   /**
-   * 0 成功
-非0 失败
+   * <p>0 成功<br>非0 失败</p>
    */
   ReturnCode?: number
   /**
@@ -5268,7 +5394,7 @@ export interface ModifyAssetSyncResponse {
  */
 export interface DescribeCfwRuleOptimizationResponse {
   /**
-   * 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。示例仅展示代表性字段；完整结果还包含 rule_type_name、rule_total、rule_active、rule_skipped_geo_or_cloud、dimension_skipped、thresholds 和 generated_at，finding 还包含 risk_level、affected_rule_uuids、affected_rule_seqs、recommendation_action、reason 和 evidence。结果过大时返回摘要，不返回 findings，并增加 truncated 和 truncated_reason。
+   * <p>查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。</p>
    */
   Data?: string
   /**
@@ -5315,6 +5441,72 @@ export interface DescribeRuleOverviewResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateAlertCenterRuleAsync请求参数结构体
+ */
+export interface CreateAlertCenterRuleAsyncRequest {
+  /**
+   * <p>处置时间<br>1  1天<br>7   7天<br>-2 永久</p>
+   */
+  HandleTime: number
+  /**
+   * <p>处置类型<br>当HandleIdList 不为空时：1封禁 2放通<br>当HandleIpList 不为空时：3放通 4封禁</p>
+   */
+  HandleType: number
+  /**
+   * <p>当前日志方向： 0 出向 1 入向</p>
+   */
+  AlertDirection: number
+  /**
+   * <p>处置方向： 0出向 1入向 0,1出入向 3内网</p>
+   */
+  HandleDirection: string
+  /**
+   * <p>AI操作来源</p><p>枚举值：</p><ul><li>console： 控制台来源值</li><li>wechat： 微信</li></ul>
+   */
+  CfwAiAgentOperationSource?: string
+  /**
+   * <p>处置对象,ID列表，  IdLists,IpList,EventIdList三选一</p>
+   */
+  HandleIdList?: Array<string>
+  /**
+   * <p>处置对象,IP列表，  IdLists,IpList,EventIdList三选一</p>
+   */
+  HandleIpList?: Array<string>
+  /**
+   * <p>处置描述</p>
+   */
+  HandleComment?: string
+  /**
+   * <p>放通原因:<br>0默认 1重复 2误报 3紧急放通</p>
+   */
+  IgnoreReason?: number
+  /**
+   * <p>封禁域名-保留字段</p>
+   */
+  BlockDomain?: string
+  /**
+   * <p>处置对象,事件ID列表，  IdLists,IpList,EventIdList三选一</p>
+   */
+  HandleEventIdList?: Array<string>
+  /**
+   * <p>加白IP列表 隔离时放通的ip列表</p>
+   */
+  WhiteIpList?: Array<string>
+  /**
+   * <p>隔离类型 1 互联网入站 2 互联网出站 4 内网访问</p>
+   */
+  IsolateType?: Array<number | bigint>
+  /**
+   * <p>隔离资产列表</p>
+   */
+  AssetIdList?: Array<string>
+  /**
+   * <p>处置HandleIpList，属于的告警事件ID</p>
+   */
+  TargetEventIdList?: Array<string>
 }
 
 /**
@@ -5506,11 +5698,11 @@ export interface DescribeSourceAssetResponse {
  */
 export interface ModifyNatFwVpcDnsSwitchRequest {
   /**
-   * nat 防火墙 id
+   * <p>nat 防火墙 id</p>
    */
   NatFwInsId: string
   /**
-   * DNS 开关切换列表
+   * <p>DNS 开关切换列表</p>
    */
   DnsVpcSwitchLst: Array<DnsVpcSwitch>
 }
@@ -5530,7 +5722,7 @@ export interface DeleteBlockIgnoreRuleNewResponse {
  */
 export interface DescribeCfwStatusMonitorResponse {
   /**
-   * <p>查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。describe_scene 返回 scene 与 selection.available_options；fetch_scene 返回选中场景的 data 快照。</p>
+   * 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。describe_scene 的 scene 返回 metric_options、perspective_options、default_metric、default_perspective、selection_required_by_metric、selection_kind_by_metric 和 time_preset_options；selection.available_options 返回可用于 SelectionId/SelectionName/SelectionInstanceId 的选项。fetch_scene 返回选中场景的 data 快照，可能包含 overview、table 或 detail。下方示例是字段结构节选，数组仅展示代表值。
    */
   Data?: string
   /**
@@ -5544,24 +5736,19 @@ export interface DescribeCfwStatusMonitorResponse {
  */
 export interface ModifyEdgeIpSwitchRequest {
   /**
-   * 0 关闭开关
-1 打开开关
-2 不操作开关，此次切换模式
+   * <p>0 关闭开关<br>1 打开开关<br>2 不操作开关，此次切换模式</p>
    */
   Enable?: number
   /**
-   * 操作开关详情
+   * <p>操作开关详情</p>
    */
   EdgeIpSwitchLst?: Array<EdgeIpSwitch>
   /**
-   * 0 不自动选择子网
-1 自动选择子网创建私有连接
+   * <p>0 不自动选择子网<br>1 自动选择子网创建私有连接</p>
    */
   AutoChooseSubnet?: number
   /**
-   * 0 切换为旁路
-1 切换为串行
-2 不切换模式，此次操作开关
+   * <p>0 切换为旁路<br>1 切换为串行<br>2 不切换模式，此次操作开关</p>
    */
   SwitchMode?: number
 }
@@ -5945,7 +6132,7 @@ export interface VpcFwGroupInfo {
  */
 export interface CreateVpcFwGroupResponse {
   /**
-   * 防火墙组ID
+   * <p>防火墙组ID</p>
    */
   FwGroupId?: string
   /**
@@ -5995,12 +6182,12 @@ export interface DescribeClusterNatCcnFwSwitchListRequest {
  */
 export interface DescribeVpcFwCcnPolicyWhiteListResponse {
   /**
-   * 支持自动接入和策略路由的CCN列表
+   * <p>支持自动接入和策略路由的CCN列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportCcnPolicy?: Array<string>
   /**
-   * 自动接入中支持自定义cidr的CCN列表
+   * <p>自动接入中支持自定义cidr的CCN列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SupportCcnPolicyCidr?: Array<string>
@@ -6258,15 +6445,23 @@ export interface SwitchError {
  */
 export interface DescribeCfwRuleOptimizationRequest {
   /**
-   * 长期零命中规则阈值天数。可选，必须为正整数，默认 180。
+   * <p>防火墙规则类型。必填。枚举：border 互联网边界；nat NAT 边界；vpc VPC 间；enterprise_sg 企业安全组。</p>
+   */
+  RuleType: string
+  /**
+   * <p>要执行的优化维度白名单。可选，例如 D1、D2、D8；不传默认执行全部支持维度。</p>
+   */
+  Dimensions?: Array<string>
+  /**
+   * <p>长期零命中规则阈值天数。可选，默认 180。</p>
    */
   IdleDays?: number
   /**
-   * 单 IP 离散过多聚合建议的最小数量。可选，最小为 2，默认 10。
+   * <p>单 IP 离散过多聚合建议的最小数量。可选，默认 10。</p>
    */
   IpAggMin?: number
   /**
-   * 可迁移 IOC 建议中返回的样例 IOC 数量上限。可选，必须为正整数，默认 50。
+   * <p>可迁移 IOC 建议中返回的样例 IOC 数量上限。可选，默认 50。</p>
    */
   IocSample?: number
 }
@@ -6359,23 +6554,21 @@ export interface DescribeFwGroupInstanceInfoResponse {
  */
 export interface DescribeAssetSyncResponse {
   /**
-   * 返回状态
-1 更新中
-2 更新完成
-3 更新失败
-4 更新失败
+   * <p>返回状态<br>1 更新中<br>2 更新完成<br>3 更新失败<br>4 更新失败</p>
    */
   Status?: number
   /**
-   * success 成功
-其他失败
+   * <p>success 成功<br>其他失败</p>
    */
   ReturnMsg?: string
   /**
-   * 0 成功
-非0 失败
+   * <p>0 成功<br>非0 失败</p>
    */
   ReturnCode?: number
+  /**
+   * <p>已有CVM数量</p>
+   */
+  CVMCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6435,19 +6628,19 @@ export interface FilterDataObject {
  */
 export interface DescribeNatFwInfoCountResponse {
   /**
-   * 返回参数 success 成功 failed 失败
+   * <p>返回参数 success 成功 failed 失败</p>
    */
   ReturnMsg?: string
   /**
-   * 当前租户的nat防火墙实例个数
+   * <p>当前租户的nat防火墙实例个数</p>
    */
   NatFwInsCount?: number
   /**
-   * 当前租户接入防火墙的子网个数
+   * <p>当前租户接入防火墙的子网个数</p>
    */
   SubnetCount?: number
   /**
-   * 打开NAT防火墙开关个数
+   * <p>打开NAT防火墙开关个数</p>
    */
   OpenSwitchCount?: number
   /**
@@ -6461,19 +6654,19 @@ export interface DescribeNatFwInfoCountResponse {
  */
 export interface ModifyVpcFwGroupRequest {
   /**
-   * 编辑的防火墙(组)ID
+   * <p>编辑的防火墙(组)ID</p>
    */
   FwGroupId: string
   /**
-   * 修改防火墙(组)名称
+   * <p>修改防火墙(组)名称</p>
    */
   Name?: string
   /**
-   * 编辑的防火墙实例列表
+   * <p>编辑的防火墙实例列表</p>
    */
   VpcFwInstances?: Array<VpcFwInstance>
   /**
-   * 指定防火墙使用网段信息
+   * <p>指定防火墙使用网段信息</p>
    */
   FwCidrInfo?: FwCidrInfo
 }
@@ -6528,6 +6721,24 @@ export interface ModifyVpcFwSequenceRulesRequest {
    * 规则快速排序：OrderIndex，原始序号；NewOrderIndex：新序号
    */
   RuleChangeItems?: Array<RuleChangeItem>
+}
+
+/**
+ * ModifyIsolateTable返回参数结构体
+ */
+export interface ModifyIsolateTableResponse {
+  /**
+   * <p>0 成功  非0失败</p>
+   */
+  ReturnCode?: number
+  /**
+   * <p>success 成功 其他失败</p>
+   */
+  ReturnMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6934,7 +7145,7 @@ export interface DescribeBlockIgnoreListResponse {
  */
 export interface DescribeCcnVpcFwSwitchRequest {
   /**
-   * 云联网ID
+   * <p>云联网ID</p>
    */
   CcnId: string
 }
@@ -7116,35 +7327,35 @@ export interface DescribeEdgeIpSimpleResponse {
  */
 export interface DescribeNatFwDnatRuleRequest {
   /**
-   * 需要查询的索引，特定场景使用，可不填
+   * <p>需要查询的索引，特定场景使用，可不填</p>
    */
   Index?: string
   /**
-   * 过滤条件组合
+   * <p>过滤条件组合</p>
    */
   Filters?: Array<CommonFilter>
   /**
-   * 每页条数
+   * <p>每页条数</p>
    */
   Limit?: number
   /**
-   * 偏移值
+   * <p>偏移值</p>
    */
   Offset?: number
   /**
-   * 检索的起始时间，可不传
+   * <p>检索的起始时间，可不传</p>
    */
   StartTime?: string
   /**
-   * 检索的截止时间，可不传
+   * <p>检索的截止时间，可不传</p>
    */
   EndTime?: string
   /**
-   * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值，可不传
+   * <p>desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值，可不传</p>
    */
   Order?: string
   /**
-   * 排序所用到的字段，可不传
+   * <p>排序所用到的字段，可不传</p>
    */
   By?: string
 }
@@ -7212,19 +7423,19 @@ export interface DnsVpcSwitch {
  */
 export interface ModifyClusterFwBypassRequest {
   /**
-   * 防火墙类型，"VPC_FW"-VPC防火墙，"NAT_FW"-NAT防火墙
+   * <p>防火墙类型，&quot;VPC_FW&quot;-VPC防火墙，&quot;NAT_FW&quot;-NAT防火墙</p>
    */
   FwType: string
   /**
-   * 云联网实例ID
+   * <p>云联网实例ID</p>
    */
   CcnId: string
   /**
-   * Bypass开关，true-开启Bypass（禁用正常下一跳，流量绕过防火墙），false-关闭Bypass（启用正常下一跳，流量经过防火墙）
+   * <p>Bypass开关，true-开启Bypass（禁用正常下一跳，流量绕过防火墙），false-关闭Bypass（启用正常下一跳，流量经过防火墙）</p>
    */
   Enable: boolean
   /**
-   * NAT防火墙实例ID，FwType为nat时必填
+   * <p>NAT防火墙实例ID，FwType为nat时必填</p>
    */
   NatInsId?: string
 }
@@ -7326,9 +7537,37 @@ export interface NatFwSwitchDetailS {
  */
 export interface DescribeCfwAssetsRequest {
   /**
-   * 最大返回资产数。可选，默认 100；取值 1 至 1000。
+   * <p>资产类型。可选，默认 host；枚举 host 主机资产、vpc VPC 网络、subnet 子网。</p>
+   */
+  AssetType?: string
+  /**
+   * <p>IP 地址过滤。可选，支持部分匹配；适用于 host。</p>
+   */
+  Ip?: string
+  /**
+   * <p>实例 ID 过滤。可选，适用于 host。</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>VPC ID 过滤。可选，适用于 host、vpc、subnet。</p>
+   */
+  VpcId?: string
+  /**
+   * <p>子网 ID 过滤。可选，适用于 host、subnet。</p>
+   */
+  SubnetId?: string
+  /**
+   * <p>实例类型过滤。可选，适用于 host；常见值包括 CVM、CLB、ENI、POD、MYSQL、REDIS、MARIADB、NAT、VPN、HAVIP、NATFW、GAAP、DC。</p>
+   */
+  InstanceType?: string
+  /**
+   * <p>最大返回资产数。可选，默认 100，最大 1000。</p>
    */
   Limit?: number
+  /**
+   * <p>上一页 Response.Data 返回的不透明资产或指纹续查 token。首次查询不传；续查时只传 NextToken，不能同时传 AssetType、过滤条件或 Limit。调用方无需区分 token 类型；无效、篡改或租户不匹配会被拒绝。</p>
+   */
+  NextToken?: string
 }
 
 /**
@@ -7336,42 +7575,42 @@ export interface DescribeCfwAssetsRequest {
  */
 export interface DescribeNatFwSwitchResponse {
   /**
-   * 总数
+   * <p>总数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Total?: number
   /**
-   * NAT边界防火墙开关列表数据
+   * <p>NAT边界防火墙开关列表数据</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Array<NatSwitchListData>
   /**
-   * 开关相关VPC列表
+   * <p>开关相关VPC列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcList?: Array<CommonIdName>
   /**
-   * 开关相关NAT列表
+   * <p>开关相关NAT列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NatList?: Array<CommonIdName>
   /**
-   * 开关相关ROUTE列表
+   * <p>开关相关ROUTE列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RouteList?: Array<CommonIdName>
   /**
-   * 开启开关个数
+   * <p>开启开关个数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OnNum?: number
   /**
-   * 关闭开关个数
+   * <p>关闭开关个数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OffNum?: number
   /**
-   * 失败开关状态
+   * <p>失败开关状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FailData?: Array<CommonIdNameStatus>
@@ -7532,31 +7771,31 @@ export interface DescribeNatFwInstanceResponse {
  */
 export interface DescribeFwEdgeIpsRequest {
   /**
-   * 过滤条件组合
+   * <p>过滤条件组合</p>
    */
   Filters?: Array<CommonFilter>
   /**
-   * 每页条数
+   * <p>每页条数</p>
    */
   Limit?: number
   /**
-   * 偏移值
+   * <p>偏移值</p>
    */
   Offset?: number
   /**
-   * 检索的起始时间，可不传
+   * <p>检索的起始时间，可不传</p>
    */
   StartTime?: string
   /**
-   * 检索的截止时间，可不传
+   * <p>检索的截止时间，可不传</p>
    */
   EndTime?: string
   /**
-   * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+   * <p>desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值</p>
    */
   Order?: string
   /**
-   * 排序所用到的字段
+   * <p>排序所用到的字段</p>
    */
   By?: string
 }
@@ -7642,11 +7881,11 @@ export interface CreateRuleItem {
  */
 export interface CloseClusterNatFwSwitchRequest {
   /**
-   * NAT防火墙实例ID
+   * <p>NAT防火墙实例ID</p>
    */
   NatInsId: string
   /**
-   * 云联网实例ID
+   * <p>云联网实例ID</p>
    */
   CcnId: string
 }
@@ -7666,12 +7905,11 @@ export interface ModifyClusterNatFwSwitchRequest {
  */
 export interface ModifyNatInstanceResponse {
   /**
-   * 0 正常
--1 异常
+   * <p>0 正常<br>-1 异常</p>
    */
   Status?: number
   /**
-   * nat实例唯一ID
+   * <p>nat实例唯一ID</p>
    */
   NatInstanceId?: string
   /**
@@ -7811,17 +8049,39 @@ export interface UpdateClusterVpcFwRequest {
  */
 export interface DeleteNatFwDnatRuleRequest {
   /**
-   * 0：cfw新增模式，1：cfw接入模式。
+   * <p>0：cfw新增模式，1：cfw接入模式。</p>
    */
   Mode: number
   /**
-   * 防火墙实例id，该字段必须传递。
+   * <p>防火墙实例id，该字段必须传递。</p>
    */
   CfwInstance?: string
   /**
-   * 添加或删除操作的Dnat规则列表。
+   * <p>添加或删除操作的Dnat规则列表。</p>
    */
   DnatRules?: Array<CfwNatDnatRule>
+}
+
+/**
+ * CreateAlertCenterRuleAsync返回参数结构体
+ */
+export interface CreateAlertCenterRuleAsyncResponse {
+  /**
+   * <p>返回状态码：<br>0 成功<br>非0 失败</p>
+   */
+  ReturnCode?: number
+  /**
+   * <p>返回信息：<br>success 成功<br>其他</p>
+   */
+  ReturnMsg?: string
+  /**
+   * <p>处置状态码：0  处置成功 1处置中  -1 通用错误，不用处理-3 表示重复，需重新刷新列表其他</p>
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7843,11 +8103,11 @@ export interface CreateChooseVpcsRequest {
  */
 export interface ModifyNatInstanceRequest {
   /**
-   * NAT防火墙实例名称
+   * <p>NAT防火墙实例名称</p>
    */
   InstanceName: string
   /**
-   * NAT防火墙实例ID
+   * <p>NAT防火墙实例ID</p>
    */
   NatInstanceId?: string
 }
@@ -7897,15 +8157,15 @@ export interface RemoveAcRuleResponse {
  */
 export interface DescribeCcnVpcFwPolicyLimitResponse {
   /**
-   * 支持的引流策略数量（最外层总条数）
+   * <p>支持的引流策略数量（最外层总条数）</p>
    */
   CcnPolicyInterconnectPairLenLimit?: number
   /**
-   * 单条引流策略中单组的最大配置数量（内层单组总条数）
+   * <p>单条引流策略中单组的最大配置数量（内层单组总条数）</p>
    */
   CcnPolicyGroupLenLimit?: number
   /**
-   * 接入的实例网段长度（网段数量）限制
+   * <p>接入的实例网段长度（网段数量）限制</p>
    */
   CcnPolicyCidrLenLimit?: number
   /**
@@ -8013,7 +8273,7 @@ export interface ModifyNatFwReSelectResponse {
  */
 export interface DescribeCfwAssetsResponse {
   /**
-   * 查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。
+   * <p>查询结果。UTF-8 JSON object 字符串；调用方需解析 Response.Data。</p>
    */
   Data?: string
   /**
@@ -8606,7 +8866,7 @@ export interface SecurityGroupListData {
  */
 export interface DescribeCcnVpcFwSwitchResponse {
   /**
-   * 互联对配置
+   * <p>互联对配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InterconnectPairs?: Array<InterconnectPair>
@@ -9144,7 +9404,7 @@ export interface UpdateCheckCcnNonDirectFlagRequest {
  */
 export interface DeleteNatFwInstanceRequest {
   /**
-   * 防火墙实例id
+   * <p>防火墙实例id</p>
    */
   CfwInstance: string
 }
@@ -9210,31 +9470,31 @@ export interface Column {
  */
 export interface DescribeDefenseSwitchResponse {
   /**
-   * 基础防御开关
+   * <p>基础防御开关</p>
    */
   BasicRuleSwitch?: number
   /**
-   * 安全基线开关
+   * <p>安全基线开关</p>
    */
   BaselineAllSwitch?: number
   /**
-   * 威胁情报开关
+   * <p>威胁情报开关</p>
    */
   TiSwitch?: number
   /**
-   * 虚拟补丁开关
+   * <p>虚拟补丁开关</p>
    */
   VirtualPatchSwitch?: number
   /**
-   * 是否历史开启
+   * <p>是否历史开启</p>
    */
   HistoryOpen?: number
   /**
-   * 状态值，0：查询成功，非0：查询失败
+   * <p>状态值，0：查询成功，非0：查询失败</p>
    */
   ReturnCode?: number
   /**
-   * 状态信息，success：查询成功，fail：查询失败
+   * <p>状态信息，success：查询成功，fail：查询失败</p>
    */
   ReturnMsg?: string
   /**
@@ -9347,19 +9607,19 @@ export interface DeleteAcRuleRequest {
  */
 export interface ModifyNatFwSwitchRequest {
   /**
-   * 开关，0：关闭，1：开启
+   * <p>开关，0：关闭，1：开启</p>
    */
   Enable: number
   /**
-   * 防火墙实例id列表，其中CfwInsIdList，SubnetIdList和RouteTableIdList只能传递一种。
+   * <p>防火墙实例id列表，其中CfwInsIdList，SubnetIdList和RouteTableIdList只能传递一种。</p>
    */
   CfwInsIdList?: Array<string>
   /**
-   * 子网id列表，其中CfwInsIdList，SubnetIdList和RouteTableIdList只能传递一种。
+   * <p>子网id列表，其中CfwInsIdList，SubnetIdList和RouteTableIdList只能传递一种。</p>
    */
   SubnetIdList?: Array<string>
   /**
-   * 路由表id列表，其中CfwInsIdList，SubnetIdList和RouteTableIdList只能传递一种。
+   * <p>路由表id列表，其中CfwInsIdList，SubnetIdList和RouteTableIdList只能传递一种。</p>
    */
   RouteTableIdList?: Array<string>
 }
@@ -9629,11 +9889,11 @@ export interface NDRAssetCategoryStats {
  */
 export interface DescribeNatFwDnatRuleResponse {
   /**
-   * Dnat规则列表
+   * <p>Dnat规则列表</p>
    */
   Data?: Array<DescNatDnatRule>
   /**
-   * 列表总数
+   * <p>列表总数</p>
    */
   Total?: number
   /**
@@ -9652,16 +9912,16 @@ export type DescribeGuideScanInfoRequest = null
  */
 export interface DescribeClusterVpcFwSwitchsResponse {
   /**
-   * 总条数
+   * <p>总条数</p>
    */
   Total?: number
   /**
-   * 防火墙开关列表
+   * <p>防火墙开关列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Data?: Array<ClusterSwitchDetail>
   /**
-   * 开关开启失败列表
+   * <p>开关开启失败列表</p>
    */
   FailData?: Array<SwitchFailInfo>
   /**
@@ -9844,40 +10104,35 @@ export interface SwitchListsData {
  */
 export interface CreateVpcFwGroupRequest {
   /**
-   * VPC防火墙(组)名称
+   * <p>VPC防火墙(组)名称</p>
    */
   Name: string
   /**
-   * 模式 1：CCN云联网模式；0：私有网络模式 2: sase 模式 3：ccn 高级模式 4: 私有网络(跨租户单边模式)
+   * <p>模式 1：CCN云联网模式；0：私有网络模式 2: sase 模式 3：ccn 高级模式 4: 私有网络(跨租户单边模式)</p>
    */
   Mode: number
   /**
-   * 防火墙(组)下的防火墙实例列表
+   * <p>防火墙(组)下的防火墙实例列表</p>
    */
   VpcFwInstances: Array<VpcFwInstance>
   /**
-   * 防火墙实例的开关模式
-1: 单点互通
-2: 多点互通
-3: 全互通
-4: 自定义路由
+   * <p>防火墙实例的开关模式<br>1: 单点互通<br>2: 多点互通<br>3: 全互通<br>4: 自定义路由</p>
    */
   SwitchMode: number
   /**
-   * auto 自动选择防火墙网段
-10.10.10.0/24 用户输入的防火墙网段
+   * <p>auto 自动选择防火墙网段<br>10.10.10.0/24 用户输入的防火墙网段</p>
    */
   FwVpcCidr: string
   /**
-   * 云联网id ，适用于云联网模式
+   * <p>云联网id ，适用于云联网模式</p>
    */
   CcnId?: string
   /**
-   * 指定防火墙使用网段信息
+   * <p>指定防火墙使用网段信息</p>
    */
   FwCidrInfo?: FwCidrInfo
   /**
-   * 跨租户管理员模式  1管理员 2多账号
+   * <p>跨租户管理员模式  1管理员 2多账号</p>
    */
   CrossUserMode?: string
 }
@@ -9887,47 +10142,47 @@ export interface CreateVpcFwGroupRequest {
  */
 export interface CreateNatFwInstanceWithDomainRequest {
   /**
-   * 防火墙实例名称
+   * <p>防火墙实例名称</p>
    */
   Name: string
   /**
-   * 带宽
+   * <p>带宽</p>
    */
   Width: number
   /**
-   * 模式 1：接入模式；0：新增模式
+   * <p>模式 1：接入模式；0：新增模式</p>
    */
   Mode: number
   /**
-   * 新增模式传递参数，其中NewModeItems和NatgwList至少传递一种。
+   * <p>新增模式传递参数，其中NewModeItems和NatgwList至少传递一种。</p>
    */
   NewModeItems?: NewModeItems
   /**
-   * 接入模式接入的nat网关列表，其中NewModeItems和NatgwList至少传递一种。
+   * <p>接入模式接入的nat网关列表，其中NewModeItems和NatgwList至少传递一种。</p>
    */
   NatGwList?: Array<string>
   /**
-   * 主可用区，为空则选择默认可用区
+   * <p>主可用区，为空则选择默认可用区</p>
    */
   Zone?: string
   /**
-   * 备可用区，为空则选择默认可用区
+   * <p>备可用区，为空则选择默认可用区</p>
    */
   ZoneBak?: string
   /**
-   * 异地灾备 1：使用异地灾备；0：不使用异地灾备；为空则默认不使用异地灾备
+   * <p>异地灾备 1：使用异地灾备；0：不使用异地灾备；为空则默认不使用异地灾备</p>
    */
   CrossAZone?: number
   /**
-   * 0不创建域名,1创建域名
+   * <p>0不创建域名,1创建域名</p>
    */
   IsCreateDomain?: number
   /**
-   * 如果要创建域名则必填
+   * <p>如果要创建域名则必填</p>
    */
   Domain?: string
   /**
-   * 指定防火墙使用网段信息
+   * <p>指定防火墙使用网段信息</p>
    */
   FwCidrInfo?: FwCidrInfo
 }
@@ -10162,11 +10417,11 @@ export interface IntArray {
  */
 export interface DescribeNatFwInstancesInfoResponse {
   /**
-   * 实例卡片信息数组
+   * <p>实例卡片信息数组</p>
    */
   NatinsLst?: Array<NatInstanceInfo>
   /**
-   * nat 防火墙个数
+   * <p>nat 防火墙个数</p>
    */
   Total?: number
   /**
@@ -10290,7 +10545,7 @@ export interface ModifyTableStatusRequest {
  */
 export interface DescribeGuideScanInfoResponse {
   /**
-   * 扫描信息
+   * <p>扫描信息</p>
    */
   Data?: ScanInfo
   /**

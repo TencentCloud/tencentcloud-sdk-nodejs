@@ -10061,6 +10061,18 @@ export interface Machine {
    * <p>核数</p>
    */
   CpuCoreCount?: number
+  /**
+   * <p>是否支持迁移</p>
+   */
+  MigrationRequired?: boolean
+  /**
+   * <p>是否支持暴露面扫描</p>
+   */
+  IsSupportXSPM?: boolean
+  /**
+   * <p>是否能解绑</p>
+   */
+  CanUnbind?: boolean
 }
 
 /**
@@ -23105,11 +23117,11 @@ export interface CosRiskViewInfo {
 }
 
 /**
- * 过滤条件。同一 Name 下多个 Values 为或关系；不同 Name 之间为且关系
+ * 过滤条件。同一 Name 下多个 Values 为或关系；不同 Name 之间为且关系。支持的 Name：TaskID（任务ID精确）、TaskStatus（任务状态）、TaskType（任务类型）
  */
 export interface Filters {
   /**
-   * 过滤条件名称
+   * 过滤条件名称。取值：TaskID（任务ID，精确匹配）、TaskStatus（任务状态，Values: INIT/SCANNING/SUCCESS/FAILED）、TaskType（任务类型，Values: PERIODIC/MANUAL）
    */
   Name?: string
   /**

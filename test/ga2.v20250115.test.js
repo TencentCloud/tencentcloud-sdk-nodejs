@@ -88,9 +88,9 @@ it("ga2.v20250115.DeleteForwardingPolicy", async function () {
     }
 })
 
-it("ga2.v20250115.DeleteForwardingRule", async function () {
+it("ga2.v20250115.DescribeCrossBorderSettlement", async function () {
     try {
-       const data = await client.DeleteForwardingRule({})
+       const data = await client.DescribeCrossBorderSettlement({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -98,9 +98,9 @@ it("ga2.v20250115.DeleteForwardingRule", async function () {
     }
 })
 
-it("ga2.v20250115.DescribeCrossBorderSettlement", async function () {
+it("ga2.v20250115.DeleteGlobalAcceleratorAclRule", async function () {
     try {
-       const data = await client.DescribeCrossBorderSettlement({})
+       const data = await client.DeleteGlobalAcceleratorAclRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -121,6 +121,26 @@ it("ga2.v20250115.ModifyListener", async function () {
 it("ga2.v20250115.DescribeAccelerateRegions", async function () {
     try {
        const data = await client.DescribeAccelerateRegions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ga2.v20250115.ModifyGlobalAcceleratorAclPolicy", async function () {
+    try {
+       const data = await client.ModifyGlobalAcceleratorAclPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ga2.v20250115.CreateGlobalAcceleratorAclRule", async function () {
+    try {
+       const data = await client.CreateGlobalAcceleratorAclRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -151,6 +171,16 @@ it("ga2.v20250115.DescribeEndpointGroups", async function () {
 it("ga2.v20250115.DescribeTaskResult", async function () {
     try {
        const data = await client.DescribeTaskResult({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ga2.v20250115.CreateGlobalAcceleratorAclPolicy", async function () {
+    try {
+       const data = await client.CreateGlobalAcceleratorAclPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +268,19 @@ it("ga2.v20250115.ModifyEndpointGroup", async function () {
     }
 })
 
-it("ga2.v20250115.DeleteEndpointGroups", async function () {
+it("ga2.v20250115.ModifyGlobalAcceleratorAclRule", async function () {
     try {
-       const data = await client.DeleteEndpointGroups({})
+       const data = await client.ModifyGlobalAcceleratorAclRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ga2.v20250115.DeleteForwardingRule", async function () {
+    try {
+       const data = await client.DeleteForwardingRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -251,6 +291,16 @@ it("ga2.v20250115.DeleteEndpointGroups", async function () {
 it("ga2.v20250115.CreateForwardingRule", async function () {
     try {
        const data = await client.CreateForwardingRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ga2.v20250115.DeleteGlobalAcceleratorAclPolicy", async function () {
+    try {
+       const data = await client.DeleteGlobalAcceleratorAclPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -301,6 +351,16 @@ it("ga2.v20250115.ModifyGlobalAccelerator", async function () {
 it("ga2.v20250115.DescribeForwardingRule", async function () {
     try {
        const data = await client.DescribeForwardingRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ga2.v20250115.DeleteEndpointGroups", async function () {
+    try {
+       const data = await client.DeleteEndpointGroups({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

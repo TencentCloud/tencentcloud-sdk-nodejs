@@ -1638,6 +1638,16 @@ it("dlc.v20210125.CreateScript", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeMCPTask", async function () {
+    try {
+       const data = await client.DescribeMCPTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.InitializeTCLake", async function () {
     try {
        const data = await client.InitializeTCLake({})
@@ -1771,6 +1781,16 @@ it("dlc.v20210125.DescribeUserDataEngineConfig", async function () {
 it("dlc.v20210125.DescribeTaskLog", async function () {
     try {
        const data = await client.DescribeTaskLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeMCPTaskResult", async function () {
+    try {
+       const data = await client.DescribeMCPTaskResult({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

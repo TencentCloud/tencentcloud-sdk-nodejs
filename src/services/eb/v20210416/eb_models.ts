@@ -195,11 +195,11 @@ export interface SearchLogResponse {
  */
 export interface ListEventBusesResponse {
   /**
-   * 事件集信息
+   * <p>事件集信息</p>
    */
   EventBuses?: Array<EventBus>
   /**
-   * 事件集总数
+   * <p>事件集总数</p>
    */
   TotalCount?: number
   /**
@@ -591,7 +591,7 @@ export interface ListTargetsRequest {
    */
   RuleId: string
   /**
-   * <p>根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间）</p>
+   * <p>根据哪个字段进行返回结果排序</p><p>枚举值：</p><ul><li>created_at： 创建时间</li><li>updated_at： 修改时间</li></ul><p>默认值：updated_at</p>
    */
   OrderBy?: string
   /**
@@ -767,23 +767,23 @@ export interface DeleteEventBusRequest {
  */
 export interface ListEventBusesRequest {
   /**
-   * 根据哪个字段进行返回结果排序,支持以下字段：created_at（创建时间）, updated_at（修改时间）
+   * <p>根据哪个字段进行返回结果排序</p><p>枚举值：</p><ul><li>created_at： 创建时间</li><li>updated_at： 修改时间</li><li>name： 事件集名称</li></ul><p>默认值：updated_at</p>
    */
   OrderBy?: string
   /**
-   * 返回数量，默认为20，最大值为100。
+   * <p>返回数量，默认为20，最大值为100。</p>
    */
   Limit?: number
   /**
-   * 以升序还是降序的方式返回结果，可选值 ASC（升序） 和 DESC（降序）
+   * <p>以升序还是降序的方式返回结果，可选值 ASC（升序） 和 DESC（降序）</p>
    */
   Order?: string
   /**
-   * 过滤字段范围: EventBusName(事件集名称)/EventBusId(事件集Id)/Type(事件集类型:Cloud(云服务);Platform(平台型);Custom(自定义))/TagKey(标签键)。每次请求的Filters的上限为10，Filter.Values的上限为5。[{"Name":"Type","Values":["Cloud","Platform"]}]
+   * <p>过滤字段范围: EventBusName(事件集名称)/EventBusId(事件集Id)/Type(事件集类型:Cloud(云服务);Platform(平台型);Custom(自定义))/TagKey(标签键)。每次请求的Filters的上限为10，Filter.Values的上限为5。[{&quot;Name&quot;:&quot;Type&quot;,&quot;Values&quot;:[&quot;Cloud&quot;,&quot;Platform&quot;]}]</p>
    */
   Filters?: Array<Filter>
   /**
-   * 分页偏移量，默认为0。
+   * <p>分页偏移量，默认为0。</p>
    */
   Offset?: number
 }
@@ -928,11 +928,11 @@ export interface UpdateTargetRequest {
  */
 export interface ListConnectionsResponse {
   /**
-   * 连接器信息
+   * <p>连接器信息</p>
    */
   Connections?: Array<Connection>
   /**
-   * 连接器总数
+   * <p>连接器总数</p>
    */
   TotalCount?: number
   /**
@@ -1045,23 +1045,23 @@ export interface ListPlatformEventPatternsResponse {
  */
 export interface ListRulesRequest {
   /**
-   * 事件集ID
+   * <p>事件集ID</p>
    */
   EventBusId: string
   /**
-   * 根据哪个字段进行返回结果排序,支持以下字段：AddTime（创建时间）, ModTime（修改时间）,name（规则名称）
+   * <p>根据哪个字段进行返回结果排序</p><p>枚举值：</p><ul><li>created_at： 创建时间</li><li>updated_at： 修改时间</li><li>name： 规则名称</li></ul><p>默认值：updated_at</p>
    */
   OrderBy?: string
   /**
-   * 返回数量，默认为20，最大值为100。
+   * <p>返回数量，默认为20，最大值为100。</p>
    */
   Limit?: number
   /**
-   * 分页偏移量，默认为0。
+   * <p>分页偏移量，默认为0。</p>
    */
   Offset?: number
   /**
-   * 以升序还是降序的方式返回结果，可选值 ASC（升序） 和 DESC（降序）
+   * <p>以升序还是降序的方式返回结果，可选值 ASC（升序） 和 DESC（降序）</p>
    */
   Order?: string
 }
@@ -1151,44 +1151,44 @@ export interface PublishEventResponse {
  */
 export interface Rule {
   /**
-   * 状态
+   * <p>状态</p>
    */
   Status?: string
   /**
-   * 修改时间
+   * <p>修改时间</p>
    */
   ModTime?: string
   /**
-   * 使能开关
+   * <p>使能开关</p>
    */
   Enable?: boolean
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
   /**
-   * 规则ID
+   * <p>规则ID</p>
    */
   RuleId?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   AddTime?: string
   /**
-   * 事件集ID
+   * <p>事件集ID</p>
    */
   EventBusId?: string
   /**
-   * 规则名称
+   * <p>规则名称</p>
    */
   RuleName?: string
   /**
-   * Target 简要信息
+   * <p>Target 简要信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Targets?: Array<TargetBrief>
   /**
-   * rule设置的dlq规则. 可能为null
+   * <p>rule设置的dlq规则. 可能为null</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DeadLetterConfig?: DeadLetterConfig
@@ -1515,11 +1515,11 @@ export interface TargetBrief {
  */
 export interface ListRulesResponse {
   /**
-   * 事件规则信息
+   * <p>事件规则信息</p>
    */
   Rules?: Array<Rule>
   /**
-   * 事件规则总数
+   * <p>事件规则总数</p>
    */
   TotalCount?: number
   /**
@@ -1695,23 +1695,23 @@ export interface DeadLetterConfig {
  */
 export interface ListConnectionsRequest {
   /**
-   * 事件集ID
+   * <p>事件集ID</p>
    */
   EventBusId: string
   /**
-   * 根据哪个字段进行返回结果排序，目前支持如下以下字段：AddTime, ModTime
+   * <p>根据哪个字段进行返回结果排序</p><p>枚举值：</p><ul><li>created_at： 创建时间</li><li>updated_at： 更新时间</li><li>name： 连接器名称</li></ul><p>默认值：updated_at</p>
    */
   OrderBy?: string
   /**
-   * 返回数量，默认为20，最大值为100。
+   * <p>返回数量，默认为20，最大值为100。</p>
    */
   Limit?: number
   /**
-   * 以升序还是降序的方式返回结果，可选值 ASC 和 DESC
+   * <p>以升序还是降序的方式返回结果，可选值 ASC 和 DESC</p>
    */
   Order?: string
   /**
-   * 偏移量，默认为0。
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
 }
@@ -1753,7 +1753,7 @@ export interface SearchLogRequest {
    */
   Page: number
   /**
-   * <p>每页数据大小</p>
+   * <p>每页数据大小</p><p>取值范围：[1, 1000]</p><p>默认值：10</p>
    */
   Limit: number
   /**
@@ -1761,11 +1761,11 @@ export interface SearchLogRequest {
    */
   Filter?: Array<LogFilter>
   /**
-   * <p>事件查询结果排序，[&quot;timestamp&quot;,&quot;subject&quot;]</p>
+   * <p>事件查询结果排序</p><p>枚举值：</p><ul><li>Timestamp： 事件触发时间</li><li>Source： 事件源</li><li>Type： 事件类型</li><li>RuleIds： 事件规则</li><li>Subject： 事件对象</li><li>Region： 事件地域</li><li>Status： 事件状态</li></ul>
    */
   OrderFields?: Array<string>
   /**
-   * <p>排序方式，asc 从旧到新，desc 从新到旧</p>
+   * <p>排序方式，asc 从旧到新，desc 从新到旧</p><p>枚举值：</p><ul><li>asc： 从旧到新</li><li>desc： 从新到旧</li></ul><p>默认值：desc</p>
    */
   OrderBy?: string
 }

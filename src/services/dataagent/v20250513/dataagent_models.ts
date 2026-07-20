@@ -44,6 +44,20 @@ export interface GetKnowledgeBaseListRequest {
 }
 
 /**
+ * QueryUserAuthority返回参数结构体
+ */
+export interface QueryUserAuthorityResponse {
+  /**
+   * 对象权限信息
+   */
+  ModelUserAuthority?: ModelUserAuthority
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AddChunk请求参数结构体
  */
 export interface AddChunkRequest {
@@ -101,6 +115,20 @@ export interface QuerySceneListResponse {
 }
 
 /**
+ * 模型详情
+ */
+export interface ModelList {
+  /**
+   * <p>模型版本名称</p>
+   */
+  Model?: string
+  /**
+   * <p>模型厂商</p>
+   */
+  Vendor?: string
+}
+
+/**
  * ModifyChunk请求参数结构体
  */
 export interface ModifyChunkRequest {
@@ -136,6 +164,24 @@ export interface ModifyChunkRequest {
 export interface ChatAIResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。本接口为流式响应接口，当请求成功时，RequestId 会被放在 HTTP 响应的 Header "X-TC-RequestId" 中。
+   */
+  RequestId?: string
+}
+
+/**
+ * QueryModels返回参数结构体
+ */
+export interface QueryModelsResponse {
+  /**
+   * <p>模型列表</p>
+   */
+  Models?: Array<ModelList>
+  /**
+   * <p>200成功，500失败</p>
+   */
+  Status?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
 }
@@ -473,17 +519,13 @@ export interface GetSessionDetailsRequest {
 }
 
 /**
- * QueryUserAuthority返回参数结构体
+ * QueryModels请求参数结构体
  */
-export interface QueryUserAuthorityResponse {
+export interface QueryModelsRequest {
   /**
-   * 对象权限信息
+   * <p>实例id</p>
    */
-  ModelUserAuthority?: ModelUserAuthority
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceId?: string
 }
 
 /**

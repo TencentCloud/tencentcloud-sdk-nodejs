@@ -16,20 +16,6 @@
  */
 
 /**
- * CreateAccelerateAreas返回参数结构体
- */
-export interface CreateAccelerateAreasResponse {
-  /**
-   * <p>异步任务ID。</p>
-   */
-  TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DescribeTaskResult返回参数结构体
  */
 export interface DescribeTaskResultResponse {
@@ -41,68 +27,6 @@ export interface DescribeTaskResultResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeListeners返回参数结构体
- */
-export interface DescribeListenersResponse {
-  /**
-   * 符合条件的监听器实例。
-   */
-  ListenerSet?: Array<ListenerSet>
-  /**
-   * 符合条件的实例个数。
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * CreateForwardingPolicy请求参数结构体
- */
-export interface CreateForwardingPolicyRequest {
-  /**
-   * <p>全球加速实例ID。</p>
-   */
-  GlobalAcceleratorId: string
-  /**
-   * <p>监听器ID。</p>
-   */
-  ListenerId: string
-  /**
-   * <p>域名。</p><p>参数格式：格式，必须满足正则表达式：^(<a href="?:[a-z0-9-]{0,61}[a-z0-9]">a-z0-9</a>?.)+[a-z]{2,}$</p><p>入参限制：长度范围是1-80。</p>
-   */
-  Host: string
-}
-
-/**
- * DescribeForwardingRule请求参数结构体
- */
-export interface DescribeForwardingRuleRequest {
-  /**
-   * 全球加速实例ID。
-   */
-  GlobalAcceleratorId: string
-  /**
-   * 监听器ID。
-   */
-  ListenerId: string
-  /**
-   * 七层转发规则ID。
-   */
-  ForwardingPolicyId: string
-  /**
-   * 偏移量，默认为0。
-   */
-  Offset?: number
-  /**
-   * 返回数量，默认为20，最大值为100。
-   */
-  Limit?: number
 }
 
 /**
@@ -124,9 +48,9 @@ export interface DescribeEndpointGroupsResponse {
 }
 
 /**
- * DeleteListenerAdditionalCert返回参数结构体
+ * ReplaceListenerAdditionalCert返回参数结构体
  */
-export interface DeleteListenerAdditionalCertResponse {
+export interface ReplaceListenerAdditionalCertResponse {
   /**
    * 任务ID。
    */
@@ -135,28 +59,6 @@ export interface DeleteListenerAdditionalCertResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ModifyForwardingPolicy请求参数结构体
- */
-export interface ModifyForwardingPolicyRequest {
-  /**
-   * <p>全球加速实例ID。</p>
-   */
-  GlobalAcceleratorId: string
-  /**
-   * <p>监听器ID。</p>
-   */
-  ListenerId: string
-  /**
-   * <p>策略ID。</p>
-   */
-  ForwardingPolicyId: string
-  /**
-   * <p>域名。</p><p>入参限制：长度范围在1-80。</p><p>格式必须满足正则表达式：^(<a href="?:[a-z0-9-]{0,61}[a-z0-9]">a-z0-9</a>?.)+[a-z]{2,}$</p>
-   */
-  Host: string
 }
 
 /**
@@ -207,102 +109,6 @@ export interface CreateForwardingRuleRequest {
    * <p>删除源站响应头</p><p>数组长度不超过5。可以传空数组，代表清空配置。</p>
    */
   HideResponseHeaders?: Array<HideResponseHeaders>
-}
-
-/**
- * 七层转发策略信息
- */
-export interface ForwardingPolicySet {
-  /**
-   * 全球加速实例ID。
-   */
-  GlobalAcceleratorId?: string
-  /**
-   * 监听器ID。
-   */
-  ListenerId?: string
-  /**
-   * 策略ID。
-   */
-  ForwardingPolicyId?: string
-  /**
-   * 域名。
-   */
-  Host?: string
-  /**
-   * 是否为默认域名。
-   */
-  DefaultHostFlag?: boolean
-}
-
-/**
- * 可加速地域信息
- */
-export interface AcceleratorRegionSet {
-  /**
-   * <p>地域中文名称。</p>
-   */
-  Name?: string
-  /**
-   * <p>是否可用；0：不可用，1:可用。</p>
-   */
-  IsAvailable?: number
-  /**
-   * <p>地域信息。</p>
-   */
-  Region?: string
-  /**
-   * <p>地区名称。</p>
-   */
-  AreaName?: string
-  /**
-   * <p>是否中国地域。</p>
-   */
-  IsChinaMainland?: number
-  /**
-   * <p>支持IspType类型。</p>
-   */
-  SupportIspType?: Array<string>
-  /**
-   * <p>是否腾讯地域。</p>
-   */
-  IsTencentRegion?: number
-}
-
-/**
- * DeleteListenerAdditionalCert请求参数结构体
- */
-export interface DeleteListenerAdditionalCertRequest {
-  /**
-   * 全球加速实例ID。
-   */
-  GlobalAcceleratorId: string
-  /**
-   * 监听器ID。
-   */
-  ListenerId: string
-  /**
-   * 证书ID。
-   */
-  AdditionalCertificates: Array<string>
-}
-
-/**
- * CreateListener返回参数结构体
- */
-export interface CreateListenerResponse {
-  /**
-   * <p>任务ID。</p>
-   */
-  TaskId?: string
-  /**
-   * <p>监听器ID。</p>
-   */
-  ListenerId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -376,38 +182,6 @@ export interface DescribeCrossBorderSettlementRequest {
 }
 
 /**
- * 加速地域公网IP信息
- */
-export interface IpAddressInfoSet {
-  /**
-   * <p>IP地址。</p>
-   */
-  IpAddress?: string
-  /**
-   * <p>IP类型。</p>
-   */
-  IspType?: string
-  /**
-   * <p>Ddos类型</p>
-   */
-  DdosProtectionType?: string
-}
-
-/**
- * ModifyForwardingPolicy返回参数结构体
- */
-export interface ModifyForwardingPolicyResponse {
-  /**
-   * <p>异步任务ID。</p>
-   */
-  TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * CreateListenerAdditionalCert返回参数结构体
  */
 export interface CreateListenerAdditionalCertResponse {
@@ -422,49 +196,77 @@ export interface CreateListenerAdditionalCertResponse {
 }
 
 /**
- * DescribeAccelerateAreas请求参数结构体
+ * DeleteGlobalAcceleratorAclPolicy返回参数结构体
  */
-export interface DescribeAccelerateAreasRequest {
+export interface DeleteGlobalAcceleratorAclPolicyResponse {
+  /**
+   * 异步任务ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateAccelerateAreas返回参数结构体
+ */
+export interface CreateAccelerateAreasResponse {
+  /**
+   * <p>异步任务ID。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeEndpointGroups请求参数结构体
+ */
+export interface DescribeEndpointGroupsRequest {
   /**
    * <p>全球加速实例ID。</p>
    */
   GlobalAcceleratorId: string
   /**
-   * <p>偏移量。默认为0。</p>
+   * <p>偏移量，默认为0。</p>
    */
   Offset?: number
   /**
-   * <p>符合条件实例数量。默认为20，最大200。</p>
+   * <p>返回数量，默认为10，最大值为10。</p>
    */
   Limit?: number
   /**
-   * <p>过滤条件。 accelerate-region- String -（过滤条件）终端节点组地域。</p>
+   * <p>过滤条件。  endpoint-group-id- String -（过滤条件）终端节点组实例ID。endpoint-group-type- String -（过滤条件）终端节点组实例类型。</p>
    */
   Filters?: Array<Filter>
 }
 
 /**
- * ModifyAccelerateAreas请求参数结构体
+ * 响应Header
  */
-export interface ModifyAccelerateAreasRequest {
+export interface ResponseHeaders {
   /**
-   * <p>全球加速实例ID。</p>
+   * <p>key</p><p>参数格式：1、字符串只包含可打印的ASCII字符 2、不能包含这些字符()&lt;&gt;@,;:\&quot;/[ ]?={ }</p><p>入参限制：长度在1-40。</p>
    */
-  GlobalAcceleratorId: string
+  Key: string
   /**
-   * <p>加速地域信息。</p><p>入参限制：数组长度不能超过10。</p>
+   * <p>value</p><p>入参限制：长度不能超过128</p><p>如果字符串包含$，那仅能配置&#39;$remote_addr&#39;, &#39;$remote_port&#39;，否则不支持。</p>
    */
-  AcceleratorAreas: Array<AcceleratorAreas>
+  Value: string
 }
 
 /**
- * DescribeCrossBorderSettlement返回参数结构体
+ * DeleteGlobalAcceleratorAclRule返回参数结构体
  */
-export interface DescribeCrossBorderSettlementResponse {
+export interface DeleteGlobalAcceleratorAclRuleResponse {
   /**
-   * 流量用量，单位是GB；精度为保留小数点6位。
+   * 异步任务ID。
    */
-  Traffic?: number
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -472,17 +274,13 @@ export interface DescribeCrossBorderSettlementResponse {
 }
 
 /**
- * DescribeForwardingRule返回参数结构体
+ * ModifyGlobalAccelerator返回参数结构体
  */
-export interface DescribeForwardingRuleResponse {
+export interface ModifyGlobalAcceleratorResponse {
   /**
-   * 符合条件的规则信息。
+   * <p>异步任务ID。</p>
    */
-  ForwardingRuleSet?: Array<ForwardingRuleSet>
-  /**
-   * 符合条件的实例个数。
-   */
-  TotalCount?: number
+  TaskId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -490,17 +288,179 @@ export interface DescribeForwardingRuleResponse {
 }
 
 /**
- * DeleteAccelerateAreas请求参数结构体
+ * 七层转发规则行为信息
  */
-export interface DeleteAccelerateAreasRequest {
+export interface RuleAction {
+  /**
+   * <p>七层转发规则行为类型</p><p>枚举值：</p><ul><li>ForwardGroup： 转发策略为转发至终端节点组。</li><li>Drop： 转发策略为丢弃。</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleActionType: string
+  /**
+   * <p>七层转发规则行为值</p><p>当RuleActionType是Drop时，此字段不用传；当RuleActionType是ForwardGroup时，此字段必传，需要填写的是自定义终端节点组ID， 不支持配置默认终端节点组。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleActionValue?: string
+}
+
+/**
+ * DeleteEndpointGroups请求参数结构体
+ */
+export interface DeleteEndpointGroupsRequest {
   /**
    * 全球加速实例ID。
    */
   GlobalAcceleratorId: string
   /**
-   * 加速地域ID。
+   * 监听器ID。
    */
-  AcceleratorAreaIds: Array<string>
+  ListenerId: string
+  /**
+   * 终端节点组ID。
+   */
+  EndpointGroupIds: Array<string>
+}
+
+/**
+ * ModifyEndpointGroup请求参数结构体
+ */
+export interface ModifyEndpointGroupRequest {
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>监听器ID。</p>
+   */
+  ListenerId: string
+  /**
+   * <p>终端节点组ID。</p>
+   */
+  EndpointGroupId: string
+  /**
+   * <p>终端节点配置。</p>
+   */
+  EndpointConfigurations?: Array<EndpointConfigurations>
+  /**
+   * <p>名称。</p><p>入参限制：最大长度不能超过128个字节。</p><p>以大小写字母或中文开头。</p>
+   */
+  Name?: string
+  /**
+   * <p>描述信息。</p><p>入参限制：最大长度不能超过100个字节。</p>
+   */
+  Description?: string
+  /**
+   * <p>是否开启健康检查。</p>
+   */
+  EnableHealthCheck?: boolean
+  /**
+   * <p>响应超时时间。</p><p>取值范围：[1, 100]</p><p>当开启健康检查时候，此参数必传。</p>
+   */
+  ConnectTimeout?: number
+  /**
+   * <p>健康检查间隔。</p><p>取值范围：[5, 300]</p><p>当开启健康检查时，此参数必传。</p>
+   */
+  HealthCheckInterval?: number
+  /**
+   * <p>不健康阀值。</p><p>取值范围：[1, 10]</p><p>当开启健康检查时，此字段必传。</p>
+   */
+  UnhealthyThreshold?: number
+  /**
+   * <p>健康阀值。</p><p>取值范围：[1, 10]</p><p>当开启健康检查时，此字段必传。</p>
+   */
+  HealthyThreshold?: number
+  /**
+   * <p>检查协议。</p><p>入参限制：支持填写：&#39;TCP&#39;, &#39;HTTP&#39;, &#39;PING&#39;, &#39;CUSTOM&#39;。</p><p>1、当监听器是TCP时，可以选CUSTOM+TCP。<br>2、当监听器是UDP时，可以选PING+CUSTOM。<br>3、当监听器是HTTP或HTTPS时，可以选HTTP。</p>
+   */
+  CheckType?: string
+  /**
+   * <p>检查端口。</p><p>取值范围：[1, 65535]</p><p>当CheckType是CUSTOM时，此字段必传。</p>
+   */
+  CheckPort?: number
+  /**
+   * <p>检查内容。</p><p>入参限制：仅支持TEXT。</p><p>当CheckType是CUSTOM时，此字段必传。</p>
+   */
+  ContextType?: string
+  /**
+   * <p>检查请求。</p><p>入参限制：长度范围在1-500。</p><p>当CheckType是CUSTOM时，此字段必传。</p>
+   */
+  CheckSendContext?: string
+  /**
+   * <p>检查返回结果。</p><p>入参限制：长度范围在1-500。</p><p>当CheckType是CUSTOM时，此字段必传。</p>
+   */
+  CheckRecvContext?: string
+  /**
+   * <p>检查域名。</p><p>入参限制：长度范围在3-80。</p><p>当CheckType是HTTP时，此字段必传。</p>
+   */
+  CheckDomain?: string
+  /**
+   * <p>检查URL。</p><p>入参限制：长度范围在3-80。</p><p>当CheckType是HTTP时，此字段必传。</p>
+   */
+  CheckPath?: string
+  /**
+   * <p>请求方式。</p><p>入参限制：支持填写 &#39;GET&#39;, &#39;HEAD&#39;。</p><p>当CheckType是HTTP时，此字段必传。</p>
+   */
+  CheckMethod?: string
+  /**
+   * <p>状态检测码。</p><p>入参限制：支持选择&#39;http_2xx&#39;, &#39;http_3xx&#39;, &#39;http_4xx&#39;, &#39;http_5xx&#39;。</p><p>当CheckType是HTTP时，此字段必传。</p>
+   */
+  StatusMask?: Array<string>
+  /**
+   * <p>回源协议。</p><p>入参限制：支持选择：&#39;HTTP&#39;, &#39;HTTPS&#39;。</p><p>当监听器协议是HTTP时只能配置HTTP，是HTTPS时能配HTTP或HTTPS。</p>
+   */
+  ForwardProtocol?: string
+  /**
+   * <p>端口映射。</p><p>当监听器协议是HTTP或HTTPS支持配置一对。当监听器协议是UDP或TCP支持配置最多30对。</p>
+   */
+  PortOverrides?: Array<PortOverride>
+  /**
+   * <p>HPPTS加密算法套件</p><p>入参限制：支持选择&#39;tls_policy_1.0-2&#39;, &#39;tls_policy_1.1-2&#39;, &#39;tls_policy_1.2&#39;, &#39;tls_policy_1.2_strict&#39;, &#39;tls_policy_1.2_strict-1.3&#39;。</p><p>当监听器协议是HTTPS时，才支持修改此参数。</p>
+   */
+  CipherPolicyId?: string
+  /**
+   * <p>仅HTTPS回源协议支持选择[&#39;HTTP/1.1&#39;, &#39;HTTP/2&#39;]</p><p>枚举值：</p><ul><li>HTTP/1.1： 版本HTTP/1.1</li><li>HTTP/2： 版本HTTP/2</li></ul>
+   */
+  HttpVersion?: string
+}
+
+/**
+ * ReplaceListenerAdditionalCert请求参数结构体
+ */
+export interface ReplaceListenerAdditionalCertRequest {
+  /**
+   * 全球加速实例ID。
+   */
+  GlobalAcceleratorId: string
+  /**
+   * 监听器ID。
+   */
+  ListenerId: string
+  /**
+   * 证书ID。
+   */
+  AdditionalCertificate: string
+  /**
+   * 旧的证书ID。
+   */
+  OldCertificate: string
+}
+
+/**
+ * ModifyGlobalAcceleratorAclPolicy请求参数结构体
+ */
+export interface ModifyGlobalAcceleratorAclPolicyRequest {
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>访问控制策略ID。</p>
+   */
+  GlobalAcceleratorAclPolicyId: string
+  /**
+   * <p>访问控制策略状态。</p><p>枚举值：</p><ul><li>OPEN： 打开。</li><li>CLOSE： 关闭。</li></ul>
+   */
+  Status: string
 }
 
 /**
@@ -626,13 +586,17 @@ export interface EndpointGroupConfigurationSet {
 }
 
 /**
- * ModifyListener返回参数结构体
+ * DescribeGlobalAccelerators返回参数结构体
  */
-export interface ModifyListenerResponse {
+export interface DescribeGlobalAcceleratorsResponse {
   /**
-   * <p>任务ID。</p>
+   * <p>符合条件的全球加速实例。</p>
    */
-  TaskId?: string
+  GlobalAcceleratorSet?: Array<GlobalAcceleratorSet>
+  /**
+   * <p>符合条件的实例个数。</p>
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -640,9 +604,45 @@ export interface ModifyListenerResponse {
 }
 
 /**
- * DeleteGlobalAccelerator返回参数结构体
+ * DescribeListeners返回参数结构体
  */
-export interface DeleteGlobalAcceleratorResponse {
+export interface DescribeListenersResponse {
+  /**
+   * 符合条件的监听器实例。
+   */
+  ListenerSet?: Array<ListenerSet>
+  /**
+   * 符合条件的实例个数。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateForwardingPolicy请求参数结构体
+ */
+export interface CreateForwardingPolicyRequest {
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>监听器ID。</p>
+   */
+  ListenerId: string
+  /**
+   * <p>域名。</p><p>参数格式：格式，必须满足正则表达式：^(<a href="?:[a-z0-9-]{0,61}[a-z0-9]">a-z0-9</a>?.)+[a-z]{2,}$</p><p>入参限制：长度范围是1-80。</p>
+   */
+  Host: string
+}
+
+/**
+ * DeleteListenerAdditionalCert返回参数结构体
+ */
+export interface DeleteListenerAdditionalCertResponse {
   /**
    * 任务ID。
    */
@@ -654,17 +654,115 @@ export interface DeleteGlobalAcceleratorResponse {
 }
 
 /**
- * DeleteAccelerateAreas返回参数结构体
+ * Acl信息
  */
-export interface DeleteAccelerateAreasResponse {
+export interface AclEntries {
   /**
-   * 异步任务ID。
+   * <p>协议。</p><p>入参限制：支持配置&#39;TCP&#39;, &#39;UDP&#39;, &#39;ALL&#39;；</p>
    */
-  TaskId?: string
+  Protocol: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>端口。</p>
    */
-  RequestId?: string
+  Port: string
+  /**
+   * <p>网段。</p>
+   */
+  SourceCidrBlock: string
+  /**
+   * <p>执行动作。</p><p>入参限制：支持配置&#39;ACCEPT&#39;, &#39;DROP&#39;；</p>
+   */
+  Policy: string
+  /**
+   * <p>描述信息，最大长度不能超过100个字节。</p>
+   */
+  Description?: string
+}
+
+/**
+ * CreateListenerAdditionalCert请求参数结构体
+ */
+export interface CreateListenerAdditionalCertRequest {
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>监听器ID。</p>
+   */
+  ListenerId: string
+  /**
+   * <p>证书ID。</p><p>当前只能添加服务器证书。</p>
+   */
+  AdditionalCertificates: Array<string>
+}
+
+/**
+ * DeleteListenerAdditionalCert请求参数结构体
+ */
+export interface DeleteListenerAdditionalCertRequest {
+  /**
+   * 全球加速实例ID。
+   */
+  GlobalAcceleratorId: string
+  /**
+   * 监听器ID。
+   */
+  ListenerId: string
+  /**
+   * 证书ID。
+   */
+  AdditionalCertificates: Array<string>
+}
+
+/**
+ * DescribeGlobalAccelerators请求参数结构体
+ */
+export interface DescribeGlobalAcceleratorsRequest {
+  /**
+   * <p>偏移量，默认为0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回数量。</p><p>取值范围：[1, 200]</p><p>默认值：20</p>
+   */
+  Limit?: number
+  /**
+   * <p>过滤条件。<li>global-accelerator-id - String -（过滤条件）全球加速实例ID。</li> <li>global-accelerator-state - String -（过滤条件）全球加速实例状态。</li></p>
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * DeleteGlobalAcceleratorAclRule请求参数结构体
+ */
+export interface DeleteGlobalAcceleratorAclRuleRequest {
+  /**
+   * 全球加速实例ID。
+   */
+  GlobalAcceleratorId: string
+  /**
+   * 安全策略ID
+   */
+  GlobalAcceleratorAclPolicyId: string
+  /**
+   * Acl规则ID。
+   */
+  GlobalAcceleratorAclRuleIds: Array<string>
+}
+
+/**
+ * 标签键值对
+ */
+export interface Tag {
+  /**
+   * 标签键
+   */
+  Key: string
+  /**
+   * 标签值
+   */
+  Value: string
 }
 
 /**
@@ -679,16 +777,6 @@ export interface ModifyAccelerateAreasResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DeleteGlobalAccelerator请求参数结构体
- */
-export interface DeleteGlobalAcceleratorRequest {
-  /**
-   * 全球加速实例ID。
-   */
-  GlobalAcceleratorId: string
 }
 
 /**
@@ -730,319 +818,9 @@ export interface PortRanges {
 }
 
 /**
- * 回源Header信息
+ * ModifyGlobalAcceleratorAclPolicy返回参数结构体
  */
-export interface OriginHeader {
-  /**
-   * <p>键。</p><p>参数格式：1、字符串只包含可打印的ASCII字符 2、不能包含这些字符()&lt;&gt;@,;:\&quot;/[ ]?={ }</p><p>入参限制：长度在1-40。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Key: string
-  /**
-   * <p>值。</p><p>入参限制：长度不能超过128</p><p>如果字符串包含$，那仅能配置&#39;$remote_addr&#39;, &#39;$remote_port&#39;，否则不支持。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Value: string
-}
-
-/**
- * DeleteForwardingRule返回参数结构体
- */
-export interface DeleteForwardingRuleResponse {
-  /**
-   * 异步任务ID。
-   */
-  TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 七层转发规则信息
- */
-export interface ForwardingRuleSet {
-  /**
-   * 七层转发规则条件信息。
-   */
-  RuleCondition?: Array<RuleCondition>
-  /**
-   * 七层转发规则行为信息。
-   */
-  RuleAction?: Array<RuleAction>
-  /**
-   * 是否开启回源Sni。
-   */
-  EnableOriginSni?: boolean
-  /**
-   * 回源Sni。
-   */
-  OriginSni?: string
-  /**
-   * 回源Herder信息。
-   */
-  OriginHeaders?: Array<OriginHeader>
-  /**
-   * 回源Host。
-   */
-  OriginHost?: string
-  /**
-   * 全球加速实例ID。
-   */
-  GlobalAcceleratorId?: string
-  /**
-   * 监听器ID。
-   */
-  ListenerId?: string
-  /**
-   * 七层转发策略ID。
-   */
-  ForwardingPolicyId?: string
-  /**
-   * 七层转发规则ID。
-   */
-  ForwardingRuleId?: string
-}
-
-/**
- * ModifyForwardingRule请求参数结构体
- */
-export interface ModifyForwardingRuleRequest {
-  /**
-   * <p>全球加速实例ID。</p>
-   */
-  GlobalAcceleratorId: string
-  /**
-   * <p>监听器ID。</p>
-   */
-  ListenerId: string
-  /**
-   * <p>策略ID。</p>
-   */
-  ForwardingPolicyId: string
-  /**
-   * <p>七层转发规则ID。</p>
-   */
-  ForwardingRuleId: string
-  /**
-   * <p>七层转发规则条件信息。</p><p>入参限制：数组长度不能超过1。</p>
-   */
-  RuleConditions?: Array<RuleCondition>
-  /**
-   * <p>七层转发规则行为信息。</p><p>入参限制：数组长度不能超过1。</p>
-   */
-  RuleActions?: Array<RuleAction>
-  /**
-   * <p>回源Header信息。</p><p>入参限制：数组长度在1-5。</p>
-   */
-  OriginHeaders?: Array<OriginHeader>
-  /**
-   * <p>是否开启回源sni。</p>
-   */
-  EnableOriginSni?: boolean
-  /**
-   * <p>回源sni。</p><p>入参限制：长度不能超过80。</p><p>当开启回源sni时，此字段必传。</p>
-   */
-  OriginSni?: string
-  /**
-   * <p>回源host。</p><p>入参限制：长度不能超过80。</p><p>当开启回源sni时，此字段必传。</p>
-   */
-  OriginHost?: string
-  /**
-   * <p>源站响应头</p><p>入参限制：数组长度不能超过5。</p>
-   */
-  ResponseHeaders?: Array<ResponseHeaders>
-  /**
-   * <p>删除源站响应头</p><p>入参限制：数组长度不能超过5。</p>
-   */
-  HideResponseHeaders?: Array<HideResponseHeaders>
-}
-
-/**
- * DescribeGlobalAccelerators请求参数结构体
- */
-export interface DescribeGlobalAcceleratorsRequest {
-  /**
-   * <p>偏移量，默认为0。</p>
-   */
-  Offset?: number
-  /**
-   * <p>返回数量。</p><p>取值范围：[1, 200]</p><p>默认值：20</p>
-   */
-  Limit?: number
-  /**
-   * <p>过滤条件。<li>global-accelerator-id - String -（过滤条件）全球加速实例ID。</li> <li>global-accelerator-state - String -（过滤条件）全球加速实例状态。</li></p>
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * 标签键值对
- */
-export interface Tag {
-  /**
-   * 标签键
-   */
-  Key: string
-  /**
-   * 标签值
-   */
-  Value: string
-}
-
-/**
- * DescribeTaskResult请求参数结构体
- */
-export interface DescribeTaskResultRequest {
-  /**
-   * 异步任务ID。
-   */
-  TaskId: string
-}
-
-/**
- * DescribeEndpointGroups请求参数结构体
- */
-export interface DescribeEndpointGroupsRequest {
-  /**
-   * <p>全球加速实例ID。</p>
-   */
-  GlobalAcceleratorId: string
-  /**
-   * <p>偏移量，默认为0。</p>
-   */
-  Offset?: number
-  /**
-   * <p>返回数量，默认为10，最大值为10。</p>
-   */
-  Limit?: number
-  /**
-   * <p>过滤条件。  endpoint-group-id- String -（过滤条件）终端节点组实例ID。endpoint-group-type- String -（过滤条件）终端节点组实例类型。</p>
-   */
-  Filters?: Array<Filter>
-}
-
-/**
- * CreateAccelerateAreas请求参数结构体
- */
-export interface CreateAccelerateAreasRequest {
-  /**
-   * <p>全球加速实例ID。</p>
-   */
-  GlobalAcceleratorId: string
-  /**
-   * <p>加速地域信息。一次最多创建10组加速地域。</p>
-   */
-  AcceleratorAreas: Array<AcceleratorAreas>
-}
-
-/**
- * DeleteForwardingPolicy请求参数结构体
- */
-export interface DeleteForwardingPolicyRequest {
-  /**
-   * 全球加速实例ID。
-   */
-  GlobalAcceleratorId: string
-  /**
-   * 监听器ID。
-   */
-  ListenerId: string
-  /**
-   * 策略ID。
-   */
-  ForwardingPolicyId: string
-}
-
-/**
- * CreateListener请求参数结构体
- */
-export interface CreateListenerRequest {
-  /**
-   * <p>全球加速实例ID。</p>
-   */
-  GlobalAcceleratorId: string
-  /**
-   * <p>名称，最大长度不能超过60个字节。</p>
-   */
-  Name: string
-  /**
-   * <p>端口范围。</p>
-   */
-  PortRanges: PortRanges
-  /**
-   * <p>描述信息，最大长度不能超过100个字节。</p>
-   */
-  Description?: string
-  /**
-   * <p>监听类型，默认为智能路由。</p><p>枚举值：</p><ul><li>Standard： 智能路由。</li></ul>
-   */
-  ListenerType?: string
-  /**
-   * <p>协议，默认为TCP。支持配置&#39;TCP&#39;, &#39;UDP&#39;, &#39;HTTP&#39;, &#39;HTTPS&#39;。</p>
-   */
-  Protocol?: string
-  /**
-   * <p>连接空闲等待时间。</p><p>1、HTTP/HTTPS监听器，默认值为15，支持范围为1-60；<br>2、TCP监听器，默认值为900，支持范围为10-900；<br>3、UDP监听器，默认值为20，支持范围为10-20；</p>
-   */
-  IdleTimeout?: number
-  /**
-   * <p>四层获取源IP方式，支持&#39;TOA&#39;, &#39;ProxyProtocol&#39;, &#39;ProxyProtocolV2&#39;。</p><p>需要开启四层获取源IP方式，才填写此参数。</p>
-   */
-  GetRealIpType?: string
-  /**
-   * <p>是否开启会话保持。支持配置&#39;Open&#39;, &#39;Close&#39;。</p><p>枚举值：</p><ul><li>Open： 开启。</li><li>Close： 关闭。</li></ul>
-   */
-  ClientAffinity?: string
-  /**
-   * <p>请求超时时间。</p><p>取值范围：[1, 180]</p><p>默认值：60</p><p>当HTTPS监听器时才可配置此参数。</p>
-   */
-  RequestTimeout?: number
-  /**
-   * <p>是否打开七层获取源IP方式。</p>
-   */
-  XForwardedForRealIp?: boolean
-  /**
-   * <p>解析方式。</p><p>枚举值：</p><ul><li>UNIDIRECTIONAL： 双向。</li><li>U： 单向。</li></ul><p>HTTPS监听器，此字段必传。</p>
-   */
-  CertificationType?: string
-  /**
-   * <p>加密算法套件。支持配置&#39;tls_policy_1.0-2&#39;, &#39;tls_policy_1.1-2&#39;, &#39;tls_policy_1.2&#39;, &#39;tls_policy_1.2_strict&#39;, &#39;tls_policy_1.2_strict-1.3&#39;。</p>
-   */
-  CipherPolicyId?: string
-  /**
-   * <p>服务器证书。</p><p>当是HTTPS监听器时，此字段必传。</p>
-   */
-  ServerCertificates?: Array<string>
-  /**
-   * <p>客户端证书。</p><p>当时HTTPS监听器且开启双向认证时，此字段必传。</p>
-   */
-  ClientCaCertificates?: Array<string>
-  /**
-   * <p>HTTPS监听器支持选择版本</p><p>枚举值：</p><ul><li>HTTP/1.1： HTTP/1.1</li><li>HTTP/2： HTTP/2</li></ul>
-   */
-  HttpVersion?: string
-}
-
-/**
- * DescribeAccelerateRegions返回参数结构体
- */
-export interface DescribeAccelerateRegionsResponse {
-  /**
-   * 加速地域信息。
-   */
-  AcceleratorRegionSet?: Array<AcceleratorRegionSet>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyForwardingRule返回参数结构体
- */
-export interface ModifyForwardingRuleResponse {
+export interface ModifyGlobalAcceleratorAclPolicyResponse {
   /**
    * <p>异步任务ID。</p>
    */
@@ -1054,155 +832,17 @@ export interface ModifyForwardingRuleResponse {
 }
 
 /**
- * DeleteForwardingRule请求参数结构体
+ * CreateGlobalAcceleratorAclRule返回参数结构体
  */
-export interface DeleteForwardingRuleRequest {
+export interface CreateGlobalAcceleratorAclRuleResponse {
   /**
-   * 全球加速实例ID。
+   * 异步任务ID。
    */
-  GlobalAcceleratorId: string
+  TaskId?: string
   /**
-   * 监听器ID。
+   * ACL规则ID。
    */
-  ListenerId: string
-  /**
-   * 策略ID。
-   */
-  ForwardingPolicyId: string
-  /**
-   * 七层转发规则ID。
-   */
-  ForwardingRuleId: string
-}
-
-/**
- * 监听器信息
- */
-export interface ListenerSet {
-  /**
-   * 全球加速实例ID。
-   */
-  GlobalAcceleratorId?: string
-  /**
-   * 监听器ID。
-   */
-  ListenerId?: string
-  /**
-   * 监听器名称。
-   */
-  Name?: string
-  /**
-   * 监听器描述。
-   */
-  Description?: string
-  /**
-   * 协议。
-   */
-  Protocol?: string
-  /**
-   * 端口范围。
-   */
-  PortRanges?: PortRanges
-  /**
-   * 是否打开七层获取源IP方式。
-   */
-  XForwardedForRealIp?: boolean
-  /**
-   * 开启会话保持。
-   */
-  ClientAffinity?: string
-  /**
-   * 会话保持时间。
-   */
-  ClientAffinityTime?: number
-  /**
-   * SSL解析方式。
-   */
-  CertificationType?: string
-  /**
-   * 服务器证书。
-   */
-  ServerCertificates?: Array<string>
-  /**
-   * 客户端证书。
-   */
-  ClientCaCertificates?: Array<string>
-  /**
-   * TLS密码套件包。
-   */
-  CipherPolicyId?: string
-  /**
-   * HTTP版本。
-   */
-  HttpVersion?: string
-  /**
-   * 请求超时时间。
-   */
-  RequestTimeout?: number
-  /**
-   * 创建时间。
-   */
-  CreateTime?: string
-  /**
-   * 监听路由类型。
-   */
-  ListenerType?: string
-  /**
-   * 监听器状态。
-   */
-  Status?: string
-  /**
-   * 所属监听器终端节点组个数。
-   */
-  EndpointGroupCounts?: number
-  /**
-   * 四层获取源IP方式。
-   */
-  GetRealIpType?: string
-  /**
-   * 连接超时时间。
-   */
-  IdleTimeout?: number
-}
-
-/**
- * ModifyGlobalAccelerator请求参数结构体
- */
-export interface ModifyGlobalAcceleratorRequest {
-  /**
-   * <p>全球加速实例ID。</p>
-   */
-  GlobalAcceleratorId: string
-  /**
-   * <p>名称，最大长度不能超过60个字节。</p>
-   */
-  Name?: string
-  /**
-   * <p>描述信息，最大长度不能超过100个字节。</p>
-   */
-  Description?: string
-  /**
-   * <p>跨境类型。</p><p>枚举值：</p><ul><li>HighQuality： 精品跨境。</li><li>Unicom： 联通跨境。</li></ul>
-   */
-  CrossBorderType?: string
-  /**
-   * <p>代表是否填写跨境服务承诺书。</p><p>当CrossBorderType传入时，此字段必须填ture，代表填写跨境承诺书。</p>
-   */
-  CrossBorderPromiseFlag?: boolean
-}
-
-/**
- * DescribeAccelerateAreas返回参数结构体
- */
-export interface DescribeAccelerateAreasResponse {
-  /**
-   * <p>加速地域信息。</p>
-   */
-  AccelerateAreaSet?: Array<AcceleratorAreas>
-  /**
-   * <p>实例个数。</p>
-   */
-  TotalCount?: number
+  GlobalAcceleratorAclRuleIds?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1224,75 +864,23 @@ export interface DeleteListenerRequest {
 }
 
 /**
- * ModifyGlobalAccelerator返回参数结构体
+ * CreateGlobalAcceleratorAclPolicy请求参数结构体
  */
-export interface ModifyGlobalAcceleratorResponse {
+export interface CreateGlobalAcceleratorAclPolicyRequest {
   /**
-   * <p>异步任务ID。</p>
-   */
-  TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 隐藏Header
- */
-export interface HideResponseHeaders {
-  /**
-   * <p>key</p><p>入参限制：长度不能超过128</p><p>如果字符串包含$，那仅能配置&#39;$remote_addr&#39;, &#39;$remote_port&#39;，否则不支持。</p>
-   */
-  Key: string
-  /**
-   * <p>value</p><p>当前传&#39;&#39;值即可。</p>
-   */
-  Value: string
-}
-
-/**
- * DescribeListeners请求参数结构体
- */
-export interface DescribeListenersRequest {
-  /**
-   * 全球加速实例ID。
+   * <p>全球加速实例ID。</p>
    */
   GlobalAcceleratorId: string
   /**
-   * 偏移量，默认为0。
+   * <p>默认行为。</p><p>枚举值：</p><ul><li>ACCEPT： 默认准许所有流量访问通道</li><li>DROP： 默认拒绝所有流量访问通道</li></ul>
    */
-  Offset?: number
-  /**
-   * 返回数量，默认为20，最大值为100。
-   */
-  Limit?: number
-  /**
-   * 过滤条件。  listener-id- String -（过滤条件）监听器实例ID。
-   */
-  Filters?: Array<Filter>
+  DefaultAction: string
 }
 
 /**
- * 七层转发规则行为信息
+ * DescribeForwardingRule请求参数结构体
  */
-export interface RuleAction {
-  /**
-   * <p>七层转发规则行为类型</p><p>枚举值：</p><ul><li>ForwardGroup： 转发策略为转发至终端节点组。</li><li>Drop： 转发策略为丢弃。</li></ul>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RuleActionType: string
-  /**
-   * <p>七层转发规则行为值</p><p>当RuleActionType是Drop时，此字段不用传；当RuleActionType是ForwardGroup时，此字段必传，需要填写的是自定义终端节点组ID， 不支持配置默认终端节点组。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RuleActionValue?: string
-}
-
-/**
- * DescribeForwardingPolicy请求参数结构体
- */
-export interface DescribeForwardingPolicyRequest {
+export interface DescribeForwardingRuleRequest {
   /**
    * 全球加速实例ID。
    */
@@ -1302,6 +890,10 @@ export interface DescribeForwardingPolicyRequest {
    */
   ListenerId: string
   /**
+   * 七层转发规则ID。
+   */
+  ForwardingPolicyId: string
+  /**
    * 偏移量，默认为0。
    */
   Offset?: number
@@ -1309,55 +901,6 @@ export interface DescribeForwardingPolicyRequest {
    * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
-}
-
-/**
- * 七层转发规则条件信息
- */
-export interface RuleCondition {
-  /**
-   * <p>七层转发规则条件类型</p><p>枚举值：</p><ul><li>Path： Path</li></ul>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RuleConditionType: string
-  /**
-   * <p>七层转发规则条件值</p><p>参数格式：格式必须满足正则表达：^[a-zA-Z0-9_.-/]{1,80}$</p><p>数组长度不能超过1。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RuleConditionValue: Array<string>
-}
-
-/**
- * DescribeAccelerateRegions请求参数结构体
- */
-export type DescribeAccelerateRegionsRequest = null
-
-/**
- * ReplaceListenerAdditionalCert返回参数结构体
- */
-export interface ReplaceListenerAdditionalCertResponse {
-  /**
-   * 任务ID。
-   */
-  TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 响应Header
- */
-export interface ResponseHeaders {
-  /**
-   * <p>key</p><p>参数格式：1、字符串只包含可打印的ASCII字符 2、不能包含这些字符()&lt;&gt;@,;:\&quot;/[ ]?={ }</p><p>入参限制：长度在1-40。</p>
-   */
-  Key: string
-  /**
-   * <p>value</p><p>入参限制：长度不能超过128</p><p>如果字符串包含$，那仅能配置&#39;$remote_addr&#39;, &#39;$remote_port&#39;，否则不支持。</p>
-   */
-  Value: string
 }
 
 /**
@@ -1375,35 +918,21 @@ export interface DeleteEndpointGroupsResponse {
 }
 
 /**
- * 过滤器
+ * DescribeAccelerateAreas返回参数结构体
  */
-export interface Filter {
+export interface DescribeAccelerateAreasResponse {
   /**
-   * 属性名称, 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+   * <p>加速地域信息。</p>
    */
-  Name: string
+  AccelerateAreaSet?: Array<AcceleratorAreas>
   /**
-   * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。当值类型为布尔类型时，可直接取值为字符串"TRUE"或 "FALSE"。
+   * <p>实例个数。</p>
    */
-  Values: Array<string>
-}
-
-/**
- * DeleteEndpointGroups请求参数结构体
- */
-export interface DeleteEndpointGroupsRequest {
+  TotalCount?: number
   /**
-   * 全球加速实例ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  GlobalAcceleratorId: string
-  /**
-   * 监听器ID。
-   */
-  ListenerId: string
-  /**
-   * 终端节点组ID。
-   */
-  EndpointGroupIds: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -1564,140 +1093,6 @@ export interface GlobalAcceleratorSet {
 }
 
 /**
- * DeleteListener返回参数结构体
- */
-export interface DeleteListenerResponse {
-  /**
-   * 任务ID。
-   */
-  TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * ModifyEndpointGroup请求参数结构体
- */
-export interface ModifyEndpointGroupRequest {
-  /**
-   * <p>全球加速实例ID。</p>
-   */
-  GlobalAcceleratorId: string
-  /**
-   * <p>监听器ID。</p>
-   */
-  ListenerId: string
-  /**
-   * <p>终端节点组ID。</p>
-   */
-  EndpointGroupId: string
-  /**
-   * <p>终端节点配置。</p>
-   */
-  EndpointConfigurations?: Array<EndpointConfigurations>
-  /**
-   * <p>名称。</p><p>入参限制：最大长度不能超过128个字节。</p><p>以大小写字母或中文开头。</p>
-   */
-  Name?: string
-  /**
-   * <p>描述信息。</p><p>入参限制：最大长度不能超过100个字节。</p>
-   */
-  Description?: string
-  /**
-   * <p>是否开启健康检查。</p>
-   */
-  EnableHealthCheck?: boolean
-  /**
-   * <p>响应超时时间。</p><p>取值范围：[1, 100]</p><p>当开启健康检查时候，此参数必传。</p>
-   */
-  ConnectTimeout?: number
-  /**
-   * <p>健康检查间隔。</p><p>取值范围：[5, 300]</p><p>当开启健康检查时，此参数必传。</p>
-   */
-  HealthCheckInterval?: number
-  /**
-   * <p>不健康阀值。</p><p>取值范围：[1, 10]</p><p>当开启健康检查时，此字段必传。</p>
-   */
-  UnhealthyThreshold?: number
-  /**
-   * <p>健康阀值。</p><p>取值范围：[1, 10]</p><p>当开启健康检查时，此字段必传。</p>
-   */
-  HealthyThreshold?: number
-  /**
-   * <p>检查协议。</p><p>入参限制：支持填写：&#39;TCP&#39;, &#39;HTTP&#39;, &#39;PING&#39;, &#39;CUSTOM&#39;。</p><p>1、当监听器是TCP时，可以选CUSTOM+TCP。<br>2、当监听器是UDP时，可以选PING+CUSTOM。<br>3、当监听器是HTTP或HTTPS时，可以选HTTP。</p>
-   */
-  CheckType?: string
-  /**
-   * <p>检查端口。</p><p>取值范围：[1, 65535]</p><p>当CheckType是CUSTOM时，此字段必传。</p>
-   */
-  CheckPort?: number
-  /**
-   * <p>检查内容。</p><p>入参限制：仅支持TEXT。</p><p>当CheckType是CUSTOM时，此字段必传。</p>
-   */
-  ContextType?: string
-  /**
-   * <p>检查请求。</p><p>入参限制：长度范围在1-500。</p><p>当CheckType是CUSTOM时，此字段必传。</p>
-   */
-  CheckSendContext?: string
-  /**
-   * <p>检查返回结果。</p><p>入参限制：长度范围在1-500。</p><p>当CheckType是CUSTOM时，此字段必传。</p>
-   */
-  CheckRecvContext?: string
-  /**
-   * <p>检查域名。</p><p>入参限制：长度范围在3-80。</p><p>当CheckType是HTTP时，此字段必传。</p>
-   */
-  CheckDomain?: string
-  /**
-   * <p>检查URL。</p><p>入参限制：长度范围在3-80。</p><p>当CheckType是HTTP时，此字段必传。</p>
-   */
-  CheckPath?: string
-  /**
-   * <p>请求方式。</p><p>入参限制：支持填写 &#39;GET&#39;, &#39;HEAD&#39;。</p><p>当CheckType是HTTP时，此字段必传。</p>
-   */
-  CheckMethod?: string
-  /**
-   * <p>状态检测码。</p><p>入参限制：支持选择&#39;http_2xx&#39;, &#39;http_3xx&#39;, &#39;http_4xx&#39;, &#39;http_5xx&#39;。</p><p>当CheckType是HTTP时，此字段必传。</p>
-   */
-  StatusMask?: Array<string>
-  /**
-   * <p>回源协议。</p><p>入参限制：支持选择：&#39;HTTP&#39;, &#39;HTTPS&#39;。</p><p>当监听器协议是HTTP时只能配置HTTP，是HTTPS时能配HTTP或HTTPS。</p>
-   */
-  ForwardProtocol?: string
-  /**
-   * <p>端口映射。</p><p>当监听器协议是HTTP或HTTPS支持配置一对。当监听器协议是UDP或TCP支持配置最多30对。</p>
-   */
-  PortOverrides?: Array<PortOverride>
-  /**
-   * <p>HPPTS加密算法套件</p><p>入参限制：支持选择&#39;tls_policy_1.0-2&#39;, &#39;tls_policy_1.1-2&#39;, &#39;tls_policy_1.2&#39;, &#39;tls_policy_1.2_strict&#39;, &#39;tls_policy_1.2_strict-1.3&#39;。</p><p>当监听器协议是HTTPS时，才支持修改此参数。</p>
-   */
-  CipherPolicyId?: string
-  /**
-   * <p>仅HTTPS回源协议支持选择[&#39;HTTP/1.1&#39;, &#39;HTTP/2&#39;]</p><p>枚举值：</p><ul><li>HTTP/1.1： 版本HTTP/1.1</li><li>HTTP/2： 版本HTTP/2</li></ul>
-   */
-  HttpVersion?: string
-}
-
-/**
- * CreateForwardingPolicy返回参数结构体
- */
-export interface CreateForwardingPolicyResponse {
-  /**
-   * <p>异步任务ID。</p>
-   */
-  TaskId?: string
-  /**
-   * <p>七层转发策略ID。</p>
-   */
-  ForwardingPolicyId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 加速地域信息
  */
 export interface AcceleratorAreas {
@@ -1733,20 +1128,6 @@ export interface AcceleratorAreas {
 }
 
 /**
- * ModifyEndpointGroup返回参数结构体
- */
-export interface ModifyEndpointGroupResponse {
-  /**
-   * <p>任务ID。</p>
-   */
-  TaskId?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * CreateEndpointGroup请求参数结构体
  */
 export interface CreateEndpointGroupRequest {
@@ -1769,28 +1150,6 @@ export interface CreateEndpointGroupRequest {
 }
 
 /**
- * ReplaceListenerAdditionalCert请求参数结构体
- */
-export interface ReplaceListenerAdditionalCertRequest {
-  /**
-   * 全球加速实例ID。
-   */
-  GlobalAcceleratorId: string
-  /**
-   * 监听器ID。
-   */
-  ListenerId: string
-  /**
-   * 证书ID。
-   */
-  AdditionalCertificate: string
-  /**
-   * 旧的证书ID。
-   */
-  OldCertificate: string
-}
-
-/**
  * CreateEndpointGroup返回参数结构体
  */
 export interface CreateEndpointGroupResponse {
@@ -1809,29 +1168,11 @@ export interface CreateEndpointGroupResponse {
 }
 
 /**
- * CreateListenerAdditionalCert请求参数结构体
+ * DeleteGlobalAccelerator返回参数结构体
  */
-export interface CreateListenerAdditionalCertRequest {
+export interface DeleteGlobalAcceleratorResponse {
   /**
-   * <p>全球加速实例ID。</p>
-   */
-  GlobalAcceleratorId: string
-  /**
-   * <p>监听器ID。</p>
-   */
-  ListenerId: string
-  /**
-   * <p>证书ID。</p><p>当前只能添加服务器证书。</p>
-   */
-  AdditionalCertificates: Array<string>
-}
-
-/**
- * DeleteForwardingPolicy返回参数结构体
- */
-export interface DeleteForwardingPolicyResponse {
-  /**
-   * 异步任务ID。
+   * 任务ID。
    */
   TaskId?: string
   /**
@@ -1841,39 +1182,63 @@ export interface DeleteForwardingPolicyResponse {
 }
 
 /**
- * CreateGlobalAccelerator返回参数结构体
+ * DescribeAccelerateRegions返回参数结构体
  */
-export interface CreateGlobalAcceleratorResponse {
+export interface DescribeAccelerateRegionsResponse {
   /**
-   * <p>任务ID。</p>
+   * 加速地域信息。
    */
-  TaskId?: string
+  AcceleratorRegionSet?: Array<AcceleratorRegionSet>
   /**
-   * <p>全球加速实例ID。</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 七层转发规则信息
+ */
+export interface ForwardingRuleSet {
+  /**
+   * 七层转发规则条件信息。
+   */
+  RuleCondition?: Array<RuleCondition>
+  /**
+   * 七层转发规则行为信息。
+   */
+  RuleAction?: Array<RuleAction>
+  /**
+   * 是否开启回源Sni。
+   */
+  EnableOriginSni?: boolean
+  /**
+   * 回源Sni。
+   */
+  OriginSni?: string
+  /**
+   * 回源Herder信息。
+   */
+  OriginHeaders?: Array<OriginHeader>
+  /**
+   * 回源Host。
+   */
+  OriginHost?: string
+  /**
+   * 全球加速实例ID。
    */
   GlobalAcceleratorId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 监听器ID。
    */
-  RequestId?: string
-}
-
-/**
- * DescribeGlobalAccelerators返回参数结构体
- */
-export interface DescribeGlobalAcceleratorsResponse {
+  ListenerId?: string
   /**
-   * <p>符合条件的全球加速实例。</p>
+   * 七层转发策略ID。
    */
-  GlobalAcceleratorSet?: Array<GlobalAcceleratorSet>
+  ForwardingPolicyId?: string
   /**
-   * <p>符合条件的实例个数。</p>
+   * 七层转发规则ID。
    */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ForwardingRuleId?: string
 }
 
 /**
@@ -1895,19 +1260,143 @@ export interface CreateForwardingRuleResponse {
 }
 
 /**
- * 端口映射
+ * CreateGlobalAcceleratorAclPolicy返回参数结构体
  */
-export interface PortOverride {
+export interface CreateGlobalAcceleratorAclPolicyResponse {
   /**
-   * 监听端口。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>异步任务ID。</p>
    */
-  ListenerPort: number
+  TaskId?: string
   /**
-   * 映射端口。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>访问控制策略ID。</p>
    */
-  EndpointPort: number
+  GlobalAcceleratorAclPolicyId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyGlobalAcceleratorAclRule请求参数结构体
+ */
+export interface ModifyGlobalAcceleratorAclRuleRequest {
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>安全策略ID</p>
+   */
+  GlobalAcceleratorAclPolicyId: string
+  /**
+   * <p>Acl规则ID。</p>
+   */
+  GlobalAcceleratorAclRuleId: string
+  /**
+   * <p>协议。</p><p>入参限制：支持选择&#39;TCP&#39;, &#39;UDP&#39;, &#39;ALL&#39;。</p>
+   */
+  Protocol?: string
+  /**
+   * <p>端口。</p>
+   */
+  Port?: string
+  /**
+   * <p>网段。</p>
+   */
+  SourceCidrBlock?: string
+  /**
+   * <p>动作。</p><p>入参限制：支持选择&#39;ACCEPT&#39;, &#39;DROP&#39;。</p><p>枚举值：</p><ul><li>ACCEPT： 允许。</li><li>DROP： 拒绝。</li></ul>
+   */
+  Policy?: string
+  /**
+   * <p>描述信息，最大长度不能超过100个字节。</p>
+   */
+  Description?: string
+}
+
+/**
+ * 可加速地域信息
+ */
+export interface AcceleratorRegionSet {
+  /**
+   * <p>地域中文名称。</p>
+   */
+  Name?: string
+  /**
+   * <p>是否可用；0：不可用，1:可用。</p>
+   */
+  IsAvailable?: number
+  /**
+   * <p>地域信息。</p>
+   */
+  Region?: string
+  /**
+   * <p>地区名称。</p>
+   */
+  AreaName?: string
+  /**
+   * <p>是否中国地域。</p>
+   */
+  IsChinaMainland?: number
+  /**
+   * <p>支持IspType类型。</p>
+   */
+  SupportIspType?: Array<string>
+  /**
+   * <p>是否腾讯地域。</p>
+   */
+  IsTencentRegion?: number
+}
+
+/**
+ * CreateListener返回参数结构体
+ */
+export interface CreateListenerResponse {
+  /**
+   * <p>任务ID。</p>
+   */
+  TaskId?: string
+  /**
+   * <p>监听器ID。</p>
+   */
+  ListenerId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyForwardingPolicy返回参数结构体
+ */
+export interface ModifyForwardingPolicyResponse {
+  /**
+   * <p>异步任务ID。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateGlobalAcceleratorAclRule请求参数结构体
+ */
+export interface CreateGlobalAcceleratorAclRuleRequest {
+  /**
+   * 全球加速实例ID。
+   */
+  GlobalAcceleratorId: string
+  /**
+   * 安全策略ID
+   */
+  GlobalAcceleratorAclPolicyId: string
+  /**
+   * Acl信息。
+   */
+  AclEntries: Array<AclEntries>
 }
 
 /**
@@ -1970,4 +1459,753 @@ export interface ModifyListenerRequest {
    * <p>获取源IP方式。</p><p>入参限制：支持选择&#39;ProxyProtocol&#39;, &#39;Close&#39;, &#39;ProxyProtocolV2&#39;, &#39;TOA&#39;。</p><p>TCP监听器才支持此参数修改。</p>
    */
   GetRealIpType?: string
+}
+
+/**
+ * 七层转发规则条件信息
+ */
+export interface RuleCondition {
+  /**
+   * <p>七层转发规则条件类型</p><p>枚举值：</p><ul><li>Path： Path</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleConditionType: string
+  /**
+   * <p>七层转发规则条件值</p><p>参数格式：格式必须满足正则表达：^[a-zA-Z0-9_.-/]{1,80}$</p><p>数组长度不能超过1。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleConditionValue: Array<string>
+}
+
+/**
+ * 隐藏Header
+ */
+export interface HideResponseHeaders {
+  /**
+   * <p>key</p><p>入参限制：长度不能超过128</p><p>如果字符串包含$，那仅能配置&#39;$remote_addr&#39;, &#39;$remote_port&#39;，否则不支持。</p>
+   */
+  Key: string
+  /**
+   * <p>value</p><p>当前传&#39;&#39;值即可。</p>
+   */
+  Value: string
+}
+
+/**
+ * DescribeForwardingRule返回参数结构体
+ */
+export interface DescribeForwardingRuleResponse {
+  /**
+   * 符合条件的规则信息。
+   */
+  ForwardingRuleSet?: Array<ForwardingRuleSet>
+  /**
+   * 符合条件的实例个数。
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteGlobalAccelerator请求参数结构体
+ */
+export interface DeleteGlobalAcceleratorRequest {
+  /**
+   * 全球加速实例ID。
+   */
+  GlobalAcceleratorId: string
+}
+
+/**
+ * ModifyForwardingRule请求参数结构体
+ */
+export interface ModifyForwardingRuleRequest {
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>监听器ID。</p>
+   */
+  ListenerId: string
+  /**
+   * <p>策略ID。</p>
+   */
+  ForwardingPolicyId: string
+  /**
+   * <p>七层转发规则ID。</p>
+   */
+  ForwardingRuleId: string
+  /**
+   * <p>七层转发规则条件信息。</p><p>入参限制：数组长度不能超过1。</p>
+   */
+  RuleConditions?: Array<RuleCondition>
+  /**
+   * <p>七层转发规则行为信息。</p><p>入参限制：数组长度不能超过1。</p>
+   */
+  RuleActions?: Array<RuleAction>
+  /**
+   * <p>回源Header信息。</p><p>入参限制：数组长度在1-5。</p>
+   */
+  OriginHeaders?: Array<OriginHeader>
+  /**
+   * <p>是否开启回源sni。</p>
+   */
+  EnableOriginSni?: boolean
+  /**
+   * <p>回源sni。</p><p>入参限制：长度不能超过80。</p><p>当开启回源sni时，此字段必传。</p>
+   */
+  OriginSni?: string
+  /**
+   * <p>回源host。</p><p>入参限制：长度不能超过80。</p><p>当开启回源sni时，此字段必传。</p>
+   */
+  OriginHost?: string
+  /**
+   * <p>源站响应头</p><p>入参限制：数组长度不能超过5。</p>
+   */
+  ResponseHeaders?: Array<ResponseHeaders>
+  /**
+   * <p>删除源站响应头</p><p>入参限制：数组长度不能超过5。</p>
+   */
+  HideResponseHeaders?: Array<HideResponseHeaders>
+}
+
+/**
+ * ModifyListener返回参数结构体
+ */
+export interface ModifyListenerResponse {
+  /**
+   * <p>任务ID。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateAccelerateAreas请求参数结构体
+ */
+export interface CreateAccelerateAreasRequest {
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>加速地域信息。一次最多创建10组加速地域。</p>
+   */
+  AcceleratorAreas: Array<AcceleratorAreas>
+}
+
+/**
+ * DeleteForwardingPolicy请求参数结构体
+ */
+export interface DeleteForwardingPolicyRequest {
+  /**
+   * 全球加速实例ID。
+   */
+  GlobalAcceleratorId: string
+  /**
+   * 监听器ID。
+   */
+  ListenerId: string
+  /**
+   * 策略ID。
+   */
+  ForwardingPolicyId: string
+}
+
+/**
+ * CreateListener请求参数结构体
+ */
+export interface CreateListenerRequest {
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>名称，最大长度不能超过60个字节。</p>
+   */
+  Name: string
+  /**
+   * <p>端口范围。</p>
+   */
+  PortRanges: PortRanges
+  /**
+   * <p>描述信息，最大长度不能超过100个字节。</p>
+   */
+  Description?: string
+  /**
+   * <p>监听类型，默认为智能路由。</p><p>枚举值：</p><ul><li>Standard： 智能路由。</li></ul>
+   */
+  ListenerType?: string
+  /**
+   * <p>协议，默认为TCP。支持配置&#39;TCP&#39;, &#39;UDP&#39;, &#39;HTTP&#39;, &#39;HTTPS&#39;。</p>
+   */
+  Protocol?: string
+  /**
+   * <p>连接空闲等待时间。</p><p>1、HTTP/HTTPS监听器，默认值为15，支持范围为1-60；<br>2、TCP监听器，默认值为900，支持范围为10-900；<br>3、UDP监听器，默认值为20，支持范围为10-20；</p>
+   */
+  IdleTimeout?: number
+  /**
+   * <p>四层获取源IP方式，支持&#39;TOA&#39;, &#39;ProxyProtocol&#39;, &#39;ProxyProtocolV2&#39;。</p><p>需要开启四层获取源IP方式，才填写此参数。</p>
+   */
+  GetRealIpType?: string
+  /**
+   * <p>是否开启会话保持。支持配置&#39;Open&#39;, &#39;Close&#39;。</p><p>枚举值：</p><ul><li>Open： 开启。</li><li>Close： 关闭。</li></ul>
+   */
+  ClientAffinity?: string
+  /**
+   * <p>请求超时时间。</p><p>取值范围：[1, 180]</p><p>默认值：60</p><p>当HTTPS监听器时才可配置此参数。</p>
+   */
+  RequestTimeout?: number
+  /**
+   * <p>是否打开七层获取源IP方式。</p>
+   */
+  XForwardedForRealIp?: boolean
+  /**
+   * <p>解析方式。</p><p>枚举值：</p><ul><li>UNIDIRECTIONAL： 双向。</li><li>U： 单向。</li></ul><p>HTTPS监听器，此字段必传。</p>
+   */
+  CertificationType?: string
+  /**
+   * <p>加密算法套件。支持配置&#39;tls_policy_1.0-2&#39;, &#39;tls_policy_1.1-2&#39;, &#39;tls_policy_1.2&#39;, &#39;tls_policy_1.2_strict&#39;, &#39;tls_policy_1.2_strict-1.3&#39;。</p>
+   */
+  CipherPolicyId?: string
+  /**
+   * <p>服务器证书。</p><p>当是HTTPS监听器时，此字段必传。</p>
+   */
+  ServerCertificates?: Array<string>
+  /**
+   * <p>客户端证书。</p><p>当时HTTPS监听器且开启双向认证时，此字段必传。</p>
+   */
+  ClientCaCertificates?: Array<string>
+  /**
+   * <p>HTTPS监听器支持选择版本</p><p>枚举值：</p><ul><li>HTTP/1.1： HTTP/1.1</li><li>HTTP/2： HTTP/2</li></ul>
+   */
+  HttpVersion?: string
+}
+
+/**
+ * DescribeTaskResult请求参数结构体
+ */
+export interface DescribeTaskResultRequest {
+  /**
+   * 异步任务ID。
+   */
+  TaskId: string
+}
+
+/**
+ * ModifyGlobalAccelerator请求参数结构体
+ */
+export interface ModifyGlobalAcceleratorRequest {
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>名称，最大长度不能超过60个字节。</p>
+   */
+  Name?: string
+  /**
+   * <p>描述信息，最大长度不能超过100个字节。</p>
+   */
+  Description?: string
+  /**
+   * <p>跨境类型。</p><p>枚举值：</p><ul><li>HighQuality： 精品跨境。</li><li>Unicom： 联通跨境。</li></ul>
+   */
+  CrossBorderType?: string
+  /**
+   * <p>代表是否填写跨境服务承诺书。</p><p>当CrossBorderType传入时，此字段必须填ture，代表填写跨境承诺书。</p>
+   */
+  CrossBorderPromiseFlag?: boolean
+}
+
+/**
+ * 过滤器
+ */
+export interface Filter {
+  /**
+   * 属性名称, 若存在多个Filter时，Filter间的关系为逻辑与（AND）关系。
+   */
+  Name: string
+  /**
+   * 属性值, 若同一个Filter存在多个Values，同一Filter下Values间的关系为逻辑或（OR）关系。当值类型为布尔类型时，可直接取值为字符串"TRUE"或 "FALSE"。
+   */
+  Values: Array<string>
+}
+
+/**
+ * DescribeAccelerateRegions请求参数结构体
+ */
+export type DescribeAccelerateRegionsRequest = null
+
+/**
+ * DeleteForwardingRule返回参数结构体
+ */
+export interface DeleteForwardingRuleResponse {
+  /**
+   * 异步任务ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateForwardingPolicy返回参数结构体
+ */
+export interface CreateForwardingPolicyResponse {
+  /**
+   * <p>异步任务ID。</p>
+   */
+  TaskId?: string
+  /**
+   * <p>七层转发策略ID。</p>
+   */
+  ForwardingPolicyId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyForwardingPolicy请求参数结构体
+ */
+export interface ModifyForwardingPolicyRequest {
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>监听器ID。</p>
+   */
+  ListenerId: string
+  /**
+   * <p>策略ID。</p>
+   */
+  ForwardingPolicyId: string
+  /**
+   * <p>域名。</p><p>入参限制：长度范围在1-80。</p><p>格式必须满足正则表达式：^(<a href="?:[a-z0-9-]{0,61}[a-z0-9]">a-z0-9</a>?.)+[a-z]{2,}$</p>
+   */
+  Host: string
+}
+
+/**
+ * ModifyGlobalAcceleratorAclRule返回参数结构体
+ */
+export interface ModifyGlobalAcceleratorAclRuleResponse {
+  /**
+   * <p>异步任务ID。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 加速地域公网IP信息
+ */
+export interface IpAddressInfoSet {
+  /**
+   * <p>IP地址。</p>
+   */
+  IpAddress?: string
+  /**
+   * <p>IP类型。</p>
+   */
+  IspType?: string
+  /**
+   * <p>Ddos类型</p>
+   */
+  DdosProtectionType?: string
+}
+
+/**
+ * DeleteForwardingPolicy返回参数结构体
+ */
+export interface DeleteForwardingPolicyResponse {
+  /**
+   * 异步任务ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 监听器信息
+ */
+export interface ListenerSet {
+  /**
+   * 全球加速实例ID。
+   */
+  GlobalAcceleratorId?: string
+  /**
+   * 监听器ID。
+   */
+  ListenerId?: string
+  /**
+   * 监听器名称。
+   */
+  Name?: string
+  /**
+   * 监听器描述。
+   */
+  Description?: string
+  /**
+   * 协议。
+   */
+  Protocol?: string
+  /**
+   * 端口范围。
+   */
+  PortRanges?: PortRanges
+  /**
+   * 是否打开七层获取源IP方式。
+   */
+  XForwardedForRealIp?: boolean
+  /**
+   * 开启会话保持。
+   */
+  ClientAffinity?: string
+  /**
+   * 会话保持时间。
+   */
+  ClientAffinityTime?: number
+  /**
+   * SSL解析方式。
+   */
+  CertificationType?: string
+  /**
+   * 服务器证书。
+   */
+  ServerCertificates?: Array<string>
+  /**
+   * 客户端证书。
+   */
+  ClientCaCertificates?: Array<string>
+  /**
+   * TLS密码套件包。
+   */
+  CipherPolicyId?: string
+  /**
+   * HTTP版本。
+   */
+  HttpVersion?: string
+  /**
+   * 请求超时时间。
+   */
+  RequestTimeout?: number
+  /**
+   * 创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 监听路由类型。
+   */
+  ListenerType?: string
+  /**
+   * 监听器状态。
+   */
+  Status?: string
+  /**
+   * 所属监听器终端节点组个数。
+   */
+  EndpointGroupCounts?: number
+  /**
+   * 四层获取源IP方式。
+   */
+  GetRealIpType?: string
+  /**
+   * 连接超时时间。
+   */
+  IdleTimeout?: number
+}
+
+/**
+ * 七层转发策略信息
+ */
+export interface ForwardingPolicySet {
+  /**
+   * 全球加速实例ID。
+   */
+  GlobalAcceleratorId?: string
+  /**
+   * 监听器ID。
+   */
+  ListenerId?: string
+  /**
+   * 策略ID。
+   */
+  ForwardingPolicyId?: string
+  /**
+   * 域名。
+   */
+  Host?: string
+  /**
+   * 是否为默认域名。
+   */
+  DefaultHostFlag?: boolean
+}
+
+/**
+ * ModifyEndpointGroup返回参数结构体
+ */
+export interface ModifyEndpointGroupResponse {
+  /**
+   * <p>任务ID。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAccelerateAreas请求参数结构体
+ */
+export interface DescribeAccelerateAreasRequest {
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>偏移量。默认为0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>符合条件实例数量。默认为20，最大200。</p>
+   */
+  Limit?: number
+  /**
+   * <p>过滤条件。 accelerate-region- String -（过滤条件）终端节点组地域。</p>
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * DescribeCrossBorderSettlement返回参数结构体
+ */
+export interface DescribeCrossBorderSettlementResponse {
+  /**
+   * 流量用量，单位是GB；精度为保留小数点6位。
+   */
+  Traffic?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteAccelerateAreas请求参数结构体
+ */
+export interface DeleteAccelerateAreasRequest {
+  /**
+   * 全球加速实例ID。
+   */
+  GlobalAcceleratorId: string
+  /**
+   * 加速地域ID。
+   */
+  AcceleratorAreaIds: Array<string>
+}
+
+/**
+ * DeleteAccelerateAreas返回参数结构体
+ */
+export interface DeleteAccelerateAreasResponse {
+  /**
+   * 异步任务ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyForwardingRule返回参数结构体
+ */
+export interface ModifyForwardingRuleResponse {
+  /**
+   * <p>异步任务ID。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyAccelerateAreas请求参数结构体
+ */
+export interface ModifyAccelerateAreasRequest {
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>加速地域信息。</p><p>入参限制：数组长度不能超过10。</p>
+   */
+  AcceleratorAreas: Array<AcceleratorAreas>
+}
+
+/**
+ * CreateGlobalAccelerator返回参数结构体
+ */
+export interface CreateGlobalAcceleratorResponse {
+  /**
+   * <p>任务ID。</p>
+   */
+  TaskId?: string
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeListeners请求参数结构体
+ */
+export interface DescribeListenersRequest {
+  /**
+   * 全球加速实例ID。
+   */
+  GlobalAcceleratorId: string
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 过滤条件。  listener-id- String -（过滤条件）监听器实例ID。
+   */
+  Filters?: Array<Filter>
+}
+
+/**
+ * DescribeForwardingPolicy请求参数结构体
+ */
+export interface DescribeForwardingPolicyRequest {
+  /**
+   * 全球加速实例ID。
+   */
+  GlobalAcceleratorId: string
+  /**
+   * 监听器ID。
+   */
+  ListenerId: string
+  /**
+   * 偏移量，默认为0。
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认为20，最大值为100。
+   */
+  Limit?: number
+}
+
+/**
+ * DeleteForwardingRule请求参数结构体
+ */
+export interface DeleteForwardingRuleRequest {
+  /**
+   * 全球加速实例ID。
+   */
+  GlobalAcceleratorId: string
+  /**
+   * 监听器ID。
+   */
+  ListenerId: string
+  /**
+   * 策略ID。
+   */
+  ForwardingPolicyId: string
+  /**
+   * 七层转发规则ID。
+   */
+  ForwardingRuleId: string
+}
+
+/**
+ * 回源Header信息
+ */
+export interface OriginHeader {
+  /**
+   * <p>键。</p><p>参数格式：1、字符串只包含可打印的ASCII字符 2、不能包含这些字符()&lt;&gt;@,;:\&quot;/[ ]?={ }</p><p>入参限制：长度在1-40。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key: string
+  /**
+   * <p>值。</p><p>入参限制：长度不能超过128</p><p>如果字符串包含$，那仅能配置&#39;$remote_addr&#39;, &#39;$remote_port&#39;，否则不支持。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value: string
+}
+
+/**
+ * DeleteListener返回参数结构体
+ */
+export interface DeleteListenerResponse {
+  /**
+   * 任务ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteGlobalAcceleratorAclPolicy请求参数结构体
+ */
+export interface DeleteGlobalAcceleratorAclPolicyRequest {
+  /**
+   * 全球加速实例ID。
+   */
+  GlobalAcceleratorId: string
+  /**
+   * 访问控制策略ID。
+   */
+  GlobalAcceleratorAclPolicyId: string
+}
+
+/**
+ * 端口映射
+ */
+export interface PortOverride {
+  /**
+   * 监听端口。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ListenerPort: number
+  /**
+   * 映射端口。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndpointPort: number
 }
