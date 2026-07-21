@@ -18,6 +18,26 @@ const client = new tencentcloud.rce.v20260130.Client({
 })
 describe("rce.v20260130.test.js", function () {
 
+it("rce.v20260130.AssessDeviceRiskPro", async function () {
+    try {
+       const data = await client.AssessDeviceRiskPro({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("rce.v20260130.AssessDeviceRiskPremiumPro", async function () {
+    try {
+       const data = await client.AssessDeviceRiskPremiumPro({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("rce.v20260130.AssessEnvironmentRisk", async function () {
     try {
        const data = await client.AssessEnvironmentRisk({})

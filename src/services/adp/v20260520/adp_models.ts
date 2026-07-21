@@ -386,6 +386,16 @@ export interface DeleteSkillShareRequest {
 }
 
 /**
+ * 工具信息
+ */
+export interface ToolSummary {
+  /**
+   * <p>工具Id</p>
+   */
+  ToolId?: string
+}
+
+/**
  * 生成模型配置
  */
 export interface GenerateModel {
@@ -1478,8 +1488,14 @@ export interface DescribeConversationMessageListResponse {
   MessageList?: Array<ConversationMessage>
   /**
    * <p>消息列表</p>
+   * @deprecated
    */
   Messages?: Array<ConversationMessage>
+  /**
+   * <p>最近一次重置信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResetInfo?: ConversationResetInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2313,25 +2329,17 @@ export interface SkillReferenceGroup {
 }
 
 /**
- * 联网搜索配置(国际版使用)
+ * 会话重置信息
  */
-export interface AppWebSearchConfig {
+export interface ConversationResetInfo {
   /**
-   * API密钥
+   * <p>最近一次重置的毫秒级时间戳</p>
    */
-  ApiKey: string
+  ResetTime?: string
   /**
-   * 是否开启
+   * <p>最近一次重置边界；该记录及更早的记录不再作为对话上下文</p>
    */
-  Enabled: boolean
-  /**
-   * 服务提供商
-   */
-  Provider: string
-  /**
-   * 返回结果数量
-   */
-  TopN: number
+  ResetThroughRecordId?: string
 }
 
 /**
@@ -3307,6 +3315,10 @@ export interface PluginSummary {
    * <p>插件配置信息</p>
    */
   Config?: PluginConfig
+  /**
+   * <p>工具信息</p>
+   */
+  ToolList?: Array<ToolSummary>
 }
 
 /**
@@ -3397,6 +3409,28 @@ export interface OAuthConfig {
    * 获取access token的url地址
    */
   TokenUrl?: string
+}
+
+/**
+ * 联网搜索配置(国际版使用)
+ */
+export interface AppWebSearchConfig {
+  /**
+   * API密钥
+   */
+  ApiKey: string
+  /**
+   * 是否开启
+   */
+  Enabled: boolean
+  /**
+   * 服务提供商
+   */
+  Provider: string
+  /**
+   * 返回结果数量
+   */
+  TopN: number
 }
 
 /**
@@ -3782,7 +3816,7 @@ export interface CreateVariableResponse {
 }
 
 /**
- * 列表通用过滤条件（多个Filter之间为AND关系，同一Filter的多个value_list为OR关系）
+ * 列表通用过滤条件（多个 Filter 之间为 AND 关系，同一 Filter 的多个 value_list 为 OR 关系）
  */
 export interface Filter {
   /**
@@ -3790,7 +3824,7 @@ export interface Filter {
    */
   Name?: string
   /**
-   * 操作符：0-属于，1-不属于
+   * 操作符，默认 IN（向后兼容）<table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>FILTER_OPERATOR_IN</td><td>0</td><td>属于 value_list（默认值，向后兼容；value_list 不可为空）</td></tr><tr><td>FILTER_OPERATOR_NOT_IN</td><td>1</td><td>不属于 value_list（value_list 不可为空）</td></tr></table>
    */
   Operator?: number
   /**
@@ -4235,6 +4269,10 @@ export interface DescribePluginRequest {
    * <p>获取指定字段</p>
    */
   FieldMask?: FieldMask
+  /**
+   * <p>插件展示场景。不传或取 0 时不限定场景。</p><p>枚举值：</p><ul><li>0：不限定场景</li><li>1：Agent 模式</li><li>2：工作流</li><li>3：智能工作台</li></ul>
+   */
+  Module?: number
 }
 
 /**

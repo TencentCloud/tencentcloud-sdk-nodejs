@@ -84,6 +84,7 @@ import {
   DescribeUserRolesResponse,
   CreateExportTaskRequest,
   CreateDMSTableRequest,
+  ModifySparkAppResponse,
   DMSTable,
   CreateSparkSubmitTaskResponse,
   UpdateEngineResourceGroupNetworkConfigInfoResponse,
@@ -390,6 +391,7 @@ import {
   CreateTcIcebergTableResponse,
   DeleteSparkAppResponse,
   DescribeUserDataEngineConfigRequest,
+  MCPTaskInfo,
   CreateTasksResponse,
   TccHive,
   GrantDLCCatalogAccessResponse,
@@ -474,7 +476,7 @@ import {
   Partition,
   ModifySparkAppBatchRequest,
   RegisterThirdPartyAccessUserResponse,
-  ModifySparkAppResponse,
+  MCPTaskResultInfo,
   LaunchStandardEngineResourceGroupsRequest,
   Property,
   UserVpcConnectionInfo,
@@ -2188,7 +2190,7 @@ export class Client extends AbstractClient {
    * 该接口（DescribeTasks）用于查询任务列表
    */
   async DescribeMCPTask(
-    req?: DescribeMCPTaskRequest,
+    req: DescribeMCPTaskRequest,
     cb?: (error: string, rep: DescribeMCPTaskResponse) => void
   ): Promise<DescribeMCPTaskResponse> {
     return this.request("DescribeMCPTask", req, cb)
@@ -2338,7 +2340,7 @@ export class Client extends AbstractClient {
    * 获取任务结果查询
    */
   async DescribeMCPTaskResult(
-    req?: DescribeMCPTaskResultRequest,
+    req: DescribeMCPTaskResultRequest,
     cb?: (error: string, rep: DescribeMCPTaskResultResponse) => void
   ): Promise<DescribeMCPTaskResultResponse> {
     return this.request("DescribeMCPTaskResult", req, cb)

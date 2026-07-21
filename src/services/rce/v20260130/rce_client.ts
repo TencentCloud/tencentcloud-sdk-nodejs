@@ -19,13 +19,21 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   RiskLabel,
-  IPLocation,
-  AssessEnvironmentRiskRsp,
-  AssessEnvironmentRiskResponse,
-  DataScore,
   Environment,
+  AssessEnvironmentRiskRsp,
+  IPLocation,
+  DataScore,
+  AssessDeviceRiskRsp,
+  AssessEnvironmentRiskResponse,
+  AssessDeviceRiskPremiumProResponse,
+  AssessDeviceRiskProRequest,
+  AssessDeviceRiskPremiumProRequest,
+  AssessDeviceRiskProResponse,
   IPNetwork,
+  AssessDeviceRiskPremiumRsp,
   AssessEnvironmentRiskRequest,
+  Device,
+  Decision,
 } from "./rce_models"
 
 /**
@@ -35,6 +43,26 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("rce.tencentcloudapi.com", "2026-01-30", clientConfig)
+  }
+
+  /**
+   * 设备风险评估-基础版
+   */
+  async AssessDeviceRiskPro(
+    req: AssessDeviceRiskProRequest,
+    cb?: (error: string, rep: AssessDeviceRiskProResponse) => void
+  ): Promise<AssessDeviceRiskProResponse> {
+    return this.request("AssessDeviceRiskPro", req, cb)
+  }
+
+  /**
+   * 设备风险评估-高级版
+   */
+  async AssessDeviceRiskPremiumPro(
+    req: AssessDeviceRiskPremiumProRequest,
+    cb?: (error: string, rep: AssessDeviceRiskPremiumProResponse) => void
+  ): Promise<AssessDeviceRiskPremiumProResponse> {
+    return this.request("AssessDeviceRiskPremiumPro", req, cb)
   }
 
   /**

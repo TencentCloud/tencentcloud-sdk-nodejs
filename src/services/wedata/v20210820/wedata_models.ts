@@ -16067,31 +16067,31 @@ export interface SubmitWorkflow {
  */
 export interface TableLineage {
   /**
-   * 数据源id
+   * <p>数据源id</p>
    */
   DatasourceId: string
   /**
-   * 库名称
+   * <p>库名称</p>
    */
   DatabaseName: string
   /**
-   * 表名称
+   * <p>表名称</p>
    */
   TableName: string
   /**
-   * catalog值
+   * <p>catalog值,仅使用DLC且开启TcLake的支持,其他类型传空即可</p>
    */
   CatalogName?: string
   /**
-   * schema名称
+   * <p>schema名称</p>
    */
   SchemaName?: string
   /**
-   * 扩展参数
+   * <p>扩展参数</p>
    */
   ExtParams?: Array<ExtParam>
   /**
-   * table类型 TABLE｜VIEW
+   * <p>table类型 TABLE｜VIEW</p>
    */
   TableType?: string
 }

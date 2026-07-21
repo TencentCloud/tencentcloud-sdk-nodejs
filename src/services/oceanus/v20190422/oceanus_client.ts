@@ -179,6 +179,7 @@ import {
   DeleteOceanusClusterResponse,
   DescribeJobsResponse,
   ExpertModeConfiguration,
+  SqlGatewayEndpoint,
   Order,
   CreateConnectorRequest,
   CopyJobItem,

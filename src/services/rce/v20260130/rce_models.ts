@@ -30,6 +30,34 @@ export interface RiskLabel {
 }
 
 /**
+ * 环境基础信息
+ */
+export interface Environment {
+  /**
+   * <p>IP地理位置信息</p>
+   */
+  Location?: IPLocation
+  /**
+   * <p>IP基础网络信息</p>
+   */
+  Network?: IPNetwork
+}
+
+/**
+ * 环境风险评估返回结果
+ */
+export interface AssessEnvironmentRiskRsp {
+  /**
+   * <p>IP环境风险分信息</p>
+   */
+  Score?: DataScore
+  /**
+   * <p>IP环境基础信息</p>
+   */
+  Environment?: Environment
+}
+
+/**
  * IP地理位置信息
  */
 export interface IPLocation {
@@ -68,17 +96,31 @@ export interface IPLocation {
 }
 
 /**
- * 环境风险评估返回结果
+ * 风险分信息
  */
-export interface AssessEnvironmentRiskRsp {
+export interface DataScore {
   /**
-   * <p>环境风险分信息</p>
+   * <p>风险等级</p>
+   */
+  RiskLevel?: number
+  /**
+   * <p>风险标签</p>
+   */
+  RiskLabels?: Array<RiskLabel>
+}
+
+/**
+ * 设备风险评估基础版返回结果
+ */
+export interface AssessDeviceRiskRsp {
+  /**
+   * <p>设备风险分信息</p>
    */
   Score?: DataScore
   /**
-   * <p>环境基础信息</p>
+   * <p>设备基础信息</p>
    */
-  Environment?: Environment
+  Device?: Device
 }
 
 /**
@@ -96,31 +138,59 @@ export interface AssessEnvironmentRiskResponse {
 }
 
 /**
- * 风险分信息
+ * AssessDeviceRiskPremiumPro返回参数结构体
  */
-export interface DataScore {
+export interface AssessDeviceRiskPremiumProResponse {
   /**
-   * <p>风险等级</p>
+   * <p>设备风险评估高级版返回结果</p>
    */
-  RiskLevel?: number
+  Data?: AssessDeviceRiskPremiumRsp
   /**
-   * <p>风险标签</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RiskLabels?: Array<RiskLabel>
+  RequestId?: string
 }
 
 /**
- * 环境基础信息
+ * AssessDeviceRiskPro请求参数结构体
  */
-export interface Environment {
+export interface AssessDeviceRiskProRequest {
   /**
-   * <p>IP地理位置信息</p>
+   * <p>用户设备指纹token标识，在您的网站或者应用程序中集成设备指纹的SDK后获取</p>
    */
-  Location?: IPLocation
+  DeviceToken: string
   /**
-   * <p>IP基础网络信息</p>
+   * <p>客户端 IP 地址</p>
    */
-  Network?: IPNetwork
+  UserIp?: string
+}
+
+/**
+ * AssessDeviceRiskPremiumPro请求参数结构体
+ */
+export interface AssessDeviceRiskPremiumProRequest {
+  /**
+   * <p>用户设备指纹token标识，在您的网站或者应用程序中集成设备指纹的SDK后获取</p>
+   */
+  DeviceToken: string
+  /**
+   * <p>客户端 IP 地址</p>
+   */
+  UserIp?: string
+}
+
+/**
+ * AssessDeviceRiskPro返回参数结构体
+ */
+export interface AssessDeviceRiskProResponse {
+  /**
+   * <p>设备风险评估基础版返回结果</p>
+   */
+  Data?: AssessDeviceRiskRsp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -198,6 +268,29 @@ export interface IPNetwork {
 }
 
 /**
+ * 设备风险评估高级版返回结果
+ */
+export interface AssessDeviceRiskPremiumRsp {
+  /**
+   * <p>决策信息</p>
+   */
+  Decision?: Decision
+  /**
+   * <p>设备风险分信息</p>
+   */
+  Score?: DataScore
+  /**
+   * <p>设备基础信息</p>
+   */
+  Device?: Device
+  /**
+   * <p>IP环境基础信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Environment?: Environment
+}
+
+/**
  * AssessEnvironmentRisk请求参数结构体
  */
 export interface AssessEnvironmentRiskRequest {
@@ -205,4 +298,60 @@ export interface AssessEnvironmentRiskRequest {
    * <p>客户端 IP 地址</p>
    */
   UserIp: string
+}
+
+/**
+ * 设备基础信息
+ */
+export interface Device {
+  /**
+   * <p>设备ID</p>
+   */
+  DeviceId?: string
+  /**
+   * <p>App版本信息</p>
+   */
+  AppVersion?: string
+  /**
+   * <p>品牌</p>
+   */
+  Brand?: string
+  /**
+   * <p>客户端IP</p>
+   */
+  ClientIp?: string
+  /**
+   * <p>机型</p>
+   */
+  Model?: string
+  /**
+   * <p>网络类型</p>
+   */
+  NetworkType?: string
+  /**
+   * <p>应用包名</p>
+   */
+  PackageName?: string
+  /**
+   * <p>平台</p><p>枚举值：</p><ul><li>2： Android</li><li>3： IOS</li><li>4： H5</li><li>5： 微信小程序</li></ul>
+   */
+  Platform?: string
+  /**
+   * <p>系统版本</p>
+   */
+  SystemVersion?: string
+  /**
+   * <p>SDK版本</p>
+   */
+  SdkBuildVersion?: string
+}
+
+/**
+ * 决策信息
+ */
+export interface Decision {
+  /**
+   * <p>决策结果</p><ul><li>pass：通过</li><li>review：复审</li><li>reject：拒绝</li></ul>
+   */
+  DecisionResult?: string
 }

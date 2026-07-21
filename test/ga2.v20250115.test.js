@@ -68,6 +68,16 @@ it("ga2.v20250115.DeleteGlobalAccelerator", async function () {
     }
 })
 
+it("ga2.v20250115.DeleteGlobalAcceleratorAccessLog", async function () {
+    try {
+       const data = await client.DeleteGlobalAcceleratorAccessLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ga2.v20250115.DeleteListener", async function () {
     try {
        const data = await client.DeleteListener({})
@@ -91,6 +101,16 @@ it("ga2.v20250115.DeleteForwardingPolicy", async function () {
 it("ga2.v20250115.DescribeCrossBorderSettlement", async function () {
     try {
        const data = await client.DescribeCrossBorderSettlement({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ga2.v20250115.DescribeGlobalAcceleratorAclRules", async function () {
+    try {
+       const data = await client.DescribeGlobalAcceleratorAclRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,6 +168,16 @@ it("ga2.v20250115.CreateGlobalAcceleratorAclRule", async function () {
     }
 })
 
+it("ga2.v20250115.ModifyGlobalAcceleratorAccessLog", async function () {
+    try {
+       const data = await client.ModifyGlobalAcceleratorAccessLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ga2.v20250115.ModifyForwardingRule", async function () {
     try {
        const data = await client.ModifyForwardingRule({})
@@ -181,6 +211,16 @@ it("ga2.v20250115.DescribeTaskResult", async function () {
 it("ga2.v20250115.CreateGlobalAcceleratorAclPolicy", async function () {
     try {
        const data = await client.CreateGlobalAcceleratorAclPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ga2.v20250115.DescribeAccessLogParam", async function () {
+    try {
+       const data = await client.DescribeAccessLogParam({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -278,6 +318,26 @@ it("ga2.v20250115.ModifyGlobalAcceleratorAclRule", async function () {
     }
 })
 
+it("ga2.v20250115.CreateGlobalAcceleratorAccessLog", async function () {
+    try {
+       const data = await client.CreateGlobalAcceleratorAccessLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ga2.v20250115.DescribeGlobalAcceleratorAclPolicies", async function () {
+    try {
+       const data = await client.DescribeGlobalAcceleratorAclPolicies({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ga2.v20250115.DeleteForwardingRule", async function () {
     try {
        const data = await client.DeleteForwardingRule({})
@@ -291,6 +351,26 @@ it("ga2.v20250115.DeleteForwardingRule", async function () {
 it("ga2.v20250115.CreateForwardingRule", async function () {
     try {
        const data = await client.CreateForwardingRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ga2.v20250115.ModifyAccessLogStatus", async function () {
+    try {
+       const data = await client.ModifyAccessLogStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ga2.v20250115.DescribeGlobalAcceleratorAccessLog", async function () {
+    try {
+       const data = await client.DescribeGlobalAcceleratorAccessLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

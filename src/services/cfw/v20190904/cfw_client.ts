@@ -115,6 +115,7 @@ import {
   DescribeIpsModeSwitchRequest,
   ModifyBlockTopResponse,
   DescribeNatFwVpcDnsLstResponse,
+  DescribeAclRegInfoResponse,
   CreateBlockIgnoreRuleListResponse,
   TLogInfo,
   DescribeLogsResponse,
@@ -149,7 +150,7 @@ import {
   DatabaseWhiteListRuleData,
   DescribeTLogInfoResponse,
   PolicyRoutePreCheckReport,
-  NatFwInstance,
+  AclRegInfo,
   DescribeCfwLogsResponse,
   ModifyAllPublicIPSwitchStatusResponse,
   BanAndAllowRuleDel,
@@ -173,6 +174,7 @@ import {
   DescribeCcnAssociatedInstancesRequest,
   ModifyVpcAcRuleRequest,
   BetaInfoByACL,
+  CreateNatFwDnatRuleResponse,
   DescribeAcListsResponse,
   ModifyClusterFwBypassResponse,
   AddNatAcRuleRequest,
@@ -185,7 +187,7 @@ import {
   DeleteResourceGroupRequest,
   ModifyFwGroupSwitchRequest,
   CreateAddressTemplateResponse,
-  CreateNatFwDnatRuleResponse,
+  DescribeAclRegInfoRequest,
   DescribeResourceGroupNewResponse,
   DescribeNatFwClusterRegionStatusRequest,
   DescribeAddressTemplateListRequest,
@@ -336,6 +338,7 @@ import {
   CloseClusterNatFwSwitchResponse,
   DescribeNatFwInstanceWithRegionRequest,
   ModifyAddressTemplateRequest,
+  NatFwInstance,
   CfwNatDnatRule,
   UpdateClusterVpcFwRequest,
   DeleteNatFwDnatRuleRequest,
@@ -1794,6 +1797,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: SetNatFwEipResponse) => void
   ): Promise<SetNatFwEipResponse> {
     return this.request("SetNatFwEip", req, cb)
+  }
+
+  /**
+   * 查询ACL规则支持配置的地区
+   */
+  async DescribeAclRegInfo(
+    req: DescribeAclRegInfoRequest,
+    cb?: (error: string, rep: DescribeAclRegInfoResponse) => void
+  ): Promise<DescribeAclRegInfoResponse> {
+    return this.request("DescribeAclRegInfo", req, cb)
   }
 
   /**

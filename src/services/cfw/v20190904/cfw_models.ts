@@ -808,39 +808,39 @@ export interface ModifyAclRuleResponse {
  */
 export interface CreateNatFwInstanceRequest {
   /**
-   * 防火墙实例名称
+   * <p>防火墙实例名称</p>
    */
   Name: string
   /**
-   * 带宽
+   * <p>带宽</p>
    */
   Width: number
   /**
-   * 模式 1：接入模式；0：新增模式
+   * <p>模式 1：接入模式；0：新增模式</p>
    */
   Mode: number
   /**
-   * 新增模式传递参数，其中NewModeItems和NatgwList至少传递一种。
+   * <p>新增模式传递参数，其中NewModeItems和NatgwList至少传递一种。</p>
    */
   NewModeItems?: NewModeItems
   /**
-   * 接入模式接入的nat网关列表，其中NewModeItems和NatgwList至少传递一种。
+   * <p>接入模式接入的nat网关列表，其中NewModeItems和NatgwList至少传递一种。</p>
    */
   NatGwList?: Array<string>
   /**
-   * 主可用区，为空则选择默认可用区
+   * <p>主可用区，为空则选择默认可用区</p>
    */
   Zone?: string
   /**
-   * 备可用区，为空则选择默认可用区
+   * <p>备可用区，为空则选择默认可用区</p>
    */
   ZoneBak?: string
   /**
-   * 异地灾备 1：使用异地灾备；0：不使用异地灾备；为空则默认不使用异地灾备
+   * <p>异地灾备 1：使用异地灾备；0：不使用异地灾备；为空则默认不使用异地灾备</p>
    */
   CrossAZone?: number
   /**
-   * 指定防火墙使用网段信息
+   * <p>指定防火墙使用网段信息</p>
    */
   FwCidrInfo?: FwCidrInfo
 }
@@ -2526,6 +2526,20 @@ export interface DescribeNatFwVpcDnsLstResponse {
 }
 
 /**
+ * DescribeAclRegInfo返回参数结构体
+ */
+export interface DescribeAclRegInfoResponse {
+  /**
+   * 规则支持的地域列表
+   */
+  Data?: Array<AclRegInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateBlockIgnoreRuleList返回参数结构体
  */
 export interface CreateBlockIgnoreRuleListResponse {
@@ -3459,33 +3473,53 @@ export interface PolicyRoutePreCheckReport {
 }
 
 /**
- * Nat实例类型
+ * ACL 地理位置支持地域数据
  */
-export interface NatFwInstance {
+export interface AclRegInfo {
   /**
-   * nat实例id
+   * 地域KEY
    */
-  NatinsId?: string
+  RegionCode?: string
   /**
-   * nat实例名称
+   * 地域名称
    */
-  NatinsName?: string
+  RegionName?: string
   /**
-   * 实例所在地域
+   * 上级地域信息
    */
-  Region?: string
+  Parent?: string
   /**
-   * 0:新增模式，1:接入模式
+   * 中文拼音首字母
    */
-  FwMode?: number
+  ZhKey?: string
   /**
-   * 0:正常状态， 1: 正在创建
+   * 英文首字母
    */
-  Status?: number
+  EnKey?: string
   /**
-   * nat公网ip
+   * 是否为地区
    */
-  NatIp?: string
+  Area?: number
+  /**
+   * 是否为省份、城市
+   */
+  IsCity?: number
+  /**
+   * 序号
+   */
+  Num?: number
+  /**
+   * 是否支持旁路
+   */
+  ForBypass?: number
+  /**
+   * 是否支持串行
+   */
+  ForSerial?: number
+  /**
+   * 是否支持NAT
+   */
+  ForNat?: number
 }
 
 /**
@@ -4102,6 +4136,16 @@ export interface BetaInfoByACL {
 }
 
 /**
+ * CreateNatFwDnatRule返回参数结构体
+ */
+export interface CreateNatFwDnatRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAcLists返回参数结构体
  */
 export interface DescribeAcListsResponse {
@@ -4299,13 +4343,13 @@ export interface CreateAddressTemplateResponse {
 }
 
 /**
- * CreateNatFwDnatRule返回参数结构体
+ * DescribeAclRegInfo请求参数结构体
  */
-export interface CreateNatFwDnatRuleResponse {
+export interface DescribeAclRegInfoRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 防火墙类型 SERIAL：串行、NAT：NAT防火墙，BYPASS：旁路防火墙
    */
-  RequestId?: string
+  FwType?: Array<string>
 }
 
 /**
@@ -6800,7 +6844,7 @@ export interface DescribeNatCcnFwSwitchResponse {
  */
 export interface ModifyRunSyncAssetResponse {
   /**
-   * 0：同步成功，1：资产更新中，2：后台同步调用失败
+   * <p>0：同步成功，1：资产更新中，2：后台同步调用失败</p>
    */
   Status?: number
   /**
@@ -7671,7 +7715,7 @@ export interface FwVpcCidr {
  */
 export interface ModifyRunSyncAssetRequest {
   /**
-   * 0: 互联网防火墙开关，1：vpc 防火墙开关
+   * <p>0: 互联网防火墙开关，1：vpc 防火墙开关</p>
    */
   Type?: number
 }
@@ -8002,6 +8046,36 @@ Type为5，域名模板eg：www.qq.com,www.tencent.com
    * 协议端口模板，协议类型，4:4层协议，7:7层协议。Type=6时必填。
    */
   ProtocolType?: string
+}
+
+/**
+ * Nat实例类型
+ */
+export interface NatFwInstance {
+  /**
+   * nat实例id
+   */
+  NatinsId?: string
+  /**
+   * nat实例名称
+   */
+  NatinsName?: string
+  /**
+   * 实例所在地域
+   */
+  Region?: string
+  /**
+   * 0:新增模式，1:接入模式
+   */
+  FwMode?: number
+  /**
+   * 0:正常状态， 1: 正在创建
+   */
+  Status?: number
+  /**
+   * nat公网ip
+   */
+  NatIp?: string
 }
 
 /**
@@ -8710,7 +8784,7 @@ export interface DescribeEdgeIpSimpleRequest {
  */
 export interface CreateNatFwInstanceResponse {
   /**
-   * 防火墙实例id
+   * <p>防火墙实例id</p>
    */
   CfwInsId?: string
   /**

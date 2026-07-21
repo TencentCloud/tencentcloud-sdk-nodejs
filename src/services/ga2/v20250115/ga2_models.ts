@@ -30,6 +30,20 @@ export interface DescribeTaskResultResponse {
 }
 
 /**
+ * DeleteGlobalAcceleratorAccessLog请求参数结构体
+ */
+export interface DeleteGlobalAcceleratorAccessLogRequest {
+  /**
+   * <p>日志唯一Id</p>
+   */
+  LogPushTaskId: string
+  /**
+   * <p>GA实例唯一Id</p>
+   */
+  GlobalAcceleratorId: string
+}
+
+/**
  * DescribeEndpointGroups返回参数结构体
  */
 export interface DescribeEndpointGroupsResponse {
@@ -109,6 +123,24 @@ export interface CreateForwardingRuleRequest {
    * <p>删除源站响应头</p><p>数组长度不超过5。可以传空数组，代表清空配置。</p>
    */
   HideResponseHeaders?: Array<HideResponseHeaders>
+}
+
+/**
+ * DescribeGlobalAcceleratorAccessLog返回参数结构体
+ */
+export interface DescribeGlobalAcceleratorAccessLogResponse {
+  /**
+   * <p>返回日志任务详情</p>
+   */
+  GlobalAcceleratorAccessLog?: Array<GlobalAcceleratorAccessLog>
+  /**
+   * <p>日志任务条数。</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -260,6 +292,24 @@ export interface ResponseHeaders {
 }
 
 /**
+ * DescribeGlobalAcceleratorAclRules请求参数结构体
+ */
+export interface DescribeGlobalAcceleratorAclRulesRequest {
+  /**
+   * <p>访问控制策略ID。</p>
+   */
+  GlobalAcceleratorAclPolicyId: string
+  /**
+   * <p>偏移量，默认为0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回数量。</p><p>取值范围：[1, 200]</p><p>默认值：20</p>
+   */
+  Limit?: number
+}
+
+/**
  * DeleteGlobalAcceleratorAclRule返回参数结构体
  */
 export interface DeleteGlobalAcceleratorAclRuleResponse {
@@ -267,6 +317,24 @@ export interface DeleteGlobalAcceleratorAclRuleResponse {
    * 异步任务ID。
    */
   TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAccessLogParam返回参数结构体
+ */
+export interface DescribeAccessLogParamResponse {
+  /**
+   * <p>七层可选参数</p>
+   */
+  L7Param?: Array<string>
+  /**
+   * <p>四层可选参数</p>
+   */
+  L4Param?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -604,6 +672,36 @@ export interface DescribeGlobalAcceleratorsResponse {
 }
 
 /**
+ * ModifyGlobalAcceleratorAccessLog请求参数结构体
+ */
+export interface ModifyGlobalAcceleratorAccessLogRequest {
+  /**
+   * <p>日志唯一Id</p>
+   */
+  LogPushTaskId: string
+  /**
+   * <p>GA实例唯一Id</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>日志主题Id</p>
+   */
+  CloudLogId?: string
+  /**
+   * <p>日志集Id</p>
+   */
+  CloudLogSetId?: string
+  /**
+   * <p>用户可选日志监听字段</p><p>枚举值：</p><ul><li>session_time： 四层，会话持续时间</li><li>upstream_bytes_received： 四层、七层，从终端节点接收的字节数</li><li>upstream_bytes_sent： 四层、七层，发送给终端节点的字节数</li><li>request_method： 七层，GET/POST</li><li>scheme： 七层，http/https</li><li>request_uri： 七层，客户端原始请求的URI</li><li>uri： 七层，当前请求的URI</li><li>host： 七层，客户端访问域名（七层）</li><li>remote_user： 七层，基本认证时的用户名（未认证时为&quot;-&quot;）</li><li>http_user_agent： 七层，客户端浏览器标识</li><li>http_referer： 七层，请求来源URL（直接从地址栏访问时为&quot;-&quot;）</li><li>http_x_forwarded_for： 七层，记录客户端原始IP及经过的代理服务器IP链</li><li>content_type： 七层，content_type</li><li>body_bytes_sent： 七层，发送给客户端的http body大小，不包含header</li><li>request_time： 七层，从接收到客户端请求的第一个字节到发送完响应最后一个字节之间的总时间（单位：秒）</li><li>sent_http_content_type： 七层，响应内容类型</li><li>upstream_header_time： 七层，终端节点的响应头到达时间</li><li>upstream_response_length： 七层，终端节点返回的响应体长度</li><li>upstream_response_time： 七层，终端节点完整响应时间</li><li>upstream_status： 七层，终端节点返回的HTTP状态码</li></ul>
+   */
+  FieldKeys?: Array<string>
+  /**
+   * <p>日志描述</p>
+   */
+  FlowLogDescription?: string
+}
+
+/**
  * DescribeListeners返回参数结构体
  */
 export interface DescribeListenersResponse {
@@ -677,6 +775,50 @@ export interface AclEntries {
    * <p>描述信息，最大长度不能超过100个字节。</p>
    */
   Description?: string
+}
+
+/**
+ * ModifyForwardingPolicy请求参数结构体
+ */
+export interface ModifyForwardingPolicyRequest {
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>监听器ID。</p>
+   */
+  ListenerId: string
+  /**
+   * <p>策略ID。</p>
+   */
+  ForwardingPolicyId: string
+  /**
+   * <p>域名。</p><p>入参限制：长度范围在1-80。</p><p>格式必须满足正则表达式：^(<a href="?:[a-z0-9-]{0,61}[a-z0-9]">a-z0-9</a>?.)+[a-z]{2,}$</p>
+   */
+  Host: string
+}
+
+/**
+ * DescribeGlobalAcceleratorAccessLog请求参数结构体
+ */
+export interface DescribeGlobalAcceleratorAccessLogRequest {
+  /**
+   * <p>ga实例唯一Id</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>查询过滤参数。{ &quot;Name&quot;: &quot;listener-id&quot;, &quot;Values&quot;: [&quot;监听器唯一Id&quot;] },{ &quot;Name&quot;: &quot;endpoint-group-id&quot;, &quot;Values&quot;: [&quot;终端节点组唯一Id&quot;] },{ &quot;Name&quot;: &quot;access_log_id&quot;, &quot;Values&quot;: [&quot;日志唯一Id&quot;] }</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>偏移量，默认为0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回数量。</p><p>取值范围：[0, 200]</p>
+   */
+  Limit?: number
 }
 
 /**
@@ -832,21 +974,21 @@ export interface ModifyGlobalAcceleratorAclPolicyResponse {
 }
 
 /**
- * CreateGlobalAcceleratorAclRule返回参数结构体
+ * ModifyAccessLogStatus请求参数结构体
  */
-export interface CreateGlobalAcceleratorAclRuleResponse {
+export interface ModifyAccessLogStatusRequest {
   /**
-   * 异步任务ID。
+   * <p>日志唯一Id</p>
    */
-  TaskId?: string
+  LogPushTaskId: string
   /**
-   * ACL规则ID。
+   * <p>状态（启动START， 停止STOP）</p><p>枚举值：</p><ul><li>START： 启动</li><li>STOP： 停止</li></ul>
    */
-  GlobalAcceleratorAclRuleIds?: Array<string>
+  Status: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>GA实例唯一Id</p>
    */
-  RequestId?: string
+  GlobalAcceleratorId: string
 }
 
 /**
@@ -901,6 +1043,20 @@ export interface DescribeForwardingRuleRequest {
    * 返回数量，默认为20，最大值为100。
    */
   Limit?: number
+}
+
+/**
+ * CreateGlobalAcceleratorAccessLog返回参数结构体
+ */
+export interface CreateGlobalAcceleratorAccessLogResponse {
+  /**
+   * <p>日志任务唯一Id</p>
+   */
+  LogPushTaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1182,6 +1338,24 @@ export interface DeleteGlobalAcceleratorResponse {
 }
 
 /**
+ * CreateGlobalAcceleratorAclRule返回参数结构体
+ */
+export interface CreateGlobalAcceleratorAclRuleResponse {
+  /**
+   * 异步任务ID。
+   */
+  TaskId?: string
+  /**
+   * ACL规则ID。
+   */
+  GlobalAcceleratorAclRuleIds?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAccelerateRegions返回参数结构体
  */
 export interface DescribeAccelerateRegionsResponse {
@@ -1200,45 +1374,53 @@ export interface DescribeAccelerateRegionsResponse {
  */
 export interface ForwardingRuleSet {
   /**
-   * 七层转发规则条件信息。
+   * <p>七层转发规则条件信息。</p>
    */
   RuleCondition?: Array<RuleCondition>
   /**
-   * 七层转发规则行为信息。
+   * <p>七层转发规则行为信息。</p>
    */
   RuleAction?: Array<RuleAction>
   /**
-   * 是否开启回源Sni。
+   * <p>是否开启回源Sni。</p>
    */
   EnableOriginSni?: boolean
   /**
-   * 回源Sni。
+   * <p>回源Sni。</p>
    */
   OriginSni?: string
   /**
-   * 回源Herder信息。
+   * <p>回源Herder信息。</p>
    */
   OriginHeaders?: Array<OriginHeader>
   /**
-   * 回源Host。
+   * <p>回源Host。</p>
    */
   OriginHost?: string
   /**
-   * 全球加速实例ID。
+   * <p>全球加速实例ID。</p>
    */
   GlobalAcceleratorId?: string
   /**
-   * 监听器ID。
+   * <p>监听器ID。</p>
    */
   ListenerId?: string
   /**
-   * 七层转发策略ID。
+   * <p>七层转发策略ID。</p>
    */
   ForwardingPolicyId?: string
   /**
-   * 七层转发规则ID。
+   * <p>七层转发规则ID。</p>
    */
   ForwardingRuleId?: string
+  /**
+   * <p>源站响应头</p>
+   */
+  HideResponseHeaders?: Array<HideResponseHeaders>
+  /**
+   * <p>删除源站响应头</p>
+   */
+  ResponseHeaders?: Array<ResponseHeaders>
 }
 
 /**
@@ -1275,6 +1457,44 @@ export interface CreateGlobalAcceleratorAclPolicyResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateGlobalAcceleratorAccessLog请求参数结构体
+ */
+export interface CreateGlobalAcceleratorAccessLogRequest {
+  /**
+   * <p>GA示例唯一Id</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>监听器Id</p>
+   */
+  ListenerId: string
+  /**
+   * <p>终端节点组Id</p>
+   */
+  EndpointGroupId: string
+  /**
+   * <p>日志集所在地域</p>
+   */
+  CloudRegion: string
+  /**
+   * <p>日志主题Id</p>
+   */
+  CloudLogId: string
+  /**
+   * <p>日志集Id</p>
+   */
+  CloudLogSetId: string
+  /**
+   * <p>指定采集字段</p><p>枚举值：</p><ul><li>session_time： 四层，会话持续时间</li><li>upstream_bytes_received： 四层、七层，从终端节点接收的字节数</li><li>upstream_bytes_sent： 四层、七层，发送给终端节点的字节数</li><li>request_method： 七层，GET/POST</li><li>scheme： 七层，http/https</li><li>request_uri： 七层，客户端原始请求的URI</li><li>uri： 七层，当前请求的URI</li><li>host： 七层，客户端访问域名（七层）</li><li>remote_user： 七层，基本认证时的用户名（未认证时为&quot;-&quot;）</li><li>http_user_agent： 七层，客户端浏览器标识</li><li>http_referer： 七层，请求来源URL（直接从地址栏访问时为&quot;-&quot;）</li><li>http_x_forwarded_for： 七层，记录客户端原始IP及经过的代理服务器IP链</li><li>content_type： 七层，content_type</li><li>body_bytes_sent： 七层，发送给客户端的http body大小，不包含header</li><li>request_time： 七层，从接收到客户端请求的第一个字节到发送完响应最后一个字节之间的总时间（单位：秒）</li><li>sent_http_content_type： 七层，响应内容类型</li><li>upstream_header_time： 七层，终端节点的响应头到达时间</li><li>upstream_response_length： 七层，终端节点返回的响应体长度</li><li>upstream_response_time： 七层，终端节点完整响应时间</li><li>upstream_status： 七层，终端节点返回的HTTP状态码</li></ul>
+   */
+  FieldKeys?: Array<string>
+  /**
+   * <p>日志描述</p>
+   */
+  FlowLogDescription?: string
 }
 
 /**
@@ -1510,6 +1730,58 @@ export interface DescribeForwardingRuleResponse {
 }
 
 /**
+ * 访问控制策略
+ */
+export interface GlobalAcceleratorAclPolicies {
+  /**
+   * 访问控制策略ID。
+   */
+  GlobalAcceleratorAclPolicyId?: string
+  /**
+   * 默认动作。
+   */
+  DefaultAction?: string
+  /**
+   * 状态。
+   */
+  Status?: string
+}
+
+/**
+ * Acl规则信息
+ */
+export interface GlobalAcceleratorAclRuleSet {
+  /**
+   * 访问控制策略ID。
+   */
+  GlobalAcceleratorPolicyId?: string
+  /**
+   * Acl规则ID。
+   */
+  GlobalAcceleratorAclRuleId?: string
+  /**
+   * 协议。
+   */
+  Protocol?: string
+  /**
+   * 端口。
+   */
+  Port?: string
+  /**
+   * 网段。
+   */
+  SourceCidrBlock?: string
+  /**
+   * 动作。
+   */
+  Policy?: string
+  /**
+   * 描述。
+   */
+  Description?: string
+}
+
+/**
  * DeleteGlobalAccelerator请求参数结构体
  */
 export interface DeleteGlobalAcceleratorRequest {
@@ -1588,17 +1860,13 @@ export interface ModifyListenerResponse {
 }
 
 /**
- * CreateAccelerateAreas请求参数结构体
+ * DeleteGlobalAcceleratorAccessLog返回参数结构体
  */
-export interface CreateAccelerateAreasRequest {
+export interface DeleteGlobalAcceleratorAccessLogResponse {
   /**
-   * <p>全球加速实例ID。</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  GlobalAcceleratorId: string
-  /**
-   * <p>加速地域信息。一次最多创建10组加速地域。</p>
-   */
-  AcceleratorAreas: Array<AcceleratorAreas>
+  RequestId?: string
 }
 
 /**
@@ -1777,25 +2045,29 @@ export interface CreateForwardingPolicyResponse {
 }
 
 /**
- * ModifyForwardingPolicy请求参数结构体
+ * 七层转发策略信息
  */
-export interface ModifyForwardingPolicyRequest {
+export interface ForwardingPolicySet {
   /**
-   * <p>全球加速实例ID。</p>
+   * 全球加速实例ID。
    */
-  GlobalAcceleratorId: string
+  GlobalAcceleratorId?: string
   /**
-   * <p>监听器ID。</p>
+   * 监听器ID。
    */
-  ListenerId: string
+  ListenerId?: string
   /**
-   * <p>策略ID。</p>
+   * 策略ID。
    */
-  ForwardingPolicyId: string
+  ForwardingPolicyId?: string
   /**
-   * <p>域名。</p><p>入参限制：长度范围在1-80。</p><p>格式必须满足正则表达式：^(<a href="?:[a-z0-9-]{0,61}[a-z0-9]">a-z0-9</a>?.)+[a-z]{2,}$</p>
+   * 域名。
    */
-  Host: string
+  Host?: string
+  /**
+   * 是否为默认域名。
+   */
+  DefaultHostFlag?: boolean
 }
 
 /**
@@ -1836,6 +2108,20 @@ export interface IpAddressInfoSet {
 export interface DeleteForwardingPolicyResponse {
   /**
    * 异步任务ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyEndpointGroup返回参数结构体
+ */
+export interface ModifyEndpointGroupResponse {
+  /**
+   * <p>任务ID。</p>
    */
   TaskId?: string
   /**
@@ -1935,39 +2221,32 @@ export interface ListenerSet {
 }
 
 /**
- * 七层转发策略信息
+ * DescribeGlobalAcceleratorAclRules返回参数结构体
  */
-export interface ForwardingPolicySet {
+export interface DescribeGlobalAcceleratorAclRulesResponse {
   /**
-   * 全球加速实例ID。
+   * <p>符合条件的Acl规则实例。</p>
    */
-  GlobalAcceleratorId?: string
+  GlobalAcceleratorAclRuleSet?: Array<GlobalAcceleratorAclRuleSet>
   /**
-   * 监听器ID。
+   * <p>符合条件的实例个数。</p>
    */
-  ListenerId?: string
+  TotalCount?: number
   /**
-   * 策略ID。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ForwardingPolicyId?: string
-  /**
-   * 域名。
-   */
-  Host?: string
-  /**
-   * 是否为默认域名。
-   */
-  DefaultHostFlag?: boolean
+  RequestId?: string
 }
 
 /**
- * ModifyEndpointGroup返回参数结构体
+ * GA访问日志
  */
-export interface ModifyEndpointGroupResponse {
-  /**
-   * <p>任务ID。</p>
-   */
-  TaskId?: string
+export type GlobalAcceleratorAccessLog = null
+
+/**
+ * ModifyAccessLogStatus返回参数结构体
+ */
+export interface ModifyAccessLogStatusResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1994,6 +2273,20 @@ export interface DescribeAccelerateAreasRequest {
    * <p>过滤条件。 accelerate-region- String -（过滤条件）终端节点组地域。</p>
    */
   Filters?: Array<Filter>
+}
+
+/**
+ * CreateAccelerateAreas请求参数结构体
+ */
+export interface CreateAccelerateAreasRequest {
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>加速地域信息。一次最多创建10组加速地域。</p>
+   */
+  AcceleratorAreas: Array<AcceleratorAreas>
 }
 
 /**
@@ -2025,6 +2318,16 @@ export interface DeleteAccelerateAreasRequest {
 }
 
 /**
+ * ModifyGlobalAcceleratorAccessLog返回参数结构体
+ */
+export interface ModifyGlobalAcceleratorAccessLogResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAccelerateAreas返回参数结构体
  */
 export interface DeleteAccelerateAreasResponse {
@@ -2032,6 +2335,42 @@ export interface DeleteAccelerateAreasResponse {
    * 异步任务ID。
    */
   TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeGlobalAcceleratorAclPolicies请求参数结构体
+ */
+export interface DescribeGlobalAcceleratorAclPoliciesRequest {
+  /**
+   * <p>全球加速实例ID。</p>
+   */
+  GlobalAcceleratorId: string
+  /**
+   * <p>偏移量。默认值为0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回数量，默认值为20，最大值为200。</p>
+   */
+  Limit?: string
+}
+
+/**
+ * DescribeGlobalAcceleratorAclPolicies返回参数结构体
+ */
+export interface DescribeGlobalAcceleratorAclPoliciesResponse {
+  /**
+   * <p>访问控制策略信息。</p>
+   */
+  GlobalAcceleratorAclPolicySet?: Array<GlobalAcceleratorAclPolicies>
+  /**
+   * <p>符合条件实例总个数。</p>
+   */
+  TotalCount?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2193,6 +2532,11 @@ export interface DeleteGlobalAcceleratorAclPolicyRequest {
    */
   GlobalAcceleratorAclPolicyId: string
 }
+
+/**
+ * DescribeAccessLogParam请求参数结构体
+ */
+export type DescribeAccessLogParamRequest = null
 
 /**
  * 端口映射

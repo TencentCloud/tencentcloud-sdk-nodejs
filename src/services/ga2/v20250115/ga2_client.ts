@@ -19,9 +19,11 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   DescribeTaskResultResponse,
+  DeleteGlobalAcceleratorAccessLogRequest,
   DescribeEndpointGroupsResponse,
   ReplaceListenerAdditionalCertResponse,
   CreateForwardingRuleRequest,
+  DescribeGlobalAcceleratorAccessLogResponse,
   DescribeForwardingPolicyResponse,
   CreateGlobalAcceleratorRequest,
   DescribeCrossBorderSettlementRequest,
@@ -30,7 +32,9 @@ import {
   CreateAccelerateAreasResponse,
   DescribeEndpointGroupsRequest,
   ResponseHeaders,
+  DescribeGlobalAcceleratorAclRulesRequest,
   DeleteGlobalAcceleratorAclRuleResponse,
+  DescribeAccessLogParamResponse,
   ModifyGlobalAcceleratorResponse,
   RuleAction,
   DeleteEndpointGroupsRequest,
@@ -39,10 +43,13 @@ import {
   ModifyGlobalAcceleratorAclPolicyRequest,
   EndpointGroupConfigurationSet,
   DescribeGlobalAcceleratorsResponse,
+  ModifyGlobalAcceleratorAccessLogRequest,
   DescribeListenersResponse,
   CreateForwardingPolicyRequest,
   DeleteListenerAdditionalCertResponse,
   AclEntries,
+  ModifyForwardingPolicyRequest,
+  DescribeGlobalAcceleratorAccessLogRequest,
   CreateListenerAdditionalCertRequest,
   DeleteListenerAdditionalCertRequest,
   DescribeGlobalAcceleratorsRequest,
@@ -52,10 +59,11 @@ import {
   EndpointConfigurations,
   PortRanges,
   ModifyGlobalAcceleratorAclPolicyResponse,
-  CreateGlobalAcceleratorAclRuleResponse,
+  ModifyAccessLogStatusRequest,
   DeleteListenerRequest,
   CreateGlobalAcceleratorAclPolicyRequest,
   DescribeForwardingRuleRequest,
+  CreateGlobalAcceleratorAccessLogResponse,
   DeleteEndpointGroupsResponse,
   DescribeAccelerateAreasResponse,
   EndpointGroupConfiguration,
@@ -64,10 +72,12 @@ import {
   CreateEndpointGroupRequest,
   CreateEndpointGroupResponse,
   DeleteGlobalAcceleratorResponse,
+  CreateGlobalAcceleratorAclRuleResponse,
   DescribeAccelerateRegionsResponse,
   ForwardingRuleSet,
   CreateForwardingRuleResponse,
   CreateGlobalAcceleratorAclPolicyResponse,
+  CreateGlobalAcceleratorAccessLogRequest,
   ModifyGlobalAcceleratorAclRuleRequest,
   AcceleratorRegionSet,
   CreateListenerResponse,
@@ -77,10 +87,12 @@ import {
   RuleCondition,
   HideResponseHeaders,
   DescribeForwardingRuleResponse,
+  GlobalAcceleratorAclPolicies,
+  GlobalAcceleratorAclRuleSet,
   DeleteGlobalAcceleratorRequest,
   ModifyForwardingRuleRequest,
   ModifyListenerResponse,
-  CreateAccelerateAreasRequest,
+  DeleteGlobalAcceleratorAccessLogResponse,
   DeleteForwardingPolicyRequest,
   CreateListenerRequest,
   DescribeTaskResultRequest,
@@ -89,17 +101,23 @@ import {
   DescribeAccelerateRegionsRequest,
   DeleteForwardingRuleResponse,
   CreateForwardingPolicyResponse,
-  ModifyForwardingPolicyRequest,
+  ForwardingPolicySet,
   ModifyGlobalAcceleratorAclRuleResponse,
   IpAddressInfoSet,
   DeleteForwardingPolicyResponse,
-  ListenerSet,
-  ForwardingPolicySet,
   ModifyEndpointGroupResponse,
+  ListenerSet,
+  DescribeGlobalAcceleratorAclRulesResponse,
+  GlobalAcceleratorAccessLog,
+  ModifyAccessLogStatusResponse,
   DescribeAccelerateAreasRequest,
+  CreateAccelerateAreasRequest,
   DescribeCrossBorderSettlementResponse,
   DeleteAccelerateAreasRequest,
+  ModifyGlobalAcceleratorAccessLogResponse,
   DeleteAccelerateAreasResponse,
+  DescribeGlobalAcceleratorAclPoliciesRequest,
+  DescribeGlobalAcceleratorAclPoliciesResponse,
   ModifyForwardingRuleResponse,
   ModifyAccelerateAreasRequest,
   CreateGlobalAcceleratorResponse,
@@ -109,6 +127,7 @@ import {
   OriginHeader,
   DeleteListenerResponse,
   DeleteGlobalAcceleratorAclPolicyRequest,
+  DescribeAccessLogParamRequest,
   PortOverride,
 } from "./ga2_models"
 
@@ -172,6 +191,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除GA日志任务
+   */
+  async DeleteGlobalAcceleratorAccessLog(
+    req: DeleteGlobalAcceleratorAccessLogRequest,
+    cb?: (error: string, rep: DeleteGlobalAcceleratorAccessLogResponse) => void
+  ): Promise<DeleteGlobalAcceleratorAccessLogResponse> {
+    return this.request("DeleteGlobalAcceleratorAccessLog", req, cb)
+  }
+
+  /**
    * 删除监听器
    */
   async DeleteListener(
@@ -199,6 +228,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCrossBorderSettlementResponse) => void
   ): Promise<DescribeCrossBorderSettlementResponse> {
     return this.request("DescribeCrossBorderSettlement", req, cb)
+  }
+
+  /**
+   * 查看ACL规则
+   */
+  async DescribeGlobalAcceleratorAclRules(
+    req: DescribeGlobalAcceleratorAclRulesRequest,
+    cb?: (error: string, rep: DescribeGlobalAcceleratorAclRulesResponse) => void
+  ): Promise<DescribeGlobalAcceleratorAclRulesResponse> {
+    return this.request("DescribeGlobalAcceleratorAclRules", req, cb)
   }
 
   /**
@@ -252,6 +291,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改GA访问日志
+   */
+  async ModifyGlobalAcceleratorAccessLog(
+    req: ModifyGlobalAcceleratorAccessLogRequest,
+    cb?: (error: string, rep: ModifyGlobalAcceleratorAccessLogResponse) => void
+  ): Promise<ModifyGlobalAcceleratorAccessLogResponse> {
+    return this.request("ModifyGlobalAcceleratorAccessLog", req, cb)
+  }
+
+  /**
    * 修改七层转发规则
    */
   async ModifyForwardingRule(
@@ -289,6 +338,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateGlobalAcceleratorAclPolicyResponse) => void
   ): Promise<CreateGlobalAcceleratorAclPolicyResponse> {
     return this.request("CreateGlobalAcceleratorAclPolicy", req, cb)
+  }
+
+  /**
+   * 查看访问日志上报参数
+   */
+  async DescribeAccessLogParam(
+    req?: DescribeAccessLogParamRequest,
+    cb?: (error: string, rep: DescribeAccessLogParamResponse) => void
+  ): Promise<DescribeAccessLogParamResponse> {
+    return this.request("DescribeAccessLogParam", req, cb)
   }
 
   /**
@@ -382,6 +441,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建GA访问日志
+   */
+  async CreateGlobalAcceleratorAccessLog(
+    req: CreateGlobalAcceleratorAccessLogRequest,
+    cb?: (error: string, rep: CreateGlobalAcceleratorAccessLogResponse) => void
+  ): Promise<CreateGlobalAcceleratorAccessLogResponse> {
+    return this.request("CreateGlobalAcceleratorAccessLog", req, cb)
+  }
+
+  /**
+   * 查看访问控制策略
+   */
+  async DescribeGlobalAcceleratorAclPolicies(
+    req: DescribeGlobalAcceleratorAclPoliciesRequest,
+    cb?: (error: string, rep: DescribeGlobalAcceleratorAclPoliciesResponse) => void
+  ): Promise<DescribeGlobalAcceleratorAclPoliciesResponse> {
+    return this.request("DescribeGlobalAcceleratorAclPolicies", req, cb)
+  }
+
+  /**
    * 删除七层转发规则
    */
   async DeleteForwardingRule(
@@ -399,6 +478,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateForwardingRuleResponse) => void
   ): Promise<CreateForwardingRuleResponse> {
     return this.request("CreateForwardingRule", req, cb)
+  }
+
+  /**
+   * 修改日志任务状态
+   */
+  async ModifyAccessLogStatus(
+    req: ModifyAccessLogStatusRequest,
+    cb?: (error: string, rep: ModifyAccessLogStatusResponse) => void
+  ): Promise<ModifyAccessLogStatusResponse> {
+    return this.request("ModifyAccessLogStatus", req, cb)
+  }
+
+  /**
+   * 查询日志任务
+   */
+  async DescribeGlobalAcceleratorAccessLog(
+    req: DescribeGlobalAcceleratorAccessLogRequest,
+    cb?: (error: string, rep: DescribeGlobalAcceleratorAccessLogResponse) => void
+  ): Promise<DescribeGlobalAcceleratorAccessLogResponse> {
+    return this.request("DescribeGlobalAcceleratorAccessLog", req, cb)
   }
 
   /**

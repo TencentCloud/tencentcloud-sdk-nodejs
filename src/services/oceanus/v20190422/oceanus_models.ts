@@ -1547,62 +1547,77 @@ export interface CreateJobResponse {
  */
 export interface SqlGatewayItem {
   /**
-   * 唯一标识
+   * <p>唯一标识</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SerialId?: string
   /**
-   * Flink内核版本
+   * <p>Flink内核版本</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FlinkVersion?: string
   /**
-   * 状态，1.停止 2. 开启中 3. 开启 4. 开启失败 5. 停止中
+   * <p>状态，1.停止 2. 开启中 3. 开启 4. 开启失败 5. 停止中</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
-   * 创建人
+   * <p>创建人</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreatorUin?: string
   /**
-   * 引用资源
+   * <p>引用资源</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResourceRefs?: Array<GatewayRefItem>
   /**
-   * Cu规格
+   * <p>Cu规格</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CuSpec?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UpdateTime?: string
   /**
-   * 配置参数
+   * <p>配置参数</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Properties?: Array<Property>
   /**
-   * Cpu
+   * <p>Cpu</p>
    */
   Cpu?: number
   /**
-   * Mem
+   * <p>Mem</p>
    */
   Mem?: number
   /**
-   * jdk版本
+   * <p>jdk版本</p>
    */
   JdkVersion?: string
+  /**
+   * <p>session id</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SessionClusterId?: string
+  /**
+   * <p>pg用户名</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PgUser?: string
+  /**
+   * <p>协议</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Endpoints?: Array<SqlGatewayEndpoint>
 }
 
 /**
@@ -5192,6 +5207,28 @@ export interface ExpertModeConfiguration {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SlotSharingGroups?: Array<SlotSharingGroup>
+}
+
+/**
+ * 对外接口访问信息
+ */
+export interface SqlGatewayEndpoint {
+  /**
+   * <p>类型</p><p>枚举值：</p><ul><li>rest： rest</li><li>hiveserver2： hiveserver2</li><li>pg： pg</li></ul>
+   */
+  Type?: string
+  /**
+   * <p>地址</p>
+   */
+  Address?: string
+  /**
+   * <p>是否开启</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>其他信息</p>
+   */
+  Extra?: string
 }
 
 /**

@@ -1743,6 +1743,16 @@ export interface CreateDMSTableRequest {
 }
 
 /**
+ * ModifySparkApp返回参数结构体
+ */
+export interface ModifySparkAppResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DMSTable基本信息
  */
 export interface DMSTable {
@@ -6725,6 +6735,10 @@ export interface CreateUserVpcConnectionResponse {
  */
 export interface DescribeMCPTaskResultResponse {
   /**
+   * <p>任务结果信息</p>
+   */
+  TaskResult?: MCPTaskResultInfo
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -9492,6 +9506,108 @@ engine-id - String - （引擎ID过滤）
 }
 
 /**
+ * mcp 请求任务详情的返回
+ */
+export interface MCPTaskInfo {
+  /**
+   * <p>任务 ID</p>
+   */
+  Id?: string
+  /**
+   * <p>BatchId</p>
+   */
+  BatchId?: string
+  /**
+   * <p>状态</p>
+   */
+  State?: number
+  /**
+   * <p>任务类型</p>
+   */
+  TaskType?: string
+  /**
+   * <p>任务类型</p>
+   */
+  TaskKind?: string
+  /**
+   * <p>引擎详情</p>
+   */
+  EngineTypeDetail?: string
+  /**
+   * <p>SQL 类型</p>
+   */
+  SQLType?: string
+  /**
+   * <p>SQL</p>
+   */
+  SQL?: string
+  /**
+   * <p>是否截断</p>
+   */
+  IsSQLCutOff?: boolean
+  /**
+   * <p>数据库名称</p>
+   */
+  DatabaseName?: string
+  /**
+   * <p>引擎 ID</p>
+   */
+  DataEngineId?: string
+  /**
+   * <p>资源组名称</p>
+   */
+  ResourceGroupName?: string
+  /**
+   * <p>JobId</p>
+   */
+  SparkJobId?: string
+  /**
+   * <p>Job 名称</p>
+   */
+  SparkJobName?: string
+  /**
+   * <p>操作人 Uin</p>
+   */
+  OperateUin?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>开始时间</p>
+   */
+  StartTime?: string
+  /**
+   * <p>结束时间</p>
+   */
+  EndTime?: string
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>引擎耗时</p><p>单位：毫秒</p>
+   */
+  UsedTime?: number
+  /**
+   * <p>执行总耗时</p><p>单位：毫秒</p>
+   */
+  TotalTime?: number
+  /**
+   * <p>进度</p>
+   */
+  Progress?: number
+  /**
+   * <p>输出信息</p>
+   */
+  OutputMessage?: string
+  /**
+   * <p>结果集</p>
+   */
+  DataSet?: string
+}
+
+/**
  * CreateTasks返回参数结构体
  */
 export interface CreateTasksResponse {
@@ -9769,6 +9885,10 @@ export interface ListTaskJobLogDetailResponse {
  * DescribeMCPTask返回参数结构体
  */
 export interface DescribeMCPTaskResponse {
+  /**
+   * <p>任务详细信息</p>
+   */
+  TaskInfo?: MCPTaskInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11467,13 +11587,53 @@ export interface RegisterThirdPartyAccessUserResponse {
 }
 
 /**
- * ModifySparkApp返回参数结构体
+ * MCP 任务结果返回
  */
-export interface ModifySparkAppResponse {
+export interface MCPTaskResultInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>任务 ID</p>
    */
-  RequestId?: string
+  TaskId?: string
+  /**
+   * <p>状态</p>
+   */
+  State?: number
+  /**
+   * <p>结果集 Schema</p>
+   */
+  ResultSchema?: Array<Column>
+  /**
+   * <p>结果集</p>
+   */
+  ResultSet?: string
+  /**
+   * <p>是否还有其他结果</p>
+   */
+  NextToken?: string
+  /**
+   * <p>影响行数</p>
+   */
+  RowAffectInfo?: string
+  /**
+   * <p>输出信息</p>
+   */
+  OutputMessage?: string
+  /**
+   * <p>展示 format</p>
+   */
+  DisplayFormat?: string
+  /**
+   * <p>能否下载</p>
+   */
+  CanDownload?: boolean
+  /**
+   * <p>结果花费时间</p><p>单位：毫秒</p>
+   */
+  QueryResultTime?: number
+  /**
+   * <p>是否超大</p>
+   */
+  IsResultOversize?: boolean
 }
 
 /**
@@ -13090,7 +13250,12 @@ export interface UpdateDataEngineConfigRequest {
 /**
  * DescribeMCPTaskResult请求参数结构体
  */
-export type DescribeMCPTaskResultRequest = null
+export interface DescribeMCPTaskResultRequest {
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId: string
+}
 
 /**
  * DropDMSTable请求参数结构体
@@ -13256,7 +13421,12 @@ export interface UserMessage {
 /**
  * DescribeMCPTask请求参数结构体
  */
-export type DescribeMCPTaskRequest = null
+export interface DescribeMCPTaskRequest {
+  /**
+   * <p>任务 ID</p>
+   */
+  TaskId?: string
+}
 
 /**
  * SwitchDataEngineImage请求参数结构体

@@ -1014,29 +1014,37 @@ export interface AiReviewTaskProhibitedOcrResult {
 }
 
 /**
- * DescribeSubtitleEmbedTemplates请求参数结构体
+ * DescribeSmartSubtitleTemplates请求参数结构体
  */
-export interface DescribeSubtitleEmbedTemplatesRequest {
+export interface DescribeSmartSubtitleTemplatesRequest {
   /**
-   * <p>智能字幕模板唯一标识过滤条件，数组长度限制：100。</p>
+   * 智能字幕模板唯一标识过滤条件，数组长度限制：100。
    */
   Definitions?: Array<number | bigint>
   /**
-   * <p>分页偏移量，默认值：0。</p>
+   * 分页偏移量，默认值：0。
    */
   Offset?: number
   /**
-   * <p>返回记录条数，默认值：10，最大值：100。</p>
+   * 返回记录条数，默认值：10，最大值：100。
    */
   Limit?: number
   /**
-   * <p>模板类型过滤条件，不填则返回所有，可选值：</p><ul><li>Preset：系统预置模板；</li><li>Custom：用户自定义模板。</li></ul>
+   * 模板类型过滤条件，不填则返回所有，可选值：
+   * Preset：系统预置模板；
+   * Custom：用户自定义模板。
    */
   Type?: string
   /**
-   * <p>字幕压制模板标识过滤条件，长度限制：64 个字符。</p>
+   * 智能字幕模板标识过滤条件，长度限制：64 个字符。
    */
   Name?: string
+  /**
+   * 字幕处理类型：
+- 0：ASR识别字幕
+- 1：纯字幕翻译
+   */
+  ProcessType?: number
 }
 
 /**
@@ -1080,24 +1088,18 @@ export interface AsrHotwordsSetItem {
 }
 
 /**
- * Ocr 文字涉违禁信息
+ * 大模型修复
  */
-export interface AiReviewProhibitedOcrTaskOutput {
+export interface AiRestorationConfig {
   /**
-   * Ocr 文字涉违禁评分，分值为0到100。
+   * <p>能力配置开关</p><p>枚举值：</p><ul><li>ON： 开启</li><li>OFF： 关闭</li></ul><p>默认值：OFF</p>
    */
-  Confidence?: number
+  Switch?: string
   /**
-   * Ocr 文字涉违禁结果建议，取值范围：
-<li>pass。</li>
-<li>review。</li>
-<li>block。</li>
+   * <p>强度类型</p><p>枚举值：</p><ul><li>weak： 弱</li><li>normal： 中</li><li>strong： 强</li></ul><p>默认值：normal</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Suggestion?: string
-  /**
-   * Ocr 文字有涉违禁嫌疑的视频片段列表。
-   */
-  SegmentSet?: Array<MediaContentReviewOcrTextSegmentItem>
+  Type?: string
 }
 
 /**
@@ -2564,79 +2566,70 @@ export interface DeleteAIRecognitionTemplateResponse {
  */
 export interface VideoEnhanceConfig {
   /**
-   * 插帧帧率配置（旧）。新用户建议使用FrameRateWithDen配置插帧帧率，支持分数，且效果更好。注意，FrameRate 与FrameRateWithDen 只能二选一，同时配置可能导致任务失败。源帧率大于等于目标帧率时能力不会生效。
-
+   * <p>插帧帧率配置（旧）。新用户建议使用FrameRateWithDen配置插帧帧率，支持分数，且效果更好。注意，FrameRate 与FrameRateWithDen 只能二选一，同时配置可能导致任务失败。源帧率大于等于目标帧率时能力不会生效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FrameRate?: FrameRateConfig
   /**
-   * 超分配置。源分辨率高于目标分辨率时不对视频做处理。注意与大模型增强不可同时开启。
-
+   * <p>超分配置。源分辨率高于目标分辨率时不对视频做处理。注意与大模型增强不可同时开启。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SuperResolution?: SuperResolutionConfig
   /**
-   * HDR配置。
+   * <p>HDR配置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Hdr?: HdrConfig
   /**
-   * 视频降噪配置。注意与大模型增强不可同时开启。
-
+   * <p>视频降噪配置。注意与大模型增强不可同时开启。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Denoise?: VideoDenoiseConfig
   /**
-   * 综合增强配置。注意大模型、综合增强、去毛刺三项里最多配置一项
+   * <p>综合增强配置。注意大模型、综合增强、去毛刺三项里最多配置一项</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageQualityEnhance?: ImageQualityEnhanceConfig
   /**
-   * 色彩增强配置。
+   * <p>色彩增强配置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ColorEnhance?: ColorEnhanceConfig
   /**
-   * 低光照增强配置。
+   * <p>低光照增强配置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LowLightEnhance?: LowLightEnhanceConfig
   /**
-   * 去划痕配置。
+   * <p>去划痕配置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ScratchRepair?: ScratchRepairConfig
   /**
-   * 去伪影（毛刺）配置。注意大模型、综合增强、去毛刺三项里最多配置一项
+   * <p>去伪影（毛刺）配置。注意大模型、综合增强、去毛刺三项里最多配置一项</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ArtifactRepair?: ArtifactRepairConfig
   /**
-   * 增强场景配置，可选值：
-<li>common（通用），通用增强参数，适用于各种视频类型的基础优化参数，提升整体画质。</li>
-<li>AIGC，整体分辨率提升，利用AI技术提升视频整体分辨率，增强画面清晰度。</li>
-<li>short_play（短剧），增强面部与字幕细节，突出人物面部表情细节和字幕清晰度，提升观剧体验。</li>
-<li>short_video（短视频），优化复杂多样的画质问题，针对短视频的复杂场景，优化画质，解决多种视觉问题。</li>
-<li>game（游戏视频），修复运动模糊，提升细节，重点提升游戏细节清晰度，恢复运动模糊区域，使游戏画面内容更清晰，更丰富。</li>
-<li>HD_movie_series（超高清影视剧），获得超高清流畅效果，针对广电/OTT超高清视频的诉求，生成4K 60fps HDR的超高清标准视频。支持广电场景格式标准要求。</li>
-<li>LQ_material（低清素材/老片修复），整体分辨率提升，针对老旧视频由于拍摄年代较久存在的分辨率不足、模糊失真、划痕损伤和色温等问题进行专门优化。</li>
-<li>lecture（秀场/电商/大会/讲座），美化提升面部效果，针对秀场/电商/大会/讲座等存在人物进行讲解的场景，进行人脸区域、噪声消除、毛刺处理的专门优化。</li>
-<li>填空字符串代表不使用增强场景</li>
+   * <p>增强场景配置，可选值：</p><li>common（通用），通用增强参数，适用于各种视频类型的基础优化参数，提升整体画质。</li><li>AIGC，整体分辨率提升，利用AI技术提升视频整体分辨率，增强画面清晰度。</li><li>short_play（短剧 &amp; AI 仿真人剧），增强面部与字幕细节，突出人物面部表情细节和字幕清晰度，提升观剧体验。</li><li>ai_comic（AI漫剧），增强漫画风格画面细节。</li><li>short_video（短视频），优化复杂多样的画质问题，针对短视频的复杂场景，优化画质，解决多种视觉问题。</li><li>game（游戏视频），修复运动模糊，提升细节，重点提升游戏细节清晰度，恢复运动模糊区域，使游戏画面内容更清晰，更丰富。</li><li>HD_movie_series（超高清影视剧），获得超高清流畅效果，针对广电/OTT超高清视频的诉求，生成4K 60fps HDR的超高清标准视频。支持广电场景格式标准要求。</li><li>LQ_material（低清素材/老片修复），整体分辨率提升，针对老旧视频由于拍摄年代较久存在的分辨率不足、模糊失真、划痕损伤和色温等问题进行专门优化。</li><li>lecture（秀场/电商/大会/讲座），美化提升面部效果，针对秀场/电商/大会/讲座等存在人物进行讲解的场景，进行人脸区域、噪声消除、毛刺处理的专门优化。</li><li>填空字符串代表不使用增强场景</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EnhanceSceneType?: string
   /**
-   * 大模型增强配置。注意大模型、综合增强、去毛刺三项里最多配置一项。且不可与超分、降噪同时开启。
-
+   * <p>大模型增强配置。注意大模型、综合增强、去毛刺三项里最多配置一项。且不可与超分、降噪同时开启。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DiffusionEnhance?: DiffusionEnhanceConfig
   /**
-   * 新插帧帧率配置，支持分数。注意与FrameRate二选一。源帧率大于等于目标帧率时能力不会生效。
-
+   * <p>新插帧帧率配置，支持分数。注意与FrameRate二选一。源帧率大于等于目标帧率时能力不会生效。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FrameRateWithDen?: FrameRateWithDenConfig
+  /**
+   * <p>大模型修复配置。注意大模型、综合增强、去毛刺三项里最多配置一项。且不可与超分、降噪同时开启。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AiRestoration?: AiRestorationConfig
 }
 
 /**
@@ -4048,6 +4041,10 @@ export interface SubtitleTransResultItem {
    * <p>翻译字幕压制视频路径。</p>
    */
   SubtitleEmbedPath?: string
+  /**
+   * <p>字幕文件FileId。</p>
+   */
+  SubtitleFileId?: string
 }
 
 /**
@@ -4894,37 +4891,24 @@ export interface DescribeFlowId {
 }
 
 /**
- * DescribeSmartSubtitleTemplates请求参数结构体
+ * Ocr 文字涉违禁信息
  */
-export interface DescribeSmartSubtitleTemplatesRequest {
+export interface AiReviewProhibitedOcrTaskOutput {
   /**
-   * 智能字幕模板唯一标识过滤条件，数组长度限制：100。
+   * Ocr 文字涉违禁评分，分值为0到100。
    */
-  Definitions?: Array<number | bigint>
+  Confidence?: number
   /**
-   * 分页偏移量，默认值：0。
+   * Ocr 文字涉违禁结果建议，取值范围：
+<li>pass。</li>
+<li>review。</li>
+<li>block。</li>
    */
-  Offset?: number
+  Suggestion?: string
   /**
-   * 返回记录条数，默认值：10，最大值：100。
+   * Ocr 文字有涉违禁嫌疑的视频片段列表。
    */
-  Limit?: number
-  /**
-   * 模板类型过滤条件，不填则返回所有，可选值：
-   * Preset：系统预置模板；
-   * Custom：用户自定义模板。
-   */
-  Type?: string
-  /**
-   * 智能字幕模板标识过滤条件，长度限制：64 个字符。
-   */
-  Name?: string
-  /**
-   * 字幕处理类型：
-- 0：ASR识别字幕
-- 1：纯字幕翻译
-   */
-  ProcessType?: number
+  SegmentSet?: Array<MediaContentReviewOcrTextSegmentItem>
 }
 
 /**
@@ -6185,23 +6169,27 @@ export interface WatermarkTemplate {
  */
 export interface ImageProcessTaskOutput {
   /**
-   * 输出文件的路径。
+   * <p>输出文件的路径。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Path?: string
   /**
-   * 输出文件的存储位置。
+   * <p>输出文件的存储位置。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OutputStorage?: TaskOutputStorage
   /**
-   * 输出文件的URL。
+   * <p>输出文件的URL。</p>
    */
   SignedUrl?: string
   /**
-   * 图生文任务的处理结果。
+   * <p>图生文任务的处理结果。</p>
    */
   Content?: string
+  /**
+   * <p>VOD标准版FileId</p>
+   */
+  FileId?: string
 }
 
 /**
@@ -9068,7 +9056,7 @@ export interface CreateAigcAudioTaskRequest {
    */
   ExtraParameters?: AigcAudioExtraParam
   /**
-   * <p>用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。<br>示例MinimaxMusic模型传入歌词时：<br>{"lyric":{"小马在快乐奔跑，花儿在开放"}}</p>
+   * <p>用于传入一些模型需要的特殊场景参数，Json格式序列化成字符串。<br>示例MinimaxMusic模型传入歌词时：<br>{"lyric":{"小马在快乐奔跑，花儿在开放"}}</p><ol><li>MiniMaxMusic生纯音乐参数使用示例: &quot;AdditionalParameters&quot;:&quot;{"is_instrumental":true}&quot;</li></ol>
    */
   AdditionalParameters?: string
   /**
@@ -9432,6 +9420,14 @@ export interface AiAnalysisTaskDubbingOutput {
    * <p>额外结果，目前包含字幕文件结果 Url</p>
    */
   ExtraOutput?: string
+  /**
+   * <p>译制视频FileId。</p>
+   */
+  VideoFileId?: string
+  /**
+   * <p>标记文件FileId。</p>
+   */
+  SpeakerFileId?: string
 }
 
 /**
@@ -11193,25 +11189,33 @@ export interface DeleteContentReviewTemplateResponse {
 }
 
 /**
- * 媒体处理 VOD （点播专业版）对象信息。
+ * 媒体处理 VOD 对象信息。
  */
 export interface VODInputInfo {
   /**
-   * 媒体处理对象文件所在的 *Bucket ID*
+   * <p>媒体处理对象文件所在的 <em>Bucket ID</em></p>
    */
   Bucket?: string
   /**
-   * 媒体处理对象文件所在的 Bucket 所属园区
+   * <p>媒体处理对象文件所在的 Bucket 所属园区</p>
    */
   Region?: string
   /**
-   * 媒体处理对象文件的输入路径
+   * <p>媒体处理对象文件的输入路径</p>
    */
   Object?: string
   /**
-   * 点播专业版应用Id
+   * <p>点播应用Id。</p>
    */
   SubAppId?: number
+  /**
+   * <p>是否使用VOD标准版。<br>注意：不填表示使用VOD专业版。</p><p>枚举值：</p><ul><li>0： 使用VOD专业版</li><li>1： 使用VOD标准版，可使用FileId发起任务</li></ul><p>默认值：0</p>
+   */
+  VodBasic?: number
+  /**
+   * <p>VOD标准版FileId</p>
+   */
+  FileId?: string
 }
 
 /**
@@ -12925,6 +12929,32 @@ export interface EnableScheduleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeSubtitleEmbedTemplates请求参数结构体
+ */
+export interface DescribeSubtitleEmbedTemplatesRequest {
+  /**
+   * <p>智能字幕模板唯一标识过滤条件，数组长度限制：100。</p>
+   */
+  Definitions?: Array<number | bigint>
+  /**
+   * <p>分页偏移量，默认值：0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回记录条数，默认值：10，最大值：100。</p>
+   */
+  Limit?: number
+  /**
+   * <p>模板类型过滤条件，不填则返回所有，可选值：</p><ul><li>Preset：系统预置模板；</li><li>Custom：用户自定义模板。</li></ul>
+   */
+  Type?: string
+  /**
+   * <p>字幕压制模板标识过滤条件，长度限制：64 个字符。</p>
+   */
+  Name?: string
 }
 
 /**
@@ -16769,6 +16799,18 @@ export interface AiAnalysisTaskDelLogoOutput {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VoiceClonedMarkFile?: string
+  /**
+   * <p>擦除后文件的FileId。</p>
+   */
+  FileId?: string
+  /**
+   * <p>基于画面提取的字幕文件FileId。</p>
+   */
+  OriginSubtitleFileId?: string
+  /**
+   * <p>基于画面提取的字幕翻译文件FileId    。</p>
+   */
+  TranslateSubtitleFileId?: string
 }
 
 /**
@@ -19900,7 +19942,7 @@ export interface ModifyStreamLinkInputResponse {
 }
 
 /**
- * 媒体处理 VOD（点播专业版） 输出对象信息。
+ * 媒体处理 VOD输出对象信息。
  */
 export interface VODOutputStorage {
   /**
@@ -19912,9 +19954,13 @@ export interface VODOutputStorage {
    */
   Region?: string
   /**
-   * <p>点播专业版应用Id</p>
+   * <p>点播应用Id</p>
    */
   SubAppId?: number
+  /**
+   * <p>任务输出是否使用VOD标准版。<br>注意：不填表示使用VOD专业版。</p><p>枚举值：</p><ul><li>0： 不使用VOD标准版</li><li>1： 使用VOD标准版</li></ul>
+   */
+  VodBasic?: number
 }
 
 /**
@@ -26377,6 +26423,10 @@ export interface SubtitleResult {
    * <p>字幕压制视频路径。</p>
    */
   SubtitleEmbedPath?: string
+  /**
+   * <p>字幕文件FileId。</p>
+   */
+  SubtitleFileId?: string
 }
 
 /**
