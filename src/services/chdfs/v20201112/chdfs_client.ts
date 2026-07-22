@@ -19,7 +19,8 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   CreateFileSystemResponse,
-  ModifyResourceTagsRequest,
+  PathProtectionRule,
+  DescribeTrashConfigResponse,
   DescribeAccessRulesRequest,
   CreateTrashConfigResponse,
   TrashConfig,
@@ -30,9 +31,11 @@ import {
   ModifyFileSystemRequest,
   DescribeLifeCycleRulesRequest,
   ModifyTrashConfigRequest,
-  Summary,
+  CreatePathProtectionRuleRequest,
   AssociateAccessGroupsRequest,
   ModifyAccessGroupRequest,
+  DeletePathProtectionRuleRequest,
+  DescribePathProtectionRulesResponse,
   DescribeFileSystemsResponse,
   DescribeFileSystemRequest,
   CreateMountPointRequest,
@@ -44,13 +47,14 @@ import {
   DescribeMountPointRequest,
   DescribeAccessGroupsRequest,
   DeleteAccessGroupResponse,
-  ModifyLifeCycleRulesResponse,
+  DescribeRestoreTasksResponse,
   Transition,
   DeleteMountPointResponse,
   CreateMountPointResponse,
   CreateFileSystemRequest,
   DisassociateAccessGroupsRequest,
   DescribeResourceTagsResponse,
+  ModifyResourceTagsRequest,
   DescribeAccessGroupsResponse,
   DeleteMountPointRequest,
   DeleteFileSystemResponse,
@@ -63,24 +67,29 @@ import {
   DescribeAccessRulesResponse,
   DeleteLifeCycleRulesResponse,
   CreateRestoreTasksRequest,
-  DescribeTrashConfigResponse,
-  DescribeRestoreTasksResponse,
+  DescribeMountPointResponse,
+  DescribePathProtectionRulesRequest,
+  DeletePathProtectionRuleResponse,
   DescribeLifeCycleRulesResponse,
   CreateAccessGroupResponse,
   DisassociateAccessGroupsResponse,
   ModifyTrashConfigResponse,
   DeleteAccessRulesRequest,
   DeleteAccessRulesResponse,
+  ModifyLifeCycleRulesResponse,
   DescribeFileSystemsRequest,
   DeleteTrashConfigResponse,
   DescribeResourceTagsRequest,
   ModifyResourceTagsResponse,
+  ModifyPathProtectionRuleRequest,
   LifeCycleRule,
   CreateAccessRulesRequest,
   DescribeAccessGroupResponse,
+  Summary,
   MountPoint,
   DescribeTrashConfigRequest,
   DescribeMountPointsResponse,
+  ModifyPathProtectionRuleResponse,
   DescribeRestoreTasksRequest,
   DescribeAccessGroupRequest,
   AssociateAccessGroupsResponse,
@@ -93,7 +102,7 @@ import {
   ModifyAccessRulesRequest,
   CreateAccessGroupRequest,
   CreateTrashConfigRequest,
-  DescribeMountPointResponse,
+  CreatePathProtectionRuleResponse,
 } from "./chdfs_models"
 
 /**
@@ -316,6 +325,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除路径保护规则。
+   */
+  async DeletePathProtectionRule(
+    req: DeletePathProtectionRuleRequest,
+    cb?: (error: string, rep: DeletePathProtectionRuleResponse) => void
+  ): Promise<DeletePathProtectionRuleResponse> {
+    return this.request("DeletePathProtectionRule", req, cb)
+  }
+
+  /**
    * 批量删除生命周期规则。
    */
   async DeleteLifeCycleRules(
@@ -333,6 +352,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAccessRulesResponse) => void
   ): Promise<CreateAccessRulesResponse> {
     return this.request("CreateAccessRules", req, cb)
+  }
+
+  /**
+   * 通过文件系统ID查看路径保护规则列表。
+   */
+  async DescribePathProtectionRules(
+    req: DescribePathProtectionRulesRequest,
+    cb?: (error: string, rep: DescribePathProtectionRulesResponse) => void
+  ): Promise<DescribePathProtectionRulesResponse> {
+    return this.request("DescribePathProtectionRules", req, cb)
   }
 
   /**
@@ -396,6 +425,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 创建路径保护规则。
+   */
+  async CreatePathProtectionRule(
+    req: CreatePathProtectionRuleRequest,
+    cb?: (error: string, rep: CreatePathProtectionRuleResponse) => void
+  ): Promise<CreatePathProtectionRuleResponse> {
+    return this.request("CreatePathProtectionRule", req, cb)
+  }
+
+  /**
    * 修改资源标签列表，全量覆盖。
    */
   async ModifyResourceTags(
@@ -433,5 +472,15 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateAccessGroupResponse) => void
   ): Promise<CreateAccessGroupResponse> {
     return this.request("CreateAccessGroup", req, cb)
+  }
+
+  /**
+   * 修改路径保护规则属性，需要指定路径保护规则ID，支持修改规则名称、路径和状态。
+   */
+  async ModifyPathProtectionRule(
+    req: ModifyPathProtectionRuleRequest,
+    cb?: (error: string, rep: ModifyPathProtectionRuleResponse) => void
+  ): Promise<ModifyPathProtectionRuleResponse> {
+    return this.request("ModifyPathProtectionRule", req, cb)
   }
 }

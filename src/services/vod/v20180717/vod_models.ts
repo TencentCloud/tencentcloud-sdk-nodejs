@@ -17647,6 +17647,10 @@ export interface AigcVideoRedrawTaskInput {
    */
   FileInfo?: AigcVideoRedrawTaskInputFileInfo
   /**
+   * <p>AIGC 视频转绘任务参数信息。</p>
+   */
+  TaskInfo?: AigcVideoRedrawTaskInfo
+  /**
    * <p>AIGC 视频转绘输出配置。</p>
    */
   OutputConfig?: AigcVideoRedrawOutputConfig
@@ -22573,6 +22577,16 @@ export interface ProhibitedOcrReviewTemplateInfoForUpdate {
    * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * AIGC 视频转绘人物参数信息。
+ */
+export interface AigcVideoRedrawTaskInfo {
+  /**
+   * <p>用于描述转绘风格。限制50字符。</p>
+   */
+  Style?: string
 }
 
 /**

@@ -39,9 +39,10 @@ import {
   DescribeDataEngineEventsResponse,
   SessionResourceTemplate,
   DeleteNativeSparkSessionResponse,
-  ElasticPlan,
+  AlterTableCommentResponse,
   DescribeDMSPartitionsRequest,
   DescribeDMSTableResponse,
+  AlterTableCommentRequest,
   CreateTasksInOrderRequest,
   DescribeUpdatableDataEnginesResponse,
   DataEngineImageSessionParameter,
@@ -52,6 +53,7 @@ import {
   DescribeAdvancedStoreLocationResponse,
   DescribeTablesNameResponse,
   DescribeAdvancedStoreLocationRequest,
+  DeleteMetaDatabaseRequest,
   CancelNotebookSessionStatementBatchResponse,
   SmartOptimizerChangeTablePolicy,
   BatchSqlTask,
@@ -62,6 +64,7 @@ import {
   SetOptimizerPolicyRequest,
   UpdateDataEngineRequest,
   SmartOptimizerWrittenPolicy,
+  DescribeDatabaseResponse,
   DescribeSparkAppJobsRequest,
   DeleteNotebookSessionRequest,
   CreateDMSTableResponse,
@@ -103,7 +106,7 @@ import {
   DeleteStandardEngineResourceGroupResponse,
   DescribeTaskResultRequest,
   UpdateUserDataEngineConfigRequest,
-  RollbackDataEngineImageRequest,
+  DeleteMetaDatabaseResponse,
   DescribeUsersResponse,
   RevokeDLCCatalogAccessRequest,
   DataGovernPolicy,
@@ -113,6 +116,7 @@ import {
   DescribeTablesRequest,
   CreateStoreLocationRequest,
   DescribeLakeFsInfoResponse,
+  ElasticPlan,
   ModifyWorkGroupResponse,
   DescribeDMSPartitionsResponse,
   DescribeStandardEngineResourceGroupConfigInfoResponse,
@@ -143,6 +147,7 @@ import {
   CreateResultDownloadRequest,
   DescribeNotebookSessionStatementSqlResultResponse,
   PauseStandardEngineResourceGroupsRequest,
+  GenerateInternalTableRequest,
   UpdateStandardEngineResourceGroupConfigInfoRequest,
   ModifyUserRequest,
   DescribeTasksCostInfoResponse,
@@ -169,7 +174,7 @@ import {
   DataEngineConfigInstanceInfo,
   CrontabResumeSuspendStrategy,
   TableExpirationPolicy,
-  VpcInfo,
+  CreateMetaDatabaseRequest,
   CustomConfig,
   NotebookSessions,
   CreateNotebookSessionStatementSupportBatchSQLRequest,
@@ -222,6 +227,7 @@ import {
   WorkGroups,
   CreateNotebookSessionStatementResponse,
   ListTaskJobLogNameResponse,
+  GenerateInternalTableResponse,
   DescribeClusterMonitorInfosResponse,
   DescribeLakeFsTaskResultRequest,
   OtherCHDFSBinding,
@@ -259,6 +265,7 @@ import {
   GetOptimizerPolicyResponse,
   AnalysisTaskResults,
   UnbindWorkGroupsFromUserResponse,
+  MetaDatabaseInfo,
   AlterDMSDatabaseResponse,
   CancelNotebookSessionStatementResponse,
   DataEngineInfo,
@@ -311,6 +318,7 @@ import {
   CheckDataEngineImageCanBeUpgradeResponse,
   CreateInternalTableRequest,
   TasksInfo,
+  RollbackDataEngineImageRequest,
   AttachWorkGroupPolicyRequest,
   StatementOutput,
   CreateUserResponse,
@@ -368,6 +376,7 @@ import {
   NetworkConnection,
   CreateUserRequest,
   ModifyWorkGroupRequest,
+  DescribeDatabaseRequest,
   UpdateStandardEngineResourceGroupBaseInfoResponse,
   SmartPolicyBaseInfo,
   DescribeDatabasesResponse,
@@ -398,6 +407,8 @@ import {
   CreateSparkAppRequest,
   CreateSparkSessionBatchSQLRequest,
   ListTaskJobLogDetailResponse,
+  CreateMetaDatabaseResponse,
+  VpcInfo,
   DescribeMCPTaskResponse,
   DescribeSubUserAccessPolicyRequest,
   HouseEventsInfo,
@@ -692,6 +703,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDataMaskStrategiesResponse) => void
   ): Promise<DescribeDataMaskStrategiesResponse> {
     return this.request("DescribeDataMaskStrategies", req, cb)
+  }
+
+  /**
+   * 本接口（DeleteMetaDatabase）用于一键删除元数据库
+   */
+  async DeleteMetaDatabase(
+    req: DeleteMetaDatabaseRequest,
+    cb?: (error: string, rep: DeleteMetaDatabaseResponse) => void
+  ): Promise<DeleteMetaDatabaseResponse> {
+    return this.request("DeleteMetaDatabase", req, cb)
   }
 
   /**
@@ -1135,13 +1156,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 元数据锁
+   * 修改表备注
    */
-  async LockMetaData(
-    req: LockMetaDataRequest,
-    cb?: (error: string, rep: LockMetaDataResponse) => void
-  ): Promise<LockMetaDataResponse> {
-    return this.request("LockMetaData", req, cb)
+  async AlterTableComment(
+    req: AlterTableCommentRequest,
+    cb?: (error: string, rep: AlterTableCommentResponse) => void
+  ): Promise<AlterTableCommentResponse> {
+    return this.request("AlterTableComment", req, cb)
   }
 
   /**
@@ -1182,6 +1203,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeScriptsResponse) => void
   ): Promise<DescribeScriptsResponse> {
     return this.request("DescribeScripts", req, cb)
+  }
+
+  /**
+   * 建表
+   */
+  async GenerateInternalTable(
+    req: GenerateInternalTableRequest,
+    cb?: (error: string, rep: GenerateInternalTableResponse) => void
+  ): Promise<GenerateInternalTableResponse> {
+    return this.request("GenerateInternalTable", req, cb)
   }
 
   /**
@@ -1665,6 +1696,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（CreateMetaDatabase）用于创建元数据库
+   */
+  async CreateMetaDatabase(
+    req: CreateMetaDatabaseRequest,
+    cb?: (error: string, rep: CreateMetaDatabaseResponse) => void
+  ): Promise<CreateMetaDatabaseResponse> {
+    return this.request("CreateMetaDatabase", req, cb)
+  }
+
+  /**
    * 创建工作组
    */
   async CreateWorkGroup(
@@ -1924,6 +1965,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDataEngineImageVersionsResponse) => void
   ): Promise<DescribeDataEngineImageVersionsResponse> {
     return this.request("DescribeDataEngineImageVersions", req, cb)
+  }
+
+  /**
+   * 元数据锁
+   */
+  async LockMetaData(
+    req: LockMetaDataRequest,
+    cb?: (error: string, rep: LockMetaDataResponse) => void
+  ): Promise<LockMetaDataResponse> {
+    return this.request("LockMetaData", req, cb)
   }
 
   /**
@@ -2194,6 +2245,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeMCPTaskResponse) => void
   ): Promise<DescribeMCPTaskResponse> {
     return this.request("DescribeMCPTask", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDatabase）,查询数据库详细信息
+   */
+  async DescribeDatabase(
+    req: DescribeDatabaseRequest,
+    cb?: (error: string, rep: DescribeDatabaseResponse) => void
+  ): Promise<DescribeDatabaseResponse> {
+    return this.request("DescribeDatabase", req, cb)
   }
 
   /**

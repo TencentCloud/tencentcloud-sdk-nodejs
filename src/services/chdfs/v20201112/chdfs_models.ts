@@ -30,17 +30,43 @@ export interface CreateFileSystemResponse {
 }
 
 /**
- * ModifyResourceTags请求参数结构体
+ * 路径保护规则
  */
-export interface ModifyResourceTagsRequest {
+export interface PathProtectionRule {
   /**
-   * 文件系统ID
+   * 路径保护规则ID
    */
-  FileSystemId: string
+  PathProtectionRuleId: number
   /**
-   * 多个资源标签，可以为空数组
+   * 规则名称
    */
-  Tags?: Array<Tag>
+  Name: string
+  /**
+   * 指定保护路径
+   */
+  Path: string
+  /**
+   * 规则状态（1：打开；2：关闭）
+   */
+  Status: number
+  /**
+   * 创建时间
+   */
+  CreateTime: string
+}
+
+/**
+ * DescribeTrashConfig返回参数结构体
+ */
+export interface DescribeTrashConfigResponse {
+  /**
+   * <p>回收站配置</p>
+   */
+  TrashConfig?: TrashConfig
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -257,33 +283,25 @@ export interface ModifyTrashConfigRequest {
 }
 
 /**
- * 生命周期规则当前路径具体存储量信息
+ * CreatePathProtectionRule请求参数结构体
  */
-export interface Summary {
+export interface CreatePathProtectionRuleRequest {
   /**
-   * 已使用容量（byte）
+   * 文件系统ID
    */
-  CapacityUsed?: number
+  FileSystemId: string
   /**
-   * 已使用COS标准存储容量（byte）
+   * 规则名称
    */
-  StandardCapacityUsed?: number
+  Name: string
   /**
-   * 已使用COS低频存储容量（byte）
+   * 指定保护路径
    */
-  DegradeCapacityUsed?: number
+  Path: string
   /**
-   * 已使用COS归档存储容量（byte）
+   * 规则状态（1：打开；2：关闭）
    */
-  ArchiveCapacityUsed?: number
-  /**
-   * 已使用COS深度归档存储容量（byte）
-   */
-  DeepArchiveCapacityUsed?: number
-  /**
-   * 已使用COS智能分层存储容量（byte）
-   */
-  IntelligentCapacityUsed?: number
+  Status: number
 }
 
 /**
@@ -316,6 +334,30 @@ export interface ModifyAccessGroupRequest {
    * 权限组描述
    */
   Description?: string
+}
+
+/**
+ * DeletePathProtectionRule请求参数结构体
+ */
+export interface DeletePathProtectionRuleRequest {
+  /**
+   * 路径保护规则ID
+   */
+  PathProtectionRuleId: number
+}
+
+/**
+ * DescribePathProtectionRules返回参数结构体
+ */
+export interface DescribePathProtectionRulesResponse {
+  /**
+   * 路径保护规则列表
+   */
+  PathProtectionRules: Array<PathProtectionRule>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -467,9 +509,21 @@ export interface DeleteAccessGroupResponse {
 }
 
 /**
- * ModifyLifeCycleRules返回参数结构体
+ * DescribeRestoreTasks返回参数结构体
  */
-export interface ModifyLifeCycleRulesResponse {
+export interface DescribeRestoreTasksResponse {
+  /**
+   * 回热任务列表
+   */
+  RestoreTasks?: Array<RestoreTask>
+  /**
+   * 标识是否已获取全量
+   */
+  IsOver?: boolean
+  /**
+   * 下一次请求起始回热任务ID标记
+   */
+  NextRestoreTaskIdMarker?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -586,6 +640,20 @@ export interface DescribeResourceTagsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyResourceTags请求参数结构体
+ */
+export interface ModifyResourceTagsRequest {
+  /**
+   * 文件系统ID
+   */
+  FileSystemId: string
+  /**
+   * 多个资源标签，可以为空数组
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -813,13 +881,13 @@ export interface CreateRestoreTasksRequest {
 }
 
 /**
- * DescribeTrashConfig返回参数结构体
+ * DescribeMountPoint返回参数结构体
  */
-export interface DescribeTrashConfigResponse {
+export interface DescribeMountPointResponse {
   /**
-   * <p>回收站配置</p>
+   * 挂载点
    */
-  TrashConfig?: TrashConfig
+  MountPoint?: MountPoint
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -827,21 +895,19 @@ export interface DescribeTrashConfigResponse {
 }
 
 /**
- * DescribeRestoreTasks返回参数结构体
+ * DescribePathProtectionRules请求参数结构体
  */
-export interface DescribeRestoreTasksResponse {
+export interface DescribePathProtectionRulesRequest {
   /**
-   * 回热任务列表
+   * 文件系统ID
    */
-  RestoreTasks?: Array<RestoreTask>
-  /**
-   * 标识是否已获取全量
-   */
-  IsOver?: boolean
-  /**
-   * 下一次请求起始回热任务ID标记
-   */
-  NextRestoreTaskIdMarker?: number
+  FileSystemId: string
+}
+
+/**
+ * DeletePathProtectionRule返回参数结构体
+ */
+export interface DeletePathProtectionRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -917,6 +983,16 @@ export interface DeleteAccessRulesResponse {
 }
 
 /**
+ * ModifyLifeCycleRules返回参数结构体
+ */
+export interface ModifyLifeCycleRulesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeFileSystems请求参数结构体
  */
 export interface DescribeFileSystemsRequest {
@@ -954,6 +1030,28 @@ export interface ModifyResourceTagsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyPathProtectionRule请求参数结构体
+ */
+export interface ModifyPathProtectionRuleRequest {
+  /**
+   * 路径保护规则ID
+   */
+  PathProtectionRuleId: number
+  /**
+   * 规则名称
+   */
+  Name?: string
+  /**
+   * 指定保护路径
+   */
+  Path?: string
+  /**
+   * 规则状态（1：打开；2：关闭）
+   */
+  Status?: number
 }
 
 /**
@@ -1023,6 +1121,36 @@ export interface DescribeAccessGroupResponse {
 }
 
 /**
+ * 生命周期规则当前路径具体存储量信息
+ */
+export interface Summary {
+  /**
+   * 已使用容量（byte）
+   */
+  CapacityUsed?: number
+  /**
+   * 已使用COS标准存储容量（byte）
+   */
+  StandardCapacityUsed?: number
+  /**
+   * 已使用COS低频存储容量（byte）
+   */
+  DegradeCapacityUsed?: number
+  /**
+   * 已使用COS归档存储容量（byte）
+   */
+  ArchiveCapacityUsed?: number
+  /**
+   * 已使用COS深度归档存储容量（byte）
+   */
+  DeepArchiveCapacityUsed?: number
+  /**
+   * 已使用COS智能分层存储容量（byte）
+   */
+  IntelligentCapacityUsed?: number
+}
+
+/**
  * 挂载点
  */
 export interface MountPoint {
@@ -1070,6 +1198,16 @@ export interface DescribeMountPointsResponse {
    * 挂载点列表
    */
   MountPoints?: Array<MountPoint>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyPathProtectionRule返回参数结构体
+ */
+export interface ModifyPathProtectionRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1229,13 +1367,9 @@ export interface CreateTrashConfigRequest {
 }
 
 /**
- * DescribeMountPoint返回参数结构体
+ * CreatePathProtectionRule返回参数结构体
  */
-export interface DescribeMountPointResponse {
-  /**
-   * 挂载点
-   */
-  MountPoint?: MountPoint
+export interface CreatePathProtectionRuleResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -488,6 +488,16 @@ it("mps.v20190612.DeleteContentReviewTemplate", async function () {
     }
 })
 
+it("mps.v20190612.DescribeAigcTaskStatus", async function () {
+    try {
+       const data = await client.DescribeAigcTaskStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DescribeImageTasks", async function () {
     try {
        const data = await client.DescribeImageTasks({})

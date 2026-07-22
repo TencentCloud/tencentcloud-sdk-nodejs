@@ -4154,6 +4154,28 @@ export interface AiAnalysisTaskReelInput {
 }
 
 /**
+ * 生图任务。
+ */
+export interface CreateImageConfig {
+  /**
+   * <p>生图模型</p><p>枚举值：</p><ul><li>WAND-create-1.0-lite： 轻量生图模型</li><li>WAND-create-1.0-flash： 质量-速度平衡生图模型</li><li>WAND-create-1.0-pro： 高质量生图模型</li></ul>
+   */
+  Model: string
+  /**
+   * <p>生图指令</p>
+   */
+  Prompt: string
+  /**
+   * <p>输出图片的分辨率</p><p>枚举值：</p><ul><li>1K： 短边分辨率 1080</li><li>2K： 短边分辨率 1440</li><li>4K： 短边分辨率 2160</li></ul><p>默认值：1K</p>
+   */
+  Resolution?: string
+  /**
+   * <p>输出图片的宽高比</p><p>枚举值：</p><ul><li>1:1： 宽高比 1:1</li><li>2:3： 宽高比 2:3</li><li>3:2： 宽高比 3:2</li><li>3:4： 宽高比 3:4</li><li>4:3： 宽高比 4:3</li><li>9:16： 宽高比 9:16</li><li>16:9： 宽高比 16:9</li></ul><p>默认值：1:1</p>
+   */
+  AspectRatio?: string
+}
+
+/**
  * DeleteStreamPackageLinearAssemblyProgram请求参数结构体
  */
 export interface DeleteStreamPackageLinearAssemblyProgramRequest {
@@ -4390,6 +4412,10 @@ export interface ImageTaskInput {
    * <p>Ai套图配置。</p>
    */
   AiPosterSuiteConfig?: AiPosterSuiteConfig
+  /**
+   * <p>生图任务配置</p>
+   */
+  CreateImageConfig?: CreateImageConfig
 }
 
 /**
@@ -11570,6 +11596,57 @@ export interface QueryProjectResponse {
 }
 
 /**
+ * DescribeAigcTaskStatus返回参数结构体
+ */
+export interface DescribeAigcTaskStatusResponse {
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId?: string
+  /**
+   * <p>任务状态描述</p><p>枚举值：</p><ul><li>PENDING： 任务等待调度</li><li>RUNNING： 任务运行中</li><li>FINISHED： 任务执行成功</li><li>STOP： 任务被中止</li><li>FAILED： 任务失败</li><li>TIMEOUT： 任务超时</li></ul>
+   */
+  TaskStatus?: string
+  /**
+   * <p>输出url</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputUrl?: string
+  /**
+   * <p>任务创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>任务调度时间</p>
+   */
+  ScheduledTime?: string
+  /**
+   * <p>任务完成时间</p>
+   */
+  FinishedTime?: string
+  /**
+   * <p>任务错误码</p>
+   */
+  TaskResultCode?: number
+  /**
+   * <p>任务返回错误信息</p>
+   */
+  TaskResultMsg?: string
+  /**
+   * <p>请求结构体</p>
+   */
+  RequestBody?: string
+  /**
+   * <p>任务类型</p>
+   */
+  TaskType?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 媒体处理任务类型
  */
 export interface MediaProcessTaskInput {
@@ -14299,6 +14376,16 @@ export interface AigcStoreCosParam {
 }
 
 /**
+ * DescribeAigcTaskStatus请求参数结构体
+ */
+export interface DescribeAigcTaskStatusRequest {
+  /**
+   * <p>任务ID</p>
+   */
+  TaskId: string
+}
+
+/**
  * DescribeDesignTask返回参数结构体
  */
 export interface DescribeDesignTaskResponse {
@@ -14460,7 +14547,7 @@ export interface ProcessImageRequest {
   /**
    * 图片处理的文件输入信息。
    */
-  InputInfo: MediaInputInfo
+  InputInfo?: MediaInputInfo
   /**
    * 图片处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。
    */

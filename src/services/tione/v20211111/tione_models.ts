@@ -4545,6 +4545,10 @@ export interface DescribeModelServiceRequest {
    */
   ServiceId: string
   /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+  /**
    * 服务分类
    * @deprecated
    */
@@ -8090,6 +8094,10 @@ export interface DescribeModelServiceGroupRequest {
    * 服务组ID
    */
   ServiceGroupId: string
+  /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
   /**
    * 服务分类
    * @deprecated

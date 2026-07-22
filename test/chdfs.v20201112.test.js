@@ -228,6 +228,16 @@ it("chdfs.v20201112.DescribeAccessGroup", async function () {
     }
 })
 
+it("chdfs.v20201112.DeletePathProtectionRule", async function () {
+    try {
+       const data = await client.DeletePathProtectionRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("chdfs.v20201112.DeleteLifeCycleRules", async function () {
     try {
        const data = await client.DeleteLifeCycleRules({})
@@ -241,6 +251,16 @@ it("chdfs.v20201112.DeleteLifeCycleRules", async function () {
 it("chdfs.v20201112.CreateAccessRules", async function () {
     try {
        const data = await client.CreateAccessRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("chdfs.v20201112.DescribePathProtectionRules", async function () {
+    try {
+       const data = await client.DescribePathProtectionRules({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,6 +328,16 @@ it("chdfs.v20201112.DescribeRestoreTasks", async function () {
     }
 })
 
+it("chdfs.v20201112.CreatePathProtectionRule", async function () {
+    try {
+       const data = await client.CreatePathProtectionRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("chdfs.v20201112.ModifyResourceTags", async function () {
     try {
        const data = await client.ModifyResourceTags({})
@@ -341,6 +371,16 @@ it("chdfs.v20201112.DeleteAccessGroup", async function () {
 it("chdfs.v20201112.CreateAccessGroup", async function () {
     try {
        const data = await client.CreateAccessGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("chdfs.v20201112.ModifyPathProtectionRule", async function () {
+    try {
+       const data = await client.ModifyPathProtectionRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

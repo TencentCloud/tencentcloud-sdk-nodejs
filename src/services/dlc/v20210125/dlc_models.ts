@@ -571,33 +571,13 @@ export interface DeleteNativeSparkSessionResponse {
 }
 
 /**
- * 引擎资源弹性伸缩计划
+ * AlterTableComment返回参数结构体
  */
-export interface ElasticPlan {
+export interface AlterTableCommentResponse {
   /**
-   * 最小集群数
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  MinElasticClusters?: number
-  /**
-   * 最大集群数
-   */
-  MaxElasticClusters?: number
-  /**
-   * 最大排队时间
-   */
-  TolerableQueueTime?: number
-  /**
-   * 开始时间，Once格式：yyyy-MM-dd HH:mm:ss; 非Once格式： HH:mm:ss
-   */
-  StartTime?: string
-  /**
-   * 结束时间，Once格式：yyyy-MM-dd HH:mm:ss; 非Once格式： HH:mm:ss
-   */
-  EndTime?: string
-  /**
-   * 分时弹性上限
-   */
-  ElasticLimit?: number
+  RequestId?: string
 }
 
 /**
@@ -741,6 +721,16 @@ export interface DescribeDMSTableResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * AlterTableComment请求参数结构体
+ */
+export interface AlterTableCommentRequest {
+  /**
+   * 修改表的基本信息
+   */
+  TableBaseInfo: TableBaseInfo
 }
 
 /**
@@ -1049,6 +1039,20 @@ export interface DescribeTablesNameResponse {
 export type DescribeAdvancedStoreLocationRequest = null
 
 /**
+ * DeleteMetaDatabase请求参数结构体
+ */
+export interface DeleteMetaDatabaseRequest {
+  /**
+   * 数据库名称
+   */
+  DatabaseName: string
+  /**
+   * 数据源名称，默认DataLakeCatalog
+   */
+  DatasourceConnectionName?: string
+}
+
+/**
  * CancelNotebookSessionStatementBatch返回参数结构体
  */
 export interface CancelNotebookSessionStatementBatchResponse {
@@ -1239,6 +1243,20 @@ export interface SmartOptimizerWrittenPolicy {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdvancePolicy?: WrittenAdvancePolicy
+}
+
+/**
+ * DescribeDatabase返回参数结构体
+ */
+export interface DescribeDatabaseResponse {
+  /**
+   * 数据库信息
+   */
+  DatabaseInfo?: DatabaseResponseInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2335,21 +2353,21 @@ export interface UpdateUserDataEngineConfigRequest {
 }
 
 /**
- * RollbackDataEngineImage请求参数结构体
+ * DeleteMetaDatabase返回参数结构体
  */
-export interface RollbackDataEngineImageRequest {
+export interface DeleteMetaDatabaseResponse {
   /**
-   * 引擎ID
+   * 本批次提交的任务的批次Id
    */
-  DataEngineId: string
+  BatchId?: string
   /**
-   * 检查是否能回滚的接口返回的FromRecordId参数
+   * 任务Id集合，按照执行顺序排列
    */
-  FromRecordId?: string
+  TaskIdSet?: Array<string>
   /**
-   * 检查是否能回滚的接口返回的ToRecordId参数
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ToRecordId?: string
+  RequestId?: string
 }
 
 /**
@@ -2529,6 +2547,36 @@ export interface DescribeLakeFsInfoResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 引擎资源弹性伸缩计划
+ */
+export interface ElasticPlan {
+  /**
+   * 最小集群数
+   */
+  MinElasticClusters?: number
+  /**
+   * 最大集群数
+   */
+  MaxElasticClusters?: number
+  /**
+   * 最大排队时间
+   */
+  TolerableQueueTime?: number
+  /**
+   * 开始时间，Once格式：yyyy-MM-dd HH:mm:ss; 非Once格式： HH:mm:ss
+   */
+  StartTime?: string
+  /**
+   * 结束时间，Once格式：yyyy-MM-dd HH:mm:ss; 非Once格式： HH:mm:ss
+   */
+  EndTime?: string
+  /**
+   * 分时弹性上限
+   */
+  ElasticLimit?: number
 }
 
 /**
@@ -3226,6 +3274,32 @@ export interface PauseStandardEngineResourceGroupsRequest {
 }
 
 /**
+ * GenerateInternalTable请求参数结构体
+ */
+export interface GenerateInternalTableRequest {
+  /**
+   * 表基本信息
+   */
+  TableBaseInfo: TableBaseInfo
+  /**
+   * 字段信息
+   */
+  Columns: Array<TColumn>
+  /**
+   * 分区信息
+   */
+  Partitions?: Array<TPartition>
+  /**
+   * 属性
+   */
+  Properties?: Array<Property>
+  /**
+   * V2 upsert表 upsert键
+   */
+  UpsertKeys?: Array<string>
+}
+
+/**
  * UpdateStandardEngineResourceGroupConfigInfo请求参数结构体
  */
 export interface UpdateStandardEngineResourceGroupConfigInfoRequest {
@@ -3834,25 +3908,25 @@ export interface TableExpirationPolicy {
 }
 
 /**
- * vpc信息
+ * CreateMetaDatabase请求参数结构体
  */
-export interface VpcInfo {
+export interface CreateMetaDatabaseRequest {
   /**
-   * vpc Id
+   * 数据源名称，默认DataLakeCatalog
    */
-  VpcId?: string
+  DatasourceConnectionName?: string
   /**
-   * vpc子网
+   * 元数据库基本信息
    */
-  VpcCidrBlock?: string
+  MetaDatabaseInfo?: MetaDatabaseInfo
   /**
-   * 规则Id
+   * 数据治理配置项
    */
-  RuleId?: number
+  GovernPolicy?: DataGovernPolicy
   /**
-   * 权限组Id
+   * 智能数据治理配置
    */
-  AccessGroupId?: string
+  SmartPolicy?: SmartPolicy
 }
 
 /**
@@ -4932,6 +5006,24 @@ export interface ListTaskJobLogNameResponse {
 }
 
 /**
+ * GenerateInternalTable返回参数结构体
+ */
+export interface GenerateInternalTableResponse {
+  /**
+   * 返回sql
+   */
+  Execution?: Execution
+  /**
+   * 是否tciceberg
+   */
+  IsTIcebergSql?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClusterMonitorInfos返回参数结构体
  */
 export interface DescribeClusterMonitorInfosResponse {
@@ -5973,6 +6065,21 @@ export interface UnbindWorkGroupsFromUserResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 元数据库基本信息
+ */
+export interface MetaDatabaseInfo {
+  /**
+   * 数据库名称。
+   */
+  DatabaseName: string
+  /**
+   * 数据库描述信息，长度 0~2048。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Comment?: string
 }
 
 /**
@@ -7416,6 +7523,24 @@ export interface TasksInfo {
    * 任务的用户自定义参数信息
    */
   Params?: Array<KVPair>
+}
+
+/**
+ * RollbackDataEngineImage请求参数结构体
+ */
+export interface RollbackDataEngineImageRequest {
+  /**
+   * 引擎ID
+   */
+  DataEngineId: string
+  /**
+   * 检查是否能回滚的接口返回的FromRecordId参数
+   */
+  FromRecordId?: string
+  /**
+   * 检查是否能回滚的接口返回的ToRecordId参数
+   */
+  ToRecordId?: string
 }
 
 /**
@@ -9010,6 +9135,20 @@ export interface ModifyWorkGroupRequest {
 }
 
 /**
+ * DescribeDatabase请求参数结构体
+ */
+export interface DescribeDatabaseRequest {
+  /**
+   * 数据库名称
+   */
+  DatabaseName: string
+  /**
+   * 数据连接名称，不填默认为DataLakeCatalog
+   */
+  DatasourceConnectionName?: string
+}
+
+/**
  * UpdateStandardEngineResourceGroupBaseInfo返回参数结构体
  */
 export interface UpdateStandardEngineResourceGroupBaseInfoResponse {
@@ -9879,6 +10018,46 @@ export interface ListTaskJobLogDetailResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateMetaDatabase返回参数结构体
+ */
+export interface CreateMetaDatabaseResponse {
+  /**
+   * 本批次提交的任务的批次Id
+   */
+  BatchId?: string
+  /**
+   * 任务Id集合，按照执行顺序排列
+   */
+  TaskIdSet?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * vpc信息
+ */
+export interface VpcInfo {
+  /**
+   * vpc Id
+   */
+  VpcId?: string
+  /**
+   * vpc子网
+   */
+  VpcCidrBlock?: string
+  /**
+   * 规则Id
+   */
+  RuleId?: number
+  /**
+   * 权限组Id
+   */
+  AccessGroupId?: string
 }
 
 /**

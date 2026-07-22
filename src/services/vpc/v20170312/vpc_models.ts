@@ -6545,7 +6545,7 @@ export interface DescribeRouteListResponse {
  */
 export interface DescribeVpcResourceDashboardRequest {
   /**
-   * Vpc实例ID，例如：vpc-f1xjkw1b。
+   * <p>Vpc实例ID，例如：vpc-f1xjkw1b。</p>
    */
   VpcIds: Array<string>
 }
@@ -7454,7 +7454,7 @@ export interface ResourceDashboard {
  */
 export interface DescribeSubnetResourceDashboardRequest {
   /**
-   * Subnet实例ID，例如：subnet-f1xjkw1b。
+   * <p>Subnet实例ID，例如：subnet-f1xjkw1b。</p>
    */
   SubnetIds: Array<string>
 }
@@ -10563,7 +10563,7 @@ export interface EndPointService {
  */
 export interface DescribeVpcResourceDashboardResponse {
   /**
-   * 资源对象列表。
+   * <p>资源对象列表。</p>
    */
   ResourceDashboardSet?: Array<ResourceDashboard>
   /**
@@ -21149,7 +21149,7 @@ export interface CreateVpcRequest {
  */
 export interface DescribeSubnetResourceDashboardResponse {
   /**
-   * 资源统计结果。
+   * <p>资源统计结果。</p>
    */
   ResourceStatisticsSet?: Array<ResourceStatistics>
   /**

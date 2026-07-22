@@ -575,7 +575,7 @@ export interface SetInstanceMaintenanceResponse {
  */
 export interface DescribeInstanceSSLRequest {
   /**
-   * 实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同
+   * <p>实例ID，格式如：cmgo-p8vnipr5。与云数据库控制台页面中显示的实例ID相同</p>
    */
   InstanceId: string
 }
@@ -1178,13 +1178,11 @@ export interface CreateDBInstanceHourResponse {
  */
 export interface InstanceEnableSSLRequest {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId: string
   /**
-   * 配置是否要开启SSL访问。
-- true：开启。
-- false：关闭。
+   * <p>配置是否要开启SSL访问。</p><ul><li>true：开启。</li><li>false：关闭。</li></ul>
    */
   Enable: boolean
 }
@@ -1808,24 +1806,22 @@ export interface DescribeDBInstancesRequest {
  */
 export interface InstanceEnableSSLResponse {
   /**
-   * SSL开启状态。
-- 0：关闭。
-- 1：开启。
+   * <p>SSL开启状态。</p><ul><li>0：关闭。</li><li>1：开启。</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
-   * 证书文件过期时间，格式为：2023-05-01 12:00:00。
+   * <p>证书文件过期时间，格式为：2023-05-01 12:00:00。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpiredTime?: string
   /**
-   * 证书文件的下载链接。
+   * <p>证书文件的下载链接。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CertUrl?: string
   /**
-   * 流程id
+   * <p>流程id</p>
    */
   FlowId?: number
   /**
@@ -3479,17 +3475,17 @@ export interface ModifyBackupExpireTimeRequest {
  */
 export interface DescribeInstanceSSLResponse {
   /**
-   * SSL开启状态。0为关闭，1为开启
+   * <p>SSL开启状态。0为关闭，1为开启</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: number
   /**
-   * 证书过期时间，格式为2023-05-01 12:00:00
+   * <p>证书过期时间，格式为2023-05-01 12:00:00</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExpiredTime?: string
   /**
-   * 证书下载链接
+   * <p>证书下载链接</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CertUrl?: string

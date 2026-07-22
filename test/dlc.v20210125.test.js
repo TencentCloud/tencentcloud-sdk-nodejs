@@ -148,6 +148,16 @@ it("dlc.v20210125.DescribeDataMaskStrategies", async function () {
     }
 })
 
+it("dlc.v20210125.DeleteMetaDatabase", async function () {
+    try {
+       const data = await client.DeleteMetaDatabase({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DeleteWorkGroup", async function () {
     try {
        const data = await client.DeleteWorkGroup({})
@@ -588,9 +598,9 @@ it("dlc.v20210125.DescribeAdvancedStoreLocation", async function () {
     }
 })
 
-it("dlc.v20210125.LockMetaData", async function () {
+it("dlc.v20210125.AlterTableComment", async function () {
     try {
-       const data = await client.LockMetaData({})
+       const data = await client.AlterTableComment({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -631,6 +641,16 @@ it("dlc.v20210125.CreateTasks", async function () {
 it("dlc.v20210125.DescribeScripts", async function () {
     try {
        const data = await client.DescribeScripts({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.GenerateInternalTable", async function () {
+    try {
+       const data = await client.GenerateInternalTable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1118,6 +1138,16 @@ it("dlc.v20210125.DropDMSPartitions", async function () {
     }
 })
 
+it("dlc.v20210125.CreateMetaDatabase", async function () {
+    try {
+       const data = await client.CreateMetaDatabase({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateWorkGroup", async function () {
     try {
        const data = await client.CreateWorkGroup({})
@@ -1371,6 +1401,16 @@ it("dlc.v20210125.CreateTasksInOrder", async function () {
 it("dlc.v20210125.DescribeDataEngineImageVersions", async function () {
     try {
        const data = await client.DescribeDataEngineImageVersions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.LockMetaData", async function () {
+    try {
+       const data = await client.LockMetaData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1641,6 +1681,16 @@ it("dlc.v20210125.CreateScript", async function () {
 it("dlc.v20210125.DescribeMCPTask", async function () {
     try {
        const data = await client.DescribeMCPTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeDatabase", async function () {
+    try {
+       const data = await client.DescribeDatabase({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

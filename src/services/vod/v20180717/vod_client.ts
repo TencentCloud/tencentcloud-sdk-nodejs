@@ -892,6 +892,7 @@ import {
   SnapshotByTimeOffsetTemplate,
   DeleteSnapshotByTimeOffsetTemplateResponse,
   ProhibitedOcrReviewTemplateInfoForUpdate,
+  AigcVideoRedrawTaskInfo,
   DescribeCLSPushTargetsRequest,
   DescribeTasksRequest,
   DescribeReviewDetailsResponse,

@@ -69,6 +69,7 @@ import {
   CreateProductSecretResponse,
   ListSecretsResponse,
   DescribeSecretRequest,
+  SecretAccountInfo,
   GetServiceStatusRequest,
   ListSecretVersionIdsResponse,
 } from "./ssm_models"

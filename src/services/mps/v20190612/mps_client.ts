@@ -183,6 +183,7 @@ import {
   CreateQualityControlTemplateResponse,
   FlowMediaAudio,
   AiAnalysisTaskReelInput,
+  CreateImageConfig,
   DeleteStreamPackageLinearAssemblyProgramRequest,
   QualityControlResult,
   AiReviewPornTaskInput,
@@ -489,6 +490,7 @@ import {
   FlowStatistics,
   BatchSmartSubtitlesResult,
   QueryProjectResponse,
+  DescribeAigcTaskStatusResponse,
   MediaProcessTaskInput,
   CreateInputSRTSettings,
   DescribeDesignTaskRequest,
@@ -588,6 +590,7 @@ import {
   BatchSubTaskResult,
   MediaContentReviewSegmentItem,
   AigcStoreCosParam,
+  DescribeAigcTaskStatusRequest,
   DescribeDesignTaskResponse,
   CreateProjectRequest,
   FlowVideo,
@@ -1587,6 +1590,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询AIGC场景任务接口
+   */
+  async DescribeAigcTaskStatus(
+    req: DescribeAigcTaskStatusRequest,
+    cb?: (error: string, rep: DescribeAigcTaskStatusResponse) => void
+  ): Promise<DescribeAigcTaskStatusResponse> {
+    return this.request("DescribeAigcTaskStatus", req, cb)
+  }
+
+  /**
    * 图片处理任务查询接口。
    */
   async DescribeImageTasks(
@@ -2047,6 +2060,8 @@ export class Client extends AbstractClient {
 1. 格式转换；
 2. 图像增强；
 3. 图像擦除;
+4. 数字水印；
+5. 美颜滤镜；
      */
   async ProcessImage(
     req: ProcessImageRequest,
