@@ -16,21 +16,21 @@
  */
 
 /**
- * ModifyEWRuleStatus返回参数结构体
+ * ModifyFwGroupSwitch请求参数结构体
  */
-export interface ModifyEWRuleStatusResponse {
+export interface ModifyFwGroupSwitchRequest {
   /**
-   * 状态值，0：修改成功，非0：修改失败
+   * <p>打开或关闭开关<br>0：关闭开关<br>1：打开开关</p>
    */
-  ReturnCode?: number
+  Enable: number
   /**
-   * 状态信息，success：查询成功，fail：查询失败
+   * <p>是否操作全部开关 0 不操作全部开关，1 操作全部开关</p>
    */
-  ReturnMsg?: string
+  AllSwitch: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>开关列表</p>
    */
-  RequestId?: string
+  SwitchList?: Array<FwGroupSwitch>
 }
 
 /**
@@ -109,6 +109,20 @@ export interface DescribeCfwStatusMonitorRequest {
    * 过滤条件列表。保留字段；当前公开 fetch_scene 场景均不支持，调用方不要传。
    */
   Filters?: Array<CfwStatusMonitorFilter>
+}
+
+/**
+ * CheckClusterNatFwPreAccess请求参数结构体
+ */
+export interface CheckClusterNatFwPreAccessRequest {
+  /**
+   * <p>NAT CCN 开关配置 JSON 字符串，与 OpenClusterNatFwSwitch 的 NatCcnSwitch 完全一致。SwitchMode 必须为 1（自动接入），RoutingMode 必须为 1（策略路由）。</p>
+   */
+  NatCcnSwitch: NatCcnSwitchConfig
+  /**
+   * <p>预接入模式</p><p>枚举值：</p><ul><li>open： 开启防火墙前预接入检查</li><li>modify： 编辑修改防火墙开关时预接入检查</li></ul>
+   */
+  CheckMode: string
 }
 
 /**
@@ -762,21 +776,107 @@ export interface AddEnterpriseSecurityGroupRulesRequest {
 }
 
 /**
- * DeleteSecurityGroupRule返回参数结构体
+ * 访问控制列表对象
  */
-export interface DeleteSecurityGroupRuleResponse {
+export interface AcListsData {
   /**
-   * 状态值，0：成功，非0：失败
+   * 规则id
+   */
+  Id?: number
+  /**
+   * 访问源
+   */
+  SourceIp?: string
+  /**
+   * 访问目的
+   */
+  TargetIp?: string
+  /**
+   * 协议
+   */
+  Protocol?: string
+  /**
+   * 端口
+   */
+  Port?: string
+  /**
+   * 策略
+   */
+  Strategy?: number
+  /**
+   * 描述
+   */
+  Detail?: string
+  /**
+   * 命中次数
+   */
+  Count?: number
+  /**
+   * 执行顺序
+   */
+  OrderIndex?: number
+  /**
+   * 告警规则id
+   */
+  LogId?: string
+  /**
+   * 规则开关状态 1打开 0关闭
    */
   Status?: number
   /**
-   * 返回多余的信息
+   * 规则源类型
    */
-  Info?: string
+  SrcType?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 规则目的类型
    */
-  RequestId?: string
+  DstType?: number
+  /**
+   * 规则唯一ID
+   */
+  Uuid?: string
+  /**
+   * 规则有效性
+1 有效
+0 无效
+   */
+  Invalid?: number
+  /**
+   * 是否地域规则
+   */
+  IsRegion?: number
+  /**
+   * 云厂商代码
+   */
+  CloudCode?: string
+  /**
+   * 自动化助手信息
+   */
+  AutoTask?: string
+  /**
+   * 实例名称
+   */
+  InstanceName?: string
+  /**
+   * 地域码信息
+   */
+  RegionCode?: string
+  /**
+   * 国家代码
+   */
+  Country?: number
+  /**
+   * 城市代码
+   */
+  City?: number
+  /**
+   * 国家名称
+   */
+  RegName1?: string
+  /**
+   * 城市名称
+   */
+  RegName2?: string
 }
 
 /**
@@ -1136,6 +1236,20 @@ export interface CreateAlertCenterOmitRequest {
 }
 
 /**
+ * 预接入检查项定义
+ */
+export interface ClusterFwPreAccessCheckItem {
+  /**
+   * 检查项 key，与查询接口 CheckResult.Stages[].Stage 一一对应
+   */
+  Stage?: string
+  /**
+   * 该检查项的展示文案，已按请求的 Language 返回中文或英文
+   */
+  Description?: string
+}
+
+/**
  * NAT防火墙Dnat规则列表
  */
 export interface DescNatDnatRule {
@@ -1417,6 +1531,24 @@ export interface DescribeNatFwInstancesInfoRequest {
 }
 
 /**
+ * 安全组地域配置
+ */
+export interface SecurityGroupRegion {
+  /**
+   * <p>地域</p>
+   */
+  Region?: string
+  /**
+   * <p>地域Id</p>
+   */
+  RegionId?: string
+  /**
+   * <p>地域中文</p>
+   */
+  RegionName?: string
+}
+
+/**
  * DescribeTableStatus请求参数结构体
  */
 export interface DescribeTableStatusRequest {
@@ -1437,6 +1569,11 @@ export interface DescribeTableStatusRequest {
    */
   Direction?: number
 }
+
+/**
+ * IPS规则展示字段相关结构
+ */
+export type IpsRuleDetailNew = null
 
 /**
  * ModifyAddressTemplate返回参数结构体
@@ -1836,6 +1973,16 @@ export interface RemoveEnterpriseSecurityGroupRuleRequest {
 }
 
 /**
+ * UpdateClusterVpcFw返回参数结构体
+ */
+export interface UpdateClusterVpcFwResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSecurityGroupList返回参数结构体
  */
 export interface DescribeSecurityGroupListResponse {
@@ -2185,6 +2332,68 @@ export interface ModifyVpcAcRuleResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeBlockList请求参数结构体
+ */
+export interface DescribeBlockListRequest {
+  /**
+   * 偏移量
+   */
+  Offset: number
+  /**
+   * 长度
+   */
+  Limit: number
+  /**
+   * 频率类型
+   */
+  StatTimeSpan: number
+  /**
+   * 开始时间
+   */
+  StartTime: string
+  /**
+   * 结束时间
+   */
+  EndTime: string
+  /**
+   * 查询条件
+   */
+  SearchValue?: string
+  /**
+   * 升序降序
+   */
+  Order?: string
+  /**
+   * 排序字段
+   */
+  By?: string
+  /**
+   * 方向 1 入 0出
+   */
+  Direction?: string
+  /**
+   * 是否处置 1处置 0不是
+   */
+  ByPass?: string
+  /**
+   * 来源
+   */
+  Source?: string
+  /**
+   * 国家 1国内
+   */
+  Country?: string
+  /**
+   * 资产id
+   */
+  AssetId?: string
+  /**
+   * 日志来源 move：vpc间防火墙
+   */
+  LogSource?: string
 }
 
 /**
@@ -2628,6 +2837,21 @@ export interface DescribeClusterVpcFwSwitchsRequest {
    * <p>排序所用到的字段</p>
    */
   By?: string
+}
+
+/**
+ * DescribeFwGroupIdNames返回参数结构体
+ */
+export interface DescribeFwGroupIdNamesResponse {
+  /**
+   * <p>防火墙(组列表)</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<FwGroupIdName>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3780,107 +4004,21 @@ export interface DescribeCfwAnalysisDataRequest {
 }
 
 /**
- * 访问控制列表对象
+ * DeleteSecurityGroupRule返回参数结构体
  */
-export interface AcListsData {
+export interface DeleteSecurityGroupRuleResponse {
   /**
-   * 规则id
-   */
-  Id?: number
-  /**
-   * 访问源
-   */
-  SourceIp?: string
-  /**
-   * 访问目的
-   */
-  TargetIp?: string
-  /**
-   * 协议
-   */
-  Protocol?: string
-  /**
-   * 端口
-   */
-  Port?: string
-  /**
-   * 策略
-   */
-  Strategy?: number
-  /**
-   * 描述
-   */
-  Detail?: string
-  /**
-   * 命中次数
-   */
-  Count?: number
-  /**
-   * 执行顺序
-   */
-  OrderIndex?: number
-  /**
-   * 告警规则id
-   */
-  LogId?: string
-  /**
-   * 规则开关状态 1打开 0关闭
+   * 状态值，0：成功，非0：失败
    */
   Status?: number
   /**
-   * 规则源类型
+   * 返回多余的信息
    */
-  SrcType?: number
+  Info?: string
   /**
-   * 规则目的类型
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DstType?: number
-  /**
-   * 规则唯一ID
-   */
-  Uuid?: string
-  /**
-   * 规则有效性
-1 有效
-0 无效
-   */
-  Invalid?: number
-  /**
-   * 是否地域规则
-   */
-  IsRegion?: number
-  /**
-   * 云厂商代码
-   */
-  CloudCode?: string
-  /**
-   * 自动化助手信息
-   */
-  AutoTask?: string
-  /**
-   * 实例名称
-   */
-  InstanceName?: string
-  /**
-   * 地域码信息
-   */
-  RegionCode?: string
-  /**
-   * 国家代码
-   */
-  Country?: number
-  /**
-   * 城市代码
-   */
-  City?: number
-  /**
-   * 国家名称
-   */
-  RegName1?: string
-  /**
-   * 城市名称
-   */
-  RegName2?: string
+  RequestId?: string
 }
 
 /**
@@ -4045,13 +4183,148 @@ export interface DescribeNDRAssetIdentificationCursorListRequest {
 }
 
 /**
- * UpdateClusterVpcFw返回参数结构体
+ * 告警中心-阻断事件结构体
  */
-export interface UpdateClusterVpcFwResponse {
+export interface BlockInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 源IP
    */
-  RequestId?: string
+  SrcIP?: string
+  /**
+   * 目的ip
+   */
+  DstIP?: string
+  /**
+   * 端口
+   */
+  DstPort?: string
+  /**
+   * appid信息
+   */
+  AppID?: string
+  /**
+   * 资产id
+   */
+  AssetId?: string
+  /**
+   * 资产名称
+   */
+  AssetName?: string
+  /**
+   * 地域
+   */
+  Zone?: string
+  /**
+   * 最晚时间
+   */
+  MaxDate?: string
+  /**
+   * 最近时间
+   */
+  MinDate?: string
+  /**
+   * 方向  1入站 0出战
+   */
+  Direction?: number
+  /**
+   * 来源  1拦截列表，2虚拟补丁，3威胁情报，4基础防御
+   */
+  BlockSource?: number
+  /**
+   * 国加
+   */
+  Country?: string
+  /**
+   * 次数
+   */
+  Count?: number
+  /**
+   * 拦截频率
+   */
+  AvgCount?: number
+  /**
+   * 置顶位
+   */
+  IsTop?: number
+  /**
+   * 记录唯一标识
+   */
+  UniqueId?: string
+  /**
+   * 1是 0不是
+   */
+  ByPass?: number
+  /**
+   * 1是 0不是
+   */
+  Block?: number
+  /**
+   * 1是 0不是
+   */
+  Ignore?: number
+  /**
+   * WhiteTag信息
+   */
+  WhiteTag?: string
+  /**
+   * vpc间防火墙日志，目的资产id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DstAssetId?: string
+  /**
+   * vpc间防火墙日志，目的资产名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DstAssetName?: string
+  /**
+   * vpc间防火墙日志，源VPC id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SrcVpc?: string
+  /**
+   * vpc间防火墙日志，源VPC名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SrcVpcName?: string
+  /**
+   * vpc间防火墙日志，目的VPC id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DstVpc?: string
+  /**
+   * vpc间防火墙日志，目的VPC名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DstVpcName?: string
+  /**
+   * vpc间防火墙开关边id
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EdgeId?: string
+  /**
+   * vpc间防火墙开关边名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EdgeName?: string
+  /**
+   * 日志来源 move：vpc间防火墙
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LogSource?: string
+  /**
+   * 是否加入隔离列表，1是 0不是
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Isolate?: number
+  /**
+   * 是否加入隔离列表，1是 0不是
+   */
+  Hide?: number
+  /**
+   * 域名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Domain?: string
 }
 
 /**
@@ -4265,24 +4538,6 @@ export interface DeleteResourceGroupRequest {
    * 组id
    */
   GroupId: string
-}
-
-/**
- * ModifyFwGroupSwitch请求参数结构体
- */
-export interface ModifyFwGroupSwitchRequest {
-  /**
-   * <p>打开或关闭开关<br>0：关闭开关<br>1：打开开关</p>
-   */
-  Enable: number
-  /**
-   * <p>是否操作全部开关 0 不操作全部开关，1 操作全部开关</p>
-   */
-  AllSwitch: number
-  /**
-   * <p>开关列表</p>
-   */
-  SwitchList?: Array<FwGroupSwitch>
 }
 
 /**
@@ -4587,6 +4842,20 @@ export interface ModifyNatFwReSelectRequest {
    * <p>指定防火墙使用网段信息</p>
    */
   FwCidrInfo?: FwCidrInfo
+}
+
+/**
+ * CloseClusterNatFwSwitch请求参数结构体
+ */
+export interface CloseClusterNatFwSwitchRequest {
+  /**
+   * <p>NAT防火墙实例ID</p>
+   */
+  NatInsId: string
+  /**
+   * <p>云联网实例ID</p>
+   */
+  CcnId: string
 }
 
 /**
@@ -5202,6 +5471,11 @@ export interface ModifySecurityGroupRuleResponse {
 }
 
 /**
+ * DescribeSecurityGroupRegionList请求参数结构体
+ */
+export type DescribeSecurityGroupRegionListRequest = null
+
+/**
  * DescribeSwitchError返回参数结构体
  */
 export interface DescribeSwitchErrorResponse {
@@ -5699,6 +5973,24 @@ export interface DescribeSourceAssetResponse {
 }
 
 /**
+ * DescribeVpcAclEdgeRange返回参数结构体
+ */
+export interface DescribeVpcAclEdgeRangeResponse {
+  /**
+   * 总条数
+   */
+  TotalCount: number
+  /**
+   * 内网间访问控制规则的生效范围列表
+   */
+  EdgeRanges: Array<EdgeRange>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyNatFwVpcDnsSwitch请求参数结构体
  */
 export interface ModifyNatFwVpcDnsSwitchRequest {
@@ -5813,6 +6105,25 @@ export interface DescribeUnHandleEventTabListRequest {
    * 查询示例ID
    */
   AssetID?: string
+}
+
+/**
+ * DescribeNatRuleScopes返回参数结构体
+ */
+export interface DescribeNatRuleScopesResponse {
+  /**
+   * 可选生效范围总数
+   */
+  Total?: number
+  /**
+   * 生效范围列表
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScopeItems?: Array<RuleScopeInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6446,6 +6757,11 @@ export interface SwitchError {
 }
 
 /**
+ * DescribeNatRuleScopes请求参数结构体
+ */
+export type DescribeNatRuleScopesRequest = null
+
+/**
  * DescribeCfwRuleOptimization请求参数结构体
  */
 export interface DescribeCfwRuleOptimizationRequest {
@@ -6652,6 +6968,22 @@ export interface DescribeNatFwInfoCountResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 规则生效范围信息
+ */
+export interface RuleScopeInfo {
+  /**
+   * NAT边界防火墙：ALL，全局生效；ap-guangzhou，生效的地域；cfwnat-xxx，生效基于实例维度
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Scope?: string
+  /**
+   * 生效范围描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ScopeDesc?: string
 }
 
 /**
@@ -7073,6 +7405,22 @@ export interface DescribeBlockByIpTimesListResponse {
 }
 
 /**
+ * 防火墙(组)ID 和 名称
+ */
+export interface FwGroupIdName {
+  /**
+   * 防火墙(组)ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FwGroupId?: string
+  /**
+   * 防火墙(组)名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FwGroupName?: string
+}
+
+/**
  * DescribeBlockIgnoreList请求参数结构体
  */
 export interface DescribeBlockIgnoreListRequest {
@@ -7153,6 +7501,24 @@ export interface DescribeCcnVpcFwSwitchRequest {
    * <p>云联网ID</p>
    */
   CcnId: string
+}
+
+/**
+ * DescribeSecurityGroupRegionList返回参数结构体
+ */
+export interface DescribeSecurityGroupRegionListResponse {
+  /**
+   * <p>配置信息</p>
+   */
+  Data?: Array<SecurityGroupRegion>
+  /**
+   * <p>总数</p>
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7806,6 +8172,24 @@ export interface DescribeFwEdgeIpsRequest {
 }
 
 /**
+ * ModifyEWRuleStatus返回参数结构体
+ */
+export interface ModifyEWRuleStatusResponse {
+  /**
+   * 状态值，0：修改成功，非0：修改失败
+   */
+  ReturnCode?: number
+  /**
+   * 状态信息，success：查询成功，fail：查询失败
+   */
+  ReturnMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 互联网边界访问控制规则参数结构，供新增和修改共用。每个对象都会被解析为一条完整的新规则记录；替换现有规则时，请求中省略的字段不会从旧记录自动继承，仅内部 AutoTask 字段由服务端保留。
  */
 export interface CreateRuleItem {
@@ -7876,17 +8260,45 @@ export interface CreateRuleItem {
 }
 
 /**
- * CloseClusterNatFwSwitch请求参数结构体
+ * DescribeVpcAclEdgeRange请求参数结构体
  */
-export interface CloseClusterNatFwSwitchRequest {
+export interface DescribeVpcAclEdgeRangeRequest {
   /**
-   * <p>NAT防火墙实例ID</p>
+   * 规则列表来源：rules，来源于当前已配置的规则；switchs，来源于开关列表
    */
-  NatInsId: string
+  FromList: string
   /**
-   * <p>云联网实例ID</p>
+   * 需要查询的索引，特定场景使用，可不填
    */
-  CcnId: string
+  Index?: string
+  /**
+   * 过滤条件组合
+   */
+  Filters?: Array<CommonFilter>
+  /**
+   * 每页条数
+   */
+  Limit?: number
+  /**
+   * 偏移值
+   */
+  Offset?: number
+  /**
+   * 检索的起始时间，可不传
+   */
+  StartTime?: string
+  /**
+   * 检索的截止时间，可不传
+   */
+  EndTime?: string
+  /**
+   * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+   */
+  Order?: string
+  /**
+   * 排序所用到的字段
+   */
+  By?: string
 }
 
 /**
@@ -7955,6 +8367,67 @@ export interface DescribeIpsModeSwitchResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeIpsRuleListNew返回参数结构体
+ */
+export interface DescribeIpsRuleListNewResponse {
+  /**
+   * 总条数
+   */
+  Total: number
+  /**
+   * 规则详情
+   */
+  Data: Array<IpsRuleDetailNew>
+  /**
+   * 返回状态码 0 成功 非0不成功
+   */
+  ReturnCode: number
+  /**
+   * 返回信息  success 成功 其他 不成功
+   */
+  ReturnMsg: string
+  /**
+   * 字段类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Category: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeIpsRuleListNew请求参数结构体
+ */
+export interface DescribeIpsRuleListNewRequest {
+  /**
+   * 每页条数
+   */
+  Limit: number
+  /**
+   * 偏移值
+   */
+  Offset: number
+  /**
+   * 需要查询的索引，特定场景使用，可不填
+   */
+  Index?: string
+  /**
+   * 过滤条件组合
+   */
+  Filters?: Array<CommonFilter>
+  /**
+   * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+   */
+  Order?: string
+  /**
+   * 排序所用到的字段
+   */
+  By?: string
 }
 
 /**
@@ -8071,6 +8544,46 @@ export interface UpdateClusterVpcFwRequest {
    * <p>ccn防火墙开关配置信息</p>
    */
   CcnSwitch: CcnSwitchInfo
+}
+
+/**
+ * DescribeBlockList返回参数结构体
+ */
+export interface DescribeBlockListResponse {
+  /**
+   * 阻断记录集合
+   */
+  Data: Array<BlockInfo>
+  /**
+   * 置顶阻断记录集合
+   */
+  TopData: Array<BlockInfo>
+  /**
+   * 数量
+   */
+  Total: number
+  /**
+   * 置顶数量
+   */
+  TopCount: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CheckClusterNatFwPreAccess返回参数结构体
+ */
+export interface CheckClusterNatFwPreAccessResponse {
+  /**
+   * <p>检查项清单，按执行顺序返回。前端据此渲染检查项骨架，描述文案已按请求的 Language 返回对应语言（中文/英文）。检查通过轮询 DescribeClusterNatCcnFwSwitchList 接口读取 CheckResult 获取每个阶段的通过/失败状态。</p>
+   */
+  CheckItems?: Array<ClusterFwPreAccessCheckItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8211,6 +8724,20 @@ export interface AddVpcAcRuleResponse {
    * <p>创建成功后返回新策略ID列表</p>
    */
   RuleUuids?: Array<number | bigint>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CheckClusterVpcFwPreAccess返回参数结构体
+ */
+export interface CheckClusterVpcFwPreAccessResponse {
+  /**
+   * <p>检查项清单，按执行顺序返回。前端据此渲染检查项骨架，描述文案已按请求的 Language 返回对应语言（中文/英文）。检查通过轮询 DescribeClusterVpcFwSwitchs 接口读取 CheckResult 获取每个阶段的通过/失败状态。</p>
+   */
+  CheckItems?: Array<ClusterFwPreAccessCheckItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8364,35 +8891,33 @@ export interface AddAclRuleResponse {
 }
 
 /**
- * CreateAlertCenterIsolate请求参数结构体
+ * NAT防火墙引流集群地域状态
  */
-export interface CreateAlertCenterIsolateRequest {
+export interface NatFwClusterRegionStatus {
   /**
-   * 处置对象,资产列表
+   * <p>NAT网关ID</p>
    */
-  HandleAssetList: Array<string>
+  NatInsId?: string
   /**
-   * 处置时间
-1  1天
-7   7天
--2 永久
+   * <p>云联网ID</p>
    */
-  HandleTime: number
+  CcnId?: string
   /**
-   * 当前日志方向： 0 出向 1 入向
+   * <p>地域，如 ap-guangzhou</p>
    */
-  AlertDirection: number
+  Region?: string
   /**
-   * 隔离类型 
-1 互联网入站
-2 互联网出站
-4 内网访问
+   * <p>地域集群状态，取值：<br>NotDeployed-未部署集群，<br>Deployed-已部署集群但未创建引流网络，<br>DeployedCustomOnly-已部署集群但内网段被覆盖，无法自动选择引流网段，需自定义设置引流网段<br>Auto-已创建引流网络(自动分配CIDR)，<br>Custom-已创建引流网络(自定义CIDR)</p>
    */
-  IsolateType: Array<number | bigint>
+  Status?: string
   /**
-   * 运维模式 1 IP白名单 2 身份认证  0 非运维模式
+   * <p>引流网络 CIDR，仅当 Status 为 Auto 或 Custom 时有值</p>
    */
-  OmMode?: number
+  Cidr?: string
+  /**
+   * <p>引流路由方法，0-多路由表模式，1-策略路由模式</p>
+   */
+  RoutingMode?: number
 }
 
 /**
@@ -9862,41 +10387,21 @@ export interface NatInstanceInfo {
 }
 
 /**
- * CreateAcRules请求参数结构体
+ * Nat防火墙弹性公网ip列表
  */
-export interface CreateAcRulesRequest {
+export interface NatFwEipsInfo {
   /**
-   * 创建规则数据
+   * 弹性公网ip
    */
-  Data: Array<RuleInfoData>
+  Eip?: string
   /**
-   * 0：添加（默认），1：插入
+   * 所属的Nat网关Id
    */
-  Type?: number
+  NatGatewayId?: string
   /**
-   * 边id
+   * Nat网关名称
    */
-  EdgeId?: string
-  /**
-   * 访问控制规则状态
-   */
-  Enable?: number
-  /**
-   * 0：添加，1：覆盖
-   */
-  Overwrite?: number
-  /**
-   * NAT实例ID, 参数Area存在的时候这个必传
-   */
-  InstanceId?: string
-  /**
-   * portScan: 来自于端口扫描, patchImport: 来自于批量导入
-   */
-  From?: string
-  /**
-   * NAT地域
-   */
-  Area?: string
+  NatGatewayName?: string
 }
 
 /**
@@ -9957,6 +10462,20 @@ export interface DescribeClusterVpcFwSwitchsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CheckClusterVpcFwPreAccess请求参数结构体
+ */
+export interface CheckClusterVpcFwPreAccessRequest {
+  /**
+   * <p>CCN 开关配置，长度为 1 的数组 JSON 字符串，结构与 ModifyClusterVpcFwSwitch 的 CcnSwitch 完全一致。SwitchMode 必须为 1（自动接入），RoutingMode 必须为 1（策略路由）。</p>
+   */
+  CcnSwitch: Array<CcnSwitchInfo>
+  /**
+   * <p>预接入检查模式</p><p>枚举值：</p><ul><li>open： 开启开关时预接入检查</li><li>modify： 编辑变更开关时预接入检查</li></ul>
+   */
+  CheckMode: string
 }
 
 /**
@@ -10342,33 +10861,35 @@ export interface SearchLogRequest {
 }
 
 /**
- * NAT防火墙引流集群地域状态
+ * CreateAlertCenterIsolate请求参数结构体
  */
-export interface NatFwClusterRegionStatus {
+export interface CreateAlertCenterIsolateRequest {
   /**
-   * <p>NAT网关ID</p>
+   * 处置对象,资产列表
    */
-  NatInsId?: string
+  HandleAssetList: Array<string>
   /**
-   * <p>云联网ID</p>
+   * 处置时间
+1  1天
+7   7天
+-2 永久
    */
-  CcnId?: string
+  HandleTime: number
   /**
-   * <p>地域，如 ap-guangzhou</p>
+   * 当前日志方向： 0 出向 1 入向
    */
-  Region?: string
+  AlertDirection: number
   /**
-   * <p>地域集群状态，取值：<br>NotDeployed-未部署集群，<br>Deployed-已部署集群但未创建引流网络，<br>DeployedCustomOnly-已部署集群但内网段被覆盖，无法自动选择引流网段，需自定义设置引流网段<br>Auto-已创建引流网络(自动分配CIDR)，<br>Custom-已创建引流网络(自定义CIDR)</p>
+   * 隔离类型 
+1 互联网入站
+2 互联网出站
+4 内网访问
    */
-  Status?: string
+  IsolateType: Array<number | bigint>
   /**
-   * <p>引流网络 CIDR，仅当 Status 为 Auto 或 Custom 时有值</p>
+   * 运维模式 1 IP白名单 2 身份认证  0 非运维模式
    */
-  Cidr?: string
-  /**
-   * <p>引流路由方法，0-多路由表模式，1-策略路由模式</p>
-   */
-  RoutingMode?: number
+  OmMode?: number
 }
 
 /**
@@ -10406,6 +10927,16 @@ export interface DescribeNatFwClusterRegionStatusResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeFwGroupIdNames请求参数结构体
+ */
+export interface DescribeFwGroupIdNamesRequest {
+  /**
+   * <p>Ip版本，0：IPv4，1：IPv6，默认为IPv4</p>
+   */
+  IpVersion?: number
 }
 
 /**
@@ -10474,6 +11005,52 @@ export interface AddNatAcRuleResponse {
 }
 
 /**
+ * vpc间防火墙规则生效范围列表
+ */
+export interface EdgeRange {
+  /**
+   * 规则生效的范围id，是在哪对vpc之间还是针对所有vpc间生效
+   */
+  EdgeId?: string
+  /**
+   * EdgeId对应的名称
+   */
+  EdgeName?: string
+  /**
+   * 本端网络实例Id
+   */
+  SrcId?: string
+  /**
+   * 本端网络实例所属地域
+   */
+  SrcRegion?: string
+  /**
+   * 本端网络实例名称
+   */
+  SrcName?: string
+  /**
+   * 本端网络实例cidr，多个以逗号分隔
+   */
+  SrcCidr?: string
+  /**
+   * 对端网络实例Id
+   */
+  DstId?: string
+  /**
+   * 对端网络实例所属地域
+   */
+  DstRegion?: string
+  /**
+   * 对端网络实例名称
+   */
+  DstName?: string
+  /**
+   * 对端网络实例cidr，多个以逗号分隔
+   */
+  DstCidr?: string
+}
+
+/**
  * DescribeResourceGroup请求参数结构体
  */
 export interface DescribeResourceGroupRequest {
@@ -10492,21 +11069,41 @@ export interface DescribeResourceGroupRequest {
 }
 
 /**
- * Nat防火墙弹性公网ip列表
+ * CreateAcRules请求参数结构体
  */
-export interface NatFwEipsInfo {
+export interface CreateAcRulesRequest {
   /**
-   * 弹性公网ip
+   * 创建规则数据
    */
-  Eip?: string
+  Data: Array<RuleInfoData>
   /**
-   * 所属的Nat网关Id
+   * 0：添加（默认），1：插入
    */
-  NatGatewayId?: string
+  Type?: number
   /**
-   * Nat网关名称
+   * 边id
    */
-  NatGatewayName?: string
+  EdgeId?: string
+  /**
+   * 访问控制规则状态
+   */
+  Enable?: number
+  /**
+   * 0：添加，1：覆盖
+   */
+  Overwrite?: number
+  /**
+   * NAT实例ID, 参数Area存在的时候这个必传
+   */
+  InstanceId?: string
+  /**
+   * portScan: 来自于端口扫描, patchImport: 来自于批量导入
+   */
+  From?: string
+  /**
+   * NAT地域
+   */
+  Area?: string
 }
 
 /**

@@ -531,201 +531,205 @@ export interface DeleteModelServiceResponse {
  */
 export interface DescribeMcpServerResponseVO {
   /**
-   * 实例ID
+   * <p>实例ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InstanceID?: string
   /**
-   * 名称
+   * <p>名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Name?: string
   /**
-   * 描述
+   * <p>描述</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Description?: string
   /**
-   * 标签ID数组
+   * <p>标签ID数组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LabelIDs?: Array<string>
   /**
-   * 目录ID数组
+   * <p>目录ID数组</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CategoryIDs?: Array<string>
   /**
-   * 负载方式，robin random consistentHash
+   * <p>负载方式，robin random consistentHash</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetSelect?: string
   /**
-   * 目标服务器
+   * <p>目标服务器</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetHosts?: Array<TargetHostDTO>
   /**
-   * 后端协议：http https
+   * <p>后端协议：http https</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HttpProtocolType?: string
   /**
-   * 证书检查
+   * <p>证书检查</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CheckTargetCertsError?: boolean
   /**
-   * 目标路径
+   * <p>目标路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TargetPath?: string
   /**
-   * 流量控制状态
+   * <p>流量控制状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InvokeLimitConfigStatus?: boolean
   /**
-   * 流量控制配置
+   * <p>流量控制配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InvokeLimitConfig?: InvokeLimitConfigDTO
   /**
-   * IP白名单开启状态
+   * <p>IP白名单开启状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IpWhiteStatus?: boolean
   /**
-   * IP白名单配置
+   * <p>IP白名单配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IpWhiteConfig?: IpConfig
   /**
-   * IP黑名单开启状态
+   * <p>IP黑名单开启状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IpBlackStatus?: boolean
   /**
-   * IP黑名单配置
+   * <p>IP黑名单配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IpBlackConfig?: IpConfig
   /**
-   * mcp server ID
+   * <p>mcp server ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ID?: string
   /**
-   * 状态
+   * <p>状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Status?: string
   /**
-   * 预览地址
+   * <p>预览地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Url?: string
   /**
-   * 应用
+   * <p>应用</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   App?: IDNameVO
   /**
-   * 目录
+   * <p>目录</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Catalogs?: Array<IDNameVO>
   /**
-   * 标签
+   * <p>标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Labels?: Array<IDNameVO>
   /**
-   * 创建时间
+   * <p>创建时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CreateTime?: string
   /**
-   * 最后修改时间
+   * <p>最后修改时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   LastUpdateTime?: string
   /**
-   * 用户appID
+   * <p>用户appID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AppID?: number
   /**
-   * 用户ID
+   * <p>用户ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Uin?: string
   /**
-   * 自定义host
+   * <p>自定义host</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CustomHttpHost?: string
   /**
-   *  Http 请求host类型 useRequestHost 保持源请求host targetHost 修正为源站host  customHost 自定义host
+   * <p>Http 请求host类型 useRequestHost 保持源请求host targetHost 修正为源站host  customHost 自定义host</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HttpHostType?: string
   /**
-   * 请求的超时时间
+   * <p>请求的超时时间</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Timeout?: number
   /**
-   * mcp server模式
+   * <p>mcp server模式</p>
    */
   Mode?: string
   /**
-   * mcp version
+   * <p>mcp version</p>
    */
   McpVersion?: string
   /**
-   * 封装模式下绑定的服务ID列表
+   * <p>封装模式下绑定的服务ID列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WrapServices?: Array<string>
   /**
-   * 工具数量
+   * <p>工具数量</p>
    */
   ToolNum?: number
   /**
-   * 安全规则集响应
+   * <p>安全规则集响应</p>
    */
   McpSecurityRulesVO?: Array<McpSecurityRulesVO>
   /**
-   * 真实工具级别配置，实时拉取了tool/list做渲染的，如果tool/list不通，就拉不到。
+   * <p>真实工具级别配置，实时拉取了tool/list做渲染的，如果tool/list不通，就拉不到。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ToolConfigs?: Array<ToolConfigVO>
   /**
-   * 访问URL
+   * <p>访问URL</p>
    */
   UrlObj?: McpUrlObj
   /**
-   * 后端mcp服务是否正常
+   * <p>后端mcp服务是否正常</p>
    */
   ToolMessage?: string
   /**
-   * 后端mcp服务的工具列表
+   * <p>后端mcp服务的工具列表</p>
    */
   Tools?: Array<McpTool>
   /**
-   * 封装的API分组ID
+   * <p>封装的API分组ID</p>
    */
   WrapPaasID?: string
   /**
-   * 关联的agentApp数量
+   * <p>关联的agentApp数量</p>
    */
   RelateAgentAppNum?: number
   /**
-   * 插件配置
+   * <p>插件配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PluginConfigs?: Array<PluginConfigDTO>
+  /**
+   * <p>是否忽略健康检查</p>
+   */
+  IgnoreHealthCheck?: boolean
 }
 
 /**
@@ -1110,7 +1114,7 @@ export interface CreateAgentAppResp {
  */
 export interface CreateMcpServerResponse {
   /**
-   * mcp server ID
+   * <p>mcp server ID</p>
    */
   Data?: ResultIDVO
   /**
@@ -1797,101 +1801,105 @@ export interface DescribeAgentAppResp {
  */
 export interface CreateMcpServerRequest {
   /**
-   * 模式：proxy代理模式； wrap封装模式；
+   * <p>模式：proxy代理模式； wrap封装模式；</p>
    */
   Mode: string
   /**
-   * 版本号：2024-11-05 2025-03-26
+   * <p>版本号：2024-11-05 2025-03-26</p>
    */
   McpVersion: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceID: string
   /**
-   * 名称
+   * <p>名称</p>
    */
   Name: string
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description: string
   /**
-   * 封装服务列表
+   * <p>封装服务列表</p>
    */
   WrapServices?: Array<string>
   /**
-   * 负载方式，robin random consistentHash
+   * <p>负载方式，robin random consistentHash</p>
    */
   TargetSelect?: string
   /**
-   * 目标服务器
+   * <p>目标服务器</p>
    */
   TargetHosts?: Array<TargetHostDTO>
   /**
-   * 后端协议：http https
+   * <p>后端协议：http https</p>
    */
   HttpProtocolType?: string
   /**
-   * 证书检查
+   * <p>证书检查</p>
    */
   CheckTargetCertsError?: boolean
   /**
-   * 目标路径
+   * <p>目标路径</p>
    */
   TargetPath?: string
   /**
-   * 流量控制开启状态
+   * <p>流量控制开启状态</p>
    */
   InvokeLimitConfigStatus?: boolean
   /**
-   * 流量控制配置
+   * <p>流量控制配置</p>
    */
   InvokeLimitConfig?: InvokeLimitConfigDTO
   /**
-   * IP白名单开启状态
+   * <p>IP白名单开启状态</p>
    */
   IpWhiteStatus?: boolean
   /**
-   * IP白名单配置
+   * <p>IP白名单配置</p>
    */
   IpWhiteConfig?: IpConfig
   /**
-   * IP黑名单开启状态
+   * <p>IP黑名单开启状态</p>
    */
   IpBlackStatus?: boolean
   /**
-   * IP黑名单配置
+   * <p>IP黑名单配置</p>
    */
   IpBlackConfig?: IpConfig
   /**
-   * 自定义host
+   * <p>自定义host</p>
    */
   CustomHttpHost?: string
   /**
-   * Http 请求host类型：useRequestHost 保持源请求；host targetHost 修正为源站host；  customHost 自定义host
+   * <p>Http 请求host类型：useRequestHost 保持源请求；host targetHost 修正为源站host；  customHost 自定义host</p>
    */
   HttpHostType?: string
   /**
-   * 请求的超时时间
+   * <p>请求的超时时间</p>
    */
   Timeout?: number
   /**
-   * 安全规则集
+   * <p>安全规则集</p>
    */
   McpSecurityRules?: Array<McpSecurityRule>
   /**
-   * 工具集配置（openapi时或许用的是）
+   * <p>工具集配置（openapi时或许用的是）</p>
    */
   ToolConfigs?: Array<ToolConfigDTO>
   /**
-   * 封装的API分组ID
+   * <p>封装的API分组ID</p>
    */
   WrapPaasID?: string
   /**
-   * 插件配置
+   * <p>插件配置</p>
    */
   PluginConfigs?: Array<PluginConfigDTO>
+  /**
+   * <p>是否忽略健康检查</p>
+   */
+  IgnoreHealthCheck?: boolean
 }
 
 /**
@@ -3318,109 +3326,113 @@ export interface DescribeServicesResponse {
  */
 export interface ModifyMcpServerRequest {
   /**
-   * mcp server ID
+   * <p>mcp server ID</p>
    */
   ID: string
   /**
-   * 模式：proxy代理模式； wrap封装模式；
+   * <p>模式：proxy代理模式； wrap封装模式；</p>
    */
   Mode: string
   /**
-   * 版本号：2024-11-05 2025-03-26
+   * <p>版本号：2024-11-05 2025-03-26</p>
    */
   McpVersion: string
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceID: string
   /**
-   * 名称
+   * <p>名称</p>
    */
   Name: string
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
   /**
-   * 封装服务列表
+   * <p>封装服务列表</p>
    */
   WrapServices?: Array<string>
   /**
-   * 负载方式，robin random consistentHash
+   * <p>负载方式，robin random consistentHash</p>
    */
   TargetSelect?: string
   /**
-   * 目标服务器
+   * <p>目标服务器</p>
    */
   TargetHosts?: Array<TargetHostDTO>
   /**
-   * 后端协议：http https
+   * <p>后端协议：http https</p>
    */
   HttpProtocolType?: string
   /**
-   * 证书检查
+   * <p>证书检查</p>
    */
   CheckTargetCertsError?: boolean
   /**
-   * 目标路径
+   * <p>目标路径</p>
    */
   TargetPath?: string
   /**
-   * 流量控制开启状态
+   * <p>流量控制开启状态</p>
    */
   InvokeLimitConfigStatus?: boolean
   /**
-   * 流量控制配置
+   * <p>流量控制配置</p>
    */
   InvokeLimitConfig?: InvokeLimitConfigDTO
   /**
-   * IP白名单开启状态
+   * <p>IP白名单开启状态</p>
    */
   IpWhiteStatus?: boolean
   /**
-   * IP白名单配置
+   * <p>IP白名单配置</p>
    */
   IpWhiteConfig?: IpConfig
   /**
-   * IP黑名单开启状态
+   * <p>IP黑名单开启状态</p>
    */
   IpBlackStatus?: boolean
   /**
-   * IP黑名单配置
+   * <p>IP黑名单配置</p>
    */
   IpBlackConfig?: IpConfig
   /**
-   * 目标Host类型 0 默认 1 vpc
+   * <p>目标Host类型 0 默认 1 vpc</p>
    */
   TargetHostType?: number
   /**
-   * 自定义host
+   * <p>自定义host</p>
    */
   CustomHttpHost?: string
   /**
-   * Http 请求host类型：useRequestHost 保持源请求；host targetHost 修正为源站host； customHost 自定义host
+   * <p>Http 请求host类型：useRequestHost 保持源请求；host targetHost 修正为源站host； customHost 自定义host</p>
    */
   HttpHostType?: string
   /**
-   * 请求的超时时间
+   * <p>请求的超时时间</p>
    */
   Timeout?: number
   /**
-   * 安全规则集
+   * <p>安全规则集</p>
    */
   McpSecurityRules?: Array<McpSecurityRule>
   /**
-   * 工具集配置（openapi可能会用到）
+   * <p>工具集配置（openapi可能会用到）</p>
    */
   ToolConfigs?: Array<ToolConfigDTO>
   /**
-   * 封装的API分组ID
+   * <p>封装的API分组ID</p>
    */
   WrapPaasID?: string
   /**
-   * 插件配置
+   * <p>插件配置</p>
    */
   PluginConfigs?: Array<PluginConfigDTO>
+  /**
+   * <p>是否忽略健康检查</p>
+   */
+  IgnoreHealthCheck?: boolean
 }
 
 /**
@@ -3952,7 +3964,7 @@ export interface DescribeAgentAppModelServicesResponse {
  */
 export interface ModifyMcpServerResponse {
   /**
-   * mcp server ID
+   * <p>mcp server ID</p>
    */
   Data?: ResultIDVO
   /**

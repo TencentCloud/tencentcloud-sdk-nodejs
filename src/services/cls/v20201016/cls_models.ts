@@ -175,6 +175,20 @@ export interface DescribeNetworkApplicationDetailRequest {
 }
 
 /**
+ * 自定义 KMS 密钥
+ */
+export interface CustomKmsInfo {
+  /**
+   * <p>KMS支持的地域，详见 腾讯云-密钥管理系统 官方文档</p><p>参数格式：ap-guangzhou</p>
+   */
+  KmsRegion: string
+  /**
+   * <p>KMS秘钥ID</p>
+   */
+  KmsKeyId: string
+}
+
+/**
  * DeleteShipper请求参数结构体
  */
 export interface DeleteShipperRequest {
@@ -1728,6 +1742,10 @@ export interface CreateTopicRequest {
    * <p>加密相关参数。 支持加密地域并且开白用户可以传此参数，其他场景不能传递该参数。<br>0或者不传： 不加密<br>1：kms-cls 云产品密钥加密</p><p>支持地域：ap-beijing,ap-guangzhou,ap-shanghai,ap-singapore,ap-bangkok,ap-jakarta,eu-frankfurt,ap-seoul,ap-tokyo</p>
    */
   Encryption?: number
+  /**
+   * <p>用户自定义 KMS 密钥信息；为空则使用默认密钥（别名 KMS-CLS）</p><p>当参数 Encryption为 1 时有效。</p>
+   */
+  CustomKmsInfo?: CustomKmsInfo
   /**
    * <p>主题类型</p><ul><li>0:日志主题，默认值</li><li>1:指标主题</li></ul>
    */
@@ -3380,21 +3398,13 @@ export interface DeleteAlarmNoticeRequest {
 }
 
 /**
- * DescribeScheduledSqlInfo返回参数结构体
+ * DeleteLogset请求参数结构体
  */
-export interface DescribeScheduledSqlInfoResponse {
+export interface DeleteLogsetRequest {
   /**
-   * ScheduledSQL任务列表信息
+   * 日志集Id。通过 [获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。
    */
-  ScheduledSqlTaskInfos?: Array<ScheduledSqlTaskInfo>
-  /**
-   * 任务总次数
-   */
-  TotalCount?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  LogsetId: string
 }
 
 /**
@@ -4547,13 +4557,21 @@ export interface QueryMetricResponse {
 }
 
 /**
- * DeleteLogset请求参数结构体
+ * DescribeScheduledSqlInfo返回参数结构体
  */
-export interface DeleteLogsetRequest {
+export interface DescribeScheduledSqlInfoResponse {
   /**
-   * 日志集Id。通过 [获取日志集列表](https://cloud.tencent.com/document/product/614/58624)获取日志集Id。
+   * ScheduledSQL任务列表信息
    */
-  LogsetId: string
+  ScheduledSqlTaskInfos?: Array<ScheduledSqlTaskInfo>
+  /**
+   * 任务总次数
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4945,9 +4963,13 @@ export interface TopicInfo {
    */
   HotPeriod?: number
   /**
-   * <p>kms-cls服务秘钥id</p>
+   * <p>kms-cls服务秘钥id</p><p>CustomKmsInfo为空时为系统默认密钥，CustomKmsInfo不为空时为用户自定义密钥</p>
    */
   KeyId?: string
+  /**
+   * <p>用户自定义 KMS 密钥信息</p>
+   */
+  CustomKmsInfo?: CustomKmsInfo
   /**
    * <p>主题类型。</p><ul><li>0: 日志主题 </li><li>1: 指标主题</li></ul>
    */
@@ -9820,36 +9842,23 @@ export interface DeleteConsumerResponse {
  */
 export interface DescribeTopicsRequest {
   /**
-   * <ul><li>topicName 按照【主题名称】进行过滤，默认为模糊匹配，可使用 PreciseSearch 参数设置为精确匹配。类型：String。必选：否</li>
-<li>logsetName 按照【日志集名称】进行过滤，默认为模糊匹配，可使用 PreciseSearch 参数设置为精确匹配。类型：String。必选：否</li>
-<li>topicId 按照【主题ID】进行过滤。类型：String。必选：否</li>
-<li>logsetId 按照【日志集ID】进行过滤，可通过调用 <a href="https://cloud.tencent.com/document/product/614/58624">DescribeLogsets</a> 查询已创建的日志集列表或登录控制台进行查看；也可以调用<a href="https://cloud.tencent.com/document/product/614/58626">CreateLogset</a> 创建新的日志集。类型：String。必选：否</li>
-<li>tagKey 按照【标签键】进行过滤。类型：String。必选：否</li>
-<li>tag:tagKey 按照【标签键值对】进行过滤。tagKey 使用具体的标签键进行替换，例如 tag:exampleKey。类型：String。必选：否</li>
-<li>storageType 按照【主题的存储类型】进行过滤。可选值 hot（标准存储），cold（低频存储）类型：String。必选：否</li></ul>
-注意：每次请求的 Filters 的上限为10，Filter.Values 的上限为100。
+   * <ul><li>topicName 按照【主题名称】进行过滤，默认为模糊匹配，可使用 PreciseSearch 参数设置为精确匹配。类型：String。必选：否</li><li>logsetName 按照【日志集名称】进行过滤，默认为模糊匹配，可使用 PreciseSearch 参数设置为精确匹配。类型：String。必选：否</li><li>topicId 按照【主题ID】进行过滤。类型：String。必选：否</li><li>logsetId 按照【日志集ID】进行过滤，可通过调用 <a href="https://cloud.tencent.com/document/product/614/58624">DescribeLogsets</a> 查询已创建的日志集列表或登录控制台进行查看；也可以调用<a href="https://cloud.tencent.com/document/product/614/58626">CreateLogset</a> 创建新的日志集。类型：String。必选：否</li><li>tagKey 按照【标签键】进行过滤。类型：String。必选：否</li><li>tag:tagKey 按照【标签键值对】进行过滤。tagKey 使用具体的标签键进行替换，例如 tag:exampleKey。类型：String。必选：否</li><li>storageType 按照【主题的存储类型】进行过滤。可选值 hot（标准存储），cold（低频存储）类型：String。必选：否</li></ul>注意：每次请求的 Filters 的上限为10，Filter.Values 的上限为100。
    */
   Filters?: Array<Filter>
   /**
-   * 分页的偏移量，默认值为0。
+   * <p>分页的偏移量，默认值为0。</p>
    */
   Offset?: number
   /**
-   * 分页单页限制数目，默认值为20，最大值100。
+   * <p>分页单页限制数目，默认值为20，最大值100。</p>
    */
   Limit?: number
   /**
-   * 控制Filters相关字段是否为精确匹配。
-<ul><li>0: 默认值，topicName 和 logsetName 模糊匹配</li>
-<li>1: topicName   精确匹配</li>
-<li>2: logsetName精确匹配</li>
-<li>3: topicName 和logsetName 都精确匹配</li></ul>
+   * <p>控制Filters相关字段是否为精确匹配。</p><ul><li>0: 默认值，topicName 和 logsetName 模糊匹配</li><li>1: topicName   精确匹配</li><li>2: logsetName精确匹配</li><li>3: topicName 和logsetName 都精确匹配</li></ul>
    */
   PreciseSearch?: number
   /**
-   * 主题类型
-- 0:日志主题，默认值
-- 1:指标主题
+   * <p>主题类型</p><ul><li>0:日志主题，默认值</li><li>1:指标主题</li></ul>
    */
   BizType?: number
 }
@@ -12869,11 +12878,11 @@ export interface CreateRecordingRuleYamlTaskResponse {
  */
 export interface DescribeTopicsResponse {
   /**
-   * 主题列表
+   * <p>主题列表</p>
    */
   Topics?: Array<TopicInfo>
   /**
-   * 总数目
+   * <p>总数目</p>
    */
   TotalCount?: number
   /**
@@ -14499,6 +14508,10 @@ export interface ModifyTopicRequest {
    * <p>加密相关参数。 支持加密地域并且开白用户可以传此参数，其他场景不能传递该参数。<br>只支持传入1：kms-cls 云产品秘钥加密</p>
    */
   Encryption?: number
+  /**
+   * <p>用户自定义 KMS 密钥信息；为空则使用默认密钥（别名 KMS-CLS）</p><p>当参数 Encryption为 1 时生效</p>
+   */
+  CustomKmsInfo?: CustomKmsInfo
   /**
    * <p>开启记录公网来源ip和服务端接收时间</p>
    */

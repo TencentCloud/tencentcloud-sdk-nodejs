@@ -1896,7 +1896,7 @@ export interface CreateListenerRequest {
    */
   GlobalAcceleratorId: string
   /**
-   * <p>名称，最大长度不能超过60个字节。</p>
+   * <p>名称，最大长度不能超过128个字符。</p>
    */
   Name: string
   /**
@@ -1904,7 +1904,7 @@ export interface CreateListenerRequest {
    */
   PortRanges: PortRanges
   /**
-   * <p>描述信息，最大长度不能超过100个字节。</p>
+   * <p>描述信息，最大长度不能超过100个字符。</p>
    */
   Description?: string
   /**

@@ -23801,6 +23801,10 @@ export interface DescribeVoicesResponse {
    */
   Msg?: string
   /**
+   * <p>符合查询条件的音色总数</p>
+   */
+  TotalCount?: number
+  /**
    * <p>可用音色列表</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */

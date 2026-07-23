@@ -2979,19 +2979,19 @@ export interface Recipient {
  */
 export interface DescribeTemplatesResponse {
   /**
-   * 模板详情列表数据
+   * <p>模板详情列表数据</p>
    */
   Templates?: Array<TemplateInfo>
   /**
-   * 查询到的模板总数
+   * <p>查询到的模板总数</p>
    */
   TotalCount?: number
   /**
-   * 每页返回的数据条数
+   * <p>每页返回的数据条数</p>
    */
   Limit?: number
   /**
-   * 查询结果分页返回，此处指定第几页。页码从0开始，即首页为0。
+   * <p>偏移量:从 0 开始，最大20000。</p>
    */
   Offset?: number
   /**
@@ -3147,31 +3147,20 @@ export interface ChannelVerifyPdfRequest {
  */
 export interface CreateChannelFlowEvidenceReportRequest {
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
-</ul>
-第三方平台子客企业和员工必须已经经过实名认证
+   * <p>关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。</p><p>此接口下面信息必填。</p><ul><li>渠道应用标识:  Agent.AppId</li><li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li><li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li></ul>第三方平台子客企业和员工必须已经经过实名认证
    */
   Agent: Agent
   /**
-   * 合同流程ID，为32位字符串。
-建议开发者妥善保存此流程ID，以便于顺利进行后续操作。
+   * <p>合同流程ID，为32位字符串。<br>建议开发者妥善保存此流程ID，以便于顺利进行后续操作。</p>
    */
   FlowId: string
   /**
-   * 暂未开放
+   * <p>暂未开放</p>
    * @deprecated
    */
   Operator?: UserInfo
   /**
-   * 指定申请的报告类型，可选类型如下：
-<ul><li> **0** :合同签署报告（默认）</li>
-<li> **1** :公证处核验报告</li></ul>
+   * <p>指定申请的报告类型，可选类型如下：<ul><li> <strong>0</strong> :合同签署报告（默认）</li></ul></p><p>枚举值：</p><ul><li>0： 合同签署报告</li></ul>
    */
   ReportType?: number
 }
@@ -4592,16 +4581,15 @@ export interface DescribeChannelSealPolicyWorkflowUrlRequest {
  */
 export interface CreatePartnerAutoSignAuthUrlResponse {
   /**
-   * 授权链接，以短链形式返回，短链的有效期参考回参中的 ExpiredTime。
+   * <p>授权链接，以短链形式返回，短链的有效期参考回参中的 ExpiredTime。</p>
    */
   Url?: string
   /**
-   * 从客户小程序或者客户APP跳转至腾讯电子签小程序进行批量签署的跳转路径
-
+   * <p>从客户小程序或者客户APP跳转至腾讯电子签小程序进行批量签署的跳转路径</p>
    */
   MiniAppPath?: string
   /**
-   * 链接过期时间以 Unix 时间戳格式表示，从生成链接时间起，往后7天有效期。过期后短链将失效，无法打开。
+   * <p>链接过期时间以 Unix 时间戳格式表示，从生成链接时间起，往后7天有效期。过期后短链将失效，无法打开。</p>
    */
   ExpireTime?: number
   /**
@@ -5722,39 +5710,23 @@ export interface ChannelGetTaskResultApiRequest {
  */
 export interface DescribeChannelOrganizationsRequest {
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
-
-此接口下面信息必填。
-
-渠道应用标识: Agent.AppId
-第三方平台子客企业标识: Agent.ProxyOrganizationOpenId
-第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId
-
-第三方平台子客企业和员工必须已经经过实名认证
+   * <p>关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。</p><p>此接口下面信息必填。</p><p>渠道应用标识: Agent.AppId<br>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId<br>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</p><p>第三方平台子客企业和员工必须已经经过实名认证</p>
    */
   Agent: Agent
   /**
-   * 指定分页每页返回的数据条数，单页最大支持 200。
+   * <p>指定分页每页返回的数据条数，单页最大支持 200。</p>
    */
   Limit: number
   /**
-   * 该字段是指第三方平台子客企业的唯一标识，用于查询单独某个子客的企业数据。
-
-**注**：`如果需要批量查询本应用下的所有企业的信息，则该字段不需要赋值`
+   * <p>该字段是指第三方平台子客企业的唯一标识，用于查询单独某个子客的企业数据。</p><p><strong>注</strong>：<code>如果需要批量查询本应用下的所有企业的信息，则该字段不需要赋值</code></p>
    */
   OrganizationOpenId?: string
   /**
-   * 可以按照当前企业的认证状态进行过滤。可值如下：
-<ul><li>**"UNVERIFIED"**： 未认证的企业</li>
-  <li>**"VERIFYINGLEGALPENDINGAUTHORIZATION"**： 认证中待法人授权的企业</li>
-  <li>**"VERIFYINGAUTHORIZATIONFILEPENDING"**： 认证中授权书审核中的企业</li>
-  <li>**"VERIFYINGAUTHORIZATIONFILEREJECT"**： 认证中授权书已驳回的企业</li>
-  <li>**"VERIFYING"**： 认证进行中的企业</li>
-  <li>**"VERIFIED"**： 已认证完成的企业</li></ul>
+   * <p>可以按照当前企业的认证状态进行过滤。可值如下：</p><ul><li>**"UNVERIFIED"**： 未认证的企业</li>  <li>**"VERIFYINGLEGALPENDINGAUTHORIZATION"**： 认证中待法人授权的企业</li>  <li>**"VERIFYINGAUTHORIZATIONFILEPENDING"**： 认证中授权书审核中的企业</li>  <li>**"VERIFYINGAUTHORIZATIONFILEREJECT"**： 认证中授权书已驳回的企业</li>  <li>**"VERIFYING"**： 认证进行中的企业</li>  <li>**"VERIFIED"**： 已认证完成的企业</li></ul>
    */
   AuthorizationStatusList?: Array<string>
   /**
-   * 指定分页返回第几页的数据，如果不传默认返回第一页。 页码从 0 开始，即首页为 0，最大20000。
+   * <p>偏移量:从 0 开始，最大20000。</p>
    */
   Offset?: number
 }
@@ -6131,30 +6103,20 @@ export interface SyncFailReason {
  */
 export interface DescribeChannelFlowEvidenceReportRequest {
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
-</ul>
-第三方平台子客企业和员工必须已经经过实名认证
+   * <p>关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。</p><p>此接口下面信息必填。</p><ul><li>渠道应用标识:  Agent.AppId</li><li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li><li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li></ul>第三方平台子客企业和员工必须已经经过实名认证
    */
   Agent: Agent
   /**
-   * 签署报告编号, 由<a href="https://qian.tencent.com/developers/partnerApis/certificate/CreateChannelFlowEvidenceReport" target="_blank">提交申请出证报告任务</a>产生
+   * <p>签署报告编号, 由<a href="https://qian.tencent.com/developers/partnerApis/certificate/CreateChannelFlowEvidenceReport" target="_blank">提交申请出证报告任务</a>产生</p>
    */
   ReportId: string
   /**
-   * 暂未开放
+   * <p>暂未开放</p>
    * @deprecated
    */
   Operator?: UserInfo
   /**
-   * 指定申请的报告类型，可选类型如下：
-<ul><li> **0** :合同签署报告（默认）</li>
-<li> **1** :公证处核验报告</li></ul>
+   * <p>指定申请的报告类型，可选类型如下：<ul><li> <strong>0</strong> :合同签署报告（默认）</li></ul></p><p>枚举值：</p><ul><li>0： 合同签署报告</li></ul>
    */
   ReportType?: number
 }
@@ -7165,69 +7127,37 @@ export interface CreateBatchOrganizationAuthorizationUrlResponse {
  */
 export interface CreatePartnerAutoSignAuthUrlRequest {
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
-</ul>
-第三方平台子客企业和员工必须已经经过实名认证
+   * <p>关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。</p><p>此接口下面信息必填。</p><ul><li>渠道应用标识:  Agent.AppId</li><li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li><li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li></ul>第三方平台子客企业和员工必须已经经过实名认证
    */
   Agent: Agent
   /**
-   * 被授企业id/授权方企业id（即OrganizationId），如果是企业之间授权和AuthorizedOrganizationName二选一传入。
-
-注：`被授权企业必须和当前企业在同一应用号下`
+   * <p>被授企业id/授权方企业id（即OrganizationId），如果是企业之间授权和AuthorizedOrganizationName二选一传入。</p><p>注：<code>被授权企业必须和当前企业在同一应用号下</code></p>
    * @deprecated
    */
   AuthorizedOrganizationId?: string
   /**
-   * 被授企业名称/授权方企业的名字，如果是企业之间授权和AuthorizedOrganizationId二选一传入即可。请确认该名称与企业营业执照中注册的名称一致。
-
-注: 
-1. 如果名称中包含英文括号()，请使用中文括号（）代替。
-2. 被授权企业必须和当前企业在同一应用号下
+   * <p>被授企业名称/授权方企业的名字，如果是企业之间授权和AuthorizedOrganizationId二选一传入即可。请确认该名称与企业营业执照中注册的名称一致。</p><p>注: </p><ol><li>如果名称中包含英文括号()，请使用中文括号（）代替。</li><li>被授权企业必须和当前企业在同一应用号下</li></ol>
    * @deprecated
    */
   AuthorizedOrganizationName?: string
   /**
-   * 是否给平台应用授权
-
-<ul>
-<li><strong>true</strong>: 表示是，授权平台应用。在此情况下，无需设置<code>AuthorizedOrganizationIds</code>和<code>AuthorizedOrganizationNames</code>。</li>
-<li><strong>false</strong>: （默认）表示否，不是授权平台应用。</li>
-</ul>
-
- 注：授权给平台应用需要开通【基于子客授权第三方应用可文件发起子客自动签署】白名单，请联系运营经理开通。
+   * <p>是否给平台应用授权</p><ul><li><strong>true</strong>: 表示是，授权平台应用。在此情况下，无需设置<code>AuthorizedOrganizationIds</code>和<code>AuthorizedOrganizationNames</code>。</li><li><strong>false</strong>: （默认）表示否，不是授权平台应用。</li></ul><p> 注：授权给平台应用需要开通【基于子客授权第三方应用可文件发起子客自动签署】白名单，请联系运营经理开通。</p>
    */
   PlatformAppAuthorization?: boolean
   /**
-   * 在设置印章授权时，可以指定特定的印章类型，以确保在授权过程中只使用相应类型的印章。支持的印章类型包括：
-
-<ul>
-<li><strong>OFFICIAL</strong>：企业公章，用于代表企业对外的正式文件和重要事务的认证。</li>
-<li><strong>CONTRACT</strong>：合同专用章，专门用于签署各类合同。</li>
-<li><strong>FINANCE</strong>：财务专用章，用于企业的财务相关文件，如发票、收据等财务凭证的认证。</li>
-<li><strong>PERSONNEL</strong>：人事专用章，用于人事管理相关文件，如劳动合同、人事任命等。</li>
-</ul>
+   * <p>在设置印章授权时，可以指定特定的印章类型，以确保在授权过程中只使用相应类型的印章。</p><p>枚举值：</p><ul><li>OFFICIAL： 企业公章，用于代表企业对外的正式文件和重要事务的认证。</li><li>CONTRACT： 合同专用章，专门用于签署各类合同</li><li>FINANCE： 财务专用章，用于企业的财务相关文件，如发票、收据等财务凭证的认证。</li><li>PERSONNEL： 人事专用章，用于人事管理相关文件，如劳动合同、人事任命等。</li><li>OTHER： 其他类型印章，包含子类型</li></ul>
    */
   SealTypes?: Array<string>
   /**
-   * 在处理授权关系时，授权的方向
-<ul>
-<li><strong>false</strong>（默认值）：表示我方授权他方。在这种情况下，<code>AuthorizedOrganizationNames</code> 代表的是【被授权方】的企业名称，即接收授权的企业。</li>
-<li><strong>true</strong>：表示他方授权我方。在这种情况下，<code>AuthorizedOrganizationNames</code> 代表的是【授权方】的企业名称，即提供授权的企业。此场景下不支持批量</li>
-</ul>
+   * <p>在处理授权关系时，授权的方向</p><ul><li><strong>false</strong>（默认值）：表示我方授权他方。在这种情况下，<code>AuthorizedOrganizationNames</code> 代表的是【被授权方】的企业名称，即接收授权的企业。</li><li><strong>true</strong>：表示他方授权我方。在这种情况下，<code>AuthorizedOrganizationNames</code> 代表的是【授权方】的企业名称，即提供授权的企业。此场景下不支持批量</li></ul>
    */
   AuthToMe?: boolean
   /**
-   * 被授企业id/授权方企业id（即OrganizationId），如果是企业之间授权和AuthorizedOrganizationNames二选一传入，最大支持50个，注：`被授权企业必须和当前企业在同一应用号下`
+   * <p>被授企业id/授权方企业id（即OrganizationId），如果是企业之间授权和AuthorizedOrganizationNames二选一传入，最大支持50个，注：<code>被授权企业必须和当前企业在同一应用号下</code></p>
    */
   AuthorizedOrganizationIds?: Array<string>
   /**
-   * 被授企业名称/授权方企业的名字，如果是企业之间授权和AuthorizedOrganizationIds二选一传入即可。请确认该名称与企业营业执照中注册的名称一致。注: 1. 如果名称中包含英文括号()，请使用中文括号（）代替。2. 被授权企业必须和当前企业在同一应用号下 3. 数组最大长度50
+   * <p>被授企业名称/授权方企业的名字，如果是企业之间授权和AuthorizedOrganizationIds二选一传入即可。请确认该名称与企业营业执照中注册的名称一致。注: 1. 如果名称中包含英文括号()，请使用中文括号（）代替。2. 被授权企业必须和当前企业在同一应用号下 3. 数组最大长度50</p>
    */
   AuthorizedOrganizationNames?: Array<string>
 }
@@ -8639,101 +8569,56 @@ export interface ChannelCancelFlowRequest {
  */
 export interface DescribeTemplatesRequest {
   /**
-   * 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
-</ul>
-第三方平台子客企业和员工必须已经经过实名认证
+   * <p>关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。</p><p>此接口下面信息必填。</p><ul><li>渠道应用标识:  Agent.AppId</li><li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li><li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li></ul>第三方平台子客企业和员工必须已经经过实名认证
    */
   Agent: Agent
   /**
-   * 合同模板ID，为32位字符串。
-
-可以通过<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>登录企业控制台, 在企业模板中得到合同模板ID。
-
-[点击查看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png)
+   * <p>合同模板ID，为32位字符串。</p><p>可以通过<a href="https://qian.tencent.com/developers/partnerApis/accounts/CreateConsoleLoginUrl" target="_blank">生成子客登录链接</a>登录企业控制台, 在企业模板中得到合同模板ID。</p><p><a href="https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png">点击查看模板Id在控制台上的位置</a></p>
    */
   TemplateId?: string
   /**
-   * 查询模板的内容
-
-<ul><li>**0**：（默认）模板列表及详情</li>
-<li>**1**：仅模板列表, 不会返回模板中的签署控件, 填写控件, 参与方角色列表等信息</li></ul>
+   * <p>查询模板的内容</p><ul><li>**0**：（默认）模板列表及详情</li><li>**1**：仅模板列表, 不会返回模板中的签署控件, 填写控件, 参与方角色列表等信息</li></ul>
    */
   ContentType?: number
   /**
-   * 合同模板ID数组，每一个合同模板ID为32位字符串,  最多支持100个模板的批量查询。
-
-注意: 
-1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`
-2. `请确保每个模板均正确且属于当前企业，若有任一模板不存在，则返回错误。`
-4. `若传递此参数，分页参数(Limit,Offset)无效`
-
-
-[点击查看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png)
-
+   * <p>合同模板ID数组，每一个合同模板ID为32位字符串,  最多支持100个模板的批量查询。</p><p>注意:<br>1.<code>此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。</code></p><ol start="2"><li><code>请确保每个模板均正确且属于当前企业，若有任一模板不存在，则返回错误。</code></li><li><code>若传递此参数，分页参数(Limit,Offset)无效</code></li></ol><p><a href="https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png">点击查看模板Id在控制台上的位置</a></p>
    */
   TemplateIds?: Array<string>
   /**
-   * 指定每页返回的数据条数，和Offset参数配合使用。
-
-注：`1.默认值为20，单页做大值为100。`
+   * <p>指定每页返回的数据条数，和Offset参数配合使用。</p><p>注：<code>1.默认值为20，单页做大值为100。</code></p>
    */
   Limit?: number
   /**
-   * 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。
-
-注：`1.offset从0开始，即第一页为0。`
-`2.默认从第一页返回。`
+   * <p>偏移量:从 0 开始，最大20000。</p>
    */
   Offset?: number
   /**
-   * 模糊搜索的模板名称，注意是模板名的连续部分，长度不能超过200，可支持由中文、字母、数字和下划线组成字符串。
+   * <p>模糊搜索的模板名称，注意是模板名的连续部分，长度不能超过200，可支持由中文、字母、数字和下划线组成字符串。</p>
    */
   TemplateName?: string
   /**
-   * 对应第三方应用平台企业的模板ID，通过此值可以搜索由第三方应用平台模板ID下发或领取得到的子客模板列表。
+   * <p>对应第三方应用平台企业的模板ID，通过此值可以搜索由第三方应用平台模板ID下发或领取得到的子客模板列表。</p>
    */
   ChannelTemplateId?: string
   /**
-   * 返回控件的范围, 是只返回发起方自己的还是所有参与方的
-
-<ul><li>**false**：（默认）只返回发起方控件</li>
-<li>**true**：返回所有参与方(包括发起方和签署方)控件</li></ul>
+   * <p>返回控件的范围, 是只返回发起方自己的还是所有参与方的</p><ul><li>**false**：（默认）只返回发起方控件</li><li>**true**：返回所有参与方(包括发起方和签署方)控件</li></ul>
    */
   QueryAllComponents?: boolean
   /**
-   * 是否获取模板预览链接。
-
-<ul><li>**false**：不获取（默认）</li>
-<li>**true**：获取</li></ul>
-
-设置为true之后， 返回参数PreviewUrl，为模板的H5预览链接,  有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。
-
+   * <p>是否获取模板预览链接。</p><ul><li>**false**：不获取（默认）</li><li>**true**：获取</li></ul><p>设置为true之后， 返回参数PreviewUrl，为模板的H5预览链接,  有效期5分钟。可以通过浏览器打开此链接预览模板，或者嵌入到iframe中预览模板。</p>
    */
   WithPreviewUrl?: boolean
   /**
-   * 是否获取模板的PDF文件链接。
-
-<ul><li>**false**：不获取（默认）</li>
-<li>**true**：获取</li></ul>
-
-设置为true之后， 返回参数PdfUrl，为模板PDF文件链接，有效期5分钟, 可以用于将PDF文件下载到本地
-
-注: `此功能需要开通功能白名单【第三方应用集成企业获取模板PDF下载链接】，使用前请联系对接的客户经理沟通。`
+   * <p>是否获取模板的PDF文件链接。</p><ul><li>**false**：不获取（默认）</li><li>**true**：获取</li></ul><p>设置为true之后， 返回参数PdfUrl，为模板PDF文件链接，有效期5分钟, 可以用于将PDF文件下载到本地</p><p>注: <code>此功能需要开通功能白名单【第三方应用集成企业获取模板PDF下载链接】，使用前请联系对接的客户经理沟通。</code></p>
    */
   WithPdfUrl?: boolean
   /**
-   * 操作者的信息
+   * <p>操作者的信息</p>
    * @deprecated
    */
   Operator?: UserInfo
   /**
-   * 用户合同类型id
+   * <p>用户合同类型id</p>
    */
   UserFlowTypeId?: string
 }
@@ -9042,19 +8927,19 @@ export interface CreateSealByImageRequest {
  */
 export interface DescribeChannelOrganizationsResponse {
   /**
-   * 满足查询条件的企业信息列表。
+   * <p>满足查询条件的企业信息列表。</p>
    */
   ChannelOrganizationInfos?: Array<ChannelOrganizationInfo>
   /**
-   * 指定分页返回第几页的数据。页码从 0 开始，即首页为 0，最大20000。
+   * <p>偏移量:从 0 开始，最大20000。</p>
    */
   Offset?: number
   /**
-   * 指定分页每页返回的数据条数，单页最大支持 200。
+   * <p>指定分页每页返回的数据条数，单页最大支持 200。</p>
    */
   Limit?: number
   /**
-   * 满足查询条件的企业总数量。
+   * <p>满足查询条件的企业总数量。</p>
    */
   Total?: number
   /**
@@ -9324,19 +9209,15 @@ export interface DescribeChannelSealPolicyWorkflowUrlResponse {
  */
 export interface CreateChannelFlowEvidenceReportResponse {
   /**
-   * 出证报告 ID，可用于<a href="https://qian.tencent.com/developers/partnerApis/certificate/DescribeChannelFlowEvidenceReport" target="_blank">获取出证报告任务执行结果</a>查询出证任务结果和出证PDF的下载URL
+   * <p>出证报告 ID，可用于<a href="https://qian.tencent.com/developers/partnerApis/certificate/DescribeChannelFlowEvidenceReport" target="_blank">获取出证报告任务执行结果</a>查询出证任务结果和出证PDF的下载URL</p>
    */
   ReportId?: string
   /**
-   * 出证任务执行的状态, 状态含义如下：
-
-<ul><li>**EvidenceStatusExecuting**：  出证任务在执行中</li>
-<li>**EvidenceStatusSuccess**：  出证任务执行成功</li>
-<li>**EvidenceStatusFailed** ： 出证任务执行失败</li></ul>
+   * <p>出证任务执行的状态, 状态含义如下：</p><ul><li>**EvidenceStatusExecuting**：  出证任务在执行中</li><li>**EvidenceStatusSuccess**：  出证任务执行成功</li><li>**EvidenceStatusFailed** ： 出证任务执行失败</li></ul>
    */
   Status?: string
   /**
-   * 废除，字段无效
+   * <p>废除，字段无效</p>
    */
   ReportUrl?: string
   /**
@@ -9473,15 +9354,11 @@ export interface SyncProxyOrganizationRequest {
  */
 export interface DescribeChannelFlowEvidenceReportResponse {
   /**
-   * 出证报告PDF的下载 URL，有效期为5分钟，超过有效期后将无法再下载。
+   * <p>出证报告PDF的下载 URL，有效期为5分钟，超过有效期后将无法再下载。</p>
    */
   ReportUrl?: string
   /**
-   * 出证任务执行的状态, 状态含义如下：
-
-<ul><li>**EvidenceStatusExecuting**：  出证任务在执行中</li>
-<li>**EvidenceStatusSuccess**：  出证任务执行成功</li>
-<li>**EvidenceStatusFailed** ： 出证任务执行失败</li></ul>
+   * <p>出证任务执行的状态, 状态含义如下：</p><ul><li>**EvidenceStatusExecuting**：  出证任务在执行中</li><li>**EvidenceStatusSuccess**：  出证任务执行成功</li><li>**EvidenceStatusFailed** ： 出证任务执行失败</li></ul>
    */
   Status?: string
   /**

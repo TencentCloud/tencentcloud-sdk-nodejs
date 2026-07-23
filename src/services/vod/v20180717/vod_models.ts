@@ -193,6 +193,10 @@ export interface CreateAigcVideoRedrawTaskRequest {
    */
   FileInfo?: AigcVideoRedrawTaskInputFileInfo
   /**
+   * <p>AIGC 视频转绘任务参数信息。</p>
+   */
+  TaskInfo?: AigcVideoRedrawTaskInfo
+  /**
    * <p>AIGC 视频转绘任务的输出媒体文件配置。</p>
    */
   OutputConfig?: AigcVideoRedrawOutputConfig
@@ -1130,25 +1134,37 @@ export interface DeleteLLMComprehendTemplateRequest {
  */
 export interface QualityInspectTaskOutput {
   /**
-   * 媒体文件是否无音频轨，取值范围：
-<li>0：否，即有音频轨；</li>
-<li>1：是，即无音频轨。</li>
+   * <p>媒体文件是否无音频轨，取值范围：</p><li>0：否，即有音频轨；</li><li>1：是，即无音频轨。</li>
    */
   NoAudio?: number
   /**
-   * 媒体文件是否无视频轨，取值范围：
-<li>0：否，即有视频轨；</li>
-<li>1：是，即无视频轨。</li>
+   * <p>媒体文件是否无视频轨，取值范围：</p><li>0：否，即有视频轨；</li><li>1：是，即无视频轨。</li>
    */
   NoVideo?: number
   /**
-   * 视频画面质量评分，取值范围：[0, 100]。
+   * <p>视频画面质量评分，取值范围：[0, 100]。</p>
    */
   QualityEvaluationScore?: number
   /**
-   * 音画质检测出的异常项列表。
+   * <p>音画质检测出的异常项列表。</p>
    */
   QualityInspectResultSet?: Array<QualityInspectResultItem>
+  /**
+   * <p>视频无参考质量评分，MOS分数。</p>
+   */
+  QualityEvaluationMeanOpinionScore?: number
+  /**
+   * <p>视频美学评分，范围：[0,100]。</p>
+   */
+  AestheticEvaluationScore?: number
+  /**
+   * <p>格式诊断检出异常项。</p>
+   */
+  ContainerDiagnoseResultSet?: Array<QualityInspectContainerDiagnoseResultItem>
+  /**
+   * <p>LLM 大模型 AIGC 质量检测结果。</p>
+   */
+  LLMDetectionReport?: QualityInspectLLMDetectionReport
 }
 
 /**
@@ -2962,6 +2978,56 @@ export interface VideoConfigureInfoForUpdate {
 当取值为 0，表示由云点播自动设置码率。
    */
   Bitrate?: number
+}
+
+/**
+ * 音视频审核任务的输出。
+ */
+export interface ReviewAudioVideoTaskOutput {
+  /**
+   * 音视频内容审核的结果建议，取值范围：
+<li>pass：建议通过；</li>
+<li>review：建议复审；</li>
+<li>block：建议封禁。</li>
+   */
+  Suggestion?: string
+  /**
+   * 当 Suggestion 为 review 或 block 时有效，表示音视频最可能的违规的标签，取值范围：
+<li>Porn：色情；</li>
+<li>Terror：暴力；</li>
+<li>Polity：不适宜的信息；</li>
+<li>Ad：广告；</li>
+<li>Illegal：违法；</li>
+<li>Abuse：谩骂；</li>
+<li>Moan：娇喘。</li>
+   */
+  Label?: string
+  /**
+   * 当 Suggestion 为 review 或 block 时有效，表示音视频最可能的违禁的形式，取值范围：
+<li>Image：画面上的人物或图标；</li>
+<li>OCR：画面上的文字；</li>
+<li>ASR：语音中的文字；</li>
+<li>Voice：声音。</li>
+   */
+  Form?: string
+  /**
+   * 有违规信息的嫌疑的视频片段列表。
+<font color=red>注意</font> ：该列表最多仅展示前 10个 元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
+   */
+  SegmentSet?: Array<ReviewAudioVideoSegmentItem>
+  /**
+   * 涉及违规信息的嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+   */
+  SegmentSetFileUrl?: string
+  /**
+   * 涉及违规信息的嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  SegmentSetFileUrlExpireTime?: string
+  /**
+   * 封面审核结果。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CoverReviewResult?: ReviewImageResult
 }
 
 /**
@@ -6173,6 +6239,40 @@ export interface ModifyHeadTailTemplateResponse {
 }
 
 /**
+ * 音画质检测的LLM 大模型检测发现的单条问题。
+ */
+export interface QualityInspectLLMDetectionIssue {
+  /**
+   * <p>问题分类标签。</p>
+   */
+  Tag?: string
+  /**
+   * <p>问题描述。</p>
+   */
+  Description?: string
+  /**
+   * <p>该问题的质量得分</p><p>取值范围：[0, 100]</p>
+   */
+  Score?: number
+  /**
+   * <p>该问题的判断置信度</p><p>取值范围：[0, 100]</p>
+   */
+  Confidence?: number
+  /**
+   * <p>问题起始时间。</p><p>单位：毫秒。</p>
+   */
+  StartTimeMs?: number
+  /**
+   * <p>问题结束时间。</p><p>单位：毫秒。</p>
+   */
+  EndTimeMs?: number
+  /**
+   * <p>附加数据（JSON 格式），如严重程度等补充信息。</p>
+   */
+  ExtraData?: string
+}
+
+/**
  * 预付费商品实例
  */
 export interface ProductInstance {
@@ -7454,53 +7554,33 @@ export interface MediaSubtitleItem {
 }
 
 /**
- * 音视频审核任务的输出。
+ * 音画质检测的控制参数配置。
  */
-export interface ReviewAudioVideoTaskOutput {
+export interface QualityInspectConfig {
   /**
-   * 音视频内容审核的结果建议，取值范围：
-<li>pass：建议通过；</li>
-<li>review：建议复审；</li>
-<li>block：建议封禁。</li>
+   * <p>检测项名称。</p><p>枚举值：</p><ul><li>LowEvaluation： 视频无参考评分（MOS）</li><li>AudioEvaluation： 音频无参考评分（MOS）</li><li>Mosaic： 马赛克检测</li><li>CrashScreen： 花屏检测</li><li>Blur： 模糊检测</li><li>Jitter： 抖动检测</li><li>Noise： 噪点检测</li><li>QRCode： 二维码检测</li><li>BarCode： 条形码检测</li><li>AppletCode： 小程序码检测</li><li>BlackWhiteEdge： 黑白边检测</li><li>SolidColorScreen： 纯色屏检测</li><li>LowLighting： 低光照</li><li>HighLighting： 过曝</li><li>NoVoice： 静音检测</li><li>LowVoice： 低音检测</li><li>HighVoice： 爆音检测</li><li>AudioNoise： 音频噪声检测</li><li>VideoResolutionChanged： 视频分辨率变化</li><li>AudioSampleRateChanged： 音频采样率变化</li><li>AudioChannelsChanged： 音频通道数变化</li><li>ParameterSetsChanged： 流参数集信息发生变化</li><li>DarOrSarInvalid： 视频的宽高比异常</li><li>TimestampFallback： DTS时间戳回退</li><li>DtsJitter： DTS抖动过大</li><li>PtsJitter： PTS抖动过大</li><li>AACDurationDeviation： AAC帧时间戳间隔不合理</li><li>AudioDroppingFrames： 音频丢帧</li><li>VideoDroppingFrames： 视频丢帧</li><li>AVTimestampInterleave： 音视频交织不合理</li><li>PtsLessThanDts： 媒体流的 pts 小于 dts</li><li>ReceiveFpsJitter： 网络接收帧率抖动过大</li><li>ReceiveFpsTooSmall： 网络接收视频帧率过小</li><li>FpsJitter： 通过PTS计算得到的流帧率抖动过大</li><li>StreamOpenFailed： 流打开失败</li><li>StreamEnd： 流结束</li><li>StreamParseFailed： 流解析失败</li><li>VideoFirstFrameNotIdr： 首帧不是IDR帧</li><li>StreamNALUError： NALU起始码错误</li><li>TsStreamNoAud： mpegts的H26x流缺失 AUD NALU</li><li>AudioStreamLack： 无音频流</li><li>VideoStreamLack： 无视频流</li><li>LackAudioRecover： 缺失音频流恢复</li><li>LackVideoRecover： 缺失视频流恢复</li><li>VideoBitrateOutofRange： 视频流码率(kbps)超出范围</li><li>AudioBitrateOutofRange： 音频流码率(kbps)超出范围</li><li>VideoDecodeFailed： 视频解码错误</li><li>AudioDecodeFailed： 音频解码错误</li><li>AudioOutOfPhase： 双通道音频相位相反</li><li>VideoDuplicatedFrame： 视频流中存在重复帧</li><li>AudioDuplicatedFrame： 音频流中存在重复帧</li><li>VideoRotation： 视频画面旋转</li><li>TsMultiPrograms： MPEG2-TS流有多个program</li><li>Mp4InvalidCodecFourcc： MP4中codec fourcc不符合Apple HLS要求</li><li>HLSBadM3u8Format： 无效的m3u8文件</li><li>HLSInvalidMasterM3u8： 无效的main m3u8文件</li><li>HLSInvalidMediaM3u8： 无效的media m3u8文件</li><li>HLSMasterM3u8Recommended： main m3u8缺少标准推荐的参数</li><li>HLSMediaM3u8Recommended： media m3u8缺少标准推荐的参数</li><li>HLSMediaM3u8DiscontinuityExist： media m3u8存在EXT-X-DISCONTINUITY</li><li>HLSMediaSegmentsStreamNumChange： 切片的流数目发生变化</li><li>HLSMediaSegmentsPTSJitterDeviation： 切片间PTS跳变且没有EXT-X-DISCONTINUITY</li><li>HLSMediaSegmentsDTSJitterDeviation： 切片间DTS跳变且没有EXT-X-DISCONTINUITY</li><li>TimecodeTrackExist： MP4存在tmcd轨道</li><li>BodyPoseCheck： 人体姿态异常</li><li>BodyDetailCheck： 人体细节异常</li><li>PhysicRulesCheck： 物理规律违反</li><li>ObjectConsistencyCheck： 物体一致性异常</li><li>FormatCheck： 格式异常</li><li>AudioReverb： 混响程度</li><li>AudioDiscontinuity： 音频不连续</li><li>AudioSpeechQuality： 语音清晰度</li><li>AudioHighLoudness： 响度失真</li><li>AudioLoudnessJitter： 音量变化剧烈</li><li>BackgroundMusic： 存在背景音乐</li><li>NoBackgroundMusic： 不存在背景音乐</li><li>VideoAesthetic： 视频美学评分</li><li>AudioVideoAsync： 音画不同步</li><li>AudioSubtitleAsync： 音频与字幕不同步</li></ul>
    */
-  Suggestion?: string
+  Type: string
   /**
-   * 当 Suggestion 为 review 或 block 时有效，表示音视频最可能的违规的标签，取值范围：
-<li>Porn：色情；</li>
-<li>Terror：暴力；</li>
-<li>Polity：不适宜的信息；</li>
-<li>Ad：广告；</li>
-<li>Illegal：违法；</li>
-<li>Abuse：谩骂；</li>
-<li>Moan：娇喘。</li>
+   * <p>能力配置开关。</p><p>枚举值：</p><ul><li>ON： 开启。</li><li>OFF： 关闭。</li></ul><p>默认值：ON</p>
    */
-  Label?: string
+  Switch?: string
   /**
-   * 当 Suggestion 为 review 或 block 时有效，表示音视频最可能的违禁的形式，取值范围：
-<li>Image：画面上的人物或图标；</li>
-<li>OCR：画面上的文字；</li>
-<li>ASR：语音中的文字；</li>
-<li>Voice：声音。</li>
+   * <p>采样方式</p><p>枚举值：</p><ul><li>Time： 根据时间间隔采样。</li></ul>
    */
-  Form?: string
+  Sampling?: string
   /**
-   * 有违规信息的嫌疑的视频片段列表。
-<font color=red>注意</font> ：该列表最多仅展示前 10个 元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
+   * <p>采样间隔时间</p><p>单位：毫秒。</p>
    */
-  SegmentSet?: Array<ReviewAudioVideoSegmentItem>
+  IntervalTime?: number
   /**
-   * 涉及违规信息的嫌疑的视频片段列表文件 URL。文件的内容为 JSON，数据结构与 SegmentSet 字段一致。 （文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+   * <p>异常持续时间。</p><p>单位：毫秒。</p>
    */
-  SegmentSetFileUrl?: string
+  Duration?: number
   /**
-   * 涉及违规信息的嫌疑的视频片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>检测项对应的阈值，不同检测项对应阈值不同。</p>
    */
-  SegmentSetFileUrlExpireTime?: string
-  /**
-   * 封面审核结果。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  CoverReviewResult?: ReviewImageResult
+  Threshold?: string
 }
 
 /**
@@ -9973,6 +10053,20 @@ export interface UserDefineConfigureInfo {
    * 用户自定义文本音视频审核控制参数。
    */
   OcrReviewInfo?: UserDefineOcrTextReviewTemplateInfo
+}
+
+/**
+ * 音画质检测的LLM大模型AIGC质量检测结果。
+ */
+export interface QualityInspectLLMDetectionReport {
+  /**
+   * <p>检测结果数量。</p>
+   */
+  ResultCount?: number
+  /**
+   * <p>各检测项结果列表。</p>
+   */
+  ResultSet?: Array<QualityInspectLLMDetectionResultItem>
 }
 
 /**
@@ -13786,63 +13880,71 @@ export interface ComposeMediaTaskInput {
  */
 export interface ModifyQualityInspectTemplateRequest {
   /**
-   * 模板 ID。
+   * <p>模板 ID。</p>
    */
   Definition: number
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 模板名称，长度限制：64 个字符。
+   * <p>模板名称，长度限制：64 个字符。</p>
    */
   Name?: string
   /**
-   * 模板描述信息，长度限制：256 个字符。
+   * <p>模板描述信息，长度限制：256 个字符。</p>
    */
   Comment?: string
   /**
-   * 截帧间隔，单位为秒，最小值为 1。
+   * <p>音画质检测的配置参数。</p>
+   */
+  Configs?: Array<QualityInspectConfig>
+  /**
+   * <p>音画质检测的抽检策略。</p>
+   */
+  Strategy?: QualityInspectStrategy
+  /**
+   * <p>（不推荐，使用 Configs 替代）截帧间隔，单位为秒，最小值为 1。</p>
    */
   ScreenshotInterval?: number
   /**
-   * 视频画面抖动重影检测的控制参数。
+   * <p>（不推荐，使用 Configs 替代）视频画面抖动重影检测的控制参数。</p>
    */
   JitterConfigure?: JitterConfigureInfoForUpdate
   /**
-   * 视频画面模糊检测的控制参数。
+   * <p>（不推荐，使用 Configs 替代）视频画面模糊检测的控制参数。</p>
    */
   BlurConfigure?: BlurConfigureInfoForUpdate
   /**
-   * 视频画面低光、过曝检测的控制参数。
+   * <p>（不推荐，使用 Configs 替代）视频画面低光、过曝检测的控制参数。</p>
    */
   AbnormalLightingConfigure?: AbnormalLightingConfigureInfoForUpdate
   /**
-   * 视频画面花屏检测的控制参数。
+   * <p>（不推荐，使用 Configs 替代）视频画面花屏检测的控制参数。</p>
    */
   CrashScreenConfigure?: CrashScreenConfigureInfoForUpdate
   /**
-   * 视频画面黑边、白边、黑屏、白屏检测的控制参数。
+   * <p>（不推荐，使用 Configs 替代）视频画面黑边、白边、黑屏、白屏检测的控制参数。</p>
    */
   BlackWhiteEdgeConfigure?: BlackWhiteEdgeConfigureInfoForUpdate
   /**
-   * 视频画面噪点检测的控制参数。
+   * <p>（不推荐，使用 Configs 替代）视频画面噪点检测的控制参数。</p>
    */
   NoiseConfigure?: NoiseConfigureInfoForUpdate
   /**
-   * 视频画面马赛克检测的控制参数。
+   * <p>（不推荐，使用 Configs 替代）视频画面马赛克检测的控制参数。</p>
    */
   MosaicConfigure?: MosaicConfigureInfoForUpdate
   /**
-   * 视频画面二维码检测的控制参数。
+   * <p>（不推荐，使用 Configs 替代）视频画面二维码检测的控制参数。</p>
    */
   QRCodeConfigure?: QRCodeConfigureInfoForUpdate
   /**
-   * 音频（静音、低音、爆音）检测的控制参数。
+   * <p>（不推荐，使用 Configs 替代）音频（静音、低音、爆音）检测的控制参数。</p>
    */
   VoiceConfigure?: VoiceConfigureInfoForUpdate
   /**
-   * 视频画面质量评价的控制参数。
+   * <p>（不推荐，使用 Configs 替代）视频画面质量评价的控制参数。</p>
    */
   QualityEvaluationConfigure?: QualityEvaluationConfigureInfoForUpdate
 }
@@ -16639,6 +16741,20 @@ export interface CreateSampleSnapshotTemplateResponse {
 }
 
 /**
+ * WeChatMiniProgramPublish返回参数结构体
+ */
+export interface WeChatMiniProgramPublishResponse {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 智能精彩片段任务输入类型
  */
 export interface AiAnalysisTaskHighlightInput {
@@ -16853,59 +16969,67 @@ export interface ExtractBlindWatermarkInputInfo {
  */
 export interface CreateQualityInspectTemplateRequest {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 音画质检测模板名称。
+   * <p>音画质检测模板名称。</p>
    */
   Name?: string
   /**
-   * 音画质检测模板描述。
+   * <p>音画质检测模板描述。</p>
    */
   Comment?: string
   /**
-   * 截帧间隔，单位为秒，最小值为 1。当不填时，默认截帧间隔为 1 秒。
+   * <p>音画质检测配置参数。</p>
+   */
+  Configs?: Array<QualityInspectConfig>
+  /**
+   * <p>音画质检测的抽检策略参数。</p>
+   */
+  Strategy?: QualityInspectStrategy
+  /**
+   * <p>（不推荐，使用 Configs 替代）截帧间隔，单位为秒，最小值为 1。当不填时，默认截帧间隔为 1 秒。</p>
    */
   ScreenshotInterval?: number
   /**
-   * 视频画面抖动重影检测的控制参数。
+   * <p>（不推荐，使用 Configs 替代）视频画面抖动重影检测的控制参数。</p>
    */
   JitterConfigure?: JitterConfigureInfo
   /**
-   * 视频画面模糊检测的控制参数。
+   * <p>（不推荐，使用 Configs 替代）视频画面模糊检测的控制参数。</p>
    */
   BlurConfigure?: BlurConfigureInfo
   /**
-   * 视频画面低光、过曝检测的控制参数。
+   * <p>（不推荐，使用 Configs 替代）视频画面低光、过曝检测的控制参数。</p>
    */
   AbnormalLightingConfigure?: AbnormalLightingConfigureInfo
   /**
-   * 视频画面花屏检测的控制参数。
+   * <p>（不推荐，使用 Configs 替代）视频画面花屏检测的控制参数。</p>
    */
   CrashScreenConfigure?: CrashScreenConfigureInfo
   /**
-   * 视频画面黑边、白边、黑屏、白屏检测的控制参数。
+   * <p>（不推荐，使用 Configs 替代）视频画面黑边、白边、黑屏、白屏检测的控制参数。</p>
    */
   BlackWhiteEdgeConfigure?: BlackWhiteEdgeConfigureInfo
   /**
-   * 视频画面噪点检测的控制参数。
+   * <p>（不推荐，使用 Configs 替代）视频画面噪点检测的控制参数。</p>
    */
   NoiseConfigure?: NoiseConfigureInfo
   /**
-   * 视频画面马赛克检测的控制参数。
+   * <p>（不推荐，使用 Configs 替代）视频画面马赛克检测的控制参数。</p>
    */
   MosaicConfigure?: MosaicConfigureInfo
   /**
-   * 视频画面二维码检测的控制参数。
+   * <p>（不推荐，使用 Configs 替代）视频画面二维码检测的控制参数。</p>
    */
   QRCodeConfigure?: QRCodeConfigureInfo
   /**
-   * 音频（静音、低音、爆音）检测的控制参数。
+   * <p>（不推荐，使用 Configs 替代）音频（静音、低音、爆音）检测的控制参数。</p>
    */
   VoiceConfigure?: VoiceConfigureInfo
   /**
-   * 视频画面质量评价的控制参数。
+   * <p>（不推荐，使用 Configs 替代）视频画面质量评价的控制参数。</p>
    */
   QualityEvaluationConfigure?: QualityEvaluationConfigureInfo
 }
@@ -18496,6 +18620,36 @@ export interface StatDataItem {
 <li>日志服务用量数据，单位是条。</li>
    */
   Value?: number
+}
+
+/**
+ * 音画质检测的LLM 大模型单个检测项的聚合结果。
+ */
+export interface QualityInspectLLMDetectionResultItem {
+  /**
+   * <p>检测分类。</p><p>枚举值：</p><ul><li>AIGCQualityCharacteristics： AIGC 质量特征。</li></ul>
+   */
+  Category?: string
+  /**
+   * <p>检测分组。</p><p>枚举值：</p><ul><li>AIGCAuthenticity： AIGC 真实性，包括人体合理性、物理合理性、跨帧一致性等。</li><li>AIGCTechQuality： AIGC 技术质量，包括画幅、黑边、强行竖屏等。</li></ul>
+   */
+  Group?: string
+  /**
+   * <p>检测类型名称。</p><p>枚举值：</p><ul><li>BodyPoseCheck： 人体姿态合理性，属于 AIGCAuthenticity。</li><li>BodyDetailCheck： 人体细节合理性，包括手指数、五官对称等，属于 AIGCAuthenticity。</li><li>PhysicRulesCheck： 物理规律合理性，包括透视、光影、重力等，属于 AIGCAuthenticity。</li><li>ObjectConsistencyCheck： 跨帧物体一致性，属于 AIGCAuthenticity。</li><li>FormatCheck： 画幅、黑边、强行竖屏等格式问题，属于 AIGCTechQuality。</li></ul>
+   */
+  Type?: string
+  /**
+   * <p>整体质量得分，范围 [0, 100]，越高表示越好。</p>
+   */
+  Score?: number
+  /**
+   * <p>判断置信度，范围 [0, 100]，越高表示越确定。</p>
+   */
+  Confidence?: number
+  /**
+   * <p>检测发现的问题列表，无问题时为空。</p>
+   */
+  IssueSet?: Array<QualityInspectLLMDetectionIssue>
 }
 
 /**
@@ -21112,7 +21266,7 @@ export interface AiRecognitionTaskAsrWordsResultItem {
  */
 export interface CreateQualityInspectTemplateResponse {
   /**
-   * 音画质检测模板 ID。
+   * <p>音画质检测模板 ID。</p>
    */
   Definition?: number
   /**
@@ -22480,73 +22634,25 @@ export interface SetDrmKeyProviderInfoRequest {
 }
 
 /**
- * 指定时间点截图模板详情
+ * 音画质检测的时间抽检策略。
  */
-export interface SnapshotByTimeOffsetTemplate {
+export interface QualityInspectTimeSpotCheck {
   /**
-   * 指定时间点截图模板唯一标识。
+   * <p>每次循环检测的时长。</p><p>取值范围：[10, 86400]</p><p>单位：秒。</p>
    */
-  Definition: number
+  CheckDuration?: number
   /**
-   * 模板类型，取值范围：
-<li>Preset：系统预置模板；</li>
-<li>Custom：用户自定义模板。</li>
+   * <p>抽检间隔，表示在一次检测结束后，等待多长时间后，再次检测</p><p>取值范围：[10, 3600]</p><p>单位：秒。</p>
    */
-  Type: string
+  CheckInterval?: number
   /**
-   * 指定时间点截图模板名称。
+   * <p>片头跳过时长。</p><p>取值范围：[1, 1800]</p><p>单位：秒。</p>
    */
-  Name: string
+  SkipDuration?: number
   /**
-   * 模板描述信息。
+   * <p>循环次数。</p><p>取值范围：[0, 1000]</p>
    */
-  Comment: string
-  /**
-   * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
-   */
-  Width: number
-  /**
-   * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
-<li>当 Width、Height 均为 0，则分辨率同源；</li>
-<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
-<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
-<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
-默认值：0。
-   */
-  Height: number
-  /**
-   * 分辨率自适应，可选值：
-<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
-<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
-默认值：open。
-   */
-  ResolutionAdaptive: string
-  /**
-   * 图片格式。
-   */
-  Format: string
-  /**
-   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  CreateTime: string
-  /**
-   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  UpdateTime: string
-  /**
-   * 填充方式，当截图配置宽高参数与原始视频的宽高比不一致时，对截图的处理方式，即为“填充”。可选填充方式：
-<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
-<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
-<li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
-<li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
-默认值：black 。
-   */
-  FillType: string
+  CirclesNumber?: number
 }
 
 /**
@@ -24231,17 +24337,73 @@ export interface DescribeWatermarkTemplatesResponse {
 }
 
 /**
- * WeChatMiniProgramPublish返回参数结构体
+ * 指定时间点截图模板详情
  */
-export interface WeChatMiniProgramPublishResponse {
+export interface SnapshotByTimeOffsetTemplate {
   /**
-   * 任务 ID。
+   * 指定时间点截图模板唯一标识。
    */
-  TaskId?: string
+  Definition: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 模板类型，取值范围：
+<li>Preset：系统预置模板；</li>
+<li>Custom：用户自定义模板。</li>
    */
-  RequestId?: string
+  Type: string
+  /**
+   * 指定时间点截图模板名称。
+   */
+  Name: string
+  /**
+   * 模板描述信息。
+   */
+  Comment: string
+  /**
+   * 截图宽度（或长边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+   */
+  Width: number
+  /**
+   * 截图高度（或短边）的最大值，取值范围：0 和 [128, 4096]，单位：px。
+<li>当 Width、Height 均为 0，则分辨率同源；</li>
+<li>当 Width 为 0，Height 非 0，则 Width 按比例缩放；</li>
+<li>当 Width 非 0，Height 为 0，则 Height 按比例缩放；</li>
+<li>当 Width、Height 均非 0，则分辨率按用户指定。</li>
+默认值：0。
+   */
+  Height: number
+  /**
+   * 分辨率自适应，可选值：
+<li>open：开启，此时，Width 代表视频的长边，Height 表示视频的短边；</li>
+<li>close：关闭，此时，Width 代表视频的宽度，Height 表示视频的高度。</li>
+默认值：open。
+   */
+  ResolutionAdaptive: string
+  /**
+   * 图片格式。
+   */
+  Format: string
+  /**
+   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  CreateTime: string
+  /**
+   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  UpdateTime: string
+  /**
+   * 填充方式，当截图配置宽高参数与原始视频的宽高比不一致时，对截图的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li>black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+<li>white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充。</li>
+<li>gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊。</li>
+默认值：black 。
+   */
+  FillType: string
 }
 
 /**
@@ -25820,6 +25982,20 @@ export interface ProcessMediaByProcedureResponse {
 }
 
 /**
+ * 音画质检测策略信息。
+ */
+export interface QualityInspectStrategy {
+  /**
+   * <p>策略类型。</p><p>枚举值：</p><ul><li>TimeSpotCheck： 根据时间的抽检策略。</li></ul>
+   */
+  StrategyType?: string
+  /**
+   * <p>根据时间的抽检策略参数，当 StrategyType 为 TimeSpotCheck 时有效。</p>
+   */
+  TimeSpotCheck?: QualityInspectTimeSpotCheck
+}
+
+/**
  * PullUpload返回参数结构体
  */
 export interface PullUploadResponse {
@@ -26013,75 +26189,81 @@ export interface PornImgReviewTemplateInfo {
  */
 export interface QualityInspectTemplateItem {
   /**
-   * 模板 ID。
+   * <p>模板 ID。</p>
    */
   Definition?: number
   /**
-   * 模板类型，可选值：
-<li>Preset：系统预置模板；</li>
-<li>Custom：用户自定义模板。</li>
+   * <p>模板类型，可选值：</p><li>Preset：系统预置模板；</li><li>Custom：用户自定义模板。</li>
    */
   Type?: string
   /**
-   * 模板名称。
+   * <p>模板名称。</p>
    */
   Name?: string
   /**
-   * 模板描述。
+   * <p>模板描述。</p>
    */
   Comment?: string
   /**
-   * 截帧间隔，单位为秒。
+   * <p>音画质检测的配置参数。</p>
    */
-  ScreenshotInterval?: number
+  Configs?: Array<QualityInspectConfig>
   /**
-   * 视频画面抖动重影检测的控制参数。
+   * <p>音画质检测的抽检策略。</p>
    */
-  JitterConfigure?: JitterConfigureInfo
+  Strategy?: QualityInspectStrategy
   /**
-   * 视频画面模糊检测的控制参数。
-   */
-  BlurConfigure?: BlurConfigureInfo
-  /**
-   * 视频画面低光、过曝检测的控制参数。
-   */
-  AbnormalLightingConfigure?: AbnormalLightingConfigureInfo
-  /**
-   * 视频画面花屏检测的控制参数。
-   */
-  CrashScreenConfigure?: CrashScreenConfigureInfo
-  /**
-   * 视频画面黑边、白边、黑屏、白屏检测的控制参数。
-   */
-  BlackWhiteEdgeConfigure?: BlackWhiteEdgeConfigureInfo
-  /**
-   * 视频画面噪点检测的控制参数。
-   */
-  NoiseConfigure?: NoiseConfigureInfo
-  /**
-   * 视频画面马赛克检测的控制参数。
-   */
-  MosaicConfigure?: MosaicConfigureInfo
-  /**
-   * 视频画面二维码检测的控制参数。
-   */
-  QRCodeConfigure?: QRCodeConfigureInfo
-  /**
-   * 视频画面质量评价的控制参数。
-   */
-  QualityEvaluationConfigure?: QualityEvaluationConfigureInfo
-  /**
-   * 音频（静音、低音、爆音）检测的控制参数。
-   */
-  VoiceConfigure?: VoiceConfigureInfo
-  /**
-   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>模板创建时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   CreateTime?: string
   /**
-   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>模板最后修改时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   UpdateTime?: string
+  /**
+   * <p>（不推荐，使用 Configs 替代）截帧间隔，单位为秒。</p>
+   */
+  ScreenshotInterval?: number
+  /**
+   * <p>（不推荐，使用 Configs 替代）视频画面抖动重影检测的控制参数。</p>
+   */
+  JitterConfigure?: JitterConfigureInfo
+  /**
+   * <p>（不推荐，使用 Configs 替代）视频画面模糊检测的控制参数。</p>
+   */
+  BlurConfigure?: BlurConfigureInfo
+  /**
+   * <p>（不推荐，使用 Configs 替代）视频画面低光、过曝检测的控制参数。</p>
+   */
+  AbnormalLightingConfigure?: AbnormalLightingConfigureInfo
+  /**
+   * <p>（不推荐，使用 Configs 替代）视频画面花屏检测的控制参数。</p>
+   */
+  CrashScreenConfigure?: CrashScreenConfigureInfo
+  /**
+   * <p>视频画面黑边、白边、黑屏、白屏检测的控制参数。</p>
+   */
+  BlackWhiteEdgeConfigure?: BlackWhiteEdgeConfigureInfo
+  /**
+   * <p>（不推荐，使用 Configs 替代）视频画面噪点检测的控制参数。</p>
+   */
+  NoiseConfigure?: NoiseConfigureInfo
+  /**
+   * <p>（不推荐，使用 Configs 替代）视频画面马赛克检测的控制参数。</p>
+   */
+  MosaicConfigure?: MosaicConfigureInfo
+  /**
+   * <p>（不推荐，使用 Configs 替代）视频画面二维码检测的控制参数。</p>
+   */
+  QRCodeConfigure?: QRCodeConfigureInfo
+  /**
+   * <p>（不推荐，使用 Configs 替代）视频画面质量评价的控制参数。</p>
+   */
+  QualityEvaluationConfigure?: QualityEvaluationConfigureInfo
+  /**
+   * <p>（不推荐，使用 Configs 替代）音频（静音、低音、爆音）检测的控制参数。</p>
+   */
+  VoiceConfigure?: VoiceConfigureInfo
 }
 
 /**
@@ -26712,6 +26894,28 @@ export interface ObjectConfigureInfo {
 默认值： All，同时使用默认物体库和用户自定义物体库。
    */
   ObjectLibrary?: string
+}
+
+/**
+ * 音画质检测的格式诊断检出异常项。
+ */
+export interface QualityInspectContainerDiagnoseResultItem {
+  /**
+   * <p>诊断出的异常类别</p><p>枚举值：</p><ul><li>DecodeParamException： 解码参数异常。</li><li>TimeStampException： 时间戳异常。</li><li>FrameException： 帧率异常。</li><li>StreamStatusException： 流状态异常。</li><li>StreamInfo： 流信息异常。</li><li>StreamAbnormalCharacteristics： 流特征异常。</li><li>DecodeException： 解码异常。</li><li>HLSRequirements： HLS 格式异常。</li></ul>
+   */
+  Category?: string
+  /**
+   * <p>诊断出的具体异常类型。</p><p>枚举值：</p><ul><li>VideoResolutionChanged： 视频分辨率变化。</li><li>AudioSampleRateChanged： 音频采样率变化。</li><li>AudioChannelsChanged： 音频通道数变化。</li><li>ParameterSetsChanged： 流参数集信息发生变化。</li><li>DarOrSarInvalid： 视频的宽高比异常。</li><li>TimestampFallback： DTS时间戳回退。</li><li>DtsJitter： DTS抖动过大。</li><li>PtsJitter： PTS抖动过大。</li><li>AACDurationDeviation： AAC帧时间戳间隔不合理。</li><li>AudioDroppingFrames： 音频丢帧。</li><li>VideoDroppingFrames： 视频丢帧。</li><li>AVTimestampInterleave： 音视频交织不合理。</li><li>PtsLessThanDts： 媒体流的 pts 小于 dts。</li><li>ReceiveFpsJitter： 网络接收帧率抖动过大。</li><li>ReceiveFpsTooSmall： 网络接收视频帧率过小。</li><li>FpsJitter： 通过PTS计算得到的流帧率抖动过大。</li><li>StreamOpenFailed： 流打开失败。</li><li>StreamEnd： 流结束。</li><li>StreamParseFailed： 流解析失败。</li><li>VideoFirstFrameNotIdr： 首帧不是IDR帧。</li><li>StreamNALUError： NALU起始码错误。</li><li>TsStreamNoAud： mpegts 的 H26x 流缺失 AUD NALU。</li><li>AudioStreamLack： 无音频流。</li><li>VideoStreamLack： 无视频流。</li><li>LackAudioRecover： 缺失音频流恢复。</li><li>LackVideoRecover： 缺失视频流恢复。</li><li>VideoBitrateOutofRange： 视频流码率(kbps)超出范围。</li><li>AudioBitrateOutofRange： 音频流码率(kbps)超出范围。</li><li>VideoDecodeFailed： 视频解码错误。</li><li>AudioDecodeFailed： 音频解码错误。</li><li>AudioOutOfPhase： 双通道音频相位相反。</li><li>VideoDuplicatedFrame： 视频流中存在重复帧。</li><li>AudioDuplicatedFrame： 音频流中存在重复帧。</li><li>VideoRotation： 视频画面旋转。</li><li>TsMultiPrograms： MPEG2-TS流有多个program。</li><li>Mp4InvalidCodecFourcc： MP4中codec fourcc不符合Apple HLS要求。</li><li>HLSBadM3u8Format： 无效的m3u8文件。</li><li>HLSInvalidMasterM3u8： 无效的main m3u8文件。</li><li>HLSInvalidMediaM3u8： 无效的media m3u8文件。</li><li>HLSMasterM3u8Recommended： main m3u8缺少标准推荐的参数。</li><li>HLSMediaM3u8Recommended： media m3u8缺少标准推荐的参数。</li><li>HLSMediaM3u8DiscontinuityExist： media m3u8存在 EXT-X-DISCONTINUITY。</li><li>HLSMediaSegmentsStreamNumChange： 切片的流数目发生变化。</li><li>HLSMediaSegmentsPTSJitterDeviation： 切片间 PTS 跳变且没有 EXT-X-DISCONTINUITY。</li><li>HLSMediaSegmentsDTSJitterDeviation： 切片间 DTS 跳变且没有 EXT-X-DISCONTINUITY。</li><li>TimecodeTrackExist： MP4存在tmcd轨道</li></ul>
+   */
+  Type?: string
+  /**
+   * <p>诊断出的异常级别。</p><p>枚举值：</p><ul><li>Fatal： 影响后续播放和解析。</li><li>Error： 可能会影响播放。</li><li>Warning： 可能会有潜在风险，但不一定会影响播放。</li><li>Notice： 比较重要的流信息。</li><li>Info： 一般性的流信息。</li></ul>
+   */
+  SeverityLevel?: string
+  /**
+   * <p>时间戳。</p>
+   */
+  TimestampSet?: Array<number>
 }
 
 /**
@@ -27392,36 +27596,19 @@ export interface AigcVideoSceneInfo {
  */
 export interface QualityInspectResultItem {
   /**
-   * 异常类型，取值范围：
-<li>Jitter：抖动；</li>
-<li>Blur：模糊；</li>
-<li>LowLighting：低光照；</li>
-<li>HighLighting：过曝；</li>
-<li>CrashScreen：花屏；</li>
-<li>BlackWhiteEdge：黑白边；</li>
-<li>SolidColorScreen：纯色屏；</li>
-<li>Noise：噪点；</li>
-<li>Mosaic：马赛克；</li>
-<li>QRCode：二维码；</li>
-<li>AppletCode：小程序码；</li>
-<li>BarCode：条形码；</li>
-<li>LowVoice：低音；</li>
-<li>HighVoice：爆音；</li>
-<li>NoVoice：静音；</li>
-<li>LowEvaluation：无参考打分低于阈值。</li>
+   * <p>异常类型，取值范围：</p><li>Jitter：抖动；</li><li>Blur：模糊；</li><li>LowLighting：低光照；</li><li>HighLighting：过曝；</li><li>CrashScreen：花屏；</li><li>BlackWhiteEdge：黑白边；</li><li>SolidColorScreen：纯色屏；</li><li>Noise：噪点；</li><li>Mosaic：马赛克；</li><li>QRCode：二维码；</li><li>AppletCode：小程序码；</li><li>BarCode：条形码；</li><li>LowVoice：低音；</li><li>HighVoice：爆音；</li><li>NoVoice：静音；</li><li>LowEvaluation：无参考打分低于阈值。</li><li> LowColorfulness：色彩丰富度信息。</li><li> AudioVideoAsync：音画不同步。</li><li> AudioSubtitleAsync：音频与字幕不同步。</li><li> VideoAesthetic：视频美学评分低。</li><li> AudioDiscontinuity：音频不连续。</li><li> AudioVolume：音量信息。</li><li> AudioLoudnessJitter：音量变化剧烈。</li><li> BackgroundMusic：存在背景音乐。</li><li> AudioEvaluation：低音质。</li><li> AudioNoise：噪声。</li><li> AudioSpeechQuality：语音清晰度低。</li><li> AudioReverb：混响程度高。</li><li> AudioHighLoudness：响度失真。</li>
    */
   Type?: string
   /**
-   * 异常片段列表。
-<font color=red>注意：</font> 该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。
+   * <p>异常片段列表。<br><font color="red">注意：</font> 该列表最多仅展示前 100 个元素。如希望获得完整结果，请从 SegmentSetFileUrl 对应的文件中获取。</p>
    */
   SegmentSet?: Array<QualityInspectItem>
   /**
-   * 异常片段列表文件 URL。文件 内容 为  JSON，数据结构与 SegmentSet 字段一致。（文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。
+   * <p>异常片段列表文件 URL。文件 内容 为  JSON，数据结构与 SegmentSet 字段一致。（文件不会永久存储，到达SegmentSetFileUrlExpireTime 时间点后文件将被删除）。</p>
    */
   SegmentSetFileUrl?: string
   /**
-   * 异常片段列表文件 URL 失效时间，使用  [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>异常片段列表文件 URL 失效时间，使用  <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   SegmentSetFileUrlExpireTime?: string
 }

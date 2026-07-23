@@ -28470,7 +28470,7 @@ export interface DescribePatchInfoRequest {
  */
 export interface DescribeSkillInfoResponse {
   /**
-   * skill信息列表
+   * <p>skill信息列表</p>
    */
   SkillInfoList?: Array<SkillInfo>
   /**
@@ -30109,7 +30109,7 @@ export interface DescribeAccountStatisticsRequest {
  */
 export interface DescribeSkillInfoRequest {
   /**
-   * 事件id
+   * <p>事件id</p>
    */
   Ids: Array<number | bigint>
 }

@@ -108,6 +108,16 @@ it("goosefs.v20220519.ModifyDataRepositoryBandwidth", async function () {
     }
 })
 
+it("goosefs.v20220519.ModifyDataRepositoryTaskStatus", async function () {
+    try {
+       const data = await client.ModifyDataRepositoryTaskStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("goosefs.v20220519.BatchDeleteClientNodes", async function () {
     try {
        const data = await client.BatchDeleteClientNodes({})

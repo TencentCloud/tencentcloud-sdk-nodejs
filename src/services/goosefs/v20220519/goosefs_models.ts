@@ -1061,6 +1061,16 @@ export interface ModifyDataRepositoryBandwidthResponse {
 }
 
 /**
+ * ModifyDataRepositoryTaskStatus返回参数结构体
+ */
+export interface ModifyDataRepositoryTaskStatusResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ExpandCapacity返回参数结构体
  */
 export interface ExpandCapacityResponse {
@@ -1705,6 +1715,24 @@ export interface CustomerClusterAttr {
    * 客户端集群挂载存储集合
    */
   ClusterMountSet?: Array<ClusterMountAttr>
+}
+
+/**
+ * ModifyDataRepositoryTaskStatus请求参数结构体
+ */
+export interface ModifyDataRepositoryTaskStatusRequest {
+  /**
+   * <p>文件系统ID</p>
+   */
+  FileSystemId: string
+  /**
+   * <p>数据流动任务ID</p>
+   */
+  TaskId: string
+  /**
+   * <p>修改数据流动任务目标状态对应的类型，仅支持任务暂停和恢复（暂停对应pause，恢复对应resume）</p><p>枚举值：</p><ul><li>pause： 暂停</li><li>resume： 恢复</li></ul>
+   */
+  ModifyType: string
 }
 
 /**

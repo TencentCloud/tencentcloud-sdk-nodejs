@@ -4052,15 +4052,15 @@ export interface DescribeDataSetUrlStatisticsV2Request {
  */
 export interface DescribeRumLogExportsV2Request {
   /**
-   * <p>Page size</p>
+   * <p>每页返回任务数</p>
    */
   PageSize: number
   /**
-   * <p>Page number</p>
+   * <p>当前页码</p>
    */
   PageNum: number
   /**
-   * <p>Project ID</p>
+   * <p>项目ID</p>
    */
   ID: number
 }

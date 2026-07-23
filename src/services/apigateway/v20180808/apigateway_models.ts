@@ -411,7 +411,7 @@ export interface DescribeApiResponse {
   /**
    * API 详情。
    */
-  Result: ApiInfo
+  Result?: ApiInfo
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1112,42 +1112,42 @@ export interface Plugin {
   /**
    * 插件ID。
    */
-  PluginId: string
+  PluginId?: string
   /**
    * 插件名称。
    */
-  PluginName: string
+  PluginName?: string
   /**
    * 插件类型。
    */
-  PluginType: string
+  PluginType?: string
   /**
    * 插件定义语句。
    */
-  PluginData: string
+  PluginData?: string
   /**
    * 插件描述。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description: string
+  Description?: string
   /**
    * 插件创建时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
    */
-  CreatedTime: string
+  CreatedTime?: string
   /**
    * 插件修改时间。按照 ISO8601 标准表示，并且使用 UTC 时间。格式为：YYYY-MM-DDThh:mm:ssZ。
    */
-  ModifiedTime: string
+  ModifiedTime?: string
   /**
    * 插件绑定的API总数。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AttachedApiTotalCount: number
+  AttachedApiTotalCount?: number
   /**
    * 插件绑定的API信息。
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  AttachedApis: Array<AttachedApiInfo>
+  AttachedApis?: Array<AttachedApiInfo>
 }
 
 /**
@@ -1281,7 +1281,7 @@ export interface DescribePluginResponse {
   /**
    * 插件详情。
    */
-  Result: Plugin
+  Result?: Plugin
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4233,7 +4233,7 @@ export interface DescribePluginsResponse {
   /**
    * 插件详情。
    */
-  Result: PluginSummary
+  Result?: PluginSummary
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

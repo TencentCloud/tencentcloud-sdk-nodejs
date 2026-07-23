@@ -8496,11 +8496,11 @@ export interface UpdateNetworkConnectionResponse {
  */
 export interface CreateSparkAppTaskResponse {
   /**
-   * 批Id
+   * <p>批Id</p>
    */
   BatchId?: string
   /**
-   * 任务Id
+   * <p>任务Id</p>
    */
   TaskId?: string
   /**
@@ -11292,15 +11292,15 @@ export interface DescribeTasksRequest {
  */
 export interface CreateSparkAppTaskRequest {
   /**
-   * spark作业名
+   * <p>spark作业名</p>
    */
   JobName: string
   /**
-   * spark作业程序入参，以空格分隔；一般用于周期性调用使用
+   * <p>spark作业程序入参，以空格分隔；一般用于周期性调用使用</p>
    */
   CmdArgs?: string
   /**
-   * 任务来源信息
+   * <p>任务来源信息</p>
    */
   SourceInfo?: Array<KVPair>
 }

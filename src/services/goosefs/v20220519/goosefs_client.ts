@@ -67,6 +67,7 @@ import {
   CreateLoadTaskRequest,
   LoadTaskCreationAttrs,
   ModifyDataRepositoryBandwidthResponse,
+  ModifyDataRepositoryTaskStatusResponse,
   ExpandCapacityResponse,
   DeleteFilesetRequest,
   AddCrossVpcSubnetSupportForClientNodeResponse,
@@ -108,6 +109,7 @@ import {
   AddCrossVpcSubnetSupportForClientNodeRequest,
   RoleToken,
   CustomerClusterAttr,
+  ModifyDataRepositoryTaskStatusRequest,
   DeleteCustomerClusterRequest,
 } from "./goosefs_models"
 
@@ -208,6 +210,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDataRepositoryBandwidthResponse) => void
   ): Promise<ModifyDataRepositoryBandwidthResponse> {
     return this.request("ModifyDataRepositoryBandwidth", req, cb)
+  }
+
+  /**
+   * 修改数据流动任务状态，目前支持任务暂停/恢复
+   */
+  async ModifyDataRepositoryTaskStatus(
+    req: ModifyDataRepositoryTaskStatusRequest,
+    cb?: (error: string, rep: ModifyDataRepositoryTaskStatusResponse) => void
+  ): Promise<ModifyDataRepositoryTaskStatusResponse> {
+    return this.request("ModifyDataRepositoryTaskStatus", req, cb)
   }
 
   /**

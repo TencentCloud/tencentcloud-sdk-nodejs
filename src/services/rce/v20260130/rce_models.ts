@@ -160,7 +160,7 @@ export interface AssessDeviceRiskProRequest {
    */
   DeviceToken: string
   /**
-   * <p>客户端 IP 地址</p>
+   * <p>客户端 IP 地址（IPv4或IPv6）</p>
    */
   UserIp?: string
 }
@@ -174,7 +174,7 @@ export interface AssessDeviceRiskPremiumProRequest {
    */
   DeviceToken: string
   /**
-   * <p>客户端 IP 地址</p>
+   * <p>客户端 IP 地址（IPv4或IPv6）</p>
    */
   UserIp?: string
 }
@@ -295,7 +295,7 @@ export interface AssessDeviceRiskPremiumRsp {
  */
 export interface AssessEnvironmentRiskRequest {
   /**
-   * <p>客户端 IP 地址</p>
+   * <p>客户端 IP 地址（IPv4或IPv6）</p>
    */
   UserIp: string
 }
