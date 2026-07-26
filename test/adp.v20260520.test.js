@@ -28,9 +28,29 @@ it("adp.v20260520.ModifyAgent", async function () {
     }
 })
 
-it("adp.v20260520.DescribeSkillDetail", async function () {
+it("adp.v20260520.ModifyAppTrigger", async function () {
     try {
-       const data = await client.DescribeSkillDetail({})
+       const data = await client.ModifyAppTrigger({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DeleteAppTrigger", async function () {
+    try {
+       const data = await client.DeleteAppTrigger({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.MarkAppTriggerRunLogRead", async function () {
+    try {
+       const data = await client.MarkAppTriggerRunLogRead({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -88,9 +108,49 @@ it("adp.v20260520.ModifyConversation", async function () {
     }
 })
 
+it("adp.v20260520.DescribeSkillDetail", async function () {
+    try {
+       const data = await client.DescribeSkillDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.DescribeAppSummaryList", async function () {
     try {
        const data = await client.DescribeAppSummaryList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DescribeAppTriggerInstance", async function () {
+    try {
+       const data = await client.DescribeAppTriggerInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.ResumeTimerTask", async function () {
+    try {
+       const data = await client.ResumeTimerTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.PauseTimerTask", async function () {
+    try {
+       const data = await client.PauseTimerTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -108,9 +168,19 @@ it("adp.v20260520.DescribeConversation", async function () {
     }
 })
 
-it("adp.v20260520.CopyAgentFromApp", async function () {
+it("adp.v20260520.DeleteVariable", async function () {
     try {
-       const data = await client.CopyAgentFromApp({})
+       const data = await client.DeleteVariable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DescribeSkillReferenceList", async function () {
+    try {
+       const data = await client.DescribeSkillReferenceList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +228,19 @@ it("adp.v20260520.DescribeAuditLogList", async function () {
     }
 })
 
-it("adp.v20260520.DescribeSkillReferenceList", async function () {
+it("adp.v20260520.DescribeModelList", async function () {
     try {
-       const data = await client.DescribeSkillReferenceList({})
+       const data = await client.DescribeModelList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.MarkTimerTaskRunLogRead", async function () {
+    try {
+       const data = await client.MarkTimerTaskRunLogRead({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -188,9 +268,19 @@ it("adp.v20260520.CreateWorkspaceCredential", async function () {
     }
 })
 
-it("adp.v20260520.DescribeApp", async function () {
+it("adp.v20260520.DescribeAppTriggerSummaryList", async function () {
     try {
-       const data = await client.DescribeApp({})
+       const data = await client.DescribeAppTriggerSummaryList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.CreateAppTrigger", async function () {
+    try {
+       const data = await client.CreateAppTrigger({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -201,6 +291,16 @@ it("adp.v20260520.DescribeApp", async function () {
 it("adp.v20260520.DescribeAgentSummaryList", async function () {
     try {
        const data = await client.DescribeAgentSummaryList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.RunAppTriggerNow", async function () {
+    try {
+       const data = await client.RunAppTriggerNow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -228,9 +328,9 @@ it("adp.v20260520.FavoritePlugin", async function () {
     }
 })
 
-it("adp.v20260520.DescribeModelList", async function () {
+it("adp.v20260520.DescribeAppTriggerRunLogList", async function () {
     try {
-       const data = await client.DescribeModelList({})
+       const data = await client.DescribeAppTriggerRunLogList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -238,9 +338,9 @@ it("adp.v20260520.DescribeModelList", async function () {
     }
 })
 
-it("adp.v20260520.UnfavoritePlugin", async function () {
+it("adp.v20260520.DescribeApp", async function () {
     try {
-       const data = await client.UnfavoritePlugin({})
+       const data = await client.DescribeApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,6 +408,16 @@ it("adp.v20260520.DescribeReleaseSummary", async function () {
     }
 })
 
+it("adp.v20260520.ResumeAppTrigger", async function () {
+    try {
+       const data = await client.ResumeAppTrigger({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.CopyApp", async function () {
     try {
        const data = await client.CopyApp({})
@@ -338,9 +448,9 @@ it("adp.v20260520.DeleteSkillShare", async function () {
     }
 })
 
-it("adp.v20260520.DeleteVariable", async function () {
+it("adp.v20260520.CopyAgentFromApp", async function () {
     try {
-       const data = await client.DeleteVariable({})
+       const data = await client.CopyAgentFromApp({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -371,6 +481,16 @@ it("adp.v20260520.CreateSpace", async function () {
 it("adp.v20260520.CreateSkill", async function () {
     try {
        const data = await client.CreateSkill({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.RunTimerTaskNow", async function () {
+    try {
+       const data = await client.RunTimerTaskNow({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -411,6 +531,16 @@ it("adp.v20260520.CreateWebSocketToken", async function () {
 it("adp.v20260520.CreateConversation", async function () {
     try {
        const data = await client.CreateConversation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DescribeAppTrigger", async function () {
+    try {
+       const data = await client.DescribeAppTrigger({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -468,6 +598,36 @@ it("adp.v20260520.DescribeSkillSummaryList", async function () {
     }
 })
 
+it("adp.v20260520.DeleteTimerTask", async function () {
+    try {
+       const data = await client.DeleteTimerTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.ModifyTimerTask", async function () {
+    try {
+       const data = await client.ModifyTimerTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.UnfavoritePlugin", async function () {
+    try {
+       const data = await client.UnfavoritePlugin({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.FavoriteSkill", async function () {
     try {
        const data = await client.FavoriteSkill({})
@@ -518,9 +678,39 @@ it("adp.v20260520.ModifySkill", async function () {
     }
 })
 
+it("adp.v20260520.DescribeTimerTask", async function () {
+    try {
+       const data = await client.DescribeTimerTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("adp.v20260520.RollbackRelease", async function () {
     try {
        const data = await client.RollbackRelease({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.CreateTimerTask", async function () {
+    try {
+       const data = await client.CreateTimerTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.PauseAppTrigger", async function () {
+    try {
+       const data = await client.PauseAppTrigger({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -561,6 +751,26 @@ it("adp.v20260520.CreatePlugin", async function () {
 it("adp.v20260520.DeleteAgent", async function () {
     try {
        const data = await client.DeleteAgent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DescribeTimerTaskRunLogList", async function () {
+    try {
+       const data = await client.DescribeTimerTaskRunLogList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("adp.v20260520.DescribeTimerTaskSummaryList", async function () {
+    try {
+       const data = await client.DescribeTimerTaskSummaryList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

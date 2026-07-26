@@ -469,7 +469,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除VPC间规则
+   * 删除 VPC 边界访问控制规则。
    */
   async RemoveVpcAcRule(
     req: RemoveVpcAcRuleRequest,
@@ -479,7 +479,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 批量删除入侵防御封禁列表、放通列表规则（新）
+   * 删除 IP 封禁规则，或清空封禁列表。
    */
   async DeleteBlockIgnoreRuleNew(
     req: DeleteBlockIgnoreRuleNewRequest,
@@ -590,7 +590,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 添加VPC内网间规则
+   * 新增一条或多条 VPC 边界访问控制规则。
    */
   async AddVpcAcRule(
     req: AddVpcAcRuleRequest,
@@ -600,7 +600,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 创建新企业安全组规则
+   * 新增一条或多条企业安全组规则。
    */
   async AddEnterpriseSecurityGroupRules(
     req: AddEnterpriseSecurityGroupRulesRequest,
@@ -640,7 +640,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 删除新企业安全组规则
+   * 删除企业安全组规则。
    */
   async RemoveEnterpriseSecurityGroupRule(
     req: RemoveEnterpriseSecurityGroupRuleRequest,
@@ -920,7 +920,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 修改内网间访问控制规则
+   * 修改一条 VPC边界访问控制规则。
    */
   async ModifyVpcAcRule(
     req: ModifyVpcAcRuleRequest,
@@ -960,7 +960,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 用户告警中心-封禁、放通处置按钮
+   * 异步处置新告警中心的告警。支持告警封禁、告警加白、IP 封禁、IP 加白、域名加白、加入安全基线和资产隔离。
    */
   async CreateAlertCenterRuleAsync(
     req: CreateAlertCenterRuleAsyncRequest,
@@ -1040,7 +1040,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 批量添加入侵防御封禁列表、放通列表规则
+   * 批量新增封禁或放通规则。
    */
   async CreateBlockIgnoreRuleNew(
     req: CreateBlockIgnoreRuleNewRequest,
@@ -1100,7 +1100,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 忽略告警中心或拦截列表中的记录。接口将目标记录的 bhide 标记设为 1，使其不再进入未忽略列表和相关统计，但不删除日志，也不创建持续匹配后续记录的忽略规则；本接口没有恢复 bhide 的参数。TableType 决定目标表及 ID 类型：AlertTable 按告警日志 logid 更新，InterceptionTable 按拦截记录 unique_id 更新。HandleEventIdList 中的聚合事件 ID 会先解析为告警日志 ID，再与 HandleIdList 合并；合并后会删除空字符串并去重。
+   * 忽略告警中心或拦截列表中的记录。忽略操作不支持撤销。
    */
   async CreateAlertCenterOmit(
     req: CreateAlertCenterOmitRequest,
@@ -1150,7 +1150,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 编辑新企业安全组规则
+   * 修改企业安全组规则，包括编辑内容或启停规则。
    */
   async ModifyEnterpriseSecurityGroupRule(
     req: ModifyEnterpriseSecurityGroupRuleRequest,
@@ -1160,7 +1160,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 添加一条或多条互联网边界访问控制规则。规则写入当前账号的可操作分区；本批 Rules 在一次插入事务中写入。From=batch_import_cover 会先以独立事务删除首条规则 Direction 对应的旧规则，再插入本批 Rules；删除一旦提交，后续插入失败不会恢复旧规则。公有云环境在数据库事务提交后异步触发规则下发，因此成功返回只表示规则已写入并已发起下发，不表示数据面已经生效。
+   * 新增一条或多条互联网边界访问控制规则。
    */
   async AddAclRule(
     req: AddAclRuleRequest,
@@ -1180,7 +1180,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 修改NAT访问控制规则
+   * 修改一条 NAT边界访问控制规则。
    */
   async ModifyNatAcRule(
     req: ModifyNatAcRuleRequest,
@@ -1333,7 +1333,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 删除互联网边界访问控制规则
+   * 删除互联网边界访问控制规则。
    */
   async RemoveAclRule(
     req: RemoveAclRuleRequest,
@@ -1533,7 +1533,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 修改互联网边界访问控制规则
+   * 修改一条互联网边界访问控制规则。
    */
   async ModifyAclRule(
     req: ModifyAclRuleRequest,
@@ -1583,7 +1583,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 删除NAT访问控制规则
+   * 删除 NAT 边界访问控制规则。
    */
   async RemoveNatAcRule(
     req: RemoveNatAcRuleRequest,
@@ -1643,7 +1643,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * ModifyIsolateTable 隔离列表编辑和删除操作
+   * 修改或解除已有入侵防御隔离记录，不用于新增隔离。
    */
   async ModifyIsolateTable(
     req: ModifyIsolateTableRequest,
@@ -2038,7 +2038,7 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
   }
 
   /**
-   * 添加nat访问控制规则
+   * 新增一条或多条 NAT边界访问控制规则。
    */
   async AddNatAcRule(
     req: AddNatAcRuleRequest,

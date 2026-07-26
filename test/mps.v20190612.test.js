@@ -178,6 +178,16 @@ it("mps.v20190612.ParseLiveStreamProcessNotification", async function () {
     }
 })
 
+it("mps.v20190612.CloneViral", async function () {
+    try {
+       const data = await client.CloneViral({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.ModifyStreamPackageSourceLocation", async function () {
     try {
        const data = await client.ModifyStreamPackageSourceLocation({})
@@ -1638,9 +1648,9 @@ it("mps.v20190612.DescribeImageSpriteTemplates", async function () {
     }
 })
 
-it("mps.v20190612.SyncDubbing", async function () {
+it("mps.v20190612.DescribeCloneViralTask", async function () {
     try {
-       const data = await client.SyncDubbing({})
+       const data = await client.DescribeCloneViralTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -2041,6 +2051,16 @@ it("mps.v20190612.DescribeQualityControlTemplates", async function () {
 it("mps.v20190612.CreateStreamLinkSecurityGroup", async function () {
     try {
        const data = await client.CreateStreamLinkSecurityGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.SyncDubbing", async function () {
+    try {
+       const data = await client.SyncDubbing({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -52,7 +52,7 @@ import {
   MediaProcessTaskImageSpriteResult,
   CustomVariable,
   AiAnalysisTaskReelOutput,
-  MediaAiAnalysisDescriptionItem,
+  CloneViralRequest,
   SegmentSpecificInfo,
   DeleteAnimatedGraphicsTemplateResponse,
   AiReviewTaskProhibitedOcrResult,
@@ -171,7 +171,7 @@ import {
   TerrorismImgReviewTemplateInfoForUpdate,
   FailOverOption,
   ModifyStreamLinkFlowRequest,
-  EditMediaTaskInput,
+  CloneViralAIGC,
   DescribeImageSpriteTemplatesRequest,
   DescribeEvent,
   TextWatermarkTemplateInputForUpdate,
@@ -188,6 +188,7 @@ import {
   QualityControlResult,
   AiReviewPornTaskInput,
   HdrConfig,
+  MediaAiAnalysisDescriptionItem,
   ScheduleTask,
   DescribeInputRISTSettings,
   CreateStreamLinkEventRequest,
@@ -288,7 +289,7 @@ import {
   ProcessMediaResponse,
   CreateWordSamplesResponse,
   CreateOutputRistSettings,
-  DeleteAdaptiveDynamicStreamingTemplateResponse,
+  CreateScheduleRequest,
   DescribeOutputRTMPSettings,
   ParseNotificationRequest,
   ImageEraseConfig,
@@ -308,7 +309,7 @@ import {
   Rules,
   AiRecognitionTaskOcrWordsResult,
   PornAsrReviewTemplateInfo,
-  TermBase,
+  CloneViralContent,
   CreateAigcImageTaskResponse,
   ComposeVideoStream,
   LiveSmartSubtitleResult,
@@ -537,7 +538,7 @@ import {
   OutputSRTSourceAddressResp,
   ClassificationConfigureInfoForUpdate,
   SecurityGroupInfo,
-  CreateScheduleRequest,
+  DeleteAdaptiveDynamicStreamingTemplateResponse,
   StreamLinkRegionInfo,
   CreateVideoSearchTaskResponse,
   OutputInfo,
@@ -661,6 +662,8 @@ import {
   TranscodeTemplate,
   TranslateConfigureInfo,
   ProgramAlertCounts,
+  DescribeCloneViralTaskResponse,
+  TermBase,
   DescribeStreamLinkFlowMediaStatisticsResponse,
   DescribeStreamLinkFlowsResponse,
   PornOcrReviewTemplateInfo,
@@ -679,6 +682,7 @@ import {
   ExtractBlindWatermarkTaskConfig,
   DetectVideoSubtitleAreaResponse,
   EraseTimeArea,
+  EditMediaTaskInput,
   DescribeSSAIActivateStateRequest,
   ImageEncodeConfig,
   AiReviewTaskPornResult,
@@ -827,6 +831,7 @@ import {
   UserDefineFaceReviewTemplateInfoForUpdate,
   DescribeInputRTMPSettings,
   StreamUrlDetail,
+  CloneViralPersona,
   AigcVideoReferenceAudioInfo,
   DeleteProcessImageTemplateResponse,
   DescribeStreamLinkSecurityGroupsRequest,
@@ -863,7 +868,7 @@ import {
   SmartEraseSubtitleConfig,
   DeleteLiveRecordTemplateResponse,
   SearchTaskResult,
-  ModifySubtitleEmbedTemplateResponse,
+  DescribeCloneViralTaskRequest,
   VoiceInfo,
   DescribeSnapshotByTimeOffsetTemplatesResponse,
   MediaVideoStreamItem,
@@ -903,6 +908,7 @@ import {
   DescribeOutputRISTSettings,
   DrmInfo,
   TextTranslationRequest,
+  CloneViralResponse,
   LiveStreamAiRecognitionResultInfo,
   DescribeSampleSnapshotTemplatesResponse,
   DescribeProcessImageTemplatesRequest,
@@ -914,6 +920,7 @@ import {
   LiveActivityResult,
   CreateAigcImageTaskRequest,
   TerrorismImgReviewTemplateInfo,
+  ModifySubtitleEmbedTemplateResponse,
   ProgramAlertInfos,
   AsrHotwordsSet,
   AiAnalysisTaskHeadTailInput,
@@ -1077,8 +1084,9 @@ import {
   CreateImageSpriteTemplateResponse,
   DescribeAIRecognitionTemplatesRequest,
   AiRecognitionTaskTransTextSegmentItem,
-  ModifyWatermarkTemplateResponse,
   AiRecognitionResult,
+  ModifyWatermarkTemplateResponse,
+  CloneViralProduct,
 } from "./mps_models"
 
 /**
@@ -1261,6 +1269,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ParseLiveStreamProcessNotificationResponse) => void
   ): Promise<ParseLiveStreamProcessNotificationResponse> {
     return this.request("ParseLiveStreamProcessNotification", req, cb)
+  }
+
+  /**
+   * 爆款复刻。输入爆款参考视频+商品图，生成风格/节奏对齐的视频
+   */
+  async CloneViral(
+    req: CloneViralRequest,
+    cb?: (error: string, rep: CloneViralResponse) => void
+  ): Promise<CloneViralResponse> {
+    return this.request("CloneViral", req, cb)
   }
 
   /**
@@ -2779,13 +2797,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 同步接口，返回克隆音色ID或合成音频结果。克隆/设计音色数量上限默认100
+   * 查询爆款复刻任务结果
    */
-  async SyncDubbing(
-    req: SyncDubbingRequest,
-    cb?: (error: string, rep: SyncDubbingResponse) => void
-  ): Promise<SyncDubbingResponse> {
-    return this.request("SyncDubbing", req, cb)
+  async DescribeCloneViralTask(
+    req: DescribeCloneViralTaskRequest,
+    cb?: (error: string, rep: DescribeCloneViralTaskResponse) => void
+  ): Promise<DescribeCloneViralTaskResponse> {
+    return this.request("DescribeCloneViralTask", req, cb)
   }
 
   /**
@@ -3195,6 +3213,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateStreamLinkSecurityGroupResponse) => void
   ): Promise<CreateStreamLinkSecurityGroupResponse> {
     return this.request("CreateStreamLinkSecurityGroup", req, cb)
+  }
+
+  /**
+   * 同步接口，返回克隆音色ID或合成音频结果。克隆/设计音色数量上限默认100
+   */
+  async SyncDubbing(
+    req: SyncDubbingRequest,
+    cb?: (error: string, rep: SyncDubbingResponse) => void
+  ): Promise<SyncDubbingResponse> {
+    return this.request("SyncDubbing", req, cb)
   }
 
   /**

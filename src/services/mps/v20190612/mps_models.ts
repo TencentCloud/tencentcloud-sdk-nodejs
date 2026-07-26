@@ -905,47 +905,29 @@ export interface AiAnalysisTaskReelOutput {
 }
 
 /**
- * 智能描述信息
+ * CloneViral请求参数结构体
  */
-export interface MediaAiAnalysisDescriptionItem {
+export interface CloneViralRequest {
   /**
-   * 智能描述。
+   * <p>爆款视频Url</p>
    */
-  Description?: string
+  VideoUrl: string
   /**
-   * 智能描述的可信度，取值范围是 0 到 100。
+   * <p>产品信息</p>
    */
-  Confidence?: number
+  Product: CloneViralProduct
   /**
-   * 智能描述标题
+   * <p>AIGC生视频相关参数</p>
    */
-  Title?: string
+  AIGCParam?: CloneViralAIGC
   /**
-   * 智能描述关键词
+   * <p>内容/风格相关参数</p>
    */
-  Keywords?: Array<string>
+  ContentParam?: CloneViralContent
   /**
-   * 分段结果。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>模特形象</p>
    */
-  Paragraphs?: Array<AiParagraphInfo>
-  /**
-   * 摘要思维导图地址
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MindMapUrl?: string
-  /**
-   * 摘要思维导图路径。
-   */
-  MindMapPath?: string
-  /**
-   * 视频字幕文件路径。
-   */
-  SubtitlePath?: string
-  /**
-   * 摘要文件存储位置。
-   */
-  OutputStorage?: TaskOutputStorage
+  Persona?: CloneViralPersona
 }
 
 /**
@@ -3917,13 +3899,25 @@ export interface ModifyStreamLinkFlowRequest {
 }
 
 /**
- * 编辑视频任务的输入。
+ * 爆款复刻 AIGC 生视频相关参数
  */
-export interface EditMediaTaskInput {
+export interface CloneViralAIGC {
   /**
-   * 输入的视频文件信息。
+   * <p>视频时长</p><p>取值范围：[4, 15]</p>
    */
-  FileInfoSet?: Array<EditMediaFileInfo>
+  Duration?: number
+  /**
+   * <p>宽高比。可选 16:9/4:3/1:1/3:4/9:16/21:9/adaptive</p>
+   */
+  AspectRatio?: string
+  /**
+   * <p>分辨率。支持720p（默认）/1080p/2k/4k</p>
+   */
+  Resolution?: string
+  /**
+   * <p>模型等级。flagship（VS2.0，默认）、standard（Kling3.0-Omni）</p>
+   */
+  ModelTier?: string
 }
 
 /**
@@ -4249,6 +4243,50 @@ export interface HdrConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Type?: string
+}
+
+/**
+ * 智能描述信息
+ */
+export interface MediaAiAnalysisDescriptionItem {
+  /**
+   * 智能描述。
+   */
+  Description?: string
+  /**
+   * 智能描述的可信度，取值范围是 0 到 100。
+   */
+  Confidence?: number
+  /**
+   * 智能描述标题
+   */
+  Title?: string
+  /**
+   * 智能描述关键词
+   */
+  Keywords?: Array<string>
+  /**
+   * 分段结果。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Paragraphs?: Array<AiParagraphInfo>
+  /**
+   * 摘要思维导图地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MindMapUrl?: string
+  /**
+   * 摘要思维导图路径。
+   */
+  MindMapPath?: string
+  /**
+   * 视频字幕文件路径。
+   */
+  SubtitlePath?: string
+  /**
+   * 摘要文件存储位置。
+   */
+  OutputStorage?: TaskOutputStorage
 }
 
 /**
@@ -6628,13 +6666,38 @@ export interface CreateOutputRistSettings {
 }
 
 /**
- * DeleteAdaptiveDynamicStreamingTemplate返回参数结构体
+ * CreateSchedule请求参数结构体
  */
-export interface DeleteAdaptiveDynamicStreamingTemplateResponse {
+export interface CreateScheduleRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 编排名称，最多128字符。同一个用户该名称唯一。
    */
-  RequestId?: string
+  ScheduleName: string
+  /**
+   * 编排绑定的触发规则，当上传视频命中该规则到该对象时即触发编排。
+   */
+  Trigger: WorkflowTrigger
+  /**
+   * 编排任务列表。
+   */
+  Activities: Array<Activity>
+  /**
+   * 媒体处理的文件输出存储位置。不填则继承 Trigger 中的存储位置。
+   */
+  OutputStorage?: TaskOutputStorage
+  /**
+   * 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。
+如果不填，表示与触发文件所在的目录一致。
+   */
+  OutputDir?: string
+  /**
+   * 任务的事件通知配置，不填代表不获取事件通知。
+   */
+  TaskNotifyConfig?: TaskNotifyConfig
+  /**
+   * 资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。
+   */
+  ResourceId?: string
 }
 
 /**
@@ -7095,25 +7158,25 @@ export interface PornAsrReviewTemplateInfo {
 }
 
 /**
- * 术语表
+ * 爆款复刻内容/风格参数
  */
-export interface TermBase {
+export interface CloneViralContent {
   /**
-   * <p>术语原语言</p>
+   * <p>自定义提示词，对生成视频的要求</p>
    */
-  Src: string
+  UserPrompt?: string
   /**
-   * <p>术语目标语言</p>
+   * <p>生成视频的目标语言，默认不指定，支持zh / en / ja / ko / es / pt / instrumental（纯音乐无口播）</p>
    */
-  Dst: string
+  Language?: string
   /**
-   * <p>术语源语言，支持：&quot;ab&quot;: &quot;阿布哈兹语&quot;,    &quot;ace&quot;: &quot;亚齐语&quot;,    &quot;ach&quot;: &quot;阿乔利语&quot;,    &quot;af&quot;: &quot;南非荷兰语&quot;,    &quot;ak&quot;: &quot;契维语（阿坎语）&quot;,    &quot;am&quot;: &quot;Amharic&quot;,    &quot;ar&quot;: &quot;阿拉伯语&quot;,    &quot;as&quot;: &quot;阿萨姆语&quot;,    &quot;ay&quot;: &quot;艾马拉语&quot;,    &quot;az&quot;: &quot;阿塞拜疆语&quot;,    &quot;ba&quot;: &quot;巴什基尔语&quot;,    &quot;ban&quot;: &quot;巴厘语&quot;,    &quot;bbc&quot;: &quot;巴塔克托巴语&quot;,    &quot;bem&quot;: &quot;Bemba&quot;,    &quot;bew&quot;: &quot;Betawi&quot;,    &quot;bg&quot;: &quot;保加利亚语&quot;,    &quot;bho&quot;: &quot;博杰普尔语&quot;,    &quot;bik&quot;: &quot;Bikol&quot;,    &quot;bm&quot;: &quot;班巴拉语&quot;,    &quot;bn&quot;: &quot;孟加拉语&quot;,    &quot;br&quot;: &quot;布列塔尼语&quot;,    &quot;bs&quot;: &quot;波斯尼亚语&quot;,    &quot;btx&quot;: &quot;巴塔克卡罗语&quot;,    &quot;bts&quot;: &quot;巴塔克西马隆贡语&quot;,    &quot;bua&quot;: &quot;布里亚特语&quot;,    &quot;ca&quot;: &quot;加泰罗尼亚语&quot;,    &quot;ceb&quot;: &quot;宿务语&quot;,    &quot;cgg&quot;: &quot;Kiga&quot;,    &quot;chm&quot;: &quot;草原马里语&quot;,    &quot;ckb&quot;: &quot;库尔德语（索拉尼语）&quot;,    &quot;cnh&quot;: &quot;哈卡钦语&quot;,    &quot;co&quot;: &quot;科西嘉语&quot;,    &quot;crh&quot;: &quot;克里米亚鞑靼语&quot;,    &quot;crs&quot;: &quot;塞舌尔克里奥尔语&quot;,    &quot;cs&quot;: &quot;捷克语&quot;,    &quot;cv&quot;: &quot;楚瓦什语&quot;,    &quot;cy&quot;: &quot;威尔士语&quot;,    &quot;da&quot;: &quot;丹麦语&quot;,    &quot;de&quot;: &quot;德语&quot;,    &quot;din&quot;: &quot;Dinka&quot;,    &quot;doi&quot;: &quot;多格来语&quot;,    &quot;dov&quot;: &quot;敦贝语&quot;,    &quot;dv&quot;: &quot;第维埃语&quot;,    &quot;dz&quot;: &quot;宗卡语&quot;,    &quot;ee&quot;: &quot;Ewe&quot;,    &quot;el&quot;: &quot;希腊语&quot;,    &quot;en&quot;: &quot;英语&quot;,    &quot;eo&quot;: &quot;世界语&quot;,    &quot;es&quot;: &quot;西班牙语&quot;,    &quot;et&quot;: &quot;爱沙尼亚语&quot;,    &quot;eu&quot;: &quot;巴斯克语&quot;,    &quot;fa&quot;: &quot;波斯语&quot;,    &quot;ff&quot;: &quot;富拉语&quot;,    &quot;fi&quot;: &quot;芬兰语&quot;,    &quot;fil&quot;: &quot;菲律宾语（塔加拉语）&quot;,    &quot;fj&quot;: &quot;斐济语&quot;,    &quot;fr&quot;: &quot;法语&quot;,    &quot;fr-CA&quot;: &quot;法语（加拿大）&quot;,    &quot;fr-FR&quot;: &quot;法语（法国）&quot;,    &quot;fy&quot;: &quot;弗里斯兰语&quot;,    &quot;ga&quot;: &quot;爱尔兰语&quot;,    &quot;gaa&quot;: &quot;加 (Ga) 语&quot;,    &quot;gd&quot;: &quot;苏格兰盖尔语&quot;,    &quot;gl&quot;: &quot;加利西亚语&quot;,    &quot;gn&quot;: &quot;瓜拉尼语&quot;,    &quot;gom&quot;: &quot;贡根语&quot;,    &quot;gu&quot;: &quot;古吉拉特语&quot;,    &quot;gv&quot;: &quot;马恩岛语&quot;,    &quot;ha&quot;: &quot;Hausa&quot;,    &quot;haw&quot;: &quot;夏威夷语&quot;,    &quot;he&quot;: &quot;希伯来语&quot;,    &quot;hi&quot;: &quot;印地语&quot;,    &quot;hil&quot;: &quot;希利盖农语&quot;,    &quot;hmn&quot;: &quot;苗语&quot;,    &quot;hr&quot;: &quot;克罗地亚语&quot;,    &quot;hrx&quot;: &quot;洪斯吕克语&quot;,    &quot;ht&quot;: &quot;海地克里奥尔语&quot;,    &quot;hu&quot;: &quot;匈牙利语&quot;,    &quot;hy&quot;: &quot;亚美尼亚语&quot;,    &quot;id&quot;: &quot;印度尼西亚语&quot;,    &quot;ig&quot;: &quot;Igbo&quot;,    &quot;ilo&quot;: &quot;伊洛果语&quot;,    &quot;is&quot;: &quot;冰岛语&quot;,    &quot;it&quot;: &quot;意大利语&quot;,    &quot;iw&quot;: &quot;希伯来语&quot;,    &quot;ja&quot;: &quot;日语&quot;,    &quot;jv&quot;: &quot;爪哇语&quot;,    &quot;jw&quot;: &quot;爪哇语&quot;,    &quot;ka&quot;: &quot;格鲁吉亚语&quot;,    &quot;kk&quot;: &quot;哈萨克语&quot;,    &quot;km&quot;: &quot;高棉语&quot;,    &quot;kn&quot;: &quot;卡纳达语&quot;,    &quot;ko&quot;: &quot;韩语&quot;,    &quot;kri&quot;: &quot;Krio&quot;,    &quot;ku&quot;: &quot;库尔德语（库尔曼吉语）&quot;,    &quot;ktu&quot;: &quot;吉土巴语&quot;,    &quot;ky&quot;: &quot;吉尔吉斯语&quot;,    &quot;la&quot;: &quot;拉丁语&quot;,    &quot;lb&quot;: &quot;卢森堡语&quot;,    &quot;lg&quot;: &quot;干达语（卢干达语）&quot;,    &quot;li&quot;: &quot;林堡语&quot;,    &quot;lij&quot;: &quot;利古里亚语&quot;,    &quot;lmo&quot;: &quot;伦巴第语&quot;,    &quot;ln&quot;: &quot;林加拉语&quot;,    &quot;lo&quot;: &quot;老挝语&quot;,    &quot;lt&quot;: &quot;立陶宛语&quot;,    &quot;ltg&quot;: &quot;拉特加莱语&quot;,    &quot;luo&quot;: &quot;Luo&quot;,    &quot;lus&quot;: &quot;米佐语&quot;,    &quot;lv&quot;: &quot;拉脱维亚语&quot;,    &quot;mai&quot;: &quot;迈蒂利语&quot;,    &quot;mak&quot;: &quot;马卡萨&quot;,    &quot;mg&quot;: &quot;马尔加什语&quot;,    &quot;mi&quot;: &quot;毛利语&quot;,    &quot;min&quot;: &quot;米南语&quot;,    &quot;mk&quot;: &quot;马其顿语&quot;,    &quot;ml&quot;: &quot;马拉雅拉姆语&quot;,    &quot;mn&quot;: &quot;蒙古语&quot;,    &quot;mr&quot;: &quot;马拉地语&quot;,    &quot;ms&quot;: &quot;马来语&quot;,    &quot;mt&quot;: &quot;马耳他语&quot;,    &quot;my&quot;: &quot;缅甸语&quot;,    &quot;ne&quot;: &quot;尼泊尔语&quot;,    &quot;new&quot;: &quot;尼泊尔语（尼瓦尔语）&quot;,    &quot;nl&quot;: &quot;荷兰语&quot;,    &quot;no&quot;: &quot;挪威语&quot;,    &quot;nr&quot;: &quot;恩德贝莱语（南部）&quot;,    &quot;nso&quot;: &quot;北索托语（塞佩蒂语）&quot;,    &quot;nus&quot;: &quot;努尔语&quot;,    &quot;ny&quot;: &quot;齐切瓦语（尼扬贾语）&quot;,    &quot;oc&quot;: &quot;奥克斯坦语&quot;,    &quot;om&quot;: &quot;Oromo&quot;,    &quot;or&quot;: &quot;奥里亚语（奥里亚）&quot;,    &quot;pa&quot;: &quot;旁遮普语&quot;,    &quot;pag&quot;: &quot;邦阿西楠语&quot;,    &quot;pam&quot;: &quot;邦板牙语&quot;,    &quot;pap&quot;: &quot;Papiamento&quot;,    &quot;pl&quot;: &quot;波兰语&quot;,    &quot;ps&quot;: &quot;Pashto&quot;,    &quot;pt&quot;: &quot;葡萄牙语&quot;,    &quot;pt-BR&quot;: &quot;葡萄牙语（巴西）&quot;,    &quot;pt-PT&quot;: &quot;葡萄牙语（葡萄牙）&quot;,    &quot;qu&quot;: &quot;克丘亚语&quot;,    &quot;ro&quot;: &quot;罗马尼亚语&quot;,    &quot;rom&quot;: &quot;罗姆语&quot;,    &quot;rn&quot;: &quot;Rundi&quot;,    &quot;ru&quot;: &quot;俄语&quot;,    &quot;rw&quot;: &quot;卢旺达语&quot;,    &quot;sa&quot;: &quot;梵语&quot;,    &quot;scn&quot;: &quot;西西里语&quot;,    &quot;sd&quot;: &quot;信德语&quot;,    &quot;sg&quot;: &quot;Sango&quot;,    &quot;shn&quot;: &quot;掸语&quot;,    &quot;si&quot;: &quot;僧伽罗语&quot;,    &quot;sk&quot;: &quot;斯洛伐克语&quot;,    &quot;sl&quot;: &quot;斯洛文尼亚语&quot;,    &quot;sm&quot;: &quot;萨摩亚语&quot;,    &quot;sn&quot;: &quot;修纳语&quot;,    &quot;so&quot;: &quot;索马里语&quot;,    &quot;sq&quot;: &quot;阿尔巴尼亚语&quot;,    &quot;sr&quot;: &quot;塞尔维亚语&quot;,    &quot;ss&quot;: &quot;斯瓦特语&quot;,    &quot;st&quot;: &quot;塞索托语&quot;,    &quot;su&quot;: &quot;巽他语&quot;,    &quot;sv&quot;: &quot;瑞典语&quot;,    &quot;sw&quot;: &quot;斯瓦希里语&quot;,    &quot;szl&quot;: &quot;西里西亚语&quot;,    &quot;ta&quot;: &quot;泰米尔语&quot;,    &quot;te&quot;: &quot;泰卢固语&quot;,    &quot;tet&quot;: &quot;德顿语&quot;,    &quot;tg&quot;: &quot;塔吉克语&quot;,    &quot;th&quot;: &quot;泰语&quot;,    &quot;ti&quot;: &quot;提格里尼亚语&quot;,    &quot;tk&quot;: &quot;土库曼语&quot;,    &quot;tl&quot;: &quot;菲律宾语（塔加拉语）&quot;,    &quot;tn&quot;: &quot;茨瓦纳语&quot;,    &quot;tr&quot;: &quot;土耳其语&quot;,    &quot;ts&quot;: &quot;聪加语&quot;,    &quot;tt&quot;: &quot;鞑靼语&quot;,    &quot;ug&quot;: &quot;维吾尔语&quot;,    &quot;uk&quot;: &quot;乌克兰语&quot;,    &quot;ur&quot;: &quot;乌尔都语&quot;,    &quot;uz&quot;: &quot;乌兹别克语&quot;,    &quot;vi&quot;: &quot;越南语&quot;,    &quot;xh&quot;: &quot;科萨语&quot;,    &quot;yi&quot;: &quot;意第绪语&quot;,    &quot;yo&quot;: &quot;约鲁巴语&quot;,    &quot;yua&quot;: &quot;尤卡坦玛雅语&quot;,    &quot;yue&quot;: &quot;粤语&quot;,    &quot;zh&quot;: &quot;简体中文&quot;,    &quot;zh-TW&quot;: &quot;中文（繁体）&quot;,    &quot;zu&quot;: &quot;祖鲁语&quot;</p>
+   * <p>目标市场，默认不指定。可选north_america / europe / china / japan / korea / sea / brazil</p>
    */
-  SrcLanguage?: string
+  Market?: string
   /**
-   * <p>术语目标语言，支持：&quot;ab&quot;: &quot;阿布哈兹语&quot;,    &quot;ace&quot;: &quot;亚齐语&quot;,    &quot;ach&quot;: &quot;阿乔利语&quot;,    &quot;af&quot;: &quot;南非荷兰语&quot;,    &quot;ak&quot;: &quot;契维语（阿坎语）&quot;,    &quot;am&quot;: &quot;Amharic&quot;,    &quot;ar&quot;: &quot;阿拉伯语&quot;,    &quot;as&quot;: &quot;阿萨姆语&quot;,    &quot;ay&quot;: &quot;艾马拉语&quot;,    &quot;az&quot;: &quot;阿塞拜疆语&quot;,    &quot;ba&quot;: &quot;巴什基尔语&quot;,    &quot;ban&quot;: &quot;巴厘语&quot;,    &quot;bbc&quot;: &quot;巴塔克托巴语&quot;,    &quot;bem&quot;: &quot;Bemba&quot;,    &quot;bew&quot;: &quot;Betawi&quot;,    &quot;bg&quot;: &quot;保加利亚语&quot;,    &quot;bho&quot;: &quot;博杰普尔语&quot;,    &quot;bik&quot;: &quot;Bikol&quot;,    &quot;bm&quot;: &quot;班巴拉语&quot;,    &quot;bn&quot;: &quot;孟加拉语&quot;,    &quot;br&quot;: &quot;布列塔尼语&quot;,    &quot;bs&quot;: &quot;波斯尼亚语&quot;,    &quot;btx&quot;: &quot;巴塔克卡罗语&quot;,    &quot;bts&quot;: &quot;巴塔克西马隆贡语&quot;,    &quot;bua&quot;: &quot;布里亚特语&quot;,    &quot;ca&quot;: &quot;加泰罗尼亚语&quot;,    &quot;ceb&quot;: &quot;宿务语&quot;,    &quot;cgg&quot;: &quot;Kiga&quot;,    &quot;chm&quot;: &quot;草原马里语&quot;,    &quot;ckb&quot;: &quot;库尔德语（索拉尼语）&quot;,    &quot;cnh&quot;: &quot;哈卡钦语&quot;,    &quot;co&quot;: &quot;科西嘉语&quot;,    &quot;crh&quot;: &quot;克里米亚鞑靼语&quot;,    &quot;crs&quot;: &quot;塞舌尔克里奥尔语&quot;,    &quot;cs&quot;: &quot;捷克语&quot;,    &quot;cv&quot;: &quot;楚瓦什语&quot;,    &quot;cy&quot;: &quot;威尔士语&quot;,    &quot;da&quot;: &quot;丹麦语&quot;,    &quot;de&quot;: &quot;德语&quot;,    &quot;din&quot;: &quot;Dinka&quot;,    &quot;doi&quot;: &quot;多格来语&quot;,    &quot;dov&quot;: &quot;敦贝语&quot;,    &quot;dv&quot;: &quot;第维埃语&quot;,    &quot;dz&quot;: &quot;宗卡语&quot;,    &quot;ee&quot;: &quot;Ewe&quot;,    &quot;el&quot;: &quot;希腊语&quot;,    &quot;en&quot;: &quot;英语&quot;,    &quot;eo&quot;: &quot;世界语&quot;,    &quot;es&quot;: &quot;西班牙语&quot;,    &quot;et&quot;: &quot;爱沙尼亚语&quot;,    &quot;eu&quot;: &quot;巴斯克语&quot;,    &quot;fa&quot;: &quot;波斯语&quot;,    &quot;ff&quot;: &quot;富拉语&quot;,    &quot;fi&quot;: &quot;芬兰语&quot;,    &quot;fil&quot;: &quot;菲律宾语（塔加拉语）&quot;,    &quot;fj&quot;: &quot;斐济语&quot;,    &quot;fr&quot;: &quot;法语&quot;,    &quot;fr-CA&quot;: &quot;法语（加拿大）&quot;,    &quot;fr-FR&quot;: &quot;法语（法国）&quot;,    &quot;fy&quot;: &quot;弗里斯兰语&quot;,    &quot;ga&quot;: &quot;爱尔兰语&quot;,    &quot;gaa&quot;: &quot;加 (Ga) 语&quot;,    &quot;gd&quot;: &quot;苏格兰盖尔语&quot;,    &quot;gl&quot;: &quot;加利西亚语&quot;,    &quot;gn&quot;: &quot;瓜拉尼语&quot;,    &quot;gom&quot;: &quot;贡根语&quot;,    &quot;gu&quot;: &quot;古吉拉特语&quot;,    &quot;gv&quot;: &quot;马恩岛语&quot;,    &quot;ha&quot;: &quot;Hausa&quot;,    &quot;haw&quot;: &quot;夏威夷语&quot;,    &quot;he&quot;: &quot;希伯来语&quot;,    &quot;hi&quot;: &quot;印地语&quot;,    &quot;hil&quot;: &quot;希利盖农语&quot;,    &quot;hmn&quot;: &quot;苗语&quot;,    &quot;hr&quot;: &quot;克罗地亚语&quot;,    &quot;hrx&quot;: &quot;洪斯吕克语&quot;,    &quot;ht&quot;: &quot;海地克里奥尔语&quot;,    &quot;hu&quot;: &quot;匈牙利语&quot;,    &quot;hy&quot;: &quot;亚美尼亚语&quot;,    &quot;id&quot;: &quot;印度尼西亚语&quot;,    &quot;ig&quot;: &quot;Igbo&quot;,    &quot;ilo&quot;: &quot;伊洛果语&quot;,    &quot;is&quot;: &quot;冰岛语&quot;,    &quot;it&quot;: &quot;意大利语&quot;,    &quot;iw&quot;: &quot;希伯来语&quot;,    &quot;ja&quot;: &quot;日语&quot;,    &quot;jv&quot;: &quot;爪哇语&quot;,    &quot;jw&quot;: &quot;爪哇语&quot;,    &quot;ka&quot;: &quot;格鲁吉亚语&quot;,    &quot;kk&quot;: &quot;哈萨克语&quot;,    &quot;km&quot;: &quot;高棉语&quot;,    &quot;kn&quot;: &quot;卡纳达语&quot;,    &quot;ko&quot;: &quot;韩语&quot;,    &quot;kri&quot;: &quot;Krio&quot;,    &quot;ku&quot;: &quot;库尔德语（库尔曼吉语）&quot;,    &quot;ktu&quot;: &quot;吉土巴语&quot;,    &quot;ky&quot;: &quot;吉尔吉斯语&quot;,    &quot;la&quot;: &quot;拉丁语&quot;,    &quot;lb&quot;: &quot;卢森堡语&quot;,    &quot;lg&quot;: &quot;干达语（卢干达语）&quot;,    &quot;li&quot;: &quot;林堡语&quot;,    &quot;lij&quot;: &quot;利古里亚语&quot;,    &quot;lmo&quot;: &quot;伦巴第语&quot;,    &quot;ln&quot;: &quot;林加拉语&quot;,    &quot;lo&quot;: &quot;老挝语&quot;,    &quot;lt&quot;: &quot;立陶宛语&quot;,    &quot;ltg&quot;: &quot;拉特加莱语&quot;,    &quot;luo&quot;: &quot;Luo&quot;,    &quot;lus&quot;: &quot;米佐语&quot;,    &quot;lv&quot;: &quot;拉脱维亚语&quot;,    &quot;mai&quot;: &quot;迈蒂利语&quot;,    &quot;mak&quot;: &quot;马卡萨&quot;,    &quot;mg&quot;: &quot;马尔加什语&quot;,    &quot;mi&quot;: &quot;毛利语&quot;,    &quot;min&quot;: &quot;米南语&quot;,    &quot;mk&quot;: &quot;马其顿语&quot;,    &quot;ml&quot;: &quot;马拉雅拉姆语&quot;,    &quot;mn&quot;: &quot;蒙古语&quot;,    &quot;mr&quot;: &quot;马拉地语&quot;,    &quot;ms&quot;: &quot;马来语&quot;,    &quot;mt&quot;: &quot;马耳他语&quot;,    &quot;my&quot;: &quot;缅甸语&quot;,    &quot;ne&quot;: &quot;尼泊尔语&quot;,    &quot;new&quot;: &quot;尼泊尔语（尼瓦尔语）&quot;,    &quot;nl&quot;: &quot;荷兰语&quot;,    &quot;no&quot;: &quot;挪威语&quot;,    &quot;nr&quot;: &quot;恩德贝莱语（南部）&quot;,    &quot;nso&quot;: &quot;北索托语（塞佩蒂语）&quot;,    &quot;nus&quot;: &quot;努尔语&quot;,    &quot;ny&quot;: &quot;齐切瓦语（尼扬贾语）&quot;,    &quot;oc&quot;: &quot;奥克斯坦语&quot;,    &quot;om&quot;: &quot;Oromo&quot;,    &quot;or&quot;: &quot;奥里亚语（奥里亚）&quot;,    &quot;pa&quot;: &quot;旁遮普语&quot;,    &quot;pag&quot;: &quot;邦阿西楠语&quot;,    &quot;pam&quot;: &quot;邦板牙语&quot;,    &quot;pap&quot;: &quot;Papiamento&quot;,    &quot;pl&quot;: &quot;波兰语&quot;,    &quot;ps&quot;: &quot;Pashto&quot;,    &quot;pt&quot;: &quot;葡萄牙语&quot;,    &quot;pt-BR&quot;: &quot;葡萄牙语（巴西）&quot;,    &quot;pt-PT&quot;: &quot;葡萄牙语（葡萄牙）&quot;,    &quot;qu&quot;: &quot;克丘亚语&quot;,    &quot;ro&quot;: &quot;罗马尼亚语&quot;,    &quot;rom&quot;: &quot;罗姆语&quot;,    &quot;rn&quot;: &quot;Rundi&quot;,    &quot;ru&quot;: &quot;俄语&quot;,    &quot;rw&quot;: &quot;卢旺达语&quot;,    &quot;sa&quot;: &quot;梵语&quot;,    &quot;scn&quot;: &quot;西西里语&quot;,    &quot;sd&quot;: &quot;信德语&quot;,    &quot;sg&quot;: &quot;Sango&quot;,    &quot;shn&quot;: &quot;掸语&quot;,    &quot;si&quot;: &quot;僧伽罗语&quot;,    &quot;sk&quot;: &quot;斯洛伐克语&quot;,    &quot;sl&quot;: &quot;斯洛文尼亚语&quot;,    &quot;sm&quot;: &quot;萨摩亚语&quot;,    &quot;sn&quot;: &quot;修纳语&quot;,    &quot;so&quot;: &quot;索马里语&quot;,    &quot;sq&quot;: &quot;阿尔巴尼亚语&quot;,    &quot;sr&quot;: &quot;塞尔维亚语&quot;,    &quot;ss&quot;: &quot;斯瓦特语&quot;,    &quot;st&quot;: &quot;塞索托语&quot;,    &quot;su&quot;: &quot;巽他语&quot;,    &quot;sv&quot;: &quot;瑞典语&quot;,    &quot;sw&quot;: &quot;斯瓦希里语&quot;,    &quot;szl&quot;: &quot;西里西亚语&quot;,    &quot;ta&quot;: &quot;泰米尔语&quot;,    &quot;te&quot;: &quot;泰卢固语&quot;,    &quot;tet&quot;: &quot;德顿语&quot;,    &quot;tg&quot;: &quot;塔吉克语&quot;,    &quot;th&quot;: &quot;泰语&quot;,    &quot;ti&quot;: &quot;提格里尼亚语&quot;,    &quot;tk&quot;: &quot;土库曼语&quot;,    &quot;tl&quot;: &quot;菲律宾语（塔加拉语）&quot;,    &quot;tn&quot;: &quot;茨瓦纳语&quot;,    &quot;tr&quot;: &quot;土耳其语&quot;,    &quot;ts&quot;: &quot;聪加语&quot;,    &quot;tt&quot;: &quot;鞑靼语&quot;,    &quot;ug&quot;: &quot;维吾尔语&quot;,    &quot;uk&quot;: &quot;乌克兰语&quot;,    &quot;ur&quot;: &quot;乌尔都语&quot;,    &quot;uz&quot;: &quot;乌兹别克语&quot;,    &quot;vi&quot;: &quot;越南语&quot;,    &quot;xh&quot;: &quot;科萨语&quot;,    &quot;yi&quot;: &quot;意第绪语&quot;,    &quot;yo&quot;: &quot;约鲁巴语&quot;,    &quot;yua&quot;: &quot;尤卡坦玛雅语&quot;,    &quot;yue&quot;: &quot;粤语&quot;,    &quot;zh&quot;: &quot;简体中文&quot;,    &quot;zh-TW&quot;: &quot;中文（繁体）&quot;,    &quot;zu&quot;: &quot;祖鲁语&quot;</p>
+   * <p>裂变程度。exact/low/medium/high，默认exact 1:1复刻</p>
    */
-  DstLanguage?: string
+  FissionLevel?: string
 }
 
 /**
@@ -13129,38 +13192,13 @@ export interface SecurityGroupInfo {
 }
 
 /**
- * CreateSchedule请求参数结构体
+ * DeleteAdaptiveDynamicStreamingTemplate返回参数结构体
  */
-export interface CreateScheduleRequest {
+export interface DeleteAdaptiveDynamicStreamingTemplateResponse {
   /**
-   * 编排名称，最多128字符。同一个用户该名称唯一。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ScheduleName: string
-  /**
-   * 编排绑定的触发规则，当上传视频命中该规则到该对象时即触发编排。
-   */
-  Trigger: WorkflowTrigger
-  /**
-   * 编排任务列表。
-   */
-  Activities: Array<Activity>
-  /**
-   * 媒体处理的文件输出存储位置。不填则继承 Trigger 中的存储位置。
-   */
-  OutputStorage?: TaskOutputStorage
-  /**
-   * 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。
-如果不填，表示与触发文件所在的目录一致。
-   */
-  OutputDir?: string
-  /**
-   * 任务的事件通知配置，不填代表不获取事件通知。
-   */
-  TaskNotifyConfig?: TaskNotifyConfig
-  /**
-   * 资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。
-   */
-  ResourceId?: string
+  RequestId?: string
 }
 
 /**
@@ -16225,6 +16263,50 @@ export interface ProgramAlertCounts {
 }
 
 /**
+ * DescribeCloneViralTask返回参数结构体
+ */
+export interface DescribeCloneViralTaskResponse {
+  /**
+   * <p>任务状态</p><p>枚举值：</p><ul><li>WAIT： 等待中</li><li>RUN： 执行中</li><li>FAIL： 任务失败</li><li>DONE： 任务成功</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>失败时返回错误信息</p>
+   */
+  Message?: string
+  /**
+   * <p>当任务状态为 DONE时，返回视频Url列表，视频存储24小时</p>
+   */
+  VideoUrls?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 术语表
+ */
+export interface TermBase {
+  /**
+   * <p>术语原语言</p>
+   */
+  Src: string
+  /**
+   * <p>术语目标语言</p>
+   */
+  Dst: string
+  /**
+   * <p>术语源语言，支持：&quot;ab&quot;: &quot;阿布哈兹语&quot;,    &quot;ace&quot;: &quot;亚齐语&quot;,    &quot;ach&quot;: &quot;阿乔利语&quot;,    &quot;af&quot;: &quot;南非荷兰语&quot;,    &quot;ak&quot;: &quot;契维语（阿坎语）&quot;,    &quot;am&quot;: &quot;Amharic&quot;,    &quot;ar&quot;: &quot;阿拉伯语&quot;,    &quot;as&quot;: &quot;阿萨姆语&quot;,    &quot;ay&quot;: &quot;艾马拉语&quot;,    &quot;az&quot;: &quot;阿塞拜疆语&quot;,    &quot;ba&quot;: &quot;巴什基尔语&quot;,    &quot;ban&quot;: &quot;巴厘语&quot;,    &quot;bbc&quot;: &quot;巴塔克托巴语&quot;,    &quot;bem&quot;: &quot;Bemba&quot;,    &quot;bew&quot;: &quot;Betawi&quot;,    &quot;bg&quot;: &quot;保加利亚语&quot;,    &quot;bho&quot;: &quot;博杰普尔语&quot;,    &quot;bik&quot;: &quot;Bikol&quot;,    &quot;bm&quot;: &quot;班巴拉语&quot;,    &quot;bn&quot;: &quot;孟加拉语&quot;,    &quot;br&quot;: &quot;布列塔尼语&quot;,    &quot;bs&quot;: &quot;波斯尼亚语&quot;,    &quot;btx&quot;: &quot;巴塔克卡罗语&quot;,    &quot;bts&quot;: &quot;巴塔克西马隆贡语&quot;,    &quot;bua&quot;: &quot;布里亚特语&quot;,    &quot;ca&quot;: &quot;加泰罗尼亚语&quot;,    &quot;ceb&quot;: &quot;宿务语&quot;,    &quot;cgg&quot;: &quot;Kiga&quot;,    &quot;chm&quot;: &quot;草原马里语&quot;,    &quot;ckb&quot;: &quot;库尔德语（索拉尼语）&quot;,    &quot;cnh&quot;: &quot;哈卡钦语&quot;,    &quot;co&quot;: &quot;科西嘉语&quot;,    &quot;crh&quot;: &quot;克里米亚鞑靼语&quot;,    &quot;crs&quot;: &quot;塞舌尔克里奥尔语&quot;,    &quot;cs&quot;: &quot;捷克语&quot;,    &quot;cv&quot;: &quot;楚瓦什语&quot;,    &quot;cy&quot;: &quot;威尔士语&quot;,    &quot;da&quot;: &quot;丹麦语&quot;,    &quot;de&quot;: &quot;德语&quot;,    &quot;din&quot;: &quot;Dinka&quot;,    &quot;doi&quot;: &quot;多格来语&quot;,    &quot;dov&quot;: &quot;敦贝语&quot;,    &quot;dv&quot;: &quot;第维埃语&quot;,    &quot;dz&quot;: &quot;宗卡语&quot;,    &quot;ee&quot;: &quot;Ewe&quot;,    &quot;el&quot;: &quot;希腊语&quot;,    &quot;en&quot;: &quot;英语&quot;,    &quot;eo&quot;: &quot;世界语&quot;,    &quot;es&quot;: &quot;西班牙语&quot;,    &quot;et&quot;: &quot;爱沙尼亚语&quot;,    &quot;eu&quot;: &quot;巴斯克语&quot;,    &quot;fa&quot;: &quot;波斯语&quot;,    &quot;ff&quot;: &quot;富拉语&quot;,    &quot;fi&quot;: &quot;芬兰语&quot;,    &quot;fil&quot;: &quot;菲律宾语（塔加拉语）&quot;,    &quot;fj&quot;: &quot;斐济语&quot;,    &quot;fr&quot;: &quot;法语&quot;,    &quot;fr-CA&quot;: &quot;法语（加拿大）&quot;,    &quot;fr-FR&quot;: &quot;法语（法国）&quot;,    &quot;fy&quot;: &quot;弗里斯兰语&quot;,    &quot;ga&quot;: &quot;爱尔兰语&quot;,    &quot;gaa&quot;: &quot;加 (Ga) 语&quot;,    &quot;gd&quot;: &quot;苏格兰盖尔语&quot;,    &quot;gl&quot;: &quot;加利西亚语&quot;,    &quot;gn&quot;: &quot;瓜拉尼语&quot;,    &quot;gom&quot;: &quot;贡根语&quot;,    &quot;gu&quot;: &quot;古吉拉特语&quot;,    &quot;gv&quot;: &quot;马恩岛语&quot;,    &quot;ha&quot;: &quot;Hausa&quot;,    &quot;haw&quot;: &quot;夏威夷语&quot;,    &quot;he&quot;: &quot;希伯来语&quot;,    &quot;hi&quot;: &quot;印地语&quot;,    &quot;hil&quot;: &quot;希利盖农语&quot;,    &quot;hmn&quot;: &quot;苗语&quot;,    &quot;hr&quot;: &quot;克罗地亚语&quot;,    &quot;hrx&quot;: &quot;洪斯吕克语&quot;,    &quot;ht&quot;: &quot;海地克里奥尔语&quot;,    &quot;hu&quot;: &quot;匈牙利语&quot;,    &quot;hy&quot;: &quot;亚美尼亚语&quot;,    &quot;id&quot;: &quot;印度尼西亚语&quot;,    &quot;ig&quot;: &quot;Igbo&quot;,    &quot;ilo&quot;: &quot;伊洛果语&quot;,    &quot;is&quot;: &quot;冰岛语&quot;,    &quot;it&quot;: &quot;意大利语&quot;,    &quot;iw&quot;: &quot;希伯来语&quot;,    &quot;ja&quot;: &quot;日语&quot;,    &quot;jv&quot;: &quot;爪哇语&quot;,    &quot;jw&quot;: &quot;爪哇语&quot;,    &quot;ka&quot;: &quot;格鲁吉亚语&quot;,    &quot;kk&quot;: &quot;哈萨克语&quot;,    &quot;km&quot;: &quot;高棉语&quot;,    &quot;kn&quot;: &quot;卡纳达语&quot;,    &quot;ko&quot;: &quot;韩语&quot;,    &quot;kri&quot;: &quot;Krio&quot;,    &quot;ku&quot;: &quot;库尔德语（库尔曼吉语）&quot;,    &quot;ktu&quot;: &quot;吉土巴语&quot;,    &quot;ky&quot;: &quot;吉尔吉斯语&quot;,    &quot;la&quot;: &quot;拉丁语&quot;,    &quot;lb&quot;: &quot;卢森堡语&quot;,    &quot;lg&quot;: &quot;干达语（卢干达语）&quot;,    &quot;li&quot;: &quot;林堡语&quot;,    &quot;lij&quot;: &quot;利古里亚语&quot;,    &quot;lmo&quot;: &quot;伦巴第语&quot;,    &quot;ln&quot;: &quot;林加拉语&quot;,    &quot;lo&quot;: &quot;老挝语&quot;,    &quot;lt&quot;: &quot;立陶宛语&quot;,    &quot;ltg&quot;: &quot;拉特加莱语&quot;,    &quot;luo&quot;: &quot;Luo&quot;,    &quot;lus&quot;: &quot;米佐语&quot;,    &quot;lv&quot;: &quot;拉脱维亚语&quot;,    &quot;mai&quot;: &quot;迈蒂利语&quot;,    &quot;mak&quot;: &quot;马卡萨&quot;,    &quot;mg&quot;: &quot;马尔加什语&quot;,    &quot;mi&quot;: &quot;毛利语&quot;,    &quot;min&quot;: &quot;米南语&quot;,    &quot;mk&quot;: &quot;马其顿语&quot;,    &quot;ml&quot;: &quot;马拉雅拉姆语&quot;,    &quot;mn&quot;: &quot;蒙古语&quot;,    &quot;mr&quot;: &quot;马拉地语&quot;,    &quot;ms&quot;: &quot;马来语&quot;,    &quot;mt&quot;: &quot;马耳他语&quot;,    &quot;my&quot;: &quot;缅甸语&quot;,    &quot;ne&quot;: &quot;尼泊尔语&quot;,    &quot;new&quot;: &quot;尼泊尔语（尼瓦尔语）&quot;,    &quot;nl&quot;: &quot;荷兰语&quot;,    &quot;no&quot;: &quot;挪威语&quot;,    &quot;nr&quot;: &quot;恩德贝莱语（南部）&quot;,    &quot;nso&quot;: &quot;北索托语（塞佩蒂语）&quot;,    &quot;nus&quot;: &quot;努尔语&quot;,    &quot;ny&quot;: &quot;齐切瓦语（尼扬贾语）&quot;,    &quot;oc&quot;: &quot;奥克斯坦语&quot;,    &quot;om&quot;: &quot;Oromo&quot;,    &quot;or&quot;: &quot;奥里亚语（奥里亚）&quot;,    &quot;pa&quot;: &quot;旁遮普语&quot;,    &quot;pag&quot;: &quot;邦阿西楠语&quot;,    &quot;pam&quot;: &quot;邦板牙语&quot;,    &quot;pap&quot;: &quot;Papiamento&quot;,    &quot;pl&quot;: &quot;波兰语&quot;,    &quot;ps&quot;: &quot;Pashto&quot;,    &quot;pt&quot;: &quot;葡萄牙语&quot;,    &quot;pt-BR&quot;: &quot;葡萄牙语（巴西）&quot;,    &quot;pt-PT&quot;: &quot;葡萄牙语（葡萄牙）&quot;,    &quot;qu&quot;: &quot;克丘亚语&quot;,    &quot;ro&quot;: &quot;罗马尼亚语&quot;,    &quot;rom&quot;: &quot;罗姆语&quot;,    &quot;rn&quot;: &quot;Rundi&quot;,    &quot;ru&quot;: &quot;俄语&quot;,    &quot;rw&quot;: &quot;卢旺达语&quot;,    &quot;sa&quot;: &quot;梵语&quot;,    &quot;scn&quot;: &quot;西西里语&quot;,    &quot;sd&quot;: &quot;信德语&quot;,    &quot;sg&quot;: &quot;Sango&quot;,    &quot;shn&quot;: &quot;掸语&quot;,    &quot;si&quot;: &quot;僧伽罗语&quot;,    &quot;sk&quot;: &quot;斯洛伐克语&quot;,    &quot;sl&quot;: &quot;斯洛文尼亚语&quot;,    &quot;sm&quot;: &quot;萨摩亚语&quot;,    &quot;sn&quot;: &quot;修纳语&quot;,    &quot;so&quot;: &quot;索马里语&quot;,    &quot;sq&quot;: &quot;阿尔巴尼亚语&quot;,    &quot;sr&quot;: &quot;塞尔维亚语&quot;,    &quot;ss&quot;: &quot;斯瓦特语&quot;,    &quot;st&quot;: &quot;塞索托语&quot;,    &quot;su&quot;: &quot;巽他语&quot;,    &quot;sv&quot;: &quot;瑞典语&quot;,    &quot;sw&quot;: &quot;斯瓦希里语&quot;,    &quot;szl&quot;: &quot;西里西亚语&quot;,    &quot;ta&quot;: &quot;泰米尔语&quot;,    &quot;te&quot;: &quot;泰卢固语&quot;,    &quot;tet&quot;: &quot;德顿语&quot;,    &quot;tg&quot;: &quot;塔吉克语&quot;,    &quot;th&quot;: &quot;泰语&quot;,    &quot;ti&quot;: &quot;提格里尼亚语&quot;,    &quot;tk&quot;: &quot;土库曼语&quot;,    &quot;tl&quot;: &quot;菲律宾语（塔加拉语）&quot;,    &quot;tn&quot;: &quot;茨瓦纳语&quot;,    &quot;tr&quot;: &quot;土耳其语&quot;,    &quot;ts&quot;: &quot;聪加语&quot;,    &quot;tt&quot;: &quot;鞑靼语&quot;,    &quot;ug&quot;: &quot;维吾尔语&quot;,    &quot;uk&quot;: &quot;乌克兰语&quot;,    &quot;ur&quot;: &quot;乌尔都语&quot;,    &quot;uz&quot;: &quot;乌兹别克语&quot;,    &quot;vi&quot;: &quot;越南语&quot;,    &quot;xh&quot;: &quot;科萨语&quot;,    &quot;yi&quot;: &quot;意第绪语&quot;,    &quot;yo&quot;: &quot;约鲁巴语&quot;,    &quot;yua&quot;: &quot;尤卡坦玛雅语&quot;,    &quot;yue&quot;: &quot;粤语&quot;,    &quot;zh&quot;: &quot;简体中文&quot;,    &quot;zh-TW&quot;: &quot;中文（繁体）&quot;,    &quot;zu&quot;: &quot;祖鲁语&quot;</p>
+   */
+  SrcLanguage?: string
+  /**
+   * <p>术语目标语言，支持：&quot;ab&quot;: &quot;阿布哈兹语&quot;,    &quot;ace&quot;: &quot;亚齐语&quot;,    &quot;ach&quot;: &quot;阿乔利语&quot;,    &quot;af&quot;: &quot;南非荷兰语&quot;,    &quot;ak&quot;: &quot;契维语（阿坎语）&quot;,    &quot;am&quot;: &quot;Amharic&quot;,    &quot;ar&quot;: &quot;阿拉伯语&quot;,    &quot;as&quot;: &quot;阿萨姆语&quot;,    &quot;ay&quot;: &quot;艾马拉语&quot;,    &quot;az&quot;: &quot;阿塞拜疆语&quot;,    &quot;ba&quot;: &quot;巴什基尔语&quot;,    &quot;ban&quot;: &quot;巴厘语&quot;,    &quot;bbc&quot;: &quot;巴塔克托巴语&quot;,    &quot;bem&quot;: &quot;Bemba&quot;,    &quot;bew&quot;: &quot;Betawi&quot;,    &quot;bg&quot;: &quot;保加利亚语&quot;,    &quot;bho&quot;: &quot;博杰普尔语&quot;,    &quot;bik&quot;: &quot;Bikol&quot;,    &quot;bm&quot;: &quot;班巴拉语&quot;,    &quot;bn&quot;: &quot;孟加拉语&quot;,    &quot;br&quot;: &quot;布列塔尼语&quot;,    &quot;bs&quot;: &quot;波斯尼亚语&quot;,    &quot;btx&quot;: &quot;巴塔克卡罗语&quot;,    &quot;bts&quot;: &quot;巴塔克西马隆贡语&quot;,    &quot;bua&quot;: &quot;布里亚特语&quot;,    &quot;ca&quot;: &quot;加泰罗尼亚语&quot;,    &quot;ceb&quot;: &quot;宿务语&quot;,    &quot;cgg&quot;: &quot;Kiga&quot;,    &quot;chm&quot;: &quot;草原马里语&quot;,    &quot;ckb&quot;: &quot;库尔德语（索拉尼语）&quot;,    &quot;cnh&quot;: &quot;哈卡钦语&quot;,    &quot;co&quot;: &quot;科西嘉语&quot;,    &quot;crh&quot;: &quot;克里米亚鞑靼语&quot;,    &quot;crs&quot;: &quot;塞舌尔克里奥尔语&quot;,    &quot;cs&quot;: &quot;捷克语&quot;,    &quot;cv&quot;: &quot;楚瓦什语&quot;,    &quot;cy&quot;: &quot;威尔士语&quot;,    &quot;da&quot;: &quot;丹麦语&quot;,    &quot;de&quot;: &quot;德语&quot;,    &quot;din&quot;: &quot;Dinka&quot;,    &quot;doi&quot;: &quot;多格来语&quot;,    &quot;dov&quot;: &quot;敦贝语&quot;,    &quot;dv&quot;: &quot;第维埃语&quot;,    &quot;dz&quot;: &quot;宗卡语&quot;,    &quot;ee&quot;: &quot;Ewe&quot;,    &quot;el&quot;: &quot;希腊语&quot;,    &quot;en&quot;: &quot;英语&quot;,    &quot;eo&quot;: &quot;世界语&quot;,    &quot;es&quot;: &quot;西班牙语&quot;,    &quot;et&quot;: &quot;爱沙尼亚语&quot;,    &quot;eu&quot;: &quot;巴斯克语&quot;,    &quot;fa&quot;: &quot;波斯语&quot;,    &quot;ff&quot;: &quot;富拉语&quot;,    &quot;fi&quot;: &quot;芬兰语&quot;,    &quot;fil&quot;: &quot;菲律宾语（塔加拉语）&quot;,    &quot;fj&quot;: &quot;斐济语&quot;,    &quot;fr&quot;: &quot;法语&quot;,    &quot;fr-CA&quot;: &quot;法语（加拿大）&quot;,    &quot;fr-FR&quot;: &quot;法语（法国）&quot;,    &quot;fy&quot;: &quot;弗里斯兰语&quot;,    &quot;ga&quot;: &quot;爱尔兰语&quot;,    &quot;gaa&quot;: &quot;加 (Ga) 语&quot;,    &quot;gd&quot;: &quot;苏格兰盖尔语&quot;,    &quot;gl&quot;: &quot;加利西亚语&quot;,    &quot;gn&quot;: &quot;瓜拉尼语&quot;,    &quot;gom&quot;: &quot;贡根语&quot;,    &quot;gu&quot;: &quot;古吉拉特语&quot;,    &quot;gv&quot;: &quot;马恩岛语&quot;,    &quot;ha&quot;: &quot;Hausa&quot;,    &quot;haw&quot;: &quot;夏威夷语&quot;,    &quot;he&quot;: &quot;希伯来语&quot;,    &quot;hi&quot;: &quot;印地语&quot;,    &quot;hil&quot;: &quot;希利盖农语&quot;,    &quot;hmn&quot;: &quot;苗语&quot;,    &quot;hr&quot;: &quot;克罗地亚语&quot;,    &quot;hrx&quot;: &quot;洪斯吕克语&quot;,    &quot;ht&quot;: &quot;海地克里奥尔语&quot;,    &quot;hu&quot;: &quot;匈牙利语&quot;,    &quot;hy&quot;: &quot;亚美尼亚语&quot;,    &quot;id&quot;: &quot;印度尼西亚语&quot;,    &quot;ig&quot;: &quot;Igbo&quot;,    &quot;ilo&quot;: &quot;伊洛果语&quot;,    &quot;is&quot;: &quot;冰岛语&quot;,    &quot;it&quot;: &quot;意大利语&quot;,    &quot;iw&quot;: &quot;希伯来语&quot;,    &quot;ja&quot;: &quot;日语&quot;,    &quot;jv&quot;: &quot;爪哇语&quot;,    &quot;jw&quot;: &quot;爪哇语&quot;,    &quot;ka&quot;: &quot;格鲁吉亚语&quot;,    &quot;kk&quot;: &quot;哈萨克语&quot;,    &quot;km&quot;: &quot;高棉语&quot;,    &quot;kn&quot;: &quot;卡纳达语&quot;,    &quot;ko&quot;: &quot;韩语&quot;,    &quot;kri&quot;: &quot;Krio&quot;,    &quot;ku&quot;: &quot;库尔德语（库尔曼吉语）&quot;,    &quot;ktu&quot;: &quot;吉土巴语&quot;,    &quot;ky&quot;: &quot;吉尔吉斯语&quot;,    &quot;la&quot;: &quot;拉丁语&quot;,    &quot;lb&quot;: &quot;卢森堡语&quot;,    &quot;lg&quot;: &quot;干达语（卢干达语）&quot;,    &quot;li&quot;: &quot;林堡语&quot;,    &quot;lij&quot;: &quot;利古里亚语&quot;,    &quot;lmo&quot;: &quot;伦巴第语&quot;,    &quot;ln&quot;: &quot;林加拉语&quot;,    &quot;lo&quot;: &quot;老挝语&quot;,    &quot;lt&quot;: &quot;立陶宛语&quot;,    &quot;ltg&quot;: &quot;拉特加莱语&quot;,    &quot;luo&quot;: &quot;Luo&quot;,    &quot;lus&quot;: &quot;米佐语&quot;,    &quot;lv&quot;: &quot;拉脱维亚语&quot;,    &quot;mai&quot;: &quot;迈蒂利语&quot;,    &quot;mak&quot;: &quot;马卡萨&quot;,    &quot;mg&quot;: &quot;马尔加什语&quot;,    &quot;mi&quot;: &quot;毛利语&quot;,    &quot;min&quot;: &quot;米南语&quot;,    &quot;mk&quot;: &quot;马其顿语&quot;,    &quot;ml&quot;: &quot;马拉雅拉姆语&quot;,    &quot;mn&quot;: &quot;蒙古语&quot;,    &quot;mr&quot;: &quot;马拉地语&quot;,    &quot;ms&quot;: &quot;马来语&quot;,    &quot;mt&quot;: &quot;马耳他语&quot;,    &quot;my&quot;: &quot;缅甸语&quot;,    &quot;ne&quot;: &quot;尼泊尔语&quot;,    &quot;new&quot;: &quot;尼泊尔语（尼瓦尔语）&quot;,    &quot;nl&quot;: &quot;荷兰语&quot;,    &quot;no&quot;: &quot;挪威语&quot;,    &quot;nr&quot;: &quot;恩德贝莱语（南部）&quot;,    &quot;nso&quot;: &quot;北索托语（塞佩蒂语）&quot;,    &quot;nus&quot;: &quot;努尔语&quot;,    &quot;ny&quot;: &quot;齐切瓦语（尼扬贾语）&quot;,    &quot;oc&quot;: &quot;奥克斯坦语&quot;,    &quot;om&quot;: &quot;Oromo&quot;,    &quot;or&quot;: &quot;奥里亚语（奥里亚）&quot;,    &quot;pa&quot;: &quot;旁遮普语&quot;,    &quot;pag&quot;: &quot;邦阿西楠语&quot;,    &quot;pam&quot;: &quot;邦板牙语&quot;,    &quot;pap&quot;: &quot;Papiamento&quot;,    &quot;pl&quot;: &quot;波兰语&quot;,    &quot;ps&quot;: &quot;Pashto&quot;,    &quot;pt&quot;: &quot;葡萄牙语&quot;,    &quot;pt-BR&quot;: &quot;葡萄牙语（巴西）&quot;,    &quot;pt-PT&quot;: &quot;葡萄牙语（葡萄牙）&quot;,    &quot;qu&quot;: &quot;克丘亚语&quot;,    &quot;ro&quot;: &quot;罗马尼亚语&quot;,    &quot;rom&quot;: &quot;罗姆语&quot;,    &quot;rn&quot;: &quot;Rundi&quot;,    &quot;ru&quot;: &quot;俄语&quot;,    &quot;rw&quot;: &quot;卢旺达语&quot;,    &quot;sa&quot;: &quot;梵语&quot;,    &quot;scn&quot;: &quot;西西里语&quot;,    &quot;sd&quot;: &quot;信德语&quot;,    &quot;sg&quot;: &quot;Sango&quot;,    &quot;shn&quot;: &quot;掸语&quot;,    &quot;si&quot;: &quot;僧伽罗语&quot;,    &quot;sk&quot;: &quot;斯洛伐克语&quot;,    &quot;sl&quot;: &quot;斯洛文尼亚语&quot;,    &quot;sm&quot;: &quot;萨摩亚语&quot;,    &quot;sn&quot;: &quot;修纳语&quot;,    &quot;so&quot;: &quot;索马里语&quot;,    &quot;sq&quot;: &quot;阿尔巴尼亚语&quot;,    &quot;sr&quot;: &quot;塞尔维亚语&quot;,    &quot;ss&quot;: &quot;斯瓦特语&quot;,    &quot;st&quot;: &quot;塞索托语&quot;,    &quot;su&quot;: &quot;巽他语&quot;,    &quot;sv&quot;: &quot;瑞典语&quot;,    &quot;sw&quot;: &quot;斯瓦希里语&quot;,    &quot;szl&quot;: &quot;西里西亚语&quot;,    &quot;ta&quot;: &quot;泰米尔语&quot;,    &quot;te&quot;: &quot;泰卢固语&quot;,    &quot;tet&quot;: &quot;德顿语&quot;,    &quot;tg&quot;: &quot;塔吉克语&quot;,    &quot;th&quot;: &quot;泰语&quot;,    &quot;ti&quot;: &quot;提格里尼亚语&quot;,    &quot;tk&quot;: &quot;土库曼语&quot;,    &quot;tl&quot;: &quot;菲律宾语（塔加拉语）&quot;,    &quot;tn&quot;: &quot;茨瓦纳语&quot;,    &quot;tr&quot;: &quot;土耳其语&quot;,    &quot;ts&quot;: &quot;聪加语&quot;,    &quot;tt&quot;: &quot;鞑靼语&quot;,    &quot;ug&quot;: &quot;维吾尔语&quot;,    &quot;uk&quot;: &quot;乌克兰语&quot;,    &quot;ur&quot;: &quot;乌尔都语&quot;,    &quot;uz&quot;: &quot;乌兹别克语&quot;,    &quot;vi&quot;: &quot;越南语&quot;,    &quot;xh&quot;: &quot;科萨语&quot;,    &quot;yi&quot;: &quot;意第绪语&quot;,    &quot;yo&quot;: &quot;约鲁巴语&quot;,    &quot;yua&quot;: &quot;尤卡坦玛雅语&quot;,    &quot;yue&quot;: &quot;粤语&quot;,    &quot;zh&quot;: &quot;简体中文&quot;,    &quot;zh-TW&quot;: &quot;中文（繁体）&quot;,    &quot;zu&quot;: &quot;祖鲁语&quot;</p>
+   */
+  DstLanguage?: string
+}
+
+/**
  * DescribeStreamLinkFlowMediaStatistics返回参数结构体
  */
 export interface DescribeStreamLinkFlowMediaStatisticsResponse {
@@ -16787,6 +16869,16 @@ export interface EraseTimeArea {
    * 时间段内擦除区域列表
    */
   Areas: Array<EraseArea>
+}
+
+/**
+ * 编辑视频任务的输入。
+ */
+export interface EditMediaTaskInput {
+  /**
+   * 输入的视频文件信息。
+   */
+  FileInfoSet?: Array<EditMediaFileInfo>
 }
 
 /**
@@ -20412,6 +20504,28 @@ export interface StreamUrlDetail {
 }
 
 /**
+ * 爆款复刻模特形象
+ */
+export interface CloneViralPersona {
+  /**
+   * <p>模特性别。male/female/any</p>
+   */
+  Gender?: string
+  /**
+   * <p>年龄段。teenager/youth/middle_aged/senior</p>
+   */
+  Age?: string
+  /**
+   * <p>外观特征。caucasian/asian/latino/african/middle_eastern</p>
+   */
+  Ethnicity?: string
+  /**
+   * <p>体型。slim / standard / athletic / chubby</p>
+   */
+  BodyType?: string
+}
+
+/**
  * 参考音频信息。
  */
 export interface AigcVideoReferenceAudioInfo {
@@ -21434,13 +21548,13 @@ export interface SearchTaskResult {
 }
 
 /**
- * ModifySubtitleEmbedTemplate返回参数结构体
+ * DescribeCloneViralTask请求参数结构体
  */
-export interface ModifySubtitleEmbedTemplateResponse {
+export interface DescribeCloneViralTaskRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>创建爆款复刻任务返回的任务ID</p>
    */
-  RequestId?: string
+  TaskId?: string
 }
 
 /**
@@ -22586,6 +22700,28 @@ export interface TextTranslationRequest {
 }
 
 /**
+ * CloneViral返回参数结构体
+ */
+export interface CloneViralResponse {
+  /**
+   * <p>任务状态，失败时返回FAIL</p>
+   */
+  Status?: string
+  /**
+   * <p>失败时返回错误信息</p>
+   */
+  Message?: string
+  /**
+   * <p>任务创建成功后，返回的任务ID。 调用查询接口，轮询获取任务进度及生成结果。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 直播流 AI 识别结果
  */
 export interface LiveStreamAiRecognitionResultInfo {
@@ -22997,6 +23133,16 @@ export interface TerrorismImgReviewTemplateInfo {
    * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核，不填默认为 80 分。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * ModifySubtitleEmbedTemplate返回参数结构体
+ */
+export interface ModifySubtitleEmbedTemplateResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -27089,20 +27235,6 @@ export interface AiRecognitionTaskTransTextSegmentItem {
 }
 
 /**
- * ModifyWatermarkTemplate返回参数结构体
- */
-export interface ModifyWatermarkTemplateResponse {
-  /**
-   * 图片水印地址，仅当 ImageTemplate.ImageContent 非空，该字段有效。
-   */
-  ImageUrl?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 智能识别结果。
  */
 export interface AiRecognitionResult {
@@ -27160,4 +27292,36 @@ ObjectRecognition 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ObjectTask?: AiRecognitionTaskObjectResult
+}
+
+/**
+ * ModifyWatermarkTemplate返回参数结构体
+ */
+export interface ModifyWatermarkTemplateResponse {
+  /**
+   * 图片水印地址，仅当 ImageTemplate.ImageContent 非空，该字段有效。
+   */
+  ImageUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 爆款复刻产品信息
+ */
+export interface CloneViralProduct {
+  /**
+   * <p>产品图</p>
+   */
+  Images: Array<string>
+  /**
+   * <p>产品名</p>
+   */
+  Name?: string
+  /**
+   * <p>产品描述</p>
+   */
+  Description?: string
 }

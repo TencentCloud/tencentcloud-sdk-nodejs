@@ -16,17 +16,69 @@
  */
 
 /**
- * MCPToolConfig
+ * AppTriggerRunLog
  */
-export interface MCPToolConfig {
+export interface AppTriggerRunLog {
   /**
-   * <p>输入参数</p>
+   *
    */
-  Inputs?: Array<RequestParam>
+  ConversationId?: string
   /**
-   * <p>输出参数</p>
+   *
    */
-  Outputs?: Array<ResponseParam>
+  DurationMs?: string
+  /**
+   *
+   */
+  EndTime?: string
+  /**
+   * <table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_FIRE_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_FIRE_TYPE_SCHEDULED</td><td>1</td><td>定时触发</td></tr><tr><td>APP_TRIGGER_FIRE_TYPE_WEBHOOK</td><td>2</td><td>Webhook 触发</td></tr><tr><td>APP_TRIGGER_FIRE_TYPE_MANUAL_RUN</td><td>3</td><td>手动立即执行</td></tr><tr><td>APP_TRIGGER_FIRE_TYPE_TEST_RUN</td><td>4</td><td>测试执行</td></tr></table>
+   */
+  FireType?: number
+  /**
+   *
+   */
+  InstanceId?: string
+  /**
+   * <table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>TIMER_RUN_PUSH_STATUS_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>TIMER_RUN_PUSH_STATUS_NONE</td><td>1</td><td>未配置推送</td></tr><tr><td>TIMER_RUN_PUSH_STATUS_WAITING</td><td>2</td><td>等待推送</td></tr><tr><td>TIMER_RUN_PUSH_STATUS_SUCCESS</td><td>3</td><td>推送成功</td></tr><tr><td>TIMER_RUN_PUSH_STATUS_FAILED</td><td>4</td><td>推送失败</td></tr></table>
+   */
+  PushStatus?: number
+  /**
+   *
+   */
+  ResultCode?: string
+  /**
+   *
+   */
+  ResultSummary?: string
+  /**
+   *
+   */
+  RunId?: string
+  /**
+   *
+   */
+  ScheduledFireTime?: string
+  /**
+   *
+   */
+  StartTime?: string
+  /**
+   * <table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>TIMER_RUN_STATUS_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>TIMER_RUN_STATUS_PENDING</td><td>1</td><td>等待执行</td></tr><tr><td>TIMER_RUN_STATUS_RUNNING</td><td>2</td><td>执行中</td></tr><tr><td>TIMER_RUN_STATUS_RETRY_WAIT</td><td>3</td><td>等待重试</td></tr><tr><td>TIMER_RUN_STATUS_SUCCESS</td><td>4</td><td>成功</td></tr><tr><td>TIMER_RUN_STATUS_DEAD</td><td>5</td><td>失败终态 (重试耗尽 / 不可重试)</td></tr><tr><td>TIMER_RUN_STATUS_CANCELLED</td><td>6</td><td>被任务暂停/删除/修改取消</td></tr></table>
+   */
+  Status?: number
+  /**
+   *
+   */
+  TriggerId?: string
+  /**
+   *
+   */
+  Unread?: boolean
+  /**
+   *
+   */
+  WorkflowRunId?: string
 }
 
 /**
@@ -386,13 +438,57 @@ export interface DeleteSkillShareRequest {
 }
 
 /**
- * 工具信息
+ * MarkTimerTaskRunLogRead返回参数结构体
  */
-export interface ToolSummary {
+export interface MarkTimerTaskRunLogReadResponse {
   /**
-   * <p>工具Id</p>
+   * 标记为已读的数量
    */
-  ToolId?: string
+  MarkedCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RunAppTriggerNow返回参数结构体
+ */
+export interface RunAppTriggerNowResponse {
+  /**
+   * <p>应用触发器实例ID</p>
+   */
+  InstanceId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeAppTriggerRunLogList请求参数结构体
+ */
+export interface DescribeAppTriggerRunLogListRequest {
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: string
+  /**
+   * <p>过滤参数</p>
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>页码</p><p>取值范围：[1, 1000000]</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页数据量</p><p>取值范围：[1, 100]</p>
+   */
+  PageSize?: number
+  /**
+   * <p>应用触发器ID</p>
+   */
+  TriggerId?: string
 }
 
 /**
@@ -465,6 +561,34 @@ export interface SkillShare {
 | 2 | 审批中 |
    */
   Status: number
+}
+
+/**
+ * DeleteAppTrigger请求参数结构体
+ */
+export interface DeleteAppTriggerRequest {
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: string
+  /**
+   * <p>触发器ID</p>
+   */
+  TriggerId?: string
+}
+
+/**
+ * RunTimerTaskNow返回参数结构体
+ */
+export interface RunTimerTaskNowResponse {
+  /**
+   * 实例ID
+   */
+  FireInstanceId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -570,6 +694,16 @@ export interface CreateWebSocketTokenRequest {
 }
 
 /**
+ * ResetConversation返回参数结构体
+ */
+export interface ResetConversationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 意图达成信息
  */
 export interface IntentAchievementInfo {
@@ -584,17 +718,13 @@ export interface IntentAchievementInfo {
 }
 
 /**
- * RollbackRelease请求参数结构体
+ * OnceSchedule
  */
-export interface RollbackReleaseRequest {
+export interface OnceSchedule {
   /**
-   * app_id
+   * 触发时间
    */
-  AppId: string
-  /**
-   * release_id
-   */
-  ReleaseId: string
+  FireTime?: string
 }
 
 /**
@@ -608,17 +738,71 @@ export interface DeleteSkillResponse {
 }
 
 /**
- * 模型属性
+ * MarkTimerTaskRunLogRead请求参数结构体
  */
-export interface ModelProperty {
+export interface MarkTimerTaskRunLogReadRequest {
   /**
-   * 属性名称
+   * 实例列表
    */
-  Name?: string
+  FireInstanceIdList?: Array<string>
   /**
-   * 属性值
+   * 空间ID
    */
-  Value?: string
+  SpaceId?: string
+  /**
+   * 任务ID
+   */
+  TimerId?: string
+  /**
+   * 主用户
+   */
+  LoginUin?: string
+  /**
+   * 子用户
+   */
+  LoginSubAccountUin?: string
+}
+
+/**
+ * ModifyConversation请求参数结构体
+ */
+export interface ModifyConversationRequest {
+  /**
+   * <p>会话类型 枚举值: 0-CONVERSATION_TYPE_UNSPECIFIED(未指定；列表查询时表示全部), 1-CONVERSATION_TYPE_VISITOR(访客端体验), 2-CONVERSATION_TYPE_EVALUATION(评测), 5-CONVERSATION_TYPE_API(API 接入), 10-CONVERSATION_TYPE_WORKFLOW(工作流调试), 20-CONVERSATION_TYPE_SHARE(分享链接)</p>
+   */
+  Type: number
+  /**
+   * <p>应用 ID</p>
+   */
+  AppId?: string
+  /**
+   * <p>Type=CONVERSATION_TYPE_API 时必填，应用密钥</p>
+   */
+  AppKey?: string
+  /**
+   * <p>登录用户子账号(集成商模式必填)</p>
+   */
+  LoginSubAccountUin?: string
+  /**
+   * <p>登录用户主账号(集成商模式必填)</p>
+   */
+  LoginUin?: string
+  /**
+   * <p>Type=CONVERSATION_TYPE_SHARE 时必填，分享码</p>
+   */
+  ShareCode?: string
+  /**
+   * <p>Type=CONVERSATION_TYPE_API 时必填，访客ID</p>
+   */
+  UserId?: string
+  /**
+   * 会话ID
+   */
+  ConversationId?: string
+  /**
+   * 会话标题
+   */
+  Title?: string
 }
 
 /**
@@ -648,6 +832,20 @@ export interface DescribeAgentReleasePreviewListRequest {
 }
 
 /**
+ * DescribeReleaseSummary返回参数结构体
+ */
+export interface DescribeReleaseSummaryResponse {
+  /**
+   * 发布信息
+   */
+  ReleaseSummary?: ReleaseSummary
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeModelList返回参数结构体
  */
 export interface DescribeModelListResponse {
@@ -666,13 +864,65 @@ export interface DescribeModelListResponse {
 }
 
 /**
- * UnfavoriteSkill返回参数结构体
+ * ResponseParam
  */
-export interface UnfavoriteSkillResponse {
+export interface ResponseParam {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>变量描述</p>
    */
-  RequestId?: string
+  Description?: string
+  /**
+   * <p>参数名称</p>
+   */
+  Name?: string
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>OUTPUT_RENDER_REPLACE</td><td>0</td><td>覆盖（全量替换）</td></tr><tr><td>OUTPUT_RENDER_APPEND</td><td>1</td><td>增量追加</td></tr></tbody></table>
+   */
+  RenderMode?: number
+  /**
+   * <p>只对 OBJECT 或 ARRAY_OBJECT 类型有用</p>
+   */
+  SubParams?: Array<ResponseParam>
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>PARAM_TYPE_STRING</td><td>0</td><td>字符串</td></tr><tr><td>PARAM_TYPE_INT</td><td>1</td><td>整数</td></tr><tr><td>PARAM_TYPE_FLOAT</td><td>2</td><td>浮点数</td></tr><tr><td>PARAM_TYPE_BOOL</td><td>3</td><td>布尔值</td></tr><tr><td>PARAM_TYPE_OBJECT</td><td>4</td><td>对象</td></tr><tr><td>PARAM_TYPE_ARRAY_STRING</td><td>5</td><td>字符串数组</td></tr><tr><td>PARAM_TYPE_ARRAY_INT</td><td>6</td><td>整数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_FLOAT</td><td>7</td><td>浮点数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_BOOL</td><td>8</td><td>布尔值数组</td></tr><tr><td>PARAM_TYPE_ARRAY_OBJECT</td><td>9</td><td>对象数组</td></tr><tr><td>PARAM_TYPE_ARRAY_ARRAY</td><td>20</td><td>数组嵌套</td></tr><tr><td>PARAM_TYPE_NULL</td><td>99</td><td>空值</td></tr><tr><td>PARAM_TYPE_UNSPECIFIED</td><td>100</td><td>未指定类型，用于OneOf和AnyOf场景</td></tr></tbody></table>
+   */
+  Type?: number
+}
+
+/**
+ * ResumeTimerTask请求参数结构体
+ */
+export interface ResumeTimerTaskRequest {
+  /**
+   * 空间ID
+   */
+  SpaceId?: string
+  /**
+   * 任务ID
+   */
+  TimerId?: string
+  /**
+   * 主用户
+   */
+  LoginUin?: string
+  /**
+   * 子用户
+   */
+  LoginSubAccountUin?: string
+}
+
+/**
+ * DescribeAppTriggerInstance请求参数结构体
+ */
+export interface DescribeAppTriggerInstanceRequest {
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: string
+  /**
+   * <p>触发器运行实例ID</p>
+   */
+  InstanceId?: string
 }
 
 /**
@@ -717,6 +967,38 @@ export interface AppModelConfig {
 }
 
 /**
+ * DescribeTimerTaskSummaryList返回参数结构体
+ */
+export interface DescribeTimerTaskSummaryListResponse {
+  /**
+   * 任务列表
+   */
+  TaskList?: Array<TimerTaskSummary>
+  /**
+   * 总数量
+   */
+  TotalCount?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * PauseAppTrigger请求参数结构体
+ */
+export interface PauseAppTriggerRequest {
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: string
+  /**
+   * <p>应用触发器ID</p>
+   */
+  TriggerId?: string
+}
+
+/**
  * CreateSpace请求参数结构体
  */
 export interface CreateSpaceRequest {
@@ -755,6 +1037,74 @@ export interface AgentModelConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ModelParameters?: ModelParams
+}
+
+/**
+ * [数据结构定义] 发布记录
+ */
+export interface ReleaseRecord {
+  /**
+   * 是否可导出
+   */
+  CanExport: boolean
+  /**
+   * 是否可回滚
+   */
+  CanRollback: boolean
+  /**
+   * 发布描述
+   */
+  Description: string
+  /**
+   * 发布失败数
+   */
+  FailCount: number
+  /**
+   * 失败原因
+   */
+  Reason: string
+  /**
+   * 发布ID
+   */
+  ReleaseId: string
+  /**
+   * 发布版本
+   */
+  ReleaseVersion: string
+  /**
+   * 发布状态。枚举值: 1:待发布, 2:发布中, 3:发布成功, 4:发布失败, 5:审核中, 6:审核成功, 7:审核失败, 8:发布成功回调处理中, 9:发布暂停, 10:申诉审核中, 11:申诉审核通过, 12:申诉审核不通过
+   */
+  Status: number
+  /**
+   * 状态描述
+   */
+  StatusDescription: string
+  /**
+   * 发布成功数
+   */
+  SuccessCount: number
+  /**
+   * 更新时间 (Unix时间戳,秒级)
+   */
+  UpdateTime: string
+  /**
+   * 发布人
+   */
+  Updater: string
+}
+
+/**
+ * WeeklyTime
+ */
+export interface WeeklyTime {
+  /**
+   * 时间
+   */
+  TimeOfDay?: string
+  /**
+   * 周几
+   */
+  Weekday?: number
 }
 
 /**
@@ -821,6 +1171,36 @@ export interface Plugin {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserState?: PluginUserState
+}
+
+/**
+ * TimerTaskSummary
+ */
+export interface TimerTaskSummary {
+  /**
+   * OwnerUserId
+   */
+  OwnerUserId?: string
+  /**
+   * 定时配置概要
+   */
+  PolicySummary?: string
+  /**
+   * 空间ID
+   */
+  SpaceId?: string
+  /**
+   * 任务相关状态
+   */
+  Status?: TimerStatus
+  /**
+   * 任务名称
+   */
+  TaskName?: string
+  /**
+   * 任务ID
+   */
+  TimerId?: string
 }
 
 /**
@@ -956,6 +1336,16 @@ export interface Variable {
 }
 
 /**
+ * AppTriggerWebhookParamSchemaConfig
+ */
+export interface AppTriggerWebhookParamSchemaConfig {
+  /**
+   *
+   */
+  SchemaList?: Array<AppTriggerParamSchema>
+}
+
+/**
  * Conversation 会话信息
  */
 export interface Conversation {
@@ -1033,29 +1423,21 @@ export interface AppShareAccessControl {
 }
 
 /**
- * PluginOperation
+ * MarkAppTriggerRunLogRead请求参数结构体
  */
-export interface PluginOperation {
+export interface MarkAppTriggerRunLogReadRequest {
   /**
-   * 是否允许外部调用
+   * <p>应用ID</p>
    */
-  AllowExternalAccess?: boolean
+  AppId?: string
   /**
-   * <p>计费类型。</p><p>枚举值：</p><ul><li>0：免费</li><li>1：公测</li><li>2：官方收费</li></ul>
+   * <p>应用触发器运行实例ID列表</p>
    */
-  BillingType?: number
+  InstanceIdList?: Array<string>
   /**
-   * 插件分类标识
+   * <p>应用触发器ID</p>
    */
-  CategoryKey?: string
-  /**
-   * 插件概述
-   */
-  Introduction?: string
-  /**
-   * 是否精选
-   */
-  IsRecommended?: boolean
+  TriggerId?: string
 }
 
 /**
@@ -1091,13 +1473,23 @@ export interface ModifyAppResponse {
 }
 
 /**
- * ResetConversation返回参数结构体
+ * FavoriteSkill返回参数结构体
  */
-export interface ResetConversationResponse {
+export interface FavoriteSkillResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DailySchedule
+ */
+export interface DailySchedule {
+  /**
+   * 时间
+   */
+  TimeOfDay?: string
 }
 
 /**
@@ -1144,41 +1536,53 @@ export interface PromptRewriteModel {
 }
 
 /**
- * ModifyApp请求参数结构体
+ * ManualOnlySchedule
  */
-export interface ModifyAppRequest {
+export interface ManualOnlySchedule {
   /**
-   * <p>应用ID</p>
+   * 启用
    */
-  AppId: string
+  Enabled?: boolean
+}
+
+/**
+ * Tool
+ */
+export interface Tool {
   /**
-   * <p>应用模式。枚举值: 1:标准模式, 2:Agent模式, 3:单工作流模式, 4:ClawAgent模式</p>
+   * <p>工具计费信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  AppMode?: number
+  Billing?: ToolBilling
   /**
-   * <p>应用头像</p>
+   * <p>工具调用次数</p><p>单位：次数</p>
    */
-  Avatar?: string
+  CallCount?: number
   /**
-   * <p>应用配置</p>
-   */
-  Config?: AppConfig
-  /**
-   * <p>应用描述</p>
+   * <p>工具描述信息</p>
    */
   Description?: string
   /**
-   * <p>应用名称</p>
+   * <p>工具名称</p>
    */
   Name?: string
   /**
-   * <p>引用的共享知识库ID列表(全量覆盖)</p>
+   * <p>插件ID</p>
    */
-  SharedKbIdList?: Array<string>
+  PluginId?: string
   /**
-   * <p>字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：<br>【顶层】Name, Avatar, Description, AppMode, SharedKbIdList<br>【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList<br>【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel<br>【WebSearch】Config.WebSearch<br>【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent<br>【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig<br>【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced<br>【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch<br>【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman<br>【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility</p>
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>TOOL_ACCESS_MODE_UNKNOWN</td><td>0</td><td>未指定</td></tr><tr><td>TOOL_ACCESS_MODE_READ_ONLY</td><td>1</td><td>只读</td></tr><tr><td>TOOL_ACCESS_MODE_WRITE_DELETE</td><td>2</td><td>写/删除</td></tr></tbody></table>
    */
-  UpdateMask?: FieldMask
+  ToolAccessMode?: number
+  /**
+   * <p>工具配置信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ToolConfig?: ToolConfig
+  /**
+   * <p>工具ID</p>
+   */
+  ToolId?: string
 }
 
 /**
@@ -1276,44 +1680,41 @@ export interface DescribeAppSummaryListRequest {
 }
 
 /**
- * 应用摘要 - 列表查询返回的应用信息
+ * CreateConversation请求参数结构体
  */
-export interface AppSummary {
+export interface CreateConversationRequest {
   /**
-   * 应用ID
+   * <p>会话类型 枚举值: 0-CONVERSATION_TYPE_UNSPECIFIED(未指定；列表查询时表示全部), 1-CONVERSATION_TYPE_VISITOR(访客端体验), 2-CONVERSATION_TYPE_EVALUATION(评测), 5-CONVERSATION_TYPE_API(API 接入), 10-CONVERSATION_TYPE_WORKFLOW(工作流调试), 20-CONVERSATION_TYPE_SHARE(分享链接)</p>
    */
-  AppId: string
+  Type: number
   /**
-   * 应用模式。枚举值: 1:标准模式, 2:Agent模式, 3:单工作流模式, 4:ClawAgent模式
+   * <p>应用 ID</p>
    */
-  AppMode: number
+  AppId?: string
   /**
-   * 应用头像
+   * <p>Type=CONVERSATION_TYPE_API 时必填，应用密钥</p>
    */
-  Avatar: string
+  AppKey?: string
   /**
-   * 应用名称
+   * <p>登录用户子账号(集成商模式必填)</p>
    */
-  Name: string
+  LoginSubAccountUin?: string
   /**
-   * 操作信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>登录用户主账号(集成商模式必填)</p>
    */
-  OperationInfo: AppOperation
+  LoginUin?: string
   /**
-   * 状态信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>Type=CONVERSATION_TYPE_SHARE 时必填，分享码</p>
    */
-  Status: AppStatusInfo
+  ShareCode?: string
   /**
-   * 子状态信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>Type=CONVERSATION_TYPE_API 时必填，访客ID</p>
    */
-  SubStatus: AppSubStatusInfo
+  UserId?: string
   /**
-   * 资源操作权限
+   * <p>用户端 AgnetId，当Claw模式开启了“允许在对话中动态修改配置”时可用</p>
    */
-  PermissionIdList?: Array<string>
+  AgentId?: string
 }
 
 /**
@@ -1353,6 +1754,20 @@ export interface CreateWebSocketTokenResponse {
 }
 
 /**
+ * ExecuteConfig
+ */
+export interface ExecuteConfig {
+  /**
+   * <p>Prompt配置</p>
+   */
+  PromptConfig?: AppTriggerPromptExecuteConfig
+  /**
+   * <p>工作流配置</p>
+   */
+  WorkflowConfig?: AppTriggerWorkflowExecuteConfig
+}
+
+/**
  * 操作日志元数据
  */
 export interface AuditLogMetaField {
@@ -1364,6 +1779,20 @@ export interface AuditLogMetaField {
    * <p>操作日志元数据Name</p>
    */
   Name?: string
+}
+
+/**
+ * ModifyTimerTask返回参数结构体
+ */
+export interface ModifyTimerTaskResponse {
+  /**
+   * 下次触发时间
+   */
+  NextFireTime?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1503,6 +1932,24 @@ export interface DescribeConversationMessageListResponse {
 }
 
 /**
+ * ReleaseSkill请求参数结构体
+ */
+export interface ReleaseSkillRequest {
+  /**
+   * <p>SkillId</p>
+   */
+  SkillId: string
+  /**
+   * <p>空间ID</p>
+   */
+  SpaceId: string
+  /**
+   * <p>版本ID</p>
+   */
+  VersionId: string
+}
+
+/**
  * 体验配置
  */
 export interface AppExperienceConfig {
@@ -1548,6 +1995,20 @@ export interface DescribeSkillCategoryListResponse {
 }
 
 /**
+ * TriggerConfig
+ */
+export interface TriggerConfig {
+  /**
+   * <p>定时器配置</p>
+   */
+  ScheduledConfig?: AppTriggerScheduleConfig
+  /**
+   * <p>Webhook配置</p>
+   */
+  WebhookConfig?: AppTriggerWebhookConfig
+}
+
+/**
  * DescribeReleaseSummary请求参数结构体
  */
 export interface DescribeReleaseSummaryRequest {
@@ -1590,6 +2051,40 @@ export interface ConversationAgentTask {
 }
 
 /**
+ * DescribeTimerTaskSummaryList请求参数结构体
+ */
+export interface DescribeTimerTaskSummaryListRequest {
+  /**
+   * 查询条件
+   */
+  FilterList?: Array<Filter>
+  /**
+   * 页码
+   */
+  PageNumber?: number
+  /**
+   * 页大小
+   */
+  PageSize?: number
+  /**
+   * 查询关键字
+   */
+  Query?: string
+  /**
+   * 空间ID
+   */
+  SpaceId?: string
+  /**
+   * <p>子用户Uin</p>
+   */
+  LoginSubAccountUin?: string
+  /**
+   * <p>主用户Uin</p>
+   */
+  LoginUin?: string
+}
+
+/**
  * ModifyPlugin请求参数结构体
  */
 export interface ModifyPluginRequest {
@@ -1628,13 +2123,21 @@ export interface ModifyPluginRequest {
 }
 
 /**
- * DeleteVariable返回参数结构体
+ * AppTriggerScheduleStatus
  */
-export interface DeleteVariableResponse {
+export interface AppTriggerScheduleStatus {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   *
    */
-  RequestId?: string
+  LastFireTime?: string
+  /**
+   *
+   */
+  NextFireTime?: string
+  /**
+   *
+   */
+  PolicySummary?: string
 }
 
 /**
@@ -1746,6 +2249,28 @@ export interface DeleteSkillRequest {
 }
 
 /**
+ * ModifyAppTrigger请求参数结构体
+ */
+export interface ModifyAppTriggerRequest {
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: string
+  /**
+   * <p>触发器信息</p>
+   */
+  Trigger?: AppTrigger
+  /**
+   * <p>触发器唯一ID</p>
+   */
+  TriggerId?: string
+  /**
+   * <p>修改字段</p>
+   */
+  UpdateMask?: FieldMask
+}
+
+/**
  * API插件配置
  */
 export interface ApiPluginConfig {
@@ -1843,6 +2368,29 @@ export interface CodeToolConfig {
 }
 
 /**
+ * 模型详细信息
+ */
+export interface ModelDetailInfo {
+  /**
+   * 模型别名
+   */
+  Alias?: string
+  /**
+   * 历史对话条数限制
+   */
+  HistoryLimit?: number
+  /**
+   * 模型唯一 ID
+   */
+  ModelId?: string
+  /**
+   * 模型参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelParams?: ModelParams
+}
+
+/**
  * CreateAgent请求参数结构体
  */
 export interface CreateAgentRequest {
@@ -1858,6 +2406,16 @@ export interface CreateAgentRequest {
    * <p>Agent 类型，区分 B 端配置态 Agent 与 C 端用户态 Agent</p><p>枚举值：</p><ul><li>0： 配置端Agent</li><li>1： 用户态 Agent</li></ul>
    */
   Kind?: number
+}
+
+/**
+ * DeleteTimerTask返回参数结构体
+ */
+export interface DeleteTimerTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2000,6 +2558,20 @@ export interface DuplexBilling {
 }
 
 /**
+ * 会话重置信息
+ */
+export interface ConversationResetInfo {
+  /**
+   * <p>最近一次重置的毫秒级时间戳</p>
+   */
+  ResetTime?: string
+  /**
+   * <p>最近一次重置边界；该记录及更早的记录不再作为对话上下文</p>
+   */
+  ResetThroughRecordId?: string
+}
+
+/**
  * 模型超参
  */
 export interface ModelParameter {
@@ -2030,6 +2602,16 @@ export interface ModelParameter {
 }
 
 /**
+ * UnfavoriteSkill返回参数结构体
+ */
+export interface UnfavoriteSkillResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifySpace返回参数结构体
  */
 export interface ModifySpaceResponse {
@@ -2037,6 +2619,40 @@ export interface ModifySpaceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeTimerTaskRunLogList请求参数结构体
+ */
+export interface DescribeTimerTaskRunLogListRequest {
+  /**
+   * 工作空间ID
+   */
+  SpaceId: string
+  /**
+   * 定时任务ID，必须按任务维度查询
+   */
+  TimerId: string
+  /**
+   * 过滤条件，支持: Status(执行状态，值为枚举int); Unread(仅未读，值为"true"/"false")
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>子用户Uin</p>
+   */
+  LoginSubAccountUin?: string
+  /**
+   * <p>主用户Uin</p>
+   */
+  LoginUin?: string
+  /**
+   * 页码，从0开始
+   */
+  PageNumber?: number
+  /**
+   * 每页数目，最大100
+   */
+  PageSize?: number
 }
 
 /**
@@ -2087,60 +2703,27 @@ export interface MultiModalUnderstandingModel {
 }
 
 /**
- * SkillAnalysisInfo Skill 安全扫描信息。
+ * DescribeAppTrigger请求参数结构体
  */
-export interface SkillAnalysisInfo {
+export interface DescribeAppTriggerRequest {
   /**
-   * 安全检测状态
-
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | 待检测 |
-| 1 | 检测中 |
-| 2 | 可用 |
-| 3 | 不可用 |
-| 4 | 检测失败 |
+   * <p>应用ID</p>
    */
-  AnalysisStatus: number
+  AppId?: string
   /**
-   * 风险描述
+   * <p>应用触发器ID</p>
    */
-  RiskDescription: string
-  /**
-   * 风险等级
-
-枚举值:
-| uint | 描述 |
-| --- | --- |
-| 0 | 无风险 |
-| 1 | 低风险 |
-| 2 | 中风险 |
-| 3 | 高风险 |
-   */
-  RiskLevel: number
-  /**
-   * 安全报告跳转url;
-   */
-  SecurityReportUrl: string
+  TriggerId?: string
 }
 
 /**
- * 支持的文件类型
+ * ResumeAppTrigger返回参数结构体
  */
-export interface SupportedFileType {
+export interface ResumeAppTriggerResponse {
   /**
-   * 文件类型描述(如"文本文档")
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Description: string
-  /**
-   * 文件类型(如 txt、pdf、jpg, 建议用扩展名)
-   */
-  FileExt: string
-  /**
-   * 文件大小限制(单位: 字节)
-   */
-  MaxSizeBytes: string
+  RequestId?: string
 }
 
 /**
@@ -2210,41 +2793,44 @@ export interface CorpShareConfig {
 }
 
 /**
- * CreateConversation请求参数结构体
+ * 应用摘要 - 列表查询返回的应用信息
  */
-export interface CreateConversationRequest {
+export interface AppSummary {
   /**
-   * <p>会话类型 枚举值: 0-CONVERSATION_TYPE_UNSPECIFIED(未指定；列表查询时表示全部), 1-CONVERSATION_TYPE_VISITOR(访客端体验), 2-CONVERSATION_TYPE_EVALUATION(评测), 5-CONVERSATION_TYPE_API(API 接入), 10-CONVERSATION_TYPE_WORKFLOW(工作流调试), 20-CONVERSATION_TYPE_SHARE(分享链接)</p>
+   * 应用ID
    */
-  Type: number
+  AppId: string
   /**
-   * <p>应用 ID</p>
+   * 应用模式。枚举值: 1:标准模式, 2:Agent模式, 3:单工作流模式, 4:ClawAgent模式
    */
-  AppId?: string
+  AppMode: number
   /**
-   * <p>Type=CONVERSATION_TYPE_API 时必填，应用密钥</p>
+   * 应用头像
    */
-  AppKey?: string
+  Avatar: string
   /**
-   * <p>登录用户子账号(集成商模式必填)</p>
+   * 应用名称
    */
-  LoginSubAccountUin?: string
+  Name: string
   /**
-   * <p>登录用户主账号(集成商模式必填)</p>
+   * 操作信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  LoginUin?: string
+  OperationInfo: AppOperation
   /**
-   * <p>Type=CONVERSATION_TYPE_SHARE 时必填，分享码</p>
+   * 状态信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ShareCode?: string
+  Status: AppStatusInfo
   /**
-   * <p>Type=CONVERSATION_TYPE_API 时必填，访客ID</p>
+   * 子状态信息
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  UserId?: string
+  SubStatus: AppSubStatusInfo
   /**
-   * <p>用户端 AgnetId，当Claw模式开启了“允许在对话中动态修改配置”时可用</p>
+   * 资源操作权限
    */
-  AgentId?: string
+  PermissionIdList?: Array<string>
 }
 
 /**
@@ -2279,6 +2865,56 @@ export interface DescribeVariableListRequest {
    * 查询关键词
    */
   Query?: string
+}
+
+/**
+ * AppTriggerSummary
+ */
+export interface AppTriggerSummary {
+  /**
+   *
+   */
+  AppId?: string
+  /**
+   * <table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_PROMPT</td><td>1</td><td>指令执行</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_WORKFLOW</td><td>2</td><td>工作流执行</td></tr></table>
+   */
+  ExecuteType?: number
+  /**
+   *
+   */
+  FailedCount?: string
+  /**
+   *
+   */
+  LastSessionId?: string
+  /**
+   * <table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_STATUS_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_STATUS_ENABLED</td><td>1</td><td>启用</td></tr><tr><td>APP_TRIGGER_STATUS_PAUSED</td><td>2</td><td>暂停</td></tr><tr><td>APP_TRIGGER_STATUS_DELETED</td><td>3</td><td>已删除</td></tr></table>
+   */
+  Status?: number
+  /**
+   *
+   */
+  SuccessCount?: string
+  /**
+   *
+   */
+  TriggerId?: string
+  /**
+   *
+   */
+  TriggerName?: string
+  /**
+   *
+   */
+  TriggerStatus?: TriggerStatus
+  /**
+   * <table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_TYPE_SCHEDULED</td><td>1</td><td>定时触发</td></tr><tr><td>APP_TRIGGER_TYPE_WEBHOOK</td><td>2</td><td>Webhook 触发</td></tr></table>
+   */
+  TriggerType?: number
+  /**
+   *
+   */
+  UnreadRunLogCount?: string
 }
 
 /**
@@ -2329,17 +2965,119 @@ export interface SkillReferenceGroup {
 }
 
 /**
- * 会话重置信息
+ * ResumeTimerTask返回参数结构体
  */
-export interface ConversationResetInfo {
+export interface ResumeTimerTaskResponse {
   /**
-   * <p>最近一次重置的毫秒级时间戳</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ResetTime?: string
+  RequestId?: string
+}
+
+/**
+ * Agent 的插件基本配置
+ */
+export interface AgentPluginConfig {
   /**
-   * <p>最近一次重置边界；该记录及更早的记录不再作为对话上下文</p>
+   * <p>插件id</p>
    */
-  ResetThroughRecordId?: string
+  PluginId?: string
+  /**
+   * <p>插件 Header 参数</p>
+   */
+  HeaderParameterList?: Array<AgentPluginParameter>
+  /**
+   * <p>插件 Query 参数</p>
+   */
+  QueryParameterList?: Array<AgentPluginParameter>
+  /**
+   * <p>是否使用CAM一键授权，仅 auth_type=2时生效</p>
+   */
+  EnableCamRoleAuth?: boolean
+  /**
+   * <p>授权类型</p><p>枚举值：</p><ul><li>0： 无鉴权</li><li>1： API Key</li><li>2： CAM授权</li><li>3： OAuth2.0授权</li></ul>
+   */
+  AuthType?: number
+  /**
+   * <p>OAuth 授权同意模式；0-开发者授权；1-使用者授权（仅在auth_type=3时生效）</p>
+   */
+  OAuthConsent?: number
+}
+
+/**
+ * 插件概要信息（用于插件列表）
+ */
+export interface PluginSummary {
+  /**
+   * <p>插件运营管理信息</p>
+   */
+  Operation?: PluginOperation
+  /**
+   * <p>插件id</p>
+   */
+  PluginId?: string
+  /**
+   * <p>插件基础信息</p>
+   */
+  Profile?: PluginProfile
+  /**
+   * <p>插件统计信息</p>
+   */
+  Statistics?: PluginStatistics
+  /**
+   * <p>插件状态，1:可用，2:不可用 </p><p>枚举值：</p><ul><li>1： 可用</li><li>2： 不可用</li></ul>
+   */
+  Status?: number
+  /**
+   * <p>用户维度的插件状态信息</p>
+   */
+  UserState?: PluginUserState
+  /**
+   * <p>插件配置信息</p>
+   */
+  Config?: PluginConfig
+  /**
+   * <p>工具信息</p>
+   */
+  ToolList?: Array<ToolSummary>
+}
+
+/**
+ * SkillProfile Skill 基础展示信息。
+ */
+export interface SkillProfile {
+  /**
+   * 创建时间（Unix秒）
+   */
+  CreateTime: string
+  /**
+   * 创建者
+   */
+  Creator: string
+  /**
+   * Skill 描述
+   */
+  Description: string
+  /**
+   * Skill 展示描述
+   */
+  DisplayDescription: string
+  /**
+   * Skill 展示名称
+   */
+  DisplayName: string
+  /**
+   * Skill 图标
+   */
+  IconUrl: string
+  /**
+   * Skill 名称
+   */
+  Name: string
+  /**
+   * 更新时间（Unix秒）
+   */
+  UpdateTime: string
 }
 
 /**
@@ -2377,13 +3115,41 @@ export interface AgentSpec {
 }
 
 /**
- * ModifyConversation返回参数结构体
+ * ModifyApp请求参数结构体
  */
-export interface ModifyConversationResponse {
+export interface ModifyAppRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>应用ID</p>
    */
-  RequestId?: string
+  AppId: string
+  /**
+   * <p>应用模式。枚举值: 1:标准模式, 2:Agent模式, 3:单工作流模式, 4:ClawAgent模式</p>
+   */
+  AppMode?: number
+  /**
+   * <p>应用头像</p>
+   */
+  Avatar?: string
+  /**
+   * <p>应用配置</p>
+   */
+  Config?: AppConfig
+  /**
+   * <p>应用描述</p>
+   */
+  Description?: string
+  /**
+   * <p>应用名称</p>
+   */
+  Name?: string
+  /**
+   * <p>引用的共享知识库ID列表(全量覆盖)</p>
+   */
+  SharedKbIdList?: Array<string>
+  /**
+   * <p>字段掩码，指定需要更新的字段(Paths为空则不更新任何字段)。Paths枚举值：<br>【顶层】Name, Avatar, Description, AppMode, SharedKbIdList<br>【Greeting】Config.Greeting, Config.Greeting.Greeting, Config.Greeting.OpeningQuestionList<br>【Model】Config.Model, Config.Model.ThinkModel, Config.Model.GenerateModel, Config.Model.AiOptimizeModel, Config.Model.FileParseModel, Config.Model.PromptRewriteModel, Config.Model.MultiModalQaModel, Config.Model.MultiModalUnderstandingModel<br>【WebSearch】Config.WebSearch<br>【Memory】Config.Memory, Config.Memory.Enabled, Config.Memory.LongMemoryDay, Config.Memory.Model, Config.Memory.PromptMode, Config.Memory.PromptContent<br>【Mode】Config.Mode, Config.Mode.MultiAgentConfig, Config.Mode.SingleWorkflowConfig<br>【Experience】Config.Experience, Config.Experience.Conversation, Config.Experience.Role, Config.Experience.Advanced<br>【Experience.Conversation】Config.Experience.Conversation.AiCall, Config.Experience.Conversation.BackgroundImage, Config.Experience.Conversation.Method, Config.Experience.Conversation.FallbackReply, Config.Experience.Conversation.Recommended, Config.Experience.Conversation.InputBoxConfig, Config.Experience.Conversation.WebSearch<br>【Experience.Conversation.AiCall】Config.Experience.Conversation.AiCall.VoiceInteract, Config.Experience.Conversation.AiCall.VoiceCall, Config.Experience.Conversation.AiCall.DigitalHuman<br>【Experience.Advanced】Config.Experience.Advanced.ContextRewrite, Config.Experience.Advanced.ImageTextRetrieval, Config.Experience.Advanced.IntentAchievement, Config.Experience.Advanced.ReplyFlexibility</p>
+   */
+  UpdateMask?: FieldMask
 }
 
 /**
@@ -2426,6 +3192,20 @@ export interface ModelLimit {
 }
 
 /**
+ * AppTriggerPromptExecuteConfig
+ */
+export interface AppTriggerPromptExecuteConfig {
+  /**
+   *
+   */
+  ExecutePrompt?: string
+  /**
+   *
+   */
+  ParamBindingsApi?: AppTriggerParamBindingConfig
+}
+
+/**
  * QuoteInfo 参考来源索引信息
  */
 export interface ConversationQuoteInfo {
@@ -2440,6 +3220,16 @@ export interface ConversationQuoteInfo {
 }
 
 /**
+ * ModifyAppTrigger返回参数结构体
+ */
+export interface ModifyAppTriggerResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 应用密钥信息
  */
 export interface AppSecretInfo {
@@ -2451,6 +3241,17 @@ export interface AppSecretInfo {
    * 创建时间
    */
   CreateTime: string
+}
+
+/**
+ * 多模态问答模型配置
+ */
+export interface MultiModalQAModel {
+  /**
+   * 模型配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Model: ModelDetailInfo
 }
 
 /**
@@ -2513,6 +3314,50 @@ export interface DeleteAgentResponse {
 }
 
 /**
+ * TimerTask
+ */
+export interface TimerTask {
+  /**
+   * 任务配置
+   */
+  Config?: TimerConfig
+  /**
+   * staffBizId
+   */
+  OwnerUserId?: string
+  /**
+   * 定时配置概要
+   */
+  PolicySummary?: string
+  /**
+   * 概要信息
+   */
+  Profile?: TimerProfile
+  /**
+   * 空间ID
+   */
+  SpaceId?: string
+  /**
+   * 任务状态
+   */
+  Status?: TimerStatus
+  /**
+   * 任务ID
+   */
+  TimerId?: string
+}
+
+/**
+ * ModifyConversation返回参数结构体
+ */
+export interface ModifyConversationResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSpaceList返回参数结构体
  */
 export interface DescribeSpaceListResponse {
@@ -2531,57 +3376,67 @@ export interface DescribeSpaceListResponse {
 }
 
 /**
- * [数据结构定义] 发布记录
+ * CreateTimerTask请求参数结构体
  */
-export interface ReleaseRecord {
+export interface CreateTimerTaskRequest {
   /**
-   * 是否可导出
+   * 
+枚举值:
+| uint | 描述 |
+| --- | --- |
+| 0 |  |
+| 1 | 页面手动创建 |
+| 2 | 自然语言对话创建 |
    */
-  CanExport: boolean
+  CreateSource?: number
   /**
-   * 是否可回滚
+   * 输入上下文
    */
-  CanRollback: boolean
+  InputContextSnapshot?: string
   /**
-   * 发布描述
+   * 模型
    */
-  Description: string
+  ModelId?: string
   /**
-   * 发布失败数
+   * 提示词
    */
-  FailCount: number
+  Prompt?: string
   /**
-   * 失败原因
+   * 推送配置
    */
-  Reason: string
+  PushConfig?: TimerPushConfig
   /**
-   * 发布ID
+   * 定时配置
    */
-  ReleaseId: string
+  Schedule?: TimerScheduleConfig
   /**
-   * 发布版本
+   * skill
    */
-  ReleaseVersion: string
+  SkillSnapshot?: string
   /**
-   * 发布状态。枚举值: 1:待发布, 2:发布中, 3:发布成功, 4:发布失败, 5:审核中, 6:审核成功, 7:审核失败, 8:发布成功回调处理中, 9:发布暂停, 10:申诉审核中, 11:申诉审核通过, 12:申诉审核不通过
+   * 空间
    */
-  Status: number
+  SpaceId?: string
   /**
-   * 状态描述
+   * 任务名称
    */
-  StatusDescription: string
+  TaskName?: string
   /**
-   * 发布成功数
+   * 工具
    */
-  SuccessCount: number
+  ToolSnapshot?: string
   /**
-   * 更新时间 (Unix时间戳,秒级)
+   * 工作空间
    */
-  UpdateTime: string
+  WorkspaceId?: string
   /**
-   * 发布人
+   * 主用户
    */
-  Updater: string
+  LoginUin?: string
+  /**
+   * 子用户
+   */
+  LoginSubAccountUin?: string
 }
 
 /**
@@ -2682,67 +3537,61 @@ export interface AppAuxiliaryInfo {
 }
 
 /**
- * ReleaseSkill请求参数结构体
+ * CreateAppTrigger请求参数结构体
  */
-export interface ReleaseSkillRequest {
+export interface CreateAppTriggerRequest {
   /**
-   * <p>SkillId</p>
+   * <p>应用ID</p>
    */
-  SkillId: string
+  AppId?: string
   /**
-   * <p>空间ID</p>
+   * <p>应用触发器执行配置</p>
    */
-  SpaceId: string
+  ExecuteConfig?: ExecuteConfig
   /**
-   * <p>版本ID</p>
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_PROMPT</td><td>1</td><td>指令执行</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_WORKFLOW</td><td>2</td><td>工作流执行</td></tr></tbody></table>
    */
-  VersionId: string
+  ExecuteType?: number
+  /**
+   * <p>第三方推送配置</p>
+   */
+  PushConfig?: TimerPushConfig
+  /**
+   * <p>触发器配置</p>
+   */
+  TriggerConfig?: TriggerConfig
+  /**
+   * <p>触发器名字</p>
+   */
+  TriggerName?: string
+  /**
+   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_TYPE_SCHEDULED</td><td>1</td><td>定时触发</td></tr><tr><td>APP_TRIGGER_TYPE_WEBHOOK</td><td>2</td><td>Webhook 触发</td></tr></tbody></table>
+   */
+  TriggerType?: number
 }
 
 /**
- * Agent的工具基础配置
+ * UnfavoritePlugin请求参数结构体
  */
-export interface AgentToolBasicConfig {
+export interface UnfavoritePluginRequest {
   /**
    * <p>插件id</p>
    */
-  PluginId?: string
+  PluginId: string
   /**
-   * <p>工具id</p>
+   * <p>当前空间id</p>
    */
-  ToolId?: string
+  SpaceId: string
+}
+
+/**
+ * AppTriggerWebhookStatus
+ */
+export interface AppTriggerWebhookStatus {
   /**
-   * <p>描述</p>
+   *
    */
-  Description?: string
-  /**
-   * <p>工具输入参数列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  InputList?: Array<AgentToolInputParameter>
-  /**
-   * <p>工具输出参数列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OutputList?: Array<AgentToolOutputParameter>
-  /**
-   * <p>工具Header参数列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  HeaderParameterList?: Array<AgentPluginParameter>
-  /**
-   * <p>工具Query参数列表</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  QueryParameterList?: Array<AgentPluginParameter>
-  /**
-   * <p>工具来源: 0-来自插件，1-来自工作流</p>
-   */
-  ToolSource?: number
-  /**
-   * <p>是否禁用</p>
-   */
-  IsDisabled?: boolean
+  WebhookUrl?: string
 }
 
 /**
@@ -2784,48 +3633,13 @@ export interface ComplexBilling {
 }
 
 /**
- * 文档解析模型参数
+ * 字段掩码
  */
-export interface FileParseModel {
+export interface FieldMask {
   /**
-   * 模型别名
+   * 字段路径列表
    */
-  Alias: string
-  /**
-   * 模型描述
-   */
-  Description: string
-  /**
-   * 增强模式
-   */
-  EnhancementMode: string
-  /**
-   * 模型唯一ID
-   */
-  ModelId: string
-  /**
-   * 模型类型
-   */
-  ModelProviderType: string
-  /**
-   * 是否启用公式增强
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnableFormulaEnhancement?: boolean
-  /**
-   * 是否启用 LLM 增强
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  EnableLLMEnhancement?: boolean
-  /**
-   * 是否输出 HTML 表格
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  OutputHtmlTable?: boolean
-  /**
-   * 支持的文件类型列表
-   */
-  SupportedFileList?: Array<SupportedFileType>
+  Paths?: Array<string>
 }
 
 /**
@@ -2886,6 +3700,54 @@ export interface DescribeAuditLogMetaResponse {
 }
 
 /**
+ * TimerScheduleConfig
+ */
+export interface TimerScheduleConfig {
+  /**
+   * cron配置
+   */
+  Cron?: CronSchedule
+  /**
+   * 每日触发
+   */
+  Daily?: DailySchedule
+  /**
+   * 固定间隔
+   */
+  Interval?: IntervalSchedule
+  /**
+   * 仅手动
+   */
+  ManualOnly?: ManualOnlySchedule
+  /**
+   * 单次
+   */
+  Once?: OnceSchedule
+  /**
+   * 
+枚举值:
+| uint | 描述 |
+| --- | --- |
+| 0 |  |
+| 1 | 仅手动 |
+| 2 | 每天 |
+| 3 | 每周 |
+| 4 | 按间隔 |
+| 5 | 一次性 |
+| 6 | Cron |
+   */
+  ScheduleType?: number
+  /**
+   * 时区
+   */
+  Timezone?: string
+  /**
+   * 每周固定时间触发
+   */
+  Weekly?: WeeklySchedule
+}
+
+/**
  * DescribeVariable请求参数结构体
  */
 export interface DescribeVariableRequest {
@@ -2901,6 +3763,30 @@ export interface DescribeVariableRequest {
    * module_type。枚举值: 1:环境参数, 2:应用参数, 3:系统参数, -1:所有参数
    */
   ModuleType?: number
+}
+
+/**
+ * IntervalSchedule
+ */
+export interface IntervalSchedule {
+  /**
+   * 开始时间
+   */
+  StartAt?: string
+  /**
+   * 
+枚举值:
+| 枚举值 | uint |
+| --- | --- |
+| INTERVAL_UNIT_UNSPECIFIED | 0 |
+| INTERVAL_UNIT_HOUR | 1 |
+| INTERVAL_UNIT_DAY | 2 |
+   */
+  Unit?: number
+  /**
+   * 值
+   */
+  Value?: number
 }
 
 /**
@@ -3017,46 +3903,45 @@ export interface SkillNotice {
 }
 
 /**
- * ResponseParam
+ * PauseTimerTask返回参数结构体
  */
-export interface ResponseParam {
+export interface PauseTimerTaskResponse {
   /**
-   * <p>变量描述</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Description?: string
-  /**
-   * <p>参数名称</p>
-   */
-  Name?: string
-  /**
-   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>OUTPUT_RENDER_REPLACE</td><td>0</td><td>覆盖（全量替换）</td></tr><tr><td>OUTPUT_RENDER_APPEND</td><td>1</td><td>增量追加</td></tr></tbody></table>
-   */
-  RenderMode?: number
-  /**
-   * <p>只对 OBJECT 或 ARRAY_OBJECT 类型有用</p>
-   */
-  SubParams?: Array<ResponseParam>
-  /**
-   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>PARAM_TYPE_STRING</td><td>0</td><td>字符串</td></tr><tr><td>PARAM_TYPE_INT</td><td>1</td><td>整数</td></tr><tr><td>PARAM_TYPE_FLOAT</td><td>2</td><td>浮点数</td></tr><tr><td>PARAM_TYPE_BOOL</td><td>3</td><td>布尔值</td></tr><tr><td>PARAM_TYPE_OBJECT</td><td>4</td><td>对象</td></tr><tr><td>PARAM_TYPE_ARRAY_STRING</td><td>5</td><td>字符串数组</td></tr><tr><td>PARAM_TYPE_ARRAY_INT</td><td>6</td><td>整数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_FLOAT</td><td>7</td><td>浮点数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_BOOL</td><td>8</td><td>布尔值数组</td></tr><tr><td>PARAM_TYPE_ARRAY_OBJECT</td><td>9</td><td>对象数组</td></tr><tr><td>PARAM_TYPE_ARRAY_ARRAY</td><td>20</td><td>数组嵌套</td></tr><tr><td>PARAM_TYPE_NULL</td><td>99</td><td>空值</td></tr><tr><td>PARAM_TYPE_UNSPECIFIED</td><td>100</td><td>未指定类型，用于OneOf和AnyOf场景</td></tr></tbody></table>
-   */
-  Type?: number
+  RequestId?: string
 }
 
 /**
- * 多模态问答模型配置
+ * AppTriggerParamSchema
  */
-export interface MultiModalQAModel {
+export interface AppTriggerParamSchema {
   /**
-   * 模型配置
-注意：此字段可能返回 null，表示取不到有效值。
+   *
    */
-  Model: ModelDetailInfo
+  ParamName?: string
+  /**
+   * <table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>PARAM_TYPE_STRING</td><td>0</td><td>字符串</td></tr><tr><td>PARAM_TYPE_INT</td><td>1</td><td>整数</td></tr><tr><td>PARAM_TYPE_FLOAT</td><td>2</td><td>浮点数</td></tr><tr><td>PARAM_TYPE_BOOL</td><td>3</td><td>布尔值</td></tr><tr><td>PARAM_TYPE_OBJECT</td><td>4</td><td>对象</td></tr><tr><td>PARAM_TYPE_ARRAY_STRING</td><td>5</td><td>字符串数组</td></tr><tr><td>PARAM_TYPE_ARRAY_INT</td><td>6</td><td>整数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_FLOAT</td><td>7</td><td>浮点数数组</td></tr><tr><td>PARAM_TYPE_ARRAY_BOOL</td><td>8</td><td>布尔值数组</td></tr><tr><td>PARAM_TYPE_ARRAY_OBJECT</td><td>9</td><td>对象数组</td></tr><tr><td>PARAM_TYPE_ARRAY_ARRAY</td><td>20</td><td>数组嵌套</td></tr><tr><td>PARAM_TYPE_NULL</td><td>99</td><td>空值</td></tr><tr><td>PARAM_TYPE_UNSPECIFIED</td><td>100</td><td>未指定类型，用于OneOf和AnyOf场景</td></tr></table>
+   */
+  ParamType?: number
+  /**
+   *
+   */
+  Required?: boolean
+  /**
+   *
+   */
+  SubParamList?: Array<AppTriggerParamSchema>
 }
 
 /**
- * FavoriteSkill返回参数结构体
+ * DescribeAppTrigger返回参数结构体
  */
-export interface FavoriteSkillResponse {
+export interface DescribeAppTriggerResponse {
+  /**
+   * <p>应用触发器信息</p>
+   */
+  Trigger?: AppTrigger
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3116,6 +4001,41 @@ export interface SingleWorkflowConfig {
 }
 
 /**
+ * TimerPushConfig
+ */
+export interface TimerPushConfig {
+  /**
+   * 
+枚举值:
+| uint | 描述 |
+| --- | --- |
+| 0 |  |
+| 1 | 不推送 |
+| 2 | 微信公众号 |
+| 3 | 企业微信 AI 机器人 |
+   */
+  PushChannel?: number
+  /**
+   * 推送会话ID
+   */
+  PushTargetId?: string
+  /**
+   * 
+枚举值:
+| uint | 描述 |
+| --- | --- |
+| 0 |  |
+| 1 | 用户 (微信公众号 openid) |
+| 2 | 群聊 (企微机器人 chat_id) |
+   */
+  PushTargetType?: number
+  /**
+   *
+   */
+  PushWebhookUrl?: string
+}
+
+/**
  * BasicBilling
  */
 export interface BasicBilling {
@@ -3148,6 +4068,28 @@ export interface DeleteSkillShareResponse {
 }
 
 /**
+ * DescribePlugin请求参数结构体
+ */
+export interface DescribePluginRequest {
+  /**
+   * <p>插件id</p>
+   */
+  PluginId: string
+  /**
+   * <p>当前空间id</p>
+   */
+  SpaceId: string
+  /**
+   * <p>获取指定字段</p>
+   */
+  FieldMask?: FieldMask
+  /**
+   * <p>插件展示场景。不传或取 0 时不限定场景。</p><p>枚举值：</p><ul><li>0：不限定场景</li><li>1：Agent 模式</li><li>2：工作流</li><li>3：智能工作台</li></ul>
+   */
+  Module?: number
+}
+
+/**
  * Agent 工具入参
  */
 export interface AgentToolConfig {
@@ -3155,6 +4097,20 @@ export interface AgentToolConfig {
    * <p>工具配置</p>
    */
   Config?: AgentToolBasicConfig
+}
+
+/**
+ * CreateTimerTask返回参数结构体
+ */
+export interface CreateTimerTaskResponse {
+  /**
+   * 任务ID
+   */
+  TimerId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3254,71 +4210,39 @@ export interface DescribeLatestReleaseRequest {
 }
 
 /**
- * Agent 的插件基本配置
+ * 联网搜索配置(国际版使用)
  */
-export interface AgentPluginConfig {
+export interface AppWebSearchConfig {
   /**
-   * <p>插件id</p>
+   * API密钥
    */
-  PluginId?: string
+  ApiKey: string
   /**
-   * <p>插件 Header 参数</p>
+   * 是否开启
    */
-  HeaderParameterList?: Array<AgentPluginParameter>
+  Enabled: boolean
   /**
-   * <p>插件 Query 参数</p>
+   * 服务提供商
    */
-  QueryParameterList?: Array<AgentPluginParameter>
+  Provider: string
   /**
-   * <p>是否使用CAM一键授权，仅 auth_type=2时生效</p>
+   * 返回结果数量
    */
-  EnableCamRoleAuth?: boolean
-  /**
-   * <p>授权类型</p><p>枚举值：</p><ul><li>0： 无鉴权</li><li>1： API Key</li><li>2： CAM授权</li><li>3： OAuth2.0授权</li></ul>
-   */
-  AuthType?: number
-  /**
-   * <p>OAuth 授权同意模式；0-开发者授权；1-使用者授权（仅在auth_type=3时生效）</p>
-   */
-  OAuthConsent?: number
+  TopN: number
 }
 
 /**
- * 插件概要信息（用于插件列表）
+ * DescribeSystemVariableList返回参数结构体
  */
-export interface PluginSummary {
+export interface DescribeSystemVariableListResponse {
   /**
-   * <p>插件运营管理信息</p>
+   * system_variable_list
    */
-  Operation?: PluginOperation
+  SystemVariableList?: Array<SystemVariable>
   /**
-   * <p>插件id</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PluginId?: string
-  /**
-   * <p>插件基础信息</p>
-   */
-  Profile?: PluginProfile
-  /**
-   * <p>插件统计信息</p>
-   */
-  Statistics?: PluginStatistics
-  /**
-   * <p>插件状态，1:可用，2:不可用 </p><p>枚举值：</p><ul><li>1： 可用</li><li>2： 不可用</li></ul>
-   */
-  Status?: number
-  /**
-   * <p>用户维度的插件状态信息</p>
-   */
-  UserState?: PluginUserState
-  /**
-   * <p>插件配置信息</p>
-   */
-  Config?: PluginConfig
-  /**
-   * <p>工具信息</p>
-   */
-  ToolList?: Array<ToolSummary>
+  RequestId?: string
 }
 
 /**
@@ -3349,6 +4273,34 @@ export interface CreatePluginRequest {
    * <p>登录用户子账号(集成商模式必填)</p>
    */
   LoginSubAccountUin?: string
+}
+
+/**
+ * ResumeAppTrigger请求参数结构体
+ */
+export interface ResumeAppTriggerRequest {
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: string
+  /**
+   * <p>应用触发器ID</p>
+   */
+  TriggerId?: string
+}
+
+/**
+ * AppTriggerParamBindingValue
+ */
+export interface AppTriggerParamBindingValue {
+  /**
+   * <p>参数值</p>
+   */
+  ParamValue?: string
+  /**
+   * <p>应用变量名</p>
+   */
+  VariableName?: string
 }
 
 /**
@@ -3412,25 +4364,25 @@ export interface OAuthConfig {
 }
 
 /**
- * 联网搜索配置(国际版使用)
+ * RunTimerTaskNow请求参数结构体
  */
-export interface AppWebSearchConfig {
+export interface RunTimerTaskNowRequest {
   /**
-   * API密钥
+   * 空间ID
    */
-  ApiKey: string
+  SpaceId?: string
   /**
-   * 是否开启
+   * 任务ID
    */
-  Enabled: boolean
+  TimerId?: string
   /**
-   * 服务提供商
+   * 主用户
    */
-  Provider: string
+  LoginUin?: string
   /**
-   * 返回结果数量
+   * 子用户
    */
-  TopN: number
+  LoginSubAccountUin?: string
 }
 
 /**
@@ -3460,6 +4412,20 @@ export interface CreateWorkspaceCredentialResponse {
    * <p>工作空间 ID</p>
    */
   WorkspaceId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeTimerTask返回参数结构体
+ */
+export interface DescribeTimerTaskResponse {
+  /**
+   * 任务
+   */
+  Task?: TimerTask
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3628,25 +4594,17 @@ export interface AgentReleasePreview {
 }
 
 /**
- * ToolConfig
+ * DescribeAgentDetail返回参数结构体
  */
-export interface ToolConfig {
+export interface DescribeAgentDetailResponse {
   /**
-   * <p>API工具配置信息</p>
+   * <p>Agent信息</p>
    */
-  ApiToolConfig?: ApiToolConfig
+  Agent?: AgentDetail
   /**
-   * <p>应用配置信息</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AppToolConfig?: AppToolConfig
-  /**
-   * <p>代码工具配置信息</p>
-   */
-  CodeToolConfig?: CodeToolConfig
-  /**
-   * <p>MCP工具配置信息</p>
-   */
-  MCPToolConfig?: MCPToolConfig
+  RequestId?: string
 }
 
 /**
@@ -3673,6 +4631,16 @@ export interface AgentToolOutputParameter {
    * <p>解析方式</p>
    */
   RenderMode?: number
+}
+
+/**
+ * DeleteVariable返回参数结构体
+ */
+export interface DeleteVariableResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3708,17 +4676,39 @@ export interface CreateSkillShareResponse {
 }
 
 /**
- * DescribeReleaseSummary返回参数结构体
+ * RunAppTriggerNow请求参数结构体
  */
-export interface DescribeReleaseSummaryResponse {
+export interface RunAppTriggerNowRequest {
   /**
-   * 发布信息
+   * <p>应用ID</p>
    */
-  ReleaseSummary?: ReleaseSummary
+  AppId?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>应用触发器ID</p>
    */
-  RequestId?: string
+  TriggerId?: string
+}
+
+/**
+ * AppTriggerWebhookConfig
+ */
+export interface AppTriggerWebhookConfig {
+  /**
+   *
+   */
+  ParamSchemaConfig?: AppTriggerWebhookParamSchemaConfig
+  /**
+   *
+   */
+  WebhookKey?: string
+  /**
+   *
+   */
+  WebhookToken?: string
+  /**
+   *
+   */
+  WebhookUrl?: string
 }
 
 /**
@@ -3750,13 +4740,9 @@ export interface AgentUserInputValue {
 }
 
 /**
- * DescribeAgentDetail返回参数结构体
+ * DeleteAppTrigger返回参数结构体
  */
-export interface DescribeAgentDetailResponse {
-  /**
-   * <p>Agent信息</p>
-   */
-  Agent?: AgentDetail
+export interface DeleteAppTriggerResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3764,41 +4750,17 @@ export interface DescribeAgentDetailResponse {
 }
 
 /**
- * SkillProfile Skill 基础展示信息。
+ * CreateAppTrigger返回参数结构体
  */
-export interface SkillProfile {
+export interface CreateAppTriggerResponse {
   /**
-   * 创建时间（Unix秒）
+   * <p>应用触发器ID</p>
    */
-  CreateTime: string
+  TriggerId?: string
   /**
-   * 创建者
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Creator: string
-  /**
-   * Skill 描述
-   */
-  Description: string
-  /**
-   * Skill 展示描述
-   */
-  DisplayDescription: string
-  /**
-   * Skill 展示名称
-   */
-  DisplayName: string
-  /**
-   * Skill 图标
-   */
-  IconUrl: string
-  /**
-   * Skill 名称
-   */
-  Name: string
-  /**
-   * 更新时间（Unix秒）
-   */
-  UpdateTime: string
+  RequestId?: string
 }
 
 /**
@@ -3876,6 +4838,54 @@ export interface ApiToolConfig {
 }
 
 /**
+ * PluginOperation
+ */
+export interface PluginOperation {
+  /**
+   * 是否允许外部调用
+   */
+  AllowExternalAccess?: boolean
+  /**
+   * <p>计费类型。</p><p>枚举值：</p><ul><li>0：免费</li><li>1：公测</li><li>2：官方收费</li></ul>
+   */
+  BillingType?: number
+  /**
+   * 插件分类标识
+   */
+  CategoryKey?: string
+  /**
+   * 插件概述
+   */
+  Introduction?: string
+  /**
+   * 是否精选
+   */
+  IsRecommended?: boolean
+}
+
+/**
+ * DescribeTimerTask请求参数结构体
+ */
+export interface DescribeTimerTaskRequest {
+  /**
+   * 空间id
+   */
+  SpaceId?: string
+  /**
+   * 任务id
+   */
+  TimerId?: string
+  /**
+   * <p>主用户Uin</p>
+   */
+  LoginUin?: string
+  /**
+   * <p>子用户Uin</p>
+   */
+  LoginSubAccountUin?: string
+}
+
+/**
  * ModifySkill返回参数结构体
  */
 export interface ModifySkillResponse {
@@ -3883,6 +4893,28 @@ export interface ModifySkillResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ToolConfig
+ */
+export interface ToolConfig {
+  /**
+   * <p>API工具配置信息</p>
+   */
+  ApiToolConfig?: ApiToolConfig
+  /**
+   * <p>应用配置信息</p>
+   */
+  AppToolConfig?: AppToolConfig
+  /**
+   * <p>代码工具配置信息</p>
+   */
+  CodeToolConfig?: CodeToolConfig
+  /**
+   * <p>MCP工具配置信息</p>
+   */
+  MCPToolConfig?: MCPToolConfig
 }
 
 /**
@@ -3919,6 +4951,16 @@ export interface AppShareURLInfo {
 }
 
 /**
+ * ReleaseSkill返回参数结构体
+ */
+export interface ReleaseSkillResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 模型基本信息
  */
 export interface ModelBasic {
@@ -3942,6 +4984,59 @@ export interface ModelBasic {
    * 模型名称
    */
   Name?: string
+}
+
+/**
+ * UnfavoriteSkill请求参数结构体
+ */
+export interface UnfavoriteSkillRequest {
+  /**
+   * <p>SkillId</p>
+   */
+  SkillId: string
+  /**
+   * <p>空间ID</p>
+   */
+  SpaceId: string
+}
+
+/**
+ * SkillAnalysisInfo Skill 安全扫描信息。
+ */
+export interface SkillAnalysisInfo {
+  /**
+   * 安全检测状态
+
+枚举值:
+| uint | 描述 |
+| --- | --- |
+| 0 | 待检测 |
+| 1 | 检测中 |
+| 2 | 可用 |
+| 3 | 不可用 |
+| 4 | 检测失败 |
+   */
+  AnalysisStatus: number
+  /**
+   * 风险描述
+   */
+  RiskDescription: string
+  /**
+   * 风险等级
+
+枚举值:
+| uint | 描述 |
+| --- | --- |
+| 0 | 无风险 |
+| 1 | 低风险 |
+| 2 | 中风险 |
+| 3 | 高风险 |
+   */
+  RiskLevel: number
+  /**
+   * 安全报告跳转url;
+   */
+  SecurityReportUrl: string
 }
 
 /**
@@ -3973,9 +5068,13 @@ export interface CreateReleaseResponse {
 }
 
 /**
- * FavoritePlugin返回参数结构体
+ * DescribeAppTriggerInstance返回参数结构体
  */
-export interface FavoritePluginResponse {
+export interface DescribeAppTriggerInstanceResponse {
+  /**
+   * <p>应用触发器实例</p>
+   */
+  Instance?: AppTriggerInstance
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3983,17 +5082,13 @@ export interface FavoritePluginResponse {
 }
 
 /**
- * UnfavoritePlugin请求参数结构体
+ * PauseAppTrigger返回参数结构体
  */
-export interface UnfavoritePluginRequest {
+export interface PauseAppTriggerResponse {
   /**
-   * <p>插件id</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PluginId: string
-  /**
-   * <p>当前空间id</p>
-   */
-  SpaceId: string
+  RequestId?: string
 }
 
 /**
@@ -4089,26 +5184,13 @@ export interface AppealingStatus {
 }
 
 /**
- * 模型详细信息
+ * 输入框配置
  */
-export interface ModelDetailInfo {
+export interface InputBoxConfig {
   /**
-   * 模型别名
+   * 输入框按钮，1：上传图片、2：上传文档，3：腾讯文档，4：联网搜索
    */
-  Alias?: string
-  /**
-   * 历史对话条数限制
-   */
-  HistoryLimit?: number
-  /**
-   * 模型唯一 ID
-   */
-  ModelId?: string
-  /**
-   * 模型参数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ModelParams?: ModelParams
+  InputBoxButtons?: Array<number | bigint>
 }
 
 /**
@@ -4155,6 +5237,16 @@ export interface CreateVariableRequest {
    * 变量信息
    */
   Variable?: Variable
+}
+
+/**
+ * AppTriggerParamBindingConfig
+ */
+export interface AppTriggerParamBindingConfig {
+  /**
+   *
+   */
+  ParamList?: Array<AppTriggerParamBinding>
 }
 
 /**
@@ -4254,25 +5346,21 @@ export interface MCPPluginConfig {
 }
 
 /**
- * DescribePlugin请求参数结构体
+ * DescribeAppTriggerSummaryList返回参数结构体
  */
-export interface DescribePluginRequest {
+export interface DescribeAppTriggerSummaryListResponse {
   /**
-   * <p>插件id</p>
+   * <p>应用触发器数量</p>
    */
-  PluginId: string
+  TotalCount?: string
   /**
-   * <p>当前空间id</p>
+   * <p>应用触发器列表</p>
    */
-  SpaceId: string
+  TriggerList?: Array<AppTriggerSummary>
   /**
-   * <p>获取指定字段</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  FieldMask?: FieldMask
-  /**
-   * <p>插件展示场景。不传或取 0 时不限定场景。</p><p>枚举值：</p><ul><li>0：不限定场景</li><li>1：Agent 模式</li><li>2：工作流</li><li>3：智能工作台</li></ul>
-   */
-  Module?: number
+  RequestId?: string
 }
 
 /**
@@ -4283,6 +5371,26 @@ export interface DescribeSystemVariableListRequest {
    * 应用ID
    */
   AppId: string
+}
+
+/**
+ * 角色配置
+ */
+export interface RoleConfig {
+  /**
+   * 角色描述
+   */
+  RoleDescription: string
+}
+
+/**
+ * DescribeTimerTaskRunLogList返回参数结构体
+ */
+export interface DescribeTimerTaskRunLogListResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4355,13 +5463,127 @@ export interface AppGreetingConfig {
 }
 
 /**
- * 输入框配置
+ * DescribeAppTriggerSummaryList请求参数结构体
  */
-export interface InputBoxConfig {
+export interface DescribeAppTriggerSummaryListRequest {
   /**
-   * 输入框按钮，1：上传图片、2：上传文档，3：腾讯文档，4：联网搜索
+   * <p>应用ID</p>
    */
-  InputBoxButtons?: Array<number | bigint>
+  AppId?: string
+  /**
+   * <p>参数过滤列表</p>
+   */
+  FilterList?: Array<Filter>
+  /**
+   * <p>页码</p><p>取值范围：[1, 1000000]</p>
+   */
+  PageNumber?: number
+  /**
+   * <p>每页大小</p><p>取值范围：[1, 100]</p>
+   */
+  PageSize?: number
+  /**
+   * <p>模糊查询字符串</p>
+   */
+  Query?: string
+}
+
+/**
+ * 模型状态信息
+ */
+export interface ModelStatus {
+  /**
+   * 专属并发数
+   */
+  Concurrency?: number
+  /**
+   * 是否专属并发
+   */
+  IsExclusive?: boolean
+  /**
+   * 资源状态。1-资源可用, 2-资源已用尽
+   */
+  ResourceStatus?: number
+}
+
+/**
+ * 特殊状态信息
+ */
+export interface SpecialStatusInfo {
+  /**
+   * 状态 (0-不在特殊状态中, 1-在特殊状态中)。枚举值: 1:在特殊状态中
+   */
+  Status: number
+}
+
+/**
+ * 空间信息
+ */
+export interface Space {
+  /**
+   * 空间id
+   */
+  SpaceId?: string
+  /**
+   * 空间名称
+   */
+  Name?: string
+  /**
+   * 空间描述
+   */
+  Description?: string
+  /**
+   * 空间权限
+   */
+  PermissionIdList?: Array<string>
+}
+
+/**
+ * WeeklySchedule
+ */
+export interface WeeklySchedule {
+  /**
+   * 定时配置（星期）
+   */
+  Times?: Array<WeeklyTime>
+}
+
+/**
+ * 应用元数据 - 基础标识和描述信息
+ */
+export interface AppMetadata {
+  /**
+   * 应用ID
+   */
+  AppId: string
+  /**
+   * 应用模式。枚举值: 1:标准模式, 2:Agent模式, 3:单工作流模式, 4:ClawAgent模式
+   */
+  AppMode: number
+  /**
+   * 应用头像
+   */
+  Avatar: string
+  /**
+   * 创建时间 (Unix时间戳,秒级)
+   */
+  CreateTime: string
+  /**
+   * 应用描述
+   */
+  Description: string
+  /**
+   * 应用名称
+   */
+  Name: string
+  /**
+   * 空间ID
+   */
+  SpaceId: string
+  /**
+   * 更新时间 (Unix时间戳,秒级)
+   */
+  UpdateTime: string
 }
 
 /**
@@ -4418,76 +5640,6 @@ export interface SkillSummary {
 }
 
 /**
- * 特殊状态信息
- */
-export interface SpecialStatusInfo {
-  /**
-   * 状态 (0-不在特殊状态中, 1-在特殊状态中)。枚举值: 1:在特殊状态中
-   */
-  Status: number
-}
-
-/**
- * 空间信息
- */
-export interface Space {
-  /**
-   * 空间id
-   */
-  SpaceId?: string
-  /**
-   * 空间名称
-   */
-  Name?: string
-  /**
-   * 空间描述
-   */
-  Description?: string
-  /**
-   * 空间权限
-   */
-  PermissionIdList?: Array<string>
-}
-
-/**
- * 应用元数据 - 基础标识和描述信息
- */
-export interface AppMetadata {
-  /**
-   * 应用ID
-   */
-  AppId: string
-  /**
-   * 应用模式。枚举值: 1:标准模式, 2:Agent模式, 3:单工作流模式, 4:ClawAgent模式
-   */
-  AppMode: number
-  /**
-   * 应用头像
-   */
-  Avatar: string
-  /**
-   * 创建时间 (Unix时间戳,秒级)
-   */
-  CreateTime: string
-  /**
-   * 应用描述
-   */
-  Description: string
-  /**
-   * 应用名称
-   */
-  Name: string
-  /**
-   * 空间ID
-   */
-  SpaceId: string
-  /**
-   * 更新时间 (Unix时间戳,秒级)
-   */
-  UpdateTime: string
-}
-
-/**
  * [数据结构定义] Agent协同配置
  */
 export interface AgentCollaborationConfig {
@@ -4524,13 +5676,43 @@ export interface DeleteVariableRequest {
 }
 
 /**
- * ReleaseSkill返回参数结构体
+ * ModifyTimerTask请求参数结构体
  */
-export interface ReleaseSkillResponse {
+export interface ModifyTimerTaskRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 空间ID
    */
-  RequestId?: string
+  SpaceId?: string
+  /**
+   * 任务ID
+   */
+  TimerId?: string
+  /**
+   * 任务
+   */
+  TimerTask?: TimerTask
+  /**
+   * 修改的内容
+   */
+  UpdateMask?: FieldMask
+  /**
+   * <p>主用户Uin</p>
+   */
+  LoginUin?: string
+  /**
+   * <p>子用户Uin</p>
+   */
+  LoginSubAccountUin?: string
+}
+
+/**
+ * CronSchedule
+ */
+export interface CronSchedule {
+  /**
+   * cron表达式
+   */
+  Expression?: string
 }
 
 /**
@@ -4552,6 +5734,72 @@ export interface AccountInfo {
 }
 
 /**
+ * AppTriggerInstance
+ */
+export interface AppTriggerInstance {
+  /**
+   *
+   */
+  AppId?: string
+  /**
+   *
+   */
+  ConversationId?: string
+  /**
+   *
+   */
+  CreatedAt?: string
+  /**
+   *
+   */
+  FinishedAt?: string
+  /**
+   *
+   */
+  InstanceId?: string
+  /**
+   *
+   */
+  RequestId?: string
+  /**
+   *
+   */
+  ResultCode?: string
+  /**
+   *
+   */
+  ResultSummary?: string
+  /**
+   *
+   */
+  RunId?: string
+  /**
+   * <table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_INSTANCE_SOURCE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_INSTANCE_SOURCE_APP_TRIGGER</td><td>1</td><td>来源于应用触发器</td></tr></table>
+   */
+  Source?: number
+  /**
+   *
+   */
+  StartedAt?: string
+  /**
+   * <table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>TIMER_RUN_STATUS_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>TIMER_RUN_STATUS_PENDING</td><td>1</td><td>等待执行</td></tr><tr><td>TIMER_RUN_STATUS_RUNNING</td><td>2</td><td>执行中</td></tr><tr><td>TIMER_RUN_STATUS_RETRY_WAIT</td><td>3</td><td>等待重试</td></tr><tr><td>TIMER_RUN_STATUS_SUCCESS</td><td>4</td><td>成功</td></tr><tr><td>TIMER_RUN_STATUS_DEAD</td><td>5</td><td>失败终态 (重试耗尽 / 不可重试)</td></tr><tr><td>TIMER_RUN_STATUS_CANCELLED</td><td>6</td><td>被任务暂停/删除/修改取消</td></tr></table>
+   */
+  Status?: number
+  /**
+   *
+   */
+  TraceId?: string
+  /**
+   *
+   */
+  TriggerId?: string
+  /**
+   *
+   */
+  WorkflowRunId?: string
+}
+
+/**
  * 应用插件配置信息
  */
 export interface AppPluginConfig {
@@ -4562,21 +5810,13 @@ export interface AppPluginConfig {
 }
 
 /**
- * 模型状态信息
+ * AppTriggerScheduleConfig
  */
-export interface ModelStatus {
+export interface AppTriggerScheduleConfig {
   /**
-   * 专属并发数
+   *
    */
-  Concurrency?: number
-  /**
-   * 是否专属并发
-   */
-  IsExclusive?: boolean
-  /**
-   * 资源状态。1-资源可用, 2-资源已用尽
-   */
-  ResourceStatus?: number
+  Schedule?: TimerScheduleConfig
 }
 
 /**
@@ -4649,55 +5889,127 @@ export interface AppMemoryConfig {
 }
 
 /**
- * ModifyConversation请求参数结构体
+ * FavoritePlugin返回参数结构体
  */
-export interface ModifyConversationRequest {
+export interface FavoritePluginResponse {
   /**
-   * <p>会话类型 枚举值: 0-CONVERSATION_TYPE_UNSPECIFIED(未指定；列表查询时表示全部), 1-CONVERSATION_TYPE_VISITOR(访客端体验), 2-CONVERSATION_TYPE_EVALUATION(评测), 5-CONVERSATION_TYPE_API(API 接入), 10-CONVERSATION_TYPE_WORKFLOW(工作流调试), 20-CONVERSATION_TYPE_SHARE(分享链接)</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Type: number
-  /**
-   * <p>应用 ID</p>
-   */
-  AppId?: string
-  /**
-   * <p>Type=CONVERSATION_TYPE_API 时必填，应用密钥</p>
-   */
-  AppKey?: string
-  /**
-   * <p>登录用户子账号(集成商模式必填)</p>
-   */
-  LoginSubAccountUin?: string
-  /**
-   * <p>登录用户主账号(集成商模式必填)</p>
-   */
-  LoginUin?: string
-  /**
-   * <p>Type=CONVERSATION_TYPE_SHARE 时必填，分享码</p>
-   */
-  ShareCode?: string
-  /**
-   * <p>Type=CONVERSATION_TYPE_API 时必填，访客ID</p>
-   */
-  UserId?: string
-  /**
-   * 会话ID
-   */
-  ConversationId?: string
-  /**
-   * 会话标题
-   */
-  Title?: string
+  RequestId?: string
 }
 
 /**
- * 角色配置
+ * Agent的工具基础配置
  */
-export interface RoleConfig {
+export interface AgentToolBasicConfig {
   /**
-   * 角色描述
+   * <p>插件id</p>
    */
-  RoleDescription: string
+  PluginId?: string
+  /**
+   * <p>工具id</p>
+   */
+  ToolId?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>工具输入参数列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InputList?: Array<AgentToolInputParameter>
+  /**
+   * <p>工具输出参数列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputList?: Array<AgentToolOutputParameter>
+  /**
+   * <p>工具Header参数列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HeaderParameterList?: Array<AgentPluginParameter>
+  /**
+   * <p>工具Query参数列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QueryParameterList?: Array<AgentPluginParameter>
+  /**
+   * <p>工具来源: 0-来自插件，1-来自工作流</p>
+   */
+  ToolSource?: number
+  /**
+   * <p>是否禁用</p>
+   */
+  IsDisabled?: boolean
+}
+
+/**
+ * MarkAppTriggerRunLogRead返回参数结构体
+ */
+export interface MarkAppTriggerRunLogReadResponse {
+  /**
+   * <p>成功标记个数</p>
+   */
+  MarkedCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 支持的文件类型
+ */
+export interface SupportedFileType {
+  /**
+   * 文件类型描述(如"文本文档")
+   */
+  Description: string
+  /**
+   * 文件类型(如 txt、pdf、jpg, 建议用扩展名)
+   */
+  FileExt: string
+  /**
+   * 文件大小限制(单位: 字节)
+   */
+  MaxSizeBytes: string
+}
+
+/**
+ * TriggerStatus
+ */
+export interface TriggerStatus {
+  /**
+   * <p>定时器状态</p>
+   */
+  ScheduledStatus?: AppTriggerScheduleStatus
+  /**
+   * <p>Webhook状态</p>
+   */
+  WebhookStatus?: AppTriggerWebhookStatus
+}
+
+/**
+ * DeleteTimerTask请求参数结构体
+ */
+export interface DeleteTimerTaskRequest {
+  /**
+   * 空间ID
+   */
+  SpaceId?: string
+  /**
+   * 任务ID
+   */
+  TimerId?: string
+  /**
+   * 主用户
+   */
+  LoginUin?: string
+  /**
+   * 子用户
+   */
+  LoginSubAccountUin?: string
 }
 
 /**
@@ -4725,21 +6037,21 @@ export interface ClawAgentCustomConfig {
 }
 
 /**
- * DescribeAuditLogList返回参数结构体
+ * AppTriggerParamBinding
  */
-export interface DescribeAuditLogListResponse {
+export interface AppTriggerParamBinding {
   /**
-   * <p>操作日志列表</p>
+   * <p>参数名字</p>
    */
-  AuditLogList?: Array<AuditLog>
+  ParamName?: string
   /**
-   * <p>es查询起始位置</p><p>用于入参查询下一页</p>
+   * <p>参数类型</p><p>枚举值：</p><ul><li>0： 字符串</li><li>1： 整数</li><li>2： 浮点数</li><li>4： 对象</li><li>5： 字符串数组</li><li>6： 整数数组</li><li>7： 浮点数数组</li><li>8： 布尔值数组</li><li>3： 布尔值</li><li>9： 对象数组</li><li>10： 文件</li><li>11： 文档</li><li>12： 图片</li><li>13： 音频</li><li>14： 视频</li><li>15： 文件数组</li><li>16： 文档数组</li><li>17： 图片数组</li><li>18： 音频数组</li><li>19： 视频数组</li><li>20： 数组嵌套</li><li>22： 密钥</li><li>99： 空值</li><li>100： 未指定类型，用于OneOf和AnyOf场景</li></ul>
    */
-  SearchAfter?: Array<string>
+  ParamType?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>参数值</p>
    */
-  RequestId?: string
+  Value?: AppTriggerParamBindingValue
 }
 
 /**
@@ -4854,13 +6166,17 @@ export interface ModelBadge {
 }
 
 /**
- * DescribeSystemVariableList返回参数结构体
+ * DescribeAppTriggerRunLogList返回参数结构体
  */
-export interface DescribeSystemVariableListResponse {
+export interface DescribeAppTriggerRunLogListResponse {
   /**
-   * system_variable_list
+   * <p>日志列表</p>
    */
-  SystemVariableList?: Array<SystemVariable>
+  RunLogList?: Array<AppTriggerRunLog>
+  /**
+   * <p>日志列表数量</p>
+   */
+  TotalCount?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4990,6 +6306,109 @@ export interface FavoritePluginRequest {
 }
 
 /**
+ * 模型属性
+ */
+export interface ModelProperty {
+  /**
+   * 属性名称
+   */
+  Name?: string
+  /**
+   * 属性值
+   */
+  Value?: string
+}
+
+/**
+ * 文档解析模型参数
+ */
+export interface FileParseModel {
+  /**
+   * 模型别名
+   */
+  Alias: string
+  /**
+   * 模型描述
+   */
+  Description: string
+  /**
+   * 增强模式
+   */
+  EnhancementMode: string
+  /**
+   * 模型唯一ID
+   */
+  ModelId: string
+  /**
+   * 模型类型
+   */
+  ModelProviderType: string
+  /**
+   * 是否启用公式增强
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableFormulaEnhancement?: boolean
+  /**
+   * 是否启用 LLM 增强
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EnableLLMEnhancement?: boolean
+  /**
+   * 是否输出 HTML 表格
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OutputHtmlTable?: boolean
+  /**
+   * 支持的文件类型列表
+   */
+  SupportedFileList?: Array<SupportedFileType>
+}
+
+/**
+ * TimerProfile
+ */
+export interface TimerProfile {
+  /**
+   * 
+枚举值:
+| uint | 描述 |
+| --- | --- |
+| 0 |  |
+| 1 | 页面手动创建 |
+| 2 | 自然语言对话创建 |
+   */
+  CreateSource?: number
+  /**
+   * 输入上下文快照
+   */
+  InputContextSnapshot?: string
+  /**
+   * 模型
+   */
+  ModelId?: string
+  /**
+   * 提示词
+   */
+  Prompt?: string
+  /**
+   * skill快照
+   */
+  SkillSnapshot?: string
+  /**
+   * 任务名称
+   */
+  TaskName?: string
+  /**
+   * 工具快照
+   */
+  ToolSnapshot?: string
+  /**
+   * 工作目录
+   */
+  WorkspaceId?: string
+}
+
+/**
  * CopyApp返回参数结构体
  */
 export interface CopyAppResponse {
@@ -5033,6 +6452,20 @@ export interface CopyAppRequest {
    * target_space_id
    */
   TargetSpaceId?: string
+}
+
+/**
+ * RollbackRelease请求参数结构体
+ */
+export interface RollbackReleaseRequest {
+  /**
+   * app_id
+   */
+  AppId: string
+  /**
+   * release_id
+   */
+  ReleaseId: string
 }
 
 /**
@@ -5218,6 +6651,24 @@ export interface ComplexBillingItem {
 }
 
 /**
+ * DescribeAuditLogList返回参数结构体
+ */
+export interface DescribeAuditLogListResponse {
+  /**
+   * <p>操作日志列表</p>
+   */
+  AuditLogList?: Array<AuditLog>
+  /**
+   * <p>es查询起始位置</p><p>用于入参查询下一页</p>
+   */
+  SearchAfter?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * BackgroundImage 背景图片配置
  */
 export interface BackgroundImage {
@@ -5265,6 +6716,28 @@ export interface DescribeSkillDetailRequest {
  * DescribeSkillCategoryList请求参数结构体
  */
 export type DescribeSkillCategoryListRequest = null
+
+/**
+ * AppTriggerWorkflowExecuteConfig
+ */
+export interface AppTriggerWorkflowExecuteConfig {
+  /**
+   * <p>工作流API参数绑定</p>
+   */
+  ParamBindingsApi?: AppTriggerParamBindingConfig
+  /**
+   * <p>工作流参数绑定</p>
+   */
+  ParamBindingsWorkflow?: AppTriggerParamBindingConfig
+  /**
+   * <p>工作流ID</p>
+   */
+  WorkflowId?: string
+  /**
+   * <p>工作流名字</p>
+   */
+  WorkflowName?: string
+}
 
 /**
  * 模型完整信息
@@ -5455,17 +6928,17 @@ export interface ModelProviderBasic {
 }
 
 /**
- * UnfavoriteSkill请求参数结构体
+ * MCPToolConfig
  */
-export interface UnfavoriteSkillRequest {
+export interface MCPToolConfig {
   /**
-   * <p>SkillId</p>
+   * <p>输入参数</p>
    */
-  SkillId: string
+  Inputs?: Array<RequestParam>
   /**
-   * <p>空间ID</p>
+   * <p>输出参数</p>
    */
-  SpaceId: string
+  Outputs?: Array<ResponseParam>
 }
 
 /**
@@ -5608,13 +7081,67 @@ export interface DescribeConversationResponse {
 }
 
 /**
- * 字段掩码
+ * AppTrigger
  */
-export interface FieldMask {
+export interface AppTrigger {
   /**
-   * 字段路径列表
+   *
    */
-  Paths?: Array<string>
+  TriggerId?: string
+  /**
+   *
+   */
+  AppId?: string
+  /**
+   *
+   */
+  TriggerName?: string
+  /**
+   * <table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_TYPE_SCHEDULED</td><td>1</td><td>定时触发</td></tr><tr><td>APP_TRIGGER_TYPE_WEBHOOK</td><td>2</td><td>Webhook 触发</td></tr></table>
+   */
+  TriggerType?: number
+  /**
+   * <table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_PROMPT</td><td>1</td><td>指令执行</td></tr><tr><td>APP_TRIGGER_EXECUTE_TYPE_WORKFLOW</td><td>2</td><td>工作流执行</td></tr></table>
+   */
+  ExecuteType?: number
+  /**
+   *
+   */
+  PushConfig?: TimerPushConfig
+  /**
+   * <table><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>APP_TRIGGER_STATUS_UNSPECIFIED</td><td>0</td><td>未指定</td></tr><tr><td>APP_TRIGGER_STATUS_ENABLED</td><td>1</td><td>启用</td></tr><tr><td>APP_TRIGGER_STATUS_PAUSED</td><td>2</td><td>暂停</td></tr><tr><td>APP_TRIGGER_STATUS_DELETED</td><td>3</td><td>已删除</td></tr></table>
+   */
+  Status?: number
+  /**
+   *
+   */
+  SuccessCount?: string
+  /**
+   *
+   */
+  FailedCount?: string
+  /**
+   *
+   */
+  TriggerConfig?: TriggerConfig
+  /**
+   *
+   */
+  ExecuteConfig?: ExecuteConfig
+  /**
+   *
+   */
+  TriggerStatus?: TriggerStatus
+}
+
+/**
+ * 工具信息
+ */
+export interface ToolSummary {
+  /**
+   * <p>工具Id</p>
+   */
+  ToolId?: string
 }
 
 /**
@@ -5633,6 +7160,28 @@ export interface DescribeAgentSummaryListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * PauseTimerTask请求参数结构体
+ */
+export interface PauseTimerTaskRequest {
+  /**
+   * 空间ID
+   */
+  SpaceId?: string
+  /**
+   * 任务ID
+   */
+  TimerId?: string
+  /**
+   * 主用户
+   */
+  LoginUin?: string
+  /**
+   * 子用户
+   */
+  LoginSubAccountUin?: string
 }
 
 /**
@@ -5761,6 +7310,47 @@ export interface AgentTool {
 }
 
 /**
+ * TimerStatus
+ */
+export interface TimerStatus {
+  /**
+   * 失败次数
+   */
+  FailedCount?: string
+  /**
+   * 上次触发时间
+   */
+  LastFireTime?: string
+  /**
+   * 最近一次会话ID
+   */
+  LastSessionId?: string
+  /**
+   * 下次触发时间
+   */
+  NextFireTime?: string
+  /**
+   * 
+枚举值:
+| uint | 描述 |
+| --- | --- |
+| 0 |  |
+| 1 | 启用 |
+| 2 | 暂停 |
+| 3 | 一次性任务已完成 |
+   */
+  Status?: number
+  /**
+   * 成功次数
+   */
+  SuccessCount?: string
+  /**
+   * 未读数量
+   */
+  UnreadRunLogCount?: string
+}
+
+/**
  * 模式配置 - 包含不同模式的独有配置
  */
 export interface AppModeConfig {
@@ -5782,43 +7372,17 @@ export interface AppModeConfig {
 }
 
 /**
- * Tool
+ * TimerConfig
  */
-export interface Tool {
+export interface TimerConfig {
   /**
-   * <p>工具计费信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 推送配置
    */
-  Billing?: ToolBilling
+  PushConfig?: TimerPushConfig
   /**
-   * <p>工具调用次数</p><p>单位：次数</p>
+   * 定时配置
    */
-  CallCount?: number
-  /**
-   * <p>工具描述信息</p>
-   */
-  Description?: string
-  /**
-   * <p>工具名称</p>
-   */
-  Name?: string
-  /**
-   * <p>插件ID</p>
-   */
-  PluginId?: string
-  /**
-   * <table><tbody><tr><td>枚举项</td><td>枚举值</td><td>描述</td></tr><tr><td>TOOL_ACCESS_MODE_UNKNOWN</td><td>0</td><td>未指定</td></tr><tr><td>TOOL_ACCESS_MODE_READ_ONLY</td><td>1</td><td>只读</td></tr><tr><td>TOOL_ACCESS_MODE_WRITE_DELETE</td><td>2</td><td>写/删除</td></tr></tbody></table>
-   */
-  ToolAccessMode?: number
-  /**
-   * <p>工具配置信息</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ToolConfig?: ToolConfig
-  /**
-   * <p>工具ID</p>
-   */
-  ToolId?: string
+  Schedule?: TimerScheduleConfig
 }
 
 /**
