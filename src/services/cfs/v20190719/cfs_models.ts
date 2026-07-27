@@ -20,67 +20,67 @@
  */
 export interface CreateMigrationTaskRequest {
   /**
-   * 迁移任务名称
+   * <p>迁移任务名称</p>
    */
   TaskName: string
   /**
-   * 迁移方式标志位，默认为0。0：桶迁移；1：清单迁移
+   * <p>迁移方式标志位，默认为0。0：桶迁移；1：清单迁移</p>
    */
   MigrationType: number
   /**
-   * 迁移模式，默认为0。0: 全量迁移
+   * <p>迁移模式，默认为0。0: 全量迁移</p>
    */
   MigrationMode: number
   /**
-   * 数据源账号的 SecretId
+   * <p>数据源账号的 SecretId</p>
    */
   SrcSecretId: string
   /**
-   * 数据源账号的 SecretKey
+   * <p>数据源账号的 SecretKey</p>
    */
   SrcSecretKey: string
   /**
-   * 文件系统实例 ID，通过查询文件系统 [DescribeCfsFileSystems](https://cloud.tencent.com/document/product/582/38170) 获取
+   * <p>文件系统实例 ID，通过查询文件系统 <a href="https://cloud.tencent.com/document/product/582/38170">DescribeCfsFileSystems</a> 获取</p>
    */
   FileSystemId: string
   /**
-   * 文件系统路径
+   * <p>文件系统路径</p>
    */
   FsPath: string
   /**
-   * 同名文件迁移时覆盖策略，默认为0。0: 最后修改时间优先；1: 全覆盖；2: 不覆盖
+   * <p>同名文件迁移时覆盖策略，默认为0。0: 最后修改时间优先；1: 全覆盖；2: 不覆盖</p>
    */
   CoverType: number
   /**
-   * 数据源服务商。COS：腾讯云COS，OSS：阿里云OSS，OBS：华为云OBS
+   * <p>数据源服务商</p><p>枚举值：</p><ul><li>COS： 腾讯云COS</li><li>OSS： 阿里云OSS</li><li>OBS： 华为云OBS</li><li>BOS： 百度云BOS</li><li>TOS： 火山引擎TOS</li></ul>
    */
   SrcService: string
   /**
-   * 数据源桶名称；桶迁移时，BucketName 和 BucketAddress 必填其一，清单迁移时无需填写此参数
+   * <p>数据源桶名称；桶迁移时，BucketName 和 BucketAddress 必填其一，清单迁移时无需填写此参数</p>
    */
   BucketName?: string
   /**
-   * 数据源桶地域
+   * <p>数据源桶地域</p>
    */
   BucketRegion?: string
   /**
-   * 数据源桶地址；桶迁移时，BucketName 和 BucketAddress 必填其一，清单迁移时无需填写此参数
+   * <p>数据源桶地址；桶迁移时，BucketName 和 BucketAddress 必填其一，清单迁移时无需填写此参数</p>
    */
   BucketAddress?: string
   /**
-   * 清单地址，迁移方式为清单迁移时必填
+   * <p>清单地址，迁移方式为清单迁移时必填</p>
    */
   ListAddress?: string
   /**
-   * 目标文件系统名称
+   * <p>目标文件系统名称</p>
    */
   FsName?: string
   /**
-   * 源桶路径，默认为 /
+   * <p>源桶路径，默认为 /</p>
    */
   BucketPath?: string
   /**
-   * 迁移方向；0：对象存储迁移至文件系统，1：文件系统迁移至对象存储。默认为0
+   * <p>迁移方向；0：对象存储迁移至文件系统，1：文件系统迁移至对象存储。默认为0</p>
    */
   Direction?: number
 }
@@ -238,109 +238,113 @@ export interface CreateLifecyclePolicyDownloadTaskRequest {
  */
 export interface MigrationTaskInfo {
   /**
-   * 迁移任务名称
+   * <p>迁移任务名称</p>
    */
   TaskName?: string
   /**
-   * 迁移任务id
+   * <p>迁移任务id</p>
    */
   TaskId?: string
   /**
-   * 迁移方式标志位，默认为0。0: 桶迁移；1: 清单迁移
+   * <p>迁移方式标志位，默认为0。0: 桶迁移；1: 清单迁移</p>
    */
   MigrationType?: number
   /**
-   * 迁移模式，默认为0。0: 全量迁移
+   * <p>迁移模式，默认为0。0: 全量迁移</p>
    */
   MigrationMode?: number
   /**
-   * 数据源桶名称
+   * <p>数据源桶名称</p>
    */
   BucketName?: string
   /**
-   * 数据源桶地域
+   * <p>数据源桶地域</p>
    */
   BucketRegion?: string
   /**
-   * 数据源桶地址
+   * <p>数据源桶地址</p>
    */
   BucketAddress?: string
   /**
-   * 清单地址
+   * <p>清单地址</p>
    */
   ListAddress?: string
   /**
-   * 文件系统实例名称
+   * <p>文件系统实例名称</p>
    */
   FsName?: string
   /**
-   * 文件系统实例Id
+   * <p>文件系统实例Id</p>
    */
   FileSystemId?: string
   /**
-   * 文件系统路径
+   * <p>文件系统路径</p>
    */
   FsPath?: string
   /**
-   * 同名文件迁移时覆盖策略，默认为0。0: 最后修改时间优先；1: 全覆盖；2: 不覆盖
+   * <p>同名文件迁移时覆盖策略，默认为0。0: 最后修改时间优先；1: 全覆盖；2: 不覆盖</p>
    */
   CoverType?: number
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: number
   /**
-   * 完成/终止时间
+   * <p>完成/终止时间</p>
    */
   EndTime?: number
   /**
-   * 迁移状态。0: 已完成；1: 创建中；2: 运行中；3: 终止中；4: 已终止；5: 创建失败；6: 运行失败；7: 结束中；8: 删除中；9: 等待中
+   * <p>迁移状态。0: 已完成；1: 创建中；2: 运行中；3: 终止中；4: 已终止；5: 创建失败；6: 运行失败；7: 结束中；8: 删除中；9: 等待中</p>
    */
   Status?: number
   /**
-   * 文件数量
+   * <p>文件数量</p>
    */
   FileTotalCount?: number
   /**
-   * 已迁移文件数量
+   * <p>已迁移文件数量</p>
    */
   FileMigratedCount?: number
   /**
-   * 迁移失败文件数量
+   * <p>迁移失败文件数量</p>
    */
   FileFailedCount?: number
   /**
-   * 文件容量，单位Byte
+   * <p>文件容量，单位Byte</p>
    */
   FileTotalSize?: number
   /**
-   * 已迁移文件容量，单位Byte
+   * <p>已迁移文件容量，单位Byte</p>
    */
   FileMigratedSize?: number
   /**
-   * 迁移失败文件容量，单位Byte
+   * <p>迁移失败文件容量，单位Byte</p>
    */
   FileFailedSize?: number
   /**
-   * 全部清单
+   * <p>全部清单</p>
    */
   FileTotalList?: string
   /**
-   * 已完成文件清单
+   * <p>已完成文件清单</p>
    */
   FileCompletedList?: string
   /**
-   * 失败文件清单
+   * <p>失败文件清单</p>
    */
   FileFailedList?: string
   /**
-   * 源桶路径
+   * <p>源桶路径</p>
    */
   BucketPath?: string
   /**
-   * 迁移方向。0: 对象存储迁移至文件系统，1: 文件系统迁移至对象存储。默认 0
+   * <p>迁移方向。0: 对象存储迁移至文件系统，1: 文件系统迁移至对象存储。默认 0</p>
    */
   Direction?: number
+  /**
+   * <p>数据源服务商</p><p>枚举值：</p><ul><li>COS： 腾讯云COS</li><li>OSS： 阿里云OSS</li><li>OBS： 华为云OBS</li><li>BOS： 百度云BOS</li><li>TOS： 火山引擎TOS</li></ul>
+   */
+  SrcService?: string
 }
 
 /**
@@ -3108,7 +3112,7 @@ export interface UpdateCfsFileSystemPGroupRequest {
  */
 export interface CreateMigrationTaskResponse {
   /**
-   * 迁移任务 ID
+   * <p>迁移任务 ID</p>
    */
   TaskId?: string
   /**

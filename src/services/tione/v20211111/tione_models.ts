@@ -203,6 +203,10 @@ export interface CreateModelServiceRequest {
    * <p>网关相关配置</p>
    */
   GatewayConfig?: GatewayConfig
+  /**
+   * <p>资源供应属性(潮汐/竞价等供应模式);空表示常规按量后付费</p>
+   */
+  ResourceSupplyAttribute?: ResourceSupplyAttribute
 }
 
 /**
@@ -963,6 +967,11 @@ export interface Service {
    * <p>变更服务的子账户名称</p>
    */
   ChangerName?: string
+  /**
+   * <p>资源供应属性(潮汐/竞价等供应模式);空表示常规按量后付费</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceSupplyAttribute?: ResourceSupplyAttribute
 }
 
 /**
@@ -7028,6 +7037,16 @@ export interface MountLimitInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtraConf?: StorageExtraConf
+}
+
+/**
+ * 资源供应属性
+ */
+export interface ResourceSupplyAttribute {
+  /**
+   * <p>资源供应类型。TIDE:潮汐;SPOT:竞价;空:常规按量后付费</p>
+   */
+  SupplyType?: string
 }
 
 /**

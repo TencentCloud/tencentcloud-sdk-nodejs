@@ -958,6 +958,16 @@ it("dlc.v20210125.DescribeNotebookSessionStatementSqlResult", async function () 
     }
 })
 
+it("dlc.v20210125.DescribeMCPSubUin", async function () {
+    try {
+       const data = await client.DescribeMCPSubUin({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateNotebookSessionStatement", async function () {
     try {
        const data = await client.CreateNotebookSessionStatement({})
@@ -1508,6 +1518,16 @@ it("dlc.v20210125.QueryResult", async function () {
     }
 })
 
+it("dlc.v20210125.ModifySparkAppForTDLC", async function () {
+    try {
+       const data = await client.ModifySparkAppForTDLC({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CheckLockMetaData", async function () {
     try {
        const data = await client.CheckLockMetaData({})
@@ -1571,6 +1591,16 @@ it("dlc.v20210125.DescribeTaskResult", async function () {
 it("dlc.v20210125.CreateExportTask", async function () {
     try {
        const data = await client.CreateExportTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.CreateSparkAppForTDLC", async function () {
+    try {
+       const data = await client.CreateSparkAppForTDLC({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

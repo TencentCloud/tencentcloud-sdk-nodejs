@@ -2264,35 +2264,35 @@ export interface DescribeApplicationExitReportListRequest {
  */
 export interface DescribeRumLogTotalV2Request {
   /**
-   * 排序方式 desc asc
+   * <p>排序方式 desc asc</p>
    */
   OrderBy: string
   /**
-   * 开始时间（必填）格式为时间戳 毫秒
+   * <p>查询日志开始时间（必填）格式为时间戳 毫秒</p>
    */
   StartTime: number
   /**
-   * 单次查询返回的原始日志条数，最大值为100（必填）
+   * <p>单次查询返回的原始日志条数，最大值为100（必填）</p>
    */
   Limit: number
   /**
-   * 查询的相关参数
+   * <p>过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：https://cloud.tencent.com/document/product/248/87223</p>
    */
   Filter: string
   /**
-   * 结束时间（必填）格式为时间戳 毫秒
+   * <p>查询日志结束时间（必填）格式为时间戳 毫秒</p>
    */
   EndTime: number
   /**
-   * 项目ID（必填）
+   * <p>项目ID（必填）</p>
    */
   ID: number
   /**
-   * 上次查询的最后一个日志的时间戳
+   * <p>上次查询的最后一个日志的时间戳</p>
    */
   LastTime?: number
   /**
-   * 上次查询的最后一个日志的rowId
+   * <p>上次查询的最后一个日志的rowId</p>
    */
   LastRowId?: number
 }
@@ -2858,27 +2858,27 @@ export interface DescribeDataLogUrlStatisticsResponse {
  */
 export interface DescribeRumLogExportV2Request {
   /**
-   * Export name
+   * <p>Name（string，必填）：导出任务名称标识，需要在使用API创建导出任务时填写。此字段为后续能力扩展预留，不在查询结果中返回。</p>
    */
   Name: string
   /**
-   * Start time
+   * <p>查询日志开始时间(必填)</p>
    */
   StartTime: number
   /**
-   * Query statement
+   * <p>过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：https://cloud.tencent.com/document/product/248/87223</p>
    */
   Filter: string
   /**
-   * End time
+   * <p>查询日志结束时间(必填)</p>
    */
   EndTime: number
   /**
-   * Project ID
+   * <p>项目ID</p>
    */
   ID: number
   /**
-   * c字段
+   * <p>注意：这个字段必选，不能为空！选择要导出哪些字段的参数，对应日志的列，可查看文档：https://cloud.tencent.com/document/product/248/87223</p><p>枚举值：</p><ul><li>level： 日志类型</li><li>url： URL</li><li>ip： 用户终端IP</li><li>version： 版本</li></ul>
    */
   Fields?: Array<string>
 }
@@ -3058,7 +3058,7 @@ export interface DescribeDataPvUrlStatisticsRequest {
  */
 export interface DescribeRumStatsLogListV2Response {
   /**
-   * Query result in JSON string format
+   * <p>日志时间分布</p>
    */
   Result?: string
   /**
@@ -3828,7 +3828,7 @@ export interface DescribeDataWebVitalsPageV2Response {
  */
 export interface DescribeRumLogExportV2Response {
   /**
-   * Query result in JSON string format
+   * <p>日志导出任务TaskId</p>
    */
   Result?: string
   /**
@@ -4492,23 +4492,23 @@ export interface DescribeDataBridgeUrlV2Response {
  */
 export interface DescribeRumStatsLogListV2Request {
   /**
-   * 开始时间（必填）
+   * <p>查询日志开始时间（必填）</p>
    */
   StartTime: number
   /**
-   * 单次查询返回的原始日志条数，最大值为100（必填）
+   * <p>单次查询返回的原始日志条数，最大值为100（必填）</p>
    */
   Limit: number
   /**
-   * 过滤条件
+   * <p>过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：https://cloud.tencent.com/document/product/248/87223</p>
    */
   Filter: string
   /**
-   * 结束时间（必填）
+   * <p>查询日志结束时间（必填）</p>
    */
   EndTime: number
   /**
-   * 项目ID（必填）
+   * <p>项目ID（必填）</p>
    */
   ID: number
 }
@@ -4589,7 +4589,7 @@ export interface DeleteStarProjectResponse {
  */
 export interface DescribeRumLogDetailsV2Response {
   /**
-   * 日志明细
+   * <p>日志明细</p>
    */
   Result?: string
   /**
@@ -4707,7 +4707,7 @@ export interface DescribeReleaseFileSignResponse {
  */
 export interface DescribeRumLogTotalV2Response {
   /**
-   * 日志总量
+   * <p>日志总量</p>
    */
   Result?: string
   /**
@@ -5878,7 +5878,7 @@ export interface DescribeRumLogListRequest {
  */
 export interface DescribeRumGroupLogV2Response {
   /**
-   * <p>Query result in JSON string format</p>
+   * <p>日志聚合结果</p>
    */
   Result?: string
   /**
@@ -6350,35 +6350,35 @@ export interface DescribeFOOMReportListRequest {
  */
 export interface DescribeRumLogDetailsV2Request {
   /**
-   * 排序方式 desc asc
+   * <p>排序方式 desc asc</p>
    */
   OrderBy: string
   /**
-   * 开始时间（必填）格式为时间戳 毫秒
+   * <p>查询日志开始时间（必填）格式为时间戳 毫秒</p>
    */
   StartTime: number
   /**
-   * 单次查询返回的原始日志条数，最大值为100（必填）
+   * <p>单次查询返回的原始日志条数，最大值为100（必填）</p>
    */
   Limit: number
   /**
-   * 查询的相关参数
+   * <p>过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：https://cloud.tencent.com/document/product/248/87223</p>
    */
   Filter: string
   /**
-   * 结束时间（必填）格式为时间戳 毫秒
+   * <p>查询日志结束时间（必填）格式为时间戳 毫秒</p>
    */
   EndTime: number
   /**
-   * 项目ID（必填）
+   * <p>项目ID（必填）</p>
    */
   ID: number
   /**
-   * 上次查询的最后一个日志的时间戳
+   * <p>上次查询的最后一个日志的时间戳</p>
    */
   LastTime?: number
   /**
-   * 上次查询的最后一个日志的rowId
+   * <p>上次查询的最后一个日志的rowId</p>
    */
   LastRowId?: number
 }
@@ -6744,7 +6744,7 @@ export interface DescribeRumGroupLogV2Request {
    */
   OrderBy: string
   /**
-   * <p>开始时间（必填）</p>
+   * <p>查询日志开始时间（必填）</p>
    */
   StartTime: number
   /**
@@ -6752,11 +6752,11 @@ export interface DescribeRumGroupLogV2Request {
    */
   Limit: number
   /**
-   * <p>过滤条件</p>
+   * <p>过滤条件，其中key与运算符(Operator)对应可选字段枚举值与示例查看文档：https://cloud.tencent.com/document/product/248/87223</p>
    */
   Filter: string
   /**
-   * <p>结束时间（必填）</p>
+   * <p>查询日志结束时间（必填）</p>
    */
   EndTime: number
   /**

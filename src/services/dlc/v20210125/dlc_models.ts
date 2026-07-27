@@ -284,6 +284,16 @@ export interface PythonSparkImage {
 }
 
 /**
+ * 数据格式其它类型。
+ */
+export interface Other {
+  /**
+   * 枚举类型，默认值为Json，可选值为[Json, Parquet, ORC, AVRD]之一。
+   */
+  Format?: string
+}
+
+/**
  * DLC分区信息查询返回数据结构
  */
 export interface MixedTablePartitions {
@@ -1091,29 +1101,13 @@ export interface BatchSqlTask {
 }
 
 /**
- * 引擎资源弹性伸缩策略
+ * ModifySparkAppForTDLC返回参数结构体
  */
-export interface ScheduleElasticityConf {
+export interface ModifySparkAppForTDLCResponse {
   /**
-   * 是否开启弹性伸缩：true/false
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ScheduledElasticityEnabled?: boolean
-  /**
-   * 调度类型：ONCE（一次性调度），DAILY（每日调度），WEEKLY（每周调度），MONTHLY（每月调度）
-   */
-  ScheduleType?: string
-  /**
-   * 调度日期：WEEKLY传：1~7； MONTHLY传:1~31；其它类型不传
-   */
-  ScheduleDays?: Array<number | bigint>
-  /**
-   * 调度时区
-   */
-  TimeZone?: string
-  /**
-   * 弹性伸缩计划
-   */
-  ElasticPlans?: Array<ElasticPlan>
+  RequestId?: string
 }
 
 /**
@@ -3075,17 +3069,13 @@ export interface CreateDatabaseResponse {
 }
 
 /**
- * DropDMSPartitions返回参数结构体
+ * DeleteDataMaskStrategy请求参数结构体
  */
-export interface DropDMSPartitionsResponse {
+export interface DeleteDataMaskStrategyRequest {
   /**
-   * 状态
+   * 数据脱敏策略Id
    */
-  Status?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  StrategyId?: string
 }
 
 /**
@@ -4647,13 +4637,17 @@ export interface CSV {
 }
 
 /**
- * DeleteDataMaskStrategy请求参数结构体
+ * DropDMSPartitions返回参数结构体
  */
-export interface DeleteDataMaskStrategyRequest {
+export interface DropDMSPartitionsResponse {
   /**
-   * 数据脱敏策略Id
+   * 状态
    */
-  StrategyId?: string
+  Status?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5844,13 +5838,43 @@ export interface DescribeDMSDatabaseRequest {
 export type DescribeLakeFsDirSummaryRequest = null
 
 /**
- * 数据格式其它类型。
+ * 引擎资源弹性伸缩策略
  */
-export interface Other {
+export interface ScheduleElasticityConf {
   /**
-   * 枚举类型，默认值为Json，可选值为[Json, Parquet, ORC, AVRD]之一。
+   * 是否开启弹性伸缩：true/false
    */
-  Format?: string
+  ScheduledElasticityEnabled?: boolean
+  /**
+   * 调度类型：ONCE（一次性调度），DAILY（每日调度），WEEKLY（每周调度），MONTHLY（每月调度）
+   */
+  ScheduleType?: string
+  /**
+   * 调度日期：WEEKLY传：1~7； MONTHLY传:1~31；其它类型不传
+   */
+  ScheduleDays?: Array<number | bigint>
+  /**
+   * 调度时区
+   */
+  TimeZone?: string
+  /**
+   * 弹性伸缩计划
+   */
+  ElasticPlans?: Array<ElasticPlan>
+}
+
+/**
+ * DescribeMCPSubUin返回参数结构体
+ */
+export interface DescribeMCPSubUinResponse {
+  /**
+   * <p>子 Uin</p>
+   */
+  Subuin?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7833,6 +7857,11 @@ export interface CreateTaskRequest {
 }
 
 /**
+ * DescribeMCPSubUin请求参数结构体
+ */
+export type DescribeMCPSubUinRequest = null
+
+/**
  * DescribeClusterMonitorInfos请求参数结构体
  */
 export interface DescribeClusterMonitorInfosRequest {
@@ -8788,6 +8817,136 @@ export interface SmartOptimizerIndexPolicy {
    * 开启索引
    */
   IndexEnable?: string
+}
+
+/**
+ * ModifySparkAppForTDLC请求参数结构体
+ */
+export interface ModifySparkAppForTDLCRequest {
+  /**
+   * <p>spark作业名</p>
+   */
+  AppName: string
+  /**
+   * <p>spark作业类型，1代表spark jar作业，2代表spark streaming作业</p>
+   */
+  AppType: number
+  /**
+   * <p>执行spark作业的数据引擎名称</p>
+   */
+  DataEngine: string
+  /**
+   * <p>spark作业程序包文件路径</p>
+   */
+  AppFile: string
+  /**
+   * <p>数据访问策略，CAM Role arn</p>
+   */
+  RoleArn: number
+  /**
+   * <p>指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）</p>
+   */
+  AppDriverSize: string
+  /**
+   * <p>指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）</p>
+   */
+  AppExecutorSize: string
+  /**
+   * <p>spark作业executor个数</p>
+   */
+  AppExecutorNums: number
+  /**
+   * <p>spark作业Id</p>
+   */
+  SparkAppId: string
+  /**
+   * <p>该字段已下线，请使用字段Datasource</p>
+   */
+  Eni?: string
+  /**
+   * <p>spark作业程序包是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）</p>
+   */
+  IsLocal?: string
+  /**
+   * <p>spark作业主类</p>
+   */
+  MainClass?: string
+  /**
+   * <p>spark配置，以换行符分隔</p>
+   */
+  AppConf?: string
+  /**
+   * <p>spark 作业依赖jar包是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）</p>
+   */
+  IsLocalJars?: string
+  /**
+   * <p>spark 作业依赖jar包（--jars），以逗号分隔</p>
+   */
+  AppJars?: string
+  /**
+   * <p>spark作业依赖文件资源是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）</p>
+   */
+  IsLocalFiles?: string
+  /**
+   * <p>spark作业依赖文件资源（--files）（非jar、zip），以逗号分隔</p>
+   */
+  AppFiles?: string
+  /**
+   * <p>pyspark：依赖上传方式，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）</p>
+   */
+  IsLocalPythonFiles?: string
+  /**
+   * <p>pyspark作业依赖python资源（--py-files），支持py/zip/egg等归档格式，多文件以逗号分隔</p>
+   */
+  AppPythonFiles?: string
+  /**
+   * <p>spark作业程序入参</p>
+   */
+  CmdArgs?: string
+  /**
+   * <p>最大重试次数，只对spark流任务生效</p>
+   */
+  MaxRetries?: number
+  /**
+   * <p>数据源名</p>
+   */
+  DataSource?: string
+  /**
+   * <p>spark作业依赖archives资源是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）</p>
+   */
+  IsLocalArchives?: string
+  /**
+   * <p>spark作业依赖archives资源（--archives），支持tar.gz/tgz/tar等归档格式，以逗号分隔</p>
+   */
+  AppArchives?: string
+  /**
+   * <p>Spark Image 版本号</p>
+   */
+  SparkImage?: string
+  /**
+   * <p>Spark Image 版本名称</p>
+   */
+  SparkImageVersion?: string
+  /**
+   * <p>指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于AppExecutorNums</p>
+   */
+  AppExecutorMaxNumbers?: number
+  /**
+   * <p>关联dlc查询脚本</p>
+   */
+  SessionId?: string
+  /**
+   * <p>任务资源配置是否继承集群配置模板：0（默认）不继承、1：继承</p>
+   */
+  IsInherit?: number
+  /**
+   * <p>是否使用session脚本的sql运行任务：false：否，true：是</p>
+   */
+  IsSessionStarted?: boolean
+  /**
+   * <p>标准引擎依赖包</p>
+   */
+  DependencyPackages?: Array<DependencyPackage>
 }
 
 /**
@@ -10551,6 +10710,20 @@ export interface DescribeTaskDetailResponse {
    * 任务详情信息
    */
   TaskDetail?: TaskFullRespInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateSparkAppForTDLC返回参数结构体
+ */
+export interface CreateSparkAppForTDLCResponse {
+  /**
+   * <p>App唯一标识</p>
+   */
+  SparkAppId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13196,6 +13369,11 @@ export interface DescribeWorkGroupsRequest {
    */
   Sorting?: string
 }
+
+/**
+ * CreateSparkAppForTDLC请求参数结构体
+ */
+export type CreateSparkAppForTDLCRequest = null
 
 /**
  * LockMetaData请求参数结构体

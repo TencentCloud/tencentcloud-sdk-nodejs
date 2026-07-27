@@ -237,6 +237,7 @@ import {
   Container,
   DeleteDatasetResponse,
   MountLimitInfo,
+  ResourceSupplyAttribute,
   DescribePresetImageListResponse,
   TrainingTaskDetail,
   DescribeExportRequest,

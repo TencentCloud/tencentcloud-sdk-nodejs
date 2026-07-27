@@ -1249,11 +1249,11 @@ export interface DescribeLoginConfigRequest {
  */
 export interface CreateHTTPServiceRouteRequest {
   /**
-   * 环境ID
+   * <p>环境ID</p>
    */
   EnvId: string
   /**
-   * 域名路由信息
+   * <p>域名路由信息</p>
    */
   Domain: HTTPServiceDomainParam
 }
@@ -3993,6 +3993,24 @@ export interface DescribeStaticStoreRequest {
 }
 
 /**
+ * 域名归属权验证指引信息
+ */
+export interface OwnershipVerificationInfo {
+  /**
+   * <p>归属权校验的域名</p>
+   */
+  Domain?: string
+  /**
+   * <p>归属权校验dns校验信息</p>
+   */
+  DnsVerification?: Array<OwnershipVerificationDnsInfo>
+  /**
+   * <p>归属权校验文件校验信息</p>
+   */
+  FileVerification?: Array<OwnershipVerificationFileInfo>
+}
+
+/**
  * http访问服务客户端限频
  */
 export interface HTTPServiceQPSPerClient {
@@ -4248,45 +4266,17 @@ export interface CreateTableResponse {
 }
 
 /**
- * 用户信息
+ * 域名归属权验证指引文件验证信息
  */
-export interface User {
+export interface OwnershipVerificationFileInfo {
   /**
-   * 用户ID
+   * <p>归属权校验文件路径</p>
    */
-  Uid?: string
+  Path?: string
   /**
-   * 用户名
+   * <p>归属权校验文件内容</p>
    */
-  Name?: string
-  /**
-   * 用户类型：internalUser-内部用户、externalUser-外部用户
-   */
-  Type?: string
-  /**
-   * 用户状态：ACTIVE（激活）、BLOCKED（冻结）
-   */
-  UserStatus?: string
-  /**
-   * 用户昵称
-   */
-  NickName?: string
-  /**
-   * 手机号
-   */
-  Phone?: string
-  /**
-   * 邮箱
-   */
-  Email?: string
-  /**
-   * 头像链接
-   */
-  AvatarUrl?: string
-  /**
-   * 用户描述
-   */
-  Description?: string
+  Content?: string
 }
 
 /**
@@ -4993,6 +4983,48 @@ export interface DescribeCurveDataRequest {
 }
 
 /**
+ * 用户信息
+ */
+export interface User {
+  /**
+   * 用户ID
+   */
+  Uid?: string
+  /**
+   * 用户名
+   */
+  Name?: string
+  /**
+   * 用户类型：internalUser-内部用户、externalUser-外部用户
+   */
+  Type?: string
+  /**
+   * 用户状态：ACTIVE（激活）、BLOCKED（冻结）
+   */
+  UserStatus?: string
+  /**
+   * 用户昵称
+   */
+  NickName?: string
+  /**
+   * 手机号
+   */
+  Phone?: string
+  /**
+   * 邮箱
+   */
+  Email?: string
+  /**
+   * 头像链接
+   */
+  AvatarUrl?: string
+  /**
+   * 用户描述
+   */
+  Description?: string
+}
+
+/**
  * DescribeStaticStore返回参数结构体
  */
 export interface DescribeStaticStoreResponse {
@@ -5583,6 +5615,10 @@ export interface DeleteAuthDomainRequest {
  */
 export interface CreateHTTPServiceRouteResponse {
   /**
+   * <p>归属权校验不通过返回信息，根据校验信息配置dns或者文件验证，可通过VerifyHTTPServiceRoute接口验证归属权是否通过</p>
+   */
+  OwnershipVerification?: OwnershipVerificationInfo
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -5650,6 +5686,32 @@ export interface ModifyClientRequest {
    * Access Token 的有效期，单位为秒。超过该时间后 Access Token 将失效，需使用 Refresh Token 重新换取。最小有效值为 1800 秒（小于 1800 将被忽略，使用默认值），默认值为 7200（即 2 小时）。该值应小于 RefreshTokenExpiresIn。
    */
   AccessTokenExpiresIn?: number
+}
+
+/**
+ * 安全网关自定义配置
+ */
+export interface WxGatewayCustomConfig {
+  /**
+   * 是否开启x-real-ip
+   */
+  IsOpenXRealIp?: boolean
+  /**
+   * 封禁配置
+   */
+  BanConfig?: BanConfig
+  /**
+   * 获取源ip方式，PPV1(Proxy Protocol V1)、PPV2(Proxy Protocol V2)、TOA(tcp option address)
+   */
+  SourceIpType?: string
+  /**
+   * 日志信息
+   */
+  LogConfig?: CustomLogConfig
+  /**
+   * 是否开启http1.0
+   */
+  IsAcceptHttpOne?: boolean
 }
 
 /**
@@ -5806,7 +5868,7 @@ export interface HTTPServiceDomainParam {
    */
   Domain: string
   /**
-   * <p>绑定类型</p><p>枚举值：</p><ul><li>DIRECT： 直连到HTTP访问服务</li><li>CDN： 接入云开发CDN</li><li>CUSTOM： 自定义接入类型（CDN、EO、WAF等接入）</li></ul><p>默认值：DIRECT</p>
+   * <p>绑定类型</p><p>枚举值：</p><ul><li>DIRECT： 直连到HTTP访问服务</li><li>CDN： 接入云开发CDN（即将下线）</li><li>CUSTOM： 自定义接入类型（CDN、EO、WAF等接入）</li><li>EO： 接入云开发EdgeOne</li></ul><p>默认值：DIRECT</p>
    */
   AccessType?: string
   /**
@@ -6132,29 +6194,21 @@ export interface MessageLocalized {
 }
 
 /**
- * 安全网关自定义配置
+ * 域名归属权验证指引DNS验证信息
  */
-export interface WxGatewayCustomConfig {
+export interface OwnershipVerificationDnsInfo {
   /**
-   * 是否开启x-real-ip
+   * <p>归属权校验dns子域名</p>
    */
-  IsOpenXRealIp?: boolean
+  Subdomain?: string
   /**
-   * 封禁配置
+   * <p>归属权校验dns记录类型</p>
    */
-  BanConfig?: BanConfig
+  RecordType?: string
   /**
-   * 获取源ip方式，PPV1(Proxy Protocol V1)、PPV2(Proxy Protocol V2)、TOA(tcp option address)
+   * <p>归属权校验dns记录值</p>
    */
-  SourceIpType?: string
-  /**
-   * 日志信息
-   */
-  LogConfig?: CustomLogConfig
-  /**
-   * 是否开启http1.0
-   */
-  IsAcceptHttpOne?: boolean
+  RecordValue?: string
 }
 
 /**
@@ -6466,11 +6520,11 @@ export interface HTTPServiceRouteParam {
    */
   Path: string
   /**
-   * <p>上游服务类型。创建时必填，修改时可选填</p><p>枚举值：</p><ul><li>SCF： 云函数</li><li>CBR： 云托管</li><li>STATIC_STORE： 静态托管</li><li>WEB_SCF： web云函数</li><li>LH： Lighthouse</li></ul>
+   * <p>上游服务类型。创建时必填，修改时可选填</p><p>枚举值：</p><ul><li>SCF： 云函数</li><li>CBR： 云托管</li><li>STATIC_STORE： 静态托管</li><li>WEB_SCF： web云函数</li><li>LH： Lighthouse</li><li>STORAGE： 云存储</li></ul>
    */
   UpstreamResourceType?: string
   /**
-   * <p>上游服务名。创建时必填，修改时可选填</p>
+   * <p>上游服务名。创建时必填，修改时可选填。HTTPServiceRouteServiceType类型为STATIC_STORE时，可不填，默认staticstore；HTTPServiceRouteServiceType类型为STORAGE时，可不填，默认storage。其他上游类型必须填写准确的服务名</p>
    */
   UpstreamResourceName?: string
   /**

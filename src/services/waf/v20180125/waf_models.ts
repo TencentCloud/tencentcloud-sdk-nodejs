@@ -3811,20 +3811,19 @@ export interface CreatePostCKafkaFlowResponse {
  */
 export interface FieldWriteConfig {
   /**
-   * 1:开启 0:不开启
+   * <p>1:开启 0:不开启</p>
    */
   EnableHeaders?: number
   /**
-   * 1:开启 0:不开启
+   * <p>1:开启 0:不开启</p>
    */
   EnableBody?: number
   /**
-   * 1:开启 0:不开启
+   * <p>1:开启 0:不开启</p>
    */
   EnableBot?: number
   /**
-   * 响应方向body
-1:开启 0:不开启
+   * <p>响应方向body<br>1:开启 0:不开启</p>
    */
   EnableResponse?: number
 }

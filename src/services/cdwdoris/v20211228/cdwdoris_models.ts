@@ -405,72 +405,71 @@ export interface WorkloadGroupConfig {
  */
 export interface BackupScheduleInfo {
   /**
-   * 迁移类型：
-1-远端集群迁移；2-COS迁移
+   * <p>迁移类型：<br>1-远端集群迁移；2-COS迁移</p>
    */
   BackupType?: number
   /**
-   * 当前任务现存实例数
+   * <p>当前任务现存实例数</p>
    */
   ExistCount?: number
   /**
-   * cos信息
+   * <p>cos信息</p>
    */
   CosSourceInfo?: string
   /**
-   * doris信息
+   * <p>doris信息</p>
    */
   DorisSourceInfo?: string
   /**
-   * 恢复类型
+   * <p>恢复类型</p>
    */
   RestoreType?: number
   /**
-   * 快照保留策略
+   * <p>快照保留策略</p>
    */
   SnapshotRemainPolicy?: SnapshotRemainPolicy
   /**
-   * 远程备份地域
+   * <p>远程备份地域</p>
    */
   DataRemoteRegion?: string
   /**
-   * 是否在宽限期内
+   * <p>是否在宽限期内</p>
    */
   IsWithinGracePeriod?: boolean
   /**
-   * 宽限期（天数）
+   * <p>宽限期（天数）</p>
    */
   GracePeriod?: number
   /**
-   * 宽限开始时间
+   * <p>宽限开始时间</p>
    */
   GraceStartTime?: string
   /**
-   * 托管桶类型：standard-标准，多可用区-MAZ
+   * <p>托管桶类型：standard-标准，多可用区-MAZ</p>
    */
   BucketType?: string
   /**
-   * 是否开启安全锁：0-未开启，1-已开启
+   * <p>是否开启安全锁：0-未开启，1-已开启</p>
    */
   EnableSecurityLock?: number
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 实例名
+   * <p>实例名</p>
    */
   InstanceName?: string
   /**
-   * 实例状态
+   * <p>实例状态</p>
    */
   InstanceStatus?: string
   /**
-   * 实例状态描述
+   * <p>实例状态描述</p>
    */
   InstanceStatusDesc?: string
   /**
-   * 桶加密状态信息
+   * <p>桶加密状态信息</p>
    */
   BucketEncryption?: BucketEncryptionInfo
 }
@@ -4111,125 +4110,141 @@ export interface ModifyInstanceKeyValConfigsRequest {
  */
 export interface BackUpJobDisplay {
   /**
-   * 备份实例id
+   * <p>备份实例id</p>
    */
   JobId?: number
   /**
-   * 备份实例名
+   * <p>备份实例名</p>
    */
   Snapshot?: string
   /**
-   * 备份数据量
+   * <p>备份数据量</p>
    */
   BackUpSize?: number
   /**
-   * 备份单副本数据量
+   * <p>备份单副本数据量</p>
    */
   BackUpSingleSize?: number
   /**
-   * 实例创建时间
+   * <p>实例创建时间</p>
    */
   BackUpTime?: string
   /**
-   * 实例过期时间
+   * <p>实例过期时间</p>
    */
   ExpireTime?: string
   /**
-   * 实例状态
+   * <p>实例状态</p>
    */
   JobStatus?: string
   /**
-   * 0为默认。1时是对远端的doris进行备份，不周期，一次性
+   * <p>0为默认。1时是对远端的doris进行备份，不周期，一次性</p>
    */
   BackupType?: number
   /**
-   * 0为默认。1时是立即备份。2时是迁移
+   * <p>0为默认。1时是立即备份。2时是迁移</p>
    */
   BackupTimeType?: number
   /**
-   * 远端doris的连接信息
+   * <p>远端doris的连接信息</p>
    */
   DorisSourceInfo?: DorisSourceInfo
   /**
-   * 实例状态对应的数值
+   * <p>实例状态对应的数值</p>
    */
   JobStatusNum?: number
   /**
-   * 备份实例中关于cos的信息
+   * <p>备份实例中关于cos的信息</p>
    */
   BackupCosInfo?: BackupCosInfo
   /**
-   * 是否使用的自定义桶
+   * <p>是否使用的自定义桶</p>
    */
   IsUserDefineBucket?: boolean
   /**
-   * 错误原因
+   * <p>错误原因</p>
    */
   ErrorReason?: string
   /**
-   * 快照保留策略
+   * <p>快照保留策略</p>
    */
   SnapshotRemainPolicy?: SnapshotRemainPolicy
   /**
-   * 隔离次数
+   * <p>隔离次数</p>
    */
   IsolationCount?: number
   /**
-   * 是否开启安全锁
+   * <p>是否开启安全锁</p>
    */
   EnableSecurityLock?: number
   /**
-   * 宽限期天数
+   * <p>宽限期天数</p>
    */
   GracePeriod?: number
   /**
-   * 宽限期开始时间
+   * <p>宽限期开始时间</p>
    */
   GraceStartTime?: string
   /**
-   * 是否在宽限期内
+   * <p>是否在宽限期内</p>
    */
   IsWithinGracePeriod?: boolean
   /**
-   * 是否使用托管桶
+   * <p>是否使用托管桶</p>
    */
   UseManagedBucket?: boolean
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId?: string
   /**
-   * 实例名称
+   * <p>实例名称</p>
    */
   InstanceName?: string
   /**
-   * 实例状态
+   * <p>实例状态</p>
    */
   InstanceStatus?: string
   /**
-   * 实例状态描述
+   * <p>实例状态描述</p>
    */
   InstanceStatusDesc?: string
   /**
-   * 备份远程桶地域
+   * <p>备份远程桶地域</p>
    */
   DataRemoteRegion?: string
   /**
-   * 桶加密状态信息
+   * <p>桶加密状态信息</p>
    */
   BucketEncryption?: BucketEncryptionInfo
   /**
-   * 备份任务创建时记录的加密类型：SSE-COS/SSE-KMS/disabled
+   * <p>备份任务创建时记录的加密类型：SSE-COS/SSE-KMS/disabled</p>
    */
   Encryption?: string
   /**
-   * 是否开通加密存储：0-未开通，1-已开通
+   * <p>是否开通加密存储：0-未开通，1-已开通</p>
    */
   EncryptionEnabled?: boolean
   /**
-   * 任务调度id
+   * <p>任务调度id</p>
    */
   ScheduleId?: number
+  /**
+   * <p>总任务数（库数）</p>
+   */
+  TotalTasks?: number
+  /**
+   * <p>已完成任务数</p>
+   */
+  CompletedTasks?: number
+  /**
+   * <p>失败任务数</p>
+   */
+  FailedTasks?: number
+  /**
+   * <p>备份进度描述，如 3/5</p>
+   */
+  BackupProgress?: string
 }
 
 /**

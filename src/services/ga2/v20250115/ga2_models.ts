@@ -166,7 +166,7 @@ export interface DescribeForwardingPolicyResponse {
  */
 export interface CreateGlobalAcceleratorRequest {
   /**
-   * <p>名称，最大长度不能超过60个字节。</p>
+   * <p>名称，最大长度不能超过128个字节，不能为空。</p><p>参数格式：满足正则 ^[a-zA-Z\u4e00-\u9fa5]（首字符是英文字母或汉字），并且不满足正则 ^[\d._-]*$（整串不能只由数字/./_/-组成）。</p>
    */
   Name: string
   /**

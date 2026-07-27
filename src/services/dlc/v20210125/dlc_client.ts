@@ -26,6 +26,7 @@ import {
   Asset,
   DescribeDataMaskStrategiesResponse,
   PythonSparkImage,
+  Other,
   MixedTablePartitions,
   ModifyGovernEventRuleResponse,
   DescribeNotebookSessionsRequest,
@@ -57,7 +58,7 @@ import {
   CancelNotebookSessionStatementBatchResponse,
   SmartOptimizerChangeTablePolicy,
   BatchSqlTask,
-  ScheduleElasticityConf,
+  ModifySparkAppForTDLCResponse,
   GroupInfo,
   UnboundDatasourceHouseRequest,
   DeleteUserVpcConnectionResponse,
@@ -138,7 +139,7 @@ import {
   TasksOverview,
   EngineResourceGroupConfigPair,
   CreateDatabaseResponse,
-  DropDMSPartitionsResponse,
+  DeleteDataMaskStrategyRequest,
   CreateWorkGroupRequest,
   UpdateDataMaskStrategyRequest,
   DescribeDatasourceConnectionRequest,
@@ -205,7 +206,7 @@ import {
   DescribeNotebookSessionRequest,
   UpgradeDataEngineImageRequest,
   CSV,
-  DeleteDataMaskStrategyRequest,
+  DropDMSPartitionsResponse,
   CreateNotebookSessionStatementRequest,
   DescribeUsersRequest,
   CreateExportTaskResponse,
@@ -253,7 +254,8 @@ import {
   CreateSparkSessionBatchSQLResponse,
   DescribeDMSDatabaseRequest,
   DescribeLakeFsDirSummaryRequest,
-  Other,
+  ScheduleElasticityConf,
+  DescribeMCPSubUinResponse,
   CreateSparkAppResponse,
   CreateTaskResponse,
   MountPointAssociates,
@@ -332,6 +334,7 @@ import {
   QueryResultRequest,
   CheckDataEngineImageCanBeRollbackRequest,
   CreateTaskRequest,
+  DescribeMCPSubUinRequest,
   DescribeClusterMonitorInfosRequest,
   CreateTableRequest,
   DescribeStandardEngineResourceGroupsRequest,
@@ -367,6 +370,7 @@ import {
   CreateImportTaskResponse,
   DescribeUDFPolicyRequest,
   SmartOptimizerIndexPolicy,
+  ModifySparkAppForTDLCRequest,
   RenewDataEngineRequest,
   DescribeTasksAnalysisRequest,
   DescribeDataEngineSessionParametersResponse,
@@ -435,6 +439,7 @@ import {
   DescribeUserDataEngineConfigResponse,
   DescribeSparkAppJobRequest,
   DescribeTaskDetailResponse,
+  CreateSparkAppForTDLCResponse,
   TCHouseD,
   CreateResultDownloadResponse,
   RestartDataEngineRequest,
@@ -535,6 +540,7 @@ import {
   DMSColumnOrder,
   LockComponentInfo,
   DescribeWorkGroupsRequest,
+  CreateSparkAppForTDLCRequest,
   LockMetaDataRequest,
   DescribeResourceGroupUsageInfoRequest,
   DescribeSparkSessionBatchSQLCostRequest,
@@ -1516,6 +1522,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取账户子账户信息
+   */
+  async DescribeMCPSubUin(
+    req?: DescribeMCPSubUinRequest,
+    cb?: (error: string, rep: DescribeMCPSubUinResponse) => void
+  ): Promise<DescribeMCPSubUinResponse> {
+    return this.request("DescribeMCPSubUin", req, cb)
+  }
+
+  /**
    * 本接口（CreateNotebookSessionStatement）用于在session中执行代码片段
    */
   async CreateNotebookSessionStatement(
@@ -2068,6 +2084,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新tdlc spark作业
+   */
+  async ModifySparkAppForTDLC(
+    req: ModifySparkAppForTDLCRequest,
+    cb?: (error: string, rep: ModifySparkAppForTDLCResponse) => void
+  ): Promise<ModifySparkAppForTDLCResponse> {
+    return this.request("ModifySparkAppForTDLC", req, cb)
+  }
+
+  /**
    * 元数据锁检查
    */
   async CheckLockMetaData(
@@ -2135,6 +2161,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateExportTaskResponse) => void
   ): Promise<CreateExportTaskResponse> {
     return this.request("CreateExportTask", req, cb)
+  }
+
+  /**
+   * 创建tdlc spark作业
+   */
+  async CreateSparkAppForTDLC(
+    req?: CreateSparkAppForTDLCRequest,
+    cb?: (error: string, rep: CreateSparkAppForTDLCResponse) => void
+  ): Promise<CreateSparkAppForTDLCResponse> {
+    return this.request("CreateSparkAppForTDLC", req, cb)
   }
 
   /**
