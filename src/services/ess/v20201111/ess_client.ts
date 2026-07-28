@@ -343,6 +343,7 @@ import {
   CreatePrepareFlowGroupRequest,
   CreateFileCounterSignResponse,
   VerifyDigitFileResult,
+  ForwardRecord,
   CreatePrepareFlowRequest,
   DescribeCancelFlowsTaskRequest,
   DescribeContractReviewMarkedRiskExportTaskResponse,

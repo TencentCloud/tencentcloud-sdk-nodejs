@@ -23,6 +23,7 @@ import {
   RemoveNodesFromDBCustomClusterRequest,
   HostDetail,
   DescribeDBCustomClusterDetailResponse,
+  Label,
   LoginSettings,
   DBCustomImage,
   DBCustomClusterNode,
@@ -70,6 +71,7 @@ import {
   CreateDBCustomNodesRequest,
   InstanceExpand,
   RenewDBCustomNodeResponse,
+  Taint,
   DescribeInstanceListResponse,
   DBCustomCluster,
   DescribeDBCustomImagesResponse,
@@ -107,7 +109,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（AddNodesToDBCustomCluster）用于为 DB Custom 集群上架节点。
+   * 该接口（AddNodesToDBCustomCluster）用于为 DB Custom 集群添加已存在的节点。
    */
   async AddNodesToDBCustomCluster(
     req: AddNodesToDBCustomClusterRequest,
@@ -117,7 +119,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（ModifyDBCustomNodeTags）用于修改 DB Custom 节点的标签配置。
+   * 该接口（ModifyDBCustomNodeTags）用于修改 DB Custom 节点绑定的标签。
    */
   async ModifyDBCustomNodeTags(
     req: ModifyDBCustomNodeTagsRequest,
@@ -217,7 +219,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（RenewDBCustomNode）用于给 DB Custom 节点续费。
+   * 该接口（RenewDBCustomNode）用于给 DB Custom 节点续费，或者给已经隔离的实例解除隔离。
    */
   async RenewDBCustomNode(
     req: RenewDBCustomNodeRequest,
@@ -267,7 +269,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（RemoveNodesFromDBCustomCluster）用于从 DB Custom 集群移除节点。
+   * 该接口（RemoveNodesFromDBCustomCluster）用于从 DB Custom 集群移出节点。
    */
   async RemoveNodesFromDBCustomCluster(
     req: RemoveNodesFromDBCustomClusterRequest,
@@ -277,7 +279,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（ModifyDBCustomClusterTags）用于修改 DB Custom 集群的标签配置。
+   * 该接口（ModifyDBCustomClusterTags）用于修改 DB Custom 集群绑定的标签。
    */
   async ModifyDBCustomClusterTags(
     req: ModifyDBCustomClusterTagsRequest,
@@ -327,7 +329,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（DescribeDBCustomClusters）为DB Custom 集群列表查询接口。
+   * 该接口（DescribeDBCustomClusters）为 DB Custom 集群列表查询接口。
    */
   async DescribeDBCustomClusters(
     req: DescribeDBCustomClustersRequest,

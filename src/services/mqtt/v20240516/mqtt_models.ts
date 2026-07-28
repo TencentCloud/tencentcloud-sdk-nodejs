@@ -1401,21 +1401,170 @@ export interface MQTTMessageItem {
 }
 
 /**
- * DescribeSharedSubscriptionClient请求参数结构体
+ * DescribeInstance返回参数结构体
  */
-export interface DescribeSharedSubscriptionClientRequest {
+export interface DescribeInstanceResponse {
   /**
-   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   * <p>实例类型<br>BASIC 基础版<br>PRO  专业版<br>PLATINUM 铂金版</p>
    */
-  InstanceId: string
+  InstanceType?: string
   /**
-   * 共享订阅组名
+   * <p>实例ID</p>
    */
-  SharedName: string
+  InstanceId?: string
   /**
-   * 订阅表达式
+   * <p>实例名称</p>
    */
-  TopicFilter: string
+  InstanceName?: string
+  /**
+   * <p>主题数量</p>
+   */
+  TopicNum?: number
+  /**
+   * <p>实例最大主题数量</p>
+   */
+  TopicNumLimit?: number
+  /**
+   * <p>TPS限流值</p>
+   */
+  TpsLimit?: number
+  /**
+   * <p>创建时间，秒为单位</p>
+   */
+  CreatedTime?: number
+  /**
+   * <p>备注信息</p>
+   */
+  Remark?: string
+  /**
+   * <p>实例状态， RUNNING, 运行中 MAINTAINING，维护中 ABNORMAL，异常 OVERDUE，欠费 DESTROYED，已删除 CREATING，创建中 MODIFYING，变配中 CREATE_FAILURE，创建失败 MODIFY_FAILURE，变配失败 DELETING，删除中</p>
+   */
+  InstanceStatus?: string
+  /**
+   * <p>实例规格</p>
+   */
+  SkuCode?: string
+  /**
+   * <p>单客户端最大订阅数</p>
+   */
+  MaxSubscriptionPerClient?: number
+  /**
+   * <p>授权规则条数</p>
+   */
+  AuthorizationPolicyLimit?: number
+  /**
+   * <p>客户端数量上限</p>
+   */
+  ClientNumLimit?: number
+  /**
+   * <p>客户端证书注册方式：<br>JITP：自动注册<br>API：通过API手动注册</p>
+   */
+  DeviceCertificateProvisionType?: string
+  /**
+   * <p>自动注册设备证书时是否自动激活</p>
+   */
+  AutomaticActivation?: boolean
+  /**
+   * <p>是否自动续费。仅包年包月集群生效。 1:自动续费 0:非自动续费</p>
+   */
+  RenewFlag?: number
+  /**
+   * <p>计费模式， POSTPAID，按量计费 PREPAID，包年包月</p>
+   */
+  PayMode?: string
+  /**
+   * <p>到期时间，毫秒级时间戳</p>
+   */
+  ExpiryTime?: number
+  /**
+   * <p>预销毁时间，毫秒级时间戳</p>
+   */
+  DestroyTime?: number
+  /**
+   * <p>TLS,单向认证    mTLS,双向认证    BYOC;一机一证</p>
+   */
+  X509Mode?: string
+  /**
+   * <p>最大Ca配额</p>
+   */
+  MaxCaNum?: number
+  /**
+   * <p>证书注册码</p>
+   */
+  RegistrationCode?: string
+  /**
+   * <p>集群最大订阅数</p>
+   */
+  MaxSubscription?: number
+  /**
+   * <p>授权策略开关</p>
+   */
+  AuthorizationPolicy?: boolean
+  /**
+   * <p>共享订阅组数最大限制</p>
+   */
+  SharedSubscriptionGroupLimit?: number
+  /**
+   * <p>单个共享订阅组TopicFilter数限制</p>
+   * @deprecated
+   */
+  MaxTopicFilterPerSharedSubscriptionGroup?: number
+  /**
+   * <p>自动订阅规则条数限制</p>
+   */
+  AutoSubscriptionPolicyLimit?: number
+  /**
+   * <p>单条自动订阅规则TopicFilter数限制</p>
+   */
+  MaxTopicFilterPerAutoSubscriptionPolicy?: number
+  /**
+   * <p>是否使用默认的服务端证书</p>
+   */
+  UseDefaultServerCert?: boolean
+  /**
+   * <p>服务端CA最大数量</p>
+   */
+  TrustedCaLimit?: number
+  /**
+   * <p>服务端证书最大数量</p>
+   */
+  ServerCertLimit?: number
+  /**
+   * <p>topic前缀最大层级</p>
+   */
+  TopicPrefixSlashLimit?: number
+  /**
+   * <p>单客户端发送消息限速，单位 条/秒</p>
+   */
+  MessageRate?: number
+  /**
+   * <p>服务端tls支持的协议，使用“,”分割。例如：TLSv1.3,TLSv1.2,TLSv1.1,TLSv1</p>
+   */
+  TransportLayerSecurity?: string
+  /**
+   * <p>消息属性增强规则配额</p>
+   */
+  MessageEnrichmentRuleLimit?: number
+  /**
+   * <p>封禁规则最大数量</p>
+   */
+  BlockRuleLimit?: number
+  /**
+   * <p>删除保护开关</p>
+   */
+  DeleteProtect?: boolean
+  /**
+   * <p>集群客户端事件格式</p><p>枚举值：</p><ul><li>V1： 详见官网文档</li><li>V2： 详见官网文档</li><li>V3： 详见官网文档</li></ul><p>默认值：V3</p>
+   */
+  EventDialect?: string
+  /**
+   * <p>消息HASH策略</p><p>枚举值：</p><ul><li>TOPIC_NAME： 按主题名</li><li>CLIENT_ID： 按客户端ID</li></ul><p>默认值：TOPIC_NAME</p>
+   */
+  HashMessagePolicy?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1432,6 +1581,72 @@ export interface UpdateMessageEnrichmentRulePriorityResponse {
  * ModifyJWKSAuthenticator返回参数结构体
  */
 export interface ModifyJWKSAuthenticatorResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeWillMessage返回参数结构体
+ */
+export interface DescribeWillMessageResponse {
+  /**
+   * <p>保留消息Topic</p>
+   */
+  Topic?: string
+  /**
+   * <p>消息服务质量</p>
+   */
+  Qos?: number
+  /**
+   * <p>是否保留消息</p>
+   */
+  Retained?: boolean
+  /**
+   * <p>消息负载(Base64编码)</p>
+   */
+  Payload?: string
+  /**
+   * <p>创建时间，毫秒级时间戳 。</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间，毫秒级时间戳 。</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>遗嘱消息延迟时间，单位秒</p>
+   */
+  WillDelayInterval?: number
+  /**
+   * <p>响应内容类型</p>
+   */
+  ContentType?: string
+  /**
+   * <p>响应主题</p>
+   */
+  ResponseTopic?: string
+  /**
+   * <p>关联数据（Base64编码）</p>
+   */
+  CorrelationData?: string
+  /**
+   * <p>消息过期时间，单位秒</p>
+   */
+  MessageExpiryInterval?: number
+  /**
+   * <p>负载格式指示器 1:UTF-8文本</p>
+   */
+  PayloadFormatIndicator?: number
+  /**
+   * <p>用户属性</p>
+   */
+  UserProperties?: Array<UserProperty>
+  /**
+   * <p>遗嘱消息发布时间</p>
+   */
+  PublishAfter?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1897,6 +2112,40 @@ export interface DescribeSharedSubscriptionClientResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 设备标识列表
+ */
+export interface DeviceIdentityBackupHistoryItem {
+  /**
+   * <p>设备id</p>
+   */
+  DeviceId?: string
+  /**
+   * <p>1:ENABLED-可用2:DISABLE-不可用</p>
+   */
+  Status?: number
+  /**
+   * <p>主要签名key（Base64编码）</p>
+   */
+  PrimaryKey?: string
+  /**
+   * <p>次要签名key（Base64编码）</p>
+   */
+  SecondaryKey?: string
+  /**
+   * <p>传播属性列表</p>
+   */
+  PropagatingProperties?: Array<PropagatingProperty>
+  /**
+   * <p>数据来源</p>
+   */
+  Source?: string
+  /**
+   * <p>修改时间</p><p>单位：毫秒级时间戳</p>
+   */
+  ModificationTime?: number
 }
 
 /**
@@ -2522,23 +2771,6 @@ PLATINUM 铂金版
 }
 
 /**
- * DescribeAuthenticator请求参数结构体
- */
-export interface DescribeAuthenticatorRequest {
-  /**
-   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
-   */
-  InstanceId: string
-  /**
-   * 认证器类型:
-JWT：JWT认证器
-JWKS：JWKS认证器
-HTTP：HTTP认证器
-   */
-  Type?: string
-}
-
-/**
  * RegisterCaCertificate请求参数结构体
  */
 export interface RegisterCaCertificateRequest {
@@ -2564,6 +2796,24 @@ export interface RegisterCaCertificateRequest {
     INACTIVE：未激活
    */
   Status?: string
+}
+
+/**
+ * DescribeSharedSubscriptionClient请求参数结构体
+ */
+export interface DescribeSharedSubscriptionClientRequest {
+  /**
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * 共享订阅组名
+   */
+  SharedName: string
+  /**
+   * 订阅表达式
+   */
+  TopicFilter: string
 }
 
 /**
@@ -2743,170 +2993,20 @@ export interface CreateUserRequest {
 }
 
 /**
- * DescribeInstance返回参数结构体
+ * DescribeAuthenticator请求参数结构体
  */
-export interface DescribeInstanceResponse {
+export interface DescribeAuthenticatorRequest {
   /**
-   * <p>实例类型<br>BASIC 基础版<br>PRO  专业版<br>PLATINUM 铂金版</p>
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
-  InstanceType?: string
+  InstanceId: string
   /**
-   * <p>实例ID</p>
+   * 认证器类型:
+JWT：JWT认证器
+JWKS：JWKS认证器
+HTTP：HTTP认证器
    */
-  InstanceId?: string
-  /**
-   * <p>实例名称</p>
-   */
-  InstanceName?: string
-  /**
-   * <p>主题数量</p>
-   */
-  TopicNum?: number
-  /**
-   * <p>实例最大主题数量</p>
-   */
-  TopicNumLimit?: number
-  /**
-   * <p>TPS限流值</p>
-   */
-  TpsLimit?: number
-  /**
-   * <p>创建时间，秒为单位</p>
-   */
-  CreatedTime?: number
-  /**
-   * <p>备注信息</p>
-   */
-  Remark?: string
-  /**
-   * <p>实例状态， RUNNING, 运行中 MAINTAINING，维护中 ABNORMAL，异常 OVERDUE，欠费 DESTROYED，已删除 CREATING，创建中 MODIFYING，变配中 CREATE_FAILURE，创建失败 MODIFY_FAILURE，变配失败 DELETING，删除中</p>
-   */
-  InstanceStatus?: string
-  /**
-   * <p>实例规格</p>
-   */
-  SkuCode?: string
-  /**
-   * <p>单客户端最大订阅数</p>
-   */
-  MaxSubscriptionPerClient?: number
-  /**
-   * <p>授权规则条数</p>
-   */
-  AuthorizationPolicyLimit?: number
-  /**
-   * <p>客户端数量上限</p>
-   */
-  ClientNumLimit?: number
-  /**
-   * <p>客户端证书注册方式：<br>JITP：自动注册<br>API：通过API手动注册</p>
-   */
-  DeviceCertificateProvisionType?: string
-  /**
-   * <p>自动注册设备证书时是否自动激活</p>
-   */
-  AutomaticActivation?: boolean
-  /**
-   * <p>是否自动续费。仅包年包月集群生效。 1:自动续费 0:非自动续费</p>
-   */
-  RenewFlag?: number
-  /**
-   * <p>计费模式， POSTPAID，按量计费 PREPAID，包年包月</p>
-   */
-  PayMode?: string
-  /**
-   * <p>到期时间，毫秒级时间戳</p>
-   */
-  ExpiryTime?: number
-  /**
-   * <p>预销毁时间，毫秒级时间戳</p>
-   */
-  DestroyTime?: number
-  /**
-   * <p>TLS,单向认证    mTLS,双向认证    BYOC;一机一证</p>
-   */
-  X509Mode?: string
-  /**
-   * <p>最大Ca配额</p>
-   */
-  MaxCaNum?: number
-  /**
-   * <p>证书注册码</p>
-   */
-  RegistrationCode?: string
-  /**
-   * <p>集群最大订阅数</p>
-   */
-  MaxSubscription?: number
-  /**
-   * <p>授权策略开关</p>
-   */
-  AuthorizationPolicy?: boolean
-  /**
-   * <p>共享订阅组数最大限制</p>
-   */
-  SharedSubscriptionGroupLimit?: number
-  /**
-   * <p>单个共享订阅组TopicFilter数限制</p>
-   * @deprecated
-   */
-  MaxTopicFilterPerSharedSubscriptionGroup?: number
-  /**
-   * <p>自动订阅规则条数限制</p>
-   */
-  AutoSubscriptionPolicyLimit?: number
-  /**
-   * <p>单条自动订阅规则TopicFilter数限制</p>
-   */
-  MaxTopicFilterPerAutoSubscriptionPolicy?: number
-  /**
-   * <p>是否使用默认的服务端证书</p>
-   */
-  UseDefaultServerCert?: boolean
-  /**
-   * <p>服务端CA最大数量</p>
-   */
-  TrustedCaLimit?: number
-  /**
-   * <p>服务端证书最大数量</p>
-   */
-  ServerCertLimit?: number
-  /**
-   * <p>topic前缀最大层级</p>
-   */
-  TopicPrefixSlashLimit?: number
-  /**
-   * <p>单客户端发送消息限速，单位 条/秒</p>
-   */
-  MessageRate?: number
-  /**
-   * <p>服务端tls支持的协议，使用“,”分割。例如：TLSv1.3,TLSv1.2,TLSv1.1,TLSv1</p>
-   */
-  TransportLayerSecurity?: string
-  /**
-   * <p>消息属性增强规则配额</p>
-   */
-  MessageEnrichmentRuleLimit?: number
-  /**
-   * <p>封禁规则最大数量</p>
-   */
-  BlockRuleLimit?: number
-  /**
-   * <p>删除保护开关</p>
-   */
-  DeleteProtect?: boolean
-  /**
-   * <p>集群客户端事件格式</p><p>枚举值：</p><ul><li>V1： 详见官网文档</li><li>V2： 详见官网文档</li><li>V3： 详见官网文档</li></ul><p>默认值：V3</p>
-   */
-  EventDialect?: string
-  /**
-   * <p>消息HASH策略</p><p>枚举值：</p><ul><li>TOPIC_NAME： 按主题名</li><li>CLIENT_ID： 按客户端ID</li></ul><p>默认值：TOPIC_NAME</p>
-   */
-  HashMessagePolicy?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Type?: string
 }
 
 /**
@@ -2999,6 +3099,72 @@ export interface ModifyInsPublicEndpointRequest {
    * 公网访问规则
    */
   Rules: Array<PublicAccessRule>
+}
+
+/**
+ * 设备证书信息
+ */
+export interface DeviceCertificateBackupHistoryItem {
+  /**
+   * <p>客户端id</p>
+   */
+  ClientId?: string
+  /**
+   * <p>设备证书</p>
+   */
+  DeviceCertificate?: string
+  /**
+   * <p>设备证书SN序列号，用于唯一标识一个设备证书</p>
+   */
+  DeviceCertificateSn?: string
+  /**
+   * <p>设备证书Cn</p>
+   */
+  DeviceCertificateCn?: string
+  /**
+   * <p>签发该证书的CA证书的序列号</p>
+   */
+  CaSn?: string
+  /**
+   * <p>证书格式，当前仅支持PEM</p>
+   */
+  Format?: string
+  /**
+   * <p>设备证书状态<br>    ACTIVE：激活<br>    INACTIVE：未激活<br>    REVOKED：吊销<br>    PENDING_ACTIVATION：注册待激活</p>
+   */
+  Status?: string
+  /**
+   * <p>组织单位</p>
+   */
+  OrganizationalUnit?: string
+  /**
+   * <p>上次激活时间，毫秒级时间戳 。</p>
+   */
+  LastActivationTime?: number
+  /**
+   * <p>上次取消激活时间，毫秒级时间戳 。</p>
+   */
+  LastInactivationTime?: number
+  /**
+   * <p>证书来源：<br>API, 手动注册<br>JITP 自动注册</p>
+   */
+  CertificateSource?: string
+  /**
+   * <p>证书失效日期，毫秒级时间戳 。</p>
+   */
+  NotAfterTime?: number
+  /**
+   * <p>证书生效开始日期，毫秒级时间戳 。</p>
+   */
+  NotBeforeTime?: number
+  /**
+   * <p>数据来源</p>
+   */
+  Source?: string
+  /**
+   * <p>修改时间</p><p>单位：毫秒级时间戳</p>
+   */
+  ModificationTime?: number
 }
 
 /**
@@ -3389,9 +3555,18 @@ public：公网
 }
 
 /**
- * DescribeProductSKUList请求参数结构体
+ * DescribeDeviceCertificateBackupHistory返回参数结构体
  */
-export type DescribeProductSKUListRequest = null
+export interface DescribeDeviceCertificateBackupHistoryResponse {
+  /**
+   * <p>设备证书列表</p>
+   */
+  Data?: Array<DeviceCertificateBackupHistoryItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * DescribeSharedSubscriptionLag请求参数结构体
@@ -3405,6 +3580,20 @@ export interface DescribeSharedSubscriptionLagRequest {
    * 共享订阅表达式
    */
   SharedSubscription: string
+}
+
+/**
+ * DescribeWillMessage请求参数结构体
+ */
+export interface DescribeWillMessageRequest {
+  /**
+   * <p>实例ID，从 <a href="https://cloud.tencent.com/document/api/1778/111029">DescribeInstanceList</a>接口或控制台获得。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>客户端id</p>
+   */
+  ClientId: string
 }
 
 /**
@@ -3589,6 +3778,36 @@ username：对应 MQTT CONNECT Packet 中 username 字段
 }
 
 /**
+ * DescribeDeviceIdentityBackupHistory请求参数结构体
+ */
+export interface DescribeDeviceIdentityBackupHistoryRequest {
+  /**
+   * <p>集群id</p>
+   */
+  InstanceId: string
+  /**
+   * <p>灾备集群的集群ID</p>
+   */
+  Destination: string
+  /**
+   * <p>设备ID</p>
+   */
+  DeviceId?: string
+  /**
+   * <p>同步发生的开始时间</p>
+   */
+  ModificationTimeStart?: number
+  /**
+   * <p>同步发生的结束时间</p>
+   */
+  ModificationTimeEnd?: number
+  /**
+   * <p>查询条数</p>
+   */
+  Limit?: number
+}
+
+/**
  * DescribeCaCertificates请求参数结构体
  */
 export interface DescribeCaCertificatesRequest {
@@ -3596,6 +3815,20 @@ export interface DescribeCaCertificatesRequest {
    * 实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
+}
+
+/**
+ * DescribeDeviceIdentityBackupHistory返回参数结构体
+ */
+export interface DescribeDeviceIdentityBackupHistoryResponse {
+  /**
+   * <p>返回的设备标识列表</p>
+   */
+  Data?: Array<DeviceIdentityBackupHistoryItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3864,6 +4097,11 @@ sub：订阅
 }
 
 /**
+ * DescribeProductSKUList请求参数结构体
+ */
+export type DescribeProductSKUListRequest = null
+
+/**
  * DescribeTopicList返回参数结构体
  */
 export interface DescribeTopicListResponse {
@@ -4059,4 +4297,38 @@ export interface IpRule {
    * 备注信息
    */
   Remark: string
+}
+
+/**
+ * DescribeDeviceCertificateBackupHistory请求参数结构体
+ */
+export interface DescribeDeviceCertificateBackupHistoryRequest {
+  /**
+   * <p>腾讯云MQTT实例ID，从 <a href="https://cloud.tencent.com/document/api/1778/111029">DescribeInstanceList</a>接口或控制台获得。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>目标集群的集群ID</p>
+   */
+  Destination: string
+  /**
+   * <p>CA证书的SN</p>
+   */
+  CaSn?: string
+  /**
+   * <p>设备证书的SN</p>
+   */
+  DeviceCertificateSn?: string
+  /**
+   * <p>同步发生开始时间（毫秒级时间戳）</p>
+   */
+  ModificationTimeStart?: number
+  /**
+   * <p>同步结束时间（毫秒级时间戳）</p>
+   */
+  ModificationTimeEnd?: number
+  /**
+   * <p>查询条数，默认20，最大1024</p>
+   */
+  Limit?: number
 }

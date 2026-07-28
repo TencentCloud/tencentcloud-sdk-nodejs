@@ -24,6 +24,7 @@ import {
   StartStreamIngestResponse,
   AgentConfig,
   TerminologyItem,
+  LiveModerationParams,
   CreatePictureRequest,
   SubscribeModerationUserIds,
   AudioEncodeParams,
@@ -42,10 +43,12 @@ import {
   SliceParams,
   DescribeUserEventRequest,
   DeleteCloudModerationRequest,
+  CreateLiveStreamModerationRequest,
   CreateCloudSliceTaskRequest,
   McuBackgroundCustomRender,
   AsyncTextToSpeechRequest,
   DescribeTrtcRoomUsageResponse,
+  TRTCDataResp,
   RegisterVoicePrintRequest,
   TranscriptionUserInfoParams,
   AbnormalEvent,
@@ -53,7 +56,7 @@ import {
   ScaleInfomation,
   AgentParams,
   ControlAIConversationResponse,
-  StopAITranscriptionRequest,
+  StopAIConversationRequest,
   VideoEncodeParams,
   UpdateAIConversationResponse,
   DescribeUserEventResponse,
@@ -68,6 +71,7 @@ import {
   TranslationConfig,
   McuTencentVod,
   RegisterVoicePrintResponse,
+  SourceInfo,
   ModifyPictureRequest,
   WebRecordVideoParams,
   DescribeWebRecordResponse,
@@ -78,12 +82,14 @@ import {
   DismissRoomResponse,
   WaterMarkParams,
   DescribeRecordStatisticResponse,
+  DescribeLiveStreamModerationResponse,
   DeleteVoicePrintRequest,
   DescribeAsyncTextToSpeechResponse,
   TranslationParam,
   CloudStorage,
   VoicePrint,
   DescribeTrtcUsageResponse,
+  StopAITranscriptionRequest,
   TimeValue,
   CreateCloudRecordingResponse,
   StartMCUMixTranscodeByStrRoomIdRequest,
@@ -137,6 +143,8 @@ import {
   CloudModerationStorage,
   McuWaterMarkImage,
   StartPublishCdnStreamResponse,
+  DeleteLiveStreamModerationResponse,
+  LiveModerationStorageParams,
   StartMCUMixTranscodeByStrRoomIdResponse,
   TrtcUsage,
   DeleteCloudSliceTaskResponse,
@@ -161,10 +169,12 @@ import {
   AsrParam,
   McuFeedBackRoomParams,
   SdkAppIdRecordUsage,
+  Input,
   AudioEncode,
   RemoveUserRequest,
   TTSVoice,
   DismissRoomRequest,
+  DeleteLiveStreamModerationRequest,
   DescribeUnusualEventRequest,
   DescribeCloudRecordingRequest,
   TencentVod,
@@ -189,7 +199,7 @@ import {
   DeletePictureResponse,
   ModifyCloudRecordingRequest,
   StopAIConversationResponse,
-  StartPublishCdnStreamRequest,
+  CreateLiveStreamModerationResponse,
   DescribeAIConversationRequest,
   WaterMarkChar,
   RowValues,
@@ -205,7 +215,7 @@ import {
   TTSParam,
   ModifyCloudModerationResponse,
   Terminology,
-  TRTCDataResp,
+  DescribeLiveStreamModerationRequest,
   VideoParams,
   DescribeTRTCSegmentModerationUsageResponse,
   DescribePictureResponse,
@@ -247,7 +257,7 @@ import {
   StopWebRecordRequest,
   McuSeiParams,
   UpdateVoicePrintRequest,
-  StopAIConversationRequest,
+  StartPublishCdnStreamRequest,
   EventMessage,
   UpdateAIConversationRequest,
   UpdatePublishCdnStreamResponse,
@@ -303,6 +313,21 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateCloudModerationResponse) => void
   ): Promise<CreateCloudModerationResponse> {
     return this.request("CreateCloudModeration", req, cb)
+  }
+
+  /**
+     * 查询TRTC监控仪表盘-实时监控质量指标（会返回下列指标）
+-视频卡顿率
+-音频卡顿率
+注意：
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，详情参考[监控仪表盘](https://cloud.tencent.com/document/product/647/81331)。
+2.查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
+     */
+  async DescribeTRTCRealTimeQualityData(
+    req: DescribeTRTCRealTimeQualityDataRequest,
+    cb?: (error: string, rep: DescribeTRTCRealTimeQualityDataResponse) => void
+  ): Promise<DescribeTRTCRealTimeQualityDataResponse> {
+    return this.request("DescribeTRTCRealTimeQualityData", req, cb)
   }
 
   /**
@@ -364,6 +389,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRoomInfoResponse) => void
   ): Promise<DescribeRoomInfoResponse> {
     return this.request("DescribeRoomInfo", req, cb)
+  }
+
+  /**
+   * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁修改自定义背景图或水印素材，可通过此接口修改已上传的图片。无需频繁修改图片素材的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中操作。
+   */
+  async ModifyPicture(
+    req: ModifyPictureRequest,
+    cb?: (error: string, rep: ModifyPictureResponse) => void
+  ): Promise<ModifyPictureResponse> {
+    return this.request("ModifyPicture", req, cb)
   }
 
   /**
@@ -464,25 +499,28 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-     * 启动AI对话任务，AI通道机器人进入TRTC房间，与房间内指定的成员进行AI对话，适用于智能客服，AI口语教师等场景
-
-TRTC AI对话功能内置语音转文本能力，同时提供通道服务，即客户可灵活指定第三方AI模型（LLM）服务和文本转音频（TTS)服务，更多[功能说明](https://cloud.tencent.com/document/product/647/108901)。
+     * 查询TRTC监控仪表盘-实时监控规模指标（会返回下列指标）
+-userCount（在线用户数）
+-roomCount（在线房间数）
+注意：
+1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，详情参考[监控仪表盘](https://cloud.tencent.com/document/product/647/81331)。
+2.查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
      */
-  async StartAIConversation(
-    req: StartAIConversationRequest,
-    cb?: (error: string, rep: StartAIConversationResponse) => void
-  ): Promise<StartAIConversationResponse> {
-    return this.request("StartAIConversation", req, cb)
+  async DescribeTRTCRealTimeScaleData(
+    req: DescribeTRTCRealTimeScaleDataRequest,
+    cb?: (error: string, rep: DescribeTRTCRealTimeScaleDataResponse) => void
+  ): Promise<DescribeTRTCRealTimeScaleDataResponse> {
+    return this.request("DescribeTRTCRealTimeScaleData", req, cb)
   }
 
   /**
-   * 传入声纹ID，删除之前注册的声纹信息
+   * 查询AI对话任务状态。
    */
-  async DeleteVoicePrint(
-    req: DeleteVoicePrintRequest,
-    cb?: (error: string, rep: DeleteVoicePrintResponse) => void
-  ): Promise<DeleteVoicePrintResponse> {
-    return this.request("DeleteVoicePrint", req, cb)
+  async DescribeAIConversation(
+    req: DescribeAIConversationRequest,
+    cb?: (error: string, rep: DescribeAIConversationResponse) => void
+  ): Promise<DescribeAIConversationResponse> {
+    return this.request("DescribeAIConversation", req, cb)
   }
 
   /**
@@ -537,6 +575,18 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
+     * 启动AI对话任务，AI通道机器人进入TRTC房间，与房间内指定的成员进行AI对话，适用于智能客服，AI口语教师等场景
+
+TRTC AI对话功能内置语音转文本能力，同时提供通道服务，即客户可灵活指定第三方AI模型（LLM）服务和文本转音频（TTS)服务，更多[功能说明](https://cloud.tencent.com/document/product/647/108901)。
+     */
+  async StartAIConversation(
+    req: StartAIConversationRequest,
+    cb?: (error: string, rep: StartAIConversationResponse) => void
+  ): Promise<StartAIConversationResponse> {
+    return this.request("StartAIConversation", req, cb)
+  }
+
+  /**
    * 接口说明：将用户从房间移出，适用于主播/房主/管理员踢人等场景。支持所有平台，Android、iOS、Windows 和 macOS 需升级到 TRTC SDK 6.6及以上版本。
    */
   async RemoveUserByStrRoomId(
@@ -567,18 +617,15 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
   }
 
   /**
-     * 查询TRTC监控仪表盘-实时监控规模指标（会返回下列指标）
--userCount（在线用户数）
--roomCount（在线房间数）
-注意：
-1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，详情参考[监控仪表盘](https://cloud.tencent.com/document/product/647/81331)。
-2.查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
+     * 启动一路直播流审核。服务端异步拉流、定频截帧、音频切片、送审，通过回调返回结果。一次一个任务（一路流）。您可以通过此接口实现如下目标：
+●指定内容参数（LiveModerationParams）来指定内容理解需要的详细参数。
+●指定存储参数（LiveModerationStorageParams）将命中的切片文件指定上传到您希望的云存储，目前支持腾讯云（对象存储COS）以及第三方AWS（S3）和阿里云（OSS）
      */
-  async DescribeTRTCRealTimeScaleData(
-    req: DescribeTRTCRealTimeScaleDataRequest,
-    cb?: (error: string, rep: DescribeTRTCRealTimeScaleDataResponse) => void
-  ): Promise<DescribeTRTCRealTimeScaleDataResponse> {
-    return this.request("DescribeTRTCRealTimeScaleData", req, cb)
+  async CreateLiveStreamModeration(
+    req: CreateLiveStreamModerationRequest,
+    cb?: (error: string, rep: CreateLiveStreamModerationResponse) => void
+  ): Promise<CreateLiveStreamModerationResponse> {
+    return this.request("CreateLiveStreamModeration", req, cb)
   }
 
   /**
@@ -622,6 +669,16 @@ TRTC 的一个房间中可能会同时存在多路音视频流，您可以通过
     cb?: (error: string, rep: DeleteBasicModerationResponse) => void
   ): Promise<DeleteBasicModerationResponse> {
     return this.request("DeleteBasicModeration", req, cb)
+  }
+
+  /**
+   * 成功开启直播流AI 内容理解任务后，可以使用此接口来查询AI 内容理解任务状态，仅在任务进行时有效，任务退出后查询将会返回错误。
+   */
+  async DescribeLiveStreamModeration(
+    req: DescribeLiveStreamModerationRequest,
+    cb?: (error: string, rep: DescribeLiveStreamModerationResponse) => void
+  ): Promise<DescribeLiveStreamModerationResponse> {
+    return this.request("DescribeLiveStreamModeration", req, cb)
   }
 
   /**
@@ -835,18 +892,13 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-     * 获取TRTC旁路转推的用量明细。
-- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
-- 单次查询统计区间最多不能超过31天。
-- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
-- 该接口只用于历史用量数据统计或核对数据使用，关键业务逻辑不能使用。
-- 默认接口请求频率限制：5次/秒。
-     */
-  async DescribeRelayUsage(
-    req: DescribeRelayUsageRequest,
-    cb?: (error: string, rep: DescribeRelayUsageResponse) => void
-  ): Promise<DescribeRelayUsageResponse> {
-    return this.request("DescribeRelayUsage", req, cb)
+   * 成功开启直播流AI 内容理解任务后，可以使用此接口来停止进行内容识别。
+   */
+  async DeleteLiveStreamModeration(
+    req: DeleteLiveStreamModerationRequest,
+    cb?: (error: string, rep: DeleteLiveStreamModerationResponse) => void
+  ): Promise<DeleteLiveStreamModerationResponse> {
+    return this.request("DeleteLiveStreamModeration", req, cb)
   }
 
   /**
@@ -1039,13 +1091,18 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-   * 如果您需要在 [云端混流转码](https://cloud.tencent.com/document/product/647/16827) 时频繁修改自定义背景图或水印素材，可通过此接口修改已上传的图片。无需频繁修改图片素材的场景，建议直接在 [控制台 > 应用管理 > 素材管理](https://cloud.tencent.com/document/product/647/50769) 中操作。
-   */
-  async ModifyPicture(
-    req: ModifyPictureRequest,
-    cb?: (error: string, rep: ModifyPictureResponse) => void
-  ): Promise<ModifyPictureResponse> {
-    return this.request("ModifyPicture", req, cb)
+     * 获取TRTC旁路转推的用量明细。
+- 查询时间小于等于1天时，返回每5分钟粒度的数据；查询时间大于1天时，返回按天汇总的数据。
+- 单次查询统计区间最多不能超过31天。
+- 若查询当天用量，由于统计延迟等原因，返回数据可能不够准确。
+- 该接口只用于历史用量数据统计或核对数据使用，关键业务逻辑不能使用。
+- 默认接口请求频率限制：5次/秒。
+     */
+  async DescribeRelayUsage(
+    req: DescribeRelayUsageRequest,
+    cb?: (error: string, rep: DescribeRelayUsageResponse) => void
+  ): Promise<DescribeRelayUsageResponse> {
+    return this.request("DescribeRelayUsage", req, cb)
   }
 
   /**
@@ -1071,18 +1128,13 @@ peakCurrentUsers：峰值同时在线人数。
   }
 
   /**
-     * 查询TRTC监控仪表盘-实时监控质量指标（会返回下列指标）
--视频卡顿率
--音频卡顿率
-注意：
-1.调用接口需开通监控仪表盘【基础版】和【进阶版】，监控仪表盘【免费版】不支持调用，详情参考[监控仪表盘](https://cloud.tencent.com/document/product/647/81331)。
-2.查询时间范围根据监控仪表盘功能版本而定，基础版可查近3小时，进阶版可查近12小时。
-     */
-  async DescribeTRTCRealTimeQualityData(
-    req: DescribeTRTCRealTimeQualityDataRequest,
-    cb?: (error: string, rep: DescribeTRTCRealTimeQualityDataResponse) => void
-  ): Promise<DescribeTRTCRealTimeQualityDataResponse> {
-    return this.request("DescribeTRTCRealTimeQualityData", req, cb)
+   * 传入声纹ID，删除之前注册的声纹信息
+   */
+  async DeleteVoicePrint(
+    req: DeleteVoicePrintRequest,
+    cb?: (error: string, rep: DeleteVoicePrintResponse) => void
+  ): Promise<DeleteVoicePrintResponse> {
+    return this.request("DeleteVoicePrint", req, cb)
   }
 
   /**
@@ -1138,16 +1190,6 @@ peakCurrentUsers：峰值同时在线人数。
     cb?: (error: string, rep: DescribeCloudModerationResponse) => void
   ): Promise<DescribeCloudModerationResponse> {
     return this.request("DescribeCloudModeration", req, cb)
-  }
-
-  /**
-   * 查询AI对话任务状态。
-   */
-  async DescribeAIConversation(
-    req: DescribeAIConversationRequest,
-    cb?: (error: string, rep: DescribeAIConversationResponse) => void
-  ): Promise<DescribeAIConversationResponse> {
-    return this.request("DescribeAIConversation", req, cb)
   }
 
   /**

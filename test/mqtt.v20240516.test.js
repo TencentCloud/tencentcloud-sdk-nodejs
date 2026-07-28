@@ -168,9 +168,9 @@ it("mqtt.v20240516.ModifyJWKSAuthenticator", async function () {
     }
 })
 
-it("mqtt.v20240516.DescribeUserList", async function () {
+it("mqtt.v20240516.DescribeDeviceCertificateBackupHistory", async function () {
     try {
-       const data = await client.DescribeUserList({})
+       const data = await client.DescribeDeviceCertificateBackupHistory({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -308,9 +308,29 @@ it("mqtt.v20240516.DescribeCaCertificates", async function () {
     }
 })
 
+it("mqtt.v20240516.DescribeUserList", async function () {
+    try {
+       const data = await client.DescribeUserList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.UpdateAuthorizationPolicyPriority", async function () {
     try {
        const data = await client.UpdateAuthorizationPolicyPriority({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mqtt.v20240516.UpdateMessageEnrichmentRulePriority", async function () {
+    try {
+       const data = await client.UpdateMessageEnrichmentRulePriority({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -378,6 +398,16 @@ it("mqtt.v20240516.DeleteInsPublicEndpoint", async function () {
     }
 })
 
+it("mqtt.v20240516.DescribeWillMessage", async function () {
+    try {
+       const data = await client.DescribeWillMessage({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mqtt.v20240516.CreateInstance", async function () {
     try {
        const data = await client.CreateInstance({})
@@ -428,9 +458,9 @@ it("mqtt.v20240516.DescribeInstance", async function () {
     }
 })
 
-it("mqtt.v20240516.DescribeMessageDetails", async function () {
+it("mqtt.v20240516.DescribeDeviceIdentityBackupHistory", async function () {
     try {
-       const data = await client.DescribeMessageDetails({})
+       const data = await client.DescribeDeviceIdentityBackupHistory({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -538,9 +568,9 @@ it("mqtt.v20240516.KickOutClient", async function () {
     }
 })
 
-it("mqtt.v20240516.UpdateMessageEnrichmentRulePriority", async function () {
+it("mqtt.v20240516.DescribeMessageDetails", async function () {
     try {
-       const data = await client.UpdateMessageEnrichmentRulePriority({})
+       const data = await client.DescribeMessageDetails({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

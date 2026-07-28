@@ -98,6 +98,16 @@ it("wedata.v20210820.DescribeTaskScript", async function () {
     }
 })
 
+it("wedata.v20210820.DescribeInstancesByExecutors", async function () {
+    try {
+       const data = await client.DescribeInstancesByExecutors({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("wedata.v20210820.DescribeRealViewSchemaPage", async function () {
     try {
        const data = await client.DescribeRealViewSchemaPage({})

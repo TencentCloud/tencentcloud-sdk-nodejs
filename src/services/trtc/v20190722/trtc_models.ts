@@ -171,6 +171,36 @@ export interface TerminologyItem {
 }
 
 /**
+ * 直播流ai内容理解参数
+ */
+export interface LiveModerationParams {
+  /**
+   * <p>AI 内容理解任务类型</p><p>枚举值：</p><ul><li>1： 音频切片理解</li><li>2： 视频截帧理解</li><li>3： 音视切片+视频截帧理解 </li></ul><p>默认值：3</p>
+   */
+  ModerationType?: number
+  /**
+   * <p>持续没有上行推流的状态超过MaxIdleTime的时长，自动停止切片。</p><p>取值范围：[30, 1800]</p><p>单位：秒</p><p>默认值：30</p>
+   */
+  MaxIdleTime?: number
+  /**
+   * <p>视频截帧间隔</p><p>取值范围：[1, 60]</p><p>单位：秒</p><p>默认值：5</p>
+   */
+  SliceVideo?: number
+  /**
+   * <p>音频切片时长</p><p>取值范围：[5, 60]</p><p>单位：秒</p><p>默认值：15</p>
+   */
+  SliceAudio?: number
+  /**
+   * <p>是否保存文件</p><p>枚举值：</p><ul><li>0： 0不保存</li><li>1： 1保存所有</li><li>2： 仅命中</li></ul><p>默认值：1</p>
+   */
+  SaveModerationFile?: number
+  /**
+   * <p>是否回调所有内容理解结果</p><p>枚举值：</p><ul><li>0： 回调所有结果</li><li>1： 仅回调命中结果</li></ul><p>默认值：0</p>
+   */
+  CallbackAllResults?: number
+}
+
+/**
  * CreatePicture请求参数结构体
  */
 export interface CreatePictureRequest {
@@ -777,6 +807,40 @@ export interface DeleteCloudModerationRequest {
 }
 
 /**
+ * CreateLiveStreamModeration请求参数结构体
+ */
+export interface CreateLiveStreamModerationRequest {
+  /**
+   * <p>TRTC的<a href="https://cloud.tencent.com/document/product/647/46351#sdkappid">SdkAppId</a>。</p>
+   */
+  SdkAppId: number
+  /**
+   * <p>直播流输入源</p>
+   */
+  Input: Input
+  /**
+   * <p>直播流ai理解审核参数</p>
+   */
+  LiveModerationParams: LiveModerationParams
+  /**
+   * <p>业务自定义唯一标识，原样透传到回调</p><p>入参限制：长度限制60字符</p>
+   */
+  DataId: string
+  /**
+   * <p>额外信息透传结构体（房间/主播/业务自定义），原样回带到回调</p>
+   */
+  SourceInfo?: SourceInfo
+  /**
+   * <p>直播流ai理解转存文件存储参数</p>
+   */
+  LiveModerationStorageParams?: LiveModerationStorageParams
+  /**
+   * <p>单路任务最大的生命周期</p><p>取值范围：[1, 72]</p><p>单位：小时</p><p>默认值：48</p>
+   */
+  ResourceExpiredHour?: number
+}
+
+/**
  * CreateCloudSliceTask请求参数结构体
  */
 export interface CreateCloudSliceTaskRequest {
@@ -886,6 +950,27 @@ export interface DescribeTrtcRoomUsageResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * TRTC数据大盘/实时监控 API接口数据出参
+ */
+export interface TRTCDataResp {
+  /**
+   * StatementID值，监控仪表盘下固定为0。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StatementID: number
+  /**
+   * 查询结果数据，以Columns-Values形式返回。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Series: Array<SeriesInfo>
+  /**
+   * Total值，监控仪表盘功能下固定为1。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total: number
 }
 
 /**
@@ -1003,11 +1088,11 @@ export interface ControlAIConversationResponse {
 }
 
 /**
- * StopAITranscription请求参数结构体
+ * StopAIConversation请求参数结构体
  */
-export interface StopAITranscriptionRequest {
+export interface StopAIConversationRequest {
   /**
-   * 唯一标识转录任务。
+   * 唯一标识任务。
    */
   TaskId: string
 }
@@ -1368,6 +1453,24 @@ export interface RegisterVoicePrintResponse {
 }
 
 /**
+ * 额外信息透传结构体（房间/主播/业务自定义），原样回带到回调
+ */
+export interface SourceInfo {
+  /**
+   * <p>直播间 ID（用于结果透传与去重；数字房间号也用 string 传）</p>
+   */
+  RoomId?: string
+  /**
+   * <p>房间号类型</p><p>枚举值：</p><ul><li>0： 字符串房间号</li><li>1： 数字房间号</li></ul>
+   */
+  RoomIdType?: number
+  /**
+   * <p>主播/被审核方 ID</p>
+   */
+  UserId?: string
+}
+
+/**
  * ModifyPicture请求参数结构体
  */
 export interface ModifyPictureRequest {
@@ -1592,6 +1695,24 @@ export interface DescribeRecordStatisticResponse {
 }
 
 /**
+ * DescribeLiveStreamModeration返回参数结构体
+ */
+export interface DescribeLiveStreamModerationResponse {
+  /**
+   * <p>AI 内容理解任务的唯一Id，在启动切片任务成功后会返回。</p>
+   */
+  TaskId?: string
+  /**
+   * <p>AI内容理解任务的状态信息。Idle:表示当前任务空闲中,InProgress:表示当前任务正在进行中,Exited:表示当前任务正在退出的过程中。</p><p>枚举值：</p><ul><li>InProgress： 进行中</li></ul>
+   */
+  Status?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteVoicePrint请求参数结构体
  */
 export interface DeleteVoicePrintRequest {
@@ -1705,6 +1826,16 @@ export interface DescribeTrtcUsageResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * StopAITranscription请求参数结构体
+ */
+export interface StopAITranscriptionRequest {
+  /**
+   * 唯一标识转录任务。
+   */
+  TaskId: string
 }
 
 /**
@@ -2907,6 +3038,30 @@ export interface StartPublishCdnStreamResponse {
 }
 
 /**
+ * DeleteLiveStreamModeration返回参数结构体
+ */
+export interface DeleteLiveStreamModerationResponse {
+  /**
+   * <p>AI 内容理解任务的唯一Id，在启动切片任务成功后会返回。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 直播流aI理解的转存文件存储参数
+ */
+export interface LiveModerationStorageParams {
+  /**
+   * <p>直播流ai理解文件转存</p>
+   */
+  CloudModerationStorage?: CloudModerationStorage
+}
+
+/**
  * StartMCUMixTranscodeByStrRoomId返回参数结构体
  */
 export interface StartMCUMixTranscodeByStrRoomIdResponse {
@@ -3475,6 +3630,20 @@ export interface SdkAppIdRecordUsage {
 }
 
 /**
+ * 拉流输入源
+ */
+export interface Input {
+  /**
+   * <p>直播拉流地址</p><p>入参限制：字符长度小于2048</p>
+   */
+  Url: string
+  /**
+   * <p>显式协议</p><p>枚举值：</p><ul><li>rtmp： rtmp协议</li></ul>
+   */
+  Format?: string
+}
+
+/**
  * 音频编码参数。
  */
 export interface AudioEncode {
@@ -3548,6 +3717,20 @@ export interface DismissRoomRequest {
    * 数字房间号。本接口仅支持解散数字类型房间号，如需解散字符串类型房间号，请使用DismissRoomByStrRoomId。
    */
   RoomId: number
+}
+
+/**
+ * DeleteLiveStreamModeration请求参数结构体
+ */
+export interface DeleteLiveStreamModerationRequest {
+  /**
+   * <p>TRTC的SDKAppId，和TRTC的房间所对应的SDKAppId相同。</p>
+   */
+  SdkAppId: number
+  /**
+   * <p>AI 内容理解任务的唯一Id，在启动切片任务成功后会返回。</p>
+   */
+  TaskId: string
 }
 
 /**
@@ -4200,61 +4383,17 @@ export interface StopAIConversationResponse {
 }
 
 /**
- * StartPublishCdnStream请求参数结构体
+ * CreateLiveStreamModeration返回参数结构体
  */
-export interface StartPublishCdnStreamRequest {
+export interface CreateLiveStreamModerationResponse {
   /**
-   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和转推的房间所对应的SdkAppId相同。
+   * <p>AI 内容理解服务分配的任务ID。任务ID是对一次切片任务生命周期过程的唯一标识，结束任务时会失去意义。任务ID需要业务保存下来，作为下次针对这个任务操作的参数</p>
    */
-  SdkAppId: number
+  TaskId?: string
   /**
-   * 主房间信息RoomId，转推的TRTC房间所对应的RoomId。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RoomId: string
-  /**
-   * 主房间信息RoomType，必须和转推的房间所对应的RoomId类型相同，0为整型房间号，1为字符串房间号。
-   */
-  RoomIdType: number
-  /**
-   * 转推服务加入TRTC房间的机器人参数。
-   */
-  AgentParams: AgentParams
-  /**
-   * 是否转码，0表示无需转码，1表示需要转码。
-WithTranscoding为0，表示旁路转推，默认不转码；WithTranscoding为1，表示混流转推，此时一定会转码，并收取转码费用。
-注：
-1，混流是必须转码的，这个参数需设置为1。
-2，WithTranscoding=0时，视频输出Codec默认跟随上行视频Codec，如果上行视频Codec发生变化，CDN会断流重推。
-   */
-  WithTranscoding: number
-  /**
-   * 转推流的音频编码参数。由于音频是必转码的（不会收取转码费用），所以启动任务的时候，必须填写。
-   */
-  AudioParams?: McuAudioParams
-  /**
-   * 转推流的视频编码参数，不填表示纯音频转推。
-   */
-  VideoParams?: McuVideoParams
-  /**
-   * 需要单流旁路转推的用户上行参数，单流旁路转推时，WithTranscoding需要设置为0。
-   */
-  SingleSubscribeParams?: SingleSubscribeParams
-  /**
-   * 转推的CDN参数，一个任务最多支持10个推流URL。和回推房间参数必须要有一个。
-   */
-  PublishCdnParams?: Array<McuPublishCdnParam>
-  /**
-   * 混流SEI参数
-   */
-  SeiParams?: McuSeiParams
-  /**
-   * 回推房间信息，一个任务最多支持回推10个房间，和转推CDN参数必须要有一个。注：回推房间需使用10.4及以上SDK版本，如您有需求，请联系腾讯云技术支持。
-   */
-  FeedBackRoomParams?: Array<McuFeedBackRoomParams>
-  /**
-   * 转推录制参数，[参考文档](https://cloud.tencent.com/document/product/647/111748)。
-   */
-  RecordParams?: McuRecordParams
+  RequestId?: string
 }
 
 /**
@@ -4580,24 +4719,17 @@ export interface Terminology {
 }
 
 /**
- * TRTC数据大盘/实时监控 API接口数据出参
+ * DescribeLiveStreamModeration请求参数结构体
  */
-export interface TRTCDataResp {
+export interface DescribeLiveStreamModerationRequest {
   /**
-   * StatementID值，监控仪表盘下固定为0。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>TRTC的SDKAppId，和录制的房间所对应的SDKAppId相同。</p>
    */
-  StatementID: number
+  SdkAppId: number
   /**
-   * 查询结果数据，以Columns-Values形式返回。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>AI 内容理解任务的唯一Id，在启动切片任务成功后会返回。</p>
    */
-  Series: Array<SeriesInfo>
-  /**
-   * Total值，监控仪表盘功能下固定为1。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Total: number
+  TaskId: string
 }
 
 /**
@@ -5444,13 +5576,61 @@ export interface UpdateVoicePrintRequest {
 }
 
 /**
- * StopAIConversation请求参数结构体
+ * StartPublishCdnStream请求参数结构体
  */
-export interface StopAIConversationRequest {
+export interface StartPublishCdnStreamRequest {
   /**
-   * 唯一标识任务。
+   * TRTC的[SdkAppId](https://cloud.tencent.com/document/product/647/46351#sdkappid)，和转推的房间所对应的SdkAppId相同。
    */
-  TaskId: string
+  SdkAppId: number
+  /**
+   * 主房间信息RoomId，转推的TRTC房间所对应的RoomId。
+   */
+  RoomId: string
+  /**
+   * 主房间信息RoomType，必须和转推的房间所对应的RoomId类型相同，0为整型房间号，1为字符串房间号。
+   */
+  RoomIdType: number
+  /**
+   * 转推服务加入TRTC房间的机器人参数。
+   */
+  AgentParams: AgentParams
+  /**
+   * 是否转码，0表示无需转码，1表示需要转码。
+WithTranscoding为0，表示旁路转推，默认不转码；WithTranscoding为1，表示混流转推，此时一定会转码，并收取转码费用。
+注：
+1，混流是必须转码的，这个参数需设置为1。
+2，WithTranscoding=0时，视频输出Codec默认跟随上行视频Codec，如果上行视频Codec发生变化，CDN会断流重推。
+   */
+  WithTranscoding: number
+  /**
+   * 转推流的音频编码参数。由于音频是必转码的（不会收取转码费用），所以启动任务的时候，必须填写。
+   */
+  AudioParams?: McuAudioParams
+  /**
+   * 转推流的视频编码参数，不填表示纯音频转推。
+   */
+  VideoParams?: McuVideoParams
+  /**
+   * 需要单流旁路转推的用户上行参数，单流旁路转推时，WithTranscoding需要设置为0。
+   */
+  SingleSubscribeParams?: SingleSubscribeParams
+  /**
+   * 转推的CDN参数，一个任务最多支持10个推流URL。和回推房间参数必须要有一个。
+   */
+  PublishCdnParams?: Array<McuPublishCdnParam>
+  /**
+   * 混流SEI参数
+   */
+  SeiParams?: McuSeiParams
+  /**
+   * 回推房间信息，一个任务最多支持回推10个房间，和转推CDN参数必须要有一个。注：回推房间需使用10.4及以上SDK版本，如您有需求，请联系腾讯云技术支持。
+   */
+  FeedBackRoomParams?: Array<McuFeedBackRoomParams>
+  /**
+   * 转推录制参数，[参考文档](https://cloud.tencent.com/document/product/647/111748)。
+   */
+  RecordParams?: McuRecordParams
 }
 
 /**

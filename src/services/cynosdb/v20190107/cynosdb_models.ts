@@ -8280,11 +8280,11 @@ export interface InquirePriceModifyResponse {
  */
 export interface DeleteAccountsRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 账号数组，包含account和host
+   * <p>账号数组，包含account和host</p>
    */
   Accounts?: Array<InputAccount>
 }
@@ -9347,31 +9347,31 @@ base-基础版本，common-通用版本，enterprise-企业版本
  */
 export interface Account {
   /**
-   * 数据库账号名
+   * <p>数据库账号名</p>
    */
   AccountName?: string
   /**
-   * 主机
+   * <p>主机</p>
    */
   Host?: string
   /**
-   * 数据库账号描述
+   * <p>数据库账号描述</p>
    */
   Description?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreateTime?: string
   /**
-   * 更新时间
+   * <p>更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 用户最大连接数
+   * <p>用户最大连接数</p>
    */
   MaxUserConnections?: number
   /**
-   * 是否开启密码轮转(0:关闭;1:开启)
+   * <p>是否开启密码轮转(0:关闭;1:开启)</p>
    */
   PasswordRotation?: number
 }
@@ -9953,11 +9953,11 @@ export interface DescribeResourcesByDealNameResponse {
  */
 export interface CreateAccountsRequest {
   /**
-   * 集群id
+   * <p>集群id</p>
    */
   ClusterId: string
   /**
-   * 新账户列表
+   * <p>新账户列表</p>
    */
   Accounts: Array<NewAccount>
 }
@@ -10027,51 +10027,51 @@ export interface DescribeLibraDBClusterAutoMapRuleResponse {
  */
 export interface Ability {
   /**
-   * 是否支持从可用区
+   * <p>是否支持从可用区</p>
    */
   IsSupportSlaveZone: string
   /**
-   * 不支持从可用区的原因
+   * <p>不支持从可用区的原因</p>
    */
   NonsupportSlaveZoneReason: string
   /**
-   * 是否支持RO实例
+   * <p>是否支持RO实例</p>
    */
   IsSupportRo: string
   /**
-   * 不支持RO实例的原因
+   * <p>不支持RO实例的原因</p>
    */
   NonsupportRoReason: string
   /**
-   * 是否支持手动发起快照备份
+   * <p>是否支持手动发起快照备份</p>
    */
   IsSupportManualSnapshot: string
   /**
-   * 是否支持透明数据加密
+   * <p>是否支持透明数据加密</p>
    */
   IsSupportTransparentDataEncryption?: string
   /**
-   * 不支持透明数据加密原因
+   * <p>不支持透明数据加密原因</p>
    */
   NoSupportTransparentDataEncryptionReason?: string
   /**
-   * 是否支持手动发起逻辑备份
+   * <p>是否支持手动发起逻辑备份</p>
    */
   IsSupportManualLogic?: string
   /**
-   * 是否支持开启全局加密
+   * <p>是否支持开启全局加密</p>
    */
   IsSupportGlobalEncryption?: string
   /**
-   * 不支持全局加密的原因
+   * <p>不支持全局加密的原因</p>
    */
   NoSupportGlobalEncryptionReason?: string
   /**
-   * 不支持透明加密原因状态码
+   * <p>不支持透明加密原因状态码</p>
    */
   NoSupportTransparentDataEncryptionReasonCode?: string
   /**
-   * 不支持全局加密原因状态码
+   * <p>不支持全局加密原因状态码</p>
    */
   NoSupportGlobalEncryptionReasonCode?: string
 }
@@ -10427,27 +10427,27 @@ export interface QueryParamFilter {
  */
 export interface NewAccount {
   /**
-   * 账户名，包含字母数字_,以字母开头，字母或数字结尾，长度1-30
+   * <p>账户名，包含字母数字_,以字母开头，字母或数字结尾，长度1-30</p>
    */
   AccountName: string
   /**
-   * 主机(%或ipv4地址)
+   * <p>主机(%或ipv4地址)</p>
    */
   Host: string
   /**
-   * 密码，密码长度范围为8到64个字符
+   * <p>密码，密码长度范围为8到64个字符</p>
    */
   AccountPassword: string
   /**
-   * 是否开启密码轮转(0:关闭;1:开启)
+   * <p>是否开启密码轮转(0:关闭;1:开启)</p>
    */
   PasswordRotation?: number
   /**
-   * 描述
+   * <p>描述</p>
    */
   Description?: string
   /**
-   * 用户最大连接数，不能大于10240
+   * <p>用户最大连接数，不能大于10240</p>
    */
   MaxUserConnections?: number
 }

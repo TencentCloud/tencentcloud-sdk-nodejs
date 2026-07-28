@@ -36,6 +36,7 @@ import {
   DeleteNotebookRequest,
   PushTrainingMetricsRequest,
   Filter,
+  TrainToolConfig,
   DescribeTrainingModelVersionsRequest,
   CodeRepoConfig,
   CreateDatasetResponse,

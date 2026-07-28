@@ -7584,21 +7584,25 @@ export interface DeleteDeviceRequest {
  */
 export interface CreateDeviceSDPAnswerRequest {
   /**
-   * 产品ID
+   * <p>产品ID</p>
    */
   ProductId: string
   /**
-   * 设备名称
+   * <p>设备名称</p>
    */
   DeviceName: string
   /**
-   * SDP提议
+   * <p>SDP提议</p>
    */
   SDPOffer: string
   /**
-   * 客户自定义拉流标识
+   * <p>客户自定义拉流标识</p>
    */
   RequesterTag?: string
+  /**
+   * <p>默认值：0，如果需要webrtc推流拉流在同一个SDP中，需要值为1，常用于单PC模式</p><p>枚举值：</p><ul><li>0： 默认值，传统多pc推流模式</li><li>1： 单pc模式，如果需要webrtc单pc推拉流，采用此模式，此模式下注意SDP需要包含推拉流全部信息</li></ul><p>默认值：0</p>
+   */
+  EnableSubPub?: number
 }
 
 /**
@@ -13159,7 +13163,7 @@ export interface RevokeBindUserDeviceResponse {
  */
 export interface CreateDeviceSDPAnswerResponse {
   /**
-   * SDP应答
+   * <p>SDP应答</p>
    */
   SDPAnswer?: string
   /**

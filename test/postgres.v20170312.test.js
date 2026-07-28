@@ -228,6 +228,16 @@ it("postgres.v20170312.DescribeTasks", async function () {
     }
 })
 
+it("postgres.v20170312.ModifyDBProxyAddress", async function () {
+    try {
+       const data = await client.ModifyDBProxyAddress({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.DescribeDatabases", async function () {
     try {
        const data = await client.DescribeDatabases({})
@@ -251,6 +261,16 @@ it("postgres.v20170312.DescribeParameterTemplates", async function () {
 it("postgres.v20170312.DescribeProductConfig", async function () {
     try {
        const data = await client.DescribeProductConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.ReloadBalanceDBProxyNode", async function () {
+    try {
+       const data = await client.ReloadBalanceDBProxyNode({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -888,6 +908,16 @@ it("postgres.v20170312.DescribeParamsEvent", async function () {
     }
 })
 
+it("postgres.v20170312.DescribeDBProxySpecs", async function () {
+    try {
+       const data = await client.DescribeDBProxySpecs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.DescribeClasses", async function () {
     try {
        const data = await client.DescribeClasses({})
@@ -921,6 +951,16 @@ it("postgres.v20170312.SwitchDBInstancePrimary", async function () {
 it("postgres.v20170312.ModifyReadOnlyDBInstanceWeight", async function () {
     try {
        const data = await client.ModifyReadOnlyDBInstanceWeight({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.ModifyDBProxy", async function () {
+    try {
+       const data = await client.ModifyDBProxy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1048,6 +1088,16 @@ it("postgres.v20170312.DeleteBackupPlan", async function () {
     }
 })
 
+it("postgres.v20170312.DestroyDBProxy", async function () {
+    try {
+       const data = await client.DestroyDBProxy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.InquiryPriceUpgradeDBInstance", async function () {
     try {
        const data = await client.InquiryPriceUpgradeDBInstance({})
@@ -1098,9 +1148,29 @@ it("postgres.v20170312.DeleteBaseBackup", async function () {
     }
 })
 
+it("postgres.v20170312.CreateDBProxy", async function () {
+    try {
+       const data = await client.CreateDBProxy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.LockAccount", async function () {
     try {
        const data = await client.LockAccount({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("postgres.v20170312.DescribeDBProxy", async function () {
+    try {
+       const data = await client.DescribeDBProxy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

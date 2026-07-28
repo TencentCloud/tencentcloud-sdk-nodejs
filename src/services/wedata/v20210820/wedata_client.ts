@@ -47,6 +47,7 @@ import {
   DescribeRuleDimStatRequest,
   DescribeRuleTemplatesResponse,
   ReportTableRequest,
+  Partition,
   CreateAndDDLSupport,
   CreateIntegrationNodeResponse,
   TaskInnerInfo,
@@ -95,9 +96,9 @@ import {
   TablePropertyScore,
   TestRunningSubRecord,
   DescribeFunctionKindsRequest,
-  DescribeFunctionKindsResponse,
+  DescribeInstancesByExecutorsRequest,
   DescribeInstanceDetailInfoResponse,
-  Partition,
+  LineageProcessVO,
   RelatedTask,
   DescribeTemplateDimCountRequest,
   CreateCodeTemplateVersionResponse,
@@ -410,6 +411,7 @@ import {
   TaskLogResponse,
   TableRecordField,
   QuietPeriod,
+  DescribeInstancesByExecutorsResponse,
   AdhocDetail,
   DescribeInstanceLastLogRequest,
   DescribeEventRequest,
@@ -570,6 +572,7 @@ import {
   ModifyIntegrationNodeRequest,
   ModifyMonitorStatusResponse,
   DescribeRuleTemplatesByPageResponse,
+  DescribeFunctionKindsResponse,
   DescribeTemplateDimCountResponse,
   DataSourceConnectStatus,
   SuccessorTaskInfo,
@@ -856,7 +859,7 @@ import {
   DlcExpiredSnapshotsInfo,
   DescribeWorkflowCanvasInfoResponse,
   DescribeRulesByPageResponse,
-  LineageProcessVO,
+  ExecutorTaskInstanceCount,
   AttributeItemDsVO,
   DescribeDatabaseMetaResponse,
   RuleDimCnt,
@@ -1106,6 +1109,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTaskScriptResponse) => void
   ): Promise<DescribeTaskScriptResponse> {
     return this.request("DescribeTaskScript", req, cb)
+  }
+
+  /**
+   * 按执行资源组查询任务调度与运行实例数量统计
+   */
+  async DescribeInstancesByExecutors(
+    req: DescribeInstancesByExecutorsRequest,
+    cb?: (error: string, rep: DescribeInstancesByExecutorsResponse) => void
+  ): Promise<DescribeInstancesByExecutorsResponse> {
+    return this.request("DescribeInstancesByExecutors", req, cb)
   }
 
   /**

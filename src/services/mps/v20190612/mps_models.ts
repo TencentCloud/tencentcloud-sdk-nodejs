@@ -12823,11 +12823,11 @@ export interface OutputReq {
  */
 export interface ManifestInfo {
   /**
-   * 单位秒。
+   * <p>单位秒。</p>
    */
   Windows?: number
   /**
-   * 打到output广告标签的格式，可选Date Range和Enhanced SCTE-35。
+   * <p>打到output广告标签的格式，可选Date Range、Enhanced SCTE-35和Standard SCTE-35。</p>
    */
   AdMarkupType?: string
 }

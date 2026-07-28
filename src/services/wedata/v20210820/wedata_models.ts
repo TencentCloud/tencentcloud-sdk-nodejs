@@ -930,6 +930,24 @@ export interface ReportTableRequest {
 }
 
 /**
+ * 分区参数
+ */
+export interface Partition {
+  /**
+   * 分区转换策略
+   */
+  Transform?: string
+  /**
+   * 分区字段名
+   */
+  Name?: string
+  /**
+   * 策略参数
+   */
+  TransformArgs?: Array<string>
+}
+
+/**
  * 是否支持creat 或ddl
  */
 export interface CreateAndDDLSupport {
@@ -3177,23 +3195,17 @@ export interface TestRunningSubRecord {
 export type DescribeFunctionKindsRequest = null
 
 /**
- * DescribeFunctionKinds返回参数结构体
+ * DescribeInstancesByExecutors请求参数结构体
  */
-export interface DescribeFunctionKindsResponse {
+export interface DescribeInstancesByExecutorsRequest {
   /**
-   * 无
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>项目ID</p>
    */
-  Kinds?: Array<FunctionTypeOrKind>
+  ProjectId?: string
   /**
-   * 无
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>执行资源组ID</p>
    */
-  ErrorMessage?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ExecutorGroupIdList?: Array<string>
 }
 
 /**
@@ -3211,21 +3223,49 @@ export interface DescribeInstanceDetailInfoResponse {
 }
 
 /**
- * 分区参数
+ * LineageProcessVO
  */
-export interface Partition {
+export interface LineageProcessVO {
   /**
-   * 分区转换策略
+   * 原始唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Transform?: string
+  ProcessId?: string
   /**
-   * 分区字段名
+   * 任务类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name?: string
+  ProcessType?: string
   /**
-   * 策略参数
+   * 任务子类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  TransformArgs?: Array<string>
+  ProcessSubType?: string
+  /**
+   * 名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessName?: string
+  /**
+   * 描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  QualifiedId?: string
+  /**
+   * 来源
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Platform?: string
+  /**
+   * 额外扩展参数
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProcessProperties?: Array<LineageProperty>
 }
 
 /**
@@ -14603,6 +14643,21 @@ export interface QuietPeriod {
 }
 
 /**
+ * DescribeInstancesByExecutors返回参数结构体
+ */
+export interface DescribeInstancesByExecutorsResponse {
+  /**
+   * <p>实例状态统计结果</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<ExecutorTaskInstanceCount>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 子任务记录
  */
 export interface AdhocDetail {
@@ -19925,6 +19980,26 @@ export interface DescribeRuleTemplatesByPageResponse {
    * 结果
    */
   Data?: RuleTemplatePage
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeFunctionKinds返回参数结构体
+ */
+export interface DescribeFunctionKindsResponse {
+  /**
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Kinds?: Array<FunctionTypeOrKind>
+  /**
+   * 无
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrorMessage?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -29572,49 +29647,44 @@ export interface DescribeRulesByPageResponse {
 }
 
 /**
- * LineageProcessVO
+ * ExecutorTaskInstanceCount
  */
-export interface LineageProcessVO {
+export interface ExecutorTaskInstanceCount {
   /**
-   * 原始唯一ID
+   * 执行资源组ID
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProcessId?: string
+  ExecutorGroupId?: string
   /**
-   * 任务类型
+   * 数据开发中的任务类型绑定的资源组数量等待调度的任务实例数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProcessType?: string
+  SchedulingTaskCount?: number
   /**
-   * 任务子类型
+   * 数据开发中的任务类型绑定的资源组数量运行中的人物实例数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProcessSubType?: string
+  RunningInstanceCount?: number
   /**
-   * 名称
+   * 数据开发中的任务类型绑定的资源组数量等待运行的任务实例数量
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  ProcessName?: string
+  WaitingInstanceCount?: number
   /**
-   * 描述
+   * 非离线开发调度中任务数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description?: string
+  OthersTaskTypeSchedulingTaskCount?: number
   /**
-   * 唯一ID
+   * 非离线开发运行中实例数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  QualifiedId?: string
+  OthersTaskTypeRunningInstanceCount?: number
   /**
-   * 来源
+   * 非离线开发等待运行实例数
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Platform?: string
-  /**
-   * 额外扩展参数
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProcessProperties?: Array<LineageProperty>
+  OthersTaskTypeWaitingInstanceCount?: string
 }
 
 /**

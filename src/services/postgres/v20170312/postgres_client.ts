@@ -38,12 +38,15 @@ import {
   CreateBaseBackupRequest,
   ModifyDBInstanceReadOnlyGroupResponse,
   ClassInfo,
-  DescribeDBInstanceParametersResponse,
+  SwitchDBInstancePrimaryRequest,
+  DescribeCloneDBInstanceSpecRequest,
   DescribeDBInstanceSecurityGroupsResponse,
   BackupPlan,
   RestoreDBInstanceObjectsResponse,
+  ProxyNode,
   ModifyDBInstanceDeletionProtectionRequest,
-  RenewInstanceResponse,
+  ProxyNodeCustom,
+  ProxyRoute,
   DeleteLogBackupResponse,
   ModifyReadOnlyGroupConfigRequest,
   BackupSummary,
@@ -59,6 +62,7 @@ import {
   DescribeBackupOverviewRequest,
   DescribeRegionsResponse,
   DescribeAuditInstanceListResponse,
+  UpgradeDBInstanceMajorVersionResponse,
   ModifyBackupDownloadRestrictionRequest,
   DBInstanceNetInfo,
   BackupDownloadRestriction,
@@ -67,6 +71,8 @@ import {
   PolicyRule,
   DescribeBackupPlansRequest,
   ZoneInfo,
+  ProxyAddress,
+  OpenDBExtranetAccessResponse,
   CreateDatabaseRequest,
   Tag,
   DescribeBackupSummariesRequest,
@@ -82,8 +88,10 @@ import {
   CreateReadOnlyDBInstanceResponse,
   DescribeAvailableRecoveryTimeRequest,
   CloseAccountCAMRequest,
+  DescribeDBProxySpecsResponse,
   DescribeTasksRequest,
   DescribeDBInstanceParametersRequest,
+  ProxyGroupInfo,
   DescribeOrdersResponse,
   DescribeBackupDownloadURLResponse,
   ModifyBaseBackupExpireTimeResponse,
@@ -114,16 +122,19 @@ import {
   CreateAuditLogFileResponse,
   ModifyPrivilege,
   NetworkAccess,
+  DestroyDBProxyRequest,
   DescribeDBInstanceAttributeRequest,
   ResetAccountPasswordResponse,
   RemoveDBInstanceFromReadOnlyGroupResponse,
   RawSlowQuery,
+  ModifyDBProxyAddressRequest,
   DescribeDatabaseObjectsRequest,
   DescribeParameterTemplatesResponse,
   ParamSpecRelation,
   DatabaseObject,
   UpgradeDBInstanceKernelVersionRequest,
   OpenAuditServiceRequest,
+  DestroyDBProxyResponse,
   SwitchDBInstancePrimaryResponse,
   ModifyReadOnlyDBInstanceWeightResponse,
   ModifyDBInstanceHAConfigRequest,
@@ -131,11 +142,13 @@ import {
   DeleteReadOnlyGroupNetworkAccessResponse,
   DescribeBackupSummariesResponse,
   DescribeDBErrlogsRequest,
+  UnlockAccountResponse,
   DBBackup,
   DeleteBackupPlanRequest,
   CloneDBInstanceRequest,
   DeleteParameterTemplateRequest,
   DescribeClassesRequest,
+  ReloadBalanceDBProxyNodeRequest,
   DescribeParamsEventRequest,
   EventInfo,
   CreateInstancesResponse,
@@ -149,6 +162,7 @@ import {
   ModifyDBInstanceSSLConfigResponse,
   DescribeParamsEventResponse,
   CloseAuditServiceResponse,
+  ModifyDBProxyRequest,
   ModifyDBInstanceSecurityGroupsRequest,
   CloseAuditServiceRequest,
   DescribeDedicatedClustersRequest,
@@ -162,7 +176,7 @@ import {
   Detail,
   SecurityGroup,
   IsolateDBInstancesResponse,
-  OpenDBExtranetAccessResponse,
+  CreateDBProxyResponse,
   InquiryPriceUpgradeDBInstanceRequest,
   DescribeDBInstanceHAConfigResponse,
   DescribeDatabaseObjectsResponse,
@@ -170,14 +184,16 @@ import {
   ModifyDBInstanceNameRequest,
   DescribeDBInstanceSSLConfigResponse,
   CloseAccountCAMResponse,
-  SwitchDBInstancePrimaryRequest,
+  ReloadBalanceDBProxyNodeResponse,
   InquiryPriceRenewDBInstanceResponse,
   DescribeSlowQueryAnalysisRequest,
   ErrLogDetail,
+  DescribeParameterTemplatesRequest,
   DestroyDBInstanceRequest,
   InquiryPriceRenewDBInstanceRequest,
+  RenewInstanceResponse,
   DescribeBackupOverviewResponse,
-  DescribeParameterTemplatesRequest,
+  DescribeDBInstanceParametersResponse,
   OpenAccountCAMRequest,
   DescribeClassesResponse,
   LogFilter,
@@ -189,19 +205,20 @@ import {
   ModifyReadOnlyDBInstanceWeightRequest,
   DescribeAuditInstanceListRequest,
   ModifyAccountPrivilegesResponse,
+  ModifyDBProxyResponse,
   Database,
   DeleteReadOnlyGroupRequest,
   DescribeDBBackupsRequest,
   SetAutoRenewFlagResponse,
   RestartDBInstanceResponse,
   Filter,
-  UpgradeDBInstanceMajorVersionResponse,
+  DescribeReadOnlyGroupsRequest,
   DescribeBackupDownloadURLRequest,
   ModifyParameterTemplateRequest,
   DescribeDBVersionsResponse,
   ModifyAuditServiceRequest,
   DatabasePrivilege,
-  UnlockAccountResponse,
+  ProxySpecItem,
   ModifyDBInstanceSecurityGroupsResponse,
   DBNode,
   ModifyDBInstanceNameResponse,
@@ -217,6 +234,7 @@ import {
   OpenAuditServiceResponse,
   CloseDBExtranetAccessRequest,
   ModifyParameterTemplateResponse,
+  DescribeDBProxyRequest,
   DescribeEncryptionKeysRequest,
   LogBackup,
   RebalanceReadOnlyGroupRequest,
@@ -235,6 +253,7 @@ import {
   DescribeDBErrlogsResponse,
   ModifyBackupPlanRequest,
   DeleteBaseBackupRequest,
+  ModifyDBProxyAddressResponse,
   ParamEntry,
   InquiryPriceUpgradeDBInstanceResponse,
   DisIsolateDBInstancesResponse,
@@ -246,7 +265,7 @@ import {
   ModifySwitchTimePeriodRequest,
   CreateAccountResponse,
   DescribeSlowQueryListRequest,
-  DescribeCloneDBInstanceSpecRequest,
+  CreateDBProxyRequest,
   RegionInfo,
   ModifyDatabaseOwnerRequest,
   DisIsolateDBInstancesRequest,
@@ -265,7 +284,7 @@ import {
   DedicatedCluster,
   DescribeDefaultParametersRequest,
   DurationAnalysis,
-  DescribeReadOnlyGroupsRequest,
+  DescribeDBProxyResponse,
   DescribeAccountPrivilegesRequest,
   DescribeReadOnlyGroupsResponse,
   RestoreDBInstanceObjectsRequest,
@@ -280,6 +299,7 @@ import {
   ModifyAuditServiceResponse,
   DestroyDBInstanceResponse,
   DescribeDBInstanceAttributeResponse,
+  DescribeDBProxySpecsRequest,
   DeleteLogBackupRequest,
   DeleteBaseBackupResponse,
   DescribeAuditLogFilesRequest,
@@ -518,6 +538,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改代理地址配置
+   */
+  async ModifyDBProxyAddress(
+    req: ModifyDBProxyAddressRequest,
+    cb?: (error: string, rep: ModifyDBProxyAddressResponse) => void
+  ): Promise<ModifyDBProxyAddressResponse> {
+    return this.request("ModifyDBProxyAddress", req, cb)
+  }
+
+  /**
    * 接口（DescribeDatabases）用来查询实例的数据库列表。
    */
   async DescribeDatabases(
@@ -545,6 +575,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeProductConfigResponse) => void
   ): Promise<DescribeProductConfigResponse> {
     return this.request("DescribeProductConfig", req, cb)
+  }
+
+  /**
+   * 本接口（ReloadBalanceDBProxyNode）用于重新均衡数据库代理节点
+   */
+  async ReloadBalanceDBProxyNode(
+    req: ReloadBalanceDBProxyNodeRequest,
+    cb?: (error: string, rep: ReloadBalanceDBProxyNodeResponse) => void
+  ): Promise<ReloadBalanceDBProxyNodeResponse> {
+    return this.request("ReloadBalanceDBProxyNode", req, cb)
   }
 
   /**
@@ -1180,6 +1220,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询代理可售规格
+   */
+  async DescribeDBProxySpecs(
+    req: DescribeDBProxySpecsRequest,
+    cb?: (error: string, rep: DescribeDBProxySpecsResponse) => void
+  ): Promise<DescribeDBProxySpecsResponse> {
+    return this.request("DescribeDBProxySpecs", req, cb)
+  }
+
+  /**
    * 本接口（DescribeClasses）用于查询实例售卖规格。
    */
   async DescribeClasses(
@@ -1220,6 +1270,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyReadOnlyDBInstanceWeightResponse) => void
   ): Promise<ModifyReadOnlyDBInstanceWeightResponse> {
     return this.request("ModifyReadOnlyDBInstanceWeight", req, cb)
+  }
+
+  /**
+   * 本接口（ModifyDBProxy）用于修改数据库代理（Proxy）。支持两种模式：①仅修改 Description 时同步生效，不下单，DealName 为空；②变更 Proxy 节点规格或数量（ProxyNodeCustom）时走计费下单流程，异步触发变配任务，返回 DealName。可通过 SwitchTag 控制变配执行时机。
+   */
+  async ModifyDBProxy(
+    req: ModifyDBProxyRequest,
+    cb?: (error: string, rep: ModifyDBProxyResponse) => void
+  ): Promise<ModifyDBProxyResponse> {
+    return this.request("ModifyDBProxy", req, cb)
   }
 
   /**
@@ -1343,6 +1403,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（DestroyDBProxy）用于销毁指定的数据库代理（Proxy）。接口仅返回 RequestId，销毁动作由计费回调异步触发 ProxyDestroy 任务，内部统一完成「隔离 + 销毁」全部步骤（释放 VIP、解绑安全组、回收资源、上报计费等），用户无需先调用隔离接口。
+   */
+  async DestroyDBProxy(
+    req: DestroyDBProxyRequest,
+    cb?: (error: string, rep: DestroyDBProxyResponse) => void
+  ): Promise<DestroyDBProxyResponse> {
+    return this.request("DestroyDBProxy", req, cb)
+  }
+
+  /**
    * 本接口（InquiryPriceUpgradeDBInstance）用于查询升级实例的价格。只支持按量计费实例。
    */
   async InquiryPriceUpgradeDBInstance(
@@ -1393,6 +1463,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（CreateDBProxy）用于为指定的 PostgreSQL 实例创建数据库代理（Proxy）。走计费下单流程，下单成功后异步发起 Proxy 创建任务，同步返回订单号 DealName 与 Proxy 实例 ID ProxyGroupId。当前仅支持后付费按量计费。
+   */
+  async CreateDBProxy(
+    req: CreateDBProxyRequest,
+    cb?: (error: string, rep: CreateDBProxyResponse) => void
+  ): Promise<CreateDBProxyResponse> {
+    return this.request("CreateDBProxy", req, cb)
+  }
+
+  /**
    * 此接口用于锁定数据库账号，锁定后账号当前连接会断开，并且无法建立新连接。
    */
   async LockAccount(
@@ -1400,6 +1480,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: LockAccountResponse) => void
   ): Promise<LockAccountResponse> {
     return this.request("LockAccount", req, cb)
+  }
+
+  /**
+   * 本接口（DescribeDBProxy）用于查询指定 PostgreSQL 实例下的数据库代理（Proxy）信息，包含 Proxy 节点列表与接入地址列表。可选传入 ProxyGroupId 精确查询某一 Proxy；不传则返回该实例下的全部 Proxy。
+   */
+  async DescribeDBProxy(
+    req: DescribeDBProxyRequest,
+    cb?: (error: string, rep: DescribeDBProxyResponse) => void
+  ): Promise<DescribeDBProxyResponse> {
+    return this.request("DescribeDBProxy", req, cb)
   }
 
   /**

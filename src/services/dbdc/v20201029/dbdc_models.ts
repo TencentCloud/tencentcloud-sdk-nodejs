@@ -32,11 +32,11 @@ export interface SystemDisk {
   /**
    * <p>磁盘类型</p><p>枚举值：</p><ul><li>CLOUD_HSSD： 增强型云硬盘</li></ul>
    */
-  DiskType?: string
+  DiskType: string
   /**
    * <p>磁盘大小</p><p>单位：GiB</p>
    */
-  DiskSize?: number
+  DiskSize: number
 }
 
 /**
@@ -51,6 +51,10 @@ export interface RemoveNodesFromDBCustomClusterRequest {
    * <p>要下架的 DB Custom 节点ID列表</p>
    */
   NodeIds: Array<string>
+  /**
+   * <p>节点的登录参数</p>
+   */
+  LoginSettings?: LoginSettings
 }
 
 /**
@@ -221,6 +225,20 @@ export interface DescribeDBCustomClusterDetailResponse {
 }
 
 /**
+ * 标签信息。
+ */
+export interface Label {
+  /**
+   * <p>在集群内的节点Label键</p>
+   */
+  Key?: string
+  /**
+   * <p>在集群内的节点Label键值</p>
+   */
+  Value?: string
+}
+
+/**
  * DB Custom 节点登录相关配置。
  */
 export interface LoginSettings {
@@ -258,6 +276,10 @@ export interface DBCustomImage {
    * <p>操作系统架构</p><p>枚举值：</p><ul><li>x86_64： X86 64位架构</li><li>arm64： ARM 64位机构</li></ul>
    */
   Architecture?: string
+  /**
+   * <p>操作系统类型</p><p>枚举值：</p><ul><li>windows： windows</li><li>linux： linux</li></ul>
+   */
+  OsType?: string
 }
 
 /**
@@ -292,6 +314,16 @@ export interface DBCustomClusterNode {
    * <p>节点类型</p><p>枚举值：</p><ul><li>DB.AT5.32XLARGE512： 高IO型服务器：128核心512GB内存，8*7180GB本地NvME SSDB。</li><li>DB.AT5.64XLARGE1152： 高IO型服务器：256核心1152GB内存，12*7180GB本地NvME SSDB。</li><li>DB.AT5.128XLARGE2304： 高IO型服务器：512核心2304GB内存，24*7180GB本地NvME SSDB。</li><li>DB.AT5.16XLARGE256： 高IO型服务器：64核心256GB内存，4*7180GB本地NvME SSDB。</li><li>DB.AT5.8XLARGE128： 高IO型服务器：32核心128GB内存，2*7180GB本地NvME SSDB。</li></ul>
    */
   NodeType?: string
+  /**
+   * <p>网络模式</p><p>枚举值：</p><ul><li>privatelink： 四层网络联通，放通SSH 通路</li><li>cross_tenant_eni： 三层网络联通，双网卡模式</li></ul>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NetworkMode?: string
+  /**
+   * <p>当选择网络模式为三层网络联通模式时，此处的IP地址则为用户可访问的地址。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EniIP?: string
 }
 
 /**
@@ -650,6 +682,26 @@ export interface AddNodesToDBCustomClusterRequest {
    * <p>实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。</p><p>入参限制：若选择密钥方式，KeyIds 仅支持单个 ID。三种方式必须且仅可以设置其中一种。</p>
    */
   LoginSettings: LoginSettings
+  /**
+   * <p>节点上架成功后初始化新增的自定义 Label</p><p>入参限制：单次 ≤ 20 对</p>
+   */
+  Labels?: Array<Label>
+  /**
+   * <p>节点上架成功后初始化下发的Taint</p><p>入参限制：单次 ≤ 5 对</p>
+   */
+  Taints?: Array<Taint>
+  /**
+   * <p>主机hostname ，仅 HostNameType=1 时必填，其余情况忽略；不支持大写字母</p><p>入参限制：- 点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。不允许使用下划线(_)。</p><ul><li>Windows 节点：主机名名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。</li><li>其他类型（Linux 等）节点：主机名字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。</li><li>上架多台节点时：</li><li>指定模式串 {R:x}：表示生成数字序列 [x, x+n-1]，其中 n为购买节点的数量。例如：输入 server_{R:3}，购买1台时，节点主机名为 server_3；购买2台时，主机名分别为 server_3、server_4。</li><li>指定模式串 {R:x,F:y}：y表示固定位数（可选），取值范围为 [0,8]，默认值 0表示不固定位数（等效于 {R:x}）。不足位时自动补零，例如：输入server_{R:3,F:3}，购买2台时，节点主机名为 server_003、server_004。若数字位数超过 y（如 {R:99,F:2}），以实际位数为准，例如：app_{R:99,F:2}，购买2台时，节点主机名为 app_99、app_100。</li><li>指定模式串 {IP}：自动替换为节点的内网IP地址。例如：输入 node-{IP}，节点主机名为 node-10.0.12.8；支持与序号模式串混合使用，例如：输入 web-{IP}-{R:1}，购买2台时，节点主机名分别为 web-10.0.12.8-1、web-10.0.12.9-2。</li><li>模式串需严格遵循 {R:x,F:y}、{R:x} 或 {IP} 格式，无效格式（如 {}）视为普通文本。支持多个模式串。</li><li>未指定模式串：节点主机名添加后缀 1、2...n，其中n表示购买节点的数量，例如 server_购买2台时生成 server_1、server_2。</li></ul>
+   */
+  HostName?: string
+  /**
+   * <p>HostName 来源类型</p><p>枚举值：</p><ul><li>0： 复用节点创建时设置的 hostname，为空则报错</li><li>1： 重新指定 HostName，需同时传 HostName 字段（支持模式串 {R:x}、{R:x,F:y}、{IP}）</li><li>2： 系统自动分配，用 NodeId 作为 HostName</li></ul>
+   */
+  HostNameType?: number
+  /**
+   * <p>试运行开关，true 时只执行参数校验，不发起上架流程</p><p>默认值：false</p>
+   */
+  DryRun?: boolean
 }
 
 /**
@@ -1239,7 +1291,7 @@ export interface RenewDBCustomNodeRequest {
   /**
    * <p>续费周期</p><p>取值范围：[1, 36]</p><p>单位：月</p><p>默认值：1</p>
    */
-  Period: number
+  Period?: number
   /**
    * <p>是否开启自动续费</p><p>枚举值：</p><ul><li>0： 不自动续费</li><li>1： 自动续费</li></ul><p>默认值：1</p>
    */
@@ -1333,10 +1385,6 @@ export interface CreateDBCustomNodesRequest {
    */
   SubnetId: string
   /**
-   * <p>购买时长(月): 1/2/3/4/5/6/7/8/9/10/11/12/24/36</p><p>取值范围：[1, 36]</p><p>单位：月</p><p>默认值：1</p>
-   */
-  Period: number
-  /**
    * <p>节点机型</p><p>枚举值：</p><ul><li>DB.AT5.32XLARGE512： 高IO型服务器：128核心512GB内存，8*7180GB本地NvME SSDB。</li><li>DB.AT5.64XLARGE1152： 高IO型服务器：256核心1152GB内存，12*7180GB本地NvME SSDB。</li><li>DB.AT5.128XLARGE2304： 高IO型服务器：512核心2304GB内存，24*7180GB本地NvME SSDB。</li><li>DB.AT5.16XLARGE256： 高IO型服务器：64核心256GB内存，4*7180GB本地NvME SSDB。</li><li>DB.AT5.8XLARGE128： 高IO型服务器：32核心128GB内存，2*7180GB本地NvME SSDB。</li></ul>
    */
   NodeType: string
@@ -1345,9 +1393,13 @@ export interface CreateDBCustomNodesRequest {
    */
   NodeCount: number
   /**
-   * <p>实例登录设置。通过该参数可以设置实例的登录方式密码、密钥或保持镜像的原始登录设置。</p><p>入参限制：若选择密钥方式，KeyIds 仅支持单个 ID。三种方式必须且仅可以设置其中一种。</p>
+   * <p>节点登录设置。通过该参数可以设置节点的登录方式密码、密钥或保持镜像的原始登录设置。</p><p>入参限制：若选择密钥方式，KeyIds 仅支持单个 ID。三种方式必须且仅可以设置其中一种。</p>
    */
   LoginSettings: LoginSettings
+  /**
+   * <p>购买时长(月): 1/2/3/4/5/6/7/8/9/10/11/12/24/36</p><p>取值范围：[1, 36]</p><p>单位：月</p><p>默认值：1</p>
+   */
+  Period?: number
   /**
    * <p>自动续费配置</p><p>枚举值：</p><ul><li>1： 自动续费</li><li>2： 不自动续费</li></ul><p>默认值：不自动续费</p>
    */
@@ -1372,6 +1424,34 @@ export interface CreateDBCustomNodesRequest {
    * <p>用于保证请求幂等性的字符串。该字符串由客户生成，需保证不同请求之间唯一，最大值不超过64个ASCII字符。若不指定该参数，则无法保证请求的幂等性。</p>
    */
   ClientToken?: string
+  /**
+   * <p>计费模式</p><p>枚举值：</p><ul><li>PREPAID： 包年包月</li><li>POSTPAID： 按量付费</li></ul><p>默认值：默认为包年包月(PREPAID)</p>
+   */
+  ChargeType?: string
+  /**
+   * <p>访问主机的网络模式</p><p>枚举值：</p><ul><li>privatelink： 四层网络联通，放通SSH 通路</li><li>cross_tenant_eni： 三层网络联通，双网卡模式</li></ul><p>默认值：默认值为：privatelink</p>
+   */
+  NetworkMode?: string
+  /**
+   * <p>系统盘配置</p><p>入参限制：仅云盘版机型支持，如DB.SA5机型。本地盘机型DB.AT5机型不支持设置</p>
+   */
+  SystemDisk?: SystemDisk
+  /**
+   * <p>数据库盘配置</p><p>入参限制：仅云盘版机型支持，如DB.SA5机型。本地盘机型DB.AT5机型不支持设置</p>
+   */
+  DataDisks?: Array<DataDisk>
+  /**
+   * <p>主机的hostname。</p><p>参数格式：字符串或者指定模式串</p><p>入参限制：- 点号（.）和短横线（-）不能作为 HostName 的首尾字符，不能连续使用。不允许使用下划线(_)。</p><ul><li>Windows 节点：主机名名字符长度为[2, 15]，允许字母（不限制大小写）、数字和短横线（-）组成，不支持点号（.），不能全是数字。</li><li>其他类型（Linux 等）节点：主机名字符长度为[2, 60]，允许支持多个点号，点之间为一段，每段允许字母（不限制大小写）、数字和短横线（-）组成。</li><li>购买多台节点时：</li><li>指定模式串 {R:x}：表示生成数字序列 [x, x+n-1]，其中 n为购买节点的数量。例如：输入 server_{R:3}，购买1台时，节点主机名为 server_3；购买2台时，主机名分别为 server_3、server_4。</li><li>指定模式串 {R:x,F:y}：y表示固定位数（可选），取值范围为 [0,8]，默认值 0表示不固定位数（等效于 {R:x}）。不足位时自动补零，例如：输入server_{R:3,F:3}，购买2台时，节点主机名为 server_003、server_004。若数字位数超过 y（如 {R:99,F:2}），以实际位数为准，例如：app_{R:99,F:2}，购买2台时，节点主机名为 app_99、app_100。</li><li>指定模式串 {IP}：自动替换为节点的内网IP地址。例如：输入 node-{IP}，节点主机名为 node-10.0.12.8；支持与序号模式串混合使用，例如：输入 web-{IP}-{R:1}，购买2台时，节点主机名分别为 web-10.0.12.8-1、web-10.0.12.9-2。</li><li>模式串需严格遵循 {R:x,F:y}、{R:x} 或 {IP} 格式，无效格式（如 {}）视为普通文本。支持多个模式串。</li><li>未指定模式串：节点主机名添加后缀 1、2...n，其中n表示购买节点的数量，例如 server_购买2台时生成 server_1、server_2。</li></ul>
+   */
+  HostName?: string
+  /**
+   * <p>试运行开关。</p><p>枚举值：</p><ul><li>true： 为 true 时接口只执行参数校验与资源申请检查（库存、配额、网络等），完成后立即返回空响应，不会真正下单，也不会创建节点记录。用于调用方在真正下单前做一次可行性预检。</li><li>false： 不预检查</li></ul><p>默认值：false</p>
+   */
+  DryRun?: boolean
+  /**
+   * <p>设置节点安全组</p><p>参数格式：设置需要与节点绑定的多个安全组ID，以数组形式配置。</p>
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -1440,6 +1520,24 @@ export interface RenewDBCustomNodeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 集群节点 taint 信息。
+ */
+export interface Taint {
+  /**
+   * <p>Taint 的键，格式对齐 K8s 原生约束（prefix DNS 子域 ≤ 253 字符，name ≤ 63 字符），不可使用系统保留前缀</p>
+   */
+  Key: string
+  /**
+   * <p>污点效果</p><p>枚举值：</p><ul><li>NoSchedule： 不允许新 Pod 调度到该节点（已运行 Pod 不受影响）</li><li>PreferNoSchedule： 尽量不调度，无法满足时仍可调度</li><li>NoExecute： 不允许调度，且会驱逐已在节点上运行的不容忍该 Taint 的 Pod</li></ul>
+   */
+  Effect?: string
+  /**
+   * <p>Taint 的值，≤ 63 字符，可为空</p>
+   */
+  Value?: string
 }
 
 /**
@@ -1561,6 +1659,10 @@ export interface RemoveNodesFromDBCustomClusterResponse {
  * DescribeDBCustomImages请求参数结构体
  */
 export interface DescribeDBCustomImagesRequest {
+  /**
+   * <p>支持镜像过滤的选项</p><p>取值参考：</p><ul><li>image-id,按镜像 ID 过滤    </li><li>os-type,按操作系统类型过滤(linux / windows)</li><li>image-type，按镜像类型过滤（PUBLIC_IMAGE（公共镜像）/ PRIVATE_IMAGE（私有镜像））</li><li>architecture，按架构过滤（x86_64 / arm64）</li></ul>
+   */
+  Filters?: Array<Filter>
   /**
    * <p>偏移量</p><p>默认值：0</p>
    */
@@ -1720,7 +1822,7 @@ export interface CreateDBCustomClusterRequest {
    */
   ContainerNetwork: ContainerNetwork
   /**
-   * <p>集群名称</p><p>入参限制：最长128个字符，只能为中文，英文，下划线。</p>
+   * <p>集群名称</p><p>入参限制：最长128个字符。</p>
    */
   ClusterName?: string
   /**
@@ -1739,6 +1841,10 @@ export interface CreateDBCustomClusterRequest {
    * <p>客户端Token</p>
    */
   ClientToken?: string
+  /**
+   * <p>试运行开关，true 时只执行参数校验，不发起创建流程，默认 false</p>
+   */
+  DryRun?: boolean
 }
 
 /**
@@ -1848,6 +1954,14 @@ export interface DBCustomNode {
    * <p>底层物理机IP（已加密）</p>
    */
   HostIp?: string
+  /**
+   * <p>网络模式</p><p>枚举值：</p><ul><li>NetworkModePrivateLink： 四层 SSH 服务联通模式</li><li>NetworkModeCrossTenantENI：  三层双网卡访问方式</li></ul>
+   */
+  NetworkMode?: string
+  /**
+   * <p>当选择NetworkModeCrossTenantENI模式时，节点的访问IP地址</p>
+   */
+  EniIP?: string
 }
 
 /**
@@ -1857,13 +1971,13 @@ export interface DataDisk {
   /**
    * <p>磁盘类型</p><p>枚举值：</p><ul><li>CLOUD_HSSD： 增强型云硬盘</li><li>LOCAL_NVME： 本地硬盘</li></ul>
    */
-  DiskType?: string
+  DiskType: string
   /**
    * <p>磁盘大小</p><p>单位：GiB</p>
    */
-  DiskSize?: number
+  DiskSize: number
   /**
-   * <p>磁盘名称</p>
+   * <p>磁盘名称</p><p>DataDisk 作为输入参数时，DiskName 无效。</p>
    */
   DiskName?: string
 }

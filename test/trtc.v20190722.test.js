@@ -28,6 +28,16 @@ it("trtc.v20190722.CreateCloudModeration", async function () {
     }
 })
 
+it("trtc.v20190722.DescribeTRTCRealTimeQualityData", async function () {
+    try {
+       const data = await client.DescribeTRTCRealTimeQualityData({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.StopWebRecord", async function () {
     try {
        const data = await client.StopWebRecord({})
@@ -71,6 +81,16 @@ it("trtc.v20190722.CreateBasicModeration", async function () {
 it("trtc.v20190722.DescribeRoomInfo", async function () {
     try {
        const data = await client.DescribeRoomInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.ModifyPicture", async function () {
+    try {
+       const data = await client.ModifyPicture({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -148,9 +168,9 @@ it("trtc.v20190722.StopMCUMixTranscodeByStrRoomId", async function () {
     }
 })
 
-it("trtc.v20190722.StartAIConversation", async function () {
+it("trtc.v20190722.DescribeTRTCRealTimeScaleData", async function () {
     try {
-       const data = await client.StartAIConversation({})
+       const data = await client.DescribeTRTCRealTimeScaleData({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -158,9 +178,9 @@ it("trtc.v20190722.StartAIConversation", async function () {
     }
 })
 
-it("trtc.v20190722.DeleteVoicePrint", async function () {
+it("trtc.v20190722.DescribeAIConversation", async function () {
     try {
-       const data = await client.DeleteVoicePrint({})
+       const data = await client.DescribeAIConversation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,6 +218,16 @@ it("trtc.v20190722.StartStreamIngest", async function () {
     }
 })
 
+it("trtc.v20190722.StartAIConversation", async function () {
+    try {
+       const data = await client.StartAIConversation({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("trtc.v20190722.RemoveUserByStrRoomId", async function () {
     try {
        const data = await client.RemoveUserByStrRoomId({})
@@ -228,9 +258,9 @@ it("trtc.v20190722.CreatePicture", async function () {
     }
 })
 
-it("trtc.v20190722.DescribeTRTCRealTimeScaleData", async function () {
+it("trtc.v20190722.CreateLiveStreamModeration", async function () {
     try {
-       const data = await client.DescribeTRTCRealTimeScaleData({})
+       const data = await client.CreateLiveStreamModeration({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -271,6 +301,16 @@ it("trtc.v20190722.RemoveUser", async function () {
 it("trtc.v20190722.DeleteBasicModeration", async function () {
     try {
        const data = await client.DeleteBasicModeration({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("trtc.v20190722.DescribeLiveStreamModeration", async function () {
+    try {
+       const data = await client.DescribeLiveStreamModeration({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -438,9 +478,9 @@ it("trtc.v20190722.DescribeCloudTranscription", async function () {
     }
 })
 
-it("trtc.v20190722.DescribeRelayUsage", async function () {
+it("trtc.v20190722.DeleteLiveStreamModeration", async function () {
     try {
-       const data = await client.DescribeRelayUsage({})
+       const data = await client.DeleteLiveStreamModeration({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -608,9 +648,9 @@ it("trtc.v20190722.DescribeCloudRecording", async function () {
     }
 })
 
-it("trtc.v20190722.ModifyPicture", async function () {
+it("trtc.v20190722.DescribeRelayUsage", async function () {
     try {
-       const data = await client.ModifyPicture({})
+       const data = await client.DescribeRelayUsage({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -638,9 +678,9 @@ it("trtc.v20190722.UpdatePublishCdnStream", async function () {
     }
 })
 
-it("trtc.v20190722.DescribeTRTCRealTimeQualityData", async function () {
+it("trtc.v20190722.DeleteVoicePrint", async function () {
     try {
-       const data = await client.DescribeTRTCRealTimeQualityData({})
+       const data = await client.DeleteVoicePrint({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -691,16 +731,6 @@ it("trtc.v20190722.DescribePicture", async function () {
 it("trtc.v20190722.DescribeCloudModeration", async function () {
     try {
        const data = await client.DescribeCloudModeration({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("trtc.v20190722.DescribeAIConversation", async function () {
-    try {
-       const data = await client.DescribeAIConversation({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

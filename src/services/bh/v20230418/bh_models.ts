@@ -3679,21 +3679,25 @@ export interface DescribeOperationTaskRequest {
  */
 export interface LoginSetting {
   /**
-   * 登录会话超时，10分钟，20分钟，30分钟，默认20分钟
+   * <p>登录会话超时，10分钟，20分钟，30分钟，默认20分钟</p>
    */
   TimeOut: number
   /**
-   * 连续密码错误次数，超过锁定账号，3-5
+   * <p>连续密码错误次数，超过锁定账号，3-5</p>
    */
   LockThreshold: number
   /**
-   * 账号锁定时长，10分钟，20分钟，30分钟
+   * <p>账号锁定时长，10分钟，20分钟，30分钟</p>
    */
   LockTime: number
   /**
-   * 用户多少天不活跃，账号自动锁定
+   * <p>用户多少天不活跃，账号自动锁定</p>
    */
   InactiveUserLock?: number
+  /**
+   * <p>运维账号单点登录开关：0-关闭，1-开启</p>
+   */
+  EnableSingleLogin?: number
 }
 
 /**

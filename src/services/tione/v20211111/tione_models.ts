@@ -291,6 +291,10 @@ export interface DescribeLogsRequest {
    * <p>使用OFFSET分页查询时，指定返回的数据偏移量，默认为0</p>
    */
   Offset?: number
+  /**
+   * <p>日志类别</p><p>枚举值：</p><ul><li>stdout： stdout</li><li>stderr： stderr</li></ul><p>默认值：&quot;&quot;</p>
+   */
+  LogStream?: string
 }
 
 /**
@@ -720,6 +724,24 @@ export interface Filter {
    * 是否开启模糊匹配
    */
   Fuzzy?: boolean
+}
+
+/**
+ * 训练诊断工具配置
+ */
+export interface TrainToolConfig {
+  /**
+   * <p>是否开启 Hang 检测</p><p>默认值：false</p>
+   */
+  EnableHangMonitor?: boolean
+  /**
+   * <p>Hang 检测的节点列表</p>
+   */
+  HangMonitorNodes?: Array<string>
+  /**
+   * <p>Hang 超时时间</p><p>取值范围：[1, 14400]</p><p>单位：分</p>
+   */
+  LogHangTimeoutInMinute?: number
 }
 
 /**
@@ -3356,25 +3378,33 @@ export interface AnnotationTaskInfo {
  */
 export interface LogIdentity {
   /**
-   * 单条日志的ID
+   * <p>单条日志的ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Id: string
+  Id?: string
   /**
-   * 单条日志的内容
+   * <p>单条日志的内容</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Message: string
+  Message?: string
   /**
-   * 这条日志对应的Pod名称
+   * <p>这条日志对应的Pod名称</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PodName: string
+  PodName?: string
   /**
-   * 日志的时间戳（RFC3339格式的时间字符串）
+   * <p>日志的时间戳（RFC3339格式的时间字符串）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Timestamp: string
+  Timestamp?: string
+  /**
+   * <p>日志上报请求包的ID</p>
+   */
+  PkgId?: string
+  /**
+   * <p>请求包内日志的ID</p>
+   */
+  PkgLogId?: string
 }
 
 /**
@@ -4743,6 +4773,14 @@ export interface CreateTrainingTaskRequest {
    * <p>环境变量</p>
    */
   Envs?: Array<EnvVar>
+  /**
+   * <p>训练诊断工具配置</p>
+   */
+  TrainToolConfig?: TrainToolConfig
+  /**
+   * <p>资源供应属性</p>
+   */
+  ResourceSupplyAttribute?: ResourceSupplyAttribute
 }
 
 /**

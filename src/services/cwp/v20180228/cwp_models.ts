@@ -14066,45 +14066,49 @@ export interface DescribeLicenseListRequest {
  */
 export interface CreateMalwareWhiteListRequest {
   /**
-   * 白名单模式； 0 MD5白名单，1自定义
+   * <p>白名单模式； 0 MD5白名单，1自定义</p>
    */
   Mode: number
   /**
-   * quuid 列表
+   * <p>quuid 列表</p>
    */
   QuuidList?: Array<string>
   /**
-   * 是否全部主机； 0否，1是。
+   * <p>是否全部主机； 0否，1是。</p>
    */
   IsGlobal?: number
   /**
-   * 匹配模式 ；0 精确匹配，1模糊匹配（废弃）
+   * <p>匹配模式 ；0 精确匹配，1模糊匹配（废弃）</p>
    */
   MatchType?: number
   /**
-   * 文件名称(正则)；长度不超过200个
+   * <p>文件名称(正则)；长度不超过200个</p>
    */
   FileName?: Array<string>
   /**
-   * 文件目录(正则)；长度不超过200个,内容base64转义
+   * <p>文件目录(正则)；长度不超过200个,内容base64转义</p>
    */
   FileDirectory?: Array<string>
   /**
-   * 文件后缀；长度不超过200个,内容base64转义（废弃）
+   * <p>文件后缀；长度不超过200个,内容base64转义（废弃）</p>
    */
   FileExtension?: Array<string>
   /**
-   * MD5列表
+   * <p>MD5列表</p>
    */
   Md5List?: Array<string>
   /**
-   * 木马事件ID
+   * <p>木马事件ID</p>
    */
   EventId?: number
   /**
-   * 对历史待处理执行加白操作；0是不处理，1是处理
+   * <p>对历史待处理执行加白操作；0是不处理，1是处理</p>
    */
   IsHandleHistoryEvents?: number
+  /**
+   * <p>恶意进程告警id</p>
+   */
+  ProcessEventID?: number
 }
 
 /**
@@ -15052,85 +15056,93 @@ export interface CreateIncidentBacktrackingResponse {
  */
 export interface RiskProcessEvent {
   /**
-   * 事件ID
+   * <p>事件ID</p>
    */
   EventId?: number
   /**
-   * 主机名称
+   * <p>主机名称</p>
    */
   HostName?: string
   /**
-   * 主机IP
+   * <p>主机IP</p>
    */
   HostIp?: string
   /**
-   * 外网IP
+   * <p>外网IP</p>
    */
   WanIp?: string
   /**
-   * 进程ID
+   * <p>进程ID</p>
    */
   ProcessId?: number
   /**
-   * 文件路径
+   * <p>文件路径</p>
    */
   FilePath?: string
   /**
-   * 执行命令
+   * <p>执行命令</p>
    */
   CmdLine?: string
   /**
-   * 进程启动时间
+   * <p>进程启动时间</p>
    */
   StartTime?: string
   /**
-   * 最近检测时间
+   * <p>最近检测时间</p>
    */
   DetectTime?: string
   /**
-   * 病毒名称
+   * <p>病毒名称</p>
    */
   VirusName?: string
   /**
-   * 木马检测平台 [1:云查杀引擎|2:TAV|3:binaryAi|4:异常行为|5:威胁情报]
+   * <p>木马检测平台 [1:云查杀引擎|2:TAV|3:binaryAi|4:异常行为|5:威胁情报]</p>
    */
   CheckPlatform?: Array<string>
   /**
-   * 病毒标签
+   * <p>病毒标签</p>
    */
   VirusTags?: Array<string>
   /**
-   * 威胁描述
+   * <p>威胁描述</p>
    */
   ThreatDesc?: string
   /**
-   * 建议方案
+   * <p>建议方案</p>
    */
   SuggestSolution?: string
   /**
-   * 参考链接
+   * <p>参考链接</p>
    */
   ReferenceLink?: string
   /**
-   * 处理状态[0待处理;1已处理;2查杀中;3已查杀;4已退出;5忽略]
+   * <p>处理状态[0待处理;1已处理;2查杀中;3已查杀;4已退出;5忽略]</p>
    */
   HandleStatus?: number
   /**
-   * 主机在线状态
+   * <p>主机在线状态</p>
    */
   OnlineStatus?: number
   /**
-   * 附加信息
+   * <p>附加信息</p>
    */
   MachineExtraInfo?: MachineExtraInfo
   /**
-   * 主机uuid
+   * <p>主机uuid</p>
    */
   Uuid?: string
   /**
-   * 首次检出方式 0扫描;1实时监控
+   * <p>首次检出方式 0扫描;1实时监控</p>
    */
   FirstDetectionMethod?: number
+  /**
+   * <p>quuid</p>
+   */
+  QUUID?: string
+  /**
+   * <p>进程md5</p>
+   */
+  ExeMd5?: string
 }
 
 /**

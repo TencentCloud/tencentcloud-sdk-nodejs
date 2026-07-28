@@ -75,9 +75,10 @@ import {
   CreateHttpAuthenticatorResponse,
   MQTTMessage,
   MQTTMessageItem,
-  DescribeSharedSubscriptionClientRequest,
+  DescribeInstanceResponse,
   UpdateMessageEnrichmentRulePriorityResponse,
   ModifyJWKSAuthenticatorResponse,
+  DescribeWillMessageResponse,
   DeleteDeviceIdentityResponse,
   CreateInsPublicEndpointResponse,
   CreateUserResponse,
@@ -105,6 +106,7 @@ import {
   CreateTopicRequest,
   DeleteCaCertificateResponse,
   DescribeSharedSubscriptionClientResponse,
+  DeviceIdentityBackupHistoryItem,
   DeleteClientSubscriptionRequest,
   TagFilter,
   DescribeMessageDetailsResponse,
@@ -130,8 +132,8 @@ import {
   RevokedDeviceCertificateRequest,
   ModifyInsPublicEndpointResponse,
   CreateInstanceRequest,
-  DescribeAuthenticatorRequest,
   RegisterCaCertificateRequest,
+  DescribeSharedSubscriptionClientRequest,
   CreateAuthorizationPolicyResponse,
   DescribeSharedSubscriptionsResponse,
   CreateInsPublicEndpointRequest,
@@ -141,13 +143,14 @@ import {
   DescribeDeviceCertificatesResponse,
   ModifyTopicRequest,
   CreateUserRequest,
-  DescribeInstanceResponse,
+  DescribeAuthenticatorRequest,
   ModifyInstanceCertBindingResponse,
   UpdateMessageEnrichmentRulePriorityRequest,
   SharedSubscriptionGroupWithSubscriptions,
   DescribeInsVPCEndpointsResponse,
   DescribeDeviceCertificateRequest,
   ModifyInsPublicEndpointRequest,
+  DeviceCertificateBackupHistoryItem,
   SharedSubscriptionClient,
   DeleteInsPublicEndpointRequest,
   DescribeInsPublicEndpointsRequest,
@@ -169,14 +172,17 @@ import {
   RevokedDeviceCertificateResponse,
   PropagatingProperty,
   CreateHttpAuthenticatorRequest,
-  DescribeProductSKUListRequest,
+  DescribeDeviceCertificateBackupHistoryResponse,
   DescribeSharedSubscriptionLagRequest,
+  DescribeWillMessageRequest,
   DescribeDeviceCertificateResponse,
   DescribeInstanceListRequest,
   DeactivateCaCertificateRequest,
   ModifyDeviceIdentityRequest,
   CreateJWTAuthenticatorRequest,
+  DescribeDeviceIdentityBackupHistoryRequest,
   DescribeCaCertificatesRequest,
+  DescribeDeviceIdentityBackupHistoryResponse,
   DeviceCertificateItem,
   SubscriptionUserProperty,
   ModifyMessageEnrichmentRuleResponse,
@@ -184,6 +190,7 @@ import {
   MQTTTopicItem,
   PriceTag,
   ModifyAuthorizationPolicyRequest,
+  DescribeProductSKUListRequest,
   DescribeTopicListResponse,
   DeleteTopicResponse,
   ModifyInstanceCertBindingRequest,
@@ -194,6 +201,7 @@ import {
   DeleteAuthenticatorResponse,
   DescribeDeviceIdentitiesResponse,
   IpRule,
+  DescribeDeviceCertificateBackupHistoryRequest,
 } from "./mqtt_models"
 
 /**
@@ -356,15 +364,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 查询用户列表，Filter参数使用说明如下：
-
-1. Username，用户名称模糊搜索
-     */
-  async DescribeUserList(
-    req: DescribeUserListRequest,
-    cb?: (error: string, rep: DescribeUserListResponse) => void
-  ): Promise<DescribeUserListResponse> {
-    return this.request("DescribeUserList", req, cb)
+   * 跨集群灾备场景下查询设备证书同步记录
+   */
+  async DescribeDeviceCertificateBackupHistory(
+    req: DescribeDeviceCertificateBackupHistoryRequest,
+    cb?: (error: string, rep: DescribeDeviceCertificateBackupHistoryResponse) => void
+  ): Promise<DescribeDeviceCertificateBackupHistoryResponse> {
+    return this.request("DescribeDeviceCertificateBackupHistory", req, cb)
   }
 
   /**
@@ -499,6 +505,18 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 查询用户列表，Filter参数使用说明如下：
+
+1. Username，用户名称模糊搜索
+     */
+  async DescribeUserList(
+    req: DescribeUserListRequest,
+    cb?: (error: string, rep: DescribeUserListResponse) => void
+  ): Promise<DescribeUserListResponse> {
+    return this.request("DescribeUserList", req, cb)
+  }
+
+  /**
    * 修改策略规则优先级
    */
   async UpdateAuthorizationPolicyPriority(
@@ -506,6 +524,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: UpdateAuthorizationPolicyPriorityResponse) => void
   ): Promise<UpdateAuthorizationPolicyPriorityResponse> {
     return this.request("UpdateAuthorizationPolicyPriority", req, cb)
+  }
+
+  /**
+   * 修改消息属性增强规则优先级
+   */
+  async UpdateMessageEnrichmentRulePriority(
+    req: UpdateMessageEnrichmentRulePriorityRequest,
+    cb?: (error: string, rep: UpdateMessageEnrichmentRulePriorityResponse) => void
+  ): Promise<UpdateMessageEnrichmentRulePriorityResponse> {
+    return this.request("UpdateMessageEnrichmentRulePriority", req, cb)
   }
 
   /**
@@ -572,6 +600,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 遗嘱消息查询
+   */
+  async DescribeWillMessage(
+    req: DescribeWillMessageRequest,
+    cb?: (error: string, rep: DescribeWillMessageResponse) => void
+  ): Promise<DescribeWillMessageResponse> {
+    return this.request("DescribeWillMessage", req, cb)
+  }
+
+  /**
    * 购买新的MQTT实例
    */
   async CreateInstance(
@@ -627,13 +665,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询MQTT消息详情
+   * 跨集群容灾场景下查询设备标识同步记录
    */
-  async DescribeMessageDetails(
-    req: DescribeMessageDetailsRequest,
-    cb?: (error: string, rep: DescribeMessageDetailsResponse) => void
-  ): Promise<DescribeMessageDetailsResponse> {
-    return this.request("DescribeMessageDetails", req, cb)
+  async DescribeDeviceIdentityBackupHistory(
+    req: DescribeDeviceIdentityBackupHistoryRequest,
+    cb?: (error: string, rep: DescribeDeviceIdentityBackupHistoryResponse) => void
+  ): Promise<DescribeDeviceIdentityBackupHistoryResponse> {
+    return this.request("DescribeDeviceIdentityBackupHistory", req, cb)
   }
 
   /**
@@ -738,13 +776,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改消息属性增强规则优先级
+   * 查询MQTT消息详情
    */
-  async UpdateMessageEnrichmentRulePriority(
-    req: UpdateMessageEnrichmentRulePriorityRequest,
-    cb?: (error: string, rep: UpdateMessageEnrichmentRulePriorityResponse) => void
-  ): Promise<UpdateMessageEnrichmentRulePriorityResponse> {
-    return this.request("UpdateMessageEnrichmentRulePriority", req, cb)
+  async DescribeMessageDetails(
+    req: DescribeMessageDetailsRequest,
+    cb?: (error: string, rep: DescribeMessageDetailsResponse) => void
+  ): Promise<DescribeMessageDetailsResponse> {
+    return this.request("DescribeMessageDetails", req, cb)
   }
 
   /**

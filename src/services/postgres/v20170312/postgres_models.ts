@@ -588,21 +588,52 @@ export interface ClassInfo {
 }
 
 /**
- * DescribeDBInstanceParameters返回参数结构体
+ * SwitchDBInstancePrimary请求参数结构体
  */
-export interface DescribeDBInstanceParametersResponse {
+export interface SwitchDBInstancePrimaryRequest {
   /**
-   * 参数列表总数
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
    */
-  TotalCount?: number
+  DBInstanceId: string
   /**
-   * 参数列表返回详情
+   * 是否强制切换。强制切换时只要备节点可访问，无论主备延迟多大都会发起切换。只有SwitchTag为0时，才可使用立即切换。
+<li>默认：false</li>
    */
-  Detail?: Array<ParamInfo>
+  Force?: boolean
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 指定实例配置完成变更后的切换时间。
+<li>0：立即切换 </li>
+<li>1：指定时间切换</li>
+<li>2：维护时间窗口内切换</li>
+默认值：0 
    */
-  RequestId?: string
+  SwitchTag?: number
+  /**
+   * 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。当SwitchTag为0或2时，该参数失效。
+   */
+  SwitchStartTime?: string
+  /**
+   * 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。当SwitchTag为0或2时，该参数失效。SwitchStartTime和SwitchEndTime时间窗口不能小于30分钟。
+   */
+  SwitchEndTime?: string
+}
+
+/**
+ * DescribeCloneDBInstanceSpec请求参数结构体
+ */
+export interface DescribeCloneDBInstanceSpecRequest {
+  /**
+   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   */
+  DBInstanceId: string
+  /**
+   * 基础备份集ID，可通过[DescribeBaseBackups](https://cloud.tencent.com/document/api/409/89022)接口获取。此入参和RecoveryTargetTime必须选择一个传入。如与RecoveryTargetTime参数同时设置，则以此参数为准。
+   */
+  BackupSetId?: string
+  /**
+   * 恢复目标时间，此入参和BackupSetId必须选择一个传入。时区以东八区（UTC+8）为准。
+   */
+  RecoveryTargetTime?: string
 }
 
 /**
@@ -688,6 +719,36 @@ export interface RestoreDBInstanceObjectsResponse {
 }
 
 /**
+ * Proxy 节点信息。
+ */
+export interface ProxyNode {
+  /**
+   * <p>Proxy 节点 ID</p>
+   */
+  ProxyNodeId?: string
+  /**
+   * <p>Proxy 节点所在可用区</p>
+   */
+  Zone?: string
+  /**
+   * <p>节点 CPU 核数（核）</p>
+   */
+  Cpu?: number
+  /**
+   * <p>节点内存大小（MB）</p><p>单位：MB</p>
+   */
+  Mem?: number
+  /**
+   * <p>节点状态：running/isolated/abnormal 等</p>
+   */
+  Status?: string
+  /**
+   * <p>节点当前连接数</p>
+   */
+  Connection?: number
+}
+
+/**
  * ModifyDBInstanceDeletionProtection请求参数结构体
  */
 export interface ModifyDBInstanceDeletionProtectionRequest {
@@ -702,17 +763,47 @@ export interface ModifyDBInstanceDeletionProtectionRequest {
 }
 
 /**
- * RenewInstance返回参数结构体
+ * Proxy 节点自定义规格信息，每个 Zone 对应一组节点配置。
  */
-export interface RenewInstanceResponse {
+export interface ProxyNodeCustom {
   /**
-   * 订单名
+   * <p>该可用区下的 Proxy 节点数量</p><p>取值范围：[1, 16]</p>
    */
-  DealName?: string
+  NodeCount: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>Proxy 节点所在可用区</p>
    */
-  RequestId?: string
+  Zone: string
+  /**
+   * <p>Proxy 节点 CPU 核数（核）</p>
+   */
+  Cpu: number
+  /**
+   * <p>Proxy 节点内存大小（MB）</p><p>单位：MB</p>
+   */
+  Mem: number
+}
+
+/**
+ * Proxy 路由信息，描述某个 Proxy 接入地址下到具体 PG 节点的路由规则。
+ */
+export interface ProxyRoute {
+  /**
+   * <p>路由指向的 PG 节点 ID（实例或只读节点 ID）</p>
+   */
+  NodeId?: string
+  /**
+   * <p>节点角色：master/slave/readonly</p>
+   */
+  Role?: string
+  /**
+   * <p>路由权重，取值范围 [0, 100]</p>
+   */
+  Weight?: number
+  /**
+   * <p>路由状态：available/unavailable</p>
+   */
+  Status?: string
 }
 
 /**
@@ -1052,6 +1143,20 @@ export interface DescribeAuditInstanceListResponse {
 }
 
 /**
+ * UpgradeDBInstanceMajorVersion返回参数结构体
+ */
+export interface UpgradeDBInstanceMajorVersionResponse {
+  /**
+   * 任务ID
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyBackupDownloadRestriction请求参数结构体
  */
 export interface ModifyBackupDownloadRestrictionRequest {
@@ -1265,6 +1370,66 @@ SUPPORTMODIFYONLY：支持变配。
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StandbyZoneSet?: Array<string>
+}
+
+/**
+ * Proxy 接入地址信息，包含 VIP/VPort、读写分离与连接池相关配置以及对应路由列表。
+ */
+export interface ProxyAddress {
+  /**
+   * <p>Proxy 接入地址 ID</p>
+   */
+  AddressId?: string
+  /**
+   * <p>Proxy 接入地址 IP</p>
+   */
+  Vip?: string
+  /**
+   * <p>Proxy 接入地址端口</p>
+   */
+  Vport?: number
+  /**
+   * <p>VPC ID</p>
+   */
+  VpcId?: string
+  /**
+   * <p>子网 ID</p>
+   */
+  SubnetId?: string
+  /**
+   * <p>接入地址描述</p>
+   */
+  Description?: string
+  /**
+   * <p>是否开启连接池：0-未开启，1-开启</p>
+   */
+  ConnectionPool?: boolean
+  /**
+   * <p>路由列表</p>
+   */
+  Routes?: Array<ProxyRoute>
+  /**
+   * <p>连接池大小</p>
+   */
+  ConnectionPoolLimit?: number
+}
+
+/**
+ * OpenDBExtranetAccess返回参数结构体
+ */
+export interface OpenDBExtranetAccessResponse {
+  /**
+   * 流程ID，FlowId等同于TaskId
+   */
+  FlowId?: number
+  /**
+   * 任务ID
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1613,6 +1778,28 @@ export interface CloseAccountCAMRequest {
 }
 
 /**
+ * DescribeDBProxySpecs返回参数结构体
+ */
+export interface DescribeDBProxySpecsResponse {
+  /**
+   * <p>规格列表</p>
+   */
+  SpecSet?: Array<ProxySpecItem>
+  /**
+   * <p>该实例是否支持开通 Proxy（仅传 DBInstanceId 时返回）</p>
+   */
+  SupportProxy?: boolean
+  /**
+   * <p>可部署可用区列表（仅传 DBInstanceId 时返回）</p>
+   */
+  AvailableZones?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTasks请求参数结构体
  */
 export interface DescribeTasksRequest {
@@ -1662,6 +1849,48 @@ export interface DescribeDBInstanceParametersRequest {
    * 查询指定参数详情。ParamName为空或不传，默认返回全部参数列表
    */
   ParamName?: string
+}
+
+/**
+ * Proxy 实例（组）详细信息，包含基础信息、节点列表、接入地址列表。
+ */
+export interface ProxyGroupInfo {
+  /**
+   * <p>Proxy 实例 ID，格式形如：proxygroup-xxxxxxxx</p>
+   */
+  ProxyGroupId?: string
+  /**
+   * <p>Proxy 状态：running/isolated/offline 等</p>
+   */
+  Status?: string
+  /**
+   * <p>Proxy 任务状态，无任务时为空</p>
+   */
+  TaskStatus?: string
+  /**
+   * <p>Proxy 描述</p>
+   */
+  Description?: string
+  /**
+   * <p>Proxy 内核版本号</p>
+   */
+  ProxyVersion?: string
+  /**
+   * <p>连接池阈值（连接数）</p>
+   */
+  ConnectionPoolLimit?: number
+  /**
+   * <p>Proxy 节点列表</p>
+   */
+  ProxyNodeSet?: Array<ProxyNode>
+  /**
+   * <p>Proxy 接入地址列表</p>
+   */
+  ProxyAddressSet?: Array<ProxyAddress>
+  /**
+   * <p>创建时间，格式：YYYY-MM-DD HH:MM:SS</p>
+   */
+  CreateTime?: string
 }
 
 /**
@@ -2397,6 +2626,20 @@ export interface NetworkAccess {
 }
 
 /**
+ * DestroyDBProxy请求参数结构体
+ */
+export interface DestroyDBProxyRequest {
+  /**
+   * <p>实例 ID，格式形如：postgres-xxxxxxxx</p>
+   */
+  DBInstanceId: string
+  /**
+   * <p>Proxy 实例 ID，格式形如：proxy-xxxxxxxx；不传时若实例下仅有一个 Proxy 则销毁该 Proxy，存在多个 Proxy 必须显式传入</p>
+   */
+  ProxyGroupId?: string
+}
+
+/**
  * DescribeDBInstanceAttribute请求参数结构体
  */
 export interface DescribeDBInstanceAttributeRequest {
@@ -2487,6 +2730,32 @@ export interface RawSlowQuery {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ApplicationName?: string
+}
+
+/**
+ * ModifyDBProxyAddress请求参数结构体
+ */
+export interface ModifyDBProxyAddressRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  DBInstanceId: string
+  /**
+   * <p>Proxy地址ID</p>
+   */
+  AddressId: string
+  /**
+   * <p>Proxy代理组 ID（不传则默认操作该实例下唯一的代理）</p>
+   */
+  ProxyGroupId?: string
+  /**
+   * <p>地址描述/备注（最多 256 字符）</p>
+   */
+  Description?: string
+  /**
+   * <p>连接池开关</p><p>枚举值：</p><ul><li>true： 开启</li><li>false： 关闭</li></ul>
+   */
+  ConnectionPool?: boolean
 }
 
 /**
@@ -2667,6 +2936,16 @@ export interface OpenAuditServiceRequest {
 }
 
 /**
+ * DestroyDBProxy返回参数结构体
+ */
+export interface DestroyDBProxyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SwitchDBInstancePrimary返回参数结构体
  */
 export interface SwitchDBInstancePrimaryResponse {
@@ -2823,6 +3102,16 @@ export interface DescribeDBErrlogsRequest {
    * <p>日志过滤条件。格式为  [{Type: &quot;ApplicationName&quot;, Compare: &quot;INC&quot;, Value: [&quot;123&quot;]}]。</p>
    */
   LogFilters?: Array<LogFilter>
+}
+
+/**
+ * UnlockAccount返回参数结构体
+ */
+export interface UnlockAccountResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3035,6 +3324,24 @@ export interface DescribeClassesRequest {
    * <p>实例存储类型，根据存储类型返回支持的规格。</p><p>枚举值：</p><ul><li>PHYSICAL_LOCAL_SSD： 物理机本地ssd硬盘</li><li>CLOUD_PREMIUM： 高性能云硬盘</li><li>CLOUD_SSD： ssd云硬盘</li><li>CLOUD_HSSD： 增强型ssd云硬盘</li></ul><p>默认值：PHYSICAL_LOCAL_SSD</p>
    */
   StorageType?: string
+}
+
+/**
+ * ReloadBalanceDBProxyNode请求参数结构体
+ */
+export interface ReloadBalanceDBProxyNodeRequest {
+  /**
+   * <p>实例ID</p>
+   */
+  DBInstanceId: string
+  /**
+   * <p>Proxy代理组ID（不传则默认操作该实例下唯一的代理）</p>
+   */
+  ProxyGroupId?: string
+  /**
+   * <p>Proxy地址ID。传入时校验归属，实际重平衡为代理组维度</p>
+   */
+  AddressId?: string
 }
 
 /**
@@ -3363,6 +3670,44 @@ export interface CloseAuditServiceResponse {
 }
 
 /**
+ * ModifyDBProxy请求参数结构体
+ */
+export interface ModifyDBProxyRequest {
+  /**
+   * <p>实例 ID，格式形如：postgres-xxxxxxxx</p>
+   */
+  DBInstanceId: string
+  /**
+   * <p>Proxy 实例 ID，格式形如：proxy-xxxxxxxx；不传时若实例下仅有一个 Proxy 则修改该 Proxy</p>
+   */
+  ProxyGroupId?: string
+  /**
+   * <p>Proxy 描述信息，长度范围 [0, 256]</p>
+   */
+  Description?: string
+  /**
+   * <p>Proxy 节点变配规格列表，按可用区分组；变配时必填</p>
+   */
+  ProxyNodeCustom?: Array<ProxyNodeCustom>
+  /**
+   * <p>负载均衡刷新策略：auto-自动；manual-手动；默认 auto</p>
+   */
+  ReloadBalance?: string
+  /**
+   * <p>变配执行时机：0-立即执行（默认），1-维护时间窗内执行，2-指定时间窗执行（需配合 SwitchStartTime/SwitchEndTime）</p>
+   */
+  SwitchTag?: number
+  /**
+   * <p>指定时间窗执行的开始时间，格式 HH:MM:SS，仅 SwitchTag=2 时生效</p>
+   */
+  SwitchStartTime?: string
+  /**
+   * <p>指定时间窗执行的结束时间，格式 HH:MM:SS，仅 SwitchTag=2 时生效</p>
+   */
+  SwitchEndTime?: string
+}
+
+/**
  * ModifyDBInstanceSecurityGroups请求参数结构体
  */
 export interface ModifyDBInstanceSecurityGroupsRequest {
@@ -3656,17 +4001,17 @@ export interface IsolateDBInstancesResponse {
 }
 
 /**
- * OpenDBExtranetAccess返回参数结构体
+ * CreateDBProxy返回参数结构体
  */
-export interface OpenDBExtranetAccessResponse {
+export interface CreateDBProxyResponse {
   /**
-   * 流程ID，FlowId等同于TaskId
+   * <p>订单号，下单成功返回。</p>
    */
-  FlowId?: number
+  DealName?: string
   /**
-   * 任务ID
+   * <p>创建出的 Proxy 实例 ID，格式形如：proxy-xxxxxxxx。</p>
    */
-  TaskId?: number
+  ProxyGroupId?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -3822,34 +4167,13 @@ export interface CloseAccountCAMResponse {
 }
 
 /**
- * SwitchDBInstancePrimary请求参数结构体
+ * ReloadBalanceDBProxyNode返回参数结构体
  */
-export interface SwitchDBInstancePrimaryRequest {
+export interface ReloadBalanceDBProxyNodeResponse {
   /**
-   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DBInstanceId: string
-  /**
-   * 是否强制切换。强制切换时只要备节点可访问，无论主备延迟多大都会发起切换。只有SwitchTag为0时，才可使用立即切换。
-<li>默认：false</li>
-   */
-  Force?: boolean
-  /**
-   * 指定实例配置完成变更后的切换时间。
-<li>0：立即切换 </li>
-<li>1：指定时间切换</li>
-<li>2：维护时间窗口内切换</li>
-默认值：0 
-   */
-  SwitchTag?: number
-  /**
-   * 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。当SwitchTag为0或2时，该参数失效。
-   */
-  SwitchStartTime?: string
-  /**
-   * 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。当SwitchTag为0或2时，该参数失效。SwitchStartTime和SwitchEndTime时间窗口不能小于30分钟。
-   */
-  SwitchEndTime?: string
+  RequestId?: string
 }
 
 /**
@@ -3970,6 +4294,32 @@ export interface ErrLogDetail {
 }
 
 /**
+ * DescribeParameterTemplates请求参数结构体
+ */
+export interface DescribeParameterTemplatesRequest {
+  /**
+   * 过滤条件，目前支持的过滤条件有：TemplateName, TemplateId，DBMajorVersion，DBEngine。TemplateName不支持模糊匹配。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 每页显示数量，[0，100]，默认 20
+   */
+  Limit?: number
+  /**
+   * 数据偏移量
+   */
+  Offset?: number
+  /**
+   * 排序指标，枚举值，支持：CreateTime，TemplateName，DBMajorVersion。如果不指定该参数，默认将按照参数模板的编号倒序排列，也就是说最新添加的参数模板会排在最前面。
+   */
+  OrderBy?: string
+  /**
+   * 排序方式，枚举值，支持：asc（升序） ，desc（降序）。默认值为asc。当未指定OrderBy时，该参数失效，此时排序方式为OrderBy参数描述中给出的默认排序方式。
+   */
+  OrderByType?: string
+}
+
+/**
  * DestroyDBInstance请求参数结构体
  */
 export interface DestroyDBInstanceRequest {
@@ -3992,6 +4342,20 @@ export interface InquiryPriceRenewDBInstanceRequest {
    * 续费周期，按月计算
    */
   Period: number
+}
+
+/**
+ * RenewInstance返回参数结构体
+ */
+export interface RenewInstanceResponse {
+  /**
+   * 订单名
+   */
+  DealName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4041,29 +4405,21 @@ export interface DescribeBackupOverviewResponse {
 }
 
 /**
- * DescribeParameterTemplates请求参数结构体
+ * DescribeDBInstanceParameters返回参数结构体
  */
-export interface DescribeParameterTemplatesRequest {
+export interface DescribeDBInstanceParametersResponse {
   /**
-   * 过滤条件，目前支持的过滤条件有：TemplateName, TemplateId，DBMajorVersion，DBEngine。TemplateName不支持模糊匹配。
+   * 参数列表总数
    */
-  Filters?: Array<Filter>
+  TotalCount?: number
   /**
-   * 每页显示数量，[0，100]，默认 20
+   * 参数列表返回详情
    */
-  Limit?: number
+  Detail?: Array<ParamInfo>
   /**
-   * 数据偏移量
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: number
-  /**
-   * 排序指标，枚举值，支持：CreateTime，TemplateName，DBMajorVersion。如果不指定该参数，默认将按照参数模板的编号倒序排列，也就是说最新添加的参数模板会排在最前面。
-   */
-  OrderBy?: string
-  /**
-   * 排序方式，枚举值，支持：asc（升序） ，desc（降序）。默认值为asc。当未指定OrderBy时，该参数失效，此时排序方式为OrderBy参数描述中给出的默认排序方式。
-   */
-  OrderByType?: string
+  RequestId?: string
 }
 
 /**
@@ -4403,6 +4759,20 @@ export interface ModifyAccountPrivilegesResponse {
 }
 
 /**
+ * ModifyDBProxy返回参数结构体
+ */
+export interface ModifyDBProxyResponse {
+  /**
+   * <p>订单号，仅变配（节点规格/数量变更）下单成功时返回；仅修改 Description 时不下单，本字段为空。</p>
+   */
+  DealName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 描述数据库详细信息，包括所有者、字符编码等
  */
 export interface Database {
@@ -4529,17 +4899,32 @@ export interface Filter {
 }
 
 /**
- * UpgradeDBInstanceMajorVersion返回参数结构体
+ * DescribeReadOnlyGroups请求参数结构体
  */
-export interface UpgradeDBInstanceMajorVersionResponse {
+export interface DescribeReadOnlyGroupsRequest {
   /**
-   * 任务ID
+   * 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：
+db-master-instance-id：按照主实例过滤，类型为string。
+read-only-group-id：按照只读组ID过滤，类型为string。
+注：该参数的过滤条件中，db-master-instance-id为必须指定项。
    */
-  TaskId?: number
+  Filters?: Array<Filter>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 查询每一页的条数，默认为10，最大值99。
    */
-  RequestId?: string
+  PageSize?: number
+  /**
+   * 查询的页码，默认为1
+   */
+  PageNumber?: number
+  /**
+   * 查询排序依据，目前支持:ROGroupId,CreateTime,Name。默认值CreateTime
+   */
+  OrderBy?: string
+  /**
+   * 查询排序依据类型，目前支持:desc,asc。默认值asc。
+   */
+  OrderByType?: string
 }
 
 /**
@@ -4651,13 +5036,25 @@ export interface DatabasePrivilege {
 }
 
 /**
- * UnlockAccount返回参数结构体
+ * Proxy可售规格信息
  */
-export interface UnlockAccountResponse {
+export interface ProxySpecItem {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>CPU 核数</p><p>单位：核</p>
    */
-  RequestId?: string
+  Cpu?: number
+  /**
+   * <p>内存大小</p><p>单位：MB</p>
+   */
+  Memory?: number
+  /**
+   * <p>最小节点数</p>
+   */
+  MinNodeNum?: number
+  /**
+   * <p>最大节点数</p>
+   */
+  MaxNodeNum?: number
 }
 
 /**
@@ -5013,6 +5410,20 @@ export interface ModifyParameterTemplateResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDBProxy请求参数结构体
+ */
+export interface DescribeDBProxyRequest {
+  /**
+   * <p>实例 ID，格式形如：postgres-xxxxxxxx</p>
+   */
+  DBInstanceId: string
+  /**
+   * <p>Proxy 实例 ID，格式形如：proxy-xxxxxxxx；不传则查询该实例下全部 Proxy</p>
+   */
+  ProxyGroupId?: string
 }
 
 /**
@@ -5412,6 +5823,16 @@ export interface DeleteBaseBackupRequest {
 }
 
 /**
+ * ModifyDBProxyAddress返回参数结构体
+ */
+export interface ModifyDBProxyAddressResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 批量修改参数
  */
 export interface ParamEntry {
@@ -5606,21 +6027,37 @@ export interface DescribeSlowQueryListRequest {
 }
 
 /**
- * DescribeCloneDBInstanceSpec请求参数结构体
+ * CreateDBProxy请求参数结构体
  */
-export interface DescribeCloneDBInstanceSpecRequest {
+export interface CreateDBProxyRequest {
   /**
-   * 实例ID。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   * <p>实例 ID，格式形如：postgres-xxxxxxxx</p>
    */
   DBInstanceId: string
   /**
-   * 基础备份集ID，可通过[DescribeBaseBackups](https://cloud.tencent.com/document/api/409/89022)接口获取。此入参和RecoveryTargetTime必须选择一个传入。如与RecoveryTargetTime参数同时设置，则以此参数为准。
+   * <p>Proxy 所在私有网络 ID，需与主实例所在 VPC 一致</p>
    */
-  BackupSetId?: string
+  VpcId: string
   /**
-   * 恢复目标时间，此入参和BackupSetId必须选择一个传入。时区以东八区（UTC+8）为准。
+   * <p>Proxy 所在私有网络子网 ID</p>
    */
-  RecoveryTargetTime?: string
+  SubnetId: string
+  /**
+   * <p>Proxy 节点自定义规格列表，至少一个元素，按可用区分组</p>
+   */
+  ProxyNodeCustom: Array<ProxyNodeCustom>
+  /**
+   * <p>Proxy 关联的安全组 ID 列表</p>
+   */
+  SecurityGroup?: Array<string>
+  /**
+   * <p>Proxy 描述信息</p><p>长度范围：[0, 256]</p>
+   */
+  Description?: string
+  /**
+   * <p>连接池阈值（连接数），单位：个</p>
+   */
+  ConnectionPoolLimit?: number
 }
 
 /**
@@ -5935,32 +6372,21 @@ export interface DurationAnalysis {
 }
 
 /**
- * DescribeReadOnlyGroups请求参数结构体
+ * DescribeDBProxy返回参数结构体
  */
-export interface DescribeReadOnlyGroupsRequest {
+export interface DescribeDBProxyResponse {
   /**
-   * 按照一个或者多个过滤条件进行查询，目前支持的过滤条件有：
-db-master-instance-id：按照主实例过滤，类型为string。
-read-only-group-id：按照只读组ID过滤，类型为string。
-注：该参数的过滤条件中，db-master-instance-id为必须指定项。
+   * <p>Proxy 实例数量。</p>
    */
-  Filters?: Array<Filter>
+  Count?: number
   /**
-   * 查询每一页的条数，默认为10，最大值99。
+   * <p>Proxy 实例详情列表。</p>
    */
-  PageSize?: number
+  ProxyInfos?: Array<ProxyGroupInfo>
   /**
-   * 查询的页码，默认为1
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  PageNumber?: number
-  /**
-   * 查询排序依据，目前支持:ROGroupId,CreateTime,Name。默认值CreateTime
-   */
-  OrderBy?: string
-  /**
-   * 查询排序依据类型，目前支持:desc,asc。默认值asc。
-   */
-  OrderByType?: string
+  RequestId?: string
 }
 
 /**
@@ -6306,6 +6732,16 @@ export interface DescribeDBInstanceAttributeResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeDBProxySpecs请求参数结构体
+ */
+export interface DescribeDBProxySpecsRequest {
+  /**
+   * <p>实例ID。传入时返回该实例的 Proxy 支持情况和可用区</p>
+   */
+  DBInstanceId?: string
 }
 
 /**

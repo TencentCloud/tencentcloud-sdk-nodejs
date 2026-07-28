@@ -345,7 +345,7 @@ export interface PrivateZone {
  */
 export interface CreatePrivateDNSAccountRequest {
   /**
-   * 私有域解析账号，该账号不能与主账号一致且需要子账号授权
+   * <p>被绑定的主账号，不能与本账号一致，且需要完成授权</p>
    */
   Account: PrivateDNSAccount
 }
