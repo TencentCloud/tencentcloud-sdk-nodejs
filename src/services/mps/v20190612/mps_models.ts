@@ -16979,6 +16979,14 @@ export interface AiAnalysisTaskDelLogoOutput {
    */
   VoiceClonedMarkFile?: string
   /**
+   * <p>仅做擦除的视频结果路径</p>
+   */
+  ErasedVideoPath?: string
+  /**
+   * <p>音色克隆编辑信息</p><p>用于音色克隆二次修改的编辑信息</p>
+   */
+  DubbingEditInfoUrl?: string
+  /**
    * <p>擦除后文件的FileId。</p>
    */
   FileId?: string
