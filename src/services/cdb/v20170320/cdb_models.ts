@@ -2713,6 +2713,20 @@ export interface DescribeDBInstanceInfoResponse {
 }
 
 /**
+ * UpgradeRoGroup返回参数结构体
+ */
+export interface UpgradeRoGroupResponse {
+  /**
+   * 异步任务ID。
+   */
+  AsyncRequestId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AssociateSecurityGroups请求参数结构体
  */
 export interface AssociateSecurityGroupsRequest {
@@ -4852,6 +4866,20 @@ export interface RollbackTimeRange {
    * 实例可回档结束时间，时间格式：2016-11-02 11:44:47
    */
   End?: string
+}
+
+/**
+ * UpgradeRoGroup请求参数结构体
+ */
+export interface UpgradeRoGroupRequest {
+  /**
+   * 实例id。
+   */
+  InstanceId: string
+  /**
+   * RO组的ID。
+   */
+  UniqRoGroupId: string
 }
 
 /**

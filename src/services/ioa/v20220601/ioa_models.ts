@@ -244,73 +244,77 @@ export interface DescribeResourceGrantedAccountsRequest {
  */
 export interface DescribeDeviceHardwareInfoItem {
   /**
-   * 设备ID
+   * <p>设备ID</p>
    */
   Id?: number
   /**
-   * 设备唯一标识符
+   * <p>设备唯一标识符</p>
    */
   Mid?: string
   /**
-   * OS平台 0 Windows 1 Linux 2 macOS 4 Android 5 iOS
+   * <p>OS平台 0 Windows 1 Linux 2 macOS 4 Android 5 iOS</p>
    */
   OsType?: number
   /**
-   * 终端名
+   * <p>终端名</p>
    */
   Name?: string
   /**
-   * 终端用户名
+   * <p>终端用户名</p>
    */
   UserName?: string
   /**
-   * 授权状态（ 4未授权 5已授权）
+   * <p>授权状态（ 4未授权 5已授权）</p>
    */
   Status?: number
   /**
-   * 设备所属分组ID
+   * <p>设备所属分组ID</p>
    */
   GroupId?: number
   /**
-   * 设备所属分组名
+   * <p>设备所属分组名</p>
    */
   GroupName?: string
   /**
-   * 设备所属分组路径
+   * <p>设备所属分组路径</p>
    */
   GroupNamePath?: string
   /**
-   * 最近登录账户的姓名
+   * <p>最近登录账户的姓名</p>
    */
   AccountName?: string
   /**
-   * 出口IP
+   * <p>出口IP</p>
    */
   Ip?: string
   /**
-   * MAC地址
+   * <p>MAC地址</p>
    */
   MacAddr?: string
   /**
-   * CPU品牌型号
+   * <p>CPU品牌型号</p>
    */
   Cpu?: string
   /**
-   * 内存信息
+   * <p>内存信息</p>
    */
   Memory?: string
   /**
-   * 硬盘信息
+   * <p>硬盘信息</p>
    */
   HardDiskSize?: string
   /**
-   * 显示器品牌型号
+   * <p>显示器品牌型号</p>
    */
   Monitor?: string
   /**
-   * 终端备注名
+   * <p>终端备注名</p>
    */
   RemarkName?: string
+  /**
+   * <p>BiosUUID（启动盘标识符）</p>
+   */
+  BiosUuid?: string
 }
 
 /**
@@ -1053,6 +1057,10 @@ export interface DeviceDetail {
    * <p>终端备注名</p>
    */
   RemarkName?: string
+  /**
+   * <p>BiosUUID（启动盘标识符）</p>
+   */
+  BiosUuid?: string
 }
 
 /**

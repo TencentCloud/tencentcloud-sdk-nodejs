@@ -24,6 +24,7 @@ import {
   DescribeUserAutonomyProfileRequest,
   DescribeMetricTopProxiesResponse,
   DescribeDBAuditLogTopSqlsRequest,
+  DiagReportUrlItem,
   DescribeDBAutonomyActionsRequest,
   SecLogExportTaskInfo,
   CancelDBAutonomyActionResponse,
@@ -32,6 +33,7 @@ import {
   DescribeRedisTopHotKeysRequest,
   CreateDBDiagReportTaskRequest,
   DescribeDBDiagReportContentRequest,
+  TagFilterGroup,
   TableSpaceTimeSeries,
   DescribeAuditLogFilesResponse,
   DescribeIndexRecommendAggregationSlowLogsRequest,
@@ -62,7 +64,7 @@ import {
   CreateKillTaskResponse,
   DescribeAuditInstanceListResponse,
   DescribeRedisSlowLogTopSqlsResponse,
-  RedisPreKeySpaceData,
+  DescribeDBInstancesResponse,
   DiagHistoryEventItem,
   CreateUserAutonomyProfileResponse,
   DescribeProxySessionKillTasksRequest,
@@ -77,6 +79,7 @@ import {
   StatisticDataInfo,
   DescribeRedisSlowLogTopSqlsRequest,
   AutonomyEventVo,
+  RedisPreKeySpaceData,
   DescribeTopSpaceTablesResponse,
   TaskInfo,
   DescribeMongoDBProcessListRequest,
@@ -94,12 +97,13 @@ import {
   DescribeRedisCommandCostStatisticsRequest,
   ModifyDiagDBInstanceConfRequest,
   DescribeSlowLogsResponse,
-  UpdateAgentSwitchRequest,
+  TagInfo,
   DescribeSecurityAuditLogDownloadUrlsRequest,
   CreateDBDiagReportTaskResponse,
   ProcessStatistic,
   MongoDBProcessItem,
-  CreateMailProfileResponse,
+  DescribeDBInstancesRequest,
+  CreateDBDiagReportUrlsResponse,
   UpdateMonitorSwitchResponse,
   DescribeDBAutonomyActionRequest,
   DescribeRedisTopKeyPrefixListRequest,
@@ -116,6 +120,7 @@ import {
   DeleteSqlFiltersResponse,
   DescribeHealthScoreTimeSeriesRequest,
   DescribeDBDiagEventsRequest,
+  CreateDBDiagReportUrlsRequest,
   CreateDBDiagReportUrlResponse,
   ScoreDetail,
   DescribeRedisUnExpiredKeyStatisticsResponse,
@@ -126,6 +131,7 @@ import {
   TopHotKeys,
   DescribeHealthScoreTimeSeriesResponse,
   SlowLogHost,
+  UpdateAgentSwitchRequest,
   DescribeRedisCmdPerfTimeSeriesResponse,
   ModifySqlFiltersResponse,
   CreateMailProfileRequest,
@@ -148,6 +154,7 @@ import {
   DescribeSqlFiltersResponse,
   MongoDBIndex,
   CreateDBDiagReportUrlRequest,
+  InstanceItem,
   AutonomyActionVo,
   CloseAuditServiceResponse,
   UpdateDatabaseAutonomyStatusResponse,
@@ -222,6 +229,7 @@ import {
   DescribeRedisCommandOverviewResponse,
   CreateSqlFilterResponse,
   DescribeSlowLogUserHostStatsRequest,
+  TagPair,
   DescribeTopSpaceSchemasResponse,
   DescribeSlowLogQueryTimeStatsResponse,
   CreateProxySessionKillTaskResponse,
@@ -268,6 +276,7 @@ import {
   DescribeDBPerfTimeSeriesRequest,
   DescribeAuditLogFilesRequest,
   DeleteSqlFiltersRequest,
+  CreateMailProfileResponse,
   DescribeDiagDBInstancesRequest,
   SlowLogAgg,
   Table,
@@ -384,6 +393,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeRedisBigKeyAnalysisTasksResponse) => void
   ): Promise<DescribeRedisBigKeyAnalysisTasksResponse> {
     return this.request("DescribeRedisBigKeyAnalysisTasks", req, cb)
+  }
+
+  /**
+   * 批量创建健康报告的PDF下载链接，支持一次获取多个报告的下载地址。
+   */
+  async CreateDBDiagReportUrls(
+    req: CreateDBDiagReportUrlsRequest,
+    cb?: (error: string, rep: CreateDBDiagReportUrlsResponse) => void
+  ): Promise<CreateDBDiagReportUrlsResponse> {
+    return this.request("CreateDBDiagReportUrls", req, cb)
   }
 
   /**
@@ -864,6 +883,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateMongoDBKillTaskResponse) => void
   ): Promise<CreateMongoDBKillTaskResponse> {
     return this.request("CreateMongoDBKillTask", req, cb)
+  }
+
+  /**
+   * 根据实例ID列表查询数据库实例基本信息，支持跨产品查询（MySQL、CynosDB、MariaDB、DCDB、MongoDB、PostgreSQL、Redis、TDStore等）。不支持分页，通过InstanceIds限制查询数量（最多100条）。
+   */
+  async DescribeDBInstances(
+    req: DescribeDBInstancesRequest,
+    cb?: (error: string, rep: DescribeDBInstancesResponse) => void
+  ): Promise<DescribeDBInstancesResponse> {
+    return this.request("DescribeDBInstances", req, cb)
   }
 
   /**

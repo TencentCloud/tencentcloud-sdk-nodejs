@@ -118,6 +118,16 @@ it("dbbrain.v20210527.DescribeRedisBigKeyAnalysisTasks", async function () {
     }
 })
 
+it("dbbrain.v20210527.CreateDBDiagReportUrls", async function () {
+    try {
+       const data = await client.CreateDBDiagReportUrls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbbrain.v20210527.DescribeRedisCommandOverview", async function () {
     try {
        const data = await client.DescribeRedisCommandOverview({})
@@ -591,6 +601,16 @@ it("dbbrain.v20210527.DescribeDBSpaceStatus", async function () {
 it("dbbrain.v20210527.CreateMongoDBKillTask", async function () {
     try {
        const data = await client.CreateMongoDBKillTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dbbrain.v20210527.DescribeDBInstances", async function () {
+    try {
+       const data = await client.DescribeDBInstances({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

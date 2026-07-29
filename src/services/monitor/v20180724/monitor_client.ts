@@ -121,7 +121,7 @@ import {
   GrafanaAccountRole,
   DestroyPrometheusInstanceRequest,
   PolicyGroupReceiverInfo,
-  CreateGrafanaNotificationChannelRequest,
+  Metric,
   MidQueryCondition,
   DescribeGrafanaInstancesRequest,
   DescribePrometheusTargetsTMPResponse,
@@ -214,7 +214,7 @@ import {
   DescribeExternalClusterRegisterCommandRequest,
   Point,
   ModifyPolicyGroupEventCondition,
-  Metric,
+  CreateGrafanaNotificationChannelRequest,
   DeleteOnCallFormsResponse,
   DescribePrometheusGlobalConfigResponse,
   UpdatePrometheusScrapeJobRequest,
@@ -270,6 +270,7 @@ import {
   DescribeAlarmNoticeRequest,
   GetPrometheusAgentManagementCommandRequest,
   DescribeBindingPolicyObjectListDimension,
+  NoticeOnCallUsersInfo,
   BindProgressResponse,
   DescribePolicyGroupInfoEventCondition,
   GetPrometheusAgentManagementCommandResponse,
@@ -304,6 +305,7 @@ import {
   ModifyPrometheusConfigRequest,
   DescribeMonitorResourceInfoRequest,
   DescribeGrafanaEnvironmentsResponse,
+  DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDResponse,
   CreateAlarmShieldResponse,
   DescribePolicyConditionListRequest,
   DeletePolicyGroupResponse,
@@ -343,6 +345,7 @@ import {
   AlarmPolicyFilter,
   ModifyAlarmPolicyNoticeResponse,
   NoticeBindPolicys,
+  NoticeSendGroup,
   PrometheusDynamicAPIResponseHTTP,
   PrometheusAlertRule,
   CleanGrafanaInstanceResponse,
@@ -485,6 +488,7 @@ import {
   AlarmHierarchicalNotice,
   BindingPolicyObjectDimension,
   DescribePrometheusTempRequest,
+  DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDRequest,
   PrometheusInstanceQuotaDetail,
   UpdateServiceDiscoveryResponse,
   UpdateOnCallFormRequest,
@@ -494,6 +498,7 @@ import {
   CreateAlarmNoticeResponse,
   Condition,
   DeleteGrafanaInstanceResponse,
+  NoticeUserInfo,
   PrometheusAgentOverview,
   Filter,
   DescribeProductEventListEventsGroupInfo,
@@ -913,6 +918,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAlertRulesResponse) => void
   ): Promise<DeleteAlertRulesResponse> {
     return this.request("DeleteAlertRules", req, cb)
+  }
+
+  /**
+   * 查询通知模板中配置的发送用户信息
+   */
+  async DescribeAlarmNoticeOnCallUsersFromPrometheusAlertID(
+    req: DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDRequest,
+    cb?: (error: string, rep: DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDResponse) => void
+  ): Promise<DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDResponse> {
+    return this.request("DescribeAlarmNoticeOnCallUsersFromPrometheusAlertID", req, cb)
   }
 
   /**

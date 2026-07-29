@@ -2487,33 +2487,72 @@ export interface PolicyGroupReceiverInfo {
 }
 
 /**
- * CreateGrafanaNotificationChannel请求参数结构体
+ * 指标，可用于设置告警、查询数据
  */
-export interface CreateGrafanaNotificationChannelRequest {
+export interface Metric {
   /**
-   * <p>Grafana 实例 ID，例如：grafana-abcdefgh</p>
+   * <p>告警策略类型</p>
    */
-  InstanceId: string
+  Namespace?: string
   /**
-   * <p>告警通道名称，例如：my-channel</p>
+   * <p>指标名</p>
    */
-  ChannelName: string
+  MetricName?: string
   /**
-   * <p>接受告警通道 ID 数组，值为告警管理/基础配置/通知模板中的模板 ID</p>
+   * <p>指标展示名</p>
    */
-  Receivers: Array<string>
+  Description?: string
   /**
-   * <p>默认为1，建议使用 OrganizationIds</p>
+   * <p>最小值</p>
    */
-  OrgId?: number
+  Min?: number
   /**
-   * <p>额外组织 ID 数组，已废弃，请使用 OrganizationIds</p>
+   * <p>最大值</p>
    */
-  ExtraOrgIds?: Array<string>
+  Max?: number
   /**
-   * <p>生效的所有组织 ID 数组，默认为 [&quot;1&quot;]</p>
+   * <p>维度列表</p>
    */
-  OrganizationIds?: Array<string>
+  Dimensions?: Array<string>
+  /**
+   * <p>单位</p>
+   */
+  Unit?: string
+  /**
+   * <p>指标配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MetricConfig?: MetricConfig
+  /**
+   * <p>是否为高级指标。1是 0否</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsAdvanced?: number
+  /**
+   * <p>高级指标是否开通。1是 0否</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsOpen?: number
+  /**
+   * <p>集成中心产品ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ProductId?: number
+  /**
+   * <p>匹配运算符</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Operators?: Array<Operator>
+  /**
+   * <p>指标触发</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Periods?: Array<number | bigint>
+  /**
+   * <p>是否延迟指标</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsLatenessMetric?: number
 }
 
 /**
@@ -4783,72 +4822,33 @@ export interface ModifyPolicyGroupEventCondition {
 }
 
 /**
- * 指标，可用于设置告警、查询数据
+ * CreateGrafanaNotificationChannel请求参数结构体
  */
-export interface Metric {
+export interface CreateGrafanaNotificationChannelRequest {
   /**
-   * <p>告警策略类型</p>
+   * <p>Grafana 实例 ID，例如：grafana-abcdefgh</p>
    */
-  Namespace?: string
+  InstanceId: string
   /**
-   * <p>指标名</p>
+   * <p>告警通道名称，例如：my-channel</p>
    */
-  MetricName?: string
+  ChannelName: string
   /**
-   * <p>指标展示名</p>
+   * <p>接受告警通道 ID 数组，值为告警管理/基础配置/通知模板中的模板 ID</p>
    */
-  Description?: string
+  Receivers: Array<string>
   /**
-   * <p>最小值</p>
+   * <p>默认为1，建议使用 OrganizationIds</p>
    */
-  Min?: number
+  OrgId?: number
   /**
-   * <p>最大值</p>
+   * <p>额外组织 ID 数组，已废弃，请使用 OrganizationIds</p>
    */
-  Max?: number
+  ExtraOrgIds?: Array<string>
   /**
-   * <p>维度列表</p>
+   * <p>生效的所有组织 ID 数组，默认为 [&quot;1&quot;]</p>
    */
-  Dimensions?: Array<string>
-  /**
-   * <p>单位</p>
-   */
-  Unit?: string
-  /**
-   * <p>指标配置</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  MetricConfig?: MetricConfig
-  /**
-   * <p>是否为高级指标。1是 0否</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsAdvanced?: number
-  /**
-   * <p>高级指标是否开通。1是 0否</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsOpen?: number
-  /**
-   * <p>集成中心产品ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ProductId?: number
-  /**
-   * <p>匹配运算符</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Operators?: Array<Operator>
-  /**
-   * <p>指标触发</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Periods?: Array<number | bigint>
-  /**
-   * <p>是否延迟指标</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsLatenessMetric?: number
+  OrganizationIds?: Array<string>
 }
 
 /**
@@ -5967,6 +5967,20 @@ export interface DescribeBindingPolicyObjectListDimension {
 }
 
 /**
+ * 通知模板配置的发送用户的信息
+ */
+export interface NoticeOnCallUsersInfo {
+  /**
+   * <p>通知模板id</p><p>参数格式：notice-xxxxxxxx</p>
+   */
+  NoticeId?: string
+  /**
+   * <p>发送组信息，对应通知模板中的每项配置</p>
+   */
+  SendGroups?: Array<NoticeSendGroup>
+}
+
+/**
  * 绑定状态Response
  */
 export interface BindProgressResponse {
@@ -6835,6 +6849,20 @@ export interface DescribeGrafanaEnvironmentsResponse {
 }
 
 /**
+ * DescribeAlarmNoticeOnCallUsersFromPrometheusAlertID返回参数结构体
+ */
+export interface DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDResponse {
+  /**
+   * <p>告警通知模板列表</p>
+   */
+  Notices?: Array<NoticeOnCallUsersInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateAlarmShield返回参数结构体
  */
 export interface CreateAlarmShieldResponse {
@@ -7609,6 +7637,20 @@ export interface NoticeBindPolicys {
    * <p>告警通知模板绑定的告警策略ID列表</p>
    */
   PolicyIds?: Array<string>
+}
+
+/**
+ * 通知模板发送组信息
+ */
+export interface NoticeSendGroup {
+  /**
+   * <p>发送组类型</p><p>枚举值：</p><ul><li>USER： 用户</li><li>GROUP： 用户组</li><li>OnCallForm： 值班表</li></ul>
+   */
+  ReceiverType?: string
+  /**
+   * <p>通知人信息</p>
+   */
+  Users?: Array<NoticeUserInfo>
 }
 
 /**
@@ -11224,6 +11266,16 @@ export interface DescribePrometheusTempRequest {
 }
 
 /**
+ * DescribeAlarmNoticeOnCallUsersFromPrometheusAlertID请求参数结构体
+ */
+export interface DescribeAlarmNoticeOnCallUsersFromPrometheusAlertIDRequest {
+  /**
+   * <p>prometheus告警分组ID</p><p>参数格式：alert-xxxxxxxx</p>
+   */
+  AlertId: string
+}
+
+/**
  * Prometheus实例创建配额信息
  */
 export interface PrometheusInstanceQuotaDetail {
@@ -11545,6 +11597,20 @@ export interface DeleteGrafanaInstanceResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 通知模板中配置的发送用户信息
+ */
+export interface NoticeUserInfo {
+  /**
+   * <p>腾讯云用户id，<strong>不是账号uin</strong></p>
+   */
+  UserId?: string
+  /**
+   * <p>用户名</p>
+   */
+  UserName?: string
 }
 
 /**

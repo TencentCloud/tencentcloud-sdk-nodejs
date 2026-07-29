@@ -219,6 +219,50 @@ export interface CheckTcbServiceResponse {
 }
 
 /**
+ * DeleteCloudAppVersion返回参数结构体
+ */
+export interface DeleteCloudAppVersionResponse {
+  /**
+   * 是否删除成功
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeCloudAppCosInfo请求参数结构体
+ */
+export interface DescribeCloudAppCosInfoRequest {
+  /**
+   * 环境id
+   */
+  EnvId: string
+  /**
+   * 服务名
+   */
+  ServiceName: string
+  /**
+   * 部署类型
+   */
+  DeployType: string
+  /**
+   * 时间戳
+   */
+  UnixTimestamp?: string
+  /**
+   * 文件后缀
+   */
+  Suffix?: string
+  /**
+   * 是否需要下载
+   */
+  NeedDownload?: boolean
+}
+
+/**
  * migration 执行计划
  */
 export interface MigrationPlanItem {
@@ -570,13 +614,42 @@ export interface SMSProviderTemplateConfig {
 }
 
 /**
- * HTTP访问服务路径重写配置
+ * 服务版本信息
  */
-export interface HTTPServicePathRewrite {
+export interface CloudAppVersionItem {
   /**
-   * 路径前缀重写。StaticStorePrefix、Prefix只能填一个
+   * <p>版本名</p>
    */
-  Prefix?: string
+  VersionName?: string
+  /**
+   * <p>构建方式</p>
+   */
+  BuildType?: string
+  /**
+   * <p>构建Id</p>
+   */
+  BuildId?: string
+  /**
+   * <p>构建状态</p>
+   */
+  Status?: string
+  /**
+   * <p>框架名</p>
+   */
+  Framework?: string
+  /**
+   * <p>构建配置</p>
+   */
+  StaticConfig?: StaticConfig
+  /**
+   * <p>构建时间</p>
+   */
+  BuildTime?: string
+  /**
+   * <p>构建步骤</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Steps?: Array<BuildStepStatus>
 }
 
 /**
@@ -720,6 +793,20 @@ export interface DescribeCloudBaseBuildServiceResponse {
 }
 
 /**
+ * 构建步骤
+ */
+export interface BuildStep {
+  /**
+   * <p>步骤名（建议 kebab-case，如 build-image），出现在 DescribeCloudAppVersion.Steps[].Name</p>
+   */
+  Name?: string
+  /**
+   * <p>shell 脚本，支持单行或多行</p>
+   */
+  Command?: string
+}
+
+/**
  * 查询HTTP访问服务输出路由信息
  */
 export interface HTTPServiceRoute {
@@ -774,6 +861,64 @@ export interface HTTPServiceRoute {
 }
 
 /**
+ * 三方认证入参映射。如果您的对接方不标准，则可以使用这个参数。默认情况下，该参数可以为空。比如：github,google,apple 接入，这些参数为空，但是国内的腾讯，新浪等则需要配置该参数。原因主要是：腾讯等公司在实现oauth时，未能完全遵循oauth标准。
+ */
+export interface ProviderRequestParametersMap {
+  /**
+   * OAuth 标准协议中的 client_id。不同第三方平台的字段名称可能不同，例如微信平台对应 appid、新浪微博对应 app_id。
+   */
+  ClientId?: string
+  /**
+   * OAuth 标准协议中的 client_secret，用于身份认证源的密钥鉴权。请妥善保管，避免泄露。
+   */
+  ClientSecret?: string
+  /**
+   * OAuth 标准协议中的 redirect_uri，即授权回调地址。用户完成第三方认证后将重定向至该地址。
+   */
+  RedirectUri?: string
+  /**
+   * 身份源注册用户时自动绑定的角色 ID。配置后，通过该身份源注册的新用户将自动关联指定角色。
+   */
+  RegisterUserRoleId?: string
+  /**
+   * 身份源注册用户时是否自动授予许可证。取值范围：
+TRUE：自动授权许可证
+FALSE：不自动授权（默认值）
+   */
+  RegisterUserAutoLicense?: string
+  /**
+   * OAuth 获取 Token 时认证信息的请求位置。取值范围：
+URL：将认证信息放在请求 URL 参数中
+Headers：将认证信息放在请求 Header 中
+Body：将认证信息放在请求 Body 中
+   */
+  AuthPosition?: string
+  /**
+   * OAuth 授权模式匹配的参数字段名。用于指定获取 Token 请求中 grant_type 参数对应的字段名称。
+   */
+  GrantType?: string
+  /**
+   * OAuth 授权模式类型。用于指定 grant_type 的值，例如 client_credentials 表示客户端凭证模式。
+   */
+  ClientCredentials?: string
+  /**
+   * OAuth 返回中 access_token 的映射字段名。若第三方平台返回的 Token 字段名不是标准的 access_token，可通过此字段指定实际字段名。
+   */
+  AccessToken?: string
+  /**
+   * OAuth 返回中 Token 有效期的映射字段名。若第三方平台返回的有效期字段名不是标准的 expires_in，可通过此字段指定实际字段名。
+   */
+  ExpiresIn?: string
+  /**
+   * 身份源注册用户时的用户类型。取值范围：
+externalUser：外部用户
+internalUser：内部用户
+默认值为 externalUser。
+   */
+  RegisterUserType?: string
+}
+
+/**
  * DescribeMySQLTaskStatus请求参数结构体
  */
 export interface DescribeMySQLTaskStatusRequest {
@@ -789,6 +934,24 @@ export interface DescribeMySQLTaskStatusRequest {
    * 任务名
    */
   TaskName?: string
+}
+
+/**
+ * 构建命令
+ */
+export interface BuildCommands {
+  /**
+   * <p>平台生成默认 install step 时执行</p>
+   */
+  InstallCmd?: string
+  /**
+   * <p>平台生成默认build step 时执行</p>
+   */
+  BuildCmd?: string
+  /**
+   * <p>平台生成默认deploy step 时执行</p>
+   */
+  DeployCmd?: string
 }
 
 /**
@@ -1303,6 +1466,63 @@ export interface UnbindStorageSourceResponse {
 }
 
 /**
+ * DescribeCloudAppInfo请求参数结构体
+ */
+export type DescribeCloudAppInfoRequest = null
+
+/**
+ * ModifyLoginConfig请求参数结构体
+ */
+export interface ModifyLoginConfigRequest {
+  /**
+   * 环境 ID，用于指定需要修改登录策略的云开发环境。
+   */
+  EnvId: string
+  /**
+   * 手机号短信登录开关。设置为 true 开启手机号短信登录，允许用户使用手机号和短信验证码进行登录和注册；设置为 false 关闭手机号短信登录。
+   */
+  PhoneNumberLogin: boolean
+  /**
+   * 邮箱登录开关。设置为 true 开启邮箱登录，允许用户使用邮箱和密码进行登录和注册；设置为 false 关闭邮箱登录。
+   */
+  EmailLogin: boolean
+  /**
+   * 用户名密码登录开关。设置为 true 开启用户名密码登录，允许用户使用用户名和密码进行登录和注册；设置为 false 关闭用户名密码登录。
+   */
+  UserNameLogin: boolean
+  /**
+   * 匿名登录开关。设置为 true 开启匿名登录，允许用户无需注册即可以匿名身份访问应用；设置为 false 关闭匿名登录。
+   */
+  AnonymousLogin: boolean
+  /**
+   * 短信验证码发送配置，用于设置短信验证码的发送通道类型和日发送限额。不传则不修改当前配置。
+   */
+  SmsVerificationConfig?: VerificationConfig
+  /**
+   * MFA 多因子认证登录配置，用于设置多因子认证开关及验证方式（短信、邮箱、TOTP、强制绑定手机号）。不传则不修改当前配置。
+   */
+  MfaConfig?: MFALoginConfig
+  /**
+   * 密码更新策略配置，用于设置首次登录强制修改密码和定期强制修改密码策略。不传则不修改当前配置。
+   */
+  PwdUpdateStrategy?: PasswordUpdateLoginConfig
+}
+
+/**
+ * DeleteCloudApp返回参数结构体
+ */
+export interface DeleteCloudAppResponse {
+  /**
+   * 是否删除成功
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribePGUserMigration返回参数结构体
  */
 export interface DescribePGUserMigrationResponse {
@@ -1350,66 +1570,6 @@ export interface DescribePGUserMigrationResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * ModifyLoginConfig请求参数结构体
- */
-export interface ModifyLoginConfigRequest {
-  /**
-   * 环境 ID，用于指定需要修改登录策略的云开发环境。
-   */
-  EnvId: string
-  /**
-   * 手机号短信登录开关。设置为 true 开启手机号短信登录，允许用户使用手机号和短信验证码进行登录和注册；设置为 false 关闭手机号短信登录。
-   */
-  PhoneNumberLogin: boolean
-  /**
-   * 邮箱登录开关。设置为 true 开启邮箱登录，允许用户使用邮箱和密码进行登录和注册；设置为 false 关闭邮箱登录。
-   */
-  EmailLogin: boolean
-  /**
-   * 用户名密码登录开关。设置为 true 开启用户名密码登录，允许用户使用用户名和密码进行登录和注册；设置为 false 关闭用户名密码登录。
-   */
-  UserNameLogin: boolean
-  /**
-   * 匿名登录开关。设置为 true 开启匿名登录，允许用户无需注册即可以匿名身份访问应用；设置为 false 关闭匿名登录。
-   */
-  AnonymousLogin: boolean
-  /**
-   * 短信验证码发送配置，用于设置短信验证码的发送通道类型和日发送限额。不传则不修改当前配置。
-   */
-  SmsVerificationConfig?: VerificationConfig
-  /**
-   * MFA 多因子认证登录配置，用于设置多因子认证开关及验证方式（短信、邮箱、TOTP、强制绑定手机号）。不传则不修改当前配置。
-   */
-  MfaConfig?: MFALoginConfig
-  /**
-   * 密码更新策略配置，用于设置首次登录强制修改密码和定期强制修改密码策略。不传则不修改当前配置。
-   */
-  PwdUpdateStrategy?: PasswordUpdateLoginConfig
-}
-
-/**
- * ModifyDatabaseACL请求参数结构体
- */
-export interface ModifyDatabaseACLRequest {
-  /**
-   * 环境ID
-   */
-  EnvId: string
-  /**
-   * 集合名称
-   */
-  CollectionName: string
-  /**
-   * 权限标签。包含以下取值：
-<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
-<li> PRIVATE：仅创建者及管理员可读写</li>
-<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
-<li> ADMINONLY：仅管理员可读写</li>
-   */
-  AclTag: string
 }
 
 /**
@@ -1670,6 +1830,72 @@ export interface DescribeHostingDomainTaskRequest {
 }
 
 /**
+ * 云应用静态托管配置
+ */
+export interface StaticConfig {
+  /**
+   * 框架类型：vue、react、nextjs 等
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Framework?: string
+  /**
+   * Node.js 版本，默认 20
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NodeJsVersion?: string
+  /**
+   * 访问路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppPath?: string
+  /**
+   * 构建目录
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BuildPath?: string
+  /**
+   * ZIP 文件地址（BuildType=ZIP/TEMPLATE 时使用）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZipFileUrl?: string
+  /**
+   * COS 时间戳
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CosTimestamp?: string
+  /**
+   * COS 文件后缀
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CosSuffix?: string
+  /**
+   * 代码源平台：github、gitlab、gitee
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CodeSource?: string
+  /**
+   * 代码仓库
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CodeRepo?: string
+  /**
+   * 代码分支
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CodeBranch?: string
+  /**
+   * 构建参数 JSON 字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StaticCmd?: StaticCmd
+  /**
+   * 构建环境变量 JSON 字符串
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StaticEnv?: StaticEnvironment
+}
+
+/**
  * 邮箱登录配置
  */
 export interface EmailProviderConfig {
@@ -1686,6 +1912,24 @@ export interface EmailProviderConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   TemplateConfig?: EmailTemplateConfig
+}
+
+/**
+ * DestroyEnv请求参数结构体
+ */
+export interface DestroyEnvRequest {
+  /**
+   * 环境Id
+   */
+  EnvId: string
+  /**
+   * 针对预付费 删除隔离中的环境时要传true 正常环境直接跳过隔离期删除
+   */
+  IsForce?: boolean
+  /**
+   * 是否绕过资源检查，资源包等额外资源，默认为false，如果为true，则不检查资源是否有数据，直接删除。
+   */
+  BypassCheck?: boolean
 }
 
 /**
@@ -1818,25 +2062,49 @@ export interface CreateMySQLResult {
 }
 
 /**
- * DescribeHTTPServiceRoute返回参数结构体
+ * CreateCloudApp请求参数结构体
  */
-export interface DescribeHTTPServiceRouteResponse {
+export interface CreateCloudAppRequest {
   /**
-   * 域名路由信息列表
+   * <p>环境ID</p>
    */
-  Domains?: Array<HTTPServiceDomain>
+  EnvId: string
   /**
-   * 自定义接入的源站域名（HTTPService接入层域名）
+   * <p>服务名</p>
    */
-  OriginDomain?: string
+  ServiceName: string
   /**
-   * 域名总数，分页查询使用总数判断是否已经拉取到所有数据
+   * <p>部署类型</p>
    */
-  TotalCount?: number
+  DeployType: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>构建类型</p>
    */
-  RequestId?: string
+  BuildType?: string
+  /**
+   * <p>静态应用创建配置信息</p>
+   */
+  StaticConfig?: StaticConfig
+  /**
+   * <p>源码定义</p>
+   */
+  Source?: BuildSource
+  /**
+   * <p>Commands 与 CustomSteps 至少填一个</p>
+   */
+  Commands?: BuildCommands
+  /**
+   * <p>Commands 与 CustomSteps 至少填一个，docker 镜像构建场景强烈建议用 CustomSteps</p>
+   */
+  Env?: Array<Variable>
+  /**
+   * <p>非敏感环境变量，构建容器中以 $KEY 引用</p>
+   */
+  CustomSteps?: Array<BuildStep>
+  /**
+   * <p>敏感凭证（AES 加密落库），构建容器中以 $SECRET_NAME 引用</p>
+   */
+  Secrets?: Array<BuildSecret>
 }
 
 /**
@@ -2174,61 +2442,17 @@ export interface DescribeCreditsUsageRequest {
 }
 
 /**
- * 三方认证入参映射。如果您的对接方不标准，则可以使用这个参数。默认情况下，该参数可以为空。比如：github,google,apple 接入，这些参数为空，但是国内的腾讯，新浪等则需要配置该参数。原因主要是：腾讯等公司在实现oauth时，未能完全遵循oauth标准。
+ * 云开发路由限频策略
  */
-export interface ProviderRequestParametersMap {
+export interface HTTPServiceRouteQPSPolicy {
   /**
-   * OAuth 标准协议中的 client_id。不同第三方平台的字段名称可能不同，例如微信平台对应 appid、新浪微博对应 app_id。
+   * QPS值，每秒请求次数
    */
-  ClientId?: string
+  QPSTotal?: number
   /**
-   * OAuth 标准协议中的 client_secret，用于身份认证源的密钥鉴权。请妥善保管，避免泄露。
+   * 客户端限频配置
    */
-  ClientSecret?: string
-  /**
-   * OAuth 标准协议中的 redirect_uri，即授权回调地址。用户完成第三方认证后将重定向至该地址。
-   */
-  RedirectUri?: string
-  /**
-   * 身份源注册用户时自动绑定的角色 ID。配置后，通过该身份源注册的新用户将自动关联指定角色。
-   */
-  RegisterUserRoleId?: string
-  /**
-   * 身份源注册用户时是否自动授予许可证。取值范围：
-TRUE：自动授权许可证
-FALSE：不自动授权（默认值）
-   */
-  RegisterUserAutoLicense?: string
-  /**
-   * OAuth 获取 Token 时认证信息的请求位置。取值范围：
-URL：将认证信息放在请求 URL 参数中
-Headers：将认证信息放在请求 Header 中
-Body：将认证信息放在请求 Body 中
-   */
-  AuthPosition?: string
-  /**
-   * OAuth 授权模式匹配的参数字段名。用于指定获取 Token 请求中 grant_type 参数对应的字段名称。
-   */
-  GrantType?: string
-  /**
-   * OAuth 授权模式类型。用于指定 grant_type 的值，例如 client_credentials 表示客户端凭证模式。
-   */
-  ClientCredentials?: string
-  /**
-   * OAuth 返回中 access_token 的映射字段名。若第三方平台返回的 Token 字段名不是标准的 access_token，可通过此字段指定实际字段名。
-   */
-  AccessToken?: string
-  /**
-   * OAuth 返回中 Token 有效期的映射字段名。若第三方平台返回的有效期字段名不是标准的 expires_in，可通过此字段指定实际字段名。
-   */
-  ExpiresIn?: string
-  /**
-   * 身份源注册用户时的用户类型。取值范围：
-externalUser：外部用户
-internalUser：内部用户
-默认值为 externalUser。
-   */
-  RegisterUserType?: string
+  QPSPerClient?: HTTPServiceQPSPerClient
 }
 
 /**
@@ -2367,6 +2591,24 @@ export interface DescribeMySQLClusterDetailRequest {
 }
 
 /**
+ * DescribeCloudAppVersionList返回参数结构体
+ */
+export interface DescribeCloudAppVersionListResponse {
+  /**
+   * <p>版本列表</p>
+   */
+  VersionList?: Array<CloudAppVersionItem>
+  /**
+   * <p>总数</p>
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateStaticStore请求参数结构体
  */
 export interface CreateStaticStoreRequest {
@@ -2436,6 +2678,28 @@ export interface CreateAuthDomainResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDatabaseACL请求参数结构体
+ */
+export interface ModifyDatabaseACLRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 集合名称
+   */
+  CollectionName: string
+  /**
+   * 权限标签。包含以下取值：
+<li> READONLY：所有用户可读，仅创建者和管理员可写</li>
+<li> PRIVATE：仅创建者及管理员可读写</li>
+<li> ADMINWRITE：所有用户可读，仅管理员可写</li>
+<li> ADMINONLY：仅管理员可读写</li>
+   */
+  AclTag: string
 }
 
 /**
@@ -2759,6 +3023,16 @@ export interface ListPGUserMigrationsRequest {
 }
 
 /**
+ * HTTP访问服务路径重写配置
+ */
+export interface HTTPServicePathRewrite {
+  /**
+   * 路径前缀重写。StaticStorePrefix、Prefix只能填一个
+   */
+  Prefix?: string
+}
+
+/**
  * ModifyEnvPlan返回参数结构体
  */
 export interface ModifyEnvPlanResponse {
@@ -2932,6 +3206,24 @@ export interface LogObject {
    * 日志来源设备
    */
   Source?: string
+}
+
+/**
+ * 静态托管的执行命令
+ */
+export interface StaticCmd {
+  /**
+   * 构建命令
+   */
+  BuildCmd?: string
+  /**
+   * 安装命令
+   */
+  InstallCmd?: string
+  /**
+   * 部署命令
+   */
+  DeployCmd?: string
 }
 
 /**
@@ -3356,21 +3648,41 @@ export interface EnvInfo {
 }
 
 /**
- * DestroyEnv请求参数结构体
+ * DescribeCloudAppVersion返回参数结构体
  */
-export interface DestroyEnvRequest {
+export interface DescribeCloudAppVersionResponse {
   /**
-   * 环境Id
+   * <p>构建类型</p>
    */
-  EnvId: string
+  BuildType?: string
   /**
-   * 针对预付费 删除隔离中的环境时要传true 正常环境直接跳过隔离期删除
+   * <p>构建Id</p>
    */
-  IsForce?: boolean
+  BuildId?: string
   /**
-   * 是否绕过资源检查，资源包等额外资源，默认为false，如果为true，则不检查资源是否有数据，直接删除。
+   * <p>构建状态</p>
    */
-  BypassCheck?: boolean
+  Status?: string
+  /**
+   * <p>框架</p>
+   */
+  Framework?: string
+  /**
+   * <p>静态托管配置信息</p>
+   */
+  StaticConfig?: StaticConfig
+  /**
+   * <p>构建时间</p>
+   */
+  BuildTime?: string
+  /**
+   * <p>[]BuildStepStatus 的 JSON 序列化</p>
+   */
+  Steps?: Array<BuildStepStatus>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3643,6 +3955,24 @@ export interface DescribeCreateMySQLResult {
 }
 
 /**
+ * DeleteCloudApp请求参数结构体
+ */
+export interface DeleteCloudAppRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 部署类型
+   */
+  DeployType: string
+  /**
+   * 服务名
+   */
+  ServiceName: string
+}
+
+/**
  * ModifyResourcePermission返回参数结构体
  */
 export interface ModifyResourcePermissionResponse {
@@ -3654,6 +3984,24 @@ export interface ModifyResourcePermissionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 步骤构建执行状态
+ */
+export interface BuildStepStatus {
+  /**
+   * <p>构建步骤名称</p>
+   */
+  Name?: string
+  /**
+   * <p>构建状态</p>
+   */
+  Status?: string
+  /**
+   * <p>构建耗时</p>
+   */
+  Duration?: string
 }
 
 /**
@@ -4256,6 +4604,28 @@ export interface StaticStorageInfo {
 }
 
 /**
+ * DescribeHTTPServiceRoute返回参数结构体
+ */
+export interface DescribeHTTPServiceRouteResponse {
+  /**
+   * 域名路由信息列表
+   */
+  Domains?: Array<HTTPServiceDomain>
+  /**
+   * 自定义接入的源站域名（HTTPService接入层域名）
+   */
+  OriginDomain?: string
+  /**
+   * 域名总数，分页查询使用总数判断是否已经拉取到所有数据
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateTable返回参数结构体
  */
 export interface CreateTableResponse {
@@ -4479,6 +4849,20 @@ export interface HTTPServiceDomain {
 }
 
 /**
+ * 构建密钥
+ */
+export interface BuildSecret {
+  /**
+   * <p>标准化为 DNS Label 风格；构建时注入为 $SECRET_&lt;NAME&gt;（同时也提供原大写形式 $SECRET_&lt;NAME_UPPERCASE&gt;）</p>
+   */
+  Name?: string
+  /**
+   * <p>平台 AES 加密落库；DescribeVersion 永不回显明文</p>
+   */
+  Value?: string
+}
+
+/**
  * 描述键值对过滤器，用于条件过滤查询。例如过滤ID、名称、状态等
  */
 export interface Filter {
@@ -4533,17 +4917,25 @@ YEAR：年
 }
 
 /**
- * 云开发路由限频策略
+ * CreateCloudApp返回参数结构体
  */
-export interface HTTPServiceRouteQPSPolicy {
+export interface CreateCloudAppResponse {
   /**
-   * QPS值，每秒请求次数
+   * <p>构建Id</p>
    */
-  QPSTotal?: number
+  BuildId?: string
   /**
-   * 客户端限频配置
+   * <p>版本名称</p>
    */
-  QPSPerClient?: HTTPServiceQPSPerClient
+  VersionName?: string
+  /**
+   * <p>服务名称</p>
+   */
+  ServiceName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5110,6 +5502,20 @@ export interface ResourcePermission {
 }
 
 /**
+ * 对象变量
+ */
+export interface Variable {
+  /**
+   * 变量的名称
+   */
+  Key?: string
+  /**
+   * 变量的值
+   */
+  Value?: string
+}
+
+/**
  * ModifyHTTPServiceRoute返回参数结构体
  */
 export interface ModifyHTTPServiceRouteResponse {
@@ -5428,6 +5834,58 @@ export interface UpdateTableRequest {
 }
 
 /**
+ * DescribeCloudAppCosInfo返回参数结构体
+ */
+export interface DescribeCloudAppCosInfoResponse {
+  /**
+   * 上传url
+   */
+  UploadUrl?: string
+  /**
+   * 上传header
+   */
+  UploadHeaders?: Array<KVPair>
+  /**
+   * 下载链接
+   */
+  DownloadUrl?: string
+  /**
+   * 下载Httpheader
+   */
+  DownloadHeaders?: Array<KVPair>
+  /**
+   * 时间戳
+   */
+  UnixTimestamp?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteCloudAppVersion请求参数结构体
+ */
+export interface DeleteCloudAppVersionRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 部署类型
+   */
+  DeployType: string
+  /**
+   * 服务名
+   */
+  ServiceName: string
+  /**
+   * 版本名
+   */
+  VersionName: string
+}
+
+/**
  * DescribeCreditsUsageDetail请求参数结构体
  */
 export interface DescribeCreditsUsageDetailRequest {
@@ -5551,6 +6009,52 @@ export interface DescribeClientRequest {
    * 客户端的唯一标识符（Client ID），在 OAuth/OIDC 授权流程中作为 client_id 参数使用，创建后不可修改，一般使用环境id
    */
   Id: string
+}
+
+/**
+ * DescribeCloudAppInfo返回参数结构体
+ */
+export interface DescribeCloudAppInfoResponse {
+  /**
+   * <p>服务名称</p>
+   */
+  ServiceName?: string
+  /**
+   * <p>框架名称</p>
+   */
+  Framework?: string
+  /**
+   * <p>域名</p>
+   */
+  Domain?: string
+  /**
+   * <p>构建路径</p>
+   */
+  AppPath?: string
+  /**
+   * <p>服务创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>最新版本名</p>
+   */
+  LatestVersionName?: string
+  /**
+   * <p>最新版本状态</p>
+   */
+  LatestStatus?: string
+  /**
+   * <p>最新版本构建时间</p>
+   */
+  LatestBuildTime?: string
+  /**
+   * <p>部署类型</p>
+   */
+  DeployType?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5980,6 +6484,17 @@ export interface PlanInfo {
 }
 
 /**
+ * 静态托管的环境变量参数
+ */
+export interface StaticEnvironment {
+  /**
+   * 环境变量数组
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Variables?: Array<Variable>
+}
+
+/**
  * 标签键值对
  */
 export interface Tag {
@@ -6110,6 +6625,44 @@ export interface MySQLClusterDetail {
 }
 
 /**
+ * 构建触发的源码来源: git,cos,inline
+ */
+export interface BuildSource {
+  /**
+   * <p>源码来源类型，取值：&quot;git&quot; &quot;zip&quot;</p>
+   */
+  Type?: string
+  /**
+   * <p>Git 仓库 HTTPS URL；或 COS 下载完整 URL；与 CodeUrlWithAuth / CosTimestamp 之一非空（zip 二阶段上传时可留空）</p>
+   */
+  Repo?: string
+  /**
+   * <p>分支 tag commit；Git 默认 main，zip 模式下忽略</p>
+   */
+  Ref?: string
+  /**
+   * <p>&quot;git&quot; &quot;github&quot; &quot;gitlab&quot; &quot;gitee&quot; &quot;coding&quot;；私有仓必填，平台据此走 OAuth 鉴权</p>
+   */
+  Channel?: string
+  /**
+   * <p>是否私有仓；true 时平台自动注入 CodeUrlWithAuth</p>
+   */
+  IsPrivate?: boolean
+  /**
+   * <p>调用方显式传入的带鉴权 clone URL 或带签名的 zip 下载直链（优先级最高，会覆盖平台 OAuth / 自动签名）</p>
+   */
+  CodeUrlWithAuth?: string
+  /**
+   * <p>仅 Type=zip/cos 时使用。配合 zip 二阶段上传：填 DescribeCloudAppCosInfo 返回的 UnixTimestamp，平台据此自动签名出 ZIP_FILE_URL</p>
+   */
+  CosTimestamp?: string
+  /**
+   * <p>仅 Type=zip/cos 时使用。zip 文件后缀，默认 .zip；与 CosTimestamp 配合定位 COS 对象</p>
+   */
+  CosSuffix?: string
+}
+
+/**
  * DescribeAuthDomains请求参数结构体
  */
 export interface DescribeAuthDomainsRequest {
@@ -6191,6 +6744,32 @@ export interface MessageLocalized {
    * 在该语言中
    */
   Locale: string
+}
+
+/**
+ * DescribeCloudAppVersion请求参数结构体
+ */
+export interface DescribeCloudAppVersionRequest {
+  /**
+   * <p>环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>服务名</p>
+   */
+  ServiceName: string
+  /**
+   * <p>部署类型</p>
+   */
+  DeployType: string
+  /**
+   * <p>版本名</p>
+   */
+  VersionName?: string
+  /**
+   * <p>构建id</p>
+   */
+  BuildId?: string
 }
 
 /**
@@ -6688,6 +7267,32 @@ export interface ModifyLoginConfigResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeCloudAppVersionList请求参数结构体
+ */
+export interface DescribeCloudAppVersionListRequest {
+  /**
+   * <p>环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>部署类型</p>
+   */
+  DeployType: string
+  /**
+   * <p>服务名</p>
+   */
+  ServiceName: string
+  /**
+   * <p>页大小</p>
+   */
+  PageSize?: number
+  /**
+   * <p>页号</p>
+   */
+  PageNo?: number
 }
 
 /**

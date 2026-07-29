@@ -5270,9 +5270,9 @@ export interface DescribeClusterTransparentEncryptInfoRequest {
  */
 export interface DescribeClusterLevelsRequest {
   /**
-   * 可用区
+   * <p>可用区</p>
    */
-  Zone: string
+  Zone?: string
 }
 
 /**
@@ -14111,9 +14111,13 @@ export interface CloseClusterPasswordComplexityRequest {
  */
 export interface DescribeClusterLevelsResponse {
   /**
-   * 集群类型列表
+   * <p>集群类型列表</p>
    */
   LevelList?: Array<string>
+  /**
+   * <p>专区列表</p>
+   */
+  Zones?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

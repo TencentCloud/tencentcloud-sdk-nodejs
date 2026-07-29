@@ -13373,7 +13373,128 @@ export interface DescribeWorkGroupsRequest {
 /**
  * CreateSparkAppForTDLC请求参数结构体
  */
-export type CreateSparkAppForTDLCRequest = null
+export interface CreateSparkAppForTDLCRequest {
+  /**
+   * <p>spark作业名</p>
+   */
+  AppName: string
+  /**
+   * <p>spark作业类型，1代表spark jar作业，2代表spark streaming作业</p>
+   */
+  AppType: number
+  /**
+   * <p>执行spark作业的数据引擎名称</p>
+   */
+  DataEngine: string
+  /**
+   * <p>spark作业程序包文件路径</p>
+   */
+  AppFile: string
+  /**
+   * <p>数据访问策略，CAM Role arn，控制台通过数据作业—&gt;作业配置获取，SDK通过DescribeUserRoles接口获取对应的值；</p>
+   */
+  RoleArn: number
+  /**
+   * <p>指定的Driver规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）</p>
+   */
+  AppDriverSize: string
+  /**
+   * <p>指定的Executor规格，当前支持：small（默认，1cu）、medium（2cu）、large（4cu）、xlarge（8cu）</p>
+   */
+  AppExecutorSize: string
+  /**
+   * <p>spark作业executor个数</p>
+   */
+  AppExecutorNums: number
+  /**
+   * <p>该字段已下线，请使用字段Datasource</p>
+   */
+  Eni?: string
+  /**
+   * <p>spark作业程序包是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）</p>
+   */
+  IsLocal?: string
+  /**
+   * <p>spark作业主类</p>
+   */
+  MainClass?: string
+  /**
+   * <p>spark配置，以换行符分隔</p>
+   */
+  AppConf?: string
+  /**
+   * <p>spark 作业依赖jar包是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）</p>
+   */
+  IsLocalJars?: string
+  /**
+   * <p>spark 作业依赖jar包（--jars），以逗号分隔</p>
+   */
+  AppJars?: string
+  /**
+   * <p>spark作业依赖文件资源是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）</p>
+   */
+  IsLocalFiles?: string
+  /**
+   * <p>spark作业依赖文件资源（--files）（非jar、zip），以逗号分隔</p>
+   */
+  AppFiles?: string
+  /**
+   * <p>spark作业程序入参，空格分割</p>
+   */
+  CmdArgs?: string
+  /**
+   * <p>最大重试次数，只对spark流任务生效</p>
+   */
+  MaxRetries?: number
+  /**
+   * <p>数据源名称</p>
+   */
+  DataSource?: string
+  /**
+   * <p>pyspark：依赖上传方式，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）</p>
+   */
+  IsLocalPythonFiles?: string
+  /**
+   * <p>pyspark作业依赖python资源（--py-files），支持py/zip/egg等归档格式，多文件以逗号分隔</p>
+   */
+  AppPythonFiles?: string
+  /**
+   * <p>spark作业依赖archives资源是否本地上传，cos：存放与cos，lakefs：本地上传（控制台使用，该方式不支持直接接口调用）</p>
+   */
+  IsLocalArchives?: string
+  /**
+   * <p>spark作业依赖archives资源（--archives），支持tar.gz/tgz/tar等归档格式，以逗号分隔</p>
+   */
+  AppArchives?: string
+  /**
+   * <p>Spark Image 版本号</p>
+   */
+  SparkImage?: string
+  /**
+   * <p>Spark Image 版本名称</p>
+   */
+  SparkImageVersion?: string
+  /**
+   * <p>指定的Executor数量（最大值），默认为1，当开启动态分配有效，若未开启，则该值等于AppExecutorNums</p>
+   */
+  AppExecutorMaxNumbers?: number
+  /**
+   * <p>关联dlc查询脚本id</p>
+   */
+  SessionId?: string
+  /**
+   * <p>任务资源配置是否继承集群模板，0（默认）不继承，1：继承</p>
+   */
+  IsInherit?: number
+  /**
+   * <p>是否使用session脚本的sql运行任务：false：否，true：是</p>
+   */
+  IsSessionStarted?: boolean
+  /**
+   * <p>依赖包信息</p>
+   */
+  DependencyPackages?: Array<DependencyPackage>
+}
 
 /**
  * LockMetaData请求参数结构体

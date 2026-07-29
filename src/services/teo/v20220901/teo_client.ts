@@ -193,6 +193,7 @@ import {
   RangeOriginPullParameters,
   ApplyFreeCertificateResponse,
   CurrentOriginACL,
+  DescribeIPGroupReferencesResponse,
   CreateEdgeKVNamespaceRequest,
   SecurityConfig,
   CreateSecurityIPGroupRequest,
@@ -565,7 +566,7 @@ import {
   InferenceEnvironmentVariable,
   CreatePlanResponse,
   DescribeApplicationProxiesRequest,
-  DescribeContentQuotaRequest,
+  DescribeIPGroupReferencesRequest,
   AllowActionParameters,
   LogItem,
   InferenceResourceConfigForModify,
@@ -740,6 +741,7 @@ import {
   DescribeMultiPathGatewaySecretKeyRequest,
   DDoSBlockData,
   IPSSLSetting,
+  DescribeContentQuotaRequest,
   ModifyFunctionReplicaRequest,
   DescribeMultiPathGatewaysRequest,
   BotPortraitRule,
@@ -810,6 +812,7 @@ import {
   DescribeDefaultCertificatesResponse,
   CreateOriginGroupResponse,
   CreateMultiPathGatewayLineRequest,
+  IPGroupReference,
   CreateContentIdentifierResponse,
   HostHeaderParameters,
   DescribeConfigGroupVersionsRequest,
@@ -1268,6 +1271,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeLogAnalysisDetailResponse) => void
   ): Promise<DescribeLogAnalysisDetailResponse> {
     return this.request("DescribeLogAnalysisDetail", req, cb)
+  }
+
+  /**
+   * 获取使用 IP 分组的策略配置。
+   */
+  async DescribeIPGroupReferences(
+    req: DescribeIPGroupReferencesRequest,
+    cb?: (error: string, rep: DescribeIPGroupReferencesResponse) => void
+  ): Promise<DescribeIPGroupReferencesResponse> {
+    return this.request("DescribeIPGroupReferences", req, cb)
   }
 
   /**

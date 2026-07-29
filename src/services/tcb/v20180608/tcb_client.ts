@@ -24,6 +24,8 @@ import {
   ManagedAIModelChargingInfo,
   OrderInfo,
   CheckTcbServiceResponse,
+  DeleteCloudAppVersionResponse,
+  DescribeCloudAppCosInfoRequest,
   MigrationPlanItem,
   LocalizedMessage,
   GetProvidersRequest,
@@ -39,7 +41,7 @@ import {
   DescribeMySQLClusterDetailResponse,
   ModifyStorageSourceResponse,
   SMSProviderTemplateConfig,
-  HTTPServicePathRewrite,
+  CloudAppVersionItem,
   CreateVmInstanceRequest,
   DescribeEnvsRequest,
   ModifyUserResponse,
@@ -47,8 +49,11 @@ import {
   DeleteUsersResp,
   DescribeEnvLimitRequest,
   DescribeCloudBaseBuildServiceResponse,
+  BuildStep,
   HTTPServiceRoute,
+  ProviderRequestParametersMap,
   DescribeMySQLTaskStatusRequest,
+  BuildCommands,
   BanConfig,
   RepairPGUserMigrationHistoryResponse,
   RepairPGUserMigrationHistoryRequest,
@@ -74,9 +79,10 @@ import {
   CreateHostingDomainRequest,
   SMSTemplateParams,
   UnbindStorageSourceResponse,
-  DescribePGUserMigrationResponse,
+  DescribeCloudAppInfoRequest,
   ModifyLoginConfigRequest,
-  ModifyDatabaseACLRequest,
+  DeleteCloudAppResponse,
+  DescribePGUserMigrationResponse,
   DescribeCloudBaseRunServerVersionResponse,
   DeleteVmInstanceResponse,
   DescribeGatewayVersionsResponse,
@@ -84,7 +90,9 @@ import {
   CreateEnvResourceRequest,
   DescribeVmInstancesRequest,
   DescribeHostingDomainTaskRequest,
+  StaticConfig,
   EmailProviderConfig,
+  DestroyEnvRequest,
   DescribeUserListResp,
   BaasPackageInfo,
   ModifyHTTPServiceRouteRequest,
@@ -92,7 +100,7 @@ import {
   CreateBillDealResponse,
   DestroyMySQLResponse,
   CreateMySQLResult,
-  DescribeHTTPServiceRouteResponse,
+  CreateCloudAppRequest,
   ProviderConfig,
   ModifySafeRuleRequest,
   KVPair,
@@ -106,17 +114,19 @@ import {
   DeleteAIModelResponse,
   ExecutePGSqlResponse,
   DescribeCreditsUsageRequest,
-  ProviderRequestParametersMap,
+  HTTPServiceRouteQPSPolicy,
   CreateUserResponse,
   DescribeEnvAccountCircleRequest,
   CreateBillDealRequest,
   RenewEnvResponse,
   DescribeMySQLClusterDetailRequest,
+  DescribeCloudAppVersionListResponse,
   CreateStaticStoreRequest,
   HTTPServiceExtension,
   LocalizedTemplate,
   DescribeBillingInfoResponse,
   CreateAuthDomainResponse,
+  ModifyDatabaseACLRequest,
   DeleteApiKeyResponse,
   DestroyStaticStoreRequest,
   MigrationInput,
@@ -132,6 +142,7 @@ import {
   MgoKeySchema,
   UpdateAIModelResponse,
   ListPGUserMigrationsRequest,
+  HTTPServicePathRewrite,
   ModifyEnvPlanResponse,
   CreateCustomLoginKeyRequest,
   DescribeCreditsUsageDetailResponse,
@@ -143,6 +154,7 @@ import {
   EmailTemplateConfig,
   UnbindStorageSourceRequest,
   LogObject,
+  StaticCmd,
   DestroyStaticStoreResponse,
   DeleteVmInstanceRequest,
   ManagedAIModel,
@@ -157,7 +169,7 @@ import {
   DeleteTableRequest,
   MySQLNetDetail,
   EnvInfo,
-  DestroyEnvRequest,
+  DescribeCloudAppVersionResponse,
   DestroyEnvResponse,
   DeleteTableResponse,
   AddProviderResponse,
@@ -172,7 +184,9 @@ import {
   MySQLTaskStatus,
   DescribeEnvPlansRequest,
   DescribeCreateMySQLResult,
+  DeleteCloudAppRequest,
   ModifyResourcePermissionResponse,
+  BuildStepStatus,
   DescribeCreateMySQLResultResponse,
   DescribeSafeRuleRequest,
   ModifyUserRequest,
@@ -198,6 +212,7 @@ import {
   VMSpec,
   ModifyDatabaseACLResponse,
   StaticStorageInfo,
+  DescribeHTTPServiceRouteResponse,
   CreateTableResponse,
   OwnershipVerificationFileInfo,
   DestroyMySQLResult,
@@ -207,10 +222,11 @@ import {
   CreateMySQLRequest,
   DatabasesInfo,
   HTTPServiceDomain,
+  BuildSecret,
   Filter,
   DropIndex,
   PasswordUpdateLoginConfig,
-  HTTPServiceRouteQPSPolicy,
+  CreateCloudAppResponse,
   PostgreSQLInfo,
   CreateUserRequest,
   CreateApiKeyResponse,
@@ -233,6 +249,7 @@ import {
   ValueDetail,
   DescribeResourcePermissionRequest,
   ResourcePermission,
+  Variable,
   ModifyHTTPServiceRouteResponse,
   GetProvidersResponse,
   DescribeQuotaDataRequest,
@@ -248,11 +265,14 @@ import {
   ModifyClientResponse,
   DescribeTableRequest,
   UpdateTableRequest,
+  DescribeCloudAppCosInfoResponse,
+  DeleteCloudAppVersionRequest,
   DescribeCreditsUsageDetailRequest,
   AuthDomain,
   RunSqlResponse,
   LogServiceInfo,
   DescribeClientRequest,
+  DescribeCloudAppInfoResponse,
   ExternalStorage,
   DescribeHostingDomainTaskResponse,
   DeleteAuthDomainRequest,
@@ -272,18 +292,21 @@ import {
   DescribeManagedAIModelListResponse,
   DescribeAIModelsResponse,
   PlanInfo,
+  StaticEnvironment,
   Tag,
   CreateEnvRequest,
   DeleteHTTPServiceRouteRequest,
   RunCommandsRequest,
   IndexAccesses,
   MySQLClusterDetail,
+  BuildSource,
   DescribeAuthDomainsRequest,
   DescribeVmSpecResponse,
   DescribeAIModelsRequest,
   RunSqlRequest,
   DescribeEnvPlansResponse,
   MessageLocalized,
+  DescribeCloudAppVersionRequest,
   OwnershipVerificationDnsInfo,
   DescribeTableResponse,
   MetricUsage,
@@ -306,6 +329,7 @@ import {
   CreateUserResp,
   AIModelGroup,
   ModifyLoginConfigResponse,
+  DescribeCloudAppVersionListRequest,
   CreateApiKeyRequest,
 } from "./tcb_models"
 
@@ -513,6 +537,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
+   * 查询应用服务信息
+   */
+  async DescribeCloudAppInfo(
+    req?: DescribeCloudAppInfoRequest,
+    cb?: (error: string, rep: DescribeCloudAppInfoResponse) => void
+  ): Promise<DescribeCloudAppInfoResponse> {
+    return this.request("DescribeCloudAppInfo", req, cb)
+  }
+
+  /**
    * 销毁云服务器实例
    */
   async DeleteVmInstance(
@@ -666,15 +700,13 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-     * 修改身份认证源。更新指定云开发环境下已有身份认证源的配置信息，支持修改基本信息（名称、图标、描述）、协议连接配置（ClientId、ClientSecret、端点地址等）、登录行为控制（透传模式、自动注册、邮箱/手机号自动关联）以及启用状态。
-对于 OIDC 类型身份源，修改 Issuer 后将自动通过 OpenID Connect Discovery 重新获取端点配置。
-若自定义登录（CUSTOM）或邮箱登录（EMAIL）身份源尚不存在，调用该接口时将自动创建。
-     */
-  async ModifyProvider(
-    req: ModifyProviderRequest,
-    cb?: (error: string, rep: ModifyProviderResponse) => void
-  ): Promise<ModifyProviderResponse> {
-    return this.request("ModifyProvider", req, cb)
+   * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
+   */
+  async DescribeEnvs(
+    req: DescribeEnvsRequest,
+    cb?: (error: string, rep: DescribeEnvsResponse) => void
+  ): Promise<DescribeEnvsResponse> {
+    return this.request("DescribeEnvs", req, cb)
   }
 
   /**
@@ -885,6 +917,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
+   * 创建云应用
+   */
+  async CreateCloudApp(
+    req: CreateCloudAppRequest,
+    cb?: (error: string, rep: CreateCloudAppResponse) => void
+  ): Promise<CreateCloudAppResponse> {
+    return this.request("CreateCloudApp", req, cb)
+  }
+
+  /**
    * 本接口（DescribePGUserMigration）用于查询目标环境指定 migration 详情。
    */
   async DescribePGUserMigration(
@@ -952,16 +994,6 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-   * 获取环境列表，含环境下的各个资源信息。尤其是各资源的唯一标识，是请求各资源的关键参数
-   */
-  async DescribeEnvs(
-    req: DescribeEnvsRequest,
-    cb?: (error: string, rep: DescribeEnvsResponse) => void
-  ): Promise<DescribeEnvsResponse> {
-    return this.request("DescribeEnvs", req, cb)
-  }
-
-  /**
    * 查询服务版本的详情，CPU和MEM  请使用CPUSize和MemSize
    */
   async DescribeCloudBaseRunServerVersion(
@@ -1005,13 +1037,14 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-   * 在Postgres数据库上执行SQL
-   */
-  async ExecutePGSql(
-    req: ExecutePGSqlRequest,
-    cb?: (error: string, rep: ExecutePGSqlResponse) => void
-  ): Promise<ExecutePGSqlResponse> {
-    return this.request("ExecutePGSql", req, cb)
+     * 修改指定云开发环境的登录策略配置。支持开启或关闭手机号短信登录、邮箱登录、用户名密码登录和匿名登录，同时可配置短信验证码发送通道、MFA 多因子认证和密码更新策略。
+修改后立即生效，影响该环境下所有终端用户的登录行为。
+     */
+  async ModifyLoginConfig(
+    req: ModifyLoginConfigRequest,
+    cb?: (error: string, rep: ModifyLoginConfigResponse) => void
+  ): Promise<ModifyLoginConfigResponse> {
+    return this.request("ModifyLoginConfig", req, cb)
   }
 
   /**
@@ -1154,6 +1187,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
+   * 删除云应用服务
+   */
+  async DeleteCloudApp(
+    req: DeleteCloudAppRequest,
+    cb?: (error: string, rep: DeleteCloudAppResponse) => void
+  ): Promise<DeleteCloudAppResponse> {
+    return this.request("DeleteCloudApp", req, cb)
+  }
+
+  /**
    * 白名单接口，申请Tcb角色临时凭证
    */
   async AssumeRoleForAllocatedEnv(
@@ -1171,6 +1214,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: CreateTableResponse) => void
   ): Promise<CreateTableResponse> {
     return this.request("CreateTable", req, cb)
+  }
+
+  /**
+   * 查询云应用服务版本信息
+   */
+  async DescribeCloudAppVersion(
+    req: DescribeCloudAppVersionRequest,
+    cb?: (error: string, rep: DescribeCloudAppVersionResponse) => void
+  ): Promise<DescribeCloudAppVersionResponse> {
+    return this.request("DescribeCloudAppVersion", req, cb)
   }
 
   /**
@@ -1229,6 +1282,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
+   * 删除云应用服务版本
+   */
+  async DeleteCloudAppVersion(
+    req: DeleteCloudAppVersionRequest,
+    cb?: (error: string, rep: DeleteCloudAppVersionResponse) => void
+  ): Promise<DeleteCloudAppVersionResponse> {
+    return this.request("DeleteCloudAppVersion", req, cb)
+  }
+
+  /**
      * 本接口用于云开发环境套餐续费。
 该接口会自动下单并支付，会在腾讯云账户中扣除余额（余额不足会下单失败）。
 该接口支持自动扣除代金券（AutoVoucher=true时），符合条件的代金券会被自动扣除。
@@ -1258,6 +1321,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DescribeDatabaseACLResponse) => void
   ): Promise<DescribeDatabaseACLResponse> {
     return this.request("DescribeDatabaseACL", req, cb)
+  }
+
+  /**
+   * 在Postgres数据库上执行SQL
+   */
+  async ExecutePGSql(
+    req: ExecutePGSqlRequest,
+    cb?: (error: string, rep: ExecutePGSqlResponse) => void
+  ): Promise<ExecutePGSqlResponse> {
+    return this.request("ExecutePGSql", req, cb)
   }
 
   /**
@@ -1348,6 +1421,18 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
+     * 修改身份认证源。更新指定云开发环境下已有身份认证源的配置信息，支持修改基本信息（名称、图标、描述）、协议连接配置（ClientId、ClientSecret、端点地址等）、登录行为控制（透传模式、自动注册、邮箱/手机号自动关联）以及启用状态。
+对于 OIDC 类型身份源，修改 Issuer 后将自动通过 OpenID Connect Discovery 重新获取端点配置。
+若自定义登录（CUSTOM）或邮箱登录（EMAIL）身份源尚不存在，调用该接口时将自动创建。
+     */
+  async ModifyProvider(
+    req: ModifyProviderRequest,
+    cb?: (error: string, rep: ModifyProviderResponse) => void
+  ): Promise<ModifyProviderResponse> {
+    return this.request("ModifyProvider", req, cb)
+  }
+
+  /**
    * 修改tcb用户
    */
   async ModifyUser(
@@ -1365,6 +1450,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: ModifyEnvResponse) => void
   ): Promise<ModifyEnvResponse> {
     return this.request("ModifyEnv", req, cb)
+  }
+
+  /**
+   * 获取云应用cos信息
+   */
+  async DescribeCloudAppCosInfo(
+    req: DescribeCloudAppCosInfoRequest,
+    cb?: (error: string, rep: DescribeCloudAppCosInfoResponse) => void
+  ): Promise<DescribeCloudAppCosInfoResponse> {
+    return this.request("DescribeCloudAppCosInfo", req, cb)
   }
 
   /**
@@ -1388,13 +1483,12 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
   }
 
   /**
-     * 修改指定云开发环境的登录策略配置。支持开启或关闭手机号短信登录、邮箱登录、用户名密码登录和匿名登录，同时可配置短信验证码发送通道、MFA 多因子认证和密码更新策略。
-修改后立即生效，影响该环境下所有终端用户的登录行为。
-     */
-  async ModifyLoginConfig(
-    req: ModifyLoginConfigRequest,
-    cb?: (error: string, rep: ModifyLoginConfigResponse) => void
-  ): Promise<ModifyLoginConfigResponse> {
-    return this.request("ModifyLoginConfig", req, cb)
+   * 查询云应用服务版本列表信息
+   */
+  async DescribeCloudAppVersionList(
+    req: DescribeCloudAppVersionListRequest,
+    cb?: (error: string, rep: DescribeCloudAppVersionListResponse) => void
+  ): Promise<DescribeCloudAppVersionListResponse> {
+    return this.request("DescribeCloudAppVersionList", req, cb)
   }
 }

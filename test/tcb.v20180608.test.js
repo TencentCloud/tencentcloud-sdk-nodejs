@@ -178,6 +178,16 @@ it("tcb.v20180608.DescribeCloudBaseBuildService", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeCloudAppInfo", async function () {
+    try {
+       const data = await client.DescribeCloudAppInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DeleteVmInstance", async function () {
     try {
        const data = await client.DeleteVmInstance({})
@@ -318,9 +328,9 @@ it("tcb.v20180608.CreateAuthDomain", async function () {
     }
 })
 
-it("tcb.v20180608.ModifyProvider", async function () {
+it("tcb.v20180608.DescribeEnvs", async function () {
     try {
-       const data = await client.ModifyProvider({})
+       const data = await client.DescribeEnvs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -508,6 +518,16 @@ it("tcb.v20180608.ListTables", async function () {
     }
 })
 
+it("tcb.v20180608.CreateCloudApp", async function () {
+    try {
+       const data = await client.CreateCloudApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.DescribePGUserMigration", async function () {
     try {
        const data = await client.DescribePGUserMigration({})
@@ -568,16 +588,6 @@ it("tcb.v20180608.DeleteHTTPServiceRoute", async function () {
     }
 })
 
-it("tcb.v20180608.DescribeEnvs", async function () {
-    try {
-       const data = await client.DescribeEnvs({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("tcb.v20180608.DescribeCloudBaseRunServerVersion", async function () {
     try {
        const data = await client.DescribeCloudBaseRunServerVersion({})
@@ -618,9 +628,9 @@ it("tcb.v20180608.RepairPGUserMigrationHistory", async function () {
     }
 })
 
-it("tcb.v20180608.ExecutePGSql", async function () {
+it("tcb.v20180608.ModifyLoginConfig", async function () {
     try {
-       const data = await client.ExecutePGSql({})
+       const data = await client.ModifyLoginConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -728,6 +738,16 @@ it("tcb.v20180608.CreateCustomLoginKey", async function () {
     }
 })
 
+it("tcb.v20180608.DeleteCloudApp", async function () {
+    try {
+       const data = await client.DeleteCloudApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.AssumeRoleForAllocatedEnv", async function () {
     try {
        const data = await client.AssumeRoleForAllocatedEnv({})
@@ -741,6 +761,16 @@ it("tcb.v20180608.AssumeRoleForAllocatedEnv", async function () {
 it("tcb.v20180608.CreateTable", async function () {
     try {
        const data = await client.CreateTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeCloudAppVersion", async function () {
+    try {
+       const data = await client.DescribeCloudAppVersion({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -798,6 +828,16 @@ it("tcb.v20180608.DescribeBillingInfo", async function () {
     }
 })
 
+it("tcb.v20180608.DeleteCloudAppVersion", async function () {
+    try {
+       const data = await client.DeleteCloudAppVersion({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.RenewEnv", async function () {
     try {
        const data = await client.RenewEnv({})
@@ -821,6 +861,16 @@ it("tcb.v20180608.AllocateEnv", async function () {
 it("tcb.v20180608.DescribeDatabaseACL", async function () {
     try {
        const data = await client.DescribeDatabaseACL({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.ExecutePGSql", async function () {
+    try {
+       const data = await client.ExecutePGSql({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -898,6 +948,16 @@ it("tcb.v20180608.DescribeQuotaData", async function () {
     }
 })
 
+it("tcb.v20180608.ModifyProvider", async function () {
+    try {
+       const data = await client.ModifyProvider({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.ModifyUser", async function () {
     try {
        const data = await client.ModifyUser({})
@@ -911,6 +971,16 @@ it("tcb.v20180608.ModifyUser", async function () {
 it("tcb.v20180608.ModifyEnv", async function () {
     try {
        const data = await client.ModifyEnv({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tcb.v20180608.DescribeCloudAppCosInfo", async function () {
+    try {
+       const data = await client.DescribeCloudAppCosInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -938,9 +1008,9 @@ it("tcb.v20180608.DescribeVmSpec", async function () {
     }
 })
 
-it("tcb.v20180608.ModifyLoginConfig", async function () {
+it("tcb.v20180608.DescribeCloudAppVersionList", async function () {
     try {
-       const data = await client.ModifyLoginConfig({})
+       const data = await client.DescribeCloudAppVersionList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

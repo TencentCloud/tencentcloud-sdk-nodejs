@@ -2549,30 +2549,15 @@ export interface LoadBalancerOperationLocksItem {
  */
 export interface DescribeLoadBalancersRequest {
   /**
-   * 查询过滤条件，支持以下几个字段
-- **LoadBalancerId**: 负载均衡实例 ID
-- **LoadBalancerName**: 负载均衡名称
-- **LoadBalancerStatus**: 负载均衡状态
-- **VpcId**: 私有网络 ID
-- **tag:tag-key**：按标签键值对筛选，tag-key 请替换为实际的标签键。例如 `tag:env` 表示按标签键 `env` 筛选。
-- **AddressType**: 网络类型
-    - **Intranet**: 内网
-    - **Internet**: 公网 
-- **AddressIpVersion**:
-    - **IPv4**: IPv4 地址
-    - **IPv6** IPv6 地址
+   * <p>查询过滤条件，支持以下几个字段</p><ul><li><strong>LoadBalancerId</strong>: 负载均衡实例 ID</li><li><strong>LoadBalancerName</strong>: 负载均衡名称</li><li><strong>LoadBalancerStatus</strong>: 负载均衡状态</li><li><strong>VpcId</strong>: 私有网络 ID</li><li><strong>tag:tag-key</strong>：按标签键值对筛选，tag-key 请替换为实际的标签键。例如 <code>tag:env</code> 表示按标签键 <code>env</code> 筛选。</li><li><strong>AddressType</strong>: 网络类型<ul><li><strong>Intranet</strong>: 内网</li><li><strong>Internet</strong>: 公网 </li></ul></li><li><strong>AddressIpVersion</strong>:<ul><li><strong>IPv4</strong>: IPv4 地址</li><li><strong>IPv6</strong> IPv6 地址</li></ul></li><li><strong>SecurityGroupId</strong>: 安全组ID</li></ul>
    */
   Filters?: Array<Filter>
   /**
-   * 分批次查询时每次显示的条目数。取值范围：**1**~**100**，默认值：**20**。
-
-
+   * <p>分批次查询时每次显示的条目数。取值范围：<strong>1</strong>~<strong>100</strong>，默认值：<strong>20</strong>。</p>
    */
   MaxResults?: number
   /**
-   * 是否拥有下一次查询的令牌（Token）。取值：
-- 第一次查询和没有下一次查询时，均无需填写。
-- 如果有下一次查询，取值为上一次API调用返回的**NextToken**值。
+   * <p>是否拥有下一次查询的令牌（Token）。取值：</p><ul><li>第一次查询和没有下一次查询时，均无需填写。</li><li>如果有下一次查询，取值为上一次API调用返回的<strong>NextToken</strong>值。</li></ul>
    */
   NextToken?: string
 }
@@ -3532,23 +3517,19 @@ export interface FixedResponseInfo {
  */
 export interface DescribeLoadBalancersResponse {
   /**
-   * 应用型负载均衡实例列表。
+   * <p>应用型负载均衡实例列表。</p>
    */
   LoadBalancers?: Array<LoadBalancer>
   /**
-   * 分批次查询时每次显示的条目数。
-
-
+   * <p>分批次查询时每次显示的条目数。</p>
    */
   MaxResults?: number
   /**
-   * 是否拥有下一次查询的令牌（Token）。取值：
-- 如果**NextToken**为空表示没有下一次查询。
-- 如果**NextToken**有返回值，该取值表示下一次查询开始的令牌。
+   * <p>是否拥有下一次查询的令牌（Token）。取值：</p><ul><li>如果<strong>NextToken</strong>为空表示没有下一次查询。</li><li>如果<strong>NextToken</strong>有返回值，该取值表示下一次查询开始的令牌。</li></ul>
    */
   NextToken?: string
   /**
-   * 列表条目数。
+   * <p>列表条目数。</p>
    */
   TotalCount?: number
   /**

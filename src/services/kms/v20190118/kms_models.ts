@@ -1025,101 +1025,105 @@ export interface DisableKeyRotationResponse {
  */
 export interface DataKeyMetadata {
   /**
-   * DataKey的全局唯一标识
+   * <p>DataKey的全局唯一标识</p>
    */
   DataKeyId?: string
   /**
-   * CMK的全局唯一标识
+   * <p>CMK的全局唯一标识</p>
    */
   KeyId?: string
   /**
-   * CMK的名称
+   * <p>CMK的名称</p>
    */
   KeyName?: string
   /**
-   * 作为密钥更容易辨识，更容易被人看懂的数据密钥名称
+   * <p>作为密钥更容易辨识，更容易被人看懂的数据密钥名称</p>
    */
   DataKeyName?: string
   /**
-   * 数据密钥的长度,单位字节
+   * <p>数据密钥的长度,单位字节</p>
    */
   NumberOfBytes?: number
   /**
-   * 密钥创建时间
+   * <p>密钥创建时间</p>
    */
   CreateTime?: number
   /**
-   * DataKey的描述
+   * <p>DataKey的描述</p>
    */
   Description?: string
   /**
-   * DataKey的状态， 取值为：Enabled | Disabled | PendingDelete
+   * <p>DataKey的状态， 取值为：Enabled | Disabled | PendingDelete</p>
    */
   KeyState?: string
   /**
-   * 创建者
+   * <p>创建者</p>
    */
   CreatorUin?: number
   /**
-   * 数据密钥的创建者，用户创建的为 user，授权各云产品自动创建的为对应的产品名
+   * <p>数据密钥的创建者，用户创建的为 user，授权各云产品自动创建的为对应的产品名</p>
    */
   Owner?: string
   /**
-   * 计划删除的时间
+   * <p>计划删除的时间</p>
    */
   DeletionDate?: number
   /**
-   * DataKey 密钥材料类型，由KMS创建的为： TENCENT_KMS， 由用户导入的类型为：EXTERNAL
+   * <p>DataKey 密钥材料类型，由KMS创建的为： TENCENT_KMS， 由用户导入的类型为：EXTERNAL</p>
    */
   Origin?: string
   /**
-   * HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）
+   * <p>HSM 集群 ID（仅对 KMS 独占版/托管版服务实例有效）</p>
    */
   HsmClusterId?: string
   /**
-   * 资源ID，格式：creatorUin/$creatorUin/$dataKeyId
+   * <p>资源ID，格式：creatorUin/$creatorUin/$dataKeyId</p>
    */
   ResourceId?: string
   /**
-   * 密钥是否是主副本。0:主本，1:同步副本。
+   * <p>密钥是否是主副本。0:主本，1:同步副本。</p>
    */
   IsSyncReplica?: number
   /**
-   * 同步的原始地域
+   * <p>同步的原始地域</p>
    */
   SourceRegion?: string
   /**
-   * 密钥同步的状态，0:未同步，1:同步成功，2:同步失败，3:同步中。
+   * <p>密钥同步的状态，0:未同步，1:同步成功，2:同步失败，3:同步中。</p>
    */
   SyncStatus?: number
   /**
-   * 同步的结果描述
+   * <p>同步的结果描述</p>
    */
   SyncMessages?: string
   /**
-   * 同步的开始时间
+   * <p>同步的开始时间</p>
    */
   SyncStartTime?: number
   /**
-   * 同步的结束时间
+   * <p>同步的结束时间</p>
    */
   SyncEndTime?: number
   /**
-   * 同步的原始集群，如果为空，是公有云公共集群
+   * <p>同步的原始集群，如果为空，是公有云公共集群</p>
    */
   SourceHsmClusterId?: string
   /**
-   * 成员账号appId
+   * <p>成员账号appId</p>
    */
   AccountAppId?: number
   /**
-   * 成员账号uin
+   * <p>成员账号uin</p>
    */
   AccountUin?: number
   /**
-   * 成员账号名称
+   * <p>成员账号名称</p>
    */
   AccountName?: string
+  /**
+   * <p>创建者UIN</p>
+   */
+  CreatorUinString?: string
 }
 
 /**
@@ -1737,6 +1741,14 @@ export interface GetServiceStatusResponse {
    */
   RegionsQps?: Array<RegionQps>
   /**
+   * <p>资源的地域信息</p>
+   */
+  ResourceZone?: number
+  /**
+   * <p>资源的地域可用区信息</p>
+   */
+  ResourceRegion?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -2060,6 +2072,10 @@ export interface KeyMetadata {
    * <p>成员账号名称</p>
    */
   AccountName?: string
+  /**
+   * <p>创建者UIN</p>
+   */
+  CreatorUinString?: string
 }
 
 /**

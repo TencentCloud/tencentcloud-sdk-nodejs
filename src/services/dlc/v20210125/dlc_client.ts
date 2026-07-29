@@ -2167,7 +2167,7 @@ export class Client extends AbstractClient {
    * 创建tdlc spark作业
    */
   async CreateSparkAppForTDLC(
-    req?: CreateSparkAppForTDLCRequest,
+    req: CreateSparkAppForTDLCRequest,
     cb?: (error: string, rep: CreateSparkAppForTDLCResponse) => void
   ): Promise<CreateSparkAppForTDLCResponse> {
     return this.request("CreateSparkAppForTDLC", req, cb)

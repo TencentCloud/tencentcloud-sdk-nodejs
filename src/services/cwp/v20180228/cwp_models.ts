@@ -831,23 +831,23 @@ export interface ModifyBaselineRuleRequest {
  */
 export interface SearchLogResponse {
   /**
-   * 匹配检索条件的原始日志的数量
+   * <p>匹配检索条件的原始日志的数量</p>
    */
   Count?: number
   /**
-   * 透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时
+   * <p>透传本次接口返回的Context值，可获取后续更多日志，过期时间1小时</p>
    */
   Context?: string
   /**
-   * 符合检索条件的日志是否已全部返回，如未全部返回可使用Context参数获取后续更多日志
+   * <p>符合检索条件的日志是否已全部返回，如未全部返回可使用Context参数获取后续更多日志</p>
    */
   ListOver?: boolean
   /**
-   * 返回的是否为统计分析（即SQL）结果
+   * <p>返回的是否为统计分析（即SQL）结果</p>
    */
   Analysis?: boolean
   /**
-   * 匹配检索条件的原始日志
+   * <p>匹配检索条件的原始日志</p>
    */
   Data?: Array<LogInfo>
   /**
@@ -7247,27 +7247,27 @@ export interface ModifyRaspMaxCpuResponse {
  */
 export interface SearchLogRequest {
   /**
-   * 要检索分析的日志的起始时间，Unix时间戳（毫秒）
+   * <p>要检索分析的日志的起始时间，Unix时间戳（毫秒）</p>
    */
   StartTime: number
   /**
-   * 要检索分析的日志的结束时间，Unix时间戳（毫秒）
+   * <p>要检索分析的日志的结束时间，Unix时间戳（毫秒）</p>
    */
   EndTime: number
   /**
-   * 检索分析语句，最大长度为12KB，查询语法可参考文档 https://cloud.tencent.com/document/product/296/50508
+   * <p>检索分析语句，最大长度为12KB，查询语法可参考文档 https://cloud.tencent.com/document/product/296/50508</p>
    */
   QueryString: string
   /**
-   * 表示单次查询返回的原始日志条数，最大值为1000，获取后续日志需使用Context参数
+   * <p>表示单次查询返回的原始日志条数，最大值为1000，获取后续日志需使用Context参数</p>
    */
   Count?: number
   /**
-   * 原始日志是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc
+   * <p>原始日志是否按时间排序返回；可选值：asc(升序)、desc(降序)，默认为 desc</p>
    */
   Sort?: string
   /**
-   * 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时
+   * <p>透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时</p>
    */
   Context?: string
 }

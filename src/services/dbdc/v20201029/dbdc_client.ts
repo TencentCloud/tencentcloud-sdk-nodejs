@@ -19,74 +19,100 @@ import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
   IsolateDBCustomNodeRequest,
-  SystemDisk,
-  RemoveNodesFromDBCustomClusterRequest,
-  HostDetail,
   DescribeDBCustomClusterDetailResponse,
-  Label,
-  LoginSettings,
-  DBCustomImage,
-  DBCustomClusterNode,
   DestroyDBCustomClusterRequest,
+  DescribeDBCustomClusterResourcesRequest,
+  ModifyInstanceNameRequest,
+  DescribeDBCustomClusterNodeConfigResponse,
+  DescribeInstancesResponse,
+  SystemDisk,
+  DBCustomNodeTypeInfo,
+  ModifyInstanceNameResponse,
+  DescribeDBCustomClusterNodeConfigRequest,
+  CreateDBCustomClusterResponse,
+  DescribeDBCustomImagesRequest,
+  ZoneInfo,
+  Tag,
+  DBCustomClusterNodeResource,
+  CreateDBCustomClusterRequest,
+  DescribeInstanceListResponse,
+  ModifyDBCustomNodeSecurityGroupsResponse,
+  Label,
+  RemoveNodesFromDBCustomClusterResponse,
   DescribeDBCustomNodesResponse,
-  ModifyDBCustomClusterTagsResponse,
+  DescribeDBCustomClusterResourcesResponse,
   DescribeDBCustomClusterNodesRequest,
-  DescribeInstanceDetail,
-  DescribeDBCustomTaskStatusRequest,
   DescribeInstanceListRequest,
   DescribeDBCustomClustersRequest,
+  DescribeDBInstancesRequest,
+  DescribeDBCustomNodeTypesResponse,
+  AddNodesToDBCustomClusterRequest,
+  DescribeHostListResponse,
+  DescribeDBCustomRegionsRequest,
+  ModifyDBCustomClusterTagsRequest,
+  DescribeDBCustomTaskStatusResponse,
+  DescribeInstanceDetailResponse,
+  ModifyDBCustomClusterNodeConfigResponse,
+  DBInstanceDetail,
+  Taint,
+  DestroyDBCustomNodeRequest,
+  DescribeDBCustomZonesRequest,
+  ModifyDBCustomClusterNodeConfigRequest,
+  HostDetail,
+  CheckRoleAuthorizedRequest,
+  CreateDBCustomNodesRequest,
+  RenewDBCustomNodeResponse,
+  DescribeDBCustomImagesResponse,
+  ModifyDBCustomNodeTagsResponse,
+  AddNodesToDBCustomClusterResponse,
+  DestroyDBCustomClusterResponse,
+  DescribeDBCustomClusterNodeResourcesRequest,
+  ResourceTag,
+  DataDisk,
+  DescribeDBCustomNodeTypesRequest,
+  LoginSettings,
+  SecurityGroup,
+  DBCustomImage,
+  DescribeDBCustomClusterNodeResourcesResponse,
+  ModifyDBCustomClusterTagsResponse,
+  DescribeDBCustomRegionsResponse,
+  DescribeInstanceDetail,
   InstanceDeviceInfo,
   DescribeDBCustomClusterKubeconfigRequest,
-  DestroyDBCustomNodeResponse,
-  DescribeDBInstancesRequest,
-  AddNodesToDBCustomClusterRequest,
-  ModifyInstanceNameRequest,
-  DescribeHostListResponse,
-  ApiServerNetwork,
-  ResourceTag,
+  RemoveNodesFromDBCustomClusterRequest,
   DescribeDBCustomClustersResponse,
-  IsolateDBCustomNodeResponse,
-  DescribeDBInstancesResponse,
-  DescribeDBCustomTaskStatusResponse,
-  CreateDBCustomNodesResponse,
-  DescribeInstancesResponse,
-  ModifyDBCustomClusterTagsRequest,
-  ModifyDBCustomNodeTagsRequest,
   CheckRoleAuthorizedResponse,
-  DescribeInstanceDetailResponse,
+  ModifyDBCustomNodeTagsRequest,
+  DescribeDBCustomClusterDetailRequest,
+  RenewDBCustomNodeRequest,
+  Filter,
+  IsolateDBCustomNodeResponse,
+  DBCustomClusterNodeConfig,
+  MetaResource,
+  DBCustomNode,
+  DBCustomClusterNode,
+  DescribeDBCustomNodeSecurityGroupsResponse,
+  DestroyDBCustomNodeResponse,
+  DescribeDBCustomTaskStatusRequest,
+  DescribeInstancesRequest,
+  ApiServerNetwork,
+  RegionInfo,
+  DescribeDBCustomZonesResponse,
+  DescribeDBInstancesResponse,
+  CreateDBCustomNodesResponse,
+  DescribeDBCustomNodeSecurityGroupsRequest,
   DescribeDBCustomClusterNodesResponse,
   DescribeInstanceDetailRequest,
-  DescribeInstancesRequest,
-  DBInstanceDetail,
-  DescribeDBCustomClusterDetailRequest,
-  ModifyInstanceNameResponse,
-  DestroyDBCustomNodeRequest,
   DescribeDBCustomClusterKubeconfigResponse,
-  Filter,
   ContainerNetwork,
-  RenewDBCustomNodeRequest,
   DescribeHostListRequest,
-  CheckRoleAuthorizedRequest,
   DescribeDBCustomNodesRequest,
-  CreateDBCustomNodesRequest,
   InstanceExpand,
-  RenewDBCustomNodeResponse,
-  Taint,
-  DescribeInstanceListResponse,
   DBCustomCluster,
-  DescribeDBCustomImagesResponse,
-  CreateDBCustomClusterResponse,
-  RemoveNodesFromDBCustomClusterResponse,
-  DescribeDBCustomImagesRequest,
   DeviceInfo,
+  ModifyDBCustomNodeSecurityGroupsRequest,
+  PolicyRule,
   InstanceDetail,
-  AddNodesToDBCustomClusterResponse,
-  Tag,
-  DestroyDBCustomClusterResponse,
-  ModifyDBCustomNodeTagsResponse,
-  CreateDBCustomClusterRequest,
-  DBCustomNode,
-  DataDisk,
 } from "./dbdc_models"
 
 /**
@@ -119,13 +145,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（ModifyDBCustomNodeTags）用于修改 DB Custom 节点绑定的标签。
+   * 该接口（DescribeDBCustomClusterResources）用于查询 DB Custom 集群的资源信息。
    */
-  async ModifyDBCustomNodeTags(
-    req: ModifyDBCustomNodeTagsRequest,
-    cb?: (error: string, rep: ModifyDBCustomNodeTagsResponse) => void
-  ): Promise<ModifyDBCustomNodeTagsResponse> {
-    return this.request("ModifyDBCustomNodeTags", req, cb)
+  async DescribeDBCustomClusterResources(
+    req: DescribeDBCustomClusterResourcesRequest,
+    cb?: (error: string, rep: DescribeDBCustomClusterResourcesResponse) => void
+  ): Promise<DescribeDBCustomClusterResourcesResponse> {
+    return this.request("DescribeDBCustomClusterResources", req, cb)
+  }
+
+  /**
+   * 该接口（DescribeDBCustomNodeSecurityGroups）用于查询 DB Custom 节点安全组信息。
+   */
+  async DescribeDBCustomNodeSecurityGroups(
+    req: DescribeDBCustomNodeSecurityGroupsRequest,
+    cb?: (error: string, rep: DescribeDBCustomNodeSecurityGroupsResponse) => void
+  ): Promise<DescribeDBCustomNodeSecurityGroupsResponse> {
+    return this.request("DescribeDBCustomNodeSecurityGroups", req, cb)
   }
 
   /**
@@ -146,6 +182,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDBCustomNodesResponse) => void
   ): Promise<DescribeDBCustomNodesResponse> {
     return this.request("DescribeDBCustomNodes", req, cb)
+  }
+
+  /**
+   * 该接口（ModifyDBCustomNodeSecurityGroups）用于修改 DB Custom 节点安全组。
+   */
+  async ModifyDBCustomNodeSecurityGroups(
+    req: ModifyDBCustomNodeSecurityGroupsRequest,
+    cb?: (error: string, rep: ModifyDBCustomNodeSecurityGroupsResponse) => void
+  ): Promise<ModifyDBCustomNodeSecurityGroupsResponse> {
+    return this.request("ModifyDBCustomNodeSecurityGroups", req, cb)
   }
 
   /**
@@ -199,6 +245,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口(DescribeDBCustomRegions) 用于查询 DB Custom 支持的地域列表。
+   */
+  async DescribeDBCustomRegions(
+    req?: DescribeDBCustomRegionsRequest,
+    cb?: (error: string, rep: DescribeDBCustomRegionsResponse) => void
+  ): Promise<DescribeDBCustomRegionsResponse> {
+    return this.request("DescribeDBCustomRegions", req, cb)
+  }
+
+  /**
    * 本接口用于修改集群名称
    */
   async ModifyInstanceName(
@@ -206,6 +262,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyInstanceNameResponse) => void
   ): Promise<ModifyInstanceNameResponse> {
     return this.request("ModifyInstanceName", req, cb)
+  }
+
+  /**
+   * 该接口(DescribeDBCustomNodeTypes) 用于查询 DB Custom 节点支持的机型信息。
+   */
+  async DescribeDBCustomNodeTypes(
+    req: DescribeDBCustomNodeTypesRequest,
+    cb?: (error: string, rep: DescribeDBCustomNodeTypesResponse) => void
+  ): Promise<DescribeDBCustomNodeTypesResponse> {
+    return this.request("DescribeDBCustomNodeTypes", req, cb)
+  }
+
+  /**
+   * 该接口（ModifyDBCustomClusterTags）用于修改 DB Custom 集群绑定的标签。
+   */
+  async ModifyDBCustomClusterTags(
+    req: ModifyDBCustomClusterTagsRequest,
+    cb?: (error: string, rep: ModifyDBCustomClusterTagsResponse) => void
+  ): Promise<ModifyDBCustomClusterTagsResponse> {
+    return this.request("ModifyDBCustomClusterTags", req, cb)
   }
 
   /**
@@ -279,13 +355,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（ModifyDBCustomClusterTags）用于修改 DB Custom 集群绑定的标签。
+   * 该接口（DescribeDBCustomClusterNodeConfig）用于查询 DB Custom 集群内节点的配置信息。
    */
-  async ModifyDBCustomClusterTags(
-    req: ModifyDBCustomClusterTagsRequest,
-    cb?: (error: string, rep: ModifyDBCustomClusterTagsResponse) => void
-  ): Promise<ModifyDBCustomClusterTagsResponse> {
-    return this.request("ModifyDBCustomClusterTags", req, cb)
+  async DescribeDBCustomClusterNodeConfig(
+    req: DescribeDBCustomClusterNodeConfigRequest,
+    cb?: (error: string, rep: DescribeDBCustomClusterNodeConfigResponse) => void
+  ): Promise<DescribeDBCustomClusterNodeConfigResponse> {
+    return this.request("DescribeDBCustomClusterNodeConfig", req, cb)
+  }
+
+  /**
+   * 该接口（ModifyDBCustomNodeTags）用于修改 DB Custom 节点绑定的标签。
+   */
+  async ModifyDBCustomNodeTags(
+    req: ModifyDBCustomNodeTagsRequest,
+    cb?: (error: string, rep: ModifyDBCustomNodeTagsResponse) => void
+  ): Promise<ModifyDBCustomNodeTagsResponse> {
+    return this.request("ModifyDBCustomNodeTags", req, cb)
   }
 
   /**
@@ -306,6 +392,36 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeHostListResponse) => void
   ): Promise<DescribeHostListResponse> {
     return this.request("DescribeHostList", req, cb)
+  }
+
+  /**
+   * 该接口(DescribeDBCustomZones) 用于查询指定地域的 DB Custom 可用区列表。
+   */
+  async DescribeDBCustomZones(
+    req?: DescribeDBCustomZonesRequest,
+    cb?: (error: string, rep: DescribeDBCustomZonesResponse) => void
+  ): Promise<DescribeDBCustomZonesResponse> {
+    return this.request("DescribeDBCustomZones", req, cb)
+  }
+
+  /**
+   * 该接口（DescribeDBCustomClusterNodeResources）用于查询 DB Custom 集群内节点的资源信息。
+   */
+  async DescribeDBCustomClusterNodeResources(
+    req: DescribeDBCustomClusterNodeResourcesRequest,
+    cb?: (error: string, rep: DescribeDBCustomClusterNodeResourcesResponse) => void
+  ): Promise<DescribeDBCustomClusterNodeResourcesResponse> {
+    return this.request("DescribeDBCustomClusterNodeResources", req, cb)
+  }
+
+  /**
+   * 该接口（ModifyDBCustomClusterNodeConfig）用于修改 DB Custom 集群中节点的配置。
+   */
+  async ModifyDBCustomClusterNodeConfig(
+    req: ModifyDBCustomClusterNodeConfigRequest,
+    cb?: (error: string, rep: ModifyDBCustomClusterNodeConfigResponse) => void
+  ): Promise<ModifyDBCustomClusterNodeConfigResponse> {
+    return this.request("ModifyDBCustomClusterNodeConfig", req, cb)
   }
 
   /**

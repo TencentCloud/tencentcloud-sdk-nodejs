@@ -172,6 +172,27 @@ export interface DescribeDBAuditLogTopSqlsRequest {
 }
 
 /**
+ * 健康报告URL信息
+ */
+export interface DiagReportUrlItem {
+  /**
+   * 异步任务ID。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AsyncRequestId?: number
+  /**
+   * 报告下载地址。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ReportUrl?: string
+  /**
+   * 链接过期时间，Unix时间戳（秒），-1表示永不过期。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ExpireTime?: number
+}
+
+/**
  * DescribeDBAutonomyActions请求参数结构体
  */
 export interface DescribeDBAutonomyActionsRequest {
@@ -365,6 +386,16 @@ export interface DescribeDBDiagReportContentRequest {
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，默认为"mysql"。
    */
   Product?: string
+}
+
+/**
+ * 标签过滤组。组内 TagPairs 之间为 OR 关系；不同 TagFilterGroup 之间为 AND 关系。
+ */
+export interface TagFilterGroup {
+  /**
+   * <p>过滤条件-标签组</p>
+   */
+  TagPairs?: Array<TagPair>
 }
 
 /**
@@ -790,11 +821,11 @@ export interface DescribeRedisBigKeyAnalysisTasksResponse {
  */
 export interface DescribeDBDiagReportTasksResponse {
   /**
-   * 任务总数目。
+   * <p>任务总数目。</p>
    */
   TotalCount?: number
   /**
-   * 任务列表。
+   * <p>任务列表。</p>
    */
   Tasks?: Array<HealthReportTask>
   /**
@@ -890,37 +921,41 @@ export interface RedisBigKeyTask {
  */
 export interface HealthReportTask {
   /**
-   * 异步任务请求 ID。
+   * <p>异步任务请求 ID。</p>
    */
   AsyncRequestId?: number
   /**
-   * 任务的触发来源，支持的取值包括："DAILY_INSPECTION" - 实例巡检；"SCHEDULED" - 定时生成；"MANUAL" - 手动触发。
+   * <p>任务的触发来源，支持的取值包括：&quot;DAILY_INSPECTION&quot; - 实例巡检；&quot;SCHEDULED&quot; - 定时生成；&quot;MANUAL&quot; - 手动触发。</p>
    */
   Source?: string
   /**
-   * 任务完成进度，单位%。
+   * <p>任务完成进度，单位%。</p>
    */
   Progress?: number
   /**
-   * 任务创建时间。
+   * <p>任务创建时间，如“2025-09-30 12:13:14”。</p>
    */
   CreateTime?: string
   /**
-   * 任务开始执行时间。
+   * <p>任务开始执行时间，如“2025-09-30 13:13:14”。</p>
    */
   StartTime?: string
   /**
-   * 任务完成执行时间。
+   * <p>任务完成执行时间，如“2025-09-30 14:13:14”。</p>
    */
   EndTime?: string
   /**
-   * 任务所属实例的基础信息。
+   * <p>任务所属实例的基础信息。</p>
    */
   InstanceInfo?: InstanceBasicInfo
   /**
-   * 健康报告中的健康信息。
+   * <p>健康报告中的健康信息。</p>
    */
   HealthStatus?: HealthStatus
+  /**
+   * <p>任务所属实例的标签信息</p>
+   */
+  Tags?: Array<TagInfo>
 }
 
 /**
@@ -1205,33 +1240,17 @@ export interface DescribeRedisSlowLogTopSqlsResponse {
 }
 
 /**
- * redis key前缀空间信息
+ * DescribeDBInstances返回参数结构体
  */
-export interface RedisPreKeySpaceData {
+export interface DescribeDBInstancesResponse {
   /**
-   * 平均元素长度。
+   * <p>实例列表。</p>
    */
-  AveElementSize: number
+  Items?: Array<InstanceItem>
   /**
-   * 总占用内存（Byte）。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Length: number
-  /**
-   * key前缀。
-   */
-  KeyPreIndex: string
-  /**
-   * 元素数量。
-   */
-  ItemCount: number
-  /**
-   * key个数。
-   */
-  Count: number
-  /**
-   * 最大元素长度。
-   */
-  MaxElementSize: number
+  RequestId?: string
 }
 
 /**
@@ -1592,6 +1611,36 @@ export interface AutonomyEventVo {
    * 自治任务完成时间；非结束状态的时候，该值无意义。
    */
   FinishTime?: number
+}
+
+/**
+ * redis key前缀空间信息
+ */
+export interface RedisPreKeySpaceData {
+  /**
+   * 平均元素长度。
+   */
+  AveElementSize: number
+  /**
+   * 总占用内存（Byte）。
+   */
+  Length: number
+  /**
+   * key前缀。
+   */
+  KeyPreIndex: string
+  /**
+   * 元素数量。
+   */
+  ItemCount: number
+  /**
+   * key个数。
+   */
+  Count: number
+  /**
+   * 最大元素长度。
+   */
+  MaxElementSize: number
 }
 
 /**
@@ -2007,21 +2056,17 @@ export interface DescribeSlowLogsResponse {
 }
 
 /**
- * UpdateAgentSwitch请求参数结构体
+ * 实例标签信息
  */
-export interface UpdateAgentSwitchRequest {
+export interface TagInfo {
   /**
-   * Agent标识。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+   * <p>实例标签key</p>
    */
-  AgentId: string
+  TagKey?: string
   /**
-   * 停止或重连Agent，支持值包括："on" - 重连Agent， "off" - 停止Agent。
+   * <p>实例标签value</p>
    */
-  Switch: string
-  /**
-   * 服务产品类型，仅支持 "dbbrain-mysql" - 自建MySQL。
-   */
-  Product: string
+  TagValue?: string
 }
 
 /**
@@ -2132,9 +2177,29 @@ export interface MongoDBProcessItem {
 }
 
 /**
- * CreateMailProfile返回参数结构体
+ * DescribeDBInstances请求参数结构体
  */
-export interface CreateMailProfileResponse {
+export interface DescribeDBInstancesRequest {
+  /**
+   * <p>实例ID列表，最多支持100个。支持多种数据库产品的实例ID，系统会根据实例ID前缀自动识别产品类型。</p>
+   */
+  InstanceIds: Array<string>
+}
+
+/**
+ * CreateDBDiagReportUrls返回参数结构体
+ */
+export interface CreateDBDiagReportUrlsResponse {
+  /**
+   * <p>URL条目总数。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalCount?: number
+  /**
+   * <p>报告URL信息列表。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<DiagReportUrlItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2494,6 +2559,20 @@ export interface DescribeDBDiagEventsRequest {
 }
 
 /**
+ * CreateDBDiagReportUrls请求参数结构体
+ */
+export interface CreateDBDiagReportUrlsRequest {
+  /**
+   * <p>服务产品类型，支持值包括：&quot;mysql&quot; - 云数据库 MySQL，&quot;redis&quot; - 云数据库 Redis，&quot;cynosdb&quot; - 云数据库 TDSQL-C for MySQL，&quot;mongodb&quot; - 云数据库 MongoDB，&quot;postgres&quot; - 云数据库 PostgreSQL。</p>
+   */
+  Product: string
+  /**
+   * <p>异步任务ID列表。</p>
+   */
+  AsyncRequestIds: Array<number | bigint>
+}
+
+/**
  * CreateDBDiagReportUrl返回参数结构体
  */
 export interface CreateDBDiagReportUrlResponse {
@@ -2666,6 +2745,24 @@ export interface SlowLogHost {
 }
 
 /**
+ * UpdateAgentSwitch请求参数结构体
+ */
+export interface UpdateAgentSwitchRequest {
+  /**
+   * Agent标识。可通过 [DescribeDiagDBInstances](https://cloud.tencent.com/document/api/1130/57798) 接口获取。
+   */
+  AgentId: string
+  /**
+   * 停止或重连Agent，支持值包括："on" - 重连Agent， "off" - 停止Agent。
+   */
+  Switch: string
+  /**
+   * 服务产品类型，仅支持 "dbbrain-mysql" - 自建MySQL。
+   */
+  Product: string
+}
+
+/**
  * DescribeRedisCmdPerfTimeSeries返回参数结构体
  */
 export interface DescribeRedisCmdPerfTimeSeriesResponse {
@@ -2752,7 +2849,8 @@ export interface InstanceBasicInfo {
    */
   Cpu?: number
   /**
-   * 实例部署模式。
+   * 实例部署模式。MySQL 实例类型取值包括"STANDARD"-标准类型,"CUSTOM"-普通类型, "EXCLUSIVE"-独占类型, "CUSTOMER_AGENT"-用户代理类型, "CUSTOMER_DIRECT"-用户直连类型,
+"CLOUD_NATIVE_CLUSTER_EXCLUSIVE"-云原生独占集群, "CLOUD_NATIVE_CLUSTER"-云原生集群。
    */
   DeployMode?: string
   /**
@@ -3199,6 +3297,49 @@ export interface CreateDBDiagReportUrlRequest {
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，"mongodb" - 云数据库 MongoDB，"mariadb" - 云数据库 MariaDB，"dcdb" - 云数据库 TDSQL MySQL，默认为"mysql"。
    */
   Product?: string
+}
+
+/**
+ * 数据库实例基本信息
+ */
+export interface InstanceItem {
+  /**
+   * 实例ID。
+   */
+  InstanceId?: string
+  /**
+   * 数据库类型，如 mysql、cynosdb、mariadb、dcdb、mongodb、postgres、redis、dbbrain-mysql、tdstore。
+   */
+  Product?: string
+  /**
+   * 地域英文ID。
+   */
+  Region?: string
+  /**
+   * 集群ID，仅集群类产品返回。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * 引擎版本。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EngineVersion?: string
+  /**
+   * 实例状态，1表示运行中。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: number
+  /**
+   * 实例创建时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: string
+  /**
+   * 实例到期时间。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeadlineTime?: string
 }
 
 /**
@@ -5076,6 +5217,20 @@ export interface DescribeSlowLogUserHostStatsRequest {
 }
 
 /**
+ * 标签键值对过滤条件。
+ */
+export interface TagPair {
+  /**
+   * <p>过滤条件-标签key</p>
+   */
+  TagKey?: string
+  /**
+   * <p>过滤条件标签-value</p>
+   */
+  TagValue?: Array<string>
+}
+
+/**
  * DescribeTopSpaceSchemas返回参数结构体
  */
 export interface DescribeTopSpaceSchemasResponse {
@@ -5936,41 +6091,45 @@ CANCELLED  - 已取消
  */
 export interface DescribeDBDiagReportTasksRequest {
   /**
-   * 第一个任务的开始时间，用于范围查询，时间格式如：2019-09-10 12:13:14。
+   * <p>第一个任务的开始时间，用于范围查询，时间格式如：2019-09-10 12:13:14。</p>
    */
   StartTime?: string
   /**
-   * 最后一个任务的开始时间，用于范围查询，时间格式如：2019-09-10 12:13:14。
+   * <p>最后一个任务的开始时间，用于范围查询，时间格式如：2019-09-10 12:13:14。</p>
    */
   EndTime?: string
   /**
-   * 实例ID数组，用于筛选指定实例的任务列表。
+   * <p>实例ID数组，用于筛选指定实例的任务列表。。可通过 <a href="https://cloud.tencent.com/document/api/1130/57798">DescribeDiagDBInstances</a> 接口获取。</p>
    */
   InstanceIds?: Array<string>
   /**
-   * 任务的触发来源，支持的取值包括："DAILY_INSPECTION" - 实例巡检；"SCHEDULED" - 计划任务；"MANUAL" - 手动触发。
+   * <p>任务的触发来源，支持的取值包括：&quot;DAILY_INSPECTION&quot; - 实例巡检；&quot;SCHEDULED&quot; - 计划任务；&quot;MANUAL&quot; - 手动触发。</p>
    */
   Sources?: Array<string>
   /**
-   * 报告的健康等级，支持的取值包括："HEALTH" - 健康；"SUB_HEALTH" - 亚健康；"RISK" - 危险；"HIGH_RISK" - 高危。
+   * <p>报告的健康等级，支持的取值包括：&quot;HEALTH&quot; - 健康；&quot;SUB_HEALTH&quot; - 亚健康；&quot;RISK&quot; - 危险；&quot;HIGH_RISK&quot; - 高危。</p>
    */
   HealthLevels?: string
   /**
-   * 任务的状态，支持的取值包括："created" - 新建；"chosen" - 待执行； "running" - 执行中；"failed" - 失败；"finished" - 已完成。
+   * <p>任务的状态，支持的取值包括：&quot;created&quot; - 新建；&quot;chosen&quot; - 待执行； &quot;running&quot; - 执行中；&quot;failed&quot; - 失败；&quot;finished&quot; - 已完成。</p>
    */
   TaskStatuses?: string
   /**
-   * 偏移量，默认0。
+   * <p>偏移量，默认0。</p>
    */
   Offset?: number
   /**
-   * 返回数量，默认20，最大值为100。
+   * <p>返回数量，默认20，最大值为100。</p>
    */
   Limit?: number
   /**
-   * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，"redis" - 云数据库 Redis，默认为"mysql"。
+   * <p>服务产品类型，支持值：&quot;mysql&quot; - 云数据库 MySQL；&quot;cynosdb&quot; - 云数据库 TDSQL-C for MySQL，&quot;redis&quot; - 云数据库 Redis，默认为&quot;mysql&quot;。</p>
    */
   Product?: string
+  /**
+   * <p>根据任务所属实例的标签信息进行过滤</p>
+   */
+  TagFilters?: Array<TagFilterGroup>
 }
 
 /**
@@ -6310,6 +6469,16 @@ export interface DeleteSqlFiltersRequest {
    * 服务产品类型，支持值："mysql" - 云数据库 MySQL；"cynosdb" - 云数据库 TDSQL-C for MySQL，默认为"mysql"。
    */
   Product?: string
+}
+
+/**
+ * CreateMailProfile返回参数结构体
+ */
+export interface CreateMailProfileResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

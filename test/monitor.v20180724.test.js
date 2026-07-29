@@ -368,6 +368,16 @@ it("monitor.v20180724.DeleteAlertRules", async function () {
     }
 })
 
+it("monitor.v20180724.DescribeAlarmNoticeOnCallUsersFromPrometheusAlertID", async function () {
+    try {
+       const data = await client.DescribeAlarmNoticeOnCallUsersFromPrometheusAlertID({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("monitor.v20180724.DescribeBaseMetrics", async function () {
     try {
        const data = await client.DescribeBaseMetrics({})

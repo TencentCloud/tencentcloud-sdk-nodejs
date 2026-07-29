@@ -132,6 +132,7 @@ import {
   StopDBImportJobRequest,
   ModifyRemoteBackupConfigResponse,
   DescribeDBInstanceInfoResponse,
+  UpgradeRoGroupResponse,
   AssociateSecurityGroupsRequest,
   DescribeInstanceUpgradeCheckJobRequest,
   DescribeDBFeaturesResponse,
@@ -237,6 +238,7 @@ import {
   HistoryJob,
   DescribeAccountsResponse,
   RollbackTimeRange,
+  UpgradeRoGroupRequest,
   AuditLog,
   DescribeAuditRuleTemplateModifyHistoryResponse,
   DescribeAuditLogFilesRequest,
@@ -1671,6 +1673,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAsyncRequestInfoResponse) => void
   ): Promise<DescribeAsyncRequestInfoResponse> {
     return this.request("DescribeAsyncRequestInfo", req, cb)
+  }
+
+  /**
+   * 该接口（UpgradeRoGroup）用于只读组升级为纯网络转发模式。
+   */
+  async UpgradeRoGroup(
+    req: UpgradeRoGroupRequest,
+    cb?: (error: string, rep: UpgradeRoGroupResponse) => void
+  ): Promise<UpgradeRoGroupResponse> {
+    return this.request("UpgradeRoGroup", req, cb)
   }
 
   /**
