@@ -2105,17 +2105,83 @@ export interface ModifyMcpServerResponse {
 }
 
 /**
- * RemoveDockerContainers请求参数结构体
+ * 镜像套餐详细信息。
  */
-export interface RemoveDockerContainersRequest {
+export interface BlueprintBundle {
   /**
-   * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。
+   * 套餐ID。可以通过[DescribeBundles](https://cloud.tencent.com/document/product/1207/47575)接口返回的BundleId获取。
    */
-  InstanceId: string
+  BundleId?: string
   /**
-   * 容器ID列表。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。
+   * 是否支持 Linux/Unix 平台。
    */
-  ContainerIds: Array<string>
+  SupportLinuxUnixPlatform?: boolean
+  /**
+   * 是否支持 Windows 平台。
+   */
+  SupportWindowsPlatform?: boolean
+  /**
+   * 套餐当前单位价格信息。
+   */
+  Price?: Price
+  /**
+   * 套餐售卖状态,取值:‘AVAILABLE’(可用) , ‘SOLD_OUT’(售罄)。
+   */
+  BundleSalesState?: string
+  /**
+   * 套餐类型。
+   */
+  BundleType?: string
+  /**
+   * 套餐类型描述信息。
+   */
+  BundleTypeDescription?: string
+  /**
+   * 套餐类型权重。取值越小排序越靠前。
+   */
+  BundleTypePriority?: number
+  /**
+   * 套餐展示标签。
+   */
+  BundleDisplayLabel?: string
+  /**
+   * 支持人数。
+   */
+  SupportSlot?: number
+  /**
+   * 内存大小，单位 GB。
+   */
+  Memory?: number
+  /**
+   * 系统盘类型。
+取值范围： 
+<li> CLOUD_SSD：SSD 云硬盘</li><li> CLOUD_PREMIUM：高性能云硬盘</li>
+   */
+  SystemDiskType?: string
+  /**
+   * 系统盘大小。单位GB。
+   */
+  SystemDiskSize?: number
+  /**
+   * 每月网络流量，单位 GB。
+   */
+  MonthlyTraffic?: number
+  /**
+   * CPU 核数。
+   */
+  CPU?: number
+  /**
+   * 峰值带宽，单位 Mbps。
+   */
+  InternetMaxBandwidthOut?: number
+  /**
+   * 网络计费类型。
+   */
+  InternetChargeType?: string
+  /**
+   * 流量是否无上限。
+   */
+  TrafficUnlimited?: boolean
 }
 
 /**
@@ -2151,17 +2217,76 @@ export interface ModifyDisksAttributeRequest {
 }
 
 /**
- * ModifyDisksBackupQuota请求参数结构体
+ * CVM镜像信息。
  */
-export interface ModifyDisksBackupQuotaRequest {
+export interface Image {
   /**
-   * 云硬盘ID列表，可通过[DescribeDisks](https://cloud.tencent.com/document/api/1207/66093)接口查询。列表最大长度为15。
+   * CVM镜像 ID ，是Image的唯一标识。
    */
-  DiskIds: Array<string>
+  ImageId: string
   /**
-   * 云硬盘备份点配额。取值范围: [0, 500]。调整后的配额必须大于等于已存在的备份点数量。
+   * 镜像名称。
    */
-  DiskBackupQuota: number
+  ImageName: string
+  /**
+   * 镜像描述。
+   */
+  ImageDescription: string
+  /**
+   * 镜像大小。单位GB。
+   */
+  ImageSize: number
+  /**
+   * 镜像来源。
+<li>CREATE_IMAGE：自定义镜像</li>
+<li>EXTERNAL_IMPORT：外部导入镜像</li>
+   */
+  ImageSource: string
+  /**
+   * 镜像分类
+<li>SystemImage：系统盘镜像</li>
+<li>InstanceImage：整机镜像</li>
+   */
+  ImageClass: string
+  /**
+   * 镜像状态
+CREATING:创建中
+NORMAL:正常
+CREATEFAILED:创建失败
+USING:使用中
+SYNCING:同步中
+IMPORTING:导入中
+IMPORTFAILED:导入失败
+   */
+  ImageState: string
+  /**
+   * 镜像是否支持Cloudinit。
+   */
+  IsSupportCloudinit: boolean
+  /**
+   * 镜像架构。
+   */
+  Architecture: string
+  /**
+   * 镜像操作系统。
+   */
+  OsName: string
+  /**
+   * 镜像来源平台。
+   */
+  Platform: string
+  /**
+   * 镜像创建时间。
+   */
+  CreatedTime: string
+  /**
+   * 镜像是否可共享到轻量应用服务器。
+   */
+  IsShareable: boolean
+  /**
+   * 不可共享的原因。
+   */
+  UnshareableReason: string
 }
 
 /**
@@ -2668,76 +2793,43 @@ export interface ModifyBlueprintAttributeResponse {
 }
 
 /**
- * CVM镜像信息。
+ * DescribeBlueprintBundles请求参数结构体
  */
-export interface Image {
+export interface DescribeBlueprintBundlesRequest {
   /**
-   * CVM镜像 ID ，是Image的唯一标识。
+   * 镜像ID。可以通过[DescribeBlueprints](https://cloud.tencent.com/document/product/1207/47689)接口返回的BlueprintId获取。当前仅支持传入镜像类型为游戏专区(“GAME_PORTAL”)的镜像Id。
    */
-  ImageId: string
+  BlueprintId: string
   /**
-   * 镜像名称。
+   * 套餐ID列表。可以通过DescribeBlueprintBundles接口返回的BundleId获取。
    */
-  ImageName: string
+  BundleIds?: Array<string>
   /**
-   * 镜像描述。
+   * 返回数量，默认为 20，最大值为 100。关于Limit的更进一步介绍请参考 API 简介中的相关小节。
    */
-  ImageDescription: string
+  Limit?: number
   /**
-   * 镜像大小。单位GB。
+   * 偏移量，默认为 0。关于Offset的更进一步介绍请参考 API 简介中的相关小节。
    */
-  ImageSize: number
+  Offset?: number
+}
+
+/**
+ * DescribeBlueprintBundles返回参数结构体
+ */
+export interface DescribeBlueprintBundlesResponse {
   /**
-   * 镜像来源。
-<li>CREATE_IMAGE：自定义镜像</li>
-<li>EXTERNAL_IMPORT：外部导入镜像</li>
+   * 镜像套餐详细信息列表。
    */
-  ImageSource: string
+  BlueprintBundleSet?: Array<BlueprintBundle>
   /**
-   * 镜像分类
-<li>SystemImage：系统盘镜像</li>
-<li>InstanceImage：整机镜像</li>
+   * 符合要求的套餐总数，用于分页展示。
    */
-  ImageClass: string
+  TotalCount?: number
   /**
-   * 镜像状态
-CREATING:创建中
-NORMAL:正常
-CREATEFAILED:创建失败
-USING:使用中
-SYNCING:同步中
-IMPORTING:导入中
-IMPORTFAILED:导入失败
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ImageState: string
-  /**
-   * 镜像是否支持Cloudinit。
-   */
-  IsSupportCloudinit: boolean
-  /**
-   * 镜像架构。
-   */
-  Architecture: string
-  /**
-   * 镜像操作系统。
-   */
-  OsName: string
-  /**
-   * 镜像来源平台。
-   */
-  Platform: string
-  /**
-   * 镜像创建时间。
-   */
-  CreatedTime: string
-  /**
-   * 镜像是否可共享到轻量应用服务器。
-   */
-  IsShareable: boolean
-  /**
-   * 不可共享的原因。
-   */
-  UnshareableReason: string
+  RequestId?: string
 }
 
 /**
@@ -3878,6 +3970,20 @@ export interface RunDockerContainersResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyDisksBackupQuota请求参数结构体
+ */
+export interface ModifyDisksBackupQuotaRequest {
+  /**
+   * 云硬盘ID列表，可通过[DescribeDisks](https://cloud.tencent.com/document/api/1207/66093)接口查询。列表最大长度为15。
+   */
+  DiskIds: Array<string>
+  /**
+   * 云硬盘备份点配额。取值范围: [0, 500]。调整后的配额必须大于等于已存在的备份点数量。
+   */
+  DiskBackupQuota: number
 }
 
 /**
@@ -5296,13 +5402,13 @@ export interface ModifyDockerContainerResponse {
 }
 
 /**
- * DescribeDisksDeniedActions返回参数结构体
+ * DescribeDiskBackupsDeniedActions返回参数结构体
  */
-export interface DescribeDisksDeniedActionsResponse {
+export interface DescribeDiskBackupsDeniedActionsResponse {
   /**
-   * 云硬盘操作限制列表详细信息。
+   * 云硬盘备份点操作限制列表详细信息。
    */
-  DiskDeniedActionSet?: Array<DiskDeniedActions>
+  DiskBackupDeniedActionSet?: Array<DiskBackupDeniedActions>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5876,13 +5982,13 @@ export interface RenameDockerContainerRequest {
 }
 
 /**
- * DescribeDiskBackupsDeniedActions返回参数结构体
+ * DescribeDisksDeniedActions返回参数结构体
  */
-export interface DescribeDiskBackupsDeniedActionsResponse {
+export interface DescribeDisksDeniedActionsResponse {
   /**
-   * 云硬盘备份点操作限制列表详细信息。
+   * 云硬盘操作限制列表详细信息。
    */
-  DiskBackupDeniedActionSet?: Array<DiskBackupDeniedActions>
+  DiskDeniedActionSet?: Array<DiskDeniedActions>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5974,6 +6080,20 @@ export interface SnapshotDeniedActions {
    * 操作限制列表。
    */
   DeniedActions?: Array<DeniedAction>
+}
+
+/**
+ * RemoveDockerContainers请求参数结构体
+ */
+export interface RemoveDockerContainersRequest {
+  /**
+   * 实例ID。可通过[DescribeInstances](https://cloud.tencent.com/document/product/1207/47573)接口返回值中的InstanceId获取。
+   */
+  InstanceId: string
+  /**
+   * 容器ID列表。可通过[DescribeDockerContainers](https://cloud.tencent.com/document/product/1207/95473)接口返回值中的ContainerId获取。
+   */
+  ContainerIds: Array<string>
 }
 
 /**

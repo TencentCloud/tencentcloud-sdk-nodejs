@@ -23117,11 +23117,11 @@ export interface CosRiskViewInfo {
 }
 
 /**
- * 过滤条件。同一 Name 下多个 Values 为或关系；不同 Name 之间为且关系。支持的 Name：TaskID（任务ID精确）、TaskStatus（任务状态）、TaskType（任务类型）
+ * 过滤条件。同一 Name 下多个 Values 为或关系；不同 Name 之间为且关系。支持的 Name：ResultStatus（通过状态）、AssetName（资产名称/ID模糊）、IP（IP地址模糊）、Tag（资产标签模糊）
  */
 export interface Filters {
   /**
-   * 过滤条件名称。取值：TaskID（任务ID，精确匹配）、TaskStatus（任务状态，Values: INIT/SCANNING/SUCCESS/FAILED）、TaskType（任务类型，Values: PERIODIC/MANUAL）
+   * 过滤条件名称。取值：ResultStatus（通过状态，Values: PASS/NOT_PASS）、AssetName（资产名称/ID，模糊匹配）、IP（IP地址，模糊匹配）、Tag（资产标签，模糊匹配）
    */
   Name?: string
   /**

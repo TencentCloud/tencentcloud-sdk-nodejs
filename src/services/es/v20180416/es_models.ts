@@ -663,9 +663,14 @@ export interface MetricMapByIndexId {
 }
 
 /**
- * UpdateLogstashPipelineDesc返回参数结构体
+ * UpdateInstancePublicAccess返回参数结构体
  */
-export interface UpdateLogstashPipelineDescResponse {
+export interface UpdateInstancePublicAccessResponse {
+  /**
+   * 订单号
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DealName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -5435,6 +5440,16 @@ Uin
 }
 
 /**
+ * UpdateLogstashPipelineDesc返回参数结构体
+ */
+export interface UpdateLogstashPipelineDescResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 自治索引信息
  */
 export interface DataStreamInfo {
@@ -6848,21 +6863,143 @@ export interface DescribeAutoScaleDiskInfoRequest {
 }
 
 /**
- * UpdateLogstashPipelineDesc请求参数结构体
+ * UpdateInstancePublicAccess请求参数结构体
  */
-export interface UpdateLogstashPipelineDescRequest {
+export interface UpdateInstancePublicAccessRequest {
   /**
    * 实例ID
    */
   InstanceId: string
   /**
-   * 实例管道ID
+   * 实例名称（1-50 个英文、汉字、数字、连接线-或下划线_）
    */
-  PipelineId: string
+  InstanceName?: string
   /**
-   * 管道描述信息
+   * 已废弃请使用NodeInfoList
+节点个数（2-50个）
    */
-  PipelineDesc: string
+  NodeNum?: number
+  /**
+   * ES配置项（JSON格式字符串）
+   */
+  EsConfig?: string
+  /**
+   * 默认用户elastic的密码（8到16位，至少包括两项（[a-z,A-Z],[0-9]和[-!@#$%&^*+=_:;,.?]的特殊符号）
+   */
+  Password?: string
+  /**
+   * 访问控制列表
+   */
+  EsAcl?: EsAcl
+  /**
+   * 已废弃请使用NodeInfoList
+磁盘大小（单位GB）
+   */
+  DiskSize?: number
+  /**
+   * 已废弃请使用NodeInfoList
+节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+   */
+  NodeType?: string
+  /**
+   * 已废弃请使用NodeInfoList
+专用主节点个数（只支持3个或5个）
+   */
+  MasterNodeNum?: number
+  /**
+   * 已废弃请使用NodeInfoList
+专用主节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE32：16核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+   */
+  MasterNodeType?: string
+  /**
+   * 已废弃请使用NodeInfoList
+专用主节点磁盘大小（单位GB系统默认配置为50GB,暂不支持自定义）
+   */
+  MasterNodeDiskSize?: number
+  /**
+   * 更新配置时是否强制重启<li>true强制重启</li><li>false不强制重启</li>当前仅更新EsConfig时需要设置，默认值为false
+   */
+  ForceRestart?: boolean
+  /**
+   * COS自动备份信息
+   */
+  CosBackup?: CosBackup
+  /**
+   * 节点信息列表，可以只传递要更新的节点及其对应的规格信息。支持的操作包括<li>修改一种节点的个数</li><li>修改一种节点的节点规格及磁盘大小</li><li>增加一种节点类型（需要同时指定该节点的类型，个数，规格，磁盘等信息）</li>上述操作一次只能进行一种，且磁盘类型不支持修改
+   */
+  NodeInfoList?: Array<NodeInfo>
+  /**
+   * 公网访问状态
+   */
+  PublicAccess?: string
+  /**
+   * 公网访问控制列表
+   */
+  EsPublicAcl?: EsPublicAcl
+  /**
+   * Kibana公网访问状态
+   */
+  KibanaPublicAccess?: string
+  /**
+   * Kibana内网访问状态
+   */
+  KibanaPrivateAccess?: string
+  /**
+   * ES 6.8及以上版本基础版开启或关闭用户认证
+   */
+  BasicSecurityType?: number
+  /**
+   * Kibana内网端口
+   */
+  KibanaPrivatePort?: number
+  /**
+   * 0: 蓝绿变更方式扩容，集群不重启 （默认） 1: 磁盘解挂载扩容，集群滚动重启
+   */
+  ScaleType?: number
+  /**
+   * 多可用区部署
+   */
+  MultiZoneInfo?: Array<ZoneDetail>
+  /**
+   * 场景化模板类型 -1：不启用 1：通用 2：日志 3：搜索
+   */
+  SceneType?: number
+  /**
+   * Kibana配置项（JSON格式字符串）
+   */
+  KibanaConfig?: string
+  /**
+   * 可视化节点配置
+   */
+  WebNodeTypeInfo?: WebNodeTypeInfo
+  /**
+   * 切换到新网络架构
+   */
+  SwitchPrivateLink?: string
+  /**
+   * 启用Cerebro
+   */
+  EnableCerebro?: boolean
+  /**
+   * Cerebro公网访问状态
+   */
+  CerebroPublicAccess?: string
+  /**
+   * Cerebro内网访问状态
+   */
+  CerebroPrivateAccess?: string
+  /**
+   * 新增或修改的配置组信息
+   */
+  EsConfigSet?: EsConfigSetInfo
+  /**
+   * 可维护时间段
+   */
+  OperationDuration?: OperationDurationUpdated
+  /**
+   * 是否开启Altering 外网告警输出
+   */
+  KibanaAlteringPublicAccess?: Array<string>
 }
 
 /**
@@ -7920,6 +8057,24 @@ export interface DescribeServerlessInstancesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateLogstashPipelineDesc请求参数结构体
+ */
+export interface UpdateLogstashPipelineDescRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 实例管道ID
+   */
+  PipelineId: string
+  /**
+   * 管道描述信息
+   */
+  PipelineDesc: string
 }
 
 /**

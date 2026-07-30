@@ -3495,6 +3495,14 @@ export interface CreateClustersRequest {
    * <p>内核小版本号</p>
    */
   CynosVersion?: string
+  /**
+   * <p>同步方式。可选值：async、semisync、sync。</p>
+   */
+  SyncWay?: string
+  /**
+   * <p>半同步超时时间，单位ms。为保证业务稳定性，半同步复制存在退化逻辑，当主可用区集群在等待备可用区集群确认事务时若超过该超时时间，复制方式将降为异步复制。</p><p>取值范围：[1000, 4294967295]</p><p>单位：毫秒</p><p>默认值：10000</p>
+   */
+  SemiSyncTimeout?: number
 }
 
 /**
@@ -10779,6 +10787,18 @@ export interface RollbackToNewClusterRequest {
    * <p>是否从保存备份中恢复</p>
    */
   FromSaveBackup?: boolean
+  /**
+   * <p>同步方式。可选值：async、semisync、sync，默认异步。</p>
+   */
+  SyncWay?: string
+  /**
+   * <p>半同步超时时间，单位ms。为保证业务稳定性，半同步复制存在退化逻辑，当主可用区集群在等待备可用区集群确认事务时若超过该超时时间，复制方式将降为异步复制。</p><p>取值范围：[1000, 4294967295]</p><p>单位：毫秒</p><p>默认值：10000</p>
+   */
+  SemiSyncTimeout?: number
+  /**
+   * <p>备可用区</p>
+   */
+  SlaveZone?: string
 }
 
 /**

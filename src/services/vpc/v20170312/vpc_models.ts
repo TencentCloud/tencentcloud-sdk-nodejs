@@ -3796,11 +3796,11 @@ export interface IKEOptionsSpecification {
    */
   DhGroupName?: string
   /**
-   * <p>IKE SA Lifetime，单位：秒，设置IKE SA的生存周期，取值范围：60-604800</p>
+   * <p>IKE SA Lifetime，单位：秒，设置IKE SA的生存周期</p><p>取值范围：[60, 604800]</p><p>默认值：86400</p>
    */
   IKESaLifetimeSeconds?: number
   /**
-   * <p>IKE版本</p>
+   * <p>IKE版本</p><p>枚举值：</p><ul><li>IKEV1： IKEV1版本</li><li>IKEV2： IKEV2版本</li></ul><p>默认值：IKEV1</p>
    */
   IKEVersion?: string
 }
@@ -6305,7 +6305,7 @@ export interface Vpc {
  */
 export interface CreateVpnGatewayResponse {
   /**
-   * VPN网关对象
+   * <p>VPN网关对象</p>
    */
   VpnGateway?: VpnGateway
   /**
@@ -13654,13 +13654,17 @@ export interface ResetRoutePolicyAssociationsRequest {
  */
 export interface CreateVpnConnRoute {
   /**
-   * 目的端IDC网段
+   * <p>目的端IDC网段</p>
    */
   DestinationCidrBlock: string
   /**
-   * 优先级；可选值0，100。
+   * <p>优先级；可选值0，100。</p>
    */
   Priority?: number
+  /**
+   * <p>路由备注；可选值</p>
+   */
+  Description?: string
 }
 
 /**
@@ -15105,11 +15109,11 @@ export interface DeleteNetDetectRequest {
  */
 export interface IPSECOptionsSpecification {
   /**
-   * <p>加密算法，可选值：&#39;3DES-CBC&#39;, &#39;AES-CBC-128&#39;, &#39;AES-CBC-192&#39;, &#39;AES-CBC-256&#39;, &#39;DES-CBC&#39;, &#39;SM4&#39;, &#39;NULL&#39;， 默认为AES-CBC-128</p>
+   * <p>加密算法，可选值：&#39;3DES-CBC&#39;, &#39;AES-CBC-128&#39;, &#39;AES-CBC-192&#39;, &#39;AES-CBC-256&#39;, &#39;DES-CBC&#39;, &#39;SM4&#39;, &#39;NULL&#39;</p><p>默认值：AES-CBC-128</p>
    */
   EncryptAlgorithm?: string
   /**
-   * <p>认证算法：可选值：&#39;MD5&#39;, &#39;SHA1&#39;，&#39;SHA-256&#39; 默认为</p>
+   * <p>认证算法：可选值：&#39;MD5&#39;, &#39;SHA1&#39;, &#39;SHA-256&#39;, &#39;SHA-512&#39;, &#39;SHA-384&#39;, &#39;SM3&#39;</p><p>默认值：SHA1</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
@@ -17593,67 +17597,67 @@ DISABLE：不启用该路由
  */
 export interface ModifyVpnConnectionAttributeRequest {
   /**
-   * VPN通道实例ID。形如：vpnx-f49l6u0z。
+   * <p>VPN通道实例ID。形如：vpnx-f49l6u0z。</p>
    */
   VpnConnectionId: string
   /**
-   * VPN通道名称，可任意命名，但不得超过60个字符。
+   * <p>VPN通道名称，可任意命名，但不得超过60个字符。</p>
    */
   VpnConnectionName?: string
   /**
-   * 预共享密钥。
+   * <p>预共享密钥。</p>
    */
   PreShareKey?: string
   /**
-   * SPD策略组，例如：{"10.0.0.5/24":["172.123.10.5/16"]}，10.0.0.5/24是vpc内网段，172.123.10.5/16是IDC网段。用户指定VPC内哪些网段可以和您IDC中哪些网段通信。
+   * <p>SPD策略组，例如：{&quot;10.0.0.5/24&quot;:[&quot;172.123.10.5/16&quot;]}，10.0.0.5/24是vpc内网段，172.123.10.5/16是IDC网段。用户指定VPC内哪些网段可以和您IDC中哪些网段通信。</p>
    */
   SecurityPolicyDatabases?: Array<SecurityPolicyDatabase>
   /**
-   * IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议。
+   * <p>IKE配置（Internet Key Exchange，因特网密钥交换），IKE具有一套自我保护机制，用户配置网络安全协议。</p>
    */
   IKEOptionsSpecification?: IKEOptionsSpecification
   /**
-   * IPSec配置，腾讯云提供IPSec安全会话设置。
+   * <p>IPSec配置，腾讯云提供IPSec安全会话设置。</p>
    */
   IPSECOptionsSpecification?: IPSECOptionsSpecification
   /**
-   * 是否启用通道健康检查，默认为False。
+   * <p>是否启用通道健康检查，默认为False。</p>
    */
   EnableHealthCheck?: boolean
   /**
-   * 本端通道探测IP。
+   * <p>本端通道探测IP。</p>
    */
   HealthCheckLocalIp?: string
   /**
-   * 对端通道探测IP。
+   * <p>对端通道探测IP。</p>
    */
   HealthCheckRemoteIp?: string
   /**
-   * 协商类型，默认为active（主动协商）。可选值：active（主动协商），passive（被动协商），flowTrigger（流量协商）
+   * <p>协商类型，默认为active（主动协商）。可选值：active（主动协商），passive（被动协商），flowTrigger（流量协商）</p>
    */
   NegotiationType?: string
   /**
-   * DPD探测开关。默认为0，表示关闭DPD探测。可选值：0（关闭），1（开启）
+   * <p>DPD探测开关。默认为0，表示关闭DPD探测。可选值：0（关闭），1（开启）</p>
    */
   DpdEnable?: number
   /**
-   * DPD超时时间。即探测确认对端不存在需要的时间。dpdEnable为1（开启）时有效。默认30，单位为秒
+   * <p>DPD超时时间。即探测确认对端不存在需要的时间。dpdEnable为1（开启）时有效。默认30，单位为秒</p>
    */
   DpdTimeout?: string
   /**
-   * DPD超时后的动作。默认为clear。dpdEnable为1（开启）时有效。可取值为clear（断开）和restart（重试）
+   * <p>DPD超时后的动作。默认为clear。dpdEnable为1（开启）时有效。可取值为clear（断开）和restart（重试）</p><p>默认值：restart</p>
    */
   DpdAction?: string
   /**
-   * 对端网关ID，4.0及以上网关下的通道支持更新。
+   * <p>对端网关ID，4.0及以上网关下的通道支持更新。</p>
    */
   CustomerGatewayId?: string
   /**
-   * 健康检查配置
+   * <p>健康检查配置</p>
    */
   HealthCheckConfig?: HealthCheckConfig
   /**
-   * BGP隧道配置
+   * <p>BGP隧道配置</p>
    */
   BgpConfig?: BgpConfig
 }
@@ -18052,47 +18056,47 @@ export interface SnapshotInstance {
  */
 export interface CreateVpnGatewayRequest {
   /**
-   * VPC实例ID。可通过[DescribeVpcs](https://cloud.tencent.com/document/product/215/15778)接口返回值中的VpcId获取。
+   * <p>VPC实例ID。可通过<a href="https://cloud.tencent.com/document/product/215/15778">DescribeVpcs</a>。接口返回值中的VpcId获取</p><p>入参限制：当Type为CCN/SSL_CCN 类型时传 &quot;&quot;，IPSEC/SSL 类型必须传对应VPC实例ID。</p>
    */
   VpcId: string
   /**
-   * VPN网关名称，最大长度不能超过60个字节。
+   * <p>VPN网关名称，最大长度不能超过60个字节。</p>
    */
   VpnGatewayName: string
   /**
-   * 公网带宽设置。可选带宽规格：5, 10, 20, 50, 100, 200, 500, 1000, 3000；单位：Mbps。
+   * <p>公网带宽设置。可选带宽规格：5, 10, 20, 50, 100, 200, 500, 1000, 3000；单位：Mbps。</p>
    */
   InternetMaxBandwidthOut: number
   /**
-   * VPN网关计费模式，PREPAID：表示预付费，即包年包月，POSTPAID_BY_HOUR：表示后付费，即按量计费。默认：POSTPAID_BY_HOUR，如果指定预付费模式，参数InstanceChargePrepaid必填。
+   * <p>VPN网关计费模式，PREPAID：表示预付费，即包年包月，POSTPAID_BY_HOUR：表示后付费，即按量计费。默认：POSTPAID_BY_HOUR，如果指定预付费模式，参数InstanceChargePrepaid必填。</p>
    */
   InstanceChargeType?: string
   /**
-   * 预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。
+   * <p>预付费模式，即包年包月相关参数设置。通过该参数可以指定包年包月实例的购买时长、是否设置自动续费等属性。若指定实例的付费模式为预付费则该参数必传。</p>
    */
   InstanceChargePrepaid?: InstanceChargePrepaid
   /**
-   * 可用区，如：ap-guangzhou-2。
+   * <p>可用区，如：ap-guangzhou-2。</p>
    */
   Zone?: string
   /**
-   * VPN网关类型，默认为IPSEC。值“IPSEC”为VPC型IPSEC VPN网关，值“SSL”为VPC型SSL VPN网关，值“CCN”为云联网型IPSEC VPN网关，值“SSL_CCN”为云联网型SSL VPN网关。
+   * <p>VPN网关类型，默认为IPSEC。值“IPSEC”为VPC型IPSEC VPN网关，值“SSL”为VPC型SSL VPN网关，值“CCN”为云联网型IPSEC VPN网关，值“SSL_CCN”为云联网型SSL VPN网关。</p>
    */
   Type?: string
   /**
-   * 指定绑定的标签列表，例如：[{"Key": "city", "Value": "shanghai"}]。
+   * <p>指定绑定的标签列表，例如：[{&quot;Key&quot;: &quot;city&quot;, &quot;Value&quot;: &quot;shanghai&quot;}]。</p>
    */
   Tags?: Array<Tag>
   /**
-   * CDC实例ID。
+   * <p>CDC实例ID。</p>
    */
   CdcId?: string
   /**
-   * SSL VPN连接数设置，可选规格：5, 10, 20, 50, 100, 200, 500, 1000；单位：个。仅 SSL / SSL_CCN 类型需要选这个参数。
+   * <p>SSL VPN连接数设置，可选规格：5, 10, 20, 50, 100, 200, 500, 1000；</p><p>单位：个</p><p>默认值：5</p><p>仅 SSL / SSL_CCN 类型需要填这个参数。</p>
    */
   MaxConnection?: number
   /**
-   * BGP ASN。
+   * <p>BGP ASN。</p>
    */
   BgpAsn?: number
 }

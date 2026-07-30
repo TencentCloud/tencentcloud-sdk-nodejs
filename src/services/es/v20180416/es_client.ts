@@ -42,7 +42,7 @@ import {
   TagInfo,
   DescribeClusterSnapshotRequest,
   MetricMapByIndexId,
-  UpdateLogstashPipelineDescResponse,
+  UpdateInstancePublicAccessResponse,
   DescribeAutoScaleDiskInfoResponse,
   DescribeInstancesResponse,
   DescribeInstanceLogsResponse,
@@ -195,6 +195,7 @@ import {
   EsDictionaryInfo,
   DescribeLogstashPipelinesRequest,
   DescribeForceMergeTaskResponse,
+  UpdateLogstashPipelineDescResponse,
   DataStreamInfo,
   ServerlessIndexMetaField,
   RequestInstancesResponse,
@@ -245,7 +246,7 @@ import {
   IndexSettingsField,
   UpdateServerlessSpaceResponse,
   DescribeAutoScaleDiskInfoRequest,
-  UpdateLogstashPipelineDescRequest,
+  UpdateInstancePublicAccessRequest,
   UpdateServerlessInstanceRequest,
   NodeView,
   DescribeSpaceKibanaToolsResponse,
@@ -281,6 +282,7 @@ import {
   OutboundPublicAcl,
   QueryZoneResourceResponse,
   DescribeServerlessInstancesResponse,
+  UpdateLogstashPipelineDescRequest,
   DeleteLogstashInstanceRequest,
   DiSourceTkePodLabel,
   DescribeViewsResponse,
@@ -330,6 +332,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeIndexListResponse) => void
   ): Promise<DescribeIndexListResponse> {
     return this.request("DescribeIndexList", req, cb)
+  }
+
+  /**
+   * 用于更新管道描述信息
+   */
+  async UpdateLogstashPipelineDesc(
+    req: UpdateLogstashPipelineDescRequest,
+    cb?: (error: string, rep: UpdateLogstashPipelineDescResponse) => void
+  ): Promise<UpdateLogstashPipelineDescResponse> {
+    return this.request("UpdateLogstashPipelineDesc", req, cb)
   }
 
   /**
@@ -483,13 +495,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于更新管道描述信息
+   * 用于下发并且部署管道
    */
-  async UpdateLogstashPipelineDesc(
-    req: UpdateLogstashPipelineDescRequest,
-    cb?: (error: string, rep: UpdateLogstashPipelineDescResponse) => void
-  ): Promise<UpdateLogstashPipelineDescResponse> {
-    return this.request("UpdateLogstashPipelineDesc", req, cb)
+  async SaveAndDeployLogstashPipeline(
+    req: SaveAndDeployLogstashPipelineRequest,
+    cb?: (error: string, rep: SaveAndDeployLogstashPipelineResponse) => void
+  ): Promise<SaveAndDeployLogstashPipelineResponse> {
+    return this.request("SaveAndDeployLogstashPipeline", req, cb)
   }
 
   /**
@@ -1051,13 +1063,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 用于下发并且部署管道
+   * 更新ES集群实例的Kibana、cerebro公网开关
    */
-  async SaveAndDeployLogstashPipeline(
-    req: SaveAndDeployLogstashPipelineRequest,
-    cb?: (error: string, rep: SaveAndDeployLogstashPipelineResponse) => void
-  ): Promise<SaveAndDeployLogstashPipelineResponse> {
-    return this.request("SaveAndDeployLogstashPipeline", req, cb)
+  async UpdateInstancePublicAccess(
+    req: UpdateInstancePublicAccessRequest,
+    cb?: (error: string, rep: UpdateInstancePublicAccessResponse) => void
+  ): Promise<UpdateInstancePublicAccessResponse> {
+    return this.request("UpdateInstancePublicAccess", req, cb)
   }
 
   /**

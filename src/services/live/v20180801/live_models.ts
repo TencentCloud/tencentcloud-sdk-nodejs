@@ -714,38 +714,35 @@ export interface PlayCodeTotalInfo {
  */
 export interface AddLiveWatermarkRequest {
   /**
-   * 水印图片 URL。
-URL中禁止包含的字符：
- ;(){}$>`#"\'|
+   * <p>水印图片 URL。<br>URL中禁止包含的字符：<br> ;(){}$&gt;`#&quot;'|</p>
    */
   PictureUrl: string
   /**
-   * 水印名称。
-最长30字节。
+   * <p>水印名称。<br>最长30字节。</p>
    */
   WatermarkName: string
   /**
-   * 显示位置，X轴偏移，单位是百分比，默认 0。
+   * <p>显示位置，X轴偏移，单位是百分比，默认 0。</p>
    */
   XPosition?: number
   /**
-   * 显示位置，Y轴偏移，单位是百分比，默认 0。
+   * <p>显示位置，Y轴偏移，单位是百分比，默认 0。</p>
    */
   YPosition?: number
   /**
-   * 水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始宽度。
+   * <p>水印宽度，占直播原始画面宽度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始宽度。</p>
    */
   Width?: number
   /**
-   * 水印高度，占直播原始画面高度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。
+   * <p>水印高度，占直播原始画面高度百分比，建议高宽只设置一项，另外一项会自适应缩放，避免变形。默认原始高度。</p>
    */
   Height?: number
   /**
-   * 背景水印宽度。默认宽度1920。
+   * <p>背景水印宽度。默认宽度1920。</p><p>取值范围：[360, 4096]</p><p>单位：px</p>
    */
   BackgroundWidth?: number
   /**
-   * 背景水印高度。默认高度1080。
+   * <p>背景水印高度。默认高度1080。</p><p>取值范围：[360, 4096]</p><p>单位：px</p>
    */
   BackgroundHeight?: number
 }
@@ -11187,7 +11184,7 @@ export interface DeleteLiveTranscodeRuleRequest {
  */
 export interface AddLiveWatermarkResponse {
   /**
-   * 水印ID。
+   * <p>水印ID。</p>
    */
   WatermarkId?: number
   /**

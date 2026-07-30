@@ -48,6 +48,16 @@ it("es.v20180416.DescribeIndexList", async function () {
     }
 })
 
+it("es.v20180416.UpdateLogstashPipelineDesc", async function () {
+    try {
+       const data = await client.UpdateLogstashPipelineDesc({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.RestoreClusterSnapshot", async function () {
     try {
        const data = await client.RestoreClusterSnapshot({})
@@ -198,9 +208,9 @@ it("es.v20180416.DescribeLogstashViews", async function () {
     }
 })
 
-it("es.v20180416.UpdateLogstashPipelineDesc", async function () {
+it("es.v20180416.SaveAndDeployLogstashPipeline", async function () {
     try {
-       const data = await client.UpdateLogstashPipelineDesc({})
+       const data = await client.SaveAndDeployLogstashPipeline({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -758,9 +768,9 @@ it("es.v20180416.RestartKibana", async function () {
     }
 })
 
-it("es.v20180416.SaveAndDeployLogstashPipeline", async function () {
+it("es.v20180416.UpdateInstancePublicAccess", async function () {
     try {
-       const data = await client.SaveAndDeployLogstashPipeline({})
+       const data = await client.UpdateInstancePublicAccess({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

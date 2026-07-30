@@ -1112,6 +1112,14 @@ export interface MemoryPlusInfo {
    */
   Region?: string
   /**
+   * <p>计费模式</p><p>枚举值：</p><ul><li>-1： 免费版</li><li>0： 按量付费</li><li>1： 包年包月</li></ul>
+   */
+  PayMode?: number
+  /**
+   * <p>是否自动续费</p><p>枚举值：</p><ul><li>0： 不自动续费</li><li>1： 自动续费</li></ul>
+   */
+  AutoRenew?: number
+  /**
    * <p>记忆条数</p>
    */
   MemoryUsage?: number
@@ -1123,6 +1131,10 @@ export interface MemoryPlusInfo {
    * <p>资源标签</p>
    */
   ResourceTags?: Array<ResourceTag>
+  /**
+   * <p>版本号</p>
+   */
+  Version?: string
   /**
    * <p>创建时间</p>
    */

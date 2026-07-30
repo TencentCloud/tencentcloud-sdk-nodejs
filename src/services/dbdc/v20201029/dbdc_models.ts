@@ -2397,7 +2397,7 @@ export interface PolicyRule {
    */
   AddressModule?: string
   /**
-   * <p>规则 ID</p>
+   * <p>安全组 ID</p>
    */
   Id?: string
   /**

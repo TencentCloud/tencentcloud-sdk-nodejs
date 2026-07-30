@@ -1808,17 +1808,21 @@ export interface ModifyApmInstanceRequest {
    */
   LogSpanIdKey?: string
   /**
-   * <p>是否开启探针头采样</p>
+   * <p>是否开启探针头采样</p><p>（受限）</p>
    */
   EnableHeadSampler?: boolean
   /**
-   * <p>头采类型</p><p>枚举值：</p><ul><li>parentbased_traceidratio： 默认</li></ul>
+   * <p>头采类型</p><p>枚举值：</p><ul><li>parentbased_traceidratio： 默认</li></ul><p>（受限）</p>
    */
   HeadSamplerType?: string
   /**
-   * <p>头采采样率</p><p>取值范围：[0, 100]</p>
+   * <p>头采采样率</p><p>取值范围：[0, 100]</p><p>（受限）</p>
    */
   HeadSamplerArg?: number
+  /**
+   * <p>是否禁用 AI 能力</p><p>单位：无</p>
+   */
+  DisableAiAbility?: number
 }
 
 /**
@@ -2701,6 +2705,10 @@ export interface ApmInstanceDetail {
    * <p>spanId的索引key: 当CLS索引类型为键值索引时生效</p>
    */
   LogSpanIdKey?: string
+  /**
+   * <p>是否禁用 AI 能力</p><p>单位：无</p>
+   */
+  DisableAiAbility?: number
 }
 
 /**

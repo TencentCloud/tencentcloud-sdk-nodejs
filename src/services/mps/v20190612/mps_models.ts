@@ -1095,6 +1095,24 @@ export interface DeleteScheduleResponse {
 }
 
 /**
+ * 智能抠图配置。
+ */
+export interface AiCutoutConfig {
+  /**
+   * <p>能力配置开关，可选值：  ON：开启； OFF：关闭。 默认值：ON。</p>
+   */
+  Switch?: string
+  /**
+   * <p>抠图目标类型指定：&quot;foreground&quot;（默认）/ &quot;pattern&quot;</p>
+   */
+  Type?: string
+  /**
+   * <p>图案抠图配置。仅在Type为pattern时生效。</p>
+   */
+  PatternConfig?: PatternConfig
+}
+
+/**
  * DisableSchedule返回参数结构体
  */
 export interface DisableScheduleResponse {
@@ -4246,6 +4264,28 @@ export interface HdrConfig {
 }
 
 /**
+ * 智能扩图配置。
+ */
+export interface AiExpansionConfig {
+  /**
+   * <p>能力配置开关，可选值：  ON：开启； OFF：关闭。 默认值：ON。</p>
+   */
+  Switch?: string
+  /**
+   * <p>目标比例，如 &quot;16:9&quot;</p>
+   */
+  AspectRatio?: string
+  /**
+   * <p>目标宽度（像素）</p><p>取值范围：[0, 2048]</p>
+   */
+  Width?: number
+  /**
+   * <p>目标高度（像素）</p><p>取值范围：[0, 2048]</p>
+   */
+  Height?: number
+}
+
+/**
  * 智能描述信息
  */
 export interface MediaAiAnalysisDescriptionItem {
@@ -4454,6 +4494,18 @@ export interface ImageTaskInput {
    * <p>生图任务配置</p>
    */
   CreateImageConfig?: CreateImageConfig
+  /**
+   * <p>Ai抠图配置</p>
+   */
+  AiCutoutConfig?: AiCutoutConfig
+  /**
+   * <p>Ai扩图配置</p>
+   */
+  AiExpansionConfig?: AiExpansionConfig
+  /**
+   * <p>Ai分镜拆解配置</p>
+   */
+  AiStoryboardConfig?: AiStoryboardConfig
 }
 
 /**
@@ -4914,6 +4966,40 @@ export interface AigcImageExtraParam {
    * <p>指定图片的输出格式，支持jpeg, png。</p>
    */
   OutputFormat?: string
+}
+
+/**
+ * 流状态实时查询接口的SRT信息。
+ */
+export interface FlowRealtimeStatusSRT {
+  /**
+   * 延迟，单位为ms。
+   */
+  Latency: number
+  /**
+   * RTT，单位为ms。
+   */
+  RTT: number
+  /**
+   * 实时发包数或者收包数。
+   */
+  Packets: number
+  /**
+   * 丢包率。
+   */
+  PacketLossRate: number
+  /**
+   * 重传率。
+   */
+  RetransmitRate: number
+  /**
+   * 实时丢包数。
+   */
+  DroppedPackets: number
+  /**
+   * 是否加密，On|Off。
+   */
+  Encryption: string
 }
 
 /**
@@ -8943,6 +9029,32 @@ export interface PornOcrReviewTemplateInfoForUpdate {
    * 判定需人工复核是否违规的分数阈值，当智能审核达到该分数以上，认为需人工复核。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * 印花提取配置。
+ */
+export interface PatternConfig {
+  /**
+   * <p>透明度阈值</p><p>取值范围：[0, 255]</p><p>默认值：30</p>
+   */
+  TransparencyThreshold?: number
+  /**
+   * <p>不透明阈值，必须大于TransparencyThreshold</p><p>取值范围：[0, 255]</p><p>默认值：127</p>
+   */
+  OpaqueThreshold?: number
+  /**
+   * <p>边缘采样步数，默认5</p><p>取值范围：[1, 10]</p>
+   */
+  EdgeSamplingStep?: number
+  /**
+   * <p>边缘扩展步数，默认5</p>
+   */
+  EdgeExpansionStep?: number
+  /**
+   * <p>边缘融合强度，默认0.5</p><p>取值范围：[0, 1.0]</p>
+   */
+  EdgeBlendingIntensity?: number
 }
 
 /**
@@ -18342,37 +18454,34 @@ export interface AiReviewPoliticalAsrTaskOutput {
 }
 
 /**
- * 流状态实时查询接口的SRT信息。
+ * DescribeStreamPackageLinearAssemblyPrograms返回参数结构体
  */
-export interface FlowRealtimeStatusSRT {
+export interface DescribeStreamPackageLinearAssemblyProgramsResponse {
   /**
-   * 延迟，单位为ms。
+   * Program列表。
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Latency: number
+  Infos?: Array<LinearAssemblyProgramInfo>
   /**
-   * RTT，单位为ms。
+   * 页数。
    */
-  RTT: number
+  PageNum?: number
   /**
-   * 实时发包数或者收包数。
+   * 每页大小。
    */
-  Packets: number
+  PageSize?: number
   /**
-   * 丢包率。
+   * 总数量。
    */
-  PacketLossRate: number
+  TotalNum?: number
   /**
-   * 重传率。
+   * 总页数。
    */
-  RetransmitRate: number
+  TotalPage?: number
   /**
-   * 实时丢包数。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DroppedPackets: number
-  /**
-   * 是否加密，On|Off。
-   */
-  Encryption: string
+  RequestId?: string
 }
 
 /**
@@ -20813,34 +20922,17 @@ export interface SubtitleOutlineConfig {
 }
 
 /**
- * DescribeStreamPackageLinearAssemblyPrograms返回参数结构体
+ * 智能分镜拆解配置。
  */
-export interface DescribeStreamPackageLinearAssemblyProgramsResponse {
+export interface AiStoryboardConfig {
   /**
-   * Program列表。
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>能力配置开关，可选值：  ON：开启； OFF：关闭。 默认值：ON。</p>
    */
-  Infos?: Array<LinearAssemblyProgramInfo>
+  Switch?: string
   /**
-   * 页数。
+   * <p>指定提取的分镜图的序号，从0开始计数，不填写则返回所有分镜图。</p>
    */
-  PageNum?: number
-  /**
-   * 每页大小。
-   */
-  PageSize?: number
-  /**
-   * 总数量。
-   */
-  TotalNum?: number
-  /**
-   * 总页数。
-   */
-  TotalPage?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  ProcessIndex?: number
 }
 
 /**

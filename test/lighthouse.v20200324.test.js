@@ -258,6 +258,16 @@ it("lighthouse.v20200324.DescribeDisksReturnable", async function () {
     }
 })
 
+it("lighthouse.v20200324.DescribeBlueprintBundles", async function () {
+    try {
+       const data = await client.DescribeBlueprintBundles({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("lighthouse.v20200324.ModifyFirewallRules", async function () {
     try {
        const data = await client.ModifyFirewallRules({})

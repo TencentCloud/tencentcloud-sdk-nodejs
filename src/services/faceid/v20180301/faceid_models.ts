@@ -2781,22 +2781,11 @@ export interface GetFaceIdResultRequest {
  */
 export interface CheckPhoneAndNameResponse {
   /**
-   * 认证结果码，收费情况如下。
-- 收费结果码：
-0: 验证结果一致。
-1: 验证结果不一致。
-
-- 不收费结果码：
--1:查无记录。
--2:引擎未知错误。
--3:引擎服务异常。
--4:姓名校验不通过。
--5:手机号码不合法。
--6: 认证次数超过当日限制，请次日重试。
+   * <p>认证结果码，收费情况如下。</p><ul><li><p>收费结果码：<br>0: 验证结果一致。<br>1: 验证结果不一致。</p></li><li><p>不收费结果码：<br>-1:查无记录。<br>-2:引擎未知错误。<br>-3:引擎服务异常。<br>-4:姓名校验不通过。<br>-5:手机号码不合法。<br>-6: 认证次数超过当日限制，请次日重试。<br>-13：该号段不支持验证</p></li></ul>
    */
   Result?: string
   /**
-   * 业务结果描述。
+   * <p>业务结果描述。</p>
    */
   Description?: string
   /**
@@ -3272,16 +3261,15 @@ export interface DetectInfoIdCardData {
  */
 export interface CheckPhoneAndNameRequest {
   /**
-   * ⼿机号。
+   * <p>⼿机号。</p>
    */
   Mobile: string
   /**
-   * 姓名。
+   * <p>姓名。</p>
    */
   Name: string
   /**
-   * 敏感数据加密信息。
-- 对传入信息（姓名、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。
+   * <p>敏感数据加密信息。</p><ul><li>对传入信息（姓名、手机号）有加密需求的用户可使用此参数，详情请点击左侧链接。</li></ul>
    */
   Encryption?: Encryption
 }

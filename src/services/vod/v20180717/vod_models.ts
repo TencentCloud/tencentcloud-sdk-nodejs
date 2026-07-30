@@ -3420,9 +3420,13 @@ export interface CreateAdaptiveDynamicStreamingTemplateRequest {
    */
   Comment?: string
   /**
-   * <p>切片类型，当 Format 为 HLS 时有效，可选值：</p><li>ts：ts 切片；</li><li>fmp4：fmp4 切片。</li>默认值：ts。
+   * <p>分片类型，可选值：<br>ts: HLS，内部映射为ts-segment</p><p>mp4: HLS/DASH，HLS情况下内部映射为mp4-mp4-segment，DASH情况下内部映射为mp4-mp4-byterange</p><p>ts-segment：HLS+TS 切片</p><p>ts-byterange：HLS+TS byte range</p><p>mp4-segment：HLS+MP4 切片</p><p>mp4-byterange：HLS+MP4 byte range</p><p>ts-packed-audio：HLS+TS+Packed Audio 切片</p><p>mp4-packed-audio：HLS+MP4+Packed Audio 切片</p><p>ts-ts-segment：HLS+TS+TS 切片</p><p>ts-ts-byterange：HLS+TS+TS byte range</p><p>mp4-mp4-segment：HLS+MP4+MP4 切片</p><p>mp4-mp4-byterange：HLS/DASH+MP4+MP4 byte range</p><p>ts-packed-audio-byterange：HLS+TS+Packed Audio byte range</p><p>mp4-packed-audio-byterange：HLS+MP4+Packed Audio byte range<br> 默认值：ts-segment 注：自适应码流的分片格式以此字段为准。DASH格式下SegmentType只能为mp4-mp4-byterange。</p><p>FairPlay：只能用于HLS，切片格式只能是mp4或mp4-mp4-segment Widevine：可以用于HLS和DASH，HLS下切片格式只能是mp4或mp4-mp4-segment，DASH下切片格式只能是mp4或mp4-mp4-byterange<br>Widevine+FairPlay: 只能用于HLS，切片格式只能是mp4或mp4-mp4-segment</p>
    */
   SegmentType?: string
+  /**
+   * <p>切片时长。</p><p>取值范围：[1, 10]</p><p>单位：秒</p><p>默认值：6</p>
+   */
+  SegmentDuration?: number
 }
 
 /**
@@ -5616,50 +5620,45 @@ export interface MediaMiniProgramReviewElem {
  */
 export interface ModifyAdaptiveDynamicStreamingTemplateRequest {
   /**
-   * 自适应转码模板唯一标识。
+   * <p>自适应转码模板唯一标识。</p>
    */
   Definition: number
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 模板名称，长度限制：64 个字符。
+   * <p>模板名称，长度限制：64 个字符。</p>
    */
   Name?: string
   /**
-   * 自适应转码格式，取值范围：
-<li>HLS；</li>
-<li>MPEG-DASH。</li>
+   * <p>自适应转码格式，取值范围：</p><li>HLS；</li><li>MPEG-DASH。</li>
    */
   Format?: string
   /**
-   * 是否禁止视频低码率转高码率，取值范围：
-<li>0：否，</li>
-<li>1：是。</li>
+   * <p>是否禁止视频低码率转高码率，取值范围：</p><li>0：否，</li><li>1：是。</li>
    */
   DisableHigherVideoBitrate?: number
   /**
-   * 是否禁止视频分辨率转高分辨率，取值范围：
-<li>0：否，</li>
-<li>1：是。</li>
+   * <p>是否禁止视频分辨率转高分辨率，取值范围：</p><li>0：否，</li><li>1：是。</li>
    */
   DisableHigherVideoResolution?: number
   /**
-   * 自适应转码输入流参数信息，最多输入10路流。
-注意：各个流的帧率必须保持一致；如果不一致，采用第一个流的帧率作为输出帧率。
+   * <p>自适应转码输入流参数信息，最多输入10路流。<br>注意：各个流的帧率必须保持一致；如果不一致，采用第一个流的帧率作为输出帧率。</p>
    */
   StreamInfos?: Array<AdaptiveStreamTemplate>
   /**
-   * 模板描述信息，长度限制：256 个字符。
+   * <p>模板描述信息，长度限制：256 个字符。</p>
    */
   Comment?: string
   /**
-   * 切片类型，当 Format 为 HLS 时有效，可选值：
-<li>ts：ts 切片；</li>
-<li>fmp4：fmp4 切片。</li>
+   * <p>分片类型，可选值：<br>ts: HLS，内部映射为ts-segment</p><p>mp4: HLS/DASH，HLS情况下内部映射为mp4-mp4-segment，DASH情况下内部映射为mp4-mp4-byterange</p><p>ts-segment：HLS+TS 切片</p><p>ts-byterange：HLS+TS byte range</p><p>mp4-segment：HLS+MP4 切片</p><p>mp4-byterange：HLS+MP4 byte range</p><p>ts-packed-audio：HLS+TS+Packed Audio 切片</p><p>mp4-packed-audio：HLS+MP4+Packed Audio 切片</p><p>ts-ts-segment：HLS+TS+TS 切片</p><p>ts-ts-byterange：HLS+TS+TS byte range</p><p>mp4-mp4-segment：HLS+MP4+MP4 切片</p><p>mp4-mp4-byterange：HLS/DASH+MP4+MP4 byte range</p><p>ts-packed-audio-byterange：HLS+TS+Packed Audio byte range</p><p>mp4-packed-audio-byterange：HLS+MP4+Packed Audio byte range<br> 默认值：ts-segment 注：自适应码流的分片格式以此字段为准。DASH格式下SegmentType只能为mp4-mp4-byterange。</p><p>FairPlay：只能用于HLS，切片格式只能是mp4或mp4-mp4-segment Widevine：可以用于HLS和DASH，HLS下切片格式只能是mp4或mp4-mp4-segment，DASH下切片格式只能是mp4或mp4-mp4-byterange Widevine+FairPlay: 只能用于HLS，切片格式只能是mp4或mp4-mp4-segment</p>
    */
   SegmentType?: string
+  /**
+   * <p>切片平均时长。</p><p>取值范围：[1, 10]</p><p>单位：秒</p>
+   */
+  SegmentDuration?: number
 }
 
 /**

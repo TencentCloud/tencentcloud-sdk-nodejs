@@ -1800,59 +1800,63 @@ export interface ModifyApiKeyInfoRequest {
  */
 export interface TokenPlanListItem {
   /**
-   * 套餐 ID。
+   * <p>套餐 ID。</p>
    */
   TeamId?: string
   /**
-   * 套餐类型。取值：enterprise（企业版专业套餐）、enterprise-auto（企业版轻享套餐）
+   * <p>套餐类型。取值：enterprise（企业版专业套餐）、enterprise-auto（企业版轻享套餐）</p>
    */
   ProductType?: string
   /**
-   * 套餐名称。最大 128 字符。
+   * <p>套餐名称。最大 128 字符。</p>
    */
   Name?: string
   /**
-   * 账号 APP ID。
+   * <p>账号 APP ID。</p>
    */
   AppId?: string
   /**
-   * 主账号 UIN。
+   * <p>主账号 UIN。</p>
    */
   Uin?: string
   /**
-   * 套餐状态。取值：enable（启用）、disable（停用）。
+   * <p>套餐状态。取值：enable（启用）、disable（停用）。</p>
    */
   Status?: string
   /**
-   * 套餐关停原因。取值：NORMAL（正常）、ISOLATED（隔离/欠费）、FROZEN（冻结）、EXHAUSTED（额度耗尽）、DESTROYED（已销毁）
+   * <p>套餐关停原因。取值：NORMAL（正常）、ISOLATED（隔离/欠费）、FROZEN（冻结）、EXHAUSTED（额度耗尽）、DESTROYED（已销毁）</p>
    */
   StopReason?: string
   /**
-   * 可创建 API Key 上限。
+   * <p>可创建 API Key 上限。</p>
    */
   ApiKeyMax?: number
   /**
-   * 云计费预付费资源包 ID。
+   * <p>当前已创建的 APIKey 数量</p>
+   */
+  ApiKeyCount?: number
+  /**
+   * <p>云计费预付费资源包 ID。</p>
    */
   PrepayResourceID?: string
   /**
-   * 创建人。若为子账号创建的套餐，则该值为子账号UIN。
+   * <p>创建人。若为子账号创建的套餐，则该值为子账号UIN。</p>
    */
   Creator?: string
   /**
-   * 创建时间。
+   * <p>创建时间。</p>
    */
   CreatedAt?: string
   /**
-   * 更新时间。
+   * <p>更新时间。</p>
    */
   UpdatedAt?: string
   /**
-   * 套餐包基本信息。
+   * <p>套餐包基本信息。</p>
    */
   PackageInfo?: TokenPlanPackageInfo
   /**
-   * 是否开启自动续费。取值：0（未开启），1（开启）
+   * <p>是否开启自动续费。取值：0（未开启），1（开启）</p>
    */
   AutoRenewFlag?: number
 }

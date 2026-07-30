@@ -124,10 +124,10 @@ import {
   RestartDockerContainersResponse,
   CreateFirewallTemplateRequest,
   ModifyMcpServerResponse,
-  RemoveDockerContainersRequest,
+  BlueprintBundle,
   RenewDisksRequest,
   ModifyDisksAttributeRequest,
-  ModifyDisksBackupQuotaRequest,
+  Image,
   DescribeKeyPairsResponse,
   FirewallTemplate,
   DescribeSnapshotsDeniedActionsResponse,
@@ -159,7 +159,8 @@ import {
   DeleteFirewallTemplateResponse,
   CreateInstancesResponse,
   ModifyBlueprintAttributeResponse,
-  Image,
+  DescribeBlueprintBundlesRequest,
+  DescribeBlueprintBundlesResponse,
   StopDockerContainersRequest,
   DescribeModifyInstanceBundlesRequest,
   DescribeRegionsRequest,
@@ -210,6 +211,7 @@ import {
   ResizeDisksRequest,
   DiskChargePrepaid,
   RunDockerContainersResponse,
+  ModifyDisksBackupQuotaRequest,
   CreateKeyPairRequest,
   DescribeMcpServerTemplatesRequest,
   ModifyDockerContainerRequest,
@@ -274,7 +276,7 @@ import {
   InstancePriceDetail,
   DescribeDockerContainersResponse,
   ModifyDockerContainerResponse,
-  DescribeDisksDeniedActionsResponse,
+  DescribeDiskBackupsDeniedActionsResponse,
   TrafficPackage,
   FirewallTemplateApplyRecord,
   DescribeDockerContainerDetailResponse,
@@ -307,13 +309,14 @@ import {
   DescribeFirewallRulesTemplateResponse,
   RenewInstancesResponse,
   RenameDockerContainerRequest,
-  DescribeDiskBackupsDeniedActionsResponse,
+  DescribeDisksDeniedActionsResponse,
   SystemDisk,
   ResetInstanceResponse,
   IsolateDisksResponse,
   DescribeFirewallRulesRequest,
   FirewallTemplateRule,
   SnapshotDeniedActions,
+  RemoveDockerContainersRequest,
   DiskDeniedActions,
   InquirePriceCreateInstancesRequest,
   Scene,
@@ -607,6 +610,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDisksReturnableResponse) => void
   ): Promise<DescribeDisksReturnableResponse> {
     return this.request("DescribeDisksReturnable", req, cb)
+  }
+
+  /**
+   * 本接口(DescribeBlueprintBundles)用于查询镜像所对应的套餐。当前仅支持查询镜像类型为游戏专区的镜像ID。
+   */
+  async DescribeBlueprintBundles(
+    req: DescribeBlueprintBundlesRequest,
+    cb?: (error: string, rep: DescribeBlueprintBundlesResponse) => void
+  ): Promise<DescribeBlueprintBundlesResponse> {
+    return this.request("DescribeBlueprintBundles", req, cb)
   }
 
   /**
