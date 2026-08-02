@@ -2262,55 +2262,61 @@ export interface DescribeBucketListResponse {
  */
 export interface MountInfo {
   /**
-   * 文件系统 ID
+   * <p>文件系统 ID</p>
    */
   FileSystemId?: string
   /**
-   * 挂载点 ID
+   * <p>挂载点 ID</p>
    */
   MountTargetId?: string
   /**
-   * 挂载点 IP
+   * <p>挂载点 IP</p>
    */
   IpAddress?: string
   /**
-   * 挂载根目录
+   * <p>挂载根目录</p>
    */
   FSID?: string
   /**
-   * 挂载点状态，包括creating：创建中；available：运行中；
-deleting：删除中；
-create_failed： 创建失败
+   * <p>挂载点状态，包括creating：创建中；available：运行中；<br>deleting：删除中；<br>create_failed： 创建失败</p>
    */
   LifeCycleState?: string
   /**
-   * 网络类型，包括VPC,CCN
+   * <p>网络类型，包括VPC,CCN</p>
    */
   NetworkInterface?: string
   /**
-   * 私有网络 ID
+   * <p>私有网络 ID</p>
    */
   VpcId?: string
   /**
-   * 私有网络名称
+   * <p>私有网络名称</p>
    */
   VpcName?: string
   /**
-   * 子网 Id
+   * <p>子网 Id</p>
    */
   SubnetId?: string
   /**
-   * 子网名称
+   * <p>子网名称</p>
    */
   SubnetName?: string
   /**
-   * CFS Turbo使用的云联网ID
+   * <p>CFS Turbo使用的云联网ID</p>
    */
   CcnID?: string
   /**
-   * 云联网中CFS Turbo使用的网段
+   * <p>云联网中CFS Turbo使用的网段</p>
    */
   CidrBlock?: string
+  /**
+   * <p>占用用户ip列表</p>
+   */
+  ServerList?: Array<string>
+  /**
+   * <p>是否占用超过200个ip</p>
+   */
+  ServerListTruncated?: boolean
 }
 
 /**

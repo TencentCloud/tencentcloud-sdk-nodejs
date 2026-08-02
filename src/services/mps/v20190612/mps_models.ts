@@ -1314,6 +1314,20 @@ export interface AdBreakInfo {
 }
 
 /**
+ * CreateAiFissionTask返回参数结构体
+ */
+export interface CreateAiFissionTaskResponse {
+  /**
+   * <p>任务id</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 自动探测硬字幕区域中，表示字幕区域坐标的数据结构。同时包含置信度。
  */
 export interface SubtitleArea {
@@ -2836,6 +2850,78 @@ export interface CreateOutputRTPSettingsDestinations {
 export type DescribeStreamLinkActivateStateRequest = null
 
 /**
+ * 创建输出的配置信息。
+ */
+export interface CreateOutputInfo {
+  /**
+   * 输出的名称。
+   */
+  OutputName: string
+  /**
+   * 输出描述。
+   */
+  Description: string
+  /**
+   * 输出的转推协议，支持SRT|RTP|RTMP|RTMP_PULL|RTSP_PULL|RIST。
+   */
+  Protocol: string
+  /**
+   * 输出地区。
+   */
+  OutputRegion: string
+  /**
+   * 输出类型：Internet/TencentCSS
+   */
+  OutputType?: string
+  /**
+   * 输出模块类型，包括Pinpoint（单点输出，最多支持四路并发输出）；MultiMesh（多路输出，支持大于四路的并发输出，目前可以达到200路）。默认类型为 Pinpoint 输出。对于单个 Flow 一个区域最多只能有一个 MultiMesh 输出
+   */
+  OutputKind?: string
+  /**
+   * 输出的SRT的配置。
+   */
+  SRTSettings?: CreateOutputSRTSettings
+  /**
+   * 输出的RTMP的配置。
+   */
+  RTMPSettings?: CreateOutputRTMPSettings
+  /**
+   * 输出的RTP的配置。
+   */
+  RTPSettings?: CreateOutputInfoRTPSettings
+  /**
+   * IP白名单列表，格式为CIDR，如0.0.0.0/0。
+当Protocol为RTMP_PULL有效，为空代表不限制客户端IP。
+   */
+  AllowIpList?: Array<string>
+  /**
+   * 最大拉流并发数，最大4，默认4。
+   */
+  MaxConcurrent?: number
+  /**
+   * 绑定的输入安全组 ID。
+   */
+  SecurityGroupIds?: Array<string>
+  /**
+   * 可用区，output最多只支持输入一个可用区。
+   */
+  Zones?: Array<string>
+  /**
+   * 输出的RIST的配置。
+   */
+  RISTSettings?: CreateOutputRistSettings
+  /**
+   * 对于含有多个音/视频轨的流，可以指定需要使用的轨道。PidSelector 与 TrackSelector 只能存在一个
+   * @deprecated
+   */
+  PidSelector?: PidSelector
+  /**
+   * 对于含有多个音/视频轨的流，可以指定需要使用的轨道。PidSelector 与 TrackSelector 只能存在一个
+   */
+  StreamSelector?: StreamSelector
+}
+
+/**
  * ResetWorkflow返回参数结构体
  */
 export interface ResetWorkflowResponse {
@@ -3750,6 +3836,28 @@ export interface ModifyStreamPackageLinearAssemblyProgramResponse {
 }
 
 /**
+ * 商品裂变模特信息
+ */
+export interface CustomModel {
+  /**
+   * <p>性别</p><p>枚举值：</p><ul><li>male： 男性</li><li>female： 女性</li><li>any： 不限</li></ul>
+   */
+  Gender?: string
+  /**
+   * <p>年龄范围</p><p>枚举值：</p><ul><li>teen： 青年</li><li>young_adult： 成年</li><li>middle_aged： 中年</li><li>mature： 成熟</li></ul>
+   */
+  Age?: string
+  /**
+   * <p>外貌</p><p>枚举值：</p><ul><li>caucasian： 白人</li><li>asian： 亚裔</li><li>latino： 拉丁裔</li><li>african： 非裔</li><li>middle_eastern： 中东</li></ul>
+   */
+  Appearance?: string
+  /**
+   * <p>身材</p><p>枚举值：</p><ul><li>slim： 苗条</li><li>standard： 标准</li><li>athletic： 健壮</li><li>chubby： 丰满</li></ul>
+   */
+  BodyType?: string
+}
+
+/**
  * CreateAdaptiveDynamicStreamingTemplate请求参数结构体
  */
 export interface CreateAdaptiveDynamicStreamingTemplateRequest {
@@ -3967,6 +4075,48 @@ export interface DescribeImageSpriteTemplatesRequest {
 }
 
 /**
+ * 商品裂变任务信息
+ */
+export interface FissionTaskInfo {
+  /**
+   * <p>视频输出时长</p><p>取值范围：[1, 15]</p><p>单位：秒</p><p>默认值：15</p>
+   */
+  Duration?: number
+  /**
+   * <p>模型档位</p><p>枚举值：</p><ul><li>standard： 标准版</li><li>flagship： 旗舰版</li></ul>
+   */
+  ModelTier?: string
+  /**
+   * <p>视频画面比例</p><p>枚举值：</p><ul><li>9:16： 9:16</li><li>16:9： 16:9</li><li>1:1： 1:1</li><li>3:4： 3:4</li><li>4:3： 4:3</li></ul>
+   */
+  Ratio?: string
+  /**
+   * <p>输出分辨率</p><p>枚举值：</p><ul><li>720p： 720p</li><li>1080p： 1080p</li><li>2k： 2k</li><li>4k： 4k</li></ul>
+   */
+  Resolution?: string
+  /**
+   * <p>目标市场</p><p>枚举值：</p><ul><li>north_america： 北美</li><li>europe： 欧洲</li><li>china： 中国</li><li>japan： 日本</li><li>korea： 韩国</li><li>southeast_asia： 东南亚</li><li>brazil： 巴西</li><li>global： 全球</li><li>other： 其他</li></ul><p>影响默认出镜模特族裔与本地化风格；未指定 CustomModel 时按市场自动决定人种</p>
+   */
+  Market?: string
+  /**
+   * <p>口播/字幕语言</p><p>枚举值：</p><ul><li>english： 英文</li><li>chinese： 中文</li><li>japanese： 日语</li><li>korean： 汉语</li><li>spanish： 西班牙语</li><li>portuguese： 葡萄牙语</li><li>music_only： 纯音乐无口播</li></ul>
+   */
+  Language?: string
+  /**
+   * <p>视频类型</p><p>枚举值：</p><ul><li>ugc： UGC种草</li><li>talk： 产品口播</li><li>display： 产品展示（纯商品、无人声）</li><li>unboxing： 开箱分享</li><li>reaction： 反应展示</li></ul>
+   */
+  VideoType?: string
+  /**
+   * <p>裂变数量</p><p>取值范围：[0, 1]</p><p>单位：个</p>
+   */
+  SplitCount?: number
+  /**
+   * <p>定制出镜模特</p>
+   */
+  CustomModel?: CustomModel
+}
+
+/**
  * 查询Event的配置信息。
  */
 export interface DescribeEvent {
@@ -4116,13 +4266,9 @@ export interface SlateInfo {
 }
 
 /**
- * CreateQualityControlTemplate返回参数结构体
+ * DeleteWorkflow返回参数结构体
  */
-export interface CreateQualityControlTemplateResponse {
-  /**
-   * 媒体质检模板唯一标识。
-   */
-  Definition?: number
+export interface DeleteWorkflowResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -4888,6 +5034,36 @@ export interface AudioBeautifyConfig {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Types?: Array<string>
+}
+
+/**
+ * TextToSpeech返回参数结构体
+ */
+export interface TextToSpeechResponse {
+  /**
+   * <p>错误码，成功时返回0</p>
+   */
+  ErrorCode?: number
+  /**
+   * <p>错误信息，成功时返回success</p>
+   */
+  Msg?: string
+  /**
+   * <p>合成音频的base64编码，默认wav格式</p>
+   */
+  AudioData?: string
+  /**
+   * <p>合成音频url，有效期24小时</p>
+   */
+  AudioUrl?: string
+  /**
+   * <p>扩展信息，json字符串  duration: 结果音频时长，单位秒</p>
+   */
+  ExtInfo?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6071,6 +6247,32 @@ export interface MP4ConfigureInfo {
 }
 
 /**
+ * TextToSpeech请求参数结构体
+ */
+export interface TextToSpeechRequest {
+  /**
+   * <p>语音合成文本</p>
+   */
+  Text: string
+  /**
+   * <p>音色ID</p>
+   */
+  VoiceId: string
+  /**
+   * <p>文本语言。不填默认自动识别<br>当前支持语言：<br>zh 中文 (Chinese)<br>en 英语 (English)<br>ja 日语 (Japanese)<br>de 德语 (German)<br>fr 法语 (French)<br>ko 韩语 (Korean)<br>ru 俄语 (Russian)<br>uk 乌克兰语 (Ukrainian)<br>pt 葡萄牙语 (Portuguese)<br>it 意大利语 (Italian)<br>es 西班牙语 (Spanish)<br>id 印度尼西亚语 (Indonesian)<br>nl 荷兰语 (Dutch)<br>tr 土耳其语 (Turkish)<br>fil 菲律宾语 (Filipino)<br>ms 马来语 (Malay)<br>el 希腊语 (Greek)<br>fi 芬兰语 (Finnish)<br>hr 克罗地亚语 (Croatian)<br>sk 斯洛伐克语 (Slovak)<br>pl 波兰语 (Polish)<br>sv 瑞典语 (Swedish)<br>hi 印地语 (Hindi)<br>bg 保加利亚语 (Bulgarian)<br>ro 罗马尼亚语 (Romanian)<br>ar 阿拉伯语 (Arabic)<br>cs 捷克语 (Czech)<br>da 丹麦语 (Danish)<br>ta 泰米尔语 (Tamil)<br>hun 匈牙利语（Hungarian）<br>vi 越南语（Vietnamese）<br>no 挪威语（Norwegian）<br>yue 粤语（Cantonese）<br>th 泰语（Thai）<br>he 希伯来语（Hebrew）<br>ca 加泰罗尼亚语（Catalan）<br>nn 尼诺斯克语（Nynorsk）<br>af 阿非利卡语（Afrikaans）<br>fa 波斯语（Persian）<br>sl 斯洛文尼亚语（Slovenian）</p>
+   */
+  TextLang?: string
+  /**
+   * <p>输出相关参数</p>
+   */
+  Output?: SyncDubbingOutputOption
+  /**
+   * <p>扩展参数，json字符串</p><p><strong>synExt</strong> Object 语音合成扩展参数<br>   <strong>duration</strong> Float 合成音频时长（单位秒），默认不控制时长。示例：5.2<br>   <strong>format</strong> String 输出音频格式，默认wav，支持wav、mp3<br>   <strong>sampleRate</strong> Integer 合成音频采样率，默认16000，支持[8000,16000,22050,24000,32000,44100]</p>
+   */
+  ExtParam?: string
+}
+
+/**
  * 语音鉴黄任务控制参数。
  */
 export interface PornAsrReviewTemplateInfoForUpdate {
@@ -6851,6 +7053,33 @@ export interface CreateWordSamplesRequest {
 }
 
 /**
+ * CreateQualityControlTemplate请求参数结构体
+ */
+export interface CreateQualityControlTemplateRequest {
+  /**
+   * 媒体质检模板名称，长度限制：64 个字符。
+   */
+  Name: string
+  /**
+   * 媒体质检控制参数。
+   */
+  QualityControlItemSet: Array<QualityControlItemConfig>
+  /**
+   * 媒体质检模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 录制文件格式。可选值：
+<li>PNG: PNG图片</li>
+   */
+  RecordFormat?: string
+  /**
+   * 媒体质检抽检策略。
+   */
+  Strategy?: QualityControlStrategy
+}
+
+/**
  * 智能擦除模板去水印配置
  */
 export interface SmartEraseWatermarkConfig {
@@ -7626,17 +7855,17 @@ export interface PornConfigureInfoForUpdate {
 }
 
 /**
- * 拆条任务输入类型
+ * CreateWorkflow返回参数结构体
  */
-export interface AiAnalysisTaskSegmentInput {
+export interface CreateWorkflowResponse {
   /**
-   * <p>拆条任务模板 ID。</p>
+   * 工作流 ID。
    */
-  Definition?: number
+  WorkflowId?: number
   /**
-   * <p>扩展参数。</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ExtendedParameter?: string
+  RequestId?: string
 }
 
 /**
@@ -7960,21 +8189,33 @@ export interface AiAnalysisTaskDescriptionOutput {
 }
 
 /**
- * DescribeStreamLinkEventAttachedFlows请求参数结构体
+ * CloneVoice返回参数结构体
  */
-export interface DescribeStreamLinkEventAttachedFlowsRequest {
+export interface CloneVoiceResponse {
   /**
-   * EventId。
+   * <p>错误码，成功时返回0</p>
    */
-  EventId: string
+  ErrorCode?: number
   /**
-   * 当前页数，默认1。
+   * <p>错误信息，成功时返回success</p>
    */
-  PageNum?: number
+  Msg?: string
   /**
-   * 每页大小，默认1000。
+   * <p>克隆生成的音色ID</p>
    */
-  PageSize?: number
+  VoiceId?: string
+  /**
+   * <p>合成音频的base64编码</p>
+   */
+  AudioData?: string
+  /**
+   * <p>合成音频Url，有效期24小时</p>
+   */
+  AudioUrl?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8378,6 +8619,24 @@ export interface TagConfigureInfoForUpdate {
 <li>OFF：关闭智能标签任务。</li>
    */
   Switch?: string
+}
+
+/**
+ * DescribeStreamLinkEventAttachedFlows请求参数结构体
+ */
+export interface DescribeStreamLinkEventAttachedFlowsRequest {
+  /**
+   * EventId。
+   */
+  EventId: string
+  /**
+   * 当前页数，默认1。
+   */
+  PageNum?: number
+  /**
+   * 每页大小，默认1000。
+   */
+  PageSize?: number
 }
 
 /**
@@ -9131,75 +9390,17 @@ export interface DescribeStreamPackageSourceLocationsRequest {
 }
 
 /**
- * 创建输出的配置信息。
+ * 视频裂变输入
  */
-export interface CreateOutputInfo {
+export interface AiFissionInput {
   /**
-   * 输出的名称。
+   * <p>视频裂变参考图url</p>
    */
-  OutputName: string
+  ImageUrls: Array<string>
   /**
-   * 输出描述。
+   * <p>视频裂变商品信息参考文案</p>
    */
-  Description: string
-  /**
-   * 输出的转推协议，支持SRT|RTP|RTMP|RTMP_PULL|RTSP_PULL|RIST。
-   */
-  Protocol: string
-  /**
-   * 输出地区。
-   */
-  OutputRegion: string
-  /**
-   * 输出类型：Internet/TencentCSS
-   */
-  OutputType?: string
-  /**
-   * 输出模块类型，包括Pinpoint（单点输出，最多支持四路并发输出）；MultiMesh（多路输出，支持大于四路的并发输出，目前可以达到200路）。默认类型为 Pinpoint 输出。对于单个 Flow 一个区域最多只能有一个 MultiMesh 输出
-   */
-  OutputKind?: string
-  /**
-   * 输出的SRT的配置。
-   */
-  SRTSettings?: CreateOutputSRTSettings
-  /**
-   * 输出的RTMP的配置。
-   */
-  RTMPSettings?: CreateOutputRTMPSettings
-  /**
-   * 输出的RTP的配置。
-   */
-  RTPSettings?: CreateOutputInfoRTPSettings
-  /**
-   * IP白名单列表，格式为CIDR，如0.0.0.0/0。
-当Protocol为RTMP_PULL有效，为空代表不限制客户端IP。
-   */
-  AllowIpList?: Array<string>
-  /**
-   * 最大拉流并发数，最大4，默认4。
-   */
-  MaxConcurrent?: number
-  /**
-   * 绑定的输入安全组 ID。
-   */
-  SecurityGroupIds?: Array<string>
-  /**
-   * 可用区，output最多只支持输入一个可用区。
-   */
-  Zones?: Array<string>
-  /**
-   * 输出的RIST的配置。
-   */
-  RISTSettings?: CreateOutputRistSettings
-  /**
-   * 对于含有多个音/视频轨的流，可以指定需要使用的轨道。PidSelector 与 TrackSelector 只能存在一个
-   * @deprecated
-   */
-  PidSelector?: PidSelector
-  /**
-   * 对于含有多个音/视频轨的流，可以指定需要使用的轨道。PidSelector 与 TrackSelector 只能存在一个
-   */
-  StreamSelector?: StreamSelector
+  Text?: string
 }
 
 /**
@@ -10560,6 +10761,20 @@ export interface DescribeRTSPPullSourceAddress {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Url: string
+}
+
+/**
+ * DescribeStreamPackageLinearAssemblyChannelAlerts返回参数结构体
+ */
+export interface DescribeStreamPackageLinearAssemblyChannelAlertsResponse {
+  /**
+   * 频道告警信息。
+   */
+  Infos?: ChannelAlertResp
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13807,30 +14022,17 @@ export interface DeleteAIAnalysisTemplateResponse {
 }
 
 /**
- * CreateQualityControlTemplate请求参数结构体
+ * CreateQualityControlTemplate返回参数结构体
  */
-export interface CreateQualityControlTemplateRequest {
+export interface CreateQualityControlTemplateResponse {
   /**
-   * 媒体质检模板名称，长度限制：64 个字符。
+   * 媒体质检模板唯一标识。
    */
-  Name: string
+  Definition?: number
   /**
-   * 媒体质检控制参数。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  QualityControlItemSet: Array<QualityControlItemConfig>
-  /**
-   * 媒体质检模板描述信息，长度限制：256 个字符。
-   */
-  Comment?: string
-  /**
-   * 录制文件格式。可选值：
-<li>PNG: PNG图片</li>
-   */
-  RecordFormat?: string
-  /**
-   * 媒体质检抽检策略。
-   */
-  Strategy?: QualityControlStrategy
+  RequestId?: string
 }
 
 /**
@@ -18325,6 +18527,24 @@ export interface OutputRISTSourceAddressResp {
 }
 
 /**
+ * CreateAiFissionTask请求参数结构体
+ */
+export interface CreateAiFissionTaskRequest {
+  /**
+   * <p>ai视频裂变输入信息</p>
+   */
+  Input: AiFissionInput
+  /**
+   * <p>用户cos信息</p>
+   */
+  CosInfo?: VideoDramaCosInfo
+  /**
+   * <p>ai视频裂变任务信息</p>
+   */
+  TaskInfo?: FissionTaskInfo
+}
+
+/**
  * CreateDocToVideoTask返回参数结构体
  */
 export interface CreateDocToVideoTaskResponse {
@@ -18861,17 +19081,17 @@ export interface AiReviewPornTaskOutput {
 }
 
 /**
- * CreateWorkflow返回参数结构体
+ * 拆条任务输入类型
  */
-export interface CreateWorkflowResponse {
+export interface AiAnalysisTaskSegmentInput {
   /**
-   * 工作流 ID。
+   * <p>拆条任务模板 ID。</p>
    */
-  WorkflowId?: number
+  Definition?: number
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>扩展参数。</p>
    */
-  RequestId?: string
+  ExtendedParameter?: string
 }
 
 /**
@@ -23965,16 +24185,6 @@ export interface RecognizeAudioSentence {
 }
 
 /**
- * DeleteWorkflow返回参数结构体
- */
-export interface DeleteWorkflowResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * ExecuteFunction请求参数结构体
  */
 export interface ExecuteFunctionRequest {
@@ -24564,17 +24774,41 @@ export interface AigcVideoExtraParam {
 }
 
 /**
- * DescribeStreamPackageLinearAssemblyChannelAlerts返回参数结构体
+ * CloneVoice请求参数结构体
  */
-export interface DescribeStreamPackageLinearAssemblyChannelAlertsResponse {
+export interface CloneVoiceRequest {
   /**
-   * 频道告警信息。
+   * <p>克隆音频base64编码</p>
    */
-  Infos?: ChannelAlertResp
+  AudioData?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>克隆音频Url，AudioData为空时有效</p>
    */
-  RequestId?: string
+  AudioUrl?: string
+  /**
+   * <p>克隆音频语言，默认中文。 当前支持语言同语音合成TextLang</p>
+   */
+  AudioLang?: string
+  /**
+   * <p>音色属性。音色查询和匹配使用</p>
+   */
+  VoiceProfile?: VoiceProfile
+  /**
+   * <p>试听文本</p>
+   */
+  Text?: string
+  /**
+   * <p>试听文本语言，不填默认自动检测。当前支持语言同语音合成</p>
+   */
+  TextLang?: string
+  /**
+   * <p>输出相关参数，可以指定输出音频形式等。默认输出音频base64。</p>
+   */
+  Output?: SyncDubbingOutputOption
+  /**
+   * <p>扩展参数，json字符串</p>
+   */
+  ExtParam?: string
 }
 
 /**

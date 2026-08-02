@@ -3639,71 +3639,75 @@ export interface SubscribeCheckStepTip {
  */
 export interface Database {
   /**
-   * 需要迁移或同步的库名，当ObjectMode为Partial时，此项必填
+   * <p>需要迁移或同步的库名，当ObjectMode为Partial时，此项必填</p>
    */
   DbName?: string
   /**
-   * 迁移或同步后的库名，默认与源库相同
+   * <p>迁移或同步后的库名，默认与源库相同</p>
    */
   NewDbName?: string
   /**
-   * DB选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当Mode为Partial时，此项必填。注意，高级对象的同步不依赖此值，如果整库同步此处应该为All。
+   * <p>DB选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当Mode为Partial时，此项必填。注意，高级对象的同步不依赖此值，如果整库同步此处应该为All。</p>
    */
   DbMode?: string
   /**
-   * 迁移或同步的 schema
+   * <p>迁移或同步的 schema</p>
    */
   SchemaName?: string
   /**
-   * 迁移或同步后的 schema name
+   * <p>迁移或同步后的 schema name</p>
    */
   NewSchemaName?: string
   /**
-   * 表选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当DBMode为Partial时此项必填，如果整库同步此处应该为All。
+   * <p>schema选择模式，pg和sqlserver需要使用</p><p>枚举值：</p><ul><li>All： 当前对象下的所有对象</li><li>Partial： 部分对象</li></ul>
+   */
+  SchemaMode?: string
+  /**
+   * <p>表选择模式: All(为当前对象下的所有对象)，Partial(部分对象)，当DBMode为Partial时此项必填，如果整库同步此处应该为All。</p>
    */
   TableMode?: string
   /**
-   * 表图对象集合，当 TableMode 为 Partial 时，此项需要填写
+   * <p>表图对象集合，当 TableMode 为 Partial 时，此项需要填写</p>
    */
   Tables?: Array<Table>
   /**
-   * 视图选择模式: All 为当前对象下的所有视图对象,Partial 为部分视图对象，如果整库同步此处应该为All。
+   * <p>视图选择模式: All 为当前对象下的所有视图对象,Partial 为部分视图对象，如果整库同步此处应该为All。</p>
    */
   ViewMode?: string
   /**
-   * 视图对象集合，当 ViewMode 为 Partial 时， 此项需要填写
+   * <p>视图对象集合，当 ViewMode 为 Partial 时， 此项需要填写</p>
    */
   Views?: Array<View>
   /**
-   * 选择要同步的模式，Partial为部分，All为整选，如果整库同步此处应该为All。
+   * <p>选择要同步的模式，Partial为部分，All为整选，如果整库同步此处应该为All。</p>
    */
   FunctionMode?: string
   /**
-   * FunctionMode取值为Partial时需要填写
+   * <p>FunctionMode取值为Partial时需要填写</p>
    */
   Functions?: Array<string>
   /**
-   * 选择要同步的模式，Partial为部分，All为整选，如果整库同步此处应该为All。
+   * <p>选择要同步的模式，Partial为部分，All为整选，如果整库同步此处应该为All。</p>
    */
   ProcedureMode?: string
   /**
-   * ProcedureMode取值为Partial时需要填写
+   * <p>ProcedureMode取值为Partial时需要填写</p>
    */
   Procedures?: Array<string>
   /**
-   * 触发器迁移模式，All(为当前对象下的所有对象)，Partial(部分对象)，如果整库同步此处应该为All。数据同步暂不支持此高级对象。
+   * <p>触发器迁移模式，All(为当前对象下的所有对象)，Partial(部分对象)，如果整库同步此处应该为All。数据同步暂不支持此高级对象。</p>
    */
   TriggerMode?: string
   /**
-   * 当TriggerMode为partial，指定要迁移的触发器名称
+   * <p>当TriggerMode为partial，指定要迁移的触发器名称</p>
    */
   Triggers?: Array<string>
   /**
-   * 事件迁移模式，All(为当前对象下的所有对象)，Partial(部分对象)，如果整库同步此处应该为All。数据同步暂不支持此高级对象。
+   * <p>事件迁移模式，All(为当前对象下的所有对象)，Partial(部分对象)，如果整库同步此处应该为All。数据同步暂不支持此高级对象。</p>
    */
   EventMode?: string
   /**
-   * 当EventMode为partial，指定要迁移的事件名称
+   * <p>当EventMode为partial，指定要迁移的事件名称</p>
    */
   Events?: Array<string>
 }

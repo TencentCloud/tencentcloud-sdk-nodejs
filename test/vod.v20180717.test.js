@@ -438,6 +438,16 @@ it("vod.v20180717.DescribeTasks", async function () {
     }
 })
 
+it("vod.v20180717.DeleteKnowledgeBase", async function () {
+    try {
+       const data = await client.DeleteKnowledgeBase({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.CreateStorageRegion", async function () {
     try {
        const data = await client.CreateStorageRegion({})
@@ -721,6 +731,16 @@ it("vod.v20180717.CreateSampleSnapshotTemplate", async function () {
 it("vod.v20180717.DeleteAIAnalysisTemplate", async function () {
     try {
        const data = await client.DeleteAIAnalysisTemplate({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.DescribeKnowledgeBases", async function () {
+    try {
+       const data = await client.DescribeKnowledgeBases({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1828,6 +1848,16 @@ it("vod.v20180717.DescribeAigcFaceInfoAsync", async function () {
     }
 })
 
+it("vod.v20180717.ModifyKnowledgeBase", async function () {
+    try {
+       const data = await client.ModifyKnowledgeBase({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("vod.v20180717.CreateJustInTimeTranscodeTemplate", async function () {
     try {
        const data = await client.CreateJustInTimeTranscodeTemplate({})
@@ -2261,6 +2291,16 @@ it("vod.v20180717.DescribeDailyPlayStatFileList", async function () {
 it("vod.v20180717.ModifySubAppIdInfo", async function () {
     try {
        const data = await client.ModifySubAppIdInfo({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("vod.v20180717.CreateKnowledgeBase", async function () {
+    try {
+       const data = await client.CreateKnowledgeBase({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

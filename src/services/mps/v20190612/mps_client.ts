@@ -72,6 +72,7 @@ import {
   DescribeOutputRTMPPullSettings,
   AwsS3FileUploadTrigger,
   AdBreakInfo,
+  CreateAiFissionTaskResponse,
   SubtitleArea,
   ScheduleAnalysisTaskResult,
   ModifyOutputInfo,
@@ -129,6 +130,7 @@ import {
   MediaMetaData,
   CreateOutputRTPSettingsDestinations,
   DescribeStreamLinkActivateStateRequest,
+  CreateOutputInfo,
   ResetWorkflowResponse,
   SRTFECFullOptions,
   MediaTranscodeItem,
@@ -165,6 +167,7 @@ import {
   AiRecognitionTaskFaceResult,
   StartStreamPackageLinearAssemblyChannelResponse,
   ModifyStreamPackageLinearAssemblyProgramResponse,
+  CustomModel,
   CreateAdaptiveDynamicStreamingTemplateRequest,
   LLMDetectionResultItem,
   CreateProcessImageTemplateResponse,
@@ -174,6 +177,7 @@ import {
   ModifyStreamLinkFlowRequest,
   CloneViralAIGC,
   DescribeImageSpriteTemplatesRequest,
+  FissionTaskInfo,
   DescribeEvent,
   TextWatermarkTemplateInputForUpdate,
   SubtitleTransResultItem,
@@ -181,7 +185,7 @@ import {
   AddOnAudio,
   AiRecognitionTaskOcrWordsResultInput,
   SlateInfo,
-  CreateQualityControlTemplateResponse,
+  DeleteWorkflowResponse,
   FlowMediaAudio,
   AiAnalysisTaskReelInput,
   CreateImageConfig,
@@ -214,6 +218,7 @@ import {
   DescribeInputSRTSettings,
   AiAnalysisTaskCoverResult,
   AudioBeautifyConfig,
+  TextToSpeechResponse,
   CreateStreamLinkSecurityGroupRequest,
   DescribeStreamLinkEventResponse,
   CreateAiDramaTaskResponse,
@@ -268,6 +273,7 @@ import {
   CreateOutputRtmpSettingsDestinations,
   AudioDenoiseConfig,
   MP4ConfigureInfo,
+  TextToSpeechRequest,
   PornAsrReviewTemplateInfoForUpdate,
   LiveRecordTemplate,
   DescribeSnapshotByTimeOffsetTemplatesRequest,
@@ -297,6 +303,7 @@ import {
   ParseNotificationRequest,
   ImageEraseConfig,
   CreateWordSamplesRequest,
+  CreateQualityControlTemplateRequest,
   SmartEraseWatermarkConfig,
   CreateMediaEvaluationResponse,
   FaceConfigureInfo,
@@ -331,7 +338,7 @@ import {
   AiQualityControlTaskInput,
   VideoDBEntryTaskResult,
   PornConfigureInfoForUpdate,
-  AiAnalysisTaskSegmentInput,
+  CreateWorkflowResponse,
   AiReviewPornAsrTaskOutput,
   ComposeTransitionItem,
   DeleteStreamPackageSourceRequest,
@@ -347,7 +354,7 @@ import {
   DescribeStreamPackageLinearAssemblyProgramsRequest,
   DescribeAsrHotwordsListRequest,
   AiAnalysisTaskDescriptionOutput,
-  DescribeStreamLinkEventAttachedFlowsRequest,
+  CloneVoiceResponse,
   RTPAddressDestination,
   DescribeStreamPackageLinearAssemblyProgramSchedulesResponse,
   DescribeAdaptiveDynamicStreamingTemplatesResponse,
@@ -368,6 +375,7 @@ import {
   DescribeStreamPackageActivateStateResponse,
   ComposeSourceMedia,
   TagConfigureInfoForUpdate,
+  DescribeStreamLinkEventAttachedFlowsRequest,
   CreatePersonSampleResponse,
   CreateContentReviewTemplateResponse,
   ModifyBlindWatermarkTemplateResponse,
@@ -392,7 +400,7 @@ import {
   AiReviewTaskPornOcrResult,
   DescribeLiveRecordTemplatesRequest,
   DescribeStreamPackageSourceLocationsRequest,
-  CreateOutputInfo,
+  AiFissionInput,
   DescribeStreamPackageSourceLocationResponse,
   CreateAigcAudioTaskRequest,
   MediaProcessTaskResult,
@@ -441,6 +449,7 @@ import {
   ModifyStreamPackageLinearAssemblyProgramRequest,
   ProcessImageResponse,
   DescribeRTSPPullSourceAddress,
+  DescribeStreamPackageLinearAssemblyChannelAlertsResponse,
   DashManifestInfo,
   VideoDramaCosInfo,
   DescribeOutputRTSPPullSettings,
@@ -566,7 +575,7 @@ import {
   LiveStreamAiReviewImagePoliticalResult,
   RawImageWatermarkInput,
   DeleteAIAnalysisTemplateResponse,
-  CreateQualityControlTemplateRequest,
+  CreateQualityControlTemplateResponse,
   EmbeddingData,
   AigcAudioExtraParam,
   AiSampleTagOperation,
@@ -739,6 +748,7 @@ import {
   CreateSmartEraseTemplateResponse,
   MediaProcessTaskSampleSnapshotResult,
   OutputRISTSourceAddressResp,
+  CreateAiFissionTaskRequest,
   CreateDocToVideoTaskResponse,
   ModifySmartSubtitleTemplateResponse,
   CreateVideoRedrawTaskRequest,
@@ -764,7 +774,7 @@ import {
   AiAnalysisTaskDubbingInput,
   ComposeCanvas,
   AiReviewPornTaskOutput,
-  CreateWorkflowResponse,
+  AiAnalysisTaskSegmentInput,
   AiAnalysisTaskVideoComprehensionOutput,
   AiRecognitionTaskAsrFullTextResult,
   ModifyAIRecognitionTemplateResponse,
@@ -952,7 +962,6 @@ import {
   CreateAnimatedGraphicsTemplateRequest,
   FrameTagConfigureInfo,
   RecognizeAudioSentence,
-  DeleteWorkflowResponse,
   ExecuteFunctionRequest,
   DescribeStreamLinkFlowLogsResponse,
   AiAnalysisTaskHeadTailOutput,
@@ -978,7 +987,7 @@ import {
   ActivateSSAIResponse,
   DescribeAIAnalysisTemplatesResponse,
   AigcVideoExtraParam,
-  DescribeStreamPackageLinearAssemblyChannelAlertsResponse,
+  CloneVoiceRequest,
   AiRecognitionTaskAsrWordsResult,
   DescribeAigcVideoTaskRequest,
   AiAnalysisTaskHeadTailResult,
@@ -1235,13 +1244,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 删除用户自定义转动图模板。
+   * 创建ai视频裂变任务
    */
-  async DeleteAnimatedGraphicsTemplate(
-    req: DeleteAnimatedGraphicsTemplateRequest,
-    cb?: (error: string, rep: DeleteAnimatedGraphicsTemplateResponse) => void
-  ): Promise<DeleteAnimatedGraphicsTemplateResponse> {
-    return this.request("DeleteAnimatedGraphicsTemplate", req, cb)
+  async CreateAiFissionTask(
+    req: CreateAiFissionTaskRequest,
+    cb?: (error: string, rep: CreateAiFissionTaskResponse) => void
+  ): Promise<CreateAiFissionTaskResponse> {
+    return this.request("CreateAiFissionTask", req, cb)
+  }
+
+  /**
+   * 同步接口，使用该接口从参考音频克隆一个音色
+   */
+  async CloneVoice(
+    req: CloneVoiceRequest,
+    cb?: (error: string, rep: CloneVoiceResponse) => void
+  ): Promise<CloneVoiceResponse> {
+    return this.request("CloneVoice", req, cb)
   }
 
   /**
@@ -2153,6 +2172,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 同步语音合成，根据输入文本和指定音色生成语音
+   */
+  async TextToSpeech(
+    req: TextToSpeechRequest,
+    cb?: (error: string, rep: TextToSpeechResponse) => void
+  ): Promise<TextToSpeechResponse> {
+    return this.request("TextToSpeech", req, cb)
+  }
+
+  /**
    * 查询编排。
    */
   async DescribeSchedules(
@@ -2220,6 +2249,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: StopStreamPackageLinearAssemblyChannelResponse) => void
   ): Promise<StopStreamPackageLinearAssemblyChannelResponse> {
     return this.request("StopStreamPackageLinearAssemblyChannel", req, cb)
+  }
+
+  /**
+   * 删除用户自定义转动图模板。
+   */
+  async DeleteAnimatedGraphicsTemplate(
+    req: DeleteAnimatedGraphicsTemplateRequest,
+    cb?: (error: string, rep: DeleteAnimatedGraphicsTemplateResponse) => void
+  ): Promise<DeleteAnimatedGraphicsTemplateResponse> {
+    return this.request("DeleteAnimatedGraphicsTemplate", req, cb)
   }
 
   /**
@@ -2473,13 +2512,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口用于批量删除关键词样本。
+   * 使用检索值检索库中最接近检索值的若干视频。
    */
-  async DeleteWordSamples(
-    req: DeleteWordSamplesRequest,
-    cb?: (error: string, rep: DeleteWordSamplesResponse) => void
-  ): Promise<DeleteWordSamplesResponse> {
-    return this.request("DeleteWordSamples", req, cb)
+  async CreateVideoSearchTask(
+    req: CreateVideoSearchTaskRequest,
+    cb?: (error: string, rep: CreateVideoSearchTaskResponse) => void
+  ): Promise<CreateVideoSearchTaskResponse> {
+    return this.request("CreateVideoSearchTask", req, cb)
   }
 
   /**
@@ -2564,13 +2603,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 使用检索值检索库中最接近检索值的若干视频。
+   * 该接口用于批量删除关键词样本。
    */
-  async CreateVideoSearchTask(
-    req: CreateVideoSearchTaskRequest,
-    cb?: (error: string, rep: CreateVideoSearchTaskResponse) => void
-  ): Promise<CreateVideoSearchTaskResponse> {
-    return this.request("CreateVideoSearchTask", req, cb)
+  async DeleteWordSamples(
+    req: DeleteWordSamplesRequest,
+    cb?: (error: string, rep: DeleteWordSamplesResponse) => void
+  ): Promise<DeleteWordSamplesResponse> {
+    return this.request("DeleteWordSamples", req, cb)
   }
 
   /**

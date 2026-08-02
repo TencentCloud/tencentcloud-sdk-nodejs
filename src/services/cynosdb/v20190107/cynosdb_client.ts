@@ -238,6 +238,7 @@ import {
   InstanceParamItem,
   IsolateLibraDBInstanceRequest,
   DescribeVaultsResponse,
+  TransferClusterPrepayToPostpayResponse,
   DescribeDBSecurityGroupsRequest,
   RollbackData,
   UnbindClusterResourcePackagesRequest,
@@ -287,6 +288,7 @@ import {
   ReplayInstanceAuditLogRequest,
   MigrateDBItem,
   RegionInstanceSpecInfo,
+  TransferClusterPrepayToPostpayRequest,
   ModifyAccountPrivilegesResponse,
   InquirePriceCreateRequest,
   ModifyLibraDBClusterAccountDescriptionRequest,
@@ -581,6 +583,7 @@ import {
   ModifyAccountDescriptionRequest,
   IntegrateInstanceInfo,
   SwitchClusterLogBin,
+  TransferStoragePrepayToPostpayRequest,
   ModifyVaultRequest,
   ExportInstanceErrorLogsResponse,
   DescribeLibraDBClustersRequest,
@@ -601,6 +604,7 @@ import {
   UpgradeClusterVersionRequest,
   AuditInstanceFilters,
   ParamInfo,
+  TransferStoragePrepayToPostpayResponse,
   ModifyClusterParamResponse,
   SecurityGroup,
   SetLibraDBClusterRenewFlagRequest,
@@ -1758,6 +1762,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 本接口（TransferClusterPrepayToPostpay）用于将预付费集群转为后付费集群
+   */
+  async TransferClusterPrepayToPostpay(
+    req?: TransferClusterPrepayToPostpayRequest,
+    cb?: (error: string, rep: TransferClusterPrepayToPostpayResponse) => void
+  ): Promise<TransferClusterPrepayToPostpayResponse> {
+    return this.request("TransferClusterPrepayToPostpay", req, cb)
+  }
+
+  /**
    * 本接口（RollbackToNewCluster）用于回档到新集群。
    */
   async RollbackToNewCluster(
@@ -2535,6 +2549,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBackupListResponse) => void
   ): Promise<DescribeBackupListResponse> {
     return this.request("DescribeBackupList", req, cb)
+  }
+
+  /**
+   * 本接口（TransferStoragePrepayToPostpay）用于将预付费存储转为后付费存储
+   */
+  async TransferStoragePrepayToPostpay(
+    req?: TransferStoragePrepayToPostpayRequest,
+    cb?: (error: string, rep: TransferStoragePrepayToPostpayResponse) => void
+  ): Promise<TransferStoragePrepayToPostpayResponse> {
+    return this.request("TransferStoragePrepayToPostpay", req, cb)
   }
 
   /**

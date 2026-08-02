@@ -5796,6 +5796,16 @@ export interface DescribeVaultsResponse {
 }
 
 /**
+ * TransferClusterPrepayToPostpay返回参数结构体
+ */
+export interface TransferClusterPrepayToPostpayResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDBSecurityGroups请求参数结构体
  */
 export interface DescribeDBSecurityGroupsRequest {
@@ -7014,6 +7024,11 @@ export interface RegionInstanceSpecInfo {
    */
   ZoneStockInfos?: Array<ZoneStockInfo4Libra>
 }
+
+/**
+ * TransferClusterPrepayToPostpay请求参数结构体
+ */
+export type TransferClusterPrepayToPostpayRequest = null
 
 /**
  * ModifyAccountPrivileges返回参数结构体
@@ -14692,6 +14707,11 @@ export interface SwitchClusterLogBin {
 }
 
 /**
+ * TransferStoragePrepayToPostpay请求参数结构体
+ */
+export type TransferStoragePrepayToPostpayRequest = null
+
+/**
  * ModifyVault请求参数结构体
  */
 export interface ModifyVaultRequest {
@@ -15275,6 +15295,16 @@ export interface ParamInfo {
    * 支持公式的参数的默认公式样式
    */
   FuncPattern?: string
+}
+
+/**
+ * TransferStoragePrepayToPostpay返回参数结构体
+ */
+export interface TransferStoragePrepayToPostpayResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

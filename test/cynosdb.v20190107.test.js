@@ -1088,6 +1088,16 @@ it("cynosdb.v20190107.CreateAccounts", async function () {
     }
 })
 
+it("cynosdb.v20190107.TransferClusterPrepayToPostpay", async function () {
+    try {
+       const data = await client.TransferClusterPrepayToPostpay({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cynosdb.v20190107.RollbackToNewCluster", async function () {
     try {
        const data = await client.RollbackToNewCluster({})
@@ -1861,6 +1871,16 @@ it("cynosdb.v20190107.DescribeLibraDBSlowLogs", async function () {
 it("cynosdb.v20190107.DescribeBackupList", async function () {
     try {
        const data = await client.DescribeBackupList({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cynosdb.v20190107.TransferStoragePrepayToPostpay", async function () {
+    try {
+       const data = await client.TransferStoragePrepayToPostpay({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

@@ -7590,6 +7590,10 @@ export interface CreateClusterNodePoolRequest {
    * <p>删除保护开关</p>
    */
   DeletionProtection?: boolean
+  /**
+   * <p>跳过校验选项，目前支持 &quot;VpcDnsCheck&quot;</p>
+   */
+  SkipValidateOptions?: Array<string>
 }
 
 /**

@@ -216,6 +216,20 @@ export interface DescribeDevicePackagesRequest {
 }
 
 /**
+ * 事件回调配置
+ */
+export interface TalkEventCallbackConfig {
+  /**
+   * <p>是否开启</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>Topic 名称</p>
+   */
+  Topic?: string
+}
+
+/**
  * 设备激活结果数据
  */
 export interface DeviceActiveResult {
@@ -762,6 +776,10 @@ export interface CreateTWeTalkAgentRequest {
    * <p>元信息扩展JSON对象字符串</p>
    */
   Metadata?: string
+  /**
+   * <p>回调配置</p>
+   */
+  EventCallbackConfig?: TalkEventCallbackConfig
 }
 
 /**
@@ -2546,73 +2564,77 @@ export interface PauseTWeCallDeviceRequest {
  */
 export interface TalkAgentInfo {
   /**
-   * 主账号UIN
+   * <p>主账号UIN</p>
    */
   Uin?: number
   /**
-   * 账号AppId
+   * <p>账号AppId</p>
    */
   AppId?: number
   /**
-   * 实例 ID
+   * <p>实例 ID</p>
    */
   InstanceId?: string
   /**
-   * 智能体ID
+   * <p>智能体ID</p>
    */
   AgentId?: string
   /**
-   * 智能体名称
+   * <p>智能体名称</p>
    */
   Name?: string
   /**
-   * 智能体描述
+   * <p>智能体描述</p>
    */
   Description?: string
   /**
-   * 语音识别配置
+   * <p>语音识别配置</p>
    */
   STTConfig?: TalkSTTConfig
   /**
-   * 大模型配置
+   * <p>大模型配置</p>
    */
   LLMConfig?: TalkLLMConfig
   /**
-   * 语音合成配置
+   * <p>语音合成配置</p>
    */
   TTSConfig?: TalkTTSConfig
   /**
-   * 对话行为配置
+   * <p>对话行为配置</p>
    */
   ConversationConfig?: TalkConversationConfig
   /**
-   * 长期记忆配置
+   * <p>长期记忆配置</p>
    */
   MemoryConfig?: TalkMemoryConfig
   /**
-   * IoT 工具列表
+   * <p>IoT 工具列表</p>
    */
   IOTTools?: Array<TalkIOTTool>
   /**
-   * Webhook 工具列表
+   * <p>Webhook 工具列表</p>
    */
   WebhookTools?: Array<TalkWebhookTool>
   /**
-   * 元信息JSON object 字符串
+   * <p>元信息JSON object 字符串</p>
    */
   Metadata?: string
   /**
-   * 绑定关系列表
+   * <p>绑定关系列表</p>
    */
   Bindings?: Array<TalkAgentBinding>
   /**
-   * 创建时间，Unix 秒
+   * <p>创建时间，Unix 秒</p>
    */
   CreateTime?: number
   /**
-   * 更新时间，Unix 秒
+   * <p>更新时间，Unix 秒</p>
    */
   UpdateTime?: number
+  /**
+   * <p>事件回调配置</p>
+   */
+  EventCallbackConfig?: TalkEventCallbackConfig
 }
 
 /**
@@ -3433,25 +3455,13 @@ export interface DescribeGatewaySubProductsResponse {
 }
 
 /**
- * 批量创建 TWeSee 语义理解任务的响应
+ * BindProducts返回参数结构体
  */
-export interface CreateVisionRecognitionTaskOutput {
+export interface BindProductsResponse {
   /**
-   * 创建任务成功
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Created?: boolean
-  /**
-   * 任务 ID
-   */
-  TaskId?: string
-  /**
-   * 错误码
-   */
-  ErrorCode?: string
-  /**
-   * 错误消息
-   */
-  ErrorMessage?: string
+  RequestId?: string
 }
 
 /**
@@ -3526,6 +3536,28 @@ export interface BindProductInfo {
    * 产品拥有者名称
    */
   ProductOwnerName?: string
+}
+
+/**
+ * 激活码统计信息。
+ */
+export interface ActivationLicense {
+  /**
+   * <p>激活码类型</p>
+   */
+  ServiceType?: string
+  /**
+   * <p>支付模式</p>
+   */
+  TotalLicenseNum?: number
+  /**
+   * <p>计费标签项</p>
+   */
+  UsedLicenseNum?: number
+  /**
+   * <p>计费标识</p>
+   */
+  Period?: string
 }
 
 /**
@@ -9414,6 +9446,20 @@ export interface DescribeTWeTalkProductConfigV2Request {
 }
 
 /**
+ * 激活码统计信息。
+ */
+export interface LicenseOverview {
+  /**
+   * <p>激活码统计信息</p>
+   */
+  ActivationLicense?: Array<ActivationLicense>
+  /**
+   * <p>激活码类型</p>
+   */
+  LicenseType?: string
+}
+
+/**
  * TWeSee 语义理解任务信息
  */
 export interface VisionRecognitionTask {
@@ -9602,13 +9648,25 @@ export interface GenSingleDeviceSignatureOfPublicRequest {
 }
 
 /**
- * BindProducts返回参数结构体
+ * 批量创建 TWeSee 语义理解任务的响应
  */
-export interface BindProductsResponse {
+export interface CreateVisionRecognitionTaskOutput {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 创建任务成功
    */
-  RequestId?: string
+  Created?: boolean
+  /**
+   * 任务 ID
+   */
+  TaskId?: string
+  /**
+   * 错误码
+   */
+  ErrorCode?: string
+  /**
+   * 错误消息
+   */
+  ErrorMessage?: string
 }
 
 /**
@@ -10327,7 +10385,7 @@ export interface OtaModuleInfo {
  */
 export interface DescribeLicenseOverviewRequest {
   /**
-   * 实例ID
+   * <p>实例ID</p>
    */
   InstanceId: string
 }
@@ -11126,6 +11184,11 @@ export interface CloudStorageAIServiceTask {
  */
 export interface DescribeLicenseOverviewResponse {
   /**
+   * <p>实例概览</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<LicenseOverview>
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -11754,7 +11817,7 @@ export interface CreateTWeTalkAIBotRequest {
  */
 export interface TalkWebhookEndpoint {
   /**
-   * <p>Webhook地址，仅支持 80 和 443 端口</p>
+   * <p>Webhook地址</p>
    */
   Url: string
   /**
@@ -12923,6 +12986,10 @@ export interface ModifyTWeTalkAgentRequest {
    * <p>元信息扩展JSON对象字符串</p>
    */
   Metadata?: string
+  /**
+   * <p>回调配置</p>
+   */
+  EventCallbackConfig?: TalkEventCallbackConfig
 }
 
 /**

@@ -398,6 +398,16 @@ it("es.v20180416.DescribeServerlessSpaceUser", async function () {
     }
 })
 
+it("es.v20180416.CheckUpdateInstance", async function () {
+    try {
+       const data = await client.CheckUpdateInstance({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("es.v20180416.ExportIpTraceLog", async function () {
     try {
        const data = await client.ExportIpTraceLog({})
@@ -551,6 +561,16 @@ it("es.v20180416.GetIpTraceStatus", async function () {
 it("es.v20180416.DescribeAutoBackUpStrategy", async function () {
     try {
        const data = await client.DescribeAutoBackUpStrategy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("es.v20180416.DescribeClusterDiskRange", async function () {
+    try {
+       const data = await client.DescribeClusterDiskRange({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -848,9 +868,9 @@ it("es.v20180416.DescribeEventDataDetail", async function () {
     }
 })
 
-it("es.v20180416.DescribeClusterDiskRange", async function () {
+it("es.v20180416.ModifyAutoScaleDiskInfo", async function () {
     try {
-       const data = await client.DescribeClusterDiskRange({})
+       const data = await client.ModifyAutoScaleDiskInfo({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

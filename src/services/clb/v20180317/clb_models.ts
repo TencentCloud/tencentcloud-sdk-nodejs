@@ -100,9 +100,17 @@ export interface ModelRouterModel {
    */
   Type: string
   /**
-   * <p>服务商/模型 ID（byok_model.model_id，形如 model-xxxxxxxx；Platform 类型不传）</p>
+   * <p>BYOK实例ID</p>
    */
   ServiceProviderId?: string
+  /**
+   * <p>当前 CMR、当前绑定模型下该 BYOK实例的调度优先级。</p><p>取值范围：[0, 2]</p><p>默认值：0</p>
+   */
+  Order?: number
+  /**
+   * <p>当前CMR、当前绑定模型的同一有效Order层内，BYOK实例之间的相对选择权重。</p><p>取值范围：[0, 100]</p><p>默认值：10</p>
+   */
+  Weight?: number
 }
 
 /**
@@ -1335,6 +1343,28 @@ export interface BatchDeregisterTargetsRequest {
 }
 
 /**
+ * CMR实例待解绑的模型信息
+ */
+export interface ModelRouterModelToDisassociate {
+  /**
+   * <p>模型名称</p>
+   */
+  ModelName: string
+  /**
+   * <p>所属厂商</p>
+   */
+  Provider: string
+  /**
+   * <p>模型类型。</p><p>枚举值：</p><ul><li>BYOK： BYOK类型</li><li>Platform： 平台类型</li></ul>
+   */
+  Type: string
+  /**
+   * <p>BYOK实例ID</p>
+   */
+  ServiceProviderId: string
+}
+
+/**
  * ModifyListener返回参数结构体
  */
 export interface ModifyListenerResponse {
@@ -1427,6 +1457,10 @@ export interface ModifyModelRouterAttributesRequest {
    * <p>路由配置</p>
    */
   RouterSetting?: RouterSettingWithFallBack
+  /**
+   * <p>带宽</p><p>取值范围：[1, 2048]</p><p>单位：Mbps</p>
+   */
+  Bandwidth?: number
 }
 
 /**
@@ -1838,6 +1872,14 @@ export interface ModelRouterDetail {
    * <p>模型路由实例所属VPC的ID</p>
    */
   VpcId?: string
+  /**
+   * <p>带宽</p><p>单位：Mbps</p>
+   */
+  Bandwidth?: number
+  /**
+   * <p>弹性公网IP的ID</p>
+   */
+  EipAddressId?: string
 }
 
 /**
@@ -1935,6 +1977,10 @@ export interface Coefficient {
    * <p>缓存命中输入积分系数。</p><p>用于 provider prompt cache 命中的输入 token。</p><p>取值范围：[0, 5000]</p><p>默认值：3</p>
    */
   InputCachedCoefficient?: number
+  /**
+   * <p>缓存创建积分系数</p>
+   */
+  InputCacheCreationCoefficient?: number
   /**
    * <p>输入积分系数。</p><p>取值范围：[1, 5000]</p><p>默认值：25</p>
    */
@@ -2739,7 +2785,7 @@ export interface DescribeLBOperateProtectRequest {
  */
 export interface RouterSettingWithFallBack {
   /**
-   * <p>模型间路由策略。</p><p>枚举值：</p><ul><li>SimpleShuffle： 简单随机路由</li><li>LowestCost： 最低积分路由</li></ul>
+   * <p>模型间路由策略。</p><p>枚举值：</p><ul><li>SimpleShuffle： 简单随机路由</li><li>CostBasedRouting： 最低积分路由</li></ul>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CrossModelGroupRoutingStrategy?: string
@@ -2753,6 +2799,16 @@ export interface RouterSettingWithFallBack {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RoutingStrategy?: string
+  /**
+   * <p>CMR实例级别请求组内重试次数</p><p>取值范围：[0, 5]</p><p>默认值：2</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  NumRetries?: number
+  /**
+   * <p>L2模型组内路由调度算法参数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RoutingStrategyArgs?: RoutingStrategyArgs
 }
 
 /**
@@ -5102,6 +5158,28 @@ export interface ListenerHealth {
 }
 
 /**
+ * L2模型内路由算法策略参数
+ */
+export interface RoutingStrategyArgs {
+  /**
+   * <p>最低繁忙路由算法相对近优容差。</p><p>取值范围：[0, 100]</p><p>默认值：0</p><p>仅最低繁忙路由算法生效。0 表示请求仅会路由到在途数最小的上游大模型部署，0.10 表示请求路由到的上游大模型部署在途请求数最多比最小在途数高10%，依次类推。</p>
+   */
+  LeastBusyBuffer?: number
+  /**
+   * <p>用量均衡路由算法相对近优容差</p><p>取值范围：[0, 100]</p><p>默认值：0</p><p>仅用量均衡路由算法生效。0 表示请求仅会路由到TPM最低的上游大模型部署；0.10 表示请求最多会路由到比TPM最小值高10%的上游大模型部署，依次类推。</p>
+   */
+  UsageBasedBuffer?: number
+  /**
+   * <p>最低延迟路由算法相对近优容差</p><p>取值范围：[0, 100]</p><p>默认值：0</p><p>仅最低延迟路由算法生效。0 表示请求仅会路由到延迟最低的上游大模型部署；0.10 表示请求最多会路由到比延迟最小值高10%的上游大模型部署，依次类推。</p>
+   */
+  LowestLatencyBuffer?: number
+  /**
+   * <p>最低积分系数路由算法相对近优容差</p><p>取值范围：[0, 100]</p><p>默认值：0</p><p>仅最低积分系数路由算法生效。0 表示请求仅会路由到积分系数最低的上游大模型部署；0.10 表示请求最多会路由到比积分系数最小值高10%的上游大模型部署，依次类推。</p>
+   */
+  LowestCostBuffer?: number
+}
+
+/**
  * DeleteRewrite请求参数结构体
  */
 export interface DeleteRewriteRequest {
@@ -5465,6 +5543,18 @@ export interface RouterSettingWithoutFallBack {
    * <p>路由策略</p><p>枚举值：</p><ul><li>SimpleShuffle： 简单随机路由</li><li>LeastBusy： 最低繁忙路由</li><li>LatencyBasedRouting： 最低延迟路由</li><li>UsageBasedRouting： 用量均衡路由</li><li>CostBasedRouting： 最低积分路由</li></ul>
    */
   RoutingStrategy?: string
+  /**
+   * <p>模型间路由策略。</p><p>枚举值：</p><ul><li>SimpleShuffle： 简单随机路由</li><li>CostBasedRouting： 最低积分路由</li></ul>
+   */
+  CrossModelGroupRoutingStrategy?: string
+  /**
+   * <p>L2模型组内路由调度算法参数</p>
+   */
+  RoutingStrategyArgs?: RoutingStrategyArgs
+  /**
+   * <p>CMR实例级别请求组内重试次数</p><p>取值范围：[0, 5]</p><p>默认值：2</p>
+   */
+  NumRetries?: number
 }
 
 /**
@@ -5705,6 +5795,14 @@ export interface ModelRouterSet {
    * <p>模型路由实例所属VPC的ID</p>
    */
   VpcId?: string
+  /**
+   * <p>带宽</p><p>单位：Mbps</p>
+   */
+  Bandwidth?: number
+  /**
+   * <p>弹性公网IP的ID</p>
+   */
+  EipAddressId?: string
 }
 
 /**
@@ -6244,6 +6342,18 @@ export interface ServiceProvider {
    * <p>BYOK名称</p>
    */
   ServiceProviderName?: string
+  /**
+   * <p>绑定的指定模型组内BYOK实例的调度优先级</p><p>取值范围[0,2]，优先级随数值增大而降低。</p>
+   */
+  Order?: number
+  /**
+   * <p>绑定的指定模型组Order相同层级内BYOK实例的调度权重</p>
+   */
+  Weight?: number
+  /**
+   * <p>CMR实例-BYOK实例的模型调度绑定关系状态</p><p>枚举值：</p><ul><li>Configuring： 变配中</li><li>ConfigureFailed： 变配失败</li><li>Deleting： 删除中</li><li>Provisioning： 创建中</li><li>Active： 正常可用</li><li>ProvisionFailed： 创建失败</li><li>DeletionFailed： 删除失败</li></ul>
+   */
+  AssociationStatus?: string
 }
 
 /**
@@ -6367,7 +6477,7 @@ export interface DisassociateModelsFromModelRouterRequest {
   /**
    * <p>需要解除关联的模型信息</p>
    */
-  Models?: Array<ModelRouterModel>
+  Models?: Array<ModelRouterModelToDisassociate>
 }
 
 /**
@@ -7279,6 +7389,34 @@ export interface Sort {
 }
 
 /**
+ * 模型路由计费信息
+ */
+export interface ModelRouterBillingConfigInput {
+  /**
+   * <p>模型路由计费模式</p><p>枚举值：</p><ul><li>POSTPAID_BY_HOUR： 按量计费</li><li>RESOURCE_PACKAGE： 按资源包抵扣</li></ul>
+   */
+  ChargeType?: string
+  /**
+   * <p>实例规格</p><p>枚举值：</p><ul><li>t1.nano-01： 入门版</li><li>t1.nano-02： 轻量版</li><li>t1.nano-03： 轻量增强版</li><li>t1.micro-01： 微型版</li><li>t1.micro-02： 基础版</li><li>t1.small-01： 标准版</li><li>t1.small-02： 标准增强版</li><li>t1.medium-01： 进阶版</li><li>t1.medium-02： 进阶增强版</li><li>t1.large-01： 专业版</li><li>t1.large-02： 专业增强版</li><li>t1.xlarge-01： 旗舰版</li><li>t1.xlarge-02： 至尊版</li></ul>
+   */
+  SlaType?: string
+  /**
+   * <p>是否关联资源包抵扣</p><p>枚举值：</p><ul><li>true： 关联</li><li>false： 不关联</li></ul>
+   */
+  AssociateResourcePackage?: boolean
+}
+
+/**
+ * DisassociateModelsFromModelRouter返回参数结构体
+ */
+export interface DisassociateModelsFromModelRouterResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 目标组健康检查详情
  */
 export interface TargetGroupHealthCheck {
@@ -7361,16 +7499,6 @@ export interface TargetGroupHealthCheck {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ExtendedCode?: string
-}
-
-/**
- * DisassociateModelsFromModelRouter返回参数结构体
- */
-export interface DisassociateModelsFromModelRouterResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -9154,6 +9282,20 @@ export interface DescribeModelRouterResourcePackageDeductionRequest {
 }
 
 /**
+ * 创建模型路由时的集群信息
+ */
+export interface ClusterInfoInput {
+  /**
+   * <p>集群ID</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>集群类型</p><p>枚举值：</p><ul><li>Exclusive： 独占集群</li><li>Public： 公有云共享集群</li></ul>
+   */
+  Type?: string
+}
+
+/**
  * AssociateTargetGroups返回参数结构体
  */
 export interface AssociateTargetGroupsResponse {
@@ -10468,13 +10610,13 @@ export interface CreateModelRouterRequest {
    */
   BudgetId?: string
   /**
-   * <p>证书ID</p><p>入参限制：当Schema为HTTPS时，该参数必传</p>
+   * <p>证书ID</p><p>入参限制：当Scheme为HTTPS时，该参数必传</p>
    */
   CertId?: string
   /**
    * <p>集群信息</p>
    */
-  ClusterInfo?: ClusterInfo
+  ClusterInfo?: ClusterInfoInput
   /**
    * <p>模型路由实例名称</p><p>默认值：-</p>
    */
@@ -10511,6 +10653,14 @@ export interface CreateModelRouterRequest {
    * <p>模型路由实例所属VPC的ID</p>
    */
   VpcId?: string
+  /**
+   * <p>模型路由实例计费信息</p>
+   */
+  ModelRouterBillingConfig?: ModelRouterBillingConfigInput
+  /**
+   * <p>客户端Token，用于保证请求的幂等性。  从您的客户端生成一个参数值，确保不同请求间该参数值唯一。ClientToken只支持ASCII字符。</p>
+   */
+  ClientToken?: string
 }
 
 /**

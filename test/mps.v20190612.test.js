@@ -138,9 +138,19 @@ it("mps.v20190612.DeletePersonSample", async function () {
     }
 })
 
-it("mps.v20190612.DeleteAnimatedGraphicsTemplate", async function () {
+it("mps.v20190612.CreateAiFissionTask", async function () {
     try {
-       const data = await client.DeleteAnimatedGraphicsTemplate({})
+       const data = await client.CreateAiFissionTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.CloneVoice", async function () {
+    try {
+       const data = await client.CloneVoice({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1028,6 +1038,16 @@ it("mps.v20190612.DescribeStreamLinkRegions", async function () {
     }
 })
 
+it("mps.v20190612.TextToSpeech", async function () {
+    try {
+       const data = await client.TextToSpeech({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("mps.v20190612.DescribeSchedules", async function () {
     try {
        const data = await client.DescribeSchedules({})
@@ -1091,6 +1111,16 @@ it("mps.v20190612.DescribeDesignTask", async function () {
 it("mps.v20190612.StopStreamPackageLinearAssemblyChannel", async function () {
     try {
        const data = await client.StopStreamPackageLinearAssemblyChannel({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("mps.v20190612.DeleteAnimatedGraphicsTemplate", async function () {
+    try {
+       const data = await client.DeleteAnimatedGraphicsTemplate({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1348,9 +1378,9 @@ it("mps.v20190612.ModifyWatermarkTemplate", async function () {
     }
 })
 
-it("mps.v20190612.DeleteWordSamples", async function () {
+it("mps.v20190612.CreateVideoSearchTask", async function () {
     try {
-       const data = await client.DeleteWordSamples({})
+       const data = await client.CreateVideoSearchTask({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1438,9 +1468,9 @@ it("mps.v20190612.DescribeStreamPackageSourceAlerts", async function () {
     }
 })
 
-it("mps.v20190612.CreateVideoSearchTask", async function () {
+it("mps.v20190612.DeleteWordSamples", async function () {
     try {
-       const data = await client.CreateVideoSearchTask({})
+       const data = await client.DeleteWordSamples({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

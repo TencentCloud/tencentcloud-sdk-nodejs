@@ -40,7 +40,7 @@ import {
   AiAnalysisTaskClassificationInput,
   SvgWatermarkInput,
   CreateTranscodeTemplateRequest,
-  TransitionOpertion,
+  MPSSubtitleEmbedConfig,
   AudioTrackItem,
   MediaAiAnalysisHighlightItem,
   DescribeAnimatedGraphicsTemplatesRequest,
@@ -72,6 +72,7 @@ import {
   ManageTaskRequest,
   EnhanceConfig,
   MediaInputInfo,
+  MPSEmbedSubtitleTemplate,
   CreateImageSpriteTask2017,
   DescribeImageReviewUsageDataResponse,
   TempCertificate,
@@ -125,6 +126,7 @@ import {
   AiRecognitionTaskAsrWordsSegmentItem,
   CreateAigcAdvancedCustomElementResponse,
   TextWatermarkTemplateInput,
+  TransitionOpertion,
   SegmentConfigureInfoForUpdate,
   UserDefineAsrTextReviewTemplateInfoForUpdate,
   QualityEvaluationConfigureInfoForUpdate,
@@ -197,6 +199,7 @@ import {
   DescribeAigcFaceInfoAsyncTask,
   DeleteAIRecognitionTemplateRequest,
   FileUploadTask,
+  CreateKnowledgeBaseResponse,
   DescribeCDNStatDetailsResponse,
   AttachMediaSubtitlesRequest,
   AiAnalysisTaskCoverResult,
@@ -207,12 +210,14 @@ import {
   ModifyLLMComprehendTemplateResponse,
   DescribeAigcFaceInfoAsyncInput,
   AiAnalysisTaskClassificationOutput,
+  CreateKnowledgeBaseRequest,
   FileDeleteTask,
   ResourceTag,
   ImportMediaKnowledgeRequest,
   AigcImageSceneInfo,
   AiAnalysisTaskHighlightResult,
   DescribeEnhanceMediaTemplatesResponse,
+  PlayerConfig,
   CreateAigcVideoTaskResponse,
   ModifyAdaptiveDynamicStreamingTemplateResponse,
   CreateRebuildMediaTemplateResponse,
@@ -229,7 +234,7 @@ import {
   ElementReferInfo,
   OcrWordsConfigureInfoForUpdate,
   FileReviewInfo,
-  WatermarkTemplate,
+  MPSSubtitleLayoutConfig,
   CoverBySnapshotTaskOutput,
   WatermarkConfigureInfoForUpdate,
   ModifyQualityInspectTemplateResponse,
@@ -285,6 +290,7 @@ import {
   ClassificationConfigureInfoForUpdate,
   DeleteAdaptiveDynamicStreamingTemplateResponse,
   AigcAdvancedCustomElementInfo,
+  DescribeKnowledgeBasesRequest,
   CreateWordSamplesRequest,
   FrameTagConfigureInfo,
   DeleteVodDomainRequest,
@@ -308,6 +314,7 @@ import {
   MediaSubtitleItem,
   QualityInspectConfig,
   ProhibitedAsrReviewTemplateInfoForUpdate,
+  MPSSubtitleOutlineConfig,
   ModifyAnimatedGraphicsTemplateResponse,
   CreateSceneAigcImageTaskResponse,
   AiRecognitionTaskAsrTranslateSegmentItem,
@@ -453,7 +460,7 @@ import {
   AiRecognitionTaskOcrFullTextResult,
   DescribeCLSTopicsResponse,
   MPSSubTaskResult,
-  MediaTrackItem,
+  HeadTailTemplate,
   ImportMediaKnowledgeResponse,
   RestoreMediaResponse,
   ImageUnderstandingItem,
@@ -470,6 +477,7 @@ import {
   ComplexAdaptiveDynamicStreamingTaskAudioInput,
   CreateAigcCustomVoiceOutput,
   AudioVolumeBalanceInfo,
+  MPSEmbedSubtitleTemplateForUpdate,
   ModifyBlindWatermarkTemplateRequest,
   AiRecognitionTaskAsrWordsResultOutput,
   CreateAigcQuotaRequest,
@@ -509,6 +517,7 @@ import {
   DescribeDailyMostPlayedStatRequest,
   LiveRealTimeClipMediaSegmentInfo,
   ModifyLLMComprehendTemplateRequest,
+  ModifyKnowledgeBaseRequest,
   DeleteImageSpriteTemplateResponse,
   LowLightEnhanceInfo,
   DescribeContentReviewTemplatesResponse,
@@ -531,7 +540,7 @@ import {
   SetVodDomainCertificateResponse,
   ExtractTraceWatermarkTaskOutput,
   MediaProcessTaskCoverBySnapshotResult,
-  DeleteAigcApiTokenResponse,
+  CreateWatermarkTemplateRequest,
   BlackWhiteEdgeConfigureInfo,
   SortBy,
   AdvancedSuperResolutionConfig,
@@ -541,6 +550,7 @@ import {
   DescribePersonSamplesRequest,
   DescribeEventsStateRequest,
   WechatMiniProgramPublishTask,
+  ProcessImageAsync,
   DescribeDrmKeyProviderInfoRequest,
   AigcAudioTaskOutputFileInfo,
   CreateImageProcessingTemplateResponse,
@@ -554,7 +564,6 @@ import {
   ExecuteFunctionResponse,
   TranscodePlayInfo2017,
   SplitMediaTask,
-  CreateWatermarkTemplateRequest,
   ComposeMediaTaskInput,
   ModifyQualityInspectTemplateRequest,
   SceneAigcVideoOutputConfig,
@@ -580,7 +589,7 @@ import {
   ModifyVodDomainConfigRequest,
   AiSampleTagOperation,
   ComplexAdaptiveDynamicStreamingTaskOutput,
-  PlayerConfig,
+  MPSSubtitleShadowConfig,
   ComplexAdaptiveDynamicStreamingTaskResult,
   ConfirmEventsRequest,
   CreateAIRecognitionTemplateResponse,
@@ -615,7 +624,7 @@ import {
   ReviewImageResult,
   DeleteSampleSnapshotTemplateResponse,
   AiAnalysisTaskTagInput,
-  HeadTailTemplate,
+  DeleteAigcApiTokenResponse,
   DescribeStorageDetailsResponse,
   PullEventsResponse,
   MediaProcessTaskTranscodeResult,
@@ -677,10 +686,12 @@ import {
   AiReviewPoliticalAsrTaskInput,
   ExtractBlindWatermarkInputInfo,
   CreateQualityInspectTemplateRequest,
+  MPSSubtitleBoardConfig,
   ProcessMediaByProcedureRequest,
   RebuildMediaTargetVideoStream,
   VoiceConfigureInfo,
   SetCLSPushTargetResponse,
+  MediaTrackItem,
   ClipTask2017,
   DeletePersonSampleRequest,
   TranscodeTemplate,
@@ -702,6 +713,7 @@ import {
   ListFilesResponse,
   CreateRoundPlayRequest,
   ExtractBlindWatermarkTaskConfig,
+  WatermarkTemplate,
   ImageEncodeConfig,
   AiReviewTaskPornResult,
   AiRecognitionTaskObjectResultOutput,
@@ -713,6 +725,7 @@ import {
   CrashScreenConfigureInfoForUpdate,
   DescribeSampleSnapshotTemplatesRequest,
   CoverConfigureInfoForUpdate,
+  DeleteKnowledgeBaseResponse,
   AigcVideoTaskInputSubjectInfo,
   AiAnalysisTaskClassificationResult,
   PoliticalImgReviewTemplateInfoForUpdate,
@@ -771,6 +784,7 @@ import {
   ComposeMediaTaskOutput,
   DescribeQualityInspectTemplatesRequest,
   MPSOutputFileInfo,
+  ModifyKnowledgeBaseResponse,
   DescribeMediaInfosRequest,
   CreateAigcApiTokenRequest,
   DescribeDrmDataKeyRequest,
@@ -874,7 +888,7 @@ import {
   ModifyMPSTemplateResponse,
   AiRecognitionTaskFaceResultInput,
   RebuildMediaOutputConfig,
-  ProcessImageAsync,
+  KnowledgeBaseDetail,
   AiReviewPoliticalTaskOutput,
   AiReviewTaskPoliticalResult,
   ImportMediaKnowledgeTask,
@@ -930,6 +944,7 @@ import {
   MPSRawSmartEraseParameter,
   ExtractCopyRightWatermarkTaskInput,
   AsrTranslateConfigureInfo,
+  ImportMediaKnowledgeTaskInput,
   DescribeSampleSnapshotTemplatesResponse,
   ModifyProcessImageAsyncTemplateRequest,
   MPSRawSmartSubtitleParameter,
@@ -1022,6 +1037,7 @@ import {
   CreateWatermarkTemplateResponse,
   PornImgReviewTemplateInfo,
   QualityInspectTemplateItem,
+  DescribeKnowledgeBasesResponse,
   AiReviewPoliticalOcrTaskOutput,
   AigcTextDetailData,
   FileDeleteResultItem,
@@ -1036,6 +1052,7 @@ import {
   DescribeAnimatedGraphicsTemplatesResponse,
   ExtractCopyRightWatermarkTask,
   MediaAiAnalysisFrameTagItem,
+  DeleteKnowledgeBaseRequest,
   QualityInspectItem,
   DescribeAigcUsageDataResponse,
   DescribeCLSPushTargetsResponse,
@@ -1585,6 +1602,17 @@ export class Client extends AbstractClient {
   }
 
   /**
+     * 删除知识库。
+调用接口后，知识库会处于“删除中”状态，并在后台执行删除操作。
+     */
+  async DeleteKnowledgeBase(
+    req: DeleteKnowledgeBaseRequest,
+    cb?: (error: string, rep: DeleteKnowledgeBaseResponse) => void
+  ): Promise<DeleteKnowledgeBaseResponse> {
+    return this.request("DeleteKnowledgeBase", req, cb)
+  }
+
+  /**
      * 该接口用于开通某地域的存储。
   1. 用户开通点播业务时，系统默认为用户开通了部分地域的存储，用户如果需要开通其它地域的存储，可以通过该接口进行开通。
   2. 通过 DescribeStorageRegions 接口可以查询到所有存储地域及已经开通的地域。
@@ -1910,6 +1938,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAIAnalysisTemplateResponse) => void
   ): Promise<DeleteAIAnalysisTemplateResponse> {
     return this.request("DeleteAIAnalysisTemplate", req, cb)
+  }
+
+  /**
+   * 查询知识库列表。返回指定用户下的所有知识库信息。
+   */
+  async DescribeKnowledgeBases(
+    req: DescribeKnowledgeBasesRequest,
+    cb?: (error: string, rep: DescribeKnowledgeBasesResponse) => void
+  ): Promise<DescribeKnowledgeBasesResponse> {
+    return this.request("DescribeKnowledgeBases", req, cb)
   }
 
   /**
@@ -3165,6 +3203,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改知识库。可以修改知识库的名称和/或描述。至少需要提供 Name 或 Description 中的一个字段。
+   */
+  async ModifyKnowledgeBase(
+    req: ModifyKnowledgeBaseRequest,
+    cb?: (error: string, rep: ModifyKnowledgeBaseResponse) => void
+  ): Promise<ModifyKnowledgeBaseResponse> {
+    return this.request("ModifyKnowledgeBase", req, cb)
+  }
+
+  /**
    * 创建即时转码模板。
    */
   async CreateJustInTimeTranscodeTemplate(
@@ -3716,6 +3764,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifySubAppIdInfoResponse) => void
   ): Promise<ModifySubAppIdInfoResponse> {
     return this.request("ModifySubAppIdInfo", req, cb)
+  }
+
+  /**
+   * 创建知识库。用于为智能媒资功能创建一个新的知识库，每个用户最多可创建的20个知识库。
+   */
+  async CreateKnowledgeBase(
+    req: CreateKnowledgeBaseRequest,
+    cb?: (error: string, rep: CreateKnowledgeBaseResponse) => void
+  ): Promise<CreateKnowledgeBaseResponse> {
+    return this.request("CreateKnowledgeBase", req, cb)
   }
 
   /**

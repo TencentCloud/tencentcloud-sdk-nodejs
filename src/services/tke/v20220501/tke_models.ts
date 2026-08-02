@@ -450,6 +450,10 @@ export interface CreateNodePoolRequest {
    * <p>节点 Annotation 列表</p>
    */
   Annotations?: Array<Annotation>
+  /**
+   * <p>跳过校验选项，支持 &quot;VpcDnsCheck&quot;</p>
+   */
+  SkipValidateOptions?: Array<string>
 }
 
 /**

@@ -29,6 +29,7 @@ import {
   DBCustomNodeTypeInfo,
   ModifyInstanceNameResponse,
   DescribeDBCustomClusterNodeConfigRequest,
+  ModifyDBCustomNodeAttributesResponse,
   CreateDBCustomClusterResponse,
   DescribeDBCustomImagesRequest,
   ZoneInfo,
@@ -103,6 +104,7 @@ import {
   DescribeDBCustomNodeSecurityGroupsRequest,
   DescribeDBCustomClusterNodesResponse,
   DescribeInstanceDetailRequest,
+  ModifyDBCustomNodeAttributesRequest,
   DescribeDBCustomClusterKubeconfigResponse,
   ContainerNetwork,
   DescribeHostListRequest,
@@ -132,6 +134,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DestroyDBCustomNodeResponse) => void
   ): Promise<DestroyDBCustomNodeResponse> {
     return this.request("DestroyDBCustomNode", req, cb)
+  }
+
+  /**
+   * 该接口（ModifyDBCustomNodeAttributes）用于修改 DB Custom 节点的属性。
+   */
+  async ModifyDBCustomNodeAttributes(
+    req: ModifyDBCustomNodeAttributesRequest,
+    cb?: (error: string, rep: ModifyDBCustomNodeAttributesResponse) => void
+  ): Promise<ModifyDBCustomNodeAttributesResponse> {
+    return this.request("ModifyDBCustomNodeAttributes", req, cb)
   }
 
   /**

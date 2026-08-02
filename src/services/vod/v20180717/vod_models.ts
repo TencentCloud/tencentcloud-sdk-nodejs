@@ -636,59 +636,73 @@ export interface CreateTranscodeTemplateRequest {
 }
 
 /**
- * 转场操作
+ * MPS字幕压制模块配置
  */
-export interface TransitionOpertion {
+export interface MPSSubtitleEmbedConfig {
   /**
-   * 转场类型，取值有：
-<ul>
-<li>图像的转场操作，用于两个视频片段图像间的转场处理：
-<ul>
-<li>ImageFadeInFadeOut：图像淡入淡出。 </li>
-<li>BowTieHorizontal：水平蝴蝶结。 </li>
-<li>BowTieVertical：垂直蝴蝶结。 </li>
-<li>ButterflyWaveScrawler：晃动。 </li>
-<li>Cannabisleaf：枫叶。 </li>
-<li>Circle：弧形收放。 </li>
-<li>CircleCrop：圆环聚拢。 </li>
-<li>Circleopen：椭圆聚拢。 </li>
-<li>Crosswarp：横向翘曲。 </li>
-<li>Cube：立方体。 </li>
-<li>DoomScreenTransition：幕布。 </li>
-<li>Doorway：门廊。 </li>
-<li>Dreamy：波浪。 </li>
-<li>DreamyZoom：水平聚拢。 </li>
-<li>FilmBurn：火烧云。 </li>
-<li>GlitchMemories：抖动。 </li>
-<li>Heart：心形。 </li>
-<li>InvertedPageCurl：翻页。 </li>
-<li>Luma：腐蚀。 </li>
-<li>Mosaic：九宫格。 </li>
-<li>Pinwheel：风车。 </li>
-<li>PolarFunction：椭圆扩散。 </li>
-<li>PolkaDotsCurtain：弧形扩散。 </li>
-<li>Radial：雷达扫描 </li>
-<li>RotateScaleFade：上下收放。 </li>
-<li>Squeeze：上下聚拢。 </li>
-<li>Swap：放大切换。 </li>
-<li>Swirl：螺旋。 </li>
-<li>UndulatingBurnOutSwirl：水流蔓延。 </li>
-<li>Windowblinds：百叶窗。 </li>
-<li>WipeDown：向下收起。 </li>
-<li>WipeLeft：向左收起。 </li>
-<li>WipeRight：向右收起。 </li>
-<li>WipeUp：向上收起。 </li>
-<li>ZoomInCircles：水波纹。 </li>
-</ul>
-</li>
-<li>音频的转场操作，用于两个音频片段间的转场处理：
-<ul>
-<li>AudioFadeInFadeOut：声音淡入淡出。 </li>
-</ul>
-</li>
-</ul>
+   * <p>字体类型，支持：</p><li>hei.ttf：黑体</li><li>song.ttf：宋体</li><li>kai.ttf（推荐）或 simkai.ttf：楷体</li><li>msyh.ttf：微软雅黑</li><li>msyhbd.ttf：微软雅黑加粗</li><li>hkjgt.ttf：华康金刚体</li><li>dhttx.ttf：典黑体特细</li><li>xqgdzt.ttf：喜鹊古字典体</li><li>qpcyt.ttf：巧拼超圆体</li><li>arial.ttf：仅支持英文</li><li>dinalternate.ttf：DIN Alternate Bold</li><li>helveticalt.ttf：Helvetica</li><li>helveticains.ttf：Helvetica Inserat</li><li>trajanpro.ttf：TrajanPro-Bold</li><li>korean.ttf：韩语</li><li>japanese.ttf：日语</li><li>thai.ttf：泰语</li><li>roboto.ttf：Roboto</li><li>notosans.ttf：NotoSans</li><li>notosansthai.ttf：泰语NotoSansThai</li><li>sarabun.ttf：泰语Sarabun</li><li>kanit.ttf：泰语Kanit</li><li>charmonman.ttf：泰语Charmonman</li><li>notonaskharabic.ttf：阿拉伯语NotoNaskhArabic</li><li>notosansdevanagari.ttf：印度语NotoSansDevanagari</li><li>notosanstc.ttf：粤语思源黑体NotoSansTC</li><li>notosanskr.ttf：韩语NotoSansKR</li><li>gothica1.ttf：韩语GothicA1</li><li>nanummyeongjo.ttf：韩语NanumMyeongjo</li><li>notosansjp.ttf：日语NotoSansJP</li><li>notoserifjp.ttf：日语NotoSerifJP</li><li>shipporimincho.ttf：日语ShipporiMincho</li>默认：hei.ttf 黑体。<br>注意：<li>楷体推荐使用kai.ttf</li><li>填了FontPath时FontPath优先</li>
    */
-  Type: string
+  FontType?: string
+  /**
+   * <p>自定义字体文件url地址</p>
+   */
+  FontPath?: string
+  /**
+   * <p>字体大小，不指定则以字幕文件中为准。支持像素和百分比格式：</p><ul><li>像素：Npx，N范围：(0,4096]。</li><li>百分百：N%，N范围：(0,100]；例如10%表示字幕字体大小=10%*源视频高度。</li></ul><p>不填且字幕文件无设置时，默认源视频高度的5%。</p>
+   */
+  FontSize?: number
+  /**
+   * <p>FontSize单位, 0 像素，1百分比，默认为0，像素</p>
+   */
+  FontSizeUnit?: number
+  /**
+   * <p>字体颜色，格式：0xRRGGBB，默认值：0xFFFFFF（白色）。</p>
+   */
+  FontColor?: string
+  /**
+   * <p>文字透明度，取值范围：(0, 1]</p><li>0：完全透明</li><li>1：完全不透明</li>默认值：1。
+   */
+  FontAlpha?: number
+  /**
+   * <p>字幕x轴坐标位置，指定此参数会忽略字幕文件自带坐标；支持像素和百分比格式：</p><ul><li>像素：Npx，N范围：[-4096,4096]。</li><li>百分百：N%，N范围：[-100,100]；例如10%表示字幕x坐标=10%*源视频宽度。</li></ul><p>默认值：0px。<br>注意：坐标轴原点在源视频中轴线底部，字幕基准点在字幕中轴线底部，参考下图：<br><img src="https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png" alt="image"></p>
+   */
+  PosX?: number
+  /**
+   * <p>PosX单位, 0 像素，1百分比，默认为0，像素</p>
+   */
+  PosXUnit?: number
+  /**
+   * <p>字幕y轴坐标位置，指定此参数会忽略字幕文件自带坐标；支持像素和百分比格式：</p><ul><li>像素：Npx，N范围：[0,4096]。</li><li>百分百：N%，N范围：[0,100]；例如10%表示字幕y坐标=10%*源视频高度。</li></ul><p>默认值：源视频高度*4%。<br>注意：坐标轴原点在源视频中轴线底部，字幕基准点在字幕中轴线底部，参考下图：<br><img src="https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png" alt="image"></p>
+   */
+  PosY?: number
+  /**
+   * <p>PosY单位, 0 像素，1百分比，默认为0，像素</p>
+   */
+  PosYUnit?: number
+  /**
+   * <p>背景配置</p>
+   */
+  SubtitleBoardConfig?: MPSSubtitleBoardConfig
+  /**
+   * <p>排列配置</p>
+   */
+  SubtitleLayoutConfig?: MPSSubtitleLayoutConfig
+  /**
+   * <p>文字描边配置</p>
+   */
+  SubtitleOutlineConfig?: MPSSubtitleOutlineConfig
+  /**
+   * <p>文字阴影配置</p>
+   */
+  SubtitleShadowConfig?: MPSSubtitleShadowConfig
+  /**
+   * <p>源视频尺寸的宽，单位像素值</p>
+   */
+  SampleWidth?: number
+  /**
+   * <p>源视频尺寸的高，单位像素值</p>
+   */
+  SampleHeight?: number
 }
 
 /**
@@ -1454,6 +1468,24 @@ export interface MediaInputInfo {
    * 视频自定义 ID。
    */
   Id?: string
+}
+
+/**
+ * MPS压制字幕模板
+ */
+export interface MPSEmbedSubtitleTemplate {
+  /**
+   * <p>字幕压制模板名称<br>长度限制：64 个字符。</p>
+   */
+  Name?: string
+  /**
+   * <p>字幕压制模板描述信息<br>长度限制：256 个字符。</p>
+   */
+  Comment?: string
+  /**
+   * <p>字幕压制相关配置</p>
+   */
+  SubtitleEmbedConfig?: MPSSubtitleEmbedConfig
 }
 
 /**
@@ -2438,43 +2470,46 @@ export interface ModifySuperPlayerConfigRequest {
  */
 export interface ResetProcedureTemplateRequest {
   /**
-   * 任务流名字
+   * <p>任务流名字</p>
    */
   Name: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 模板描述信息，长度限制：256 个字符。
+   * <p>模板描述信息，长度限制：256 个字符。</p>
    */
   Comment?: string
   /**
-   * 视频处理类型任务参数。
+   * <p>视频处理类型任务参数。</p>
    */
   MediaProcessTask?: MediaProcessTaskInput
   /**
-   * AI 智能内容审核类型任务参数 \*。
-<font color=red>\*：该参数用于发起旧版审核，不建议使用。推荐使用 ReviewAudioVideoTask 参数发起审核。</font> 
+   * <p>AI 智能内容审核类型任务参数 *。<br><font color="red">*：该参数用于发起旧版审核，不建议使用。推荐使用 ReviewAudioVideoTask 参数发起审核。</font></p>
    */
   AiContentReviewTask?: AiContentReviewTaskInput
   /**
-   * AI 智能内容分析类型任务参数。
+   * <p>AI 智能内容分析类型任务参数。</p>
    */
   AiAnalysisTask?: AiAnalysisTaskInput
   /**
-   * AI 内容识别类型任务参数。
+   * <p>AI 内容识别类型任务参数。</p>
    */
   AiRecognitionTaskSet?: Array<AiRecognitionTaskInput>
   /**
-   * 该参数已不推荐使用，建议使用 AiRecognitionTaskSet。
+   * <p>该参数已不推荐使用，建议使用 AiRecognitionTaskSet。</p>
    * @deprecated
    */
   AiRecognitionTask?: AiRecognitionTaskInput
   /**
-   * 音视频审核类型任务参数。
+   * <p>音视频审核类型任务参数。</p>
    */
   ReviewAudioVideoTask?: ProcedureReviewAudioVideoTaskInput
+  /**
+   * <p>导入智能媒资知识库任务参数。</p>
+   */
+  ImportMediaKnowledgeTaskSet?: Array<ImportMediaKnowledgeTaskInput>
 }
 
 /**
@@ -2613,19 +2648,15 @@ export interface AigcFaceIdentityInfo {
  */
 export interface DeleteMPSTemplateRequest {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。</b></p>
    */
   SubAppId: number
   /**
-   * 需要删除的 MPS 模板的类型。取值：
-<li>Transcode: 删除转码模板。</li>
-<li>AIAnalysis: 创建智能分析模板。</li>
-<li>SmartSubtitle: 创建智能字幕模板。</li>
-<li>SmartErase: 创建智能擦除模板。</li>
+   * <p>需要删除的 MPS 模板的类型。取值：</p><li>AIAnalysis: 创建智能分析模板。</li><li>SmartSubtitle: 创建智能字幕模板。</li><li>SmartErase: 创建智能擦除模板。</li><li>EmbedSubtitle: 字幕压制模板。</li>
    */
   TemplateType: string
   /**
-   * MPS 任务模板唯一标识。
+   * <p>MPS 任务模板唯一标识。</p>
    */
   Definition: number
 }
@@ -2880,6 +2911,62 @@ export interface TextWatermarkTemplateInput {
 默认值：1。
    */
   FontAlpha: number
+}
+
+/**
+ * 转场操作
+ */
+export interface TransitionOpertion {
+  /**
+   * 转场类型，取值有：
+<ul>
+<li>图像的转场操作，用于两个视频片段图像间的转场处理：
+<ul>
+<li>ImageFadeInFadeOut：图像淡入淡出。 </li>
+<li>BowTieHorizontal：水平蝴蝶结。 </li>
+<li>BowTieVertical：垂直蝴蝶结。 </li>
+<li>ButterflyWaveScrawler：晃动。 </li>
+<li>Cannabisleaf：枫叶。 </li>
+<li>Circle：弧形收放。 </li>
+<li>CircleCrop：圆环聚拢。 </li>
+<li>Circleopen：椭圆聚拢。 </li>
+<li>Crosswarp：横向翘曲。 </li>
+<li>Cube：立方体。 </li>
+<li>DoomScreenTransition：幕布。 </li>
+<li>Doorway：门廊。 </li>
+<li>Dreamy：波浪。 </li>
+<li>DreamyZoom：水平聚拢。 </li>
+<li>FilmBurn：火烧云。 </li>
+<li>GlitchMemories：抖动。 </li>
+<li>Heart：心形。 </li>
+<li>InvertedPageCurl：翻页。 </li>
+<li>Luma：腐蚀。 </li>
+<li>Mosaic：九宫格。 </li>
+<li>Pinwheel：风车。 </li>
+<li>PolarFunction：椭圆扩散。 </li>
+<li>PolkaDotsCurtain：弧形扩散。 </li>
+<li>Radial：雷达扫描 </li>
+<li>RotateScaleFade：上下收放。 </li>
+<li>Squeeze：上下聚拢。 </li>
+<li>Swap：放大切换。 </li>
+<li>Swirl：螺旋。 </li>
+<li>UndulatingBurnOutSwirl：水流蔓延。 </li>
+<li>Windowblinds：百叶窗。 </li>
+<li>WipeDown：向下收起。 </li>
+<li>WipeLeft：向左收起。 </li>
+<li>WipeRight：向右收起。 </li>
+<li>WipeUp：向上收起。 </li>
+<li>ZoomInCircles：水波纹。 </li>
+</ul>
+</li>
+<li>音频的转场操作，用于两个音频片段间的转场处理：
+<ul>
+<li>AudioFadeInFadeOut：声音淡入淡出。 </li>
+</ul>
+</li>
+</ul>
+   */
+  Type: string
 }
 
 /**
@@ -3642,7 +3729,7 @@ export interface ModifyMPSTemplateRequest {
    */
   SubAppId: number
   /**
-   * <p>需要修改的 MPS 模板的类型。</p><p>枚举值：</p><ul><li>AIAnalysis： 智能分析模板</li><li>SmartSubtitle： 智能字幕模板</li><li>SmartErase： 智能擦除模板</li></ul>
+   * <p>需要修改的 MPS 模板的类型。</p><p>枚举值：</p><ul><li>AIAnalysis： 智能分析模板</li><li>SmartSubtitle： 智能字幕模板</li><li>SmartErase： 智能擦除模板</li><li>EmbedSubtitle： 字幕压制模板</li></ul>
    */
   TemplateType: string
   /**
@@ -3661,6 +3748,10 @@ export interface ModifyMPSTemplateRequest {
    * <p>智能擦除模板参数，MPSModifyTemplateParams为空时有效。</p>
    */
   SmartEraseTemplate?: MPSSmartEraseTemplateForUpdate
+  /**
+   * <p>字幕压制模板参数，MPSModifyTemplateParams为空时有效。</p>
+   */
+  EmbedSubtitleTemplate?: MPSEmbedSubtitleTemplateForUpdate
 }
 
 /**
@@ -4058,43 +4149,46 @@ export interface UserDefineAsrTextReviewTemplateInfo {
  */
 export interface CreateProcedureTemplateRequest {
   /**
-   * 任务流名字（支持中文，不超过20个字）。
+   * <p>任务流名字（支持中文，不超过20个字）。</p>
    */
   Name: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 模板描述信息，长度限制：256 个字符。
+   * <p>模板描述信息，长度限制：256 个字符。</p>
    */
   Comment?: string
   /**
-   * 视频处理类型任务参数。
+   * <p>视频处理类型任务参数。</p>
    */
   MediaProcessTask?: MediaProcessTaskInput
   /**
-   * AI 内容审核类型任务参数 \*。
-<font color=red>\*：该参数用于发起旧版审核，不建议使用。推荐使用 ReviewAudioVideoTask 参数发起审核。</font> 
+   * <p>AI 内容审核类型任务参数 *。<br><font color="red">*：该参数用于发起旧版审核，不建议使用。推荐使用 ReviewAudioVideoTask 参数发起审核。</font></p>
    */
   AiContentReviewTask?: AiContentReviewTaskInput
   /**
-   * AI 内容分析类型任务参数。
+   * <p>AI 内容分析类型任务参数。</p>
    */
   AiAnalysisTask?: AiAnalysisTaskInput
   /**
-   * AI 内容识别类型任务参数。
+   * <p>AI 内容识别类型任务参数。</p>
    */
   AiRecognitionTaskSet?: Array<AiRecognitionTaskInput>
   /**
-   * 该参数已不推荐使用，建议使用 AiRecognitionTaskSet。
+   * <p>该参数已不推荐使用，建议使用 AiRecognitionTaskSet。</p>
    * @deprecated
    */
   AiRecognitionTask?: AiRecognitionTaskInput
   /**
-   * 音视频审核类型任务参数。
+   * <p>音视频审核类型任务参数。</p>
    */
   ReviewAudioVideoTask?: ProcedureReviewAudioVideoTaskInput
+  /**
+   * <p>导入智能媒资知识库任务参数。</p>
+   */
+  ImportMediaKnowledgeTaskSet?: Array<ImportMediaKnowledgeTaskInput>
 }
 
 /**
@@ -4724,6 +4818,16 @@ export interface FileUploadTask {
 }
 
 /**
+ * CreateKnowledgeBase返回参数结构体
+ */
+export interface CreateKnowledgeBaseResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCDNStatDetails返回参数结构体
  */
 export interface DescribeCDNStatDetailsResponse {
@@ -4967,6 +5071,24 @@ export interface AiAnalysisTaskClassificationOutput {
 }
 
 /**
+ * CreateKnowledgeBase请求参数结构体
+ */
+export interface CreateKnowledgeBaseRequest {
+  /**
+   * <p>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</p>
+   */
+  SubAppId: number
+  /**
+   * <p>知识库名称。长度限制：1-64个字符。</p>
+   */
+  Name: string
+  /**
+   * <p>知识库描述。长度限制：最多256个字符。</p>
+   */
+  Description?: string
+}
+
+/**
  * 文件删除任务
  */
 export interface FileDeleteTask {
@@ -4999,21 +5121,23 @@ export interface ResourceTag {
  */
 export interface ImportMediaKnowledgeRequest {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。</b></p>
    */
   SubAppId: number
   /**
-   * 媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 [视频上传完成事件通知](/document/product/266/7830) 或 [云点播控制台](https://console.cloud.tencent.com/vod/media) 获取该字段。
+   * <p>媒体文件 ID，即该文件在云点播上的全局唯一标识符，在上传成功后由云点播后台分配。可以在 <a href="/document/product/266/7830">视频上传完成事件通知</a> 或 <a href="https://console.cloud.tencent.com/vod/media">云点播控制台</a> 获取该字段。</p>
    */
   FileId: string
   /**
-   * 大模型理解模板的唯一标识
+   * <p>大模型理解模板的唯一标识</p>
    */
   Definition?: number
   /**
-   * 需要导入知识库任务类型，可选值有：
-- AiAnalysis.DescriptionTask
-- SmartSubtitle.AsrFullTextTask
+   * <p>知识库ID列表，留空时将使用默认知识库</p>
+   */
+  KnowledgeBaseIds?: Array<string>
+  /**
+   * <p>需要导入知识库任务类型，可选值有：</p><ul><li>AiAnalysis.DescriptionTask</li><li>SmartSubtitle.AsrFullTextTask</li></ul>
    * @deprecated
    */
   ImportTasks?: Array<string>
@@ -5099,6 +5223,69 @@ export interface DescribeEnhanceMediaTemplatesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 播放器配置详情
+ */
+export interface PlayerConfig {
+  /**
+   * <p>播放器配置名字。</p>
+   */
+  Name?: string
+  /**
+   * <p>播放器配置类型，取值范围：</p><li>Preset：系统预置配置；</li><li>Custom：用户自定义配置。</li>
+   */
+  Type?: string
+  /**
+   * <p>播放的音视频类型，可选值有：</p><li>AdaptiveDynamicStream：自适应码流输出；</li><li>Transcode：转码输出；</li><li>Original：原始音视频。</li>
+   */
+  AudioVideoType?: string
+  /**
+   * <p>播放 DRM 保护的自适应码流开关：</p><li>ON：开启，表示仅播放 DRM  保护的自适应码流输出；</li><li>OFF：关闭，表示播放未加密的自适应码流输出。</li>
+   */
+  DrmSwitch?: string
+  /**
+   * <p>允许输出的未加密的自适应码流模板 ID。</p>
+   */
+  AdaptiveDynamicStreamingDefinition?: number
+  /**
+   * <p>允许输出的 DRM 自适应码流模板内容。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DrmStreamingsInfo?: DrmStreamingsInfo
+  /**
+   * <p>允许输出的转码模板 ID。</p>
+   */
+  TranscodeDefinition?: number
+  /**
+   * <p>允许输出的雪碧图模板 ID。</p>
+   */
+  ImageSpriteDefinition?: number
+  /**
+   * <p>播放器对不于不同分辨率的子流展示名字。</p>
+   */
+  ResolutionNameSet?: Array<ResolutionNameInfo>
+  /**
+   * <p>播放器配置创建时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>播放器配置最后修改时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>播放时使用的域名。值为 Default，表示使用<a href="https://cloud.tencent.com/document/product/266/33373">默认分发配置</a>中的域名。</p>
+   */
+  Domain?: string
+  /**
+   * <p>播放时使用的 Scheme。取值范围：</p><li>Default：使用[默认分发配置](https://cloud.tencent.com/document/product/266/33373)中的 Scheme；</li><li>HTTP；</li><li>HTTPS。</li>
+   */
+  Scheme?: string
+  /**
+   * <p>模板描述信息。</p>
+   */
+  Comment?: string
 }
 
 /**
@@ -5429,70 +5616,25 @@ export interface FileReviewInfo {
 }
 
 /**
- * 水印模板详情
+ * MPS字幕压制模块字幕排列配置
  */
-export interface WatermarkTemplate {
+export interface MPSSubtitleLayoutConfig {
   /**
-   * 水印模板唯一标识。
+   * <p>字幕排列配置开关，0关闭，1开启，默认0</p>
    */
-  Definition?: number
+  SubtitleLayoutConfigSwitch?: number
   /**
-   * 水印类型，取值：
-<li>image：图片水印；</li>
-<li>text：文字水印。</li>
+   * <p>行间距。正整数。 - 代表像素值时， [0, 1000]。 - 代表百分数时，[0, 100]。不填默认0。</p>
    */
-  Type?: string
+  LineSpacing?: number
   /**
-   * 水印模板名称。
+   * <p>LineSpacing单位，0 像素，1百分比，默认为0，像素</p>
    */
-  Name?: string
+  LineSpacingUnit?: number
   /**
-   * 模板描述信息。
+   * <p>对齐方式，取值：top: 顶部对齐，字幕顶部按位置固定，底部随行数变化。bottom: 底部对齐，字幕底部按位置固定，顶部随行数变化。不填默认底部对齐。</p>
    */
-  Comment?: string
-  /**
-   * 水印图片原点距离视频图像原点的水平位置。
-<li>当字符串以 % 结尾，表示水印 Left 为视频宽度指定百分比的位置，如 10% 表示 Left 为视频宽度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 Left 为视频宽度指定像素的位置，如 100px 表示 Left 为 100 像素。</li>
-   */
-  XPos?: string
-  /**
-   * 水印图片原点距离视频图像原点的垂直位置。
-<li>当字符串以 % 结尾，表示水印 Top 为视频高度指定百分比的位置，如 10% 表示 Top 为视频高度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 Top 为视频高度指定像素的位置，如 100px 表示 Top 为 100 像素。</li>
-   */
-  YPos?: string
-  /**
-   * 图片水印模板，仅当 Type 为 image，该字段有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  ImageTemplate?: ImageWatermarkTemplate
-  /**
-   * 文字水印模板，仅当 Type 为 text，该字段有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TextTemplate?: TextWatermarkTemplateInput
-  /**
-   * SVG 水印模板，当 Type 为 svg，该字段有效。
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SvgTemplate?: SvgWatermarkInput
-  /**
-   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  CreateTime?: string
-  /**
-   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  UpdateTime?: string
-  /**
-   * 原点位置，可选值：
-<li>topLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角；</li>
-<li>topRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；</li>
-<li>bottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；</li>
-<li>bottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下。；</li>
-   */
-  CoordinateOrigin?: string
+  Alignment?: string
 }
 
 /**
@@ -5929,72 +6071,77 @@ export interface PlayStatFileInfo {
  */
 export interface ModifyMediaInfoRequest {
   /**
-   * 媒体文件唯一标识。
+   * <p>媒体文件唯一标识。</p>
    */
   FileId: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 媒体文件名称，最长 64 个字符。
+   * <p>媒体文件名称，最长 64 个字符。</p>
    */
   Name?: string
   /**
-   * 媒体文件描述，最长 128 个字符。
+   * <p>媒体文件描述，最长 128 个字符。</p>
    */
   Description?: string
   /**
-   * 媒体文件分类 ID。
+   * <p>媒体文件分类 ID。</p>
    */
   ClassId?: number
   /**
-   * 媒体文件过期时间，采用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。填“9999-12-31T23:59:59Z”表示永不过期。过期后该媒体文件及其相关资源（转码结果、雪碧图等）将被永久删除。
+   * <p>媒体文件过期时间，采用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。填“9999-12-31T23:59:59Z”表示永不过期。过期后该媒体文件及其相关资源（转码结果、雪碧图等）将被永久删除。</p>
    */
   ExpireTime?: string
   /**
-   * 视频封面图片文件（如 jpeg, png 等）进行 [Base64](https://tools.ietf.org/html/rfc4648) 编码后的字符串，仅支持 gif、jpeg、png 三种图片格式。
+   * <p>视频封面图片文件（如 jpeg, png 等）进行 <a href="https://tools.ietf.org/html/rfc4648">Base64</a> 编码后的字符串，仅支持 gif、jpeg、png 三种图片格式。</p>
    */
   CoverData?: string
   /**
-   * 新增的一组视频打点信息，如果某个偏移时间已存在打点，则会进行覆盖操作，单个媒体文件最多 100 个打点信息。同一个请求里，AddKeyFrameDescs 的时间偏移参数必须与 DeleteKeyFrameDescs 都不同。
+   * <p>新增的一组视频打点信息，如果某个偏移时间已存在打点，则会进行覆盖操作，单个媒体文件最多 100 个打点信息。同一个请求里，AddKeyFrameDescs 的时间偏移参数必须与 DeleteKeyFrameDescs 都不同。</p>
    */
   AddKeyFrameDescs?: Array<MediaKeyFrameDescItem>
   /**
-   * 要删除的一组视频打点信息的时间偏移，单位：秒。同一个请求里，AddKeyFrameDescs 的时间偏移参数必须与 DeleteKeyFrameDescs 都不同。
+   * <p>要删除的一组视频打点信息的时间偏移，单位：秒。同一个请求里，AddKeyFrameDescs 的时间偏移参数必须与 DeleteKeyFrameDescs 都不同。</p>
    */
   DeleteKeyFrameDescs?: Array<number>
   /**
-   * 取值 1 表示清空视频打点信息，其他值无意义。
-同一个请求里，ClearKeyFrameDescs 与 AddKeyFrameDescs 不能同时出现。
+   * <p>取值 1 表示清空视频打点信息，其他值无意义。<br>同一个请求里，ClearKeyFrameDescs 与 AddKeyFrameDescs 不能同时出现。</p>
    */
   ClearKeyFrameDescs?: number
   /**
-   * 新增的一组标签，单个媒体文件最多 16 个标签，单个标签最多 32 个字符。同一个请求里，AddTags 参数必须与 DeleteTags 都不同。
+   * <p>新增的一组标签，单个媒体文件最多 16 个标签，单个标签最多 32 个字符。同一个请求里，AddTags 参数必须与 DeleteTags 都不同。</p>
    */
   AddTags?: Array<string>
   /**
-   * 要删除的一组标签。同一个请求里，AddTags 参数必须与 DeleteTags 都不同。
+   * <p>要删除的一组标签。同一个请求里，AddTags 参数必须与 DeleteTags 都不同。</p>
    */
   DeleteTags?: Array<string>
   /**
-   * 取值 1 表示清空媒体文件所有标签，其他值无意义。
-同一个请求里，ClearTags 与 AddTags 不能同时出现。
+   * <p>取值 1 表示清空媒体文件所有标签，其他值无意义。<br>同一个请求里，ClearTags 与 AddTags 不能同时出现。</p>
    */
   ClearTags?: number
   /**
-   * 新增一组字幕。单个媒体文件最多 16 个字幕。同一个请求中，AddSubtitles 中指定的字幕 Id 必须与 DeleteSubtitleIds 都不相同。
+   * <p>新增一组字幕。单个媒体文件最多 16 个字幕。同一个请求中，AddSubtitles 中指定的字幕 Id 必须与 DeleteSubtitleIds 都不相同。</p>
    */
   AddSubtitles?: Array<MediaSubtitleInput>
   /**
-   * 待删除字幕的唯一标识。同一个请求中，AddSubtitles 中指定的字幕 Id 必须与 DeleteSubtitleIds 都不相同。
+   * <p>待删除字幕的唯一标识。同一个请求中，AddSubtitles 中指定的字幕 Id 必须与 DeleteSubtitleIds 都不相同。</p>
    */
   DeleteSubtitleIds?: Array<string>
   /**
-   * 取值 1 表示清空媒体文件所有的字幕信息，其他值无意义。
-同一个请求里，ClearSubtitles 与 AddSubtitles不能同时出现。
+   * <p>取值 1 表示清空媒体文件所有的字幕信息，其他值无意义。<br>同一个请求里，ClearSubtitles 与 AddSubtitles不能同时出现。</p>
    */
   ClearSubtitles?: number
+  /**
+   * <p>待出库的知识库ID。</p>
+   */
+  DeleteKnowledgeBases?: Array<string>
+  /**
+   * <p>取值 1 表示从所有知识库中移除此媒体文件，其他值无意义。</p><p><br>同一个请求里，ClearKnowledgeBases 与 DeleteKnowledgeBases 不能同时出现。<p></p></p>
+   */
+  ClearKnowledgeBases?: number
 }
 
 /**
@@ -6946,6 +7093,28 @@ export interface AigcAdvancedCustomElementInfo {
 }
 
 /**
+ * DescribeKnowledgeBases请求参数结构体
+ */
+export interface DescribeKnowledgeBasesRequest {
+  /**
+   * <p>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</p>
+   */
+  SubAppId: number
+  /**
+   * <p>分页偏移量，默认值：0。</p>
+   */
+  Offset?: number
+  /**
+   * <p>返回记录条数，默认值：100，最大值：100。</p>
+   */
+  Limit?: number
+  /**
+   * <p>按知识库名称精确匹配筛选，不填则返回所有知识库。</p>
+   */
+  Name?: string
+}
+
+/**
  * CreateWordSamples请求参数结构体
  */
 export interface CreateWordSamplesRequest {
@@ -7058,6 +7227,10 @@ export interface MPSSmartSubtitleTemplateForUpdate {
    */
   SelectingSubtitleAreasConfig?: MPSSelectingSubtitleAreasConfig
   /**
+   * <p>压制模板id，只有ProcessType为0或2（任务类型为ASR或OCR）时才允许填写。开启多个翻译语言时，不允许填写。</p>
+   */
+  SubtitleEmbedId?: number
+  /**
    * <p>说话人识别开关，可选值：<br>0：表示不开启说话人识别；<br>1：表示开启说话人识别。</p>
    */
   SpeakerMode?: number
@@ -7135,6 +7308,10 @@ export interface LLMComprehendTemplateItem {
    * <p>图片异步处理模板描述信息。</p>
    */
   Comment?: string
+  /**
+   * <p>模板类型</p><p>枚举值：</p><ul><li>Preset： 系统预置模板</li><li>Custom： 用户自定义模板</li></ul>
+   */
+  Type?: string
   /**
    * <p>解析级别，可选值为：</p><ul><li>Audio: 音频级解析</li><li>Video: 视频级解析</li></ul>
    */
@@ -7604,6 +7781,32 @@ export interface ProhibitedAsrReviewTemplateInfoForUpdate {
    * 判定需人工复核是否违规的分数阈值，当审核达到该分数以上，认为需人工复核，不填默认为 75 分。取值范围：0~100。
    */
   ReviewConfidence?: number
+}
+
+/**
+ * MPS字幕压制模块文字描边配置
+ */
+export interface MPSSubtitleOutlineConfig {
+  /**
+   * <p>文字描边配置开关，0关闭，1开启，默认0</p>
+   */
+  SubtitleOutlineConfigSwitch?: number
+  /**
+   * <p>描边宽度，默认单位像素，底层默认值为源视频高度的0.3%</p>
+   */
+  OutlineWidth?: number
+  /**
+   * <p>描边宽度单位，0 像素，1百分比，默认为0，像素</p>
+   */
+  OutlineWidthUnit?: number
+  /**
+   * <p>描边颜色。6位16进制RGB。不填默认黑色。</p>
+   */
+  OutlineColor?: string
+  /**
+   * <p>描边透明度。(0，1] 正浮点数。不填默认1，完全不透明</p>
+   */
+  OutlineAlpha?: number
 }
 
 /**
@@ -9396,7 +9599,7 @@ export interface AigcVideoTaskInputFileInfo {
    */
   Type?: string
   /**
-   * <p>文件分类。取值为：</p><ul><li>Image: 图片；<strong>注意，要使用Usage字段定义图片类型</strong>。</li><li>Video: 视频。</li></ul>
+   * <p>文件分类。取值为：</p><ul><li>Image: 图片；</li><li>Video: 视频；</li><li>Audio: 音频；</li></ul>
    */
   Category?: string
   /**
@@ -10323,6 +10526,10 @@ export interface KnowledgeBasesInfo {
    * <p>知识库中媒体分析信息</p>
    */
   KnowledgeAnalysisInfos?: Array<KnowledgeAnalysisInfo>
+  /**
+   * <p>当前媒资当导入的知识库列表，以及使用的解析模板等详细信息</p>
+   */
+  KnowledgeBaseDetails?: Array<KnowledgeBaseDetail>
 }
 
 /**
@@ -11160,12 +11367,11 @@ export interface ComplexAdaptiveDynamicStreamingTask {
  */
 export interface ModifyMediaInfoResponse {
   /**
-   * 新的视频封面 URL。
-   * 注意：仅当请求携带 CoverData 时此返回值有效。 *
+   * <p>新的视频封面 URL。</p><ul><li>注意：仅当请求携带 CoverData 时此返回值有效。 *</li></ul>
    */
   CoverUrl?: string
   /**
-   * 新增的字幕信息。
+   * <p>新增的字幕信息。</p>
    */
   AddedSubtitleSet?: Array<MediaSubtitleItem>
   /**
@@ -11352,44 +11558,46 @@ export interface MPSSubTaskResult {
 }
 
 /**
- * 媒体轨道的片段信息
+ * 片头片尾模板详情
  */
-export interface MediaTrackItem {
+export interface HeadTailTemplate {
   /**
-   * 片段类型。取值有：
-<li>Video：视频片段。</li>
-<li>Audio：音频片段。</li>
-<li>Sticker：贴图片段。</li>
-<li>Transition：转场。</li>
-<li>Empty：空白片段。</li>
+   * 片头片尾模板号。
    */
-  Type: string
+  Definition?: number
   /**
-   * 视频片段，当 Type = Video 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 模板名，最大支持 64 个字符。
    */
-  VideoItem?: VideoTrackItem
+  Name?: string
   /**
-   * 音频片段，当 Type = Audio 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 模板描述，最大支持 256 个字符。
    */
-  AudioItem?: AudioTrackItem
+  Comment?: string
   /**
-   * 贴图片段，当 Type = Sticker 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 片头候选列表。使用时会选择跟正片分辨率最贴近的一个使用，当存在相同的候选时，选择第一个使用，最大支持 5 个。
    */
-  StickerItem?: StickerTrackItem
+  HeadCandidateSet?: Array<string>
   /**
-   * 转场，当 Type = Transition 时有效。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 片尾候选列表。使用时会选择跟正片分辨率最贴近的一个使用，当存在相同的候选时，选择第一个使用，最大支持 5 个。
    */
-  TransitionItem?: MediaTransitionItem
+  TailCandidateSet?: Array<string>
   /**
-   * 空白片段，当 Type = Empty 时有效。空片段用于时间轴的占位。<li>如需要两个音频片段之间有一段时间的静音，可以用 EmptyTrackItem 来进行占位。</li>
-<li>使用 EmptyTrackItem 进行占位，来定位某个Item。</li>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
+<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
+<li> gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊；</li>
+<li> white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充；</li>
+<li> black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
+默认值：stretch 。
    */
-  EmptyItem?: EmptyTrackItem
+  FillType?: string
+  /**
+   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  CreateTime?: string
+  /**
+   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  UpdateTime?: string
 }
 
 /**
@@ -11397,7 +11605,7 @@ export interface MediaTrackItem {
  */
 export interface ImportMediaKnowledgeResponse {
   /**
-   * 任务 ID。
+   * <p>任务 ID。</p>
    */
   TaskId?: string
   /**
@@ -11565,11 +11773,11 @@ export interface CreateAigcVideoTaskRequest {
    */
   ModelName: string
   /**
-   * <p>模型版本。取值：<br>当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast；<br>当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、2.6、O1、3.0、3.0-Omni；<br>当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo、q3、q3-pro、q3-turbo；<br>当 ModelName 是 GV，可选值为 3.1、3.1-fast；<br>当 ModelName 是 OS，可选值为 2.0；<br>当 ModelName 是 Hunyuan，可选值为 1.5；<br>当 ModelName 是 Mingmou，可选值为 1.0；<br>当 ModelName 是 PixVerse，可选值为 v5.6、v6、c1；</p>
+   * <p>模型版本。取值：<br>当 ModelName 是 Hailuo，可选值为 02、2.3、2.3-fast、H3；<br>当 ModelName 是 Kling，可选值为 1.6、2.0、2.1、2.5、2.6、O1、3.0、3.0-Omni；<br>当 ModelName 是 Vidu，可选值为 q2、q2-pro、q2-turbo、q3、q3-pro、q3-turbo；<br>当 ModelName 是 GV，可选值为 3.1、3.1-fast；<br>当 ModelName 是 OS，可选值为 2.0；<br>当 ModelName 是 Hunyuan，可选值为 1.5；<br>当 ModelName 是 Mingmou，可选值为 1.0；<br>当 ModelName 是 PixVerse，可选值为 v5.6、v6、c1；</p>
    */
   ModelVersion: string
   /**
-   * <p>用于描述模型在生成视频时要使用的资源文件，分为<strong>首尾帧模式、参考图、视频参考、视频编辑等模式</strong>。</p><p><strong>首尾帧视频生成</strong>：首帧图片只支持<strong>一张</strong>图片，<strong>图片的Usage字段为FirstFrame</strong>，LastFrameFileId 或者 LastFrameUrl 表示尾帧。可以单独传首帧，不能单独传尾帧。<strong>首尾帧生成会参考图片比例</strong>。<br><strong>参考图片生成</strong>：可传入单张图片或者多张，<strong>图片的Usage字段为Reference</strong>；参考图片，可以调整生成视频的宽高比例。<br><strong>视频编辑、视频参考</strong>：Vidu、Kling可输入视频作为参考或者进行编辑。传入视频的同时也可以传入图片，<strong>图片的Usage字段为Reference</strong>。</p><p>注意：</p><ol><li>图片大小不超过10M。</li><li>支持的图片格式：jpeg、jpg、png。x0b</li><li>关于模型某个版本是否支持参考图、首尾帧、视频编辑等功能，可向我们索取文档或者参考原厂文档信息。</li></ol>
+   * <p>用于描述模型在生成视频时要使用的资源文件，分为<strong>首尾帧模式、参考图片/视频/声音生成、视频编辑等模式</strong>。</p><p><strong>首尾帧视频生成</strong>：<strong>首帧图片的Usage字段为FirstFrame，尾帧图片的Usage字段为LastFrame</strong>，支持各一张，可以单独传首帧，不能单独传尾帧。<strong>首尾帧生成会参考图片比例</strong>。<br><strong>参考图片/视频/声音生成</strong>：可传入单个或者多个图片/视频/声音作为参考，<strong>Usage字段为Reference</strong>；<strong>参考模式，可以调整生成视频的宽高比例</strong>。<br><strong>视频编辑</strong>：Vidu、Kling可输入视频进行编辑。传入视频的同时也可以传入图片，<strong>图片的Usage字段为Reference</strong>。</p><p>注意：</p><ol><li>图片大小不超过10M。</li><li>支持的图片格式：jpeg、jpg、png。x0b</li><li>关于模型某个版本是否支持参考图片/视频/声音、首尾帧、视频编辑等功能，可向我们索取文档或者参考原厂文档信息。</li></ol>
    */
   FileInfos?: Array<AigcVideoTaskInputFileInfo>
   /**
@@ -11727,6 +11935,28 @@ export interface AudioVolumeBalanceInfo {
 默认值：loudNorm。
    */
   Type?: string
+}
+
+/**
+ * MPS压制字幕模板
+ */
+export interface MPSEmbedSubtitleTemplateForUpdate {
+  /**
+   * <p>字幕压制模板唯一标识</p>
+   */
+  Definition: number
+  /**
+   * <p>字幕压制名称<br>长度限制：64 个字符。</p>
+   */
+  Name?: string
+  /**
+   * <p>字幕压制模板描述信息<br>长度限制：256 个字符。</p>
+   */
+  Comment?: string
+  /**
+   * <p>字幕压制相关配置</p>
+   */
+  SubtitleEmbedConfig?: MPSSubtitleEmbedConfig
 }
 
 /**
@@ -12741,6 +12971,28 @@ export interface ModifyLLMComprehendTemplateRequest {
 }
 
 /**
+ * ModifyKnowledgeBase请求参数结构体
+ */
+export interface ModifyKnowledgeBaseRequest {
+  /**
+   * <p>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</p>
+   */
+  SubAppId: number
+  /**
+   * <p>要修改的知识库ID。</p>
+   */
+  KnowledgeBaseId: string
+  /**
+   * <p>新的知识库名称。长度限制：1-64个字符。</p>
+   */
+  Name?: string
+  /**
+   * <p>新的知识库描述。长度限制：最多256个字符。</p>
+   */
+  Description?: string
+}
+
+/**
  * DeleteImageSpriteTemplate返回参数结构体
  */
 export interface DeleteImageSpriteTemplateResponse {
@@ -13224,13 +13476,63 @@ export interface MediaProcessTaskCoverBySnapshotResult {
 }
 
 /**
- * DeleteAigcApiToken返回参数结构体
+ * CreateWatermarkTemplate请求参数结构体
  */
-export interface DeleteAigcApiTokenResponse {
+export interface CreateWatermarkTemplateRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 水印类型，可选值：
+<li>image：图片水印；</li>
+<li>text：文字水印；</li>
+<li>svg：SVG 水印。</li>
    */
-  RequestId?: string
+  Type: string
+  /**
+   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   */
+  SubAppId?: number
+  /**
+   * 水印模板名称，长度限制：64 个字符。
+   */
+  Name?: string
+  /**
+   * 模板描述信息，长度限制：256 个字符。
+   */
+  Comment?: string
+  /**
+   * 原点位置，可选值：
+<li>TopLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角；</li>
+<li>TopRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；</li>
+<li>BottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；</li>
+<li>BottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下角。</li>
+默认值：TopLeft。
+   */
+  CoordinateOrigin?: string
+  /**
+   * 水印原点距离视频图像坐标原点的水平位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 XPos 为指定像素，如 100px 表示 XPos 为 100 像素。</li>
+默认值：0px。
+   */
+  XPos?: string
+  /**
+   * 水印原点距离视频图像坐标原点的垂直位置。支持 %、px 两种格式：
+<li>当字符串以 % 结尾，表示水印 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 YPos 为指定像素，如 100px 表示 YPos 为 100 像素。</li>
+默认值：0px。
+   */
+  YPos?: string
+  /**
+   * 图片水印模板，当 Type 为 image，该字段必填。当 Type 为 text，该字段无效。
+   */
+  ImageTemplate?: ImageWatermarkInput
+  /**
+   * 文字水印模板，当 Type 为 text，该字段必填。当 Type 为 image，该字段无效。
+   */
+  TextTemplate?: TextWatermarkTemplateInput
+  /**
+   * SVG水印模板，当 Type 为 svg，该字段必填。当 Type 为 image 或 text，该字段无效。
+   */
+  SvgTemplate?: SvgWatermarkInput
 }
 
 /**
@@ -13313,23 +13615,15 @@ export interface AdvancedSuperResolutionConfig {
  */
 export interface DescribeMPSTemplatesRequest {
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。</b></p>
    */
   SubAppId: number
   /**
-   * MPS 模板类型。根据需要查询的 MPS 模板的类型对结果进行过滤。取值：
-<li>Transcode: 查询转码模板列表。</li>
-<li>AIAnalysis: 创建智能分析模板。</li>
-<li>SmartSubtitle: 创建智能字幕模板。</li>
-<li>SmartErase: 创建智能擦除模板。</li>
+   * <p>MPS 模板类型。根据需要查询的 MPS 模板的类型对结果进行过滤。取值：</p><li>AIAnalysis: 智能分析模板。</li><li>SmartSubtitle: 智能字幕模板。</li><li>SmartErase: 智能擦除模板。</li><li>EmbedSubtitle: 字幕压制模板。</li>
    */
   TemplateType: string
   /**
-   * MPS 查询模板参数。该参数用于透传至媒体处理服务（MPS），从云点播侧查询 MPS 任务模板列表。目前仅支持通过此方式查询以下任务类型的模板：
-1. 音视频增强：仅支持填写“[获取转码模板列表](https://cloud.tencent.com/document/product/862/37593)”接口中的 Definitions、Type、Name、Offset 和 Limit 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。
-2. 智能分析：仅支持填写“[获取智能分析模板列表](https://cloud.tencent.com/document/product/862/40247)”接口中的 Definitions、Type、Name、Offset 和 Limit 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。
-3. 智能字幕：仅支持填写“[获取智能字幕模板列表](https://cloud.tencent.com/document/product/862/117002)”接口中的 Definitions、Type、Name、Offset 和 Limit 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。
-4. 智能擦除：仅支持填写“[获取智能擦除模板列表](https://cloud.tencent.com/document/product/862/123733)”接口中的 Definitions、Type、Name、Offset 和 Limit 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。
+   * <p>MPS 查询模板参数。该参数用于透传至媒体处理服务（MPS），从云点播侧查询 MPS 任务模板列表。目前仅支持通过此方式查询以下任务类型的模板：</p><ol><li>音视频增强：仅支持填写“<a href="https://cloud.tencent.com/document/product/862/37593">获取转码模板列表</a>”接口中的 Definitions、Type、Name、Offset 和 Limit 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。</li><li>智能分析：仅支持填写“<a href="https://cloud.tencent.com/document/product/862/40247">获取智能分析模板列表</a>”接口中的 Definitions、Type、Name、Offset 和 Limit 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。</li><li>智能字幕：仅支持填写“<a href="https://cloud.tencent.com/document/product/862/117002">获取智能字幕模板列表</a>”接口中的 Definitions、Type、Name、Offset 和 Limit 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。</li><li>智能擦除：仅支持填写“<a href="https://cloud.tencent.com/document/product/862/123733">获取智能擦除模板列表</a>”接口中的 Definitions、Type、Name、Offset 和 Limit 几个参数的内容。目前仅支持在模板中配置以上参数，其他参数无需填写，若包含其它参数，系统将自动忽略。</li></ol>
    */
   MPSDescribeTemplateParams?: string
 }
@@ -13471,6 +13765,48 @@ FINISH：已完成。
 <li>Rejected：音视频审核未通过。</li>
    */
   PublishResult?: string
+}
+
+/**
+ * 图片异步处理任务信息
+ */
+export interface ProcessImageAsync {
+  /**
+   * 任务 ID。
+   */
+  TaskId?: string
+  /**
+   * 任务状态，取值：<li>PROCESSING：处理中；</li><li>FINISH：已完成。</li>
+   */
+  Status?: string
+  /**
+   * 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。
+   */
+  ErrCode?: number
+  /**
+   * 错误信息。
+   */
+  Message?: string
+  /**
+   * 任务进度，取值范围 [0-100] 。
+   */
+  Progress?: number
+  /**
+   * 图片异步处理任务的输入信息。
+   */
+  Input?: ProcessImageAsyncInput
+  /**
+   * 图片异步处理任务的输出信息。
+   */
+  Output?: ProcessImageAsyncOutput
+  /**
+   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   */
+  SessionId?: string
+  /**
+   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   */
+  SessionContext?: string
 }
 
 /**
@@ -13797,66 +14133,6 @@ export interface SplitMediaTask {
    * 视频拆条任务进度，取值范围 [0-100] 。
    */
   Progress?: number
-}
-
-/**
- * CreateWatermarkTemplate请求参数结构体
- */
-export interface CreateWatermarkTemplateRequest {
-  /**
-   * 水印类型，可选值：
-<li>image：图片水印；</li>
-<li>text：文字水印；</li>
-<li>svg：SVG 水印。</li>
-   */
-  Type: string
-  /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
-   */
-  SubAppId?: number
-  /**
-   * 水印模板名称，长度限制：64 个字符。
-   */
-  Name?: string
-  /**
-   * 模板描述信息，长度限制：256 个字符。
-   */
-  Comment?: string
-  /**
-   * 原点位置，可选值：
-<li>TopLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角；</li>
-<li>TopRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；</li>
-<li>BottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；</li>
-<li>BottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下角。</li>
-默认值：TopLeft。
-   */
-  CoordinateOrigin?: string
-  /**
-   * 水印原点距离视频图像坐标原点的水平位置。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示水印 XPos 为视频宽度指定百分比，如 10% 表示 XPos 为视频宽度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 XPos 为指定像素，如 100px 表示 XPos 为 100 像素。</li>
-默认值：0px。
-   */
-  XPos?: string
-  /**
-   * 水印原点距离视频图像坐标原点的垂直位置。支持 %、px 两种格式：
-<li>当字符串以 % 结尾，表示水印 YPos 为视频高度指定百分比，如 10% 表示 YPos 为视频高度的 10%；</li>
-<li>当字符串以 px 结尾，表示水印 YPos 为指定像素，如 100px 表示 YPos 为 100 像素。</li>
-默认值：0px。
-   */
-  YPos?: string
-  /**
-   * 图片水印模板，当 Type 为 image，该字段必填。当 Type 为 text，该字段无效。
-   */
-  ImageTemplate?: ImageWatermarkInput
-  /**
-   * 文字水印模板，当 Type 为 text，该字段必填。当 Type 为 image，该字段无效。
-   */
-  TextTemplate?: TextWatermarkTemplateInput
-  /**
-   * SVG水印模板，当 Type 为 svg，该字段必填。当 Type 为 image 或 text，该字段无效。
-   */
-  SvgTemplate?: SvgWatermarkInput
 }
 
 /**
@@ -14674,66 +14950,29 @@ export interface ComplexAdaptiveDynamicStreamingTaskOutput {
 }
 
 /**
- * 播放器配置详情
+ * MPS字幕压制模块文字阴影配置
  */
-export interface PlayerConfig {
+export interface MPSSubtitleShadowConfig {
   /**
-   * <p>播放器配置名字。</p>
+   * <p>文字阴影配置开关，0关闭，1开启，默认0</p>
    */
-  Name?: string
+  SubtitleShadowConfigSwitch?: number
   /**
-   * <p>播放器配置类型，取值范围：</p><li>Preset：系统预置配置；</li><li>Custom：用户自定义配置。</li>
+   * <p>阴影宽度，默认单位像素，底层默认值为0，无阴影</p>
    */
-  Type?: string
+  ShadowWidth?: number
   /**
-   * <p>播放的音视频类型，可选值有：</p><li>AdaptiveDynamicStream：自适应码流输出；</li><li>Transcode：转码输出；</li><li>Original：原始音视频。</li>
+   * <p>阴影宽度单位， 0 像素，1百分比，默认为0，像素</p>
    */
-  AudioVideoType?: string
+  ShadowWidthUnit?: number
   /**
-   * <p>播放 DRM 保护的自适应码流开关：</p><li>ON：开启，表示仅播放 DRM  保护的自适应码流输出；</li><li>OFF：关闭，表示播放未加密的自适应码流输出。</li>
+   * <p>阴影颜色。6位16进制RGB。不填默认黑色（有设置阴影的情况下）</p>
    */
-  DrmSwitch?: string
+  ShadowColor?: string
   /**
-   * <p>允许输出的未加密的自适应码流模板 ID。</p>
+   * <p>阴影透明度。(0，1] 正浮点数。不填默认1，完全不透明（有设置阴影的情况下）</p>
    */
-  AdaptiveDynamicStreamingDefinition?: number
-  /**
-   * <p>允许输出的 DRM 自适应码流模板内容。</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DrmStreamingsInfo?: DrmStreamingsInfo
-  /**
-   * <p>允许输出的转码模板 ID。</p>
-   */
-  TranscodeDefinition?: number
-  /**
-   * <p>允许输出的雪碧图模板 ID。</p>
-   */
-  ImageSpriteDefinition?: number
-  /**
-   * <p>播放器对不于不同分辨率的子流展示名字。</p>
-   */
-  ResolutionNameSet?: Array<ResolutionNameInfo>
-  /**
-   * <p>播放器配置创建时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
-   */
-  CreateTime?: string
-  /**
-   * <p>播放器配置最后修改时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
-   */
-  UpdateTime?: string
-  /**
-   * <p>播放时使用的域名。值为 Default，表示使用<a href="https://cloud.tencent.com/document/product/266/33373">默认分发配置</a>中的域名。</p>
-   */
-  Domain?: string
-  /**
-   * <p>播放时使用的 Scheme。取值范围：</p><li>Default：使用[默认分发配置](https://cloud.tencent.com/document/product/266/33373)中的 Scheme；</li><li>HTTP；</li><li>HTTPS。</li>
-   */
-  Scheme?: string
-  /**
-   * <p>模板描述信息。</p>
-   */
-  Comment?: string
+  ShadowAlpha?: number
 }
 
 /**
@@ -15414,46 +15653,13 @@ export interface AiAnalysisTaskTagInput {
 }
 
 /**
- * 片头片尾模板详情
+ * DeleteAigcApiToken返回参数结构体
  */
-export interface HeadTailTemplate {
+export interface DeleteAigcApiTokenResponse {
   /**
-   * 片头片尾模板号。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Definition?: number
-  /**
-   * 模板名，最大支持 64 个字符。
-   */
-  Name?: string
-  /**
-   * 模板描述，最大支持 256 个字符。
-   */
-  Comment?: string
-  /**
-   * 片头候选列表。使用时会选择跟正片分辨率最贴近的一个使用，当存在相同的候选时，选择第一个使用，最大支持 5 个。
-   */
-  HeadCandidateSet?: Array<string>
-  /**
-   * 片尾候选列表。使用时会选择跟正片分辨率最贴近的一个使用，当存在相同的候选时，选择第一个使用，最大支持 5 个。
-   */
-  TailCandidateSet?: Array<string>
-  /**
-   * 填充方式，当视频流配置宽高参数与原始视频的宽高比不一致时，对转码的处理方式，即为“填充”。可选填充方式：
-<li> stretch：拉伸，对每一帧进行拉伸，填满整个画面，可能导致转码后的视频被“压扁“或者“拉长“；</li>
-<li> gauss：高斯模糊，保持视频宽高比不变，边缘剩余部分使用高斯模糊；</li>
-<li> white：留白，保持视频宽高比不变，边缘剩余部分使用白色填充；</li>
-<li> black：留黑，保持视频宽高比不变，边缘剩余部分使用黑色填充。</li>
-默认值：stretch 。
-   */
-  FillType?: string
-  /**
-   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  CreateTime?: string
-  /**
-   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
-   */
-  UpdateTime?: string
+  RequestId?: string
 }
 
 /**
@@ -15630,61 +15836,62 @@ export interface ModifyDefaultDistributionConfigRequest {
  */
 export interface ProcedureTemplate {
   /**
-   * 任务流名字。
+   * <p>任务流名字。</p>
    */
   Name?: string
   /**
-   * 任务流模板类型，取值范围：
-<li>Preset：系统预置任务流模板；</li>
-<li>Custom：用户自定义任务流模板。</li>
+   * <p>任务流模板类型，取值范围：</p><li>Preset：系统预置任务流模板；</li><li>Custom：用户自定义任务流模板。</li>
    */
   Type?: string
   /**
-   * 模板描述信息，长度限制：256 个字符。
+   * <p>模板描述信息，长度限制：256 个字符。</p>
    */
   Comment?: string
   /**
-   * 视频处理类型任务参数。
+   * <p>视频处理类型任务参数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MediaProcessTask?: MediaProcessTaskInput
   /**
-   * AI 智能审核类型任务参数 \*。
-<font color=red>\*：该参数用于发起旧版审核，不建议使用。推荐使用 ReviewAudioVideoTask 参数发起审核。</font> 
+   * <p>AI 智能审核类型任务参数 *。<br><font color="red">*：该参数用于发起旧版审核，不建议使用。推荐使用 ReviewAudioVideoTask 参数发起审核。</font></p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AiContentReviewTask?: AiContentReviewTaskInput
   /**
-   * AI 智能内容分析类型任务参数。
+   * <p>AI 智能内容分析类型任务参数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AiAnalysisTask?: AiAnalysisTaskInput
   /**
-   * AI 内容识别类型任务参数。
+   * <p>AI 内容识别类型任务参数。</p>
    */
   AiRecognitionTaskSet?: Array<AiRecognitionTaskInput>
   /**
-   * 该参数已不推荐使用，建议使用 AiRecognitionTaskSet。
+   * <p>该参数已不推荐使用，建议使用 AiRecognitionTaskSet。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   AiRecognitionTask?: AiRecognitionTaskInput
   /**
-   * 微信小程序发布任务参数。
+   * <p>微信小程序发布任务参数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MiniProgramPublishTask?: WechatMiniProgramPublishTaskInput
   /**
-   * 音视频审核类型任务参数。
+   * <p>音视频审核类型任务参数。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ReviewAudioVideoTask?: ProcedureReviewAudioVideoTaskInput
   /**
-   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>导入智能媒资知识库任务参数。</p>
+   */
+  ImportMediaKnowledgeTaskSet?: Array<ImportMediaKnowledgeTaskInput>
+  /**
+   * <p>模板创建时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   CreateTime?: string
   /**
-   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   * <p>模板最后修改时间，使用 <a href="https://cloud.tencent.com/document/product/266/11732#I">ISO 日期格式</a>。</p>
    */
   UpdateTime?: string
 }
@@ -15754,19 +15961,23 @@ export interface CreateAigcSubjectOutput {
  */
 export interface SemanticsSearchResult {
   /**
-   * 媒体文件唯一标识 ID。
+   * <p>媒体文件唯一标识 ID。</p>
    */
   FileId?: string
   /**
-   * 视频在本次检索中的得分，得分越高和检索值越相似，取值范围[0,1]
+   * <p>智能媒资为当前片段生成的标题</p>
+   */
+  Title?: string
+  /**
+   * <p>视频在本次检索中的得分，得分越高和检索值越相似，取值范围[0,1]</p>
    */
   Score?: number
   /**
-   * 视频片段的开始时间，单位：秒
+   * <p>视频片段的开始时间，单位：秒</p>
    */
   StartTimeOffset?: number
   /**
-   * 视频片段的结束时间，单位：秒
+   * <p>视频片段的结束时间，单位：秒</p>
    */
   EndTimeOffset?: number
 }
@@ -15931,6 +16142,10 @@ export interface MPSSmartEraseSubtitleConfig {
    * <p>指定擦除自定义区域。<br>对选定区域，在选定时间段内不进行检测识别直接进行擦除。<br>注意：修改模板时，清除区域请传入[]，不传时将保持模板区域信息不变。</p>
    */
   CustomAreas?: Array<MPSEraseTimeArea>
+  /**
+   * <p>字幕压制模板id，只有开启OCR翻译时可以填写</p>
+   */
+  SubtitleEmbedId?: number
   /**
    * <p>压制配置，默认开启1, 把字幕压制回原字幕位置。只有开启OCR翻译时可以填写，取0时表示不开启压回原位</p>
    */
@@ -16216,7 +16431,7 @@ export interface CreateLLMComprehendTemplateRequest {
    */
   Comment?: string
   /**
-   * <p>分段摘要解析配置</p>
+   * <p>分段摘要解析配置<br>注意：当前版本必须要打开分段摘要，才可以正常进行解析</p>
    */
   Summary?: LLMComprehendSummary
   /**
@@ -16826,6 +17041,10 @@ export interface MPSSmartSubtitleTemplate {
    */
   SelectingSubtitleAreasConfig?: MPSSelectingSubtitleAreasConfig
   /**
+   * <p>压制模板id，只有ProcessType为0或2（任务类型为ASR或OCR）时才允许填写。开启多个翻译语言时，不允许填写。</p>
+   */
+  SubtitleEmbedId?: number
+  /**
    * <p>说话人识别开关，可选值：<br>0：表示不开启说话人识别；<br>1：表示开启说话人识别；<br>默认不开启说话人识别。</p>
    */
   SpeakerMode?: number
@@ -17038,46 +17257,93 @@ export interface CreateQualityInspectTemplateRequest {
 }
 
 /**
+ * MPS字幕压制模块背景配置
+ */
+export interface MPSSubtitleBoardConfig {
+  /**
+   * <p>字幕压制模块背景配置开关，0关闭，1开启，默认0</p>
+   */
+  SubtitleBoardConfigSwitch?: number
+  /**
+   * <p>字幕背景底板的x轴坐标位置；支持像素和百分比格式： - 像素：Npx，N范围：[-4096,4096]。 - 百分百：N%，N范围：[-100,100]；例如10%表示字幕背景底板x坐标=10%*源视频宽度。 默认值：0px。 注意：坐标轴原点位于源视频的中轴线底部，字幕底板的基准点在其中轴线底部，参考下图： <img src="https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png" alt="image"></p>
+   */
+  BoardX?: number
+  /**
+   * <p>BoardX单位, 0 像素，1百分比，默认为0，像素</p>
+   */
+  BoardXUnit?: number
+  /**
+   * <p>字幕背景底板的y轴坐标位置；支持像素和百分比格式： - 像素：Npx，N范围：[0,4096]。 - 百分百：N%，N范围：[0,100]；例如10%表示字幕背景底板y坐标=10%*源视频高度。 不传表示不开启字幕背景底板。 注意：坐标轴原点位于源视频的中轴线底部，字幕背景底板的基准点在其中轴线底部，参考下图： <img src="https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png" alt="image"></p>
+   */
+  BoardY?: number
+  /**
+   * <p>BoardY单位, 0 像素，1百分比，默认为0，像素</p>
+   */
+  BoardYUnit?: number
+  /**
+   * <p>底板的宽度，正整数。 - 代表像素时，取值范围：[0,4096]。 - 代表百分数时，[0, 100]。 开启底板且不填此值时，默认源视频宽像素的90%。</p>
+   */
+  BoardWidth?: number
+  /**
+   * <p>底板的宽度单位，0 像素，1百分比，默认为0，像素</p>
+   */
+  BoardWidthUnit?: number
+  /**
+   * <p>底板的高度，正整数。 - 代表像素时，取值范围：[0,4096]。 - 代表百分数时，[0, 100]。 开启底板且不填此值时，默认为源视频高像素的15%。</p>
+   */
+  BoardHeight?: number
+  /**
+   * <p>底板的高度单位，0 像素，1百分比，默认为0，像素</p>
+   */
+  BoardHeightUnit?: number
+  /**
+   * <p>底板颜色。格式：0xRRGGBB， 默认值：0x000000（黑色）。</p>
+   */
+  BoardColor?: string
+  /**
+   * <p>字幕背景板透明度，取值范围：[0, 1] <li>0：完全透明</li> <li>1：完全不透明</li> 默认值：0.8。</p>
+   */
+  BoardAlpha?: number
+}
+
+/**
  * ProcessMediaByProcedure请求参数结构体
  */
 export interface ProcessMediaByProcedureRequest {
   /**
-   * [任务流](https://cloud.tencent.com/document/product/266/33475#.E4.BB.BB.E5.8A.A1.E6.B5.81)名称。
+   * <p><a href="https://cloud.tencent.com/document/product/266/33475#.E4.BB.BB.E5.8A.A1.E6.B5.81">任务流</a>名称。</p>
    */
   ProcedureName: string
   /**
-   * 媒体文件 ID。
-FileId和MediaStoragePath必须提供其中一个。
+   * <p>媒体文件 ID。<br>FileId和MediaStoragePath必须提供其中一个。</p>
    */
   FileId?: string
   /**
-   * 媒体的存储路径。
-只有[FileID + Path 模式](https://cloud.tencent.com/document/product/266/126825)的子应用可以通过MediaStoragePath发起任务。
-FileId和MediaStoragePath必须提供其中一个。
+   * <p>媒体的存储路径。<br>只有<a href="https://cloud.tencent.com/document/product/266/126825">FileID + Path 模式</a>的子应用可以通过MediaStoragePath发起任务。<br>FileId和MediaStoragePath必须提供其中一个。</p>
    */
   MediaStoragePath?: string
   /**
-   * <b>点播[应用](/document/product/266/14574) ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b>
+   * <p><b>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</b></p>
    */
   SubAppId?: number
   /**
-   * 任务流的优先级，数值越大优先级越高，取值范围是-10到10，不填代表0。
+   * <p>任务流的优先级，数值越大优先级越高，取值范围是-10到10，不填代表0。</p>
    */
   TasksPriority?: number
   /**
-   * 任务流状态变更通知模式，可取值有 Finish，Change 和 None，不填代表 Finish。
+   * <p>任务流状态变更通知模式，可取值有 Finish，Change 和 None，不填代表 Finish。</p>
    */
   TasksNotifyMode?: string
   /**
-   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
+   * <p>来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。</p>
    */
   SessionContext?: string
   /**
-   * 用于去重的识别码，如果 7 天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+   * <p>用于去重的识别码，如果 7 天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。</p>
    */
   SessionId?: string
   /**
-   * 保留字段，特殊用途时使用。
+   * <p>保留字段，特殊用途时使用。</p>
    */
   ExtInfo?: string
 }
@@ -17166,6 +17432,47 @@ export interface SetCLSPushTargetResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 媒体轨道的片段信息
+ */
+export interface MediaTrackItem {
+  /**
+   * 片段类型。取值有：
+<li>Video：视频片段。</li>
+<li>Audio：音频片段。</li>
+<li>Sticker：贴图片段。</li>
+<li>Transition：转场。</li>
+<li>Empty：空白片段。</li>
+   */
+  Type: string
+  /**
+   * 视频片段，当 Type = Video 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VideoItem?: VideoTrackItem
+  /**
+   * 音频片段，当 Type = Audio 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AudioItem?: AudioTrackItem
+  /**
+   * 贴图片段，当 Type = Sticker 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StickerItem?: StickerTrackItem
+  /**
+   * 转场，当 Type = Transition 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TransitionItem?: MediaTransitionItem
+  /**
+   * 空白片段，当 Type = Empty 时有效。空片段用于时间轴的占位。<li>如需要两个音频片段之间有一段时间的静音，可以用 EmptyTrackItem 来进行占位。</li>
+<li>使用 EmptyTrackItem 进行占位，来定位某个Item。</li>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EmptyItem?: EmptyTrackItem
 }
 
 /**
@@ -17427,6 +17734,10 @@ export interface DescribeLLMComprehendTemplatesRequest {
    */
   Definitions?: Array<number | bigint>
   /**
+   * <p>排序方式。<br>Sort.Field 可选 Definition、CreateTime、UpdateTime。</p>
+   */
+  Sort?: SortBy
+  /**
    * <p>分页偏移量，默认值：0。</p>
    */
   Offset?: number
@@ -17670,6 +17981,73 @@ export interface ExtractBlindWatermarkTaskConfig {
 }
 
 /**
+ * 水印模板详情
+ */
+export interface WatermarkTemplate {
+  /**
+   * 水印模板唯一标识。
+   */
+  Definition?: number
+  /**
+   * 水印类型，取值：
+<li>image：图片水印；</li>
+<li>text：文字水印。</li>
+   */
+  Type?: string
+  /**
+   * 水印模板名称。
+   */
+  Name?: string
+  /**
+   * 模板描述信息。
+   */
+  Comment?: string
+  /**
+   * 水印图片原点距离视频图像原点的水平位置。
+<li>当字符串以 % 结尾，表示水印 Left 为视频宽度指定百分比的位置，如 10% 表示 Left 为视频宽度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Left 为视频宽度指定像素的位置，如 100px 表示 Left 为 100 像素。</li>
+   */
+  XPos?: string
+  /**
+   * 水印图片原点距离视频图像原点的垂直位置。
+<li>当字符串以 % 结尾，表示水印 Top 为视频高度指定百分比的位置，如 10% 表示 Top 为视频高度的 10%；</li>
+<li>当字符串以 px 结尾，表示水印 Top 为视频高度指定像素的位置，如 100px 表示 Top 为 100 像素。</li>
+   */
+  YPos?: string
+  /**
+   * 图片水印模板，仅当 Type 为 image，该字段有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ImageTemplate?: ImageWatermarkTemplate
+  /**
+   * 文字水印模板，仅当 Type 为 text，该字段有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TextTemplate?: TextWatermarkTemplateInput
+  /**
+   * SVG 水印模板，当 Type 为 svg，该字段有效。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SvgTemplate?: SvgWatermarkInput
+  /**
+   * 模板创建时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  CreateTime?: string
+  /**
+   * 模板最后修改时间，使用 [ISO 日期格式](https://cloud.tencent.com/document/product/266/11732#I)。
+   */
+  UpdateTime?: string
+  /**
+   * 原点位置，可选值：
+<li>topLeft：表示坐标原点位于视频图像左上角，水印原点为图片或文字的左上角；</li>
+<li>topRight：表示坐标原点位于视频图像的右上角，水印原点为图片或文字的右上角；</li>
+<li>bottomLeft：表示坐标原点位于视频图像的左下角，水印原点为图片或文字的左下角；</li>
+<li>bottomRight：表示坐标原点位于视频图像的右下角，水印原点为图片或文字的右下。；</li>
+   */
+  CoordinateOrigin?: string
+}
+
+/**
  * 图片编码格式参数
  */
 export interface ImageEncodeConfig {
@@ -17887,6 +18265,16 @@ export interface CoverConfigureInfoForUpdate {
 <li>OFF：关闭智能封面任务。</li>
    */
   Switch?: string
+}
+
+/**
+ * DeleteKnowledgeBase返回参数结构体
+ */
+export interface DeleteKnowledgeBaseResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -19483,6 +19871,16 @@ Output类型文件，不同MPS任务对应输出结果不同，具体返回内�
 }
 
 /**
+ * ModifyKnowledgeBase返回参数结构体
+ */
+export interface ModifyKnowledgeBaseResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeMediaInfos请求参数结构体
  */
 export interface DescribeMediaInfosRequest {
@@ -19495,7 +19893,7 @@ export interface DescribeMediaInfosRequest {
    */
   SubAppId?: number
   /**
-   * <p>指定所有媒体文件需要返回的信息，可同时指定多个信息，N 从 0 开始递增。如果未填写该字段，默认返回所有信息。选项有：</p><li>basicInfo（视频基础信息）。</li><li>metaData（视频元信息）。</li><li>transcodeInfo（视频转码结果信息）。</li><li>animatedGraphicsInfo（视频转动图结果信息）。</li><li>imageSpriteInfo（视频雪碧图信息）。</li><li>snapshotByTimeOffsetInfo（视频指定时间点截图信息）。</li><li>sampleSnapshotInfo（采样截图信息）。</li><li>keyFrameDescInfo（打点信息）。</li><li>adaptiveDynamicStreamingInfo（转自适应码流信息）。</li><li>miniProgramReviewInfo（小程序审核信息）。</li><li>subtitleInfo（字幕信息）。</li><li>reviewInfo（审核信息）。</li><li>mpsAiMediaInfo（mps智能媒资信息）。</li>
+   * <p>指定所有媒体文件需要返回的信息，可同时指定多个信息，N 从 0 开始递增。如果未填写该字段，默认返回所有信息。选项有：</p><li>basicInfo（视频基础信息）。</li><li>metaData（视频元信息）。</li><li>transcodeInfo（视频转码结果信息）。</li><li>animatedGraphicsInfo（视频转动图结果信息）。</li><li>imageSpriteInfo（视频雪碧图信息）。</li><li>snapshotByTimeOffsetInfo（视频指定时间点截图信息）。</li><li>sampleSnapshotInfo（采样截图信息）。</li><li>keyFrameDescInfo（打点信息）。</li><li>adaptiveDynamicStreamingInfo（转自适应码流信息）。</li><li>miniProgramReviewInfo（小程序审核信息）。</li><li>subtitleInfo（字幕信息）。</li><li>reviewInfo（审核信息）。</li><li>mpsAiMediaInfo（mps智能媒资信息）。</li><li>knowledgeBasesInfo（智能媒资知识库信息）。</li>
    */
   Filters?: Array<string>
 }
@@ -20433,7 +20831,7 @@ export interface CreateMPSTemplateRequest {
    */
   SubAppId: number
   /**
-   * <p>需要创建的 MPS 模板的类型。取值：</p><li>AIAnalysis: 创建智能分析模板。</li><li>SmartSubtitle: 创建智能字幕模板。</li><li>SmartErase: 创建智能擦除模板。</li>
+   * <p>需要创建的 MPS 模板的类型。取值：</p><li>AIAnalysis: 创建智能分析模板。</li><li>SmartSubtitle: 创建智能字幕模板。</li><li>SmartErase: 创建智能擦除模板。</li><li>EmbedSubtitle: 创建字幕压制模板。</li>
    */
   TemplateType: string
   /**
@@ -20452,6 +20850,10 @@ export interface CreateMPSTemplateRequest {
    * <p>智能擦除模板参数，MPSCreateTemplateParams为空时有效。</p>
    */
   SmartEraseTemplate?: MPSSmartEraseTemplate
+  /**
+   * <p>字幕压制模板参数，MPSCreateTemplateParams为空时有效。</p>
+   */
+  EmbedSubtitleTemplate?: MPSEmbedSubtitleTemplate
 }
 
 /**
@@ -21739,11 +22141,11 @@ export interface DescribeCLSLogsetsResponse {
  */
 export interface DescribeMPSTemplatesResponse {
   /**
-   * 符合过滤条件的记录总数。
+   * <p>符合过滤条件的记录总数。</p>
    */
   TotalCount?: number
   /**
-   * MPS 任务模板详情列表。
+   * <p>MPS 任务模板详情列表。</p>
    */
   MPSTemplateSet?: Array<MPSTemplate>
   /**
@@ -22111,45 +22513,21 @@ export interface RebuildMediaOutputConfig {
 }
 
 /**
- * 图片异步处理任务信息
+ * 媒资当导入的知识库列表，以及使用的解析模板等详细信息
  */
-export interface ProcessImageAsync {
+export interface KnowledgeBaseDetail {
   /**
-   * 任务 ID。
+   * <p>知识库ID</p>
    */
-  TaskId?: string
+  KnowledgeBaseId?: string
   /**
-   * 任务状态，取值：<li>PROCESSING：处理中；</li><li>FINISH：已完成。</li>
+   * <p>关联的大模型解析模板</p>
    */
-  Status?: string
+  Definition?: number
   /**
-   * 错误码。源异常时返回非0错误码，返回0时请使用各个具体任务的 ErrCode。
+   * <p>入库时间</p>
    */
-  ErrCode?: number
-  /**
-   * 错误信息。
-   */
-  Message?: string
-  /**
-   * 任务进度，取值范围 [0-100] 。
-   */
-  Progress?: number
-  /**
-   * 图片异步处理任务的输入信息。
-   */
-  Input?: ProcessImageAsyncInput
-  /**
-   * 图片异步处理任务的输出信息。
-   */
-  Output?: ProcessImageAsyncOutput
-  /**
-   * 用于去重的识别码，如果七天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
-   */
-  SessionId?: string
-  /**
-   * 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
-   */
-  SessionContext?: string
+  ImportTime?: string
 }
 
 /**
@@ -22229,19 +22607,27 @@ export interface AiReviewTaskPoliticalResult {
  */
 export interface ImportMediaKnowledgeTask {
   /**
-   * 任务 ID。
+   * <p>任务 ID。</p>
    */
   TaskId?: string
   /**
-   * 任务状态，取值：<li>PROCESSING：处理中；</li><li>FINISH：已完成。</li>
+   * <p>媒体文件 ID</p>
+   */
+  FileId?: string
+  /**
+   * <p>导入知识库任务的输入。</p>
+   */
+  Input?: ImportMediaKnowledgeTaskInput
+  /**
+   * <p>任务状态，取值：<li>PROCESSING：处理中；</li><li>FINISH：已完成。</li></p>
    */
   Status?: string
   /**
-   * 错误码，0 表示成功，其他值表示失败
+   * <p>错误码，0 表示成功，其他值表示失败</p>
    */
   ErrCode?: number
   /**
-   * 错误信息。
+   * <p>错误信息。</p>
    */
   Message?: string
 }
@@ -23552,6 +23938,20 @@ export interface AsrTranslateConfigureInfo {
 }
 
 /**
+ * 任务流模板导入智能媒资知识库输入参数类型。
+ */
+export interface ImportMediaKnowledgeTaskInput {
+  /**
+   * <p>大模型理解模板</p>
+   */
+  Definition: number
+  /**
+   * <p>知识库ID列表，留空时将使用默认知识库</p>
+   */
+  KnowledgeBaseIds?: Array<string>
+}
+
+/**
  * DescribeSampleSnapshotTemplates返回参数结构体
  */
 export interface DescribeSampleSnapshotTemplatesResponse {
@@ -23627,6 +24027,22 @@ export interface MPSRawSmartSubtitleParameter {
    * <p>字幕处理类型：</p><ul><li>0：ASR识别字幕</li><li>1：纯字幕翻译</li><li>2：OCR识别字幕</li></ul><p><strong>注意</strong>：不传的情况下默认类型为 ASR识别字幕</p>
    */
   ProcessType?: number
+  /**
+   * <p>字幕OCR提取框选区域配置</p>
+   */
+  SelectingSubtitleAreasConfig?: MPSSelectingSubtitleAreasConfig
+  /**
+   * <p>压制模板id，只有ProcessType为0或2（任务类型为ASR或OCR）时才允许填写</p>
+   */
+  SubtitleEmbedId?: number
+  /**
+   * <p>说话人识别模式，可选值：<br>0：表示不开启说话人识别；<br>1：表示开启说话人识别；<br>默认值：0</p>
+   */
+  SpeakerMode?: number
+  /**
+   * <p>说话人识别输出到字幕文件，可选值：<br>0：表示不输出到字幕文件；<br>1：表示输出到vtt字幕文件<br>注意：使用此参数SpeakerMode的值不能为0；<br>默认值：0</p>
+   */
+  SpeakerLabel?: number
 }
 
 /**
@@ -25971,13 +26387,17 @@ export interface ImageWatermarkInputForUpdate {
  */
 export interface ProcessMediaByProcedureResponse {
   /**
-   * 任务类型为 Procedure 的任务 ID，当入参 ProcedureName 对应的任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。
+   * <p>任务类型为 Procedure 的任务 ID，当入参 ProcedureName 对应的任务流模板指定了 MediaProcessTask、AiAnalysisTask、AiRecognitionTask 中的一个或多个时发起该任务。</p>
    */
   TaskId?: string
   /**
-   * 任务类型为 ReviewAudioVideo 的任务 ID，当入参 ProcedureName 对应的任务流模板指定了 ReviewAudioVideoTask 时，发起该任务。
+   * <p>任务类型为 ReviewAudioVideo 的任务 ID，当入参 ProcedureName 对应的任务流模板指定了 ReviewAudioVideoTask 时，发起该任务。</p>
    */
   ReviewAudioVideoTaskId?: string
+  /**
+   * <p>任务类型为 ImportMediaKnowledge 的任务 ID，当入参 ProcedureName 对应的任务流模板指定了 ImportMediaKnowledgeTaskSet 时，发起该任务。</p>
+   */
+  ImportMediaKnowledgeTaskIdSet?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -26267,6 +26687,16 @@ export interface QualityInspectTemplateItem {
    * <p>（不推荐，使用 Configs 替代）音频（静音、低音、爆音）检测的控制参数。</p>
    */
   VoiceConfigure?: VoiceConfigureInfo
+}
+
+/**
+ * DescribeKnowledgeBases返回参数结构体
+ */
+export interface DescribeKnowledgeBasesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -26614,6 +27044,20 @@ export interface MediaAiAnalysisFrameTagItem {
    * 按帧标签的可信度，取值范围是 0 到 100。
    */
   Confidence?: number
+}
+
+/**
+ * DeleteKnowledgeBase请求参数结构体
+ */
+export interface DeleteKnowledgeBaseRequest {
+  /**
+   * <p>点播<a href="/document/product/266/14574">应用</a> ID。从2023年12月25日起开通点播的客户，如访问点播应用中的资源（无论是默认应用还是新创建的应用），必须将该字段填写为应用 ID。</p>
+   */
+  SubAppId: number
+  /**
+   * <p>要删除的知识库ID。</p>
+   */
+  KnowledgeBaseId: string
 }
 
 /**
@@ -27936,6 +28380,10 @@ export interface SearchMediaBySemanticsRequest {
    * <p>需要进行搜索的内容</p>
    */
   Text: string
+  /**
+   * <p>知识库ID，留空时将使用默认知识库</p>
+   */
+  KnowledgeBaseId?: string
   /**
    * <p>返回的记录条数，默认值：20。</p><p>取值范围：[1, 100]</p>
    */

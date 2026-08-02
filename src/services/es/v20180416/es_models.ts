@@ -1521,6 +1521,11 @@ export interface ServerlessSpace {
 }
 
 /**
+ * RequestInstances请求参数结构体
+ */
+export type RequestInstancesRequest = null
+
+/**
  * CheckMigrateIndexMetaData返回参数结构体
  */
 export interface CheckMigrateIndexMetaDataResponse {
@@ -1958,13 +1963,19 @@ export interface LogstashPipeline {
 }
 
 /**
- * CreateIndex返回参数结构体
+ * 普通索引信息列表
  */
-export interface CreateIndexResponse {
+export interface CommonIndexInfo {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 普通索引名
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  RequestId?: string
+  IndexName?: string
+  /**
+   * 分片状态
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsShardComplete?: number
 }
 
 /**
@@ -2714,9 +2725,22 @@ export interface VpcInfo {
 }
 
 /**
- * RequestInstances请求参数结构体
+ * ModifyAutoScaleDiskInfo请求参数结构体
  */
-export type RequestInstancesRequest = null
+export interface ModifyAutoScaleDiskInfoRequest {
+  /**
+   * 实例名称
+   */
+  InstanceId: string
+  /**
+   * 自动扩盘参数列表
+   */
+  AutoScaleDiskInfoList?: Array<AutoScaleDiskInfo>
+  /**
+   * 需要删除的自动扩盘节点类型
+   */
+  DeleteNodeTypeList?: Array<string>
+}
 
 /**
  * RestartKibana返回参数结构体
@@ -2739,21 +2763,17 @@ export interface DescribeRequestInstancePolicyRequest {
 }
 
 /**
- * 智能运维集群配置详情
+ * ModifyAutoScaleDiskInfo返回参数结构体
  */
-export interface SettingDetail {
+export interface ModifyAutoScaleDiskInfoResponse {
   /**
-   * 配置key
+   * true 成功; false 失败
    */
-  Key: string
+  Status?: boolean
   /**
-   * 配置当前值
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Value: string
-  /**
-   * 配置处理建议
-   */
-  Advise: string
+  RequestId?: string
 }
 
 /**
@@ -3727,19 +3747,13 @@ export interface EventDataDetail {
 }
 
 /**
- * 普通索引信息列表
+ * CreateIndex返回参数结构体
  */
-export interface CommonIndexInfo {
+export interface CreateIndexResponse {
   /**
-   * 普通索引名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IndexName?: string
-  /**
-   * 分片状态
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  IsShardComplete?: number
+  RequestId?: string
 }
 
 /**
@@ -6101,6 +6115,24 @@ export interface Snapshots {
 }
 
 /**
+ * 智能运维集群配置详情
+ */
+export interface SettingDetail {
+  /**
+   * 配置key
+   */
+  Key: string
+  /**
+   * 配置当前值
+   */
+  Value: string
+  /**
+   * 配置处理建议
+   */
+  Advise: string
+}
+
+/**
  * UpdateJdk返回参数结构体
  */
 export interface UpdateJdkResponse {
@@ -6260,39 +6292,13 @@ export interface UpdateIndexRequest {
 }
 
 /**
- * Serverless实例，网络、索引、kibana等连接信息
+ * RestartNodes返回参数结构体
  */
-export interface ServerlessIndexNetworkField {
+export interface RestartNodesResponse {
   /**
-   * 地域
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Region?: string
-  /**
-   * 区域
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Zone?: string
-  /**
-   * vpc唯一ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  VpcUid?: string
-  /**
-   * 子网唯一ID
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SubnetUid?: string
-  /**
-   * 用户名
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Username?: string
-  /**
-   * 密码
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Password?: string
+  RequestId?: string
 }
 
 /**
@@ -6801,6 +6807,42 @@ export interface BackingIndexMetaField {
    * <p>索引Uuid</p>
    */
   IndexUuid?: string
+}
+
+/**
+ * Serverless实例，网络、索引、kibana等连接信息
+ */
+export interface ServerlessIndexNetworkField {
+  /**
+   * 地域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Region?: string
+  /**
+   * 区域
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Zone?: string
+  /**
+   * vpc唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VpcUid?: string
+  /**
+   * 子网唯一ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubnetUid?: string
+  /**
+   * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Username?: string
+  /**
+   * 密码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
 }
 
 /**
@@ -7428,6 +7470,33 @@ export interface DiSourceTke {
 }
 
 /**
+ * CheckUpdateInstance返回参数结构体
+ */
+export interface CheckUpdateInstanceResponse {
+  /**
+   * 是否允许变配操作
+   */
+  AllowUpdate?: boolean
+  /**
+   * 不允许变配的原因
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ErrMsg?: string
+  /**
+   * 是否需要设置分片迁移并发相关参数
+   */
+  NeedSetShards?: boolean
+  /**
+   * 是否需要开启置放群组异步任务
+   */
+  EnableScheduleRecoverGroupTask?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLogstashPipelines返回参数结构体
  */
 export interface DescribeLogstashPipelinesResponse {
@@ -7625,13 +7694,66 @@ export interface DescribeLogstashInstanceLogsRequest {
 }
 
 /**
- * RestartNodes返回参数结构体
+ * CheckUpdateInstance请求参数结构体
  */
-export interface RestartNodesResponse {
+export interface CheckUpdateInstanceRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 实例ID
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * 已废弃，请使用NodeInfoList
+变配后的节点个数（2-50个）
+   */
+  NodeNum?: number
+  /**
+   * 已废弃，请使用NodeInfoList
+变配后的节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+   */
+  NodeType?: string
+  /**
+   * 已废弃，请使用NodeInfoList
+变配后的磁盘大小（单位GB）
+   */
+  DiskSize?: number
+  /**
+   * 已废弃，请使用NodeInfoList
+变配后的专用主节点个数（仅支持3个和5个）
+   */
+  MasterNodeNum?: number
+  /**
+   * 已废弃，请使用NodeInfoList
+变配后的专用主节点规格<li>ES.S1.SMALL2：1核2G</li><li>ES.S1.MEDIUM4：2核4G</li><li>ES.S1.MEDIUM8：2核8G</li><li>ES.S1.LARGE16：4核16G</li><li>ES.S1.2XLARGE32：8核32G</li><li>ES.S1.4XLARGE64：16核64G</li>
+   */
+  MasterNodeType?: string
+  /**
+   * 节点信息列表，可以只传递要更新的节点及其对应的规格信息。支持的操作包括<li>修改一种节点的个数</li><li>修改一种节点的节点规格及磁盘大小</li><li>增加一种节点类型（需要同时指定该节点的类型，个数，规格，磁盘等信息）</li>上述操作一次只能进行一种，且磁盘类型不支持修改
+   */
+  NodeInfoList?: Array<NodeInfo>
+  /**
+   * 更新配置时是否强制重启<li>true强制重启</li><li>false不强制重启</li>默认值为false
+   */
+  ForceRestart?: boolean
+  /**
+   * 0: 蓝绿变更方式扩容，集群不重启 （默认） 1: 磁盘解挂载扩容，集群滚动重启
+   */
+  ScaleType?: number
+  /**
+   * 多可用区部署
+   */
+  MultiZoneInfo?: Array<ZoneDetail>
+  /**
+   * 可视化节点配置
+   */
+  WebNodeTypeInfo?: WebNodeTypeInfo
+  /**
+   * COS自动备份信息
+   */
+  CosBackup?: CosBackup
+  /**
+   * 读写分离模式：-1-不开启，1-本地读写分离，2-远端读写分离
+   */
+  ReadWriteMode?: number
 }
 
 /**

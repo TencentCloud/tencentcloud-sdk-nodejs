@@ -75,6 +75,7 @@ import {
   DescribeUpgradeResponse,
   DeleteClusterSnapshotRequest,
   ServerlessSpace,
+  RequestInstancesRequest,
   CheckMigrateIndexMetaDataResponse,
   RegionsData,
   DescribeDiagnoseRequest,
@@ -89,7 +90,7 @@ import {
   UpdateIpTraceStatusRequest,
   InstanceLog,
   LogstashPipeline,
-  CreateIndexResponse,
+  CommonIndexInfo,
   DescribeServerlessSpaceUserResponse,
   LogDetail,
   CreateCollectorRequest,
@@ -121,10 +122,10 @@ import {
   NodeTypeDiskSizeRange,
   DeleteInstanceResponse,
   VpcInfo,
-  RequestInstancesRequest,
+  ModifyAutoScaleDiskInfoRequest,
   RestartKibanaResponse,
   DescribeRequestInstancePolicyRequest,
-  SettingDetail,
+  ModifyAutoScaleDiskInfoResponse,
   DescribeLogstashInstanceOperationsResponse,
   CreateIndexRequest,
   LogstashPipelineInfo,
@@ -160,7 +161,7 @@ import {
   DiDataSourceTke,
   ClusterView,
   EventDataDetail,
-  CommonIndexInfo,
+  CreateIndexResponse,
   DeleteAutoBackUpStrategyRequest,
   InquirePriceRenewInstanceResponse,
   CreateClusterSnapshotRequest,
@@ -216,13 +217,14 @@ import {
   DeleteAutoBackUpStrategyResponse,
   DescribeIndexMetaRequest,
   Snapshots,
+  SettingDetail,
   UpdateJdkResponse,
   QueryZoneResourceForLogstashResponse,
   LogstashNodeView,
   DescribeUserCosSnapshotListResponse,
   UpdateLogstashInstanceResponse,
   UpdateIndexRequest,
-  ServerlessIndexNetworkField,
+  RestartNodesResponse,
   ExportIpTraceLogResponse,
   DescribeRegionsRequest,
   EventDataInfoOverview,
@@ -242,6 +244,7 @@ import {
   CreateCosMigrateToServerlessInstanceResponse,
   RestartInstanceResponse,
   BackingIndexMetaField,
+  ServerlessIndexNetworkField,
   IpTimePair,
   IndexSettingsField,
   UpdateServerlessSpaceResponse,
@@ -254,6 +257,7 @@ import {
   UpdateInstanceRequest,
   CreateAutoBackUpStrategyResponse,
   DiSourceTke,
+  CheckUpdateInstanceResponse,
   DescribeLogstashPipelinesResponse,
   CreateServerlessInstanceResponse,
   DescribeEsInstanceEventListsRequest,
@@ -263,7 +267,7 @@ import {
   DescribeInstancePluginListResponse,
   DiSourceCvm,
   DescribeLogstashInstanceLogsRequest,
-  RestartNodesResponse,
+  CheckUpdateInstanceRequest,
   DescribeServerlessSpacesRequest,
   RestartInstanceRequest,
   LogstashExtendedFile,
@@ -692,6 +696,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 检查实例变配操作是否可以发起
+   */
+  async CheckUpdateInstance(
+    req: CheckUpdateInstanceRequest,
+    cb?: (error: string, rep: CheckUpdateInstanceResponse) => void
+  ): Promise<CheckUpdateInstanceResponse> {
+    return this.request("CheckUpdateInstance", req, cb)
+  }
+
+  /**
    * 查询IP溯源日志原始数据
    */
   async ExportIpTraceLog(
@@ -849,6 +863,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAutoBackUpStrategyResponse) => void
   ): Promise<DescribeAutoBackUpStrategyResponse> {
     return this.request("DescribeAutoBackUpStrategy", req, cb)
+  }
+
+  /**
+   * 获取集群节点磁盘大小上下限
+   */
+  async DescribeClusterDiskRange(
+    req: DescribeClusterDiskRangeRequest,
+    cb?: (error: string, rep: DescribeClusterDiskRangeResponse) => void
+  ): Promise<DescribeClusterDiskRangeResponse> {
+    return this.request("DescribeClusterDiskRange", req, cb)
   }
 
   /**
@@ -1148,13 +1172,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取集群节点磁盘大小上下限
+   * 修改自动扩盘参数
    */
-  async DescribeClusterDiskRange(
-    req: DescribeClusterDiskRangeRequest,
-    cb?: (error: string, rep: DescribeClusterDiskRangeResponse) => void
-  ): Promise<DescribeClusterDiskRangeResponse> {
-    return this.request("DescribeClusterDiskRange", req, cb)
+  async ModifyAutoScaleDiskInfo(
+    req: ModifyAutoScaleDiskInfoRequest,
+    cb?: (error: string, rep: ModifyAutoScaleDiskInfoResponse) => void
+  ): Promise<ModifyAutoScaleDiskInfoResponse> {
+    return this.request("ModifyAutoScaleDiskInfo", req, cb)
   }
 
   /**
