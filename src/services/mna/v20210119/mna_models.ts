@@ -172,11 +172,11 @@ export interface UpdateNetInfo {
  */
 export interface UpdateL3SwitchRequest {
   /**
-   * 互通规则ID
+   * <p>互通规则ID</p>
    */
   L3ConnId: string
   /**
-   * 互通规则开关
+   * <p>互通规则开关</p>
    */
   Enable?: boolean
 }
@@ -309,11 +309,11 @@ export interface AddApplicationRequest {
  */
 export interface ModifyPackageRenewFlagRequest {
   /**
-   * 流量包的唯一资源ID
+   * <p>流量包的唯一资源ID</p>
    */
   ResourceId: string
   /**
-   * 自动续费标识。true代表自动续费，false代表不自动续费
+   * <p>自动续费标识。true代表自动续费，false代表不自动续费</p>
    */
   RenewFlag: boolean
 }
@@ -2791,23 +2791,23 @@ export interface Hardware {
  */
 export interface UpdateL3CidrRequest {
   /**
-   * 互通规则ID
+   * <p>互通规则ID</p>
    */
   L3ConnId: string
   /**
-   * 互通规则CIDR
+   * <p>互通规则CIDR</p>
    */
   Cidr1: string
   /**
-   * 互通设备ID
+   * <p>互通设备ID</p>
    */
   DeviceId1?: string
   /**
-   * 互通设备ID
+   * <p>互通设备ID</p>
    */
   DeviceId2?: string
   /**
-   * 互通规则CIDR
+   * <p>互通规则CIDR</p>
    */
   Cidr2?: string
 }

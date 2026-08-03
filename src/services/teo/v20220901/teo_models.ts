@@ -472,8 +472,10 @@ export interface OriginDetail {
 <li>当 OriginType = IP_DOMAIN 时，该参数为 IPv4、IPv6 地址或域名；</li>
 <li>当 OriginType = COS 时，该参数为 COS 桶的访问域名；</li>
 <li>当 OriginType = AWS_S3，该参数为 S3 桶的访问域名；</li>
-<li>当 OriginType = ORIGIN_GROUP 时，该参数为源站组 ID；</li>
+<li>当 OriginType = ORIGIN_GROUP 时，该参数为源站组 ID；如果引用了其它站点的源站组，格式为{源站组 ID}@{ZoneID}。例如：og-testorigin@zone-38moq1z10wwwy</li>
 <li>当 OriginType = VOD 时，该参数请填写云点播应用 ID ；</li>
+<li>当 OriginType = LB 时，该参数请填写负载均衡实例 ID，该功能当前仅白名单开放；如果引用了其它站点的负载均衡，格式为{负载均衡 ID}@{ZoneID}。例如：lb-2rxpamcyqfzg@zone-38moq1z10wwwy</li>
+<li>当 OriginType = SPACE 时，该参数请填写源站卸载空间 ID，该功能当前仅白名单开放。</li>
    */
   Origin?: string
   /**
@@ -3634,16 +3636,17 @@ export interface DetectLengthLimitRule {
  */
 export interface IPSSLConfig {
   /**
-   * IP SSL关联的域名。如果Status值为 unbound 时，该字段为空值。
+   * <p>IP SSL 关联域名所属站点ID。如果Status值为 unbound 时，该字段为空值。</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ZoneId?: string
+  /**
+   * <p>IP SSL关联的域名。如果Status值为 unbound 时，该字段为空值。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AssociatedDomain?: string
   /**
-   * 关联状态， 取值如下：
-<li>bound：IP SSL配置已绑定</li>
-<li>binding：IP SSL配置绑定中</li>
-<li>unbinding：IP SSL配置解绑中</li>
-<li>unbound：IP SSL配置未绑定</li>
+   * <p>关联状态， 取值如下：</p><li>bound：IP SSL配置已绑定</li><li>binding：IP SSL配置绑定中</li><li>unbinding：IP SSL配置解绑中</li><li>unbound：IP SSL配置未绑定</li>
    */
   Status?: string
 }
@@ -13424,27 +13427,31 @@ export interface ExceptionRule {
    */
   Condition?: string
   /**
-   * 例外规则执行选项，取值有：<li>WebSecurityModules: 指定例外规则的安全防护模块。</li><li>ManagedRules：指定托管规则。</li>
+   * 例外规则执行选项，取值有：<li>WebSecurityModules: 指定例外规则的安全防护模块，需配合  ⁠WebSecurityModulesForException⁠  使用；</li><li>WebSecuritySubmodules: 指定例外规则的安全防护子模块，需配合  ⁠WebSecuritySubmodulesForException⁠  使用；</li><li>ManagedRules：指定例外规则的具体托管规则，需配合  ⁠ManagedRulesForException⁠  使用；</li><li>ManagedRuleGroups：指定例外规则的托管规则组，需配合  ⁠ManagedRuleGroupsForException⁠  使用。</li>
    */
   SkipScope?: string
   /**
-   * 跳过请求的具体类型，取值有：<li>SkipOnAllRequestFields: 跳过所有请求；</li><li>SkipOnSpecifiedRequestFields: 跳过指定请求字段。</li>仅当 SkipScope 为 ManagedRules 时有效。
+   * 跳过请求的具体类型，取值有：<li>SkipOnAllRequestFields: 跳过所有请求；</li><li>SkipOnSpecifiedRequestFields: 跳过指定请求字段。</li>仅当 SkipScope 为 ManagedRules 或 ManagedRuleGroups 时有效。
    */
   SkipOption?: string
   /**
-   * 指定例外规则的安全防护模块，仅当 SkipScope 为 WebSecurityModules 时有效。取值有：<li>websec-mod-managed-rules：托管规则；</li><li>websec-mod-rate-limiting：速率限制；</li><li>websec-mod-custom-rules：自定义规则；</li><li>websec-mod-adaptive-control：自适应频控、智能客户端过滤、慢速攻击防护、流量盗刷防护；</li><li>websec-mod-bot：Bot管理。</li>
+   * 指定例外规则的安全防护模块，仅当 SkipScope 为 WebSecurityModules 时有效，取值有：<li>websec-mod-managed-rules：托管规则；</li><li>websec-mod-rate-limiting：速率限制；</li><li>websec-mod-custom-rules：自定义规则；</li><li>websec-mod-adaptive-control：自适应频控、智能客户端过滤、慢速攻击防护、流量盗刷防护；</li><li>websec-mod-bot：Bot管理。</li>
    */
   WebSecurityModulesForException?: Array<string>
   /**
-   * 指定例外规则的具体托管规则，仅当 SkipScope 为 ManagedRules 时有效，且此时不能指定 ManagedRuleGroupsForException 。
+   * 指定例外规则的安全防护子模块，仅当 SkipScope 为 WebSecuritySubmodules 时有效，取值有：<ul><li>托管规则（ManagedRules）模块功能：<ul><li>websec-mod-managed-rules/managed-rule-groups：规则集；</li><li>websec-mod-managed-rules/frequent-scanning-protection：高频扫描防护；</li></ul></li><li>速率限制（RateLimitingRules）模块功能：<ul><li>websec-mod-rate-limiting-rules：速率限制规则；</li></ul></li><li>自定义规则（CustomRules）模块功能：<ul><li>websec-mod-custom-rules：自定义规则；</li></ul></li><li>HTTP DDoS 防护（HttpDDoSProtection）模块功能：<ul><li>websec-mod-http-ddos-protection/adaptive-frequency-control：自适应频控；</li><li>websec-mod-http-ddos-protection/client-filtering：智能客户端过滤；</li><li>websec-mod-http-ddos-protection/bandwidth-abuse-defense：流量盗刷防护；</li></ul></li><li>高级 Bot 管理（BotManagement）模块功能：<ul><li>websec-mod-bot-management/basic-feature：基础特征管理；</li><li>websec-mod-bot-management/ip-reputation：客户端画像分析；</li><li>websec-mod-bot-management/bot-intelligence：智能 Bot 分析；</li><li>websec-mod-bot-management/custom-rules：自定义规则；</li><li>websec-mod-bot-management/browser-impersonation-detection：主动特征识别；</li><li>websec-mod-bot-management/client-attestation-rules：客户端认证；</li></ul></li><li>基础 Bot 管理（BotManagementLite）模块功能：<ul><li>websec-mod-bot-management-lite/ai-crawler-detection：AI 爬虫处置；</li><li>websec-mod-bot-management-lite/captcha-page-challenge：人机校验页。</li></ul></li></ul>
+   */
+  WebSecuritySubmodulesForException?: Array<string>
+  /**
+   * 指定例外规则的具体托管规则，仅当 SkipScope 为 ManagedRules 时有效。
    */
   ManagedRulesForException?: Array<string>
   /**
-   * 指定例外规则的托管规则组，仅当 SkipScope 为 ManagedRules 时有效，且此时不能指定 ManagedRulesForException 。
+   * 指定例外规则的托管规则组，仅当 SkipScope 为 ManagedRuleGroups 时有效。
    */
   ManagedRuleGroupsForException?: Array<string>
   /**
-   * 指定例外规则跳过指定请求字段的具体配置，仅当 SkipScope 为 ManagedRules 并且 SkipOption 为 SkipOnSpecifiedRequestFields 时有效。
+   * 指定例外规则跳过指定请求字段的具体配置，仅当 SkipScope 为 ManagedRules 或 ManagedRuleGroups 并且 SkipOption 为 SkipOnSpecifiedRequestFields 时有效。
    */
   RequestFieldsForException?: Array<RequestFieldsForException>
   /**
@@ -16027,80 +16034,67 @@ export interface DownloadL7LogsResponse {
  */
 export interface AccelerationDomain {
   /**
-   * 站点 ID。
+   * <p>站点 ID。</p>
    */
   ZoneId?: string
   /**
-   * 加速域名名称。
+   * <p>加速域名名称。</p>
    */
   DomainName?: string
   /**
-   * 加速域名状态，取值有：
-<li>online：已生效；</li>
-<li>process：部署中；</li>
-<li>offline：已停用；</li>
-<li>forbidden：已封禁；</li>
-<li>init：未生效，待激活站点。</li>
+   * <p>加速域名状态</p><p>枚举值：</p><ul><li>online： 已生效</li><li>process： 部署中</li><li>offline： 已停用</li><li>init： 未生效，待激活站点</li></ul>
    */
   DomainStatus?: string
   /**
-   * CNAME 地址。
+   * <p>CNAME 地址。</p>
    */
   Cname?: string
   /**
-   * IPv6 状态，取值有：
-<li>follow：遵循站点IPv6配置；</li>
-<li>on：开启状态；</li>
-<li>off：关闭状态。</li>
+   * <p>IPv6 状态，取值有：</p><li>follow：遵循站点IPv6配置；</li><li>on：开启状态；</li><li>off：关闭状态。</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IPv6Status?: string
   /**
-   * 加速域名归属权验证状态，取值有： 
-<li>pending：待验证；</li>
-<li>finished：已完成验证。</li>	
+   * <p>加速域名归属权验证状态，取值有： </p><li>pending：待验证；</li><li>finished：已完成验证。</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IdentificationStatus?: string
   /**
-   * 加速域名需进行归属权验证才能继续提供服务时，该对象会携带对应验证方式所需要的信息。
+   * <p>加速域名需进行归属权验证才能继续提供服务时，该对象会携带对应验证方式所需要的信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OwnershipVerification?: OwnershipVerification
   /**
-   * 源站信息。
+   * <p>源站信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OriginDetail?: OriginDetail
   /**
-   * 回源协议，取值有：
-<li>FOLLOW：协议跟随；</li>
-<li>HTTP：HTTP协议回源；</li>
-<li>HTTPS：HTTPS协议回源。</li>
+   * <p>回源协议，取值有：</p><li>FOLLOW：协议跟随；</li><li>HTTP：HTTP协议回源；</li><li>HTTPS：HTTPS协议回源。</li>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OriginProtocol?: string
   /**
-   * HTTP 回源端口。
+   * <p>HTTP 回源端口。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HttpOriginPort?: number
   /**
-   * HTTPS 回源端口。
+   * <p>HTTPS 回源端口。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HttpsOriginPort?: number
   /**
-   * 加速域名证书信息。
+   * <p>加速域名证书信息。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Certificate?: AccelerationDomainCertificate
   /**
-   * 创建时间。
+   * <p>创建时间。</p>
    */
   CreatedOn?: string
   /**
-   * 修改时间。
+   * <p>修改时间。</p>
    */
   ModifiedOn?: string
 }

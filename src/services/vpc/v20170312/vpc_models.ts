@@ -3756,7 +3756,7 @@ export interface DisassociateVpcEndPointSecurityGroupsRequest {
  */
 export interface IKEOptionsSpecification {
   /**
-   * <p>加密算法，可选值：&#39;3DES-CBC&#39;, &#39;AES-CBC-128&#39;, &#39;AES-CBC-192&#39;, &#39;AES-CBC-256&#39;, &#39;DES-CBC&#39;，&#39;SM4&#39;, 默认为3DES-CBC</p>
+   * <p>加密算法，可选值：&#39;3DES-CBC&#39;, &#39;AES-CBC-128&#39;, &#39;AES-CBC-192&#39;, &#39;AES-CBC-256&#39;, &#39;DES-CBC&#39;, &#39;SM4&#39;,  &#39;AES128GCM128&#39;, &#39;AES192GCM128&#39;, &#39;AES256GCM128&#39;</p><p>默认值：3DES-CBC</p><p>仅4.0VPN网关支持 &#39;AES128GCM128&#39;, &#39;AES192GCM128&#39;, &#39;AES256GCM128&#39;</p>
    */
   PropoEncryAlgorithm?: string
   /**
@@ -15109,7 +15109,7 @@ export interface DeleteNetDetectRequest {
  */
 export interface IPSECOptionsSpecification {
   /**
-   * <p>加密算法，可选值：&#39;3DES-CBC&#39;, &#39;AES-CBC-128&#39;, &#39;AES-CBC-192&#39;, &#39;AES-CBC-256&#39;, &#39;DES-CBC&#39;, &#39;SM4&#39;, &#39;NULL&#39;</p><p>默认值：AES-CBC-128</p>
+   * <p>加密算法，可选值：&#39;3DES-CBC&#39;, &#39;AES-CBC-128&#39;, &#39;AES-CBC-192&#39;, &#39;AES-CBC-256&#39;, &#39;DES-CBC&#39;, &#39;SM4&#39;, &#39;NULL&#39;, &#39;AES128GCM128&#39;, &#39;AES192GCM128&#39;, &#39;AES256GCM128&#39;</p><p>默认值：AES-CBC-128</p><p>仅4.0VPN网关支持 &#39;AES128GCM128&#39;, &#39;AES192GCM128&#39;, &#39;AES256GCM128&#39;</p>
    */
   EncryptAlgorithm?: string
   /**

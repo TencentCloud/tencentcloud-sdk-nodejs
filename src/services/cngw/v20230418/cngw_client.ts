@@ -30,6 +30,7 @@ import {
   DeleteCloudNativeAPIGatewayMCPToolRequest,
   AIGWRedisConfig,
   AIGWIntentRoute,
+  Filter,
   AIGWFallbackServiceItem,
   DescribeCloudNativeAPIGatewaySecretKeyValueRequest,
   AIGWLatencyPriorityRouteRule,
@@ -58,12 +59,12 @@ import {
   CNAPIGwConsumer,
   AIGWLogConfig,
   AIGWMCPServerList,
-  AIGWJWTCredentialConfig,
+  AIGWIntentRouteRule,
   ModifyCloudNativeAPIGatewayLLMModelServiceResponse,
   CreateCloudNativeAPIGatewayLLMModelServiceResponse,
   AIGWTopConsumersItem,
   RemoveCloudNativeAPIGatewayConsumerInGroupRequest,
-  CreateCloudNativeAPIGatewayLLMModelServiceRequest,
+  AIGWJWTCredentialConfig,
   DescribeCloudNativeAPIGatewayLLMModelServicesRequest,
   CreateCloudNativeAPIGatewayLLMModelAPIRequest,
   CNAPIGwMCPToolParam,
@@ -87,15 +88,17 @@ import {
   DefaultKongRoute,
   DescribeCloudNativeAPIGatewayMCPToolListRequest,
   DeleteCloudNativeAPIGatewayMCPServerResponse,
-  AIGWIntentRouteRule,
+  CNAPIGwParseMCPToolsResult,
   ModifyCloudNativeAPIGatewayMCPToolRequest,
   DescribeCloudNativeAPIGatewayMCPToolACLListRequest,
   ListCloudNativeAPIGatewayLLMModelAPI,
   DeleteCloudNativeAPIGatewayLLMModelServiceResponse,
   DescribeCloudNativeAPIGatewayMCPToolResponse,
   ModifyCloudNativeAPIGatewayMCPToolACLResponse,
+  DescribeCloudNativeAPIGatewayMCPToolsFromFileRequest,
   AIGWOIDCCredentialConfig,
   CreateCloudNativeAPIGatewayConsumerGroupResponse,
+  UpdateCloudNativeAPIGatewayMCPToolsResponse,
   DescribeCloudNativeAPIGatewayLLMModelAPIResponse,
   AIGWMCPUpstreamInfoDetail,
   ModifyCloudNativeAPIGatewayMCPServerStatusResponse,
@@ -115,6 +118,7 @@ import {
   AIGWCacheAwareRouteConfig,
   ModifyCloudNativeAPIGatewayMCPToolACLRequest,
   CreateCloudNativeAPIGatewayMCPServerResponse,
+  UpdateCloudNativeAPIGatewayMCPToolsRequest,
   AIGWHealthCheckSetting,
   AIGWLLMTokenUsageStatisticsResult,
   DeleteCloudNativeAPIGatewayLLMModelAPIRequest,
@@ -129,8 +133,9 @@ import {
   DeleteCloudNativeAPIGatewayLLMModelAPIResponse,
   UnbindCloudNativeAPIGatewaySecretKeyResponse,
   AIGWLLMTokenUsageListResult,
+  DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse,
   ModifyCloudNativeAPIGatewaySecretKeyRequest,
-  Filter,
+  CNAPIGwMCPToolPreview,
   CNAPIGwMCPTool,
   AIGWMCPToolACLItem,
   DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsResponse,
@@ -164,6 +169,7 @@ import {
   DescribeCloudNativeAPIGatewayMCPServerRequest,
   DescribeCloudNativeAPIGatewayLLMTokenUsageListRequest,
   ModifyCloudNativeAPIGatewayMCPToolStatusRequest,
+  CreateCloudNativeAPIGatewayLLMModelServiceRequest,
   AddCloudNativeAPIGatewayConsumerGroupAuthRequest,
   AIGWLLMModelServiceSubRoute,
   AIGWForwardDesensitizeConfig,
@@ -381,7 +387,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询 LLM 模型 API 列表。
+   * 查询指定网关实例下的所有 LLM 模型 API 列表。支持按名称关键词模糊搜索、按过滤器筛选，以及分页查询。用于绑定场景时，可通过 ConsumerGroupId 和 UseToBind 参数筛选可绑定的模型 API。
    */
   async DescribeCloudNativeAPIGatewayLLMModelAPIs(
     req: DescribeCloudNativeAPIGatewayLLMModelAPIsRequest,
@@ -531,6 +537,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 批量导入从OpenAPI文件中解析的MCP Tools
+   */
+  async UpdateCloudNativeAPIGatewayMCPTools(
+    req: UpdateCloudNativeAPIGatewayMCPToolsRequest,
+    cb?: (error: string, rep: UpdateCloudNativeAPIGatewayMCPToolsResponse) => void
+  ): Promise<UpdateCloudNativeAPIGatewayMCPToolsResponse> {
+    return this.request("UpdateCloudNativeAPIGatewayMCPTools", req, cb)
+  }
+
+  /**
    * 修改 MCP Server 的认证配置
    */
   async ModifyCloudNativeAPIGatewayMCPServerAuth(
@@ -658,6 +674,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCloudNativeAPIGatewayLLMModelServicesResponse) => void
   ): Promise<DescribeCloudNativeAPIGatewayLLMModelServicesResponse> {
     return this.request("DescribeCloudNativeAPIGatewayLLMModelServices", req, cb)
+  }
+
+  /**
+   * 从OpenAPI文件中解析出可导入的MCP tools
+   */
+  async DescribeCloudNativeAPIGatewayMCPToolsFromFile(
+    req: DescribeCloudNativeAPIGatewayMCPToolsFromFileRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayMCPToolsFromFileResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayMCPToolsFromFile", req, cb)
   }
 
   /**

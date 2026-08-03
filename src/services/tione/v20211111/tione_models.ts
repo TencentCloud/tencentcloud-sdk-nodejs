@@ -1518,6 +1518,10 @@ export interface DescribeAnnotatedTaskListRequest {
    */
   Limit: number
   /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
+  /**
    * 过滤条件数组，支持数据集ID，标注场景、任务状态、数据集名称、人物名称的过滤，后面两个支持模糊查询
    */
   Filters?: Array<Filter>
@@ -7025,7 +7029,7 @@ export interface Container {
  */
 export interface DeleteDatasetResponse {
   /**
-   * 删除的datasetId
+   * <p>删除的datasetId</p>
    */
   DatasetId?: string
   /**
@@ -7983,13 +7987,17 @@ export interface DescribeSubAccountLinuxUserInfosResponse {
  */
 export interface DeleteDatasetRequest {
   /**
-   * 数据集id
+   * <p>数据集id</p>
    */
   DatasetId: string
   /**
-   * 是否删除cos标签文件
+   * <p>是否删除cos标签文件</p>
    */
   DeleteLabelEnable: boolean
+  /**
+   * <p>TI工作空间ID</p><p>仅用于“工作空间”白名单功能。如需使用，请联系TI管理员开通白名单。</p>
+   */
+  TiProjectId?: string
 }
 
 /**

@@ -10861,6 +10861,10 @@ export interface ToolCall {
    * <p>索引值</p>
    */
   Index?: number
+  /**
+   * <p>模型返回的思考签名，执行工具后需在后续请求中原样回传</p>
+   */
+  ThoughtSignature?: string
 }
 
 /**

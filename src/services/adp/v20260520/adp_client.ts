@@ -24,6 +24,7 @@ import {
   CamAuthConfig,
   FavoriteSkillRequest,
   DescribeSkillReferenceListResponse,
+  ConversationRecordErrorInfo,
   AgentRelease,
   AgentToolInputParameter,
   UnfavoritePluginResponse,
@@ -31,7 +32,6 @@ import {
   SkillClassification,
   ModifySpaceRequest,
   DeleteSkillShareRequest,
-  MarkTimerTaskRunLogReadResponse,
   RunAppTriggerNowResponse,
   DescribeAppTriggerRunLogListRequest,
   GenerateModel,
@@ -39,7 +39,6 @@ import {
   AgentAdvancedConfig,
   SkillShare,
   DeleteAppTriggerRequest,
-  RunTimerTaskNowResponse,
   AppShareWhitelistItem,
   ModifyVariableRequest,
   ReleaseSummary,
@@ -48,24 +47,20 @@ import {
   IntentAchievementInfo,
   OnceSchedule,
   DeleteSkillResponse,
-  MarkTimerTaskRunLogReadRequest,
+  ModelProperty,
   ModifyConversationRequest,
   DescribeAgentReleasePreviewListRequest,
   DescribeReleaseSummaryResponse,
   DescribeModelListResponse,
-  ResponseParam,
-  ResumeTimerTaskRequest,
   DescribeAppTriggerInstanceRequest,
   AppModelConfig,
-  DescribeTimerTaskSummaryListResponse,
+  MultiModalQAModel,
   PauseAppTriggerRequest,
   CreateSpaceRequest,
   AgentModelConfig,
   ReleaseRecord,
-  WeeklyTime,
   SearchResourceStatusInfo,
   Plugin,
-  TimerTaskSummary,
   ApiKeyAuthConfig,
   CreateConversationResponse,
   CopyAgentFromAppRequest,
@@ -75,7 +70,7 @@ import {
   Conversation,
   AuthConfig,
   AppShareAccessControl,
-  MarkAppTriggerRunLogReadRequest,
+  PluginOperation,
   AppSharedKbInfo,
   ModifyAppResponse,
   FavoriteSkillResponse,
@@ -84,7 +79,6 @@ import {
   DescribeAccountListRequest,
   PromptRewriteModel,
   ManualOnlySchedule,
-  Tool,
   DescribeAppRequest,
   DeleteAppResponse,
   DescribeConversationListResponse,
@@ -95,7 +89,6 @@ import {
   CreateWebSocketTokenResponse,
   ExecuteConfig,
   AuditLogMetaField,
-  ModifyTimerTaskResponse,
   DescribeAgentDetailRequest,
   DescribePluginSummaryListRequest,
   SkillReferenceSummary,
@@ -109,7 +102,6 @@ import {
   DescribeReleaseSummaryRequest,
   AppWorkflowConfig,
   ConversationAgentTask,
-  DescribeTimerTaskSummaryListRequest,
   ModifyPluginRequest,
   AppTriggerScheduleStatus,
   PluginParam,
@@ -123,7 +115,6 @@ import {
   CodeToolConfig,
   ModelDetailInfo,
   CreateAgentRequest,
-  DeleteTimerTaskResponse,
   MultiAgentConfig,
   ConversationExperience,
   ClawAgentAgentTeamConfig,
@@ -135,7 +126,6 @@ import {
   ModelParameter,
   UnfavoriteSkillResponse,
   ModifySpaceResponse,
-  DescribeTimerTaskRunLogListRequest,
   SkillDetail,
   DescribePluginSummaryListResponse,
   MultiModalUnderstandingModel,
@@ -150,10 +140,8 @@ import {
   ConversationWorkspace,
   BillingAttribute,
   SkillReferenceGroup,
-  ResumeTimerTaskResponse,
   AgentPluginConfig,
   PluginSummary,
-  SkillProfile,
   AgentSpec,
   ModifyAppRequest,
   ClawAgentConfig,
@@ -162,19 +150,17 @@ import {
   ConversationQuoteInfo,
   ModifyAppTriggerResponse,
   AppSecretInfo,
-  MultiModalQAModel,
   AgentDetail,
   ThinkModel,
   DeleteAgentResponse,
-  TimerTask,
   ModifyConversationResponse,
   DescribeSpaceListResponse,
-  CreateTimerTaskRequest,
+  ConversationRecordSummary,
   CreateAppRequest,
+  ConversationRecordTimeUsage,
   App,
   AppAuxiliaryInfo,
-  CreateAppTriggerRequest,
-  UnfavoritePluginRequest,
+  ConversationRecordTokenUsage,
   AppTriggerWebhookStatus,
   PluginStatistics,
   AppStatusInfo,
@@ -192,7 +178,7 @@ import {
   ModifyAgentResponse,
   DescribeLatestReleaseResponse,
   SkillNotice,
-  PauseTimerTaskResponse,
+  ResponseParam,
   AppTriggerParamSchema,
   DescribeAppTriggerResponse,
   ToolBilling,
@@ -202,7 +188,7 @@ import {
   DeleteSkillShareResponse,
   DescribePluginRequest,
   AgentToolConfig,
-  CreateTimerTaskResponse,
+  PauseAppTriggerResponse,
   CreatePluginResponse,
   ModifyVariableResponse,
   AgentSkillConfig,
@@ -216,10 +202,8 @@ import {
   AppTriggerParamBindingValue,
   AgentProfile,
   OAuthConfig,
-  RunTimerTaskNowRequest,
   CopyAgentFromAppResponse,
   CreateWorkspaceCredentialResponse,
-  DescribeTimerTaskResponse,
   ModelParams,
   RetryReleaseResponse,
   AgentInput,
@@ -239,8 +223,7 @@ import {
   CreateVariableResponse,
   Filter,
   ApiToolConfig,
-  PluginOperation,
-  DescribeTimerTaskRequest,
+  WeeklyTime,
   ModifySkillResponse,
   ToolConfig,
   ConversationReference,
@@ -252,7 +235,7 @@ import {
   ModifyPluginResponse,
   CreateReleaseResponse,
   DescribeAppTriggerInstanceResponse,
-  PauseAppTriggerResponse,
+  UnfavoritePluginRequest,
   ModifySkillRequest,
   RetryReleaseRequest,
   CreateSpaceResponse,
@@ -268,8 +251,7 @@ import {
   MCPPluginConfig,
   DescribeAppTriggerSummaryListResponse,
   DescribeSystemVariableListRequest,
-  RoleConfig,
-  DescribeTimerTaskRunLogListResponse,
+  SkillProfile,
   AppConfig,
   SystemVariable,
   AppGreetingConfig,
@@ -282,7 +264,7 @@ import {
   SkillSummary,
   AgentCollaborationConfig,
   DeleteVariableRequest,
-  ModifyTimerTaskRequest,
+  CreateAppTriggerRequest,
   CronSchedule,
   AccountInfo,
   AppTriggerInstance,
@@ -292,10 +274,9 @@ import {
   AppMemoryConfig,
   FavoritePluginResponse,
   AgentToolBasicConfig,
-  MarkAppTriggerRunLogReadResponse,
   SupportedFileType,
   TriggerStatus,
-  DeleteTimerTaskRequest,
+  RoleConfig,
   CreateAgentResponse,
   ClawAgentCustomConfig,
   AppTriggerParamBinding,
@@ -311,9 +292,7 @@ import {
   DescribeAppSummaryListResponse,
   ClawAgentLongMemoryConfig,
   FavoritePluginRequest,
-  ModelProperty,
   FileParseModel,
-  TimerProfile,
   CopyAppResponse,
   AgentPluginParameter,
   CopyAppRequest,
@@ -345,15 +324,13 @@ import {
   AppTrigger,
   ToolSummary,
   DescribeAgentSummaryListResponse,
-  PauseTimerTaskRequest,
   PluginUserState,
   AppAdvancedConf,
   DescribeSpaceListRequest,
   SkillVersion,
   AgentTool,
-  TimerStatus,
   AppModeConfig,
-  TimerConfig,
+  Tool,
   DeleteSpaceResponse,
 } from "./adp_models"
 
@@ -397,16 +374,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * MarkAppTriggerRunLogRead
-   */
-  async MarkAppTriggerRunLogRead(
-    req: MarkAppTriggerRunLogReadRequest,
-    cb?: (error: string, rep: MarkAppTriggerRunLogReadResponse) => void
-  ): Promise<MarkAppTriggerRunLogReadResponse> {
-    return this.request("MarkAppTriggerRunLogRead", req, cb)
-  }
-
-  /**
    * 获取空间列表
    */
   async DescribeSpaceList(
@@ -427,8 +394,9 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 重置会话
-   */
+     * 重置会话
+注意：当前Claw模式应用会话不支持重置
+     */
   async ResetConversation(
     req: ResetConversationRequest,
     cb?: (error: string, rep: ResetConversationResponse) => void
@@ -484,26 +452,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAppTriggerInstanceResponse) => void
   ): Promise<DescribeAppTriggerInstanceResponse> {
     return this.request("DescribeAppTriggerInstance", req, cb)
-  }
-
-  /**
-   * ResumeTimerTask
-   */
-  async ResumeTimerTask(
-    req: ResumeTimerTaskRequest,
-    cb?: (error: string, rep: ResumeTimerTaskResponse) => void
-  ): Promise<ResumeTimerTaskResponse> {
-    return this.request("ResumeTimerTask", req, cb)
-  }
-
-  /**
-   * PauseTimerTask
-   */
-  async PauseTimerTask(
-    req: PauseTimerTaskRequest,
-    cb?: (error: string, rep: PauseTimerTaskResponse) => void
-  ): Promise<PauseTimerTaskResponse> {
-    return this.request("PauseTimerTask", req, cb)
   }
 
   /**
@@ -584,16 +532,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeModelListResponse) => void
   ): Promise<DescribeModelListResponse> {
     return this.request("DescribeModelList", req, cb)
-  }
-
-  /**
-   * MarkTimerTaskRunLogRead
-   */
-  async MarkTimerTaskRunLogRead(
-    req: MarkTimerTaskRunLogReadRequest,
-    cb?: (error: string, rep: MarkTimerTaskRunLogReadResponse) => void
-  ): Promise<MarkTimerTaskRunLogReadResponse> {
-    return this.request("MarkTimerTaskRunLogRead", req, cb)
   }
 
   /**
@@ -837,16 +775,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * RunTimerTaskNow
-   */
-  async RunTimerTaskNow(
-    req: RunTimerTaskNowRequest,
-    cb?: (error: string, rep: RunTimerTaskNowResponse) => void
-  ): Promise<RunTimerTaskNowResponse> {
-    return this.request("RunTimerTaskNow", req, cb)
-  }
-
-  /**
    * 创建参数变量
    */
   async CreateVariable(
@@ -947,26 +875,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DeleteTimerTask
-   */
-  async DeleteTimerTask(
-    req: DeleteTimerTaskRequest,
-    cb?: (error: string, rep: DeleteTimerTaskResponse) => void
-  ): Promise<DeleteTimerTaskResponse> {
-    return this.request("DeleteTimerTask", req, cb)
-  }
-
-  /**
-   * ModifyTimerTask
-   */
-  async ModifyTimerTask(
-    req: ModifyTimerTaskRequest,
-    cb?: (error: string, rep: ModifyTimerTaskResponse) => void
-  ): Promise<ModifyTimerTaskResponse> {
-    return this.request("ModifyTimerTask", req, cb)
-  }
-
-  /**
    * 取消收藏插件
    */
   async UnfavoritePlugin(
@@ -1027,16 +935,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * DescribeTimerTask
-   */
-  async DescribeTimerTask(
-    req: DescribeTimerTaskRequest,
-    cb?: (error: string, rep: DescribeTimerTaskResponse) => void
-  ): Promise<DescribeTimerTaskResponse> {
-    return this.request("DescribeTimerTask", req, cb)
-  }
-
-  /**
    * 回滚发布
    */
   async RollbackRelease(
@@ -1044,16 +942,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RollbackReleaseResponse) => void
   ): Promise<RollbackReleaseResponse> {
     return this.request("RollbackRelease", req, cb)
-  }
-
-  /**
-   * CreateTimerTask
-   */
-  async CreateTimerTask(
-    req: CreateTimerTaskRequest,
-    cb?: (error: string, rep: CreateTimerTaskResponse) => void
-  ): Promise<CreateTimerTaskResponse> {
-    return this.request("CreateTimerTask", req, cb)
   }
 
   /**
@@ -1104,26 +992,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteAgentResponse) => void
   ): Promise<DeleteAgentResponse> {
     return this.request("DeleteAgent", req, cb)
-  }
-
-  /**
-   * 查询定时任务执行记录列表
-   */
-  async DescribeTimerTaskRunLogList(
-    req: DescribeTimerTaskRunLogListRequest,
-    cb?: (error: string, rep: DescribeTimerTaskRunLogListResponse) => void
-  ): Promise<DescribeTimerTaskRunLogListResponse> {
-    return this.request("DescribeTimerTaskRunLogList", req, cb)
-  }
-
-  /**
-   * 查询定时任务列表
-   */
-  async DescribeTimerTaskSummaryList(
-    req: DescribeTimerTaskSummaryListRequest,
-    cb?: (error: string, rep: DescribeTimerTaskSummaryListResponse) => void
-  ): Promise<DescribeTimerTaskSummaryListResponse> {
-    return this.request("DescribeTimerTaskSummaryList", req, cb)
   }
 
   /**

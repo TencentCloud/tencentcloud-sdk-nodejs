@@ -61,6 +61,7 @@ import {
   DeleteSandboxToolRequest,
   UpdateSandboxToolResponse,
   VPCConfig,
+  AgentBucketStorageSource,
   DeleteAPIKeyRequest,
   AcquireSandboxInstanceTokenResponse,
   ProbeConfiguration,

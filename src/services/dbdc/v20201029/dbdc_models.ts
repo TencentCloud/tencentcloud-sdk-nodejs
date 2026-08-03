@@ -1891,7 +1891,7 @@ export interface DBCustomNode {
    */
   HostIp?: string
   /**
-   * <p>网络模式</p><p>枚举值：</p><ul><li>NetworkModePrivateLink： 四层 SSH 服务联通模式</li><li>NetworkModeCrossTenantENI：  三层双网卡访问方式</li></ul>
+   * <p>网络模式</p><p>枚举值：</p><ul><li>privatelink： 四层 SSH 服务联通模式</li><li>cross_tenant_eni：  三层双网卡访问方式</li></ul>
    */
   NetworkMode?: string
   /**

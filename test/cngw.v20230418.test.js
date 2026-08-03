@@ -358,6 +358,16 @@ it("cngw.v20230418.ModifyCloudNativeAPIGatewayMCPTool", async function () {
     }
 })
 
+it("cngw.v20230418.UpdateCloudNativeAPIGatewayMCPTools", async function () {
+    try {
+       const data = await client.UpdateCloudNativeAPIGatewayMCPTools({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cngw.v20230418.ModifyCloudNativeAPIGatewayMCPServerAuth", async function () {
     try {
        const data = await client.ModifyCloudNativeAPIGatewayMCPServerAuth({})
@@ -481,6 +491,16 @@ it("cngw.v20230418.BindCloudNativeAPIGatewaySecretKey", async function () {
 it("cngw.v20230418.DescribeCloudNativeAPIGatewayLLMModelServices", async function () {
     try {
        const data = await client.DescribeCloudNativeAPIGatewayLLMModelServices({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cngw.v20230418.DescribeCloudNativeAPIGatewayMCPToolsFromFile", async function () {
+    try {
+       const data = await client.DescribeCloudNativeAPIGatewayMCPToolsFromFile({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

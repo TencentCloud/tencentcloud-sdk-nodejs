@@ -166,7 +166,7 @@ export interface DescribeForwardingPolicyResponse {
  */
 export interface CreateGlobalAcceleratorRequest {
   /**
-   * <p>名称，最大长度不能超过128个字节，不能为空。</p><p>参数格式：满足正则 ^[a-zA-Z\u4e00-\u9fa5]（首字符是英文字母或汉字），并且不满足正则 ^[\d._-]*$（整串不能只由数字/./_/-组成）。</p>
+   * <p>名称。</p><p>参数格式：以字母或中文开头，长度 2–128 个字符，支持字母、数字、中文、. - _</p>
    */
   Name: string
   /**
@@ -174,7 +174,7 @@ export interface CreateGlobalAcceleratorRequest {
    */
   InstanceChargeType?: string
   /**
-   * <p>描述信息，最大长度不能超过100个字节。</p>
+   * <p>描述信息。</p><p>参数格式：最大长度不超过100 个字符。</p>
    */
   Description?: string
   /**
@@ -410,7 +410,7 @@ export interface ModifyEndpointGroupRequest {
    */
   EndpointConfigurations?: Array<EndpointConfigurations>
   /**
-   * <p>名称。</p><p>入参限制：最大长度不能超过128个字节。</p><p>以大小写字母或中文开头。</p>
+   * <p>名称。</p><p>参数格式：以字母或中文开头，长度 2–128 个字符，支持字母、数字、中文、. - _</p>
    */
   Name?: string
   /**
@@ -1096,7 +1096,7 @@ export interface DescribeAccelerateAreasResponse {
  */
 export interface EndpointGroupConfiguration {
   /**
-   * <p>终端节点组名称。</p><p>最大长度不能超过128个字节。必须以字母（a-z, A-Z）或中文字符开头。</p>
+   * <p>终端节点组名称。</p><p>参数格式：以字母或中文开头，长度 2–128 个字符，支持字母、数字、中文、. - _</p>
    */
   Name: string
   /**
@@ -1259,7 +1259,7 @@ export interface AcceleratorAreas {
   /**
    * <p>带宽。</p>
    */
-  Bandwidth: number
+  Bandwidth?: number
   /**
    * <p>支持&#39;BGP&#39;, &#39;QUALITY_BGP&#39;, &#39;STATIC_IP&#39;，默认BGP。</p><p>枚举值：</p><ul><li>BGP： BGP</li><li>STATIC_IP： 三网</li><li>QUALITY_BGP： 精品BGP</li></ul>
    */
@@ -1514,7 +1514,7 @@ export interface ModifyGlobalAcceleratorAclRuleRequest {
    */
   GlobalAcceleratorAclRuleId: string
   /**
-   * <p>协议。</p><p>入参限制：支持选择&#39;TCP&#39;, &#39;UDP&#39;, &#39;ALL&#39;。</p>
+   * <p>协议。</p><p>入参限制：支持选择&#39;TCP&#39;, &#39;UDP&#39;。</p>
    */
   Protocol?: string
   /**
@@ -1632,7 +1632,7 @@ export interface ModifyListenerRequest {
    */
   ListenerId: string
   /**
-   * <p>名称，最大长度不能超过60个字节。</p>
+   * <p>名称。</p><p>参数格式：以字母或中文开头，长度 2–128 个字符，支持字母、数字、中文、. - _</p>
    */
   Name?: string
   /**
@@ -1668,11 +1668,11 @@ export interface ModifyListenerRequest {
    */
   CipherPolicyId?: string
   /**
-   * <p>服务器证书。</p><p>HTTPS监听器才支持此参数修改。</p>
+   * <p>服务器证书。</p><p>入参限制：当前仅支持传入一本证书；如果要使用多本证书，使用证书接口CreateListenerAdditionalCert来加其他证书。</p><p>HTTPS监听器才支持此参数修改。</p>
    */
   ServerCertificates?: Array<string>
   /**
-   * <p>客户端证书。</p><p>HTTPS监听器才支持此参数修改，并且开启双向认证。</p>
+   * <p>客户端证书。</p><p>入参限制：1、当前仅支持传入一本证书；如果要使用多本证书，使用证书接口CreateListenerAdditionalCert来加其他证书。2、证书必须为CA证书。</p><p>HTTPS监听器才支持此参数修改，并且开启双向认证。</p>
    */
   ClientCaCertificates?: Array<string>
   /**
@@ -1896,7 +1896,7 @@ export interface CreateListenerRequest {
    */
   GlobalAcceleratorId: string
   /**
-   * <p>名称，最大长度不能超过128个字符。</p>
+   * <p>名称。</p><p>参数格式：以字母或中文开头，长度 2–128 个字符，支持字母、数字、中文、. - _</p>
    */
   Name: string
   /**
@@ -1924,7 +1924,7 @@ export interface CreateListenerRequest {
    */
   GetRealIpType?: string
   /**
-   * <p>是否开启会话保持。支持配置&#39;Open&#39;, &#39;Close&#39;。</p><p>枚举值：</p><ul><li>Open： 开启。</li><li>Close： 关闭。</li></ul>
+   * <p>是否开启会话保持。支持配置&#39;Open&#39;, &#39;Close&#39;。</p><p>枚举值：</p><ul><li>Open： 开启。</li><li>Close： 关闭。</li></ul><p>仅支持4层监听器 ，7层不支持修改</p>
    */
   ClientAffinity?: string
   /**
@@ -1944,11 +1944,11 @@ export interface CreateListenerRequest {
    */
   CipherPolicyId?: string
   /**
-   * <p>服务器证书。</p><p>当是HTTPS监听器时，此字段必传。</p>
+   * <p>服务器证书。</p><p>入参限制：当前仅支持传入一本证书；如果要使用多本证书，使用证书接口CreateListenerAdditionalCert来加其他证书。</p><p>当是HTTPS监听器时，此字段必传。</p>
    */
   ServerCertificates?: Array<string>
   /**
-   * <p>客户端证书。</p><p>当时HTTPS监听器且开启双向认证时，此字段必传。</p>
+   * <p>客户端证书。</p><p>入参限制：1、当前仅支持传入一本证书；如果要使用多本证书，使用证书接口CreateListenerAdditionalCert来加其他证书。2、证书必须为CA证书。</p><p>当时HTTPS监听器且开启双向认证时，此字段必传。</p>
    */
   ClientCaCertificates?: Array<string>
   /**
@@ -1976,11 +1976,11 @@ export interface ModifyGlobalAcceleratorRequest {
    */
   GlobalAcceleratorId: string
   /**
-   * <p>名称，最大长度不能超过60个字节。</p>
+   * <p>名称。</p><p>参数格式：以字母或中文开头，长度 2–128 个字符，支持字母、数字、中文、. - _</p>
    */
   Name?: string
   /**
-   * <p>描述信息，最大长度不能超过100个字节。</p>
+   * <p>描述信息。</p><p>参数格式：最大长度不超过100 个字符。</p>
    */
   Description?: string
   /**

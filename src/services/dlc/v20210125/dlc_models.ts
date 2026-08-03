@@ -284,6 +284,28 @@ export interface PythonSparkImage {
 }
 
 /**
+ * UpdateClusterGroup请求参数结构体
+ */
+export interface UpdateClusterGroupRequest {
+  /**
+   * <p>集群组 ID（定位要更新的集群组）</p>
+   */
+  Id: string
+  /**
+   * <p>集群组名称（可选，为空则保持原名）</p>
+   */
+  Name?: string
+  /**
+   * <p>集群组描述</p>
+   */
+  Description?: string
+  /**
+   * <p>集群组配置</p>
+   */
+  Config?: string
+}
+
+/**
  * 数据格式其它类型。
  */
 export interface Other {
@@ -291,6 +313,60 @@ export interface Other {
    * 枚举类型，默认值为Json，可选值为[Json, Parquet, ORC, AVRD]之一。
    */
   Format?: string
+}
+
+/**
+ * CreateResourceConfig返回参数结构体
+ */
+export interface CreateResourceConfigResponse {
+  /**
+   * 模板ID
+   */
+  Id?: string
+  /**
+   * 模板名称
+   */
+  Name?: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 模板类型
+   */
+  Type?: string
+  /**
+   * Head节点配置
+   */
+  Head?: HeadSpecDTO
+  /**
+   * Worker节点配置
+   */
+  Worker?: Array<WorkerSpecDTO>
+  /**
+   * 创建时间
+   */
+  CreateTime?: number
+  /**
+   * 更新时间
+   */
+  UpdateTime?: number
+  /**
+   * 应用ID
+   */
+  AppId?: number
+  /**
+   * 创建者UIN
+   */
+  Uin?: string
+  /**
+   * 子用户UIN
+   */
+  SubAccountUin?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -364,30 +440,33 @@ export interface DescribeNotebookSessionsRequest {
 }
 
 /**
- * SmartOptimizerLifecyclePolicy
+ * ListLabs返回参数结构体
  */
-export interface SmartOptimizerLifecyclePolicy {
+export interface ListLabsResponse {
   /**
-   * 生命周期启用
+   * <p>总记录数</p>
    */
-  LifecycleEnable?: string
+  Total?: number
   /**
-   * 过期时间
+   * <p>当前页码（从1开始）</p>
    */
-  Expiration?: number
+  Page?: number
   /**
-   * 是否删表，该字段废弃已使用，用TableExpiration策略替代
-   * @deprecated
+   * <p>每页数量</p>
    */
-  DropTable?: boolean
+  PageSize?: number
   /**
-   * 过期字段
+   * <p>总页数</p>
    */
-  ExpiredField?: string
+  TotalPages?: number
   /**
-   * 过期字段格式
+   * <p>数据实验室列表</p>
    */
-  ExpiredFieldFormat?: string
+  Items?: Array<LabResponse>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -568,6 +647,128 @@ export interface SessionResourceTemplate {
    * 运行时参数
    */
   RunningTimeParameters?: Array<DataEngineConfigPair>
+}
+
+/**
+ * GetRayCluster返回参数结构体
+ */
+export interface GetRayClusterResponse {
+  /**
+   * <p>获取Ray集群详情请求</p>
+   */
+  Id?: string
+  /**
+   * <p>资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口）</p>
+   */
+  Type?: string
+  /**
+   * <p>集群名称</p>
+   */
+  Name?: string
+  /**
+   * <p>集群描述</p>
+   */
+  Description?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
+  /**
+   * <p>集群状态</p>
+   */
+  Status?: string
+  /**
+   * <p>状态详情/错误信息</p>
+   */
+  StatusMessage?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>所属集群组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>Dashboard URL / 历史记录链接</p>
+   */
+  HistoryUrl?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>高级参数（规范化后的扁平 KV JSON）</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>启动时间（最近一次启动）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>停止时间（最近一次停止/休眠）</p>
+   */
+  StopTime?: number
+  /**
+   * <p>标签列表（TagKey-TagValue）</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -762,6 +963,213 @@ export interface CreateTasksInOrderRequest {
 }
 
 /**
+ * Workspace 持久化工作目录配置
+ */
+export interface PersistentWorkDir {
+  /**
+   * <p>是否启用持久化工作目录；为空或 false 时沿用 emptyDir 行为</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>持久化存储类型：COS / CFS</p>
+   */
+  Type?: string
+  /**
+   * <p>COS Bucket 名称（Type=COS 时必填）</p>
+   */
+  Bucket?: string
+  /**
+   * <p>CFS 文件系统 ID（Type=CFS 时必填）</p>
+   */
+  FileSystemId?: string
+  /**
+   * <p>Bucket / 文件系统下的子路径，必须以 &#39;/&#39; 开头且不含 &#39;..&#39;</p>
+   */
+  VolumeSubPath?: string
+}
+
+/**
+ * Ray集群实体
+ */
+export interface RayClusterEntity {
+  /**
+   * <p>集群ID</p>
+   */
+  Id?: string
+  /**
+   * <p>资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口）</p>
+   */
+  Type?: string
+  /**
+   * <p>集群名称</p>
+   */
+  Name?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
+  /**
+   * <p>集群状态</p>
+   */
+  Status?: string
+  /**
+   * <p>状态详情/错误信息</p>
+   */
+  StatusMessage?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>所属集群组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>Dashboard URL / 历史记录链接</p>
+   */
+  HistoryUrl?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>高级参数（规范化后的扁平 KV JSON）</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>启动时间（最近一次启动）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>停止时间（最近一次停止/休眠）</p>
+   */
+  StopTime?: number
+  /**
+   * <p>标签列表（TagKey-TagValue）</p>
+   */
+  Tags?: Array<Tag>
+}
+
+/**
+ * GetLabEvent请求参数结构体
+ */
+export interface GetLabEventRequest {
+  /**
+   * <p>数据实验室ID</p>
+   */
+  Id: string
+  /**
+   * <p>每页数量</p>
+   */
+  PageSize?: number
+  /**
+   * <p>开始时间（毫秒时间戳）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>结束时间（毫秒时间戳）</p>
+   */
+  EndTime?: number
+  /**
+   * <p>排序字段列表</p>
+   */
+  SortFields?: Array<SortField>
+}
+
+/**
+ * Elasticsearch数据源的详细信息
+ */
+export interface ElasticsearchInfo {
+  /**
+   * 数据源ID
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceId?: string
+  /**
+   * 数据源名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  InstanceName?: string
+  /**
+   * 用户名
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  User?: string
+  /**
+   * 密码，需要base64编码
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Password?: string
+  /**
+   * 数据源的VPC和子网信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Location?: DatasourceConnectionLocation
+  /**
+   * 默认数据库名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DbName?: string
+  /**
+   * 访问Elasticsearch的ip、端口信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceInfo?: Array<IpPortPair>
+}
+
+/**
  * DescribeUpdatableDataEngines返回参数结构体
  */
 export interface DescribeUpdatableDataEnginesResponse {
@@ -881,6 +1289,20 @@ export interface DescribeDMSTablesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 标签
+ */
+export interface Tag {
+  /**
+   * 标签键
+   */
+  TagKey?: string
+  /**
+   * 标签值
+   */
+  TagValue?: string
 }
 
 /**
@@ -1044,9 +1466,61 @@ export interface DescribeTablesNameResponse {
 }
 
 /**
+ * GetLabPodYaml返回参数结构体
+ */
+export interface GetLabPodYamlResponse {
+  /**
+   * <p>Pod YAML</p>
+   */
+  Yaml?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeAdvancedStoreLocation请求参数结构体
  */
 export type DescribeAdvancedStoreLocationRequest = null
+
+/**
+ * 任务状态历史记录
+ */
+export interface JobStatusHistory {
+  /**
+   * 历史记录ID
+   */
+  Id?: number
+  /**
+   * 作业ID
+   */
+  JobId?: string
+  /**
+   * 作业名称
+   */
+  JobName?: string
+  /**
+   * 源状态
+   */
+  FromState?: string
+  /**
+   * 目标状态
+   */
+  ToState?: string
+  /**
+   * 触发事件
+   */
+  Event?: string
+  /**
+   * 消息
+   */
+  Message?: string
+  /**
+   * 转换时间（毫秒时间戳）
+   */
+  TransitionTime?: number
+}
 
 /**
  * DeleteMetaDatabase请求参数结构体
@@ -1063,6 +1537,16 @@ export interface DeleteMetaDatabaseRequest {
 }
 
 /**
+ * GetRayCluster请求参数结构体
+ */
+export interface GetRayClusterRequest {
+  /**
+   * <p>集群ID</p>
+   */
+  Id: string
+}
+
+/**
  * CancelNotebookSessionStatementBatch返回参数结构体
  */
 export interface CancelNotebookSessionStatementBatchResponse {
@@ -1070,6 +1554,20 @@ export interface CancelNotebookSessionStatementBatchResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 节点标签模型
+ */
+export interface Label {
+  /**
+   * <p>名称</p>
+   */
+  Name?: string
+  /**
+   * <p>值</p>
+   */
+  Value?: string
 }
 
 /**
@@ -1125,6 +1623,16 @@ export interface GroupInfo {
 }
 
 /**
+ * StartRayCluster请求参数结构体
+ */
+export interface StartRayClusterRequest {
+  /**
+   * <p>集群ID</p>
+   */
+  Id: string
+}
+
+/**
  * UnboundDatasourceHouse请求参数结构体
  */
 export interface UnboundDatasourceHouseRequest {
@@ -1138,6 +1646,20 @@ export interface UnboundDatasourceHouseRequest {
  * DeleteUserVpcConnection返回参数结构体
  */
 export interface DeleteUserVpcConnectionResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetRayJobYaml返回参数结构体
+ */
+export interface GetRayJobYamlResponse {
+  /**
+   * RayJob YAML
+   */
+  Yaml?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1254,6 +1776,152 @@ export interface DescribeDatabaseResponse {
 }
 
 /**
+ * 作业配置
+ */
+export interface JobSpec {
+  /**
+   * <p>配置ID</p>
+   */
+  Id?: string
+  /**
+   * <p>配置名称</p>
+   */
+  Name?: string
+  /**
+   * <p>配置描述</p>
+   */
+  Description?: string
+  /**
+   * <p>入口命令</p>
+   */
+  Entrypoint?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>镜像拉取类型（Builtin: 内置, Custom: 自定义）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>运行时环境配置(JSON)</p>
+   */
+  RuntimeEnv?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>弹性伸缩配置(JSON)</p>
+   */
+  AutoscalerOptions?: string
+  /**
+   * <p>ResourceConfigId</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>资源配置模板是否变更</p>
+   */
+  ResourceConfigChanged?: boolean
+  /**
+   * <p>默认资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>默认队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>集群组Id</p>
+   */
+  GroupId?: string
+  /**
+   * <p>集群id</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>默认计算组名称</p>
+   */
+  ClusterGroup?: string
+  /**
+   * <p>作业包URL</p>
+   */
+  JobPackage?: string
+  /**
+   * <p>作业包名称</p>
+   */
+  JobPackageName?: string
+  /**
+   * <p>优先级</p>
+   */
+  Priority?: number
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>创建者UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>该配置产生的作业实例数量</p>
+   */
+  JobInstanceCount?: number
+  /**
+   * <p>是否有运行中的作业实例</p>
+   */
+  HasRunningJobs?: boolean
+  /**
+   * <p>高级参数，JSON 字符串</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>集群分派策略</p>
+   */
+  DispatchStrategy?: string
+  /**
+   * <p>作业提交目标：GROUP（按计算组分派）/ CLUSTER（指定集群）/ SERVERLESS（按 Serverless 拉起）</p>
+   */
+  SubmissionTarget?: string
+  /**
+   * <p>集群组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>集群名称</p>
+   */
+  ClusterName?: string
+}
+
+/**
  * DescribeSparkAppJobs请求参数结构体
  */
 export interface DescribeSparkAppJobsRequest {
@@ -1336,6 +2004,36 @@ export interface ViewResponseInfo {
 }
 
 /**
+ * ListClusterGroups请求参数结构体
+ */
+export interface ListClusterGroupsRequest {
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>页数</p>
+   */
+  PageSize?: number
+  /**
+   * <p>提交时间起始过滤-时间戳（毫秒，可选）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>提交时间截止过滤-时间戳（毫秒，可选）</p>
+   */
+  EndTime?: number
+  /**
+   * <p>过滤条件</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>排序字段列表</p>
+   */
+  SortFields?: Array<SortField>
+}
+
+/**
  * DescribeSparkSessionBatchSQL请求参数结构体
  */
 export interface DescribeSparkSessionBatchSQLRequest {
@@ -1347,6 +2045,68 @@ export interface DescribeSparkSessionBatchSQLRequest {
    * 用户自定义主键, 若不为空，则按照该值查询
    */
   CustomKey?: string
+}
+
+/**
+ * head组规格
+ */
+export interface HeadSpecDTO {
+  /**
+   * <p>head/worker名称</p>
+   */
+  Name?: string
+  /**
+   * <p>Pod CPU核数</p>
+   */
+  PodCpu?: number
+  /**
+   * <p>Pod 内存大小</p>
+   */
+  PodMem?: number
+  /**
+   * <p>GPU类型</p>
+   */
+  GpuType?: string
+  /**
+   * <p>GPU数量</p>
+   */
+  GpuNum?: number
+  /**
+   * <p>环境变量列表</p>
+   */
+  Envs?: Array<Env>
+  /**
+   * <p>标签列表</p>
+   */
+  Labels?: Array<Label>
+  /**
+   * <p>资源标签列表（用于追加到 headGroupSpec/workerGroupSpec 的 resources map 中，对应 Ray/K8s 的自定义资源声明），Value 必须为字符串形式的整数</p>
+   */
+  ResourcesLabels?: Array<Label>
+  /**
+   * <p>Pod数量</p>
+   */
+  PodNum?: number
+  /**
+   * <p>是否支持高级可用</p>
+   */
+  HighAvailability?: boolean
+  /**
+   * <p>资源类型,CPU,GPU</p>
+   */
+  ResourceType?: string
+  /**
+   * <p>机型</p>
+   */
+  InstanceType?: string
+  /**
+   * <p>规格数量</p>
+   */
+  Spec?: number
+  /**
+   * <p>资源ID(唯一)</p>
+   */
+  BillingItem?: string
 }
 
 /**
@@ -1428,6 +2188,126 @@ export interface UnboundDatasourceHouseResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RunJobSpec返回参数结构体
+ */
+export interface RunJobSpecResponse {
+  /**
+   * <p>任务ID</p>
+   */
+  Id?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>任务状态</p>
+   */
+  Status?: string
+  /**
+   * <p>入口命令</p>
+   */
+  Entrypoint?: string
+  /**
+   * <p>任务名称</p>
+   */
+  JobName?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>运行时间(ms)</p>
+   */
+  RunningTime?: number
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>运行时环境配置(JSON)</p>
+   */
+  RuntimeEnv?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>弹性伸缩配置(JSON)</p>
+   */
+  AutoscalerOptions?: string
+  /**
+   * <p>来源配置ID</p>
+   */
+  SpecId?: string
+  /**
+   * <p>来源配置名称</p>
+   */
+  SpecName?: string
+  /**
+   * <p>高级参数</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>优先级</p>
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>业务来源标识（调用上下文，长度上限 64，禁止控制字符）</p>
+   */
+  JobSource?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetLabHistory请求参数结构体
+ */
+export interface GetLabHistoryRequest {
+  /**
+   * <p>数据实验室ID</p>
+   */
+  Id: string
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>每页数量</p>
+   */
+  PageSize?: number
 }
 
 /**
@@ -1575,6 +2455,36 @@ export interface CreateImportTaskRequest {
 }
 
 /**
+ * ListRayClusters请求参数结构体
+ */
+export interface ListRayClustersRequest {
+  /**
+   * <p>起始时间（毫秒时间戳）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>截止时间（毫秒时间戳）</p>
+   */
+  EndTime?: number
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>每页数量</p>
+   */
+  PageSize?: number
+  /**
+   * <p>过滤条件列表</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>排序字段列表</p>
+   */
+  SortFields?: Array<SortField>
+}
+
+/**
  * DescribeDataMaskStrategies请求参数结构体
  */
 export interface DescribeDataMaskStrategiesRequest {
@@ -1593,13 +2503,30 @@ export interface DescribeDataMaskStrategiesRequest {
 }
 
 /**
- * UpdateDataMaskStrategy返回参数结构体
+ * SmartOptimizerLifecyclePolicy
  */
-export interface UpdateDataMaskStrategyResponse {
+export interface SmartOptimizerLifecyclePolicy {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 生命周期启用
    */
-  RequestId?: string
+  LifecycleEnable?: string
+  /**
+   * 过期时间
+   */
+  Expiration?: number
+  /**
+   * 是否删表，该字段废弃已使用，用TableExpiration策略替代
+   * @deprecated
+   */
+  DropTable?: boolean
+  /**
+   * 过期字段
+   */
+  ExpiredField?: string
+  /**
+   * 过期字段格式
+   */
+  ExpiredFieldFormat?: string
 }
 
 /**
@@ -1634,6 +2561,20 @@ export interface DescribeDLCCatalogAccessResponse {
  * DeleteTable返回参数结构体
  */
 export interface DeleteTableResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetLabYaml返回参数结构体
+ */
+export interface GetLabYamlResponse {
+  /**
+   * <p>RayCluster YAML</p>
+   */
+  Yaml?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -1678,6 +2619,50 @@ export interface CreateExportTaskRequest {
    * 目标数据源的类型，目前支持导出到cos
    */
   OutputType?: string
+}
+
+/**
+ * RegisterThirdPartyAccessUser返回参数结构体
+ */
+export interface RegisterThirdPartyAccessUserResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * Ray 任务事件项
+ */
+export interface RayJobEventItem {
+  /**
+   * <p>事件时间（Unix 时间戳，毫秒）</p>
+   */
+  EventTime?: number
+  /**
+   * <p>组件名称，来源于 event.involvedObject.kind</p>
+   */
+  Component?: string
+  /**
+   * <p>事件级别，来源于 event.type 的原始值（如 Normal、Warning）</p>
+   */
+  Level?: string
+  /**
+   * <p>事件内容，来源于 event.message</p>
+   */
+  Message?: string
+  /**
+   * <p>关联的 K8s 对象名称，来源于 event.involvedObject.name</p>
+   */
+  InvolvedObjectName?: string
+  /**
+   * <p>事件来源组件，来源于 event.source.component</p>
+   */
+  SourceComponent?: string
+  /**
+   * <p>事件原因，来源于 event.reason</p>
+   */
+  Reason?: string
 }
 
 /**
@@ -1874,13 +2859,13 @@ export interface CreateSparkSubmitTaskResponse {
 }
 
 /**
- * UpdateEngineResourceGroupNetworkConfigInfo返回参数结构体
+ * CancelRayJob请求参数结构体
  */
-export interface UpdateEngineResourceGroupNetworkConfigInfoResponse {
+export interface CancelRayJobRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 任务ID
    */
-  RequestId?: string
+  Id: string
 }
 
 /**
@@ -2203,6 +3188,20 @@ export interface DescribeNotebookSessionStatementSqlResultRequest {
 }
 
 /**
+ * GetLabPodYaml请求参数结构体
+ */
+export interface GetLabPodYamlRequest {
+  /**
+   * <p>数据实验室ID</p>
+   */
+  Id: string
+  /**
+   * <p>Pod名称</p>
+   */
+  PodName?: string
+}
+
+/**
  * CreateSparkSubmitTask请求参数结构体
  */
 export interface CreateSparkSubmitTaskRequest {
@@ -2347,21 +3346,21 @@ export interface UpdateUserDataEngineConfigRequest {
 }
 
 /**
- * DeleteMetaDatabase返回参数结构体
+ * CreateNotebookSessionStatement请求参数结构体
  */
-export interface DeleteMetaDatabaseResponse {
+export interface CreateNotebookSessionStatementRequest {
   /**
-   * 本批次提交的任务的批次Id
+   * Session唯一标识
    */
-  BatchId?: string
+  SessionId: string
   /**
-   * 任务Id集合，按照执行顺序排列
+   * 执行的代码
    */
-  TaskIdSet?: Array<string>
+  Code: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 类型，当前支持：spark、pyspark、sparkr、sql
    */
-  RequestId?: string
+  Kind: string
 }
 
 /**
@@ -2519,6 +3518,148 @@ table-id - String - （过滤条件）table id形如：12342。
 }
 
 /**
+ * StartLab返回参数结构体
+ */
+export interface StartLabResponse {
+  /**
+   * <p>案例模板ID（startMode=EXAMPLE 时使用）</p>
+   */
+  ExampleId?: string
+  /**
+   * <p>代码包/工程归档地址</p>
+   */
+  CodeArchiveUrl?: string
+  /**
+   * <p>数据实验室服务入口（服务类型 -&gt; 访问地址）</p>
+   */
+  Services?: Array<TypeKVPair>
+  /**
+   * <p>Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在&quot;内置 / 自定义&quot;两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。</p>
+   */
+  LabImage?: string
+  /**
+   * <p>集群ID</p>
+   */
+  Id?: string
+  /**
+   * <p>资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口）</p>
+   */
+  Type?: string
+  /**
+   * <p>集群名称</p>
+   */
+  Name?: string
+  /**
+   * <p>集群描述</p>
+   */
+  Description?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>集群状态</p>
+   */
+  Status?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>所属集群组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。</p>
+   */
+  Image?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>Dashboard URL / 历史记录链接</p>
+   */
+  HistoryUrl?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>启动时间（最近一次启动）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>标签列表（TagKey-TagValue）</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。</p>
+   */
+  PersistentWorkDir?: PersistentWorkDir
+  /**
+   * <p>是否开启token认证</p>
+   */
+  EnableToken?: boolean
+  /**
+   * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  LabImagePullType?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateStoreLocation请求参数结构体
  */
 export interface CreateStoreLocationRequest {
@@ -2584,6 +3725,20 @@ export interface ModifyWorkGroupResponse {
 }
 
 /**
+ * ListExampleDifficulties请求参数结构体
+ */
+export interface ListExampleDifficultiesRequest {
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>页数</p>
+   */
+  PageSize?: number
+}
+
+/**
  * DescribeDMSPartitions返回参数结构体
  */
 export interface DescribeDMSPartitionsResponse {
@@ -2602,21 +3757,13 @@ export interface DescribeDMSPartitionsResponse {
 }
 
 /**
- * DescribeStandardEngineResourceGroupConfigInfo返回参数结构体
+ * DeleteRayCluster请求参数结构体
  */
-export interface DescribeStandardEngineResourceGroupConfigInfoResponse {
+export interface DeleteRayClusterRequest {
   /**
-   * 总数
+   * <p>集群ID</p>
    */
-  Total?: number
-  /**
-   * 标准引擎资源组，配置相关信息
-   */
-  StandardEngineResourceGroupConfigInfos?: Array<StandardEngineResourceGroupConfigInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Id: string
 }
 
 /**
@@ -2796,6 +3943,163 @@ export interface DescribeDataEnginesScaleDetailRequest {
 }
 
 /**
+ * UpdateJobSpec返回参数结构体
+ */
+export interface UpdateJobSpecResponse {
+  /**
+   * <p>配置ID</p>
+   */
+  Id?: string
+  /**
+   * <p>配置名称</p>
+   */
+  Name?: string
+  /**
+   * <p>配置描述</p>
+   */
+  Description?: string
+  /**
+   * <p>入口命令</p>
+   */
+  Entrypoint?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>镜像拉取类型（Builtin: 内置, Custom: 自定义）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>运行时环境配置(JSON)</p>
+   */
+  RuntimeEnv?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>弹性伸缩配置(JSON)</p>
+   */
+  AutoscalerOptions?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>资源配置模板是否变更</p>
+   */
+  ResourceConfigChanged?: boolean
+  /**
+   * <p>默认资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>默认队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>作业包URL</p>
+   */
+  JobPackage?: string
+  /**
+   * <p>作业包名称</p>
+   */
+  JobPackageName?: string
+  /**
+   * <p>作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺省时按 Local 处理</p>
+   */
+  JobPackageSource?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>创建者UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>该配置产生的作业实例数量</p>
+   */
+  JobInstanceCount?: number
+  /**
+   * <p>是否有运行中的作业实例</p>
+   */
+  HasRunningJobs?: boolean
+  /**
+   * <p>高级参数json</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>默认计算组名称（与 ClusterGroup 等价，新调用方使用 GroupId）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupId?: string
+  /**
+   * <p>默认集群 ID（与 GroupId 互斥）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * <p>作业优先级（1-9，数字越大优先级越高）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>集群分派策略</p><p>枚举值：</p><ul><li>RANDOM： 随机分配</li></ul>
+   */
+  DispatchStrategy?: string
+  /**
+   * <p>作业提交目标</p><p>枚举值：</p><ul><li>GROUP： 按计算组分派</li></ul>
+   */
+  SubmissionTarget?: string
+  /**
+   * <p>计算组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>集群名称</p>
+   */
+  ClusterName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeEngineNetworks请求参数结构体
  */
 export interface DescribeEngineNetworksRequest {
@@ -2898,6 +4202,67 @@ export interface DescribeSparkAppJobsResponse {
 }
 
 /**
+ * 集群组响应
+ */
+export interface ClusterGroup {
+  /**
+   * 集群组 ID（系统生成）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Id?: string
+  /**
+   * 集群组名称
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * 集群组描述
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * 配置
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Config?: string
+  /**
+   * 应用 ID（多租户）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: number
+  /**
+   * 创建者主账号 UIN
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+  /**
+   * 创建者子账号 UIN
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubAccountUin?: string
+  /**
+   * 创建时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * 更新时间
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: number
+  /**
+   * 是否已软删除
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Deleted?: boolean
+  /**
+   * 删除时间（软删时写入，活跃记录为 null）
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeleteTime?: number
+}
+
+/**
  * 查询表信息对象
  */
 export interface TableResponseInfo {
@@ -2959,13 +4324,33 @@ export interface TableResponseInfo {
 }
 
 /**
- * UpdateUserDataEngineConfig返回参数结构体
+ * UpdateResourceConfig请求参数结构体
  */
-export interface UpdateUserDataEngineConfigResponse {
+export interface UpdateResourceConfigRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 资源配置模板Id
    */
-  RequestId?: string
+  Id: string
+  /**
+   * 模板名称
+   */
+  Name?: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * Head节点配置
+   */
+  Head?: HeadSpecDTO
+  /**
+   * Worker节点配置
+   */
+  Worker?: Array<WorkerSpecDTO>
+  /**
+   * 模板类型(不传默认Ray)
+   */
+  Type?: string
 }
 
 /**
@@ -3055,6 +4440,64 @@ export interface EngineResourceGroupConfigPair {
 }
 
 /**
+ * UpdateRowFilter返回参数结构体
+ */
+export interface UpdateRowFilterResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 授权用户信息
+ */
+export interface UserInfo {
+  /**
+   * 用户Id，和子用户uin相同
+   */
+  UserId?: string
+  /**
+   * 用户描述信息，方便区分不同用户
+   */
+  UserDescription?: string
+  /**
+   * 单独给用户绑定的权限集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PolicySet?: Array<Policy>
+  /**
+   * 当前用户的创建者
+   */
+  Creator?: string
+  /**
+   * 创建时间，格式如2021-07-28 16:19:32
+   */
+  CreateTime?: string
+  /**
+   * 关联的工作组集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  WorkGroupSet?: Array<WorkGroupMessage>
+  /**
+   * 是否是主账号
+   */
+  IsOwner?: boolean
+  /**
+   * 用户类型。ADMIN：管理员 COMMON：普通用户。
+   */
+  UserType?: string
+  /**
+   * 用户别名
+   */
+  UserAlias?: string
+  /**
+   * 账号类型
+   */
+  AccountType?: string
+}
+
+/**
  * CreateDatabase返回参数结构体
  */
 export interface CreateDatabaseResponse {
@@ -3069,6 +4512,60 @@ export interface CreateDatabaseResponse {
 }
 
 /**
+ * DeleteJobSpec请求参数结构体
+ */
+export interface DeleteJobSpecRequest {
+  /**
+   * 配置ID
+   */
+  SpecId: string
+}
+
+/**
+ * GetLabPods请求参数结构体
+ */
+export interface GetLabPodsRequest {
+  /**
+   * <p>数据实验室ID</p>
+   */
+  Id: string
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>每页数量</p>
+   */
+  PageSize?: number
+  /**
+   * <p>开始时间（毫秒时间戳）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>结束时间（毫秒时间戳）</p>
+   */
+  EndTime?: number
+  /**
+   * <p>过滤条件</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>排序字段列表</p>
+   */
+  SortFields?: Array<SortField>
+}
+
+/**
+ * GetRayJob请求参数结构体
+ */
+export interface GetRayJobRequest {
+  /**
+   * <p>任务ID</p>
+   */
+  Id: string
+}
+
+/**
  * DeleteDataMaskStrategy请求参数结构体
  */
 export interface DeleteDataMaskStrategyRequest {
@@ -3076,6 +4573,36 @@ export interface DeleteDataMaskStrategyRequest {
    * 数据脱敏策略Id
    */
   StrategyId?: string
+}
+
+/**
+ * ListExampleTags返回参数结构体
+ */
+export interface ListExampleTagsResponse {
+  /**
+   * <p>标签总数</p>
+   */
+  Total?: number
+  /**
+   * <p>当前页码</p>
+   */
+  Page?: number
+  /**
+   * <p>每页显示标签数量</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总页数</p>
+   */
+  TotalPages?: number
+  /**
+   * <p>标签实体</p>
+   */
+  Items?: Array<ExampleTag>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3098,6 +4625,24 @@ export interface CreateWorkGroupRequest {
    * 需要绑定到工作组的用户Id集合
    */
   UserIds?: Array<string>
+}
+
+/**
+ * DescribeClusterGroupClusters请求参数结构体
+ */
+export interface DescribeClusterGroupClustersRequest {
+  /**
+   * <p>计算组 ID</p>
+   */
+  Id: string
+  /**
+   * <p>返回样例 ClusterId 的最大数量（默认 5）</p>
+   */
+  SampleLimit?: number
+  /**
+   * <p>Cluster 状态列表</p><p>枚举值：</p><ul><li>running： 运行中</li></ul>
+   */
+  Status?: Array<string>
 }
 
 /**
@@ -3169,6 +4714,147 @@ export interface CheckDataEngineImageCanBeUpgradeRequest {
    * 集群id
    */
   DataEngineId: string
+}
+
+/**
+ * UpdateJobSpecPriority返回参数结构体
+ */
+export interface UpdateJobSpecPriorityResponse {
+  /**
+   * <p>配置ID</p>
+   */
+  Id?: string
+  /**
+   * <p>配置名称</p>
+   */
+  Name?: string
+  /**
+   * <p>配置描述</p>
+   */
+  Description?: string
+  /**
+   * <p>入口命令</p>
+   */
+  Entrypoint?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>镜像拉取类型（Builtin: 内置, Custom: 自定义）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>运行时环境配置(JSON)</p>
+   */
+  RuntimeEnv?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>弹性伸缩配置(JSON)</p>
+   */
+  AutoscalerOptions?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>资源配置模板是否变更</p>
+   */
+  ResourceConfigChanged?: boolean
+  /**
+   * <p>默认资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>默认队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>默认计算组 ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupId?: string
+  /**
+   * <p>默认集群 ID（与 GroupId 互斥）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * <p>集群分派策略（本期仅支持 RANDOM；NULL 时退化为依赖 ClusterGroup 配置兜底）</p>
+   */
+  DispatchStrategy?: string
+  /**
+   * <p>作业包URL</p>
+   */
+  JobPackage?: string
+  /**
+   * <p>作业包名称</p>
+   */
+  JobPackageName?: string
+  /**
+   * <p>作业优先级（1-9，数字越大优先级越高）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Priority?: number
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>创建者UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>该配置下未进入终态的作业实例数量</p>
+   */
+  JobInstanceCount?: number
+  /**
+   * <p>是否有运行中的作业实例</p>
+   */
+  HasRunningJobs?: boolean
+  /**
+   * <p>高级参数，JSON 字符串（内容为 Key-Value 对象）</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺时按 Local 处理</p>
+   */
+  JobPackageSource?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3308,21 +4994,53 @@ export interface UpdateStandardEngineResourceGroupConfigInfoRequest {
 }
 
 /**
- * ModifyUser请求参数结构体
+ * GetRayClusterHistory返回参数结构体
  */
-export interface ModifyUserRequest {
+export interface GetRayClusterHistoryResponse {
   /**
-   * 用户Id，和CAM侧Uin匹配
+   * <p>总记录数</p>
    */
-  UserId: string
+  Total?: number
   /**
-   * 用户描述
+   * <p>当前页码（从1开始）</p>
    */
-  UserDescription: string
+  Page?: number
   /**
-   * 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户）
+   * <p>每页数量</p>
    */
-  AccountType?: string
+  PageSize?: number
+  /**
+   * <p>总页数</p>
+   */
+  TotalPages?: number
+  /**
+   * <p>集群状态历史详情列表</p>
+   */
+  Items?: Array<RayClusterHistory>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateUserDataEngineConfig返回参数结构体
+ */
+export interface UpdateUserDataEngineConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetResourceConfig请求参数结构体
+ */
+export interface GetResourceConfigRequest {
+  /**
+   * 模板ID
+   */
+  Id: string
 }
 
 /**
@@ -3344,21 +5062,157 @@ export interface DescribeTasksCostInfoResponse {
 }
 
 /**
- * AddDMSPartitions返回参数结构体
+ * DeleteRayJob请求参数结构体
  */
-export interface AddDMSPartitionsResponse {
+export interface DeleteRayJobRequest {
   /**
-   * 成功数量
+   * 任务ID
    */
-  Total?: number
+  Id: string
+}
+
+/**
+ * ModifyClusterPriority返回参数结构体
+ */
+export interface ModifyClusterPriorityResponse {
   /**
-   * 分区值
+   * <p>集群ID</p>
    */
-  Partitions?: Array<DMSPartition>
+  Id?: string
+  /**
+   * <p>资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口）</p>
+   */
+  Type?: string
+  /**
+   * <p>集群名称</p>
+   */
+  Name?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子账号UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>集群状态</p>
+   */
+  Status?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>所属集群组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>Dashboard URL / 历史记录链接</p>
+   */
+  HistoryUrl?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>高级参数（规范化后的扁平 KV JSON）</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>启动时间（最近一次启动）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>标签列表（TagKey-TagValue）</p>
+   */
+  Tags?: Array<Tag>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DataEngine基本信息
+ */
+export interface DataEngineBasicInfo {
+  /**
+   * DataEngine名称
+   */
+  DataEngineName?: string
+  /**
+   * 数据引擎状态  -2已删除 -1失败 0初始化中 1挂起 2运行中 3准备删除 4删除中
+   */
+  State?: number
+  /**
+   * 创建时间
+   */
+  CreateTime?: number
+  /**
+   * 更新时间
+   */
+  UpdateTime?: number
+  /**
+   * 返回信息
+   */
+  Message?: string
+  /**
+   * 引擎id
+   */
+  DataEngineId?: string
+  /**
+   * 引擎类型，有效值：PrestoSQL/SparkSQL/SparkBatch
+   */
+  DataEngineType?: string
+  /**
+   * 用户ID
+   */
+  AppId?: number
+  /**
+   * 账号ID
+   */
+  UserUin?: string
 }
 
 /**
@@ -3429,6 +5283,40 @@ export interface GPUInfo {
    * 售卖情况（1-缺货，2-低库存，3-充足）
    */
   SaleStatus?: number
+}
+
+/**
+ * GetRayClusterEvent请求参数结构体
+ */
+export interface GetRayClusterEventRequest {
+  /**
+   * <p>Ray集群ID</p>
+   */
+  Id: string
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>每页数量</p>
+   */
+  PageSize?: number
+  /**
+   * <p>开始时间（毫秒时间戳）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>结束时间（毫秒时间戳）</p>
+   */
+  EndTime?: number
+  /**
+   * <p>排序字段列表</p>
+   */
+  SortFields?: Array<SortField>
+  /**
+   * <p>翻页上下文，首次查询不传，后续翻页传入上一次返回的 Context 值</p>
+   */
+  Context?: string
 }
 
 /**
@@ -4030,6 +5918,16 @@ export interface CreateNotebookSessionStatementSupportBatchSQLRequest {
 }
 
 /**
+ * UpgradeDataEngineImage返回参数结构体
+ */
+export interface UpgradeDataEngineImageResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DetachWorkGroupPolicy返回参数结构体
  */
 export interface DetachWorkGroupPolicyResponse {
@@ -4059,6 +5957,40 @@ export interface DescribeSparkSessionBatchSqlLogResponse {
 }
 
 /**
+ * GetRayClusterPods请求参数结构体
+ */
+export interface GetRayClusterPodsRequest {
+  /**
+   * <p>集群ID</p>
+   */
+  Id: string
+  /**
+   * <p>起始时间（毫秒时间戳）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>截止时间（毫秒时间戳）</p>
+   */
+  EndTime?: number
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>每页数量</p>
+   */
+  PageSize?: number
+  /**
+   * <p>过滤条件列表</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>排序字段列表</p>
+   */
+  SortFields?: Array<SortField>
+}
+
+/**
  * SwitchDataEngine返回参数结构体
  */
 export interface SwitchDataEngineResponse {
@@ -4076,6 +6008,16 @@ export interface DescribeTaskResourceUsageRequest {
    * 任务 id
    */
   TaskInstanceId: string
+}
+
+/**
+ * ListExampleTags请求参数结构体
+ */
+export interface ListExampleTagsRequest {
+  /**
+   * <p>案例标签</p>
+   */
+  Category?: string
 }
 
 /**
@@ -4165,6 +6107,156 @@ export interface PauseStandardEngineResourceGroupsResponse {
 }
 
 /**
+ * ModifyLabPriority返回参数结构体
+ */
+export interface ModifyLabPriorityResponse {
+  /**
+   * <p>案例模板ID（startMode=EXAMPLE 时使用）</p>
+   */
+  ExampleId?: string
+  /**
+   * <p>代码包/工程归档地址</p>
+   */
+  CodeArchiveUrl?: string
+  /**
+   * <p>数据实验室服务入口（服务类型 -&gt; 访问地址）</p>
+   */
+  Services?: Array<TypeKVPair>
+  /**
+   * <p>Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在&quot;内置 / 自定义&quot;两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。</p>
+   */
+  LabImage?: string
+  /**
+   * <p>集群ID</p>
+   */
+  Id?: string
+  /**
+   * <p>资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口）</p>
+   */
+  Type?: string
+  /**
+   * <p>集群名称</p>
+   */
+  Name?: string
+  /**
+   * <p>集群描述</p>
+   */
+  Description?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>集群状态</p>
+   */
+  Status?: string
+  /**
+   * <p>状态详情/错误信息</p>
+   */
+  StatusMessage?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>所属集群组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。</p>
+   */
+  Image?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>Dashboard URL / 历史记录链接</p>
+   */
+  HistoryUrl?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>启动时间（最近一次启动）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>停止时间（最近一次停止/休眠）</p>
+   */
+  StopTime?: number
+  /**
+   * <p>标签列表（TagKey-TagValue）</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。</p>
+   */
+  PersistentWorkDir?: PersistentWorkDir
+  /**
+   * <p>是否开启token认证</p>
+   */
+  EnableToken?: boolean
+  /**
+   * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  LabImagePullType?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteStandardEngineResourceGroup请求参数结构体
  */
 export interface DeleteStandardEngineResourceGroupRequest {
@@ -4225,6 +6317,36 @@ export interface DescribeUserTypeResponse {
 }
 
 /**
+ * ListJobsBySpec返回参数结构体
+ */
+export interface ListJobsBySpecResponse {
+  /**
+   * 总记录数
+   */
+  Total?: number
+  /**
+   * 当前页码（从1开始）
+   */
+  Page?: number
+  /**
+   * 页数
+   */
+  PageSize?: number
+  /**
+   * 总页数
+   */
+  TotalPages?: number
+  /**
+   * 数据列表
+   */
+  Items?: Array<RayJobSubmitEntity>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * QueryResult返回参数结构体
  */
 export interface QueryResultResponse {
@@ -4251,9 +6373,83 @@ export interface QueryResultResponse {
 }
 
 /**
+ * 环境变量标签
+ */
+export interface Env {
+  /**
+   * <p>名称</p>
+   */
+  Name?: string
+  /**
+   * <p>值</p>
+   */
+  Value?: string
+}
+
+/**
  * DeleteThirdPartyAccessUser请求参数结构体
  */
 export type DeleteThirdPartyAccessUserRequest = null
+
+/**
+ * 资源配置响应
+ */
+export interface ResourceConfig {
+  /**
+   * <p>模板ID</p>
+   */
+  Id?: string
+  /**
+   * <p>模板名称</p>
+   */
+  Name?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>模板类型(ray,spark)</p>
+   */
+  Type?: string
+  /**
+   * <p>Head节点配置</p>
+   */
+  Head?: HeadSpecDTO
+  /**
+   * <p>Worker节点配置</p>
+   */
+  Worker?: Array<WorkerSpecDTO>
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>创建者UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+}
+
+/**
+ * GetRayClusterYaml请求参数结构体
+ */
+export interface GetRayClusterYamlRequest {
+  /**
+   * <p>集群ID</p>
+   */
+  Id: string
+}
 
 /**
  * DeleteUser返回参数结构体
@@ -4312,6 +6508,20 @@ export interface CreateDataEngineResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetRayJobPodYaml请求参数结构体
+ */
+export interface GetRayJobPodYamlRequest {
+  /**
+   * 任务ID
+   */
+  Id?: string
+  /**
+   * Pod名称
+   */
+  PodName?: string
 }
 
 /**
@@ -4637,6 +6847,20 @@ export interface CSV {
 }
 
 /**
+ * GetRayClusterPodYaml请求参数结构体
+ */
+export interface GetRayClusterPodYamlRequest {
+  /**
+   * <p>集群ID</p>
+   */
+  Id: string
+  /**
+   * <p>Pod名称</p>
+   */
+  PodName?: string
+}
+
+/**
  * DropDMSPartitions返回参数结构体
  */
 export interface DropDMSPartitionsResponse {
@@ -4651,21 +6875,21 @@ export interface DropDMSPartitionsResponse {
 }
 
 /**
- * CreateNotebookSessionStatement请求参数结构体
+ * DeleteMetaDatabase返回参数结构体
  */
-export interface CreateNotebookSessionStatementRequest {
+export interface DeleteMetaDatabaseResponse {
   /**
-   * Session唯一标识
+   * 本批次提交的任务的批次Id
    */
-  SessionId: string
+  BatchId?: string
   /**
-   * 执行的代码
+   * 任务Id集合，按照执行顺序排列
    */
-  Code: string
+  TaskIdSet?: Array<string>
   /**
-   * 类型，当前支持：spark、pyspark、sparkr、sql
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Kind: string
+  RequestId?: string
 }
 
 /**
@@ -4769,51 +6993,60 @@ export interface DescribeNotebookSessionLogRequest {
 }
 
 /**
- * 授权用户信息
+ * DeleteClusterGroup返回参数结构体
  */
-export interface UserInfo {
+export interface DeleteClusterGroupResponse {
   /**
-   * 用户Id，和子用户uin相同
+   * <p>集群组 ID（系统生成）</p>
    */
-  UserId?: string
+  Id?: string
   /**
-   * 用户描述信息，方便区分不同用户
+   * <p>集群组名称（同一 AppId 下唯一）</p>
    */
-  UserDescription?: string
+  Name?: string
   /**
-   * 单独给用户绑定的权限集合
+   * <p>集群组描述</p>
+   */
+  Description?: string
+  /**
+   * <p>集群组配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  PolicySet?: Array<Policy>
+  Config?: string
   /**
-   * 当前用户的创建者
+   * <p>应用 ID（多租户）</p>
    */
-  Creator?: string
+  AppId?: number
   /**
-   * 创建时间，格式如2021-07-28 16:19:32
+   * <p>创建者主账号 UIN</p>
    */
-  CreateTime?: string
+  Uin?: string
   /**
-   * 关联的工作组集合
+   * <p>创建者子账号 UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>是否已软删除（false=活跃, true=已删除）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkGroupSet?: Array<WorkGroupMessage>
+  Deleted?: boolean
   /**
-   * 是否是主账号
+   * <p>删除时间（软删时写入，活跃记录为 null）</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  IsOwner?: boolean
+  DeleteTime?: number
   /**
-   * 用户类型。ADMIN：管理员 COMMON：普通用户。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UserType?: string
-  /**
-   * 用户别名
-   */
-  UserAlias?: string
-  /**
-   * 账号类型
-   */
-  AccountType?: string
+  RequestId?: string
 }
 
 /**
@@ -4839,6 +7072,36 @@ export interface Users {
    * 用户总数
    */
   TotalCount?: number
+}
+
+/**
+ * GetRayJobHistory返回参数结构体
+ */
+export interface GetRayJobHistoryResponse {
+  /**
+   * 总记录数
+   */
+  Total?: number
+  /**
+   * 当前页码（从1开始）
+   */
+  Page?: number
+  /**
+   * 页数
+   */
+  PageSize?: number
+  /**
+   * 总页数
+   */
+  TotalPages?: number
+  /**
+   * 作业状态历史列表
+   */
+  Items?: Array<JobStatusHistory>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4874,6 +7137,178 @@ export interface SortOrder {
 }
 
 /**
+ * GetLabDetail返回参数结构体
+ */
+export interface GetLabDetailResponse {
+  /**
+   * <p>案例模板ID（startMode=EXAMPLE 时使用）</p>
+   */
+  ExampleId?: string
+  /**
+   * <p>代码包/工程归档地址</p>
+   */
+  CodeArchiveUrl?: string
+  /**
+   * <p>数据实验室服务入口（服务类型 -&gt; 访问地址）</p>
+   */
+  Services?: Array<TypeKVPair>
+  /**
+   * <p>集群ID</p>
+   */
+  Id?: string
+  /**
+   * <p>资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口）</p>
+   */
+  Type?: string
+  /**
+   * <p>集群名称</p>
+   */
+  Name?: string
+  /**
+   * <p>集群描述</p>
+   */
+  Description?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>集群状态</p>
+   */
+  Status?: string
+  /**
+   * <p>状态详情/错误信息</p>
+   */
+  StatusMessage?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。</p>
+   */
+  Image?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>Dashboard URL / 历史记录链接</p>
+   */
+  HistoryUrl?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>启动时间（最近一次启动）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>停止时间（最近一次停止/休眠）</p>
+   */
+  StopTime?: number
+  /**
+   * <p>删除时间</p>
+   */
+  DeleteTime?: number
+  /**
+   * <p>标签列表（TagKey-TagValue）</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。</p>
+   */
+  PersistentWorkDir?: PersistentWorkDir
+  /**
+   * <p>是否开启token认证</p>
+   */
+  EnableToken?: boolean
+  /**
+   * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  LabImagePullType?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 数据实验室事件项
+ */
+export interface EventItem {
+  /**
+   * <p>事件时间（Unix 时间戳，毫秒）</p>
+   */
+  EventTime?: number
+  /**
+   * <p>组件名称，来源于 event.involvedObject.kind</p>
+   */
+  Component?: string
+  /**
+   * <p>事件级别，来源于 event.type 的原始值（如 Normal、Warning）</p>
+   */
+  Level?: string
+  /**
+   * <p>事件内容，来源于 event.message</p>
+   */
+  Message?: string
+  /**
+   * <p>关联的 K8s 对象名称，来源于 event.involvedObject.name</p>
+   */
+  InvolvedObjectName?: string
+  /**
+   * <p>事件来源组件，来源于 event.source.component</p>
+   */
+  SourceComponent?: string
+  /**
+   * <p>事件原因，来源于 event.reason</p>
+   */
+  Reason?: string
+}
+
+/**
  * SuspendResumeDataEngine返回参数结构体
  */
 export interface SuspendResumeDataEngineResponse {
@@ -4885,6 +7320,24 @@ export interface SuspendResumeDataEngineResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyUser请求参数结构体
+ */
+export interface ModifyUserRequest {
+  /**
+   * 用户Id，和CAM侧Uin匹配
+   */
+  UserId: string
+  /**
+   * 用户描述
+   */
+  UserDescription: string
+  /**
+   * 用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户）
+   */
+  AccountType?: string
 }
 
 /**
@@ -4907,6 +7360,57 @@ export interface DatasourceConnectionLocation {
    * Subnet的IPv4 CIDR
    */
   SubnetCidrBlock: string
+}
+
+/**
+ * Smart Optimizer高级参数配置数据结构
+ */
+export interface WrittenAdvancePolicy {
+  /**
+   * 是否启用合并
+   */
+  CompactEnable?: string
+  /**
+   * 是否启用历史数据清理
+   */
+  DeleteEnable?: string
+  /**
+   * 合并最新文件数量
+   */
+  MinInputFiles?: number
+  /**
+   * 合并文件目录文件大小
+   */
+  TargetFileSizeBytes?: number
+  /**
+   * 保留过期时间的快照数量
+   */
+  RetainLast?: number
+  /**
+   * 快照过期时间
+   */
+  BeforeDays?: number
+  /**
+   * 快照过期执行周期
+   */
+  ExpiredSnapshotsIntervalMin?: number
+  /**
+   * 移除孤立文件执行周期
+   */
+  RemoveOrphanIntervalMin?: number
+  /**
+   * 是否开启COW表合并
+   */
+  CowCompactEnable?: string
+  /**
+   * 文件合并策略
+   */
+  CompactStrategy?: string
+  /**
+   * sort合并策略的规则定义
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SortOrders?: Array<SortOrder>
 }
 
 /**
@@ -5032,6 +7536,36 @@ export interface DescribeClusterMonitorInfosResponse {
 }
 
 /**
+ * GetRayJobPods返回参数结构体
+ */
+export interface GetRayJobPodsResponse {
+  /**
+   * 总记录数
+   */
+  Total?: number
+  /**
+   * 当前页码（从1开始）
+   */
+  Page?: number
+  /**
+   * 页数
+   */
+  PageSize?: number
+  /**
+   * 总页数
+   */
+  TotalPages?: number
+  /**
+   * 作业pod列表
+   */
+  Items?: Array<JobPodEntity>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeLakeFsTaskResult请求参数结构体
  */
 export interface DescribeLakeFsTaskResultRequest {
@@ -5146,6 +7680,72 @@ export interface AlterDMSTableRequest {
 }
 
 /**
+ * worker组规格
+ */
+export interface WorkerSpecDTO {
+  /**
+   * <p>worker名称</p>
+   */
+  Name?: string
+  /**
+   * <p>Pod CPU核数</p>
+   */
+  PodCpu?: number
+  /**
+   * <p>Pod 内存大小</p>
+   */
+  PodMem?: number
+  /**
+   * <p>GPU类型</p>
+   */
+  GpuType?: string
+  /**
+   * <p>GPU数量</p>
+   */
+  GpuNum?: number
+  /**
+   * <p>环境变量列表</p>
+   */
+  Envs?: Array<Env>
+  /**
+   * <p>标签列表</p>
+   */
+  Labels?: Array<Label>
+  /**
+   * <p>资源标签列表（用于追加到 headGroupSpec/workerGroupSpec 的 resources map 中，对应 Ray/K8s 的自定义资源声明），Value 必须为字符串形式的整数</p>
+   */
+  ResourcesLabels?: Array<Label>
+  /**
+   * <p>最小Pod数量</p>
+   */
+  MinPodNum?: number
+  /**
+   * <p>最大Pod数量</p>
+   */
+  MaxPodNum?: number
+  /**
+   * <p>是否开启弹性伸缩（true=开启，false/null=关闭）。开启后按 MinPodNum/MaxPodNum 弹性伸缩，关闭则按固定副本数运行</p>
+   */
+  EnableAutoScaling?: boolean
+  /**
+   * <p>资源类型,CPU,GPU</p>
+   */
+  ResourceType?: string
+  /**
+   * <p>机型，例如X40/T20</p>
+   */
+  InstanceType?: string
+  /**
+   * <p>规格数量</p>
+   */
+  Spec?: number
+  /**
+   * <p>资源ID(唯一)</p>
+   */
+  BillingItem?: string
+}
+
+/**
  * SmartPolicyRequest
  */
 export interface SmartPolicy {
@@ -5199,6 +7799,150 @@ export interface DescribeUserVpcConnectionRequest {
    * 终端节点ID集合
    */
   UserVpcEndpointIds?: Array<string>
+}
+
+/**
+ * StartRayCluster返回参数结构体
+ */
+export interface StartRayClusterResponse {
+  /**
+   * <p>集群ID</p>
+   */
+  Id?: string
+  /**
+   * <p>资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口）</p>
+   */
+  Type?: string
+  /**
+   * <p>集群名称</p>
+   */
+  Name?: string
+  /**
+   * <p>集群描述</p>
+   */
+  Description?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子账号UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>集群状态</p>
+   */
+  Status?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>所属集群组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>Dashboard URL / 历史记录链接</p>
+   */
+  HistoryUrl?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>高级参数（规范化后的扁平 KV JSON）</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>启动时间（最近一次启动）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>停止时间（最近一次停止/休眠）</p>
+   */
+  StopTime?: number
+  /**
+   * <p>标签列表（TagKey-TagValue）</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetRayClusterEvent返回参数结构体
+ */
+export interface GetRayClusterEventResponse {
+  /**
+   * <p>翻页上下文，下一次分页请求时传入此值</p>
+   */
+  Context?: string
+  /**
+   * <p>是否已经返回所有符合条件的日志，true 表示已全部返回</p>
+   */
+  ListOver?: boolean
+  /**
+   * <p>事件列表</p>
+   */
+  Events?: Array<EventItem>
+  /**
+   * <p>事件开始时间</p><p>单位：毫秒</p>
+   */
+  StartTime?: number
+  /**
+   * <p>事件结束时间</p><p>单位：毫秒</p>
+   */
+  EndTime?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5399,6 +8143,76 @@ export interface DescribeResourceGroupUsageInfoResponse {
 }
 
 /**
+ * 任务Pod信息
+ */
+export interface JobPodEntity {
+  /**
+   * Pod名称
+   */
+  PodName?: string
+  /**
+   * Pod IP
+   */
+  PodIp?: string
+  /**
+   * Pod状态
+   */
+  Status?: string
+  /**
+   * Pod阶段
+   */
+  Phase?: string
+  /**
+   * 所属节点
+   */
+  NodeName?: string
+  /**
+   * 节点IP
+   */
+  NodeIp?: string
+  /**
+   * 命名空间
+   */
+  Namespace?: string
+  /**
+   * CPU请求
+   */
+  CpuRequest?: string
+  /**
+   * CPU限制
+   */
+  CpuLimit?: string
+  /**
+   * 内存请求
+   */
+  MemoryRequest?: string
+  /**
+   * 内存限制
+   */
+  MemoryLimit?: string
+  /**
+   * GPU数量
+   */
+  GpuCount?: string
+  /**
+   * 容器镜像
+   */
+  Image?: string
+  /**
+   * Pod角色(head/worker)
+   */
+  Role?: string
+  /**
+   * 创建时间
+   */
+  CreateTime?: number
+  /**
+   * 启动时间
+   */
+  StartTime?: number
+}
+
+/**
  * DescribeSparkSessionBatchSQLCost返回参数结构体
  */
 export interface DescribeSparkSessionBatchSQLCostResponse {
@@ -5425,6 +8239,195 @@ export interface DescribeTasksOverviewResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetJobSpec返回参数结构体
+ */
+export interface GetJobSpecResponse {
+  /**
+   * <p>配置ID</p>
+   */
+  Id?: string
+  /**
+   * <p>配置名称</p>
+   */
+  Name?: string
+  /**
+   * <p>配置描述</p>
+   */
+  Description?: string
+  /**
+   * <p>入口命令</p>
+   */
+  Entrypoint?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>镜像拉取类型（Builtin: 内置, Custom: 自定义）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>运行时环境配置(JSON)</p>
+   */
+  RuntimeEnv?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>弹性伸缩配置(JSON)</p>
+   */
+  AutoscalerOptions?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>资源配置模板是否变更</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourceConfigChanged?: boolean
+  /**
+   * <p>默认资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>默认队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>作业包URL</p>
+   */
+  JobPackage?: string
+  /**
+   * <p>作业包名称</p>
+   */
+  JobPackageName?: string
+  /**
+   * <p>作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺省时按 Local 处理</p>
+   */
+  JobPackageSource?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>创建者UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>该配置产生的作业实例数量</p>
+   */
+  JobInstanceCount?: number
+  /**
+   * <p>是否有运行中的作业实例</p>
+   */
+  HasRunningJobs?: boolean
+  /**
+   * <p>高级参数json</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>默认计算组名称（与 ClusterGroup 等价，新调用方使用 GroupId）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupId?: string
+  /**
+   * <p>默认集群 ID（与 GroupId 互斥）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * <p>作业优先级（1-9，数字越大优先级越高）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>集群分派策略</p><p>枚举值：</p><ul><li>RANDOM： 随机分配</li></ul>
+   */
+  DispatchStrategy?: string
+  /**
+   * <p>作业提交目标</p><p>枚举值：</p><ul><li>GROUP： 按计算组分派</li></ul>
+   */
+  SubmissionTarget?: string
+  /**
+   * <p>计算组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>集群名称</p>
+   */
+  ClusterName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListLabs请求参数结构体
+ */
+export interface ListLabsRequest {
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>每页数量</p>
+   */
+  PageSize?: number
+  /**
+   * <p>开始时间（毫秒时间戳）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>结束时间（毫秒时间戳）</p>
+   */
+  EndTime?: number
+  /**
+   * <p>过滤条件</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>排序字段列表</p>
+   */
+  SortFields?: Array<SortField>
 }
 
 /**
@@ -5461,6 +8464,84 @@ export interface FavorInfo {
    * Table名称
    */
   Table?: string
+}
+
+/**
+ * UpdateLab请求参数结构体
+ */
+export interface UpdateLabRequest {
+  /**
+   * <p>数据实验室名称</p>
+   */
+  Name: string
+  /**
+   * <p>Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在&quot;内置 / 自定义&quot;两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。</p>
+   */
+  LabImage: string
+  /**
+   * <p>数据实验室描述</p>
+   */
+  Description?: string
+  /**
+   * <p>Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。</p>
+   */
+  Image?: string
+  /**
+   * <p>镜像拉取策略（Always, IfNotPresent, Never）</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>案例ID，当 startMode=EXAMPLE 时必填</p>
+   */
+  ExampleId?: string
+  /**
+   * <p>案例代码包地址，当 startMode=EXAMPLE 时填写</p>
+   */
+  CodeArchiveUrl?: string
+  /**
+   * <p>Lab sidecar 镜像拉取策略（Always, IfNotPresent, Never）</p>
+   */
+  LabImagePullPolicy?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>是否开启token认证</p>
+   */
+  EnableToken?: boolean
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。</p>
+   */
+  PersistentWorkDir?: PersistentWorkDir
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  LabImagePullType?: string
 }
 
 /**
@@ -5792,6 +8873,128 @@ export interface DeleteDataEngineRequest {
 }
 
 /**
+ * StopLab返回参数结构体
+ */
+export interface StopLabResponse {
+  /**
+   * <p>案例模板ID（startMode=EXAMPLE 时使用）</p>
+   */
+  ExampleId?: string
+  /**
+   * <p>数据实验室服务入口（服务类型 -&gt; 访问地址）</p>
+   */
+  Services?: Array<TypeKVPair>
+  /**
+   * <p>Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在&quot;内置 / 自定义&quot;两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。</p>
+   */
+  LabImage?: string
+  /**
+   * <p>集群ID</p>
+   */
+  Id?: string
+  /**
+   * <p>资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口）</p>
+   */
+  Type?: string
+  /**
+   * <p>集群名称</p>
+   */
+  Name?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>集群状态</p>
+   */
+  Status?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。</p>
+   */
+  Image?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>Dashboard URL / 历史记录链接</p>
+   */
+  HistoryUrl?: string
+  /**
+   * <p>高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>启动时间（最近一次启动）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>标签列表（TagKey-TagValue）</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。</p>
+   */
+  PersistentWorkDir?: PersistentWorkDir
+  /**
+   * <p>是否开启token认证</p>
+   */
+  EnableToken?: boolean
+  /**
+   * <p>Token 认证密钥（开启 token 认证时由系统生成）</p>
+   */
+  Token?: string
+  /**
+   * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  LabImagePullType?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateSparkSessionBatchSQL返回参数结构体
  */
 export interface CreateSparkSessionBatchSQLResponse {
@@ -5878,6 +9081,20 @@ export interface DescribeMCPSubUinResponse {
 }
 
 /**
+ * DeleteClusterGroup请求参数结构体
+ */
+export interface DeleteClusterGroupRequest {
+  /**
+   * <p>集群组 ID</p>
+   */
+  Id: string
+  /**
+   * <p>是否强制删除（Detach 模式）；false=Block（默认），true=Detach</p>
+   */
+  Force?: boolean
+}
+
+/**
  * CreateSparkApp返回参数结构体
  */
 export interface CreateSparkAppResponse {
@@ -5932,6 +9149,36 @@ export interface MountPointAssociates {
 }
 
 /**
+ * GetRayJobEvent返回参数结构体
+ */
+export interface GetRayJobEventResponse {
+  /**
+   * <p>翻页上下文，下一次分页请求时传入此值</p>
+   */
+  Context?: string
+  /**
+   * <p>是否已经返回所有符合条件的日志，true 表示已全部返回</p>
+   */
+  ListOver?: boolean
+  /**
+   * <p>事件列表</p>
+   */
+  Events?: Array<RayJobEventItem>
+  /**
+   * <p>事件开始时间</p><p>单位：毫秒</p>
+   */
+  StartTime?: number
+  /**
+   * <p>事件结束时间</p><p>单位：毫秒</p>
+   */
+  EndTime?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * AlterDMSPartition返回参数结构体
  */
 export interface AlterDMSPartitionResponse {
@@ -5983,6 +9230,120 @@ export interface CoreInfo {
  * DetachUserPolicy返回参数结构体
  */
 export interface DetachUserPolicyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateLab返回参数结构体
+ */
+export interface UpdateLabResponse {
+  /**
+   * <p>案例模板ID（startMode=EXAMPLE 时使用）</p>
+   */
+  ExampleId?: string
+  /**
+   * <p>代码包/工程归档地址</p>
+   */
+  CodeArchiveUrl?: string
+  /**
+   * <p>数据实验室服务入口（服务类型 -&gt; 访问地址）</p>
+   */
+  Services?: Array<TypeKVPair>
+  /**
+   * <p>Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在&quot;内置 / 自定义&quot;两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。</p>
+   */
+  LabImage?: string
+  /**
+   * <p>Lab sidecar 镜像拉取策略（Always, IfNotPresent, Never）</p>
+   */
+  LabImagePullPolicy?: string
+  /**
+   * <p>集群ID</p>
+   */
+  Id?: string
+  /**
+   * <p>资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口）</p>
+   */
+  Type?: string
+  /**
+   * <p>集群名称</p>
+   */
+  Name?: string
+  /**
+   * <p>集群描述</p>
+   */
+  Description?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>集群状态</p>
+   */
+  Status?: string
+  /**
+   * <p>计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。</p>
+   */
+  Image?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。</p>
+   */
+  PersistentWorkDir?: PersistentWorkDir
+  /**
+   * <p>是否开启token认证</p>
+   */
+  EnableToken?: boolean
+  /**
+   * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  LabImagePullType?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6104,6 +9465,70 @@ export interface MetaDatabaseInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Comment?: string
+}
+
+/**
+ * GetRayJobEventLog请求参数结构体
+ */
+export interface GetRayJobEventLogRequest {
+  /**
+   * ray-jobID
+   */
+  Id: string
+  /**
+   * 开始时间
+   */
+  StartTime?: number
+  /**
+   * 结束时间
+   */
+  EndTime?: number
+  /**
+   * 当前页码（从1开始）
+   */
+  Page?: number
+  /**
+   * 页数
+   */
+  PageSize?: number
+  /**
+   * 排序字段列表（列表字段）
+   */
+  SortFields?: Array<SortField>
+}
+
+/**
+ * GetRayJobEvent请求参数结构体
+ */
+export interface GetRayJobEventRequest {
+  /**
+   * <p>ray-job ID</p>
+   */
+  Id: string
+  /**
+   * <p>开始时间（毫秒时间戳）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>结束时间（毫秒时间戳）</p>
+   */
+  EndTime?: number
+  /**
+   * <p>排序字段列表</p>
+   */
+  SortFields?: Array<SortField>
+  /**
+   * <p>翻页上下文，首次查询不传，后续翻页传入上一次返回的 Context 值</p>
+   */
+  Context?: string
+  /**
+   * <p>分页大小</p>
+   */
+  PageSize?: number
+  /**
+   * <p>事件类型过滤，仅允许 ASCII 字母（如 Normal、Warning）</p>
+   */
+  EventType?: string
 }
 
 /**
@@ -6490,6 +9915,32 @@ export interface SetOptimizerPolicyResponse {
 }
 
 /**
+ * GetLabEvent返回参数结构体
+ */
+export interface GetLabEventResponse {
+  /**
+   * <p>是否已经返回所有符合条件的日志，true 表示已全部返回</p>
+   */
+  ListOver?: boolean
+  /**
+   * <p>事件列表</p>
+   */
+  Events?: Array<EventItem>
+  /**
+   * <p>事件开始时间</p><p>单位：毫秒</p>
+   */
+  StartTime?: number
+  /**
+   * <p>事件结束时间</p><p>单位：毫秒</p>
+   */
+  EndTime?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CheckLockMetaData返回参数结构体
  */
 export interface CheckLockMetaDataResponse {
@@ -6505,6 +9956,100 @@ export interface CheckLockMetaDataResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateJobSpec请求参数结构体
+ */
+export interface CreateJobSpecRequest {
+  /**
+   * <p>入口命令不能为空</p>
+   */
+  Entrypoint: string
+  /**
+   * <p>配置名称（可选，不填则自动生成）</p>
+   */
+  Name?: string
+  /**
+   * <p>配置描述</p>
+   */
+  Description?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>镜像拉取类型（Builtin: 内置, Custom: 自定义）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>镜像拉取策略（Always, IfNotPresent, Never）</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>运行时环境配置(JSON)</p>
+   */
+  RuntimeEnv?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>弹性伸缩配置(JSON)</p>
+   */
+  AutoscalerOptions?: string
+  /**
+   * <p>默认资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>资源配置模板ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>默认队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>作业包URL</p>
+   */
+  JobPackage?: string
+  /**
+   * <p>作业包名称</p>
+   */
+  JobPackageName?: string
+  /**
+   * <p>作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺省时按 Local 处理</p>
+   */
+  JobPackageSource?: string
+  /**
+   * <p>高级参数json</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>默认计算组名称（与 ClusterId 互斥；与老字段 ClusterGroup 等价，新调用方优先使用 GroupId）</p>
+   */
+  GroupId?: string
+  /**
+   * <p>默认集群 ID（与 GroupId 互斥，同时非空将返回 InvalidParameter.ClusterAndGroupConflict）</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>作业优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>集群分派策略</p><p>枚举值：</p><ul><li>RANDOM： 随机分配</li></ul>
+   */
+  DispatchStrategy?: string
 }
 
 /**
@@ -6552,9 +10097,29 @@ export interface DescribeOtherCHDFSBindingListResponse {
 }
 
 /**
- * UpdateRowFilter返回参数结构体
+ * GetLabHistory返回参数结构体
  */
-export interface UpdateRowFilterResponse {
+export interface GetLabHistoryResponse {
+  /**
+   * <p>总记录数</p>
+   */
+  Total?: number
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>每页数量</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总页数</p>
+   */
+  TotalPages?: number
+  /**
+   * <p>集群状态历史详情列表</p>
+   */
+  Items?: Array<RayClusterHistory>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6643,6 +10208,36 @@ export interface DescribeDataEnginesResponse {
 }
 
 /**
+ * ListRayClusters返回参数结构体
+ */
+export interface ListRayClustersResponse {
+  /**
+   * <p>总记录数</p>
+   */
+  Total?: number
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>每页数量</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总页数</p>
+   */
+  TotalPages?: number
+  /**
+   * <p>Ray cluster列表</p>
+   */
+  Items?: Array<RayClusterEntity>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 标准引擎资源组，配置相关信息
  */
 export interface StandardEngineResourceGroupConfigInfo {
@@ -6670,6 +10265,20 @@ export interface StandardEngineResourceGroupConfigInfo {
    * 更新时间
    */
   UpdateTime?: number
+}
+
+/**
+ * CopyJobSpec请求参数结构体
+ */
+export interface CopyJobSpecRequest {
+  /**
+   * <p>原配置ID</p>
+   */
+  SpecId: string
+  /**
+   * <p>新配置名称（可选，留空则自动命名为 &#39;原名-copy&#39;）</p>
+   */
+  NewName?: string
 }
 
 /**
@@ -6908,6 +10517,24 @@ export interface DataEngineScaleInfoDetail {
 }
 
 /**
+ * DescribeClusterGroupClusters返回参数结构体
+ */
+export interface DescribeClusterGroupClustersResponse {
+  /**
+   * <p>活跃 cluster 总数</p>
+   */
+  Count?: number
+  /**
+   * <p>前 N 个样例</p>
+   */
+  SampleClusters?: Array<RayClusterEntity>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteDataEngine返回参数结构体
  */
 export interface DeleteDataEngineResponse {
@@ -6931,6 +10558,220 @@ export interface CosPermission {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Permissions?: Array<string>
+}
+
+/**
+ * GetResourceConfig返回参数结构体
+ */
+export interface GetResourceConfigResponse {
+  /**
+   * 模板ID
+   */
+  Id?: string
+  /**
+   * 模板名称
+   */
+  Name?: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * 模板类型
+   */
+  Type?: string
+  /**
+   * Head节点配置
+   */
+  Head?: HeadSpecDTO
+  /**
+   * Worker节点配置
+   */
+  Worker?: Array<WorkerSpecDTO>
+  /**
+   * 创建时间
+   */
+  CreateTime?: number
+  /**
+   * 更新时间
+   */
+  UpdateTime?: number
+  /**
+   * 应用ID
+   */
+  AppId?: number
+  /**
+   * 创建者UIN
+   */
+  Uin?: string
+  /**
+   * 子用户UIN
+   */
+  SubAccountUin?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 元数据加锁内容
+ */
+export interface LockComponentInfo {
+  /**
+   * 数据库名称
+   */
+  DbName: string
+  /**
+   * 表名称
+   */
+  TableName?: string
+  /**
+   * 分区
+   */
+  Partition?: string
+  /**
+   * 锁类型：SHARED_READ、SHARED_WRITE、EXCLUSIVE
+   */
+  LockType?: string
+  /**
+   * 锁级别：DB、TABLE、PARTITION
+   */
+  LockLevel?: string
+  /**
+   * 锁操作：SELECT,INSERT,UPDATE,DELETE,UNSET,NO_TXN
+   */
+  DataOperationType?: string
+  /**
+   * 是否保持Acid
+   */
+  IsAcid?: boolean
+  /**
+   * 是否动态分区写
+   */
+  IsDynamicPartitionWrite?: boolean
+}
+
+/**
+ * GetRayJob返回参数结构体
+ */
+export interface GetRayJobResponse {
+  /**
+   * <p>任务ID</p>
+   */
+  Id?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>任务状态</p>
+   */
+  Status?: string
+  /**
+   * <p>入口命令</p>
+   */
+  Entrypoint?: string
+  /**
+   * <p>任务名称</p>
+   */
+  JobName?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户主账号UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>创建账号</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>历史记录链接</p>
+   */
+  HistoryUrl?: string
+  /**
+   * <p>运行时间(ms)</p>
+   */
+  RunningTime?: number
+  /**
+   * <p>完成时间</p>
+   */
+  FinishTime?: number
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>失败原因/错误信息</p>
+   */
+  ErrorMessage?: string
+  /**
+   * <p>运行时环境配置(JSON)</p>
+   */
+  RuntimeEnv?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>弹性伸缩配置(JSON)</p>
+   */
+  AutoscalerOptions?: string
+  /**
+   * <p>来源配置ID</p>
+   */
+  SpecId?: string
+  /**
+   * <p>来源配置名称</p>
+   */
+  SpecName?: string
+  /**
+   * <p>高级参数，JSON 字符串（透传到 Neutrino）</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>作业优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>业务来源标识（调用上下文，长度上限 64，禁止控制字符）</p>
+   */
+  JobSource?: string
+  /**
+   * <p>集群名称</p>
+   */
+  ClusterName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6963,6 +10804,20 @@ export interface PrestoMonitorMetrics {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FragmentCacheHitRate?: number
+}
+
+/**
+ * ModifyClusterPriority请求参数结构体
+ */
+export interface ModifyClusterPriorityRequest {
+  /**
+   * <p>集群ID</p>
+   */
+  Id: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority: number
 }
 
 /**
@@ -7026,44 +10881,115 @@ export interface SwitchDataEngineImageResponse {
 }
 
 /**
- * Elasticsearch数据源的详细信息
+ * UnlockMetaData返回参数结构体
  */
-export interface ElasticsearchInfo {
+export interface UnlockMetaDataResponse {
   /**
-   * 数据源ID
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceId?: string
+  RequestId?: string
+}
+
+/**
+ * ModifyDataEngineDescription请求参数结构体
+ */
+export interface ModifyDataEngineDescriptionRequest {
   /**
-   * 数据源名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * 要修改的引擎的名称
    */
-  InstanceName?: string
+  DataEngineName: string
   /**
-   * 用户名
-注意：此字段可能返回 null，表示取不到有效值。
+   * 引擎的描述信息，最大长度为250
    */
-  User?: string
+  Message: string
+}
+
+/**
+ * 集群pod详情
+ */
+export interface ClusterPod {
   /**
-   * 密码，需要base64编码
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>Pod名称</p>
    */
-  Password?: string
+  PodName?: string
   /**
-   * 数据源的VPC和子网信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>Pod IP</p>
    */
-  Location?: DatasourceConnectionLocation
+  PodIp?: string
   /**
-   * 默认数据库名称
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>Pod状态</p>
    */
-  DbName?: string
+  Status?: string
   /**
-   * 访问Elasticsearch的ip、端口信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>Pod阶段</p>
    */
-  ServiceInfo?: Array<IpPortPair>
+  Phase?: string
+  /**
+   * <p>所属节点</p>
+   */
+  NodeName?: string
+  /**
+   * <p>节点IP</p>
+   */
+  NodeIp?: string
+  /**
+   * <p>命名空间</p>
+   */
+  Namespace?: string
+  /**
+   * <p>CPU请求</p>
+   */
+  CpuRequest?: string
+  /**
+   * <p>CPU限制</p>
+   */
+  CpuLimit?: string
+  /**
+   * <p>内存请求</p>
+   */
+  MemoryRequest?: string
+  /**
+   * <p>内存限制</p>
+   */
+  MemoryLimit?: string
+  /**
+   * <p>GPU数量</p>
+   */
+  GpuCount?: string
+  /**
+   * <p>容器镜像</p>
+   */
+  Image?: string
+  /**
+   * <p>Pod角色(head/worker)</p>
+   */
+  Role?: string
+  /**
+   * <p>创建时间（毫秒时间戳）</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>启动时间（毫秒时间戳）</p>
+   */
+  StartTime?: number
+}
+
+/**
+ * GetRayClusterHistory请求参数结构体
+ */
+export interface GetRayClusterHistoryRequest {
+  /**
+   * <p>集群/数据实验室ID</p>
+   */
+  Id: string
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>每页数量</p>
+   */
+  PageSize?: number
 }
 
 /**
@@ -7145,45 +11071,81 @@ export interface DropDMSTableResponse {
 }
 
 /**
- * DataEngine基本信息
+ * AddDMSPartitions返回参数结构体
  */
-export interface DataEngineBasicInfo {
+export interface AddDMSPartitionsResponse {
   /**
-   * DataEngine名称
+   * 成功数量
    */
-  DataEngineName?: string
+  Total?: number
   /**
-   * 数据引擎状态  -2已删除 -1失败 0初始化中 1挂起 2运行中 3准备删除 4删除中
+   * 分区值
    */
-  State?: number
+  Partitions?: Array<DMSPartition>
   /**
-   * 创建时间
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  CreateTime?: number
+  RequestId?: string
+}
+
+/**
+ * 集群状态历史详情
+ */
+export interface RayClusterHistory {
   /**
-   * 更新时间
+   * <p>历史记录ID</p>
    */
-  UpdateTime?: number
+  Id?: number
   /**
-   * 返回信息
+   * <p>集群/数据实验室ID</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>集群/数据实验室名称</p>
+   */
+  ClusterName?: string
+  /**
+   * <p>源状态</p>
+   */
+  FromState?: string
+  /**
+   * <p>目标状态</p>
+   */
+  ToState?: string
+  /**
+   * <p>触发事件</p>
+   */
+  Event?: string
+  /**
+   * <p>消息</p>
    */
   Message?: string
   /**
-   * 引擎id
+   * <p>转换时间（毫秒时间戳）</p>
    */
-  DataEngineId?: string
+  TransitionTime?: number
+}
+
+/**
+ * DetachUserPolicy请求参数结构体
+ */
+export interface DetachUserPolicyRequest {
   /**
-   * 引擎类型，有效值：PrestoSQL/SparkSQL/SparkBatch
+   * <p>用户Id，和CAM侧Uin匹配</p>
    */
-  DataEngineType?: string
+  UserId: string
   /**
-   * 用户ID
+   * <p>解绑的权限集合</p>
    */
-  AppId?: number
+  PolicySet?: Array<Policy>
   /**
-   * 账号ID
+   * <p>用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户）</p>
    */
-  UserUin?: string
+  AccountType?: string
+  /**
+   * <p>要授权的策略列表</p>
+   */
+  PolicyIds?: Array<string>
 }
 
 /**
@@ -7414,9 +11376,59 @@ export interface AlterDMSPartitionRequest {
 }
 
 /**
+ * UpdateDataMaskStrategy返回参数结构体
+ */
+export interface UpdateDataMaskStrategyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteLab返回参数结构体
+ */
+export interface DeleteLabResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ReportHeartbeatMetaData返回参数结构体
  */
 export interface ReportHeartbeatMetaDataResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * GetLabPods返回参数结构体
+ */
+export interface GetLabPodsResponse {
+  /**
+   * <p>总记录数</p>
+   */
+  Total?: number
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>每页数量</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总页数</p>
+   */
+  TotalPages?: number
+  /**
+   * <p>集群的Pod列表</p>
+   */
+  Items?: Array<ClusterPod>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -7653,6 +11665,20 @@ export interface UpdateDataEngineResponse {
 }
 
 /**
+ * DescribeClusterGroup请求参数结构体
+ */
+export interface DescribeClusterGroupRequest {
+  /**
+   * <p>集群组 ID</p>
+   */
+  Id: string
+  /**
+   * <p>是否包含已软删除的记录（默认 false，仅返回活跃记录；true 时允许返回 deleted=1 的记录，用于悬挂 cluster 回显场景）</p>
+   */
+  IncludeDeleted?: boolean
+}
+
+/**
  * DescribeTasksOverview请求参数结构体
  */
 export interface DescribeTasksOverviewRequest {
@@ -7731,6 +11757,175 @@ export interface DeleteUserVpcConnectionRequest {
 }
 
 /**
+ * 案例实体
+ */
+export interface ExampleEntity {
+  /**
+   * <p>ID</p>
+   */
+  Id?: number
+  /**
+   * <p>案例ID</p>
+   */
+  ExampleId?: string
+  /**
+   * <p>标题</p>
+   */
+  Title?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>README</p>
+   */
+  Readme?: string
+  /**
+   * <p>案例归档URL</p>
+   */
+  CodeArchiveUrl?: string
+  /**
+   * <p>图片URL</p>
+   */
+  Image?: string
+  /**
+   * <p>实验室镜像地址</p>
+   */
+  LabImage?: string
+  /**
+   * <p>资源配置</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>分类</p>
+   */
+  Category?: string
+  /**
+   * <p>标签</p>
+   */
+  Tags?: Array<string>
+  /**
+   * <p>案例热度</p>
+   */
+  Popularity?: number
+  /**
+   * <p>难度</p>
+   */
+  Difficulty?: string
+  /**
+   * <p>预估时间（分钟）</p>
+   */
+  EstimatedTime?: number
+  /**
+   * <p>排序</p>
+   */
+  SortOrder?: number
+  /**
+   * <p>是否启用</p>
+   */
+  IsEnabled?: boolean
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>是否删除</p>
+   */
+  Deleted?: number
+}
+
+/**
+ * CreateClusterGroup返回参数结构体
+ */
+export interface CreateClusterGroupResponse {
+  /**
+   * <p>集群组 ID</p>
+   */
+  Id?: string
+  /**
+   * <p>集群组名称</p>
+   */
+  Name?: string
+  /**
+   * <p>集群组描述</p>
+   */
+  Description?: string
+  /**
+   * <p>应用 ID（多租户）</p>
+   */
+  AppId?: number
+  /**
+   * <p>创建者主账号 UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>创建者子账号 UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>修改时间</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>集群组配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Config?: string
+  /**
+   * <p>是否已软删除</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Deleted?: boolean
+  /**
+   * <p>删除时间（软删时写入，活跃记录为 null）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeleteTime?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListClusterGroups返回参数结构体
+ */
+export interface ListClusterGroupsResponse {
+  /**
+   * <p>总记录数</p>
+   */
+  Total?: number
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>页数</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总页数</p>
+   */
+  TotalPages?: number
+  /**
+   * <p>集群组列表</p>
+   */
+  Items?: Array<ClusterGroup>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTaskMonitorInfos请求参数结构体
  */
 export interface DescribeTaskMonitorInfosRequest {
@@ -7803,6 +11998,72 @@ export interface LakeFsInfo {
 }
 
 /**
+ * UpdateRayCluster请求参数结构体
+ */
+export interface UpdateRayClusterRequest {
+  /**
+   * <p>集群ID</p>
+   */
+  Id: string
+  /**
+   * <p>集群名称（可选，不填写则默认使用集群ID）</p>
+   */
+  Name?: string
+  /**
+   * <p>集群描述</p>
+   */
+  Description?: string
+  /**
+   * <p>所属计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>镜像拉取策略（Always, IfNotPresent, Never）</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>资源配置</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>存储卷和挂载卷配置</p>
+   */
+  Catalog?: string
+  /**
+   * <p>高级参数（规范化后的扁平 KV JSON）</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+}
+
+/**
  * QueryResult请求参数结构体
  */
 export interface QueryResultRequest {
@@ -7854,6 +12115,75 @@ export interface CreateTaskRequest {
    * 任务来源信息
    */
   SourceInfo?: Array<KVPair>
+}
+
+/**
+ * spark session详细信息
+ */
+export interface SparkSessionInfo {
+  /**
+   * spark session id
+   */
+  SparkSessionId?: string
+  /**
+   * spark session名称
+   */
+  SparkSessionName?: string
+  /**
+   * 资源组id
+   */
+  ResourceGroupId?: string
+  /**
+   * engine session id
+   */
+  EngineSessionId?: string
+  /**
+   * engine session   
+name
+   */
+  EngineSessionName?: string
+  /**
+   * 自动销毁时间
+   */
+  IdleTimeoutMin?: number
+  /**
+   * driver规格
+   */
+  DriverSpec?: string
+  /**
+   * executor规格
+   */
+  ExecutorSpec?: string
+  /**
+   * executor最小数量
+   */
+  ExecutorNumMin?: number
+  /**
+   * executor最大数量
+   */
+  ExecutorNumMax?: number
+  /**
+   * 总规格最小
+   */
+  TotalSpecMin?: number
+  /**
+   * 总规格最大
+   */
+  TotalSpecMax?: number
+  /**
+   * 状态，STARTING、RUNNING、TERMINATED
+   */
+  State?: string
+}
+
+/**
+ * 案例分类详情
+ */
+export interface ExampleCategories {
+  /**
+   * <p>分类名称</p>
+   */
+  Categories?: string
 }
 
 /**
@@ -7968,17 +12298,13 @@ export interface DescribeSparkSessionBatchSqlLogRequest {
 }
 
 /**
- * 同一个用户绑定的工作组集合
+ * GetLabDetail请求参数结构体
  */
-export interface WorkGroupIdSetOfUserId {
+export interface GetLabDetailRequest {
   /**
-   * 用户Id，和CAM侧Uin匹配
+   * <p>工作区ID</p>
    */
-  UserId: string
-  /**
-   * 工作组Id集合
-   */
-  WorkGroupIds: Array<number | bigint>
+  Id: string
 }
 
 /**
@@ -8000,6 +12326,40 @@ export interface DescribeUpdatableDataEnginesRequest {
 }
 
 /**
+ * ModifySparkAppBatch请求参数结构体
+ */
+export interface ModifySparkAppBatchRequest {
+  /**
+   * 需要批量修改的Spark作业任务ID列表
+   */
+  SparkAppId: Array<string>
+  /**
+   * 引擎ID
+   */
+  DataEngine?: string
+  /**
+   * driver规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
+   */
+  AppDriverSize?: string
+  /**
+   * executor规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
+   */
+  AppExecutorSize?: string
+  /**
+   * 指定executor数量，最小值为1，最大值小于集群规格
+   */
+  AppExecutorNums?: number
+  /**
+   * 指定executor max数量（动态配置场景下），最小值为1，最大值小于集群规格（当ExecutorMaxNumbers小于ExecutorNums时，改值设定为ExecutorNums）
+   */
+  AppExecutorMaxNumbers?: number
+  /**
+   * 任务资源配置是否继承集群模板，0（默认）不继承，1：继承
+   */
+  IsInherit?: number
+}
+
+/**
  * DeleteTable请求参数结构体
  */
 export interface DeleteTableRequest {
@@ -8015,52 +12375,13 @@ export interface DeleteTableRequest {
 export type DescribeStoreLocationRequest = null
 
 /**
- * DescribeViews请求参数结构体
+ * AddUsersToWorkGroup返回参数结构体
  */
-export interface DescribeViewsRequest {
+export interface AddUsersToWorkGroupResponse {
   /**
-   * 列出该数据库下所属数据表。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  DatabaseName: string
-  /**
-   * 返回数量，默认为10，最大值为100。
-   */
-  Limit?: number
-  /**
-   * 数据偏移量，从0开始，默认为0。
-   */
-  Offset?: number
-  /**
-   * 过滤条件，如下支持的过滤类型，传参Name应为其一
-view-name - String - （过滤条件）数据表名称,形如：view-001。
-view-id - String - （过滤条件）view id形如：12342。
-   */
-  Filters?: Array<Filter>
-  /**
-   * 数据库所属的数据源名称
-   */
-  DatasourceConnectionName?: string
-  /**
-   * 排序字段
-   */
-  Sort?: string
-  /**
-   * 排序规则，true:升序；false:降序
-   */
-  Asc?: boolean
-  /**
-   * 按视图更新时间筛选，开始时间，如2021-11-11 00:00:00
-   */
-  StartTime?: string
-  /**
-   * 按视图更新时间筛选，结束时间，如2021-11-12 00:00:00
-   */
-  EndTime?: string
-  /**
-   * 查询类型：all：全部数据（默认）、permission：有权限的数据
-注意：此字段需要开启白名单使用，如果需要使用，请提交工单联系我们。
-   */
-  DescribeType?: string
+  RequestId?: string
 }
 
 /**
@@ -8521,6 +12842,36 @@ export interface UpdateNetworkConnectionResponse {
 }
 
 /**
+ * ListJobSpecs返回参数结构体
+ */
+export interface ListJobSpecsResponse {
+  /**
+   * <p>总数量</p>
+   */
+  Total?: number
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>页数</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总页数</p>
+   */
+  TotalPages?: number
+  /**
+   * <p>作业配置列表</p>
+   */
+  Items?: Array<JobSpec>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateSparkAppTask返回参数结构体
  */
 export interface CreateSparkAppTaskResponse {
@@ -8536,6 +12887,20 @@ export interface CreateSparkAppTaskResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * UpdateRayJobPriority请求参数结构体
+ */
+export interface UpdateRayJobPriorityRequest {
+  /**
+   * <p>任务ID</p>
+   */
+  Id: string
+  /**
+   * <p>作业优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority: number
 }
 
 /**
@@ -8652,13 +13017,145 @@ export interface BindWorkGroupsToUserResponse {
 }
 
 /**
- * UpdateUDFPolicy返回参数结构体
+ * GetRayJobPodYaml返回参数结构体
  */
-export interface UpdateUDFPolicyResponse {
+export interface GetRayJobPodYamlResponse {
   /**
-   * UDF权限信息
+   * Pod Yaml
    */
-  UDFPolicyInfos?: Array<UDFPolicyInfo>
+  Yaml?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * UpdateRayCluster返回参数结构体
+ */
+export interface UpdateRayClusterResponse {
+  /**
+   * <p>集群ID</p>
+   */
+  Id?: string
+  /**
+   * <p>资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口）</p>
+   */
+  Type?: string
+  /**
+   * <p>集群名称</p>
+   */
+  Name?: string
+  /**
+   * <p>集群描述</p>
+   */
+  Description?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
+  /**
+   * <p>集群状态</p>
+   */
+  Status?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>高级参数（规范化后的扁平 KV JSON）</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue）</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListExamples返回参数结构体
+ */
+export interface ListExamplesResponse {
+  /**
+   * <p>总记录数</p>
+   */
+  Total?: number
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>页数</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总页数</p>
+   */
+  TotalPages?: number
+  /**
+   * <p>案例管理列表</p>
+   */
+  Items?: Array<ExampleEntity>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -8706,6 +13203,16 @@ export interface AddDMSPartitionsRequest {
    * 分区
    */
   Partitions?: Array<DMSPartition>
+}
+
+/**
+ * 案例难度详情
+ */
+export interface ExampleDifficulties {
+  /**
+   * <p>案例难度</p>
+   */
+  Difficulty?: string
 }
 
 /**
@@ -8792,21 +13299,179 @@ export interface CreateImportTaskResponse {
 }
 
 /**
- * DescribeUDFPolicy请求参数结构体
+ * DescribeClusterGroup返回参数结构体
  */
-export interface DescribeUDFPolicyRequest {
+export interface DescribeClusterGroupResponse {
   /**
-   * udf名称
+   * <p>集群组 ID（系统生成）</p>
    */
-  Name: string
+  Id?: string
   /**
-   * 数据库名(全局UDF：global-function)
+   * <p>集群组名称（同一 AppId 下唯一）</p>
    */
-  DatabaseName: string
+  Name?: string
   /**
-   * 数据目录名
+   * <p>集群组描述</p>
    */
-  CatalogName: string
+  Description?: string
+  /**
+   * <p>集群组配置</p>
+   */
+  Config?: string
+  /**
+   * <p>应用 ID（多租户）</p>
+   */
+  AppId?: number
+  /**
+   * <p>创建者主账号 UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>创建者子账号 UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>创建时间（毫秒时间戳）</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间（毫秒时间戳）</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>是否已软删除（false=活跃，true=已删除）</p>
+   */
+  Deleted?: boolean
+  /**
+   * <p>删除时间（软删时写入，活跃记录为 null）</p>
+   */
+  DeleteTime?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * StartLab请求参数结构体
+ */
+export interface StartLabRequest {
+  /**
+   * <p>工作区ID</p>
+   */
+  Id: string
+}
+
+/**
+ * StopRayCluster返回参数结构体
+ */
+export interface StopRayClusterResponse {
+  /**
+   * <p>集群ID</p>
+   */
+  Id?: string
+  /**
+   * <p>资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口）</p>
+   */
+  Type?: string
+  /**
+   * <p>集群名称</p>
+   */
+  Name?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子账号UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>集群状态</p>
+   */
+  Status?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>所属集群组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>Dashboard URL / 历史记录链接</p>
+   */
+  HistoryUrl?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>启动时间（最近一次启动）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>停止时间（最近一次停止/休眠）</p>
+   */
+  StopTime?: number
+  /**
+   * <p>标签列表（TagKey-TagValue）</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteJobSpec返回参数结构体
+ */
+export interface DeleteJobSpecResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9047,13 +13712,13 @@ export interface DescribeScriptsResponse {
 }
 
 /**
- * UnbindWorkGroupsFromUser请求参数结构体
+ * GetExampleDetail请求参数结构体
  */
-export interface UnbindWorkGroupsFromUserRequest {
+export interface GetExampleDetailRequest {
   /**
-   * 解绑的工作组Id和用户Id的关联关系
+   * <p>案例ID</p>
    */
-  AddInfo: WorkGroupIdSetOfUserId
+  ExampleId: string
 }
 
 /**
@@ -9294,6 +13959,90 @@ export interface ModifyWorkGroupRequest {
 }
 
 /**
+ * DescribeStandardEngineResourceGroupConfigInfo返回参数结构体
+ */
+export interface DescribeStandardEngineResourceGroupConfigInfoResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 标准引擎资源组，配置相关信息
+   */
+  StandardEngineResourceGroupConfigInfos?: Array<StandardEngineResourceGroupConfigInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * RunJobSpec请求参数结构体
+ */
+export interface RunJobSpecRequest {
+  /**
+   * <p>配置ID</p>
+   */
+  SpecId: string
+  /**
+   * <p>外部工作流引擎业务键 flowId</p>
+   */
+  FlowId?: string
+  /**
+   * <p>外部工作流引擎业务键 executionId</p>
+   */
+  ExecutionId?: string
+  /**
+   * <p>业务来源标识（调用上下文，长度上限 64，禁止控制字符）</p>
+   */
+  JobSource?: string
+}
+
+/**
+ * 同一个用户绑定的工作组集合
+ */
+export interface WorkGroupIdSetOfUserId {
+  /**
+   * 用户Id，和CAM侧Uin匹配
+   */
+  UserId: string
+  /**
+   * 工作组Id集合
+   */
+  WorkGroupIds: Array<number | bigint>
+}
+
+/**
+ * ListResourceConfigs请求参数结构体
+ */
+export interface ListResourceConfigsRequest {
+  /**
+   * 当前页码（从1开始）
+   */
+  Page?: number
+  /**
+   * 页数
+   */
+  PageSize?: number
+  /**
+   * 过滤条件列表（列表字段名称）
+   */
+  Filters?: Array<Filter>
+  /**
+   * 提交时间起始过滤-时间戳（毫秒）
+   */
+  StartTime?: number
+  /**
+   * 提交时间截止过滤-时间戳（毫秒）
+   */
+  EndTime?: number
+  /**
+   * 排序字段列表（列表字段名称）
+   */
+  SortFields?: Array<SortField>
+}
+
+/**
  * DescribeDatabase请求参数结构体
  */
 export interface DescribeDatabaseRequest {
@@ -9305,6 +14054,124 @@ export interface DescribeDatabaseRequest {
    * 数据连接名称，不填默认为DataLakeCatalog
    */
   DatasourceConnectionName?: string
+}
+
+/**
+ * Ray任务提交实体
+ */
+export interface RayJobSubmitEntity {
+  /**
+   * <p>任务ID</p>
+   */
+  Id?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>任务状态</p>
+   */
+  Status?: string
+  /**
+   * <p>入口命令</p>
+   */
+  Entrypoint?: string
+  /**
+   * <p>任务名称</p>
+   */
+  JobName?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户主账号UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
+  /**
+   * <p>历史记录链接</p>
+   */
+  HistoryUrl?: string
+  /**
+   * <p>运行时间(ms)</p>
+   */
+  RunningTime?: number
+  /**
+   * <p>完成时间</p>
+   */
+  FinishTime?: number
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>失败原因/错误信息</p>
+   */
+  ErrorMessage?: string
+  /**
+   * <p>运行时环境配置(JSON)</p>
+   */
+  RuntimeEnv?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>弹性伸缩配置(JSON)</p>
+   */
+  AutoscalerOptions?: string
+  /**
+   * <p>来源配置ID</p>
+   */
+  SpecId?: string
+  /**
+   * <p>来源配置名称</p>
+   */
+  SpecName?: string
+  /**
+   * <p>高级参数，JSON 字符串（透传到 Neutrino）</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>作业优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>作业来源（如 RAY_JOB / RAY_SERVE / 平台直提交等）</p>
+   */
+  JobSource?: string
 }
 
 /**
@@ -9382,6 +14249,40 @@ export interface DMSTableInfo {
 }
 
 /**
+ * GetRayJobPods请求参数结构体
+ */
+export interface GetRayJobPodsRequest {
+  /**
+   * 任务ID
+   */
+  Id: string
+  /**
+   * 当前页码（从1开始）
+   */
+  Page?: number
+  /**
+   * 页数
+   */
+  PageSize?: number
+  /**
+   * 提交时间起始过滤-时间戳（毫秒，可选
+   */
+  StartTime?: number
+  /**
+   * 提交时间截止过滤-时间戳（毫秒，可选）
+   */
+  EndTime?: number
+  /**
+   * 过滤条件（列表名称）
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序字段列表
+   */
+  SortFields?: Array<SortField>
+}
+
+/**
  * 迁移元数据分区对象
  */
 export interface DMSPartition {
@@ -9441,6 +14342,82 @@ export interface DMSPartition {
    * 数据源连接名
    */
   DatasourceConnectionName?: string
+}
+
+/**
+ * UpdateJobSpecPriority请求参数结构体
+ */
+export interface UpdateJobSpecPriorityRequest {
+  /**
+   * <p>配置ID</p>
+   */
+  SpecId: string
+  /**
+   * <p>作业优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority: number
+}
+
+/**
+ * CreateRayCluster请求参数结构体
+ */
+export interface CreateRayClusterRequest {
+  /**
+   * <p>集群名称（可选，不填写则默认使用集群ID）</p>
+   */
+  Name?: string
+  /**
+   * <p>集群描述</p>
+   */
+  Description?: string
+  /**
+   * <p>所属计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>镜像拉取策略（Always, IfNotPresent, Never）</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>资源配置</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>存储卷和挂载卷配置</p>
+   */
+  Catalog?: string
+  /**
+   * <p>高级参数（规范化后的扁平 KV JSON）</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -9576,6 +14553,28 @@ export interface DataEngineImageVersion {
 }
 
 /**
+ * UpdateUDFPolicy请求参数结构体
+ */
+export interface UpdateUDFPolicyRequest {
+  /**
+   * UDF名称
+   */
+  Name: string
+  /**
+   * 数据库名
+   */
+  DatabaseName: string
+  /**
+   * 数据目录名
+   */
+  CatalogName: string
+  /**
+   * UDF权限信息
+   */
+  UDFPolicyInfos: Array<UDFPolicyInfo>
+}
+
+/**
  * Mysql类型数据源信息
  */
 export interface MysqlInfo {
@@ -9660,6 +14659,32 @@ export interface Sort {
 }
 
 /**
+ * CreateResourceConfig请求参数结构体
+ */
+export interface CreateResourceConfigRequest {
+  /**
+   * 模板名称
+   */
+  Name: string
+  /**
+   * 描述
+   */
+  Description?: string
+  /**
+   * Head节点配置
+   */
+  Head?: HeadSpecDTO
+  /**
+   * Worker节点配置
+   */
+  Worker?: Array<WorkerSpecDTO>
+  /**
+   * 模板类型，不填默认是Ray
+   */
+  Type?: string
+}
+
+/**
  * statement信息
  */
 export interface StatementInformation {
@@ -9684,25 +14709,13 @@ export interface OtherDatasourceConnection {
 }
 
 /**
- * DetachUserPolicy请求参数结构体
+ * DeleteResourceConfig返回参数结构体
  */
-export interface DetachUserPolicyRequest {
+export interface DeleteResourceConfigResponse {
   /**
-   * <p>用户Id，和CAM侧Uin匹配</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  UserId: string
-  /**
-   * <p>解绑的权限集合</p>
-   */
-  PolicySet?: Array<Policy>
-  /**
-   * <p>用户来源类型TencentAccount（普通腾讯云用户） / EntraAccount（微软用户）</p>
-   */
-  AccountType?: string
-  /**
-   * <p>要授权的策略列表</p>
-   */
-  PolicyIds?: Array<string>
+  RequestId?: string
 }
 
 /**
@@ -9716,13 +14729,72 @@ export interface DeleteThirdPartyAccessUserResponse {
 }
 
 /**
- * AddUsersToWorkGroup返回参数结构体
+ * StopRayCluster请求参数结构体
  */
-export interface AddUsersToWorkGroupResponse {
+export interface StopRayClusterRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>集群ID</p>
    */
-  RequestId?: string
+  Id: string
+}
+
+/**
+ * DescribeViews请求参数结构体
+ */
+export interface DescribeViewsRequest {
+  /**
+   * 列出该数据库下所属数据表。
+   */
+  DatabaseName: string
+  /**
+   * 返回数量，默认为10，最大值为100。
+   */
+  Limit?: number
+  /**
+   * 数据偏移量，从0开始，默认为0。
+   */
+  Offset?: number
+  /**
+   * 过滤条件，如下支持的过滤类型，传参Name应为其一
+view-name - String - （过滤条件）数据表名称,形如：view-001。
+view-id - String - （过滤条件）view id形如：12342。
+   */
+  Filters?: Array<Filter>
+  /**
+   * 数据库所属的数据源名称
+   */
+  DatasourceConnectionName?: string
+  /**
+   * 排序字段
+   */
+  Sort?: string
+  /**
+   * 排序规则，true:升序；false:降序
+   */
+  Asc?: boolean
+  /**
+   * 按视图更新时间筛选，开始时间，如2021-11-11 00:00:00
+   */
+  StartTime?: string
+  /**
+   * 按视图更新时间筛选，结束时间，如2021-11-12 00:00:00
+   */
+  EndTime?: string
+  /**
+   * 查询类型：all：全部数据（默认）、permission：有权限的数据
+注意：此字段需要开启白名单使用，如果需要使用，请提交工单联系我们。
+   */
+  DescribeType?: string
+}
+
+/**
+ * GetLabYaml请求参数结构体
+ */
+export interface GetLabYamlRequest {
+  /**
+   * <p>数据实验室Id</p>
+   */
+  Id: string
 }
 
 /**
@@ -9766,13 +14838,33 @@ export interface CreateTcIcebergTableResponse {
 }
 
 /**
- * DeleteSparkApp返回参数结构体
+ * DescribeWorkGroups请求参数结构体
  */
-export interface DeleteSparkAppResponse {
+export interface DescribeWorkGroupsRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 查询的工作组Id，不填或填0表示不过滤。
    */
-  RequestId?: string
+  WorkGroupId?: number
+  /**
+   * 过滤条件，当前仅支持按照工作组名称进行模糊搜索。Key为workgroup-name
+   */
+  Filters?: Array<Filter>
+  /**
+   * 偏移量，默认为0
+   */
+  Offset?: number
+  /**
+   * 返回数量，默认20，最大值100
+   */
+  Limit?: number
+  /**
+   * 排序字段，支持如下字段类型，create-time
+   */
+  SortBy?: string
+  /**
+   * 排序方式，desc表示正序，asc表示反序， 默认为asc
+   */
+  Sorting?: string
 }
 
 /**
@@ -9903,6 +14995,151 @@ export interface MCPTaskInfo {
    * <p>结果集</p>
    */
   DataSet?: string
+}
+
+/**
+ * CopyJobSpec返回参数结构体
+ */
+export interface CopyJobSpecResponse {
+  /**
+   * <p>配置ID</p>
+   */
+  Id?: string
+  /**
+   * <p>配置名称</p>
+   */
+  Name?: string
+  /**
+   * <p>配置描述</p>
+   */
+  Description?: string
+  /**
+   * <p>入口命令</p>
+   */
+  Entrypoint?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>镜像拉取类型（Builtin: 内置, Custom: 自定义）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>运行时环境配置(JSON)</p>
+   */
+  RuntimeEnv?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>弹性伸缩配置(JSON)</p>
+   */
+  AutoscalerOptions?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>资源配置模板是否变更</p>
+   */
+  ResourceConfigChanged?: boolean
+  /**
+   * <p>默认资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>默认队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>作业包URL</p>
+   */
+  JobPackage?: string
+  /**
+   * <p>作业包名称</p>
+   */
+  JobPackageName?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>创建者UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>该配置产生的作业实例数量</p>
+   */
+  JobInstanceCount?: number
+  /**
+   * <p>是否有运行中的作业实例</p>
+   */
+  HasRunningJobs?: boolean
+  /**
+   * <p>高级参数配置，json类型</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>默认计算组名称（与 ClusterGroup 等价，新调用方使用 GroupId）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupId?: string
+  /**
+   * <p>默认集群 ID（与 GroupId 互斥）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * <p>作业优先级（1-9，数字越大优先级越高）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>集群分派策略</p><p>枚举值：</p><ul><li>RANDOM： 随机分配</li><li>NULL： 无</li></ul>
+   */
+  DispatchStrategy?: string
+  /**
+   * <p>作业提交目标：GROUP（按计算组分派）/ CLUSTER（指定集群）/ SERVERLESS（按 Serverless 拉起）</p><p>枚举值：</p><ul><li>GROUP： 按计算组分派</li><li>CLUSTER： 指定集群</li><li>SERVERLESS： 按 Serverless 拉起</li></ul>
+   */
+  SubmissionTarget?: string
+  /**
+   * <p>集群组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>集群名称</p>
+   */
+  ClusterName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10094,6 +15331,104 @@ export interface CreateSparkAppRequest {
 }
 
 /**
+ * UpdateRayJobPriority返回参数结构体
+ */
+export interface UpdateRayJobPriorityResponse {
+  /**
+   * <p>任务ID</p>
+   */
+  Id?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>任务状态</p>
+   */
+  Status?: string
+  /**
+   * <p>入口命令</p>
+   */
+  Entrypoint?: string
+  /**
+   * <p>任务名称</p>
+   */
+  JobName?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户主账号UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>创建账号</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>历史记录链接</p>
+   */
+  HistoryUrl?: string
+  /**
+   * <p>运行时间(ms)</p>
+   */
+  RunningTime?: number
+  /**
+   * <p>完成时间</p>
+   */
+  FinishTime?: number
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>来源配置ID</p>
+   */
+  SpecId?: string
+  /**
+   * <p>作业优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>业务来源标识（调用上下文，长度上限 64，禁止控制字符）</p>
+   */
+  JobSource?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * CreateSparkSessionBatchSQL请求参数结构体
  */
 export interface CreateSparkSessionBatchSQLRequest {
@@ -10234,6 +15569,16 @@ export interface DescribeMCPTaskResponse {
 }
 
 /**
+ * DeleteResourceConfig请求参数结构体
+ */
+export interface DeleteResourceConfigRequest {
+  /**
+   * 模板ID
+   */
+  Id: string
+}
+
+/**
  * DescribeSubUserAccessPolicy请求参数结构体
  */
 export type DescribeSubUserAccessPolicyRequest = null
@@ -10301,6 +15646,36 @@ export interface NetWork {
    * 子网网段
    */
   SubnetCidrBlock?: string
+}
+
+/**
+ * ListExampleDifficulties返回参数结构体
+ */
+export interface ListExampleDifficultiesResponse {
+  /**
+   * <p>总记录数</p>
+   */
+  Total?: number
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>页数</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总页数</p>
+   */
+  TotalPages?: number
+  /**
+   * <p>分类列表</p>
+   */
+  Items?: Array<ExampleDifficulties>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10552,6 +15927,92 @@ export interface UserDetailInfo {
 }
 
 /**
+ * GetExampleDetail返回参数结构体
+ */
+export interface GetExampleDetailResponse {
+  /**
+   * <p>ID</p>
+   */
+  Id?: number
+  /**
+   * <p>案例ID</p>
+   */
+  ExampleId?: string
+  /**
+   * <p>标题</p>
+   */
+  Title?: string
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>README</p>
+   */
+  Readme?: string
+  /**
+   * <p>案例归档URL</p>
+   */
+  CodeArchiveUrl?: string
+  /**
+   * <p>图片URL</p>
+   */
+  Image?: string
+  /**
+   * <p>实验室镜像</p>
+   */
+  LabImage?: string
+  /**
+   * <p>资源配置</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>分类</p>
+   */
+  Category?: string
+  /**
+   * <p>案例标签</p>
+   */
+  Tags?: Array<string>
+  /**
+   * <p>难度</p>
+   */
+  Difficulty?: string
+  /**
+   * <p>预估时间（分钟）</p>
+   */
+  EstimatedTime?: number
+  /**
+   * <p>排序</p>
+   */
+  SortOrder?: number
+  /**
+   * <p>是否启用</p>
+   */
+  IsEnabled?: boolean
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>是否删除</p>
+   */
+  Deleted?: number
+  /**
+   * <p>案例热度</p>
+   */
+  Popularity?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeTaskResult返回参数结构体
  */
 export interface DescribeTaskResultResponse {
@@ -10617,17 +16078,35 @@ export interface DescribeNotebookSessionStatementRequest {
 }
 
 /**
- * ModifyDataEngineDescription请求参数结构体
+ * CreateClusterGroup请求参数结构体
  */
-export interface ModifyDataEngineDescriptionRequest {
+export interface CreateClusterGroupRequest {
   /**
-   * 要修改的引擎的名称
+   * <p>集群组名称</p>
    */
-  DataEngineName: string
+  Name: string
   /**
-   * 引擎的描述信息，最大长度为250
+   * <p>集群组描述</p>
    */
-  Message: string
+  Description?: string
+  /**
+   * <p>集群组配置</p>
+   */
+  Config?: string
+}
+
+/**
+ * GetRayClusterYaml返回参数结构体
+ */
+export interface GetRayClusterYamlResponse {
+  /**
+   * <p>RayCluster YAML</p>
+   */
+  Yaml?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10700,6 +16179,16 @@ export interface DescribeSparkAppJobRequest {
    * spark作业名
    */
   JobName?: string
+}
+
+/**
+ * DeleteRayCluster返回参数结构体
+ */
+export interface DeleteRayClusterResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -10798,6 +16287,16 @@ export interface RestartDataEngineRequest {
 }
 
 /**
+ * UnbindWorkGroupsFromUser请求参数结构体
+ */
+export interface UnbindWorkGroupsFromUserRequest {
+  /**
+   * 解绑的工作组Id和用户Id的关联关系
+   */
+  AddInfo: WorkGroupIdSetOfUserId
+}
+
+/**
  * DescribeNotebookSession返回参数结构体
  */
 export interface DescribeNotebookSessionResponse {
@@ -10819,6 +16318,108 @@ export interface DescribeSubUserAccessPolicyResponse {
    * 子用户访问策略
    */
   PolicyDocument?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateRayCluster返回参数结构体
+ */
+export interface CreateRayClusterResponse {
+  /**
+   * <p>集群ID</p>
+   */
+  Id?: string
+  /**
+   * <p>资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口）</p>
+   */
+  Type?: string
+  /**
+   * <p>集群名称</p>
+   */
+  Name?: string
+  /**
+   * <p>集群描述</p>
+   */
+  Description?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
+  /**
+   * <p>集群状态</p>
+   */
+  Status?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>高级参数（规范化后的扁平 KV JSON）</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue）</p>
+   */
+  Tags?: Array<Tag>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10878,62 +16479,166 @@ export interface TagInfo {
 }
 
 /**
- * spark session详细信息
+ * 数据实验室
  */
-export interface SparkSessionInfo {
+export interface LabResponse {
   /**
-   * spark session id
+   * <p>案例模板ID（startMode=EXAMPLE 时使用）</p>
    */
-  SparkSessionId?: string
+  ExampleId?: string
   /**
-   * spark session名称
+   * <p>代码包/工程归档地址</p>
    */
-  SparkSessionName?: string
+  CodeArchiveUrl?: string
   /**
-   * 资源组id
+   * <p>数据实验室服务入口（服务类型 -&gt; 访问地址）</p>
    */
-  ResourceGroupId?: string
+  Services?: Array<TypeKVPair>
   /**
-   * engine session id
+   * <p>Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在&quot;内置 / 自定义&quot;两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。</p>
    */
-  EngineSessionId?: string
+  LabImage?: string
   /**
-   * engine session   
-name
+   * <p>Lab sidecar 镜像拉取策略（Always, IfNotPresent, Never）</p>
    */
-  EngineSessionName?: string
+  LabImagePullPolicy?: string
   /**
-   * 自动销毁时间
+   * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
    */
-  IdleTimeoutMin?: number
+  LabImagePullType?: string
   /**
-   * driver规格
+   * <p>集群ID</p>
    */
-  DriverSpec?: string
+  Id?: string
   /**
-   * executor规格
+   * <p>资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口）</p>
    */
-  ExecutorSpec?: string
+  Type?: string
   /**
-   * executor最小数量
+   * <p>集群名称</p>
    */
-  ExecutorNumMin?: number
+  Name?: string
   /**
-   * executor最大数量
+   * <p>集群描述</p>
    */
-  ExecutorNumMax?: number
+  Description?: string
   /**
-   * 总规格最小
+   * <p>所属资源分区ID</p>
    */
-  TotalSpecMin?: number
+  ResourcePartitionId?: string
   /**
-   * 总规格最大
+   * <p>默认资源分区名称</p>
    */
-  TotalSpecMax?: number
+  ResourcePartitionName?: string
   /**
-   * 状态，STARTING、RUNNING、TERMINATED
+   * <p>所属队列名称</p>
    */
-  State?: string
+  Queue?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SubAccountName?: string
+  /**
+   * <p>集群状态</p>
+   */
+  Status?: string
+  /**
+   * <p>状态详情/错误信息</p>
+   */
+  StatusMessage?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>所属集群组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>运行时环境配置(JSON)</p>
+   */
+  RuntimeEnv?: string
+  /**
+   * <p>Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。</p>
+   */
+  Image?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>Dashboard URL / 历史记录链接</p>
+   */
+  HistoryUrl?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>启动时间（最近一次启动）</p>
+   */
+  StartTime?: number
+  /**
+   * <p>停止时间（最近一次停止/休眠）</p>
+   */
+  StopTime?: number
+  /**
+   * <p>删除时间</p>
+   */
+  DeleteTime?: number
+  /**
+   * <p>标签列表（TagKey-TagValue）</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。</p>
+   */
+  PersistentWorkDir?: PersistentWorkDir
+  /**
+   * <p>是否开启token认证</p>
+   */
+  EnableToken?: boolean
+  /**
+   * <p>Token 认证密钥（开启 token 认证时由系统生成）</p>
+   */
+  Token?: string
 }
 
 /**
@@ -10965,6 +16670,36 @@ export interface DescribeDLCCatalogAccessRequest {
 }
 
 /**
+ * GetRayClusterPods返回参数结构体
+ */
+export interface GetRayClusterPodsResponse {
+  /**
+   * <p>总记录数</p>
+   */
+  Total?: number
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>每页数量</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总页数</p>
+   */
+  TotalPages?: number
+  /**
+   * <p>集群的Pod列表</p>
+   */
+  Items?: Array<ClusterPod>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeStandardEngineResourceGroups返回参数结构体
  */
 export interface DescribeStandardEngineResourceGroupsResponse {
@@ -10976,6 +16711,36 @@ export interface DescribeStandardEngineResourceGroupsResponse {
    * 资源组总数
    */
   Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListResourceConfigs返回参数结构体
+ */
+export interface ListResourceConfigsResponse {
+  /**
+   * 总记录数
+   */
+  Total?: number
+  /**
+   * 当前页码（从1开始）
+   */
+  Page?: number
+  /**
+   * 页数
+   */
+  PageSize?: number
+  /**
+   * 总页数
+   */
+  TotalPages?: number
+  /**
+   * 资源配置模板列表
+   */
+  Items?: Array<ResourceConfig>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -11409,6 +17174,22 @@ export interface DeleteDataMaskStrategyResponse {
 }
 
 /**
+ * 通用的键值对数据结构
+ */
+export interface TypeKVPair {
+  /**
+   * <p>key值</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Key?: string
+  /**
+   * <p>value值</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Value?: string
+}
+
+/**
  * AddOptimizerEngines返回参数结构体
  */
 export interface AddOptimizerEnginesResponse {
@@ -11592,6 +17373,32 @@ export interface GenerateCreateMangedTableSqlResponse {
 }
 
 /**
+ * ListRayJobs返回参数结构体
+ */
+export interface ListRayJobsResponse {
+  /**
+   * 当前页码（从1开始）
+   */
+  Page?: number
+  /**
+   * 页数
+   */
+  PageSize?: number
+  /**
+   * 总页数
+   */
+  TotalPages?: number
+  /**
+   * ray作业列表
+   */
+  Items?: Array<RayJobSubmitEntity>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ListTaskJobLogDetail请求参数结构体
  */
 export interface ListTaskJobLogDetailRequest {
@@ -11761,6 +17568,20 @@ export interface DataSourceInfo {
 }
 
 /**
+ * UpdateUDFPolicy返回参数结构体
+ */
+export interface UpdateUDFPolicyResponse {
+  /**
+   * UDF权限信息
+   */
+  UDFPolicyInfos?: Array<UDFPolicyInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeNotebookSessions返回参数结构体
  */
 export interface DescribeNotebookSessionsResponse {
@@ -11798,6 +17619,163 @@ export interface DescribeEngineUsageInfoRequest {
    * 数据引擎ID
    */
   DataEngineId: string
+}
+
+/**
+ * CreateJobSpec返回参数结构体
+ */
+export interface CreateJobSpecResponse {
+  /**
+   * <p>配置ID</p>
+   */
+  Id?: string
+  /**
+   * <p>配置名称</p>
+   */
+  Name?: string
+  /**
+   * <p>配置描述</p>
+   */
+  Description?: string
+  /**
+   * <p>入口命令</p>
+   */
+  Entrypoint?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>镜像拉取类型（Builtin: 内置, Custom: 自定义）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>运行时环境配置(JSON)</p>
+   */
+  RuntimeEnv?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>弹性伸缩配置(JSON)</p>
+   */
+  AutoscalerOptions?: string
+  /**
+   * <p>资源配置模板ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>资源配置模板是否变更</p>
+   */
+  ResourceConfigChanged?: boolean
+  /**
+   * <p>默认资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>默认队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>作业包URL</p>
+   */
+  JobPackage?: string
+  /**
+   * <p>作业包名称</p>
+   */
+  JobPackageName?: string
+  /**
+   * <p>作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺省时按 Local 处理</p>
+   */
+  JobPackageSource?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>创建者UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>该配置下未进入终态的作业实例数量</p>
+   */
+  JobInstanceCount?: number
+  /**
+   * <p>是否有运行中的作业实例</p>
+   */
+  HasRunningJobs?: boolean
+  /**
+   * <p>高级参数json</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>默认计算组名称（与 ClusterGroup 等价，新调用方使用 GroupId）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GroupId?: string
+  /**
+   * <p>默认集群 ID（与 GroupId 互斥）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ClusterId?: string
+  /**
+   * <p>作业优先级（1-9，数字越大优先级越高）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>集群分派策略</p><p>枚举值：</p><ul><li>RANDOM： 随机分配</li></ul>
+   */
+  DispatchStrategy?: string
+  /**
+   * <p>作业提交目标</p><p>枚举值：</p><ul><li>GROUP： 按计算组分派</li></ul>
+   */
+  SubmissionTarget?: string
+  /**
+   * <p>计算组名称</p>
+   */
+  GroupName?: string
+  /**
+   * <p>集群名称</p>
+   */
+  ClusterName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11864,6 +17842,132 @@ export interface AddOptimizerEnginesRequest {
 }
 
 /**
+ * CreateLab返回参数结构体
+ */
+export interface CreateLabResponse {
+  /**
+   * <p>案例模板ID（从案例创建时返回）</p>
+   */
+  ExampleId?: string
+  /**
+   * <p>代码包/工程归档地址</p>
+   */
+  CodeArchiveUrl?: string
+  /**
+   * <p>数据实验室服务入口（服务类型 -&gt; 访问地址）</p>
+   */
+  Services?: Array<TypeKVPair>
+  /**
+   * <p>集群ID</p>
+   */
+  Id?: string
+  /**
+   * <p>资源类型：CLUSTER-普通集群；WORKSPACE-数据实验室（开发入口）</p>
+   */
+  Type?: string
+  /**
+   * <p>集群名称</p>
+   */
+  Name?: string
+  /**
+   * <p>集群描述</p>
+   */
+  Description?: string
+  /**
+   * <p>所属资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>默认资源分区名称</p>
+   */
+  ResourcePartitionName?: string
+  /**
+   * <p>所属队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>应用ID</p>
+   */
+  AppId?: number
+  /**
+   * <p>用户UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>子用户UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>集群状态</p>
+   */
+  Status?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。</p>
+   */
+  Image?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>镜像拉取策略</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue）</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。</p>
+   */
+  PersistentWorkDir?: PersistentWorkDir
+  /**
+   * <p>是否开启token认证</p>
+   */
+  EnableToken?: boolean
+  /**
+   * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  LabImagePullType?: string
+  /**
+   * <p>子用户名称（由聚合层通过 CAM 接口回填）</p>
+   */
+  SubAccountName?: string
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 数据表分块信息。
  */
 export interface Partition {
@@ -11895,47 +17999,67 @@ export interface Partition {
 }
 
 /**
- * ModifySparkAppBatch请求参数结构体
+ * ListRayJobs请求参数结构体
  */
-export interface ModifySparkAppBatchRequest {
+export interface ListRayJobsRequest {
   /**
-   * 需要批量修改的Spark作业任务ID列表
+   * 当前页码（从1开始）
    */
-  SparkAppId: Array<string>
+  Page?: number
   /**
-   * 引擎ID
+   * 页数
    */
-  DataEngine?: string
+  PageSize?: number
   /**
-   * driver规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
+   * 过滤条件列表（列表的字段名称）
    */
-  AppDriverSize?: string
+  Filters?: Array<Filter>
   /**
-   * executor规格：small,medium,large,xlarge；内存型(引擎类型)：m.small,m.medium,m.large,m.xlarge
+   * 提交时间起始过滤-时间戳（毫秒，可选）
    */
-  AppExecutorSize?: string
+  StartTime?: number
   /**
-   * 指定executor数量，最小值为1，最大值小于集群规格
+   * 提交时间截止过滤-时间戳（毫秒，可选）
    */
-  AppExecutorNums?: number
+  EndTime?: number
   /**
-   * 指定executor max数量（动态配置场景下），最小值为1，最大值小于集群规格（当ExecutorMaxNumbers小于ExecutorNums时，改值设定为ExecutorNums）
+   * 排序字段列表（列表字段）
    */
-  AppExecutorMaxNumbers?: number
-  /**
-   * 任务资源配置是否继承集群模板，0（默认）不继承，1：继承
-   */
-  IsInherit?: number
+  SortFields?: Array<SortField>
 }
 
 /**
- * RegisterThirdPartyAccessUser返回参数结构体
+ * ListJobsBySpec请求参数结构体
  */
-export interface RegisterThirdPartyAccessUserResponse {
+export interface ListJobsBySpecRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 配置ID
    */
-  RequestId?: string
+  SpecId: string
+  /**
+   * 当前页码（从1开始）
+   */
+  Page?: number
+  /**
+   * 页数
+   */
+  PageSize?: number
+  /**
+   * 提交时间起始过滤-时间戳（毫秒，可选）
+   */
+  StartTime?: number
+  /**
+   * 提交时间截止过滤-时间戳（毫秒，可选）
+   */
+  EndTime?: number
+  /**
+   * 过滤条件
+   */
+  Filters?: Array<Filter>
+  /**
+   * 排序字段列表
+   */
+  SortFields?: Array<SortField>
 }
 
 /**
@@ -11999,6 +18123,40 @@ export interface LaunchStandardEngineResourceGroupsRequest {
 }
 
 /**
+ * ListRayClusterJobs请求参数结构体
+ */
+export interface ListRayClusterJobsRequest {
+  /**
+   * 集群ID（必填）
+   */
+  ClusterId: string
+  /**
+   * 当前页码（从1开始）
+   */
+  Page?: number
+  /**
+   * 每页数量
+   */
+  PageSize?: number
+  /**
+   * 额外过滤条件（ClusterId 已由外层单独传入，无需再在此处指定）
+   */
+  Filters?: Array<Filter>
+  /**
+   * 提交时间起始过滤-时间戳（毫秒，可选）
+   */
+  StartTime?: number
+  /**
+   * 提交时间截止过滤-时间戳（毫秒，可选）
+   */
+  EndTime?: number
+  /**
+   * 排序字段列表
+   */
+  SortFields?: Array<SortField>
+}
+
+/**
  * 数据库和数据表属性信息
  */
 export interface Property {
@@ -12041,6 +18199,16 @@ export interface UserVpcConnectionInfo {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessConnectionInfos?: Array<string>
+}
+
+/**
+ * CancelRayJob返回参数结构体
+ */
+export interface CancelRayJobResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -12364,25 +18532,195 @@ export interface DescribeNotebookSessionStatementResponse {
 }
 
 /**
- * UpdateUDFPolicy请求参数结构体
+ * UpdateResourceConfig返回参数结构体
  */
-export interface UpdateUDFPolicyRequest {
+export interface UpdateResourceConfigResponse {
   /**
-   * UDF名称
+   * 模板ID
    */
-  Name: string
+  Id?: string
   /**
-   * 数据库名
+   * 模板名称
    */
-  DatabaseName: string
+  Name?: string
   /**
-   * 数据目录名
+   * 描述
    */
-  CatalogName: string
+  Description?: string
   /**
-   * UDF权限信息
+   * Head节点配置
    */
-  UDFPolicyInfos: Array<UDFPolicyInfo>
+  Head?: HeadSpecDTO
+  /**
+   * Worker节点配置
+   */
+  Worker?: Array<WorkerSpecDTO>
+  /**
+   * 创建时间
+   */
+  CreateTime?: number
+  /**
+   * 更新时间
+   */
+  UpdateTime?: number
+  /**
+   * 模板类型
+   */
+  Type?: string
+  /**
+   * 应用ID
+   */
+  AppId?: number
+  /**
+   * 创建者UIN
+   */
+  Uin?: string
+  /**
+   * 子用户UIN
+   */
+  SubAccountUin?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListExampleCategories请求参数结构体
+ */
+export interface ListExampleCategoriesRequest {
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>页数</p>
+   */
+  PageSize?: number
+}
+
+/**
+ * UpdateJobSpec请求参数结构体
+ */
+export interface UpdateJobSpecRequest {
+  /**
+   * <p>配置ID</p>
+   */
+  SpecId: string
+  /**
+   * <p>入口命令</p>
+   */
+  Entrypoint: string
+  /**
+   * <p>配置名称</p>
+   */
+  Name?: string
+  /**
+   * <p>配置描述</p>
+   */
+  Description?: string
+  /**
+   * <p>镜像地址</p>
+   */
+  Image?: string
+  /**
+   * <p>镜像拉取类型（Builtin: 内置, Custom: 自定义）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>镜像拉取策略（Always, IfNotPresent, Never）</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>资源配置(JSON)</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>运行时环境配置(JSON)</p>
+   */
+  RuntimeEnv?: string
+  /**
+   * <p>存储卷和挂载卷配置(JSON)</p>
+   */
+  Catalog?: string
+  /**
+   * <p>弹性伸缩配置(JSON)</p>
+   */
+  AutoscalerOptions?: string
+  /**
+   * <p>默认资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>资源配置模板ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>默认队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>作业包URL</p>
+   */
+  JobPackage?: string
+  /**
+   * <p>作业包名称</p>
+   */
+  JobPackageName?: string
+  /**
+   * <p>作业包来源类型（Local: 本地上传, Cos: 用户自有 COS 桶地址）；缺省时按 Local 处理</p>
+   */
+  JobPackageSource?: string
+  /**
+   * <p>高级参数json</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>默认计算组名称（与 ClusterId 互斥；与老字段 ClusterGroup 等价，新调用方优先使用 GroupId）</p>
+   */
+  GroupId?: string
+  /**
+   * <p>默认集群 ID（与 GroupId 互斥，同时非空将返回 InvalidParameter.ClusterAndGroupConflict）</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>作业优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>集群分派策略</p><p>枚举值：</p><ul><li>RANDOM： 随机分配</li></ul>
+   */
+  DispatchStrategy?: string
+}
+
+/**
+ * ListRayClusterJobs返回参数结构体
+ */
+export interface ListRayClusterJobsResponse {
+  /**
+   * 当前页码（从1开始）
+   */
+  Page?: number
+  /**
+   * 每页数量
+   */
+  PageSize?: number
+  /**
+   * 总页数
+   */
+  TotalPages?: number
+  /**
+   * 该集群下的Ray作业列表
+   */
+  Items?: Array<RayJobSubmitEntity>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -12412,9 +18750,29 @@ export interface DescribeStandardEngineResourceGroupConfigInfoRequest {
 }
 
 /**
- * UpgradeDataEngineImage返回参数结构体
+ * ListExampleCategories返回参数结构体
  */
-export interface UpgradeDataEngineImageResponse {
+export interface ListExampleCategoriesResponse {
+  /**
+   * <p>总记录数</p>
+   */
+  Total?: number
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>页数</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总页数</p>
+   */
+  TotalPages?: number
+  /**
+   * <p>分类列表</p>
+   */
+  Items?: Array<ExampleCategories>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12668,6 +19026,24 @@ export interface OperateEngineResourceGroupFailMessage {
    * 操作失败的提示信息
    */
   FailMessage?: string
+}
+
+/**
+ * GetRayJobHistory请求参数结构体
+ */
+export interface GetRayJobHistoryRequest {
+  /**
+   * ray-jobID
+   */
+  Id: string
+  /**
+   * 当前页码（从1开始）
+   */
+  Page?: number
+  /**
+   * 页数
+   */
+  PageSize?: number
 }
 
 /**
@@ -12927,54 +19303,51 @@ export interface Column {
 }
 
 /**
- * Smart Optimizer高级参数配置数据结构
+ * DescribeUDFPolicy请求参数结构体
  */
-export interface WrittenAdvancePolicy {
+export interface DescribeUDFPolicyRequest {
   /**
-   * 是否启用合并
+   * udf名称
    */
-  CompactEnable?: string
+  Name: string
   /**
-   * 是否启用历史数据清理
+   * 数据库名(全局UDF：global-function)
    */
-  DeleteEnable?: string
+  DatabaseName: string
   /**
-   * 合并最新文件数量
+   * 数据目录名
    */
-  MinInputFiles?: number
+  CatalogName: string
+}
+
+/**
+ * ListJobSpecs请求参数结构体
+ */
+export interface ListJobSpecsRequest {
   /**
-   * 合并文件目录文件大小
+   * <p>页数</p>
    */
-  TargetFileSizeBytes?: number
+  Page?: number
   /**
-   * 保留过期时间的快照数量
+   * <p>页数</p>
    */
-  RetainLast?: number
+  PageSize?: number
   /**
-   * 快照过期时间
+   * <p>过滤条件</p>
    */
-  BeforeDays?: number
+  Filters?: Array<Filter>
   /**
-   * 快照过期执行周期
+   * <p>创建时间范围 - 开始时间（时间戳（毫秒））</p><p>单位：ms</p>
    */
-  ExpiredSnapshotsIntervalMin?: number
+  StartTime?: number
   /**
-   * 移除孤立文件执行周期
+   * <p>创建时间范围 - 结束时间（时间戳（毫秒））</p><p>单位：ms</p>
    */
-  RemoveOrphanIntervalMin?: number
+  EndTime?: number
   /**
-   * 是否开启COW表合并
+   * <p>排序字段列表</p>
    */
-  CowCompactEnable?: string
-  /**
-   * 文件合并策略
-   */
-  CompactStrategy?: string
-  /**
-   * sort合并策略的规则定义
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SortOrders?: Array<SortOrder>
+  SortFields?: Array<SortField>
 }
 
 /**
@@ -13006,6 +19379,46 @@ export interface DescribeLakeFsDirSummaryResponse {
 }
 
 /**
+ * GetRayJobYaml请求参数结构体
+ */
+export interface GetRayJobYamlRequest {
+  /**
+   * 任务ID
+   */
+  Id: string
+}
+
+/**
+ * GetRayJobEventLog返回参数结构体
+ */
+export interface GetRayJobEventLogResponse {
+  /**
+   * 事件总数
+   */
+  TotalCount?: number
+  /**
+   * 事件列表
+   */
+  Events?: Array<EventLogItem>
+  /**
+   * 当前页码（从1开始）
+   */
+  Page?: number
+  /**
+   * 页数
+   */
+  PageSize?: number
+  /**
+   * 总页数
+   */
+  TotalPages?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeUserVpcConnection返回参数结构体
  */
 export interface DescribeUserVpcConnectionResponse {
@@ -13021,13 +19434,17 @@ export interface DescribeUserVpcConnectionResponse {
 }
 
 /**
- * UnlockMetaData返回参数结构体
+ * 案例标签返回值
  */
-export interface UnlockMetaDataResponse {
+export interface ExampleTag {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>案例标签名称</p>
    */
-  RequestId?: string
+  Tag?: string
+  /**
+   * <p>标签数量</p>
+   */
+  Count?: number
 }
 
 /**
@@ -13053,6 +19470,20 @@ export interface ModifySparkAppBatchResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ModifyLabPriority请求参数结构体
+ */
+export interface ModifyLabPriorityRequest {
+  /**
+   * <p>数据实验室ID</p>
+   */
+  Id: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority: number
 }
 
 /**
@@ -13099,6 +19530,16 @@ export interface DescribeThirdPartyAccessUserResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * StopLab请求参数结构体
+ */
+export interface StopLabRequest {
+  /**
+   * <p>工作区ID</p>
+   */
+  Id: string
 }
 
 /**
@@ -13153,6 +19594,46 @@ export interface DatabaseInfo {
  * CancelTasks返回参数结构体
  */
 export interface CancelTasksResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 事件日志项
+ */
+export interface EventLogItem {
+  /**
+   * 事件时间（Unix 时间戳，秒级）
+   */
+  EventTime?: number
+  /**
+   * 组件名称
+   */
+  Component?: string
+  /**
+   * 日志级别（INFO/WARN/ERROR）
+   */
+  Level?: string
+  /**
+   * 事件内容
+   */
+  Message?: string
+}
+
+/**
+ * InitializeTCLake返回参数结构体
+ */
+export interface InitializeTCLakeResponse {
+  /**
+   * <p>实例Id</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>是否成功</p>
+   */
+  IsSuccess?: boolean
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13303,71 +19784,137 @@ export interface DMSColumnOrder {
 }
 
 /**
- * 元数据加锁内容
+ * GetLabServiceUrls请求参数结构体
  */
-export interface LockComponentInfo {
+export interface GetLabServiceUrlsRequest {
   /**
-   * 数据库名称
+   * <p>数据实验室ID</p>
    */
-  DbName: string
-  /**
-   * 表名称
-   */
-  TableName?: string
-  /**
-   * 分区
-   */
-  Partition?: string
-  /**
-   * 锁类型：SHARED_READ、SHARED_WRITE、EXCLUSIVE
-   */
-  LockType?: string
-  /**
-   * 锁级别：DB、TABLE、PARTITION
-   */
-  LockLevel?: string
-  /**
-   * 锁操作：SELECT,INSERT,UPDATE,DELETE,UNSET,NO_TXN
-   */
-  DataOperationType?: string
-  /**
-   * 是否保持Acid
-   */
-  IsAcid?: boolean
-  /**
-   * 是否动态分区写
-   */
-  IsDynamicPartitionWrite?: boolean
+  Id: string
 }
 
 /**
- * DescribeWorkGroups请求参数结构体
+ * UpdateEngineResourceGroupNetworkConfigInfo返回参数结构体
  */
-export interface DescribeWorkGroupsRequest {
+export interface UpdateEngineResourceGroupNetworkConfigInfoResponse {
   /**
-   * 查询的工作组Id，不填或填0表示不过滤。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  WorkGroupId?: number
+  RequestId?: string
+}
+
+/**
+ * DeleteRayJob返回参数结构体
+ */
+export interface DeleteRayJobResponse {
   /**
-   * 过滤条件，当前仅支持按照工作组名称进行模糊搜索。Key为workgroup-name
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Filters?: Array<Filter>
+  RequestId?: string
+}
+
+/**
+ * DeleteSparkApp返回参数结构体
+ */
+export interface DeleteSparkAppResponse {
   /**
-   * 偏移量，默认为0
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  Offset?: number
+  RequestId?: string
+}
+
+/**
+ * CreateLab请求参数结构体
+ */
+export interface CreateLabRequest {
   /**
-   * 返回数量，默认20，最大值100
+   * <p>数据实验室名称</p>
    */
-  Limit?: number
+  Name: string
   /**
-   * 排序字段，支持如下字段类型，create-time
+   * <p>Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在&quot;内置 / 自定义&quot;两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。</p>
    */
-  SortBy?: string
+  LabImage: string
   /**
-   * 排序方式，desc表示正序，asc表示反序， 默认为asc
+   * <p>资源分区ID</p>
    */
-  Sorting?: string
+  ResourcePartitionId: string
+  /**
+   * <p>队列名称</p>
+   */
+  Queue: string
+  /**
+   * <p>数据实验室描述</p>
+   */
+  Description?: string
+  /**
+   * <p>Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。</p>
+   */
+  Image?: string
+  /**
+   * <p>镜像拉取策略（Always, IfNotPresent, Never）</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>资源配置</p>
+   */
+  ResourceConfig?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>存储卷和挂载卷配置</p>
+   */
+  Catalog?: string
+  /**
+   * <p>计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>服务类型列表(VSCODE, JUPYTER, WEBSHELL)，不填则使用默认配置</p>
+   */
+  ServiceTypes?: Array<string>
+  /**
+   * <p>案例ID，当 startMode=EXAMPLE 时必填</p>
+   */
+  ExampleId?: string
+  /**
+   * <p>案例代码包地址，当 startMode=EXAMPLE 时填写</p>
+   */
+  CodeArchiveUrl?: string
+  /**
+   * <p>Lab sidecar 镜像拉取策略（Always, IfNotPresent, Never）</p>
+   */
+  LabImagePullPolicy?: string
+  /**
+   * <p>高级参数（扁平 Key-Value 的 JSON 字符串），Key 以 spec. 开头，按 RayCluster CRD 下钻；详见 ADVANCED_CLUSTER_OPTIONS_DESIGN.md</p>
+   */
+  AdvancedOptions?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。</p>
+   */
+  PersistentWorkDir?: PersistentWorkDir
+  /**
+   * <p>是否开启token认证</p>
+   */
+  EnableToken?: boolean
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  LabImagePullType?: string
 }
 
 /**
@@ -13494,6 +20041,20 @@ export interface CreateSparkAppForTDLCRequest {
    * <p>依赖包信息</p>
    */
   DependencyPackages?: Array<DependencyPackage>
+}
+
+/**
+ * GetRayClusterPodYaml返回参数结构体
+ */
+export interface GetRayClusterPodYamlResponse {
+  /**
+   * <p>Pod YAML</p>
+   */
+  Yaml?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -13676,6 +20237,16 @@ task-operator- string （子uin过滤）
 }
 
 /**
+ * DeleteLab请求参数结构体
+ */
+export interface DeleteLabRequest {
+  /**
+   * <p>工作区ID</p>
+   */
+  Id: string
+}
+
+/**
  * ModifyDataEngineDescription返回参数结构体
  */
 export interface ModifyDataEngineDescriptionResponse {
@@ -13686,21 +20257,13 @@ export interface ModifyDataEngineDescriptionResponse {
 }
 
 /**
- * InitializeTCLake返回参数结构体
+ * GetJobSpec请求参数结构体
  */
-export interface InitializeTCLakeResponse {
+export interface GetJobSpecRequest {
   /**
-   * <p>实例Id</p>
+   * <p>配置ID</p>
    */
-  InstanceId?: string
-  /**
-   * <p>是否成功</p>
-   */
-  IsSuccess?: boolean
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  SpecId: string
 }
 
 /**
@@ -13921,6 +20484,62 @@ export interface SwitchDataEngineImageRequest {
 }
 
 /**
+ * UpdateClusterGroup返回参数结构体
+ */
+export interface UpdateClusterGroupResponse {
+  /**
+   * <p>集群组 ID</p>
+   */
+  Id?: string
+  /**
+   * <p>集群组名称</p>
+   */
+  Name?: string
+  /**
+   * <p>集群组描述</p>
+   */
+  Description?: string
+  /**
+   * <p>集群组配置</p>
+   */
+  Config?: string
+  /**
+   * <p>应用 ID（多租户）</p>
+   */
+  AppId?: number
+  /**
+   * <p>创建者主账号 UIN</p>
+   */
+  Uin?: string
+  /**
+   * <p>创建者子账号 UIN</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>是否已软删除</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Deleted?: boolean
+  /**
+   * <p>删除时间（软删时写入，活跃记录为 null）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeleteTime?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeDMSTable请求参数结构体
  */
 export interface DescribeDMSTableRequest {
@@ -13962,6 +20581,20 @@ export interface DescribeDMSTableRequest {
  * ModifyGovernEventRule请求参数结构体
  */
 export type ModifyGovernEventRuleRequest = null
+
+/**
+ * GetLabServiceUrls返回参数结构体
+ */
+export interface GetLabServiceUrlsResponse {
+  /**
+   * <p>数据实验室服务入口（服务类型 -&gt; 访问地址）</p>
+   */
+  ServiceUrls?: Array<KVPair>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
 
 /**
  * Iceberg表分区信息
@@ -14105,6 +20738,50 @@ export interface DMSColumn {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IsPartition?: boolean
+}
+
+/**
+ * ListExamples请求参数结构体
+ */
+export interface ListExamplesRequest {
+  /**
+   * <p>分类</p>
+   */
+  Category?: string
+  /**
+   * <p>关键词</p>
+   */
+  Keyword?: string
+  /**
+   * <p>标签数组，多个标签 AND 关系；与 Category/Keyword 之间也是 AND</p>
+   */
+  Tags?: Array<string>
+  /**
+   * <p>DEFAULT（sort_order ASC, create_time DESC）/ POPULARITY（按热度降序），非法值降级为 DEFAULT</p>
+   */
+  OrderBy?: string
+  /**
+   * <p>当前页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>页数</p>
+   */
+  PageSize?: number
+}
+
+/**
+ * 排序字段定义
+ */
+export interface SortField {
+  /**
+   * 排序字段名，对应实体属性名（驼峰命名）
+   */
+  Field?: string
+  /**
+   * 排序方向：ASC（升序）或DESC（降序），默认ASC
+   */
+  Order?: string
 }
 
 /**

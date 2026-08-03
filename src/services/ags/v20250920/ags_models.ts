@@ -37,6 +37,10 @@ export interface PauseSandboxInstanceRequest {
    * <p>沙箱实例ID</p>
    */
   InstanceId: string
+  /**
+   * <p>可选。带内存暂停，恢复后保留进程和内存状态。true=带内存；false=仅磁盘；不传=系统默认（当前默认 true，带内存）。</p>
+   */
+  Memory?: boolean
 }
 
 /**
@@ -86,7 +90,7 @@ export interface StartSandboxInstanceRequest {
    */
   CustomConfiguration?: CustomConfiguration
   /**
-   * <p>沙箱访问认证模式</p><p>枚举值：</p><ul><li>DEFAULT： 默认，即 TOKEN 认证</li><li>TOKEN： Token认证，即所有端口访问都需携带TOKEN</li><li>NONE： 免认证，即所有端口访问无需携带TOKEN</li><li>PUBLIC： 公开模式，即ENVD管理端口（49983）访问需携带TOKEN，其他端口无需携带TOKEN</li></ul><p>默认值：DEFAULT</p>
+   * <p>沙箱访问认证模式</p><p>枚举值：</p><ul><li>DEFAULT： 默认，即TOKEN认证</li><li>TOKEN： Token认证，即所有端口访问都需携带Token</li><li>NONE： 免认证，即所有端口访问无需携带Token</li><li>PUBLIC： 公开模式，即ENVD管理端口（49983）访问需携带Token，其他端口无需携带Token</li></ul><p>默认值：DEFAULT</p>
    */
   AuthMode?: string
   /**
@@ -324,23 +328,23 @@ export interface HttpGetAction {
  */
 export interface DescribePreCacheImageTaskResponse {
   /**
-   * 镜像地址
+   * <p>镜像地址</p>
    */
   Image?: string
   /**
-   * 镜像 Digest
+   * <p>镜像 Digest</p>
    */
   ImageDigest?: string
   /**
-   * 镜像仓库类型：`enterprise`、`personal`。
+   * <p>镜像仓库类型：<code>enterprise</code>、<code>personal</code>。</p>
    */
   ImageRegistryType?: string
   /**
-   * 镜像预热状态
+   * <p>镜像预热状态</p>
    */
   Status?: string
   /**
-   * 镜像预热状态描述
+   * <p>镜像预热状态描述</p>
    */
   Message?: string
   /**
@@ -354,9 +358,13 @@ export interface DescribePreCacheImageTaskResponse {
  */
 export interface ResumeSandboxInstanceRequest {
   /**
-   * 沙箱实例ID
+   * <p>沙箱实例ID</p>
    */
   InstanceId: string
+  /**
+   * <p>超时时间，超过这个时间就自动回收实例。支持格式：5m、300s、1h 等，默认 5m。最小 30s，最大 24h</p>
+   */
+  Timeout?: string
 }
 
 /**
@@ -410,15 +418,15 @@ export interface UpdateSandboxInstanceResponse {
  */
 export interface DescribePreCacheImageTaskRequest {
   /**
-   * 镜像地址
+   * <p>镜像地址</p>
    */
   Image: string
   /**
-   * 镜像 Digest
+   * <p>镜像 Digest</p>
    */
   ImageDigest: string
   /**
-   * 镜像仓库类型：`enterprise`、`personal`。
+   * <p>镜像仓库类型：<code>enterprise</code>、<code>personal</code>、<code>custom</code> 。</p><p>枚举值：</p><ul><li>enterprise： tcr 企业容器镜像服务</li><li>personal： ccr 个人容器镜像服务</li></ul>
    */
   ImageRegistryType: string
 }
@@ -439,6 +447,10 @@ export interface StorageSource {
    * <p>文件存储配置</p>
    */
   Cfs?: CfsStorageSource
+  /**
+   * <p>AgentBucket 存储配置</p>
+   */
+  AgentBucket?: AgentBucketStorageSource
 }
 
 /**
@@ -673,7 +685,7 @@ export interface CustomConfiguration {
    */
   Image?: string
   /**
-   * <p>镜像仓库类型：<code>enterprise</code>、<code>personal</code>。</p>
+   * <p>镜像仓库类型：<code>enterprise</code>、<code>personal</code>、<code>custom</code></p><p>枚举值：</p><ul><li>enterprise： tcr 企业容器镜像服务</li><li>personal： ccr 个人容器镜像服务</li></ul>
    */
   ImageRegistryType?: string
   /**
@@ -711,19 +723,19 @@ export interface CustomConfiguration {
  */
 export interface ImageStorageSource {
   /**
-   * 镜像地址
+   * <p>镜像地址</p>
    */
   Reference?: string
   /**
-   * 镜像仓库类型：`enterprise`、`personal`。
+   * <p>镜像仓库类型：<code>enterprise</code>、<code>personal</code>。</p>
    */
   ImageRegistryType?: string
   /**
-   * 镜像内部的路径
+   * <p>镜像内部的路径</p>
    */
   SubPath?: string
   /**
-   * 镜像 Digest，请求时无需传入
+   * <p>镜像 Digest，请求时无需传入</p>
    */
   Digest?: string
 }
@@ -824,7 +836,7 @@ export interface CustomConfigurationDetail {
    */
   Image?: string
   /**
-   * <p>镜像仓库类型：<code>TCR</code>、<code>CCR</code>。</p>
+   * <p>镜像仓库类型：<code>enterprise</code>、<code>personal</code>、<code>custom</code>。</p><p>枚举值：</p><ul><li>enterprise： TCR 企业容器镜像服务</li><li>personal： CCR 个人容器镜像服务</li></ul>
    */
   ImageRegistryType?: string
   /**
@@ -919,6 +931,24 @@ export interface VPCConfig {
 }
 
 /**
+ * 用于记录 Agent Bucket 的 Storage Source
+ */
+export interface AgentBucketStorageSource {
+  /**
+   * <p>用于传入 AgentBucket 的 LibraryID</p>
+   */
+  LibraryId?: string
+  /**
+   * <p>用于传入 AgentBucket 的 spaceId</p>
+   */
+  SpaceId?: string
+  /**
+   * <p>用于传入 AgentBucket 的 AccessDomain</p>
+   */
+  AccessDomain?: string
+}
+
+/**
  * DeleteAPIKey请求参数结构体
  */
 export interface DeleteAPIKeyRequest {
@@ -992,10 +1022,6 @@ export interface CreatePreCacheImageTaskRequest {
    * <p>镜像仓库类型：<code>enterprise</code>、<code>personal</code>、<code>custom</code></p><p>枚举值：</p><ul><li>enterprise： tcr 企业容器镜像服务</li><li>personal： ccr 个人容器镜像服务</li></ul>
    */
   ImageRegistryType: string
-  /**
-   * <p>预热超时时长</p>
-   */
-  TimeoutMinutes?: number
 }
 
 /**
@@ -1091,19 +1117,20 @@ export interface ResumeSandboxInstanceResponse {
  */
 export interface StorageMount {
   /**
-   * 存储挂载配置名称
+   * <p>存储挂载配置名称</p>
    */
   Name?: string
   /**
-   * 存储配置
+   * <p>存储配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
   StorageSource?: StorageSource
   /**
-   * 沙箱实例本地挂载路径
+   * <p>沙箱实例本地挂载路径</p>
    */
   MountPath?: string
   /**
-   * 存储挂载读写权限配置，默认为false
+   * <p>存储挂载读写权限配置，默认为false</p>
    */
   ReadOnly?: boolean
 }

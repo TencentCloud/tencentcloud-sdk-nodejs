@@ -1652,7 +1652,7 @@ export interface DescribeApiKeyListRequest {
  */
 export interface ModifyEndpointRequest {
   /**
-   * 自动调整配额
+   * <p>自动调整配额</p>
    */
   AutoAdjustQuota?: number
 }

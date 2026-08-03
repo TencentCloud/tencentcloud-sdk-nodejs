@@ -681,11 +681,11 @@ export interface Tag {
  */
 export interface CreateFlowForwardsResponse {
   /**
-   * 失败的合同id以及错误详情
+   * <p>失败的合同id以及错误详情</p>
    */
   FailedFlows?: Array<FlowForwardResult>
   /**
-   * 成功的合同id
+   * <p>成功的合同id</p>
    */
   SuccessFlows?: Array<string>
   /**
@@ -4831,21 +4831,19 @@ export interface FlowApproverDetail {
  */
 export interface CreateFlowForwardsRequest {
   /**
-   * 执行本接口操作的员工信息。注: `在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。`
+   * <p>执行本接口操作的员工信息。注: <code>在调用此接口时，请确保指定的员工已获得所需的接口调用权限，并具备接口传入的相应资源的数据权限。</code></p>
    */
   Operator: UserInfo
   /**
-   * 合同对应参与方需要修改的目标经办人。其UserId可在企业控制台中组织管理里面找到。或者使用获取员工信息接口得到。
-
-注意：`需要保证目标经办人已经加入企业且已实名`
+   * <p>合同对应参与方需要修改的目标经办人。其UserId可在企业控制台中组织管理里面找到。或者使用获取员工信息接口得到。</p><p>注意：<code>需要保证目标经办人已经加入企业且已实名</code></p>
    */
   TargetUserId: string
   /**
-   * 企业签署方的合同及对应签署方
+   * <p>企业签署方的合同及对应签署方</p>
    */
   FlowForwardInfos: Array<FlowForwardInfo>
   /**
-   * 代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。
+   * <p>代理企业和员工的信息。在集团企业代理子企业操作的场景中，需设置此参数。在此情境下，ProxyOrganizationId（子企业的组织ID）为必填项。</p>
    */
   Agent?: Agent
 }

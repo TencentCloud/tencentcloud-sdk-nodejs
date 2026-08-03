@@ -18,9 +18,29 @@ const client = new tencentcloud.dlc.v20210125.Client({
 })
 describe("dlc.v20210125.test.js", function () {
 
+it("dlc.v20210125.GetRayClusterEvent", async function () {
+    try {
+       const data = await client.GetRayClusterEvent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateTask", async function () {
     try {
        const data = await client.CreateTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.ModifyUser", async function () {
+    try {
+       const data = await client.ModifyUser({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -198,6 +218,26 @@ it("dlc.v20210125.CreateStoreLocation", async function () {
     }
 })
 
+it("dlc.v20210125.GetLabPodYaml", async function () {
+    try {
+       const data = await client.GetLabPodYaml({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.GetExampleDetail", async function () {
+    try {
+       const data = await client.GetExampleDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateNotebookSessionStatementSupportBatchSQL", async function () {
     try {
        const data = await client.CreateNotebookSessionStatementSupportBatchSQL({})
@@ -218,9 +258,9 @@ it("dlc.v20210125.SwitchDataEngine", async function () {
     }
 })
 
-it("dlc.v20210125.AlterDMSDatabase", async function () {
+it("dlc.v20210125.DescribeDataEngines", async function () {
     try {
-       const data = await client.AlterDMSDatabase({})
+       const data = await client.DescribeDataEngines({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -268,6 +308,16 @@ it("dlc.v20210125.DescribeNotebookSessions", async function () {
     }
 })
 
+it("dlc.v20210125.DescribeClusterGroup", async function () {
+    try {
+       const data = await client.DescribeClusterGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeDMSPartitions", async function () {
     try {
        const data = await client.DescribeDMSPartitions({})
@@ -308,9 +358,19 @@ it("dlc.v20210125.DescribeDLCCatalogAccess", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeDMSTables", async function () {
+it("dlc.v20210125.ListResourceConfigs", async function () {
     try {
-       const data = await client.DescribeDMSTables({})
+       const data = await client.ListResourceConfigs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DeleteDataEngine", async function () {
+    try {
+       const data = await client.DeleteDataEngine({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -331,6 +391,16 @@ it("dlc.v20210125.DescribeNativeSparkSessions", async function () {
 it("dlc.v20210125.DescribeUserType", async function () {
     try {
        const data = await client.DescribeUserType({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.ListJobSpecs", async function () {
+    try {
+       const data = await client.ListJobSpecs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -398,6 +468,16 @@ it("dlc.v20210125.DescribeTasks", async function () {
     }
 })
 
+it("dlc.v20210125.ListExamples", async function () {
+    try {
+       const data = await client.ListExamples({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DeleteScript", async function () {
     try {
        const data = await client.DeleteScript({})
@@ -408,9 +488,9 @@ it("dlc.v20210125.DeleteScript", async function () {
     }
 })
 
-it("dlc.v20210125.DeleteTable", async function () {
+it("dlc.v20210125.DescribeDataEngineSessionParameters", async function () {
     try {
-       const data = await client.DeleteTable({})
+       const data = await client.DescribeDataEngineSessionParameters({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -448,6 +528,16 @@ it("dlc.v20210125.UpdateStandardEngineResourceGroupBaseInfo", async function () 
     }
 })
 
+it("dlc.v20210125.ModifyClusterPriority", async function () {
+    try {
+       const data = await client.ModifyClusterPriority({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeLakeFsDirSummary", async function () {
     try {
        const data = await client.DescribeLakeFsDirSummary({})
@@ -468,9 +558,49 @@ it("dlc.v20210125.DescribeDatabases", async function () {
     }
 })
 
+it("dlc.v20210125.GetRayJobYaml", async function () {
+    try {
+       const data = await client.GetRayJobYaml({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.GetLabDetail", async function () {
+    try {
+       const data = await client.GetLabDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.AlterDMSPartition", async function () {
     try {
        const data = await client.AlterDMSPartition({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeClusterGroupClusters", async function () {
+    try {
+       const data = await client.DescribeClusterGroupClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.GetRayClusterPodYaml", async function () {
+    try {
+       const data = await client.GetRayClusterPodYaml({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -488,9 +618,9 @@ it("dlc.v20210125.DescribeThirdPartyAccessUser", async function () {
     }
 })
 
-it("dlc.v20210125.RevokeDLCCatalogAccess", async function () {
+it("dlc.v20210125.GetLabHistory", async function () {
     try {
-       const data = await client.RevokeDLCCatalogAccess({})
+       const data = await client.GetLabHistory({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -511,6 +641,16 @@ it("dlc.v20210125.RestartDataEngine", async function () {
 it("dlc.v20210125.CreateUser", async function () {
     try {
        const data = await client.CreateUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.GetRayClusterHistory", async function () {
+    try {
+       const data = await client.GetRayClusterHistory({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -578,9 +718,9 @@ it("dlc.v20210125.AddOptimizerEngines", async function () {
     }
 })
 
-it("dlc.v20210125.UpdateRowFilter", async function () {
+it("dlc.v20210125.DescribeDataEngineImageVersions", async function () {
     try {
-       const data = await client.UpdateRowFilter({})
+       const data = await client.DescribeDataEngineImageVersions({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -611,6 +751,16 @@ it("dlc.v20210125.AlterTableComment", async function () {
 it("dlc.v20210125.DescribeSparkAppJobs", async function () {
     try {
        const data = await client.DescribeSparkAppJobs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.ListJobsBySpec", async function () {
+    try {
+       const data = await client.ListJobsBySpec({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -658,9 +808,19 @@ it("dlc.v20210125.GenerateInternalTable", async function () {
     }
 })
 
-it("dlc.v20210125.AttachDataMaskPolicy", async function () {
+it("dlc.v20210125.DescribeClusterMonitorInfos", async function () {
     try {
-       const data = await client.AttachDataMaskPolicy({})
+       const data = await client.DescribeClusterMonitorInfos({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.CreateLab", async function () {
+    try {
+       const data = await client.CreateLab({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -738,6 +898,26 @@ it("dlc.v20210125.DescribeUpdatableDataEngines", async function () {
     }
 })
 
+it("dlc.v20210125.ListExampleCategories", async function () {
+    try {
+       const data = await client.ListExampleCategories({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.RevokeDLCCatalogAccess", async function () {
+    try {
+       const data = await client.RevokeDLCCatalogAccess({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateInternalTable", async function () {
     try {
        const data = await client.CreateInternalTable({})
@@ -778,9 +958,49 @@ it("dlc.v20210125.DescribeDataEnginesScaleDetail", async function () {
     }
 })
 
+it("dlc.v20210125.ListExampleDifficulties", async function () {
+    try {
+       const data = await client.ListExampleDifficulties({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateSparkApp", async function () {
     try {
        const data = await client.CreateSparkApp({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.CreateUserVpcConnection", async function () {
+    try {
+       const data = await client.CreateUserVpcConnection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.UpdateRowFilter", async function () {
+    try {
+       const data = await client.UpdateRowFilter({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.RunJobSpec", async function () {
+    try {
+       const data = await client.RunJobSpec({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -848,9 +1068,9 @@ it("dlc.v20210125.CreateSparkSessionBatchSQL", async function () {
     }
 })
 
-it("dlc.v20210125.CreateUserVpcConnection", async function () {
+it("dlc.v20210125.CreateClusterGroup", async function () {
     try {
-       const data = await client.CreateUserVpcConnection({})
+       const data = await client.CreateClusterGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -868,9 +1088,29 @@ it("dlc.v20210125.DescribeUDFPolicy", async function () {
     }
 })
 
+it("dlc.v20210125.UpdateRayJobPriority", async function () {
+    try {
+       const data = await client.UpdateRayJobPriority({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeNotebookSessionStatements", async function () {
     try {
        const data = await client.DescribeNotebookSessionStatements({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.GetRayCluster", async function () {
+    try {
+       const data = await client.GetRayCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -888,9 +1128,69 @@ it("dlc.v20210125.GrantDLCCatalogAccess", async function () {
     }
 })
 
+it("dlc.v20210125.UpdateRayCluster", async function () {
+    try {
+       const data = await client.UpdateRayCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.CopyJobSpec", async function () {
+    try {
+       const data = await client.CopyJobSpec({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.UpdateClusterGroup", async function () {
+    try {
+       const data = await client.UpdateClusterGroup({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.UpdateResourceConfig", async function () {
+    try {
+       const data = await client.UpdateResourceConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.StartRayCluster", async function () {
+    try {
+       const data = await client.StartRayCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.SuspendResumeDataEngine", async function () {
     try {
        const data = await client.SuspendResumeDataEngine({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.GetRayJobEventLog", async function () {
+    try {
+       const data = await client.GetRayJobEventLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -908,9 +1208,29 @@ it("dlc.v20210125.CreateDMSDatabase", async function () {
     }
 })
 
+it("dlc.v20210125.GetLabPods", async function () {
+    try {
+       const data = await client.GetLabPods({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.AttachUserPolicy", async function () {
     try {
        const data = await client.AttachUserPolicy({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.StopLab", async function () {
+    try {
+       const data = await client.StopLab({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -968,6 +1288,16 @@ it("dlc.v20210125.DescribeMCPSubUin", async function () {
     }
 })
 
+it("dlc.v20210125.DeleteLab", async function () {
+    try {
+       const data = await client.DeleteLab({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateNotebookSessionStatement", async function () {
     try {
        const data = await client.CreateNotebookSessionStatement({})
@@ -998,9 +1328,29 @@ it("dlc.v20210125.DescribeStandardEngineResourceGroupConfigInfo", async function
     }
 })
 
-it("dlc.v20210125.DescribeDataEngines", async function () {
+it("dlc.v20210125.RegisterThirdPartyAccessUser", async function () {
     try {
-       const data = await client.DescribeDataEngines({})
+       const data = await client.RegisterThirdPartyAccessUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.GetLabServiceUrls", async function () {
+    try {
+       const data = await client.GetLabServiceUrls({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.AlterDMSDatabase", async function () {
+    try {
+       const data = await client.AlterDMSDatabase({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1018,9 +1368,9 @@ it("dlc.v20210125.DescribeSparkSessionBatchSQL", async function () {
     }
 })
 
-it("dlc.v20210125.DropDMSDatabase", async function () {
+it("dlc.v20210125.CreateJobSpec", async function () {
     try {
-       const data = await client.DropDMSDatabase({})
+       const data = await client.CreateJobSpec({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1088,6 +1438,16 @@ it("dlc.v20210125.DescribeTaskResourceUsage", async function () {
     }
 })
 
+it("dlc.v20210125.ListExampleTags", async function () {
+    try {
+       const data = await client.ListExampleTags({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeNotebookSessionLog", async function () {
     try {
        const data = await client.DescribeNotebookSessionLog({})
@@ -1111,6 +1471,16 @@ it("dlc.v20210125.DescribeTasksCostInfo", async function () {
 it("dlc.v20210125.DescribeResultDownload", async function () {
     try {
        const data = await client.DescribeResultDownload({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.GetJobSpec", async function () {
+    try {
+       const data = await client.GetJobSpec({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1208,9 +1578,29 @@ it("dlc.v20210125.DescribeDatasourceConnection", async function () {
     }
 })
 
+it("dlc.v20210125.ListRayClusterJobs", async function () {
+    try {
+       const data = await client.ListRayClusterJobs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeTablePartitions", async function () {
     try {
        const data = await client.DescribeTablePartitions({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.UpdateJobSpecPriority", async function () {
+    try {
+       const data = await client.UpdateJobSpecPriority({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1228,6 +1618,26 @@ it("dlc.v20210125.CheckDataEngineImageCanBeRollback", async function () {
     }
 })
 
+it("dlc.v20210125.DeleteJobSpec", async function () {
+    try {
+       const data = await client.DeleteJobSpec({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.GetLabEvent", async function () {
+    try {
+       const data = await client.GetLabEvent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CancelSparkSessionBatchSQL", async function () {
     try {
        const data = await client.CancelSparkSessionBatchSQL({})
@@ -1238,9 +1648,9 @@ it("dlc.v20210125.CancelSparkSessionBatchSQL", async function () {
     }
 })
 
-it("dlc.v20210125.ModifyUser", async function () {
+it("dlc.v20210125.GetRayJobHistory", async function () {
     try {
-       const data = await client.ModifyUser({})
+       const data = await client.GetRayJobHistory({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1298,6 +1708,16 @@ it("dlc.v20210125.DeleteUserVpcConnection", async function () {
     }
 })
 
+it("dlc.v20210125.GetRayJobPods", async function () {
+    try {
+       const data = await client.GetRayJobPods({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DeleteNativeSparkSession", async function () {
     try {
        const data = await client.DeleteNativeSparkSession({})
@@ -1318,6 +1738,16 @@ it("dlc.v20210125.CheckDataEngineConfigPairsValidity", async function () {
     }
 })
 
+it("dlc.v20210125.GetRayJobEvent", async function () {
+    try {
+       const data = await client.GetRayJobEvent({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DescribeUserVpcConnection", async function () {
     try {
        const data = await client.DescribeUserVpcConnection({})
@@ -1328,9 +1758,9 @@ it("dlc.v20210125.DescribeUserVpcConnection", async function () {
     }
 })
 
-it("dlc.v20210125.DeleteDataEngine", async function () {
+it("dlc.v20210125.DeleteRayCluster", async function () {
     try {
-       const data = await client.DeleteDataEngine({})
+       const data = await client.DeleteRayCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1348,9 +1778,19 @@ it("dlc.v20210125.DeleteUser", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeDataEngineSessionParameters", async function () {
+it("dlc.v20210125.DescribeDMSTables", async function () {
     try {
-       const data = await client.DescribeDataEngineSessionParameters({})
+       const data = await client.DescribeDMSTables({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DeleteTable", async function () {
+    try {
+       const data = await client.DeleteTable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1408,9 +1848,9 @@ it("dlc.v20210125.CreateTasksInOrder", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeDataEngineImageVersions", async function () {
+it("dlc.v20210125.DeleteClusterGroup", async function () {
     try {
-       const data = await client.DescribeDataEngineImageVersions({})
+       const data = await client.DeleteClusterGroup({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1498,6 +1938,16 @@ it("dlc.v20210125.DetachWorkGroupPolicy", async function () {
     }
 })
 
+it("dlc.v20210125.GetRayJob", async function () {
+    try {
+       const data = await client.GetRayJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.DropDMSTable", async function () {
     try {
        const data = await client.DropDMSTable({})
@@ -1541,6 +1991,26 @@ it("dlc.v20210125.CheckLockMetaData", async function () {
 it("dlc.v20210125.CreateImportTask", async function () {
     try {
        const data = await client.CreateImportTask({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.StopRayCluster", async function () {
+    try {
+       const data = await client.StopRayCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.GetRayClusterPods", async function () {
+    try {
+       const data = await client.GetRayClusterPods({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1598,6 +2068,16 @@ it("dlc.v20210125.CreateExportTask", async function () {
     }
 })
 
+it("dlc.v20210125.CreateResourceConfig", async function () {
+    try {
+       const data = await client.CreateResourceConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.CreateSparkAppForTDLC", async function () {
     try {
        const data = await client.CreateSparkAppForTDLC({})
@@ -1608,9 +2088,29 @@ it("dlc.v20210125.CreateSparkAppForTDLC", async function () {
     }
 })
 
-it("dlc.v20210125.RegisterThirdPartyAccessUser", async function () {
+it("dlc.v20210125.ListClusterGroups", async function () {
     try {
-       const data = await client.RegisterThirdPartyAccessUser({})
+       const data = await client.ListClusterGroups({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.ListRayClusters", async function () {
+    try {
+       const data = await client.ListRayClusters({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.CancelRayJob", async function () {
+    try {
+       const data = await client.CancelRayJob({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1621,6 +2121,16 @@ it("dlc.v20210125.RegisterThirdPartyAccessUser", async function () {
 it("dlc.v20210125.DescribeTasksAnalysis", async function () {
     try {
        const data = await client.DescribeTasksAnalysis({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.ListLabs", async function () {
+    try {
+       const data = await client.ListLabs({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1641,6 +2151,36 @@ it("dlc.v20210125.DeleteUsersFromWorkGroup", async function () {
 it("dlc.v20210125.UpdateNetworkConnection", async function () {
     try {
        const data = await client.UpdateNetworkConnection({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.GetRayJobPodYaml", async function () {
+    try {
+       const data = await client.GetRayJobPodYaml({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.ListRayJobs", async function () {
+    try {
+       const data = await client.ListRayJobs({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.UpdateJobSpec", async function () {
+    try {
+       const data = await client.UpdateJobSpec({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1671,6 +2211,16 @@ it("dlc.v20210125.CreateUserRole", async function () {
 it("dlc.v20210125.UnbindWorkGroupsFromUser", async function () {
     try {
        const data = await client.UnbindWorkGroupsFromUser({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DescribeDataEnginePythonSparkImages", async function () {
+    try {
+       const data = await client.DescribeDataEnginePythonSparkImages({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1748,9 +2298,9 @@ it("dlc.v20210125.DescribeNotebookSessionStatement", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeClusterMonitorInfos", async function () {
+it("dlc.v20210125.AttachDataMaskPolicy", async function () {
     try {
-       const data = await client.DescribeClusterMonitorInfos({})
+       const data = await client.AttachDataMaskPolicy({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1818,6 +2368,26 @@ it("dlc.v20210125.UpdateEngineResourceGroupNetworkConfigInfo", async function ()
     }
 })
 
+it("dlc.v20210125.StartLab", async function () {
+    try {
+       const data = await client.StartLab({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.ModifyLabPriority", async function () {
+    try {
+       const data = await client.ModifyLabPriority({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dlc.v20210125.ModifySparkAppBatch", async function () {
     try {
        const data = await client.ModifySparkAppBatch({})
@@ -1831,6 +2401,16 @@ it("dlc.v20210125.ModifySparkAppBatch", async function () {
 it("dlc.v20210125.DescribeDMSDatabase", async function () {
     try {
        const data = await client.DescribeDMSDatabase({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.CreateRayCluster", async function () {
+    try {
+       const data = await client.CreateRayCluster({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1861,6 +2441,36 @@ it("dlc.v20210125.DescribeUserDataEngineConfig", async function () {
 it("dlc.v20210125.DescribeTaskLog", async function () {
     try {
        const data = await client.DescribeTaskLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.GetRayClusterYaml", async function () {
+    try {
+       const data = await client.GetRayClusterYaml({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.GetLabYaml", async function () {
+    try {
+       const data = await client.GetLabYaml({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.GetResourceConfig", async function () {
+    try {
+       const data = await client.GetResourceConfig({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1958,9 +2568,19 @@ it("dlc.v20210125.CreateDataEngine", async function () {
     }
 })
 
-it("dlc.v20210125.DescribeDataEnginePythonSparkImages", async function () {
+it("dlc.v20210125.DeleteResourceConfig", async function () {
     try {
-       const data = await client.DescribeDataEnginePythonSparkImages({})
+       const data = await client.DeleteResourceConfig({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DropDMSDatabase", async function () {
+    try {
+       const data = await client.DropDMSDatabase({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1981,6 +2601,26 @@ it("dlc.v20210125.DescribeStandardEngineResourceGroups", async function () {
 it("dlc.v20210125.ListTaskJobLogDetail", async function () {
     try {
        const data = await client.ListTaskJobLogDetail({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.DeleteRayJob", async function () {
+    try {
+       const data = await client.DeleteRayJob({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("dlc.v20210125.UpdateLab", async function () {
+    try {
+       const data = await client.UpdateLab({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
