@@ -266,6 +266,7 @@ import {
   DeleteSyncCompareTaskRequest,
   TagItem,
   RecoverMigrateJobRequest,
+  OnlineDDL,
   DescribeSubscribeJobsResponse,
   ResetSubscribeRequest,
   DatabaseTableObject,

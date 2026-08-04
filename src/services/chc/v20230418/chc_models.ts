@@ -1613,37 +1613,41 @@ export interface Campus {
  */
 export interface WorkOrderData {
   /**
-   * 工单号
+   * <p>工单号</p>
    */
   WorkOrderId?: string
   /**
-   * 服务类型，一个服务可能会产生多个工单
+   * <p>服务类型，一个服务可能会产生多个工单</p>
    */
   ServiceType?: string
   /**
-   * 工单类型
+   * <p>工单类型</p>
    */
   OrderType?: string
   /**
-   * 工单状态
+   * <p>工单状态</p>
    */
   OrderStatus?: string
   /**
-   * 工单创建人
+   * <p>工单创建人</p>
    */
   Creator?: string
   /**
-   * 工单创建时间
+   * <p>工单创建时间</p>
    */
   CreateTime?: string
   /**
-   * 工单完成时间
+   * <p>工单完成时间</p>
    */
   FinishTime?: string
   /**
-   * 工单关联的dcops单号
+   * <p>工单关联的dcops单号</p>
    */
   TicketId?: string
+  /**
+   * <p>SLA</p>
+   */
+  SLAInfo?: SLAInfo
 }
 
 /**
@@ -2038,6 +2042,32 @@ export interface Device {
    * 硬件备注
    */
   HardwareMemo?: string
+}
+
+/**
+ * SLA 信息
+ */
+export interface SLAInfo {
+  /**
+   * <p>SLA 状态</p><p>枚举值：</p><ul><li>InSLA： SLA 内</li><li>Overdue： 已超时</li><li>Completed： 已完成</li></ul>
+   */
+  SLAStatus?: string
+  /**
+   * <p>到期时间</p>
+   */
+  DueTime?: string
+  /**
+   * <p>剩余时长</p><p>单位：小时</p>
+   */
+  RemainingHours?: number
+  /**
+   * <p>超时时长</p><p>单位：小时</p>
+   */
+  OverdueHours?: number
+  /**
+   * <p>SLA 工作日天数</p><p>单位：天</p>
+   */
+  SLADays?: number
 }
 
 /**
@@ -2858,7 +2888,7 @@ export interface DescribeDeviceListResponse {
  */
 export interface DescribeDeviceWorkOrderDetailRequest {
   /**
-   * 工单ID
+   * <p>工单ID</p>
    */
   OrderId: string
 }
@@ -3010,37 +3040,45 @@ export interface DescribeIdcsResponse {
  */
 export interface DescribeDeviceWorkOrderDetailResponse {
   /**
-   * 工单ID
+   * <p>工单ID</p>
    */
   OrderId?: string
   /**
-   * 服务类型
+   * <p>服务类型</p>
    */
   ServiceType?: string
   /**
-   * 工单类型
+   * <p>工单类型</p>
    */
   OrderType?: string
   /**
-   * 工单状态
+   * <p>工单状态</p>
    */
   OrderStatus?: string
   /**
-   * 工单流程状态
+   * <p>工单流程状态</p>
    */
   StepSet?: Array<OrderStep>
   /**
-   * 工单设备信息
+   * <p>工单设备信息</p>
    */
   DeviceSet?: Array<DeviceHistory>
   /**
-   * 工单的入参信息
+   * <p>工单的入参信息</p>
    */
   BaseInfo?: DeviceOrderBaseInfo
   /**
-   * 工单的拒绝原因，工单状态为reject的时候返回
+   * <p>工单的拒绝原因，工单状态为reject的时候返回</p>
    */
   RejectReason?: string
+  /**
+   * <p>工单 SLA 信息</p>
+   */
+  SLAInfo?: SLAInfo
+  /**
+   * <p>前序未完成的工单号</p>
+   */
+  PreOrderSet?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

@@ -55,6 +55,16 @@ export interface MQTTClientSubscription {
 }
 
 /**
+ * DeleteBlockRule返回参数结构体
+ */
+export interface DeleteBlockRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyDeviceIdentity返回参数结构体
  */
 export interface ModifyDeviceIdentityResponse {
@@ -166,6 +176,24 @@ export interface CaCertificateItem {
    * 失效时间，毫秒级时间戳 。
    */
   NotAfterTime?: number
+}
+
+/**
+ * CreateBlockRule返回参数结构体
+ */
+export interface CreateBlockRuleResponse {
+  /**
+   * 实例ID
+   */
+  InstanceId?: string
+  /**
+   * 封禁规则名
+   */
+  Name?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -472,6 +500,16 @@ export interface ModifyUserResponse {
 }
 
 /**
+ * ModifyBlockRule返回参数结构体
+ */
+export interface ModifyBlockRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCaCertificate返回参数结构体
  */
 export interface DescribeCaCertificateResponse {
@@ -756,6 +794,20 @@ export interface DescribeDeviceIdentitiesRequest {
 }
 
 /**
+ * DeleteBlockRule请求参数结构体
+ */
+export interface DeleteBlockRuleRequest {
+  /**
+   * 实例ID
+   */
+  InstanceId: string
+  /**
+   * 封禁规则名
+   */
+  BlockRuleName: string
+}
+
+/**
  * CreateMessageEnrichmentRule返回参数结构体
  */
 export interface CreateMessageEnrichmentRuleResponse {
@@ -834,13 +886,17 @@ export interface DescribeMessageDetailsRequest {
 }
 
 /**
- * DeleteInstance请求参数结构体
+ * DescribeInsVPCEndpoints返回参数结构体
  */
-export interface DeleteInstanceRequest {
+export interface DescribeInsVPCEndpointsResponse {
   /**
-   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   * 接入点
    */
-  InstanceId: string
+  Endpoints?: Array<MQTTEndpointItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1285,13 +1341,33 @@ export interface ModifyInstanceResponse {
 }
 
 /**
- * ModifyX509Config返回参数结构体
+ * ModifyBlockRule请求参数结构体
  */
-export interface ModifyX509ConfigResponse {
+export interface ModifyBlockRuleRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
-  RequestId?: string
+  InstanceId: string
+  /**
+   * 待修改的封禁规则名
+   */
+  Name: string
+  /**
+   * 包含表达式支持*（多个字符）和？（一个字符）
+   */
+  Include?: string
+  /**
+   * 排除表达式支持*（多个字符）和？（一个字符），最多三条。
+   */
+  Excludes?: Array<string>
+  /**
+   * 过期时间，毫秒级时间戳
+   */
+  ExpireTime?: number
+  /**
+   * 备注，最长 128 字符
+   */
+  Remark?: string
 }
 
 /**
@@ -1314,6 +1390,24 @@ export interface AddClientSubscriptionRequest {
    * 服务质量:0,1,2
    */
   Qos?: string
+}
+
+/**
+ * ModifyInsPublicEndpoint请求参数结构体
+ */
+export interface ModifyInsPublicEndpointRequest {
+  /**
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * 带宽，单位：Mbps
+   */
+  Bandwidth: number
+  /**
+   * 公网访问规则
+   */
+  Rules: Array<PublicAccessRule>
 }
 
 /**
@@ -1943,6 +2037,24 @@ export interface DescribeMessageByTopicResponse {
 }
 
 /**
+ * DescribeBlockRuleList返回参数结构体
+ */
+export interface DescribeBlockRuleListResponse {
+  /**
+   * 总数
+   */
+  TotalCount?: number
+  /**
+   * 封禁规则列表
+   */
+  Data?: Array<BlockRuleItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteInstance返回参数结构体
  */
 export interface DeleteInstanceResponse {
@@ -2485,6 +2597,16 @@ sub：订阅mqtt消息
 }
 
 /**
+ * ModifyX509Config返回参数结构体
+ */
+export interface ModifyX509ConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeClientList请求参数结构体
  */
 export interface DescribeClientListRequest {
@@ -2661,6 +2783,44 @@ export interface DescribeTopicListRequest {
 }
 
 /**
+ * MQTT集群用户信息
+ */
+export interface BlockRuleItem {
+  /**
+   * <p>封禁策略名</p>
+   */
+  Name?: string
+  /**
+   * <p>封禁策略类型</p>
+   */
+  Type?: number
+  /**
+   * <p>备注信息</p>
+   */
+  Remark?: string
+  /**
+   * <p>包含规则</p>
+   */
+  Include?: string
+  /**
+   * <p>排除规则</p>
+   */
+  Excludes?: Array<string>
+  /**
+   * <p>过期时间，毫秒级时间戳 。</p>
+   */
+  ExpireTime?: number
+  /**
+   * <p>修改时间，毫秒级时间戳 。</p>
+   */
+  UpdateTime?: number
+  /**
+   * <p>创建时间，毫秒级时间戳 。</p>
+   */
+  CreateTime?: number
+}
+
+/**
  * AddClientSubscription返回参数结构体
  */
 export interface AddClientSubscriptionResponse {
@@ -2713,61 +2873,21 @@ export interface ModifyInsPublicEndpointResponse {
 }
 
 /**
- * CreateInstance请求参数结构体
+ * CreateAuthorizationPolicy返回参数结构体
  */
-export interface CreateInstanceRequest {
+export interface CreateAuthorizationPolicyResponse {
   /**
-   * 实例类型，需要和SkuCode保持对应关系，可参考 [获取MQTT产品售卖规格](https://cloud.tencent.com/document/api/1778/116232) 接口获取。
-BASIC 基础版
-PRO  专业版
-PLATINUM 铂金版
-
+   * 集群Id
    */
-  InstanceType: string
+  InstanceId?: string
   /**
-   * 集群名称不能为空, 3-64个字符，只能包含数字、字母、“-”和“_”。
+   * 策略id
    */
-  Name: string
+  Id?: number
   /**
-   * 商品规格，需要和InstanceType保持对应关系，可参考 [获取MQTT产品售卖规格](https://cloud.tencent.com/document/api/1778/116232) 接口获取。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  SkuCode: string
-  /**
-   * 备注信息，最长 128 字符
-   */
-  Remark?: string
-  /**
-   * 标签列表
-   */
-  TagList?: Array<Tag>
-  /**
-   * 实例绑定的VPC信息，需要传当前用户下可用的VPC和SUBNET
-   */
-  VpcList?: Array<VpcInfo>
-  /**
-   * 是否开启公网，默认false（关闭）
-   */
-  EnablePublic?: boolean
-  /**
-   * 公网带宽（单位：Mbps），EnablePublic 为True时，该字段必须填写且大于0.
-   */
-  Bandwidth?: number
-  /**
-   * 公网访问白名单，不传表示拒绝所有IP网络访问。
-   */
-  IpRules?: Array<IpRule>
-  /**
-   * 是否自动续费（0: 不自动续费；1: 自动续费），仅购买预付费集群时生效。默认1:自动续费
-   */
-  RenewFlag?: number
-  /**
-   * 购买时长（单位：月），购买预付费集群时生效，默认1m（月）。可选范围：1~12、24、36、48、60；
-   */
-  TimeSpan?: number
-  /**
-   * 付费模式（0: 后付费；1: 预付费），默认0（后付费）。
-   */
-  PayMode?: number
+  RequestId?: string
 }
 
 /**
@@ -2817,21 +2937,17 @@ export interface DescribeSharedSubscriptionClientRequest {
 }
 
 /**
- * CreateAuthorizationPolicy返回参数结构体
+ * DescribeCaCertificate请求参数结构体
  */
-export interface CreateAuthorizationPolicyResponse {
+export interface DescribeCaCertificateRequest {
   /**
-   * 集群Id
+   * CA证书的SN序列号，可以从 [DescribeCaCertificates](https://cloud.tencent.com/document/api/1778/116206)接口、控制台、证书文件中获得。
    */
-  InstanceId?: string
+  CaSn: string
   /**
-   * 策略id
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
-  Id?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  InstanceId: string
 }
 
 /**
@@ -2904,6 +3020,43 @@ ACTIVE：激活
 INACTIVE：未激活     
    */
   Status?: string
+}
+
+/**
+ * CreateBlockRule请求参数结构体
+ */
+export interface CreateBlockRuleRequest {
+  /**
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   */
+  InstanceId: string
+  /**
+   * 封禁规则名，不可重复，只支持数字字母中划线
+   */
+  Name: string
+  /**
+   * 封禁规则类型
+    CLIENT_ID(1), 默认值
+    USERNAME(2),
+    IP_ADDRESS(3);
+   */
+  Type?: number
+  /**
+   * 包含表达式支持*（多个字符）和？（一个字符）
+   */
+  Include?: string
+  /**
+   * 排除表达式支持*（多个字符）和？（一个字符），最多三条。
+   */
+  Excludes?: Array<string>
+  /**
+   * 过期时间，毫秒级时间戳
+   */
+  ExpireTime?: number
+  /**
+   * 备注，最长 128 字符
+   */
+  Remark?: string
 }
 
 /**
@@ -3056,17 +3209,39 @@ export interface SharedSubscriptionGroupWithSubscriptions {
 }
 
 /**
- * DescribeInsVPCEndpoints返回参数结构体
+ * MQTT集群用户信息
  */
-export interface DescribeInsVPCEndpointsResponse {
+export interface MQTTUserItem {
   /**
-   * 接入点
+   * 用户名
    */
-  Endpoints?: Array<MQTTEndpointItem>
+  Username?: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 密码
    */
-  RequestId?: string
+  Password?: string
+  /**
+   * 备注信息
+   */
+  Remark?: string
+  /**
+   * 创建时间，毫秒级时间戳 。
+   */
+  CreatedTime?: number
+  /**
+   * 修改时间，毫秒级时间戳 。
+   */
+  ModifiedTime?: number
+}
+
+/**
+ * DeleteInstance请求参数结构体
+ */
+export interface DeleteInstanceRequest {
+  /**
+   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   */
+  InstanceId: string
 }
 
 /**
@@ -3084,21 +3259,13 @@ export interface DescribeDeviceCertificateRequest {
 }
 
 /**
- * ModifyInsPublicEndpoint请求参数结构体
+ * DescribeBlockRuleList请求参数结构体
  */
-export interface ModifyInsPublicEndpointRequest {
+export interface DescribeBlockRuleListRequest {
   /**
-   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
+   * 实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
    */
   InstanceId: string
-  /**
-   * 带宽，单位：Mbps
-   */
-  Bandwidth: number
-  /**
-   * 公网访问规则
-   */
-  Rules: Array<PublicAccessRule>
 }
 
 /**
@@ -3297,20 +3464,6 @@ export interface DeleteClientSubscriptionResponse {
 }
 
 /**
- * DescribeCaCertificate请求参数结构体
- */
-export interface DescribeCaCertificateRequest {
-  /**
-   * CA证书的SN序列号，可以从 [DescribeCaCertificates](https://cloud.tencent.com/document/api/1778/116206)接口、控制台、证书文件中获得。
-   */
-  CaSn: string
-  /**
-   * 腾讯云MQTT实例ID，从 [DescribeInstanceList](https://cloud.tencent.com/document/api/1778/111029)接口或控制台获得。
-   */
-  InstanceId: string
-}
-
-/**
  * DescribeMessageEnrichmentRules请求参数结构体
  */
 export interface DescribeMessageEnrichmentRulesRequest {
@@ -3433,29 +3586,61 @@ export interface DescribeDeviceIdentityRequest {
 }
 
 /**
- * MQTT集群用户信息
+ * CreateInstance请求参数结构体
  */
-export interface MQTTUserItem {
+export interface CreateInstanceRequest {
   /**
-   * 用户名
+   * 实例类型，需要和SkuCode保持对应关系，可参考 [获取MQTT产品售卖规格](https://cloud.tencent.com/document/api/1778/116232) 接口获取。
+BASIC 基础版
+PRO  专业版
+PLATINUM 铂金版
+
    */
-  Username?: string
+  InstanceType: string
   /**
-   * 密码
+   * 集群名称不能为空, 3-64个字符，只能包含数字、字母、“-”和“_”。
    */
-  Password?: string
+  Name: string
   /**
-   * 备注信息
+   * 商品规格，需要和InstanceType保持对应关系，可参考 [获取MQTT产品售卖规格](https://cloud.tencent.com/document/api/1778/116232) 接口获取。
+   */
+  SkuCode: string
+  /**
+   * 备注信息，最长 128 字符
    */
   Remark?: string
   /**
-   * 创建时间，毫秒级时间戳 。
+   * 标签列表
    */
-  CreatedTime?: number
+  TagList?: Array<Tag>
   /**
-   * 修改时间，毫秒级时间戳 。
+   * 实例绑定的VPC信息，需要传当前用户下可用的VPC和SUBNET
    */
-  ModifiedTime?: number
+  VpcList?: Array<VpcInfo>
+  /**
+   * 是否开启公网，默认false（关闭）
+   */
+  EnablePublic?: boolean
+  /**
+   * 公网带宽（单位：Mbps），EnablePublic 为True时，该字段必须填写且大于0.
+   */
+  Bandwidth?: number
+  /**
+   * 公网访问白名单，不传表示拒绝所有IP网络访问。
+   */
+  IpRules?: Array<IpRule>
+  /**
+   * 是否自动续费（0: 不自动续费；1: 自动续费），仅购买预付费集群时生效。默认1:自动续费
+   */
+  RenewFlag?: number
+  /**
+   * 购买时长（单位：月），购买预付费集群时生效，默认1m（月）。可选范围：1~12、24、36、48、60；
+   */
+  TimeSpan?: number
+  /**
+   * 付费模式（0: 后付费；1: 预付费），默认0（后付费）。
+   */
+  PayMode?: number
 }
 
 /**

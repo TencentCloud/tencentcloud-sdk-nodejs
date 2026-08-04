@@ -47,6 +47,7 @@ import {
   DescribeApplicationsResponse,
   DescribeEnvironmentsRequest,
   RunGroupNotification,
+  DeleteEnvironmentCacheRequest,
   CreateEnvironmentRequest,
   DescribeInputTemplatesRequest,
   Application,
@@ -104,6 +105,7 @@ import {
   DescribeProjectsRequest,
   CreateVolumeResponse,
   DeleteVolumeRequest,
+  DeleteEnvironmentCacheResponse,
   DescribeProjectsResponse,
   Volume,
   ModifyVolumeResponse,
@@ -398,6 +400,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteVolumeDataResponse) => void
   ): Promise<DeleteVolumeDataResponse> {
     return this.request("DeleteVolumeData", req, cb)
+  }
+
+  /**
+   * 删除环境缓存。
+   */
+  async DeleteEnvironmentCache(
+    req: DeleteEnvironmentCacheRequest,
+    cb?: (error: string, rep: DeleteEnvironmentCacheResponse) => void
+  ): Promise<DeleteEnvironmentCacheResponse> {
+    return this.request("DeleteEnvironmentCache", req, cb)
   }
 
   /**

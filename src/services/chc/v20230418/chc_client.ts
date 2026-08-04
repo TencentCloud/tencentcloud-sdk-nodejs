@@ -100,6 +100,7 @@ import {
   DescribePersonnelVisitWorkOrderDetailRequest,
   DescribeCustomerInfoResponse,
   Device,
+  SLAInfo,
   CreateServerModelResponse,
   DescribeCampusListRequest,
   Filter,

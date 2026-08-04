@@ -81,6 +81,10 @@ export interface DescribeDBCustomClusterDetailResponse {
    */
   ContainerNetwork?: ContainerNetwork
   /**
+   * <p>是否启用集群删除保护</p><p>枚举值：</p><ul><li>true： 启用</li><li>false： 不启用</li></ul>
+   */
+  DeletionProtection?: boolean
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -374,6 +378,10 @@ export interface CreateDBCustomClusterRequest {
    * <p>试运行开关，true 时只执行参数校验，不发起创建流程，默认 false</p>
    */
   DryRun?: boolean
+  /**
+   * <p>是否启用集群删除保护</p><p>枚举值：</p><ul><li>true： 启用</li><li>false： 不启用</li></ul><p>默认值：true</p>
+   */
+  DeletionProtection?: boolean
 }
 
 /**
@@ -2347,6 +2355,10 @@ export interface DBCustomCluster {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<Tag>
+  /**
+   * <p>是否启用集群删除保护</p><p>枚举值：</p><ul><li>true： 启用</li><li>false： 不启用</li></ul>
+   */
+  DeletionProtection?: boolean
 }
 
 /**

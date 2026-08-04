@@ -278,6 +278,16 @@ it("omics.v20221128.DeleteVolumeData", async function () {
     }
 })
 
+it("omics.v20221128.DeleteEnvironmentCache", async function () {
+    try {
+       const data = await client.DeleteEnvironmentCache({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("omics.v20221128.DescribeVolumes", async function () {
     try {
        const data = await client.DescribeVolumes({})

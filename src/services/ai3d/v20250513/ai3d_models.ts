@@ -114,9 +114,13 @@ export interface QueryHunyuan3DPartJobResponse {
    */
   ResultFile3Ds?: Array<File3D>
   /**
-   * <p>是否分步骤进行组件生成；<br>开启后，输入原始模型后，可生成带分割信息的模型以及分割数据，可对此信息编辑后再传入带有分割信息的模型和分割数据进行编辑后的组件生成；<br>此参数默认关闭。</p>
+   * <p>是否分步骤进行组件生成；<br>开启后，输入原始模型后，可生成带分割信息的模型以及分割数据，可对此信息编辑后再传入带有分割信息的模型和分割数据进行编辑后的组件生成；<br>此参数默认关闭。</p><p>该参数废弃， 超过 9MB 不返回， 请使用 PartSegmentationInfoUrl 下载</p>
    */
   PartSegmentationInfo?: string
+  /**
+   * <p>PartSegmentationInfo 下载地址</p>
+   */
+  PartSegmentationInfoUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -741,9 +745,13 @@ export interface SubmitHunyuan3DPartJobRequest {
    */
   PartSegmentationInfo?: string
   /**
-   * <p>是否开启后处理，开启后将只输出一个模型链接，默认关闭。 （开启此接口后，需额外增加20积分）</p>
+   * <p>是否分步骤进行组件生成；<br>开启后，输入原始模型后，可生成带分割信息的模型以及分割数据，可对此信息编辑后再传入带有分割信息的模型和分割数据进行编辑后的组件生成；<br>此参数默认关闭。</p>
    */
   EnableStagedGeneration?: boolean
+  /**
+   * <p>是否开启后处理，开启后将只输出一个模型链接，默认关闭。 （开启此接口后，需额外增加20积分）</p>
+   */
+  EnablePostProcess?: boolean
 }
 
 /**

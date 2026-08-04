@@ -368,7 +368,7 @@ export interface AuditLogInfo {
    */
   EffectRow?: number
   /**
-   * 执行时间
+   * 执行时间,单位：毫秒
    */
   ExecTime?: number
   /**
@@ -1071,29 +1071,41 @@ export interface DspmAccountCount {
  */
 export interface ModifyDspmRiskStrategyRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
-   * 风险策略类型
+   * <p>风险策略类型</p>
    */
   StrategyType?: string
   /**
-   * 是否启用
+   * <p>是否启用</p>
    */
   IsEnabled?: number
   /**
-   * 策略内容，如：{     ThresholdValue: "100" }
+   * <p>策略内容，如：{     ThresholdValue: &quot;100&quot; }</p>
    */
   Rule?: string
   /**
-   * 可选值：Info/Low/Medium/High
+   * <p>可选值：Info/Low/Medium/High</p>
    */
   RiskLevel?: string
   /**
-   * 策略id
+   * <p>策略id</p>
    */
   StrategyId?: Array<number | bigint>
+  /**
+   * <p>策略名</p>
+   */
+  Name?: string
+  /**
+   * <p>策略描述</p>
+   */
+  Description?: string
+  /**
+   * <p>支持的数据库类型</p>
+   */
+  DbTypes?: string
 }
 
 /**
@@ -4415,7 +4427,7 @@ export interface CreateDspmAccessExportJobRequest {
  */
 export interface DescribeDspmRiskStrategyGroupRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -5639,7 +5651,7 @@ export interface DescribeDspmAssetSupportedPrivilegesResponse {
  */
 export interface CreateDspmWhitelistStrategyResponse {
   /**
-   * 白名单id
+   * <p>白名单id</p>
    */
   WhitelistStrategyId?: string
   /**
@@ -6302,7 +6314,7 @@ export interface ModifyNotifyAssetConfigRequest {
  */
 export interface ModifyDspmWhitelistStrategyRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -7284,7 +7296,7 @@ export type DescribeNotifySettingAlertRequest = null
  */
 export interface DescribeDspmLogListRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -7388,7 +7400,7 @@ export interface DescribeDspmLogListRequest {
    */
   RowNumMax?: number
   /**
-   * 数据库类型
+   * 数据库类型, 支持的值：cdb，mariadb
    */
   DbTypes?: Array<string>
   /**
@@ -10771,61 +10783,74 @@ export interface RiskCallRecord {
  */
 export interface DspmRiskStrategy {
   /**
-   * 策略类型
+   * <p>策略类型</p>
    */
   StrategyType?: string
   /**
-   * 策略名
+   * <p>策略名</p>
    */
   Name?: string
   /**
-   * 策略类型
+   * <p>策略类型</p>
    */
   StrategyCategory?: string
   /**
-   * 是否启用。0-禁用 1-启用
+   * <p>是否启用。0-禁用 1-启用</p>
    */
   IsEnabled?: number
   /**
-   * 风险等级。
+   * <p>风险等级。</p>
    */
   RiskLevel?: string
   /**
-   * 策略规则
+   * <p>策略规则</p>
    */
   Rule?: string
   /**
-   * 备注
+   * <p>备注</p>
    */
   Remark?: string
   /**
-   * 策略内容
+   * <p>策略内容</p>
    */
   Description?: string
   /**
-   * 命中次数
+   * <p>命中次数</p>
    */
   HitCount?: number
   /**
-   * 风险类型。risk-风险；alarm-告警。
+   * <p>风险类型。risk-风险；alarm-告警。</p>
    */
   RiskType?: string
   /**
-   * 资产所属账号app id
+   * <p>资产所属账号app id</p>
    */
   AppId?: number
   /**
-   * 账号昵称
+   * <p>账号昵称</p>
    */
   NickName?: string
   /**
-   * 资产所属账号uin
+   * <p>资产所属账号uin</p>
    */
   Uin?: string
   /**
-   * 策略id
+   * <p>策略id</p>
    */
   StrategyId?: number
+  /**
+   * <p>规则来源</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleSource?: string
+  /**
+   * <p>支持的资产类型</p>
+   */
+  AssetTypes?: Array<string>
+  /**
+   * <p>风险描述</p>
+   */
+  RiskDescription?: string
 }
 
 /**
@@ -14177,41 +14202,45 @@ export interface DBAssetVO {
  */
 export interface CreateDspmWhitelistStrategyRequest {
   /**
-   * 策略类型
+   * <p>策略类型</p>
    */
-  StrategyType: string
+  StrategyType?: string
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
-   * 白名单
+   * <p>白名单</p>
    */
   Name?: string
   /**
-   * 规则
+   * <p>规则</p>
    */
   Rule?: string
   /**
-   * 资产id
+   * <p>资产id</p>
    */
   AssetId?: string
   /**
-   * 账号
+   * <p>账号</p>
    */
   Account?: string
   /**
-   * 主机
+   * <p>主机</p>
    */
   Host?: string
   /**
-   * 风险id
+   * <p>风险id</p>
    */
   RiskId?: string
   /**
-   * 备注
+   * <p>备注</p>
    */
   Remark?: string
+  /**
+   * <p>白名单的类型</p><p>枚举值：</p><ul><li>static_risk： 静态配置扫描的白名单规则</li><li>audit： 审计白名单规则</li><li>ueba： ueba相关的白名单规则</li></ul>
+   */
+  WhitelistType?: string
 }
 
 /**
@@ -17914,7 +17943,7 @@ export interface ModifyDspmIdentifyInfoRequest {
  */
 export interface DescribeDspmWhitelistStrategyRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -20143,33 +20172,38 @@ export interface DbAssetInfo {
  */
 export interface DspmRiskStrategyGroup {
   /**
-   * 策略类型
+   * <p>策略类型</p>
    */
   StrategyType?: string
   /**
-   * 策略名
+   * <p>策略名</p>
    */
   Name?: string
   /**
-   * 策略类型
+   * <p>策略类型</p>
    */
   StrategyCategory?: string
   /**
-   * 是否启用。0-禁用 1-启用
+   * <p>是否启用。0-禁用 1-启用</p>
    */
   IsEnabled?: number
   /**
-   * 命中次数
+   * <p>命中次数</p>
    */
   HitCount?: number
   /**
-   * 风险类型。risk-风险；alarm-告警。
+   * <p>风险类型。risk-风险；alarm-告警。</p>
    */
   RiskType?: string
   /**
-   * 策略列表
+   * <p>策略列表</p>
    */
   StrategyList?: Array<DspmRiskStrategy>
+  /**
+   * <p>规则来源</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RuleSource?: string
 }
 
 /**
@@ -21790,65 +21824,69 @@ export interface DescribeAssetViewVulRiskListRequest {
  */
 export interface DspmWhitelistStrategy {
   /**
-   * 白名单策略id
+   * <p>白名单策略id</p>
    */
   WhitelistStrategyId?: string
   /**
-   * 策略类型
+   * <p>策略类型</p>
    */
   StrategyType?: string
   /**
-   * 白名单策略名
+   * <p>白名单策略名</p>
    */
   Name?: string
   /**
-   * 策略类型
+   * <p>策略类型</p>
    */
   StrategyCategory?: string
   /**
-   * 策略规则
+   * <p>策略规则</p>
    */
   Rule?: string
   /**
-   * 备注
+   * <p>备注</p>
    */
   Remark?: string
   /**
-   * 修改时间
+   * <p>修改时间</p>
    */
   ModifyTime?: string
   /**
-   * 资产id
+   * <p>资产id</p>
    */
   AssetId?: string
   /**
-   * 账号
+   * <p>账号</p>
    */
   Account?: string
   /**
-   * 主机
+   * <p>主机</p>
    */
   Host?: string
   /**
-   * 策略规则内容描述
+   * <p>策略规则内容描述</p>
    */
   Description?: string
   /**
-   * 白名单类型。risk-风险白名单；alarm-告警白名单。
+   * <p>白名单类型。risk-风险白名单；alarm-告警白名单。</p>
    */
   RiskType?: string
   /**
-   * 资产所属账号app id
+   * <p>资产所属账号app id</p>
    */
   AppId?: number
   /**
-   * 账号昵称
+   * <p>账号昵称</p>
    */
   NickName?: string
   /**
-   * 资产所属账号uin
+   * <p>资产所属账号uin</p>
    */
   Uin?: string
+  /**
+   * <p>白名单类型</p>
+   */
+  WhitelistType?: string
 }
 
 /**
@@ -22369,7 +22407,7 @@ export interface DescribeRiskCenterPortViewPortRiskListResponse {
  */
 export interface DescribeDspmRiskStrategyRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**
@@ -23688,7 +23726,7 @@ export interface FilterDataObject {
  */
 export interface DeleteDspmWhitelistStrategyRequest {
   /**
-   * 集团账号的成员id
+   * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
   /**

@@ -478,6 +478,16 @@ it("kms.v20190118.DisableKeyRotation", async function () {
     }
 })
 
+it("kms.v20190118.RotateKey", async function () {
+    try {
+       const data = await client.RotateKey({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("kms.v20190118.ListKeyDetail", async function () {
     try {
        const data = await client.ListKeyDetail({})

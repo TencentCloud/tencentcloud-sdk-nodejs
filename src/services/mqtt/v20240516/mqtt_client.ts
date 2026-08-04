@@ -20,11 +20,13 @@ import { ClientConfig } from "../../../common/interface"
 import {
   UpdateAuthorizationPolicyPriorityResponse,
   MQTTClientSubscription,
+  DeleteBlockRuleResponse,
   ModifyDeviceIdentityResponse,
   DeleteUserRequest,
   DescribeSharedSubscriptionGroupsWithSubscriptionsResponse,
   ModifyJWTAuthenticatorResponse,
   CaCertificateItem,
+  CreateBlockRuleResponse,
   MessageEnrichmentRulePriority,
   ModifyAuthorizationPolicyResponse,
   ActivateDeviceCertificateRequest,
@@ -40,6 +42,7 @@ import {
   DescribeSharedSubscriptionLagResponse,
   DeleteTopicRequest,
   ModifyUserResponse,
+  ModifyBlockRuleResponse,
   DescribeCaCertificateResponse,
   DescribeDeviceCertificatesRequest,
   DescribeSharedSubscriptionGroupsRequest,
@@ -51,12 +54,13 @@ import {
   ProductSkuItem,
   ModifyJWKSAuthenticatorRequest,
   DescribeDeviceIdentitiesRequest,
+  DeleteBlockRuleRequest,
   CreateMessageEnrichmentRuleResponse,
   RegisterCaCertificateResponse,
   UserProperty,
   KickOutClientResponse,
   DescribeMessageDetailsRequest,
-  DeleteInstanceRequest,
+  DescribeInsVPCEndpointsResponse,
   ModifyInstanceRequest,
   CreateDeviceIdentityRequest,
   RegisterDeviceCertificateResponse,
@@ -70,8 +74,9 @@ import {
   ApplyRegistrationCodeResponse,
   ModifyMessageEnrichmentRuleRequest,
   ModifyInstanceResponse,
-  ModifyX509ConfigResponse,
+  ModifyBlockRuleRequest,
   AddClientSubscriptionRequest,
+  ModifyInsPublicEndpointRequest,
   CreateHttpAuthenticatorResponse,
   MQTTMessage,
   MQTTMessageItem,
@@ -96,6 +101,7 @@ import {
   ActivateCaCertificateResponse,
   DeleteDeviceCertificateResponse,
   DescribeMessageByTopicResponse,
+  DescribeBlockRuleListResponse,
   DeleteInstanceResponse,
   DescribeProductSKUListResponse,
   CreateJWKSAuthenticatorRequest,
@@ -120,6 +126,7 @@ import {
   DescribeTopicRequest,
   PublishMessageRequest,
   AuthorizationPolicyItem,
+  ModifyX509ConfigResponse,
   DescribeClientListRequest,
   SharedGroup,
   DeleteInsPublicEndpointResponse,
@@ -127,17 +134,19 @@ import {
   DeviceIdentityItem,
   DescribeInsVPCEndpointsRequest,
   DescribeTopicListRequest,
+  BlockRuleItem,
   AddClientSubscriptionResponse,
   CreateTopicResponse,
   RevokedDeviceCertificateRequest,
   ModifyInsPublicEndpointResponse,
-  CreateInstanceRequest,
+  CreateAuthorizationPolicyResponse,
   RegisterCaCertificateRequest,
   DescribeSharedSubscriptionClientRequest,
-  CreateAuthorizationPolicyResponse,
+  DescribeCaCertificateRequest,
   DescribeSharedSubscriptionsResponse,
   CreateInsPublicEndpointRequest,
   RegisterDeviceCertificateRequest,
+  CreateBlockRuleRequest,
   Filter,
   DeactivateDeviceCertificateRequest,
   DescribeDeviceCertificatesResponse,
@@ -147,9 +156,10 @@ import {
   ModifyInstanceCertBindingResponse,
   UpdateMessageEnrichmentRulePriorityRequest,
   SharedSubscriptionGroupWithSubscriptions,
-  DescribeInsVPCEndpointsResponse,
+  MQTTUserItem,
+  DeleteInstanceRequest,
   DescribeDeviceCertificateRequest,
-  ModifyInsPublicEndpointRequest,
+  DescribeBlockRuleListRequest,
   DeviceCertificateBackupHistoryItem,
   SharedSubscriptionClient,
   DeleteInsPublicEndpointRequest,
@@ -159,7 +169,6 @@ import {
   DescribeDeviceIdentityResponse,
   ModifyTopicResponse,
   DeleteClientSubscriptionResponse,
-  DescribeCaCertificateRequest,
   DescribeMessageEnrichmentRulesRequest,
   UpdateAuthorizationPolicyPriorityRequest,
   CreateMessageEnrichmentRuleRequest,
@@ -167,7 +176,7 @@ import {
   CreateJWTAuthenticatorResponse,
   DeleteAuthorizationPolicyRequest,
   DescribeDeviceIdentityRequest,
-  MQTTUserItem,
+  CreateInstanceRequest,
   DescribeAuthorizationPoliciesRequest,
   RevokedDeviceCertificateResponse,
   PropagatingProperty,
@@ -324,13 +333,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改集群X509配置
+   * 更新MQTT实例公网接入点
    */
-  async ModifyX509Config(
-    req: ModifyX509ConfigRequest,
-    cb?: (error: string, rep: ModifyX509ConfigResponse) => void
-  ): Promise<ModifyX509ConfigResponse> {
-    return this.request("ModifyX509Config", req, cb)
+  async ModifyInsPublicEndpoint(
+    req: ModifyInsPublicEndpointRequest,
+    cb?: (error: string, rep: ModifyInsPublicEndpointResponse) => void
+  ): Promise<ModifyInsPublicEndpointResponse> {
+    return this.request("ModifyInsPublicEndpoint", req, cb)
   }
 
   /**
@@ -341,6 +350,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DeleteInstanceResponse) => void
   ): Promise<DeleteInstanceResponse> {
     return this.request("DeleteInstance", req, cb)
+  }
+
+  /**
+   * 修改集群X509配置
+   */
+  async ModifyX509Config(
+    req: ModifyX509ConfigRequest,
+    cb?: (error: string, rep: ModifyX509ConfigResponse) => void
+  ): Promise<ModifyX509ConfigResponse> {
+    return this.request("ModifyX509Config", req, cb)
   }
 
   /**
@@ -384,6 +403,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 删除封禁规则
+   */
+  async DeleteBlockRule(
+    req: DeleteBlockRuleRequest,
+    cb?: (error: string, rep: DeleteBlockRuleResponse) => void
+  ): Promise<DeleteBlockRuleResponse> {
+    return this.request("DeleteBlockRule", req, cb)
+  }
+
+  /**
    * 查询MQTT实例公网接入点
    */
   async DescribeInsPublicEndpoints(
@@ -404,13 +433,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新MQTT实例公网接入点
+   * 修改策略规则优先级
    */
-  async ModifyInsPublicEndpoint(
-    req: ModifyInsPublicEndpointRequest,
-    cb?: (error: string, rep: ModifyInsPublicEndpointResponse) => void
-  ): Promise<ModifyInsPublicEndpointResponse> {
-    return this.request("ModifyInsPublicEndpoint", req, cb)
+  async UpdateAuthorizationPolicyPriority(
+    req: UpdateAuthorizationPolicyPriorityRequest,
+    cb?: (error: string, rep: UpdateAuthorizationPolicyPriorityResponse) => void
+  ): Promise<UpdateAuthorizationPolicyPriorityResponse> {
+    return this.request("UpdateAuthorizationPolicyPriority", req, cb)
+  }
+
+  /**
+   * 修改封禁规则
+   */
+  async ModifyBlockRule(
+    req: ModifyBlockRuleRequest,
+    cb?: (error: string, rep: ModifyBlockRuleResponse) => void
+  ): Promise<ModifyBlockRuleResponse> {
+    return this.request("ModifyBlockRule", req, cb)
   }
 
   /**
@@ -517,13 +556,14 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改策略规则优先级
-   */
-  async UpdateAuthorizationPolicyPriority(
-    req: UpdateAuthorizationPolicyPriorityRequest,
-    cb?: (error: string, rep: UpdateAuthorizationPolicyPriorityResponse) => void
-  ): Promise<UpdateAuthorizationPolicyPriorityResponse> {
-    return this.request("UpdateAuthorizationPolicyPriority", req, cb)
+     * 修改消息属性增强规则
+注意：需要提交当前规则的所有属性，即使某些字段没有修改。
+     */
+  async ModifyMessageEnrichmentRule(
+    req: ModifyMessageEnrichmentRuleRequest,
+    cb?: (error: string, rep: ModifyMessageEnrichmentRuleResponse) => void
+  ): Promise<ModifyMessageEnrichmentRuleResponse> {
+    return this.request("ModifyMessageEnrichmentRule", req, cb)
   }
 
   /**
@@ -574,6 +614,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAuthorizationPoliciesResponse) => void
   ): Promise<DescribeAuthorizationPoliciesResponse> {
     return this.request("DescribeAuthorizationPolicies", req, cb)
+  }
+
+  /**
+   * 创建封禁规则
+   */
+  async CreateBlockRule(
+    req: CreateBlockRuleRequest,
+    cb?: (error: string, rep: CreateBlockRuleResponse) => void
+  ): Promise<CreateBlockRuleResponse> {
+    return this.request("CreateBlockRule", req, cb)
   }
 
   /**
@@ -755,14 +805,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 修改消息属性增强规则
-注意：需要提交当前规则的所有属性，即使某些字段没有修改。
-     */
-  async ModifyMessageEnrichmentRule(
-    req: ModifyMessageEnrichmentRuleRequest,
-    cb?: (error: string, rep: ModifyMessageEnrichmentRuleResponse) => void
-  ): Promise<ModifyMessageEnrichmentRuleResponse> {
-    return this.request("ModifyMessageEnrichmentRule", req, cb)
+   * 封禁规则列表
+   */
+  async DescribeBlockRuleList(
+    req: DescribeBlockRuleListRequest,
+    cb?: (error: string, rep: DescribeBlockRuleListResponse) => void
+  ): Promise<DescribeBlockRuleListResponse> {
+    return this.request("DescribeBlockRuleList", req, cb)
   }
 
   /**

@@ -1915,6 +1915,20 @@ export interface CancelDataKeyDeletionResponse {
 }
 
 /**
+ * RotateKey返回参数结构体
+ */
+export interface RotateKeyResponse {
+  /**
+   * <p>轮转任务ID，用于标识本次轮转任务。可以通过调用DescribeKey，返回上次轮转时间和下次轮转时间，判断是否轮转成功。</p>
+   */
+  TaskId?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ListKeys请求参数结构体
  */
 export interface ListKeysRequest {
@@ -2606,6 +2620,20 @@ export interface PostQuantumCryptoDecryptResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * RotateKey请求参数结构体
+ */
+export interface RotateKeyRequest {
+  /**
+   * <p>CMK的全局唯一标识符</p>
+   */
+  KeyId: string
+  /**
+   * <p>成员账号信息，用于多账号场景</p>
+   */
+  MemberAccount?: MemberAccount
 }
 
 /**

@@ -833,6 +833,24 @@ export interface RunGroupNotification {
 }
 
 /**
+ * DeleteEnvironmentCache请求参数结构体
+ */
+export interface DeleteEnvironmentCacheRequest {
+  /**
+   * <p>环境ID。</p>
+   */
+  EnvironmentId: string
+  /**
+   * <p>缓存类型</p><p>枚举值：</p><ul><li>RUNTIME： 清理默认缓存卷的运行缓存目录</li><li>INPUT： 清理默认缓存卷的输入缓存目录</li><li>ALL： 清空环境下全部有效缓存卷</li><li>PATH： 指定缓存卷下指定路径，需要在Path中填入实际绝对路径</li></ul>
+   */
+  CacheType: string
+  /**
+   * <p>指定路径删除</p><p>入参限制：以盘符开头的绝对路径地址</p>
+   */
+  Path?: string
+}
+
+/**
  * CreateEnvironment请求参数结构体
  */
 export interface CreateEnvironmentRequest {
@@ -2141,6 +2159,20 @@ export interface DeleteVolumeRequest {
    * 缓存卷ID。
    */
   VolumeId: string
+}
+
+/**
+ * DeleteEnvironmentCache返回参数结构体
+ */
+export interface DeleteEnvironmentCacheResponse {
+  /**
+   * <p>工作流UUID。</p>
+   */
+  WorkflowUuid?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**

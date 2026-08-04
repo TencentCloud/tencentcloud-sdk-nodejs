@@ -3280,30 +3280,33 @@ export interface DeleteOrganizationAuthorizationsResponse {
  */
 export interface ChannelCreatePrepareFlowGroupRequest {
   /**
-   * 合同组中每个合同签署流程的信息，合同组中最少包含2个合同，不能超过50个合同。
+   * <p>合同组中每个合同签署流程的信息，合同组中最少包含2个合同，不能超过50个合同。</p>
    */
   BaseFlowInfos: Array<BaseFlowInfo>
   /**
-   * 合同组的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。
+   * <p>合同组的名称（可自定义此名称），长度不能超过200，只能由中文、字母、数字和下划线组成。</p>
    */
   FlowGroupName: string
   /**
-   * 资源类型，取值有： <ul><li> **1**：模板</li> <li> **2**：文件</li></ul>
+   * <p>资源类型，取值有： <ul><li> <strong>1</strong>：模板</li> <li> <strong>2</strong>：文件</li></ul></p>
    */
   ResourceType: number
   /**
-   * 合同的发起企业和发起人信息，<a href="https://qcloudimg.tencent-cloud.cn/raw/b69f8aad306c40b7b78d096e39b2edbb.png" target="_blank">点击查看合同发起企业和人展示的位置</a>
-
-此接口下面信息必填。
-<ul>
-<li>渠道应用标识: <a href="https://qcloudimg.tencent-cloud.cn/raw/a71872de3d540d55451e3e73a2ad1a6e.png" target="_blank">Agent.AppId</a></li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId（合同的发起企业）</li>
-<li>第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId （合同的发起人）</li>
-</ul>
-
-合同的发起企业和发起人必需已经完成实名，并加入企业
+   * <p>合同的发起企业和发起人信息，<a href="https://qcloudimg.tencent-cloud.cn/raw/b69f8aad306c40b7b78d096e39b2edbb.png" target="_blank">点击查看合同发起企业和人展示的位置</a></p><p>此接口下面信息必填。</p><ul><li>渠道应用标识: <a href="https://qcloudimg.tencent-cloud.cn/raw/a71872de3d540d55451e3e73a2ad1a6e.png" target="_blank">Agent.AppId</a></li><li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId（合同的发起企业）</li><li>第三方平台子客企业中的员工标识: Agent.ProxyOperator.OpenId （合同的发起人）</li></ul><p>合同的发起企业和发起人必需已经完成实名，并加入企业</p>
    */
   Agent?: Agent
+  /**
+   * <p>合同组发起参数控制，包括对合同组名称、过期时间、发起后签署以及查看等操作</p>
+   */
+  FlowGroupOptions?: FlowGroupOptions
+  /**
+   * <p>合同组类型，会应用到所有子合同</p>
+   */
+  FlowGroupType?: string
+  /**
+   * <p>合同组过期时间，会应用到所有子合同</p>
+   */
+  FlowGroupDeadline?: number
 }
 
 /**
@@ -4348,17 +4351,45 @@ export interface ChannelCancelMultiFlowSignQRCodeRequest {
  */
 export interface FlowGroupOptions {
   /**
-   * 发起方企业经办人（即签署人为发起方企业员工）是否需要对子合同进行独立的意愿确认
-<ul><li>**false**（默认）：发起方企业经办人签署时对所有子合同进行统一的意愿确认。</li>
-<li>**true**：发起方企业经办人签署时需要对子合同进行独立的意愿确认。</li></ul>
+   * <p>发起方企业经办人（即签署人为发起方企业员工）是否需要对子合同进行独立的意愿确认</p><ul><li>**false**（默认）：发起方企业经办人签署时对所有子合同进行统一的意愿确认。</li><li>**true**：发起方企业经办人签署时需要对子合同进行独立的意愿确认。</li></ul>
    */
   SelfOrganizationApproverSignEach?: boolean
   /**
-   * 非发起方企业经办人（即：签署人为个人或者不为发起方企业的员工）是否需要对子合同进行独立的意愿确认
-<ul><li>**false**（默认）：非发起方企业经办人签署时对所有子合同进行统一的意愿确认。</li>
-<li>**true**：非发起方企业经办人签署时需要对子合同进行独立的意愿确认。</li></ul>
+   * <p>非发起方企业经办人（即：签署人为个人或者不为发起方企业的员工）是否需要对子合同进行独立的意愿确认</p><ul><li>**false**（默认）：非发起方企业经办人签署时对所有子合同进行统一的意愿确认。</li><li>**true**：非发起方企业经办人签署时需要对子合同进行独立的意愿确认。</li></ul>
    */
   OtherApproverSignEach?: boolean
+  /**
+   * <p>是否不可编辑合同名称 true-不可编辑 false-可编辑(默认)</p>
+   */
+  NoEditFlowName?: boolean
+  /**
+   * <p>是否不可编辑合同类型 true-不可编辑 false-可编辑(默认)</p>
+   */
+  NoEditFlowType?: boolean
+  /**
+   * <p>是否不可编辑合同截止日期 true-不可编辑 false-可编辑(默认)</p>
+   */
+  NoEditDeadline?: boolean
+  /**
+   * <p>签署控件配置(如是否默认展示日期)，用于嵌入式发起页面配置</p>
+   */
+  SignComponentConfig?: SignComponentConfig
+  /**
+   * <p>是否禁止编辑水印控件属性 true-禁止 false-否(默认)</p>
+   */
+  ForbidEditWatermark?: boolean
+  /**
+   * <p>发起成功后是否隐藏签署码 true-隐藏 false-否(默认)</p>
+   */
+  HideSignCodeAfterStart?: boolean
+  /**
+   * <p>发起成功后是否签署合同,仅当前经办人为签署人时生效 true-展示签署 false-否(默认)</p>
+   */
+  SignAfterStart?: boolean
+  /**
+   * <p>发起成功后是否预览合同 true-展示预览按钮 false-否(默认)</p>
+   */
+  PreviewAfterStart?: boolean
 }
 
 /**
@@ -7727,12 +7758,11 @@ export interface ApproverOption {
  */
 export interface ChannelCreatePrepareFlowGroupResponse {
   /**
-   * 合同组ID，为32位字符串。
-建议开发者妥善保存此合同组ID，以便于顺利进行后续操作。
+   * <p>合同组ID，为32位字符串。<br>建议开发者妥善保存此合同组ID，以便于顺利进行后续操作。</p>
    */
   FlowGroupId?: string
   /**
-   * 嵌入式发起链接
+   * <p>嵌入式发起链接</p>
    */
   PrepareUrl?: string
   /**

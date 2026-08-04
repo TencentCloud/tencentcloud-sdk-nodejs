@@ -119,6 +119,7 @@ import {
   DeleteWhiteBoxKeyResponse,
   ListDataKeyDetailRequest,
   CancelDataKeyDeletionResponse,
+  RotateKeyResponse,
   ListKeysRequest,
   DescribeWhiteBoxDecryptKeyRequest,
   DataKey,
@@ -160,6 +161,7 @@ import {
   DescribeWhiteBoxDecryptKeyResponse,
   DescribeWhiteBoxDeviceFingerprintsResponse,
   PostQuantumCryptoDecryptResponse,
+  RotateKeyRequest,
   DisableDataKeysRequest,
   UpdateKeyDescriptionRequest,
   UnbindCloudResourceResponse,
@@ -638,6 +640,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DisableKeyRotationResponse) => void
   ): Promise<DisableKeyRotationResponse> {
     return this.request("DisableKeyRotation", req, cb)
+  }
+
+  /**
+   * 对指定的CMK（用户主密钥）执行立即轮转操作。可以通过调用DescribeKey，返回上次轮转时间和下次轮转时间，判断是否轮转成功。
+   */
+  async RotateKey(
+    req: RotateKeyRequest,
+    cb?: (error: string, rep: RotateKeyResponse) => void
+  ): Promise<RotateKeyResponse> {
+    return this.request("RotateKey", req, cb)
   }
 
   /**
