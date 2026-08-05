@@ -154,6 +154,7 @@ import {
   ExtensionInfo,
   BindNumberCallOutSkillGroupRequest,
   DeletePredictiveDialingCampaignResponse,
+  TransferToAgentItem,
   IVRKeyPressedElement,
   DescribeFlashSMSListRequest,
   UnbindNumberCallOutSkillGroupResponse,

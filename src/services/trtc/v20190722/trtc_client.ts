@@ -76,6 +76,7 @@ import {
   DescribeCloudTranscriptionResponse,
   DescribeUserInfoRequest,
   DeleteCloudModerationResponse,
+  AgoraParam,
   DescribeRelayUsageRequest,
   DismissRoomResponse,
   WaterMarkParams,

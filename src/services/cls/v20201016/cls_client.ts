@@ -106,7 +106,7 @@ import {
   DeleteDataTransformRequest,
   DescribeRemoteWriteTasksResponse,
   AddMachineGroupInfoRequest,
-  DescribeKafkaConsumerGroupListResponse,
+  DescribeKafkaRechargesRequest,
   CreateHostMetricConfigResponse,
   ModifyConsumerGroupRequest,
   CreateTopicResponse,
@@ -163,6 +163,7 @@ import {
   ModifyCosRechargeRequest,
   DescribeClusterMetricConfigsResponse,
   DescribeWebCallbacksRequest,
+  DescribeKafkaConsumerGroupListResponse,
   ConsumerContent,
   CreateMetricSubscribeResponse,
   DescribeMachinesRequest,
@@ -261,6 +262,7 @@ import {
   CreateMetricConfigResponse,
   DeleteConfigFromMachineGroupResponse,
   PreviewKafkaRechargeResponse,
+  DeleteLogResponse,
   MonitorNotice,
   DescribeAlarmsResponse,
   MetricCollectConfig,
@@ -488,6 +490,7 @@ import {
   DescribeNetworkApplicationDetailResponse,
   GetClsServiceRequest,
   DescribeShipperTasksRequest,
+  ModifyLogRequest,
   CreateCloudProductLogCollectionRequest,
   S3RechargeInfo,
   DescribeIndexRequest,
@@ -515,9 +518,9 @@ import {
   DescribeTopicBaseMetricConfigsResponse,
   CloseKafkaConsumerResponse,
   ViewSearchTopic,
+  DeleteLogRequest,
   Relabeling,
   GetAlarmLogResponse,
-  DescribeKafkaRechargesRequest,
   CreateDashboardSubscribeResponse,
   DescribeExportsRequest,
   AlarmTarget,
@@ -562,6 +565,7 @@ import {
   ModifyTopicRequest,
   DeleteSplunkDeliverRequest,
   ModifyEsRechargeResponse,
+  ModifyLogResponse,
   ModifyConsumerGroupResponse,
   SearchS3RechargeInfoResponse,
   CreateKafkaRechargeRequest,
@@ -861,6 +865,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: DescribeEsRechargesResponse) => void
   ): Promise<DescribeEsRechargesResponse> {
     return this.request("DescribeEsRecharges", req, cb)
+  }
+
+  /**
+   * 修改日志信息
+   */
+  async DeleteLog(
+    req: DeleteLogRequest,
+    cb?: (error: string, rep: DeleteLogResponse) => void
+  ): Promise<DeleteLogResponse> {
+    return this.request("DeleteLog", req, cb)
   }
 
   /**
@@ -2126,6 +2140,16 @@ API 中 Region 填写任意一个地域均可开通所有地域的 CLS，建议�
     cb?: (error: string, rep: CreateS3RechargeResponse) => void
   ): Promise<CreateS3RechargeResponse> {
     return this.request("CreateS3Recharge", req, cb)
+  }
+
+  /**
+   * 修改日志信息
+   */
+  async ModifyLog(
+    req: ModifyLogRequest,
+    cb?: (error: string, rep: ModifyLogResponse) => void
+  ): Promise<ModifyLogResponse> {
+    return this.request("ModifyLog", req, cb)
   }
 
   /**

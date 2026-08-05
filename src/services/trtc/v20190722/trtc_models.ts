@@ -803,7 +803,7 @@ export interface CreateLiveStreamModerationRequest {
   /**
    * <p>业务自定义唯一标识，原样透传到回调</p><p>入参限制：长度限制60字符</p>
    */
-  DataId: string
+  DataId?: string
   /**
    * <p>额外信息透传结构体（房间/主播/业务自定义），原样回带到回调</p>
    */
@@ -1534,6 +1534,40 @@ export interface DeleteCloudModerationResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 声网拉流参数
+ */
+export interface AgoraParam {
+  /**
+   * <p>声网提供的应用标识</p>
+   */
+  AppId?: string
+  /**
+   * <p>声网提供的频道名</p>
+   */
+  Channel?: string
+  /**
+   * <p>声网录制的频道模式， 可选值如下：（默认值为0） 0: 通信（默认）,即常见的 1 对 1 单聊或群聊， 频道内任何用户可以自由说话； 1: 直播，有两种用户角色: 主播和观众。</p><p>枚举值：</p><ul><li>0:： 通信（默认）</li><li>1： 直播</li></ul>
+   */
+  ChannelProfile?: number
+  /**
+   * <p>绑定频道生成的临时Token</p>
+   */
+  Token?: string
+  /**
+   * <p>用户ID</p>
+   */
+  Uid?: number
+  /**
+   * <p>信任用户的列表</p>
+   */
+  TrustedUserIdList?: Array<number | bigint>
+  /**
+   * <p>非信任用户的列表</p>
+   */
+  UntrustedUserIdList?: Array<number | bigint>
 }
 
 /**
@@ -3501,11 +3535,15 @@ export interface Input {
   /**
    * <p>直播拉流地址</p><p>入参限制：字符长度小于2048</p>
    */
-  Url: string
+  Url?: string
   /**
    * <p>显式协议</p><p>枚举值：</p><ul><li>rtmp： rtmp协议</li></ul>
    */
   Format?: string
+  /**
+   * <p>声网拉流进房参数</p>
+   */
+  AgoraParam?: AgoraParam
 }
 
 /**

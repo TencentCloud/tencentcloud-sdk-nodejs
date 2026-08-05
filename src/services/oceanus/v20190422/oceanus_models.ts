@@ -4306,6 +4306,18 @@ export interface JobV1 {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   NewStateCOSBucketType?: number
+  /**
+   * <p>健康分数</p>
+   */
+  HealthScore?: number
+  /**
+   * <p>最新诊断时间</p><p>参数格式：RFC3339</p>
+   */
+  LastDiagnoseTime?: string
+  /**
+   * <p>负责人Uin</p>
+   */
+  ManagerUin?: string
 }
 
 /**

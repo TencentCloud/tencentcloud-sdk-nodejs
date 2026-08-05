@@ -2336,29 +2336,24 @@ export interface AddMachineGroupInfoRequest {
 }
 
 /**
- * DescribeKafkaConsumerGroupList返回参数结构体
+ * DescribeKafkaRecharges请求参数结构体
  */
-export interface DescribeKafkaConsumerGroupListResponse {
+export interface DescribeKafkaRechargesRequest {
   /**
-   * 日志主题名称
+   * 日志主题Id。
+- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
    */
-  TopicName?: string
+  TopicId: string
   /**
-   * 日志集id
+   * 导入配置Id。
+- 通过 [创建Kafka数据订阅任务](https://cloud.tencent.com/document/product/614/94448)获取Kafka导入配置Id。
+- 通过 [获取Kafka数据订阅任务列表](https://cloud.tencent.com/document/product/614/94446)获取Kafka导入配置Id。
    */
-  LogsetId?: string
+  Id?: string
   /**
-   * 总个数
+   * 状态。1: 运行中，2: 暂停，3：错误
    */
-  Total?: number
-  /**
-   * 消费组信息列表
-   */
-  Groups?: Array<ConsumerGroup>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  Status?: number
 }
 
 /**
@@ -3847,6 +3842,32 @@ export interface DescribeWebCallbacksRequest {
    * 分页单页限制数目，默认值为20，最大值100。
    */
   Limit?: number
+}
+
+/**
+ * DescribeKafkaConsumerGroupList返回参数结构体
+ */
+export interface DescribeKafkaConsumerGroupListResponse {
+  /**
+   * 日志主题名称
+   */
+  TopicName?: string
+  /**
+   * 日志集id
+   */
+  LogsetId?: string
+  /**
+   * 总个数
+   */
+  Total?: number
+  /**
+   * 消费组信息列表
+   */
+  Groups?: Array<ConsumerGroup>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6315,6 +6336,20 @@ export interface PreviewKafkaRechargeResponse {
    * 日志预览结果
    */
   LogData?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteLog返回参数结构体
+ */
+export interface DeleteLogResponse {
+  /**
+   * <p>影响日志条数</p>
+   */
+  AffectedRows?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12490,6 +12525,36 @@ StartTime必须小于EndTime
 }
 
 /**
+ * ModifyLog请求参数结构体
+ */
+export interface ModifyLogRequest {
+  /**
+   * <p>日志主题id</p>
+   */
+  TopicId: string
+  /**
+   * <p>检索时间范围-开始时间</p><p>单位：ms</p>
+   */
+  From: number
+  /**
+   * <p>检索时间范围-结束时间</p><p>单位：ms</p>
+   */
+  To: number
+  /**
+   * <p>日志检索条件，仅支持 CQL 语法，不支持 Lucene 语法</p><p>对符合检索条件的日志进行修改</p>
+   */
+  QueryString: string
+  /**
+   * <p>修改模式</p><p>枚举值：</p><ul><li>PARTIAL： 只修改指定的日志字段</li><li>REPLACE： 整体替换原有日志（不包含预置字段及元数据字段）</li></ul>
+   */
+  ModifyMode: string
+  /**
+   * <p>修改内容</p><p>不支持修改预置字段(__FILENAME__、__SOURCE__等，但不包括__CONTENT__)及元数据字段(__TAG__开头的字段)</p>
+   */
+  ModifyContent: string
+}
+
+/**
  * CreateCloudProductLogCollection请求参数结构体
  */
 export interface CreateCloudProductLogCollectionRequest {
@@ -13229,6 +13294,28 @@ export interface ViewSearchTopic {
 }
 
 /**
+ * DeleteLog请求参数结构体
+ */
+export interface DeleteLogRequest {
+  /**
+   * <p>日志主题id</p>
+   */
+  TopicId: string
+  /**
+   * <p>检索时间范围-开始时间</p><p>单位：ms</p>
+   */
+  From: number
+  /**
+   * <p>检索时间范围-结束时间</p><p>单位：ms</p>
+   */
+  To: number
+  /**
+   * <p>日志检索条件，仅支持 CQL 语法，不支持 Lucene 语法</p><p>对符合检索条件的日志进行删除</p>
+   */
+  QueryString: string
+}
+
+/**
  * 标签重新标记配置。
 允许动态重写目标、警报、抓取样本和远程写入样本的标签集。
  */
@@ -13332,27 +13419,6 @@ export interface GetAlarmLogResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
-}
-
-/**
- * DescribeKafkaRecharges请求参数结构体
- */
-export interface DescribeKafkaRechargesRequest {
-  /**
-   * 日志主题Id。
-- 通过[获取日志主题列表](https://cloud.tencent.com/document/product/614/56454)获取日志主题Id。
-   */
-  TopicId: string
-  /**
-   * 导入配置Id。
-- 通过 [创建Kafka数据订阅任务](https://cloud.tencent.com/document/product/614/94448)获取Kafka导入配置Id。
-- 通过 [获取Kafka数据订阅任务列表](https://cloud.tencent.com/document/product/614/94446)获取Kafka导入配置Id。
-   */
-  Id?: string
-  /**
-   * 状态。1: 运行中，2: 暂停，3：错误
-   */
-  Status?: number
 }
 
 /**
@@ -14545,6 +14611,20 @@ export interface DeleteSplunkDeliverRequest {
  * ModifyEsRecharge返回参数结构体
  */
 export interface ModifyEsRechargeResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyLog返回参数结构体
+ */
+export interface ModifyLogResponse {
+  /**
+   * <p>影响日志条数</p>
+   */
+  AffectedRows?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

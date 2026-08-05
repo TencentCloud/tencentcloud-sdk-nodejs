@@ -4147,6 +4147,20 @@ export interface TkeClusterInfo {
 }
 
 /**
+ * VerifyHTTPServiceRoute请求参数结构体
+ */
+export interface VerifyHTTPServiceRouteRequest {
+  /**
+   * <p>环境ID</p>
+   */
+  EnvId: string
+  /**
+   * <p>域名路由信息</p>
+   */
+  Domain: HTTPServiceDomainParam
+}
+
+/**
  * 身份源配置信息。描述云开发环境下用户登录身份源的完整配置，定义了用户通过何种方式进入系统并完成身份认证。支持多种类型：包括标准协议身份源（OAuth 2.0、OIDC、SAML 2.0）、内置身份源（邮箱登录、自定义登录）以及通过插件机制扩展的身份源（如 CAS）。每个身份源包含认证配置、启用状态、用户自动注册策略、信息透传模式等核心属性，是登录认证流程的核心数据结构。
  */
 export interface Provider {
@@ -6697,6 +6711,28 @@ export interface DescribeAIModelsRequest {
 }
 
 /**
+ * VerifyHTTPServiceRoute单项前置校验结果
+ */
+export interface VerifyHTTPServiceRouteCheckItem {
+  /**
+   * <p>检查状态</p><p>枚举值：</p><ul><li>PASS： 通过</li><li>SKIPPED： 跳过（无需校验，视为通过）</li><li>FAIL： 失败</li></ul><p>默认值：SKIPPED</p>
+   */
+  Status?: string
+  /**
+   * <p>前置校验子项失败原因枚举，仅在 Status=FAIL 时有值，供前端根据 Code 精确渲染提示与操作指引</p><p>枚举值：</p><ul><li>INTERNAL_CHECK_ERROR： 预检过程中依赖服务/内部资源异常</li><li>OWNERSHIP_DNS_LOOKUP_FAILED： DNS解析失败</li><li>OWNERSHIP_VERIFY_FAILED： DNS记录内容与预期dns记录值不匹配</li><li>CERT_VERIFY_FAILED： 证书校验失败：不匹配当前域名 / 已过期 / 不属于当前 uin 等</li><li>QUOTA_EXCEEDED： 域名或路径数量超出配额限制</li><li>ROUTE_CONFLICT： 存在同域名下已被占用的路径，前端应提示用户修改路径</li><li>DOMAIN_IN_USE： 域名已被其他环境占用，无法在当前环境接入</li><li>NON_INTERNAL_ACCOUNT： 使用了内部域名但当前账号不是内部账号</li><li>DOMAIN_IN_BLACKLIST： 域名被列入黑名单，禁止接入</li><li>CDN_RESOURCE_PROCESSING： CDN 资源正处于变更中，需稍后重试</li><li>CDN_RESOURCE_OFFLINE： CDN 资源已下线，需重新上线后才能绑定</li><li>EO_OWNERSHIP_VERIFY_FAILED： EdgeOne 侧归属权未通过，响应体中 OwnershipVerification 会给出，EdgeOne要求配置的 DNS/文件 verification 指引</li><li>EO_DOMAIN_NOT_ICP： EdgeOne 检测到域名未备案</li><li>EO_DOMAIN_IN_USE： EdgeOne 检测到域名已被其他账号接入 EdgeOne</li></ul>
+   */
+  Code?: string
+  /**
+   * <p>详细描述；Skipped 时给出跳过原因；Pass 时可为空</p>
+   */
+  Message?: string
+  /**
+   * <p>域名归属权验证指引信息，仅在所有权校验未通过时有值</p>
+   */
+  OwnershipVerification?: OwnershipVerificationInfo
+}
+
+/**
  * RunSql请求参数结构体
  */
 export interface RunSqlRequest {
@@ -6726,6 +6762,56 @@ export interface DescribeEnvPlansResponse {
    * <p>云开发新套餐详情</p>
    */
   PlanList?: Array<PlanInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * VerifyHTTPServiceRoute返回参数结构体
+ */
+export interface VerifyHTTPServiceRouteResponse {
+  /**
+   * <p>前置校验总开关。所有启用的检查项均为 PASS 或 SKIPPED 时为 true，任一检查项为 FAIL 时为 false。当为 false 时，前端应根据各 CheckItem 的 Code 精确渲染错误提示和操作指引；当为 true 时可继续调用 CreateHTTPServiceRoute 完成创建。 示例值：false</p>
+   */
+  Passed?: boolean
+  /**
+   * <p>域名归属权校验结果</p>
+   */
+  Ownership?: VerifyHTTPServiceRouteCheckItem
+  /**
+   * <p>证书校验结果；CertId 为空时 Status=SKIPPED</p>
+   */
+  Cert?: VerifyHTTPServiceRouteCheckItem
+  /**
+   * <p>域名/路径数量配额校验结果</p>
+   */
+  Quota?: VerifyHTTPServiceRouteCheckItem
+  /**
+   * <p>同域名下路由路径冲突校验结果</p>
+   */
+  RouteConflict?: VerifyHTTPServiceRouteCheckItem
+  /**
+   * <p>域名被其他环境占用校验结果</p>
+   */
+  DomainConflict?: VerifyHTTPServiceRouteCheckItem
+  /**
+   * <p>内部域名且非内部账号校验结果</p>
+   */
+  InternalAccount?: VerifyHTTPServiceRouteCheckItem
+  /**
+   * <p>域名黑名单校验结果</p>
+   */
+  Blacklist?: VerifyHTTPServiceRouteCheckItem
+  /**
+   * <p>AccessType=CDN 时 CDN 资源存在性 / 状态校验结果（含 ICP 未备案的提示）</p>
+   */
+  CDNResource?: VerifyHTTPServiceRouteCheckItem
+  /**
+   * <p>AccessType=EO 时的 EdgeOne 预检结果（域名冲突/备案/归属权）</p>
+   */
+  EO?: VerifyHTTPServiceRouteCheckItem
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

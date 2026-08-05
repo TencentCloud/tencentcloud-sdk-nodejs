@@ -107,6 +107,7 @@ import {
   DateParam,
   ScalingDownResp,
   PrivateLinkParam,
+  DescribeGroupInfoResponse,
   CreateTopicResp,
   TaskStatusResponse,
   DescribeGroup,
@@ -119,11 +120,13 @@ import {
   DescribeGroupOffsetsRequest,
   DescribeDatahubTopicResp,
   InstanceDetail,
+  ThrottleRuleResult,
   InstanceQuotaConfigResp,
   DescribeTopicDetailResponse,
   SecurityGroupRouteResp,
   LatestBrokerVersion,
   DeleteAclRequest,
+  DeleteThrottleRuleRequest,
   RouteDTO,
   DescribeDatahubTaskResponse,
   FetchLatestDatahubMessageListRequest,
@@ -161,7 +164,7 @@ import {
   CreateMetaSyncDatahubTaskRequest,
   TopicInSyncReplicaInfo,
   DescribeRegionRequest,
-  DescribeGroupInfoResponse,
+  CreateThrottleRuleRequest,
   DtsConnectParam,
   ModifyAccessPolicyRequest,
   GroupOffsetResponse,
@@ -271,6 +274,7 @@ import {
   DescribeUserResponse,
   CosParam,
   ZoneResponse,
+  DescribeThrottleRulesResponse,
   DeleteInstancePreRequest,
   ClickHouseSchema,
   ConsumerGroupTopic,
@@ -337,10 +341,13 @@ import {
   CreateInstancePostResp,
   IsolatedInstancePreResponse,
   DescribeDatahubTopicResponse,
+  DescribeThrottleRulesRequest,
   CreateCdcClusterResponse,
   OperateResponseData,
   ClusterInfo,
   DeleteGroupRequest,
+  CreateThrottleRuleResponse,
+  ModifyThrottleRuleResponse,
   DescribeConnectResourceRequest,
   DeleteRouteResponse,
   CreatePrometheusResponse,
@@ -349,11 +356,13 @@ import {
   Partition,
   CreateAclResponse,
   TransformParam,
+  ModifyThrottleRuleRequest,
   DeleteInstancePreResponse,
   DatahubTopicResp,
   DescribeCvmInfoResponse,
   DeleteRouteTriggerTimeResponse,
   DealInstanceDTO,
+  ThrottleRuleDetail,
   DescribeConnectResource,
   DescribeUserRequest,
   DescribeModifyTypeResponse,
@@ -377,6 +386,7 @@ import {
   InquireCkafkaPriceResponse,
   ListCvmAndIpInfoRsp,
   CreateRouteResponse,
+  DeleteThrottleRuleResponse,
   DeleteDatahubTaskResponse,
   EventBusParam,
   DescribeTopicFlowRankingResponse,
@@ -545,6 +555,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTopicFlowRankingResponse) => void
   ): Promise<DescribeTopicFlowRankingResponse> {
     return this.request("DescribeTopicFlowRanking", req, cb)
+  }
+
+  /**
+   * 获取实例限流规则列表
+   */
+  async DescribeThrottleRules(
+    req: DescribeThrottleRulesRequest,
+    cb?: (error: string, rep: DescribeThrottleRulesResponse) => void
+  ): Promise<DescribeThrottleRulesResponse> {
+    return this.request("DescribeThrottleRules", req, cb)
   }
 
   /**
@@ -718,6 +738,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 实例限流规则相关接口
+   */
+  async CreateThrottleRule(
+    req: CreateThrottleRuleRequest,
+    cb?: (error: string, rep: CreateThrottleRuleResponse) => void
+  ): Promise<CreateThrottleRuleResponse> {
+    return this.request("CreateThrottleRule", req, cb)
+  }
+
+  /**
    * broker版本升级
    */
   async UpgradeBrokerVersion(
@@ -825,6 +855,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeInstanceAttributesResponse) => void
   ): Promise<DescribeInstanceAttributesResponse> {
     return this.request("DescribeInstanceAttributes", req, cb)
+  }
+
+  /**
+   * 删除实例限流规则
+   */
+  async DeleteThrottleRule(
+    req: DeleteThrottleRuleRequest,
+    cb?: (error: string, rep: DeleteThrottleRuleResponse) => void
+  ): Promise<DeleteThrottleRuleResponse> {
+    return this.request("DeleteThrottleRule", req, cb)
   }
 
   /**
@@ -1236,6 +1276,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateRouteResponse) => void
   ): Promise<CreateRouteResponse> {
     return this.request("CreateRoute", req, cb)
+  }
+
+  /**
+   * 修改限流规则接口
+   */
+  async ModifyThrottleRule(
+    req: ModifyThrottleRuleRequest,
+    cb?: (error: string, rep: ModifyThrottleRuleResponse) => void
+  ): Promise<ModifyThrottleRuleResponse> {
+    return this.request("ModifyThrottleRule", req, cb)
   }
 
   /**

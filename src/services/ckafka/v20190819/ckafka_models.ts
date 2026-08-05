@@ -2642,6 +2642,20 @@ export interface PrivateLinkParam {
 }
 
 /**
+ * DescribeGroupInfo返回参数结构体
+ */
+export interface DescribeGroupInfoResponse {
+  /**
+   * 返回的结果
+   */
+  Result?: Array<GroupInfoResponse>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 创建主题返回
  */
 export interface CreateTopicResp {
@@ -3024,6 +3038,20 @@ export interface InstanceDetail {
 }
 
 /**
+ * 限流规则列表返回
+ */
+export interface ThrottleRuleResult {
+  /**
+   * 总数量
+   */
+  TotalCount?: number
+  /**
+   * 规则列表
+   */
+  ThrottleRuleList?: Array<ThrottleRuleDetail>
+}
+
+/**
  * 实例 / topic 维度限流策略
  */
 export interface InstanceQuotaConfigResp {
@@ -3113,6 +3141,20 @@ export interface DeleteAclRequest {
    * 用户列表，默认为User:*，表示任何user都可以访问，当前用户只能是用户列表中包含的用户
    */
   Principal?: string
+}
+
+/**
+ * DeleteThrottleRule请求参数结构体
+ */
+export interface DeleteThrottleRuleRequest {
+  /**
+   * 限流规则Id
+   */
+  ThrottleRuleId: string
+  /**
+   * 实例标识
+   */
+  InstanceId: string
 }
 
 /**
@@ -3918,17 +3960,41 @@ export interface DescribeRegionRequest {
 }
 
 /**
- * DescribeGroupInfo返回参数结构体
+ * CreateThrottleRule请求参数结构体
  */
-export interface DescribeGroupInfoResponse {
+export interface CreateThrottleRuleRequest {
   /**
-   * 返回的结果
+   * <p>实例Id</p>
    */
-  Result?: Array<GroupInfoResponse>
+  InstanceId: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>限流类型:</p><p>枚举值：</p><ul><li>1： 用户/客户端限流</li><li>2： 消费组维度限流</li><li>3： Topic限流</li></ul>
    */
-  RequestId?: string
+  ThrottleType: number
+  /**
+   * <p>消费组名</p>
+   */
+  GroupNameList?: Array<string>
+  /**
+   * <p>消费限流值,生产消费限流值,必填一个单位MB/s</p>
+   */
+  ConsumeThrottle?: number
+  /**
+   * <p>生产限流值,生产消费限流值,单位MB/s</p>
+   */
+  ProduceThrottle?: number
+  /**
+   * <p>用户客户端id</p>
+   */
+  ClientIdList?: Array<string>
+  /**
+   * <p>用户名</p>
+   */
+  UserNameList?: Array<string>
+  /**
+   * <p>topic名称</p>
+   */
+  TopicNameList?: Array<string>
 }
 
 /**
@@ -6568,6 +6634,20 @@ export interface ZoneResponse {
 }
 
 /**
+ * DescribeThrottleRules返回参数结构体
+ */
+export interface DescribeThrottleRulesResponse {
+  /**
+   * <p>返回信息</p>
+   */
+  Result?: ThrottleRuleResult
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteInstancePre请求参数结构体
  */
 export interface DeleteInstancePreRequest {
@@ -8336,6 +8416,32 @@ export interface DescribeDatahubTopicResponse {
 }
 
 /**
+ * DescribeThrottleRules请求参数结构体
+ */
+export interface DescribeThrottleRulesRequest {
+  /**
+   * <p>实例Id</p>
+   */
+  InstanceId: string
+  /**
+   * <p>关键字</p>
+   */
+  SearchWord?: string
+  /**
+   * <p>返回数量，不填则默认为20，最大值200</p>
+   */
+  Limit?: number
+  /**
+   * <p>偏移数，默认为0</p>
+   */
+  Offset?: number
+  /**
+   * <p>限流维度</p><p>枚举值：</p><ul><li>1： 实例维度限流</li><li>2： topic维度限流</li></ul><p>默认值：1</p>
+   */
+  ThrottleDimension?: number
+}
+
+/**
  * CreateCdcCluster返回参数结构体
  */
 export interface CreateCdcClusterResponse {
@@ -8413,6 +8519,34 @@ export interface DeleteGroupRequest {
    * 消费组名称，可通过[DescribeConsumerGroup](https://cloud.tencent.com/document/product/597/40841)接口获取。
    */
   Group: string
+}
+
+/**
+ * CreateThrottleRule返回参数结构体
+ */
+export interface CreateThrottleRuleResponse {
+  /**
+   * <p>返回信息</p>
+   */
+  Result?: JgwOperateResponse
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyThrottleRule返回参数结构体
+ */
+export interface ModifyThrottleRuleResponse {
+  /**
+   * 返回信息
+   */
+  Result?: JgwOperateResponse
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8556,6 +8690,24 @@ export interface TransformParam {
 }
 
 /**
+ * ModifyThrottleRule请求参数结构体
+ */
+export interface ModifyThrottleRuleRequest {
+  /**
+   * 规则标识
+   */
+  ThrottleRuleId: number
+  /**
+   * 实例Id
+   */
+  InstanceId: string
+  /**
+   * 消费限流值单位MB/s
+   */
+  ConsumeThrottle?: number
+}
+
+/**
  * DeleteInstancePre返回参数结构体
  */
 export interface DeleteInstancePreResponse {
@@ -8619,6 +8771,44 @@ export interface DealInstanceDTO {
    * 订单流水对应购买的 CKafka 实例 id 列表
    */
   InstanceIdList?: Array<string>
+}
+
+/**
+ * 限流规则详情
+ */
+export interface ThrottleRuleDetail {
+  /**
+   * <p>限流规则标识</p>
+   */
+  ThrottleRuleId?: number
+  /**
+   * <p>限流类型</p><p>枚举值：</p><ul><li>1： 用户/客户端限流</li><li>2： 消费组限流</li><li>3： topic限流</li></ul>
+   */
+  ThrottleType?: number
+  /**
+   * <p>客户端id</p>
+   */
+  ClientId?: string
+  /**
+   * <p>用户名</p>
+   */
+  UserName?: string
+  /**
+   * <p>消费限流值,单位MB/s</p>
+   */
+  ConsumeThrottle?: number
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>topic名称</p>
+   */
+  TopicName?: string
+  /**
+   * <p>topicId</p>
+   */
+  TopicId?: string
 }
 
 /**
@@ -9116,6 +9306,20 @@ export interface ListCvmAndIpInfoRsp {
 export interface CreateRouteResponse {
   /**
    * <p>返回结果</p>
+   */
+  Result?: JgwOperateResponse
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DeleteThrottleRule返回参数结构体
+ */
+export interface DeleteThrottleRuleResponse {
+  /**
+   * 返回信息
    */
   Result?: JgwOperateResponse
   /**

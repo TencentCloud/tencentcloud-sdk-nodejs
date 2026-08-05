@@ -158,6 +158,16 @@ it("ckafka.v20190819.DescribeTopicFlowRanking", async function () {
     }
 })
 
+it("ckafka.v20190819.DescribeThrottleRules", async function () {
+    try {
+       const data = await client.DescribeThrottleRules({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.CreatePartition", async function () {
     try {
        const data = await client.CreatePartition({})
@@ -328,6 +338,16 @@ it("ckafka.v20190819.DescribePrometheus", async function () {
     }
 })
 
+it("ckafka.v20190819.CreateThrottleRule", async function () {
+    try {
+       const data = await client.CreateThrottleRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("ckafka.v20190819.UpgradeBrokerVersion", async function () {
     try {
        const data = await client.UpgradeBrokerVersion({})
@@ -431,6 +451,16 @@ it("ckafka.v20190819.DeleteAcl", async function () {
 it("ckafka.v20190819.DescribeInstanceAttributes", async function () {
     try {
        const data = await client.DescribeInstanceAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.DeleteThrottleRule", async function () {
+    try {
+       const data = await client.DeleteThrottleRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -841,6 +871,16 @@ it("ckafka.v20190819.DescribeInstances", async function () {
 it("ckafka.v20190819.CreateRoute", async function () {
     try {
        const data = await client.CreateRoute({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("ckafka.v20190819.ModifyThrottleRule", async function () {
+    try {
+       const data = await client.ModifyThrottleRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

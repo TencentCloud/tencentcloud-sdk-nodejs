@@ -46,10 +46,11 @@ import {
   GetRayClusterResponse,
   DescribePartitionsRequest,
   AlterTableCommentResponse,
-  DescribeDMSPartitionsRequest,
+  DescribeEngineUsageInfoRequest,
   DescribeDMSTableResponse,
   AlterTableCommentRequest,
   CreateTasksInOrderRequest,
+  ResourceQuota,
   PersistentWorkDir,
   RayClusterEntity,
   GetLabEventRequest,
@@ -59,7 +60,7 @@ import {
   CreateDatabaseRequest,
   DescribeDMSTablesResponse,
   Tag,
-  DependencyPackage,
+  CreateInferenceServiceRequest,
   DataMaskStrategy,
   DescribeAdvancedStoreLocationResponse,
   DescribeTablesNameResponse,
@@ -70,7 +71,7 @@ import {
   GetRayClusterRequest,
   CancelNotebookSessionStatementBatchResponse,
   Label,
-  SmartOptimizerChangeTablePolicy,
+  CreateModelVersionRequest,
   BatchSqlTask,
   ModifySparkAppForTDLCResponse,
   GroupInfo,
@@ -132,16 +133,19 @@ import {
   CreateJobSpecResponse,
   OptimizerEngineInfo,
   CreateStandardEngineResourceGroupRequest,
+  QueryDashboardOverviewRequest,
   DescribeNotebookSessionStatementSqlResultRequest,
   GetLabPodYamlRequest,
   CreateSparkSubmitTaskRequest,
   CreateTableResponse,
   ListTaskJobLogNameRequest,
+  QueryMonitorOverviewRequest,
   DeleteStandardEngineResourceGroupResponse,
   DescribeTaskResultRequest,
   UpdateUserDataEngineConfigRequest,
   CreateNotebookSessionStatementRequest,
   QueueInfo,
+  OverviewItem,
   DescribeUsersResponse,
   CheckQueueNameRequest,
   DataGovernPolicy,
@@ -159,10 +163,13 @@ import {
   ListExampleDifficultiesRequest,
   DescribeDMSPartitionsResponse,
   DeleteRayClusterRequest,
+  GetInferenceServiceRequest,
   DescribeTableRequest,
+  QueryDashboardOverviewResponse,
   Policy,
   DescribeTaskLogRequest,
   DescribeDataEnginesScaleDetailRequest,
+  StopInferenceServiceRequest,
   UpdateJobSpecResponse,
   CreateInferenceModelRequest,
   DescribeEngineNetworksRequest,
@@ -178,6 +185,7 @@ import {
   CancelSparkSessionBatchSQLRequest,
   CancelTasksRequest,
   TasksOverview,
+  CreateCHDFSBindingProductRequest,
   EngineResourceGroupConfigPair,
   FlowInfo,
   UnbindWorkGroupsFromUserRequest,
@@ -186,6 +194,7 @@ import {
   CreateDatabaseResponse,
   DeleteJobSpecRequest,
   GetLabPodsRequest,
+  EngineCapabilities,
   UpdateInferenceModelRequest,
   GetRayJobRequest,
   DeleteDataMaskStrategyRequest,
@@ -204,6 +213,7 @@ import {
   GenerateInternalTableRequest,
   UpdateStandardEngineResourceGroupConfigInfoRequest,
   GetRayClusterHistoryResponse,
+  LinkedServiceInfo,
   UpdateUserDataEngineConfigResponse,
   GetResourceConfigRequest,
   ListExampleCategoriesRequest,
@@ -242,6 +252,7 @@ import {
   UpgradeDataEngineImageResponse,
   DetachWorkGroupPolicyResponse,
   DescribeSparkSessionBatchSqlLogResponse,
+  ServiceMetricsItem,
   GetRayClusterPodsRequest,
   SwitchDataEngineResponse,
   DescribeTaskResourceUsageRequest,
@@ -250,6 +261,7 @@ import {
   UpdateStandardEngineResourceGroupConfigInfoResponse,
   CreateCHDFSBindingProductResponse,
   DescribeUserInfoRequest,
+  CreateModelVersionResponse,
   PauseStandardEngineResourceGroupsResponse,
   DescribeSaleRegionsResponse,
   ModifyLabPriorityResponse,
@@ -268,7 +280,8 @@ import {
   GetRayClusterYamlRequest,
   DeleteUserResponse,
   CreateUserRoleRequest,
-  ResourceQuota,
+  RestartInferenceServiceRequest,
+  DependencyPackage,
   DescribeForbiddenTableProRequest,
   CreateDataEngineResponse,
   GetRayJobPodYamlRequest,
@@ -278,9 +291,11 @@ import {
   KerberosInfo,
   AssociateDatasourceHouseRequest,
   CreateDataEngineRequest,
+  QueryDashboardServiceListResponse,
   DescribeNotebookSessionRequest,
   UpgradeDataEngineImageRequest,
   CSV,
+  ModelVersionInfo,
   GetRayClusterPodYamlRequest,
   DropDMSPartitionsResponse,
   DeleteMetaDatabaseResponse,
@@ -292,7 +307,7 @@ import {
   DescribeNotebookSessionLogRequest,
   DeleteClusterGroupResponse,
   GetOptimizerPolicyRequest,
-  Users,
+  GetModelReadmeRequest,
   GetRayJobHistoryResponse,
   DataEngineConfigPair,
   SortOrder,
@@ -315,6 +330,7 @@ import {
   DescribeLakeFsTaskResultRequest,
   OtherCHDFSBinding,
   AlterDMSTableRequest,
+  GpuSummaryItem,
   WorkerSpecDTO,
   SmartPolicy,
   CreateScriptRequest,
@@ -339,8 +355,9 @@ import {
   ListLabsRequest,
   KafkaInfo,
   FavorInfo,
-  UpdateLabRequest,
+  StopInferenceServiceResponse,
   TaskFullRespInfo,
+  SmartOptimizerChangeTablePolicy,
   DeleteDataEngineRequest,
   StopLabResponse,
   CreateSparkSessionBatchSQLResponse,
@@ -376,6 +393,7 @@ import {
   CheckLockMetaDataResponse,
   CreateJobSpecRequest,
   AlterDMSDatabaseRequest,
+  QueryDashboardServiceListRequest,
   DescribeOtherCHDFSBindingListResponse,
   GetLabHistoryResponse,
   DescribeDataEngineEventsRequest,
@@ -392,17 +410,20 @@ import {
   DeleteNativeSparkSessionRequest,
   AlterDMSTableResponse,
   PartitionDetail,
+  ListModelVersionsRequest,
   CreateUserVpcConnectionResponse,
   DescribeMCPTaskResultResponse,
   DeleteUserRequest,
   DataEngineScaleInfoDetail,
   DescribeClusterGroupClustersResponse,
   DeleteDataEngineResponse,
+  ReplicaInfo,
   DescribePartitionQueuesRequest,
   CosPermission,
   GetResourceConfigResponse,
   LockComponentInfo,
   GetRayJobResponse,
+  QueryMonitorOverviewResponse,
   IpPortPair,
   PrestoMonitorMetrics,
   ModifyClusterPriorityRequest,
@@ -416,7 +437,7 @@ import {
   ClusterPod,
   GetRayClusterHistoryRequest,
   DescribeSparkAppTasksResponse,
-  CreateCHDFSBindingProductRequest,
+  CpuSummaryItem,
   DescribeUserRegisterTimeResponse,
   DropDMSTableResponse,
   AddDMSPartitionsResponse,
@@ -426,10 +447,12 @@ import {
   ModifySparkAppRequest,
   SpecInfo,
   AssignMangedTablePropertiesRequest,
+  UpdateLabRequest,
   UserIdSetOfWorkGroupId,
   InitializeTCLakeRequest,
   AlterDMSPartitionRequest,
   UpdateDataMaskStrategyResponse,
+  ListInferenceServicesResponse,
   DeleteLabResponse,
   ReportHeartbeatMetaDataResponse,
   GetLabPodsResponse,
@@ -487,6 +510,7 @@ import {
   UpdateNetworkConnectionResponse,
   ListJobSpecsResponse,
   CreateSparkAppTaskResponse,
+  RestartInferenceServiceResponse,
   UpdateRayJobPriorityRequest,
   DatasourceConnectionInfo,
   DescribeDataEngineImageVersionsRequest,
@@ -519,6 +543,7 @@ import {
   ModifyWorkGroupRequest,
   DescribeStandardEngineResourceGroupConfigInfoResponse,
   RunJobSpecRequest,
+  GetModelFilesResponse,
   WorkGroupIdSetOfUserId,
   ListResourceConfigsRequest,
   DescribeDatabaseRequest,
@@ -537,6 +562,8 @@ import {
   AssignMangedTablePropertiesResponse,
   ResourceSaleInfo,
   DataEngineImageVersion,
+  ListModelVersionsResponse,
+  ListInferenceEnginesRequest,
   ModifyPartitionDescriptionResponse,
   UpdateUDFPolicyRequest,
   MysqlInfo,
@@ -565,6 +592,7 @@ import {
   UpdateRayJobPriorityResponse,
   CreateSparkSessionBatchSQLRequest,
   DescribePartitionDetailResponse,
+  ListInferenceEnginesResponse,
   ListTaskJobLogDetailResponse,
   CreateMetaDatabaseResponse,
   VpcInfo,
@@ -582,6 +610,7 @@ import {
   DeleteCHDFSBindingProductResponse,
   UpdateConfContext,
   CancelNotebookSessionStatementBatchRequest,
+  GetInferenceServiceResponse,
   DescribeLakeFsTaskResultResponse,
   CheckModifyPartitionResponse,
   EngineSessionImage,
@@ -606,6 +635,8 @@ import {
   CreateResultDownloadResponse,
   RestartDataEngineRequest,
   CheckQueueNameResponse,
+  ListInferenceServicesRequest,
+  GetModelConfigRequest,
   DescribeNotebookSessionResponse,
   DescribeSubUserAccessPolicyResponse,
   CreateRayClusterResponse,
@@ -613,6 +644,7 @@ import {
   ModifyAdvancedStoreLocationResponse,
   CreateTasksInOrderResponse,
   TagInfo,
+  GetModelReadmeResponse,
   LabResponse,
   DeleteSparkAppRequest,
   DescribeDLCCatalogAccessRequest,
@@ -631,12 +663,13 @@ import {
   CheckDataEngineConfigPairsValidityRequest,
   DescribeTablePartitionsResponse,
   CSVSerde,
+  GetModelConfigResponse,
   HiveInfo,
   CHDFSProductVpcInfo,
   DescribePartitionDetailRequest,
   UpdateDataEngineConfigResponse,
   CreateInferenceModelResponse,
-  ViewBaseInfo,
+  MetricsData,
   CheckLockMetaDataRequest,
   DeleteDataMaskStrategyResponse,
   TypeKVPair,
@@ -660,7 +693,7 @@ import {
   DataSourceInfo,
   UpdateUDFPolicyResponse,
   DescribeNotebookSessionsResponse,
-  DescribeEngineUsageInfoRequest,
+  DescribeDMSPartitionsRequest,
   CreateDataMaskStrategyResponse,
   DataMaskStrategyInfo,
   RollbackDataEngineImageResponse,
@@ -678,12 +711,14 @@ import {
   DescribeWorkGroupsResponse,
   SparkJobInfo,
   DescribeScriptsRequest,
+  ViewBaseInfo,
   DescribeSparkAppJobResponse,
   HiveTablePartition,
   UDFPolicyInfo,
   DescribeNotebookSessionStatementResponse,
   UpdateResourceConfigResponse,
   DropDMSTableRequest,
+  InferenceServiceInfo,
   UpdateJobSpecRequest,
   ListRayClusterJobsResponse,
   DescribeStandardEngineResourceGroupConfigInfoRequest,
@@ -694,6 +729,7 @@ import {
   GetRayJobHistoryRequest,
   DescribeStoreLocationResponse,
   DescribeTCLakeMetaInstanceResponse,
+  CreateInferenceServiceResponse,
   QueryTaskCostDetailResponse,
   UpdateInferenceModelResponse,
   NotebookSessionInfo,
@@ -701,6 +737,7 @@ import {
   CreateNotebookSessionStatementSupportBatchSQLResponse,
   BindWorkGroupsToUserRequest,
   Column,
+  Users,
   DescribeUDFPolicyRequest,
   ListJobSpecsRequest,
   Filter,
@@ -708,6 +745,8 @@ import {
   GetRayJobYamlRequest,
   GetRayJobEventLogResponse,
   DescribeUserVpcConnectionResponse,
+  GetModelFilesRequest,
+  FileNode,
   ExampleTag,
   DeleteWorkGroupResponse,
   RegisterThirdPartyAccessUserRequest,
@@ -720,6 +759,7 @@ import {
   StopLabRequest,
   DescribeNotebookSessionStatementsResponse,
   CancelSparkSessionBatchSQLResponse,
+  ParallelKeyMapping,
   DatabaseInfo,
   CancelTasksResponse,
   EventLogItem,
@@ -747,6 +787,7 @@ import {
   ModifyPartitionQueueResponse,
   DescribeDataEngineResponse,
   DataEngineScaleInfo,
+  InferenceEngineInfo,
   DescribeTasksAnalysisRequest,
   ResourceConf,
   QueryTaskCostDetailRequest,
@@ -1036,6 +1077,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 案例列表
+   */
+  async ListExamples(
+    req: ListExamplesRequest,
+    cb?: (error: string, rep: ListExamplesResponse) => void
+  ): Promise<ListExamplesResponse> {
+    return this.request("ListExamples", req, cb)
+  }
+
+  /**
    * 切换主备集群
    */
   async SwitchDataEngine(
@@ -1266,13 +1317,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 案例列表
+   * 获取单个推理服务详情
    */
-  async ListExamples(
-    req: ListExamplesRequest,
-    cb?: (error: string, rep: ListExamplesResponse) => void
-  ): Promise<ListExamplesResponse> {
-    return this.request("ListExamples", req, cb)
+  async GetInferenceService(
+    req: GetInferenceServiceRequest,
+    cb?: (error: string, rep: GetInferenceServiceResponse) => void
+  ): Promise<GetInferenceServiceResponse> {
+    return this.request("GetInferenceService", req, cb)
   }
 
   /**
@@ -1293,6 +1344,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDataEngineSessionParametersResponse) => void
   ): Promise<DescribeDataEngineSessionParametersResponse> {
     return this.request("DescribeDataEngineSessionParameters", req, cb)
+  }
+
+  /**
+   * 获取所有案例分类
+   */
+  async ListExampleCategories(
+    req: ListExampleCategoriesRequest,
+    cb?: (error: string, rep: ListExampleCategoriesResponse) => void
+  ): Promise<ListExampleCategoriesResponse> {
+    return this.request("ListExampleCategories", req, cb)
   }
 
   /**
@@ -1426,6 +1487,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取模型文件树（默认最新版本）
+   */
+  async GetModelFiles(
+    req: GetModelFilesRequest,
+    cb?: (error: string, rep: GetModelFilesResponse) => void
+  ): Promise<GetModelFilesResponse> {
+    return this.request("GetModelFiles", req, cb)
+  }
+
+  /**
    * 获取实验室的状态变更历史记录
    */
   async GetLabHistory(
@@ -1516,13 +1587,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 更新标准引擎资源组基础信息
+   * 列出推理引擎
    */
-  async UpdateStandardEngineResourceGroupConfigInfo(
-    req: UpdateStandardEngineResourceGroupConfigInfoRequest,
-    cb?: (error: string, rep: UpdateStandardEngineResourceGroupConfigInfoResponse) => void
-  ): Promise<UpdateStandardEngineResourceGroupConfigInfoResponse> {
-    return this.request("UpdateStandardEngineResourceGroupConfigInfo", req, cb)
+  async ListInferenceEngines(
+    req: ListInferenceEnginesRequest,
+    cb?: (error: string, rep: ListInferenceEnginesResponse) => void
+  ): Promise<ListInferenceEnginesResponse> {
+    return this.request("ListInferenceEngines", req, cb)
   }
 
   /**
@@ -1636,6 +1707,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 更新标准引擎资源组基础信息
+   */
+  async UpdateStandardEngineResourceGroupConfigInfo(
+    req: UpdateStandardEngineResourceGroupConfigInfoRequest,
+    cb?: (error: string, rep: UpdateStandardEngineResourceGroupConfigInfoResponse) => void
+  ): Promise<UpdateStandardEngineResourceGroupConfigInfoResponse> {
+    return this.request("UpdateStandardEngineResourceGroupConfigInfo", req, cb)
+  }
+
+  /**
    * 查询任务监控指标信息
    */
   async DescribeClusterMonitorInfos(
@@ -1726,13 +1807,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取所有案例分类
+   * 创建模型新版本
    */
-  async ListExampleCategories(
-    req: ListExampleCategoriesRequest,
-    cb?: (error: string, rep: ListExampleCategoriesResponse) => void
-  ): Promise<ListExampleCategoriesResponse> {
-    return this.request("ListExampleCategories", req, cb)
+  async CreateModelVersion(
+    req: CreateModelVersionRequest,
+    cb?: (error: string, rep: CreateModelVersionResponse) => void
+  ): Promise<CreateModelVersionResponse> {
+    return this.request("CreateModelVersion", req, cb)
   }
 
   /**
@@ -1996,6 +2077,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 该接口（QueryTaskCostDetail）用于查询任务消耗明细
+   */
+  async QueryTaskCostDetail(
+    req: QueryTaskCostDetailRequest,
+    cb?: (error: string, rep: QueryTaskCostDetailResponse) => void
+  ): Promise<QueryTaskCostDetailResponse> {
+    return this.request("QueryTaskCostDetail", req, cb)
+  }
+
+  /**
    * 更新集群组
    */
   async UpdateClusterGroup(
@@ -2043,6 +2134,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetRayJobEventLogResponse) => void
   ): Promise<GetRayJobEventLogResponse> {
     return this.request("GetRayJobEventLog", req, cb)
+  }
+
+  /**
+   * 获取模型 config.json 配置（默认最新版本）
+   */
+  async GetModelConfig(
+    req: GetModelConfigRequest,
+    cb?: (error: string, rep: GetModelConfigResponse) => void
+  ): Promise<GetModelConfigResponse> {
+    return this.request("GetModelConfig", req, cb)
   }
 
   /**
@@ -2186,6 +2287,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 列出推理服务（支持关键词和状态过滤 + 分页）
+   */
+  async ListInferenceServices(
+    req: ListInferenceServicesRequest,
+    cb?: (error: string, rep: ListInferenceServicesResponse) => void
+  ): Promise<ListInferenceServicesResponse> {
+    return this.request("ListInferenceServices", req, cb)
+  }
+
+  /**
    * 本接口（RegisterThirdPartyAccessUser）用于开通第三方平台访问
    */
   async RegisterThirdPartyAccessUser(
@@ -2243,6 +2354,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: AddDMSPartitionsResponse) => void
   ): Promise<AddDMSPartitionsResponse> {
     return this.request("AddDMSPartitions", req, cb)
+  }
+
+  /**
+   * 返回指定时间范围内所有推理服务的聚合 KPI 值。
+   */
+  async QueryDashboardOverview(
+    req: QueryDashboardOverviewRequest,
+    cb?: (error: string, rep: QueryDashboardOverviewResponse) => void
+  ): Promise<QueryDashboardOverviewResponse> {
+    return this.request("QueryDashboardOverview", req, cb)
   }
 
   /**
@@ -2356,13 +2477,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 该接口（QueryTaskCostDetail）用于查询任务消耗明细
+   * 创建推理服务（含默认部署）
    */
-  async QueryTaskCostDetail(
-    req: QueryTaskCostDetailRequest,
-    cb?: (error: string, rep: QueryTaskCostDetailResponse) => void
-  ): Promise<QueryTaskCostDetailResponse> {
-    return this.request("QueryTaskCostDetail", req, cb)
+  async CreateInferenceService(
+    req: CreateInferenceServiceRequest,
+    cb?: (error: string, rep: CreateInferenceServiceResponse) => void
+  ): Promise<CreateInferenceServiceResponse> {
+    return this.request("CreateInferenceService", req, cb)
   }
 
   /**
@@ -2463,6 +2584,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeTablePartitionsResponse) => void
   ): Promise<DescribeTablePartitionsResponse> {
     return this.request("DescribeTablePartitions", req, cb)
+  }
+
+  /**
+   * 重启推理服务（操作所有部署）。
+   */
+  async RestartInferenceService(
+    req: RestartInferenceServiceRequest,
+    cb?: (error: string, rep: RestartInferenceServiceResponse) => void
+  ): Promise<RestartInferenceServiceResponse> {
+    return this.request("RestartInferenceService", req, cb)
   }
 
   /**
@@ -3018,6 +3149,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询监控大盘服务列表
+   */
+  async QueryDashboardServiceList(
+    req: QueryDashboardServiceListRequest,
+    cb?: (error: string, rep: QueryDashboardServiceListResponse) => void
+  ): Promise<QueryDashboardServiceListResponse> {
+    return this.request("QueryDashboardServiceList", req, cb)
+  }
+
+  /**
    * 列出所有集群组
    */
   async ListClusterGroups(
@@ -3238,6 +3379,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 停止推理服务（操作所有部署）。
+   */
+  async StopInferenceService(
+    req: StopInferenceServiceRequest,
+    cb?: (error: string, rep: StopInferenceServiceResponse) => void
+  ): Promise<StopInferenceServiceResponse> {
+    return this.request("StopInferenceService", req, cb)
+  }
+
+  /**
    * 绑定数据脱敏策略
    */
   async AttachDataMaskPolicy(
@@ -3255,6 +3406,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEngineNodeSpecResponse) => void
   ): Promise<DescribeEngineNodeSpecResponse> {
     return this.request("DescribeEngineNodeSpec", req, cb)
+  }
+
+  /**
+   * 查询监控概览数据（瞬时值）
+   */
+  async QueryMonitorOverview(
+    req: QueryMonitorOverviewRequest,
+    cb?: (error: string, rep: QueryMonitorOverviewResponse) => void
+  ): Promise<QueryMonitorOverviewResponse> {
+    return this.request("QueryMonitorOverview", req, cb)
   }
 
   /**
@@ -3368,6 +3529,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取模型 README 信息（默认最新版本）
+   */
+  async GetModelReadme(
+    req: GetModelReadmeRequest,
+    cb?: (error: string, rep: GetModelReadmeResponse) => void
+  ): Promise<GetModelReadmeResponse> {
+    return this.request("GetModelReadme", req, cb)
+  }
+
+  /**
    * 绑定工作组到用户
    */
   async BindWorkGroupsToUser(
@@ -3415,6 +3586,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: GetRayClusterYamlResponse) => void
   ): Promise<GetRayClusterYamlResponse> {
     return this.request("GetRayClusterYaml", req, cb)
+  }
+
+  /**
+   * 列出模型所有版本
+   */
+  async ListModelVersions(
+    req: ListModelVersionsRequest,
+    cb?: (error: string, rep: ListModelVersionsResponse) => void
+  ): Promise<ListModelVersionsResponse> {
+    return this.request("ListModelVersions", req, cb)
   }
 
   /**

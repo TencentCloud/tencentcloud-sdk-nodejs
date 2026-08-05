@@ -103,95 +103,99 @@ export interface IsolateMigrateJobResponse {
  */
 export interface SubscribeInfo {
   /**
-   * 数据订阅的实例ID
+   * <p>数据订阅的实例ID</p>
    */
   SubscribeId?: string
   /**
-   * 数据订阅实例的名称
+   * <p>数据订阅实例的名称</p>
    */
   SubscribeName?: string
   /**
-   * 订阅实例发送数据的kafka topic
+   * <p>订阅实例发送数据的kafka topic</p>
    */
   Topic?: string
   /**
-   * 订阅实例的类型，目前支持 cynosdbmysql,mariadb,mongodb,mysql,percona,tdpg,tdsqlpercona(tdsqlmysql)
+   * <p>订阅实例的类型，目前支持 cynosdbmysql,mariadb,mongodb,mysql,percona,tdpg,tdsqlpercona(tdsqlmysql)</p>
    */
   Product?: string
   /**
-   * 订阅的数据库实例ID（如果订阅的是云数据库）如果实例不是腾讯云上的，此值为空。
+   * <p>订阅的数据库实例ID（如果订阅的是云数据库）如果实例不是腾讯云上的，此值为空。</p>
    */
   InstanceId?: string
   /**
-   * 云数据库状态：running 运行中，isolated 已隔离，offline 已下线。如果不是云上，此值为空
+   * <p>云数据库状态：running 运行中，isolated 已隔离，offline 已下线。如果不是云上，此值为空</p>
    */
   InstanceStatus?: string
   /**
-   * 数据订阅生命周期状态，可能的值为：正常 normal, 隔离中 isolating, 已隔离 isolated, 下线中 offlining, 按量转包年包月中 post2PrePayIng
+   * <p>数据订阅生命周期状态，可能的值为：正常 normal, 隔离中 isolating, 已隔离 isolated, 下线中 offlining, 按量转包年包月中 post2PrePayIng</p>
    */
   Status?: string
   /**
-   * 数据订阅状态，可能的值为：未启动 notStarted, 校验中 checking, 校验不通过 checkNotPass, 校验通过 checkPass, 启动中 starting, 运行中 running, 异常出错 error
+   * <p>数据订阅状态，可能的值为：未启动 notStarted, 校验中 checking, 校验不通过 checkNotPass, 校验通过 checkPass, 启动中 starting, 运行中 running, 异常出错 error</p>
    */
   SubsStatus?: string
   /**
-   * 上次修改时间，时间格式如：Y-m-d h:m:s
+   * <p>上次修改时间，时间格式如：Y-m-d h:m:s</p>
    */
   ModifyTime?: string
   /**
-   * 创建时间，时间格式如：Y-m-d h:m:s
+   * <p>创建时间，时间格式如：Y-m-d h:m:s</p>
    */
   CreateTime?: string
   /**
-   * 隔离时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
+   * <p>隔离时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00</p>
    */
   IsolateTime?: string
   /**
-   * 包年包月任务的到期时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
+   * <p>包年包月任务的到期时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00</p>
    */
   ExpireTime?: string
   /**
-   * 下线时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
+   * <p>下线时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00</p>
    */
   OfflineTime?: string
   /**
-   * 计费方式，0 - 包年包月，1 - 按量计费
+   * <p>计费方式，0 - 包年包月，1 - 按量计费</p>
    */
   PayType?: number
   /**
-   * 自动续费标识。只有当 PayType=0，该值才有意义。枚举值：0-不自动续费，1-自动续费
+   * <p>自动续费标识。只有当 PayType=0，该值才有意义。枚举值：0-不自动续费，1-自动续费</p>
    */
   AutoRenewFlag?: number
   /**
-   * 数据订阅实例所属地域
+   * <p>数据订阅实例所属地域</p>
    */
   Region?: string
   /**
-   * 接入方式。枚举值：extranet(公网) vpncloud(vpn接入) dcg(专线接入) ccn(云联网) cdb(云数据库) cvm(云主机自建) intranet(自研上云) vpc(私有网络vpc)
+   * <p>接入方式。枚举值：extranet(公网) vpncloud(vpn接入) dcg(专线接入) ccn(云联网) cdb(云数据库) cvm(云主机自建) intranet(自研上云) vpc(私有网络vpc)</p>
    */
   AccessType?: string
   /**
-   * 数据库节点信息
+   * <p>数据库节点信息</p>
    */
   Endpoints?: Array<EndpointItem>
   /**
-   * 数据订阅版本, 当前支持kafka和kafkaPro（专业版）
+   * <p>数据订阅版本, 当前支持kafka和kafkaPro（专业版）</p>
    */
   SubscribeVersion?: string
   /**
-   * 标签
+   * <p>标签</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tags?: Array<TagItem>
   /**
-   * 任务报错信息，如果有的话。
+   * <p>任务报错信息，如果有的话。</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Errors?: Array<SubsErr>
   /**
-   * 订阅实例规格
+   * <p>订阅实例规格</p>
    */
   InstanceClass?: string
+  /**
+   * <p>新版订阅消费端路由阶段</p>
+   */
+  ConsumerRoutePhase?: string
 }
 
 /**
@@ -1792,15 +1796,15 @@ export interface ConfigureSubscribeJobResponse {
  */
 export interface DescribeConsumerGroupsRequest {
   /**
-   * 订阅实例id，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。
+   * <p>订阅实例id，可通过<a href="https://cloud.tencent.com/document/product/571/102943">DescribeSubscribeJobs</a>接口获取。</p>
    */
   SubscribeId: string
   /**
-   * 返回记录的起始偏移量。默认0
+   * <p>返回记录的起始偏移量。默认0</p>
    */
   Offset?: number
   /**
-   * 单次返回的记录数量。默认10
+   * <p>单次返回的记录数量。默认10</p>
    */
   Limit?: number
 }
@@ -1810,47 +1814,47 @@ export interface DescribeConsumerGroupsRequest {
  */
 export interface GroupInfo {
   /**
-   * 消费者组账号
+   * <p>消费者组账号</p>
    */
   Account?: string
   /**
-   * 消费者组名称
+   * <p>消费者组名称</p>
    */
   ConsumerGroupName?: string
   /**
-   * 消费者组备注
+   * <p>消费者组备注</p>
    */
   Description?: string
   /**
-   * 消费组偏移量。该字段是为了兼容以前单Partition的情况，取值为最后一个分区的偏移量。各分区的偏移量详见StateOfPartition字段
+   * <p>消费组偏移量。该字段是为了兼容以前单Partition的情况，取值为最后一个分区的偏移量。各分区的偏移量详见StateOfPartition字段</p>
    */
   ConsumerGroupOffset?: number
   /**
-   * 消费组未消费的数据量。该字段是为了兼容以前单Partition的情况，取值为最后一个分区未消费的数据量。各分区未消费数据量详见StateOfPartition字段
+   * <p>消费组未消费的数据量。该字段是为了兼容以前单Partition的情况，取值为最后一个分区未消费的数据量。各分区未消费数据量详见StateOfPartition字段</p>
    */
   ConsumerGroupLag?: number
   /**
-   * 消费延迟(单位为秒)
+   * <p>消费延迟(单位为秒)</p>
    */
   Latency?: number
   /**
-   * 各分区的消费状态
+   * <p>各分区的消费状态</p>
    */
   StateOfPartition?: Array<MonitorInfo>
   /**
-   * 消费者组创建时间，格式为YYYY-MM-DD hh:mm:ss
+   * <p>消费者组创建时间。</p>
    */
   CreatedAt?: string
   /**
-   * 消费者组修改时间，格式为YYYY-MM-DD hh:mm:ss
+   * <p>消费者组修改时间。</p>
    */
   UpdatedAt?: string
   /**
-   * 消费者组状态，包括Dead、Empty、Stable等，只有Dead和Empty两种状态可以执行reset操作
+   * <p>消费者组状态，包括Dead、Empty、Stable等，只有Dead和Empty两种状态可以执行reset操作</p>
    */
   ConsumerGroupState?: string
   /**
-   * 每个消费者正在消费的分区
+   * <p>每个消费者正在消费的分区</p>
    */
   PartitionAssignment?: Array<PartitionAssignment>
 }
@@ -2021,134 +2025,132 @@ export interface ModifySyncCompareTaskNameResponse {
  */
 export interface DescribeSubscribeDetailResponse {
   /**
-   * 数据订阅的ID，形如subs-b6x64o31tm
+   * <p>数据订阅的ID，形如subs-b6x64o31tm</p>
    */
   SubscribeId?: string
   /**
-   * 数据订阅实例的名称
+   * <p>数据订阅实例的名称</p>
    */
   SubscribeName?: string
   /**
-   * 订阅的数据库类型，目前支持 cynosdbmysql(tdsql-c mysql版),mariadb,mongodb,mysql,percona,tdpg(tdsql postgresql版),tdsqlpercona(tdsql mysql版)
+   * <p>订阅的数据库类型，目前支持 cynosdbmysql(tdsql-c mysql版),mariadb,mongodb,mysql,percona,tdpg(tdsql postgresql版),tdsqlpercona(tdsql mysql版)</p>
    */
   Product?: string
   /**
-   * 订阅的云数据库实例ID，只有订阅云数据库该值才有意义
+   * <p>订阅的云数据库实例ID，只有订阅云数据库该值才有意义</p>
    */
   InstanceId?: string
   /**
-   * 订阅的云数据库实例状态，只有订阅云数据库该值才有意义。可能值为：running, isolated, offline
+   * <p>订阅的云数据库实例状态，只有订阅云数据库该值才有意义。可能值为：running, isolated, offline</p>
    */
   InstanceStatus?: string
   /**
-   * 订阅任务计费状态，可能值为：正常normal, 隔离中isolating, 已隔离isolated, 下线中offlining, 按量转包年包月中 post2PrePayIng
+   * <p>订阅任务计费状态，可能值为：正常normal, 隔离中isolating, 已隔离isolated, 下线中offlining, 按量转包年包月中 post2PrePayIng</p>
    */
   Status?: string
   /**
-   * 订阅任务状态，可能值为：未启动notStarted, 校验中checking, 校验不通过checkNotPass, 校验通过checkPass, 启动中starting, 运行中running, 异常出错error
+   * <p>订阅任务状态，可能值为：未启动notStarted, 校验中checking, 校验不通过checkNotPass, 校验通过checkPass, 启动中starting, 运行中running, 异常出错error</p>
    */
   SubsStatus?: string
   /**
-   * 修改时间，时间格式如：Y-m-d h:m:s
+   * <p>修改时间。</p>
    */
   ModifyTime?: string
   /**
-   * 创建时间，时间格式如：Y-m-d h:m:s
+   * <p>创建时间。</p>
    */
   CreateTime?: string
   /**
-   * 隔离时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
+   * <p>隔离时间。</p>
    */
   IsolateTime?: string
   /**
-   * 包年包月任务的到期时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
+   * <p>包年包月任务的到期时间。</p>
    */
   ExpireTime?: string
   /**
-   * 下线时间，时间格式如：Y-m-d h:m:s。默认：0000-00-00 00:00:00
+   * <p>下线时间。</p>
    */
   OfflineTime?: string
   /**
-   * 付费方式，可能值为：0-包年包月，1-按量计费
+   * <p>付费方式，可能值为：0-包年包月，1-按量计费</p>
    */
   PayType?: number
   /**
-   * 自动续费标识。只有当 PayType=0，该值才有意义。枚举值：0-不自动续费，1-自动续费
+   * <p>自动续费标识。只有当 PayType=0，该值才有意义。枚举值：0-不自动续费，1-自动续费</p>
    */
   AutoRenewFlag?: number
   /**
-   * 任务所在地域
+   * <p>任务所在地域</p>
    */
   Region?: string
   /**
-   * Kafka topic
+   * <p>Kafka topic</p>
    */
   Topic?: string
   /**
-   * Kafka服务Broker地址
+   * <p>Kafka服务Broker地址</p>
    */
   Broker?: string
   /**
-   * 数据订阅的类型，当 Product 不为 mongodb 时，可能值为：all-全实例更新；dml-数据更新；ddl-结构更新；dmlAndDdl-数据更新+结构更新。当 Product 为 mongodb 时，可能值为 all-全实例更新；database-订阅单库；collection-订阅单集合
+   * <p>数据订阅的类型，当 Product 不为 mongodb 时，可能值为：all-全实例更新；dml-数据更新；ddl-结构更新；dmlAndDdl-数据更新+结构更新。当 Product 为 mongodb 时，可能值为 all-全实例更新；database-订阅单库；collection-订阅单集合</p>
    */
   SubscribeMode?: string
   /**
-   * 订阅数据格式。如果为空则用的默认格式: mysql\cynosdbmysql\mariadb\percona\tdsqlpercona\tdpg是protobuf，mongo是json。当 DatabaseType 为 mysql和cynosdbmysql 时有三种可选协议：protobuf\avro\json。数据格式详情参考官网的消费demo文档
+   * <p>订阅数据格式。如果为空则用的默认格式: mysql\cynosdbmysql\mariadb\percona\tdsqlpercona\tdpg是protobuf，mongo是json。当 DatabaseType 为 mysql和cynosdbmysql 时有三种可选协议：protobuf\avro\json。数据格式详情参考官网的消费demo文档</p>
    */
   Protocol?: string
   /**
-   * 订阅的数据库表信息
+   * <p>订阅的数据库表信息</p>
    */
   SubscribeObjects?: Array<SubscribeObject>
   /**
-   * kafka配置信息
+   * <p>kafka配置信息</p>
    */
   KafkaConfig?: SubscribeKafkaConfig
   /**
-   * 订阅内置kafka的版本信息
+   * <p>订阅内置kafka的版本信息</p>
    */
   KafkaVersion?: string
   /**
-   * 源数据库接入类型，如：extranet(公网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、cdb(云数据库)、cvm(云服务器自建)、intranet(自研上云)、vpc(私有网络vpc)。注意具体可选值依赖当前链路支持能力
+   * <p>源数据库接入类型，如：extranet(公网)、vpncloud(vpn接入)、dcg(专线接入)、ccn(云联网)、cdb(云数据库)、cvm(云服务器自建)、intranet(自研上云)、vpc(私有网络vpc)。注意具体可选值依赖当前链路支持能力</p>
    */
   AccessType?: string
   /**
-   * 接入类型信息
+   * <p>接入类型信息</p>
    */
   Endpoints?: Array<EndpointItem>
   /**
-   * mongo输出聚合设置
+   * <p>mongo输出聚合设置</p>
    */
   PipelineInfo?: Array<PipelineInfo>
   /**
-   * 标签
+   * <p>标签</p>
    */
   Tags?: Array<TagItem>
   /**
-   * 订阅任务报错信息
+   * <p>订阅任务报错信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Errors?: Array<SubsErr>
   /**
-   * 为业务添加的额外信息。参数名作key，参数值作value。
-mysql选填参数：ProcessXA-是否处理XA事务，为true处理，其他不处理。
-mongo选填参数：SubscribeType-订阅类型，目前只支持changeStream。
+   * <p>为业务添加的额外信息。参数名作key，参数值作value。<br>mysql选填参数：ProcessXA-是否处理XA事务，为true处理，其他不处理。<br>mongo选填参数：SubscribeType-订阅类型，目前只支持changeStream。</p>
    */
   ExtraAttr?: Array<KeyValuePairOption>
   /**
-   * 数据订阅版本, 当前支持kafka和kafkaPro（专业版）
+   * <p>数据订阅版本, 当前支持kafka和kafkaPro（专业版）</p>
    */
   SubscribeVersion?: string
   /**
-   * 消费端地址所在vpc
+   * <p>消费端地址所在vpc</p>
    */
   ConsumerVpcId?: string
   /**
-   * 消费端地址所在子网
+   * <p>消费端地址所在子网</p>
    */
   ConsumerSubnetId?: string
   /**
-   * 订阅实例规格
+   * <p>订阅实例规格</p>
    */
   InstanceClass?: string
   /**
@@ -2261,6 +2263,10 @@ export interface DeleteConsumerGroupRequest {
 请务必保证账户名称正确。可通过[DescribeConsumerGroups](https://cloud.tencent.com/document/product/571/102947)接口获取。
    */
   AccountName: string
+  /**
+   *
+   */
+  BackendJobId?: string
 }
 
 /**
@@ -2445,7 +2451,7 @@ export interface MigrateOption {
  */
 export interface DescribeSubscribeDetailRequest {
   /**
-   * 订阅实例ID，可通过[DescribeSubscribeJobs](https://cloud.tencent.com/document/product/571/102943)接口获取。
+   * <p>订阅实例ID，可通过<a href="https://cloud.tencent.com/document/product/571/102943">DescribeSubscribeJobs</a>接口获取。</p>
    */
   SubscribeId: string
 }
@@ -4018,11 +4024,11 @@ export interface SyncDetailInfo {
  */
 export interface DescribeConsumerGroupsResponse {
   /**
-   * 指定实例下的消费者组总数
+   * <p>指定实例下的消费者组总数</p>
    */
   TotalCount?: number
   /**
-   * 消费者组列表
+   * <p>消费者组列表</p>
    */
   Items?: Array<GroupInfo>
   /**

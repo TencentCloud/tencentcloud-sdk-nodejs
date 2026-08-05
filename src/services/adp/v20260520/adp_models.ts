@@ -2414,27 +2414,27 @@ export interface ConversationResetInfo {
  */
 export interface ModelParameter {
   /**
-   * 默认值
+   * <p>默认值</p>
    */
   DefaultValue?: string
   /**
-   * 可选值列表
+   * <p>可选值列表</p>
    */
   EnumValueList?: Array<string>
   /**
-   * 最大值（仅数值类型有效）
+   * <p>最大值（仅数值类型有效）</p>
    */
   MaxValue?: number
   /**
-   * 最小值（仅数值类型有效）
+   * <p>最小值（仅数值类型有效）</p>
    */
   MinValue?: number
   /**
-   * 超参名称
+   * <p>超参名称</p>
    */
   Name?: string
   /**
-   * 超参类型。1-浮点数, 2-整数, 3-字符串
+   * <p>超参类型。1-浮点数, 2-整数, 3-字符串</p>
    */
   Type?: number
 }

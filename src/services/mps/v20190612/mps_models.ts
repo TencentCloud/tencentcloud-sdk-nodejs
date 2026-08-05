@@ -1110,6 +1110,10 @@ export interface AiCutoutConfig {
    * <p>图案抠图配置。仅在Type为pattern时生效。</p>
    */
   PatternConfig?: PatternConfig
+  /**
+   * <p>抠图模型选择，可不填。</p><p>枚举值：</p><ul><li>auto： 自动选择合适的模型</li><li>WAND-cutout-1.0-lite： 标准版，速度最快</li><li>WAND-cutout-2.0-lite： 增强版，速度最快</li><li>WAND-cutout-2.0-flash： 增强版，质量-速度平衡</li></ul>
+   */
+  Model?: string
 }
 
 /**
@@ -13780,6 +13784,10 @@ export interface CreateDocToVideoTaskRequest {
    * <p>用户cos信息，用于保存生成结果</p>
    */
   CosInfo?: DocToVideoCosInfo
+  /**
+   * <p>资源ID，需要保证对应资源是开启状态。默认为账号主资源ID。</p>
+   */
+  ResourceId?: string
 }
 
 /**

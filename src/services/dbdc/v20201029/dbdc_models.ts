@@ -1906,6 +1906,11 @@ export interface DBCustomNode {
    * <p>当选择NetworkModeCrossTenantENI模式时，节点的访问IP地址</p>
    */
   EniIP?: string
+  /**
+   * <p>节点绑定的安全组</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**
@@ -1950,6 +1955,11 @@ export interface DBCustomClusterNode {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   EniIP?: string
+  /**
+   * <p>节点绑定的安全组</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SecurityGroupIds?: Array<string>
 }
 
 /**

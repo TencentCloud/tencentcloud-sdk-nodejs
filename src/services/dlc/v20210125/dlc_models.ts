@@ -832,61 +832,13 @@ export interface AlterTableCommentResponse {
 }
 
 /**
- * DescribeDMSPartitions请求参数结构体
+ * DescribeEngineUsageInfo请求参数结构体
  */
-export interface DescribeDMSPartitionsRequest {
+export interface DescribeEngineUsageInfoRequest {
   /**
-   * 数据库名
+   * 数据引擎ID
    */
-  DatabaseName: string
-  /**
-   * 表名称
-   */
-  TableName: string
-  /**
-   * schema名称
-   */
-  SchemaName?: string
-  /**
-   * 名称
-   */
-  Name?: string
-  /**
-   * 单个分区名称，精准匹配
-   */
-  Values?: Array<string>
-  /**
-   * 多个分区名称，精准匹配
-   */
-  PartitionNames?: Array<string>
-  /**
-   * 多个分区字段的匹配，模糊匹配
-   */
-  PartValues?: Array<string>
-  /**
-   * 过滤SQL
-   */
-  Filter?: string
-  /**
-   * 最大分区数量
-   */
-  MaxParts?: number
-  /**
-   * 翻页跳过数量
-   */
-  Offset?: number
-  /**
-   * 页面数量
-   */
-  Limit?: number
-  /**
-   * 表达式
-   */
-  Expression?: string
-  /**
-   * 数据源连接名
-   */
-  DatasourceConnectionName?: string
+  DataEngineId: string
 }
 
 /**
@@ -1000,6 +952,20 @@ export interface CreateTasksInOrderRequest {
    * 数据源名称，默认为COSDataCatalog
    */
   DatasourceConnectionName?: string
+}
+
+/**
+ * 资源配额
+ */
+export interface ResourceQuota {
+  /**
+   * <p>可售卖资源规格</p>
+   */
+  ResourceSpec?: ResourceSpec
+  /**
+   * <p>配额数量</p><p>请注意，CPU类型计费项为32的整数倍，GPU类型计费项为1的整数倍。</p>
+   */
+  Quota?: number
 }
 
 /**
@@ -1346,49 +1312,81 @@ export interface Tag {
 }
 
 /**
- * 任务依赖包信息
+ * CreateInferenceService请求参数结构体
  */
-export interface DependencyPackage {
+export interface CreateInferenceServiceRequest {
   /**
-   * 依赖包类型
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>推理服务名称</p>
    */
-  PackageSource?: string
+  Name: string
   /**
-   * 依赖包信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>模型 UID（业务级唯一标识）</p>
    */
-  MavenPackage?: string
+  ModelUid: string
   /**
-   * 依赖包仓库
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>推理引擎（vllm / xgboost）</p>
    */
-  MavenRepository?: string
+  Engine: string
   /**
-   * maven包exclusion信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>副本数</p>
    */
-  MavenExclusion?: string
+  Replicas: number
   /**
-   * pypi包信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>资源分区 ID（目标 K8s 集群分区）</p>
    */
-  PypiPackage?: string
+  ResourcePartitionId: string
   /**
-   * pypi索引地址
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>Ray Serve 部署镜像</p>
    */
-  PypiIndexUrl?: string
+  Image: string
   /**
-   * 文件包的类型
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>模型标识符（OpenAI 兼容 API 中的 model 字段）</p>
    */
-  PackageType?: string
+  ModelIdentifier: string
   /**
-   * 文件包的路径
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>队列名（K8s namespace）</p>
    */
-  PackagePath?: string
+  Queue: string
+  /**
+   * <p>部署名称（可选，未提供时自动生成）</p>
+   */
+  DeploymentName?: string
+  /**
+   * <p>模型版本（如 v1, v2），未提供时使用最新版本</p>
+   */
+  ModelVersion?: string
+  /**
+   * <p>ray head 是否开始高可用（是否申请 redis 实例用于 head 连接）</p>
+   */
+  HeadHighAvailabilityEnabled?: boolean
+  /**
+   * <p>高级参数（JSON 字符串，可选）</p>
+   */
+  AdvancedParams?: string
+  /**
+   * <p>镜像拉取策略（默认 IfNotPresent）</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>是否启用弹性伸缩</p>
+   */
+  AutoscalingEnabled?: boolean
+  /**
+   * <p>最小副本数（启用弹性伸缩时生效，0 表示缩容到 0）</p>
+   */
+  MinReplicas?: number
+  /**
+   * <p>最大副本数（启用弹性伸缩时生效）</p>
+   */
+  MaxReplicas?: number
+  /**
+   * <p>Autoscaler 配置（JSON 字符串）</p>
+   */
+  AutoscalerOptions?: string
+  /**
+   * <p>ApiKeyIds</p>
+   */
+  ApiKeyIds?: Array<string>
 }
 
 /**
@@ -1583,13 +1581,29 @@ export interface Label {
 }
 
 /**
- * 混合表中，change表的数据保存时间，单位为天
+ * CreateModelVersion请求参数结构体
  */
-export interface SmartOptimizerChangeTablePolicy {
+export interface CreateModelVersionRequest {
   /**
-   * change表的数据保存时间，单位为天
+   * <p>模型UID</p>
    */
-  DataRetentionTime?: number
+  ModelUid: string
+  /**
+   * <p>模型版本号</p>
+   */
+  ModelVersion: string
+  /**
+   * <p>版本说明</p>
+   */
+  Description?: string
+  /**
+   * <p>该版本的存储 URI（可选，如 cos://bucket-name/models/name/v2/）</p>
+   */
+  StorageUri?: string
+  /**
+   * <p>是否使用用户自带存储桶（默认 false 表示平台托管）</p>
+   */
+  UseCustomStorage?: boolean
 }
 
 /**
@@ -3674,6 +3688,20 @@ export interface CreateStandardEngineResourceGroupRequest {
 }
 
 /**
+ * QueryDashboardOverview请求参数结构体
+ */
+export interface QueryDashboardOverviewRequest {
+  /**
+   * <p>时间范围起始（Unix 时间戳，秒）</p>
+   */
+  StartTime: string
+  /**
+   * <p>时间范围结束（Unix 时间戳，秒）</p>
+   */
+  EndTime: string
+}
+
+/**
  * DescribeNotebookSessionStatementSqlResult请求参数结构体
  */
 export interface DescribeNotebookSessionStatementSqlResultRequest {
@@ -3804,6 +3832,20 @@ export interface ListTaskJobLogNameRequest {
 }
 
 /**
+ * QueryMonitorOverview请求参数结构体
+ */
+export interface QueryMonitorOverviewRequest {
+  /**
+   * <p>图表类型列表（批量查询多个指标的当前值）</p>
+   */
+  ChartTypes: Array<string>
+  /**
+   * <p>推理服务 ID（业务唯一标识）</p>
+   */
+  ServiceId: string
+}
+
+/**
  * DeleteStandardEngineResourceGroup返回参数结构体
  */
 export interface DeleteStandardEngineResourceGroupResponse {
@@ -3905,6 +3947,20 @@ export interface QueueInfo {
    * <p>队列类型：1-独占型，2-共享型</p>
    */
   QueueType?: number
+}
+
+/**
+ * 概览数据项，用于监控
+ */
+export interface OverviewItem {
+  /**
+   * <p>图表类型（与请求中的 ChartTypes 对应）</p>
+   */
+  ChartType?: string
+  /**
+   * <p>当前瞬时值（如 QPS=15.2、延迟=120.5ms、利用率=85.0%）。查询失败或无数据时为 null</p>
+   */
+  Value?: number
 }
 
 /**
@@ -4343,6 +4399,16 @@ export interface DeleteRayClusterRequest {
 }
 
 /**
+ * GetInferenceService请求参数结构体
+ */
+export interface GetInferenceServiceRequest {
+  /**
+   * <p>ServiceId</p>
+   */
+  ServiceId: string
+}
+
+/**
  * DescribeTable请求参数结构体
  */
 export interface DescribeTableRequest {
@@ -4358,6 +4424,28 @@ export interface DescribeTableRequest {
    * 查询表所在的数据源名称
    */
   DatasourceConnectionName?: string
+}
+
+/**
+ * QueryDashboardOverview返回参数结构体
+ */
+export interface QueryDashboardOverviewResponse {
+  /**
+   * <p>时间范围内所有服务的总 QPS（每秒请求数）均值</p><p>单位：请求每秒</p>
+   */
+  TotalRequestsPerSecond?: number
+  /**
+   * <p>时间范围内全局 P99 延迟均值（毫秒）</p><p>单位：毫秒</p>
+   */
+  AverageP99LatencyMs?: number
+  /**
+   * <p>时间范围内全局错误率均值（0~1，如 0.02 表示 2%）</p><p>取值范围：[0, 1]</p>
+   */
+  ErrorRate?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4516,6 +4604,16 @@ export interface DescribeDataEnginesScaleDetailRequest {
    * 结束时间，时间格式：yyyy-MM-dd HH:mm:ss，最长查询一个月内的记录
    */
   EndTime?: string
+}
+
+/**
+ * StopInferenceService请求参数结构体
+ */
+export interface StopInferenceServiceRequest {
+  /**
+   * <p>推理服务ID</p>
+   */
+  ServiceId: string
 }
 
 /**
@@ -5050,6 +5148,32 @@ export interface TasksOverview {
 }
 
 /**
+ * CreateCHDFSBindingProduct请求参数结构体
+ */
+export interface CreateCHDFSBindingProductRequest {
+  /**
+   * 需要绑定的元数据加速桶名
+   */
+  MountPoint: string
+  /**
+   * 桶的类型，分为cos和lakefs
+   */
+  BucketType: string
+  /**
+   * 产品名称
+   */
+  ProductName: string
+  /**
+   * 引擎名称，ProductName选择DLC产品时，必传此参数。其他产品可不传
+   */
+  EngineName?: string
+  /**
+   * vpc信息，产品名称为other时必传此参数
+   */
+  VpcInfo?: Array<VpcInfo>
+}
+
+/**
  * 引擎资源组参数 配置项
  */
 export interface EngineResourceGroupConfigPair {
@@ -5207,6 +5331,32 @@ export interface GetLabPodsRequest {
    * <p>排序字段列表</p>
    */
   SortFields?: Array<SortField>
+}
+
+/**
+ * 描述一个推理引擎的能力
+ */
+export interface EngineCapabilities {
+  /**
+   * <p>GPU 是否可选</p>
+   */
+  GpuOptional?: boolean
+  /**
+   * <p>是否支持并行配置</p>
+   */
+  SupportsParallelConfig?: boolean
+  /**
+   * <p>是否支持远程代码</p>
+   */
+  SupportsRemoteCode?: boolean
+  /**
+   * <p>GPU 显存配置键名</p>
+   */
+  GpuMemoryKey?: string
+  /**
+   * <p>并行配置键名列表</p>
+   */
+  ParallelKeys?: Array<ParallelKeyMapping>
 }
 
 /**
@@ -5711,6 +5861,21 @@ export interface GetRayClusterHistoryResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 关联的推理服务信息
+ */
+export interface LinkedServiceInfo {
+  /**
+   * <p>服务 UID</p>
+   */
+  ServiceId?: string
+  /**
+   * <p>服务名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceName?: string
 }
 
 /**
@@ -6667,6 +6832,44 @@ export interface DescribeSparkSessionBatchSqlLogResponse {
 }
 
 /**
+ * 服务监控指标
+ */
+export interface ServiceMetricsItem {
+  /**
+   * <p>服务 UID，服务唯一标识</p>
+   */
+  ServiceId?: string
+  /**
+   * <p>服务显示名称</p>
+   */
+  ServiceName?: string
+  /**
+   * <p>服务状态</p>
+   */
+  Status?: string
+  /**
+   * <p>推理引擎</p>
+   */
+  Engine?: string
+  /**
+   * <p>模型名称</p>
+   */
+  ModelName?: string
+  /**
+   * <p>OpenAI 兼容的模型标识符</p>
+   */
+  ModelIdentifier?: string
+  /**
+   * <p>副本信息</p>
+   */
+  Replicas?: ReplicaInfo
+  /**
+   * <p>监控指标数据</p>
+   */
+  Metrics?: MetricsData
+}
+
+/**
  * GetRayClusterPods请求参数结构体
  */
 export interface GetRayClusterPodsRequest {
@@ -6799,6 +7002,59 @@ export interface DescribeUserInfoRequest {
    * <p>TF 资源 ID</p>
    */
   PolicyId?: string
+}
+
+/**
+ * CreateModelVersion返回参数结构体
+ */
+export interface CreateModelVersionResponse {
+  /**
+   * <p>版本ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionId?: string
+  /**
+   * <p>关联的模型ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelId?: string
+  /**
+   * <p>该版本的存储 URI</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageUri?: string
+  /**
+   * <p>版本说明</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * <p>创建时间（毫秒时间戳）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间（毫秒时间戳）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: number
+  /**
+   * <p>关联的推理服务列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LinkedServices?: Array<LinkedServiceInfo>
+  /**
+   * <p>模型版本号</p>
+   */
+  Version?: string
+  /**
+   * <p>是否使用用户自带存储桶（true=用户自带桶，false=平台托管）</p>
+   */
+  UseCustomStorage?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -7299,17 +7555,59 @@ export interface CreateUserRoleRequest {
 }
 
 /**
- * 资源配额
+ * RestartInferenceService请求参数结构体
  */
-export interface ResourceQuota {
+export interface RestartInferenceServiceRequest {
   /**
-   * <p>可售卖资源规格</p>
+   * <p>推理服务ID</p>
    */
-  ResourceSpec?: ResourceSpec
+  ServiceId: string
+}
+
+/**
+ * 任务依赖包信息
+ */
+export interface DependencyPackage {
   /**
-   * <p>配额数量</p>
+   * 依赖包类型
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Quota?: number
+  PackageSource?: string
+  /**
+   * 依赖包信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MavenPackage?: string
+  /**
+   * 依赖包仓库
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MavenRepository?: string
+  /**
+   * maven包exclusion信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MavenExclusion?: string
+  /**
+   * pypi包信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PypiPackage?: string
+  /**
+   * pypi索引地址
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PypiIndexUrl?: string
+  /**
+   * 文件包的类型
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackageType?: string
+  /**
+   * 文件包的路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PackagePath?: string
 }
 
 /**
@@ -7626,6 +7924,36 @@ export interface CreateDataEngineRequest {
 }
 
 /**
+ * QueryDashboardServiceList返回参数结构体
+ */
+export interface QueryDashboardServiceListResponse {
+  /**
+   * <p>匹配过滤条件的服务总数</p>
+   */
+  Total?: number
+  /**
+   * <p>当前页码</p>
+   */
+  Page?: number
+  /**
+   * <p>每页数量</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总页数</p>
+   */
+  TotalPages?: number
+  /**
+   * <p>服务监控指标列表</p>
+   */
+  Items?: Array<ServiceMetricsItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeNotebookSession请求参数结构体
  */
 export interface DescribeNotebookSessionRequest {
@@ -7665,6 +7993,56 @@ export interface CSV {
    * 格式，默认值为CSV
    */
   Format?: string
+}
+
+/**
+ * 模型版本信息
+ */
+export interface ModelVersionInfo {
+  /**
+   * <p>版本ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  VersionId?: string
+  /**
+   * <p>关联的模型ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelId?: string
+  /**
+   * <p>版本号（如 v1, v2）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Version?: string
+  /**
+   * <p>该版本的存储 URI</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  StorageUri?: string
+  /**
+   * <p>版本说明</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * <p>创建时间（毫秒时间戳）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间（毫秒时间戳）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: number
+  /**
+   * <p>关联的推理服务列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  LinkedServices?: Array<LinkedServiceInfo>
+  /**
+   * <p>是否使用用户自带存储桶（true=用户自带桶，false=平台托管）</p>
+   */
+  UseCustomStorage?: boolean
 }
 
 /**
@@ -7881,18 +8259,17 @@ export interface GetOptimizerPolicyRequest {
 }
 
 /**
- * 用户信息集合
+ * GetModelReadme请求参数结构体
  */
-export interface Users {
+export interface GetModelReadmeRequest {
   /**
-   * 用户信息集合
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>模型UID</p>
    */
-  UserSet?: Array<UserMessage>
+  ModelUid: string
   /**
-   * 用户总数
+   * <p>模型版本</p>
    */
-  TotalCount?: number
+  ModelVersion?: string
 }
 
 /**
@@ -8499,6 +8876,11 @@ export interface AlterDMSTableRequest {
    */
   DatasourceConnectionName?: string
 }
+
+/**
+ * 运行中部署的 GPU 资源汇总
+ */
+export type GpuSummaryItem = null
 
 /**
  * worker组规格
@@ -9336,81 +9718,125 @@ export interface FavorInfo {
 }
 
 /**
- * UpdateLab请求参数结构体
+ * StopInferenceService返回参数结构体
  */
-export interface UpdateLabRequest {
+export interface StopInferenceServiceResponse {
   /**
-   * <p>数据实验室名称</p>
+   * <p>推理服务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Name: string
+  ServiceId?: string
   /**
-   * <p>Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在&quot;内置 / 自定义&quot;两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。</p>
+   * <p>服务名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  LabImage: string
+  Name?: string
   /**
-   * <p>数据实验室描述</p>
+   * <p>关联的模型UID</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Description?: string
+  ModelUid?: string
   /**
-   * <p>Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。</p>
+   * <p>关联的模型名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Image?: string
+  ModelName?: string
   /**
-   * <p>镜像拉取策略（Always, IfNotPresent, Never）</p>
+   * <p>关联的模型版本号</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImagePullPolicy?: string
+  ModelVersion?: string
   /**
-   * <p>资源配置ID</p>
+   * <p>模型标识符（OpenAI 兼容 API 中的 model 字段）</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceConfigId?: string
+  ModelIdentifier?: string
   /**
-   * <p>计算组 ID</p>
+   * <p>关联模型的类型（LLM / VLM / Embedding / Reranker / TTS / ASR / CV / NLP / ML）</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  GroupId?: string
+  ModelType?: string
   /**
-   * <p>资源分区ID</p>
+   * <p>服务状态（Running/Stopped/Deploying/Failed）</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourcePartitionId?: string
+  Status?: string
   /**
-   * <p>队列名称</p>
+   * <p>服务端点URL</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Queue?: string
+  EndpointUrl?: string
   /**
-   * <p>案例ID，当 startMode=EXAMPLE 时必填</p>
+   * <p>OpenAI 兼容统一入口 URL（通过 API-Key 路由，适用于 LLM/Embedding/Reranker）</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ExampleId?: string
+  UnifiedEndpointUrl?: string
   /**
-   * <p>案例代码包地址，当 startMode=EXAMPLE 时填写</p>
+   * <p>KServe V2 协议统一入口 URL（通过 API-Key + model name 路由，适用于 XGBoost 等传统 ML 模型）</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  CodeArchiveUrl?: string
+  UnifiedV2EndpointUrl?: string
   /**
-   * <p>Lab sidecar 镜像拉取策略（Always, IfNotPresent, Never）</p>
+   * <p>应用ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  LabImagePullPolicy?: string
+  AppId?: number
   /**
-   * <p>优先级（1-9，数字越大优先级越高）</p>
+   * <p>主账号UIN</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Priority?: number
+  Uin?: string
   /**
-   * <p>是否开启token认证</p>
+   * <p>创建时间（Unix 时间戳，毫秒）</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnableToken?: boolean
+  CreateTime?: number
   /**
-   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   * <p>更新时间（Unix 时间戳，毫秒）</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Tags?: Array<Tag>
+  UpdateTime?: number
   /**
-   * <p>持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。</p>
+   * <p>部署数量</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  PersistentWorkDir?: PersistentWorkDir
+  DeploymentCount?: number
   /**
-   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   * <p>是否存在至少一个运行中的部署</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImagePullType?: string
+  HasRunningDeployment?: boolean
   /**
-   * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   * <p>是否启用 API-Key 鉴权</p>
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  LabImagePullType?: string
+  ApiKeyAuthEnabled?: boolean
+  /**
+   * <p>是否强制开启 API-Key 鉴权（生产环境为 true，不允许关闭）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiKeyAuthForceEnabled?: boolean
+  /**
+   * <p>是否跳过 TLS 证书验证（自签证书场景，前端 curl 命令需加 -k 参数）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SkipTlsVerify?: boolean
+  /**
+   * <p>子账号UIN（实际操作者）</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>运行中部署的 CPU 资源汇总</p>
+   */
+  CpuResourceSummary?: CpuSummaryItem
+  /**
+   * <p>资源配置（JSON 字符串，取自第一个部署）</p>
+   */
+  ResourceConfig?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -9729,6 +10155,16 @@ export interface TaskFullRespInfo {
    * <p>排队时间</p><p>单位：毫秒</p>
    */
   QueueTime?: number
+}
+
+/**
+ * 混合表中，change表的数据保存时间，单位为天
+ */
+export interface SmartOptimizerChangeTablePolicy {
+  /**
+   * change表的数据保存时间，单位为天
+   */
+  DataRetentionTime?: number
 }
 
 /**
@@ -10974,6 +11410,28 @@ export interface AlterDMSDatabaseRequest {
 }
 
 /**
+ * QueryDashboardServiceList请求参数结构体
+ */
+export interface QueryDashboardServiceListRequest {
+  /**
+   * <p>页码（默认1）</p>
+   */
+  Page?: number
+  /**
+   * <p>每页数量（默认20）</p>
+   */
+  PageSize?: number
+  /**
+   * <p>过滤条件。支持的过滤字段：Keyword（服务名称/模型名称模糊搜索）、Status（服务状态精确匹配，如 Running）、Engine（推理引擎匹配，如 vllm，用于 LLM 推理专项 tab，只要服务有至少一个 deployment 的 engine 匹配即返回）、ResourcePartitionId（资源分区精确匹配）</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>排序字段列表（全局排序，支持按指标字段排序）</p>
+   */
+  SortFields?: Array<SortField>
+}
+
+/**
  * DescribeOtherCHDFSBindingList返回参数结构体
  */
 export interface DescribeOtherCHDFSBindingListResponse {
@@ -11407,6 +11865,40 @@ export interface PartitionDetail {
 }
 
 /**
+ * ListModelVersions请求参数结构体
+ */
+export interface ListModelVersionsRequest {
+  /**
+   * <p>模型UID</p>
+   */
+  ModelUid: string
+  /**
+   * <p>创建时间起始过滤-毫秒时间戳</p><p>单位：ms</p>
+   */
+  StartTime?: number
+  /**
+   * <p>创建时间截止过滤-毫秒时间戳</p><p>单位：ms</p>
+   */
+  EndTime?: number
+  /**
+   * <p>额外过滤条件</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>排序字段列表</p>
+   */
+  SortFields?: Array<SortField>
+  /**
+   * <p>页码（默认1）</p><p>取值范围：[1, 2147483647]</p>
+   */
+  Page?: number
+  /**
+   * <p>每页数量（默认200）</p><p>取值范围：[1, 2147483647]</p>
+   */
+  PageSize?: number
+}
+
+/**
  * CreateUserVpcConnection返回参数结构体
  */
 export interface CreateUserVpcConnectionResponse {
@@ -11492,6 +11984,20 @@ export interface DeleteDataEngineResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 副本信息
+ */
+export interface ReplicaInfo {
+  /**
+   * <p>期望副本数</p>
+   */
+  Desired?: number
+  /**
+   * <p>可用（就绪）副本数</p>
+   */
+  Available?: number
 }
 
 /**
@@ -11744,6 +12250,20 @@ export interface GetRayJobResponse {
    * <p>集群名称</p>
    */
   ClusterName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * QueryMonitorOverview返回参数结构体
+ */
+export interface QueryMonitorOverviewResponse {
+  /**
+   * <p>概览数据项列表，每项对应一个请求的 ChartType</p>
+   */
+  Items?: Array<OverviewItem>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -12007,29 +12527,21 @@ export interface DescribeSparkAppTasksResponse {
 }
 
 /**
- * CreateCHDFSBindingProduct请求参数结构体
+ * CPU resource summary item aggregated from all running deployments.
  */
-export interface CreateCHDFSBindingProductRequest {
+export interface CpuSummaryItem {
   /**
-   * 需要绑定的元数据加速桶名
+   * <p>CPU 总核数（headCpu + cpu × replicas 的总和）</p>
    */
-  MountPoint: string
+  TotalCpuCores?: number
   /**
-   * 桶的类型，分为cos和lakefs
+   * <p>内存总量（headMem + mem × replicas 的总和，单位 GB）</p>
    */
-  BucketType: string
+  TotalMemoryGB?: number
   /**
-   * 产品名称
+   * <p>运行中的副本总数</p>
    */
-  ProductName: string
-  /**
-   * 引擎名称，ProductName选择DLC产品时，必传此参数。其他产品可不传
-   */
-  EngineName?: string
-  /**
-   * vpc信息，产品名称为other时必传此参数
-   */
-  VpcInfo?: Array<VpcInfo>
+  Replicas?: number
 }
 
 /**
@@ -12355,6 +12867,84 @@ export interface AssignMangedTablePropertiesRequest {
 }
 
 /**
+ * UpdateLab请求参数结构体
+ */
+export interface UpdateLabRequest {
+  /**
+   * <p>数据实验室名称</p>
+   */
+  Name: string
+  /**
+   * <p>Lab 镜像地址（必填，用于开发工具如 Jupyter/VSCode/WebShell）。前端在&quot;内置 / 自定义&quot;两态中选择此值；当 Image 字段未显式传入时，后端会基于该字段按 R1（镜像表命中）/R2（同值 fallback）派生 Ray 集群镜像。</p>
+   */
+  LabImage: string
+  /**
+   * <p>数据实验室描述</p>
+   */
+  Description?: string
+  /**
+   * <p>Ray 集群镜像地址（可选，OpenAPI/SDK 高级控制入口）。前端不再传递此字段；为空时后端按 R1（镜像表查询命中）→ R2（同值 fallback）顺序自动派生。非空时直接作为 Ray 集群镜像，跳过派生（EXPLICIT），且后端不校验其与 LabImage 的兼容性。</p>
+   */
+  Image?: string
+  /**
+   * <p>镜像拉取策略（Always, IfNotPresent, Never）</p>
+   */
+  ImagePullPolicy?: string
+  /**
+   * <p>资源配置ID</p>
+   */
+  ResourceConfigId?: string
+  /**
+   * <p>计算组 ID</p>
+   */
+  GroupId?: string
+  /**
+   * <p>资源分区ID</p>
+   */
+  ResourcePartitionId?: string
+  /**
+   * <p>队列名称</p>
+   */
+  Queue?: string
+  /**
+   * <p>案例ID，当 startMode=EXAMPLE 时必填</p>
+   */
+  ExampleId?: string
+  /**
+   * <p>案例代码包地址，当 startMode=EXAMPLE 时填写</p>
+   */
+  CodeArchiveUrl?: string
+  /**
+   * <p>Lab sidecar 镜像拉取策略（Always, IfNotPresent, Never）</p>
+   */
+  LabImagePullPolicy?: string
+  /**
+   * <p>优先级（1-9，数字越大优先级越高）</p>
+   */
+  Priority?: number
+  /**
+   * <p>是否开启token认证</p>
+   */
+  EnableToken?: boolean
+  /**
+   * <p>标签列表（TagKey-TagValue），用于将资源与腾讯云标签系统中的标签绑定</p>
+   */
+  Tags?: Array<Tag>
+  /**
+   * <p>持久化工作目录配置（可选）。启用后将 COS/CFS 指定路径挂载到容器内 /workspace 工作目录，与现有 Catalog 的卷配置互斥（不允许同时在 Catalog 中显式声明 MountPath=/workspace）。</p>
+   */
+  PersistentWorkDir?: PersistentWorkDir
+  /**
+   * <p>镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  ImagePullType?: string
+  /**
+   * <p>Lab sidecar 镜像拉取类型（BuiltIn: 内置, Custom: 自定义-TCR, CustomCcr: 自定义-CCR）</p>
+   */
+  LabImagePullType?: string
+}
+
+/**
  * 绑定到同一个工作组的用户Id的集合
  */
 export interface UserIdSetOfWorkGroupId {
@@ -12403,6 +12993,41 @@ export interface AlterDMSPartitionRequest {
  * UpdateDataMaskStrategy返回参数结构体
  */
 export interface UpdateDataMaskStrategyResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListInferenceServices返回参数结构体
+ */
+export interface ListInferenceServicesResponse {
+  /**
+   * <p>推理服务列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<InferenceServiceInfo>
+  /**
+   * <p>总记录数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Total?: number
+  /**
+   * <p>当前页码</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Page?: number
+  /**
+   * <p>每页数量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PageSize?: number
+  /**
+   * <p>总页数</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TotalPages?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -13928,6 +14553,128 @@ export interface CreateSparkAppTaskResponse {
 }
 
 /**
+ * RestartInferenceService返回参数结构体
+ */
+export interface RestartInferenceServiceResponse {
+  /**
+   * <p>推理服务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceId?: string
+  /**
+   * <p>服务名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * <p>关联的模型UID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelUid?: string
+  /**
+   * <p>关联的模型名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelName?: string
+  /**
+   * <p>关联的模型版本号</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelVersion?: string
+  /**
+   * <p>模型标识符（OpenAI 兼容 API 中的 model 字段）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelIdentifier?: string
+  /**
+   * <p>关联模型的类型（LLM / VLM / Embedding / Reranker / TTS / ASR / CV / NLP / ML）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelType?: string
+  /**
+   * <p>服务状态（Running/Stopped/Deploying/Failed）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * <p>服务端点URL</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndpointUrl?: string
+  /**
+   * <p>OpenAI 兼容统一入口 URL（通过 API-Key 路由，适用于 LLM/Embedding/Reranker）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnifiedEndpointUrl?: string
+  /**
+   * <p>KServe V2 协议统一入口 URL（通过 API-Key + model name 路由，适用于 XGBoost 等传统 ML 模型）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnifiedV2EndpointUrl?: string
+  /**
+   * <p>应用ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: number
+  /**
+   * <p>主账号UIN</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+  /**
+   * <p>创建时间（Unix 时间戳，毫秒）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间（Unix 时间戳，毫秒）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: number
+  /**
+   * <p>部署数量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeploymentCount?: number
+  /**
+   * <p>是否存在至少一个运行中的部署</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasRunningDeployment?: boolean
+  /**
+   * <p>是否启用 API-Key 鉴权</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiKeyAuthEnabled?: boolean
+  /**
+   * <p>是否强制开启 API-Key 鉴权（生产环境为 true，不允许关闭）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiKeyAuthForceEnabled?: boolean
+  /**
+   * <p>是否跳过 TLS 证书验证（自签证书场景，前端 curl 命令需加 -k 参数）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SkipTlsVerify?: boolean
+  /**
+   * <p>子账号UIN（实际操作者）</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>运行中部署的 CPU 资源汇总</p>
+   */
+  CpuResourceSummary?: CpuSummaryItem
+  /**
+   * <p>资源配置（JSON 字符串，取自第一个部署）</p>
+   */
+  ResourceConfig?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * UpdateRayJobPriority请求参数结构体
  */
 export interface UpdateRayJobPriorityRequest {
@@ -15027,6 +15774,31 @@ export interface RunJobSpecRequest {
 }
 
 /**
+ * GetModelFiles返回参数结构体
+ */
+export interface GetModelFilesResponse {
+  /**
+   * <p>模型ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelId?: number
+  /**
+   * <p>模型名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelName?: string
+  /**
+   * <p>文件树根节点列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Files?: Array<FileNode>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 同一个用户绑定的工作组集合
  */
 export interface WorkGroupIdSetOfUserId {
@@ -15544,6 +16316,67 @@ export interface DataEngineImageVersion {
    * 更新时间
    */
   UpdateTime?: string
+}
+
+/**
+ * ListModelVersions返回参数结构体
+ */
+export interface ListModelVersionsResponse {
+  /**
+   * <p>模型版本列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Items?: Array<ModelVersionInfo>
+  /**
+   * <p>模型总数量</p>
+   */
+  Total?: number
+  /**
+   * <p>当前多少页</p>
+   */
+  Page?: number
+  /**
+   * <p>当前页模型数量</p>
+   */
+  PageSize?: number
+  /**
+   * <p>结果总页数</p>
+   */
+  TotalPages?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ListInferenceEngines请求参数结构体
+ */
+export interface ListInferenceEnginesRequest {
+  /**
+   * <p>当前页码</p>
+   */
+  Page?: number
+  /**
+   * <p>每页的数量</p>
+   */
+  PageSize?: number
+  /**
+   * <p>创建时间起始过滤-时间戳（毫秒，可选）</p><p>单位：ms</p>
+   */
+  StartTime?: number
+  /**
+   * <p>创建时间截止过滤-时间戳（毫秒，可选）</p><p>单位：ms</p>
+   */
+  EndTime?: number
+  /**
+   * <p>过滤条件</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>排序字段列表</p>
+   */
+  SortFields?: Array<SortField>
 }
 
 /**
@@ -16622,6 +17455,36 @@ export interface DescribePartitionDetailResponse {
 }
 
 /**
+ * ListInferenceEngines返回参数结构体
+ */
+export interface ListInferenceEnginesResponse {
+  /**
+   * <p>数据列表</p>
+   */
+  Items?: Array<InferenceEngineInfo>
+  /**
+   * <p>总记录数</p>
+   */
+  Total?: number
+  /**
+   * <p>当前页码</p>
+   */
+  Page?: number
+  /**
+   * <p>每页的数量</p>
+   */
+  PageSize?: number
+  /**
+   * <p>总的页数</p>
+   */
+  TotalPages?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ListTaskJobLogDetail返回参数结构体
  */
 export interface ListTaskJobLogDetailResponse {
@@ -16927,6 +17790,138 @@ export interface CancelNotebookSessionStatementBatchRequest {
    * 批任务唯一标识
    */
   BatchId: string
+}
+
+/**
+ * GetInferenceService返回参数结构体
+ */
+export interface GetInferenceServiceResponse {
+  /**
+   * <p>ServiceId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceId?: string
+  /**
+   * <p>服务名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * <p>关联的模型UID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelUid?: string
+  /**
+   * <p>关联的模型名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelName?: string
+  /**
+   * <p>关联的模型版本号</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelVersion?: string
+  /**
+   * <p>模型标识符（OpenAI 兼容 API 中的 model 字段）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelIdentifier?: string
+  /**
+   * <p>关联模型的类型（LLM / VLM / Embedding / Reranker / TTS / ASR / CV / NLP / ML）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelType?: string
+  /**
+   * <p>服务状态（Running/Stopped/Deploying/Failed）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * <p>服务端点URL</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndpointUrl?: string
+  /**
+   * <p>OpenAI 兼容统一入口 URL（通过 API-Key 路由，适用于 LLM/Embedding/Reranker）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnifiedEndpointUrl?: string
+  /**
+   * <p>KServe V2 协议统一入口 URL（通过 API-Key + model name 路由，适用于 XGBoost 等传统 ML 模型）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnifiedV2EndpointUrl?: string
+  /**
+   * <p>应用ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: number
+  /**
+   * <p>主账号UIN</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+  /**
+   * <p>创建时间（Unix 时间戳，毫秒）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间（Unix 时间戳，毫秒）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: number
+  /**
+   * <p>部署数量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeploymentCount?: number
+  /**
+   * <p>是否存在至少一个运行中的部署</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasRunningDeployment?: boolean
+  /**
+   * <p>Ray Dashboard 访问地址（通过 Ingress 代理）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RayDashboardUrl?: string
+  /**
+   * <p>是否启用 API-Key 鉴权</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiKeyAuthEnabled?: boolean
+  /**
+   * <p>是否强制开启 API-Key 鉴权（生产环境为 true，不允许关闭）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiKeyAuthForceEnabled?: boolean
+  /**
+   * <p>是否跳过 TLS 证书验证（自签证书场景，前端 curl 命令需加 -k 参数）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SkipTlsVerify?: boolean
+  /**
+   * <p>运行中部署的 GPU 资源汇总</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GpuResourceSummary?: Array<GpuSummaryItem>
+  /**
+   * <p>子账号UIN（实际操作者）</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>运行中部署的 CPU 资源汇总</p>
+   */
+  CpuResourceSummary?: CpuSummaryItem
+  /**
+   * <p>资源配置（JSON 字符串，取自第一个部署）</p>
+   */
+  ResourceConfig?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -17480,6 +18475,50 @@ export interface CheckQueueNameResponse {
 }
 
 /**
+ * ListInferenceServices请求参数结构体
+ */
+export interface ListInferenceServicesRequest {
+  /**
+   * <p>页码（从1开始）</p>
+   */
+  Page?: number
+  /**
+   * <p>每页数量（最大 200）</p>
+   */
+  PageSize?: number
+  /**
+   * <p>创建时间起始过滤-时间戳（毫秒，可选）</p><p>单位：ms</p>
+   */
+  StartTime?: number
+  /**
+   * <p>创建时间截止过滤-时间戳（毫秒，可选）</p><p>单位：ms</p>
+   */
+  EndTime?: number
+  /**
+   * <p>过滤条件</p>
+   */
+  Filters?: Array<Filter>
+  /**
+   * <p>排序字段列表</p>
+   */
+  SortFields?: Array<SortField>
+}
+
+/**
+ * GetModelConfig请求参数结构体
+ */
+export interface GetModelConfigRequest {
+  /**
+   * <p>模型UID</p>
+   */
+  ModelUid: string
+  /**
+   * <p>模型版本</p>
+   */
+  ModelVersion?: string
+}
+
+/**
  * DescribeNotebookSession返回参数结构体
  */
 export interface DescribeNotebookSessionResponse {
@@ -17659,6 +18698,46 @@ export interface TagInfo {
    * 标签值
    */
   TagValue?: string
+}
+
+/**
+ * GetModelReadme返回参数结构体
+ */
+export interface GetModelReadmeResponse {
+  /**
+   * <p>模型名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelName?: string
+  /**
+   * <p>模型提供方</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Provider?: string
+  /**
+   * <p>模型类型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelType?: string
+  /**
+   * <p>参数量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ParameterSize?: string
+  /**
+   * <p>是否是内置模型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  BuiltIn?: boolean
+  /**
+   * <p>README 内容（Markdown 格式）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Readme?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -18251,6 +19330,26 @@ export interface CSVSerde {
 }
 
 /**
+ * GetModelConfig返回参数结构体
+ */
+export interface GetModelConfigResponse {
+  /**
+   * <p>模型名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelName?: string
+  /**
+   * <p>config.json 原始内容（JSON 字符串）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ConfigJson?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * hive类型数据源的信息
  */
 export interface HiveInfo {
@@ -18452,25 +19551,73 @@ export interface CreateInferenceModelResponse {
 }
 
 /**
- * 视图基本配置信息
+ * 监控指标数据
  */
-export interface ViewBaseInfo {
+export interface MetricsData {
   /**
-   * 该视图所属数据库名字
+   * <p>每秒请求数（QPS）</p>
    */
-  DatabaseName: string
+  RequestsPerSecond?: number
   /**
-   * 视图名称
+   * <p>错误率（0~1）</p>
    */
-  ViewName: string
+  ErrorRate?: number
   /**
-   * 视图创建人昵称
+   * <p>P95 延迟（毫秒）</p>
    */
-  UserAlias?: string
+  P95LatencyMs?: number
   /**
-   * 视图创建人ID
+   * <p>P99 延迟（毫秒）</p>
    */
-  UserSubUin?: string
+  P99LatencyMs?: number
+  /**
+   * <p>队列深度（排队中的请求数）</p>
+   */
+  QueueDepth?: number
+  /**
+   * <p>TTFT P99 延迟（毫秒，仅 vLLM）</p>
+   */
+  TimeToFirstTokenP99Ms?: number
+  /**
+   * <p>TPOT P99 延迟（毫秒，仅 vLLM）</p>
+   */
+  TimePerOutputTokenP99Ms?: number
+  /**
+   * <p>Token 吞吐量（tokens/s，仅 vLLM）</p>
+   */
+  TokenThroughput?: number
+  /**
+   * <p>GPU 利用率（0~100，百分比）</p>
+   */
+  GpuUtilization?: number
+  /**
+   * <p>GPU 显存已用（MB）</p>
+   */
+  GpuMemoryUsedMB?: number
+  /**
+   * <p>GPU 显存总量（MB）</p>
+   */
+  GpuMemoryTotalMB?: number
+  /**
+   * <p>CPU 利用率（0~100，百分比）</p>
+   */
+  CpuUtilization?: number
+  /**
+   * <p>内存已用（字节）</p>
+   */
+  MemoryUsedBytes?: number
+  /**
+   * <p>内存总量（字节）</p>
+   */
+  MemoryTotalBytes?: number
+  /**
+   * <p>网络接收速度（MB/s）</p>
+   */
+  NetworkReceiveMBPerSecond?: number
+  /**
+   * <p>网络发送速度（MB/s）</p>
+   */
+  NetworkSendMBPerSecond?: number
 }
 
 /**
@@ -18959,13 +20106,61 @@ export interface DescribeNotebookSessionsResponse {
 }
 
 /**
- * DescribeEngineUsageInfo请求参数结构体
+ * DescribeDMSPartitions请求参数结构体
  */
-export interface DescribeEngineUsageInfoRequest {
+export interface DescribeDMSPartitionsRequest {
   /**
-   * 数据引擎ID
+   * 数据库名
    */
-  DataEngineId: string
+  DatabaseName: string
+  /**
+   * 表名称
+   */
+  TableName: string
+  /**
+   * schema名称
+   */
+  SchemaName?: string
+  /**
+   * 名称
+   */
+  Name?: string
+  /**
+   * 单个分区名称，精准匹配
+   */
+  Values?: Array<string>
+  /**
+   * 多个分区名称，精准匹配
+   */
+  PartitionNames?: Array<string>
+  /**
+   * 多个分区字段的匹配，模糊匹配
+   */
+  PartValues?: Array<string>
+  /**
+   * 过滤SQL
+   */
+  Filter?: string
+  /**
+   * 最大分区数量
+   */
+  MaxParts?: number
+  /**
+   * 翻页跳过数量
+   */
+  Offset?: number
+  /**
+   * 页面数量
+   */
+  Limit?: number
+  /**
+   * 表达式
+   */
+  Expression?: string
+  /**
+   * 数据源连接名
+   */
+  DatasourceConnectionName?: string
 }
 
 /**
@@ -19654,6 +20849,28 @@ script-name-keyword - String - （过滤条件）数据表名称,形如：script
 }
 
 /**
+ * 视图基本配置信息
+ */
+export interface ViewBaseInfo {
+  /**
+   * 该视图所属数据库名字
+   */
+  DatabaseName: string
+  /**
+   * 视图名称
+   */
+  ViewName: string
+  /**
+   * 视图创建人昵称
+   */
+  UserAlias?: string
+  /**
+   * 视图创建人ID
+   */
+  UserSubUin?: string
+}
+
+/**
  * DescribeSparkAppJob返回参数结构体
  */
 export interface DescribeSparkAppJobResponse {
@@ -19813,6 +21030,139 @@ export interface DropDMSTableRequest {
    * 数据目录信息
    */
   DatasourceConnectionName?: string
+}
+
+/**
+ * 推理服务信息
+ */
+export interface InferenceServiceInfo {
+  /**
+   * <p>服务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceId?: string
+  /**
+   * <p>服务名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * <p>关联的模型ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelId?: number
+  /**
+   * <p>关联的模型UID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelUid?: string
+  /**
+   * <p>关联的模型名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelName?: string
+  /**
+   * <p>关联的模型版本号</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelVersion?: string
+  /**
+   * <p>模型标识符（OpenAI 兼容 API 中的 model 字段）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelIdentifier?: string
+  /**
+   * <p>关联模型的类型（LLM / VLM / Embedding / Reranker / TTS / ASR / CV / NLP / ML）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelType?: string
+  /**
+   * <p>服务状态（Running/Stopped/Deploying/Failed）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * <p>服务端点URL</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndpointUrl?: string
+  /**
+   * <p>OpenAI 兼容统一入口 URL（通过 API-Key 路由，适用于 LLM/Embedding/Reranker）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnifiedEndpointUrl?: string
+  /**
+   * <p>KServe V2 协议统一入口 URL（通过 API-Key + model name 路由，适用于 XGBoost 等传统 ML 模型）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnifiedV2EndpointUrl?: string
+  /**
+   * <p>应用ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: number
+  /**
+   * <p>主账号UIN</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+  /**
+   * <p>创建时间（Unix 时间戳，毫秒）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间（Unix 时间戳，毫秒）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: number
+  /**
+   * <p>部署数量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeploymentCount?: number
+  /**
+   * <p>是否存在至少一个运行中的部署</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasRunningDeployment?: boolean
+  /**
+   * <p>Ray Dashboard 访问地址（通过 Ingress 代理）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RayDashboardUrl?: string
+  /**
+   * <p>是否启用 API-Key 鉴权</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiKeyAuthEnabled?: boolean
+  /**
+   * <p>是否强制开启 API-Key 鉴权（生产环境为 true，不允许关闭）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiKeyAuthForceEnabled?: boolean
+  /**
+   * <p>是否跳过 TLS 证书验证（自签证书场景，前端 curl 命令需加 -k 参数）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SkipTlsVerify?: boolean
+  /**
+   * <p>运行中部署的 GPU 资源汇总</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  GpuResourceSummary?: Array<GpuSummaryItem>
+  /**
+   * <p>子账号UIN（实际操作者）</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>运行中部署的 CPU 资源汇总</p>
+   */
+  CpuResourceSummary?: CpuSummaryItem
+  /**
+   * <p>资源配置（JSON 字符串，取自第一个部署）</p>
+   */
+  ResourceConfig?: string
 }
 
 /**
@@ -20291,6 +21641,141 @@ export interface DescribeTCLakeMetaInstanceResponse {
 }
 
 /**
+ * CreateInferenceService返回参数结构体
+ */
+export interface CreateInferenceServiceResponse {
+  /**
+   * <p>服务ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ServiceId?: string
+  /**
+   * <p>服务名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * <p>关联的模型ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelId?: number
+  /**
+   * <p>关联的模型UID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelUid?: string
+  /**
+   * <p>关联的模型名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelName?: string
+  /**
+   * <p>关联的模型版本号</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelVersion?: string
+  /**
+   * <p>模型标识符（OpenAI 兼容 API 中的 model 字段）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelIdentifier?: string
+  /**
+   * <p>关联模型的类型（LLM / VLM / Embedding / Reranker / TTS / ASR / CV / NLP / ML）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ModelType?: string
+  /**
+   * <p>服务状态（Running/Stopped/Deploying/Failed）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Status?: string
+  /**
+   * <p>服务端点URL</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  EndpointUrl?: string
+  /**
+   * <p>OpenAI 兼容统一入口 URL（通过 API-Key 路由，适用于 LLM/Embedding/Reranker）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnifiedEndpointUrl?: string
+  /**
+   * <p>KServe V2 协议统一入口 URL（通过 API-Key + model name 路由，适用于 XGBoost 等传统 ML 模型）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UnifiedV2EndpointUrl?: string
+  /**
+   * <p>ray head 是否开启高可用</p>
+   */
+  HeadHighAvailabilityEnabled?: boolean
+  /**
+   * <p>应用ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  AppId?: number
+  /**
+   * <p>主账号UIN</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Uin?: string
+  /**
+   * <p>创建时间（Unix 时间戳，毫秒）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间（Unix 时间戳，毫秒）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: number
+  /**
+   * <p>部署数量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DeploymentCount?: number
+  /**
+   * <p>是否存在至少一个运行中的部署</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  HasRunningDeployment?: boolean
+  /**
+   * <p>是否启用 API-Key 鉴权</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiKeyAuthEnabled?: boolean
+  /**
+   * <p>是否强制开启 API-Key 鉴权（生产环境为 true，不允许关闭）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiKeyAuthForceEnabled?: boolean
+  /**
+   * <p>是否跳过 TLS 证书验证（自签证书场景，前端 curl 命令需加 -k 参数）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SkipTlsVerify?: boolean
+  /**
+   * <p>API Key 绑定结果（success 表示成功，其他为错误信息）</p>
+   */
+  ApiKeyBindMessage?: string
+  /**
+   * <p>子账号UIN（实际操作者）</p>
+   */
+  SubAccountUin?: string
+  /**
+   * <p>运行中部署的 CPU 资源汇总</p>
+   */
+  CpuResourceSummary?: CpuSummaryItem
+  /**
+   * <p>资源配置（JSON 字符串，取自第一个部署）</p>
+   */
+  ResourceConfig?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * QueryTaskCostDetail返回参数结构体
  */
 export interface QueryTaskCostDetailResponse {
@@ -20609,6 +22094,21 @@ export interface Column {
 }
 
 /**
+ * 用户信息集合
+ */
+export interface Users {
+  /**
+   * 用户信息集合
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UserSet?: Array<UserMessage>
+  /**
+   * 用户总数
+   */
+  TotalCount?: number
+}
+
+/**
  * DescribeUDFPolicy请求参数结构体
  */
 export interface DescribeUDFPolicyRequest {
@@ -20737,6 +22237,50 @@ export interface DescribeUserVpcConnectionResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * GetModelFiles请求参数结构体
+ */
+export interface GetModelFilesRequest {
+  /**
+   * <p>模型UID</p>
+   */
+  ModelUid: string
+  /**
+   * <p>模型版本</p>
+   */
+  ModelVersion?: string
+}
+
+/**
+ * 文件/目录节点
+ */
+export interface FileNode {
+  /**
+   * <p>文件/目录名称</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Name?: string
+  /**
+   * <p>节点类型：file 或 directory</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Type?: string
+  /**
+   * <p>文件大小（字节），目录为 null</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: number
+  /**
+   * <p>子节点列表（仅目录有效）</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Children?: Array<FileNode>
+  /**
+   * <p>文件最后修改时间（毫秒时间戳）</p><p>单位：ms</p>
+   */
+  LastModifyTime?: number
 }
 
 /**
@@ -20888,6 +22432,20 @@ export interface CancelSparkSessionBatchSQLResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ParallelKeyMapping 用于 inference engine 并行配置参数 key 映射
+ */
+export interface ParallelKeyMapping {
+  /**
+   * <p>并行类型</p>
+   */
+  Type?: string
+  /**
+   * <p>该并行类型对应的参数 key 列表</p>
+   */
+  Keys?: Array<string>
 }
 
 /**
@@ -21255,7 +22813,7 @@ export interface ResourceSpec {
    */
   InstanceType?: string
   /**
-   * <p>四层计费项</p>
+   * <p>四层计费项</p><p>枚举值：</p><ul><li>sv_dlc_standard_cu_standard_cu： 标准型cpu，最小单位32</li><li>sv_dlc_high_memory_cu_high_memory_cu： 高内存型cpu，最小单位32</li><li>sv_dlc_gn7_gn75xlarge80： T4，最小单位1</li><li>sv_dlc_gn10xp_gn10xp2xlarge40： V100，最小单位1</li></ul><p>若您想要了解更多的计费规格和产品细节，欢迎联系我们。</p>
    */
   BillingItem?: string
   /**
@@ -21267,7 +22825,7 @@ export interface ResourceSpec {
    */
   Spec?: string
   /**
-   * <p>GPU类型，仅GU有值</p>
+   * <p>GPU类型</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   GpuType?: string
@@ -21562,6 +23120,48 @@ export interface DataEngineScaleInfo {
    * 引擎规格详情
    */
   ScaleDetail?: Array<DataEngineScaleInfoDetail>
+}
+
+/**
+ * 推理引擎具体信息
+ */
+export interface InferenceEngineInfo {
+  /**
+   * <p>引擎标识符</p>
+   */
+  EngineId?: string
+  /**
+   * <p>引擎名称</p>
+   */
+  Name?: string
+  /**
+   * <p>引擎版本</p>
+   */
+  Version?: string
+  /**
+   * <p>引擎描述</p>
+   */
+  Description?: string
+  /**
+   * <p>标签列表</p>
+   */
+  Tags?: Array<string>
+  /**
+   * <p>支持的模型类型</p>
+   */
+  ModelTypes?: Array<string>
+  /**
+   * <p>是否独占，如果为 true，表示自定义模型看不到这个推理引擎，通常用于自研内置模型</p>
+   */
+  Exclusive?: boolean
+  /**
+   * <p>是否启用</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>引擎能力声明</p>
+   */
+  Capabilities?: EngineCapabilities
 }
 
 /**

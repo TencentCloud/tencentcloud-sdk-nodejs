@@ -258,6 +258,16 @@ it("cls.v20201016.DescribeEsRecharges", async function () {
     }
 })
 
+it("cls.v20201016.DeleteLog", async function () {
+    try {
+       const data = await client.DeleteLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cls.v20201016.CreateTopic", async function () {
     try {
        const data = await client.CreateTopic({})
@@ -1501,6 +1511,16 @@ it("cls.v20201016.DescribeConfigMachineGroups", async function () {
 it("cls.v20201016.CreateS3Recharge", async function () {
     try {
        const data = await client.CreateS3Recharge({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cls.v20201016.ModifyLog", async function () {
+    try {
+       const data = await client.ModifyLog({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
