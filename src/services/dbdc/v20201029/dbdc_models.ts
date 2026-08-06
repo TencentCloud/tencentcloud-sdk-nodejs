@@ -111,6 +111,52 @@ export interface DescribeDBCustomClusterResourcesRequest {
 }
 
 /**
+ * DescribeInstances请求参数结构体
+ */
+export interface DescribeInstancesRequest {
+  /**
+   * 集群类型: 0 一主一备, 1 一主两备...N-1 一主N备
+   */
+  InstanceTypes?: Array<number | bigint>
+  /**
+   * 产品ID:  0 MYSQL，1 TDSQL
+   */
+  ProductIds?: Array<number | bigint>
+  /**
+   * 集群uuid: 如 dbdc-q810131s
+   */
+  InstanceIds?: Array<string>
+  /**
+   * 是否按金融围笼标志搜索
+   */
+  FenceFlag?: boolean
+  /**
+   * 按实例名字模糊匹配
+   */
+  InstanceName?: string
+  /**
+   * 每页数目, 整型
+   */
+  PageSize?: number
+  /**
+   * 页码, 整型
+   */
+  PageNumber?: number
+  /**
+   * 排序字段，枚举：createtime,groupname
+   */
+  OrderBy?: string
+  /**
+   * 排序方式: asc升序, desc降序
+   */
+  OrderByType?: string
+  /**
+   * 集群状态: -2 已删除, -1 已隔离, 0 创建中, 1 运行中, 2 扩容中, 3 删除中
+   */
+  InstanceStatus?: number
+}
+
+/**
  * ModifyInstanceName请求参数结构体
  */
 export interface ModifyInstanceNameRequest {
@@ -1340,6 +1386,20 @@ export interface DataDisk {
 }
 
 /**
+ * ModifyDBCustomClusterAttributes请求参数结构体
+ */
+export interface ModifyDBCustomClusterAttributesRequest {
+  /**
+   * <p>集群ID</p><p>参数格式：dbcc-hj7gab15</p>
+   */
+  ClusterId: string
+  /**
+   * <p>是否启用集群删除保护</p><p>枚举值：</p><ul><li>true： 启用</li><li>false： 不启用</li></ul>
+   */
+  DeletionProtection?: boolean
+}
+
+/**
  * DescribeDBCustomNodeTypes请求参数结构体
  */
 export interface DescribeDBCustomNodeTypesRequest {
@@ -2002,49 +2062,13 @@ export interface DescribeDBCustomTaskStatusRequest {
 }
 
 /**
- * DescribeInstances请求参数结构体
+ * ModifyDBCustomClusterAttributes返回参数结构体
  */
-export interface DescribeInstancesRequest {
+export interface ModifyDBCustomClusterAttributesResponse {
   /**
-   * 集群类型: 0 一主一备, 1 一主两备...N-1 一主N备
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstanceTypes?: Array<number | bigint>
-  /**
-   * 产品ID:  0 MYSQL，1 TDSQL
-   */
-  ProductIds?: Array<number | bigint>
-  /**
-   * 集群uuid: 如 dbdc-q810131s
-   */
-  InstanceIds?: Array<string>
-  /**
-   * 是否按金融围笼标志搜索
-   */
-  FenceFlag?: boolean
-  /**
-   * 按实例名字模糊匹配
-   */
-  InstanceName?: string
-  /**
-   * 每页数目, 整型
-   */
-  PageSize?: number
-  /**
-   * 页码, 整型
-   */
-  PageNumber?: number
-  /**
-   * 排序字段，枚举：createtime,groupname
-   */
-  OrderBy?: string
-  /**
-   * 排序方式: asc升序, desc降序
-   */
-  OrderByType?: string
-  /**
-   * 集群状态: -2 已删除, -1 已隔离, 0 创建中, 1 运行中, 2 扩容中, 3 删除中
-   */
-  InstanceStatus?: number
+  RequestId?: string
 }
 
 /**

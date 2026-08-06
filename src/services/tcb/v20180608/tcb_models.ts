@@ -1144,6 +1144,32 @@ export interface EmailSmtpConfig {
 }
 
 /**
+ * DescribeCloudBaseRunBuildLog请求参数结构体
+ */
+export interface DescribeCloudBaseRunBuildLogRequest {
+  /**
+   * 环境ID
+   */
+  EnvId?: string
+  /**
+   * 服务名称
+   */
+  ServiceName?: string
+  /**
+   * 版本名称
+   */
+  ServiceVersion?: string
+  /**
+   * 构建ID
+   */
+  BuildId?: number
+  /**
+   * 偏移记录
+   */
+  Start?: number
+}
+
+/**
  * DescribeHTTPServiceRoute请求参数结构体
  */
 export interface DescribeHTTPServiceRouteRequest {
@@ -1806,17 +1832,29 @@ export interface CreateEnvResourceRequest {
 }
 
 /**
- * DescribeVmInstances请求参数结构体
+ * BuildLog
  */
-export interface DescribeVmInstancesRequest {
+export interface CloudBaseRunBuildLog {
   /**
-   * 环境ID
+   * 总数
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnvId: string
+  Total: number
   /**
-   * 服务器类型： LightHouse = 轻量云服务器 CVM = 云服务器
+   * 触达ID
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Type: string
+  Delivered: number
+  /**
+   * 文档
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Text: string
+  /**
+   * 是否更多
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  More: boolean
 }
 
 /**
@@ -3153,19 +3191,17 @@ export interface HpaPolicy {
 }
 
 /**
- * 邮件模板配置
+ * DescribeVmInstances请求参数结构体
  */
-export interface EmailTemplateConfig {
+export interface DescribeVmInstancesRequest {
   /**
-   * <p>注册登录模板</p><p>入参限制：模板中必须包含{{.VerificationCode}}变量，用于邮件中验证码的展示，可选变量有{{.Usage}}、{{.ExpireMinutes}}、{{.Email}}。邮件模板中禁止包含 script、javascript、onclick、onload、iframe、link 标签及 CSS expression、CSS url() 等</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 环境ID
    */
-  RegisterSignIn?: LocalizedTemplate
+  EnvId: string
   /**
-   * <p>默认模板</p><p>入参限制：模板中必须包含{{.VerificationCode}}变量，用于邮件中验证码的展示，可选变量有{{.Usage}}、{{.ExpireMinutes}}、{{.Email}}。邮件模板中禁止包含 script、javascript、onclick、onload、iframe、link 标签及 CSS expression、CSS url() 等</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * 服务器类型： LightHouse = 轻量云服务器 CVM = 云服务器
    */
-  DefaultTpl?: LocalizedTemplate
+  Type: string
 }
 
 /**
@@ -5540,6 +5576,22 @@ export interface ModifyHTTPServiceRouteResponse {
 }
 
 /**
+ * 邮件模板配置
+ */
+export interface EmailTemplateConfig {
+  /**
+   * <p>注册登录模板</p><p>入参限制：模板中必须包含{{.VerificationCode}}变量，用于邮件中验证码的展示，可选变量有{{.Usage}}、{{.ExpireMinutes}}、{{.Email}}。邮件模板中禁止包含 script、javascript、onclick、onload、iframe、link 标签及 CSS expression、CSS url() 等</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RegisterSignIn?: LocalizedTemplate
+  /**
+   * <p>默认模板</p><p>入参限制：模板中必须包含{{.VerificationCode}}变量，用于邮件中验证码的展示，可选变量有{{.Usage}}、{{.ExpireMinutes}}、{{.Email}}。邮件模板中禁止包含 script、javascript、onclick、onload、iframe、link 标签及 CSS expression、CSS url() 等</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  DefaultTpl?: LocalizedTemplate
+}
+
+/**
  * GetProviders返回参数结构体
  */
 export interface GetProvidersResponse {
@@ -6701,6 +6753,20 @@ export interface DescribeVmSpecResponse {
 }
 
 /**
+ * ModifyStorageSource请求参数结构体
+ */
+export interface ModifyStorageSourceRequest {
+  /**
+   * 环境ID
+   */
+  EnvId: string
+  /**
+   * 存储源
+   */
+  StorageConfig: ExternalStorage
+}
+
+/**
  * DescribeAIModels请求参数结构体
  */
 export interface DescribeAIModelsRequest {
@@ -6941,17 +7007,18 @@ export interface MetricUsage {
 }
 
 /**
- * ModifyStorageSource请求参数结构体
+ * DescribeCloudBaseRunBuildLog返回参数结构体
  */
-export interface ModifyStorageSourceRequest {
+export interface DescribeCloudBaseRunBuildLogResponse {
   /**
-   * 环境ID
+   * 日志
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  EnvId: string
+  Log?: CloudBaseRunBuildLog
   /**
-   * 存储源
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  StorageConfig: ExternalStorage
+  RequestId?: string
 }
 
 /**

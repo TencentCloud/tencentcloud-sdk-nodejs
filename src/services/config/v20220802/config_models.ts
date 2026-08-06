@@ -771,6 +771,20 @@ export interface ListDiscoveredResourcesResponse {
 }
 
 /**
+ * ListConfigRuleResourceEvaluationResults请求参数结构体
+ */
+export interface ListConfigRuleResourceEvaluationResultsRequest {
+  /**
+   * <p>返回数量，最大值1000，不填写返回全部</p>
+   */
+  Limit?: number
+  /**
+   * <p>偏移量，默认为0</p>
+   */
+  Offset?: number
+}
+
+/**
  * UpdateAggregateCompliancePackStatus返回参数结构体
  */
 export interface UpdateAggregateCompliancePackStatusResponse {
@@ -996,6 +1010,24 @@ UN_ACTIVE ：停用
    * 账号组ID
    */
   AccountGroupId: string
+}
+
+/**
+ * ListAggregateConfigRuleResourceEvaluationResults返回参数结构体
+ */
+export interface ListAggregateConfigRuleResourceEvaluationResultsResponse {
+  /**
+   * <p>配置规则资源评估结果列表</p>
+   */
+  Items?: Array<ConfigRuleResourceEvaluationResult>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2420,6 +2452,24 @@ export interface CompliancePackRuleForManage {
 }
 
 /**
+ * ListConfigRuleResourceEvaluationResults返回参数结构体
+ */
+export interface ListConfigRuleResourceEvaluationResultsResponse {
+  /**
+   * <p>配置规则资源评估结果列表</p>
+   */
+  Items?: Array<ConfigRuleResourceEvaluationResult>
+  /**
+   * <p>总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteAggregateCompliancePack请求参数结构体
  */
 export interface DeleteAggregateCompliancePackRequest {
@@ -3237,6 +3287,60 @@ export interface CloseConfigRuleResponse {
 }
 
 /**
+ * 配置规则资源评估结果
+ */
+export interface ConfigRuleResourceEvaluationResult {
+  /**
+   * 规则ID
+   */
+  RuleId?: string
+  /**
+   * 规则名称
+   */
+  RuleName?: string
+  /**
+   * 规则身份标识
+   */
+  RuleIdentifier?: string
+  /**
+   * 规则描述
+   */
+  RuleDescription?: string
+  /**
+   * 规则归属账号
+   */
+  RuleOwnerId?: number
+  /**
+   * 规则风险等级
+   */
+  RuleRiskLevel?: number
+  /**
+   * 资源ID
+   */
+  ResourceId?: string
+  /**
+   * 资源类型
+   */
+  ResourceType?: string
+  /**
+   * 资源名称
+   */
+  ResourceName?: string
+  /**
+   * 资源地域
+   */
+  ResourceRegion?: string
+  /**
+   * 资源标签
+   */
+  ResourceTags?: Array<Tag>
+  /**
+   * 合规详情
+   */
+  Annotation?: Annotation
+}
+
+/**
  * DescribeSystemRule返回参数结构体
  */
 export interface DescribeSystemRuleResponse {
@@ -3505,6 +3609,24 @@ export interface ListRemediationsResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * ListAggregateConfigRuleResourceEvaluationResults请求参数结构体
+ */
+export interface ListAggregateConfigRuleResourceEvaluationResultsRequest {
+  /**
+   * <p>账号组Id</p>
+   */
+  AccountGroupId?: string
+  /**
+   * <p>返回数量，最大值1000，不填写返回全部</p>
+   */
+  Limit?: number
+  /**
+   * <p>偏移量，默认为0</p>
+   */
+  Offset?: number
 }
 
 /**

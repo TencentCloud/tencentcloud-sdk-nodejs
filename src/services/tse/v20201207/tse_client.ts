@@ -54,6 +54,7 @@ import {
   CreateCloudNativeAPIGatewayLLMModelAPIRequest,
   GovernanceServiceDestination,
   DescribeCloudNativeAPIGatewayConsumerListRequest,
+  KongServiceWithRoutes,
   CreateCloudNativeAPIGatewayConsumerRequest,
   CreateCloudNativeAPIGatewayCanaryRuleResponse,
   CloudNativeAPIGatewayLLMModelAPI,
@@ -109,6 +110,8 @@ import {
   CreateConfigFileGroupResponse,
   CreateGovernanceAliasRequest,
   ModifyCloudNativeAPIGatewayServiceRequest,
+  DescribeCNGWServicesWithRoutesRequest,
+  KongServiceRoute,
   DescribeAutoScalerResourceStrategyBindingGroupsRequest,
   DescribeWafProtectionRequest,
   DescribeAutoScalerResourceStrategiesRequest,
@@ -302,6 +305,7 @@ import {
   DescribeCloudNativeAPIGatewayConsumerGroupRequest,
   CreateGovernanceInstancesResponse,
   DeleteCloudNativeAPIGatewayLLMModelAPIRequest,
+  DescribeCNGWServicesWithRoutesResponse,
   DescribeCloudNativeAPIGatewayLLMModelAPIsRequest,
   CreateGatewayServiceResult,
   DescribeInstanceInfoByIpResult,
@@ -1893,13 +1897,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询密钥列表。
+   * 查询云原生网关路由列表
    */
-  async DescribeCloudNativeAPIGatewaySecretKeyList(
-    req: DescribeCloudNativeAPIGatewaySecretKeyListRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewaySecretKeyListResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewaySecretKeyListResponse> {
-    return this.request("DescribeCloudNativeAPIGatewaySecretKeyList", req, cb)
+  async DescribeCloudNativeAPIGatewayRoutes(
+    req: DescribeCloudNativeAPIGatewayRoutesRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayRoutesResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewayRoutesResponse> {
+    return this.request("DescribeCloudNativeAPIGatewayRoutes", req, cb)
   }
 
   /**
@@ -1950,6 +1954,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCloudNativeAPIGatewayConsumerResponse) => void
   ): Promise<ModifyCloudNativeAPIGatewayConsumerResponse> {
     return this.request("ModifyCloudNativeAPIGatewayConsumer", req, cb)
+  }
+
+  /**
+   * 查询云原生网关服务和路由列表
+   */
+  async DescribeCNGWServicesWithRoutes(
+    req: DescribeCNGWServicesWithRoutesRequest,
+    cb?: (error: string, rep: DescribeCNGWServicesWithRoutesResponse) => void
+  ): Promise<DescribeCNGWServicesWithRoutesResponse> {
+    return this.request("DescribeCNGWServicesWithRoutes", req, cb)
   }
 
   /**
@@ -2043,13 +2057,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询云原生网关路由列表
+   * 查询密钥列表。
    */
-  async DescribeCloudNativeAPIGatewayRoutes(
-    req: DescribeCloudNativeAPIGatewayRoutesRequest,
-    cb?: (error: string, rep: DescribeCloudNativeAPIGatewayRoutesResponse) => void
-  ): Promise<DescribeCloudNativeAPIGatewayRoutesResponse> {
-    return this.request("DescribeCloudNativeAPIGatewayRoutes", req, cb)
+  async DescribeCloudNativeAPIGatewaySecretKeyList(
+    req: DescribeCloudNativeAPIGatewaySecretKeyListRequest,
+    cb?: (error: string, rep: DescribeCloudNativeAPIGatewaySecretKeyListResponse) => void
+  ): Promise<DescribeCloudNativeAPIGatewaySecretKeyListResponse> {
+    return this.request("DescribeCloudNativeAPIGatewaySecretKeyList", req, cb)
   }
 
   /**

@@ -118,6 +118,16 @@ it("config.v20220802.OpenConfigRecorder", async function () {
     }
 })
 
+it("config.v20220802.ListConfigRuleResourceEvaluationResults", async function () {
+    try {
+       const data = await client.ListConfigRuleResourceEvaluationResults({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("config.v20220802.StartConfigRuleEvaluation", async function () {
     try {
        const data = await client.StartConfigRuleEvaluation({})
@@ -248,9 +258,9 @@ it("config.v20220802.ListRemediations", async function () {
     }
 })
 
-it("config.v20220802.UpdateConfigDeliver", async function () {
+it("config.v20220802.ListAggregateConfigRuleResourceEvaluationResults", async function () {
     try {
-       const data = await client.UpdateConfigDeliver({})
+       const data = await client.ListAggregateConfigRuleResourceEvaluationResults({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -391,6 +401,16 @@ it("config.v20220802.DescribeConfigRule", async function () {
 it("config.v20220802.ListAggregateConfigRuleEvaluationResults", async function () {
     try {
        const data = await client.ListAggregateConfigRuleEvaluationResults({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("config.v20220802.UpdateConfigDeliver", async function () {
+    try {
+       const data = await client.UpdateConfigDeliver({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

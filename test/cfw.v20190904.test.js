@@ -208,6 +208,16 @@ it("cfw.v20190904.ModifyClusterVpcFwSwitch", async function () {
     }
 })
 
+it("cfw.v20190904.CreateWhiteRule", async function () {
+    try {
+       const data = await client.CreateWhiteRule({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cfw.v20190904.DescribeNDRAssetIdentificationList", async function () {
     try {
        const data = await client.DescribeNDRAssetIdentificationList({})
@@ -631,6 +641,16 @@ it("cfw.v20190904.RemoveOfflineExportTask", async function () {
 it("cfw.v20190904.DescribeNatFwSwitch", async function () {
     try {
        const data = await client.DescribeNatFwSwitch({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.DeleteWhiteRule", async function () {
+    try {
+       const data = await client.DeleteWhiteRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1161,6 +1181,16 @@ it("cfw.v20190904.DescribeLogStorageStatistic", async function () {
 it("cfw.v20190904.ExpandCfwVertical", async function () {
     try {
        const data = await client.ExpandCfwVertical({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cfw.v20190904.ModifyWhiteRule", async function () {
+    try {
+       const data = await client.ModifyWhiteRule({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

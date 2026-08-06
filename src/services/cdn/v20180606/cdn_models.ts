@@ -3930,365 +3930,337 @@ last：表示回源层节点
  */
 export interface DetailDomain {
   /**
-   * 域名 ID
+   * <p>域名 ID</p>
    */
   ResourceId?: string
   /**
-   * 腾讯云账号ID
+   * <p>腾讯云账号ID</p>
    */
   AppId?: number
   /**
-   * 加速域名
+   * <p>加速域名</p>
    */
   Domain?: string
   /**
-   * 域名对应的 CNAME 地址
+   * <p>域名对应的 CNAME 地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Cname?: string
   /**
-   * 加速服务状态
-rejected：域名审核未通过，域名备案过期/被注销导致
-processing：部署中
-closing：关闭中
-online：已启动
-offline：已关闭
+   * <p>加速服务状态<br>rejected：域名审核未通过，域名备案过期/被注销导致<br>processing：部署中<br>closing：关闭中<br>online：已启动<br>offline：已关闭</p>
    */
   Status?: string
   /**
-   * 项目 ID，可前往腾讯云项目管理页面查看
+   * <p>项目 ID，可前往腾讯云项目管理页面查看</p>
    */
   ProjectId?: number
   /**
-   * 加速域名业务类型
-web：网页小文件
-download：下载大文件
-media：音视频点播
-hybrid:  动静加速
-dynamic:  动态加速
+   * <p>加速域名业务类型<br>web：网页小文件<br>download：下载大文件<br>media：音视频点播<br>hybrid:  动静加速<br>dynamic:  动态加速</p>
    */
   ServiceType?: string
   /**
-   * 域名创建时间
+   * <p>域名创建时间</p>
    */
   CreateTime?: string
   /**
-   * 域名更新时间
+   * <p>域名更新时间</p>
    */
   UpdateTime?: string
   /**
-   * 源站配置
+   * <p>源站配置</p>
    */
   Origin?: Origin
   /**
-   * IP 黑白名单配置
+   * <p>IP 黑白名单配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IpFilter?: IpFilter
   /**
-   * IP 访问限频配置
+   * <p>IP 访问限频配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   IpFreqLimit?: IpFreqLimit
   /**
-   * 状态码缓存配置
+   * <p>状态码缓存配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   StatusCodeCache?: StatusCodeCache
   /**
-   * 智能压缩配置
+   * <p>智能压缩配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Compression?: Compression
   /**
-   * 带宽封顶配置
+   * <p>带宽封顶配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   BandwidthAlert?: BandwidthAlert
   /**
-   * Range 回源配置
+   * <p>Range 回源配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RangeOriginPull?: RangeOriginPull
   /**
-   * 301/302 回源自动跟随配置
+   * <p>301/302 回源自动跟随配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   FollowRedirect?: FollowRedirect
   /**
-   * 自定义错误页面配置
+   * <p>自定义错误页面配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorPage?: ErrorPage
   /**
-   * 自定义请求头部配置
+   * <p>自定义请求头部配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RequestHeader?: RequestHeader
   /**
-   * 自定义响应头部配置
+   * <p>自定义响应头部配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResponseHeader?: ResponseHeader
   /**
-   * 单链接下行限速配置
+   * <p>单链接下行限速配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   DownstreamCapping?: DownstreamCapping
   /**
-   * 带参/不带参缓存配置
+   * <p>带参/不带参缓存配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   CacheKey?: CacheKey
   /**
-   * 源站头部缓存配置
+   * <p>源站头部缓存配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResponseHeaderCache?: ResponseHeaderCache
   /**
-   * 视频拖拽配置
+   * <p>视频拖拽配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VideoSeek?: VideoSeek
   /**
-   * 节点缓存过期规则配置
+   * <p>节点缓存过期规则配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Cache?: Cache
   /**
-   * 跨国链路优化配置（功能灰度中，敬请期待）
+   * <p>跨国链路优化配置（功能灰度中，敬请期待）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OriginPullOptimization?: OriginPullOptimization
   /**
-   * Https 加速相关配置
+   * <p>Https 加速相关配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Https?: Https
   /**
-   * 时间戳防盗链配置
+   * <p>时间戳防盗链配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Authentication?: Authentication
   /**
-   * SEO 优化配置
+   * <p>SEO 优化配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Seo?: Seo
   /**
-   * 域名封禁状态
-normal：正常状态
-overdue：账号欠费导致域名关闭，充值完成后可自行启动加速服务
-malicious：域名出现恶意行为，强制关闭加速服务
-ddos：域名被大规模 DDoS 攻击，关闭加速服务
-ddos_risk: 域名存在ddos攻击风险
-idle：域名超过 90 天内无任何操作、数据产生，判定为不活跃域名自动关闭加速服务，可自行启动加速服务
-unlicensed：域名未备案/备案注销，自动关闭加速服务，备案完成后可自行启动加速服务
-capping：触发配置的带宽阈值上限
-readonly：域名存在特殊配置，被锁定
+   * <p>域名封禁状态<br>normal：正常状态<br>overdue：账号欠费导致域名关闭，充值完成后可自行启动加速服务<br>malicious：域名出现恶意行为，强制关闭加速服务<br>ddos：域名被大规模 DDoS 攻击，关闭加速服务<br>ddos_risk: 域名存在ddos攻击风险<br>idle：域名超过 90 天内无任何操作、数据产生，判定为不活跃域名自动关闭加速服务，可自行启动加速服务<br>unlicensed：域名未备案/备案注销，自动关闭加速服务，备案完成后可自行启动加速服务<br>capping：触发配置的带宽阈值上限<br>readonly：域名存在特殊配置，被锁定</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Disable?: string
   /**
-   * 访问协议强制跳转配置
+   * <p>访问协议强制跳转配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ForceRedirect?: ForceRedirect
   /**
-   * Referer 防盗链配置
+   * <p>Referer 防盗链配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Referer?: Referer
   /**
-   * 浏览器缓存过期规则配置（功能灰度中，敬请期待）
+   * <p>浏览器缓存过期规则配置（功能灰度中，敬请期待）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   MaxAge?: MaxAge
   /**
-   * Ipv6 回源配置（功能灰度中，敬请期待）
+   * <p>Ipv6 回源配置（功能灰度中，敬请期待）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Ipv6?: Ipv6
   /**
-   * 是否兼容旧版本配置（内部兼容性字段）
+   * <p>是否兼容旧版本配置（内部兼容性字段）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Compatibility?: Compatibility
   /**
-   * 区域特殊配置
+   * <p>区域特殊配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SpecificConfig?: SpecificConfig
   /**
-   * 加速区域
-mainland：中国境内加速
-overseas：中国境外加速
-global：全球加速
+   * <p>加速区域<br>mainland：中国境内加速<br>overseas：中国境外加速<br>global：全球加速</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Area?: string
   /**
-   * 域名锁定状态
-normal：未锁定
-mainland：中国境内锁定
-overseas：中国境外锁定
-global：全球锁定
+   * <p>域名锁定状态<br>normal：未锁定<br>mainland：中国境内锁定<br>overseas：中国境外锁定<br>global：全球锁定</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Readonly?: string
   /**
-   * 回源超时配置
+   * <p>回源超时配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OriginPullTimeout?: OriginPullTimeout
   /**
-   * 回源S3鉴权配置
+   * <p>回源S3鉴权配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AwsPrivateAccess?: AwsPrivateAccess
   /**
-   * Scdn配置
+   * <p>Scdn配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SecurityConfig?: SecurityConfig
   /**
-   * ImageOptimization配置
+   * <p>ImageOptimization配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ImageOptimization?: ImageOptimization
   /**
-   * UA黑白名单配置
+   * <p>UA黑白名单配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UserAgentFilter?: UserAgentFilter
   /**
-   * 访问控制
+   * <p>访问控制</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessControl?: AccessControl
   /**
-   * 是否支持高级配置项
-on：支持
-off：不支持
+   * <p>是否支持高级配置项<br>on：支持<br>off：不支持</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Advance?: string
   /**
-   * URL重定向配置
+   * <p>URL重定向配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   UrlRedirect?: UrlRedirect
   /**
-   * 访问端口配置
+   * <p>访问端口配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AccessPort?: Array<number | bigint>
   /**
-   * 标签配置
+   * <p>标签配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Tag?: Array<Tag>
   /**
-   * 时间戳防盗链高级配置，白名单功能
+   * <p>时间戳防盗链高级配置，白名单功能</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdvancedAuthentication?: AdvancedAuthentication
   /**
-   * 回源鉴权高级配置，白名单功能
+   * <p>回源鉴权高级配置，白名单功能</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OriginAuthentication?: OriginAuthentication
   /**
-   * Ipv6访问配置
+   * <p>Ipv6访问配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Ipv6Access?: Ipv6Access
   /**
-   * 高级配置集合
+   * <p>高级配置集合</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   AdvanceSet?: Array<AdvanceConfig>
   /**
-   * 离线缓存（功能灰度中，尚未全量，请等待后续全量发布）
+   * <p>离线缓存（功能灰度中，尚未全量，请等待后续全量发布）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OfflineCache?: OfflineCache
   /**
-   * 合并回源（白名单功能）
+   * <p>合并回源（白名单功能）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OriginCombine?: OriginCombine
   /**
-   * POST上传配置项
+   * <p>POST上传配置项</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   PostMaxSize?: PostSize
   /**
-   * Quic配置
+   * <p>Quic配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Quic?: Quic
   /**
-   * 回源OSS私有鉴权
+   * <p>回源OSS私有鉴权</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OssPrivateAccess?: OssPrivateAccess
   /**
-   * WebSocket配置
+   * <p>WebSocket配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   WebSocket?: WebSocket
   /**
-   * 远程鉴权配置
+   * <p>远程鉴权配置</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RemoteAuthentication?: RemoteAuthentication
   /**
-   * 共享CNAME配置（白名单功能）
+   * <p>共享CNAME配置（白名单功能）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ShareCname?: ShareCname
   /**
-   * 规则引擎
+   * <p>规则引擎</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   RuleEngine?: RuleEngine
   /**
-   * 主域名
+   * <p>主域名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParentHost?: string
   /**
-   * 华为云对象存储回源鉴权
+   * <p>华为云对象存储回源鉴权</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HwPrivateAccess?: HwPrivateAccess
   /**
-   * 七牛云对象存储回源鉴权
+   * <p>七牛云对象存储回源鉴权</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   QnPrivateAccess?: QnPrivateAccess
   /**
-   * HTTPS服务，缺省时默认开启
+   * <p>HTTPS服务，缺省时默认开启</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   HttpsBilling?: HttpsBilling
   /**
-   * 其他厂商对象存储回源鉴权
+   * <p>其他厂商对象存储回源鉴权</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   OthersPrivateAccess?: OthersPrivateAccess
   /**
-   * 参数黑名单
+   * <p>参数黑名单</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ParamFilter?: ParamFilter
   /**
-   * 流量一键防盗刷配置
+   * <p>流量一键防盗刷配置</p>
    */
   AutoGuard?: AutoGuard
   /**
-   * 区域访问控制配置
+   * <p>区域访问控制配置</p>
    */
   GeoBlocker?: GeoBlocker
 }

@@ -758,6 +758,16 @@ it("tcb.v20180608.DeleteCloudApp", async function () {
     }
 })
 
+it("tcb.v20180608.DescribeCloudBaseRunBuildLog", async function () {
+    try {
+       const data = await client.DescribeCloudBaseRunBuildLog({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("tcb.v20180608.AssumeRoleForAllocatedEnv", async function () {
     try {
        const data = await client.AssumeRoleForAllocatedEnv({})

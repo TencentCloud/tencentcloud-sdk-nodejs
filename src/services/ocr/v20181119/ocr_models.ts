@@ -533,77 +533,57 @@ export interface CoordList {
  */
 export interface ExtractDocMultiRequest {
   /**
-   * 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * <p>图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。</p>
    */
   ImageUrl?: string
   /**
-   * 图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * <p>图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。</p>
    */
   ImageBase64?: string
   /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，默认值为前3页。
+   * <p>需要识别的PDF页面的对应页码，仅支持PDF单页识别。</p>
    */
   PdfPageNumber?: number
   /**
-   * 自定义结构化功能需返回的字段名称，例：若客户想新增返回姓名、性别两个字段的识别结果，则输入ItemNames=["姓名","性别"]
+   * <p>自定义结构化功能需返回的字段名称，例：若客户想新增返回姓名、性别两个字段的识别结果，则输入ItemNames=[&quot;姓名&quot;,&quot;性别&quot;]</p>
    */
   ItemNames?: Array<string>
   /**
-   * true：仅输出自定义字段
-false：输出默认字段+自定义字段
-默认true
+   * <p>true：仅输出自定义字段<br>false：输出默认字段+自定义字段<br>默认true</p>
    */
   ItemNamesShowMode?: boolean
   /**
-   * 是否开启全文字段识别
+   * <p>是否开启全文字段识别</p>
    */
   ReturnFullText?: boolean
   /**
-   * 配置id支持：
-General -- 通用场景 
-InvoiceEng -- 国际invoice模板 
-WayBillEng --海运订单模板
-CustomsDeclaration -- 进出口报关单
-WeightNote -- 磅单
-MedicalMeter -- 血压仪表识别
-BillOfLading -- 海运提单
-EntrustmentBook -- 海运托书
-Statement -- 对账单识别模板
-BookingConfirmation -- 配舱通知书识别模板
-AirWayBill -- 航空运单识别模板
-Table -- 表格模板
-SteelLabel -- 实物标签识别模板
-CarInsurance -- 车辆保险单识别模板
-MultiRealEstateCertificate -- 房产材料识别模板
-MultiRealEstateMaterial -- 房产证明识别模板
-HongKongUtilityBill -- 中国香港水电煤单识别模板
-OverseasCheques -- 海外支票
-RegistrationCertificate -- 备案证
-​GridPhoto -- 电网系统照片
-​SignaturePage -- 签署页
-​SalesDeliveryNote -- 销售发货单
-
-
-
+   * <p>配置id支持：<br>General -- 通用场景<br>InvoiceEng -- 国际invoice模板<br>WayBillEng --海运订单模板<br>CustomsDeclaration -- 进出口报关单<br>WeightNote -- 磅单<br>MedicalMeter -- 血压仪表识别<br>BillOfLading -- 海运提单<br>EntrustmentBook -- 海运托书<br>Statement -- 对账单识别模板<br>BookingConfirmation -- 配舱通知书识别模板<br>AirWayBill -- 航空运单识别模板<br>Table -- 表格模板<br>SteelLabel -- 实物标签识别模板<br>CarInsurance -- 车辆保险单识别模板<br>MultiRealEstateCertificate -- 房产材料识别模板<br>MultiRealEstateMaterial -- 房产证明识别模板<br>HongKongUtilityBill -- 中国香港水电煤单识别模板<br>OverseasCheques -- 海外支票<br>RegistrationCertificate -- 备案证<br>u200bGridPhoto -- 电网系统照片<br>u200bSignaturePage -- 签署页<br>u200bSalesDeliveryNote -- 销售发货单</p>
    */
   ConfigId?: string
   /**
-   * 是否开启全文字段坐标值的识别
+   * <p>是否开启全文字段坐标值的识别</p>
    */
   EnableCoord?: boolean
   /**
-   * 是否开启父子key识别，默认是
+   * <p>是否开启父子key识别，默认是</p>
    */
   OutputParentKey?: boolean
   /**
-   * 模板的单个属性配置
+   * <p>模板的单个属性配置</p>
    */
   ConfigAdvanced?: ConfigAdvanced
   /**
-   * cn时，添加的key为中文  
-en时，添加的key为英语
+   * <p>cn时，添加的key为中文<br>en时，添加的key为英语</p>
    */
   OutputLanguage?: string
+  /**
+   * <p>自定义抽取需要的字段名称、字段类型、字段提示词</p>
+   */
+  NewItemNames?: Array<ItemNames>
+  /**
+   * <p>文档抽取（多模态）识别服务所用的算法模型版本<br>-目前入参支持“1.0”和“2.0“两个输入。</p><ul><li>2026年7月20日开始，默认为“2.0”，之前使用过本接口的账号若未填写本参数默认为“1.0”。</li><li>2026年7月20日后开通服务的账号仅支持输入“2.0”。</li><li>不同算法模型版本对应的文档抽取识别算法不同，新版本的整体效果会优于旧版本，建议使用“2.0”版本。<br>示例值：2.0</li></ul>
+   */
+  MultiModelVersion?: string
 }
 
 /**
@@ -728,54 +708,26 @@ export interface EstateCertOCRResponse {
 }
 
 /**
- * ExtractDocMultiPro请求参数结构体
+ * GeneralHandwritingOCR返回参数结构体
  */
-export interface ExtractDocMultiProRequest {
+export interface GeneralHandwritingOCRResponse {
   /**
-   * 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 检测到的文本信息，具体内容请点击左侧链接。
    */
-  ImageUrl?: string
+  TextDetections?: Array<TextGeneralHandwriting>
   /**
-   * 图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
+   * @deprecated
    */
-  ImageBase64?: string
+  Angel?: number
   /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为前3页。
+   * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
    */
-  PdfPageNumber?: number
+  Angle?: number
   /**
-   * 自定义结构化功能需返回的字段名称，例：若客户想新增返回姓名、性别两个字段的识别结果，则输入ItemNames=["姓名","性别"]
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ItemNames?: Array<string>
-  /**
-   * true：仅输出自定义字段
-flase：输出默认字段+自定义字段
-默认true
-   */
-  ItemNamesShowMode?: boolean
-  /**
-   * 是否开启全文字段识别
-   */
-  ReturnFullText?: boolean
-  /**
-   * 配置id支持：
-DispatchWeightNote -- 磅单发货单识别模板
-ReceiptWeightNote -- 磅单收货单识别模板
-默认：DispatchWeightNote
-   */
-  ConfigId?: string
-  /**
-   * 是否开启全文字段坐标值的识别
-   */
-  EnableCoord?: boolean
-  /**
-   * 是否开启父子key识别，默认是
-   */
-  OutputParentKey?: boolean
-  /**
-   * 模板的单个属性配置
-   */
-  ConfigAdvanced?: ConfigAdvanced
+  RequestId?: string
 }
 
 /**
@@ -1314,72 +1266,36 @@ export interface CustomsPaymentReceipt {
 }
 
 /**
- * QuestionSplitOCR请求参数结构体
+ * 混贴票据中单张发票的内容
  */
-export interface QuestionSplitOCRRequest {
+export interface SingleInvoiceInfo {
   /**
-   * 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 识别出的字段名称
    */
-  ImageUrl?: string
+  Name?: string
   /**
-   * 图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 识别出的字段名称对应的值，也就是字段name对应的字符串结果。
    */
-  ImageBase64?: string
+  Value?: string
   /**
-   * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
+   * 字段属于第几行，用于相同字段的排版，如发票明细表格项目，普通字段使用默认值为-1，表示无列排版。
    */
-  IsPdf?: boolean
-  /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
-   */
-  PdfPageNumber?: number
-  /**
-   * 是否开启切边增强和弯曲矫正,默认为false不开启
-   */
-  EnableImageCrop?: boolean
-  /**
-   * 是否只返回检测框，默认false
-   */
-  EnableOnlyDetectBorder?: boolean
-  /**
-   * false: 使用当前默认模型(结构化信息更全面，但手写答案坐标精度一般)  
-true:  使用多模态推理模型，推理效果更强（题目框选、手写答案坐标定位能力更优，但不返回题目选项和题目类型信息）
-
-API默认false, demo默认使用的是true
-   */
-  UseNewModel?: boolean
+  Row?: number
 }
 
 /**
- * FlightInvoiceOCR请求参数结构体
+ * key信息组
  */
-export interface FlightInvoiceOCRRequest {
+export interface Key {
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * 自动识别的字段名称
    */
-  ImageBase64?: string
+  AutoName?: string
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * 定义的字段名称（传key的名称）
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ImageUrl?: string
-  /**
-   * 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。
-   */
-  IsPdf?: boolean
-  /**
-   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
-   */
-  PdfPageNumber?: number
-}
-
-/**
- * 数学公式识别结果
- */
-export interface TextFormula {
-  /**
-   * 识别出的文本行内容
-   */
-  DetectedText?: string
+  ConfigName?: string
 }
 
 /**
@@ -1862,28 +1778,6 @@ export interface DriverLicenseOCRRequest {
 }
 
 /**
- * VerifyBizLicenseEnterprise3返回参数结构体
- */
-export interface VerifyBizLicenseEnterprise3Response {
-  /**
-   * <p>0 成功，计费<br>1 系统异常，不计费<br>2 查询无结果，不计费</p>
-   */
-  StatusCode?: number
-  /**
-   * <p>验证结果<br>1：三要素完全匹配<br>0：三要素不完全匹配<br>仅StatusCode为0时返回</p>
-   */
-  VerifyResult?: number
-  /**
-   * <p>企业状态</p><p>枚举值：</p><ul><li>1： 开业（在营）/ 在营</li><li>2： 迁出 / 非在营</li><li>3： 注销</li><li>4： 吊销</li><li>5： 撤销</li><li>6： 停业</li><li>7： 撤销登记</li><li>0： 其他</li><li>/： 无法查询</li></ul><p>企业状态  当VerifyType参数为ENT_2META时，可返回：  0-7,  /   当VerifyType参数为ENT_3META时，可返回  1，2</p>
-   */
-  OperatingStatus?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * OtherInvoiceItem
  */
 export interface OtherInvoiceItem {
@@ -1963,21 +1857,25 @@ export interface RecognizeTableOCRResponse {
 }
 
 /**
- * 数学试题识别结果
+ * VerifyBizLicenseEnterprise3返回参数结构体
  */
-export interface TextEduPaper {
+export interface VerifyBizLicenseEnterprise3Response {
   /**
-   * 识别出的字段名称（关键字）
+   * <p>0 成功，计费<br>1 系统异常，不计费<br>2 查询无结果，不计费</p>
    */
-  Item?: string
+  StatusCode?: number
   /**
-   * 识别出的字段名称对应的值，也就是字段Item对应的字符串结果
+   * <p>验证结果<br>1：三要素完全匹配<br>0：三要素不完全匹配<br>仅StatusCode为0时返回</p>
    */
-  DetectedText?: string
+  VerifyResult?: number
   /**
-   * 文本行在旋转纠正之后的图像中的像素坐标，表示为（左上角x, 左上角y，宽width，高height）
+   * <p>企业状态</p><p>枚举值：</p><ul><li>1： 开业（在营）/ 在营</li><li>2： 迁出 / 非在营</li><li>3： 注销</li><li>4： 吊销</li><li>5： 撤销</li><li>6： 停业</li><li>7： 撤销登记</li><li>0： 其他</li><li>/： 无法查询</li></ul><p>企业状态  当VerifyType参数为ENT_2META时，可返回：  0-7,  /   当VerifyType参数为ENT_3META时，可返回  1，2</p>
    */
-  Itemcoord?: ItemCoord
+  OperatingStatus?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2681,24 +2579,6 @@ export interface ArithmeticOCRResponse {
 }
 
 /**
- * FormulaOCR返回参数结构体
- */
-export interface FormulaOCRResponse {
-  /**
-   * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负
-   */
-  Angle?: number
-  /**
-   * 检测到的文本信息，具体内容请点击左侧链接。
-   */
-  FormulaInfos?: Array<TextFormula>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * RecognizeGeneralCardWarn请求参数结构体
  */
 export interface RecognizeGeneralCardWarnRequest {
@@ -2864,32 +2744,6 @@ ItemNames=["姓名","性别"]
    * 是否开启全文字段识别，默认值为false，开启后可返回全文字段识别结果。
    */
   ReturnFullText?: boolean
-}
-
-/**
- * ExtractDocMultiPro返回参数结构体
- */
-export interface ExtractDocMultiProResponse {
-  /**
-   * 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负
-   */
-  Angle?: number
-  /**
-   * 配置结构化文本信息
-   */
-  StructuralList?: Array<GroupInfo>
-  /**
-   * 还原文本信息
-   */
-  WordList?: Array<WordItem>
-  /**
-   * 样本识别字段数
-   */
-  TokenNum?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -3273,20 +3127,6 @@ export interface BusInvoice {
    * 车次
    */
   TrainNumber?: string
-}
-
-/**
- * QrcodeOCR请求参数结构体
- */
-export interface QrcodeOCRRequest {
-  /**
-   * <p>图片的 Base64 值。要求图片经Base64编码后不超过 10M，支持PNG、JPG、JPEG、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。</p>
-   */
-  ImageBase64?: string
-  /**
-   * <p>图片的 Url 地址。要求图片经Base64编码后不超过 10M，支持PNG、JPG、JPEG、PDF格式。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。</p>
-   */
-  ImageUrl?: string
 }
 
 /**
@@ -3899,6 +3739,10 @@ export interface MultimodalDocParseRequest {
    * <p>需要识别的页码范围，单次调用最多支持300页。</p><p>参数格式：1-10</p>
    */
   PageRange?: string
+  /**
+   * <p>任务类型</p><p>枚举值：</p><ul><li>0： 文档解析</li><li>1： 图片OCR识别</li><li>2： 切片文字识别</li><li>3： 切片表格识别</li><li>4： 切片代码识别</li></ul><p>默认值：0</p>
+   */
+  TaskType?: number
 }
 
 /**
@@ -3906,27 +3750,27 @@ export interface MultimodalDocParseRequest {
  */
 export interface LicensePlateOCRResponse {
   /**
-   * 识别出的车牌号码。
+   * <p>识别出的车牌号码。</p>
    */
   Number?: string
   /**
-   * 置信度，0 - 100 之间。
+   * <p>置信度，0 - 100 之间。</p>
    */
   Confidence?: number
   /**
-   * 文本行在原图片中的像素坐标框。
+   * <p>文本行在原图片中的像素坐标框。</p>
    */
   Rect?: Rect
   /**
-   * 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿”、“黄”、“黄绿”、“临牌”、“喷漆”、“其它”。
+   * <p>识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿”、“黄”、“黄绿”、“临牌”、“喷漆”、“其它”。</p>
    */
   Color?: string
   /**
-   * 全部车牌信息。
+   * <p>全部车牌信息。</p>
    */
   LicensePlateInfos?: Array<LicensePlateInfo>
   /**
-   * 车牌类别， 如： 实体车牌、非实体车牌 示例值：实体车牌
+   * <p>车牌类别， 如： 标准实体车牌、非标准实体车牌、临牌，喷漆车牌  示例值：实体车牌</p>
    */
   LicensePlateCategory?: string
   /**
@@ -4632,19 +4476,19 @@ export interface OnlineTaxiItineraryInfo {
  */
 export interface ExtractDocMultiResponse {
   /**
-   * 图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负
+   * <p>图片旋转角度(角度制)，文本的水平方向为 0；顺时针为正，逆时针为负</p>
    */
   Angle?: number
   /**
-   * 配置结构化文本信息
+   * <p>配置结构化文本信息</p>
    */
   StructuralList?: Array<GroupInfo>
   /**
-   * 还原文本信息
+   * <p>还原文本信息</p>
    */
   WordList?: Array<WordItem>
   /**
-   * 样本识别字段数
+   * <p>样本识别字段数</p>
    */
   TokenNum?: number
   /**
@@ -4850,24 +4694,6 @@ export interface FinancialBillItem {
 }
 
 /**
- * 混贴票据中单张发票的内容
- */
-export interface SingleInvoiceInfo {
-  /**
-   * 识别出的字段名称
-   */
-  Name?: string
-  /**
-   * 识别出的字段名称对应的值，也就是字段name对应的字符串结果。
-   */
-  Value?: string
-  /**
-   * 字段属于第几行，用于相同字段的排版，如发票明细表格项目，普通字段使用默认值为-1，表示无列排版。
-   */
-  Row?: number
-}
-
-/**
  * 购物小票
  */
 export interface ShoppingReceipt {
@@ -5003,28 +4829,6 @@ export interface TextDetectRequest {
    * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
   ImageUrl?: string
-}
-
-/**
- * EduPaperOCR返回参数结构体
- */
-export interface EduPaperOCRResponse {
-  /**
-   * 检测到的文本信息，具体内容请点击左侧链接。
-   */
-  EduPaperInfos?: Array<TextEduPaper>
-  /**
-   * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。
-   */
-  Angle?: number
-  /**
-   * 结构化方式输出，具体内容请点击左侧链接。
-   */
-  QuestionBlockInfos?: Array<QuestionBlockObj>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -5986,11 +5790,11 @@ export interface SubmitMarkEssayAgentJobRequest {
  */
 export interface LicensePlateOCRRequest {
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * <p>图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。</p>
    */
   ImageBase64?: string
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * <p>图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。</p>
    */
   ImageUrl?: string
 }
@@ -6301,6 +6105,10 @@ export interface SubmitQuestionMarkAgentJobResponse {
    * <p>题目切题数量，作为计费题目数总量</p>
    */
   QuestionCount?: string
+  /**
+   * <p>客户图片url</p>
+   */
+  OriginalImageUrl?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -6838,20 +6646,6 @@ export interface RecognizeFormulaOCRRequest {
 }
 
 /**
- * FlightInvoiceOCR返回参数结构体
- */
-export interface FlightInvoiceOCRResponse {
-  /**
-   * 机票行程单识别结果，具体内容请点击左侧链接。
-   */
-  FlightInvoiceInfos?: Array<FlightInvoiceInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * 临时身份证信息返回
  */
 export interface TemporaryIDCardInfo {
@@ -7016,25 +6810,6 @@ export interface VatRollItem {
    * 金额
    */
   Total?: string
-}
-
-/**
- * 机票行程单识别结果
- */
-export interface FlightInvoiceInfo {
-  /**
-   * 识别出的字段名称(关键字)，支持以下字段：
-票价、合计金额、填开日期、有效身份证件号码、电子客票号码、验证码、旅客姓名、填开单位、其他税费、燃油附加费、民航发展基金、保险费、销售单位代号、始发地、目的地、航班号、时间、日期、座位等级、承运人、发票消费类型、国内国际标签、印刷序号、客票级别/类别、客票生效日期、有效期截止日期、免费行李。
-   */
-  Name: string
-  /**
-   * 识别出的字段名称对应的值，也就是字段 Name 对应的字符串结果。
-   */
-  Value: string
-  /**
-   * 多个行程的字段所在行号，下标从0开始，非行字段或未能识别行号的该值返回-1。
-   */
-  Row: number
 }
 
 /**
@@ -7811,20 +7586,6 @@ export interface SealOCRResponse {
 }
 
 /**
- * InsuranceBillOCR返回参数结构体
- */
-export interface InsuranceBillOCRResponse {
-  /**
-   * 保险单据识别结果，具体内容请点击左侧链接。
-   */
-  InsuranceBillInfos?: Array<InsuranceBillInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * VerifyBizLicenseEnterprise4返回参数结构体
  */
 export interface VerifyBizLicenseEnterprise4Response {
@@ -7977,36 +7738,40 @@ export interface PassInvoiceInfo {
 }
 
 /**
- * 试题识别结构化信息
+ * QuestionSplitOCR请求参数结构体
  */
-export interface QuestionObj {
+export interface QuestionSplitOCRRequest {
   /**
-   * 题号
+   * 图片/PDF的 Url 地址。要求图片经Base64编码后不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
    */
-  QuestionTextNo: string
+  ImageUrl?: string
   /**
-   * 题型：
-1: "选择题"
-2: "填空题"
-3: "解答题"
+   * 图片/PDF的 Base64 值。要求Base64不超过10M，分辨率建议600*800以上，支持PNG、JPG、JPEG、BMP、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
    */
-  QuestionTextType: number
+  ImageBase64?: string
   /**
-   * 题干
+   * 是否开启PDF识别，默认值为false，开启后可同时支持图片和PDF的识别。
    */
-  QuestionText: string
+  IsPdf?: boolean
   /**
-   * 选择题选项，包含1个或多个option
+   * 需要识别的PDF页面的对应页码，仅支持PDF单页识别，当上传文件为PDF且IsPdf参数值为true时有效，默认值为1。
    */
-  QuestionOptions: string
+  PdfPageNumber?: number
   /**
-   * 所有子题的question属性
+   * 是否开启切边增强和弯曲矫正,默认为false不开启
    */
-  QuestionSubquestion: string
+  EnableImageCrop?: boolean
   /**
-   * 示意图检测框在的图片中的像素坐标
+   * 是否只返回检测框，默认false
    */
-  QuestionImageCoords: Array<Rect>
+  EnableOnlyDetectBorder?: boolean
+  /**
+   * false: 使用当前默认模型(结构化信息更全面，但手写答案坐标精度一般)  
+true:  使用多模态推理模型，推理效果更强（题目框选、手写答案坐标定位能力更优，但不返回题目选项和题目类型信息）
+
+API默认false, demo默认使用的是true
+   */
+  UseNewModel?: boolean
 }
 
 /**
@@ -8052,48 +7817,53 @@ export interface RequestIdInfo {
 }
 
 /**
- * EduPaperOCR请求参数结构体
+ * PermitOCR返回参数结构体
  */
-export interface EduPaperOCRRequest {
+export interface PermitOCRResponse {
   /**
-   * 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 7M。图片下载时间不超过 3 秒。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * <p>姓名</p>
    */
-  ImageBase64?: string
+  Name?: string
   /**
-   * 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 7M。图片下载时间不超过 3 秒。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * <p>英文姓名</p>
    */
-  ImageUrl?: string
+  EnglishName?: string
   /**
-   * 扩展配置信息。
-配置格式：{"option1":value1,"option2":value2}
-1. task_type：任务类型【0: 关闭版式分析与处理 1: 开启版式分析处理】可选参数，Int32类型，默认值为1
-2. is_structuralization：是否结构化输出【true：返回包体同时返回通用和结构化输出  false：返回包体返回通用输出】 可选参数，Bool类型，默认值为true
-3. if_readable_format：是否按照版式整合通用文本/公式输出结果 可选参数，Bool类型，默认值为false
-示例：
-{"task_type": 1,"is_structuralization": true,"if_readable_format": true}
+   * <p>证件号</p>
    */
-  Config?: string
-}
-
-/**
- * FormulaOCR请求参数结构体
- */
-export interface FormulaOCRRequest {
+  Number?: string
   /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * <p>性别</p>
    */
-  ImageBase64?: string
+  Sex?: string
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * <p>有效期限</p>
    */
-  ImageUrl?: string
+  ValidDate?: string
+  /**
+   * <p>签发机关</p>
+   */
+  IssueAuthority?: string
+  /**
+   * <p>签发地点</p>
+   */
+  IssueAddress?: string
+  /**
+   * <p>出生日期</p>
+   */
+  Birthday?: string
+  /**
+   * <p>头像照片的base64</p>
+   */
+  PortraitImage?: string
+  /**
+   * <p>返回类型</p>
+   */
+  Type?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8797,28 +8567,6 @@ export interface VerifyBizLicenseEnterprise4Request {
    * <p>注册登记证件号码</p>
    */
   IdNum: string
-}
-
-/**
- * 保险单据信息
- */
-export interface InsuranceBillInfo {
-  /**
-   * 识别出的字段名称(关键字)，支持以下字段：
-【病案首页】
-姓名、性别、出生日期、出院诊断、疾病编码、入院病情等。
-【费用清单】
-医疗参保人员类别、身份证号、入院方式、结账日期、项目、金额等。
-【结算单】
-名称、单价、数量、金额、医保内、医保外等。
-【医疗发票】
-姓名、性别、住院时间、收费项目、金额、合计等。
-   */
-  Name?: string
-  /**
-   * 识别出的字段名称对应的值，也就是字段Name对应的字符串结果。
-   */
-  Value?: string
 }
 
 /**
@@ -9948,32 +9696,32 @@ export interface AirTransport {
  */
 export interface QuestionInfo {
   /**
-   * 旋转角度
+   * <p>旋转角度</p>
    */
   Angle?: number
   /**
-   * 预处理后图片高度
+   * <p>预处理后图片高度</p><p>单位：px</p>
    */
   Height?: number
   /**
-   * 预处理后图片宽度
+   * <p>预处理后图片宽度</p><p>单位：px</p>
    */
   Width?: number
   /**
-   * 文档元素
+   * <p>文档元素</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ResultList?: Array<ResultList>
   /**
-   * 输入图片高度
+   * <p>输入图片高度</p><p>单位：px</p>
    */
   OrgHeight?: number
   /**
-   * 输入图片宽度
+   * <p>输入图片宽度</p><p>单位：px</p>
    */
   OrgWidth?: number
   /**
-   * 预处理后的图片base64编码
+   * <p>预处理后的图片base64编码</p>
    */
   ImageBase64?: string
 }
@@ -10054,184 +9802,6 @@ export interface TaxiTicket {
    * 是否有公司印章（0：没有，1：有）
    */
   CompanySealMark?: number
-}
-
-/**
- * 二手车销售统一发票
- */
-export interface UsedCarPurchaseInvoice {
-  /**
-   * 发票名称
-   */
-  Title?: string
-  /**
-   * 是否存在二维码（0：没有，1：有）
-   */
-  QRCodeMark?: number
-  /**
-   * 发票代码
-   */
-  Code?: string
-  /**
-   * 发票号码
-   */
-  Number?: string
-  /**
-   * 开票日期
-   */
-  Date?: string
-  /**
-   * 价税合计（小写）
-   */
-  Total?: string
-  /**
-   * 价税合计（大写）
-   */
-  TotalCn?: string
-  /**
-   * 销货单位名称
-   */
-  Seller?: string
-  /**
-   * 销售方电话
-   */
-  SellerTel?: string
-  /**
-   * 销售方单位代码/个人身份证号
-   */
-  SellerTaxID?: string
-  /**
-   * 销售方地址
-   */
-  SellerAddress?: string
-  /**
-   * 购买方名称
-   */
-  Buyer?: string
-  /**
-   * 购买方单位代码/个人身份证号
-   */
-  BuyerID?: string
-  /**
-   * 购买方地址
-   */
-  BuyerAddress?: string
-  /**
-   * 购买方电话
-   */
-  BuyerTel?: string
-  /**
-   * 二手车市场
-   */
-  CompanyName?: string
-  /**
-   * 二手车市场纳税人识别号
-   */
-  CompanyTaxID?: string
-  /**
-   * 二手车市场开户银行和账号
-   */
-  CompanyBankAccount?: string
-  /**
-   * 二手车市场电话
-   */
-  CompanyTel?: string
-  /**
-   * 二手车市场地址
-   */
-  CompanyAddress?: string
-  /**
-   * 转入地车辆管理所名称
-   */
-  TransferAdministrationName?: string
-  /**
-   * 车牌号
-   */
-  LicensePlate?: string
-  /**
-   * 登记证号
-   */
-  RegistrationNumber?: string
-  /**
-   * 车辆识别代码
-   */
-  VIN?: string
-  /**
-   * 厂牌型号
-   */
-  VehicleModel?: string
-  /**
-   * 发票消费类型
-   */
-  Kind?: string
-  /**
-   * 省
-   */
-  Province?: string
-  /**
-   * 市
-   */
-  City?: string
-  /**
-   * 车辆类型
-   */
-  VehicleType?: string
-  /**
-   * 备注
-   */
-  Remark?: string
-  /**
-   * 发票联次
-   */
-  FormType?: string
-  /**
-   * 发票联名
-   */
-  FormName?: string
-  /**
-   * 是否有公司印章（0：没有，1：有）
-   */
-  CompanySealMark?: number
-  /**
-   * 经营拍卖单位
-   */
-  AuctionOrgName?: string
-  /**
-   * 经营拍卖单位地址
-   */
-  AuctionOrgAddress?: string
-  /**
-   * 经营拍卖单位纳税人识别号
-   */
-  AuctionOrgTaxID?: string
-  /**
-   * 经营拍卖单位开户银行账号
-   */
-  AuctionOrgBankAccount?: string
-  /**
-   * 经营拍卖单位电话
-   */
-  AuctionOrgPhone?: string
-  /**
-   * 开票人
-   */
-  Issuer?: string
-  /**
-   * 税控码
-   */
-  TaxCode?: string
-  /**
-   * 机器编号
-   */
-  MachineSerialNumber?: string
-  /**
-   * 机打发票代码
-   */
-  MachineCode?: string
-  /**
-   * 机打发票号码
-   */
-  MachineNumber?: string
 }
 
 /**
@@ -10486,90 +10056,17 @@ export interface EnterpriseLicenseInfo {
 }
 
 /**
- * PermitOCR返回参数结构体
+ * QrcodeOCR请求参数结构体
  */
-export interface PermitOCRResponse {
+export interface QrcodeOCRRequest {
   /**
-   * <p>姓名</p>
-   */
-  Name?: string
-  /**
-   * <p>英文姓名</p>
-   */
-  EnglishName?: string
-  /**
-   * <p>证件号</p>
-   */
-  Number?: string
-  /**
-   * <p>性别</p>
-   */
-  Sex?: string
-  /**
-   * <p>有效期限</p>
-   */
-  ValidDate?: string
-  /**
-   * <p>签发机关</p>
-   */
-  IssueAuthority?: string
-  /**
-   * <p>签发地点</p>
-   */
-  IssueAddress?: string
-  /**
-   * <p>出生日期</p>
-   */
-  Birthday?: string
-  /**
-   * <p>头像照片的base64</p>
-   */
-  PortraitImage?: string
-  /**
-   * <p>返回类型</p>
-   */
-  Type?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * InsuranceBillOCR请求参数结构体
- */
-export interface InsuranceBillOCRRequest {
-  /**
-   * 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+   * <p>图片的 Base64 值。要求图片经Base64编码后不超过 10M，支持PNG、JPG、JPEG、PDF格式。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。</p>
    */
   ImageBase64?: string
   /**
-   * 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+   * <p>图片的 Url 地址。要求图片经Base64编码后不超过 10M，支持PNG、JPG、JPEG、PDF格式。建议图片存储于腾讯云，可保障更高的下载速度和稳定性。</p>
    */
   ImageUrl?: string
-}
-
-/**
- * GeneralHandwritingOCR返回参数结构体
- */
-export interface GeneralHandwritingOCRResponse {
-  /**
-   * 检测到的文本信息，具体内容请点击左侧链接。
-   */
-  TextDetections?: Array<TextGeneralHandwriting>
-  /**
-   * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
-   * @deprecated
-   */
-  Angel?: number
-  /**
-   * 图片旋转角度（角度制），文本的水平方向为0°；顺时针为正，逆时针为负。点击查看<a href="https://cloud.tencent.com/document/product/866/45139">如何纠正倾斜文本</a>
-   */
-  Angle?: number
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
 }
 
 /**
@@ -10593,23 +10090,23 @@ export interface IDCardResult {
  */
 export interface LicensePlateInfo {
   /**
-   * 识别出的车牌号码。
+   * <p>识别出的车牌号码。</p>
    */
   Number?: string
   /**
-   * 置信度，0 - 100 之间。
+   * <p>置信度，0 - 100 之间。</p>
    */
   Confidence?: number
   /**
-   * 文本行在原图片中的像素坐标框。
+   * <p>文本行在原图片中的像素坐标框。</p>
    */
   Rect?: Rect
   /**
-   * 识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”、“喷漆”、“其它”。
+   * <p>识别出的车牌颜色，目前支持颜色包括 “白”、“黑”、“蓝”、“绿“、“黄”、“黄绿”、“临牌”、“喷漆”、“其它”。</p>
    */
   Color?: string
   /**
-   * 车牌类别， 如： 实体车牌、非实体车牌
+   * <p>车牌类别， 如： 标准实体车牌、非标准实体车牌、临牌、喷漆车牌</p>
    */
   LicensePlateCategory?: string
 }
@@ -10622,20 +10119,6 @@ export interface DetectedWordCoordPoint {
    * 单字在原图中的坐标，以四个顶点坐标表示，以左上角为起点，顺时针返回。
    */
   WordCoordinate: Array<Coord>
-}
-
-/**
- * 数学试题识别结构化对象
- */
-export interface QuestionBlockObj {
-  /**
-   * 数学试题识别结构化信息数组
-   */
-  QuestionArr: Array<QuestionObj>
-  /**
-   * 题目主体区域检测框在图片中的像素坐标
-   */
-  QuestionBboxCoord: Rect
 }
 
 /**
@@ -11459,7 +10942,7 @@ export interface SubmitQuestionMarkAgentJobRequest {
    */
   EnableDeepThink?: boolean
   /**
-   * <p>题目信息输出配置，当key对应为true表示开启配置开关。</p><p>当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；<br>当key为TrueAnswer  value为true 表示输出每道题的正确答案 ；<br>当key为StepCorrection  value为true表示启用步骤级批改；</p><p> 设置方式参考  {&quot;KnowledgePoints&quot;:true,&quot;TrueAnswer&quot;:true}</p><p>参数格式：{&quot;KnowledgePoints&quot;:true,&quot;TrueAnswer&quot;:true}</p>
+   * <p>题目信息输出配置，当key对应为true表示开启配置开关。</p><p>当key为KnowledgePoints value为true 表示输出每道题结构信息中输出知识点内容；<br>当key为TrueAnswer value为true 表示输出每道题的正确答案 ；<br>当key为StepCorrection value为true表示启用步骤级批改；</p><p>当key为DisableAnswerAnalysis value为true表示不输出答案解析；</p><p>当key为OutputSubQuestionsAndCoords value为true表示输出子题干和插图坐标；</p><p>当key为UseCoordAssist value为true表示使用精调坐标辅助模型，false表示默认模型坐标（性能更优）；</p><p>参数格式：{&quot;KnowledgePoints&quot;:true,&quot;TrueAnswer&quot;:true}</p>
    */
   QuestionConfigMap?: string
   /**
@@ -11467,13 +10950,21 @@ export interface SubmitQuestionMarkAgentJobRequest {
    */
   ReferenceAnswer?: string
   /**
-   * <p>图片/PDF的 Base64 列表值，最多三张。每张图片要求参考ImageBase64  1. 如果ImageBase64List或者ImageUrlList 都没值则取ImageBase64 或者ImageUrl  2.如果ImageBase64List或者ImageUrlList 有一个值，则不取ImageBase64 或者ImageUrl值，优先去list  3.如果ImageBase64List或者ImageUrlList 都有值，则取ImageUrlList</p>
+   * <p>批量base64图片入口，每个base64参考单独ImageBase64参数规则。</p><ol><li>当AssistMarkType为2时，用于提供题目相关的辅助批改图片信息.ImageBase64List.N/ImageUrlList.N来输入答题试卷和含正确解析试卷，最多两张</li><li>当AssistMarkType不为2时，ImageBase64List.N/ImageUrlList.N图片会执行拼接逻辑（解决单题跨页场景）</li></ol>
    */
   ImageBase64List?: Array<string>
   /**
-   * <p>图片/PDF的 Url 地址Base64 列表值，最多三张。每张图片要求参考ImageUrl。  图片生效规则同ImageBase64List</p>
+   * <p>批量ImageUrl图片入口，每个ImageUrl参考单独ImageUrl参数规则。</p><ol><li>当AssistMarkType为2时，用于提供题目相关的辅助批改图片信息.ImageBase64List.N/ImageUrlList.N 来输入答题试卷和含正确解析试卷，最多两张</li><li>当AssistMarkType不为2时，ImageBase64List.N/ImageUrlList.N图片会执行拼接逻辑（解决单题跨页场景）</li></ol>
    */
   ImageUrlList?: Array<string>
+  /**
+   * <p>辅助批改类型</p><p>枚举值：</p><ul><li>0： 无辅助批改，直接模型批改</li><li>1： 单题文本辅助批改，配合AnswerAssistMap使用</li><li>2： 整页辅助批改，待批改试卷使用ImageUrl/ImageBase64，答案部分使用ImageBase64List.N/ImageUrlList.N</li></ul><p>默认值：0</p>
+   */
+  AssistMarkType?: number
+  /**
+   * <p>单题辅助批改文本内容列表，当AssistMarkType为1时生效，用于提供题目相关的辅助文本信息。</p><ol><li>当key为ReferenceAnswer，value可以输入单题的辅助答案文本。</li><li>当key为QuestionAuxStem，value可以输入单题的辅助题干。</li></ol>
+   */
+  AnswerAssistMap?: string
 }
 
 /**
@@ -11592,18 +11083,181 @@ export interface GeneralFastOCRResponse {
 }
 
 /**
- * key信息组
+ * 二手车销售统一发票
  */
-export interface Key {
+export interface UsedCarPurchaseInvoice {
   /**
-   * 自动识别的字段名称
+   * 发票名称
    */
-  AutoName?: string
+  Title?: string
   /**
-   * 定义的字段名称（传key的名称）
-注意：此字段可能返回 null，表示取不到有效值。
+   * 是否存在二维码（0：没有，1：有）
    */
-  ConfigName?: string
+  QRCodeMark?: number
+  /**
+   * 发票代码
+   */
+  Code?: string
+  /**
+   * 发票号码
+   */
+  Number?: string
+  /**
+   * 开票日期
+   */
+  Date?: string
+  /**
+   * 价税合计（小写）
+   */
+  Total?: string
+  /**
+   * 价税合计（大写）
+   */
+  TotalCn?: string
+  /**
+   * 销货单位名称
+   */
+  Seller?: string
+  /**
+   * 销售方电话
+   */
+  SellerTel?: string
+  /**
+   * 销售方单位代码/个人身份证号
+   */
+  SellerTaxID?: string
+  /**
+   * 销售方地址
+   */
+  SellerAddress?: string
+  /**
+   * 购买方名称
+   */
+  Buyer?: string
+  /**
+   * 购买方单位代码/个人身份证号
+   */
+  BuyerID?: string
+  /**
+   * 购买方地址
+   */
+  BuyerAddress?: string
+  /**
+   * 购买方电话
+   */
+  BuyerTel?: string
+  /**
+   * 二手车市场
+   */
+  CompanyName?: string
+  /**
+   * 二手车市场纳税人识别号
+   */
+  CompanyTaxID?: string
+  /**
+   * 二手车市场开户银行和账号
+   */
+  CompanyBankAccount?: string
+  /**
+   * 二手车市场电话
+   */
+  CompanyTel?: string
+  /**
+   * 二手车市场地址
+   */
+  CompanyAddress?: string
+  /**
+   * 转入地车辆管理所名称
+   */
+  TransferAdministrationName?: string
+  /**
+   * 车牌号
+   */
+  LicensePlate?: string
+  /**
+   * 登记证号
+   */
+  RegistrationNumber?: string
+  /**
+   * 车辆识别代码
+   */
+  VIN?: string
+  /**
+   * 厂牌型号
+   */
+  VehicleModel?: string
+  /**
+   * 发票消费类型
+   */
+  Kind?: string
+  /**
+   * 省
+   */
+  Province?: string
+  /**
+   * 市
+   */
+  City?: string
+  /**
+   * 车辆类型
+   */
+  VehicleType?: string
+  /**
+   * 备注
+   */
+  Remark?: string
+  /**
+   * 发票联次
+   */
+  FormType?: string
+  /**
+   * 发票联名
+   */
+  FormName?: string
+  /**
+   * 是否有公司印章（0：没有，1：有）
+   */
+  CompanySealMark?: number
+  /**
+   * 经营拍卖单位
+   */
+  AuctionOrgName?: string
+  /**
+   * 经营拍卖单位地址
+   */
+  AuctionOrgAddress?: string
+  /**
+   * 经营拍卖单位纳税人识别号
+   */
+  AuctionOrgTaxID?: string
+  /**
+   * 经营拍卖单位开户银行账号
+   */
+  AuctionOrgBankAccount?: string
+  /**
+   * 经营拍卖单位电话
+   */
+  AuctionOrgPhone?: string
+  /**
+   * 开票人
+   */
+  Issuer?: string
+  /**
+   * 税控码
+   */
+  TaxCode?: string
+  /**
+   * 机器编号
+   */
+  MachineSerialNumber?: string
+  /**
+   * 机打发票代码
+   */
+  MachineCode?: string
+  /**
+   * 机打发票号码
+   */
+  MachineNumber?: string
 }
 
 /**

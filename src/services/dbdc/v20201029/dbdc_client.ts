@@ -22,6 +22,7 @@ import {
   DescribeDBCustomClusterDetailResponse,
   DestroyDBCustomClusterRequest,
   DescribeDBCustomClusterResourcesRequest,
+  DescribeInstancesRequest,
   ModifyInstanceNameRequest,
   DescribeDBCustomClusterNodeConfigResponse,
   DescribeInstancesResponse,
@@ -70,6 +71,7 @@ import {
   DescribeDBCustomClusterNodeResourcesRequest,
   ResourceTag,
   DataDisk,
+  ModifyDBCustomClusterAttributesRequest,
   DescribeDBCustomNodeTypesRequest,
   LoginSettings,
   SecurityGroup,
@@ -95,7 +97,7 @@ import {
   DescribeDBCustomNodeSecurityGroupsResponse,
   DestroyDBCustomNodeResponse,
   DescribeDBCustomTaskStatusRequest,
-  DescribeInstancesRequest,
+  ModifyDBCustomClusterAttributesResponse,
   ApiServerNetwork,
   RegionInfo,
   DescribeDBCustomZonesResponse,
@@ -334,6 +336,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: IsolateDBCustomNodeResponse) => void
   ): Promise<IsolateDBCustomNodeResponse> {
     return this.request("IsolateDBCustomNode", req, cb)
+  }
+
+  /**
+   * 该接口（ModifyDBCustomClusterAttributes）用于修改 DB Custom 集群的属性。
+   */
+  async ModifyDBCustomClusterAttributes(
+    req: ModifyDBCustomClusterAttributesRequest,
+    cb?: (error: string, rep: ModifyDBCustomClusterAttributesResponse) => void
+  ): Promise<ModifyDBCustomClusterAttributesResponse> {
+    return this.request("ModifyDBCustomClusterAttributes", req, cb)
   }
 
   /**

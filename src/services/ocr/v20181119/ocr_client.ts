@@ -38,7 +38,7 @@ import {
   QuestionSplitLayoutOCRRequest,
   DescribeMarkEssayAgentJobResponse,
   EstateCertOCRResponse,
-  ExtractDocMultiProRequest,
+  GeneralHandwritingOCRResponse,
   WordItem,
   MLIDPassportOCRRequest,
   OverseasInvoice,
@@ -56,9 +56,8 @@ import {
   ClassifyStoreNameRequest,
   Rect,
   CustomsPaymentReceipt,
-  QuestionSplitOCRRequest,
-  FlightInvoiceOCRRequest,
-  TextFormula,
+  SingleInvoiceInfo,
+  Key,
   MLIDCardOCRRequest,
   VatInvoiceItem,
   VehicleRegCertInfo,
@@ -73,11 +72,10 @@ import {
   TextVatInvoice,
   VehicleInvoiceInfo,
   DriverLicenseOCRRequest,
-  VerifyBizLicenseEnterprise3Response,
   OtherInvoiceItem,
   TextDetection,
   RecognizeTableOCRResponse,
-  TextEduPaper,
+  VerifyBizLicenseEnterprise3Response,
   QrcodeOCRResponse,
   CustomsDeclaration,
   WaybillObj,
@@ -101,13 +99,11 @@ import {
   BankSlipInfo,
   RecognizeFormulaOCRResponse,
   ArithmeticOCRResponse,
-  FormulaOCRResponse,
   RecognizeGeneralCardWarnRequest,
   Encryption,
   VinOCRRequest,
   MixedInvoiceItem,
   SmartStructuralOCRRequest,
-  ExtractDocMultiProResponse,
   TableCellInfo,
   GeneralHandwritingOCRRequest,
   BizLicenseOCRRequest,
@@ -118,7 +114,6 @@ import {
   GeneralAccurateOCRResponse,
   ElectronicTrainTicketFull,
   BusInvoice,
-  QrcodeOCRRequest,
   RecognizeGeneralInvoiceRequest,
   GeneralBasicOCRResponse,
   MainlandTravelPermitBackInfos,
@@ -153,11 +148,9 @@ import {
   ExtractDocMultiResponse,
   MachinePrintedInvoice,
   FinancialBillItem,
-  SingleInvoiceInfo,
   ShoppingReceipt,
   TrainTicket,
   TextDetectRequest,
-  EduPaperOCRResponse,
   RecognizeThaiIDCardOCRRequest,
   IDCardConfig,
   BusinessCardInfo,
@@ -198,13 +191,11 @@ import {
   GeneralAccurateOCRRequest,
   RailwayTicketInfo,
   RecognizeFormulaOCRRequest,
-  FlightInvoiceOCRResponse,
   TemporaryIDCardInfo,
   VatInvoiceVerifyNewRequest,
   CarInvoiceInfo,
   SchemaList,
   VatRollItem,
-  FlightInvoiceInfo,
   DetailInformationOfAirTicketTupleList,
   TextVehicleFront,
   AdvertiseTextDetection,
@@ -225,18 +216,16 @@ import {
   RecognizeTableAccurateOCRRequest,
   Coord,
   SealOCRResponse,
-  InsuranceBillOCRResponse,
   VerifyBizLicenseEnterprise4Response,
   HandwritingEssayOCRRequest,
   BankSlipOCRResponse,
   OnlineTaxiItinerary,
   Polygon,
   PassInvoiceInfo,
-  QuestionObj,
+  QuestionSplitOCRRequest,
   TableInfo,
   RequestIdInfo,
-  EduPaperOCRRequest,
-  FormulaOCRRequest,
+  PermitOCRResponse,
   TextGeneralHandwriting,
   PassportOCRRequest,
   ConfigAdvanced,
@@ -260,7 +249,6 @@ import {
   RecognizeGeneralInvoiceResponse,
   HandwritingEssayOCRResponse,
   VerifyBizLicenseEnterprise4Request,
-  InsuranceBillInfo,
   MarkInfo,
   AnswerInfo,
   QuestionOCRRequest,
@@ -288,7 +276,6 @@ import {
   AirTransport,
   QuestionInfo,
   TaxiTicket,
-  UsedCarPurchaseInvoice,
   EnglishOCRResponse,
   ImageCoordinates,
   VerifyBizLicenseEnterprise3Request,
@@ -298,13 +285,10 @@ import {
   CandWord,
   TollInvoice,
   EnterpriseLicenseInfo,
-  PermitOCRResponse,
-  InsuranceBillOCRRequest,
-  GeneralHandwritingOCRResponse,
+  QrcodeOCRRequest,
   IDCardResult,
   LicensePlateInfo,
   DetectedWordCoordPoint,
-  QuestionBlockObj,
   Element,
   SubmitExtractDocAgentJobRequest,
   ExtractDocAgentRequest,
@@ -333,7 +317,7 @@ import {
   RecognizeValidIDCardOCRResponse,
   DescribeMarkEssayAgentJobRequest,
   GeneralFastOCRResponse,
-  Key,
+  UsedCarPurchaseInvoice,
   QrcodePositionObj,
 } from "./ocr_models"
 
@@ -344,18 +328,6 @@ import {
 export class Client extends AbstractClient {
   constructor(clientConfig: ClientConfig) {
     super("ocr.tencentcloudapi.com", "2018-11-19", clientConfig)
-  }
-
-  /**
-     * 本接口支持病案首页、费用清单、结算单、医疗发票四种保险理赔单据的文本识别和结构化输出。
-
-默认接口请求频率限制：1次/秒。
-     */
-  async InsuranceBillOCR(
-    req: InsuranceBillOCRRequest,
-    cb?: (error: string, rep: InsuranceBillOCRResponse) => void
-  ): Promise<InsuranceBillOCRResponse> {
-    return this.request("InsuranceBillOCR", req, cb)
   }
 
   /**
@@ -919,16 +891,68 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * <b>此接口不再进行服务升级，建议您使用识别能力更强、服务性能更优的<a href="https://cloud.tencent.com/document/product/866/90802">通用票据识别（高级版）</a>。</b>
-本接口支持机票行程单关键字段的识别，包括旅客姓名、有效身份证件号码、电子客票号码、验证码、填开单位、其他税费、燃油附加费、民航发展基金、保险费、销售单位代号、始发地、目的地、航班号、时间、日期、座位等级、承运人、发票消费类型、票价、合计金额、填开日期、国内国际标签、印刷序号、客票级别/类别、客票生效日期、有效期截止日期、免费行李等字段，支持航班信息多行明细输出。
+     * **建议您使用识别效果更好的[通用文字识别（高精度版](https://cloud.tencent.com/document/product/866/34937 )）**
+本接口支持图像整体文字的检测和识别。可以识别中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语，阿拉伯语20种语言，且各种语言均支持与英文混合的文字识别。
 
-默认接口请求频率限制：5次/秒。
+适用于印刷文档识别、网络图片识别、广告图文字识别、街景店招牌识别、菜单识别、视频标题识别、头像文字识别等场景。
+
+产品优势：支持自动识别语言类型，可返回文本框坐标信息，对于倾斜文本支持自动旋转纠正。
+
+通用印刷体识别不同版本的差异如下：
+<table style="width:715px">
+      <thead>
+        <tr>
+          <th style="width:150px"></th>
+          <th style="width:250px">【荐】通用印刷体识别</th>
+          <th ><a href="https://cloud.tencent.com/document/product/866/34937">【荐】通用印刷体识别（高精度版）</a></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> 适用场景</td>
+          <td>适用于所有通用场景的印刷体识别</td>
+          <td>适用于文字较多、长串数字、小字、模糊字、倾斜文本等困难场景</td>
+        </tr>
+        <tr>
+          <td>识别准确率</td>
+          <td>96%</td>
+          <td>99%</td>
+        </tr>
+        <tr>
+          <td>价格</td>
+          <td>低</td>
+          <td>中</td>
+        </tr>
+        <tr>
+          <td>支持的语言</td>
+          <td>中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语</td>
+          <td>中文、英文、中英文、泰语、印尼语、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、哈萨克语</td>
+        </tr>
+        <tr>
+          <td>自动语言检测</td>
+          <td>支持</td>
+          <td>中英文支持；其他语种需要调整输入参数</td>
+        </tr>
+        <tr>
+          <td>返回文本行坐标</td>
+          <td>支持</td>
+          <td>支持</td>
+        </tr>
+        <tr>
+          <td>自动旋转纠正</td>
+          <td>支持旋转识别，返回角度信息</td>
+          <td>支持旋转识别，返回角度信息</td>
+        </tr>
+      </tbody>
+    </table>
+
+默认接口请求频率限制：20次/秒。
      */
-  async FlightInvoiceOCR(
-    req: FlightInvoiceOCRRequest,
-    cb?: (error: string, rep: FlightInvoiceOCRResponse) => void
-  ): Promise<FlightInvoiceOCRResponse> {
-    return this.request("FlightInvoiceOCR", req, cb)
+  async GeneralBasicOCR(
+    req: GeneralBasicOCRRequest,
+    cb?: (error: string, rep: GeneralBasicOCRResponse) => void
+  ): Promise<GeneralBasicOCRResponse> {
+    return this.request("GeneralBasicOCR", req, cb)
   }
 
   /**
@@ -989,18 +1013,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: SmartStructuralOCRResponse) => void
   ): Promise<SmartStructuralOCRResponse> {
     return this.request("SmartStructuralOCR", req, cb)
-  }
-
-  /**
-     * 本接口当前仅支持复杂磅单收发货单抽取，更多强推理场景支持定制咨询。点击[立即体验](https://ocrdemo.cloud.tencent.com/?action=ExtractDocMultiPro)。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async ExtractDocMultiPro(
-    req: ExtractDocMultiProRequest,
-    cb?: (error: string, rep: ExtractDocMultiProResponse) => void
-  ): Promise<ExtractDocMultiProResponse> {
-    return this.request("ExtractDocMultiPro", req, cb)
   }
 
   /**
@@ -1084,7 +1096,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 本接口支持对中国大陆机动车车牌的自动定位和识别，返回地域编号和车牌号码与车牌颜色信息。
+     * 本接口支持对中国大陆机动车车牌的自动定位和识别，返回地域编号和车牌号码与车牌颜色信息。 
 
 默认接口请求频率限制：10次/秒。
      */
@@ -1405,20 +1417,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-     * 接口下线
-
-本接口支持识别主流初高中数学符号和公式，返回公式的 Latex 格式文本。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async FormulaOCR(
-    req: FormulaOCRRequest,
-    cb?: (error: string, rep: FormulaOCRResponse) => void
-  ): Promise<FormulaOCRResponse> {
-    return this.request("FormulaOCR", req, cb)
-  }
-
-  /**
      * <b>此接口为护照识别（中国大陆地区护照）的旧版本服务，不再进行服务升级，建议您使用识别能力更强、服务性能更优的<a href="https://cloud.tencent.com/document/product/866/37657">护照识别（多国多地区护照）</a>。</b>
 
 本接口支持中国大陆地区护照个人资料页多个字段的检测与识别。已支持字段包括英文姓名、中文姓名、国家码、护照号、出生地、出生日期、国籍英文、性别英文、有效期、签发地点英文、签发日期、持证人签名、护照机读码（MRZ码）等。
@@ -1430,71 +1428,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: PassportOCRResponse) => void
   ): Promise<PassportOCRResponse> {
     return this.request("PassportOCR", req, cb)
-  }
-
-  /**
-     * **建议您使用识别效果更好的[通用文字识别（高精度版](https://cloud.tencent.com/document/product/866/34937 )）**
-本接口支持图像整体文字的检测和识别。可以识别中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语，阿拉伯语20种语言，且各种语言均支持与英文混合的文字识别。
-
-适用于印刷文档识别、网络图片识别、广告图文字识别、街景店招牌识别、菜单识别、视频标题识别、头像文字识别等场景。
-
-产品优势：支持自动识别语言类型，可返回文本框坐标信息，对于倾斜文本支持自动旋转纠正。
-
-通用印刷体识别不同版本的差异如下：
-<table style="width:715px">
-      <thead>
-        <tr>
-          <th style="width:150px"></th>
-          <th style="width:250px">【荐】通用印刷体识别</th>
-          <th ><a href="https://cloud.tencent.com/document/product/866/34937">【荐】通用印刷体识别（高精度版）</a></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td> 适用场景</td>
-          <td>适用于所有通用场景的印刷体识别</td>
-          <td>适用于文字较多、长串数字、小字、模糊字、倾斜文本等困难场景</td>
-        </tr>
-        <tr>
-          <td>识别准确率</td>
-          <td>96%</td>
-          <td>99%</td>
-        </tr>
-        <tr>
-          <td>价格</td>
-          <td>低</td>
-          <td>中</td>
-        </tr>
-        <tr>
-          <td>支持的语言</td>
-          <td>中文、英文、中英文、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、泰语</td>
-          <td>中文、英文、中英文、泰语、印尼语、日语、韩语、西班牙语、法语、德语、葡萄牙语、越南语、马来语、俄语、意大利语、荷兰语、瑞典语、芬兰语、丹麦语、挪威语、匈牙利语、哈萨克语</td>
-        </tr>
-        <tr>
-          <td>自动语言检测</td>
-          <td>支持</td>
-          <td>中英文支持；其他语种需要调整输入参数</td>
-        </tr>
-        <tr>
-          <td>返回文本行坐标</td>
-          <td>支持</td>
-          <td>支持</td>
-        </tr>
-        <tr>
-          <td>自动旋转纠正</td>
-          <td>支持旋转识别，返回角度信息</td>
-          <td>支持旋转识别，返回角度信息</td>
-        </tr>
-      </tbody>
-    </table>
-
-默认接口请求频率限制：20次/秒。
-     */
-  async GeneralBasicOCR(
-    req: GeneralBasicOCRRequest,
-    cb?: (error: string, rep: GeneralBasicOCRResponse) => void
-  ): Promise<GeneralBasicOCRResponse> {
-    return this.request("GeneralBasicOCR", req, cb)
   }
 
   /**
@@ -1552,18 +1485,6 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CropEnhanceImageOCRResponse) => void
   ): Promise<CropEnhanceImageOCRResponse> {
     return this.request("CropEnhanceImageOCR", req, cb)
-  }
-
-  /**
-     * 本接口支持数学试题内容的识别和结构化输出，包括通用文本解析和小学/初中/高中数学公式解析能力（包括91种题型，180种符号），公式返回格式为 Latex 格式文本。
-
-默认接口请求频率限制：5次/秒。
-     */
-  async EduPaperOCR(
-    req: EduPaperOCRRequest,
-    cb?: (error: string, rep: EduPaperOCRResponse) => void
-  ): Promise<EduPaperOCRResponse> {
-    return this.request("EduPaperOCR", req, cb)
   }
 
   /**

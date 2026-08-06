@@ -956,21 +956,29 @@ export interface SREInstance {
  */
 export interface DescribeCloudNativeAPIGatewayServicesRequest {
   /**
-   * 网关ID
+   * <p>网关ID</p>
    */
   GatewayId: string
   /**
-   * 列表数量
+   * <p>列表数量</p>
    */
   Limit?: number
   /**
-   * 列表 offset
+   * <p>列表 offset</p>
    */
   Offset?: number
   /**
-   * 过滤条件，多个过滤条件之间是与的关系，支持 name,upstreamType
+   * <p>过滤条件，多个过滤条件之间是与的关系，支持 name,upstreamType</p>
    */
   Filters?: Array<ListFilter>
+  /**
+   * <p>排序字段</p>
+   */
+  OrderField?: string
+  /**
+   * <p>排序方式</p><p>枚举值：</p><ul><li>DESC： 降序</li><li>ASC： 升序</li></ul>
+   */
+  OrderType?: string
 }
 
 /**
@@ -1080,6 +1088,20 @@ export interface DescribeCloudNativeAPIGatewayConsumerListRequest {
    * <p>资源ID</p>
    */
   ResourceId?: string
+}
+
+/**
+ * 返回kong的服务和路由列表
+ */
+export interface KongServiceWithRoutes {
+  /**
+   *
+   */
+  ServiceList?: Array<KongServiceRoute>
+  /**
+   * 总数
+   */
+  TotalCount?: number
 }
 
 /**
@@ -1233,7 +1255,7 @@ export interface Label {
  */
 export interface DescribeCloudNativeAPIGatewayRoutesResponse {
   /**
-   * 无
+   * <p>无</p>
    */
   Result?: KongServiceRouteList
   /**
@@ -2469,6 +2491,50 @@ export interface ModifyCloudNativeAPIGatewayServiceRequest {
 }
 
 /**
+ * DescribeCNGWServicesWithRoutes请求参数结构体
+ */
+export interface DescribeCNGWServicesWithRoutesRequest {
+  /**
+   * <p>网关ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>列表数量</p>
+   */
+  Limit?: number
+  /**
+   * <p>列表 offset</p>
+   */
+  Offset?: number
+  /**
+   * <p>过滤条件，多个过滤条件之间是与的关系，支持 name,upstreamType</p>
+   */
+  Filters?: Array<ListFilter>
+}
+
+/**
+ * kong实例的服务和路由列表
+ */
+export interface KongServiceRoute {
+  /**
+   * <p>服务信息</p>
+   */
+  Service?: KongServicePreview
+  /**
+   * <p>路由总条数</p>
+   */
+  RouteTotalCount?: number
+  /**
+   * <p>是否有未返回的路由</p>
+   */
+  RouteHasMore?: boolean
+  /**
+   * <p>路由信息</p>
+   */
+  Routes?: Array<KongRoutePreview>
+}
+
+/**
  * DescribeAutoScalerResourceStrategyBindingGroups请求参数结构体
  */
 export interface DescribeAutoScalerResourceStrategyBindingGroupsRequest {
@@ -3638,7 +3704,7 @@ export interface DescribeConfigFilesResponse {
  */
 export interface DescribeCloudNativeAPIGatewayServicesResponse {
   /**
-   * 无
+   * <p>无</p>
    */
   Result?: KongServices
   /**
@@ -4069,35 +4135,35 @@ export interface ModifyCloudNativeAPIGatewayCanaryRuleResponse {
  */
 export interface KongServicePreview {
   /**
-   * 服务ID
+   * <p>服务ID</p>
    */
   ID: string
   /**
-   * 服务名字
+   * <p>服务名字</p>
    */
   Name?: string
   /**
-   * 标签
+   * <p>标签</p>
    */
   Tags?: Array<string>
   /**
-   * 后端配置
+   * <p>后端配置</p>
    */
   UpstreamInfo?: KongUpstreamInfo
   /**
-   * 后端类型
+   * <p>后端类型</p>
    */
   UpstreamType?: string
   /**
-   * 创建时间
+   * <p>创建时间</p>
    */
   CreatedTime?: string
   /**
-   * 是否可编辑
+   * <p>是否可编辑</p>
    */
   Editable?: boolean
   /**
-   * 请求路径
+   * <p>请求路径</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Path?: string
@@ -4700,86 +4766,90 @@ export interface ConfigFileRelease {
  */
 export interface KongRoutePreview {
   /**
-   * 服务ID
+   * <p>服务ID</p>
    */
   ID: string
   /**
-   * 服务名字
+   * <p>服务名字</p>
    */
   Name?: string
   /**
-   * 无
+   * <p>无</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Methods?: Array<string>
   /**
-   * 无
+   * <p>无</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Paths?: Array<string>
   /**
-   * 无
+   * <p>无</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Hosts?: Array<string>
   /**
-   * 无
+   * <p>无</p>
    */
   Protocols?: Array<string>
   /**
-   * 无
+   * <p>无</p>
    */
   PreserveHost?: boolean
   /**
-   * 无
+   * <p>无</p>
    */
   HttpsRedirectStatusCode?: number
   /**
-   * 无
+   * <p>无</p>
    */
   StripPath?: boolean
   /**
-   * 无
+   * <p>无</p>
    */
   CreatedTime?: string
   /**
-   * 是否开启了强制HTTPS
+   * <p>是否开启了强制HTTPS</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   ForceHttps?: boolean
   /**
-   * 服务名
+   * <p>服务名</p>
    */
   ServiceName?: string
   /**
-   * 服务ID
+   * <p>服务ID</p>
    */
   ServiceID?: string
   /**
-   * 目的端口
+   * <p>目的端口</p>
    */
   DestinationPorts?: Array<number | bigint>
   /**
-   * 路由的Headers
+   * <p>路由的Headers</p>
    */
   Headers?: Array<KVMapping>
   /**
-   * 是否缓存请求body，默认true
+   * <p>是否缓存请求body，默认true</p>
    */
   RequestBuffering?: boolean
   /**
-   * 是否缓存响应body，默认true
+   * <p>是否缓存响应body，默认true</p>
    */
   ResponseBuffering?: boolean
   /**
-   * 正则优先级
+   * <p>正则优先级</p>
    */
   RegexPriority?: number
   /**
-   * querystring参数
+   * <p>querystring参数</p>
    */
   QueryStringParameters?: Array<KVMapping>
+  /**
+   * <p>路由来源</p>
+   */
+  RouteSource?: string
 }
 
 /**
@@ -6820,21 +6890,25 @@ export interface ModifyCloudNativeAPIGatewayRouteRateLimitRequest {
  */
 export interface KongActiveHealthCheck {
   /**
-   * 主动健康检查健康探测间隔，单位：秒，0表示不开启
+   * <p>主动健康检查健康探测间隔，单位：秒，0表示不开启</p>
    */
   HealthyInterval?: number
   /**
-   * 主动健康检查异常探测间隔，单位：秒，0表示不开启
+   * <p>主动健康检查异常探测间隔，单位：秒，0表示不开启</p>
    */
   UnHealthyInterval?: number
   /**
-   * 在 GET HTTP 请求中使用的路径，以作为主动运行状况检查的探测器运行。默认： ”/”。
+   * <p>在 GET HTTP 请求中使用的路径，以作为主动运行状况检查的探测器运行。默认： ”/”。</p>
    */
   HttpPath?: string
   /**
-   * GET HTTP 请求的超时时间，单位：秒。默认 60。
+   * <p>GET HTTP 请求的超时时间，单位：秒。默认 60。</p>
    */
   Timeout?: number
+  /**
+   * <p>Host头</p>
+   */
+  HostHeader?: string
 }
 
 /**
@@ -7064,6 +7138,20 @@ export interface DeleteCloudNativeAPIGatewayLLMModelAPIRequest {
    * 模型 API ID，全局唯一标识。
    */
   ModelAPIId: string
+}
+
+/**
+ * DescribeCNGWServicesWithRoutes返回参数结构体
+ */
+export interface DescribeCNGWServicesWithRoutesResponse {
+  /**
+   * <p>无</p>
+   */
+  Result?: KongServiceWithRoutes
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -8172,29 +8260,45 @@ export interface DeleteCloudNativeAPIGatewaySecretKeyResponse {
  */
 export interface DescribeCloudNativeAPIGatewayRoutesRequest {
   /**
-   * 网关ID
+   * <p>网关ID</p>
    */
   GatewayId: string
   /**
-   * 翻页单页查询限制数量[0,1000], 默认值0
+   * <p>翻页单页查询限制数量[0,1000], 默认值0</p>
    */
   Limit?: number
   /**
-   * 翻页单页偏移量，默认值0
+   * <p>翻页单页偏移量，默认值0</p>
    */
   Offset?: number
   /**
-   * 服务的名字，精确匹配
+   * <p>服务的名字，精确匹配</p>
    */
   ServiceName?: string
   /**
-   * 路由的名字，精确匹配
+   * <p>路由的名字，精确匹配</p>
    */
   RouteName?: string
   /**
-   * 过滤条件，多个过滤条件之间是与的关系，支持 name, path, host, method, service, protocol
+   * <p>过滤条件，多个过滤条件之间是与的关系，支持 name, path, host, method, service, protocol</p>
    */
   Filters?: Array<ListFilter>
+  /**
+   * <p>路由类型</p>
+   */
+  RouteTypes?: Array<string>
+  /**
+   * <p>是否将灰度规则可能带来的路由排在原始路由前</p>
+   */
+  GrayRoutesFirst?: boolean
+  /**
+   * <p>排序字段</p>
+   */
+  OrderField?: string
+  /**
+   * <p>排序方式</p><p>枚举值：</p><ul><li>DESC： 降序</li><li>ASC： 升序</li></ul>
+   */
+  OrderType?: string
 }
 
 /**

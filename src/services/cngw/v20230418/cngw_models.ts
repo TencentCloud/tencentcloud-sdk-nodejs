@@ -850,6 +850,45 @@ export interface AIGWLogConfig {
 }
 
 /**
+ * 云原生网关服务预览信息
+ */
+export interface KongServicePreview {
+  /**
+   * 服务ID
+   */
+  ID: string
+  /**
+   * 创建时间
+   */
+  CreatedTime?: string
+  /**
+   * 是否可编辑
+   */
+  Editable?: boolean
+  /**
+   * 服务名字
+   */
+  Name?: string
+  /**
+   * 请求路径
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Path?: string
+  /**
+   * 标签
+   */
+  Tags?: Array<string>
+  /**
+   * 后端配置
+   */
+  UpstreamInfo?: KongUpstreamInfo
+  /**
+   * 后端类型
+   */
+  UpstreamType?: string
+}
+
+/**
  * MCP Server 列表
  */
 export interface AIGWMCPServerList {
@@ -1143,6 +1182,119 @@ export interface DescribeCloudNativeAPIGatewayConsumerGroupRequest {
 }
 
 /**
+ * 服务的后端配置
+ */
+export interface KongUpstreamInfo {
+  /**
+   * 负载均衡算法，默认为 round-robin，还支持 least-connections，consisten_hashing
+   */
+  Algorithm?: string
+  /**
+   * CVM弹性伸缩组端口
+   */
+  AutoScalingCvmPort?: number
+  /**
+   * CVM弹性伸缩组ID
+   */
+  AutoScalingGroupID?: string
+  /**
+   * CVM弹性伸缩组生命周期挂钩状态
+   */
+  AutoScalingHookStatus?: string
+  /**
+   * CVM弹性伸缩组使用的CVM TAT命令状态
+   */
+  AutoScalingTatCmdStatus?: string
+  /**
+   * upstream健康状态HEALTHY（健康）, UNHEALTHY（异常）, HEALTHCHECKS_OFF（未开启）和NONE（不支持健康检查）
+   */
+  HealthStatus?: string
+  /**
+   * IP或域名
+   */
+  Host?: string
+  /**
+   * 命名空间
+   */
+  Namespace?: string
+  /**
+   * 端口
+   */
+  Port?: number
+  /**
+   * 精确的服务来源类型，新建服务来源时候传入的类型
+   */
+  RealSourceType?: string
+  /**
+   * 云函数是否开启CAM鉴权，不填时默认为开启(true)
+   */
+  ScfCamAuthEnable?: boolean
+  /**
+   * 云函数是否开启Base64编码，默认为false
+   */
+  ScfIsBase64Encoded?: boolean
+  /**
+   * 云函数是否开启响应集成，默认为false
+   */
+  ScfIsIntegratedResponse?: boolean
+  /**
+   * SCF函数名
+   */
+  ScfLambdaName?: string
+  /**
+   * SCF函数版本
+   */
+  ScfLambdaQualifier?: string
+  /**
+   * SCF函数命名空间
+   */
+  ScfNamespace?: string
+  /**
+   * SCF函数类型
+   */
+  ScfType?: string
+  /**
+   * 服务（注册中心或Kubernetes中的服务）名字
+   */
+  ServiceName?: string
+  /**
+   * 冷启动时间，单位秒
+   */
+  SlowStart?: number
+  /**
+   * 服务来源ID
+   */
+  SourceID?: string
+  /**
+   * 服务来源的名字
+   */
+  SourceName?: string
+  /**
+   * 服务来源类型
+   */
+  SourceType?: string
+  /**
+   * 服务后端类型是IPList时提供
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Targets?: Array<KongTarget>
+}
+
+/**
+ * 返回kong的服务和路由列表
+ */
+export interface KongServiceWithRoutes {
+  /**
+   * 服务及路由列表
+   */
+  ServiceList?: Array<KongServiceRoute>
+  /**
+   * 总数
+   */
+  TotalCount?: number
+}
+
+/**
  * JWT 认证插件配置
  */
 export interface AIGWJWTAuthPluginConfig {
@@ -1178,6 +1330,20 @@ export interface AIGWJWTAuthPluginConfig {
    * <p>CORS预检验证</p>
    */
   RunOnPreFlight?: boolean
+}
+
+/**
+ * DescribeCNGWServicesWithRoutes返回参数结构体
+ */
+export interface DescribeCNGWServicesWithRoutesResponse {
+  /**
+   * <p>服务及路由查询结果</p>
+   */
+  Result?: KongServiceWithRoutes
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1662,6 +1828,97 @@ export interface CNAPIGwParseMCPToolsResult {
 }
 
 /**
+ * 云原生网关路由信息
+ */
+export interface KongRoutePreview {
+  /**
+   * <p>服务ID</p>
+   */
+  ID: string
+  /**
+   * <p>服务名字</p>
+   */
+  Name?: string
+  /**
+   * <p>请求方法列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Methods?: Array<string>
+  /**
+   * <p>路由Paths列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Paths?: Array<string>
+  /**
+   * <p>路由Hosts列表</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Hosts?: Array<string>
+  /**
+   * <p>协议列表</p>
+   */
+  Protocols?: Array<string>
+  /**
+   * <p>是否保留Host头</p>
+   */
+  PreserveHost?: boolean
+  /**
+   * <p>HTTPS重定向状态码</p>
+   */
+  HttpsRedirectStatusCode?: number
+  /**
+   * <p>是否去除路径前缀</p>
+   */
+  StripPath?: boolean
+  /**
+   * <p>创建时间</p>
+   */
+  CreatedTime?: string
+  /**
+   * <p>强制转换 https</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   * @deprecated
+   */
+  ForceHttps?: boolean
+  /**
+   * <p>服务名</p>
+   */
+  ServiceName?: string
+  /**
+   * <p>服务ID</p>
+   */
+  ServiceID?: string
+  /**
+   * <p>目的端口</p>
+   */
+  DestinationPorts?: Array<number | bigint>
+  /**
+   * <p>headers</p>
+   */
+  Headers?: Array<KVMapping>
+  /**
+   * <p>是否缓存请求body，默认true</p>
+   */
+  RequestBuffering?: boolean
+  /**
+   * <p>是否缓存响应body，默认true</p>
+   */
+  ResponseBuffering?: boolean
+  /**
+   * <p>正则优先级</p>
+   */
+  RegexPriority?: number
+  /**
+   * <p>querystring参数</p>
+   */
+  QueryStringParameters?: Array<KVMapping>
+  /**
+   * <p>路由来源</p>
+   */
+  RouteSource?: string
+}
+
+/**
  * ModifyCloudNativeAPIGatewayMCPTool请求参数结构体
  */
 export interface ModifyCloudNativeAPIGatewayMCPToolRequest {
@@ -1926,17 +2183,45 @@ export interface AIGWMCPUpstreamInfoDetail {
 }
 
 /**
- * ModifyCloudNativeAPIGatewayMCPServerStatus返回参数结构体
+ * Kong Upstream中的Target
  */
-export interface ModifyCloudNativeAPIGatewayMCPServerStatusResponse {
+export interface KongTarget {
   /**
-   * <p>创建结果</p>
+   * 目标主机地址
    */
-  Result?: boolean
+  Host: string
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 端口
    */
-  RequestId?: string
+  Port: number
+  /**
+   * 权重
+   */
+  Weight: number
+  /**
+   * 创建时间
+   */
+  CreatedTime?: string
+  /**
+   * CVM实例ID
+   */
+  CvmInstanceId?: string
+  /**
+   * CVM实例名称
+   */
+  CvmInstanceName?: string
+  /**
+   * 健康状态
+   */
+  Health?: string
+  /**
+   * Target的来源
+   */
+  Source?: string
+  /**
+   * target标签
+   */
+  Tags?: Array<string>
 }
 
 /**
@@ -1951,6 +2236,20 @@ export interface DescribeCloudNativeAPIGatewayLLMModelAPIRequest {
    * <p>模型 API ID，全局唯一标识。</p>
    */
   ModelAPIId: string
+}
+
+/**
+ * 键值对
+ */
+export interface KVMapping {
+  /**
+   * 键值映射的键
+   */
+  Key?: string
+  /**
+   * 键值映射的值
+   */
+  Value?: string
 }
 
 /**
@@ -2057,6 +2356,20 @@ export interface DeleteCloudNativeAPIGatewayMCPServerRequest {
    * <p>MCP服务ID</p>
    */
   ServerId: string
+}
+
+/**
+ * ModifyCloudNativeAPIGatewayMCPServerStatus返回参数结构体
+ */
+export interface ModifyCloudNativeAPIGatewayMCPServerStatusResponse {
+  /**
+   * <p>创建结果</p>
+   */
+  Result?: boolean
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -2361,6 +2674,20 @@ export interface ModifyCloudNativeAPIGatewayMCPToolResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 列表过滤条件，模糊匹配
+ */
+export interface ListFilter {
+  /**
+   * 过滤字段
+   */
+  Key?: string
+  /**
+   * 过滤值
+   */
+  Value?: string
 }
 
 /**
@@ -2688,6 +3015,28 @@ export interface ListCloudNativeAPIGatewayLLMModelService {
 }
 
 /**
+ * DescribeCNGWServicesWithRoutes请求参数结构体
+ */
+export interface DescribeCNGWServicesWithRoutesRequest {
+  /**
+   * <p>网关ID</p>
+   */
+  GatewayId: string
+  /**
+   * <p>列表数量</p>
+   */
+  Limit?: number
+  /**
+   * <p>列表 offset</p>
+   */
+  Offset?: number
+  /**
+   * <p>过滤条件，多个过滤条件之间是与的关系，支持 name,upstreamType</p>
+   */
+  Filters?: Array<ListFilter>
+}
+
+/**
  * DescribeCloudNativeAPIGatewayMCPServerACL返回参数结构体
  */
 export interface DescribeCloudNativeAPIGatewayMCPServerACLResponse {
@@ -2857,6 +3206,28 @@ export interface AIGWCustomDesensitizeRule {
    * <p>自定义脱敏规则开关</p>
    */
   Enabled: boolean
+}
+
+/**
+ * kong实例的服务和路由列表
+ */
+export interface KongServiceRoute {
+  /**
+   * <p>服务信息</p>
+   */
+  Service?: KongServicePreview
+  /**
+   * <p>路由总数</p>
+   */
+  RouteTotalCount?: number
+  /**
+   * <p>是否还有更多路由</p>
+   */
+  RouteHasMore?: boolean
+  /**
+   * <p>路由列表</p>
+   */
+  Routes?: Array<KongRoutePreview>
 }
 
 /**

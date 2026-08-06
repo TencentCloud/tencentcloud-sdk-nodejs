@@ -1378,9 +1378,9 @@ it("tse.v20201207.DeleteCloudNativeAPIGatewayService", async function () {
     }
 })
 
-it("tse.v20201207.DescribeCloudNativeAPIGatewaySecretKeyList", async function () {
+it("tse.v20201207.DescribeCloudNativeAPIGatewayRoutes", async function () {
     try {
-       const data = await client.DescribeCloudNativeAPIGatewaySecretKeyList({})
+       const data = await client.DescribeCloudNativeAPIGatewayRoutes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1431,6 +1431,16 @@ it("tse.v20201207.CreateCloudNativeAPIGatewayPublicNetwork", async function () {
 it("tse.v20201207.ModifyCloudNativeAPIGatewayConsumer", async function () {
     try {
        const data = await client.ModifyCloudNativeAPIGatewayConsumer({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("tse.v20201207.DescribeCNGWServicesWithRoutes", async function () {
+    try {
+       const data = await client.DescribeCNGWServicesWithRoutes({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -1528,9 +1538,9 @@ it("tse.v20201207.DescribeCloudNativeAPIGatewayNodes", async function () {
     }
 })
 
-it("tse.v20201207.DescribeCloudNativeAPIGatewayRoutes", async function () {
+it("tse.v20201207.DescribeCloudNativeAPIGatewaySecretKeyList", async function () {
     try {
-       const data = await client.DescribeCloudNativeAPIGatewayRoutes({})
+       const data = await client.DescribeCloudNativeAPIGatewaySecretKeyList({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

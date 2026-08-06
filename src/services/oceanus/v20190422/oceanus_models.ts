@@ -1462,33 +1462,27 @@ export interface VariableItem {
  */
 export interface DescribeClustersRequest {
   /**
-   * 按照一个或者多个集群 ID 查询，每次请求的集群上限为 100
+   * <p>按照一个或者多个集群 ID 查询，每次请求的集群上限为 100</p>
    */
   ClusterIds?: Array<string>
   /**
-   * 偏移量，默认 0
+   * <p>偏移量，默认 0</p>
    */
   Offset?: number
   /**
-   * 请求的集群数量，默认 20，最大值 100
+   * <p>请求的集群数量，默认 20，最大值 100</p>
    */
   Limit?: number
   /**
-   * 集群信息结果排序规则，1 按时间降序，2 按照时间升序，3  按照状态排序
+   * <p>集群信息结果排序规则，1 按时间降序，2 按照时间升序，3  按照状态排序</p>
    */
   OrderType?: number
   /**
-   * 过滤规则
-    
-- Name
-    按照集群的名字进行模糊查询。例如：测试
-    类型： String
-    必选： 否
-    
+   * <p>过滤规则</p><ul><li>Name<br>  按照集群的名字进行模糊查询。例如：测试<br>  类型： String<br>  必选： 否</li></ul>
    */
   Filters?: Array<Filter>
   /**
-   * 工作空间 SerialId
+   * <p>工作空间 SerialId</p>
    */
   WorkSpaceId?: string
 }
@@ -2424,11 +2418,11 @@ export interface Connectors {
  */
 export interface DescribeClustersResponse {
   /**
-   * 集群总数
+   * <p>集群总数</p>
    */
   TotalCount?: number
   /**
-   * 集群列表
+   * <p>集群列表</p>
    */
   ClusterSet?: Array<Cluster>
   /**
@@ -4038,31 +4032,31 @@ export interface DescribeJobSubmissionLogRequest {
  */
 export interface DescribeJobsRequest {
   /**
-   * 按照一个或者多个作业ID查询。作业ID形如：cql-11112222，每次请求的作业上限为100。参数不支持同时指定JobIds和Filters。
+   * <p>按照一个或者多个作业ID查询。作业ID形如：cql-11112222，每次请求的作业上限为100。参数不支持同时指定JobIds和Filters。</p>
    */
   JobIds?: Array<string>
   /**
-   * 过滤条件，支持的 Filter.Name 为：作业名 Name、作业状态 Status、所属集群 ClusterId、作业id JobId、集群名称 ClusterName。 每次请求的 Filters 个数的上限为 5，Filter.Values 的个数上限为 5。参数不支持同时指定 JobIds 和 Filters。
+   * <p>过滤条件，支持的 Filter.Name 为：作业名 Name、作业状态 Status、所属集群 ClusterId、作业id JobId、集群名称 ClusterName。 每次请求的 Filters 个数的上限为 5，Filter.Values 的个数上限为 5。参数不支持同时指定 JobIds 和 Filters。</p>
    */
   Filters?: Array<Filter>
   /**
-   * 偏移量，默认为0
+   * <p>偏移量，默认为0</p>
    */
   Offset?: number
   /**
-   * 分页大小，默认为20，最大值为100
+   * <p>分页大小，默认为20，最大值为100</p>
    */
   Limit?: number
   /**
-   * 工作空间 SerialId
+   * <p>工作空间 SerialId</p>
    */
   WorkSpaceId?: string
   /**
-   * 查询额外的作业信息,例如 JobEventInfo
+   * <p>查询额外的作业信息,例如 JobEventInfo</p>
    */
   ExtraResult?: Array<string>
   /**
-   * 查询引用connector
+   * <p>查询引用connector</p>
    */
   ConnectorOptions?: string
 }
@@ -5187,11 +5181,11 @@ export interface DeleteOceanusClusterResponse {
  */
 export interface DescribeJobsResponse {
   /**
-   * 作业总数
+   * <p>作业总数</p>
    */
   TotalCount?: number
   /**
-   * 作业列表
+   * <p>作业列表</p>
    */
   JobSet?: Array<JobV1>
   /**

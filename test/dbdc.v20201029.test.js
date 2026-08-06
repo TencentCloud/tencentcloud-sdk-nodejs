@@ -228,6 +228,16 @@ it("dbdc.v20201029.IsolateDBCustomNode", async function () {
     }
 })
 
+it("dbdc.v20201029.ModifyDBCustomClusterAttributes", async function () {
+    try {
+       const data = await client.ModifyDBCustomClusterAttributes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("dbdc.v20201029.DescribeInstanceList", async function () {
     try {
        const data = await client.DescribeInstanceList({})

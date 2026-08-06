@@ -18,16 +18,6 @@ const client = new tencentcloud.ocr.v20181119.Client({
 })
 describe("ocr.v20181119.test.js", function () {
 
-it("ocr.v20181119.InsuranceBillOCR", async function () {
-    try {
-       const data = await client.InsuranceBillOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ocr.v20181119.ImageEnhancement", async function () {
     try {
        const data = await client.ImageEnhancement({})
@@ -368,9 +358,9 @@ it("ocr.v20181119.WaybillOCR", async function () {
     }
 })
 
-it("ocr.v20181119.FlightInvoiceOCR", async function () {
+it("ocr.v20181119.GeneralBasicOCR", async function () {
     try {
-       const data = await client.FlightInvoiceOCR({})
+       const data = await client.GeneralBasicOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -421,16 +411,6 @@ it("ocr.v20181119.TextDetect", async function () {
 it("ocr.v20181119.SmartStructuralOCR", async function () {
     try {
        const data = await client.SmartStructuralOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ocr.v20181119.ExtractDocMultiPro", async function () {
-    try {
-       const data = await client.ExtractDocMultiPro({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -708,29 +688,9 @@ it("ocr.v20181119.EraseHandwrittenImageOCR", async function () {
     }
 })
 
-it("ocr.v20181119.FormulaOCR", async function () {
-    try {
-       const data = await client.FormulaOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
 it("ocr.v20181119.PassportOCR", async function () {
     try {
        const data = await client.PassportOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ocr.v20181119.GeneralBasicOCR", async function () {
-    try {
-       const data = await client.GeneralBasicOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -781,16 +741,6 @@ it("ocr.v20181119.MixedInvoiceOCR", async function () {
 it("ocr.v20181119.CropEnhanceImageOCR", async function () {
     try {
        const data = await client.CropEnhanceImageOCR({})
-       expect(data).to.be.ok
-    } catch(error) {
-      expect(error.requestId).to.be.ok
-      expect(error.code).to.be.ok
-    }
-})
-
-it("ocr.v20181119.EduPaperOCR", async function () {
-    try {
-       const data = await client.EduPaperOCR({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

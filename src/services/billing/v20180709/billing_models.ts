@@ -2702,7 +2702,7 @@ export interface DescribeGatherResourceRequest {
    */
   TreeNodeUniqKey?: string
   /**
-   * <p>资源目录类别，枚举值如下：<br>all - 全部<br>none - 未归集</p>
+   * <p>资源目录类别，枚举值如下：<br>all - 全部<br>none - 未归集</p><p>枚举值：</p><ul><li>all： 全部</li><li>none： 未归集</li><li>allocation： 已公摊资源</li><li>gather： 已归集资源</li></ul>
    */
   GatherType?: string
   /**
@@ -8355,164 +8355,165 @@ export interface BillActionType {
  */
 export interface GatherResourceSummary {
   /**
-   * 支付者 UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识
+   * <p>支付者 UIN：支付者的账号 ID，账号 ID 是用户在腾讯云的唯一账号标识</p>
    */
   PayerUin?: string
   /**
-   * 使用者 UIN：实际使用资源的账号 ID
+   * <p>使用者 UIN：实际使用资源的账号 ID</p>
    */
   OwnerUin?: string
   /**
-   * 操作者 UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的ID或者角色 ID）
+   * <p>操作者 UIN：操作者账号 ID（预付费资源下单或后付费操作开通资源账号的ID或者角色 ID）</p>
    */
   OperateUin?: string
   /**
-   * 实例类型编码
+   * <p>实例类型编码</p>
    */
   InstanceType?: string
   /**
-   * 实例类型：购买的产品服务对应的实例类型，包括资源包、RI、SP、竞价实例。常规实例默认展示“-”
+   * <p>实例类型：购买的产品服务对应的实例类型，包括资源包、RI、SP、竞价实例。常规实例默认展示“-”</p>
    */
   InstanceTypeName?: string
   /**
-   * 资源ID：不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID； 若该产品被分拆，则展示产品分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名
+   * <p>资源ID：不同产品因资源形态不同，资源内容不完全相同，如云服务器 CVM 为对应的实例 ID； 若该产品被分拆，则展示产品分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名</p>
    */
   ResourceId?: string
   /**
-   * 实例名称：用户在控制台为资源设置的名称，如未设置默认为空；若该产品被分拆，则展示分拆产品分拆后的分拆项资源别名
+   * <p>实例名称：用户在控制台为资源设置的名称，如未设置默认为空；若该产品被分拆，则展示分拆产品分拆后的分拆项资源别名</p>
    */
   ResourceName?: string
   /**
-   * 分账单元唯一标识
+   * <p>分账单元唯一标识</p>
    */
   TreeNodeUniqKey?: string
   /**
-   * 分账单元名称
+   * <p>分账单元名称</p>
    */
   TreeNodeUniqKeyName?: string
   /**
-   * 资源命中公摊规则ID
+   * <p>资源命中公摊规则ID</p>
    */
   RuleId?: number
   /**
-   * 资源命中公摊规则名称
+   * <p>资源命中公摊规则名称</p>
    */
   RuleName?: string
   /**
-   * 产品编码
+   * <p>产品编码</p>
    */
   BusinessCode?: string
   /**
-   * 产品名称：用户所采购的各类云产品
+   * <p>产品名称：用户所采购的各类云产品</p>
    */
   BusinessCodeName?: string
   /**
-   * 组件名称编码
+   * <p>组件名称编码</p>
    */
   ItemCode?: string
   /**
-   * 组件名称：用户购买的产品或服务，所包含的具体组件
+   * <p>组件名称：用户购买的产品或服务，所包含的具体组件</p>
    */
   ItemCodeName?: string
   /**
-   * 地域ID
+   * <p>地域ID</p>
    */
   RegionId?: number
   /**
-   * 地域名称：资源所属地域
+   * <p>地域名称：资源所属地域</p>
    */
   RegionName?: string
   /**
-   * 分账标签：资源绑定的标签
+   * <p>分账标签：资源绑定的标签</p>
    */
   Tag?: Array<BillTag>
   /**
-   * 优惠后总价：优惠后总价 =（原价 - 预留实例抵扣原价 - 节省计划抵扣原价）* 折扣率
+   * <p>优惠后总价：优惠后总价 =（原价 - 预留实例抵扣原价 - 节省计划抵扣原价）* 折扣率</p>
    */
   RealTotalCost?: string
   /**
-   * 现金账户支出(元)：通过现金账户支付的金额
+   * <p>现金账户支出(元)：通过现金账户支付的金额</p>
    */
   CashPayAmount?: string
   /**
-   * 代金券支出(元)：使用各类优惠券（如代金券、现金券等）支付的金额
+   * <p>代金券支出(元)：使用各类优惠券（如代金券、现金券等）支付的金额</p>
    */
   VoucherPayAmount?: string
   /**
-   * 赠送账户支出(元)：使用赠送金支付的金额
+   * <p>赠送账户支出(元)：使用赠送金支付的金额</p>
    */
   IncentivePayAmount?: string
   /**
-   * 分成账户支出(元)：通过分成金账户支付的金额
+   * <p>分成账户支出(元)：通过分成金账户支付的金额</p>
    */
   TransferPayAmount?: string
   /**
-   * 费用归集类型：费用来源类型，分摊、归集、未分配
-0 - 分摊
-1 - 归集
--1 - 未分配
+   * <p>费用归集类型：费用来源类型，分摊、归集、未分配<br>0 - 分摊<br>1 - 归集<br>-1 - 未分配</p>
    */
   AllocationType?: number
   /**
-   * 当前归属单元信息
+   * <p>当前归属单元信息</p>
    */
   BelongTreeNodeUniqKey?: AllocationTreeNode
   /**
-   * 当前资源命中公摊规则信息
+   * <p>当前资源命中公摊规则信息</p>
    */
   BelongRule?: AllocationRule
   /**
-   * 其它归属单元信息
+   * <p>其它归属单元信息</p>
    */
   OtherTreeNodeUniqKeys?: Array<AllocationTreeNode>
   /**
-   * 其他命中规则信息
+   * <p>其他命中规则信息</p>
    */
   OtherRules?: Array<AllocationRule>
   /**
-   * 项目ID
+   * <p>项目ID</p>
    */
   ProjectId?: number
   /**
-   * 项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目
+   * <p>项目名称：资源归属的项目，用户在控制台给资源自主分配项目，未分配则是默认项目</p>
    */
   ProjectName?: string
   /**
-   * 子产品编码
+   * <p>子产品编码</p>
    */
   ProductCode?: string
   /**
-   * 子产品名称：用户采购的具体产品细分类型
+   * <p>子产品名称：用户采购的具体产品细分类型</p>
    */
   ProductCodeName?: string
   /**
-   * 计费模式编码
+   * <p>计费模式编码</p>
    */
   PayMode?: string
   /**
-   * 计费模式：资源的计费模式，区分为包年包月和按量计费
+   * <p>计费模式：资源的计费模式，区分为包年包月和按量计费</p>
    */
   PayModeName?: string
   /**
-   * 交易类型编码
+   * <p>交易类型编码</p>
    */
   ActionType?: string
   /**
-   * 交易类型：明细交易类型
+   * <p>交易类型：明细交易类型</p>
    */
   ActionTypeName?: string
   /**
-   * 分拆项 ID：涉及分拆产品的分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名
+   * <p>分拆项 ID：涉及分拆产品的分拆后的分拆项 ID，如 COS 桶 ID，CDN 域名</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   SplitItemId?: string
   /**
-   * 分拆项名称：涉及分拆产品的分拆后的分拆项
+   * <p>分拆项名称：涉及分拆产品的分拆后的分拆项</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   SplitItemName?: string
+  /**
+   * <p>归集方式</p><p>枚举值：</p><ul><li>0： 未归集</li><li>1： 自动命中</li><li>2： 手动分配待生效</li><li>3： 手动分配已生效</li></ul>
+   */
+  EffectiveMode?: string
 }
 
 /**

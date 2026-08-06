@@ -64,6 +64,7 @@ import {
   ManagedAIModelGroup,
   ReleaseEnvResponse,
   EmailSmtpConfig,
+  DescribeCloudBaseRunBuildLogRequest,
   DescribeHTTPServiceRouteRequest,
   MongoConnector,
   DescribeCurveDataResponse,
@@ -88,7 +89,7 @@ import {
   DescribeGatewayVersionsResponse,
   DescribeGatewayVersionsRequest,
   CreateEnvResourceRequest,
-  DescribeVmInstancesRequest,
+  CloudBaseRunBuildLog,
   DescribeHostingDomainTaskRequest,
   StaticConfig,
   EmailProviderConfig,
@@ -151,7 +152,7 @@ import {
   ListPGUserMigrationsResponse,
   DescribeBillingInfoRequest,
   HpaPolicy,
-  EmailTemplateConfig,
+  DescribeVmInstancesRequest,
   UnbindStorageSourceRequest,
   LogObject,
   StaticCmd,
@@ -252,6 +253,7 @@ import {
   ResourcePermission,
   Variable,
   ModifyHTTPServiceRouteResponse,
+  EmailTemplateConfig,
   GetProvidersResponse,
   DescribeQuotaDataRequest,
   CreateStaticStoreResponse,
@@ -303,6 +305,7 @@ import {
   BuildSource,
   DescribeAuthDomainsRequest,
   DescribeVmSpecResponse,
+  ModifyStorageSourceRequest,
   DescribeAIModelsRequest,
   VerifyHTTPServiceRouteCheckItem,
   RunSqlRequest,
@@ -313,7 +316,7 @@ import {
   OwnershipVerificationDnsInfo,
   DescribeTableResponse,
   MetricUsage,
-  ModifyStorageSourceRequest,
+  DescribeCloudBaseRunBuildLogResponse,
   DescribeDatabaseACLRequest,
   DescribeCreditsUsageResponse,
   DescribeDatabaseACLResponse,
@@ -1222,6 +1225,16 @@ Id、Secret、CreatedAt、Meta 等字段在该接口中不可修改，当客户�
     cb?: (error: string, rep: DeleteCloudAppResponse) => void
   ): Promise<DeleteCloudAppResponse> {
     return this.request("DeleteCloudApp", req, cb)
+  }
+
+  /**
+   * 查询构建日志
+   */
+  async DescribeCloudBaseRunBuildLog(
+    req: DescribeCloudBaseRunBuildLogRequest,
+    cb?: (error: string, rep: DescribeCloudBaseRunBuildLogResponse) => void
+  ): Promise<DescribeCloudBaseRunBuildLogResponse> {
+    return this.request("DescribeCloudBaseRunBuildLog", req, cb)
   }
 
   /**

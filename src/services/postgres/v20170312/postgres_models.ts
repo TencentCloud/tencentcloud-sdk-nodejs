@@ -986,11 +986,11 @@ export interface CreateAccountRequest {
  */
 export interface DescribeTasksResponse {
   /**
-   * 查询到的任务数量
+   * <p>查询到的任务数量</p>
    */
   TotalCount?: number
   /**
-   * 任务信息列表
+   * <p>任务信息列表</p>
    */
   TaskSet?: Array<TaskSet>
   /**
@@ -1804,35 +1804,35 @@ export interface DescribeDBProxySpecsResponse {
  */
 export interface DescribeTasksRequest {
   /**
-   * 按照任务ID进行查询。其余云API中返回的FlowId和TaskId等价。
+   * <p>按照任务ID进行查询。其余云API中返回的FlowId和TaskId等价。</p>
    */
   TaskId?: number
   /**
-   * 按照数据库实例ID进行查询。
+   * <p>按照数据库实例ID进行查询。</p>
    */
   DBInstanceId?: string
   /**
-   * 任务的最早开始时间，形如2024-08-23 00:00:00,默认只展示180天内的数据。
+   * <p>任务的最早开始时间，形如2024-08-23 00:00:00,默认只展示180天内的数据。</p>
    */
   MinStartTime?: string
   /**
-   * 任务的最晚开始时间，形如2024-08-23 00:00:00，默认为当前时间。
+   * <p>任务的最晚开始时间，形如2024-08-23 00:00:00，默认为当前时间。</p>
    */
   MaxStartTime?: string
   /**
-   * 每页显示数量，取值范围为1-100，默认为返回20条。
+   * <p>每页显示数量，取值范围为1-100，默认为返回20条。</p>
    */
   Limit?: number
   /**
-   * 数据偏移量，从0开始。
+   * <p>数据偏移量，从0开始。</p>
    */
   Offset?: number
   /**
-   * 排序字段，支持StartTime,EndTime，默认为StartTime。
+   * <p>排序字段，支持StartTime,EndTime，默认为StartTime。</p>
    */
   OrderBy?: string
   /**
-   * 排序方式，包括升序：asc，降序：desc，默认为desc。
+   * <p>排序方式，包括升序：asc，降序：desc，默认为desc。</p>
    */
   OrderByType?: string
 }
@@ -2326,52 +2326,49 @@ export interface ReadOnlyGroup {
  */
 export interface ModifyDBInstanceSpecRequest {
   /**
-   * 实例ID，形如：postgres-6bwgamo3。可通过[DescribeDBInstances](https://cloud.tencent.com/document/api/409/16773)接口获取
+   * <p>实例ID，形如：postgres-6bwgamo3。可通过<a href="https://cloud.tencent.com/document/api/409/16773">DescribeDBInstances</a>接口获取</p>
    */
   DBInstanceId: string
   /**
-   * 修改后的实例内存大小，单位GiB。
+   * <p>修改后的实例内存大小，单位GB。</p>
    */
   Memory: number
   /**
-   * 修改后的实例磁盘大小，单位GiB。该参数的设置步长为10。
+   * <p>修改后的实例磁盘大小，单位GB。该参数的设置步长为10。</p>
    */
   Storage: number
   /**
-   * 是否自动使用代金券：
-<li>0：否</li>
-<li>1：是</li>
-默认值：0
+   * <p>是否自动使用代金券：</p><li>0：否</li><li>1：是</li>默认值：0
    */
   AutoVoucher?: number
   /**
-   * 代金券ID列表，目前仅支持指定一张代金券。
+   * <p>代金券ID列表，目前仅支持指定一张代金券。</p>
    */
   VoucherIds?: Array<string>
   /**
-   * 活动ID。
+   * <p>活动ID。</p>
    */
   ActivityId?: number
   /**
-   * 指定实例配置完成变更后的切换时间。
-<li>0：立即切换 </li>
-<li>1：指定时间切换</li>
-<li>2：维护时间窗口内</li>切换
-默认值：0 
+   * <p>指定实例配置完成变更后的切换时间。</p><li>0：立即切换 </li><li>1：指定时间切换</li><li>2：维护时间窗口内</li>切换默认值：0
    */
   SwitchTag?: number
   /**
-   * 切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。当SwitchTag为0或2时，该参数失效。
+   * <p>切换开始时间，时间格式：HH:MM:SS，例如：01:00:00。当SwitchTag为0或2时，该参数失效。</p>
    */
   SwitchStartTime?: string
   /**
-   * 切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。当SwitchTag为0或2时，该参数失效。
+   * <p>切换截止时间，时间格式：HH:MM:SS，例如：01:30:00。当SwitchTag为0或2时，该参数失效。</p>
    */
   SwitchEndTime?: string
   /**
-   * 修改后的实例CPU大小，单位Core。不填写该参数时，默认根据Memory确定Cpu大小。如Memory为2，支持的规格有1核2GiB，则不传入Cpu时，Cpu默认为1。
+   * <p>修改后的实例CPU大小，单位Core。不填写该参数时，默认根据Memory确定Cpu大小。如Memory为2，支持的规格有1核2GB，则不传入Cpu时，Cpu默认为1。</p>
    */
   Cpu?: number
+  /**
+   * <p>变配时同步修改的参数列表</p>
+   */
+  SyncModifyParams?: Array<ParamEntry>
 }
 
 /**
@@ -5266,7 +5263,7 @@ export interface CreateReadOnlyDBInstanceRequest {
    */
   ReadOnlyGroupId?: string
   /**
-   * <p>实例需要绑定的Tag信息，默认为空；可以通过调用 <a href="https://cloud.tencent.com/document/api/651/35316">DescribeTags</a> 返回值中的 Tags 字段来获取。</p>
+   * <p>实例需要绑定的Tag信息，默认为空；可以通过调用 <a href="https://cloud.tencent.com/document/api/651/35316">DescribeTags</a> 返回值中的 Tags 字段来获取。</p><p>当前字段未完整支持多个tag形式，不推荐使用，建议使用新字段Tags</p>
    */
   TagList?: Tag
   /**
@@ -5294,6 +5291,10 @@ export interface CreateReadOnlyDBInstanceRequest {
    * <p>实例是否开启删除保护: true-开启删除保护；false-关闭删除保护。</p>
    */
   DeletionProtection?: boolean
+  /**
+   * <p>实例需要绑定的Tag信息，默认为空；可以通过调用 <a href="https://cloud.tencent.com/document/api/651/35316">DescribeTags</a> 返回值中的 Tags 字段来获取。</p>
+   */
+  Tags?: Array<Tag>
 }
 
 /**
@@ -6799,11 +6800,11 @@ export interface DescribeAuditLogFilesRequest {
  */
 export interface ModifyDBInstanceSpecResponse {
   /**
-   * 订单号。
+   * <p>订单号。</p>
    */
   DealName?: string
   /**
-   * 冻结流水号。
+   * <p>冻结流水号。</p>
    */
   BillId?: string
   /**

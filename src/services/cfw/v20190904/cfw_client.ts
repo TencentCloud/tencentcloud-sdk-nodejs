@@ -21,6 +21,7 @@ import {
   ModifyFwGroupSwitchRequest,
   DescribeCfwStatusMonitorRequest,
   CheckClusterNatFwPreAccessRequest,
+  DeleteWhiteRuleResponse,
   FwDeploy,
   CreateAlertCenterIsolateResponse,
   NatClusterInfo,
@@ -53,6 +54,7 @@ import {
   CreateNatFwInstanceRequest,
   SecurityGroupSimplifyRule,
   ClusterFwPreAccessCheckResult,
+  ModifyWhiteRuleResponse,
   DescribeEnterpriseSecurityGroupRuleRequest,
   VpcRuleItem,
   CreateAlertCenterOmitRequest,
@@ -83,6 +85,7 @@ import {
   DescribeNDRAssetIdentificationCursorListResponse,
   ModifySequenceAclRulesResponse,
   CreateBlockIgnoreRuleNewResponse,
+  ModifyWhiteRuleRequest,
   ScanResultInfo,
   DeleteBlockIgnoreRuleListRequest,
   SyncFwOperateResponse,
@@ -104,6 +107,7 @@ import {
   ModifyVpcAcRuleResponse,
   DescribeBlockListRequest,
   ModifyBlockIgnoreRuleNewRequest,
+  CreateWhiteRuleResponse,
   DescribeCfwRiskOverviewRequest,
   RemoveNatAcRuleResponse,
   CustomWhiteRule,
@@ -211,7 +215,7 @@ import {
   ModifyBlockIgnoreRuleResponse,
   DescribeCcnAssociatedInstancesResponse,
   ModifyNatFwReSelectRequest,
-  CloseClusterNatFwSwitchRequest,
+  DescribeVpcAclEdgeRangeRequest,
   ModifyFwGroupSwitchResponse,
   SecurityGroupBothWayInfo,
   ModifyAllRuleStatusResponse,
@@ -233,7 +237,9 @@ import {
   ModifySecurityGroupRuleResponse,
   DescribeSecurityGroupRegionListRequest,
   DescribeSwitchErrorResponse,
+  WhiteRuleInfo,
   MultiTopicSearchInformation,
+  DeleteWhiteRuleRequest,
   ModifyTableStatusResponse,
   DescribeNatFwSwitchRequest,
   StorageHistogram,
@@ -298,11 +304,13 @@ import {
   InterconnectPair,
   ModifyVpcFwSequenceRulesResponse,
   ModifyVpcFwSequenceRulesRequest,
+  IdsWhiteRule,
   ModifyIsolateTableResponse,
   ModifySecurityGroupSequenceRulesRequest,
   CreateChooseVpcsResponse,
   DescribeNatCcnFwSwitchResponse,
   ModifyRunSyncAssetResponse,
+  CreateWhiteRuleRequest,
   ModifySequenceAclRulesRequest,
   DescribeResourceGroupNewRequest,
   ModifyBlockTopRequest,
@@ -345,7 +353,7 @@ import {
   DescribeFwEdgeIpsRequest,
   ModifyEWRuleStatusResponse,
   CreateRuleItem,
-  DescribeVpcAclEdgeRangeRequest,
+  CloseClusterNatFwSwitchRequest,
   ModifyClusterNatFwSwitchRequest,
   ModifyNatInstanceResponse,
   DescribeBlockStaticListResponse,
@@ -657,6 +665,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: ModifyClusterVpcFwSwitchResponse) => void
   ): Promise<ModifyClusterVpcFwSwitchResponse> {
     return this.request("ModifyClusterVpcFwSwitch", req, cb)
+  }
+
+  /**
+   * 创建入侵防御白名单。先选择 RuleType，再按该类型填写 Rules[].Info；每条策略使用唯一 RuleName。创建成功后调用 DescribeWhiteRule，使用 RuleName+OperatorType 9 查询并精确核对 RuleName，取得 WhiteId。
+   */
+  async CreateWhiteRule(
+    req: CreateWhiteRuleRequest,
+    cb?: (error: string, rep: CreateWhiteRuleResponse) => void
+  ): Promise<CreateWhiteRuleResponse> {
+    return this.request("CreateWhiteRule", req, cb)
   }
 
   /**
@@ -1087,6 +1105,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: DescribeNatFwSwitchResponse) => void
   ): Promise<DescribeNatFwSwitchResponse> {
     return this.request("DescribeNatFwSwitch", req, cb)
+  }
+
+  /**
+   * 按 WhiteId 删除入侵防御白名单。先从 DescribeWhiteRule.Data[].WhiteId 读取目标 ID；提交删除后调用 DescribeWhiteRule，Filters 使用 Name=WD、OperatorType=1 和目标 WhiteId，Data 为空表示删除完成。
+   */
+  async DeleteWhiteRule(
+    req: DeleteWhiteRuleRequest,
+    cb?: (error: string, rep: DeleteWhiteRuleResponse) => void
+  ): Promise<DeleteWhiteRuleResponse> {
+    return this.request("DeleteWhiteRule", req, cb)
   }
 
   /**
@@ -1620,6 +1648,16 @@ VPC间规则需指定EdgeId。Nat边界规则需指定地域Region与Direction�
     cb?: (error: string, rep: ExpandCfwVerticalResponse) => void
   ): Promise<ExpandCfwVerticalResponse> {
     return this.request("ExpandCfwVertical", req, cb)
+  }
+
+  /**
+   * 修改入侵防御白名单采用整条替换。先调用 DescribeWhiteRule，选择 BanEdit=0 的策略并沿用其 WhiteId 和 RuleType；Rule 提交修改后的全部可写字段。Info 多值字段按笛卡尔积展开，第一项更新原 WhiteId，其余组合创建新 WhiteId，展开后最多 100 条且新增组合消耗配额。成功后调用 DescribeWhiteRule：原策略使用 Name=WD、OperatorType=1 精确查询，新组合使用 Name=RuleName、OperatorType=9 查询并逐项核对。
+   */
+  async ModifyWhiteRule(
+    req: ModifyWhiteRuleRequest,
+    cb?: (error: string, rep: ModifyWhiteRuleResponse) => void
+  ): Promise<ModifyWhiteRuleResponse> {
+    return this.request("ModifyWhiteRule", req, cb)
   }
 
   /**

@@ -3087,41 +3087,45 @@ export interface InquirePriceRenewInstanceRequest {
  */
 export interface KibanaView {
   /**
-   * Kibana节点IP
+   * <p>Kibana节点IP</p>
    */
   Ip?: string
   /**
-   * 节点总磁盘大小
+   * <p>节点总磁盘大小</p>
    */
   DiskSize?: number
   /**
-   * 磁盘使用率
+   * <p>磁盘使用率</p>
    */
   DiskUsage?: number
   /**
-   * 节点内存大小
+   * <p>节点内存大小</p>
    */
   MemSize?: number
   /**
-   * 内存使用率
+   * <p>内存使用率</p>
    */
   MemUsage?: number
   /**
-   * 节点cpu个数
+   * <p>节点cpu个数</p>
    */
   CpuNum?: number
   /**
-   * cpu使用率
+   * <p>cpu使用率</p>
    */
   CpuUsage?: number
   /**
-   * 可用区
+   * <p>可用区</p>
    */
   Zone?: string
   /**
-   * ts-0noqayxu-az6-hot-03222010-0
+   * <p>ts-0noqayxu-az6-hot-03222010-0</p>
    */
   NodeId?: string
+  /**
+   * <p>客户侧Ip信息</p>
+   */
+  UserIp?: string
 }
 
 /**

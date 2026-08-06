@@ -126,6 +126,24 @@ export interface CheckClusterNatFwPreAccessRequest {
 }
 
 /**
+ * DeleteWhiteRule返回参数结构体
+ */
+export interface DeleteWhiteRuleResponse {
+  /**
+   * 状态码，0 表示请求被接受处理。
+   */
+  ReturnCode?: number
+  /**
+   * 状态信息；成功一般为 success。
+   */
+  ReturnMsg?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 防火墙部署输入参数列表
  */
 export interface FwDeploy {
@@ -1019,6 +1037,16 @@ export interface ClusterFwPreAccessCheckResult {
 }
 
 /**
+ * ModifyWhiteRule返回参数结构体
+ */
+export interface ModifyWhiteRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeEnterpriseSecurityGroupRule请求参数结构体
  */
 export interface DescribeEnterpriseSecurityGroupRuleRequest {
@@ -1821,6 +1849,31 @@ export interface CreateBlockIgnoreRuleNewResponse {
 }
 
 /**
+ * ModifyWhiteRule请求参数结构体
+ */
+export interface ModifyWhiteRuleRequest {
+  /**
+   * JSON object，提交完整策略。将 DescribeWhiteRule.Data[].WhiteId 写入 Rule.Info.WhiteId；RuleName、FwType、EndTime、Comment、Info 按本次请求整体保存，Id 和 IdsRuleName 由服务端管理。
+   */
+  Rule: IdsWhiteRule
+  /**
+   * 使用 JSON integer，沿用 DescribeWhiteRule.Data[].RuleType：
+- 2 精确外部 IP：Rule.Info.SrcIP、Rule.Info.DstIP 两个字段中恰好填写一个。
+- 3 域名。
+- 4 威胁情报。
+- 5 资产：Rule.Info.SrcIP、Rule.Info.DstIP 两个字段中恰好填写一个。
+- 6 IPS 自定义：Rule.Info.IdsRuleId 必填，Rule.Info.SrcIP、Rule.Info.DstIP 至少一项为具体 IP；Rule.FwType=16 时目的 IPv4 可带端口；Rule.FwType 包含 1 时具体 IP 至少一项属于当前账号资产。
+- 8 IP 扩展：在 Rule.Info 中填写 CIDR、端口或源/目的组合。
+- 9 NDR 扩展：Rule.FwType=16，Rule.Info 至少包含一个 NDR 专属条件；搭配 IdsRuleId 时同时填写 Rule.Info.SrcIP 或 Rule.Info.DstIP。
+   */
+  RuleType: number
+  /**
+   * 使用 JSON integer。仅 RuleType=2 使用：0 或省略表示保留冲突封禁；1 表示删除同 IP、同方向冲突封禁后保存，选择 1 前先确认该删除操作。其它 RuleType 省略本参数。
+   */
+  CoverDuplicate?: number
+}
+
+/**
  * 新手引导扫描结果信息
  */
 export interface ScanResultInfo {
@@ -2408,6 +2461,16 @@ export interface ModifyBlockIgnoreRuleNewRequest {
    * RuleType: 1放通列表 2外部IP 3域名 4情报 5资产 6自定义规则  7入侵防御规则
    */
   RuleType: number
+}
+
+/**
+ * CreateWhiteRule返回参数结构体
+ */
+export interface CreateWhiteRuleResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4845,17 +4908,45 @@ export interface ModifyNatFwReSelectRequest {
 }
 
 /**
- * CloseClusterNatFwSwitch请求参数结构体
+ * DescribeVpcAclEdgeRange请求参数结构体
  */
-export interface CloseClusterNatFwSwitchRequest {
+export interface DescribeVpcAclEdgeRangeRequest {
   /**
-   * <p>NAT防火墙实例ID</p>
+   * 规则列表来源：rules，来源于当前已配置的规则；switchs，来源于开关列表
    */
-  NatInsId: string
+  FromList: string
   /**
-   * <p>云联网实例ID</p>
+   * 需要查询的索引，特定场景使用，可不填
    */
-  CcnId: string
+  Index?: string
+  /**
+   * 过滤条件组合
+   */
+  Filters?: Array<CommonFilter>
+  /**
+   * 每页条数
+   */
+  Limit?: number
+  /**
+   * 偏移值
+   */
+  Offset?: number
+  /**
+   * 检索的起始时间，可不传
+   */
+  StartTime?: string
+  /**
+   * 检索的截止时间，可不传
+   */
+  EndTime?: string
+  /**
+   * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
+   */
+  Order?: string
+  /**
+   * 排序所用到的字段
+   */
+  By?: string
 }
 
 /**
@@ -5491,6 +5582,64 @@ export interface DescribeSwitchErrorResponse {
 }
 
 /**
+ * 白名单匹配条件；各字段的适用 RuleType 和取值要求见字段说明。
+ */
+export interface WhiteRuleInfo {
+  /**
+   * 访问目的。RuleType=2：本字段与 SrcIP 两个字段中恰好填写一个，值为精确 IP；RuleType=5：本字段与 SrcIP 两个字段中恰好填写一个，值为资产 instance_id；RuleType=6：与 SrcIP 至少一项为具体 IP，另一项可省略或使用同 IP 版本的 0.0.0.0/0、::/0，两项均为具体 IP 时使用相同 IP 版本；FwType=16 时具体目的 IPv4 可带端口。RuleType=8：IP、CIDR、IP:端口或 CIDR:端口，可与 SrcIP 组合；RuleType=9：IP、CIDR 或带端口地址，可与 NDR 专属条件组合；搭配 IdsRuleId 时使用 IPv4 或 IPv4:端口。IPv6 带端口时使用 [IPv6]:端口；已选字段的多值用逗号分隔。
+   */
+  DstIP?: string
+  /**
+   * 文件 MD5，仅 RuleType=9。32 位十六进制；多值逗号分隔，最多 10 个。
+   */
+  FileMd5?: string
+  /**
+   * 文件名，仅 RuleType=9；支持精确匹配及 ?、* 通配符，区分大小写；多值用逗号分隔，最多 10 个。
+   */
+  FileName?: string
+  /**
+   * HTTP Host，仅 RuleType=9；填写主机名或 IP，支持 ?、* 通配符并区分大小写；多值用逗号分隔。
+   */
+  HostName?: string
+  /**
+   * 服务端内部字段。
+   */
+  Id?: number
+  /**
+   * IPS 规则 ID，取自 DescribeIpsRuleListNew.Data[].RuleID。RuleType=6 必填；RuleType=9 可选，填写时同时填写 SrcIP 或 DstIP。
+   */
+  IdsRuleId?: string
+  /**
+   * 服务端保留字段。
+   */
+  IdsRuleName?: string
+  /**
+   * RuleType=3 填一个合法域名；RuleType=4 填情报 IP、CIDR 或域名。
+   */
+  Ioc?: string
+  /**
+   * 访问源。RuleType=2：本字段与 DstIP 两个字段中恰好填写一个，值为精确 IP；RuleType=5：本字段与 DstIP 两个字段中恰好填写一个，值为资产 instance_id；RuleType=6：与 DstIP 至少一项为具体 IP，另一项可省略或使用同 IP 版本的 0.0.0.0/0、::/0，两项均为具体 IP 时使用相同 IP 版本；RuleType=8：IP 或 CIDR；RuleType=9：IP 或 CIDR，可与 NDR 专属条件组合；搭配 IdsRuleId 时使用 IPv4。源地址使用无端口格式；已选字段的多值用逗号分隔。
+   */
+  SrcIP?: string
+  /**
+   * HTTP URL，仅 RuleType=9；支持精确匹配及 ?、* 通配符，区分大小写；多值用逗号分隔，最多 10 个。
+   */
+  Url?: string
+  /**
+   * HTTP User-Agent，仅 RuleType=9；支持精确匹配及 ?、* 通配符，区分大小写；单值少于 255 个字符，最多 2 个，多值用 <#cfw-splite#> 分隔。
+   */
+  UserAgent?: string
+  /**
+   * 白名单策略唯一 ID。
+   */
+  WhiteId?: string
+  /**
+   * HTTP X-Forwarded-For，仅 RuleType=9；精确 IP，多值逗号分隔，最多 50 个。
+   */
+  XForwardedFor?: string
+}
+
+/**
  * 多日志主题检索相关信息
  */
 export interface MultiTopicSearchInformation {
@@ -5502,6 +5651,16 @@ export interface MultiTopicSearchInformation {
    * 透传上次接口返回的Context值，可获取后续更多日志，总计最多可获取1万条原始日志，过期时间1小时
    */
   Context?: string
+}
+
+/**
+ * DeleteWhiteRule请求参数结构体
+ */
+export interface DeleteWhiteRuleRequest {
+  /**
+   * JSON string 数组，至少一项；元素取自 DescribeWhiteRule.Data[].WhiteId，可批量。
+   */
+  WhiteIdList?: Array<string>
 }
 
 /**
@@ -7061,6 +7220,38 @@ export interface ModifyVpcFwSequenceRulesRequest {
 }
 
 /**
+ * 入侵防御白名单策略。必填字段：RuleName、FwType、EndTime、Info；Comment 选填
+ */
+export interface IdsWhiteRule {
+  /**
+   * 策略备注，最多 200 个字符；可省略或传空字符串。
+   */
+  Comment?: string
+  /**
+   * 策略截止时间，北京时间（UTC+8）YYYY-MM-DD HH:MM:SS，必须晚于当前时间；永久有效传 3000-01-01 00:00:00。
+   */
+  EndTime?: string
+  /**
+   * 使用 JSON integer 表示生效范围位图，取值 1–31；各项按位相加：1 互联网旁路、2 NAT、4 VPC、8 互联网串行、16 NDR。
+例如：12 表示 VPC+互联网串行，31 表示全部范围。
+匹配条件支持的范围：
+- 源/目的 IP、域名、IPS 规则：支持 1、2、4、8、16 及其组合。
+- 威胁情报：固定为 1。
+- 资产：使用 4、16 或 20。
+- UserAgent、Url、XForwardedFor、HostName、FileName、FileMd5：固定为 16；RuleType=9 同样固定为 16。
+   */
+  FwType?: number
+  /**
+   * 匹配条件。按 RuleType 填写对应字段，无值字段省略。除 UserAgent 外，同字段多值用逗号分隔；UserAgent 多值用 <#cfw-splite#>。
+   */
+  Info?: WhiteRuleInfo
+  /**
+   * 策略名称，填写 1–50 个字符。
+   */
+  RuleName?: string
+}
+
+/**
  * ModifyIsolateTable返回参数结构体
  */
 export interface ModifyIsolateTableResponse {
@@ -7144,6 +7335,31 @@ export interface ModifyRunSyncAssetResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateWhiteRule请求参数结构体
+ */
+export interface CreateWhiteRuleRequest {
+  /**
+   * 使用 JSON integer 表示白名单类型，一次请求使用一种：
+- 2 精确外部 IP：Rules[].Info.SrcIP、Rules[].Info.DstIP 两个字段中恰好填写一个。
+- 3 域名：填写 Rules[].Info.Ioc。
+- 4 威胁情报：填写 Rules[].Info.Ioc，FwType=1。
+- 5 资产：Rules[].Info.SrcIP、Rules[].Info.DstIP 两个字段中恰好填写一个，值取 DescribeCfwAssets 的 instance_id。
+- 6 IPS 自定义：Rules[].Info.IdsRuleId 必填，Rules[].Info.SrcIP、Rules[].Info.DstIP 至少一项为具体 IP；FwType=16 时目的 IPv4 可带端口；FwType 包含 1 时具体 IP 至少一项属于当前账号资产。
+- 8 IP 扩展：在 Rules[].Info 中填写 CIDR、端口或源/目的组合。
+- 9 NDR 扩展：FwType=16，Rules[].Info 至少填写一个 UserAgent、Url、XForwardedFor、HostName、FileName、FileMd5；可组合 SrcIP、DstIP，搭配 IdsRuleId 时同时填写 SrcIP 或 DstIP。
+   */
+  RuleType: number
+  /**
+   * JSON object 数组，至少一项；每项填写 1–50 个字符的 RuleName，且同一请求内名称唯一。列表内共用一个 RuleType，不同类型分次调用。Rules[].Info 多值字段按笛卡尔积展开，一次请求展开后最多 100 条。WhiteId 由服务端生成，Id 和 IdsRuleName 由服务端管理。
+   */
+  Rules: Array<IdsWhiteRule>
+  /**
+   * 使用 JSON integer。仅 RuleType=2 使用：0 或省略表示保留冲突封禁并跳过冲突项；1 表示删除同 IP、同方向冲突封禁后创建白名单，选择 1 前先确认该删除操作。其它 RuleType 省略本参数。
+   */
+  CoverDuplicate?: number
 }
 
 /**
@@ -8194,111 +8410,83 @@ export interface ModifyEWRuleStatusResponse {
  */
 export interface CreateRuleItem {
   /**
-   * 规则方向：1 表示入站，0 表示出站；其它整数或省略会校验失败。方向还决定 SourceType、TargetType、Scope 与 Protocol 的可用组合。
+   * <p>规则方向：1 表示入站，0 表示出站；其它整数或省略会校验失败。方向还决定 SourceType、TargetType、Scope 与 Protocol 的可用组合。</p>
    */
   Direction: number
   /**
-   * 规则顺序，必须填写。传 -1 时追加到当前方向末尾；正序号表示在对应位置插入并顺延后续规则；0 按 1 处理，其他负数及超范围值不应使用。新增请求包含多条规则时，Direction 必须相同；追加时全部传 -1，插入时按请求顺序传连续递增的正序号。修改请求只接受一条规则。
+   * <p>规则顺序。不传默认为-1，传 -1 时追加到当前方向末尾；正序号表示在对应位置插入并顺延后续规则；0 按 1 处理，其他负数及超范围值不应使用。新增请求包含多条规则时，Direction 必须相同；追加时全部传 -1，插入时按请求顺序传连续递增的正序号。修改请求只接受一条规则。</p>
    */
   OrderIndex: number
   /**
-   * 目的端口。Protocol 为 ICMP 时忽略本字段并置为空字符串；其它协议必须提供可解析字符串，可按逗号分隔填写正整数单端口或“起始/结束”范围，起始值不得大于结束值，-1/-1 表示全部端口。FTP 只接受单个正整数。domain 或域名模板目的在 side 或 all 范围下仅接受 -1/-1 或 0/65535。
+   * <p>目的端口。Protocol 为 ICMP 时忽略本字段并置为空字符串；其它协议必须提供可解析字符串，可按逗号分隔填写正整数单端口或“起始/结束”范围，起始值不得大于结束值，-1/-1 表示全部端口。FTP 只接受单个正整数。domain 或域名模板目的在 side 或 all 范围下仅接受 -1/-1 或 0/65535。</p>
    */
   Port: string
   /**
-   * 协议，解析不区分大小写。四层值 TCP、UDP、ICMP、ICMPV6、ANY 归一化为大写；应用层值 HTTP、HTTPS、HTTP/HTTPS、SMTP、SMTPS、SMTP/SMTPS、FTP、DNS、TLS/SSL 及别名 domain、TLS、SSL 归一化为对应标准值。ANY 表示不限定协议，不表示省略 Protocol；它同时属于可解析的四层协议和应用协议，domain、TLS、SSL 均归一化为 TLS/SSL。domain 或域名模板目的接受上述应用层协议及 ANY，但不接受 FTP 和其它四层协议；dnsparse、domainiptwoverify 仅接受 TCP 或 UDP 且仅支持 serial；其它目的在公有云环境不接受 FTP、ANY 之外的应用层协议。side 或 all 范围下，入站仅接受 TCP，出站仅接受 TCP、HTTP/HTTPS 或 TLS/SSL。DNS 用于非 domain 目的且目的不是 * 时，目的内容还必须是非 IP 的合法域名规则列表。使用协议端口模板时，模板中的每组协议和端口也执行这些联动校验。
+   * <p>协议，解析不区分大小写。四层值 TCP、UDP、ICMP、ICMPV6、ANY 归一化为大写；应用层值 HTTP、HTTPS、HTTP/HTTPS、SMTP、SMTPS、SMTP/SMTPS、FTP、DNS、TLS/SSL 及别名 domain、TLS、SSL 归一化为对应标准值。ANY 表示不限定协议，不表示省略 Protocol；它同时属于可解析的四层协议和应用协议，domain、TLS、SSL 均归一化为 TLS/SSL。domain 或域名模板目的接受上述应用层协议及 ANY，但不接受 FTP 和其它四层协议；dnsparse、domainiptwoverify 仅接受 TCP 或 UDP 且仅支持 serial；其它目的在公有云环境不接受 FTP、ANY 之外的应用层协议。side 或 all 范围下，入站仅接受 TCP，出站仅接受 TCP、HTTP/HTTPS 或 TLS/SSL。DNS 用于非 domain 目的且目的不是 * 时，目的内容还必须是非 IP 的合法域名规则列表。使用协议端口模板时，模板中的每组协议和端口也执行这些联动校验。</p>
    */
   Protocol: string
   /**
-   * 流量处理动作，解析不区分大小写。accept 表示放行，drop 表示拒绝，log 表示观察；isolateinaccept 表示放行访问隔离资产的白名单流量，isolateindrop 表示阻断访问隔离资产的其它流量，isolateoutaccept 表示放行隔离资产访问白名单目标，isolateoutdrop 表示阻断隔离资产访问其它目标。drop 及其拒绝别名还会校验当前账号是否具备互联网边界阻断能力。
+   * <p>流量处理动作，解析不区分大小写。accept 表示放行，drop 表示拒绝，log 表示观察；isolateinaccept 表示放行访问隔离资产的白名单流量，isolateindrop 表示阻断访问隔离资产的其它流量，isolateoutaccept 表示放行隔离资产访问白名单目标，isolateoutdrop 表示阻断隔离资产访问其它目标。drop 及其拒绝别名还会校验当前账号是否具备互联网边界阻断能力。</p>
    */
   RuleAction: string
   /**
-   * 访问源内容。ip 或 net 使用合法 IP/CIDR 列表，普通列表最多 10 项；template 使用当前账号可解析的地址模板标识；Direction=0 时，instance、group、tag 使用相应资源标识，其中 instance 必须能解析到公网 IP，tag 必须存在且格式为 {"Key":"标签键","Value":"标签值"}；Direction=1 时，location 使用地域 code CSV 并须通过当前账号的新地域规则能力校验，vendor 使用 tencent、aliyun、aws、huawei、azure 或 all 的 CSV。location、vendor 保存时会转换为地域或厂商匹配信息。
+   * <p>访问源内容。ip 或 net 使用合法 IP/CIDR 列表，普通列表最多 10 项；template 使用当前账号可解析的地址模板标识；Direction=0 时，instance、group、tag 使用相应资源标识，其中 instance 必须能解析到公网 IP，tag 必须存在且格式为 {&quot;Key&quot;:&quot;标签键&quot;,&quot;Value&quot;:&quot;标签值&quot;}；Direction=1 时，location 使用地域 code CSV 并须通过当前账号的新地域规则能力校验，vendor 使用 tencent、aliyun、aws、huawei、azure 或 all 的 CSV。location、vendor 保存时会转换为地域或厂商匹配信息。</p>
    */
   SourceContent: string
   /**
-   * 访问源类型，解析不区分大小写。net、ip 均表示 IP/CIDR，template 表示地址模板，instance 表示资产实例，group 表示资产分组，tag 表示资源标签，location 表示地域，vendor 表示云厂商。Direction=1 接受 ip、net、template、location、vendor；Direction=0 接受 ip、net、template、instance、group、tag。ip 与 net 按同一类型处理。
+   * <p>访问源类型，解析不区分大小写。net、ip 均表示 IP/CIDR，template 表示地址模板，instance 表示资产实例，group 表示资产分组，tag 表示资源标签，location 表示地域，vendor 表示云厂商。Direction=1 接受 ip、net、template、location、vendor；Direction=0 接受 ip、net、template、instance、group、tag。ip 与 net 按同一类型处理。</p>
    */
   SourceType: string
   /**
-   * 访问目的内容。ip 或 net 使用合法 IP/CIDR 列表；domain 使用合法的 IP、普通域名或通配域名列表，也接受单独的 *；普通列表最多 10 项，通配域名最多 5 级。domain 配合 DNS 协议时不接受 IP。dnsparse 使用单个合法域名、泛域名或当前账号可解析的 mb_ 域名模板，domainiptwoverify 使用单个不含通配符的合法域名或此类模板；两者均不接受单独的 *、IP、逗号列表或段内通配域名。串行 domain 段内通配和 domainiptwoverify 模板要求当前环境支持对应能力。template 使用当前账号可解析的地址模板标识；Direction=1 时，instance、group、tag 使用相应资源标识，其中 instance 必须能解析到公网 IP，tag 必须存在且格式为 {"Key":"标签键","Value":"标签值"}；Direction=0 时，location 使用地域 code CSV，vendor 使用 tencent、aliyun、aws、huawei、azure 或 all 的 CSV。规范化后的内容最长 1023。
+   * <p>访问目的内容。ip 或 net 使用合法 IP/CIDR 列表；domain 使用合法的 IP、普通域名或通配域名列表，也接受单独的 *；普通列表最多 10 项，通配域名最多 5 级。domain 配合 DNS 协议时不接受 IP。dnsparse 使用单个合法域名、泛域名或当前账号可解析的 mb_ 域名模板，domainiptwoverify 使用单个不含通配符的合法域名或此类模板；两者均不接受单独的 *、IP、逗号列表或段内通配域名。串行 domain 段内通配和 domainiptwoverify 模板要求当前环境支持对应能力。template 使用当前账号可解析的地址模板标识；Direction=1 时，instance、group、tag 使用相应资源标识，其中 instance 必须能解析到公网 IP，tag 必须存在且格式为 {&quot;Key&quot;:&quot;标签键&quot;,&quot;Value&quot;:&quot;标签值&quot;}；Direction=0 时，location 使用地域 code CSV，vendor 使用 tencent、aliyun、aws、huawei、azure 或 all 的 CSV。规范化后的内容最长 1023。</p>
    */
   TargetContent: string
   /**
-   * 访问目的类型，解析不区分大小写。net、ip 均表示 IP/CIDR，template 表示地址模板，instance 表示资产实例，group 表示资产分组，tag 表示资源标签，location 表示地域，vendor 表示云厂商，domain 表示 FQDN 匹配（内容也可传 IP 或 *），dnsparse 表示宽松匹配：Host/SNI 与域名匹配，或目的 IP 属于该域名当前 DNS 解析结果，满足任一条件即命中；domainiptwoverify 表示严格匹配：上述两个条件必须同时满足。Direction=1 接受 ip、net、template、domain、instance、group、tag；Direction=0 接受 ip、net、template、domain、dnsparse、domainiptwoverify、location、vendor。
+   * <p>访问目的类型，解析不区分大小写。net、ip 均表示 IP/CIDR，template 表示地址模板，instance 表示资产实例，group 表示资产分组，tag 表示资源标签，location 表示地域，vendor 表示云厂商，domain 表示 FQDN 匹配（内容也可传 IP 或 *），dnsparse 表示宽松匹配：Host/SNI 与域名匹配，或目的 IP 属于该域名当前 DNS 解析结果，满足任一条件即命中；domainiptwoverify 表示严格匹配：上述两个条件必须同时满足。Direction=1 接受 ip、net、template、domain、instance、group、tag；Direction=0 接受 ip、net、template、domain、dnsparse、domainiptwoverify、location、vendor。</p>
    */
   TargetType: string
   /**
-   * 规则描述，不超过 100 个字符。新增时按请求值保存；修改时完整替换，不继承旧值。
+   * <p>规则描述，不超过 100 个字符。新增时按请求值保存；修改时完整替换，不继承旧值。</p>
    */
   Description?: string
   /**
-   * 启用状态。非空值不区分大小写接受字符串 true 或 false，并归一化为启用或停用；省略或传空字符串时读取当前账号的访问控制默认启用配置，该配置不可用时默认启用。替换现有规则时不继承旧值。
+   * <p>启用状态。非空值不区分大小写接受字符串 true 或 false，并归一化为启用或停用；省略或传空字符串时读取当前账号的访问控制默认启用配置，该配置不可用时默认启用。替换现有规则时不继承旧值。</p>
    */
   Enable?: string
   /**
-   * 关联告警或来源事件 ID。新增时省略或传空字符串表示不关联；修改时应将 DescribeCfwRules 返回的 rules[].log_id 原样传入，未返回时省略或传空字符串。替换时不会自动继承旧值；From=batch_import_cover 时，非空值还会作为覆盖导入后规则的字符串标识复用。
+   * <p>关联告警或来源事件 ID。新增时省略或传空字符串表示不关联；修改时应将 DescribeCfwRules 返回的 rules[].log_id 原样传入，未返回时省略或传空字符串。替换时不会自动继承旧值；From=batch_import_cover 时，非空值还会作为覆盖导入后规则的字符串标识复用。</p>
    */
   LogId?: string
   /**
-   * 协议端口模板 ID。省略或传空字符串表示不使用模板；非空时必须指向当前账号已有且内容格式为“协议:端口”的模板，否则请求失败。模板中的协议和端口须满足 Direction、TargetType 与 Scope 的联动限制。Protocol 和 Port 仍须符合各自字段规则，但不要求固定填写 ANY、-1/-1 或 serial。
+   * <p>协议端口模板 ID。省略或传空字符串表示不使用模板；非空时必须指向当前账号已有且内容格式为“协议:端口”的模板，否则请求失败。模板中的协议和端口须满足 Direction、TargetType 与 Scope 的联动限制。Protocol 和 Port 仍须符合各自字段规则，但不要求固定填写 ANY、-1/-1 或 serial。</p>
    */
   ParamTemplateId?: string
   /**
-   * 规则来源：0 表示普通规则，2 表示隔离资产出向访问规则。新增时可以省略，省略按 0 处理；显式传值及修改时仅接受 0 或 2，修改时应传入原规则值。
+   * <p>规则来源：0 表示普通规则，2 表示隔离资产出向访问规则。新增时可以省略，省略按 0 处理；显式传值及修改时仅接受 0 或 2，修改时应传入原规则值。</p>
    */
   RuleSource?: number
   /**
-   * 生效范围，解析不区分大小写：serial 表示仅互联网边界串行防火墙，side 表示仅互联网边界旁路防火墙，all 表示同时作用于串行和旁路防火墙；省略、空字符串或其它值会校验失败。国际站环境会将有效输入统一归一化为 serial。协议、端口、目的类型及协议端口模板的联动限制见 Protocol、Port 和 ParamTemplateId。
+   * <p>生效范围，必填，解析不区分大小写：serial 表示仅互联网边界串行防火墙，side 表示仅互联网边界旁路防火墙，all 表示同时作用于串行和旁路防火墙；省略、空字符串或其它值会校验失败。国际站环境会将有效输入统一归一化为 serial。协议、端口、目的类型及协议端口模板的联动限制见 Protocol、Port 和 ParamTemplateId。</p>
    */
   Scope?: string
   /**
-   * 规则数值 ID。普通新增、指定位置新增和批量导入会忽略该字段；From=batch_import_cover 时可使用正整数 ID；修改时必须提供当前账号已有且可修改的正整数 ID，用于定位并完整替换原规则，省略、非正整数或不存在的 ID 会导致请求失败。
+   * <p>规则数值 ID。普通新增、指定位置新增和批量导入会忽略该字段；From=batch_import_cover 时可使用正整数 ID；修改时必须提供当前账号已有且可修改的正整数 ID，用于定位并完整替换原规则，省略、非正整数或不存在的 ID 会导致请求失败。</p>
    */
   Uuid?: number
 }
 
 /**
- * DescribeVpcAclEdgeRange请求参数结构体
+ * CloseClusterNatFwSwitch请求参数结构体
  */
-export interface DescribeVpcAclEdgeRangeRequest {
+export interface CloseClusterNatFwSwitchRequest {
   /**
-   * 规则列表来源：rules，来源于当前已配置的规则；switchs，来源于开关列表
+   * <p>NAT防火墙实例ID</p>
    */
-  FromList: string
+  NatInsId: string
   /**
-   * 需要查询的索引，特定场景使用，可不填
+   * <p>云联网实例ID</p>
    */
-  Index?: string
-  /**
-   * 过滤条件组合
-   */
-  Filters?: Array<CommonFilter>
-  /**
-   * 每页条数
-   */
-  Limit?: number
-  /**
-   * 偏移值
-   */
-  Offset?: number
-  /**
-   * 检索的起始时间，可不传
-   */
-  StartTime?: string
-  /**
-   * 检索的截止时间，可不传
-   */
-  EndTime?: string
-  /**
-   * desc：降序；asc：升序。根据By字段的值进行排序，这里传参的话则By也必须有值
-   */
-  Order?: string
-  /**
-   * 排序所用到的字段
-   */
-  By?: string
+  CcnId: string
 }
 
 /**

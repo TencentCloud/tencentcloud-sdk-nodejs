@@ -14202,6 +14202,10 @@ export interface DeployContainerApplicationRequest {
    * <p>镜像Secret列表</p>
    */
   ImagePullSecretList?: Array<string>
+  /**
+   * <p>用于区分使用sidecar的版本是稳定版还是发行版</p><p>枚举值：</p><ul><li>stable： sidecar稳定版</li><li>release： sidecar发行版</li></ul>
+   */
+  MeshSidecarVersion?: string
 }
 
 /**

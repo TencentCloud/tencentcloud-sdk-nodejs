@@ -58,6 +58,7 @@ import {
   ModifyCloudNativeAPIGatewayLLMModelAPIResponse,
   CNAPIGwConsumer,
   AIGWLogConfig,
+  KongServicePreview,
   AIGWMCPServerList,
   AIGWIntentRouteRule,
   ModifyCloudNativeAPIGatewayLLMModelServiceResponse,
@@ -70,7 +71,10 @@ import {
   CNAPIGwMCPToolParam,
   AIGWOAuthAuthPluginConfig,
   DescribeCloudNativeAPIGatewayConsumerGroupRequest,
+  KongUpstreamInfo,
+  KongServiceWithRoutes,
   AIGWJWTAuthPluginConfig,
+  DescribeCNGWServicesWithRoutesResponse,
   CloudNativeAPIGatewayLLMModelAPI,
   DescribeCloudNativeAPIGatewayLLMModelAPIsRequest,
   ModifyCloudNativeAPIGatewayMCPServerACLRequest,
@@ -89,6 +93,7 @@ import {
   DescribeCloudNativeAPIGatewayMCPToolListRequest,
   DeleteCloudNativeAPIGatewayMCPServerResponse,
   CNAPIGwParseMCPToolsResult,
+  KongRoutePreview,
   ModifyCloudNativeAPIGatewayMCPToolRequest,
   DescribeCloudNativeAPIGatewayMCPToolACLListRequest,
   ListCloudNativeAPIGatewayLLMModelAPI,
@@ -101,8 +106,9 @@ import {
   UpdateCloudNativeAPIGatewayMCPToolsResponse,
   DescribeCloudNativeAPIGatewayLLMModelAPIResponse,
   AIGWMCPUpstreamInfoDetail,
-  ModifyCloudNativeAPIGatewayMCPServerStatusResponse,
+  KongTarget,
   DescribeCloudNativeAPIGatewayLLMModelAPIRequest,
+  KVMapping,
   CreateCloudNativeAPIGatewayConsumerRequest,
   AIGWTokenLengthRoute,
   AIGWCacheAwareRouteCandidate,
@@ -110,6 +116,7 @@ import {
   ModifyCloudNativeAPIGatewayConsumerResponse,
   ModifyCloudNativeAPIGatewayMCPServerACLResponse,
   DeleteCloudNativeAPIGatewayMCPServerRequest,
+  ModifyCloudNativeAPIGatewayMCPServerStatusResponse,
   DeleteCloudNativeAPIGatewaySecretKeyResponse,
   DescribeCloudNativeAPIGatewayMCPToolRequest,
   DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsRequest,
@@ -124,6 +131,7 @@ import {
   DeleteCloudNativeAPIGatewayLLMModelAPIRequest,
   ModifyCloudNativeAPIGatewayMCPServerStatusRequest,
   ModifyCloudNativeAPIGatewayMCPToolResponse,
+  ListFilter,
   RemoveCloudNativeAPIGatewayConsumerInGroupResponse,
   AIGWCrossServiceFallbackConfig,
   DescribeCloudNativeAPIGatewayLLMModelAPIsResponse,
@@ -140,6 +148,7 @@ import {
   AIGWMCPToolACLItem,
   DescribeCloudNativeAPIGatewayLLMTokenUsageStatisticsResponse,
   ListCloudNativeAPIGatewayLLMModelService,
+  DescribeCNGWServicesWithRoutesRequest,
   DescribeCloudNativeAPIGatewayMCPServerACLResponse,
   ModifyCloudNativeAPIGatewayMCPServerResponse,
   DescribeCloudNativeAPIGatewayLLMModelServiceResponse,
@@ -152,6 +161,7 @@ import {
   ModifyCloudNativeAPIGatewayMCPToolStatusResponse,
   AIGWLLMQuotaLimit,
   AIGWCustomDesensitizeRule,
+  KongServiceRoute,
   CNAPIGwMCPToolList,
   AIGWTokenLengthRouteRule,
   AIGWOAuthCredentialConfig,
@@ -414,6 +424,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyCloudNativeAPIGatewayConsumerResponse) => void
   ): Promise<ModifyCloudNativeAPIGatewayConsumerResponse> {
     return this.request("ModifyCloudNativeAPIGatewayConsumer", req, cb)
+  }
+
+  /**
+   * 查询云原生网关服务和路由列表
+   */
+  async DescribeCNGWServicesWithRoutes(
+    req: DescribeCNGWServicesWithRoutesRequest,
+    cb?: (error: string, rep: DescribeCNGWServicesWithRoutesResponse) => void
+  ): Promise<DescribeCNGWServicesWithRoutesResponse> {
+    return this.request("DescribeCNGWServicesWithRoutes", req, cb)
   }
 
   /**

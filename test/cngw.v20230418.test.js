@@ -238,6 +238,16 @@ it("cngw.v20230418.ModifyCloudNativeAPIGatewayConsumer", async function () {
     }
 })
 
+it("cngw.v20230418.DescribeCNGWServicesWithRoutes", async function () {
+    try {
+       const data = await client.DescribeCNGWServicesWithRoutes({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cngw.v20230418.ModifyCloudNativeAPIGatewayMCPServer", async function () {
     try {
        const data = await client.ModifyCloudNativeAPIGatewayMCPServer({})

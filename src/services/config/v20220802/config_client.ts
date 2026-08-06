@@ -56,6 +56,7 @@ import {
   UpdateAlarmPolicyResponse,
   DescribeCompliancePackRequest,
   ListDiscoveredResourcesResponse,
+  ListConfigRuleResourceEvaluationResultsRequest,
   UpdateAggregateCompliancePackStatusResponse,
   Aggregator,
   DescribeAggregateConfigDeliverResponse,
@@ -66,6 +67,7 @@ import {
   ListCompliancePacksRequest,
   UpdateCompliancePackStatusResponse,
   UpdateAggregateCompliancePackStatusRequest,
+  ListAggregateConfigRuleResourceEvaluationResultsResponse,
   UpdateConfigRecorderResponse,
   ListAlarmPolicyRequest,
   DescribeSystemCompliancePackResponse,
@@ -126,6 +128,7 @@ import {
   UpdateAggregateConfigDeliverResponse,
   UpdateAggregateCompliancePackResponse,
   CompliancePackRuleForManage,
+  ListConfigRuleResourceEvaluationResultsResponse,
   DeleteAggregateCompliancePackRequest,
   ListSystemRulesRequest,
   AggregateResourceInfo,
@@ -159,6 +162,7 @@ import {
   OpenConfigRuleRequest,
   StartRemediationRequest,
   CloseConfigRuleResponse,
+  ConfigRuleResourceEvaluationResult,
   DescribeSystemRuleResponse,
   AlarmPolicyRsp,
   UpdateAggregateConfigRuleRequest,
@@ -171,6 +175,7 @@ import {
   UpdateAggregateConfigRuleResponse,
   InputParameter,
   ListRemediationsResponse,
+  ListAggregateConfigRuleResourceEvaluationResultsRequest,
   DeleteRemediationsRequest,
 } from "./config_models"
 
@@ -281,6 +286,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: OpenConfigRecorderResponse) => void
   ): Promise<OpenConfigRecorderResponse> {
     return this.request("OpenConfigRecorder", req, cb)
+  }
+
+  /**
+   * 查询配置规则资源评估结果列表
+   */
+  async ListConfigRuleResourceEvaluationResults(
+    req: ListConfigRuleResourceEvaluationResultsRequest,
+    cb?: (error: string, rep: ListConfigRuleResourceEvaluationResultsResponse) => void
+  ): Promise<ListConfigRuleResourceEvaluationResultsResponse> {
+    return this.request("ListConfigRuleResourceEvaluationResults", req, cb)
   }
 
   /**
@@ -414,13 +429,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 编辑投递设置
+   * 账号组查询配置规则资源评估结果列表
    */
-  async UpdateConfigDeliver(
-    req: UpdateConfigDeliverRequest,
-    cb?: (error: string, rep: UpdateConfigDeliverResponse) => void
-  ): Promise<UpdateConfigDeliverResponse> {
-    return this.request("UpdateConfigDeliver", req, cb)
+  async ListAggregateConfigRuleResourceEvaluationResults(
+    req: ListAggregateConfigRuleResourceEvaluationResultsRequest,
+    cb?: (error: string, rep: ListAggregateConfigRuleResourceEvaluationResultsResponse) => void
+  ): Promise<ListAggregateConfigRuleResourceEvaluationResultsResponse> {
+    return this.request("ListAggregateConfigRuleResourceEvaluationResults", req, cb)
   }
 
   /**
@@ -561,6 +576,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ListAggregateConfigRuleEvaluationResultsResponse) => void
   ): Promise<ListAggregateConfigRuleEvaluationResultsResponse> {
     return this.request("ListAggregateConfigRuleEvaluationResults", req, cb)
+  }
+
+  /**
+   * 编辑投递设置
+   */
+  async UpdateConfigDeliver(
+    req: UpdateConfigDeliverRequest,
+    cb?: (error: string, rep: UpdateConfigDeliverResponse) => void
+  ): Promise<UpdateConfigDeliverResponse> {
+    return this.request("UpdateConfigDeliver", req, cb)
   }
 
   /**

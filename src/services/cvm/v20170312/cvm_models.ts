@@ -994,37 +994,45 @@ export interface DescribeChcHostsResponse {
  */
 export interface InstanceTypeConfig {
   /**
-   * 可用区。
+   * <p>可用区。</p>
    */
   Zone?: string
   /**
-   * 实例机型。
+   * <p>实例机型。</p>
    */
   InstanceType?: string
   /**
-   * 实例机型系列。
+   * <p>实例机型系列。</p>
    */
   InstanceFamily?: string
   /**
-   * GPU核数，单位：核。
+   * <p>GPU核数，单位：核。</p>
    */
   GPU?: number
   /**
-   * CPU核数，单位：核。
+   * <p>CPU核数，单位：核。</p>
    */
   CPU?: number
   /**
-   * 内存容量，单位：`GiB`。
+   * <p>内存容量，单位：<code>GiB</code>。</p>
    */
   Memory?: number
   /**
-   * FPGA核数，单位：核。
+   * <p>FPGA核数，单位：核。</p>
    */
   FPGA?: number
   /**
-   * 实例机型映射的物理GPU卡数，单位：卡。vGPU卡型小于1，直通卡型大于等于1。vGPU是通过分片虚拟化技术，将物理GPU卡重新划分，同一块GPU卡经虚拟化分割后可分配至不同的实例使用。直通卡型会将GPU设备直接挂载给实例使用。
+   * <p>实例机型映射的物理GPU卡数，单位：卡。vGPU卡型小于1，直通卡型大于等于1。vGPU是通过分片虚拟化技术，将物理GPU卡重新划分，同一块GPU卡经虚拟化分割后可分配至不同的实例使用。直通卡型会将GPU设备直接挂载给实例使用。</p>
    */
   GpuCount?: number
+  /**
+   * <p>实例GPU类型</p>
+   */
+  GpuType?: string
+  /**
+   * <p>实例GPU单块显存,单位：GiB。</p>
+   */
+  GpuMemory?: number
 }
 
 /**
