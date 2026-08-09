@@ -4500,11 +4500,11 @@ export interface ProjectSummaryOverviewItem {
  */
 export interface DescribeDealsByCondResponse {
   /**
-   * 订单列表
+   * <p>订单列表</p>
    */
   Deals?: Array<Deal>
   /**
-   * 订单总数
+   * <p>订单总数</p>
    */
   TotalCount?: number
   /**
@@ -8535,51 +8535,39 @@ export interface DescribeSavingPlanResourceInfoResponse {
  */
 export interface DescribeDealsByCondRequest {
   /**
-   * 开始时间 2016-01-01 00:00:00
+   * <p>开始时间 2016-01-01 00:00:00</p>
    */
   StartTime: string
   /**
-   * 结束时间 2016-02-01 00:00:00 建议跨度不超过3个月
+   * <p>结束时间 2016-02-01 00:00:00 建议跨度不超过3个月</p>
    */
   EndTime: string
   /**
-   * 一页多少条数据，默认是20条，最大不超过1000
+   * <p>一页多少条数据，默认是20条，最大不超过1000</p>
    */
   Limit: number
   /**
-   * 第多少页，从0开始，默认是0
+   * <p>第多少页，从0开始，默认是0</p>
    */
   Offset?: number
   /**
-   * 订单状态,默认为4（成功的订单）
-订单的状态
-1：未支付
-2：已支付3：发货中
-4：已发货
-5：发货失败
-6：已退款
-7：已关单
-8：订单过期
-9：订单已失效
-10：产品已失效
-11：代付拒绝
-12：支付中
+   * <p>订单状态</p><p>枚举值：</p><ul><li>1：  待支付</li><li>2：  已支付</li><li>3：  发货中</li><li>4：  已发货</li><li>5：  发货失败</li><li>6：  已退款</li><li>7：  已取消</li><li>8：  订单过期</li><li>9 ：  订单已失效</li><li>10：  产品已失效</li><li>11：  代付拒绝</li><li>12：  支付中</li><li>13：  退款中</li><li>30：  服务市场订单待用户确认完成</li></ul><p>默认值：4（已发货，成功的订单）</p><p>其中，状态2、3、5、12、13、30 在<a href="https://console.cloud.tencent.com/expense/deal">控制台</a>统一显示“处理中”；<br>状态4 在<a href="https://console.cloud.tencent.com/expense/deal">控制台</a>中显示交易成功；<br>状态9、10 在<a href="https://console.cloud.tencent.com/expense/deal">控制台</a>中无对应状态</p>
    */
   Status?: number
   /**
-   * 子订单号
+   * <p>子订单号</p>
    */
   OrderId?: string
   /**
-   * 大订单号
+   * <p>大订单号</p>
    */
   BigDealId?: string
   /**
-   * 资源id
+   * <p>资源id</p>
    */
   ResourceId?: string
   /**
-   * 订单状态
+   * <p>订单状态</p>
    */
   StatusSet?: Array<number | bigint>
 }

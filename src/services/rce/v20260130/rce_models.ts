@@ -126,6 +126,11 @@ export interface AssessDeviceRiskRsp {
    * <p>设备基础信息</p>
    */
   Device?: Device
+  /**
+   * <p>IP环境基础信息</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Environment?: Environment
 }
 
 /**
@@ -367,4 +372,9 @@ export interface Decision {
    * <p>决策结果</p><ul><li>pass：通过</li><li>review：复审</li><li>reject：拒绝</li></ul>
    */
   DecisionResult?: string
+  /**
+   * <p>命中策略后的决策动作，可在控制台配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Disposition?: string
 }

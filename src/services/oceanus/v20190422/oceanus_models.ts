@@ -85,6 +85,27 @@ export interface CopyJobResult {
 }
 
 /**
+ * Sql Gateway 返回Result结构类型
+ */
+export interface StatementResult {
+  /**
+   * 返回结果列
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Columns?: Array<ResultColumn>
+  /**
+   * 格式
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RowFormat?: string
+  /**
+   * 结果值
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Data?: Array<ResultData>
+}
+
+/**
  * CreateResource请求参数结构体
  */
 export interface CreateResourceRequest {
@@ -226,6 +247,16 @@ export interface ModifyWorkSpaceRequest {
  * ModifyJob返回参数结构体
  */
 export interface ModifyJobResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyMetaTable返回参数结构体
+ */
+export interface ModifyMetaTableResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -877,6 +908,28 @@ export interface ResultColumn {
 }
 
 /**
+ * CreateMetaDatabase请求参数结构体
+ */
+export interface CreateMetaDatabaseRequest {
+  /**
+   * 无
+   */
+  CatalogId: number
+  /**
+   * 库名
+   */
+  DatabaseName: string
+  /**
+   * 备注
+   */
+  Comment?: string
+  /**
+   * 工作空间 SerialId
+   */
+  WorkSpaceId?: string
+}
+
+/**
  * setats类型
  */
 export interface Setats {
@@ -1166,15 +1219,15 @@ export interface RefJobStatusCountItem {
  */
 export interface RunSqlGatewayStatementRequest {
   /**
-   * 集群ID
+   * <p>集群ID</p>
    */
   ClusterId: string
   /**
-   * 需要执行的sql，该sql会被Sql Gateway执行，当前支持的是paimon修改需求，因此主要是DDL语句
+   * <p>需要执行的sql，需要对其进行base64编译后传入</p>
    */
   Sql: string
   /**
-   * Sql Gateway会话ID，可不填，如果不填则会自动创建一个会话ID，每个会话ID都有一个存活时间，测试环境为10分钟，线上默认是30分钟
+   * <p>Sql Gateway会话ID，可不填，如果不填则会自动创建一个会话ID，每个会话ID都有一个存活时间，测试环境为10分钟，线上默认是30分钟</p>
    */
   SessionId?: string
 }
@@ -1537,6 +1590,86 @@ export interface CreateJobResponse {
 }
 
 /**
+ * DeleteResources返回参数结构体
+ */
+export interface DeleteResourcesResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * DescribeVariables请求参数结构体
+ */
+export interface DescribeVariablesRequest {
+  /**
+   * 工作空间 SerialId
+   */
+  WorkSpaceId?: string
+}
+
+/**
+ * DescribeJobRuntimeInfo返回参数结构体
+ */
+export interface DescribeJobRuntimeInfoResponse {
+  /**
+   * 作业运行时信息
+   */
+  JobRuntimeInfo?: Array<JobRuntimeInfo>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * 停止作业的描述信息
+ */
+export interface StopJobDescription {
+  /**
+   * 作业Id
+   */
+  JobId: string
+  /**
+   * 停止类型，1 停止 2 暂停
+   */
+  StopType: number
+}
+
+/**
+ * CreateFolder请求参数结构体
+ */
+export interface CreateFolderRequest {
+  /**
+   * 新建文件夹名
+   */
+  FolderName: string
+  /**
+   * 新建文件夹的父目录ID（根目录为"root"）
+   */
+  ParentId: string
+  /**
+   * 文件夹类型，0是任务文件夹，1是依赖文件夹
+   */
+  FolderType?: number
+  /**
+   * 工作空间 SerialId
+   */
+  WorkSpaceId?: string
+}
+
+/**
+ * DeleteJobConfigs返回参数结构体
+ */
+export interface DeleteJobConfigsResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * SqlGateway配置信息
  */
 export interface SqlGatewayItem {
@@ -1615,76 +1748,6 @@ export interface SqlGatewayItem {
 }
 
 /**
- * DescribeVariables请求参数结构体
- */
-export interface DescribeVariablesRequest {
-  /**
-   * 工作空间 SerialId
-   */
-  WorkSpaceId?: string
-}
-
-/**
- * DescribeJobRuntimeInfo返回参数结构体
- */
-export interface DescribeJobRuntimeInfoResponse {
-  /**
-   * 作业运行时信息
-   */
-  JobRuntimeInfo?: Array<JobRuntimeInfo>
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
- * 停止作业的描述信息
- */
-export interface StopJobDescription {
-  /**
-   * 作业Id
-   */
-  JobId: string
-  /**
-   * 停止类型，1 停止 2 暂停
-   */
-  StopType: number
-}
-
-/**
- * CreateFolder请求参数结构体
- */
-export interface CreateFolderRequest {
-  /**
-   * 新建文件夹名
-   */
-  FolderName: string
-  /**
-   * 新建文件夹的父目录ID（根目录为"root"）
-   */
-  ParentId: string
-  /**
-   * 文件夹类型，0是任务文件夹，1是依赖文件夹
-   */
-  FolderType?: number
-  /**
-   * 工作空间 SerialId
-   */
-  WorkSpaceId?: string
-}
-
-/**
- * DeleteJobConfigs返回参数结构体
- */
-export interface DeleteJobConfigsResponse {
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
-
-/**
  * DeleteTableConfig请求参数结构体
  */
 export interface DeleteTableConfigRequest {
@@ -1707,24 +1770,93 @@ export interface DeleteTableConfigRequest {
 }
 
 /**
- * Sql Gateway 返回Result结构类型
+ * 描述Savepoint信息
  */
-export interface StatementResult {
+export interface Savepoint {
   /**
-   * 返回结果列
+   * <p>主键</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Columns?: Array<ResultColumn>
+  Id?: number
   /**
-   * 格式
+   * <p>版本号</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  RowFormat?: string
+  VersionId?: number
   /**
-   * 结果值
+   * <p>状态 1: Active; 2: Expired; 3: InProgress; 4: Failed; 5: Timeout</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
-  Data?: Array<ResultData>
+  Status?: number
+  /**
+   * <p>创建时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  CreateTime?: number
+  /**
+   * <p>更新时间</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  UpdateTime?: number
+  /**
+   * <p>路径</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Path?: string
+  /**
+   * <p>大小</p><p>单位：Byte</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Size?: number
+  /**
+   * <p>快照类型 1: savepoint；2: checkpoint；3: cancelWithSavepoint</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RecordType?: number
+  /**
+   * <p>运行作业实例的顺序 ID</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  JobRuntimeId?: number
+  /**
+   * <p>描述</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Description?: string
+  /**
+   * <p>固定超时时间</p><p>单位：毫秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Timeout?: number
+  /**
+   * <p>快照 serialId</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SerialId?: string
+  /**
+   * <p>耗时</p><p>单位：毫秒</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TimeConsuming?: number
+  /**
+   * <p>快照路径状态 1：可用；2：不可用；</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PathStatus?: number
+  /**
+   * <p>Flink版本</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FlinkVersion?: string
+  /**
+   * <p>CheckPoint是否增量</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  IsIncremental?: string
+  /**
+   * <p>checkpoint 大小</p><p>单位：Byte</p>
+   */
+  CheckpointSize?: number
 }
 
 /**
@@ -1774,13 +1906,29 @@ export interface DescribeTreeJobsRsp {
 }
 
 /**
- * DeleteResources返回参数结构体
+ * CreateConnector请求参数结构体
  */
-export interface DeleteResourcesResponse {
+export interface CreateConnectorRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 资源id
    */
-  RequestId?: string
+  ResourceId: string
+  /**
+   * 空间
+   */
+  WorkSpaceId: string
+  /**
+   * 资源版本
+   */
+  VersionId: number
+  /**
+   * 连接器名称
+   */
+  Connector: string
+  /**
+   * 连接方式
+   */
+  ConnectionMethod: string
 }
 
 /**
@@ -1965,6 +2113,36 @@ export interface JobGraphNode {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   Parallelism: number
+}
+
+/**
+ * ModifyMetaTable请求参数结构体
+ */
+export interface ModifyMetaTableRequest {
+  /**
+   * <p>集群唯一id</p>
+   */
+  ClusterId: string
+  /**
+   * <p>元数据表唯一id</p>
+   */
+  TableId: string
+  /**
+   * <p>SQL</p><p>参数格式：base64加密</p>
+   */
+  SqlCode: string
+  /**
+   * <p>Flink版本</p>
+   */
+  FlinkVersion: string
+  /**
+   * <p>空间唯一id</p>
+   */
+  WorkSpaceId: string
+  /**
+   * <p>备注</p>
+   */
+  Remark: string
 }
 
 /**
@@ -2670,6 +2848,20 @@ export interface TraceModeConfiguration {
 }
 
 /**
+ * CreateMetaTable返回参数结构体
+ */
+export interface CreateMetaTableResponse {
+  /**
+   * <p>表Id</p>
+   */
+  TableId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * RunJobs请求参数结构体
  */
 export interface RunJobsRequest {
@@ -2867,93 +3059,45 @@ export interface JobGraphEdge {
 }
 
 /**
- * 描述Savepoint信息
+ * CreateMetaTable请求参数结构体
  */
-export interface Savepoint {
+export interface CreateMetaTableRequest {
   /**
-   * <p>主键</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>Catalog Id</p>
    */
-  Id?: number
+  CatalogId: number
   /**
-   * <p>版本号</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>库Id</p>
    */
-  VersionId?: number
+  DatabaseId: number
   /**
-   * <p>状态 1: Active; 2: Expired; 3: InProgress; 4: Failed; 5: Timeout</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>建表语句</p><p>参数格式：需要base64加密</p>
    */
-  Status?: number
+  SqlCode: string
   /**
-   * <p>创建时间</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>备注</p>
    */
-  CreateTime?: number
+  Comment?: string
   /**
-   * <p>更新时间</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>集群id</p>
    */
-  UpdateTime?: number
+  ClusterId?: string
   /**
-   * <p>路径</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>引用资源</p>
    */
-  Path?: string
-  /**
-   * <p>大小</p><p>单位：Byte</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Size?: number
-  /**
-   * <p>快照类型 1: savepoint；2: checkpoint；3: cancelWithSavepoint</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  RecordType?: number
-  /**
-   * <p>运行作业实例的顺序 ID</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  JobRuntimeId?: number
-  /**
-   * <p>描述</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Description?: string
-  /**
-   * <p>固定超时时间</p><p>单位：毫秒</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Timeout?: number
-  /**
-   * <p>快照 serialId</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  SerialId?: string
-  /**
-   * <p>耗时</p><p>单位：毫秒</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  TimeConsuming?: number
-  /**
-   * <p>快照路径状态 1：可用；2：不可用；</p>
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  PathStatus?: number
+  ResourceRefs?: Array<ResourceRef>
   /**
    * <p>Flink版本</p>
-注意：此字段可能返回 null，表示取不到有效值。
    */
   FlinkVersion?: string
   /**
-   * <p>CheckPoint是否增量</p>
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>工作空间 SerialId</p>
    */
-  IsIncremental?: string
+  WorkSpaceId?: string
   /**
-   * <p>checkpoint 大小</p><p>单位：Byte</p>
+   * <p>异步id</p>
    */
-  CheckpointSize?: number
+  AsyncTaskId?: string
 }
 
 /**
@@ -2961,16 +3105,16 @@ export interface Savepoint {
  */
 export interface RunSqlGatewayStatementResponse {
   /**
-   * 错误信息
+   * <p>错误信息</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   ErrorMessage?: Array<string>
   /**
-   * 会话id，若入参未传，则返回自动创建的会话id，若入参已经传递，则返回值与原传入值一致
+   * <p>会话id，若入参未传，则返回自动创建的会话id，若入参已经传递，则返回值与原传入值一致</p>
    */
   SessionId?: string
   /**
-   * 返回执行id，可以根据该执行id和会话id获取执行结果
+   * <p>返回执行id，可以根据该执行id和会话id获取执行结果</p>
    */
   OperationHandleId?: string
   /**
@@ -3226,32 +3370,6 @@ export interface ResourceRefDetail {
    * Connector版本
    */
   ConnectorVersion?: string
-}
-
-/**
- * setats 机器规格
- */
-export interface SetatsCvmInfo {
-  /**
-   * setats机器cpu
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Cpu?: number
-  /**
-   * setats机器内存
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Mem?: number
-  /**
-   * setats worker 并行度
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  DefaultParallelism?: number
-  /**
-   * setats 机器磁盘
-注意：此字段可能返回 null，表示取不到有效值。
-   */
-  Disk?: SetatsDisk
 }
 
 /**
@@ -5195,6 +5313,20 @@ export interface DescribeJobsResponse {
 }
 
 /**
+ * CreateMetaDatabase返回参数结构体
+ */
+export interface CreateMetaDatabaseResponse {
+  /**
+   * 无
+   */
+  DatabaseId: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 作业配置 -- 专家模式的详细配置
  */
 export interface ExpertModeConfiguration {
@@ -5269,29 +5401,29 @@ export interface Order {
 }
 
 /**
- * CreateConnector请求参数结构体
+ * setats 机器规格
  */
-export interface CreateConnectorRequest {
+export interface SetatsCvmInfo {
   /**
-   * 资源id
+   * setats机器cpu
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  ResourceId: string
+  Cpu?: number
   /**
-   * 空间
+   * setats机器内存
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  WorkSpaceId: string
+  Mem?: number
   /**
-   * 资源版本
+   * setats worker 并行度
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  VersionId: number
+  DefaultParallelism?: number
   /**
-   * 连接器名称
+   * setats 机器磁盘
+注意：此字段可能返回 null，表示取不到有效值。
    */
-  Connector: string
-  /**
-   * 连接方式
-   */
-  ConnectionMethod: string
+  Disk?: SetatsDisk
 }
 
 /**

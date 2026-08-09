@@ -48,6 +48,16 @@ it("oceanus.v20190422.CopyJobs", async function () {
     }
 })
 
+it("oceanus.v20190422.ModifyMetaTable", async function () {
+    try {
+       const data = await client.ModifyMetaTable({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("oceanus.v20190422.RunSqlGatewayStatement", async function () {
     try {
        const data = await client.RunSqlGatewayStatement({})
@@ -128,9 +138,9 @@ it("oceanus.v20190422.CreateConnector", async function () {
     }
 })
 
-it("oceanus.v20190422.ModifyFolder", async function () {
+it("oceanus.v20190422.CreateMetaDatabase", async function () {
     try {
-       const data = await client.ModifyFolder({})
+       const data = await client.CreateMetaDatabase({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok
@@ -391,6 +401,26 @@ it("oceanus.v20190422.StopJobs", async function () {
 it("oceanus.v20190422.RenewOceanusCluster", async function () {
     try {
        const data = await client.RenewOceanusCluster({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.ModifyFolder", async function () {
+    try {
+       const data = await client.ModifyFolder({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("oceanus.v20190422.CreateMetaTable", async function () {
+    try {
+       const data = await client.CreateMetaTable({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

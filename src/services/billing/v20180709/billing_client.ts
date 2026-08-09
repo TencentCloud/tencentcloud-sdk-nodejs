@@ -694,7 +694,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 创建一个实例资源，会创建一个新购实例资源的订单，并通过腾讯云账户余额自动支付。调用该接口的账号需要授予finace:trade的权限，否则无法支付成功。目前已接入并支持购买的产品包括：T-Sec-Web应用防火墙、云防火墙、主机安全、主机容器、云安全中心、T-Sec-密钥管理系统。
+   * 创建一个实例资源，会创建一个新购实例资源的订单，并通过腾讯云账户余额自动支付。调用该接口的账号需要授予finance:trade的权限，否则无法支付成功。目前已接入并支持购买的产品包括：T-Sec-Web应用防火墙、云防火墙、主机安全、主机容器、云安全中心、T-Sec-密钥管理系统。
    */
   async CreateInstance(
     req: CreateInstanceRequest,
@@ -844,7 +844,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 续费一台实例，调用该接口续费服务器时，您需要确保您的腾讯云账户余额充足，否则会续费失败。调用该接口的账号需要授予finace:trade的权限，否则无法续费成功。目前已接入并支持续费的产品包括：T-Sec-Web应用防火墙、云防火墙、主机安全、主机容器、云安全中心、T-Sec-密钥管理系统。
+   * 续费一台实例，调用该接口续费服务器时，您需要确保您的腾讯云账户余额充足，否则会续费失败。调用该接口的账号需要授予finance:trade的权限，否则无法续费成功。目前已接入并支持续费的产品包括：T-Sec-Web应用防火墙、云防火墙、主机安全、主机容器、云安全中心、T-Sec-密钥管理系统。
    */
   async RenewInstance(
     req: RenewInstanceRequest,
@@ -924,7 +924,7 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 退订不再需要的实例，只退还实付金额的部分，已使用的代金券不退还，退还的实付金额默认退到腾讯云账户余额中。调用该接口的账号需要授予finace:RefundInstance的权限，否则无法支付成功。目前已接入并支持退订的产品包括：T-Sec-Web应用防火墙、云防火墙、主机安全、主机容器、云安全中心、T-Sec-密钥管理系统。
+   * 退订不再需要的实例，只退还实付金额的部分，已使用的代金券不退还，退还的实付金额默认退到腾讯云账户余额中。调用该接口的账号需要授予finance:RefundInstance的权限，否则无法支付成功。目前已接入并支持退订的产品包括：T-Sec-Web应用防火墙、云防火墙、主机安全、主机容器、云安全中心、T-Sec-密钥管理系统。
    */
   async RefundInstance(
     req: RefundInstanceRequest,

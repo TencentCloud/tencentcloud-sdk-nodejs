@@ -20,12 +20,14 @@ import { ClientConfig } from "../../../common/interface"
 import {
   ParseConnectorRequest,
   CopyJobResult,
+  StatementResult,
   CreateResourceRequest,
   ModifyFolderRequest,
   DescribeJobSubmissionLogResponse,
   DeleteJobsRequest,
   ModifyWorkSpaceRequest,
   ModifyJobResponse,
+  ModifyMetaTableResponse,
   CreateJobConfigResponse,
   CreateResourceConfigResponse,
   CreateJobConfigRequest,
@@ -46,6 +48,7 @@ import {
   DescribeJobConfigsRequest,
   StopJobsRequest,
   ResultColumn,
+  CreateMetaDatabaseRequest,
   Setats,
   TreeJobSets,
   ResourceItem,
@@ -67,16 +70,17 @@ import {
   CreateWorkSpaceResponse,
   SlaveZone,
   CreateJobResponse,
-  SqlGatewayItem,
+  DeleteResourcesResponse,
   DescribeVariablesRequest,
   DescribeJobRuntimeInfoResponse,
   StopJobDescription,
   CreateFolderRequest,
   DeleteJobConfigsResponse,
+  SqlGatewayItem,
   DeleteTableConfigRequest,
-  StatementResult,
+  Savepoint,
   DescribeTreeJobsRsp,
-  DeleteResourcesResponse,
+  CreateConnectorRequest,
   DeleteTableConfigResponse,
   SlotSharingGroupSpec,
   Tag,
@@ -84,6 +88,7 @@ import {
   FetchSqlGatewayStatementResultResponse,
   DescribeJobSavepointResponse,
   JobGraphNode,
+  ModifyMetaTableRequest,
   CreateWorkSpaceRequest,
   DeleteResourceConfigsRequest,
   DescribeVariablesResponse,
@@ -114,6 +119,7 @@ import {
   DeleteJobConfigsRequest,
   RenewOceanusClusterRequest,
   TraceModeConfiguration,
+  CreateMetaTableResponse,
   RunJobsRequest,
   DeleteWorkSpaceResponse,
   HadoopYarnItem,
@@ -122,7 +128,7 @@ import {
   DeleteJobsResponse,
   Property,
   JobGraphEdge,
-  Savepoint,
+  CreateMetaTableRequest,
   RunSqlGatewayStatementResponse,
   SystemResourceItem,
   DescribeResourceRelatedJobsRequest,
@@ -130,7 +136,6 @@ import {
   RoleAuth,
   DescribeTreeResourcesRsp,
   ResourceRefDetail,
-  SetatsCvmInfo,
   TreeResourceItem,
   DescribeTreeResourcesResponse,
   CreateVariableResponse,
@@ -178,10 +183,11 @@ import {
   CheckSavepointResponse,
   DeleteOceanusClusterResponse,
   DescribeJobsResponse,
+  CreateMetaDatabaseResponse,
   ExpertModeConfiguration,
   SqlGatewayEndpoint,
   Order,
-  CreateConnectorRequest,
+  SetatsCvmInfo,
   CopyJobItem,
   DescribeTreeJobsRequest,
   DescribeJobConfigsResponse,
@@ -227,6 +233,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CopyJobsResponse) => void
   ): Promise<CopyJobsResponse> {
     return this.request("CopyJobs", req, cb)
+  }
+
+  /**
+   * 修改元数据表
+   */
+  async ModifyMetaTable(
+    req: ModifyMetaTableRequest,
+    cb?: (error: string, rep: ModifyMetaTableResponse) => void
+  ): Promise<ModifyMetaTableResponse> {
+    return this.request("ModifyMetaTable", req, cb)
   }
 
   /**
@@ -310,13 +326,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 自定义树状结构页面拖拽文件夹
+   * 创建元数据库
    */
-  async ModifyFolder(
-    req: ModifyFolderRequest,
-    cb?: (error: string, rep: ModifyFolderResponse) => void
-  ): Promise<ModifyFolderResponse> {
-    return this.request("ModifyFolder", req, cb)
+  async CreateMetaDatabase(
+    req: CreateMetaDatabaseRequest,
+    cb?: (error: string, rep: CreateMetaDatabaseResponse) => void
+  ): Promise<CreateMetaDatabaseResponse> {
+    return this.request("CreateMetaDatabase", req, cb)
   }
 
   /**
@@ -577,6 +593,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: RenewOceanusClusterResponse) => void
   ): Promise<RenewOceanusClusterResponse> {
     return this.request("RenewOceanusCluster", req, cb)
+  }
+
+  /**
+   * 自定义树状结构页面拖拽文件夹
+   */
+  async ModifyFolder(
+    req: ModifyFolderRequest,
+    cb?: (error: string, rep: ModifyFolderResponse) => void
+  ): Promise<ModifyFolderResponse> {
+    return this.request("ModifyFolder", req, cb)
+  }
+
+  /**
+   * 创建元数据表
+   */
+  async CreateMetaTable(
+    req: CreateMetaTableRequest,
+    cb?: (error: string, rep: CreateMetaTableResponse) => void
+  ): Promise<CreateMetaTableResponse> {
+    return this.request("CreateMetaTable", req, cb)
   }
 
   /**
