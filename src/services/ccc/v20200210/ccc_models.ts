@@ -1645,44 +1645,46 @@ export interface PackageBuyInfo {
  */
 export interface DescribeTelCdrRequest {
   /**
-   * 起始时间戳，Unix 秒级时间戳，最大支持近180天。
+   * <p>起始时间戳，Unix 秒级时间戳，最大支持近180天。</p>
    */
   StartTimeStamp: number
   /**
-   * 结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。
+   * <p>结束时间戳，Unix 秒级时间戳，结束时间与开始时间的区间范围小于90天。</p>
    */
   EndTimeStamp: number
   /**
-   * 应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc
+   * <p>应用 ID（必填），可以查看 https://console.cloud.tencent.com/ccc</p>
    */
   SdkAppId: number
   /**
-   * 分页尺寸（必填），上限 100
+   * <p>分页尺寸（必填），上限 100</p>
    */
   PageSize: number
   /**
-   * 分页页码（必填），从 0 开始
+   * <p>分页页码（必填），从 0 开始</p>
    */
   PageNumber: number
   /**
-   * 实例 ID（废弃）
+   * <p>实例 ID（废弃）</p>
    * @deprecated
    */
   InstanceId?: number
   /**
-   * 返回数据条数，上限（废弃）
+   * <p>返回数据条数，上限（废弃）</p>
+   * @deprecated
    */
   Limit?: number
   /**
-   * 偏移（废弃）
+   * <p>偏移（废弃）</p>
+   * @deprecated
    */
   Offset?: number
   /**
-   * 按手机号筛选
+   * <p>按手机号筛选</p>
    */
   Phones?: Array<string>
   /**
-   * 按SessionId筛选
+   * <p>按SessionId筛选</p>
    */
   SessionIds?: Array<string>
 }
@@ -4443,254 +4445,179 @@ export interface ToneWordInfo {
  */
 export interface TelCdrInfo {
   /**
-   * 主叫号码
+   * <p>主叫号码</p>
    */
   Caller?: string
   /**
-   * 被叫号码
+   * <p>被叫号码</p>
    */
   Callee?: string
   /**
-   * 呼叫发起时间戳，Unix 时间戳
+   * <p>呼叫发起时间戳，Unix 时间戳</p>
    */
   Time?: number
   /**
-   * 呼入呼出方向 0 呼入 1 呼出
+   * <p>呼入呼出方向 0 呼入 1 呼出</p>
    */
   Direction?: number
   /**
-   * 通话类型 1 呼出 2 呼入 3 音频呼入 5 预测式外呼 6 内线呼叫
+   * <p>通话类型 1 呼出 2 呼入 3 音频呼入 5 预测式外呼 6 内线呼叫</p>
    */
   CallType?: number
   /**
-   * 通话时长
+   * <p>通话时长</p>
    */
   Duration?: number
   /**
-   * 录音信息
+   * <p>录音信息</p>
    */
   RecordURL?: string
   /**
-   * 录音 ID
+   * <p>录音 ID</p>
    */
   RecordId?: string
   /**
-   * 座席信息
+   * <p>座席信息</p>
    */
   SeatUser?: SeatUserInfo
   /**
-   * EndStatus与EndStatusString一一对应，具体枚举如下：
-
-**场景	         EndStatus	EndStatusString	状态说明**
-
-电话呼入&呼出	1	        ok	                        **正常通话**
-
-电话呼入	             102	        ivrGiveUp	        **IVR期间用户放弃**
-
-电话呼入	             103	        waitingGiveUp	       **排队时用户放弃**
-
-电话呼入	             104	        ringingGiveUp	       **振铃时用户放弃**
-
-电话呼入	             105	        noSeatOnline	       **无座席在线**
-
-电话呼入              106	       notWorkTime	       **非工作时间**   
-
-电话呼入	            107	       ivrEnd	               **IVR全自动结束(无人工介入)**
-
-电话呼入	            100	      blackList **黑名单(系统侧)**
-
-电话呼出             108	        restrictedCallee	**全局外呼风险号码拦截(系统侧)**
-
-电话呼出             109	        tooManyRequest	    **外呼频控拦截(系统侧)**
-
-电话呼出             110	        restrictedArea	    **外呼地域拦截(系统侧)**
-
-电话呼出             111	        restrictedTime	**外呼时段拦截(系统侧)**
-                         
-电话呼出             202            notAnswer	 **被叫未接听**
-
-电话呼出            203	    userReject	**被叫拒接挂断**
-
-电话呼出	          204	    powerOff	**被叫关机**
-
-电话呼出           205            numberNotExist	**被叫空号**
-
-电话呼出	         206	           busy	**被叫忙**
-
-电话呼出   	        207	           outOfCredit	**被叫欠费**
-
-电话呼出	         208	           operatorError	**运营商线路异常**
-
-电话呼出         	209	           callerCancel	**主叫取消**
-
-电话呼出	        210	           notInService	**被叫不在服务区**
-
-电话呼入&呼出	211    clientError    **座席客户端错误**
-
-电话呼出        212     carrierBlocked      **运营商拦截**
-
-电话呼出        213     callReminder      **提示来电提醒**
-
-电话呼出        215     numberInvalid      **被叫号码无效**
-
-电话呼出        216     callRestricted      **提示呼叫受限**
-
-电话呼出        217     calleeRestricted      **被叫黑名单受限**
-
-电话呼出        218     areaRestricted      **被叫区域受限**
-
-电话呼出        219     promptCallForwarding      **提示呼叫转移**
-
-电话呼出        220     callerCancelWhileRing      **振铃中主叫取消**
-
-电话呼出        221     callerCancelWithoutRing      **未振铃被叫号码异常**
-
-电话呼出        222     voiceMailReached      **语音信箱挂断**
-
-音频呼入        501     callConflict      **VoIP用户呼叫冲突终止**
-
-音频呼入        502     clientTimeout      **VoIP用户客户端超时**
-
-音频呼入        503     voipClientError      **VoIP用户客户端错误**
-
-中文详情[参考](https://www.tencentcloud.com/zh/document/product/1229/71847)
-
-英文详情[参考](https://www.tencentcloud.com/document/product/1229/71847?lang=en)
+   * <p>EndStatus与EndStatusString一一对应，具体枚举如下：</p><p><strong>场景             EndStatus    EndStatusString    状态说明</strong></p><p>电话呼入&amp;呼出    1            ok                            <strong>正常通话</strong></p><p>电话呼入                 102            ivrGiveUp            <strong>IVR期间用户放弃</strong></p><p>电话呼入                 103            waitingGiveUp           <strong>排队时用户放弃</strong></p><p>电话呼入                 104            ringingGiveUp           <strong>振铃时用户放弃</strong></p><p>电话呼入                 105            noSeatOnline           <strong>无座席在线</strong></p><p>电话呼入              106           notWorkTime           <strong>非工作时间</strong>   </p><p>电话呼入                107           ivrEnd                   <strong>IVR全自动结束(无人工介入)</strong></p><p>电话呼入                100          blackList <strong>黑名单(系统侧)</strong></p><p>电话呼出             108            restrictedCallee    <strong>全局外呼风险号码拦截(系统侧)</strong></p><p>电话呼出             109            tooManyRequest        <strong>外呼频控拦截(系统侧)</strong></p><p>电话呼出             110            restrictedArea        <strong>外呼地域拦截(系统侧)</strong></p><p>电话呼出             111            restrictedTime    <strong>外呼时段拦截(系统侧)</strong></p><p>电话呼出             202            notAnswer     <strong>被叫未接听</strong></p><p>电话呼出            203        userReject    <strong>被叫拒接挂断</strong></p><p>电话呼出              204        powerOff    <strong>被叫关机</strong></p><p>电话呼出           205            numberNotExist    <strong>被叫空号</strong></p><p>电话呼出             206               busy    <strong>被叫忙</strong></p><p>电话呼出               207               outOfCredit    <strong>被叫欠费</strong></p><p>电话呼出             208               operatorError    <strong>运营商线路异常</strong></p><p>电话呼出             209               callerCancel    <strong>主叫取消</strong></p><p>电话呼出            210               notInService    <strong>被叫不在服务区</strong></p><p>电话呼入&amp;呼出    211    clientError    <strong>座席客户端错误</strong></p><p>电话呼出        212     carrierBlocked      <strong>运营商拦截</strong></p><p>电话呼出        213     callReminder      <strong>提示来电提醒</strong></p><p>电话呼出        215     numberInvalid      <strong>被叫号码无效</strong></p><p>电话呼出        216     callRestricted      <strong>提示呼叫受限</strong></p><p>电话呼出        217     calleeRestricted      <strong>被叫黑名单受限</strong></p><p>电话呼出        218     areaRestricted      <strong>被叫区域受限</strong></p><p>电话呼出        219     promptCallForwarding      <strong>提示呼叫转移</strong></p><p>电话呼出        220     callerCancelWhileRing      <strong>振铃中主叫取消</strong></p><p>电话呼出        221     callerCancelWithoutRing      <strong>未振铃被叫号码异常</strong></p><p>电话呼出        222     voiceMailReached      <strong>语音信箱挂断</strong></p><p>音频呼入        501     callConflict      <strong>VoIP用户呼叫冲突终止</strong></p><p>音频呼入        502     clientTimeout      <strong>VoIP用户客户端超时</strong></p><p>音频呼入        503     voipClientError      <strong>VoIP用户客户端错误</strong></p><p>中文详情<a href="https://www.tencentcloud.com/zh/document/product/1229/71847">参考</a></p><p>英文详情<a href="https://www.tencentcloud.com/document/product/1229/71847?lang=en">参考</a></p>
    */
   EndStatus?: number
   /**
-   * 技能组名称
+   * <p>技能组名称</p>
    */
   SkillGroup?: string
   /**
-   * 主叫归属地
+   * <p>主叫归属地</p>
    */
   CallerLocation?: string
   /**
-   * IVR 阶段耗时
+   * <p>IVR 阶段耗时</p>
    */
   IVRDuration?: number
   /**
-   * 振铃时间戳，UNIX 秒级时间戳
+   * <p>振铃时间戳，UNIX 秒级时间戳</p>
    */
   RingTimestamp?: number
   /**
-   * 接听时间戳，UNIX 秒级时间戳
+   * <p>接听时间戳，UNIX 秒级时间戳</p>
    */
   AcceptTimestamp?: number
   /**
-   * 结束时间戳，UNIX 秒级时间戳
+   * <p>结束时间戳，UNIX 秒级时间戳</p>
    */
   EndedTimestamp?: number
   /**
-   * IVR 按键信息 ，e.g. ["1","2","3"]
+   * <p>IVR 按键信息 ，e.g. [&quot;1&quot;,&quot;2&quot;,&quot;3&quot;]</p>
+   * @deprecated
    */
   IVRKeyPressed?: Array<string>
   /**
-   * 挂机方 seat 座席 user 用户 system 系统
+   * <p>IVR按键信息（e.g.xa0[{&quot;Key&quot;:&quot;1&quot;,&quot;Label&quot;:&quot;非常满意&quot;}]）</p>
+   */
+  IVRKeyPressedEx?: Array<IVRKeyPressedElement>
+  /**
+   * <p>挂机方 seat 座席 user 用户 system 系统</p>
    */
   HungUpSide?: string
   /**
-   * 服务参与者列表
+   * <p>服务参与者列表</p>
    */
   ServeParticipants?: Array<ServeParticipant>
   /**
-   * 技能组ID
+   * <p>技能组ID</p>
    */
   SkillGroupId?: number
   /**
-   * 参考 EndStatus 字段
+   * <p>参考 EndStatus 字段</p>
    */
   EndStatusString?: string
   /**
-   * 会话开始时间戳，UNIX 秒级时间戳
+   * <p>会话开始时间戳，UNIX 秒级时间戳</p>
    */
   StartTimestamp?: number
   /**
-   * 进入排队时间，Unix 秒级时间戳
+   * <p>进入排队时间，Unix 秒级时间戳</p>
    */
   QueuedTimestamp?: number
   /**
-   * 后置IVR按键信息（e.g. [{"Key":"1","Label":"非常满意"}]）
+   * <p>后置IVR按键信息（e.g.xa0[{&quot;Key&quot;:&quot;1&quot;,&quot;Label&quot;:&quot;非常满意&quot;}]）</p>
+   * @deprecated
    */
   PostIVRKeyPressed?: Array<IVRKeyPressedElement>
   /**
-   * 排队技能组Id
+   * <p>满意度按键信息 Key 为 noInput 表示进入满意度但无按键</p>
+   */
+  PostIVRKeyPressedEx?: Array<IVRKeyPressedElement>
+  /**
+   * <p>排队技能组Id</p>
    */
   QueuedSkillGroupId?: number
   /**
-   * 会话 ID
+   * <p>会话 ID</p>
    */
   SessionId?: string
   /**
-   * 主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空
+   * <p>主叫号码保护ID，开启号码保护映射功能时有效，且Caller字段置空</p>
    */
   ProtectedCaller?: string
   /**
-   * 被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空
+   * <p>被叫号码保护ID，开启号码保护映射功能时有效，且Callee字段置空</p>
    */
   ProtectedCallee?: string
   /**
-   * 客户自定义数据（User-to-User Interface）
+   * <p>客户自定义数据（User-to-User Interface）</p>
 注意：此字段可能返回 null，表示取不到有效值。
    * @deprecated
    */
   Uui?: string
   /**
-   * 客户自定义数据（User-to-User Interface）
+   * <p>客户自定义数据（User-to-User Interface）</p>
    */
   UUI?: string
   /**
-   * IVR按键信息（e.g. [{"Key":"1","Label":"非常满意"}]）
-   */
-  IVRKeyPressedEx?: Array<IVRKeyPressedElement>
-  /**
-   * 获取录音ASR文本信息地址
+   * <p>获取录音ASR文本信息地址</p>
    */
   AsrUrl?: string
   /**
-   * AsrUrl的状态：Complete
-已完成;
-Processing
-正在生成中;
-NotExists
-无记录(未开启生成离线asr或者无套餐包)
+   * <p>AsrUrl的状态：Complete<br>已完成;<br>Processing<br>正在生成中;<br>NotExists<br>无记录(未开启生成离线asr或者无套餐包)</p>
    */
   AsrStatus?: string
   /**
-   * 录音转存第三方COS地址
+   * <p>录音转存第三方COS地址</p>
    */
   CustomRecordURL?: string
   /**
-   * 备注
+   * <p>备注</p>
    */
   Remark?: string
   /**
-   * 排队技能组名称
+   * <p>排队技能组名称</p>
    */
   QueuedSkillGroupName?: string
   /**
-   * 通话中语音留言录音URL
+   * <p>通话中语音留言录音URL</p>
    */
   VoicemailRecordURL?: Array<string>
   /**
-   * 通话中语音留言ASR文本信息地址
+   * <p>通话中语音留言ASR文本信息地址</p>
    */
   VoicemailAsrURL?: Array<string>
   /**
-   * 如果是智能体相关通话，这里是智能体 ID
+   * <p>如果是智能体相关通话，这里是智能体 ID</p>
    */
   AIAgentId?: number
   /**
-   * 如果是智能体相关通话，这里是智能体名称
+   * <p>如果是智能体相关通话，这里是智能体名称</p>
    */
   AIAgentName?: string
   /**
-   * 接通后系统挂断原因，枚举类似
+   * <p>接通后系统挂断原因，枚举类似</p>
    */
   SysHangupReason?: number
   /**
-   * 接通后系统挂断原因，文字描述信息
+   * <p>接通后系统挂断原因，文字描述信息</p>
    */
   SysHangupReasonString?: string
 }
@@ -5238,16 +5165,16 @@ export interface ClientInfo {
  */
 export interface DescribeTelCdrResponse {
   /**
-   * 话单记录总数
+   * <p>话单记录总数</p>
    */
   TotalCount?: number
   /**
-   * 话单记录
+   * <p>话单记录</p>
    * @deprecated
    */
   TelCdrs?: Array<TelCdrInfo>
   /**
-   * 话单记录
+   * <p>话单记录</p>
    */
   TelCdrList?: Array<TelCdrInfo>
   /**

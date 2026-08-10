@@ -4007,17 +4007,21 @@ export interface UpdateDictionariesRequest {
  */
 export interface DescribeUserCosSnapshotListRequest {
   /**
-   * cos桶名
+   * <p>cos桶名</p>
    */
   CosBucket?: string
   /**
-   * bucket 桶下的备份路径
+   * <p>bucket 桶下的备份路径</p>
    */
   BasePath?: string
   /**
-   * 云上集群迁移集群名
+   * <p>云上集群迁移集群名</p>
    */
   ClusterInstanceId?: string
+  /**
+   * <p>es 集群仓库</p>
+   */
+  PaasEsRepository?: string
 }
 
 /**
@@ -6226,11 +6230,11 @@ export interface LogstashNodeView {
  */
 export interface DescribeUserCosSnapshotListResponse {
   /**
-   * cos 快照信息列表
+   * <p>cos 快照信息列表</p>
    */
   CosSnapshotInfoList?: Array<CosSnapShotInfo>
   /**
-   * cos 快照数量
+   * <p>cos 快照数量</p>
    */
   TotalCount?: number
   /**

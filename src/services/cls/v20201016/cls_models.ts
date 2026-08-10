@@ -12364,13 +12364,13 @@ export interface CreateAgentApplicationRequest {
    */
   ApplicationName: string
   /**
-   * <p>接入类型</p><p>枚举值：</p><ul><li>Langfuse： Langfuse 是一款开源的 LLM（大语言模型）工程与可观测性平台（LLMOps Tool）</li></ul>
+   * <p>接入类型</p><p>枚举值：</p><ul><li>Langfuse： Langfuse 是一款开源的 LLM（大语言模型）工程与可观测性平台（LLMOps Tool）</li><li>Agent： 用户创建 Agent 应用时，系统按统一规范自动创建对应的 CLS 主题（Topic），并为主题打上统一标签，便于后续在 Agent 可观测场景下做统一管理与检索。</li></ul>
    */
   AccessType: string
   /**
    * <p>日志集Id。通过 <a href="https://cloud.tencent.com/document/product/614/58624">获取日志集列表</a>获取日志集Id。</p>
    */
-  LogsetId: string
+  LogsetId?: string
 }
 
 /**

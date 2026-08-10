@@ -126,6 +126,7 @@ import {
   TimeIntervalStrategy,
   DescribeCdbProxyInfoRequest,
   RollbackDBName,
+  ModifyInstanceChargeTypeRequest,
   RuleFilters,
   ModifyAuditRuleTemplatesRequest,
   CreateAuditRuleResponse,
@@ -165,6 +166,7 @@ import {
   DescribeCPUExpandStrategyInfoRequest,
   SlaveInfo,
   DescribeDBSecurityGroupsRequest,
+  ModifyInstanceDestroyProtectResponse,
   DescribeDBSwitchRecordsResponse,
   Tag,
   RuleTemplateInfo,
@@ -215,6 +217,7 @@ import {
   ModifyAuditConfigResponse,
   SwitchDrInstanceToMasterResponse,
   ModifyDBInstanceNameResponse,
+  AddressInfo,
   VerifyRootAccountRequest,
   RuleTemplateRecordInfo,
   DescribeCloneListResponse,
@@ -300,7 +303,7 @@ import {
   DescribeProxySupportParamRequest,
   ModifyAutoRenewFlagResponse,
   RollbackTask,
-  StartReplicationRequest,
+  ModifyInstanceDestroyProtectRequest,
   ProxyInst,
   ReloadBalanceProxyNodeResponse,
   DescribeRemoteBackupConfigResponse,
@@ -469,11 +472,13 @@ import {
   AuditRuleTemplateInfo,
   ModifyTimeWindowRequest,
   AuditLogFile,
+  StartReplicationRequest,
   DescribeAuditRuleTemplatesRequest,
   RollbackTables,
   BackupConfig,
   LocalBinlogConfigDefault,
   DescribeSSLStatusRequest,
+  ModifyInstanceChargeTypeResponse,
   DescribeSlowLogDataRequest,
   ReleaseIsolatedDBInstancesResponse,
   DeleteAuditLogFileRequest,
@@ -490,7 +495,7 @@ import {
   UpgradeCDBProxyVersionRequest,
   DeleteAuditRuleTemplatesResponse,
   DescribeDeviceMonitorInfoResponse,
-  AddressInfo,
+  InstanceChargePrepaid,
   ModifyAuditRuleTemplatesResponse,
 } from "./cdb_models"
 
@@ -581,6 +586,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: BalanceRoGroupLoadResponse) => void
   ): Promise<BalanceRoGroupLoadResponse> {
     return this.request("BalanceRoGroupLoad", req, cb)
+  }
+
+  /**
+   * 该接口（ModifyInstanceDestroyProtect）用于修改实例销毁保护状态。
+   */
+  async ModifyInstanceDestroyProtect(
+    req: ModifyInstanceDestroyProtectRequest,
+    cb?: (error: string, rep: ModifyInstanceDestroyProtectResponse) => void
+  ): Promise<ModifyInstanceDestroyProtectResponse> {
+    return this.request("ModifyInstanceDestroyProtect", req, cb)
   }
 
   /**
@@ -1320,6 +1335,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeBackupEncryptionStatusResponse) => void
   ): Promise<DescribeBackupEncryptionStatusResponse> {
     return this.request("DescribeBackupEncryptionStatus", req, cb)
+  }
+
+  /**
+   * 本接口(ModifyInstanceChargeType)用于将实例的计费模式从包年包月改为按量计费。
+   */
+  async ModifyInstanceChargeType(
+    req: ModifyInstanceChargeTypeRequest,
+    cb?: (error: string, rep: ModifyInstanceChargeTypeResponse) => void
+  ): Promise<ModifyInstanceChargeTypeResponse> {
+    return this.request("ModifyInstanceChargeType", req, cb)
   }
 
   /**

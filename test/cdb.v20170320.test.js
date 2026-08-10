@@ -98,6 +98,16 @@ it("cdb.v20170320.BalanceRoGroupLoad", async function () {
     }
 })
 
+it("cdb.v20170320.ModifyInstanceDestroyProtect", async function () {
+    try {
+       const data = await client.ModifyInstanceDestroyProtect({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("cdb.v20170320.IsolateDBInstance", async function () {
     try {
        const data = await client.IsolateDBInstance({})
@@ -791,6 +801,16 @@ it("cdb.v20170320.DescribeInstanceParams", async function () {
 it("cdb.v20170320.DescribeBackupEncryptionStatus", async function () {
     try {
        const data = await client.DescribeBackupEncryptionStatus({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
+it("cdb.v20170320.ModifyInstanceChargeType", async function () {
+    try {
+       const data = await client.ModifyInstanceChargeType({})
        expect(data).to.be.ok
     } catch(error) {
       expect(error.requestId).to.be.ok

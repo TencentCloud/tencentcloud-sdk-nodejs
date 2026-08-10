@@ -4656,6 +4656,10 @@ export interface ImageTaskInput {
    * <p>Ai分镜拆解配置</p>
    */
   AiStoryboardConfig?: AiStoryboardConfig
+  /**
+   * <p>图片理解配置</p>
+   */
+  UnderstandImageConfig?: UnderstandImageConfig
 }
 
 /**
@@ -7923,6 +7927,20 @@ export interface DeleteStreamPackageSourceRequest {
    * Source Id。
    */
   Id: string
+}
+
+/**
+ * 图片理解任务。
+ */
+export interface UnderstandImageConfig {
+  /**
+   * <p>图片理解模型</p><p>枚举值：</p><ul><li>WAND-understand-1.0-lite： 轻量理解模型</li><li>WAND-understand-1.0-flash： 质量-速度平衡理解模型</li><li>WAND-understand-1.0-pro： 高质量理解模型</li></ul>
+   */
+  Model: string
+  /**
+   * <p>图片理解指令</p>
+   */
+  Prompt: string
 }
 
 /**
@@ -21929,6 +21947,10 @@ export interface VoiceInfo {
    * <p>推荐场景</p><p>如：教育</p>
    */
   Scenes?: Array<string>
+  /**
+   * <p>音色所属引擎</p>
+   */
+  Engine?: string
 }
 
 /**

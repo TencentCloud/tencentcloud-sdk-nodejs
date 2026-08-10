@@ -238,6 +238,16 @@ it("postgres.v20170312.ModifyDBProxyAddress", async function () {
     }
 })
 
+it("postgres.v20170312.DeleteDatabase", async function () {
+    try {
+       const data = await client.DeleteDatabase({})
+       expect(data).to.be.ok
+    } catch(error) {
+      expect(error.requestId).to.be.ok
+      expect(error.code).to.be.ok
+    }
+})
+
 it("postgres.v20170312.DescribeDatabases", async function () {
     try {
        const data = await client.DescribeDatabases({})

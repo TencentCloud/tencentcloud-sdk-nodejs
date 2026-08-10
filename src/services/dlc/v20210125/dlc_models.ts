@@ -10155,6 +10155,10 @@ export interface TaskFullRespInfo {
    * <p>排队时间</p><p>单位：毫秒</p>
    */
   QueueTime?: number
+  /**
+   * <p>资源组类型</p>
+   */
+  ResourceGroupType?: string
 }
 
 /**

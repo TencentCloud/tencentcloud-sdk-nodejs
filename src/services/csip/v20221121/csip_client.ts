@@ -18,11 +18,13 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
+  DescribeVulIgnoreRuleListRequest,
   CreateDspmIdentifyRuleRequest,
   DeleteRiskScanTaskRequest,
   DescribeCosInvokeUaRequest,
+  DescribeHostVulRiskListResponse,
   CsipRiskCenterStatistics,
-  ModifyDspmApproveStatusRequest,
+  CreateVulReScanRequest,
   DescribeCWPMachineDetailRequest,
   DescribeRiskItemListResponse,
   ModifyPolicyStatusRequest,
@@ -30,7 +32,7 @@ import {
   CreateCosAssetSyncTaskResponse,
   DescribeDspmIdentifyComplianceCategoryRuleListRequest,
   DescribeDspmSupportedAssetTypeResponse,
-  ModifyDspmBackupSettingRequest,
+  DescribeVulFixedListResponse,
   AuditLogInfo,
   CreateAccessKeySyncTaskRequest,
   ModifyCosAuditObjectIdentifyStatusResponse,
@@ -40,6 +42,7 @@ import {
   DescribeCosBucketBillingInfoResponse,
   RiskRuleInfo,
   KeyValue,
+  PublicIpDomainListKey,
   ModifyDspmIdentifyLevelItemRequest,
   OrganizationUserInfo,
   DspmIdentifyRuleItem,
@@ -53,12 +56,15 @@ import {
   DescribeDspmIdentifyComplianceGroupDetailResponse,
   DspmAccountCount,
   ModifyDspmRiskStrategyRequest,
+  CreateVulFixedExportJobRequest,
   DeleteDspmPersonalIdentifyRequest,
   CreateDspmAssetIdentifyInfoExportJobResponse,
   ModifyCosAuditMonitorAccountRequest,
   DescribeDspmAccessTopologyIpsResponse,
   LogRuleKeyValueInfo,
+  VulFixedItem,
   DescribeEdrAlertListRequest,
+  ModifyDspmApproveStatusRequest,
   ModifyDspmAssetAccountResponse,
   CreateDspmAssetsExportJobResponse,
   DescribeRiskCenterWebsiteRiskListResponse,
@@ -74,7 +80,7 @@ import {
   DescribeScanTaskListRequest,
   CreateAccessKeyCheckTaskResponse,
   DescribeOrganizationInfoRequest,
-  DspmArea,
+  DescribeVulFixableMachineListResponse,
   DescribeDspmBackupLogListRequest,
   ModifyDspmAssetSecurityAnalysisSwitchRequest,
   DescribeCosBucketBillingInfoRequest,
@@ -82,6 +88,7 @@ import {
   EdrAlertTarget,
   DescribeDspmRiskResponse,
   LogItems,
+  DescribeHostVulRiskListRequest,
   ModifyDspmWhitelistStrategyResponse,
   DescribeKeySandboxCredentialRequest,
   DescribeDspmDictionaryListRequest,
@@ -107,13 +114,15 @@ import {
   ModifyDspmRestoreLogTaskResponse,
   DescribeKeySandboxCredentialListResponse,
   AttributeOptionSet,
+  VulVendorProduct,
   DeleteDspmApplyOrderRequest,
   DescribeDspmIdentifyComplianceGroupListResponse,
   SubUserInfo,
   CloudCountDesc,
   DiskPartitionInfo,
-  ModifyDspmApproveStatusResponse,
+  KBUpdateMachineItem,
   IaCFile,
+  ModifyDspmBackupSettingRequest,
   DescribeDspmIdentifyRuleDetailResponse,
   DescribeAIAgentAssetListRequest,
   SendDspmAssetLoginSmsCodeResponse,
@@ -122,15 +131,16 @@ import {
   DetectTypeCount,
   DescribeRiskCenterAssetViewCFGRiskListResponse,
   DspmPersonIdentifyItem,
-  ModifyDspmIdentifyComplianceRuleLevelInfoResponse,
+  DescribeVulHostRelateComponentResponse,
   ScanTaskInfoList,
   DspmIdentifyAssetStatistic,
   IPIntelInfo,
-  DescribeCosActionListRequest,
+  DescribeCosAuditDictionaryListRequest,
   DescribeUserDspmInfoListRequest,
   DescribeCosAlarmListRequest,
+  DescribeVulItemListRequest,
   DescribeSkillScanPayInfoResponse,
-  PublicIpDomainListKey,
+  CreateVulScanManualRequest,
   DescribeDspmApproveHistoryResponse,
   DescribeCosAccessPermissionsResponse,
   DescribeConfigCheckRulesResponse,
@@ -139,8 +149,9 @@ import {
   DescribeRiskRulesRequest,
   UserDspmInfo,
   CosBucketTaskInfo,
-  DescribeSourceIPAssetRequest,
+  DescribeHostKBRiskListResponse,
   DescribeBucketInvokeIpListResponse,
+  CreateVulFixRetryTaskRequest,
   DescribeDspmIdentifyInfoRequest,
   DescribeDbAssetInfoRequest,
   DescribeUserCallRecordResponse,
@@ -149,7 +160,7 @@ import {
   DescribeDspmIdentifyInfoListRequest,
   ModifyCosAuditObjectSampleRateResponse,
   ModifyCosAuditBucketMonitorStatusResponse,
-  DeleteCosAkAssetResponse,
+  DescribeCosRiskEvidenceRequest,
   AssetTagModifyAssetItem,
   DescribeAccessKeyAlarmResponse,
   DescribeGatewayAssetsResponse,
@@ -157,6 +168,7 @@ import {
   DescribeDspmAssetTableListRequest,
   DescribeDspmApproveOrderListRequest,
   DspmRiskTendency,
+  VulFixSummaryItem,
   DeleteDomainAndIpResponse,
   CSIPTag,
   DescribeDspmRiskDetailRequest,
@@ -166,14 +178,15 @@ import {
   DescribeRiskRulesResponse,
   SkillCapabilityTag,
   VerifyDspmAssetLoginCodeResponse,
-  RuleContentProcessInfo,
+  DescribeVulComponentRelateHostResponse,
+  ModifyDspmIdentifyComplianceRuleLevelInfoResponse,
   DescribeScanStatisticResponse,
   DescribeAccessKeyAlarmRequest,
   DescribeCosAlarmListResponse,
   CosAssetInfo,
   ModifyDspmIdentifyLevelGroupResponse,
   DescribeExposuresRequest,
-  DescribeCosRiskEvidenceRequest,
+  DeleteCosAkAssetResponse,
   DescribeDspmApproveOrderListResponse,
   DescribeHighBaseLineRiskListResponse,
   CreateDomainAndIpRequest,
@@ -181,6 +194,8 @@ import {
   CosOverview,
   CreateDspmIdentifyCategoryRequest,
   DescribeCosIdentifyFileListRequest,
+  DescribeHostVulItemVPRInfoResponse,
+  ModifyVulWhitelistSwitchRequest,
   DescribeDspmAssetSupportedPrivilegesRequest,
   DescribePolicyHitDataRequest,
   DescribeCosSourceIpResponse,
@@ -199,7 +214,10 @@ import {
   CreateDspmAssetsExportJobRequest,
   DescribeRiskCenterServerRiskListResponse,
   CreateDspmPersonalIdentifyResponse,
+  VulScanTask,
+  ModifyDspmIdentifyComplianceGroupRequest,
   DspmIpCount,
+  DescribeVulComponentRelateHostRequest,
   DescribeGatewayAssetsRequest,
   ModifyCosAuditBucketMonitorStatusRequest,
   AccessKeyAsset,
@@ -210,6 +228,7 @@ import {
   DescribeEdrAlertInfoResponse,
   DescribeExposuresResponse,
   CreateDspmApproveHistoryExportJobRequest,
+  VPRRatingInfo,
   AttackStageCount,
   CreateDspmRiskExportJobResponse,
   DescribeDspmRiskTendencyResponse,
@@ -224,12 +243,15 @@ import {
   ModifyDspmAssetAccountPrivilegesRequest,
   DescribeDspmIdentifyLevelGroupListRequest,
   DescribeDspmAssetDatabasesRequest,
+  CreateHostVulExportJobRequest,
   DescribeRiskBucketListRequest,
   CreateCosRiskScanTaskResponse,
   DescribeCosRoleAccessPermissionResponse,
   CreateDspmIdentifyInfoListExportJobRequest,
+  CreateVulFixTaskRequest,
   CreateIaCFileExportJobRequest,
   AlertInfo,
+  DescribeVulRiskRelateComponentRequest,
   Vpc,
   STSCredentialOutput,
   PortRiskAdvanceCFGParamItem,
@@ -237,6 +259,7 @@ import {
   DescribeDspmExportTaskResponse,
   DescribeRepositoryImageAssetsResponse,
   DescribeDspmIdentifyRuleTestResultRequest,
+  VulBriefInfo,
   ModifyNotifySettingResponse,
   CreateDspmApproveHistoryExportJobResponse,
   CosPermissionInfo,
@@ -245,20 +268,25 @@ import {
   DescribeDspmAssetSupportedPrivilegesResponse,
   CreateDspmWhitelistStrategyResponse,
   DeleteDspmIdentifyLevelGroupRequest,
+  UpdateAlertStatusListResponse,
   HitRules,
   DspmIdentifyCount,
   DspmAccessRecord,
+  ModifyVulWhitelistConfigResponse,
   VulRiskItem,
   DescribeTopAttackInfoResponse,
   ModifyDspmPersonalIdentifyRequest,
   CreateIaCAccessTokenResponse,
   DescribeVULRiskAdvanceCFGListRequest,
   DspmAssetTypeCount,
+  ComponentDetailItem,
   DescribeCLSLogIndexV3Request,
   DescribeCosAssetSyncTaskResponse,
   DescribeDspmApproveHistoryRequest,
+  DescribeVulScanTaskListResponse,
   DescribeDspmAssetFieldSamplesRequest,
   RepositoryImageVO,
+  DescribeVulFixTaskDetailResponse,
   ModifyDspmIdentifyComplianceGroupStatusResponse,
   DescribeRiskRuleDetailResponse,
   VerifyDspmAssetLoginCodeRequest,
@@ -274,17 +302,21 @@ import {
   ModifyNotifyAssetConfigRequest,
   ModifyDspmWhitelistStrategyRequest,
   DeleteDspmIdentifyComplianceCategoryRelationRequest,
+  ModifyVulWhitelistConfigRequest,
   CICDToken,
   DescribeSkillScanResultRequest,
   LogCLSFilter,
   GateWayAsset,
+  CreateVulFixTaskResponse,
   DescribeSourceIPAssetResponse,
   CosBucketBillingInfo,
   CreateIaCFileExportJobResponse,
+  AccountBriefInfo,
   DescribeDspmSyncUsersStatusRequest,
   DescribeDspmApplyOrderListResponse,
   DescribeDspmAccessTopologyAssetsRequest,
   AssetViewVULRiskData,
+  DspmIdentifyIdItem,
   DspmIp,
   NICAsset,
   DescribeCLSLogListV3Response,
@@ -305,11 +337,13 @@ import {
   ModifyDspmIdentifyInfoResponse,
   DspmAssetDatabaseInfo,
   RuleContentCmdLine,
+  DescribeKBDetailResponse,
   DspmColumnPrivilege,
   CreateDspmAssetAccessTopologyExportJobResponse,
   DescribeCosBucketListResponse,
+  RuleContentProcessInfo,
   DescribeDspmAccessRecordResponse,
-  ModifyDspmIdentifyComplianceGroupRequest,
+  EdrAlertDetail,
   DescribeDspmIdentifyIdListResponse,
   DeleteDspmBackupLogListResponse,
   DescribeCosAuditAppIdListRequest,
@@ -321,6 +355,7 @@ import {
   DescribeCosAlarmTrendDataRequest,
   RetryDspmExportLogRequest,
   DescribeAccessKeyAssetRequest,
+  DescribeHostVulItemVPRInfoRequest,
   CreateCosObjectScanTaskRequest,
   DescribeScanTaskListResponse,
   ModifyDspmApplyingIdentifyComplianceGroupRequest,
@@ -332,11 +367,12 @@ import {
   DescribeDspmAssetIdentifyInfoListRequest,
   DescribeDspmIdentifyIdListRequest,
   DescribeAILinkSettingRequest,
+  HostVulOverview,
   DescribeCVMAssetInfoResponse,
   ModifyDspmIdentifyCategoryResponse,
   ModifyDspmIdentifyComplianceGroupStatusRequest,
   CreateDspmIdentifyLevelGroupResponse,
-  DspmIdentifyComplianceRuleRelation,
+  DescribeVulRiskRelateHostRequest,
   DescribeAIAgentAssetListResponse,
   CosActionInfo,
   LogSearchInfos,
@@ -354,17 +390,21 @@ import {
   DescribeDspmAssetAccessTopologyRequest,
   DescribeRiskCenterWebsiteRiskListRequest,
   DescribeCallRecordRequest,
+  DescribeVulScanTaskDetailResponse,
   AssetViewVULRisk,
   DescribeClusterPodAssetsResponse,
   DescribeCFWAssetStatisticsResponse,
+  HostVulComponent,
   TaskIdListKey,
   AssetViewPortRisk,
+  DspmIdentifyComplianceRuleRelation,
   DescribeRiskCenterAssetViewCFGRiskListRequest,
   DescribeDspmRiskStrategyGroupResponse,
   DspmIdentifyRefComplianceInfo,
   DescribeCosAuditPayInfoRequest,
   DescribeCosAkInvokeIpListResponse,
   ReportTaskIdList,
+  DescribeKBUpdatableMachineListRequest,
   AddNewBindRoleUserResponse,
   DescribeCosIdentifyFileListResponse,
   DeleteCosPolicyRequest,
@@ -384,36 +424,41 @@ import {
   DeleteDspmIdentifyComplianceGroupResponse,
   Machine,
   NotifySetting,
-  DescribeDspmAssetIdsResponse,
+  DescribeCosAuditDictionaryListResponse,
   UebaRule,
   DspmTablePrivilege,
   DescribeSearchBugInfoResponse,
+  VPRRatingStage,
   CosPolicyInfo,
   DescribeIpInvokeRecordRequest,
   DescribeAccessKeyRiskDetailRequest,
+  VulHostBriefInfo,
   ModifyOrganizationAccountStatusRequest,
+  DescribeVulScanTaskDetailRequest,
   DescribeExposeAssetCategoryRequest,
   DescribeAbnormalCallRecordResponse,
   DspmDbAsset,
   DescribeRiskItemListRequest,
   DescribeCosIpInvokeLogResponse,
+  Filter,
   DescribeRiskCenterAssetViewVULRiskListResponse,
-  DescribeCosRiskEvidenceResponse,
+  DescribeDspmAssetDatabasesResponse,
   CosInvokeDetailInfo,
   DescribeDspmAccessTopologyAssetsResponse,
   CosAssetSyncTaskInfo,
   DspmDictionary,
   InquireInfo,
   ModifyUebaRuleSwitchRequest,
-  RiskCallRecord,
+  DspmArea,
   DspmRiskStrategy,
   AssetProcessItem,
+  HostVulRisk,
   MachineDetail,
   ModifyDspmIdentifyRuleStatusRequest,
   DspmAssetCount,
   DspmIdentifyLevelItem,
   DescribeScanStatisticRequest,
-  Filter,
+  DescribeVulFixTaskListRequest,
   CosAssetDataScanDetail,
   ModifyDspmApplyingIdentifyComplianceGroupResponse,
   ModifyNotifySettingAlertRequest,
@@ -421,6 +466,7 @@ import {
   EDRRule,
   DescribeEdrAlertInfoRequest,
   ExportTask,
+  StopVulScanTaskRequest,
   AddDspmAssetManagerResponse,
   UpdateAccessKeyRemarkRequest,
   AddDspmAssetManagerRequest,
@@ -450,26 +496,31 @@ import {
   DspmIdentifyComplianceCategoryRelation,
   KeyValueInt,
   DspmUinUser,
+  ModifyDspmIpInfoResponse,
   CosAkSet,
   DataSearchBug,
   DspmAssetInstance,
   CommandPluginState,
   DescribeIaCFileOverviewResponse,
+  KBFixSummaryItem,
   DspmAssetSecurityAnalyseStatus,
   DspmAssetDataScanDetail,
   BackupLog,
+  VulFixableMachineItem,
   CreateIaCFileReScanTaskResponse,
   DescribeClusterAssetsRequest,
   ResetDspmAssetAccountPasswordResponse,
   DescribeDspmAssetAccountPresetPrivilegesResponse,
   TaskCenterWeakPwdRiskInputParam,
   DeleteCosAkAssetRequest,
+  UebaCustomRule,
   DescribeDomainAssetsRequest,
   DescribeNotifyAssetConfigResponse,
   DescribeNICAssetsRequest,
   DescribeIaCFileReportResponse,
   DescribeDspmAssetFieldListResponse,
   DescribeDspmPersonApplyHistoryResponse,
+  DescribeVulScanTaskListRequest,
   DescribeAssetProcessListRequest,
   DescribeAssetProcessListResponse,
   CosRiskAlarmInfo,
@@ -479,6 +530,7 @@ import {
   DescribeIpInvokeRecordDetailResponse,
   CosAccessInfo,
   DescribeRiskRuleDetailRequest,
+  DescribeVulHostRelateComponentRequest,
   DescribeDspmAssetAccountPresetPrivilegesRequest,
   ModifyDspmIdentifyCategoryRequest,
   DescribeDspmIdentifyLevelGroupListResponse,
@@ -493,22 +545,27 @@ import {
   CreateAccessKeySyncTaskResponse,
   ModifyIaCTokenPeriodResponse,
   EdrAlertItem,
+  DescribeVulFixableMachineListRequest,
   DescribeDspmSyncUsersStatusResponse,
   DescribeSearchBugInfoRequest,
   DescribeDspmRiskDetailResponse,
   DescribeCosRiskScanTaskRequest,
+  DescribeVulLabelListResponse,
   DeleteDspmIdentifyComplianceRuleRelationRequest,
   DescribeOrganizationUserInfoResponse,
   LogItem,
   AccessKeyRisk,
   DspmIdentifyRuleDetail,
+  VulSpreadTrend,
   StopRiskCenterTaskResponse,
   DBAssetVO,
   CreateDspmWhitelistStrategyRequest,
   ModifyUebaRuleSwitchResponse,
+  StopVulScanTaskResponse,
+  CreateVulScanManualResponse,
   DeleteCosPolicyResponse,
   DescribeDspmAssetDatabaseListRequest,
-  UpdateAlertStatusListResponse,
+  DescribeHostVulOverviewRequest,
   DescribeIaCTokenListRequest,
   SkillScanEngineResult,
   CosAkAssetInfo,
@@ -522,13 +579,15 @@ import {
   DescribeDspmAssetAccountIdentifyResponse,
   DescribeDspmAssetLoginCredentialRequest,
   DescribeCLSLogListV3Request,
-  DescribeCVMAssetsResponse,
+  CreateVulFixedExportJobResponse,
   LogIndexRuleInfo,
   DescribeDspmIdentifyDistributionStatisticsResponse,
   DescribeDspmIdentifyRuleListRequest,
   DescribeCosSourceIpRequest,
   DescribePublicIpAssetsRequest,
   DescribeDspmBackupSettingRequest,
+  DescribeVulLabelListRequest,
+  HostKBRisk,
   DescribeCVMAssetInfoRequest,
   ModifyMachineRemarkResponse,
   DescribeVulRiskListRequest,
@@ -551,7 +610,8 @@ import {
   TaskCenterVulRiskInputParam,
   ModifyDspmIpInfoRequest,
   ScanTaskInfo,
-  TrafficPluginState,
+  ModifyVulWhitelistSwitchResponse,
+  DescribeVulIgnoreRuleListResponse,
   DescribeAccessKeyAlarmDetailRequest,
   Tags,
   ModifyDspmRiskInfoRequest,
@@ -563,8 +623,10 @@ import {
   DescribeVpcAssetsResponse,
   CreateDspmIdentifyComplianceRuleRelationResponse,
   RevertDspmAssetAccountRequest,
+  VPRLabel,
   DescribeAssetRiskListRequest,
   CreateDspmIdentifyLevelGroupRequest,
+  VulFixTaskItem,
   VulTrend,
   SkillState,
   DescribeDspmIdentifyInfoListResponse,
@@ -572,9 +634,10 @@ import {
   DescribeDspmAssetAccountsRequest,
   DescribeAccessKeyRiskResponse,
   LogDynamicIndex,
+  DescribeVulFixedHostDetailResponse,
   ModifyCosMarkInfoRequest,
   DescribeDspmApplyHistoryResponse,
-  ModifyDspmIpInfoResponse,
+  DescribeCVMAssetsResponse,
   CreateAccessKeyCheckTaskRequest,
   DspmFrequency,
   SyncDspmUsersResponse,
@@ -583,10 +646,11 @@ import {
   DescribeDspmAssetAccountsResponse,
   AssetBaseInfoResponse,
   DescribeRiskCallRecordResponse,
+  VulDetailInfo,
   DescribeRiskCenterPortViewPortRiskListRequest,
   DescribeAccessKeyUserDetailRequest,
   DescribeDspmAssetIdentifyInfoListResponse,
-  DescribeCosAuditDictionaryListResponse,
+  DescribeDspmAssetIdsResponse,
   StopRiskCenterTaskRequest,
   ModifyDspmAssetSecurityAnalysisSwitchResponse,
   DeleteDspmIdentifyComplianceRuleRelationResponse,
@@ -596,12 +660,14 @@ import {
   WhereFilter,
   DescribeAlertListResponse,
   DescribeDspmIdentifyRuleListResponse,
+  VulFixTaskInfo,
   DspmStatisticsItem,
-  DescribeCosAuditDictionaryListRequest,
+  DescribeCosActionListRequest,
   DescribeRiskCenterAssetViewVULRiskListRequest,
   DeleteIaCFileRequest,
   LogKeyValueInfo,
   DeleteDspmExportTaskResponse,
+  ModifyOrganizationAccountStatusResponse,
   SourceIPAsset,
   DescribeUserCallRecordRequest,
   CreateDspmIdentifyComplianceGroupRequest,
@@ -609,7 +675,7 @@ import {
   DescribeAccessKeyUserDetailResponse,
   NotifyAssetConfigItem,
   ModifyDspmIdentifyRuleResponse,
-  EdrAlertDetail,
+  CreateHostVulExportJobResponse,
   CosAlarmTrendInfo,
   CredentialEffectScope,
   RevertDspmAssetAccountResponse,
@@ -624,14 +690,17 @@ import {
   DescribeCVMAssetsRequest,
   DescribeRiskCenterServerRiskListRequest,
   DomainInfo,
+  VulFixStatusItem,
   DescribeAccessKeyAlarmDetailResponse,
   RuleContentProcessNetwork,
   DescribeOtherCloudAssetsRequest,
   DescribeIaCFileListResponse,
+  ModifyDspmApproveStatusResponse,
   DescribeAILinkSettingResponse,
   ModifyAILinkSettingResponse,
   DescribeDspmAssetSecurityAnalyseStatusResponse,
   CosAlarmRiskIdInfo,
+  DescribeKBDetailRequest,
   ModifyNotifyAssetConfigResponse,
   DescribeDspmBackupLogListResponse,
   ModifyDspmAssetAccountRequest,
@@ -641,12 +710,14 @@ import {
   DescribeOtherCloudAssetsResponse,
   CreateDomainAndIpResponse,
   DescribeSubUserInfoRequest,
-  DescribeDspmAssetDatabasesResponse,
+  DescribeCosRiskEvidenceResponse,
   SendDspmAssetLoginSmsCodeRequest,
   DescribeHighBaseLineRiskListRequest,
   DescribeTaskLogURLRequest,
   ModifyCosAuditMonitorAccountResponse,
-  DspmIdentifyIdItem,
+  AddVulWhitelistResponse,
+  DescribeVulRiskRelateHostResponse,
+  DescribeKBUpdatableMachineListResponse,
   DescribeDspmStatisticsResponse,
   DescribeCosPolicyResponse,
   CreateDspmRiskExportJobRequest,
@@ -654,20 +725,26 @@ import {
   CosInvokeIpVpcInfo,
   AccessKeyAlarmInfo,
   DescribeDspmAssetAccountRecycledPrivilegesRequest,
+  DescribeVulItemListResponse,
   DescribeCosRiskScanTaskResponse,
   CosInvokeLog,
   DownloadDspmExportLogResponse,
+  DescribeVulFixTaskDetailRequest,
+  DescribeVulRiskRelateComponentResponse,
   CosIdentifyCategoryDetail,
+  VulComponentSummary,
   DescribeCheckViewRisksRequest,
   DescribeDspmAssetFieldListRequest,
   DeleteDspmPersonalIdentifyResponse,
   DeleteDspmIdentifyRuleRequest,
+  DescribeHostVulOverviewResponse,
   DspmRisk,
   ModifyAILinkSettingRequest,
   DescribePolicyHitDataResponse,
   StatisticalFilter,
   DspmIdentifyCategoryItem,
   DescribeVULRiskDetailRequest,
+  DescribeVulFixedHostDetailRequest,
   DescribeSkillScanResultResponse,
   DspmDbAssetId,
   NetworkCardInfo,
@@ -679,10 +756,13 @@ import {
   DescribeCosAkInvokeIpListRequest,
   DescribeCosBucketRiskResponse,
   DescribeCosRiskActionListRequest,
+  KBDetail,
   DescribeCosRoleAccessPermissionsRequest,
   LogTopicIndexInfo,
   DescribeVULRiskDetailResponse,
+  VulWhitelist,
   DspmIdentifyCategoryRuleRelateItem,
+  DeleteVulWhitelistRequest,
   ModifyAlarmRiskStatusRequest,
   TrafficRuleState,
   ModifyEDRRuleResponse,
@@ -705,11 +785,13 @@ import {
   DescribeDspmWhitelistStrategyResponse,
   DescribeDspmAssetAccountIdentifyRequest,
   DescribeDspmAssetAccessTopologyResponse,
+  RiskCallRecord,
   DescribeSkillScanPayInfoRequest,
   DescribeCosInvokeUaResponse,
   DescribeDspmApplyHistoryRequest,
   AccessKeyAlarmCount,
   DescribeListenerListResponse,
+  HostBriefInfo,
   TaskAdvanceCFG,
   DescribeDspmAssetFieldSamplesResponse,
   DescribeCosAuditPayInfoResponse,
@@ -717,14 +799,17 @@ import {
   SubnetAsset,
   ContainerEnvInfo,
   CreateDspmIdentifyComplianceCategoryRelationResponse,
+  ModifyVulScanPeriodicRequest,
   RiskCenterStatusKey,
   TaskAssetObject,
   DbAssetInfo,
+  TrafficPluginState,
   DspmRiskStrategyGroup,
   DescribeCosAccessPermissionsRequest,
   CreateCosRiskScanTaskRequest,
   CosIdentifyRuleDetail,
   Element,
+  CreateVulFixRetryTaskResponse,
   DeleteDspmIdentifyComplianceGroupRequest,
   SyncDspmUsersRequest,
   DescribeDspmAssetTableListResponse,
@@ -740,6 +825,8 @@ import {
   DescribeVULListRequest,
   AssetViewWeakPassRisk,
   ModifyPolicyStatusResponse,
+  DescribeVulFixedListRequest,
+  DescribeVulFixTaskListResponse,
   CFGViewCFGRisk,
   DescribeCWPMachinesResponse,
   CreateIaCFileReScanTaskRequest,
@@ -752,10 +839,12 @@ import {
   CreateDspmIdentifyComplianceGroupCopyRequest,
   SkillRuleCatalogItem,
   DescribeRiskCenterVULViewVULRiskListRequest,
+  ModifyVulScanPeriodicResponse,
+  AddVulWhitelistRequest,
   CosRiskTrendInfo,
   DescribeCosAssetSyncTaskRequest,
   UpdateAccessKeyRemarkResponse,
-  UebaCustomRule,
+  CreateVulReScanResponse,
   VULRiskInfo,
   CreateDspmApplyOrderRequest,
   RiskDetailItem,
@@ -800,12 +889,15 @@ import {
   DescribeDspmPersonalIdentifyListRequest,
   ModifyNotifySettingAlertResponse,
   CosSourceIpInfo,
-  ModifyOrganizationAccountStatusResponse,
+  DescribeSourceIPAssetRequest,
   DescribeDspmIdentifyComplianceGroupListRequest,
+  VulScanTaskDetail,
   DescribeDspmIdentifyDistributionStatisticsRequest,
+  VulFixTaskDetailItem,
   DescribeDbAssetsRequest,
   DescribeDbAssetInfoResponse,
   DescribeTopAttackInfoRequest,
+  DescribeHostKBRiskListRequest,
   LogContextInfo,
   DescribeAlertListRequest,
   DescribeRiskCenterCFGViewCFGRiskListResponse,
@@ -814,6 +906,7 @@ import {
   DescribeDspmAssetSecurityAnalyseStatusRequest,
   DeleteDspmIdentifyRuleResponse,
   ModifyDspmRiskInfoResponse,
+  DescribeVulScanPeriodicRequest,
   DescribeDspmIdentifyRuleTestResultResponse,
   DescribeClusterAssetsResponse,
   DownloadDspmExportLogRequest,
@@ -828,8 +921,10 @@ import {
   DescribeNICAssetsResponse,
   DescribeRiskTrendDataRequest,
   ModifyCosAuditObjectIdentifyStatusRequest,
+  DeleteVulWhitelistResponse,
   LogSearchResult,
   CosRiskViewInfo,
+  DescribeVulScanPeriodicResponse,
   Filters,
   ModifyRiskCenterScanTaskRequest,
   ClbListenerListInfo,
@@ -857,6 +952,7 @@ import {
   DspmAssetAccessTopologyItem,
   DescribeRiskCenterAssetViewPortRiskListResponse,
   DeleteDspmAssetAccountResponse,
+  VulFixItem,
   DescribeRiskBucketListResponse,
   DescribeAssumeRoleResponse,
 } from "./csip_models"
@@ -961,6 +1057,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询指定漏洞修复任务的详情信息，包含每台主机的修复状态、快照状态等明细数据，支持分页和筛选。
+   */
+  async DescribeVulFixTaskDetail(
+    req: DescribeVulFixTaskDetailRequest,
+    cb?: (error: string, rep: DescribeVulFixTaskDetailResponse) => void
+  ): Promise<DescribeVulFixTaskDetailResponse> {
+    return this.request("DescribeVulFixTaskDetail", req, cb)
+  }
+
+  /**
    * 域名列表
    */
   async DescribeDomainAssets(
@@ -1028,6 +1134,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAccessKeyUserListResponse) => void
   ): Promise<DescribeAccessKeyUserListResponse> {
     return this.request("DescribeAccessKeyUserList", req, cb)
+  }
+
+  /**
+   * 获取漏洞标签列表
+   */
+  async DescribeVulLabelList(
+    req?: DescribeVulLabelListRequest,
+    cb?: (error: string, rep: DescribeVulLabelListResponse) => void
+  ): Promise<DescribeVulLabelListResponse> {
+    return this.request("DescribeVulLabelList", req, cb)
+  }
+
+  /**
+   * 分页查询漏洞修复任务记录列表，支持按修复状态、时间范围等条件筛选，展示每个修复任务的概要信息。
+   */
+  async DescribeVulFixTaskList(
+    req: DescribeVulFixTaskListRequest,
+    cb?: (error: string, rep: DescribeVulFixTaskListResponse) => void
+  ): Promise<DescribeVulFixTaskListResponse> {
+    return this.request("DescribeVulFixTaskList", req, cb)
   }
 
   /**
@@ -1108,6 +1234,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDspmRiskDetailResponse) => void
   ): Promise<DescribeDspmRiskDetailResponse> {
     return this.request("DescribeDspmRiskDetail", req, cb)
+  }
+
+  /**
+   * 停止漏洞扫描（任务扫描）
+   */
+  async StopVulScanTask(
+    req: StopVulScanTaskRequest,
+    cb?: (error: string, rep: StopVulScanTaskResponse) => void
+  ): Promise<StopVulScanTaskResponse> {
+    return this.request("StopVulScanTask", req, cb)
   }
 
   /**
@@ -1201,13 +1337,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查看风险趋势图
+   * 添加漏洞白名单
    */
-  async DescribeRiskTrendData(
-    req: DescribeRiskTrendDataRequest,
-    cb?: (error: string, rep: DescribeRiskTrendDataResponse) => void
-  ): Promise<DescribeRiskTrendDataResponse> {
-    return this.request("DescribeRiskTrendData", req, cb)
+  async AddVulWhitelist(
+    req: AddVulWhitelistRequest,
+    cb?: (error: string, rep: AddVulWhitelistResponse) => void
+  ): Promise<AddVulWhitelistResponse> {
+    return this.request("AddVulWhitelist", req, cb)
   }
 
   /**
@@ -1241,13 +1377,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询TOP攻击信息
+   * 用户手动提交漏洞修复任务，指定需要修复的漏洞和目标主机，系统创建修复任务并下发执行。支持指定修复超时时间、是否创建快照等选项。通过FixItems数组精确控制每个漏洞/KB补丁修复哪些主机。
    */
-  async DescribeTopAttackInfo(
-    req: DescribeTopAttackInfoRequest,
-    cb?: (error: string, rep: DescribeTopAttackInfoResponse) => void
-  ): Promise<DescribeTopAttackInfoResponse> {
-    return this.request("DescribeTopAttackInfo", req, cb)
+  async CreateVulFixTask(
+    req: CreateVulFixTaskRequest,
+    cb?: (error: string, rep: CreateVulFixTaskResponse) => void
+  ): Promise<CreateVulFixTaskResponse> {
+    return this.request("CreateVulFixTask", req, cb)
   }
 
   /**
@@ -1301,6 +1437,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改漏洞白名单配置
+   */
+  async ModifyVulWhitelistConfig(
+    req: ModifyVulWhitelistConfigRequest,
+    cb?: (error: string, rep: ModifyVulWhitelistConfigResponse) => void
+  ): Promise<ModifyVulWhitelistConfigResponse> {
+    return this.request("ModifyVulWhitelistConfig", req, cb)
+  }
+
+  /**
    * 创建IaC检测文件重新扫描任务
    */
   async CreateIaCFileReScanTask(
@@ -1338,6 +1484,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeEdrAlertInfoResponse) => void
   ): Promise<DescribeEdrAlertInfoResponse> {
     return this.request("DescribeEdrAlertInfo", req, cb)
+  }
+
+  /**
+   * 获取扫描漏洞任务详情
+   */
+  async DescribeVulScanTaskDetail(
+    req: DescribeVulScanTaskDetailRequest,
+    cb?: (error: string, rep: DescribeVulScanTaskDetailResponse) => void
+  ): Promise<DescribeVulScanTaskDetailResponse> {
+    return this.request("DescribeVulScanTaskDetail", req, cb)
   }
 
   /**
@@ -1438,6 +1594,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeCosAuditDictionaryListResponse) => void
   ): Promise<DescribeCosAuditDictionaryListResponse> {
     return this.request("DescribeCosAuditDictionaryList", req, cb)
+  }
+
+  /**
+   * 修改AI-Link智链引擎配置
+   */
+  async ModifyAILinkSetting(
+    req: ModifyAILinkSettingRequest,
+    cb?: (error: string, rep: ModifyAILinkSettingResponse) => void
+  ): Promise<ModifyAILinkSettingResponse> {
+    return this.request("ModifyAILinkSetting", req, cb)
   }
 
   /**
@@ -1571,6 +1737,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改Dspm审批单状态
+   */
+  async ModifyDspmApproveStatus(
+    req: ModifyDspmApproveStatusRequest,
+    cb?: (error: string, rep: ModifyDspmApproveStatusResponse) => void
+  ): Promise<ModifyDspmApproveStatusResponse> {
+    return this.request("ModifyDspmApproveStatus", req, cb)
+  }
+
+  /**
    * 修改对象存储识别开关
    */
   async ModifyCosAuditObjectIdentifyStatus(
@@ -1691,6 +1867,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * RetryExportLog
+   */
+  async RetryDspmExportLog(
+    req: RetryDspmExportLogRequest,
+    cb?: (error: string, rep: RetryDspmExportLogResponse) => void
+  ): Promise<RetryDspmExportLogResponse> {
+    return this.request("RetryDspmExportLog", req, cb)
+  }
+
+  /**
    * 查看存储桶调用源ip列表
    */
   async DescribeCosAkInvokeIpList(
@@ -1771,13 +1957,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改dspm数据识别模板状态
+   * 修改漏洞白名单开关
    */
-  async ModifyDspmIdentifyComplianceGroupStatus(
-    req: ModifyDspmIdentifyComplianceGroupStatusRequest,
-    cb?: (error: string, rep: ModifyDspmIdentifyComplianceGroupStatusResponse) => void
-  ): Promise<ModifyDspmIdentifyComplianceGroupStatusResponse> {
-    return this.request("ModifyDspmIdentifyComplianceGroupStatus", req, cb)
+  async ModifyVulWhitelistSwitch(
+    req: ModifyVulWhitelistSwitchRequest,
+    cb?: (error: string, rep: ModifyVulWhitelistSwitchResponse) => void
+  ): Promise<ModifyVulWhitelistSwitchResponse> {
+    return this.request("ModifyVulWhitelistSwitch", req, cb)
+  }
+
+  /**
+   * 根据用户输入的 KB 内部 ID 查询单个 Windows KB 补丁的详情信息，返回 KB 基本信息、发布时间、是否需要重启，以及该 KB 关联的漏洞列表。
+   */
+  async DescribeKBDetail(
+    req: DescribeKBDetailRequest,
+    cb?: (error: string, rep: DescribeKBDetailResponse) => void
+  ): Promise<DescribeKBDetailResponse> {
+    return this.request("DescribeKBDetail", req, cb)
   }
 
   /**
@@ -1818,6 +2014,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeKeySandboxCredentialListResponse) => void
   ): Promise<DescribeKeySandboxCredentialListResponse> {
     return this.request("DescribeKeySandboxCredentialList", req, cb)
+  }
+
+  /**
+   * 查询某个已修复漏洞在指定主机上的修复详情，包含漏洞基本信息、修复主机信息以及关联组件&路径的详细列表（组件名称、命中版本、关联路径、修复命令）。
+   */
+  async DescribeVulFixedHostDetail(
+    req: DescribeVulFixedHostDetailRequest,
+    cb?: (error: string, rep: DescribeVulFixedHostDetailResponse) => void
+  ): Promise<DescribeVulFixedHostDetailResponse> {
+    return this.request("DescribeVulFixedHostDetail", req, cb)
   }
 
   /**
@@ -1881,6 +2087,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改IaC检测接入Token存储周期
+   */
+  async ModifyIaCTokenPeriod(
+    req: ModifyIaCTokenPeriodRequest,
+    cb?: (error: string, rep: ModifyIaCTokenPeriodResponse) => void
+  ): Promise<ModifyIaCTokenPeriodResponse> {
+    return this.request("ModifyIaCTokenPeriod", req, cb)
+  }
+
+  /**
    * 查看调用记录关联的文件信息
    */
   async DescribeCosIpInvokeRecordFile(
@@ -1921,23 +2137,43 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取账号dspm信息列表
+   * 修改通知资产范围配置
    */
-  async DescribeUserDspmInfoList(
-    req: DescribeUserDspmInfoListRequest,
-    cb?: (error: string, rep: DescribeUserDspmInfoListResponse) => void
-  ): Promise<DescribeUserDspmInfoListResponse> {
-    return this.request("DescribeUserDspmInfoList", req, cb)
+  async ModifyNotifyAssetConfig(
+    req: ModifyNotifyAssetConfigRequest,
+    cb?: (error: string, rep: ModifyNotifyAssetConfigResponse) => void
+  ): Promise<ModifyNotifyAssetConfigResponse> {
+    return this.request("ModifyNotifyAssetConfig", req, cb)
   }
 
   /**
-   * RetryExportLog
+   * 创建已修复漏洞列表的导出任务。支持与 DescribeVulFixedList 相同的过滤条件，导出通过异步任务实现，返回 JobID 后前端轮询查询导出任务状态。导出字段包含漏洞ID、漏洞名称、漏洞等级、VPR评级、漏洞类型、CVE编号、主机名称、实例ID、关联组件&路径、修复时间。
    */
-  async RetryDspmExportLog(
-    req: RetryDspmExportLogRequest,
-    cb?: (error: string, rep: RetryDspmExportLogResponse) => void
-  ): Promise<RetryDspmExportLogResponse> {
-    return this.request("RetryDspmExportLog", req, cb)
+  async CreateVulFixedExportJob(
+    req: CreateVulFixedExportJobRequest,
+    cb?: (error: string, rep: CreateVulFixedExportJobResponse) => void
+  ): Promise<CreateVulFixedExportJobResponse> {
+    return this.request("CreateVulFixedExportJob", req, cb)
+  }
+
+  /**
+   * 获取主机漏洞概览
+   */
+  async DescribeHostVulOverview(
+    req: DescribeHostVulOverviewRequest,
+    cb?: (error: string, rep: DescribeHostVulOverviewResponse) => void
+  ): Promise<DescribeHostVulOverviewResponse> {
+    return this.request("DescribeHostVulOverview", req, cb)
+  }
+
+  /**
+   * 修改dspm数据识别模板状态
+   */
+  async ModifyDspmIdentifyComplianceGroupStatus(
+    req: ModifyDspmIdentifyComplianceGroupStatusRequest,
+    cb?: (error: string, rep: ModifyDspmIdentifyComplianceGroupStatusResponse) => void
+  ): Promise<ModifyDspmIdentifyComplianceGroupStatusResponse> {
+    return this.request("ModifyDspmIdentifyComplianceGroupStatus", req, cb)
   }
 
   /**
@@ -1978,6 +2214,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDspmApproveHistoryResponse) => void
   ): Promise<DescribeDspmApproveHistoryResponse> {
     return this.request("DescribeDspmApproveHistory", req, cb)
+  }
+
+  /**
+   * 创建漏洞重新扫描
+   */
+  async CreateVulReScan(
+    req: CreateVulReScanRequest,
+    cb?: (error: string, rep: CreateVulReScanResponse) => void
+  ): Promise<CreateVulReScanResponse> {
+    return this.request("CreateVulReScan", req, cb)
   }
 
   /**
@@ -2028,6 +2274,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeScanReportListResponse) => void
   ): Promise<DescribeScanReportListResponse> {
     return this.request("DescribeScanReportList", req, cb)
+  }
+
+  /**
+   * 获取漏洞忽略列表
+   */
+  async DescribeVulIgnoreRuleList(
+    req: DescribeVulIgnoreRuleListRequest,
+    cb?: (error: string, rep: DescribeVulIgnoreRuleListResponse) => void
+  ): Promise<DescribeVulIgnoreRuleListResponse> {
+    return this.request("DescribeVulIgnoreRuleList", req, cb)
   }
 
   /**
@@ -2151,6 +2407,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取漏洞组件关联主机
+   */
+  async DescribeVulComponentRelateHost(
+    req: DescribeVulComponentRelateHostRequest,
+    cb?: (error: string, rep: DescribeVulComponentRelateHostResponse) => void
+  ): Promise<DescribeVulComponentRelateHostResponse> {
+    return this.request("DescribeVulComponentRelateHost", req, cb)
+  }
+
+  /**
    * 获取配置视角的配置风险列表
    */
   async DescribeRiskCenterCFGViewCFGRiskList(
@@ -2201,6 +2467,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询TOP攻击信息
+   */
+  async DescribeTopAttackInfo(
+    req: DescribeTopAttackInfoRequest,
+    cb?: (error: string, rep: DescribeTopAttackInfoResponse) => void
+  ): Promise<DescribeTopAttackInfoResponse> {
+    return this.request("DescribeTopAttackInfo", req, cb)
+  }
+
+  /**
    * 仓库镜像列表
    */
   async DescribeRepositoryImageAssets(
@@ -2241,6 +2517,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取漏洞视角的漏洞风险列表
+   */
+  async DescribeVulViewVulRiskList(
+    req: DescribeVulViewVulRiskListRequest,
+    cb?: (error: string, rep: DescribeVulViewVulRiskListResponse) => void
+  ): Promise<DescribeVulViewVulRiskListResponse> {
+    return this.request("DescribeVulViewVulRiskList", req, cb)
+  }
+
+  /**
    * cvm详情
    */
   async DescribeCVMAssetInfo(
@@ -2271,13 +2557,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改通知资产范围配置
+   * 查询已被修复的漏洞列表，展示修复成功的漏洞信息及修复情况统计，帮助用户了解修复成效。
    */
-  async ModifyNotifyAssetConfig(
-    req: ModifyNotifyAssetConfigRequest,
-    cb?: (error: string, rep: ModifyNotifyAssetConfigResponse) => void
-  ): Promise<ModifyNotifyAssetConfigResponse> {
-    return this.request("ModifyNotifyAssetConfig", req, cb)
+  async DescribeVulFixedList(
+    req: DescribeVulFixedListRequest,
+    cb?: (error: string, rep: DescribeVulFixedListResponse) => void
+  ): Promise<DescribeVulFixedListResponse> {
+    return this.request("DescribeVulFixedList", req, cb)
   }
 
   /**
@@ -2351,13 +2637,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改日志备份设置
+   * 创建主机列漏洞表导出任务
    */
-  async ModifyDspmBackupSetting(
-    req: ModifyDspmBackupSettingRequest,
-    cb?: (error: string, rep: ModifyDspmBackupSettingResponse) => void
-  ): Promise<ModifyDspmBackupSettingResponse> {
-    return this.request("ModifyDspmBackupSetting", req, cb)
+  async CreateHostVulExportJob(
+    req: CreateHostVulExportJobRequest,
+    cb?: (error: string, rep: CreateHostVulExportJobResponse) => void
+  ): Promise<CreateHostVulExportJobResponse> {
+    return this.request("CreateHostVulExportJob", req, cb)
   }
 
   /**
@@ -2391,6 +2677,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 对修复失败的漏洞修复任务进行重试，仅针对原任务中修复失败的主机重新下发修复指令。仅当任务状态为部分修复失败或全部修复失败时允许重试。
+   */
+  async CreateVulFixRetryTask(
+    req: CreateVulFixRetryTaskRequest,
+    cb?: (error: string, rep: CreateVulFixRetryTaskResponse) => void
+  ): Promise<CreateVulFixRetryTaskResponse> {
+    return this.request("CreateVulFixRetryTask", req, cb)
+  }
+
+  /**
    * 修改Dspm资产数据扫描任务状态
    */
   async ModifyDspmAssetDataScanTaskStatus(
@@ -2401,13 +2697,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改对象存储备注
+   * 获取漏洞关联组件
    */
-  async ModifyCosMarkInfo(
-    req: ModifyCosMarkInfoRequest,
-    cb?: (error: string, rep: ModifyCosMarkInfoResponse) => void
-  ): Promise<ModifyCosMarkInfoResponse> {
-    return this.request("ModifyCosMarkInfo", req, cb)
+  async DescribeVulRiskRelateComponent(
+    req: DescribeVulRiskRelateComponentRequest,
+    cb?: (error: string, rep: DescribeVulRiskRelateComponentResponse) => void
+  ): Promise<DescribeVulRiskRelateComponentResponse> {
+    return this.request("DescribeVulRiskRelateComponent", req, cb)
   }
 
   /**
@@ -2581,6 +2877,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改dspm数据识别分级组
+   */
+  async ModifyDspmIdentifyLevelGroup(
+    req: ModifyDspmIdentifyLevelGroupRequest,
+    cb?: (error: string, rep: ModifyDspmIdentifyLevelGroupResponse) => void
+  ): Promise<ModifyDspmIdentifyLevelGroupResponse> {
+    return this.request("ModifyDspmIdentifyLevelGroup", req, cb)
+  }
+
+  /**
    * 查询Dspm访问拓扑ip列表
    */
   async DescribeDspmAccessTopologyIps(
@@ -2611,6 +2917,26 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取漏洞或KB关联的主机
+   */
+  async DescribeVulRiskRelateHost(
+    req: DescribeVulRiskRelateHostRequest,
+    cb?: (error: string, rep: DescribeVulRiskRelateHostResponse) => void
+  ): Promise<DescribeVulRiskRelateHostResponse> {
+    return this.request("DescribeVulRiskRelateHost", req, cb)
+  }
+
+  /**
+   * 修改漏洞扫描（周期扫描）
+   */
+  async ModifyVulScanPeriodic(
+    req: ModifyVulScanPeriodicRequest,
+    cb?: (error: string, rep: ModifyVulScanPeriodicResponse) => void
+  ): Promise<ModifyVulScanPeriodicResponse> {
+    return this.request("ModifyVulScanPeriodic", req, cb)
+  }
+
+  /**
    * 创建日志导出任务
    */
   async CreateDspmExportTask(
@@ -2618,6 +2944,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: CreateDspmExportTaskResponse) => void
   ): Promise<CreateDspmExportTaskResponse> {
     return this.request("CreateDspmExportTask", req, cb)
+  }
+
+  /**
+   * 修改日志备份设置
+   */
+  async ModifyDspmBackupSetting(
+    req: ModifyDspmBackupSettingRequest,
+    cb?: (error: string, rep: ModifyDspmBackupSettingResponse) => void
+  ): Promise<ModifyDspmBackupSettingResponse> {
+    return this.request("ModifyDspmBackupSetting", req, cb)
+  }
+
+  /**
+   * 查看风险趋势图
+   */
+  async DescribeRiskTrendData(
+    req: DescribeRiskTrendDataRequest,
+    cb?: (error: string, rep: DescribeRiskTrendDataResponse) => void
+  ): Promise<DescribeRiskTrendDataResponse> {
+    return this.request("DescribeRiskTrendData", req, cb)
   }
 
   /**
@@ -2641,6 +2987,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询 Skill 安全检测结果。调用 CreateSkillScan 成功后使用返回的 ContentHash + EngineVersion 轮询本接口获取结果。上传成功后建议5分钟后首次轮询，如未检测完成之后每隔1分钟轮询一次。响应通过 Status 字段区分四种状态：检测完成（SUCCESS）、检测中（SCANNING）、无记录（NOT_FOUND）、检测失败（FAILED）。注意：检测结果保留90天，超期后将返回 NOT_FOUND。
+   */
+  async DescribeSkillScanResult(
+    req: DescribeSkillScanResultRequest,
+    cb?: (error: string, rep: DescribeSkillScanResultResponse) => void
+  ): Promise<DescribeSkillScanResultResponse> {
+    return this.request("DescribeSkillScanResult", req, cb)
+  }
+
+  /**
    * 修改存储桶监测状态
    */
   async ModifyCosAuditBucketMonitorStatus(
@@ -2661,13 +3017,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 查询 Skill 安全检测结果。调用 CreateSkillScan 成功后使用返回的 ContentHash + EngineVersion 轮询本接口获取结果。上传成功后建议5分钟后首次轮询，如未检测完成之后每隔1分钟轮询一次。响应通过 Status 字段区分四种状态：检测完成（SUCCESS）、检测中（SCANNING）、无记录（NOT_FOUND）、检测失败（FAILED）。注意：检测结果保留90天，超期后将返回 NOT_FOUND。
+   * 获取主机kb风险列表
    */
-  async DescribeSkillScanResult(
-    req: DescribeSkillScanResultRequest,
-    cb?: (error: string, rep: DescribeSkillScanResultResponse) => void
-  ): Promise<DescribeSkillScanResultResponse> {
-    return this.request("DescribeSkillScanResult", req, cb)
+  async DescribeHostKBRiskList(
+    req: DescribeHostKBRiskListRequest,
+    cb?: (error: string, rep: DescribeHostKBRiskListResponse) => void
+  ): Promise<DescribeHostKBRiskListResponse> {
+    return this.request("DescribeHostKBRiskList", req, cb)
   }
 
   /**
@@ -2718,6 +3074,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeAILinkSettingResponse) => void
   ): Promise<DescribeAILinkSettingResponse> {
     return this.request("DescribeAILinkSetting", req, cb)
+  }
+
+  /**
+   * 获取账号dspm信息列表
+   */
+  async DescribeUserDspmInfoList(
+    req: DescribeUserDspmInfoListRequest,
+    cb?: (error: string, rep: DescribeUserDspmInfoListResponse) => void
+  ): Promise<DescribeUserDspmInfoListResponse> {
+    return this.request("DescribeUserDspmInfoList", req, cb)
   }
 
   /**
@@ -2891,6 +3257,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 修改对象存储备注
+   */
+  async ModifyCosMarkInfo(
+    req: ModifyCosMarkInfoRequest,
+    cb?: (error: string, rep: ModifyCosMarkInfoResponse) => void
+  ): Promise<ModifyCosMarkInfoResponse> {
+    return this.request("ModifyCosMarkInfo", req, cb)
+  }
+
+  /**
    * 修改集团账号状态
    */
   async ModifyOrganizationAccountStatus(
@@ -2971,13 +3347,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改AI-Link智链引擎配置
+   * 获取漏洞扫描任务记录
    */
-  async ModifyAILinkSetting(
-    req: ModifyAILinkSettingRequest,
-    cb?: (error: string, rep: ModifyAILinkSettingResponse) => void
-  ): Promise<ModifyAILinkSettingResponse> {
-    return this.request("ModifyAILinkSetting", req, cb)
+  async DescribeVulScanTaskList(
+    req: DescribeVulScanTaskListRequest,
+    cb?: (error: string, rep: DescribeVulScanTaskListResponse) => void
+  ): Promise<DescribeVulScanTaskListResponse> {
+    return this.request("DescribeVulScanTaskList", req, cb)
   }
 
   /**
@@ -3221,6 +3597,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询指定KB补丁可以更新的主机列表。用于Windows系统补丁修复场景，在用户提交KB补丁更新任务前，查询哪些主机缺少该补丁且支持自动更新。
+   */
+  async DescribeKBUpdatableMachineList(
+    req: DescribeKBUpdatableMachineListRequest,
+    cb?: (error: string, rep: DescribeKBUpdatableMachineListResponse) => void
+  ): Promise<DescribeKBUpdatableMachineListResponse> {
+    return this.request("DescribeKBUpdatableMachineList", req, cb)
+  }
+
+  /**
    * 修改风险中心扫描任务
    */
   async ModifyRiskCenterScanTask(
@@ -3228,6 +3614,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyRiskCenterScanTaskResponse) => void
   ): Promise<ModifyRiskCenterScanTaskResponse> {
     return this.request("ModifyRiskCenterScanTask", req, cb)
+  }
+
+  /**
+   * 获取漏洞扫描（周期扫描）
+   */
+  async DescribeVulScanPeriodic(
+    req: DescribeVulScanPeriodicRequest,
+    cb?: (error: string, rep: DescribeVulScanPeriodicResponse) => void
+  ): Promise<DescribeVulScanPeriodicResponse> {
+    return this.request("DescribeVulScanPeriodic", req, cb)
   }
 
   /**
@@ -3281,6 +3677,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 获取漏洞主机关联组件
+   */
+  async DescribeVulHostRelateComponent(
+    req: DescribeVulHostRelateComponentRequest,
+    cb?: (error: string, rep: DescribeVulHostRelateComponentResponse) => void
+  ): Promise<DescribeVulHostRelateComponentResponse> {
+    return this.request("DescribeVulHostRelateComponent", req, cb)
+  }
+
+  /**
    * 每日告警新增数据
    */
   async DescribeCosAlarmTrendData(
@@ -3318,6 +3724,16 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDspmIdentifyComplianceGroupListResponse) => void
   ): Promise<DescribeDspmIdentifyComplianceGroupListResponse> {
     return this.request("DescribeDspmIdentifyComplianceGroupList", req, cb)
+  }
+
+  /**
+   * 查询指定漏洞可以被修复的主机列表。在用户提交修复任务前，需要先查询哪些主机支持自动修复，为用户选择修复目标提供数据支持。
+   */
+  async DescribeVulFixableMachineList(
+    req: DescribeVulFixableMachineListRequest,
+    cb?: (error: string, rep: DescribeVulFixableMachineListResponse) => void
+  ): Promise<DescribeVulFixableMachineListResponse> {
+    return this.request("DescribeVulFixableMachineList", req, cb)
   }
 
   /**
@@ -3391,13 +3807,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 获取漏洞视角的漏洞风险列表
+   * 创建漏洞扫描（一键扫描）
    */
-  async DescribeVulViewVulRiskList(
-    req: DescribeVulViewVulRiskListRequest,
-    cb?: (error: string, rep: DescribeVulViewVulRiskListResponse) => void
-  ): Promise<DescribeVulViewVulRiskListResponse> {
-    return this.request("DescribeVulViewVulRiskList", req, cb)
+  async CreateVulScanManual(
+    req: CreateVulScanManualRequest,
+    cb?: (error: string, rep: CreateVulScanManualResponse) => void
+  ): Promise<CreateVulScanManualResponse> {
+    return this.request("CreateVulScanManual", req, cb)
   }
 
   /**
@@ -3421,13 +3837,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改Dspm审批单状态
+   * 获取主机漏洞VPR信息
    */
-  async ModifyDspmApproveStatus(
-    req: ModifyDspmApproveStatusRequest,
-    cb?: (error: string, rep: ModifyDspmApproveStatusResponse) => void
-  ): Promise<ModifyDspmApproveStatusResponse> {
-    return this.request("ModifyDspmApproveStatus", req, cb)
+  async DescribeHostVulItemVPRInfo(
+    req: DescribeHostVulItemVPRInfoRequest,
+    cb?: (error: string, rep: DescribeHostVulItemVPRInfoResponse) => void
+  ): Promise<DescribeHostVulItemVPRInfoResponse> {
+    return this.request("DescribeHostVulItemVPRInfo", req, cb)
   }
 
   /**
@@ -3491,13 +3907,13 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改IaC检测接入Token存储周期
+   * 获取漏洞列表
    */
-  async ModifyIaCTokenPeriod(
-    req: ModifyIaCTokenPeriodRequest,
-    cb?: (error: string, rep: ModifyIaCTokenPeriodResponse) => void
-  ): Promise<ModifyIaCTokenPeriodResponse> {
-    return this.request("ModifyIaCTokenPeriod", req, cb)
+  async DescribeVulItemList(
+    req: DescribeVulItemListRequest,
+    cb?: (error: string, rep: DescribeVulItemListResponse) => void
+  ): Promise<DescribeVulItemListResponse> {
+    return this.request("DescribeVulItemList", req, cb)
   }
 
   /**
@@ -3531,13 +3947,23 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 修改dspm数据识别分级组
+   * 删除漏洞白名单
    */
-  async ModifyDspmIdentifyLevelGroup(
-    req: ModifyDspmIdentifyLevelGroupRequest,
-    cb?: (error: string, rep: ModifyDspmIdentifyLevelGroupResponse) => void
-  ): Promise<ModifyDspmIdentifyLevelGroupResponse> {
-    return this.request("ModifyDspmIdentifyLevelGroup", req, cb)
+  async DeleteVulWhitelist(
+    req: DeleteVulWhitelistRequest,
+    cb?: (error: string, rep: DeleteVulWhitelistResponse) => void
+  ): Promise<DeleteVulWhitelistResponse> {
+    return this.request("DeleteVulWhitelist", req, cb)
+  }
+
+  /**
+   * 获取主机漏洞风险列表
+   */
+  async DescribeHostVulRiskList(
+    req: DescribeHostVulRiskListRequest,
+    cb?: (error: string, rep: DescribeHostVulRiskListResponse) => void
+  ): Promise<DescribeHostVulRiskListResponse> {
+    return this.request("DescribeHostVulRiskList", req, cb)
   }
 
   /**

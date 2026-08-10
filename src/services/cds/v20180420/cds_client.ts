@@ -18,19 +18,36 @@
 import { AbstractClient } from "../../../common/abstract_client"
 import { ClientConfig } from "../../../common/interface"
 import {
-  ModifyDbauditInstancesRenewFlagResponse,
-  DescribeDbauditInstanceTypeResponse,
-  InquiryPriceDbauditInstanceResponse,
-  CdsAuditInstance,
-  ModifyDbauditInstancesRenewFlagRequest,
-  DescribeDbauditUsedRegionsResponse,
-  DescribeDbauditInstancesRequest,
-  DescribeDbauditInstanceTypeRequest,
-  RegionInfo,
-  DescribeDbauditInstancesResponse,
+  CreateReportPdfRequest,
+  IdWithName,
   DbauditTypesInfo,
-  DescribeDbauditUsedRegionsRequest,
+  ModifyDbauditInstancesRenewFlagRequest,
+  DescribeReportMissionListRequest,
+  DescribeAssetsListRequest,
   InquiryPriceDbauditInstanceRequest,
+  CreateReportPdfResponse,
+  DescribeDbauditInstanceTypeResponse,
+  AssetsInfo,
+  DescribeReportMissionListResponse,
+  CdsAuditInstance,
+  DescribeDbauditUsedRegionsResponse,
+  AuditCapability,
+  CreateTimerReportResponse,
+  RegionInfo,
+  DescribeDbauditInstancesRequest,
+  ModifyDbauditInstancesRenewFlagResponse,
+  DescribeDbauditUsedRegionsRequest,
+  InquiryPriceDbauditInstanceResponse,
+  ReportMission,
+  NameValueString,
+  Reports,
+  DsgcBindingInfo,
+  CreateTimerReportRequest,
+  DescribeReportListResponse,
+  DescribeDbauditInstanceTypeRequest,
+  DescribeReportListRequest,
+  DescribeAssetsListResponse,
+  DescribeDbauditInstancesResponse,
 } from "./cds_models"
 
 /**
@@ -43,16 +60,6 @@ export class Client extends AbstractClient {
   }
 
   /**
-   * 本接口 (DescribeDbauditInstanceType) 用于查询可售卖的产品规格列表。
-   */
-  async DescribeDbauditInstanceType(
-    req?: DescribeDbauditInstanceTypeRequest,
-    cb?: (error: string, rep: DescribeDbauditInstanceTypeResponse) => void
-  ): Promise<DescribeDbauditInstanceTypeResponse> {
-    return this.request("DescribeDbauditInstanceType", req, cb)
-  }
-
-  /**
    * 本接口 (ModifyDbauditInstancesRenewFlag) 用于修改数据安全审计产品实例续费标识
    */
   async ModifyDbauditInstancesRenewFlag(
@@ -60,6 +67,26 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: ModifyDbauditInstancesRenewFlagResponse) => void
   ): Promise<ModifyDbauditInstancesRenewFlagResponse> {
     return this.request("ModifyDbauditInstancesRenewFlag", req, cb)
+  }
+
+  /**
+   * 查询报表列表
+   */
+  async DescribeReportList(
+    req: DescribeReportListRequest,
+    cb?: (error: string, rep: DescribeReportListResponse) => void
+  ): Promise<DescribeReportListResponse> {
+    return this.request("DescribeReportList", req, cb)
+  }
+
+  /**
+   * 新建报表任务
+   */
+  async CreateTimerReport(
+    req: CreateTimerReportRequest,
+    cb?: (error: string, rep: CreateTimerReportResponse) => void
+  ): Promise<CreateTimerReportResponse> {
+    return this.request("CreateTimerReport", req, cb)
   }
 
   /**
@@ -83,6 +110,16 @@ export class Client extends AbstractClient {
   }
 
   /**
+   * 查询报表任务列表
+   */
+  async DescribeReportMissionList(
+    req: DescribeReportMissionListRequest,
+    cb?: (error: string, rep: DescribeReportMissionListResponse) => void
+  ): Promise<DescribeReportMissionListResponse> {
+    return this.request("DescribeReportMissionList", req, cb)
+  }
+
+  /**
    * 本接口 (DescribeDbauditUsedRegions) 用于查询可售卖地域列表。
    */
   async DescribeDbauditUsedRegions(
@@ -90,5 +127,35 @@ export class Client extends AbstractClient {
     cb?: (error: string, rep: DescribeDbauditUsedRegionsResponse) => void
   ): Promise<DescribeDbauditUsedRegionsResponse> {
     return this.request("DescribeDbauditUsedRegions", req, cb)
+  }
+
+  /**
+   * 查询资产列表
+   */
+  async DescribeAssetsList(
+    req: DescribeAssetsListRequest,
+    cb?: (error: string, rep: DescribeAssetsListResponse) => void
+  ): Promise<DescribeAssetsListResponse> {
+    return this.request("DescribeAssetsList", req, cb)
+  }
+
+  /**
+   * 本接口 (DescribeDbauditInstanceType) 用于查询可售卖的产品规格列表。
+   */
+  async DescribeDbauditInstanceType(
+    req?: DescribeDbauditInstanceTypeRequest,
+    cb?: (error: string, rep: DescribeDbauditInstanceTypeResponse) => void
+  ): Promise<DescribeDbauditInstanceTypeResponse> {
+    return this.request("DescribeDbauditInstanceType", req, cb)
+  }
+
+  /**
+   * 下载报表PDF
+   */
+  async CreateReportPdf(
+    req: CreateReportPdfRequest,
+    cb?: (error: string, rep: CreateReportPdfResponse) => void
+  ): Promise<CreateReportPdfResponse> {
+    return this.request("CreateReportPdf", req, cb)
   }
 }

@@ -3305,11 +3305,11 @@ export interface PluginStatistics {
  */
 export interface AppStatusInfo {
   /**
-   * 应用状态 (OFFLINE:未上线, RUNNING:运行中, DISABLED:停用)。枚举值: 1:未上线, 2:运行中, 3:停用
+   * <p>应用状态</p><p>枚举值：</p><ul><li>1： 未上线</li><li>2： 运行中</li><li>3： 停用</li><li>4： 导入中</li></ul>
    */
   Status: number
   /**
-   * 状态描述
+   * <p>状态描述</p>
    */
   StatusDescription: string
 }
@@ -5112,11 +5112,11 @@ export interface SystemVariable {
  */
 export interface AppGreetingConfig {
   /**
-   * 欢迎语内容
+   * <p>欢迎语内容</p>
    */
   Greeting: string
   /**
-   * 开场问题列表
+   * <p>开场问题列表</p>
    */
   OpeningQuestionList?: Array<string>
 }

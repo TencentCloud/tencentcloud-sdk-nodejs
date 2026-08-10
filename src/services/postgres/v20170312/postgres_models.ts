@@ -2585,41 +2585,13 @@ export interface ModifyPrivilege {
 }
 
 /**
- * 网络相关信息。（该数据结构已废弃，网络相关信息使用DBInstanceNetInfo）
+ * DeleteDatabase返回参数结构体
  */
-export interface NetworkAccess {
+export interface DeleteDatabaseResponse {
   /**
-   * 网络资源id，实例id或RO组id
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ResourceId?: string
-  /**
-   * 资源类型，1-实例 2-RO组
-   */
-  ResourceType?: number
-  /**
-   * 私有网络ID
-   */
-  VpcId?: string
-  /**
-   * IPV4地址
-   */
-  Vip?: string
-  /**
-   * IPV6地址
-   */
-  Vip6?: string
-  /**
-   * 访问端口
-   */
-  Vport?: number
-  /**
-   * 子网ID
-   */
-  SubnetId?: string
-  /**
-   * 网络状态，1-申请中，2-使用中，3-删除中，4-已删除
-   */
-  VpcStatus?: number
+  RequestId?: string
 }
 
 /**
@@ -2964,6 +2936,44 @@ export interface ModifyReadOnlyDBInstanceWeightResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 网络相关信息。（该数据结构已废弃，网络相关信息使用DBInstanceNetInfo）
+ */
+export interface NetworkAccess {
+  /**
+   * 网络资源id，实例id或RO组id
+   */
+  ResourceId?: string
+  /**
+   * 资源类型，1-实例 2-RO组
+   */
+  ResourceType?: number
+  /**
+   * 私有网络ID
+   */
+  VpcId?: string
+  /**
+   * IPV4地址
+   */
+  Vip?: string
+  /**
+   * IPV6地址
+   */
+  Vip6?: string
+  /**
+   * 访问端口
+   */
+  Vport?: number
+  /**
+   * 子网ID
+   */
+  SubnetId?: string
+  /**
+   * 网络状态，1-申请中，2-使用中，3-删除中，4-已删除
+   */
+  VpcStatus?: number
 }
 
 /**
@@ -4756,18 +4766,9 @@ export interface ModifyAccountPrivilegesResponse {
 }
 
 /**
- * ModifyDBProxy返回参数结构体
+ * DeleteDatabase请求参数结构体
  */
-export interface ModifyDBProxyResponse {
-  /**
-   * <p>订单号，仅变配（节点规格/数量变更）下单成功时返回；仅修改 Description 时不下单，本字段为空。</p>
-   */
-  DealName?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
-}
+export type DeleteDatabaseRequest = null
 
 /**
  * 描述数据库详细信息，包括所有者、字符编码等
@@ -5761,6 +5762,20 @@ export interface DescribeDBErrlogsResponse {
    * <p>错误日志详细信息集合。</p>
    */
   Details?: Array<ErrLogDetail>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDBProxy返回参数结构体
+ */
+export interface ModifyDBProxyResponse {
+  /**
+   * <p>订单号，仅变配（节点规格/数量变更）下单成功时返回；仅修改 Description 时不下单，本字段为空。</p>
+   */
+  DealName?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */

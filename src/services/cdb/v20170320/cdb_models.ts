@@ -2597,6 +2597,24 @@ export interface RollbackDBName {
 }
 
 /**
+ * ModifyInstanceChargeType请求参数结构体
+ */
+export interface ModifyInstanceChargeTypeRequest {
+  /**
+   * <p>实例 ID，格式如：cdb-c1nl9rpv，与云数据库控制台页面中显示的实例 ID 相同。</p>
+   */
+  InstanceId: string
+  /**
+   * <p>修改后的计费类型</p><p>枚举值：</p><ul><li>PREPAID： 包年包月</li><li>POSTPAID_BY_HOUR： 按量计费</li></ul>
+   */
+  InstanceChargeType: string
+  /**
+   * <p>修改后包年包月相关参数设置</p>
+   */
+  InstanceChargePrepaid?: InstanceChargePrepaid
+}
+
+/**
  * 审计规则的规则过滤条件
  */
 export interface RuleFilters {
@@ -3457,6 +3475,16 @@ export interface DescribeDBSecurityGroupsRequest {
    * 变更集群版实例只读组时，InstanceId传实例id，需要额外指定该参数表示操作只读组。 如果操作读写节点则不需指定该参数。
    */
   OpResourceId?: string
+}
+
+/**
+ * ModifyInstanceDestroyProtect返回参数结构体
+ */
+export interface ModifyInstanceDestroyProtectResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4448,6 +4476,40 @@ export interface ModifyDBInstanceNameResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 实例地址信息
+ */
+export interface AddressInfo {
+  /**
+   * 地址的资源id标识。
+   */
+  ResourceId?: string
+  /**
+   * 地址所在的vpc。
+   */
+  UniqVpcId?: string
+  /**
+   * 地址所在的子网。
+   */
+  UniqSubnetId?: string
+  /**
+   * 地址的vip。
+   */
+  Vip?: string
+  /**
+   * 地址的端口。
+   */
+  VPort?: number
+  /**
+   * 外网地址域名。
+   */
+  WanDomain?: string
+  /**
+   * 外网地址端口。
+   */
+  WanPort?: number
 }
 
 /**
@@ -6701,13 +6763,17 @@ export interface RollbackTask {
 }
 
 /**
- * StartReplication请求参数结构体
+ * ModifyInstanceDestroyProtect请求参数结构体
  */
-export interface StartReplicationRequest {
+export interface ModifyInstanceDestroyProtectRequest {
   /**
-   * 实例 ID。仅支持只读实例。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。
+   * 实例 ID 列表
    */
-  InstanceId: string
+  InstanceIds: Array<string>
+  /**
+   * 开启或关闭实例销毁保护
+   */
+  DestroyProtect: string
 }
 
 /**
@@ -10842,6 +10908,16 @@ export interface AuditLogFile {
 }
 
 /**
+ * StartReplication请求参数结构体
+ */
+export interface StartReplicationRequest {
+  /**
+   * 实例 ID。仅支持只读实例。可通过 [DescribeDBInstances](https://cloud.tencent.com/document/product/236/15872) 接口获取。
+   */
+  InstanceId: string
+}
+
+/**
  * DescribeAuditRuleTemplates请求参数结构体
  */
 export interface DescribeAuditRuleTemplatesRequest {
@@ -10935,6 +11011,20 @@ export interface DescribeSSLStatusRequest {
 说明：实例 ID 和只读组 ID 两个参数选其一填写即可。若要查询只读实例或只读组 SSL 开通情况，请填写 RoGroupId 参数，并注意填写的都是只读组 ID。单节点（云盘）、云盘版实例不支持开启 SSL，因此不支持查询。
    */
   RoGroupId?: string
+}
+
+/**
+ * ModifyInstanceChargeType返回参数结构体
+ */
+export interface ModifyInstanceChargeTypeResponse {
+  /**
+   * <p>订单ID</p>
+   */
+  DealName?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -11185,6 +11275,10 @@ export interface UpgradeDBInstanceResponse {
    */
   AsyncRequestId?: string
   /**
+   * <p>任务列表的任务ID</p>
+   */
+  JobId?: number
+  /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
@@ -11253,37 +11347,17 @@ export interface DescribeDeviceMonitorInfoResponse {
 }
 
 /**
- * 实例地址信息
+ * 修改计费模式时，如果需要从按量计费转为包年包月，则需指定时长和自动续费标志
  */
-export interface AddressInfo {
+export interface InstanceChargePrepaid {
   /**
-   * 地址的资源id标识。
+   * <p>购买实例的时长，单位：月。取值范围：1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60。</p>
    */
-  ResourceId?: string
+  Period?: number
   /**
-   * 地址所在的vpc。
+   * <p>自动续费标识，0：不自动续费，1：自动续费</p>
    */
-  UniqVpcId?: string
-  /**
-   * 地址所在的子网。
-   */
-  UniqSubnetId?: string
-  /**
-   * 地址的vip。
-   */
-  Vip?: string
-  /**
-   * 地址的端口。
-   */
-  VPort?: number
-  /**
-   * 外网地址域名。
-   */
-  WanDomain?: string
-  /**
-   * 外网地址端口。
-   */
-  WanPort?: number
+  RenewFlag?: number
 }
 
 /**

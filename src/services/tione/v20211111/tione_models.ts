@@ -3891,34 +3891,46 @@ export interface CronScaleJob {
  */
 export interface PrivateLinkInfo {
   /**
-   * 私有连接所在的VPCID
+   * <p>私有连接所在的VPCID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
   /**
-   * 私有连接所在的子网ID
+   * <p>私有连接所在的子网ID</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   SubnetId?: string
   /**
-   * HTTP内网调用地址
+   * <p>HTTP内网调用地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InnerHttpAddr?: Array<string>
   /**
-   * HTTPS内网调用地址
+   * <p>HTTPS内网调用地址</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   InnerHttpsAddr?: Array<string>
   /**
-   * 私有连接状态
+   * <p>私有连接状态</p>
 注意：此字段可能返回 null，表示取不到有效值。
    */
   State?: string
   /**
-   * grpc内网调用地址
+   * <p>grpc内网调用地址</p>
    */
   InnerGrpcAddr?: Array<string>
+  /**
+   * <p>创建者 UIN</p>
+   */
+  CreatedBy?: string
+  /**
+   * <p>创建时间</p>
+   */
+  CreateTime?: string
+  /**
+   * <p>子用户名称</p>
+   */
+  SubUinName?: string
 }
 
 /**

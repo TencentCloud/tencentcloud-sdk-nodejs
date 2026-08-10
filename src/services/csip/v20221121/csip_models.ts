@@ -16,6 +16,36 @@
  */
 
 /**
+ * DescribeVulIgnoreRuleList请求参数结构体
+ */
+export interface DescribeVulIgnoreRuleListRequest {
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>过滤条件，支持以下 Name：</p><li>Keyword - 漏洞名/备注，模糊匹配</li><li>Switch - 开关状态，过滤值：0（关闭）/ 1（开启）</li>
+   */
+  Filters?: Array<Filters>
+  /**
+   * <p>分页大小，默认 10，最大 100</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移，从 0 开始</p>
+   */
+  Offset?: number
+  /**
+   * <p>排序方向：asc（升序）/ desc（降序），默认 desc</p>
+   */
+  Order?: string
+  /**
+   * <p>排序字段，默认按更新时间（UpdateTime）排序</p>
+   */
+  By?: string
+}
+
+/**
  * CreateDspmIdentifyRule请求参数结构体
  */
 export interface CreateDspmIdentifyRuleRequest {
@@ -71,6 +101,24 @@ export interface DescribeCosInvokeUaRequest {
    * 过滤器
    */
   Filter?: Filter
+}
+
+/**
+ * DescribeHostVulRiskList返回参数结构体
+ */
+export interface DescribeHostVulRiskListResponse {
+  /**
+   * <p>主机漏洞风险列表（按漏洞维度聚合）</p>
+   */
+  List?: Array<HostVulRisk>
+  /**
+   * <p>凭据总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -150,21 +198,25 @@ export interface CsipRiskCenterStatistics {
 }
 
 /**
- * ModifyDspmApproveStatus请求参数结构体
+ * CreateVulReScan请求参数结构体
  */
-export interface ModifyDspmApproveStatusRequest {
+export interface CreateVulReScanRequest {
   /**
-   * 申请单id
+   * <p>漏洞ID</p>
    */
-  OrderId: string
+  VulId?: Array<number | bigint>
   /**
-   * 状态。1-通过 2-拒绝
+   * <p>补丁编号</p>
    */
-  Status: number
+  KbNo?: Array<string>
   /**
-   * 审批信息
+   * <p>集团账号的成员id</p>
    */
-  Comment?: string
+  MemberId?: Array<string>
+  /**
+   * <p>资产列表</p>
+   */
+  AssetList?: Array<string>
 }
 
 /**
@@ -282,29 +334,21 @@ export interface DescribeDspmSupportedAssetTypeResponse {
 }
 
 /**
- * ModifyDspmBackupSetting请求参数结构体
+ * DescribeVulFixedList返回参数结构体
  */
-export interface ModifyDspmBackupSettingRequest {
+export interface DescribeVulFixedListResponse {
   /**
-   * 集团账号的成员id
+   * <p>已修复漏洞列表</p>
    */
-  MemberId?: Array<string>
+  Data?: Array<VulFixedItem>
   /**
-   * 备份日志保留时长
+   * <p>总数量</p>
    */
-  BackupLogSaveTime?: number
+  TotalCount?: number
   /**
-   * 恢复日志保留时长
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RestoreLogSaveTime?: number
-  /**
-   * 日志最大生命周期限制
-   */
-  LogMaxSaveTime?: number
-  /**
-   * 在线日志最大天数限制
-   */
-  OnlineLogMaxSaveTime?: number
+  RequestId?: string
 }
 
 /**
@@ -644,6 +688,16 @@ export interface KeyValue {
    * 值
    */
   Value?: string
+}
+
+/**
+ * 公网IP和域名资产列表key
+ */
+export interface PublicIpDomainListKey {
+  /**
+   * 资产值
+   */
+  Asset: string
 }
 
 /**
@@ -1109,6 +1163,28 @@ export interface ModifyDspmRiskStrategyRequest {
 }
 
 /**
+ * CreateVulFixedExportJob请求参数结构体
+ */
+export interface CreateVulFixedExportJobRequest {
+  /**
+   * <p>过滤条件（与 DescribeVulFixedList 一致）<br>支持的Filter.Name：<br>Keyword - 模糊匹配，按关键字搜索（漏洞名称/CVE编号/主机名称/实例ID）<br>VulName - 模糊匹配，按漏洞名称搜索<br>Level - 精确匹配，按漏洞等级筛选：LOW-低危 MEDIUM-中危 HIGH-高危 CRITICAL-严重<br>VprLevel - 精确匹配，按VPR评级筛选：1-Low 2-Medium 3-High 4-Critical<br>VulCategory - 精确匹配，按漏洞类型筛选：LINUX-Linux软件漏洞 WINDOWS-Windows系统补丁漏洞 WEB_CMS-Web-CMS漏洞 APPLICATION-应用漏洞 EMERGENCY-应急漏洞<br>MachineName - 模糊匹配，按主机名称搜索<br>InstanceId - 模糊匹配，按实例ID搜索<br>FixTime - 范围匹配，修复时间范围，传入两个值表示起止时间</p>
+   */
+  Filters?: Array<Filters>
+  /**
+   * <p>排序字段<br>枚举值：<br>FixTime：按修复时间排序<br>VulName：按漏洞名称排序</p>
+   */
+  Order?: string
+  /**
+   * <p>排序方式<br>枚举值：<br>asc：升序<br>desc：降序<br>默认值：desc</p>
+   */
+  By?: string
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+}
+
+/**
  * DeleteDspmPersonalIdentify请求参数结构体
  */
 export interface DeleteDspmPersonalIdentifyRequest {
@@ -1179,6 +1255,68 @@ export interface LogRuleKeyValueInfo {
 }
 
 /**
+ * 已修复漏洞信息
+ */
+export interface VulFixedItem {
+  /**
+   * 漏洞ID
+   */
+  VulId?: number
+  /**
+   * 漏洞名称
+   */
+  VulName?: string
+  /**
+   * 漏洞等级
+枚举值：
+LOW：低危
+MEDIUM：中危
+HIGH：高危
+CRITICAL：严重
+   */
+  Level?: string
+  /**
+   * VPR 评级信息（包含评级结果、说明和分阶段评分），与 DescribeHostVulRiskList 一致
+   */
+  VRPRatingInfo?: VPRRatingInfo
+  /**
+   * 漏洞类型
+枚举值：
+LINUX：Linux软件漏洞
+WINDOWS：Windows系统补丁漏洞
+WEB_CMS：Web-CMS漏洞
+APPLICATION：应用漏洞
+EMERGENCY：应急漏洞
+   */
+  VulCategory?: string
+  /**
+   * CVE编号
+   */
+  CveId?: string
+  /**
+   * 修复主机名称
+   */
+  MachineName?: string
+  /**
+   * 修复主机实例ID
+   */
+  InstanceId?: string
+  /**
+   * 关联组件&路径数量
+   */
+  ComponentCount?: number
+  /**
+   * 关联组件&路径列表
+   */
+  Components?: Array<string>
+  /**
+   * 最近一次修复时间
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   */
+  LatestFixTime?: string
+}
+
+/**
  * DescribeEdrAlertList请求参数结构体
  */
 export interface DescribeEdrAlertListRequest {
@@ -1206,6 +1344,24 @@ export interface DescribeEdrAlertListRequest {
    * <p>可选排序列: [LatestDetectTime]</p>
    */
   By?: string
+}
+
+/**
+ * ModifyDspmApproveStatus请求参数结构体
+ */
+export interface ModifyDspmApproveStatusRequest {
+  /**
+   * 申请单id
+   */
+  OrderId: string
+  /**
+   * 状态。1-通过 2-拒绝
+   */
+  Status: number
+  /**
+   * 审批信息
+   */
+  Comment?: string
 }
 
 /**
@@ -1658,21 +1814,33 @@ export interface DescribeOrganizationInfoRequest {
 }
 
 /**
- * Dspm地域信息
+ * DescribeVulFixableMachineList返回参数结构体
  */
-export interface DspmArea {
+export interface DescribeVulFixableMachineListResponse {
   /**
-   * 国家
+   * <p>可修复主机列表</p>
    */
-  Country?: string
+  Data?: Array<VulFixableMachineItem>
   /**
-   * 省
+   * <p>总数量</p>
    */
-  Province?: string
+  TotalCount?: number
   /**
-   * 市
+   * <p>可一键修复的主机数量</p>
    */
-  City?: string
+  FixableCount?: number
+  /**
+   * <p>不可一键修复的主机数量</p>
+   */
+  NotFixableCount?: number
+  /**
+   * <p>漏洞维度汇总信息，展示被修复的漏洞列表概要</p>
+   */
+  VulSummary?: Array<VulFixSummaryItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -1819,6 +1987,36 @@ export interface LogItems {
    * <p>数值</p>
    */
   Data?: Array<LogItem>
+}
+
+/**
+ * DescribeHostVulRiskList请求参数结构体
+ */
+export interface DescribeHostVulRiskListRequest {
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>筛选条件数组，多条件之间为 AND 关系<br>支持的 Filter.Name：<br>CVSSLevel：CVSS level过滤<br>Keyword：关键字模糊搜索（多词使用｜分隔，对漏洞名/CVEID 模糊匹配）<br>Category：漏洞分类（LINUX/WEB_CMS/APPLICATION/EMERGENCY）<br>VPRLevel：VPR 评级<br>RiskStatus：修复状态<br>Label：VPR风险标签<br>InstanceID：实例ID<br>CheckMethod：检测方法</p>
+   */
+  Filters?: Array<Filters>
+  /**
+   * <p>每页返回数量<br>取值范围：[1, 100]<br>默认值：10</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移量<br>取值范围：[0, +∞)<br>默认值：0</p>
+   */
+  Offset?: number
+  /**
+   * <p>排序方向<br>枚举值：<br>ASC：升序<br>DESC：降序<br>默认值：DESC</p>
+   */
+  Order?: string
+  /**
+   * <p>排序字段<br>枚举值：<br>LatestScanTime：最近扫描时间<br>默认值：LatestScanTime</p>
+   */
+  By?: string
 }
 
 /**
@@ -2367,6 +2565,24 @@ export interface AttributeOptionSet {
 }
 
 /**
+ * 漏洞影响厂商和产品
+ */
+export interface VulVendorProduct {
+  /**
+   * <p>供应商</p>
+   */
+  Vendor?: string
+  /**
+   * <p>产品名称</p>
+   */
+  Product?: string
+  /**
+   * <p>影响版本</p>
+   */
+  VersionRange?: Array<string>
+}
+
+/**
  * DeleteDspmApplyOrder请求参数结构体
  */
 export interface DeleteDspmApplyOrderRequest {
@@ -2526,13 +2742,65 @@ export interface DiskPartitionInfo {
 }
 
 /**
- * ModifyDspmApproveStatus返回参数结构体
+ * 可更新补丁主机信息
  */
-export interface ModifyDspmApproveStatusResponse {
+export interface KBUpdateMachineItem {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * <p>KB补丁ID</p>
    */
-  RequestId?: string
+  KBId?: number
+  /**
+   * <p>主机实例ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>主机名称</p>
+   */
+  MachineName?: string
+  /**
+   * <p>主机IP</p>
+   */
+  MachineIp?: string
+  /**
+   * <p>公网IP</p>
+   */
+  PublicIp?: string
+  /**
+   * <p>操作系统名称</p>
+   */
+  OsName?: string
+  /**
+   * <p>主机在线状态<br>枚举值：<br>ONLINE：在线<br>OFFLINE：离线</p>
+   */
+  MachineStatus?: string
+  /**
+   * <p>是否支持自动更新补丁<br>枚举值：<br>0：不支持<br>1：支持</p>
+   */
+  SupportAutoFix?: number
+  /**
+   * <p>当前修复状态<br>枚举值：<br>0：未修复<br>1：修复中<br>2：修复失败<br>3：修复成功<br>4：修复超时</p>
+   */
+  FixStatus?: number
+  /**
+   * <p>最近一次修复时间<br>参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）</p>
+   */
+  LatestFixTime?: string
+  /**
+   * <p>不可修复原因，SupportAutoFix为0时返回</p>
+   */
+  NotFixableReason?: string
+  /**
+   * <p>资产标签列表</p>
+   */
+  TagItems?: Array<MiniTagItem>
+  /**
+   * <p>所属账号AppId</p>
+   */
+  AppId?: number
+  /**
+   * <p>付费版本信息<br>枚举值：<br>BASIC：基础版<br>PRO：专业版<br>ULTIMATE：旗舰版</p>
+   */
+  PayVersion?: string
 }
 
 /**
@@ -2587,6 +2855,32 @@ export interface IaCFile {
    * <p>扫描失败类型(0:无失败, 1:检测超时, 2:文件格式解析失败, 3:检测失败)</p>
    */
   FailType?: number
+}
+
+/**
+ * ModifyDspmBackupSetting请求参数结构体
+ */
+export interface ModifyDspmBackupSettingRequest {
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+  /**
+   * 备份日志保留时长
+   */
+  BackupLogSaveTime?: number
+  /**
+   * 恢复日志保留时长
+   */
+  RestoreLogSaveTime?: number
+  /**
+   * 日志最大生命周期限制
+   */
+  LogMaxSaveTime?: number
+  /**
+   * 在线日志最大天数限制
+   */
+  OnlineLogMaxSaveTime?: number
 }
 
 /**
@@ -2766,9 +3060,13 @@ export interface DspmPersonIdentifyItem {
 }
 
 /**
- * ModifyDspmIdentifyComplianceRuleLevelInfo返回参数结构体
+ * DescribeVulHostRelateComponent返回参数结构体
  */
-export interface ModifyDspmIdentifyComplianceRuleLevelInfoResponse {
+export interface DescribeVulHostRelateComponentResponse {
+  /**
+   * <p>受该组件影响的主机列表</p>
+   */
+  List?: Array<HostVulComponent>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -2990,13 +3288,17 @@ export interface IPIntelInfo {
 }
 
 /**
- * DescribeCosActionList请求参数结构体
+ * DescribeCosAuditDictionaryList请求参数结构体
  */
-export interface DescribeCosActionListRequest {
+export interface DescribeCosAuditDictionaryListRequest {
   /**
-   * 过滤器
+   * <p>字典类型（RootCategory：一级分类，IdentifyRule:敏感识别数据项）</p>
    */
-  Filter?: Filter
+  DictType: string
+  /**
+   * <p>筛选条件</p>
+   */
+  Filters?: Array<WhereFilter>
 }
 
 /**
@@ -3025,6 +3327,32 @@ export interface DescribeCosAlarmListRequest {
    * 过滤器
    */
   Filter?: Filter
+}
+
+/**
+ * DescribeVulItemList请求参数结构体
+ */
+export interface DescribeVulItemListRequest {
+  /**
+   * <p>筛选条件数组，多条件之间为 AND 关系<br>支持的 Filter.Name：<br>Keyword：关键字模糊搜索（对漏洞名/CVE/VulID 模糊匹配）<br>Category：漏洞分类（LINUX/WINDOWS/WEB_CMS/APPLICATION/EMERGENCY）<br>Level：威胁等级<br>VPRLevel：VPR 评级<br>Label：风险标签<br>CheckMethod：检测方式（VERSION_COMPARE/POC/VERSION_COMPARE_POC）<br>DefendStatus：漏洞防御状态（ENABLED/NOT_SUPPORTED/NOT_ENABLED）<br>SupportFix：是否支持一键修复（true/false）<br>Emergency:  紧急漏洞获取 (0/1)<br>Top5HotVul: 热点top 5 漏洞 (0/1)</p>
+   */
+  Filters?: Array<Filters>
+  /**
+   * <p>每页返回数量<br>取值范围：[1, 100]<br>默认值：10</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移量<br>取值范围：[0, +∞)<br>默认值：0</p>
+   */
+  Offset?: number
+  /**
+   * <p>排序方向<br>枚举值：<br>ASC：升序<br>DESC：降序<br>默认值：DESC</p>
+   */
+  Order?: string
+  /**
+   * <p>排序字段<br>枚举值：<br>PublishTime：漏洞披露时间<br>默认值：PublishTime</p>
+   */
+  By?: string
 }
 
 /**
@@ -3098,13 +3426,49 @@ export interface DescribeSkillScanPayInfoResponse {
 }
 
 /**
- * 公网IP和域名资产列表key
+ * CreateVulScanManual请求参数结构体
  */
-export interface PublicIpDomainListKey {
+export interface CreateVulScanManualRequest {
   /**
-   * 资产值
+   * <p>超时时间（秒）</p>
    */
-  Asset: string
+  Timeout: number
+  /**
+   * <p>资产范围（0-全部资产，1-自选资产，2-剔除资产，3-自动资产匹配）</p>
+   */
+  AssetRange: number
+  /**
+   * <p>扫描方式（VersionCompare: 版本对比, POC: POC检测, VersionComparePOC: 版本对比+POC检测）</p>
+   */
+  Method?: Array<string>
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>漏洞id</p>
+   */
+  VulId?: Array<number | bigint>
+  /**
+   * <p>kb编号</p>
+   */
+  KbNo?: Array<string>
+  /**
+   * <p>漏扫类型</p><p>枚举值：</p><ul><li>LINUX： Linux软件漏洞</li><li>WINDOWS： Windows系统补丁</li><li>WEB_CMS： Web-CMS漏洞</li><li>APPLICATION： 应用漏洞</li><li>EMERGENCY： 应急漏洞</li></ul>
+   */
+  VulCategory?: Array<string>
+  /**
+   * <p>漏洞等级（INVALID: 无效, INFO: 提示, LOW: 低危, MEDIUM: 中危, HIGH: 高危, CRITICAL: 严重）</p>
+   */
+  Level?: Array<string>
+  /**
+   * <p>资产列表（Quuid列表）</p>
+   */
+  AssetList?: Array<string>
+  /**
+   * <p>标签id</p>
+   */
+  TagIds?: Array<number | bigint>
 }
 
 /**
@@ -3324,17 +3688,21 @@ export interface CosBucketTaskInfo {
 }
 
 /**
- * DescribeSourceIPAsset请求参数结构体
+ * DescribeHostKBRiskList返回参数结构体
  */
-export interface DescribeSourceIPAssetRequest {
+export interface DescribeHostKBRiskListResponse {
   /**
-   * 集团账号的成员id
+   * <p>主机 KB 补丁风险列表</p>
    */
-  MemberId?: Array<string>
+  List?: Array<HostKBRisk>
   /**
-   * 过滤器
+   * <p>凭据总数</p>
    */
-  Filter?: Filter
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -3353,6 +3721,24 @@ export interface DescribeBucketInvokeIpListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * CreateVulFixRetryTask请求参数结构体
+ */
+export interface CreateVulFixRetryTaskRequest {
+  /**
+   * <p>需要重试的修复任务ID</p>
+   */
+  TaskId: number
+  /**
+   * <p>指定需要重试的主机实例ID列表，不传则对所有失败主机进行重试</p>
+   */
+  InstanceIds?: Array<string>
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -3456,13 +3842,25 @@ export interface ModifyCosAuditBucketMonitorStatusResponse {
 }
 
 /**
- * DeleteCosAkAsset返回参数结构体
+ * DescribeCosRiskEvidence请求参数结构体
  */
-export interface DeleteCosAkAssetResponse {
+export interface DescribeCosRiskEvidenceRequest {
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * appid
    */
-  RequestId?: string
+  RelAppId: number
+  /**
+   * 策略id
+   */
+  PolicyId: number
+  /**
+   * 存储桶名
+   */
+  BucketName: string
+  /**
+   * 过滤器
+   */
+  Filter?: Filter
 }
 
 /**
@@ -3635,6 +4033,36 @@ export interface DspmRiskTendency {
 }
 
 /**
+ * 漏洞修复汇总信息
+ */
+export interface VulFixSummaryItem {
+  /**
+   * <p>漏洞ID</p>
+   */
+  VulId?: number
+  /**
+   * <p>漏洞名称</p>
+   */
+  VulName?: string
+  /**
+   * <p>CVE编号</p>
+   */
+  CveId?: string
+  /**
+   * <p>受影响主机数</p>
+   */
+  AffectedCount?: number
+  /**
+   * <p>修复后是否需要重启系统</p>
+   */
+  NeedReboot?: boolean
+  /**
+   * <p>是否支持一键修复true-支持 false-不支持</p>
+   */
+  FixSwitch?: boolean
+}
+
+/**
  * DeleteDomainAndIp返回参数结构体
  */
 export interface DeleteDomainAndIpResponse {
@@ -3793,17 +4221,31 @@ export interface VerifyDspmAssetLoginCodeResponse {
 }
 
 /**
- * EDR命令行规则单规则
+ * DescribeVulComponentRelateHost返回参数结构体
  */
-export interface RuleContentProcessInfo {
+export interface DescribeVulComponentRelateHostResponse {
   /**
-   * <p>进程文件路径</p>
+   * <p>受该组件影响的主机列表</p>
    */
-  Exe: string
+  List?: Array<HostVulComponent>
   /**
-   * <p>进程命令行</p>
+   * <p>凭据总数</p>
    */
-  CmdLine: string
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDspmIdentifyComplianceRuleLevelInfo返回参数结构体
+ */
+export interface ModifyDspmIdentifyComplianceRuleLevelInfoResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -4027,25 +4469,13 @@ export interface DescribeExposuresRequest {
 }
 
 /**
- * DescribeCosRiskEvidence请求参数结构体
+ * DeleteCosAkAsset返回参数结构体
  */
-export interface DescribeCosRiskEvidenceRequest {
+export interface DeleteCosAkAssetResponse {
   /**
-   * appid
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RelAppId: number
-  /**
-   * 策略id
-   */
-  PolicyId: number
-  /**
-   * 存储桶名
-   */
-  BucketName: string
-  /**
-   * 过滤器
-   */
-  Filter?: Filter
+  RequestId?: string
 }
 
 /**
@@ -4188,6 +4618,42 @@ export interface DescribeCosIdentifyFileListRequest {
    * <p>0：没有识别结果 1：有识别结果</p>
    */
   ResultStatus?: number
+}
+
+/**
+ * DescribeHostVulItemVPRInfo返回参数结构体
+ */
+export interface DescribeHostVulItemVPRInfoResponse {
+  /**
+   * <p>VPR Label</p>
+   */
+  Label?: Array<VPRLabel>
+  /**
+   * <p>VPR评级过程和结果</p>
+   */
+  VRPRatingInfo?: VPRRatingInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyVulWhitelistSwitch请求参数结构体
+ */
+export interface ModifyVulWhitelistSwitchRequest {
+  /**
+   * <p>id列表</p>
+   */
+  Id?: Array<number | bigint>
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>策略开关</p><p>枚举值：</p><ul><li>0： 关闭</li><li>1： 开启</li></ul>
+   */
+  Switch?: number
 }
 
 /**
@@ -4661,6 +5127,102 @@ export interface CreateDspmPersonalIdentifyResponse {
 }
 
 /**
+ * 漏洞扫描任务记录
+ */
+export interface VulScanTask {
+  /**
+   * <p>任务id</p>
+   */
+  Id?: number
+  /**
+   * <p>任务id</p>
+   */
+  JobId?: string
+  /**
+   * <p>任务所属用户appid</p>
+   */
+  AppId?: number
+  /**
+   * <p>任务类型</p><p>枚举值：</p><ul><li>0： 一键扫描</li><li>1： 周期扫描</li></ul>
+   */
+  TaskType?: number
+  /**
+   * <p>漏洞分类</p><p>枚举值：</p><ul><li>LINUX： Linux软件漏洞</li><li>WINDOWS： Windows系统补丁</li><li>WEB_CMS： Web-CMS漏洞</li><li>APPLICATION： 应用漏洞</li><li>EMERGENCY： 应急漏洞</li></ul>
+   */
+  VulCategory?: Array<string>
+  /**
+   * <p>漏洞名称</p>
+   */
+  VulName?: Array<string>
+  /**
+   * <p>kb名称</p>
+   */
+  KbName?: Array<string>
+  /**
+   * <p>是否应急漏洞</p><p>枚举值：</p><ul><li>0： 否</li><li>1： 是</li></ul>
+   */
+  Emergency?: number
+  /**
+   * <p>扫描账号数量（0: 全部账号, others: 账号数量）</p>
+   */
+  Account?: number
+  /**
+   * <p>扫描开始时间</p>
+   */
+  StartTime?: string
+  /**
+   * <p>扫描结束时间</p>
+   */
+  EndTime?: string
+  /**
+   * <p>扫描状态（INITIALIZING: 初始化, SCANNING: 扫描中, SUCCESS: 扫描成功,  TOTAL_FAIL: 全部扫描失败）</p><p>枚举值：</p><ul><li>STOPPED： 已停止</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>漏洞威胁等级</p><p>枚举值：</p><ul><li>LOW： 低危</li><li>MEDIUM： 中危</li><li>HIGH： 高危</li><li>CRITICAL： 严重</li></ul>
+   */
+  Level?: Array<string>
+  /**
+   * <p>扫描方式</p><p>枚举值：</p><ul><li>VersionCompare： 版本对比</li><li>POC： POC检测</li><li>VersionComparePOC： 版本对比+POC检测</li></ul>
+   */
+  Method?: Array<string>
+  /**
+   * <p>资产列表</p>
+   */
+  AssetList?: Array<string>
+  /**
+   * <p>资产范围</p><p>枚举值：</p><ul><li>0： 所有资产</li><li>1： 自选资产</li><li>2： 自选排除资产</li></ul>
+   */
+  AssetRange?: number
+}
+
+/**
+ * ModifyDspmIdentifyComplianceGroup请求参数结构体
+ */
+export interface ModifyDspmIdentifyComplianceGroupRequest {
+  /**
+   * <p>识别模板ID</p>
+   */
+  Id: number
+  /**
+   * <p>识别模板名称</p>
+   */
+  Name?: string
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>描述</p>
+   */
+  Description?: string
+  /**
+   * <p>状态</p><p>枚举值：</p><ul><li>0： 未启用</li><li>1： 启用</li></ul>
+   */
+  Status?: number
+}
+
+/**
  * Dspm ip 统计数
  */
 export interface DspmIpCount {
@@ -4676,6 +5238,36 @@ export interface DspmIpCount {
    * 内网Ip个数
    */
   PrivateIpCount?: number
+}
+
+/**
+ * DescribeVulComponentRelateHost请求参数结构体
+ */
+export interface DescribeVulComponentRelateHostRequest {
+  /**
+   * <p>漏洞 ID（vul_vuls.id）</p>
+   */
+  VulID: number
+  /**
+   * <p>组件名称</p>
+   */
+  Name: string
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>筛选条件数组，多条件之间为 AND 关系<br>支持的 Filter.Name：<br>Keyword：关键字模糊搜索（对主机名/IP/InstanceID 模糊匹配）</p>
+   */
+  Filters?: Array<Filters>
+  /**
+   * <p>每页返回数量<br>取值范围：[1, 100]<br>默认值：10</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移量<br>取值范围：[0, +∞)<br>默认值：0</p>
+   */
+  Offset?: number
 }
 
 /**
@@ -4924,6 +5516,28 @@ export interface CreateDspmApproveHistoryExportJobRequest {
 }
 
 /**
+ * VRP评级信息
+ */
+export interface VPRRatingInfo {
+  /**
+   * VPR 评级结果
+枚举值：
+URGENT：立即修复
+SUGGESTED：建议修复
+DEFERRABLE：可延迟修复
+   */
+  Result?: string
+  /**
+   * 评级说明
+   */
+  Remark?: string
+  /**
+   * 分阶段评级详情列表
+   */
+  Stage?: Array<VPRRatingStage>
+}
+
+/**
  * EDR-攻击阶段对应数量
  */
 export interface AttackStageCount {
@@ -5145,6 +5759,24 @@ export interface DescribeDspmAssetDatabasesRequest {
 }
 
 /**
+ * CreateHostVulExportJob请求参数结构体
+ */
+export interface CreateHostVulExportJobRequest {
+  /**
+   * <p>导出的action</p><p>枚举值：</p><ul><li>LinuxHostVulRiskList： linux漏洞风险列表</li><li>WebCmsHostVulRiskList： WebCms漏洞风险列表</li><li>AppHostVulRiskList： App漏洞风险列表</li><li>EmergencyHostVulRiskList： 紧急漏洞风险列表</li><li>KBRiskList： Windows kb风险列表</li><li>RelateHostList： 关联主机列表</li><li>WhiteList： 漏洞白名单</li></ul>
+   */
+  BusinessAction: string
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>筛选条件数组，多条件之间为 AND 关系<br>支持的 Filter.Name：<br>KbID：KB风险关联主机情况下需要额外加入KB风险ID<br>VulID：漏洞风险关联主机情况下需要额外加入vul风险ID</p>
+   */
+  Filters?: Array<Filters>
+}
+
+/**
  * DescribeRiskBucketList请求参数结构体
  */
 export interface DescribeRiskBucketListRequest {
@@ -5202,6 +5834,36 @@ export interface CreateDspmIdentifyInfoListExportJobRequest {
    * 过滤器
    */
   Filter?: Filter
+}
+
+/**
+ * CreateVulFixTask请求参数结构体
+ */
+export interface CreateVulFixTaskRequest {
+  /**
+   * <p>修复项列表，每项指定一个漏洞/KB补丁及其需要修复的主机<br>入参限制：最多100项，总实例数不超过5000</p>
+   */
+  FixItems: Array<VulFixItem>
+  /**
+   * <p>最大修复时间<br>单位：秒<br>默认值：3600</p>
+   */
+  Timeout?: number
+  /**
+   * <p>是否在修复前创建磁盘快照<br>默认值：false</p>
+   */
+  CreateSnapshot?: boolean
+  /**
+   * <p>快照名称，CreateSnapshot为true时有效<br>入参限制：最长128个字符</p>
+   */
+  SnapshotName?: string
+  /**
+   * <p>快照保存天数，CreateSnapshot为true时有效</p>
+   */
+  SaveDays?: number
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -5348,6 +6010,24 @@ CSIP:云安全中心
    * 语句检索
    */
   LogSearch?: string
+}
+
+/**
+ * DescribeVulRiskRelateComponent请求参数结构体
+ */
+export interface DescribeVulRiskRelateComponentRequest {
+  /**
+   * <p>漏洞 ID（vul_vuls.id）</p>
+   */
+  VulID: number
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>筛选条件数组，多条件之间为 AND 关系<br>支持的 Filter.Name：<br>Keyword：关键字模糊搜索（对组件名称模糊匹配）</p>
+   */
+  Filters?: Array<Filters>
 }
 
 /**
@@ -5543,6 +6223,50 @@ export interface DescribeDspmIdentifyRuleTestResultRequest {
 }
 
 /**
+ * 漏洞简要信息
+ */
+export interface VulBriefInfo {
+  /**
+   * 漏洞 ID（vul_vuls.id）
+   */
+  VulID?: number
+  /**
+   * 漏洞名称
+   */
+  VulName?: string
+  /**
+   * CVE 编号
+参数格式：形如 CVE-2018-5377
+   */
+  CVEID?: string
+  /**
+   * VPR 风险标签列表
+   */
+  Label?: Array<VPRLabel>
+  /**
+   * CVSS 评分
+取值范围：[0.0, 10.0]
+   */
+  CvssScore?: number
+  /**
+   * 威胁等级
+枚举值：
+INVALID：无效
+INFO：提示
+LOW：低危
+MEDIUM：中危
+HIGH：高危
+CRITICAL：严重
+   */
+  Level?: string
+  /**
+   * 漏洞披露时间
+参数格式：YYYY-MM-DD HH:mm:ss
+   */
+  PublishTime?: string
+}
+
+/**
  * ModifyNotifySetting返回参数结构体
  */
 export interface ModifyNotifySettingResponse {
@@ -5675,6 +6399,24 @@ export interface DeleteDspmIdentifyLevelGroupRequest {
 }
 
 /**
+ * UpdateAlertStatusList返回参数结构体
+ */
+export interface UpdateAlertStatusListResponse {
+  /**
+   * 结果信息
+   */
+  Msg?: string
+  /**
+   * 结果代码
+   */
+  Code?: string
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 规则集合
  */
 export interface HitRules {
@@ -5730,6 +6472,16 @@ export interface DspmAccessRecord {
    * 登录失败次数
    */
   LoginFailedCount?: number
+}
+
+/**
+ * ModifyVulWhitelistConfig返回参数结构体
+ */
+export interface ModifyVulWhitelistConfigResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -5897,6 +6649,28 @@ export interface DspmAssetTypeCount {
 }
 
 /**
+ * 关联组件&路径详情
+ */
+export interface ComponentDetailItem {
+  /**
+   * 组件名称
+   */
+  Name?: string
+  /**
+   * 命中版本
+   */
+  Version?: string
+  /**
+   * 关联路径
+   */
+  Path?: string
+  /**
+   * 修复命令
+   */
+  FixCommand?: string
+}
+
+/**
  * DescribeCLSLogIndexV3请求参数结构体
  */
 export interface DescribeCLSLogIndexV3Request {
@@ -5940,6 +6714,24 @@ export interface DescribeDspmApproveHistoryRequest {
    * 筛选项
    */
   Filter?: Filter
+}
+
+/**
+ * DescribeVulScanTaskList返回参数结构体
+ */
+export interface DescribeVulScanTaskListResponse {
+  /**
+   * <p>任务列表</p>
+   */
+  List?: Array<VulScanTask>
+  /**
+   * <p>总数</p>
+   */
+  Total?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6052,6 +6844,28 @@ export interface RepositoryImageVO {
    * 是否新资产 1新
    */
   IsNewAsset?: number
+}
+
+/**
+ * DescribeVulFixTaskDetail返回参数结构体
+ */
+export interface DescribeVulFixTaskDetailResponse {
+  /**
+   * <p>任务明细列表</p>
+   */
+  Data?: Array<VulFixTaskDetailItem>
+  /**
+   * <p>总数量</p>
+   */
+  TotalCount?: number
+  /**
+   * <p>任务概要信息</p>
+   */
+  TaskInfo?: VulFixTaskInfo
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -6354,6 +7168,32 @@ export interface DeleteDspmIdentifyComplianceCategoryRelationRequest {
 }
 
 /**
+ * ModifyVulWhitelistConfig请求参数结构体
+ */
+export interface ModifyVulWhitelistConfigRequest {
+  /**
+   * <p>id列表</p>
+   */
+  Id?: number
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>备注</p>
+   */
+  Remark?: string
+  /**
+   * <p>资产范围</p><p>枚举值：</p><ul><li>0： 全部资产</li><li>1： 自选资产</li><li>2： 全选剔除资产</li></ul>
+   */
+  AssetRange?: number
+  /**
+   * <p>资产列表（Quuid列表）</p>
+   */
+  AssetList?: Array<string>
+}
+
+/**
  * CI/CD接入Token
  */
 export interface CICDToken {
@@ -6555,6 +7395,20 @@ export interface GateWayAsset {
 }
 
 /**
+ * CreateVulFixTask返回参数结构体
+ */
+export interface CreateVulFixTaskResponse {
+  /**
+   * <p>修复任务ID，用于后续查询任务状态</p>
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeSourceIPAsset返回参数结构体
  */
 export interface DescribeSourceIPAssetResponse {
@@ -6646,6 +7500,24 @@ export interface CreateIaCFileExportJobResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 账号简要信息
+ */
+export interface AccountBriefInfo {
+  /**
+   * <p>账号 AppID</p>
+   */
+  AppID?: number
+  /**
+   * <p>账号昵称</p>
+   */
+  Nick?: string
+  /**
+   * <p>账号 Uin</p>
+   */
+  Uin?: string
 }
 
 /**
@@ -6853,6 +7725,46 @@ export interface AssetViewVULRiskData {
    * 是否POC扫描，0-非POC，1-POC
    */
   IsPOC?: number
+}
+
+/**
+ * Dspm身份id信息
+ */
+export interface DspmIdentifyIdItem {
+  /**
+   * 身份id。
+   */
+  IdentifyId?: string
+  /**
+   * 备注。
+   */
+  Remark?: string
+  /**
+   * 身份类型。0-未定义 2-长期身份 3-临时身份
+   */
+  IdentifyType?: number
+  /**
+   * 所属云账号uin用户。
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  OwnerUin?: DspmUinUser
+  /**
+   * 创建者账号uin用户。
+   */
+  CreatorUin?: DspmUinUser
+  /**
+   * 创建时间。
+   */
+  CreateTime?: string
+  /**
+   * 状态。0-不活跃 1-活跃
+   */
+  Status?: number
+  /**
+   * 所属个人用户信息
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  Person?: DspmPersonUser
 }
 
 /**
@@ -7552,6 +8464,20 @@ export interface RuleContentCmdLine {
 }
 
 /**
+ * DescribeKBDetail返回参数结构体
+ */
+export interface DescribeKBDetailResponse {
+  /**
+   * Windows KB 补丁详细信息
+   */
+  KBDetail?: KBDetail
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 列权限信息
  */
 export interface DspmColumnPrivilege {
@@ -7606,6 +8532,20 @@ export interface DescribeCosBucketListResponse {
 }
 
 /**
+ * EDR命令行规则单规则
+ */
+export interface RuleContentProcessInfo {
+  /**
+   * <p>进程文件路径</p>
+   */
+  Exe: string
+  /**
+   * <p>进程命令行</p>
+   */
+  CmdLine: string
+}
+
+/**
  * DescribeDspmAccessRecord返回参数结构体
  */
 export interface DescribeDspmAccessRecordResponse {
@@ -7624,29 +8564,201 @@ export interface DescribeDspmAccessRecordResponse {
 }
 
 /**
- * ModifyDspmIdentifyComplianceGroup请求参数结构体
+ * EDR告警详情（含content JSON + 资产/情报富化字段）
  */
-export interface ModifyDspmIdentifyComplianceGroupRequest {
+export interface EdrAlertDetail {
   /**
-   * <p>识别模板ID</p>
+   * <p>主键ID</p>
    */
-  Id: number
+  Id?: number
   /**
-   * <p>识别模板名称</p>
+   * <p>租户ID</p>
    */
-  Name?: string
+  AppId?: number
   /**
-   * <p>集团账号的成员id</p>
+   * <p>告警唯一标识</p>
    */
-  MemberId?: Array<string>
+  AlertId?: string
   /**
-   * <p>描述</p>
+   * <p>告警大类（英文枚举：VIRUS_TROJAN/ABNORMAL_LOGIN/HOST_BEHAVIOR/NETWORK_BEHAVIOR/LINK_ENGINE）</p>
    */
-  Description?: string
+  AlertCategory?: string
   /**
-   * <p>状态</p><p>枚举值：</p><ul><li>0： 未启用</li><li>1： 启用</li></ul>
+   * <p>告警子类型（英文枚举：MALWARE_FILE/MALWARE_PROCESS/RISK_LOGIN/BRUTE_FORCE/DNS/BASH/PRIV_ESCALATION/REVERSE_SHELL/NET_ATTACK/VUL_DEFENCE/MEMORY_SHELL_INJECT/MEMORY_SHELL_SCAN/MULTI_BEHAVIOR_ATTACK）</p>
    */
-  Status?: number
+  AlertSubType?: string
+  /**
+   * <p>关联规则ID</p>
+   */
+  RuleId?: string
+  /**
+   * <p>规则类型: 0-系统规则 1-用户自定义</p>
+   */
+  RuleType?: number
+  /**
+   * <p>告警等级（英文枚举：CRITICAL/HIGH/MEDIUM/LOW/INFO）</p>
+   */
+  Level?: string
+  /**
+   * <p>处理状态（英文枚举：PENDING/PROCESSED/WHITELISTED/ISOLATED/CLEANED/IGNORED/ISOLATING/RESTORING/BLOCKED/DELETED）</p>
+   */
+  Status?: string
+  /**
+   * <p>ATT&amp;CK攻击阶段</p>
+   */
+  AttackStage?: string
+  /**
+   * <p>检测模式（英文枚举：PRECISE/BALANCED/DEEP）</p>
+   */
+  DetectMode?: string
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>主机UUID</p>
+   */
+  Quuid?: string
+  /**
+   * <p>聚合事件数</p>
+   */
+  EventCount?: number
+  /**
+   * <p>是否付费版</p>
+   */
+  IsProVersion?: number
+  /**
+   * <p>告警来源（英文枚举：HOST/CONTAINER/K8S/CSIP）</p>
+   */
+  AlertSource?: string
+  /**
+   * <p>容器镜像ID（保留字段，恒为空串）</p>
+   */
+  ImageId?: string
+  /**
+   * <p>容器ID（保留字段，恒为空串）</p>
+   */
+  ContainerId?: string
+  /**
+   * <p>集群ID（保留字段，恒为空串）</p>
+   */
+  ClusterId?: string
+  /**
+   * <p>首次发现时间</p>
+   */
+  FirstDetectTime?: string
+  /**
+   * <p>最近发现时间</p>
+   */
+  LatestDetectTime?: string
+  /**
+   * <p>规则名称（规则富化）</p>
+   */
+  RuleName?: string
+  /**
+   * <p>内容类型: md5/cmdline/dns/ip_inbound/ip_outbound/custom_file/process_network</p>
+   */
+  ContentType?: string
+  /**
+   * <p>实例名（资产富化）</p>
+   */
+  InstanceName?: string
+  /**
+   * <p>公网IP（资产富化）</p>
+   */
+  PublicIp?: string
+  /**
+   * <p>内网IP（资产富化）</p>
+   */
+  PrivateIp?: string
+  /**
+   * <p>告警详情JSON字符串（前端通过JSON.parse解析，空值为&quot;{}&quot;）</p>
+   */
+  Content?: string
+  /**
+   * <p>告警名称（子类型中英文名）</p>
+   */
+  AlertName?: string
+  /**
+   * <p>安全中心标签</p>
+   */
+  CSIPTags?: Array<CSIPTag>
+  /**
+   * <p>危害描述（统一字段，合并原各子类型独立字段）</p>
+   */
+  HarmDesc?: string
+  /**
+   * <p>修复建议（统一字段）</p>
+   */
+  SuggestScheme?: string
+  /**
+   * <p>数据来源: vuldb/vdc/intel/default</p>
+   */
+  HarmDescSource?: string
+  /**
+   * <p>统一威胁情报标签（按子类型路由不同情报源）</p>
+   */
+  ThreatTags?: Array<string>
+  /**
+   * <p>Base64解码后的命令（高危命令子类型独有）</p>
+   */
+  BashCmdDecoded?: string
+  /**
+   * <p>漏洞名称（网络攻击子类型独有）</p>
+   */
+  NetVulName?: string
+  /**
+   * <p>CVE编号（网络攻击子类型独有）</p>
+   */
+  NetCVEId?: string
+  /**
+   * <p>异常行为（网络攻击子类型独有）</p>
+   */
+  NetAbnormalAction?: string
+  /**
+   * <p>IP情报信息（为空时不返回）</p>
+   */
+  IPIntel?: IPIntelInfo
+  /**
+   * <p>多行为攻击规则类型分类: sequence/threshold/command</p>
+   */
+  MultiBehaviorDetectionMode?: string
+  /**
+   * <p>告警来源描述（按子类型派生，描述哪个引擎/规则检出）</p>
+   */
+  SourceDesc?: string
+  /**
+   * <p>处理时间参数格式：2026-05-26 19:45:48</p>
+   */
+  ModifyTime?: string
+  /**
+   * <p>情报富化结果来源（标识本次详情是否成功命中外部情报）；取值 &quot;VDC&quot; / &quot;IPAnalysis&quot; / &quot;BreakingTI&quot; / 空串</p>
+   */
+  IntelSource?: string
+  /**
+   * <p>综合研判，中英文已翻译，中：恶意/安全/未知；英：Malicious/Safe/Unknown</p>
+   */
+  Verdict?: string
+  /**
+   * <p>研判依据</p>
+   */
+  VerdictBasis?: string
+  /**
+   * <p>病毒名称</p>
+   */
+  VirusName?: string
+  /**
+   * <p>病毒家族</p>
+   */
+  VirusFamily?: string
+  /**
+   * <p>NetResponsePayload 响应数据包（base64 编码后的字符串）</p>
+   */
+  NetResponsePayload?: string
+  /**
+   * <p>服务进程信息（base64 编码后的 JSON 字符串）</p>
+   */
+  NetSvcPs?: string
 }
 
 /**
@@ -7931,6 +9043,20 @@ export interface DescribeAccessKeyAssetRequest {
 }
 
 /**
+ * DescribeHostVulItemVPRInfo请求参数结构体
+ */
+export interface DescribeHostVulItemVPRInfoRequest {
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>漏洞ID</p>
+   */
+  VulID?: number
+}
+
+/**
  * CreateCosObjectScanTask请求参数结构体
  */
 export interface CreateCosObjectScanTaskRequest {
@@ -8181,6 +9307,80 @@ export interface DescribeAILinkSettingRequest {
 }
 
 /**
+ * 主机漏洞概要
+ */
+export interface HostVulOverview {
+  /**
+   * <p>需立即修复漏洞数（VPR 评级为 URGENT 的漏洞数量）</p>
+   */
+  UrgentRepairCount?: number
+  /**
+   * <p>已开启漏洞防御的主机数</p>
+   */
+  DefendHostCount?: number
+  /**
+   * <p>主机总数</p>
+   */
+  TotalHostCount?: number
+  /**
+   * <p>已修复漏洞总次数</p>
+   */
+  FixedVulCount?: number
+  /**
+   * <p>Linux 软件漏洞数</p>
+   */
+  LinuxVulCount?: number
+  /**
+   * <p>Windows 系统补丁数</p>
+   */
+  WindowVulCount?: number
+  /**
+   * <p>Web-CMS 漏洞数</p>
+   */
+  WebCMSVulCount?: number
+  /**
+   * <p>应用漏洞数</p>
+   */
+  AppVulCount?: number
+  /**
+   * <p>应急漏洞数</p>
+   */
+  EmergencyCount?: number
+  /**
+   * <p>漏洞知识库总数</p>
+   */
+  VulItemCount?: number
+  /**
+   * <p>最近扫描时间</p><p>参数格式：YYYY-MM-DDTHH:mm:ssZ</p>
+   */
+  LatestScanTime?: string
+  /**
+   * <p>是否开启周期扫描</p><p>枚举值：</p><ul><li>1： 开启</li><li>0： 未开启</li></ul>
+   */
+  EnableTimingScan?: number
+  /**
+   * <p>严重修复数</p>
+   */
+  CriticalRepairCount?: number
+  /**
+   * <p>严重修复Linux漏洞数</p>
+   */
+  CriticalRepairLinuxVulCount?: number
+  /**
+   * <p>严重修复应用漏洞数</p>
+   */
+  CriticalRepairAppVulCount?: number
+  /**
+   * <p>严重修复Web-CMS漏洞数</p>
+   */
+  CriticalRepairWebCMSVulCount?: number
+  /**
+   * <p>严重修复紧急漏洞数</p>
+   */
+  CriticalRepairEmergencyCount?: number
+}
+
+/**
  * DescribeCVMAssetInfo返回参数结构体
  */
 export interface DescribeCVMAssetInfoResponse {
@@ -8237,41 +9437,41 @@ export interface CreateDspmIdentifyLevelGroupResponse {
 }
 
 /**
- * dspm数据识别模板数据项关联关系
+ * DescribeVulRiskRelateHost请求参数结构体
  */
-export interface DspmIdentifyComplianceRuleRelation {
+export interface DescribeVulRiskRelateHostRequest {
   /**
-   * <p>数据项ID</p>
+   * <p>KB 补丁内部 ID（kb_info.id）</p>
    */
-  RuleId?: number
+  KBID: number
   /**
-   * <p>数据项名称</p>
+   * <p>漏洞 ID（vul_vuls.id）</p>
    */
-  RuleName?: string
+  VulID: number
   /**
-   * <p>级别ID</p>
+   * <p>集团账号的成员id</p>
    */
-  LevelId?: number
+  MemberId?: Array<string>
   /**
-   * <p>级别名称</p>
+   * <p>筛选条件数组，多条件之间为 AND 关系<br>支持的 Filter.Name：<br>Keyword：关键字模糊搜索（对主机名/IP/InstanceID 模糊匹配）<br>CloudTag: 云标签<br>Tag: 安全中心标签</p>
    */
-  LevelName?: string
+  Filters?: Array<Filters>
   /**
-   * <p>级别程度</p><p>单位：分数</p>
+   * <p>每页返回数量<br>取值范围：[1, 100]<br>默认值：10</p>
    */
-  LevelScore?: number
+  Limit?: number
   /**
-   * <p>结构化规则状态</p><p>枚举值：</p><ul><li>0： 未配置</li><li>1： 已配置</li></ul>
+   * <p>分页偏移量<br>取值范围：[0, +∞)<br>默认值：0</p>
    */
-  StructuredStatus?: number
+  Offset?: number
   /**
-   * <p>非结构化规则状态</p><p>枚举值：</p><ul><li>0： 未配置</li><li>1： 已配置</li></ul>
+   * <p>排序方向<br>枚举值：<br>ASC：升序<br>DESC：降序<br>默认值：DESC</p>
    */
-  UnStructuredStatus?: number
+  Order?: string
   /**
-   * <p>数据项开启状态</p><p>枚举值：</p><ul><li>0： 未开启</li><li>1： 已开启</li></ul>
+   * <p>排序字段<br>枚举值：<br>LatestScanTime：最近扫描时间<br>VPRLevel：VPR 评级<br>RiskStatus：修复状态<br>默认值：LatestScanTime</p>
    */
-  Status?: number
+  By?: string
 }
 
 /**
@@ -9112,6 +10312,68 @@ export interface DescribeCallRecordRequest {
 }
 
 /**
+ * DescribeVulScanTaskDetail返回参数结构体
+ */
+export interface DescribeVulScanTaskDetailResponse {
+  /**
+   * <p>任务详情列表</p>
+   */
+  List?: Array<VulScanTaskDetail>
+  /**
+   * <p>总数</p>
+   */
+  Total?: number
+  /**
+   * <p>漏洞数量</p>
+   */
+  Vuls?: number
+  /**
+   * <p>扫描数量</p>
+   */
+  Scanned?: number
+  /**
+   * <p>风险数量</p>
+   */
+  Risk?: number
+  /**
+   * <p>失败数量</p>
+   */
+  Failed?: number
+  /**
+   * <p>扫描进度（0-100）</p>
+   */
+  Progress?: number
+  /**
+   * <p>任务pdf报告地址</p>
+   */
+  TaskPdf?: string
+  /**
+   * <p>任务excel报告地址</p>
+   */
+  TaskExcel?: string
+  /**
+   * <p>任务开始时间，格式：2006-01-02T15:04:05+08:00</p>
+   */
+  StartTime?: string
+  /**
+   * <p>任务结束时间，格式：2006-01-02T15:04:05+08:00</p>
+   */
+  EndTime?: string
+  /**
+   * <p>漏洞ID</p>
+   */
+  VulId?: Array<number | bigint>
+  /**
+   * <p>KB编号</p>
+   */
+  KbNo?: Array<string>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 资产视角的漏洞风险对象
  */
 export interface AssetViewVULRisk {
@@ -9339,6 +10601,36 @@ export interface DescribeCFWAssetStatisticsResponse {
 }
 
 /**
+ * 主机漏洞组件
+ */
+export interface HostVulComponent {
+  /**
+   * <p>主机简要信息</p>
+   */
+  HostInfo?: HostBriefInfo
+  /**
+   * <p>受影响组件版本</p>
+   */
+  EffectVersion?: string
+  /**
+   * <p>组件在主机上的安装路径</p>
+   */
+  Path?: string
+  /**
+   * <p>关联进程 ID</p>
+   */
+  ProcessID?: string
+  /**
+   * <p>修复命令（仅展示）</p>
+   */
+  FixCommand?: string
+  /**
+   * <p>组件名字</p>
+   */
+  Name?: string
+}
+
+/**
  * 任务ID列表Key
  */
 export interface TaskIdListKey {
@@ -9443,6 +10735,44 @@ export interface AssetViewPortRisk {
 }
 
 /**
+ * dspm数据识别模板数据项关联关系
+ */
+export interface DspmIdentifyComplianceRuleRelation {
+  /**
+   * <p>数据项ID</p>
+   */
+  RuleId?: number
+  /**
+   * <p>数据项名称</p>
+   */
+  RuleName?: string
+  /**
+   * <p>级别ID</p>
+   */
+  LevelId?: number
+  /**
+   * <p>级别名称</p>
+   */
+  LevelName?: string
+  /**
+   * <p>级别程度</p><p>单位：分数</p>
+   */
+  LevelScore?: number
+  /**
+   * <p>结构化规则状态</p><p>枚举值：</p><ul><li>0： 未配置</li><li>1： 已配置</li></ul>
+   */
+  StructuredStatus?: number
+  /**
+   * <p>非结构化规则状态</p><p>枚举值：</p><ul><li>0： 未配置</li><li>1： 已配置</li></ul>
+   */
+  UnStructuredStatus?: number
+  /**
+   * <p>数据项开启状态</p><p>枚举值：</p><ul><li>0： 未开启</li><li>1： 已开启</li></ul>
+   */
+  Status?: number
+}
+
+/**
  * DescribeRiskCenterAssetViewCFGRiskList请求参数结构体
  */
 export interface DescribeRiskCenterAssetViewCFGRiskListRequest {
@@ -9531,6 +10861,32 @@ export interface ReportTaskIdList {
    * 租户ID
    */
   AppId?: string
+}
+
+/**
+ * DescribeKBUpdatableMachineList请求参数结构体
+ */
+export interface DescribeKBUpdatableMachineListRequest {
+  /**
+   * <p>KB补丁ID列表，最多支持100个</p>
+   */
+  KBIds: Array<number | bigint>
+  /**
+   * <p>分页偏移量<br>取值范围：[0, +∞)<br>默认值：0</p>
+   */
+  Offset?: number
+  /**
+   * <p>每页返回数量<br>取值范围：[1, 100]<br>默认值：10</p>
+   */
+  Limit?: number
+  /**
+   * <p>过滤条件<br>支持的Filter.Name：<br>InstanceId - 精确匹配，按主机实例ID筛选<br>MachineName - 模糊匹配，按主机名称搜索<br>MachineIp - 模糊匹配，按主机IP搜索<br>SupportAutoFix - 精确匹配，按是否支持自动修复筛选：0-不支持 1-支持</p>
+   */
+  Filters?: Array<Filters>
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -10130,17 +11486,13 @@ export interface NotifySetting {
 }
 
 /**
- * DescribeDspmAssetIds返回参数结构体
+ * DescribeCosAuditDictionaryList返回参数结构体
  */
-export interface DescribeDspmAssetIdsResponse {
+export interface DescribeCosAuditDictionaryListResponse {
   /**
-   * 数据库资产总数
+   * <p>结果集</p>
    */
-  TotalCount?: number
-  /**
-   * 资产id信息
-   */
-  AssetSet?: Array<DspmDbAssetId>
+  DataSet?: Array<CosDictionary>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10252,6 +11604,20 @@ export interface DescribeSearchBugInfoResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * VRP评级阶段
+ */
+export interface VPRRatingStage {
+  /**
+   * 阶段名称（例如：威胁活跃度、可利用性、漏洞严重性等）
+   */
+  Stage?: string
+  /**
+   * 该阶段的评级结果
+   */
+  Result?: string
 }
 
 /**
@@ -10371,6 +11737,64 @@ export interface DescribeAccessKeyRiskDetailRequest {
 }
 
 /**
+ * 主机简要信息
+ */
+export interface VulHostBriefInfo {
+  /**
+   * <p>云主机实例 ID<br>参数格式：形如 ins-xxxxxxxx</p>
+   */
+  InstanceID?: string
+  /**
+   * <p>主机名称</p>
+   */
+  Name?: string
+  /**
+   * <p>公网 IP 地址</p>
+   */
+  PublicIP?: string
+  /**
+   * <p>内网 IP 地址</p>
+   */
+  PrivateIP?: string
+  /**
+   * <p>防护版本<br>枚举值：<br>NONE：无防护<br>BASIC：基础版<br>PRO：专业版<br>ULTIMATE：旗舰版<br>PRO_LH：轻量版</p>
+   */
+  DefendVersion?: string
+  /**
+   * <p>漏洞防御状态<br>枚举值：<br>ENABLED：已开启<br>NOT_SUPPORTED：不支持<br>NOT_ENABLED：未开启</p>
+   */
+  DefendStatus?: string
+  /**
+   * <p>所属账号信息</p>
+   */
+  Account?: AccountBriefInfo
+  /**
+   * <p>云主机实例状态<br>枚举值：<br>RUNNING：运行中<br>STOPPED：已停止<br>UNKNOWN：未知</p>
+   */
+  InstanceStatus?: string
+  /**
+   * <p>修复状态枚举值</p><p>枚举值：</p><ul><li>PENDING： 待修复</li><li>SCANNING： 扫描中</li><li>FIXED： 已修复</li><li>IGNORED： 已忽略</li><li>FIXING： 修复中</li><li>FIX_FAILED： 修复失败</li><li>NEED_REBOOT： 修复待重启</li></ul>
+   */
+  RiskStatus?: string
+  /**
+   * <p>VPR 评级信息（含评级结果与各维度详情）</p>
+   */
+  VPRRating?: VPRRatingInfo
+  /**
+   * <p>CWP Agent 状态<br>枚举值：<br>ONLINE：在线<br>OFFLINE：离线<br>UNINSTALLED：未安装</p>
+   */
+  AgentStatus?: string
+  /**
+   * <p>资产标签列表（CSIP 内部资产标签）</p>
+   */
+  TagItem?: Array<MiniTagItem>
+  /**
+   * <p>云上标签列表（云资产侧 Tag）</p>
+   */
+  CloudTag?: Array<Tag>
+}
+
+/**
  * ModifyOrganizationAccountStatus请求参数结构体
  */
 export interface ModifyOrganizationAccountStatusRequest {
@@ -10382,6 +11806,40 @@ export interface ModifyOrganizationAccountStatusRequest {
    * 集团账号的成员id
    */
   MemberId?: Array<string>
+}
+
+/**
+ * DescribeVulScanTaskDetail请求参数结构体
+ */
+export interface DescribeVulScanTaskDetailRequest {
+  /**
+   * <p>任务id</p>
+   */
+  Id: number
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>过滤条件，支持以下 Name：</p><li>InstanceId - 资产实例 ID，精确匹配</li><li>InstanceName - 资产实例名称，模糊匹配（ExactMatch=1 时精确匹配）</li><li>Ip - 资产 IP 地址，精确匹配</li><li>Status - 扫描状态，精确匹配</li>
+   */
+  Filters?: Array<Filters>
+  /**
+   * <p>分页大小，默认 10，最大 100</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移，从 0 开始</p>
+   */
+  Offset?: number
+  /**
+   * <p>排序方向：asc（升序）/ desc（降序），默认 desc</p>
+   */
+  Order?: string
+  /**
+   * <p>排序字段，默认按创建时间（CreateTime）排序</p>
+   */
+  By?: string
 }
 
 /**
@@ -10597,6 +12055,40 @@ export interface DescribeCosIpInvokeLogResponse {
 }
 
 /**
+ * 列表查询接口采用新filter 接口，直接传给后台供后台查询过滤
+ */
+export interface Filter {
+  /**
+   * 查询数量限制
+   */
+  Limit?: number
+  /**
+   * 查询偏移位置
+   */
+  Offset?: number
+  /**
+   * 排序采用升序还是降序 升:asc 降 desc
+   */
+  Order?: string
+  /**
+   * 需排序的字段
+   */
+  By?: string
+  /**
+   * 过滤的列及内容
+   */
+  Filters?: Array<WhereFilter>
+  /**
+   * 可填无， 日志使用查询时间
+   */
+  StartTime?: string
+  /**
+   * 可填无， 日志使用查询时间
+   */
+  EndTime?: string
+}
+
+/**
  * DescribeRiskCenterAssetViewVULRiskList返回参数结构体
  */
 export interface DescribeRiskCenterAssetViewVULRiskListResponse {
@@ -10635,17 +12127,13 @@ export interface DescribeRiskCenterAssetViewVULRiskListResponse {
 }
 
 /**
- * DescribeCosRiskEvidence返回参数结构体
+ * DescribeDspmAssetDatabases返回参数结构体
  */
-export interface DescribeCosRiskEvidenceResponse {
+export interface DescribeDspmAssetDatabasesResponse {
   /**
-   * 证据信息
+   * 数据库列表
    */
-  Evidences?: Array<CosPermissionInfo>
-  /**
-   * 总数
-   */
-  Total?: number
+  Items?: Array<string>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -10749,33 +12237,21 @@ export interface ModifyUebaRuleSwitchRequest {
 }
 
 /**
- * 风险调用记录详情
+ * Dspm地域信息
  */
-export interface RiskCallRecord {
+export interface DspmArea {
   /**
-   * 接口名称
+   * 国家
    */
-  EventName?: string
+  Country?: string
   /**
-   * 接口中文描述
+   * 省
    */
-  EventDescCN?: string
+  Province?: string
   /**
-   * 接口英文描述
+   * 市
    */
-  EventDescEN?: string
-  /**
-   * 产品名称
-   */
-  ProductName?: string
-  /**
-   * 产品中文名称
-   */
-  ProductNameCN?: string
-  /**
-   * 调用次数
-   */
-  CallCount?: number
+  City?: string
 }
 
 /**
@@ -10901,6 +12377,40 @@ export interface AssetProcessItem {
    * 监听端口列表
    */
   Port?: string
+}
+
+/**
+ * 主机漏洞风险
+ */
+export interface HostVulRisk {
+  /**
+   * <p>风险记录 ID（host_vul_risk.id）</p>
+   */
+  RiskID?: number
+  /**
+   * <p>受影响主机数</p>
+   */
+  EffectHostCount?: number
+  /**
+   * <p>最近扫描时间<br>参数格式：YYYY-MM-DD HH:mm:ss</p>
+   */
+  LatestScanTime?: string
+  /**
+   * <p>所属账号列表</p>
+   */
+  Account?: Array<AccountBriefInfo>
+  /**
+   * <p>漏洞防御状态<br>枚举值：<br>ENABLED：已开启<br>NOT_SUPPORTED：不支持<br>NOT_ENABLED：未开启</p>
+   */
+  DefendStatus?: string
+  /**
+   * <p>修复状态<br>枚举值：<br>PENDING：待修复<br>SCANNING：扫描中<br>FIXED：已修复<br>IGNORED：已加白<br>FIXING：修复中<br>FIX_FAILED：修复失败<br>NOTSCAN：未扫描<br>WITHOUT_RISK：无风险<br>NEED_REBOOT：修复待重启</p>
+   */
+  RiskStatus?: string
+  /**
+   * <p>漏洞详细信息</p>
+   */
+  VulDetail?: VulDetailInfo
 }
 
 /**
@@ -11190,37 +12700,33 @@ export interface DescribeScanStatisticRequest {
 }
 
 /**
- * 列表查询接口采用新filter 接口，直接传给后台供后台查询过滤
+ * DescribeVulFixTaskList请求参数结构体
  */
-export interface Filter {
+export interface DescribeVulFixTaskListRequest {
   /**
-   * 查询数量限制
-   */
-  Limit?: number
-  /**
-   * 查询偏移位置
+   * <p>分页偏移量<br>取值范围：[0, +∞)<br>默认值：0</p>
    */
   Offset?: number
   /**
-   * 排序采用升序还是降序 升:asc 降 desc
+   * <p>每页返回数量<br>取值范围：[1, 100]<br>默认值：10</p>
+   */
+  Limit?: number
+  /**
+   * <p>过滤条件<br>支持的Filter.Name：<br>TaskId - 精确匹配，按任务ID筛选<br>JobId - 精确匹配，按任务JobId筛选，对应后台任务系统的任务ID<br>FixStatus - 精确匹配，按修复状态筛选：0-初始化 1-修复中 2-修复成功 3-部分修复失败 4-全部修复失败 5-停止修复<br>StartTime - 范围匹配，修复启动时间范围，传入两个值表示起止时间<br>AppId - 精确匹配，按创建者AppId筛选<br>VulCategory - 精确匹配，按漏洞类型筛选：LINUX-Linux软件漏洞 WINDOWS-Windows系统补丁漏洞 WEB_CMS-Web-CMS漏洞 APPLICATION-应用漏洞 EMERGENCY-应急漏洞<br>TaskName - 模糊匹配，按漏洞名称/CVE编号/KB补丁名称筛选，匹配任务关联的漏洞或KB补丁</p>
+   */
+  Filters?: Array<Filters>
+  /**
+   * <p>排序字段<br>枚举值：<br>StartTime：按修复启动时间排序<br>EndTime：按修复结束时间排序<br>CreateTime：按创建时间排序</p>
    */
   Order?: string
   /**
-   * 需排序的字段
+   * <p>排序方式<br>枚举值：<br>asc：升序<br>desc：降序<br>默认值：desc</p>
    */
   By?: string
   /**
-   * 过滤的列及内容
+   * 集团账号的成员id
    */
-  Filters?: Array<WhereFilter>
-  /**
-   * 可填无， 日志使用查询时间
-   */
-  StartTime?: string
-  /**
-   * 可填无， 日志使用查询时间
-   */
-  EndTime?: string
+  MemberId?: Array<string>
 }
 
 /**
@@ -11595,6 +13101,24 @@ export interface ExportTask {
    * 剩余时间(单位：秒)
    */
   RemainingTime?: number
+}
+
+/**
+ * StopVulScanTask请求参数结构体
+ */
+export interface StopVulScanTaskRequest {
+  /**
+   * <p>任务id</p>
+   */
+  Id?: number
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>停止扫描的资产instance_id</p>
+   */
+  AssetList?: Array<string>
 }
 
 /**
@@ -12691,6 +14215,16 @@ export interface DspmUinUser {
 }
 
 /**
+ * ModifyDspmIpInfo返回参数结构体
+ */
+export interface ModifyDspmIpInfoResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * cos ak 集合
  */
 export interface CosAkSet {
@@ -12798,6 +14332,40 @@ export interface DescribeIaCFileOverviewResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * KB补丁修复汇总信息
+ */
+export interface KBFixSummaryItem {
+  /**
+   * KB补丁ID
+   */
+  KBId?: number
+  /**
+   * KB补丁名称
+   */
+  KBName?: string
+  /**
+   * KB编号（如 KB5001234）
+   */
+  KBNo?: string
+  /**
+   * 关联漏洞数
+   */
+  RelatedVulCount?: number
+  /**
+   * 受影响主机数
+   */
+  AffectedCount?: number
+  /**
+   * 修复后是否需要重启系统
+   */
+  NeedReboot?: boolean
+  /**
+   * 前置依赖补丁（逗号分隔的KB编号列表）
+   */
+  KBPreCondition?: string
 }
 
 /**
@@ -12965,6 +14533,80 @@ export interface BackupLog {
 }
 
 /**
+ * 可修复主机信息
+ */
+export interface VulFixableMachineItem {
+  /**
+   * <p>漏洞ID列表，按 SupportAutoFix 维度分组：SupportAutoFix=1 时为可修复的漏洞ID，SupportAutoFix=0 时为不可修复的漏洞ID</p>
+   */
+  VulIds?: Array<number | bigint>
+  /**
+   * <p>主机实例ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>主机名称</p>
+   */
+  MachineName?: string
+  /**
+   * <p>主机IP</p>
+   */
+  MachineIp?: string
+  /**
+   * <p>公网IP</p>
+   */
+  PublicIp?: string
+  /**
+   * <p>操作系统类型<br>枚举值：<br>linux：Linux操作系统<br>windows：Windows操作系统</p>
+   */
+  OsType?: string
+  /**
+   * <p>操作系统名称</p>
+   */
+  OsName?: string
+  /**
+   * <p>主机在线状态<br>枚举值：<br>ONLINE：在线<br>OFFLINE：离线</p>
+   */
+  MachineStatus?: string
+  /**
+   * <p>是否支持自动修复<br>枚举值：<br>0：不支持<br>1：支持</p>
+   */
+  SupportAutoFix?: number
+  /**
+   * <p>当前修复状态<br>枚举值：<br>0：未修复<br>1：修复中<br>2：修复失败<br>3：修复成功<br>4：修复超时</p>
+   */
+  FixStatus?: number
+  /**
+   * <p>最近一次修复时间<br>参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）</p>
+   */
+  LatestFixTime?: string
+  /**
+   * <p>不可修复原因，SupportAutoFix为0时返回</p>
+   */
+  NotFixableReason?: string
+  /**
+   * <p>修复命令列表，SupportAutoFix为1时返回</p>
+   */
+  FixCommands?: Array<string>
+  /**
+   * <p>关联组件列表</p>
+   */
+  Components?: Array<string>
+  /**
+   * <p>资产标签列表</p>
+   */
+  TagItems?: Array<MiniTagItem>
+  /**
+   * <p>所属账号AppId</p>
+   */
+  AppId?: number
+  /**
+   * <p>付费版本信息<br>枚举值：<br>BASIC：基础版<br>PRO：专业版<br>ULTIMATE：旗舰版</p>
+   */
+  PayVersion?: string
+}
+
+/**
  * CreateIaCFileReScanTask返回参数结构体
  */
 export interface CreateIaCFileReScanTaskResponse {
@@ -13034,6 +14676,67 @@ export interface DeleteCosAkAssetRequest {
    * 要删除的cos ak集合
    */
   CosAkSet: Array<CosAkSet>
+}
+
+/**
+ * 用户行为分析  自定义策略结构体
+ */
+export interface UebaCustomRule {
+  /**
+   * 策略名称
+   */
+  RuleName: string
+  /**
+   * 1: 云账号
+2: 自定义用户
+   */
+  UserType: number
+  /**
+   * 发生时间
+1：10分钟
+2：1小时
+3：一天
+4：一周
+5：一个月
+   */
+  TimeInterval: number
+  /**
+   * 发生事件
+   */
+  EventContent: UebaEventContent
+  /**
+   * 告警名称
+   */
+  AlertName: string
+  /**
+   * 告警类型
+0:  提示
+1:  低危
+2:  中危
+3:  高危
+4:  严重
+   */
+  AlterLevel: number
+  /**
+   * 操作者
+   */
+  Operator: Array<string>
+  /**
+   * 操作对象
+   */
+  OperateObject: Array<string>
+  /**
+   * 操作方式
+   */
+  OperateMethod: Array<string>
+  /**
+   * 日志类型
+   */
+  LogType?: string
+  /**
+   * 日志中文名
+   */
+  LogTypeStr?: string
 }
 
 /**
@@ -13142,6 +14845,36 @@ export interface DescribeDspmPersonApplyHistoryResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeVulScanTaskList请求参数结构体
+ */
+export interface DescribeVulScanTaskListRequest {
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>过滤条件，支持以下 Name：<li>JobId - 任务 ID 精确匹配</li><li>TaskType- 任务类型精确匹配</li></p>
+   */
+  Filters?: Array<Filters>
+  /**
+   * <p>分页大小</p><p>取值范围：[1, 100]</p><p>单位：条</p><p>默认值：10</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移</p><p>取值范围：[0, 99999]</p><p>单位：条</p>
+   */
+  Offset?: number
+  /**
+   * <p>过滤方向</p><p>枚举值：</p><ul><li>DESC： 倒序</li><li>ASC： 正序</li></ul>
+   */
+  Order?: string
+  /**
+   * <p>排序字段</p><p>默认值：ScanTime</p>
+   */
+  By?: string
 }
 
 /**
@@ -13359,6 +15092,24 @@ export interface DescribeRiskRuleDetailRequest {
    * <p>风险规则ID</p>
    */
   RiskRuleId: string
+}
+
+/**
+ * DescribeVulHostRelateComponent请求参数结构体
+ */
+export interface DescribeVulHostRelateComponentRequest {
+  /**
+   * <p>漏洞 ID（vul_vuls.id）</p>
+   */
+  VulID: number
+  /**
+   * <p>实例ID</p>
+   */
+  InstanceID: string
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -13741,6 +15492,32 @@ export interface EdrAlertItem {
 }
 
 /**
+ * DescribeVulFixableMachineList请求参数结构体
+ */
+export interface DescribeVulFixableMachineListRequest {
+  /**
+   * <p>漏洞ID列表，最多支持100个</p>
+   */
+  VulIds: Array<number | bigint>
+  /**
+   * <p>分页偏移量<br>取值范围：[0, +∞)<br>默认值：0</p>
+   */
+  Offset?: number
+  /**
+   * <p>每页返回数量<br>取值范围：[1, 100]<br>默认值：10</p>
+   */
+  Limit?: number
+  /**
+   * <p>过滤条件<br>支持的Filter.Name：<br>Keyword - 模糊匹配，按资产ID、资产名称搜索<br>ComponentName - 模糊匹配，按关联组件名称搜索<br>InstanceId - 精确匹配，按主机实例ID筛选<br>MachineName - 模糊匹配，按主机名称搜索<br>MachineIp - 模糊匹配，按主机IP搜索<br>OsType - 精确匹配，按操作系统类型筛选：linux/windows<br>SupportAutoFix - 精确匹配，按是否支持自动修复筛选：0-不支持 1-支持<br>Tag - 精确匹配，按资产标签筛选<br>AppId - 精确匹配，按所属账号筛选</p>
+   */
+  Filters?: Array<Filters>
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+}
+
+/**
  * DescribeDspmSyncUsersStatus返回参数结构体
  */
 export interface DescribeDspmSyncUsersStatusResponse {
@@ -13890,6 +15667,20 @@ export interface DescribeCosRiskScanTaskRequest {
    * 需要查看的存储桶详情
    */
   BucketInfoSet?: Array<CosBucketInfo>
+}
+
+/**
+ * DescribeVulLabelList返回参数结构体
+ */
+export interface DescribeVulLabelListResponse {
+  /**
+   * <p>漏洞条目列表</p>
+   */
+  List?: Array<VPRLabel>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -14086,6 +15877,20 @@ export interface DspmIdentifyRuleDetail {
 }
 
 /**
+ * 漏洞传播趋势
+ */
+export interface VulSpreadTrend {
+  /**
+   * <p>日期<br>参数格式：YYYY-MM-DD</p>
+   */
+  Date?: string
+  /**
+   * <p>该日期的传播趋势数值</p>
+   */
+  Trend?: number
+}
+
+/**
  * StopRiskCenterTask返回参数结构体
  */
 export interface StopRiskCenterTaskResponse {
@@ -14262,6 +16067,30 @@ export interface ModifyUebaRuleSwitchResponse {
 }
 
 /**
+ * StopVulScanTask返回参数结构体
+ */
+export interface StopVulScanTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * CreateVulScanManual返回参数结构体
+ */
+export interface CreateVulScanManualResponse {
+  /**
+   * <p>任务id</p>
+   */
+  TaskId?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DeleteCosPolicy返回参数结构体
  */
 export interface DeleteCosPolicyResponse {
@@ -14290,21 +16119,13 @@ export interface DescribeDspmAssetDatabaseListRequest {
 }
 
 /**
- * UpdateAlertStatusList返回参数结构体
+ * DescribeHostVulOverview请求参数结构体
  */
-export interface UpdateAlertStatusListResponse {
+export interface DescribeHostVulOverviewRequest {
   /**
-   * 结果信息
+   * <p>集团账号的成员id</p>
    */
-  Msg?: string
-  /**
-   * 结果代码
-   */
-  Code?: string
-  /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
-   */
-  RequestId?: string
+  MemberId?: Array<string>
 }
 
 /**
@@ -14899,65 +16720,13 @@ export interface DescribeCLSLogListV3Request {
 }
 
 /**
- * DescribeCVMAssets返回参数结构体
+ * CreateVulFixedExportJob返回参数结构体
  */
-export interface DescribeCVMAssetsResponse {
+export interface CreateVulFixedExportJobResponse {
   /**
-   * 总数
+   * <p>导出任务ID<br>取值参考：前端轮询导出任务状态时使用</p>
    */
-  Total?: number
-  /**
-   * 机器列表
-   */
-  Data?: Array<CVMAssetVO>
-  /**
-   * 地域列表
-   */
-  RegionList?: Array<FilterDataObject>
-  /**
-   * 防护状态
-   */
-  DefenseStatusList?: Array<FilterDataObject>
-  /**
-   * vpc枚举
-   */
-  VpcList?: Array<FilterDataObject>
-  /**
-   * 资产类型枚举
-   */
-  AssetTypeList?: Array<FilterDataObject>
-  /**
-   * 操作系统枚举
-   */
-  SystemTypeList?: Array<FilterDataObject>
-  /**
-   * ip列表
-   */
-  IpTypeList?: Array<FilterDataObject>
-  /**
-   * appid列表
-   */
-  AppIdList?: Array<FilterDataObject>
-  /**
-   * 可用区列表
-   */
-  ZoneList?: Array<FilterDataObject>
-  /**
-   * os列表
-   */
-  OsList?: Array<FilterDataObject>
-  /**
-   * 资产类型和实例类型的对应关系
-   */
-  AssetMapInstanceTypeList?: Array<AssetInstanceTypeMap>
-  /**
-   * 公网内网枚举
-   */
-  PublicPrivateAttr?: Array<FilterDataObject>
-  /**
-   * 主机防护状态
-   */
-  ProtectStatusList?: Array<FilterDataObject>
+  JobID?: string
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -15054,6 +16823,41 @@ export interface DescribeDspmBackupSettingRequest {
    * 集团账号的成员id
    */
   MemberId?: Array<string>
+}
+
+/**
+ * DescribeVulLabelList请求参数结构体
+ */
+export type DescribeVulLabelListRequest = null
+
+/**
+ * 主机漏洞风险
+ */
+export interface HostKBRisk {
+  /**
+   * <p>风险记录 ID（kb_risk.id）</p>
+   */
+  RiskID?: number
+  /**
+   * <p>Windows KB 补丁详细信息</p>
+   */
+  KBDetail?: KBDetail
+  /**
+   * <p>受影响主机数</p>
+   */
+  EffectHostCount?: number
+  /**
+   * <p>最近扫描时间<br>参数格式：YYYY-MM-DDTHH:mm:ssZ</p>
+   */
+  LatestScanTime?: string
+  /**
+   * <p>所属账号列表</p>
+   */
+  Account?: Array<AccountBriefInfo>
+  /**
+   * <p>修复状态<br>枚举值：<br>PENDING：待修复<br>SCANNING：扫描中<br>FIXED：已修复<br>IGNORED：已加白<br>FIXING：修复中<br>FIX_FAILED：修复失败</p>
+   */
+  RiskStatus?: string
 }
 
 /**
@@ -15646,39 +17450,31 @@ export interface ScanTaskInfo {
 }
 
 /**
- * AI Agent 流量沙箱插件状态
+ * ModifyVulWhitelistSwitch返回参数结构体
  */
-export interface TrafficPluginState {
+export interface ModifyVulWhitelistSwitchResponse {
   /**
-   * 插件安装状态（上层聚合）
-枚举值：
-NONE：未安装
-INSTALLING：安装中
-INSTALLED：已安装
-INSTALL_FAIL：安装失败
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  InstallStatus?: string
+  RequestId?: string
+}
+
+/**
+ * DescribeVulIgnoreRuleList返回参数结构体
+ */
+export interface DescribeVulIgnoreRuleListResponse {
   /**
-   * 插件安装细分状态。取值与 InstallStatus 对应：未安装（InstallStatus=UNINSTALL）时为空字符串；安装成功（InstallStatus=INSTALLED）时为 SUCCESS；安装失败（InstallStatus=INSTALL_FAIL）时为具体失败原因
-枚举值：
-NOT_SUPPORT：环境不支持
-CONTAINER_NOT_FOUND：容器不存在
-REQUIRE_RESTART：需要重启
-CA_FAILED：CA 失败
-EBPF_FAILED：eBPF 失败
-IPTABLE_FAILED：iptables 失败
-REDIRECT_FAILED：流量重定向失败
+   * <p>白名单列表</p>
    */
-  Status?: string
+  List?: Array<VulWhitelist>
   /**
-   * 状态文案（由 Status 根据请求语言派生的国际化描述）
+   * <p>总数</p>
    */
-  Message?: string
+  Total?: number
   /**
-   * 插件最近活跃时间
-参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  ActivityTime?: string
+  RequestId?: string
 }
 
 /**
@@ -15928,6 +17724,24 @@ export interface RevertDspmAssetAccountRequest {
 }
 
 /**
+ * 漏洞VPR标签
+ */
+export interface VPRLabel {
+  /**
+   * <p>标签名称<br>枚举值：<br>IN_THE_WILD：在野利用<br>EXP：有 EXP<br>POC：有 POC<br>INTERNET_EXPOSED：外网暴露<br>NO_RESTART：无需重启<br>HIGH_VALUE_ASSET：重要资产<br>MALWARE_WEAPONIZED：已武器化</p>
+   */
+  Name?: string
+  /**
+   * <p>标签等级<br>枚举值：<br>HIGH：高<br>MEDIUM：中<br>LOW：低</p>
+   */
+  Level?: string
+  /**
+   * <p>标签说明</p>
+   */
+  Remark?: string
+}
+
+/**
  * DescribeAssetRiskList请求参数结构体
  */
 export interface DescribeAssetRiskListRequest {
@@ -15977,6 +17791,103 @@ export interface CreateDspmIdentifyLevelGroupRequest {
    * <p>无</p>
    */
   LevelItems?: Array<DspmAddIdentifyLevelItem>
+}
+
+/**
+ * 漏洞修复任务列表项
+ */
+export interface VulFixTaskItem {
+  /**
+   * 修复任务主键ID
+   */
+  Id?: number
+  /**
+   * 任务ID，用于交互的hash标识
+   */
+  TaskId?: number
+  /**
+   * 任务JobId，对应后台任务系统的任务ID
+   */
+  JobId?: string
+  /**
+   * 修复的漏洞ID列表
+   */
+  VulIds?: Array<number | bigint>
+  /**
+   * 修复的KB补丁ID列表
+   */
+  KBIds?: Array<number | bigint>
+  /**
+   * 修复资产总数
+   */
+  AssetCount?: number
+  /**
+   * 修复成功的主机数
+   */
+  SuccessCount?: number
+  /**
+   * 修复失败的主机数
+   */
+  FailCount?: number
+  /**
+   * 修复进度百分比
+取值范围：[0, 100]
+补充说明：计算方式为(SuccessCount+FailCount)/AssetCount×100
+   */
+  Progress?: number
+  /**
+   * 修复任务用户数
+   */
+  TargetAppIdsCount?: number
+  /**
+   * 修复状态
+枚举值：
+0：初始化
+1：修复中
+2：修复成功
+3：部分修复失败
+4：全部修复失败
+5：停止修复
+   */
+  FixStatus?: number
+  /**
+   * 最大修复时间
+单位：秒
+   */
+  Timeout?: number
+  /**
+   * 修复启动时间
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   */
+  StartTime?: string
+  /**
+   * 修复结束时间
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   */
+  EndTime?: string
+  /**
+   * 记录创建时间
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   */
+  CreateTime?: string
+  /**
+   * 修复的漏洞名称列表，便于列表页直接展示
+   */
+  VulNames?: Array<string>
+  /**
+   * 漏洞类型列表
+枚举值：
+LINUX：Linux软件漏洞
+WINDOWS：Windows系统补丁漏洞
+WEB_CMS：Web-CMS漏洞
+APPLICATION：应用漏洞
+EMERGENCY：应急漏洞
+   */
+  VulCategory?: Array<string>
+  /**
+   * 创建者AppId
+   */
+  AppId?: number
 }
 
 /**
@@ -16110,6 +18021,57 @@ export interface LogDynamicIndex {
 }
 
 /**
+ * DescribeVulFixedHostDetail返回参数结构体
+ */
+export interface DescribeVulFixedHostDetailResponse {
+  /**
+   * <p>漏洞名称</p>
+   */
+  VulName?: string
+  /**
+   * <p>CVE编号</p>
+   */
+  CveId?: string
+  /**
+   * <p>漏洞类型<br>枚举值：<br>LINUX：Linux软件漏洞<br>WINDOWS：Windows系统补丁漏洞<br>WEB_CMS：Web-CMS漏洞<br>APPLICATION：应用漏洞</p>
+   */
+  VulCategory?: string
+  /**
+   * <p>修复完成时间<br>参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）</p>
+   */
+  FixTime?: string
+  /**
+   * <p>主机实例ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>主机名称</p>
+   */
+  MachineName?: string
+  /**
+   * <p>主机公网IP</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  PublicIp?: string
+  /**
+   * <p>主机内网IP</p>
+   */
+  PrivateIp?: string
+  /**
+   * <p>关联组件&amp;路径详情列表</p>
+   */
+  ComponentDetails?: Array<ComponentDetailItem>
+  /**
+   * <p>关联组件&amp;路径总数量</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * ModifyCosMarkInfo请求参数结构体
  */
 export interface ModifyCosMarkInfoRequest {
@@ -16142,9 +18104,65 @@ export interface DescribeDspmApplyHistoryResponse {
 }
 
 /**
- * ModifyDspmIpInfo返回参数结构体
+ * DescribeCVMAssets返回参数结构体
  */
-export interface ModifyDspmIpInfoResponse {
+export interface DescribeCVMAssetsResponse {
+  /**
+   * 总数
+   */
+  Total?: number
+  /**
+   * 机器列表
+   */
+  Data?: Array<CVMAssetVO>
+  /**
+   * 地域列表
+   */
+  RegionList?: Array<FilterDataObject>
+  /**
+   * 防护状态
+   */
+  DefenseStatusList?: Array<FilterDataObject>
+  /**
+   * vpc枚举
+   */
+  VpcList?: Array<FilterDataObject>
+  /**
+   * 资产类型枚举
+   */
+  AssetTypeList?: Array<FilterDataObject>
+  /**
+   * 操作系统枚举
+   */
+  SystemTypeList?: Array<FilterDataObject>
+  /**
+   * ip列表
+   */
+  IpTypeList?: Array<FilterDataObject>
+  /**
+   * appid列表
+   */
+  AppIdList?: Array<FilterDataObject>
+  /**
+   * 可用区列表
+   */
+  ZoneList?: Array<FilterDataObject>
+  /**
+   * os列表
+   */
+  OsList?: Array<FilterDataObject>
+  /**
+   * 资产类型和实例类型的对应关系
+   */
+  AssetMapInstanceTypeList?: Array<AssetInstanceTypeMap>
+  /**
+   * 公网内网枚举
+   */
+  PublicPrivateAttr?: Array<FilterDataObject>
+  /**
+   * 主机防护状态
+   */
+  ProtectStatusList?: Array<FilterDataObject>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16388,6 +18406,160 @@ export interface DescribeRiskCallRecordResponse {
 }
 
 /**
+ * 漏洞全部信息
+ */
+export interface VulDetailInfo {
+  /**
+   * <p>漏洞ID</p>
+   */
+  ID?: number
+  /**
+   * <p>漏洞名字</p>
+   */
+  Name?: string
+  /**
+   * <p>CveID</p>
+   */
+  CVEID?: string
+  /**
+   * 漏洞分类
+枚举值：
+LINUX：Linux 软件漏洞
+WINDOWS：Windows 系统补丁
+WEB_CMS：Web-CMS 漏洞
+APPLICATION：应用漏洞
+EMERGENCY：应急漏洞
+   */
+  Category?: string
+  /**
+   * 漏洞披露时间
+参数格式：YYYY-MM-DD HH:mm:ss
+   */
+  PublishTime?: string
+  /**
+   * <p>检测方式</p><p>枚举值：</p><ul><li>VersionCompare： 版本对比</li><li>POC： POC检测</li></ul>
+   */
+  CheckMethod?: string
+  /**
+   * 漏洞防御状态
+枚举值：
+ENABLED：已开启
+NOT_SUPPORTED：不支持
+NOT_ENABLED：未开启
+   */
+  DefendStatus?: string
+  /**
+   * 是否支持一键修复
+枚举值：
+true：支持
+false：不支持
+   */
+  SupportFix?: boolean
+  /**
+   * VPR 评级信息（包含评级结果、说明和分阶段评分）
+   */
+  VRPRatingInfo?: VPRRatingInfo
+  /**
+   * CVSS 评分
+取值范围：[0.0, 10.0]
+   */
+  CvssScore?: number
+  /**
+   * VPR 风险标签列表（如在野利用、有 EXP、有 POC、外网暴露、无需重启等）
+   */
+  Label?: Array<VPRLabel>
+  /**
+   * 漏洞备注
+   */
+  Remark?: string
+  /**
+   * 漏洞概述说明
+   */
+  Summary?: string
+  /**
+   * 已开启漏洞防御的主机数
+   */
+  DefendHostCount?: number
+  /**
+   * 未开启漏洞防御的主机数
+   */
+  NotDefendHostCount?: number
+  /**
+   * 最近扫描时间
+参数格式：YYYY-MM-DD HH:mm:ss
+   */
+  LatestScanTime?: string
+  /**
+   * CVSS 危害等级
+枚举值：
+INVALID：无效
+INFO：提示
+LOW：低危
+MEDIUM：中危
+HIGH：高危
+CRITICAL：严重
+   */
+  CVSSLevel?: string
+  /**
+   * 受影响软件描述列表（每项形如 openssl < 1.1.1k）
+   */
+  VulAffect?: Array<string>
+  /**
+   * 是否被 KVE（已知被利用漏洞）库收录
+枚举值：
+true：已收录
+false：未收录
+   */
+  KVERecord?: boolean
+  /**
+   * KVE 收录时间
+参数格式：YYYY-MM-DD HH:mm:ss
+   */
+  KVERecordTime?: string
+  /**
+   * EPSS 评分（漏洞利用概率预测）
+取值范围：[0.0, 1.0]
+   */
+  EPSSScore?: number
+  /**
+   * 受影响厂商列表
+   */
+  AffectVendor?: Array<string>
+  /**
+   * 受影响产品列表
+   */
+  AffectProduct?: Array<string>
+  /**
+   * 漏洞利用机制说明
+   */
+  Mechanism?: string
+  /**
+   * 漏洞利用前置条件说明
+   */
+  Precondition?: string
+  /**
+   * 漏洞最新传播趋势数据列表（按日期）
+   */
+  LatestTrend?: Array<VulSpreadTrend>
+  /**
+   * <p>修复方案</p>
+   */
+  FixSolution?: string
+  /**
+   * <p>参考链接</p>
+   */
+  RefLink?: string
+  /**
+   * <p>漏洞危害描述</p>
+   */
+  HarmDescription?: string
+  /**
+   * <p>漏洞影响产品</p>
+   */
+  AffectVendorProduct?: Array<VulVendorProduct>
+}
+
+/**
  * DescribeRiskCenterPortViewPortRiskList请求参数结构体
  */
 export interface DescribeRiskCenterPortViewPortRiskListRequest {
@@ -16438,13 +18610,17 @@ export interface DescribeDspmAssetIdentifyInfoListResponse {
 }
 
 /**
- * DescribeCosAuditDictionaryList返回参数结构体
+ * DescribeDspmAssetIds返回参数结构体
  */
-export interface DescribeCosAuditDictionaryListResponse {
+export interface DescribeDspmAssetIdsResponse {
   /**
-   * <p>结果集</p>
+   * 数据库资产总数
    */
-  DataSet?: Array<CosDictionary>
+  TotalCount?: number
+  /**
+   * 资产id信息
+   */
+  AssetSet?: Array<DspmDbAssetId>
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -16761,6 +18937,83 @@ export interface DescribeDspmIdentifyRuleListResponse {
 }
 
 /**
+ * 漏洞修复任务概要信息
+ */
+export interface VulFixTaskInfo {
+  /**
+   * 修复任务主键ID
+   */
+  Id?: number
+  /**
+   * 任务ID
+   */
+  TaskId?: number
+  /**
+   * 修复状态
+枚举值：
+0：初始化
+1：修复中
+2：修复成功
+3：部分修复失败
+4：全部修复失败
+5：停止修复
+   */
+  FixStatus?: number
+  /**
+   * 修复资产总数
+   */
+  AssetCount?: number
+  /**
+   * 修复成功数
+   */
+  SuccessCount?: number
+  /**
+   * 修复失败数
+   */
+  FailCount?: number
+  /**
+   * 修复中数量
+   */
+  FixingCount?: number
+  /**
+   * 排队中数量（等待下发或等待快照创建）
+   */
+  QueueCount?: number
+  /**
+   * 修复进度百分比
+取值范围：[0, 100]
+补充说明：计算方式为(SuccessCount+FailCount)/AssetCount×100
+   */
+  Progress?: number
+  /**
+   * 修复成功的漏洞数
+   */
+  SuccessVulCount?: number
+  /**
+   * 修复失败的漏洞数
+   */
+  FailVulCount?: number
+  /**
+   * 修复的漏洞名称列表
+   */
+  VulNames?: Array<string>
+  /**
+   * 修复启动时间
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   */
+  StartTime?: string
+  /**
+   * 修复结束时间
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   */
+  EndTime?: string
+  /**
+   * 漏洞维度修复状态列表，每个漏洞的修复状态详情
+   */
+  VulFixStatusList?: Array<VulFixStatusItem>
+}
+
+/**
  * dspm统计项
  */
 export interface DspmStatisticsItem {
@@ -16779,17 +19032,13 @@ export interface DspmStatisticsItem {
 }
 
 /**
- * DescribeCosAuditDictionaryList请求参数结构体
+ * DescribeCosActionList请求参数结构体
  */
-export interface DescribeCosAuditDictionaryListRequest {
+export interface DescribeCosActionListRequest {
   /**
-   * <p>字典类型（RootCategory：一级分类，IdentifyRule:敏感识别数据项）</p>
+   * 过滤器
    */
-  DictType: string
-  /**
-   * <p>筛选条件</p>
-   */
-  Filters?: Array<WhereFilter>
+  Filter?: Filter
 }
 
 /**
@@ -16838,6 +19087,20 @@ export interface LogKeyValueInfo {
  * DeleteDspmExportTask返回参数结构体
  */
 export interface DeleteDspmExportTaskResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyOrganizationAccountStatus返回参数结构体
+ */
+export interface ModifyOrganizationAccountStatusResponse {
+  /**
+   * 返回值为0，则修改成功
+   */
+  Status?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17203,201 +19466,17 @@ export interface ModifyDspmIdentifyRuleResponse {
 }
 
 /**
- * EDR告警详情（含content JSON + 资产/情报富化字段）
+ * CreateHostVulExportJob返回参数结构体
  */
-export interface EdrAlertDetail {
+export interface CreateHostVulExportJobResponse {
   /**
-   * <p>主键ID</p>
+   * <p>任务ID</p>
    */
-  Id?: number
+  JobID?: string
   /**
-   * <p>租户ID</p>
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  AppId?: number
-  /**
-   * <p>告警唯一标识</p>
-   */
-  AlertId?: string
-  /**
-   * <p>告警大类（英文枚举：VIRUS_TROJAN/ABNORMAL_LOGIN/HOST_BEHAVIOR/NETWORK_BEHAVIOR/LINK_ENGINE）</p>
-   */
-  AlertCategory?: string
-  /**
-   * <p>告警子类型（英文枚举：MALWARE_FILE/MALWARE_PROCESS/RISK_LOGIN/BRUTE_FORCE/DNS/BASH/PRIV_ESCALATION/REVERSE_SHELL/NET_ATTACK/VUL_DEFENCE/MEMORY_SHELL_INJECT/MEMORY_SHELL_SCAN/MULTI_BEHAVIOR_ATTACK）</p>
-   */
-  AlertSubType?: string
-  /**
-   * <p>关联规则ID</p>
-   */
-  RuleId?: string
-  /**
-   * <p>规则类型: 0-系统规则 1-用户自定义</p>
-   */
-  RuleType?: number
-  /**
-   * <p>告警等级（英文枚举：CRITICAL/HIGH/MEDIUM/LOW/INFO）</p>
-   */
-  Level?: string
-  /**
-   * <p>处理状态（英文枚举：PENDING/PROCESSED/WHITELISTED/ISOLATED/CLEANED/IGNORED/ISOLATING/RESTORING/BLOCKED/DELETED）</p>
-   */
-  Status?: string
-  /**
-   * <p>ATT&amp;CK攻击阶段</p>
-   */
-  AttackStage?: string
-  /**
-   * <p>检测模式（英文枚举：PRECISE/BALANCED/DEEP）</p>
-   */
-  DetectMode?: string
-  /**
-   * <p>实例ID</p>
-   */
-  InstanceId?: string
-  /**
-   * <p>主机UUID</p>
-   */
-  Quuid?: string
-  /**
-   * <p>聚合事件数</p>
-   */
-  EventCount?: number
-  /**
-   * <p>是否付费版</p>
-   */
-  IsProVersion?: number
-  /**
-   * <p>告警来源（英文枚举：HOST/CONTAINER/K8S/CSIP）</p>
-   */
-  AlertSource?: string
-  /**
-   * <p>容器镜像ID（保留字段，恒为空串）</p>
-   */
-  ImageId?: string
-  /**
-   * <p>容器ID（保留字段，恒为空串）</p>
-   */
-  ContainerId?: string
-  /**
-   * <p>集群ID（保留字段，恒为空串）</p>
-   */
-  ClusterId?: string
-  /**
-   * <p>首次发现时间</p>
-   */
-  FirstDetectTime?: string
-  /**
-   * <p>最近发现时间</p>
-   */
-  LatestDetectTime?: string
-  /**
-   * <p>规则名称（规则富化）</p>
-   */
-  RuleName?: string
-  /**
-   * <p>内容类型: md5/cmdline/dns/ip_inbound/ip_outbound/custom_file/process_network</p>
-   */
-  ContentType?: string
-  /**
-   * <p>实例名（资产富化）</p>
-   */
-  InstanceName?: string
-  /**
-   * <p>公网IP（资产富化）</p>
-   */
-  PublicIp?: string
-  /**
-   * <p>内网IP（资产富化）</p>
-   */
-  PrivateIp?: string
-  /**
-   * <p>告警详情JSON字符串（前端通过JSON.parse解析，空值为&quot;{}&quot;）</p>
-   */
-  Content?: string
-  /**
-   * <p>告警名称（子类型中英文名）</p>
-   */
-  AlertName?: string
-  /**
-   * <p>安全中心标签</p>
-   */
-  CSIPTags?: Array<CSIPTag>
-  /**
-   * <p>危害描述（统一字段，合并原各子类型独立字段）</p>
-   */
-  HarmDesc?: string
-  /**
-   * <p>修复建议（统一字段）</p>
-   */
-  SuggestScheme?: string
-  /**
-   * <p>数据来源: vuldb/vdc/intel/default</p>
-   */
-  HarmDescSource?: string
-  /**
-   * <p>统一威胁情报标签（按子类型路由不同情报源）</p>
-   */
-  ThreatTags?: Array<string>
-  /**
-   * <p>Base64解码后的命令（高危命令子类型独有）</p>
-   */
-  BashCmdDecoded?: string
-  /**
-   * <p>漏洞名称（网络攻击子类型独有）</p>
-   */
-  NetVulName?: string
-  /**
-   * <p>CVE编号（网络攻击子类型独有）</p>
-   */
-  NetCVEId?: string
-  /**
-   * <p>异常行为（网络攻击子类型独有）</p>
-   */
-  NetAbnormalAction?: string
-  /**
-   * <p>IP情报信息（为空时不返回）</p>
-   */
-  IPIntel?: IPIntelInfo
-  /**
-   * <p>多行为攻击规则类型分类: sequence/threshold/command</p>
-   */
-  MultiBehaviorDetectionMode?: string
-  /**
-   * <p>告警来源描述（按子类型派生，描述哪个引擎/规则检出）</p>
-   */
-  SourceDesc?: string
-  /**
-   * <p>处理时间参数格式：2026-05-26 19:45:48</p>
-   */
-  ModifyTime?: string
-  /**
-   * <p>情报富化结果来源（标识本次详情是否成功命中外部情报）；取值 &quot;VDC&quot; / &quot;IPAnalysis&quot; / &quot;BreakingTI&quot; / 空串</p>
-   */
-  IntelSource?: string
-  /**
-   * <p>综合研判，中英文已翻译，中：恶意/安全/未知；英：Malicious/Safe/Unknown</p>
-   */
-  Verdict?: string
-  /**
-   * <p>研判依据</p>
-   */
-  VerdictBasis?: string
-  /**
-   * <p>病毒名称</p>
-   */
-  VirusName?: string
-  /**
-   * <p>病毒家族</p>
-   */
-  VirusFamily?: string
-  /**
-   * <p>NetResponsePayload 响应数据包（base64 编码后的字符串）</p>
-   */
-  NetResponsePayload?: string
-  /**
-   * <p>服务进程信息（base64 编码后的 JSON 字符串）</p>
-   */
-  NetSvcPs?: string
+  RequestId?: string
 }
 
 /**
@@ -17673,6 +19752,45 @@ export interface DomainInfo {
 }
 
 /**
+ * 漏洞/KB补丁维度修复状态
+ */
+export interface VulFixStatusItem {
+  /**
+   * 漏洞ID（KB补丁修复任务时为空）
+   */
+  VulId?: number
+  /**
+   * KB补丁ID（漏洞修复任务时为空）
+   */
+  KBId?: number
+  /**
+   * 漏洞名称或KB补丁名称
+   */
+  VulName?: string
+  /**
+   * 该漏洞的修复状态
+枚举值：
+0：修复中
+1：全部成功
+2：部分失败
+3：全部失败
+   */
+  FixStatus?: number
+  /**
+   * 该漏洞/KB补丁关联的主机总数
+   */
+  HostCount?: number
+  /**
+   * 该漏洞/KB补丁修复成功的主机数
+   */
+  SuccessHostCount?: number
+  /**
+   * 该漏洞/KB补丁修复失败的主机数
+   */
+  FailHostCount?: number
+}
+
+/**
  * DescribeAccessKeyAlarmDetail返回参数结构体
  */
 export interface DescribeAccessKeyAlarmDetailResponse {
@@ -17750,6 +19868,16 @@ export interface DescribeIaCFileListResponse {
    * <p>总数</p>
    */
   TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * ModifyDspmApproveStatus返回参数结构体
+ */
+export interface ModifyDspmApproveStatusResponse {
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -17838,6 +19966,16 @@ export interface CosAlarmRiskIdInfo {
    * 租户id
    */
   AppId: number
+}
+
+/**
+ * DescribeKBDetail请求参数结构体
+ */
+export interface DescribeKBDetailRequest {
+  /**
+   * KB 补丁内部 ID（kb_info.id）
+   */
+  KBID: number
 }
 
 /**
@@ -18015,13 +20153,17 @@ export interface DescribeSubUserInfoRequest {
 }
 
 /**
- * DescribeDspmAssetDatabases返回参数结构体
+ * DescribeCosRiskEvidence返回参数结构体
  */
-export interface DescribeDspmAssetDatabasesResponse {
+export interface DescribeCosRiskEvidenceResponse {
   /**
-   * 数据库列表
+   * 证据信息
    */
-  Items?: Array<string>
+  Evidences?: Array<CosPermissionInfo>
+  /**
+   * 总数
+   */
+  Total?: number
   /**
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
@@ -18117,43 +20259,61 @@ export interface ModifyCosAuditMonitorAccountResponse {
 }
 
 /**
- * Dspm身份id信息
+ * AddVulWhitelist返回参数结构体
  */
-export interface DspmIdentifyIdItem {
+export interface AddVulWhitelistResponse {
   /**
-   * 身份id。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  IdentifyId?: string
+  RequestId?: string
+}
+
+/**
+ * DescribeVulRiskRelateHost返回参数结构体
+ */
+export interface DescribeVulRiskRelateHostResponse {
   /**
-   * 备注。
+   * <p>该漏洞影响的主机列表</p>
    */
-  Remark?: string
+  List?: Array<VulHostBriefInfo>
   /**
-   * 身份类型。0-未定义 2-长期身份 3-临时身份
+   * <p>符合条件的总数</p>
    */
-  IdentifyType?: number
+  TotalCount?: number
   /**
-   * 所属云账号uin用户。
-注意：此字段可能返回 null，表示取不到有效值。
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  OwnerUin?: DspmUinUser
+  RequestId?: string
+}
+
+/**
+ * DescribeKBUpdatableMachineList返回参数结构体
+ */
+export interface DescribeKBUpdatableMachineListResponse {
   /**
-   * 创建者账号uin用户。
+   * <p>可更新补丁主机列表</p>
    */
-  CreatorUin?: DspmUinUser
+  Data?: Array<KBUpdateMachineItem>
   /**
-   * 创建时间。
+   * <p>总数量</p>
    */
-  CreateTime?: string
+  TotalCount?: number
   /**
-   * 状态。0-不活跃 1-活跃
+   * <p>可一键修复的主机数量</p>
    */
-  Status?: number
+  FixableCount?: number
   /**
-   * 所属个人用户信息
-注意：此字段可能返回 null，表示取不到有效值。
+   * <p>不可一键修复的主机数量</p>
    */
-  Person?: DspmPersonUser
+  NotFixableCount?: number
+  /**
+   * <p>KB补丁维度汇总信息，展示被修复的补丁列表概要</p>
+   */
+  KBSummary?: Array<KBFixSummaryItem>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -18363,6 +20523,24 @@ export interface DescribeDspmAssetAccountRecycledPrivilegesRequest {
 }
 
 /**
+ * DescribeVulItemList返回参数结构体
+ */
+export interface DescribeVulItemListResponse {
+  /**
+   * <p>漏洞条目列表</p>
+   */
+  List?: Array<VulDetailInfo>
+  /**
+   * <p>凭据总数</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * DescribeCosRiskScanTask返回参数结构体
  */
 export interface DescribeCosRiskScanTaskResponse {
@@ -18409,6 +20587,54 @@ export interface DownloadDspmExportLogResponse {
 }
 
 /**
+ * DescribeVulFixTaskDetail请求参数结构体
+ */
+export interface DescribeVulFixTaskDetailRequest {
+  /**
+   * <p>修复任务ID</p>
+   */
+  TaskId: number
+  /**
+   * <p>分页偏移量<br>取值范围：[0, +∞)<br>默认值：0</p>
+   */
+  Offset?: number
+  /**
+   * <p>每页返回数量<br>取值范围：[1, 100]<br>默认值：10</p>
+   */
+  Limit?: number
+  /**
+   * <p>过滤条件<br>支持的Filter.Name：<br>InstanceId - 精确匹配，按主机实例ID筛选<br>VulId - 精确匹配，按漏洞ID筛选，过滤出某个漏洞下的主机<br>KBId - 精确匹配，按KB补丁ID筛选，过滤出某个KB补丁下的主机<br>Status - 精确匹配，按执行状态筛选：0-初始状态 1-已下发 11-客户端已确认 2-修复完成 3-客户端离线 4-超时 5-失败 6-不支持 9-等待快照创建完成中 10-快照创建失败<br>FixStatus - 精确匹配，按修复结果筛选：0-初始状态 1-修复成功 2-修复失败<br>SnapshotStatus - 精确匹配，按快照状态筛选：-1-无需创建快照 0-未开始 1-进行中 2-已完成 3-创建失败</p>
+   */
+  Filters?: Array<Filters>
+  /**
+   * <p>排序字段<br>枚举值：<br>StartTime：按修复启动时间排序<br>EndTime：按修复结束时间排序</p>
+   */
+  Order?: string
+  /**
+   * <p>排序方式<br>枚举值：<br>asc：升序<br>desc：降序<br>默认值：desc</p>
+   */
+  By?: string
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+}
+
+/**
+ * DescribeVulRiskRelateComponent返回参数结构体
+ */
+export interface DescribeVulRiskRelateComponentResponse {
+  /**
+   * <p>该漏洞影响的组件列表</p>
+   */
+  List?: Array<VulComponentSummary>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * cos数据识别结果分类详情
  */
 export interface CosIdentifyCategoryDetail {
@@ -18424,6 +20650,20 @@ export interface CosIdentifyCategoryDetail {
    * <p>数据项集合</p>
    */
   RuleSet?: Array<CosIdentifyRuleDetail>
+}
+
+/**
+ * 主机漏洞组件概要
+ */
+export interface VulComponentSummary {
+  /**
+   * <p>组件名称</p>
+   */
+  Name: string
+  /**
+   * <p>关联主机数</p>
+   */
+  RelateHostCount?: number
 }
 
 /**
@@ -18504,6 +20744,20 @@ export interface DeleteDspmIdentifyRuleRequest {
    * <p>集团账号的成员id</p>
    */
   MemberId?: Array<string>
+}
+
+/**
+ * DescribeHostVulOverview返回参数结构体
+ */
+export interface DescribeHostVulOverviewResponse {
+  /**
+   * <p>主机漏洞概览数据</p>
+   */
+  Overview?: HostVulOverview
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -18731,6 +20985,32 @@ export interface DescribeVULRiskDetailRequest {
    * pcMgrId
    */
   PCMGRId?: string
+}
+
+/**
+ * DescribeVulFixedHostDetail请求参数结构体
+ */
+export interface DescribeVulFixedHostDetailRequest {
+  /**
+   * <p>漏洞ID</p>
+   */
+  VulId: number
+  /**
+   * <p>主机实例ID</p>
+   */
+  InstanceId: string
+  /**
+   * <p>分页偏移量，用于关联组件&amp;路径列表分页<br>取值范围：[0, +∞)<br>默认值：0</p>
+   */
+  Offset?: number
+  /**
+   * <p>每页返回数量，用于关联组件&amp;路径列表分页<br>取值范围：[1, 100]<br>默认值：10</p>
+   */
+  Limit?: number
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -19017,6 +21297,48 @@ export interface DescribeCosRiskActionListRequest {
 }
 
 /**
+ * Windows KB详细信息
+ */
+export interface KBDetail {
+  /**
+   * <p>KB 补丁内部 ID（kb_info.id）</p>
+   */
+  ID?: number
+  /**
+   * <p>KB 编号<br>参数格式：形如 KB5001234</p>
+   */
+  Number?: string
+  /**
+   * <p>KB 补丁名称</p>
+   */
+  Name?: string
+  /**
+   * <p>参考链接（微软官方文档地址）</p>
+   */
+  ReferUrl?: string
+  /**
+   * <p>发布时间<br>参数格式：YYYY-MM-DD HH:mm:ss</p>
+   */
+  PublishTime?: string
+  /**
+   * <p>安装该 KB 后是否需要重启<br>枚举值：<br>true：需要<br>false：不需要</p>
+   */
+  NeedRestart?: boolean
+  /**
+   * <p>关联漏洞列表</p>
+   */
+  RelateVulList?: Array<VulBriefInfo>
+  /**
+   * <p>关联漏洞总数</p>
+   */
+  RelateVulCount?: number
+  /**
+   * <p>关联os版本</p>
+   */
+  RelateProduct?: string
+}
+
+/**
  * DescribeCosRoleAccessPermissions请求参数结构体
  */
 export interface DescribeCosRoleAccessPermissionsRequest {
@@ -19095,6 +21417,52 @@ export interface DescribeVULRiskDetailResponse {
 }
 
 /**
+ * 漏洞白名单
+ */
+export interface VulWhitelist {
+  /**
+   * <p>id</p>
+   */
+  Id?: number
+  /**
+   * <p>漏洞名称</p>
+   */
+  Name?: string
+  /**
+   * <p>备注</p>
+   */
+  Remark?: string
+  /**
+   * <p>所属账号</p>
+   */
+  AppId?: number
+  /**
+   * <p>资产列表</p>
+   */
+  AssetList?: Array<string>
+  /**
+   * <p>更新时间</p>
+   */
+  UpdateTime?: string
+  /**
+   * <p>策略开关（0-关闭, 1-开启）</p>
+   */
+  Switch?: number
+  /**
+   * <p>资产范围</p><p>枚举值：</p><ul><li>0： 全部资产</li><li>1： 自选资产</li><li>2： 全选排除资产</li></ul>
+   */
+  AssetRange?: number
+  /**
+   * <p>补丁KB id</p>
+   */
+  KBId?: number
+  /**
+   * <p>漏洞Id</p>
+   */
+  VulId?: number
+}
+
+/**
  * dspm数据识别分类和数据项关联关系
  */
 export interface DspmIdentifyCategoryRuleRelateItem {
@@ -19106,6 +21474,20 @@ export interface DspmIdentifyCategoryRuleRelateItem {
    * <p>级别ID</p>
    */
   LevelId: number
+}
+
+/**
+ * DeleteVulWhitelist请求参数结构体
+ */
+export interface DeleteVulWhitelistRequest {
+  /**
+   * <p>id列表</p>
+   */
+  Id?: Array<number | bigint>
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -19775,6 +22157,36 @@ export interface DescribeDspmAssetAccessTopologyResponse {
 }
 
 /**
+ * 风险调用记录详情
+ */
+export interface RiskCallRecord {
+  /**
+   * 接口名称
+   */
+  EventName?: string
+  /**
+   * 接口中文描述
+   */
+  EventDescCN?: string
+  /**
+   * 接口英文描述
+   */
+  EventDescEN?: string
+  /**
+   * 产品名称
+   */
+  ProductName?: string
+  /**
+   * 产品中文名称
+   */
+  ProductNameCN?: string
+  /**
+   * 调用次数
+   */
+  CallCount?: number
+}
+
+/**
  * DescribeSkillScanPayInfo请求参数结构体
  */
 export type DescribeSkillScanPayInfoRequest = null
@@ -19853,6 +22265,65 @@ export interface DescribeListenerListResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 主机简要信息
+ */
+export interface HostBriefInfo {
+  /**
+   * 云主机实例 ID
+参数格式：形如 ins-instance
+   */
+  InstanceID?: string
+  /**
+   * 主机 QUUID（CWP 内部唯一标识）
+   */
+  QUUID?: string
+  /**
+   * 主机 UUID
+   */
+  UUID?: string
+  /**
+   * 公网 IP 地址
+   */
+  PublicIP?: string
+  /**
+   * 内网 IP 地址
+   */
+  PrivateIP?: string
+  /**
+   * CWP Agent 状态
+枚举值：
+ONLINE：在线
+OFFLINE：离线
+UNINSTALLED：未安装
+   */
+  AgentStatus?: string
+  /**
+   * 云主机实例状态
+枚举值：
+RUNNING：运行中
+STOPPED：已停止
+UNKNOWN：未知
+   */
+  InstanceStatus?: string
+  /**
+   * 主机名称
+   */
+  Name?: string
+  /**
+   * 所属账号信息
+   */
+  Account?: AccountBriefInfo
+  /**
+   * 资产标签列表（CSIP 内部资产标签）
+   */
+  TagItem?: Array<MiniTagItem>
+  /**
+   * 云上标签列表（云资产侧 Tag）
+   */
+  CloudTag?: Array<Tag>
 }
 
 /**
@@ -20066,6 +22537,76 @@ export interface CreateDspmIdentifyComplianceCategoryRelationResponse {
 }
 
 /**
+ * ModifyVulScanPeriodic请求参数结构体
+ */
+export interface ModifyVulScanPeriodicRequest {
+  /**
+   * <p>周期扫描开关（0-关闭, 1-开启）</p>
+   */
+  Status: number
+  /**
+   * <p>漏洞类型</p><p>枚举值：</p><ul><li>LINUX： Linux软件漏洞</li><li>WINDOWS： Windows系统补丁</li><li>WEB_CMS： Web-CMS漏洞</li><li>APPLICATION： 应用漏洞</li><li>EMERGENCY： 应急漏洞</li></ul>
+   */
+  VulCategory: Array<string>
+  /**
+   * <p>漏洞等级</p><p>枚举值：</p><ul><li>LOW： 低危</li><li>MEDIUM： 中危</li><li>HIGH： 高危</li><li>CRITICAL： 严重</li></ul>
+   */
+  Level: Array<string>
+  /**
+   * <p>扫描方式（VersionCompare: 版本对比, POC: POC检测, VersionComparePOC: 版本对比+POC检测）</p>
+   */
+  Method: string
+  /**
+   * <p>开始时间（09:00:00）</p>
+   */
+  StartTime: string
+  /**
+   * <p>结束时间（18:00:00）</p>
+   */
+  EndTime: string
+  /**
+   * <p>资产范围（0-全部资产，1-自选资产，2-剔除资产，3-自动资产匹配）</p>
+   */
+  AssetRange: number
+  /**
+   * <p>周期扫描类型</p><p>枚举值：</p><ul><li>1： 每天</li><li>2： 每周</li><li>3： 每月</li></ul>
+   */
+  CycleType: number
+  /**
+   * <p>扫描超时时长</p><p>单位：秒</p>
+   */
+  Timeout: number
+  /**
+   * <p>周期值</p><p>取值范围：[1, 31]</p><p>单位：周几或者每月几号</p>
+   */
+  CycleValue?: Array<number | bigint>
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>资产列表（instance_id列表）</p>
+   */
+  AssetList?: Array<string>
+  /**
+   * <p>是否运行被同步配置 0-不允许，1-允许</p>
+   */
+  AllowSync?: number
+  /**
+   * <p>管理员账号是否开启了自动同步配置开关 0-关闭，1-开启</p>
+   */
+  EnableSync?: number
+  /**
+   * <p>配置同步给哪些账号appid</p>
+   */
+  SyncTo?: Array<number | bigint>
+  /**
+   * <p>标签ID</p>
+   */
+  TagIds?: Array<number | bigint>
+}
+
+/**
  * 风险中心状态处理Key
  */
 export interface RiskCenterStatusKey {
@@ -20165,6 +22706,42 @@ export interface DbAssetInfo {
    * tag信息
    */
   Tag?: Array<Tag>
+}
+
+/**
+ * AI Agent 流量沙箱插件状态
+ */
+export interface TrafficPluginState {
+  /**
+   * 插件安装状态（上层聚合）
+枚举值：
+NONE：未安装
+INSTALLING：安装中
+INSTALLED：已安装
+INSTALL_FAIL：安装失败
+   */
+  InstallStatus?: string
+  /**
+   * 插件安装细分状态。取值与 InstallStatus 对应：未安装（InstallStatus=UNINSTALL）时为空字符串；安装成功（InstallStatus=INSTALLED）时为 SUCCESS；安装失败（InstallStatus=INSTALL_FAIL）时为具体失败原因
+枚举值：
+NOT_SUPPORT：环境不支持
+CONTAINER_NOT_FOUND：容器不存在
+REQUIRE_RESTART：需要重启
+CA_FAILED：CA 失败
+EBPF_FAILED：eBPF 失败
+IPTABLE_FAILED：iptables 失败
+REDIRECT_FAILED：流量重定向失败
+   */
+  Status?: string
+  /**
+   * 状态文案（由 Status 根据请求语言派生的国际化描述）
+   */
+  Message?: string
+  /**
+   * 插件最近活跃时间
+参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）
+   */
+  ActivityTime?: string
 }
 
 /**
@@ -20280,6 +22857,24 @@ export interface Element {
    * 统计对象
    */
   Value?: string
+}
+
+/**
+ * CreateVulFixRetryTask返回参数结构体
+ */
+export interface CreateVulFixRetryTaskResponse {
+  /**
+   * <p>重试生成的新任务ID，用于后续查询任务状态</p>
+   */
+  TaskId?: number
+  /**
+   * <p>本次重试的主机数量</p>
+   */
+  RetryCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -20857,6 +23452,54 @@ export interface ModifyPolicyStatusResponse {
 }
 
 /**
+ * DescribeVulFixedList请求参数结构体
+ */
+export interface DescribeVulFixedListRequest {
+  /**
+   * <p>分页偏移量<br>取值范围：[0, +∞)<br>默认值：0</p>
+   */
+  Offset?: number
+  /**
+   * <p>每页返回数量<br>取值范围：[1, 100]<br>默认值：10</p>
+   */
+  Limit?: number
+  /**
+   * <p>过滤条件<br>支持的Filter.Name：<br>Keyword - 模糊匹配，按关键字搜索（漏洞名称/CVE编号/主机名称/实例ID）<br>VulName - 模糊匹配，按漏洞名称搜索<br>Level - 精确匹配，按漏洞等级筛选：LOW-低危 MEDIUM-中危 HIGH-高危 CRITICAL-严重<br>VprLevel - 精确匹配，按VPR评级筛选：1-Low 2-Medium 3-High 4-Critical<br>VulCategory - 精确匹配，按漏洞类型筛选：LINUX-Linux软件漏洞 WINDOWS-Windows系统补丁漏洞 WEB_CMS-Web-CMS漏洞 APPLICATION-应用漏洞 EMERGENCY-应急漏洞<br>MachineName - 模糊匹配，按主机名称搜索<br>InstanceId - 模糊匹配，按实例ID搜索<br>FixTime - 范围匹配，修复时间范围，传入两个值表示起止时间</p>
+   */
+  Filters?: Array<Filters>
+  /**
+   * <p>排序字段<br>枚举值：<br>FixTime：按修复时间排序<br>VulName：按漏洞名称排序</p>
+   */
+  Order?: string
+  /**
+   * <p>排序方式<br>枚举值：<br>asc：升序<br>desc：降序<br>默认值：desc</p>
+   */
+  By?: string
+  /**
+   * 集团账号的成员id
+   */
+  MemberId?: Array<string>
+}
+
+/**
+ * DescribeVulFixTaskList返回参数结构体
+ */
+export interface DescribeVulFixTaskListResponse {
+  /**
+   * <p>修复任务列表</p>
+   */
+  Data?: Array<VulFixTaskItem>
+  /**
+   * <p>总数量</p>
+   */
+  TotalCount?: number
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 配置视角的配置风险对象
  */
 export interface CFGViewCFGRisk {
@@ -21157,6 +23800,42 @@ export interface DescribeRiskCenterVULViewVULRiskListRequest {
 }
 
 /**
+ * ModifyVulScanPeriodic返回参数结构体
+ */
+export interface ModifyVulScanPeriodicResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
+ * AddVulWhitelist请求参数结构体
+ */
+export interface AddVulWhitelistRequest {
+  /**
+   * <p>漏洞ID</p>
+   */
+  VulId?: Array<number | bigint>
+  /**
+   * <p>补丁ID</p>
+   */
+  KbId?: Array<number | bigint>
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>备注</p>
+   */
+  Remark?: string
+  /**
+   * <p>资产列表</p>
+   */
+  AssetList?: Array<string>
+}
+
+/**
  * 对象存储风险趋势图
  */
 export interface CosRiskTrendInfo {
@@ -21199,64 +23878,13 @@ export interface UpdateAccessKeyRemarkResponse {
 }
 
 /**
- * 用户行为分析  自定义策略结构体
+ * CreateVulReScan返回参数结构体
  */
-export interface UebaCustomRule {
+export interface CreateVulReScanResponse {
   /**
-   * 策略名称
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
-  RuleName: string
-  /**
-   * 1: 云账号
-2: 自定义用户
-   */
-  UserType: number
-  /**
-   * 发生时间
-1：10分钟
-2：1小时
-3：一天
-4：一周
-5：一个月
-   */
-  TimeInterval: number
-  /**
-   * 发生事件
-   */
-  EventContent: UebaEventContent
-  /**
-   * 告警名称
-   */
-  AlertName: string
-  /**
-   * 告警类型
-0:  提示
-1:  低危
-2:  中危
-3:  高危
-4:  严重
-   */
-  AlterLevel: number
-  /**
-   * 操作者
-   */
-  Operator: Array<string>
-  /**
-   * 操作对象
-   */
-  OperateObject: Array<string>
-  /**
-   * 操作方式
-   */
-  OperateMethod: Array<string>
-  /**
-   * 日志类型
-   */
-  LogType?: string
-  /**
-   * 日志中文名
-   */
-  LogTypeStr?: string
+  RequestId?: string
 }
 
 /**
@@ -22499,17 +25127,17 @@ export interface CosSourceIpInfo {
 }
 
 /**
- * ModifyOrganizationAccountStatus返回参数结构体
+ * DescribeSourceIPAsset请求参数结构体
  */
-export interface ModifyOrganizationAccountStatusResponse {
+export interface DescribeSourceIPAssetRequest {
   /**
-   * 返回值为0，则修改成功
+   * 集团账号的成员id
    */
-  Status?: number
+  MemberId?: Array<string>
   /**
-   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   * 过滤器
    */
-  RequestId?: string
+  Filter?: Filter
 }
 
 /**
@@ -22524,6 +25152,60 @@ export interface DescribeDspmIdentifyComplianceGroupListRequest {
    * <p>过滤条件</p>
    */
   Filter?: Filter
+}
+
+/**
+ * 漏洞扫描任务详情
+ */
+export interface VulScanTaskDetail {
+  /**
+   * <p>任务id</p>
+   */
+  Id?: string
+  /**
+   * <p>创建者AppId</p>
+   */
+  AppId?: number
+  /**
+   * <p>实例id</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>实例名称</p>
+   */
+  InstanceName?: string
+  /**
+   * <p>公网ip</p>
+   */
+  PublicIp?: string
+  /**
+   * <p>内网ip</p>
+   */
+  PrivateIp?: string
+  /**
+   * <p>操作系统</p>
+   */
+  OS?: string
+  /**
+   * <p>扫描状态（SUCCESS: 扫描完成/成功, OFFLINE: 客户端离线, TIMEOUT: 扫描超时, FAILED: 扫描失败, UNSUPPORTED: 客户端版本过低/不支持扫描, TERMINATED: 已终止, TERMINATING: 终止中）</p><p>枚举值：</p><ul><li>SCANNING： 扫描中</li></ul>
+   */
+  Status?: string
+  /**
+   * <p>扫描开始时间</p>
+   */
+  StartTime?: string
+  /**
+   * <p>扫描结束时间</p>
+   */
+  EndTime?: string
+  /**
+   * <p>漏洞数量</p>
+   */
+  Vuls?: number
+  /**
+   * <p>失败原因</p>
+   */
+  Description?: string
 }
 
 /**
@@ -22546,6 +25228,80 @@ export interface DescribeDspmIdentifyDistributionStatisticsRequest {
    * <p>识别模板id</p>
    */
   ComplianceId?: number
+}
+
+/**
+ * 漏洞修复任务明细项
+ */
+export interface VulFixTaskDetailItem {
+  /**
+   * <p>明细记录ID</p>
+   */
+  Id?: number
+  /**
+   * <p>关联的修复任务ID</p>
+   */
+  TaskId?: number
+  /**
+   * <p>修复的漏洞ID</p>
+   */
+  VulId?: number
+  /**
+   * <p>修复的KB补丁ID</p>
+   */
+  KBId?: number
+  /**
+   * <p>主机实例ID</p>
+   */
+  InstanceId?: string
+  /**
+   * <p>主机名称</p>
+   */
+  MachineName?: string
+  /**
+   * <p>主机内网IP</p>
+   */
+  MachineIp?: string
+  /**
+   * <p>漏洞名称</p>
+   */
+  VulName?: string
+  /**
+   * <p>执行状态<br>枚举值：<br>0：初始状态<br>1：已下发任务<br>11：客户端已确认<br>2：修复完成<br>3：客户端离线<br>4：超时<br>5：失败<br>6：不支持<br>9：等待快照创建完成中<br>10：快照创建失败</p>
+   */
+  Status?: number
+  /**
+   * <p>修复结果</p><p>枚举值：</p><ul><li>0： 初始状态</li><li>1： 修复成功</li><li>2： 修复失败</li><li>3： 修复中</li></ul>
+   */
+  FixStatus?: number
+  /**
+   * <p>快照状态<br>枚举值：<br>-1：无需创建快照<br>0：未开始<br>1：进行中<br>2：已完成<br>3：创建失败</p>
+   */
+  SnapshotStatus?: number
+  /**
+   * <p>异常提示信息</p>
+   */
+  ExceptionMessage?: string
+  /**
+   * <p>修复启动时间<br>参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）</p>
+   */
+  StartTime?: string
+  /**
+   * <p>修复结束时间<br>参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）</p>
+   */
+  EndTime?: string
+  /**
+   * <p>快照创建时间<br>参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）</p>
+   */
+  SnapshotCreateTime?: string
+  /**
+   * <p>快照到期时间<br>参数格式：YYYY-MM-DDTHH:mm:ssZ（ISO8601格式）</p>
+   */
+  SnapshotExpireTime?: string
+  /**
+   * <p>快照创建失败原因（当 SnapshotStatus=3 时有值）</p>
+   */
+  SnapshotFailReason?: string
 }
 
 /**
@@ -22612,6 +25368,36 @@ export interface DescribeTopAttackInfoRequest {
    * 0: 默认全部 1:资产ID 2:域名
    */
   AssetType?: number
+}
+
+/**
+ * DescribeHostKBRiskList请求参数结构体
+ */
+export interface DescribeHostKBRiskListRequest {
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
+  /**
+   * <p>筛选条件数组，多条件之间为 AND 关系<br>支持的 Filter.Name：<br>Keyword：关键字模糊搜索（对 KB 编号/名称模糊匹配）<br>RiskStatus：修复状态<br>InstanceID：实例ID<br>NewestKB: 最新补丁(0/1)</p>
+   */
+  Filters?: Array<Filters>
+  /**
+   * <p>每页返回数量<br>取值范围：[1, 100]<br>默认值：10</p>
+   */
+  Limit?: number
+  /**
+   * <p>分页偏移量<br>取值范围：[0, +∞)<br>默认值：0</p>
+   */
+  Offset?: number
+  /**
+   * <p>排序方向<br>枚举值：<br>ASC：升序<br>DESC：降序<br>默认值：DESC</p>
+   */
+  Order?: string
+  /**
+   * <p>排序字段<br>枚举值：<br>LatestScanTime：最近扫描时间<br>默认值：LatestScanTime</p>
+   */
+  By?: string
 }
 
 /**
@@ -22756,6 +25542,16 @@ export interface ModifyDspmRiskInfoResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * DescribeVulScanPeriodic请求参数结构体
+ */
+export interface DescribeVulScanPeriodicRequest {
+  /**
+   * <p>集团账号的成员id</p>
+   */
+  MemberId?: Array<string>
 }
 
 /**
@@ -23063,6 +25859,16 @@ export interface ModifyCosAuditObjectIdentifyStatusRequest {
 }
 
 /**
+ * DeleteVulWhitelist返回参数结构体
+ */
+export interface DeleteVulWhitelistResponse {
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
+}
+
+/**
  * 日志检索结果
  */
 export interface LogSearchResult {
@@ -23152,6 +25958,76 @@ export interface CosRiskViewInfo {
    * 最近风险检出时间Unix时间单位毫秒
    */
   LastScanTimestamp?: number
+}
+
+/**
+ * DescribeVulScanPeriodic返回参数结构体
+ */
+export interface DescribeVulScanPeriodicResponse {
+  /**
+   * <p>周期扫描开关（0-关闭, 1-开启）</p>
+   */
+  Status?: number
+  /**
+   * <p>漏洞类型</p><p>枚举值：</p><ul><li>LINUX： Linux软件漏洞</li><li>WINDOWS： Windows系统补丁</li><li>WEB_CMS： Web-CMS漏洞</li><li>APPLICATION： 应用漏洞</li><li>EMERGENCY： 应急漏洞</li></ul>
+   */
+  VulCategory?: Array<string>
+  /**
+   * <p>漏洞等级（INVALID: 无效, INFO: 提示, LOW: 低危, MEDIUM: 中危, HIGH: 高危, CRITICAL: 严重）</p>
+   */
+  Level?: Array<string>
+  /**
+   * <p>扫描方式（VersionCompare: 版本对比, POC: POC检测, VersionComparePOC: 版本对比+POC检测）</p>
+   */
+  Method?: string
+  /**
+   * <p>周期扫描类型</p><p>枚举值：</p><ul><li>1： 每天</li><li>2： 每周</li><li>3： 每月</li></ul>
+   */
+  CycleType?: number
+  /**
+   * <p>开始时间（09:00:00）</p>
+   */
+  StartTime?: string
+  /**
+   * <p>结束时间（18:00:00）</p>
+   */
+  EndTime?: string
+  /**
+   * <p>资产范围（0-全部资产，1-自选资产，2-剔除资产）</p>
+   */
+  AssetRange?: number
+  /**
+   * <p>资产列表（instance_id列表）</p>
+   */
+  AssetList?: Array<string>
+  /**
+   * <p>周期值</p><p>单位：周几或者每月几号</p>
+   */
+  CycleValue?: Array<number | bigint>
+  /**
+   * <p>超时时长</p><p>单位：秒</p>
+   */
+  Timeout?: number
+  /**
+   * <p>是否运行被同步配置 0-不允许，1-允许</p>
+   */
+  AllowSync?: number
+  /**
+   * <p>管理员账号是否开启了自动同步配置开关 0-关闭，1-开启</p>
+   */
+  EnableSync?: number
+  /**
+   * <p>配置信息来自哪个账号，为空表示自己设置</p>
+   */
+  AdminInfo?: AccountBriefInfo
+  /**
+   * <p>标签id</p>
+   */
+  TagIds?: Array<number | bigint>
+  /**
+   * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
+   */
+  RequestId?: string
 }
 
 /**
@@ -23909,6 +26785,24 @@ export interface DeleteDspmAssetAccountResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 漏洞修复项，指定一个漏洞/KB补丁及其需要修复的目标主机
+ */
+export interface VulFixItem {
+  /**
+   * <p>需要修复的主机实例ID列表<br>入参限制：单项最多1000个实例ID</p>
+   */
+  InstanceIds: Array<string>
+  /**
+   * <p>漏洞ID，VulId和KBId二选一</p>
+   */
+  VulId?: number
+  /**
+   * <p>KB补丁ID，VulId和KBId二选一</p>
+   */
+  KBId?: number
 }
 
 /**

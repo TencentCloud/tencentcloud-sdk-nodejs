@@ -503,6 +503,10 @@ export interface DescribeModelNamesRequest {
    * <p>过滤PrivateCustom类型自建模型。如果传递了此参数，则只返回具有相同VPC Id的模型。</p>
    */
   VpcId?: string
+  /**
+   * <p>过滤器，Name取值：</p><ul><li>ModelName：按照模型名称过滤。</li><li>ServiceProviderId：按照BYOK ID过滤。</li><li>InputModalitiesUnion：按照模态过滤。</li></ul>
+   */
+  Filters?: Array<Filter>
 }
 
 /**
@@ -1286,6 +1290,16 @@ export interface AddModelRewriteRequest {
    * <p>目标模型名（重写规则的 value）。</p><p>长度 1-255 字符；必须是已关联到该模型路由实例的模型（含 IntentRouter/* 也需先通过 AssociateModels 关联）。</p><p>不允许使用 <code>default</code>；不允许与 SourceModel 相同（大小写不敏感）。</p>
    */
   TargetModel: string
+}
+
+/**
+ * 健康检查配置
+ */
+export interface ServiceProviderHealthCheckConfigInput {
+  /**
+   * <p>是否开启健康检查</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul>
+   */
+  HealthCheckEnabled?: boolean
 }
 
 /**
@@ -4350,6 +4364,10 @@ export interface CreateModelRequest {
    * <p>是否校验服务提供商的SSL证书</p>
    */
   VerifySSL?: boolean
+  /**
+   * <p>健康检查配置</p>
+   */
+  HealthCheckConfig?: ServiceProviderHealthCheckConfigInput
 }
 
 /**
@@ -6128,6 +6146,16 @@ export interface ConfigListItem {
 格式：YYYY-MM-DD HH:mm:ss
    */
   UpdateTimestamp?: string
+}
+
+/**
+ * 健康检查配置
+ */
+export interface ServiceProviderHealthCheckConfigOutput {
+  /**
+   * <p>是否开启健康检查</p><p>枚举值：</p><ul><li>true： 是</li><li>false： 否</li></ul>
+   */
+  HealthCheckEnabled?: boolean
 }
 
 /**
@@ -9452,7 +9480,7 @@ export interface ModelKeyInfoItem {
    */
   ServiceProviderName?: string
   /**
-   * <p>模型状态</p><p>枚举值：</p><ul><li>Active： 运行中</li><li>Provisioning： 创建中</li><li>Configuring： 变配中</li><li>Deleting： 删除中</li><li>ProvisionFailed： 创建失败</li><li>ConfigureFailed： 变配失败</li><li>DeletionFailed： 删除失败</li><li>Disabled： 已禁用</li></ul>
+   * <p>模型状态</p><p>枚举值：</p><ul><li>Active： 运行中</li><li>Provisioning： 创建中</li><li>Configuring： 变配中</li></ul>
    */
   Status?: string
   /**
@@ -9473,6 +9501,10 @@ export interface ModelKeyInfoItem {
 注意：此字段可能返回 null，表示取不到有效值。
    */
   VpcId?: string
+  /**
+   * <p>健康检查配置</p>
+   */
+  HealthCheckConfig?: ServiceProviderHealthCheckConfigOutput
 }
 
 /**

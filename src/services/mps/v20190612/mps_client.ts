@@ -342,6 +342,7 @@ import {
   AiReviewPornAsrTaskOutput,
   ComposeTransitionItem,
   DeleteStreamPackageSourceRequest,
+  UnderstandImageConfig,
   DeleteAIAnalysisTemplateRequest,
   DescribeMDPMPSUserInfoRequest,
   SSAIChannelInfo,

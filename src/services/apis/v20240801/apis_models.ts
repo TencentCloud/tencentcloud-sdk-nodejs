@@ -131,6 +131,18 @@ export interface CreateModelServiceRequest {
    * <p>自定义模型协议配置</p>
    */
   RawCustomModelProtocolConfig?: string
+  /**
+   * <p>路由策略</p><p>枚举值：</p><ul><li>weight： 权重</li><li>taskComplexity： 任务复杂度</li><li>tokenLength： token长度</li></ul>
+   */
+  RouteStrategy?: string
+  /**
+   * <p>token长度路由策略</p>
+   */
+  TokenLengthRoute?: Array<TokenLengthRouteDTO>
+  /**
+   * <p>任务复杂度路由策略</p>
+   */
+  TaskComplexityRoute?: TaskComplexityRouteDTO
 }
 
 /**
@@ -159,6 +171,27 @@ export interface AgentAppSecretKeyVO {
    * secret key
    */
   SecretKey?: string
+}
+
+/**
+ * token长度路由参数
+ */
+export interface TokenLengthRouteDTO {
+  /**
+   * <p>Token 区间下限</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MinTokens?: number
+  /**
+   * <p>Token 区间上限</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  MaxTokens?: number
+  /**
+   * <p>模型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TargetModels?: Array<TargetModelDTO>
 }
 
 /**
@@ -955,6 +988,18 @@ export interface ModifyModelServiceRequest {
    * <p>自定义模型协议配置</p>
    */
   RawCustomModelProtocolConfig?: string
+  /**
+   * <p>路由策略</p><p>枚举值：</p><ul><li>weight： 权重</li><li>taskComplexity： 任务复杂度</li><li>tokenLength： token长度</li></ul>
+   */
+  RouteStrategy?: string
+  /**
+   * <p>token长度路由策略</p>
+   */
+  TokenLengthRoute?: Array<TokenLengthRouteDTO>
+  /**
+   * <p>任务复杂度路由策略</p>
+   */
+  TaskComplexityRoute?: TaskComplexityRouteDTO
 }
 
 /**
@@ -1024,6 +1069,27 @@ export interface CreateAgentAppServicesResponse {
    * 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
    */
   RequestId?: string
+}
+
+/**
+ * 任务复杂度路由参数
+ */
+export interface TaskComplexityRouteDTO {
+  /**
+   * <p>倾向度</p><p>取值范围：[0, 1]</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ComplexityBias?: number
+  /**
+   * <p>简单模型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  SimpleTargetModels?: Array<TargetModelDTO>
+  /**
+   * <p>复杂模型</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ComplexTargetModels?: Array<TargetModelDTO>
 }
 
 /**
@@ -1597,17 +1663,27 @@ export interface DescribeModelServiceResponse {
  */
 export interface AgentCredentialContentDTO {
   /**
-   * 如果认证类型为sts时，该项必填
+   * <p>如果认证类型为sts时，该项必填</p>
    */
   STSSystem?: string
   /**
-   * 如果认证类型为sts时，该项必填
+   * <p>如果认证类型为sts时，该项必填</p>
    */
   STSService?: string
   /**
-   * 如果认证类型为reqKey时，该项必填
+   * <p>如果认证类型为reqKey时，该项必填</p>
    */
   Headers?: Array<AgentCredentialContentHeaderDTO>
+  /**
+   * <p>如果认证类型为apiKey时，该项必填</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  ApiKeys?: Array<AgentCredentialApiKeyDTO>
+  /**
+   * <p>容错策略，仅Type为apiKey时支持</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  FaultTolerance?: FaultToleranceDTO
 }
 
 /**
@@ -1914,6 +1990,16 @@ export interface DeleteModelServiceRequest {
    * 模型服务ID
    */
   ID: string
+}
+
+/**
+ * API Key类型凭据
+ */
+export interface AgentCredentialApiKeyDTO {
+  /**
+   * <p>API Key</p>
+   */
+  Value?: string
 }
 
 /**
@@ -2435,6 +2521,36 @@ export interface DescribeMcpServerRequest {
    * mcp server ID
    */
   ID: string
+}
+
+/**
+ * API Key容错策略配置
+ */
+export interface FaultToleranceDTO {
+  /**
+   * <p>是否启用API Key容错配置</p>
+   */
+  Enabled?: boolean
+  /**
+   * <p>异常判定状态码，固定3位数字或字母</p>
+   */
+  ErrorCodes?: Array<string>
+  /**
+   * <p>连续异常次数</p><p>单位：次</p>
+   */
+  ErrorCount?: number
+  /**
+   * <p>隔离时长</p><p>单位：秒</p>
+   */
+  IsolationTime?: number
+  /**
+   * <p>最多切换次数</p><p>置0为不开启自动切换</p>
+   */
+  MaxSwitchCount?: number
+  /**
+   * <p>切换总时间预算</p><p>单位：秒</p>
+   */
+  SwitchTimeout?: number
 }
 
 /**
@@ -3823,6 +3939,21 @@ export interface DescribeModelServiceResponseVO {
    * <p>自定义模型协议配置</p>
    */
   RawCustomModelProtocolConfig?: string
+  /**
+   * <p>路由策略</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  RouteStrategy?: string
+  /**
+   * <p>token长度路由配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TokenLengthRoute?: Array<TokenLengthRouteDTO>
+  /**
+   * <p>任务复杂度路由配置</p>
+注意：此字段可能返回 null，表示取不到有效值。
+   */
+  TaskComplexityRoute?: TaskComplexityRouteDTO
 }
 
 /**
